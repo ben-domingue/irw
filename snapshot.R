@@ -25,10 +25,11 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     L<-lapply(L,ff)
     mean.resp<-mean(unlist(L),na.rm=TRUE)
     ##
-    c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,per=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
+    c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
 }
 
-lf<-list.files(pattern="*.Rdata")
+lf<-NULL#lf<-c('wirs.Rdata','mobility.Rdata','lsat.Rdata','abortion.Rdata')
+if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 test<-grepl("misc.Rdata",lf,fixed=TRUE)
 lf<-lf[!test]
 tab<-t(sapply(lf,f))
