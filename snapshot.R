@@ -28,12 +28,13 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
 }
 
-lf<-NULL#lf<-c('wirs.Rdata','mobility.Rdata','lsat.Rdata','abortion.Rdata')
+lf<-c('motion.Rdata','mq_supremecourt.Rdata')
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 test<-grepl("misc.Rdata",lf,fixed=TRUE)
 lf<-lf[!test]
 tab<-t(sapply(lf,f))
-tab<-tab[order(tab[,6]),]
+tab<-data.frame(tab)
+tab<-tab[order(tab$sparse),]
 
 tab
 write.csv(tab,'')
