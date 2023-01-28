@@ -9,16 +9,23 @@ for (nm in c("EXT","EST","AGR","CSN","OPN")) {
         x[,i]<-as.numeric(x[,i])
         x[,i]<-ifelse(x[,i]==0,NA,x[,i])
     }
+    ##respose time
+    ii<-paste(nm,1:10,"_E",sep='')
+    t<-x.all[,ii]
     for (i in 1:ncol(x)) {
-        rs<-rowMeans(x[,-i],na.rm=TRUE)
-        rho<-cor(x[,i],rs,use='p')
-        print(rho)
-        if (rho<0) x[,i]<-6-x[,i]
+        t[,i]<-as.numeric(t[,i])/1000
     }
+    ## for (i in 1:ncol(x)) {
+    ##     rs<-rowMeans(x[,-i],na.rm=TRUE)
+    ##     rho<-cor(x[,i],rs,use='p')
+    ##     print(rho)
+    ##     if (rho<0) x[,i]<-6-x[,i]
+    ## }
     names(x)<-paste("item_",1:ncol(x),sep='')
     id<-1:nrow(x)
     L<-list()
-    for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
+    for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i],rt=t[,i])
     df<-data.frame(do.call("rbind",L))
+
     save(df,file=paste("ffm_",nm,".Rdata",sep=""))
 }

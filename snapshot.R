@@ -28,7 +28,7 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
 }
 
-lf<-c('motion.Rdata','mq_supremecourt.Rdata')
+lf<-NULL #lf<-c('hads_multilcirt.Rdata','naep_multilcirt.Rdata')
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 test<-grepl("misc.Rdata",lf,fixed=TRUE)
 lf<-lf[!test]

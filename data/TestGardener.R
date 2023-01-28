@@ -22,3 +22,6 @@ for (i in 1:ncol(SDS_U)) {
 df<-data.frame(do.call('rbind',L))
 save(df,file="sds.Rdata")
 
+
+
+Ramsay J (2023). _TestGardener: Optimal Analysis of Test and Rating Scale Data_. R package version 3.1.4, <https://CRAN.R-project.org/package=TestGardener>.

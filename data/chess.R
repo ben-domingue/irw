@@ -1,3 +1,5 @@
+##see here. https://search.r-project.org/CRAN/refmans/LNIRT/html/AmsterdamChess.html
+
 library(foreign)
 x<-read.spss("chess.sav",to.data.frame=TRUE)
 L<-list()

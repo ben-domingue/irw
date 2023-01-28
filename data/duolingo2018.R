@@ -1,6 +1,3 @@
-##only 4 users???? the person id seems wrong...
-
-
 ##http://sharedtask.duolingo.com/2018.html#task-definition-data
 ##Settles, Burr, 2018, "Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO
 
