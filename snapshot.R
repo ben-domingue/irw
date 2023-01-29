@@ -28,7 +28,8 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
 }
 
-lf<-NULL #lf<-c('hads_multilcirt.Rdata','naep_multilcirt.Rdata')
+lf<-c("acl_mokken.Rdata","autonomysupport_mokken.Rdata","balance_mokken.Rdata","cavalini_mokken.Rdata","ds14_mokken.Rdata","mcmi_mokken.Rdata","swmd_mokken.Rdata","transreas_mokken.Rdata")
+#lf<-NULL 
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 test<-grepl("misc.Rdata",lf,fixed=TRUE)
 lf<-lf[!test]
