@@ -94,10 +94,11 @@ id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
+##
 rownames(Q)<-names(x)
 names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q$item<-rownames(Q)
-df<-merge(df,Q)
+attr(df,which='item')<-Q
 save(df,file="mcmi_mokken.Rdata")
 
 ## SWMD, 57

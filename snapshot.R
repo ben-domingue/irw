@@ -6,7 +6,7 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     item.n<-length(unique(df$item))
     n<-length(df$resp)
     ncat<-length(unique(df$resp[!is.na(df$resp)]))
-    per<-(person.n/sqrt(n))*(item.n/sqrt(n))
+    per<-(sqrt(n)/person.n)*(sqrt(n)/item.n)
     resp.per.person<-mean(as.numeric(table(df$id)))
     resp.per.item<-mean(as.numeric(table(df$item)))
     ##
@@ -25,18 +25,23 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     L<-lapply(L,ff)
     mean.resp<-mean(unlist(L),na.rm=TRUE)
     ##
-    c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
+    date.index<-('date' %in% names(df))
+    rater.index<-('rater' %in% names(df))
+    rt.index<-('rt' %in% names(df))
+    ##
+    c(nresp=n,rt=rt.index,date=date.index,rater=rater.index,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
 }
 
-lf<-c("acl_mokken.Rdata","autonomysupport_mokken.Rdata","balance_mokken.Rdata","cavalini_mokken.Rdata","ds14_mokken.Rdata","mcmi_mokken.Rdata","swmd_mokken.Rdata","transreas_mokken.Rdata")
+
+lf<-c("sem_cnes.Rdata")
 #lf<-NULL 
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
-test<-grepl("misc.Rdata",lf,fixed=TRUE)
-lf<-lf[!test]
 tab<-t(sapply(lf,f))
 tab<-data.frame(tab)
-tab<-tab[order(tab$sparse),]
+ss<-tab[order(tab$sparse),]
 
-tab
-write.csv(tab,'')
+write.csv(ss,'')
+
+#save(ss,file="snapshot.Rdata")
+
 

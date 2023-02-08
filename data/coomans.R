@@ -9,10 +9,16 @@ for (fn in lf) {
     x<-x[!duplicated(id),]
     ##
     x<-x[,c("user_id","item_id","response_in_milliseconds","correct_answered","days")]
-    names(x)<-c("id","item","rt","resp","days")
-    x$id<-paste(x$id,x$days) #round(x$days/10))
+    names(x)<-c("id","item","rt","resp","date")
     x$rt<-x$rt/1000
+    ##date
+    m<-min(x$date,na.rm=TRUE)
+    x$date<-x$date-m
+    secperday<-24*60*60
+    x$date<-x$date*secperday
     #
     df<-x
-    save(df,file=paste("coomans",fn,sep=''))
+    ##
+    fn2<-gsub("RData","Rdata",fn)
+    save(df,file=paste("coomans",fn2,sep=''))
 }

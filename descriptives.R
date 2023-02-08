@@ -1,0 +1,7 @@
+pdf("/home/bd/Dropbox/Apps/Overleaf/MAIRD/Ns.pdf",width=7,height=3)
+par(mfrow=c(1,2),mgp=c(2,1,0),mar=c(3,3,1,1),oma=rep(.5,4))
+hist(log10(ss$nresp),col='blue',main='',breaks=20,xlab="log10 (N responses)")
+mtext(side=3,adj=0,line=0,'A')
+plot(log10(ss$person.n),log10(ss$item.n),pch=19,cex=.5,col='blue',xlab="log10(N person)",ylab="log10(N item)")
+mtext(side=3,adj=0,line=0,'B')
+dev.off()
