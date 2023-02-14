@@ -20,7 +20,9 @@ x<-read.csv("answer.csv",sep=";")
 
 df<-x[,c("user","response_time")]
 names(df)[1]<-'id'
-df$date<-x$inserted
+names(df)[2]<-'rt'
+df$rt<-df$rt/1000
+#df$date<-x$inserted
 df$resp<-ifelse(x$place_asked==x$place_answered,1,0)
 
 z<-x$options
@@ -38,5 +40,8 @@ df$item<-f(x$place_asked,z)
 df$item<-paste(df$item,x$type,sep="__")
 
 df$item_key<-x$place_asked
+hold<-df$item
+df$item<-df$item_key
+df$item_complex<-hold
 
 save(df,file='geography.Rdata')

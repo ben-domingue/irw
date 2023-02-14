@@ -1,6 +1,7 @@
 ##http://sharedtask.duolingo.com/2018.html#task-definition-data
 ##Settles, Burr, 2018, "Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO
 
+
 con<-file("en_es.slam.20190204.train")
 x<-readLines(con)
 close(con)
@@ -43,7 +44,7 @@ f<-function(x) {
     }
     data.frame(do.call("rbind",out))
 }
-options(warn=2)
+#options(warn=2)
 #for (i in 1:length(L)) L[[i]]<-f(L[[i]])
 library(parallel)
 L<-mclapply(L,f,mc.cores=3)
@@ -73,9 +74,27 @@ for (i in 1:length(L2)) {
     df$stem<-df$item
     df$item<-paste(df$item,df$token,sep="__")
     df$token<-NULL
+    df$rt<-as.numeric(df$time)
+    df$time<-NULL
+    df$client<-NULL
+    df$days<-NULL
+    df$resp.id<-NULL
+    df$countries<-NULL
+    ##items
+    items<-df[,c("item","part.speech","morphology","dependency.label","dependency.head","stem")]
+    ll<-split(items,items$item)
+    test<-lapply(ll,duplicated)
+    ii<-sapply(test,function(x) if (length(x)>0) which(!x))
+    len<-sapply(ii,length)
+    keep<-len[len==1]
+    items<-items[items$item %in% names(keep),]
+    items<-items[!duplicated(items$item),]
     ##
+    df$part.speech<-df$morphology<-df$dependency.label<-df$dependency.head<-df$stem<-NULL
+    df<-df[df$item %in% items$item,]
     print(length(unique(df$id)))
     print(length(unique(df$item)))
+    attr(df,which='item')<-items
     ##
     fn<-paste('duolingo__',names(L2)[i],'.Rdata',sep='')
     save(df,file=fn)

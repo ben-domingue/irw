@@ -1,4 +1,5 @@
-f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
+lf<-NULL 
+f<-function(fn,nsamp=25000) { 
     print(fn)
     load(fn)
     ##
@@ -29,19 +30,24 @@ f<-function(fn,nsamp=25000) { ##to add: cronbach's alpha
     rater.index<-('rater' %in% names(df))
     rt.index<-('rt' %in% names(df))
     ##
-    c(nresp=n,rt=rt.index,date=date.index,rater=rater.index,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp)
+    c(nresp=n,ncat=ncat,person.n=person.n,item.n=item.n,sparse=per,resp.per.person=resp.per.person,resp.per.item=resp.per.item,mean=mean.resp,rt=rt.index,date=date.index,rater=rater.index)
 }
 
 
-lf<-c("sem_cnes.Rdata")
-#lf<-NULL 
+#lf<-c("mpsycho_asti.Rdata","mpsycho_avlancheprep.Rdata","mpsycho_bsss.Rdata","mpsycho_ceaq.Rdata","mpsycho_condom.Rdata","mpsycho_lakes.Rdata","mpsycho_learnemo.Rdata","mpsycho_Rmotivation.Rdata","mpsycho_Rogers.Rdata","mpsycho_Rogers_adolescent.Rdata","mpsycho_rwdq.Rdata","mpsycho_wenchuan.Rdata","mpsycho_wilmer.Rdata","mpsycho_wilpat.Rdata","mpsycho_YouthDep.Rdata","mpsycho_zareki.Rdata")
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 tab<-t(sapply(lf,f))
 tab<-data.frame(tab)
 ss<-tab[order(tab$sparse),]
 
+
 write.csv(ss,'')
 
 #save(ss,file="snapshot.Rdata")
+
+
+
+
+
 
 

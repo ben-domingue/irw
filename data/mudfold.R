@@ -10,8 +10,8 @@ save(df,file="andrich_mudfold.Rdata")
 
 ## EURPAR2.RData
 load("EURPAR2.RData")
-x<-EURPAR2
-id<-1:nrow(x)
+x<-EURPAR2i
+d<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=colnames(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
