@@ -16,6 +16,7 @@ id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
+df$resp<-as.numeric(as.character(df$resp))
 save(df,file="mpsycho_avlancheprep.Rdata")
 
 ## BSSS
@@ -149,6 +150,7 @@ x$race<-NULL
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i],race=race)
 df<-data.frame(do.call("rbind",L))
+df$resp<-as.numeric(as.character(df$resp))
 save(df,file="mpsycho_YouthDep.Rdata")
 
 ## zareki

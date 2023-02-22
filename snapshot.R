@@ -43,7 +43,12 @@ ss<-tab[order(tab$sparse),]
 
 write.csv(ss,'')
 
-#save(ss,file="snapshot.Rdata")
+save(ss,file="~/Dropbox/projects/irw/src/snapshot.Rdata")
+
+
+
+
+
 
 
 
