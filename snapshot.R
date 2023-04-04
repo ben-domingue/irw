@@ -76,7 +76,7 @@ f<-function(fn,nsamp=25000) {
 
 
 
-lf<-c("mtf.Rdata")
+lf<-c("sapa_personality.Rdata")
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 tab<-t(sapply(lf,f))
 tab<-data.frame(tab)
