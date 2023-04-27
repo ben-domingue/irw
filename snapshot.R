@@ -34,6 +34,7 @@ f<-function(fn,nsamp=25000) {
 }
 
 
+
 ##v1,2-15-2023
 ## lf <-
 ## c("4thgrade_math_sirt.Rdata", "abortion.Rdata", "acl_mokken.Rdata", 
@@ -76,7 +77,7 @@ f<-function(fn,nsamp=25000) {
 
 
 
-lf<-c("sapa_personality.Rdata")
+lf<-c("artistic_preferences.Rdata","depression_anxiety_stress.Rdata","fisher_temperment.Rdata","nature_relatedness.Rdata","protestant_workethic.Rdata")
 if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
 tab<-t(sapply(lf,f))
 tab<-data.frame(tab)
