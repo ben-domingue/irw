@@ -5,7 +5,7 @@
 library(readr)
 library(dplyr)
 library(tidyverse)
-library(EdSurvey)
+#library(EdSurvey)
 #install.packages("SAScii")
 library(SAScii)
 
@@ -91,7 +91,8 @@ df_mc= df_mc |>
                           resp_text_na=="" ~ NA,
                           T ~ 0
                           )
-         )  |> select(CNT, SCHOOLID, contains("scale"), id, item, itemtype, resp,resp_text) 
+         )  |> 
+  dplyr::select(CNT, SCHOOLID, contains("scale"), id, item, itemtype, resp,resp_text) 
 
 
 ## Working with all other option types: CR
@@ -112,12 +113,36 @@ codebook_cr = codebook |>
 df_cr = inner_join(df, codebook_cr)
 #unique(df_cr$resp_text)
 df_cr= df_cr |>
-  select(CNT, SCHOOLID, contains("scale"), id, item, itemtype, resp, resp_text) 
+  dplyr::select(CNT, SCHOOLID, contains("scale"), id, item, itemtype, resp, resp_text) 
 
 df = rbind(df_cr, df_mc)
 
-df_id = df |> select(CNT, SCHOOLID, item, id, contains("scale"), mscale_actual, rscale_actual, sscale_actual, itemtype, resp_text)
+df_id = df |> dplyr::select(CNT, SCHOOLID, item, id, contains("scale"), mscale_actual, rscale_actual, sscale_actual, itemtype, resp_text)
 #summary(df)
 attr(df,which='id')<-df_id
-df = df |> select(-MSCALE,-SCHOOLID,-contains("actual"), -itemtype, -resp_text)
+df = df |> dplyr::select(-MSCALE,-SCHOOLID,-contains("actual"), -itemtype, -resp_text)
+
+df = df |>
+  filter(!is.na(resp)) |>
+  mutate(id= paste0(CNT,id)) |> select(-CNT)
+
+
+
 save(df,file="pisa2000.Rdata")
+#load("pisa2000.Rdata")
+#load("pisa2000_math.Rdata")
+
+df$subject =substr(df$item,1,1)
+df$subject = ifelse(df$subject=="M", "math", ifelse(df$subject=="R", "read", "science"))
+df0= df
+
+for (sub in c("math", "read", "science")) {
+  df = df0 |> filter(subject==sub) 
+  df = df |> dplyr::select(-subject)
+  name = paste0("pisa2000_", sub, ".Rdata")
+  save(df,file=name)
+}
+
+  
+
+

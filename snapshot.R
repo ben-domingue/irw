@@ -35,6 +35,21 @@ f<-function(fn,nsamp=25000) {
 
 
 
+
+lf<-NULL
+if (is.null(lf)) lf<-system("ls -S *.Rdata",intern=TRUE) #lf<-list.files(pattern="*.Rdata")
+tab<-t(sapply(lf,f))
+tab<-data.frame(tab)
+ss<-tab[order(tab$sparse),]
+
+
+write.csv(ss,'')
+
+#save(ss,file="~/Dropbox/projects/irw/src/snapshot.Rdata")
+
+
+
+
 ##v1,2-15-2023
 ## lf <-
 ## c("4thgrade_math_sirt.Rdata", "abortion.Rdata", "acl_mokken.Rdata", 
@@ -74,19 +89,6 @@ f<-function(fn,nsamp=25000) {
 ## "state_c3_2007_9_responses.Rdata", "swmd_mokken.Rdata", "tenseness_pcmrs.Rdata", 
 ## "timss_tam.Rdata", "tma.Rdata", "transreas_mokken.Rdata", "trees_sirt.Rdata", 
 ## "verbagg.Rdata", "wirs.Rdata", "wordsum.Rdata")
-
-
-
-lf<-c("artistic_preferences.Rdata","depression_anxiety_stress.Rdata","fisher_temperment.Rdata","nature_relatedness.Rdata","protestant_workethic.Rdata")
-if (is.null(lf)) lf<-list.files(pattern="*.Rdata")
-tab<-t(sapply(lf,f))
-tab<-data.frame(tab)
-ss<-tab[order(tab$sparse),]
-
-
-write.csv(ss,'')
-
-save(ss,file="~/Dropbox/projects/irw/src/snapshot.Rdata")
 
 
 

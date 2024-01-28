@@ -13,3 +13,4 @@ replace rt = rt/1000
 order id item resp
 compress 
 export delimited "vocab_assessment_3_to_8_year_old_children.csv", replace 
+*exported to Rdata by bd
