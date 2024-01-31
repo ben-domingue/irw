@@ -57,6 +57,7 @@ load("GERAS.rda")
 x<-GERAS.items
 id<-1:nrow(x)
 gender<-x$gender
+x$gender<-NULL
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],gender=gender,resp=x[,i])
 df<-data.frame(do.call("rbind",L))
