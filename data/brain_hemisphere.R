@@ -47,6 +47,8 @@ df <- df |>
 # print response values
 table(df$resp)
 
+df$resp<-as.numeric(df$resp)
+
 # save df to Rdata file
 save(df, file="brain_hemisphere.Rdata")
 
