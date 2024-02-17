@@ -4,6 +4,7 @@ x<-read.dta13("lifelabtrial.dta")
 
 id<-x$serial
 intervention<-x$intervention
+treatment<-ifelse(intervention=="Intervention",1,0)
 
 ##These were a series of five questions, four of which used a Likert scale, with five responses ranging from ‘strongly disagree’, (scored 1), to ‘strongly agree’ (scored 5), the fifth question “At what age do you think our nutrition starts to affect our future health?” has responses from before birth then in decades up to > 60 years.
 x<-x[,c("agenutaf12","fdnow12","fdpregh12","fdnowc12","fdadch12")]
@@ -35,7 +36,7 @@ for (i in 2:ncol(x)) {
 }
 
 df<-list()
-for (i in 1:length(items)) df[[i]]<-data.frame(id=id,intervention=intervention,item=names(items)[i],resp=items[[i]])
+for (i in 1:length(items)) df[[i]]<-data.frame(id=id,treatment=treatment,item=names(items)[i],resp=items[[i]])
 df<-data.frame(do.call("rbind",df))
 
 save(df,file="lifelab_healthliteracy.Rdata")
