@@ -2,7 +2,7 @@
 #devtools::install_github("ben-domingue/irw/irw_pkg")
 
 ##example analysis of one dataset
-dataset <- redivis::user("stanford_templates")$dataset("item_response_warehouse")
+dataset <- redivis::user("datapages")$dataset("item_response_warehouse")
 #df <- dataset$table("4thgrade_math_sirt")$to_data_frame()
 df <- dataset$table("content_literacy_intervention")$to_data_frame()
 items<-unique(df$item)
