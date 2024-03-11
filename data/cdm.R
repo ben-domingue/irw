@@ -41,10 +41,10 @@ L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
 ##
-names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q<-data.frame(Q)
+names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q$item<-rownames(Q)
-attr(df,which='item')<-Q
+df<-merge(df,Q) #fixed 3-5-2024
 save(df,file="cdm_pisa00R.Rdata")
 
 load("data.timss03.G8.su.rda")
@@ -58,10 +58,10 @@ L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
 ##
-names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q<-data.frame(Q)
+names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q$item<-rownames(Q)
-attr(df,which='item')<-Q
+df<-merge(df,Q) #fixed 3-5-2024
 save(df,file="cdm_timss03.Rdata")
 
 load("data.timss07.G4.lee.rda")
@@ -77,10 +77,10 @@ for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i],bookle
 df<-data.frame(do.call("rbind",L))
 df<-df[!is.na(df$resp),]
 ##
-names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q<-data.frame(Q)
+names(Q)<-paste("Qmatrix",names(Q),sep="__")
 Q$item<-rownames(Q)
-attr(df,which='item')<-Q
+df<-merge(df,Q) #fixed 3-5-2024
 save(df,file="cdm_timss07.Rdata")
 
 load("data.timss11.G4.AUT.rda")
