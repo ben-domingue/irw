@@ -29,3 +29,15 @@ for (nm in c("EXT","EST","AGR","CSN","OPN")) {
 
     save(df,file=paste("ffm_",nm,".Rdata",sep=""))
 }
+
+
+##removing negative rt values
+
+for (fn in c("ffm_CSN","ffm_EXT", "ffm_AGR","ffm_EST", "ffm_OPN")) {
+    fn<-paste0(fn,".Rdata")
+    load(fn)
+    print(summary(df$rt))
+    df$rt<-ifelse(df$rt<0,NA,df$rt)
+    print(summary(df$rt))
+    save(df,file=fn)
+}

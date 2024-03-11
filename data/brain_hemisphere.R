@@ -52,3 +52,6 @@ df$resp<-as.numeric(df$resp)
 # save df to Rdata file
 save(df, file="brain_hemisphere.Rdata")
 
+
+##removing negative rt values
+df$rt<-ifelse(df$rt<0,NA,df$rt)

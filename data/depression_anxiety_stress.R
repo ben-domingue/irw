@@ -71,3 +71,7 @@ table(df$resp)
 
 # save df to Rdata file
 save(df, file="depression_anxiety_stress.Rdata")
+
+
+##removing negative rt values
+df$rt<-ifelse(df$rt<0,NA,df$rt)

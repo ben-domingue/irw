@@ -71,3 +71,7 @@ table(df$resp)
 
 # save df to Rdata file
 save(df, file="fisher_temperment.Rdata")
+
+
+##removing negative rt values
+df$rt<-ifelse(df$rt<0,NA,df$rt)

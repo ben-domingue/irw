@@ -77,3 +77,7 @@ table(df$resp)
 
 # save df to Rdata file
 save(df, file="artistic_preferences.Rdata")
+
+##removing negative rt values
+df$rt<-ifelse(df$rt<0,NA,df$rt)
+

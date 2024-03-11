@@ -45,3 +45,4 @@ table(df$resp)
 save(df, file="broadband_inventories.Rdata")
 
 
+df$rt<-ifelse(df$rt<0,NA,df$rt)
