@@ -15,5 +15,7 @@ df <- df |>
             by=c("item" = "unique(df$item)")) |>
   select(responseid, item_id, resp) |>
   rename(item = item_id)
+df <- df %>%
+  filter(!resp %in% c(0, 8))
 save(df, file="Veterans Affairs SSVF Survey 2018-20.Rdata")
 write.csv(df, file="Veterans Affairs SSVF Survey 2018-20.csv",row.names= FALSE)
