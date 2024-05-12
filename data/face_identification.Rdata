@@ -1,0 +1,6 @@
+x=read.csv("Responses.csv")
+id<-1:nrow(x)
+L<-list()
+for (i in 2:ncol(x)) L[[i]]<-data.frame(id=x[,1],item=colnames(x)[i],resp=x[,i])
+df<-data.frame(do.call("rbind",L))
+save(df,file='face_identification.Rdata')
