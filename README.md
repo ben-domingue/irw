@@ -1,12 +1,12 @@
 # IRW
 
 ## IRW Commandments
-
+Below are critical instructions for formatting data for the IRW. More information about the IRW data standard is available in the preprint and by contacting the IRW maintainers. 
 1. Numeric values of a response should be meaningful.
 2. If data come from an RCT, have a `treatment` column that is 1 if response comes from a treated respondent and 0 otherwise. 
 3. Response time should be in seconds. 
 4. Longitudinally collected responses should be in Unix time (seconds since Jan 1 1970 UTC).
-
+5. If there are multiple scales available, split them into mutiple files. 
 
 ## Notes about adding to the IRW
 - To add data from the queue to the IRW repository there are three todo items:
