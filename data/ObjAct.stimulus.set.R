@@ -12,7 +12,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -20,7 +20,6 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df1=df
-
 
 y <- read_excel("QPart2Data_objects.xlsx")
 x=y[, 19:190 ]
@@ -35,7 +34,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -43,7 +42,6 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df2=df
-
 
 y <- read_excel("QPart3Data_objects.xlsx")
 x=y[, 19:190 ]
@@ -58,7 +56,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -66,7 +64,6 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df3=df
-
 
 y <- read_excel("QPart4Data_objects.xlsx")
 x=y[, 19:190 ]
@@ -81,7 +78,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -89,7 +86,6 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df4=df
-
 
 y <- read_excel("QPart5Data_objects.xlsx")
 x=y[, 19:190 ]
@@ -104,7 +100,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -112,7 +108,6 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df5=df
-
 
 y <- read_excel("QPart6Data_objects.xlsx")
 x=y[, 19:190 ]
@@ -127,7 +122,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -149,7 +144,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -171,7 +166,7 @@ for (i in 1:n) L[[i]]<-x[,((i-1)*8+1):(i*8)]
 df=data.frame()
 for (i in 1:n){
   l=L[[i]][,-8]
-  id=L[[i]][1,8]
+  id=L[[i]][,8]
   m=list()
   for (j in 1:ncol(l)) m[[j]]=data.frame(rater.id=rater.id, id=id, item=colnames(l)[j], resp=x[,j])
   for (i in 1:ncol(l)) colnames(m[[i]])<-c("rater.id", "id", "item", "resp")
@@ -179,6 +174,5 @@ for (i in 1:n){
   df=rbind(df, d)
 }
 df8=df
-
 d=rbind(df1, df2, df3, df4, df5, df6, df7, df8)
 save(d, file='Object.stimulus.set.Rdata')
