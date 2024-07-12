@@ -2,7 +2,7 @@ Package: irw
 Title: Package for working with data from the IRW. 
 Version: 0.1
 Authors@R: c(
-	person("Ben", "Domingue", email = "ben.domingue@gmail.com",role = c("aut", "cre")),
+	person("Ben", "Domingue", email = "ben.domingue@gmail.com",role = c("aut", "cre"))
 	)
 Description: Functions to manage data from the Item Response Warehouse. 
 Depends: R (>= 3.1.0)
