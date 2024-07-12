@@ -84,4 +84,4 @@ long_data_list <- lapply(data_list, function(df) {
 
 AVI_S_data <- bind_rows(long_data_list)
 
-save(AVI_S_data, file = "AVI-S.RData")
+save(AVI_S_data, file = "AVI-S.RData") ##bd note: saved as wooly_hartman2022 
