@@ -11,5 +11,5 @@ data <- data |>
   rename(id=userID)
 data <- pivot_longer(data, cols=-c(age, id), names_to='item', values_to='resp')
 
-save(data, file="AMI_CV.Rdata")
-write.csv(data, "AMI_CV.csv", row.names=FALSE)
+save(data, file="AMI_CV_Hewitt2024.Rdata")
+write.csv(data, "AMI_CV_Hewitt2024.csv", row.names=FALSE)
