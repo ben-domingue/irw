@@ -9,7 +9,7 @@ The Item Response Warehouse (IRW) is an **open-source, large-scale** repository 
 - [IRW Code: ](https://github.com/KingArthur0205/irw/tree/main/data)a list of code used to standardize datasets into IRW format.
 - **Contact Us:** for any question, please contact us at ```itemresponsewarehouse@stanford.edu```.
 
-## Installation
+## Installation & Getting Started
 The easiest way to get access to IRW is via Redivis API
 
 ```r
@@ -25,8 +25,6 @@ devtools::install_github("redivis/redivis-r", ref="main")
 # 4. Install the IRW package to access essential APIs
 devtools:install_github("ben-domingue/irw/irw_pkg")
 ```
-
-## Getting Started
 For guidance to use IRW for data analysis in Python or R, please refer to the [IRW webiste](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
 
 
