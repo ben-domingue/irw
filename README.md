@@ -1,4 +1,10 @@
 # IRW
+The Item Response Warehouse (IRW) is an open-source, large-scale repository designed to advance psychometric research by standardizing and aggregating a vast collection of item response datasets. Its ultimate goal is to enrich psychometric research with more data and to support broader, more comprehensive analyses.
+
+## IRW Menu
+
+## Getting Started
+
 
 ## IRW Commandments
 Below are critical instructions for formatting data for the IRW. More information about the IRW data standard is available in the preprint and by contacting the IRW maintainers. 
