@@ -4,12 +4,12 @@ library(tidyr)
 library(dplyr)
 
 data <- read.csv("./combined_data.csv")
-data <- data[!data$userID %in% c(8387, 8885, 9943), ] # Remove duplicate participants and those who did not declare their gender
+data <- data[!data$userID %in% c(8387, 8885, 9943), ] # Remove duplicate participants and those who did not declare their gender (as per original analysis)
 rownames(data) <- NULL
 data <- data |>
   select(userID, age, AMI_CV_1:AMI_CV_18) |> # Keep only items and relevant columns
   rename(id=userID)
 data <- pivot_longer(data, cols=-c(age, id), names_to='item', values_to='resp')
 
-save(data, file="AMI_CV.Rdata")
-write.csv(data, "AMI_CV.csv", row.names=FALSE)
+save(data, file="AMI_CV_Hewitt2024.Rdata")
+write.csv(data, "AMI_CV_Hewitt2024.csv", row.names=FALSE)
