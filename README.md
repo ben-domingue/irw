@@ -10,7 +10,7 @@ The Item Response Warehouse (IRW) is an **open-source, large-scale** repository 
 - **Contact Us:** for any question, please contact us at ```itemresponsewarehouse@stanford.edu```.
 
 ## Installation & Getting Started
-The easiest way to get access to IRW is via Redivis API
+The easiest way to get access to IRW data is via the Redivis API
 
 ```r
 # 1. Make sure devtools is intalled from CRAN 
@@ -25,7 +25,7 @@ devtools::install_github("redivis/redivis-r", ref="main")
 # 4. Install the IRW package to access essential APIs
 devtools:install_github("ben-domingue/irw/irw_pkg")
 ```
-For guidance to use IRW for data analysis in Python or R, please refer to the [IRW webiste](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
+For guidance to use IRW for data analysis in Python or R, please refer to the [IRW website](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
 
 
 
