@@ -23,7 +23,7 @@ devtools::install_github("redivis/redivis-r", ref="main")
 # Instructions at https://apidocs.redivis.com/client-libraries/redivis-r/getting-started
 
 # 4. Install the IRW package to access essential APIs
-devtools:install_github("ben-domingue/irw/irw_pkg")
+devtools::install_github("ben-domingue/irw/irw_pkg")
 ```
 For guidance to use IRW for data analysis in Python or R, please refer to the [IRW website](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
 
