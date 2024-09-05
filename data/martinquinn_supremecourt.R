@@ -16,4 +16,12 @@ df<-data.frame(do.call("rbind",out))
 
 df<-df[!is.na(df$resp),]
 
+##converting term
+paste("8-1-",df$term,sep='')->d
+d<-strptime(d,"%m-%d-%Y")
+df$date<-as.numeric(as.POSIXct(d))
+
+
+
 save(df,file='mq_supremecourt.Rdata')
+

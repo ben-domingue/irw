@@ -28,7 +28,9 @@ write.csv(df, "BF_BrummerHoffman_2021.csv", row.names=FALSE)
 ##bd add'n
 x<-read.csv("BF_BrummerHoffman_2021.csv")
 
-nms<-c("promis","phq","gad","audit","grit","whodas","lte","ucla","wemwbs")
+nms<-c("promis","phq","gad","audit","grit","whodas",
+                                        #"lte",
+       "ucla","wemwbs")
 for (nm in nms) {
     ii<-grepl(paste("^",nm,sep=''),x$item)
     df<-x[ii,]
