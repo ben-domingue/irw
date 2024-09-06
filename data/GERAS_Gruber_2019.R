@@ -35,6 +35,7 @@ study1_df$id <- as.character(study1_df$id)
 merged_df <- bind_rows(
   study1_df %>% mutate(group = "Study 1"), 
   study2_df %>% mutate(group = "Study 2")) # Merge datasets from the 2 studies
+pivot_longer(merged_df, cols=-c(id, age, group), names_to="item", values_to = "resp")
 
 
 save(merged_df, file="GERAS_Gruber_2019.Rdata")
