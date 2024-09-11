@@ -1,0 +1,19 @@
+When you email, remember to:
+1. cc itemresponsewarehouse@stanford.edu and bdomingue@stanford.edu
+2. insert links to paper and data repo at end of email.
+3. Update 'note' about OSF licensing if data is not on OSF.
+
+###email text below
+Hello, 
+
+My name is Ben Domingue. I am an associate professor in the Graduate School of Education at Stanford University. I am attempting to build a repository of publicly available item response datasets. This resource, the “Item Response Warehouse” (IRW), can be seen here: https://datapages.github.io/irw/
+
+In the course of building this resource I have come across the data noted below. I could not determine whether there was a license governing modification/reuse of this data. I am hoping to include this data in the Item Response Warehouse. To do this, I would first modify the data by reformatting so that it conforms to the Item Response Warehouse data standard and then make it publicly available (with a citation and link to the original data). I am writing to request permission. Will you grant me permission to modify the dataset as I’ve described and to publicly share it as a part of the Item Response Warehouse? My plan is to release data under the CC BY 4.0 license [https://creativecommons.org/licenses/by/4.0/]. However, if you would prefer that the data derived from your dataset be distributed under a different license or not licensed for reuse by others, please let me know and I will plan to do that. I am also happy to further discuss any questions/concerns you might have.
+
+Note: OSF also has functionality that permits specification of a license on their platform. If you updated that, I could just work off the permissions consistent with the license.
+
+Thank you for your consideration,
+Ben
+
+Data. [link]
+Paper. [link]
