@@ -1,7 +1,7 @@
 As we start processing larger amounts of data, I wanted to offer some general thoughts about this process. 
 - First and foremost, the idea is not to get through the queue. If we're doing our job right, that won't happen as we'll always have more data coming in. Rather, the goal is to *maximize the data in the IRW*. I'll elaborate on this guiding principle below.
 - When you approach a potential dataset described in a github issue, feel free to ask some questions before you start processing.
-  - *Is the data clearly licensed?* If not, I can provide text that you can send to the author asking for permission. Let's get in the habit of asking first and not worrying about processing until we have permission or updated licensing terms.
+  - *Is the data clearly licensed?* If not, you can send an email to the author asking for permission using the text [here](https://github.com/ben-domingue/irw/blob/main/processing_notes/Licensing.txt). Let's get in the habit of asking first and not worrying about processing until we have permission or updated licensing terms.
   - *Is the data neatly formatted?* If it can be processed quickly, great. If not, you can make a decision about prioritization. If it is high-quality/large-volume, it may be worth the trouble. If it is 150 respondents in an unpublished study, you can leave it for later.
   - In general, feel free to ask questions first and process later. Let's use time to efficiently process data and I'd rather have you pause with a given dataset while you're waiting for an answer to a question and move on to the next one rather than the alternative.
 - The theme here is that there is more data than time so let's use time in ways that maximize growing the IRW! 
