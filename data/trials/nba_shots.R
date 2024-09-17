@@ -1,6 +1,6 @@
 ##https://github.com/DomSamangy/NBA_Shots_04_23
 
-years<-2004:2023
+years<-2004:2024
 L<-list()
 for (y in years) {
     print(y)
@@ -21,15 +21,15 @@ for (y in years) {
     mins<-as.numeric(x$MINS_LEFT+x$SECS_LEFT/60)
     gameclock<-12*(quarter-1)+12-mins
     ##
-    L[[as.character(y)]]<-data.frame(id=id,resp=resp,trial__locx=lx,trial__locy=ly,trial__three=threept,
+    L[[as.character(y)]]<-data.frame(id=id,resp=resp,trial_locx=lx,trial_locy=ly,trial_three=threept,
                    date=date,year=year,
                    gameclock=gameclock
                    )
 }
 df<-data.frame(do.call("rbind",L))
 df<-df[df$gameclock<=48,]
-save(df,file="nbashots.Rdata")
+save(df,file="nbashots_samangy.Rdata")
 
 library(lme4)
-m<-lmer(resp~abs(trial__locx)+trial__locy+trial__three+(1|id),df)
-m<-lmer(resp~abs(trial__locx)+trial__locy+trial__three+gameclock+(1|id),df[df$gameclock>45,])
+m<-lmer(resp~abs(trial_locx)+trial_locy+trial_three+(1|id),df)
+m<-lmer(resp~abs(trial_locx)+trial_locy+trial_three+gameclock+(1|id),df[df$gameclock>45,])
