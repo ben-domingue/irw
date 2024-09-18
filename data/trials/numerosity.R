@@ -1,5 +1,5 @@
 ##https://osf.io/za9y8/
-
+##https://github.com/ben-domingue/irw/issues/60
 ## 6.  task_number
 ##     Task number = 1 for dot difference
 ## Task number = 2 for dot numerosity
