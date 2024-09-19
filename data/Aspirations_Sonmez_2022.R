@@ -1,3 +1,5 @@
+# Paper: https://www.inderscienceonline.com/doi/abs/10.1504/IJHD.2023.131527
+# Data: https://osf.io/psgk8/
 library(haven)
 library(dplyr)
 library(tidyr)
