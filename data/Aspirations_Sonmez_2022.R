@@ -10,5 +10,5 @@ df <- df |>
   select(id, starts_with("Asp"))
 df <- pivot_longer(df, cols=-id, values_to = "resp", names_to="item")
 
-save(df, file="Aspirations_Sonmez_2023.Rdata")
-write.csv(df, "Aspirations_Sonmez_2023.csv", row.names=FALSE)
+save(df, file="Aspirations_Sonmez_2022.Rdata")
+write.csv(df, "Aspirations_Sonmez_2022.csv", row.names=FALSE)
