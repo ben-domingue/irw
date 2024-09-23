@@ -14,6 +14,7 @@ pdp_df <- df |>
   select(ends_with("_C"), ends_with("_IC"), id)
 pdp_df <- pivot_longer(pdp_df, cols=-id, names_to="item", values_to="resp")
 
+##bd edit: 1/2 responses converted to 0/1
 save(pdp_df, file="CPDMMC_Kunnari_2020_PDP.Rdata")
 write.csv(pdp_df, "CPDMMC_Kunnari_2020_PDP.csv", row.names=FALSE)
 
