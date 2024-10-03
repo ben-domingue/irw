@@ -71,3 +71,26 @@ num <- length(datasets)
 
 walk2(datasets, 1:num, irw_clean, 
       .progress = TRUE)
+
+
+##bd addendum
+lf<-list.files(pattern="*.csv")
+for (fn in lf) {
+    print(fn)
+    x<-read.csv(fn)
+    i<-grep("time",names(x))
+    if (length(i)>0) {
+        names(x)[i]<-'wave'
+    }
+    i<-strsplit(fn,'_')[[1]]
+    i<-sub(".csv","",i[3])
+    i<-as.numeric(i)
+    fn0<-paste("gilbert_meta_",i,sep="")
+    df<-x
+    save(df,file=paste("/tmp/proc/",fn0,".Rdata",sep=""))
+    write.csv(df,quote=FALSE,row.names=FALSE,file=paste("/tmp/proc/",fn0,".csv",sep=""))
+}
+
+##rm
+##remove study 3 though, that’s simulated based on the models in our SSRI paper
+
