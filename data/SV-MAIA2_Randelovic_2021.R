@@ -137,6 +137,18 @@ student_GEI_df <- pivot_longer(student_GEI_df, cols=-c(id), names_to="item", val
 save(student_GEI_df, file="SV-MAIA2_Randelovic_2021_GEI.Rdata")
 write.csv(student_GEI_df, "SV-MAIA2_Randelovic_2021_GEI.csv", row.names=FALSE)
 
+# ------ Process MAAS Dataset ------
+practitioner_MAAS_df <- practioner_df |>
+  select(starts_with("MAAS"), id, -MAAS_i1, -maasM) |>
+  rename(date=MAAS_final)
+practitioner_MAAS_df <- remove_na2(practitioner_MAAS_df)
+practitioner_MAAS_df$date <- as.numeric(as.POSIXct(practitioner_MAAS_df$date, format="%Y-%m-%d %H:%M:%S", tz="UTC"))
+
+practitioner_MAAS_df <- pivot_longer(practitioner_MAAS_df, cols=-c(id, date), names_to="item", values_to="resp")
+a <- table(practitioner_MAAS_df$resp)
+print(a)
+save(practitioner_MAAS_df, file="SV-MAIA2_Randelovic_2021_MAAS.Rdata")
+write.csv(practitioner_MAAS_df, "SV-MAIA2_Randelovic_2021_MAAS.csv", row.names=FALSE)
 # ------ Process SOD14 Dataset ------
 
 student_SOD_df <- student_df |>
@@ -277,3 +289,4 @@ practioner_dass_df <- pivot_longer(practioner_dass_df, cols=-c(id, date), names_
 
 save(practioner_dass_df, file="SV-MAIA2_Randelovic_2021_DASS.Rdata")
 write.csv(practioner_dass_df, "SV-MAIA2_Randelovic_2021_DASS.csv", row.names=FALSE)
+
