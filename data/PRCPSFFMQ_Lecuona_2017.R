@@ -1,5 +1,5 @@
-# Paper: https://link.springer.com/article/10.1007/s12144-022-03323-4
-# Data: https://osf.io/twzq4/files/osfstorage
+# Paper: https://journals.sagepub.com/doi/full/10.1177/1073191119873718?casa_token=bS2U5vD1xx0AAAAA%3AEehLWfuR-ZR7rFN_8w2kK6cWgfH18X9ziDkXC_lZHqOmX0BYpGmcoCPJHkanPsAYNxv1t8E-8e8
+# Data: https://osf.io/m64wp/
 
 library(haven)
 library(dplyr)
