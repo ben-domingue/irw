@@ -287,3 +287,4 @@ practioner_dass_df <- remove_na(practioner_dass_df)
 practioner_dass_df <- pivot_longer(practioner_dass_df, cols=-c(id, date), names_to="item", values_to="resp")
 
 save(practioner_dass_df, file="SV-MAIA2_Randelovic_2021_DASS.Rdata")
+write.csv(practioner_dass_df, "SV-MAIA2_Randelovic_2021_DASS.csv", row.names=FALSE)
