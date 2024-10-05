@@ -127,16 +127,6 @@ student_delta_df <- pivot_longer(student_delta_df, cols=-c(id), names_to="item",
 save(student_delta_df, file="SV-MAIA2_Randelovic_2021_delta.Rdata")
 write.csv(student_delta_df, "SV-MAIA2_Randelovic_2021_delta.csv", row.names=FALSE)
 
-# ------ Process GEI14 Dataset ------
-
-student_GEI_df <- student_df |>
-  select(starts_with("GEI"), id)
-student_GEI_df  <- remove_na2(student_GEI_df )
-student_GEI_df <- pivot_longer(student_GEI_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_GEI_df, file="SV-MAIA2_Randelovic_2021_GEI.Rdata")
-write.csv(student_GEI_df, "SV-MAIA2_Randelovic_2021_GEI.csv", row.names=FALSE)
-
 # ------ Process MAAS Dataset ------
 practitioner_MAAS_df <- practioner_df |>
   select(starts_with("MAAS"), id, -MAAS_i1, -maasM) |>
@@ -148,93 +138,6 @@ practitioner_MAAS_df <- pivot_longer(practitioner_MAAS_df, cols=-c(id, date), na
 
 save(practitioner_MAAS_df, file="SV-MAIA2_Randelovic_2021_MAAS.Rdata")
 write.csv(practitioner_MAAS_df, "SV-MAIA2_Randelovic_2021_MAAS.csv", row.names=FALSE)
-# ------ Process SOD14 Dataset ------
-
-student_SOD_df <- student_df |>
-  select(starts_with("SOD"), id)
-student_SOD_df <- student_SOD_df |>
-  select(-ends_with("SOD"))
-student_SOD_df  <- remove_na2(student_SOD_df )
-student_SOD_df <- pivot_longer(student_SOD_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_SOD_df, file="SV-MAIA2_Randelovic_2021_SOD.Rdata")
-write.csv(student_SOD_df, "SV-MAIA2_Randelovic_2021_SOD.csv", row.names=FALSE)
-
-# ------ Process PD12 Dataset ------
-
-student_PD_df <- student_df |>
-  select(starts_with("PD"), id)
-student_PD_df <- student_PD_df |>
-  select(-ends_with("PD"))
-student_PD_df  <- remove_na2(student_PD_df )
-student_PD_df <- pivot_longer(student_PD_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_PD_df, file="SV-MAIA2_Randelovic_2021_PD.Rdata")
-write.csv(student_PD_df, "SV-MAIA2_Randelovic_2021_PD.csv", row.names=FALSE)
-
-# ------ Process FA11 Dataset ------
-
-student_FA_df <- student_df |>
-  select(starts_with("FA"), id)
-student_FA_df <- student_FA_df |>
-  select(-ends_with("FA"))
-student_FA_df  <- remove_na2(student_FA_df )
-student_FA_df <- pivot_longer(student_FA_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_FA_df, file="SV-MAIA2_Randelovic_2021_FA.Rdata")
-write.csv(student_FA_df, "SV-MAIA2_Randelovic_2021_FA.csv", row.names=FALSE)
-
-# ------ Process EA10 Dataset ------
-
-student_EA_df <- student_df |>
-  select(starts_with("EA"), id)
-student_EA_df <- student_EA_df |>
-  select(-ends_with("EA"))
-student_EA_df  <- remove_na2(student_EA_df )
-student_EA_df <- pivot_longer(student_EA_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_EA_df, file="SV-MAIA2_Randelovic_2021_EA.Rdata")
-write.csv(student_EA_df, "SV-MAIA2_Randelovic_2021_EA.csv", row.names=FALSE)
-
-# ------ Process SA10 Dataset ------
-
-student_SA_df <- student_df |>
-  select(starts_with("SA"), id)
-student_SA_df  <- remove_na2(student_SA_df )
-student_SA_df <- pivot_longer(student_SA_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_SA_df, file="SV-MAIA2_Randelovic_2021_SA.Rdata")
-write.csv(student_SA_df, "SV-MAIA2_Randelovic_2021_SA.csv", row.names=FALSE)
-
-# ------ Process MT13 Dataset ------
-
-student_MT_df <- student_df |>
-  select(starts_with("MT"), id)
-student_MT_df <- student_MT_df |>
-  select(-ends_with("MT"))
-student_MT_df  <- remove_na2(student_MT_df )
-student_MT_df <- pivot_longer(student_MT_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_MT_df, file="SV-MAIA2_Randelovic_2021_MT.Rdata")
-write.csv(student_MT_df, "SV-MAIA2_Randelovic_2021_MT.csv", row.names=FALSE)
-
-# ------ Process M12 Dataset ------
-
-student_M_df <- student_df[, c(paste0("M", 1:12), "id")]
-student_M_df  <- remove_na2(student_M_df )
-student_M_df <- pivot_longer(student_M_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_M_df, file="SV-MAIA2_Randelovic_2021_M.Rdata")
-write.csv(student_M_df, "SV-MAIA2_Randelovic_2021_M.csv", row.names=FALSE)
-
-# ------ Process P Dataset ------
-
-student_P_df <- student_df[, c("id", paste0("P", 1:13))]
-student_P_df  <- remove_na2(student_P_df )
-student_P_df <- pivot_longer(student_P_df, cols=-c(id), names_to="item", values_to="resp")
-
-save(student_P_df, file="SV-MAIA2_Randelovic_2021_P.Rdata")
-write.csv(student_P_df, "SV-MAIA2_Randelovic_2021_P.csv", row.names=FALSE)
 
 # ------ Process HEXACO-60 Dataset ------
 
@@ -248,19 +151,6 @@ practioner_hexaco_df <- pivot_longer(practioner_hexaco_df, cols=-c(id,date), nam
 
 save(practioner_hexaco_df, file="SV-MAIA2_Randelovic_2021_hexaco60.Rdata")
 write.csv(practioner_hexaco_df, "SV-MAIA2_Randelovic_2021_hexaco60.csv", row.names=FALSE)
-
-# ------ Process DEL20 Dataset ------
-
-practioner_DEL20_df <- practioner_df |>
-  select(starts_with("DEL20"), id, -DEL20_i1)
-practioner_DEL20_df <- practioner_DEL20_df |>
-  rename(date=DEL20_final)
-practioner_DEL20_df  <- remove_na(practioner_DEL20_df )
-practioner_DEL20_df$date <- as.numeric(as.POSIXct(practioner_DEL20_df$date, format="%Y-%m-%d %H:%M:%S", tz="UTC"))
-practioner_DEL20_df <- pivot_longer(practioner_DEL20_df, cols=-c(id,date), names_to="item", values_to="resp")
-
-save(practioner_DEL20_df, file="SV-MAIA2_Randelovic_2021_DEL20.Rdata")
-write.csv(practioner_DEL20_df, "SV-MAIA2_Randelovic_2021_DEL20.csv", row.names=FALSE)
 
 # ------ Process ERQ Dataset ------
 
