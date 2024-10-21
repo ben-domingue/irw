@@ -1,4 +1,4 @@
-# Paper:https://pubmed.ncbi.nlm.nih.gov/38311907/
+# Paper:https://link.springer.com/article/10.1007/s11136-017-1629-y
 # Data: https://osf.io/f7rp3/
 
 library(haven)
@@ -106,11 +106,6 @@ FBPARENT_df <- FB_PROXY_df  |>
 FBPARENT_df <- remove_na(FBPARENT_df)
 FBPARENT_df <- pivot_longer(FBPARENT_df, cols=-c(id), names_to="item", values_to="resp")
 
-FBCHILD_df $ group <- "Children"
-FBPARENT_df $ group <- "Parent/Proxy"
-
-FB_df <- rbind(FBCHILD_df, FBPARENT_df )
-
 FICHILD_df <- FI_CHILD_df |>
   select(starts_with("FAM_FI"), id)
 FICHILD_df <- remove_na(FICHILD_df)
@@ -121,15 +116,13 @@ FIPARENT_df <- FI_PROXY_df  |>
 FIPARENT_df<- remove_na(FIPARENT_df)
 FIPARENT_df <- pivot_longer(FIPARENT_df, cols=-c(id), names_to="item", values_to="resp")
 
-FICHILD_df  $ group <- "Children"
-FIPARENT_df $ group <- "Parent/Proxy"
+Family_Child_df <- rbind(FBCHILD_df, FICHILD_df)
+Family_Parent_df <- rbind(FIPARENT_df, FBPARENT_df)
 
-FI_df <- rbind(FICHILD_df, FIPARENT_df )
-
-Family_df <- rbind(FB_df, FI_df)
-
-save(FI_df, file="PROMISPME_Forrest_2021_Family.Rdata")
-write.csv(FI_df, "PROMISPME_Forrest_2021_Family.csv", row.names=FALSE)
+save(Family_Child_df, file="PROMISPME_Forrest_2021_Family_Children.Rdata")
+write.csv(Family_Child_df, "PROMISPME_Forrest_2021_Family_Children.csv", row.names=FALSE)
+save(Family_Child_df, file="PROMISPME_Forrest_2021_Family_Proxy.Rdata")
+write.csv(Family_Child_df, "PROMISPME_Forrest_2021_Family_Proxy.csv", row.names=FALSE)
 
 #-------- Process  Pediatric Global Health-7 Dataset ------
 GHGlobal_CHILD_df <- GH_CHILD_df |>
@@ -140,13 +133,10 @@ GHGlobal_Proxy_df <- GH_PROXY_df |>
   select(starts_with("Global"),starts_with("PedGlobal"),id)
 GHGlobal_Proxy_df  <- pivot_longer(GHGlobal_Proxy_df , cols=-c(id), names_to="item", values_to="resp")
 
-GHGlobal_CHILD_df $ group <- "Children"
-GHGlobal_Proxy_df $ group <- "Parent/Proxy"
-
-GHGlobal_df <- rbind(GHGlobal_CHILD_df, GHGlobal_Proxy_df)
-
-save(GHGlobal_df, file="PROMISPME_Forrest_2021_GHGlobal.Rdata")
-write.csv(GHGlobal_df, "PROMISPME_Forrest_2021_GHGlobal.csv", row.names=FALSE)
+save(GHGlobal_CHILD_df, file="PROMISPME_Forrest_2021_GHGlobal_Children.Rdata")
+write.csv(GHGlobal_CHILD_df, "PROMISPME_Forrest_2021_GHGlobal_Children.csv", row.names=FALSE)
+save(GHGlobal_Proxy_df, file="PROMISPME_Forrest_2021_GHGlobal_Proxy.Rdata")
+write.csv(GHGlobal_Proxy_df, "PROMISPME_Forrest_2021_GHGlobal_Proxy.csv", row.names=FALSE)
 
 #-------- Process Life Satisfaction Dataset ------
 LSCHILD_df <- LS_CHILD_df |>
@@ -159,13 +149,10 @@ LSPARENT_df <- LS_PROXY_df  |>
 LSPARENT_df <- remove_na(LSPARENT_df)
 LSPARENT_df  <- pivot_longer(LSPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-LSCHILD_df $ group <- "Children"
-LSPARENT_df  $ group <- "Parent/Proxy"
-
-LS_df <- rbind(LSCHILD_df, LSPARENT_df)
-
-save(LS_df, file="PROMISPME_Forrest_2021_LS.Rdata")
-write.csv(LS_df, "PROMISPME_Forrest_2021_LS.csv", row.names=FALSE)
+save(LSCHILD_df, file="PROMISPME_Forrest_2021_LS_Children.Rdata")
+write.csv(LSCHILD_df, "PROMISPME_Forrest_2021_LS_Children.csv", row.names=FALSE)
+save(LSPARENT_df, file="PROMISPME_Forrest_2021_LS_Proxy.Rdata")
+write.csv(LSPARENT_df, "PROMISPME_Forrest_2021_LS_Proxy.csv", row.names=FALSE)
 
 #-------- Process Meaning & Purpose Dataset ------
 MPCHILD_df <- MP_CHILD_df |>
@@ -177,13 +164,10 @@ MPPARENT_df <- MP_PROXY_df  |>
   select(starts_with("SWB_FO"), id)
 MPPARENT_df  <- pivot_longer(MPPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-MPCHILD_df $ group <- "Children"
-MPPARENT_df  $ group <- "Parent/Proxy"
-
-MP_df <- rbind(MPCHILD_df ,MPPARENT_df)
-
-save(MP_df , file="PROMISPME_Forrest_2021_MP.Rdata")
-write.csv(MP_df , "PROMISPME_Forrest_2021_MP.csv", row.names=FALSE)
+save(MPCHILD_df, file="PROMISPME_Forrest_2021_MP_Children.Rdata")
+write.csv(MPCHILD_df , "PROMISPME_Forrest_2021_MP_Children.csv", row.names=FALSE)
+save(MPARENT_df, file="PROMISPME_Forrest_2021_MP_Proxy.Rdata")
+write.csv(MPARENT_df, "PROMISPME_Forrest_2021_MP_Proxy.csv", row.names=FALSE)
 
 #-------- Process Physical Dataset ------
 PhyCHILD_df <- Phy_CHILD_df |>
@@ -194,11 +178,6 @@ PhyPARENT_df <- Phy_PROXY_df  |>
   select(starts_with("EoS_S"), id)
 PhyPARENT_df  <- pivot_longer(PhyPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-PhyCHILD_df $ group <- "Children"
-PhyPARENT_df $ group <- "Parent/Proxy"
-
-Phy_df <- rbind(PhyCHILD_df, PhyPARENT_df)
-
 PhysActCHILD_df <- PhysAct_CHILD_df |>
   select(starts_with("PAC_M"), id)
 PhysActCHILD_df <- pivot_longer(PhysActCHILD_df, cols=-c(id), names_to="item", values_to="resp")
@@ -207,14 +186,13 @@ PhysActPARENT_df <- PhysAct_PROXY_df  |>
   select(starts_with("PAC_M"), id)
 PhysActPARENT_df <- pivot_longer(PhysActPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-PhysActCHILD_df $ group <- "Children"
-PhysActPARENT_df $ group <- "Parent/Proxy"
+Phys_Children_df <- rbind(PhysActCHILD_df, PhyCHILD_df)
+Phys_Parent_df <- rbind(PhysActPARENT_df, PhyPARENT_df)
 
-PhysAct_df <- rbind(PhysActCHILD_df, PhysActPARENT_df)
-
-Physical_df <- rbind(Phy_df, PhysAct_df)
-save(Physical_df, file="PROMISPME_Forrest_2021_Physical.Rdata")
-write.csv(Physical_df, "PROMISPME_Forrest_2021_Physical.csv", row.names=FALSE)
+save(Phys_Children_df, file="PROMISPME_Forrest_2021_Physical_Children.Rdata")
+write.csv(Phys_Children_df, "PROMISPME_Forrest_2021_Physical_Children.csv", row.names=FALSE)
+save(Phys_Parent_df, file="PROMISPME_Forrest_2021_Physical_Proxy.Rdata")
+write.csv(Phys_Parent_df, "PROMISPME_Forrest_2021_Physical_Proxy.csv", row.names=FALSE)
 
 #-------- Process Physical Stress Affect Dataset ------
 PosAffCHILD_df <- Pos_Aff_CHILD_df |>
@@ -225,13 +203,10 @@ PosAffPARENT_df <- Pos_Aff_PROXY_df  |>
   select(starts_with("SWB_P"), id)
 PosAffPARENT_df <- pivot_longer(PosAffPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-PosAffCHILD_df  $ group <- "Children"
-PosAffPARENT_df $ group <- "Parent/Proxy"
-
-PosAff_df <- rbind(PosAffCHILD_df, PosAffPARENT_df)
-
-save(PosAff_df, file="PROMISPME_Forrest_2021_PosAff.Rdata")
-write.csv(PosAff_df, "PROMISPME_Forrest_2021_PosAff.csv", row.names=FALSE)
+save(PosAffCHILD_df, file="PROMISPME_Forrest_2021_PosAff_Children.Rdata")
+write.csv(PosAffCHILD_df, "PROMISPME_Forrest_2021_PosAff_Children.csv", row.names=FALSE)
+save(PosAffPARENT_df, file="PROMISPME_Forrest_2021_PosAff_Proxy.Rdata")
+write.csv(PosAffPARENT_df, "PROMISPME_Forrest_2021_PosAff_Proxy.csv", row.names=FALSE)
 
 #-------- Process Pediatric Psychological Stress Experience Dataset ------
 PsychCHILD_df <- Psych_CHILD_df |>
@@ -242,13 +217,10 @@ PsychPARENT_df <- Psych_PROXY_df  |>
   select(starts_with("EoS_P"), id)
 PsychPARENT_df  <- pivot_longer(PsychPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-PsychCHILD_df  $ group <- "Children"
-PsychPARENT_df  $ group <- "Parent/Proxy"
-
-Psych_df <- rbind(PsychCHILD_df, PsychPARENT_df)
-
-save(Psych_df, file="PROMISPME_Forrest_2021_Psych.Rdata")
-write.csv(Psych_df, "PROMISPME_Forrest_2021_Psych.csv", row.names=FALSE)
+save(PsychCHILD_df, file="PROMISPME_Forrest_2021_Psych_Children.Rdata")
+write.csv(PsychCHILD_df, "PROMISPME_Forrest_2021_Psych_Children.csv", row.names=FALSE)
+save(PsychPARENT_df, file="PROMISPME_Forrest_2021_Psych_Proxy.Rdata")
+write.csv(PsychPARENT_df, "PROMISPME_Forrest_2021_Psych_Proxy.csv", row.names=FALSE)
 
 #-------- Process Pediatric Psychological Stress Experience Dataset ------
 StrengthCHILD_df <- Strength_CHILD_df |>
@@ -261,10 +233,7 @@ StrengthPARENT_df <- Strength_PROXY_df  |>
 StrengthPARENT_df  <- remove_na(StrengthPARENT_df )
 StrengthPARENT_df <- pivot_longer(StrengthPARENT_df , cols=-c(id), names_to="item", values_to="resp")
 
-PsychCHILD_df  $ group <- "Children"
-PsychPARENT_df  $ group <- "Parent/Proxy"
-
-Strength_df <- rbind(StrengthCHILD_df, StrengthPARENT_df)
-
-save(Strength_df, file="PROMISPME_Forrest_2021_Strength.Rdata")
-write.csv(Strength_df, "PROMISPME_Forrest_2021_Strength.csv", row.names=FALSE)
+save(StrengthCHILD_df, file="PROMISPME_Forrest_2021_Strength_Children.Rdata")
+write.csv(StrengthCHILD_df, "PROMISPME_Forrest_2021_Strength_Children.csv", row.names=FALSE)
+save(StrengthPARENT_df, file="PROMISPME_Forrest_2021_Strength_Proxy.Rdata")
+write.csv(StrengthPARENT_df, "PROMISPME_Forrest_2021_Strength_Proxy.csv", row.names=FALSE)
