@@ -1,0 +1,92 @@
+name: Organize Issues in Project
+
+on:
+  issues:
+    types: [labeled, unlabeled, opened, edited]
+
+jobs:
+  organize_in_project:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install @octokit/rest
+
+      - name: Organize Issue in Project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          const { Octokit } = require("@octokit/rest");
+          const fs = require("fs");
+
+          // Repository information
+          const GITHUB_REPO = "ben-domingue/irw";
+          const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+          const HEADERS = {
+            Authorization: `token ${GITHUB_TOKEN}`,
+            Accept: "application/vnd.github.v3+json"
+          };
+
+          const octokit = new Octokit({ auth: GITHUB_TOKEN });
+
+          const project_id = 2; // Replace with your GitHub project ID
+          const column_map = {
+            "bug": "Bugs",
+            "enhancement": "Enhancements",
+            "priority: high": "High Priority",
+            "documentation": "Documentation"
+          };
+
+          async function run() {
+            const { payload } = JSON.parse(process.env.GITHUB_EVENT_PATH);
+            const issue = payload.issue;
+            const labels = issue.labels.map(label => label.name);
+
+            // Determine target column based on labels
+            let targetColumn = null;
+            for (const label of labels) {
+              if (column_map[label]) {
+                targetColumn = column_map[label];
+                break;
+              }
+            }
+
+            if (targetColumn) {
+              // Find the project card for this issue if it exists
+              const cards = await octokit.projects.listCards({
+                column_id: project_id,
+              });
+              const card = cards.data.find(card => card.content_url === issue.url);
+
+              // Move to the target column or create a new card if none exists
+              if (card) {
+                await octokit.projects.moveCard({
+                  card_id: card.id,
+                  position: "top",
+                  column_id: targetColumn,
+                  headers: HEADERS
+                });
+              } else {
+                await octokit.projects.createCard({
+                  column_id: targetColumn,
+                  content_id: issue.id,
+                  content_type: "Issue",
+                  headers: HEADERS
+                });
+              }
+
+              console.log(`Moved issue #${issue.number} to column: ${targetColumn}`);
+            } else {
+              console.log(`No matching column found for issue #${issue.number}`);
+            }
+          }
+
+          run().catch(err => console.error(err));
