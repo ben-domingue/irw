@@ -60,14 +60,18 @@ df <- df %>%
 
 df_treatment <- df %>% filter(grepl("treatment", item))
 df_hdrs <- df %>% filter(grepl("hdrs", item))
-df_whoqol <- df %>% filter(grepl("whoqol", item))
+df_whoqol <- df %>% filter(grepl("whoqol", item)) %>%
+  filter(resp != 0)
 df_csq <- df %>% filter(grepl("customer", item)) %>%
           select (id, resp, item)
-df_adl <- df %>% filter(grepl("_adl", item))
-df_iadl <- df %>% filter(grepl("iadl", item))
+df_adl <- df %>% filter(grepl("_adl", item)) %>%
+  filter(resp != 0)
+df_iadl <- df %>% filter(grepl("iadl", item)) %>%
+  filter(resp != 5)
 df_mos <- df %>% filter(grepl("mos", item))
 df_sns <- df %>% filter(grepl("social", item))
-df_phq <- df %>% filter(grepl("phq", item))
+df_phq <- df %>% filter(grepl("phq", item)) %>%
+  filter(resp != 4)
 
 write.csv(df_treatment, "COACH_Chen_2022_treatmentStigma.csv", row.names=FALSE)
 write.csv(df_hdrs, "COACH_Chen_2022_HDRS.csv", row.names=FALSE)
