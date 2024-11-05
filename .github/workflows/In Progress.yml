@@ -19,14 +19,25 @@ jobs:
               query($id: ID!) {
                 node(id: $id) {
                   ... on Issue {
-                    projectItems(first: 10) {
+                    projectItems(first: 500) {
                       nodes {
-                        fieldValues(first: 10) {
+                        fieldValues(first: 500) {
                           nodes {
                             projectField {
                               name
                             }
-                            value
+                            value {
+                              ... on ProjectV2ItemFieldTextValue {
+                                text
+                              }
+                              ... on ProjectV2ItemFieldNumberValue {
+                                number
+                              }
+                              ... on ProjectV2ItemFieldSingleSelectValue {
+                                name
+                              }
+                              # Add more inline fragments if there are additional types you need to handle
+                            }
                           }
                         }
                       }
@@ -39,7 +50,7 @@ jobs:
             const result = await github.graphql(query, variables);
             const projectItems = result.node.projectItems.nodes;
             const currentStatus = projectItems
-              .map(item => item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value)
+              .map(item => item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value?.text || item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value?.name)
               .find(status => status) || "None";
             return currentStatus === 'Under Review';
 
