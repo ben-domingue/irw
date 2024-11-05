@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check if Issue Has "data" Label
+      - name: Check if Issue Has "data queue" Label
         id: check_label
         uses: actions/github-script@v6
         with:
           script: |
             const labelName = context.payload.label ? context.payload.label.name : null;
             const issueLabels = context.payload.issue.labels.map(label => label.name);
-            return labelName === 'data' || issueLabels.includes('data');
+            return labelName === 'data queue' || issueLabels.includes('data queue');
 
       - name: Update Project Item Status to "To-Do"
         if: steps.check_label.outputs.result == 'true'
