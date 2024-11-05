@@ -17,7 +17,7 @@ jobs:
         with:
           script: |
             const issue = context.payload.issue;
-            const hasDataLabel = issue.labels.some(label => label.name === 'data');
+            const hasDataLabel = issue.labels.some(label => label.name === 'data queue');
             const hasAssignee = issue.assignees.length > 0;
             return hasDataLabel && hasAssignee;
 
