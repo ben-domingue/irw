@@ -1,0 +1,53 @@
+name: Update Project Status on Assignee Added
+
+on:
+  issues:
+    types: [assigned]
+
+jobs:
+  update-project-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Current Project Status
+        id: check_status
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issueNodeId = context.payload.issue.node_id;
+            const query = `
+              query($id: ID!) {
+                node(id: $id) {
+                  ... on Issue {
+                    projectItems(first: 10) {
+                      nodes {
+                        fieldValues(first: 10) {
+                          nodes {
+                            projectField {
+                              name
+                            }
+                            value
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            `;
+            const variables = { id: issueNodeId };
+            const result = await github.graphql(query, variables);
+            const projectItems = result.node.projectItems.nodes;
+            const currentStatus = projectItems
+              .map(item => item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value)
+              .find(status => status) || "None";
+            return currentStatus === 'Under Review';
+
+      - name: Update Project Item Status to "In Progress"
+        if: steps.check_status.outputs.result == 'false'
+        uses: nipe0324/update-project-v2-item-field@v2.0.1
+        with:
+          project-url: https://github.com/users/ben-domingue/projects/1
+          github-token: ${{ secrets.PROJECTS_TEST }}
+          field-name: Status
+          field-value: In Progress
