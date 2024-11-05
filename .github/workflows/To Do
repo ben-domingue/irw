@@ -1,0 +1,30 @@
+name: Add Issue to "To-Do" Status on Label
+
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+
+jobs:
+  add-to-todo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if Issue Has "data" Label
+        id: check_label
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const labelName = context.payload.label ? context.payload.label.name : null;
+            const issueLabels = context.payload.issue.labels.map(label => label.name);
+            return labelName === 'data' || issueLabels.includes('data');
+
+      - name: Update Project Item Status to "To-Do"
+        if: steps.check_label.outputs.result == 'true'
+        uses: nipe0324/update-project-v2-item-field@v2.0.1
+        with:
+          project-url: https://github.com/users/ben-domingue/projects/1
+          github-token: ${{ secrets.PROJECTS_TEST }}
+          field-name: Status
+          field-value: Todo
