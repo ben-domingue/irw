@@ -1,61 +1,36 @@
-name: Update Project Status on Assignee Added
+name: Add Issue to Project and Update Status
 
 on:
   issues:
-    types: [assigned]
+    types:
+      - labeled
+      - assigned
 
 jobs:
-  update-project-status:
+  process-issue:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check Current Project Status
-        id: check_status
+      - name: Check if Issue Has "data" Label and an Assignee
+        id: check_conditions
         uses: actions/github-script@v6
         with:
           script: |
-            const issueNodeId = context.payload.issue.node_id;
-            const query = `
-              query($id: ID!) {
-                node(id: $id) {
-                  ... on Issue {
-                    projectItems(first: 500) {
-                      nodes {
-                        fieldValues(first: 500) {
-                          nodes {
-                            projectField {
-                              name
-                            }
-                            value {
-                              ... on ProjectV2ItemFieldTextValue {
-                                text
-                              }
-                              ... on ProjectV2ItemFieldNumberValue {
-                                number
-                              }
-                              ... on ProjectV2ItemFieldSingleSelectValue {
-                                name
-                              }
-                              # Add more inline fragments if there are additional types you need to handle
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            `;
-            const variables = { id: issueNodeId };
-            const result = await github.graphql(query, variables);
-            const projectItems = result.node.projectItems.nodes;
-            const currentStatus = projectItems
-              .map(item => item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value?.text || item.fieldValues.nodes.find(field => field.projectField.name === 'Status')?.value?.name)
-              .find(status => status) || "None";
-            return currentStatus === 'Under Review';
+            const issue = context.payload.issue;
+            const hasDataLabel = issue.labels.some(label => label.name === 'data');
+            const hasAssignee = issue.assignees.length > 0;
+            return hasDataLabel && hasAssignee;
+
+      - name: Add Issue to Project
+        if: steps.check_conditions.outputs.result == 'true'
+        id: add_to_project
+        uses: actions/add-to-project@v0.3.0
+        with:
+          project-url: https://github.com/users/ben-domingue/projects/1
+          github-token: ${{ secrets.PROJECTS_TEST }}
 
       - name: Update Project Item Status to "In Progress"
-        if: steps.check_status.outputs.result == 'false'
+        if: steps.check_conditions.outputs.result == 'true'
         uses: nipe0324/update-project-v2-item-field@v2.0.1
         with:
           project-url: https://github.com/users/ben-domingue/projects/1
