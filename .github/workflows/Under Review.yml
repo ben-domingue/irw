@@ -1,0 +1,28 @@
+name: Update Project Status on CSV Comment
+
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  update-project-status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check if Comment Contains CSV Attachment
+        id: check_csv
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const commentBody = context.payload.comment.body;
+            const csvPattern = /\.(csv|zip)\b/;
+            return csvPattern.test(commentBody);
+
+      - name: Update Project Item Status to "Under Review"
+        if: steps.check_csv.outputs.result == 'true'
+        uses: nipe0324/update-project-v2-item-field@v2.0.1
+        with:
+          project-url: https://github.com/users/ben-domingue/projects/1
+          github-token: ${{ secrets.PROJECTS_TEST }}
+          field-name: Status
+          field-value: Under Review
