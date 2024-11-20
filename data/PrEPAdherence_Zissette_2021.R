@@ -6,7 +6,7 @@ df <- read.table("Screening and adherence monitoring for oral PrEP.tab", header=
 df$id <- seq(1, nrow(df))
 
 df_final <- df %>%
-  select(id, starts_with("q_s_"), matches("^q_m_.*ftp"), matches("^q_m_.*ntp")) %>%
+  select(id, starts_with("q_s_"), matches("^q_m_.*all")) %>%
   pivot_longer(-id,
                names_to = 'item',
                values_to = 'resp') %>%
