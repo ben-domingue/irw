@@ -83,6 +83,11 @@ df4$id <- paste0(df4$id, "_4")
 
 combined <- bind_rows(df1, df2, df3, df4)
 
-write.csv(combined, "ThreatPerceptions_Isler_2024.csv", row.names=FALSE)
+df_panas <- combined %>%
+  filter(!grepl("crt", item))
 
+df_crt <- combined %>%
+  filter(grepl("crt", item))
 
+write.csv(df_panas, "ThreatPerceptions_Isler_2024_PANAS.csv", row.names=FALSE)
+write.csv(df_crt, "ThreatPerceptions_Isler_2024_CRT.csv", row.names=FALSE)
