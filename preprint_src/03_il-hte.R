@@ -1,27 +1,41 @@
-# Define a function 'il_hte' that takes a data frame 'tab' as input
+dataset <- redivis::organization("datapages")$
+    dataset("Item Response Warehouse")
+dataset_tables <- dataset$list_tables()
+names(dataset_tables) <- sapply(dataset_tables, function(x) x$name)
+f <- function(table) table$list_variables()
+nms <- lapply(dataset_tables, f)
+f <- function(x) {
+    nm <- sapply(x, function(x) x$name)  # Extract names of variables
+    "treat" %in% nm 
+}
+test <- sapply(nms, f)
+rct_tables <- dataset_tables[test]
+
 il_hte <- function(tab) {
-    
-    # Convert the 'resp' column of the data frame to numeric type
-    df$resp <- as.numeric(df$resp)
-    
-    # Fit a 1 Parameter Logistic (1PL) Item Response Theory model using lme4's glmer function
-    # The model predicts the response ('resp') based on the treatment variable 'treat', 
-    # with random effects for 'id' and an interaction term between 'treat' and 'item'
-    m <- lme4::glmer(resp ~ treat + (1 | id) + (treat | item), 
-                     family = 'binomial', data = df) # Specify the family as 'binomial' for binary outcomes
-    
-    # Return a list containing:
-    # 1. The name of the model (not defined in the provided code)
-    # 2. The fixed effects estimates from the fitted model
-    # 3. The variance components of the model
-    list(nm, fixef(m), VarCorr(m))
+    nm<-tab$name
+    print(nm)
+    df <- tab$to_data_frame()
+    df$resp<-as.numeric(df$resp)
+    ##downsample
+    ids<-unique(df$id)
+    if (length(ids)>1000) {
+        ids<-sample(ids,1000)
+        df<-df[df$id %in% ids,]
+    }
+    ## 1PL IL-HTE model with lme4
+    m<-lme4::lmer(resp ~ treat + (1|id) + (treat|item),df) ##LPM for efficiency
+    list(nm,lme4::ranef(m)$item[,2])
 }
 
-# Retrieve the dataset named "item_response_warehouse" from the Redivis user "datapages"
-dataset <- redivis::user("datapages")$dataset("item_response_warehouse")
+library(parallel)
+L<-mclapply(rct_tables[1:15],il_hte,mc.cores=5)
 
-# Convert the specified table "gilbert_meta_2" to a data frame
-df <- dataset$table("gilbert_meta_2")$to_data_frame()
-
-# Call the 'il_hte' function with 'df' as input to fit the model and obtain results
-il_hte(df)
+##figure. compare to figure 1 here: https://arxiv.org/pdf/2405.00161
+est<-sapply(L,function(x) x[[2]])
+par(mgp=c(2,1,0),mar=c(3,10,1,1))
+plot(NULL,xlim=range(unlist(est)),ylim=c(1,length(L)),yaxt='n',ylab='',xlab="Item-level treatment effects")
+for (i in 1:length(L)) {
+    xv<-L[[i]][[2]]
+    points(xv,rep(i,length(xv)),pch=19)
+    mtext(side=2,line=0,at=i,L[[i]][[1]],cex=.7,las=2)
+}

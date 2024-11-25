@@ -3,7 +3,7 @@ not_data <- "metadata"
 
 # Retrieve the dataset named "Item Response Warehouse" from the Redivis organization "datapages"
 dataset <- redivis::organization("datapages")$
-    dataset("Item Response Warehouse", version = "v4.0")
+    dataset("Item Response Warehouse")
 
 # List the tables available in the dataset
 dataset_tables <- dataset$list_tables()
