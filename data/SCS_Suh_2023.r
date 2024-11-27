@@ -16,10 +16,12 @@ korea_df <- korea_df |>
 ea_scs <- ea_df |>
   select(id, starts_with("SCS"), -starts_with("SCS_Short"))
 ea_scs <- pivot_longer(ea_scs, cols=-id, names_to="item", values_to="resp")
+ea_scs$group <- "NA"
 
 korea_scs <- korea_df |>
   select(id, starts_with("SCS"))
 korea_scs <- pivot_longer(korea_scs, cols=-id, names_to="item", values_to="resp")
+korea_scs$group <- "Korea"
 
 scs_df <- rbind(ea_scs, korea_scs)
 
@@ -41,6 +43,7 @@ ea_bfne <- ea_df |>
 ea_bfne[ea_bfne == 999] <- NA
 ea_bfne <- pivot_longer(ea_bfne, cols=-id, names_to="item", values_to="resp")
 ea_bfne <- ea_bfne[!is.na(ea_bfne$resp),]
+ea_bfne$group <- "NA"
 
 korea_bfne <- korea_df |>
   select(id, starts_with("BFNE"), -BFNE)
@@ -48,6 +51,7 @@ korea_bfne[korea_bfne == 999] <- NA
 korea_bfne[korea_bfne == 0] <- NA
 korea_bfne <- pivot_longer(korea_bfne, cols=-id, names_to="item", values_to="resp")
 korea_bfne <- korea_bfne[!is.na(korea_bfne$resp),]
+korea_bfne$group <- "Korea"
 
 bfne_df <- rbind(korea_bfne, ea_bfne)
 
