@@ -16,7 +16,7 @@ korea_df <- korea_df |>
 ea_scs <- ea_df |>
   select(id, starts_with("SCS"), -starts_with("SCS_Short"))
 ea_scs <- pivot_longer(ea_scs, cols=-id, names_to="item", values_to="resp")
-ea_scs$group <- "NA"
+ea_scs$group <- "US"
 
 korea_scs <- korea_df |>
   select(id, starts_with("SCS"))
@@ -43,7 +43,7 @@ ea_bfne <- ea_df |>
 ea_bfne[ea_bfne == 999] <- NA
 ea_bfne <- pivot_longer(ea_bfne, cols=-id, names_to="item", values_to="resp")
 ea_bfne <- ea_bfne[!is.na(ea_bfne$resp),]
-ea_bfne$group <- "NA"
+ea_bfne$group <- "US"
 
 korea_bfne <- korea_df |>
   select(id, starts_with("BFNE"), -BFNE)
@@ -55,5 +55,5 @@ korea_bfne$group <- "Korea"
 
 bfne_df <- rbind(korea_bfne, ea_bfne)
 
-save(ea_siaps, file="SCS_Suh_2023_BFNE.Rdata")
-write.csv(ea_siaps, "SCS_Suh_2023_BFNE.csv", row.names=FALSE)
+save(bfne_df, file="SCS_Suh_2023_BFNE.Rdata")
+write.csv(bfne_df, "SCS_Suh_2023_BFNE.csv", row.names=FALSE)
