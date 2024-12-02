@@ -1,0 +1,60 @@
+# Tagging Script for Item Response Warehouse
+
+## Introduction
+Tagging plays a critical role in item response data warehouses. By categorizing and labeling data effectively, researchers can search for specific data based on tags and retrieve it quickly and accurately. This process enhances the efficiency of data analysis and streamlines research workflows, making it easier to access relevant information.
+
+## Project Overview
+This Python script automates the tagging process for a dataset by extracting additional information from a web source. It takes a CSV file as input, performs web scraping to gather meaningful data from the URLs provided in the CSV, and labels ten new columns. The script then saves the enriched dataset to `labeled_results.csv`.
+
+## Prerequisites
+- An `.env` file containing your `OPENAI_API_KEY`
+- Python 3.x installed
+- Required Python packages (install using `requirements.txt`)
+
+## Installation
+1. Clone the repository or download the script.
+2. Ensure your working directory contains the `.env` file with your `OPENAI_API_KEY`.
+3. Install the required packages by running:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Usage
+To run the script, use the following command:
+```bash
+python3 tagging.py --data-path $PATH_TO_CSV
+```
+### Example:
+```bash
+python3 tagging.py --data-path irw/tagging/data/IRW Data Dictionary - data index.csv
+```
+
+## How the Script Works
+1. **Reading Input**: The script reads the provided CSV file, which must contain columns such as `Filename`, `Description`, `URL`, and other metadata.
+2. **Web Scraping**: The script fetches the URL from each row to extract meaningful information and labels the data.
+3. **Tagging Process**:
+   - A labeling agent is used to populate ten new columns:
+     - `Measurement Focus`
+     - `Response Type`
+     - `Target Population`
+     - `Domain of Measurement`
+     - `Scoring Methodology`
+     - `Data Structure`
+     - `Data Source`
+     - `Context of Use`
+     - `Item Format`
+     - `Geographic Location`
+   - If the information is missing from the web source, the column is filled with `Unknown`.
+4. **Supervision**: The labeling agent's results are verified to ensure correctness.
+5. **Output**: The final labeled dataset is saved as `labeled_results.csv`.
+
+## Output
+The output is a CSV file (`labeled_results.csv`) that contains the original columns along with the ten newly populated columns, providing researchers with enriched data for better searchability and data retrieval.
+
+## Notes
+- Ensure the `.env` file with `OPENAI_API_KEY` is present in the same directory as the script.
+- The web scraping functionality relies on internet access and a valid API key for data enhancement.
+
+## Conclusion
+This script is designed to help researchers in the item response data field efficiently tag and categorize data for easier access and analysis. By automating the labeling and validation process, it saves time and increases data accuracy.
+

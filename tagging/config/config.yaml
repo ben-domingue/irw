@@ -1,0 +1,70 @@
+labeling_prompt:
+  |
+  The Item Response Warehouse (IRW) is a collection of open, harmonized item response datasets designed to provide large quantities of data for standardized psychometric analysis. Some dataset descriptions may lack detailed information, so it is important to apply relevant labels only if they meaningfully help a researcher find the dataset.
+
+  Given the following description of a dataset, classify it by applying labels from the categories below. Only include information explicitly found in the description or that can be reasonably inferred. If certain information is not available, set the corresponding field as "Unknown".
+
+  Here is the dataset description:
+  - Short description from the dataset field: {dataset_short_description}
+  - Description obtained from the link: {description_from_link}
+
+  The output should be a JSON object formatted as follows, with all categories present and populated with information from the description or set to "Unknown":
+  {{
+      "Measurement Focus": "", 
+      "Response Type": "", 
+      "Target Population": "", 
+      "Domain of Measurement": "", 
+      "Scoring Methodology": "", 
+      "Data Structure": "", 
+      "Data Source": "", 
+      "Context of Use": "", 
+      "Item Format": "", 
+      "Geographic Location": ""
+  }}
+
+  Classification should be based on the following categories:
+  - **Measurement Focus** (e.g., Educational Ability, Political Attitudes, Personality Traits, Health/Well-being)
+  - **Response Type** (e.g., Dichotomous, Polytomous, Continuous, Response Time)
+  - **Target Population** (e.g., K-12 Students, College Students, Adults, Special Populations)
+  - **Domain of Measurement** (e.g., Cognitive Skills, Affective Measures, Behavioral Measures, Social Attitudes)
+  - **Scoring Methodology** (e.g., Classical Test Theory, Item Response Theory, Computerized Adaptive Testing, Factor Analysis)
+  - **Data Structure** (e.g., Cross-sectional, Longitudinal, Cross-classified)
+  - **Data Source** (e.g., Survey-based, Test-based, Behavioral Task-based)
+  - **Context of Use** (e.g., Educational Assessment, Political Polling, Psychological Screening, Workplace Evaluation)
+  - **Item Format** (e.g., Multiple-choice, Open-ended, True/False, Likert Scale)
+  - **Geographic Location** (e.g., U.S.-based, European, Global)
+
+  Ensure that only the most relevant labels are applied based on the provided dataset description, and do not return any additional information beyond the JSON object.
+
+
+supervisor_prompt:
+  |
+  Given the dataset description and the labels generated in the JSON format, verify whether each label is supported by the information in the description. 
+  If a label includes data not found in the description, update it to "unknown". Only use evidence directly from the dataset description to validate or
+  adjust the labels.
+
+  Here is the dataset description:
+  - Short description from the dataset field: {dataset_short_description}
+  - Description obtained from the link: {description_from_link}
+
+  Here is the generated label JSON:
+  {label_json}
+
+  Verify each field in the JSON object and ensure they align with the dataset description. Update the fields as follows:
+  - If a field is supported by explicit information in the description, leave it as is.
+  - If a field is not supported by the description, change it to "unknown".
+
+  The validated output should be a JSON object with the following structure:
+  {{
+      "Measurement Focus": "",
+      "Response Type": "",
+      "Target Population": "",
+      "Domain of Measurement": "",
+      "Scoring Methodology": "",
+      "Data Structure": "",
+      "Data Source": "",
+      "Context of Use": "",
+      "Item Format": "",
+      "Geographic Location": ""
+  }}
+  Do not answer anything besides the valid JSON object.
