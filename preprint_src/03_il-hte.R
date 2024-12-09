@@ -68,17 +68,18 @@ L <- lapply(rct_tables[1:10], il_hte)
 
 # Remove NULL results from the results list
 L <- L[!sapply(L, is.null)]
+##save(L,file="ilhte.Rdata")
 
 # Generate a figure of treatment effects, similar to the result in provided link
 pdf("~/Dropbox/Apps/Overleaf/IRW/ilhte.pdf", width = 4, height = 2.2)
 
-     
+# order things
+te <- sapply(L, function(x) x[[3]][2])  # Overall treatment effect
+L<-L[order(te)]
+
 # Extract random effects and treatment effect estimates
 est <- sapply(L, function(x) x[[2]]$item[, 2])  # Item-level effects
 treatment.effect <- sapply(L, function(x) x[[3]][2])  # Overall treatment effect
-
-# order things
-L<-L[order(treatment.effect)]
 
 # Set up plot parameters
 par(mgp = c(2, 1, 0), mar = c(3, 10, 1, 1))  # Margins and spacing adjustments
@@ -90,8 +91,8 @@ abline(v = 0, col = 'gray')  # Add a vertical line at x = 0 for reference
 # Plot treatment effects for each item
 for (i in 1:length(L)) {
     xv <- est[[i]] + treatment.effect[i]  # Calculate adjusted treatment effects
-    points(treatment.effect[i],i,col='red')
     points(xv, rep(i, length(xv)), pch = 19, cex = .5)  # Add points to the plot
+    points(treatment.effect[i],i,col=rgb(0.93,0,0,alpha=.4),cex=1.5,pch=19)
     mtext(side = 2, line = 0.2, at = i, L[[i]][[1]], cex = .8, las = 2)  # Add item names to y-axis
 }
 
