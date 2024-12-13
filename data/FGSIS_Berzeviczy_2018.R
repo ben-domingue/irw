@@ -25,4 +25,6 @@ fgsis$resp <- likert_map[fgsis$resp]
 fgsis <- fgsis %>%
   filter(!is.na(resp))
 
-write.csv(df, "FGSIS_Berzeviczy_2018.csv", row.names=FALSE)
+fgsis
+
+write.csv(fgsis, "FGSIS_Berzeviczy_2018.csv", row.names=FALSE)
