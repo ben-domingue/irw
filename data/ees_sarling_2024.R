@@ -16,5 +16,8 @@ data_ve <- data %>%
 data_iu <- data %>%
   filter(grepl("IU", item))
 
-write.csv(data_ve, "ees_sarling_2024_vicarious_experience.csv", row.names=FALSE)
-write.csv(data_iu, "ees_sarling_2024_intuitive_understanding.csv", row.names=FALSE)
+#write.csv(data_ve, "ees_sarling_2024_vicarious_experience.csv", row.names=FALSE)
+#write.csv(data_iu, "ees_sarling_2024_intuitive_understanding.csv", row.names=FALSE)
+
+
+###NOTE: ees_sarling_2024_vicarious_experience.csv & ees_sarling_2024_intuitive_understanding.csv joined to create ees_sarling_2024
