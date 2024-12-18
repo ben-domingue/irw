@@ -17,3 +17,5 @@ data_1 <- data %>%
   )
 
 saveRDS(data_1, "spelling assessment_study2.RData")
+
+##note table now spelling_assessment_study2
