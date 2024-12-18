@@ -10,3 +10,5 @@ names(data)[names(data) == "ID"] <- "id"
 data_1 <- pivot_longer(data, cols = -id, names_to = "item", values_to = "resp")
 
 saveRDS(data_1, "spelling assessment_study1.RData")
+
+##note: table now spelling_assessment_study1
