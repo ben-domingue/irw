@@ -1,3 +1,8 @@
+##############################
+##NOTE: 12-10-2024 from BD. id has been replaced with person_id now that we have functionality to handle wave. this change was made manually, code does not reflect this update.
+##############################
+
+
 library(tidyverse)
 library(readxl)
 library(janitor)

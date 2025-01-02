@@ -75,13 +75,14 @@ proc <- function(table) {
 
 # Apply the 'proc' function to each table containing 'rt' and store the results in 'dens'
 dens <- lapply(rt_data, proc)
+##save(dens,file="/tmp/dens.Rdata")
 
 # Create a PDF file to save the Q-Q plots
-pdf("~/Dropbox/Apps/Overleaf/IRW/rt.pdf", width = 3, height = 3)
+pdf("~/Dropbox/Apps/Overleaf/IRW/rt.pdf", width = 3, height = 2.2)
 
 # Set color with transparency for the lines to be plotted
 cc <- col2rgb("red")
-cc <- rgb(cc[1], cc[2], cc[3], max = 255, alpha = 75)  # Red color with alpha
+cc <- rgb(cc[1], cc[2], cc[3], max = 255, alpha = 45)  # Red color with alpha
 
 # Set graphical parameters for the plot layout
 par(mgp = c(2, 1, 0), mar = c(3, 3, .1, .1))
