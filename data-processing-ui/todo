@@ -1,0 +1,1 @@
+- check if id and item is a row of column. Modify map_resp to get the right element of the tuple
