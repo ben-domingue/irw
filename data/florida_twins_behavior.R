@@ -4,7 +4,7 @@ library(readr)
 df <- read_csv('multiparentandchild0311 LDBase.csv')
 
 names(df) <- tolower(names(df))
-
+co
 df <- df |>
   select(-starts_with('panas_pa'),
          -starts_with('panas_na'),
@@ -37,36 +37,78 @@ df <- df |>
          -contains('feeling'),
          -pair_gender,
          -zyg_par,
-         -starts_with('bg_id'),
          -`...1`,
-         -starts_with('id'),
+         -id1,
+         -id0,
          -contains('swan'),
-         -twinid) |>
-  mutate(id = row_number()) |>
-  pivot_longer(cols = -c(id, famid),
+         -twinid,
+         -starts_with('n'))
+
+
+df0 <- df %>%
+  select(bg_id0, ends_with("0")) %>%
+  rename(id = bg_id0) %>%
+  pivot_longer(cols = -id,
                names_to = 'item',
                values_to = 'resp',
-               values_drop_na = T) |>
-  rename(family_id = famid)
-
-# create item IDs for each survey item
-items <- as.data.frame(unique(df$item))
-items <- items |>
-  mutate(item_id = row_number())
+               values_drop_na = T)
 
 
-df <- df |>
-  # merge item IDs with df
-  left_join(items, 
-            by=c("item" = "unique(df$item)")) |>
-  # drop character item variable
-  select(id, family_id, item_id, resp) |>
-  # use item_id column as the item column
-  rename(item = item_id) |>
-  arrange(id, item)
+df1 <- df %>%
+  select(bg_id1, ends_with("1")) %>%
+  rename(id = bg_id1) %>%
+  pivot_longer(cols = -id,
+               names_to = 'item',
+               values_to = 'resp',
+               values_drop_na = T)
+
+df_ <- bind_rows(df0, df1)
+
+df_$item <- substring(df_$item, 1, nchar(df_$item) - 1)
+
+df_ <- df_[!(grepl("^n", df_$item) & !grepl("^nes", df_$item)),]
+
+unique(df_$item)
 
 # print response values
-table(df$resp)
+table(df_$resp)
 
-# save df to Rdata file
-save(df, file="florida_twins_behavior.Rdata")
+df_panas <- df_ %>%
+  filter(grepl("panas", item))
+
+df_ecs <- df_ %>%
+  filter(grepl("ecs", item))
+
+df_rcads <- df_ %>%
+  filter(grepl("rcads", item))
+
+df_cads <- df_ %>%
+  filter(grepl("^cads_", item))
+
+df_tas <- df_ %>%
+  filter(grepl("tas", item))
+
+df_friends <- df_ %>%
+  filter(grepl("friends", item))
+
+df_cadsyv <- df_ %>%
+  filter(grepl("^cadsyv", item))
+
+length(unique(df_panas$item))
+length(unique(df_ecs$item))
+length(unique(df_rcads$item))
+length(unique(df_cads$item))
+length(unique(df_tas$item))
+length(unique(df_friends$item))
+length(unique(df_cadsyv$item))
+
+write.csv(df_panas, "florida_twins_behavior_panas.csv", row.names=FALSE)
+write.csv(df_ecs, "florida_twins_behavior_ecs.csv", row.names=FALSE)
+write.csv(df_rcads, "florida_twins_behavior_rcads.csv", row.names=FALSE)
+write.csv(df_cads, "florida_twins_behavior_cads.csv", row.names=FALSE)
+write.csv(df_tas, "florida_twins_behavior_tas.csv", row.names=FALSE)
+write.csv(df_friends, "florida_twins_behavior_friends.csv", row.names=FALSE)
+write.csv(df_cadsyv, "florida_twins_behavior_cadsyv.csv", row.names=FALSE)
+
+# # save df to Rdata file
+# save(df, file="florida_twins_behavior.Rdata")
