@@ -42,8 +42,7 @@ df <- df |>
          -id0,
          -contains('swan'),
          -twinid,
-         -starts_with('n')) %>%
-  rename()
+         -starts_with('n'))
 
 
 df0 <- df %>%
