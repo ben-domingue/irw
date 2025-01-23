@@ -1,2 +1,3 @@
 *.gz
 *.tar.gz
+.env
