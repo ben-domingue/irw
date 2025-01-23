@@ -1,4 +1,4 @@
-x<-read.csv("isi_bifactor_dat.csv")
+x<-read.csv("isi_bifactor_data.csv") ##https://figshare.com/s/59a2c9e849bc019da6e4?file=51597500
 id<-1:nrow(x)
 for (nm in c("ASLEC","ISI","PHQ")) {
     ii<-grep(nm,names(x))
