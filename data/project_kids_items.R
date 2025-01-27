@@ -44,9 +44,10 @@ tosrec <- df_raw |>
                values_to = 'resp',
                values_drop_na = T) |>
   mutate(wave = 'g2_end',
-         item = paste0(pt1, '_', pt2, '_', pt3)) |>
-  select(id, item, wave, resp) 
-  
+         item = paste0(pt1, '_', pt2, '_', pt3),
+         wave_temp = '3') |>
+  select(id, item, wave, wave_temp, resp) 
+
 # transform variables with three underscores       
 three <- df_raw |>
   select(id,
@@ -68,7 +69,13 @@ three <- df_raw |>
                values_to = 'resp',
                values_drop_na = T) |>
   mutate(item = paste0(pt1, '_', pt2, '_', pt3)) |>
-  select(id, item, wave, resp) 
+  mutate(wave_temp = case_when(wave == 'g1' ~ '1',
+                          wave == 'g2' ~ '2',
+                          wave == 'g3' ~ '3',
+                          wave == 'w1' ~ '1',
+                          wave == 'w2' ~ '2',
+                          wave == 'w3' ~ '3')) |>
+  select(id, item, wave, wave_temp, resp) 
 
 # transform kbit assessment variables
 kbit <- df_raw |>
@@ -78,7 +85,8 @@ kbit <- df_raw |>
                names_to = 'item',
                values_to = 'resp',
                values_drop_na = T) |>
-  mutate(wave = NA)
+  mutate(wave = NA, wave_temp = NA) |>
+  select(id, item, wave, wave_temp, resp)
 
 # transform variables with two underscores
 two <- df_raw |>
@@ -91,7 +99,13 @@ two <- df_raw |>
                values_to = 'resp',
                values_drop_na = T) |>
   mutate(item = paste0(pt1, '_', pt2)) |>
-  select(id, item, wave, resp)
+  mutate(wave_temp = case_when(wave == 'g1' ~ '1',
+                               wave == 'g2' ~ '2',
+                               wave == 'g3' ~ '3',
+                               wave == 'w1' ~ '1',
+                               wave == 'w2' ~ '2',
+                               wave == 'w3' ~ '3')) |>
+  select(id, item, wave, wave_temp, resp)
 
 tosrec2 <- df_raw |>
   select(id,
@@ -102,10 +116,13 @@ tosrec2 <- df_raw |>
                names_sep = '_',
                values_to = 'resp',
                values_drop_na = T) |>
-  mutate(wave = case_when(wave == 'g1c' ~ 'g1_end',
-                          wave == 'g2a' ~ 'g2_beginning'),
+  # mutate(wave = case_when(wave == 'g1c' ~ 'g1_end',
+  #                         wave == 'g2a' ~ 'g2_beginning'),
+  #        item = paste0(pt1, '_', pt2, '_', pt3, '_', pt4)) |>
+  mutate(wave_temp = case_when(wave == 'g1c' ~ '1',
+                          wave == 'g2a' ~ '2'),
          item = paste0(pt1, '_', pt2, '_', pt3, '_', pt4)) |>
-  select(id, item, wave, resp)
+  select(id, item, wave, wave_temp, resp)
 
 # transform variables with four underscores
 four <- df_raw |>
@@ -117,31 +134,154 @@ four <- df_raw |>
                values_to = 'resp',
                values_drop_na = T) |>
   mutate(item = paste0(pt1, '_', pt2, '_', pt3, '_', pt4)) |>
-  select(id, item, wave, resp) 
+  mutate(wave_temp = case_when(wave == 'g1' ~ '1',
+                               wave == 'g2' ~ '2',
+                               wave == 'g3' ~ '3',
+                               wave == 'w1' ~ '1',
+                               wave == 'w2' ~ '2',
+                               wave == 'w3' ~ '3')) |>
+  select(id, item, wave, wave_temp, resp) 
 
 df <- rbind(four, kbit, three, tosrec, tosrec2, two)
 
-# create item IDs for each survey item
-items <- as.data.frame(unique(df$item))
-items <- items |>
-  mutate(item_id = row_number())
+df$check <- str_sub(df$item, 1, 5)
 
-df <- df |>
-  # merge item IDs with df
-  left_join(items, 
-            by=c("item" = "unique(df$item)")) |>
-  rowwise() |>
-  mutate(person_id = id,
-         id = paste0(id, '_', wave)) |>
-  # drop character item variable
-  select(id, person_id, item_id, wave, resp) |>
-  # use item_id column as the item column
-  rename(item = item_id) |>
-  arrange(id, item, wave) 
-  
+df_ctopp <- df %>%
+  filter(grepl("ctopp",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
 
-# print response values
-table(df$resp)
+df_wj_mf <- df %>%
+  filter(grepl("wj_mf",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
 
-# save df to Rdata file
-save(df, file="project_kids_items.Rdata")
+df_kbit <- df %>%
+  filter(grepl("kbit",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+
+df_wj_lw_grade <- df %>%
+  filter(grepl("wj_lw",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_lw_wave <- df %>%
+  filter(grepl("wj_lw",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_pc_grade <- df %>%
+  filter(grepl("wj_pc",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_pc_wave <- df %>%
+  filter(grepl("wj_pc",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_pv_grade <- df %>%
+  filter(grepl("wj_pv",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_pv_wave <- df %>%
+  filter(grepl("wj_pv",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_ak_grade <- df %>%
+  filter(grepl("wj_ak",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_ak_wave <- df %>%
+  filter(grepl("wj_ak",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_sa <- df %>%
+  filter(grepl("wj_sa",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_wa_grade <- df %>%
+  filter(grepl("wj_wa",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_wa_wave <- df %>%
+  filter(grepl("wj_wa",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_wf <- df %>%
+  filter(grepl("wj_wf",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_ap <- df %>%
+  filter(grepl("wj_ap",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_qc <- df %>%
+  filter(grepl("wj_qc",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_told_grade <- df %>%
+  filter(grepl("told",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_told_wave <- df %>%
+  filter(grepl("told",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_spell_grade <- df %>%
+  filter(grepl("wj_sp",df$check), grepl("g",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_wj_spell_wave <- df %>%
+  filter(grepl("wj_sp",df$check), grepl("w",wave))%>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_tosrec <- df %>%
+  filter(grepl("tosre",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+df_topel <- df %>%
+  filter(grepl("topel",df$check)) %>%
+  select(id, item, wave_temp, resp) %>%
+  rename("wave" = "wave_temp")
+
+write.csv(df_ctopp, "project_kids_ctopp.csv", row.names=FALSE)
+write.csv(df_wj_mf, "project_kids_wj_mf.csv", row.names=FALSE)
+write.csv(df_kbit, "project_kids_kbit.csv", row.names=FALSE)
+write.csv(df_wj_lw_grade, "project_kids_wj_lwid_grade.csv", row.names=FALSE)
+write.csv(df_wj_lw_wave, "project_kids_wj_lwid_wave.csv", row.names=FALSE)
+write.csv(df_wj_pc_grade, "project_kids_wj_pc_grade.csv", row.names=FALSE)
+write.csv(df_wj_pc_wave, "project_kids_wj_pc_wave.csv", row.names=FALSE)
+write.csv(df_wj_pv_grade, "project_kids_wj_pv_grade.csv", row.names=FALSE)
+write.csv(df_wj_pv_wave, "project_kids_wj_pv_wave.csv", row.names=FALSE)
+write.csv(df_wj_ak_grade, "project_kids_wj_ak_grade.csv", row.names=FALSE)
+write.csv(df_wj_ak_wave, "project_kids_wj_ak_wave.csv", row.names=FALSE)
+write.csv(df_wj_sa, "project_kids_wj_sa.csv", row.names=FALSE)
+write.csv(df_wj_wa_grade, "project_kids_wj_wa_grade.csv", row.names=FALSE)
+write.csv(df_wj_wa_wave, "project_kids_wj_wa_wave.csv", row.names=FALSE)
+write.csv(df_wj_wf, "project_kids_wj_wf.csv", row.names=FALSE)
+write.csv(df_wj_ap, "project_kids_wj_ap.csv", row.names=FALSE)
+write.csv(df_wj_qc, "project_kids_wj_qc.csv", row.names=FALSE)
+write.csv(df_told_grade, "project_kids_told_grade.csv", row.names=FALSE)
+write.csv(df_told_wave, "project_kids_told_wave.csv", row.names=FALSE)
+write.csv(df_wj_spell_grade, "project_kids_wj_spell_grade.csv", row.names=FALSE)
+write.csv(df_wj_spell_wave, "project_kids_wj_spell_wave.csv", row.names=FALSE)
+write.csv(df_tosrec, "project_kids_tosrec.csv", row.names=FALSE)
+write.csv(df_topel, "project_kids_topel.csv", row.names=FALSE)

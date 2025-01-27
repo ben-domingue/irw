@@ -168,3 +168,13 @@ colnames(emotion_df) <- ifelse(
 
 save(emotion_df, file="ecps_sahm_2024_emotion.Rdata")
 write.csv(emotion_df, "ecps_sahm_2024_emotion.csv", row.names=FALSE)
+
+
+##note [bd 1-8-2025]
+##files edited to remove newline from some columns via the following code:
+fns<-list.files(pattern="*.csv")
+for (fn in fns) {
+    x<-read.csv(fn)
+    for (i in 1:ncol(x)) x[,i]<-gsub("\n"," ",x[,i])
+    write.table(x,fn,quote=FALSE,row.names=FALSE,sep="|")
+}
