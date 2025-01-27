@@ -12,3 +12,8 @@ df <- df |>
 
 save(df, file="ml_harper_2015.Rdata")
 write.csv(df, "ml_harper_2015.csv", row.names=FALSE)
+
+
+###BD 1-27-2025: added
+#rater<-id
+#id<-1
