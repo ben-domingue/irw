@@ -7,7 +7,7 @@ library(readxl)
 
 df <- read_excel("DET-duration.xlsm", sheet="data")
 df <- df |>
-  rename(id=user_id, item=response_id, 
+  rename(id=user_id, item=prompt_id, 
          cov_gender=gender, cov_test_taker_intent=test_taker_intent, cov_first_langugage=first_language, 
          itemcov_condition=condition, itemcov_length_characters=length_characters, cov_ielts_writing=ielts_writing) |>
   select(id, item, machine_grade, starts_with("cov"), starts_with("rater"), starts_with("itemcov"), -rater3)
