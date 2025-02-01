@@ -77,7 +77,8 @@ df1 <- df1 |>
          -multiple,
          -zygparsum,
          -zyg_par,
-         -fid) |>
+         -fid,
+         -contains('cqbar')) |>
   left_join(auths, by = "student_id0") |>
   # add participant ID
   rename(family_id = famid,
@@ -108,6 +109,8 @@ df11$item <- substring(df11$item, 1, nchar(df11$item) - 1)
 df1_ <- bind_rows(df10, df11)
 
 df1_ <- df1_[!(grepl("^n", df1_$item) & !grepl("^nes", df1_$item)),] # remove reverted scales
+
+unique(df1_$item)
 
 
 # ----- WAVE 2 DATASET
@@ -329,9 +332,6 @@ df_dweck <- df %>%
 df_grit <- df %>%
   filter(grepl("grit", item))
 
-df_cqbar <- df %>%
-  filter(grepl("cqbar", item))
-
 df_hwk <- df %>%
   filter(grepl("hwk", item))
 
@@ -364,7 +364,6 @@ write.csv(df_auth, "florida_twins_auth.csv", row.names=FALSE)
 write.csv(df_pals, "florida_twins_pals.csv", row.names=FALSE)
 write.csv(df_dweck, "florida_twins_dweck.csv", row.names=FALSE)
 write.csv(df_grit, "florida_twins_grit.csv", row.names=FALSE)
-write.csv(df_cqbar, "florida_twins_cqbar.csv", row.names=FALSE)
 write.csv(df_hwk, "florida_twins_hwk.csv", row.names=FALSE)
 write.csv(df_tech, "florida_twins_tech.csv", row.names=FALSE)
 write.csv(df_media, "florida_twins_media.csv", row.names=FALSE)
