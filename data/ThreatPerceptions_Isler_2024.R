@@ -18,7 +18,7 @@ df1 <- df1 %>%
                names_to = "item",
                values_to = "resp")
 
-df1$experiment <- "1"
+df1$treat <- "1"
 df1$id <- paste0(df1$id, "_1")
 
 # ---------- EXPERIMENT 2 ----------
@@ -37,7 +37,7 @@ df2 <- df2 %>%
                names_to = "item",
                values_to = "resp")
 
-df2$experiment <- "2"
+df2$treat <- "2"
 df2$id <- paste0(df2$id, "_2")
 
 # ---------- EXPERIMENT 3 ----------
@@ -56,7 +56,7 @@ df3 <- df3 %>%
                names_to = "item",
                values_to = "resp")
 
-df3$experiment <- "3"
+df3$treat <- "3"
 df3$id <- paste0(df3$id, "_3")
 
 # ---------- EXPERIMENT 4 ----------
@@ -77,7 +77,7 @@ df4 <- df4 %>%
                names_to = "item",
                values_to = "resp")
 
-df4$experiment <- "4"
+df4$treat <- "4"
 df4$id <- paste0(df4$id, "_4")
 
 
