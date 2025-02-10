@@ -4,8 +4,12 @@ user <- redivis$user("bdomingu")
 dataset <- user$dataset("irw_meta:bdxt:v2_1")
 table <- dataset$table("metadata:h5gs")
 meta <- table$to_tibble()
+meta<-meta[,c("dataset_name", "n_responses", "n_categories", "n_participants", 
+"n_items", "responses_per_participant", "responses_per_item", 
+"density")]
 dim(meta)
 old.tables<-meta$dataset_name
+length(old.tables)
 
 ##new tables
 library(redivis)
@@ -78,41 +82,43 @@ if (length(ii)>0) {
     library(tidyr)
     summaries_new<-as_tibble(summaries)
     length(ii)
-    dim(summaries)
+    dim(summaries_new)
     head(meta)
     head(summaries_new)
+    nms.cols<-names(meta)
+    for (nm in nms.cols) {
+        test<-nm %in% names(summaries_new)
+        if (!test) summaries_new[[nm]]<-NA
+    }
+    summaries_new<-summaries_new[,nms.cols]
     summaries<-as_tibble(rbind(meta,summaries_new))
-} else summaries<-meta
-
+} else {
+    summaries<-meta
+}
 
 str(summaries)
 length(unique(summaries$dataset_name))
 
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse")
-tables<-v1$list_tables()
 
-f  <- function(table) table$list_variables()
-nms <- lapply(tables, f) # this seems to be the only part that's slow
-nms
+#############get names for each dataset
+library(redivis)
+library(tibble)
 
-g <- function(x,variable) {
-    nm <- sapply(x, function(x) x$name)  
-    variable %in% nm  
-}
-                 
-L<-list()
-for (variable in c("rt","rater","wave","date","treat")) {
-    L[[paste("has_",variable,sep='')]] <- sapply(nms, g,variable=variable)
-}
-L<-data.frame(do.call("cbind",L))
-L$dataset_name<-sapply(tables,function(x) x$name)
-head(L)
-dim(L)                       
-dim(summaries)
-summaries<-merge(summaries,L)
-head(summaries)
-dim(summaries)
-
-write.csv(summaries,'sum.csv',quote=FALSE,row.names=FALSE)
+# fetch all tables
+dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
+dataset_tables <- dataset$list_tables()
 
 
+# Extract table names and variables, storing variables as concatenated strings
+table_vars_df <- tibble(
+  dataset_name = sapply(dataset_tables, function(table) table$name),
+  variables = sapply(dataset_tables, function(table) {
+    var_list <- table$list_variables()
+    paste(sapply(var_list, function(v) v$name), collapse = "| ")  # Concatenate variables
+  })
+)
+
+x<-merge(summaries,table_vars_df,by='dataset_name')
+dim(x)
+
+write.csv(x,'metadata.csv',quote=FALSE,row.names=FALSE)
