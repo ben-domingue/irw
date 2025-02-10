@@ -58,5 +58,5 @@ df$treatment <- remove_labels(df$treatment)
 table(df$resp)
 
 # save df to Rdata file
-save(df, file="content_literacy_interention_g1.Rdata")
+save(df, file="content_literacy_intervention_g1.Rdata")
 
