@@ -1,14 +1,4 @@
-dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
-dataset_tables <- dataset$list_tables()
-names(dataset_tables) <- sapply(dataset_tables, function(x) x$name)
-f <- function(table) table$list_variables()
-nms <- lapply(dataset_tables, f)
-f <- function(x) {
-    nm <- sapply(x, function(x) x$name)  # Extract names of variables
-    "treat" %in% nm  # Check if "treat" is in the names
-}
-test <- sapply(nms, f)
-rct_tables <- dataset_tables[test]
+rct_tables <- irwpkg::irw_filter(var='treat',density=NULL)
 
 # Define a function to perform item-level Harmonic Treatment Effect (IL-HTE) analysis
 il_hte <- function(tab) {

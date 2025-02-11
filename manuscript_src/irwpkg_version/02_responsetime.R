@@ -1,5 +1,5 @@
 # Select only the tables that contain the "rt" variable
-rt_data <- irwpkg::irw_filter(has_rt=TRUE)
+rt_tables <- irwpkg::irw_filter(var='rt',density=NULL)
 
 # Define a processing function for each table containing "rt"
 proc <- function(table) {
@@ -27,7 +27,7 @@ proc <- function(table) {
 }
 
 # Apply the 'proc' function to each table containing 'rt' and store the results in 'dens'
-dens <- lapply(rt_data[1:3], proc)
+dens <- lapply(rt_tables[1:3], proc)
 ##save(dens,file="/tmp/dens.Rdata")
 
 # Create a PDF file to save the Q-Q plots
