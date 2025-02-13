@@ -11,6 +11,8 @@ if 'processing_page' not in st.session_state:
     st.session_state.processing_page = False 
 if 'df' not in st.session_state:
     st.session_state.df = None
+if 'extended_df' not in st.session_state:
+    st.session_state.extended_df = None
 if "irw_dataframe" not in st.session_state:
     st.session_state.irw_dataframe = pd.DataFrame()
 if "id_row_range" not in st.session_state:
@@ -214,9 +216,36 @@ with tab1:
     uploaded_file = st.file_uploader("Upload a CSV file", type="csv")
     if uploaded_file is not None:
         # Load the data
-        st.session_state.df = pd.read_csv(uploaded_file, header=None)
-        # st.session_state.df.set_index(st.session_state.df.columns[0], inplace=True)
-        st.write("Uploaded DataFrame:")
+        if st.session_state.df is None:
+            st.session_state.df = pd.read_csv(uploaded_file, header=None)
+            st.rerun()
+        # Create two columns for the buttons in tab2 and tab3
+        else:
+            # Create two columns for the buttons
+            st.title("Extend DataFrame:")
+            st.write("You can extend the dataframe by adding a column or a row.")
+            col1, col2 = st.columns(2)
+            
+            # Add Column button
+            if col1.button("Add Column", key="add_col"):
+                # Create a new column of zeros at the beginning
+                new_df = st.session_state.df.copy()
+                new_df.insert(0, "new_col", range(len(new_df)))
+                st.session_state.df = new_df
+                st.dataframe(st.session_state.df)
+                st.rerun()
+                
+            # Add Row button    
+            if col2.button("Add Row", key="add_row"):
+                # Create a new row of zeros at the beginning
+                new_df = st.session_state.df.copy()
+                new_row = pd.DataFrame([range(0, len(new_df.columns))])
+                new_row.columns = new_df.columns
+                st.session_state.df = pd.concat([new_row, new_df]).reset_index(drop=True)
+                st.dataframe(st.session_state.df)
+                st.rerun()
+
+        st.write("DataFrame:")
         st.dataframe(st.session_state.df)
 
 
@@ -501,6 +530,6 @@ with tab7:
 
             conn.update(data=df)
 
-            st.success("Thank you for your feedback! We’ll review it and keep improving the tool.")
+            st.success("Thank you for your feedback! We'll review it and keep improving the tool.")
 
 
