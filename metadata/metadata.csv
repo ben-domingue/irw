@@ -1,4 +1,4 @@
-dataset_name,n_responses,n_categories,n_participants,n_items,responses_per_participant,responses_per_item,density,variables
+table,n_responses,n_categories,n_participants,n_items,responses_per_participant,responses_per_item,density,variables
 16_personalityfactors,8012917,6,49159,163,163,49159,1,id| item| resp
 4thgrade_math_sirt,19920,2,664,30,30,664,1,item| id| resp| testlet| domain| subdomain
 5personalityfactors,626780,8,8936,70,70.1410026857654,8954,1.00201432408236,id| item| resp| age

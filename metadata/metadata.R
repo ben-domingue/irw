@@ -1,14 +1,17 @@
-#tables from last version of metadata
+##################################################################################
+##Construct metadata.csv
+
+##tables from last version of metadata
 library(redivis)
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:v2_1")
+dataset <- user$dataset("irw_meta:bdxt:latest")
 table <- dataset$table("metadata:h5gs")
 meta <- table$to_tibble()
-meta<-meta[,c("dataset_name", "n_responses", "n_categories", "n_participants", 
+meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
 "n_items", "responses_per_participant", "responses_per_item", 
 "density")]
 dim(meta)
-old.tables<-meta$dataset_name
+old.tables<-meta$table
 length(old.tables)
 
 ##new tables
@@ -29,7 +32,7 @@ old.tables[!torem]
 
 ##remove tables
 dim(meta)
-ii<-match(old.tables[!torem],meta$dataset_name)
+ii<-match(old.tables[!torem],meta$table)
 if (length(ii)>0) {
     meta[ii,]
     meta<-meta[-ii,]
@@ -78,7 +81,7 @@ if (length(ii)>0) {
         out[[as.character(i)]]<-f(tables[[i]])
     }
     summaries<-data.frame(do.call("rbind",out))
-    summaries$dataset_name<-nms[1:nrow(summaries)]
+    summaries$table<-nms[1:nrow(summaries)]
     library(tidyr)
     summaries_new<-as_tibble(summaries)
     length(ii)
@@ -97,10 +100,10 @@ if (length(ii)>0) {
 }
 
 str(summaries)
-length(unique(summaries$dataset_name))
+length(unique(summaries$table))
 
 
-#############get names for each dataset
+##get variable names for each dataset
 library(redivis)
 library(tibble)
 
@@ -108,23 +111,23 @@ library(tibble)
 dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
 dataset_tables <- dataset$list_tables()
 
-
 # Extract table names and variables, storing variables as concatenated strings
 table_vars_df <- tibble(
-  dataset_name = sapply(dataset_tables, function(table) table$name),
+  table = sapply(dataset_tables, function(table) table$name),
   variables = sapply(dataset_tables, function(table) {
     var_list <- table$list_variables()
     paste(sapply(var_list, function(v) v$name), collapse = "| ")  # Concatenate variables
   })
 )
 
-x<-merge(summaries,table_vars_df,by='dataset_name')
-dim(x)
+meta<-merge(summaries,table_vars_df,by='table')
+dim(meta)
 
-write.csv(x,'metadata.csv',quote=FALSE,row.names=FALSE)
+write.csv(meta,'metadata.csv',quote=FALSE,row.names=FALSE)
 
-#############Upload the DOIs
-library(googlesheets4)
+##################################################################################
+##Construct biblio.csv
+library(gsheet)
 library(redivis)
 library(httr)
 library(glue)
@@ -137,8 +140,7 @@ fetch_bibtex_from_doi <- function(filename, doi) {
   }
   
   url <- paste0("https://doi.org/", doi)
-  response <- tryCatch(
-    {
+  response <- tryCatch({
       GET(url, add_headers(Accept = "application/x-bibtex"))
     },
     error = function(e) {
@@ -156,28 +158,47 @@ fetch_bibtex_from_doi <- function(filename, doi) {
 }
 
 # Google Spreadsheet URL or Sheet ID
-sheet_url <- "https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0"
-gs4_auth(
-  scopes = "https://www.googleapis.com/auth/spreadsheets.readonly"  # Read-only scope
-)
-# Read the entire sheet
-irw_dict <- read_sheet(sheet_url, sheet="data index")
+irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
 
 # Read the current biblio file
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:v3_1")
+dataset <- user$dataset("irw_meta:bdxt:latest")
 biblio_table <- dataset$table("biblio:qahg")
 biblio <- biblio_table$to_tibble()
 head(biblio)
 
 # Find rows in dictionary whose Filename is not in biblio
-new_data_rows <- irw_dict[!(irw_dict$Filename %in% biblio$Filename), ]
+new_data_rows <- irw_dict[!(irw_dict$table %in% biblio$table), ]
 new_data_rows <- new_data_rows |>
-  select(Filename, Reference, `DOI (for paper)`) |>
+  select(table, Reference, `DOI (for paper)`) |>
   rename(DOI=`DOI (for paper)`)
 new_data_rows <- new_data_rows %>%
-  mutate(BibTex = map2_chr(Filename, DOI, fetch_bibtex_from_doi))
+  mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
 biblio <- bind_rows(biblio, new_data_rows)
 
 # Save the updated biblio to a CSV file
-write_csv(biblio, "biblio.csv")
+readr::write_csv(biblio, "biblio.csv")
+
+##################################################################################
+##Look for missing dictionary entries
+library(gsheet)
+library(readr)
+library(dplyr)
+irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+metadata <- read.csv("metadata.csv")
+
+
+tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:latest")$list_tables()
+tableName_df <- data.frame(
+  FileName = sapply(tables, function(table) table$properties$name),
+  stringsAsFactors = FALSE
+)
+tableName_df$FileName <- tolower(tableName_df$FileName)
+irw_dict$col_name_irw <- tolower(irw_dict[["table.lower"]])
+
+# Find missing tables
+missing_tables <- tableName_df[!(tableName_df$FileName %in% irw_dict$table.lower), ]
+m_df = as.data.frame(list(File=missing_tables$Name))
+m_df
+
+##write_csv(m_df, "not_in_dict.csv")
