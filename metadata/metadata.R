@@ -156,8 +156,10 @@ fetch_bibtex_from_doi <- function(filename, doi) {
   }
 }
 
+
 # Google Spreadsheet URL or Sheet ID
 irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
 
 # Read the current biblio file
 user <- redivis$user("bdomingu")
@@ -169,13 +171,17 @@ head(biblio)
 # Find rows in dictionary whose Filename is not in biblio
 new_data_rows <- irw_dict[!(irw_dict$table %in% biblio$table), ]
 new_data_rows <- new_data_rows |>
-  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-  rename(DOI=`DOI (for paper)`)
+select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+rename(DOI=`DOI (for paper)`)
 new_data_rows <- new_data_rows %>%
-  mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
+    mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
 biblio <- bind_rows(biblio, new_data_rows)
 
-# Save the updated biblio to a CSV file
+##remove nonpublic elements
+test<-biblio$table %in% irw_notpub$table
+biblio<-biblio[!test,]
+
+## Save the updated biblio to a CSV file
 readr::write_csv(biblio, "biblio.csv")
 
 ##################################################################################
