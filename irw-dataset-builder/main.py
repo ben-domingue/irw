@@ -11,6 +11,8 @@ if 'processing_page' not in st.session_state:
     st.session_state.processing_page = False 
 if 'df' not in st.session_state:
     st.session_state.df = None
+if 'extended_df' not in st.session_state:
+    st.session_state.extended_df = None
 if "irw_dataframe" not in st.session_state:
     st.session_state.irw_dataframe = pd.DataFrame()
 if "id_row_range" not in st.session_state:
@@ -214,9 +216,41 @@ with tab1:
     uploaded_file = st.file_uploader("Upload a CSV file", type="csv")
     if uploaded_file is not None:
         # Load the data
-        st.session_state.df = pd.read_csv(uploaded_file, header=None)
-        # st.session_state.df.set_index(st.session_state.df.columns[0], inplace=True)
-        st.write("Uploaded DataFrame:")
+        if st.session_state.df is None:
+            st.session_state.df = pd.read_csv(uploaded_file, header=None)
+            st.rerun()
+        # Create two columns for the buttons in tab2 and tab3
+        else:
+            # Create two columns for the buttons
+            st.title("Extend DataFrame:")
+            st.write("You can extend the dataframe by adding a column or a row.")
+            col1, col2 = st.columns(2)
+            
+            # Add Column button
+            if col1.button("Add Column", key="add_col"):
+                # Create a new column of zeros at the beginning
+                new_df = st.session_state.df.copy()
+                # Get the current number of columns
+                current_cols = len(new_df.columns)
+                # Insert new column with 0s instead of range
+                new_df.insert(0, current_cols, range(len(new_df)))
+                # Reindex columns from 0 to n
+                new_df.columns = range(len(new_df.columns))
+                st.session_state.df = new_df
+                st.dataframe(st.session_state.df)
+                st.rerun()
+                
+            # Add Row button    
+            if col2.button("Add Row", key="add_row"):
+                # Create a new row of zeros at the beginning
+                new_df = st.session_state.df.copy()
+                new_row = pd.DataFrame([range(0, len(new_df.columns))])
+                new_row.columns = new_df.columns
+                st.session_state.df = pd.concat([new_row, new_df]).reset_index(drop=True)
+                st.dataframe(st.session_state.df)
+                st.rerun()
+
+        st.write("DataFrame:")
         st.dataframe(st.session_state.df)
 
 
@@ -232,9 +266,9 @@ with tab2:
         
         # Input fields for range selection
         start_row = st.number_input("ID Start Row Number :", min_value=0, max_value=len(data), value=0)
-        finish_row = st.number_input("ID Finish Row Number :", min_value=start_row, max_value=len(data), value=start_row)
+        finish_row = st.number_input(f"ID Finish Row Number (Last row is {len(data) - 1}):", min_value=start_row, max_value=len(data), value=start_row)
         start_col = st.number_input("ID Start Column Number :", min_value=0, max_value=len(data.columns), value=0)
-        finish_col = st.number_input("ID Finish Column Number :", min_value=start_col, max_value=len(data.columns), value=start_col)
+        finish_col = st.number_input(f"ID Finish Column Number (Last column is {len(data.columns) - 1}):", min_value=start_col, max_value=len(data.columns), value=start_col)
         
 
         # Adjusting for 0-indexing in Python
@@ -278,9 +312,9 @@ with tab3:
         
         # Input fields for range selection
         start_row = st.number_input("Item Start Row Number:", min_value=0, max_value=len(data), value=0)
-        finish_row = st.number_input("Item Finish Row Number:", min_value=start_row, max_value=len(data), value=start_row)
+        finish_row = st.number_input(f"Item Finish Row Number: (Last row is {len(data) - 1})", min_value=start_row, max_value=len(data), value=start_row)
         start_col = st.number_input("Item Start Column Number:", min_value=0, max_value=len(data.columns), value=0)
-        finish_col = st.number_input("Item Finish Column Number:", min_value=start_col, max_value=len(data.columns), value=start_col)
+        finish_col = st.number_input(f"Item Finish Column Number: (Last column is {len(data.columns) - 1})", min_value=start_col, max_value=len(data.columns), value=start_col)
         
 
         # Adjusting for 0-indexing in Python
@@ -318,28 +352,29 @@ with tab3:
         st.write("No data uploaded.")
 
 def map_resp(original_df, indices_df, id_orientation, item_orientation):
-    print("######################################3")
-    print(id_orientation, item_orientation)
     # Extract values based on the intersections
     resp_values = []
 
     for id_idx, item_idx in zip(indices_df['id_idx'], indices_df['item_idx']):
         # Handle the id_idx based on the id_orientation (row or column)
-        if id_orientation == 'Column':
-            id_position = id_idx[0]  # Use the first element if 'id' is a column
-        else:  # Assume it's 'row'
-            id_position = id_idx[1]  # Use the second element if 'id' is a row
+        if id_orientation == "Row":
+            row_idx = id_idx[0]  # Row position from id
+            col_idx = item_idx[1]  # Column position from item
+        else:  # id_orientation == "Column"
+            row_idx = item_idx[0]  # Row position from item
+            col_idx = id_idx[1]  # Column position from id
         
-        # Handle the item_idx based on the item_orientation (row or column)
-        if item_orientation == 'column':
-            item_position = item_idx[0]  # Use the first element if 'item' is a column
-        else:  # Assume it's 'row'
-            item_position = item_idx[1]  # Use the second element if 'item' is a row
-
+        # Convert indices to integers
+        row_idx = int(row_idx)
+        col_idx = int(col_idx)
+        
         # Extract the value from the original dataframe at the given position
-        
-        resp = original_df.iat[id_position, item_position]
-        resp_values.append(resp)
+        try:
+            resp = original_df.iat[row_idx, col_idx]
+            resp_values.append(resp)
+        except IndexError as e:
+            st.error(f"Index error at position ({row_idx}, {col_idx}). Please check your data layout selection.")
+            raise e
 
     # Create the 'resp' DataFrame
     resp_df = pd.DataFrame({'resp': resp_values})
@@ -347,60 +382,60 @@ def map_resp(original_df, indices_df, id_orientation, item_orientation):
 
 with tab4:
     if not st.session_state.indices_df.empty:
-        # st.write(st.session_state.indices_df)
         st.markdown("""
-        ### How to Map Your Data
+        ### Select Your Data Layout
 
-        In this step, you will map the `resp` values from your original dataset based on the intersection of `id` and `item` coordinates. This process requires you to select the orientation of both `id` and `item` (whether they are rows or columns in the original data) and then map the values accordingly.
-
-        #### Step-by-Step Process:
-
-        1. **Select the Orientation of `id`:**
-        - If your `id` values are arranged **as a column**, choose **"Column"**.
-        - If your `id` values are arranged **as a row**, choose **"Row"**.
-
-        2. **Select the Orientation of `item`:**
-        - If your `item` values are arranged **as a column**, choose **"Column"**.
-        - If your `item` values are arranged **as a row**, choose **"Row"**.
-
-        3. **Map the Data as a Matrix:**
-        - The data is represented as a matrix where the rows and columns correspond to the `id` and `item` values in your dataset. Based on the orientation you select, the function will automatically extract the correct values from the intersections of `id` and `item` in the original data.
-
-        Once the mapping is complete, the tool will generate a new column called `resp`, which contains the values at these intersections.
+        Please choose the layout that matches your data structure:
         """)
 
+        # Create example DataFrames for visualization
+        example_1 = pd.DataFrame({
+            'ID': ['Student1', 'Student2', 'Student3'],
+            'Item1': [1, 0, 1],
+            'Item2': [0, 1, 1],
+            'Item3': [1, 1, 0]
+        })
 
-        # Create two columns for the radio buttons
+        example_2 = pd.DataFrame({
+            'Items': ['Item1', 'Item2', 'Item3'],
+            'Student1': [1, 0, 1],
+            'Student2': [0, 1, 1],
+            'Student3': [1, 1, 0]
+        })
+
+        # Create two columns for the layout options
         col1, col2 = st.columns(2)
 
-        # In the first column, ask if the item is a row or column
         with col1:
-            item_orientation = st.radio(
-                "Is the 'Item' a row or a column?", 
-                ("Row", "Column"),
-                key="item_orientation"
-            )
+            st.subheader("Layout Option 1")
+            st.markdown("IDs as rows, Items as columns:")
+            st.dataframe(example_1)
+            option_1_selected = st.button("Select Layout 1")
 
-        # In the second column, ask if the id is a row or column
         with col2:
-            id_orientation = st.radio(
-                "Is the 'ID' a row or a column?", 
-                ("Row", "Column"),
-                key="id_orientation"
-            )
+            st.subheader("Layout Option 2")
+            st.markdown("Items as rows, IDs as columns:")
+            st.dataframe(example_2)
+            option_2_selected = st.button("Select Layout 2")
 
-        # Add a confirmation button
-        if st.button("Confirm Mapping"):
-            # Display a heading for the resp mapping section
-            # Call the function
+        # Handle layout selection
+        if option_1_selected:
+            id_orientation = "Row"
+            item_orientation = "Column"
             resp_df = map_resp(st.session_state.df, st.session_state.indices_df, id_orientation, item_orientation)
-            st.session_state.irw_dataframe = pd.concat([st.session_state.irw_dataframe.reset_index(drop=True), resp_df.reset_index(drop=True)], axis=1)
-            
-            # Display the result
-            st.subheader("Mapped Resp DataFrame")
-            st.write(resp_df)
+            st.session_state.irw_dataframe = pd.concat([st.session_state.irw_dataframe.reset_index(drop=True), 
+                                                      resp_df.reset_index(drop=True)], axis=1)
+            st.success("Layout 1 selected and responses mapped!")
             st.rerun()
-            
+
+        if option_2_selected:
+            id_orientation = "Column"
+            item_orientation = "Row"
+            resp_df = map_resp(st.session_state.df, st.session_state.indices_df, id_orientation, item_orientation)
+            st.session_state.irw_dataframe = pd.concat([st.session_state.irw_dataframe.reset_index(drop=True), 
+                                                      resp_df.reset_index(drop=True)], axis=1)
+            st.success("Layout 2 selected and responses mapped!")
+            st.rerun()
     else:
         st.write("Please complete the ids and items mapping")
 
@@ -501,6 +536,6 @@ with tab7:
 
             conn.update(data=df)
 
-            st.success("Thank you for your feedback! We’ll review it and keep improving the tool.")
+            st.success("Thank you for your feedback! We'll review it and keep improving the tool.")
 
 
