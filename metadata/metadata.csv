@@ -1,726 +1,727 @@
-table,n_responses,n_categories,n_participants,n_items,responses_per_participant,responses_per_item,density,variables
-16_personalityfactors,8012917,6,49159,163,163,49159,1,id| item| resp
-4thgrade_math_sirt,19920,2,664,30,30,664,1,item| id| resp| testlet| domain| subdomain
-5personalityfactors,626780,8,8936,70,70.1410026857654,8954,1.00201432408236,id| item| resp| age
-aa1_Silvia_2023,14994,5,1071,14,14,1071,1,id| item| resp
-aappss_malpas_2019_scl,54990,6,611,90,90,611,1,id| cov_gender| cov_VEM_diagnosis_general| cov_age| item| resp
-abortion,1516,2,379,4,4,379,1,id| item| resp
-acl_mokken,94394,5,433,109,218,866,2,id| item| scale| resp
-ada_boredom_bieleke2022,6360,7,636,10,10,636,1,id| item| resp
-Adherence_Zissette_2018_SDB,18409,6,709,26,25.9647390691114,708.038461538462,0.998643810350439,id| item| resp
-aestheticfluency_cotter2023,89280,4,2480,36,36,2480,1,id| item| resp| group
-alcoholresearch_sumscore,4660,2,233,20,20,233,1,id| item| resp
-alcoholstroop_jones2024,26208,2,156,28,168,936,6,id| trialnum| stimulus| item| resp| rt
-ALSECYPIAMH_WU_2022_CPS,114804,5,9567,12,12,9567,1,id| item| resp| group
-ALSECYPIAMH_WU_2022_Empathy,54894,5,7842,7,7,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_MIL,78420,7,7842,10,10,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_NEI,39210,2,7842,5,5,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_PEI,39210,2,7842,5,5,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_PHQ,15684,4,7842,2,2,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_PIL,31368,7,7842,4,4,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_SDQ,47046,3,7841,6,6,7841,1,id| item| resp
-ALSECYPIAMH_WU_2022_SWEMWBS,54894,5,7842,7,7,7842,1,id| item| resp
-ALSECYPIAMH_WU_2022_SWLS,39210,7,7842,5,5,7842,1,id| item| resp
-american_multiracial_face,117880,7,1145,2252,102.951965065502,52.3445825932504,0.0457157926578607,id| item| resp
-AMI_CV_Hewitt2024,3402,6,189,18,18,189,1,id| age| item| resp
-andrich_mudfold,432,2,54,8,8,54,1,id| item| resp
-anxiety_gastro_symptoms,5730,5,382,15,15,382,1,id| item| resp
-anxiety_lordif,22214,5,766,29,29,766,1,id| item| resp
-AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,7098,5,286,14,24.8181818181818,507,1.77272727272727,id| item| resp| Group
-AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,10140,5,286,20,35.4545454545455,507,1.77272727272727,id| item| resp| Group
-AOMT_BR_SF_EDPANAB_Geiger_2021_RF,14196,6,286,28,49.6363636363636,507,1.77272727272727,id| item| resp| Group
-APFCompact_Ptacek_2024_AAQ_II,2093,7,299,7,7,299,1,id| item| resp
-APFCompact_Ptacek_2024_DASS-21,6279,4,299,21,21,299,1,id| item| resp
-APFCompact_Ptacek_2024_SWLS,1495,7,299,5,5,299,1,id| item| resp
-artistic_preferences,1040200,9,18575,56,56,18575,1,id| item| resp| rt
-aslec_insomnia_wang2025,13730280,5,572095,24,24,572095,1,id| item| resp
-Aspirations_Sonmez_2022,16555,8,265,35,62.4716981132075,473,1.78490566037736,id| item| resp
-audit_BrummerHoffman_2021,5484,5,1828,3,3,1828,1,id| group| date| age| item| resp
-autonomysupport_mokken,1813,5,14,7,129.5,259,18.5,id| rater| item| resp
-bae_boredom_bieleke2022,10812,7,636,17,17,636,1,id| item| resp
-BAFACALO_Golino_2013_BVPS,18104,3,292,62,62,292,1,id| age| item| resp
-BAFACALO_Golino_2013_CIS,17520,3,292,60,60,292,1,id| age| item| resp
-BAFACALO_Golino_2013_FIS,17520,3,292,60,60,292,1,id| age| item| resp
-BAFACALO_Golino_2013_SMS,10804,3,292,37,37,292,1,id| age| item| resp
-balance_mokken,12100,2,484,25,25,484,1,id| item| resp
-beh_boredom_bieleke2022,12084,6,636,19,19,636,1,id| item| resp
-bhs_floreskanter2021,51936,5,2164,24,24,2164,1,id| item| resp
-big5_sirt,120000,3,500,240,240,500,1,id| item| resp
-boyd_prism_2024,13104,5,606,22,21.6237623762376,595.636363636364,0.982898289828983,id| item| resp
-BPAQ_Christopher_2024_BPAQSF,4080,6,170,12,24,340,2,id| group| treat| item| resp| wave
-BPAQ_Christopher_2024_FFMQSF,2550,6,170,15,15,170,1,id| item| resp
-BPAQ_Christopher_2024_OBSI,2720,4,170,16,16,170,1,id| item| resp
-BPAQ_Christopher_2024_PCL5,2180,5,109,20,20,109,1,id| item| resp
-BPAQ_Christopher_2024_PROMIS,4080,6,170,24,24,170,1,id| item| resp
-BPAQ_Christopher_2024_PSS10,1090,5,109,10,10,109,1,id| item| resp
-BPAQ_Christopher_2024_SCSS,2040,6,170,12,12,170,1,id| item| resp
-bps_boredom_bieleke2022,5088,7,636,8,8,636,1,id| item| resp
-brain_hemisphere,590880,6,29544,20,20,29544,1,id| item| resp| rt
-broadband_inventories,365077,7,2017,181,181,2017,1,id| item| resp| rt
-BSCS_fadplus_goto2021,10426,5,802,13,13,802,1,id| age| gender| item| resp
-cavalini_mokken,14076,4,828,17,17,828,1,resp| item| id
-CBI_Rodriguez_2021,58296,4,2082,28,28,2082,1,id| item| resp
-cbq_huczewska2022,175488,5,2742,64,64,2742,1,id| cov_sex| item| resp| cov_group
-ccapsvtskhpacr_mercedes_2023_beck,4074,4,194,21,21,194,1,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp
-ccapsvtskhpacr_mercedes_2023_hada,2716,4,194,14,14,194,1,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp
-ccapsvtskhpacr_mercedes_2023_physical,5820,2,194,30,30,194,1,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp
-ccapsvtskhpacr_mercedes_2023_sf,2328,5,194,12,12,194,1,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp
-ccapsvtskhpacr_mercedes_2023_tsk,5457,4,194,17,28.1288659793814,321,1.65463917525773,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp| wave
-cdm_ecpe,81816,2,2922,28,28,2922,1,item| id| resp| Qmatrix__skill1| Qmatrix__skill2| Qmatrix__skill3
-cdm_hr,54250,2,1550,35,35,1550,1,item| id| resp| Qmatrix__Skill1| Qmatrix__Skill2| Qmatrix__Skill3| Qmatrix__Skill4| Qmatrix__Skill5
-cdm_pisa00R,28470,3,1095,26,26,1095,1,item| id| resp| Qmatrix__A1| Qmatrix__A2| Qmatrix__A3| Qmatrix__A4| Qmatrix__A5| Qmatrix__A6| Qmatrix__MC| Qmatrix__CR
-cdm_timss03,17411,2,757,23,23,757,1,item| id| resp| Qmatrix__S1| Qmatrix__S2| Qmatrix__S3| Qmatrix__S4| Qmatrix__S5| Qmatrix__S6| Qmatrix__S7| Qmatrix__S8| Qmatrix__S9| Qmatrix__S11| Qmatrix__S13| Qmatrix__S14| Qmatrix__S15
-cdm_timss07,12494,2,698,25,17.8997134670487,499.76,0.715988538681948,item| id| resp| booklet| Qmatrix__NWN01| Qmatrix__NWN02| Qmatrix__NWN03| Qmatrix__NWN04| Qmatrix__NFD05| Qmatrix__NFD06| Qmatrix__NNS07| Qmatrix__NPR08| Qmatrix__GLA09| Qmatrix__GTT10| Qmatrix__GTT11| Qmatrix__GLM12| Qmatrix__DRI13| Qmatrix__DRI14| Qmatrix__DOR15
-cdm_timss11,115983,2,4668,174,24.8464010282776,666.568965517241,0.142795408208492,item| id| resp| booklet| Qmatrix__Co_DA| Qmatrix__Co_DK| Qmatrix__Co_DR| Qmatrix__Co_GA| Qmatrix__Co_GK| Qmatrix__Co_GR| Qmatrix__Co_NA| Qmatrix__Co_NK| Qmatrix__Co_NR
-CFC_Balaji_2019,1584,5,132,12,12,132,1,id| item| resp
-chess_lnirt,10240,2,259,40,39.5366795366795,256,0.988416988416989,resp| rt| item| cov_elo| id
-CHEXI_Lin_2019,53088,6,2212,24,24,2212,1,id| item| resp
-christiannationalism_davis2021,8268,5,1378,6,6,1378,1,id| item| resp
-close_relationships,1853676,6,51491,36,36,51491,1,id| item| resp
-COACH_Chen_2022_ADL,95653,4,2364,14,40.4623519458545,6832.35714285714,2.89016799613246,id| item| wave| resp
-COACH_Chen_2022_CSQ,18891,5,2362,8,7.99788314987299,2361.375,0.999735393734124,id| resp| item
-COACH_Chen_2022_HDRS,232006,5,2365,17,98.0997885835095,13647.4117647059,5.77057579902997,id| item| wave| resp
-COACH_Chen_2022_IADL,54653,5,2364,8,23.1188663282572,6831.625,2.88985829103215,id| item| wave| resp
-COACH_Chen_2022_MOS_SSS_C,129644,5,2364,19,54.8409475465313,6823.36842105263,2.88636566034375,id| item| wave| resp
-COACH_Chen_2022_PHQ9,122645,4,2363,9,51.9022429115531,13627.2222222222,5.76691587906146,id| item| wave| resp
-COACH_Chen_2022_SNS,50272,6,2364,11,21.2656514382403,4570.18181818182,1.93324103984002,id| item| wave| resp
-COACH_Chen_2022_treatmentStigma,13722,2,2365,3,5.80211416490486,4574,1.93403805496829,id| item| wave| resp
-COACH_Chen_2022_WHOQOL_BREF,176081,5,2364,26,74.4843485617597,6772.34615384615,2.86478263699076,id| item| wave| resp
-concretewords,691689,5,66404,1831,10.416375519547,377.765701802294,0.00568889979221574,id| item| resp
-consideration_future_consequences,180420,6,15035,12,12,15035,1,id| item| resp
-content_literacy_intervention_g1,569316,4,5293,116,107.560173814472,4907.89655172414,0.927242877710965,id| treat| item| resp
-CPDMMC_Kunnari_2020_HCD,12516,7,1043,12,12,1043,1,id| item| resp
-CPDMMC_Kunnari_2020_PDP,18774,2,1043,18,18,1043,1,id| item| resp
-CQTMS_Hur_2023,122720,6,767,160,160,767,1,id| item| resp
-credentialform_lnirt,327200,3,1636,200,200,1636,1,id| item| resp| rt| Flagged| Pretest| Attempt| Country| StateCode| School_ID| Cent_id| Tot_time
-criticalperiod_syntax,107483095,2,1131401,95,95,1131401,1,id| item| resp
-CSE_Bayazit_2022,9765,5,651,15,15,651,1,id| item| resp
-cub_relgoods,51429,10,2459,21,20.9145994306629,2449,0.995933306222042,resp| item| id
-cud_stone2024,71108,9,413,44,172.174334140436,1616.09090909091,3.91305304864627,id| item| date| resp
-cure_data,81934,7,1134,54,72.2522045855379,1517.2962962963,1.33800378862107,resp| period| item| id
-CV_OASIS_ODSIS_PPE_Novak_2020_BFI,19280,5,2409,8,8.00332088003321,2410,1.00041511000415,id| item| resp| group
-CV_OASIS_ODSIS_PPE_Novak_2020_DSES,17325,6,2474,7,7.00282942603072,2475,1.00040420371867,id| item| resp| group
-CV_OASIS_ODSIS_PPE_Novak_2020_PANAS,29160,5,1458,20,20,1458,1,id| item| resp
-CV_OASIS_ODSIS_PPE_Novak_2020_RSES,23740,4,2373,10,10.0042140750105,2374,1.00042140750105,id| item| resp| group
-DART_Brysbaert_2020_1,26268,2,199,132,132,199,1,id| gender| age| mother_language| item| resp
-DART_Brysbaert_2020_3_4_5,28908,3,219,264,132,109.5,0.5,id| item| resp| group
-dass_Thiyagarajan2022,20391,4,971,21,21,971,1,id| item| resp
-DbdIFdM_Puga_2021,7602,4,543,14,14,543,1,id| item| resp
-dd_rotation,1178,2,121,10,9.73553719008265,117.8,0.973553719008264,id| item| rt| resp
-deception_game,15264,80,635,24,24.0377952755906,636,1.00157480314961,id| item| resp| age
-deception_professors,11928,84,568,21,21,568,1,id| item| resp
-DEMOS,10656,2876,2664,4,4,2664,1,id| item| resp
-depression_anxiety_stress,2704700,9,39775,68,68,39775,1,id| item| resp| rt
-depression_hymcohort_tang2022,10752,5,448,24,24,448,1,id| item| resp| cov_age| cov_gender
-det_naismith_2023,3438,1152,573,3,6,1146,2,id| item| cov_gender| cov_test_taker_intent| cov_first_langugage| cov_ielts_writing| itemcov_condition| itemcov_length_characters| rater| resp
-difnlr_msatb,28140,2,1407,20,20,1407,1,cov_gender| resp| item| id
-disgust_berger2014,35350,6,1414,25,25,1414,1,id| item| resp| cov_age| cov_gender| cov_education| cov_religion| cov_political
-DMCT_Addis_2020_MCT,4048,2,92,44,44,92,1,id| item| resp| rt
-DMCT_Addis_2020_PSIQ,3220,11,92,35,35,92,1,id| item| resp
-DMCT_Addis_2020_SUIS,1656,5,92,18,18,92,1,id| item| resp
-ds14_mokken,7564,6,541,14,13.9815157116451,540.285714285714,0.998679693688936,resp| age| item| id
-dumas_Organisciak_2022,21960,6,92,10,238.695652173913,2196,23.8695652173913,id| item| verbatim| rater| resp
-dvivdtws_ppmial_marcatto_2023_cwb,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
-dvivdtws_ppmial_marcatto_2023_dtw,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
-dvivdtws_ppmial_marcatto_2023_ocb,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
-dvivdtws_ppmial_marcatto_2023_ocs,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
-dvivdtws_ppmial_marcatto_2023_snaq,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
-ecps_sahm_2024_distrust,130849,7,13137,13,9.96034102154221,10065.3076923077,0.76618007858017,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
-ecps_sahm_2024_dtl,145828,7,13299,11,10.9653357395293,13257.0909090909,0.996848703593572,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
-ecps_sahm_2024_emotion,103731,7,12988,8,7.98668001231906,12966.375,0.998335001539883,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
-ecps_sahm_2024_ia,88570,10,13136,7,6.74253958587089,12652.8571428571,0.963219940838698,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
-ecps_sahm_2024_identity,62521,7,15699,4,3.98248296069813,15630.25,0.995620740174533,id| cov_age| cov_gender| cov_residing_country| cov_relationship_status| cov_dependents_no| cov_live_alone| item| resp
-ecps_sahm_2024_moral,143285,7,13056,11,10.9746476715686,13025.9090909091,0.997695242869875,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
-ecps_sahm_2024_sscd,181216,7,15607,24,11.6112001025181,7550.66666666667,0.483800004271588,id| cov_age| cov_gender| cov_education| cov_residing_country| cov_relationship_status| cov_live_alone| cov_covid_self| cov_dependents_no| item| resp| item_family
-ecps_sahm_2024_stress,302118,5,15736,28,19.1991611591256,10789.9285714286,0.685684327111628,id| cov_age| cov_gender| cov_residing_country| cov_occupation| cov_relationship_status| cov_dependents_no| cov_live_alone| cov_covid_self| item| resp
-ecps_sahm_2024_support,47125,7,15722,3,2.99739218928889,15708.3333333333,0.999130729762965,id| cov_age| cov_gender| cov_residing_country| cov_occupation| cov_relationship_status| cov_live_alone| cov_covid_self| cov_dependents_no| item| resp
-ecps_sahm_2024_trust,106815,11,15310,7,6.97681254082299,15259.2857142857,0.996687505831856,id| cov_age| cov_gender| cov_education| cov_residing_country| cov_covid_self| item| resp
-ecps_sahm_2024_vaccine,107454,7,15372,7,6.99024199843872,15350.5714285714,0.99860599977696,id| cov_age| cov_gender| cov_education| cov_residing_country| cov_covid_self| item| resp
-EEEDPRM_Bulut_2021,9610,4,961,10,10,961,1,id| gender| age| item| resp| position
-EEN_Lacey_2024_Children,30524,6,2348,13,13,2348,1,id| treat| item| resp
-EEN_Lacey_2024_Parent,59640,7,2485,24,24,2485,1,id| treat| item| resp
-ees_sarling_2024,24150,5,805,30,30,805,1,id| cov_age| cov_gender| cov_nationality| study| item| resp
-Ellipse_Corssley_2024,142240,6,8890,8,16,17780,2,id| rater| item| resp
-emotion_pcmrs,16256,5,2032,8,8,2032,1,resp| item| id
-empathizing_systemizing,1590720,5,13256,120,120,13256,1,id| item| resp
-EMSC_Kuan-chin_2023,693,6,99,7,7,99,1,id| item| resp
-enem_2013_1mil_ch,44992035,2,999823,45,45,999823,1,id| item| resp| position| booklet
-enem_2013_1mil_cn,44992035,2,999823,45,45,999823,1,id| item| resp| position| booklet
-enem_2013_1mil_lc,39992880,2,999822,40,40,999822,1,id| item| resp| position| booklet
-enem_2013_1mil_mt,44991990,2,999822,45,45,999822,1,id| item| resp| position| booklet
-enem_2014_1mil_ch,45000000,3,1000000,45,45,1e+06,1,id| item| resp| position| booklet
-enem_2014_1mil_cn,45000000,3,1000000,52,45,865384.615384615,0.865384615384615,id| item| resp| position| booklet
-enem_2014_1mil_lc,50000000,3,1000000,100,50,5e+05,0.5,id| item| resp| position| booklet
-enem_2014_1mil_mt,45000000,3,1000000,91,45,494505.494505494,0.494505494505495,id| item| resp| position| booklet
-enem_2015_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5,id| item| resp| position| booklet
-enem_2015_1mil_cn,45000000,2,1000000,99,45,454545.454545455,0.454545454545455,id| item| resp| position| booklet
-enem_2015_1mil_lc,40000000,2,1000000,82,40,487804.87804878,0.487804878048781,id| item| resp| position| booklet
-enem_2015_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935,id| item| resp| position| booklet
-enem_2016_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5,id| item| resp| position| booklet
-enem_2016_1mil_cn,45000000,2,1000000,102,45,441176.470588235,0.441176470588235,id| item| resp| position| booklet
-enem_2016_1mil_lc,40000000,2,1000000,80,40,5e+05,0.5,id| item| resp| position| booklet
-enem_2016_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935,id| item| resp| position| booklet
-enem_2017_1mil_ch,45000000,2,1000000,131,45,343511.450381679,0.343511450381679,id| item| resp| position| booklet
-enem_2017_1mil_cn,45000000,2,1000000,98,45,459183.673469388,0.459183673469388,id| item| resp| position| booklet
-enem_2017_1mil_lc,50000000,2,1000000,143,50,349650.34965035,0.34965034965035,id| item| resp| position| booklet
-enem_2017_1mil_mt,45000000,2,1000000,91,45,494505.494505494,0.494505494505495,id| item| resp| position| booklet
-enem_2018_1mil_ch,45000000,2,1000000,91,45,494505.494505494,0.494505494505495,id| item| resp| position| booklet
-enem_2018_1mil_cn,45000000,2,1000000,55,45,818181.818181818,0.818181818181818,id| item| resp| position| booklet
-enem_2018_1mil_lc,40000000,2,1000000,80,40,5e+05,0.5,id| item| resp| position| booklet
-enem_2018_1mil_mt,45000000,2,1000000,47,45,957446.808510638,0.957446808510638,id| item| resp| position| booklet
-enem_2019_1mil_ch,45000000,2,1000000,45,45,1e+06,1,id| item| resp| position| booklet
-enem_2019_1mil_cn,45000000,2,1000000,47,45,957446.808510638,0.957446808510638,id| item| resp| position| booklet
-enem_2019_1mil_lc,40000000,2,1000000,40,40,1e+06,1,id| item| resp| position| booklet
-enem_2019_1mil_mt,45000000,2,1000000,46,45,978260.869565217,0.978260869565218,id| item| resp| position| booklet
-enem_2020_1mil_ch,45000000,2,1000000,135,45,333333.333333333,0.333333333333333,id| item| resp| position| booklet
-enem_2020_1mil_cn,45000000,2,1000000,143,45,314685.314685315,0.314685314685315,id| item| resp| position| booklet
-enem_2020_1mil_lc,39598000,2,989950,80,40,494975,0.5,id| item| resp| position| booklet
-enem_2020_1mil_mt,45000000,2,1000000,144,45,312500,0.3125,id| item| resp| position| booklet
-enem_2021_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5,id| item| resp| position| booklet
-enem_2021_1mil_cn,45000000,2,1000000,99,45,454545.454545455,0.454545454545455,id| item| resp| position| booklet
-enem_2021_1mil_lc,40000000,2,1000000,85,40,470588.235294118,0.470588235294118,id| item| resp| position| booklet
-enem_2021_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935,id| item| resp| position| booklet
-enem_2022_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5,id| item| resp| position| booklet
-enem_2022_1mil_cn,45000000,2,1000000,91,45,494505.494505494,0.494505494505495,id| item| resp| position| booklet
-enem_2022_1mil_lc,40000000,2,1000000,84,40,476190.476190476,0.476190476190476,id| item| resp| position| booklet
-enem_2022_1mil_mt,45000000,2,1000000,95,45,473684.210526316,0.473684210526316,id| item| resp| position| booklet
-environment_ltm,1746,3,291,6,6,291,1,id| item| resp| resp_raw
-EOAQ-EST_Silveira_2024,1918,5,137,14,14,137,1,id| item| resp
-erf_breuer_2017_dosp,3897,6,433,9,9,433,1,id| cov_gender| cov_age| item| resp
-erf_breuer_2017_frmfr,10825,3,433,25,25,433,1,id| cov_gender| cov_age| item| resp
-erf_breuer_2017_frmmc,10825,3,433,25,25,433,1,id| cov_gender| cov_age| item| resp
-erf_breuer_2017_tai,6495,5,433,15,15,433,1,id| cov_gender| cov_age| item| resp
-estcrm_epia,5165,111,1033,5,5,1033,1,resp| item| id
-estcrm_selfeff,3070,161,307,10,10,307,1,resp| item| id
-eurpar2_mudfold,10716,2,1786,6,6,1786,1,resp| item| id
-EWAS_Sanford_2024,9972,7,482,30,20.6887966804979,332.4,0.689626556016597,id| item| resp| study
-EWAS_Sanford_2024_Flourish,3856,7,482,8,8,482,1,id| item| resp
-experimental_iq,10000,3,400,25,25,400,1,id| item| resp
-face_memory_test,309400,6,1768,175,175,1768,1,id| item| resp| rt
-FACES_Spanish_Vegas_2022_FACES,50232,6,1196,42,42,1196,1,id| item| resp
-FACES_Spanish_Vegas_2022_FSS,11960,6,1196,10,10,1196,1,id| item| resp
-FACIT_YOUNT_2021_clinic10,10926,2,607,18,18,607,1,id| date| item| resp
-FACIT_YOUNT_2021_crqsasx,12160,8,608,20,20,608,1,id| date| item| resp
-FACIT_YOUNT_2021_hadsx,8512,4,608,14,14,608,1,id| date| item| resp
-FACIT_YOUNT_2021_limitations,42200,5,608,100,69.4078947368421,422,0.694078947368421,id| date| item| resp| wave
-fad_dataset1,1512,5,56,27,27,56,1,resp| age| item| id
-fad_dataset2,34456,6,584,59,59,584,1,id| item| resp| age
-FAD_fadplus_goto2021,43308,5,802,54,54,802,1,id| age| gender| item| resp
-famous_melodies,42876,9,109,5,393.357798165138,8575.2,78.6715596330275,id| rater| item| resp| rt
-fcupanas_cffsdas_reyna_2018,32720,6,805,40,40.6459627329193,818,1.01614906832298,id| cov_sex| cov_age| item| resp| group| cov_career| cov_educational
-feardriving_fisher2021,20250,5,810,25,25,810,1,id| item| resp
-FEDSP_Trzcinska_2023_MonKnow,396,2,197,2,2.01015228426396,198,1.00507614213198,id| item| resp
-FEDSP_Trzcinska_2023_PRD,990,7,197,5,5.0253807106599,198,1.00507614213198,id| item| resp
-FEDSP_Trzcinska_2023_PSPCSA,3564,4,197,12,18.0913705583756,297,1.50761421319797,id| item| resp| wave
-FEDSP_Trzcinska_2023_SMSD,2574,5,197,13,13.0659898477157,198,1.00507614213198,id| item| resp
-feminist_perspectives,808620,6,13477,60,60,13477,1,id| item| resp
-ffm_AGR,10153410,6,1015341,10,10,1015341,1,id| item| resp| rt
-ffm_CSN,10153410,6,1015341,10,10,1015341,1,id| item| resp| rt
-ffm_EST,10153410,6,1015341,10,10,1015341,1,id| item| resp| rt
-ffm_EXT,10153410,6,1015341,10,10,1015341,1,id| item| resp| rt
-ffm_OPN,10153410,6,1015341,10,10,1015341,1,id| item| resp| rt
-FGSIS_Berzeviczy_2018,1693,5,170,10,9.95882352941176,169.3,0.995882352941177,id| item| resp
-Fh_Okcsr_Roos_2022_study1_Feeling_Heard,22892,8,194,106,118,215.962264150943,1.11320754716981,id| item| resp| group
-Fh_Okcsr_Roos_2022_study2_Feeling_Heard,40854,10,1000,102,40.854,400.529411764706,0.400529411764706,id| item| resp| group
-fictionexposure_wimmer,66726,2,337,198,198,337,1,id| item| resp
-figure_skating,23077,1103,1676,663,13.7690930787589,34.8069381598793,0.0207678628638898,performance_type| performance_id| nation| resp| person_id| item| id
-fims_tam,89194,2,6371,14,14,6371,1,resp| country| item| id
-firstborn_personality,3160911,5,41841,76,75.5457804545781,41590.9342105263,0.994023427033922,resp| item| date| id
-fisher_temperment,437096,9,4967,88,88,4967,1,id| item| resp| rt
-FIVPEI_Perrig_2023_AttDiff,32571,7,1551,21,21,1551,1,id| item| resp| group
-FIVPEI_Perrig_2023_IMI,10857,7,1551,7,7,1551,1,id| item| resp
-FIVPEI_Perrig_2023_PENS,32571,7,1551,21,21,1551,1,id| item| resp
-FIVPEI_Perrig_2023_PXI,51183,7,1551,33,33,1551,1,id| item| resp
-florida_twins_auth,115306,2,1356,100,85.0339233038348,1153.06,0.850339233038348,id| cov_age| item| resp| wave
-florida_twins_behavior_cads,156292,4,1378,57,113.419448476052,2741.9649122807,1.98981488554478,id| item| resp
-florida_twins_behavior_cadsyv,96854,4,861,57,112.49012775842,1699.19298245614,1.97351101330562,id| item| resp
-florida_twins_behavior_ecs,106442,5,1387,48,76.7426099495314,2217.54166666667,1.59880437394857,id| item| resp
-florida_twins_behavior_friends,32386,4,858,19,37.7459207459207,1704.52631578947,1.98662740768004,id| item| resp
-florida_twins_behavior_panas,88202,5,1387,40,63.5919250180245,2205.05,1.58979812545061,id| item| resp
-florida_twins_behavior_rcads,208996,4,1387,94,150.682047584715,2223.36170212766,1.60300050622037,id| item| resp
-florida_twins_behavior_tas,51362,4,861,30,59.6538908246225,1712.06666666667,1.98846302748742,id| item| resp
-florida_twins_cads,89680,4,1272,57,70.503144654088,1573.33333333333,1.23689727463312,id| cov_age| item| resp| wave
-florida_twins_chaos,4806,5,808,6,5.9480198019802,801,0.991336633663366,id| cov_age| item| resp| wave
-florida_twins_class,7994,5,806,10,9.9181141439206,799.4,0.99181141439206,id| cov_age| item| resp| wave
-florida_twins_dbi,21801,2,606,36,35.9752475247525,605.583333333333,0.999312431243125,id| cov_age| item| resp| wave
-florida_twins_dweck,10997,6,879,8,12.5108077360637,1374.625,1.56385096700796,id| cov_age| item| resp| wave
-florida_twins_friends,42374,4,1351,21,31.3649148778682,2017.80952380952,1.49356737513658,id| cov_age| item| resp| wave
-florida_twins_game,2326,8,591,7,3.93570219966159,332.285714285714,0.562243171380227,id| cov_age| item| resp| wave
-florida_twins_grades,8685,6,1348,4,6.44287833827893,2171.25,1.61071958456973,id| cov_age| item| resp| wave
-florida_twins_grit,9257,5,782,12,11.8375959079284,771.416666666667,0.986466325660699,id| cov_age| item| resp| wave
-florida_twins_hwk,2405,4,602,4,3.99501661129568,601.25,0.99875415282392,id| cov_age| item| resp| wave
-florida_twins_leq,15322,4,607,42,25.2421746293245,364.809523809524,0.601004157841061,id| cov_age| item| resp| wave
-florida_twins_media,6312,4,608,11,10.3815789473684,573.818181818182,0.94377990430622,id| cov_age| item| resp| wave
-florida_twins_nes,21739,4,1353,10,16.0672579453067,2173.9,1.60672579453067,id| cov_age| item| resp| wave
-florida_twins_pals,27879,5,784,36,35.5599489795918,774.416666666667,0.987776360544218,id| cov_age| item| resp| wave
-florida_twins_panas,43228,5,1351,20,31.9970392301999,2161.4,1.59985196150999,id| cov_age| item| resp| wave
-florida_twins_par,31078,39,1353,31,22.969696969697,1002.51612903226,0.740957966764418,id| cov_age| item| resp| wave
-florida_twins_read,43010,4,809,54,53.1644004944376,796.481481481482,0.984525935082177,id| cov_age| item| resp| wave
-florida_twins_sch,15148,4,804,19,18.8407960199005,797.263157894737,0.991620843152658,id| cov_age| item| resp| wave
-florida_twins_tech,13198,7,608,22,21.7072368421053,599.909090909091,0.986692583732057,id| cov_age| item| resp| wave
-FPAS_Silva_2022,2718,5,151,18,18,151,1,id| item| resp
-frac20,10720,2,536,20,20,536,1,item| id| resp| Qmatrix__1| Qmatrix__2| Qmatrix__3| Qmatrix__4| Qmatrix__5| Qmatrix__6| Qmatrix__7| Qmatrix__8
-fractals_rating,71680,7,400,7,179.2,10240,25.6,id| item| rater| resp
-ftna_kasper_2022,8862532,5,633038,11,14,805684.727272727,1.27272727272727,id| cov_year| cov_female| cluster_id| cov_private| item| resp| wave
-g308_sirt,14940,2,747,20,20,747,1,resp| testlet| item| id
-gad_BrummerHoffman_2021,63980,5,1828,35,35,1828,1,id| group| date| age| item| resp
-GART_Grolig_2020,9000,2,120,75,75,120,1,id| age| gender| item| resp
-GBJW_fadplus_goto2021,5614,6,802,7,7,802,1,id| age| gender| item| resp
-geiser_tam,12456,2,519,24,24,519,1,resp| item| id
-gender_roles,14017212,6,318573,44,44,318573,1,id| item| resp
-Gene_likert_Aivelo_2020,10482,5,421,25,24.8978622327791,419.28,0.995914489311164,id| item| resp
-genpsych_russell_2024_gemma,28028,6,1001,28,28,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-genpsych_russell_2024_gpt3,31031,6,1001,31,31,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-genpsych_russell_2024_gpt4o,34965,6,999,35,35,999,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-genpsych_russell_2024_llama3,30030,6,1001,30,30,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-genpsych_russell_2024_mixtral,31936,6,998,32,32,998,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-geography,10087305,3,91331,1458,110.447766913753,6918.59053497942,0.0757529265526428,id| rt| resp| item| item_key| item_complex
-gilbert_meta_1,226809,2,7797,30,29.0892651019623,7560.3,0.96964217006541,id| cluster_id| item| resp| treat| std_baseline
-gilbert_meta_10,96688,3,4895,20,19.7524004085802,4834.4,0.987620020429009,id| cluster_id| block_id| item| resp| treat| cov_white| cov_black| cov_asian| cov_hispanic| cov_male| cov_lep| cov_iep| cov_ses_low| cov_ses_med| cov_ses_high| std_baseline
-gilbert_meta_11,59246,2,2588,24,22.8925811437403,2468.58333333333,0.953857547655847,id| cluster_id| block_id| item| resp| treat| cov_white| cov_black| cov_asian| cov_hispanic| cov_male| cov_lep| cov_iep| cov_ses_low| cov_ses_med| cov_ses_high| std_baseline
-gilbert_meta_12,59005,2,2612,24,22.5899693721286,2458.54166666667,0.941248723838693,id| cluster_id| block_id| item| resp| treat| cov_white| cov_black| cov_asian| cov_hispanic| cov_male| cov_lep| cov_iep| cov_ses_low| cov_ses_med| cov_ses_high| std_baseline
-gilbert_meta_13,176009,2,3780,37,46.5632275132275,4757,1.25846560846561,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
-gilbert_meta_14,391755,2,3780,69,103.638888888889,5677.60869565217,1.50201288244767,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
-gilbert_meta_15,35100,2,3510,10,10,3510,1,id| cluster_id| item| resp| treat| cov_female| cov_age| std_baseline
-gilbert_meta_16,257458,2,4031,71,63.8695112875217,3626.16901408451,0.89957058151439,id| cluster_id| block_id| item| wave| resp| cov_age| cov_male| treat
-gilbert_meta_17,1840581,2,51652,21,35.6342639200805,87646.7142857143,1.69686971048003,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_age| cov_father_literate| cov_mother_literate
-gilbert_meta_18,1809838,2,51652,21,35.039069155115,86182.7619047619,1.66852710262452,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_age| cov_father_literate| cov_mother_literate
-gilbert_meta_19,1774229,2,51612,21,34.3762884600481,84487.0952380952,1.63696611714514,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_age| cov_father_literate| cov_mother_literate
-gilbert_meta_2,43480,2,2174,20,20,2174,1,id| cluster_id| block_id| item| resp| treat| std_baseline| cov_white_num| cov_black_num| cov_asian_num| cov_hispanic_num| cov_male_num| cov_lep_num| cov_iep_num| cov_ses_low| cov_ses_med| cov_homelang_eng
-gilbert_meta_20,24180,3,186,93,130,260,1.39784946236559,id| item| wave| resp| treat| cov_male| cov_black| cov_asian| cov_white| cov_hispanic| cov_multi| cov_frl| cov_iep
-gilbert_meta_21,135750,2,4084,86,33.2394711067581,1578.48837209302,0.386505477985559,id| cluster_id| item| wave| resp| treat
-gilbert_meta_22,90051,4,5364,16,16.7880313199105,5628.1875,1.04925195749441,id| cluster_id| item| wave| resp| treat| cov_male| cov_age
-gilbert_meta_23,63640,2,958,38,66.4300626304802,1674.73684210526,1.74815954290737,id| cluster_id| block_id| item| wave| resp| treat
-gilbert_meta_24,14294,2,644,13,22.195652173913,1099.53846153846,1.70735785953177,id| cluster_id| item| wave| resp| treat| cov_ethnicity| cov_age| cov_male
-gilbert_meta_25,23222,4,779,15,29.8100128369705,1548.13333333333,1.98733418913136,id| cluster_id| item| wave| resp| treat| cov_female| cov_child_age
-gilbert_meta_26,23310,2,779,15,29.9229781771502,1554,1.99486521181001,id| cluster_id| item| wave| resp| treat| cov_female| cov_child_age
-gilbert_meta_27,246834,2,8857,18,27.8688043355538,13713,1.54826690753077,block_id| id| item| wave| resp| treat| cov_age| rcode
-gilbert_meta_28,185297,2,8857,17,20.9209664672011,10899.8235294118,1.23064508630595,block_id| id| item| wave| resp| treat| cov_age| rcode
-gilbert_meta_29,358480,2,14576,15,24.5938529088913,23898.6666666667,1.63959019392609,block_id| cluster_id| id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_30,164735,2,14576,10,11.3017974753019,16473.5,1.13017974753019,block_id| cluster_id| id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_31,146583,2,12560,6,11.6706210191083,24430.5,1.94510350318471,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_age
-gilbert_meta_32,162640,2,4513,20,36.0381121205407,8132,1.80190560602703,id| cluster_id| item| wave| resp| cov_urban| cov_age| cov_male| cov_repeat_grade| treat
-gilbert_meta_33,48773,5,1610,18,30.2937888198758,2709.61111111111,1.68298826777088,id| item| wave| resp| treat| cov_male| cov_age| cov_kyrgyz| cov_uzbek| cov_other_eth| cov_ethnic_minority| r
-gilbert_meta_34,40284,4,1000,9,40.284,4476,4.476,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_marital| cov_attend_school| cov_childcare| cov_permission_work
-gilbert_meta_35,41808,4,1438,12,29.0737134909597,3484,2.42280945757997,id| cluster_id| item| wave| resp| treat| cov_female| cov_mother_country_origin| cov_father_country_origin| cov_books_in_home
-gilbert_meta_36,19740,2,1418,7,13.9210155148096,2820,1.98871650211566,id| cluster_id| item| wave| resp| treat| cov_female| cov_mother_country_origin| cov_father_country_origin| cov_books_in_home
-gilbert_meta_37,17619,2,839,21,21,839,1,id| block_id| item| resp| treat| std_baseline| cov_female| cov_hh_size| cov_hh_income| cov_age| cov_married| cov_hindu| cov_completed_elementary| cov_completed_secondary
-gilbert_meta_38,7551,2,839,9,9,839,1,id| block_id| item| resp| treat| std_baseline| cov_female| cov_hh_size| cov_hh_income| cov_age| cov_married| cov_hindu| cov_completed_elementary| cov_completed_secondary
-gilbert_meta_39,68035,2,6818,10,9.9787327662071,6803.5,0.99787327662071,id| cluster_id| item| resp| treat| school| grade| cov_ethnicity| cov_home_lang| cov_religion| std_baseline
-gilbert_meta_4,51566,4,999,20,51.6176176176176,2578.3,2.58088088088088,id| block_id| item| wave| resp| treat| cov_age| cov_educ| cov_health| tot
-gilbert_meta_40,207858,2,8217,30,25.2960934647682,6928.6,0.843203115492272,id| cluster_id| item| wave| resp| treat| school| grade| cov_ethnicity| cov_home_lang| cov_religion
-gilbert_meta_41,1837594,2,3230,1355,568.914551083591,1356.15793357934,0.419863137331064,cluster_id| block_id| id| item| wave| resp| treat| cov_male| cov_age| cov_homelang_zulu| std_baseline
-gilbert_meta_42,29040,8,726,20,40,1452,2,id| cluster_id| item| wave| resp| treat| cov_female| cov_household_size
-gilbert_meta_43,22404,2,726,28,30.8595041322314,800.142857142857,1.10212514757969,id| cluster_id| item| wave| resp| treat| cov_female| cov_household_size
-gilbert_meta_44,14729,6,243,22,60.6131687242798,669.5,2.75514403292181,id| item| wave| resp| treat| tot| cov_age| cov_sex| cov_educ
-gilbert_meta_45,25636,7,249,37,102.955823293173,692.864864864865,2.7825898187344,id| item| wave| resp| treat| cov_age| cov_female| cov_race| cov_role| cov_years_exp
-gilbert_meta_46,10498,2,156,42,67.2948717948718,249.952380952381,1.60225885225885,id| cluster_id| item| wave| resp| rt| treat| cov_country| cov_age| cov_male| cov_bilingual| cov_risk
-gilbert_meta_47,11676,2,162,44,72.0740740740741,265.363636363636,1.63804713804714,id| cluster_id| item| wave| resp| rt| treat| cov_country| cov_age| cov_male| cov_bilingual| cov_risk
-gilbert_meta_48,131864,5,1984,30,66.4637096774194,4395.46666666667,2.21545698924731,id| cluster_id| item| wave| resp| cov_female| item_age| treat
-gilbert_meta_49,9511,2,200,20,47.555,475.55,2.37775,id| cluster_id| item| wave| resp| treat| cov_age| cov_any_school| cov_literate| cov_income
-gilbert_meta_5,37584,2,2928,7,12.8360655737705,5369.14285714286,1.83372365339578,id| cluster_id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_50,6497,2,449,11,14.4699331848552,590.636363636364,1.31544847135048,cluster_id| id| item| wave| resp| treat| cov_child_age| cov_firstborn| cov_premature| cov_height_for_age_z
-gilbert_meta_51,6675,2,449,8,14.8663697104677,834.375,1.85829621380846,cluster_id| id| item| wave| resp| treat| cov_child_age| cov_firstborn| cov_premature| cov_height_for_age_z
-gilbert_meta_52,2263206,2,102873,11,22,205746,2,id| block_id| cluster_id| item| wave| resp| treat| cov_household_size
-gilbert_meta_53,52640,2,1880,14,28,3760,2,id| item| wave| resp| treat| cov_pursue_career| cov_mobile_phone| cov_attend_school| cov_in_school
-gilbert_meta_54,22560,4,1880,6,12,3760,2,id| item| wave| resp| treat| cov_pursue_career| cov_mobile_phone| cov_attend_school| cov_in_school
-gilbert_meta_55,26445,3,1763,15,15,1763,1,id| cluster_id| item| resp| treat| cov_age| cov_male| cov_father_ed| cov_mother_ed| cov_income| std_baseline
-gilbert_meta_56,17364,2,2712,4,6.40265486725664,4341,1.60066371681416,id| cluster_id| block_id| item| wave| resp| treat| tot| cov_age| cov_male
-gilbert_meta_57,42840,4,1154,9,37.1230502599653,4760,4.12478336221837,id| cluster_id| item| wave| resp| treat| cov_age| cov_household_size| cov_educ| cov_num_children
-gilbert_meta_58,69429,2,1154,13,60.1637781629116,5340.69230769231,4.62798293560859,id| cluster_id| item| wave| resp| treat| cov_age| cov_household_size| cov_educ| cov_num_children
-gilbert_meta_59,57000,5,1154,10,49.3934142114385,5700,4.93934142114385,id| cluster_id| item| wave| resp| treat| cov_age| cov_household_size| cov_educ| cov_num_children
-gilbert_meta_6,589430,2,32950,10,17.8886191198786,58943,1.78886191198786,id| cluster_id| block_id| item| wave| resp| treat| cov_female| cov_mom_ed| cov_dad_ed| cov_welfare| cov_home_computer| cov_retained| cov_unemployed
-gilbert_meta_60,53190,2,2558,9,20.7935887412041,5910,2.31039874902267,id| block_id| item| wave| resp| treat| tot| cov_age| cov_female
-gilbert_meta_61,35502,4,2559,6,13.873388042204,5917,2.31223134036733,id| block_id| item| wave| resp| treat| tot| cov_age| cov_female
-gilbert_meta_62,8622,4,741,4,11.6356275303644,2155.5,2.90890688259109,id| cluster_id| item| wave| resp| treat| cov_female| cov_age| cov_county| cov_no_edu| cov_primary_edu| cov_secondary_edu| cov_tertiary_edu| cov_income_50| cov_weight
-gilbert_meta_63,71900,2,8988,4,7.99955496217178,17975,1.99988874054295,id| cluster_id| block_id| item| wave| resp| treat| cov_female_head| cov_household_size| cov_owns_land
-gilbert_meta_64,35861,5,4056,9,8.84146942800789,3984.55555555556,0.982385492000877,id| cluster_id| item| resp| treat| cov_household_size| cov_tch_exp| cov_female| cov_health| std_baseline
-gilbert_meta_65,7829,5,281,14,27.8612099644128,559.214285714286,1.99008642602949,id| cluster_id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_66,5518,4,281,10,19.6370106761566,551.8,1.96370106761566,id| cluster_id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_67,2215,5,281,4,7.88256227758007,553.75,1.97064056939502,id| cluster_id| item| wave| resp| treat| cov_age| cov_male
-gilbert_meta_68,439888,2,9413,35,46.7319664294061,12568.2285714286,1.33519904084018,id| cluster_id| block_id| item| wave| resp| cov_female| cov_age| cov_grade| treat| test
-gilbert_meta_69,387718,2,9410,30,41.2027630180659,12923.9333333333,1.37342543393553,id| cluster_id| block_id| item| wave| resp| cov_female| cov_age| cov_grade| treat| test
-gilbert_meta_7,49259,2,1386,36,35.540404040404,1368.30555555556,0.987233445566779,id| cluster_id| block_id| item| resp| treat| tot| std_baseline| cov_black_num| cov_hispanic_num| cov_other_num| cov_male_num| cov_lep_num| cov_iep_num| cov_ses_low| cov_ses_med| cov_ses_high
-gilbert_meta_70,395462,2,6391,33,61.8779533719293,11983.696969697,1.87508949611907,cluster_id| id| item| wave| resp| cov_female| cov_age| cov_grade| treat| e2_std12| e2_std35| test| item_grade
-gilbert_meta_71,310247,2,6389,20,48.5595554859915,15512.35,2.42797777429958,cluster_id| id| item| wave| resp| cov_female| cov_age| cov_grade| treat| e2_std12| e2_std35| test| item_grade
-gilbert_meta_72,435609,2,5388,53,80.847995545657,8219.03773584906,1.52543387821994,cluster_id| id| item| wave| resp| cov_female| cov_age| cov_grade| treat| e2_std12| e2_std35| test| item_grade
-gilbert_meta_73,358304,2,5386,36,66.52506498329,9952.88888888889,1.84791847175806,cluster_id| id| item| wave| resp| cov_female| cov_age| cov_grade| treat| e2_std12| e2_std35| test| item_grade
-gilbert_meta_74,29400,3,1225,12,24,2450,2,id| cluster_id| item| wave| resp| treat| std_baseline
-gilbert_meta_75,3550,2,142,10,25,355,2.5,id| block_id| item| wave| resp| treat| cov_female| cov_party| cov_white| cov_asian
-gilbert_meta_8,37182,2,1335,29,27.8516853932584,1282.13793103448,0.960402944595118,id| cluster_id| block_id| item| resp| treat| tot| std_baseline| cov_black_num| cov_hispanic_num| cov_other_num| cov_male_num| cov_lep_num| cov_iep_num| cov_ses_low| cov_ses_med| cov_ses_high
-gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
-graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
-grit,37944,6,3162,12,12,3162,1,id| item| resp
-grit_BrummerHoffman_2021,14624,5,1828,8,8,1828,1,id| group| date| age| item| resp
-hads_multilcirt,2814,4,201,14,14,201,1,id| item| resp
-HEARD_Roch_2022_COPE,14400,5,600,24,24,600,1,id| item| resp
-HEARD_Roch_2022_IDSS,7200,6,600,12,12,600,1,id| item| resp
-HEARD_Roch_2022_K6,3600,6,600,6,6,600,1,id| item| resp
-HEARD_Roch_2022_SWLPWI,4800,11,600,8,8,600,1,id| item| resp
-HEARD_Roch_2022_WHODAS,7200,6,600,12,12,600,1,id| item| resp
-hmcdm_spatialreasoning,3500,2,350,50,10,70,0.2,item| id| rt| resp| Qmatrix__1| Qmatrix__2| Qmatrix__3| Qmatrix__4
-humor_styles,34272,6,1071,32,32,1071,1,id| item| resp| age
-hypersensitive_narcissism,1187582,6,53981,22,22,53981,1,id| item| resp
-iat_difference,392451,7,19925,20,19.6964115432873,19622.55,0.984820577164366,resp| item| race| id
-iat_poverty,234602,5,19811,12,11.8420069658271,19550.1666666667,0.986833913818922,resp| item| race| id
-icar_sapa,1199896,2,95236,60,12.599185182074,19998.2666666667,0.209986419701233,resp| item| id
-idas_machado2024,240279,5,2379,101,101,2379,1,id| item| resp
-ieswriting_molloy_2022,28250,11,565,50,50,565,1,id| cov_participating_course_grade| cov_sat_total| cov_cum_GPA| item| resp
-IJLS_Eersel_2024_Anxiety,1393,4,199,7,7,199,1,id| item| resp
-IJLS_Eersel_2024_DenialAcceptance,796,4,199,4,4,199,1,id| item| resp
-IJLS_Eersel_2024_Depression,1393,4,199,7,7,199,1,id| item| resp
-IJLS_Eersel_2024_ICECAP,995,4,199,5,5,199,1,id| item| resp
-IJLS_Eersel_2024_IJLSreaction,3303,5,200,9,16.515,367,1.835,id| item| wave| resp
-IJLS_Eersel_2024_IUS,2388,5,199,12,12,199,1,id| IUS_sum| item| resp
-IJLS_Eersel_2024_Optimism,1194,5,199,6,6,199,1,id| item| resp
-IJLS_Eersel_2024_Work,1800,7,200,9,9,200,1,id| item| resp
-immer09_immer,128,7,57,20,2.24561403508772,6.4,0.112280701754386,resp| item| id
-immer10_immer,793,3,61,13,13,61,1,resp| difficulty| item| id
-immer12_immer,720,29,20,4,36,180,9,resp| rater| item| id
-introversion_extroversion,654108,5,7188,91,91,7188,1,id| item| resp| rt
-iowa_gambling_task,65291,4,617,339,105.820097244733,192.598820058997,0.312153679188002,resp| item| id
-isi_insomnia_wang2025,4004665,5,572095,7,7,572095,1,id| item| resp
-janssen2_tam,6920,2,346,20,20,346,1,resp| item| id
-joreskog_moustaki_2001,4290,3,715,6,6,715,1,id| item| resp
-K-PCQ_Huh_2022,4291,7,358,12,11.9860335195531,357.583333333333,0.998836126629423,id| item| resp
-KanjiOAHaS_Inoue_2024,9769,2,255,120,38.3098039215686,81.4083333333333,0.319248366013072,id| item| resp| rt
-kfcovid_fear_Li2020,770,5,110,7,7,110,1,id| item| resp
-kfcovid_Li2020,1320,2,110,12,12,110,1,id| item| resp
-kfcovid_pss_Li2020,440,5,110,4,4,110,1,id| item| resp
-KoreanNursing_Park_2017,37000,2,740,50,50,740,1,id| item| resp
-KTEEM_Schoen_2019-2022,87404,2,1130,35,77.3486725663717,2497.25714285714,2.2099620733249,id| group| item| resp
-lessR_Mach4,7020,6,351,20,20,351,1,resp| item| id
-LOC_fadplus_goto2021,5614,7,802,7,7,802,1,id| age| gender| item| resp
-loneliness_mudfold,43857,3,3987,11,11,3987,1,resp| item| id
-lsat,5000,2,1000,5,5,1000,1,resp| item| id
-LSHS-E_Quidaja_2022,42624,6,2664,16,16,2664,1,id| item| resp
-mbft_anunciacao_2024,42290975,8,272845,155,155,272845,1,cov_sex| cov_age| cov_profession| cov_institution| id| item| resp
-MBPS_Vangsness_2019,28271,5,235,122,120.302127659574,231.729508196721,0.986083013603069,id| item| resp
-mcmi_mokken,53152,2,1208,44,44,1208,1,item| id| resp| Qmatrix__A| Qmatrix__H| Qmatrix__SS| Qmatrix__CC
-Mechanical_Turk_Lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204,id| resp| rt| item
-Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741,id| resp| rt| item
-MEFSIRODGAS_Nileksela_2023_freq,45409,6,499,91,91,499,1,id| age| item| resp
-MEFSIRODGAS_Nileksela_2023_severity,45409,6,499,91,91,499,1,id| age| item| resp
-mental_health_malawi,35111,6,984,40,35.6819105691057,877.775,0.892047764227642,resp| item| id
-mft_validationandreplication,30060,6,835,36,36,835,1,id| item| resp
-MGSISGCLQ_Hollyhead_2018,950,6,38,25,25,38,1,id| cov_medical_condition| item| resp
-mindfulness_assessment,23439,6,601,39,39,601,1,age| id| item| resp
-ml_harper_2015,32000204,10,84432,200948,379.00563767292,159.246193044967,0.00188608813062544,item| id| resp
-MMF_Solis_2020,89156,5,10746,10,8.29666852782431,8915.6,0.829666852782431,id| item| resp
-mobility,67560,2,8445,8,8,8445,1,resp| item| id
-MotAcademica_Ribeiro_2019,33553,7,1157,29,29,1157,1,id| item| resp
-motion,31800,2,106,30,300,1060,10,id| resp| rt| item
-movac_pakpour2022,72096,7,6008,12,12,6008,1,id| item| resp
-mpsycho_asti,28225,4,1129,25,25,1129,1,resp| item| id
-mpsycho_avlancheprep,5420,5,1355,4,4,1355,1,resp| item| id
-mpsycho_bsss,13008,5,1626,8,8,1626,1,resp| item| id
-mpsycho_ceaq,3328,3,208,16,16,208,1,resp| age| item| id
-mpsycho_condom,3000,4,500,6,6,500,1,resp| item| id
-mpsycho_lakes,15458,7,194,16,79.680412371134,966.125,4.98002577319588,resp| subtest| item| rater| id
-mpsycho_learnemo,1110,3,111,10,10,111,1,resp| item| id
-mpsycho_Rmotivation,29687,2,852,36,34.843896713615,824.638888888889,0.96788601982264,resp| item| id
-mpsycho_Rogers,10608,5,408,26,26,408,1,resp| item| id
-mpsycho_Rogers_adolescent,2262,5,87,26,26,87,1,resp| item| id
-mpsycho_rwdq,16498,2,1055,18,15.6379146919431,916.555555555556,0.868773038441285,resp| item| id
-mpsycho_wenchuan,6132,5,362,17,16.939226519337,360.705882352941,0.996425089372766,resp| item| id
-mpsycho_wilmer,36775,2,1471,25,25,1471,1,resp| age| item| id
-mpsycho_wilpat,36984,3,804,46,46,804,1,cov_age| cov_gender| item| id| LibCons| LeftRight| Country| resp
-mpsycho_youthdep,59540,3,2290,26,26,2290,1,cov_race| resp| item| id
-mpsycho_zareki,5456,2,341,16,16,341,1,resp| item| id
-mq_supremecourt,53245,2,48,6108,1109.27083333333,8.71725605762934,0.181609501200611,id| item| term| resp| date
-mturkddm_by,132800,3,166,20,800,6640,40,id| block| order| rt| resp| item
-mturkddm_lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204,id| block| order| rt| resp| item
-mturkddm_recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741,id| block| order| rt| resp| item
-mturkddm_y25,127488,3,166,12,768,10624,64,id| block| order| rt| resp| item
-naep_multilcirt,18120,2,1510,12,12,1510,1,resp| item| id
-NAMPRB_Siwiak_2024_AOT,1248,6,156,8,8,156,1,id| item| resp
-NAMPRB_Siwiak_2024_BSR10,4680,5,156,30,30,156,1,id| item| resp
-NAMPRB_Siwiak_2024_DESRPL,4816,9,172,28,28,172,1,id| item| resp
-NAMPRB_Siwiak_2024_GCBS,6075,5,405,15,15,405,1,id| item| resp
-NAMPRB_Siwiak_2024_KON2066,3784,2,172,22,22,172,1,id| item| resp
-NAMPRB_Siwiak_2024_KOP20,3120,4,156,20,20,156,1,id| item| resp
-NAMPRB_Siwiak_2024_NEOFFI,16680,5,278,60,60,278,1,id| item| resp
-NAMPRB_Siwiak_2024_SSUB,19340,5,887,25,21.803833145434,773.6,0.872153325817362,id| wave| item| resp
-NARQing,49920,6,1248,40,40,1248,1,id| ethnic_category| item| resp
-nas_rogoza_2024_study1,11070,7,369,30,30,369,1,id| cov_age| cov_gender| cov_education| item| resp
-nas_rogoza_2024_study2_nas,6354,7,353,18,18,353,1,id| cov_age| cov_gender| cov_education| item| resp
-nas_rogoza_2024_study2_ngs,4589,7,353,13,13,353,1,id| cov_age| cov_gender| cov_education| item| resp
-nas_rogoza_2024_study2_nvs,3883,7,353,11,11,353,1,id| cov_age| cov_gender| cov_education| item| resp
-nas_rogoza_2024_study5_nas,38040,102,317,4,120,9510,30,id| wave| item| resp
-nas_rogoza_2024_study5_ngs,38040,102,317,4,120,9510,30,id| wave| item| resp
-nas_rogoza_2024_study5_nvs,38040,102,317,4,120,9510,30,id| wave| item| resp
-nature_relatedness,48704,9,1522,32,32,1522,1,id| item| resp| rt
-nerdy_personality,777660,9,14955,52,52,14955,1,id| item| resp
-neurips_2020,24076951,5,118971,27613,202.37663800422,871.942599500235,0.00732903480260093,item| id| resp
-neurips_2022,509957,3,6468,5730,78.8430735930736,88.9977312390925,0.0137596987073427,id| date| item| resp
-non_parametric_mixture_modeling_exp1_Cleaned,44957,2,56,2,802.803571428571,22478.5,401.401785714286,id| item| rt| resp
-nonverbal_immediacy,7896928,9,151864,52,52,151864,1,id| item| resp| rt
-novelobjectmatching,47840,2,299,320,160,149.5,0.5,id| item| resp
-NSR-FC_Youhasan_2021,12424,5,355,35,34.9971830985915,354.971428571429,0.999919517102616,id| Academic_Year| item| resp
-number_pattern_game,272700,2,606,255,450,1069.41176470588,1.76470588235294,resp| item| id
-offlinefriend_bigfive,35288,5,802,44,44,802,1,id| item| resp
-offlinefriend_dospert,22140,6,800,30,27.675,738,0.9225,id| item| resp
-offlinefriend_ofaq,29674,5,802,37,37,802,1,id| item| resp
-orev_bohn2024,30212,2,581,52,52,581,1,id| item| rt| age| resp
-OS_TBMWTFS_Schubert_2023_ACS,4600,4,230,20,20,230,1,id| item| resp
-OS_TBMWTFS_Schubert_2023_BMW3,12456,5,1038,12,12,1038,1,id| item| resp| group
-OS_TBMWTFS_Schubert_2023_CERQ,2436,7,174,14,14,174,1,id| item| resp
-OS_TBMWTFS_Schubert_2023_DMW,1564,7,215,4,7.27441860465116,391,1.81860465116279,id| item| resp| group
-OS_TBMWTFS_Schubert_2023_IPIP,19550,5,215,50,90.9302325581395,391,1.81860465116279,id| item| resp| group
-OS_TBMWTFS_Schubert_2023_MAAS,5865,6,215,15,27.2790697674419,391,1.81860465116279,id| item| resp| group
-OS_TBMWTFS_Schubert_2023_SMW,1564,7,215,4,7.27441860465116,391,1.81860465116279,id| item| resp| group
-OSCE_Hejri_2017,2660,5,266,10,10,266,1,id| item| resp
-pact_project,1018383,8,4002,850,254.468515742129,1198.09764705882,0.299374724402505,item| resp| treat| id
-papp_silva-martins2023,19233,5,503,62,38.2365805168986,310.209677419355,0.616719040595139,id| item| resp| wave
-parental_text_intervention,52809,9,3870,19,13.6457364341085,2779.42105263158,0.718196654426765,id| item| resp
-PBS_Surrain_2019_PoB,13966,7,741,23,18.8475033738192,607.217391304348,0.81945666842692,id| age| item| resp| group
-PEMAIW_Qiu_2020_BWSS,21540,6,955,20,22.5549738219895,1077,1.12774869109948,id| item| resp| group
-PEMAIW_Qiu_2020_DASS,22554,5,952,21,23.6911764705882,1074,1.1281512605042,id| item| resp| group
-PEMAIW_Qiu_2020_FFMQ,46176,6,1057,39,43.685903500473,1184,1.120151371807,id| item| resp| group
-PEMAIW_Qiu_2020_MEQ,33510,7,992,30,33.7802419354839,1117,1.12600806451613,id| item| resp| group
-PEMAIW_Qiu_2020_MLQ,10780,8,956,10,11.2761506276151,1078,1.12761506276151,id| item| resp| group
-PEMAIW_Qiu_2020_PANAS,21680,6,960,20,22.5833333333333,1084,1.12916666666667,id| item| resp| group
-PEMAIW_Qiu_2020_SWLS,5460,8,968,5,5.6404958677686,1092,1.12809917355372,id| item| resp| group
-PEPABAS2C_Kubicka_2024,4846,8,200,24,24.23,201.916666666667,1.00958333333333,id| item| resp
-PeSCBCSCe_Novak_2020_SCBCS,2860,7,572,5,5,572,1,id| item| resp
-PeSCBCSCe_Novak_2020_SPIRIT,2860,7,572,5,5,572,1,id| item| resp
-phq_BrummerHoffman_2021,82260,5,1828,45,45,1828,1,id| group| date| age| item| resp
-phq_insomnia_wang2025,5148855,4,572095,9,9,572095,1,id| item| resp
-pirlsmissing_sirt,110797,2,3480,35,31.8382183908046,3165.62857142857,0.909663382594417,country| wt| resp| item| id
-pisa2000_math,1538494,3,106322,45,14.4701378830346,34188.7555555556,0.32155861962299,id| item| resp
-pisa2000_read,7987114,3,193138,129,41.3544408661165,61915.6124031008,0.320577060977647,id| item| resp
-pisa2000_science,1753516,3,106075,45,16.530907376856,38967.0222222222,0.367353497263467,id| item| resp
-pisa2003_math,5933858,3,270613,84,21.9274683773507,70641.1666666667,0.261041290206556,id| item| resp
-pisa2003_problem_solving,838595,3,143467,12,5.8452117908648,69882.9166666667,0.487100982572067,id| item| resp
-pisa2003_read,2040328,3,146678,28,13.9102523895881,72868.8571428571,0.496794728199574,id| item| resp
-pisa2003_science,2353802,3,145963,32,16.1260182374985,73556.3125,0.50393806992183,id| item| resp
-pisa2006_math,5686467,3,292667,48,19.4298195560142,118468.0625,0.404787907416962,id| item| resp
-pisa2006_read,3255323,3,200682,28,16.2213003657528,116261.535714286,0.579332155919742,id| item| resp
-pisa2006_science,22644363,4,381172,192,59.4072046215357,117939.390625,0.309412524070498,id| item| resp
-pisa2009_math,5390873,3,356033,35,15.1414981195563,154024.942857143,0.432614231987324,id| item| resp
-pisa2009_read,15257952,3,514832,131,29.6367591758088,116472.916030534,0.22623480286877,id| item| resp
-pisa2009_science,8101451,3,355604,53,22.7822268590904,152857.566037736,0.429853336963971,id| item| resp
-pisa2012_math,12194969,3,482503,109,25.2743900037927,111880.449541284,0.231875137649475,id| item| resp
-pisa2012_read,6320624,3,333602,44,18.9466010395621,143650.545454545,0.430604569080957,id| item| resp
-pisa2012_science,7634927,3,333764,53,22.8752262077396,144055.226415094,0.431608041655464,id| item| resp
-pisa2015_math,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNTSCHID| id| item| resp| rt
-pisa2015_read,2884889,3,227833,100,12.6622965066518,28848.89,0.126622965066518,CNTSCHID| id| item| resp| rt
-pisa2015_science,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNTSCHID| id| item| resp| rt
-pks_probability,12096,3,504,24,24,504,1,id| item| resp| wave
-PMT_Trzcinska_2023_finans,364,4,26,14,14,26,1,id| item| resp
-PMT_Trzcinska_2023_MVS,234,5,26,9,9,26,1,id| item| resp
-PMT_Trzcinska_2023_PMT,7392,2,204,64,36.2352941176471,115.5,0.566176470588235,id| item| resp| wave
-polca_carcinoma,826,2,118,7,7,118,1,resp| item| id
-polca_cheating,1276,2,319,4,4,319,1,resp| item| id
-polca_election,20128,4,1785,12,11.2761904761905,1677.33333333333,0.93968253968254,resp| item| id
-polca_values,864,2,216,4,4,216,1,resp| item| id
-political_psychology,296862,7,552,37,537.79347826087,8023.2972972973,14.5349588719154,resp| item| date| id
-PPPASBPNSSedaisw_Pedro_2022_EBSV,9888,6,1648,6,6,1648,1,id| item| resp
-PPPASBPNSSedaisw_Pedro_2022_NPBE,24720,5,1648,15,15,1648,1,id| item| resp
-PPPASBPNSSedaisw_Pedro_2022_PANAS,32960,5,1648,20,20,1648,1,id| item| resp
-PPPSSAPIS_Figlova_2021_PSS10,1530,5,153,10,10,153,1,id| item| resp
-PPSRS_Caliciuri_2024,3707,2,337,11,11,337,1,id| item| resp
-PRCPSFFMQ_Lecuona_2017,31200,5,800,39,39,800,1,id| item| resp
-preference_inventory,162024,4,13502,12,12,13502,1,id| item| resp
-PrEPAdherence_Zissette_2021,18988,6,193,99,98.3834196891192,191.79797979798,0.993771916051709,id| item| resp
-preschool_sel_akt,14506,2,883,17,16.4280860702152,853.294117647059,0.966358004130304,id| item| resp
-preschool_sel_box,14234,2,735,20,19.3659863945578,711.7,0.968299319727891,id| item| resp
-preschool_sel_dn,11472,2,878,14,13.0660592255125,819.428571428571,0.933289944679466,id| item| resp
-preschool_sel_emt,21016,2,898,48,23.4031180400891,437.833333333333,0.487564959168523,id| item| resp
-preschool_sel_htks,8320,2,847,10,9.82290436835891,832,0.982290436835891,id| item| resp
-preschool_sel_pl,19036,2,965,39,19.7264248704663,488.102564102564,0.505805765909393,id| item| resp
-preschool_sel_wj,28320,2,897,78,31.5719063545151,363.076923076923,0.40476803018609,id| item| resp
-previc_bohn2023,451010,2,1190,379,379,1190,1,itemcov_word| resp| itemcov_word_type| item| itemcov_english| itemcov_aoa_rating_german| cov_gender| cov_age| id
-project_kids_ctopp,62554,2,1421,58,44.0211118930331,1078.51724137931,0.758984687810915,id| item| wave| resp
-project_kids_kbit,80865,2,1287,125,62.8321678321678,646.92,0.502657342657343,id| item| wave| resp
-project_kids_told_grade,15220,2,593,28,25.6661045531197,543.571428571429,0.916646591182847,id| item| wave| resp
-project_kids_told_wave,51602,2,1386,58,37.2308802308802,889.689655172414,0.641911728118625,id| item| wave| resp
-project_kids_topel,36388,2,1066,36,34.1350844277674,1010.77777777778,0.948196789660204,id| item| wave| resp
-project_kids_tosrec,39683,2,961,168,41.2934443288241,236.208333333333,0.245794311481096,id| item| wave| resp
-project_kids_wj_ak_grade,3709,2,348,13,10.6580459770115,285.307692307692,0.819849690539346,id| item| wave| resp
-project_kids_wj_ak_wave,204310,2,3319,65,61.5576981018379,3143.23076923077,0.947041509259045,id| item| wave| resp
-project_kids_wj_ap,42253,2,511,39,82.6868884540117,1083.41025641026,2.12017662702594,id| item| wave| resp
-project_kids_wj_lwid_grade,54680,2,852,71,64.1784037558685,770.140845070423,0.90392117966012,id| item| wave| resp
-project_kids_wj_lwid_wave,470335,2,3962,76,118.711509338718,6188.61842105263,1.5619935439305,id| item| wave| resp
-project_kids_wj_mf,43430,2,510,80,85.156862745098,542.875,1.06446078431373,id| item| wave| resp
-project_kids_wj_pc_grade,39371,2,849,41,46.3733804475854,960.268292682927,1.1310580596972,id| item| wave| resp
-project_kids_wj_pc_wave,226884,2,3770,44,60.1814323607427,5156.45454545455,1.36775982638052,id| item| wave| resp
-project_kids_wj_pv_grade,33220,2,846,34,39.2671394799054,977.058823529412,1.15491586705604,id| item| wave| resp
-project_kids_wj_pv_wave,331616,2,3960,43,83.7414141414141,7712,1.94747474747475,id| item| wave| resp
-project_kids_wj_qc,1793,2,76,26,23.5921052631579,68.9615384615385,0.907388663967611,id| item| wave| resp
-project_kids_wj_sa,120449,2,1574,45,76.5241423125794,2676.64444444444,1.7005364958351,id| item| wave| resp
-project_kids_wj_spell_grade,37753,2,847,47,44.5726092089728,803.255319148936,0.948353387424954,id| item| wave| resp
-project_kids_wj_spell_wave,27696,2,733,47,37.7844474761255,589.276595744681,0.803924414385649,id| item| wave| resp
-project_kids_wj_wa_grade,32468,2,842,32,38.5605700712589,1014.625,1.20501781472684,id| item| wave| resp
-project_kids_wj_wa_wave,106473,2,2760,32,38.5771739130435,3327.28125,1.20553668478261,id| item| wave| resp
-project_kids_wj_wf,22512,2,1470,30,15.3142857142857,750.4,0.51047619047619,id| item| wave| resp
-promis_BrummerHoffman_2021,109602,6,1828,80,59.9573304157549,1370.025,0.749466630196937,id| group| date| age| item| resp
-promis1wave1_anger,149758,5,15043,56,9.95532805956259,2674.25,0.177773715349332,id| item| resp
-promis1wave1_anxiety,144194,5,14909,56,9.67160775370582,2574.89285714286,0.172707281316175,id| item| resp
-promis1wave1_cesd,15471,4,778,20,19.8856041131105,773.55,0.994280205655527,id| item| resp
-promis1wave1_depression,143840,5,14909,56,9.64786370648602,2568.57142857143,0.172283280472965,id| item| resp
-promis1wave1_fatigue,290044,5,15053,112,19.2681857437056,2589.67857142857,0.172037372711657,id| item| resp
-promis1wave1_haq,37677,4,1590,24,23.6962264150943,1569.875,0.987342767295597,id| item| resp
-promis1wave1_pain,434103,5,15961,168,27.197731971681,2583.94642857143,0.161891261736196,id| item| resp
-promis1wave1_physicalfunction,140837,5,14954,56,9.41801524675672,2514.94642857143,0.168178843692084,id| item| resp
-promis1wave1_social,292014,5,15045,112,19.409371884347,2607.26785714286,0.173297963253098,id| item| resp
-PROMISPFUE_2,20400,6,600,34,34,600,1,id| item| resp
-PROMISPME_Forrest_2021_Family_Children,208598,6,1845,113,113.061246612466,1846,1.00054200542005,id| item| resp
-PROMISPME_Forrest_2021_Family_Proxy,208598,6,1845,113,113.061246612466,1846,1.00054200542005,id| item| resp
-PROMISPME_Forrest_2021_GHGlobal_Children,65430,7,3635,18,18,3635,1,id| item| resp
-PROMISPME_Forrest_2021_GHGlobal_Proxy,37947,7,1807,21,21,1807,1,id| item| resp
-PROMISPME_Forrest_2021_LS_Children,111608,6,1992,56,56.0281124497992,1993,1.00050200803213,id| item| resp
-PROMISPME_Forrest_2021_LS_Proxy,54040,6,964,56,56.0580912863071,965,1.00103734439834,id| item| resp
-PROMISPME_Forrest_2021_MP_Children,104280,6,1895,55,55.0290237467018,1896,1.00052770448549,id| item| resp
-PROMISPME_Forrest_2021_MP_Proxy,51040,6,927,55,55.059331175836,928,1.00107874865156,id| item| resp
-PROMISPME_Forrest_2021_Physical_Children,238197,7,3854,122,61.8051375194603,1952.43442622951,0.506599487864429,id| item| resp
-PROMISPME_Forrest_2021_Physical_Proxy,121418,7,1957,122,62.0429228410833,995.229508196721,0.508548547877732,id| item| resp
-PROMISPME_Forrest_2021_PosAff_Children,99322,6,1874,53,53,1874,1,id| item| resp
-PROMISPME_Forrest_2021_PosAff_Proxy,48177,6,909,53,53,909,1,id| item| resp
-PROMISPME_Forrest_2021_Psych_Children,119936,6,1874,64,64,1874,1,id| item| resp
-PROMISPME_Forrest_2021_Psych_Proxy,58432,6,913,64,64,913,1,id| item| resp
-PROMISPME_Forrest_2021_Strength_Children,45625,6,1824,25,25.0137061403509,1825,1.00054824561403,id| item| resp
-PROMISPME_Forrest_2021_Strength_Proxy,22975,6,918,25,25.0272331154684,919,1.00108932461874,id| item| resp
-protestant_workethic,60750,9,1350,45,45,1350,1,id| item| resp| rt
-psiq_woelk2022,25725,11,735,35,35,735,1,id| study| item| resp
-PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI,2756,8,198,13,13.9191919191919,212,1.07070707070707,id| figure| item| resp
-PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR,1272,8,198,6,6.42424242424242,212,1.07070707070707,id| figure| item| resp
-PSR-P_Scale_Intimacy_Hakim_2018_Study3,21528,8,897,24,24,897,1,id| figure| item| resp
-psychoneurotic_inventory,698204,3,6019,116,116,6019,1,id| item| resp
-psychotools_conspiracist,36629,5,2449,15,14.9567170273581,2441.93333333333,0.99711446849054,resp| item| id
-psychotools_gratitude,34950,9,1405,25,24.8754448398576,1398,0.995017793594306,resp| item| id
-psychotools_mathexam,9477,3,729,13,13,729,1,resp| item| id
-psychtools_ability,23257,2,1525,16,15.2504918032787,1453.5625,0.953155737704918,resp| item| id
-psychtools_Athenstaedt,42624,7,576,74,74,576,1,resp| gender| item| id
-psychtools_bfi,69492,6,2800,25,24.8185714285714,2779.68,0.992742857142857,resp| item| id
-psychtools_blot,5250,2,150,35,35,150,1,resp| item| id
-psychtools_epi,198744,2,3570,57,55.6705882352941,3486.73684210526,0.976676986584107,resp| item| id
-psychtools_geras,23550,5,471,50,50,471,1,id| item| gender| resp
-psychtools_msq,275842,4,3895,75,70.8195121951219,3677.89333333333,0.944260162601626,resp| item| id
-psychtools_sai,106111,4,3027,20,35.0548397753551,5305.55,1.75274198876776,resp| item| occasion| id
-PTAM_Kretzschmar_2017_MicroFIN,6984,6,253,24,27.604743083004,291,1.1501976284585,id| item| resp| wave
-PTAM_Kretzschmar_2017_Raven,4760,2,238,20,20,238,1,id| item| resp
-PTAM_Kretzschmar_2017_Reasoning,8424,3,234,36,36,234,1,id| item| resp
-ptam1_immer,18784,6,6877,2,2.73142358586593,9392,1.36571179293297,resp| rater| item| id
-PTCI_Chinese_Zhan_2024,80388,7,1267,33,63.4475138121547,2436,1.92265193370166,id| item| resp
-QADT_Kleka_2023,16308,2,453,12,36,1359,3,id| wave| item| resp
-QaSLu_lopez_2024,5310,5,118,45,45,118,1,id| item| resp
-QaSLU_Prado_2024,5310,5,118,45,45,118,1,id| item| resp
-QCDQES_Oliveira_2022,28854,5,687,42,42,687,1,id| item| resp
-quantshort,24000,2,1000,24,24,1000,1,resp| item| id
-ravens_deboeck2012,11622,2,503,35,23.1053677932406,332.057142857143,0.660153365521159,resp| item| id
-RD_EppSCQRK_Kipkemoi_2024_scq,10720,2,243,40,44.1152263374486,268,1.10288065843621,id| item| resp
-RD_PPCSEDSOF_Afable_2023,57299,3,5209,11,11,5209,1,id| item| resp
-RD_PpCvDOS_PadcOnaCns_Jinbo_2019_DOS,10750,5,1075,10,10,1075,1,id| item| resp
-RD_PpSL7as_Ghasemy_2024_SL,2468,5,617,4,4,617,1,id| item| resp
-rdatasets_gssabortion,301343,2,64814,7,4.64935044897707,43049,0.664192921282439,resp| id| item| cov_age| cov_gender| cov_year
-realpic_souza2021,4172,968,592,7,7.0472972972973,596,1.00675675675676,id| item| resp
-Resistance,7084,6,506,14,14,506,1,id| group| item| resp
-riasec,10791272,9,145828,74,74,145828,1,id| item| resp
-rightwing_authoritariansim,474288,11,9881,48,48,9881,1,id| item| resp
-RLMS_MLCIRTwithin,5823,5,1485,4,3.92121212121212,1455.75,0.98030303030303,resp| item| id
-roar_lexical,61500,2,123,500,500,123,1,realpseudo| resp| rt| item| id
-Rosenberg_fadplus_goto2021,8020,4,802,10,10,802,1,id| age| gender| item| resp
-rosenberg_selfesteem,479740,5,47974,10,10,47974,1,id| item| resp
-rr98_accuracy,12205,2,30,33,406.833333333333,369.848484848485,12.3282828282828,rt| item| resp| id
-RvKDCS_Romiacg_Miroshnik_2020_BFI,60660,5,1011,60,60,1011,1,id| item| resp
-RvKDCS_Romiacg_Miroshnik_2020_CBI,11121,4,1011,11,11,1011,1,id| item| resp
-RvKDCS_Romiacg_Miroshnik_2020_KDOCS,50550,5,1011,50,50,1011,1,id| item| resp
-rvobgvmaas_lsf_lehing_2024,6992,5,184,27,38,258.962962962963,1.40740740740741,id| cov_age| cov_child_number| item| resp| wave
-sabers_vesper2023,20415,5,1361,15,15,1361,1,id| language| item| resp
-SABFI2_Gallardo_Pujol_2018_BFI,85140,5,1419,60,60,1419,1,id| item| resp| group
-SABFI2_Gallardo_Pujol_2018_Constru,5447,9,419,13,13,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_Honest,4190,5,419,10,10,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_IntHapp,3771,5,419,9,9,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_LOT,2514,5,419,6,6,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_Micro,2514,4,419,6,6,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_Narq,2514,5,419,6,6,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_ReligionScale,7123,6,419,17,17,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_SWB,1676,7,419,4,4,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_Tight,2514,5,419,6,6,419,1,id| item| resp
-SABFI2_Gallardo_Pujol_2018_Trust,2095,5,419,5,5,419,1,id| item| resp
-sapa_personality,2039803,6,23678,696,86.1476053720753,2930.75143678161,0.123775295074821,resp| item| id
-SAS_Deters_2022,134824,3,1526,19,88.35124508519,7096,4.65006553079948,id| item| resp
-sat12_wilson_2003,19200,6,600,32,32,600,1,id| item| resp
-SBD_Smith_2020,6644,12,302,22,22,302,1,id| item| resp
-science_ltm,2744,4,392,7,7,392,1,id| item| resp| resp_raw
-scoliosis_dueber,46440,5,2322,20,20,2322,1,id| item| resp
-SCS_Lopez_2015,39432,5,1643,24,24,1643,1,id| item| resp
-SCS_Suh_2023_BFNE,7288,5,612,12,11.9084967320261,607.333333333333,0.992374727668845,id| item| resp| group
-SCS_Suh_2023_SCS,20430,8,681,30,30,681,1,id| item| resp| group
-SCS_Suh_2023_SIAPS,4332,6,361,12,12,361,1,id| item| resp
-sds,6149,6,473,13,13,473,1,resp| item| id
-sem_cnes,6116,4,1529,4,4,1529,1,resp| item| id
-sexual_compulsivity,33760,5,3376,10,10,3376,1,id| item| resp| age
-sexual_selfconcept,1768500,6,17685,100,100,17685,1,id| item| resp
-SF12_MLCIRTwithin,7061,5,620,12,11.3887096774194,588.416666666667,0.949059139784946,resp| item| id
-short_dark_triad,491184,6,18192,27,27,18192,1,id| item| resp
-si09_sirt,62412,7,5201,12,12,5201,1,country| resp| item| id
-smacof_pvq40,6023,6,151,40,39.887417218543,150.575,0.997185430463576,resp| item| id
-spanishmegastudy,2893980,2,48233,1270,60,2278.72440944882,0.047244094488189,order| resp| rt| item| id
-spelling_assessment_study1,73357,3,673,109,109,673,1,id| item| resp
-spelling_assessment_study2,56592,3,786,72,72,786,1,id| group| item| resp
-spelling2pronounce_edwards2023,629815,7,23282,1,27.0515849153853,629815,27.0515849153853,id| item| resp| rater
-spidersBAT_grill2024,1922,7,62,31,31,62,1,id| item| resp
-SPQVS_Barnby_2017_DSE,2865,6,191,15,15,191,1,id| item| resp
-SPQVS_Barnby_2017_OEQ,1146,4,191,6,6,191,1,id| item| resp
-SPQVS_Barnby_2017_OLIFE,8022,2,191,42,42,191,1,id| item| resp
-SPQVS_Barnby_2017_SENPQ,3056,5,191,16,16,191,1,id| item| resp
-SPQVS_Barnby_2017_SIAS,3820,5,191,20,20,191,1,id| item| resp
-SPQVS_Barnby_2017_WHO,955,6,191,5,5,191,1,id| item| resp
-sris_silvia2022,23840,7,221,20,107.873303167421,1192,5.39366515837104,id| study| item| resp
-ssd12_habib_2025,2400,5,200,12,12,200,1,id| group| cov_age| cov_gender| cov_socioeconomicstatus| cov_maritalstatus| cov_education| item| resp
-stress_deboeck2012,6897,3,185,11,37.2810810810811,627,3.38918918918919,resp| id| occasion| item
-SV-MAIA2_Randelovic_2021_DASS,4305,5,205,21,21,205,1,date| id| item| resp
-SV-MAIA2_Randelovic_2021_delta,26160,5,218,120,120,218,1,id| item| resp
-SV-MAIA2_Randelovic_2021_ERQ,2030,5,203,10,10,203,1,date| id| item| resp
-SV-MAIA2_Randelovic_2021_hexaco100,21700,5,217,100,100,217,1,id| item| resp
-SV-MAIA2_Randelovic_2021_hexaco60,8280,6,138,60,60,138,1,date| id| item| resp
-SV-MAIA2_Randelovic_2021_MAAS,3135,6,209,15,15,209,1,date| id| item| resp
-SV-MAIA2_Randelovic_2021_MAIA,25086,7,449,37,55.8708240534521,678,1.51002227171492,date| id| item| resp| wave
-SV-MAIA2_Randelovic_2021_SHS,2076,8,449,8,4.62360801781737,259.5,0.577951002227172,id| item| resp| date| wave
-swmd_mokken,4557,5,30,7,151.9,651,21.7,resp| item| rater| id
-tdri,67641,2,1803,56,37.5158069883527,1207.875,0.669925124792013,resp| item| id
-tenseness_pcmrs,16336,5,2042,8,8,2042,1,resp| item| id
-teq_novak_2021_bfin,1320,5,165,8,8,165,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-teq_novak_2021_scbs,3220,7,644,5,5,644,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-teq_novak_2021_selfesteem,1960,4,196,10,10,196,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-teq_novak_2021_socdes,990,5,198,5,5,198,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-teq_novak_2021_spirit,11729,6,782,15,14.9987212276215,781.933333333333,0.999914748508099,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-teq_novak_2021_teq,17884,5,1141,16,15.6739702015776,1117.75,0.979623137598598,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
-test_taking_patterns_over_time,405252,3,1802,284,224.89012208657,1426.94366197183,0.791866627065389,resp| id| subtest| item| form
-threatperceptions_isler_2024_experiment1_cognitive_crt,253,4,253,1,1,253,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment1_cognitive_panas,5566,5,253,22,22,253,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment1_incentive_crt,253,4,253,1,1,253,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment1_incentive_panas,5566,5,253,22,22,253,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment2_cognitive_crt,433,4,433,1,1,433,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment2_cognitive_panas,9526,5,433,22,22,433,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment2_picture_crt,433,4,433,1,1,433,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment2_picture_panas,9526,5,433,22,22,433,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment3_cognitive_panas,39094,5,1777,22,22,1777,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment4_cognitive_crt,8067,4,2689,3,3,2689,1,id| treat| item| resp
-threatperceptions_isler_2024_experiment4_cognitive_panas,59158,5,2689,22,22,2689,1,id| treat| item| resp
-timss_tam,19459,14,1773,11,10.9751833051325,1769,0.997743936830231,resp| country| item| booklet| id
-tma,270500,3,5410,50,50,5410,1,id| item| resp
-transreas_mokken,5100,2,425,12,12,425,1,cov_grade| resp| item| id
-trees_sirt,5805,2,387,15,15,387,1,resp| item| id
-twod_rotation_mather2023,1905487,2,1020195,304,1.86776743661751,6268.04934210526,0.00614397183097865,id| item| resp| cov_age| cov_gender
-ucla_BrummerHoffman_2021,5484,3,1828,3,3,1828,1,id| group| date| age| item| resp
-VCISM_Polish_Trzcinska_2023,2070,5,104,12,19.9038461538462,172.5,1.65865384615385,id| item| resp| wave
-VEI_Brazillian_Shiramizu_2018_EI,9772,6,698,14,14,698,1,id| item| resp
-VEI_Brazillian_Shiramizu_2018_IRI,19544,6,698,28,28,698,1,id| item| resp
-verbagg,7584,2,316,24,24,316,1,resp| item| id
-Veterans_Affairs_SSVF_Survey_2016-17,340723,5,5809,59,58.6543294887244,5774.96610169491,0.99414117777499,id| item| resp
-Veterans_Affairs_SSVF_Survey_2018-20,1475369,6,26347,56,55.9976088359206,26345.875,0.999957300641439,id| item| resp
-vocab_assessment_3_to_8_year_old_children,30212,2,581,52,52,581,1,cov_age_group| cov_age| itemcov_group| itemcov_aoa_german_comb| cov_gender| itemcov_german| itemcov_order| itemcov_source| subjid| chosencategory| chosenposition| targetword| chosenword| resp| rt| item| id
-vocabulary_iq,912975,3,12173,75,75,12173,1,id| item| resp
-VSOCFP_Sebo_2024,6352,8,794,8,8,794,1,id| item| resp
-wemwbs_BrummerHoffman_2021,12796,5,1828,7,7,1828,1,id| group| date| age| item| resp
-western_reserve_project,1066535,10,2880,2812,370.324652777778,379.27987197724,0.131694399992097,id| item| family_id| wave| resp
-whodas_BrummerHoffman_2021,21936,5,1828,12,12,1828,1,id| group| date| age| item| resp
-wine_luckett2021,1998,100,17,3,117.529411764706,666,39.1764705882353,rater| id| item| resp
-wirs,6030,2,1005,6,6,1005,1,id| item| resp
-WMD_bartczuk_2023,12936,6,539,24,24,539,1,id| item| resp
-WMI_Read_Han,3960,8,264,15,15,264,1,id| item| resp
-WMI_Rot_Han,3144,6,262,12,12,262,1,id| item| resp
-wooly_hartman2022,29659,3,1561,19,19,1561,1,id| cov_age| group| item| resp
+table,n_responses,n_categories,n_participants,n_items,responses_per_participant,responses_per_item,density
+psiq_woelk2022,25725,11,735,35,35,735,1
+rightwing_authoritariansim,474288,11,9881,48,48,9881,1
+estcrm_epia,5165,111,1033,5,5,1033,1
+SBD_Smith_2020,6644,12,302,22,22,302,1
+kfcovid_Li2020,1320,2,110,12,12,110,1
+CPDMMC_Kunnari_2020_PDP,18774,2,1043,18,18,1043,1
+fictionexposure_wimmer,66726,2,337,198,198,337,1
+frac20,10720,2,536,20,20,536,1
+g308_sirt,14940,2,747,20,20,747,1
+janssen2_tam,6920,2,346,20,20,346,1
+gilbert_meta_2,43480,2,2174,20,20,2174,1
+gilbert_meta_52,2263206,2,102873,11,22,205746,2
+NAMPRB_Siwiak_2024_KON2066,3784,2,172,22,22,172,1
+cdm_timss03,17411,2,757,23,23,757,1
+geiser_tam,12456,2,519,24,24,519,1
+balance_mokken,12100,2,484,25,25,484,1
+gilbert_meta_53,52640,2,1880,14,28,3760,2
+ccapsvtskhpacr_mercedes_2023_physical,5820,2,194,30,30,194,1
+4thgrade_math_sirt,19920,2,664,30,30,664,1
+psychtools_blot,5250,2,150,35,35,150,1
+cdm_hr,54250,2,1550,35,35,1550,1
+QADT_Kleka_2023,16308,2,453,12,36,1359,3
+polca_values,864,2,216,4,4,216,1
+abortion,1516,2,379,4,4,379,1
+enem_2019_1mil_lc,40000000,2,1000000,40,40,1e+06,1
+enem_2018_1mil_lc,40000000,2,1000000,80,40,5e+05,0.5
+enem_2013_1mil_lc,39992880,2,999822,40,40,999822,1
+enem_2016_1mil_lc,40000000,2,1000000,80,40,5e+05,0.5
+mcmi_mokken,53152,2,1208,44,44,1208,1
+DMCT_Addis_2020_MCT,4048,2,92,44,44,92,1
+enem_2013_1mil_cn,44992035,2,999823,45,45,999823,1
+enem_2013_1mil_mt,44991990,2,999822,45,45,999822,1
+enem_2013_1mil_ch,44992035,2,999823,45,45,999823,1
+ALSECYPIAMH_WU_2022_NEI,39210,2,7842,5,5,7842,1
+ALSECYPIAMH_WU_2022_PEI,39210,2,7842,5,5,7842,1
+lsat,5000,2,1000,5,5,1000,1
+KoreanNursing_Park_2017,37000,2,740,50,50,740,1
+roar_lexical,61500,2,123,500,500,123,1
+GART_Grolig_2020,9000,2,120,75,75,120,1
+mobility,67560,2,8445,8,8,8445,1
+andrich_mudfold,432,2,54,8,8,54,1
+immer12_immer,720,29,20,4,36,180,9
+mpsycho_learnemo,1110,3,111,10,10,111,1
+RD_PPCSEDSOF_Afable_2023,57299,3,5209,11,11,5209,1
+gilbert_meta_55,26445,3,1763,15,15,1763,1
+mpsycho_ceaq,3328,3,208,16,16,208,1
+wooly_hartman2022,29659,3,1561,19,19,1561,1
+gilbert_meta_74,29400,3,1225,12,24,2450,2
+pks_probability,12096,3,504,24,24,504,1
+big5_sirt,120000,3,500,240,240,500,1
+experimental_iq,10000,3,400,25,25,400,1
+BAFACALO_Golino_2013_SMS,10804,3,292,37,37,292,1
+tma,270500,3,5410,50,50,5410,1
+enem_2014_1mil_lc,50000000,3,1000000,100,50,5e+05,0.5
+mturkddm_by,132800,3,166,20,800,6640,40
+RvKDCS_Romiacg_Miroshnik_2020_CBI,11121,4,1011,11,11,1011,1
+DbdIFdM_Puga_2021,7602,4,543,14,14,543,1
+hads_multilcirt,2814,4,201,14,14,201,1
+FACIT_YOUNT_2021_hadsx,8512,4,608,14,14,608,1
+cavalini_mokken,14076,4,828,17,17,828,1
+ALSECYPIAMH_WU_2022_PHQ,15684,4,7842,2,2,7842,1
+OS_TBMWTFS_Schubert_2023_ACS,4600,4,230,20,20,230,1
+APFCompact_Ptacek_2024_DASS-21,6279,4,299,21,21,299,1
+CBI_Rodriguez_2021,58296,4,2082,28,28,2082,1
+aestheticfluency_cotter2023,89280,4,2480,36,36,2480,1
+sem_cnes,6116,4,1529,4,4,1529,1
+IJLS_Eersel_2024_ICECAP,995,4,199,5,5,199,1
+SPQVS_Barnby_2017_OEQ,1146,4,191,6,6,191,1
+mpsycho_condom,3000,4,500,6,6,500,1
+IJLS_Eersel_2024_Anxiety,1393,4,199,7,7,199,1
+IJLS_Eersel_2024_Depression,1393,4,199,7,7,199,1
+science_ltm,2744,4,392,7,7,392,1
+phq_insomnia_wang2025,5148855,4,572095,9,9,572095,1
+rosenberg_selfesteem,479740,5,47974,10,10,47974,1
+sexual_compulsivity,33760,5,3376,10,10,3376,1
+RD_PpCvDOS_PadcOnaCns_Jinbo_2019_DOS,10750,5,1075,10,10,1075,1
+OSCE_Hejri_2017,2660,5,266,10,10,266,1
+SV-MAIA2_Randelovic_2021_hexaco100,21700,5,217,100,100,217,1
+idas_machado2024,240279,5,2379,101,101,2379,1
+ccapsvtskhpacr_mercedes_2023_sf,2328,5,194,12,12,194,1
+CFC_Balaji_2019,1584,5,132,12,12,132,1
+OS_TBMWTFS_Schubert_2023_BMW3,12456,5,1038,12,12,1038,1
+SV-MAIA2_Randelovic_2021_delta,26160,5,218,120,120,218,1
+BSCS_fadplus_goto2021,10426,5,802,13,13,802,1
+EOAQ-EST_Silveira_2024,1918,5,137,14,14,137,1
+NAMPRB_Siwiak_2024_GCBS,6075,5,405,15,15,405,1
+sabers_vesper2023,20415,5,1361,15,15,1361,1
+swmd_mokken,4557,5,30,7,151.9,651,21.7
+SPQVS_Barnby_2017_SENPQ,3056,5,191,16,16,191,1
+DMCT_Addis_2020_SUIS,1656,5,92,18,18,92,1
+scoliosis_dueber,46440,5,2322,20,20,2322,1
+SPQVS_Barnby_2017_SIAS,3820,5,191,20,20,191,1
+SV-MAIA2_Randelovic_2021_DASS,4305,5,205,21,21,205,1
+HEARD_Roch_2022_COPE,14400,5,600,24,24,600,1
+bhs_floreskanter2021,51936,5,2164,24,24,2164,1
+aslec_insomnia_wang2025,13730280,5,572095,24,24,572095,1
+SCS_Lopez_2015,39432,5,1643,24,24,1643,1
+feardriving_fisher2021,20250,5,810,25,25,810,1
+mpsycho_Rogers,10608,5,408,26,26,408,1
+ees_sarling_2024,24150,5,805,30,30,805,1
+gad_BrummerHoffman_2021,63980,5,1828,35,35,1828,1
+offlinefriend_ofaq,29674,5,802,37,37,802,1
+mpsycho_avlancheprep,5420,5,1355,4,4,1355,1
+RD_PpSL7as_Ghasemy_2024_SL,2468,5,617,4,4,617,1
+kfcovid_pss_Li2020,440,5,110,4,4,110,1
+QaSLU_Prado_2024,5310,5,118,45,45,118,1
+QaSLu_lopez_2024,5310,5,118,45,45,118,1
+RvKDCS_Romiacg_Miroshnik_2020_KDOCS,50550,5,1011,50,50,1011,1
+IJLS_Eersel_2024_Optimism,1194,5,199,6,6,199,1
+RvKDCS_Romiacg_Miroshnik_2020_BFI,60660,5,1011,60,60,1011,1
+cbq_huczewska2022,175488,5,2742,64,64,2742,1
+isi_insomnia_wang2025,4004665,5,572095,7,7,572095,1
+kfcovid_fear_Li2020,770,5,110,7,7,110,1
+ALSECYPIAMH_WU_2022_Empathy,54894,5,7842,7,7,7842,1
+ALSECYPIAMH_WU_2022_SWEMWBS,54894,5,7842,7,7,7842,1
+emotion_pcmrs,16256,5,2032,8,8,2032,1
+tenseness_pcmrs,16336,5,2042,8,8,2042,1
+PMT_Trzcinska_2023_MVS,234,5,26,9,9,26,1
+ffm_OPN,10153410,6,1015341,10,10,1015341,1
+ffm_AGR,10153410,6,1015341,10,10,1015341,1
+ffm_EXT,10153410,6,1015341,10,10,1015341,1
+ffm_CSN,10153410,6,1015341,10,10,1015341,1
+ffm_EST,10153410,6,1015341,10,10,1015341,1
+sexual_selfconcept,1768500,6,17685,100,100,17685,1
+HEARD_Roch_2022_WHODAS,7200,6,600,12,12,600,1
+HEARD_Roch_2022_IDSS,7200,6,600,12,12,600,1
+consideration_future_consequences,180420,6,15035,12,12,15035,1
+EEN_Lacey_2024_Children,30524,6,2348,13,13,2348,1
+VEI_Brazillian_Shiramizu_2018_EI,9772,6,698,14,14,698,1
+Resistance,7084,6,506,14,14,506,1
+BPAQ_Christopher_2024_FFMQSF,2550,6,170,15,15,170,1
+SV-MAIA2_Randelovic_2021_MAAS,3135,6,209,15,15,209,1
+CQTMS_Hur_2023,122720,6,767,160,160,767,1
+face_memory_test,309400,6,1768,175,175,1768,1
+AMI_CV_Hewitt2024,3402,6,189,18,18,189,1
+beh_boredom_bieleke2022,12084,6,636,19,19,636,1
+hypersensitive_narcissism,1187582,6,53981,22,22,53981,1
+WMD_bartczuk_2023,12936,6,539,24,24,539,1
+MGSISGCLQ_Hollyhead_2018,950,6,38,25,25,38,1
+offlinefriend_dospert,22140,6,800,30,27.675,738,0.9225
+genpsych_russell_2024_gpt3,31031,6,1001,31,31,1001,1
+humor_styles,34272,6,1071,32,32,1071,1
+genpsych_russell_2024_mixtral,31936,6,998,32,32,998,1
+genpsych_russell_2024_gpt4o,34965,6,999,35,35,999,1
+close_relationships,1853676,6,51491,36,36,51491,1
+FACES_Spanish_Vegas_2022_FACES,50232,6,1196,42,42,1196,1
+SPQVS_Barnby_2017_WHO,955,6,191,5,5,191,1
+HEARD_Roch_2022_K6,3600,6,600,6,6,600,1
+PPPASBPNSSedaisw_Pedro_2022_EBSV,9888,6,1648,6,6,1648,1
+PROMISPME_Forrest_2021_Psych_Proxy,58432,6,913,64,64,913,1
+EMSC_Kuan-chin_2023,693,6,99,7,7,99,1
+aappss_malpas_2019_scl,54990,6,611,90,90,611,1
+MEFSIRODGAS_Nileksela_2023_severity,45409,6,499,91,91,499,1
+MEFSIRODGAS_Nileksela_2023_freq,45409,6,499,91,91,499,1
+CPDMMC_Kunnari_2020_HCD,12516,7,1043,12,12,1043,1
+movac_pakpour2022,72096,7,6008,12,12,6008,1
+PROMISPME_Forrest_2021_GHGlobal_Children,65430,7,3635,18,18,3635,1
+FIVPEI_Perrig_2023_PENS,32571,7,1551,21,21,1551,1
+FIVPEI_Perrig_2023_AttDiff,32571,7,1551,21,21,1551,1
+PROMISPME_Forrest_2021_GHGlobal_Proxy,37947,7,1807,21,21,1807,1
+EEN_Lacey_2024_Parent,59640,7,2485,24,24,2485,1
+FIVPEI_Perrig_2023_PXI,51183,7,1551,33,33,1551,1
+ALSECYPIAMH_WU_2022_PIL,31368,7,7842,4,4,7842,1
+ALSECYPIAMH_WU_2022_SWLS,39210,7,7842,5,5,7842,1
+PeSCBCSCe_Novak_2020_SCBCS,2860,7,572,5,5,572,1
+APFCompact_Ptacek_2024_SWLS,1495,7,299,5,5,299,1
+teq_novak_2021_scbs,3220,7,644,5,5,644,1
+PeSCBCSCe_Novak_2020_SPIRIT,2860,7,572,5,5,572,1
+FIVPEI_Perrig_2023_IMI,10857,7,1551,7,7,1551,1
+EWAS_Sanford_2024_Flourish,3856,7,482,8,8,482,1
+IJLS_Eersel_2024_Work,1800,7,200,9,9,200,1
+mbft_anunciacao_2024,42290975,8,272845,155,155,272845,1
+FACIT_YOUNT_2021_crqsasx,12160,8,608,20,20,608,1
+PSR-P_Scale_Intimacy_Hakim_2018_Study3,21528,8,897,24,24,897,1
+VSOCFP_Sebo_2024,6352,8,794,8,8,794,1
+SABFI2_Gallardo_Pujol_2018_Constru,5447,9,419,13,13,419,1
+NAMPRB_Siwiak_2024_DESRPL,4816,9,172,28,28,172,1
+nature_relatedness,48704,9,1522,32,32,1522,1
+nonverbal_immediacy,7896928,9,151864,52,52,151864,1
+fisher_temperment,437096,9,4967,88,88,4967,1
+threatperceptions_isler_2024_experiment3_cognitive_panas,39094,5,1777,22,22,1777,1
+threatperceptions_isler_2024_experiment1_incentive_panas,5566,5,253,22,22,253,1
+threatperceptions_isler_2024_experiment1_cognitive_panas,5566,5,253,22,22,253,1
+threatperceptions_isler_2024_experiment4_cognitive_panas,59158,5,2689,22,22,2689,1
+erf_breuer_2017_dosp,3897,6,433,9,9,433,1
+erf_breuer_2017_tai,6495,5,433,15,15,433,1
+det_naismith_2023,3438,1152,573,3,6,1146,2
+florida_twins_par,31078,39,1353,31,22.969696969697,1002.51612903226,0.740957966764418
+DEMOS,10656,2876,2664,4,4,2664,1
+realpic_souza2021,4172,968,592,7,7.0472972972973,596,1.00675675675676
+deception_professors,11928,84,568,21,21,568,1
+deception_game,15264,80,635,24,24.0377952755906,636,1.00157480314961
+figure_skating,23077,1103,1676,663,13.7690930787589,34.8069381598793,0.0207678628638898
+wine_luckett2021,1998,100,17,3,117.529411764706,666,39.1764705882353
+timss_tam,19459,14,1773,11,10.9751833051325,1769,0.997743936830231
+estcrm_selfeff,3070,161,307,10,10,307,1
+ecps_sahm_2024_ia,88570,10,13136,7,6.74253958587089,12652.8571428571,0.963219940838698
+western_reserve_project,1066535,10,2880,2812,370.324652777778,379.27987197724,0.131694399992097
+Fh_Okcsr_Roos_2022_study2_Feeling_Heard,40854,10,1000,102,40.854,400.529411764706,0.400529411764706
+ml_harper_2015,32000204,10,84432,200948,379.00563767292,159.246193044967,0.00188608813062544
+cub_relgoods,51429,10,2459,21,20.9145994306629,2449,0.995933306222042
+ecps_sahm_2024_trust,106815,11,15310,7,6.97681254082299,15259.2857142857,0.996687505831856
+ieswriting_molloy_2022,28250,11,565,50,50,565,1
+HEARD_Roch_2022_SWLPWI,4800,11,600,8,8,600,1
+gilbert_meta_30,164735,2,14576,10,11.3017974753019,16473.5,1.13017974753019
+gilbert_meta_29,358480,2,14576,15,24.5938529088913,23898.6666666667,1.63959019392609
+gilbert_meta_28,185297,2,8857,17,20.9209664672011,10899.8235294118,1.23064508630595
+gilbert_meta_27,246834,2,8857,18,27.8688043355538,13713,1.54826690753077
+gilbert_meta_41,1837594,2,3230,1355,568.914551083591,1356.15793357934,0.419863137331064
+gilbert_meta_71,310247,2,6389,20,48.5595554859915,15512.35,2.42797777429958
+gilbert_meta_70,395462,2,6391,33,61.8779533719293,11983.696969697,1.87508949611907
+gilbert_meta_72,435609,2,5388,53,80.847995545657,8219.03773584906,1.52543387821994
+gilbert_meta_73,358304,2,5386,36,66.52506498329,9952.88888888889,1.84791847175806
+gilbert_meta_51,6675,2,449,8,14.8663697104677,834.375,1.85829621380846
+gilbert_meta_50,6497,2,449,11,14.4699331848552,590.636363636364,1.31544847135048
+pirlsmissing_sirt,110797,2,3480,35,31.8382183908046,3165.62857142857,0.909663382594417
+vocab_assessment_3_to_8_year_old_children,30212,2,581,52,52,581,1
+difnlr_msatb,28140,2,1407,20,20,1407,1
+transreas_mokken,5100,2,425,12,12,425,1
+gilbert_meta_37,17619,2,839,21,21,839,1
+gilbert_meta_38,7551,2,839,9,9,839,1
+gilbert_meta_75,3550,2,142,10,25,355,2.5
+gilbert_meta_60,53190,2,2558,9,20.7935887412041,5910,2.31039874902267
+gilbert_meta_11,59246,2,2588,24,22.8925811437403,2468.58333333333,0.953857547655847
+gilbert_meta_12,59005,2,2612,24,22.5899693721286,2458.54166666667,0.941248723838693
+gilbert_meta_7,49259,2,1386,36,35.540404040404,1368.30555555556,0.987233445566779
+gilbert_meta_8,37182,2,1335,29,27.8516853932584,1282.13793103448,0.960402944595118
+gilbert_meta_16,257458,2,4031,71,63.8695112875217,3626.16901408451,0.89957058151439
+gilbert_meta_69,387718,2,9410,30,41.2027630180659,12923.9333333333,1.37342543393553
+gilbert_meta_68,439888,2,9413,35,46.7319664294061,12568.2285714286,1.33519904084018
+gilbert_meta_23,63640,2,958,38,66.4300626304802,1674.73684210526,1.74815954290737
+gilbert_meta_63,71900,2,8988,4,7.99955496217178,17975,1.99988874054295
+gilbert_meta_31,146583,2,12560,6,11.6706210191083,24430.5,1.94510350318471
+gilbert_meta_19,1774229,2,51612,21,34.3762884600481,84487.0952380952,1.63696611714514
+gilbert_meta_17,1840581,2,51652,21,35.6342639200805,87646.7142857143,1.69686971048003
+gilbert_meta_18,1809838,2,51652,21,35.039069155115,86182.7619047619,1.66852710262452
+gilbert_meta_6,589430,2,32950,10,17.8886191198786,58943,1.78886191198786
+gilbert_meta_56,17364,2,2712,4,6.40265486725664,4341,1.60066371681416
+gilbert_meta_15,35100,2,3510,10,10,3510,1
+gilbert_meta_39,68035,2,6818,10,9.9787327662071,6803.5,0.99787327662071
+gilbert_meta_1,226809,2,7797,30,29.0892651019623,7560.3,0.96964217006541
+gilbert_meta_32,162640,2,4513,20,36.0381121205407,8132,1.80190560602703
+gilbert_meta_46,10498,2,156,42,67.2948717948718,249.952380952381,1.60225885225885
+gilbert_meta_47,11676,2,162,44,72.0740740740741,265.363636363636,1.63804713804714
+gilbert_meta_21,135750,2,4084,86,33.2394711067581,1578.48837209302,0.386505477985559
+gilbert_meta_49,9511,2,200,20,47.555,475.55,2.37775
+gilbert_meta_58,69429,2,1154,13,60.1637781629116,5340.69230769231,4.62798293560859
+gilbert_meta_5,37584,2,2928,7,12.8360655737705,5369.14285714286,1.83372365339578
+gilbert_meta_24,14294,2,644,13,22.195652173913,1099.53846153846,1.70735785953177
+gilbert_meta_14,391755,2,3780,69,103.638888888889,5677.60869565217,1.50201288244767
+gilbert_meta_13,176009,2,3780,37,46.5632275132275,4757,1.25846560846561
+gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499
+gilbert_meta_26,23310,2,779,15,29.9229781771502,1554,1.99486521181001
+gilbert_meta_43,22404,2,726,28,30.8595041322314,800.142857142857,1.10212514757969
+gilbert_meta_36,19740,2,1418,7,13.9210155148096,2820,1.98871650211566
+gilbert_meta_40,207858,2,8217,30,25.2960934647682,6928.6,0.843203115492272
+florida_twins_auth,115306,2,1356,100,85.0339233038348,1153.06,0.850339233038348
+florida_twins_dbi,21801,2,606,36,35.9752475247525,605.583333333333,0.999312431243125
+FACIT_YOUNT_2021_clinic10,10926,2,607,18,18,607,1
+DART_Brysbaert_2020_1,26268,2,199,132,132,199,1
+KTEEM_Schoen_2019-2022,87404,2,1130,35,77.3486725663717,2497.25714285714,2.2099620733249
+FEDSP_Trzcinska_2023_MonKnow,396,2,197,2,2.01015228426396,198,1.00507614213198
+PPSRS_Caliciuri_2024,3707,2,337,11,11,337,1
+novelobjectmatching,47840,2,299,320,160,149.5,0.5
+PTAM_Kretzschmar_2017_Raven,4760,2,238,20,20,238,1
+wirs,6030,2,1005,6,6,1005,1
+alcoholresearch_sumscore,4660,2,233,20,20,233,1
+preschool_sel_pl,19036,2,965,39,19.7264248704663,488.102564102564,0.505805765909393
+preschool_sel_dn,11472,2,878,14,13.0660592255125,819.428571428571,0.933289944679466
+criticalperiod_syntax,107483095,2,1131401,95,95,1131401,1
+preschool_sel_emt,21016,2,898,48,23.4031180400891,437.833333333333,0.487564959168523
+preschool_sel_box,14234,2,735,20,19.3659863945578,711.7,0.968299319727891
+preschool_sel_htks,8320,2,847,10,9.82290436835891,832,0.982290436835891
+SPQVS_Barnby_2017_OLIFE,8022,2,191,42,42,191,1
+RD_EppSCQRK_Kipkemoi_2024_scq,10720,2,243,40,44.1152263374486,268,1.10288065843621
+preschool_sel_wj,28320,2,897,78,31.5719063545151,363.076923076923,0.40476803018609
+preschool_sel_akt,14506,2,883,17,16.4280860702152,853.294117647059,0.966358004130304
+twod_rotation_mather2023,1905487,2,1020195,304,1.86776743661751,6268.04934210526,0.00614397183097865
+enem_2017_1mil_cn,45000000,2,1000000,98,45,459183.673469388,0.459183673469388
+enem_2018_1mil_mt,45000000,2,1000000,47,45,957446.808510638,0.957446808510638
+enem_2018_1mil_cn,45000000,2,1000000,55,45,818181.818181818,0.818181818181818
+enem_2019_1mil_cn,45000000,2,1000000,47,45,957446.808510638,0.957446808510638
+enem_2022_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5
+enem_2020_1mil_cn,45000000,2,1000000,143,45,314685.314685315,0.314685314685315
+enem_2015_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5
+enem_2020_1mil_ch,45000000,2,1000000,135,45,333333.333333333,0.333333333333333
+enem_2018_1mil_ch,45000000,2,1000000,91,45,494505.494505494,0.494505494505495
+enem_2015_1mil_lc,40000000,2,1000000,82,40,487804.87804878,0.487804878048781
+enem_2017_1mil_ch,45000000,2,1000000,131,45,343511.450381679,0.343511450381679
+enem_2022_1mil_mt,45000000,2,1000000,95,45,473684.210526316,0.473684210526316
+enem_2020_1mil_lc,39598000,2,989950,80,40,494975,0.5
+enem_2021_1mil_cn,45000000,2,1000000,99,45,454545.454545455,0.454545454545455
+enem_2017_1mil_lc,50000000,2,1000000,143,50,349650.34965035,0.34965034965035
+enem_2020_1mil_mt,45000000,2,1000000,144,45,312500,0.3125
+enem_2016_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935
+enem_2021_1mil_lc,40000000,2,1000000,85,40,470588.235294118,0.470588235294118
+enem_2019_1mil_mt,45000000,2,1000000,46,45,978260.869565217,0.978260869565218
+enem_2017_1mil_mt,45000000,2,1000000,91,45,494505.494505494,0.494505494505495
+enem_2015_1mil_cn,45000000,2,1000000,99,45,454545.454545455,0.454545454545455
+enem_2016_1mil_cn,45000000,2,1000000,102,45,441176.470588235,0.441176470588235
+enem_2016_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5
+enem_2021_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935
+enem_2021_1mil_ch,45000000,2,1000000,90,45,5e+05,0.5
+enem_2019_1mil_ch,45000000,2,1000000,45,45,1e+06,1
+enem_2015_1mil_mt,45000000,2,1000000,93,45,483870.967741935,0.483870967741935
+enem_2022_1mil_cn,45000000,2,1000000,91,45,494505.494505494,0.494505494505495
+enem_2022_1mil_lc,40000000,2,1000000,84,40,476190.476190476,0.476190476190476
+KanjiOAHaS_Inoue_2024,9769,2,255,120,38.3098039215686,81.4083333333333,0.319248366013072
+PMT_Trzcinska_2023_PMT,7392,2,204,64,36.2352941176471,115.5,0.566176470588235
+orev_bohn2024,30212,2,581,52,52,581,1
+non_parametric_mixture_modeling_exp1_Cleaned,44957,2,56,2,802.803571428571,22478.5,401.401785714286
+dd_rotation,1178,2,121,10,9.73553719008265,117.8,0.973553719008264
+mq_supremecourt,53245,2,48,6108,1109.27083333333,8.71725605762934,0.181609501200611
+project_kids_wj_pv_wave,331616,2,3960,43,83.7414141414141,7712,1.94747474747475
+project_kids_wj_wf,22512,2,1470,30,15.3142857142857,750.4,0.51047619047619
+project_kids_wj_ak_grade,3709,2,348,13,10.6580459770115,285.307692307692,0.819849690539346
+project_kids_kbit,80865,2,1287,125,62.8321678321678,646.92,0.502657342657343
+project_kids_told_grade,15220,2,593,28,25.6661045531197,543.571428571429,0.916646591182847
+project_kids_wj_spell_grade,37753,2,847,47,44.5726092089728,803.255319148936,0.948353387424954
+project_kids_topel,36388,2,1066,36,34.1350844277674,1010.77777777778,0.948196789660204
+project_kids_wj_lwid_wave,470335,2,3962,76,118.711509338718,6188.61842105263,1.5619935439305
+project_kids_tosrec,39683,2,961,168,41.2934443288241,236.208333333333,0.245794311481096
+COACH_Chen_2022_treatmentStigma,13722,2,2365,3,5.80211416490486,4574,1.93403805496829
+project_kids_wj_ak_wave,204310,2,3319,65,61.5576981018379,3143.23076923077,0.947041509259045
+project_kids_told_wave,51602,2,1386,58,37.2308802308802,889.689655172414,0.641911728118625
+project_kids_wj_qc,1793,2,76,26,23.5921052631579,68.9615384615385,0.907388663967611
+project_kids_wj_wa_grade,32468,2,842,32,38.5605700712589,1014.625,1.20501781472684
+project_kids_wj_wa_wave,106473,2,2760,32,38.5771739130435,3327.28125,1.20553668478261
+project_kids_wj_pv_grade,33220,2,846,34,39.2671394799054,977.058823529412,1.15491586705604
+project_kids_wj_sa,120449,2,1574,45,76.5241423125794,2676.64444444444,1.7005364958351
+project_kids_wj_spell_wave,27696,2,733,47,37.7844474761255,589.276595744681,0.803924414385649
+project_kids_ctopp,62554,2,1421,58,44.0211118930331,1078.51724137931,0.758984687810915
+project_kids_wj_ap,42253,2,511,39,82.6868884540117,1083.41025641026,2.12017662702594
+project_kids_wj_pc_grade,39371,2,849,41,46.3733804475854,960.268292682927,1.1310580596972
+project_kids_wj_lwid_grade,54680,2,852,71,64.1784037558685,770.140845070423,0.90392117966012
+project_kids_wj_mf,43430,2,510,80,85.156862745098,542.875,1.06446078431373
+project_kids_wj_pc_wave,226884,2,3770,44,60.1814323607427,5156.45454545455,1.36775982638052
+motion,31800,2,106,30,300,1060,10
+alcoholstroop_jones2024,26208,2,156,28,168,936,6
+previc_bohn2023,451010,2,1190,379,379,1190,1
+cdm_ecpe,81816,2,2922,28,28,2922,1
+cdm_timss11,115983,2,4668,174,24.8464010282776,666.568965517241,0.142795408208492
+cdm_timss07,12494,2,698,25,17.8997134670487,499.76,0.715988538681948
+hmcdm_spatialreasoning,3500,2,350,50,10,70,0.2
+graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574
+spanishmegastudy,2893980,2,48233,1270,60,2278.72440944882,0.047244094488189
+mpsycho_wilmer,36775,2,1471,25,25,1471,1
+fims_tam,89194,2,6371,14,14,6371,1
+rdatasets_gssabortion,301343,2,64814,7,4.64935044897707,43049,0.664192921282439
+naep_multilcirt,18120,2,1510,12,12,1510,1
+polca_carcinoma,826,2,118,7,7,118,1
+verbagg,7584,2,316,24,24,316,1
+eurpar2_mudfold,10716,2,1786,6,6,1786,1
+trees_sirt,5805,2,387,15,15,387,1
+psychtools_epi,198744,2,3570,57,55.6705882352941,3486.73684210526,0.976676986584107
+psychtools_ability,23257,2,1525,16,15.2504918032787,1453.5625,0.953155737704918
+mpsycho_rwdq,16498,2,1055,18,15.6379146919431,916.555555555556,0.868773038441285
+mpsycho_zareki,5456,2,341,16,16,341,1
+icar_sapa,1199896,2,95236,60,12.599185182074,19998.2666666667,0.209986419701233
+number_pattern_game,272700,2,606,255,450,1069.41176470588,1.76470588235294
+polca_cheating,1276,2,319,4,4,319,1
+mpsycho_Rmotivation,29687,2,852,36,34.843896713615,824.638888888889,0.96788601982264
+quantshort,24000,2,1000,24,24,1000,1
+ravens_deboeck2012,11622,2,503,35,23.1053677932406,332.057142857143,0.660153365521159
+tdri,67641,2,1803,56,37.5158069883527,1207.875,0.669925124792013
+chess_lnirt,10240,2,259,40,39.5366795366795,256,0.988416988416989
+rr98_accuracy,12205,2,30,33,406.833333333333,369.848484848485,12.3282828282828
+pisa2015_read,2884889,3,227833,100,12.6622965066518,28848.89,0.126622965066518
+pisa2015_math,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658
+pisa2015_science,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658
+mpsycho_wilpat,36984,3,804,46,46,804,1
+mpsycho_youthdep,59540,3,2290,26,26,2290,1
+BAFACALO_Golino_2013_CIS,17520,3,292,60,60,292,1
+BAFACALO_Golino_2013_BVPS,18104,3,292,62,62,292,1
+BAFACALO_Golino_2013_FIS,17520,3,292,60,60,292,1
+mturkddm_lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204
+mturkddm_recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741
+mturkddm_y25,127488,3,166,12,768,10624,64
+gilbert_meta_10,96688,3,4895,20,19.7524004085802,4834.4,0.987620020429009
+erf_breuer_2017_frmfr,10825,3,433,25,25,433,1
+erf_breuer_2017_frmmc,10825,3,433,25,25,433,1
+neurips_2022,509957,3,6468,5730,78.8430735930736,88.9977312390925,0.0137596987073427
+ucla_BrummerHoffman_2021,5484,3,1828,3,3,1828,1
+spelling_assessment_study2,56592,3,786,72,72,786,1
+spelling_assessment_study1,73357,3,673,109,109,673,1
+pisa2009_math,5390873,3,356033,35,15.1414981195563,154024.942857143,0.432614231987324
+ALSECYPIAMH_WU_2022_SDQ,47046,3,7841,6,6,7841,1
+SAS_Deters_2022,134824,3,1526,19,88.35124508519,7096,4.65006553079948
+psychoneurotic_inventory,698204,3,6019,116,116,6019,1
+pisa2003_problem_solving,838595,3,143467,12,5.8452117908648,69882.9166666667,0.487100982572067
+pisa2000_read,7987114,3,193138,129,41.3544408661165,61915.6124031008,0.320577060977647
+pisa2012_math,12194969,3,482503,109,25.2743900037927,111880.449541284,0.231875137649475
+pisa2003_math,5933858,3,270613,84,21.9274683773507,70641.1666666667,0.261041290206556
+pisa2006_read,3255323,3,200682,28,16.2213003657528,116261.535714286,0.579332155919742
+pisa2006_math,5686467,3,292667,48,19.4298195560142,118468.0625,0.404787907416962
+pisa2000_math,1538494,3,106322,45,14.4701378830346,34188.7555555556,0.32155861962299
+pisa2003_science,2353802,3,145963,32,16.1260182374985,73556.3125,0.50393806992183
+PTAM_Kretzschmar_2017_Reasoning,8424,3,234,36,36,234,1
+joreskog_moustaki_2001,4290,3,715,6,6,715,1
+pisa2000_science,1753516,3,106075,45,16.530907376856,38967.0222222222,0.367353497263467
+pisa2012_science,7634927,3,333764,53,22.8752262077396,144055.226415094,0.431608041655464
+pisa2003_read,2040328,3,146678,28,13.9102523895881,72868.8571428571,0.496794728199574
+pisa2009_read,15257952,3,514832,131,29.6367591758088,116472.916030534,0.22623480286877
+pisa2009_science,8101451,3,355604,53,22.7822268590904,152857.566037736,0.429853336963971
+vocabulary_iq,912975,3,12173,75,75,12173,1
+pisa2012_read,6320624,3,333602,44,18.9466010395621,143650.545454545,0.430604569080957
+enem_2014_1mil_mt,45000000,3,1000000,91,45,494505.494505494,0.494505494505495
+enem_2014_1mil_ch,45000000,3,1000000,45,45,1e+06,1
+enem_2014_1mil_cn,45000000,3,1000000,52,45,865384.615384615,0.865384615384615
+environment_ltm,1746,3,291,6,6,291,1
+credentialform_lnirt,327200,3,1636,200,200,1636,1
+gilbert_meta_20,24180,3,186,93,130,260,1.39784946236559
+Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741
+Mechanical_Turk_Lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204
+geography,10087305,3,91331,1458,110.447766913753,6918.59053497942,0.0757529265526428
+cdm_pisa00R,28470,3,1095,26,26,1095,1
+immer10_immer,793,3,61,13,13,61,1
+stress_deboeck2012,6897,3,185,11,37.2810810810811,627,3.38918918918919
+test_taking_patterns_over_time,405252,3,1802,284,224.89012208657,1426.94366197183,0.791866627065389
+psychotools_mathexam,9477,3,729,13,13,729,1
+loneliness_mudfold,43857,3,3987,11,11,3987,1
+Rosenberg_fadplus_goto2021,8020,4,802,10,10,802,1
+gilbert_meta_4,51566,4,999,20,51.6176176176176,2578.3,2.58088088088088
+gilbert_meta_61,35502,4,2559,6,13.873388042204,5917,2.31223134036733
+gilbert_meta_34,40284,4,1000,9,40.284,4476,4.476
+gilbert_meta_57,42840,4,1154,9,37.1230502599653,4760,4.12478336221837
+gilbert_meta_66,5518,4,281,10,19.6370106761566,551.8,1.96370106761566
+gilbert_meta_62,8622,4,741,4,11.6356275303644,2155.5,2.90890688259109
+gilbert_meta_25,23222,4,779,15,29.8100128369705,1548.13333333333,1.98733418913136
+gilbert_meta_35,41808,4,1438,12,29.0737134909597,3484,2.42280945757997
+gilbert_meta_22,90051,4,5364,16,16.7880313199105,5628.1875,1.04925195749441
+teq_novak_2021_selfesteem,1960,4,196,10,10,196,1
+florida_twins_media,6312,4,608,11,10.3815789473684,573.818181818182,0.94377990430622
+florida_twins_cads,89680,4,1272,57,70.503144654088,1573.33333333333,1.23689727463312
+florida_twins_sch,15148,4,804,19,18.8407960199005,797.263157894737,0.991620843152658
+florida_twins_read,43010,4,809,54,53.1644004944376,796.481481481482,0.984525935082177
+florida_twins_friends,42374,4,1351,21,31.3649148778682,2017.80952380952,1.49356737513658
+florida_twins_leq,15322,4,607,42,25.2421746293245,364.809523809524,0.601004157841061
+florida_twins_hwk,2405,4,602,4,3.99501661129568,601.25,0.99875415282392
+florida_twins_nes,21739,4,1353,10,16.0672579453067,2173.9,1.60672579453067
+ccapsvtskhpacr_mercedes_2023_beck,4074,4,194,21,21,194,1
+ccapsvtskhpacr_mercedes_2023_hada,2716,4,194,14,14,194,1
+ccapsvtskhpacr_mercedes_2023_tsk,5457,4,194,17,28.1288659793814,321,1.65463917525773
+EEEDPRM_Bulut_2021,9610,4,961,10,10,961,1
+florida_twins_behavior_tas,51362,4,861,30,59.6538908246225,1712.06666666667,1.98846302748742
+florida_twins_behavior_rcads,208996,4,1387,94,150.682047584715,2223.36170212766,1.60300050622037
+PMT_Trzcinska_2023_finans,364,4,26,14,14,26,1
+florida_twins_behavior_cads,156292,4,1378,57,113.419448476052,2741.9649122807,1.98981488554478
+promis1wave1_cesd,15471,4,778,20,19.8856041131105,773.55,0.994280205655527
+BPAQ_Christopher_2024_OBSI,2720,4,170,16,16,170,1
+florida_twins_behavior_cadsyv,96854,4,861,57,112.49012775842,1699.19298245614,1.97351101330562
+dass_Thiyagarajan2022,20391,4,971,21,21,971,1
+florida_twins_behavior_friends,32386,4,858,19,37.7459207459207,1704.52631578947,1.98662740768004
+IJLS_Eersel_2024_DenialAcceptance,796,4,199,4,4,199,1
+SABFI2_Gallardo_Pujol_2018_Micro,2514,4,419,6,6,419,1
+pisa2006_science,22644363,4,381172,192,59.4072046215357,117939.390625,0.309412524070498
+preference_inventory,162024,4,13502,12,12,13502,1
+NAMPRB_Siwiak_2024_KOP20,3120,4,156,20,20,156,1
+promis1wave1_haq,37677,4,1590,24,23.6962264150943,1569.875,0.987342767295597
+CV_OASIS_ODSIS_PPE_Novak_2020_RSES,23740,4,2373,10,10.0042140750105,2374,1.00042140750105
+FEDSP_Trzcinska_2023_PSPCSA,3564,4,197,12,18.0913705583756,297,1.50761421319797
+COACH_Chen_2022_ADL,95653,4,2364,14,40.4623519458545,6832.35714285714,2.89016799613246
+COACH_Chen_2022_PHQ9,122645,4,2363,9,51.9022429115531,13627.2222222222,5.76691587906146
+gilbert_meta_54,22560,4,1880,6,12,3760,2
+threatperceptions_isler_2024_experiment4_cognitive_crt,8067,4,2689,3,3,2689,1
+threatperceptions_isler_2024_experiment2_picture_crt,433,4,433,1,1,433,1
+threatperceptions_isler_2024_experiment2_cognitive_crt,433,4,433,1,1,433,1
+threatperceptions_isler_2024_experiment1_cognitive_crt,253,4,253,1,1,253,1
+threatperceptions_isler_2024_experiment1_incentive_crt,253,4,253,1,1,253,1
+mpsycho_asti,28225,4,1129,25,25,1129,1
+psychtools_msq,275842,4,3895,75,70.8195121951219,3677.89333333333,0.944260162601626
+iowa_gambling_task,65291,4,617,339,105.820097244733,192.598820058997,0.312153679188002
+polca_election,20128,4,1785,12,11.2761904761905,1677.33333333333,0.93968253968254
+psychtools_sai,106111,4,3027,20,35.0548397753551,5305.55,1.75274198876776
+SV-MAIA2_Randelovic_2021_ERQ,2030,5,203,10,10,203,1
+NSR-FC_Youhasan_2021,12424,5,355,35,34.9971830985915,354.971428571429,0.999919517102616
+IJLS_Eersel_2024_IUS,2388,5,199,12,12,199,1
+FAD_fadplus_goto2021,43308,5,802,54,54,802,1
+gilbert_meta_64,35861,5,4056,9,8.84146942800789,3984.55555555556,0.982385492000877
+gilbert_meta_48,131864,5,1984,30,66.4637096774194,4395.46666666667,2.21545698924731
+gilbert_meta_59,57000,5,1154,10,49.3934142114385,5700,4.93934142114385
+gilbert_meta_67,2215,5,281,4,7.88256227758007,553.75,1.97064056939502
+gilbert_meta_65,7829,5,281,14,27.8612099644128,559.214285714286,1.99008642602949
+teq_novak_2021_socdes,990,5,198,5,5,198,1
+teq_novak_2021_teq,17884,5,1141,16,15.6739702015776,1117.75,0.979623137598598
+teq_novak_2021_bfin,1320,5,165,8,8,165,1
+ecps_sahm_2024_stress,302118,5,15736,28,19.1991611591256,10789.9285714286,0.685684327111628
+florida_twins_panas,43228,5,1351,20,31.9970392301999,2161.4,1.59985196150999
+florida_twins_class,7994,5,806,10,9.9181141439206,799.4,0.99181141439206
+florida_twins_grit,9257,5,782,12,11.8375959079284,771.416666666667,0.986466325660699
+florida_twins_chaos,4806,5,808,6,5.9480198019802,801,0.991336633663366
+florida_twins_pals,27879,5,784,36,35.5599489795918,774.416666666667,0.987776360544218
+ftna_kasper_2022,8862532,5,633038,11,14,805684.727272727,1.27272727272727
+FACIT_YOUNT_2021_limitations,42200,5,608,100,69.4078947368421,422,0.694078947368421
+phq_BrummerHoffman_2021,82260,5,1828,45,45,1828,1
+whodas_BrummerHoffman_2021,21936,5,1828,12,12,1828,1
+wemwbs_BrummerHoffman_2021,12796,5,1828,7,7,1828,1
+grit_BrummerHoffman_2021,14624,5,1828,8,8,1828,1
+audit_BrummerHoffman_2021,5484,5,1828,3,3,1828,1
+psychtools_geras,23550,5,471,50,50,471,1
+PPPASBPNSSedaisw_Pedro_2022_NPBE,24720,5,1648,15,15,1648,1
+florida_twins_behavior_panas,88202,5,1387,40,63.5919250180245,2205.05,1.58979812545061
+anxiety_lordif,22214,5,766,29,29,766,1
+SABFI2_Gallardo_Pujol_2018_Tight,2514,5,419,6,6,419,1
+CSE_Bayazit_2022,9765,5,651,15,15,651,1
+SABFI2_Gallardo_Pujol_2018_LOT,2514,5,419,6,6,419,1
+BPAQ_Christopher_2024_PSS10,1090,5,109,10,10,109,1
+NAMPRB_Siwiak_2024_BSR10,4680,5,156,30,30,156,1
+promis1wave1_pain,434103,5,15961,168,27.197731971681,2583.94642857143,0.161891261736196
+QCDQES_Oliveira_2022,28854,5,687,42,42,687,1
+promis1wave1_physicalfunction,140837,5,14954,56,9.41801524675672,2514.94642857143,0.168178843692084
+offlinefriend_bigfive,35288,5,802,44,44,802,1
+empathizing_systemizing,1590720,5,13256,120,120,13256,1
+promis1wave1_fatigue,290044,5,15053,112,19.2681857437056,2589.67857142857,0.172037372711657
+PPPASBPNSSedaisw_Pedro_2022_PANAS,32960,5,1648,20,20,1648,1
+NAMPRB_Siwiak_2024_NEOFFI,16680,5,278,60,60,278,1
+concretewords,691689,5,66404,1831,10.416375519547,377.765701802294,0.00568889979221574
+FPAS_Silva_2022,2718,5,151,18,18,151,1
+promis1wave1_anxiety,144194,5,14909,56,9.67160775370582,2574.89285714286,0.172707281316175
+SABFI2_Gallardo_Pujol_2018_Honest,4190,5,419,10,10,419,1
+SABFI2_Gallardo_Pujol_2018_Narq,2514,5,419,6,6,419,1
+promis1wave1_social,292014,5,15045,112,19.409371884347,2607.26785714286,0.173297963253098
+anxiety_gastro_symptoms,5730,5,382,15,15,382,1
+FGSIS_Berzeviczy_2018,1693,5,170,10,9.95882352941176,169.3,0.995882352941177
+MMF_Solis_2020,89156,5,10746,10,8.29666852782431,8915.6,0.829666852782431
+promis1wave1_anger,149758,5,15043,56,9.95532805956259,2674.25,0.177773715349332
+boyd_prism_2024,13104,5,606,22,21.6237623762376,595.636363636364,0.982898289828983
+florida_twins_behavior_ecs,106442,5,1387,48,76.7426099495314,2217.54166666667,1.59880437394857
+MBPS_Vangsness_2019,28271,5,235,122,120.302127659574,231.729508196721,0.986083013603069
+promis1wave1_depression,143840,5,14909,56,9.64786370648602,2568.57142857143,0.172283280472965
+PPPSSAPIS_Figlova_2021_PSS10,1530,5,153,10,10,153,1
+BPAQ_Christopher_2024_PCL5,2180,5,109,20,20,109,1
+SABFI2_Gallardo_Pujol_2018_IntHapp,3771,5,419,9,9,419,1
+FEDSP_Trzcinska_2023_SMSD,2574,5,197,13,13.0659898477157,198,1.00507614213198
+aa1_Silvia_2023,14994,5,1071,14,14,1071,1
+christiannationalism_davis2021,8268,5,1378,6,6,1378,1
+CV_OASIS_ODSIS_PPE_Novak_2020_PANAS,29160,5,1458,20,20,1458,1
+SABFI2_Gallardo_Pujol_2018_Trust,2095,5,419,5,5,419,1
+PRCPSFFMQ_Lecuona_2017,31200,5,800,39,39,800,1
+AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,7098,5,286,14,24.8181818181818,507,1.77272727272727
+AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,10140,5,286,20,35.4545454545455,507,1.77272727272727
+depression_hymcohort_tang2022,10752,5,448,24,24,448,1
+CV_OASIS_ODSIS_PPE_Novak_2020_BFI,19280,5,2409,8,8.00332088003321,2410,1.00041511000415
+PEMAIW_Qiu_2020_DASS,22554,5,952,21,23.6911764705882,1074,1.1281512605042
+ALSECYPIAMH_WU_2022_CPS,114804,5,9567,12,12,9567,1
+OS_TBMWTFS_Schubert_2023_IPIP,19550,5,215,50,90.9302325581395,391,1.81860465116279
+SCS_Suh_2023_BFNE,7288,5,612,12,11.9084967320261,607.333333333333,0.992374727668845
+SABFI2_Gallardo_Pujol_2018_BFI,85140,5,1419,60,60,1419,1
+introversion_extroversion,654108,5,7188,91,91,7188,1
+VCISM_Polish_Trzcinska_2023,2070,5,104,12,19.9038461538462,172.5,1.65865384615385
+papp_silva-martins2023,19233,5,503,62,38.2365805168986,310.209677419355,0.616719040595139
+acl_mokken,94394,5,433,109,218,866,2
+COACH_Chen_2022_MOS_SSS_C,129644,5,2364,19,54.8409475465313,6823.36842105263,2.88636566034375
+COACH_Chen_2022_HDRS,232006,5,2365,17,98.0997885835095,13647.4117647059,5.77057579902997
+IJLS_Eersel_2024_IJLSreaction,3303,5,200,9,16.515,367,1.835
+COACH_Chen_2022_IADL,54653,5,2364,8,23.1188663282572,6831.625,2.88985829103215
+COACH_Chen_2022_WHOQOL_BREF,176081,5,2364,26,74.4843485617597,6772.34615384615,2.86478263699076
+gilbert_meta_33,48773,5,1610,18,30.2937888198758,2709.61111111111,1.68298826777088
+autonomysupport_mokken,1813,5,14,7,129.5,259,18.5
+COACH_Chen_2022_CSQ,18891,5,2362,8,7.99788314987299,2361.375,0.999735393734124
+threatperceptions_isler_2024_experiment2_cognitive_panas,9526,5,433,22,22,433,1
+threatperceptions_isler_2024_experiment2_picture_panas,9526,5,433,22,22,433,1
+NAMPRB_Siwiak_2024_SSUB,19340,5,887,25,21.803833145434,773.6,0.872153325817362
+neurips_2020,24076951,5,118971,27613,202.37663800422,871.942599500235,0.00732903480260093
+fad_dataset1,1512,5,56,27,27,56,1
+firstborn_personality,3160911,5,41841,76,75.5457804545781,41590.9342105263,0.994023427033922
+mpsycho_wenchuan,6132,5,362,17,16.939226519337,360.705882352941,0.996425089372766
+mpsycho_bsss,13008,5,1626,8,8,1626,1
+SF12_MLCIRTwithin,7061,5,620,12,11.3887096774194,588.416666666667,0.949059139784946
+psychotools_conspiracist,36629,5,2449,15,14.9567170273581,2441.93333333333,0.99711446849054
+RLMS_MLCIRTwithin,5823,5,1485,4,3.92121212121212,1455.75,0.98030303030303
+mpsycho_Rogers_adolescent,2262,5,87,26,26,87,1
+iat_poverty,234602,5,19811,12,11.8420069658271,19550.1666666667,0.986833913818922
+mindfulness_assessment,23439,6,601,39,39,601,1
+genpsych_russell_2024_gemma,28028,6,1001,28,28,1001,1
+genpsych_russell_2024_llama3,30030,6,1001,30,30,1001,1
+SV-MAIA2_Randelovic_2021_hexaco60,8280,6,138,60,60,138,1
+GBJW_fadplus_goto2021,5614,6,802,7,7,802,1
+teq_novak_2021_spirit,11729,6,782,15,14.9987212276215,781.933333333333,0.999914748508099
+florida_twins_grades,8685,6,1348,4,6.44287833827893,2171.25,1.61071958456973
+florida_twins_dweck,10997,6,879,8,12.5108077360637,1374.625,1.56385096700796
+dvivdtws_ppmial_marcatto_2023_cwb,12166,6,553,22,22,553,1
+dvivdtws_ppmial_marcatto_2023_ocb,12166,6,553,22,22,553,1
+dvivdtws_ppmial_marcatto_2023_ocs,12166,6,553,22,22,553,1
+dvivdtws_ppmial_marcatto_2023_dtw,12166,6,553,22,22,553,1
+dvivdtws_ppmial_marcatto_2023_snaq,12166,6,553,22,22,553,1
+fcupanas_cffsdas_reyna_2018,32720,6,805,40,40.6459627329193,818,1.01614906832298
+NARQing,49920,6,1248,40,40,1248,1
+promis_BrummerHoffman_2021,109602,6,1828,80,59.9573304157549,1370.025,0.749466630196937
+BPAQ_Christopher_2024_BPAQSF,4080,6,170,12,24,340,2
+PROMISPFUE_2,20400,6,600,34,34,600,1
+PROMISPME_Forrest_2021_PosAff_Proxy,48177,6,909,53,53,909,1
+PROMISPME_Forrest_2021_Strength_Children,45625,6,1824,25,25.0137061403509,1825,1.00054824561403
+BPAQ_Christopher_2024_PROMIS,4080,6,170,24,24,170,1
+WMI_Rot_Han,3144,6,262,12,12,262,1
+NAMPRB_Siwiak_2024_AOT,1248,6,156,8,8,156,1
+feminist_perspectives,808620,6,13477,60,60,13477,1
+LSHS-E_Quidaja_2022,42624,6,2664,16,16,2664,1
+16_personalityfactors,8012917,6,49159,163,163,49159,1
+PROMISPME_Forrest_2021_Psych_Children,119936,6,1874,64,64,1874,1
+PROMISPME_Forrest_2021_LS_Children,111608,6,1992,56,56.0281124497992,1993,1.00050200803213
+SABFI2_Gallardo_Pujol_2018_ReligionScale,7123,6,419,17,17,419,1
+gender_roles,14017212,6,318573,44,44,318573,1
+PROMISPME_Forrest_2021_PosAff_Children,99322,6,1874,53,53,1874,1
+VEI_Brazillian_Shiramizu_2018_IRI,19544,6,698,28,28,698,1
+SCS_Suh_2023_SIAPS,4332,6,361,12,12,361,1
+PROMISPME_Forrest_2021_Family_Proxy,208598,6,1845,113,113.061246612466,1846,1.00054200542005
+mft_validationandreplication,30060,6,835,36,36,835,1
+PROMISPME_Forrest_2021_Strength_Proxy,22975,6,918,25,25.0272331154684,919,1.00108932461874
+PROMISPME_Forrest_2021_MP_Children,104280,6,1895,55,55.0290237467018,1896,1.00052770448549
+FACES_Spanish_Vegas_2022_FSS,11960,6,1196,10,10,1196,1
+PROMISPME_Forrest_2021_Family_Children,208598,6,1845,113,113.061246612466,1846,1.00054200542005
+CHEXI_Lin_2019,53088,6,2212,24,24,2212,1
+PrEPAdherence_Zissette_2021,18988,6,193,99,98.3834196891192,191.79797979798,0.993771916051709
+SPQVS_Barnby_2017_DSE,2865,6,191,15,15,191,1
+grit,37944,6,3162,12,12,3162,1
+sat12_wilson_2003,19200,6,600,32,32,600,1
+Adherence_Zissette_2018_SDB,18409,6,709,26,25.9647390691114,708.038461538462,0.998643810350439
+BPAQ_Christopher_2024_SCSS,2040,6,170,12,12,170,1
+PROMISPME_Forrest_2021_MP_Proxy,51040,6,927,55,55.059331175836,928,1.00107874865156
+PROMISPME_Forrest_2021_LS_Proxy,54040,6,964,56,56.0580912863071,965,1.00103734439834
+short_dark_triad,491184,6,18192,27,27,18192,1
+AOMT_BR_SF_EDPANAB_Geiger_2021_RF,14196,6,286,28,49.6363636363636,507,1.77272727272727
+fad_dataset2,34456,6,584,59,59,584,1
+disgust_berger2014,35350,6,1414,25,25,1414,1
+PEMAIW_Qiu_2020_BWSS,21540,6,955,20,22.5549738219895,1077,1.12774869109948
+CV_OASIS_ODSIS_PPE_Novak_2020_DSES,17325,6,2474,7,7.00282942603072,2475,1.00040420371867
+OS_TBMWTFS_Schubert_2023_MAAS,5865,6,215,15,27.2790697674419,391,1.81860465116279
+PEMAIW_Qiu_2020_PANAS,21680,6,960,20,22.5833333333333,1084,1.12916666666667
+PEMAIW_Qiu_2020_FFMQ,46176,6,1057,39,43.685903500473,1184,1.120151371807
+brain_hemisphere,590880,6,29544,20,20,29544,1
+PTAM_Kretzschmar_2017_MicroFIN,6984,6,253,24,27.604743083004,291,1.1501976284585
+dumas_Organisciak_2022,21960,6,92,10,238.695652173913,2196,23.8695652173913
+COACH_Chen_2022_SNS,50272,6,2364,11,21.2656514382403,4570.18181818182,1.93324103984002
+gilbert_meta_44,14729,6,243,22,60.6131687242798,669.5,2.75514403292181
+Ellipse_Corssley_2024,142240,6,8890,8,16,17780,2
+ds14_mokken,7564,6,541,14,13.9815157116451,540.285714285714,0.998679693688936
+smacof_pvq40,6023,6,151,40,39.887417218543,150.575,0.997185430463576
+psychtools_bfi,69492,6,2800,25,24.8185714285714,2779.68,0.992742857142857
+lessR_Mach4,7020,6,351,20,20,351,1
+sapa_personality,2039803,6,23678,696,86.1476053720753,2930.75143678161,0.123775295074821
+mental_health_malawi,35111,6,984,40,35.6819105691057,877.775,0.892047764227642
+sds,6149,6,473,13,13,473,1
+ptam1_immer,18784,6,6877,2,2.73142358586593,9392,1.36571179293297
+si09_sirt,62412,7,5201,12,12,5201,1
+SV-MAIA2_Randelovic_2021_MAIA,25086,7,449,37,55.8708240534521,678,1.51002227171492
+LOC_fadplus_goto2021,5614,7,802,7,7,802,1
+PBS_Surrain_2019_PoB,13966,7,741,23,18.8475033738192,607.217391304348,0.81945666842692
+ecps_sahm_2024_moral,143285,7,13056,11,10.9746476715686,13025.9090909091,0.997695242869875
+ecps_sahm_2024_dtl,145828,7,13299,11,10.9653357395293,13257.0909090909,0.996848703593572
+ecps_sahm_2024_distrust,130849,7,13137,13,9.96034102154221,10065.3076923077,0.76618007858017
+ecps_sahm_2024_emotion,103731,7,12988,8,7.98668001231906,12966.375,0.998335001539883
+ecps_sahm_2024_vaccine,107454,7,15372,7,6.99024199843872,15350.5714285714,0.99860599977696
+ecps_sahm_2024_sscd,181216,7,15607,24,11.6112001025181,7550.66666666667,0.483800004271588
+ecps_sahm_2024_support,47125,7,15722,3,2.99739218928889,15708.3333333333,0.999130729762965
+ecps_sahm_2024_identity,62521,7,15699,4,3.98248296069813,15630.25,0.995620740174533
+florida_twins_tech,13198,7,608,22,21.7072368421053,599.909090909091,0.986692583732057
+fractals_rating,71680,7,400,7,179.2,10240,25.6
+PTCI_Chinese_Zhan_2024,80388,7,1267,33,63.4475138121547,2436,1.92265193370166
+SABFI2_Gallardo_Pujol_2018_SWB,1676,7,419,4,4,419,1
+OS_TBMWTFS_Schubert_2023_CERQ,2436,7,174,14,14,174,1
+american_multiracial_face,117880,7,1145,2252,102.951965065502,52.3445825932504,0.0457157926578607
+ada_boredom_bieleke2022,6360,7,636,10,10,636,1
+ALSECYPIAMH_WU_2022_MIL,78420,7,7842,10,10,7842,1
+APFCompact_Ptacek_2024_AAQ_II,2093,7,299,7,7,299,1
+PROMISPME_Forrest_2021_Physical_Proxy,121418,7,1957,122,62.0429228410833,995.229508196721,0.508548547877732
+spidersBAT_grill2024,1922,7,62,31,31,62,1
+K-PCQ_Huh_2022,4291,7,358,12,11.9860335195531,357.583333333333,0.998836126629423
+FEDSP_Trzcinska_2023_PRD,990,7,197,5,5.0253807106599,198,1.00507614213198
+PROMISPME_Forrest_2021_Physical_Children,238197,7,3854,122,61.8051375194603,1952.43442622951,0.506599487864429
+bps_boredom_bieleke2022,5088,7,636,8,8,636,1
+bae_boredom_bieleke2022,10812,7,636,17,17,636,1
+MotAcademica_Ribeiro_2019,33553,7,1157,29,29,1157,1
+OS_TBMWTFS_Schubert_2023_DMW,1564,7,215,4,7.27441860465116,391,1.81860465116279
+OS_TBMWTFS_Schubert_2023_SMW,1564,7,215,4,7.27441860465116,391,1.81860465116279
+PEMAIW_Qiu_2020_MEQ,33510,7,992,30,33.7802419354839,1117,1.12600806451613
+spelling2pronounce_edwards2023,629815,7,23282,1,27.0515849153853,629815,27.0515849153853
+broadband_inventories,365077,7,2017,181,181,2017,1
+EWAS_Sanford_2024,9972,7,482,30,20.6887966804979,332.4,0.689626556016597
+gilbert_meta_45,25636,7,249,37,102.955823293173,692.864864864865,2.7825898187344
+sris_silvia2022,23840,7,221,20,107.873303167421,1192,5.39366515837104
+psychtools_Athenstaedt,42624,7,576,74,74,576,1
+political_psychology,296862,7,552,37,537.79347826087,8023.2972972973,14.5349588719154
+immer09_immer,128,7,57,20,2.24561403508772,6.4,0.112280701754386
+iat_difference,392451,7,19925,20,19.6964115432873,19622.55,0.984820577164366
+cure_data,81934,7,1134,54,72.2522045855379,1517.2962962963,1.33800378862107
+mpsycho_lakes,15458,7,194,16,79.680412371134,966.125,4.98002577319588
+gilbert_meta_42,29040,8,726,20,40,1452,2
+florida_twins_game,2326,8,591,7,3.93570219966159,332.285714285714,0.562243171380227
+PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR,1272,8,198,6,6.42424242424242,212,1.07070707070707
+PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSI,2756,8,198,13,13.9191919191919,212,1.07070707070707
+PEPABAS2C_Kubicka_2024,4846,8,200,24,24.23,201.916666666667,1.00958333333333
+WMI_Read_Han,3960,8,264,15,15,264,1
+5personalityfactors,626780,8,8936,70,70.1410026857654,8954,1.00201432408236
+SV-MAIA2_Randelovic_2021_SHS,2076,8,449,8,4.62360801781737,259.5,0.577951002227172
+PEMAIW_Qiu_2020_SWLS,5460,8,968,5,5.6404958677686,1092,1.12809917355372
+PEMAIW_Qiu_2020_MLQ,10780,8,956,10,11.2761506276151,1078,1.12761506276151
+SCS_Suh_2023_SCS,20430,8,681,30,30,681,1
+Fh_Okcsr_Roos_2022_study1_Feeling_Heard,22892,8,194,106,118,215.962264150943,1.11320754716981
+pact_project,1018383,8,4002,850,254.468515742129,1198.09764705882,0.299374724402505
+cud_stone2024,71108,9,413,44,172.174334140436,1616.09090909091,3.91305304864627
+parental_text_intervention,52809,9,3870,19,13.6457364341085,2779.42105263158,0.718196654426765
+nerdy_personality,777660,9,14955,52,52,14955,1
+riasec,10791272,9,145828,74,74,145828,1
+depression_anxiety_stress,2704700,9,39775,68,68,39775,1
+protestant_workethic,60750,9,1350,45,45,1350,1
+artistic_preferences,1040200,9,18575,56,56,18575,1
+famous_melodies,42876,9,109,5,393.357798165138,8575.2,78.6715596330275
+psychotools_gratitude,34950,9,1405,25,24.8754448398576,1398,0.995017793594306
+content_literacy_intervention_g1,569316,4,5293,116,107.560173814472,4907.89655172414,0.927242877710965
+nas_rogoza_2024_study1,11070,7,369,30,30,369,1
+nas_rogoza_2024_study2_nvs,3883,7,353,11,11,353,1
+nas_rogoza_2024_study2_ngs,4589,7,353,13,13,353,1
+nas_rogoza_2024_study2_nas,6354,7,353,18,18,353,1
+ssd12_habib_2025,2400,5,200,12,12,200,1
+rvobgvmaas_lsf_lehing_2024,6992,5,184,27,38,258.962962962963,1.40740740740741
+nas_rogoza_2024_study5_nas,38040,102,317,4,120,9510,30
+nas_rogoza_2024_study5_ngs,38040,102,317,4,120,9510,30
+nas_rogoza_2024_study5_nvs,38040,102,317,4,120,9510,30
+Veterans_Affairs_SSVF_Survey_2016-17,340723,5,5809,59,58.6543294887244,5774.96610169491,0.99414117777499
+DMCT_Addis_2020_PSIQ,3220,11,92,35,35,92,1
+Aspirations_Sonmez_2022,16555,8,265,35,62.4716981132075,473,1.78490566037736
+Veterans_Affairs_SSVF_Survey_2018-20,1475369,6,26347,56,55.9976088359206,26345.875,0.999957300641439
+Gene_likert_Aivelo_2020,10482,5,421,25,24.8978622327791,419.28,0.995914489311164
+DART_Brysbaert_2020_3_4_5,28908,3,219,264,132,109.5,0.5
+tears,24019,101,72,11,333.597222222222,2183.54545454545,30.3270202020202

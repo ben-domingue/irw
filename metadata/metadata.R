@@ -192,26 +192,28 @@ c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_",
 
 readr::write_csv(biblio, "biblio.csv")
 
-##################################################################################
-##Look for missing dictionary entries
-library(gsheet)
-library(readr)
-library(dplyr)
-irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
-metadata <- read.csv("metadata.csv")
+##deprecated. table checking now in tables.R
+## ##################################################################################
+## ##Look for missing dictionary entries
+## library(gsheet)
+## library(readr)
+## library(dplyr)
+## library(redivis)
+## irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
 
 
-tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:latest")$list_tables()
-tableName_df <- data.frame(
-  FileName = sapply(tables, function(table) table$properties$name),
-  stringsAsFactors = FALSE
-)
-tableName_df$FileName <- tolower(tableName_df$FileName)
-irw_dict$col_name_irw <- tolower(irw_dict[["table.lower"]])
+##                                         #tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:latest")$list_tables() ##latest
+## tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:next")$list_tables() ##next
+## tableName_df <- data.frame(
+##   FileName = sapply(tables, function(table) table$properties$name),
+##   stringsAsFactors = FALSE
+## )
+## tableName_df$FileName <- tolower(tableName_df$FileName)
+## ##irw_dict$col_name_irw <- tolower(irw_dict[["table.lower"]])
 
-# Find missing tables
-missing_tables <- tableName_df[!(tableName_df$FileName %in% irw_dict$table.lower), ]
-m_df = as.data.frame(list(File=missing_tables$Name))
-m_df
+## # Find missing tables
+## missing_tables <- tableName_df[!(tableName_df$FileName %in% irw_dict$table.lower), ]
+## m_df = as.data.frame(list(File=missing_tables$Name))
+## m_df
 
-##write_csv(m_df, "not_in_dict.csv")
+## ##write_csv(m_df, "not_in_dict.csv")
