@@ -266,9 +266,9 @@ with tab2:
         
         # Input fields for range selection
         start_row = st.number_input("ID Start Row Number :", min_value=0, max_value=len(data), value=0)
-        finish_row = st.number_input("ID Finish Row Number :", min_value=start_row, max_value=len(data), value=start_row)
+        finish_row = st.number_input(f"ID Finish Row Number (Last row is {len(data) - 1}):", min_value=start_row, max_value=len(data), value=start_row)
         start_col = st.number_input("ID Start Column Number :", min_value=0, max_value=len(data.columns), value=0)
-        finish_col = st.number_input("ID Finish Column Number :", min_value=start_col, max_value=len(data.columns), value=start_col)
+        finish_col = st.number_input(f"ID Finish Column Number (Last column is {len(data.columns) - 1}):", min_value=start_col, max_value=len(data.columns), value=start_col)
         
 
         # Adjusting for 0-indexing in Python
@@ -312,9 +312,9 @@ with tab3:
         
         # Input fields for range selection
         start_row = st.number_input("Item Start Row Number:", min_value=0, max_value=len(data), value=0)
-        finish_row = st.number_input("Item Finish Row Number:", min_value=start_row, max_value=len(data), value=start_row)
+        finish_row = st.number_input(f"Item Finish Row Number: (Last row is {len(data) - 1})", min_value=start_row, max_value=len(data), value=start_row)
         start_col = st.number_input("Item Start Column Number:", min_value=0, max_value=len(data.columns), value=0)
-        finish_col = st.number_input("Item Finish Column Number:", min_value=start_col, max_value=len(data.columns), value=start_col)
+        finish_col = st.number_input(f"Item Finish Column Number: (Last column is {len(data.columns) - 1})", min_value=start_col, max_value=len(data.columns), value=start_col)
         
 
         # Adjusting for 0-indexing in Python
