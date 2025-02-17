@@ -181,7 +181,15 @@ biblio <- bind_rows(biblio, new_data_rows)
 test<-biblio$table %in% irw_notpub$table
 biblio<-biblio[!test,]
 
+##no csv
+biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+     
 ## Save the updated biblio to a CSV file
+biblio<-biblio[,
+c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
+"Derived_License", "Description", "BibTex", "Reference", "DOI", 
+"URL__for_data__2", "URL (for data)")]
+
 readr::write_csv(biblio, "biblio.csv")
 
 ##################################################################################
