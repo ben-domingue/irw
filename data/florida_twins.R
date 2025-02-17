@@ -1,8 +1,3 @@
-##############################
-##NOTE: 12-10-2024 from BD. id has been replaced with person_id now that we have functionality to handle wave. this change was made manually, code does not reflect this update.
-##############################
-
-
 library(tidyverse)
 library(readr)
 
@@ -11,29 +6,30 @@ df1 <- read_csv('Wave 1 Child LDBase.csv')
 
 names(df1) <- tolower(names(df1))
 
+df1 <- df1 %>%
+  filter(twinid == 0)
+
 auths <- df1 |>
   select(student_id0,
-         contains('auth'))
-
-authsb <- auths |>
+         contains('auth')) |>
   select(student_id0,
          contains('b')) |>
   # recode invalid responses as NA, change remaining responses to 0/1 binary
   mutate(across(starts_with('auth'), ~if_else(. == 0, NA, .)),
-          across(starts_with('auth'), ~if_else(. == 1, 0, .)),
-          across(starts_with('auth'), ~if_else(. == 2, 1, .)))
+         across(starts_with('auth'), ~if_else(. == 1, 0, .)),
+         across(starts_with('auth'), ~if_else(. == 2, 1, .)))
 
 # save names of vars in this df to drop and later merge back onto the full df
-auth_names <- names(authsb[2:ncol(authsb)])
+auth_names <- names(auths[2:ncol(auths)])
 
 df1 <- df1 |>
   # drop unneeded variables
   select(-all_of(auth_names),
          -reading_grades0,
          -reading_grades1,
-         -starts_with('npar'),
-         -starts_with('nnpar'),
-         -starts_with('par'),
+         # -starts_with('npar'),
+         # -starts_with('nnpar'),
+         # -starts_with('par'),
          -starts_with('artcorrect'),
          -starts_with('artfalse'),
          -starts_with('arttpe'),
@@ -70,29 +66,51 @@ df1 <- df1 |>
          -bin,
          -ain,
          -id1,
+         -id0,
          -contains('total'),
          -starts_with('childchaos'),
-         -starts_with('bg_id'),
          -starts_with('identifier'),
          -starts_with('tid'),
          -`...1`,
-         -twinid,
          -gender_master,
          -pair_gender,
          -multiple,
          -zygparsum,
          -zyg_par,
-         -fid) |>
-  left_join(authsb, by='student_id0') |>
-  select(-starts_with('student_id')) |>
+         -fid,
+         -contains('cqbar')) |>
+  left_join(auths, by = "student_id0") |>
   # add participant ID
   rename(family_id = famid,
-         age = qage) |>
-  pivot_longer(cols = -c(id0, family_id, age),
+         cov_age = qage)
+
+df10 <- df1 %>%
+  select(bg_id0, cov_age, ends_with("0")) %>%
+  rename(id = bg_id0) %>%
+  pivot_longer(cols = -c(id, cov_age),
                names_to = 'item',
                values_to = 'resp',
-               values_drop_na = T) |>
+               values_drop_na = T) %>%
   mutate(wave = 1)
+
+df10$item <- substring(df10$item, 1, nchar(df10$item) - 1)
+
+df11 <- df1 %>%
+  select(student_id1, cov_age, ends_with("1")) %>%
+  rename(id = student_id1) %>%
+  pivot_longer(cols = -c(id, cov_age),
+               names_to = 'item',
+               values_to = 'resp',
+               values_drop_na = T) %>%
+  mutate(wave = 1)
+
+df11$item <- substring(df11$item, 1, nchar(df11$item) - 1)
+
+df1_ <- bind_rows(df10, df11)
+
+df1_ <- df1_[!(grepl("^n", df1_$item) & !grepl("^nes", df1_$item)),] # remove reverted scales
+
+unique(df1_$item)
 
 
 # ----- WAVE 2 DATASET
@@ -100,9 +118,11 @@ df1 <- df1 |>
 df2 <- read_csv('wave2multitwinq718 LDBase_0.csv')
 names(df2) <- tolower(names(df2))
 
+df2 <- df2 %>%
+  filter(twinid == 0)
+
 df2 <- df2 |>
   select(-`...1`,
-         -starts_with('bg_id'),
          -starts_with('bfcrr_twin'),
          -contains('hair'),
          -contains('eyes'),
@@ -118,6 +138,7 @@ df2 <- df2 |>
          -contains('info_sharing'),
          -contains('total'),
          -id1,
+         -id0,
          -ain,
          -bin,
          -zygparsum,
@@ -152,13 +173,34 @@ df2 <- df2 |>
          -starts_with('bgritconsistency'),
          -starts_with('bgritperseverance'),
          -starts_with('bart')) |>
-  rename(age = bq2age) |>
-  pivot_longer(cols = -c(id0, age, famid),
+  rename(cov_age = bq2age)
+
+df20 <- df2 %>%
+  select(bg_id0, cov_age, ends_with("0")) %>%
+  rename(id = bg_id0) %>%
+  pivot_longer(cols = -c(id, cov_age),
                names_to = 'item',
                values_to = 'resp',
-               values_drop_na = T) |>
-  mutate(wave = 2) |>
-  rename(family_id = famid)
+               values_drop_na = T) %>%
+  mutate(wave = 2)
+
+
+df21 <- df2 %>%
+  select(bg_id1, cov_age, ends_with("1")) %>%
+  rename(id = bg_id1) %>%
+  pivot_longer(cols = -c(id, cov_age),
+               names_to = 'item',
+               values_to = 'resp',
+               values_drop_na = T) %>%
+  mutate(wave = 2)
+
+df2_ <- bind_rows(df20, df21)
+
+df2_$item <- substring(df2_$item, 2, nchar(df2_$item) - 1)
+
+df2_ <- df2_[!(grepl("^n", df2_$item) & !grepl("^nes", df2_$item)),] 
+
+df2_
 
 
 # ------- WAVE 3 DATASET
@@ -167,13 +209,16 @@ df3 <- read_csv('w3multitwinq818 LDBase.csv')
 
 names(df3) <- tolower(names(df3))
 
+df3 <- df3 %>%
+  filter(twinid == 0)
+
 df3 <- df3 |>
   select(-`...1`,
-         -starts_with('bg_id'),
          -twinid,
          -contains('gender'),
          -multiple,
          -id1,
+         -id0,
          -fid,
          -contains('hair'),
          -contains('eyes'),
@@ -208,45 +253,120 @@ df3 <- df3 |>
          -starts_with('cleq_events'),
          -contains('cart'),
          -starts_with('cweeklytv')) |>
-  rename(age = cq3age) |>
+  rename(cov_age = cq3age) |>
   mutate(across(contains('hwk'), ~ . + 1),
-         across(contains('grades'), ~if_else(. == 7, NA, .))) |>
-  pivot_longer(cols = -c(id0, age, famid),
+         across(contains('grades'), ~if_else(. == 7, NA, .))) 
+
+df30 <- df3 %>%
+  select(bg_id0, cov_age, ends_with("0")) %>%
+  rename(id = bg_id0) %>%
+  pivot_longer(cols = -c(id, cov_age),
                names_to = 'item',
                values_to = 'resp',
-               values_drop_na = T) |>
-  mutate(wave = 3) |>
-  rename(family_id = famid)
+               values_drop_na = T) %>%
+  mutate(wave = 3)
 
+
+df31 <- df3 %>%
+  select(bg_id1, cov_age, ends_with("1")) %>%
+  rename(id = bg_id1) %>%
+  pivot_longer(cols = -c(id, cov_age),
+               names_to = 'item',
+               values_to = 'resp',
+               values_drop_na = T) %>%
+  mutate(wave = 3)
+
+df3_ <- bind_rows(df30, df31)
+
+df3_$item <- substring(df3_$item, 2, nchar(df3_$item) - 1)
+
+df3_ <- df3_[!(grepl("^n", df3_$item) & !grepl("^nes", df3_$item)),]
 
 # ---- merge three waves datasets
 
-df <- rbind(df1, df2, df3)
+df <- rbind(df1_, df2_, df3_)
 
-# create item IDs for each survey item
-items <- as.data.frame(unique(df$item))
-items <- items |>
-  mutate(item_id = row_number())
+unique(df$item)
 
-ids <- as.data.frame(unique(df$id0))
-ids <- ids |>
-  mutate(id = row_number())
+print(unique(df$item), max = 2000)
 
-df <- df |>
-  # merge item IDs with df
-  left_join(items, 
-            by=c("item" = "unique(df$item)")) |>
-  left_join(ids, by=c('id0' = "unique(df$id0)"))  |>
-  mutate(person_id = id,
-         id = paste0(person_id, '_', wave)) |>
-  # drop character item variable
-  select(person_id, id, family_id, wave, age, item_id, resp) |>
-  # use item_id column as the item column
-  rename(item = item_id) |>
-  arrange(person_id, item, wave)
+df_chaos <- df %>%
+  filter(grepl("chaos", item))
 
-# print response values
-table(df$resp)
+df_grades <- df %>%
+  filter(grepl("grades", item))
 
-# save df to Rdata file
-save(df, file="florida_twins.Rdata")
+df_nes <- df %>%
+  filter(grepl("nes", item))
+
+df_par <- df %>%
+  filter(grepl("par", item))
+
+df_class <- df %>%
+  filter(grepl("class", item))
+
+df_sch <- df %>%
+  filter(grepl("sch", item))
+
+df_read <- df %>%
+  filter(grepl("read", item))
+
+df_panas <- df %>%
+  filter(grepl("panas", item))
+
+df_cads <- df %>%
+  filter(grepl("cads", item))
+
+df_friends <- df %>%
+  filter(grepl("friends", item))
+
+df_auth <- df %>%
+  filter(grepl("auth", item))
+
+df_pals <- df %>%
+  filter(grepl("pals", item))
+
+df_dweck <- df %>%
+  filter(grepl("dweck", item))
+
+df_grit <- df %>%
+  filter(grepl("grit", item))
+
+df_hwk <- df %>%
+  filter(grepl("hwk", item))
+
+df_tech <- df %>%
+  filter(grepl("tech", item))
+
+df_media <- df %>%
+  filter(grepl("media", item))
+
+df_dbi <- df %>%
+  filter(grepl("dbi", item))
+
+df_leq <- df %>%
+  filter(grepl("leq", item))
+
+df_game <- df %>%
+  filter(grepl("game", item))
+
+write.csv(df_chaos, "florida_twins_chaos.csv", row.names=FALSE)
+write.csv(df_grades, "florida_twins_grades.csv", row.names=FALSE)
+write.csv(df_nes, "florida_twins_nes.csv", row.names=FALSE)
+write.csv(df_par, "florida_twins_par.csv", row.names=FALSE)
+write.csv(df_class, "florida_twins_class.csv", row.names=FALSE)
+write.csv(df_sch, "florida_twins_sch.csv", row.names=FALSE)
+write.csv(df_read, "florida_twins_read.csv", row.names=FALSE)
+write.csv(df_panas, "florida_twins_panas.csv", row.names=FALSE)
+write.csv(df_cads, "florida_twins_cads.csv", row.names=FALSE)
+write.csv(df_friends, "florida_twins_friends.csv", row.names=FALSE)
+write.csv(df_auth, "florida_twins_auth.csv", row.names=FALSE)
+write.csv(df_pals, "florida_twins_pals.csv", row.names=FALSE)
+write.csv(df_dweck, "florida_twins_dweck.csv", row.names=FALSE)
+write.csv(df_grit, "florida_twins_grit.csv", row.names=FALSE)
+write.csv(df_hwk, "florida_twins_hwk.csv", row.names=FALSE)
+write.csv(df_tech, "florida_twins_tech.csv", row.names=FALSE)
+write.csv(df_media, "florida_twins_media.csv", row.names=FALSE)
+write.csv(df_dbi, "florida_twins_dbi.csv", row.names=FALSE)
+write.csv(df_leq, "florida_twins_leq.csv", row.names=FALSE)
+write.csv(df_game, "florida_twins_game.csv", row.names=FALSE)
