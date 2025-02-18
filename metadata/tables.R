@@ -38,6 +38,20 @@ x[n<4,]
 
 cnt<-base::table(x$table)
 names(cnt)[cnt>1]
+for (i in 1:length(L)) {
+    tab<-base::table(L[[i]])
+    print(tab[tab>1])
+}
 
-
+                                  table red gs bib met
+130                    duolingo__listen  NA  1   1  NA
+131               duolingo__reverse_tap  NA  1   1  NA
+132         duolingo__reverse_translate  NA  1   1  NA
+316          genpsych_russell_2024_gpt3   1 NA  NA   1
+317        genpsych_russell_2024_gpt3_5  NA  1   1  NA
+318        genpsych_russell_2024_gpt3.5  NA NA   1  NA
+319        genpsych_russell_2024_gpt3.5  NA NA   1  NA
+616                        promispfue_2   1 NA  NA   1
+617 promispfue_2_0e_gershon_2019_promis  NA  1   1  NA
+618 promispfue_2.0e_gershon_2019_promis  NA NA   1  NA
 

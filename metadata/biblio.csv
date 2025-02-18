@@ -4066,3 +4066,15 @@ Adherence_Zissette_2018_SDB,NA,NA,NA,NA,Social desirability bias,"@misc{https://
   year = {2018}
 }
 ","Zissette, Seth, 2018, ""Development and Pyschometric Validation of Measures for Vaginal Ring Adherence Survey"", https://doi.org/10.7910/DVN/5W9HXM, Harvard Dataverse, V1, UNF:6:mDWjaac6I49x5MDOEq2dDw== [fileUNF]",10.7910/DVN/5W9HXM,NA,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5W9HXM
+PROMISPFUE_2_0E_Gershon_2019_PROMIS,NA,NA,NA,NA,"PROMIS Physical Function - Short, PROMIS Physical Function - Upper Extermity, and Flexilevel Scale of Shoulder Function","@misc{https://doi.org/10.7910/dvn/ihnirh,
+  doi = {10.7910/DVN/IHNIRH},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/IHNIRH},
+  author = {Gershon, Richard and Kaat, Aaron},
+  keywords = {Medicine, Health and Life Sciences, Social Sciences, PROMIS, Physical Function, Upper Extremity},
+  title = {PROMIS Physical Function Upper Extremity v2.0 Extension},
+  publisher = {Harvard Dataverse},
+  year = {2019}
+}
+","Gershon, Richard; Kaat, Aaron, 2019, ""PROMIS Physical Function Upper Extremity v2.0 Extension"", https://doi.org/10.7910/DVN/IHNIRH, Harvard Dataverse, V1, UNF:6:BsY5AJjLMU1s4Yw2kBRneg== [fileUNF]",10.7910/DVN/IHNIRH,NA,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IHNIRH
+genpsych_russell_2024_gpt3_5,NA,NA,NA,NA,LLM-generated big 5 inventory," @article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
+","Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",10.31234/osf.io/fgbj4,NA,https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e
