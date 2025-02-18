@@ -32,9 +32,10 @@ AOMT_BR_SF_EDPANAB_Geiger_2021_RF,14196,6,286,28,49.6363636363636,507,1.77272727
 APFCompact_Ptacek_2024_AAQ_II,2093,7,299,7,7,299,1,id| item| resp
 APFCompact_Ptacek_2024_DASS-21,6279,4,299,21,21,299,1,id| item| resp
 APFCompact_Ptacek_2024_SWLS,1495,7,299,5,5,299,1,id| item| resp
+art,70100,2,1402,50,50,1402,1,id| item| resp
 artistic_preferences,1040200,9,18575,56,56,18575,1,id| item| resp| rt
 aslec_insomnia_wang2025,13730280,5,572095,24,24,572095,1,id| item| resp
-Aspirations_Sonmez_2023,16555,8,265,35,62.4716981132075,473,1.78490566037736,id| item| resp
+Aspirations_Sonmez_2022,16555,8,265,35,62.4716981132075,473,1.78490566037736,id| item| resp
 audit_BrummerHoffman_2021,5484,5,1828,3,3,1828,1,id| group| date| age| item| resp
 autonomysupport_mokken,1813,5,14,7,129.5,259,18.5,id| rater| item| resp
 bae_boredom_bieleke2022,10812,7,636,17,17,636,1,id| item| resp
@@ -103,7 +104,7 @@ CV_OASIS_ODSIS_PPE_Novak_2020_DSES,17325,6,2474,7,7.00282942603072,2475,1.000404
 CV_OASIS_ODSIS_PPE_Novak_2020_PANAS,29160,5,1458,20,20,1458,1,id| item| resp
 CV_OASIS_ODSIS_PPE_Novak_2020_RSES,23740,4,2373,10,10.0042140750105,2374,1.00042140750105,id| item| resp| group
 DART_Brysbaert_2020_1,26268,2,199,132,132,199,1,id| gender| age| mother_language| item| resp
-DART_Brysbaert_2020_3.4.5,28908,3,219,264,132,109.5,0.5,id| item| resp| group
+DART_Brysbaert_2020_3_4_5,28908,3,219,264,132,109.5,0.5,id| item| resp| group
 dass_Thiyagarajan2022,20391,4,971,21,21,971,1,id| item| resp
 DbdIFdM_Puga_2021,7602,4,543,14,14,543,1,id| item| resp
 dd_rotation,1178,2,121,10,9.73553719008265,117.8,0.973553719008264,id| item| rt| resp
@@ -116,7 +117,7 @@ det_naismith_2023,3438,1152,573,3,6,1146,2,id| item| cov_gender| cov_test_taker_
 difnlr_msatb,28140,2,1407,20,20,1407,1,cov_gender| resp| item| id
 disgust_berger2014,35350,6,1414,25,25,1414,1,id| item| resp| cov_age| cov_gender| cov_education| cov_religion| cov_political
 DMCT_Addis_2020_MCT,4048,2,92,44,44,92,1,id| item| resp| rt
-DMCT_Addis_2020_PSYQ,3220,11,92,35,35,92,1,id| item| resp
+DMCT_Addis_2020_PSIQ,3220,11,92,35,35,92,1,id| item| resp
 DMCT_Addis_2020_SUIS,1656,5,92,18,18,92,1,id| item| resp
 ds14_mokken,7564,6,541,14,13.9815157116451,540.285714285714,0.998679693688936,resp| age| item| id
 dumas_Organisciak_2022,21960,6,92,10,238.695652173913,2196,23.8695652173913,id| item| verbatim| rater| resp
@@ -268,7 +269,7 @@ GART_Grolig_2020,9000,2,120,75,75,120,1,id| age| gender| item| resp
 GBJW_fadplus_goto2021,5614,6,802,7,7,802,1,id| age| gender| item| resp
 geiser_tam,12456,2,519,24,24,519,1,resp| item| id
 gender_roles,14017212,6,318573,44,44,318573,1,id| item| resp
-Gene_scale_Aivelo_2020,10482,5,421,25,24.8978622327791,419.28,0.995914489311164,id| item| resp
+Gene_likert_Aivelo_2020,10482,5,421,25,24.8978622327791,419.28,0.995914489311164,id| item| resp
 genpsych_russell_2024_gemma,28028,6,1001,28,28,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
 genpsych_russell_2024_gpt3,31031,6,1001,31,31,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
 genpsych_russell_2024_gpt4o,34965,6,999,35,35,999,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
@@ -681,6 +682,7 @@ SV-MAIA2_Randelovic_2021_MAIA,25086,7,449,37,55.8708240534521,678,1.510022271714
 SV-MAIA2_Randelovic_2021_SHS,2076,8,449,8,4.62360801781737,259.5,0.577951002227172,id| item| resp| date| wave
 swmd_mokken,4557,5,30,7,151.9,651,21.7,resp| item| rater| id
 tdri,67641,2,1803,56,37.5158069883527,1207.875,0.669925124792013,resp| item| id
+tears,24019,101,72,11,333.597222222222,2183.54545454545,30.3270202020202,id| rater| stimulus| phase| item| resp
 tenseness_pcmrs,16336,5,2042,8,8,2042,1,resp| item| id
 teq_novak_2021_bfin,1320,5,165,8,8,165,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
 teq_novak_2021_scbs,3220,7,644,5,5,644,1,id| cov_Gender| cov_Age| cov_Family_status| cov_Education| cov_Economical_status| item| resp
@@ -710,8 +712,8 @@ VCISM_Polish_Trzcinska_2023,2070,5,104,12,19.9038461538462,172.5,1.6586538461538
 VEI_Brazillian_Shiramizu_2018_EI,9772,6,698,14,14,698,1,id| item| resp
 VEI_Brazillian_Shiramizu_2018_IRI,19544,6,698,28,28,698,1,id| item| resp
 verbagg,7584,2,316,24,24,316,1,resp| item| id
-Veterans.Affairs.SSVF.Survey.2016-17,340723,5,5809,59,58.6543294887244,5774.96610169491,0.99414117777499,id| item| resp
-Veterans.Affairs.SSVF.Survey.2018-20,1475369,6,26347,56,55.9976088359206,26345.875,0.999957300641439,id| item| resp
+Veterans_Affairs_SSVF_Survey_2016-17,340723,5,5809,59,58.6543294887244,5774.96610169491,0.99414117777499,id| item| resp
+Veterans_Affairs_SSVF_Survey_2018-20,1475369,6,26347,56,55.9976088359206,26345.875,0.999957300641439,id| item| resp
 vocab_assessment_3_to_8_year_old_children,30212,2,581,52,52,581,1,cov_age_group| cov_age| itemcov_group| itemcov_aoa_german_comb| cov_gender| itemcov_german| itemcov_order| itemcov_source| subjid| chosencategory| chosenposition| targetword| chosenword| resp| rt| item| id
 vocabulary_iq,912975,3,12173,75,75,12173,1,id| item| resp
 VSOCFP_Sebo_2024,6352,8,794,8,8,794,1,id| item| resp

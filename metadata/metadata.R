@@ -156,8 +156,10 @@ fetch_bibtex_from_doi <- function(filename, doi) {
   }
 }
 
+
 # Google Spreadsheet URL or Sheet ID
 irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
 
 # Read the current biblio file
 user <- redivis$user("bdomingu")
@@ -169,35 +171,49 @@ head(biblio)
 # Find rows in dictionary whose Filename is not in biblio
 new_data_rows <- irw_dict[!(irw_dict$table %in% biblio$table), ]
 new_data_rows <- new_data_rows |>
-  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-  rename(DOI=`DOI (for paper)`)
+select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+rename(DOI=`DOI (for paper)`)
 new_data_rows <- new_data_rows %>%
-  mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
+    mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
 biblio <- bind_rows(biblio, new_data_rows)
 
-# Save the updated biblio to a CSV file
+##remove nonpublic elements
+test<-biblio$table %in% irw_notpub$table
+biblio<-biblio[!test,]
+
+##no csv
+biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+     
+## Save the updated biblio to a CSV file
+biblio<-biblio[,
+c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
+"Derived_License", "Description", "BibTex", "Reference", "DOI", 
+"URL__for_data__2", "URL (for data)")]
+
 readr::write_csv(biblio, "biblio.csv")
 
-##################################################################################
-##Look for missing dictionary entries
-library(gsheet)
-library(readr)
-library(dplyr)
-irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
-metadata <- read.csv("metadata.csv")
+##deprecated. table checking now in tables.R
+## ##################################################################################
+## ##Look for missing dictionary entries
+## library(gsheet)
+## library(readr)
+## library(dplyr)
+## library(redivis)
+## irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
 
 
-tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:latest")$list_tables()
-tableName_df <- data.frame(
-  FileName = sapply(tables, function(table) table$properties$name),
-  stringsAsFactors = FALSE
-)
-tableName_df$FileName <- tolower(tableName_df$FileName)
-irw_dict$col_name_irw <- tolower(irw_dict[["table.lower"]])
+##                                         #tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:latest")$list_tables() ##latest
+## tables <- redivis$user("datapages")$dataset("item_response_warehouse:as2e:next")$list_tables() ##next
+## tableName_df <- data.frame(
+##   FileName = sapply(tables, function(table) table$properties$name),
+##   stringsAsFactors = FALSE
+## )
+## tableName_df$FileName <- tolower(tableName_df$FileName)
+## ##irw_dict$col_name_irw <- tolower(irw_dict[["table.lower"]])
 
-# Find missing tables
-missing_tables <- tableName_df[!(tableName_df$FileName %in% irw_dict$table.lower), ]
-m_df = as.data.frame(list(File=missing_tables$Name))
-m_df
+## # Find missing tables
+## missing_tables <- tableName_df[!(tableName_df$FileName %in% irw_dict$table.lower), ]
+## m_df = as.data.frame(list(File=missing_tables$Name))
+## m_df
 
-##write_csv(m_df, "not_in_dict.csv")
+## ##write_csv(m_df, "not_in_dict.csv")
