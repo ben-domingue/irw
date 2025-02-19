@@ -271,7 +271,7 @@ geiser_tam,12456,2,519,24,24,519,1,resp| item| id
 gender_roles,14017212,6,318573,44,44,318573,1,id| item| resp
 Gene_likert_Aivelo_2020,10482,5,421,25,24.8978622327791,419.28,0.995914489311164,id| item| resp
 genpsych_russell_2024_gemma,28028,6,1001,28,28,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
-genpsych_russell_2024_gpt3,31031,6,1001,31,31,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
+genpsych_russell_2024_gpt3_5,31031,6,1001,31,31,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
 genpsych_russell_2024_gpt4o,34965,6,999,35,35,999,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
 genpsych_russell_2024_llama3,30030,6,1001,30,30,1001,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
 genpsych_russell_2024_mixtral,31936,6,998,32,32,998,1,cov_age| cov_english| cov_hispanic| cov_race| cov_gender| id| item| resp
@@ -348,6 +348,7 @@ gilbert_meta_72,435609,2,5388,53,80.847995545657,8219.03773584906,1.525433878219
 gilbert_meta_73,358304,2,5386,36,66.52506498329,9952.88888888889,1.84791847175806,cluster_id| id| item| wave| resp| cov_female| cov_age| cov_grade| treat| e2_std12| e2_std35| test| item_grade
 gilbert_meta_74,29400,3,1225,12,24,2450,2,id| cluster_id| item| wave| resp| treat| std_baseline
 gilbert_meta_75,3550,2,142,10,25,355,2.5,id| block_id| item| wave| resp| treat| cov_female| cov_party| cov_white| cov_asian
+gilbert_meta_76,66768,3,428,78,156,856,2,id| cluster_id| block_id| cov_grade| treat| cov_age_wave1| cov_age_wave2| cov_male| item| resp| wave
 gilbert_meta_8,37182,2,1335,29,27.8516853932584,1282.13793103448,0.960402944595118,id| cluster_id| block_id| item| resp| treat| tot| std_baseline| cov_black_num| cov_hispanic_num| cov_other_num| cov_male_num| cov_lep_num| cov_iep_num| cov_ses_low| cov_ses_med| cov_ses_high
 gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
 graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
@@ -565,7 +566,7 @@ promis1wave1_haq,37677,4,1590,24,23.6962264150943,1569.875,0.987342767295597,id|
 promis1wave1_pain,434103,5,15961,168,27.197731971681,2583.94642857143,0.161891261736196,id| item| resp
 promis1wave1_physicalfunction,140837,5,14954,56,9.41801524675672,2514.94642857143,0.168178843692084,id| item| resp
 promis1wave1_social,292014,5,15045,112,19.409371884347,2607.26785714286,0.173297963253098,id| item| resp
-PROMISPFUE_2,20400,6,600,34,34,600,1,id| item| resp
+promispfue_2_0e_gershon_2019_promis,20400,6,600,34,34,600,1,id| item| resp
 PROMISPME_Forrest_2021_Family_Children,208598,6,1845,113,113.061246612466,1846,1.00054200542005,id| item| resp
 PROMISPME_Forrest_2021_Family_Proxy,208598,6,1845,113,113.061246612466,1846,1.00054200542005,id| item| resp
 PROMISPME_Forrest_2021_GHGlobal_Children,65430,7,3635,18,18,3635,1,id| item| resp

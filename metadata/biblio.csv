@@ -33,7 +33,7 @@ Solis, Jonathan A.; Philip D. Waggoner, 2020, ""Replication Data for: Measuring 
   year = {2020}
 }
 ",NA,NA,NA,NA
-PROMISPFUE_2.0E_Gershon_2019_PROMIS,10.7910/DVN/IHNIRH,"Gershon, Richard; Kaat, Aaron, 2019, ""PROMIS Physical Function Upper Extremity v2.0 Extension"", https://doi.org/10.7910/DVN/IHNIRH, Harvard Dataverse, V1, UNF:6:BsY5AJjLMU1s4Yw2kBRneg== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IHNIRH,CC 1.0,"PROMIS Physical Function - Short, PROMIS Physical Function - Upper Extermity, and Flexilevel Scale of Shoulder Function","@misc{https://doi.org/10.7910/dvn/ihnirh,
+PROMISPFUE_2_0E_Gershon_2019_PROMIS,10.7910/DVN/IHNIRH,"Gershon, Richard; Kaat, Aaron, 2019, ""PROMIS Physical Function Upper Extremity v2.0 Extension"", https://doi.org/10.7910/DVN/IHNIRH, Harvard Dataverse, V1, UNF:6:BsY5AJjLMU1s4Yw2kBRneg== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IHNIRH,CC 1.0,"PROMIS Physical Function - Short, PROMIS Physical Function - Upper Extermity, and Flexilevel Scale of Shoulder Function","@misc{https://doi.org/10.7910/dvn/ihnirh,
   doi = {10.7910/DVN/IHNIRH},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/IHNIRH},
   author = {Gershon, Richard and Kaat, Aaron},
@@ -456,36 +456,6 @@ riasec,NA,(2018). Holland Code (RIASEC) Test [dataset and codebook]. http://open
   url = {http://openpsychometrics.org/_rawdata/RIASEC_data12Dec2018.zip},
   howpublished = {\\url{http://openpsychometrics.org/_rawdata/}}
 }",NA,NA,NA,NA
-duolingo__listen,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,CC BY 4.0,Modeling of second language acquisition,"@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-",NA,NA,NA,NA
-duolingo__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,CC BY 4.0,Modeling of second language acquisition,"@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-",NA,NA,NA,NA
-duolingo__reverse_translate,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,CC BY 4.0,Modeling of second language acquisition,"@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-",NA,NA,NA,NA
 bhs_floreskanter2021,10.17632/9mjg54kcwv.5,"Flores-Kanter, Pablo Ezequiel (2021), “Datset for Internal structure of Beck Hopelessness Scale: An analysis of method effects using the CT-C(M–1) model”, Mendeley Data, V5, doi: 10.17632/9mjg54kcwv.5",https://data.mendeley.com/datasets/9mjg54kcwv/5,CC BY 4.0,Beck Hopelessness Scale (BHS) and suicidal ideation (SI) in an Argentine population.,"@misc{https://doi.org/10.17632/9mjg54kcwv.5,
   doi = {10.17632/9MJG54KCWV.5},
   url = {https://data.mendeley.com/datasets/9mjg54kcwv/5},
@@ -3772,10 +3742,6 @@ genpsych_russell_2024_gemma,10.31234/osf.io/fgbj4,"Russell-Lasalandra, L. L., Ch
 ",NA,NA,NA,NA
 genpsych_russell_2024_gpt4o,10.31234/osf.io/fgbj4,"Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",NA,NA,NA,"@article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
 ",NA,NA,NA,NA
-genpsych_russell_2024_gpt3.5,10.31234/osf.io/fgbj4,"Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",NA,NA,NA,"@article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
-",NA,NA,NA,NA
-genpsych_russell_2024_gpt3.5,NA,"Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e,CC0 1.0,LLM-generated big 5 inventory,"@article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
-",NA,NA,NA,NA
 genpsych_russell_2024_llama3,NA,"Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e,CC0 1.0,LLM-generated big 5 inventory,"@article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
 ",NA,NA,NA,NA
 genpsych_russell_2024_gemma,NA,"Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e,CC0 1.0,LLM-generated big 5 inventory,"@article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
@@ -4065,16 +4031,8 @@ Adherence_Zissette_2018_SDB,NA,NA,NA,NA,Social desirability bias,"@misc{https://
   publisher = {Harvard Dataverse},
   year = {2018}
 }
-","Zissette, Seth, 2018, ""Development and Pyschometric Validation of Measures for Vaginal Ring Adherence Survey"", https://doi.org/10.7910/DVN/5W9HXM, Harvard Dataverse, V1, UNF:6:mDWjaac6I49x5MDOEq2dDw== [fileUNF]",10.7910/DVN/5W9HXM,NA,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/5W9HXM
-PROMISPFUE_2_0E_Gershon_2019_PROMIS,NA,NA,NA,NA,"PROMIS Physical Function - Short, PROMIS Physical Function - Upper Extermity, and Flexilevel Scale of Shoulder Function","@misc{https://doi.org/10.7910/dvn/ihnirh,
-  doi = {10.7910/DVN/IHNIRH},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/IHNIRH},
-  author = {Gershon, Richard and Kaat, Aaron},
-  keywords = {Medicine, Health and Life Sciences, Social Sciences, PROMIS, Physical Function, Upper Extremity},
-  title = {PROMIS Physical Function Upper Extremity v2.0 Extension},
-  publisher = {Harvard Dataverse},
-  year = {2019}
-}
-","Gershon, Richard; Kaat, Aaron, 2019, ""PROMIS Physical Function Upper Extremity v2.0 Extension"", https://doi.org/10.7910/DVN/IHNIRH, Harvard Dataverse, V1, UNF:6:BsY5AJjLMU1s4Yw2kBRneg== [fileUNF]",10.7910/DVN/IHNIRH,NA,https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/IHNIRH
+","Zissette, Seth, 2018, ""Development and Pyschometric Validation of Measures for Vaginal Ring Adherence Survey"", https://doi.org/10.7910/DVN/5W9HXM, Harvard Dataverse, V1, UNF:6:mDWjaac6I49x5MDOEq2dDw== [fileUNF]",10.7910/DVN/5W9HXM,NA,NA
 genpsych_russell_2024_gpt3_5,NA,NA,NA,NA,LLM-generated big 5 inventory," @article{Russell_Lasalandra_2024, title={Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation}, url={http://dx.doi.org/10.31234/osf.io/fgbj4}, DOI={10.31234/osf.io/fgbj4}, publisher={Center for Open Science}, author={Russell-Lasalandra, Lara Lee and Christensen, Alexander P. and Golino, Hudson}, year={2024}, month=sep }
-","Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",10.31234/osf.io/fgbj4,NA,https://osf.io/zcytb/?view_only=79d2c8bf12c24393863d60c4143f8a0e
+","Russell-Lasalandra, L. L., Christensen, A. P., & Golino, H. (2024, September 12). Generative Psychometrics via AI-GENIE: Automatic Item Generation and Validation via Network-Integrated Evaluation. https://doi.org/10.31234/osf.io/fgbj4",10.31234/osf.io/fgbj4,NA,NA
+gilbert_meta_76,NA,NA,NA,NA,"Test of Early Mathematics Ability, third edition, or TEMA-3"," @article{Thai_2021, title={Accelerating Early Math Learning with Research-Based Personalized Learning Games: A Cluster Randomized Controlled Trial}, volume={15}, ISSN={1934-5739}, url={http://dx.doi.org/10.1080/19345747.2021.1969710}, DOI={10.1080/19345747.2021.1969710}, number={1}, journal={Journal of Research on Educational Effectiveness}, publisher={Informa UK Limited}, author={Thai, Khanh-Phuong and Bang, Hee Jin and Li, Linlin}, year={2021}, month=sep, pages={28–51} }
+","Thai, K. P., Bang, H. J., & Li, L. (2022). Accelerating early math learning with research-based personalized learning games: A cluster randomized controlled trial. Journal of Research on Educational Effectiveness, 15(1), 28-51.",10.1080/19345747.2021.1969710,NA,https://data.mendeley.com/datasets/gf9dc6zxdx/5

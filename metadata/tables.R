@@ -43,15 +43,33 @@ for (i in 1:length(L)) {
     print(tab[tab>1])
 }
 
-                                  table red gs bib met
-130                    duolingo__listen  NA  1   1  NA
-131               duolingo__reverse_tap  NA  1   1  NA
-132         duolingo__reverse_translate  NA  1   1  NA
-316          genpsych_russell_2024_gpt3   1 NA  NA   1
-317        genpsych_russell_2024_gpt3_5  NA  1   1  NA
-318        genpsych_russell_2024_gpt3.5  NA NA   1  NA
-319        genpsych_russell_2024_gpt3.5  NA NA   1  NA
-616                        promispfue_2   1 NA  NA   1
-617 promispfue_2_0e_gershon_2019_promis  NA  1   1  NA
-618 promispfue_2.0e_gershon_2019_promis  NA NA   1  NA
 
+## ###################################################33
+## ##eliminating duplicate biblio.csv entries
+
+## met<-read.csv("metadata.csv")
+## length(unique(met$table))
+## bib<-read.csv("biblio.csv")
+## tab<-base::table(bib$table)
+## nm<-names(tab)[tab>1]
+## hold<-bib[!(bib$table %in% nm),]
+## x<-bib[bib$table %in% nm,]
+## length(unique(x$table))
+## L<-split(x,x$table)
+## f<-function(z) {
+##     z2<-z[!is.na(z[,2]),]
+##     if (nrow(z2)==1) tr<-z2 else {
+##                                 z2<-z[!is.na(z$Derived_License),]
+##                                 if (nrow(z2)==1) tr<-z2
+##                             }
+##     tr
+## }
+## L<-lapply(L,f)
+## table(sapply(L,nrow))
+
+## bib<-data.frame(rbind(hold,do.call("rbind",L)))
+## length(unique(bib$table))
+## test<-tolower(bib$table) %in% tolower(met$table)
+## bib[!test,]
+
+## readr::write_csv(bib, "biblio.csv")
