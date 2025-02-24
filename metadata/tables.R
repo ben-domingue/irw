@@ -45,31 +45,32 @@ for (i in 1:length(L)) {
 
 
 ## ###################################################33
-## ##eliminating duplicate biblio.csv entries
+##eliminating duplicate biblio.csv entries
 
-## met<-read.csv("metadata.csv")
-## length(unique(met$table))
-## bib<-read.csv("biblio.csv")
-## tab<-base::table(bib$table)
-## nm<-names(tab)[tab>1]
-## hold<-bib[!(bib$table %in% nm),]
-## x<-bib[bib$table %in% nm,]
-## length(unique(x$table))
-## L<-split(x,x$table)
-## f<-function(z) {
-##     z2<-z[!is.na(z[,2]),]
-##     if (nrow(z2)==1) tr<-z2 else {
-##                                 z2<-z[!is.na(z$Derived_License),]
-##                                 if (nrow(z2)==1) tr<-z2
-##                             }
-##     tr
-## }
-## L<-lapply(L,f)
-## table(sapply(L,nrow))
+met<-read.csv("metadata.csv")
+length(unique(met$table))
+bib<-read.csv("biblio.csv")
+tab<-base::table(bib$table)
+nm<-names(tab)[tab>1]
+hold<-bib[!(bib$table %in% nm),]
+x<-bib[bib$table %in% nm,]
+length(unique(x$table))
+L<-split(x,x$table)
+f<-function(z) {
+    z2<-z[!is.na(z[,2]),]
+    if (nrow(z2)==1) tr<-z2 else {
+                                z2<-z[!is.na(z$Derived_License),]
+                                if (nrow(z2)==1) tr<-z2
+                            }
+    tr
+}
+L<-lapply(L,f)
+table(sapply(L,nrow))
 
-## bib<-data.frame(rbind(hold,do.call("rbind",L)))
-## length(unique(bib$table))
-## test<-tolower(bib$table) %in% tolower(met$table)
-## bib[!test,]
 
-## readr::write_csv(bib, "biblio.csv")
+bib<-data.frame(rbind(hold,do.call("rbind",L)))
+length(unique(bib$table))
+test<-tolower(bib$table) %in% tolower(met$table)
+bib[!test,]
+
+readr::write_csv(bib, "biblio.csv")

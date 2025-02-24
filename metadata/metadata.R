@@ -169,7 +169,7 @@ biblio <- biblio_table$to_tibble()
 head(biblio)
 
 # Find rows in dictionary whose Filename is not in biblio
-new_data_rows <- irw_dict[!(irw_dict$table %in% biblio$table), ]
+new_data_rows <- irw_dict[!(tolower(irw_dict$table) %in% tolower(biblio$table)), ]
 new_data_rows <- new_data_rows |>
 select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
 rename(DOI=`DOI (for paper)`)
