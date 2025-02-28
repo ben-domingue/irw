@@ -1,7 +1,3 @@
-##from arthur
-https://domingue-lab.slack.com/archives/D07NUH5GE5S/p1740447695711419
-compare to metadata_old
-
 ##################################################################################
 ##Construct metadata.csv
 
@@ -44,36 +40,42 @@ if (length(ii)>0) {
 dim(meta)
 
 f<-function(tab) {
-  print(tab)
-  variables <- tab$list_variables() 
-  nms<-sapply(variables,function(x) x$get()$properties$name)
-  stats<-lapply(variables,function(x) x$properties$statistics) #stats<-lapply(variables,function(x) x$get()$properties$statistics)
-  names(stats)<-nms
-  n_responses<-stats$resp$count
-  if (is.null(n_responses)) {
-    df <- tab$to_tibble()
-    df<-df[!is.na(df$resp),]
-    n_responses<-length(df$resp)
+  getvars<-function(tab) {
+      variables <- tab$list_variables() 
+      nms<-sapply(variables,function(x) x$get()$properties$name)
+      stats<-lapply(variables,function(x) x$properties$statistics) #stats<-lapply(variables,function(x) x$get()$properties$statistics)
+      names(stats)<-nms
+      n_responses<-stats$resp$count
+      if (is.null(n_responses)) {
+          df <- tab$to_tibble()
+          df<-df[!is.na(df$resp),]
+          n_responses<-length(df$resp)
+      }
+      n_categories<-stats$resp$numDistinct
+      n_participants<-stats$id$numDistinct
+      n_items<-stats$item$numDistinct
+      responses_per_participant = n_responses / n_participants
+      responses_per_item = n_responses / n_items
+      density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
+      ##throttle
+                                        #i<-0
+                                        #while (i<10000000) i<-i+1
+      ##
+      testvec<-c(n_responses=n_responses,
+                 n_categories=n_categories,
+                 n_participants=n_participants,
+                 n_items=n_items,
+                 responses_per_participant=responses_per_participant,
+                 responses_per_item=responses_per_item,
+                 density=density)
+      testvec
   }
-  n_categories<-stats$resp$numDistinct
-  n_participants<-stats$id$numDistinct
-  n_items<-stats$item$numDistinct
-  responses_per_participant = n_responses / n_participants
-  responses_per_item = n_responses / n_items
-  density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
-  ##throttle
-  i<-0
-  while (i<10000000) i<-i+1
-  ##
-  data.frame(
-    n_responses=n_responses,
-    n_categories=n_categories,
-    n_participants=n_participants,
-    n_items=n_items,
-    responses_per_participant=responses_per_participant,
-    responses_per_item=responses_per_item,
-    density=density
-  )
+  try.counter<-0
+  while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
+      testvec<-getvars(tab)
+      if (length(testvec)==7) try.counter<-100 else try.counter<-try.counter+1
+  }
+  return(testvec)
 }
 out<-list()
 
@@ -81,8 +83,8 @@ nms<-new.tables[!toadd]
 ii<-match(nms,new.tables)
 if (length(ii)>0) {
   for (i in ii) {
-    print(which(i==ii))
-    out[[as.character(i)]]<-f(tables[[i]])
+      print(i/ii)
+      out[[as.character(i)]]<-f(tables[[i]])
   }
   summaries<-data.frame(do.call("rbind",out))
   summaries$table<-nms[1:nrow(summaries)]
@@ -127,7 +129,10 @@ table_vars_df <- tibble(
 meta<-merge(summaries,table_vars_df,by='table')
 dim(meta)
 
+ord<-order(meta$table)
+meta<-meta[ord,] #put in alphabetical order
 write.csv(meta,'metadata.csv',quote=FALSE,row.names=FALSE)
+
 
 ##################################################################################
 ##Construct biblio.csv
@@ -247,17 +252,15 @@ head(biblio)
 
 # Find rows in dictionary whose Filename is not in biblio
 new_data_rows <- irw_dict[!(tolower(irw_dict$table) %in% tolower(biblio$table)), ]
-##remove nonpublic elements before calling ChatGPT
-new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
 new_data_rows <- new_data_rows |>
-  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-  rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
+select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+rename(DOI=`DOI (for paper)`)
 new_data_rows <- new_data_rows %>%
-    mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
+    mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
 new_data_rows <- generate_bibtex(new_data_rows)
 
-
 biblio <- bind_rows(biblio, new_data_rows)
+
 ##remove nonpublic elements
 test<-biblio$table %in% irw_notpub$table
 biblio<-biblio[!test,]
@@ -268,6 +271,7 @@ biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
 ## Save the updated biblio to a CSV file
 biblio<-biblio[,
 c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
-"Derived_License", "Description", "BibTex")]
+"Derived_License", "Description", "BibTex", "Reference", "DOI", 
+"URL__for_data__2", "URL (for data)")]
 
 readr::write_csv(biblio, "biblio.csv")

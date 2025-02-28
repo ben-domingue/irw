@@ -68,7 +68,6 @@ ccapsvtskhpacr_mercedes_2023_physical,5820,2,194,30,30,194,1,id| cov_sex| cov_ag
 ccapsvtskhpacr_mercedes_2023_sf,2328,5,194,12,12,194,1,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp
 ccapsvtskhpacr_mercedes_2023_tsk,5457,4,194,17,28.1288659793814,321,1.65463917525773,id| cov_sex| cov_age| cov_kg| cov_cm| cov_bmi| item| resp| wave
 cdm_ecpe,81816,2,2922,28,28,2922,1,item| id| resp| Qmatrix__skill1| Qmatrix__skill2| Qmatrix__skill3
-cdm_hr,54250,2,1550,35,35,1550,1,item| id| resp| Qmatrix__Skill1| Qmatrix__Skill2| Qmatrix__Skill3| Qmatrix__Skill4| Qmatrix__Skill5
 cdm_pisa00R,28470,3,1095,26,26,1095,1,item| id| resp| Qmatrix__A1| Qmatrix__A2| Qmatrix__A3| Qmatrix__A4| Qmatrix__A5| Qmatrix__A6| Qmatrix__MC| Qmatrix__CR
 cdm_timss03,17411,2,757,23,23,757,1,item| id| resp| Qmatrix__S1| Qmatrix__S2| Qmatrix__S3| Qmatrix__S4| Qmatrix__S5| Qmatrix__S6| Qmatrix__S7| Qmatrix__S8| Qmatrix__S9| Qmatrix__S11| Qmatrix__S13| Qmatrix__S14| Qmatrix__S15
 cdm_timss07,12494,2,698,25,17.8997134670487,499.76,0.715988538681948,item| id| resp| booklet| Qmatrix__NWN01| Qmatrix__NWN02| Qmatrix__NWN03| Qmatrix__NWN04| Qmatrix__NFD05| Qmatrix__NFD06| Qmatrix__NNS07| Qmatrix__NPR08| Qmatrix__GLA09| Qmatrix__GTT10| Qmatrix__GTT11| Qmatrix__GLM12| Qmatrix__DRI13| Qmatrix__DRI14| Qmatrix__DOR15
@@ -128,7 +127,7 @@ duolingo_es_en__listen,858013,2,2624,160786,326.986661585366,5.33636635030413,0.
 duolingo_es_en__reverse_tap,540054,2,2363,13148,228.54591620821,41.0749923942805,0.017382561317935,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
 duolingo_es_en__reverse_translate,575485,2,2643,17161,217.739311388574,33.5344676883632,0.0126880316641556,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
 duolingo_fr_en__listen,182041,2,1205,50783,151.071369294606,3.58468385089498,0.00297484137003733,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
-duolingo_fr_en__reverse_tap.csv,357601,2,1053,12276,339.602089268756,29.1300912349299,0.0276639043066761,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
+duolingo_fr_en__reverse_tap,357601,2,1053,12276,339.602089268756,29.1300912349299,0.0276639043066761,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
 duolingo_fr_en__reverse_translate,387004,2,1213,15293,319.046990931575,25.3059569737789,0.0208622893435934,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
 dvivdtws_ppmial_marcatto_2023_cwb,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
 dvivdtws_ppmial_marcatto_2023_dtw,12166,6,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp

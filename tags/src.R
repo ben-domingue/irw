@@ -11,5 +11,5 @@ index<-tabs %in% tabs.done ##to remove
 tabs.todo<-tabs[!index]
 any(tabs.todo %in% tabs.done) ##confirming all is well, should be FA
 
-z<-sample(tabs.todo,30)
+z<-sample(tabs.todo,50)
 write.csv(z,'',quote=FALSE,row.names=FALSE)
