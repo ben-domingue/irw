@@ -1,0 +1,3 @@
+- metadata.R: makes metadata.csv
+- biblio.R: makes biblio.csv
+- tables.R: does sanity checking on table Ns

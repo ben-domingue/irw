@@ -690,15 +690,6 @@ VSOCFP_Sebo_2024,10.17605/OSF.IO/PJ5MR,"Sebo, P. (2024, January 27). Validation 
   year = {2024}
 }
 "
-MBPS_Vangsness_2019,10.17605/OSF.IO/R7WCX,"Vangsness, L., Voss, N. M., Maddox, N., Devereaux, V., Martin, E., & Nystrom, C. (2022, January 24). Self-Report Measures of Procrastination Exhibit Inconsistent Concurrent Validity, Predictive Validity, and Psychometric Properties. https://doi.org/10.17605/OSF.IO/R7WCX",https://osf.io/r7wcx/,CC BY 4.0,"Metacognitive Beliefs About Procrastination, Academic Functional Procrastination, Lay’s General Procrastination Scale, Adult Inventory of Procrastination, Active Procrastination Scale, Unintentional Procrastination Scale, Procrastination Assessment Scale for Students, Irrational Procrastination Scale, Pure Procrastination Scale, Tuckman’s Procrastination Scale, Behavioral Measures of Delay, Days to Study Completion, Pacing Styles","@article{https://doi.org/10.17605/osf.io/r7wcx,
-  doi = {10.17605/OSF.IO/R7WCX},
-  url = {https://osf.io/r7wcx/},
-  author = {Vangsness, Lisa and Voss, Nathaniel and Maddox, Noelle and Devereaux, Victoria and Martin, Emma and Nystrom, Caytlyn},
-  title = {Self-Report Measures of Procrastination Exhibit Inconsistent Concurrent Validity, Predictive Validity, and Psychometric Properties},
-  publisher = {Open Science Framework},
-  year = {2022}
-}
-"
 mbft_anunciacao_2024,NA,"Anunciacao, L. (2024, December 13). Personality - Murray and Big five theory. Retrieved from osf.io/wkzan",https://osf.io/wkzan/,CC BY 4.0,Murray Needs Theory and Big Five Theory,"@misc{anunciacao2024personality,
   author       = {Anunciacao, L.},
   title        = {Personality - Murray and Big Five Theory},
@@ -3848,7 +3839,37 @@ genpsych_russell_2024_gpt3_5,10.31234/osf.io/fgbj4,"Russell-Lasalandra, L. L., C
 "
 gilbert_meta_76,10.1080/19345747.2021.1969710,"Thai, K. P., Bang, H. J., & Li, L. (2022). Accelerating early math learning with research-based personalized learning games: A cluster randomized controlled trial. Journal of Research on Educational Effectiveness, 15(1), 28-51.",NA,NA,"Test of Early Mathematics Ability, third edition, or TEMA-3"," @article{Thai_2021, title={Accelerating Early Math Learning with Research-Based Personalized Learning Games: A Cluster Randomized Controlled Trial}, volume={15}, ISSN={1934-5739}, url={http://dx.doi.org/10.1080/19345747.2021.1969710}, DOI={10.1080/19345747.2021.1969710}, number={1}, journal={Journal of Research on Educational Effectiveness}, publisher={Informa UK Limited}, author={Thai, Khanh-Phuong and Bang, Hee Jin and Li, Linlin}, year={2021}, month=sep, pages={28–51} }
 "
-duolingo_en_es__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from English learners (who already speak Spanish).","@misc{https://doi.org/10.7910/dvn/8swhno,
+duolingo_fr_en__reverse_translate,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from French learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
+  doi = {10.7910/DVN/8SWHNO},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
+  author = {{Settles, Burr}},
+  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
+  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
+  publisher = {Harvard Dataverse},
+  year = {2018}
+}
+"
+duolingo_es_en__reverse_translate,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from Spanish learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
+  doi = {10.7910/DVN/8SWHNO},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
+  author = {{Settles, Burr}},
+  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
+  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
+  publisher = {Harvard Dataverse},
+  year = {2018}
+}
+"
+duolingo_es_en__listen,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from Spanish learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
+  doi = {10.7910/DVN/8SWHNO},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
+  author = {{Settles, Burr}},
+  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
+  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
+  publisher = {Harvard Dataverse},
+  year = {2018}
+}
+"
+duolingo_fr_en__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from French learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
   doi = {10.7910/DVN/8SWHNO},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
   author = {{Settles, Burr}},
@@ -3878,37 +3899,17 @@ duolingo_en_es__listen,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2
   year = {2018}
 }
 "
+duolingo_en_es__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from English learners (who already speak Spanish).","@misc{https://doi.org/10.7910/dvn/8swhno,
+  doi = {10.7910/DVN/8SWHNO},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
+  author = {{Settles, Burr}},
+  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
+  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
+  publisher = {Harvard Dataverse},
+  year = {2018}
+}
+"
 duolingo_fr_en__listen,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from French learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-"
-duolingo_fr_en__reverse_translate,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from French learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-"
-duolingo_fr_en__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from French learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
-"
-duolingo_es_en__reverse_translate,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from Spanish learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
   doi = {10.7910/DVN/8SWHNO},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
   author = {{Settles, Burr}},
@@ -3928,72 +3929,68 @@ duolingo_es_en__reverse_tap,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for 
   year = {2018}
 }
 "
-duolingo_es_en__listen,10.7910/DVN/8SWHNO,"Settles, Burr, 2018, ""Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)"", https://doi.org/10.7910/DVN/8SWHNO, Harvard Dataverse, V4, https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8SWHNO",http://sharedtask.duolingo.com/2018.html#task-definition-data,NA,"Modeling of second language acquisition, data from Spanish learners (who already speak English).","@misc{https://doi.org/10.7910/dvn/8swhno,
-  doi = {10.7910/DVN/8SWHNO},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/8SWHNO},
-  author = {{Settles, Burr}},
-  keywords = {Computer and Information Science, Social Sciences, Duolingo, Spaced Repetition, Second Language Acquisition, Machine Learning, Computational Linguistics},
-  title = {Data for the 2018 Duolingo Shared Task on Second Language Acquisition Modeling (SLAM)},
-  publisher = {Harvard Dataverse},
-  year = {2018}
-}
+evpromisi_stone_2021_ddeddep,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
+
+Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
+",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Emotional Distress-Depression," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
 "
 evpromisi_stone_2021_ddedanx,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
 
 Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
 ",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Emotional Distress-Anxiety," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
 "
-evpromisi_stone_2021_ddeddep,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
-
-Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
-",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Emotional Distress-Depression," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
-"
 evpromisi_stone_2021_global,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
 
 Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
 ",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Global health scale," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
-"
-evpromisi_stone_2021_ddpainin,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
-
-Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
-",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Pain Intensity," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
 "
 evpromisi_stone_2021_cdiag,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
 
 Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
 ",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS fatigue," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
 "
-gilbert_meta_77,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Clinical Evaluation of Language Fundamentals—Fourth Edition Sentence Structure subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
+evpromisi_stone_2021_ddpainin,10.1007/s11136-013-0553-z,"Stone, Arthur A.; Broderick, Joan E., 2021, ""Ecological Validity of PROMIS Instruments"", https://doi.org/10.7910/DVN/G4E2SR, Harvard Dataverse, V1
+
+Christodoulou C, Schneider S, Junghaenel DU, Broderick JE, Stone AA. Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS ®). Qual Life Res. 2014;23(4):1245-1253. doi:10.1007/s11136-013-0553-z
+",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/G4E2SR,NA,PROMIS Pain Intensity," @article{Christodoulou_2013, title={Measuring daily fatigue using a brief scale adapted from the Patient-Reported Outcomes Measurement Information System (PROMIS®)}, volume={23}, ISSN={1573-2649}, url={http://dx.doi.org/10.1007/s11136-013-0553-z}, DOI={10.1007/s11136-013-0553-z}, number={4}, journal={Quality of Life Research}, publisher={Springer Science and Business Media LLC}, author={Christodoulou, Christopher and Schneider, Stefan and Junghaenel, Doerte U. and Broderick, Joan E. and Stone, Arthur A.}, year={2013}, month=oct, pages={1245–1253} }
 "
 gilbert_meta_78,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Peabody Picture Vocabulary Test—Fourth Edition," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
 "
-gilbert_meta_79,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Test of Narrative Language," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
-"
 gilbert_meta_80,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Woodcock–Johnson III Tests of Achievement Picture Vocabulary subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
 "
-gilbert_meta_81,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Woodcock–Johnson Tests of Achievement Science subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
+gilbert_meta_79,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Test of Narrative Language," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
 "
 gilbert_meta_82,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Woodcock–Johnson Tests of Achievement Social Studies subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
 "
-imos_1996,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1996,
+gilbert_meta_77,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Clinical Evaluation of Language Fundamentals—Fourth Edition Sentence Structure subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
+"
+gilbert_meta_81,10.1037/edu0000916,"Cabell, S. Q., Kim, J. S., White, T. G., Gale, C. J., Edwards, A. A., Hwang, H., ... & Raines, R. M. (2024). Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge. Journal of Educational Psychology.",https://ldbase.org/datasets/de4bf144-39ed-430c-862d-201009d3d33e,NA,Woodcock–Johnson Tests of Achievement Science subtest," @article{Cabell_2025, title={Impact of a content-rich literacy curriculum on kindergarteners’ vocabulary, listening comprehension, and content knowledge.}, volume={117}, ISSN={0022-0663}, url={http://dx.doi.org/10.1037/edu0000916}, DOI={10.1037/edu0000916}, number={2}, journal={Journal of Educational Psychology}, publisher={American Psychological Association (APA)}, author={Cabell, Sonia Q. and Kim, James S. and White, Thomas G. and Gale, Charles J. and Edwards, Ashley A. and Hwang, HyeJin and Petscher, Yaacov and Raines, Rhonda M.}, year={2025}, month=feb, pages={153–175} }
+"
+imos_2008,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2008,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-23}
+  year = {2008},
+  note = {Accessed: 2023-10-01}
 }"
-imos_2001,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2001,
+imos_1986,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1986,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
-imos_2006,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2006,
+imos_2007,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2007,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  year = {2006},
   note = {Accessed: 2023-10-01}
 }"
-imos_1984,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1984,
+imos_2000,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2000,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-01}
+}"
+imos_2013,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2013,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  year = {2013},
   note = {Accessed: 2023-10-01}
 }"
 imos_1993,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1993,
@@ -4001,7 +3998,33 @@ imos_1993,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-23}
 }"
-imos_1989,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1989,
+imos_2006,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2006,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  year = {2006},
+  note = {Accessed: 2023-10-01}
+}"
+imos_1996,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1996,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-23}
+}"
+imos_1992,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1992,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-01}
+}"
+imos_1988,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1988,
+  title = {International Math Olympiad problems},
+  url = {https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv},
+  note = {Accessed: 2023-10-01}
+}"
+imos_1985,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1985,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-01}
+}"
+imos_2003,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2003,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
@@ -4012,9 +4035,10 @@ imos_2017,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   year = {2017},
   note = {Accessed: 2023-10-01}
 }"
-imos_1987,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1987,
+imos_1998,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1998,
   title = {International Math Olympiad problems},
-  url = {https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  year = {1998},
   note = {Accessed: 2023-10-01}
 }"
 imos_2002,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2002,
@@ -4022,17 +4046,12 @@ imos_2002,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
-imos_1991,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1991,
+imos_2001,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2001,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
-imos_2004,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2004,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-01}
-}"
-imos_1986,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1986,
+imos_1997,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1997,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
@@ -4042,9 +4061,14 @@ imos_2005,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
-imos_1988,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1988,
+imos_1990,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1990,
   title = {International Math Olympiad problems},
-  url = {https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-01}
+}"
+imos_1991,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1991,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
 imos_2016,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2016,
@@ -4053,15 +4077,15 @@ imos_2016,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   year = {2016},
   note = {Accessed: 2023-10-01}
 }"
-imos_1994,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1994,
+imos_1987,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1987,
+  title = {International Math Olympiad problems},
+  url = {https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv},
+  note = {Accessed: 2023-10-01}
+}"
+imos_1999,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1999,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-23}
-}"
-imos_2003,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2003,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-01}
 }"
 imos_2009,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2009,
   title = {International Math Olympiad problems},
@@ -4069,18 +4093,7 @@ imos_2009,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   year = {2009},
   note = {Accessed: 2023-10-01}
 }"
-imos_2007,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2007,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-01}
-}"
-imos_2008,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2008,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  year = {2008},
-  note = {Accessed: 2023-10-01}
-}"
-imos_1995,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1995,
+imos_2004,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2004,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
@@ -4091,12 +4104,13 @@ imos_2014,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   year = {2014},
   note = {Accessed: 2023-10-01}
 }"
-imos_1990,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1990,
+imos_2012,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2012,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  year = {2012},
   note = {Accessed: 2023-10-01}
 }"
-imos_1997,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1997,
+imos_2011,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2011,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
@@ -4113,46 +4127,77 @@ imos_2015,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_res
   year = {2015},
   note = {Accessed: 2023-10-01}
 }"
-imos_2013,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2013,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  year = {2013},
-  note = {Accessed: 2023-10-01}
-}"
-imos_2000,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2000,
+imos_1984,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1984,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
-imos_1998,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1998,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  year = {1998},
-  note = {Accessed: 2023-10-01}
-}"
-imos_1985,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1985,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-01}
-}"
-imos_1992,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1992,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  note = {Accessed: 2023-10-01}
-}"
-imos_2012,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2012,
-  title = {International Math Olympiad problems},
-  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
-  year = {2012},
-  note = {Accessed: 2023-10-01}
-}"
-imos_1999,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1999,
+imos_1994,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1994,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-23}
 }"
-imos_2011,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_2011,
+imos_1995,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1995,
   title = {International Math Olympiad problems},
   howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
   note = {Accessed: 2023-10-01}
 }"
+imos_1989,NA,NA,https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv,NA,International Math Olympiad problems,"@misc{imos_1989,
+  title = {International Math Olympiad problems},
+  howpublished = {\url{https://www.kaggle.com/datasets/luckyt/imo-scores?select=imo_results.csv}},
+  note = {Accessed: 2023-10-01}
+}"
+nomt_hooper_2024_study1,10.3758/s13428-024-02579-x,"Hooper, M. A., Tomarken, A., & Gauthier, I. (2024). Measuring visual ability in linguistically diverse populations. Behavior Research Methods, 57(1), 36.",https://doi.org/10.6084/m9.figshare.24395098.v2,NA,Assessed whether the Novel Object Memory Test (NOMT) instructions in English versus Spanish affect performance among bilingual participants.," @article{Hooper_2024, title={Measuring visual ability in linguistically diverse populations}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-024-02579-x}, DOI={10.3758/s13428-024-02579-x}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Hooper, Madison A. and Tomarken, Andrew and Gauthier, Isabel}, year={2024}, month=dec }
+"
+nomt_hooper_2024_study2,10.3758/s13428-024-02579-x,"Hooper, M. A., Tomarken, A., & Gauthier, I. (2024). Measuring visual ability in linguistically diverse populations. Behavior Research Methods, 57(1), 36.",https://doi.org/10.6084/m9.figshare.24395098.v2,NA,Assessed whether the Novel Object Memory Test (NOMT) measures the same object recognition ability across native English and Spanish speakers.," @article{Hooper_2024, title={Measuring visual ability in linguistically diverse populations}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-024-02579-x}, DOI={10.3758/s13428-024-02579-x}, number={1}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Hooper, Madison A. and Tomarken, Andrew and Gauthier, Isabel}, year={2024}, month=dec }
+"
+gilbert_meta_83,10.7910/DVN/OUI9LS,"Krakowski, Krzysztof; Clemm von Hohenberg, Bernhard; Morisi, Davide, 2025, ""Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland"", https://doi.org/10.7910/DVN/OUI9LS, Harvard Dataverse, V1, UNF:6:wszDijH9TS3y7CCrKAwiug== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/OUI9LS,NA,Cognitive Openness,"@misc{https://doi.org/10.7910/dvn/oui9ls,
+  doi = {10.7910/DVN/OUI9LS},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/OUI9LS},
+  author = {Krakowski, Krzysztof and Clemm von Hohenberg, Bernhard and Morisi, Davide},
+  keywords = {Social Sciences, Misinformation, Conspiracy thinking, Fake news, Debating, Critical thinking},
+  title = {Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland},
+  publisher = {Harvard Dataverse},
+  year = {2025}
+}
+"
+gilbert_meta_84,10.7910/DVN/OUI9LS,"Krakowski, Krzysztof; Clemm von Hohenberg, Bernhard; Morisi, Davide, 2025, ""Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland"", https://doi.org/10.7910/DVN/OUI9LS, Harvard Dataverse, V1, UNF:6:wszDijH9TS3y7CCrKAwiug== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/OUI9LS,NA,Conspiracy Beliefs,"@misc{https://doi.org/10.7910/dvn/oui9ls,
+  doi = {10.7910/DVN/OUI9LS},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/OUI9LS},
+  author = {Krakowski, Krzysztof and Clemm von Hohenberg, Bernhard and Morisi, Davide},
+  keywords = {Social Sciences, Misinformation, Conspiracy thinking, Fake news, Debating, Critical thinking},
+  title = {Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland},
+  publisher = {Harvard Dataverse},
+  year = {2025}
+}
+"
+gilbert_meta_85,10.7910/DVN/OUI9LS,"Krakowski, Krzysztof; Clemm von Hohenberg, Bernhard; Morisi, Davide, 2025, ""Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland"", https://doi.org/10.7910/DVN/OUI9LS, Harvard Dataverse, V1, UNF:6:wszDijH9TS3y7CCrKAwiug== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/OUI9LS,NA,Trust in Media,"@misc{https://doi.org/10.7910/dvn/oui9ls,
+  doi = {10.7910/DVN/OUI9LS},
+  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/OUI9LS},
+  author = {Krakowski, Krzysztof and Clemm von Hohenberg, Bernhard and Morisi, Davide},
+  keywords = {Social Sciences, Misinformation, Conspiracy thinking, Fake news, Debating, Critical thinking},
+  title = {Replication Data for: Does School Debating Reduce Vulnerability to Misinformation? A Field Experiment in Poland},
+  publisher = {Harvard Dataverse},
+  year = {2025}
+}
+"
+pechorro_impulsivity_2021_bes,10.1371/journal.pone.0260621,"Pechorro P, Revilla R, Resende M, Abrunhosa Gonçalves R, Nunes C, Cyders MA (2021) The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults. PLoS ONE 16(12): e0260621.",https://doi.org/10.1371/journal.pone.0260621.s002,NA,Basic Empathy Scale," @article{Pechorro_2021, title={The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260621}, DOI={10.1371/journal.pone.0260621}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Pechorro, Pedro and Revilla, Rebecca and Resende, Miguel and Abrunhosa Gonçalves, Rui and Nunes, Cristina and Cyders, Melissa A.}, editor={Gullo, Matthew J.}, year={2021}, month=dec, pages={e0260621} }
+"
+pechorro_impulsivity_2021_rpq,10.1371/journal.pone.0260621,"Pechorro P, Revilla R, Resende M, Abrunhosa Gonçalves R, Nunes C, Cyders MA (2021) The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults. PLoS ONE 16(12): e0260621.",https://doi.org/10.1371/journal.pone.0260621.s002,NA,Reactive-Proactive Aggression Questionnaire," @article{Pechorro_2021, title={The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260621}, DOI={10.1371/journal.pone.0260621}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Pechorro, Pedro and Revilla, Rebecca and Resende, Miguel and Abrunhosa Gonçalves, Rui and Nunes, Cristina and Cyders, Melissa A.}, editor={Gullo, Matthew J.}, year={2021}, month=dec, pages={e0260621} }
+"
+pechorro_impulsivity_2021_iid,10.1371/journal.pone.0260621,"Pechorro P, Revilla R, Resende M, Abrunhosa Gonçalves R, Nunes C, Cyders MA (2021) The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults. PLoS ONE 16(12): e0260621.",https://doi.org/10.1371/journal.pone.0260621.s002,NA,Dickman Impulsivity Inventory," @article{Pechorro_2021, title={The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260621}, DOI={10.1371/journal.pone.0260621}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Pechorro, Pedro and Revilla, Rebecca and Resende, Miguel and Abrunhosa Gonçalves, Rui and Nunes, Cristina and Cyders, Melissa A.}, editor={Gullo, Matthew J.}, year={2021}, month=dec, pages={e0260621} }
+"
+pechorro_impulsivity_2021_ypitris,10.1371/journal.pone.0260621,"Pechorro P, Revilla R, Resende M, Abrunhosa Gonçalves R, Nunes C, Cyders MA (2021) The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults. PLoS ONE 16(12): e0260621.",https://doi.org/10.1371/journal.pone.0260621.s002,NA,Youth Psychopathic Traits Inventory–Triarchic–Short," @article{Pechorro_2021, title={The Dickman Impulsivity Inventory: Validation and measurement invariance among Portuguese young adults}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0260621}, DOI={10.1371/journal.pone.0260621}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Pechorro, Pedro and Revilla, Rebecca and Resende, Miguel and Abrunhosa Gonçalves, Rui and Nunes, Cristina and Cyders, Melissa A.}, editor={Gullo, Matthew J.}, year={2021}, month=dec, pages={e0260621} }
+"
+paampsmartsud_saba_2023_pacs,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Penn Alcohol Craving Scale," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"
+paampsmartsud_saba_2023_amps,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Applied Mindfulness Process Scale," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"
+paampsmartsud_saba_2023_attendance,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Class Attendance Scale," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"
+paampsmartsud_saba_2023_ders,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Difficulties in Emotion Regulation Scale," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"
+paampsmartsud_saba_2023_ffmq,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Five Facet Mindfulness Questionnaire – Short Form," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"
+paampsmartsud_saba_2023_pss,10.1007/s12671-023-02144-1,"Saba, S. K., & Black, D. S. (2024, September 4). Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample in Residential Treatment for Substance Use Disorder. Retrieved from osf.io/9jgxs",https://osf.io/9jgxs/,NA,Perceived Stress Scale," @article{Saba_2023, title={Psychometric Assessment of the Applied Mindfulness Process Scale (AMPS) Among a Sample of Women in Treatment for Substance Use Disorder}, volume={14}, ISSN={1868-8535}, url={http://dx.doi.org/10.1007/s12671-023-02144-1}, DOI={10.1007/s12671-023-02144-1}, number={6}, journal={Mindfulness}, publisher={Springer Science and Business Media LLC}, author={Saba, Shaddy K. and Black, David S.}, year={2023}, month=may, pages={1406–1418} }
+"

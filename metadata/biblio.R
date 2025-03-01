@@ -1,138 +1,3 @@
-##################################################################################
-##Construct metadata.csv
-
-##tables from last version of metadata
-library(redivis)
-user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:latest")
-table <- dataset$table("metadata:h5gs")
-meta <- table$to_tibble()
-meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
-              "n_items", "responses_per_participant", "responses_per_item", 
-              "density")]
-dim(meta)
-old.tables<-meta$table
-length(old.tables)
-
-##new tables
-library(redivis)
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse")
-tables<-v1$list_tables()
-new.tables<-sapply(tables,function(x) x$name)
-length(new.tables)
-
-##to add
-toadd<-new.tables %in% old.tables
-print("add")
-new.tables[!toadd]
-##to remove
-torem<-old.tables %in% new.tables
-print("remove")
-old.tables[!torem]
-
-##remove tables
-dim(meta)
-ii<-match(old.tables[!torem],meta$table)
-if (length(ii)>0) {
-  meta[ii,]
-  meta<-meta[-ii,]
-}
-dim(meta)
-
-f<-function(tab) {
-  getvars<-function(tab) {
-      variables <- tab$list_variables() 
-      nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$properties$statistics) #stats<-lapply(variables,function(x) x$get()$properties$statistics)
-      names(stats)<-nms
-      n_responses<-stats$resp$count
-      if (is.null(n_responses)) {
-          df <- tab$to_tibble()
-          df<-df[!is.na(df$resp),]
-          n_responses<-length(df$resp)
-      }
-      n_categories<-stats$resp$numDistinct
-      n_participants<-stats$id$numDistinct
-      n_items<-stats$item$numDistinct
-      responses_per_participant = n_responses / n_participants
-      responses_per_item = n_responses / n_items
-      density = (sqrt(n_responses) / n_participants) * (sqrt(n_responses) / n_items)
-      ##throttle
-                                        #i<-0
-                                        #while (i<10000000) i<-i+1
-      ##
-      testvec<-c(n_responses=n_responses,
-                 n_categories=n_categories,
-                 n_participants=n_participants,
-                 n_items=n_items,
-                 responses_per_participant=responses_per_participant,
-                 responses_per_item=responses_per_item,
-                 density=density)
-      testvec
-  }
-  try.counter<-0
-  while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
-      testvec<-getvars(tab)
-      if (length(testvec)==7) try.counter<-100 else try.counter<-try.counter+1
-  }
-  return(testvec)
-}
-out<-list()
-
-nms<-new.tables[!toadd]
-ii<-match(nms,new.tables)
-if (length(ii)>0) {
-  for (i in ii) {
-      print(i/ii)
-      out[[as.character(i)]]<-f(tables[[i]])
-  }
-  summaries<-data.frame(do.call("rbind",out))
-  summaries$table<-nms[1:nrow(summaries)]
-  library(tidyr)
-  summaries_new<-as_tibble(summaries)
-  length(ii)
-  dim(summaries_new)
-  head(meta)
-  head(summaries_new)
-  nms.cols<-names(meta)
-  for (nm in nms.cols) {
-    test<-nm %in% names(summaries_new)
-    if (!test) summaries_new[[nm]]<-NA
-  }
-  summaries_new<-summaries_new[,nms.cols]
-  summaries<-as_tibble(rbind(meta,summaries_new))
-} else {
-  summaries<-meta
-}
-
-str(summaries)
-length(unique(summaries$table))
-
-
-##get variable names for each dataset
-library(redivis)
-library(tibble)
-
-# fetch all tables
-dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
-dataset_tables <- dataset$list_tables()
-
-# Extract table names and variables, storing variables as concatenated strings
-table_vars_df <- tibble(
-  table = sapply(dataset_tables, function(table) table$name),
-  variables = sapply(dataset_tables, function(table) {
-    var_list <- table$list_variables()
-    paste(sapply(var_list, function(v) v$name), collapse = "| ")  # Concatenate variables
-  })
-)
-
-meta<-merge(summaries,table_vars_df,by='table')
-dim(meta)
-
-ord<-order(meta$table)
-meta<-meta[ord,] #put in alphabetical order
-write.csv(meta,'metadata.csv',quote=FALSE,row.names=FALSE)
-
 
 ##################################################################################
 ##Construct biblio.csv
@@ -252,15 +117,17 @@ head(biblio)
 
 # Find rows in dictionary whose Filename is not in biblio
 new_data_rows <- irw_dict[!(tolower(irw_dict$table) %in% tolower(biblio$table)), ]
+##remove nonpublic elements before calling ChatGPT
+new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
 new_data_rows <- new_data_rows |>
-select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-rename(DOI=`DOI (for paper)`)
+  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+  rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
 new_data_rows <- new_data_rows %>%
-    mutate(BibTex = map2_chr(table, DOI, fetch_bibtex_from_doi))
+    mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
 new_data_rows <- generate_bibtex(new_data_rows)
 
-biblio <- bind_rows(biblio, new_data_rows)
 
+biblio <- bind_rows(biblio, new_data_rows)
 ##remove nonpublic elements
 test<-biblio$table %in% irw_notpub$table
 biblio<-biblio[!test,]
@@ -271,7 +138,6 @@ biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
 ## Save the updated biblio to a CSV file
 biblio<-biblio[,
 c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
-"Derived_License", "Description", "BibTex", "Reference", "DOI", 
-"URL__for_data__2", "URL (for data)")]
+"Derived_License", "Description", "BibTex")]
 
 readr::write_csv(biblio, "biblio.csv")

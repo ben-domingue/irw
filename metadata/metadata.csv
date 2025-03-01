@@ -369,6 +369,9 @@ gilbert_meta_8,37182,2,1335,29,27.8516853932584,1282.13793103448,0.9604029445951
 gilbert_meta_80,50940,2,1189,36,42.8427249789739,1415,1.19007569386039,id| cov_grade| cov_teacher| cluster_id| treat| cov_male| item| resp| wave
 gilbert_meta_81,25310,2,1188,18,21.3047138047138,1406.11111111111,1.18359521137299,id| cov_grade| cov_teacher| cluster_id| treat| cov_male| item| resp| wave
 gilbert_meta_82,25493,2,1188,18,21.4587542087542,1416.27777777778,1.19215301159746,id| cov_grade| cov_teacher| cluster_id| treat| cov_male| item| resp| wave
+gilbert_meta_83,4056,5,941,3,4.31030818278427,1352,1.43676939426142,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
+gilbert_meta_84,6326,5,917,5,6.89858233369684,1265.2,1.37971646673937,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
+gilbert_meta_85,4053,7,940,3,4.31170212765957,1351,1.43723404255319,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
 gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
 graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
 grit,37944,6,3162,12,12,3162,1,id| item| resp
@@ -450,7 +453,6 @@ loneliness_mudfold,43857,3,3987,11,11,3987,1,resp| item| id
 lsat,5000,2,1000,5,5,1000,1,resp| item| id
 LSHS-E_Quidaja_2022,42624,6,2664,16,16,2664,1,id| item| resp
 mbft_anunciacao_2024,42290975,8,272845,155,155,272845,1,cov_sex| cov_age| cov_profession| cov_institution| id| item| resp
-MBPS_Vangsness_2019,28271,5,235,122,120.302127659574,231.729508196721,0.986083013603069,id| item| resp
 mcmi_mokken,53152,2,1208,44,44,1208,1,item| id| resp| Qmatrix__A| Qmatrix__H| Qmatrix__SS| Qmatrix__CC
 Mechanical_Turk_Lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204,id| resp| rt| item
 Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741,id| resp| rt| item
@@ -508,6 +510,8 @@ nature_relatedness,48704,9,1522,32,32,1522,1,id| item| resp| rt
 nerdy_personality,777660,9,14955,52,52,14955,1,id| item| resp
 neurips_2020,24076951,5,118971,27613,202.37663800422,871.942599500235,0.00732903480260093,item| id| resp
 neurips_2022,509957,3,6468,5730,78.8430735930736,88.9977312390925,0.0137596987073427,id| date| item| resp
+nomt_hooper_2024_study1,25704,2,119,216,216,119,1,id| item| resp
+nomt_hooper_2024_study2,56592,2,393,144,144,393,1,group| id| cov_gender| cov_age| cov_country_of_birth| cov_country_of_residence| cov_first_language| cov_nationality| cov_spanish_fluency| cov_english_fluency| item| resp_raw| resp| rt
 non_parametric_mixture_modeling_exp1_Cleaned,44957,2,56,2,802.803571428571,22478.5,401.401785714286,id| item| rt| resp
 nonverbal_immediacy,7896928,9,151864,52,52,151864,1,id| item| resp| rt
 novelobjectmatching,47840,2,299,320,160,149.5,0.5,id| item| resp
@@ -525,10 +529,20 @@ OS_TBMWTFS_Schubert_2023_IPIP,19550,5,215,50,90.9302325581395,391,1.818604651162
 OS_TBMWTFS_Schubert_2023_MAAS,5865,6,215,15,27.2790697674419,391,1.81860465116279,id| item| resp| group
 OS_TBMWTFS_Schubert_2023_SMW,1564,7,215,4,7.27441860465116,391,1.81860465116279,id| item| resp| group
 OSCE_Hejri_2017,2660,5,266,10,10,266,1,id| item| resp
+paampsmartsud_saba_2023_amps,6000,6,100,15,60,400,4,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| S_value| wave
+paampsmartsud_saba_2023_attendance,1200,2,100,12,12,100,1,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp
+paampsmartsud_saba_2023_ders,7400,6,100,37,74,200,2,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| wave
+paampsmartsud_saba_2023_ffmq,4800,6,100,24,48,200,2,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| wave
+paampsmartsud_saba_2023_pacs,1000,8,100,5,10,200,2,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| wave
+paampsmartsud_saba_2023_pss,2000,6,100,10,20,200,2,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| wave
 pact_project,1018383,8,4002,850,254.468515742129,1198.09764705882,0.299374724402505,item| resp| treat| id
 papp_silva-martins2023,19233,5,503,62,38.2365805168986,310.209677419355,0.616719040595139,id| item| resp| wave
 parental_text_intervention,52809,9,3870,19,13.6457364341085,2779.42105263158,0.718196654426765,id| item| resp
 PBS_Surrain_2019_PoB,13966,7,741,23,18.8475033738192,607.217391304348,0.81945666842692,id| age| item| resp| group
+pechorro_impulsivity_2021_bes,3003,5,429,7,7,429,1,id| cov_sex| cov_age| item| resp
+pechorro_impulsivity_2021_iid,9866,4,429,23,22.997668997669,428.95652173913,0.999898652072565,id| cov_sex| cov_age| item| resp
+pechorro_impulsivity_2021_rpq,9866,3,429,23,22.997668997669,428.95652173913,0.999898652072565,id| cov_sex| cov_age| item| resp
+pechorro_impulsivity_2021_ypitris,9009,5,429,21,21,429,1,id| cov_sex| cov_age| item| resp
 PEMAIW_Qiu_2020_BWSS,21540,6,955,20,22.5549738219895,1077,1.12774869109948,id| item| resp| group
 PEMAIW_Qiu_2020_DASS,22554,5,952,21,23.6911764705882,1074,1.1281512605042,id| item| resp| group
 PEMAIW_Qiu_2020_FFMQ,46176,6,1057,39,43.685903500473,1184,1.120151371807,id| item| resp| group
