@@ -9,6 +9,8 @@ acl_mokken,94394,5,433,109,218,866,2,id| item| scale| resp
 ada_boredom_bieleke2022,6360,7,636,10,10,636,1,id| item| resp
 Adherence_Zissette_2018_SDB,18409,6,709,26,25.9647390691114,708.038461538462,0.998643810350439,id| item| resp
 aestheticfluency_cotter2023,89280,4,2480,36,36,2480,1,id| item| resp| group
+afps_vangsness_2019,2077,5,231,9,8.99134199134199,230.777777777778,0.999037999037999,id| item| resp
+aip_vangsness_2019,2552,5,232,11,11,232,1,id| item| resp
 alcoholresearch_sumscore,4660,2,233,20,20,233,1,id| item| resp
 alcoholstroop_jones2024,26208,2,156,28,168,936,6,id| trialnum| stimulus| item| resp| rt
 ALSECYPIAMH_WU_2022_CPS,114804,5,9567,12,12,9567,1,id| item| resp| group
@@ -32,6 +34,7 @@ AOMT_BR_SF_EDPANAB_Geiger_2021_RF,14196,6,286,28,49.6363636363636,507,1.77272727
 APFCompact_Ptacek_2024_AAQ_II,2093,7,299,7,7,299,1,id| item| resp
 APFCompact_Ptacek_2024_DASS-21,6279,4,299,21,21,299,1,id| item| resp
 APFCompact_Ptacek_2024_SWLS,1495,7,299,5,5,299,1,id| item| resp
+aps_vangsness_2019,3710,5,232,16,15.9913793103448,231.875,0.999461206896552,id| item| resp
 art,70100,2,1402,50,50,1402,1,id| item| resp
 artistic_preferences,1040200,9,18575,56,56,18575,1,id| item| resp| rt
 aslec_insomnia_wang2025,13730280,5,572095,24,24,572095,1,id| item| resp
@@ -193,6 +196,7 @@ enem_2022_1mil_ch,4.5e+07,2,1e+06,90,45,5e+05,0.5,id| item| resp| position| book
 enem_2022_1mil_cn,4.5e+07,2,1e+06,91,45,494505.494505494,0.494505494505495,id| item| resp| position| booklet
 enem_2022_1mil_lc,4e+07,2,1e+06,84,40,476190.476190476,0.476190476190476,id| item| resp| position| booklet
 enem_2022_1mil_mt,4.5e+07,2,1e+06,95,45,473684.210526316,0.473684210526316,id| item| resp| position| booklet
+envirisk_lalot_2025,24060,12,2005,12,12,2005,1,id| cov_age| cov_gender| cov_education| cov_income| item| resp
 environment_ltm,1746,3,291,6,6,291,1,id| item| resp| resp_raw
 EOAQ-EST_Silveira_2024,1918,5,137,14,14,137,1,id| item| resp
 erf_breuer_2017_dosp,3897,6,433,9,9,433,1,id| cov_gender| cov_age| item| resp
@@ -372,7 +376,10 @@ gilbert_meta_82,25493,2,1188,18,21.4587542087542,1416.27777777778,1.192153011597
 gilbert_meta_83,4056,5,941,3,4.31030818278427,1352,1.43676939426142,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
 gilbert_meta_84,6326,5,917,5,6.89858233369684,1265.2,1.37971646673937,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
 gilbert_meta_85,4053,7,940,3,4.31170212765957,1351,1.43723404255319,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
+gilbert_meta_86,27210,7,1244,15,21.8729903536977,1814,1.45819935691318,id| item| resp| wave| treat| cov_asian| cov_black| cov_hispanic| cov_middle_eastern| cov_native| cov_white| cov_multiracial| cov_educ| cov_age| cov_male
+gilbert_meta_87,19954,3,1244,11,16.040192926045,1814,1.45819935691318,id| item| resp| wave| treat| cov_asian| cov_black| cov_hispanic| cov_middle_eastern| cov_native| cov_white| cov_multiracial| cov_educ| cov_age| cov_male
 gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
+gps_vangsness_2019,3695,5,231,16,15.995670995671,230.9375,0.999729437229437,id| item| resp
 graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
 grit,37944,6,3162,12,12,3162,1,id| item| resp
 grit_BrummerHoffman_2021,14624,5,1828,8,8,1828,1,id| group| date| age| item| resp
@@ -437,6 +444,7 @@ imos_2016,3612,8,602,6,6,602,1,id| cov_country| cov_rank| cov_award| item| resp
 imos_2017,3690,8,615,6,6,615,1,id| cov_country| cov_rank| cov_award| item| resp
 introversion_extroversion,654108,5,7188,91,91,7188,1,id| item| resp| rt
 iowa_gambling_task,65291,4,617,339,105.820097244733,192.598820058997,0.312153679188002,resp| item| id
+ips_vangsness_2019,2094,5,233,9,8.98712446351931,232.666666666667,0.998569384835479,id| item| resp
 isi_insomnia_wang2025,4004665,5,572095,7,7,572095,1,id| item| resp
 janssen2_tam,6920,2,346,20,20,346,1,resp| item| id
 joreskog_moustaki_2001,4290,3,715,6,6,715,1,id| item| resp
@@ -453,6 +461,7 @@ loneliness_mudfold,43857,3,3987,11,11,3987,1,resp| item| id
 lsat,5000,2,1000,5,5,1000,1,resp| item| id
 LSHS-E_Quidaja_2022,42624,6,2664,16,16,2664,1,id| item| resp
 mbft_anunciacao_2024,42290975,8,272845,155,155,272845,1,cov_sex| cov_age| cov_profession| cov_institution| id| item| resp
+mbps_vangsness_2019,3017,5,233,13,12.9484978540773,232.076923076923,0.996038296467481,id| item| resp
 mcmi_mokken,53152,2,1208,44,44,1208,1,item| id| resp| Qmatrix__A| Qmatrix__H| Qmatrix__SS| Qmatrix__CC
 Mechanical_Turk_Lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204,id| resp| rt| item
 Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741,id| resp| rt| item
@@ -538,6 +547,7 @@ paampsmartsud_saba_2023_pss,2000,6,100,10,20,200,2,id| cov_NUMBER_MH_DIAGNOSES| 
 pact_project,1018383,8,4002,850,254.468515742129,1198.09764705882,0.299374724402505,item| resp| treat| id
 papp_silva-martins2023,19233,5,503,62,38.2365805168986,310.209677419355,0.616719040595139,id| item| resp| wave
 parental_text_intervention,52809,9,3870,19,13.6457364341085,2779.42105263158,0.718196654426765,id| item| resp
+pass_vangsness_2019,2768,5,231,12,11.982683982684,230.666666666667,0.998556998556999,id| item| resp
 PBS_Surrain_2019_PoB,13966,7,741,23,18.8475033738192,607.217391304348,0.81945666842692,id| age| item| resp| group
 pechorro_impulsivity_2021_bes,3003,5,429,7,7,429,1,id| cov_sex| cov_age| item| resp
 pechorro_impulsivity_2021_iid,9866,4,429,23,22.997668997669,428.95652173913,0.999898652072565,id| cov_sex| cov_age| item| resp
@@ -588,6 +598,7 @@ PPPASBPNSSedaisw_Pedro_2022_EBSV,9888,6,1648,6,6,1648,1,id| item| resp
 PPPASBPNSSedaisw_Pedro_2022_NPBE,24720,5,1648,15,15,1648,1,id| item| resp
 PPPASBPNSSedaisw_Pedro_2022_PANAS,32960,5,1648,20,20,1648,1,id| item| resp
 PPPSSAPIS_Figlova_2021_PSS10,1530,5,153,10,10,153,1,id| item| resp
+pps_vangsness_2019,2783,5,232,12,11.9956896551724,231.916666666667,0.999640804597701,id| item| resp
 PPSRS_Caliciuri_2024,3707,2,337,11,11,337,1,id| item| resp
 PRCPSFFMQ_Lecuona_2017,31200,5,800,39,39,800,1,id| item| resp
 preference_inventory,162024,4,13502,12,12,13502,1,id| item| resp
@@ -726,6 +737,7 @@ SF12_MLCIRTwithin,7061,5,620,12,11.3887096774194,588.416666666667,0.949059139784
 short_dark_triad,491184,6,18192,27,27,18192,1,id| item| resp
 si09_sirt,62412,7,5201,12,12,5201,1,country| resp| item| id
 smacof_pvq40,6023,6,151,40,39.887417218543,150.575,0.997185430463576,resp| item| id
+sned_bendall_2024,4806,10,801,6,6,801,1,id| rt| cov_age| cov_gender| cov_ethnicity| cov_countryofbirth| cov_countryofresidence| cov_nationality| cov_education| item| resp
 spanishmegastudy,2893980,2,48233,1270,60,2278.72440944882,0.047244094488189,order| resp| rt| item| id
 spelling_assessment_study1,73357,3,673,109,109,673,1,id| item| resp
 spelling_assessment_study2,56592,3,786,72,72,786,1,id| group| item| resp
@@ -772,10 +784,12 @@ threatperceptions_isler_2024_experiment4_cognitive_crt,8067,4,2689,3,3,2689,1,id
 threatperceptions_isler_2024_experiment4_cognitive_panas,59158,5,2689,22,22,2689,1,id| treat| item| resp
 timss_tam,19459,14,1773,11,10.9751833051325,1769,0.997743936830231,resp| country| item| booklet| id
 tma,270500,3,5410,50,50,5410,1,id| item| resp
+tpi_vangsness_2019,3713,5,233,16,15.9356223175966,232.0625,0.995976394849785,id| item| resp
 transreas_mokken,5100,2,425,12,12,425,1,cov_grade| resp| item| id
 trees_sirt,5805,2,387,15,15,387,1,resp| item| id
 twod_rotation_mather2023,1905487,2,1020195,304,1.86776743661751,6268.04934210526,0.00614397183097865,id| item| resp| cov_age| cov_gender
 ucla_BrummerHoffman_2021,5484,3,1828,3,3,1828,1,id| group| date| age| item| resp
+ups_vangsness_2019,1630,5,233,7,6.99570815450644,232.857142857143,0.999386879215205,id| item| resp
 VCISM_Polish_Trzcinska_2023,2070,5,104,12,19.9038461538462,172.5,1.65865384615385,id| item| resp| wave
 VEI_Brazillian_Shiramizu_2018_EI,9772,6,698,14,14,698,1,id| item| resp
 VEI_Brazillian_Shiramizu_2018_IRI,19544,6,698,28,28,698,1,id| item| resp
