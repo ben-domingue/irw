@@ -48,5 +48,12 @@ null_counts   ## 1253 null values.
 output_cleaned = output.dropna()
 output_cleaned.shape    ## 28271 rows, 3 columns: 1253 records removed.
 
-## Save the result as csv file
-output_cleaned.to_csv('MBPS_Vangsness_2019.csv', index=False)
+prefixes = ["MBPS", "AFPS", "GPS", "AIP", "APS", "UPS", "PASS", "IPS", "PPS", "TPI"]
+split_data = {}
+
+for prefix in prefixes:
+    split_data[prefix] = output_cleaned[output_cleaned["item"].str.startswith(prefix)]
+
+for prefix, df_subset in split_data.items():
+    filename = f"{prefix.lower()}_vangsness_2019.csv"
+    df_subset.to_csv(filename, index=False)
