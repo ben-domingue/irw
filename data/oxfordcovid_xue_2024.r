@@ -66,8 +66,24 @@ pswq_df  <- pivot_longer(pswq_df , -c(id, wave, starts_with("cov")), names_to="i
 pswq_df  <- pswq_df  %>%
   filter(!is.na(resp))
 
-save(pswq_df , file="oxfordcovid_xue_2024_pswq.Rdata")
-write.csv(pswq_df , "oxfordcovid_xue_2024_pswq.csv", row.names=FALSE)
+split_df <- function(df) {
+  pswq_a_df <- df[grepl("^edeq_a_\\d+$", df$item), ]
+  pswq_c_df <- df[!grepl("^edeq_a_\\d+$", df$item), ]
+  return(list(pswq_a_df = pswq_a_df, pswq_c_df = pswq_c_df))
+}
+
+# Execute function
+split_data <- split_df(pswq_df)
+
+# Extracting split dataframes
+pswq_a_df <- split_data$pswq_a_df
+pswq_c_df <- split_data$pswq_c_df
+
+save(pswq_a_df , file="oxfordcovid_xue_2024_pswq_a.Rdata")
+write.csv(pswq_a_df , "oxfordcovid_xue_2024_pswq_a.csv", row.names=FALSE)
+
+save(pswq_c_df , file="oxfordcovid_xue_2024_pswq_c.Rdata")
+write.csv(pswq_c_df , "oxfordcovid_xue_2024_pswq_c.csv", row.names=FALSE)
 
 # ---------- IUSC Questionnaire ----------
 iusc_df <- arc_df |>
