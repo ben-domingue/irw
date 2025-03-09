@@ -67,8 +67,8 @@ pswq_df  <- pswq_df  %>%
   filter(!is.na(resp))
 
 split_df <- function(df) {
-  pswq_a_df <- df[grepl("^edeq_a_\\d+$", df$item), ]
-  pswq_c_df <- df[!grepl("^edeq_a_\\d+$", df$item), ]
+  pswq_a_df <- df[grepl("^pswq_a_\\d+$", df$item), ]  # Select rows matching "pswq_a_x"
+  pswq_c_df <- df[grepl("^pswq_c_\\d+$", df$item), ]  # Select rows matching "pswq_c_x"
   return(list(pswq_a_df = pswq_a_df, pswq_c_df = pswq_c_df))
 }
 
@@ -78,6 +78,7 @@ split_data <- split_df(pswq_df)
 # Extracting split dataframes
 pswq_a_df <- split_data$pswq_a_df
 pswq_c_df <- split_data$pswq_c_df
+
 
 save(pswq_a_df , file="oxfordcovid_xue_2024_pswq_a.Rdata")
 write.csv(pswq_a_df , "oxfordcovid_xue_2024_pswq_a.csv", row.names=FALSE)
@@ -204,3 +205,4 @@ at_df <- at_df %>%
 
 save(at_df, file="oxfordcovid_xue_2024_at.Rdata")
 write.csv(at_df, "oxfordcovid_xue_2024_at.csv", row.names=FALSE)
+
