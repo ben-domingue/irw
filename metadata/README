@@ -1,3 +1,6 @@
-- metadata.R: makes metadata.csv
-- biblio.R: makes biblio.csv
-- tables.R: does sanity checking on table Ns
+Process for updating IRW mdatadata (https://redivis.com/datasets/bdxt-4fqe5tyf4)
+
+1. metadata.R: makes metadata.csv [numbers computed from raw tables such as # of unique `id`s]
+2. biblio.R: makes biblio.csv [bibliographic information for citing]
+3. tags.R: makes tags.csv [pulls together hand-annotated tags]
+4. tables.R: qc/nothing to upload [does checking on table names]
