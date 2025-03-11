@@ -6,10 +6,18 @@ library(tidyr)
 
 # ---------- EMA Data ----------
 ema_df <- read.csv("clean_ema.csv")
+ema_df <- ema_df |> 
+  mutate(Response = as.POSIXct(Response, format="%Y-%m-%d %H:%M:%S", tz="CET")) |>
+  rename(date=Response)
 ema_df <- ema_df |>
   rename(id=ID) |>
-  select(id, starts_with("Q"))
-ema_df <- pivot_longer(ema_df, cols=-id, names_to="item", values_to="resp")
+  select(id, starts_with("Q"), date)
+ema_df <- pivot_longer(ema_df, cols=-c(id,date), names_to="item", values_to="resp")
+ema_df <- ema_df |> 
+  arrange(id, date) |>  # Sort by user and response time
+  group_by(id) |> 
+  mutate(wave = dense_rank(date) - 1) |>  # Assign sequential wave numbers per user
+  ungroup()
 
 save(ema_df, file="mhscdc_fried_2020_ema.Rdata")
 write.csv(ema_df, "mhscdc_fried_2020_ema.csv", row.names=FALSE)
