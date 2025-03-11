@@ -18,6 +18,7 @@ ema_df <- ema_df |>
   group_by(id) |> 
   mutate(wave = dense_rank(date) - 1) |>  # Assign sequential wave numbers per user
   ungroup()
+ema_df$date<-as.numeric(strptime(ema_df$date,format="%Y-%m-%d %H:%M:%S"))
 
 save(ema_df, file="mhscdc_fried_2020_ema.Rdata")
 write.csv(ema_df, "mhscdc_fried_2020_ema.csv", row.names=FALSE)
