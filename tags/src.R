@@ -13,3 +13,12 @@ any(tabs.todo %in% tabs.done) ##confirming all is well, should be FA
 
 z<-sample(tabs.todo,50)
 write.csv(z,'',quote=FALSE,row.names=FALSE)
+
+
+
+
+##
+                                        #organizing queue
+x<-gsheet2tbl('https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=48265913#gid=48265913')
+tab<-table(x)
+tab[tab>1]

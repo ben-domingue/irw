@@ -60,6 +60,10 @@ BPAQ_Christopher_2024_PSS10,1090,5,109,10,10,109,1,id| item| resp
 BPAQ_Christopher_2024_SCSS,2040,6,170,12,12,170,1,id| item| resp
 bps_boredom_bieleke2022,5088,7,636,8,8,636,1,id| item| resp
 brain_hemisphere,590880,6,29544,20,20,29544,1,id| item| resp| rt
+brand_raffaelli_2024_familiarity_24,48262,8,818,59,59,818,1,cov_age| cov_gender| id| item| resp| item_family
+brand_raffaelli_2024_liking_20,60150,7,1197,51,50.250626566416,1179.41176470588,0.98530640326306,id| cov_gender| cov_age| item| resp| item_family
+brand_raffaelli_2024_liking_24,48262,8,818,59,59,818,1,cov_age| cov_gender| id| item| resp| item_family
+brand_raffaelli_2024_recognition_20,59200,2,592,101,100,586.138613861386,0.99009900990099,id| cov_gender| cov_age| item| resp| item_family
 broadband_inventories,365077,7,2017,181,181,2017,1,id| item| resp| rt
 BSCS_fadplus_goto2021,10426,5,802,13,13,802,1,id| age| gender| item| resp
 cavalini_mokken,14076,4,828,17,17,828,1,resp| item| id
@@ -468,8 +472,20 @@ Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0
 MEFSIRODGAS_Nileksela_2023_freq,45409,6,499,91,91,499,1,id| age| item| resp
 MEFSIRODGAS_Nileksela_2023_severity,45409,6,499,91,91,499,1,id| age| item| resp
 mental_health_malawi,35111,6,984,40,35.6819105691057,877.775,0.892047764227642,resp| item| id
+metacogmonitoring_double2025,20100,6,300,67,67,300,1,id| cov_age| cov_sex| item| resp
 mft_validationandreplication,30060,6,835,36,36,835,1,id| item| resp
 MGSISGCLQ_Hollyhead_2018,950,6,38,25,25,38,1,id| cov_medical_condition| item| resp
+mhscdc_fried_2020_anger,560,5,80,7,7,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_conscientiousness,960,5,80,12,12,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_dass,1680,5,80,21,21,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_ema,78696,6,79,18,996.151898734177,4372,55.3417721518987,id| date| item| resp| wave
+mhscdc_fried_2020_loneliness,400,5,80,5,5,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_mindfullness,960,5,80,12,12,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_motivation,1280,7,80,16,16,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_ps,800,5,80,10,10,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_se,800,4,80,10,10,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_smartphone,1120,7,80,14,14,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
+mhscdc_fried_2020_tired,640,4,80,8,8,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
 mindfulness_assessment,23439,6,601,39,39,601,1,age| id| item| resp
 ml_harper_2015,32000204,10,84432,200948,379.00563767292,159.246193044967,0.00188608813062544,item| id| resp
 MMF_Solis_2020,89156,5,10746,10,8.29666852782431,8915.6,0.829666852782431,id| item| resp
@@ -538,6 +554,23 @@ OS_TBMWTFS_Schubert_2023_IPIP,19550,5,215,50,90.9302325581395,391,1.818604651162
 OS_TBMWTFS_Schubert_2023_MAAS,5865,6,215,15,27.2790697674419,391,1.81860465116279,id| item| resp| group
 OS_TBMWTFS_Schubert_2023_SMW,1564,7,215,4,7.27441860465116,391,1.81860465116279,id| item| resp| group
 OSCE_Hejri_2017,2660,5,266,10,10,266,1,id| item| resp
+oxfordcovid_xue_2024_at,179937,6,1518,44,118.53557312253,4089.47727272727,2.69399029823931,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_bfi,32848,7,1826,15,17.9890470974808,2189.86666666667,1.19926980649872,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_brs,10344,5,851,6,12.1551116333725,1724,2.02585193889542,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_edeq,90858,4,1534,12,59.2294654498044,7571.5,4.9357887874837,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_gad,54210,4,1574,7,34.440914866582,7744.28571428571,4.92013069522599,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_iusc,53656,5,1662,27,32.2839951865223,1987.25925925926,1.19570352542675,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_mfq,37431,6,1555,20,24.0713826366559,1871.55,1.2035691318328,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_mh,39840,2,2248,15,17.7224199288256,2656,1.18149466192171,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_pas,72379,5,1632,9,44.3498774509804,8042.11111111111,4.92776416122004,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_phq,70077,4,1582,9,44.2964601769912,7786.33333333333,4.92182890855457,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_pss,31555,5,1600,4,19.721875,7888.75,4.93046875,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_pswq_a,8072,5,506,16,15.9525691699605,504.5,0.997035573122529,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_pswq_c,17629,4,1264,14,13.9469936708861,1259.21428571429,0.996213833634719,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_rse,18535,4,1534,10,12.0827900912647,1853.5,1.20827900912647,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_school,3158,8,173,19,18.2543352601156,166.210526315789,0.960754487374506,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_swemws,52126,5,1491,7,34.9604292421194,7446.57142857143,4.99434703458848,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
+oxfordcovid_xue_2024_ua,2020,6,1308,4,1.54434250764526,505,0.386085626911315,id| wave| cov_age| cov_gender| cov_trans| cov_sexual_orientation| cov_ethnicity| cov_relationship_status| cov_country| cov_education| cov_employment| item| resp
 paampsmartsud_saba_2023_amps,6000,6,100,15,60,400,4,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| S_value| wave
 paampsmartsud_saba_2023_attendance,1200,2,100,12,12,100,1,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp
 paampsmartsud_saba_2023_ders,7400,6,100,37,74,200,2,id| cov_NUMBER_MH_DIAGNOSES| cov_AUD_SUD_DIAGNOSES| cov_ALCDAYS_PAST8MONTH| cov_DRUGDAYS_PAST8MONTH| item| resp| wave

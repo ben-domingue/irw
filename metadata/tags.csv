@@ -1,7 +1,6 @@
-Table,Age Range,Child Age (for child-focused studies),Sample,Construct type,Measurement tool,Item format,Primary Language(s)
+table,age range,child age (for child-focused studies),sample,construct type,measurement tool,item format,primary language(s)
 gilbert_meta_48,Child (<18y),Early (<6y),Program-based,Developmental,Observational rating,Likert Scale/selected response,spa
 dass_thiyagarajan2022,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"eng,may"
-cfc_balaji_2019,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,NA
 ieswriting_molloy_2022,Adult (18+),NA,Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng
 koreannursing_park_2017,Adult (18+),NA,Clinical,Cognitive/educational,Test,Likert Scale/selected response,kor
 sabers_vesper2023,Adult (18+),NA,"Internet-based (Mturkers, etc)",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"ger,eng,fre"
@@ -23,7 +22,7 @@ ijls_eersel_2024_depression,Adult (18+),NA,Targeted/specific,Affective/mental he
 ijls_eersel_2024_optimism,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,nld
 ijls_eersel_2024_icecap,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,nld
 ijls_eersel_2024_work,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,nld
-cfc_balaji_2019,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
+cfc_balaji_2019,Adult (18+),NA,Educational,"Cognitive/educational, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng
 ewas_sanford_2024,Mixed,NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
 ewas_sanford_2024_flourish,Mixed,NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
 cavalini_mokken,Adult (18+),NA,General/non-specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng
@@ -71,22 +70,9 @@ face_memory_test,Adult (18+),NA,"General/non-specific, Educational",Cognitive/ed
 feminist_perspectives,Adult (18+),NA,Targeted/specific,Opinion/attitude,Test,Likert Scale/selected response,eng
 firstborn_personality,Adult (18+),NA,Educational,Behavioral,Test,Likert Scale/selected response,eng
 deception_professors,Adult (18+),NA,"Educational, Targeted/specific",Opinion/attitude,Survey/questionnaire,Mixed,eng
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
-NA,NA,NA,NA,NA,NA,NA,NA
 os_tbmwtfs_schubert_2023_smw,Adult (18+),NA,"General/non-specific, Educational",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"eng,deu"
-sv-maia2_randelovic_2021_hexaco100,Adult (18+),NA,"Targeted/specific, Educational",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"eng,srp"
-enem_2022_1mil_lc,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,por
-enem_2018_1mil_ch,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,por
+enem_2022_1mil_lc,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,Mixed,por
+enem_2018_1mil_ch,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Test,Mixed,por
 pisa2012_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng
 florida_twins_auth,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Targeted/specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng
 vocabulary_iq,Mixed,NA,"""Internet-based (Mturkers, etc)""",Personality,Test,Mixed,eng
@@ -174,10 +160,50 @@ scoliosis_dueber,Child (<18y),Adolescent (12-18y),Clinical,"Affective/mental hea
 vsocfp_sebo_2024,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,fre
 estcrm_selfeff,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Slider/continuous,NA
 pepabas2c_kubicka_2024,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,pol
-imos_2015,NA,NA,NA,NA,NA,NA,NA
-pepabas2c_kubicka_2024,NA,NA,NA,NA,NA,NA,NA
-sf12_mlcirtwithin,NA,NA,NA,NA,NA,NA,NA
+imos_1984,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1985,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1986,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1987,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1988,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1989,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1990,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1991,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1992,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1993,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1994,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1995,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1996,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1997,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1998,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_1999,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2000,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2001,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2002,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2003,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2004,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2005,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2006,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2007,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2008,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2009,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2010,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2011,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2012,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2013,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2014,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2015,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2016,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+imos_2017,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,NA
+psychotools_conspiracist,NA,NA,NA,NA,NA,NA,NA
 psychotools_gratitude,NA,NA,NA,NA,NA,NA,NA
+psychotools_mathexam,NA,NA,NA,NA,NA,NA,NA
+psychtools_ability,NA,NA,NA,NA,NA,NA,NA
+psychtools_athenstaedt,NA,NA,NA,NA,NA,NA,NA
+psychtools_bfi,NA,NA,NA,NA,NA,NA,NA
+psychtools_blot,NA,NA,NA,NA,NA,NA,NA
+psychtools_epi,NA,NA,NA,NA,NA,NA,NA
+psychtools_geras,NA,NA,NA,NA,NA,NA,NA
+psychtools_msq,NA,NA,NA,NA,NA,NA,NA
+psychtools_sai,NA,NA,NA,NA,NA,NA,NA
 polca_values,NA,NA,NA,NA,NA,NA,NA
 mpsycho_rwdq,NA,NA,NA,NA,NA,NA,NA
-imos_2012,NA,NA,NA,NA,NA,NA,NA
