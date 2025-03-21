@@ -14,7 +14,6 @@ fetch_bibtex_from_doi <- function(filename, doi) {
   if (is.na(doi) || doi == "") {
     return(NA_character_)  # Return NA if DOI is missing
   }
-  
   url <- paste0("https://doi.org/", doi)
   response <- tryCatch({
     GET(url, add_headers(Accept = "application/x-bibtex"))
@@ -22,7 +21,6 @@ fetch_bibtex_from_doi <- function(filename, doi) {
     warning(glue("Error fetching dataset: {filename} - {e$message}"))
     return(NULL)
   }
-  
   )
   if (!is.null(response) && status_code(response) == 200) {
     return(content(response, as = "text", encoding = "UTF-8"))

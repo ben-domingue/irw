@@ -12,5 +12,7 @@ f<-function(tab) {
 meta<-read.csv("~/Dropbox/projects/irw/src/metadata/metadata.csv")
 m<-meta[meta$density>.9 & meta$density<=1 & meta$n_categories==2,]
 
+setwd("/home/bdomingu/Dropbox/projects/irw/data/pub")
 out<-t(sapply(m$table[1:10],f))
 summary(out[2,]/out[,1])
+plot(out); abline(0,1)

@@ -382,7 +382,13 @@ gilbert_meta_84,6326,5,917,5,6.89858233369684,1265.2,1.37971646673937,id| treat|
 gilbert_meta_85,4053,7,940,3,4.31170212765957,1351,1.43723404255319,id| treat| tot| block_id| cov_age| cov_hh_size| cov_politics| item| resp| wave
 gilbert_meta_86,27210,7,1244,15,21.8729903536977,1814,1.45819935691318,id| item| resp| wave| treat| cov_asian| cov_black| cov_hispanic| cov_middle_eastern| cov_native| cov_white| cov_multiracial| cov_educ| cov_age| cov_male
 gilbert_meta_87,19954,3,1244,11,16.040192926045,1814,1.45819935691318,id| item| resp| wave| treat| cov_asian| cov_black| cov_hispanic| cov_middle_eastern| cov_native| cov_white| cov_multiracial| cov_educ| cov_age| cov_male
+gilbert_meta_88,51828,2,2433,12,21.3020961775586,4319,1.77517468146321,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
+gilbert_meta_89,84007,2,2433,100,34.528154541718,840.07,0.34528154541718,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
 gilbert_meta_9,48210,2,1646,19,29.2891859052248,2537.36842105263,1.54153610027499,id| cluster_id| item| wave| resp| treat| cov_female| cov_age
+gilbert_meta_90,36383,2,1773,21,20.5205865764241,1732.52380952381,0.97717078935353,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
+gilbert_meta_91,27560,5,1729,16,15.9398496240601,1722.5,0.996240601503759,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
+gilbert_meta_92,28953,4,2433,7,11.9001233045623,4136.14285714286,1.70001761493747,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
+gilbert_meta_93,206612,2,2433,119,84.9206740649404,1736.23529411765,0.713619109789415,id| block_id| treat| wave| cov_mother_age| cov_mother_educ| cov_mother_n_children| cov_child_age| cov_child_female| cov_child_disability| item| resp
 gps_vangsness_2019,3695,5,231,16,15.995670995671,230.9375,0.999729437229437,id| item| resp
 graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
 grit,37944,6,3162,12,12,3162,1,id| item| resp
@@ -615,9 +621,16 @@ pisa2009_science,8101451,3,355604,53,22.7822268590904,152857.566037736,0.4298533
 pisa2012_math,12194969,3,482503,109,25.2743900037927,111880.449541284,0.231875137649475,id| item| resp
 pisa2012_read,6320624,3,333602,44,18.9466010395621,143650.545454545,0.430604569080957,id| item| resp
 pisa2012_science,7634927,3,333764,53,22.8752262077396,144055.226415094,0.431608041655464,id| item| resp
-pisa2015_math,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNTSCHID| id| item| resp| rt
-pisa2015_read,2884889,3,227833,100,12.6622965066518,28848.89,0.126622965066518,CNTSCHID| id| item| resp| rt
-pisa2015_science,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNTSCHID| id| item| resp| rt
+pisa2015_math,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| timing_of_last_visit
+pisa2015_read,2884889,3,227833,100,12.6622965066518,28848.89,0.126622965066518,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| timing_of_last_visit
+pisa2015_science,2730800,3,188046,60,14.5219786647948,45513.3333333333,0.24203297774658,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| timing_of_last_visit
+pisa2018_gc,2115346,3,73378,71,28.8280683583635,29793.6056338028,0.406029131807937,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| time_to_first_action
+pisa2018_math,5132859,3,266305,82,19.274362103603,62595.8414634146,0.235053196385403,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| time_to_first_action
+pisa2018_read,17614746,3,550651,246,31.9889476274446,71604.6585365854,0.130036372469287,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| time_to_first_action
+pisa2018_science,8392511,3,266958,115,31.4375707040059,72978.3565217391,0.273370180034834,CNT| CNTSCHID| id| item| resp| num_actions| num_visits| rt| time_to_first_action
+pisa2022_math,14708813,3,555063,233,26.4993577305639,63127.9527896996,0.113731149058214,CNT| CNTSCHID| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action
+pisa2022_read,12990947,3,243214,254,53.4136480630227,51145.4606299213,0.210289953004026,CNT| CNTSCHID| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action
+pisa2022_science,8383445,3,243131,115,34.4811850401635,72899.5217391304,0.299836391653596,CNT| CNTSCHID| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action
 pks_probability,12096,3,504,24,24,504,1,id| item| resp| wave
 PMT_Trzcinska_2023_finans,364,4,26,14,14,26,1,id| item| resp
 PMT_Trzcinska_2023_MVS,234,5,26,9,9,26,1,id| item| resp
@@ -736,6 +749,10 @@ roar_lexical,61500,2,123,500,500,123,1,realpseudo| resp| rt| item| id
 Rosenberg_fadplus_goto2021,8020,4,802,10,10,802,1,id| age| gender| item| resp
 rosenberg_selfesteem,479740,5,47974,10,10,47974,1,id| item| resp
 rr98_accuracy,12205,2,30,33,406.833333333333,369.848484848485,12.3282828282828,rt| item| resp| id
+rrca_mcneish_2025_bdi,21840,4,1040,21,21,1040,1,id| item| resp
+rrca_mcneish_2025_exp,3088,5,386,8,8,386,1,id| item| resp
+rrca_mcneish_2025_sen,3088,5,386,8,8,386,1,id| item| resp
+rrca_mcneish_2025_use,3088,5,386,8,8,386,1,id| item| resp
 RvKDCS_Romiacg_Miroshnik_2020_BFI,60660,5,1011,60,60,1011,1,id| item| resp
 RvKDCS_Romiacg_Miroshnik_2020_CBI,11121,4,1011,11,11,1011,1,id| item| resp
 RvKDCS_Romiacg_Miroshnik_2020_KDOCS,50550,5,1011,50,50,1011,1,id| item| resp

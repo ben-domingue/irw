@@ -25,16 +25,16 @@ ijls_eersel_2024_work,Adult (18+),NA,Targeted/specific,Affective/mental health,S
 cfc_balaji_2019,Adult (18+),NA,Educational,"Cognitive/educational, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng
 ewas_sanford_2024,Mixed,NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
 ewas_sanford_2024_flourish,Mixed,NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
-cavalini_mokken,Adult (18+),NA,General/non-specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng
+cavalini_mokken,Adult (18+),NA,Targeted/specific,Personality,Survey/questionnaire,Likert Scale/selected response,"eng, dut"
 pemaiw_qiu_2020_dass,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
 promispme_forrest_2021_physical_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Representative,Developmental,Survey/questionnaire,Likert Scale/selected response,eng
 alsecypiamh_wu_2022_phq,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng
 tenseness_pcmrs,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"ger, eng"
 stress_deboeck2012,Mixed,NA,General/non-specific,"Cognitive/educational, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng
-transreas_mokken,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng
+transreas_mokken,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Likert Scale/selected response,"eng, dut"
 gilbert_meta_56,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Constructed Response,eng
 dmct_addis_2020_suis,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"eng, ger"
-enem_2013_1mil_lc,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Constructed Response,por
+enem_2013_1mil_lc,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Mixed,por
 dart_brysbaert_2020_1,Mixed,NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,nld
 ffm_ext,Mixed,NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,eng
 motacademica_ribeiro_2019,Adult (18+),NA,Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,por
@@ -207,3 +207,22 @@ psychtools_msq,NA,NA,NA,NA,NA,NA,NA
 psychtools_sai,NA,NA,NA,NA,NA,NA,NA
 polca_values,NA,NA,NA,NA,NA,NA,NA
 mpsycho_rwdq,NA,NA,NA,NA,NA,NA,NA
+een_lacey_2024_parent,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ne
+emsc_kuan-chin_2023,Adult (18+),NA,Educational,"Cognitive/educational, Affective/mental health",Observational rating,Likert Scale/selected response,eng
+enem_2015_1mil_cn,Child (<18y),Adolescent (12-18y),Educational,"Cognitive/educational, Opinion/attitude",Test,Mixed,por
+gilbert_meta_11,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Mixed,eng
+gilbert_meta_5,Child (<18y),Adolescent (12-18y),Educational,"Cognitive/educational, Opinion/attitude",Test,Mixed,por
+gilbert_meta_57,Mixed,Child (6-12y),Clinical,"Affective/mental health, Developmental",Survey/questionnaire,Mixed,urd
+gilbert_meta_59,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,urd
+gilbert_meta_64,Child (<18y),Early (<6y),Educational,"Developmental, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,ar
+idas_machado2024,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por
+loc_fadplus_goto2021,Adult (18+),NA,General/non-specific,"Opinion/attitude, Personality",Survey/questionnaire,Likert Scale/selected response,jpn
+offlinefriend_dospert,Adult (18+),NA,General/non-specific,"Opinion/attitude, Personality",Survey/questionnaire,Likert Scale/selected response,eng
+gilbert_meta_33,Child (<18y),Adolescent (12-18y),Educational,"Opinion/attitude, Behavioral",Survey/questionnaire,Likert Scale/selected response,rus
+realpic_souza2021,Adult (18+),NA,General/non-specific,"Cognitive/educational, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,por
+gilbert_meta_77,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng
+coach_chen_2022_sns,Elderly (minimum age >50),NA,Clinical,"Affective/mental health, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,zho
+gilbert_meta_2,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng
+dmct_addis_2020_psiq,Adult (18+),NA,General/non-specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng
+ecps_sahm_2024_support,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,deu
+hmcdm_spatialreasoning,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,eng
