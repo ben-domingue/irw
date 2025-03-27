@@ -40,8 +40,9 @@ hist(d2,main='',xlab='difference in last two thresholds')
 #################################################################################################
 ##BLOCK C
 m2<-mirt(resp[,-1],1,'rsm')
-coef(m2,IRTpars=TRUE,simplify=TRUE)
 plot(m2,type='trace')
+
+coef(m2,IRTpars=TRUE,simplify=TRUE)
 ## E.g., for a K = 4 category response model,
 ##               P(x = 0 | theta, psi) = exp(0) / G              
 ##       P(x = 1 | theta, psi) = exp(a(theta - b1) + c) / G      
@@ -53,6 +54,7 @@ plot(m2,type='trace')
 
 #################################################################################################
 ##BLOCK D
+set.seed(8675309)
 
 ##oos testing
 nfold<-5
@@ -83,7 +85,22 @@ for (i in 1:nfold) {
 error<-do.call("rbind",error)
 error*10000
 
-##oos testing
+
+m2<-mirt(resp0[,-1],1,'rsm')
+par(mfrow=c(4,5),mgp=c(2,1,0),mar=c(3,3,1,1))
+th<-seq(-3,3,length.out=1000)
+for (i in 2:ncol(resp)) {
+    p<-expected.item(extract.item(m,names(resp)[i]),th)
+    p2<-expected.item(extract.item(m2,names(resp)[i]),th)
+    plot(th,p,ylim=c(0,3),type='l')
+    lines(th,p2,ylim=c(0,3),col='red')
+    legend("topleft",bty='n',names(resp)[i])
+}
+
+#################################################################################################
+##BLOCK E
+
+##oos testing, m2 is now a binomial model
 nfold<-5
 df$fold<-sample(1:nfold,nrow(df),replace=TRUE)
 rms<-function(x) sqrt(mean(x^2))
@@ -111,3 +128,19 @@ for (i in 1:nfold) {
 }
 error<-do.call("rbind",error)
 error*10000
+
+##graph
+m<-mirt(resp[,-1],1,'Rasch')
+m2<-mirt(resp[,-1]/3,1,'Rasch')
+
+par(mfrow=c(4,5),mgp=c(2,1,0),mar=c(3,3,1,1))
+th<-seq(-3,3,length.out=1000)
+for (i in 2:ncol(resp)) {
+    p<-expected.item(extract.item(m,names(resp)[i]),th)
+    p2<-expected.item(extract.item(m2,names(resp)[i]),th)
+    plot(th,p,ylim=c(0,3),type='l')
+    lines(th,p2*3,ylim=c(0,3),col='red')
+    legend("topleft",bty='n',names(resp)[i])
+}
+
+          
