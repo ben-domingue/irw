@@ -1,11 +1,17 @@
+install.packages(c("splines",
+                   "lme4",
+                   "mirt",
+                   "WrightMap",
+                   "difR",
+                   "TAM",
+                   "eRm"
+                   ),dep=TRUE
+                 )
 
 
-library(mirt)
-library(WrightMap)
-library(difR)
-
-
-library(irwpkg) ##devtools::install_github("hansorlee/irwpkg")
-library(redivis)
+##if you want to use irwpkg
+install.packages("devtools",dep=TRUE)
+devtools::install_github("redivis/redivis-r", ref="main")
+devtools::install_github("hansorlee/irwpkg")
 
 
