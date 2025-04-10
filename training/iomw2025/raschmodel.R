@@ -13,7 +13,7 @@ legend("topright",bty='n',paste(length(sumscore),' persons',sep=''))
 
 #################################################################################################
 ##BLOCK B
-resp<-irwpkg::irw_long2resp(df) ##bd. note the importance of this function
+resp<-irwpkg::irw_long2resp(df) ##note the importance of this function
 dim(df)
 dim(resp)
 head(df)
