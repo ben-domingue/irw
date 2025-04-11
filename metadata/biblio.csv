@@ -411,7 +411,7 @@ brain_hemisphere,NA,"Jorgenson, E. (2016). Open Hemispheric Brain Dominance Scal
   url = {http://openpsychometrics.org/_rawdata/OHBDS-data.zip},
   note = {Retrieved from http://openpsychometrics.org/_rawdata/}
 }"
-protestant_workethic,NA,Protestant Work Ethic Scale [dataset and codebook]. http://openpsychometrics.org/_rawdata/PWE_data.zip,http://openpsychometrics.org/_rawdata/,CC BY 4.0,"Data from an online survey that collects participants' sentiments on various ""protestant work ethic"" statements","@misc{PWE_dataset,
+protestant_workethic,NA,Protestant Work Ethic Scale [dataset and codebook]. http://openpsychometrics.org/_rawdata/PWE_data.zip,http://openpsychometrics.org/_rawdata/,CC BY 4.0,Data from an online survey that collects participants' sentiments on various 'protestant work ethic' statements,"@misc{PWE_dataset,
   title = {Protestant Work Ethic Scale [dataset and codebook]},
   howpublished = {\\url{http://openpsychometrics.org/_rawdata/PWE_data.zip}},
   note = {Accessed via http://openpsychometrics.org/_rawdata/},
@@ -4397,10 +4397,17 @@ gilbert_meta_93,10.1080/19345747.2025.2450318,"Arteaga, I., de Barros, A., & Gan
 "
 gilbert_meta_92,10.1080/19345747.2025.2450318,"Arteaga, I., de Barros, A., & Ganimian, A. J. (2025). The Challenges of Scaling up Effective Child-Rearing Practices Using Technology in Developing Settings: Experimental Evidence From India. Journal of Research on Educational Effectiveness, 1-19.",https://zenodo.org/records/14278007,NA,2. Maternal anxiety: General Anxiety Disorder (GAD) Questions," @article{Arteaga_2025, title={The Challenges of Scaling up Effective Child-Rearing Practices Using Technology in Developing Settings: Experimental Evidence From India}, ISSN={1934-5739}, url={http://dx.doi.org/10.1080/19345747.2025.2450318}, DOI={10.1080/19345747.2025.2450318}, journal={Journal of Research on Educational Effectiveness}, publisher={Informa UK Limited}, author={Arteaga, Irma and de Barros, Andreas and Ganimian, Alejandro J.}, year={2025}, month=mar, pages={1–19} }
 "
-gpt4mcq_young_2025,10.1177/0098628324131122,"Young, R., Courtney, E., Kah, A., Wilkerson, M., & Chen, Y.-H. (2025). Content and Item Response Theory Analysis of ChatGPT-4-Generated Multiple-Choice Items. Teaching of Psychology, 0(0). https://doi.org/10.1177/00986283241311220",https://osf.io/zq4eg/?view_only=d78eeb2235e940ca9ae4bb6732fad999,NA,ChatGPT-4 Multiple-choice item,"@misc{gpt4mcq_young_2025,
-  title = {ChatGPT-4 Multiple-choice item},
-  howpublished = {\url{}}
-}"
+gpt4mcq_young_2025,10.1177/00986283241311220,"Young, R., Courtney, E., Kah, A., Wilkerson, M., & Chen, Y.-H. (2025). Content and Item Response Theory Analysis of ChatGPT-4-Generated Multiple-Choice Items. Teaching of Psychology, 0(0). https://doi.org/10.1177/00986283241311220",https://osf.io/zq4eg/?view_only=d78eeb2235e940ca9ae4bb6732fad999,NA,ChatGPT-4 Multiple-choice item,"@article{young2025chatgpt,
+  author    = {Young, R. and Courtney, E. and Kah, A. and Wilkerson, M. and Chen, Y.-H.},
+  title     = {Content and Item Response Theory Analysis of ChatGPT-4-Generated Multiple-Choice Items},
+  journal   = {Teaching of Psychology},
+  volume    = {0},
+  number    = {0},
+  year      = {2025},
+  doi       = {10.1177/00986283241311220},
+  url       = {https://doi.org/10.1177/00986283241311220}
+}
+"
 gilbert_meta_94,10.1257/pol.20200716,"Evans, W. N., Kolka, S., Sullivan, J. X., & Turner, P. S. (2025). Fighting poverty one family at a time: Experimental evidence from an intervention with holistic, individualized, wraparound services. American Economic Journal: Economic Policy, 17(1), 311-361.
 
 Evans, William, Kolka, Shawna, Sullivan, James, and Turner, Patrick. Data and Code for: Fighting Poverty One Family at a Time: Experimental Evidence from an Intervention with Holistic, Individualized, Wrap-Around Services. Nashville, TN: American Economic Association [publisher], 2025. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2025-01-07. https://doi.org/10.3886/E193743V1
@@ -4422,37 +4429,54 @@ gcbs_brotherton_2013_tipi,10.3389/fpsyg.2013.00279,"Brotherton, R., French, C. C
 "
 gcbs_brotherton_2013_vcl,10.3389/fpsyg.2013.00279,"Brotherton, R., French, C. C., & Pickering, A. D. (2013). Measuring belief in conspiracy theories: The generic conspiracist beliefs scale. Frontiers in psychology, 4, 279.",https://openpsychometrics.org/_rawdata/,NA,Vocabulary check," @article{Brotherton_2013, title={Measuring Belief in Conspiracy Theories: The Generic Conspiracist Beliefs Scale}, volume={4}, ISSN={1664-1078}, url={http://dx.doi.org/10.3389/fpsyg.2013.00279}, DOI={10.3389/fpsyg.2013.00279}, journal={Frontiers in Psychology}, publisher={Frontiers Media SA}, author={Brotherton, Robert and French, Christopher C. and Pickering, Alan D.}, year={2013} }
 "
-csft_ye_2025,10.3758/s13428-024-02559-1,"Ye, M., & Li, J. (2025). Computerized continuous scoring of the cognitive style figure test: Embedded figure test as an example. Behavior Research Methods, 57(3), 84.",https://link.springer.com/article/10.3758/s13428-024-02559-1#Sec23,NA,Embedded Figure Test," @article{Ye_2025, title={Computerized continuous scoring of the cognitive style figure test: Embedded figure test as an example}, volume={57}, ISSN={1554-3528}, url={http://dx.doi.org/10.3758/s13428-024-02559-1}, DOI={10.3758/s13428-024-02559-1}, number={3}, journal={Behavior Research Methods}, publisher={Springer Science and Business Media LLC}, author={Ye, Meng and Li, Jingyi}, year={2025}, month=feb }
+hexaco_ashton_2014_x,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Extraversion (X) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
 "
-hexaco_ashton_2014_x,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Extraversion (X) Facets,"@misc{hexaco_ashton_2014_x,
-  title = {HEXACO Personality Inventory: Extraversion (X) Facets},
-  year = {2014},
-  note = {HEXACO Personality Inventory dataset focusing on Extraversion facets.}
-}"
-hexaco_ashton_2014_o,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Openness to Experience (O) Facets,"@misc{hexaco_ashton_2014_o,
-  title = {HEXACO Personality Inventory: Openness to Experience (O) Facets},
-  year = {2014},
-  note = {Table: hexaco_ashton_2014_o}
-}"
-hexaco_ashton_2014_a,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Agreeableness (A) Facets,"@misc{hexaco_ashton_2014_a,
-  title = {HEXACO Personality Inventory: Agreeableness (A) Facets},
-  year = {2014},
-  note = {HEXACO Personality Inventory dataset focusing on the Agreeableness facets.}
-}"
-hexaco_ashton_2014_c,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Conscientiousness (C) Facets,"@misc{hexaco_ashton_2014_c,
-  title = {HEXACO Personality Inventory: Conscientiousness (C) Facets},
-  note = {No reference or URL provided}
-}"
-hexaco_ashton_2014_h,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Honesty-Humility (H) Facets,"@misc{hexaco_ashton_2014_h,
-  title = {HEXACO Personality Inventory: Honesty-Humility (H) Facets},
-  year = {2014},
-  note = {HEXACO Personality Inventory dataset focusing on the Honesty-Humility (H) facets.}
-}"
-hexaco_ashton_2014_e,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Emotionality (E) Facets,"@misc{hexaco_ashton_2014_e,
-  title = {HEXACO Personality Inventory: Emotionality (E) Facets},
-  year = {2014},
-  note = {Table: hexaco_ashton_2014_e}
-}"
+hexaco_ashton_2014_o,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Openness to Experience (O) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
+"
+hexaco_ashton_2014_a,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Agreeableness (A) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
+"
+hexaco_ashton_2014_c,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Conscientiousness (C) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
+"
+hexaco_ashton_2014_h,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Honesty-Humility (H) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
+"
+hexaco_ashton_2014_e,NA,"Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP–HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515-1526.",https://ipip.ori.org/newhexaco_pi_key.htm,NA,HEXACO Personality Inventory: Emotionality (E) Facets,"@misc{hexaco_extraversion_facets,
+  author       = {Ashton, M. C. and Lee, K. and Goldberg, L. R.},
+  title        = {HEXACO Personality Inventory: Extraversion (X) Facets},
+  year         = {2007},
+  howpublished = {\url{https://ipip.ori.org/newhexaco_pi_key.htm}},
+  note         = {Based on: Ashton, M. C., Lee, K., & Goldberg, L. R. (2007). The IPIP--HEXACO scales: An alternative, public-domain measure of the personality constructs in the HEXACO model. Personality and Individual Differences, 42, 1515--1526.}
+}
+"
 wang_onlineriskexp_2025,10.1371/journal.pone.0319700,"Wang, H., Zhang, S., Sun, N., Qi, S., & Yi, X. (2025). Online risk exposure and anxiety among college students in China: The chain mediating role of negative attribution and interpersonal security. PloS one, 20(3), e0319700.",https://doi.org/10.1371/journal.pone.0319700.s001,NA,"Scales that measure how often students encounter harmful online experiences, like cyberbullying, sexual solicitation, or exposure to explicit content."," @article{Wang_2025, title={Online risk exposure and anxiety among college students in China: The chain mediating role of negative attribution and interpersonal security}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0319700}, DOI={10.1371/journal.pone.0319700}, number={3}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Wang, Haihong and Zhang, Shang and Sun, Na and Qi, Senqing and Yi, Xinfa}, editor={Regencia, Zypher Jude G.}, year={2025}, month=mar, pages={e0319700} }
 "
 wang_onlineriskexp_2025_negativeatt,10.1371/journal.pone.0319700,"Wang, H., Zhang, S., Sun, N., Qi, S., & Yi, X. (2025). Online risk exposure and anxiety among college students in China: The chain mediating role of negative attribution and interpersonal security. PloS one, 20(3), e0319700.",https://doi.org/10.1371/journal.pone.0319700.s001,NA,Tendency to interpret events or others' intentions in overly negative or pessimistic ways.," @article{Wang_2025, title={Online risk exposure and anxiety among college students in China: The chain mediating role of negative attribution and interpersonal security}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0319700}, DOI={10.1371/journal.pone.0319700}, number={3}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Wang, Haihong and Zhang, Shang and Sun, Na and Qi, Senqing and Yi, Xinfa}, editor={Regencia, Zypher Jude G.}, year={2025}, month=mar, pages={e0319700} }

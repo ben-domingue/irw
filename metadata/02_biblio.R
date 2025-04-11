@@ -8,6 +8,14 @@ library(glue)
 library(dplyr)
 library(progress)
 library(jsonlite)
+library(purrr)
+
+add_json_field <- function(key, value) {
+  if (!is.na(value)) {
+    return(paste0('  "', key, '": "', value, '"'))
+  }
+  return(NULL)
+}
 
 # Function to Generate BibTex from DOI
 fetch_bibtex_from_doi <- function(filename, doi) {
@@ -73,27 +81,38 @@ generate_bibtex <- function(df) {
     message("No missing BibTeX entries found.")
     return(df)
   }
+  
   pb <- progress_bar$new(
     format = "Generating BibTeX [:bar] :percent (:current/:total) - ETA: :eta",
     total = length(missing_bibtex_indices),
     width = 50
   )
   for (i in missing_bibtex_indices) {
-    prompt <- paste(
-      "Extract a valid BibTeX citation in JSON format for the following dataset. They should all start with @misc:\n",
-      "{\n",
-      '  "table": "', df$table[i], '",\n',
-      '  "reference": "', df$Reference[i], '",\n',
-      '  "description": "', df$Description[i], '",\n',
-      '  "url": "', df$`URL (for data)`[i], '"\n',
-      "}\n",
-      "Return a JSON object with a single key 'bibtex'."
+    # Build JSON lines dynamically
+    fields <- list(
+      add_json_field("reference",   df$Reference_x[i]),
+      add_json_field("url",         df$URL__for_data_[i])
     )
-    print(df$table[i])
+    
+    # Remove NULLs and collapse into JSON object
+    json_body <- paste("{\n", paste(Filter(Negate(is.null), fields), collapse = ",\n"), "\n}")
+    
+    # Only proceed if JSON has at least one field
+    if (nchar(json_body) > 5) {
+      prompt <- paste(
+        "Extract a valid BibTeX citation in JSON format for the following citation:\n",
+        json_body,
+        "\nReturn a JSON object with a single key 'bibtex'."
+      )
+    } else {
+      message(sprintf("Skipping row %d — all fields are NA.", i))
+    }
     df$BibTex[i] <- openai_chat(prompt)
+    
     pb$tick()
     Sys.sleep(1) # Limit the call-rate to OpenAI
   }
+  
   return(df)
 }
 
@@ -109,7 +128,7 @@ biblio <- biblio_table$to_tibble()
 head(biblio)
 
 # Find rows in dictionary whose Filename is not in biblio
-new_data_rows <- irw_dict[!(tolower(irw_dict$table) %in% tolower(biblio$table)), ]
+new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
 ##remove nonpublic elements before calling ChatGPT
 new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
 new_data_rows <- new_data_rows |>
