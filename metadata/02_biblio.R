@@ -11,7 +11,8 @@ library(jsonlite)
 
 # Function to Generate BibTex from DOI
 fetch_bibtex_from_doi <- function(filename, doi) {
-  if (is.na(doi) || doi == "") {
+    print(filename)
+    if (is.na(doi) || doi == "") {
     return(NA_character_)  # Return NA if DOI is missing
   }
   url <- paste0("https://doi.org/", doi)
@@ -33,12 +34,10 @@ fetch_bibtex_from_doi <- function(filename, doi) {
 # Function to call ChatGPT and generate JSON formatted BibTeX output
 openai_chat <- function(prompt, model = "gpt-4o", temperature = 0) {
   api_key <- Sys.getenv("OPENAI_API_KEY")
-  
   if (nchar(api_key) == 0) {
     api_key <- readline("Enter your OpenAI API key: ")
     Sys.setenv(OPENAI_API_KEY = api_key)
   }
-  
   response <- POST(
     url = "https://api.openai.com/v1/chat/completions", 
     add_headers(Authorization = paste("Bearer", api_key)),
@@ -54,11 +53,9 @@ openai_chat <- function(prompt, model = "gpt-4o", temperature = 0) {
       temperature = temperature
     ), auto_unbox = TRUE)
   )
-  
   if (status_code(response) != 200) {
     stop("Error: ", content(response, as = "parsed")$error$message)
   }
-  
   parsed_response <- content(response, as = "parsed")
   if (!is.null(parsed_response$choices) && length(parsed_response$choices) > 0) {
     json_text <- parsed_response$choices[[1]]$message$content
@@ -76,7 +73,6 @@ generate_bibtex <- function(df) {
     message("No missing BibTeX entries found.")
     return(df)
   }
-  
   pb <- progress_bar$new(
     format = "Generating BibTeX [:bar] :percent (:current/:total) - ETA: :eta",
     total = length(missing_bibtex_indices),
@@ -93,12 +89,11 @@ generate_bibtex <- function(df) {
       "}\n",
       "Return a JSON object with a single key 'bibtex'."
     )
+    print(df$table[i])
     df$BibTex[i] <- openai_chat(prompt)
-    
     pb$tick()
     Sys.sleep(1) # Limit the call-rate to OpenAI
   }
-  
   return(df)
 }
 

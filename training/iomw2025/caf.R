@@ -8,7 +8,7 @@ spl<-splines::bs(x)
 head(cbind(x,spl))
 m<-lm(y~spl)
 summary(m)
-lines(x,fitted(m),col='red')
+lines(x,fitted(m),col='red',lwd=3)
 
 df<-irwpkg::irw_fetch("roar_lexical")
 
