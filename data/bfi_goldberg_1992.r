@@ -43,11 +43,11 @@ df_O <- pivot_longer(df_O, cols = -c(id, starts_with("cov")),
 
 # Correct: use list() to keep dataframes intact
 suffixes <- list(
-  sociability = df_E,
-  emotional_instability = df_N,
-  compassion = df_A,
-  self_discipline = df_C,
-  intellectual_curiosity = df_O
+  extraversion = df_E,
+  neuroticism = df_N,
+  agreeableness = df_A,
+  conscientiousness = df_C,
+  openness_to_experience = df_O
 )
 
 # Loop over the list and save one .csv and one .RData for each
