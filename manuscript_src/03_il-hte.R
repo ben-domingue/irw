@@ -1,36 +1,10 @@
-# Load the dataset from the redivis package
-dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
-
-# List all tables in the dataset
-dataset_tables <- dataset$list_tables()
-
-# Rename the tables using their names for easier access
-names(dataset_tables) <- sapply(dataset_tables, function(x) x$name)
-
-# Define a function to list variables for a given table
-f <- function(table) table$list_variables()
-
-# Apply the function to all tables to get a list of variable names
-nms <- lapply(dataset_tables, f)
-
-# Define a function to check if "treat" is among the variable names
-f <- function(x) {
-    nm <- sapply(x, function(x) x$name)  # Extract names of variables
-    "treat" %in% nm  # Check if "treat" is in the names
-}
-
-# Apply the function to identify tables that contain the "treat" variable
-test <- sapply(nms, f)
-
-# Filter the dataset tables to only include those that contain "treat"
-rct_tables <- dataset_tables[test]
+rct_tables <- irwpkg::irw_filter(var='treat',density=NULL)
 
 # Define a function to perform item-level Harmonic Treatment Effect (IL-HTE) analysis
 il_hte <- function(tab) {
-    nm <- tab$name  # Get the name of the current table
-    df <- tab$to_data_frame()  # Convert the table to a data frame
+    df<-irwpkg::irw_fetch(tab)
     df$resp <- as.numeric(df$resp)  # Ensure the response variable is numeric
-    print(nm)  # Print the name of the table
+    print(tab)  # Print the name of the table
     print(head(df))  # Display the first few rows of the data frame
     
     # Filter for only wave 1 if the "wave" variable exists
@@ -57,14 +31,11 @@ il_hte <- function(tab) {
     print(summary(m))  # Print the model summary
     
     # Return the table name, random effects, and fixed effects from the model
-    list(nm, lme4::ranef(m), lme4::fixef(m))
+    list(tab, lme4::ranef(m), lme4::fixef(m))
 }
 
-# Set seed for reproducibility
 set.seed(1013010)
-
-# Apply the IL-HTE function to the first 10 RCT tables
-L <- lapply(rct_tables[1:10], il_hte)
+L <- lapply(names(rct_tables)[1:10], il_hte)
 
 # Remove NULL results from the results list
 L <- L[!sapply(L, is.null)]
