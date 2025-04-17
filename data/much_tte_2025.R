@@ -139,7 +139,7 @@ df_mr <- df_mr_raw %>%
   )
 
 write.csv(df_mr, "much_tte_2025_matrixreasoning.csv", row.names = FALSE)
-write.csv(df_mrp, "much_tte_2025_unsolvablepersistence.csv", row.names = FALSE)
+##write.csv(df_mrp, "much_tte_2025_unsolvablepersistence.csv", row.names = FALSE) ##removed 4-17-2025 by BD, responses not ordinal
 write.csv(df_ct, "much_tte_2025_concentrationtask.csv", row.names = FALSE)
 write.csv(df_cm, "much_tte_2025_currentmotivation.csv", row.names = FALSE)
 write.csv(df_ef, "much_tte_2025_effort.csv", row.names = FALSE)
