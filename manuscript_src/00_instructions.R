@@ -2,4 +2,3 @@
 ## If it's not installed, you can do that with: devtools::install_github("redivis/redivis-r", ref="main")
 ## You will also need the 'irwpkg': https://hansorlee.github.io/irwpkg/
 
-df<-irwpkg::irw_fetch("gilbert_meta_2")

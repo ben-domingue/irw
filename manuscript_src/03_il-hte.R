@@ -1,4 +1,3 @@
-rct_tables <- irwpkg::irw_filter(var='treat',density=NULL)
 
 # Define a function to perform item-level Harmonic Treatment Effect (IL-HTE) analysis
 il_hte <- function(tab) {
@@ -34,8 +33,9 @@ il_hte <- function(tab) {
     list(tab, lme4::ranef(m), lme4::fixef(m))
 }
 
+rct_tables<-paste("gilbert_meta_",c(20,37,17,69,1,74,41,9))
 set.seed(1013010)
-L <- lapply(names(rct_tables)[1:10], il_hte)
+L <- lapply(rct_tables, il_hte)
 
 # Remove NULL results from the results list
 L <- L[!sapply(L, is.null)]

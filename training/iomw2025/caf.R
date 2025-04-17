@@ -48,5 +48,4 @@ plot(z$t,z$acc,type='l',xlab='rt',ylab='change in repsonse',xlim=qu,xaxt='n',lwd
 tvals<-c(1,2,3,5,10,15,30,60,120)
 axis(side=1,at=log(tvals),as.character(tvals))
 qu<-quantile(df$rt,c(.025,.975))
-polygon(c(qu[1],qu[1],qu[2],qu[2]),c(0,1,1,0),col=rgb(1,0,0,alpha=.35)
-)
+polygon(c(qu[1],qu[1],qu[2],qu[2]),c(0,1,1,0),col=rgb(1,0,0,alpha=.35))
