@@ -48,6 +48,11 @@ BAFACALO_Golino_2013_FIS,17520,3,292,60,60,292,1,id| age| item| resp
 BAFACALO_Golino_2013_SMS,10804,3,292,37,37,292,1,id| age| item| resp
 balance_mokken,12100,2,484,25,25,484,1,id| item| resp
 beh_boredom_bieleke2022,12084,6,636,19,19,636,1,id| item| resp
+bfi_goldberg_1992_agreeableness,197190,6,19719,10,10,19719,1,id| cov_race| cov_age| cov_engnat| cov_gender| cov_hand| cov_source| cov_country| item| resp
+bfi_goldberg_1992_conscientiousness,197190,6,19719,10,10,19719,1,id| cov_race| cov_age| cov_engnat| cov_gender| cov_hand| cov_source| cov_country| item| resp
+bfi_goldberg_1992_extraversion,197190,6,19719,10,10,19719,1,id| cov_race| cov_age| cov_engnat| cov_gender| cov_hand| cov_source| cov_country| item| resp
+bfi_goldberg_1992_neuroticism,197190,6,19719,10,10,19719,1,id| cov_race| cov_age| cov_engnat| cov_gender| cov_hand| cov_source| cov_country| item| resp
+bfi_goldberg_1992_openness_to_experience,197190,6,19719,10,10,19719,1,id| cov_race| cov_age| cov_engnat| cov_gender| cov_hand| cov_source| cov_country| item| resp
 bhs_floreskanter2021,51936,5,2164,24,24,2164,1,id| item| resp
 big5_sirt,120000,3,500,240,240,500,1,id| item| resp
 boyd_prism_2024,13104,5,606,22,21.6237623762376,595.636363636364,0.982898289828983,id| item| resp
@@ -498,6 +503,7 @@ MEFSIRODGAS_Nileksela_2023_severity,45409,6,499,91,91,499,1,id| age| item| resp
 mental_health_malawi,35111,6,984,40,35.6819105691057,877.775,0.892047764227642,resp| item| id
 metacogmonitoring_double2025,20100,6,300,67,67,300,1,id| cov_age| cov_sex| item| resp
 mft_validationandreplication,30060,6,835,36,36,835,1,id| item| resp
+mgkt,614976,11,19218,32,32,19218,1,id| cov_age| cov_gender| cov_engnat| cov_country| item| resp| rt
 MGSISGCLQ_Hollyhead_2018,950,6,38,25,25,38,1,id| cov_medical_condition| item| resp
 mhscdc_fried_2020_anger,560,5,80,7,7,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
 mhscdc_fried_2020_conscientiousness,960,5,80,12,12,80,1,id| cov_Gender| cov_Age| cov_Nationality| cov_RelationshipStatus| cov_StudyProgram| cov_StudyYear| cov_WorkStatus| cov_MentalHealth| item| resp
@@ -538,6 +544,11 @@ mturkddm_by,132800,3,166,20,800,6640,40,id| block| order| rt| resp| item
 mturkddm_lexical,68160,3,142,4588,480,14.8561464690497,0.10462074978204,id| block| order| rt| resp| item
 mturkddm_recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0.245960778293741,id| block| order| rt| resp| item
 mturkddm_y25,127488,3,166,12,768,10624,64,id| block| order| rt| resp| item
+much_tte_2025_actionorientation,14928,2,1244,12,12,1244,1,id| group| cov_age| cov_gender| cov_education| cov_language| cov_country| cov_device| item| resp
+much_tte_2025_concentrationtask,11196,3,1244,9,9,1244,1,id| group| cov_age| cov_gender| cov_education| cov_language| cov_country| cov_device| item| raw_resp| wave| resp
+much_tte_2025_currentmotivation,11196,101,1244,3,9,3732,3,id| group| cov_age| cov_gender| cov_education| cov_language| cov_country| cov_device| item| resp| wave
+much_tte_2025_effort,12440,4,1244,5,10,2488,2,id| group| cov_age| cov_gender| cov_education| cov_language| cov_country| cov_device| item| resp| wave
+much_tte_2025_matrixreasoning,24880,3,1244,20,20,1244,1,id| group| cov_age| cov_gender| cov_education| cov_language| cov_country| cov_device| item| raw_resp| wave| resp| rt
 naep_multilcirt,18120,2,1510,12,12,1510,1,resp| item| id
 NAMPRB_Siwiak_2024_AOT,1248,6,156,8,8,156,1,id| item| resp
 NAMPRB_Siwiak_2024_BSR10,4680,5,156,30,30,156,1,id| item| resp
