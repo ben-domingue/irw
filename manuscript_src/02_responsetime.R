@@ -1,10 +1,10 @@
 # Select only the tables that contain the "rt" variable
-rt_tables <- irwpkg::irw_filter(var='rt',density=NULL)
+rt_tables <- irw::irw_filter(var='rt',density=NULL)
 
 # Define a processing function for each table containing "rt"
 proc <- function(table) {
     # Convert the table to a data frame
-    df <- irwpkg::irw_fetch(table)
+    df <- irw::irw_fetch(table)
     # Replace "NA" strings with actual NA values in 'resp' and 'rt' columns
     df$resp <- ifelse(df$resp == "NA", NA, df$resp)
     df$rt <- ifelse(df$rt == "NA", NA, df$rt)

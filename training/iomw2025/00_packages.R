@@ -11,9 +11,9 @@ install.packages(c("splines",
                  )
 
 
-##If you want to use irwpkg, you will also need to install the following:
+##If you want to use the irw R package, you will also need to install the following:
 install.packages("devtools",dep=TRUE)
 devtools::install_github("redivis/redivis-r", ref="main")
-devtools::install_github("hansorlee/irwpkg")
+devtools::install_github("hansorlee/irw")
 
 

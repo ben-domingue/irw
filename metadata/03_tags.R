@@ -1,6 +1,6 @@
 library(gsheet)
 tag <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123')
-tag<-tag[-1,c(1,6:12)]
+tag<-tag[-1,c(1,6:12,3)]
 names(tag)<-tolower(names(tag))
 tag$table<-tolower(tag$table)
 

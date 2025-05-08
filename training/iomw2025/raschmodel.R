@@ -1,4 +1,4 @@
-library(irwpkg)
+library(irw)
 df<-irw_fetch("DART_Brysbaert_2020_1")
 
 #################################################################################################
@@ -13,7 +13,7 @@ legend("topright",bty='n',paste(length(sumscore),' persons',sep=''))
 
 #################################################################################################
 ##BLOCK B
-resp<-irwpkg::irw_long2resp(df) ##note the importance of this function
+resp<-irw::irw_long2resp(df) ##note the importance of this function
 dim(df)
 dim(resp)
 head(df)

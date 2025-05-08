@@ -10,7 +10,7 @@ m<-lm(y~spl)
 summary(m)
 lines(x,fitted(m),col='red',lwd=3)
 
-df<-irwpkg::irw_fetch("roar_lexical")
+df<-irw::irw_fetch("roar_lexical")
 
 caf<-function(df,nspl=3) {
     ##rescaling responses

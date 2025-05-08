@@ -1,5 +1,0 @@
-##irw
-devtools::install_github("ben-domingue/irw/irw_pkg")
-
-
-NOTE: This is deprecated in favor of 'irwpkg'. https://hansorlee.github.io/irwpkg/

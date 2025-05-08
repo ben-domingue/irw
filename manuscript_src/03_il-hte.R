@@ -1,7 +1,7 @@
 
 # Define a function to perform item-level Harmonic Treatment Effect (IL-HTE) analysis
 il_hte <- function(tab) {
-    df<-irwpkg::irw_fetch(tab)
+    df<-irw::irw_fetch(tab)
     df$resp <- as.numeric(df$resp)  # Ensure the response variable is numeric
     print(tab)  # Print the name of the table
     print(head(df))  # Display the first few rows of the data frame

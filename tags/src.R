@@ -1,4 +1,4 @@
-tabs<-irwpkg::irw_list_tables()
+tabs<-irw::irw_list_tables()
 tabs<-tolower(tabs$name)
 
 library(gsheet)

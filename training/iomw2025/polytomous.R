@@ -1,4 +1,4 @@
-library(irwpkg)
+library(irw)
 df<-irw_fetch("promis1wave1_cesd")
 
 #################################################################################################
@@ -16,7 +16,7 @@ legend("topright",bty='n',paste(length(pvalue),' items',sep=''))
 hist(sumscore,main='',xlab='person sum score')
 legend("topright",bty='n',paste(length(sumscore),' persons',sep=''))
 
-resp<-irwpkg::irw_long2resp(df) ##bd. note the importance of this function
+resp<-irw::irw_long2resp(df) ##bd. note the importance of this function
 dim(df)
 dim(resp)
 head(df)
@@ -64,7 +64,7 @@ error<-list()
 for (i in 1:nfold) {
     test<-df[df$fold==i,]
     train<-df[df$fold!=i,]
-    resp0<-irwpkg::irw_long2resp(train)
+    resp0<-irw::irw_long2resp(train)
     m<-mirt(resp0[,-1],1,'Rasch')
     m2<-mirt(resp0[,-1],1,'rsm')
     th<-fscores(m)
@@ -108,7 +108,7 @@ error<-list()
 for (i in 1:nfold) {
     test<-df[df$fold==i,]
     train<-df[df$fold!=i,]
-    resp0<-irwpkg::irw_long2resp(train)
+    resp0<-irw::irw_long2resp(train)
     m<-mirt(resp0[,-1],1,'Rasch')
     m2<-mirt(resp0[,-1]/3,1,'Rasch')
     th<-fscores(m)
