@@ -32,13 +32,15 @@ dfQ <- dfQ_resp %>%
   mutate(
     rt = na_if(rt, ""),
     rt = as.numeric(gsub(",", "", rt)) / 1000
-  )
+  ) %>%
+  filter(resp != "NULL")
 
 df_tipi <- df %>%
   select(id, starts_with("TIPI"), starts_with("cov")) %>%
   pivot_longer(cols = starts_with("TIPI"),
                names_to = "item",
-               values_to = "resp")
+               values_to = "resp") %>%
+  filter(resp != 0)
 
 df_vcl <- df %>%
   select(id, starts_with("VCL"), starts_with("cov")) %>%
