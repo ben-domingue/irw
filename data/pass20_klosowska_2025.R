@@ -54,7 +54,7 @@ df_pass_hospital <- df1 %>%
   pivot_longer(-c(id, starts_with("cov")),
                names_to = "item",
                values_to = "resp") %>%
-  filter(!is.na(resp))
+  filter(!is.na(resp) & resp != 6) 
 
 
 write.csv(df_pass, "pass20_klosowska_2025_pass_online.csv", row.names = FALSE)
