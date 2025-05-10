@@ -1,5 +1,6 @@
 # Select only the tables that contain the "rt" variable
 rt_tables <- irw::irw_filter(var='rt',density=NULL)
+##irw::irw_save_bibtex(rt_tables)
 
 # Define a processing function for each table containing "rt"
 proc <- function(table) {
@@ -27,8 +28,8 @@ proc <- function(table) {
 }
 
 # Apply the 'proc' function to each table containing 'rt' and store the results in 'dens'
-dens <- lapply(rt_tables[1:3], proc)
-##save(dens,file="/tmp/dens.Rdata")
+dens <- lapply(rt_tables, proc)
+##save(dens,file="/tmp/dens.Rdata") ##time-consuming to get them all
 
 # Create a PDF file to save the Q-Q plots
 pdf("~/Dropbox/Apps/Overleaf/IRW/rt.pdf", width = 3, height = 2.2)
@@ -48,7 +49,7 @@ plot(NULL, xlim = c(-6, 6), ylim = c(-6, 6),
 abline(0, 1, lwd = 2)
 
 # Loop through density data and add lines for each density distribution
-for (i in 1:length(dens)) lines(dens[[i]], col = cc)
+for (i in 1:length(dens)) lines(dens[[i]], col = cc,lwd=1.2)
 
 # Close the PDF device
 dev.off()

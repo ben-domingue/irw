@@ -34,7 +34,6 @@ il_hte <- function(tab) {
 }
 
 rct_tables<-paste("gilbert_meta_",c(20,37,17,69,1,74,41,9))
-set.seed(1013010)
 L <- lapply(rct_tables, il_hte)
 
 # Remove NULL results from the results list

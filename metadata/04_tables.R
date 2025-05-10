@@ -33,6 +33,7 @@ for (i in 2:5) {
     x<-merge(x,y,by='table',all=TRUE)
 }
 
+##counting duplicates
 n<-rowSums(x[,-1],na.rm=TRUE)
 x[order(n),]
 dim(x)

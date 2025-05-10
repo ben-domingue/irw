@@ -81,7 +81,6 @@ generate_bibtex <- function(df) {
     message("No missing BibTeX entries found.")
     return(df)
   }
-  
   pb <- progress_bar$new(
     format = "Generating BibTeX [:bar] :percent (:current/:total) - ETA: :eta",
     total = length(missing_bibtex_indices),
@@ -93,10 +92,8 @@ generate_bibtex <- function(df) {
       add_json_field("reference",   df$Reference_x[i]),
       add_json_field("url",         df$URL__for_data_[i])
     )
-    
     # Remove NULLs and collapse into JSON object
     json_body <- paste("{\n", paste(Filter(Negate(is.null), fields), collapse = ",\n"), "\n}")
-    
     # Only proceed if JSON has at least one field
     if (nchar(json_body) > 5) {
       prompt <- paste(
@@ -108,11 +105,9 @@ generate_bibtex <- function(df) {
       message(sprintf("Skipping row %d — all fields are NA.", i))
     }
     df$BibTex[i] <- openai_chat(prompt)
-    
     pb$tick()
     Sys.sleep(1) # Limit the call-rate to OpenAI
   }
-  
   return(df)
 }
 

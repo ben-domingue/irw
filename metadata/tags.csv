@@ -356,18 +356,63 @@ iowa_gambling_task,Adult (18+),NA,"General/non-specific, Educational",Cognitive/
 gilbert_meta_95,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,tur,Key Features Questions (KFQ)
 gilbert_meta_96,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,tur,AI attitudes
 gilbert_meta_70,NA,NA,NA,NA,NA,NA,NA,NA
-gilbert_meta_34,NA,NA,NA,NA,NA,NA,NA,NA
-duolingo_es_en__reverse_translate,NA,NA,NA,NA,NA,NA,NA,NA
-threatperceptions_isler_2024_experiment2_picture_panas,NA,NA,NA,NA,NA,NA,NA,NA
-pisa2022_math,NA,NA,NA,NA,NA,NA,NA,NA
-broadband_inventories,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_34,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,PHQ-9 Depression Scale
+duolingo_en_es__reverse_translate,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",reverse_translate
+duolingo_en_es__reverse_tap,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",reverse_tap
+duolingo_en_es__listen,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",listen
+duolingo_es_en__reverse_translate,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",reverse_translate
+duolingo_es_en__reverse_tap,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",reverse_tap
+duolingo_es_en__listen,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,spa",listen
+duolingo_fr_en__reverse_translate,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,fre",reverse_translate
+duolingo_fr_en__reverse_tap,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,fre",reverse_tap
+duolingo_fr_en__listen,NA,NA,General/non-specific,Cognitive/educational,Test,Constructed Response,"eng,fre",listen
+pisa2000_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2000_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2000_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2003_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2003_problem_solving,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2003_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2003_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2006_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2006_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2006_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2009_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2009_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2009_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2012_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2012_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2015_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2015_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2015_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2018_gc,Child (<18y),Adolescent (12-18y),Educational,NA,NA,NA,NA,PISA
+pisa2018_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2018_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2018_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2022_math,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2022_read,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+pisa2022_science,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Mixed,eng,PISA
+iat_difference,Mixed,NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Attitudes about difference
+iat_poverty,Mixed,NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Attitudes towards poverty
+alsecypiamh_wu_2022_cps,Child (<18y),Adolescent (12-18y),Educational,"Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,"chi,eng",Claremont Purpose Scale
+alsecypiamh_wu_2022_empathy,Child (<18y),Adolescent (12-18y),Educational,"Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"chi,eng",Perce Empathy Scale
+alsecypiamh_wu_2022_mil,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"chi,eng",Meaning of Life
+alsecypiamh_wu_2022_pei,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"chi,eng",Pancreatic Exocrine Insufficiency
+alsecypiamh_wu_2022_nei,Child (<18y),Adolescent (12-18y),Educational,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,"chi,eng",National Eye Institute Questionnaire
+alsecypiamh_wu_2022_swemwbs,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"chi,eng",Short Warwick-Edinburgh Mental Wellbeing Scale
+alsecypiamh_wu_2022_pil,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"chi,eng",Purpose in Life
+alsecypiamh_wu_2022_swls,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"chi,eng",Satisfaction with Life Scale
+aspirations_sonmez_2022,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,tur,Turkish version of the Aspiration Index
+mq_supremecourt,Adult (18+),NA,Targeted/specific,Opinion/attitude,NA,Likert Scale/selected response,eng,Supreme Court voting record
+mcmi_mokken,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,dut,Million clinical multiaxial inventory
+concretewords,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific, Educational",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Concreteness of words
+demos,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,chi,Dalian Emotional Movement Open-source Set
+rr98_accuracy,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Luminosity discrimination tasks
+twod_rotation_mather2023,Mixed,Adolescent (12-18y),"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,spatial abilities
+een_lacey_2024_children,Child (<18y),Adolescent (12-18y),"General/non-specific, Educational",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,nep,Mental Health Increase Willingness Questionnaire
+faces_spanish_vegas_2022_faces,NA,NA,NA,NA,NA,NA,NA,Family Adaptability and Cohesion Evaluation Scale Package (FACES IV).
+faces_spanish_vegas_2022_fss,NA,NA,NA,NA,NA,NA,NA,family satisfaction scale (fss)
 enem_2017_1mil_mt,NA,NA,NA,NA,NA,NA,NA,NA
-ijls_eersel_2024_anxiety,NA,NA,NA,NA,NA,NA,NA,NA
-koreannursing_park_2017,NA,NA,NA,NA,NA,NA,NA,NA
-mpsycho_wilpat,NA,NA,NA,NA,NA,NA,NA,NA
-vei_brazillian_shiramizu_2018_ei,NA,NA,NA,NA,NA,NA,NA,NA
-erf_breuer_2017_tai,NA,NA,NA,NA,NA,NA,NA,NA
-mpsycho_zareki,NA,NA,NA,NA,NA,NA,NA,NA
+florida_twins_behavior_ecs,NA,NA,NA,NA,NA,NA,NA,NA
 een_lacey_2024_parent,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ne,Willingness to Seek Mental Health Treatment
 emsc_kuan-chin_2023,Adult (18+),NA,Educational,"Cognitive/educational, Affective/mental health",Observational rating,Likert Scale/selected response,eng,Evaluation of Medical Students' Communication Skills in an Objective Structured Clinical Examination (OSCE) Using Electronic Medical Records (EMR)
 enem_2015_1mil_cn,Child (<18y),Adolescent (12-18y),Educational,"Cognitive/educational, Opinion/attitude",Test,Mixed,por,Perception of the Relationship Between ENEM and the Brazilian High School Curriculum

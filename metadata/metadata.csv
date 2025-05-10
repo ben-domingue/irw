@@ -291,6 +291,9 @@ FPAS_Silva_2022,2718,5,151,18,18,151,1,id| item| resp
 frac20,10720,2,536,20,20,536,1,item| id| resp| Qmatrix__1| Qmatrix__2| Qmatrix__3| Qmatrix__4| Qmatrix__5| Qmatrix__6| Qmatrix__7| Qmatrix__8
 fractals_rating,71680,7,400,7,179.2,10240,25.6,id| item| rater| resp
 ftna_kasper_2022,8862532,5,633038,11,14,805684.727272727,1.27272727272727,id| cov_year| cov_female| cluster_id| cov_private| item| resp| wave
+fullscaleiq_memory,19164,11,3194,6,6,3194,1,id| item| resp| raw_resp| rt
+fullscaleiq_mentalrotation,19164,11,3194,6,6,3194,1,id| item| resp| raw_resp| rt
+fullscaleiq_vocab,22358,9,3194,7,7,3194,1,id| item| resp| raw_resp| rt
 g308_sirt,14940,2,747,20,20,747,1,resp| testlet| item| id
 gad_BrummerHoffman_2021,63980,5,1828,35,35,1828,1,id| group| date| age| item| resp
 GART_Grolig_2020,9000,2,120,75,75,120,1,id| age| gender| item| resp
@@ -402,6 +405,8 @@ gilbert_meta_93,206612,2,2433,119,84.9206740649404,1736.23529411765,0.7136191097
 gilbert_meta_94,18186,2,378,17,48.1111111111111,1069.76470588235,2.83006535947712,id| treat| cov_hhsize| cov_female| cov_married| item| resp| wave| r
 gilbert_meta_95,2760,63,115,12,24,230,2,id| treat| cov_male| cov_repeat_year| wave| item| resp
 gilbert_meta_96,1032,7,86,6,12,172,2,id| treat| cov_male| cov_repeat_year| item| resp| wave
+gilbert_meta_97,180471,6,8609,12,20.9630619119526,15039.25,1.74692182599605,id| treat| cov_age| cov_sex| cov_eth| cov_nationality| cov_language| item| resp| wave
+gilbert_meta_98,90204,6,8608,6,10.4790892193309,15034,1.74651486988848,id| treat| cov_age| cov_sex| cov_eth| cov_nationality| cov_language| item| resp| wave
 gps_vangsness_2019,3695,5,231,16,15.995670995671,230.9375,0.999729437229437,id| item| resp
 gpt4mcq_young_2025,3800,4,190,20,20,190,1,id| item| resp
 graphmapping_study1,6318,2,61,18,103.573770491803,351,5.75409836065574,item| rt| resp| order| id
@@ -438,6 +443,7 @@ IJLS_Eersel_2024_IJLSreaction,3303,5,200,9,16.515,367,1.835,id| item| wave| resp
 IJLS_Eersel_2024_IUS,2388,5,199,12,12,199,1,id| IUS_sum| item| resp
 IJLS_Eersel_2024_Optimism,1194,5,199,6,6,199,1,id| item| resp
 IJLS_Eersel_2024_Work,1800,7,200,9,9,200,1,id| item| resp
+ilearnathome_regalado_2025,13635,3,909,15,15,909,1,id| cov_educators| cov_loc_of_educ_institution| cov_education| cov_employment| cov_years_of_service| cov_age| cov_gender| item| resp
 immer09_immer,128,7,57,20,2.24561403508772,6.4,0.112280701754386,resp| item| id
 immer10_immer,793,3,61,13,13,61,1,resp| difficulty| item| id
 immer12_immer,720,29,20,4,36,180,9,resp| rater| item| id
@@ -477,6 +483,10 @@ imos_2016,3612,8,602,6,6,602,1,id| cov_country| cov_rank| cov_award| item| resp
 imos_2017,3690,8,615,6,6,615,1,id| cov_country| cov_rank| cov_award| item| resp
 introversion_extroversion,654108,5,7188,91,91,7188,1,id| item| resp| rt
 iowa_gambling_task,65291,4,617,339,105.820097244733,192.598820058997,0.312153679188002,resp| item| id
+ipip_openpsychometrics_ad,9977,5,1000,10,9.977,997.7,0.9977,id| cov_age| cov_gender| item| resp
+ipip_openpsychometrics_as,9988,5,1004,10,9.94820717131474,998.8,0.994820717131474,id| cov_age| cov_gender| item| resp
+ipip_openpsychometrics_do,9981,5,1001,10,9.97102897102897,998.1,0.997102897102897,id| cov_age| cov_gender| item| resp
+ipip_openpsychometrics_sc,9973,5,1001,10,9.96303696303696,997.3,0.996303696303696,id| cov_age| cov_gender| item| resp
 ips_vangsness_2019,2094,5,233,9,8.98712446351931,232.666666666667,0.998569384835479,id| item| resp
 isi_insomnia_wang2025,4004665,5,572095,7,7,572095,1,id| item| resp
 janssen2_tam,6920,2,346,20,20,346,1,resp| item| id
@@ -493,6 +503,9 @@ LOC_fadplus_goto2021,5614,7,802,7,7,802,1,id| age| gender| item| resp
 loneliness_mudfold,43857,3,3987,11,11,3987,1,resp| item| id
 lsat,5000,2,1000,5,5,1000,1,resp| item| id
 LSHS-E_Quidaja_2022,42624,6,2664,16,16,2664,1,id| item| resp
+machivallianism_test_main,1469720,5,73486,20,20,73486,1,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp| rt
+machivallianism_test_tipi,728729,7,73264,10,9.94661771129067,72872.9,0.994661771129067,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp
+machivallianism_test_vcl,1175824,2,73489,16,16,73489,1,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp
 mbft_anunciacao_2024,42290975,8,272845,155,155,272845,1,cov_sex| cov_age| cov_profession| cov_institution| id| item| resp
 mbps_vangsness_2019,3017,5,233,13,12.9484978540773,232.076923076923,0.996038296467481,id| item| resp
 mcmi_mokken,53152,2,1208,44,44,1208,1,item| id| resp| Qmatrix__A| Qmatrix__H| Qmatrix__SS| Qmatrix__CC
@@ -616,6 +629,11 @@ pact_project,1018383,8,4002,850,254.468515742129,1198.09764705882,0.299374724402
 papp_silva-martins2023,19233,5,503,62,38.2365805168986,310.209677419355,0.616719040595139,id| item| resp| wave
 parental_text_intervention,52809,9,3870,19,13.6457364341085,2779.42105263158,0.718196654426765,id| item| resp
 pass_vangsness_2019,2768,5,231,12,11.982683982684,230.666666666667,0.998556998556999,id| item| resp
+pass20_klosowska_2025_csq_online,2508,7,415,6,6.0433734939759,418,1.00722891566265,id| cov_age| cov_sex| cov_race| cov_student| cov_employed_full_time| cov_employed_part_time| cov_unemployed| cov_retired| cov_pensioner| cov_net_monthly_income| cov_sick_leave| cov_marital_status| cov_education| cov_residence| item| resp
+pass20_klosowska_2025_dass_online,8778,4,415,21,21.1518072289157,418,1.00722891566265,id| cov_age| cov_sex| cov_race| cov_student| cov_employed_full_time| cov_employed_part_time| cov_unemployed| cov_retired| cov_pensioner| cov_net_monthly_income| cov_sick_leave| cov_marital_status| cov_education| cov_residence| item| resp
+pass20_klosowska_2025_pass_hospital,2813,6,141,20,19.9503546099291,140.65,0.997517730496454,id| cov_age| cov_sex| cov_race| cov_professional_status| cov_net_monthly_income| cov_sick_leave| cov_marital_status| cov_education| cov_residence| item| resp
+pass20_klosowska_2025_pass_online,14960,6,415,20,36.0481927710843,748,1.80240963855422,id| cov_age| cov_sex| cov_race| cov_student| cov_employed_full_time| cov_employed_part_time| cov_unemployed| cov_retired| cov_pensioner| cov_net_monthly_income| cov_sick_leave| cov_marital_status| cov_education| cov_residence| item| resp| wave
+pass20_klosowska_2025_staix_online,8360,4,415,20,20.144578313253,418,1.00722891566265,id| cov_age| cov_sex| cov_race| cov_student| cov_employed_full_time| cov_employed_part_time| cov_unemployed| cov_retired| cov_pensioner| cov_net_monthly_income| cov_sick_leave| cov_marital_status| cov_education| cov_residence| item| resp
 PBS_Surrain_2019_PoB,13966,7,741,23,18.8475033738192,607.217391304348,0.81945666842692,id| age| item| resp| group
 pechorro_impulsivity_2021_bes,3003,5,429,7,7,429,1,id| cov_sex| cov_age| item| resp
 pechorro_impulsivity_2021_iid,9866,4,429,23,22.997668997669,428.95652173913,0.999898652072565,id| cov_sex| cov_age| item| resp
