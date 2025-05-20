@@ -42,6 +42,6 @@ process_item_level_data("numSeries")
 process_item_level_data("ps")
 process_item_level_data("matches")
 process_item_level_data("analogies")
-process_item_level_data("Story Recall 1")
-process_item_level_data("Story Recall 2")
-process_item_level_data("Story Recall 3")
+process_item_level_data("Story Recall 1") #space removed from table name
+process_item_level_data("Story Recall 2") #space removed from table name
+process_item_level_data("Story Recall 3") #space removed from table name
