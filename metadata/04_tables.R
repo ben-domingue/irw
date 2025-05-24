@@ -8,6 +8,22 @@ red<-sapply(tables,function(x) x$name)
 irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
 gs <- irw_dict[irw_dict$`Public Reshare?`=="Public",]
 
+##check for missing info
+core_required_fields <- c("table.lower", "Description", "URL (for data)")
+
+# Identify rows missing any core field
+missing_core <- apply(irw_dict[, core_required_fields], 1, function(row) {
+  any(is.na(row) | trimws(row) == "")
+})
+missing_license <- with(irw_dict, {
+  is_public <- `Public Reshare?` == "Public"
+  license_missing <- is.na(`Derived License`) | trimws(`Derived License`) == ""
+  is_public & license_missing
+})
+
+# Combine both types of missing flags
+flagged_rows <- irw_dict[missing_core | missing_license, ]
+
 ##biblio/redivis
 ## user <- redivis$user("bdomingu")
 ## dataset <- user$dataset("irw_meta:bdxt:latest")
