@@ -10,6 +10,7 @@ df <- df %>%
   select(id, starts_with("cov"), Q1:Q40) %>%
   pivot_longer(Q1:Q40,
                names_to = "item",
-               values_to = "resp")
+               values_to = "resp") %>%
+  filter(resp != 0)
 
 write.csv(df, "narcissistic_personality_inventory.csv", row.names = FALSE)
