@@ -3,7 +3,8 @@ tabs<-tolower(tabs$name)
 
 library(gsheet)
 work<-gsheet2tbl('https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123')
-tabs.done<-tolower(work$Table)[-1]
+names(work)<-tolower(names(work))
+tabs.done<-tolower(work$table)[-1]
 tabs.done<-tabs.done[!is.na(tabs.done)]
 
 all(tabs.done %in% tabs) ##confirming all is well, should be TRUE
