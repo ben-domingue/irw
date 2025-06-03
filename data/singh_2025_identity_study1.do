@@ -3,9 +3,6 @@
 * clear
 clear
 
-* change working directory
-cd "C:\Users\lossa\OneDrive\Escritorio\Stata Do Files"
-
 * import main dataset
 import spss using "IRS1.sav", clear
 
@@ -57,33 +54,38 @@ drop if missing(item) | item == ""
 
 * encode any needed variables
 destring cov_age, replace
-destring resp, replace
+gen resp2 = resp
+drop resp
+rename resp2 resp
+
+* reorder variables
+order id item resp cov_gender cov_age cov_education cov_income cov_identity, first
 
 * saves final dataset
-export delimited using "identity_study1.csv", replace
+export delimited using "singh_2025_identity_study1.csv", replace
 
 * creates subset of tables
 local base_items irs cse grit pds pia pit pba pss gi
 foreach prefix of local base_items {
     preserve
         keep if strpos(item, "`prefix'") == 1
-        export delimited using "identity_study1_`prefix'.csv", replace
+        export delimited using "singh_2025_identity_study1_`prefix'.csv", replace
     restore
 }
 
 * use the files just created
-import delimited "identity_study1_irs.csv", clear
-import delimited "identity_study1_cse.csv", clear
-import delimited "identity_study1_grit.csv", clear
-import delimited "identity_study1_pds.csv", clear
-import delimited "identity_study1_pia.csv", clear
-import delimited "identity_study1_pit.csv", clear
-import delimited "identity_study1_pba.csv", clear
-import delimited "identity_study1_pss.csv", clear
-import delimited "identity_study1_gi.csv", clear
+import delimited "singh_2025_identity_study1_irs.csv", clear
+import delimited "singh_2025_identity_study1_cse.csv", clear
+import delimited "singh_2025_identity_study1_grit.csv", clear
+import delimited "singh_2025_identity_study1_pds.csv", clear
+import delimited "singh_2025_identity_study1_pia.csv", clear
+import delimited "singh_2025_identity_study1_pit.csv", clear
+import delimited "singh_2025_identity_study1_pba.csv", clear
+import delimited "singh_2025_identity_study1_pss.csv", clear
+import delimited "singh_2025_identity_study1_gi.csv", clear
 
 * use the main file
-import delimited "identity_study1.csv", clear
+import delimited "singh_2025_identity_study1.csv", clear
 
 * use the uncleaned version of the main file
 import delimited "IRS1.csv", clear
