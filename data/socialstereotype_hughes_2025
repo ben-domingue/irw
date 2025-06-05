@@ -1,0 +1,83 @@
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) 
+rm(list = ls ())
+library(tidyverse)
+library(haven)
+
+df_scored <- read_csv("SES stereotypes_scored data.csv")
+
+target_cov <- df_scored %>% # They all covariates are for 'rater', so I just select them firstly and then merge to the 'df_SES'
+  select(id = srm_p_id,
+         cov_group = g_id,
+         cov_age = age_sr,
+         cov_sex = male_sr,
+         cov_sex_open = self_id_gender,
+         cov_ethnicity = raceethnicity_sr,
+         cov_income = income_sr,
+         cov_edu = education_sr,
+         cov_occupation = opr
+         ) %>%
+  distinct(id, .keep_all = TRUE)
+
+# Latent Variable 1.1: Personality_Other
+personality_vars <- c(
+  # Big Five
+  paste0("bfixs", 1:15),
+  # QB6 Honesty and Propriety
+  paste0("qb6hp", 1:5),
+  # SCM Warmth and Competence
+  paste0("wc", 1:4),
+  # Face-valid Single-item
+  "impulsive","intelligent","lazy","trustworthy"
+)
+
+df_personality <- df_scored %>%
+  select(id = srm_t_id,
+         rater = srm_p_id,
+         all_of(personality_vars)
+         ) %>%
+  left_join(target_cov, by = "id") %>%
+  filter( id != rater ) %>%
+  pivot_longer(cols = all_of(personality_vars),
+               names_to = "item",
+               values_to = "resp")
+
+# Latent Variable 1.2: Personality_Self
+df_personality_self <- df_scored %>%
+  select(id = srm_t_id,
+         rater = srm_p_id,
+         all_of(personality_vars)) %>%
+  left_join(target_cov, by = "id") %>%
+  filter( id == rater ) %>%
+  select( -rater ) %>%
+  pivot_longer(cols = all_of(personality_vars),
+               names_to = "item",
+               values_to = "resp")
+
+# Latent Variable 2: Interpersonal Judgement
+judgement_vars <- c(
+  # Interest in Affiliation
+  paste0("affil", 1:6),
+  # Sympathy for Consumer
+  "sympathy",
+  # Credibility of Consumer
+  "ce1","ce2",
+  # Credibility of Business
+  "ce4","ce5",
+  # Net Promoter Score
+  "nps"
+)
+
+df_judge <- df_scored %>%
+  select(id = srm_t_id,
+         rater = srm_p_id,
+         all_of(judgement_vars)
+  ) %>%
+  left_join(target_cov, by = "id") %>%
+  filter( id != rater ) %>%
+  pivot_longer(cols = all_of(judgement_vars),
+               names_to = "item",
+               values_to = "resp")
+
+write_csv(df_personality, "socialstereotype_hughes_2025_personality_other.csv")
+write_csv(df_personality_self, "socialstereotype_hughes_2025_personality_self.csv")
+write_csv(df_judge, "socialstereotype_hughes_2025_judgement.csv")
