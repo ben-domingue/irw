@@ -54,7 +54,9 @@ n<-rowSums(x[,-1],na.rm=TRUE)
 x[order(n),]
 dim(x)
 base::table(n,useNA='always')
-x[n<4,]
+z<-x[n<4,]
+z
+
 
 cnt<-base::table(x$table)
 names(cnt)[cnt>1]
