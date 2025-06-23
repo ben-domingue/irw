@@ -44,7 +44,8 @@ f<-function(tab) {
   getvars<-function(tab) {
       variables <- tab$list_variables() 
       nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$properties$statistics) #stats<-lapply(variables,function(x) x$get()$properties$statistics)
+      stats<-lapply(variables,function(x) x$properties$statistics) 
+      ##
       names(stats)<-nms
       n_responses<-stats$resp$count
       if (is.null(n_responses)) {
@@ -52,7 +53,15 @@ f<-function(tab) {
           df<-df[!is.na(df$resp),]
           n_responses<-length(df$resp)
       }
-      n_categories<-stats$resp$numDistinct
+      ##
+      #n_categories<-stats$resp$numDistinct #see june 13 2025 email 'Redivis API deprecation notice for "statistics" property on variable.get endpoint'
+      resp.index<-which(nms=="resp")
+      variable<-variables[[resp.index]]
+      out<-variable$get_statistics()
+      out<-out$frequencyDistribution
+      ncats<-as.numeric(sapply(out,function(x) x$value))
+      n_categories<-length(ncats[!is.na(ncats)])
+      ##
       n_participants<-stats$id$numDistinct
       n_items<-stats$item$numDistinct
       responses_per_participant = n_responses / n_participants
