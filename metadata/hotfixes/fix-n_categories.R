@@ -46,3 +46,19 @@ for (i in 1:length(tables)) {
 nc<-data.frame(tolower(new.tables),nc)
 write.csv(nc,'n_categories.csv',quote=FALSE,row.names=FALSE)
            
+
+##
+m<-read.csv("metadata.csv")
+names(m)
+m$table.lower<-tolower(m$table)
+nc<-read.csv("./hotfixes/n_categories.csv")
+names(nc)[1]<-'table.lower'
+dim(m)
+dim(nc)
+m<-merge(m,nc)
+m$n_categories<-m$nc
+m$nc<-m$table.lower<-NULL
+names(m)
+
+write.csv(m,'metadata.csv',quote=FALSE,row.names=FALSE)
+
