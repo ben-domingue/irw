@@ -10,28 +10,13 @@ The Item Response Warehouse (IRW) is an **open-source, large-scale** repository 
 - **Contact Us:** for any question, please contact us at ```itemresponsewarehouse@stanford.edu```.
 
 ## Installation & Getting Started
-The easiest way to get access to IRW data is via the Redivis API
-
-```r
-# 1. Make sure devtools is intalled from CRAN 
-# install.packages("devtools")
-
-# 2. The Redivis R package redivis-r needs to be installed
-devtools::install_github("redivis/redivis-r", ref="main")
-
-# 3. Generate a long-term Redivis API Token to avoid human intervention.
-# Instructions at https://apidocs.redivis.com/client-libraries/redivis-r/getting-started
-
-# 4. Install the IRW package to access essential APIs
-devtools::install_github("ben-domingue/irw/irw_pkg")
-```
-For guidance to use IRW for data analysis in Python or R, please refer to the [IRW website](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
+The easiest way to get access to IRW data is via the `irw` R package. See additional instructions [here](https://itemresponsewarehouse.org/analysis.html). For guidance to use IRW for data analysis in Python or R, please refer to the [IRW website](https://datapages.github.io/irw/analysis.html) for comprehensive explanations and examples.
 
 
 
 ## IRW Commandments
-Below are critical instructions for formatting data for the IRW. More information about the IRW data standard is available in the preprint and by contacting the IRW maintainers. 
-1. Numeric values of a response should be meaningful.
+Below are critical instructions for formatting data for the IRW. More information about the IRW data standard is available [here](https://itemresponsewarehouse.org/standard.html). 
+1. Numeric values of `resp` should be meaningful (i.e., at least ordinal).
 2. If data come from an RCT, have a `treatment` column that is 1 if response comes from a treated respondent and 0 otherwise.  
 3. Response time should be in seconds.   
 4. Longitudinally collected responses should be in Unix time (seconds since Jan 1 1970 UTC).
