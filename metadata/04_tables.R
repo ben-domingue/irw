@@ -5,7 +5,7 @@ tables<-v1$list_tables()
 red<-sapply(tables,function(x) x$name)
 
 ##tables on sheet
-irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315')
 gs <- irw_dict[irw_dict$`Public Reshare?`=="Public",]
 
 ##check for missing info

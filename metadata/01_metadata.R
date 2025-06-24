@@ -59,7 +59,9 @@ f<-function(tab) {
       variable<-variables[[resp.index]]
       out<-variable$get_statistics()
       out<-out$frequencyDistribution
-      ncats<-as.numeric(sapply(out,function(x) x$value))
+      z<-lapply(out,function(x) x$value)
+      z<-z[!sapply(z,is.null)]
+      ncats<-as.numeric(unlist(z))
       n_categories<-length(ncats[!is.na(ncats)])
       ##
       n_participants<-stats$id$numDistinct
