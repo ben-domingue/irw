@@ -17,7 +17,7 @@ length(old.tables)
 
 ##new tables
 library(redivis)
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse")
+v1<- redivis$organization("datapages")$dataset("Item Response Warehouse")
 tables<-v1$list_tables()
 new.tables<-sapply(tables,function(x) x$name)
 length(new.tables)
@@ -44,7 +44,7 @@ f<-function(tab) {
   getvars<-function(tab) {
       variables <- tab$list_variables() 
       nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$properties$statistics) 
+      stats<-lapply(variables,function(x) x$get_statistics() ) 
       ##
       names(stats)<-nms
       n_responses<-stats$resp$count

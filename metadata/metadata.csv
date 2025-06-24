@@ -134,6 +134,7 @@ DMCT_Addis_2020_MCT,4048,2,92,44,44,92,1,id| item| resp| rt
 DMCT_Addis_2020_PSIQ,3220,11,92,35,35,92,1,id| item| resp
 DMCT_Addis_2020_SUIS,1656,5,92,18,18,92,1,id| item| resp
 ds14_mokken,7564,6,541,14,13.9815157116451,540.285714285714,0.998679693688936,resp| age| item| id
+dsgi_brinkmann_2022,16884,6,469,36,36,469,1,id| item| resp
 dumas_Organisciak_2022,21960,6,92,10,238.695652173913,2196,23.8695652173913,id| item| verbatim| rater| resp
 duolingo_en_es__listen,755856,2,2579,116689,293.081039162466,6.47752573078868,0.00251164239270596,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
 duolingo_en_es__reverse_tap,693857,2,2168,13282,320.044741697417,52.240400542087,0.0240961257112948,id| item| resp| session| format| rt| part_speech| morphology| dependency_label| dependency_head| stem
@@ -529,6 +530,7 @@ Mechanical_Turk_Recognition,76908,3,142,2202,541.605633802817,34.9264305177112,0
 MEFSIRODGAS_Nileksela_2023_freq,45409,6,499,91,91,499,1,id| age| item| resp
 MEFSIRODGAS_Nileksela_2023_severity,45409,6,499,91,91,499,1,id| age| item| resp
 mental_health_malawi,35111,6,984,40,35.6819105691057,877.775,0.892047764227642,resp| item| id
+mentalrotation_wolf_2024,1184,2,37,64,32,18.5,0.5,id| cov_age| cov_sex| cov_year| cov_major| itemcov_cbsheet| itemcov_shape| itemcov_angle| item| resp| resp_raw
 metacogmonitoring_double2025,20100,6,300,67,67,300,1,id| cov_age| cov_sex| item| resp
 mft_validationandreplication,30060,6,835,36,36,835,1,id| item| resp
 mgkt,614976,11,19218,32,32,19218,1,id| cov_age| cov_gender| cov_engnat| cov_country| item| resp| rt
@@ -859,7 +861,17 @@ shu_2025_translation_pcd,16864,9,1054,16,16,1054,1,id| item| resp| cov_gender| c
 shu_2025_translation_pgv,5270,9,1054,5,5,1054,1,id| item| resp| cov_gender| cov_age
 shu_2025_translation_srt,5270,9,1054,5,5,1054,1,id| item| resp| cov_gender| cov_age
 si09_sirt,62412,7,5201,12,12,5201,1,country| resp| item| id
+singh_2025_identity_cse,23520,5,1470,16,16,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_gi,5880,5,1470,4,4,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_grit,11760,5,1470,8,8,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_irs,14700,5,1470,10,10,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_pba,16170,5,1470,11,11,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_pds,13230,6,1470,9,9,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_pia,5880,5,1470,4,4,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_pit,5880,5,1470,4,4,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
+singh_2025_identity_pss,14700,5,1470,10,10,1470,1,id| item| resp| cov_study| cov_gender| cov_age| cov_education| cov_income| cov_identity
 smacof_pvq40,6023,6,151,40,39.887417218543,150.575,0.997185430463576,resp| item| id
+smoking_perseverance_mcneish_2025,10572,5,50,3,211.44,3524,70.48,id| item| resp| date
 sned_bendall_2024,4806,10,801,6,6,801,1,id| rt| cov_age| cov_gender| cov_ethnicity| cov_countryofbirth| cov_countryofresidence| cov_nationality| cov_education| item| resp
 socialstereotype_hughes_2025_judgement,14604,12,312,12,46.8076923076923,1217,3.90064102564103,id| rater| cov_group| cov_age| cov_sex| cov_sex_open| cov_ethnicity| cov_income| cov_edu| cov_occupation| item| resp
 socialstereotype_hughes_2025_personality_other,34076,6,312,28,109.217948717949,1217,3.90064102564103,id| rater| cov_group| cov_age| cov_sex| cov_sex_open| cov_ethnicity| cov_income| cov_edu| cov_occupation| item| resp
