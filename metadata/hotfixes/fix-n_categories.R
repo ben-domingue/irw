@@ -37,11 +37,12 @@ f<-function(tab) {
 
 nc<-numeric()
 
-for (i in 330:length(tables)) {
+for (i in 1:length(tables)) {
     print(i)
     nc[i]<-f(tables[[i]])
 }
 
 
-data.frame(tolower(new.tables),nc)
+nc<-data.frame(tolower(new.tables),nc)
+write.csv(nc,'n_categories.csv',quote=FALSE,row.names=FALSE)
            
