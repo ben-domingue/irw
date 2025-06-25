@@ -483,15 +483,46 @@ boyd_prism_2024,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/atti
 ftna_kasper_2022,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,"swa, eng",Items from Tanzanian Form Two National Assessment & Primary School Leaving Examination
 gpt4mcq_young_2025,Adult (18+),NA,Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,ChatGPT-4 Multiple-choice item
 gilbert_meta_94,NA,NA,NA,NA,NA,NA,NA,Collection of poverty indicators
-hpwt_bayona_2025_workcharacteristics,NA,NA,NA,NA,NA,NA,NA,"HPWT (Happy-Productive Worker Thesis), contains employees' self-reported responses to 18 work design characteristics (e.g., autonomy, feedback, social support) based on the Work Design Questionnaire."
-hpwt_bayona_2025_jobsatisfaction,NA,NA,NA,NA,NA,NA,NA,"HPWT (Happy-Productive Worker Thesis), includes employees’ responses to a 5-item job satisfaction scale which captures their hedonic well-being at work."
-hpwt_bayona_2025_jobperformance,NA,NA,NA,NA,NA,NA,NA,"HPWT (Happy-Productive Worker Thesis), contains supervisor-rated assessments of employee performance using a 4-item standardized scale."
-cdm_mentalhealth_tan_2023_rapi,NA,NA,NA,NA,NA,NA,NA,NA
-cdm_mentalhealth_tan_2023_bsi,NA,NA,NA,NA,NA,NA,NA,NA
-gcbs_brotherton_2013,NA,NA,NA,NA,NA,NA,NA,NA
-gcbs_brotherton_2013_tipi,NA,NA,NA,NA,NA,NA,NA,NA
-gcbs_brotherton_2013_vcl,NA,NA,NA,NA,NA,NA,NA,NA
-csft_ye_2025,NA,NA,NA,NA,NA,NA,NA,NA
+hpwt_bayona_2025_workcharacteristics,Adult (18+),NA,"Educational, General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Work Design Questionnaire
+hpwt_bayona_2025_jobperformance,Adult (18+),NA,"Educational, General/non-specific",Behavioral,Observational rating,Likert Scale/selected response,spa,job performance
+hpwt_bayona_2025_jobsatisfaction,Adult (18+),NA,"Educational, General/non-specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,spa,Job satisfaction
+cdm_mentalhealth_tan_2023_rapi,Adult (18+),NA,Educational,"Behavioral, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,Rutgers Alcohol Problem Index (RAPI)
+cdm_mentalhealth_tan_2023_bsi,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Brief Symptom Inventory (BSI)
+gcbs_brotherton_2013,Adult (18+),NA,"Educational, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Generic Conspiracist Beliefs Scale
+gcbs_brotherton_2013_tipi,Adult (18+),NA,"Educational, ""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Ten Item Personality Inventory
+gcbs_brotherton_2013_vcl,Adult (18+),NA,"Educational, ""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Vocabulary check
+csft_ye_2025,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Observational rating,Likert Scale/selected response,chi,Embedded Figure Test
+hexaco_ashton_2014_x,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Extraversion (X) Facets
+hexaco_ashton_2014_o,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Openness to Experience (O) Facets
+hexaco_ashton_2014_a,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Agreeableness (A) Facets
+hexaco_ashton_2014_c,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Conscientiousness (C) Facets
+hexaco_ashton_2014_h,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Honesty-Humility (H) Facets
+hexaco_ashton_2014_e,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,HEXACO Personality Inventory: Emotionality (E) Facets
+wang_onlineriskexp_2025,Adult (18+),NA,"Educational, Representative",Behavioral,Survey/questionnaire,Likert Scale/selected response,chi,Online risk exposure scale
+wang_onlineriskexp_2025_negativeatt,Adult (18+),NA,"Educational, Representative",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Negative attribution scale
+wang_onlineriskexp_2025_anxiety,Adult (18+),NA,"Educational, Representative",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Anxiety scale
+wang_onlineriskexp_2025_interpersonalsecurity,Adult (18+),NA,"Educational, Representative",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Interpersonal security scale
+much_tte_2025_matrixreasoning,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,reasoning
+much_tte_2025_currentmotivation,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Test-taking effort
+much_tte_2025_effort,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Test-taking effort
+much_tte_2025_concentrationtask,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,concentration
+much_tte_2025_actionorientation,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,motivational disposition
+bfi_goldberg_1992_extraversion,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory: Extraversion
+bfi_goldberg_1992_neuroticism,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory: Neuroticism
+bfi_goldberg_1992_agreeableness,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory: Agreeableness
+bfi_goldberg_1992_conscientiousness,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory: Conscientiousness
+bfi_goldberg_1992_openness_to_experience,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory: Openness to Experience
+nomt_hooper_2024_study1,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,"eng, spa",novel object memory tests (NOMTs)
+nomt_hooper_2024_study2,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,"eng, spa",novel object memory tests (NOMTs)
+gilbert_meta_83,Child (<18y),Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,pol,Cognitive Openness
+gilbert_meta_84,Child (<18y),Adolescent (12-18y),Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,pol,Conspiracy Beliefs
+gilbert_meta_85,Child (<18y),Adolescent (12-18y),Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,pol,Trust in Media
+gilbert_meta_76,NA,NA,NA,NA,NA,NA,NA,"Test of Early Mathematics Ability, third edition, or TEMA-3"
+gilbert_meta_78,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_79,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_80,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_81,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_82,NA,NA,NA,NA,NA,NA,NA,NA
 een_lacey_2024_parent,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ne,Willingness to Seek Mental Health Treatment
 emsc_kuan-chin_2023,Adult (18+),NA,Educational,"Cognitive/educational, Affective/mental health",Observational rating,Likert Scale/selected response,eng,Evaluation of Medical Students' Communication Skills in an Objective Structured Clinical Examination (OSCE) Using Electronic Medical Records (EMR)
 enem_2015_1mil_cn,Child (<18y),Adolescent (12-18y),Educational,"Cognitive/educational, Opinion/attitude",Test,Mixed,por,Perception of the Relationship Between ENEM and the Brazilian High School Curriculum
@@ -521,6 +552,7 @@ content_literacy_intervention_g1,Child (<18y),Child (6-12y),Educational,"Cogniti
 cpdmmc_kunnari_2020_hcd,Adult (18+),NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,"Utilitarian Inclinations and Deontological Inclinations in moral judgment, measured via the Process Dissociation Procedure"
 dvivdtws_ppmial_marcatto_2023_ocs,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ita,Dark Tetrad at Work (DTW) scale
 ees_sarling_2024,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,swe,Empathic Experience Scale (EES)
+smoking_perseverance_mcneish_2025,Adult (18+),NA,Targeted/specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Smoking perseverance
 narcissistic_personality_inventory,NA,NA,NA,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Narcissistic Personality Inventory (NPI)
 perceived_injustice_mourin,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ben,Perceived Injustice Scale
 selfcompassionscale_shortform_fuochi_2025,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ita,Self-Compassion Scale Short Form (SCS-SF)
@@ -586,3 +618,5 @@ shu_2025_translation_add,Mixed,NA,"Educational, Targeted/specific","Affective/me
 socialstereotype_hughes_2025_judgement,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,NA
 socialstereotype_hughes_2025_personality_self,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,NA
 socialstereotype_hughes_2025_personality_other,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,NA
+mentalrotation_wolf_2024,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,Cross-Modality Mental Rotation
+dsgi_brinkmann_2022,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Other,Survey/questionnaire,Likert Scale/selected response,nld,Dutch Sensory Gating Inventory
