@@ -10,6 +10,8 @@ df <- df %>%
          cov_neurologist = Neurologist, cov_ophthalmologist = Ophthalmologist,
          cov_psychiatrist = Psychiatrist)
 
+table(sims$resp)
+
 svk <- df %>%
   select(id, starts_with("cov"), starts_with("SVK"), -ends_with("CAT"), -c("SVK_Total", "SVK_limitations", "SVK_Factor1", "SVK_Factor2", "SVK_Factor3")) %>%
   pivot_longer(-c(id, starts_with("cov")),
@@ -29,7 +31,26 @@ vfq <- df %>%
   pivot_longer(-c(id, starts_with("cov")),
                names_to = "item",
                values_to = "resp") %>%
-  mutate(resp = ifelse(resp == "#NULL!", NA, resp))
+  mutate(resp = ifelse(resp == "#NULL!", NA, resp)) %>%
+  mutate(resp = as.numeric(resp)) %>%
+  mutate(
+    resp = case_when(
+      item == "VFQ.2" & resp == 0   ~ 0,
+      item == "VFQ.2" & resp == 20  ~ 1,
+      item == "VFQ.2" & resp == 40  ~ 2,
+      item == "VFQ.2" & resp == 60  ~ 3,
+      item == "VFQ.2" & resp == 80  ~ 4,
+      item == "VFQ.2" & resp == 100 ~ 5,
+      
+      item != "VFQ.2" & resp == 0   ~ 0,
+      item != "VFQ.2" & resp == 25  ~ 1,
+      item != "VFQ.2" & resp == 50  ~ 2,
+      item != "VFQ.2" & resp == 75  ~ 3,
+      item != "VFQ.2" & resp == 100 ~ 4,
+      
+      TRUE ~ resp
+    )
+  )
 
 feda <- df %>%
   select(id, starts_with("cov"), starts_with("FEDA"), -FEDA_total) %>%
@@ -75,6 +96,3 @@ write.csv(brief, "neurodegenerative_huizinga_2019_brief.csv", row.names = FALSE)
 write.csv(user, "neurodegenerative_huizinga_2019_user.csv", row.names = FALSE)
 write.csv(dass, "neurodegenerative_huizinga_2019_dass.csv", row.names = FALSE)
 write.csv(sims, "neurodegenerative_huizinga_2019_sims.csv", row.names = FALSE)
-
-
-
