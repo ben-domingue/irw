@@ -620,3 +620,122 @@ socialstereotype_hughes_2025_personality_self,Adult (18+),NA,"""Internet-based (
 socialstereotype_hughes_2025_personality_other,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,NA
 mentalrotation_wolf_2024,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,Cross-Modality Mental Rotation
 dsgi_brinkmann_2022,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Other,Survey/questionnaire,Likert Scale/selected response,nld,Dutch Sensory Gating Inventory
+florida_twins_game,Child (<18y),Child (6-12y),General/non-specific,"Cognitive/educational, Behavioral",Survey/questionnaire,Likert Scale/selected response,eng,"Child Home, School, and Social Environment Survey"
+florida_twins_tech,Child (<18y),Child (6-12y),General/non-specific,"Cognitive/educational, Behavioral",Survey/questionnaire,Likert Scale/selected response,eng,"Child Home, School, and Social Environment Survey"
+florida_twins_cads,Child (<18y),Child (6-12y),General/non-specific,"Personality, Developmental",Survey/questionnaire,Likert Scale/selected response,eng,"Child Home, School, and Social Environment Survey"
+florida_twins_dbi,Child (<18y),Child (6-12y),General/non-specific,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Disruptive Behaviors Inventory (DBI)
+florida_twins_grades,Child (<18y),Child (6-12y),General/non-specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,School Grades Self-Report
+florida_twins_media,Child (<18y),Child (6-12y),General/non-specific,"Behavioral, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Technology and Social Media Use and Parental Monitoring Scale
+florida_twins_par,Child (<18y),Child (6-12y),General/non-specific,"Developmental, Behavioral, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,My parents Scale
+florida_twins_chaos,Child (<18y),Child (6-12y),General/non-specific,"Behavioral, Developmental, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,"Confusion, Hubbub, and Order Scale (CHAOS)"
+florida_twins_nes,Child (<18y),Child (6-12y),General/non-specific,"Physical health/functioning, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Neighborhood Environment Scale
+florida_twins_read,Child (<18y),Child (6-12y),General/non-specific,"Opinion/attitude, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,"Reading Interest and Enjoyment Scale (""How do you feel about reading?"")"
+florida_twins_class,Child (<18y),Child (6-12y),General/non-specific,"Opinion/attitude, Behavioral",Survey/questionnaire,Likert Scale/selected response,eng,Class Time Scale
+florida_twins_friends,Child (<18y),Child (6-12y),General/non-specific,"Behavioral, Developmental, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Friends Scale
+florida_twins_hwk,Child (<18y),Child (6-12y),General/non-specific,"Cognitive/educational, Behavioral",Survey/questionnaire,Likert Scale/selected response,eng,"Homework and Free Time Scale (Technology, Social Media, and Parental Monitoring Subscales)"
+florida_twins_pals,Child (<18y),Child (6-12y),General/non-specific,"Cognitive/educational, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,eng,Patterns of Adaptive Learning Scales (PALS)
+florida_twins_sch,Child (<18y),Child (6-12y),General/non-specific,"Opinion/attitude, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,What My School is Like? Scale
+fcupanas_cffsdas_reyna_2018,NA,NA,NA,NA,NA,NA,NA,NA
+erf_breuer_2017_frmfr,NA,NA,NA,NA,NA,NA,NA,NA
+erf_breuer_2017_frmmc,NA,NA,NA,NA,NA,NA,NA,NA
+erf_breuer_2017_tai,NA,NA,NA,NA,NA,NA,NA,NA
+erf_breuer_2017_dosp,NA,NA,NA,NA,NA,NA,NA,NA
+ml_harper_2015,NA,NA,NA,NA,NA,NA,NA,NA
+det_naismith_2023,NA,NA,NA,NA,NA,NA,NA,NA
+dvivdtws_ppmial_marcatto_2023_dtw,NA,NA,NA,NA,NA,NA,NA,NA
+dvivdtws_ppmial_marcatto_2023_ocb,NA,NA,NA,NA,NA,NA,NA,NA
+dvivdtws_ppmial_marcatto_2023_cwb,NA,NA,NA,NA,NA,NA,NA,NA
+dvivdtws_ppmial_marcatto_2023_snaq,NA,NA,NA,NA,NA,NA,NA,NA
+rvobgvmaas_lsf_lehing_2024,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study1,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study2_nvs,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study5_nvs,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study2_nas,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study5_nas,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study2_ngs,NA,NA,NA,NA,NA,NA,NA,NA
+nas_rogoza_2024_study5_ngs,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_akt,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_emt,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_pl,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_box,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_dn,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_htks,NA,NA,NA,NA,NA,NA,NA,NA
+preschool_sel_wj,NA,NA,NA,NA,NA,NA,NA,NA
+idcr_martinez_2023_story_recall_3,NA,NA,NA,NA,NA,NA,NA,NA
+offlinefriend_ofaq,NA,NA,NA,NA,NA,NA,NA,NA
+bhs_floreskanter2021,NA,NA,NA,NA,NA,NA,NA,NA
+grit,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2018_1mil_cn,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2013_1mil_ch,NA,NA,NA,NA,NA,NA,NA,NA
+wirs,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_42,NA,NA,NA,NA,NA,NA,NA,NA
+ellipse_corssley_2024,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2015_1mil_lc,NA,NA,NA,NA,NA,NA,NA,NA
+ecps_sahm_2024_trust,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_24,NA,NA,NA,NA,NA,NA,NA,NA
+mechanical_turk_recognition,NA,NA,NA,NA,NA,NA,NA,NA
+pact_project,NA,NA,NA,NA,NA,NA,NA,NA
+pmt_trzcinska_2023_finans,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2013_1mil_mt,NA,NA,NA,NA,NA,NA,NA,NA
+christiannationalism_davis2021,NA,NA,NA,NA,NA,NA,NA,NA
+vocab_assessment_3_to_8_year_old_children,NA,NA,NA,NA,NA,NA,NA,NA
+anxiety_gastro_symptoms,NA,NA,NA,NA,NA,NA,NA,NA
+mental_health_malawi,NA,NA,NA,NA,NA,NA,NA,NA
+eoaq-est_silveira_2024,NA,NA,NA,NA,NA,NA,NA,NA
+psiq_woelk2022,NA,NA,NA,NA,NA,NA,NA,NA
+mft_validationandreplication,NA,NA,NA,NA,NA,NA,NA,NA
+figure_skating,NA,NA,NA,NA,NA,NA,NA,NA
+motion,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_63,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2014_1mil_ch,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2021_1mil_cn,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2021_1mil_lc,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_37,NA,NA,NA,NA,NA,NA,NA,NA
+tdri,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_68,NA,NA,NA,NA,NA,NA,NA,NA
+non_parametric_mixture_modeling_exp1_cleaned,NA,NA,NA,NA,NA,NA,NA,NA
+gender_roles,NA,NA,NA,NA,NA,NA,NA,NA
+apfcompact_ptacek_2024_swls,NA,NA,NA,NA,NA,NA,NA,NA
+project_kids_tosrec,NA,NA,NA,NA,NA,NA,NA,NA
+mturkddm_recognition,NA,NA,NA,NA,NA,NA,NA,NA
+idcr_martinez_2023_numseries,NA,NA,NA,NA,NA,NA,NA,NA
+fpas_silva_2022,NA,NA,NA,NA,NA,NA,NA,NA
+gart_grolig_2020,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_9,NA,NA,NA,NA,NA,NA,NA,NA
+kanjioahas_inoue_2024,NA,NA,NA,NA,NA,NA,NA,NA
+pass20_klosowska_2025_csq_online,NA,NA,NA,NA,NA,NA,NA,NA
+project_kids_wj_mf,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_26,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_17,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2021_1mil_ch,NA,NA,NA,NA,NA,NA,NA,NA
+fractals_rating,NA,NA,NA,NA,NA,NA,NA,NA
+gilbert_meta_13,NA,NA,NA,NA,NA,NA,NA,NA
+idcr_martinez_2023_raco,NA,NA,NA,NA,NA,NA,NA,NA
+lys_2020_rape_1_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_2_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_2_rma_pre,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_asi,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_cons,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_diff,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_kpnts,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_rwa,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_sds,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_sj,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+lys_2020_rape_3_unjust,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
+dwyer_2025_genomics_ec,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+dwyer_2025_genomics_gec,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+dwyer_2025_genomics_os,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+dwyer_2025_genomics_pb,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+dwyer_2025_genomics_pc,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+dwyer_2025_genomics_sjc,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+pinheiro_2023_trwcas,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,por,Teachers' Remote Work Context Assessment Scale (TRWCAS)
+pinheiro_2023_srq,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Psychological Distress (SRQ-20)
+neurodegenerative_huizinga_2019_svc,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,The Screening of Visual Complaints questionaire (SVC)
+neurodegenerative_huizinga_2019_cvc,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,The Cerebral Visual Complaints questionnaire (CVC-q)
+neurodegenerative_huizinga_2019_vfq,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,National Eye Institute Visual Function Questionnaire – 25 (NEI-VFQ-25)
+neurodegenerative_huizinga_2019_feda,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,dut,The Questionnaire for Experiences of Attention Deficit (Fragebogen erlebter Defizite der Aufmerkzamkeit; FEDA)
+neurodegenerative_huizinga_2019_brief,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,dut,Behavior Rating Inventory of Executive Function - Adult (BRIEF-A)
+neurodegenerative_huizinga_2019_user,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Behavioral,Survey/questionnaire,Likert Scale/selected response,dut,Utrecht Scale for Evaluation of Rehabilitation-Participation (USER)
+neurodegenerative_huizinga_2019_dass,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,dut,Depression Anxiety Stress Scale – 21 (DASS-21)
+neurodegenerative_huizinga_2019_sims,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,dut,Structured Inventory for Malingered Symptomatology (SIMS)

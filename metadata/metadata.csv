@@ -150,6 +150,12 @@ dvivdtws_ppmial_marcatto_2023_dtw,12166,5,553,22,22,553,1,id| cov_gender| cov_ag
 dvivdtws_ppmial_marcatto_2023_ocb,12166,5,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
 dvivdtws_ppmial_marcatto_2023_ocs,12166,5,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
 dvivdtws_ppmial_marcatto_2023_snaq,12166,5,553,22,22,553,1,id| cov_gender| cov_age| cov_language| item| resp
+dwyer_2025_genomics_ec,4351,7,486,9,8.95267489711934,483.444444444444,0.994741655235483,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
+dwyer_2025_genomics_gec,3395,7,486,7,6.98559670781893,485,0.997942386831276,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
+dwyer_2025_genomics_os,2909,7,486,6,5.98559670781893,484.833333333333,0.997599451303155,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
+dwyer_2025_genomics_pb,4369,7,486,9,8.98971193415638,485.444444444444,0.998856881572931,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
+dwyer_2025_genomics_pc,3887,7,486,8,7.99794238683128,485.875,0.99974279835391,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
+dwyer_2025_genomics_sjc,1942,7,486,4,3.99588477366255,485.5,0.998971193415638,id| item| resp| cov_language| cov_gender| cov_age| cov_ethnicity| cov_race| cov_education| cov_liveinus| cov_income| cov_healthstatus| cov_popdensity| cov_healthlitsubj| cov_job
 ecps_sahm_2024_distrust,130849,7,13137,13,9.96034102154221,10065.3076923077,0.76618007858017,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
 ecps_sahm_2024_dtl,145828,7,13299,11,10.9653357395293,13257.0909090909,0.996848703593572,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
 ecps_sahm_2024_emotion,103731,7,12988,8,7.98668001231906,12966.375,0.998335001539883,id| cov_age| cov_gender| cov_education| cov_occupation| cov_residing_country| cov_covid_self| cov_live_alone| item| resp
@@ -519,6 +525,18 @@ LOC_fadplus_goto2021,5614,7,802,7,7,802,1,id| age| gender| item| resp
 loneliness_mudfold,43857,3,3987,11,11,3987,1,resp| item| id
 lsat,5000,2,1000,5,5,1000,1,resp| item| id
 LSHS-E_Quidaja_2022,42624,5,2664,16,16,2664,1,id| item| resp
+lys_2020_rape_1_rma,16757,6,921,19,18.1943539630836,881.947368421053,0.9575975770044,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_2_rma,2698,5,142,19,19,142,1,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_2_rma_pre,2698,5,142,19,19,142,1,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_asi,8313,8,433,22,19.1986143187067,377.863636363636,0.872664287213941,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_cons,7978,5,433,20,18.4249422632794,398.9,0.921247113163972,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_diff,5031,7,433,13,11.6189376443418,387,0.893764434180139,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_kpnts,6273,5,433,16,14.4872979214781,392.0625,0.905456120092379,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_rma,7699,5,433,19,17.7806004618938,405.210526315789,0.935821076941777,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_rwa,4166,5,433,12,9.62124711316397,347.166666666667,0.801770592763664,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_sds,10618,2,433,29,24.5219399538106,366.137931034483,0.845584136338297,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_sj,3161,5,433,8,7.30023094688222,395.125,0.912528868360277,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
+lys_2020_rape_3_unjust,3927,7,433,10,9.06928406466513,392.7,0.906928406466513,id| item| resp| cov_field| cov_subsample| cov_field_cat| cov_gender| cov_age
 machivallianism_test_main,1469720,5,73486,20,20,73486,1,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp| rt
 machivallianism_test_tipi,728729,7,73264,10,9.94661771129067,72872.9,0.994661771129067,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp
 machivallianism_test_vcl,1175824,2,73489,16,16,73489,1,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp
@@ -601,6 +619,14 @@ nature_relatedness,48704,8,1522,32,32,1522,1,id| item| resp| rt
 nerdy_personality,777660,8,14955,52,52,14955,1,id| item| resp
 neurips_2020,24076951,5,118971,27613,202.37663800422,871.942599500235,0.00732903480260093,item| id| resp
 neurips_2022,509957,2,6468,5730,78.8430735930736,88.9977312390925,0.0137596987073427,id| date| item| resp
+neurodegenerative_huizinga_2019_brief,109575,3,1461,75,75,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_cvc,23376,3,1461,16,16,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_dass,30681,4,1461,21,21,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_feda,39447,5,1461,27,27,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_sims,109575,2,1461,75,75,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_svc,30681,11,1461,21,21,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_user,30681,6,1461,21,21,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
+neurodegenerative_huizinga_2019_vfq,42369,6,1461,29,29,1461,1,id| cov_age| cov_sex| cov_education| cov_neurologist| cov_ophthalmologist| cov_psychiatrist| item| resp
 nomt_hooper_2024_study1,25704,2,119,216,216,119,1,id| item| resp
 nomt_hooper_2024_study2,56592,2,393,144,144,393,1,group| id| cov_gender| cov_age| cov_country_of_birth| cov_country_of_residence| cov_first_language| cov_nationality| cov_spanish_fluency| cov_english_fluency| item| resp_raw| resp| rt
 non_parametric_mixture_modeling_exp1_Cleaned,44957,2,56,2,802.803571428571,22478.5,401.401785714286,id| item| rt| resp
@@ -671,6 +697,8 @@ PeSCBCSCe_Novak_2020_SCBCS,2860,7,572,5,5,572,1,id| item| resp
 PeSCBCSCe_Novak_2020_SPIRIT,2860,7,572,5,5,572,1,id| item| resp
 phq_BrummerHoffman_2021,82260,4,1828,45,45,1828,1,id| group| date| age| item| resp
 phq_insomnia_wang2025,5148855,4,572095,9,9,572095,1,id| item| resp
+pinheiro_2023_srq,4700,2,235,20,20,235,1,id| cov_gen| cov_idade| cov_raca| cov_estado_civil| cov_escolaridade| cov_renda_familiar| cov_depend_renda| cov_renda_pos_pandemia| cov_vinculo| cov_grupo_de_risco| cov_diagnostico_de_covid| cov_perdas_p_covid| item| resp
+pinheiro_2023_trwcas,5405,5,235,23,23,235,1,id| cov_gen| cov_idade| cov_raca| cov_estado_civil| cov_escolaridade| cov_renda_familiar| cov_depend_renda| cov_renda_pos_pandemia| cov_vinculo| cov_grupo_de_risco| cov_diagnostico_de_covid| cov_perdas_p_covid| item| resp
 pirlsmissing_sirt,110797,2,3480,35,31.8382183908046,3165.62857142857,0.909663382594417,country| wt| resp| item| id
 pisa2000_math,1538494,3,106322,45,14.4701378830346,34188.7555555556,0.32155861962299,id| item| resp
 pisa2000_read,7987114,3,193138,129,41.3544408661165,61915.6124031008,0.320577060977647,id| item| resp
@@ -920,6 +948,7 @@ threatperceptions_isler_2024_experiment2_picture_panas,9526,5,433,22,22,433,1,id
 threatperceptions_isler_2024_experiment3_cognitive_panas,39094,5,1777,22,22,1777,1,id| treat| item| resp
 threatperceptions_isler_2024_experiment4_cognitive_crt,8067,4,2689,3,3,2689,1,id| treat| item| resp
 threatperceptions_isler_2024_experiment4_cognitive_panas,59158,5,2689,22,22,2689,1,id| treat| item| resp
+timss_tam,19503,3,1773,11,11,1773,1,resp| country| item| booklet| id
 tma,270500,2,5410,50,50,5410,1,id| item| resp
 tpi_vangsness_2019,3713,5,233,16,15.9356223175966,232.0625,0.995976394849785,id| item| resp
 transreas_mokken,5100,2,425,12,12,425,1,cov_grade| resp| item| id

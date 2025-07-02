@@ -1,6 +1,6 @@
 ##tables on redivis
 library(redivis)
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse",version='latest')
+v1<- redivis$organization("datapages")$dataset("Item Response Warehouse",version='latest')
 tables<-v1$list_tables()
 red<-sapply(tables,function(x) x$name)
 

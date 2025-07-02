@@ -126,7 +126,7 @@ library(redivis)
 library(tibble)
 
 # fetch all tables
-dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
+dataset <- redivis$organization("datapages")$dataset("Item Response Warehouse") ##edited
 dataset_tables <- dataset$list_tables()
 
 # Extract table names and variables, storing variables as concatenated strings
