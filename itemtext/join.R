@@ -1,4 +1,4 @@
-table<-'coach_chen_2022_phq9'
+table<-'gilbert_meta_1'
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
 tabs$table<-tolower(tabs$table)
@@ -15,7 +15,7 @@ items<-L[[1]]
 for (i in 2:length(L)) items<-merge(items,L[[i]],all.x=TRUE)
 
 df<-irw::irw_fetch(table) ##see authentication and installation notes here. https://github.com/ben-domingue/irwpkg
-unique(df$item)
-unique(items$item)
+unique(df$item)[!(unique(df$item) %in% unique(items$item))]
+unique(items$item)[!(unique(items$item) %in% unique(df$item))]
 
 write.csv(items,file=paste(table,"__items.csv",sep=''))
