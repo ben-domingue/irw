@@ -1,4 +1,4 @@
-table<-'gilbert_meta_1'
+table<-'gilbert_meta_49'
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
 tabs$table<-tolower(tabs$table)
@@ -18,4 +18,4 @@ df<-irw::irw_fetch(table) ##see authentication and installation notes here. http
 unique(df$item)[!(unique(df$item) %in% unique(items$item))]
 unique(items$item)[!(unique(items$item) %in% unique(df$item))]
 
-write.csv(items,file=paste(table,"__items.csv",sep=''))
+write.csv(items,file=paste(table,"__items.csv",sep=''),row.names=FALSE)
