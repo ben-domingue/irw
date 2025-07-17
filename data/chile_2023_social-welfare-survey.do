@@ -30,14 +30,33 @@ drop activ_ebs insatisfaccion affective_sw affective_sw_recod phq4 tdomestico tc
 * drop casen covariates to reduce processing time
 drop qaut_casen dau_casen pobreza_casen pobreza_multi_4d_casen pobreza_multi_5d_casen sexo_casen region_casen edad_casen_t ecivil_recat_casen numper_casen men6_casen men18c_casen may60c_casen ind_tip_casen ten_viv_casen ind_hacina_casen hh_d_hacina_casen hh_d_estado_casen hh_d_servbas_casen r17a_casen r17b_casen r17c_casen r17d_casen r17e_casen v34b_casen v36a_casen v36b_casen v36c_casen v36d_casen v36e_casen hh_d_seg_casen r6_casen hh_d_part_casen hh_d_appart_casen educ_recat_casen s13_casen h7a_casen h7b_casen h7c_casen h7d_casen h7e_casen h7f_casen disc_wg_casen s32a_casen hh_d_mal_casen activ_casen cat_ocup_casen contrato_casen o20_casen r1b_recat_casen r3_recat_casen tipohogar_casen
 
+* fix cov_age variable to better match desired format in the output
+decode cov_age_range, gen(cov_age_range_str)
+drop cov_age_range
+rename cov_age_range_str cov_age_range
+replace cov_age_range = substr(cov_age_range, 4, .)
+
+* fix cov_gender variable to better match desired format in the output
+decode cov_gender, gen(cov_gender_str)
+drop cov_gender
+rename cov_gender_str cov_gender
+replace cov_gender = "6. No Sabe" if cov_gender == "No sabe"
+replace cov_gender = "7. Otro (especifique)" if cov_gender == "Otro (especifique)"
+replace cov_gender = substr(cov_gender, 4, .)
+
 * adds id
 gen id = _n
 
 * reorder variables
 order id date cov*, first
 
+* implement aggressive recoding to NA for -88, -99, and -89 values
+mvdecode _all, mv(-88)
+mvdecode _all, mv(-99)
+mvdecode _all, mv(-89)
+
 * save cleaned dataset
-save "chile_social-welfare-survey.dta", replace
+save "chile_social-welfare-survey.csv", replace
 
 ******************************************
 ******************************************
@@ -48,7 +67,7 @@ save "chile_social-welfare-survey.dta", replace
 **# Bookmark #1: Group A
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -87,12 +106,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "a"
-save "chile_2023_social-welfare-survey_a.csv", replace
+export delimited using "chile_2023_social-welfare-survey_a.csv", replace
 
 **# Bookmark #2: Group ee
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -131,12 +150,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "ee"
-save "chile_2023_social-welfare-survey_ee.csv", replace
+export delimited using "chile_2023_social-welfare-survey_ee.csv", replace
 
 **# Bookmark #3: Group oo
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -175,12 +194,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "oo"
-save "chile_2023_social-welfare-survey_oo.csv", replace
+export delimited using "chile_2023_social-welfare-survey_oo.csv", replace
 
 **# Bookmark #4: Group u
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -219,12 +238,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "u"
-save "chile_2023_social-welfare-survey_u.csv", replace
+export delimited using "chile_2023_social-welfare-survey_u.csv", replace
 
 **# Bookmark #5: Group yy
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -263,12 +282,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "yy"
-save "chile_2023_social-welfare-survey_yy.csv", replace
+export delimited using "chile_2023_social-welfare-survey_yy.csv", replace
 
 **# Bookmark #6: Group ss
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -307,12 +326,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "ss"
-save "chile_2023_social-welfare-survey_ss.csv", replace
+export delimited using "chile_2023_social-welfare-survey_ss.csv", replace
 
 **# Bookmark #7: Group vv
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -351,13 +370,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "vv"
-save "chile_2023_social-welfare-survey_vv.csv", replace
-
+export delimited using "chile_2023_social-welfare-survey_vv.csv", replace
 
 **# Bookmark #8: Group g
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -396,12 +414,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "g"
-save "chile_2023_social-welfare-survey_g.csv", replace
+export delimited using "chile_2023_social-welfare-survey_g.csv", replace
 
 **# Bookmark #9: Group h
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -440,12 +458,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "h"
-save "chile_2023_social-welfare-survey_h.csv", replace
+export delimited using "chile_2023_social-welfare-survey_h.csv", replace
 
 **# Bookmark #10: Group rr
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -484,13 +502,12 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "rr"
-save "chile_2023_social-welfare-survey_rr.csv", replace
-
+export delimited using "chile_2023_social-welfare-survey_rr.csv", replace
 
 **# Bookmark #11: Group f
 
 * recall dataset
-use "chile_social-welfare-survey.dta", clear
+use "chile_social-welfare-survey.csv", clear
 
 * compress the dataset to optimize memory usage
 compress
@@ -529,4 +546,4 @@ rename resp2 resp
 order id item resp date cov*, first
 
 * export the long-format table for group "f"
-save "chile_2023_social-welfare-survey_f.csv", replace
+export delimited using "chile_2023_social-welfare-survey_f.csv", replace
