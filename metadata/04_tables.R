@@ -1,8 +1,12 @@
 ##tables on redivis
 library(redivis)
-v1<- redivis$organization("datapages")$dataset("Item Response Warehouse",version='latest')
-tables<-v1$list_tables()
-red<-sapply(tables,function(x) x$name)
+red<-list()
+for (dataset in c("item_response_warehouse","item_response_warehouse_2")) {
+    v1<- redivis$organization("datapages")$dataset("Item Response Warehouse",version='latest')
+    tables<-v1$list_tables()
+    red[[dataset]]<-sapply(tables,function(x) x$name)
+}
+red<-unlist(red)
 
 ##tables on sheet
 irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315')

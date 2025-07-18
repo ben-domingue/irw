@@ -1,4 +1,4 @@
-table<-'gilbert_meta_92'
+table<-'coach_chen_2022_phq9'
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
 tabs$table<-tolower(tabs$table)

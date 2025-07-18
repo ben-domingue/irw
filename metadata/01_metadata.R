@@ -16,11 +16,16 @@ old.tables<-meta$table
 length(old.tables)
 
 ##new tables
-library(redivis)
-v1<- redivis$organization("datapages")$dataset("Item Response Warehouse")
-tables<-v1$list_tables()
-new.tables<-sapply(tables,function(x) x$name)
-length(new.tables)
+tables<-new.tables<-list()
+for (dataset in c("item_response_warehouse","item_response_warehouse_2")) {
+     v1<- redivis$organization("datapages")$dataset(dataset)
+     tabs<-v1$list_tables()
+     new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
+     tables[[dataset]]<-tabs
+}
+nt<-data.frame(do.call("rbind",new.tables))
+new.tables<-nt$table
+tables<-do.call("c",tables)
 
 ##to add
 toadd<-new.tables %in% old.tables
@@ -120,14 +125,22 @@ if (length(ii)>0) {
 str(summaries)
 length(unique(summaries$table))
 
+##add dataset
+summaries<-merge(summaries,nt)
 
 ##get variable names for each dataset
+
 library(redivis)
 library(tibble)
 
+
 # fetch all tables
-dataset <- redivis$organization("datapages")$dataset("Item Response Warehouse") ##edited
-dataset_tables <- dataset$list_tables()
+dataset_tables<-list()
+for (dataset in unique(summaries$dataset)) {
+    ds <- redivis$organization("datapages")$dataset(dataset) ##edited
+    dataset_tables[[dataset]] <- ds$list_tables()
+}
+dataset_tables<-unlist(dataset_tables)
 
 # Extract table names and variables, storing variables as concatenated strings
 table_vars_df <- tibble(
