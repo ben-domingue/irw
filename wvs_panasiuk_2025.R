@@ -58,6 +58,10 @@ df_long_A <- df_items_A %>%
 # Set NAs of resp
 df_long_A <- df_long_A %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+# Drop items with categorical values
+items_drop_A <- c("A044", "A045", "A169")
+df_long_A <- df_long_A %>%
+  filter(!item %in% items_drop_A)
 
 write_csv(df_long_A, "wvs_panasiuk_perception_of_life.csv")
 
@@ -89,6 +93,11 @@ df_long_B <- df_items_B %>%
 # Set NAs of resp
 df_long_B <- df_long_B %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+
+# Drop items with categorical values
+items_drop_B <- c("B008", "B009", "B016", "B017")
+df_long_B <- df_long_B %>%
+  filter(!item %in% items_drop_B)
 
 write_csv(df_long_B, "wvs_panasiuk_environment.csv")
 
@@ -127,6 +136,11 @@ df_long_C <- df_items_C %>%
 df_long_C <- df_long_C %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
 
+# Drop items with categorical values
+items_drop_C <- c("C009", "C010")
+df_long_C <- df_long_C %>%
+  filter(!item %in% items_drop_C)
+
 write_csv(df_long_C, "wvs_panasiuk_work.csv")
 #-------------------- Family (68 items, beginning with D) ----------------------
 fam <- names(df)[startsWith(names(df), "D")]
@@ -162,6 +176,11 @@ df_long_D <- df_items_D %>%
 # Set NAs of resp
 df_long_D <- df_long_D %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+
+# Drop items with categorical values
+items_drop_D <- c("D025")
+df_long_D <- df_long_D %>%
+  filter(!item %in% items_drop_D)
 
 write_csv(df_long_D, "wvs_panasiuk_family.csv")
 #----------- Politics and Society (295 items, beginning with E) ----------------
@@ -243,6 +262,13 @@ df_long_E <- merge(
 df_long_E <- df_long_E %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
 
+# Drop items with categorical values
+items_drop_E <- c("E001", "E002", "E003", "E004", "E005", "E006", "E032", "E062", "E118", "E119",
+                  "E135", "E136", "E137", "E138", "E139", "E179WVS", "E179_WVS7LOC", "E180WVS",
+                  "E182", "E190", "E191", "E192", "E238", "E239", "E240", "E241", "E256", "E279",
+                  "E280", "E281")
+df_long_E <- df_long_E[!item %in% items_drop_E]
+
 data.table::fwrite(df_long_E, "wvs_panasiuk_politics_society.csv")
 
 #--------------- Religion and Morale (127 items, beginning with F) -------------
@@ -287,6 +313,11 @@ df_long_F <- df_items_F %>%
 df_long_F <- df_long_F %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
 
+# Drop items with categorical values
+items_drop_F <- c("F022", "F025", "F025_WVS", "F027", "F188", "F189", "F192", "F200", "F201")
+df_long_F <- df_long_F %>%
+  filter(!item %in% items_drop_F)
+
 write_csv(df_long_F, "wvs_panasiuk_religion_morality.csv")
 #-------------- National Identity (116 items, beginning with G) ----------------
 national_identity <- names(df)[startsWith(names(df), "G")]
@@ -321,6 +352,12 @@ df_long_G <- df_items_G %>%
 df_long_G <- df_long_G %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
 
+# Drop items with categorical values
+items_drop_G <- c("G001", "G001CS", "G002", "G002CS", "G003CS", "G005", "G015", "G015B", "G016", "G017",
+                  "G024", "G025", "G026", "G026_01", "G027", "G027_01", "G027A", "G027B")
+df_long_G <- df_long_G %>%
+  filter(!item %in% items_drop_G)
+
 write_csv(df_long_G, "wvs_panasiuk_national_identity.csv")
 #-------------- Security (30 items, beginning with H) -------------------------
 security <- names(df)[startsWith(names(df), "H")]
@@ -352,6 +389,11 @@ df_long_H <- df_items_H %>%
 # Set NAs of resp
 df_long_H <- df_long_H %>%
   mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+
+# Drop items with categorical values
+items_drop_H <- c("H008_07", "H008_08")
+df_long_H <- df_long_H %>%
+  filter(!item %in% items_drop_H)
 
 write_csv(df_long_H, "wvs_panasiuk_security.csv")
 #-------------------- Science (2 items, beginning with I) ----------------------
