@@ -50,10 +50,17 @@ gen id = _n
 * reorder variables
 order id date cov*, first
 
-* implement aggressive recoding to NA for -88, -99, and -89 values
+* implement aggressive recoding to NA for -88, -99, -89, and -98 values
 mvdecode _all, mv(-88)
 mvdecode _all, mv(-99)
 mvdecode _all, mv(-89)
+mvdecode _all, mv(-98)
+
+* implement aggressive recoding to NA for -88, -99, -89, and -98 values that are string
+ds, has(type string)
+foreach var of varlist `r(varlist)' {
+    replace `var' = "" if inlist(`var', "-88", "-89", "-99", "-98")
+}
 
 * save cleaned dataset
 save "chile_social-welfare-survey.csv", replace
@@ -64,7 +71,7 @@ save "chile_social-welfare-survey.csv", replace
 ******************************************
 ******************************************
 
-**# Bookmark #1: Group A
+**# Bookmark #1: Group a
 
 * recall dataset
 use "chile_social-welfare-survey.csv", clear
