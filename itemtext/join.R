@@ -1,11 +1,11 @@
-table<-'gilbert_meta_8'
+table<-'gilbert_meta_56'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
 tabs$table<-tolower(tabs$table)
 f<-function(table,tabs) {
     L<-list()
-    ii<-grep(table,tabs$table)
+    ii<-match(table,tabs$table)
     for (i in 1:4) L[[i]]<-gsheet2tbl(tabs[ii,i+2])
     L
 }
