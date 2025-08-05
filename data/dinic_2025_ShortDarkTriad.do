@@ -70,4 +70,4 @@ order id item resp cov_*
 sort item id 
 
 * saves final dataset
-export delimited using "dinic_2025_ShortDarkTriad.csv", replace
+export delimited using "dinic_2025_shortdarktriad.csv", replace
