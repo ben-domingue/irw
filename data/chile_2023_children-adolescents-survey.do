@@ -25,16 +25,18 @@ rename cov_age_range_str cov_age_range
 * drop children under the age of 4
 drop if cov_age_range == "0 - 4 años"
 
-* implement aggressive recoding to NA for -88, -99, -89, and -98 values
+* implement aggressive recoding to NA for -88, -99, -89, -98, 87, 77 values
 mvdecode _all, mv(-88)
 mvdecode _all, mv(-99)
 mvdecode _all, mv(-89)
 mvdecode _all, mv(-98)
+mvdecode _all, mv(87)
+mvdecode _all, mv(77)
 
-* implement aggressive recoding to NA for -88, -99, -89, and -98 values that are string
+* implement aggressive recoding to NA for -88, -99, -89, -98, 87, and 77 values that are string
 ds, has(type string)
 foreach var of varlist `r(varlist)' {
-    replace `var' = "" if inlist(`var', "-88", "-89", "-99", "-98")
+    replace `var' = "" if inlist(`var', "-88", "-89", "-99", "-98", "87", "77")
 }
 
 * reorder variables
