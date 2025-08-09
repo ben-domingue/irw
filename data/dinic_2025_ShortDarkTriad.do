@@ -26,6 +26,11 @@ rename sd3_17r sd3_17
 rename sd3_20r sd3_20
 rename sd3_25r sd3_25
 
+* implement aggressive recoding to NA for values of 24, 41, and 43 
+mvdecode _all, mv(24)
+mvdecode _all, mv(41)
+mvdecode _all, mv(43)
+
 * adds id
 gen id = _n
 
