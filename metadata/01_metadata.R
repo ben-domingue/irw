@@ -129,7 +129,6 @@ length(unique(summaries$table))
 summaries<-merge(summaries,nt)
 
 ##get variable names for each dataset
-
 library(redivis)
 library(tibble)
 

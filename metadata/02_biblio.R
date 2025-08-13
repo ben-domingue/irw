@@ -134,7 +134,6 @@ new_data_rows <- new_data_rows %>%
     mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
 new_data_rows <- generate_bibtex(new_data_rows)
 
-
 biblio <- bind_rows(biblio, new_data_rows)
 ##remove nonpublic elements
 test<-biblio$table %in% irw_notpub$table
