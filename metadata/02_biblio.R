@@ -112,7 +112,8 @@ generate_bibtex <- function(df) {
 }
 
 # Google Spreadsheet URL or Sheet ID
-irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315')
+##('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
 irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
 
 # Read the current biblio file
@@ -132,7 +133,6 @@ new_data_rows <- new_data_rows |>
 new_data_rows <- new_data_rows %>%
     mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
 new_data_rows <- generate_bibtex(new_data_rows)
-
 
 biblio <- bind_rows(biblio, new_data_rows)
 ##remove nonpublic elements

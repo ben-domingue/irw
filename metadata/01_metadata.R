@@ -16,11 +16,16 @@ old.tables<-meta$table
 length(old.tables)
 
 ##new tables
-library(redivis)
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse")
-tables<-v1$list_tables()
-new.tables<-sapply(tables,function(x) x$name)
-length(new.tables)
+tables<-new.tables<-list()
+for (dataset in c("item_response_warehouse","item_response_warehouse_2")) {
+     v1<- redivis$organization("datapages")$dataset(dataset)
+     tabs<-v1$list_tables()
+     new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
+     tables[[dataset]]<-tabs
+}
+nt<-data.frame(do.call("rbind",new.tables))
+new.tables<-nt$table
+tables<-do.call("c",tables)
 
 ##to add
 toadd<-new.tables %in% old.tables
@@ -44,7 +49,8 @@ f<-function(tab) {
   getvars<-function(tab) {
       variables <- tab$list_variables() 
       nms<-sapply(variables,function(x) x$get()$properties$name)
-      stats<-lapply(variables,function(x) x$properties$statistics) #stats<-lapply(variables,function(x) x$get()$properties$statistics)
+      stats<-lapply(variables,function(x) x$get_statistics() ) 
+      ##
       names(stats)<-nms
       n_responses<-stats$resp$count
       if (is.null(n_responses)) {
@@ -52,7 +58,17 @@ f<-function(tab) {
           df<-df[!is.na(df$resp),]
           n_responses<-length(df$resp)
       }
-      n_categories<-stats$resp$numDistinct
+      ##
+      #n_categories<-stats$resp$numDistinct #see june 13 2025 email 'Redivis API deprecation notice for "statistics" property on variable.get endpoint'
+      resp.index<-which(nms=="resp")
+      variable<-variables[[resp.index]]
+      out<-variable$get_statistics()
+      out<-out$frequencyDistribution
+      z<-lapply(out,function(x) x$value)
+      z<-z[!sapply(z,is.null)]
+      ncats<-as.numeric(unlist(z))
+      n_categories<-length(ncats[!is.na(ncats)])
+      ##
       n_participants<-stats$id$numDistinct
       n_items<-stats$item$numDistinct
       responses_per_participant = n_responses / n_participants
@@ -109,14 +125,21 @@ if (length(ii)>0) {
 str(summaries)
 length(unique(summaries$table))
 
+##add dataset
+summaries<-merge(summaries,nt)
 
 ##get variable names for each dataset
 library(redivis)
 library(tibble)
 
+
 # fetch all tables
-dataset <- redivis::organization("datapages")$dataset("Item Response Warehouse")
-dataset_tables <- dataset$list_tables()
+dataset_tables<-list()
+for (dataset in unique(summaries$dataset)) {
+    ds <- redivis$organization("datapages")$dataset(dataset) ##edited
+    dataset_tables[[dataset]] <- ds$list_tables()
+}
+dataset_tables<-unlist(dataset_tables)
 
 # Extract table names and variables, storing variables as concatenated strings
 table_vars_df <- tibble(

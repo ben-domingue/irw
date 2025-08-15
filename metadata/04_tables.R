@@ -1,11 +1,15 @@
 ##tables on redivis
 library(redivis)
-v1<- redivis::organization("datapages")$dataset("Item Response Warehouse",version='latest')
-tables<-v1$list_tables()
-red<-sapply(tables,function(x) x$name)
+red<-list()
+for (dataset in c("item_response_warehouse","item_response_warehouse_2")) {
+    v1<- redivis$organization("datapages")$dataset(dataset,version='latest')
+    tables<-v1$list_tables()
+    red[[dataset]]<-sapply(tables,function(x) x$name)
+}
+red<-do.call("c",red)
 
 ##tables on sheet
-irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
+irw_dict <- gsheet::gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315')
 gs <- irw_dict[irw_dict$`Public Reshare?`=="Public",]
 
 ##check for missing info
@@ -54,7 +58,11 @@ n<-rowSums(x[,-1],na.rm=TRUE)
 x[order(n),]
 dim(x)
 base::table(n,useNA='always')
-x[n<4,]
+z<-x[n<4,]
+tmp<-z[,-6] ##no tag
+nn<-rowSums(is.na(tmp))
+z[nn<4,]
+
 
 cnt<-base::table(x$table)
 names(cnt)[cnt>1]
@@ -94,3 +102,5 @@ for (i in 1:length(L)) {
 ## bib[!test,]
 
 ## readr::write_csv(bib, "biblio.csv")
+
+
