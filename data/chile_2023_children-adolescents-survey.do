@@ -8,7 +8,7 @@ use "Base de datos EANNA 2023.dta", clear
 export delimited "chile_children-adolescents-survey.csv", replace
 
 * drop unnecessary variables
-drop folio id_hogar id_persona region area expr varunit estrato check_hogar_casen check_nuevos int_nuevo f1	f10	f10_quien	f2a	f2a_esp	f2b	f2b_esp	f3	f3_esp	f4	f5	f6a_asiste	f6a_no_asiste	f6b_asiste	f6b_no_asiste	f6d_preg	f7	f8	f9	f9_esp	f9_esp_cod	pco1	pco1_a	pco1_b	pco1_nna	pco1_nna	th1	th1_quien	th2_1	th2_1_tiempo	th2_10	th2_10_tiempo	th2_11	th2_11_tiempo	th2_12	th2_12_tiempo	th2_2	th2_2_tiempo	th2_3	th2_3_tiempo	th2_4	th2_4_tiempo	th2_5	th2_5_tiempo	th2_6	th2_6_tiempo	th2_7	th2_7_tiempo	th2_77	th2_77_esp	th2_77_esp_cod	th2_77_tiempo	th2_8	th2_8_tiempo	th2_9	th2_9_tiempo	th3_1	th3_1_tiempo	th3_10	th3_10_tiempo	th3_11	th3_11_tiempo	th3_12	th3_12_tiempo	th3_2	th3_2_tiempo	th3_3	th3_3_tiempo	th3_4	th3_4_tiempo	th3_5	th3_5_tiempo	th3_6	th3_6_tiempo	th3_7	th3_7_tiempo	th3_77	th3_77_esp	th3_77_esp_cod	th3_77_tiempo	th3_8	th3_8_tiempo	th3_9	th3_9_tiempo	th4	th4_esp	th4_esp_cod	th5	th5_esp	th5_esp_cod	th6_1	th6_2	th6_3	th6_4	th6_5	th6_6	th7	th7_tiempo	th8	th8_tiempo	w1	w10_tiempo	w11	w11_esp	w2	w3	w4_1	w4_2	w4_3	w4_4	w4_5	w4_6	w4_7	w4_77	w4_8	w4_esp	w5	w6	w7	w8	w8_esp	w8_esp_cod	w9_tiempo ac7
+drop folio id_hogar id_persona region area expr varunit estrato check_hogar_casen check_nuevos int_nuevo f1	f10	f10_quien	f2a	f2a_esp	f2b	f2b_esp	f3	f3_esp	f4	f5	f6a_asiste	f6a_no_asiste	f6b_asiste	f6b_no_asiste	f6d_preg	f7	f8	f9	f9_esp	f9_esp_cod	pco1	pco1_a	pco1_b	pco1_nna	pco1_nna	th1	th1_quien	th2_1	th2_1_tiempo	th2_10	th2_10_tiempo	th2_11	th2_11_tiempo	th2_12	th2_12_tiempo	th2_2	th2_2_tiempo	th2_3	th2_3_tiempo	th2_4	th2_4_tiempo	th2_5	th2_5_tiempo	th2_6	th2_6_tiempo	th2_7	th2_7_tiempo	th2_77	th2_77_esp	th2_77_esp_cod	th2_77_tiempo	th2_8	th2_8_tiempo	th2_9	th2_9_tiempo	th3_1	th3_1_tiempo	th3_10	th3_10_tiempo	th3_11	th3_11_tiempo	th3_12	th3_12_tiempo	th3_2	th3_2_tiempo	th3_3	th3_3_tiempo	th3_4	th3_4_tiempo	th3_5	th3_5_tiempo	th3_6	th3_6_tiempo	th3_7	th3_7_tiempo	th3_77	th3_77_esp	th3_77_esp_cod	th3_77_tiempo	th3_8	th3_8_tiempo	th3_9	th3_9_tiempo	th4	th4_esp	th4_esp_cod	th5	th5_esp	th5_esp_cod	th6_1	th6_2	th6_3	th6_4	th6_5	th6_6	th7	th7_tiempo	th8	th8_tiempo	w1	w10_tiempo	w11	w11_esp	w2	w3	w4_1	w4_2	w4_3	w4_4	w4_5	w4_6	w4_7	w4_77	w4_8	w4_esp	w5	w6	w7	w8	w8_esp	w8_esp_cod	w9_tiempo ac7 
 
 * drop casen covariates to reduce processing time
 drop e6a_casen	activ_casen	allega_ext_casen	allega_int_casen	dau_casen	depen_casen	disc_wg_casen	e6b_casen	hh_d_acc_casen	hh_d_accesi_casen	hh_d_act_casen	hh_d_appart_casen	hh_d_asis_casen	hh_d_cot_casen	hh_d_entorno_casen	hh_d_equipo_casen	hh_d_esc_casen	hh_d_estado_casen	hh_d_habitab_casen	hh_d_hacina_casen	hh_d_hapoyo_casen	hh_d_jub_casen	hh_d_mal_casen	hh_d_medio_casen	hh_d_part_casen	hh_d_prevs_casen	hh_d_rez_casen	hh_d_seg_casen	hh_d_servbas_casen	hh_d_tiempo_casen	hh_d_tsocial_casen	ind_hacina_casen	indsan_casen	lugar_nac_casen	pobreza_casen	pobreza_multi_4d_casen	pobreza_multi_5d_casen	pueblos_indigenas_casen	qaut_casen	r17a_casen	r17b_casen	r17c_casen	r17d_casen	r17e_casen	r8a_casen	r8b_casen	r8c_casen	r8d_casen	r8e_casen	r8f_casen	r8g_casen	r8h_casen	s13_casen	s6_casen	ten_viv_casen	ten_viv_f_casen	tot_hog_casen	v1_casen	v2_casen	v4_casen	v6_casen	yaimh_casen	yautcorh_casen	yauth_casen	ymonecorh_casen	ypch_casen	ypchautcor_casen	ypchtrabcor_casen	ysubh_casen	ytoth_casen	ytrabajocorh_casen
@@ -58,7 +58,7 @@ use "chile_2023_children-adolescents-survey.csv", clear
 keep if rp2 == 1
 
 * keep only the relevant variables of this section
-keep cov_gender cov_age_range cp1	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac1_8_esp	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_77_esp	ac5_77_esp_cod	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77	ac6_77_esp	ac6_77_esp_cod cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
+keep cov_gender cov_age_range ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac1_8_esp	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_77_esp	ac5_77_esp_cod	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77	ac6_77_esp	ac6_77_esp_cod cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4 cp1
 
 * drop additional text-based answers
 drop ac1_8_esp ac6_77_esp ac6_77_esp_cod ac5_77_esp ac5_77_esp_cod
@@ -93,6 +93,9 @@ rename cp9_2_num cp9_2
 rename cp9_3_num cp9_3
 rename cp9_4_num cp9_4
 
+* rename other germane variables
+rename cp1 cov_age_first_job
+
 * adds id
 gen id = _n
 
@@ -100,7 +103,7 @@ gen id = _n
 order id cov*, first
 
 * create long-format data from wide data
-local question_cols cp1	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
+local question_cols	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
 
 tempfile longdata
 save `longdata', emptyok replace
@@ -122,7 +125,7 @@ foreach var of local question_cols {
 
 use `longdata', clear
 
-drop cp1	ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
+drop ac1_1	ac1_2	ac1_3	ac1_4	ac1_5	ac1_6	ac1_7	ac1_8	ac2_1	ac2_2	ac2_3	ac2_4	ac2_5	ac3	ac5_1	ac5_10	ac5_2	ac5_3	ac5_4	ac5_5	ac5_6	ac5_7	ac5_77	ac5_8	ac5_9	ac6_1	ac6_2	ac6_3	ac6_4	ac6_77 cp2_1	cp2_10	cp2_2	cp2_3	cp2_4	cp2_5	cp2_6	cp2_7	cp2_77	cp2_8	cp2_9	cp3	cp4	cp5_1	cp5_2	cp5_3	cp5_4	cp5_5	cp5_6	cp5_7	cp6_1	cp6_2	cp6_3	cp6_4	cp6_5	cp6_6	cp6_7	cp6_8	cp7_1	cp7_2	cp7_3	cp7_4	cp8_1	cp8_2	cp8_3	cp8_4	cp8_5	cp8_6	cp9_1	cp9_2	cp9_3	cp9_4
 
 drop if missing(item) | item == ""
 
