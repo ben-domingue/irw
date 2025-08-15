@@ -31,7 +31,10 @@ rename polishhighschoolgrade cov_polish_highschool_grade
 rename polishhighschoolexitexam	cov_polish_highschool_exitexam
 rename mathelementarygrade cov_math_elementary_grade
 rename mathjuniorhighschoolgrade cov_math_jjhighschool_grade
-rename mathhighschoolgrade cov_math_highschool_exitexam  
+rename mathhighschoolgrade cov_math_highschool_exitexam 
+
+* convert the SIMA scale as a covariate to avoid single-item tables
+rename sima cov_sima
 
 * adds id
 gen id = _n
@@ -132,49 +135,7 @@ order id item resp cov*, first
 * export the long-format table
 export delimited using "szczygiel_2023_masa_amas.csv", replace
 
-**# Bookmark #3: Group SIMA
-
-* recall dataset
-import delimited "szczygiel_2023_masa.csv", clear
-
-* keep only id, covariates, and respective group variables
-keep id cov_* sima
-
-* creates long data from wide data
-local question_cols	sima
-
-tempfile longdata
-save `longdata', emptyok replace
-
-foreach var of local question_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp
-    append using `longdata'
-    save `longdata', replace
-    restore
-}
-
-use `longdata', clear
-
-drop sima
-
-drop if missing(item) | item == ""
-
-* encode any needed variables
-gen resp2 = resp
-drop resp
-rename resp2 resp
-
-* reorder variables
-order id item resp cov*, first
-
-* export the long-format table
-export delimited using "szczygiel_2023_masa_sima.csv", replace
-
-**# Bookmark #4: Group MAQA
+**# Bookmark #3: Group MAQA
 
 * recall dataset
 import delimited "szczygiel_2023_masa.csv", clear
@@ -216,7 +177,7 @@ order id item resp cov*, first
 * export the long-format table
 export delimited using "szczygiel_2023_masa_maqa.csv", replace
 
-**# Bookmark #5: Group MSC and PSC (Math and Polish Self-Concept) | MSE and PSE (Math and Polish Self-Efficacy)
+**# Bookmark #4: Group MSC and PSC (Math and Polish Self-Concept) | MSE and PSE (Math and Polish Self-Efficacy)
 
 * recall dataset
 import delimited "szczygiel_2023_masa.csv", clear
