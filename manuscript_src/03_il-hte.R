@@ -1,5 +1,5 @@
 
-# Define a function to perform item-level Harmonic Treatment Effect (IL-HTE) analysis
+# Define a function to perform item-level Heterogeneous Treatment Effect (IL-HTE) analysis
 il_hte <- function(tab) {
     df<-irw::irw_fetch(tab)
     df$resp <- as.numeric(df$resp)  # Ensure the response variable is numeric
