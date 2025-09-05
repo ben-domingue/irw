@@ -1,6 +1,5 @@
 *** This Do File creates tables from the Psychometric properties of the polish updated Illinois rape myth acceptance scale studies 1, 2, and 3 ***
 
-
 **# Bookmark #1: Study 1
 
 * clear
@@ -302,4 +301,5 @@ foreach prefix of local base_items {
     }
     export delimited using "lys_2020_rape_3_`prefix'.csv", replace
     restore
+
 }
