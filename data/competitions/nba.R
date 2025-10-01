@@ -5,16 +5,12 @@ x3<-read.csv("2017-18_teamBoxScore.csv")
 x<-rbind(x1,x2,x3)
 
 x<-x[x$teamLoc=="Home",]
-x[,c("gmDate","teamAbbr","teamPTS","opptAbbr","opptPTS")]
-
-delta<-x$teamPTS-x$opptPTS
-
-test<-delta>=0
-id_1<-ifelse(test,x$teamAbbr,x$opptAbbr)
-id_2<-ifelse(!test,x$teamAbbr,x$opptAbbr)
-df<-data.frame(id_1=id_1,id_2=id_2,resp=abs(delta))
-
+df<-x[,c("teamAbbr","teamPTS","opptAbbr","opptPTS")]
+names(df)<-c("agent_a","score_a","agent_b","score_b")
 df$date<-as.numeric(strptime(x$gmDate,format='%Y-%m-%d'))
+df$hometeam<-'agent_a'
 
-save(df,file="nba_2012-2018.Rdata")
+df$winner<-ifelse(df$score_a>df$score_b,'agent_a','agent_b')
+df$winner<-ifelse(df$score_a==df$score_b,'draw',df$winner)
+
 write.csv(df,file="nba_2012-2018.csv",quote=FALSE,row.names=FALSE)

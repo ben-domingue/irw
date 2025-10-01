@@ -53,6 +53,14 @@ for (i in 2:5) {
     x<-merge(x,y,by='table',all=TRUE)
 }
 
+##duplicated table names
+cnt<-base::table(x$table)
+names(cnt)[cnt>1]
+for (i in 1:length(L)) {
+    tab<-base::table(L[[i]])
+    print(tab[tab>1])
+}
+
 ##counting duplicates
 n<-rowSums(x[,-1],na.rm=TRUE)
 x[order(n),]
@@ -63,13 +71,6 @@ tmp<-z[,-6] ##no tag
 nn<-rowSums(is.na(tmp))
 z[nn<4,]
 
-
-cnt<-base::table(x$table)
-names(cnt)[cnt>1]
-for (i in 1:length(L)) {
-    tab<-base::table(L[[i]])
-    print(tab[tab>1])
-}
 
 
 ## ## ###################################################33
