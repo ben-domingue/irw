@@ -18,9 +18,5 @@ data <- data %>%
     rater = as.integer(factor(participant_private_id))
 )
 
-data_aoa = subset(data, item == 'aoa')
-data_cnc = subset(data, item == 'cnc')
-
-write.csv(data_aoa, "KalimahNorms_alzahrani_2025_aoa.csv", row.names = FALSE)
-write.csv(data_cnc, "KalimahNorms_alzahrani_2025_cnc.csv", row.names = FALSE)
+write.csv(data, "KalimahNorms_alzahrani_2025.csv", row.names = FALSE)
 
