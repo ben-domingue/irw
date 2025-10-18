@@ -178,3 +178,50 @@ sort id item
 
 * export the long-format table for group the group
 export delimited using "fryback_2009_health_discrm.csv", replace
+
+**# Bookmark #4: Quality of life questions
+
+* recall dataset
+use "fryback_2009_health.csv", clear
+
+* keep only id, covariates, and respective variables
+keep id cov_* sf*
+
+* drop variables
+drop sf6phy sf6role sf6men sf6soc sf6pain sf6vit sf36a sf6d_12v2 sf36time sf1rev sf6d_36v2 
+
+* create long-format data from wide data
+local question_cols sf1 sf2 sf3 sf4 sf5 sf6 sf7 sf8 sf9 sf10 sf11 sf12 sf13 sf14 sf15 sf16 sf17 sf18 sf19 sf20 sf21 sf22 sf23 sf24 sf25 sf26 sf27 sf28 sf29 sf30 sf31 sf32 sf33 sf34 sf35 sf36
+tempfile long_sf
+save `long_sf', emptyok replace
+
+foreach var of local question_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_sf'
+    save `long_sf', replace
+    restore
+}
+
+use `long_sf', clear
+
+drop sf1 sf2 sf3 sf4 sf5 sf6 sf7 sf8 sf9 sf10 sf11 sf12 sf13 sf14 sf15 sf16 sf17 sf18 sf19 sf20 sf21 sf22 sf23 sf24 sf25 sf26 sf27 sf28 sf29 sf30 sf31 sf32 sf33 sf34 sf35 sf36
+
+drop if missing(item) | item == ""
+
+* encode any needed variables
+gen resp2 = resp
+drop resp
+rename resp2 resp
+
+* reorder variables
+order id item resp cov*, first
+
+* sort
+sort id item
+
+* export the long-format table for group the group
+export delimited using "fryback_2009_health_sf.csv", replace
