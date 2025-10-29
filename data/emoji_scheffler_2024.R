@@ -5,15 +5,15 @@ data <- read.csv("emoji-norming-results-raw.csv")
 data <- data %>%
   mutate(
     resp = case_when(
-      trial_name == "familiarity" ~ as.character(familiarity),
-      trial_name == "naming" ~ paste(response1, response2, response3, sep = ", "),
-      trial_name == "arousal" ~ as.character(answere),
-      trial_name == "complexity" ~ as.character(compexity),   
-      trial_name == "valence" ~ as.character(valence),
-      trial_name == "ambiguity" ~ as.character(ambiguity),
-      TRUE ~ NA_character_
+      trial_name == "familiarity" ~ familiarity,
+      trial_name == "arousal" ~ answere,
+      trial_name == "complexity" ~compexity,   
+      trial_name == "valence" ~ valence,
+      trial_name == "ambiguity" ~ ambiguity,
+      TRUE ~ NA_real_
     )
-  )
+  )%>%
+  filter(trial_name != 'naming')
 
 data <- data %>%
   transmute(
