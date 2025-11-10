@@ -29,7 +29,8 @@ data_2 <- sample_2 %>%
          sample = 2) %>%            
   select(date, rater, id, item, resp,sample)
 
-data <- bind_rows(data_1, data_2)
+data <- bind_rows(data_1, data_2)%>%
+  mutate(date = as.numeric(as.POSIXct(date, format = "%Y-%m-%d %H:%M:%OS", tz = "UTC")))
 
 write.csv(data, "moralvignettes_rakhmankulova_2025.csv", row.names = FALSE)
 
