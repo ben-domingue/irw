@@ -1,4 +1,7 @@
 library(dplyr)
+library(stringr)
+library(readr)
+
 
 data1 <- read.csv2('Open_TSST_VR_data_study_1.csv', header = TRUE)
 
@@ -18,7 +21,8 @@ data1 <- data1 %>%
   mutate(
     cov_sex = 1,
     cov_order = NA,
-    study  = 1
+    study  = 1,
+    id = paste(study, id, sep = "_")
   )
 
 data2 <- read.csv2('Open_TSST_VR_data_study_2.csv', header = TRUE)
@@ -39,7 +43,8 @@ data2 <- data2 %>%
     cov_order =order
   )%>%
   mutate(cov_order = as.integer(factor(cov_order)),
-         study  = 2)
+         study  = 2,
+         id = paste(study, id, sep = "_"))
 
 common_cols <- intersect(names(data1), names(data2))
 data <- bind_rows(data1[, common_cols], data2[, common_cols])
