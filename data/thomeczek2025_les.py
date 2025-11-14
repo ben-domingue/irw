@@ -63,19 +63,8 @@ def convert_to_irw_format(input_file, output_file):
     # Save to CSV
     irw_df.to_csv(output_file, index=False)
     
-    print(f"Conversion complete! Output saved to {output_file}")
-    print(f"Total rows: {len(irw_df)}")
-    print(f"Unique parties (id): {irw_df['id'].nunique()}")
-    print(f"Unique items: {irw_df['item'].nunique()}")
-    print(f"Unique raters: {irw_df['rater'].nunique()}")
     
     # Debug
-    print("\nSample of converted data:")
-    print(irw_df.head(10))
-    
-    print(f"\nUnique id-item-rater combinations: {len(irw_df.groupby(['id', 'item', 'rater']))}")
-    
-    print("\nBreakdown by context:")
     context_counts = irw_df['id'].str.split('_').str[1].value_counts()
     print(context_counts)
     
