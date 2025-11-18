@@ -152,7 +152,7 @@ table_vars_df <- tibble(
 
 meta<-merge(summaries,table_vars_df,by='table')
 dim(meta)
-
+meta$variables<-tolower(meta$variables) ##https://github.com/itemresponsewarehouse/Rpkg/issues/109
 
 ##add longitudinal flag, https://github.com/ben-domingue/irw/issues/1167#issue-3519409612
 i1<- grepl("wave",meta$variables)

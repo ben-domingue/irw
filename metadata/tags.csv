@@ -104,8 +104,8 @@ sv-maia2_randelovic_2021_maia,Adult (18+),NA,"Educational, Targeted/specific",Af
 sv-maia2_randelovic_2021_hexaco100,Adult (18+),NA,"Educational, Targeted/specific",Personality,Survey/questionnaire,Likert Scale/selected response,"eng,srp",Hexaco 100 item personality inventory
 sv-maia2_randelovic_2021_shs,Adult (18+),NA,"Educational, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"eng,srp",Subjective Happiness Scale
 trees_sirt,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,opinion on thinning trees
-project_kids_wj_sa,NA,NA,NA,NA,NA,NA,NA,NA
-project_kids_wj_spell_grade,NA,NA,NA,NA,NA,NA,NA,NA
+project_kids_wj_sa,Child (<18y),"Early (<6y), Child (6-12y)",Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Woodcock-Johnson Sound Awareness subtest
+project_kids_wj_spell_grade,Child (<18y),"Early (<6y), Child (6-12y)",Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Woodcock-Johnson Spelling subtest
 pppasbpnssedaisw_pedro_2022_ebsv,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,The Brief Multidimensional Student’s Life Satisfaction Scale (BMSLSS)
 pppasbpnssedaisw_pedro_2022_panas,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,The Positive and Negative Affect Schedule(PANAS)
 pppasbpnssedaisw_pedro_2022_npbe,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"por,eng",The Adolescent Student Basic Psychological Need Satisfaction Scale
@@ -1180,12 +1180,9 @@ fryback_2009_health_pwbs,Mixed,NA,"General/non-specific, Targeted/specific",Affe
 fryback_2009_health_pwbp,Mixed,NA,"General/non-specific, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Pscyhological well-being scale (purpose)
 fryback_2009_health_discrm,Mixed,NA,"General/non-specific, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Self-perceived discrimination scale
 fryback_2009_health_sf,Mixed,NA,"General/non-specific, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Self-perceived quality of life ratings; HRQoL Index
-opentsstvr_linnig_2025_study1_ssq,Adult (18+),NA,Educational,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,deu,symptoms of simulator sickness (SSQ)
-opentsstvr_linnig_2025_study1_vas,Adult (18+),NA,Educational,"Cognitive/educational, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,deu,subjective perception of the VR environment (VAS)
-opentsstvr_linnig_2025_study1_vrexperience,Adult (18+),NA,Educational,"Opinion/attitude, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,deu,perception of (social) presence in the TSST (IPQ and SPQ)
-opentsstvr_linnig_2025_study2_ssq,Adult (18+),NA,Educational,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,deu,symptoms of simulator sickness (SSQ)
-opentsstvr_linnig_2025_study2_vas,Adult (18+),NA,Educational,"Cognitive/educational, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,deu,subjective perception of the VR environment (VAS)
-opentsstvr_linnig_2025_study2_vrexperience,Adult (18+),NA,Educational,"Opinion/attitude, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,deu,perception of (social) presence in the TSST (IPQ and SPQ)
+opentsstvr_linnig_2025_ssq,Adult (18+),NA,Educational,Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,deu,symptoms of simulator sickness (SSQ)
+opentsstvr_linnig_2025_vas,Adult (18+),NA,Educational,"Cognitive/educational, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,deu,subjective perception of the VR environment (VAS)
+opentsstvr_linnig_2025_vrexperience,Adult (18+),NA,Educational,"Opinion/attitude, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,deu,perception of (social) presence in the TSST (IPQ and SPQ)
 moralvignettes_rakhmankulova_2025,Non-human,NA,Non-human,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,rus,Moral event features
 pezzuti_2025_coolpeople_main_trendy_usa,Mixed,NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Trendy
 pezzuti_2025_coolpeople_main_collectivism_usa,Mixed,NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Collectivism
@@ -1220,3 +1217,25 @@ pezzuti_2025_coolpeople_supplemental_secure,Mixed,NA,"General/non-specific, ""In
 pezzuti_2025_coolpeople_supplemental_traditional,Mixed,NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Tradition
 pezzuti_2025_coolpeople_supplemental_powerful,Mixed,NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Power
 pezzuti_2025_coolpeople_supplemental_single-items,Mixed,NA,"General/non-specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Single-item Attributes
+rating_speed_2025,Non-human,NA,Non-human,"Affective/mental health, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,dut,"valence, arousal, and emotion"
+emoji_scheffler_2024,Non-human,NA,Non-human,"Cognitive/educational, Affective/mental health, Opinion/attitude",Survey/questionnaire,Slider/continuous,deu,"valence, arousal, familiarity, clarity, and visual complexity."
+megart_tonkovic_2021,Adult (18+),NA,Educational,Cognitive/educational,Test,Likert Scale/selected response,hrv,lexical decision task
+kepaq_balparda_2021,Mixed,NA,Clinical,"Affective/mental health, Physical health/functioning",Survey/questionnaire,Likert Scale/selected response,eng,Quality of Life
+suicide_reinbergs_2025_stig,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Stigma–9 Questionnaire (STIG-9)
+suicide_reinbergs_2025_gad,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Generalized Anxiety Disorder–2 (GAD-2)
+suicide_reinbergs_2025_phq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Patient Health Questionnaire–9 (PHQ-9)
+suicide_reinbergs_2025_stosa,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Stigma of Suicide Attempt Scale (STOSA)
+suicide_reinbergs_2025_soss,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Stigma of Suicide Scale–Short Form Stigma Subscale (SOSS-SF Stigma)
+suicide_reinbergs_2025_sbqr,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Suicide Behaviors Questionnaire–Revised (SBQ-R)
+suicide_reinbergs_2025_mpfi,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,"Multidimensional Psychological Flexibility Inventory–24, Psychological Flexibility Subscale (MPFI-24-PF)"
+suicide_reinbergs_2025_ghsq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,General Help-Seeking Questionnaire (GHSQ)
+suicide_reinbergs_2025_dssm,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Suicide Stigma Scale
+lhsbrasil_couto_2023_lhs,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Learned Helplessness Scale
+lhsbrasil_couto_2023_ses,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Rosenberg’s Self-Esteem Scale (SES)
+lhsbrasil_couto_2023_pss,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Perceived Stress Scale (PSS-10)
+ptcichina_zhan_2024,Mixed,"Adolescent (12-18y), Child (6-12y)","Educational, ""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,zho,Posttraumatic Cognitions Inventory (PTCI)
+crspolish_wiesyk_2024_crs,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,pol,Coparenting Relationship Scale (CRS)
+crspolish_wiesyk_2024_lie,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,pol,Lie Scale
+crspolish_wiesyk_2024_enrich,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,pol,ENRICH Marital Satisfaction (EMS) Scale
+crspolish_wiesyk_2024_p_stress,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,pol,Parental Distress Scale
+gahps_korner_2021,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,ger,German Authentic and Hubristic Pride Scales (GAHPS)
