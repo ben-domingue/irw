@@ -13,14 +13,11 @@ import pandas as pd
 import numpy as np
 
 def convert_to_irw_format(input_file, output_file):
-    """
-    Convert the wide format data to IRW standard format.
-    """
+
     df = pd.read_excel(input_file)
     
     item_cols = [col for col in df.columns if col not in ['id', ' sex', 'age']]
     
-    print(f"Found {len(item_cols)} items")
     long_data = []
     
     for _, row in df.iterrows():
