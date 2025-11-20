@@ -16,7 +16,7 @@ data <- data%>%
 pivot_scale <- function(data, prefix) {
   data %>%
     zap_labels()%>%
-    select(id, starts_with("cov_"), matches(paste0("^", prefix, "\\d+$"))) %>%
+    select(id, starts_with("cov_"), matches(paste0("^", prefix, "\\d{2}r?$"))) %>%
     pivot_longer(
       cols = starts_with(prefix),
       names_to = "item",
