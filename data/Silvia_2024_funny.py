@@ -55,3 +55,5 @@ if __name__ == "__main__":
     output_file = "/Users/francesraphael/projects/research/irw/funny/data_irw_format.csv"
     
     irw_data = convert_to_irw_format(input_file, output_file)
+
+##exported as silvia_2024_funny
