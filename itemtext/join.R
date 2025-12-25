@@ -1,4 +1,4 @@
-table<-'emsc_kuan-chin_2023'
+table<-'kfcovid_pss_li2020'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
