@@ -77,23 +77,50 @@ for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
 save(df,file="mpsycho_Rmotivation.Rdata")
 
-## Rogers
+## ## Rogers
+## load("Rogers.rda")
+## x<-Rogers
+## id<-1:nrow(x)
+## L<-list()
+## for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
+## df<-data.frame(do.call("rbind",L))
+## save(df,file="mpsycho_Rogers.Rdata")
+
+## ## Rogers_Adolescent
+## load("Rogers_Adolescent.rda")
+## x<-Rogers_Adolescent
+## id<-1:nrow(x)
+## L<-list()
+## for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
+## df<-data.frame(do.call("rbind",L))
+## save(df,file="mpsycho_Rogers_adolescent.Rdata")
+
+## Rogers & Rogers_Adolescent
 load("Rogers.rda")
 x<-Rogers
 id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
 df<-data.frame(do.call("rbind",L))
-save(df,file="mpsycho_Rogers.Rdata")
-
-## Rogers_Adolescent
+df$cov_sample<-'adult'
 load("Rogers_Adolescent.rda")
 x<-Rogers_Adolescent
 id<-1:nrow(x)
 L<-list()
 for (i in 1:ncol(x)) L[[i]]<-data.frame(id=id,item=names(x)[i],resp=x[,i])
-df<-data.frame(do.call("rbind",L))
-save(df,file="mpsycho_Rogers_adolescent.Rdata")
+df1<-data.frame(do.call("rbind",L))
+df1$cov_sample<-'adolescent'
+df<-data.frame(rbind(df,df1))
+##https://github.com/ben-domingue/irw/issues/1239#issuecomment-3673618435
+ocd<-c("obtime", "obinterfer", "obdistress", "obresist", "obcontrol", "comptime","compinterf", "compdis", "compresis", "compcont")
+test<-df$item %in% ocd
+ocd<-df[test,]
+dep<-df[!test,]
+ocd$id<-paste(ocd$id,ocd$cov_sample,sep='--')
+dep$id<-paste(dep$id,dep$cov_sample,sep='--')
+write.csv(ocd,file="mpsycho_rogers_ocd.csv",quote=FALSE,row.names=FALSE)
+write.csv(dep,file="mpsycho_rogers_depression.csv",quote=FALSE,row.names=FALSE)
+
 
 ## RWDQ
 load("RWDQ.rda")

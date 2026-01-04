@@ -353,6 +353,8 @@ florida_twins_par,31078,39,1353,31,22.969696969697,1002.51612903226,0.7409579667
 florida_twins_read,43010,4,809,54,53.1644004944376,796.481481481482,0.984525935082177,item_response_warehouse,id| cov_age| item| resp| wave,TRUE
 florida_twins_sch,15148,4,804,19,18.8407960199005,797.263157894737,0.991620843152658,item_response_warehouse,id| cov_age| item| resp| wave,TRUE
 florida_twins_tech,13198,7,608,22,21.7072368421053,599.909090909091,0.986692583732057,item_response_warehouse,id| cov_age| item| resp| wave,TRUE
+Forthmann-2024-cleverness_ratings,3020,5,202,3,14.950495049505,1006.66666666667,4.98349834983498,item_response_warehouse_2,id| item| resp| rater| cov_age| cov_sex| cov_aggression| cov_submission_r| cov_conventionalism| cov_rwa| cov_ts| cov_flu_letterf| cov_flu_letters| cov_flu_super| cov_flu_animals| cov_vf_flu,FALSE
+Forthmann-2024-creative_quality,14289,5,202,3719,70.7376237623762,3.84216187147083,0.019020603324113,item_response_warehouse_2,id| item| resp| rater| cov_object| itemcov_frequency| itemcov_idea_type| cov_age| cov_sex| cov_aggression| cov_submission_r| cov_conventionalism| cov_rwa| cov_ts| cov_flu_letterf| cov_flu_letters| cov_flu_super| cov_flu_animals| cov_vf_flu,FALSE
 FPAS_Silva_2022,2718,5,151,18,18,151,1,item_response_warehouse,id| item| resp,FALSE
 frac20,10720,2,536,20,20,536,1,item_response_warehouse,item| id| resp| qmatrix__1| qmatrix__2| qmatrix__3| qmatrix__4| qmatrix__5| qmatrix__6| qmatrix__7| qmatrix__8,FALSE
 fractals_rating,71680,7,400,7,179.2,10240,25.6,item_response_warehouse,id| item| rater| resp,FALSE
@@ -494,6 +496,14 @@ HEARD_Roch_2022_IDSS,7200,5,600,12,12,600,1,item_response_warehouse,id| item| re
 HEARD_Roch_2022_K6,3600,5,600,6,6,600,1,item_response_warehouse,id| item| resp,FALSE
 HEARD_Roch_2022_SWLPWI,4800,11,600,8,8,600,1,item_response_warehouse,id| item| resp,FALSE
 HEARD_Roch_2022_WHODAS,7200,5,600,12,12,600,1,item_response_warehouse,id| item| resp,FALSE
+heise_2024_mental_divbeliefs,1478,3,206,8,7.1747572815534,184.75,0.896844660194175,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_divdesires,2408,3,206,12,11.6893203883495,200.666666666667,0.97411003236246,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_falsebel,2458,3,206,12,11.9320388349515,204.833333333333,0.994336569579288,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_falsesign,2449,3,206,12,11.8883495145631,204.083333333333,0.990695792880259,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_knowaccess,1220,3,206,6,5.92233009708738,203.333333333333,0.98705501618123,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_knowexpert,1110,3,206,6,5.38834951456311,185,0.898058252427185,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_truebel,1223,3,206,6,5.9368932038835,203.833333333333,0.989482200647249,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
+heise_2024_mental_vpt,2440,3,206,12,11.8446601941748,203.333333333333,0.98705501618123,item_response_warehouse_2,id| item| resp| cov_age| cov_sex,FALSE
 hexaco_ashton_2014_a,911440,7,22786,40,40,22786,1,item_response_warehouse,cov_country| id| item| resp,FALSE
 hexaco_ashton_2014_c,911440,7,22786,40,40,22786,1,item_response_warehouse,cov_country| id| item| resp,FALSE
 hexaco_ashton_2014_e,911440,7,22786,40,40,22786,1,item_response_warehouse,cov_country| id| item| resp,FALSE
@@ -502,7 +512,6 @@ hexaco_ashton_2014_o,911440,7,22786,40,40,22786,1,item_response_warehouse,cov_co
 hexaco_ashton_2014_x,911440,7,22786,40,40,22786,1,item_response_warehouse,cov_country| id| item| resp,FALSE
 hexaco_silvia_2025,53000,5,530,100,100,530,1,item_response_warehouse_2,id| cov_age| cov_gender| cov_edu| item| resp,FALSE
 hmcdm_spatialreasoning,3500,2,350,50,10,70,0.2,item_response_warehouse,item| id| rt| resp| qmatrix__1| qmatrix__2| qmatrix__3| qmatrix__4,FALSE
-hope_repich2024,4452,8,106,42,42,106,1,item_response_warehouse_2,id| item| resp| cov_sex| cov_age,FALSE
 hpwt_bayona_2025_jobperformance,2016,5,504,4,4,504,1,item_response_warehouse,id| cov_gender| cov_education| cov_age| rater| item| resp,FALSE
 hpwt_bayona_2025_jobsatisfaction,2520,5,504,5,5,504,1,item_response_warehouse,id| cov_gender| cov_education| cov_age| item| resp,FALSE
 hpwt_bayona_2025_workcharacteristics,38808,5,504,77,77,504,1,item_response_warehouse,id| cov_gender| cov_education| cov_age| item| resp,FALSE
@@ -617,6 +626,17 @@ lys_2020_rape_3_unjust,3927,7,433,10,9.06928406466513,392.7,0.906928406466513,it
 machivallianism_test_main,1469720,5,73486,20,20,73486,1,item_response_warehouse,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp| rt,FALSE
 machivallianism_test_tipi,728729,7,73264,10,9.94661771129067,72872.9,0.994661771129067,item_response_warehouse,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp,FALSE
 machivallianism_test_vcl,1175824,2,73489,16,16,73489,1,item_response_warehouse,id| cov_country| cov_education| cov_urban| cov_gender| cov_engnat| cov_age| cov_hand| cov_religion| cov_orientation| cov_race| cov_voted| cov_married| cov_familysize| cov_major| item| resp,FALSE
+margaretto_2025_translation_study_1_generalknowledge,12545,2,231,65,54.3073593073593,193,0.835497835497836,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_1_lextale,19170,2,231,90,82.987012987013,213,0.922077922077922,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_1_readingcomprehension,6945,2,231,42,30.0649350649351,165.357142857143,0.715831787260359,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_1_vocabulary_1,10368,2,231,48,44.8831168831169,216,0.935064935064935,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_1_vocabulary_2,11319,2,231,49,49,231,1,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_1_vocabulary_3,10028,2,231,46,43.4112554112554,218,0.943722943722944,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_2_generalknowledge_1,11660,2,220,55,53,212,0.963636363636364,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_2_generalknowledge_2,11183,2,220,53,50.8318181818182,211,0.959090909090909,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_2_lextale,19260,2,220,90,87.5454545454545,214,0.972727272727273,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_2_readingcomprehension,8047,2,220,42,36.5772727272727,191.595238095238,0.870887445887446,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
+margaretto_2025_translation_study_2_vocabulary_full,15466,2,220,74,70.3,209,0.95,item_response_warehouse_2,id| item| resp| cov_country| cov_age| cov_gender| cov_occupation| cov_educationlevel| cov_motherlanguage| cov_multilingual,FALSE
 mbft_anunciacao_2024,42290975,7,272845,155,155,272845,1,item_response_warehouse,cov_sex| cov_age| cov_profession| cov_institution| id| item| resp,FALSE
 mbps_vangsness_2019,3017,5,233,13,12.9484978540773,232.076923076923,0.996038296467481,item_response_warehouse,id| item| resp,FALSE
 mcmi_mokken,53152,2,1208,44,44,1208,1,item_response_warehouse,item| id| resp| qmatrix__a| qmatrix__h| qmatrix__ss| qmatrix__cc,FALSE
@@ -633,15 +653,16 @@ mgkt,614976,11,19218,32,32,19218,1,item_response_warehouse,id| cov_age| cov_gend
 MGSISGCLQ_Hollyhead_2018,950,5,38,25,25,38,1,item_response_warehouse,id| cov_medical_condition| item| resp,FALSE
 mhscdc_fried_2020_anger,560,5,80,7,7,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
 mhscdc_fried_2020_conscientiousness,960,5,80,12,12,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
-mhscdc_fried_2020_dass,1680,5,80,21,21,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
+mhscdc_fried_2020_dass,1680,5,80,21,21,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| wave| item| resp,TRUE
 mhscdc_fried_2020_ema,78696,5,79,18,996.151898734177,4372,55.3417721518987,item_response_warehouse,id| date| item| resp| wave,TRUE
-mhscdc_fried_2020_loneliness,400,5,80,5,5,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
+mhscdc_fried_2020_loneliness,400,5,80,5,5,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| wave| item| resp,TRUE
 mhscdc_fried_2020_mindfullness,960,5,80,12,12,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
 mhscdc_fried_2020_motivation,1280,7,80,16,16,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
+mhscdc_fried_2020_procrastination,800,5,80,5,10,160,2,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| wave| item| resp,TRUE
 mhscdc_fried_2020_ps,800,5,80,10,10,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
 mhscdc_fried_2020_se,800,4,80,10,10,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
 mhscdc_fried_2020_smartphone,1120,7,80,14,14,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
-mhscdc_fried_2020_tired,640,4,80,8,8,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| item| resp,FALSE
+mhscdc_fried_2020_tired,640,4,80,8,8,80,1,item_response_warehouse,id| cov_gender| cov_age| cov_nationality| cov_relationshipstatus| cov_studyprogram| cov_studyyear| cov_workstatus| cov_mentalhealth| wave| item| resp,TRUE
 mindfulness_assessment,23439,5,601,39,39,601,1,item_response_warehouse,age| id| item| resp,FALSE
 ml_harper_2015,32000204,10,84432,200948,379.00563767292,159.246193044967,0.00188608813062544,item_response_warehouse,item| id| resp,FALSE
 MMF_Solis_2020,89156,5,10746,10,8.29666852782431,8915.6,0.829666852782431,item_response_warehouse,id| item| resp,FALSE
@@ -658,8 +679,8 @@ mpsycho_condom,3000,4,500,6,6,500,1,item_response_warehouse,resp| item| id,FALSE
 mpsycho_lakes,15458,7,194,16,79.680412371134,966.125,4.98002577319588,item_response_warehouse,resp| subtest| item| rater| id,FALSE
 mpsycho_learnemo,1110,3,111,10,10,111,1,item_response_warehouse,resp| item| id,FALSE
 mpsycho_Rmotivation,29687,2,852,36,34.843896713615,824.638888888889,0.96788601982264,item_response_warehouse,resp| item| id,FALSE
-mpsycho_Rogers,10608,5,408,26,26,408,1,item_response_warehouse,resp| item| id,FALSE
-mpsycho_Rogers_adolescent,2262,5,87,26,26,87,1,item_response_warehouse,resp| item| id,FALSE
+mpsycho_rogers_depression,7920,4,495,16,16,495,1,item_response_warehouse_2,id| item| resp| cov_sample,FALSE
+mpsycho_rogers_ocd,4950,5,495,10,10,495,1,item_response_warehouse_2,id| item| resp| cov_sample,FALSE
 mpsycho_rwdq,16498,2,1055,18,15.6379146919431,916.555555555556,0.868773038441285,item_response_warehouse,resp| item| id,FALSE
 mpsycho_wenchuan,6132,5,362,17,16.939226519337,360.705882352941,0.996425089372766,item_response_warehouse,resp| item| id,FALSE
 mpsycho_wilmer,36775,2,1471,25,25,1471,1,item_response_warehouse,resp| age| item| id,FALSE
@@ -847,6 +868,7 @@ pisa2018_science,8392511,3,266958,115,31.4375707040059,72978.3565217391,0.273370
 pisa2022_math,14708813,3,555063,233,26.4993577305639,63127.9527896996,0.113731149058214,item_response_warehouse,cnt| cntschid| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action,FALSE
 pisa2022_read,12990947,3,243214,254,53.4136480630227,51145.4606299213,0.210289953004026,item_response_warehouse,cnt| cntschid| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action,FALSE
 pisa2022_science,8383445,3,243131,115,34.4811850401635,72899.5217391304,0.299836391653596,item_response_warehouse,cnt| cntschid| id| item| resp| num_actions| num_short_visits| num_visits| rt| time_to_first_action,FALSE
+piterova-slovak-science-related-populism,61728,12,643,96,96,643,1,item_response_warehouse_2,id| item| resp| cov_time| cov_gndr| cov_age| cov_agecat| cov_reg| cov_size| cov_edu| cov_subinc| cov_vote| cov_vote_13| cov_ident| cov_vote_last| cov_vote_last_14| cov_ident_last| cov_carelesslong| cov_carelessmahal| cov_careless| cov_tech| cov_intpol| cov_intsc| cov_trustpol| cov_trustpp| cov_trustgov| cov_relig,FALSE
 pks_probability,12096,2,504,24,24,504,1,item_response_warehouse,id| item| resp| wave,TRUE
 PMT_Trzcinska_2023_finans,364,4,26,14,14,26,1,item_response_warehouse,id| item| resp,FALSE
 PMT_Trzcinska_2023_MVS,234,5,26,9,9,26,1,item_response_warehouse,id| item| resp,FALSE
@@ -937,7 +959,9 @@ PSR-P_Scale_Intimacy_Hakim_2018_Study2_PSR,1272,7,198,6,6.42424242424242,212,1.0
 PSR-P_Scale_Intimacy_Hakim_2018_Study3,21528,7,897,24,24,897,1,item_response_warehouse,id| figure| item| resp,FALSE
 psychoneurotic_inventory,698204,2,6019,116,116,6019,1,item_response_warehouse,id| item| resp,FALSE
 psychotools_conspiracist,36629,5,2449,15,14.9567170273581,2441.93333333333,0.99711446849054,item_response_warehouse,resp| item| id,FALSE
-psychotools_gratitude,34950,9,1405,25,24.8754448398576,1398,0.995017793594306,item_response_warehouse,resp| item| id,FALSE
+psychotools_gratitude_gac,4215,5,1405,3,3,1405,1,item_response_warehouse_2,resp| item| id,FALSE
+psychotools_gratitude_gart,22480,9,1405,16,16,1405,1,item_response_warehouse_2,resp| item| id,FALSE
+psychotools_gratitude_gq6,8430,7,1405,6,6,1405,1,item_response_warehouse_2,resp| item| id,FALSE
 psychotools_mathexam,9477,3,729,13,13,729,1,item_response_warehouse,resp| item| id,FALSE
 psychtools_ability,23257,2,1525,16,15.2504918032787,1453.5625,0.953155737704918,item_response_warehouse,resp| item| id,FALSE
 psychtools_Athenstaedt,42624,7,576,74,74,576,1,item_response_warehouse,resp| cov_gender| item| id,FALSE
@@ -1034,6 +1058,7 @@ shu_2025_translation_pcd,16864,9,1054,16,16,1054,1,item_response_warehouse,id| i
 shu_2025_translation_pgv,5270,9,1054,5,5,1054,1,item_response_warehouse,id| item| resp| cov_gender| cov_age,FALSE
 shu_2025_translation_srt,5270,9,1054,5,5,1054,1,item_response_warehouse,id| item| resp| cov_gender| cov_age,FALSE
 si09_sirt,62412,7,5201,12,12,5201,1,item_response_warehouse,country| resp| item| id,FALSE
+silvia_2024_funny,14713,5,1842,8,7.98751357220413,1839.125,0.998439196525516,item_response_warehouse_2,id| item| resp| cov_identity| cov_efficacy| cov_age| cov_gender,FALSE
 simsalRbim_Human_LargeValence_2017,1344,2,32,7,42,192,6,item_response_warehouse_2,id| item| resp| trial,FALSE
 simsalRbim_Human_LargeValence_2018,672,2,16,7,42,96,6,item_response_warehouse_2,id| item| resp| trial,FALSE
 simsalRbim_Human_LowValence_2017,2646,2,63,7,42,378,6,item_response_warehouse_2,id| item| resp| trial,FALSE
@@ -1142,17 +1167,17 @@ teq_novak_2021_spirit,11729,6,782,15,14.9987212276215,781.933333333333,0.9999147
 teq_novak_2021_teq,17884,5,1141,16,15.6739702015776,1117.75,0.979623137598598,item_response_warehouse,id| cov_gender| cov_age| cov_family_status| cov_education| cov_economical_status| item| resp,FALSE
 test_taking_patterns_over_time,405252,3,1802,284,224.89012208657,1426.94366197183,0.791866627065389,item_response_warehouse,resp| id| subtest| item| form,FALSE
 thomeczek2025_les,3661,20,16,20,228.8125,183.05,11.440625,item_response_warehouse_2,id| item| resp| rater| date,TRUE
-threat_isler_2024_exp1_cog_crt,253,4,253,1,1,253,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp1_cog_panas,5566,5,253,22,22,253,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp1_cognitive_crt,253,4,253,1,1,253,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp1_cognitive_panas,5566,5,253,22,22,253,1,item_response_warehouse,id| treat| item| resp,FALSE
 threat_isler_2024_exp1_incentive_crt,253,4,253,1,1,253,1,item_response_warehouse,id| treat| item| resp,FALSE
 threat_isler_2024_exp1_incentive_panas,5566,5,253,22,22,253,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp2_cog_crt,433,4,433,1,1,433,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp2_cog_panas,9526,5,433,22,22,433,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp2_cognitive_crt,433,4,433,1,1,433,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp2_cognitive_panas,9526,5,433,22,22,433,1,item_response_warehouse,id| treat| item| resp,FALSE
 threat_isler_2024_exp2_picture_crt,433,4,433,1,1,433,1,item_response_warehouse,id| treat| item| resp,FALSE
 threat_isler_2024_exp2_picture_panas,9526,5,433,22,22,433,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp3_cog_panas,39094,5,1777,22,22,1777,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp4_cog_crt,8067,4,2689,3,3,2689,1,item_response_warehouse,id| treat| item| resp,FALSE
-threat_isler_2024_exp4_cog_panas,59158,5,2689,22,22,2689,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp3_cognitive_panas,39094,5,1777,22,22,1777,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp4_cognitive_crt,8067,4,2689,3,3,2689,1,item_response_warehouse,id| treat| item| resp,FALSE
+threat_isler_2024_exp4_cognitive_panas,59158,5,2689,22,22,2689,1,item_response_warehouse,id| treat| item| resp,FALSE
 timss_tam,19503,3,1773,11,11,1773,1,item_response_warehouse,resp| country| item| booklet| id,FALSE
 tma,270500,2,5410,50,50,5410,1,item_response_warehouse,id| item| resp,FALSE
 tpi_vangsness_2019,3713,5,233,16,15.9356223175966,232.0625,0.995976394849785,item_response_warehouse,id| item| resp,FALSE
@@ -1194,3 +1219,6 @@ wvs_panasiuk_science,901738,10,98531,2,9.15182023931555,450869,4.57591011965777,
 wvs_panasiuk_security,12624332,5,98531,28,128.125483350418,450869,4.57591011965777,item_response_warehouse_2,id| wave| date| cov_gender| cov_age| item| resp| item_family,TRUE
 wvs_panasiuk_work,20739974,11,98531,46,210.491865504258,450869,4.57591011965777,item_response_warehouse_2,id| wave| date| cov_gender| cov_age| item| resp| item_family,TRUE
 yu2025,24543,572,167,5,146.964071856287,4908.6,29.3928143712575,item_response_warehouse_2,id| trial| item_cov_phase| item| item_cov_truth| resp| cov_age| item_cov_rep| item_unique| resp_prop| resp01| cov_female,FALSE
+Zanesco_2023_Golleretal2020,13176,5,366,36,36,366,1,item_response_warehouse_2,id| item| resp,FALSE
+Zanesco_2023_Kaneetal2016,55269,8,537,112,102.921787709497,493.473214285714,0.918944533120511,item_response_warehouse_2,id| item| resp,FALSE
+Zanesco_2023_Zanescoetal2020,15034,6,537,28,27.9962756052142,536.928571428571,0.999866985900505,item_response_warehouse_2,id| item| resp,FALSE
