@@ -1,3 +1,5 @@
+*** note: we only took the 3 selected response tables, see https://github.com/ben-domingue/irw/issues/1177#issuecomment-3709007325
+
 *** This Do File creates tables from the Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks study ***
 
 ******************************************
@@ -692,4 +694,5 @@ order id item resp cov*, first
 sort id item
 
 * export the long-format table for the group
+
 export delimited using "friedman_2018_risks_worry.csv", replace
