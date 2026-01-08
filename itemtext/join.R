@@ -1,4 +1,4 @@
-table<-'namprb_siwiak_2024_kop20'
+table<-'oxfordcovid_xue_2024_swemws'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
