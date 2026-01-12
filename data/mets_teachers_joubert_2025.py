@@ -48,6 +48,6 @@ def convert_to_irw(input_file, output_file):
 if __name__ == "__main__":
     # Test with the teachers dataset
     input_file = 'ds_pred_mets_teachers_sa.csv'
-    output_file = 'ds_pred_mets_teachers_sa_irw_data.csv'
-    
+    output_file = 'mets_teachers_joubert_2025.csv'
+
     convert_to_irw(input_file, output_file)
