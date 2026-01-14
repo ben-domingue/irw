@@ -152,5 +152,13 @@ table_vars_df <- tibble(
 
 meta<-merge(summaries,table_vars_df,by='table')
 dim(meta)
+meta$variables<-tolower(meta$variables) ##https://github.com/itemresponsewarehouse/Rpkg/issues/109
+
+##add longitudinal flag, https://github.com/ben-domingue/irw/issues/1167#issue-3519409612
+i1<- grepl("wave",meta$variables)
+i2<- grepl("date",meta$variables)
+meta$longitudinal<-i1 | i2
+                                        ##tabs.pkg<-irw_filter(longitudinal=TRUE,density=NULL) ##confirming
+                                        ##tabs.meta<-meta$table[meta$longitudinal]
 
 write.csv(meta,'metadata.csv',quote=FALSE,row.names=FALSE)

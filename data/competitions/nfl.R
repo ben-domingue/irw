@@ -8,18 +8,18 @@ for (y in 2010:2019) {
 }
 x<-do.call("rbind",L)
 
-delta<-x$H.Score-x$A.Score
+df<-x[,c("HomeTeam","AwayTeam","H.Score","A.Score")]
+names(df)<-c("agent_a","agent_b","score_a","score_b")
 
-test<-delta>=0
-id_1<-ifelse(test,x$HomeTeam,x$AwayTeam)
-id_2<-ifelse(!test,x$AwayTeam,x$AwayTeam)
-df<-data.frame(id_1=id_1,id_2=id_2,resp=abs(delta),year=x$year,week=x$Week)
-
-m<-min(df$year)
+m<-min(x$year)
 ws<-7*24*60*60
-d<-(df$week-1)*ws
+d<-(x$Week-1)*ws
 ys<-365*24*60*60
-y<-(df$year-m)*ys
+y<-(x$year-m)*ys
 df$date<-d+y
+
+df$winner<-ifelse(df$score_a>df$score_b,'agent_a','agent_b')
+df$winner<-ifelse(df$score_a==df$score_b,'draw',df$winner)
+
 
 write.csv(df,file="nfl_2010-2019.csv",quote=FALSE,row.names=FALSE)
