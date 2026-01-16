@@ -4,19 +4,23 @@ import numpy as np
 
 def convert_to_irw(input_file, output_file):
     df = pd.read_csv(input_file)
+    
+    # cov_ columns
+    cov_cols_raw = df.columns[1:8].tolist()
+    mapping = {col: f'cov_{col.lower()}' for col in cov_cols_raw}
+    mapping['ID'] = 'id'
+    mapping[df.columns[-1]] = 'rater'
 
     # Items
     item_cols = [c for c in df.columns[8:-1] if not c.startswith('X_')]
     
-    # Rater
-    rater_name = df.columns[-1]
+    irw_df = df.rename(columns=mapping)
+    lower_cov_cols = [f'cov_{col.lower()}' for col in cov_cols_raw]
+    id_vars = ['id', 'rater'] + lower_cov_cols
 
-    # Response table
-    irw_df = df.rename(columns={'ID' : 'id', rater_name : 'rater'})
-    
     irw_df = pd.melt(
         irw_df,
-        id_vars=['id', 'rater'],
+        id_vars=id_vars,
         value_vars=item_cols,
         var_name='item',
         value_name='resp'
@@ -32,7 +36,8 @@ def convert_to_irw(input_file, output_file):
     irw_df = irw_df[irw_df['resp'] % 1 == 0]
 
     irw_df['resp'] = irw_df['resp'].astype(int)
-    irw_df = irw_df[['id', 'item', 'resp', 'rater']]
+    final_cols = ['id', 'item', 'resp', 'rater'] + lower_cov_cols
+    irw_df = irw_df[final_cols]
     irw_df.to_csv(output_file, index=False)
     
     print("Done processing the data.")
