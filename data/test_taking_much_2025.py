@@ -6,7 +6,7 @@ def convert_to_irw(input_file, output_file):
     df = pd.read_csv(input_file)
 
     # Items
-    item_cols = df.iloc[:, 8:-1].columns.tolist()
+    item_cols = [c for c in df.columns[8:-1] if not c.startswith('X_')]
     
     # Rater
     rater_name = df.columns[-1]
@@ -25,6 +25,13 @@ def convert_to_irw(input_file, output_file):
     irw_df['resp'] = pd.to_numeric(irw_df['resp'], errors='coerce')
     irw_df = irw_df.dropna(subset=['resp'])
     
+    # Filter -8 values
+    irw_df = irw_df[irw_df['resp'] >= 0]
+    
+    # Filter non-integral values
+    irw_df = irw_df[irw_df['resp'] % 1 == 0]
+
+    irw_df['resp'] = irw_df['resp'].astype(int)
     irw_df = irw_df[['id', 'item', 'resp', 'rater']]
     irw_df.to_csv(output_file, index=False)
     
