@@ -674,3 +674,18 @@ sort id item
 
 * export the long-format table for group the group
 export delimited using "anunciacao_2025_personality_succorance.csv", replace
+
+
+*** note from bd: R code below used to remove responses not 1-7
+/* lf<-list.files(pattern="*.csv") */
+/* for (fn in lf) { */
+/*     df<-read.csv(fn) */
+/*     print(fn) */
+/*     print(dim(df)) */
+/*     print(table(df$resp)) */
+/*     df$resp<-ifelse(df$resp %in% 1:7,df$resp,NA) */
+/*     print(dim(df)) */
+/*     print(table(df$resp)) */
+/*     for (i in 1:ncol(df)) df[,i]<-gsub('\\|','',df[,i]) */
+/*     write.table(df,fn,quote=FALSE,row.names=FALSE,sep="|") */
+/* } */

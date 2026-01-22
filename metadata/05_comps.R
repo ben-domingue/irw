@@ -211,7 +211,7 @@ new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$ta
 ##remove nonpublic elements before calling ChatGPT
 new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
 new_data_rows <- new_data_rows |>
-  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+  select(table, Reference, Derived_License,`DOI (for paper)`, Description, `URL (for data)`) |>
   rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
 new_data_rows <- new_data_rows %>%
     mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
@@ -230,4 +230,4 @@ biblio<-biblio[,
 c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
 "Derived_License", "Description", "BibTex")]
 
-readr::write_csv(biblio, "biblio.csv")
+readr::write_csv(biblio, "comps_biblio.csv")

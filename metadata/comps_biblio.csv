@@ -1,0 +1,145 @@
+table,DOI__for_paper_,Reference_x,URL__for_data_,Derived_License,Description,BibTex
+MLB_Baseball,NA,NA,https://www.retrosheet.org/game.htm#Notice,NA,"major league baseball games, winner could be extracted maybe?","@misc{retrosheet_game_data,
+  title = {Retrosheet Game Data},
+  howpublished = {\url{https://www.retrosheet.org/game.htm#Notice}},
+  note = {Accessed: 2023-10-17}
+}"
+NHL_hockey,NA,NA,https://gitlab.com/dword4/nhlapi,NA,national hockey league,"@misc{nhlapi,
+  title = {NHL API},
+  howpublished = {\url{https://gitlab.com/dword4/nhlapi}},
+  note = {Accessed: 2023-10-15}
+}"
+cricket,NA,NA,https://cricsheet.org/,NA,data would need to be extracted then reformated,"@misc{cricsheet,
+  title = {CricSheet: Cricket Data Analysis},
+  howpublished = {\url{https://cricsheet.org/}},
+  note = {Accessed: 2023-10-01}
+}"
+debate,NA,NA,https://www.tabroom.com/index/index.mhtml,NA,bot could extract csv for multiple tournaments,"@misc{tabroom,
+  title = {Tabroom},
+  howpublished = {\url{https://www.tabroom.com/index/index.mhtml}},
+  note = {Accessed: 2023-10-01}
+}"
+league_of_legends,NA,NA,https://developer.riotgames.com/,NA,didn't make an account but should have data,"@misc{riotgames_api,
+  title = {Riot Games API},
+  howpublished = {\url{https://developer.riotgames.com/}},
+  note = {Accessed: 2023-10-01}
+}"
+collegefb_2021and2022,NA,NA,https://www.kaggle.com/datasets/thedevastator/analyzing-college-football-2022-wins-losses-rank?resource=download&select=games2020.csv,CC0 1.0,College football results from 2021-2022.,"@misc{analyzing_college_football_2022,
+  title = {Analyzing College Football 2022 Wins Losses Rank},
+  url = {https://www.kaggle.com/datasets/thedevastator/analyzing-college-football-2022-wins-losses-rank?resource=download&select=games2020.csv},
+  note = {Accessed: 2023-10-01}
+}"
+epl_matches_2021-2022,NA,NA,https://www.kaggle.com/datasets/shubhamgadekar/english-premier-league20202022-dataset,CC0 1.0,EPL matches from 2021-2022,"@misc{english_premier_league_2020_2022,
+  title = {English Premier League 2020-2022 Dataset},
+  url = {https://www.kaggle.com/datasets/shubhamgadekar/english-premier-league20202022-dataset},
+  note = {Accessed: 2023-10-01}
+}"
+nba_2012-2018,NA,NA,https://www.kaggle.com/datasets/pablote/nba-enhanced-stats,CC BY-SA 4.0,NBA games from 2012-2018,"@misc{nba_enhanced_stats,
+  title = {NBA Enhanced Stats},
+  howpublished = {\url{https://www.kaggle.com/datasets/pablote/nba-enhanced-stats}},
+  note = {Accessed: 2023-10-01}
+}"
+nfl_2010-2019,NA,NA,https://www.kaggle.com/datasets/davidsasser/nfl-game-stats-20102019,CC0 1.0,NFL games from 2010-2019,"@misc{nfl_game_stats_2010_2019,
+  title = {NFL Game Stats 2010-2019},
+  url = {https://www.kaggle.com/datasets/davidsasser/nfl-game-stats-20102019},
+  note = {Accessed: 2023-10-01},
+  author = {David Sasser},
+  year = {2019}
+}"
+nhl_post1917,10.32614/CRAN.package.NHLData,NA,https://cran.r-project.org/web/packages/NHLData/index.html,CC0 1.0,NHL games following 1917," @misc{2017, title={NHLData: Scores for Every Season Since the Founding of the NHL in 1917}, url={http://dx.doi.org/10.32614/CRAN.package.NHLData}, DOI={10.32614/cran.package.nhldata}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, year={2017}, month=mar }
+"
+eufootball_2010-2020,10.32614/CRAN.package.EUfootball,NA,https://cran.r-project.org/web/packages/EUfootball/index.html,GPL-3.0,Football games from 7 EU leagues (2010-2020)," @misc{van_der_Wurp_2022, title={EUfootball: Football Match Data of European Leagues}, url={http://dx.doi.org/10.32614/CRAN.package.EUfootball}, DOI={10.32614/cran.package.eufootball}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={van der Wurp, Hendrik}, year={2022}, month=may }
+"
+footbayes_england,10.32614/CRAN.package.footBayes,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,Top 4 England tiers from 1888/89 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }
+"
+footbayes_italy,10.32614/CRAN.package.footBayes,NA,https://cran.r-project.org/web/packages/footBayes/index.html,GPL-2.0,Top tier in Italy from 1934/35 season to 2021/22 season.," @misc{Egidi_2022, title={footBayes: Fitting Bayesian and MLE Football Models}, url={http://dx.doi.org/10.32614/CRAN.package.footBayes}, DOI={10.32614/cran.package.footbayes}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, author={Egidi, Leonardo and Macrì Demartino, Roberto and Palaskas., Vasilis}, year={2022}, month=feb }
+"
+bradleyterry2_cems,NA,"Turner, H., & Firth, D. (2012). Bradley-Terry models in R: the BradleyTerry2 package. Journal of statistical software, 48, 1-21.",https://cran.r-project.org/web/packages/BradleyTerry2/index.html,GPL-3.0,Rater preferences for management schools,"@article{Turner2012BradleyTerry,
+  author = {Turner, Heather and Firth, David},
+  title = {Bradley-Terry models in R: the BradleyTerry2 package},
+  journal = {Journal of Statistical Software},
+  year = {2012},
+  volume = {48},
+  pages = {1--21},
+  url = {https://cran.r-project.org/web/packages/BradleyTerry2/index.html}
+}"
+elochoice_physical,https://doi.org/10.32614/CRAN.package.EloChoice,NA,https://cran.r-project.org/web/packages/EloChoice/refman/EloChoice.html#physical,GPL-3.0,Rater preference for physical appearance," @misc{2015, title={EloChoice: Preference Rating for Visual Stimuli Based on Elo Ratings}, url={http://dx.doi.org/10.32614/CRAN.package.EloChoice}, DOI={10.32614/cran.package.elochoice}, journal={CRAN: Contributed Packages}, publisher={The R Foundation}, year={2015}, month=oct }
+"
+mlb_through2023,NA,NA,https://github.com/sportstensor/MLB/tree/main/data_and_models,MIT,MLB from 1870s through 2023,"@misc{MLBData2023,
+  title = {MLB Data and Models},
+  howpublished = {\url{https://github.com/sportstensor/MLB/tree/main/data_and_models}},
+  note = {Accessed: 2023-10-01}
+}"
+lichess,NA,NA,https://database.lichess.org/,CC0 1.0,Chess outcomes,"@misc{lichess_database,
+  title = {Lichess Database},
+  howpublished = {\url{https://database.lichess.org/}},
+  note = {Accessed: 2023-10-01}
+}"
+t20_hyper,NA,"Hankin, R. K. (2017). Partial rank data with the hyper2 package: likelihood functions for generalized Bradley-Terry models. https://digitalcommons.unl.edu/r-journal/672/",https://cran.r-project.org/web/packages/hyper2/index.html,GPL-3.0,"Cricket dataset, T20 Indian Premier League 2008-2017","@misc{hankin2017partial,
+  author = {Hankin, Robin K. S.},
+  title = {Partial rank data with the hyper2 package: likelihood functions for generalized Bradley-Terry models},
+  year = {2017},
+  howpublished = {\url{https://digitalcommons.unl.edu/r-journal/672/}},
+  note = {Accessed: 2023-10-01},
+  url = {https://cran.r-project.org/web/packages/hyper2/index.html}
+}"
+zucco2019_portfoliosalience,NA,"Zucco, Cesar; Batista, Mariana; Power, Timothy, 2019, ""Replication Data for: Measuring portfolio salience using the Bradley-Terry model: An illustration with data from Brazil"", https://doi.org/10.7910/DVN/HJZSIM, Harvard Dataverse, V1, UNF:6:6qSTa2eXmoheavSmyYC9Wg== [fileUNF]",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HJZSIM,CC0 1.0,Pairwise comparisons between cabinet positions in Brazil,"@dataset{zucco2019replication,
+  author = {Zucco, Cesar and Batista, Mariana and Power, Timothy},
+  title = {Replication Data for: Measuring portfolio salience using the Bradley-Terry model: An illustration with data from Brazil},
+  year = {2019},
+  doi = {10.7910/DVN/HJZSIM},
+  publisher = {Harvard Dataverse},
+  version = {V1},
+  url = {https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/HJZSIM},
+  note = {UNF:6:6qSTa2eXmoheavSmyYC9Wg== [fileUNF]}
+}"
+guinaudeau2024_largechambers,10.1017/psrm.2024.68,"Guinaudeau, Benjamin; Breunig, Christian, 2024, ""Replication Data for: Measuring Legislators’ Ideological Position in Large Chambers using Pairwise-Comparisons"", https://doi.org/10.7910/DVN/0ULECU, Harvard Dataverse, V1",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/0ULECU,CC0 1.0,Ideological comparisons of German MPs," @article{Breunig_2025, title={Measuring legislators’ ideological position in large chambers using pairwise-comparisons}, ISSN={2049-8489}, url={http://dx.doi.org/10.1017/psrm.2024.68}, DOI={10.1017/psrm.2024.68}, journal={Political Science Research and Methods}, publisher={Cambridge University Press (CUP)}, author={Breunig, Christian and Guinaudeau, Benjamin}, year={2025}, month=jan, pages={1–18} }
+"
+friedman2019_risk_appropriate,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Appropriateness of government responding to risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_harm,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Harm associated with risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_priority,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Priority for government response," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_disaster,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Risk of disaster," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_incidence,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Incidence of risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_worry,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Worry about risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_fairness,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Fairness of risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
+friedman2019_risk_longterm,10.1111/ajps.12400,"Friedman, Jeffrey, 2018, ""Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks"", https://doi.org/10.7910/DVN/ZSJA25, Harvard Dataverse, V1, UNF:6:OJ7nZP2bzoQZoyzx8JvOFg== [fileUNF]
+
+
+
+Friedman, J. A. (2019). Priorities for preventive action: Explaining Americans’ divergent reactions to 100 public risks. American Journal of Political Science, 63(1), 181-196.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/ZSJA25,CC BY 4.0,Longterm growth in risk," @article{Friedman_2018, title={Priorities for Preventive Action: Explaining Americans’ Divergent Reactions to 100 Public Risks}, volume={63}, ISSN={1540-5907}, url={http://dx.doi.org/10.1111/ajps.12400}, DOI={10.1111/ajps.12400}, number={1}, journal={American Journal of Political Science}, publisher={Wiley}, author={Friedman, Jeffrey A.}, year={2018}, month=oct, pages={181–196} }
+"
