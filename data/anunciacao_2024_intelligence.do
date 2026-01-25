@@ -28,13 +28,19 @@ rename cidadedenascimento cov_birthcity
 rename escolaridade cov_education
 
 * drop irrelevant point variables
-drop figuras_pontos fig_1 fig_2 fig_3 fig_4 fig_5 fig_6 fig_7 fig_8 fig_9 fig_10 fig_11 fig_12 fig_13 fig_14 fig_15 fig_16 fig_17 fig_18 fig_19 fig_20 fig_21 fig_22 fig_23 fig_24 fig_25 fig_26 fig_27 fig_28
+drop figuras_pontos figuras1 figuras2 figuras3 figuras4 figuras5 figuras6 figuras7 figuras8 figuras9 figuras10 figuras11 figuras12 figuras13 figuras14 figuras15 figuras16 figuras17 figuras18 figuras19 figuras20 figuras21 figuras22 figuras23 figuras24 figuras25 figuras26 figuras27 figuras28
+
+* drop name covariate
+drop cov_name
 
 * drop any additional irrelevant variables
 drop qi_teorico gun cnh pm primeira_habilitacao prof_driver
 
 * keep only the newly defined relevant variables - makes part of the previously used drop commands redundant by nature
-keep cov* id figuras*
+keep cov* id fig*
+
+* format covariates as desired
+destring cov_age, replace ignore("NA")
 
 * reorder variables
 order id cov*, first
@@ -52,7 +58,7 @@ save "anunciacao_2024_intelligence.csv", replace
 use "anunciacao_2024_intelligence.csv", clear
 
 * set up the code for long-format data from wide data
-local question_cols figuras1 figuras2 figuras3 figuras4 figuras5 figuras6 figuras7 figuras8 figuras9 figuras10 figuras11 figuras12 figuras13 figuras14 figuras15 figuras16 figuras17 figuras18 figuras19 figuras20 figuras21 figuras22 figuras23 figuras24 figuras25 figuras26 figuras27 figuras28
+local question_cols fig_1 fig_2 fig_3 fig_4 fig_5 fig_6 fig_7 fig_8 fig_9 fig_10 fig_11 fig_12 fig_13 fig_14 fig_15 fig_16 fig_17 fig_18 fig_19 fig_20 fig_21 fig_22 fig_23 fig_24 fig_25 fig_26 fig_27 fig_28
 
 tempfile long_data
 save `long_data', emptyok replace
@@ -71,7 +77,7 @@ foreach var of local question_cols {
 
 use `long_data', clear
 
-drop figuras1 figuras2 figuras3 figuras4 figuras5 figuras6 figuras7 figuras8 figuras9 figuras10 figuras11 figuras12 figuras13 figuras14 figuras15 figuras16 figuras17 figuras18 figuras19 figuras20 figuras21 figuras22 figuras23 figuras24 figuras25 figuras26 figuras27 figuras28
+drop fig_1 fig_2 fig_3 fig_4 fig_5 fig_6 fig_7 fig_8 fig_9 fig_10 fig_11 fig_12 fig_13 fig_14 fig_15 fig_16 fig_17 fig_18 fig_19 fig_20 fig_21 fig_22 fig_23 fig_24 fig_25 fig_26 fig_27 fig_28
 
 drop if missing(item) | item == ""
 
