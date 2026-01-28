@@ -27,8 +27,7 @@ def convert_to_irw(file_path):
         'ct': ['Y_CT', 'Y_CTt'],
         'cm': ['CM'], 
         'ef': ['EF'],
-        'ao': ['AO'],
-        'mrp': ['X_MRp']
+        'ao': ['AO']
     }
     
     totals = ['Y_MR_01', 'Y_MR_02', 'Y_MRt', 'Y_CTt', 'Y_CT_01', 'Y_CT_02', 'Y_CT_03', 'AO', 'CM_01', 'CM_02', 'CM_03', 'EF_01', 'EF_02']
@@ -55,30 +54,34 @@ def convert_to_irw(file_path):
             sub = demo_df.copy()
             sub['item'] = ic
             sub['resp'] = df[ic] 
-            print(f"Number of unique value for item '{ic}': {sub['resp'].nunique()}")
-            
-            if t_col in df.columns:
-                sub['rt'] = df[t_col] / 1000.0
-            else:
-                sub['rt'] = None
-            
-            if cr_col in df.columns:
-                sub['rater'] = df[cr_col]
-            else:
-                sub['rater'] = None
+
+            if name == 'mr':
+                if t_col in df.columns:
+                    sub['rt'] = df[t_col] / 1000.0
+                else:
+                    sub['rt'] = None
+                
+                if cr_col in df.columns:
+                    sub['rater'] = df[cr_col]
+                else:
+                    sub['rater'] = None
                 
             dfs_to_concat.append(sub)
             
         if dfs_to_concat:
             final_df = pd.concat(dfs_to_concat, ignore_index=True)
             
+            missing_count = final_df['resp'].isna().sum()
+            final_df.dropna(subset=['resp'], inplace=True)
+            print(f"Dropped {missing_count} rows with missing 'resp' values for {name} construct.")
+            
             cols_order = ['id', 'item', 'resp', 'rt', 'rater'] + cov_cols
             cols_order = [c for c in cols_order if c in final_df.columns]
             final_df = final_df[cols_order]
             
             final_df.sort_values(by=['id', 'item'], inplace=True)
-            
-            filename = f"test_taking_much_{name}.csv"
+
+            filename = f"test_taking_much_2025_{name}.csv"
             final_df.to_csv(filename, index=False)
             print(f"Saved: {filename}")
 
