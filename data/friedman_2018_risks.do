@@ -1,5 +1,3 @@
-*** note: we only took the 3 selected response tables, see https://github.com/ben-domingue/irw/issues/1177#issuecomment-3709007325
-
 *** This Do File creates tables from the Replication Data for: Priorities for Preventive Action: Explaining Americans' Divergent Reactions to 100 Public Risks study ***
 
 ******************************************
@@ -109,6 +107,12 @@ gen resp2 = resp
 drop resp
 rename resp2 resp
 
+* modify the format of the resp variable
+label define likert 1 "Strongly disagree" 2 "Moderately disagree" 3 "Slightly disagree" 4 "Slightly agree" 5 "Moderately agree" 6 "Strongly agree"
+encode resp, gen(resp_num) label(likert)
+drop resp
+rename resp_num resp
+
 * reorder variables
 order id item resp cov*, first
 
@@ -155,6 +159,12 @@ gen resp2 = resp
 drop resp
 rename resp2 resp
 
+* modify the format of the resp variable
+label define likert 1 "Strongly disagree" 2 "Moderately disagree" 3 "Slightly disagree" 4 "Slightly agree" 5 "Moderately agree" 6 "Strongly agree"
+encode resp, gen(resp_num) label(likert)
+drop resp
+rename resp_num resp
+
 * reorder variables
 order id item resp cov*, first
 
@@ -163,49 +173,3 @@ sort id item
 
 * export the long-format table for group the group
 export delimited using "friedman_2018_risks_discrimination.csv", replace
-
-**# Bookmark #3: yes/no responses to general science-related questions such as whether antibiotics kill viruses or whether electrons are smaller than atoms
-
-* recall dataset
-use "friedman_2018_risks.csv", clear
-
-* keep only id, covariates, and respective variables
-keep id cov_* osc_anti osc_atoms osc_copern osc_gas osc_lasers osc_radio osc_year
-
-* set up the code for long-format data from wide data
-local question_cols osc_anti osc_atoms osc_copern osc_gas osc_lasers osc_radio osc_year
-
-tempfile long_data
-save `long_data', emptyok replace
-
-* create long-format data from wide data
-foreach var of local question_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-
-drop osc_anti osc_atoms osc_copern osc_gas osc_lasers osc_radio osc_year
-
-drop if missing(item) | item == ""
-
-* encode any needed variables
-gen resp2 = resp
-drop resp
-rename resp2 resp
-
-* reorder variables
-order id item resp cov*, first
-
-* sort
-sort id item
-
-* export the long-format table for group the group
-export delimited using "friedman_2018_risks_science.csv", replace
