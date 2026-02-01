@@ -50,6 +50,8 @@ def convert_ipq_excel(file_path, output_name):
 
     df_long.dropna(subset=['resp'], inplace=True)
     
+    df_long = df_long[df_long['resp'] != 6]
+    
     base_cols = ['id', 'item', 'resp']
     cov_cols = [c for c in df_long.columns if c.startswith('cov_')]
     final_cols = base_cols + [c for c in cov_cols if c not in base_cols]
