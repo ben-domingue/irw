@@ -54,4 +54,4 @@ def convert_to_irw(file1, output_name):
     
 if __name__ == "__main__":
     convert_to_irw(
-        'raw_data/Data_MainStudy.xlsx', 'raw_data/teaching_deweerds_2026.csv')
+        'raw_data/Data_MainStudy.xlsx', 'raw_data/teaching_deweerdt_2026.csv')
