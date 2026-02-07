@@ -1,4 +1,4 @@
-table<-'faces_spanish_vegas_2022_fss'
+table<-'florida_twins_sch'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
@@ -28,3 +28,4 @@ test2<-all(i2 %in% i1)
 test1 & test2
 
 write.csv(items,file=paste(table,"__items.csv",sep=''),row.names=FALSE)
+
