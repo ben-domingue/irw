@@ -1,7 +1,6 @@
 import pandas as pd
 import os
 
-
 def load_session_metadata():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     metadata_file = os.path.join(script_dir, 'metadata_tables', 'session.csv')
@@ -12,7 +11,6 @@ def load_session_metadata():
             df = df.drop_duplicates(subset=['session_id'], keep='first').reset_index(drop=True)
         return df
     return None
-
 
 def load_aig_version_metadata():
     """Load AIG/anchor version metadata."""
