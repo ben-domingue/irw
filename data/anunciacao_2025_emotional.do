@@ -78,6 +78,9 @@ order id item resp cov*, first
 * sort
 sort id item
 
+* turn non-integer responses to missing values
+replace resp = . if resp != floor(resp)
+
 * export the long-format table for group the group
 export delimited using "anunciacao_2025_emotional_relationships.csv", replace
 
@@ -215,6 +218,9 @@ order id item resp cov*, first
 
 * sort
 sort id item
+
+* turn non-integer responses to missing values
+replace resp = . if resp != floor(resp)
 
 * export the long-format table for group the group
 export delimited using "anunciacao_2025_emotional_management.csv", replace
