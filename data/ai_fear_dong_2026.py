@@ -7,15 +7,25 @@ def convert_to_irw(file_path):
         print(f"Error loading {file_path}: {e}")
         return
 
-    df['id'] = df['id'].astype(str)
+    if 'id' in df.columns:
+        df['id'] = df['id'].astype(str)
+        df.rename(columns={'id': 'rater'}, inplace=True)
 
     cov_cols = ['country', 'age', 'age_group', 'gender', 'education', 'income', 'social_class']
     cov_map = {c: f"cov_{c}" for c in cov_cols if c in df.columns}
     df.rename(columns=cov_map, inplace=True)
 
-    df['item'] = df['occupation'] + "_" + df['trait']
-
-    id_vars = ['id', 'item'] + [c for c in df.columns if c.startswith('cov_')]
+    if 'occupation' in df.columns:
+        df['occupation'] = df['occupation'].astype(str)
+        df.rename(columns={'occupation': 'id'}, inplace=True)
+    
+    if 'trait' in df.columns:
+        df['trait'] = df['trait'].astype(str)
+        df.rename(columns={'trait': 'item'}, inplace=True)
+        
+    base_id_vars = ['id', 'item', 'rater']
+    cov_vars = [c for c in df.columns if c.startswith('cov_')]
+    id_vars = base_id_vars + cov_vars
 
     response_vars = ['requirement', 'ai', 'own.fear', 'other.fear', 'incentive']
 
@@ -23,7 +33,7 @@ def convert_to_irw(file_path):
         if resp_var not in df.columns:
             continue
             
-        cols_to_keep = id_vars + [resp_var]
+        cols_to_keep = [c for c in id_vars if c in df.columns] + [resp_var]
         df_construct = df[cols_to_keep].copy()
         
         df_construct.rename(columns={resp_var: 'resp'}, inplace=True)
@@ -33,14 +43,17 @@ def convert_to_irw(file_path):
         if df_construct.empty:
             print(f"No data for {resp_var}, skipping...")
             continue
+            
         try:
-            df_construct['resp'] = pd.to_numeric(df_construct['resp']).astype('Int64')
+            df_construct['resp'] = pd.to_numeric(df_construct['resp'], errors='coerce')
+            df_construct.dropna(subset=['resp'], inplace=True)
+            if (df_construct['resp'] % 1 == 0).all():
+                df_construct['resp'] = df_construct['resp'].astype('Int64')
         except ValueError:
             pass 
         
-        base_cols = ['id', 'item', 'resp']
-        covs = [c for c in df_construct.columns if c.startswith('cov_')]
-        final_cols = base_cols + covs
+        final_cols_ordered = ['id', 'item', 'resp', 'rater'] + cov_vars
+        final_cols = [c for c in final_cols_ordered if c in df_construct.columns]
         
         df_final = df_construct[final_cols]
         
