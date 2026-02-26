@@ -69,7 +69,7 @@ base::table(n,useNA='always')
 z<-x[n<4,]
 tmp<-z[,-6] ##no tag
 nn<-rowSums(is.na(tmp))
-z[nn<4,]
+zz<-z[nn<4,]
 
 
 

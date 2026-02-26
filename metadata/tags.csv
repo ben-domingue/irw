@@ -137,17 +137,17 @@ psr-p_scale_intimacy_hakim_2018_study2_psi,Adult (18+),NA,General/non-specific,O
 psr-p_scale_intimacy_hakim_2018_study2_psr,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,parasocial relationship with political figures (PSR-P)
 psr-p_scale_intimacy_hakim_2018_study3,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,parasocial relationship with political figures (PSR-P)
 aa1_silvia_2023,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Aesthetic Responsiveness Assessment
-threatperceptions_isler_2024_experiment1_cognitive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
-threatperceptions_isler_2024_experiment1_cognitive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
-threatperceptions_isler_2024_experiment1_incentive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
-threatperceptions_isler_2024_experiment1_incentive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
-threatperceptions_isler_2024_experiment2_cognitive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
-threatperceptions_isler_2024_experiment2_cognitive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
-threatperceptions_isler_2024_experiment2_picture_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
-threatperceptions_isler_2024_experiment2_picture_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
-threatperceptions_isler_2024_experiment3_cognitive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
-threatperceptions_isler_2024_experiment4_cognitive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
-threatperceptions_isler_2024_experiment4_cognitive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp1_incentive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
+threat_isler_2024_exp1_cog_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp1_incentive_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
+threat_isler_2024_exp1_incentive_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp2_cog_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
+threat_isler_2024_exp2_cog_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp2_picture_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
+threat_isler_2024_exp2_picture_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp3_cog_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
+threat_isler_2024_exp4_cog_crt,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Likert Scale/selected response,eng,Cognitive Refection Test (CRT)
+threat_isler_2024_exp4_cog_panas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Positive and Negative Afect Schedule (PANAS)
 promis1wave1_pain,Adult (18+),NA,"General/non-specific, Clinical, Educational",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,eng,pain
 promis1wave1_social,Adult (18+),NA,"General/non-specific, Clinical, Educational",Other,Survey/questionnaire,Likert Scale/selected response,eng,social roles & social activities
 promis1wave1_anxiety,Adult (18+),NA,"General/non-specific, Clinical, Educational",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,anxiety
@@ -627,21 +627,21 @@ enem_2014_1mil_lc,Mixed,NA,Representative,Cognitive/educational,Test,Likert Scal
 enem_2016_1mil_lc,Mixed,NA,Representative,Cognitive/educational,Test,Likert Scale/selected response,por,Brazilian ENEM Natural Science Achievement Test (2016 Subsample)
 enem_2017_1mil_cn,Mixed,NA,Representative,Cognitive/educational,Test,Likert Scale/selected response,por,Brazilian ENEM Natural Science Achievement Test (2016 Subsample)
 enem_2017_1mil_mt,Mixed,NA,Representative,Cognitive/educational,Test,Likert Scale/selected response,por,Brazilian ENEM Natural Science Achievement Test (2016 Subsample)
-singh_2025_identity_irs,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_cse,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_grit,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
+singh_2025_identity_irs,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Identity Resource Stressor
+singh_2025_identity_cse,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Self-Worth
+singh_2025_identity_grit,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Perception Dignity Daily Life
 singh_2025_identity_pds,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_pia,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_pit,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_pba,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_pss,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-singh_2025_identity_gi,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,NA
-shu_2025_translation_mcpis,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
-shu_2025_translation_pcd,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
-shu_2025_translation_pgv,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
-shu_2025_translation_srt,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
-shu_2025_translation_eib,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
-shu_2025_translation_add,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",NA
+singh_2025_identity_pia,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Nervousness
+singh_2025_identity_pit,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Honesty
+singh_2025_identity_pba,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Avoidance
+singh_2025_identity_pss,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Stress
+singh_2025_identity_gi,Mixed,NA,"Representative, Targeted/specific","Opinion/attitude, Affective/mental health",Survey/questionnaire,Likert Scale/selected response,eng,Belonging
+shu_2025_translation_mcpis,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",MacLeod Clark Professional Identity
+shu_2025_translation_pcd,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Professional Commitment and Devotion
+shu_2025_translation_pgv,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Professional Goals and Values
+shu_2025_translation_srt,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Self-fulfilment and Retention Tendency
+shu_2025_translation_eib,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Emotional Identification and Belongingness
+shu_2025_translation_add,Mixed,NA,"Educational, Targeted/specific","Affective/mental health, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,"eng, chi",Enrollment Intent
 socialstereotype_hughes_2025_judgement,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,MacArthur scale of subjective SES
 socialstereotype_hughes_2025_personality_self,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory 2-XS along with five honesty and propriety items from the Questionnaire Big Six
 socialstereotype_hughes_2025_personality_other,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory 2-XS along with five honesty and propriety items from the Questionnaire Big Six
@@ -739,24 +739,24 @@ enem_2021_1mil_ch,Mixed,NA,General/non-specific,Cognitive/educational,Test,Liker
 fractals_rating,Adult (18+),NA,General/non-specific,Developmental,Survey/questionnaire,Likert Scale/selected response,eng,Ratings of Abstract Fractals
 gilbert_meta_13,Adult (18+),NA,Targeted/specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Literacy Data from the Partnership Schools for Liberia RCT
 idcr_martinez_2023_raco,Adult (18+),NA,General/non-specific,Cognitive/educational,Survey/questionnaire,Constructed Response,eng,Route and Count Metrics for Story Recall
-lys_2020_rape_1_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_2_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_2_rma_pre,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_asi,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_cons,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_diff,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_kpnts,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_rwa,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_sds,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_sj,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-lys_2020_rape_3_unjust,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",NA
-dwyer_2025_genomics_ec,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
-dwyer_2025_genomics_gec,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
-dwyer_2025_genomics_os,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
-dwyer_2025_genomics_pb,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
-dwyer_2025_genomics_pc,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
-dwyer_2025_genomics_sjc,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",NA
+lys_2020_rape_1_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Rape Myth Acceptance Scale
+lys_2020_rape_2_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Rape Myth Acceptance Scale
+lys_2020_rape_2_rma_pre,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Pre Rape Myth Acceptance Scale
+lys_2020_rape_3_asi,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Ambivalent Sexism Inventory
+lys_2020_rape_3_cons,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Political Opinion
+lys_2020_rape_3_diff,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Gender Differences
+lys_2020_rape_3_kpnts,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Social Dominance
+lys_2020_rape_3_rma,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Rape Myth Acceptance Scale
+lys_2020_rape_3_rwa,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Right Wind Authoritarianism
+lys_2020_rape_3_sds,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Social Desirability
+lys_2020_rape_3_sj,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",System Justification
+lys_2020_rape_3_unjust,Mixed,NA,"Targeted/specific, ""Internet-based (Mturkers, etc)"", General/non-specific",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, pol",Unjust World Beliefs
+dwyer_2025_genomics_ec,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Embryo Concerns
+dwyer_2025_genomics_gec,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Nature Concerns
+dwyer_2025_genomics_os,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Overall Support
+dwyer_2025_genomics_pb,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Perceived Benefits
+dwyer_2025_genomics_pc,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Privacy Concerns
+dwyer_2025_genomics_sjc,Adult (18+),NA,"Targeted/specific, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"eng, spa",Social Justice Concerns
 pinheiro_2023_trwcas,Adult (18+),NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,por,Teachers' Remote Work Context Assessment Scale (TRWCAS)
 pinheiro_2023_srq,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Psychological Distress (SRQ-20)
 neurodegenerative_huizinga_2019_svc,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,The Screening of Visual Complaints questionaire (SVC)
@@ -767,17 +767,17 @@ neurodegenerative_huizinga_2019_brief,Adult (18+),NA,"""Internet-based (Mturkers
 neurodegenerative_huizinga_2019_user,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Behavioral,Survey/questionnaire,Likert Scale/selected response,dut,Utrecht Scale for Evaluation of Rehabilitation-Participation (USER)
 neurodegenerative_huizinga_2019_dass,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,dut,Depression Anxiety Stress Scale – 21 (DASS-21)
 neurodegenerative_huizinga_2019_sims,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,dut,Structured Inventory for Malingered Symptomatology (SIMS)
-chile_2023_social-welfare-survey_a,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_ee,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_f,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_g,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_h,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_oo,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_rr,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_ss,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_u,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_vv,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
-chile_2023_social-welfare-survey_yy,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,NA
+chile_2023_social-welfare-survey_a,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Well-being
+chile_2023_social-welfare-survey_ee,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Education
+chile_2023_social-welfare-survey_f,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Trust
+chile_2023_social-welfare-survey_g,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Environmental Quality
+chile_2023_social-welfare-survey_h,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Community Safety
+chile_2023_social-welfare-survey_oo,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Work Occupation
+chile_2023_social-welfare-survey_rr,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Social Relationships
+chile_2023_social-welfare-survey_ss,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Health
+chile_2023_social-welfare-survey_u,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Use of Time
+chile_2023_social-welfare-survey_vv,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Living Quality
+chile_2023_social-welfare-survey_yy,Mixed,NA,"""Internet-based (Mturkers, etc)"", General/non-specific, Representative",Opinion/attitude,Survey/questionnaire,Mixed,spa,CASEN Income
 coomansaddition,Child (<18y),Child (6-12y),"General/non-specific, Educational",Cognitive/educational,Test,Likert Scale/selected response,"eng, dut",Arithmetic Addition Items from MathGarden
 coomansdivision,Child (<18y),Child (6-12y),"General/non-specific, Educational",Cognitive/educational,Test,Likert Scale/selected response,"eng, dut",Arithmetic Division Items from MathGarden
 coomansletterchaos,Child (<18y),Child (6-12y),General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,"eng, dut",Arithmetic Division Items from MathGarden
@@ -1093,10 +1093,10 @@ measuring_lexical_quality,Adult (18+),NA,Educational,Cognitive/educational,Test,
 mental_health_questionnaire_for_the_elderly,Elderly (minimum age >50),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Survey on Anxiety Disorders in the Elderly
 mtf,Child (<18y),"Adolescent (12-18y), Child (6-12y)",Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Monitoring the Future (MTF) Public-Use Cross-Sectional Datasets
 lessr_mach4,Adult (18+),NA,General/non-specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Machiavellian beliefs and personality: Construct invalidity of the Machiavellianism dimension
-amorim_2025_climej_climej,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",NA
-amorim_2025_climej_desenhonotrabalho,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",NA
-amorim_2025_climej_florescimentonotrabalho,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",NA
-amorim_2025_climej_suporteorganizacional,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",NA
+amorim_2025_climej_climej,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",CLIMEJ
+amorim_2025_climej_desenhonotrabalho,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Job Design
+amorim_2025_climej_florescimentonotrabalho,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Flourishing at Work
+amorim_2025_climej_suporteorganizacional,Adult (18+),NA,"Targeted/specific, Representative, ""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Organizational Support
 rfq8_wozniakprus_2022,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,pol,Reflective Functioning Questionnaire (RFQ-8)
 identity_fusion_gomez_2025,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Opinion/attitude,Survey/questionnaire,Mixed,"spa, eng","Identity Fusion, Perceived Self-verification and Willingness to fight and die"
 bfi2_zhang_2025,Adult (18+),NA,"Educational, ""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,The Big Five Inventory-2 (BFI-2) and three Alternative Formats
@@ -1305,16 +1305,16 @@ psychotools_gratitude_gart,Mixed,Adolescent (12-18y),"Educational, Representativ
 psychotools_gratitude_gq6,Mixed,Adolescent (12-18y),"Educational, Representative",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Gratitude Questionnaire– 6 (GQ-6)
 forthmann-2024-cleverness_ratings,Mixed,NA,"Educational, Targeted/specific","Behavioral, Cognitive/educational",Observational rating,Mixed,eng,"Cleverness ratings from 5 raters for three objects (paperclip, garbagebag, rope) in an Alternate Uses Task."
 forthmann-2024-creative_quality,Mixed,NA,"Educational, Targeted/specific","Behavioral, Cognitive/educational",Observational rating,Mixed,eng,Creative quality ratings from 3 raters for individual creative ideas generated in the Alternate Uses Task.
-margaretto_2025_translation_study_1_generalknowledge,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge (GK) ​
-margaretto_2025_translation_study_1_lextale,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Lextale-Esp (Spanish vocabulary form-recognition) ​
-margaretto_2025_translation_study_1_readingcomprehension,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Reading Comprehension (RC) ​
+margaretto_2025_translation_study_1_generalknowledge,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge (GK)
+margaretto_2025_translation_study_1_lextale,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Lextale-Esp (Spanish vocabulary form-recognition)
+margaretto_2025_translation_study_1_readingcomprehension,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Reading Comprehension (RC)
 margaretto_2025_translation_study_1_vocabulary_1,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Student Vocabulary Test 1 (StuVoc1)
 margaretto_2025_translation_study_1_vocabulary_2,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Student Vocabulary Test 2 (StuVoc2)
 margaretto_2025_translation_study_1_vocabulary_3,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Student Vocabulary Test 3 (StuVoc)
-margaretto_2025_translation_study_2_generalknowledge_1,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge 1 (GK1) ​
-margaretto_2025_translation_study_2_generalknowledge_2,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge 2 (GK2) ​
-margaretto_2025_translation_study_2_lextale,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Lextale-Esp (Spanish vocabulary form-recognition) ​
-margaretto_2025_translation_study_2_readingcomprehension,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Reading Comprehension (RC) ​
+margaretto_2025_translation_study_2_generalknowledge_1,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge 1 (GK1)
+margaretto_2025_translation_study_2_generalknowledge_2,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",General Knowledge 2 (GK2)
+margaretto_2025_translation_study_2_lextale,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Lextale-Esp (Spanish vocabulary form-recognition)
+margaretto_2025_translation_study_2_readingcomprehension,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Reading Comprehension (RC)
 margaretto_2025_translation_study_2_vocabulary_full,Mixed,NA,"Educational, Targeted/specific",Other,Test,Likert Scale/selected response,"eng, spa",Student Vocabulary Test combined (StuVoc)
 heise_2024_mental_divdesires,Child (<18y),"Early (<6y), Child (6-12y)","Targeted/specific, ""Internet-based (Mturkers, etc)""","Opinion/attitude, Cognitive/educational",Test,Likert Scale/selected response,eng,Diverse Desires
 heise_2024_mental_divbeliefs,Child (<18y),"Early (<6y), Child (6-12y)","Targeted/specific, ""Internet-based (Mturkers, etc)""","Opinion/attitude, Cognitive/educational",Test,Likert Scale/selected response,eng,Diverse Beliefs
@@ -1342,31 +1342,160 @@ gilbert_meta_106,Child (<18y),Adolescent (12-18y),Program-based,Affective/mental
 gilbert_meta_107,Child (<18y),Adolescent (12-18y),Program-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"hau, eng",Pathways Gender Norms and Empowerment Beliefs
 friedman_2018_risks_government,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Appropriate
 friedman_2018_risks_discrimination,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Discrimination
-friedman_2018_risks_science,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Science
-anunciacao_2025_personality_achievement​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Achievement​
-anunciacao_2025_personality_affiliation​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Affiliation​
-anunciacao_2025_personality_aggression​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Aggression​
-anunciacao_2025_personality_autonomy​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Autonomy​
-anunciacao_2025_personality_change​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Change​
-anunciacao_2025_personality_deference​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Deference​
-anunciacao_2025_personality_dominance​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Dominance​
-anunciacao_2025_personality_exhibition​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Exhibition​
-anunciacao_2025_personality_intraception​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Intraception​
-anunciacao_2025_personality_nurturance​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Nurturance​
-anunciacao_2025_personality_order​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Order​
-anunciacao_2025_personality_persistence​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Persistence​
-anunciacao_2025_personality_succorance​,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Succorance​
+anunciacao_2025_personality_achievement,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Achievement​
+anunciacao_2025_personality_affiliation,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Affiliation​
+anunciacao_2025_personality_aggression,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Aggression​
+anunciacao_2025_personality_autonomy,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Autonomy​
+anunciacao_2025_personality_change,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Change​
+anunciacao_2025_personality_deference,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Deference​
+anunciacao_2025_personality_dominance,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Dominance​
+anunciacao_2025_personality_exhibition,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Exhibition​
+anunciacao_2025_personality_intraception,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Intraception​
+anunciacao_2025_personality_nurturance,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Nurturance​
+anunciacao_2025_personality_order,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Order​
+anunciacao_2025_personality_persistence,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Persistence​
+anunciacao_2025_personality_succorance,Mixed,NA,Representative,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"por, eng",Personality Factor Inventory - Succorance​
 gilbert_meta_108,Adult (18+),NA,Program-based,Behavioral,Survey/questionnaire,Likert Scale/selected response,"eng, swa",Gendered Credit Rationing and Risk-Contingent Credit Uptake (Kenya Smallholder RCT)
 mental_health_wang_2024_phq,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Impact of COVID-19 - Anxiety
 mental_health_wang_2024_gad,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,chi,Impact of COVID-19 - Depression
-test_taking_much_2025,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Speed-ability trade-off and test-taking persistence
+test_taking_much_2025_ao,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Motivational Disposition
+test_taking_much_2025_cm,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Current Motivation
+test_taking_much_2025_ct,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Concentration Task
+test_taking_much_2025_ef,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Effort
+test_taking_much_2025_mr,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Mixed,eng,Matrix Reasoning Test
 face_memory_amado_2024,Adult (18+),NA,General/non-specific,Cognitive/educational,Test,Likert Scale/selected response,eng,Face Memory
-rfq_wozniakprus_2021,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Survey/questionnaire,Constructed Response,pol,Reflective Functioning Questionnaire
+rfq_wozniakprus_2021,Mixed,Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,pol,Reflective Functioning Questionnaire
 ramp_poulton_2022_timed,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,Raven's Advanced Progressive Matrices - timed
 ramp_poulton_2022_untimed,Mixed,Adolescent (12-18y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,Raven's Advanced Progressive Matrices - untimed
-uti_newlands_2023,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Recurrent UTI Impact
+uti_newlands_2023_rutiiq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Recurrent UTI Impact
+uti_newlands_2023_phq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Depression
+uti_newlands_2023_gad,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Anxiety
+uti_newlands_2023_uclals,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Loneliness
+uti_newlands_2023_fsdsr,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Sexual Distress
+uti_newlands_2023_wpai,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Work Productivity & Activity Impairment
+uti_newlands_2023_psq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Mixed,eng,Patient Satisfaction
 double_marking_steele_2022,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Observational rating,Likert Scale/selected response,eng,The Value of Double Marking in Dissertation Assessment
-caetano-santos-lsas-2021,Mixed,NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Measure of Anxiety in Selection Interviews
-caetano-santos-masi-2021,Mixed,NA,Targeted/specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Measure of Anxiety in Selection Interviews
-meng-competitiveness-2023,Mixed,NA,Targeted/specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,"Competitiveness, Cooperativeness, and Social Comparison Orientation"
-cunek-handwriting-2023,Child (<18y),Child (6-12y),Targeted/specific,"Behavioral, Cognitive/educational",Observational rating,Slider/continuous,eng,Handwriting Quality and Legibility
+caetano-santos-lsas-2021,Mixed,NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Measure of Anxiety in Selection Interviews
+caetano-santos-masi-2021,Mixed,NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,NA
+meng-competitiveness-2023,Adult (18+),NA,Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,"Competitiveness, Cooperativeness, and Social Comparison Orientation"
+cunek-handwriting-2023,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Observational rating,Likert Scale/selected response,eng,Handwriting Quality and Legibility
+assessment_time_fournier_2025_upps,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,Assessment Time - Impulsive Behavio
+assessment_time_fournier_2025_bscs,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,Assessment Time - Self-Control
+assessment_time_fournier_2025_gad,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,Assessment Time - Anxiety
+assessment_time_fournier_2025_phq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,Assessment Time - Depression
+assessment_time_fournier_2025_pmpuq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Behavioral, Cognitive/educational",Survey/questionnaire,Likert Scale/selected response,eng,Assessment Time - Problematic Mobile Use
+srsi_dandachifitzgerald_2023,Mixed,Adolescent (12-18y),"Targeted/specific, Clinical",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"fre, dut",Self-Report Symptom Inventory
+autism_blotner_2025_aq,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Autism Quotient
+autism_blotner_2025_qcae,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Cognitive and Affective Empathy
+autism_blotner_2025_ffmi,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Five-Factor Machiavellianism Inventory
+autism_blotner_2025_acme,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Affective and Cognitive Measure of Empathy
+autism_blotner_2025_tactics,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Two-Dimensional Machiavellianism Scale
+autism_blotner_2025_views,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Two-Dimensional Machiavellianism Scale
+autism_blotner_2025_bes,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,ger,Basic Empathy Scale
+ders_valencia_2025,Adult (18+),NA,Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,Difficulties in Emotion Regulation Scale
+presenteeism_golz_2024,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,eng,Multi-item Presenteeism Scale
+parenting_anunciacao_2025_affect,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Behavioral,Survey/questionnaire,Slider/continuous,por,Affect
+parenting_anunciacao_2025_goals,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Developmental,Survey/questionnaire,Slider/continuous,por,Developmental Goals
+parenting_anunciacao_2025_values,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Slider/continuous,por,Values Priorities
+parenting_anunciacao_2025_rejection,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Behavioral,Survey/questionnaire,Slider/continuous,por,Values Priorities
+parenting_anunciacao_2025_materialism,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Slider/continuous,por,Materialism
+parenting_anunciacao_2025_material_rewards,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Slider/continuous,por,Material Rewards
+ipq_doglioni_2021,Adult (18+),NA,Clinical,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,fre,Illness Perception
+ebp_tafla_2024,Child (<18y),"Child (6-12y), Adolescent (12-18y)","Clinical, Targeted/specific",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,por,Emotional and behavioral problems
+magiccats_ozono_2020,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Epistemic Emotions
+cfq_ruiz_2025_cfq,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,Cognitive Fusion
+cfq_ruiz_2025_dass,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,spa,"Depression, Anxiety, and Stress Scale"
+item_slope_west_2024_bscs,Adult (18+),NA,General/non-specific,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Brief Self-Control Scale
+gilbert_meta_112,Child (<18y),"Adolescent (12-18y), Child (6-12y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,dut,Cognitive Learning Outcomes in Science
+gilbert_meta_113,Child (<18y),"Adolescent (12-18y), Child (6-12y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,dut,Cognitive Learning Outcomes in Science
+williams-cps2019,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Psychometric Validation of the Beck Depression Inventory CPS Study 1
+williams-cps2018,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Psychometric Validation of the Beck Depression Inventory CPS Study 2
+williams-brat2020-study2,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Psychometric Validation of the Beck Depression Inventory BRAT Study 2
+williams-brat2020_study1,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Psychometric Validation of the Beck Depression Inventory BRAT Study 1
+magnus-format-study1_2022,Adult (18+),NA,Targeted/specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,The psychometric effects of filter questions on self-reported symptom frequencies
+magnus-format-study2_2022,Adult (18+),NA,Targeted/specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,The psychometric effects of filter questions on self-reported symptom frequencies
+himmelstein-admc_raw-2025,Adult (18+),NA,Targeted/specific,Behavioral,Survey/questionnaire,Slider/continuous,eng,Trial-level decision-making responses on the Adult Decision-Making Competence
+himmelstein-number_series-2025,Adult (18+),NA,NA,Cognitive/educational,Survey/questionnaire,Slider/continuous,eng,Accuracy on a number-series task where participants identify the next number in the sequence
+himmelstein-berlin_numeracy-2025,Adult (18+),NA,NA,Cognitive/educational,Survey/questionnaire,Slider/continuous,eng,Numeracy with the Berlin Numeracy Test
+himmelstein-shipley_vocabulary-2025,Adult (18+),NA,NA,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Vocabulary with the Shipley Institute of Living Scale
+himmelstein-impossible_question-2025,Adult (18+),NA,NA,Cognitive/educational,Test,Likert Scale/selected response,eng,Performance on a mix of general-knowledge and impossible (unknowable) questions
+himmelstein-shipley_abstraction-2025,Adult (18+),NA,NA,Cognitive/educational,Test,Likert Scale/selected response,eng,Abstract reasoning with the Shipley Institute of Living Scale
+himmelstein-cognitive_reflection-2025,Adult (18+),NA,NA,Behavioral,Test,Likert Scale/selected response,eng,Tendency to override intuitive answers using the Cognitive Reflection Test (CRT)
+johansson-swedish-pss-rasch-analysis-2024,Adult (18+),NA,Targeted/specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,swe,Swedish Translation of the Perceived Stress Scale
+karim2022_tmoca_mci,Elderly (minimum age >50),NA,Targeted/specific,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,tam,Cross-sectional T-MoCA raw subscale scores for 233 Tamil-speaking older adults at one timepoint.
+karim2022_tmoca_subscales_longitudinal,Elderly (minimum age >50),NA,NA,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,tam,Binary MCI screening
+karim2022_tmoca_subscales_single,Elderly (minimum age >50),NA,NA,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,tam,Longitudinal T-MoCA subscale data
+curiosity_stone_2022_fns,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Variety Seeking
+curiosity_stone_2022_invol,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Variety Seeking
+curiosity_stone_2022_var,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Variety Seeking
+amatus_cipora_2024_amas,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Abbreviated Math Anxiety Scale
+amatus_cipora_2024_gad,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Generalized Anxiety Disorder
+amatus_cipora_2024_stai,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,"ger, fra",State-Trait Anxiety Inventory
+amatus_cipora_2024_tai,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Personality,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Self-Description Questionnaire
+amatus_cipora_2024_sdq_m,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Math Self-Concept
+amatus_cipora_2024_sdq_l,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Literacy Self-Concept
+amatus_cipora_2024_pisa_me,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"ger, fra",PISA Math Self-Efficacy
+amatus_cipora_2024_fsmas_se,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Fennema-Sherman Math Attitudes - Self-Efficacy
+amatus_cipora_2024_bfi_n,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Personality,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Big Five Inventory - Neuroticism
+amatus_cipora_2024_arithmetic,Adult (18+),NA,"""Internet-based (Mturkers, etc)"", Educational",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,"ger, fra",Arithmetic Performance
+sadism_west_2026_cast,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Comprehensive Assessment of Sadistic Tendencies
+sadism_west_2026_srp,Adult (18+),NA,General/non-specific,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Self-Report of Psychopathy III
+lexical_difficulty_altgassen_2025_s01_knowledge,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Knowledge
+lexical_difficulty_altgassen_2025_s01_personality,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Personality
+lexical_difficulty_altgassen_2025_s02_gc,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,General Crystallized Intelligence
+lexical_difficulty_altgassen_2025_s02_ws,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,Word Fluency
+lexical_difficulty_altgassen_2025_s03_per,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Personality
+rmet_higgins_2022_rmet,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Constructed Response,eng,Reading the Mind in the Eyes Test
+rmet_higgins_2022_aq,Adult (18+),NA,"""Internet-based (Mturkers, etc)""","Developmental, Personality",Survey/questionnaire,Likert Scale/selected response,eng,Autism Spectrum Quotient
+rmet_higgins_2022_tas,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Toronto Alexithymia Scale
+rmet_higgins_2022_tom,Adult (18+),NA,"""Internet-based (Mturkers, etc)""",Cognitive/educational,Test,Constructed Response,eng,Theory of Mind
+ai_fear_dong_2026_ai,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,AI Capability
+ai_fear_dong_2026_requirement,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,Trait Requirement
+ai_fear_dong_2026_own_fear,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,Own Fear Replacement
+ai_fear_dong_2026_other_fear,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,Other Fear Replacement
+ai_fear_dong_2026_incentive,Adult (18+),NA,General/non-specific,"Behavioral, Other",Survey/questionnaire,Likert Scale/selected response,eng,Incentive Condition
+lsbq_maleki_2025_persian_comprehension,Adult (18+),NA,Representative,Cognitive/educational,Survey/questionnaire,Slider/continuous,per,Persian Comperehension
+lsbq_maleki_2025_non_persian_proficiency,Adult (18+),NA,Representative,Cognitive/educational,Survey/questionnaire,Slider/continuous,per,Non Persian Proficiency
+lsbq_maleki_2025_dominant_language_home_community,Adult (18+),NA,Representative,Behavioral,Survey/questionnaire,Likert Scale/selected response,per,Dominant Language Home Community
+lsbq_maleki_2025_non_persian_use,Adult (18+),NA,Representative,Behavioral,Survey/questionnaire,Likert Scale/selected response,per,Non Persian Use
+lsbq_maleki_2025_persian_switching,Adult (18+),NA,Representative,Behavioral,Survey/questionnaire,Likert Scale/selected response,per,Switching
+guatemala_2024_homes_water,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA - Water
+guatemala_2024_homes_drainage,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Drainage
+guatemala_2024_homes_lighting,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Lightning
+guatemala_2024_homes_parks,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Parks
+guatemala_2024_homes_trash,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Trash
+guatemala_2024_homes_avenues,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Avenues
+guatemala_2024_homes_roads,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Roads
+guatemala_2024_homes_energy,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Energy
+guatemala_2024_homes_safety,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Safety
+guatemala_2024_homes_emergencies,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Emergencies
+guatemala_2024_homes_publiceducation,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Public Education
+guatemala_2024_homes_nutrition,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Nutrition
+guatemala_2024_homes_publichealth,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Public Health
+guatemala_2024_homes_publicclinic,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Public Clinic
+guatemala_2024_homes_transport,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,ENCASBA -  Transport
+guatemala_2024_homes_country,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,ENCASBA -  Country
+guatemala_2024_homes_transparency,Mixed,NA,"Targeted/specific, Representative",Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,ENCASBA -  Transparency and Corruption
+chakraborty2026_bes_irw,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Social-Emotional Behaviors (BES)
+chakraborty2026_bspwba_irw,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Well-Being & Self-Perception (BSPWB-A)
+chakraborty2026_iwah_irw,Child (<18y),Adolescent (12-18y),Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Identification with All Humanity (IWAH)
+chakraborty2026_selos_irw,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Social-Emotional Learning Outcomes (SELOS)
+chakraborty2026_bidr_irw,Child (<18y),Adolescent (12-18y),Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Balanced Inventory of Desirable Responding - 16 (BIDR-16)
+chakraborty2026_iri_irw,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Interpersonal Reactivity Index (IRI)
+chakraborty2026_ptm_irw,Child (<18y),Adolescent (12-18y),Educational,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Prosocial Tendencies Measure
+sel_marca_2025_estudantes,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Personality,Survey/questionnaire,Likert Scale/selected response,por,Sociol and Emotional Learning (SEL) - Students
+sel_marca_2025_familiares,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,por,Sociol and Emotional Learning (SEL) - Families
+sel_marca_2025_professores,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Slider/continuous,por,Sociol and Emotional Learning (SEL) - Teachers
+fomonegativeaffect_cremer_2026_fomo,Adult (18+),NA,NA,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,NA
+fomonegativeaffect_cremer_2026_panas,Adult (18+),NA,NA,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,NA
+fomonegativeaffect_cremer_2026_phq,Adult (18+),NA,NA,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,NA
+fomonegativeaffect_cremer_2026_rrs,Adult (18+),NA,NA,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,NA
+heekerens2025_bfi_extraversion,Adult (18+),NA,Clinical,Personality,Survey/questionnaire,Likert Scale/selected response,ger,Big Five Inventory – Extraversion (German BFI-10)
+heekerens2025_bfi_neuroticism,Adult (18+),NA,Clinical,Personality,Survey/questionnaire,Likert Scale/selected response,ger,Big Five Inventory – Neuroticism (German BFI-10)
+heekerens2025_bfi_openness,Adult (18+),NA,Clinical,Personality,Survey/questionnaire,Likert Scale/selected response,ger,Big Five Inventory – Openness (German BFI-10)
+heekerens2025_dss,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ger,Dissociative Symptoms Scale – German Version (G-DSS)
+heekerens2025_pds,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ger,Posttraumatic Diagnostic Scale – DSM-5 (German PDS-5)
+heekerens2025_phq,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ger,Patient Health Questionnaire – 8-item (German PHQ-8)
+heekerens2025_sdq,Adult (18+),NA,Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,ger,Somatoform Dissociation Questionnaire – 20-item (German SDQ-20)
+rapm_poulton_2022_timed,Adult (18+),NA,"Educational, General/non-specific",Cognitive/educational,Test,Likert Scale/selected response,eng,Raven’s Advanced Progressive Matrices – 12-item Timed (APM-12 T)
+rapm_poulton_2022_untimed,Adult (18+),NA,"Educational, General/non-specific",Cognitive/educational,Test,Likert Scale/selected response,eng,Raven’s Advanced Progressive Matrices – 12-item Untimed (APM-12 U)
