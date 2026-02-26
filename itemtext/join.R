@@ -1,4 +1,4 @@
-table<-'lys_2020_rape_3_rma'
+table<-'pezzuti_2025_coolpeople_main_single-items'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
@@ -10,6 +10,7 @@ f<-function(table,tabs) {
     L
 }
 L<-f(table,tabs) ##note that i changed to lowercase
+
 
 ##lapply(L,names)
 items<-L[[1]]
