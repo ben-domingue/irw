@@ -15,8 +15,9 @@ names(z)<-paste("cov_",nm,sep='')
 for (nm in names(z)) df[[nm]]<-z[[nm]]
 df$item<-gsub("\"","",df$item)
 
-essays<-gsub("\n","[newline]",essays)
 essays<-gsub("¨","\"",essays)
+essays<-gsub("\"","'",essays)
 df$text<-essays
 
-write.table(df,file="asap20train.csv",quote=FALSE,row.names=FALSE,sep="|")
+write.table(df,file="asap20train.csv",row.names=FALSE,sep="|")
+
