@@ -1677,4 +1677,49 @@ order id item resp cov*, first
 sort id item
 
 * export the long-format table for group the group
+
 export delimited using "pezzuti_2025_coolpeople_supplemental_single-items.csv", replace
+
+**
+**
+**
+************NOTE that the below R code was added in March 2026 for the purposes of collapsing tables. 
+**
+**
+**
+traits <- c(
+  "warm",
+  "autonomous",
+  "adventurous",
+  "hedonistic",
+  "capable",
+  "conforming",
+  "benevolent",
+  "secure",
+  "traditional",
+  "powerful",
+  "single-items"
+)
+
+for (t in traits) {
+  
+  table_m <- paste0("pezzuti_2025_coolpeople_main_", t)
+  table_s <- paste0("pezzuti_2025_coolpeople_supplemental_", t)
+  
+  df_m <- irw::irw_fetch(table_m) %>%
+    mutate(
+      id = paste0("m_", id),
+      wave = 1
+    )
+  
+  df_s <- irw::irw_fetch(table_s) %>%
+    mutate(
+      id = paste0("s_", id),
+      wave = 2
+    )
+  
+  df_all <- bind_rows(df_m, df_s)
+  
+  write_csv(df_all,
+            paste0("pezzuti_2025_coolpeople_", t, ".csv"))
+}
