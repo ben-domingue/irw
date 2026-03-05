@@ -7,8 +7,7 @@ user <- redivis$user("bdomingu")
 dataset <- user$dataset("irw_meta:bdxt:latest")
 table <- dataset$table("nominal_metadata")
 meta <- table$to_tibble()
-##update
-## meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
+##update## meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
 ##               "n_items", "responses_per_participant", "responses_per_item", 
 ##               "density")]
 dim(meta)
@@ -28,6 +27,25 @@ new.tables<-nt$table
 tables<-do.call("c",tables)
 
 
+##to add
+toadd<-new.tables %in% old.tables
+print("add")
+new.tables[!toadd]
+##to remove
+torem<-old.tables %in% new.tables
+print("remove")
+old.tables[!torem]
+
+##remove tables
+dim(meta)
+ii<-match(old.tables[!torem],meta$table)
+if (length(ii)>0) {
+  meta[ii,]
+  meta<-meta[-ii,]
+}
+dim(meta)
+
+
 f<-function(tab) {
     getvars<-function(tab) {
       variables <- tab$list_variables() 
@@ -40,10 +58,16 @@ f<-function(tab) {
       n_responses<-stats$text$count
       responses_per_participant = n_responses / n_participants
       ##
+      resp.index<-which(nms=="text")
+      variable<-variables[[resp.index]]
+      out<-variable$get_statistics()
+      n_categories<-out$numDistinct
+      ##
       testvec<-c(n_responses=n_responses,
                  n_participants=n_participants,
                  n_items=n_items,
-                 responses_per_participant=responses_per_participant                 
+                 responses_per_participant=responses_per_participant,
+                 n_categories=n_categories
                  )
       testvec
   }
@@ -82,7 +106,7 @@ if (length(ii)>0) {
   summaries<-meta
 }
 
-write.csv(meta,'nominal_metadata.csv',quote=FALSE,row.names=FALSE)
+write.csv(summaries,'nominal_metadata.csv',quote=FALSE,row.names=FALSE)
 
 
 
