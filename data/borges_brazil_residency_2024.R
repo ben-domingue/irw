@@ -19,6 +19,8 @@ scored1 <- df1 %>%
 scored1 <- scored1 %>%
   select(-corr_resp)
 
+scored1$resp_raw[scored1$resp_raw == "X"] <- NA
+
 
 df2 <- read.csv("Dataset 2. Raw responses of 1, 994 applicants to 100 multiple choice items of paper-based testing for residency in a hospital in Brazil", check.names = FALSE)
 df2a <- read.csv("Dataset 4. Correct options or 100 items for paper-based testing",check.names = FALSE)
@@ -37,6 +39,8 @@ scored2 <- df2 %>%
 
 scored2 <- scored2 %>%
   select(-corr_resp)
+
+scored2$resp_raw[scored2$resp_raw == "X"] <- NA
 
 
 write.csv(scored1, "borges_brazil_residency_2024_cbt.csv", row.names = FALSE)
