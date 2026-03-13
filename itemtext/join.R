@@ -1,4 +1,4 @@
-table<-'sv-maia2_randelovic_2021_hexaco100'
+table<-'rosenberg_fadplus_goto2021'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
