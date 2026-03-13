@@ -104,8 +104,11 @@ practioner_SHS_df$wave <- NA
 # Merge the 2 trials
 student_SHS_df <- rbind(student_SHS_df, student_SHS_t2_df)
 SHS_df <- rbind(student_SHS_df, practioner_SHS_df)
+##note we also added df$item <- gsub("_t2$", "", df$item) 
 save(SHS_df, file="SV-MAIA2_Randelovic_2021_SHS.Rdata")
 write.csv(SHS_df, "SV-MAIA2_Randelovic_2021_SHS.csv", row.names=FALSE)
+
+
 
 # ------ Process HEXACO-100 Dataset ------
 
