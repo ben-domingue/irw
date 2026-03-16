@@ -111,41 +111,64 @@ generate_bibtex <- function(df) {
   return(df)
 }
 
-# Google Spreadsheet URL or Sheet ID
-irw_dict <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315')
-##('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0')
-irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
+dbs<-list(
+    core=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
+              user="bdomingu",
+              dataset="irw_meta:bdxt:latest",
+              table="biblio:qahg",
+              file.out="biblio.csv"),
+    comps=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
+              user="bdomingu",
+              dataset="irw_meta:bdxt:latest",
+              table="comps_biblio:w8pz",
+              file.out="comps_biblio.csv"),
+    nom=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
+             user="bdomingu",
+             dataset="irw_meta:bdxt:latest",
+             table="nominal_biblio:vphd",
+             file.out="nominal_biblio.csv"),
+    sim=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
+             user="bdomingu",
+             dataset="irw_meta:bdxt:latest",
+             table="simsyn_biblio:pm9v",
+             file.out="simsyn_biblio.csv")
+)
 
-# Read the current biblio file
-user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:latest")
-biblio_table <- dataset$table("biblio:qahg")
-biblio <- biblio_table$to_tibble()
-head(biblio)
+getrows<-function(l) {
+    for (i in 1:length(l)) assign(names(l)[i],l[[i]])
+    ## Read the current biblio file
+    user <- redivis$user(user)
+    dataset <- user$dataset(dataset)
+    biblio_table <- dataset$table(table)
+    biblio <- biblio_table$to_tibble()
+    head(biblio)
+    ##
+    irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
+    ## Find rows in dictionary whose Filename is not in biblio
+    new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
+    ##remove nonpublic elements before calling ChatGPT
+    new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
+    new_data_rows <- new_data_rows |>
+    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
+    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
+    new_data_rows <- new_data_rows %>%
+        mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
+    new_data_rows <- generate_bibtex(new_data_rows)
+    biblio <- bind_rows(biblio, new_data_rows)
+    ##remove nonpublic elements
+    test<-biblio$table %in% irw_notpub$table
+    biblio<-biblio[!test,]
+    ##no csv
+    biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+    ## Save the updated biblio to a CSV file
+    biblio<-biblio[,
+                   c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
+                     "Derived_License", "Description", "BibTex")]
+    readr::write_csv(biblio, file.out)
+}
 
-# Find rows in dictionary whose Filename is not in biblio
-new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
-##remove nonpublic elements before calling ChatGPT
-new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
-new_data_rows <- new_data_rows |>
-  select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-  rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
-new_data_rows <- new_data_rows %>%
-    mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
-new_data_rows <- generate_bibtex(new_data_rows)
-
-biblio <- bind_rows(biblio, new_data_rows)
-##remove nonpublic elements
-test<-biblio$table %in% irw_notpub$table
-biblio<-biblio[!test,]
-
-##no csv
-biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
-     
-## Save the updated biblio to a CSV file
-biblio<-biblio[,
-c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
-"Derived_License", "Description", "BibTex")]
-
-readr::write_csv(biblio, "biblio.csv")
+for (i in 1:length(dbs)) {
+    print(i)
+    getrows(dbs[[i]])
+}
 
