@@ -5,7 +5,6 @@ import os
 import re
 
 def load_data(input_file):
-    """Dynamically load data based on file extension."""
     ext = os.path.splitext(input_file)[-1].lower()
     if ext == '.sav':
         df, meta = pyreadstat.read_sav(input_file, apply_value_formats=False)
@@ -17,17 +16,12 @@ def load_data(input_file):
         raise ValueError(f"Unsupported file extension: {ext}")
     return df
 
-def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
-    print(f"Starting processing for: {input_file}")
-    
+def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'): 
     try:
         df = load_data(input_file)
-        print(f"Successfully loaded data: {df.shape[0]} rows, {df.shape[1]} columns")
     except Exception as e:
         print(f"Error loading {input_file}: {e}")
         return
-
-    # --- 1. Map Core Variables Safely ---
     id_col = next((c for c in ['ResponseId', 'ResponseID', 'Participant ID', 'PID', 'MID'] if c in df.columns), None)
     if id_col:
         df.rename(columns={id_col: 'id'}, inplace=True)
@@ -47,7 +41,6 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
     }
     df.rename(columns={k: v for k, v in cov_map.items() if k in df.columns}, inplace=True)
 
-    # --- 1.5 Study-Specific Pre-Mappings ---
     if 'Study 3' in input_file:
         study3_map = {
             'Q3.1_1': 'moral1', 'Q3.3_1': 'moral2', 'Q3.5_1': 'moral3',
@@ -65,13 +58,9 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
             'Ideology': 'cov_ideology', 'leftright': 'cov_leftright', 'party': 'cov_party',
             'condname': 'cov_condition', 
             'manip': 'cov_manipcheck', 'accuracy': 'cov_accuracycheck',
-            
-            # Timed Condition
             'Q129': 'moral1_timed', 'Q130': 'moral2_timed', 'Q131': 'moral3_timed',
             'Q132': 'moral4_timed', 'Q133': 'moral5_timed', 'Q134': 'moral6_timed',
             'Q137': 'moral7_timed', 'Q138': 'moral8_timed', 'Q139': 'moral9_timed',
-            
-            # Control Condition (Corrected & Verified)
             'Q141': 'moral1_ctrl', 'Q142': 'moral2_ctrl', 'Q143': 'moral3_ctrl',
             'Q144': 'moral4_ctrl', 'Q145': 'moral5_ctrl', 'Q146': 'moral6_ctrl',
             'Q3.1': 'moral7_ctrl', 'Q127': 'moral8_ctrl', 'Q128': 'moral9_ctrl'
@@ -144,7 +133,6 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         }
         df.rename(columns=study9_map, inplace=True)
 
-    # --- 1.6 Format Coercion ---
     if 'date' in df.columns:
         df['date'] = pd.to_datetime(df['date'], errors='coerce')
         df['date'] = df['date'].apply(lambda x: int(x.timestamp()) if pd.notnull(x) else pd.NA)
@@ -157,12 +145,10 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
     else:
         df['id'] = df['id'].astype(str)
 
-    # Prevent ID duplicates in Long-Format experiments
     for long_col in ['issue', 'Issue', 'practice', 'trial', 'Trial']:
         if long_col in df.columns:
             df['id'] = df['id'] + f"_{long_col}" + df[long_col].astype(str)
 
-    # --- 2. Filter Columns ---
     id_vars = ['id'] + [c for c in df.columns if c.startswith('cov_') or c in ['rt', 'date']]
     
     system_vars = [
@@ -173,8 +159,7 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         'ExternalReference', 'DistributionChannel', 'UserLanguage', 
         'StartDate', 'RecordedDate', 'PROLIFIC_PID', 'condname'
     ]
-    
-    # Isolate valid items and actively reject Qualtrics timing/text artifacts
+
     item_cols = [
         c for c in df.columns 
         if c not in id_vars 
@@ -182,15 +167,12 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         and not any(artifact in c for artifact in ['_Click', '_Submit', '_TEXT', 'FL_'])
     ]
 
-    # --- 3. Melt to Long Format ---
     df_long = df.melt(
         id_vars=id_vars,
         value_vars=item_cols,
         var_name='original_item',
         value_name='resp'
     )
-
-    # --- 4. Clean up the Responses (Text to Numeric) ---
     likert_mapping = {
         'strongly disagree': 1, 'moderately disagree': 2, 'slightly disagree': 3,
         'somewhat disagree': 3, 'neither agree nor disagree': 4, 'neutral': 4,
@@ -211,18 +193,12 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         return val
 
     df_long['resp'] = df_long['resp'].apply(convert_likert)
-    
-    # Force coercion to numeric and safely bypass pandas object memory retention
     df_long['resp'] = pd.to_numeric(df_long['resp'], errors='coerce')
     df_long = df_long.dropna(subset=['resp']).copy()
-    
-    # Strict numpy array cast to Int64
     float_array = np.array(df_long['resp'].values, dtype=float)
     df_long['resp'] = pd.Series(float_array, index=df_long.index).round().astype('Int64')
     df_long['item'] = df_long['original_item']
-
-    # --- 5. Extract Constructs via Strict Whitelist ---
-    # Pure psychometric whitelist only
+    
     valid_prefixes = ['mfq', 'nfc', 'dt', 'pp', 'mr', 'moral', 'stance', 'ban', 'petition']
 
     def extract_construct(item_name):
@@ -237,42 +213,30 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         return 'Discard'
 
     df_long['construct'] = df_long['item'].apply(extract_construct)
-    
-    # Remove junk columns
     df_long = df_long[df_long['construct'] != 'Discard']
-    
     constructs = df_long['construct'].unique()
-    print(f"Found {len(constructs)} valid constructs. Generating separate tables...")
 
-    # --- 6. Export to Files ---
     base_cols = ['id', 'item', 'resp']
     cov_cols = [c for c in df_long.columns if c.startswith('cov_') or c in ['rt', 'date']]
     final_cols = base_cols + [c for c in cov_cols if c not in base_cols]
     
     os.makedirs(output_dir, exist_ok=True)
 
-    # Extract Study number for dynamic file naming
     study_match = re.search(r'study\s*(\d+)', input_file, re.IGNORECASE)
     study_id = f"study{study_match.group(1)}" if study_match else "study_unknown"
 
     for construct in constructs:
         df_construct = df_long[df_long['construct'] == construct].copy()
-        
-        # Avoid creating tables for empty or nearly empty constructs
         if len(df_construct) < 10:
             continue
-            
         df_final = df_construct[final_cols]
         df_final = df_final.drop_duplicates(subset=['id', 'item'])
-        
-        # Standardized IRW filename
         filename = f"moral_absolutism_goyal_2025_{study_id}_{construct.lower()}.csv"
         output_name = os.path.join(output_dir, filename)
         
         df_final.to_csv(output_name, index=False)
-        print(f" -> Saved {output_name} ({len(df_final)} valid responses)")
         
-    print(f"Processing complete for {input_file}!\n" + "-"*40 + "\n")
+    print(f"Processing complete for {input_file}.")
 
 if __name__ == "__main__":
 
