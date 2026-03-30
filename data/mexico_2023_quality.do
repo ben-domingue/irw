@@ -7,6 +7,10 @@
 * clear
 clear
 
+******************************************
+**************  2023 Survey **************
+******************************************
+
 * import residentes (master)
 import delimited "encig2023_02_residentes_sec_2.csv", varnames(1) clear
 
@@ -30,7 +34,7 @@ keep if _merge == 3
 drop _merge
 
 * save merged dataset
-save "mexico_2023_quality.dta", replace
+save "mexico_2023_quality_2023.dta", replace
 
 * import third dataset 
 import delimited "encig2023_01_sec_11.csv", varnames(1) clear
@@ -39,10 +43,68 @@ import delimited "encig2023_01_sec_11.csv", varnames(1) clear
 save "encig2023_01_sec_11.dta", replace
 
 * load new master and merge 1:1 on id_per
-use "mexico_2023_quality.dta", clear
+use "mexico_2023_quality_2023.dta", clear
 merge 1:1 id_per using "encig2023_01_sec_11.dta"
 
 * save merged dataset
+save "mexico_2023_quality_2023.dta", replace
+
+******************************************
+**************  2021 Survey **************
+******************************************
+
+* import residentes (master)
+import delimited "encig2021_02_residentes_sec_2.csv", varnames(1) clear
+
+* save as Stata for easier merging
+save "encig2021_02_residentes_sec_2.dta", replace
+
+* import quality (using)
+import delimited "encig2021_01_sec1_A_3_4_5_8_9_10.csv", clear
+
+* save as Stata for easier merging
+save "encig2021_01_sec1_A_3_4_5_8_9_10.dta", replace
+
+* load master and merge 1:1 on id_per
+use "encig2021_02_residentes_sec_2.dta", clear
+merge 1:1 id_per using "encig2021_01_sec1_A_3_4_5_8_9_10.dta"
+
+* only keep merged observations
+keep if _merge == 3
+
+* drop _merge variable
+drop _merge
+
+* save merged dataset
+save "mexico_2023_quality_2021.dta", replace
+
+* import third dataset 
+import delimited "encig2021_01_sec_11.csv", varnames(1) clear
+
+* save as Stata for easier merging
+save "encig2021_01_sec_11.dta", replace
+
+* load new master and merge 1:1 on id_per
+use "mexico_2023_quality_2021.dta", clear
+merge 1:1 id_per using "encig2021_01_sec_11.dta"
+
+* save merged dataset
+save "mexico_2023_quality_2021.dta", replace
+
+******************************************
+***********  Prepare the data ************
+******************************************
+
+* clear memory
+clear
+
+* load first file
+use "mexico_2023_quality_2023.dta", clear
+
+* append second file
+append using "mexico_2023_quality_2021.dta", force
+
+* save combined file
 save "mexico_2023_quality.dta", replace
 
 * convert column names to lowercase
@@ -231,6 +293,9 @@ destring p4_1a, replace
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p4_1_1	p4_1_2	p4_1_3	p4_1_4	p4_1_5	p4_1_6	p4_1_7	p4_1a
 
+* recode 1/2 values one value lower (substracting 1)
+recode p4_1_1 p4_1_2 p4_1_3 p4_1_4 p4_1_5 p4_1_6 p4_1_7 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p4_1_1	p4_1_2	p4_1_3	p4_1_4	p4_1_5	p4_1_6	p4_1_7	p4_1a
 
@@ -279,6 +344,9 @@ destring p4_2a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p4_2_1	p4_2_2	p4_2_3	p4_2_4	p4_2a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p4_2_1 p4_2_2 p4_2_3 p4_2_4 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p4_2_1	p4_2_2	p4_2_3	p4_2_4	p4_2a
@@ -329,6 +397,9 @@ destring p4_3a, replace
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p4_3_1 p4_3_2 p4_3_3 p4_3a
 
+* recode 1/2 values one value lower (substracting 1)
+recode p4_3_1 p4_3_2 p4_3_3 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p4_3_1 p4_3_2 p4_3_3 p4_3a
 
@@ -377,6 +448,9 @@ destring p4_4a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p4_4_1 p4_4_2 p4_4_3 p4_4_4 p4_4a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p4_4_1 p4_4_2 p4_4_3 p4_4_4 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p4_4_1 p4_4_2 p4_4_3 p4_4_4 p4_4a
@@ -427,6 +501,9 @@ destring p4_5a, replace
 * keep only relevant variables: id, covariates, and items
 keep id cov_*  p4_5_1 p4_5_2 p4_5_3 p4_5a
 
+* recode 1/2 values one value lower (substracting 1)
+recode p4_5_1 p4_5_2 p4_5_3 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p4_5_1 p4_5_2 p4_5_3 p4_5a
 
@@ -475,6 +552,9 @@ destring p4_6a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_*  p4_6_1 p4_6_2 p4_6a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p4_6_1 p4_6_2 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p4_6_1 p4_6_2 p4_6a
@@ -525,6 +605,9 @@ destring p4_7a, replace
 * keep only relevant variables: id, covariates, and items
 keep id cov_*  p4_7_1 p4_7_2 p4_7_3 p4_7_4 p4_7a
 
+* recode 1/2 values one value lower (substracting 1)
+recode p4_7_1 p4_7_2 p4_7_3 p4_7_4 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p4_7_1 p4_7_2 p4_7_3 p4_7_4 p4_7a
 
@@ -573,6 +656,9 @@ destring p4_8a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_*  p4_8_1 p4_8_2 p4_8_3 p4_8_4 p4_8a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p4_8_1 p4_8_2 p4_8_3 p4_8_4 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p4_8_1 p4_8_2 p4_8_3 p4_8_4 p4_8a
@@ -625,6 +711,9 @@ destring p5_1_11, replace
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_1_01	p5_1_02	p5_1_03	p5_1_04	p5_1_05	p5_1_06	p5_1_07	p5_1_08	p5_1_09	p5_1_10	p5_1_11	p5_1_12
 
+* recode 1/2 values one value lower (substracting 1)
+recode p5_1_01	p5_1_02	p5_1_03	p5_1_04	p5_1_05	p5_1_06	p5_1_07	p5_1_08	p5_1_09	p5_1_10	p5_1_11	p5_1_12 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p5_1_01	p5_1_02	p5_1_03	p5_1_04	p5_1_05	p5_1_06	p5_1_07	p5_1_08	p5_1_09	p5_1_10	p5_1_11	p5_1_12
 
@@ -669,10 +758,13 @@ use "mexico_2023_quality.dta", clear
 compress
 
 * destring non-numeric variables
-destring p5_2a, replace
+destring p5_2_1	p5_2_2	p5_2_3	p5_2_4	p5_2_5	p5_2_6	p5_2_7	p5_2_8	p5_2_9	p5_2a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_2_1	p5_2_2	p5_2_3	p5_2_4	p5_2_5	p5_2_6	p5_2_7	p5_2_8	p5_2_9	p5_2a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_2_1	p5_2_2	p5_2_3	p5_2_4	p5_2_5	p5_2_6	p5_2_7	p5_2_8	p5_2_9 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_2_1	p5_2_2	p5_2_3	p5_2_4	p5_2_5	p5_2_6	p5_2_7	p5_2_8	p5_2_9	p5_2a
@@ -720,10 +812,13 @@ use "mexico_2023_quality.dta", clear
 compress
 
 * destring non-numeric variables
-destring p5_3a, replace
+destring p5_3_1	p5_3_2	p5_3_3	p5_3_4	p5_3_5	p5_3_6	p5_3_7	p5_3_8 p5_3a, replace
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_3_1	p5_3_2	p5_3_3	p5_3_4	p5_3_5	p5_3_6	p5_3_7	p5_3_8	p5_3a
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_3_1	p5_3_2	p5_3_3	p5_3_4	p5_3_5	p5_3_6	p5_3_7	p5_3_8 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_3_1	p5_3_2	p5_3_3	p5_3_4	p5_3_5	p5_3_6	p5_3_7	p5_3_8	p5_3a
@@ -773,6 +868,12 @@ compress
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_4_01	p5_4_02	p5_4_03	p5_4_04	p5_4_05	p5_4_06	p5_4_07	p5_4_08	p5_4_09	p5_4_10	p5_4_11	p5_4a
 
+* destring non-numeric variables
+destring p5_4_01	p5_4_02	p5_4_03	p5_4_04	p5_4_05	p5_4_06	p5_4_07	p5_4_08	p5_4_09	p5_4_10	p5_4_11, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_4_01	p5_4_02	p5_4_03	p5_4_04	p5_4_05	p5_4_06	p5_4_07	p5_4_08	p5_4_09	p5_4_10	p5_4_11 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p5_4_01	p5_4_02	p5_4_03	p5_4_04	p5_4_05	p5_4_06	p5_4_07	p5_4_08	p5_4_09	p5_4_10	p5_4_11	p5_4a
 
@@ -820,6 +921,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_5_01	p5_5_02	p5_5_03	p5_5_04	p5_5_05	p5_5_06	p5_5_07	p5_5_08	p5_5_09	p5_5_10	p5_5_11	p5_5a
+
+* destring non-numeric variables
+destring p5_5_01	p5_5_02	p5_5_03	p5_5_04	p5_5_05	p5_5_06	p5_5_07	p5_5_08	p5_5_09	p5_5_10	p5_5_11, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_5_01	p5_5_02	p5_5_03	p5_5_04	p5_5_05	p5_5_06	p5_5_07	p5_5_08	p5_5_09	p5_5_10	p5_5_11 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_5_01	p5_5_02	p5_5_03	p5_5_04	p5_5_05	p5_5_06	p5_5_07	p5_5_08	p5_5_09	p5_5_10	p5_5_11	p5_5a
@@ -869,6 +976,12 @@ compress
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_6_01	p5_6_02	p5_6_03	p5_6_04	p5_6_05	p5_6_06	p5_6_07	p5_6_08	p5_6_09	p5_6_10	p5_6_11	p5_6a
 
+* destring non-numeric variables
+destring p5_6_01	p5_6_02	p5_6_03	p5_6_04	p5_6_05	p5_6_06	p5_6_07	p5_6_08	p5_6_09	p5_6_10	p5_6_11, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_6_01	p5_6_02	p5_6_03	p5_6_04	p5_6_05	p5_6_06	p5_6_07	p5_6_08	p5_6_09	p5_6_10	p5_6_11 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p5_6_01	p5_6_02	p5_6_03	p5_6_04	p5_6_05	p5_6_06	p5_6_07	p5_6_08	p5_6_09	p5_6_10	p5_6_11	p5_6a
 
@@ -916,6 +1029,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_7_01	p5_7_02	p5_7_03	p5_7_04	p5_7_05	p5_7_06	p5_7_07	p5_7_08	p5_7_09	p5_7_10	p5_7_11	p5_7a
+
+* destring non-numeric variables
+destring p5_7_01	p5_7_02	p5_7_03	p5_7_04	p5_7_05	p5_7_06	p5_7_07	p5_7_08	p5_7_09	p5_7_10	p5_7_11, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_7_01	p5_7_02	p5_7_03	p5_7_04	p5_7_05	p5_7_06	p5_7_07	p5_7_08	p5_7_09	p5_7_10	p5_7_11 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_7_01	p5_7_02	p5_7_03	p5_7_04	p5_7_05	p5_7_06	p5_7_07	p5_7_08	p5_7_09	p5_7_10	p5_7_11	p5_7a
@@ -965,6 +1084,12 @@ compress
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_8_1	p5_8_2	p5_8_3	p5_8a
 
+* destring non-numeric variables
+destring p5_8_1	p5_8_2	p5_8_3, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_8_1	p5_8_2	p5_8_3 (1=0) (2=1)
+
 * set up the code for long-format data from wide data
 local question_cols p5_8_1	p5_8_2	p5_8_3	p5_8a
 
@@ -1002,7 +1127,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_homelightning.csv", replace
 
-**# Bookmark #20: Basic Services - Transportation
+**# Bookmark #20: Basic Services - Buses
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1013,53 +1138,11 @@ compress
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8	p5_9a
 
-* set up the code for long-format data from wide data
-local question_cols p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8	p5_9a
+* destring non-numeric variables
+destring p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8, replace
 
-destring `question_cols', replace force
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local question_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-
-drop p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8	p5_9a
-
-drop if missing(item) | item == ""
-
-gen resp2 = resp
-drop resp
-rename resp2 resp
-
-replace resp = . if resp == 98 | resp == 99
-replace resp = . if resp == 9
-
-order id item resp cov*, first
-sort id item
-
-export delimited using "mexico_2023_quality_transportation.csv", replace
-
-**# Bookmark #21: Basic Services - Buses
-
-* recall dataset
-use "mexico_2023_quality.dta", clear
-
-* compress data
-compress
-
-* keep only relevant variables: id, covariates, and items
-keep id cov_* p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8	p5_9a
+* recode 1/2 values one value lower (substracting 1)
+recode p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_9_1	p5_9_2	p5_9_3	p5_9_4	p5_9_5	p5_9_6	p5_9_7	p5_9_8	p5_9a
@@ -1098,7 +1181,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_buses.csv", replace
 
-**# Bookmark #22: Basic Services - Transportation Stations
+**# Bookmark #21: Basic Services - Transportation Stations
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1108,6 +1191,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_10_1	p5_10_2	p5_10_3	p5_10_4	p5_10_5	p5_10_6	p5_10_7	p5_10_8	p5_10a
+
+* destring non-numeric variables
+destring p5_10_1	p5_10_2	p5_10_3	p5_10_4	p5_10_5	p5_10_6	p5_10_7	p5_10_8, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_10_1	p5_10_2	p5_10_3	p5_10_4	p5_10_5	p5_10_6	p5_10_7	p5_10_8 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_10_1	p5_10_2	p5_10_3	p5_10_4	p5_10_5	p5_10_6	p5_10_7	p5_10_8	p5_10a
@@ -1146,7 +1235,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_transportationstations.csv", replace
 
-**# Bookmark #23: Basic Services - Cable Cars
+**# Bookmark #22: Basic Services - Cable Cars
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1156,6 +1245,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_11_1	p5_11_2	p5_11_3	p5_11_4	p5_11_5	p5_11_6	p5_11_7	p5_11_8	p5_11a
+
+* destring non-numeric variables
+destring p5_11_1	p5_11_2	p5_11_3	p5_11_4	p5_11_5	p5_11_6	p5_11_7	p5_11_8, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_11_1	p5_11_2	p5_11_3	p5_11_4	p5_11_5	p5_11_6	p5_11_7	p5_11_8 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_11_1	p5_11_2	p5_11_3	p5_11_4	p5_11_5	p5_11_6	p5_11_7	p5_11_8	p5_11a
@@ -1194,7 +1289,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_cablecars.csv", replace
 
-**# Bookmark #24: Basic Services - Trains
+**# Bookmark #23: Basic Services - Trains
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1204,6 +1299,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_12_1	p5_12_2	p5_12_3	p5_12_4	p5_12_5	p5_12a
+
+* destring non-numeric variables
+destring p5_12_1	p5_12_2	p5_12_3	p5_12_4	p5_12_5, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_12_1	p5_12_2	p5_12_3	p5_12_4	p5_12_5 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_12_1	p5_12_2	p5_12_3	p5_12_4	p5_12_5	p5_12a
@@ -1242,7 +1343,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_trains.csv", replace
 
-**# Bookmark #25: Basic Services - Highways
+**# Bookmark #24: Basic Services - Highways
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1252,6 +1353,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p5_13_1	p5_13_2	p5_13_3	p5_13_4	p5_13_5	p5_13a
+
+* destring non-numeric variables
+destring p5_13_1	p5_13_2	p5_13_3	p5_13_4	p5_13_5, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p5_13_1	p5_13_2	p5_13_3	p5_13_4	p5_13_5 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p5_13_1	p5_13_2	p5_13_3	p5_13_4	p5_13_5	p5_13a
@@ -1290,7 +1397,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_highways.csv", replace
 
-**# Bookmark #26: Corruption
+**# Bookmark #25: Corruption
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1300,6 +1407,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p8_1	p8_2	p8_3_1	p8_3_2	p8_3_3
+
+* destring non-numeric variables
+destring p8_1	p8_2	p8_3_1	p8_3_2	p8_3_3, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p8_1	p8_2	p8_3_1	p8_3_2	p8_3_3 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p8_1	p8_2	p8_3_1	p8_3_2	p8_3_3
@@ -1338,7 +1451,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_corruption.csv", replace
 
-**# Bookmark #27: General Corruption
+**# Bookmark #26: General Corruption
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1348,6 +1461,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p9_1 p9_7
+
+* destring non-numeric variables
+destring p9_1 p9_7, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p9_1 p9_7 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p9_1 p9_7
@@ -1386,7 +1505,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_generalcorruption.csv", replace
 
-**# Bookmark #28: Electric Government
+**# Bookmark #27: Electric Government
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
@@ -1396,6 +1515,12 @@ compress
 
 * keep only relevant variables: id, covariates, and items
 keep id cov_* p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6
+
+* destring non-numeric variables
+destring p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6, replace
+
+* recode 1/2 values one value lower (substracting 1)
+recode p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6 (1=0) (2=1)
 
 * set up the code for long-format data from wide data
 local question_cols p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6
@@ -1434,55 +1559,7 @@ sort id item
 
 export delimited using "mexico_2023_quality_electricgovernment.csv", replace
 
-**# Bookmark #29: Quality of Public Services
-
-* recall dataset
-use "mexico_2023_quality.dta", clear
-
-* compress data
-compress
-
-* keep only relevant variables: id, covariates, and items
-keep id cov_* p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6
-
-* set up the code for long-format data from wide data
-local question_cols p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6
-
-destring `question_cols', replace force
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local question_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-
-drop p10_1_1	p10_1_2	p10_1_3	p10_1_4	p10_1_5	p10_1_6
-
-drop if missing(item) | item == ""
-
-gen resp2 = resp
-drop resp
-rename resp2 resp
-
-replace resp = . if resp == 98 | resp == 99
-replace resp = . if resp == 9
-
-order id item resp cov*, first
-sort id item
-
-export delimited using "mexico_2023_quality_publicservicesquality.csv", replace
-
-**# Bookmark #30: Institutional Confidence
+**# Bookmark #28: Institutional Confidence
 
 * recall dataset
 use "mexico_2023_quality.dta", clear
