@@ -16,12 +16,17 @@ def load_data(input_file):
         raise ValueError(f"Unsupported file extension: {ext}")
     return df
 
-def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'): 
+def process_file_to_df(input_file): 
     try:
         df = load_data(input_file)
     except Exception as e:
         print(f"Error loading {input_file}: {e}")
-        return
+        return None
+
+    # Extract study identifier and add it
+    study_match = re.search(r'study\s*(\d+)', input_file, re.IGNORECASE)
+    study_id = f"study{study_match.group(1)}" if study_match else "study_unknown"
+
     id_col = next((c for c in ['ResponseId', 'ResponseID', 'Participant ID', 'PID', 'MID'] if c in df.columns), None)
     if id_col:
         df.rename(columns={id_col: 'id'}, inplace=True)
@@ -149,7 +154,10 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
         if long_col in df.columns:
             df['id'] = df['id'] + f"_{long_col}" + df[long_col].astype(str)
 
-    id_vars = ['id'] + [c for c in df.columns if c.startswith('cov_') or c in ['rt', 'date']]
+    df['id'] = study_id + "_" + df['id']
+    df['study'] = study_id  
+
+    id_vars = ['id', 'study'] + [c for c in df.columns if c.startswith('cov_') or c in ['rt', 'date']]
     
     system_vars = [
         'EndDate', 'Status', 'IPAddress', 'Progress', 'Finished', 
@@ -195,11 +203,15 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
     df_long['resp'] = df_long['resp'].apply(convert_likert)
     df_long['resp'] = pd.to_numeric(df_long['resp'], errors='coerce')
     df_long = df_long.dropna(subset=['resp']).copy()
+    
+    if df_long.empty:
+        return None
+
     float_array = np.array(df_long['resp'].values, dtype=float)
     df_long['resp'] = pd.Series(float_array, index=df_long.index).round().astype('Int64')
     df_long['item'] = df_long['original_item']
     
-    valid_prefixes = ['mfq', 'nfc', 'dt', 'pp', 'mr', 'moral', 'stance', 'ban', 'petition']
+    valid_prefixes = ['mfq', 'nfc', 'dt', 'pp', 'mr', 'moral', 'stance']
 
     def extract_construct(item_name):
         clean_name = item_name.lower()
@@ -214,32 +226,54 @@ def process_to_irw_constructs(input_file, output_dir='irw_processed_tables'):
 
     df_long['construct'] = df_long['item'].apply(extract_construct)
     df_long = df_long[df_long['construct'] != 'Discard']
-    constructs = df_long['construct'].unique()
 
-    base_cols = ['id', 'item', 'resp']
-    cov_cols = [c for c in df_long.columns if c.startswith('cov_') or c in ['rt', 'date']]
-    final_cols = base_cols + [c for c in cov_cols if c not in base_cols]
-    
+    return df_long
+
+def compile_and_save_constructs(files_to_process, output_dir='moral_absolutism_goyal_2025'):
     os.makedirs(output_dir, exist_ok=True)
+    all_dfs = []
+    for file in files_to_process:
+        if os.path.exists(file):
+            df = process_file_to_df(file)
+            if df is not None and not df.empty:
+                all_dfs.append(df)
+        else:
+            print(f"File '{file}' not found.")
 
-    study_match = re.search(r'study\s*(\d+)', input_file, re.IGNORECASE)
-    study_id = f"study{study_match.group(1)}" if study_match else "study_unknown"
+    if not all_dfs:
+        print("No valid data was processed.")
+        return
+
+    master_df = pd.concat(all_dfs, ignore_index=True)
+    constructs = master_df['construct'].unique()
 
     for construct in constructs:
-        df_construct = df_long[df_long['construct'] == construct].copy()
+        df_construct = master_df[master_df['construct'] == construct].copy()
+        
+        item_counts_per_study = df_construct.groupby('study')['item'].nunique()
+        valid_studies = item_counts_per_study[item_counts_per_study > 1].index
+        df_construct = df_construct[df_construct['study'].isin(valid_studies)]
+
         if len(df_construct) < 10:
+            print(f"Skipped saving {construct} (empty file).")
             continue
+
+        base_cols = ['id', 'study', 'item', 'resp']
+        target_covs = ['cov_age', 'cov_gender', 'cov_socialclass', 'rt', 'date']
+        cov_cols = [c for c in target_covs if c in df_construct.columns]
+        final_cols = base_cols + [c for c in cov_cols if c not in base_cols]
+        final_cols = [c for c in final_cols if c in df_construct.columns]
+        
         df_final = df_construct[final_cols]
-        df_final = df_final.drop_duplicates(subset=['id', 'item'])
-        filename = f"moral_absolutism_goyal_2025_{study_id}_{construct.lower()}.csv"
+        df_final = df_final.drop_duplicates(subset=['id', 'study', 'item'])
+        
+        filename = f"moral_absolutism_goyal_2025_{construct.lower()}.csv"
         output_name = os.path.join(output_dir, filename)
         
         df_final.to_csv(output_name, index=False)
-        
-    print(f"Processing complete for {input_file}.")
+        print(f"Saved: {filename} (Merged studies: {', '.join(valid_studies.tolist())})")
 
 if __name__ == "__main__":
-
     files_to_process = [
         'raw_data/Study 3 Data.sav',
         'raw_data/Study 4 Data Experimental NFC.sav',
@@ -250,8 +284,4 @@ if __name__ == "__main__":
         'raw_data/Study 9 Data.sav'
     ]
     
-    for file in files_to_process:
-        if os.path.exists(file):
-            process_to_irw_constructs(file)
-        else:
-            print(f"File '{file}' not found.")
+    compile_and_save_constructs(files_to_process)
