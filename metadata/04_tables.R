@@ -70,6 +70,8 @@ z<-x[n<4,]
 tmp<-z[,-6] ##no tag
 nn<-rowSums(is.na(tmp))
 zz<-z[nn<4,]
+zz
+
 
 
 
