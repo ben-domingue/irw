@@ -111,29 +111,6 @@ generate_bibtex <- function(df) {
   return(df)
 }
 
-dbs<-list(
-    core=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
-              user="bdomingu",
-              dataset="irw_meta:bdxt:latest",
-              table="biblio:qahg",
-              file.out="biblio.csv"),
-    comps=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
-              user="bdomingu",
-              dataset="irw_meta:bdxt:latest",
-              table="comps_biblio:w8pz",
-              file.out="comps_biblio.csv"),
-    nom=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
-             user="bdomingu",
-             dataset="irw_meta:bdxt:latest",
-             table="nominal_biblio:vphd",
-             file.out="nominal_biblio.csv"),
-    sim=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
-             user="bdomingu",
-             dataset="irw_meta:bdxt:latest",
-             table="simsyn_biblio:pm9v",
-             file.out="simsyn_biblio.csv")
-)
-
 getrows<-function(l) {
     for (i in 1:length(l)) assign(names(l)[i],l[[i]])
     ## Read the current biblio file
@@ -166,6 +143,30 @@ getrows<-function(l) {
                      "Derived_License", "Description", "BibTex")]
     readr::write_csv(biblio, file.out)
 }
+
+
+dbs<-list(
+    core=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
+              user="bdomingu",
+              dataset="irw_meta:bdxt:latest",
+              table="biblio:qahg",
+              file.out="biblio.csv"),
+    comps=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
+              user="bdomingu",
+              dataset="irw_meta:bdxt:latest",
+              table="comps_biblio:w8pz",
+              file.out="comps_biblio.csv"),
+    nom=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
+             user="bdomingu",
+             dataset="irw_meta:bdxt:latest",
+             table="nominal_biblio:vphd",
+             file.out="nominal_biblio.csv"),
+    sim=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
+             user="bdomingu",
+             dataset="irw_meta:bdxt:latest",
+             table="simsyn_biblio:pm9v",
+             file.out="simsyn_biblio.csv")
+)
 
 for (i in 1:length(dbs)) {
     print(i)
