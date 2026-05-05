@@ -1,16 +1,20 @@
+remove<-NULL #c('')
+
 ##all tables
 lt<-irw::irw_list_itemtext_tables()
+lt<-lt[!lt %in% remove]
 
 ##tables with data already
 library(redivis)
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt")
-table <- dataset$table("itemtext_metadata:drat")
+dataset <- user$dataset("irw_meta")
+table <- dataset$table("itemtext_metadata")
 xxx <- table$to_tibble()
 
 ##tables.new will need to be processed
 tables.new<-lt[!lt %in% xxx$table]
 merge.old<-as.data.frame(xxx)
+
 
 ################################################
 ##processing tables.new
@@ -27,21 +31,49 @@ for (ii in 1:length(tables.new)) {
     l<-strsplit(z,' ')
     nw<-sapply(l,length)
     nc<-sapply(z,nchar)
-    nc.option<-sapply(items$option_text,nchar)
-    L[[tab]]<-data.frame(table=tab,instrument=items$instrument,item=items$item,nw=nw,nc=nc,nc.option=nc.option)
+    nc.option<-rep(NA,length(nc))
+    if ("option_text" %in% names(items)) nc.option<-sapply(items$option_text,nchar)
+    instrument<-rep(NA,length(nc))
+    if ("instrument" %in% names(items)) instrument<-items$instrument
+    L[[tab]]<-data.frame(table=tab,instrument=instrument,item=items$item,item_text=z,nw=nw,nc=nc,nc.option=nc.option)
 }
-df<-data.frame(do.call("rbind",L))
+
+save(L,file="items_alltext.Rdata")
 
 f<-function(x) {
     mnw<-mean(x$nw)
     mnc<-mean(x$nc)
-    data.frame(table=unique(x$table),mean_word=mnw,mean_char=mnc)
+    if ('instrument' %in% names(x)) instrument<-unique(x$instrument) else instrument<-NA
+    if ('nc.option' %in% names(x)) nco<-mean(x$nc.option) else nco<-NA
+    data.frame(table=unique(x$table),instrument=unique(x$instrument),mean_word=mnw,mean_character=mnc,mean_character_responses=nco)
 }
 z<-lapply(L,f)
 z<-data.frame(do.call("rbind",z))
+
+##get flesch-kincaid
+load("items_alltext.Rdata")
+library(koRpus)
+library(koRpus.lang.en)
+rdb<-list()
+for (i in 1:length(L)) {
+    df<-L[[i]]
+    write.table(df$item_text,file="/tmp/text.txt",row.names=FALSE,quote=FALSE)
+    zz<-tokenize(
+        "/tmp/text.txt",
+        lang="en",
+        doc_id="sample")
+    hy<-hyphen(zz)
+    rdb[[names(L)[i] ]]<-readability(zz, hyphen=hy,index="Flesch.Kincaid")
+}
+fk<-sapply(rdb,function(x) x@Flesch.Kincaid$age)
+fk<-data.frame(table=names(fk),FleschKincaid.age=fk)
+z<-merge(z,fk)
+
+
 merge.new<-z
 
-merge.old$sample<-merge.old$construct<-NULL
 df<-data.frame(rbind(merge.new,merge.old[,names(merge.new)]))
 
-save(z,file="descriptives.Rdata")
+write.csv(df,file="itemtext_metadata.csv",quote=TRUE,row.names=FALSE)
+
+
