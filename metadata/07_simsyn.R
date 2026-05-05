@@ -5,7 +5,7 @@
 ##tables from last version of metadata
 library(redivis)
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:latest")
+dataset <- user$dataset("irw_meta")
 table <- dataset$table("simsyn_metadata")
 meta <- table$to_tibble()
 meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
@@ -251,7 +251,7 @@ write.csv(summaries,'simsyn_metadata.csv',quote=FALSE,row.names=FALSE)
 
 ## # Read the current biblio file
 ## user <- redivis$user("bdomingu")
-## dataset <- user$dataset("irw_meta:bdxt:latest")
+## dataset <- user$dataset("irw_meta")
 ## biblio_table <- dataset$table("simsyn_biblio:qahg")
 ## biblio <- biblio_table$to_tibble()
 ## head(biblio)

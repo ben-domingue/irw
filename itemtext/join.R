@@ -1,4 +1,7 @@
-table<-'alcoholresearch_sumscore'
+# Usage: Rscript join.R <table_name>
+# e.g.:  Rscript join.R alcoholresearch_sumscore
+args <- commandArgs(trailingOnly=TRUE)
+table <- if (length(args) >= 1) args[1] else 'alcoholresearch_sumscore'
 
 library(gsheet)
 tabs <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0')
@@ -29,4 +32,7 @@ test2<-all(i2 %in% i1)
 test1 & test2
 
 write.csv(items,file=paste(table,"__items.csv",sep=''),row.names=FALSE)
+
+print(i1)
+print(i2)
 

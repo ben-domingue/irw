@@ -4,7 +4,7 @@
 ##tables from last version of metadata
 library(redivis)
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:latest")
+dataset <- user$dataset("irw_meta")
 table <- dataset$table("nominal_metadata")
 meta <- table$to_tibble()
 ##update## meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 

@@ -4,8 +4,8 @@
 ##tables from last version of metadata
 library(redivis)
 user <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta:bdxt:latest")
-table <- dataset$table("comps_metadata:h5gs")
+dataset <- user$dataset("irw_meta")
+table <- dataset$table("comps_metadata")
 meta <- table$to_tibble()
 meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
               "n_items", "responses_per_participant", "responses_per_item", 
@@ -16,7 +16,7 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("irw_competitions:cmd7")) {
+for (dataset in c("irw_competitions")) {
      v1<- redivis$organization("bdomingu")$dataset(dataset)
      tabs<-v1$list_tables()
      new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
