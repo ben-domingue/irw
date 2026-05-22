@@ -1,3 +1,7 @@
+# Install the development version of irw from GitHub
+devtools::install_github("itemresponsewarehouse/Rpkg")
+
+
 library(irw)
 df<-irw_fetch("DART_Brysbaert_2020_1")
 
@@ -34,19 +38,7 @@ diff<-diff[order(diff[,2]),]
 head(diff) #easiest items
 tail(diff) #hardest items
 
-##for fun
-## tam.model<-TAM::tam(resp[,-1])
-## tam.diff<-tam.model$xsi$xsi
-## erm.model<-eRm::RM(resp[,-1])
-## erm.diff<-erm.model$betapar
-
-## plot(data.frame(mirt.diff=co$item[,2],tam.diff=tam.diff,erm.diff=erm.diff))
-
-#################################################################################################
-##BLOCK D
-fitstat<-itemfit(m,'infit')
-sd(fitstat$outfit)
-sqrt(2/nrow(resp))
+plot(m,type='trace')
 
 #################################################################################################
 ##BLOCK E
