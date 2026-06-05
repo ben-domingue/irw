@@ -2,12 +2,15 @@
 
 ## Quick start
 
+The pipeline has two independent steps you can run at any time.
+
+### Step 1 — Find and triage candidates
+
 ```bash
 # 0. One-time / periodic: refresh what's already in the IRW
-#    (run in R whenever you want an up-to-date exclusion list)
 Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
 
-# 1. Find candidates — automatically excludes irw_metadata.csv and irw_queued.csv
+# 1. Find candidates (auto-excludes IRW metadata + queue sheet)
 python irw_discover_updated.py "PHQ-9 questionnaire" "reading assessment" --out candidates.csv
 
 # 2. Test on 10 rows first
@@ -18,12 +21,21 @@ python irw_batch_updated.py candidates.csv --out triage.csv
 python irw_batch_updated.py candidates.csv --out triage.csv --resume
 
 # 4. Open triage.csv; work 'good' rows first, then 'human_assistance'
-
-# 5. For each dataset you decide to process, add a row to the queue sheet:
+#    For each dataset you want to process, add a row to the queue sheet:
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
 #    (columns: doi, title, source, url)
-#    Future discovery runs will automatically exclude it.
 ```
+
+### Step 2 — Process the queue
+
+```bash
+# Downloads, standardizes, and saves each queued dataset.
+# Safe to re-run: already-processed DOIs are skipped automatically.
+python irw_process_queue.py
+```
+
+Output lands in `irw_output/queue/<doi>.csv` — one IRW-formatted file per dataset,
+ready to review and submit.
 
 ### The two exclusion sources
 
@@ -118,6 +130,17 @@ run is safe to interrupt. Converted tables are saved under `irw_output/good/` an
 --limit <n>    process only the first N rows (use this to test)
 --resume       continue from the checkpoint
 --out <path>   output path (default: irw_triage_summary.csv)
+```
+
+### `irw_process_queue.py` — process queued datasets
+
+Reads the [processing queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit),
+downloads each dataset, standardizes it to IRW format, and saves the output.
+Skips any DOI whose output file already exists — safe to re-run after adding new
+rows to the sheet.
+
+```
+--out-dir <path>   output directory (default: irw_output/queue)
 ```
 
 ### `irw_triage_updated.py` — evaluate one file
