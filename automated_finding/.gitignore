@@ -18,5 +18,3 @@ test_*.csv
 # Python
 __pycache__/
 *.pyc
-
-# irw_queued.csv is intentionally tracked — it's the processing queue

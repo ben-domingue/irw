@@ -19,26 +19,22 @@ python irw_batch_updated.py candidates.csv --out triage.csv --resume
 
 # 4. Open triage.csv; work 'good' rows first, then 'human_assistance'
 
-# 5. For each dataset you decide to process, add its DOI to irw_queued.csv
-#    so it won't appear in future discovery runs while you're working on it
+# 5. For each dataset you decide to process, add a row to the queue sheet:
+#    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
+#    (columns: doi, title, source, url)
+#    Future discovery runs will automatically exclude it.
 ```
 
-### The two exclusion files
+### The two exclusion sources
 
-| File | What it contains | How to update |
+| Source | What it contains | How to update |
 |---|---|---|
-| `irw_metadata.csv` | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` — run periodically |
-| `irw_queued.csv` | DOIs you've decided to process but haven't landed yet | Add rows manually as you work the triage output |
+| `irw_metadata.csv` (local file) | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` — run periodically |
+| [Processing queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | DOIs decided for processing but not yet landed | Edit the sheet directly — must stay shared "anyone with link can view" |
 
-Both are read automatically from the working directory — no flags needed. Once a dataset lands in the IRW, its DOI will appear in `irw_metadata.csv` on the next refresh and can be removed from `irw_queued.csv`.
+Both are loaded automatically at startup — no flags needed. `irw_metadata.csv` is read from the working directory if present; the sheet is fetched over the network (a warning is printed if it can't be reached, and the run continues without it).
 
-`irw_queued.csv` just needs a `doi` column (or any column — the loader extracts DOI-shaped tokens from any CSV column):
-
-```
-doi
-10.7910/dvn/taisb2
-10.6084/m9.figshare.25039721.v1
-```
+Once a dataset lands in the IRW, its DOI will appear in `irw_metadata.csv` on the next refresh and can be removed from the queue sheet.
 
 ---
 

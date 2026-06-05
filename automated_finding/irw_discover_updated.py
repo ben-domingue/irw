@@ -17,8 +17,9 @@ Three things this does that a naive search doesn't:
 To keep irw_metadata.csv current, regenerate it from R periodically:
     library(irw); write.csv(irw_metadata(), "irw_metadata.csv")
 
-irw_queued.csv is maintained manually: add one DOI per row as you decide to
-process candidates from the triage output, so they stop appearing in future runs.
+The processing queue is a Google Sheet maintained manually — add a row whenever
+you decide to process a candidate from the triage output. Future discovery runs
+will fetch the sheet and exclude those DOIs automatically.
 
 Run:
     python irw_discover_updated.py "self-efficacy scale" "reading assessment"
@@ -304,10 +305,14 @@ SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare]
 # ---------------------------------------------------------------------------
 
 IRW_METADATA_FILE = "irw_metadata.csv"   # already in the IRW — refresh with:
-IRW_QUEUED_FILE   = "irw_queued.csv"    #   Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
-                                        # irw_queued.csv: DOIs you've decided to
-                                        # process but haven't landed yet; maintain
-                                        # manually as you work the triage output.
+                                        #   Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
+
+# Processing queue: DOIs decided for processing but not yet landed in the IRW.
+# Managed manually in this Google Sheet (must be shared "anyone with link can view"):
+QUEUE_SHEET_URL = (
+    "https://docs.google.com/spreadsheets/d/"
+    "1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/export?format=csv&gid=0"
+)
 
 
 def load_exclusions(path: str) -> set:
@@ -322,11 +327,29 @@ def load_exclusions(path: str) -> set:
     return excl
 
 
+def _load_queued_from_sheet() -> set:
+    """Fetch queued DOIs from the IRW processing queue Google Sheet."""
+    try:
+        r = requests.get(QUEUE_SHEET_URL, timeout=15)
+        r.raise_for_status()
+        dois = set()
+        for row in csv.reader(r.text.splitlines()):
+            for cell in row:
+                d = norm_doi(cell)
+                if "/" in d and d.count(" ") == 0:
+                    dois.add(d)
+        return dois
+    except Exception as e:
+        print(f"[warn] Could not fetch processing queue from Google Sheet: {e}",
+              file=sys.stderr)
+        return set()
+
+
 def _load_auto_exclusions() -> tuple[set, set]:
-    """Load irw_metadata.csv and irw_queued.csv from the working directory if
-    they exist. Returns (irw_dois, queued_dois)."""
+    """Load irw_metadata.csv (local) and the queue Google Sheet. Returns
+    (irw_dois, queued_dois)."""
     irw_dois    = load_exclusions(IRW_METADATA_FILE) if os.path.exists(IRW_METADATA_FILE) else set()
-    queued_dois = load_exclusions(IRW_QUEUED_FILE)   if os.path.exists(IRW_QUEUED_FILE)   else set()
+    queued_dois = _load_queued_from_sheet()
     return irw_dois, queued_dois
 
 
@@ -366,7 +389,7 @@ def main():
         print(f"[note] {IRW_METADATA_FILE} not found — not excluding known IRW datasets.")
         print(f"       Regenerate with: Rscript -e \"library(irw); write.csv(irw_metadata(), '{IRW_METADATA_FILE}')\"")
     if queued_dois:
-        print(f"Excluding {len(queued_dois):,} DOIs already queued for processing  ({IRW_QUEUED_FILE})")
+        print(f"Excluding {len(queued_dois):,} DOIs already queued for processing  (Google Sheet)")
     print()
 
     hits = discover(queries, exclude, relevance_on=not args.all)
