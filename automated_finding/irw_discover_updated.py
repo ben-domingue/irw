@@ -130,6 +130,16 @@ _RE_STRONG     = _matcher(STRONG_TERMS)
 _RE_CONSTRUCT  = _matcher(CONSTRUCT_TERMS)
 _RE_EXCLUDE    = _matcher(EXCLUDE_TERMS)
 
+# Supplementary-file titles: journal papers upload individual tables, figures,
+# and data sheets as repository items. These are never standalone datasets and
+# reliably have no downloadable tabular file. Block them unconditionally.
+_RE_SUPPLEMENTARY = re.compile(
+    r"^(?:table\s+\d+[_\s]|data\s+sheet\s+\d+[_\s]|"
+    r"supplementary\s+(?:file|material|table|figure|data)\b|"
+    r"figure\s+\d+[_\s]|appendix\s*\d*[_:\s])",
+    re.IGNORECASE
+)
+
 
 @dataclass
 class Hit:
@@ -152,15 +162,23 @@ def norm_doi(s: str) -> str:
 def is_relevant(h: Hit, enabled: bool) -> bool:
     """Relevant if the title names an instrument, or carries a strong/construct
     signal — and isn't clinical/epi study language. Word-boundary matched so
-    short acronyms don't match inside other words. Ambiguous words don't pass."""
+    short acronyms don't match inside other words. Ambiguous words don't pass.
+    Named instruments override the exclusion gate: a validation study of the
+    PHQ-9 in a clinical cohort still has the item-response data we want."""
     if not enabled:
         return True
-    text = h.title.lower()
-    if _RE_EXCLUDE.search(text):                  # epi/medical study -> block
+    # Supplementary file naming convention — never a standalone dataset, always
+    # blocked regardless of content or instrument mentions.
+    if _RE_SUPPLEMENTARY.search(h.title):
         return False
-    return bool(_RE_INSTRUMENT.search(text) or
-                _RE_STRONG.search(text) or
-                _RE_CONSTRUCT.search(text))
+    text = h.title.lower()
+    # Named instrument always passes — validation studies have the data.
+    if _RE_INSTRUMENT.search(text):
+        return True
+    # Epi/medical study language blocks everything else.
+    if _RE_EXCLUDE.search(text):
+        return False
+    return bool(_RE_STRONG.search(text) or _RE_CONSTRUCT.search(text))
 
 
 # ---------------------------------------------------------------------------

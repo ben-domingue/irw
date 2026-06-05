@@ -1,0 +1,13 @@
+# Downloaded and converted data — regenerable, potentially large
+irw_output/
+downloads/
+
+# Ephemeral batch run state
+irw_batch_checkpoint.jsonl
+
+# Scratch / test run outputs
+test_*.csv
+
+# Python
+__pycache__/
+*.pyc

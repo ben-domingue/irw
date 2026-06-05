@@ -42,6 +42,10 @@ UA = {"User-Agent": "irw-triage/1.0 (research)"}
 
 IRW_REQUIRED = ["id", "item", "resp"]
 
+PERSON_LEVEL_COLS = {"wave", "treat"}
+ITEM_LEVEL_PREFIXES = ("itemcov_", "qmatrix", "item_family", "rater")
+RESPONSE_LEVEL_COLS = {"rt", "date"}
+
 
 # ---------------------------------------------------------------------------
 # 1. DOWNLOAD
@@ -83,6 +87,7 @@ class Coercion:
     confidence: str            # "high" | "low"
     method: str                # how the guess was made
     notes: list = field(default_factory=list)
+    original_cols: list = field(default_factory=list)  # wide source columns, for QC
 
 
 def _looks_like_id(series: pd.Series, n_rows: int) -> bool:
@@ -101,50 +106,103 @@ def _ordinalish(series: pd.Series) -> bool:
 
 def coerce_to_irw(df: pd.DataFrame) -> Coercion:
     cols = {c.lower(): c for c in df.columns}
+    orig_cols = list(df.columns)
 
     # Case A: already in IRW long format -> trust it.
     if all(k in cols for k in IRW_REQUIRED):
         out = df.rename(columns={cols["id"]: "id", cols["item"]: "item",
                                  cols["resp"]: "resp"})
         return Coercion(out, "high", "already-long",
-                        ["File already has id/item/resp columns."])
+                        ["File already has id/item/resp columns."], orig_cols)
 
     # Case B: wide matrix (person rows x item columns) -> melt.
     n = len(df)
-    # candidate id column: first column that looks like an identifier
+    notes = []
+
+    # Candidate id column: first that looks like an identifier.
     id_col = None
+    id_fallback = False
     for c in df.columns:
         if _looks_like_id(df[c], n) and not pd.api.types.is_float_dtype(df[c]):
             id_col = c
             break
     if id_col is None:
-        id_col = df.columns[0]  # fall back to first column
+        id_col = df.columns[0]
+        id_fallback = True
+        notes.append(
+            f"No column met the id heuristic (≥50% unique, non-float); "
+            f"used first column '{id_col}' as fallback — verify this is the "
+            "person identifier."
+        )
 
-    item_cols = [c for c in df.columns if c != id_col and _ordinalish(df[c])]
+    # Detect trial_* columns — signals trials-based data that can't be melted.
+    trial_cols = [c for c in df.columns if c.lower().startswith("trial_")]
+    if trial_cols:
+        notes.append(
+            f"Detected trial_* columns ({trial_cols[:4]}). This may be "
+            "trials-based data (IRW standard §Trials). The item column will be "
+            "uninformative; trial_ columns carry the probe information. "
+            "Manual mapping required."
+        )
+        return Coercion(None, "low", "unresolved", notes, orig_cols)
 
-    notes = []
+    # Classify non-id columns by their role in the melt.
+    person_cols = [c for c in df.columns
+                   if c != id_col
+                   and (c in PERSON_LEVEL_COLS or c.startswith("cov_"))]
+    item_level_cols = [c for c in df.columns
+                       if any(c.startswith(p) for p in ITEM_LEVEL_PREFIXES)]
+    response_level_present = [c for c in df.columns if c in RESPONSE_LEVEL_COLS]
+
+    # Option A: bail out if response-level columns exist in a wide file —
+    # one rt/date value per person is structurally ambiguous after melting.
+    if response_level_present:
+        notes.append(
+            f"Wide source file contains response-level column(s) "
+            f"{response_level_present} — cannot safely melt. "
+            "Manual mapping required."
+        )
+        return Coercion(None, "low", "unresolved", notes, orig_cols)
+
+    protected = set([id_col] + person_cols)
+    excluded_from_items = protected | set(item_level_cols)
+    item_cols = [c for c in df.columns
+                 if c not in excluded_from_items and _ordinalish(df[c])]
+
     if len(item_cols) >= 2:
-        long = df.melt(id_vars=[id_col], value_vars=item_cols,
+        long = df.melt(id_vars=[id_col] + person_cols, value_vars=item_cols,
                        var_name="item", value_name="resp")
         long = long.rename(columns={id_col: "id"})
         long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
         long = long.dropna(subset=["resp"]).reset_index(drop=True)
 
-        # Was the id guess shaky? Then confidence is low.
-        confident = _looks_like_id(df[id_col], n)
+        if person_cols:
+            notes.append(
+                f"Protected person-level columns (carried through melt): "
+                f"{person_cols}."
+            )
+        if item_level_cols:
+            notes.append(
+                f"Item-level columns excluded from melt (verify alignment): "
+                f"{item_level_cols}."
+            )
         notes.append(f"Guessed person column: '{id_col}'.")
         notes.append(f"Guessed {len(item_cols)} item columns: "
                      f"{item_cols[:6]}{'...' if len(item_cols) > 6 else ''}.")
-        # Heuristic can't verify responses are *consistently* coded / ordinal.
         notes.append("VERIFY: are responses ordinal & consistently coded "
                      "(higher = stronger) within each item?")
-        return Coercion(long, "high" if confident else "low",
-                        "wide-to-long", notes)
+
+        # P0 fix #2: fallback forces low confidence regardless of heuristic result.
+        if id_fallback:
+            confidence = "low"
+        else:
+            confidence = "high" if _looks_like_id(df[id_col], n) else "low"
+        return Coercion(long, confidence, "wide-to-long", notes, orig_cols)
 
     # Case C: can't tell -> hand off.
     notes.append("Could not confidently identify item columns.")
     notes.append(f"Columns present: {list(df.columns)}")
-    return Coercion(None, "low", "unresolved", notes)
+    return Coercion(None, "low", "unresolved", notes, orig_cols)
 
 
 # ---------------------------------------------------------------------------
@@ -181,11 +239,13 @@ class Check:
     detail: str
 
 
-def run_qc(df: pd.DataFrame) -> list:
+def run_qc(df: pd.DataFrame, coercion_method: str = "",
+           original_cols: list = None) -> list:
     """QC checks. The first block is ported directly from the IRW's official
     validate_irw.R (statuses: pass=OK, warn=NOTE, fail=ERROR). The second block
     is extra heuristics we add on top, clearly labelled."""
     checks = []
+    original_cols = original_cols or []
 
     # ===== ported from validate_irw.R =====================================
 
@@ -253,12 +313,93 @@ def run_qc(df: pd.DataFrame) -> list:
                             f"{ncat} distinct resp values — confirm continuous, "
                             "not mis-parsed"))
 
+    # P1 #3: resp coding direction — can't auto-verify; always warn after melt.
+    if coercion_method == "wide-to-long":
+        checks.append(Check(
+            "resp_direction*", "warn",
+            "Cannot auto-verify: within each item, higher resp values must "
+            "indicate more of the construct (IRW standard). Confirm no "
+            "unreversed items."
+        ))
+
+    # P1 #4: imputed values — column name signals and mean-imputation signature.
+    if original_cols:
+        imputed_signals = [c for c in original_cols
+                           if re.search(r"_imp(?:uted)?$|_filled$|_flag$", c,
+                                        re.I)]
+        if imputed_signals:
+            checks.append(Check("imputed_values*", "warn",
+                                f"Columns suggest imputed values may be present: "
+                                f"{imputed_signals}. IRW requires their removal."))
+    # Mean-imputation signature: any item where one value accounts for >60% of rows.
+    if resp_num.notna().any():
+        by_item = df.groupby("item")["resp"]
+        for item_name, grp in by_item:
+            vc = grp.value_counts(normalize=True)
+            if not vc.empty and vc.iloc[0] > 0.60:
+                checks.append(Check("imputed_values*", "warn",
+                                    f"Item '{item_name}' has one resp value "
+                                    f"accounting for {vc.iloc[0]:.0%} of responses "
+                                    "— possible mean imputation."))
+                break  # one warning is enough
+
+    # P1 #5: date column validation.
+    if "date" in df.columns:
+        d = pd.to_numeric(df["date"], errors="coerce")
+        if d.isna().mean() > 0.1:
+            checks.append(Check("date_numeric*", "warn",
+                                "date column is not numeric — IRW requires Unix "
+                                "seconds (or seconds since first observation)"))
+        elif d.notna().any() and d.max() < 1e8:
+            checks.append(Check("date_range*", "warn",
+                                f"date max={d.max():.0f} — looks too small for "
+                                "Unix seconds; verify units"))
+
+    # P1 #6: rt column validation.
+    if "rt" in df.columns:
+        rt = pd.to_numeric(df["rt"], errors="coerce")
+        if rt.isna().mean() > 0.1:
+            checks.append(Check("rt_numeric*", "warn",
+                                "rt column is not numeric"))
+        elif rt.notna().any():
+            if rt.median() > 60000:
+                checks.append(Check("rt_units*", "warn",
+                                    f"rt median={rt.median():.0f} — likely "
+                                    "milliseconds, not seconds (IRW requires "
+                                    "seconds)"))
+            if (rt < 0).any():
+                checks.append(Check("rt_negative*", "warn",
+                                    "rt has negative values"))
+
     # treat column should be 0/1 if present
     if "treat" in df.columns:
         bad = set(pd.unique(df["treat"].dropna())) - {0, 1}
         if bad:
             checks.append(Check("treat_binary*", "warn",
                                 f"treat has non-0/1 values {sorted(bad)[:5]}"))
+
+    # P2 #7: item-level columns dropped during melt — remind user to verify.
+    if original_cols and coercion_method == "wide-to-long":
+        item_level_found = [c for c in original_cols
+                            if any(c.startswith(p) for p in ITEM_LEVEL_PREFIXES)]
+        if item_level_found:
+            checks.append(Check("item_level_cols*", "warn",
+                                f"Item-level columns {item_level_found} were "
+                                "excluded from the melt — verify they are "
+                                "correctly aligned after conversion."))
+
+    # P2 #7: multi-scale detection — distinct item-name prefixes suggest separate
+    # scales that must be split into separate files.
+    if "item" in df.columns:
+        prefixes = [re.split(r"[\d_]", str(i))[0].lower()
+                    for i in df["item"].unique() if str(i)]
+        prefix_counts = pd.Series(prefixes).value_counts()
+        dominant = prefix_counts[prefix_counts >= 3]
+        if len(dominant) >= 2:
+            checks.append(Check("multi_scale*", "warn",
+                                f"Item names suggest {len(dominant)} subscales "
+                                f"({list(dominant.index)[:4]}) — IRW requires "
+                                "separate files per scale."))
 
     # IRW's own density signal — very sparse data is worth a look
     meta = irw_metadata(df)
@@ -330,6 +471,13 @@ def looks_like_item_response(df: pd.DataFrame) -> tuple:
     if len(resp) and resp.nunique() / len(resp) > 0.6:
         soft.append(f"{resp.nunique()/len(resp):.0%} of responses are unique "
                     "(real items reuse a small scale; this looks like a results table)")
+    # Non-integer resp values signal continuous measurements (loadings, correlations,
+    # proportions) rather than ordinal item responses, which are almost always integers.
+    if resp.notna().any():
+        non_int_frac = (resp.dropna() % 1 != 0).mean()
+        if non_int_frac > 0.5:
+            soft.append(f"{non_int_frac:.0%} of resp values are non-integer — "
+                        "ordinal item responses are almost always integer-valued")
 
     is_ir = not hard and len(soft) < 2
     if hard:
@@ -349,7 +497,7 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
         return Triage("human_assistance", reasons + coerce.notes,
                       coerce, [], None)
 
-    checks = run_qc(coerce.df)
+    checks = run_qc(coerce.df, coerce.method, coerce.original_cols)
     meta = irw_metadata(coerce.df)
 
     # Content gate: does this even look like item-response data?
@@ -372,11 +520,17 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
 
     # Decision (matching the validator's ERROR vs NOTE semantics):
     #   hard ERROR or shaky mapping -> needs a human
+    #   resp_ordinal* on wide-to-long -> needs a human (likely aggregate scores)
     #   only soft NOTEs             -> still 'good', notes listed for a glance
+    ordinal_warn = any(c.name == "resp_ordinal*" for c in warns)
     if fails:
         flag = "human_assistance"
     elif coerce.confidence == "low":
         flag = "human_assistance"
+    elif ordinal_warn and coerce.method == "wide-to-long":
+        flag = "human_assistance"
+        reasons.insert(0, "resp has >50 unique values after wide-to-long melt — "
+                          "likely continuous/aggregate data, not ordinal item responses.")
     else:
         flag = "good"
         if warns:

@@ -46,7 +46,7 @@ from urllib.parse import urlparse
 import requests
 import pandas as pd
 
-from irw_triage import load_table, triage_dataset, irw_metadata
+from irw_triage_updated import load_table, triage_dataset, irw_metadata
 
 UA = {"User-Agent": "irw-batch/1.0 (research; contact your-email)"}
 TABULAR_EXT = (".csv", ".tsv", ".xlsx", ".xls")
@@ -135,6 +135,21 @@ def _dataverse_files(url: str, doi: str) -> list:
     return out
 
 
+def _osf_files(url: str) -> list:
+    node_id = [s for s in url.rstrip("/").split("/") if s][-1]
+    r = requests.get(
+        f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
+        headers=UA, timeout=30)
+    r.raise_for_status()
+    out = []
+    for f in r.json().get("data", []):
+        name = f.get("attributes", {}).get("name", "")
+        dl = f.get("links", {}).get("download", "")
+        if name.lower().endswith(TABULAR_EXT) and dl:
+            out.append((dl, name))
+    return out
+
+
 def resolve_data_files(row: dict) -> list:
     """Dispatch to the right repository resolver. Returns [(file_url, name)]."""
     src = (row.get("source") or "").lower()
@@ -149,9 +164,11 @@ def resolve_data_files(row: dict) -> list:
             return _dryad_files(doi)
         if src == "dataverse":
             return _dataverse_files(url, doi)
+        if src == "osf":
+            return _osf_files(url)
     except Exception:
         return []      # treated as no_usable_file by caller
-    return []          # osf + unknown sources: not auto-resolvable yet
+    return []          # unknown sources: not auto-resolvable
 
 
 # ---------------------------------------------------------------------------
