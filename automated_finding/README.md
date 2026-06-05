@@ -65,7 +65,6 @@ Once a dataset lands in the IRW, its DOI will appear in `irw_metadata.csv` on th
 | `n_responses` | Total non-NA rows |
 | `density` | IRW density metric: `(√n_resp / n_part) × (√n_resp / n_item)` — 1.0 = complete matrix |
 | `data_file` | Filename of the tabular file that was downloaded and triaged |
-| `irw_file` | Path to the saved best-guess IRW-formatted CSV (empty if flag is `no_usable_file` etc.) |
 | `n_other_files` | How many additional tabular files the landing page had (0 = only one; >0 = multi-file dataset, needs a human) |
 
 ### Flag values
@@ -123,8 +122,9 @@ file N_…`) are blocked unconditionally — they are never standalone datasets.
 Resolves each landing-page URL to actual data files (Zenodo, Figshare, Dryad,
 Dataverse, OSF all supported), downloads the first tabular file, and runs
 `irw_triage_updated.py` on it. Results are checkpointed after every row so the
-run is safe to interrupt. Converted tables are saved under `irw_output/good/` and
-`irw_output/human_assistance/`.
+run is safe to interrupt. No files are saved to disk — this step is for triage
+only. Use `irw_process_queue.py` to download and standardize the datasets you
+decide to process.
 
 ```
 --limit <n>    process only the first N rows (use this to test)

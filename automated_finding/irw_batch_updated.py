@@ -192,24 +192,6 @@ def polite_get(url: str) -> requests.Response:
 # Process one candidate
 # ---------------------------------------------------------------------------
 
-def _safe_name(row: dict, fname: str) -> str:
-    """A filename that traces back to its source dataset."""
-    src = (row.get("source") or "src").lower()
-    doi = (row.get("doi") or "").replace("/", "_")
-    stem = doi or re.sub(r"\W+", "_", (row.get("title") or "untitled"))[:50]
-    return f"{src}__{stem}.csv"
-
-
-def save_converted(df, row: dict, fname: str, flag: str,
-                   out_root: str = "irw_output") -> str:
-    """Write a converted IRW-format table into a per-flag folder. Returns path."""
-    folder = os.path.join(out_root, flag)          # irw_output/good, .../human_assistance
-    os.makedirs(folder, exist_ok=True)
-    path = os.path.join(folder, _safe_name(row, fname))
-    df.to_csv(path, index=False)
-    return path
-
-
 def process_one(row: dict) -> dict:
     base = {"source": row.get("source", ""), "title": row.get("title", ""),
             "url": row.get("url", ""), "doi": row.get("doi", "")}
@@ -234,10 +216,6 @@ def process_one(row: dict) -> dict:
     try:
         t = triage_dataset(df)
         meta = t.metadata or {}
-        saved_path = ""
-        # Keep the converted table whenever we actually produced one.
-        if t.flag in ("good", "human_assistance") and t.coercion.df is not None:
-            saved_path = save_converted(t.coercion.df, row, fname, t.flag)
         return {**base, "flag": t.flag,
                 "reasons": " | ".join(t.reasons)[:400],
                 "n_responses": meta.get("n_responses", ""),
@@ -245,7 +223,6 @@ def process_one(row: dict) -> dict:
                 "n_items": meta.get("n_items", ""),
                 "density": meta.get("density", ""),
                 "data_file": fname,
-                "irw_file": saved_path,
                 "n_other_files": len(files) - 1}
     except Exception as e:
         return {**base, "flag": "error", "reasons": str(e)[:200],
@@ -338,9 +315,9 @@ def main():
         if flag in counts:
             print(f"  {flag:18} {counts[flag]}")
     print(f"\nFull summary -> {args.out}")
-    print("Converted tables saved under irw_output/good/ and "
-          "irw_output/human_assistance/")
     print("Work the 'good' rows first; they're sorted to the top.")
+    print("Add candidates you want to process to the queue sheet,")
+    print("then run irw_process_queue.py.")
 
 
 if __name__ == "__main__":
