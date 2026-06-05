@@ -304,27 +304,12 @@ SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare]
 # Orchestration
 # ---------------------------------------------------------------------------
 
-IRW_METADATA_FILE = "irw_metadata.csv"   # already in the IRW — refresh with:
-                                        #   Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
-
 # Processing queue: DOIs decided for processing but not yet landed in the IRW.
 # Managed manually in this Google Sheet (must be shared "anyone with link can view"):
 QUEUE_SHEET_URL = (
     "https://docs.google.com/spreadsheets/d/"
     "1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/export?format=csv&gid=0"
 )
-
-
-def load_exclusions(path: str) -> set:
-    """Pull every DOI-looking token out of any column of a CSV."""
-    excl = set()
-    with open(path, newline="", encoding="utf-8") as f:
-        for row in csv.reader(f):
-            for cell in row:
-                d = norm_doi(cell)
-                if "/" in d and d.count(" ") == 0:
-                    excl.add(d)
-    return excl
 
 
 def _load_queued_from_sheet() -> set:
@@ -345,12 +330,9 @@ def _load_queued_from_sheet() -> set:
         return set()
 
 
-def _load_auto_exclusions() -> tuple[set, set]:
-    """Load irw_metadata.csv (local) and the queue Google Sheet. Returns
-    (irw_dois, queued_dois)."""
-    irw_dois    = load_exclusions(IRW_METADATA_FILE) if os.path.exists(IRW_METADATA_FILE) else set()
-    queued_dois = _load_queued_from_sheet()
-    return irw_dois, queued_dois
+def _load_auto_exclusions() -> set:
+    """Load queued DOIs from the Google Sheet. IRW duplicate check happens in Step 2."""
+    return _load_queued_from_sheet()
 
 
 def discover(queries, exclude: set, relevance_on: bool) -> list:
@@ -379,17 +361,12 @@ def main():
 
     queries = args.queries or ["item response theory"]
 
-    # Auto-load both exclusion lists from the working directory.
-    irw_dois, queued_dois = _load_auto_exclusions()
-    exclude = irw_dois | queued_dois
+    queued_dois = _load_auto_exclusions()
+    exclude = queued_dois
 
-    if irw_dois:
-        print(f"Excluding {len(irw_dois):,} DOIs already in the IRW  ({IRW_METADATA_FILE})")
-    else:
-        print(f"[note] {IRW_METADATA_FILE} not found — not excluding known IRW datasets.")
-        print(f"       Regenerate with: Rscript -e \"library(irw); write.csv(irw_metadata(), '{IRW_METADATA_FILE}')\"")
     if queued_dois:
         print(f"Excluding {len(queued_dois):,} DOIs already queued for processing  (Google Sheet)")
+    print(f"[note] IRW duplicate check runs at the start of Step 2 (irw_process_queue.py).")
     print()
 
     hits = discover(queries, exclude, relevance_on=not args.all)

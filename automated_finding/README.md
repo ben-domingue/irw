@@ -119,14 +119,14 @@ tell you exactly what to look for in each file.
 
 ## Keeping the queue current
 
-| Source | What it contains | How to update |
+| Source | When it's checked | What it excludes |
 |---|---|---|
-| `irw_metadata.csv` (local) | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` |
-| [Queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | DOIs in progress | Add rows manually after reviewing triage.csv |
+| [Queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | Step 1 (discovery) | DOIs already queued for processing |
+| Redivis (`bdomingu/irw_meta`) | Step 2 (process queue) | DOIs already in the IRW |
 
-Both are loaded automatically at discovery startup — no flags needed. Once a
-dataset lands in the IRW, its DOI appears in `irw_metadata.csv` on the next
-refresh and can be removed from the queue sheet.
+No local metadata files needed. The Redivis check runs once at the start of
+`irw_process_queue.py` and skips any queued dataset whose DOI already appears
+in the IRW.
 
 ---
 

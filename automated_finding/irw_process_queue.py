@@ -36,6 +36,35 @@ from irw_triage_updated  import load_table, coerce_to_irw, run_qc, irw_metadata,
 from irw_batch_updated   import resolve_data_files, polite_get, TABULAR_EXT
 from irw_discover_updated import QUEUE_SHEET_URL, norm_doi
 
+# Redivis tables that contain DOIs of datasets already in the IRW.
+# Both biblio and metadata tables are scanned; DOI-like tokens are extracted
+# from every cell so the column name doesn't need to be hardcoded.
+_REDIVIS_IRW_TABLES = [
+    "https://redivis.com/workspace/datasets/bdxt-4fqe5tyf4/tables/h5gs-a45yyran0",
+    "https://redivis.com/workspace/datasets/bdxt-4fqe5tyf4/tables/qahg-c3vy0avfz",
+]
+
+
+def _load_redivis_dois() -> set:
+    """Fetch DOIs already in the IRW from Redivis. Returns empty set on failure."""
+    try:
+        import redivis
+        ds = redivis.user("bdomingu").dataset("irw_meta")
+        dois = set()
+        for table in ds.list_tables():
+            df = table.to_dataframe()
+            for col in df.columns:
+                for val in df[col].dropna().astype(str):
+                    d = norm_doi(val)
+                    if "/" in d and " " not in d:
+                        dois.add(d)
+        print(f"Redivis: {len(dois):,} DOIs already in the IRW.")
+        return dois
+    except Exception as e:
+        print(f"[warn] Could not load Redivis IRW metadata: {e}", file=sys.stderr)
+        print(f"       Proceeding without Redivis deduplication.", file=sys.stderr)
+        return set()
+
 UA = {"User-Agent": "irw-process-queue/1.0 (research)"}
 
 
@@ -142,6 +171,9 @@ def main():
 
     os.makedirs(args.out_dir, exist_ok=True)
 
+    irw_dois = _load_redivis_dois()
+    print()
+
     rows = fetch_queue()
     print(f"Queue has {len(rows)} dataset(s).\n")
 
@@ -153,6 +185,12 @@ def main():
 
         if not doi:
             print(f"  [skip] row has no DOI: {row}")
+
+        if doi and doi in irw_dois:
+            print(f"  [skip] {title}")
+            print(f"         already in IRW (Redivis)")
+            skipped += 1
+            continue
             skipped += 1
             continue
 
