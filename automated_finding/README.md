@@ -1,157 +1,193 @@
 # IRW Automated Finding Pipeline
 
-## Quick start
+Automated tools for finding, screening, and standardizing datasets for the IRW.
+The pipeline has **two distinct steps** with different people and cadences in mind.
 
-The pipeline has two independent steps you can run at any time.
+---
 
-### Step 1 — Find and triage candidates
+## Step 1 — Find and triage candidates
+
+**Who:** Anyone with Python and internet access.
+**When:** Periodically, or when targeting a new domain/instrument.
+**Output:** A CSV ranking candidates by how cleanly they map to IRW format.
 
 ```bash
-# 0. One-time / periodic: refresh what's already in the IRW
+# 0. Refresh what's already in the IRW (do this periodically)
 Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
 
-# 1. Find candidates (auto-excludes IRW metadata + queue sheet)
-python irw_discover_updated.py "PHQ-9 questionnaire" "reading assessment" --out candidates.csv
+# 1. Search across repositories (auto-excludes known IRW datasets + queue)
+python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
 
-# 2. Test on 10 rows first
+# 2. Test on 10 rows before running everything
 python irw_batch_updated.py candidates.csv --limit 10 --out triage_test.csv
 
-# 3. Full run (resumable — safe to interrupt and continue)
+# 3. Full run — safe to interrupt and resume
 python irw_batch_updated.py candidates.csv --out triage.csv
 python irw_batch_updated.py candidates.csv --out triage.csv --resume
 
-# 4. Open triage.csv; work 'good' rows first, then 'human_assistance'
-#    For each dataset you want to process, add a row to the queue sheet:
+# 4. Open triage.csv, sort by flag ('good' first), review candidates.
+#    For anything you want to process, add a row to the queue sheet:
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
 #    (columns: doi, title, source, url)
 ```
 
-### Step 2 — Process the queue
-
-```bash
-# Downloads, standardizes, and saves each queued dataset.
-# Safe to re-run: already-processed DOIs are skipped automatically.
-python irw_process_queue.py
-```
-
-Output lands in `irw_output/queue/<doi>.csv` — one IRW-formatted file per dataset,
-ready to review and submit.
-
-### The two exclusion sources
-
-| Source | What it contains | How to update |
-|---|---|---|
-| `irw_metadata.csv` (local file) | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` — run periodically |
-| [Processing queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | DOIs decided for processing but not yet landed | Edit the sheet directly — must stay shared "anyone with link can view" |
-
-Both are loaded automatically at startup — no flags needed. `irw_metadata.csv` is read from the working directory if present; the sheet is fetched over the network (a warning is printed if it can't be reached, and the run continues without it).
-
-Once a dataset lands in the IRW, its DOI will appear in `irw_metadata.csv` on the next refresh and can be removed from the queue sheet.
+The triage step downloads each candidate and runs automated checks — it does
+**not** save any data files. Its only output is `triage.csv`.
 
 ---
 
-## Output: triage summary CSV columns
+## Step 2 — Process the queue
+
+**Who:** Someone doing the actual IRW data work.
+**When:** After candidates have been added to the queue sheet.
+**Output:** Best-guess IRW-formatted CSV files, one per dataset, ready to review.
+
+```bash
+python irw_process_queue.py
+```
+
+This reads the [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit),
+downloads each dataset, and saves a standardized file to `irw_output/queue/`.
+Re-running is safe — datasets already in `irw_output/queue/` are skipped.
+
+### What the queue files look like
+
+Each file in `irw_output/queue/` is in IRW long format with (at minimum) three
+columns:
+
+| Column | Contents |
+|---|---|
+| `id` | Person identifier — best guess from the source data |
+| `item` | Item identifier — column names from the wide source, or existing item labels |
+| `resp` | Numeric response value |
+
+Additional columns (`wave`, `treat`, `cov_*`) are carried through when the
+pipeline can identify them. The conversion is a **heuristic best-guess**, not a
+verified mapping.
+
+### What still needs a human before submission
+
+These files are **ready to review, not ready to submit**. Before a file goes
+into the IRW processing pipeline, check:
+
+1. **Covariates in the item column.** Demographic columns (`Age`, `Sex`,
+   `Education`, etc.) often get melted in as items. They need to be moved out
+   and renamed with a `cov_` prefix or dropped.
+
+2. **Multiple scales.** If the `multi_scale*` warning fired, the file likely
+   contains two instruments that must be split into separate files.
+
+3. **Response direction.** The `resp_direction*` warning fires on every
+   wide-to-long conversion — it's a standing reminder to verify that higher
+   values indicate more of the construct within each item (i.e., no unreversed
+   items).
+
+4. **Item labels.** Wide-format source data uses column names as item
+   identifiers. These may be meaningful (`I found it hard to wind down`) or
+   opaque (`V1`, `Q3`). Opaque labels should be replaced with proper item text
+   where possible.
+
+5. **Scale and range.** Glance at the unique `resp` values to confirm they
+   match the expected response scale for the instrument.
+
+The QC warnings printed during processing (and recorded in the triage CSV)
+tell you exactly what to look for in each file.
+
+---
+
+## Keeping the queue current
+
+| Source | What it contains | How to update |
+|---|---|---|
+| `irw_metadata.csv` (local) | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` |
+| [Queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | DOIs in progress | Add rows manually after reviewing triage.csv |
+
+Both are loaded automatically at discovery startup — no flags needed. Once a
+dataset lands in the IRW, its DOI appears in `irw_metadata.csv` on the next
+refresh and can be removed from the queue sheet.
+
+---
+
+## Triage CSV column reference
 
 | Column | What it means |
 |---|---|
-| `source` | Repository the candidate came from (`dataverse`, `figshare`, `zenodo`, `osf`, `dryad`) |
+| `source` | Repository (`dataverse`, `figshare`, `zenodo`, `osf`, `dryad`) |
 | `title` | Dataset title from the repository |
-| `doi` | DOI if available; used for deduplication and linking |
+| `doi` | DOI; used for deduplication and exclusion |
 | `url` | Landing-page URL |
-| `flag` | Routing decision — see table below |
-| `reasons` | Why the flag was assigned; pipe-separated list of QC findings |
-| `n_participants` | Distinct `id` values in the coerced long table |
+| `flag` | Routing decision — see below |
+| `reasons` | Why the flag was assigned; pipe-separated QC findings |
+| `n_participants` | Distinct `id` values |
 | `n_items` | Distinct `item` values |
 | `n_responses` | Total non-NA rows |
-| `density` | IRW density metric: `(√n_resp / n_part) × (√n_resp / n_item)` — 1.0 = complete matrix |
-| `data_file` | Filename of the tabular file that was downloaded and triaged |
-| `n_other_files` | How many additional tabular files the landing page had (0 = only one; >0 = multi-file dataset, needs a human) |
+| `density` | IRW density: `(√n_resp / n_part) × (√n_resp / n_item)` — 1.0 = complete matrix |
+| `data_file` | Filename that was downloaded and triaged |
+| `n_other_files` | Additional tabular files on the landing page (>0 = multi-file, needs a human) |
 
 ### Flag values
 
 | Flag | Meaning | Action |
 |---|---|---|
-| `good` | Confident column mapping, no QC errors | Review `irw_file`; check any listed warnings |
-| `human_assistance` | Got data but mapping or QC needs a person | Read `reasons`; open `irw_file` if it exists |
-| `not_item_response` | Data is shaped like IRW format but isn't response data (e.g. a stats table) | Skip |
-| `no_usable_file` | Landing page had no resolvable `.csv`/`.tsv`/`.xlsx` | Skip |
+| `good` | Confident column mapping, no QC errors | Strong candidate — add to queue sheet |
+| `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
+| `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
+| `no_usable_file` | No resolvable tabular file on the landing page | Skip |
 | `download_failed` | Network or HTTP error | Retry manually if important |
-| `error` | Unexpected pipeline error | Check `reasons` for the message |
+| `error` | Unexpected pipeline error | Check `reasons` |
 
----
+### QC warning glossary
 
-## QC warning glossary
-
-Warnings appear in the `reasons` column. Starred names (`*`) are heuristics added on top of the official IRW validator.
+Starred names (`*`) are heuristics beyond the official IRW validator.
 
 | Warning | Meaning |
 |---|---|
-| `resp_direction*` | After a wide-to-long melt, cannot auto-verify that higher resp = more of construct within each item — confirm no unreversed items |
-| `resp_ordinal*` | >50 unique resp values — likely continuous or aggregate data rather than ordinal item responses; escalates to `human_assistance` after a melt |
-| `multi_scale*` | Item names cluster into 2+ distinct prefixes — IRW requires separate files per scale |
-| `imputed_values*` | Column names or value distributions suggest imputed data; IRW requires removal |
-| `date_numeric*` / `date_range*` | `date` column is not numeric or looks too small for Unix seconds |
-| `rt_units*` / `rt_negative*` | `rt` median suggests milliseconds instead of seconds, or negative values present |
-| `item_level_cols*` | Columns like `itemcov_`, `rater`, `item_family` were excluded from the melt — verify alignment |
-| `density*` | Matrix is very sparse; fine for adaptive/booklet designs, otherwise verify |
-| `cov_prefix` | Unrecognized extra columns — prefix with `cov_` if they are person-level covariates |
-| `treat_binary*` | `treat` column has values other than 0/1 |
-| `dup_id_item` | Duplicate id+item rows (error if no longitudinal column; warning if `wave`/`date` present) |
+| `resp_direction*` | Cannot auto-verify coding direction within items — confirm no unreversed items |
+| `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses |
+| `multi_scale*` | Item names suggest 2+ subscales — IRW requires separate files per scale |
+| `imputed_values*` | Column names or value distributions suggest imputed data — IRW requires removal |
+| `date_numeric*` / `date_range*` | `date` column not numeric or too small for Unix seconds |
+| `rt_units*` / `rt_negative*` | `rt` looks like milliseconds, or has negative values |
+| `item_level_cols*` | Item-level columns (`itemcov_`, `rater`, `item_family`) excluded from melt — verify alignment |
+| `cov_prefix` | Unrecognized columns — prefix with `cov_` if person-level covariates |
+| `treat_binary*` | `treat` has values other than 0/1 |
+| `dup_id_item` | Duplicate id+item rows (error without a longitudinal column) |
+| `density*` | Very sparse matrix — fine for adaptive designs, otherwise verify |
 
 ---
 
 ## Scripts
 
-### `irw_discover_updated.py` — find candidates
-
-Searches Dataverse, Zenodo, OSF, Dryad, and Figshare. Applies a tiered relevance
-filter: named instruments (PHQ-9, WAIS, BFI, …) always pass; strong psychometric
-terms (Rasch, Likert, factor analysis, …) and construct terms (depression, ability,
-personality, …) pass unless the title also contains epidemiological/clinical study
-language. Supplementary file titles (`Table N_…`, `Data Sheet N_…`, `Supplementary
-file N_…`) are blocked unconditionally — they are never standalone datasets.
-
+### `irw_discover_updated.py`
+Searches Dataverse, Zenodo, OSF, Dryad, and Figshare. Tiered relevance filter:
+named instruments always pass; psychometric and construct terms pass unless
+blocked by epi/clinical study language; supplementary file titles
+(`Table N_…`, `Data Sheet N_…`) are always blocked.
+Auto-loads `irw_metadata.csv` and the queue sheet to exclude known DOIs.
 ```
---exclude <csv>   skip DOIs already in the IRW
---all             disable relevance filter entirely
---out <path>      output path (default: irw_discovered.csv)
+--all          disable relevance filter
+--out <path>   output path (default: irw_discovered.csv)
 ```
 
-### `irw_batch_updated.py` — triage at scale
-
-Resolves each landing-page URL to actual data files (Zenodo, Figshare, Dryad,
-Dataverse, OSF all supported), downloads the first tabular file, and runs
-`irw_triage_updated.py` on it. Results are checkpointed after every row so the
-run is safe to interrupt. No files are saved to disk — this step is for triage
-only. Use `irw_process_queue.py` to download and standardize the datasets you
-decide to process.
-
+### `irw_batch_updated.py`
+Resolves landing pages to data files, downloads, triages, and writes
+`triage.csv`. No data files are saved — triage only.
 ```
---limit <n>    process only the first N rows (use this to test)
---resume       continue from the checkpoint
+--limit <n>    process only the first N rows
+--resume       continue from checkpoint after interruption
 --out <path>   output path (default: irw_triage_summary.csv)
 ```
 
-### `irw_process_queue.py` — process queued datasets
-
-Reads the [processing queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit),
-downloads each dataset, standardizes it to IRW format, and saves the output.
-Skips any DOI whose output file already exists — safe to re-run after adding new
-rows to the sheet.
-
+### `irw_process_queue.py`
+Reads the queue sheet, downloads and standardizes each dataset to IRW format,
+saves to `irw_output/queue/`. Skips DOIs already present in that folder.
 ```
 --out-dir <path>   output directory (default: irw_output/queue)
 ```
 
-### `irw_triage_updated.py` — evaluate one file
-
-Runs a single file through download → coerce → QC → flag. Can be used standalone:
-
+### `irw_triage_updated.py`
+Evaluate a single file directly (useful for spot-checking):
 ```bash
 python irw_triage_updated.py path/to/data.csv
 python irw_triage_updated.py https://example.com/data.csv
 ```
-
-Prints a full report and writes a best-guess IRW-formatted CSV if a conversion
-was possible. The coercion is a heuristic: `human_assistance` is the normal,
-expected outcome for ambiguous datasets, not a failure.
