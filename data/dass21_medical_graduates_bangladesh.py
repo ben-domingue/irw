@@ -13,8 +13,8 @@ QUEUE_FILE = "../automated_finding/irw_output/queue/10_7910_dvn_nz7vfl.csv"
 OUT_DIR    = "../automated_finding/irw_output/cleaned"
 
 def update_index(out_dir, rows):
-    """Upsert rows into cleaned_index.csv (keyed on 'file')."""
-    idx_path = os.path.join(out_dir, "cleaned_index.csv")
+    """Upsert rows into cleaned_index.csv (keyed on 'file'), one level above cleaned/."""
+    idx_path = os.path.join(os.path.dirname(out_dir), "cleaned_index.csv")
     cols = ["file","doi","title","scale","n_participants","n_items",
             "n_responses","resp_range","notes","status"]
     if os.path.exists(idx_path):

@@ -68,9 +68,11 @@ verified mapping.
 ### Cleaned files and the index
 
 After human review and cleanup, finalized files go to `irw_output/cleaned/`.
-Each cleaning script in `data/` writes a row to `irw_output/cleaned/cleaned_index.csv`
-recording key metadata and any outstanding issues. Update the `status` column
-from `cleaned` to `submitted` once a dataset has been uploaded to Redivis.
+That folder contains **only** the CSVs destined for Redivis upload — nothing else.
+Each cleaning script in `data/` writes a row to `irw_output/cleaned_index.csv`
+(one level up) recording key metadata and any outstanding issues. Update the
+`status` column from `cleaned` to `submitted` once a dataset has been uploaded
+to Redivis.
 
 `cleaned_index.csv` columns:
 
