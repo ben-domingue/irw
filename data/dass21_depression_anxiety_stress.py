@@ -20,7 +20,7 @@ def update_index(out_dir, rows):
     """Upsert rows into cleaned_index.csv (keyed on 'file'), one level above cleaned/."""
     idx_path = os.path.join(os.path.dirname(out_dir), "cleaned_index.csv")
     cols = ["file","doi","title","scale","n_participants","n_items",
-            "n_responses","resp_range","notes","status"]
+            "n_responses","resp_range","license","notes","status"]
     if os.path.exists(idx_path):
         idx = pd.read_csv(idx_path)
     else:
@@ -67,7 +67,7 @@ update_index(OUT_DIR, [
     {"file": "dass21_depression_anxiety_stress.csv",
      "doi": "10.7910/DVN/TAISB2", "title": "Depression Anxiety and Stress Data",
      "scale": "DASS-21 variant", "n_participants": out_df["id"].nunique(), "n_items": out_df["item"].nunique(),
-     "n_responses": len(out_df), "resp_range": "0-4",
+     "n_responses": len(out_df), "resp_range": "0-4", "license": "cc0",
      "notes": "resp scale 0-4 (non-standard — verify instrument); covariate codes are numeric (codebook needed); item text absent (Q1-Q21 only)",
      "status": "cleaned"},
 ])

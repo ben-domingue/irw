@@ -14,7 +14,7 @@ def update_index(out_dir, rows):
     """Upsert rows into cleaned_index.csv (keyed on 'file'), one level above cleaned/."""
     idx_path = os.path.join(os.path.dirname(out_dir), "cleaned_index.csv")
     cols = ["file","doi","title","scale","n_participants","n_items",
-            "n_responses","resp_range","notes","status"]
+            "n_responses","resp_range","license","notes","status"]
     if os.path.exists(idx_path):
         idx = pd.read_csv(idx_path)
     else:
@@ -95,13 +95,13 @@ update_index(OUT_DIR, [
     {"file": "pcss_adolescent_athletes.csv",
      "doi": "10.7910/DVN/5YF5XJ", "title": "Depression & Concussion-Like Symptoms in Adolescent Athletes",
      "scale": "PCSS", "n_participants": pcss["id"].nunique(), "n_items": pcss["item"].nunique(),
-     "n_responses": len(pcss), "resp_range": "0-6",
+     "n_responses": len(pcss), "resp_range": "0-6", "license": "cc0",
      "notes": "resp direction unverified; item labels are numbered (pcss_1 through pcss_22)",
      "status": "cleaned"},
     {"file": "mfq_adolescent_athletes.csv",
      "doi": "10.7910/DVN/5YF5XJ", "title": "Depression & Concussion-Like Symptoms in Adolescent Athletes",
      "scale": "MFQ", "n_participants": mfq["id"].nunique(), "n_items": mfq["item"].nunique(),
-     "n_responses": len(mfq), "resp_range": "0-2",
+     "n_responses": len(mfq), "resp_range": "0-2", "license": "cc0",
      "notes": "resp direction unverified; item labels are numbered (mfq_1 through mfq_33)",
      "status": "cleaned"},
 ])

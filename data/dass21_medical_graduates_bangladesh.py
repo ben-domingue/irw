@@ -16,7 +16,7 @@ def update_index(out_dir, rows):
     """Upsert rows into cleaned_index.csv (keyed on 'file'), one level above cleaned/."""
     idx_path = os.path.join(os.path.dirname(out_dir), "cleaned_index.csv")
     cols = ["file","doi","title","scale","n_participants","n_items",
-            "n_responses","resp_range","notes","status"]
+            "n_responses","resp_range","license","notes","status"]
     if os.path.exists(idx_path):
         idx = pd.read_csv(idx_path)
     else:
@@ -40,7 +40,7 @@ update_index(OUT_DIR, [
     {"file": "dass21_medical_graduates_bangladesh.csv",
      "doi": "10.7910/DVN/NZ7VFL", "title": "Depression Anxiety and Stress Among Medical Graduates in Bangladesh",
      "scale": "DASS-21", "n_participants": df["id"].nunique(), "n_items": df["item"].nunique(),
-     "n_responses": len(df), "resp_range": "0-3",
+     "n_responses": len(df), "resp_range": "0-3", "license": "cc0",
      "notes": "resp direction unverified; item text present",
      "status": "cleaned"},
 ])
