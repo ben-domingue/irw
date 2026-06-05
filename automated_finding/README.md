@@ -3,7 +3,11 @@
 ## Quick start
 
 ```bash
-# 1. Find candidates across five repositories
+# 0. One-time / periodic: refresh what's already in the IRW
+#    (run in R whenever you want an up-to-date exclusion list)
+Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
+
+# 1. Find candidates — automatically excludes irw_metadata.csv and irw_queued.csv
 python irw_discover_updated.py "PHQ-9 questionnaire" "reading assessment" --out candidates.csv
 
 # 2. Test on 10 rows first
@@ -14,12 +18,26 @@ python irw_batch_updated.py candidates.csv --out triage.csv
 python irw_batch_updated.py candidates.csv --out triage.csv --resume
 
 # 4. Open triage.csv; work 'good' rows first, then 'human_assistance'
+
+# 5. For each dataset you decide to process, add its DOI to irw_queued.csv
+#    so it won't appear in future discovery runs while you're working on it
 ```
 
-To exclude DOIs already in the IRW:
-```bash
-# In R: library(irw); write.csv(irw_metadata(), "irw_metadata.csv")
-python irw_discover_updated.py --exclude irw_metadata.csv "item response theory"
+### The two exclusion files
+
+| File | What it contains | How to update |
+|---|---|---|
+| `irw_metadata.csv` | DOIs already in the IRW | `Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"` — run periodically |
+| `irw_queued.csv` | DOIs you've decided to process but haven't landed yet | Add rows manually as you work the triage output |
+
+Both are read automatically from the working directory — no flags needed. Once a dataset lands in the IRW, its DOI will appear in `irw_metadata.csv` on the next refresh and can be removed from `irw_queued.csv`.
+
+`irw_queued.csv` just needs a `doi` column (or any column — the loader extracts DOI-shaped tokens from any CSV column):
+
+```
+doi
+10.7910/dvn/taisb2
+10.6084/m9.figshare.25039721.v1
 ```
 
 ---

@@ -10,21 +10,24 @@ Three things this does that a naive search doesn't:
   - SOURCES   : queries 5 repositories, not 1 (breadth = recall)
   - PAGINATION: walks every page per source, so you don't miss results
   - DEDUP     : merges by DOI across sources, falls back to title
-  - EXCLUDE   : optionally drops datasets already in the IRW, so your list is
-                only NEW candidates (the single biggest time-saver)
+  - EXCLUDE   : automatically skips datasets already in the IRW (irw_metadata.csv)
+                and datasets already queued for processing (irw_queued.csv).
+                Both files are read from the working directory if present.
 
-To build the exclusion set: in R, run the irw package and export known DOIs:
+To keep irw_metadata.csv current, regenerate it from R periodically:
     library(irw); write.csv(irw_metadata(), "irw_metadata.csv")
-then pass --exclude irw_metadata.csv (any column containing DOIs works).
+
+irw_queued.csv is maintained manually: add one DOI per row as you decide to
+process candidates from the triage output, so they stop appearing in future runs.
 
 Run:
-    python irw_discover.py "self-efficacy scale" "reading assessment"
-    python irw_discover.py --exclude irw_metadata.csv "item response"
-    python irw_discover.py --all "questionnaire"     # disable relevance filter
+    python irw_discover_updated.py "self-efficacy scale" "reading assessment"
+    python irw_discover_updated.py --all "questionnaire"   # disable relevance filter
 """
 
 from __future__ import annotations
 
+import os
 import sys
 import re
 import csv
@@ -300,6 +303,13 @@ SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare]
 # Orchestration
 # ---------------------------------------------------------------------------
 
+IRW_METADATA_FILE = "irw_metadata.csv"   # already in the IRW — refresh with:
+IRW_QUEUED_FILE   = "irw_queued.csv"    #   Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
+                                        # irw_queued.csv: DOIs you've decided to
+                                        # process but haven't landed yet; maintain
+                                        # manually as you work the triage output.
+
+
 def load_exclusions(path: str) -> set:
     """Pull every DOI-looking token out of any column of a CSV."""
     excl = set()
@@ -310,6 +320,14 @@ def load_exclusions(path: str) -> set:
                 if "/" in d and d.count(" ") == 0:
                     excl.add(d)
     return excl
+
+
+def _load_auto_exclusions() -> tuple[set, set]:
+    """Load irw_metadata.csv and irw_queued.csv from the working directory if
+    they exist. Returns (irw_dois, queued_dois)."""
+    irw_dois    = load_exclusions(IRW_METADATA_FILE) if os.path.exists(IRW_METADATA_FILE) else set()
+    queued_dois = load_exclusions(IRW_QUEUED_FILE)   if os.path.exists(IRW_QUEUED_FILE)   else set()
+    return irw_dois, queued_dois
 
 
 def discover(queries, exclude: set, relevance_on: bool) -> list:
@@ -332,15 +350,24 @@ def discover(queries, exclude: set, relevance_on: bool) -> list:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("queries", nargs="*", default=["item response theory"])
-    ap.add_argument("--exclude", help="CSV of DOIs already in the IRW to skip")
     ap.add_argument("--all", action="store_true", help="disable relevance filter")
     ap.add_argument("--out", default="irw_discovered.csv")
     args = ap.parse_args()
 
     queries = args.queries or ["item response theory"]
-    exclude = load_exclusions(args.exclude) if args.exclude else set()
-    if exclude:
-        print(f"Excluding {len(exclude)} DOIs already in the IRW\n")
+
+    # Auto-load both exclusion lists from the working directory.
+    irw_dois, queued_dois = _load_auto_exclusions()
+    exclude = irw_dois | queued_dois
+
+    if irw_dois:
+        print(f"Excluding {len(irw_dois):,} DOIs already in the IRW  ({IRW_METADATA_FILE})")
+    else:
+        print(f"[note] {IRW_METADATA_FILE} not found — not excluding known IRW datasets.")
+        print(f"       Regenerate with: Rscript -e \"library(irw); write.csv(irw_metadata(), '{IRW_METADATA_FILE}')\"")
+    if queued_dois:
+        print(f"Excluding {len(queued_dois):,} DOIs already queued for processing  ({IRW_QUEUED_FILE})")
+    print()
 
     hits = discover(queries, exclude, relevance_on=not args.all)
     hits.sort(key=lambda h: h.published or "", reverse=True)

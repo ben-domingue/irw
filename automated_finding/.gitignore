@@ -5,9 +5,18 @@ downloads/
 # Ephemeral batch run state
 irw_batch_checkpoint.jsonl
 
+# Generated exclusion list (regenerate from R; can be large)
+irw_metadata.csv
+
+# Generated pipeline outputs — always regenerable from the scripts
+irw_triage_summary*.csv
+irw_discovered*.csv
+
 # Scratch / test run outputs
 test_*.csv
 
 # Python
 __pycache__/
 *.pyc
+
+# irw_queued.csv is intentionally tracked — it's the processing queue
