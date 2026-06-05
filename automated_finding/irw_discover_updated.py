@@ -214,6 +214,7 @@ def from_dataverse(query: str, max_pages: int = 5, per: int = 50):
 
 
 def from_zenodo(query: str, max_pages: int = 5, per: int = 50):
+    query = query.replace("-", " ")   # Zenodo returns 400 on hyphenated queries
     for page in range(1, max_pages + 1):
         try:
             r = requests.get(
