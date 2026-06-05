@@ -65,6 +65,26 @@ Additional columns (`wave`, `treat`, `cov_*`) are carried through when the
 pipeline can identify them. The conversion is a **heuristic best-guess**, not a
 verified mapping.
 
+### Cleaned files and the index
+
+After human review and cleanup, finalized files go to `irw_output/cleaned/`.
+Each cleaning script in `data/` writes a row to `irw_output/cleaned/cleaned_index.csv`
+recording key metadata and any outstanding issues. Update the `status` column
+from `cleaned` to `submitted` once a dataset has been uploaded to Redivis.
+
+`cleaned_index.csv` columns:
+
+| Column | Contents |
+|---|---|
+| `file` | Filename in `irw_output/cleaned/` |
+| `doi` | Source DOI |
+| `title` | Dataset title |
+| `scale` | Instrument name |
+| `n_participants` / `n_items` / `n_responses` | Dataset dimensions |
+| `resp_range` | Response scale (e.g. `0-3`) |
+| `notes` | Outstanding issues to resolve before submission |
+| `status` | `cleaned` → `submitted` |
+
 ### What still needs a human before submission
 
 These files are **ready to review, not ready to submit**. Before a file goes
