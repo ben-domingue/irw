@@ -55,56 +55,85 @@ CHECKPOINT = "irw_batch_checkpoint.jsonl"
 
 
 # ---------------------------------------------------------------------------
-# RESOLVE: landing page -> direct data-file URL(s)
-#   Each helper returns a list of (file_url, filename). Best-effort and the
-#   most likely thing to need per-repo tweaking. Unknown sources -> [].
+# License checking
 # ---------------------------------------------------------------------------
 
-def _zenodo_files(url: str) -> list:
+_BLOCKED_LICENSES = {"cc-by-nc", "cc-by-nd", "cc-by-nc-nd", "cc-by-nc-sa",
+                     "all-rights-reserved", "arr"}
+_OPEN_LICENSES    = {"cc0", "cc-pddc", "cc-by", "cc-by-sa", "public-domain"}
+
+def _norm_license(raw: str) -> str:
+    s = raw.lower().strip()
+    s = re.sub(r"\s+", "-", s)
+    s = re.sub(r"[-_]?\d+\.\d+$", "", s)   # strip version (e.g. cc-by-4.0 -> cc-by)
+    s = re.sub(r"https?://.*creativecommons\.org/licenses/([^/]+).*", r"cc-\1", s)
+    s = re.sub(r"https?://.*creativecommons\.org/publicdomain/zero.*", "cc0", s)
+    return s
+
+def check_license(raw: str) -> tuple[str, bool, bool]:
+    """Returns (normalized, is_blocked, is_unknown)."""
+    if not raw:
+        return ("unknown", False, True)
+    n = _norm_license(raw)
+    return (n, n in _BLOCKED_LICENSES, n not in _OPEN_LICENSES and n not in _BLOCKED_LICENSES)
+
+
+# ---------------------------------------------------------------------------
+# RESOLVE: landing page -> direct data-file URL(s) + license
+#   Each helper returns ([(file_url, filename)], license_str).
+# ---------------------------------------------------------------------------
+
+def _zenodo_files(url: str) -> tuple:
     m = re.search(r"(?:record|records)/(\d+)", url)
     if not m:
-        return []
+        return [], ""
     r = requests.get(f"https://zenodo.org/api/records/{m.group(1)}",
                      headers=UA, timeout=30)
     r.raise_for_status()
+    data = r.json()
+    license_raw = (data.get("metadata", {}).get("license", {}) or {}).get("id", "")
     out = []
-    for f in r.json().get("files", []):
+    for f in data.get("files", []):
         key = f.get("key", "")
         link = f.get("links", {}).get("self", "")
         if key.lower().endswith(TABULAR_EXT) and link:
             out.append((link, key))
-    return out
+    return out, license_raw
 
 
-def _figshare_files(url: str) -> list:
+def _figshare_files(url: str) -> tuple:
     m = re.search(r"articles/(?:[^/]+/)?(?:[^/]+/)?(\d+)", url)
     if not m:
-        return []
+        return [], ""
     r = requests.get(f"https://api.figshare.com/v2/articles/{m.group(1)}",
                      headers=UA, timeout=30)
     r.raise_for_status()
+    data = r.json()
+    license_raw = (data.get("license") or {}).get("name", "")
     out = []
-    for f in r.json().get("files", []):
+    for f in data.get("files", []):
         name = f.get("name", "")
         dl = f.get("download_url", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
             out.append((dl, name))
-    return out
+    return out, license_raw
 
 
-def _dryad_files(doi: str) -> list:
+def _dryad_files(doi: str) -> tuple:
     if not doi:
-        return []
+        return [], ""
     enc = requests.utils.quote(f"doi:{doi}", safe="")
     base = "https://datadryad.org/api/v2"
     r = requests.get(f"{base}/datasets/{enc}/versions", headers=UA, timeout=30)
     r.raise_for_status()
     versions = r.json().get("_embedded", {}).get("stash:versions", [])
     if not versions:
-        return []
-    files_link = versions[-1].get("_links", {}).get("stash:files", {}).get("href", "")
+        return [], ""
+    latest_ver = versions[-1]
+    license_raw = latest_ver.get("license", "")
+    files_link = latest_ver.get("_links", {}).get("stash:files", {}).get("href", "")
     if not files_link:
-        return []
+        return [], license_raw
     r2 = requests.get(f"https://datadryad.org{files_link}", headers=UA, timeout=30)
     r2.raise_for_status()
     out = []
@@ -113,17 +142,18 @@ def _dryad_files(doi: str) -> list:
         dl = f.get("_links", {}).get("stash:download", {}).get("href", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
             out.append((f"https://datadryad.org{dl}", name))
-    return out
+    return out, license_raw
 
 
-def _dataverse_files(url: str, doi: str) -> list:
+def _dataverse_files(url: str, doi: str) -> tuple:
     pid = f"doi:{doi}" if doi else None
     if not pid:
-        return []
+        return [], ""
     r = requests.get("https://dataverse.harvard.edu/api/datasets/:persistentId/",
                      params={"persistentId": pid}, headers=UA, timeout=30)
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
+    license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
     out = []
     for f in latest.get("files", []):
         df = f.get("dataFile", {})
@@ -132,26 +162,32 @@ def _dataverse_files(url: str, doi: str) -> list:
         if name.lower().endswith(TABULAR_EXT) and fid:
             out.append((f"https://dataverse.harvard.edu/api/access/datafile/{fid}",
                         name))
-    return out
+    return out, license_raw
 
 
-def _osf_files(url: str) -> list:
+def _osf_files(url: str) -> tuple:
     node_id = [s for s in url.rstrip("/").split("/") if s][-1]
     r = requests.get(
-        f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
+        f"https://api.osf.io/v2/nodes/{node_id}/",
         headers=UA, timeout=30)
     r.raise_for_status()
+    license_raw = (r.json().get("data", {}).get("relationships", {})
+                   .get("license", {}).get("data", {}) or {}).get("id", "")
+    r2 = requests.get(
+        f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
+        headers=UA, timeout=30)
+    r2.raise_for_status()
     out = []
-    for f in r.json().get("data", []):
+    for f in r2.json().get("data", []):
         name = f.get("attributes", {}).get("name", "")
         dl = f.get("links", {}).get("download", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
             out.append((dl, name))
-    return out
+    return out, license_raw
 
 
-def resolve_data_files(row: dict) -> list:
-    """Dispatch to the right repository resolver. Returns [(file_url, name)]."""
+def resolve_data_files(row: dict) -> tuple:
+    """Dispatch to the right repository resolver. Returns ([(file_url, name)], license_str)."""
     src = (row.get("source") or "").lower()
     url = row.get("url") or ""
     doi = row.get("doi") or ""
@@ -167,8 +203,8 @@ def resolve_data_files(row: dict) -> list:
         if src == "osf":
             return _osf_files(url)
     except Exception:
-        return []      # treated as no_usable_file by caller
-    return []          # unknown sources: not auto-resolvable
+        return [], ""
+    return [], ""
 
 
 # ---------------------------------------------------------------------------
@@ -196,7 +232,16 @@ def process_one(row: dict) -> dict:
     base = {"source": row.get("source", ""), "title": row.get("title", ""),
             "url": row.get("url", ""), "doi": row.get("doi", "")}
 
-    files = resolve_data_files(row)
+    files, license_raw = resolve_data_files(row)
+    license_norm, blocked, unknown = check_license(license_raw)
+    base["license"] = license_norm
+
+    if blocked:
+        return {**base, "flag": "license_restricted",
+                "reasons": f"license '{license_norm}' does not permit redistribution",
+                "n_responses": "", "n_participants": "", "n_items": "",
+                "density": "", "data_file": ""}
+
     if not files:
         return {**base, "flag": "no_usable_file",
                 "reasons": "no resolvable .csv/.tsv/.xlsx on landing page",
@@ -216,8 +261,11 @@ def process_one(row: dict) -> dict:
     try:
         t = triage_dataset(df)
         meta = t.metadata or {}
+        reasons = list(t.reasons)
+        if unknown:
+            reasons.append(f"license_unknown* — license '{license_norm}' not recognised as open; verify before submission")
         return {**base, "flag": t.flag,
-                "reasons": " | ".join(t.reasons)[:400],
+                "reasons": " | ".join(reasons)[:400],
                 "n_responses": meta.get("n_responses", ""),
                 "n_participants": meta.get("n_participants", ""),
                 "n_items": meta.get("n_items", ""),
@@ -259,7 +307,7 @@ def append_checkpoint(path: str, key: str, result: dict):
 # ---------------------------------------------------------------------------
 
 FLAG_ORDER = ["good", "human_assistance", "not_item_response",
-              "no_usable_file", "download_failed", "error"]
+              "no_usable_file", "license_restricted", "download_failed", "error"]
 
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               resume: bool, checkpoint: str = CHECKPOINT) -> pd.DataFrame:

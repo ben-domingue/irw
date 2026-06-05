@@ -144,6 +144,7 @@ in the IRW.
 | `n_items` | Distinct `item` values |
 | `n_responses` | Total non-NA rows |
 | `density` | IRW density: `(√n_resp / n_part) × (√n_resp / n_item)` — 1.0 = complete matrix |
+| `license` | Normalized license string (e.g. `cc-by`, `cc0`, `unknown`) |
 | `data_file` | Filename that was downloaded and triaged |
 | `n_other_files` | Additional tabular files on the landing page (>0 = multi-file, needs a human) |
 
@@ -155,6 +156,7 @@ in the IRW.
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `no_usable_file` | No resolvable tabular file on the landing page | Skip |
+| `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
 | `download_failed` | Network or HTTP error | Retry manually if important |
 | `error` | Unexpected pipeline error | Check `reasons` |
 
@@ -174,6 +176,7 @@ Starred names (`*`) are heuristics beyond the official IRW validator.
 | `cov_prefix` | Unrecognized columns — prefix with `cov_` if person-level covariates |
 | `treat_binary*` | `treat` has values other than 0/1 |
 | `dup_id_item` | Duplicate id+item rows (error without a longitudinal column) |
+| `license_unknown*` | License not recognised as a known open license — verify before submission |
 | `density*` | Very sparse matrix — fine for adaptive designs, otherwise verify |
 
 ---
