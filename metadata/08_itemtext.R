@@ -50,6 +50,15 @@ f<-function(x) {
 z<-lapply(L,f)
 z<-data.frame(do.call("rbind",z))
 
+
+#############################################
+merge.new<-z
+df<-data.frame(rbind(merge.new,merge.old[,names(merge.new)]))
+
+write.csv(df,file="itemtext_metadata.csv",quote=TRUE,row.names=FALSE)
+
+
+######################### This is broken. doesn't run correctly at present.
 ##get flesch-kincaid
 load("items_alltext.Rdata")
 library(koRpus)
@@ -70,10 +79,5 @@ fk<-data.frame(table=names(fk),FleschKincaid.age=fk)
 z<-merge(z,fk)
 
 
-merge.new<-z
-
-df<-data.frame(rbind(merge.new,merge.old[,names(merge.new)]))
-
-write.csv(df,file="itemtext_metadata.csv",quote=TRUE,row.names=FALSE)
 
 
