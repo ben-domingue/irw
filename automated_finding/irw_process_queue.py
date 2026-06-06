@@ -49,10 +49,10 @@ def _load_redivis_dois() -> set:
     """Fetch DOIs already in the IRW from Redivis. Returns empty set on failure."""
     try:
         import redivis
-        ds = redivis.user("bdomingu").dataset("irw_meta")
+        ds = redivis.user("bdomingu").dataset("irw_meta:bdxt")
         dois = set()
         for table in ds.list_tables():
-            df = table.to_dataframe()
+            df = table.to_pandas_dataframe(dtype_backend="numpy")
             for col in df.columns:
                 for val in df[col].dropna().astype(str):
                     d = norm_doi(val)
@@ -116,7 +116,16 @@ def process_one(row: dict, out_dir: str) -> dict:
     # Build a minimal batch-style row so we can reuse resolve_data_files.
     batch_row = {"source": src, "url": url, "doi": doi}
 
-    files = resolve_data_files(batch_row)
+    files, license_raw = resolve_data_files(batch_row)
+    from irw_batch_updated import check_license
+    license_norm, blocked, _ = check_license(license_raw)
+    result["license"] = license_norm
+
+    if blocked:
+        result["status"] = "license_restricted"
+        result["note"]   = f"license '{license_norm}' does not permit redistribution"
+        return result
+
     if not files:
         result["status"] = "no_usable_file"
         result["note"]   = "resolver found no tabular files on the landing page"
