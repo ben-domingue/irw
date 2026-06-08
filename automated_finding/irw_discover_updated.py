@@ -62,12 +62,18 @@ STRONG_TERMS = [          # psychometric structure/method — rarely outside the
     "psychometric", "questionnaire", "likert", "self-report", "factor analysis",
     "latent trait", "test battery", "item bank", "polytomous", "dichotomous",
     "construct validity", "measurement invariance", "response data",
+    "reaction time", "response latency", "curriculum-based measurement",
 ]
 CONSTRUCT_TERMS = [       # things the IRW actually measures (its construct_type tags)
     # education / ability
     "ability", "aptitude", "achievement", "proficiency", "numeracy", "literacy",
     "vocabulary", "reading comprehension", "grammar", "arithmetic", "spelling",
     "intelligence", "cognitive", "working memory", "knowledge test",
+    "phonological awareness", "reading fluency", "mathematics achievement",
+    "science achievement",
+    # executive function / cognitive control
+    "executive function", "inhibitory control", "cognitive flexibility",
+    "task switching", "set shifting", "processing speed",
     # personality / clinical
     "personality", "big five", "depression", "anxiety", "well-being", "wellbeing",
     "self-esteem", "mood", "affect", "temperament", "psychopathology",
@@ -118,6 +124,13 @@ INSTRUMENT_TERMS = [
     # cognitive ability / intelligence
     "raven's progressive matrices", "progressive matrices", "wechsler", "wais",
     "wisc", "icar", "stanford-binet",
+    # executive function tasks
+    "stroop", "trail making", "flanker", "stop signal", "n-back",
+    "brixton", "wisconsin card sorting", "tower of london", "tower of hanoi",
+    "behavior rating inventory of executive function", "brief-a",
+    # educational achievement / reading
+    "woodcock-johnson", "dibels", "aimsweb", "kaufman assessment", "kabc",
+    "dynamic indicators of basic early literacy",
     # values / language / large-scale assessments
     "schwartz values", "portrait values", "peabody picture vocabulary", "ppvt",
     "test for reception of grammar", "trog",

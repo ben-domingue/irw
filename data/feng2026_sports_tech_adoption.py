@@ -11,7 +11,7 @@ OUT_DIR    = REPO_ROOT / "automated_finding" / "irw_output" / "cleaned"
 INDEX_FILE = REPO_ROOT / "automated_finding" / "irw_output" / "cleaned_index.csv"
 
 DOI   = "10.7910/dvn/zdnsfj"
-TITLE = "Questionnaire survey data on adolescents' intention to adopt intelligent sports equipment"
+TITLE = "Questionnaire survey data on adolescents' intention to adopt intelligent sports assistance robots"
 
 INDEX_FIELDS = ["file", "doi", "title", "scale", "n_participants", "n_items",
                 "n_responses", "resp_range", "license", "notes", "status"]

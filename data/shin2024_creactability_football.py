@@ -20,7 +20,8 @@ SUBSCALES = {
     "quickness":    ["Quickness1", "Quickness2", "Quickness3"],
     "creativity":   ["Creativity1", "Creativity2", "Creativity3"],
     "adaptability": ["Adaptability1", "Adaptability2", "Adaptability3"],
-    "test":         ["test1", "test2", "test3"],
+    # "test" items (test1-3) present in figshare data but not part of the
+    # validated creactability scale (paper documents only these 3 subscales).
 }
 
 # Team/player performance stats — not scale items.
@@ -78,7 +79,7 @@ def convert():
             "license":        "cc-by",
             "notes":          "1-7 Likert; football player sample (n=241); "
                               "team performance stats kept as covariates; "
-                              "test subscale role unverified; resp direction unverified",
+                              "resp direction unverified",
             "status":         "cleaned",
         }
         existing = [r for r in existing if r.get("file") != fname]
