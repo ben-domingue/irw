@@ -194,12 +194,12 @@ def main():
 
         if not doi:
             print(f"  [skip] row has no DOI: {row}")
-
-        if doi and doi in irw_dois:
-            print(f"  [skip] {title}")
-            print(f"         already in IRW (Redivis)")
             skipped += 1
             continue
+
+        if doi in irw_dois:
+            print(f"  [skip] {title}")
+            print(f"         already in IRW (Redivis)")
             skipped += 1
             continue
 
