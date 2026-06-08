@@ -69,7 +69,7 @@ graph_df["item"] = graph_df["item"].str.strip()
 graph_df["resp"] = graph_df["resp"].astype(int)
 graph_df = graph_df.sort_values(["id", "item"]).reset_index(drop=True)
 
-out_graph = "personality_financial_handwriting__graphology.csv"
+out_graph = "personality_handwriting__graphology.csv"
 graph_df.to_csv(os.path.join(OUT_DIR, out_graph), index=False)
 print(f"graphology: {graph_df['id'].nunique()} participants, "
       f"{graph_df['item'].nunique()} items, {len(graph_df)} rows")
@@ -77,10 +77,13 @@ print(f"graphology: {graph_df['id'].nunique()} participants, "
 # --- Financial behavior/personality scale (Likert 1-5) ---
 fin_df = df[df["item"].isin(LIKERT_ITEMS)].copy()
 fin_df["item"] = fin_df["item"].str.strip()
+# Two items have isolated 0 responses (<0.1% of total); treat as missing —
+# all other items are cleanly 1-5 and the survey scale starts at 1.
+fin_df = fin_df[fin_df["resp"] != 0]
 fin_df["resp"] = fin_df["resp"].astype(int)
 fin_df = fin_df.sort_values(["id", "item"]).reset_index(drop=True)
 
-out_fin = "personality_financial_handwriting__financial_behavior.csv"
+out_fin = "personality_handwriting__financial_behavior.csv"
 fin_df.to_csv(os.path.join(OUT_DIR, out_fin), index=False)
 print(f"financial_behavior: {fin_df['id'].nunique()} participants, "
       f"{fin_df['item'].nunique()} items, {len(fin_df)} rows")
@@ -98,7 +101,7 @@ update_index(OUT_DIR, [
      "doi": DOI, "title": "Personality, Financial Behaviour, and Handwriting Analysis",
      "scale": "financial_behavior", "n_participants": fin_df["id"].nunique(),
      "n_items": fin_df["item"].nunique(), "n_responses": len(fin_df),
-     "resp_range": "0-5", "license": LICENSE,
-     "notes": "mixed financial attitude and personality Likert items; item text = item label",
+     "resp_range": "1-5", "license": LICENSE,
+     "notes": "mixed financial attitude and personality Likert items; item text = item label; 4 isolated 0-responses dropped as entry errors",
      "status": "cleaned"},
 ])

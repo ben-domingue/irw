@@ -109,7 +109,7 @@ for scale_name, item_map in SCALES.items():
     scale_df["resp"] = scale_df["resp"].astype(int)
     scale_df = scale_df.sort_values(["id", "item"]).reset_index(drop=True)
 
-    out_file = f"dpt_noncognitive_traits__{scale_name}.csv"
+    out_file = f"dpt_noncog__{scale_name}.csv"
     scale_df.to_csv(os.path.join(OUT_DIR, out_file), index=False)
 
     n_p = scale_df["id"].nunique()

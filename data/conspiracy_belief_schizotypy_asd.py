@@ -119,7 +119,7 @@ for scale_name, col_range, prefix, resp_range in SCALES:
     long = long.sort_values(["id", "item"]).reset_index(drop=True)
     long["resp"] = long["resp"].astype(int)
 
-    fname = f"conspiracy_belief_schizotypy_asd__{scale_name}.csv"
+    fname = f"conspiracy_asd__{scale_name}.csv"
     long.to_csv(os.path.join(OUT_DIR, fname), index=False)
 
     n_participants = long["id"].nunique()
