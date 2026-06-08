@@ -34,6 +34,30 @@ python irw_batch_updated.py candidates.csv --out triage.csv --resume
 The triage step downloads each candidate and runs automated checks — it does
 **not** save any data files. Its only output is `triage.csv`.
 
+### Step 1b — Retriage human_assistance rows (optional)
+
+After a full triage run the `human_assistance` bucket is usually large (hundreds
+of rows). Most of it is recoverable without re-downloading anything:
+
+```bash
+python irw_retriage_ha.py --input triage.csv --out triage_ha_refined.csv
+```
+
+This reads the 400-char `reasons` strings already in the triage CSV and
+sub-classifies each `human_assistance` row into one of six buckets:
+
+| refined_flag | Typical cause | Action |
+|---|---|---|
+| `not_item_response` | HTML-markup scraped tables, data dictionaries, implausible participant counts | Drop |
+| `aggregate_continuous` | >50 unique resp values after melt; extreme dup_id_item ratio | Drop — likely continuous measures |
+| `wrong_file_selected` | Codebook file downloaded instead of data matrix (common with SAPA-Project) | Re-resolve landing page manually |
+| `recoverable_format` | Semicolon-delimited file read with comma delimiter | Re-read with `sep=';'`, re-triage |
+| `worth_retrying` | dup_id_item with plausible longitudinal structure (ratio 1–8×, n≥50) | Re-download; look for wave/timepoint column |
+| `human_review` | Genuinely ambiguous | Needs a human to look at the raw file |
+
+In practice ~60% of `human_assistance` rows are resolved automatically, leaving
+a much smaller set for manual review.
+
 ---
 
 ## Step 2 — Process the queue
@@ -216,3 +240,14 @@ Evaluate a single file directly (useful for spot-checking):
 python irw_triage_updated.py path/to/data.csv
 python irw_triage_updated.py https://example.com/data.csv
 ```
+
+### `irw_retriage_ha.py`
+Post-hoc refinement of `human_assistance` rows using metadata already in the
+triage CSV — no re-download required. Adds `refined_flag` and `refined_reason`
+columns and prints a summary with actionable follow-up lists.
+```
+--input <path>   triage CSV to read (default: irw_triage_new.csv)
+--output <path>  refined CSV to write (default: irw_retriage_ha.csv)
+```
+Run this after any full batch triage to reduce the manual review burden before
+deciding which `human_assistance` cases to escalate.
