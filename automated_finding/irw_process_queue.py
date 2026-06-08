@@ -81,7 +81,8 @@ def fetch_queue() -> list[dict]:
         print(f"ERROR: could not fetch queue sheet: {e}", file=sys.stderr)
         sys.exit(1)
 
-    rows = list(csv.DictReader(io.StringIO(r.text)))
+    rows = [row for row in csv.DictReader(io.StringIO(r.text))
+            if any(v.strip() for v in row.values())]
     if not rows:
         print("Queue sheet is empty.")
         sys.exit(0)
