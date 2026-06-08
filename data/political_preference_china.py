@@ -2,8 +2,10 @@
 Self-reported Political Preference in China
 Source: https://doi.org/10.7910/DVN/DWPLBC  (Harvard Dataverse)
 
-392 participants. Three attitude items (0-5 ordinal) asking participants
+~350 participants. Three attitude items (1-5 ordinal) asking participants
 to rate their views toward different online political factions.
+0-responses (~10% of raw data) dropped as the scale interpretation is
+ambiguous and the item anchors are not documented in the data file.
 Binary group-membership classifications and derived grouping variables
 are excluded as they are not item responses.
 
@@ -56,6 +58,7 @@ ITEM_LABELS = {
 att_df = df[df["item"].isin(ATTITUDE_ITEMS)].copy()
 att_df["item"] = att_df["item"].map(ITEM_LABELS)
 att_df["resp"] = att_df["resp"].astype(int)
+att_df = att_df[att_df["resp"] != 0]  # 0-anchor ambiguous; not documented in data file
 att_df = att_df.sort_values(["id", "item"]).reset_index(drop=True)
 
 out_file = "political_preference_china.csv"
