@@ -9,7 +9,7 @@
 - [x] `10_7910_dvn_iek9pw.csv` — Personality + Entrepreneurship (Brazil) — 5 scale files
 - [x] `10_6084_m9_figshare_26130403_v1.csv` — Quarter-Life Crisis — 3 scale files
 - [x] `10_7910_dvn_y75cp2.csv` — DPT Non-Cognitive Traits — 6 scale files
-- [x] Redivis upload — all cleaned datasets uploaded
+- [x] Redivis upload — all cleaned datasets uploaded (batch 1 + batch 2: 15 new tables)
 - [x] Biblio sheet entries — all entries added
 
 ## Pipeline improvements
