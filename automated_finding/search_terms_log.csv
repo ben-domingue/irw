@@ -1,0 +1,11 @@
+date,query,output_file,notes
+2026-06-01,item response theory,irw_discovered.csv,initial run; 539 candidates (135 from Zenodo)
+2026-06-05,executive function,irw_discovered_new.csv,expanded terms batch
+2026-06-05,reaction time task,irw_discovered_new.csv,expanded terms batch
+2026-06-05,reading fluency,irw_discovered_new.csv,expanded terms batch
+2026-06-05,phonological awareness,irw_discovered_new.csv,expanded terms batch
+2026-06-05,mathematics achievement,irw_discovered_new.csv,expanded terms batch
+2026-06-05,stroop,irw_discovered_new.csv,expanded terms batch
+2026-06-05,flanker task,irw_discovered_new.csv,expanded terms batch
+2026-06-05,n-back,irw_discovered_new.csv,expanded terms batch
+2026-06-08,patient reported outcomes,irw_discovered_pro.csv,
