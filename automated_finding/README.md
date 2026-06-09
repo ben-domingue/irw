@@ -26,9 +26,10 @@ python irw_batch_updated.py candidates.csv --out triage.csv
 python irw_batch_updated.py candidates.csv --out triage.csv --resume
 
 # 4. Open triage.csv, sort by flag ('good' first), review candidates.
-#    For anything you want to process, add a row to the queue sheet:
+#    For anything you want to process, add a row to the "to be processed" tab:
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
 #    (columns: doi, title, source, url)
+#    For human_review rows from irw_retriage_ha.py, add them to the "human eye" tab.
 ```
 
 The triage step downloads each candidate and runs automated checks — it does
@@ -70,7 +71,7 @@ a much smaller set for manual review.
 python irw_process_queue.py
 ```
 
-This reads the [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit),
+This reads the **"to be processed"** tab of the [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit),
 downloads each dataset, and saves a standardized file to `irw_output/queue/`.
 Re-running is safe — datasets already in `irw_output/queue/` are skipped.
 
@@ -143,9 +144,16 @@ tell you exactly what to look for in each file.
 
 ## Keeping the queue current
 
+The [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) has two tabs:
+
+| Tab | Purpose |
+|---|---|
+| **to be processed** | Datasets queued for or already processed. Add rows here for anything you intend to process (`doi`, `title`, `source`, `url`). Rows are never removed — they serve as a permanent exclusion list. |
+| **human eye** | Datasets with `refined_flag = human_review` that need a person to open the raw file and decide if they're worth processing. Move actionable rows to "to be processed" once a decision is made. |
+
 | Source | When it's checked | What it excludes |
 |---|---|---|
-| [Queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) | Step 1 (discovery) | DOIs already queued for processing |
+| Queue sheet — "to be processed" tab | Step 1 (discovery) | DOIs already queued for processing |
 | Redivis (`bdomingu/irw_meta`) | Step 2 (process queue) | DOIs already in the IRW |
 
 No local metadata files needed. The Redivis check runs once at the start of
