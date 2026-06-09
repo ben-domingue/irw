@@ -22,10 +22,10 @@ python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
 python irw_batch_updated.py candidates.csv --limit 10 --out triage_test.csv
 
 # 3. Full run — safe to interrupt and resume
-python irw_batch_updated.py candidates.csv --out triage.csv
-python irw_batch_updated.py candidates.csv --out triage.csv --resume
+python irw_batch_updated.py candidates.csv --out irw_triage.csv
+python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 
-# 4. Open triage.csv, sort by flag ('good' first), review candidates.
+# 4. Open irw_triage.csv, sort by flag ('good' first), review candidates.
 #    For anything you want to process, add a row to the "to be processed" tab:
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
 #    (columns: doi, title, source, url)
@@ -33,7 +33,7 @@ python irw_batch_updated.py candidates.csv --out triage.csv --resume
 ```
 
 The triage step downloads each candidate and runs automated checks — it does
-**not** save any data files. Its only output is `triage.csv`.
+**not** save any data files. Its only output is `irw_triage.csv`.
 
 ### Step 1b — Retriage human_assistance rows (optional)
 
@@ -41,7 +41,7 @@ After a full triage run the `human_assistance` bucket is usually large (hundreds
 of rows). Most of it is recoverable without re-downloading anything:
 
 ```bash
-python irw_retriage_ha.py --input triage.csv --out triage_ha_refined.csv
+python irw_retriage_ha.py --input irw_triage.csv --out irw_retriage_ha.csv
 ```
 
 This reads the 400-char `reasons` strings already in the triage CSV and
@@ -223,7 +223,7 @@ blocked by epi/clinical study language; supplementary file titles
 Auto-loads `irw_metadata.csv` and the queue sheet to exclude known DOIs.
 ```
 --all          disable relevance filter
---out <path>   output path (default: irw_discovered.csv)
+--out <path>   output path (default: candidates.csv)
 ```
 
 ### `irw_batch_updated.py`
@@ -232,7 +232,7 @@ Resolves landing pages to data files, downloads, triages, and writes
 ```
 --limit <n>    process only the first N rows
 --resume       continue from checkpoint after interruption
---out <path>   output path (default: irw_triage_summary.csv)
+--out <path>   output path (default: irw_triage.csv)
 ```
 
 ### `irw_process_queue.py`
@@ -254,7 +254,7 @@ Post-hoc refinement of `human_assistance` rows using metadata already in the
 triage CSV — no re-download required. Adds `refined_flag` and `refined_reason`
 columns and prints a summary with actionable follow-up lists.
 ```
---input <path>   triage CSV to read (default: irw_triage_new.csv)
+--input <path>   triage CSV to read (default: irw_triage.csv)
 --output <path>  refined CSV to write (default: irw_retriage_ha.csv)
 ```
 Run this after any full batch triage to reduce the manual review burden before

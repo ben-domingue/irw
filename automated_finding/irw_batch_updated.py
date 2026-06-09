@@ -345,7 +345,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("candidates_csv")
-    ap.add_argument("--out", default="irw_triage_summary.csv")
+    ap.add_argument("--out", default="irw_triage.csv")
     ap.add_argument("--limit", type=int, default=None,
                     help="process only the first N (use this to test first!)")
     ap.add_argument("--resume", action="store_true",

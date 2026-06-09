@@ -370,7 +370,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("queries", nargs="*", default=["item response theory"])
     ap.add_argument("--all", action="store_true", help="disable relevance filter")
-    ap.add_argument("--out", default="irw_discovered.csv")
+    ap.add_argument("--out", default="candidates.csv")
     args = ap.parse_args()
 
     queries = args.queries or ["item response theory"]

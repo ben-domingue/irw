@@ -259,8 +259,8 @@ FLAG_ORDER = [
 def main():
     import argparse, os, sys
     ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--input",  default="irw_triage_new.csv",
-                    help="triage CSV to read (default: irw_triage_new.csv)")
+    ap.add_argument("--input",  default="irw_triage.csv",
+                    help="triage CSV to read (default: irw_triage.csv)")
     ap.add_argument("--output", default="irw_retriage_ha.csv",
                     help="output CSV (default: irw_retriage_ha.csv)")
     args = ap.parse_args()
