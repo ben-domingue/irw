@@ -21,7 +21,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | Column | Required | Rules |
 |--------|----------|-------|
 | `id` | yes | Identifier for the focal unit being measured — typically a person, but sometimes another entity (e.g., a word in a lexical task). Integer or string. Must be unique per focal unit (not per row). |
-| `item` | yes | Item identifier. String. Use original column names when they are meaningful; use `item_1`, `item_2`, … when they are not. |
+| `item` | yes | Item identifier. String. Use original column names when they are meaningful; use `item_1`, `item_2`, … when they are not. Item names should be chosen to allow straightforward downstream matching with item text — prefer names that correspond directly to identifiers used in the source instrument or codebook (e.g., `BDI_1`, `PHQ_3`) over generic positional labels whenever such identifiers exist. |
 | `resp` | yes | Response value. Must be numeric. Higher values represent a consistent directional change **within** each item, but direction may vary **across** items — do not recode reverse-scored items unless you have specific reason to. Remove imputed values. |
 | `cov_*` | no | Covariates that are invariant to the focal unit (e.g., a person's gender or age). Always prefix with `cov_`. |
 | `itemcov_*` | no | Covariates invariant to measurement probes (item-level attributes). Always prefix with `itemcov_`. |
@@ -201,7 +201,7 @@ When source column names are opaque (`V1`, `Q3`, column indices), assign generic
 ```python
 item_names = [f"item_{i:02d}" for i in range(1, n_items + 1)]
 ```
-Map source columns to these names before melting.
+Map source columns to these names before melting. When generic labels are necessary, preserve the mapping from original column name to assigned label in a comment or a separate lookup so that item text can be matched later if it becomes available.
 
 ### Non-Latin item text in column names
 If column names are in a non-English language, create a mapping to `item_1`, `item_2`, … and optionally attach `item_text` and `item_text_translated` columns in the output for documentation purposes (see `bakumenko_2023_adyghe_values.py`).
