@@ -70,7 +70,20 @@ automated_finding/irw_output/cleaned/
 
 ### 1. Load the raw data
 
-Accept any of: `.csv`, `.tsv`, `.xlsx`, `.xls`. Detect the format from the file extension. For Excel files with multiple sheets, inspect the sheet names and load the one containing response data (usually the first, or a sheet named "Data").
+Accept any tabular format — the list below is illustrative, not exhaustive. Detect the format from the file extension and use the appropriate reader:
+
+| Format | Extension(s) | Reader |
+|--------|-------------|--------|
+| CSV / TSV | `.csv`, `.tsv` | `pd.read_csv` |
+| Excel | `.xlsx`, `.xls` | `pd.read_excel` |
+| SPSS | `.sav`, `.zsav` | `pd.read_spss` or `pyreadstat.read_sav` |
+| Stata | `.dta` | `pd.read_stata` |
+| SAS | `.sas7bdat`, `.xpt` | `pd.read_sas` |
+| R data | `.RData`, `.rds`, `.rda` | `pyreadr.read_r` |
+
+For SPSS files, value labels embedded in the file (e.g., `1 = "Strongly disagree"`) are often useful for identifying covariate values — inspect them with `pyreadstat` metadata when available. Use numeric codes as the `resp` values; do not replace codes with label strings.
+
+For Excel files with multiple sheets, inspect the sheet names and load the one containing response data (usually the first, or a sheet named "Data").
 
 If the first row appears to be a label row rather than column headers (e.g., if cell A1 cannot be coerced to a number and looks like question text), skip it and use the second row as the header.
 
@@ -248,7 +261,7 @@ If items are organized into testlets, clones, or clusters that may violate local
 Some experimental datasets capture fine-grained behavioral traces (e.g., clickstreams, response sequences within a single item, eye-tracking events). The standard row structure — one row per person-item observation — does not accommodate these directly. Flag such datasets for human review rather than attempting to force them into the standard schema.
 
 ### Detecting the right file when multiple files exist on a landing page
-For Figshare, Dataverse, OSF, and Zenodo, iterate over the file list returned by the repository API and select the file matching the expected format (`.xlsx`, `.csv`). Prefer the main data file over codebooks, README files, or supplement tables. When multiple data files exist, flag this for human review rather than guessing.
+For Figshare, Dataverse, OSF, and Zenodo, iterate over the file list returned by the repository API and select the file matching any supported tabular format (`.csv`, `.xlsx`, `.sav`, `.dta`, `.sas7bdat`, `.RData`, etc.). Prefer the main data file over codebooks, README files, or supplement tables. When multiple data files exist, flag this for human review rather than guessing.
 
 ---
 
