@@ -30,10 +30,18 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
 #    (columns: doi, title, source, url)
 #    For human_review rows from irw_retriage_ha.py, add them to the "human eye" tab.
+
+# 5. Once actionable rows are captured in the sheet, delete the local triage CSV.
+#    It is a temporary working file — search_terms_log.csv is the permanent record.
 ```
 
 The triage step downloads each candidate and runs automated checks — it does
-**not** save any data files. Its only output is `irw_triage.csv`.
+**not** save any data files. Its only output is `irw_triage.csv` (a temporary
+working file — delete it once good candidates are in the queue sheet and
+human_review rows are in the "human eye" tab).
+
+`search_terms_log.csv` is the permanent record of all queries that have been
+run. Update it whenever you add new search terms.
 
 ### Step 1b — Retriage human_assistance rows (optional)
 

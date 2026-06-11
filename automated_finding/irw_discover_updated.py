@@ -153,7 +153,13 @@ _RE_EXCLUDE    = _matcher(EXCLUDE_TERMS)
 _RE_SUPPLEMENTARY = re.compile(
     r"^(?:table\s+\d+[_\s]|data\s+sheet\s+\d+[_\s]|"
     r"supplementary\s+(?:file|material|table|figure|data)\b|"
-    r"figure\s+\d+[_\s]|appendix\s*\d*[_:\s])",
+    r"figure\s+\d+[_\s]|appendix\s*\d*[_:\s])"
+    # DataCite-specific: SAGE/Springer supplemental files named "sj-ext-N-jrnl-doi"
+    r"|^sj-[a-z]+-\d+-"
+    # Anything flagged mid-title as supplemental material for a paper
+    r"|\bsupplemental\s+material\s+for\b"
+    # Software/package files accidentally filed as datasets (.tar, version strings)
+    r"|_\d+\.\d+\.\d+\.tar$",
     re.IGNORECASE
 )
 
@@ -311,7 +317,168 @@ def from_figshare(query: str, max_pages: int = 5, per: int = 50):
         time.sleep(0.5)
 
 
-SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare]
+def from_gesis(query: str, max_pages: int = 5, per: int = 25):
+    """GESIS Vitrine API — Elasticsearch-backed social/behavioral science archive."""
+    for page in range(max_pages):
+        try:
+            r = requests.get(
+                "https://api.vitrine.gesis.org/search/gesis-soda/_search",
+                params={"q": query, "size": per, "from": page * per},
+                headers=UA, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            hits = data.get("hits", {}).get("hits", [])
+        except Exception as e:
+            print(f"[gesis] {e}", file=sys.stderr); return
+        if not hits:
+            return
+        for h in hits:
+            s = h.get("_source", {})
+            title_obj = s.get("title", {})
+            title = title_obj.get("en") or title_obj.get("pref", "")
+            handles = s.get("handles", [])
+            doi = handles[0].get("notation", "") if handles else ""
+            url = handles[0].get("url", "") if handles else ""
+            pubs = s.get("publications", [{}])
+            published = pubs[0].get("startDate", "") if pubs else ""
+            yield Hit("gesis", title, url, norm_doi(doi), published)
+        total = data.get("hits", {}).get("total", {}).get("value", 0)
+        if (page + 1) * per >= total:
+            return
+        time.sleep(0.5)
+
+
+# Publishers already covered by other connectors — skip their DataCite records
+# to avoid duplicate candidates (DOI dedup catches exact matches, but publisher
+# filtering avoids pulling in thousands of Zenodo/Figshare records we already have).
+_DATACITE_SKIP = {
+    "zenodo", "figshare", "dryad data", "harvard dataverse",
+    "open science framework", "osf",
+}
+
+def from_datacite(query: str, max_pages: int = 5, per: int = 25):
+    """DataCite REST API — aggregates datasets from ICPSR, UK Data Service, DANS,
+    and hundreds of other repositories not covered by the other connectors."""
+    for page in range(1, max_pages + 1):
+        try:
+            r = requests.get(
+                "https://api.datacite.org/dois",
+                params={"query": query, "resource-type-id": "dataset",
+                        "page[size]": per, "page[number]": page},
+                headers=UA, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            items = data.get("data", [])
+        except Exception as e:
+            print(f"[datacite] {e}", file=sys.stderr); return
+        if not items:
+            return
+        for item in items:
+            a = item.get("attributes", {})
+            publisher = a.get("publisher", "").lower()
+            if any(s in publisher for s in _DATACITE_SKIP):
+                continue
+            titles = a.get("titles", [{}])
+            title = titles[0].get("title", "") if titles else ""
+            doi = a.get("doi", "")
+            url = a.get("url", "") or f"https://doi.org/{doi}"
+            published = str(a.get("publicationYear", ""))
+            # Strip version suffixes (e.g. 10.3886/icpsr21661.v3) for cleaner dedup
+            doi_norm = re.sub(r"\.v\d+$", "", norm_doi(doi))
+            yield Hit("datacite", title, url, doi_norm, published)
+        meta = data.get("meta", {})
+        if page >= meta.get("totalPages", 1):
+            return
+        time.sleep(0.5)
+
+
+def _dataverse_connector(name: str, base_url: str):
+    """Generate a Dataverse-compatible source function for a given instance."""
+    def fn(query: str, max_pages: int = 5, per: int = 50):
+        start = 0
+        for _ in range(max_pages):
+            try:
+                r = requests.get(
+                    f"{base_url}/api/search",
+                    params={"q": query, "type": "dataset", "per_page": per, "start": start},
+                    headers=UA, timeout=30)
+                r.raise_for_status()
+                data = r.json().get("data", {})
+                items = data.get("items", [])
+            except Exception as e:
+                print(f"[{name}] {e}", file=sys.stderr); return
+            if not items:
+                return
+            for it in items:
+                yield Hit(name, it.get("name", ""), it.get("url", ""),
+                          norm_doi(it.get("global_id", "")), it.get("published_at", ""))
+            start += per
+            if start >= data.get("total_count", 0):
+                return
+            time.sleep(0.5)
+    fn.__name__ = f"from_{name}"
+    return fn
+
+
+from_scholars_portal = _dataverse_connector(
+    "scholars_portal", "https://dataverse.scholarsportal.info")
+from_surf            = _dataverse_connector("surf", "https://dataverse.nl")
+from_aussda          = _dataverse_connector("aussda", "https://data.aussda.at")
+
+
+def from_openaire(query: str, max_pages: int = 5, per: int = 25):
+    """OpenAIRE — European open research aggregator (EU-funded datasets)."""
+    for page in range(1, max_pages + 1):
+        try:
+            r = requests.get(
+                "https://api.openaire.eu/search/datasets",
+                params={"keywords": query, "size": per, "page": page, "format": "json"},
+                headers=UA, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            results = data.get("response", {}).get("results", {}).get("result", [])
+            total = int(data.get("response", {}).get("header", {}).get("total", {}).get("$", 0))
+        except Exception as e:
+            print(f"[openaire] {e}", file=sys.stderr); return
+        if not results:
+            return
+        for res in results:
+            md = res.get("metadata", {}).get("oaf:entity", {}).get("oaf:result", {})
+            t = md.get("title", [])
+            if isinstance(t, list) and t:
+                title = t[0].get("$", "")
+            elif isinstance(t, dict):
+                title = t.get("$", "")
+            else:
+                title = ""
+            pids = md.get("pid", [])
+            doi = ""
+            for p in (pids if isinstance(pids, list) else [pids]):
+                if isinstance(p, dict) and p.get("@classid") == "doi":
+                    doi = p.get("$", "")
+                    break
+            url_obj = md.get("url", {})
+            url = url_obj.get("$", "") if isinstance(url_obj, dict) else ""
+            if not url and doi:
+                url = f"https://doi.org/{doi}"
+            dates = md.get("dateofacceptance", {})
+            published = dates.get("$", "")[:10] if isinstance(dates, dict) else ""
+            yield Hit("openaire", title, url, norm_doi(doi), published)
+        if page * per >= total:
+            return
+        time.sleep(0.5)
+
+
+# Also update skip list so DataCite doesn't duplicate our new Dataverse instances
+_DATACITE_SKIP.update({"scholars portal", "scholars portal dataverse", "surf",
+                        "aussda", "austrian social science data archive"})
+
+
+SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
+           from_gesis, from_datacite, from_openaire,
+           from_scholars_portal, from_surf, from_aussda]
+
+SOURCE_MAP = {fn.__name__.replace("from_", ""): fn for fn in SOURCES}
 
 
 # ---------------------------------------------------------------------------
@@ -349,10 +516,13 @@ def _load_auto_exclusions() -> set:
     return _load_queued_from_sheet()
 
 
-def discover(queries, exclude: set, relevance_on: bool) -> list:
+def discover(queries, exclude: set, relevance_on: bool, sources=None) -> list:
+    active = sources if sources is not None else SOURCES
     seen, results = set(), []
-    for q in queries:
-        for src in SOURCES:
+    total = len(queries)
+    for i, q in enumerate(queries, 1):
+        print(f"[query {i}/{total}] {q}", flush=True)
+        for src in active:
             for hit in src(q):
                 key = hit.doi or f"{hit.source}:{hit.title.strip().lower()}"
                 if not key or key in seen:
@@ -371,9 +541,20 @@ def main():
     ap.add_argument("queries", nargs="*", default=["item response theory"])
     ap.add_argument("--all", action="store_true", help="disable relevance filter")
     ap.add_argument("--out", default="candidates.csv")
+    ap.add_argument("--sources", metavar="NAME", nargs="+",
+                    help=f"query only these sources (choices: {', '.join(SOURCE_MAP)})")
     args = ap.parse_args()
 
     queries = args.queries or ["item response theory"]
+
+    if args.sources:
+        unknown = set(args.sources) - set(SOURCE_MAP)
+        if unknown:
+            ap.error(f"Unknown sources: {', '.join(unknown)}. Choices: {', '.join(SOURCE_MAP)}")
+        active_sources = [SOURCE_MAP[s] for s in args.sources]
+        print(f"Querying sources: {', '.join(args.sources)}")
+    else:
+        active_sources = None
 
     queued_dois = _load_auto_exclusions()
     exclude = queued_dois
@@ -383,7 +564,7 @@ def main():
     print(f"[note] IRW duplicate check runs at the start of Step 2 (irw_process_queue.py).")
     print()
 
-    hits = discover(queries, exclude, relevance_on=not args.all)
+    hits = discover(queries, exclude, relevance_on=not args.all, sources=active_sources)
     hits.sort(key=lambda h: h.published or "", reverse=True)
 
     with open(args.out, "w", newline="", encoding="utf-8") as f:
