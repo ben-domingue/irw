@@ -61,46 +61,75 @@ if (length(missing_vars) > 0) {
 # Person-level variables receive cov_ prefix.
 # Item responses are converted to item / resp columns.
 
-processed_data <- raw_data %>%
-  select(all_of(expected_vars)) %>%
-  rename(id = ID) %>%
-  rename_with(
-    .fn = ~ paste0("cov_", .x),
-    .cols = all_of(covariate_vars)
-  ) %>%
-  pivot_longer(
-    cols = all_of(item_vars),
-    names_to = "item",
-    values_to = "resp"
-  ) %>%
-  mutate(
-    item_family = case_when(
-      grepl("^SASC", item) ~ "SASC",
-      grepl("^CESD", item) ~ "CESD10",
-      grepl("^GAD", item) ~ "GAD7",
-      TRUE ~ NA_character_
-    )
-  )
+# 6. Create a helper function to generate one IRW-style long table per construct
+# Each output table keeps person-level covariates using the cov_ prefix.
+# Each row is one person-item response.
 
-# 7. Write processed main table
-write_csv(processed_data, "chen_2022_mental_health.csv")
+make_irw_table <- function(data, items, construct_name) {
+  data %>%
+    select(ID, all_of(covariate_vars), all_of(items)) %>%
+    rename(id = ID) %>%
+    rename_with(
+      .fn = ~ paste0("cov_", .x),
+      .cols = all_of(covariate_vars)
+    ) %>%
+    pivot_longer(
+      cols = all_of(items),
+      names_to = "item",
+      values_to = "resp"
+    ) %>%
+    mutate(construct = construct_name)
+}
+
+# 7. Generate construct-specific tables
+
+sasc_data <- make_irw_table(
+  data = raw_data,
+  items = sasc_items,
+  construct_name = "SASC"
+)
+
+cesd_data <- make_irw_table(
+  data = raw_data,
+  items = cesd_items,
+  construct_name = "CESD10"
+)
+
+gad_data <- make_irw_table(
+  data = raw_data,
+  items = gad_items,
+  construct_name = "GAD7"
+)
+
+# 8. Write construct-specific processed tables
+
+write_csv(sasc_data, "chen_2022_sasc.csv")
+write_csv(cesd_data, "chen_2022_cesd.csv")
+write_csv(gad_data, "chen_2022_gad.csv")
 
 
-# 8. Create a simple variable codebook
+# 9. Create a simple variable codebook
+
 variable_codebook <- tibble::tibble(
-  variable = names(processed_data),
+  variable = names(sasc_data),
   role = dplyr::case_when(
     variable == "id" ~ "person_id",
     grepl("^cov_", variable) ~ "person_level_covariate",
-    grepl("^SASC", variable) ~ "item_response_sasc",
-    grepl("^CESD", variable) ~ "item_response_cesd",
-    grepl("^GAD", variable) ~ "item_response_gad",
+    variable == "item" ~ "item_identifier",
+    variable == "resp" ~ "item_response",
+    variable == "construct" ~ "construct_identifier",
     TRUE ~ "other"
   )
 )
 
 write_csv(variable_codebook, "codebook_variables.csv")
 
-# 9. Print output summary
-print(dim(processed_data))
-print(names(processed_data))
+# 10. Print output summaries
+
+print(dim(sasc_data))
+print(dim(cesd_data))
+print(dim(gad_data))
+
+print(names(sasc_data))
+print(names(cesd_data))
+print(names(gad_data))
