@@ -1,60 +1,50 @@
-# Mental health dataset of college students during COVID-19
+Chen 2022 Mental Health Dataset
 
-## Source
+This folder contains processing documentation for the Chen et al. 2022 mental health dataset from Science Data Bank.
 
-Repository: Science Data Bank
+Source
 
-Dataset title: Mental health dataset of college students during COVID-19
-
+Dataset: Mental health dataset of college students during COVID-19
+Source: Science Data Bank
 DOI: 10.57760/sciencedb.000115.00089
+Original license: CC BY-NC 4.0
 
-License: CC BY-NC 4.0
+Processed output files
 
-Authors: Yaru Chen, Qisheng Zhang, Zhengkui Liu
+Following Ben’s suggestion, the dataset is split into three construct-specific long-format tables:
 
-Published: 2022-10-12
+* chen_2022_sasc.csv: SASC item responses
+* chen_2022_cesd.csv: CESD-10 item responses
+* chen_2022_gad.csv: GAD-7 item responses
 
-Survey period: April 13–23, 2020
+Each table is in long format, with one row per participant-item response. Person-level covariates are included in each table using the cov_ prefix.
 
-## Sample
+Output dimensions
 
-The dataset contains responses from 77,211 Chinese college students during the COVID-19 period.
+* chen_2022_sasc.csv: 1,698,642 rows × 12 columns
+* chen_2022_cesd.csv: 772,110 rows × 12 columns
+* chen_2022_gad.csv: 540,477 rows × 12 columns
 
-## Measures
+These correspond to:
 
-The dataset includes item-level responses from three psychological scales:
+* 77,211 participants × 22 SASC items
+* 77,211 participants × 10 CESD-10 items
+* 77,211 participants × 7 GAD-7 items
 
-- Smartphone Addiction Scale for College Students (SAS-C): SASC01–SASC22
-- Center for Epidemiological Studies Depression Scale, 10-item version (CES-D-10): CESD01–CESD10
-- Generalized Anxiety Disorder Scale (GAD-7): GAD01–GAD07
+Processing script
 
-## IRW standardization
+The processing script is:
 
-The original dataset was distributed as an SPSS `.sav` file. I converted the file using R `haven::read_sav()`, reshaped the item-level responses into long format, and standardized the output according to the IRW data standard.
+process_chen_2022_mental_health.R
 
-The IRW-standard item response file uses the following columns:
+The script:
 
-- `id`: anonymous respondent identifier
-- `item`: item identifier
-- `resp`: numeric item response
-- `item_family`: scale membership, including SAS-C, CES-D-10, and GAD-7
+* reads the original SPSS .sav file;
+* removes SPSS value labels before reshaping;
+* keeps person-level covariates in the main tables using the cov_ prefix;
+* reshapes item responses into long format with item and resp columns;
+* generates three construct-specific output tables for SASC, CESD-10, and GAD-7.
 
-Person-level covariates are stored separately using the `cov_` prefix.
+Notes
 
-## Processed outputs
-
-The local processed files include:
-
-- `irw_standard_responses.csv`: IRW-standard item response file with `id`, `item`, `resp`, and `item_family`
-- `irw_standard_covariates.csv`: person-level covariates using the `cov_` prefix
-- `irw_standard_item_summary.csv`: item-level response range and missingness
-- `codebook_variables.csv`: variable labels from the original SPSS file
-- `codebook_value_labels.csv`: value labels from the original SPSS file
-- `scale_missing_summary.csv`: missingness summary by scale
-- `process_mental_health_covid19.R`: reproducible R processing script
-
-## Notes
-
-This dataset appears suitable for IRW because it contains clear item-level responses from three psychological scales in a large Chinese college student sample.
-
-The main IRW-ready file is `irw_standard_responses.csv`.
+The processed CSV files are too large to upload directly through GitHub, so they were shared with Ben via Google Drive.
