@@ -17,7 +17,7 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("item_response_warehouse","item_response_warehouse_2")) {
+for (dataset in c("item_response_warehouse","item_response_warehouse_2","item_response_warehouse_3")) {
      v1<- redivis$organization("datapages")$dataset(dataset)
      tabs<-v1$list_tables()
      new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
