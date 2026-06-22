@@ -1,33 +1,15 @@
-## Incremental update: processes only tables not yet in itemtext_metadata,
-## then appends to the existing table and writes an updated CSV.
-## For a full recompute (e.g. new columns), use 08_itemtext_recompute.R.
+## One-time full recompute of itemtext_metadata.csv for ALL tables.
+## Run this when adding FK_grade or other new columns to the schema,
+## then switch back to 08_itemtext.R for incremental updates.
 ## Requires: quanteda, quanteda.textstats
 
-library(redivis)
 library(quanteda)
 library(quanteda.textstats)
 
 script_path <- grep("--file=", commandArgs(FALSE), value = TRUE)
 here <- if (length(script_path)) dirname(normalizePath(sub("--file=", "", script_path[1]))) else getwd()
 
-remove <- NULL  # c("table_name") to exclude specific tables
-
-## all tables with item text
 lt <- irw::irw_list_itemtext_tables()
-lt <- lt[!lt %in% remove]
-
-## tables already in Redivis
-user    <- redivis$user("bdomingu")
-dataset <- user$dataset("irw_meta")
-table   <- dataset$table("itemtext_metadata")
-existing <- as.data.frame(table$to_tibble())
-
-## only process tables not yet present
-tables.new <- lt[!lt %in% existing$table]
-if (length(tables.new) == 0) {
-    message("No new tables to process.")
-    quit(save = "no")
-}
 
 fk_score <- function(texts) {
     texts <- texts[!is.na(texts) & nchar(trimws(texts)) > 0]
@@ -49,9 +31,9 @@ summarize_table <- function(x) {
 }
 
 L <- list()
-for (ii in seq_along(tables.new)) {
-    tab <- tables.new[ii]
-    cat(sprintf("[%d/%d] %s\n", ii, length(tables.new), tab))
+for (ii in seq_along(lt)) {
+    tab <- lt[ii]
+    cat(sprintf("[%d/%d] %s\n", ii, length(lt), tab))
     items <- irw::irw_itemtext(tab)
     z <- if ("item_text_translated" %in% names(items)) items$item_text_translated else items$item_text
     nw        <- lengths(strsplit(z, " "))
@@ -64,11 +46,7 @@ for (ii in seq_along(tables.new)) {
 
 save(L, file = file.path(here, "items_alltext.Rdata"))
 
-rows      <- lapply(L, summarize_table)
-merge.new <- do.call(rbind, rows)
+rows <- lapply(L, summarize_table)
+df   <- do.call(rbind, rows)
 
-## align columns: add FK_grade to existing if this is the first run with it
-if (!"FK_grade" %in% names(existing)) existing$FK_grade <- NA_real_
-
-df <- rbind(merge.new, existing[, names(merge.new)])
 write.csv(df, file = file.path(here, "itemtext_metadata.csv"), quote = TRUE, row.names = FALSE)
