@@ -114,9 +114,6 @@
   - [x] Redivis upload — batch 8 (3 new tables: ma2021_sme_covid, balmas2018_leader_personality, balmas2018_leader_attitudes)
   - [x] Biblio sheet entries — batch 8 (/tmp/biblio_batch8.csv)
 
-- [ ] 117 + 37 + 27 = 181 `human_review` rows total — tracked in "Automated queue - Human eye" Google Sheet (deduped to 600 rows as of 2026-06-22):
-  - 117 from irw_retriage_ha.csv (refined_flag='human_review')
-  - 37 from irw_retriage_personality.csv (refined_flag='human_review')
-  - 27 from irw_retriage_batch7.csv (refined_flag='human_review')
+- [ ] ~566 `human_review` rows — tracked in "Automated queue - Human eye" Google Sheet (600 rows total after dedup, 2026-06-22); the 181 figure in earlier notes undercounted; sheet has accumulated entries across all batches/runs
 
 - [x] Batch 7 discovery complete (2026-06-12) — 1,317 candidates, 9 good (all already on Redivis), 27 human_review (added to Human eye sheet), batch files cleaned up
