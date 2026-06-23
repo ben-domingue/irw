@@ -475,8 +475,7 @@ _DATACITE_SKIP.update({"scholars portal", "scholars portal dataverse", "surf",
 
 
 SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
-           from_gesis, from_datacite, from_openaire,
-           from_scholars_portal, from_surf, from_aussda]
+           from_datacite, from_scholars_portal, from_surf]
 
 SOURCE_MAP = {fn.__name__.replace("from_", ""): fn for fn in SOURCES}
 
@@ -491,6 +490,39 @@ QUEUE_SHEET_URL = (
     "https://docs.google.com/spreadsheets/d/"
     "1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/export?format=csv&gid=0"
 )
+
+# IRW dictionary: authoritative list of what is already in the warehouse.
+DICT_SHEET_URL = (
+    "https://docs.google.com/spreadsheets/d/"
+    "1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/export?format=csv&gid=0"
+)
+
+
+def _extract_doi_from_url(url: str) -> str | None:
+    """Best-effort extraction of a normalised DOI from a data repository URL."""
+    if not url:
+        return None
+    # doi.org resolver
+    m = re.search(r'doi\.org/(.+?)(?:\s|$)', url)
+    if m:
+        return norm_doi(m.group(1))
+    # Harvard Dataverse persistent ID
+    m = re.search(r'persistentId=doi:(.+?)(?:&|$)', url, re.I)
+    if m:
+        return norm_doi(m.group(1))
+    # OSF project page
+    m = re.search(r'osf\.io/([a-z0-9]+)/?$', url, re.I)
+    if m:
+        return norm_doi(f'10.17605/osf.io/{m.group(1)}')
+    # Zenodo record page
+    m = re.search(r'zenodo\.org/record/(\d+)', url)
+    if m:
+        return norm_doi(f'10.5281/zenodo.{m.group(1)}')
+    # Figshare article page (any subdomain)
+    m = re.search(r'figshare\.com/articles/[^/]+/(\d+)', url)
+    if m:
+        return norm_doi(f'10.6084/m9.figshare.{m.group(1)}')
+    return None
 
 
 def _load_queued_from_sheet() -> set:
@@ -511,12 +543,46 @@ def _load_queued_from_sheet() -> set:
         return set()
 
 
+def _load_existing_irw_dois() -> set:
+    """Fetch DOIs of datasets already in the IRW dictionary Google Sheet."""
+    try:
+        r = requests.get(DICT_SHEET_URL, timeout=15)
+        r.raise_for_status()
+        reader = csv.DictReader(r.text.splitlines())
+        dois = set()
+        for row in reader:
+            url_doi = _extract_doi_from_url(row.get("URL (for data)", ""))
+            if url_doi:
+                dois.add(url_doi)
+            paper_doi = norm_doi(row.get("DOI (for paper)", "") or "")
+            if "/" in paper_doi and " " not in paper_doi:
+                dois.add(paper_doi)
+        return dois
+    except Exception as e:
+        print(f"[warn] Could not fetch IRW dictionary from Google Sheet: {e}",
+              file=sys.stderr)
+        return set()
+
+
 def _load_auto_exclusions() -> set:
-    """Load queued DOIs from the Google Sheet. IRW duplicate check happens in Step 2."""
-    return _load_queued_from_sheet()
+    """Load DOIs to exclude: already in the IRW dictionary + in the processing queue."""
+    existing = _load_existing_irw_dois()
+    queued = _load_queued_from_sheet()
+    total = existing | queued
+    print(f"[exclude] {len(existing)} DOIs already in IRW, "
+          f"{len(queued)} in processing queue → {len(total)} total excluded",
+          flush=True)
+    return total
 
 
-def discover(queries, exclude: set, relevance_on: bool, sources=None) -> list:
+def discover(queries, exclude: set, relevance_on: bool, sources=None,
+             on_hit=None) -> list:
+    """Discover candidates across all sources for each query.
+
+    on_hit: optional callable(Hit) invoked immediately when a new candidate
+    passes all filters — use this to write results incrementally rather than
+    waiting for the full run to finish.
+    """
     active = sources if sources is not None else SOURCES
     seen, results = set(), []
     total = len(queries)
@@ -533,6 +599,8 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None) -> list:
                     continue
                 seen.add(key)
                 results.append(hit)
+                if on_hit:
+                    on_hit(hit)
     return results
 
 

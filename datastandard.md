@@ -35,6 +35,12 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 
 Column order in the output file: `id`, `item`, `resp`, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
 
+**Common mistake:** When melting with `id_vars=["id"] + cov_cols`, pandas places covariates immediately after `id` in the output — before `item` and `resp`. Always reorder explicitly after melting:
+```python
+out_cols = ["id", "item", "resp"] + [c for c in long.columns if c in ("wave","treat","rt","date")] + cov_cols
+long = long[out_cols]
+```
+
 ---
 
 ## One file per scale
@@ -54,6 +60,8 @@ senosy_2025_anxiety_state.csv
 ```
 
 Use the first author's last name, publication year, and a short construct label. For multi-scale papers, append the scale name or abbreviation.
+
+**Table names must be 40 characters or fewer** (excluding `.csv`). If the natural name exceeds 40 characters, shorten the construct label — use standard abbreviations (e.g., `pos` for Perceived Organizational Support, `gad7` for GAD-7) or truncate. Never shorten the author name or year.
 
 ---
 
@@ -220,7 +228,11 @@ Include as an `rt` column in the output. Do not include it in the `item`/`resp` 
 When the same focal unit appears at multiple time points, include a `wave` column (integer, with larger values indicating later collection). If calendar timestamps are available, store them as `date` in seconds — either relative (seconds since data collection began) or Unix absolute time; do not use milliseconds, minutes, or other units. Duplicate `id`+`item` pairs are valid when a `wave` column is present.
 
 ### Experimental / RCT treatment data
-Include a `treat` column with values `1` (treatment) and `0` (control). This applies to any experimental design, not only RCTs.
+Include a `treat` column with values `1` (treatment) and `0` (control). This applies to any experimental design, not only RCTs. Do **not** encode this as a `cov_group` covariate — it belongs in `treat` so downstream tools can identify it. Map whatever coding the source uses (e.g., 1/2) to the standard 0/1 encoding:
+```python
+df["treat"] = (df["original_group_col"] == treatment_value).astype(int)
+df = df.drop(columns=["original_group_col"])
+```
 
 ### Missing person ID — use row index
 ```python
