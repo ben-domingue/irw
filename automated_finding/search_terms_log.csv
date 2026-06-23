@@ -1131,3 +1131,261 @@ date,query,output_file,notes
 2026-06-12,التردد المهني,irw_discovered_batch7.csv,batch7 run
 2026-06-12,beroepsonzekerheid,irw_discovered_batch7.csv,batch7 run
 2026-06-12,진로 미결정,irw_discovered_batch7.csv,batch7 run
+2026-06-22,prospective memory,irw_discovered_batch8.csv,batch8 run
+2026-06-22,prospective memory task,irw_discovered_batch8.csv,batch8 run
+2026-06-22,task switching,irw_discovered_batch8.csv,batch8 run
+2026-06-22,task-switching,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cognitive flexibility,irw_discovered_batch8.csv,batch8 run
+2026-06-22,attentional blink,irw_discovered_batch8.csv,batch8 run
+2026-06-22,attentional control,irw_discovered_batch8.csv,batch8 run
+2026-06-22,dual-task performance,irw_discovered_batch8.csv,batch8 run
+2026-06-22,processing speed,irw_discovered_batch8.csv,batch8 run
+2026-06-22,fluid intelligence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,crystallized intelligence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,go no-go task,irw_discovered_batch8.csv,batch8 run
+2026-06-22,mental rotation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sustained attention,irw_discovered_batch8.csv,batch8 run
+2026-06-22,vigilance task,irw_discovered_batch8.csv,batch8 run
+2026-06-22,probabilistic reversal learning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,delay discounting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,temporal discounting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,risk perception,irw_discovered_batch8.csv,batch8 run
+2026-06-22,risk taking,irw_discovered_batch8.csv,batch8 run
+2026-06-22,decision making under uncertainty,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cognitive aging,irw_discovered_batch8.csv,batch8 run
+2026-06-22,reading motivation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,reading disability,irw_discovered_batch8.csv,batch8 run
+2026-06-22,dyslexia,irw_discovered_batch8.csv,batch8 run
+2026-06-22,reading self-concept,irw_discovered_batch8.csv,batch8 run
+2026-06-22,oral language,irw_discovered_batch8.csv,batch8 run
+2026-06-22,oral reading fluency,irw_discovered_batch8.csv,batch8 run
+2026-06-22,morphological awareness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,print awareness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,print motivation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,text comprehension,irw_discovered_batch8.csv,batch8 run
+2026-06-22,second language acquisition,irw_discovered_batch8.csv,batch8 run
+2026-06-22,L2 reading,irw_discovered_batch8.csv,batch8 run
+2026-06-22,language proficiency,irw_discovered_batch8.csv,batch8 run
+2026-06-22,bilingual language use,irw_discovered_batch8.csv,batch8 run
+2026-06-22,mathematical reasoning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,fraction knowledge,irw_discovered_batch8.csv,batch8 run
+2026-06-22,number sense,irw_discovered_batch8.csv,batch8 run
+2026-06-22,mathematics self-concept,irw_discovered_batch8.csv,batch8 run
+2026-06-22,mathematical fluency,irw_discovered_batch8.csv,batch8 run
+2026-06-22,geometry achievement,irw_discovered_batch8.csv,batch8 run
+2026-06-22,algebra readiness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,STEM attitudes,irw_discovered_batch8.csv,batch8 run
+2026-06-22,eating pathology,irw_discovered_batch8.csv,batch8 run
+2026-06-22,dissociation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,dissociative symptoms,irw_discovered_batch8.csv,batch8 run
+2026-06-22,borderline symptoms,irw_discovered_batch8.csv,batch8 run
+2026-06-22,emotion dysregulation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,alexithymia,irw_discovered_batch8.csv,batch8 run
+2026-06-22,illness behavior,irw_discovered_batch8.csv,batch8 run
+2026-06-22,paranoia,irw_discovered_batch8.csv,batch8 run
+2026-06-22,hallucination proneness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,schizotypy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,psychosis risk,irw_discovered_batch8.csv,batch8 run
+2026-06-22,prolonged grief disorder,irw_discovered_batch8.csv,batch8 run
+2026-06-22,complicated grief,irw_discovered_batch8.csv,batch8 run
+2026-06-22,moral distress,irw_discovered_batch8.csv,batch8 run
+2026-06-22,interoception,irw_discovered_batch8.csv,batch8 run
+2026-06-22,interoceptive awareness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,body dysmorphia,irw_discovered_batch8.csv,batch8 run
+2026-06-22,tic severity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,selective mutism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,hoarding,irw_discovered_batch8.csv,batch8 run
+2026-06-22,self-harm,irw_discovered_batch8.csv,batch8 run
+2026-06-22,non-suicidal self-injury,irw_discovered_batch8.csv,batch8 run
+2026-06-22,perfectionism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,trait anxiety,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sensation seeking,irw_discovered_batch8.csv,batch8 run
+2026-06-22,novelty seeking,irw_discovered_batch8.csv,batch8 run
+2026-06-22,absorption,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cognitive style,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cognitive rigidity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,intolerance of uncertainty,irw_discovered_batch8.csv,batch8 run
+2026-06-22,need for closure,irw_discovered_batch8.csv,batch8 run
+2026-06-22,openness to experience,irw_discovered_batch8.csv,batch8 run
+2026-06-22,agreeableness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,conscientiousness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,humor styles,irw_discovered_batch8.csv,batch8 run
+2026-06-22,dispositional optimism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,trait mindfulness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,boredom proneness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,reactive aggression,irw_discovered_batch8.csv,batch8 run
+2026-06-22,proactive aggression,irw_discovered_batch8.csv,batch8 run
+2026-06-22,hedonic wellbeing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,eudaimonic wellbeing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,psychological wellbeing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,positive psychology,irw_discovered_batch8.csv,batch8 run
+2026-06-22,vitality,irw_discovered_batch8.csv,batch8 run
+2026-06-22,self-determination,irw_discovered_batch8.csv,batch8 run
+2026-06-22,basic psychological needs,irw_discovered_batch8.csv,batch8 run
+2026-06-22,gratitude,irw_discovered_batch8.csv,batch8 run
+2026-06-22,hope,irw_discovered_batch8.csv,batch8 run
+2026-06-22,hope theory,irw_discovered_batch8.csv,batch8 run
+2026-06-22,optimism scale,irw_discovered_batch8.csv,batch8 run
+2026-06-22,forgiveness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,awe,irw_discovered_batch8.csv,batch8 run
+2026-06-22,emotional granularity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,affect regulation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,ambivalence over emotional expression,irw_discovered_batch8.csv,batch8 run
+2026-06-22,egalitarianism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,system justification,irw_discovered_batch8.csv,batch8 run
+2026-06-22,economic inequality attitudes,irw_discovered_batch8.csv,batch8 run
+2026-06-22,environmental attitudes,irw_discovered_batch8.csv,batch8 run
+2026-06-22,animal attitudes,irw_discovered_batch8.csv,batch8 run
+2026-06-22,religious fundamentalism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,spirituality,irw_discovered_batch8.csv,batch8 run
+2026-06-22,nationalism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,patriotism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,moral foundations,irw_discovered_batch8.csv,batch8 run
+2026-06-22,just world belief,irw_discovered_batch8.csv,batch8 run
+2026-06-22,belief in science,irw_discovered_batch8.csv,batch8 run
+2026-06-22,science literacy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,scientific reasoning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,media trust,irw_discovered_batch8.csv,batch8 run
+2026-06-22,trust in news,irw_discovered_batch8.csv,batch8 run
+2026-06-22,fake news discernment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,helicopter parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,overprotective parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,permissive parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,authoritative parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,authoritarian parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,harsh parenting,irw_discovered_batch8.csv,batch8 run
+2026-06-22,fathering,irw_discovered_batch8.csv,batch8 run
+2026-06-22,father involvement,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sibling relationship,irw_discovered_batch8.csv,batch8 run
+2026-06-22,family cohesion,irw_discovered_batch8.csv,batch8 run
+2026-06-22,divorce adjustment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,co-rumination,irw_discovered_batch8.csv,batch8 run
+2026-06-22,breakup distress,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sexual satisfaction,irw_discovered_batch8.csv,batch8 run
+2026-06-22,communication satisfaction,irw_discovered_batch8.csv,batch8 run
+2026-06-22,academic identity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,belonging,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sense of belonging,irw_discovered_batch8.csv,batch8 run
+2026-06-22,school belonging,irw_discovered_batch8.csv,batch8 run
+2026-06-22,stereotype threat,irw_discovered_batch8.csv,batch8 run
+2026-06-22,academic help-seeking,irw_discovered_batch8.csv,batch8 run
+2026-06-22,academic cheating,irw_discovered_batch8.csv,batch8 run
+2026-06-22,academic dishonesty,irw_discovered_batch8.csv,batch8 run
+2026-06-22,digital literacy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,inquiry learning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,inquiry-based learning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,peer learning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cooperative learning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,teacher-student relationship,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cannabis use,irw_discovered_batch8.csv,batch8 run
+2026-06-22,marijuana use,irw_discovered_batch8.csv,batch8 run
+2026-06-22,tobacco dependence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,nicotine dependence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,caffeine dependence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,compulsive buying,irw_discovered_batch8.csv,batch8 run
+2026-06-22,compulsive shopping,irw_discovered_batch8.csv,batch8 run
+2026-06-22,binge drinking,irw_discovered_batch8.csv,batch8 run
+2026-06-22,alcohol expectancies,irw_discovered_batch8.csv,batch8 run
+2026-06-22,craving,irw_discovered_batch8.csv,batch8 run
+2026-06-22,pornography use,irw_discovered_batch8.csv,batch8 run
+2026-06-22,problematic pornography use,irw_discovered_batch8.csv,batch8 run
+2026-06-22,doomscrolling,irw_discovered_batch8.csv,batch8 run
+2026-06-22,digital wellbeing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,technoference,irw_discovered_batch8.csv,batch8 run
+2026-06-22,emotional labor,irw_discovered_batch8.csv,batch8 run
+2026-06-22,abusive supervision,irw_discovered_batch8.csv,batch8 run
+2026-06-22,perceived organizational support,irw_discovered_batch8.csv,batch8 run
+2026-06-22,role conflict,irw_discovered_batch8.csv,batch8 run
+2026-06-22,role ambiguity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,job demands,irw_discovered_batch8.csv,batch8 run
+2026-06-22,job resources,irw_discovered_batch8.csv,batch8 run
+2026-06-22,thriving at work,irw_discovered_batch8.csv,batch8 run
+2026-06-22,work meaningfulness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,presenteeism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,turnover intention,irw_discovered_batch8.csv,batch8 run
+2026-06-22,organizational identification,irw_discovered_batch8.csv,batch8 run
+2026-06-22,proactive behavior,irw_discovered_batch8.csv,batch8 run
+2026-06-22,voice behavior,irw_discovered_batch8.csv,batch8 run
+2026-06-22,ethical leadership,irw_discovered_batch8.csv,batch8 run
+2026-06-22,entrepreneurial intention,irw_discovered_batch8.csv,batch8 run
+2026-06-22,pain self-management,irw_discovered_batch8.csv,batch8 run
+2026-06-22,physical activity enjoyment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,exercise identity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,body dissatisfaction,irw_discovered_batch8.csv,batch8 run
+2026-06-22,weight stigma,irw_discovered_batch8.csv,batch8 run
+2026-06-22,eating competence,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sports injury,irw_discovered_batch8.csv,batch8 run
+2026-06-22,injury anxiety,irw_discovered_batch8.csv,batch8 run
+2026-06-22,athlete burnout,irw_discovered_batch8.csv,batch8 run
+2026-06-22,competitive anxiety,irw_discovered_batch8.csv,batch8 run
+2026-06-22,flow state,irw_discovered_batch8.csv,batch8 run
+2026-06-22,sport flow,irw_discovered_batch8.csv,batch8 run
+2026-06-22,coach behavior,irw_discovered_batch8.csv,batch8 run
+2026-06-22,coaching efficacy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,physical literacy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,social-emotional development,irw_discovered_batch8.csv,batch8 run
+2026-06-22,executive function development,irw_discovered_batch8.csv,batch8 run
+2026-06-22,attachment security,irw_discovered_batch8.csv,batch8 run
+2026-06-22,infant attachment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,language development,irw_discovered_batch8.csv,batch8 run
+2026-06-22,play behavior,irw_discovered_batch8.csv,batch8 run
+2026-06-22,school adjustment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,peer rejection,irw_discovered_batch8.csv,batch8 run
+2026-06-22,peer acceptance,irw_discovered_batch8.csv,batch8 run
+2026-06-22,theory of mind development,irw_discovered_batch8.csv,batch8 run
+2026-06-22,kindergarten assessment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,home learning environment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cross-cultural adaptation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,global identity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,national identity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cultural orientation,irw_discovered_batch8.csv,batch8 run
+2026-06-22,individualism collectivism,irw_discovered_batch8.csv,batch8 run
+2026-06-22,independent self-construal,irw_discovered_batch8.csv,batch8 run
+2026-06-22,interdependent self-construal,irw_discovered_batch8.csv,batch8 run
+2026-06-22,cultural values,irw_discovered_batch8.csv,batch8 run
+2026-06-22,color-blind racial attitudes,irw_discovered_batch8.csv,batch8 run
+2026-06-22,stereotype endorsement,irw_discovered_batch8.csv,batch8 run
+2026-06-22,work readiness,irw_discovered_batch8.csv,batch8 run
+2026-06-22,job search self-efficacy,irw_discovered_batch8.csv,batch8 run
+2026-06-22,academic-career integration,irw_discovered_batch8.csv,batch8 run
+2026-06-22,vocational interests,irw_discovered_batch8.csv,batch8 run
+2026-06-22,Holland types,irw_discovered_batch8.csv,batch8 run
+2026-06-22,work meaning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,meaningful work,irw_discovered_batch8.csv,batch8 run
+2026-06-22,career calling,irw_discovered_batch8.csv,batch8 run
+2026-06-22,professional identity,irw_discovered_batch8.csv,batch8 run
+2026-06-22,STEM career interest,irw_discovered_batch8.csv,batch8 run
+2026-06-22,PISA,irw_discovered_batch8.csv,batch8 run
+2026-06-22,TIMSS,irw_discovered_batch8.csv,batch8 run
+2026-06-22,NAEP,irw_discovered_batch8.csv,batch8 run
+2026-06-22,PIRLS,irw_discovered_batch8.csv,batch8 run
+2026-06-22,large-scale assessment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,national assessment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,standardized testing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,high-stakes testing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,PHQ-9,irw_discovered_batch8.csv,batch8 run
+2026-06-22,GAD-7,irw_discovered_batch8.csv,batch8 run
+2026-06-22,PCL-5,irw_discovered_batch8.csv,batch8 run
+2026-06-22,BDI,irw_discovered_batch8.csv,batch8 run
+2026-06-22,STAI,irw_discovered_batch8.csv,batch8 run
+2026-06-22,SF-36,irw_discovered_batch8.csv,batch8 run
+2026-06-22,patient-reported outcome measures,irw_discovered_batch8.csv,batch8 run
+2026-06-22,PROM,irw_discovered_batch8.csv,batch8 run
+2026-06-22,functional assessment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,moral judgment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,trolley problem,irw_discovered_batch8.csv,batch8 run
+2026-06-22,distributive justice,irw_discovered_batch8.csv,batch8 run
+2026-06-22,fairness judgments,irw_discovered_batch8.csv,batch8 run
+2026-06-22,economic games,irw_discovered_batch8.csv,batch8 run
+2026-06-22,ultimatum game,irw_discovered_batch8.csv,batch8 run
+2026-06-22,public goods game,irw_discovered_batch8.csv,batch8 run
+2026-06-22,trust game,irw_discovered_batch8.csv,batch8 run
+2026-06-22,response bias,irw_discovered_batch8.csv,batch8 run
+2026-06-22,acquiescence bias,irw_discovered_batch8.csv,batch8 run
+2026-06-22,careless responding,irw_discovered_batch8.csv,batch8 run
+2026-06-22,item difficulty,irw_discovered_batch8.csv,batch8 run
+2026-06-22,item discrimination,irw_discovered_batch8.csv,batch8 run
+2026-06-22,differential item functioning,irw_discovered_batch8.csv,batch8 run
+2026-06-22,computerized adaptive testing,irw_discovered_batch8.csv,batch8 run
+2026-06-22,ecological momentary assessment,irw_discovered_batch8.csv,batch8 run
+2026-06-22,experience sampling,irw_discovered_batch8.csv,batch8 run
