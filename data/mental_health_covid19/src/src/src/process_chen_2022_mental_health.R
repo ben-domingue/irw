@@ -1,13 +1,31 @@
-# Process Chen et al. (2022) mental health dataset for IRW
-# Dataset: Mental health dataset of college students during COVID-19
-# Source: Science Data Bank
-# DOI: 10.57760/sciencedb.000115.00089
-# License: CC BY-NC 4.0
+# Chen et al. (2022): Mental health dataset of college students during COVID-19
 #
-# This script reads the original SPSS file and creates an IRW-style
-# main response table with person-level covariates merged into the table
-# using the cov_ prefix.
-
+# Source:
+# Science Data Bank
+# Data URL: https://doi.org/10.57760/sciencedb.000115.00089
+# Original license: CC BY-NC 4.0
+#
+# Dataset:
+# Item-level survey responses from 77,211 Chinese college students collected
+# during COVID-19 (April 13–23, 2020).
+#
+# Constructs and output files:
+# - SAS-C: problematic smartphone usage / smartphone addiction
+#   Output: chen_2022_sasc.csv
+# - CES-D-10: depression
+#   Output: chen_2022_cesd.csv
+# - GAD-7: anxiety
+#   Output: chen_2022_gad.csv
+#
+# Processing:
+# - Reads the original SPSS .sav file.
+# - Removes SPSS value labels before reshaping.
+# - Retains person-level covariates with the cov_ prefix.
+# - Reshapes responses into long format with id, item, and resp columns.
+# - Produces one construct-specific table for each scale listed above.
+#
+# Each output has one row per participant-item response.
+# ------------------------------------------------------------------------------
 library(haven)
 library(dplyr)
 library(readr)
