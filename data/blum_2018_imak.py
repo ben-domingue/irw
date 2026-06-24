@@ -25,9 +25,7 @@ def _load() -> pd.DataFrame:
     return df.rename(columns={"Participant": "id", **COV_RENAME})
 
 
-def _melt_with_rt(df: pd.DataFrame, score_prefix: str, outname: str) -> None:
-    """Melt the polytomous (Item<N>) or dichotomous (Binary<N>) columns and
-    pair each response with its matching Time<N> reaction time."""
+def _melt_with_rt(df: pd.DataFrame, score_prefix: str, outname: str, resp_col: str = "resp") -> None:
     score_cols = sorted(
         [c for c in df.columns if re.match(rf"^{score_prefix}\d+$", c)],
         key=lambda c: int(c[len(score_prefix):]),
@@ -41,26 +39,26 @@ def _melt_with_rt(df: pd.DataFrame, score_prefix: str, outname: str) -> None:
         time_col = f"Time{n}"
         chunk = df[id_vars + [c, time_col]].copy()
         chunk["item"] = f"item_{n:02d}"
-        chunk = chunk.rename(columns={c: "resp", time_col: "rt"})
+        chunk = chunk.rename(columns={c: resp_col, time_col: "rt"})
         rows.append(chunk)
     long = pd.concat(rows, ignore_index=True)
-    long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
+    long[resp_col] = pd.to_numeric(long[resp_col], errors="coerce")
     long["rt"] = pd.to_numeric(long["rt"], errors="coerce")
-    long = long.dropna(subset=["resp"])
-    long["resp"] = long["resp"].astype(int)
-    long = long[["id", "item", "resp", "rt"] + cov]
+    long = long.dropna(subset=[resp_col])
+    long[resp_col] = long[resp_col].astype(int)
+    long = long[["id", "item", resp_col, "rt"] + cov]
     out = OUT / outname
     out.parent.mkdir(parents=True, exist_ok=True)
     long.to_csv(out, index=False)
     print(f"{out.name}: rows={len(long)}, items={long['item'].nunique()}, "
-          f"ids={long['id'].nunique()}, resp_range=[{long['resp'].min()}, {long['resp'].max()}], "
+          f"ids={long['id'].nunique()}, {resp_col}_range=[{long[resp_col].min()}, {long[resp_col].max()}], "
           f"rt_range=[{long['rt'].min():.2f}, {long['rt'].max():.2f}]s")
 
 
 def main() -> None:
     df = _load()
-    _melt_with_rt(df, "Binary", "blum_2018_imak_bin.csv")
-    _melt_with_rt(df, "Item",   "blum_2018_imak_items.csv")
+    _melt_with_rt(df, "Binary", "blum_2018_imak_bin.csv", resp_col="resp")
+    _melt_with_rt(df, "Item",   "blum_2018_imak_items.csv", resp_col="text")
 
 
 if __name__ == "__main__":
