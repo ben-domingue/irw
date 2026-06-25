@@ -25,40 +25,74 @@ def _load() -> pd.DataFrame:
     return df.rename(columns={"Participant": "id", **COV_RENAME})
 
 
-def _melt_with_rt(df: pd.DataFrame, score_prefix: str, outname: str, resp_col: str = "resp") -> None:
-    score_cols = sorted(
-        [c for c in df.columns if re.match(rf"^{score_prefix}\d+$", c)],
-        key=lambda c: int(c[len(score_prefix):]),
-    )
+def _build_bin(df: pd.DataFrame, outname: str) -> None:
     cov = list(COV_RENAME.values())
     id_vars = ["id"] + cov
+    item_nums = sorted(
+        int(c[len("Binary"):])
+        for c in df.columns if re.match(r"^Binary\d+$", c)
+    )
 
     rows = []
-    for c in score_cols:
-        n = int(c[len(score_prefix):])
+    for n in item_nums:
+        bin_col = f"Binary{n}"
         time_col = f"Time{n}"
-        chunk = df[id_vars + [c, time_col]].copy()
+        chunk = df[id_vars + [bin_col, time_col]].copy()
         chunk["item"] = f"item_{n:02d}"
-        chunk = chunk.rename(columns={c: resp_col, time_col: "rt"})
+        chunk = chunk.rename(columns={bin_col: "resp", time_col: "rt"})
         rows.append(chunk)
     long = pd.concat(rows, ignore_index=True)
-    long[resp_col] = pd.to_numeric(long[resp_col], errors="coerce")
+    long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
     long["rt"] = pd.to_numeric(long["rt"], errors="coerce")
-    long = long.dropna(subset=[resp_col])
-    long[resp_col] = long[resp_col].astype(int)
-    long = long[["id", "item", resp_col, "rt"] + cov]
+    long = long.dropna(subset=["resp"])
+    long["resp"] = long["resp"].astype(int)
+    long = long[["id", "item", "resp", "rt"] + cov]
     out = OUT / outname
     out.parent.mkdir(parents=True, exist_ok=True)
     long.to_csv(out, index=False)
     print(f"{out.name}: rows={len(long)}, items={long['item'].nunique()}, "
-          f"ids={long['id'].nunique()}, {resp_col}_range=[{long[resp_col].min()}, {long[resp_col].max()}], "
+          f"ids={long['id'].nunique()}, resp_range=[{long['resp'].min()}, {long['resp'].max()}], "
+          f"rt_range=[{long['rt'].min():.2f}, {long['rt'].max():.2f}]s")
+
+
+def _build_nominal(df: pd.DataFrame, outname: str) -> None:
+    cov = list(COV_RENAME.values())
+    id_vars = ["id"] + cov
+    item_nums = sorted(
+        int(c[len("Item"):])
+        for c in df.columns if re.match(r"^Item\d+$", c)
+    )
+
+    rows = []
+    for n in item_nums:
+        item_col = f"Item{n}"
+        bin_col = f"Binary{n}"
+        time_col = f"Time{n}"
+        chunk = df[id_vars + [item_col, bin_col, time_col]].copy()
+        chunk["item"] = f"item_{n:02d}"
+        chunk = chunk.rename(columns={item_col: "text", bin_col: "resp", time_col: "rt"})
+        rows.append(chunk)
+    long = pd.concat(rows, ignore_index=True)
+    long["text"] = pd.to_numeric(long["text"], errors="coerce")
+    long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
+    long["rt"] = pd.to_numeric(long["rt"], errors="coerce")
+    long = long.dropna(subset=["text"])
+    long["text"] = long["text"].astype(int)
+    long["resp"] = long["resp"].astype(int)
+    long = long[["id", "item", "text", "resp", "rt"] + cov]
+    out = OUT / outname
+    out.parent.mkdir(parents=True, exist_ok=True)
+    long.to_csv(out, index=False)
+    print(f"{out.name}: rows={len(long)}, items={long['item'].nunique()}, "
+          f"ids={long['id'].nunique()}, text_range=[{long['text'].min()}, {long['text'].max()}], "
+          f"resp_range=[{long['resp'].min()}, {long['resp'].max()}], "
           f"rt_range=[{long['rt'].min():.2f}, {long['rt'].max():.2f}]s")
 
 
 def main() -> None:
     df = _load()
-    _melt_with_rt(df, "Binary", "blum_2018_imak_bin.csv", resp_col="resp")
-    _melt_with_rt(df, "Item",   "blum_2018_imak_items.csv", resp_col="text")
+    _build_bin(df, "blum_2018_imak_bin.csv")
+    _build_nominal(df, "blum_2018_imak_nominal.csv")
 
 
 if __name__ == "__main__":
