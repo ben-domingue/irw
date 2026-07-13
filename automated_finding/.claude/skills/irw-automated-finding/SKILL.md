@@ -9,8 +9,10 @@ Orchestrates the multi-step pipeline in `automated_finding/` that finds,
 triages, and standardizes candidate datasets for the Item Response Warehouse.
 The scripts and full column/flag reference already live in
 `automated_finding/README.md` — read it before running anything unfamiliar.
-This file is the orchestration layer: which step to run, in what order, and
-the hard rules that must not be skipped.
+The output format itself — schema, naming, edge cases — is defined in
+`datastandard.md` at the repo root; this file does not restate it. This file
+is the orchestration layer: which step to run, in what order, and the
+pipeline-specific hard rules that must not be skipped.
 
 Work from inside `automated_finding/`.
 
@@ -108,13 +110,14 @@ README when they conflict.
 Current practice (see batches 7–9 in `TODO.md` and e.g.
 `data/frikha_2023_motivation.py`, `data/germann_2026_terrorism.py`): for each
 `good` or `worth_retrying` candidate, write one bespoke script directly in
-`data/`, named `authorname_year_construct.py`, that:
+`data/`, named `authorname_year_construct.py`.
 
-1. Downloads the raw file from its source (Dataverse/Figshare/OSF/Zenodo API).
-2. Converts to IRW long format (`id`, `item`, `resp`, `wave` if longitudinal, `cov_*`).
-3. Writes one CSV per measurement scale straight to
-   `automated_finding/irw_output/` (`REPO_ROOT / "automated_finding" /
-   "irw_output"`), named `authorname_year_construct.csv`.
+**Read `datastandard.md` at the repo root before writing the script** — it is
+the single source of truth for the required schema, column order, file
+naming, output location, and the step-by-step conversion logic (load raw
+data → identify id/covariates/items → melt to long → clean `resp` → enforce
+column order → save). Follow it rather than improvising; this SKILL.md only
+covers pipeline orchestration, not the data standard itself.
 
 There is no separate "processing queue" run or intermediate holding
 directory — the script IS the queue-processing step, and its output in
@@ -123,14 +126,13 @@ Step 4 right the first time.
 
 ## Step 4 — QC before submitting
 
-Before uploading a file from `irw_output/` to Redivis, check the five items
-under "What still needs a human before submission" in the README (covariates
-melted in as items, multiple scales needing a split, response direction,
-opaque item labels, response scale/range) — the QC warnings recorded in the
-triage CSV point at exactly what to check.
+Before uploading a file from `irw_output/` to Redivis, run through
+`datastandard.md`'s "What to verify before saving" checklist — the QC
+warnings recorded in the triage CSV point at exactly what to check.
 
-Two hard rules apply at this stage, non-negotiable regardless of how good the
-dataset otherwise looks:
+One additional hard rule applies at this stage that isn't in
+`datastandard.md`, because it's a pipeline/triage concern rather than an
+output-format one:
 
 - **License.** Only proceed if the license is explicitly verified as open
   (`cc0`, `cc-by`, `cc-by-sa`, or equivalent) on the source page itself. A
@@ -144,33 +146,6 @@ dataset otherwise looks:
   skipping isn't the only option — emailing the author for permission
   (template in `processing_notes/Licensing.txt`) is fine, but don't process
   the data until permission or updated license terms come back confirmed.
-- **Naming.** Output files use `authorname_year_construct` (e.g.
-  `smith2021_anxiety.csv`), never a content description. One file per
-  measurement scale.
-- **resp must be genuinely ordinal, not just numeric.** Check the codebook
-  (variable-description file, OSF wiki, or paper) for every response scale
-  before treating its raw codes as `resp`. A source column can be pure
-  `int64` with zero `NaN`s and still be wrong: a sentinel category like
-  "don't know" / "not applicable" / "refused" is a non-response, not a step
-  on the ordinal scale, even though it's stored as an in-range integer (e.g.
-  a 3-item financial-literacy quiz coded `0=incorrect, 1=correct, 2=don't
-  know` — 2 is not "more correct" than 1). `dropna()` will **not** catch
-  this, because the sentinel is a real number, not `NaN`. Identify these
-  values from the codebook and exclude those specific item-responses (filter
-  them out, don't recode them to 0 or drop the person entirely) before the
-  file is considered ordinal and upload-ready.
-
-  This is a different failure than "continuous" — a genuinely continuous
-  per-item response (e.g. a 0–100 slider, "how well does this describe you?")
-  *is* valid IRW data; keep `resp` as a float, don't coerce to integer, and
-  don't drop it just because it tripped the `resp_ordinal*`/
-  `aggregate_continuous` heuristic. That heuristic exists to catch a
-  *composite/subscale score* smuggled in as if it were an item response
-  (e.g. a `total_score` column melted in alongside real items) — check which
-  case it actually is before deciding.
-- **wave, not cov_wave.** A longitudinal timepoint indicator (pre/during/post,
-  or numeric order) gets its own `wave` column per the IRW standard, never a
-  `cov_`-prefixed one.
 
 When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,

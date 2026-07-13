@@ -34,23 +34,36 @@ Rscript metadata/04_tables.R
 - **`tags/`** — Tagging data with human annotators.
 - **`training/`** — Workshop and training materials.
 - **`processing_notes/`** — Data processing guidelines and licensing docs.
+- **`automated_finding/`** — Automated pipeline that discovers, triages, and
+  standardizes candidate datasets from public repositories (Dataverse,
+  Figshare, OSF, Zenodo, Dryad). See its
+  `.claude/skills/irw-automated-finding/SKILL.md` for orchestration and
+  `README.md` for the script/column reference.
 
 ## IRW Data Format (The "Commandments")
 
-All processed datasets must conform to this schema:
+The full schema, column order, file naming, and step-by-step conversion
+guidance live in **`datastandard.md`** at the repo root — that file is the
+single source of truth for output format across every script in `data/` and
+the `automated_finding/` pipeline. Read it before writing a processing
+script. Quick reference for the required columns:
 
 | Column | Required | Description |
 |--------|----------|-------------|
 | `id` | yes | Person identifier |
 | `item` | yes | Item identifier |
-| `resp` | yes | Response value — numeric, at least ordinal |
+| `resp` | yes | Response value — numeric, at least ordinal (continuous/slider responses are also acceptable — see `datastandard.md`) |
 | `wave` | no | Longitudinal timepoint (pre/during/post, or numeric order) — its own column, never `cov_wave` |
 | `cov_*` | no | Covariates (demographic/background) — always prefixed `cov_` |
+
+`datastandard.md` also covers less-common columns (`itemcov_*`, `treat`,
+`rt`, `date`, `qmatrix*`, `rater`, `item_family`) and edge cases
+(multi-scale files, sentinel/missing codes, opaque item labels, etc.) not
+repeated here.
 
 Additional rules:
 - **Long format only** — one row per person-item observation
 - Each measurement scale is saved as a **separate file**
-- **Continuous responses are acceptable** — slider items (e.g. a 0–100 "how well does this describe you?") and other bounded continuous scales are fine for IRW. Keep `resp` as a float when values aren't whole-number Likert steps; don't coerce to integer. (Don't confuse this with an *aggregate* score summed/averaged across items — that's a composite, not a response, and doesn't belong in `resp`.)
 - Response times in **seconds**
 - Longitudinal timestamps in **Unix time**
 - Output saved as both `.csv` and `.RData`

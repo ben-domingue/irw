@@ -22,7 +22,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 |--------|----------|-------|
 | `id` | yes | Identifier for the focal unit being measured — typically a person, but sometimes another entity (e.g., a word in a lexical task). Integer or string. Must be unique per focal unit (not per row). |
 | `item` | yes | Item identifier. String. Use original column names when they are meaningful; use `item_1`, `item_2`, … when they are not. Item names should be chosen to allow straightforward downstream matching with item text — prefer names that correspond directly to identifiers used in the source instrument or codebook (e.g., `BDI_1`, `PHQ_3`) over generic positional labels whenever such identifiers exist. |
-| `resp` | yes | Response value. Must be numeric. Higher values represent a consistent directional change **within** each item, but direction may vary **across** items — do not recode reverse-scored items unless you have specific reason to. Remove imputed values. |
+| `resp` | yes | Response value. Must be numeric. Higher values represent a consistent directional change **within** each item, but direction may vary **across** items — do not recode reverse-scored items unless you have specific reason to. Remove imputed values. Continuous responses are acceptable (e.g. a 0–100 slider, "how well does this describe you?") — keep `resp` as a float and don't coerce to integer. Don't confuse this with an *aggregate* score summed/averaged across items; that's a composite, not a response, and doesn't belong in `resp` (see "Subscale aggregate columns" below). |
 | `cov_*` | no | Covariates that are invariant to the focal unit (e.g., a person's gender or age). Always prefix with `cov_`. |
 | `itemcov_*` | no | Covariates invariant to measurement probes (item-level attributes). Always prefix with `itemcov_`. |
 | `wave` | no | Longitudinal wave indicator. Larger values indicate later collection. Use when the same focal unit appears at multiple time points. |
@@ -69,8 +69,9 @@ Use the first author's last name, publication year, and a short construct label.
 
 Finalized output files go to:
 ```
-automated_finding/irw_output/cleaned/
+automated_finding/irw_output/
 ```
+(There is no `queue/` or `cleaned/` subdirectory — that intermediate stage was eliminated. Everything in `irw_output/` is upload-ready.)
 
 ---
 
@@ -151,6 +152,8 @@ long = long.dropna(subset=["resp"]).reset_index(drop=True)
 long = long[(long["resp"] >= 1) & (long["resp"] <= valid_max)]
 ```
 
+**A sentinel can hide inside the valid range, and `dropna()` will not catch it.** Check the codebook (variable-description file, OSF wiki, or paper) for every response scale before trusting raw codes as `resp`. A source column can be pure `int64` with zero `NaN`s and still be wrong: a category like "don't know" / "not applicable" / "refused" is a non-response, not a step on the ordinal scale, even though it's stored as an in-range integer — e.g. a 3-item financial-literacy quiz coded `0=incorrect, 1=correct, 2=don't know`; `2` is not "more correct" than `1`. Identify these values from the codebook and filter out those specific item-responses (don't recode them to 0 and don't drop the person entirely) before the file is considered ordinal and upload-ready.
+
 **Parse text-coded responses.** Some datasets store responses as strings like `"3 - Sometimes"` or `"Strongly agree (5)"`. Extract the leading integer:
 ```python
 long["resp"] = long["resp"].str.extract(r"(\d+)").astype(float)
@@ -185,7 +188,7 @@ import os
 import pandas as pd
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "..", "automated_finding", "irw_output", "cleaned")
+                       "..", "automated_finding", "irw_output")
 
 def convert():
     # ... processing logic ...
@@ -225,7 +228,7 @@ rt = rt_ms / 1000
 Include as an `rt` column in the output. Do not include it in the `item`/`resp` melt — it is a response-level attribute alongside `resp`.
 
 ### Longitudinal / repeated-measures data
-When the same focal unit appears at multiple time points, include a `wave` column (integer, with larger values indicating later collection). If calendar timestamps are available, store them as `date` in seconds — either relative (seconds since data collection began) or Unix absolute time; do not use milliseconds, minutes, or other units. Duplicate `id`+`item` pairs are valid when a `wave` column is present.
+When the same focal unit appears at multiple time points, include a `wave` column (integer, with larger values indicating later collection). This is always its own column named `wave` — **never** a `cov_`-prefixed one (e.g. not `cov_wave`), even though it looks like a covariate. If calendar timestamps are available, store them as `date` in seconds — either relative (seconds since data collection began) or Unix absolute time; do not use milliseconds, minutes, or other units. Duplicate `id`+`item` pairs are valid when a `wave` column is present.
 
 ### Experimental / RCT treatment data
 Include a `treat` column with values `1` (treatment) and `0` (control). This applies to any experimental design, not only RCTs. Do **not** encode this as a `cov_group` covariate — it belongs in `treat` so downstream tools can identify it. Map whatever coding the source uses (e.g., 1/2) to the standard 0/1 encoding:
@@ -297,6 +300,6 @@ raw file → load → identify id / covariates / items
          → (split by scale) → melt to long
          → clean resp (numeric, drop NaN, filter sentinels)
          → enforce column order
-         → save to automated_finding/irw_output/cleaned/<name>.csv
+         → save to automated_finding/irw_output/<name>.csv
          → print summary line
 ```
