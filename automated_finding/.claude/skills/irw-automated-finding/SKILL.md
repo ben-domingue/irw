@@ -48,7 +48,17 @@ python irw_discover_updated.py "search term 1" "search term 2" --out candidates.
 - Pick terms not already in `search_terms_log.csv`. Good sources of new terms:
   named instruments not yet covered, constructs adjacent to recent batches,
   or a domain the user names explicitly.
-- After the run, append the new terms to `search_terms_log.csv`.
+- **Translate every term into at least these 8 languages and include all
+  variants in the same discovery run**: Spanish, German, French, Chinese
+  (Simplified), Japanese, Arabic, Dutch, Korean (the set used in batch 9).
+  Non-English repositories (especially Dataverse installations run by
+  non-US institutions) surface real candidates that the English term alone
+  misses. Batch 9 did this (9 languages × 30 topics); batches 10–13 regressed
+  to English-only by omission, not by decision — don't repeat that. A batch
+  of N English terms should become N × 9 discovery queries (English +
+  8 translations), all logged and run together, not as a separate follow-up.
+- After the run, append every term (English and each translation) to
+  `search_terms_log.csv` as its own row.
 
 ## Step 2 — Triage
 
