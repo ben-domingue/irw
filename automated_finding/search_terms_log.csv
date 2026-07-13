@@ -1660,3 +1660,15 @@ date,query,output_file,notes
 2026-07-12,financial literacy,candidates_test10.csv,skill test run
 2026-07-12,grit scale,candidates_test10.csv,skill test run
 2026-07-12,math anxiety,candidates_test10.csv,skill test run
+2026-07-13,workplace burnout,candidates_batch11.csv,batch11 run
+2026-07-13,creativity scale,candidates_batch11.csv,batch11 run
+2026-07-13,leadership style,candidates_batch11.csv,batch11 run
+2026-07-13,screen time,candidates_batch11.csv,batch11 run
+2026-07-13,climate anxiety,candidates_batch11.csv,batch11 run
+2026-07-13,prosocial behavior,candidates_batch11.csv,batch11 run
+2026-07-13,aggression scale,candidates_batch11.csv,batch11 run
+2026-07-13,empathy scale,candidates_batch11.csv,batch11 run
+2026-07-13,resilience scale,candidates_batch11.csv,batch11 run
+2026-07-13,social comparison,candidates_batch11.csv,batch11 run
+2026-07-13,narcissism scale,candidates_batch11.csv,batch11 run
+2026-07-13,gratitude scale,candidates_batch11.csv,batch11 run
