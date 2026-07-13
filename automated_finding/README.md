@@ -58,7 +58,7 @@ sub-classifies each `human_assistance` row into one of six buckets:
 | refined_flag | Typical cause | Action |
 |---|---|---|
 | `not_item_response` | HTML-markup scraped tables, data dictionaries, implausible participant counts | Drop |
-| `aggregate_continuous` | >50 unique resp values after melt; extreme dup_id_item ratio | Drop — likely continuous measures |
+| `aggregate_continuous` | >50 unique resp values after melt; extreme dup_id_item ratio | Drop *if* it's a composite/subscale score smuggled in as an item — but a genuinely continuous per-item response (e.g. a 0–100 slider) is valid IRW data and should not be dropped just for tripping this heuristic; check which case it is before deciding |
 | `wrong_file_selected` | Codebook file downloaded instead of data matrix (common with SAPA-Project) | Re-resolve landing page manually |
 | `recoverable_format` | Semicolon-delimited file read with comma delimiter | Re-read with `sep=';'`, re-triage |
 | `worth_retrying` | dup_id_item with plausible longitudinal structure (ratio 1–8×, n≥50) | Re-download; look for wave/timepoint column |
@@ -95,8 +95,9 @@ columns:
 | `resp` | Numeric response value |
 
 Additional columns (`wave`, `treat`, `cov_*`) are carried through when the
-pipeline can identify them. The conversion is a **heuristic best-guess**, not a
-verified mapping.
+pipeline can identify them. A longitudinal timepoint indicator belongs in its
+own `wave` column — never prefixed `cov_wave`. The conversion is a
+**heuristic best-guess**, not a verified mapping.
 
 ### Cleaned files and the index
 
@@ -207,7 +208,7 @@ Starred names (`*`) are heuristics beyond the official IRW validator.
 | Warning | Meaning |
 |---|---|
 | `resp_direction*` | Cannot auto-verify coding direction within items — confirm no unreversed items |
-| `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses |
+| `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses. Verify which: a composite/subscale sum is not a response and must be dropped; a genuinely continuous per-item response (e.g. a 0–100 slider) is legitimate — keep `resp` as a float, don't coerce to integer |
 | `multi_scale*` | Item names suggest 2+ subscales — IRW requires separate files per scale |
 | `imputed_values*` | Column names or value distributions suggest imputed data — IRW requires removal |
 | `date_numeric*` / `date_range*` | `date` column not numeric or too small for Unix seconds |
@@ -218,6 +219,11 @@ Starred names (`*`) are heuristics beyond the official IRW validator.
 | `dup_id_item` | Duplicate id+item rows (error without a longitudinal column) |
 | `license_unknown*` | License not recognised as a known open license — verify before submission |
 | `density*` | Very sparse matrix — fine for adaptive designs, otherwise verify |
+
+An unresolved license doesn't have to be a dead end: if the dataset is otherwise
+strong, emailing the author for permission (template in
+`processing_notes/Licensing.txt`) is an option — just don't process the data
+until permission or updated license terms come back confirmed.
 
 ---
 

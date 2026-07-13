@@ -101,7 +101,7 @@ Current practice (see batches 7–9 in `TODO.md` and e.g.
 `data/`, named `authorname_year_construct.py`, that:
 
 1. Downloads the raw file from its source (Dataverse/Figshare/OSF/Zenodo API).
-2. Converts to IRW long format (`id`, `item`, `resp`, `cov_*`).
+2. Converts to IRW long format (`id`, `item`, `resp`, `wave` if longitudinal, `cov_*`).
 3. Writes one CSV per measurement scale straight to
    `automated_finding/irw_output/` (`REPO_ROOT / "automated_finding" /
    "irw_output"`), named `authorname_year_construct.csv`.
@@ -130,7 +130,10 @@ dataset otherwise looks:
   `563c1cf88c5e4a3877f9e96a`), not a name. Resolve it first —
   `GET https://api.osf.io/v2/licenses/{id}/` returns the actual license name
   — before deciding it's unverified. Only skip once that lookup fails to
-  produce an explicit open license.
+  produce an explicit open license. If the dataset is otherwise strong,
+  skipping isn't the only option — emailing the author for permission
+  (template in `processing_notes/Licensing.txt`) is fine, but don't process
+  the data until permission or updated license terms come back confirmed.
 - **Naming.** Output files use `authorname_year_construct` (e.g.
   `smith2021_anxiety.csv`), never a content description. One file per
   measurement scale.
@@ -146,6 +149,18 @@ dataset otherwise looks:
   values from the codebook and exclude those specific item-responses (filter
   them out, don't recode them to 0 or drop the person entirely) before the
   file is considered ordinal and upload-ready.
+
+  This is a different failure than "continuous" — a genuinely continuous
+  per-item response (e.g. a 0–100 slider, "how well does this describe you?")
+  *is* valid IRW data; keep `resp` as a float, don't coerce to integer, and
+  don't drop it just because it tripped the `resp_ordinal*`/
+  `aggregate_continuous` heuristic. That heuristic exists to catch a
+  *composite/subscale score* smuggled in as if it were an item response
+  (e.g. a `total_score` column melted in alongside real items) — check which
+  case it actually is before deciding.
+- **wave, not cov_wave.** A longitudinal timepoint indicator (pre/during/post,
+  or numeric order) gets its own `wave` column per the IRW standard, never a
+  `cov_`-prefixed one.
 
 When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,
