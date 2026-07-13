@@ -1389,3 +1389,274 @@ date,query,output_file,notes
 2026-06-22,computerized adaptive testing,irw_discovered_batch8.csv,batch8 run
 2026-06-22,ecological momentary assessment,irw_discovered_batch8.csv,batch8 run
 2026-06-22,experience sampling,irw_discovered_batch8.csv,batch8 run
+2026-06-24,chronic pain,irw_discovered_batch9.csv,batch9 run
+2026-06-24,dolor crónico,irw_discovered_batch9.csv,batch9 run
+2026-06-24,chronischer Schmerz,irw_discovered_batch9.csv,batch9 run
+2026-06-24,douleur chronique,irw_discovered_batch9.csv,batch9 run
+2026-06-24,慢性疼痛,irw_discovered_batch9.csv,batch9 run
+2026-06-24,慢性痛,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الألم المزمن,irw_discovered_batch9.csv,batch9 run
+2026-06-24,chronische pijn,irw_discovered_batch9.csv,batch9 run
+2026-06-24,만성 통증,irw_discovered_batch9.csv,batch9 run
+2026-06-24,quality of life,irw_discovered_batch9.csv,batch9 run
+2026-06-24,calidad de vida,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Lebensqualität,irw_discovered_batch9.csv,batch9 run
+2026-06-24,qualité de vie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,生活质量,irw_discovered_batch9.csv,batch9 run
+2026-06-24,生活の質,irw_discovered_batch9.csv,batch9 run
+2026-06-24,جودة الحياة,irw_discovered_batch9.csv,batch9 run
+2026-06-24,kwaliteit van leven,irw_discovered_batch9.csv,batch9 run
+2026-06-24,삶의 질,irw_discovered_batch9.csv,batch9 run
+2026-06-24,functional disability,irw_discovered_batch9.csv,batch9 run
+2026-06-24,discapacidad funcional,irw_discovered_batch9.csv,batch9 run
+2026-06-24,funktionelle Behinderung,irw_discovered_batch9.csv,batch9 run
+2026-06-24,incapacité fonctionnelle,irw_discovered_batch9.csv,batch9 run
+2026-06-24,功能障碍,irw_discovered_batch9.csv,batch9 run
+2026-06-24,機能障害,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الإعاقة الوظيفية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,functionele beperking,irw_discovered_batch9.csv,batch9 run
+2026-06-24,기능 장애,irw_discovered_batch9.csv,batch9 run
+2026-06-24,symptom checklist,irw_discovered_batch9.csv,batch9 run
+2026-06-24,lista de síntomas,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Symptomliste,irw_discovered_batch9.csv,batch9 run
+2026-06-24,liste de symptômes,irw_discovered_batch9.csv,batch9 run
+2026-06-24,症状清单,irw_discovered_batch9.csv,batch9 run
+2026-06-24,症状チェックリスト,irw_discovered_batch9.csv,batch9 run
+2026-06-24,قائمة الأعراض,irw_discovered_batch9.csv,batch9 run
+2026-06-24,symptoomlijst,irw_discovered_batch9.csv,batch9 run
+2026-06-24,증상 체크리스트,irw_discovered_batch9.csv,batch9 run
+2026-06-24,medication adherence,irw_discovered_batch9.csv,batch9 run
+2026-06-24,adherencia a la medicación,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Medikamentenadhärenz,irw_discovered_batch9.csv,batch9 run
+2026-06-24,adhérence médicamenteuse,irw_discovered_batch9.csv,batch9 run
+2026-06-24,用药依从性,irw_discovered_batch9.csv,batch9 run
+2026-06-24,服薬アドヒアランス,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الالتزام بالدواء,irw_discovered_batch9.csv,batch9 run
+2026-06-24,medicatietrouw,irw_discovered_batch9.csv,batch9 run
+2026-06-24,약물 순응도,irw_discovered_batch9.csv,batch9 run
+2026-06-24,patient satisfaction,irw_discovered_batch9.csv,batch9 run
+2026-06-24,satisfacción del paciente,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Patientenzufriedenheit,irw_discovered_batch9.csv,batch9 run
+2026-06-24,satisfaction du patient,irw_discovered_batch9.csv,batch9 run
+2026-06-24,患者满意度,irw_discovered_batch9.csv,batch9 run
+2026-06-24,患者満足度,irw_discovered_batch9.csv,batch9 run
+2026-06-24,رضا المريض,irw_discovered_batch9.csv,batch9 run
+2026-06-24,patiënttevredenheid,irw_discovered_batch9.csv,batch9 run
+2026-06-24,환자 만족도,irw_discovered_batch9.csv,batch9 run
+2026-06-24,social dominance orientation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,orientación a la dominancia social,irw_discovered_batch9.csv,batch9 run
+2026-06-24,soziale Dominanzorientierung,irw_discovered_batch9.csv,batch9 run
+2026-06-24,orientation à la dominance sociale,irw_discovered_batch9.csv,batch9 run
+2026-06-24,社会支配指向性,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التوجه نحو الهيمنة الاجتماعية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,sociale dominantie-oriëntatie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,사회적 지배 지향성,irw_discovered_batch9.csv,batch9 run
+2026-06-24,right-wing authoritarianism,irw_discovered_batch9.csv,batch9 run
+2026-06-24,autoritarismo de derecha,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Rechtsautoritarismus,irw_discovered_batch9.csv,batch9 run
+2026-06-24,autoritarisme de droite,irw_discovered_batch9.csv,batch9 run
+2026-06-24,右翼威权主义,irw_discovered_batch9.csv,batch9 run
+2026-06-24,右翼権威主義,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الاستبداد اليميني,irw_discovered_batch9.csv,batch9 run
+2026-06-24,rechts autoritarisme,irw_discovered_batch9.csv,batch9 run
+2026-06-24,우익 권위주의,irw_discovered_batch9.csv,batch9 run
+2026-06-24,racial prejudice,irw_discovered_batch9.csv,batch9 run
+2026-06-24,prejuicio racial,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Rassismus,irw_discovered_batch9.csv,batch9 run
+2026-06-24,préjugé racial,irw_discovered_batch9.csv,batch9 run
+2026-06-24,种族偏见,irw_discovered_batch9.csv,batch9 run
+2026-06-24,人種的偏見,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التحيز العنصري,irw_discovered_batch9.csv,batch9 run
+2026-06-24,raciale vooroordelen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,인종 편견,irw_discovered_batch9.csv,batch9 run
+2026-06-24,intergroup contact,irw_discovered_batch9.csv,batch9 run
+2026-06-24,contacto intergrupal,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Intergruppenkonktakt,irw_discovered_batch9.csv,batch9 run
+2026-06-24,contact intergroupe,irw_discovered_batch9.csv,batch9 run
+2026-06-24,群际接触,irw_discovered_batch9.csv,batch9 run
+2026-06-24,集団間接触,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الاتصال بين المجموعات,irw_discovered_batch9.csv,batch9 run
+2026-06-24,intergroepscontact,irw_discovered_batch9.csv,batch9 run
+2026-06-24,집단 간 접촉,irw_discovered_batch9.csv,batch9 run
+2026-06-24,environmental attitudes,irw_discovered_batch9.csv,batch9 run
+2026-06-24,actitudes ambientales,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Umwelteinstellungen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,attitudes environnementales,irw_discovered_batch9.csv,batch9 run
+2026-06-24,环境态度,irw_discovered_batch9.csv,batch9 run
+2026-06-24,環境態度,irw_discovered_batch9.csv,batch9 run
+2026-06-24,المواقف البيئية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,milieu-attitudes,irw_discovered_batch9.csv,batch9 run
+2026-06-24,환경 태도,irw_discovered_batch9.csv,batch9 run
+2026-06-24,climate change beliefs,irw_discovered_batch9.csv,batch9 run
+2026-06-24,creencias sobre el cambio climático,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Klimawandelüberzeugungen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,croyances sur le changement climatique,irw_discovered_batch9.csv,batch9 run
+2026-06-24,气候变化信念,irw_discovered_batch9.csv,batch9 run
+2026-06-24,気候変動に関する信念,irw_discovered_batch9.csv,batch9 run
+2026-06-24,معتقدات تغير المناخ,irw_discovered_batch9.csv,batch9 run
+2026-06-24,klimaatveranderingsovertuigingen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,기후변화 신념,irw_discovered_batch9.csv,batch9 run
+2026-06-24,student engagement,irw_discovered_batch9.csv,batch9 run
+2026-06-24,compromiso estudiantil,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Schülerengagement,irw_discovered_batch9.csv,batch9 run
+2026-06-24,engagement des élèves,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学生投入,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学習への取り組み,irw_discovered_batch9.csv,batch9 run
+2026-06-24,مشاركة الطلاب,irw_discovered_batch9.csv,batch9 run
+2026-06-24,studentbetrokkenheid,irw_discovered_batch9.csv,batch9 run
+2026-06-24,학생 참여,irw_discovered_batch9.csv,batch9 run
+2026-06-24,teacher self-efficacy,irw_discovered_batch9.csv,batch9 run
+2026-06-24,autoeficacia docente,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Lehrer-Selbstwirksamkeit,irw_discovered_batch9.csv,batch9 run
+2026-06-24,auto-efficacité des enseignants,irw_discovered_batch9.csv,batch9 run
+2026-06-24,教师自我效能感,irw_discovered_batch9.csv,batch9 run
+2026-06-24,教師の自己効力感,irw_discovered_batch9.csv,batch9 run
+2026-06-24,كفاءة المعلم الذاتية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,leerkracht-zelfeffectiviteit,irw_discovered_batch9.csv,batch9 run
+2026-06-24,교사 자기 효능감,irw_discovered_batch9.csv,batch9 run
+2026-06-24,academic motivation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,motivación académica,irw_discovered_batch9.csv,batch9 run
+2026-06-24,akademische Motivation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,motivation académique,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学业动机,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学業的動機づけ,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الدافعية الأكاديمية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,academische motivatie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,학업 동기,irw_discovered_batch9.csv,batch9 run
+2026-06-24,learning strategies,irw_discovered_batch9.csv,batch9 run
+2026-06-24,estrategias de aprendizaje,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Lernstrategien,irw_discovered_batch9.csv,batch9 run
+2026-06-24,stratégies d'apprentissage,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学习策略,irw_discovered_batch9.csv,batch9 run
+2026-06-24,学習方略,irw_discovered_batch9.csv,batch9 run
+2026-06-24,استراتيجيات التعلم,irw_discovered_batch9.csv,batch9 run
+2026-06-24,leerstrategieën,irw_discovered_batch9.csv,batch9 run
+2026-06-24,학습 전략,irw_discovered_batch9.csv,batch9 run
+2026-06-24,acculturation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,aculturación,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Akkulturation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,文化适应,irw_discovered_batch9.csv,batch9 run
+2026-06-24,文化変容,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التثاقف,irw_discovered_batch9.csv,batch9 run
+2026-06-24,acculturatie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,문화 적응,irw_discovered_batch9.csv,batch9 run
+2026-06-24,ethnic identity,irw_discovered_batch9.csv,batch9 run
+2026-06-24,identidad étnica,irw_discovered_batch9.csv,batch9 run
+2026-06-24,ethnische Identität,irw_discovered_batch9.csv,batch9 run
+2026-06-24,identité ethnique,irw_discovered_batch9.csv,batch9 run
+2026-06-24,民族认同,irw_discovered_batch9.csv,batch9 run
+2026-06-24,民族的アイデンティティ,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الهوية العرقية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,etnische identiteit,irw_discovered_batch9.csv,batch9 run
+2026-06-24,민족 정체성,irw_discovered_batch9.csv,batch9 run
+2026-06-24,stigma,irw_discovered_batch9.csv,batch9 run
+2026-06-24,estigma,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Stigma,irw_discovered_batch9.csv,batch9 run
+2026-06-24,stigmate,irw_discovered_batch9.csv,batch9 run
+2026-06-24,污名,irw_discovered_batch9.csv,batch9 run
+2026-06-24,スティグマ,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الوصمة الاجتماعية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,낙인,irw_discovered_batch9.csv,batch9 run
+2026-06-24,help-seeking,irw_discovered_batch9.csv,batch9 run
+2026-06-24,búsqueda de ayuda,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Hilfesuchverhalten,irw_discovered_batch9.csv,batch9 run
+2026-06-24,recherche d'aide,irw_discovered_batch9.csv,batch9 run
+2026-06-24,求助行为,irw_discovered_batch9.csv,batch9 run
+2026-06-24,援助要請,irw_discovered_batch9.csv,batch9 run
+2026-06-24,طلب المساعدة,irw_discovered_batch9.csv,batch9 run
+2026-06-24,hulpzoekend gedrag,irw_discovered_batch9.csv,batch9 run
+2026-06-24,도움 추구,irw_discovered_batch9.csv,batch9 run
+2026-06-24,obsessive compulsive,irw_discovered_batch9.csv,batch9 run
+2026-06-24,trastorno obsesivo compulsivo,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Zwangsstörung,irw_discovered_batch9.csv,batch9 run
+2026-06-24,trouble obsessionnel compulsif,irw_discovered_batch9.csv,batch9 run
+2026-06-24,强迫症,irw_discovered_batch9.csv,batch9 run
+2026-06-24,強迫性障害,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الوسواس القهري,irw_discovered_batch9.csv,batch9 run
+2026-06-24,obsessief-compulsief,irw_discovered_batch9.csv,batch9 run
+2026-06-24,강박 장애,irw_discovered_batch9.csv,batch9 run
+2026-06-24,eating attitudes,irw_discovered_batch9.csv,batch9 run
+2026-06-24,actitudes alimentarias,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Essverhalten,irw_discovered_batch9.csv,batch9 run
+2026-06-24,attitudes alimentaires,irw_discovered_batch9.csv,batch9 run
+2026-06-24,饮食态度,irw_discovered_batch9.csv,batch9 run
+2026-06-24,食行動,irw_discovered_batch9.csv,batch9 run
+2026-06-24,المواقف الغذائية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,eetattitudes,irw_discovered_batch9.csv,batch9 run
+2026-06-24,식이 태도,irw_discovered_batch9.csv,batch9 run
+2026-06-24,health anxiety,irw_discovered_batch9.csv,batch9 run
+2026-06-24,ansiedad por la salud,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Gesundheitsangst,irw_discovered_batch9.csv,batch9 run
+2026-06-24,anxiété de santé,irw_discovered_batch9.csv,batch9 run
+2026-06-24,健康焦虑,irw_discovered_batch9.csv,batch9 run
+2026-06-24,健康不安,irw_discovered_batch9.csv,batch9 run
+2026-06-24,القلق الصحي,irw_discovered_batch9.csv,batch9 run
+2026-06-24,gezondheidsangst,irw_discovered_batch9.csv,batch9 run
+2026-06-24,건강 불안,irw_discovered_batch9.csv,batch9 run
+2026-06-24,somatization,irw_discovered_batch9.csv,batch9 run
+2026-06-24,somatización,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Somatisierung,irw_discovered_batch9.csv,batch9 run
+2026-06-24,somatisation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,躯体化,irw_discovered_batch9.csv,batch9 run
+2026-06-24,身体化,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التجسيم النفسي,irw_discovered_batch9.csv,batch9 run
+2026-06-24,somatisatie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,신체화,irw_discovered_batch9.csv,batch9 run
+2026-06-24,prejudice,irw_discovered_batch9.csv,batch9 run
+2026-06-24,prejuicio,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Vorurteil,irw_discovered_batch9.csv,batch9 run
+2026-06-24,préjugé,irw_discovered_batch9.csv,batch9 run
+2026-06-24,偏见,irw_discovered_batch9.csv,batch9 run
+2026-06-24,偏見,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التحيز,irw_discovered_batch9.csv,batch9 run
+2026-06-24,vooroordeel,irw_discovered_batch9.csv,batch9 run
+2026-06-24,편견,irw_discovered_batch9.csv,batch9 run
+2026-06-24,discrimination,irw_discovered_batch9.csv,batch9 run
+2026-06-24,discriminación,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Diskriminierung,irw_discovered_batch9.csv,batch9 run
+2026-06-24,discrimination,irw_discovered_batch9.csv,batch9 run
+2026-06-24,歧视,irw_discovered_batch9.csv,batch9 run
+2026-06-24,差別,irw_discovered_batch9.csv,batch9 run
+2026-06-24,التمييز,irw_discovered_batch9.csv,batch9 run
+2026-06-24,discriminatie,irw_discovered_batch9.csv,batch9 run
+2026-06-24,차별,irw_discovered_batch9.csv,batch9 run
+2026-06-24,cross-cultural,irw_discovered_batch9.csv,batch9 run
+2026-06-24,intercultural,irw_discovered_batch9.csv,batch9 run
+2026-06-24,interkulturell,irw_discovered_batch9.csv,batch9 run
+2026-06-24,interculturel,irw_discovered_batch9.csv,batch9 run
+2026-06-24,跨文化,irw_discovered_batch9.csv,batch9 run
+2026-06-24,異文化間,irw_discovered_batch9.csv,batch9 run
+2026-06-24,عبر الثقافات,irw_discovered_batch9.csv,batch9 run
+2026-06-24,intercultureel,irw_discovered_batch9.csv,batch9 run
+2026-06-24,문화 간,irw_discovered_batch9.csv,batch9 run
+2026-06-24,religious beliefs,irw_discovered_batch9.csv,batch9 run
+2026-06-24,creencias religiosas,irw_discovered_batch9.csv,batch9 run
+2026-06-24,religiöse Überzeugungen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,croyances religieuses,irw_discovered_batch9.csv,batch9 run
+2026-06-24,宗教信仰,irw_discovered_batch9.csv,batch9 run
+2026-06-24,宗教的信念,irw_discovered_batch9.csv,batch9 run
+2026-06-24,المعتقدات الدينية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,religieuze overtuigingen,irw_discovered_batch9.csv,batch9 run
+2026-06-24,종교적 신념,irw_discovered_batch9.csv,batch9 run
+2026-06-24,spiritual wellbeing,irw_discovered_batch9.csv,batch9 run
+2026-06-24,bienestar espiritual,irw_discovered_batch9.csv,batch9 run
+2026-06-24,spirituelles Wohlbefinden,irw_discovered_batch9.csv,batch9 run
+2026-06-24,bien-être spirituel,irw_discovered_batch9.csv,batch9 run
+2026-06-24,灵性健康,irw_discovered_batch9.csv,batch9 run
+2026-06-24,スピリチュアリティ,irw_discovered_batch9.csv,batch9 run
+2026-06-24,الرفاهية الروحية,irw_discovered_batch9.csv,batch9 run
+2026-06-24,spiritueel welzijn,irw_discovered_batch9.csv,batch9 run
+2026-06-24,영적 웰빙,irw_discovered_batch9.csv,batch9 run
+2026-06-24,coping strategies,irw_discovered_batch9.csv,batch9 run
+2026-06-24,estrategias de afrontamiento,irw_discovered_batch9.csv,batch9 run
+2026-06-24,Bewältigungsstrategien,irw_discovered_batch9.csv,batch9 run
+2026-06-24,stratégies d'adaptation,irw_discovered_batch9.csv,batch9 run
+2026-06-24,应对策略,irw_discovered_batch9.csv,batch9 run
+2026-06-24,コーピング方略,irw_discovered_batch9.csv,batch9 run
+2026-06-24,استراتيجيات المواجهة,irw_discovered_batch9.csv,batch9 run
+2026-06-24,copingstrategieën,irw_discovered_batch9.csv,batch9 run
+2026-06-24,대처 전략,irw_discovered_batch9.csv,batch9 run
+2026-07-12,impostor syndrome,candidates_test10.csv,skill test run
+2026-07-12,financial literacy,candidates_test10.csv,skill test run
+2026-07-12,grit scale,candidates_test10.csv,skill test run
+2026-07-12,math anxiety,candidates_test10.csv,skill test run

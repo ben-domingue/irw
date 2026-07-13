@@ -583,12 +583,17 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
     passes all filters — use this to write results incrementally rather than
     waiting for the full run to finish.
     """
+    import time as _time
     active = sources if sources is not None else SOURCES
     seen, results = set(), []
     total = len(queries)
+    t0 = _time.time()
     for i, q in enumerate(queries, 1):
+        q_new = 0
+        q_start = _time.time()
         print(f"[query {i}/{total}] {q}", flush=True)
         for src in active:
+            src_new = 0
             for hit in src(q):
                 key = hit.doi or f"{hit.source}:{hit.title.strip().lower()}"
                 if not key or key in seen:
@@ -599,8 +604,15 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                     continue
                 seen.add(key)
                 results.append(hit)
+                q_new += 1
+                src_new += 1
                 if on_hit:
                     on_hit(hit)
+            if src_new:
+                print(f"  [{src.__name__:20}] +{src_new}", flush=True)
+        elapsed = _time.time() - t0
+        print(f"  → {q_new} new this query | {len(results)} total | "
+              f"{elapsed:.0f}s elapsed", flush=True)
     return results
 
 
@@ -632,14 +644,22 @@ def main():
     print(f"[note] IRW duplicate check runs at the start of Step 2 (irw_process_queue.py).")
     print()
 
-    hits = discover(queries, exclude, relevance_on=not args.all, sources=active_sources)
-    hits.sort(key=lambda h: h.published or "", reverse=True)
+    fieldnames = ["source", "title", "doi", "published", "url"]
+    outf = open(args.out, "w", newline="", encoding="utf-8")
+    writer = csv.DictWriter(outf, fieldnames=fieldnames)
+    writer.writeheader()
+    outf.flush()
 
-    with open(args.out, "w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=["source", "title", "doi", "published", "url"])
-        w.writeheader()
-        for h in hits:
-            w.writerow(asdict(h))
+    hits = []
+
+    def on_hit(h):
+        hits.append(h)
+        writer.writerow(asdict(h))
+        outf.flush()
+
+    discover(queries, exclude, relevance_on=not args.all, sources=active_sources,
+             on_hit=on_hit)
+    outf.close()
 
     print(f"{len(hits)} candidates found -> {args.out}")
     for h in hits[:25]:
