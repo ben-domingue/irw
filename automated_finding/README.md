@@ -255,7 +255,11 @@ the note in Step 1 above.)
 
 ### `irw_batch_updated.py`
 Resolves landing pages to data files, downloads, triages, and writes
-`triage.csv`. No data files are saved — triage only.
+`triage.csv`. No data files are saved — triage only. Recognizes
+`.csv`/`.tsv`/`.xlsx`/`.xls`/`.sav`/`.dta`/`.sas7bdat`/`.rdata`/`.rda`/`.rds`
+on a landing page (`TABULAR_EXT`) — the SPSS/Stata/SAS/R formats were added
+2026-07-14; see the "Pipeline fix" note in `BATCH_LOG.md` for why and what
+it needed (`pyreadstat`/`pyreadr`, see Prerequisites in `SKILL.md`).
 ```
 --limit <n>    process only the first N rows
 --resume       continue from checkpoint after interruption
@@ -269,7 +273,10 @@ dataset in `data/` (see Step 2 above) — the file is kept in this directory
 for reference but is stale and should not be executed.
 
 ### `irw_triage_updated.py`
-Evaluate a single file directly (useful for spot-checking):
+Evaluate a single file directly (useful for spot-checking). `load_table()`
+here is what `irw_batch_updated.py` calls too, so its format support
+(`.csv`/`.tsv`/`.xlsx`/`.xls`/`.sav`/`.dta`/`.sas7bdat`/`.rdata`/`.rda`/`.rds`)
+is shared between both entry points:
 ```bash
 python irw_triage_updated.py path/to/data.csv
 python irw_triage_updated.py https://example.com/data.csv
@@ -285,3 +292,22 @@ columns and prints a summary with actionable follow-up lists.
 ```
 Run this after any full batch triage to reduce the manual review burden before
 deciding which `human_assistance` cases to escalate.
+
+### `irw_extract_evaluated_dois.py`
+Mines `BATCH_LOG.md` for DOI-like identifiers of every dataset already
+evaluated in any prior batch — any outcome (good, skip, human_review,
+worth_retrying, processed), not just what's in the IRW dictionary or queue
+sheet. Exists because the dictionary/queue exclusion in
+`irw_discover_updated.py` can't catch a dataset that was looked at and
+explicitly *skipped* — it never lands in either sheet, so it can resurface
+as a "new" candidate in a later batch (this happened to DVN/5ZQHV6 twice,
+in batches 14 and 15, before this tool existed).
+```bash
+python irw_extract_evaluated_dois.py                        # print count + list
+python irw_extract_evaluated_dois.py --out dois.txt          # write to file
+python irw_extract_evaluated_dois.py --check candidates.csv  # report matches in a candidate file
+```
+Run the `--check` form against a merged candidate file before triaging it,
+same as the license/dictionary checks. It's a heuristic (only catches
+datasets mentioned with a recognizable ID in `BATCH_LOG.md`'s prose) —
+treat a 0-match result as "no repeats caught," not "no repeats exist."

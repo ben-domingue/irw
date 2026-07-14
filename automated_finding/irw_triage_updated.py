@@ -2,7 +2,7 @@
 irw_triage.py
 =============
 Takes a candidate dataset and runs it through:
-  1. DOWNLOAD     - fetch the data file from a URL (csv/tsv/xlsx)
+  1. DOWNLOAD     - fetch the data file from a URL (csv/tsv/xlsx/sav/dta/sas7bdat/RData/rds)
   2. COERCE       - make a BEST-GUESS mapping into IRW long format (id/item/resp)
   3. QC           - run checks mirroring the official IRW data standard, plus
                     the IRW's own density metric
@@ -64,7 +64,8 @@ def download(url: str, dest_dir: str = "downloads") -> str:
 
 
 def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
-    """Read csv/tsv/xlsx into a DataFrame from a path or raw bytes."""
+    """Read csv/tsv/xlsx/sav/dta/sas7bdat/RData/rds into a DataFrame from a
+    path or raw bytes."""
     name = (filename or str(path_or_bytes)).lower()
     if isinstance(path_or_bytes, (bytes, bytearray)):
         src = io.BytesIO(path_or_bytes)
@@ -74,6 +75,29 @@ def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
         return pd.read_excel(src)
     if name.endswith(".tsv"):
         return pd.read_csv(src, sep="\t")
+    if name.endswith(".sav"):
+        # pandas.read_spss (via pyreadstat) accepts a file-like object directly.
+        return pd.read_spss(src)
+    if name.endswith(".dta"):
+        return pd.read_stata(src)
+    if name.endswith(".sas7bdat"):
+        return pd.read_sas(src, format="sas7bdat")
+    if name.endswith((".rdata", ".rda", ".rds")):
+        # pyreadr needs a real filesystem path, not a file-like object --
+        # spill bytes to a temp file, read, and clean up either way.
+        import pyreadr
+        import tempfile
+        suffix = ".rds" if name.endswith(".rds") else ".RData"
+        with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
+            tmp.write(src.read() if hasattr(src, "read") else open(src, "rb").read())
+            tmp_path = tmp.name
+        try:
+            result = pyreadr.read_r(tmp_path)
+            # .rds -> single unnamed object (key None); .RData -> one or more
+            # named objects. Take the first/only one either way.
+            return next(iter(result.values()))
+        finally:
+            os.unlink(tmp_path)
     return pd.read_csv(src)
 
 

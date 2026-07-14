@@ -18,15 +18,18 @@ Work from inside `automated_finding/`.
 
 ## Prerequisites
 
-`irw_batch_updated.py` and `irw_triage_updated.py` need `pandas` and
-`openpyxl` (for `.xlsx` sources); `irw_discover_updated.py` only needs
-`requests`, which is commonly already present. A fresh machine may not have
-`pandas`/`openpyxl` installed — check with
-`python3 -c "import pandas, openpyxl"` before running the triage steps. If
-missing and `pip install` refuses with "externally-managed-environment",
-`pip3 install --user --break-system-packages pandas openpyxl` is a
-reasonable, reversible fix (installs to the user's own site-packages, no
-sudo, no system package changes) rather than fighting with a venv.
+`irw_batch_updated.py` and `irw_triage_updated.py` need `pandas`, `openpyxl`
+(for `.xlsx` sources), `pyreadstat` (for `.sav`/`.sas7bdat` sources, via
+`pd.read_spss`/`pd.read_sas`), and `pyreadr` (for `.RData`/`.rds` sources —
+`.dta` needs neither extra package, `pd.read_stata` is pandas-native).
+`irw_discover_updated.py` only needs `requests`, which is commonly already
+present. A fresh machine may not have these installed — check with
+`python3 -c "import pandas, openpyxl, pyreadstat, pyreadr"` before running
+the triage steps. If missing and `pip install` refuses with
+"externally-managed-environment",
+`pip3 install --user --break-system-packages pandas openpyxl pyreadstat pyreadr`
+is a reasonable, reversible fix (installs to the user's own site-packages,
+no sudo, no system package changes) rather than fighting with a venv.
 
 ## Before doing anything
 

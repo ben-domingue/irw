@@ -35,18 +35,23 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
     — structure already confirmed, ready to process the moment a license
     exists)
 
-- [ ] **Pipeline gap: `.sav`/`.dta`/`.sas7bdat`/`.RData` files are invisible
-  to discovery/triage.** `irw_batch_updated.py`'s `TABULAR_EXT` only checks
-  `.csv`/`.tsv`/`.xlsx`/`.xls` when resolving a landing page to a data file,
-  so any candidate whose only file is SPSS/Stata/SAS/R format gets silently
-  flagged `no_usable_file` without ever being opened — even though
-  `datastandard.md` lists all of those as supported formats to process.
-  Confirmed concretely via figshare 19713625 ("Psychometric properties of
-  GS, EGO, 3D-GS grit scales in Chinese adults: A Bifactor IRT study," a
-  `.sav`-only deposit that turned out to be a strong candidate — N=896, 6
-  named scales — once opened by hand with `pyreadstat`). Likely a source of
-  silent false negatives across all 16 batches, not just this one dataset.
-  Needs: extend `TABULAR_EXT` handling (and the download/parse logic) to
-  cover these formats, `pyreadstat` added to the documented prerequisites,
-  and probably a pass at re-discovering `no_usable_file` candidates from
-  past batches once fixed. Not yet fixed.
+- [ ] **Batch 17 wrap-up** — biblio sheet entries confirmed live in the
+  dictionary (2026-07-14). `human_review_batch17.csv` (5 rows,
+  `automated_finding/human_review_batch17.csv`) is still sitting locally,
+  unlike batches 15/16's — not deleted yet, so not assuming it's been
+  pasted into the "Human eye" sheet. Paste it and delete the file when done.
+
+- [ ] **Re-discover past `no_usable_file` candidates now that `.sav`/`.dta`/
+  `.sas7bdat`/`.RData` support is fixed** (2026-07-14 — `TABULAR_EXT` in
+  `irw_batch_updated.py` extended, `load_table()` in `irw_triage_updated.py`
+  now parses all four via `pd.read_spss`/`pd.read_stata`/`pd.read_sas`/
+  `pyreadr`, verified end-to-end against figshare 19713625 which now
+  correctly triages as `human_assistance` — N=896, 6 named scales — instead
+  of silently vanishing as `no_usable_file`). The fix only helps *future*
+  discovery runs; every candidate flagged `no_usable_file` in batches 1-17
+  needs re-checking, since some unknown fraction of those 200-900-per-batch
+  rows were SPSS/Stata/SAS/R files rejected before this fix, not genuinely
+  unusable. No mechanism exists yet to re-run triage against old candidate
+  lists (they were deleted per the temp-file cleanup convention) — would
+  need either saved candidate URLs or a fresh discovery pass per past search
+  term to recover them.

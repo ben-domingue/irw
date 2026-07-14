@@ -10,15 +10,14 @@ Three things this does that a naive search doesn't:
   - SOURCES   : queries 5 repositories, not 1 (breadth = recall)
   - PAGINATION: walks every page per source, so you don't miss results
   - DEDUP     : merges by DOI across sources, falls back to title
-  - EXCLUDE   : automatically skips datasets already in the IRW and datasets
-                already queued for processing. Both exclusion sets are fetched
-                live from Google Sheets on every run (_load_auto_exclusions())
-                — the IRW dictionary sheet and the processing queue sheet.
-                No local file to maintain.
-
-The processing queue is a Google Sheet maintained manually — add a row whenever
-you decide to process a candidate from the triage output. Future discovery runs
-will fetch the sheet and exclude those DOIs automatically.
+  - EXCLUDE   : automatically skips datasets already in the IRW. The
+                exclusion set is fetched live from the IRW dictionary Google
+                Sheet on every run (_load_auto_exclusions()) — no local file
+                to maintain. (The processing-queue "to be processed" sheet
+                was dropped from this check 2026-07-14 -- it's a manually
+                maintained tab other contributors use, not something this
+                pipeline's own good/worth_retrying candidates ever land in,
+                so treating it as an exclusion source no longer made sense.)
 
 Run:
     python irw_discover_updated.py "self-efficacy scale" "reading assessment"
@@ -483,13 +482,6 @@ SOURCE_MAP = {fn.__name__.replace("from_", ""): fn for fn in SOURCES}
 # Orchestration
 # ---------------------------------------------------------------------------
 
-# Processing queue: DOIs decided for processing but not yet landed in the IRW.
-# Managed manually in this Google Sheet (must be shared "anyone with link can view"):
-QUEUE_SHEET_URL = (
-    "https://docs.google.com/spreadsheets/d/"
-    "1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/export?format=csv&gid=0"
-)
-
 # IRW dictionary: authoritative list of what is already in the warehouse.
 DICT_SHEET_URL = (
     "https://docs.google.com/spreadsheets/d/"
@@ -517,29 +509,15 @@ def _extract_doi_from_url(url: str) -> str | None:
     m = re.search(r'zenodo\.org/record/(\d+)', url)
     if m:
         return norm_doi(f'10.5281/zenodo.{m.group(1)}')
-    # Figshare article page (any subdomain)
-    m = re.search(r'figshare\.com/articles/[^/]+/(\d+)', url)
+    # Figshare article page (any subdomain). Real URLs have a variable number
+    # of path segments between "articles/" and the numeric ID -- at minimum
+    # a type segment ("dataset"), often also a title slug
+    # (.../articles/dataset/Some_Title_Here/19158812) -- so anchor on the
+    # trailing digits rather than assuming exactly one segment in between.
+    m = re.search(r'figshare\.com/articles/.+?(\d+)(?:\.v\d+)?/?(?:[?#]|$)', url)
     if m:
         return norm_doi(f'10.6084/m9.figshare.{m.group(1)}')
     return None
-
-
-def _load_queued_from_sheet() -> set:
-    """Fetch queued DOIs from the IRW processing queue Google Sheet."""
-    try:
-        r = requests.get(QUEUE_SHEET_URL, timeout=15)
-        r.raise_for_status()
-        dois = set()
-        for row in csv.reader(r.text.splitlines()):
-            for cell in row:
-                d = norm_doi(cell)
-                if "/" in d and d.count(" ") == 0:
-                    dois.add(d)
-        return dois
-    except Exception as e:
-        print(f"[warn] Could not fetch processing queue from Google Sheet: {e}",
-              file=sys.stderr)
-        return set()
 
 
 def _load_existing_irw_dois() -> set:
@@ -564,14 +542,10 @@ def _load_existing_irw_dois() -> set:
 
 
 def _load_auto_exclusions() -> set:
-    """Load DOIs to exclude: already in the IRW dictionary + in the processing queue."""
+    """Load DOIs to exclude: already in the IRW dictionary."""
     existing = _load_existing_irw_dois()
-    queued = _load_queued_from_sheet()
-    total = existing | queued
-    print(f"[exclude] {len(existing)} DOIs already in IRW, "
-          f"{len(queued)} in processing queue → {len(total)} total excluded",
-          flush=True)
-    return total
+    print(f"[exclude] {len(existing)} DOIs already in IRW", flush=True)
+    return existing
 
 
 def discover(queries, exclude: set, relevance_on: bool, sources=None,
@@ -635,12 +609,10 @@ def main():
     else:
         active_sources = None
 
-    queued_dois = _load_auto_exclusions()
-    exclude = queued_dois
+    exclude = _load_auto_exclusions()
 
-    if queued_dois:
-        print(f"Excluding {len(queued_dois):,} DOIs already queued for processing  (Google Sheet)")
-    print(f"[note] IRW duplicate check runs at the start of Step 2 (irw_process_queue.py).")
+    if exclude:
+        print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary")
     print()
 
     fieldnames = ["source", "title", "doi", "published", "url"]
