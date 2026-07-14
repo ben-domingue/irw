@@ -25,10 +25,10 @@ dropped for three batches until caught).
 
 ```bash
 # 1. Search across repositories. Exclusion is automatic and live: the script
-#    fetches DOIs already in the IRW dictionary and already-queued DOIs
-#    directly from the two Google Sheets on every run (see
-#    _load_auto_exclusions() in irw_discover_updated.py) — there is no local
-#    metadata file to regenerate first.
+#    fetches DOIs already in the IRW dictionary directly from the Google
+#    Sheet on every run (see _load_auto_exclusions() in
+#    irw_discover_updated.py) — there is no local metadata file to
+#    regenerate first.
 python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
 
 # 2. Test on 10 rows before running everything
@@ -39,19 +39,35 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv
 python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 
 # 4. Open irw_triage.csv, sort by flag ('good' first), review candidates.
-#    For anything you want to process, add a row to the "to be processed" tab:
+#    `good`/`worth_retrying` rows go straight to Step 2 (write a processing
+#    script) -- there is no "add to a queue tab" staging step for these; see
+#    the note below. For human_review rows from irw_retriage_ha.py, add them
+#    to the "human eye" tab:
 #    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
-#    (columns: doi, title, source, url)
-#    For human_review rows from irw_retriage_ha.py, add them to the "human eye" tab.
 
-# 5. Once actionable rows are captured in the sheet, delete the local triage CSV.
+# 5. Once actionable rows are captured, delete the local triage CSV.
 #    It is a temporary working file — search_terms_log.csv is the permanent record.
 ```
 
 The triage step downloads each candidate and runs automated checks — it does
 **not** save any data files. Its only output is `irw_triage.csv` (a temporary
-working file — delete it once good candidates are in the queue sheet and
-human_review rows are in the "human eye" tab).
+working file — delete it once `good`/`worth_retrying` candidates have a
+processing script and human_review rows are in the "human eye" tab).
+
+**Note on the "to be processed" tab:** the queue sheet has a second tab by
+this name, and older docs described writing `good` rows there as a staging
+step before processing. That hasn't been the actual practice since batch 7
+(confirmed 2026-07-14 by checking batches 14-16's processed DOIs against the
+tab — none were ever added) — the automated pipeline goes straight from a
+`good` triage flag to a processing script in `data/`, whose output lands
+directly in the dictionary sheet. `irw_discover_updated.py` also dropped it
+as a dedup-exclusion source the same day (2026-07-14) — it's a manually
+maintained tab for other, non-pipeline contributors, not something this
+pipeline's own candidates ever land in, so excluding on it no longer made
+sense. Exclusion now runs off the IRW dictionary alone. The tab itself still
+exists and still gets manual additions from others; this pipeline just
+doesn't read or write it anymore. Don't resurrect either the "add to
+to-be-processed" step or the exclusion check.
 
 **Every new search term must also be run translated into several other
 languages in the same discovery run** — non-English repositories surface real
@@ -61,6 +77,13 @@ has drifted out of sync with actual practice before.
 
 `search_terms_log.csv` is the permanent record of all queries that have been
 run. Update it whenever you add new search terms.
+
+`license_blocked_candidates.csv` is a similar standing record, but for
+datasets: whenever an otherwise-strong candidate gets skipped purely for a
+missing/unresolvable license (not a content problem), it's logged there —
+title, URL, size, contributors — before it's dropped, so it isn't lost the
+moment the triage CSV that found it gets cleaned up. See `SKILL.md` Step 4
+for what to capture.
 
 ### Step 1b — Retriage human_assistance rows (optional)
 
@@ -91,7 +114,9 @@ a much smaller set for manual review.
 ## Step 2 — Write a processing script per dataset
 
 **Who:** Someone doing the actual IRW data work.
-**When:** After candidates have been added to the queue sheet.
+**When:** Right after Step 1's triage flags a candidate `good` or
+`worth_retrying` — there is no intermediate queueing step (see the "to be
+processed" tab note above).
 **Output:** One bespoke script per dataset in `data/`, writing upload-ready
 CSVs directly to `irw_output/`.
 
@@ -102,7 +127,7 @@ CSVs directly to `irw_output/`.
 > and `cleaned_index.csv` no longer exist — do not run or look for them.
 > Current practice is below.
 
-For each `good` or `worth_retrying` row in the queue sheet, write one
+For each `good` or `worth_retrying` row in the triage output, write one
 standalone script directly in `data/`, named `authorname_year_construct.py`
 (see e.g. `data/frikha_2023_motivation.py`, `data/germann_2026_terrorism.py`).
 The script downloads the raw file from its source (Dataverse/Figshare/OSF/
@@ -141,13 +166,12 @@ The [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwt
 
 | Tab | Purpose |
 |---|---|
-| **to be processed** | Datasets queued for or already processed. Add rows here for anything you intend to process (`doi`, `title`, `source`, `url`). Rows are never removed — they serve as a permanent exclusion list. |
-| **human eye** | Datasets with `refined_flag = human_review` that need a person to open the raw file and decide if they're worth processing. Move actionable rows to "to be processed" once a decision is made. |
+| **to be processed** | A place other (manual, non-pipeline) contributors queue datasets. This automated pipeline neither writes to it nor reads it — `good`/`worth_retrying` candidates go straight to a processing script and from there into the dictionary sheet, and exclusion runs off the dictionary alone. Don't add a "stage it here first" step, and don't add it back as an exclusion source. |
+| **human eye** | Datasets with `refined_flag = human_review` that need a person to open the raw file and decide if they're worth processing. Once a decision is made, either write a processing script (if eligible) or drop it — there's no intermediate tab to move it to. |
 
 | Source | When it's checked | What it excludes |
 |---|---|---|
-| Queue sheet — "to be processed" tab | Step 1 (discovery) | DOIs already queued for processing |
-| IRW dictionary / Redivis (`bdomingu/irw_meta`) | Step 2 (before writing a script) | DOIs already in the IRW |
+| IRW dictionary / Redivis (`bdomingu/irw_meta`) | Step 1 (discovery), automatically; also worth a manual double check in Step 2 before writing a script | DOIs already in the IRW |
 
 No local metadata files needed, but this check is now manual per dataset —
 there is no longer a pipeline step that runs it automatically. Before writing
@@ -179,7 +203,7 @@ a processing script, check the dataset's DOI against the
 
 | Flag | Meaning | Action |
 |---|---|---|
-| `good` | Confident column mapping, no QC errors | Strong candidate — add to queue sheet |
+| `good` | Confident column mapping, no QC errors | Strong candidate — write a processing script (Step 2) |
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `no_usable_file` | No resolvable tabular file on the landing page | Skip |
@@ -220,9 +244,10 @@ Searches Dataverse, Zenodo, OSF, Dryad, and Figshare. Tiered relevance filter:
 named instruments always pass; psychometric and construct terms pass unless
 blocked by epi/clinical study language; supplementary file titles
 (`Table N_…`, `Data Sheet N_…`) are always blocked.
-Auto-excludes known DOIs by fetching the IRW dictionary and queue sheets
-live from Google Sheets on every run (`_load_auto_exclusions()`) — no local
-file needed.
+Auto-excludes known DOIs by fetching the IRW dictionary sheet live on every
+run (`_load_auto_exclusions()`) — no local file needed. (The "to be
+processed" queue sheet was dropped as an exclusion source 2026-07-14 — see
+the note in Step 1 above.)
 ```
 --all          disable relevance filter
 --out <path>   output path (default: candidates.csv)

@@ -25,8 +25,28 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (not in this repo). Needs a person to periodically review and either
   process or dismiss entries.
 
-- [ ] **Batch 15 wrap-up** — Redivis upload for 4 new tables in
-  `automated_finding/irw_output/` (chowdhury2026 x3, nelson2019 x1), and
-  biblio sheet entries from `/tmp/biblio_batch15.csv` (4 rows). Also paste
-  `human_review_batch15.csv` (26 rows) into the "Human eye" sheet if not
-  already done.
+- [ ] **Two strong OSF candidates blocked only on missing license** (not a
+  content problem — worth an author-permission email per
+  `processing_notes/Licensing.txt` if someone wants to pursue them):
+  - "The Role of Attentional Bias in Anxiety and Depression" (osf.io/ctnaq,
+    N=831, 82 items)
+  - "Assessing Creative Self-Efficacy in the Spanish Workplace" (osf.io/mksw2,
+    N=405, BFI-2-S + General Self-Efficacy + 2 Creative Self-Efficacy scales
+    — structure already confirmed, ready to process the moment a license
+    exists)
+
+- [ ] **Pipeline gap: `.sav`/`.dta`/`.sas7bdat`/`.RData` files are invisible
+  to discovery/triage.** `irw_batch_updated.py`'s `TABULAR_EXT` only checks
+  `.csv`/`.tsv`/`.xlsx`/`.xls` when resolving a landing page to a data file,
+  so any candidate whose only file is SPSS/Stata/SAS/R format gets silently
+  flagged `no_usable_file` without ever being opened — even though
+  `datastandard.md` lists all of those as supported formats to process.
+  Confirmed concretely via figshare 19713625 ("Psychometric properties of
+  GS, EGO, 3D-GS grit scales in Chinese adults: A Bifactor IRT study," a
+  `.sav`-only deposit that turned out to be a strong candidate — N=896, 6
+  named scales — once opened by hand with `pyreadstat`). Likely a source of
+  silent false negatives across all 16 batches, not just this one dataset.
+  Needs: extend `TABULAR_EXT` handling (and the download/parse logic) to
+  cover these formats, `pyreadstat` added to the documented prerequisites,
+  and probably a pass at re-discovering `no_usable_file` candidates from
+  past batches once fixed. Not yet fixed.

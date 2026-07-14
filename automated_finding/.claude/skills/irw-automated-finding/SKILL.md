@@ -83,11 +83,15 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
   check `wc -l irw_batch_checkpoint.jsonl` for progress rather than waiting
   on it synchronously.
 - Sort `irw_triage.csv` by `flag`, `good` first.
-- `good` rows → add to the "to be processed" tab of the queue sheet
-  (doi, title, source, url).
+- `good` rows → go straight to Step 3 (write a processing script). There is
+  no "stage it in the queue sheet first" step — that tab exists but this
+  pipeline doesn't write to it (confirmed 2026-07-14: none of batches 14-16's
+  processed DOIs were ever added to it). Don't add that step back in.
 - `human_assistance` rows → run Step 2b before deciding what to do with them.
-- Once actionable rows are captured in the sheet, delete the local triage CSV
-  — it's temporary; `search_terms_log.csv` is the permanent record.
+- Once every `good`/`worth_retrying` row has a processing script (or a
+  documented skip reason) and every `human_review` row is in the "human eye"
+  tab, delete the local triage CSV — it's temporary; `search_terms_log.csv`
+  is the permanent record.
 
 ## Step 2b — Retriage `human_assistance` (recommended before reviewing by hand)
 
@@ -151,6 +155,16 @@ output-format one:
   skipping isn't the only option — emailing the author for permission
   (template in `processing_notes/Licensing.txt`) is fine, but don't process
   the data until permission or updated license terms come back confirmed.
+- **Log it before dropping it.** When a `good` (or otherwise structurally
+  strong) candidate is skipped purely because of a missing/unresolvable
+  license — not a content problem — append a row to
+  `license_blocked_candidates.csv` (title, URL, paper DOI if any, n/items/
+  density, contributors + OSF profile links, email if a linked *published*
+  paper's Crossref/PMC metadata has one — OSF's API never exposes email
+  directly, don't guess one) before moving on. This is a standing list, not
+  a per-batch temp file — don't delete it. It exists so a strong,
+  ready-to-process candidate isn't lost the moment its triage CSV gets
+  cleaned up.
 
 When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,
@@ -185,4 +199,7 @@ biblio-entered per batch.
    CSV handed to the user for the queue/dictionary sheet. Don't delete a
    `human_review_*.csv` or biblio CSV until the user has confirmed the rows
    were actually pasted into the sheet — check whether that item is still
-   open in `TODO.md`, don't assume from an earlier "yes."
+   open in `TODO.md`, don't assume from an earlier "yes." **Never delete
+   `license_blocked_candidates.csv`** — unlike the per-batch temp files, it's
+   a standing, cumulative list (like `search_terms_log.csv`), not disposable
+   once a batch is written up.
