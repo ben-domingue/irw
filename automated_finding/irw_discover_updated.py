@@ -10,12 +10,11 @@ Three things this does that a naive search doesn't:
   - SOURCES   : queries 5 repositories, not 1 (breadth = recall)
   - PAGINATION: walks every page per source, so you don't miss results
   - DEDUP     : merges by DOI across sources, falls back to title
-  - EXCLUDE   : automatically skips datasets already in the IRW (irw_metadata.csv)
-                and datasets already queued for processing (irw_queued.csv).
-                Both files are read from the working directory if present.
-
-To keep irw_metadata.csv current, regenerate it from R periodically:
-    library(irw); write.csv(irw_metadata(), "irw_metadata.csv")
+  - EXCLUDE   : automatically skips datasets already in the IRW and datasets
+                already queued for processing. Both exclusion sets are fetched
+                live from Google Sheets on every run (_load_auto_exclusions())
+                — the IRW dictionary sheet and the processing queue sheet.
+                No local file to maintain.
 
 The processing queue is a Google Sheet maintained manually — add a row whenever
 you decide to process a candidate from the triage output. Future discovery runs

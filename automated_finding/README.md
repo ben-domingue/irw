@@ -3,6 +3,18 @@
 Automated tools for finding, screening, and standardizing datasets for the IRW.
 The pipeline has **two distinct steps** with different people and cadences in mind.
 
+This file is the **script and column/flag reference** — exact CLI flags, what
+each triage column means, what each QC warning means. For orchestration —
+what order to run things in, and the hard rules that must not be skipped
+(the 9-language discovery requirement, the license-verification procedure,
+what's current vs. retired) — see
+`.claude/skills/irw-automated-finding/SKILL.md`, not this file. That skill
+is what an agent actually follows step-by-step; this README is what it
+consults for the details. Where the two disagree, the skill wins — it gets
+updated whenever practice changes, and duplicated instructions here have
+drifted stale before (e.g. the 9-language requirement below was silently
+dropped for three batches until caught).
+
 ---
 
 ## Step 1 — Find and triage candidates
@@ -12,10 +24,11 @@ The pipeline has **two distinct steps** with different people and cadences in mi
 **Output:** A CSV ranking candidates by how cleanly they map to IRW format.
 
 ```bash
-# 0. Refresh what's already in the IRW (do this periodically)
-Rscript -e "library(irw); write.csv(irw_metadata(), 'irw_metadata.csv')"
-
-# 1. Search across repositories (auto-excludes known IRW datasets + queue)
+# 1. Search across repositories. Exclusion is automatic and live: the script
+#    fetches DOIs already in the IRW dictionary and already-queued DOIs
+#    directly from the two Google Sheets on every run (see
+#    _load_auto_exclusions() in irw_discover_updated.py) — there is no local
+#    metadata file to regenerate first.
 python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
 
 # 2. Test on 10 rows before running everything
@@ -39,6 +52,12 @@ The triage step downloads each candidate and runs automated checks — it does
 **not** save any data files. Its only output is `irw_triage.csv` (a temporary
 working file — delete it once good candidates are in the queue sheet and
 human_review rows are in the "human eye" tab).
+
+**Every new search term must also be run translated into several other
+languages in the same discovery run** — non-English repositories surface real
+candidates the English term alone misses. The current language set and the
+exact rule are maintained in `SKILL.md` (Step 1), not here, since this list
+has drifted out of sync with actual practice before.
 
 `search_terms_log.csv` is the permanent record of all queries that have been
 run. Update it whenever you add new search terms.
@@ -79,7 +98,7 @@ CSVs directly to `irw_output/`.
 > **This section used to describe a different flow** — `irw_process_queue.py`
 > → `irw_output/queue/` → human cleanup → `irw_output/cleaned/` +
 > `cleaned_index.csv`. That intermediate stage was eliminated 2026-06-24 (see
-> `TODO.md`'s "Workflow notes"). `irw_process_queue.py`, `irw_output/queue/`,
+> `BATCH_LOG.md`'s "Workflow notes"). `irw_process_queue.py`, `irw_output/queue/`,
 > and `cleaned_index.csv` no longer exist — do not run or look for them.
 > Current practice is below.
 
@@ -104,7 +123,14 @@ Before uploading a file from `irw_output/` to Redivis, run through
 warnings printed during triage (and recorded in the triage CSV, glossary
 below) point at exactly what to check in each file.
 
-There is no `cleaned_index.csv` to update — `TODO.md` is the record of
+One more hard rule applies at this stage that lives in `SKILL.md`, not
+`datastandard.md`, because it's a pipeline/triage concern rather than an
+output-format one: a triage `license` of `unknown` is not verified and means
+skip, but a bare OSF-style UUID is *not* automatically unverified — resolve
+it via `GET https://api.osf.io/v2/licenses/{id}/` before deciding. See
+`SKILL.md` Step 4 for the full procedure.
+
+There is no `cleaned_index.csv` to update — `BATCH_LOG.md` is the record of
 what's been processed, uploaded, and biblio-entered per batch.
 
 ---
@@ -194,7 +220,9 @@ Searches Dataverse, Zenodo, OSF, Dryad, and Figshare. Tiered relevance filter:
 named instruments always pass; psychometric and construct terms pass unless
 blocked by epi/clinical study language; supplementary file titles
 (`Table N_…`, `Data Sheet N_…`) are always blocked.
-Auto-loads `irw_metadata.csv` and the queue sheet to exclude known DOIs.
+Auto-excludes known DOIs by fetching the IRW dictionary and queue sheets
+live from Google Sheets on every run (`_load_auto_exclusions()`) — no local
+file needed.
 ```
 --all          disable relevance filter
 --out <path>   output path (default: candidates.csv)

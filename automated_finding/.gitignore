@@ -4,13 +4,29 @@ downloads/
 
 # Ephemeral batch run state
 irw_batch_checkpoint.jsonl
+*.log
 
-# Generated exclusion list (regenerate from R; can be large)
+# Optional local reference file for manual dedup checks (library(irw); write.csv(irw_metadata(), ...)).
+# Not read by any script — irw_discover_updated.py fetches exclusions live from
+# Google Sheets instead — but harmless to ignore if someone generates it by hand.
 irw_metadata.csv
 
-# Generated pipeline outputs — always regenerable from the scripts
-irw_triage_summary*.csv
+# Discovery-run candidate lists — regenerable from search_terms_log.csv + the
+# scripts. Covers both the pre-batch-10 naming (irw_discovered*.csv) and the
+# current one (candidates*.csv, e.g. candidates_batch11.csv, candidates_test10.csv,
+# candidates_batch14_intl2.csv, candidates_batch13_merged.csv).
 irw_discovered*.csv
+candidates*.csv
+
+# Triage / retriage / human-review outputs — regenerable from the candidate
+# lists via irw_batch_updated.py / irw_retriage_ha.py. Includes the historical
+# irw_triage_summary*.csv naming and the current irw_triage_batchN.csv /
+# irw_retriage_batchN.csv / triage_testN.csv / human_review_batchN.csv pattern.
+irw_triage_summary*.csv
+irw_triage*.csv
+irw_retriage*.csv
+triage_test*.csv
+human_review_*.csv
 
 # Scratch / test run outputs
 test_*.csv

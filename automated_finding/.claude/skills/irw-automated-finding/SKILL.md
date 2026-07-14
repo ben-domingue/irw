@@ -1,6 +1,6 @@
 ---
 name: irw-automated-finding
-description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_process_queue.py) or its TODO.md.
+description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_process_queue.py) or its TODO.md/BATCH_LOG.md.
 ---
 
 # IRW Automated Finding Pipeline
@@ -30,16 +30,21 @@ sudo, no system package changes) rather than fighting with a venv.
 
 ## Before doing anything
 
-1. Read `TODO.md` — it is the running log of every discovery run, batch, and
-   decision made so far. Check it before starting new work so effort isn't
-   duplicated (e.g. a search term or DOI already covered).
-2. Read `search_terms_log.csv` — the permanent record of every query already
+1. Read `TODO.md` — the short list of currently open action items (on-hold
+   datasets, unresolved `worth_retrying` cases, pending uploads). Check
+   whether anything you're about to do overlaps with it.
+2. Read `BATCH_LOG.md` — the running, append-only log of every discovery
+   run, batch, and decision made so far. Check it before starting new work
+   so effort isn't duplicated (e.g. a search term or DOI already covered).
+   `TODO.md` is for "what's still open"; `BATCH_LOG.md` is for "what's
+   already been decided" — read both, but they answer different questions.
+3. Read `search_terms_log.csv` — the permanent record of every query already
    run through `irw_discover_updated.py`. Only add genuinely new terms.
-3. Note: this skill cannot write to the queue Google Sheet directly (no
+4. Note: this skill cannot write to the queue Google Sheet directly (no
    Sheets-editing tool is available, only Drive read/download). Prepare new
    rows as a CSV in the scratchpad or `/tmp` (matching the existing
-   `/tmp/biblio_batchN.csv` convention visible in `TODO.md`) and tell the user
-   what to paste in, rather than claiming the sheet was updated.
+   `/tmp/biblio_batchN.csv` convention visible in `BATCH_LOG.md`) and tell
+   the user what to paste in, rather than claiming the sheet was updated.
 
 ## Step 1 — Discover
 
@@ -100,14 +105,14 @@ queue sheet; everything else is either dropped or handled per its bucket.
 ## Step 3 — Write the processing script and QC it
 
 **Note:** the README still documents an older `irw_process_queue.py` →
-`irw_output/queue/` → `cleaned_index.csv` flow. Per `TODO.md`'s "Workflow
-notes (2026-06-24)", that intermediate stage was eliminated —
+`irw_output/queue/` → `cleaned_index.csv` flow. Per `BATCH_LOG.md`'s
+"Workflow notes (2026-06-24)", that intermediate stage was eliminated —
 `irw_process_queue.py` is stale and should not be run. `irw_output/queue/`
 and `cleaned_index.csv` no longer exist. The README hasn't been updated to
-match; treat `TODO.md`'s latest workflow notes as authoritative over the
+match; treat `BATCH_LOG.md`'s latest workflow notes as authoritative over the
 README when they conflict.
 
-Current practice (see batches 7–9 in `TODO.md` and e.g.
+Current practice (see batches 7–9 in `BATCH_LOG.md` and e.g.
 `data/frikha_2023_motivation.py`, `data/germann_2026_terrorism.py`): for each
 `good` or `worth_retrying` candidate, write one bespoke script directly in
 `data/`, named `authorname_year_construct.py`.
@@ -156,22 +161,28 @@ License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
 `Contributor` is `"automated"`, and `Public Reshare?` is `"Public"` (not
 `"Yes"`).
 
-There is no `cleaned_index.csv` to update (eliminated 2026-06-24) — `TODO.md`
-is the record of what's been cleaned, uploaded, and biblio-entered per batch.
+There is no `cleaned_index.csv` to update (eliminated 2026-06-24) —
+`BATCH_LOG.md` is the record of what's been cleaned, uploaded, and
+biblio-entered per batch.
 
 ## After finishing a batch
 
-1. Append a dated entry to `TODO.md` summarizing what ran and what was
+1. Append a dated entry to `BATCH_LOG.md` summarizing what ran and what was
    decided (new search terms used, candidate counts, good/skip decisions,
    batch/table names) — following the existing style already in the file.
    This is what lets the next run (by Claude or a human) avoid repeating
    work.
-2. Delete temp files once their content is captured elsewhere — this
+2. Reconcile `TODO.md`: remove any item the batch resolved, add any new
+   open item the batch surfaced (an on-hold dataset, an uninvestigated
+   `worth_retrying` case, a pending upload). `TODO.md` should always reflect
+   only what's currently actionable — don't let resolved items linger there
+   the way they used to linger unchecked in the old combined file.
+3. Delete temp files once their content is captured elsewhere — this
    pipeline generates several per batch (`candidates*.csv`,
    `irw_triage*.csv`, `irw_retriage*.csv`, any `triage_test*.csv` sanity
    check, `irw_batch_checkpoint.jsonl`) and they're disposable *once* every
-   actionable row has landed in `TODO.md`, a `data/*.py` script, or a CSV
-   handed to the user for the queue/dictionary sheet. Don't delete a
+   actionable row has landed in `BATCH_LOG.md`, a `data/*.py` script, or a
+   CSV handed to the user for the queue/dictionary sheet. Don't delete a
    `human_review_*.csv` or biblio CSV until the user has confirmed the rows
-   were actually pasted into the sheet — check TODO.md's checkbox for that
-   item, don't assume from an earlier "yes."
+   were actually pasted into the sheet — check whether that item is still
+   open in `TODO.md`, don't assume from an earlier "yes."
