@@ -100,6 +100,8 @@ If the first row appears to be a label row rather than column headers (e.g., if 
 
 Look for a column named `ID`, `id`, `SubjectID`, `participant`, `Participants ID`, `no`, or similar. Rename it to `id`. Coerce to numeric where possible; drop rows where `id` is NaN.
 
+Before trusting this column as unique, verify it: `df["id"].nunique() == len(df)`. A same-named column that looks like an identifier (e.g. a source `randomid`) can still have far fewer unique values than rows. This matters most when the id is later used to merge item-slices with a covariate-slice — merging on a non-unique key produces a silent cartesian product (rows multiply, no error), not a crash, so it's easy to ship without noticing. If the check fails, use the row index instead (see below), not the non-unique column.
+
 If no person ID column exists, create one from the row index:
 ```python
 df = df.reset_index(drop=True)
@@ -246,6 +248,9 @@ df.insert(0, "id", df.index + 1)
 ### Text IDs that cannot be made numeric
 If IDs are strings like `"sub-01"` that identify distinct people, keep them as strings. Do not force numeric conversion if it would destroy the identifier.
 
+### PII columns
+Some raw files include real names, email addresses, IP addresses, GPS coordinates, dates of birth, or national ID-card numbers (not to be confused with an anonymous study-assigned participant ID). Drop these columns entirely — do not carry them into `cov_*`, do not use them as `id`, and never print/materialize their values while inspecting the file (check `.notna().sum()` counts instead of viewing actual values). If a source ID-card or similar column is the only candidate for `id`, treat it the same as any other unusable ID (see "Missing person ID" above) — use row index instead, not the PII column.
+
 ### Data entry errors at known values
 If a single out-of-range value is clearly a data entry error (e.g., a single `0` in a scale scored 1–7), set it to NaN and drop:
 ```python
@@ -282,14 +287,15 @@ For Figshare, Dataverse, OSF, and Zenodo, iterate over the file list returned by
 
 ## What to verify before saving
 
-1. **`id` column** — unique per person (no NaN, no accidental item-level IDs).
-2. **`item` column** — no covariate columns accidentally melted in as items (check for names like `Age`, `Gender`, `Sex`, `Education`).
-3. **`resp` range** — matches the documented scale (e.g., 1–4 for a Likert scale). Unexpected values (0s, 99s, 999s) indicate unfiltered sentinels.
-4. **`resp` is numeric** — no string values remaining.
-5. **One scale per file** — if item names suggest two instruments, split the file.
-6. **`resp` direction within items** — within each item, higher values must represent a consistent directional change (the scale cannot reverse mid-item). However, direction is allowed to vary across items, so reverse-scored items do not need to be recoded. What matters is that imputed values are removed and no sentinel codes remain.
-7. **No aggregate/subscale totals in the item list** — check that `n_items` in your summary line is plausible for the instrument.
-8. **`rt` in seconds** — if response times are included, verify the scale (values in the thousands likely indicate milliseconds).
+1. **`id` column** — unique per person (no NaN, no accidental item-level IDs). Confirm with `nunique() == len(df)` on the pre-merge frame, not just an eyeball check — a non-unique id used in a merge/join silently multiplies rows instead of erroring.
+2. **No PII** — no real names, emails, IP/GPS, birthdates, or national ID numbers in `id` or any `cov_*` column.
+3. **`item` column** — no covariate columns accidentally melted in as items (check for names like `Age`, `Gender`, `Sex`, `Education`).
+4. **`resp` range** — matches the documented scale (e.g., 1–4 for a Likert scale). Unexpected values (0s, 99s, 999s) indicate unfiltered sentinels.
+5. **`resp` is numeric** — no string values remaining.
+6. **One scale per file** — if item names suggest two instruments, split the file.
+7. **`resp` direction within items** — within each item, higher values must represent a consistent directional change (the scale cannot reverse mid-item). However, direction is allowed to vary across items, so reverse-scored items do not need to be recoded. What matters is that imputed values are removed and no sentinel codes remain.
+8. **No aggregate/subscale totals in the item list** — check that `n_items` in your summary line is plausible for the instrument.
+9. **`rt` in seconds** — if response times are included, verify the scale (values in the thousands likely indicate milliseconds).
 
 ---
 

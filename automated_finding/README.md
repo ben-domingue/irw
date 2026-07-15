@@ -78,6 +78,15 @@ has drifted out of sync with actual practice before.
 `search_terms_log.csv` is the permanent record of all queries that have been
 run. Update it whenever you add new search terms.
 
+**A term logged before 2026-07-14 is not a complete "already covered" signal.**
+`irw_batch_updated.py` couldn't see `.sav`/`.dta`/`.sas7bdat`/`.RData` files
+before that date (fixed — see `SKILL.md` Step 1 and `BATCH_LOG.md`'s
+"Pipeline fix" note), so a pre-fix run of that term only ruled out
+`.csv`/`.xlsx`-visible candidates, not ones whose only file was one of those
+formats. Don't assume this needs fixing by re-running every historical term
+wholesale, though — check `TODO.md` for the current state of a small pilot
+re-run that's assessing whether that's actually worth the cost first.
+
 `license_blocked_candidates.csv` is a similar standing record, but for
 datasets: whenever an otherwise-strong candidate gets skipped purely for a
 missing/unresolvable license (not a content problem), it's logged there —

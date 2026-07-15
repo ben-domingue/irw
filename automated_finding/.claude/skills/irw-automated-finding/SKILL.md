@@ -45,9 +45,16 @@ no sudo, no system package changes) rather than fighting with a venv.
    run through `irw_discover_updated.py`. Only add genuinely new terms.
 4. Note: this skill cannot write to the queue Google Sheet directly (no
    Sheets-editing tool is available, only Drive read/download). Prepare new
-   rows as a CSV in the scratchpad or `/tmp` (matching the existing
-   `/tmp/biblio_batchN.csv` convention visible in `BATCH_LOG.md`) and tell
-   the user what to paste in, rather than claiming the sheet was updated.
+   rows as a CSV **directly in `automated_finding/`** (repo-tracked, not
+   scratchpad or `/tmp`) and tell the user what to paste in, rather than
+   claiming the sheet was updated. Earlier batches used a scratchpad/`/tmp`
+   path for these staging CSVs (e.g. `/tmp/biblio_batchN.csv`) — don't
+   repeat that: the scratchpad directory is tied to the session that
+   created it, so the user can't reliably find it afterward (confirmed
+   2026-07-15 — biblio/human-review rows for a resolved batch had to be
+   relocated into `automated_finding/` after the user couldn't locate them).
+   `license_blocked_candidates.csv` and prior `human_review_*.csv`/
+   `biblio_*.csv` files already follow this repo-tracked pattern.
 
 ## Step 1 — Discover
 
@@ -58,6 +65,18 @@ python irw_discover_updated.py "search term 1" "search term 2" --out candidates.
 - Pick terms not already in `search_terms_log.csv`. Good sources of new terms:
   named instruments not yet covered, constructs adjacent to recent batches,
   or a domain the user names explicitly.
+- **Caveat on terms logged before 2026-07-14**: `irw_batch_updated.py`
+  couldn't see `.sav`/`.dta`/`.sas7bdat`/`.RData` files at all before that
+  date (fixed — see `BATCH_LOG.md`'s "Pipeline fix" note) — any landing page
+  whose *only* file was one of those formats was silently triaged as
+  `no_usable_file` without ever being opened. All 575 pre-fix **English**
+  terms were re-run against this fix (2026-07-15): found 186 previously-
+  invisible alt-format candidates out of 10198 (1.8%), yielding 21 new
+  tables across 9 datasets — that's done, don't repeat it. The ~1500
+  logged **non-English** terms have not been re-run this way; a per-language
+  pilot to gauge whether it's worth doing at scale is queued in `TODO.md`
+  (deliberately after other open items) rather than done yet — check there
+  for the current state of that decision.
 - **Translate every term into at least these 8 languages and include all
   variants in the same discovery run**: Spanish, German, French, Chinese
   (Simplified), Japanese, Arabic, Dutch, Korean (the set used in batch 9).
@@ -85,6 +104,20 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
   not a hang, just let it run). Launch the full run in the background and
   check `wc -l irw_batch_checkpoint.jsonl` for progress rather than waiting
   on it synchronously.
+- **On a large candidate pool (thousands of rows) where you only need a
+  narrow yes/no signal** (e.g. "does this resolve to an alt-format file at
+  all?"), a full triage is overkill and can take 1-2 days. Use
+  `resolve_data_files()` from `irw_batch_updated.py` directly in a small
+  throwaway script for a metadata-only pass (lists filenames via each repo's
+  API, no download/parse) to narrow the pool first, then run full triage
+  only on what's left. This cut a 10198-candidate pool to 186 in ~82 minutes
+  during the 2026-07-15 re-discovery (see `BATCH_LOG.md`).
+- **If one source (e.g. Dataverse) is rate-limiting or timing out mid-run**,
+  don't stall on it or drop it outright — split into a fast-sources-first
+  pass and a deferred pass for the degraded source once it recovers, then
+  merge results. Used successfully 2026-07-15; see `BATCH_LOG.md`'s
+  "English-terms re-discovery" entry for the concrete phase-1/phase-2
+  pattern.
 - Sort `irw_triage.csv` by `flag`, `good` first.
 - `good` rows → go straight to Step 3 (write a processing script). There is
   no "stage it in the queue sheet first" step — that tab exists but this
