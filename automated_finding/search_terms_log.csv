@@ -2142,3 +2142,147 @@ date,query,output_file,notes
 2026-07-14,الهيمنة الاجتماعية,candidates_batch17_intl2.csv,batch17 run (multilingual; bare-root safe-substitute)
 2026-07-14,sociale dominantie,candidates_batch17_intl2.csv,batch17 run (multilingual; bare-root safe-substitute)
 2026-07-14,사회적 지배,candidates_batch17_intl2.csv,batch17 run (multilingual; bare-root safe-substitute)
+2026-07-17,Simon task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,Simon effect,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,emotional Stroop,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,numerical Stroop,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,spatial Stroop,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,Multi-Source Interference Task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,dot-probe task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,attentional bias task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,Navon task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,global-local task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,AX-CPT,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,continuous performance task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,spatial stimulus-response compatibility,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,congruency effect,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,conflict adaptation,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,response inhibition task,candidates_conflict_en.csv,conflict-task batch: new terms (Simon/MSIT/dot-probe/Navon/AX-CPT/spatial S-R compat/congruency/conflict adaptation/response inhibition/Stroop variants)
+2026-07-17,tarea Simon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Simon-Aufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche de Simon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,西蒙任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,サイモン課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة سيمون,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Simon-taak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,사이먼 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,efecto Simon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Simon-Effekt,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,effet Simon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,西蒙效应,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,サイモン効果,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,تأثير سيمون,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Simon-effect,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,사이먼 효과,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop emocional,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,emotionaler Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop émotionnel,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,情绪Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,感情ストループ,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ستروب العاطفي,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,emotionele Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,정서 스트룹,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop numérico,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,numerischer Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop numérique,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,数字Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,数的ストループ,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ستروب العددي,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,numerieke Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,숫자 스트룹,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop espacial,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,räumlicher Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Stroop spatial,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,空间Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,空間ストループ,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ستروب المكاني,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ruimtelijke Stroop,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,공간 스트룹,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Tarea de Interferencia de Múltiples Fuentes,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Multi-Source-Interferenzaufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche d'interférence à sources multiples,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,多源干扰任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,マルチソース干渉課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة التداخل متعدد المصادر,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,multi-source interferentietaak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,다중 출처 간섭 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea dot-probe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Dot-Probe-Aufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche dot-probe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,点探测任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ドットプローブ課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة النقطة المسبار,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,dot-probe taak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,점탐사 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea de sesgo atencional,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Aufmerksamkeitsverzerrungsaufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche de biais attentionnel,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,注意偏向任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,注意バイアス課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة التحيز الانتباهي,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,aandachtsbias taak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,주의 편향 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea de Navon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Navon-Aufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche de Navon,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Navon任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ナヴォン課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة نافون,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Navon-taak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,네이번 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea global-local,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,global-lokal-Aufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche global-local,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,整体-局部任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,全体-局所課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة الكل والجزء,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,globaal-lokaal taak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,전체-부분 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,prueba de rendimiento continuo AX,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT持续性操作测验,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,اختبار AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,AX-CPT,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea de rendimiento continuo,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Continuous-Performance-Test,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche de performance continue,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,持续性操作任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,持続的遂行課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة الأداء المستمر,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,continue prestatietaak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,지속수행 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,compatibilidad espacial estímulo-respuesta,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,räumliche Reiz-Reaktions-Kompatibilität,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,compatibilité spatiale stimulus-réponse,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,空间刺激反应相容性,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,空間的刺激反応適合性,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,توافق المثير والاستجابة المكاني,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,ruimtelijke stimulus-respons compatibiliteit,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,공간 자극-반응 양립성,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,efecto de congruencia,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Kongruenzeffekt,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,effet de congruence,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,一致性效应,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,一致性効果,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,تأثير التطابق,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,congruentie-effect,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,일치성 효과,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,adaptación al conflicto,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Konfliktadaptation,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,adaptation au conflit,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,冲突适应,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,葛藤適応,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,التكيف مع التعارض,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,conflictadaptatie,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,갈등 적응,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tarea de inhibición de respuesta,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,Reaktionshemmungsaufgabe,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,tâche d'inhibition de réponse,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,反应抑制任务,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,反応抑制課題,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,مهمة تثبيط الاستجابة,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,responsinhibitietaak,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above
+2026-07-17,반응 억제 과제,candidates_conflict_intl.csv,conflict-task batch: 8-language translations of the above

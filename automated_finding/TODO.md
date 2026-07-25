@@ -3,6 +3,24 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **Gyurkovics/Stafford/Levita conflict-task dataset (osf.io/7vbtr)** —
+  by far the strongest find from the batch-18 conflict-task search: trial-
+  level Flanker + Simon + SART(go/no-go) data, N=118, fully documented,
+  directly relevant to the user's Hedge/Powell/Sumner reliability-paradox
+  vignette. Blocked purely on a missing OSF license (no license set on the
+  node at all). **ben-domingue emailed the authors 2026-07-17 requesting
+  permission — awaiting response.** See `license_blocked_candidates.csv`
+  (batch 18 row) for contributor OSF profiles/ORCID. Ready to process the
+  moment permission or a license appears.
+
+- [ ] **`automated_finding/human_review_conflict.csv`** (1 row: "Stroop test
+  dataset", DVN/GINKMU) — needs pasting into the "Human eye" sheet. CC0,
+  real trial-level Stroop latency/accuracy columns appear to be present but
+  buried in a ~700-column undocumented Russian-language child-development
+  survey with no codebook found — needs a person to decode the column
+  scheme (or locate the source paper) before it can be extracted. See
+  `BATCH_LOG.md`'s "Batch 18" entry.
+
 - [ ] **Political Preference China** (`10_7910_dvn_dwplbc.csv`, DVN/dwplbc) — on
   hold: 0-response ambiguity, anchor labels not documented in the source.
   Needs the anchor-label question resolved before it can be processed.
@@ -43,11 +61,27 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   needs manual browser access). Full story of how these were found in
   `BATCH_LOG.md`'s "Finishing the 32-candidate backlog" entry.
 
-- [ ] **Multilingual per-language pilot — queued, deliberately after
-  everything else above.** Decided 2026-07-15: run a small bounded pilot
-  (same ~10-term sample used for the alt-format pilot, across each of the 8
-  non-English languages separately, counting hits per language rather than
-  combined) once the rest of this list is cleared — not before. Anecdotal
-  signal so far (see `BATCH_LOG.md`'s "Non-English source yield" entry)
-  points at Chinese dominating other languages by a wide margin among
-  alt-format hits, but that's unconfirmed by any controlled measurement.
+- [ ] **`automated_finding/human_review_lang_pilot.csv`** (1 row: SWAN
+  depression/lifestyle data, DVN/HWMJAE) — needs pasting into the "Human
+  eye" sheet; see `BATCH_LOG.md`'s "Non-English per-language discovery
+  pilot" entry for why it couldn't be resolved automatically (real
+  longitudinal item data, but the 4 items may span two different SWAN
+  questionnaire modules — needs SWAN-codebook access to confirm).
+
+- [ ] **Portella 2022 racial-attitudes dictionary/tags fix needs pasting in**
+  (`automated_finding/dictionary_fix_portella_2022.csv`,
+  `automated_finding/tags_fix_portella_2022.csv`) — replaces the existing
+  `racialsocialnormsbrazilianstudents_portella_2022` row (broken processing
+  script, never actually live; see `BATCH_LOG.md`'s "User-directed fix"
+  entry, 2026-07-16) with a `portella_2022_racial_attitudes` row. Once
+  pasted, `irw_output/portella_2022_racial_attitudes.csv` is ready to upload
+  to Redivis.
+
+- [ ] **Peters 2025 COVID-19 Risk Tool (issue #1093) — follow-up pass on the
+  remaining ~300 raw columns.** Main 16 DCT belief-item tables are fully
+  processed, tagged, dictionary-entered, and uploaded to Redivis
+  (ben-domingue confirmed 2026-07-17; see `BATCH_LOG.md`). Not yet covered:
+  the risk-estimate/checkbox-array family — `siCurrent*`/`siIntention*`/
+  `hwFrequency*`/`work*`/`DMQslider*` and their paired `*Est` columns — uses
+  a different, not-yet-decoded response mechanism.
+

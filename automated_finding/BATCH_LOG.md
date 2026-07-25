@@ -404,4 +404,508 @@ Four cases sat un-investigated in `TODO.md` since batch 11. All 4 now resolved:
 
 Checked whether any per-language candidate counts exist in this log to answer "which non-English languages are producing the most results" — they don't. Every multilingual discovery run (batches 9, 13-17) only recorded a combined total across all 8 non-English languages per batch (e.g. "multilingual runs → candidates_batch15_intl1.csv (274, first 6 terms)") — the discovery script itself doesn't tag which language matched, so no reconstruction is possible from existing files without re-running queries language-by-language.
 
-That said, real signal exists anecdotally from the alt-format (`.sav`/`.dta`/`.sas7bdat`/`.RData`) re-discovery and batch-11 work this session: of the datasets actually processed or seriously evaluated, Chinese-language sources dominate overwhelmingly — chen2022 (cls/ses/sasc), wu2021 (6 tables), chen2026 (mpa/sa/sc), shi2024 (ysq + 2 more), ma2026 (bsmas/sabas/igds), chen2025 (body_image, 4 tables), gao2025 (family_support, 5 tables), and now dou2025 (3 tables) — 8 of roughly 9-10 non-English-sourced datasets this session. The only other non-English instance was a single Malaysian/Malay dataset (skipped — aggregate data only). This is not a controlled measurement — it's biased by whatever the English search terms happened to surface as alt-format Chinese deposits — but it's a real, consistent pattern across ~16 independent triage decisions, not noise. If a genuine per-language yield estimate is wanted before committing to the full multilingual re-discovery, the clean way to get one is a small bounded pilot: run the same ~10-term sample already used for the alt-format pilot across each of the 8 non-English languages separately (not combined), and count candidates per language before triaging.
+That said, real signal exists anecdotally from the alt-format (`.sav`/`.dta`/`.sas7bdat`/`.RData`) re-discovery and batch-11 work this session: of the datasets actually processed or seriously evaluated, Chinese-language sources dominate overwhelmingly — chen2022 (cls/ses/sasc), wu2021 (6 tables), chen2026 (mpa/sa/sc), shi2024 (ysq + 2 more), ma2026 (bsmas/sabas/igds), chen2025 (body_image, 4 tables), gao2025 (family_support, 5 tables), and now dou2025 (3 tables) — 8 of roughly 9-10 non-English-sourced datasets this session. The only other non-English instance was a single Malaysian/Malay dataset (skipped — aggregate data only). This is not a controlled measurement — it's biased by whatever the English search terms happened to surface as alt-format Chinese deposits — but it's a real, consistent pattern across ~16 independent triage decisions, not noise.
+
+## Non-English per-language discovery pilot (2026-07-15)
+
+Ran the bounded pilot proposed above: 11 general constructs (anxiety, depression, self-esteem, resilience, burnout, life satisfaction, emotion regulation, perfectionism, mindfulness, impulsivity, grit) translated into each of the 8 non-English languages, run **separately per language** (not combined) through `irw_discover_updated.py`, to get an actual per-language candidate count for the first time.
+
+**Discovery-stage candidate counts:**
+
+| Language | Candidates |
+|---|---|
+| German | 522 |
+| French | 191 |
+| Dutch | 174 |
+| Spanish | 130 |
+| Chinese | 114 |
+| Japanese | 48 |
+| Arabic | 6 |
+| Korean | 0 |
+
+German came out far ahead of Chinese despite Chinese being the anecdotal favorite from the alt-format work — the two questions (raw discovery volume vs. downstream alt-format triage yield) turned out to measure different things.
+
+**Arabic and Korean investigated separately and confirmed not a pipeline bug**: live re-queries straight against Zenodo/OSF/Dataverse (bypassing our script) reproduced the same near-zero results for multiple different Korean terms across multiple sources, with correctly percent-encoded requests — these repositories' search indices just don't have meaningful Korean-language metadata to match against. Arabic technically returned 6 hits but all were false positives (Zenodo manuscript/grammar-text titles matching an Arabic-script substring, not datasets). Conclusion: not worth pursuing either language through these particular sources — this is a real property of the source repositories, not something fixable in our pipeline.
+
+**Triaged the top 3 languages by yield (German, French, Dutch — 887 candidates total)**:
+- `good`: 2 total, both low-value — one (`osf.io/ctnaq`) is already a known duplicate sitting in `license_blocked_candidates.csv`; the other (DVN/M7AFDM) is CC0 but only N=28/2 items.
+- `human_assistance`: 72 total (45 de + 11 fr + 16 nl) — retriaged.
+- Retriage `worth_retrying`: 4 unique candidates after dedup (a 5th, `osf.io/mqud7`, was already known). All 4 investigated:
+  - figshare 32899694 (sports facilities/well-being) — skip, `aggregate_continuous`: a pre-computed CES-D score + covariates only, not items.
+  - DVN/MTTFJR ("European Quality of Life" indicators) — skip, `not_item_response`: country-year macro indicators (GDP/governance/health indices), not person-level data.
+  - DVN/HWMJAE (SWAN Depression/Lifestyle) — **human review**, logged to `automated_finding/human_review_lang_pilot.csv`: real longitudinal ordinal item data (N=2803, CC0, major cohort study), but its 4 depression items split into two different response-format groups, suggesting two different SWAN questionnaire modules bundled together — can't confirm the split from public metadata alone.
+  - osf.io/dcqa6 (mindfulness dose-response RCT) — skip, `aggregate_continuous`: all 37 "items" are pre-computed subscale totals (BFI-2, PROMIS, K10, WEMWBS, FFMQ-15, DERS-SF, etc.), not raw items.
+- Retriage `human_review` (31 rows: 18 de + 7 fr + 6 nl) — not yet worked; would need a person, same as every other `human_review` bucket in this pipeline.
+
+**Bottom line**: triaging the 3 highest-yield non-English languages (887 discovery-stage candidates, the top end of what the other 7 languages combined would offer) produced **zero new processed tables** — one human-review candidate of uncertain final value, everything else duplicate/aggregate/macro/not-item-data. High discovery-stage volume (especially German's 522) did not translate into IRW-usable yield. Combined with Arabic/Korea's near-zero real yield, this doesn't support extending the alt-format-style re-discovery effort to the full ~1500 non-English historical terms — the marginal cost (per-language discovery + triage + retriage, each language behaving like its own mini-batch) doesn't look justified by what a bounded, honest pilot actually found. Chinese and Japanese (114 and 48 candidates, not yet triaged in this pilot) remain the most promising unexplored piece if there's appetite to check further, given Chinese's strong track record earlier in this session — but that's a smaller, more targeted follow-up than a full non-English re-discovery, not the original all-languages plan.
+
+## User-directed fix: Portella 2022 racial norms dataset (2026-07-16)
+
+User pointed directly at Harvard Dataverse `doi:10.7910/DVN/ZHCTCK` ("Racial
+Social Norms among Brazilian Students...", PNAS 2022) and asked to pull/convert
+it — bypassing discovery since the target was already named. Investigation found
+it was **not actually new**: `racialsocialnormsbrazilianstudents_portella_2022`
+already had rows in the live dictionary and tags Google Sheets (added
+2025-12-15 by contributor Rubina Shrestha), plus a script at
+`data/racialsocialnormsbrazilianstudents_portella_2022.R` — but no matching
+table in `metadata.csv` (i.e. never actually uploaded to Redivis).
+
+**Why it was never live**: the existing `.R` script was broken —
+- read from a hardcoded personal path (`/Users/rubinashrestha/Downloads/data_11.csv`),
+  not reproducible/self-contained;
+- melted *every* non-id column into `item`/`resp`, including the paper's EFA
+  composite scores (`score_racism`, `score_homophobia`, `score_self_esteem`,
+  `scores_sdo_*`, etc. — aggregates, not raw items), demographic covariates,
+  and even Portuguese text labels (`"Masculino"`) as if they were response
+  values;
+- recoded missing responses to a sentinel `"0"` string instead of dropping them.
+
+**What's actually usable**: checked `CODEBOOK.pdf` — the release's composite
+scores are EFA-derived from underlying survey items that were **not included**
+in the release, only the derived scores were. The only genuine raw item-level
+data is `q9`/`q12`/`q57`/`q60`: four statements about race relations sharing
+one preamble and one 4-point agreement scale, answered by 3,431 of the 4,409
+students. License confirmed CC0 1.0 via the Dataverse API.
+
+**Fix applied**:
+- Deleted the broken `data/racialsocialnormsbrazilianstudents_portella_2022.R`.
+- Wrote `data/portella_2022_racial_attitudes.py` (self-contained, downloads
+  `data_11.tab` directly from the Dataverse API, keeps only the 4 raw items +
+  demographic covariates, drops missing rather than sentinel-coding) →
+  `irw_output/portella_2022_racial_attitudes.csv` (rows=13724, ids=3431,
+  items=4, resp=1-4).
+- Renamed the table (old name was 50 chars, over the 40-char limit) and staged
+  corrected dictionary/tags rows for the user to paste in, since this pipeline
+  can't write to the Sheets directly: `dictionary_fix_portella_2022.csv`,
+  `tags_fix_portella_2022.csv`. Also fixes two unrelated errors spotted in the
+  live sheet row: the paper DOI had lost its leading digit
+  (`0.1073/pnas.2117956119` — spreadsheet auto-number-formatting artifact) and
+  "URL (for data)" pointed at the PNAS paper instead of the actual Dataverse
+  dataset.
+
+## Peters 2025 COVID-19 Risk Tool: DCT belief-item mapping (2026-07-16)
+
+User pointed at GitHub issue #1093 (Peters et al. 2025, "Collecting
+behavioural data across countries during pandemics: Development of the
+COVID-19 Risk Assessment Tool", PNAS... Behav Res 57, 223) and asked for the
+same treatment as the Portella fix earlier this session. Turned out to be a
+much bigger undertaking than Portella, matching why ben-domingue had told the
+collaborator on the issue to shelve it as "complicated" (2026-07-08 comment).
+
+**License**: the issue thread recorded "CC-BY-NC-SA" from the GitLab repo
+(`gitlab.com/a-bc/your-covid-19-risk`), which would normally be disqualifying
+(NC blocks redistribution). Read the actual README directly: it states
+standard copyright applies project-wide *except* R scripts (CC0) and
+"`.csv` data sets... are anonymized, and as such, defined as facts and
+existing in the public domain by definition." The NC-SA framing is the
+aspirational license for the site/branding generally, not the actual data
+files — recorded as "Public Domain" in the new dictionary rows rather than
+the NC-SA the old placeholder rows used.
+
+**Structure**: the raw data is 50 CSV exports across 21 LimeSurvey survey IDs
+(sids) on `gitlab.com/a-bc/your-covid-19-risk-data`. Confirmed empirically
+(diffing columns across sid-100101/100106/100121) that all 21 sids share
+essentially the same ~577-585 column schema — one instrument fielded across
+~21 countries/languages, not 21 different item sets, matching the source
+repo's own bulk-loader script (`read--your-covid-19-risk--data.R`) which
+`rbind`s all 50 files together. Also confirmed the raw `id` column resets to
+1 within each sid (not globally unique) — built a composite id as
+`f"{sid}-{orig_id}"` and verified uniqueness (102,917 rows, 102,917 unique
+ids) before using it in any merge.
+
+**Item mapping**: found the project's own LimeSurvey-generation build script
+rendered at `your-risk.com/v1-translation-results-limesurvey` (their R
+Markdown source, hosted as a GitLab Pages HTML dump). It documents the
+answer-scale mechanism for the Reasoned Action Approach (RAA) belief items
+that make up the bulk of the survey: each belief statement is `<Item>Seq`
+(randomization-order slot — empirically confirmed non-response, holds
+arbitrary integers 10-155, not a scale value), plus two scored sub-questions
+(`Ex...`/`Ev...` or family-specific equivalents), each on a "uni" (1-5) or
+"bi" (1-7) scale with code `0` = "don't know/NA" sentinel. Confirmed the
+sentinel empirically too (`NrmDeIdFamily`, a "bi" item, has real `0.0` values
+in the raw data). Extracted a validated polarity mapping for 276 of ~585
+columns this way, covering seven belief-item families (`AttEx`, `AttIn`,
+`Gen`, `NrmDe`, `NrmIn`, `PbcSk`, `PbcCn`) plus two small single-item scales
+(`CIBERlite`, `gnrc`).
+
+**Design decision confirmed with user**: for each family, the two components
+(e.g. "Ex"=belief strength vs "Ev"=belief evaluation) measure different
+psychological dimensions of the same statement, not the same scale twice —
+split into separate output tables rather than combined. User confirmed:
+"yeah keep them separate. ex and ev are different."
+
+**Output**: `data/peters_2025_covid19_risk_dcts.py` downloads all 50 raw
+files, builds the combined+deduplicated dataset, and produces 16 separate
+IRW tables (`peters_2025_att_exp_strength`/`_eval`,
+`peters_2025_att_instr_strength`/`_eval`, `peters_2025_gen_risk_strength`/
+`_eval`, `peters_2025_nrm_desc_behavior`/`_ident`,
+`peters_2025_nrm_inj_approval`/`_motivation`,
+`peters_2025_pbc_skill_prob`/`_import`, `peters_2025_pbc_cond_power`/
+`_presence`, `peters_2025_ciberlite`, `peters_2025_gnrc_beliefs`) — N ranges
+from ~2,100 to ~40,000 depending on table (survey uses heavy randomization,
+so most respondents only see a subset of items). One real bug caught during
+QC: an initial date conversion (`datestamp` -> Unix seconds) was off by
+1000x because pandas returned microsecond- not nanosecond-resolution
+datetimes here — fixed with a unit-agnostic `Timedelta` division rather than
+assuming a fixed divisor.
+
+**Not done**: the remaining ~300 raw columns (demographic/intake covariates
+are handled as `cov_*`, but a separate "risk estimate" family —
+`siCurrent*`/`siIntention*`/`hwFrequency*`/`work*`/`DMQslider*` and their
+paired `*Est` follow-ups — use a different checkbox-array + numeric-estimate
+mechanism not yet reverse-engineered). Logged as a follow-up in `TODO.md`.
+
+**Dictionary/tags**: the live sheets had 50 existing placeholder rows (one
+per raw file chunk, e.g. `covid19risktool_peters_2025_100121-16198-16374`)
+added 2026-07-01 by Rubina Shrestha — none of these match a real output
+table and all need deleting. Staged 16 replacement rows in
+`dictionary_fix_peters_2025.csv` and `tags_fix_peters_2025.csv` for the user
+to paste in (per the standing rule that this pipeline can't write to the
+Sheets directly).
+
+**Resolution (2026-07-16)**: dug further on the license per user request — checked
+`your-covid-19-risk-data`'s own README (has no license statement at all, purely
+a pipeline description) and OSF's structured license field via API
+(`node_license: null`). Re-read the site README's exact wording with the user:
+the "public domain by definition" statement for `.csv` files is structurally an
+explicit *exception* carved out from the repo's otherwise-unsettled copyright
+state, not part of the hedge — more deliberate than a first read suggested, but
+still a legal argument in a README rather than a formal license grant/badge.
+**Decision: paused.** ben-domingue is emailing the authors directly for
+explicit confirmation rather than relying on this reasoning alone. Dictionary/
+tags rows are staged but not pasted; nothing uploaded to Redivis. Logged in
+`license_blocked_candidates.csv` so this doesn't get lost. Resume once
+permission or an explicit license comes back.
+
+## Peters 2025 COVID-19 Risk Tool: license approved, walked through upload steps (2026-07-17)
+
+Author permission came back. User asked to go through the remaining steps
+slowly and separately rather than all at once.
+
+**Step 1 (reproduce data)**: re-ran `data/peters_2025_covid19_risk_dcts.py` —
+same 16 tables as the 2026-07-16 run (`peters_2025_att_exp_strength/_eval`,
+`att_instr_strength/_eval`, `gen_risk_strength/_eval`, `nrm_desc_behavior/
+_ident`, `nrm_inj_approval/_motivation`, `pbc_skill_prob/_import`,
+`pbc_cond_power/_presence`, `ciberlite`, `gnrc_beliefs`), landed in
+`irw_output/` for the user to inspect and upload to Redivis themselves.
+
+**Step 2 (source)**: confirmed with the user this just meant the processing
+script already sitting in `data/` — nothing further needed, already done in
+the 2026-07-16 session.
+
+**Step 3 (tags)**: caught a real error in the 50 stale placeholder rows while
+drafting replacements — they tagged `primary language(s)` as `eng` only, but
+pulling `startlanguage` from all 50 raw files directly showed the tool is
+actually deployed in 20 distinct languages (eng, dut, ger, rum, tur, por, fra,
+gre, ind, spa, ita, pol, heb, hun, jpn, kor, urd, amh, ara, chi) across its 21
+country arms. Also switched `sample` from the placeholders' `Targeted/specific`
+to `"Internet-based (Mturkers, etc)", General/non-specific` — the GitLab
+README describes this as an open, self-selected public web tool, not a
+recruited/targeted sample. Per the convention used for other multi-scale
+datasets (`promis1wave1_*`, `pemaiw_qiu_2020_*`), gave each table its own
+`construct name` (e.g. "Experiential Attitude — belief strength (RAA)")
+rather than repeating the instrument name 16 times. User reviewed and
+approved the draft. Wrote the 16 rows directly into `metadata/tags.csv` and
+deleted the 50 stale `covid19risktool_peters_2025_*` rows in the same pass
+(no separate `tags_fix_peters_2025.csv` staging file needed since this file
+is repo-tracked, not a Sheet).
+
+**Step 4 (dictionary)**: user gave three specific instructions — (1) verify
+the live dictionary sheet's column format first, (2) reference the paper via
+its shortDOI `doi.org/p3gf` in column E (APA reference) and F (raw DOI), (3)
+use `ODbL 1.0` for both Original and Derived License. Confirmed the sheet's
+column order via its CSV export (`table, table.lower, Description, URL (for
+data), Reference, DOI (for paper), Original License, Custom License, Public
+Reshare?, Derived License, Custom License, Notes, Contributor, Date`) and
+that `"ODbL 1.0"` is the exact string already used for the `geography` table.
+The shortDOI resolves to the same paper already on file
+(`10.3758/s13428-025-02743-x`) — pulled the full author list from Crossref
+(76 authors) to build a proper APA-7 reference (first 19 authors, ellipsis,
+then final author, per the 21+-author rule). Staged 16 rows in
+`automated_finding/dictionary_fix_peters_2025.csv` (Contributor=`automated`,
+Public Reshare=`Public`, per-table Description mirroring the tags construct
+names, URL (for data) = `https://gitlab.com/a-bc/your-covid-19-risk-data`)
+for the user to paste in, replacing the same 50 stale placeholder rows in
+the dictionary sheet.
+
+**Closed out (2026-07-17)**: ben-domingue confirmed the dictionary rows are
+pasted in, the 50 stale placeholder rows are deleted from both Sheets, and
+the 16 `irw_output/peters_2025_*.csv` tables are uploaded to Redivis. Deleted
+the now-redundant `dictionary_fix_peters_2025.csv` staging file. Only open
+item left is the ~300-column risk-estimate follow-up, moved to `TODO.md`.
+
+## Batch 18 — Conflict-task paradigm search (2026-07-17)
+
+User is building an IRW vignette replicating Hedge, Powell & Sumner (2018)'s
+"reliability paradox" (large, reliable group-level congruency effects but
+weak individual-differences reliability for the incongruent-minus-congruent
+difference score), currently using Hearts & Flowers, an alcohol-cue Stroop
+(`alcoholstroop_jones2024.R`), and OSARI. Asked for a targeted search across
+the conflict/interference-task paradigm family (Stroop variants, Flanker,
+Simon, go/no-go, stop-signal, MSIT, dot-probe/attentional bias, Navon/
+global-local, AX-CPT/CPT, task-switching, spatial S-R compatibility,
+congruency effect/conflict adaptation, response inhibition).
+
+**Discovery**: checked `search_terms_log.csv` first — Stroop, flanker task,
+stop signal (task), inhibition, task switching, and go no-go task already
+had partial entries from batches 5/8 (English + a handful of languages).
+Simon task/effect, MSIT, dot-probe/attentional bias, Navon/global-local,
+AX-CPT/continuous performance task, spatial stimulus-response compatibility,
+congruency effect, conflict adaptation, and response inhibition task had
+never been searched at all, in any language — 16 new English terms,
+translated into the standard 8-language set (es/de/fr/zh/ja/ar/nl/ko) =
+144 queries total, all logged in `search_terms_log.csv`. English run →
+`candidates_conflict_en.csv` (729 candidates after auto-exclusion of the
+861 IRW-dictionary DOIs); multilingual run → `candidates_conflict_intl.csv`
+(499). Merged + deduped by doi/title → 946 unique; checked against
+`irw_extract_evaluated_dois.py`'s BATCH_LOG-mined exclusion set (2 matches,
+both irrelevant to conflict tasks — false-positive DOI collisions).
+
+**Triage**: `irw_batch_updated.py` OOM-killed twice on the same candidate
+(`10.7910/DVN/BRCRS5`, "Effects of Air Pollution on Students' Cognitive
+Performance" — a large, unrelated Brazilian exam-records dataset that
+spiked memory to ~19GB, presumably via a huge `.dta`/`.xlsx`; a false-
+positive relevance match, not a conflict task) — dropped that one row from
+the candidate pool and resumed from the checkpoint both times rather than
+restarting. Final result on 945 candidates: 4 `good`, 51 `human_assistance`,
+13 `not_item_response`, 6 `license_restricted`, 90 `download_failed`, 781
+`no_usable_file`.
+
+**The 4 `good` rows were all relevance-filter false positives** (soldier
+ISR decision-making, Parkinson's gait kinematics, racism/BPD perceptions,
+a Colombia household survey) — none are conflict tasks, none processed.
+
+**Retriaged the 51 `human_assistance` rows** (`irw_retriage_ha.py` →
+`irw_retriage_conflict.csv`): 8 not_item_response, 19 aggregate_continuous,
+6 worth_retrying, 18 human_review. Investigated all 6 `worth_retrying` plus
+every conflict-task-titled `human_review` row by hand:
+- **osf.io/7vbtr** (Gyurkovics, Stafford & Levita, 2020, *JEP:General*,
+  10.1037/xge0000698) — by far the strongest find. Bundles trial-level
+  Flanker, Simon (both with `cong` 0/1 already coded), and SART/go-no-go
+  data for N=118 adolescents/adults, fully documented via the node's
+  `readme.txt`. Blocked purely on license — the OSF node has no license
+  relationship set at all (checked via API) and the published paper doesn't
+  itself grant a data license. Logged to `license_blocked_candidates.csv`
+  (batch 18) with full contributor/ORCID detail — strong candidate for an
+  author-permission email per `processing_notes/Licensing.txt`.
+- figshare 32725962 ("Specific cognitive-balance interference... 2D Spatial
+  Stroop tasks") — same dataset already documented as aggregate-only in
+  batch 4's notes (dozens of files, all pre-aggregated per-condition
+  error-rate/RT summaries); confirmed still true, not reprocessed.
+- figshare 21708593 ("Emotional Stroop Task - English Version", CC BY 4.0)
+  — downloaded and inspected: `EST in English.xlsx` is just the 128-word
+  stimulus list (word/translation/valence), not participant data. Skip.
+- figshare 1609723 ("The impact of induced anxiety on affective response
+  inhibition", CC BY 4.0) — downloaded `OpenAccessDataset.sav`: per-subject
+  aggregated RT/accuracy means by condition (N=114), not trial-level. Skip.
+- figshare 13042430 ("Hypervigilance to dynamic and static facial
+  expressions in social anxiety", CC BY 4.0) — downloaded
+  `CompleteData_2021.xlsx`: per-subject, per-condition aggregate eye-tracking
+  summary measures (%correct, fixation count/time by emotion×intensity),
+  N=56-58, not trial-level. Skip.
+- `10.7910/DVN/VOBQPR` ("Behavioral data of a combined flanker/stop signal
+  task") — CC0, has a real `.tab` file that the triage script missed
+  (filename `Online data available.tab` didn't match its file-type
+  heuristics). Downloaded and inspected: per-subject condition-aggregate
+  columns (CGoRT, ICSSRT, etc.), not trial-level. Skip.
+- `10.7910/DVN/GINKMU` ("Stroop test dataset") — CC0, also missed by triage
+  on the same filename heuristic. Downloaded `StrooptestQ.tab`: a ~700-column
+  Russian-language multi-purpose child-development survey with what look
+  like genuine trial-level Stroop latency/accuracy columns
+  (`v1_NS_BELL_1_lat`...`_5_lat` etc., 2 waves) buried inside it, but no
+  codebook or linked paper found to decode the abbreviation scheme safely.
+  Logged to `human_review_conflict.csv` — needs a person with the source
+  codebook, not another automated pass.
+
+**Broader landscape note**: of the ~130 candidates whose titles matched a
+conflict-task keyword, the overwhelming majority (91 `no_usable_file`, 90
+`download_failed`) are PLOS ONE-style "S1 Table"/"Figure data" supplementary
+files (pre-aggregated means/SDs/ANOVA tables, not raw responses) or landing
+pages on access-controlled cohort platforms (`data.individualdevelopment.nl`
+requires registration). This mirrors the pre-existing "IAT/reaction-time
+data" dead-end pattern already noted in earlier batches — open, trial-level
+conflict-task data is scarce in these repositories regardless of search
+term; the Gyurkovics dataset is the one clear exception.
+
+**Filename-heuristic gap found**: the triage script's `no_usable_file`
+classifier missed at least 2 confirmed-real `.tab` files this batch because
+their filenames didn't match its recognized-extension/naming heuristics
+(`Online data available.tab`, and presumably others with generic names).
+Not fixed here — flagging as a real, if minor, false-negative source for
+whoever next tunes `irw_batch_updated.py`'s file-detection logic.
+
+Temp files from this batch (`candidates_conflict_*.csv`, `discover_*.log`,
+`triage_conflict*.log`, `irw_triage_conflict.csv`, `irw_retriage_conflict.csv`,
+`downloads/*`) can be deleted once the license-blocked and human-review rows
+above are confirmed captured — `human_review_conflict.csv` still needs
+pasting into the "Human eye" sheet (see `TODO.md`).
+
+**Follow-up (2026-07-17)**: ben-domingue confirmed they emailed the
+Gyurkovics/Stafford/Levita authors requesting permission — noted in `TODO.md`
+as awaiting response, nothing else changes until they reply.
+
+## User-directed lead: Self Regulation Ontology project data (2026-07-17)
+
+User pointed directly at the PNAS paper Enkavi, Eisenberg, Bissett, Mazza,
+MacKinnon, Marsch & Poldrack (2019), "Large-scale analysis of test-retest
+reliabilities of self-regulation measures" (10.1073/pnas.1818430116) and its
+data-availability link — bypassing discovery, same pattern as the Portella
+2026-07-16 fix. Confirmed via the paper's PMC record (PMC6431228) that the
+canonical data source is
+https://github.com/IanEisenberg/Self_Regulation_Ontology/tree/master/Data.
+
+This is the single strongest candidate found so far for the conflict-task/
+reliability-paradox vignette — the paper itself is a test-retest reliability
+study of self-regulation tasks. `Data/Complete_02-16-2019/Individual_Measures/`
+and the parallel `Data/Retest_02-16-2019/Individual_Measures/` each contain
+trial-level long-format CSVs covering nearly the entire target paradigm
+family: `stroop.csv.gz`, `simon.csv.gz`, `attention_network_task.csv.gz`
+(flanker component), `go_nogo.csv.gz`, `stop_signal.csv.gz`,
+`motor_selective_stop_signal.csv.gz`, `stim_selective_stop_signal.csv.gz`,
+`local_global_letter.csv.gz` (Navon/global-local), `dot_pattern_expectancy.csv.gz`
+(an AX-CPT variant), `threebytwo.csv.gz` + `shift_task.csv.gz` (task-
+switching) — each with a matching Retest-sample counterpart, meaning this
+dataset could support a genuine test-retest reliability analysis directly,
+not just the group-effect side that Hearts & Flowers/alcohol-Stroop/OSARI
+cover. Downloaded and inspected `stroop.csv.gz`, `simon.csv.gz`, and
+`attention_network_task.csv.gz` directly to confirm structure: `worker_id`
+(person id), `trial_id`/`trial_num`, `condition` (congruent/incongruent),
+`correct`, `rt`, `exp_stage` (test/practice — filter to `test`) — e.g.
+`stroop.csv.gz` has 50,112 test-stage trial rows across 522 workers, evenly
+split congruent/incongruent. Would map cleanly to IRW's id/item/resp/
+cov_condition schema per `datastandard.md`.
+
+**Blocked on license**: no `LICENSE`/`LICENSE.md`/`LICENSE.txt` file on the
+GitHub repo (checked via the GitHub API and direct raw-file probes, all
+404), no license field on the repo itself, and no OSF companion project
+found. The project is NIH-funded (Science of Behavior Change Common Fund,
+NIDA UH2DA041713) and clearly intended for reuse given how thoroughly the
+data release is organized and documented, but per this pipeline's standing
+rule, intent to share isn't the same as an explicit open license — GitHub's
+own policy treats a repo with no LICENSE file as all-rights-reserved by
+default. Logged to `license_blocked_candidates.csv` (`user-directed` batch
+row) with full structural detail. Found a real, non-guessed contact —
+`zenkavi@stanford.edu` (A. Zeynep Enkavi, first author) — directly in the
+PMC article page's HTML (PMC6431228), so an author-permission email per
+`processing_notes/Licensing.txt` is very much worth sending; flagged in
+`TODO.md` as the top-priority open item.
+
+**Follow-up (2026-07-17)**: ben-domingue confirmed they emailed
+zenkavi@stanford.edu requesting permission — `TODO.md` updated to "awaiting
+response," nothing else changes until she replies.
+
+## SRO conflict-task battery: license approved, processed (2026-07-17)
+
+Author permission came back: the SRO dataset is released under CC BY.
+Wrote `data/enkavi_2019_conflict_tasks.py` to process the 8
+conflict/interference tasks relevant to the vignette (deferred the other
+~50 SRO measures — surveys, n-back, discounting tasks, etc. — as out of
+scope for this request).
+
+**Design decisions**:
+- Each task's `Individual_Measures/<task>.csv.gz` is fetched directly from
+  GitHub raw for both `Complete_02-16-2019` (wave=1) and `Retest_02-16-2019`
+  (wave=2) samples — `worker_id` is stable across both (confirmed 150/151
+  retest workers also appear in the complete sample), giving a genuine
+  test-retest structure per datastandard.md's wave convention.
+- Filtered to `exp_stage=="test"` only (drops practice trials).
+- **Item construction**: raw trial order/stimuli are randomized per
+  participant, so there's no shared item bank to key items on directly.
+  Built `item` as `"<condition-label>_<NNN>"` (e.g. `congruent_001`,
+  `congruent_002`, ... `incongruent_001`, ...) where NNN counts occurrences
+  of that condition-label within person+wave. This keeps id+item unique per
+  wave and makes each task's `itemcov_*` column(s) exactly invariant within
+  item, by construction — necessary since congruency/condition varies trial
+  to trial, not by a fixed item identity.
+- `resp` = trial accuracy (`correct`, 0/1 in the source; `go_nogo` and
+  `threebytwo` stored it as bool — coerced explicitly, `pd.to_numeric`
+  alone leaves bool untouched and later breaks on NaN assignment).
+- **Sentinel caught in QC**: `dot_pattern_expectancy`'s `correct` column has
+  a third value, `-1` (1787 of 66,816 test rows), paired with
+  `key_press==-1` and `rt==-1` — a non-response/timeout, not "incorrect."
+  The script's own summary-line QC step (`resp={min}-{max}`) caught this
+  immediately (`resp=-1-1` on the first run) before it shipped — fixed by
+  filtering `resp` to strictly `{0,1}`, dropping non-response rows entirely
+  (both accuracy and rt are genuinely missing on those trials, matching how
+  `go_nogo`/`stop_signal` non-response trials on nogo/stop trials already
+  behave: rt<=0 with a real 0/1 accuracy value, which is different and
+  correctly kept).
+- `rt`: milliseconds → seconds; `<=0` (the same non-response sentinel
+  pattern, e.g. `stop_signal`'s successfully-stopped trials, `go_nogo`'s
+  correctly-withheld no-go trials) mapped to missing, row kept (accuracy is
+  still meaningful with no RT).
+
+**Output** (all in `irw_output/`, verified via a QC pass — unique
+id+item+wave, no PII, `resp` clean 0/1, `rt` in seconds):
+
+| table | rows | ids | items | source task |
+|---|---|---|---|---|
+| enkavi_2019_stroop | 64,608 | 523 | 96 | Stroop |
+| enkavi_2019_simon | 67,300 | 523 | 100 | Simon |
+| enkavi_2019_ant_flanker | 96,912 | 523 | 144 | ANT (flanker component) |
+| enkavi_2019_gonogo | 235,550 | 523 | 350 | go/no-go |
+| enkavi_2019_dpx_axcpt | 83,967 | 522 | 128 | dot-pattern-expectancy (AX-CPT) |
+| enkavi_2019_navon | 64,608 | 523 | 167 | local/global letter (Navon) |
+| enkavi_2019_stopsignal | 403,800 | 523 | 600 | stop-signal |
+| enkavi_2019_taskswitch | 296,120 | 523 | 615 | three-by-two (task-switching) |
+
+**Not yet done**: tags.csv rows, dictionary rows, and the Redivis upload
+itself — same remaining steps as the Peters 2025 case above, deferred until
+the user says how they want to proceed (that case was walked through "slowly
+and separately" by request rather than all at once).
+
+## SRO conflict-task battery: item redefinition + dictionary staging (2026-07-17)
+
+**Item redefinition**: user reviewed the initial item-construction choice
+(`"<condition>_<NNN>"`, a positional label) and asked for `item` to instead
+be the actual stimulus combination, with a separate `position` column
+holding the repetition index. Rewrote `data/enkavi_2019_conflict_tasks.py`
+per-task:
+
+- `stroop`: item = word × color (9 combos)
+- `simon`: item = color × side × condition — condition has to stay in the
+  key because the color-to-response-key mapping is **counterbalanced across
+  participants** (confirmed empirically: the same stim_color+stim_side
+  combination is "congruent" for about half the sample and "incongruent"
+  for the other half, always consistent *within* a person). Every other
+  task's congruency label is fully derivable from its stimulus columns.
+- `attention_network_task`: item = cue × flanker_type × flanker direction ×
+  flanker location (48 combos)
+- `go_nogo`: item = condition × stimulus id (extracted via regex from a
+  malformed-whitespace HTML stimulus string — `id = stim1` vs `id  =
+  stim1` were spuriously producing 4 "distinct" strings for 2 real stimuli)
+- `dot_pattern_expectancy`: item = condition × probe image id (24 combos;
+  each row's `trial_id` is always `"probe"` — cue-phase rows aren't in this
+  file at all)
+- `local_global_letter`: item = attended level × global shape × local shape
+  (12 combos; `conflict_condition` confirmed fully derivable from
+  global_shape==local_shape)
+- `stop_signal`: item = delay condition × trial type × shape id (16 combos)
+- `threebytwo`: item = cue × digit × color × task_switch (288 combos) —
+  used `cue` rather than `task` since 2 cues map to each task (confirmed
+  1:1) and cue-vs-task-switch is the actual manipulation in this cued
+  task-switching design
+
+Added an explicit runtime assertion checking every `itemcov_*` column is
+genuinely invariant within `item` (not merely assumed) — this is what would
+have caught the Simon counterbalancing issue if it had been missed. All 8
+tables pass. Row counts unchanged from the first version; only the
+`item`/`position` keying changed.
+
+**Dictionary rows staged**: `automated_finding/dictionary_fix_enkavi_2019.csv`
+(8 rows, one per table) — matches the live dictionary sheet's column order
+(verified via its CSV export) and follows the exact precedent already set
+by the existing `alcoholstroop_jones2024` row for "source has no formal
+license, author granted permission by email": `Original License` = "Missing
+(NA)", `Derived License` = "CC BY 4.0", `Notes` = "email permission",
+`Contributor` = "automated". Reference is the full 7-author APA citation
+(PNAS 116(12):5472-5477).
+
+**Closed out (2026-07-17)**: ben-domingue confirmed the dictionary rows
+were pasted in and the 8 `irw_output/enkavi_2019_*.csv` tables are uploaded
+to Redivis. Explicitly deprioritized tags.csv entries for now ("don't worry
+about tags") — not done, and not currently tracked as an open TODO item;
+revisit if/when the user wants it. This closes out the SRO conflict-task
+battery lead end-to-end: discovered as a user-directed pointer, license-
+blocked, permission granted, processed (8 tables), dictionary staged and
+pasted, uploaded.
