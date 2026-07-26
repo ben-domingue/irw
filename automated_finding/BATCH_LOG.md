@@ -909,3 +909,234 @@ revisit if/when the user wants it. This closes out the SRO conflict-task
 battery lead end-to-end: discovered as a user-directed pointer, license-
 blocked, permission granted, processed (8 tables), dictionary staged and
 pasted, uploaded.
+
+## Batch 19 — Cognitive/decision-making task discovery (2026-07-26)
+
+**New search terms**: 10 topics not previously in `search_terms_log.csv`
+(confirmed absent by grep before running), each in English + the standard
+8-language set (Spanish, German, French, Chinese Simplified, Japanese,
+Arabic, Dutch, Korean) = 90 queries, run together via
+`candidates_cognitive_tasks_intl.csv`: Implicit Association Test, Raven's
+Progressive Matrices, Posner cueing task, visual search task, digit span
+task, reading span task, Iowa Gambling Task, Balloon Analogue Risk Task,
+dictator game, Corsi block-tapping task. All 90 terms logged to
+`search_terms_log.csv`. 649 candidates found.
+
+**Pipeline hazard hit and worked around**: candidate #8 (Dataverse
+`DVN/BRCRS5`, "Air Pollution and Students' Cognitive Performance") OOM-killed
+`irw_batch_updated.py` twice in a row (confirmed via `journalctl -k`: both
+attempts hit ~21GB RSS before the kernel OOM-killer stepped in on a 30GB
+machine). The dataset's files are six `.dta` files up to 1.4GB each plus a
+183MB `.tab` — `pandas.read_stata`/read on a file this size expands well
+beyond the on-disk size in memory. Worked around by excluding that one row
+(`candidates_cognitive_tasks_intl_safe.csv`, 648 rows) and resuming from the
+existing checkpoint; the rest of the batch completed cleanly with no further
+OOM. **Pipeline improvement worth considering** (not done, added to
+`TODO.md`): `irw_batch_updated.py` has no file-size guard before attempting
+to load a candidate file — a size check (e.g. skip/flag anything over ~200MB
+per file without downloading fully first) would prevent this class of
+failure automatically instead of requiring a human to notice the process
+died silently.
+
+**Triage summary** (`irw_triage_cognitive.csv`, 648 rows): good 2,
+human_assistance 39, not_item_response 5, no_usable_file 511,
+license_restricted 7, download_failed 84.
+
+**Retriage summary** (`irw_retriage_ha_cognitive.csv`, 39 human_assistance
+rows): not_item_response 9, aggregate_continuous 9, worth_retrying 6,
+human_review 15 (0 wrong_file_selected, 0 recoverable_format).
+
+**Both `good` rows turned out to be false positives on inspection** — the
+triage tool's item-count heuristic doesn't distinguish real item batteries
+from columns that happen to look like a small numeric grid:
+- "Pre-test and post-test dataset of working memory in students with
+  learning disabilities" (figshare 27141603, CC BY, N=40): the 9 "item"
+  columns are all pre/post *composite test totals* (Visual/Verbal Memory
+  Total Score, WMS Score, WM-PTF Score, Raven score) — aggregate, not
+  item-level. Not processed.
+- "Time as a medium of reward in three social preference experiments"
+  (figshare/eur 14636322, CC BY, N=62): 9 Excel sheets, one per behavioral-
+  economics game variant (Dictator/Ultimatum/Trust Game at two endowment
+  levels, plus money-only controls) — each subject makes a single game
+  decision per sheet with demographic covariates alongside it, not a battery
+  of comparable items. Not processed.
+
+**Of the 6 `worth_retrying` cases, 4 were dropped and 2 reclassified to
+human_review** (details in `human_review_cognitive_tasks.csv`, appended to
+the 15 rows the automated retriage couldn't resolve — 17 rows total):
+- Dropped (all aggregate/composite scores or not item-response data, same
+  pattern as the two "good" false positives above): "Working Memory
+  Training in Healthy Adults" (figshare 3121582, N=81 — pre/post digit-span/
+  RAPM/CCFT/coding *totals*, no items); "The explicit-implicit personality
+  relationship study" (UCL RDR 22202371, CC0, N=1458 — IAT D-scores and
+  TEIQue subscale totals, no items); "Mapping indicators of food security...
+  Senegal" (DVN/YYJJHN, N=296 "participants") — turned out to be a pure GIS/
+  remote-sensing agroforestry dataset (rasters, land-cover, InVEST ecosystem-
+  service model outputs); the triage tool's participant/item counts came
+  from an incidental small `.tab`/`.csv` file with no survey data at all;
+  "Do Gender-Related Stereotypes Affect Spatial Performance? ... Mental
+  Rotation Task" (Frontiers/figshare 6854201, CC BY, N=76) — per-condition
+  (Neutral/Male-optimized/Female-optimized) summary stats (%%correct, mean
+  latency, confidence), not trial-level responses.
+- Reclassified to `human_review` (real data, but doesn't safely fit the
+  automated schema): "Nosek and Smyth (2011): Implicit social cognitions
+  predict math engagement and achievement" (DVN/Z3MV4J, CC0, N=11,819) — a
+  186-column `.sas7bdat` mixing IAT block key-assignment metadata (e.g.
+  `PanxB3` values are strings like `"MATH/Anxious,FURNITURE/Confident"`, not
+  responses) with raw latencies and self-report items across 5 sub-IATs;
+  needs the paper's PDF codebook to safely separate real Likert columns from
+  task metadata. "Ideological Cues, Partisanship, and Prejudice Against
+  LGBTQ Judges" (DVN/CDLVDH, CC0, N=1,249) — a genuine conjoint experiment
+  (2 randomized judge-nominee profiles per respondent, 5-point support
+  rating each) that maps cleanly to `id`/`item`(profile_1/profile_2)/`resp`,
+  but its natural `itemcov_*` candidates (the 9 randomized judge attributes:
+  age/race/law school/job/politics/gender/transgender status/sexuality/
+  rhetoric) are randomized **per response**, violating datastandard.md's
+  itemcov invariance rule (itemcov must be constant within an item across
+  all rows). A draft processing script was written and then deliberately
+  discarded rather than shipped with a schema violation — flagged for a
+  person to decide whether to ship a bare `id`/`item`/`resp`/`cov_*` file
+  (losing the conjoint attribute detail) or treat conjoint designs as out of
+  scope for IRW's shared-item psychometric paradigm.
+
+**Net result this batch**: 0 new tables in `irw_output/` — every `good` and
+`worth_retrying` lead turned out to be aggregate/composite data, non-survey
+data, or a genuine schema mismatch on closer inspection. This is a real
+(if unexciting) outcome, not a missed opportunity: the search successfully
+surfaced candidates worth checking, and checking them thoroughly (rather
+than trusting the triage tool's flag) is what caught the false positives.
+
+**Cleanup**: `candidates_cognitive_tasks_intl.csv`,
+`candidates_cognitive_tasks_intl_safe.csv`, `irw_triage_cognitive.csv`,
+`irw_retriage_ha_cognitive.csv`, `irw_batch_checkpoint.jsonl`,
+`triage_cognitive_run.log` deleted — content captured above.
+`human_review_cognitive_tasks.csv` (17 rows) kept pending user paste into
+the "Human eye" sheet; tracked in `TODO.md`.
+
+## Batch 20 — Well-being/clinical-screening instrument discovery (2026-07-26)
+
+**New search terms**: 10 named instruments not previously in
+`search_terms_log.csv` (confirmed by grep before running, since several
+adjacent-sounding terms like "life satisfaction" or "PTSD" already existed
+but these exact instrument names did not): Perceived Stress Scale, UCLA
+Loneliness Scale, Multidimensional Scale of Perceived Social Support,
+Buss-Perry Aggression Questionnaire, Domain-Specific Risk-Taking Scale,
+Problem Gambling Severity Index, Barratt Impulsiveness Scale, Maslach
+Burnout Inventory, Satisfaction with Life Scale, Alcohol Use Disorders
+Identification Test — each in English + the standard 8-language set
+(Spanish, German, French, Chinese Simplified, Japanese, Arabic, Dutch,
+Korean) = 90 queries, run together via `candidates_batch20.csv`. All 90
+terms logged to `search_terms_log.csv`. 1,023 candidates found.
+
+**Pipeline hazard hit again, same class as batch 19**: candidate
+`DVN/EHBGOW` ("Taking Teacher Evaluation to Scale...") OOM-killed
+`irw_batch_updated.py` at row 652/1023 (confirmed via `journalctl -k`: 21GB
+RSS on a 30GB machine). Checked the Dataverse file listing directly this
+time before resuming: six `.dta` files up to 1.58GB each. Excluded that one
+row (`candidates_batch20_safe.csv`) and resumed from the checkpoint; the
+rest completed cleanly. This is now the second batch in a row hitting this
+exact failure mode — reinforces the open `TODO.md` item for a file-size
+guard in `irw_batch_updated.py` (still not implemented).
+
+**Triage summary** (`irw_triage_batch20.csv`, 1023 rows): good 2,
+human_assistance 67, not_item_response 7, no_usable_file 835,
+license_restricted 7, download_failed 102, error 3.
+
+**Both `good` rows were false positives on inspection**, same pattern as
+batch 19 — the triage heuristic counts columns without checking they form a
+shared item bank:
+- Marathi translation-equivalence pilot for MSPSS/PSS (figshare 25888477,
+  CC BY 4.0, N=10) — 12 items rated twice (self vs. interview method) by only
+  10 raters, plus aggregate total/mean/difference columns. Too small and a
+  translation-validation pilot, not a substantive response dataset. Not
+  processed.
+- "Questionnaire and Interview Results" (DVN/NTVW8T, CC0, N=150, 181
+  nominal "items") — a Philippine/Chinese secondary-school language-program
+  survey: open-text policy questions, per-grade checklists, administrative
+  headcounts. No shared Likert item battery. Not processed. (Note: this DOI
+  was listed with a bare, unannotated checkmark in this file's original
+  batch-3 audit section — re-confirmed here from scratch since the dictionary
+  itself was checked live via `irw_discover_updated.py`'s auto-exclusion and
+  this DOI was not excluded, meaning it was never actually uploaded.)
+
+**3 of 3 `worth_retrying` cases panned out this time** (unlike batch 19,
+where all 6 were dead ends) — all inspected directly rather than trusting
+the retriage tool's guess:
+- `DVN/DWCBOE` ("Need Fulfillment Inventory for Older Adults... University
+  of the Third Age", Trusz 2025, CC0) is a multi-file scale-development
+  deposit (EFA N=660, CFA N=437, retest N=54, combined N=1097). The
+  retriage tool flagged the combined N=1097 file's dup_id_item ratio as
+  possibly longitudinal; direct inspection showed that file mixes 3
+  incompatible sub-studies with an unreliable `KOD` id (constant/blank for
+  660 of 1097 rows) and duplicate-valued "retest" columns that turned out to
+  be mean-imputed copies (`PO_IMPUTACJI` = "after imputation"), not a second
+  wave — not usable as-is. The EFA-only file (`EFA_NFI72_N660.sav`) is clean
+  though: `lp` is a genuine unique id (660/660), `i1`-`i72` are the real
+  NFI-72 items (1-5 Likert, ignore the `i*_1` imputed-duplicate columns and
+  the `@`-prefixed raw-text columns and the `*_SUM`/`*_SR` subscale
+  aggregates). Processed as `trusz_2025_nfi.py` → `trusz_2025_nfi.csv`
+  (659 ids after dropping one all-missing row, 72 items, resp 1-5). CFA and
+  retest subsamples not processed — left as a note in the dictionary row for
+  anyone who wants to pick them up later.
+- Gan et al. (2015), "Rumination and Loneliness... Chinese Elderly in
+  Nursing Homes" (figshare 1535084, CC BY 4.0, N=71) — the retriage tool
+  flagged a low-confidence id mapping; `num` is in fact a clean unique id.
+  Real CES-D (20 items, 0-3), UCLA Loneliness short form (8 items, 1-4), and
+  RRS (10 items, 1-3, numbered 1,2,4-11 — the source already excludes item 3)
+  all present. Processed as `gan_2015_nursing_home.py` → 3 tables
+  (`gan_2015_cesd`, `gan_2015_ucla_loneliness`, `gan_2015_rrs`).
+- Chen, Ji & Jiang (2022), "Psychological Abuse and Social Support in
+  Chinese Adolescents" (figshare 19410062, CC BY 4.0) — retriage flagged a
+  4.1x dup_id_item ratio as possibly longitudinal; direct inspection showed
+  `number` instead resets across respondents (same participant number maps
+  to different ages/genders across rows — same false-longitudinal pattern as
+  earlier batches' "number resets per class" cases), so used row index as
+  `id` instead per datastandard.md, giving 417 real respondents. Three
+  scales: parental psychological abuse (14 items, 1-5), MSPSS-style social
+  support (12 items, 1-7), Rosenberg-style self-esteem (10 items, 1-4).
+  Caught one data-entry sentinel (a single `22` in an otherwise 1-4 item)
+  via the `resp` range filter before shipping. Processed as
+  `chen_2022b_adolescents.py` → 3 tables (`chen2022b_psychabuse`,
+  `chen2022b_socsupport`, `chen2022b_selfesteem`). Named with a `b` suffix
+  because the first author's surname ("Chen Chen") collides with the
+  unrelated existing `chen2022_cls/ses/sasc` batch-7 entry (different paper,
+  different figshare DOI, same author name) — flagging here so the
+  collision doesn't look like a duplicate-processing mistake later.
+
+**Net result this batch**: 7 new tables in `irw_output/` across 3 datasets
+(`trusz_2025_nfi`, `gan_2015_cesd`/`ucla_loneliness`/`rrs`,
+`chen2022b_psychabuse`/`socsupport`/`selfesteem`) — all CC0/CC BY, verified
+id uniqueness, no PII, no dup id+item, resp ranges matched documented
+scales. Dictionary rows staged in
+`automated_finding/dictionary_fix_batch20.csv` (7 rows), not yet pasted.
+
+**7 `license_restricted` rows** (all explicit NC/ND-family licenses —
+cc-by-nc, cc-by-nc-nd, cc-by-nc-sa — not a missing/unresolvable-license
+case, so not added to `license_blocked_candidates.csv`; that file is
+reserved for missing/unverifiable licenses, not deliberately-restrictive
+ones): Kenya Diet Quality Questionnaire ×2, Social Capital Integrated
+Household Questionnaire, air pollution/cognition Kenya replication data,
+stress/trauma/family-resilience child outcomes, VR height-perception
+self-esteem study, mindfulness/self-compassion/perfectionism Hong Kong
+gifted-adolescents study — all skipped outright, no email-permission attempt
+(NC/ND is a deliberate restriction stated by the depositor, not an
+oversight worth appealing).
+
+**18 `human_review` rows** — generic "no clear automated classification"
+cases the retriage tool couldn't sub-classify further; saved to
+`human_review_batch20.csv`, needs pasting into the "Human eye" sheet.
+
+**Cleanup**: `candidates_batch20.csv`, `candidates_batch20_safe.csv`,
+`irw_triage_batch20.csv`, `irw_retriage_batch20.csv`,
+`irw_batch_checkpoint.jsonl`, `discover_batch20.log`, `triage_batch20.log`,
+`triage_batch20_resume.log`, `triage_test20.csv` deleted — content captured
+above. `human_review_batch20.csv` and `dictionary_fix_batch20.csv` kept
+pending user paste into the sheets.
+
+**Closed out (2026-07-26)**: ben-domingue confirmed both
+`human_review_batch20.csv` (18 rows) and `dictionary_fix_batch20.csv` (7
+rows) were pasted into their respective sheets; both files deleted from the
+repo. ben-domingue also confirmed the 7 `irw_output/*.csv` tables
+(`trusz_2025_nfi`, `gan_2015_cesd`/`ucla_loneliness`/`rrs`,
+`chen2022b_psychabuse`/`socsupport`/`selfesteem`) are uploaded to Redivis.
+This closes out batch 20 end-to-end.

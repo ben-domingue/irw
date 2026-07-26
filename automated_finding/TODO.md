@@ -85,3 +85,33 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `hwFrequency*`/`work*`/`DMQslider*` and their paired `*Est` columns — uses
   a different, not-yet-decoded response mechanism.
 
+- [ ] **`automated_finding/human_review_cognitive_tasks.csv`** (17 rows,
+  from batch 19's cognitive/decision-making-task search) — needs pasting
+  into the "Human eye" sheet. Includes 2 notable cases worth a second look:
+  the Nosek & Smyth (2011) math-IAT dataset (DVN/Z3MV4J, N=11,819 — real
+  data, needs the paper's PDF codebook to decode 186 cryptic columns safely)
+  and the LGBTQ-judges conjoint experiment (DVN/CDLVDH, N=1,249 — a genuine
+  conjoint design where the judge-profile attributes are randomized per
+  response, conflicting with datastandard.md's itemcov invariance rule; a
+  person needs to decide whether to ship a bare id/item/resp file without
+  the attribute detail, or treat conjoint designs as out of scope). See
+  `BATCH_LOG.md`'s "Batch 19" entry for the full reasoning on all 17 rows.
+
+- [ ] **Pipeline improvement: no file-size guard in `irw_batch_updated.py`.**
+  Batch 19 hit a Dataverse candidate (`DVN/BRCRS5`) whose files were six
+  `.dta` files up to 1.4GB each — loading it OOM-killed the triage process
+  twice (~21GB RSS on a 30GB machine) before it was manually excluded and
+  the run resumed. Batch 20 hit the identical failure mode again
+  (`DVN/EHBGOW`, six `.dta` files up to 1.58GB each) — now two batches in a
+  row. Worth adding a size check (e.g. via each repo API's reported file
+  size, skip/flag anything over some threshold without a full download) so
+  this fails gracefully instead of silently killing the process. Not done —
+  no one has picked this up yet.
+
+- [ ] **Trusz 2025 NFI dataset (`DVN/DWCBOE`) has unprocessed CFA (N=437)
+  and test-retest-stability (N=54) subsamples** beyond the EFA sample
+  already processed as `trusz_2025_nfi`. Not picked up because the
+  combined N=1097 file mixing all sub-studies has an unreliable id column;
+  would need per-file (not per-combined-file) processing. Low priority —
+  noted for whoever wants the extra ~500 respondents.
+
