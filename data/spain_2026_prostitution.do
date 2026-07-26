@@ -1,4 +1,4 @@
-*** This Stata Do File processes the spain_2026_disinformation study ***
+*** This Stata Do File processes the spain_2026_prostitution study ***
 
 clear all
 set more off
