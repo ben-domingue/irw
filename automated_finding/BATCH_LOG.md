@@ -1943,3 +1943,28 @@ reviewed: processed or explicitly skipped with reasons logged above.
 Only the deprioritized sub-100 tail (26 candidates, filtered out
 2026-07-26 per ben-domingue's direction) remains unreviewed in the
 `worth_retrying` category.
+
+`biblio_plos_batch5.csv` (11 rows) confirmed uploaded/pasted by
+ben-domingue (2026-07-27).
+
+## Decision: expand beyond PLOS ONE (2026-07-27)
+
+ben-domingue's direction for the next session: run a fresh discovery
+pass with new search terms rather than working the sub-100
+`worth_retrying` tail, and evaluate expanding the PLOS discovery script
+beyond PLOS ONE.
+
+Discussed and agreed: target PLOS Mental Health and PLOS Global Public
+Health specifically, not the full PLOS journal family. Both share PLOS
+ONE's CC-BY licensing and site template, so `irw_discover_plos.py`
+(currently filtered to PLOS ONE's eissn 1932-6203) likely only needs an
+eissn swap or an additional eissn in the filter, not a rewrite of the
+SI-extraction/license/data-availability logic. Both journals also
+publish survey/psychometric data as a core part of their scope, similar
+to the psych/health subset of PLOS ONE that's produced most of this
+pipeline's hits so far. Explicitly decided against expanding to PLOS
+Biology/Genetics/Pathogens/Computational Biology/etc. — those mostly
+publish lab/genomic data, not item responses, so the discovery/triage
+time would have low yield. Not yet implemented — this is the plan for
+the next session, starting narrow with these two journals before
+considering further expansion.

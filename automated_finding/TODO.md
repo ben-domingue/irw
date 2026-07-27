@@ -27,11 +27,24 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (confirmed 2026-07-27, ben-domingue): pasted into the dictionary sheet,
   62 tables uploaded to Redivis.
 
-- [ ] **PLOS ONE pilot — `biblio_plos_batch5.csv` (11 rows, closed pool)
-  needs pasting into the dictionary sheet**, and the corresponding
-  `irw_output/*.csv` tables need uploading to Redivis (ben-domingue is
-  doing this now, 2026-07-27). See `BATCH_LOG.md`'s "worth_retrying
-  pass, batch 5" entries for the full list of what's in this batch.
+- [x] **PLOS ONE pilot — `biblio_plos_batch5.csv` (11 rows) closed out**
+  (confirmed 2026-07-27, ben-domingue): pasted into the dictionary sheet,
+  11 tables uploaded to Redivis. This closes out the entire N≥100
+  `worth_retrying` pool end-to-end.
+
+- [ ] **Next session: start with a fresh PLOS discovery pass using new
+  search terms** (ben-domingue's direction, 2026-07-27), not the sub-100
+  `worth_retrying` tail below.
+  - **Decision to make first: expand beyond PLOS ONE to PLOS Mental
+    Health and PLOS Global Public Health.** Same CC-BY licensing and
+    site template as PLOS ONE, so `irw_discover_plos.py` likely only
+    needs an eissn swap/addition, not a rewrite — and survey/
+    psychometric data is core to what both journals publish, similar to
+    what's worked well in PLOS ONE. Deliberately NOT expanding to
+    broader PLOS journals (Biology, Genetics, Pathogens, Computational
+    Biology) — those mostly publish lab/genomic data, low yield for
+    discovery/triage time. Start narrow with these two, expand further
+    only if they pan out.
 
 - [x] **PLOS ONE pilot — entire `worth_retrying` N≥100 pool (81 candidates)
   fully reviewed** (2026-07-27) — every candidate processed or explicitly
