@@ -1,0 +1,7 @@
+# Cached source text fetched while tagging (paywalled/rate-limited sources
+# shouldn't be re-hit on every run) — regenerable, not for version control.
+.claude/skills/irw-auto-tag/.cache/
+
+# Python
+__pycache__/
+*.pyc
