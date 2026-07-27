@@ -1,6 +1,36 @@
-Process for updating IRW mdatadata (https://redivis.com/datasets/bdxt-4fqe5tyf4)
+Process for updating IRW metadata (https://redivis.com/datasets/bdxt-4fqe5tyf4)
 
-1. 01_metadata.R: makes metadata.csv [numbers computed from raw tables such as # of unique `id`s]
-2. 02_biblio.R: makes biblio.csv [bibliographic information for citing]
+Preferred: use the site-update skill (.claude/skills/site-update/) instead of
+running the scripts below by hand. It runs them in order, diffs each output
+CSV against what it replaced (added/removed/changed rows, flagged if any
+cell looks like a suspiciously long raw-text dump), and never overwrites
+silently.
+
+  scripts/run_pipeline.sh     # generate: 01 -> 02 -> 03 -> 05 -> 06 -> 07 -> 09
+  scripts/audit_tables.R      # cross-source table-name consistency audit;
+                               # run AFTER run_pipeline.sh, in the same directory
+
+Needs ANTHROPIC_API_KEY set (02_biblio.R's BibTeX-generation fallback calls
+Claude when a DOI-based lookup fails) and Redivis credentials configured
+externally, as before.
+
+Manual run order, if not using the skill:
+
+1. 01_metadata.R: makes metadata.csv [numbers computed from raw core tables such as # of unique `id`s]
+2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source]
 3. 03_tags.R: makes tags.csv [pulls together hand-annotated tags]
-4. 04_tables.R: qc/nothing to upload [does checking on table names]
+5. 05_comps.R: makes comps_metadata.csv [same idea as 01_metadata.R, for the irw_competitions source]
+6. 06_nominal.R: makes nominal_metadata.csv [same idea as 01_metadata.R, for the irw_nominal source]
+7. 07_simsyn.R: makes simsyn_metadata.csv [same idea as 01_metadata.R, for the irw_simsyn source]
+9. 09_hero_status.R: makes irw_site's data/hero_stats.json [run LAST -- reads metadata.csv written by step 1]
+
+4. 04_tables.R: qc/nothing to upload [checks table names across core sources
+   only; being superseded by the skill's audit_tables.R, which generalizes
+   this to all four sources (core/comps/nominal/simsyn) and writes a
+   standalone report rather than printing to console]
+
+08_itemtext.R is a separate concern (item-text readability metadata) --
+see itemtext/.claude/skills/irw-auto-itemtext/.
+
+hotfixes/: one-off patch/diagnostic scripts, out of scope for the normal
+update process -- see hotfixes/README.md.
