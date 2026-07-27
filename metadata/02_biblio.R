@@ -39,34 +39,38 @@ fetch_bibtex_from_doi <- function(filename, doi) {
   }
 }
 
-# Function to call ChatGPT and generate JSON formatted BibTeX output
-openai_chat <- function(prompt, model = "gpt-4o", temperature = 0) {
-  api_key <- Sys.getenv("OPENAI_API_KEY")
+# Function to call Claude and generate JSON formatted BibTeX output
+anthropic_chat <- function(prompt, model = "claude-haiku-4-5", max_tokens = 1024) {
+  api_key <- Sys.getenv("ANTHROPIC_API_KEY")
   if (nchar(api_key) == 0) {
-    api_key <- readline("Enter your OpenAI API key: ")
-    Sys.setenv(OPENAI_API_KEY = api_key)
+    api_key <- readline("Enter your Anthropic API key: ")
+    Sys.setenv(ANTHROPIC_API_KEY = api_key)
   }
+  system_prompt <- "You are an expert in structured data extraction. You will receive details of a dataset and should return a BibTeX citation of the dataset in JSON format. Respond with ONLY the raw JSON object -- no markdown code fences, no commentary."
   response <- POST(
-    url = "https://api.openai.com/v1/chat/completions", 
-    add_headers(Authorization = paste("Bearer", api_key)),
+    url = "https://api.anthropic.com/v1/messages",
+    add_headers(
+      "x-api-key" = api_key,
+      "anthropic-version" = "2023-06-01"
+    ),
     content_type_json(),
     encode = "json",
     body = toJSON(list(
       model = model,
+      max_tokens = max_tokens,
+      system = system_prompt,
       messages = list(
-        list(role = "system", content = "You are an expert in structured data extraction. You will receive details of a dataset and should return a BibTeX citation of the dataset in JSON format."),
         list(role = "user", content = prompt)
-      ),
-      response_format = list(type="json_object"),  # Ensure structured JSON response
-      temperature = temperature
+      )
     ), auto_unbox = TRUE)
   )
   if (status_code(response) != 200) {
     stop("Error: ", content(response, as = "parsed")$error$message)
   }
   parsed_response <- content(response, as = "parsed")
-  if (!is.null(parsed_response$choices) && length(parsed_response$choices) > 0) {
-    json_text <- parsed_response$choices[[1]]$message$content
+  if (!is.null(parsed_response$content) && length(parsed_response$content) > 0) {
+    json_text <- parsed_response$content[[1]]$text
+    json_text <- gsub("^```json\\s*|```\\s*$", "", json_text)  # strip fences if the model adds them anyway
     bibtex_entry <- fromJSON(json_text)$bibtex  # Extract only the BibTeX field
     return(bibtex_entry)
   } else {
@@ -104,9 +108,9 @@ generate_bibtex <- function(df) {
     } else {
       message(sprintf("Skipping row %d — all fields are NA.", i))
     }
-    df$BibTex[i] <- openai_chat(prompt)
+    df$BibTex[i] <- anthropic_chat(prompt)
     pb$tick()
-    Sys.sleep(1) # Limit the call-rate to OpenAI
+    Sys.sleep(1) # Limit the call-rate to Anthropic
   }
   return(df)
 }
