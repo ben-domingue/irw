@@ -1882,3 +1882,64 @@ Remaining: ~13 more `worth_retrying` candidates with N≥100 (pool
 recounted 2026-07-27 against actual BATCH_LOG skip decisions, not just
 processed scripts — several earlier skips weren't being excluded from
 the "remaining" count).
+
+## `worth_retrying` pass, batch 5 (2026-07-27)
+
+`biblio_plos_batch4.csv` (62 rows) confirmed uploaded/pasted by
+ben-domingue; recounted the actual remaining pool precisely (not the
+rough estimate above) — 5 true unreviewed candidates left, not ~13 (most
+of the gap was already-skipped rows the estimate hadn't excluded). New
+staging file `biblio_plos_batch5.csv` started.
+
+1 candidate, 2 tables → `biblio_plos_batch5.csv`:
+- `ibrahim_2015_*` (sf36, bfi) — chronic kidney disease patients, N=200,
+  80 items total. SF-36 exported as 8 different section-specific text
+  formats (expected for this instrument); enumerated each section's full
+  category set before mapping. Two isolated stray numeric values dropped
+  as out-of-range errors (Q3 one 4.0 against 3 categories, Q4 one 3.0
+  against binary); Q10's stray 6.0 kept as a legitimate response
+  (matches that section's real 6th category). SS1-5/SE1-8 (13 items) and
+  SF9-19 (11 items) also present but left unprocessed — no variable
+  labels, no identifiable instrument name in the paper's available text.
+
+1 more candidate, 1 table (3 total in `biblio_plos_batch5.csv`):
+- `marcussonclavertz_2019_velten` — Velten Mood Induction Procedure
+  statements (80 items), online validation study, N=106. LimeSurvey's
+  opaque `vNN_SQ001` codes only resolve to the real mood-statement text
+  via SPSS variable labels, not the column names — checked before
+  assuming these were uninterpretable, unlike the batch-10/13
+  listening-text-repetition case where no such labels existed. Study 2
+  (a separate file with a structurally different, already-named PANAS-
+  style item set) not processed here.
+
+1 more candidate, 2 tables (5 total in `biblio_plos_batch5.csv`):
+- `chen_2019_*` (cdrsc, csq) — cold-pressor pain-appraisal study, N=235.
+  Confirmed instrument identities directly against the paper's Measures
+  section text (CDRS-C 0-4, task-specific CSQ 0-6) rather than guessing
+  from column names. 37 columns (pse01-08/appraisal01,a02-06/nrs01-03/
+  hs01-06) left unprocessed — no labels and no matching description
+  found in the paper text for any of them.
+
+1 more candidate, 3 tables (8 total in `biblio_plos_batch5.csv`):
+- `romadlon_2022_*` (mfi20, facit, bdi) — Indonesian type 2 diabetes
+  fatigue study, N=200, 54 items total. `Sample` (1-3 letter codes,
+  likely patient initials) reused across different respondents —
+  neither a reliable id nor safe to keep as a covariate; dropped
+  entirely, row index used as id. PSQI1-7 (the 7 standard PSQI component
+  scores, not raw sub-questions — treated as derived, like SF-36 domain
+  totals elsewhere) and Q1-5 (heterogeneous binary/continuous/ordinal
+  formats, unidentified) excluded.
+
+Final candidate, 3 tables (11 total in `biblio_plos_batch5.csv`):
+- `dolzdelcastellar_2021_*` (faces, stai, eds) — family functioning/
+  differentiation-of-self/anxiety study, Spanish young adults, N=185,
+  114 items total. Two raw column-naming inconsistencies fixed (`EDCS_34`
+  and `EDS65`, both missing/wrong naming relative to the rest of the
+  74-item EDS scale).
+
+**This closes out the entire `worth_retrying` (N≥100) pool** — every
+candidate from the 81-row filtered list (2026-07-26) has now been
+reviewed: processed or explicitly skipped with reasons logged above.
+Only the deprioritized sub-100 tail (26 candidates, filtered out
+2026-07-26 per ben-domingue's direction) remains unreviewed in the
+`worth_retrying` category.

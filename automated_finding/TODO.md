@@ -23,18 +23,28 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `BATCH_LOG.md`'s "QC spot-check pass"). See `BATCH_LOG.md`'s
   "worth_retrying pass" entries for the full list of what's in this batch.
 
-- [ ] **PLOS ONE pilot — `biblio_plos_batch4.csv` (62 rows, growing) needs
-  pasting into the dictionary sheet**, and the corresponding
-  `irw_output/*.csv` tables need uploading to Redivis. See `BATCH_LOG.md`'s
-  "worth_retrying pass, batch 4" entries for the full list.
+- [x] **PLOS ONE pilot — `biblio_plos_batch4.csv` (62 rows) closed out**
+  (confirmed 2026-07-27, ben-domingue): pasted into the dictionary sheet,
+  62 tables uploaded to Redivis.
 
-- [ ] **PLOS ONE pilot — ~13 more `worth_retrying` candidates (N≥100)**
-  still need hand review; see `BATCH_LOG.md`'s "worth_retrying pass"
-  entries for the running processed/skipped list. Filtered from 107 to 81 at N≥100 per
-  ben-domingue's direction (2026-07-26); the sub-100 tail is
-  deprioritized, not abandoned. Candidate details are in
-  `plos_full_triage.csv` / `plos_full_retriage.csv`; delete both once this
-  is fully worked through.
+- [ ] **PLOS ONE pilot — `biblio_plos_batch5.csv` (11 rows, closed pool)
+  needs pasting into the dictionary sheet**, and the corresponding
+  `irw_output/*.csv` tables need uploading to Redivis (ben-domingue is
+  doing this now, 2026-07-27). See `BATCH_LOG.md`'s "worth_retrying
+  pass, batch 5" entries for the full list of what's in this batch.
+
+- [x] **PLOS ONE pilot — entire `worth_retrying` N≥100 pool (81 candidates)
+  fully reviewed** (2026-07-27) — every candidate processed or explicitly
+  skipped with reasons in `BATCH_LOG.md`. Filtered from 107 to 81 at
+  N≥100 per ben-domingue's direction (2026-07-26).
+
+- [ ] **PLOS ONE pilot — sub-100 `worth_retrying` tail (26 candidates)**
+  not yet reviewed — deprioritized, not abandoned, per ben-domingue's
+  2026-07-26 direction. This is the natural next step once batch 5 is
+  closed out, or a fresh discovery pass with new search terms is another
+  option. Candidate details are in `plos_full_triage.csv` /
+  `plos_full_retriage.csv`; delete both once this tail is fully worked
+  through (or once a decision is made to not pursue it).
 
 - [x] **PLOS ONE pilot — all 34 tables from the first pass uploaded and
   biblio-entered** (confirmed 2026-07-26, ben-domingue): first 7
