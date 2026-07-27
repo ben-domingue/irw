@@ -1140,3 +1140,745 @@ repo. ben-domingue also confirmed the 7 `irw_output/*.csv` tables
 (`trusz_2025_nfi`, `gan_2015_cesd`/`ucla_loneliness`/`rrs`,
 `chen2022b_psychabuse`/`socsupport`/`selfesteem`) are uploaded to Redivis.
 This closes out batch 20 end-to-end.
+
+## PLOS ONE pilot (2026-07-26) — new source: single-journal search via Supporting Information files
+
+**What this is**: a different discovery mode, not a numbered batch of
+`irw_discover_updated.py`. All of that script's connectors query data
+*repositories* (Dataverse/Zenodo/OSF/Dryad/Figshare/DataCite/...) for
+dataset-shaped records. PLOS ONE papers instead attach their raw data
+directly to the article as "Supporting Information" files — those are
+structurally invisible to every repo-based connector, since the data was
+never deposited in any of those systems. New script: `irw_discover_plos.py`.
+It queries PLOS's own Solr search API (`api.plos.org`, filtered to PLOS
+ONE's eissn `1932-6203` so it's robust to the "PLoS ONE"/"PLOS ONE" naming
+drift in their own metadata), then for each candidate DOI fetches the
+article page, reads the Data Availability statement, and pulls any
+Supporting Information file with a tabular-looking declared format
+(CSV/XLSX/XLS/SAV/DTA) — same `triage_dataset()`/`load_table()` content and
+format gate the regular pipeline uses, no separate scoring logic. It also
+captures any external-repo DOI mentioned in the Data Availability statement
+(even bare, unlinked DOIs like `doi: 10.5061/dryad.xxxx`) so a lead pointing
+back into Dryad/OSF/etc. isn't lost.
+
+**Pipeline fix found during this pilot**: `pyreadstat`'s native `.sav`
+parser can segfault outright on a corrupt file — a C-level crash, not a
+catchable Python exception, so a bare try/except around the per-candidate
+processing step doesn't protect a long unattended run (confirmed: the first
+full-batch attempt died at 168/~3000 candidates, taking the whole run down
+with it). Fixed by isolating each candidate in its own worker process
+(`ProcessPoolExecutor(max_workers=1)`, respawned on crash/timeout) — a
+crashed worker is now recorded as a `crashed` row and the batch continues.
+Also added `--resume` (skip DOIs already in `--out`). Same segfault risk
+likely exists in `irw_batch_updated.py`'s `.sav` path for the regular
+pipeline; not yet ported there.
+
+**Also fixed**: `xlrd` wasn't installed, so every old-style `.xls`
+Supporting Information file failed with `download_failed` instead of being
+read. Installed (`pip3 install --user --break-system-packages xlrd`) —
+recovered 5 of 7 affected candidates in a spot-check. Worth adding to
+`SKILL.md`'s prerequisite-check list alongside pandas/openpyxl/pyreadstat/pyreadr.
+
+**Run**: 22 terms (named instruments + constructs spanning depression,
+anxiety, personality, stress, burnout, cognitive/executive-function tasks),
+restricted to PLOS ONE — `search_terms_log.csv` updated (logged separately
+from `irw_discover_updated.py`'s terms since a term's coverage doesn't
+transfer between sources). 2,996 unique candidates after dedup against the
+IRW dictionary (pulled fresh at run start).
+
+**Triage result**: 2,325 `no_usable_file` (77.6%), 546 `human_assistance`
+(18.2%), 57 `not_item_response`, **32 `good`**, 26 `download_failed`, 8
+`error`, 1 `crashed`, 1 `timeout`. License: 2,527 `cc-by`, 60 `cc0`, 407
+`unknown` (parse misses on the copyright-notice extraction, not actual
+non-open licenses — 0 `license_restricted` rows; PLOS ONE's license is
+uniformly open), 2 blank. Nothing added to `license_blocked_candidates.csv`
+— no candidate was dropped purely for license reasons.
+
+**Retriage on the 546 `human_assistance` rows** (`irw_retriage_ha.py`, no
+changes needed — same column shape as the regular pipeline's output):
+**107 `worth_retrying`**, 184 `human_review`, 159 `aggregate_continuous`
+(drop), 94 `not_item_response` (drop), 2 `recoverable_format`.
+
+**Duplicate check**: re-pulled the IRW dictionary fresh and checked all 32
+`good` DOIs against `DOI (for paper)` — 0 exact matches. Re-checked again
+after the first 6 were written to `irw_output/` — still 0.
+
+**License verification for Supporting Information files specifically**
+(distinct question from the article's own license): PLOS's Licenses and
+Copyright policy states CC BY 4.0 applies to "articles and other works we
+publish" (not narrowly "the PDF/HTML body"), and Crossref registers each SI
+file's own DOI as `is-component-of` the parent article DOI — i.e. PLOS
+structurally treats SI files as part of the same published work, not an
+independent third-party deposit with its own separate terms (which is the
+case for data availability statements pointing to an *external* repo
+instead — those still need their own per-repo license check, same as the
+regular pipeline already does). No single sentence found stating literally
+"Supporting Information files are CC BY" — this is inferred from the two
+points above, not a first-party stamped label the way an external repo's
+API returns an explicit license field. Judged sufficient to satisfy the
+"explicitly and verifiably open, confirmed on the source page" bar, but
+flagging the inference so it's not confused with a repo API's direct
+license field.
+
+**First pass of the 32 `good` candidates** — 6 processed by hand rather
+than blindly trusting the triage flag (see `datastandard.md`'s "still needs
+a human glance" note):
+- `muslih_2024_rses` (260p×10i), `jiang_2021_resilience` (952p×17i, itemcov_dimension
+  for the 4 subscale groupings; 4 stray `0` values dropped as data-entry
+  errors — 1-2 occurrences per item vs. hundreds at 1-5, and the other 14
+  items never take 0), `kinyanjui_2023_substance_use` (400p×12i binary
+  checklist; dropped 5 Big Five subscale SUM columns also in the raw file
+  — aggregates, not items), `wilson_2022_kelpie_personality` (228p×18i,
+  owner recorded as `rater` since the dog, not the owner, is the focal
+  unit), `rashid_2022_mbi` (168p×22i — **caught a wrong-file selection**:
+  the article has 4 SI files; S1/S4 hold only derived MBI subscale totals,
+  which is what the automated triage grabbed; S2/S3 hold the real 22 raw
+  items, used instead), `yin_2022_gad7` + `yin_2022_values_importance`
+  (153p×7i / 153p×13i — one raw file held two distinct scales, split per
+  the one-scale-per-file rule).
+- **Skipped** 2 candidates despite a `good` triage flag: the PANAS/social-
+  functioning paper (SI's only affect column was a Positive Affect
+  composite sum, not raw items) and the dietician intention-to-quit paper
+  (heterogeneous single-question professional survey, not a coherent
+  multi-item instrument).
+- Biblio entries for the 6 processed → `biblio_plos_batch1.csv` (7 rows;
+  Yin split into 2 tables). `human_review_plos_batch1.csv` (184 rows)
+  ready to paste into the "Human eye" sheet.
+- Remaining: 26 more `good` candidates + 107 `worth_retrying` still to
+  review by hand.
+
+**Continued same day**: 6 more `good` candidates processed by hand (12
+total now):
+- `kraft_todd_2017_*` (4 tables: competence, warmth, care_measure, panas —
+  physician nonverbal-empathy experiment, 1377p, 4 sub-studies pooled, two
+  crossed binary conditions kept as covariates not `treat`).
+- `song_2023_*` (3 tables: rses, slwai, mpats — Chinese medical students,
+  1238p).
+- `di_riso_2025_*` (2 tables: mask_emotion, contact_behavior — large
+  Italian sample, 1151p; dropped several single-item questions and PID-5-BF
+  aggregate sums from the same raw file).
+- `iwasa_2016_*` (4 tables: dpssr, padua_inventory, asi, stai_trait —
+  Japanese sample, 481p, 112 items total across 4 validated instruments).
+- `hui_2024_*` (3 tables: gbfs, who5, pss10 — Chinese college students,
+  309p).
+- `liu_2018_*` (5 tables: swls, shyness, panas, gse, lot_r — Chinese
+  working adults, 208p; raw file also had a second set of SEM item-parcel
+  columns, confirmed as averaged composites via fractional values and
+  excluded).
+- Also reviewed and **skipped** the "Network study of responses to
+  unusualness" candidate (pone.0246894, 1500p×6i) — all 6 columns in the SI
+  file are subscale SUM scores (ranges like 9-45), no raw items available
+  at all.
+- `biblio_plos_batch1.csv` now has 28 rows total. Duplicate-checked all new
+  DOIs against a freshly-pulled dictionary (2273 rows) — 0 matches.
+- **Redivis/dictionary status, confirmed by ben-domingue (2026-07-26)**:
+  the first 7 tables (muslih/jiang/kinyanjui/wilson/rashid/yin×2) are
+  uploaded to Redivis and their biblio rows are pasted into the dictionary
+  sheet. The other 21 tables (rows 8-28) are not yet uploaded/pasted.
+- **File-loss incident**: mid-session, an in-place append to
+  `biblio_plos_batch1.csv` silently reverted to just the appended content
+  (lost the original 7 rows — caught and fixed by reconstructing the full
+  file), and separately the 7 already-uploaded `irw_output/*.csv` tables
+  disappeared from disk with no git record. `automated_finding/` lives in a
+  Dropbox-synced folder — most likely explanation is a sync event from
+  another device, not a bug in the processing scripts (all `data/*.py`
+  scripts were untouched and regenerated their output cleanly on rerun).
+  Noted in `TODO.md` as a standing caution for this working directory.
+- Remaining: ~20 more `good` candidates + all 107 `worth_retrying` still to
+  review by hand.
+
+**Continued same day**: 3 more `good` candidates processed (15 total, 34
+tables):
+- `uffler_2017_*` (2 tables: lecture_seating 26-item 1-7 Likert, seat_reasons
+  7-item binary multi-select checklist — health sciences students, 593p).
+- `nabwera_2021_bdi` (1 table, 20 items — BDI-II embedded inside a ~90-column
+  menstrual-hygiene-management survey in rural Gambia; only the BDI-II block
+  is a coherent scale, rest excluded as heterogeneous single-question items).
+- `lu_2017_*` (3 tables: phq9, gad7, pss10 — Chinese university students).
+  **Notable recovery**: the article has 2 SI files; automated triage only
+  found S1 (retest subsample, N=129) and flagged it `good` on that basis.
+  Manual review found S2 (main sample, N=1296) and confirmed via exact-set
+  overlap that all 129 S1 ids are a subset of S2's — a genuine 2-wave
+  design, not a duplicate/separate dataset. Combined into `wave` 1
+  (main)/2 (retest), recovering 10x the participants the triage flag alone
+  would have suggested. One data-entry error (-1 on a 0-4 scale item)
+  caught and dropped.
+- `biblio_plos_batch1.csv` now 34 rows; `irw_output/` now 34 files — counts
+  cross-checked and match. All new DOIs re-checked against a freshly-pulled
+  dictionary (2273 rows), 0 duplicates.
+- Two of the 5 items rechecked against source data mid-session, as a spot
+  QC pass at the user's request: `hui_2024_who5`'s `resp=0` values (1-12
+  occurrences per item, all 5 items) confirmed genuine — WHO-5's own scale
+  is 0-5, unlike the earlier jiang/lu cases where a lone out-of-range value
+  was a data-entry error.
+- Remaining: ~17 more `good` candidates + all 107 `worth_retrying` still to
+  review by hand.
+
+**Closed out (2026-07-26)**: ben-domingue confirmed all 34 tables from this
+first pass (the initial 7 + the following 27) are uploaded to Redivis and
+their biblio rows pasted into the dictionary sheet. `biblio_plos_batch1.csv`,
+`biblio_plos_batch1_remaining27.csv` (the 27-row split-off prepared for this
+paste), and all 34 `irw_output/*.csv` files deleted from the repo — the 27
+files had already vanished from disk by the time of cleanup, consistent with
+this being a Dropbox-synced folder (see `TODO.md`'s standing note) rather
+than anything left to actually delete. The 9 `data/*.py` scripts remain in
+place and are re-run to regenerate any of these tables if ever needed. This
+closes out the first pass of the PLOS ONE pilot end-to-end — 15 `good`
+candidates processed, 34 tables. ~17 more `good` candidates and all 107
+`worth_retrying` candidates remain open (tracked in `TODO.md`), along with
+`human_review_plos_batch1.csv` (184 rows, not yet pasted).
+
+**human_review_plos_batch1.csv closed out (2026-07-26)**: the file had
+disappeared from disk (same Dropbox-sync pattern noted above) by the time
+it was needed for a DOI spot-check; regenerated deterministically from
+`plos_full_retriage.csv` (same 184 rows, same order — verified the
+regenerated last row's DOI, `10.1371/journal.pone.0273327`, against what
+ben-domingue had on hand before it was pasted). ben-domingue confirmed all
+184 rows pasted into the "Human eye" sheet; file deleted from the repo.
+
+**Second pass on `good` candidates (2026-07-26)**: 5 more processed (9
+tables) → `biblio_plos_batch2.csv`:
+- `zhu_2024_pyd` — **largest single table in the pilot**: 41-item Positive
+  Youth Development Scale, 2 waves, N=4060 (284,194 rows). Raw file also
+  had B1-B3/SB1-B3 columns confirmed to be IRT theta-scores rather than
+  raw items (each takes exactly 7 values evenly spaced by 5/6 -- the
+  signature of a theta-transform on a 3-item raw-score table), excluded.
+- `boni_2018_mbi_ss` — MBI-Student Survey, 15 items, N=270 (of 281; 99 used
+  as a consistent missing sentinel).
+- `bang_2023_*` (5 tables: health, depression, anxiety, self_esteem,
+  parenting_stress) — quasi-experimental wellness program, N=37, confirmed
+  scale groupings via the raw file's own "Data dictionary" sheet.
+- `luu_2024_stai6` — STAI-6, N=359, text-coded responses parsed.
+
+Also reviewed and **skipped** 4 more `good`-flagged candidates, all
+confirmed to have no raw item-level data at all despite passing the
+automated triage:
+- pone.0246894 ("Network study... unusualness") — 6 columns, all subscale
+  SUMS (already logged in the first pass).
+- pone.0258752 (cognition-targeted exercise) — entirely composite outcome
+  scores at 3 timepoints × 2 groups × 4 scales; no item columns anywhere.
+- pone.0199118 (mobile depression self-rating) — single sheet of algorithm
+  scores/cutoffs/PHQ9 total; other 2 sheets in the workbook are empty.
+- pone.0253779 (altered states) — Tellegen Absorption + NEO-FFI-2 factor
+  TOTALS only, no raw items.
+- pone.0238022 (spatial working memory) — S1 has real per-condition
+  performance data but only 14 unique subjects (112 = 14 subj × 8
+  conditions, not 112 participants as the triage's `n_participants`
+  implied); S2 is fMRI ROI activation data, out of scope. Judged too small
+  (N=14) to be worth the schema-fit work, deferred rather than processed.
+
+**Good list closed out (2026-07-26)**: reviewed all 6 remaining small
+candidates.
+- `makowska_2023_*` (2 tables: pss4, pdts) — Digital Transformation Stress
+  Scale paper. Article has 2 SI files (S1 N=229, S2 N=558); used S2, the
+  larger sample. Polish text-coded responses parsed.
+- `alkouri_2025_*` (2 tables: icu_stressors 29 items, coping 19 items) —
+  **another triage miscount**: flagged `n_items=1`, actually has 2 real
+  multi-item scales the automated melt entirely missed. Raw file also had
+  `Name`/`Email` columns (real PII — Email 127/127 non-null) dropped
+  entirely; item column names were full sentences, mapped to
+  `item_01..item_NN` with the mapping preserved as ordered lists in the
+  script. "Barely"/"Rarely" used interchangeably as the 2nd-lowest
+  frequency category across different items (verified never both within
+  one item) and mapped to the same value.
+- pone.0279255 (school value-added scores) — **skipped**: confirmed
+  school-level aggregate rankings, `id` would be a school not a person,
+  not item-response data at all.
+- pone.0275045 (patient feedback) — **skipped**: confirmed a systematic-
+  review study-coding table (methodological metadata about other papers),
+  not survey responses from participants.
+- pone.0254922 (surgical resident QI, N=14 after removing an embedded
+  Qualtrics question-text row that the automated read had counted as a
+  data row) and pone.0147008 (couples synchrony, N=10) — inspected (both
+  structurally valid: 0254922 has real Q7/Q1 11+10-item scales with
+  standard 4-point response formats) but **not processed**, per
+  ben-domingue: too small to be worth it.
+
+All 32 originally-flagged `good` candidates have now been reviewed by
+hand. Final count: **21 candidates processed → 46 tables**, **11 skipped**
+(confirmed aggregate-only, not item-response data, or too small: PANAS/
+social-functioning composite, dietician heterogeneous survey, "network
+study" unusualness composites, cognition-targeted-exercise composites,
+mobile-depression algorithm scores, altered-states composites, spatial-WM
+N=14 fMRI companion, school value-added rankings, patient-feedback
+systematic-review coding table, surgical-resident QI N=14, couples
+synchrony N=10).
+
+**`good` list closed out end-to-end (2026-07-26)**: ben-domingue confirmed
+the remaining 12 tables (`biblio_plos_batch2.csv`: zhu_2024_pyd,
+boni_2018_mbi_ss, bang_2023 ×5, luu_2024_stai6, makowska_2023 ×2,
+alkouri_2025 ×2) uploaded to Redivis and pasted into the dictionary sheet,
+joining the first 34 closed out earlier. `biblio_plos_batch2.csv` and all
+12 `irw_output/*.csv` files had already disappeared from disk by the time
+of cleanup (same Dropbox-sync pattern noted in `TODO.md` — nothing left to
+actually delete). The full `good` list — all 32 candidates, 46 tables from
+21 of them — is now fully processed and closed out. Remaining open item:
+all 107 `worth_retrying` candidates.
+
+## `worth_retrying` pass, first batch (2026-07-26)
+
+At ben-domingue's direction, filtered the 107 `worth_retrying` candidates
+to N≥100 (81 remain) before starting hand review — the sub-100 tail is
+deprioritized, not abandoned (still in `plos_full_retriage.csv`).
+
+7 candidates reviewed, 5 processed → 14 tables (`biblio_plos_batch3.csv`):
+- `wurm_2016_*` (hbi 40 items, mdi 10 items) — German physicians, N=5897.
+  Retriage flag was a low-confidence id mapping; id was actually fine.
+- `ye_2025_*` (3 tables, 9/10/13 items) — Chinese university students,
+  N=4513. Retriage flag was dup_id_item; confirmed the 124 duplicated
+  `index` rows were exact full-row duplicates (double-submitted survey),
+  deduplicated. Instrument identity for each Q-block not confirmed against
+  the full paper text — labeled by source question number.
+- `dopmeijer_2022_*` (4 tables: sense_belonging, ubos, loneliness,
+  performance_pressure) — Dutch students, N=3141. No id column exists in
+  the raw file at all; retriage's dup_id_item flag came from a heuristic
+  guess on the wrong column. Row index used, no actual duplication.
+- `leon_guereno_2020_*` (breq 23 items, resilience 10 items) — recreational
+  runners, N=1850.
+- `roelen_2020_*` (k6 6 items, rses 10 items, dietary_diversity 17 items)
+  — rural Haiti, N=1381. Item text (household survey has ~240 opaquely-
+  coded columns) resolved via Stata variable labels (pyreadstat), not
+  guessed — found the paper's actual focal instrument (RSES) this way.
+
+2 skipped: pone.0202750 (equine ethogram/behavioral-coding data, doesn't
+fit the item-response schema — the "7357 participants" the retriage
+reported was a red herring from a repeated-observation coding file, not
+real N); pone.0150312 (all columns are DASS/wellbeing/social-support
+composite TOTALS, no raw items).
+
+Remaining: 74 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued (2026-07-27)
+
+10 more candidates reviewed, 7 processed → 21 more tables (35 total in
+`biblio_plos_batch3.csv`):
+- `pranckeviciene_2022_*` (phq9, gad7) — Lithuanian students, N=1358.
+  `phone` column (real PII, 1358/1358 non-null) dropped.
+- `contreras_valdez_2022_*` (edeq, bsq, rses) — Mexican general
+  population, 2 studies pooled (id unique only within-study, composite
+  key used). Two different EDE-Q missing-sentinel codes (9 vs 99)
+  resolved via the raw file's own "Keys" codebook sheet, not guessed.
+- `buzgova_2023_*` (qol, rses, soc, lsita, gds, gai — 6 scales, 83 items)
+  — Czech elders, largest multi-scale find in this pass. Raw id column
+  fails uniqueness with no wave/date column to explain it; row index used
+  per the standard's non-unique-id guidance rather than assuming a
+  longitudinal structure without evidence.
+- `duboz_2021_*` (swls, pss10) — Senegal, 2 locations pooled; 7 exact
+  full-row duplicate pairs within Dakar deduplicated.
+- `cormier_2024_*` (personality, pss4, phq4, cognitive_decline) — hearing
+  loss study; Qualtrics export with 2 extra header rows (question text +
+  ImportId JSON) that the automated triage's plain read didn't skip.
+  SC1-12 columns are per-instrument TOTALS (row-1 label is literally the
+  instrument name), excluded.
+- `jutte_2024_*` (loneliness ×2 waves, personality) — COVID-era panel;
+  wave already explicit in the raw file's own `_w1`/`_w2` suffixes.
+- `safiye_2023_*` (mbi, rfq) — teachers; RFQc/RFQu per-item transformed
+  columns (used to derive 2 subscale totals) correctly recognized as
+  redundant with the raw RFQ items, not double-counted.
+
+3 skipped: pone.0233831 (SCL-90/resilience/social-support -- all subscale
+SUM/mean columns, no raw items); pone.0304549 (PHQ9 column is a binary
+clinical-cutoff flag, not items or even a total); pone.0307744 (all
+columns are single summary/behavioral measures, e.g. minutes of physical
+activity per week -- no raw items).
+
+Remaining: 64 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued further (2026-07-27)
+
+4 more candidates reviewed, 3 processed → 10 more tables (45 total in
+`biblio_plos_batch3.csv`):
+- `teshome_2021_pss10` — Ethiopian healthcare workers, N=798.
+- `bitew_2020_*` (anxiety, self_efficacy, osss3, phq9, lte — 5 scales, 39
+  items) — Ethiopian students. Two text-coded scales use abbreviated/
+  nonstandard category labels; ordinal direction inferred from semantics,
+  flagged as such rather than asserted with false confidence.
+- `hellstrom_2019_*` (psqi, isi, sci, pss14 — 4 scales, 43 items) —
+  Swedish students. The source paper is itself a psychometric methods
+  paper about the Sleep Condition Indicator's item-response properties.
+  Each PSQI/ISI/SCI item had genuinely different response-category
+  wording (verified per-column, not assumed uniform) -- built item-
+  specific value maps rather than one shared map. Excluded 4 Pittsburgh
+  single items that turned out to be clock-time values, not ordinal
+  responses.
+
+1 skipped: pone.0140621 (Brazilian birth-cohort growth study; only
+derived depression classification/sum columns present, no raw items, and
+`id` unresolvable -- no per-person identifier at all, cryptic Portuguese
+column names throughout).
+
+Remaining: 60 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued further still (2026-07-27)
+
+6 more candidates reviewed, 3 processed → 8 more tables (53 total in
+`biblio_plos_batch3.csv`):
+- `cinar_tanriverdi_2023_*` (pmss 13 items, gad7 7 items) — Turkish
+  medical students. Main sample (S1, N=572) had SPSS multiple-imputation
+  artifacts (28 rows with near-integer jittered floats identically across
+  every item, e.g. 1.988282041) -- dropped per "remove imputed values",
+  not rounded to the nearest integer. S2 (N=70) confirmed a genuine
+  retest subsample via 69/70 id overlap, combined as wave 1/2.
+- `van_der_donk_2019_bdi` — full 21-item BDI, depressed diabetes patients,
+  Netherlands, N=566.
+- `hoorani_2022_*` (child_help, ps, sp, epreas, nps — 5 scales) — Young
+  Lives India adolescent panel, 2 waves. The Excel SI file (S1) had these
+  same items with source-level string truncation (values like "Strongly"
+  with no agree/disagree indication -- genuinely ambiguous, not a display
+  artifact); the Stata companion (S2) had the full untruncated strings
+  and was used instead.
+
+3 skipped: pone.0212914 (SF-36/PSQI/HADS -- all domain-level and total
+scores, no raw items); pone.0292302 (K6/FCV19/STAI -- all totals, no raw
+items; S2 turned out to be an unrelated COVID case-count time series);
+pone.0271374's item structure recovered via S2 as noted above (not a
+skip, listed for context).
+
+Remaining: 55 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued yet further (2026-07-27)
+
+5 more candidates reviewed, 2 processed → 4 more tables (57 total in
+`biblio_plos_batch3.csv`):
+- `jeon_2019_*` (cbi 19 items, cesd10 10 items) — Korean homecare
+  workers, N=464.
+- `bakker_2020_*` (pss10, rses) — Ethiopian midwifery students, N=403. A
+  third 10-item block about the paper's actual focal topic (mistreatment
+  during childbirth) takes values 1-10 with a categorical-looking
+  distribution (likely provider/location type) rather than ordinal
+  severity -- not included, flagged as uncertain rather than guessed.
+
+3 skipped: pone.0200609 (each column is a different construct/rater-type
+score -- cognitive/math-pretest/math-interest/etc as judged by student
+vs. teacher -- not repeated items of one scale, doesn't fit the
+id×item×resp schema); pone.0321373 (all Big-5/anxiety/depression totals,
+no raw items); pone.0239002 (aHSCS/BRS/RSES/GSES/DSRS all present only as
+aggregate a/b/c score variants, no raw items).
+
+Remaining: 50 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued (2026-07-27, cont'd)
+
+3 more candidates reviewed, 2 processed → 4 more tables (61 total in
+`biblio_plos_batch3.csv`):
+- `tran_2023_*` (gad7, phq9, gi_symptoms) — Vietnamese medical students,
+  N=400. One duplicate id (data-entry error, not a real wave) disambiguated
+  rather than dropping either respondent's data.
+- `weida_2020_financial_security` — 10-item scale, N=371. Confirmed f1-f4
+  are continuous IRT factor scores (not raw items) via their hundreds of
+  distinct non-integer values, not assumed.
+
+1 skipped: pone.0302350 (heterogeneous demographic/clinical survey, no
+multi-item scale present at all -- "Personality traits(high)" and
+"Adherence score" are each single columns, not scales).
+
+Remaining: 47 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued (2026-07-27, cont'd further)
+
+2 more candidates reviewed, 2 processed → 3 more tables (64 total in
+`biblio_plos_batch3.csv`):
+- `rahman_2022_phq9` — Bangladeshi students, no reliable id column at all
+  (Timestamp only covers half the rows); row index recovers the full
+  N=677 instead of the 333 the triage's partial id guess implied.
+- `park_2024_*` (ageism 18 items, mbi 22 items) — Korean nurses, N=331.
+  Same reverse-coded-twin-column pattern as wurm_2016 earlier in this
+  pass (Korean "역산" suffix instead of German "umgepo").
+
+1 skipped: pone.0255392 -- retracted paper (title literally begins
+"RETRACTED:"), skipped outright regardless of content.
+
+Remaining: 45 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued (2026-07-27, cont'd yet more)
+
+5 more candidates reviewed, 2 processed → 4 more tables (68 total in
+`biblio_plos_batch3.csv`):
+- `koirala_2024_*` (pss10, brief_cope 28 items) — Nepali nursing students,
+  N=317. AQ/BQ/CQ blocks turned out to be demographics (age/income/
+  institution), not items, once actually inspected.
+- `menaldi_2023_*` (mbi 22 items, brief_cope 28 items) — Indonesian
+  resident physicians, N=388. Raw sheet interleaves a raw-text response
+  column with a numerically-coded column per item; selected the coded
+  columns via regex on column name rather than position.
+
+3 skipped: pone.0171186 (all single aggregate scores -- FIQ/BFI/PCS/MCS/
+BDI/STAI/etc totals, no id column, no raw items); pone.0224322 (PHQ9_T1/
+T2, Stress, Support are totals; GH/PF/RF/... are MOS-HIV domain-level
+scores, not raw items); pone.0262638 (PHQ items split across
+inconsistent multi-part gating/frequency sub-questions -- e.g. PHQ3 has
+PHQ31/PHQ311/PHQ322 -- that would need nontrivial reconstruction logic,
+and no reliable person-ID column exists either; too complex/risky for
+the likely payoff, deferred rather than guessed at).
+
+Remaining: 41 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass — dudasova_2021 (2026-07-27)
+
+1 candidate, 10 tables (78 total in `biblio_plos_batch3.csv`) —
+**largest single multi-scale find in the worth_retrying pass**:
+`dudasova_2021_*` (cpc12, engagement, job_satisfaction, swls, hope,
+social_support, gratitude, positive_affect, performance — 9 scales, 88
+items, N=282; plus cpc12_study3, a second independent N=202 sample of
+just the focal CPC-12 instrument under a different naming convention).
+Article has 4 SI files, one per validation sub-study with independent
+samples; only S1 (richest) and S3 (CPC-12 alone) were used -- S2 (sparse
+mixed single-item subset) and S4 (CPC-12's 4 subfacets as separate
+blocks, needing nontrivial remapping to align with S1's combined naming)
+were not reconciled for this pass, noted as a possible future addition
+rather than silently dropped.
+
+Remaining: 40 more `worth_retrying` candidates with N≥100.
+
+## `worth_retrying` pass, continued (2026-07-27, cont'd further still)
+
+2 more candidates reviewed, 1 processed → 4 more tables (82 total in
+`biblio_plos_batch3.csv`):
+- `jordan_2020_*` (burnout, pss10, resilience, mindfulness — 4 scales, 38
+  items) — first-year medical students, N=539. Retriage flag was only
+  n_items=2; real content is a Qualtrics export with 3 header rows above
+  the data (ImportId JSON, question text, short code) -- header=2
+  recovers the real scales and the full N=539, not the 282 the triage's
+  partial read implied.
+
+1 skipped: pone.0280338 (depression/GAD present only as single derived
+binary flags, no raw items).
+
+Remaining: 39 more `worth_retrying` candidates with N≥100.
+
+**QC spot-check pass (2026-07-27)**, at ben-domingue's request, on 9
+specific `resp` values across already-processed tables. 5 confirmed
+legitimate (bakker_2020_pss10 resp=0; buzgova_2023_lsita resp=6;
+buzgova_2023_rses resp=0, a known alternate RSES 0-3 coding;
+contreras_valdez_2022_edeq's 0-50 range, expected from its two item
+types; jeon_2019_cesd10 resp=3). **4 real data-entry errors caught and
+fixed**, all isolated to one item (or absent everywhere else in the same
+scale) rather than recurring proportionally across items — the diagnostic
+that told real values from errors here:
+- `bitew_2020_lte`: stray resp=2 (1 of 7908; scale is otherwise strictly
+  binary) — dropped, now 0-1.
+- `bitew_2020_osss3`: resp=0 (2-4 per item vs. 87-287 for genuine
+  categories; standard OSSS-3 scoring has no 0) — dropped, now 1-5.
+- `leon_guereno_2020_resilience`: resp=0 isolated to RS7 only, absent
+  from the other 9 items — dropped, now 1-5.
+- `park_2024_ageism`: stray resp=5 on item a18 only (every other item
+  caps at 4) — dropped, now 1-4.
+
+This "isolated-to-one-item vs. consistent-across-items" diagnostic was
+formalized into `datastandard.md`'s "Data entry errors at known values"
+section and its QC checklist item 4, so future scripts (in this pipeline
+or `data/`) apply it up front rather than needing a manual spot-check
+after the fact.
+
+**Upload note**: `biblio_plos_batch3.csv` (82 rows through this point)
+was pasted into the dictionary sheet by ben-domingue and the file deleted
+before this note-annotation update could be applied to the 4 corrected
+rows -- the actual dictionary entries (DOI/N/description) are unaffected
+by these fixes, only the underlying `irw_output/*.csv` content changed,
+so nothing needs re-pasting. The 4 corrected CSVs (and the other 78) were
+still present in `irw_output/` as of this fix, ahead of the Redivis
+upload -- confirm the corrected versions (not any earlier download) are
+what gets uploaded.
+
+**Closed out (2026-07-27)**: ben-domingue confirmed all 82 tables from
+this batch (`biblio_plos_batch3.csv`, including the 4 QC-corrected ones)
+moved for Redivis upload; `irw_output/` and the biblio CSV both empty/gone
+on confirmation, consistent with upload having happened. 42 of 81
+`worth_retrying` candidates now fully closed out end-to-end (24 processed
+→ 82 tables, 18 skipped). Remaining: 39 more `worth_retrying` candidates
+with N≥100.
+
+## `worth_retrying` pass, batch 4 (2026-07-27)
+
+1 candidate, 5 tables → `biblio_plos_batch4.csv`: `rahm_2017_*` (spane,
+panas, swls, hswbs, shs) — German SPANE validation, N=498, 47 items
+total. `VP` isn't a person id (records collection mode); SPANE's 1-month
+follow-up columns exist wide on the same row and were melted into a wave
+column. SHS's mixed numeric-string/text-endpoint export handled with
+per-item maps, verified via per-item resp distribution per the newly
+formalized diagnostic (datastandard.md) before finalizing.
+
+2 more candidates, 2 tables (7 total in `biblio_plos_batch4.csv`):
+- `moore_2016_bdi` (20 of 21 BDI-II items) — N=282, no id column, row
+  index used.
+- `rinaldi_2021_mas` (61-item Mentalized Affectivity Scale, the paper's
+  focal instrument) — N=258. The per-item distribution check (freshly
+  formalized) caught 3 corrupted recoded-item columns (values up to 124
+  on an otherwise clean 1-7 scale) before they went into the output;
+  fixed by using the raw un-recoded items instead of patching around the
+  corruption, since the standard only requires within-item direction
+  consistency, not across items.
+
+3 more candidates reviewed, 2 processed → 4 more tables (11 total in
+`biblio_plos_batch4.csv`):
+- `donati_2021_cfq7` — Cognitive Fusion Questionnaire-7, clinical +
+  non-clinical Italian samples, N=365. One duplicate-code collision
+  within the clinical group disambiguated.
+- `zautra_2015_*` (caug, iri, tmms24 — 3 scales, 47 items) — pre/post
+  social-intelligence intervention, Spanish sample. Id unique only within
+  experimental/control group, composite used. A 35-item CIS block with
+  item-specific full-phrase response categories (not a uniform scale)
+  deferred rather than force-mapped.
+
+2 skipped: pone.0229591 (ASL receptive-skills deaf-education longitudinal
+growth-curve study, mostly derived scores with opaque item codes);
+pone.0174367 (real name/email PII columns present; a 9-item anxiety/
+depression screener + 8-item ESS each administered twice, but
+distinguishable only by column position with unnamed offset headers
+throughout -- too fragile for reliable extraction, deferred).
+
+1 more candidate, 1 table (12 total in `biblio_plos_batch4.csv`):
+- `gomez_2020_mpq` (114 items) — Multidimensional Personality
+  Questionnaire brief-form item pool, N=213. Retriage dup_id_item flag
+  was because the raw file has every respondent's row duplicated
+  exactly (a plain export artifact, not real repeated measures) --
+  full-row drop_duplicates fixed it. Separately, 18 of 132 M-item
+  columns had corrupted SPSS value-label metadata (nonsense labels like
+  "Company"/"Plane" instead of True/False) and were dropped rather than
+  guessed at.
+
+3 more candidates reviewed, 2 processed → 5 more tables (17 total in
+`biblio_plos_batch4.csv`): `park_2021_*` (pss10, swls, N=208) and
+`kim_2023_*` (pss10, phq9, gad7, N=202) — both clean multi-scale
+extractions, only the raw items kept out of files with many _sum/_aver/_T
+aggregate columns. 1 skipped: pone.0182845 (Pubertal Development Scale +
+Family Affluence Scale, only 7 items total, but item-specific German
+category text mixed with float/string corruption -- poor effort/value
+tradeoff for the item count).
+
+1 more candidate, 6 tables (23 total in `biblio_plos_batch4.csv`):
+- `rzeszutek_2020_wwii_*` (matgrandmother/matgrandfather/patgrandmother/
+  patgrandfather, 29 items each) + `rzeszutek_2020_swls`/`ghq28` —
+  grandchild-reported WWII trauma-history checklist (loss of parent,
+  combat, concentration/Soviet camp, ghetto, rape, hiding Jews, etc. —
+  confirmed real distinct items via SPSS variable labels), Polish young
+  adults, N=500. `lp` is a family/sibling-group id shared by 2-4
+  respondents of differing age/sex (not a per-respondent id) — row index
+  used, `lp` kept as cov_family. Each trauma item is yes/no/don't know;
+  "don't know" isn't an ordinal point between no/yes for a factual
+  historical question, so treated as missing and dropped (no=0/yes=1).
+  Per-item resp distribution checked clean across all 6 tables (per the
+  standing diagnostic) before finalizing.
+
+5 more candidates reviewed, 1 processed → 11 more tables (34 total in
+`biblio_plos_batch4.csv`):
+- Skipped 4 as aggregate-only, no raw items: pone.0195239 (autistic
+  traits/social anxiety — both SI files are per-condition accuracy
+  composites and SPAI/AQ totals, no trial- or item-level data);
+  pone.0156939 (systematic review — SI is a study-characteristics results
+  database, not respondent data); pone.0206555 (video game expertise —
+  SI has only derived task scores: MMR, Grit total, span-task totals);
+  pone.0256983 (sleep deprivation/emotion regulation — 8 SI files are all
+  pre-aggregated by condition/bout, e.g. Subject×Valence×Session means,
+  not raw trials or items despite trial-based task design).
+- Processed — `wolf_2017_*` (posaff/vitality/anxiety × Study 1, plus
+  Study 2's pre/post + video_liking + nature_connect — 11 tables, 76
+  items total) — biodiversity-exposure well-being study, N=140 (Study 1)
+  / N=264 (Study 2). Every item across both studies uses one uniform
+  5-point format (bare numeric string or "LABEL (N)" endpoint text) —
+  a single regex handled all 11 tables. Study 2's pre/post scales use
+  different, mostly non-overlapping item wording per the SPSS labels
+  (confirmed before assuming a wave structure applied), so kept as
+  separate tables rather than melted into a shared wave column.
+
+1 more candidate, 1 table (35 total in `biblio_plos_batch4.csv`):
+- `garciabatista_2021_erq` — Emotional Regulation Questionnaire (10
+  items), COVID-19 health workers, N=187. The PSS-14 columns the paper's
+  title implies (perceived stress) are entirely empty in the export (0
+  non-null across all 14, confirmed not a read/parse issue) — only ERQ
+  usable. No reliable id column (`TimeStamp` had only 9 unique values
+  across 187 rows); row index used. Real PII (`Email` column) dropped
+  entirely, not kept even as a covariate.
+
+2 more candidates reviewed, 1 processed → 3 more tables (38 total in
+`biblio_plos_batch4.csv`):
+- Skipped: pone.0271719 (BDNF/CRH vitiligo genetics — PHQ-15/GAD-7/PHQ-9
+  present only as single total-score columns, no raw items).
+- Processed — `nteveros_2021_*` (mbi, who5, psqi_disturbance) — Greek
+  medical-student burnout study, N=182, 30 items total. MBI (15i) and
+  PSQI component-5 (10i) both exported as Greek-text frequency
+  categories, mapped to ordinal codes after confirming each scale's full
+  item set shares one identical category string set. WHO-5 (5i) already
+  numeric. Left out: PSQI's other single-item components (heterogeneous
+  time-of-day/duration/differently-worded formats) and an unlabeled
+  c1-c7 block whose construct isn't identified anywhere in the source or
+  paper.
+
+1 more candidate, 3 tables (41 total in `biblio_plos_batch4.csv`):
+- `makransky_2016_*` (motivation, self_efficacy, mcq_correct) — virtual
+  lab-simulation training study, N=189. Genuine pre/post design with the
+  *same* items asked twice (unlike wolf_2017 above) — used wave=1/2
+  rather than separate tables. MCQ items scored correct(1)/incorrect(0);
+  raw MCQ answer-option letters not processed (would need the item key).
+
+4 more candidates reviewed, 1 processed → 1 more table (42 total in
+`biblio_plos_batch4.csv`):
+- Skipped 3 as aggregate-only, no raw items: pone.0200129 (perimenopausal
+  quality-of-life prediction — every column is a subscale/domain score);
+  pone.0212482 (children's executive-function physical-activity breaks —
+  all columns are derived t-values/conflict-scores/indices);
+  pone.0200609 (already logged as skipped earlier in this pass).
+- Processed — `kolcu_2025_mmas` — medication-adherence questionnaire (6
+  items), pre/post LNG-IUD insertion, N=143. `Case` had one duplicate
+  value; row index used as id. SF-36 (subscale scores only) and Beck
+  Depression (total only) present in the same file but have no raw items,
+  excluded.
+
+2 more candidates reviewed, 1 processed → 4 more tables (46 total in
+`biblio_plos_batch4.csv`):
+- Skipped: pone.0199605 (retirement time-use study — every column is a
+  DASS/Rosenberg/SWEMWBS/time-use total, no raw items).
+- Processed — `extremera_2016_*` (shs, swls, sbq, ei) — unemployment/
+  emotional-intelligence/suicide-risk study, N≈1123, 29 items total.
+  Important correction to the original triage: `cuestionario` (what the
+  retriage treated as the id, giving a "150 participants, ~7.5x
+  duplication ratio" worth_retrying flag) is NOT a person identifier —
+  spot-checking rows sharing a `cuestionario` value showed different
+  ages and sexes, i.e. different people. It's a batch/version code, not
+  a repeated-measures key, and there's no real wave/longitudinal
+  structure at all — this is a cross-sectional sample of ~1123
+  respondents, not ~150. Row index used as id. Per-item resp-distribution
+  QC caught 2 isolated resp=0 values in SWLS (dropped) but confirmed
+  SBQ item 4's legitimate 0-6 range (703/961 at 0 — the standard SBQ-R
+  format for that item, not an error) before keeping it.
+
+2 more candidates reviewed, 1 processed → 5 more tables (51 total in
+`biblio_plos_batch4.csv`):
+- Skipped: pone.0338126 (asthma/depression predictors — ACT/AQLQ/PHQ-9
+  present only as total-score columns, no raw items).
+- Processed — `chinvararak_2021_*` (bdi, phq15, ylseq, ssq, ecr) — Thai
+  depressed-patient attachment/depression study, N=180, 113 items total.
+  Three scales exported as Thai text categories (PHQ-15 3-point severity,
+  YLSEQ binary yes/no, SSQ 5-point) each mapped to ordinal codes after
+  confirming the full category set was identical across every item in
+  that scale; BDI and ECR already numeric.
+
+2 more candidates reviewed, 1 processed → 1 more table (52 total in
+`biblio_plos_batch4.csv`):
+- Skipped: pone.0223482 (MS social-cognitive treatment — every column
+  across 4 timepoints is an MSSES/UCL/MSQOL54/anxiety/depression/IPA
+  subscale total, no raw items).
+- Processed — `ojelabi_2019_sf36` — SF-36 raw items (36 items), sickle
+  cell disease patients in Nigeria, N=200. No id column at all; row
+  index used. A companion covariate file (PHQ9/GAD7/SGH totals, same 200
+  row count) was deliberately not merged in — no confirmed shared key or
+  row-order alignment between the two files, and guessing risked
+  silently pairing the wrong patients' records.
+
+1 more candidate, 10 tables (62 total in `biblio_plos_batch4.csv`):
+- `wang_2016_*` (study1_power/authliving/authalien/authexternal/se/
+  relationship + study3_se/power/auth/social_desirability) —
+  authenticity/power/self-esteem/relationship-satisfaction study, 2 of 3
+  sub-studies processed (Study 1 N=104 English, Study 3 N=210 Chinese;
+  Study 2's ambiguous Q3_1-21/po item blocks with no codebook match
+  skipped). Study 3 exported as 5-point Chinese agree/disagree text,
+  mapped after confirming se/power/auth share one identical category
+  set; its 5-item social-desirability scale had per-item SPSS
+  value-label corruption (only {0.0, one Chinese label} per item instead
+  of a clean binary pair) — treated as 0/1 by relative state, same
+  pattern as gomez_2020_mpq's corrupted labels earlier in this batch.
+
+Remaining: ~13 more `worth_retrying` candidates with N≥100 (pool
+recounted 2026-07-27 against actual BATCH_LOG skip decisions, not just
+processed scripts — several earlier skips weren't being excluded from
+the "remaining" count).

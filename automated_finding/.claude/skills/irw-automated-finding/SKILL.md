@@ -1,6 +1,6 @@
 ---
 name: irw-automated-finding
-description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_process_queue.py) or its TODO.md/BATCH_LOG.md.
+description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_discover_plos.py, irw_process_queue.py) or its TODO.md/BATCH_LOG.md. Also applies to searching individual open-access journals (e.g. PLOS ONE) directly, as opposed to data repositories.
 ---
 
 # IRW Automated Finding Pipeline
@@ -30,6 +30,9 @@ the triage steps. If missing and `pip install` refuses with
 `pip3 install --user --break-system-packages pandas openpyxl pyreadstat pyreadr`
 is a reasonable, reversible fix (installs to the user's own site-packages,
 no sudo, no system package changes) rather than fighting with a venv.
+`irw_discover_plos.py` additionally needs `xlrd` (for old-style `.xls`
+Supporting Information files — `openpyxl` only handles `.xlsx`); install the
+same way if missing.
 
 ## Before doing anything
 
@@ -214,6 +217,76 @@ License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
 There is no `cleaned_index.csv` to update (eliminated 2026-06-24) —
 `BATCH_LOG.md` is the record of what's been cleaned, uploaded, and
 biblio-entered per batch.
+
+## Alternate discovery source: single-journal search (PLOS ONE)
+
+`irw_discover_plos.py` is a different discovery mode from Steps 1-4 above,
+not a variant of them — it searches a single open-access *journal* rather
+than a data *repository*. Use it when the user asks to search a journal
+directly, or references PLOS ONE / Supporting Information files.
+
+**Why this exists**: `irw_discover_updated.py`'s connectors all query
+repositories (Dataverse/Zenodo/OSF/Dryad/Figshare/DataCite/...) for
+dataset-shaped records. PLOS ONE papers instead commonly attach their raw
+data directly to the article as a "Supporting Information" file — that data
+is structurally invisible to every repo-based connector, since it was never
+deposited in any of those systems. Confirmed in the 2026-07-26 pilot (see
+`BATCH_LOG.md`): 32 `good` + 107 `worth_retrying` candidates from 22 terms
+against one journal, none overlapping the IRW dictionary.
+
+```bash
+python irw_discover_plos.py "PHQ-9" "self-esteem scale" --out plos_triage.csv
+python irw_discover_plos.py "term" --limit 10 --out plos_test.csv   # sanity check first
+python irw_discover_plos.py "term1" "term2" --out plos_triage.csv --resume   # after an interrupted run
+```
+
+- Two phases in one script: a cheap Solr search against `api.plos.org`
+  (filtered to PLOS ONE's eissn `1932-6203`, not the journal name string —
+  PLOS's own metadata inconsistently capitalizes "PLoS ONE" vs "PLOS ONE"),
+  then per-candidate it fetches the article page, reads the Data
+  Availability statement, and pulls any Supporting Information file with a
+  tabular-looking declared format (CSV/XLSX/XLS/SAV/DTA). Same
+  `triage_dataset()`/`load_table()` gate the regular pipeline uses.
+- Also records any external-repo DOI mentioned in the Data Availability
+  statement (`external_link` column), including bare unlinked DOIs like
+  `doi: 10.5061/dryad.xxxx` — a lead worth chasing through the regular
+  repo-based pipeline instead, not something this script re-downloads.
+- **Expect roughly a 1% `good` rate and another ~2-4% recoverable via
+  `irw_retriage_ha.py`** on the raw candidate pool (same retriage script,
+  no changes needed — it works on this output unmodified). ~77% land in
+  `no_usable_file` (data withheld, or the paper's data is only in an
+  external repo already reachable via the regular pipeline).
+- **Crash isolation is built in**: `pyreadstat`'s `.sav` parser can segfault
+  outright on a corrupt file — a C-level crash that bypasses Python's
+  try/except, which took down an entire unattended run before this was
+  fixed (see `BATCH_LOG.md`). Each candidate now runs in its own worker
+  process; a crash or >90s hang is recorded as a `crashed`/`timeout` row and
+  the batch continues. Don't remove this to "simplify" the script.
+- **Multi-term runs are slow** (single-domain rate limit against
+  `journals.plos.org`, one article fetch each) — expect on the order of
+  hours for a few thousand candidates. Launch in the background.
+- **A `good` flag here needs a human glance more than usual.** The article
+  often has multiple Supporting Information files, and the script only
+  inspects the first tabular one per candidate — that can be a codebook or
+  derived subscale-totals file rather than the raw item data (caught
+  exactly this in the pilot: an MBI burnout study's first SI file held only
+  aggregate subscale sums; the real 22-item data was in a different SI
+  attachment). Before writing a processing script, fetch the article page
+  and check `extract_si_files()`'s full list, not just the file the triage
+  row used.
+- **Generalizing to other journals**: PLOS's other journals (PLOS Medicine,
+  PLOS Global Public Health, PLOS Mental Health, PLOS Digital Health) share
+  the same `api.plos.org` index — swapping the eissn filter (or dropping it
+  to search all PLOS journals at once) is close to zero new code. BMC
+  journals (BMC Psychology, BMC Psychiatry, ...) were spot-checked and are
+  also server-rendered with a scrapable "Data availability" +
+  "Additional file N" structure, but need a new per-site parser. Frontiers
+  was spot-checked and is a client-rendered JS SPA — not scrapable the same
+  way; would need a headless browser or their internal API. Don't build a
+  new-journal connector speculatively — numFound-check the term yield via
+  `api.crossref.org` first (publisher-agnostic, works for any journal by
+  `container-title` + bibliographic query), same as this pilot did before
+  committing to a full run.
 
 ## After finishing a batch
 

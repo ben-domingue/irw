@@ -258,6 +258,13 @@ long.loc[long["resp"] == 0, "resp"] = float("nan")
 long = long.dropna(subset=["resp"]).reset_index(drop=True)
 ```
 
+**How to tell a data-entry error from a real scale point you didn't expect:** check the value's distribution *across every item in the scale*, not just its presence in the overall range. A genuine response category recurs proportionally across most or all items (e.g. a 6th point on a 1–6 scale showing up a dozen-ish times on every item). A data-entry error is typically isolated — it appears on only one item, or only a handful of times total against hundreds of legitimate responses, or both. Concretely:
+```python
+for item in item_cols:
+    print(item, long.loc[long["item"] == item, "resp"].value_counts().sort_index())
+```
+If a value shows up on essentially one item and nowhere else in the scale, it's an error — drop it, don't keep it as if it were a valid response. This applies even when a value would be perfectly plausible as a real anchor (e.g. `0` on a scale otherwise coded 1–5, or a scale's own nominal top category) — plausibility alone isn't confirmation; cross-item consistency is. Do this check per scale before finalizing `resp`, not just once on the merged min/max.
+
 ### Excel files with header rows above the column names
 Some spreadsheets have banner rows or merged cells above the actual column headers. Use `header=None` when reading, then slice:
 ```python
@@ -290,7 +297,7 @@ For Figshare, Dataverse, OSF, and Zenodo, iterate over the file list returned by
 1. **`id` column** — unique per person (no NaN, no accidental item-level IDs). Confirm with `nunique() == len(df)` on the pre-merge frame, not just an eyeball check — a non-unique id used in a merge/join silently multiplies rows instead of erroring.
 2. **No PII** — no real names, emails, IP/GPS, birthdates, or national ID numbers in `id` or any `cov_*` column.
 3. **`item` column** — no covariate columns accidentally melted in as items (check for names like `Age`, `Gender`, `Sex`, `Education`).
-4. **`resp` range** — matches the documented scale (e.g., 1–4 for a Likert scale). Unexpected values (0s, 99s, 999s) indicate unfiltered sentinels.
+4. **`resp` range** — matches the documented scale (e.g., 1–4 for a Likert scale). Unexpected values (0s, 99s, 999s) indicate unfiltered sentinels. Check the per-item distribution (`value_counts()` grouped by item), not just the merged min/max — a value isolated to one item, or appearing only a handful of times against hundreds of legitimate responses, is a data-entry error even if it would otherwise be a plausible scale point (see "Data entry errors at known values" above).
 5. **`resp` is numeric** — no string values remaining.
 6. **One scale per file** — if item names suggest two instruments, split the file.
 7. **`resp` direction within items** — within each item, higher values must represent a consistent directional change (the scale cannot reverse mid-item). However, direction is allowed to vary across items, so reverse-scored items do not need to be recoded. What matters is that imputed values are removed and no sentinel codes remain.

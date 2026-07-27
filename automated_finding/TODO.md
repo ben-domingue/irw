@@ -3,6 +3,63 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **PLOS ONE pilot — human_review_plos_batch1.csv (184 rows)** pasted
+  into the "Human eye" sheet (confirmed 2026-07-26, ben-domingue); file
+  deleted from the repo.
+
+- [x] **PLOS ONE pilot — `good` list fully closed out** (2026-07-26,
+  ben-domingue): all 32 originally-flagged candidates hand-reviewed, 21
+  processed → 46 tables, all uploaded to Redivis and pasted into the
+  dictionary sheet (34 in `biblio_plos_batch1.csv`, 12 in
+  `biblio_plos_batch2.csv` — both files deleted, content captured in
+  `BATCH_LOG.md`). 11 skipped as confirmed aggregate-only/not-item-
+  response/too-small (surgical resident QI and couples synchrony
+  explicitly deemed too small by ben-domingue at N=14/N=10). See
+  `BATCH_LOG.md` for the full list.
+
+- [x] **PLOS ONE pilot — `biblio_plos_batch3.csv` (82 rows) closed out**
+  (confirmed 2026-07-27, ben-domingue): pasted into the dictionary sheet,
+  82 tables moved for Redivis upload (includes 4 QC-corrected ones, see
+  `BATCH_LOG.md`'s "QC spot-check pass"). See `BATCH_LOG.md`'s
+  "worth_retrying pass" entries for the full list of what's in this batch.
+
+- [ ] **PLOS ONE pilot — `biblio_plos_batch4.csv` (62 rows, growing) needs
+  pasting into the dictionary sheet**, and the corresponding
+  `irw_output/*.csv` tables need uploading to Redivis. See `BATCH_LOG.md`'s
+  "worth_retrying pass, batch 4" entries for the full list.
+
+- [ ] **PLOS ONE pilot — ~13 more `worth_retrying` candidates (N≥100)**
+  still need hand review; see `BATCH_LOG.md`'s "worth_retrying pass"
+  entries for the running processed/skipped list. Filtered from 107 to 81 at N≥100 per
+  ben-domingue's direction (2026-07-26); the sub-100 tail is
+  deprioritized, not abandoned. Candidate details are in
+  `plos_full_triage.csv` / `plos_full_retriage.csv`; delete both once this
+  is fully worked through.
+
+- [x] **PLOS ONE pilot — all 34 tables from the first pass uploaded and
+  biblio-entered** (confirmed 2026-07-26, ben-domingue): first 7
+  (muslih_2024_rses, jiang_2021_resilience, kinyanjui_2023_substance_use,
+  wilson_2022_kelpie_personality, rashid_2022_mbi, yin_2022_gad7,
+  yin_2022_values_importance) plus the remaining 27 (kraft_todd_2017 ×4,
+  song_2023 ×3, di_riso_2025 ×2, iwasa_2016 ×4, hui_2024 ×3, liu_2018 ×5,
+  uffler_2017 ×2, nabwera_2021 ×1, lu_2017 ×3) all uploaded to Redivis and
+  pasted into the dictionary sheet. `biblio_plos_batch1.csv`,
+  `biblio_plos_batch1_remaining27.csv`, and all 34 `irw_output/*.csv`
+  files deleted from the repo — content fully captured in the sheets and
+  in `BATCH_LOG.md`. This first pass of the PLOS ONE pilot is closed out
+  end-to-end.
+
+- [ ] **Note on this working directory**: `automated_finding/` lives inside
+  a Dropbox-synced folder. Twice during the 2026-07-26 PLOS session, files
+  written here (a `biblio_*.csv` append, and 7 `irw_output/*.csv` tables)
+  disappeared from disk with no git record — most likely a Dropbox sync
+  event from another device overwriting/reverting local changes mid-edit,
+  not a bug in the processing scripts themselves (all source `.py` scripts
+  in `data/` were untouched and the CSVs regenerated cleanly). If output
+  files or biblio rows look incomplete partway through a session, check
+  whether they simply need regenerating from the `data/*.py` script before
+  assuming the underlying data/logic was wrong.
+
 - [ ] **Gyurkovics/Stafford/Levita conflict-task dataset (osf.io/7vbtr)** —
   by far the strongest find from the batch-18 conflict-task search: trial-
   level Flanker + Simon + SART(go/no-go) data, N=118, fully documented,
