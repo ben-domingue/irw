@@ -51,18 +51,31 @@ from irw_batch_updated import check_license, TABULAR_EXT, polite_get
 from irw_triage_updated import load_table, triage_dataset
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact your-email)"}
-PLOS_ONE_EISSN = "1932-6203"   # stable identifier; journal name string drifts
 PLOS_SEARCH_API = "https://api.plos.org/search"
-PLOS_ARTICLE_URL = "https://journals.plos.org/plosone/article?id={doi}"
+PLOS_ARTICLE_URL = "https://journals.plos.org/{slug}/article?id={doi}"
+
+# slug (as used in journals.plos.org URLs) -> (eissn, display name). eissn is
+# the stable Solr filter (journal name strings drift, e.g. "PLoS ONE" vs
+# "PLOS ONE"); slug confirmed against a live article URL for each journal
+# (2026-07-27) rather than guessed. Deliberately not the full PLOS family --
+# see TODO.md/BATCH_LOG.md for why Biology/Genetics/Pathogens/etc. are
+# excluded (lab/genomic data, not item responses).
+JOURNALS = {
+    "plosone": ("1932-6203", "PLOS ONE"),
+    "mentalhealth": ("2837-8156", "PLOS Mental Health"),
+    "globalpublichealth": ("2767-3375", "PLOS Global Public Health"),
+}
+DEFAULT_JOURNAL = "plosone"
 
 
 # ---------------------------------------------------------------------------
 # Phase 1: discover — cheap Solr search, title/abstract/DOI only
 # ---------------------------------------------------------------------------
 
-def search_plos(query: str, max_rows: int = 300, page_size: int = 100):
+def search_plos(query: str, eissn: str, max_rows: int = 300, page_size: int = 100):
     """Yields raw PLOS search docs (dict) for a full-text query, restricted
-    to PLOS ONE. Paginates until max_rows or results are exhausted."""
+    to the journal identified by eissn. Paginates until max_rows or results
+    are exhausted."""
     start = 0
     while start < max_rows:
         try:
@@ -70,7 +83,7 @@ def search_plos(query: str, max_rows: int = 300, page_size: int = 100):
                 PLOS_SEARCH_API,
                 params={
                     "q": f'everything:"{query}"',
-                    "fq": f'eissn:"{PLOS_ONE_EISSN}" AND doc_type:full',
+                    "fq": f'eissn:"{eissn}" AND doc_type:full',
                     "fl": "id,title_display,abstract,publication_date",
                     "rows": page_size,
                     "start": start,
@@ -90,11 +103,16 @@ def search_plos(query: str, max_rows: int = 300, page_size: int = 100):
         time.sleep(0.5)
 
 
-def from_plos(query: str):
+def from_plos(query: str, journal: str = DEFAULT_JOURNAL):
     """Discovery connector, same shape as irw_discover_updated.py's from_*
     functions. Relevance filtering uses title + abstract (abstracts carry
-    construct terms that a title alone often doesn't)."""
-    for d in search_plos(query):
+    construct terms that a title alone often doesn't). `journal` is a slug
+    key into JOURNALS; encoded into the Hit's `source` field (as
+    "plos:<slug>") so process_one (run in a separate worker process) can
+    recover which journal a candidate came from without a second
+    pool.submit() argument."""
+    eissn, _ = JOURNALS[journal]
+    for d in search_plos(query, eissn):
         doi = d.get("id", "")
         title = d.get("title_display", "")
         abstract = " ".join(d.get("abstract", []) or [])
@@ -103,7 +121,8 @@ def from_plos(query: str):
                      d.get("publication_date", "")[:10])
         if not is_relevant(probe, enabled=True):
             continue
-        yield Hit("plos", title, PLOS_ARTICLE_URL.format(doi=doi), norm_doi(doi),
+        yield Hit(f"plos:{journal}", title,
+                  PLOS_ARTICLE_URL.format(slug=journal, doi=doi), norm_doi(doi),
                   d.get("publication_date", "")[:10])
 
 
@@ -142,8 +161,7 @@ def _strip_tags(s: str) -> str:
     return _RE_TAG.sub(" ", s).strip()
 
 
-def fetch_plos_article(doi: str) -> str:
-    url = PLOS_ARTICLE_URL.format(doi=doi)
+def fetch_plos_article(url: str) -> str:
     r = polite_get(url)
     return r.text
 
@@ -162,7 +180,7 @@ def extract_license(html: str) -> str:
     return ""
 
 
-def extract_si_files(html: str, doi: str) -> list[tuple[str, str]]:
+def extract_si_files(html: str, doi: str, journal: str = DEFAULT_JOURNAL) -> list[tuple[str, str]]:
     """Returns [(file_url, filename)] for SI items with a tabular-looking
     declared format. filename is synthesized (SI blocks don't expose a real
     one) so load_table() can dispatch on its extension."""
@@ -173,7 +191,7 @@ def extract_si_files(html: str, doi: str) -> list[tuple[str, str]]:
         ext = _FORMAT_EXT.get(fmt)
         if not ext:
             continue   # DOCX/PDF/PPTX/TIFF/ZIP etc. -- not directly tabular
-        file_url = f"https://journals.plos.org/plosone/{rel_url.replace('&amp;', '&')}"
+        file_url = f"https://journals.plos.org/{journal}/{rel_url.replace('&amp;', '&')}"
         si_label = si_id.replace(" ", "_")
         caption_text = _strip_tags(caption)[:60]
         out.append((file_url, f"{doi.split('/')[-1]}_{si_label}{ext}", caption_text))
@@ -181,9 +199,11 @@ def extract_si_files(html: str, doi: str) -> list[tuple[str, str]]:
 
 
 def process_one(hit: Hit) -> dict:
-    base = {"source": "plos", "title": hit.title, "doi": hit.doi, "url": hit.url}
+    journal = hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
+    base = {"source": "plos", "journal": journal, "title": hit.title,
+            "doi": hit.doi, "url": hit.url}
     try:
-        html = fetch_plos_article(hit.doi)
+        html = fetch_plos_article(hit.url)
     except Exception as e:
         return {**base, "flag": "download_failed", "reasons": f"article page: {e}"[:200],
                 "data_availability": "", "external_link": "", "license": "",
@@ -216,7 +236,7 @@ def process_one(hit: Hit) -> dict:
                 "n_responses": "", "n_participants": "", "n_items": "",
                 "density": "", "data_file": ""}
 
-    files = extract_si_files(html, hit.doi)
+    files = extract_si_files(html, hit.doi, journal)
     if not files:
         reasons = "no tabular-format Supporting Information file on article page"
         if ext_link:
@@ -258,8 +278,8 @@ def process_one(hit: Hit) -> dict:
 # Orchestration
 # ---------------------------------------------------------------------------
 
-FIELDNAMES = ["source", "doi", "title", "url", "license", "flag", "reasons",
-              "data_availability", "external_link", "data_file",
+FIELDNAMES = ["source", "journal", "doi", "title", "url", "license", "flag",
+              "reasons", "data_availability", "external_link", "data_file",
               "n_responses", "n_participants", "n_items", "density",
               "n_other_files"]
 
@@ -279,7 +299,9 @@ def _new_pool() -> ProcessPoolExecutor:
 def process_one_isolated(hit: Hit, pool: ProcessPoolExecutor) -> tuple[dict, ProcessPoolExecutor]:
     """Runs process_one(hit) in a subprocess. Returns (row, pool) -- pool is
     replaced with a fresh one if the worker crashed or hung."""
-    base = {"source": "plos", "title": hit.title, "doi": hit.doi, "url": hit.url}
+    journal = hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
+    base = {"source": "plos", "journal": journal, "title": hit.title,
+            "doi": hit.doi, "url": hit.url}
     try:
         fut = pool.submit(process_one, hit)
         row = fut.result(timeout=_PROCESS_TIMEOUT)
@@ -316,7 +338,15 @@ def main():
     ap.add_argument("--resume", action="store_true",
                     help="skip DOIs already present in --out and append to it, "
                          "rather than overwriting")
+    ap.add_argument("--journals", default=DEFAULT_JOURNAL,
+                    help="comma-separated journal slugs to search, from: "
+                         f"{', '.join(JOURNALS)} (default: {DEFAULT_JOURNAL})")
     args = ap.parse_args()
+
+    journals = [j.strip() for j in args.journals.split(",") if j.strip()]
+    bad = [j for j in journals if j not in JOURNALS]
+    if bad:
+        raise SystemExit(f"Unknown journal slug(s): {bad}. Choose from: {list(JOURNALS)}")
 
     exclude = _load_auto_exclusions()
     print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary\n")
@@ -335,17 +365,20 @@ def main():
     n_done = 0
     pool = _new_pool()
     try:
-        for q in args.queries:
-            print(f"[query] {q}", flush=True)
-            for hit in from_plos(q):
-                if hit.doi in seen or hit.doi in exclude:
-                    continue
-                seen.add(hit.doi)
-                row, pool = process_one_isolated(hit, pool)
-                writer.writerow(row)
-                outf.flush()
-                n_done += 1
-                print(f"  [{row['flag']:18}] {hit.title[:70]}", flush=True)
+        for journal in journals:
+            for q in args.queries:
+                print(f"[{journal}] [query] {q}", flush=True)
+                for hit in from_plos(q, journal):
+                    if hit.doi in seen or hit.doi in exclude:
+                        continue
+                    seen.add(hit.doi)
+                    row, pool = process_one_isolated(hit, pool)
+                    writer.writerow(row)
+                    outf.flush()
+                    n_done += 1
+                    print(f"  [{row['flag']:18}] {hit.title[:70]}", flush=True)
+                    if args.limit and n_done >= args.limit:
+                        break
                 if args.limit and n_done >= args.limit:
                     break
             if args.limit and n_done >= args.limit:

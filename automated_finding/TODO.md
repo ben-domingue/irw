@@ -32,19 +32,25 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   11 tables uploaded to Redivis. This closes out the entire N≥100
   `worth_retrying` pool end-to-end.
 
-- [ ] **Next session: start with a fresh PLOS discovery pass using new
-  search terms** (ben-domingue's direction, 2026-07-27), not the sub-100
-  `worth_retrying` tail below.
-  - **Decision to make first: expand beyond PLOS ONE to PLOS Mental
-    Health and PLOS Global Public Health.** Same CC-BY licensing and
-    site template as PLOS ONE, so `irw_discover_plos.py` likely only
-    needs an eissn swap/addition, not a rewrite — and survey/
-    psychometric data is core to what both journals publish, similar to
-    what's worked well in PLOS ONE. Deliberately NOT expanding to
-    broader PLOS journals (Biology, Genetics, Pathogens, Computational
-    Biology) — those mostly publish lab/genomic data, low yield for
-    discovery/triage time. Start narrow with these two, expand further
-    only if they pan out.
+- [ ] **PLOS Mental Health + PLOS Global Public Health discovery run
+  in progress** (started 2026-07-27). `irw_discover_plos.py` now takes
+  `--journals` (comma-separated slugs into a `JOURNALS` dict: `plosone`
+  [default], `mentalhealth` [eissn 2837-8156], `globalpublichealth`
+  [eissn 2767-3375] — slugs confirmed against live article URLs, not
+  guessed). Deliberately NOT expanding to broader PLOS journals
+  (Biology, Genetics, Pathogens, Computational Biology) — those mostly
+  publish lab/genomic data, low yield for discovery/triage time.
+  Reused the same 22 terms as the PLOS ONE pilot against these two new
+  journals (logged in `search_terms_log.csv`, 2026-07-27) rather than
+  writing new terms — it's a new journal, not a new topic. Running in
+  the background as
+  `python3 irw_discover_plos.py <22 terms> --journals
+  mentalhealth,globalpublichealth --out plos_mh_gph_triage.csv`
+  (nohup'd to `plos_mh_gph_run.log`, PID logged at launch time); expect
+  on the order of hours given ~44 query×journal combinations. Next
+  session: check `wc -l plos_mh_gph_triage.csv` for progress, or if
+  finished, sort by flag and run Step 2b (`irw_retriage_ha.py`) on the
+  `human_assistance` rows same as the original PLOS ONE pilot.
 
 - [x] **PLOS ONE pilot — entire `worth_retrying` N≥100 pool (81 candidates)
   fully reviewed** (2026-07-27) — every candidate processed or explicitly
