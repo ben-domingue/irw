@@ -5,6 +5,7 @@ metadata/items_alltext.Rdata
 .Rproj.user
 .DS_Store
 .Rhistory
+itemtext/.cache/
 
 ##deprecated package
 irw_pkg/
