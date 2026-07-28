@@ -32,38 +32,54 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   11 tables uploaded to Redivis. This closes out the entire N≥100
   `worth_retrying` pool end-to-end.
 
-- [ ] **PLOS Mental Health + PLOS Global Public Health discovery run
-  in progress** (started 2026-07-27). `irw_discover_plos.py` now takes
-  `--journals` (comma-separated slugs into a `JOURNALS` dict: `plosone`
-  [default], `mentalhealth` [eissn 2837-8156], `globalpublichealth`
-  [eissn 2767-3375] — slugs confirmed against live article URLs, not
-  guessed). Deliberately NOT expanding to broader PLOS journals
-  (Biology, Genetics, Pathogens, Computational Biology) — those mostly
-  publish lab/genomic data, low yield for discovery/triage time.
-  Reused the same 22 terms as the PLOS ONE pilot against these two new
-  journals (logged in `search_terms_log.csv`, 2026-07-27) rather than
-  writing new terms — it's a new journal, not a new topic. Running in
-  the background as
-  `python3 irw_discover_plos.py <22 terms> --journals
-  mentalhealth,globalpublichealth --out plos_mh_gph_triage.csv`
-  (nohup'd to `plos_mh_gph_run.log`, PID logged at launch time); expect
-  on the order of hours given ~44 query×journal combinations. Next
-  session: check `wc -l plos_mh_gph_triage.csv` for progress, or if
-  finished, sort by flag and run Step 2b (`irw_retriage_ha.py`) on the
-  `human_assistance` rows same as the original PLOS ONE pilot.
+- [x] **PLOS Mental Health + PLOS Global Public Health discovery run
+  completed and retriaged (2026-07-28)** — 168 candidates (100
+  `mentalhealth` + 68 `globalpublichealth`), same 22 terms as the PLOS
+  ONE pilot. 1 `good`, 17 `human_assistance` → retriaged to 4
+  `worth_retrying` + 7 `human_review` (rest dropped). Full run/retriage
+  details, the network hiccups hit along the way, and the yield
+  comparison to PLOS ONE are in `BATCH_LOG.md`'s "PLOS Mental Health +
+  PLOS Global Public Health run" entry (2026-07-28).
+
+- [x] **`automated_finding/human_review_plos_mh_gph.csv`** (7 rows)
+  pasted into the "Human eye" sheet (confirmed 2026-07-28, ben-domingue);
+  file deleted from the repo.
+
+- [ ] **Decision (ben-domingue, 2026-07-28): backburner PLOS Mental
+  Health/Global Public Health, refocus on PLOS ONE.** 1 `good` + 4
+  `worth_retrying` candidates from the run above are parked, not
+  processed, in favor of returning to the PLOS ONE sub-100
+  `worth_retrying` tail below. `plos_mh_gph_triage.csv` (the full
+  168-row file) disappeared from disk mid-session (2026-07-28) — same
+  Dropbox-sync file-loss pattern as the 2026-07-26 incident noted below,
+  not a script bug. DOI/URL/n/items for the 5 parked candidates below are
+  preserved here; `plos_mh_gph_retriage_ha.csv` (17 rows, full columns
+  incl. license/data_availability) survived and still exists. If the
+  full triage file is needed again, DOIs are known and re-running
+  `process_one` on them directly is cheap. Parked candidates:
+  - **`good`**: "The impact of parkrun on life satisfaction and its
+    cost-effectiveness" (`globalpublichealth`, 10.1371/journal.pgph.0003580)
+  - **`worth_retrying`**: "Depressive symptoms and its associated
+    factors among secondary school..." (271p/5i,
+    10.1371/journal.pgph.0002826); "Child maltreatment mediates the
+    relationship between HIV/AIDS family..." (285p/228i,
+    10.1371/journal.pgph.0001599); "Health care needs survey to improve
+    preparedness of community outreach..." (187p/146i,
+    10.1371/journal.pgph.0005204); "The effect of biomass smoke exposure
+    on quality-of-life among Ugandan..." (1626p/2i,
+    10.1371/journal.pgph.0002892)
 
 - [x] **PLOS ONE pilot — entire `worth_retrying` N≥100 pool (81 candidates)
   fully reviewed** (2026-07-27) — every candidate processed or explicitly
   skipped with reasons in `BATCH_LOG.md`. Filtered from 107 to 81 at
   N≥100 per ben-domingue's direction (2026-07-26).
 
-- [ ] **PLOS ONE pilot — sub-100 `worth_retrying` tail (26 candidates)**
-  not yet reviewed — deprioritized, not abandoned, per ben-domingue's
-  2026-07-26 direction. This is the natural next step once batch 5 is
-  closed out, or a fresh discovery pass with new search terms is another
-  option. Candidate details are in `plos_full_triage.csv` /
-  `plos_full_retriage.csv`; delete both once this tail is fully worked
-  through (or once a decision is made to not pursue it).
+- [x] **PLOS ONE pilot — sub-100 `worth_retrying` tail (26 candidates)
+  dropped, not pursued** (ben-domingue, 2026-07-28): too small (N<100
+  each) to be worth the review time. `plos_full_triage.csv` /
+  `plos_full_retriage.csv` still hold these rows if reconsidered later,
+  but no longer block anything — next step is a fresh PLOS ONE discovery
+  pass with new search terms (not yet started).
 
 - [x] **PLOS ONE pilot — all 34 tables from the first pass uploaded and
   biblio-entered** (confirmed 2026-07-26, ben-domingue): first 7

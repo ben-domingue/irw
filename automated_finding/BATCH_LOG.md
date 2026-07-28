@@ -1968,3 +1968,59 @@ publish lab/genomic data, not item responses, so the discovery/triage
 time would have low yield. Not yet implemented — this is the plan for
 the next session, starting narrow with these two journals before
 considering further expansion.
+
+## PLOS Mental Health + PLOS Global Public Health run, and decision to backburner (2026-07-28)
+
+Implemented the plan above: `irw_discover_plos.py` generalized from a
+single hardcoded PLOS ONE eissn/URL to a `JOURNALS` dict keyed by slug
+(`plosone`, `mentalhealth` [eissn 2837-8156], `globalpublichealth`
+[eissn 2767-3375]) plus a `--journals` CLI flag; slugs confirmed against
+live `journals.plos.org` article URLs, not guessed. Journal slug threaded
+through `Hit.source` (`"plos:<slug>"`) so it survives being pickled to the
+`ProcessPoolExecutor` worker. Reused the same 22 terms as the PLOS ONE
+pilot (logged in `search_terms_log.csv`, 2026-07-27) rather than writing
+new ones — same topics, new journals.
+
+**Run hit two network problems mid-flight, both since resolved, neither a
+code bug**: (1) a transient DNS resolution outage on this machine killed
+every `globalpublichealth` query from `GAD-7` onward the first time
+through (21/22 terms got zero results, `PHQ-9` was cut mid-pagination) —
+re-ran just `globalpublichealth` with `--resume` once DNS recovered
+(dedupes by DOI already in the output, so it only filled the gap). (2)
+35 of the resulting `globalpublichealth` rows landed as `download_failed`
+— an abnormal 51% rate vs. `mentalhealth`'s 0% — traced to the same
+network instability (connection-refused fetching the *article page*, not
+a real 404/broken SI link). `--resume`'s DOI dedupe would have skipped
+these too (it doesn't distinguish flag), so instead pulled those 35 rows
+out of the CSV and fed their DOI/URL straight into `process_one_isolated`
+via a throwaway script, bypassing the Solr search since the URLs were
+already known. Of the 35, 34 resolved cleanly on retry (confirming the
+network-flakiness diagnosis) and 1 was a genuine persistent
+`download_failed`.
+
+**Final triage** (168 total candidates — `mentalhealth` 100,
+`globalpublichealth` 68): 134 `no_usable_file`, 12 `timeout`, 17
+`human_assistance`, 3 `not_item_response`, 1 `good`, 1 `download_failed`.
+
+**Retriage on the 17 `human_assistance` rows** (`irw_retriage_ha.py`):
+4 `worth_retrying`, 7 `human_review`, 3 `aggregate_continuous` (drop), 3
+`not_item_response` (drop). `human_review_plos_mh_gph.csv` (7 rows) ready
+to paste into the "Human eye" tab.
+
+**Comparison to the PLOS ONE pilot** (same 22 terms): PLOS ONE produced
+2,996 candidates → 32 `good` (1.1%) + 107 `worth_retrying` after
+retriage. This run produced 168 candidates → 1 `good` (0.6%) + 4
+`worth_retrying`. Per-candidate yield rate is comparable; the shortfall
+is pool size — these are much smaller/newer journals (Mental Health
+launched 2024, Global Public Health 2021), not a worse hit rate. At this
+volume, further investment here (e.g. an 8-language translation pass,
+standard practice for the repo-based pipeline) isn't worth it relative to
+other queued work.
+
+**Decision (ben-domingue, 2026-07-28): backburner PLOS Mental
+Health/Global Public Health, refocus on PLOS ONE.** The 1 `good` + 4
+`worth_retrying` candidates from this run are parked, not processed, for
+the same reason: not urgent enough to justify diverting from PLOS ONE's
+existing backlog. See `TODO.md` for the parked candidate list and their
+DOIs/URLs/n/items, and for the still-open sub-100 `worth_retrying` PLOS
+ONE tail this session is refocusing on.
