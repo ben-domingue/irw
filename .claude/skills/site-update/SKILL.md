@@ -37,15 +37,19 @@ script-by-script writeup this was built from:
 
 ## Before doing anything
 
-- **Prerequisites**: Redivis credentials configured externally (per root
-  `CLAUDE.md` — not this repo's concern), `ANTHROPIC_API_KEY` set in the
-  environment (used by `02_biblio.R`'s BibTeX-generation fallback — a plain
-  single-turn `claude-haiku-4-5` call via `httr`, no SDK, swapped in from an
-  earlier OpenAI/GPT-4o implementation on 2026-07-27; it will otherwise
-  prompt interactively — fine in a foreground run, don't run that stage
-  unattended without it set). R packages: `redivis`, `gsheet`, `dplyr`,
-  `tidyr`, `tibble`, `httr`, `glue`, `progress`, `jsonlite`, `purrr`,
-  `readr`, `irw`.
+- **Prerequisites**: a Redivis API token at `~/.redivis_api_token` (bare
+  token value, no `REDIVIS_API_TOKEN=` prefix, `chmod 600` recommended —
+  deliberately *not* `~/.Renviron`, since that also leaks into interactive
+  `R` sessions and trips the redivis package's "deprecated and highly
+  discouraged" interactive-token warning; see `run_pipeline.sh` and
+  `audit_tables.R`, both of which load it from that file into their own
+  process env only, 2026-07-28), `ANTHROPIC_API_KEY` set in the environment
+  (used by `02_biblio.R`'s BibTeX-generation fallback — a plain single-turn
+  `claude-haiku-4-5` call via `httr`, no SDK, swapped in from an earlier
+  OpenAI/GPT-4o implementation on 2026-07-27; it will otherwise prompt
+  interactively — fine in a foreground run, don't run that stage unattended
+  without it set). R packages: `redivis`, `gsheet`, `dplyr`, `tidyr`,
+  `tibble`, `httr`, `glue`, `progress`, `jsonlite`, `purrr`, `readr`, `irw`.
 - **Nothing here uploads to Redivis.** Every numbered script just writes a
   local CSV/JSON. Getting that data into the actual `irw_meta:bdxt` Redivis
   tables is a separate, manual step outside this skill's scope — don't

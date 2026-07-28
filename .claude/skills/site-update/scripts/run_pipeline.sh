@@ -30,10 +30,14 @@
 #   scripts/run_pipeline.sh 05              # try the known-broken comps stage explicitly
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
-# Requires: Redivis credentials configured externally (per root CLAUDE.md),
-# and ANTHROPIC_API_KEY set for 02_biblio.R's BibTeX-generation fallback (it
-# calls Claude Haiku 4.5 and will prompt interactively if unset -- fine for
-# a foreground run, not for unattended use).
+# Requires: Redivis credentials configured externally (per root CLAUDE.md;
+# see ~/.redivis_api_token handling below -- 2026-07-28: REDIVIS_API_TOKEN
+# deliberately no longer lives in ~/.Renviron, since that also leaks into
+# Ben's plain interactive `R` sessions and triggers the redivis package's
+# "deprecated and highly discouraged" interactive-token warning). Also
+# needs ANTHROPIC_API_KEY set for 02_biblio.R's BibTeX-generation fallback
+# (it calls Claude Haiku 4.5 and will prompt interactively if unset -- fine
+# for a foreground run, not for unattended use).
 
 set -euo pipefail
 
@@ -42,6 +46,18 @@ REPO_ROOT="$(cd "$SCRIPT_DIR/../../../.." && pwd)"
 METADATA_DIR="$REPO_ROOT/metadata"
 SNAPSHOT_DIR="$(mktemp -d)"
 trap 'rm -rf "$SNAPSHOT_DIR"' EXIT
+
+# Load REDIVIS_API_TOKEN for this script's own child Rscript processes only
+# -- never written to .Renviron, so it never reaches an interactive R
+# session. If the token's already in the environment (someone exported it
+# themselves) that wins; otherwise read it from a dedicated file. Missing
+# file is not fatal here -- the redivis package falls back to cached OAuth
+# credentials at ~/.redivis/r_credentials, which may already be valid.
+REDIVIS_TOKEN_FILE="${REDIVIS_TOKEN_FILE:-$HOME/.redivis_api_token}"
+if [[ -z "${REDIVIS_API_TOKEN:-}" && -f "$REDIVIS_TOKEN_FILE" ]]; then
+  export REDIVIS_API_TOKEN
+  REDIVIS_API_TOKEN="$(tr -d '[:space:]' < "$REDIVIS_TOKEN_FILE")"
+fi
 
 if [[ ! -f "$METADATA_DIR/01_metadata.R" ]]; then
   echo "error: expected $METADATA_DIR/01_metadata.R -- is REPO_ROOT resolution wrong?" >&2

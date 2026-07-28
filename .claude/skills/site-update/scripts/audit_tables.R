@@ -47,6 +47,21 @@
 ## 2026-07-27: hold off until there are real incomplete-coverage examples to
 ## look at together before designing that detector.
 
+## Load REDIVIS_API_TOKEN from a dedicated file rather than relying on it
+## being set in ~/.Renviron (2026-07-28: that also leaks into Ben's plain
+## interactive `R` sessions and triggers the redivis package's "deprecated
+## and highly discouraged" interactive-token warning -- see run_pipeline.sh
+## for the matching fix on that entry point). Bare token value only, no
+## `REDIVIS_API_TOKEN=` prefix. An already-set env var wins; a missing file
+## is not fatal -- redivis falls back to cached OAuth credentials at
+## ~/.redivis/r_credentials.
+if (identical(Sys.getenv("REDIVIS_API_TOKEN"), "")) {
+  token_file <- path.expand(Sys.getenv("REDIVIS_TOKEN_FILE", "~/.redivis_api_token"))
+  if (file.exists(token_file)) {
+    Sys.setenv(REDIVIS_API_TOKEN = trimws(readLines(token_file, n = 1, warn = FALSE)))
+  }
+}
+
 suppressMessages({
   library(irw)
   library(dplyr)

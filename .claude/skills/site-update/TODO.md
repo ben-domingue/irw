@@ -1,5 +1,22 @@
 # site-update TODO
 
+## Discuss folding 08_itemtext.R into this skill (Ben, 2026-07-28)
+
+Currently explicitly out of scope (see SKILL.md and `references/pipeline.md`)
+-- it belongs to the separate `itemtext/` pipeline
+(`itemtext/.claude/skills/irw-auto-itemtext/`), and `run_pipeline.sh` doesn't
+have it wired up as a stage at all. Ben: in the long run he wants `08` (item-
+text readability metadata -- word/char counts, Flesch-Kincaid, incremental
+vs. the `hotfixes/08_itemtext_recompute.R` full-recompute variant) included
+in *this* skill instead. Needs a real conversation before implementing --
+at minimum: how it should relate to the separate `irw-auto-itemtext` skill
+(which does the actual item-text *extraction* that `08` then summarizes --
+folding `08` in here doesn't obviously mean moving that skill too), whether
+it fits `run_pipeline.sh`'s snapshot/diff pattern the same way (it's
+incremental-only by design, unlike 01/05/06/07/09), and where in the run
+order it'd go. Don't just wire it into `DEFAULT_ORDER` without that
+discussion.
+
 ## 05_comps.R is broken -- needs a real fix, not a patch (found 2026-07-28)
 
 Confirmed three separate bugs while diagnosing a live-run crash. Fixing just
