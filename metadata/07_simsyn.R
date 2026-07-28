@@ -89,7 +89,13 @@ f<-function(tab) {
   }
   try.counter<-0
   while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
-      testvec<-getvars(tab)
+      had_error<-FALSE
+      testvec<-tryCatch(getvars(tab), error=function(e) {
+          message("  ! request failed (attempt ", try.counter+1, "/4): ", conditionMessage(e))
+          had_error<<-TRUE
+          NULL
+      })
+      if (had_error) Sys.sleep(5) #network failure -- back off before retrying
       if (length(testvec)==7) try.counter<-100 else try.counter<-try.counter+1
   }
   return(testvec)

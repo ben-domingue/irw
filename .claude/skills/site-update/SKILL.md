@@ -18,6 +18,15 @@ script-by-script writeup this was built from:
 - Core pipeline order: `01_metadata.R` → `02_biblio.R` → `03_tags.R` →
   `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `09_hero_status.R` (must run
   **last**, it reads `metadata.csv` written by 01).
+- **`05` and `06` are excluded from `run_pipeline.sh`'s default order as of
+  2026-07-28 — read `TODO.md` before touching either.** `05_comps.R` has
+  three confirmed bugs (wrong column list, an undefined `toadd` variable, and
+  a final write that silently ignores the freshly-computed data) found during
+  a live run; `06_nominal.R` looks structurally sound on inspection but was
+  never actually verified standalone. Don't assume 06 is broken just because
+  05 is, and don't attempt to fix either without first reading `TODO.md`'s
+  full trace of what's actually wrong — a narrow patch to the reported crash
+  alone would leave 05 "succeeding" while still silently doing nothing.
 - `04_tables.R` (QC) is being superseded by this skill's audit workflow —
   details of exactly how are still being worked out with Ben; don't assume
   `04_tables.R` itself needs to keep running standalone.
@@ -55,9 +64,10 @@ source Google Sheets or newly live in Redivis (e.g. a new
 `item_response_warehouse_3` table, or an edited dictionary-sheet row).
 
 ```bash
-scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 07 09
+scripts/run_pipeline.sh                 # full default sequence: 01 02 03 07 09 (05/06 excluded, see TODO.md)
 scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 scripts/run_pipeline.sh --no-09         # everything except the hero JSON
+scripts/run_pipeline.sh 05              # try the known-broken comps stage explicitly
 ```
 
 What it does, per stage:

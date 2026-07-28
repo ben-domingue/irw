@@ -10,14 +10,24 @@
 #   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 09 (hero_stats.json,
 #   must run LAST since it reads metadata.csv written by 01)
 #
+# 05 and 06 are DROPPED from the default order (2026-07-28, see TODO.md):
+# 05_comps.R has three confirmed bugs (wrong column list, undefined `toadd`,
+# writes stale data instead of the computed result) and reliably crashes,
+# which -- combined with `set -e` -- previously blocked 07/09 from ever
+# running. 06_nominal.R looks fine on inspection but was never actually
+# verified standalone; leaving it out too until someone runs it directly.
+# Both are still runnable explicitly: `scripts/run_pipeline.sh 05` /
+# `scripts/run_pipeline.sh 06`.
+#
 # 04 (QC) and 08 (itemtext metadata) are intentionally excluded here: 04 is
 # superseded by audit_tables.R for this skill (see SKILL.md workflow 2); 08
 # belongs to the separate itemtext pipeline. hotfixes/ are out of scope per
 # Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence
+#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 07 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
+#   scripts/run_pipeline.sh 05              # try the known-broken comps stage explicitly
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md),
@@ -51,7 +61,7 @@ declare -A STAGE_OUTPUTS=(
   [07]="simsyn_metadata.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 09)
+DEFAULT_ORDER=(01 02 03 07 09)  # 05, 06 excluded -- see TODO.md
 
 stages=()
 for a in "$@"; do
@@ -86,23 +96,26 @@ for stage in "${stages[@]}"; do
   echo ""
   echo "== Stage $stage: Rscript $script =="
   Rscript "$script"
-done
 
-echo ""
-echo "== Diffing outputs against pre-run snapshots =="
-for stage in "${stages[@]}"; do
+  # Diff THIS stage's outputs immediately, not batched at the end -- if a
+  # later stage fails, set -e aborts the script, and a batched-at-the-end
+  # diff loop would mean every already-succeeded stage's output got
+  # overwritten on disk with no diff ever printed. That defeats the whole
+  # point of this script (silent overwrite is exactly what it exists to
+  # prevent) -- confirmed happening in practice 2026-07-28: stage 05 failed
+  # and stages 02/03's real changes to biblio.csv/tags.csv were never
+  # diffed or reported.
+  echo ""
+  echo "-- Stage $stage diff --"
   for f in ${STAGE_OUTPUTS[$stage]:-}; do
     [[ -z "$f" ]] && continue
     python3 "$SCRIPT_DIR/diff_csv.py" "$SNAPSHOT_DIR/$f" "$METADATA_DIR/$f"
   done
+  if [[ "$stage" == "09" ]]; then
+    echo "hero_stats.json written -- not a keyed CSV, review the file directly"
+    echo "(default path: $REPO_ROOT/../irw_site/data/hero_stats.json, or check 09's stdout above)."
+  fi
 done
-
-if [[ " ${stages[*]} " == *" 09 "* ]]; then
-  echo ""
-  echo "== Stage 09 output =="
-  echo "hero_stats.json written -- not a keyed CSV, review the file directly"
-  echo "(default path: $REPO_ROOT/../irw_site/data/hero_stats.json, or check 09's stdout above)."
-fi
 
 echo ""
 echo "Done. Nothing here uploads to Redivis or touches irw_site -- review the"
