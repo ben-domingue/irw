@@ -123,19 +123,33 @@ fetch alone** (measured 2026-07-27: `core` ≈ 59s for 2233 tables, `comp` ≈
 10s; `--skip-dict` avoids 4 more Google Sheets round-trips on top of that).
 This is normal — don't assume it's hung and kill it early.
 
-Generalizes `04_tables.R`'s presence-matrix / `zz` idea from core-only to all
-four sources, and writes **a fresh report every run** — nothing is tracked
-or accumulated across runs (confirmed with Ben: he triages the current list
-by hand each time, no queue file needed here unlike
-`tags/tags_queue_staging.csv`).
+**Bucket A reproduces `04_tables.R`'s `zz` object exactly** (confirmed with
+Ben, 2026-07-28, after a naive generalization — flag anything missing even
+1 source — proved far noisier than `zz` ever was: 805 rows, most
+uninformative). `zz`'s actual rule: missing **at least 2** of the applicable
+sources (not just 1), and rows where the *only* source present is
+`tags_csv` are dropped entirely ("I definitely don't want tag only").
+Output is the same **wide, one-column-per-source shape** `zz` had — no
+`present_in`/`missing_from` strings, just a `1`/blank grid you scan across,
+same as `04_tables.R` printing `zz` to the console used to give Ben.
+Writes **a fresh report every run** — nothing is tracked or accumulated
+across runs (confirmed with Ben: he triages the current list by hand each
+time, no queue file needed here unlike `tags/tags_queue_staging.csv`).
 
-Output, both written to `metadata/` (path configurable via `--out`):
+Output, all written to `metadata/` (path configurable via `--out`):
+- `table_audit_report_incomplete.txt` — **the one to open first.** Fixed-
+  width plain text, one row per table, columns `table | category | redivis
+  | dictionary_sheet | biblio_csv | metadata_csv | tags_csv`, `1` for
+  present / blank for absent — reads as an aligned grid directly, no
+  spreadsheet needed. This is bucket A, full list, sorted worst-first
+  (fewest sources present).
+- `table_audit_report_incomplete.csv` — same data, comma-separated, for
+  spreadsheet use.
 - `table_audit_report.md`:
-  - **A. Incomplete coverage** — tables present in some but not all of
-    {Redivis, dictionary sheet, metadata CSV, biblio CSV, (core only)
-    tags.csv} for their source, sorted worst-first (fewest sources present).
-    This is the main triage list, and the one to lead with when reporting
-    results back to Ben.
+  - **A. Incomplete coverage** — same grid, markdown-table preview
+    (truncates at 30 rows — use the `.txt` for the full list). This is the
+    main triage list, and the one to lead with when reporting results back
+    to Ben.
   - **B. Urgent** — live in Redivis but in *no* local CSV at all yet
     (usually just means re-run workflow 1).
   - **C. Near-duplicate / inconsistent names — not implemented yet.** A
@@ -146,8 +160,6 @@ Output, both written to `metadata/` (path configurable via `--out`):
     properly until there are real bucket-A examples to look at together.
     Don't try to resurrect the edit-distance approach without discussing it
     first.
-- `table_audit_report_incomplete.csv` — the full bucket-A list as a plain
-  CSV (the markdown table truncates at 30 rows).
 
 **This is an adjudication aid, not an auto-fixer.** Never merge, rename, or
 delete rows based on this report — hand Ben the report and let him resolve

@@ -22,9 +22,23 @@
 ##   cd metadata
 ##   ../.claude/skills/site-update/scripts/run_pipeline.sh   # generate fresh CSVs first
 ##   Rscript ../.claude/skills/site-update/scripts/audit_tables.R
-## Optional: --dir <path>  (defaults to cwd, i.e. metadata/)
-##           --out <path>  (markdown report; default table_audit_report.md)
-##           --skip-dict   (skip the four Google Sheet dictionary pulls -- faster, less complete)
+## Optional: --dir <path>          (defaults to cwd, i.e. metadata/)
+##           --out <path>          (markdown report; default table_audit_report.md)
+##           --skip-dict           (skip the four Google Sheet dictionary pulls -- faster, less complete)
+##
+## Bucket A reproduces `zz` from metadata/04_tables.R exactly (confirmed with
+## Ben, 2026-07-28, after a first attempt at generalizing it -- present in
+## ANY fewer than all sources -- turned out far noisier than what `zz` ever
+## showed: 805 "incomplete" rows, most of it uninformative). `zz`'s actual
+## rule, from the source:
+##   n<-rowSums(x[,-1],na.rm=TRUE); z<-x[n<4,]              # missing >=2 of 5
+##   tmp<-z[,-6]; nn<-rowSums(is.na(tmp)); zz<-z[nn<4,]      # drop tag-only rows
+## i.e. (a) missing at least 2 of the applicable sources -- not just 1 -- and
+## (b) drop rows where the ONLY source present is tags_csv (Ben: "I
+## definitely don't want tag only"). Both are applied below, generalized
+## from `zz`'s core-only 5-column shape to all four sources' own column
+## counts. Output is the same wide 1/blank-per-source shape `zz` had --
+## `present_in`/`missing_from` string columns are gone.
 ##
 ## Near-duplicate/inconsistent-name detection (edit distance across the full
 ## table universe) is deliberately NOT implemented yet -- an earlier attempt
@@ -118,31 +132,40 @@ build_matrix <- function(src) {
 }
 mats <- Filter(Negate(is.null), lapply(sources, build_matrix))
 
-## ---- bucket A: incomplete coverage (the `zz` idea, generalized) -----------
-## present in at least one source, missing from at least one other.
-## Sorted worst-first (fewest sources present) so triage starts with the
-## most-obviously-broken rows.
+## ---- bucket A: incomplete coverage -- reproduces `zz` exactly -------------
+## missing >= 2 of the applicable sources, tag-only rows dropped. Sorted
+## worst-first (fewest sources present) so triage starts where `zz` always
+## put the most-obviously-broken rows.
+DISPLAY_COLS <- c("redivis", "dictionary_sheet", "biblio_csv", "metadata_csv", "tags_csv")
+
 incomplete_list <- lapply(mats, function(m) {
   ind_cols <- setdiff(names(m), c("table", "category"))
   n_present <- rowSums(m[, ind_cols, drop = FALSE])
   n_total   <- length(ind_cols)
-  keep <- n_present < n_total
+  keep <- n_present <= n_total - 2   # zz: n<4 of 5 == missing at least 2
+  if ("tags_csv" %in% ind_cols) {    # zz: nn<4 -- drop "only tags_csv present" rows
+    other_cols <- setdiff(ind_cols, "tags_csv")
+    tag_only <- m$tags_csv & !apply(m[, other_cols, drop = FALSE], 1, any)
+    keep <- keep & !tag_only
+  }
   if (!any(keep)) return(NULL)
-  present_in <- apply(m[keep, ind_cols, drop = FALSE], 1, function(r) paste(ind_cols[r], collapse = "|"))
-  missing_from <- apply(m[keep, ind_cols, drop = FALSE], 1, function(r) paste(ind_cols[!r], collapse = "|"))
-  data.frame(
-    table = m$table[keep], category = m$category[keep],
-    n_present = n_present[keep], n_total = n_total,
-    present_in = present_in, missing_from = missing_from,
-    stringsAsFactors = FALSE
-  )
+  out <- m[keep, c("table", "category", ind_cols)]
+  out$n_present <- n_present[keep]
+  out$n_total <- n_total
+  out
 })
-incomplete <- do.call(rbind, Filter(Negate(is.null), incomplete_list))
-if (!is.null(incomplete)) incomplete <- incomplete[order(incomplete$n_present, incomplete$category, incomplete$table), ]
+incomplete <- dplyr::bind_rows(Filter(Negate(is.null), incomplete_list))
+if (nrow(incomplete) == 0) incomplete <- NULL
+if (!is.null(incomplete)) {
+  incomplete <- incomplete[order(incomplete$n_present, incomplete$category, incomplete$table), ]
+  ## fixed column order regardless of which sources each category has
+  for (cn in DISPLAY_COLS) if (!cn %in% names(incomplete)) incomplete[[cn]] <- NA
+  incomplete <- incomplete[, c("table", "category", DISPLAY_COLS, "n_present", "n_total")]
+}
 
 ## ---- bucket B: urgent -- live in Redivis, absent from every local CSV -----
 urgent <- if (!is.null(incomplete)) {
-  incomplete[incomplete$n_present == 1 & grepl("(^|\\|)redivis(\\||$)", incomplete$present_in), ]
+  incomplete[incomplete$n_present == 1 & incomplete$redivis %in% TRUE, ]
 } else NULL
 
 ## Bucket C (near-duplicate/inconsistent names) intentionally omitted for
@@ -151,8 +174,38 @@ urgent <- if (!is.null(incomplete)) {
 ## like in this table-naming scheme.
 
 ## ---- write outputs ----------------------------------------------------
+## CSV: wide 1/blank-per-source shape, matching zz. TRUE->1, FALSE/NA->blank
+## (blank distinguishes "absent" from "not applicable to this category",
+## same visual meaning zz's NA had).
+to_csv_cell <- function(x) ifelse(is.na(x), "", ifelse(x, "1", ""))
 csv_out <- sub("\\.md$", "_incomplete.csv", out_path)
-if (!is.null(incomplete)) write_csv(incomplete, csv_out) else file.create(csv_out)
+if (!is.null(incomplete)) {
+  csv_df <- incomplete
+  for (cn in DISPLAY_COLS) csv_df[[cn]] <- to_csv_cell(incomplete[[cn]])
+  write_csv(csv_df, csv_out)
+} else {
+  file.create(csv_out)
+}
+
+## Fixed-width plain text: the actual ask (Ben, 2026-07-28) -- "visually
+## organized as columns in raw text", i.e. readable as an aligned grid
+## without opening a spreadsheet, same as zz printed to the R console.
+txt_out <- sub("\\.md$", "_incomplete.txt", out_path)
+if (!is.null(incomplete)) {
+  txt_cols <- c("table", "category", DISPLAY_COLS)
+  disp <- incomplete[, txt_cols]
+  for (cn in DISPLAY_COLS) disp[[cn]] <- to_csv_cell(incomplete[[cn]])
+  widths <- vapply(txt_cols, function(cn) max(nchar(cn), nchar(disp[[cn]]), na.rm = TRUE), integer(1))
+  pad_row <- function(vals) paste(mapply(function(v, w) formatC(v, width = -w), vals, widths), collapse = " | ")
+  lines <- c(
+    pad_row(txt_cols),
+    paste(vapply(widths, function(w) strrep("-", w), character(1)), collapse = "-+-"),
+    apply(disp, 1, pad_row)
+  )
+  writeLines(lines, txt_out)
+} else {
+  file.create(txt_out)
+}
 
 md <- c(
   paste0("# IRW table-name consistency audit -- ", Sys.Date()),
@@ -160,20 +213,23 @@ md <- c(
   "Ground truth: `irw::irw_list_tables(source = c(\"core\",\"comp\",\"nom\",\"sim\"))`. ",
   if (skip_dict) "Dictionary sheets skipped (--skip-dict)." else "Dictionary sheets included (Public rows only).",
   "",
-  "## A. Incomplete coverage (sorted worst-first -- fewest sources present)",
+  "## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)",
   "",
-  paste0("Full list: `", basename(csv_out), "` (", if (is.null(incomplete)) 0 else nrow(incomplete), " rows). ",
+  paste0("Full list, aligned columns: `", basename(txt_out), "`. Same data as CSV: `",
+         basename(csv_out), "` (", if (is.null(incomplete)) 0 else nrow(incomplete), " rows). ",
          "Nothing here is auto-fixed -- triage by hand."),
   ""
 )
 if (!is.null(incomplete)) {
   head_n <- min(30, nrow(incomplete))
-  md <- c(md, "| table | category | present_in | missing_from |", "|---|---|---|---|")
+  md <- c(md, paste0("| ", paste(c("table", "category", DISPLAY_COLS), collapse = " | "), " |"),
+          paste0("|", strrep("---|", 2 + length(DISPLAY_COLS))))
   for (i in seq_len(head_n)) {
     r <- incomplete[i, ]
-    md <- c(md, sprintf("| %s | %s | %s | %s |", r$table, r$category, r$present_in, r$missing_from))
+    cells <- vapply(DISPLAY_COLS, function(cn) if (isTRUE(r[[cn]])) "1" else "", character(1))
+    md <- c(md, paste0("| ", r$table, " | ", r$category, " | ", paste(cells, collapse = " | "), " |"))
   }
-  if (nrow(incomplete) > head_n) md <- c(md, sprintf("_...and %d more, see CSV._", nrow(incomplete) - head_n))
+  if (nrow(incomplete) > head_n) md <- c(md, sprintf("_...and %d more, see the .txt or .csv._", nrow(incomplete) - head_n))
 } else {
   md <- c(md, "_None -- every table is present everywhere it should be._")
 }
@@ -196,6 +252,7 @@ writeLines(md, out_path)
 message("\nWrote:")
 message("  ", out_path)
 message("  ", csv_out)
+message("  ", txt_out)
 message(sprintf("\nSummary: %d incomplete, %d urgent.",
                  if (is.null(incomplete)) 0 else nrow(incomplete),
                  if (is.null(urgent)) 0 else nrow(urgent)))
