@@ -2024,3 +2024,232 @@ the same reason: not urgent enough to justify diverting from PLOS ONE's
 existing backlog. See `TODO.md` for the parked candidate list and their
 DOIs/URLs/n/items, and for the still-open sub-100 `worth_retrying` PLOS
 ONE tail this session is refocusing on.
+
+## PLOS ONE batch 6 — new search terms, discovery + full good-candidate pass (2026-07-28)
+
+Per the decision above, ran a fresh PLOS ONE discovery pass with 22 new
+instrument/construct terms not previously tried against any PLOS journal
+(Need for Cognition Scale, Short Dark Triad, Autism Spectrum Quotient,
+Toronto Alexithymia Scale, Fear of COVID-19 Scale, Insomnia Severity
+Index, Eating Disorder Examination Questionnaire, Barratt Impulsiveness
+Scale, Emotion Regulation Questionnaire, Raven's Progressive Matrices,
+Implicit Association Test, n-back task, go/no-go task, Five Facet
+Mindfulness Questionnaire, Multidimensional Scale of Perceived Social
+Support, WHOQOL quality of life, Social Dominance Orientation, Balloon
+Analogue Risk Task, Body Shape Questionnaire, Gratitude Questionnaire,
+trust game, vocabulary test) — logged in `search_terms_log.csv`.
+`python3 irw_discover_plos.py <22 terms> --out plos_batch6_triage.csv`,
+run in the background (~2.5 hours wall clock for 1841 candidates).
+
+**Triage**: 1841 candidates → 15 `good` (0.8%, comparable to the original
+22-term pilot's 1.1%), 274 `human_assistance`, 1491 `no_usable_file`, 42
+`not_item_response`, 12 `download_failed`, 6 `error`, 1 `timeout`.
+
+**Retriage on the 274 `human_assistance` rows** (`irw_retriage_ha.py` →
+`plos_batch6_retriage.csv`): 92 `aggregate_continuous` (drop), 89
+`human_review`, 48 `worth_retrying`, 44 `not_item_response` (drop), 1
+`recoverable_format` (a semicolon-delimited PsyCap file, not yet
+re-triaged). The 89 `human_review` + 48 `worth_retrying` are not yet acted
+on — next open item.
+
+**All 15 `good` candidates hand-reviewed** (per this skill's standing
+caution that a `good` flag needs a human glance — the triage script only
+inspects the first tabular SI file, and several turned out to be
+subscale-total/aggregate files rather than raw items once actually
+opened):
+
+Processed (8 papers → 24 output tables, all CC-BY, in
+`biblio_plos_batch6.csv`, ready to paste into the dictionary sheet):
+- `bled_2021_imagery_phenomenology` / `bled_2021_imagery_use` (autism
+  mental-imagery use, N=119) — 2 short scales bundled in one file.
+- `ruiz_parra_2023_rfq8` / `_ipo83` / `_maas` / `_iri_pt` / `_tas20` /
+  `_scl90r` / `_bdi2` / `_pid5bf` / `_iip32` (Spanish RFQ validation
+  study, N=605 non-clinical sample) — 9 validated instruments bundled in
+  one SI file, each administered to a different overlapping subsample
+  (confirmed via per-scale missingness being uniform across every item
+  within a scale, i.e. real administration pattern, not random
+  non-response). IRI items were letter-coded (A-E), recoded to 1-5. RFQ-8
+  had one isolated -9 data-entry error (single value, single respondent),
+  dropped. The "Retest" and "clinical" sheets in the same workbook (113
+  and 41 rows) were not processed — left for a future pass if wanted.
+- `najari_2024_bpqsf_awareness` / `_autonomic` / `_stress` (BPQ-SF
+  Persian validation, N=751) — one stray Persian free-text value in
+  column `s1`, coerced to NaN by the standard numeric cleaning step.
+- `odachi_2022_fear_covid19` / `_hads` / `_bfs` (Japanese nurses, N=417).
+- `zhao_2024_erq` (ERQ-8 validation, Chinese students, N=1534).
+- `li_2021_sustainable_innov_behav` / `_cultural_intelligence` /
+  `_knowledge_sharing` / `_org_cultural_diversity` (N=336).
+- `kang_2015_facial_preference` (N=16 subjects x 24 faces) — the raw file
+  is transposed (rows=faces, columns=subjects); reshaped so id=subject,
+  item=face, resp=continuous facial-preference proportion (0-1). Small
+  sample but genuine continuous item-level data, kept.
+- `ly_2021_animal_empathy` (N=30, farm-animal empathy videos) — each
+  participant rated a different subset of 20 videos on 7 emotions;
+  item defined as video_id+emotion (verified participant x video unique)
+  rather than emotion alone, since a bare emotion-only item would create
+  spurious duplicate id+item pairs across different video content.
+
+Skipped as **not actually item-level data** despite the `good` flag —
+all four turned out to be aggregate/composite scores or non-Likert
+ranking data once the raw file was opened, not raw item responses:
+- `10.1371/journal.pone.0249033` (Ngai 2021, animal-assisted humane
+  education) — SI file has only subscale-total scores at 3 timepoints
+  (Prosocial/Cognitive/Empathy/etc. T0/T1/T2), no raw items.
+- `10.1371/journal.pone.0186581` (Kumazaki 2017, robot appearance
+  preferences in autism) — N=16, only a 3-category ranking task plus
+  aggregate AQ/IQ totals; too small and not real Likert items.
+- `10.1371/journal.pone.0230258` (Lasagna 2020, eye contact perception) —
+  the picked SI file (`S1_Data.csv`) is an aggregated psychophysical
+  count-correct matrix (participants x trials, cell = count out of ~12
+  correct at a given signal-strength level), not raw per-trial responses;
+  the other two SI Data files are similarly aggregated fitted-parameter
+  and subscale-total data.
+- `10.1371/journal.pone.0243209` (Megreya 2020, emotion regulation +
+  face recognition) — all three experiment sheets contain only
+  summary-statistic columns (hit/miss rates, accuracy %, CERQ subscale
+  sums), no raw trial or item data anywhere in the file.
+- `10.1371/journal.pone.0279360` (van Heyst 2022, attentional bias for
+  weapons) — SI file has per-category accuracy proportions (aggregated
+  across trials), not raw per-trial responses.
+
+**Not yet processed — flagged for a follow-up session, not abandoned**
+(both need real codebook-decoding time rather than a quick pass):
+- `10.1371/journal.pone.0169808` (Carver 2017, PUGGS genetics-belief
+  questionnaire) — two pilot-study raw-data files (N=207, N=78) each
+  spanning 2-3 distinct subscales (belief-in-determinism, 1-6/1-5 with a
+  "don't know" sentinel; true/false genetics-knowledge items needing an
+  answer-key-based correct/incorrect recode per the codebook). Full DOCX
+  codebooks already downloaded and read; the recoding logic is understood
+  but not yet implemented as a script.
+- `10.1371/journal.pone.0128876` (Meloni 2015, disability representations
+  in parents and children) — 244-column SI file with ~8 distinct item
+  families (open-ended disability-attribution codes, 5x12 fictional-
+  character rating blocks, knowledge scale, interest/attitude scales with
+  paired response-time columns, extracurricular-activity items); tractable
+  but needs more per-block codebook time than this pass had.
+
+## Human-eye backlog cleared; batch 6 human_review split out (2026-07-28)
+
+ben-domingue confirmed three long-open "Human eye" pastes are done:
+`human_review_conflict.csv` (Stroop/DVN-GINKMU), `human_review_lang_pilot.csv`
+(SWAN/DVN-HWMJAE), and `human_review_cognitive_tasks.csv` (17 rows, batch
+19) — all three files were already missing from disk (Dropbox-sync loss,
+same pattern as elsewhere in this log) but content was preserved in
+`TODO.md`'s descriptions, so closing them out is just a TODO update, no
+regeneration needed.
+
+Split batch 6's 89 `human_review` rows out of `plos_batch6_retriage.csv`
+into `human_review_plos_batch6.csv` (columns: title, doi, url, license,
+data_availability, data_file, n_participants, n_items, density,
+refined_reason) — ready to paste into the "Human eye" sheet. The 48
+`worth_retrying` rows remain in `plos_batch6_retriage.csv`, not yet
+reviewed.
+
+ben-domingue is now uploading batch 6's 24 `irw_output/*.csv` files to
+Redivis and pasting `biblio_plos_batch6.csv` into the dictionary sheet —
+those files are expected to disappear from disk shortly as a result, not
+a sync-loss incident.
+
+## PLOS ONE batch 6's 48 `worth_retrying` rows reviewed (2026-07-28)
+
+Worked through all 48 `worth_retrying` rows from batch 6's retriage
+(`plos_batch6_retriage.csv`). Most had been flagged only because
+`irw_batch_updated.py`'s id-detection heuristic wasn't confident, or
+because a dup_id_item failure looked longitudinal — neither of those
+triage signals turned out to reliably predict whether a file actually
+contained raw item responses. Downloaded and hand-inspected every file's
+real column structure (id uniqueness, item vs. aggregate columns, text-
+vs-numeric encoding) via a bulk inspection pass before deciding.
+
+**Processed → 13 tables from 9 papers** (all CC-BY, in
+`biblio_plos_batch7.csv`):
+- `baumgaertner_2018_vaccine_trust` — 2 batteries of 3 vaccination-
+  likelihood items, text-coded ("Very unlikely"..."Very likely") recoded
+  1-5, N=997.
+- `huang_2016_neo_neuroticism` / `_neo_conscientious` / `_cesd` — NEO-FFI
+  N/C subscales (12 items each) + CES-D (20 items), N=113-114. The
+  file's PSQI sleep-quality section was left unprocessed (item-level
+  components are text-coded and mixed in among already-computed PSQI
+  component scores; would need a separate pass).
+- `grant_2018_ersq` — Emotion Regulation Skills Questionnaire (27 items),
+  pre/post intervention as `wave` 1/2, N=36; text Likert labels ("Not at
+  all"..."Almost always") recoded 0-4.
+- `laksmita_2020_mspss` — MSPSS, Indonesian adolescent disaster
+  survivors, N=299.
+- `rosharudin_2023_dass21` / `_ders18` — one SI file bundling DASS-21 (21
+  items, obfuscated `@N_LETTER` column names where the letter denotes
+  Stress/Anxiety/Depression) and DERS-18 (18 items, letters denote the
+  six DERS subscales) — identified by matching subscale-letter counts
+  against the two named instruments in the title. Malay, N=689.
+- `turner_2022_sr_belief_change` / `_cognitive_mediation` — two item sets
+  in one file (stimulus-response belief-change, 9 items; cognitive-
+  mediation beliefs, 15 items), N=250.
+- `gomez_2022_qcae` — QCAE (31 items; some text-coded "Strongly
+  Disagree"..."Strongly Agree", some already-numeric reverse-scored
+  columns kept as-is), N=203. Every other instrument in this file (TOSCA,
+  SIAS-6, SPS-6, BIS/BAS, ERQ, ATQ) was present only as subscale
+  totals/means, not raw items — excluded.
+- `yang_2015_ethnic_essentialism` — 104-item combined essentialism/
+  multicultural-ideology/cultural-anxiety battery, Chinese university
+  students, N=113. Every respondent was duplicated as a byte-identical
+  row pair (export artifact, confirmed by direct row comparison) —
+  deduplicated before melting. No codebook exists to split the 104 items
+  by construct, so they're kept as one file.
+**Retracted after initial processing (2026-07-28, caught by ben-domingue
+in review)**: `stenson_2021_sleep_emotion` (10.1371/journal.pone.0256983)
+was initially shipped as a 13th table (continuous "Rating" per session x
+valence, item = session×valence, N=59) but the paper's Methods text
+states the real per-trial response is a 5-point Likert rating (1-5, "how
+negatively you felt about the image"), 15 trials per condition, and
+explicitly says "Mean ratings for the attend/negative and decrease/
+negative conditions were used" — i.e. the SI file's "Rating" column is a
+derived mean/contrast score across trials (further transformed somehow,
+since it goes negative, which a raw 1-5 mean can't), not a raw response.
+Continuous-looking values were wrongly assumed legitimate by analogy to
+`kang_2015_facial_preference`'s genuine FPV proportions, without
+independently checking this file against the source paper's description
+of what's actually being measured. Pulled the table, its `data/` script,
+and its biblio row; `biblio_plos_batch7.csv` now has 12 rows.
+**Process gap this exposed**: continuous/fractional values in a "worth_
+retrying" SI file need to be checked against the paper's Methods text for
+what the raw per-observation unit actually is (single Likert response?
+average over N trials? a computed index?) before being accepted as
+`resp` — matching values in-range for the *stated* raw scale isn't
+enough on its own; out-of-range or oddly-fractional values are a strong
+signal the column is already a composite, and should be looked into
+before use rather than after.
+
+**Skipped as aggregate/composite/derived data, not raw items** (despite
+a clean, unique id column) — the recurring failure mode in this batch:
+files whose only "items" were already-computed subscale totals,
+standardized T-scores, IAT D-scores, or (in one case) values that were
+fractional/imputed throughout every column, none of which are raw
+responses per datastandard.md:
+- ADHD/ERP twins study, videogame-virtue-behavior study (all SDQ/AQ/BIS/
+  STAXI totals + game telemetry), undergrad romantic-attachment study
+  (all subscale-mean composites), workplace social-support study (every
+  scale's values were fractional/imputed throughout, not raw Likert
+  codes), COVID hospital-staff longitudinal study (K6/FCV19/STAI stored
+  only as wave-level totals despite a genuine `time` wave column),
+  complementary chronic-pain-treatment study (T1_* columns are all
+  scale-total names), error-related-negativity video-game study (EEG/
+  behavioral aggregates only), drunk-driving IAT study (D-scores only,
+  4 genuine explicit-attitude items too thin on their own), police-cadet
+  heart-rate-stress study (behavioral/physio aggregates, 3 genuine
+  single-item mood ratings too thin alone), abacus-training and ADHD-
+  executive-function-training studies (T-scores/standardized composites
+  throughout).
+
+**Deferred, not abandoned** (flagged for a follow-up session, same as
+PUGGS/disability-representations from the `good` pass): coping-self-
+efficacy/sex-trafficking study and full-body-mirror-exposure eating-
+pathology study (both have genuine multi-wave raw items — MSPSS,
+CopSE, EDE-Q, PANAS — but need careful per-scale wave-column work);
+insight-in-schizophrenia study (many real item blocks with ambiguous
+subscale identity, e.g. bare "C1-5"/"S1-10"/"M1-12" prefixes with no
+codebook); Brazilian smoking/FFMQ study (huge multi-scale file with
+extensive derived-transform columns to filter out and ambiguous A/B/C
+block identities). The remaining rows in `plos_batch6_retriage.csv`
+(near-clean duplicate-id cases needing a dedup decision, and rows where
+the first column is confirmed not to be a real id) were not individually
+worked through this pass — see `TODO.md`.

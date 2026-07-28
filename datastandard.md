@@ -222,6 +222,19 @@ If column names are in a non-English language, create a mapping to `item_1`, `it
 ### Subscale aggregate columns
 Aggregate columns often share a prefix with item columns but have a suffix like `_total`, `_TT`, `_FAMIL`, `_001`, `_002`. Exclude them explicitly by checking for these suffixes before building the item column list.
 
+### Verifying a continuous-looking column is actually a raw response
+Not every column with plausible, in-range-looking values is a raw single-observation response — some are already a mean/contrast/index computed across several trials or items, which is a composite (see "Subscale aggregate columns" above), not a `resp`. This is easy to miss when the composite happens to fall in a plausible range, or when its non-integer look is (wrongly) taken as evidence it's a legitimate continuous rating rather than checked. Before accepting a continuous or oddly-fractional column as `resp`:
+- Check the paper's Methods/description of the instrument for what a single raw observation actually is (e.g. "subjects rated each image on a 5-point scale") and how many raw trials/items feed into the value you're looking at.
+- Values that fall outside the raw scale's stated bounds (e.g. negative values from a 1–5 scale) are a strong signal the column is already transformed — don't rationalize an out-of-range value as "continuous data, so it's fine."
+- A genuine per-observation ratio (e.g. proportion of K repeated trials rated a certain way) should reduce to a small set of exact fractions with a consistent denominator (`k/K` for fixed `K`) — check this arithmetically before trusting it; an inconsistent, non-repeating set of fractions across rows points to a computed index instead.
+- A prior instance in this pipeline (`stenson_2021_sleep_emotion`, PLOS ONE batch 6, 2026-07-28) shipped a mean/contrast score across ~15 trials as if it were a raw per-trial rating; it was caught after the fact and retracted. Do this check before saving the file, not after.
+
+### Checking for imputed values
+`resp` must have imputed values removed — but a non-integer value on an otherwise-integer scale (see "Data entry errors at known values" below) only catches *some* imputation methods (mean/regression imputation). Mode imputation, last-observation-carried-forward, and hot-deck imputation all produce values indistinguishable from genuine responses by inspecting `resp` alone, so the numeric check is not sufficient on its own:
+- When the source paper's text is available (e.g. already fetched for a PLOS article's Data Availability/Methods sections), search it for imputation-related language before finalizing the file: "imput" (catches "imputed"/"imputation"), "missing data", "MICE", "multiple imputation", "expectation-maximization", "mean substitution", "last observation carried forward"/"LOCF", "hot-deck". Finding "listwise deletion" or "complete case" is a good sign — it means missing data were dropped, not filled in.
+- If the paper describes imputing missing values for the *analysis* sample, don't assume the shared raw file predates that step — check whether the file/codebook distinguishes a raw vs. an imputed/analysis version, or flag the dataset for human review if it's ambiguous which one was shared.
+- This is a text-search check, not a purely numeric one — apply it regardless of whether `resp` looks like clean integers, since imputation can produce values that are individually indistinguishable from real ones.
+
 ### Response time data
 Convert to seconds if the source is in milliseconds:
 ```python
@@ -303,6 +316,7 @@ For Figshare, Dataverse, OSF, and Zenodo, iterate over the file list returned by
 7. **`resp` direction within items** — within each item, higher values must represent a consistent directional change (the scale cannot reverse mid-item). However, direction is allowed to vary across items, so reverse-scored items do not need to be recoded. What matters is that imputed values are removed and no sentinel codes remain.
 8. **No aggregate/subscale totals in the item list** — check that `n_items` in your summary line is plausible for the instrument.
 9. **`rt` in seconds** — if response times are included, verify the scale (values in the thousands likely indicate milliseconds).
+10. **No imputed values** — a non-integer value on an otherwise-integer scale is one signal (see "Data entry errors at known values"), but not the only one. When the source paper's text is available, search it for imputation language ("imput", "missing data", "MICE", "multiple imputation", "mean substitution", "LOCF", "hot-deck") before finalizing — see "Checking for imputed values" above. Do this regardless of whether `resp` already looks clean, since some imputation methods produce values indistinguishable from real ones.
 
 ---
 

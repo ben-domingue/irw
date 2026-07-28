@@ -78,8 +78,84 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   dropped, not pursued** (ben-domingue, 2026-07-28): too small (N<100
   each) to be worth the review time. `plos_full_triage.csv` /
   `plos_full_retriage.csv` still hold these rows if reconsidered later,
-  but no longer block anything — next step is a fresh PLOS ONE discovery
-  pass with new search terms (not yet started).
+  but no longer block anything. The fresh PLOS ONE discovery pass with
+  new search terms this note called for has since run — see batch 6
+  below.
+
+- [x] **PLOS ONE batch 6 — `biblio_plos_batch6.csv` (24 rows) closed out**
+  (confirmed 2026-07-28, ben-domingue): all 24 tables from the
+  15-candidate `good` review — 8 papers (bled_2021 ×2, ruiz_parra_2023
+  ×9, najari_2024_bpqsf ×3, odachi_2022 ×3, zhao_2024_erq ×1, li_2021 ×4,
+  kang_2015 ×1, ly_2021 ×1) — uploaded to Redivis and pasted into the
+  dictionary sheet; `biblio_plos_batch6.csv` and all 24 `irw_output/*.csv`
+  files gone from disk as expected.
+
+- [ ] **PLOS ONE batch 6 — `human_review_plos_batch6.csv` (89 rows) needs
+  pasting into the "Human eye" sheet** (2026-07-28, generated from
+  `plos_batch6_retriage.csv`'s `human_review` rows).
+
+- [x] **PLOS ONE batch 6 — `biblio_plos_batch7.csv` (12 rows) closed out**
+  (confirmed 2026-07-28, ben-domingue): 12 tables from 8 of the 48
+  `worth_retrying` rows (baumgaertner_2018, huang_2016 ×3, grant_2018,
+  laksmita_2020, rosharudin_2023 ×2, turner_2022 ×2, gomez_2022,
+  yang_2015) uploaded to Redivis and pasted into the dictionary sheet;
+  `biblio_plos_batch7.csv` and the 12 `irw_output/*.csv` files gone from
+  disk as expected. Before upload, two issues were caught and fixed in
+  review (see `BATCH_LOG.md`'s "Retracted after initial processing" and
+  the `yang_2015` isolated-data-entry-error fix): a 13th table
+  (`stenson_2021_sleep_emotion`) was retracted entirely — its "Rating"
+  column was a derived mean/contrast score across trials, not a raw
+  per-trial response, per the paper's own Methods text — and
+  `yang_2015_ethnic_essentialism` had one isolated non-integer value
+  (3.75 on a single item/respondent) dropped as a data-entry error. Both
+  findings prompted new standing checks added to `datastandard.md`
+  ("Verifying a continuous-looking column is actually a raw response"
+  and "Checking for imputed values" — the latter checks the source
+  paper's text for imputation language, since non-integer screening alone
+  doesn't catch every imputation method).
+
+- [ ] **PLOS ONE batch 6 — 2 datasets need codebook-driven follow-up work
+  (deferred from the worth_retrying pass, 2026-07-28)**: the coping-self-
+  efficacy/sex-trafficking study and the full-body-mirror-exposure
+  eating-pathology study both have genuine multi-wave raw items (MSPSS,
+  CopSE, EDE-Q, PANAS) but need careful per-scale wave-column work beyond
+  what this pass had time for. DOIs and column details in `BATCH_LOG.md`.
+
+- [ ] **PLOS ONE batch 6 — 3 datasets have real items but ambiguous
+  subscale identity** (deferred, 2026-07-28): insight-in-schizophrenia
+  study (bare "C1-5"/"S1-10"/"M1-12"/VAGUS blocks, no codebook to name
+  them), Brazilian smoking/FFMQ study (huge multi-scale file, needs
+  filtering out extensive derived-transform columns and identifying
+  ambiguous A/B/C blocks), and 1 `recoverable_format` row in
+  `plos_batch6_retriage.csv` (a semicolon-delimited PsyCap file) not yet
+  re-triaged with `sep=';'`.
+
+- [ ] **PLOS ONE batch 6 — remaining `worth_retrying` rows not
+  individually reviewed** (`plos_batch6_retriage.csv`, 2026-07-28): rows
+  where duplicate ids are near-clean (a handful of likely-exact-duplicate
+  rows needing a dedup decision) and rows where the first column is
+  confirmed not to be a real person id (true id column, if any, not yet
+  located). ~26 rows total; see `BATCH_LOG.md` for the full accounting of
+  what was and wasn't looked at.
+
+- [ ] **Carver 2017 PUGGS genetics-belief questionnaire
+  (`10.1371/journal.pone.0169808`) needs a codebook-driven processing
+  script** — flagged `good` in batch 6 but not processed: two pilot
+  samples (N=207, N=78), each spanning a belief-in-determinism subscale
+  (1-6/1-5 Likert with a "don't know" sentinel) and a true/false
+  genetics-knowledge subscale (needs a per-item answer-key recode to
+  correct/incorrect per the codebook). Both DOCX codebooks are already
+  downloaded and read (see `BATCH_LOG.md`); the recode logic is
+  understood, just not yet implemented as a script.
+
+- [ ] **Meloni 2015 disability-representations study
+  (`10.1371/journal.pone.0128876`) needs a codebook-driven processing
+  script** — flagged `good` in batch 6 but not processed: 244-column SI
+  file with ~8 distinct item families (open-ended disability-attribution
+  codes, 5×12 fictional-character rating blocks, a knowledge scale,
+  interest/attitude scales with paired response-time columns,
+  extracurricular-activity items). Tractable but needs more per-block
+  codebook time than the batch 6 pass had.
 
 - [x] **PLOS ONE pilot — all 34 tables from the first pass uploaded and
   biblio-entered** (confirmed 2026-07-26, ben-domingue): first 7
@@ -115,12 +191,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (batch 18 row) for contributor OSF profiles/ORCID. Ready to process the
   moment permission or a license appears.
 
-- [ ] **`automated_finding/human_review_conflict.csv`** (1 row: "Stroop test
-  dataset", DVN/GINKMU) — needs pasting into the "Human eye" sheet. CC0,
-  real trial-level Stroop latency/accuracy columns appear to be present but
-  buried in a ~700-column undocumented Russian-language child-development
-  survey with no codebook found — needs a person to decode the column
-  scheme (or locate the source paper) before it can be extracted. See
+- [x] **`automated_finding/human_review_conflict.csv`** (1 row: "Stroop test
+  dataset", DVN/GINKMU) pasted into the "Human eye" sheet (confirmed
+  2026-07-28, ben-domingue); file no longer on disk. CC0, real trial-level
+  Stroop latency/accuracy columns appear to be present but buried in a
+  ~700-column undocumented Russian-language child-development survey with
+  no codebook found — still needs a person to decode the column scheme
+  (or locate the source paper) before it can be extracted. See
   `BATCH_LOG.md`'s "Batch 18" entry.
 
 - [ ] **Political Preference China** (`10_7910_dvn_dwplbc.csv`, DVN/dwplbc) — on
@@ -163,12 +240,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   needs manual browser access). Full story of how these were found in
   `BATCH_LOG.md`'s "Finishing the 32-candidate backlog" entry.
 
-- [ ] **`automated_finding/human_review_lang_pilot.csv`** (1 row: SWAN
-  depression/lifestyle data, DVN/HWMJAE) — needs pasting into the "Human
-  eye" sheet; see `BATCH_LOG.md`'s "Non-English per-language discovery
-  pilot" entry for why it couldn't be resolved automatically (real
-  longitudinal item data, but the 4 items may span two different SWAN
-  questionnaire modules — needs SWAN-codebook access to confirm).
+- [x] **`automated_finding/human_review_lang_pilot.csv`** (1 row: SWAN
+  depression/lifestyle data, DVN/HWMJAE) pasted into the "Human eye" sheet
+  (confirmed 2026-07-28, ben-domingue); file no longer on disk. See
+  `BATCH_LOG.md`'s "Non-English per-language discovery pilot" entry for
+  why it couldn't be resolved automatically (real longitudinal item data,
+  but the 4 items may span two different SWAN questionnaire modules —
+  needs SWAN-codebook access to confirm).
 
 - [ ] **Portella 2022 racial-attitudes dictionary/tags fix needs pasting in**
   (`automated_finding/dictionary_fix_portella_2022.csv`,
@@ -187,9 +265,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `hwFrequency*`/`work*`/`DMQslider*` and their paired `*Est` columns — uses
   a different, not-yet-decoded response mechanism.
 
-- [ ] **`automated_finding/human_review_cognitive_tasks.csv`** (17 rows,
-  from batch 19's cognitive/decision-making-task search) — needs pasting
-  into the "Human eye" sheet. Includes 2 notable cases worth a second look:
+- [x] **`automated_finding/human_review_cognitive_tasks.csv`** (17 rows,
+  from batch 19's cognitive/decision-making-task search) pasted into the
+  "Human eye" sheet (confirmed 2026-07-28, ben-domingue); file no longer
+  on disk. Included 2 notable cases worth a second look:
   the Nosek & Smyth (2011) math-IAT dataset (DVN/Z3MV4J, N=11,819 — real
   data, needs the paper's PDF codebook to decode 186 cryptic columns safely)
   and the LGBTQ-judges conjoint experiment (DVN/CDLVDH, N=1,249 — a genuine
