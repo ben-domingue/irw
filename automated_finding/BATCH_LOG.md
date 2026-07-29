@@ -2457,3 +2457,130 @@ Still open: splitting the 80 `human_review` rows into
 deferred datasets noted in the previous entry. ben-domingue is reviewing
 all of batch 8's output CSVs before pasting `biblio_plos_batch8.csv` into
 the dictionary sheet.
+
+## PLOS ONE batch 8 — VR-empathy and phonological-loop deferred datasets resolved (2026-07-29)
+
+Took the "second, closer look" promised in the previous entry for the 2
+datasets that looked plausible but weren't committed to. Both resolved
+cleanly once checked against the source papers' own Methods text, rather
+than needing new codebook time — reclassified from "needs a closer look"
+to "just needed the paper read more carefully."
+
+**`herrera_2018_vr_empathy`** (`10.1371/journal.pone.0204494`, Herrera
+et al., building long-term empathy via traditional vs. VR perspective-
+taking about homelessness) -> 4 tables:
+- `herrera_2018_iri` (21 items — Empathic Concern/Perspective
+  Taking/Personal Distress subscales of the IRI) and
+  `herrera_2018_beliefs_about_empathy` (12 items) — both merged across
+  Study 1 (N=117) and Study 2 (N=439) since the Methods text confirms
+  both were administered "pre-intervention" identically in both studies
+  as sample checks; Study 2's id offset by 1000. Source `PID` strings
+  collide across unrelated respondents in both studies (confirmed via
+  mismatched ages on the same PID string, e.g. `26c2` appearing twice
+  with ages 15 and 28) — row index was used as id instead.
+  `cov_condition`/`cov_study` carry the group assignment rather than
+  `treat`, since Study 1 is a 2-arm comparison (traditional vs. VR) but
+  Study 2 is 4-arm (traditional/desktop/VR/control), so a single binary
+  `treat` column wouldn't fit both.
+- `herrera_2018_attitudes_homeless` (8 items, Study 2 only) — matched to
+  the paper's "Attitudes toward the Homeless" scale on Likert range
+  (1-9) and topic (the paper describes it as 7 items; the file has 8,
+  likely an off-by-one in the paper's own count, not independently
+  re-verified against the raw item text).
+  `herrera_2018_se_d_items` (8 items, Study 2 only, `SE1-4`/`D1-4`) could
+  not be matched to a named instrument in the text and were kept under
+  their original source labels rather than guessed at.
+
+**Caught and corrected in review (2026-07-29, ben-domingue)**: initially
+also shipped `herrera_2018_ios` (Inclusion of Other in the Self, single
+item) and `herrera_2018_dehumanization` (Ascent-of-Man Dehumanization
+Scale, single continuous 0-100 item), both explicitly named single-item
+measures in the paper's Methods text. Pulled both — **IRW does not
+accept single-item scales regardless of data quality**, since there's no
+within-person item pattern to model; this is now a standing rule (see
+memory `feedback_no_single_item_scales`). Removed from `irw_output/`,
+`biblio_plos_batch8_deferred.csv`, and the processing script.
+
+**`meng_2017_referent_assignment`** (`10.1371/journal.pone.0187368`,
+Meng, Murakami & Hashiya — phonological loop and children's referent
+assignment) -> 1 table. The original triage flagged
+`Base-Assignment`/`Shift`/`Re-Assignment`/`Follow-RA` as the item
+columns, which is what made this look ambiguous at first pass, but the
+paper's Methods text spells out that each of those four is a derived
+composite: "The Base-Assignment Score ... coded as 1 when both the EQ
+and AQ were correct," and likewise Shift = f(EQ, EQ2), Re-Assignment =
+f(EQ2, AQ2), Follow-RA = f(AQ2, AQ3). The actual raw responses are the 5
+binary correctness scores those composites are built from — `EQ`
+(explicit question), `AQ` (ambiguous question, same trial), `EQ2`/`AQ2`
+(same pair after a topic shift), and `AQ3` (repeated ambiguous question,
+a consistency check). Each of 74 children contributed 2 blocks x 2
+trials = 4 observations of this 5-item set, encoded as a `wave` column
+(1-4) rather than needing all 4 as separate items, since datastandard.md
+allows duplicate id+item pairs when `wave` is present. `LPS` (0-8 range,
+consistent with the paper's forward digit-span phonological-loop
+measure) and `CES` (abbreviation not spelled out in the text) are
+constant per child across all 4 rows and carried as covariates.
+
+Both datasets' biblio rows are in `biblio_plos_batch8_deferred.csv` (5
+rows, after removing the 2 single-item tables above), separate from the
+already-pasted `biblio_plos_batch8.csv`. All output files passed the
+per-item rare-value data-entry-error scan.
+
+Still deferred: the Clinton-voter activism longitudinal study, the
+Chinese EFL learning study, and the emotional-eating chain-mediation
+study — all three still need real per-scale codebook/wave-column work,
+not just a closer read of the paper text. See `TODO.md`.
+
+## One-off: santos_2018 (GH issue #1557, 2026-07-29)
+
+User-directed pointer, not from the discovery pipeline:
+[issue #1557](https://github.com/ben-domingue/irw/issues/1557) linked
+`https://osf.io/e9r5s/` (raw file `Santos_PlosOne.txt`) and the paper
+Santos, Kossakowski, Schwartz, Beeber & Fried (2018), "Longitudinal
+network structure of depression symptoms and self-efficacy in low-income
+mothers," PLOS ONE 13(1):e0191675 (`10.1371/journal.pone.0191675`),
+noting "permission from author." The OSF node itself has no license set
+(`node_license` empty via the OSF API) — same "no formal license, author
+granted permission" situation as `alcoholstroop_jones2024`/
+`enkavi_2019`, so `Original License` = "Missing (NA)", `Derived License`
+= "CC BY 4.0" (per ben-domingue instruction and the standard permission-
+email template's default terms), `Notes` = "email permission (issue
+#1557)".
+
+N=306 low-income mothers, two combined RCTs (2003-2010), up to 4 waves
+(baseline/14wk/22wk/26wk, not all retained at every wave; 957 person-wave
+rows total). `data/santos_2018_maternal_depression.py` writes 2 tables:
+- `santos_2018_gse.csv` — 10-item Generalized Self-Efficacy scale
+  (columns `gse2`/`gse4`/`gse5`/.../`gse18`, kept as-is since they're the
+  item numbers from the source instrument's larger bank, not positions),
+  1-4 range. `GSEcomponent` (a PCA composite of these 10 items, per the
+  paper's own network-analysis Methods) is a derived score, not a raw
+  item — excluded.
+- `santos_2018_cesd.csv` — 20-item CES-D depression scale, 0-3 range.
+  `CESDtot` (aggregate sum) excluded.
+
+Both files carry `wave` (`time`, 1-4, already ascending) and `treat`
+(`RX`, mapped from the paper's "2=intervention, 1=control" coding to the
+standard 1/0, confirmed constant per id across waves). The sentinel
+value `9` appears 1-2 times on literally every item in both scales,
+consistent with a missing-data code sitting outside each scale's
+documented range — filtered out per the per-item rare-value check,
+along with two isolated `4`s on `cesd12`/`cesd13` (otherwise 0-3). No
+imputation involved — the paper's own text ("we estimated GGMs ... using
+pairwise complete observations") confirms the shared raw file is
+pre-imputation.
+
+**Closed out (2026-07-29, ben-domingue)**: both tables uploaded to
+Redivis and the tab-delimited dictionary rows confirmed pasted into the
+dictionary sheet; `dictionary_fix_santos_2018.csv` deleted.
+
+**Paste format fix (2026-07-29)**: ben-domingue reported the dictionary
+rows didn't paste cleanly into the Google Sheet — comma-CSV quoting
+around `Description`/`Reference` (both routinely contain commas: author
+lists, "13(1), e0191675" style citations) isn't honored by Google
+Sheets' plain clipboard paste, which splits on every literal comma and
+shifts `License`/`Contributor`/`Date` out of alignment. Rewrote
+`dictionary_fix_santos_2018.csv` tab-delimited (real `\t`, no quoting
+needed since no field contains a literal tab) and documented this as the
+standard going forward in `SKILL.md`. Use tab-delimited for all future
+`dictionary_fix_*`/`biblio_*` staging files, not comma-CSV.

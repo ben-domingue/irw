@@ -340,17 +340,36 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   batch 8's `human_review` rows) pasted into the "Human eye" sheet
   (confirmed 2026-07-29, ben-domingue); file deleted from the repo.
 
-- [ ] **PLOS ONE batch 8 — 5 datasets deferred, not abandoned** (need
-  more codebook/wave-column time than this pass had): Clinton-voter
-  activism longitudinal study (`10.1371/journal.pone.0221754`, real
-  CESD + Activist items across waves, T1a/T1b/Wave coding needs care);
-  Chinese EFL learning study (`10.1371/journal.pone.0280919`, real items
-  but Chinese-text Likert labels need recoding + a 481-vs-942-row
-  mismatch to resolve); emotional-eating chain-mediation study
-  (`10.1371/journal.pone.0280701`, real EES-R/CES-D/DERS bundle but
-  item blocks are cryptically labeled `@10.`/`@11.` etc., needs matching
-  to instruments); VR-empathy perspective-taking study
-  (`10.1371/journal.pone.0204494`) and phonological-loop children study
-  (`10.1371/journal.pone.0187368`) both look like real per-item/per-trial
-  data but want a second, closer look before committing.
+- [ ] **PLOS ONE batch 8 — 3 datasets still deferred** (need more
+  codebook/wave-column time than any pass so far): Clinton-voter activism
+  longitudinal study (`10.1371/journal.pone.0221754`, real CESD +
+  Activist items across waves, T1a/T1b/Wave coding needs care); Chinese
+  EFL learning study (`10.1371/journal.pone.0280919`, real items but
+  Chinese-text Likert labels need recoding + a 481-vs-942-row mismatch to
+  resolve); emotional-eating chain-mediation study
+  (`10.1371/journal.pone.0280701`, real EES-R/CES-D/DERS bundle but item
+  blocks are cryptically labeled `@10.`/`@11.` etc., needs matching to
+  instruments).
+
+- [x] **PLOS ONE batch 8 — VR-empathy and phonological-loop deferred
+  datasets resolved** (confirmed 2026-07-29, ben-domingue) — the "second
+  closer look" both turned out to be quick once checked against the
+  papers' Methods text. `herrera_2018_vr_empathy.py`
+  (`10.1371/journal.pone.0204494`) -> 4 tables:
+  `herrera_2018_iri`/`_beliefs_about_empathy` (merged across the paper's
+  2 studies, confirmed identically administered, ids offset per study),
+  `_attitudes_homeless`/`_se_d_items` (Study 2 only). Two more candidate
+  tables (`_ios`, `_dehumanization`) were caught in review as single-item
+  measures and dropped — IRW does not accept single-item scales
+  regardless of data quality (new standing rule, see memory
+  `feedback_no_single_item_scales`). `meng_2017_referent_assignment.py`
+  (`10.1371/journal.pone.0187368`) -> 1 table: the triage-flagged
+  `Base-Assignment`/`Shift`/`Re-Assignment`/`Follow-RA` columns turned
+  out to be derived composites (each an AND of two raw scores, per the
+  paper's own coding description) rather than raw items — the actual
+  5 raw per-trial correctness scores (`EQ`/`AQ`/`EQ2`/`AQ2`/`AQ3`) were
+  used instead, with a `wave` column encoding the block/trial order (74
+  children x 4 trials). All 5 output files uploaded to Redivis;
+  `biblio_plos_batch8_deferred.csv` pasted into the dictionary sheet and
+  being removed from disk as expected.
 

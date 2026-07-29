@@ -214,6 +214,16 @@ License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
 `Contributor` is `"automated"`, and `Public Reshare?` is `"Public"` (not
 `"Yes"`).
 
+**Write these staging files tab-delimited, not comma-delimited** (confirmed
+2026-07-29 with the `santos_2018` entry). `Description` and `Reference`
+routinely contain commas (author lists, "13(1), e0191675" page/issue
+citations), which forces RFC4180 quoting in a comma CSV — but Google Sheets'
+plain clipboard paste does not honor that quoting; it splits on every comma
+literally, shifting `License`/`Contributor`/`Date` out of place. None of the
+fields contain literal tab characters, so a real-tab-delimited file needs no
+quoting at all and pastes cleanly cell-by-cell. Keep the `.csv` filename
+(matches the existing naming convention) but use `\t` between fields.
+
 There is no `cleaned_index.csv` to update (eliminated 2026-06-24) —
 `BATCH_LOG.md` is the record of what's been cleaned, uploaded, and
 biblio-entered per batch.
