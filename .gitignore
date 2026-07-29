@@ -1,6 +1,8 @@
 *.gz
 *.tar.gz
 metadata/items_alltext.Rdata
+metadata/**/*.csv
+metadata/**/*.txt
 .env
 .Rproj.user
 .DS_Store
