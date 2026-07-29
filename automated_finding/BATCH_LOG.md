@@ -2584,3 +2584,123 @@ shifts `License`/`Contributor`/`Date` out of alignment. Rewrote
 needed since no field contains a literal tab) and documented this as the
 standard going forward in `SKILL.md`. Use tab-delimited for all future
 `dictionary_fix_*`/`biblio_*` staging files, not comma-CSV.
+
+## PLOS ONE batch 9 (2026-07-29)
+
+Fresh discovery run following the same pattern as batches 6/8: 28 new
+instrument/construct/task terms not previously searched against PLOS ONE
+(General Health Questionnaire, Life Orientation Test, Attention Network
+Test, Trail Making Test, Tower of London Task, Narcissistic Personality
+Inventory, Machiavellianism Scale, Empathy Quotient, Marlowe-Crowne Social
+Desirability Scale, Rejection Sensitivity Questionnaire, Behavioral
+Inhibition/Activation Scale, Operation Span Task, Mental Rotation Task,
+Epworth Sleepiness Scale, Kessler Psychological Distress Scale, WHO-5
+Well-Being Index, Meaning in Life Questionnaire, Three-Factor Eating
+Questionnaire, Dutch Eating Behavior Questionnaire, Dyadic Adjustment
+Scale, Parental Bonding Instrument, Child Behavior Checklist, Test
+Anxiety Inventory, Job Satisfaction Survey, Perceived Organizational
+Support Scale, Prisoner's Dilemma Game, Social Value Orientation Scale,
+System Justification Scale; logged in `search_terms_log.csv`). A few
+terms initially considered (Iowa Gambling Task, Corsi Block-Tapping Task,
+Reading Span Task, Dictator Game, Public Goods Game, Continuous
+Performance Task) were swapped out because they'd already been searched
+via `irw_discover_updated.py` in an earlier batch (different source/
+mechanism, but kept the term list maximally novel for this pass anyway).
+
+1,261 candidates -> 7 `good` + 184 `human_assistance` + 25
+`not_item_response` + 7 `download_failed`/`error`. Retriage
+(`irw_retriage_ha.py`) on the `human_assistance` bucket gave 24
+`worth_retrying` + 1 `recoverable_format` + 63 `human_review` + 68
+`aggregate_continuous` + 28 `not_item_response`.
+
+**Good-candidate review** (all 7 hand-checked against the full article
+text and Supporting Information file list, per SKILL.md's "needs a human
+glance more than usual" note): 5 processed -> 9 tables, 1 skipped, 1
+deferred.
+- `xiong_2025_dass21` (`10.1371/journal.pone.0316703`, DASS-21 TMD
+  study): DASS-21 (21 items, 0-3) merged across two independently-
+  recruited samples (Wave 1 N=519, Wave 2 N=455) since Methods text
+  confirms identical wording/scale in both; id offset per sample,
+  `cov_sample` added rather than a `wave` column (different people, not
+  repeat measures). The paper's "5Ts" TMD-symptom items were dropped: the
+  text describes them as binary yes/no in both waves, but the raw Wave 2
+  columns actually contain values 0-3 -- inconsistent with the paper's
+  own description, so left out rather than guessed at.
+- `su_2025_health_behaviors` (`10.1371/journal.pone.0333086`): 19-item
+  ad hoc student health-behaviour-influence inventory (1-5 Likert), N=150.
+  Not a named standardized instrument, but the paper reports Cronbach's
+  alpha=0.889 across the full set, confirming it's treated as one
+  coherent measure rather than 19 unrelated single-item ratings. An
+  unexplained extra "Age" column (values 1-5, inconsistent with the
+  actual "What is your age?" item) was dropped rather than guessed at.
+- `wakui_2023_who5` (`10.1371/journal.pone.0294357`, aroma-seal-mask RCT):
+  WHO-5 (5 items, 0-5) at baseline and 2-week follow-up, N=61, `wave`
+  column for the two timepoints. Caught in review: the article's other SI
+  file, ostensibly DASS-21 data, actually contains only pre-computed
+  subscale totals (Total/Anxiety/Depression/Stress), not raw items -- not
+  shipped, per datastandard.md's "verifying a continuous-looking column
+  is actually a raw response" check. `Group` (aroma vs. placebo, coded
+  1/2) kept as `cov_group` rather than `treat` since the article text
+  never states which numeric code is which arm.
+- `liu_2025_mlq` / `liu_2025_positive_cognition` /
+  `liu_2025_learning_motivation` (`10.1371/journal.pone.0330447`, N=345
+  Chinese college students): three scales in one Chinese-language raw
+  file -- Meaning in Life Questionnaire (9 items, 1-7), Positive
+  Cognition (12 items, 1-5), Learning Motivation (16 items, 1-5). Item
+  columns relabeled `item_1..` with original Chinese text kept in
+  `item_text`, per datastandard.md's non-Latin-column-names edge case.
+  `来自IP` (source IP address) dropped as PII, not carried as a covariate.
+- `zamzuri_2021_rpap_risk_perception` / `_attitude` / `_practice`
+  (`10.1371/journal.pone.0256636`, dengue RPAP questionnaire validation,
+  N=253 Malaysian respondents, main Sheet1 sample only): three domain
+  blocks on an 8-point scale -- Risk Perception (D, 12 items), Attitude
+  (E, 10 items), Practice (F, 13 items). Ships all raw items as
+  collected rather than the paper's post-hoc reduced 29-item scoring
+  subset. A separate N=67 test-retest subsample (Sheet3) was left
+  unprocessed.
+- Skipped: `10.1371/journal.pone.0299201` (SoroTouch abacus-training
+  cognitive study) -- the flagged "4 items" are derived per-participant
+  engagement metrics (usage time, questions attempted, correct answers,
+  proficiency level), not raw item responses; N=10 in the SoroTouch arm
+  is also too small on its own.
+- Deferred (not processed this pass): `10.1371/journal.pone.0307369`
+  (situational-motivation/physical-activity EMA study) -- genuine
+  event-contingent repeated-measures design (22 people, 519 sessions over
+  10 weeks) but the triage-flagged "2 items" turned out to be pre-/post-
+  activity report *modules* each containing several sub-ratings, not two
+  comparable Likert items; needs the raw file opened and the actual
+  per-session item structure mapped before it can be shipped correctly.
+
+All 9 output tables passed the per-item rare-value data-entry-error scan
+(clean, plausible-skew distributions, no isolated-to-one-item outliers).
+All 9 `irw_output/*.csv` files uploaded to Redivis and removed from disk
+(confirmed 2026-07-29, ben-domingue).
+
+**Biblio staging format detour and revert (2026-07-29)**: `biblio_plos_batch9.csv`
+was first staged tab-delimited per the standing convention (see the
+`santos_2018` entry above), but ben-domingue reported columns shifting on
+import. Root cause turned out to be Google Sheets' delimiter
+auto-detection guessing comma over tab because of the many literal commas
+still present in `Description`/`Reference` text -- the file itself was
+confirmed correctly tab-delimited (10/10 rows, 14 fields each). Re-staged
+as `.xlsx` to remove delimiter guessing entirely, which fixed the paste --
+but ben-domingue then asked to revert entirely to the plain comma-CSV
+system used before that morning's tab-delimited change, treating the
+santos_2018/batch-9 issues as isolated rather than grounds to change the
+standing format. `SKILL.md`'s tab-delimited paragraph (added earlier this
+session) was reverted via `git checkout`, and `biblio_plos_batch9.csv` /
+`human_review_plos_batch9.csv` were rebuilt as standard comma-delimited
+CSV. Both pasted successfully and confirmed by ben-domingue; both files
+deleted from the repo. Standing convention going forward: plain
+comma-delimited CSV, no special-casing -- see memory
+`feedback_dict_format` for the reasoning.
+
+**Not yet reviewed**: 24 `worth_retrying` + 1 `recoverable_format` rows
+remain in `plos_batch9_retriage.csv`, not individually hand-checked this
+pass (titles/DOIs/n/items preserved in `TODO.md`). Notable ones by size:
+`10.1371/journal.pone.0199480` (body image/eating behavior/QoL, N=2096,
+65 items), `10.1371/journal.pone.0206800` (Multidimensional Social
+Competence Scale psychometric validation, N=734, 40 items),
+`10.1371/journal.pone.0169375` (exercise behavior in Chinese cancer
+patients, N=350, 138 items), `10.1371/journal.pone.0202818` (trust/
+psychological distress, urban poor Accra, N=788).

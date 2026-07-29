@@ -373,3 +373,47 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `biblio_plos_batch8_deferred.csv` pasted into the dictionary sheet and
   being removed from disk as expected.
 
+- [x] **PLOS ONE batch 9 discovered, triaged, and 5 of 7 `good` candidates
+  processed** (confirmed 2026-07-29): 28 new terms, 1,261 candidates -> 7
+  `good` + 184 `human_assistance`. 5 papers processed -> 9 tables
+  (`xiong_2025_dass21`, `su_2025_health_behaviors`, `wakui_2023_who5`,
+  `liu_2025_mlq`/`_positive_cognition`/`_learning_motivation`,
+  `zamzuri_2021_rpap_risk_perception`/`_attitude`/`_practice`); 1 skipped
+  (SoroTouch, N=10 derived engagement metrics, not raw items); 1 deferred
+  (situational-motivation EMA, ambiguous item structure -- see below). Full
+  per-dataset reasoning in `BATCH_LOG.md`'s "PLOS ONE batch 9" entry. All 9
+  `irw_output/*.csv` files uploaded to Redivis and removed from disk
+  (confirmed 2026-07-29, ben-domingue).
+
+- [x] **`automated_finding/biblio_plos_batch9.csv`** (9 rows) pasted into
+  the dictionary sheet (confirmed 2026-07-29, ben-domingue); file deleted
+  from the repo. Re-staged as plain comma-delimited CSV after a same-day
+  tab-delimited/xlsx detour was tried and reverted -- see `BATCH_LOG.md`
+  and memory `feedback_dict_format` for why.
+
+- [x] **`automated_finding/human_review_plos_batch9.csv`** (63 rows,
+  batch 9's `human_review` rows from `irw_retriage_ha.py`) pasted into the
+  "Human eye" sheet (confirmed 2026-07-29, ben-domingue); file deleted
+  from the repo.
+
+- [ ] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
+  not yet hand-reviewed** (2026-07-29), still in `plos_batch9_retriage.csv`:
+  `10.1371/journal.pone.0199480` (body image/eating behavior/QoL, N=2096,
+  65 items), `10.1371/journal.pone.0206800` (Multidimensional Social
+  Competence Scale validation, N=734, 40 items), `10.1371/journal.pone.0169375`
+  (exercise behavior in Chinese cancer patients, N=350, 138 items),
+  `10.1371/journal.pone.0202818` (trust/psychological distress, urban poor
+  Accra, N=788, 5 items), `10.1371/journal.pone.0322635` (exercise/
+  emotional eating/body dissatisfaction SEM, N=903, 8 items), plus 19 more
+  smaller-N rows and 1 `recoverable_format` (semicolon-delimited body-
+  esteem/diabetes file, `10.1371/journal.pone.0263766`). See
+  `BATCH_LOG.md` for the full list with n/items.
+
+- [ ] **PLOS ONE batch 9 — situational-motivation EMA study deferred**
+  (`10.1371/journal.pone.0307369`, 2026-07-29): genuine event-contingent
+  repeated-measures design (22 people, 519 sessions over 10 weeks,
+  pre-/post-activity self-reports), but the triage-flagged "2 items" are
+  actually two multi-rating report *modules*, not two Likert items --
+  needs the raw S1 Data file opened and the per-session item structure
+  mapped out before it can be shipped.
+
