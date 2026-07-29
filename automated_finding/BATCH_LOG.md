@@ -2253,3 +2253,207 @@ block identities). The remaining rows in `plos_batch6_retriage.csv`
 (near-clean duplicate-id cases needing a dedup decision, and rows where
 the first column is confirmed not to be a real id) were not individually
 worked through this pass — see `TODO.md`.
+
+## PLOS ONE batch 8 discovery + worth_retrying triage (2026-07-29)
+
+Fresh PLOS ONE discovery run following the 2026-07-28 decision to keep
+mining PLOS ONE with new instrument/task terms. 30 terms not previously in
+`search_terms_log.csv` (HEXACO Personality Inventory, Difficulties in
+Emotion Regulation Scale, Interpersonal Reactivity Index, Pittsburgh Sleep
+Quality Index, Adult ADHD Self-Report Scale, Self-Compassion Scale, Trait
+Emotional Intelligence Questionnaire, Need for Closure Scale, Right-Wing
+Authoritarianism Scale, Moral Foundations Questionnaire, Cognitive
+Reflection Test, Delay Discounting Task, Ultimatum Game, Wisconsin Card
+Sorting Task, Digit Span Task, Dot Probe Task, Fear of Negative Evaluation
+Scale, Social Interaction Anxiety Scale, Body Appreciation Scale, Eating
+Attitudes Test, Alcohol Use Disorders Identification Test, Internet
+Addiction Test, Adverse Childhood Experiences Questionnaire, Impact of
+Event Scale, Brief COPE, Utrecht Work Engagement Scale, Psychological
+Capital Questionnaire, Experiences in Close Relationships Scale,
+Strengths and Difficulties Questionnaire, Fear of Missing Out Scale).
+
+`api.plos.org` DNS dropped mid-run after ~24 terms (transient network
+hiccup, not a script bug) — the last 6 terms were re-run with `--resume`
+once DNS recovered, which correctly skipped the ~1281 already-processed
+DOIs and only fetched the gap. Final tally: 1,500 candidates -> 1,153
+`no_usable_file`, 261 `human_assistance`, 35 `download_failed`, 23
+`not_item_response`, 7 `good`, 4 `error`, 1 `timeout`.
+
+Retriage (`irw_retriage_ha.py`) on the 261 `human_assistance` rows gave:
+91 `aggregate_continuous`, 80 `human_review`, 47 `not_item_response`, 42
+`worth_retrying`, 1 `recoverable_format` (a semicolon-delimited PsyCap
+file misread with the comma default).
+
+### worth_retrying / recoverable_format triage (43 rows, all hand-inspected)
+
+Downloaded and hand-inspected every flagged file's real column structure
+via a throwaway bulk-inspection script (`inspect_batch8_wr.py`, deleted
+after use; full per-row structural dump captured in
+`batch8_wr_inspection.txt` before deletion). Same recurring failure mode
+as prior batches: many `dup_id_item`-flagged rows turned out to be files
+of already-computed subscale totals/z-scores/composite indices, not raw
+items, despite having a clean unique-looking first column.
+
+**Processed -> 8 papers, 31 tables** (all CC-BY, `biblio_plos_batch8.csv`):
+- `lorenz_2016_hope`/`_optimism1`/`_optimism2`/`_resilience`/`_efficacy1`/
+  `_efficacy2`/`_psycap` (PsyCap CPC-12 validation, Study 1, N=321) — the
+  `recoverable_format` row; confirmed the semicolon re-read produces 76
+  clean 1-6 item columns across 7 distinct batteries (hope, two optimism
+  batteries, CD-RISC-13 resilience, two self-efficacy batteries, and the
+  24-item PsyCap item pool). No id/covariate columns in source; row index
+  used as id.
+- `sleboda_2021_risk_benefit` (N=3228) — 80-item risk/benefit-perception
+  battery, 5 hazard domains x 16 semantic-differential dimensions.
+  `pd.read_spss`'s default value-label handling mixed numeric and
+  labeled-endpoint Swedish text inconsistently across columns (labels
+  exist only at the scale's 1/11 endpoints) — `convert_categoricals=False`
+  was required to get clean 1-11 codes throughout; a real gotcha worth
+  remembering for other Nordic-language SPSS files.
+- `tiemensma_2018_iesr` (N=549) — 22-item IES-R. Source `id` collided on 2
+  of 552 rows with genuinely different response patterns (not a retest) —
+  failed the uniqueness check, so row index was used instead per
+  datastandard.md's fallback rule.
+- `alsuhibani_2022_*` (conspiracy/paranoia across 3 independent samples,
+  combined N=2644) — 10 tables. Per ben-domingue's direction this session,
+  checked the paper's own Methods text before assuming any cross-study
+  item correspondence, rather than merging on column-name similarity
+  alone: confirmed the 24-item Multidimensional Locus of Control Scale
+  was "identical" across all 3 studies, the 20-item Self-Esteem Rating
+  Scale was used in "Studies 2 and 3", and Study 3's 15-item GCBS was
+  explicitly "the same ... employed in Study 2 ... the two additional
+  items ... were not included" — so those three instruments were merged
+  into single cross-study files (`alsuhibani_2022_loc`, `_sers`, `_gcbs`)
+  with each study's `id` offset by `100000*study_number` to keep the
+  combined id space collision-free; Study 2's 2 extra GCBS items with no
+  Study-3 counterpart were kept as their own small file
+  (`alsuhibani_2022_gcbs_extra_s2`) rather than discarded. PADS differed
+  in both item count (10 vs 8) and scale range (0-4 vs 1-5) between
+  Study 1 and Study 2 with no textual confirmation of correspondence, so
+  those stayed separate, as did the single-study Consp (S1), Revised
+  Paranoia scale (S3), NPI (S3), and ECRS (S3) batteries. This merge-vs-
+  separate distinction is now documented in `datastandard.md`'s new "same
+  instrument administered to multiple sub-studies/samples" edge case.
+- `niazi_2020_mfq` / `_mfq_stereotype` (N=300) — MFQ-32 rated twice per
+  respondent: once as the respondent's own judgment, once as their
+  prediction of the average person's rating on the same 32 statements.
+- `kim_2025_psas` / `_isi` / `_psqi` / `_hads` (Korean sleep-arousal
+  validation, N=286) — 4 instruments bundled in one file, text-coded
+  responses ("1=not at all", etc.) with leading-integer extraction; PSQI's
+  4 clock-time/duration items (bedtime, wake time, minutes-to-sleep,
+  hours-slept) are not ordinal Likert responses and were excluded, keeping
+  only its 14 ordinal items (item 5's 10 disturbance sub-items + items
+  6-9).
+- `luo_2021_ecr` / `_conational_ties` / `_host_ties` / `_intl_ties` /
+  `_acculturation_index` (international students in China, N=229) — 5
+  instruments in one file with a Excel-merge header artifact (only the
+  first item in each block carries real question text, later items are
+  bare "@2."/"@3." placeholders with non-ASCII apostrophes) — columns were
+  selected by position rather than by retyping the header text, and
+  output items renamed to generic `item_NN` labels. A 2-item QCL block was
+  excluded: values were fractional with a min near 0.01, indicating an
+  already-computed proportion rather than a raw response.
+- `reinecke_2018_online_vigilance` (N=229) — 12-item Online Vigilance
+  Scale (salience/reactibility/monitoring subscales).
+
+All 31 output files passed an automated per-item rare-value scan (looking
+for values isolated to a single item and appearing nowhere else in that
+item's scale, the data-entry-error signature from prior batches) with
+nothing flagged.
+
+**Skipped as aggregate/composite/derived or otherwise out of scope**
+(~25 rows) — same recurring pattern as prior batches: files whose columns
+were already-computed subscale totals, z-scored/standardized composites,
+or clinical/biomarker measures, despite a clean unique id column. Notable
+cases: a tourism choice-experiment (`10.1371/journal.pone.0270531`) and a
+preference-reversal betting experiment (`10.1371/journal.pone.0292011`)
+were skipped as conjoint/trial-level economic-game designs, the same open
+scope question as the LGBTQ-judges conjoint case from batch 19 (see
+TODO.md); a full-body-mirror-exposure eating-pathology study
+(`10.1371/journal.pone.0257303`) turned out to be the identical paper
+already deferred from batch 6's worth_retrying pass, just resurfaced via
+a different search term; a small (N=26) JIA/SDQ study and a small (N=41)
+racially-targeted-food-marketing study were skipped as too small per the
+established N<100(ish) threshold; a HEXACO-100 test-retest study
+(`10.1371/journal.pone.0262465`) only exposed domain-level facet means
+(O/C/A/X/E/H) in the parsed sheet despite its SI caption promising
+"items, facets, and domains" — flagged for a follow-up look at whether
+another sheet in the same Excel file holds the raw 100 items.
+
+**Deferred, not abandoned** (5 datasets, need more codebook/wave-column
+time): a Clinton-voter activism longitudinal study
+(`10.1371/journal.pone.0221754`, real CESD + Activist items across waves
+but T1a/T1b/Wave coding needs care), a Chinese EFL learning study
+(`10.1371/journal.pone.0280919`, real items with Chinese-text Likert
+labels needing recoding plus a 481-vs-942-row mismatch to resolve), an
+emotional-eating chain-mediation study (`10.1371/journal.pone.0280701`,
+real EES-R/CES-D/DERS bundle but item blocks are cryptically labeled
+`@10.`/`@11.` etc. and need matching to instruments), and a VR-empathy
+perspective-taking study (`10.1371/journal.pone.0204494`) plus a
+phonological-loop children study (`10.1371/journal.pone.0187368`) that
+both look like real per-item/per-trial data but want a second look before
+committing. See `TODO.md`.
+
+The 7 originally-`good`-flagged candidates from the discovery run have
+not yet been reviewed — next step, per plan agreed with ben-domingue.
+
+## PLOS ONE batch 8 good-candidate review (2026-07-29)
+
+Hand-reviewed all 7 originally-`good`-flagged candidates from the batch 8
+discovery run before writing scripts, per the skill's standing caution
+that the triage script only inspects the first tabular SI file.
+
+**Processed -> 3 papers, 9 tables** (added to `biblio_plos_batch8.csv`):
+- `queiros_2018_qcae` (N=562) — 31-item QCAE, Portuguese sample. The file
+  extension in the SI listing (`.xls`) was misleading twice over: the
+  triage-selected suffix guessed from caption order didn't match the
+  actual live URL (fixed by re-running `extract_si_files` fresh rather
+  than assuming a `.sNNN` numbering pattern), and even the correct URL's
+  content is OOXML-zip-based despite the `.xls` name, needing
+  `engine="xlrd"` — actually failed until traced through: don't guess
+  SI suffixes from caption order, always re-derive the live URL.
+- `esiason_2024_aaqii`/`_cfq`/`_bai`/`_bdi`/`_vlq_importance`/
+  `_vlq_consistency`/`_ace` (NMOSD patients N=21 + caregivers N=37,
+  combined into single cross-group files per the same identical-
+  instrument-across-samples logic as `alsuhibani_2022`, caregiver ids
+  offset by 1000) — REDCap export with a title row above the real header
+  (`header=1` needed). AAQ-II, a 13-item CFQ item pool, BAI, BDI (items
+  16/18 use a 1-7 code capturing both increase/decrease directions, a
+  known BDI-II digitization quirk rather than a data error, confirmed via
+  per-item `value_counts()`), the Valued Living Questionnaire (importance
+  + consistency ratings on 10 life domains, written as two files), and a
+  10-item ACE screen. REDCap `*_complete` status columns and 94
+  `acoping___N`/`bcoping___N` checkbox fields (a coping word-pair
+  checklist with no accompanying codebook) were excluded.
+- `addy_2021_sdq_ghana` (N=405) — first 10 raw SDQ items (0-2 scale).
+  `SDQ_TOTAL` and subscale sums, `TOTAL_DF_old`, and 25 `SDQ*_CAT`
+  columns (banded/categorized recodes of the full 25-item SDQ, not raw
+  responses to `SDQ_1`-`SDQ_10`) were excluded.
+
+**Skipped, 4 candidates:**
+- `10.1371/journal.pone.0243209` (Megreya, emotion regulation + face
+  recognition) — same DOI already skipped in batch 6 as aggregate-only
+  (hit/miss/accuracy face-memory stats, ERQ subscale means); resurfaced
+  via a different search term (Emotion Regulation Questionnaire) but not
+  new information.
+- `10.1371/journal.pone.0220622` (ultimatum game neural correlate) —
+  the "3 items" the triage flag saw were per-subject acceptance-rate
+  proportions (Fair/Mid-value/Unfair conditions, values like 0.14/0.86/
+  0.92 with a malformed multi-row Excel header) — an aggregate over
+  trials, not raw per-trial responses, per datastandard.md's
+  "continuous-looking column" check.
+- `10.1371/journal.pone.0275045` (health-service positive-feedback
+  systematic scoping review) — the "data" is a literature-review study-
+  characteristics abstraction table (one row per reviewed paper), not
+  survey response data at all.
+- `10.1371/journal.pone.0233025` (monetary-incentive RCT for vulnerable
+  children survey response) — the 5 "items" the triage flag saw
+  (EMOSYM/CONPRO/HYPACT/PEEPRO/PROBEH) are already-computed SDQ subscale
+  scores, not raw items; `response`/`allocation` are the RCT's own
+  outcome/treatment fields with no accompanying item-level data.
+
+This closes out PLOS ONE batch 8's discovery/triage/processing pass.
+Still open: splitting the 80 `human_review` rows into
+`human_review_plos_batch8.csv` for the "Human eye" sheet, and the 5
+deferred datasets noted in the previous entry. ben-domingue is reviewing
+all of batch 8's output CSVs before pasting `biblio_plos_batch8.csv` into
+the dictionary sheet.

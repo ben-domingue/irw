@@ -90,9 +90,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   dictionary sheet; `biblio_plos_batch6.csv` and all 24 `irw_output/*.csv`
   files gone from disk as expected.
 
-- [ ] **PLOS ONE batch 6 — `human_review_plos_batch6.csv` (89 rows) needs
-  pasting into the "Human eye" sheet** (2026-07-28, generated from
-  `plos_batch6_retriage.csv`'s `human_review` rows).
+- [x] **`automated_finding/human_review_plos_batch6.csv`** (89 rows,
+  batch 6's `human_review` rows) pasted into the "Human eye" sheet
+  (confirmed 2026-07-29, ben-domingue); file deleted from the repo.
 
 - [x] **PLOS ONE batch 6 — `biblio_plos_batch7.csv` (12 rows) closed out**
   (confirmed 2026-07-28, ben-domingue): 12 tables from 8 of the 48
@@ -295,4 +295,62 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   combined N=1097 file mixing all sub-studies has an unreliable id column;
   would need per-file (not per-combined-file) processing. Low priority —
   noted for whoever wants the extra ~500 respondents.
+
+- [x] **`knight_2026_crt`** (2026-07-29, one-off user-supplied lead, not
+  from batch discovery) pasted into the dictionary sheet and uploaded to
+  Redivis (confirmed 2026-07-29, ben-domingue). Processed from Knight et
+  al. (2026, *Psychological Science*) — double-blind RCT of intranasal
+  testosterone vs. placebo on the 7-item Cognitive Reflection Test, OSF
+  node `37ycj` (`TED_CRT_longdata.csv`), CC0. Script:
+  `data/knight_2026_crt.py`. Output was `irw_output/knight_2026_crt.csv`
+  (6,993 rows, 999 ids, 7 items, resp 0/1, treat 0/1, rt in seconds —
+  back-transformed from the source's natural-log RT via `exp()`, verified
+  against Qualtrics `Page Submit` timing elsewhere in the same raw dataset,
+  which is natively in seconds). `biblio_knight_2026_crt.csv` deleted from
+  the repo.
+
+- [x] **PLOS ONE batch 8 discovered and processed** (confirmed 2026-07-29,
+  ben-domingue): fresh discovery run (`irw_discover_plos.py`, 30 new
+  instrument/task terms not previously searched, e.g. HEXACO, Cognitive
+  Reflection Test, Ultimatum Game; logged in `search_terms_log.csv`).
+  1,500 candidates -> 7 `good` + 261 `human_assistance`. Retriage
+  (`irw_retriage_ha.py`) on the `human_assistance` bucket gave 42
+  `worth_retrying` + 1 `recoverable_format` + 80 `human_review` + 91
+  `aggregate_continuous` + 47 `not_item_response`. All 43
+  `worth_retrying`/`recoverable_format` rows and all 7 `good` rows were
+  downloaded and hand-inspected (see "Batch 8 worth_retrying triage" and
+  "Batch 8 good-candidate review" in `BATCH_LOG.md` for the per-row
+  calls). 11 papers processed -> 40 tables — `lorenz_2016` (PsyCap
+  CPC-12, 7 tables), `sleboda_2021_risk_benefit`, `tiemensma_2018_iesr`,
+  `alsuhibani_2022` (conspiracy/paranoia, 3 studies, 10 tables —
+  LOC/SERS/GCBS merged across studies confirmed identical by the paper's
+  own Methods text, ids offset per study; see `datastandard.md`'s new
+  "same instrument administered to multiple sub-studies" edge case, added
+  this session), `niazi_2020_moral_foundations` (2 tables),
+  `kim_2025_presleep_arousal` (4 tables), `luo_2021_acculturation` (5
+  tables), `reinecke_2018_online_vigilance`, `queiros_2018_qcae`,
+  `esiason_2024_nmosd` (patients+caregivers merged same way as
+  `alsuhibani_2022`, 7 tables), `addy_2021_sdq_ghana`. All 40 output
+  files passed the per-item rare-value data-entry-error scan and
+  ben-domingue's review; `biblio_plos_batch8.csv` and all 40
+  `irw_output/*.csv` files are being removed from disk as expected
+  (pasted into the dictionary sheet / uploaded to Redivis).
+
+- [x] **`automated_finding/human_review_plos_batch8.csv`** (80 rows,
+  batch 8's `human_review` rows) pasted into the "Human eye" sheet
+  (confirmed 2026-07-29, ben-domingue); file deleted from the repo.
+
+- [ ] **PLOS ONE batch 8 — 5 datasets deferred, not abandoned** (need
+  more codebook/wave-column time than this pass had): Clinton-voter
+  activism longitudinal study (`10.1371/journal.pone.0221754`, real
+  CESD + Activist items across waves, T1a/T1b/Wave coding needs care);
+  Chinese EFL learning study (`10.1371/journal.pone.0280919`, real items
+  but Chinese-text Likert labels need recoding + a 481-vs-942-row
+  mismatch to resolve); emotional-eating chain-mediation study
+  (`10.1371/journal.pone.0280701`, real EES-R/CES-D/DERS bundle but
+  item blocks are cryptically labeled `@10.`/`@11.` etc., needs matching
+  to instruments); VR-empathy perspective-taking study
+  (`10.1371/journal.pone.0204494`) and phonological-loop children study
+  (`10.1371/journal.pone.0187368`) both look like real per-item/per-trial
+  data but want a second, closer look before committing.
 

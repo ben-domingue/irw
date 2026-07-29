@@ -209,6 +209,13 @@ Use `{"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}` as the request h
 ### Multiple scales in one file
 Define a `SCALES` dict mapping output name → item column list (or regex pattern). Loop over it, melt, and write one file per entry. See `che_2026_social_support.py` for a pattern using `re.compile` prefix matching, and `ren_2019_psychopathy_children.py` for a `(prefix, valid_max, out_name)` tuple approach.
 
+### The same instrument administered to multiple sub-studies/samples in one paper
+Some papers report several independently-recruited samples (Study 1, Study 2, Study 3, ...) in separate supplementary files, and reuse the same instrument across two or more of them. Default to one file per study, but merge into a single combined file when both of the following hold:
+- **Confirmed identical administration.** Check the paper's Methods text explicitly — don't infer this from matching item counts or column-name patterns alone. Column names can coincidentally match (or superficially differ, e.g. `GCBS1` vs `GCBS01`) without the underlying items being the same, and two studies can also use genuinely different versions of a same-named instrument. Look for language like "identical to those used in Study N" or "the same 15-item version ... employed in Study 2 (the two additional items ... were not included)" — the latter also tells you exactly which items correspond when counts differ (e.g. Study 2's items 1-15 out of 17 map onto Study 3's 15). If the text doesn't confirm it, or item counts/scale ranges differ with no explanation, keep the studies as separate files rather than guessing at a correspondence.
+- **`id` values can be made distinct across the merged samples.** Studies are independently recruited, so their `id` columns almost always overlap numerically even though they don't refer to the same people. Offset each study's `id` by a per-study constant safely larger than any study's max `id` (e.g. `id + 100000 * study_number`) before concatenating — never concatenate raw `id`s from different samples without doing this, since it silently creates false id collisions across unrelated respondents.
+
+When a source item exists in one study but not the other (e.g. two bonus items only asked in the larger sample), don't discard it — write it as its own small file rather than folding it into the merged one, since it wasn't measured in the other sample(s).
+
 ### No meaningful item labels
 When source column names are opaque (`V1`, `Q3`, column indices), assign generic labels:
 ```python
