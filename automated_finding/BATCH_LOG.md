@@ -2889,3 +2889,162 @@ design but needs the full timepoint list mapped); `10.1371/journal.pone.0184488`
 found so far); `10.1371/journal.pone.0256916` (psychosomatic
 rehabilitation gender-effects study, 494 cols with cryptic `N7`/`N1`-
 suffixed variable names, no clear raw-item naming pattern found).
+
+## PLOS ONE batch 11 (2026-07-30)
+
+Fresh discovery run following the same pattern as batches 6/8/9/10: 30 new
+instrument/construct terms not previously searched against PLOS ONE (Penn
+State Worry Questionnaire, Social Phobia Inventory, Liebowitz Social
+Anxiety Scale, Yale-Brown Obsessive Compulsive Scale, Padua Inventory,
+Hewitt Multidimensional Perfectionism Scale, Multidimensional Body-Self
+Relations Questionnaire, Eating Disorder Inventory, Yale Food Addiction
+Scale, Multidimensional Health Locus of Control Scale, Illness Attitude
+Scales, Whiteley Index, Short Health Anxiety Inventory, PHQ-15, Beck
+Hopelessness Scale, Columbia Suicide Severity Rating Scale, Social
+Support Questionnaire, De Jong Gierveld Loneliness Scale, Need to Belong
+Scale, Social Connectedness Scale, Conflict Tactics Scale, Dysfunctional
+Attitudes Scale, Automatic Thoughts Questionnaire, Ruminative Response
+Scale, Anxiety Sensitivity Index, Flourishing Scale, Subjective Happiness
+Scale, Oxford Happiness Questionnaire, Coping Self-Efficacy Scale,
+Copenhagen Burnout Inventory; logged in `search_terms_log.csv`).
+
+634 candidates -> 4 `good` + 107 `human_assistance` + 7 `not_item_response`
++ 13 `download_failed` + 2 `error` + 1 `timeout`. Retriage
+(`irw_retriage_ha.py`) on the `human_assistance` bucket gave 19
+`worth_retrying` + 28 `human_review` + 41 `aggregate_continuous` + 19
+`not_item_response`.
+
+**Good-candidate review**: all 4 hand-checked; 3 processed, 1 retracted.
+- `teicher_2015_mace` (`10.1371/journal.pone.0117423`) -- **retracted
+  2026-07-30** (ben-domingue catch): the triage-flagged S4/S5/S6 files are
+  blank Excel *scoring templates* for the MACE instrument (hence tiny
+  N=9/12/24), not participant data -- caught exactly the "needs a human
+  glance more than usual" scenario, and the real dataset (S11_File,
+  N=1051) was initially shipped as 10 items (maltreatment type) x 18
+  waves (age). But the paper's own text states MACE severity scores were
+  "developed... using item response theory to gauge severity of
+  exposure" -- these are IRT-calibrated severity weights, not raw
+  responses to a single question, which is why per-type values cluster
+  on even numbers (0,2,4,6,8,10) rather than spanning the full integer
+  range. Same category of problem as the `stenson_2021_sleep_emotion`
+  retraction (batch 6/7): a derived index shipped as if it were `resp`.
+  `data/teicher_2015_mace.py` deleted, `irw_output/teicher_2015_mace.csv`
+  removed, dropped from `biblio_plos_batch11.csv`. S9_File in the same
+  article *does* contain genuine raw binary (0/1) lifetime-endorsement
+  items behind MACE's scoring (`Swore`, `Hit`, `Fondled`, `Pushed`, ~70
+  candidate columns total, plus paired `_Helpless`/`_Terrified` distress
+  ratings and `_sib`/peer/adult variants) -- a promising raw dataset, but
+  properly separating item vs. covariate columns across ~70 candidates is
+  new work for a future session, not done here.
+- `xu_2016_pqb` (`10.1371/journal.pone.0148935`, N=505): Prodromal
+  Questionnaire-Brief Version, 21 items, 0-5 (Chinese adaptation uses a
+  0-5 severity scale rather than the original's binary format). `NUM`
+  used as id since `DATE` (the first column) was not unique.
+- `fredrickson_2015_mhcsf` (`10.1371/journal.pone.0121839`, N=122):
+  Mental Health Continuum-Short Form, 14 items, 0-5. One cell held a
+  literal `'.'` missing-value placeholder, handled by the standard
+  `to_numeric(errors="coerce")` + dropna path.
+- `milavic_2019_psisysf` (`10.1371/journal.pone.0220930`, N=304):
+  Psychological Skills Inventory for Sports Youth-SF, 18 items, 1-5. A
+  trailing all-NaN column literally named `#########` (Excel
+  column-width overflow artifact) dropped.
+
+**worth_retrying pass**: hand-reviewed all 19 rows plus re-confirmed
+`10.1371/journal.pone.0234997` was already skipped in batch 10 (same
+paper, different search term). 5 papers processed -> 18 tables.
+- `tanck_2021_edeq` / `tanck_2021_bcq` (`10.1371/journal.pone.0257303`,
+  N=73): pre/post full-body mirror exposure. BCQ (23 items) is
+  straightforward; EDE-Q (28 raw columns) needed a closer look after
+  ben-domingue asked about item 13-15 values up to 20 (not 0-6) --
+  confirmed against the paper's own text: "the EDE-Q consists of 22 items
+  which are rated on a Likert scale from 0 to 6," and 12+10=22 of the 28
+  raw columns (items 1-12, 19-28) are indeed bounded 0-6 in the data.
+  Items 13-18 are the instrument's separate frequency-count questions
+  (e.g. number of binge/vomiting/exercise episodes out of the past 28
+  days) -- real EDE-Q items, just not part of the 4 subscale totals this
+  paper computed, so genuinely legitimate at values up to 20-28 rather
+  than a data error. Kept in the same file per the "ship all raw items
+  from the instrument" precedent (`liu_2022_mice_skills`, batch 10) since
+  they're still real responses on the same questionnaire form, just a
+  different response format than the 0-6 items. Source column numbering
+  is zero-padded at `_pre` but not `_post` -- normalized to a shared item
+  label.
+- `aguirre_camacho_2021_shai` / `aguirre_camacho_2021_champion`
+  (`10.1371/journal.pone.0249562`, N=244/442): Short Health Anxiety
+  Inventory (18 items, 0-3) and Champion Breast Cancer Fear Scale (8
+  items, 1-5, with a wave=1 retest subsample n=78). **Caught in QC**: the
+  per-item rare-value scan surfaced fractional values (e.g. 2.71, 3.39)
+  on both scales -- the paper's own Methods text confirms EM-algorithm
+  imputation was applied to missing values (~1.3% of cells) in this same
+  file before analysis. Filtered to integer-only `resp` (imputed cells
+  are the non-integer ones); ~0.2-0.4% of cells dropped per scale.
+- `conner_2017_*` (`10.1371/journal.pone.0171206`, N=171, fruit/vegetable
+  RCT, 3 arms kept as `cov_condition`): 7 tables -- CES-D, HADS-Anxiety,
+  Flourishing Scale, Vitality (0-100 continuous VAS), Curiosity and
+  Exploration Inventory, Life Orientation Test (all baseline+follow-up),
+  and Big Five Inventory (baseline only). A handful of isolated
+  non-integer cells (5 total across ~24,000, no imputation language in
+  this paper) filtered as data-entry errors on the non-VAS scales. The
+  daily-diary mood items (6 adjectives x ~13 days) not shipped -- needs
+  day-by-adjective mapping.
+- `shi_2025_*` (`10.1371/journal.pone.0331084`, N=196, mindfulness-vs-
+  control RCT, 3 waves pre/post/3-month): 5 tables -- MAAS, BRUMS,
+  DASS-21, RRS, Resilience (27 items). `组别`/Group kept as `cov_group`,
+  not `treat` -- paper confirms a 98/98 split but never states which
+  numeric code is which arm (same ambiguity as `wakui_2023_who5` in batch
+  9). **Caught in QC**: MAAS item 9 had one `42` and item 8 one `8`
+  (valid range 1-6); RRS items 9 and 16 each had one `5` (valid range
+  1-4) -- isolated single data-entry errors against hundreds of
+  legitimate responses on those same items, filtered out.
+- `reinwarth_2023_loneliness3` / `reinwarth_2023_phq4`
+  (`10.1371/journal.pone.0279701`, N=2465/2464, German representative
+  population sample): 3-item brief loneliness scale and PHQ-4, both
+  confirmed via the file's own German variable labels
+  (`meta.column_names_to_labels`). An 8-domain importance/satisfaction
+  battery, the validated FLZ life-satisfaction questionnaire, and an
+  unidentified 6-item block in the same file were not shipped -- would
+  need per-domain label translation or instrument identification beyond
+  this pass.
+
+All 18 tables passed the per-item rare-value/imputation scan after the
+two fixes above. `biblio_plos_batch11.csv` (21 rows: 3 good + 18
+worth_retrying, after the `teicher_2015_mace` retraction above) staged
+for the dictionary sheet, all CC BY 4.0. `human_review_plos_batch11.csv`
+(28 rows) staged for the "human eye" sheet.
+
+**10 skipped** (aggregate-only or not item-response shaped, confirmed by
+opening the file): `10.1371/journal.pone.0307349` (German caregiver
+trait-anxiety study, all composite totals), `10.1371/journal.pone.0171186`
+(fibromyalgia QoL SEM, all composite totals), `10.1371/journal.pone.0189808`
+(gastric cancer/caregiver social support, all composite totals),
+`10.1371/journal.pone.0190292` (Floatation-REST, mostly composite/VAS
+totals; a small ambiguous ~43-item `sec_*` block with only 51/151 rows
+complete not pursued), `10.1371/journal.pone.0284769` (chocolate/muscle
+pain, repeated VAS pain-intensity readings over time under 3 chocolate
+conditions -- a psychophysics time-series, not item-response-shaped data),
+`10.1371/journal.pone.0350293` (DBS-for-OCD QoL, only 4 columns, YBOCS/QLES
+totals despite a longitudinal structure), `10.1371/journal.pone.0256001`
+(chronic pain RCT, all T1_/T2_ composite subscale totals),
+`10.1371/journal.pone.0122311` (facial disgust/estradiol, Hits/FA/Pr are
+signal-detection summaries across trials, not raw per-trial responses),
+`10.1371/journal.pone.0304132` (international-students mental health, ad
+hoc mixed-type items with no shared validated scale, N=87; the paper's
+secondary N=201 dataset also composite-only), `10.1371/journal.pone.0270464`
+(role-stress/burnout Hong Kong, Int/Ext/Total are per-wave composite
+behavior scores plus latent-growth-curve model parameters, not raw
+items).
+
+**4 deferred** (real item-level data present, needs more codebook time):
+`10.1371/journal.pone.0257577` (disordered-eating-in-athletes prospective
+study, N=802, 3 waves, ~20 subscale prefixes incl. EDI Drive-for-
+Thinness/Body-Dissatisfaction and EDE-Q C/R/S/W/X blocks in one 665-column
+file); `10.1371/journal.pone.0350928` (psychological-crisis-coping/
+physical-activity study, N=1051, clean 2-row header revealed rumination
+[22 items, 3 subscales], PA [3 items], CC [32 items, 4 subscales], ER [14
+items, 2 subscales] blocks, but subscale semantic identity needs the
+paper's codebook); `10.1371/journal.pone.0279701`'s remaining q11/q12/q13
+domain-importance/satisfaction/FLZ battery and unidentified q18 6-item
+block (loneliness3/phq4 already shipped from this same file, see above);
+`10.1371/journal.pone.0291207` (coping-self-efficacy/sex-trafficking
+study) -- confirmed to be the same dataset already flagged deferred in
+batch 6's `TODO.md`, not re-investigated.

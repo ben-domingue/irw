@@ -3,6 +3,49 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **PLOS ONE batch 11 — `biblio_plos_batch11.csv` (21 rows) closed
+  out** (confirmed 2026-07-30, ben-domingue): 8 papers (`xu_2016_pqb`,
+  `fredrickson_2015_mhcsf`, `milavic_2019_psisysf`, `tanck_2021_*` ×2,
+  `aguirre_camacho_2021_*` ×2, `conner_2017_*` ×7, `shi_2025_*` ×5,
+  `reinwarth_2023_*` ×2, all CC BY 4.0) uploaded to Redivis and pasted
+  into the dictionary sheet; `biblio_plos_batch11.csv` and all 21
+  `irw_output/*.csv` files gone from disk as expected. Three QC catches
+  along the way, see `BATCH_LOG.md`'s "PLOS ONE batch 11" entry:
+  `teicher_2015_mace` was **retracted** (ben-domingue caught an odd
+  even-number-only response pattern -- the paper confirms MACE severity
+  scores are IRT-derived, not raw responses; script and output deleted),
+  `aguirre_camacho_2021_*` needed a non-integer filter for EM-imputed
+  cells (paper-confirmed), and `shi_2025_maas`/`shi_2025_rrs` had isolated
+  single data-entry errors dropped.
+
+- [x] **`automated_finding/human_review_plos_batch11.csv`** (28 rows,
+  batch 11's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-07-30, ben-domingue); file deleted
+  from the repo.
+
+- [ ] **Teicher 2015 MACE study (`10.1371/journal.pone.0117423`) has a
+  genuine raw-item dataset worth a future look** (found while retracting
+  `teicher_2015_mace`, 2026-07-30): S9_File in the same article contains
+  ~70 candidate raw binary (0/1) lifetime-maltreatment-endorsement items
+  (`Swore`, `Hit`, `Fondled`, `Pushed`, etc.), plus paired
+  `_Helpless`/`_Terrified` distress ratings and `_sib`/peer/adult
+  variants, N=1051. Properly separating item vs. covariate columns and
+  deciding what to do with the paired distress ratings is new work, not
+  started.
+
+- [ ] **PLOS ONE batch 11 — 4 deferred `worth_retrying` datasets need
+  codebook-driven follow-up** (2026-07-30): disordered-eating-in-athletes
+  prospective study (`10.1371/journal.pone.0257577`, N=802, 3 waves, ~20
+  subscale prefixes incl. EDI and EDE-Q blocks in one 665-column file);
+  psychological-crisis-coping/physical-activity study
+  (`10.1371/journal.pone.0350928`, N=1051, clean rumination[22i,3sub]/
+  PA[3i]/CC[32i,4sub]/ER[14i,2sub] block structure already identified,
+  just needs subscale semantic labels from the paper's codebook);
+  `10.1371/journal.pone.0279701`'s remaining q11/q12/q13 domain-
+  importance/satisfaction/FLZ battery + unidentified q18 6-item block
+  (the loneliness3/phq4 tables from this same file are already shipped,
+  see above). `plos_batch11_retriage.csv` still holds these rows.
+
 - [x] **PLOS ONE batch 10 — `biblio_plos_batch10.csv` (19 rows) closed out**
   (confirmed 2026-07-30, ben-domingue): 4 papers (`baudin_2024_static99r`,
   `liu_2022_mice_skills`, `alsyouf_2024_*` ×12, `ozkurt_2026_*` ×5, all
