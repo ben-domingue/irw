@@ -26,11 +26,21 @@ def convert_to_irw(input_file, output_prefix):
                     and not c.startswith('score_')]
     
     arith_items = [c for c in all_cols if c.startswith('arith_perf') and c.endswith('_acc')]
-    
+
+    # AMATUS's arithmetic task is a 2-minute speed test administered in a fixed
+    # order (Cipora et al. 2024, sec. 2.5): unattempted items are coded 0 in the
+    # *_acc columns, conflating "wrong" with "never reached". The matching
+    # *_resp column is empty iff the item was never attempted, so use it to
+    # recode unattempted items as missing (NaN) rather than incorrect (0).
+    for acc_col in arith_items:
+        resp_col = acc_col.replace('_acc', '_resp')
+        if resp_col in df.columns:
+            df.loc[df[resp_col].isna(), acc_col] = pd.NA
+
     item_cols = survey_items + arith_items
 
     exclude_cols = ['id'] + item_cols + [c for c in all_cols if c.endswith('_resp')]
-    
+
     cov_cols = [c for c in df.columns if c not in exclude_cols]
 
     cov_rename_map = {c: f"cov_{c}" for c in cov_cols}
