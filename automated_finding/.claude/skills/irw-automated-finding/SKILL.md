@@ -145,6 +145,13 @@ typical action). Usually resolves ~60% of the bucket automatically. Only
 `human_review` rows need a person — add those to the "human eye" tab of the
 queue sheet; everything else is either dropped or handled per its bucket.
 
+**When reviewing `human_review` rows by hand, check the reason string
+first.** Rows whose only reason is "Could not confidently identify item
+columns" are disproportionately real, recoverable datasets, not ambiguous
+ones — see README's Step 1b for why and the two specific fixes to try
+(header-row offset, text-Likert item columns) before spending real time on
+one.
+
 ## Step 3 — Write the processing script and QC it
 
 **Note:** the README still documents an older `irw_process_queue.py` →

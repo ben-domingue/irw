@@ -63,30 +63,50 @@ def download(url: str, dest_dir: str = "downloads") -> str:
     return path
 
 
+def _looks_header_offset(df: pd.DataFrame) -> bool:
+    """True if the header row looks wrong rather than the data. pandas fills
+    every blank/duplicate header cell with 'Unnamed: N' — a strong, specific
+    signal that a banner/title row (common in Qualtrics and journal
+    supplementary-material exports) got read as the column names instead of
+    the real header a row or two below it."""
+    if df.shape[1] == 0:
+        return False
+    unnamed = sum(1 for c in df.columns if str(c).startswith("Unnamed:"))
+    return unnamed / df.shape[1] > 0.5
+
+
 def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     """Read csv/tsv/xlsx/sav/dta/sas7bdat/RData/rds into a DataFrame from a
     path or raw bytes."""
     name = (filename or str(path_or_bytes)).lower()
-    if isinstance(path_or_bytes, (bytes, bytearray)):
-        src = io.BytesIO(path_or_bytes)
-    else:
-        src = path_or_bytes
-    if name.endswith((".xlsx", ".xls")):
-        return pd.read_excel(src)
-    if name.endswith(".tsv"):
-        return pd.read_csv(src, sep="\t")
+
+    def _src():
+        # A BytesIO is consumed by one read; rebuild it fresh for each retry.
+        # A path string can just be reopened by pandas each time.
+        if isinstance(path_or_bytes, (bytes, bytearray)):
+            return io.BytesIO(path_or_bytes)
+        return path_or_bytes
+
+    def _read_tabular(header):
+        if name.endswith((".xlsx", ".xls")):
+            return pd.read_excel(_src(), header=header)
+        if name.endswith(".tsv"):
+            return pd.read_csv(_src(), sep="\t", header=header)
+        return pd.read_csv(_src(), header=header)
+
     if name.endswith(".sav"):
         # pandas.read_spss (via pyreadstat) accepts a file-like object directly.
-        return pd.read_spss(src)
+        return pd.read_spss(_src())
     if name.endswith(".dta"):
-        return pd.read_stata(src)
+        return pd.read_stata(_src())
     if name.endswith(".sas7bdat"):
-        return pd.read_sas(src, format="sas7bdat")
+        return pd.read_sas(_src(), format="sas7bdat")
     if name.endswith((".rdata", ".rda", ".rds")):
         # pyreadr needs a real filesystem path, not a file-like object --
         # spill bytes to a temp file, read, and clean up either way.
         import pyreadr
         import tempfile
+        src = _src()
         suffix = ".rds" if name.endswith(".rds") else ".RData"
         with tempfile.NamedTemporaryFile(suffix=suffix, delete=False) as tmp:
             tmp.write(src.read() if hasattr(src, "read") else open(src, "rb").read())
@@ -98,7 +118,25 @@ def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
             return next(iter(result.values()))
         finally:
             os.unlink(tmp_path)
-    return pd.read_csv(src)
+
+    # csv/tsv/xlsx/xls (or an unrecognized extension, which falls back to
+    # plain csv): if the default header=0 read looks offset, retry a few
+    # header rows down before accepting a table that's mostly unusable.
+    # Only fires when the default read already looks broken, so it can only
+    # recover otherwise-unresolved files, never change a working read.
+    df = _read_tabular(header=0)
+    if _looks_header_offset(df):
+        for k in range(1, 5):
+            try:
+                candidate = _read_tabular(header=k)
+            except Exception:
+                continue
+            if not _looks_header_offset(candidate):
+                print(f"    [load_table] header row looked offset (mostly "
+                      f"'Unnamed:' columns) — re-read {filename or ''} with "
+                      f"header={k}", flush=True)
+                return candidate
+    return df
 
 
 # ---------------------------------------------------------------------------
@@ -126,6 +164,22 @@ def _ordinalish(series: pd.Series) -> bool:
     if s.notna().mean() < 0.8:        # mostly non-numeric -> not a clean resp
         return False
     return True
+
+
+def _textish_likert(series: pd.Series, n_rows: int) -> bool:
+    """A column of a few short, repeated text categories -- looks like a
+    Likert scale stored as text labels (e.g. 'Strongly Agree') rather than
+    numeric codes. Detection only, never auto-recoded: the category set and
+    scale direction need a human to confirm against the source instrument,
+    the same verification datastandard.md already requires for numeric
+    resp columns."""
+    s = series.dropna().astype(str).str.strip()
+    if len(s) < max(2, 0.5 * n_rows):
+        return False
+    nun = s.nunique()
+    if nun < 2 or nun > 12:            # a real Likert scale has few categories
+        return False
+    return s.str.len().mean() <= 40    # short labels, not free-text/prose
 
 
 def coerce_to_irw(df: pd.DataFrame) -> Coercion:
@@ -223,7 +277,26 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
             confidence = "high" if _looks_like_id(df[id_col], n) else "low"
         return Coercion(long, confidence, "wide-to-long", notes, orig_cols)
 
-    # Case C: can't tell -> hand off.
+    # Case C: can't tell -> hand off. Before giving up, check whether the
+    # excluded columns look like a text-coded Likert scale (e.g. "Strongly
+    # Agree") rather than junk -- _ordinalish() only recognizes numeric-
+    # coercible columns, so a real, well-formed instrument stored as text
+    # labels reads the same as noise to it. This is a positive signal, not
+    # noise: flag it explicitly (detection only, no auto-recode -- see
+    # _textish_likert's docstring) so a human finds it fast instead of
+    # re-discovering it from scratch.
+    non_excluded = [c for c in df.columns if c not in excluded_from_items]
+    textish = [c for c in non_excluded if _textish_likert(df[c], n)]
+    if len(textish) >= 2:
+        notes.append(
+            f"Could not confidently identify NUMERIC item columns, but "
+            f"{len(textish)} column(s) look like text-coded Likert items "
+            f"(e.g. {textish[:3]}) rather than numeric codes. Needs a human "
+            "to confirm the category set/order and recode to numeric."
+        )
+        notes.append(f"Columns present: {list(df.columns)}")
+        return Coercion(None, "low", "text_likert_candidate", notes, orig_cols)
+
     notes.append("Could not confidently identify item columns.")
     notes.append(f"Columns present: {list(df.columns)}")
     return Coercion(None, "low", "unresolved", notes, orig_cols)

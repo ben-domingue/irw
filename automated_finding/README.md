@@ -118,6 +118,38 @@ sub-classifies each `human_assistance` row into one of six buckets:
 In practice ~60% of `human_assistance` rows are resolved automatically, leaving
 a much smaller set for manual review.
 
+**Not all `human_review` rows are equally "ambiguous" — the reason string matters.**
+`irw_retriage_ha.py` can only sub-classify rows where `coerce_to_irw()` produced
+*some* long-format dataframe to compute QC metrics on (dup_id_item ratios, etc.).
+When `coerce_to_irw()` fails outright — fewer than 2 columns pass the
+`_ordinalish()` numeric-coercion check, so its only note is "Could not
+confidently identify item columns" — there's no dataframe to sub-classify, so
+the row falls into the `human_review` catch-all regardless of whether the
+underlying data is great or worthless. A 2026-07-30 audit of the "Human eye"
+queue sheet found this sub-population is *not* "genuinely ambiguous": every
+single row a human marked eligible (13/13, e.g. issues #1559–#1565) had this
+exact reason string, and in every case the cause was one of two recoverable,
+recurring patterns — not a content problem:
+- **Header row isn't row 0** (Qualtrics/SurveyMonkey/journal-supplement exports
+  with a title/question-text/ImportId row above the real header) — pandas'
+  default `header=0` read yields `Unnamed: N` columns and non-numeric junk in
+  every data row, so nothing looks ordinal. Also hit repeatedly in past PLOS
+  batches (`cormier_2024_*`, `jordan_2020_*` — see `BATCH_LOG.md`). Fix: reread
+  with `header=None` and slice, or try `header=1..4`, before concluding the
+  file isn't usable — see `datastandard.md`'s "Excel files with header rows
+  above the column names".
+- **Item columns are the literal question text** (often non-English), with
+  Likert responses stored as text labels ("Strongly Agree") rather than numeric
+  codes — `_ordinalish()` only recognizes numeric-coercible columns, so a
+  real, well-formed instrument reads as "no item columns found." This is
+  actually a positive signal of genuine item-response data, not noise.
+
+When triaging a `human_review` row, check its original `reasons` string first:
+if it's specifically "Could not confidently identify item columns" (rather
+than a dup_id_item conflict or similar), open the raw file and check for these
+two patterns before spending time on anything else — they resolve fast and
+disproportionately turn into real, eligible datasets.
+
 ---
 
 ## Step 2 — Write a processing script per dataset

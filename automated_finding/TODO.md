@@ -314,24 +314,34 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   this fails gracefully instead of silently killing the process. Not done —
   no one has picked this up yet.
 
-- [ ] **Pipeline improvement: `coerce_to_irw()` gives up too early on two
-  specific, recurring, recoverable patterns** (found 2026-07-30 auditing the
-  "Human eye" queue sheet — see `README.md`'s Step 1b note for the full
-  writeup). Every row a human has ever marked eligible from the sheet (13/13,
-  including issues #1559–#1565) failed triage with the exact same reason,
-  "Could not confidently identify item columns," and in every case the file
-  was real, usable item-response data defeated by (a) a header row that
-  isn't row 0 (Qualtrics/journal-supplement exports — also hit repeatedly in
-  past PLOS batches, see `cormier_2024_*`/`jordan_2020_*` in `BATCH_LOG.md`)
-  or (b) item columns whose headers are the literal (often non-English)
-  question text with Likert responses stored as text labels rather than
-  numeric codes, which `_ordinalish()` doesn't recognize. Worth having
-  `coerce_to_irw()` retry with a few header-row offsets (`header=0..4`) and a
-  text-Likert-label recode pass before falling back to "unresolved" — since
-  this is the one triage reason string most worth automating away rather
-  than re-diagnosing by hand every batch. Not done — no one has picked this
-  up yet; flag it to whoever next works on `irw_triage_updated.py` rather
-  than doing it speculatively mid-batch.
+- [x] **Pipeline improvement: `coerce_to_irw()`/`load_table()` gave up too
+  early on two specific, recurring, recoverable patterns — fixed
+  2026-07-30.** Found auditing the "Human eye" queue sheet: every row a
+  human has ever marked eligible from it (13/13, including issues
+  #1559–#1565) failed triage with the exact same reason, "Could not
+  confidently identify item columns," and in every case the file was real,
+  usable item-response data defeated by (a) a header row that isn't row 0
+  (Qualtrics/journal-supplement exports — also hit repeatedly in past PLOS
+  batches, see `cormier_2024_*`/`jordan_2020_*` in `BATCH_LOG.md`) or (b)
+  item columns whose headers are the literal (often non-English) question
+  text with Likert responses stored as text labels rather than numeric
+  codes, which `_ordinalish()` doesn't recognize. Full writeup in
+  `README.md`'s Step 1b note. Fixed:
+  - `load_table()` now detects a header-offset read (>50% `Unnamed:`
+    columns) and retries `header=1..4` before accepting a broken table —
+    see `_looks_header_offset()`. Only fires when the default read already
+    looks broken, so it can't change a working read.
+  - `coerce_to_irw()`'s Case C now checks excluded columns for text-coded
+    Likert categories (`_textish_likert()`) before giving up, and notes it
+    explicitly rather than folding it into the generic "could not identify
+    item columns" message. Detection only, deliberately not auto-recoded —
+    category set/direction still needs a human, same as datastandard.md
+    already requires for numeric `resp` columns.
+  - `irw_retriage_ha.py` gained a rule (before RULE 7) that routes this new
+    note to `worth_retrying` instead of the `human_review` catch-all, so
+    it surfaces ahead of genuinely ambiguous rows next retriage run.
+  Not yet re-run against a live batch to confirm real-world recovery rate —
+  worth checking next time `human_assistance` rows come through.
 
 - [ ] **Trusz 2025 NFI dataset (`DVN/DWCBOE`) has unprocessed CFA (N=437)
   and test-retest-stability (N=54) subsamples** beyond the EFA sample

@@ -179,6 +179,18 @@ def classify(row: pd.Series) -> tuple[str, str]:
                     f"File is semicolon-delimited but read as CSV; columns appear to be "
                     f"non-item metadata ({tokens[:5]})")
 
+    # ── RULE 6b: Text-coded Likert item columns detected ─────────────────────
+    # coerce_to_irw() flags this explicitly when >=2 excluded columns look
+    # like short, repeated text categories (e.g. "Strongly Agree") rather
+    # than numeric codes -- a positive signal of a real instrument, not
+    # noise. See README.md's Step 1b note (2026-07-30 "Human eye" audit).
+    if "text-coded Likert items" in reasons:
+        return ("worth_retrying",
+                "Item columns appear to hold text-coded Likert responses "
+                "('Strongly Agree', etc.) rather than numeric codes — "
+                "confirm the category set/order against the source "
+                "instrument and recode to numeric; not a content problem.")
+
     # ── RULE 7: Only 2 columns, both non-numeric labels ──────────────────────
     if len(cols) == 2 and not any(re.search(r"\d", c) for c in cols):
         return ("not_item_response",
