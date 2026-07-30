@@ -1,4 +1,4 @@
-# ENEM 2013 -> IRW long format (id | item | resp | position | booklet),
+# ENEM 2025 -> IRW long format (id | item | resp | position | booklet),
 # restricted to MAIN (standard regular-booklet) items only (issue #955):
 # excludes reaplicacao, digital, and accessibility-substitute items so every
 # area is a single unlinked instrument (density ~= 1.0 for CH/CN/MT).
@@ -6,16 +6,16 @@
 # 1,000,000 examinees sampled from the REGULAR-application pool (seed 5150).
 #
 # standard_prova_codes / regular_prova_codes below were generated offline from
-# this year's INEP dictionary (Dicionario_Microdados_Enem_2013.xlsx) by
+# this year's INEP dictionary (Dicionario_Microdados_Enem_2025.xlsx) by
 # enem_reprocess/identify_regular_items.py -- see that directory for the full
 # reprocessing writeup and the shared logic this script was derived from.
 
 library(tidyverse)
 library(vroom)
 
-year <- 2013
-standard_prova_codes <- c(167, 170, 171, 174, 176, 177, 178, 180, 181, 182)
-regular_prova_codes  <- c(167, 170, 171, 174, 176, 177, 178, 180, 181, 182, 189, 190)
+year <- 2025
+standard_prova_codes <- c(1447, 1448, 1449, 1450, 1459, 1460, 1461, 1462, 1471, 1472, 1473, 1474, 1483, 1484, 1485, 1486, 1583, 1584, 1585, 1586, 1595, 1596, 1597, 1598, 1607, 1608, 1609, 1610, 1619, 1620, 1621, 1622)
+regular_prova_codes  <- c(1447, 1448, 1449, 1450, 1451, 1452, 1454, 1459, 1460, 1461, 1462, 1463, 1464, 1466, 1471, 1472, 1473, 1474, 1475, 1476, 1478, 1483, 1484, 1485, 1486, 1487, 1488, 1490, 1495, 1496, 1497, 1498, 1583, 1584, 1585, 1586, 1587, 1595, 1596, 1597, 1598, 1599, 1607, 1608, 1609, 1610, 1611, 1619, 1620, 1621, 1622, 1623, 1631, 1632, 1633, 1634)
 
 # ---- load microdata (layout varies by year; some ship split PARTICIPANTES/RESULTADOS) ----
 find_ci <- function(dir, pattern) {
