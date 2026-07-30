@@ -2704,3 +2704,93 @@ Competence Scale psychometric validation, N=734, 40 items),
 `10.1371/journal.pone.0169375` (exercise behavior in Chinese cancer
 patients, N=350, 138 items), `10.1371/journal.pone.0202818` (trust/
 psychological distress, urban poor Accra, N=788).
+
+## PLOS ONE batch 10 (2026-07-30)
+
+Fresh discovery run following the same pattern as batches 6/8/9: 30 new
+instrument/construct terms not previously searched against PLOS ONE
+(Center for Epidemiologic Studies Depression Scale, Brief Symptom
+Inventory, Symptom Checklist-90, Rotter Locus of Control Scale, Ten Item
+Personality Inventory, NEO Five-Factor Inventory, Buss-Perry Aggression
+Questionnaire, State-Trait Anger Expression Inventory, Snaith-Hamilton
+Pleasure Scale, Multigroup Ethnic Identity Measure, Social Provisions
+Scale, Cognitive Failures Questionnaire, UPPS Impulsive Behavior Scale,
+Sensation Seeking Scale, Toronto Empathy Questionnaire, Frost
+Multidimensional Perfectionism Scale, Sport Anxiety Scale, Physical
+Activity Enjoyment Scale, Illness Perception Questionnaire, Medical
+Outcomes Study Social Support Survey, Basic Psychological Need
+Satisfaction Scale, Academic Motivation Scale, Schutte Self-Report
+Emotional Intelligence Test, Multidimensional Anxiety Scale for Children,
+Positive Mental Health Scale, Cognitive Emotion Regulation Questionnaire,
+Zimbardo Time Perspective Inventory, Cyberbullying Victimization Scale,
+Compassion Scale, Interpersonal Support Evaluation List; logged in
+`search_terms_log.csv`).
+
+907 candidates -> 7 `good` + 162 `human_assistance` + 21 `not_item_response`
++ 4 `download_failed` + 1 each `crashed`/`timeout`/`error`. Retriage
+(`irw_retriage_ha.py`) on the `human_assistance` bucket gave 25
+`worth_retrying` + 1 `recoverable_format` + 53 `human_review` + 49
+`aggregate_continuous` + 34 `not_item_response`.
+
+**Good-candidate review** (all 7 hand-checked against the full article's SI
+file list and Methods text, per SKILL.md's "needs a human glance more than
+usual" note): 4 processed -> 19 tables, 3 skipped as aggregate-only.
+- `baudin_2024_static99r` (`10.1371/journal.pone.0307216`): Static-99R
+  actuarial sexual-recidivism risk tool, 9 behavioral items (items 2-10,
+  binary/ordinal 0-1 or 0-3 risk factors), N=146 Swedish forensic-psychiatric
+  cohort. Item 1 ("Age at release") is a polytomous person-level attribute
+  scored from an age-at-release table (18-34.9=1, 35-39.9=0, 40-59.9=-1,
+  60+=-3), not a repeated behavioral response like the other 9 -- moved to
+  `cov_age_at_release` rather than the item block (ben-domingue catch,
+  2026-07-30). 6 binary DIF covariates (psychotic disorder, intellectual
+  disability, etc.) also kept as `cov_*`.
+- `liu_2022_mice_skills` (`10.1371/journal.pone.0271430`): 16-item
+  employability-skills importance rating (1-5 Likert) for MICE
+  (meetings/incentives/conferences/exhibitions) management
+  students/professionals, N=95. Paper text confirms 120 questionnaires
+  distributed, 95 valid (incomplete ones excluded, not imputed) -- ships
+  all 16 raw items rather than the paper's post-hoc EFA-reduced subset.
+- `alsyouf_2024_*` (`10.1371/journal.pone.0300657`, Jordan/Saudi Arabia
+  nurses EHR continuance-intention study, N=472): 12 tables from one rich
+  raw file -- 7 UTAUT-based tech-acceptance scales (continuance_intention
+  6i, performance_expectancy 5i, effort_expectancy 5i, social_influence 8i,
+  facilitating_conditions 6i, management_support 4i, end_user_support 4i,
+  all 1-5) plus the full NEO-FFI-3 personality inventory split into its 5
+  factor subscales (neuroticism/extraversion/openness/agreeableness/
+  conscientiousness, 12 items each, 1-5). Column-prefix legend (CI/PE/EE/
+  SI/FC/MS/EUS/N/E/O/A/C) confirmed directly from the paper's Sec. 2.3
+  text, not guessed from column names alone.
+- `ozkurt_2026_*` (`10.1371/journal.pone.0353067`, elite Turkish wrestlers,
+  N=374): 5 tables -- ego_orientation (10i, 1-5), basic_psych_needs (14i,
+  1-5, matches the BPNS search term), sport_motivation (16i, 1-7),
+  paces_enjoyment (8i, 1-7, matches the PACES/Physical Activity Enjoyment
+  search term), continuance_intention (6i, 1-7). Used the article's
+  `S2_File.sav` (clean EGOQ/BPNS/SMS/PACES/INT column labels via SPSS
+  variable labels) rather than the triage-flagged `S1_File.xlsx`, whose
+  headers were ambiguous/incomplete for the same underlying data (missing
+  item 1, per-column "Ego Orientation"/"Task Orientation" captions instead
+  of a clean prefix) -- caught exactly the "needs a human glance more than
+  usual" scenario SKILL.md warns about. A 3rd SI file (qualitative
+  interview excerpts) was not used.
+- Skipped (aggregate-only, not raw items -- all 3 confirmed by opening the
+  actual SI file, not just the triage flag): `10.1371/journal.pone.0199118`
+  (mobile depression-screening app) -- columns are 3 different algorithm
+  total scores plus a single PHQ-9 total, no item-level PHQ-9 responses;
+  `10.1371/journal.pone.0253779` (flicker-light altered-states study) --
+  file has only a Tellegen Absorption Scale total and 5 NEO-FFI-2 factor
+  scores, N=24, no raw items; `10.1371/journal.pone.0243209` (emotion
+  regulation/face recognition) -- Face Memory columns are aggregated
+  signal-detection outcome counts (Hit/Miss/Misid/CR/FPS/Acc) and the ERQ
+  columns are subscale means (Reappraisal/Suppression), not per-trial or
+  per-item raw responses.
+
+All 19 output tables passed the per-item rare-value data-entry-error scan
+-- several scales show low counts of "1"/"2" spread across most items in
+the same scale (the expected tail of a skewed Likert distribution, not an
+isolated-to-one-item anomaly). `biblio_plos_batch10.csv` (19 rows) staged
+for the dictionary sheet; `human_review_plos_batch10.csv` (53 rows) staged
+for the "human eye" sheet. All CC BY 4.0.
+
+**Not yet reviewed**: 25 `worth_retrying` + 1 `recoverable_format` rows
+remain in `plos_batch10_retriage.csv` (not individually hand-checked this
+pass) -- same deferred-backlog pattern as batch 9's tail.

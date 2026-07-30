@@ -3,6 +3,31 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **PLOS ONE batch 10 — `biblio_plos_batch10.csv` (19 rows) closed out**
+  (confirmed 2026-07-30, ben-domingue): 4 papers (`baudin_2024_static99r`,
+  `liu_2022_mice_skills`, `alsyouf_2024_*` ×12, `ozkurt_2026_*` ×5, all
+  CC BY 4.0) uploaded to Redivis and pasted into the dictionary sheet;
+  `biblio_plos_batch10.csv` and all 19 `irw_output/*.csv` files gone from
+  disk as expected. `baudin_2024_static99r` was corrected before upload
+  (ben-domingue catch): item 1 ("Age at release") is a polytomous
+  person-level attribute, not a repeated behavioral response — moved from
+  the item block to `cov_age_at_release`, leaving 9 items. See
+  `BATCH_LOG.md`'s "PLOS ONE batch 10" entry for full per-dataset detail.
+
+- [x] **`automated_finding/human_review_plos_batch10.csv`** (53 rows,
+  batch 10's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-07-30, ben-domingue); file deleted
+  from the repo.
+
+- [ ] **PLOS ONE batch 10 — 25 `worth_retrying` + 1 `recoverable_format`
+  rows not yet hand-reviewed** (2026-07-30), still in
+  `plos_batch10_retriage.csv` — same deferred-backlog pattern as batch 9's
+  tail below.
+
+- [ ] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
+  still unreviewed** in `plos_batch9_retriage.csv` (see below for detail)
+  — older backlog, still open when batch 10 finishes.
+
 - [x] **PLOS ONE pilot — human_review_plos_batch1.csv (184 rows)** pasted
   into the "Human eye" sheet (confirmed 2026-07-26, ben-domingue); file
   deleted from the repo.
@@ -288,6 +313,25 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   size, skip/flag anything over some threshold without a full download) so
   this fails gracefully instead of silently killing the process. Not done —
   no one has picked this up yet.
+
+- [ ] **Pipeline improvement: `coerce_to_irw()` gives up too early on two
+  specific, recurring, recoverable patterns** (found 2026-07-30 auditing the
+  "Human eye" queue sheet — see `README.md`'s Step 1b note for the full
+  writeup). Every row a human has ever marked eligible from the sheet (13/13,
+  including issues #1559–#1565) failed triage with the exact same reason,
+  "Could not confidently identify item columns," and in every case the file
+  was real, usable item-response data defeated by (a) a header row that
+  isn't row 0 (Qualtrics/journal-supplement exports — also hit repeatedly in
+  past PLOS batches, see `cormier_2024_*`/`jordan_2020_*` in `BATCH_LOG.md`)
+  or (b) item columns whose headers are the literal (often non-English)
+  question text with Likert responses stored as text labels rather than
+  numeric codes, which `_ordinalish()` doesn't recognize. Worth having
+  `coerce_to_irw()` retry with a few header-row offsets (`header=0..4`) and a
+  text-Likert-label recode pass before falling back to "unresolved" — since
+  this is the one triage reason string most worth automating away rather
+  than re-diagnosing by hand every batch. Not done — no one has picked this
+  up yet; flag it to whoever next works on `irw_triage_updated.py` rather
+  than doing it speculatively mid-batch.
 
 - [ ] **Trusz 2025 NFI dataset (`DVN/DWCBOE`) has unprocessed CFA (N=437)
   and test-retest-stability (N=54) subsamples** beyond the EFA sample
