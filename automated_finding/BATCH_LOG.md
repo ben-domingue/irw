@@ -2794,3 +2794,98 @@ for the "human eye" sheet. All CC BY 4.0.
 **Not yet reviewed**: 25 `worth_retrying` + 1 `recoverable_format` rows
 remain in `plos_batch10_retriage.csv` (not individually hand-checked this
 pass) -- same deferred-backlog pattern as batch 9's tail.
+
+## PLOS ONE batch 10 worth_retrying pass (2026-07-30)
+
+Hand-reviewed all 25 `worth_retrying` + 1 `recoverable_format` rows left
+over from batch 10 (`plos_batch10_retriage.csv`). Downloaded and opened
+every candidate's actual SI file rather than trusting the triage row's
+`n_items` count, which repeatedly turned out to be counting composite/
+total-score columns as if they were raw items.
+
+**5 processed -> 13 tables:**
+- `mavromoustakos_2016_*` (`10.1371/journal.pone.0161272`, flying phobia,
+  N=115): FASQ (Flight Anxiety Situations Questionnaire, 32 items, 1-5),
+  `probability_scale` (perceived probability of flying/general negative
+  and positive events, 20 items, 0-100 continuous -- confirmed as "the
+  Probability Scale" from the paper's own Methods text, not a "Panic
+  Symptoms Questionnaire" despite the `PSQ` column prefix), ZTPI (Zimbardo
+  Time Perspective Inventory, 56 items incl. reverse-scored, 1-5).
+  `VAR00001` (phobic vs. non-phobic group) kept as `cov_flying_phobic_group`.
+- `burns_2018_*` (`10.1371/journal.pone.0203435`, PETALE study, couples
+  whose child was treated for leukemia, N=103): DAS-4 and BSI-18 each
+  split into father-report and mother-report tables (4 tables total) --
+  father and mother are different respondents reporting on their own
+  relationship/symptoms, linked by the shared family ID (`PT`).
+- `bilotta_2018_*` (`10.1371/journal.pone.0201216`, mindreading in
+  narcissistic PD, N=1362): TAS-20 (20 items, 1-5) and SCL-90-R (90 items,
+  0-4 -- the paper's text paraphrases the anchors as "1=not at all to
+  4=very much" but 0 recurs proportionally on every item, so the raw 0-4
+  convention was kept as genuine data, not a sentinel). Two other raw item
+  blocks in the file (`IVAMIt1-16`, `xNAR1-9`) are not described anywhere
+  in this paper's Measures section (only SCID, SCL-90-R, TAS-20, and the
+  MAI clinical interview are) -- left unshipped rather than guessed at.
+- `petrowski_2019_sclk9` (`10.1371/journal.pone.0213490`, German norming
+  study, N=2502): SCL-K-9 (9 items, 0-4). This was the `recoverable_format`
+  row -- file is semicolon-delimited. `-1` filtered as a missing-data
+  sentinel (recurs at ~0.2-0.4% on every item, outside the 0-4 range).
+- `schalet_2016_*` (`10.1371/journal.pone.0159647`, paroxetine-vs-placebo
+  depression RCT, N=180): HRSD, HRSA, and BAI (raw file labels the BAI
+  columns `si*`/`s08i*`, identified from the 21-item count and the paper's
+  extensive discussion of BAI results), each with `wave` (0=intake,
+  1=week-8) and `treat` (1=paroxetine, 0=placebo per `TAF1`). HRSD's
+  week-8 assessment included 7 extra items (18-24) not scored at intake --
+  kept as wave=1-only item rows, valid per datastandard.md's longitudinal
+  rules. Per-item value ranges vary within each scale (e.g. some HRSD
+  items 0-2, others 0-4) -- the instruments' own known item-specific
+  scoring, not a data-entry issue.
+
+All 13 tables passed the per-item rare-value scan -- flagged low counts
+were each item's own natural distribution tail (recurring across most
+items in the same scale), not isolated one-item anomalies.
+`biblio_plos_batch10_worthretrying.csv` (13 rows) staged for the
+dictionary sheet, all CC BY 4.0.
+
+**15 skipped** (aggregate-only or not item-response data, confirmed by
+opening the actual file): `10.1371/journal.pone.0150312` (Social Rhythm
+cross-cultural, all composite scores), `10.1371/journal.pone.0161840`
+(Type A/D personality hypertension, all composite scores),
+`10.1371/journal.pone.0181209` (videogame/SDQ study, all subscale
+totals), `10.1371/journal.pone.0245113` (ADHD narrative-discourse network
+analysis, all composite scores), `10.1371/journal.pone.0272987`
+(irrational beliefs/motivation regulation, 6 composite scores only),
+`10.1371/journal.pone.0275995` (HIV transmission Vietnam modeling, CES-D
+totals + epi covariates, no raw items), `10.1371/journal.pone.0277516`
+(passive-sensor personality-network study, derived network metrics
+only), `10.1371/journal.pone.0282406` (hyperbaric oxygen fibromyalgia
+RCT, SF-36/BSI-18/MOS all subscale totals despite a banner-row layout
+that looked promising), `10.1371/journal.pone.0302350` (psychotropic
+non-adherence Uganda, categorical/derived vars only, also had a PII phone
+number column), `10.1371/journal.pone.0307744` (leisure physical
+activity/happiness, composite scores only), `10.1371/journal.pone.0311889`
+(dance and wellbeing -- turned out to be a systematic-review table of
+included studies, not participant-level survey data at all),
+`10.1371/journal.pone.0124364` (temperament/autistic traits, AQ/EAS/FCB
+all composite totals), `10.1371/journal.pone.0262465` (HEXACO-100
+test-retest, only the 6 factor totals present, not the 100 raw items),
+`10.1371/journal.pone.0234997` (longitudinal mental health Germany/
+Russia/China, all composite BL/FU scores despite the 2-wave structure),
+`10.1371/journal.pone.0203336` (spirituality in pain medicine, BSI/FSB
+subscale totals + physiology measures only).
+
+**5 deferred** (real item-level data present but needs dedicated codebook
+time beyond this pass): `10.1371/journal.pone.0230103` (French
+school-subject self-concept study, 249 cols, 5 parallel ~33-item domain
+scales -- Ecole/Maths/Francais/Anglais/EducPhy -- plus Big Five-like and
+other blocks; has a `Date de naissance` DOB/PII column to strip first);
+`10.1371/journal.pone.0272095` (Dutch self/other/meta-perceptions of
+personality, 1086 cols, multi-rater HEXACO facet items with `_1`/`_2`/...
+rater suffixes); `10.1371/journal.pone.0159386` (chronic fatigue
+neuromuscular-strain study, 187 cols, 5 symptom items x many timepoints
+from baseline through 24hrs post-maneuver -- a genuine wave-structured
+design but needs the full timepoint list mapped); `10.1371/journal.pone.0184488`
+("Lab meets real life" thought-sampling study, N=43, `t0`/`t6` and
+`DoM`/`ToM`/etc. column labels not explained anywhere in the paper text
+found so far); `10.1371/journal.pone.0256916` (psychosomatic
+rehabilitation gender-effects study, 494 cols with cryptic `N7`/`N1`-
+suffixed variable names, no clear raw-item naming pattern found).

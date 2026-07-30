@@ -19,10 +19,32 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-07-30, ben-domingue); file deleted
   from the repo.
 
-- [ ] **PLOS ONE batch 10 — 25 `worth_retrying` + 1 `recoverable_format`
-  rows not yet hand-reviewed** (2026-07-30), still in
-  `plos_batch10_retriage.csv` — same deferred-backlog pattern as batch 9's
-  tail below.
+- [x] **PLOS ONE batch 10 — `biblio_plos_batch10_worthretrying.csv` (13
+  rows) closed out** (confirmed 2026-07-30, ben-domingue): 5 papers from
+  the batch 10 `worth_retrying` pass (`mavromoustakos_2016_*` ×3,
+  `burns_2018_*` ×4, `bilotta_2018_*` ×2, `petrowski_2019_sclk9`,
+  `schalet_2016_*` ×3, all CC BY 4.0) uploaded to Redivis and pasted into
+  the dictionary sheet; `biblio_plos_batch10_worthretrying.csv` and all 13
+  `irw_output/*.csv` files gone from disk as expected. See `BATCH_LOG.md`'s
+  "PLOS ONE batch 10 worth_retrying pass" entry for full per-dataset
+  detail, including the 15 skipped (confirmed aggregate-only/not-item-
+  response) and 5 deferred (real items, needs codebook time) candidates
+  from the same 26-row pool.
+
+- [ ] **PLOS ONE batch 10 — 5 deferred `worth_retrying` datasets need
+  codebook-driven follow-up** (2026-07-30): French school-subject
+  self-concept study (`10.1371/journal.pone.0230103`, 249 cols, 5 parallel
+  ~33-item domain scales, has a DOB/PII column to strip first); Dutch
+  self/other/meta-personality study (`10.1371/journal.pone.0272095`, 1086
+  cols, multi-rater HEXACO facets); chronic fatigue neuromuscular-strain
+  study (`10.1371/journal.pone.0159386`, 187 cols, 5 symptom items across
+  many timepoints, a genuine but unmapped wave structure); "Lab meets real
+  life" thought-sampling study (`10.1371/journal.pone.0184488`, N=43,
+  ambiguous `t0`/`t6`/`DoM`/`ToM` labels not yet explained by the paper
+  text); psychosomatic rehabilitation gender-effects study
+  (`10.1371/journal.pone.0256916`, 494 cols, cryptic suffixed variable
+  names). `plos_batch10_retriage.csv` still holds these rows if picked up
+  later.
 
 - [ ] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
   still unreviewed** in `plos_batch9_retriage.csv` (see below for detail)
