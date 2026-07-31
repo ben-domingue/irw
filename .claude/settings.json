@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{ echo \"Available skills:\"; find -L /home/ben/Dropbox/projects/irw/src/.claude/skills -name SKILL.md 2>/dev/null | sort | while IFS= read -r f; do name=$(sed -n 's/^name: *//p' \"$f\" | head -1); desc=$(sed -n 's/^description: *//p' \"$f\" | head -1); printf -- '- %s: %s\\n' \"$name\" \"$desc\"; done; } | jq -Rs '{systemMessage: .}'"
+          }
+        ]
+      }
+    ]
+  }
+}
