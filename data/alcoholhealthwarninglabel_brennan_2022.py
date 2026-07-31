@@ -5,9 +5,8 @@ Source: Brennan et al. (2022). Testing the effectiveness of alcohol health
 warning label formats. PLoS ONE 17(12): e0276189.
 
 Produces:
-  - alcoholhealthwarninglabel_brennan_2022_negative_arousal.csv
-  - alcoholhealthwarninglabel_brennan_2022_positive_arousal.csv
-  - alcoholhealthwarninglabel_brennan_2022_awareness_harms.csv
+  - alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup.csv
+  - alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup.csv
   - alcoholhealthwarninglabel_brennan_2022_intentions_postexposure.csv
 
 Requires: pandas, pyreadstat  (pip install pyreadstat --break-system-packages)
@@ -48,7 +47,7 @@ df['cov_gender'] = df['gender_A2b'].map({0: 'not male', 1: 'male'})
 COVS = ['cov_condition', 'cov_age', 'cov_gender']
 
 
-def melt_construct(source_df, item_map, wave_label):
+def melt_construct(source_df, item_map):
     """Reshape a set of wide item columns into id/item/resp long format."""
     cols = list(item_map.keys())
     long = source_df[['id'] + cols + COVS].melt(
@@ -59,32 +58,28 @@ def melt_construct(source_df, item_map, wave_label):
     )
     long['item'] = long['item'].map(item_map)
     long = long.dropna(subset=['resp'])
-    long['wave'] = wave_label
-    return long[['id', 'item', 'resp', 'wave'] + COVS]
+    return long[['id', 'item', 'resp'] + COVS]
 
 
 # ---------------------------------------------------------------------------
-# 1. Negative emotional arousal (follow-up, 7-point scale)
+# 1. Emotional arousal, follow-up, 7-point scale.
+#    Negative (disgusted/afraid/uncomfortable/worried) and positive
+#    (excited/pleased) items share the same stem and response scale, so
+#    they're kept in one table; item names still distinguish the two
+#    sub-constructs for anyone who wants to score them separately.
 # ---------------------------------------------------------------------------
-neg_items = {
+arousal_items = {
     'FG1_FG6_1': 'disgusted',
     'FG1_FG6_2': 'afraid',
     'FG1_FG6_3': 'uncomfortable',
     'FG1_FG6_4': 'worried',
-}
-negative_arousal = melt_construct(df, neg_items, wave_label='follow_up')
-
-# ---------------------------------------------------------------------------
-# 2. Positive emotional arousal (follow-up, 7-point scale)
-# ---------------------------------------------------------------------------
-pos_items = {
     'FG1_FG6_5': 'excited',
     'FG1_FG6_6': 'pleased',
 }
-positive_arousal = melt_construct(df, pos_items, wave_label='follow_up')
+emotional_arousal_followup = melt_construct(df, arousal_items)
 
 # ---------------------------------------------------------------------------
-# 3. Awareness of alcohol-related harms (follow-up, binary)
+# 2. Awareness of alcohol-related harms, follow-up, binary.
 #    Note: there is no FD2_FD6_3_b in the source file — only 4 items
 #    (cancer, liver damage, heart disease, pregnancy complications),
 #    matching the paper's item list.
@@ -95,11 +90,11 @@ aware_items = {
     'FD2_FD6_4_b': 'increase_heart_disease_risk',
     'FD2_FD6_5_b': 'increase_pregnancy_complication_risk',
 }
-awareness_harms = melt_construct(df, aware_items, wave_label='follow_up')
-awareness_harms['resp'] = awareness_harms['resp'].astype(int)
+awareness_harms_followup = melt_construct(df, aware_items)
+awareness_harms_followup['resp'] = awareness_harms_followup['resp'].astype(int)
 
 # ---------------------------------------------------------------------------
-# 4. Drinking-reduction intentions, immediately post-exposure (raw 4-pt)
+# 3. Drinking-reduction intentions, immediately post-exposure, raw 4-pt.
 #    Note: "avoid drinking completely" (D2_D4_4) is only available in this
 #    file already binarized (D2_D4_4_r), so it's excluded here to avoid
 #    mixing response scales within one resp column.
@@ -108,15 +103,14 @@ intent_items = {
     'D2_D4_2': 'reduce_how_often',
     'D2_D4_3': 'reduce_amount_per_occasion',
 }
-intentions_postexposure = melt_construct(df, intent_items, wave_label='post_exposure')
+intentions_postexposure = melt_construct(df, intent_items)
 
 # ---------------------------------------------------------------------------
-# Write the four IRW tables
+# Write the three IRW tables
 # ---------------------------------------------------------------------------
 tables = {
-    'negative_arousal': negative_arousal,
-    'positive_arousal': positive_arousal,
-    'awareness_harms': awareness_harms,
+    'emotional_arousal_followup': emotional_arousal_followup,
+    'awareness_harms_followup': awareness_harms_followup,
     'intentions_postexposure': intentions_postexposure,
 }
 for name, table in tables.items():
