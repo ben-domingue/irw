@@ -3048,3 +3048,332 @@ block (loneliness3/phq4 already shipped from this same file, see above);
 `10.1371/journal.pone.0291207` (coping-self-efficacy/sex-trafficking
 study) -- confirmed to be the same dataset already flagged deferred in
 batch 6's `TODO.md`, not re-investigated.
+
+## PLOS ONE batch 12 (2026-07-30)
+
+**Term selection change**: for the first time, terms were pulled from
+`search_terms_log.csv` rows already run against *other* discovery sources
+(Dataverse/Zenodo/OSF/etc.) but never against PLOS -- a different search
+surface, so reuse isn't a duplicate query, and these terms are
+already-validated real instrument/construct/task names rather than fresh
+guesses. Filtering the log to non-PLOS, English-only, not-yet-tried-on-PLOS
+rows turned up ~1,200 candidates in one pass; 30 were used this batch (see
+`TODO.md` for the remaining pool). New rule documented in `SKILL.md`'s PLOS
+section.
+
+30 terms (Iowa Gambling Task, Corsi block-tapping task, dot-probe task,
+global-local task, Navon task, Posner cueing task, prospective memory
+task, reading span task, Simon task, stop signal task, task switching,
+visual search task, attentional bias task, continuous performance task,
+Multi-Source Interference Task, dual-task performance, emotional Stroop
+task, spatial Stroop task, numerical Stroop task, dictator game, public
+goods game, Domain-Specific Risk-Taking Scale, Problem Gambling Severity
+Index, Job Crafting, envy scale, curiosity scale, grief scale, Fagerstrom
+Test for Nicotine Dependence, Multidimensional Assessment of Interoceptive
+Awareness, Pain Catastrophizing Scale; logged in `search_terms_log.csv`).
+
+1,556 candidates -> 6 `good` + 205 `human_assistance` + 54
+`not_item_response` + 10 `error` + 5 `download_failed` + 1 `timeout`.
+Retriage (`irw_retriage_ha.py`) on the `human_assistance` bucket gave 40
+`worth_retrying` + 63 `human_review` + 76 `aggregate_continuous` + 26
+`not_item_response`.
+
+**Good-candidate review**: all 6 hand-checked by opening the actual SI
+file(s) -- 2 of the 6 were false positives, matching the standing "good
+needs a human glance more than usual" caution.
+- `page_2025_portrait10` (`10.1371/journal.pone.0335734`, N=245):
+  PORTRAIT-10 complex-health-care-needs tool, 10 items scored 0-4
+  ("Answers to questions are scored from 0 to 4 (Likert type)" per the
+  paper's own text), administered at baseline and follow-up (`wave`
+  1/2). Follow-up missing for 86/245 (35.1%) matches the paper's own
+  reported attrition rate exactly -- genuine dropout, not imputation.
+  Source file has a 2-row header (banner row + real column names) and
+  inconsistent capitalization between baseline/follow-up column names
+  (`Alcohol/drug use` vs `Alcohol/Drug use_2`), handled via case-
+  insensitive column lookup. Script: `data/page_2025_portrait10.py`.
+- `penningroth_2019_pm_goals` / `penningroth_2019_pm_concerns`
+  (`10.1371/journal.pone.0216888`, N=89): real-life prospective memory
+  task recall study. Each participant free-recalled up to 5 real-life PM
+  tasks, each content-coded into 15 goal categories and 15 concern
+  categories (binary 1/0 per category). Coding scheme and column meanings
+  came directly from the raw file's own "META-DATA" sheet, not inferred.
+  `percPMgr`/`percPMcr` (derived % goal-/concern-related) excluded as
+  composites; `grpYvsO` (2-group young/older split used in this study)
+  kept as a covariate alongside `AgeGroup` (original 3-subgroup coding).
+  Shipped as two files (goal vs. concern are conceptually distinct
+  motivational categories, matching the paper's own separate
+  `percPMgr`/`percPMcr` composites) per `datastandard.md`'s one-scale-
+  per-file rule. Script: `data/penningroth_2019_pm_goals_concerns.py`.
+- `attnbias_0279360` (video-games/weapons attentional-bias study,
+  `10.1371/journal.pone.0279360`) -- **not processed, false positive**:
+  all 4 sheets (Accuracy/RT/Caution Scores/Gaming Data) hold per-
+  condition aggregated proportions/scores per participant, not raw
+  per-trial responses anywhere in the file. Same category of problem as
+  `10.1371/journal.pone.0122311` (batch 11) -- a signal-detection-style
+  summary, not item-response-shaped data.
+- `10.1371/journal.pone.0220622` (ultimatum game neural correlate) --
+  **not processed, false positive**: the flagged SI file is
+  figure-source-data (one sheet per published figure, e.g. "Figure 1A"
+  holding aggregated acceptance rates per fairness condition), not
+  participant-level responses. The paper's own Data Availability
+  statement points to the real dataset on Figshare
+  (`10.6084/m9.figshare.9037808`) -- a lead for the regular repo-based
+  pipeline, not re-downloaded here.
+
+**2 deferred** (real item-level data present, needs more time):
+- `10.1371/journal.pone.0161858` (MnemoCity Task): file mixes a genuine
+  ~8-item usability/satisfaction survey (`US1/US2`, `SA1-4`, `Q3D`,
+  `Q2_US1`, `Q2_SA1`, `PRE1`, `PRE2`) with derived cognitive-task-summary
+  scores (`Direct/Inverse CBTT Score`, `MnemoCity Score`, `Satisfaction`,
+  `Usability` composites) that aren't raw items. Only the survey portion
+  looks shippable; needs the paper's Methods text to confirm exactly what
+  each survey item asks before writing a script.
+- `10.1371/journal.pone.0123625` (children's implicit/voluntary attention
+  in time): triage only read the "Demographics" sheet (just ID/Group/Age/
+  Sex/Hand covariates, n_items=3 was a mis-read). The real raw data is
+  trial-level (336 trials x 62 children: `Trial`, `Delay`, `ISI_value`,
+  `Target.RT`, `Validity`) but spread across 62 separate per-participant
+  sheets (named `"1"`-`"62"`) that need merging into one long file --
+  genuine data, just needs a custom multi-sheet-merge script.
+
+Both ready datasets processed, QC'd (per-item value_counts, id
+uniqueness, no PII, correct column order), and staged:
+`biblio_plos_batch12.csv` (3 rows, all CC BY 4.0) for the dictionary
+sheet; `irw_output/page_2025_portrait10.csv`,
+`irw_output/penningroth_2019_pm_goals.csv`,
+`irw_output/penningroth_2019_pm_concerns.csv` ready for Redivis upload.
+
+## Teicher 2015 MACE S9_File raw items (2026-07-31)
+
+Follow-up to the batch 11 retraction of `teicher_2015_mace` (which shipped
+IRT-derived severity scores as if they were raw responses). The TODO note
+left after that retraction flagged S9_File (`10.1371/journal.pone.0117423`,
+same article, CC BY 4.0, N=1051) as a genuine raw-item dataset worth a
+closer look -- picked up now as the highest-value item in the open
+codebook-driven-follow-up list.
+
+While investigating, also opened the S5_File Excel scoring template
+(a companion Supporting Information file on the same article, previously
+dismissed in batch 11 as a "blank scoring template" -- true for its
+Entry/correction/Scored sheets, but its `Reference_sheet` turned out to
+hold the full item-to-subscale legend for the instrument: 10 named
+subscales (Familial and Non-Familial Sexual Abuse, Parental Verbal Abuse,
+Parental Non-Verbal Abuse, Parental Physical Maltreatment, Witnessing
+Physical Abuse between parents, Witnessing Abuse toward sibling, Peer
+Verbal Abuse+Ostracism, Peer Physical bullying, Emotional Neglect,
+Physical Neglect) each listing their plain-English item names. This
+confirmed S9's checklist columns are genuine per-event yes/no items
+feeding the instrument's IRT scoring (not composites themselves), and
+gave a validated basis for grouping S9's ~75 raw item-pool columns into
+per-subscale files rather than guessing at groupings from column-name
+similarity alone.
+
+S9 is more granular than the reference's collapsed subscale counts (it
+keeps parent- vs. other-adult- vs. sibling-directed versions of the same
+event separate, where the reference collapses them for final scoring) --
+S9's own column names were used as item labels since they're already
+meaningful, with the reference used only to confirm construct membership.
+
+**10 checklist tables + 2 distress-rating tables shipped** (all binary
+0/1, verified clean per-item via `value_counts()`, no unexpected values):
+`teicher_2015_mace_verbal` (4i), `_nonverbal` (5i), `_physical` (6i),
+`_sexual` (12i, familial+non-familial+peer combined), `_witness_parent`
+(8i), `_witness_sib` (8i), `_peer_verbal` (5i), `_peer_physical` (5i),
+`_emot_neglect` (5i), `_phys_neglect` (5i). Plus `_distress_helpless` and
+`_distress_terrified` (35 items each) -- subjective distress ratings
+asked as a follow-up to 35 of the checklist events; shipped as their own
+two files since this is a different response dimension (how it felt) from
+the checklist (did it happen), not a new instrument. Source values for
+these were a messy mix of `'0'/'No'/'1'/'Yes'/'yes'` -- recoded to 0/1.
+Covariates: gender, age, number of siblings, race, ethnicity, own/father's/
+mother's/parents' education years, financial sufficiency, and an
+interviewed-in-person flag.
+
+**Not shipped, left for a future pass** (noted in `TODO.md`): `Yelled`
+(parental verbal item with no match in any of the reference's 10
+subscales -- likely a dropped pilot item); the peer items' `Date_*`
+columns (binary, paired to each peer item, meaning not confirmed from the
+paper text); several household-structure/context columns not clearly
+matched to a named subscale (`Separated`, `Divorced`, `P_died`,
+`Two_households`, `Foster_care`, `Adult_resposibility`, `Unsuper`,
+`P_homework`, `M_unavail_good`, `F_unavail_good`, `Felt_close`); and all
+derived/composite columns (`SQ_*`, `DES_SCORE`, `LSCL33`, `ASIQ_tot`,
+`*vas` severity scores, `CTQ_*`, `ACE_*`, `MACE_*_EVER`, `MACE_SUM_EVER`,
+`emotional_negl_01`...`w_sib_ab_01`, `ATQ_*`) -- excluded on the same
+grounds that got the original `teicher_2015_mace` table retracted.
+
+Script: `data/teicher_2015_mace_items.py`. `biblio_teicher_2015_mace.csv`
+(12 rows, CC BY 4.0) staged for the dictionary sheet; all 12
+`irw_output/*.csv` files ready for Redivis upload.
+
+## Carver 2017 PUGGS genetics-belief questionnaire (2026-07-31)
+
+Second item picked up from the open codebook-driven-follow-up list
+(`10.1371/journal.pone.0169808`, CC BY 4.0). Re-downloaded and re-read the
+SI files fresh this session (the DOCX codebooks referenced as "already
+downloaded" in the prior note were in a session-scoped scratchpath from
+an earlier session, no longer on disk).
+
+Two pilot studies (S5/S6 Tables, N=207 and N=78), each with its own Code
+Book (S4/S2 Text). **Key finding: the two pilots use genuinely different
+response formats for the "core ideas" items** (confirmed from their own
+codebooks, not assumed from matching item content) -- pilot 1 uses a
+4-point Likert agreement scale per true/false-keyed statement; pilot 2
+uses a direct True/False/Don't-know choice. Per `datastandard.md`'s
+same-instrument-multiple-sub-studies rule (identical administration must
+be confirmed before merging), these were kept as separate per-pilot
+files, not merged.
+
+**8 tables shipped**:
+- `carver_2017_puggs_pilot1_traits` / `_pilot2_traits`: "Table of Traits"
+  items (rate genetic vs. environmental influence on a named trait, 1-5,
+  higher=more genetic). Pilot 1's codebook also gives a scientifically
+  "expected" answer per trait -- kept as `itemcov_expected_answer` (an
+  item attribute, not a derived score). Pilot 2 has no such key and one
+  fewer trait (17 vs. 20).
+- `carver_2017_puggs_pilot1_det_core` / `_genom_know` (13i/18i, 1-4
+  Likert): raw agreement ratings shipped as-is, NOT recoded to the
+  codebook's own "determinism"/"understanding" direction -- that would be
+  exactly the kind of reverse-scoring flip `datastandard.md` says not to
+  apply ourselves (direction is allowed to vary across items).
+- `carver_2017_puggs_pilot2_det_core` / `_genom_know` (9i/16i): pilot 2's
+  raw True(1)/False(2) codes have no inherent ordinal direction, so
+  (matching `datastandard.md`'s own worked example for a true/false/
+  don't-know financial-literacy quiz) these were recoded to
+  correct(1)/incorrect(0) using the paper's own answer key; don't-know(3)
+  and missing(99) were filtered as genuine non-response, not scored as
+  incorrect (the paper's own codebook conflates the two for its own
+  analysis -- overridden here per `datastandard.md`'s explicit guidance).
+- `carver_2017_puggs_pilot1_attitudes` / `_pilot2_attitudes` (20i each,
+  1-4 Likert): raw agreement, unmodified.
+
+Sentinel handling confirmed against the actual data, not just the
+codebook: pilot 1 uses `99` as an additional true-missing code on top of
+each item's own built-in "don't know" option (6 for the TT block, 5 for
+Q-items); pilot 2 uses `99` throughout. A single out-of-range pilot-1 Age
+value (`5`, codebook only defines 1-4) was set to missing as a covariate-
+cleaning step (doesn't affect any item data). All 8 files QC'd (per-item
+value_counts, correct ranges, no covariate leakage into items).
+
+Script: `data/carver_2017_puggs_items.py`. `biblio_carver_2017_puggs.csv`
+(8 rows, CC BY 4.0) staged for the dictionary sheet; all 8
+`irw_output/*.csv` files ready for Redivis upload.
+
+## Meloni 2015 disability-representations study (2026-07-31)
+
+Third item from the open codebook-driven-follow-up list
+(`10.1371/journal.pone.0128876`, CC BY 4.0, N=152: 76 parent-child dyads).
+Re-downloaded both SI files fresh (S1 File data, S2 File codebook -- a
+legacy `.doc`, converted to text via `soffice --headless --convert-to txt`
+since `python-docx` only reads `.docx`).
+
+**9 tables shipped**, split parent-population (`id` 101-181) vs.
+child-population (`id` 201-281) throughout, since the two groups answer
+via different response modalities (parents: numeric scale; children: a
+smiley-face card) even where item content is shared -- not assumed
+equivalent, kept separate:
+- `meloni_2015_deq_oe_parent` / `_child` (36 items: 9 coded disability-
+  model categories x 4 stimuli). **Not a 0/1 presence flag** despite the
+  codebook's description of the paper's own *published* scoring table --
+  raw values in this file range 0-8, a count of coded mentions per
+  model/stimulus before the paper's own presence/absence collapse.
+  Shipped as raw counts; the paper's own binary collapse was not
+  re-derived.
+- `meloni_2015_deq_ce_parent` / `_child` (44 items: 11 statements x 4
+  stimuli, 1-4 with half-points allowed per the codebook, confirmed
+  genuine in the data).
+- `meloni_2015_parent_divers_ed` (60 items: 12 statements x 5 image
+  stimuli, 1-5) and `meloni_2015_parent_interests` (25 items, 1-5),
+  parent-only.
+- `meloni_2015_child_disab_knowledge` (16 items, 1-4 w/ half-points) --
+  `itemcov_keyed_true` marks whether the statement is true-keyed
+  ("knowledge") or false-keyed ("stereotype") per the codebook; raw
+  agreement shipped either way, no correct/incorrect recode (unlike
+  Carver 2017 pilot 2 -- these are attitude/endorsement items by the
+  paper's own design, not a scored quiz).
+- `meloni_2015_child_ia_satisfaction` / `_ia_frequency` (20 items each,
+  1-5): the same 20 activities have two response dimensions in the raw
+  file -- a preference ranking and, despite the confusing `_TIME` column
+  suffix, the codebook's own "how often" frequency scale (not a response
+  time). Shipped as two files.
+
+A `0` value appears at a low, consistent rate (~0.3-1.5%) across every
+1-4/1-5 rating block, below each scale's documented floor -- a missing-
+response sentinel used throughout the file (not isolated to one item),
+filtered out. All 9 files QC'd (per-item value_counts, correct ranges,
+`id` correctly partitioned by population).
+
+Script: `data/meloni_2015_disability.py`. `biblio_meloni_2015_disability.csv`
+(9 rows, CC BY 4.0) staged for the dictionary sheet; all 9
+`irw_output/*.csv` files ready for Redivis upload.
+
+## Peters 2025 COVID-19 Risk Tool: precaution-checklist follow-up (2026-07-31)
+
+Fourth item from the open codebook-driven-follow-up list -- the ~300-column
+"risk-estimate/checkbox-array" remainder left undone by the original
+2026-07-16/17 session (`work*`/`siCurrent*`/`siTrigger*`/`siIntention*`/
+`hwFrequency*`/`hwIntensity*` + paired `*Est` columns, "a different,
+not-yet-decoded response mechanism").
+
+**Mechanism, reverse-engineered from the raw data** (not documented in the
+project's own build script the way the RAA belief items were): each family
+is a LimeSurvey "checkboxes" question, one column per option, holding `Y`
+if selected and blank otherwise. The paired `*Est` column is **not a
+per-person numeric estimate** despite the name -- confirmed across two
+different sids/countries, each `*Est` column takes only 1-2 distinct
+values, identical across sids, and those values are the tool's own fixed
+internal risk-scoring coefficients for that option (e.g. `hwFrequencyCntctEst`
+is always exactly `0` when the respondent washes hands after contact and a
+constant `2.7` when they don't -- a risk weight, not a response). Its real
+use here is different: `*Est` is non-null exactly when that option was
+actually administered to that respondent (this survey uses per-item skip
+logic -- e.g. `siIntention`'s own LimeSurvey definition has
+`array_filter = "siCurrent"`), and null when never shown. Exhaustively
+verified (two sids, ~600 checkbox-cell comparisons): zero rows where the
+checkbox is "Y" but Est is null. Decoding rule: Est null -> not
+administered (excluded); Est not null & checkbox=="Y" -> resp=1; Est not
+null & checkbox blank -> resp=0.
+
+`siTrigger.other.` and `siIntention.other.` are "Other, please specify"
+free-text boxes (values are open-ended sentences, e.g. participants' own
+written reasons in Dutch/etc, not "Y") -- detected programmatically (not
+assumed from naming) by checking each checkbox column's non-null values
+are a subset of `{"Y"}`, and excluded as open-text.
+
+**6 tables shipped** (id/date/covariates identical scheme to the sibling
+`peters_2025_covid19_risk_dcts.py` script -- `id` = `{sid}-{orig_id}`,
+`date` = Unix seconds from `datestamp`): `peters_2025_work_precautions`
+(4 items: who you work in contact with), `peters_2025_si_current` (6
+items: activities currently done despite self-isolation guidance),
+`peters_2025_si_trigger` (4 items, after excluding the free-text option:
+what would trigger starting self-isolation), `peters_2025_si_intention`
+(5 items, after excluding the free-text option: which activities you'd
+resume), `peters_2025_hw_frequency` (7 items: situations prompting hand-
+washing), `peters_2025_hw_intensity` (4 items: hand-washing thoroughness).
+N ranges ~70,000-75,000 depending on table (matches the DCT tables' scale
+-- same underlying ~76-102k-respondent dataset, survey randomization/skip
+logic limits how many see each specific item family). All resp values
+strictly 0/1, verified per-item with sensible non-degenerate distributions
+(no all-0/all-1 items; rare "none"/"never" options behave as expected).
+
+**Not covered** (single-item, can't be shipped as their own scale per
+IRW's no-single-item-scale rule): `proximity` (single radiobutton) and
+`DMQslider.nr.` (single slider item).
+
+**Aside, not part of this task**: while building the tags/dictionary
+entries for these 6 new tables, found that the *existing* 16
+`peters_2025_*` tables (from the 2026-07-16/17 session) have zero rows in
+`metadata/tags.csv` despite BATCH_LOG recording them as "written directly"
+into that file -- the correct rows *do* exist in `metadata/biblio.csv`
+(confirmed `peters_2025_att_exp_eval` etc. present with full APA
+reference/DOI/BibTeX), just not in tags.csv. Not investigated further
+here (likely a metadata-pipeline regeneration or the same Dropbox-sync
+loss pattern documented elsewhere in this log) -- flagged in `TODO.md` for
+whoever next touches `metadata/tags.csv` or runs the site-update skill.
+
+Script: `data/peters_2025_covid19_risk_precautions.py`.
+`biblio_peters_2025_precautions.csv` (6 rows, ODbL 1.0, matching the
+license/reference convention the user specified for this paper's earlier
+tables) staged for the dictionary sheet; `tags_fix_peters_2025_precautions.csv`
+(6 rows) staged in case tags entries are wanted per-table like the
+original 16; all 6 `irw_output/*.csv` files ready for Redivis upload.

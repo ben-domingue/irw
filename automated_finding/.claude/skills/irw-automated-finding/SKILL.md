@@ -247,6 +247,28 @@ python irw_discover_plos.py "term" --limit 10 --out plos_test.csv   # sanity che
 python irw_discover_plos.py "term1" "term2" --out plos_triage.csv --resume   # after an interrupted run
 ```
 
+- **Term selection: recycle non-PLOS terms from `search_terms_log.csv`
+  before inventing new ones.** `search_terms_log.csv` is a shared record
+  across *every* discovery mode — each row's `file` column ties it to the
+  specific triage output it was run against (a repository-connector
+  `candidates.csv`/batch file, or a `plos_batch*_triage.csv`). A term
+  already used against Dataverse/Zenodo/OSF/etc. has never been run against
+  PLOS ONE, since that's a completely separate search surface
+  (`api.plos.org` full-text/Solr vs. repository connector APIs) — reusing
+  it is not a duplicate query. Batches 1–11 picked fresh instrument names
+  each time and never checked this, which means a large pool of
+  already-validated real instrument/construct/task terms (searched
+  successfully elsewhere, proven to surface genuine datasets) sat unused
+  for PLOS while newly-brainstormed terms — no better a priori, and
+  unvalidated — were used instead. Before a new batch: filter
+  `search_terms_log.csv` to rows whose `file` does NOT contain "plos",
+  exclude any that (case-insensitively) match a term already in a
+  `plos_batch*` row, and prioritize picking from what's left (favor terms
+  that read as clean instrument/construct/task names) over inventing new
+  ones from scratch. Batch 12 (2026-07-30) did this for the first time —
+  see `BATCH_LOG.md`'s batch 12 entry for the method and results. The
+  candidate pool is large (~1,200 unused-for-PLOS English terms found in
+  one pass) — expect several more batches' worth before this pool runs dry.
 - Two phases in one script: a cheap Solr search against `api.plos.org`
   (filtered to PLOS ONE's eissn `1932-6203`, not the journal name string —
   PLOS's own metadata inconsistently capitalizes "PLoS ONE" vs "PLOS ONE"),

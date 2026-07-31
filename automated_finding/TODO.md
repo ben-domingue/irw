@@ -3,6 +3,48 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **Large pool of recyclable PLOS search terms still unused** (found
+  2026-07-30): batches 1–11 always invented fresh instrument names for
+  PLOS ONE discovery without checking whether a term had already proven
+  itself against a *different* source (Dataverse/Zenodo/OSF/etc.) in
+  `search_terms_log.csv` — those are a different search surface from PLOS,
+  so reusing them isn't a duplicate query, and they're already-validated
+  real instrument/construct/task names rather than guesses. Filtering
+  `search_terms_log.csv` to non-PLOS, English-only rows not yet tried
+  against PLOS turned up ~1,200 candidates in one pass; batch 12
+  (2026-07-30) used 30 of them, leaving ~1,170 unused. See `SKILL.md`'s
+  "Alternate discovery source: single-journal search (PLOS ONE)" section
+  (term-selection bullet) for the exact filtering method. Expect several
+  more batches' worth of higher-quality-than-average terms before this
+  pool runs dry — pull from it before brainstorming new terms in future
+  PLOS batches.
+
+- [x] **PLOS ONE batch 12 — `biblio_plos_batch12.csv` (3 rows) closed out**
+  (confirmed 2026-07-30, ben-domingue): `page_2025_portrait10.csv`,
+  `penningroth_2019_pm_goals.csv`, `penningroth_2019_pm_concerns.csv` (all
+  CC BY 4.0) uploaded to Redivis and pasted into the dictionary sheet;
+  `biblio_plos_batch12.csv` and all 3 `irw_output/*.csv` files gone from
+  disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 12" entry for
+  full per-dataset detail.
+
+- [ ] **PLOS ONE batch 12 — 205 `human_assistance` rows retriaged, not yet
+  hand-reviewed** (2026-07-30): `plos_batch12_retriage.csv` holds 40
+  `worth_retrying` + 63 `human_review` + 76 `aggregate_continuous` + 26
+  `not_item_response`. The `human_review` rows still need pasting into the
+  "Human eye" sheet, and the `worth_retrying` rows still need a
+  hand-review pass, same as prior batches.
+
+- [ ] **PLOS ONE batch 12 — 2 deferred `good`-flagged datasets need more
+  time** (2026-07-30): MnemoCity Task (`10.1371/journal.pone.0161858`,
+  N=160) has a genuine ~8-item usability/satisfaction survey mixed in with
+  derived cognitive-task-summary scores in the same file — needs the
+  paper's Methods text to confirm what each survey item asks before
+  writing a script; children's implicit/voluntary attention-in-time study
+  (`10.1371/journal.pone.0123625`, N=62) has real trial-level RT data
+  (336 trials/child) but it's spread across 62 separate per-participant
+  Excel sheets that need merging — a custom multi-sheet script, not a
+  simple melt.
+
 - [x] **PLOS ONE batch 11 — `biblio_plos_batch11.csv` (21 rows) closed
   out** (confirmed 2026-07-30, ben-domingue): 8 papers (`xu_2016_pqb`,
   `fredrickson_2015_mhcsf`, `milavic_2019_psisysf`, `tanck_2021_*` ×2,
@@ -23,15 +65,19 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-07-30, ben-domingue); file deleted
   from the repo.
 
-- [ ] **Teicher 2015 MACE study (`10.1371/journal.pone.0117423`) has a
-  genuine raw-item dataset worth a future look** (found while retracting
-  `teicher_2015_mace`, 2026-07-30): S9_File in the same article contains
-  ~70 candidate raw binary (0/1) lifetime-maltreatment-endorsement items
-  (`Swore`, `Hit`, `Fondled`, `Pushed`, etc.), plus paired
-  `_Helpless`/`_Terrified` distress ratings and `_sib`/peer/adult
-  variants, N=1051. Properly separating item vs. covariate columns and
-  deciding what to do with the paired distress ratings is new work, not
-  started.
+- [x] **Teicher 2015 MACE S9_File — `biblio_teicher_2015_mace.csv` (12
+  rows) closed out** (confirmed 2026-07-31, ben-domingue):
+  `teicher_2015_mace_verbal/_nonverbal/_physical/_sexual/_witness_parent/
+  _witness_sib/_peer_verbal/_peer_physical/_emot_neglect/_phys_neglect/
+  _distress_helpless/_distress_terrified.csv` (all CC BY 4.0) uploaded to
+  Redivis and pasted into the dictionary sheet; `biblio_teicher_2015_mace.csv`
+  and all 12 `irw_output/*.csv` files gone from disk as expected. See
+  `BATCH_LOG.md`'s "Teicher 2015 MACE S9_File raw items" entry for full
+  detail, including a list of columns deliberately not shipped (an
+  unmapped pilot item, ambiguous peer `Date_*` columns, several unmatched
+  household-context columns) that could be revisited if the paper's actual
+  survey instrument/codebook
+  turns up.
 
 - [ ] **PLOS ONE batch 11 — 4 deferred `worth_retrying` datasets need
   codebook-driven follow-up** (2026-07-30): disordered-eating-in-athletes
@@ -228,24 +274,37 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   located). ~26 rows total; see `BATCH_LOG.md` for the full accounting of
   what was and wasn't looked at.
 
-- [ ] **Carver 2017 PUGGS genetics-belief questionnaire
-  (`10.1371/journal.pone.0169808`) needs a codebook-driven processing
-  script** — flagged `good` in batch 6 but not processed: two pilot
-  samples (N=207, N=78), each spanning a belief-in-determinism subscale
-  (1-6/1-5 Likert with a "don't know" sentinel) and a true/false
-  genetics-knowledge subscale (needs a per-item answer-key recode to
-  correct/incorrect per the codebook). Both DOCX codebooks are already
-  downloaded and read (see `BATCH_LOG.md`); the recode logic is
-  understood, just not yet implemented as a script.
+- [x] **Carver 2017 PUGGS — `biblio_carver_2017_puggs.csv` (8 rows) closed
+  out** (confirmed 2026-07-31, ben-domingue): `carver_2017_puggs_pilot1_traits/
+  _det_core/_genom_know/_attitudes` and `_pilot2_traits/_det_core/_genom_know/
+  _attitudes.csv` (all CC BY 4.0) uploaded to Redivis and pasted into the
+  dictionary sheet; `biblio_carver_2017_puggs.csv` and all 8
+  `irw_output/*.csv` files gone from disk as expected. See `BATCH_LOG.md`'s
+  "Carver 2017 PUGGS genetics-belief questionnaire" entry for full detail,
+  including why the two pilots were kept as separate files (different raw
+  response formats for the core-ideas items, confirmed from their own
+  codebooks) and why pilot 2's true/false items were recoded to
+  correct/incorrect while
+  pilot 1's Likert items were not.
 
-- [ ] **Meloni 2015 disability-representations study
-  (`10.1371/journal.pone.0128876`) needs a codebook-driven processing
-  script** — flagged `good` in batch 6 but not processed: 244-column SI
-  file with ~8 distinct item families (open-ended disability-attribution
-  codes, 5×12 fictional-character rating blocks, a knowledge scale,
-  interest/attitude scales with paired response-time columns,
-  extracurricular-activity items). Tractable but needs more per-block
-  codebook time than the batch 6 pass had.
+- [x] **Meloni 2015 disability-representations study —
+  `biblio_meloni_2015_disability.csv` (9 rows) closed out** (confirmed
+  2026-07-31, ben-domingue): `meloni_2015_deq_oe_parent/_child`,
+  `meloni_2015_deq_ce_parent/_child`, `meloni_2015_parent_divers_ed`,
+  `meloni_2015_parent_interests`, `meloni_2015_child_disab_knowledge`,
+  `meloni_2015_child_ia_satisfaction/_frequency` (all CC BY 4.0) uploaded
+  to Redivis and pasted into the dictionary sheet; `biblio_meloni_2015_disability.csv`
+  and all 9 `irw_output/*.csv` files gone from disk as expected. The
+  fractional (.5) values in `deq_ce_parent`/`_child`/`child_disab_knowledge`
+  were checked against the paper's full text (no imputation language found
+  anywhere) and confirmed genuine — restricted to exactly the two 1-4
+  scales whose own codebook documents a half-point response option, absent
+  everywhere else. See `BATCH_LOG.md`'s "Meloni 2015 disability-representations
+  study" entry
+  for full detail, including why the `DEQ_OE` blocks are raw mention
+  counts (0-8) rather than the paper's own published 0/1 presence table,
+  and why the misleadingly-named `_TIME` columns are actually a frequency
+  scale, not response times.
 
 - [x] **PLOS ONE pilot — all 34 tables from the first pass uploaded and
   biblio-entered** (confirmed 2026-07-26, ben-domingue): first 7
@@ -347,13 +406,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   pasted, `irw_output/portella_2022_racial_attitudes.csv` is ready to upload
   to Redivis.
 
-- [ ] **Peters 2025 COVID-19 Risk Tool (issue #1093) — follow-up pass on the
-  remaining ~300 raw columns.** Main 16 DCT belief-item tables are fully
-  processed, tagged, dictionary-entered, and uploaded to Redivis
-  (ben-domingue confirmed 2026-07-17; see `BATCH_LOG.md`). Not yet covered:
-  the risk-estimate/checkbox-array family — `siCurrent*`/`siIntention*`/
-  `hwFrequency*`/`work*`/`DMQslider*` and their paired `*Est` columns — uses
-  a different, not-yet-decoded response mechanism.
+- [x] **Peters 2025 COVID-19 Risk Tool — `biblio_peters_2025_precautions.csv`
+  (6 rows) closed out** (confirmed 2026-07-31, ben-domingue):
+  `peters_2025_work_precautions`, `_si_current`, `_si_trigger`,
+  `_si_intention`, `_hw_frequency`, `_hw_intensity` (all ODbL 1.0) uploaded
+  to Redivis and pasted into the dictionary sheet; `biblio_peters_2025_precautions.csv`
+  and all 6 `irw_output/*.csv` files gone from disk as expected. See
+  `BATCH_LOG.md`'s "Peters 2025 COVID-19 Risk Tool: precaution-checklist
+  follow-up" entry for the `*Est`-column decoding mechanism (it's a fixed
+  risk-weight/administration flag, not a per-person estimate, despite the
+  name). `proximity` (single radiobutton) and `DMQslider.nr.` (single
+  slider) remain unshipped — genuinely single-item, can't form their own
+  scale.
+
+- [ ] **`tags_fix_peters_2025_precautions.csv` (6 rows) still staged, not
+  yet confirmed applied** (2026-07-31) — optional per-table tags entries
+  for the 6 precaution tables above, matching the original 16 tables'
+  convention. Not yet pasted/applied; file still on disk.
+
+- [ ] **`metadata/tags.csv` missing rows for the existing 16 `peters_2025_*`
+  tables** (found 2026-07-31, while adding tags for the 6 new precaution
+  tables above): `BATCH_LOG.md`'s 2026-07-17 entry records these 16 rows
+  as "written directly into metadata/tags.csv," but none are present now —
+  zero case-insensitive matches for "peters" in the file. The corresponding
+  `metadata/biblio.csv` rows *are* present and correct (full APA reference/
+  DOI/BibTeX confirmed for `peters_2025_att_exp_eval` etc.), so this is
+  tags.csv-specific — possibly a metadata-pipeline regeneration overwrote
+  the direct edit, or the same Dropbox-sync file-loss pattern documented
+  elsewhere in `BATCH_LOG.md`. Not investigated further — worth a look next
+  time `metadata/tags.csv` is regenerated or the site-update skill runs.
 
 - [x] **`automated_finding/human_review_cognitive_tasks.csv`** (17 rows,
   from batch 19's cognitive/decision-making-task search) pasted into the
