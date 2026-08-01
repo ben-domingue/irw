@@ -1,0 +1,200 @@
+---
+title: "<TODO: TITLE>"
+description: |
+  <TODO: one paragraph — the question, why it matters, framed for a public
+  reader who hasn't seen the site before. Pull this from the user's answer
+  to the Motivation prompt, don't paraphrase it away.>
+date: today
+bibliography: <NAME>_data/references.bib
+format:
+  html:
+    code-fold: true
+    toc: true
+    toc-depth: 2
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r}
+#| label: setup
+#| echo: false
+
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(ggplot2)
+library(plotly)
+
+theme_set(theme_minimal(base_size = 13))
+irw_blue <- "#2166ac"
+irw_red  <- "#d73027"
+irw_grey <- "grey50"
+
+`%||%` <- function(a, b) if (is.null(a)) b else a
+
+cache_path <- "<NAME>_data/<NAME>_results.rds"
+cache_ok   <- file.exists(cache_path)
+
+if (cache_ok) {
+  .cache           <- readRDS(cache_path)
+  summary_df       <- .cache$summary
+  candidate_tables <- .cache$candidate_tables
+  date_run         <- .cache$date_run
+  is_pilot         <- isTRUE(.cache$pilot)
+  r_all_candidates <- .cache$n_all_candidates %||% length(candidate_tables)
+  r_n_tables_run   <- length(candidate_tables)
+  # TODO(agent): pull any other keyed objects the compute script saved
+  # (e.g. .cache$eigenvalues, .cache$q3_matrices) needed for sanity-check figures.
+} else {
+  summary_df <- tibble(
+    table = character(), n_items = integer(), n_participants = integer()
+    # TODO(agent): match this empty-schema fallback to the real summary_df
+    # columns the compute script writes, so the page doesn't error on a
+    # missing cache.
+  )
+  candidate_tables <- character()
+  date_run         <- Sys.Date()
+  is_pilot         <- FALSE
+  r_all_candidates <- 0L
+  r_n_tables_run   <- 0L
+}
+
+knitr::opts_chunk$set(eval = cache_ok)
+```
+
+```{r}
+#| label: cache-warning
+#| echo: false
+#| eval: true
+#| output: asis
+
+if (!cache_ok) cat(
+  "::: {.callout-warning}\n",
+  "**Cache not found** — figures and tables will not appear. Generate results ",
+  "by running the compute script, then re-render:\n\n",
+  "```r\nRscript vignettes/<NAME>_compute.R\n```\n",
+  ":::\n", sep = ""
+)
+```
+
+```{r}
+#| label: pilot-warning
+#| echo: false
+#| eval: true
+#| output: asis
+
+if (cache_ok && is_pilot) cat(
+  "::: {.callout-warning}\n",
+  "**Draft preview, partial run.** This render uses a partial sample of ",
+  r_n_tables_run, " tables out of ", r_all_candidates, " eligible tables, ",
+  "to validate the pipeline and page layout before the full batch finishes. ",
+  "All numbers here are real computed results -- not placeholders -- but ",
+  "treat the *distributions* as a small, noisy preview rather than a ",
+  "representative picture. Re-run `<NAME>_compute.R` (with `PILOT <- FALSE` ",
+  "and the full batch complete) to scale up.\n",
+  ":::\n", sep = ""
+)
+```
+
+::: {.callout-note}
+This vignette — including the dataset search, the compute script, the
+analysis design, and the writing below — was produced largely by Claude
+(Anthropic), working from a task specification and with human review.
+Treat the methodological choices and interpretations accordingly, and
+check the compute script (`<NAME>_compute.R`) directly if you're relying
+on the numbers here.
+:::
+
+<!--
+TODO(agent): if this vignette was NOT substantially authored by an
+automated agent, delete the callout-note block above rather than leaving a
+false disclosure in place.
+-->
+
+## Motivation
+
+<TODO: the modeling assumption or research question, why it matters, and
+links to sibling vignettes that share the assumption or method (use real
+`[text](other_vignette.qmd)` links — check which ones actually exist in
+vignettes/ before citing them).>
+
+## Data and methods
+
+### Dataset selection
+
+```{r}
+#| label: filter-datasets
+#| eval: false
+
+all_candidates <- irw_filter(
+  n_items        = c(<MIN_ITEMS>, <MAX_ITEMS>),
+  n_participants = c(<MIN_PARTICIPANTS>, Inf)
+)
+```
+
+<TODO: why these thresholds — trace back to the user's selection-criteria
+answer, not a plausible-sounding guess.> `r r_all_candidates` tables met
+this criterion as of `r format(date_run, "%B %Y")`.
+`r if (is_pilot) "This page currently runs on a small pilot subset (see the warning above); a full pass analyzes all of them." else paste0("This pass analyzes all ", r_n_tables_run, " of them.")`
+
+### Per-table computation
+
+For each candidate table, `<TODO: fit function name from the compute script>()`:
+
+<TODO: numbered list of what the fit function actually does, matching its
+real steps in `<NAME>_compute.R` — don't describe a method that isn't in
+the script.>
+
+```{r}
+#| label: fit-function
+#| eval: false
+
+# TODO(agent): paste the real (trimmed) fit function body from
+# <NAME>_compute.R here, not a paraphrase.
+```
+
+Of the `r r_n_tables_run` candidate tables in this pass, `r nrow(summary_df)`
+produced usable results.
+
+::: {.callout-note}
+To reproduce with current IRW holdings, re-run `<NAME>_compute.R`
+and commit the updated `<NAME>_data/<NAME>_results.rds`.
+:::
+
+## Results
+
+<TODO: figures/tables built from `summary_df`. Use `ggplot2` + `ggplotly()`
+with a `text=` tooltip aesthetic (showing table name) for anything with
+more than one dataset per point; `knitr::kable()` for tables.>
+
+## Limitations
+
+<TODO: real methodological caveats grounded in what the compute script
+actually does/doesn't handle — not boilerplate. Get this from the user's
+Limitations-grounding answer.>
+
+## Reproducibility
+
+Results were computed on `r format(date_run, "%B %d, %Y")`. To regenerate:
+
+```r
+# 1. Re-run the compute script (from the project root)
+source("vignettes/<NAME>_compute.R")
+
+# 2. Re-render this page
+quarto::quarto_render("vignettes/<NAME>.qmd")
+```
+
+::: {.callout-tip}
+To cite the datasets used, run:
+
+```r
+irw_save_bibtex(summary_df$table, output_file = "<NAME>_data/references.bib")
+```
+:::
+
+---
+
+## References
