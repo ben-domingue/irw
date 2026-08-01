@@ -1,5 +1,6 @@
 # Downloaded and converted data — regenerable, potentially large
 irw_output/
+output_noncore/
 downloads/
 
 # Ephemeral batch run state

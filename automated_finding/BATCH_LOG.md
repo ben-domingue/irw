@@ -3805,6 +3805,82 @@ session was discovery + first-pass license/structure screening only, per
 the "real pass ... not eyeballing all 6912/6163 rows" instruction. See
 `TODO.md` for what's left.
 
+**Follow-up (2026-08-01, same day): three surviving candidates downloaded,
+opened, and converted to first-draft IRW-format CSVs** in
+`automated_finding/output_noncore/` (kept out of `irw_output/` since these
+aren't the core ordinal standard; `output_noncore/` gitignored the same
+way). Structure confirmed real and clean in all three cases — these are
+draft conversions for review, not yet uploaded to Redivis or pasted into
+any dictionary sheet, and not yet QC'd against the resp-error/imputation
+checks `datastandard.md` requires for the core standard (unclear how many
+of those apply verbatim to `text`-column data — worth a decision before
+shipping).
+
+- ~~**Nominal — Boydstun (2021) open-ended poverty-cause survey**
+  (Dataverse DVN/E4AJZF, CC0 1.0)~~ — **ruled out-of-scope by ben-domingue
+  (2026-08-01), reason not recorded.** Was converted to
+  `boydstun_2021_povertycause_text.csv`/`_selfcode.csv` (free-text poverty
+  attributions + self-coded individual/government_society/other category
+  per response); both output files and `data/boydstun_2021_povertycause.py`
+  removed. Don't re-surface this DOI as a nominal candidate without
+  checking with Ben first on what made it out-of-scope (politically
+  charged survey topic? something about the self-coding design not fitting
+  the nominal criteria cleanly? unconfirmed either way).
+- **Competitions — Costa & Giné (2023) World Padel Tour match history**
+  (`data/costa_gine_2023_wpt_matches.py`, source: Zenodo 10.5281/
+  zenodo.7860242, CC BY 4.0). File was UTF-16LE with BOM (not UTF-8 as the
+  `.csv` extension implied — `file`/`iconv` needed to catch this before
+  parsing). 17,661 raw rows (2018-2023, Spanish tour data) -> 17,583
+  matches after dropping 78 rows where the winner string didn't cleanly
+  match either team ("agent" = a doubles pair, formatted "Player1 /
+  Player2"); `score_a`/`score_b` = sets won (parsed from `set1`-`set3`
+  columns, matches with a `0-0` placeholder set treated as unplayed);
+  `date` = tournament start date converted to Unix time;
+  `winner` = `a`/`b`. `homefield` left blank throughout — WPT is a neutral
+  pro tour, no home team concept. Extra `cov_tournament`/`cov_year`/
+  `cov_category` (Femenino/Masculino)/`cov_round` columns kept.
+- **Nominal — COS101 open-ended CS exam responses** (`data/
+  cos101_2026_openended.py`, source: Figshare 10.6084/m9.figshare.32109718,
+  CC BY 4.0). 294 Nigerian undergrad CS students, 3 open-ended exam
+  questions each (privacy/security tradeoffs, computer-virus influence on
+  OS security design, microprocessor history) -> 882 id/item/text rows.
+  Full question wording is in the source `.xlsx` header row (printed by
+  the script, not carried into the output CSV) — needed for an itemtext
+  pass later, same as any other table.
+
+None of the three has gone through a human QC pass yet (per-item rare-
+value scan doesn't obviously apply to free-text `text` columns the way it
+does to numeric `resp`; a person still needs to spot-check for the nominal
+equivalent — e.g. gibberish/copy-pasted/off-topic responses, or the
+padel score-parsing logic's handling of retired/walkover matches). See
+`TODO.md` for the review step.
+
+**Correction (2026-08-02)**: this entry and the one above wrongly claimed
+no biblio/dictionary-sheet process exists for these standards — it does,
+`metadata/comps_biblio.csv`/`nominal_biblio.csv` (same column format as
+core `metadata/biblio.csv`), confirmed as pipeline-regenerated snapshots
+of the two Google Sheets Ben linked (rows matched exactly). First drafted
+`biblio_comps_padel.csv`/`biblio_nominal_cos101.csv` in *that* format —
+wrong target: `metadata/comps_biblio.csv`/`nominal_biblio.csv` is what the
+metadata pipeline *produces from* the sheet, not the staging format that
+gets pasted into it. Corrected (ben-domingue caught it) to the actual
+automated_finding biblio-staging format documented in memory
+`feedback_dict_format` (`table, table.lower, Description, URL (for data),
+Reference, DOI (for paper), Original License, Custom License, Public
+Reshare?, Derived License, Custom License, Notes, Contributor, Date`) —
+`costa_gine_2023_wpt_matches` (no associated paper; Reference/DOI point
+to the Zenodo deposit itself) and `cos101_2026_openended` (same, points
+to the Figshare deposit; single author Temidayo Omotehinwa), both
+`Original License`/`Derived License` = CC BY 4.0, `Contributor` =
+automated, `Public Reshare?` = Public.
+
+**Uploaded to Redivis (confirmed 2026-08-02, ben-domingue)**: both
+`output_noncore/*.csv` files gone from disk as expected — the padel and
+COS101 tables are now the first-ever competitions/nominal tables shipped
+by this pipeline. `biblio_comps_padel.csv`/`biblio_nominal_cos101.csv`
+still need pasting into the respective Google Sheets, and neither table
+has had a human QC pass — see `TODO.md`.
+
 ## "Human eye" sheet review follow-through (2026-08-01)
 
 Padma K hand-reviewed 31 rows of the "Human eye" tab (all `human_review`
@@ -4168,3 +4244,19 @@ formula (importance/10 x Likert), confirmed via the paper's Methods text
 `liu_2017_ssrs_support`'s S2 (350 respondents at 4, one at 1) remain
 unresolved — plausible but not verifiable against a confirmed instrument
 name/codebook.
+
+## yandun2026 batch-3 column-boundary bug fixed (2026-08-01)
+
+Fixed the off-by-one `SUBSCALES` column ranges in `data/
+yandun2026_cognitive.py` identified in the "Discovered as duplicates of
+already-processed IRW content" note above: `language` was cols 14-18 (5
+items, wrongly including "Relates numbers with clues"), `logical_thinking`
+was cols 19-21 (3 items, missing it). Corrected to language cols 14-17 (4
+items) / logical_thinking cols 18-21 (4 items), confirmed against the raw
+header's own group-boundary row (`Language and Communication` spans 4
+columns, `Logical Thinking` spans 4). Regenerated all 4 subscale CSVs
+(attention/memory unchanged, language 500->400 responses, logical_thinking
+300->400 responses) into `automated_finding/irw_output/cleaned/`;
+`cleaned_index.csv` updated. **Re-uploaded to Redivis (confirmed
+2026-08-02, ben-domingue)** — `irw_output/cleaned/` and `cleaned_index.csv`
+removed from disk as expected.

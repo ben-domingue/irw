@@ -20,44 +20,45 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `BATCH_LOG.md`'s "'Human eye' sheet review follow-through" entry for how
   each was found and what was checked.
 
-- [ ] **Bug found in already-shipped `yandun2026_language`/
-  `yandun2026_logical_thinking` tables (batch 3) — need reprocessing**
-  (found 2026-08-01, while checking a "human eye" Yes-row candidate that
-  turned out to be a duplicate of this same dataset): `data/
-  yandun2026_cognitive.py`'s column boundaries are off by one — the
-  `language` subscale wrongly includes "Relates numbers with clues" (a
-  Logical Thinking item per the source header's own group-boundary row),
-  and `logical_thinking` is missing it (3 items instead of the true 4).
-  Fix the `SUBSCALES` column ranges in that script (language should be
-  cols 14-17, logical_thinking cols 18-21, 0-indexed after header-strip),
-  regenerate both CSVs, and re-upload to Redivis. See `BATCH_LOG.md` for
-  the exact column-header evidence.
+- [x] **`yandun2026_language`/`yandun2026_logical_thinking` bug fixed and
+  re-uploaded to Redivis** (confirmed 2026-08-02, ben-domingue): `data/
+  yandun2026_cognitive.py`'s `SUBSCALES` column ranges were off by one
+  (see `BATCH_LOG.md`'s duplicate-dataset entry for the original evidence);
+  corrected to language cols 14-17 (4 items) / logical_thinking cols 18-21
+  (4 items, was 3), regenerated, and uploaded. `automated_finding/irw_output/cleaned/`
+  and `cleaned_index.csv` removed from disk as expected.
 
-- [ ] **Nominal/competitions experimental-standard candidates — shortlisted,
-  license/structure-screened, and deduped against the existing
-  nominal/competitions table sheets — not yet downloaded or converted**
-  (2026-08-01, one-off search, not a standing priority — see
+- [x] **Nominal/competitions experimental-standard candidates —
+  `costa_gine_2023_wpt_matches` (competitions) and `cos101_2026_openended`
+  (nominal) uploaded to Redivis** (confirmed 2026-08-02, ben-domingue):
+  both `output_noncore/*.csv` files gone from disk as expected. See
   `BATCH_LOG.md`'s "Nominal / competitions experimental-standard search"
-  entry, including its dedup-check addendum, for full detail and memory
-  `project_alt_data_standards` for the schema criteria).
-  `candidates_nominal_shortlist.csv` (57 rows) and
-  `candidates_competitions_shortlist.csv` (53 rows) are keyword-filtered
-  from the full 6911/6078-row discovery files. **The dedup check caught
-  one exact duplicate already live in IRW (`zucco2019_portfoliosalience`,
-  DVN/HJZSIM) and several already-covered domains (chess via `lichess`,
-  League of Legends via `league_of_legends`, football via
-  `eufootball_2010-2020`, ASAP-lineage essay corpora via `asap20train`) —
-  those candidates are downgraded, not dropped from the shortlist files.**
-  Strongest surviving next candidates to actually download and convert:
-  nominal — Self-Coding open-ended survey data (Dataverse DVN/E4AJZF,
-  **CC0**, best-confirmed fit, non-overlapping domain) and COS101
-  open-ended exam responses (Figshare, CC BY 4.0, also non-overlapping);
-  competitions — World Padel Tour match history (Zenodo 7860242, CC BY
-  4.0, padel is not an already-covered sport). One dataverse candidate
-  (`DVN/J9KSHU`) is license-blocked (CC BY-NC-SA). Needs someone to
-  actually open the files, confirm id/item/text or agent_a/agent_b/score
-  structure, and write bespoke processing scripts (normal
-  `irw_batch_updated.py` triage does not apply to either standard).
+  entry, including its dedup-check and conversion-follow-up addenda, for
+  full detail; memory `project_alt_data_standards` for the schema
+  criteria. Scripts remain in `data/`
+  (`costa_gine_2023_wpt_matches.py`, `cos101_2026_openended.py`). A third
+  candidate (Boydstun 2021 open-ended poverty-cause survey, DVN/E4AJZF)
+  was converted but then ruled out-of-scope by ben-domingue (2026-08-01)
+  and removed — don't re-surface it without checking why first.
+
+- [ ] **`biblio_comps_padel.csv` / `biblio_nominal_cos101.csv`** (1 row
+  each) still need pasting into the competitions/nominal Google Sheets
+  (see the two links in memory `project_alt_data_standards`). **Corrected
+  2026-08-02** to the standard automated_finding biblio-staging column
+  format (`table, table.lower, Description, URL (for data), Reference,
+  DOI (for paper), Original License, Custom License, Public Reshare?,
+  Derived License, Custom License, Notes, Contributor, Date` — see memory
+  `feedback_dict_format`) after an earlier draft wrongly used the
+  `metadata/comps_biblio.csv`/`nominal_biblio.csv` *regenerated-snapshot*
+  format instead (fewer columns, has `BibTex`, no `table.lower`/`Original
+  License`/`Public Reshare?`/`Contributor`/`Date` — that format is what
+  the metadata pipeline produces from the sheet, not what gets pasted
+  into it). Not yet confirmed pasted. Neither of the two uploaded tables
+  has had a
+  human QC pass yet either (no established check for `text`-column data,
+  unlike the numeric resp-error checks the core standard has — worth a
+  decision on what that should look like). `DVN/J9KSHU` remains
+  license-blocked (CC BY-NC-SA) and untouched.
 
 - [x] **PLOS ONE batch 14 — `dejesus_2017_{lequesne,sf36,womac,gpm}` pasted
   into the dictionary sheet** (confirmed 2026-08-01, ben-domingue, from the
