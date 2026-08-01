@@ -3,6 +3,13 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`biblio_worthretrying_sweep_20260801.csv` (32 rows) uploaded/
+  pasted** (confirmed 2026-08-01, ben-domingue): the 10 papers / 32
+  tables from the PLOS worth_retrying backlog sweep (see `BATCH_LOG.md`
+  entry below) uploaded to Redivis and pasted into the dictionary sheet;
+  `biblio_worthretrying_sweep_20260801.csv` and all 32 `irw_output/*.csv`
+  files gone from disk as expected.
+
 - [x] **"Human eye" batch — 5 new tables pasted into the dictionary sheet**
   (confirmed 2026-08-01, ben-domingue): `iandolo_2021_asq`,
   `dasilva_2019_hexaco24`, `mendes_2019_snycq`, `tutrin_2020_meq30`,
@@ -60,35 +67,82 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   combined biblio file used. See `BATCH_LOG.md`'s "PLOS ONE batch 14" entry
   for full detail.
 
-- [ ] **`automated_finding/human_review_plos_batch14.csv`** (12 rows, batch
-  14's `human_review` rows from `irw_retriage_ha.py`) — needs pasting into
-  the "Human eye" sheet.
+- [x] **`automated_finding/human_review_merged.csv`** (292 rows) pasted
+  into the "Human eye" sheet (confirmed 2026-08-01, ben-domingue): merged
+  `human_review` rows from all of `human_review_plos_batch14.csv` +
+  `plos_batch{6,9,10,11,12,13,14}_retriage.csv`, deduped internally by
+  DOI (412 -> 301) and against the live "Human eye" sheet (301 -> 292
+  net-new, 9 already there); file gone from disk as expected.
 
-- [ ] **PLOS ONE batch 14 — dairy tie-stall housing survey deferred**
-  (10.1371/journal.pone.0216544, 2026-08-01): two clean between-subjects
-  samples (S1 N=430, S2 N=372), each with 6 genuine 1-7 Likert belief items
-  (`b1_morerisky/lowerquality/harmenviro`, `b2_borganic/bfamfarm/
-  bsmallfarm`) plus 3 more (`has1-3`) of unclear relationship to the rest —
-  needs the paper's item wording to confirm whether this is one 9-item
-  battery or 2-3 separate subscales before it can be split into file(s)
-  correctly. `plos_batch14_retriage.csv` still holds this row.
+- [x] **PLOS ONE batch 14 — dairy tie-stall housing survey processed**
+  (confirmed 2026-08-01): `robbins_2019_dairy_tiestall` -> 3 tables
+  (risk/quality belief, farm-type belief, "has" belief, 3 items each,
+  1-7). Item wording wasn't findable in the article text, but the
+  column-name structure (b1_*/b2_*/has*) gave a defensible split into 3
+  separate scales rather than 1. See `BATCH_LOG.md`'s "PLOS ONE
+  worth_retrying backlog sweep" entry (2026-08-01).
 
 - [ ] **PLOS ONE batch 14 — Auricular Acupuncture exam-anxiety study
   deferred, low priority** (10.1371/journal.pone.0168338, 2026-08-01):
   N=44, mostly physiological/composite STAI-subscale readings across 3
   conditions plus a few `vas_*` items — small sample, needs more untangling
-  than this pass had time for. `plos_batch14_retriage.csv` still holds this
-  row.
+  than this pass had time for. `plos_deferred_candidates.csv` still holds
+  this row (2026-08-01: `plos_batch{10,11,14}_retriage.csv` consolidated
+  into this single file — 5 rows total, the only ones from those 3 files
+  still open — and deleted; everything else in them was already resolved
+  or captured in `human_review_merged.csv`).
 
-- [ ] **Continuous/bounded-response repo-based discovery (Batch 21) in
-  progress** (started 2026-08-01): same 32-term list as PLOS batch 14 (see
-  above), translated into 8 languages (256 additional queries), run against
-  `irw_discover_updated.py`'s repository connectors (Dataverse/Zenodo/OSF/
-  Dryad/Figshare/DataCite/Scholars Portal/SURF). English run
-  (`candidates_continuous_en.csv`) and multilingual run
-  (`candidates_continuous_intl.csv`) still need merging, triaging, and
-  reviewing. Check `BATCH_LOG.md` for whether this finished in the same
-  session it was started or needs picking up.
+- [x] **Continuous/bounded-response repo-based discovery (Batch 21) —
+  discovered, triaged, retriaged, and hand-reviewed end-to-end** (confirmed
+  2026-08-01): 737 English + 378 international candidates merged/deduped to
+  1,030 (1,029 after excluding a known OOM-triggering Dataverse file,
+  `DVN/EHBGOW`), full `irw_batch_updated.py` triage run (had to be resumed
+  twice — see `BATCH_LOG.md`), retriaged with `irw_retriage_ha.py`. **Net
+  result: zero immediately-shippable tables this batch** — both promising
+  leads need source-paper access before they can be scripted safely (see
+  the two items below). See `BATCH_LOG.md`'s "Continuous/bounded-response
+  repo-based discovery (Batch 21)" entry for the full per-row accounting.
+
+- [ ] **`automated_finding/human_review_continuous.csv`** (21 rows, Batch
+  21's `human_review` rows from `irw_retriage_ha.py`) — needs pasting into
+  the "Human eye" sheet.
+
+- [ ] **Batch 21 — Romanian teachers' lifelong-learning survey deferred,
+  needs a careful multi-scale split** (figshare 10.6084/m9.figshare.31836016,
+  CC BY 4.0, Haraseniuc & Maier 2026, N=70): genuinely real Likert data (56
+  items, fully self-documented Romanian item text in the headers, no
+  external paper needed) — but it's **7 distinct instruments bundled in one
+  file**, identifiable by the item numbering resetting to "1." six times:
+  a 5-item ad-hoc openness-to-new-content scale (still under the form's
+  original Q8-Q12 numbering), an 11-item conscientiousness/procrastination
+  block, a 6-item self-confidence block (3 reverse-worded), the validated
+  9-item Affinity for Technology Interaction (ATI) scale, a 9-item
+  self-efficacy block (3 reverse-worded, resembles NGSES), an 8-item
+  criticism-tolerance/rigidity block, and a 10-item "love of
+  learning"/lifelong-learning disposition block (3 reverse-worded). Needs
+  each block split into its own file per `datastandard.md`'s one-scale-
+  per-file rule, with reverse-coded items in the self-confidence/self-
+  efficacy/love-of-learning blocks flipped so higher always means more of
+  the construct — deliberately not rushed through in this pass given the
+  number of per-item direction calls across a non-English instrument.
+
+- [ ] **Batch 21 — visual-impairment functional-mobility kinematics dataset
+  deferred, needs the source manuscript** (Dataverse `DVN/0LWF5Z`, CC0,
+  Ahulló-Fuster et al. 2026, N=54): the raw file's `QUEST_*` column prefix
+  is a red herring — the dataset description states the actual instrument
+  is "a version of the NASA Task Load Index (NASA-TLX) adapted to
+  individuals with visual impairment," not the QUEST assistive-tech
+  satisfaction scale the column names suggest. 7 items × 4 task conditions
+  (OA/OC/OA2T/OC2T — single vs. dual-task obstacle avoidance/crossing),
+  clean 0–5 range, N=54, no missingness — structurally ready to ship, but
+  the manuscript ("Adults with visual impairment show distinct kinematic
+  and cognitive load patterns during demanding functional mobility tasks
+  compared with sighted controls") isn't findable via web search (likely
+  unpublished/not yet indexed — Dataverse deposit 2026-02-18, released
+  2026-05-12) and NASA-TLX's standard "Performance" subscale is reverse-
+  coded relative to its other 5 subscales, which needs the paper's actual
+  item order to apply correctly. Don't guess the subscale-to-column mapping
+  — wait for the paper or ask the authors.
 
 - [ ] **Large pool of recyclable PLOS search terms still unused** (found
   2026-07-30): batches 1–11 always invented fresh instrument names for
@@ -121,9 +175,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-01, ben-domingue); file deleted
   from the repo.
 
-- [ ] **PLOS ONE batch 13 — 72 `worth_retrying` rows not yet
-  hand-reviewed** (2026-07-31), still in `plos_batch13_retriage.csv` —
-  same pattern as prior batches' worth_retrying passes, not yet started.
+- [x] **PLOS ONE batches 6/9/12/13 — `worth_retrying` backlog closed
+  out** (confirmed 2026-08-01, ben-domingue): full sweep screened all
+  ~186 rows at scale; 16 hand-verified and processed to 32 tables (see
+  `BATCH_LOG.md`'s "PLOS ONE worth_retrying backlog sweep" entry,
+  2026-08-01, for the full list). The remaining 62
+  structurally-promising-but-unverified candidates (top 20 by size listed
+  in that same `BATCH_LOG.md` entry) were **written off, not pursued**
+  (ben-domingue decision, 2026-08-01) — `plos_batch{6,9,12,13}_retriage.csv`
+  deleted. If any of those 62 DOIs are wanted later, the scan logs have
+  title/DOI/shape but not license — would need re-fetching via
+  `irw_discover_plos.py`'s `process_one()` on the DOI.
 
 - [ ] **PLOS ONE batch 13 — 3 deferred `good`-flagged datasets need more
   time** (2026-07-31): imitation task (`10.1371/journal.pone.0235595`,
@@ -146,12 +208,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 12" entry for
   full per-dataset detail.
 
-- [ ] **PLOS ONE batch 12 — 205 `human_assistance` rows retriaged, not yet
-  hand-reviewed** (2026-07-30): `plos_batch12_retriage.csv` holds 40
-  `worth_retrying` + 63 `human_review` + 76 `aggregate_continuous` + 26
-  `not_item_response`. The `human_review` rows still need pasting into the
-  "Human eye" sheet, and the `worth_retrying` rows still need a
-  hand-review pass, same as prior batches.
+- [x] **PLOS ONE batch 12 — `human_review` rows merged into
+  `human_review_merged.csv`; `worth_retrying` backlog closed out**
+  (confirmed 2026-08-01): `colomer_perez_2021_self_care`
+  (`10.1371/journal.pone.0260827`, from this batch) -> 2 tables
+  (Appraisal of Self-Care Agency 24i, SOC-13). See batch 13's entry above
+  — remainder written off, `plos_batch12_retriage.csv` deleted.
 
 - [ ] **PLOS ONE batch 12 — 2 deferred `good`-flagged datasets need more
   time** (2026-07-30): MnemoCity Task (`10.1371/journal.pone.0161858`,
@@ -198,18 +260,19 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   survey instrument/codebook
   turns up.
 
-- [ ] **PLOS ONE batch 11 — 4 deferred `worth_retrying` datasets need
-  codebook-driven follow-up** (2026-07-30): disordered-eating-in-athletes
-  prospective study (`10.1371/journal.pone.0257577`, N=802, 3 waves, ~20
-  subscale prefixes incl. EDI and EDE-Q blocks in one 665-column file);
-  psychological-crisis-coping/physical-activity study
-  (`10.1371/journal.pone.0350928`, N=1051, clean rumination[22i,3sub]/
-  PA[3i]/CC[32i,4sub]/ER[14i,2sub] block structure already identified,
-  just needs subscale semantic labels from the paper's codebook);
-  `10.1371/journal.pone.0279701`'s remaining q11/q12/q13 domain-
-  importance/satisfaction/FLZ battery + unidentified q18 6-item block
-  (the loneliness3/phq4 tables from this same file are already shipped,
-  see above). `plos_batch11_retriage.csv` still holds these rows.
+- [x] **PLOS ONE batch 11 — 4 deferred `worth_retrying` datasets resolved**
+  (confirmed 2026-08-01): psychological-crisis-coping/physical-activity
+  study (`10.1371/journal.pone.0350928`) -> `yang_2026_crisis_coping`, 4
+  tables (RRS 22i, PARS-3 3i, Duan coping scale 32i, ERQ 14i);
+  `10.1371/journal.pone.0279701`'s q11/q12/q18 -> `reinwarth_2023_domains_wellbeing`,
+  3 more tables (the q13/"FLZ" battery turned out to be a derived index,
+  not raw items — not shipped). Disordered-eating-in-athletes
+  (`10.1371/journal.pone.0257577`) confirmed still too complex to rush
+  (~10 bundled instruments across a 665-column file) — remains deferred,
+  structure mapped in `BATCH_LOG.md`. See `BATCH_LOG.md`'s "PLOS ONE
+  worth_retrying backlog sweep" entry (2026-08-01) for full detail;
+  `plos_deferred_candidates.csv` holds this row (consolidated from
+  `plos_batch11_retriage.csv`, since deleted).
 
 - [x] **PLOS ONE batch 10 — `biblio_plos_batch10.csv` (19 rows) closed out**
   (confirmed 2026-07-30, ben-domingue): 4 papers (`baudin_2024_static99r`,
@@ -239,24 +302,29 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   response) and 5 deferred (real items, needs codebook time) candidates
   from the same 26-row pool.
 
-- [ ] **PLOS ONE batch 10 — 5 deferred `worth_retrying` datasets need
-  codebook-driven follow-up** (2026-07-30): French school-subject
-  self-concept study (`10.1371/journal.pone.0230103`, 249 cols, 5 parallel
-  ~33-item domain scales, has a DOB/PII column to strip first); Dutch
-  self/other/meta-personality study (`10.1371/journal.pone.0272095`, 1086
-  cols, multi-rater HEXACO facets); chronic fatigue neuromuscular-strain
-  study (`10.1371/journal.pone.0159386`, 187 cols, 5 symptom items across
-  many timepoints, a genuine but unmapped wave structure); "Lab meets real
-  life" thought-sampling study (`10.1371/journal.pone.0184488`, N=43,
-  ambiguous `t0`/`t6`/`DoM`/`ToM` labels not yet explained by the paper
-  text); psychosomatic rehabilitation gender-effects study
-  (`10.1371/journal.pone.0256916`, 494 cols, cryptic suffixed variable
-  names). `plos_batch10_retriage.csv` still holds these rows if picked up
-  later.
+- [x] **PLOS ONE batch 10 — 5 deferred `worth_retrying` datasets, 2
+  processed** (confirmed 2026-08-01): chronic fatigue neuromuscular-strain
+  study (`10.1371/journal.pone.0159386`) -> `rowe_2016_cfs_strain`, 3
+  tables (5 symptoms x 7 waves, BAI 21i, MFI-20); "Lab meets real life"
+  thought-sampling study (`10.1371/journal.pone.0184488`) ->
+  `kuehner_2017_mw_rumination`, 1 table (resolved the old ambiguous-
+  labels note: the t0_* columns are unlabeled composite indices and
+  positive/negative_affect are PANAS sums, neither raw items; only
+  MW/RUM are genuine raw probe ratings). Remaining 3 confirmed still too
+  complex to rush this pass, structure now mapped in `BATCH_LOG.md`:
+  French school-subject self-concept study (`10.1371/journal.pone.0230103`,
+  richer than originally noted — 5 domain scales x 33 items plus an
+  embedded ~32-item Big Five plus grade data), Dutch self/other/meta-
+  personality study (`10.1371/journal.pone.0272095`, 1086 cols),
+  psychosomatic rehabilitation gender-effects study
+  (`10.1371/journal.pone.0256916`, 494 cols). See `BATCH_LOG.md`'s "PLOS
+  ONE worth_retrying backlog sweep" entry (2026-08-01);
+  `plos_deferred_candidates.csv` holds these 3 rows (consolidated from
+  `plos_batch10_retriage.csv`, since deleted).
 
-- [ ] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
-  still unreviewed** in `plos_batch9_retriage.csv` (see below for detail)
-  — older backlog, still open when batch 10 finishes.
+- [x] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
+  reviewed** (see below for detail) — resolved 2026-08-01, 3 papers
+  processed to 14 tables.
 
 - [x] **PLOS ONE pilot — human_review_plos_batch1.csv (184 rows)** pasted
   into the "Human eye" sheet (confirmed 2026-07-26, ben-domingue); file
@@ -369,29 +437,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   paper's text for imputation language, since non-integer screening alone
   doesn't catch every imputation method).
 
-- [ ] **PLOS ONE batch 6 — 2 datasets need codebook-driven follow-up work
-  (deferred from the worth_retrying pass, 2026-07-28)**: the coping-self-
-  efficacy/sex-trafficking study and the full-body-mirror-exposure
-  eating-pathology study both have genuine multi-wave raw items (MSPSS,
-  CopSE, EDE-Q, PANAS) but need careful per-scale wave-column work beyond
-  what this pass had time for. DOIs and column details in `BATCH_LOG.md`.
-
-- [ ] **PLOS ONE batch 6 — 3 datasets have real items but ambiguous
-  subscale identity** (deferred, 2026-07-28): insight-in-schizophrenia
-  study (bare "C1-5"/"S1-10"/"M1-12"/VAGUS blocks, no codebook to name
-  them), Brazilian smoking/FFMQ study (huge multi-scale file, needs
-  filtering out extensive derived-transform columns and identifying
-  ambiguous A/B/C blocks), and 1 `recoverable_format` row in
-  `plos_batch6_retriage.csv` (a semicolon-delimited PsyCap file) not yet
-  re-triaged with `sep=';'`.
-
-- [ ] **PLOS ONE batch 6 — remaining `worth_retrying` rows not
-  individually reviewed** (`plos_batch6_retriage.csv`, 2026-07-28): rows
-  where duplicate ids are near-clean (a handful of likely-exact-duplicate
-  rows needing a dedup decision) and rows where the first column is
-  confirmed not to be a real person id (true id column, if any, not yet
-  located). ~26 rows total; see `BATCH_LOG.md` for the full accounting of
-  what was and wasn't looked at.
+- [x] **PLOS ONE batch 6 — remaining `worth_retrying` items written off**
+  (ben-domingue decision, 2026-08-01): the coping-self-efficacy/sex-
+  trafficking study, full-body-mirror-exposure eating-pathology study,
+  insight-in-schizophrenia study, Brazilian smoking/FFMQ study, the
+  semicolon-delimited PsyCap `recoverable_format` row, and ~26 other
+  never-individually-reviewed rows were part of the 62-candidate pool
+  from the full batch 6/9/12/13 sweep — not pursued and written off
+  (ben-domingue decision, 2026-08-01). `plos_batch6_retriage.csv` and the
+  scan logs (`scan_plos_batch{6,9,12,13}_worthretrying.log`) both
+  deleted — see `BATCH_LOG.md`'s "PLOS ONE worth_retrying backlog sweep"
+  entry (2026-08-01) for the DOI list if reconsidered later.
 
 - [x] **Carver 2017 PUGGS — `biblio_carver_2017_puggs.csv` (8 rows) closed
   out** (confirmed 2026-07-31, ben-domingue): `carver_2017_puggs_pilot1_traits/
@@ -715,18 +771,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   "Human eye" sheet (confirmed 2026-07-29, ben-domingue); file deleted
   from the repo.
 
-- [ ] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
-  not yet hand-reviewed** (2026-07-29), still in `plos_batch9_retriage.csv`:
-  `10.1371/journal.pone.0199480` (body image/eating behavior/QoL, N=2096,
-  65 items), `10.1371/journal.pone.0206800` (Multidimensional Social
-  Competence Scale validation, N=734, 40 items), `10.1371/journal.pone.0169375`
-  (exercise behavior in Chinese cancer patients, N=350, 138 items),
-  `10.1371/journal.pone.0202818` (trust/psychological distress, urban poor
-  Accra, N=788, 5 items), `10.1371/journal.pone.0322635` (exercise/
-  emotional eating/body dissatisfaction SEM, N=903, 8 items), plus 19 more
-  smaller-N rows and 1 `recoverable_format` (semicolon-delimited body-
-  esteem/diabetes file, `10.1371/journal.pone.0263766`). See
-  `BATCH_LOG.md` for the full list with n/items.
+- [x] **PLOS ONE batch 9 — 25 `worth_retrying`/`recoverable_format` rows
+  hand-reviewed** (confirmed 2026-08-01): `10.1371/journal.pone.0199480`
+  (body image/eating/QoL) -> `silva_2018_body_image`, 5 tables;
+  `10.1371/journal.pone.0206800` (MSCS validation) -> `trevisan_2018_mscs`,
+  2 tables; `10.1371/journal.pone.0169375` (Chinese cancer-patient
+  exercise) -> `liu_2017_cancer_exercise`, 7 tables (5 confidently or
+  tentatively named instruments, 2 shipped under generic names pending a
+  paper-text pass). `0202818` (trust/distress Accra) confirmed too small
+  (5 items) to pursue; `0322635` (exercise/eating/body dissatisfaction)
+  confirmed all pre-computed composite scores, no raw items. Remaining
+  ~19 smaller-N rows + the semicolon-delimited `0263766` not individually
+  reverified — see `BATCH_LOG.md`'s "PLOS ONE worth_retrying backlog
+  sweep" entry (2026-08-01) for the full disposition and the shared
+  62-candidate remaining pool across batches 6/9/12/13.
 
 - [ ] **PLOS ONE batch 9 — situational-motivation EMA study deferred**
   (`10.1371/journal.pone.0307369`, 2026-07-29): genuine event-contingent
