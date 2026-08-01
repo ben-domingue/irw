@@ -3,6 +3,93 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **"Human eye" batch — 5 new tables pasted into the dictionary sheet**
+  (confirmed 2026-08-01, ben-domingue): `iandolo_2021_asq`,
+  `dasilva_2019_hexaco24`, `mendes_2019_snycq`, `tutrin_2020_meq30`,
+  `lee_2025_nursing_exam` (combined with the batch 14 rows below into
+  `biblio_batch_20260801.csv`, then pasted); `biblio_humaneye_batch1.csv`,
+  `biblio_plos_batch14.csv`, `biblio_batch_20260801.csv`, and all
+  `irw_output/*.csv` files gone from disk as expected. See
+  `BATCH_LOG.md`'s "'Human eye' sheet review follow-through" entry for how
+  each was found and what was checked.
+
+- [ ] **Bug found in already-shipped `yandun2026_language`/
+  `yandun2026_logical_thinking` tables (batch 3) — need reprocessing**
+  (found 2026-08-01, while checking a "human eye" Yes-row candidate that
+  turned out to be a duplicate of this same dataset): `data/
+  yandun2026_cognitive.py`'s column boundaries are off by one — the
+  `language` subscale wrongly includes "Relates numbers with clues" (a
+  Logical Thinking item per the source header's own group-boundary row),
+  and `logical_thinking` is missing it (3 items instead of the true 4).
+  Fix the `SUBSCALES` column ranges in that script (language should be
+  cols 14-17, logical_thinking cols 18-21, 0-indexed after header-strip),
+  regenerate both CSVs, and re-upload to Redivis. See `BATCH_LOG.md` for
+  the exact column-header evidence.
+
+- [ ] **Nominal/competitions experimental-standard candidates — shortlisted,
+  license/structure-screened, and deduped against the existing
+  nominal/competitions table sheets — not yet downloaded or converted**
+  (2026-08-01, one-off search, not a standing priority — see
+  `BATCH_LOG.md`'s "Nominal / competitions experimental-standard search"
+  entry, including its dedup-check addendum, for full detail and memory
+  `project_alt_data_standards` for the schema criteria).
+  `candidates_nominal_shortlist.csv` (57 rows) and
+  `candidates_competitions_shortlist.csv` (53 rows) are keyword-filtered
+  from the full 6911/6078-row discovery files. **The dedup check caught
+  one exact duplicate already live in IRW (`zucco2019_portfoliosalience`,
+  DVN/HJZSIM) and several already-covered domains (chess via `lichess`,
+  League of Legends via `league_of_legends`, football via
+  `eufootball_2010-2020`, ASAP-lineage essay corpora via `asap20train`) —
+  those candidates are downgraded, not dropped from the shortlist files.**
+  Strongest surviving next candidates to actually download and convert:
+  nominal — Self-Coding open-ended survey data (Dataverse DVN/E4AJZF,
+  **CC0**, best-confirmed fit, non-overlapping domain) and COS101
+  open-ended exam responses (Figshare, CC BY 4.0, also non-overlapping);
+  competitions — World Padel Tour match history (Zenodo 7860242, CC BY
+  4.0, padel is not an already-covered sport). One dataverse candidate
+  (`DVN/J9KSHU`) is license-blocked (CC BY-NC-SA). Needs someone to
+  actually open the files, confirm id/item/text or agent_a/agent_b/score
+  structure, and write bespoke processing scripts (normal
+  `irw_batch_updated.py` triage does not apply to either standard).
+
+- [x] **PLOS ONE batch 14 — `dejesus_2017_{lequesne,sf36,womac,gpm}` pasted
+  into the dictionary sheet** (confirmed 2026-08-01, ben-domingue, from the
+  continuous/bounded response-scale search): Lopes de Jesus et al. (2017)
+  intra-articular ozone knee-OA RCT (10.1371/journal.pone.0179185), CC BY
+  4.0, N=98 x up to 4 waves — see the "Human eye" batch entry above for the
+  combined biblio file used. See `BATCH_LOG.md`'s "PLOS ONE batch 14" entry
+  for full detail.
+
+- [ ] **`automated_finding/human_review_plos_batch14.csv`** (12 rows, batch
+  14's `human_review` rows from `irw_retriage_ha.py`) — needs pasting into
+  the "Human eye" sheet.
+
+- [ ] **PLOS ONE batch 14 — dairy tie-stall housing survey deferred**
+  (10.1371/journal.pone.0216544, 2026-08-01): two clean between-subjects
+  samples (S1 N=430, S2 N=372), each with 6 genuine 1-7 Likert belief items
+  (`b1_morerisky/lowerquality/harmenviro`, `b2_borganic/bfamfarm/
+  bsmallfarm`) plus 3 more (`has1-3`) of unclear relationship to the rest —
+  needs the paper's item wording to confirm whether this is one 9-item
+  battery or 2-3 separate subscales before it can be split into file(s)
+  correctly. `plos_batch14_retriage.csv` still holds this row.
+
+- [ ] **PLOS ONE batch 14 — Auricular Acupuncture exam-anxiety study
+  deferred, low priority** (10.1371/journal.pone.0168338, 2026-08-01):
+  N=44, mostly physiological/composite STAI-subscale readings across 3
+  conditions plus a few `vas_*` items — small sample, needs more untangling
+  than this pass had time for. `plos_batch14_retriage.csv` still holds this
+  row.
+
+- [ ] **Continuous/bounded-response repo-based discovery (Batch 21) in
+  progress** (started 2026-08-01): same 32-term list as PLOS batch 14 (see
+  above), translated into 8 languages (256 additional queries), run against
+  `irw_discover_updated.py`'s repository connectors (Dataverse/Zenodo/OSF/
+  Dryad/Figshare/DataCite/Scholars Portal/SURF). English run
+  (`candidates_continuous_en.csv`) and multilingual run
+  (`candidates_continuous_intl.csv`) still need merging, triaging, and
+  reviewing. Check `BATCH_LOG.md` for whether this finished in the same
+  session it was started or needs picking up.
+
 - [ ] **Large pool of recyclable PLOS search terms still unused** (found
   2026-07-30): batches 1–11 always invented fresh instrument names for
   PLOS ONE discovery without checking whether a term had already proven
@@ -12,12 +99,44 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   real instrument/construct/task names rather than guesses. Filtering
   `search_terms_log.csv` to non-PLOS, English-only rows not yet tried
   against PLOS turned up ~1,200 candidates in one pass; batch 12
-  (2026-07-30) used 30 of them, leaving ~1,170 unused. See `SKILL.md`'s
-  "Alternate discovery source: single-journal search (PLOS ONE)" section
-  (term-selection bullet) for the exact filtering method. Expect several
-  more batches' worth of higher-quality-than-average terms before this
-  pool runs dry — pull from it before brainstorming new terms in future
-  PLOS batches.
+  (2026-07-30) used 30, batch 13 (2026-07-31) used 30 more, leaving
+  ~1,140 unused. See `SKILL.md`'s "Alternate discovery source:
+  single-journal search (PLOS ONE)" section (term-selection bullet) for
+  the exact filtering method. Expect several more batches' worth of
+  higher-quality-than-average terms before this pool runs dry — pull from
+  it before brainstorming new terms in future PLOS batches.
+
+- [x] **PLOS ONE batch 13 — `biblio_plos_batch13.csv` (7 rows) closed
+  out** (confirmed 2026-08-01, ben-domingue): `nelson_2019_ipqrde`,
+  `hermans_2015_dm1_rods`, `liu_2025_classroom_interaction`,
+  `_willingness_communicate`, `_speaking_selfefficacy`,
+  `_foreign_lang_enjoyment`, `wang_2015_donation_decision` (all CC BY
+  4.0) uploaded to Redivis and pasted into the dictionary sheet;
+  `biblio_plos_batch13.csv` and all 7 `irw_output/*.csv` files gone from
+  disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 13" entry for
+  full per-dataset detail.
+
+- [x] **`automated_finding/human_review_plos_batch13.csv`** (92 rows,
+  batch 13's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-01, ben-domingue); file deleted
+  from the repo.
+
+- [ ] **PLOS ONE batch 13 — 72 `worth_retrying` rows not yet
+  hand-reviewed** (2026-07-31), still in `plos_batch13_retriage.csv` —
+  same pattern as prior batches' worth_retrying passes, not yet started.
+
+- [ ] **PLOS ONE batch 13 — 3 deferred `good`-flagged datasets need more
+  time** (2026-07-31): imitation task (`10.1371/journal.pone.0235595`,
+  N=124) has a genuine 3-item binary imitation scale but the raw sheet's
+  exclusion-flag column has a multi-block layout issue needing manual
+  inspection; illusory-body-ownership embodiment questionnaire
+  (`10.1371/journal.pone.0277080`, N=30) has a genuine 7-item scale x 4
+  conditions but one item shows an out-of-range value and the actual
+  questionnaire statement text still needs pulling from the paper;
+  situational-motivation EMA (`10.1371/journal.pone.0307369`) is the same
+  unresolved candidate from batch 9 (see below), flagged `good` again.
+  `plos_batch13_retriage.csv` / `plos_batch13_triage.csv` still hold
+  these rows.
 
 - [x] **PLOS ONE batch 12 — `biblio_plos_batch12.csv` (3 rows) closed out**
   (confirmed 2026-07-30, ben-domingue): `page_2025_portrait10.csv`,

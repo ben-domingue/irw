@@ -3377,3 +3377,518 @@ license/reference convention the user specified for this paper's earlier
 tables) staged for the dictionary sheet; `tags_fix_peters_2025_precautions.csv`
 (6 rows) staged in case tags entries are wanted per-table like the
 original 16; all 6 `irw_output/*.csv` files ready for Redivis upload.
+
+## PLOS ONE batch 13 (2026-07-31)
+
+Continued the term-pool drawdown started in batch 12 (see `TODO.md`'s
+"Large pool of recyclable PLOS search terms" item): 30 more terms pulled
+from `search_terms_log.csv` rows already run against other discovery
+sources but never against PLOS, favoring named instruments/methodology
+terms not yet tried (PCL-5, BDI, STAI, SF-36, PROM, PISA, TIMSS, NAEP,
+PIRLS, computerized adaptive testing, differential item functioning,
+ecological momentary assessment, experience sampling, trolley problem,
+distributive justice, moral judgment, economic games, AX-CPT, congruency
+effect, conflict adaptation, response inhibition task, acquiescence bias,
+careless responding, social desirability, sense of coherence, distress
+tolerance, body appreciation, orthorexia, intuitive eating, insomnia
+severity; logged in `search_terms_log.csv`). ~1,140 unused terms remain in
+the pool after this batch.
+
+1,878 candidates (some terms hit PLOS's per-query cap) -> 17 `good` + 280
+`human_assistance` + 1,435 `no_usable_file` + 65 `download_failed` + 37
+`timeout` + 28 `not_item_response` + 16 `error`. Note: the background
+monitor watching this run undercounted `good`/`human_assistance` in its
+live progress notifications (naive `cut -d',' -f7` on a CSV with commas
+inside quoted title fields shifts field positions for some rows) -- the
+true counts, from `csv.DictReader`, are as stated above. Retriage
+(`irw_retriage_ha.py`) on the `human_assistance` bucket gave 72
+`worth_retrying` + 92 `human_review` + 72 `aggregate_continuous` + 44
+`not_item_response`.
+
+**Good-candidate review**: all 17 hand-checked (fetched full SI file list
+per candidate, not just the triage-flagged file, per the standing "good
+needs a human glance more than usual" caution). 7 were already resolved
+before any download was needed:
+- `10.1371/journal.pone.0220622` (ultimatum game neural correlate) --
+  same confirmed false positive as batch 12 (figure-source-data, not
+  participant-level responses).
+- `10.1371/journal.pone.0279360` (video-games weapons attentional bias)
+  -- same confirmed false positive as batch 12 (per-condition aggregated
+  proportions, not raw per-trial responses).
+- `10.1371/journal.pone.0117423` (MACE) -- already fully processed as
+  `teicher_2015_mace_*` (see "Teicher 2015 MACE S9_File raw items" above).
+- `10.1371/journal.pone.0307216` (Static-99R) -- already fully processed
+  as `baudin_2024_static99r` (batch 10).
+- `10.1371/journal.pone.0255039` (thinking in pictures, autistic adults)
+  -- already fully processed as `bled_2021_imagery_phenomenology`/
+  `bled_2021_imagery_use` (batch 6).
+- `10.1371/journal.pone.0193861` ("All metrics are equal...") -- not
+  item-response data: a systematic-review dataset of included studies
+  (papers), not people.
+- `10.1371/journal.pone.0174044` (archerfish symbol-value discrimination)
+  -- non-human subjects (fish), out of IRW's scope.
+
+**4 papers processed -> 7 tables** (all CC BY 4.0, in
+`biblio_plos_batch13.csv`, ready to paste into the dictionary sheet):
+- `nelson_2019_ipqrde` (`10.1371/journal.pone.0214082`, N=198): the
+  43-item Illness Perception Questionnaire - Revised, Dental Edition
+  (IPQ-RDE), a new CSM-framework instrument for older adults' perception
+  of dental conditions. 1-5 Likert. A sparse `-9` sentinel (27/8514
+  cells, spread across 17 of 43 items) filtered as missing. The file's
+  other blocks (`pqx_*`: bundled depression/social-support/OHQOL
+  sub-instruments; `ohs_*`: clinician-administered screening findings,
+  not self-report) not shipped -- would need separate instrument
+  identification.
+- `hermans_2015_dm1_rods` (`10.1371/journal.pone.0139944`, N=312): the
+  raw Myotonic Dystrophy Type 1 (DM1) activity/participation item bank
+  (105 items, `r_ods001`-`r_ods144` naming from the same group's R-ODS
+  methodology) used to Rasch-reconstruct the final 25-item DM1-Activ C
+  scale -- shipped the full raw item bank rather than only the paper's
+  post-selection 25 items, since IRW wants raw responses. 0/1/2 scale, no
+  missing values.
+- `liu_2025_classroom_interaction` / `_willingness_communicate` /
+  `_speaking_selfefficacy` / `_foreign_lang_enjoyment`
+  (`10.1371/journal.pone.0328226`, N=623, Chinese EFL students, 1-5
+  Likert, no missing): four validated instruments administered in one
+  44-item block, each with its own paper-reported Cronbach's alpha --
+  Classroom Interaction Scale (Wu & Gao, 11 items: learner-instructor +
+  learner-learner dimensions), Willingness to Communicate in English
+  Scale (Peng & Woodrow, 10 items), Speaking Self-Efficacy Scale (Wang &
+  Sun, 14 items: linguistic/self-regulatory/delivery/performance
+  dimensions), Foreign Language Enjoyment Scale short form (Botes et al.,
+  9 items: personal/teacher/social sub-scales -- grouped by actual item
+  content since the raw column order didn't match the paper's prose
+  order). Shipped at one-file-per-named-instrument granularity to match
+  the paper's own reliability reporting, not split further by internal
+  sub-dimension.
+- `wang_2015_donation_decision` (`10.1371/journal.pone.0138219`, N=371,
+  China/US cross-cultural donation experiment): 3 raw items (distress,
+  sympathy, both 0-7; `Q4WTC` donation amount out of 100, kept as
+  collected). Excluded `WTC` (a log-transformed version of `Q4WTC`, the
+  paper's own normality-driven transform) and `count` (a derived
+  donated-something binary) as composites/transforms.
+
+**3 deferred** (real item-level data present, needs more time):
+- `10.1371/journal.pone.0235595` (social evaluation/imitation of
+  prosocial/antisocial agents, infants/children, N=124): genuine 3-item
+  binary imitation task (`Imitation_pulling mitten off/shaking the
+  mitten/putting mitten back on`), but the raw sheet's "Analyzability
+  imitation" exclusion column contains stray non-binary values (`21`,
+  `23`, `'Age'`, etc.) suggesting a multi-block sheet layout that a
+  simple `header=3` read doesn't fully resolve -- needs manual sheet
+  inspection before trusting the analyzable-subset filter.
+- `10.1371/journal.pone.0277080` (visuo-tactile/visuo-vestibular illusory
+  body ownership, N=30): genuine 7-item (`S1`-`S7`) embodiment
+  questionnaire administered across 4 conditions, across 3 sheets in the
+  same file (a main Questionnaire Experiment + 2 SCR-experiment sheets)
+  -- but `S7` shows an out-of-range value (8) against an otherwise
+  -3..+3-looking scale, and the actual questionnaire statement text
+  (needed for item labels/direction) wasn't yet pulled from the paper.
+- `10.1371/journal.pone.0307369` (situational-motivation EMA) -- same
+  candidate flagged `good` again (previously deferred in batch 9); still
+  unresolved, see batch 9's entry below for the known complexity
+  (session-level report modules, not simple Likert items).
+
+**3 not shipped, reviewed and skipped**:
+- `10.1371/journal.pone.0201698` (PANAS-C/CASAFS, Spanish children,
+  N=390): the SI file only contains subscale-level composite totals (PA,
+  and CASAFS's SP/PR/FR/HD), not the underlying 10+24 raw items -- those
+  aren't in the file at all.
+- `10.1371/journal.pone.0199118` (mobile depression screening app,
+  N=20-23): algorithm-validation summary data (cutoffs, a single PHQ-9
+  total score), not raw item responses.
+- `10.1371/journal.pone.0344731` (selfish intentions, 5-year-olds, N=48):
+  the "Liking" ratings are 3 single-item measures of unrelated constructs
+  (partner liking vs. an unrelated ice-cream-preference manipulation
+  check) -- doesn't form a coherent multi-item scale, and IRW doesn't
+  ship single-item measures (`feedback_no_single_item_scales`).
+
+Scripts: `data/nelson_2019_ipqrde.py`, `data/hermans_2015_dm1_rods.py`,
+`data/liu_2025_classroom_wtc.py`, `data/wang_2015_donation_decision.py`.
+`biblio_plos_batch13.csv` (7 rows) staged for the dictionary sheet;
+`human_review_plos_batch13.csv` (92 rows) staged for the "Human eye"
+sheet; all 7 `irw_output/*.csv` files ready for Redivis upload.
+`plos_batch13_retriage.csv` still holds 72 unreviewed `worth_retrying`
+rows (see `TODO.md`).
+
+## PLOS ONE batch 14 — continuous/bounded response-scale search (2026-08-01)
+
+User-supplied term list (direct terminology, method names, research/
+methodological angles, combined and emerging terms — 32 terms after merging
+near-duplicates) targeting continuous and bounded response measures (VAS,
+sliders, thermometers, NRS, graphic rating scales, etc.), run against both
+PLOS ONE (this entry) and the repository-connector pipeline (see the
+following entry). All 32 terms confirmed unused against every prior
+`search_terms_log.csv` row (repo or PLOS) before running — genuinely new.
+
+- Discovery — 32 English terms (no translation; PLOS ONE is English-only) →
+  `plos_batch14_triage.csv`: 281 candidates → 2 `good`, 44 `human_assistance`,
+  2 `not_item_response`, 2 `error`, 1 `download_failed`. Terms logged in
+  `search_terms_log.csv`.
+- Both `good` flags were false positives (shape-only match, not content):
+  - "Effects of mindfulness-based stress reduction..." (HCC/TACE,
+    10.1371/journal.pone.0352434): triage's 22 "items" mix a single
+    repeated 0-10 NRS pain score (one item across 4 timepoints — would
+    violate the no-single-item-scale rule on its own) with aggregate
+    HADS-Anxiety/HADS-Depression/SUPPH-* subscale *totals* (values in the
+    20s-30s land in the same resp column as the 0-10 NRS scores, confirming
+    they're not comparable items of one scale).
+  - "Effects of speculum lubrication on cervical smears..."
+    (10.1371/journal.pone.0292207): the 13 "items" are demographic/clinical
+    trial variables (age, parity, religion, marital status, etc.), not a
+    psychometric instrument.
+- Retriage (`irw_retriage_ha.py`) on the 44 `human_assistance` rows →
+  `plos_batch14_retriage.csv`: 16 `aggregate_continuous`, 12
+  `worth_retrying`, 12 `human_review`, 4 `not_item_response`.
+- `human_review_plos_batch14.csv` (12 rows) — ready to paste into the
+  "Human eye" sheet.
+- All 12 `worth_retrying` rows hand-reviewed (downloaded and inspected each
+  SI file):
+  - **Processed** — Lopes de Jesus et al. (2017) intra-articular ozone vs.
+    placebo knee-OA RCT (10.1371/journal.pone.0179185), CC BY 4.0, N=98
+    patients x up to 4 visits (baseline/4/8/16 weeks). One raw file held
+    **four** separate instruments, unpacked into 4 tables
+    (`data/dejesus_2017_ozone_knee.py`): Lequesne Algofunctional Index (10
+    items, mixed 0-2/0-8 per-item ranges incl. half-points), SF-36 (22 raw
+    items), **WOMAC (24 items, genuine 0/25/50/75/100 bounded response —
+    directly on-topic for this batch's continuous/bounded search)**, and
+    the Geriatric Pain Measure (24 items, mostly binary + two 0-10
+    intensity items, confirmed via the paper's Methods text as a named
+    instrument, not a triage artifact). `id`=patient number, `wave`=week,
+    `treat`=1 ozone/0 placebo, `cov_age/sex/schooling/marital_status/
+    race/knee` (confirmed baseline-only, constant per patient). Dropped:
+    `TUG (seconds)` (single continuous performance test) and a standalone
+    `VAS` pain column — both single-item measures, excluded per the
+    no-single-item-scale rule.
+  - **Skipped — confirmed non-recoverable imputation contamination**:
+    "Abdominal symptoms in cystic fibrosis..." (JenAbdomen-CF Score,
+    10.1371/journal.pone.0174463, CC BY 4.0, N=131, a genuine new 17-item
+    pilot GI-symptom questionnaire with plausible per-item 0-5/0-8/half-point
+    ranges). Looked structurally clean, but the paper's Methods explicitly
+    states missing values were replaced with zero ("the percentage of
+    missing data was only 4.8%"). Since 0 is also the legitimate bottom
+    anchor for nearly every item ("never"/"not at all"), genuine-zero and
+    imputed-zero responses are indistinguishable in the raw file with no
+    separate missingness flag available — not recoverable. Per
+    `datastandard.md`'s "Checking for imputed values", this disqualifies
+    the file as-is.
+  - **Skipped — not item-response data**: "Psychosocial and demographic
+    factors influencing pain scores..." (10.1371/journal.pone.0195075,
+    mostly-NaN demographics + one single "Pain score" column); "Feasibility,
+    acceptability and appropriateness of a reproductive PROM..."
+    (10.1371/journal.pone.0256497, open-ended qualitative feedback text
+    about survey design, not itemized responses).
+  - **Skipped — aggregate/composite scores only**: "Patient reported
+    outcomes... osteopathic care" (10.1371/journal.pone.0249719, S1/S2:
+    `BQ baseline sum score` is an aggregate sum; GRoC/satisfaction/
+    experience are single-item categorical measures at 2 timepoints, no
+    multi-item raw block); "Effects and predictors of intravenous
+    lidocaine..." (10.1371/journal.pone.0320463: WPI/SSS/rFIQ/DSIS are all
+    aggregate composite/subscale-total scores, Worst/Least/Ave NRS are
+    single-item pain scores); "Complementary treatment comparison for
+    chronic pain..." (10.1371/journal.pone.0256001: T1-T4 columns are
+    subscale *totals* — HADS-A, ISI, PDI, PCS/MCS, SOPA subscales — not raw
+    items); "Associations between the injustice experience questionnaire
+    and treatment termination..." (10.1371/journal.pone.0231077: NRS, NDI,
+    HADS-A/D, IEQ, EQ-5D are all single aggregate scores per person, one row
+    each, no raw items).
+  - **Skipped — too small**: "Development and validation of the facial
+    scale (FaceSed)..." (10.1371/journal.pone.0251909) is a genuine 4-item
+    observational rating scale (Ears/Eyes/Lower lip/Upper lip, 0-2 each,
+    scored by 4 evaluators from photos) but the rated unit is the **horse**,
+    not a person, and there are only **7 unique horses** — far below any
+    reasonable N threshold (cf. the N=10/N=14 minimums ben-domingue already
+    rejected in the PLOS ONE pilot).
+  - **Deferred — needs paper's item wording/scale-structure confirmation**:
+    "Factors influencing public support for dairy tie stall housing..."
+    (10.1371/journal.pone.0216544, CC BY 4.0): two clean between-subjects
+    survey samples (S1 N=430 "hours" framing, S2 N=372 "willingness-to-pay"
+    framing), each with 6 genuine 1-7 Likert belief items (`b1_morerisky`,
+    `b1_lowerquality`, `b1_harmenviro`, `b2_borganic`, `b2_bfamfarm`,
+    `b2_bsmallfarm`) plus 3 more (`has1-3`) of unclear relationship — not
+    processed because it's ambiguous from column names alone whether `b1_*`/
+    `b2_*`/`has*` are one 9-item battery or 2-3 separate subscales (the
+    "one file per scale" rule needs this resolved first). See `TODO.md`.
+  - **Deferred — low priority**: "Auricular Acupuncture for Exam Anxiety..."
+    (10.1371/journal.pone.0168338, N=44, mostly physiological/composite
+    STAI-subscale readings across 3 conditions plus a few `vas_*` items —
+    small N, needs more untangling than this pass had time for).
+- `biblio_plos_batch14.csv` (4 rows, all `dejesus_2017_*`) — ready to paste
+  into the dictionary sheet; `irw_output/dejesus_2017_{lequesne,sf36,
+  womac,gpm}.csv` ready for Redivis upload.
+
+## Nominal / competitions experimental-standard search (2026-08-01, one-off, ben-domingue-requested)
+
+Ben asked for a one-off search against IRW's two experimental data standards
+("nominal" — id/item structure with unordered-category or free-text `text`
+responses instead of `resp`; "competitions" — no id/item structure, instead
+`agent_a`/`agent_b`/`date`/`homefield`/`score_a`/`score_b`/`winner` head-to-
+head event data). Full criteria preserved in memory
+`project_alt_data_standards`. **Standing rule going forward: do not
+default to searching for this flavor again** — this was explicitly a
+one-off, not a new pipeline priority.
+
+Discovery (already run before this session, `irw_discover_updated.py --all`
+with the relevance filter disabled since it doesn't recognize sports/MCQ/
+essay-scoring language): `candidates_nominal.csv` (6911 data rows, 10 terms:
+"multiple choice item distractor", "selected response option data", "essay
+scoring corpus", "constructed response scoring", "short answer response
+dataset", "automated essay scoring", "open-ended response coding", "free
+text response categorization", "choice option dataset survey", "categorical
+response coding scheme") and `candidates_competitions.csv` (6078 data rows,
+12 terms: "pairwise comparison judgment dataset", "paired comparison
+experiment", "head-to-head match results", "two-alternative forced choice
+dataset", "game results dataset scores", "tournament match dataset", "Elo
+rating dataset", "Bradley-Terry model dataset", "sports match results
+dataset", "esports match dataset", "chess games dataset", "model comparison
+arena battles").
+
+**This session's work**: neither file can go through `irw_batch_updated.py`/
+`irw_triage_updated.py` (built for the ordinal core standard) — did a
+title-only keyword scan of the full files instead (regex include list of
+on-topic phrases, regex exclude list of the dominant false-positive
+clusters: taxonomy/animal-behavior papers matching "distractor"/"multiple
+choice" out of context for nominal, and pairwise-comparison-in-biology/
+medicine papers matching "pairwise"/"head-to-head" out of context for
+competitions). Scripts and shortlists:
+- `candidates_nominal_shortlist.csv` (57 rows) — supersedes the earlier
+  hand-filtered `candidates_nominal_filtered.csv` (38 rows) as the working
+  shortlist; ~30 rows overlap, each file also has some rows the other
+  missed (the old file's discrete-choice-econometrics and visual/auditory-
+  distractor-psychophysics rows are excluded here as off-topic; two
+  plausible misses from the old file worth a manual look later: "AI-
+  Enhanced Distractors and Test Quality" (Mendeley 10.17632/45dv52zf7f) and
+  "Illustrative AI-Generated and Student-Generated MCQs... Item-Level
+  Discrimination Indices").
+- `candidates_competitions_shortlist.csv` (53 rows) — supersedes
+  `candidates_competitions_filtered.csv` (17 rows) likewise; the old file's
+  AHP pairwise-comparison-of-decision-criteria row is kept here as
+  ambiguous (criteria don't "win" the way competitions entities do) and
+  several Bradley-Terry/pairwise PLOS figshare rows turned out to be
+  single supplementary tables of derived model estimates, not raw
+  comparison data — excluded.
+
+**License + structure spot-check** (WebFetch against each repo's landing
+page / API; not fully downloaded and inspected, so treat as first-pass
+screening, not a final accept/reject call):
+
+Nominal — promising:
+- **ASAP-SAS Handwritten** (Zenodo 10.5281/zenodo.8088866) — CC BY 4.0.
+  Handwritten-response extension of the well-known ASAP Short Answer
+  Scoring dataset; single zip archive, not yet opened to confirm per-
+  student text + human score columns.
+- **Self-Coding open-ended survey data** (Dataverse 10.7910/DVN/E4AJZF,
+  "Self-Coding: A Method to Assess Semantic Validity and Bias when Coding
+  Open-Ended Responses") — **CC0 1.0**. Real per-respondent open-ended
+  survey text in a Stata `.tab` file (`Self Coding Survey Data, for
+  Stata.tab`) — best-confirmed nominal candidate found this session, not
+  yet downloaded/mapped to id/item/text.
+- **COS101 open-ended exam responses** (Figshare
+  10.6084/m9.figshare.32109718, "2025/2026 Students' Responses to
+  Open-Ended Questions on COS101... FUHSO, Nigeria") — CC BY 4.0. Single
+  Excel file of real student exam responses paired with model answers
+  (built for an AI short-answer-grading study); not yet opened.
+- **Automated Essay Grading Dataset — 2,550 Undergrad Business/Auditing
+  Students** (Zenodo 10.5281/zenodo.18856923) — CC BY 4.0, 85 accounting
+  questions, but **files are access-restricted** on Zenodo (login/request
+  required) — license is fine, access is the blocker.
+- **NepAES Nepali essay scoring** (Zenodo 10.5281/zenodo.16760033) — CC BY
+  4.0, but the file list (`mbart50_p*`/`nep_p*` CSVs) looks like it may be
+  pre-computed embeddings rather than raw essay text — needs a look before
+  treating as usable.
+
+Nominal — license-blocked:
+- **"Combining Human and Automated Scoring Methods in Experimental
+  Assessments of Writing"** (Dataverse 10.7910/DVN/J9KSHU) — **CC BY-NC-SA
+  4.0**. NonCommercial clause fails the "explicitly and verifiably open"
+  bar (see memory `feedback_license_verification`) — do not process
+  without an author-permission email.
+
+Competitions — promising:
+- **World Padel Tour historical match data** (Zenodo 10.5281/zenodo.7860242)
+  — CC BY 4.0, single `historico_partidos_wpt.csv`, Spanish-language
+  scraped match history; not yet opened. Padel is not an already-covered
+  sport (see dedup check below) — this is the strongest surviving
+  competitions candidate.
+- **Chess Game Dataset** (Zenodo 10.5281/zenodo.10344773), **FIDE chess
+  game evaluations** (Zenodo 10.5281/zenodo.17636050, 1.2M games), and
+  **League of Legends KR High Elo 5v5 Match Data** (Zenodo
+  10.5281/zenodo.6636849) — all CC BY 4.0, all real match data, but
+  **downgraded to low priority**: chess and League of Legends are both
+  already-covered domains in the existing competitions tables (`lichess`,
+  `league_of_legends` — see dedup check below), which are broader,
+  API-sourced, and presumably better-maintained than these one-off Zenodo
+  mirrors. Only worth revisiting if one of these adds something the
+  existing source structurally can't (e.g. FIDE's OTB-rated-player pool
+  vs `lichess`'s online games) — not assumed true, not checked.
+- **Sparse-networks-in-football Elo methodology dataset**
+  (tandf Figshare 10.6084/m9.figshare.31049599) — CC BY 4.0,
+  `real_data_set.csv` (42.5 MB) — similarly downgraded: football/soccer is
+  already covered by `eufootball_2010-2020` in the existing tables, and
+  this dataset's own framing (testing Elo-rating *methodology* on real
+  data, not a general-purpose match-results release) makes it a worse fit
+  than a dedicated match-results source anyway.
+- ~~Portfolio salience via Bradley-Terry, Brazilian cabinet positions
+  (Dataverse 10.7910/DVN/HJZSIM)~~ — **already in IRW** as
+  `zucco2019_portfoliosalience` per the existing-tables dedup check below.
+  Struck from consideration; the initial recommendation of this dataset in
+  an earlier version of this entry was wrong — caught by ben-domingue
+  asking whether the shortlist had been checked against the existing
+  competitions/nominal table sheets, which it hadn't been until this
+  correction.
+
+Competitions — noise found and excluded (documented so it isn't re-
+investigated): PLOS figshare "Bradley-Terry model estimates for
+Experiment N" tables (single supplementary result tables, not raw
+comparison data); "Elo ratings of the top 20 players" (same, derived
+summary table); AHP pairwise-comparison-of-decision-criteria dataset
+(criteria, not competitors); several ETF/stock-performance and medical
+"head-to-head" datasets that matched the term literally but are unrelated
+domains; Leela Chess Zero self-play datasets (12 Kaggle-mirrored Zenodo
+records) — technically fit the agent_a/agent_b schema (AI models playing
+each other) but weren't license/structure-checked this session, noted
+here rather than dropped in case Ben wants synthetic self-play data
+considered later.
+
+**Dedup check against existing nominal/competitions IRW tables
+(2026-08-01, prompted by ben-domingue)**: the DOI-level exclusion in
+`irw_discover_updated.py` only excludes DOIs already in the *core-standard*
+IRW dictionary Google Sheet — nominal/competitions tables live in two
+separate sheets
+([competitions](https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=0),
+[nominal](https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=0))
+that the discovery script never reads, so nothing in this search was
+excluded against them. Fetched both and checked the shortlists by hand:
+- **Competitions sheet already contains**: `lichess`, `tennis_co_uk`,
+  `dota_2`, `MLB_Baseball`, `NHL_hockey`, `cricket`, `debate`,
+  `league_of_legends`, `table_tennis`, `badminton`, `ufc`, `olympics`,
+  `track_and_field`, `counterstrike`, `starcraft_2`, `cards_bridge`,
+  `scrabble`, `go_game`, `poker`, plus DOI-backed
+  `collegefb_2021and2022`/`epl_matches_2021-2022`/`nba_2012-2018`/
+  `nfl_2010-2019`/`nhl_post1917`/`eufootball_2010-2020`/`mlb_through2023`,
+  plus pairwise-comparison entries `bradleyterry2_cems`/
+  `elochoice_physical`/`t20_hyper`/**`zucco2019_portfoliosalience`
+  (10.7910/DVN/HJZSIM — exact match to a candidate this entry had
+  recommended before this correction)**/`guinaudeau2024_largechambers`/
+  `friedman2019_risk_*`. Confirmed exact-DOI duplicate: HJZSIM (struck
+  above). Confirmed same-domain-already-covered (not exact DOI matches,
+  but redundant enough to deprioritize): chess (`lichess`), League of
+  Legends (`league_of_legends`), football/soccer (`eufootball_2010-2020`).
+  Padel and table tennis/badminton/UFC/track-and-field/olympics domains
+  from this session's shortlist did not overlap.
+  Sheet also has additional rows with only `Public`/`Private` status
+  populated (no table name yet) — not reviewed in detail.
+- **Nominal sheet already contains**: `preference_inventory`, `asap20train`
+  (ASAP 2.0 argumentative-essay corpus, 10.1016/j.asw.2025.100954 —
+  related lineage to but a different DOI/release from this session's
+  ASAP-SAS Handwritten candidate), `wilmer-*-rmet-normative-data-set-2022`
+  (×2), `himmelstein-berlin_numeracy-2025`, `much_tte_2025_matrixreasoning`,
+  `much_tte_2025_concentrationtask`, `borges_brazil_residency_2024_cbt`/
+  `_pbt`, `persuade_learningagency` (student persuasive-writing corpus —
+  same essay-scoring family as `asap20train`), `blum_2018_imak_nominal`,
+  `hachenberger_2025_stroop_main_nominal`/`_pilot_nominal`. No exact-DOI
+  overlap with this session's nominal shortlist. The essay-scoring/
+  short-answer-corpus domain is not a blank slate (`asap20train` +
+  `persuade_learningagency` already cover ASAP-lineage and persuasive-essay
+  corpora) — downgrades ASAP-SAS Handwritten to lower priority for the
+  same reason as chess/LoL above (closely related to already-covered
+  territory, not confirmed to add anything new). **Self-Coding open-ended
+  survey data (DVN/E4AJZF, CC0) and COS101 open-ended exam responses
+  (Figshare, CC BY 4.0) remain non-overlapping** — different response
+  type (survey/exam short-answer coding, not persuasive-essay scoring) —
+  and are now the strongest surviving nominal candidates.
+  Sheet also has additional rows with incomplete metadata past the first
+  13 — not reviewed in detail.
+
+Neither shortlist has been downloaded/converted to IRW format yet — this
+session was discovery + first-pass license/structure screening only, per
+the "real pass ... not eyeballing all 6912/6163 rows" instruction. See
+`TODO.md` for what's left.
+
+## "Human eye" sheet review follow-through (2026-08-01)
+
+Padma K hand-reviewed 31 rows of the "Human eye" tab (all `human_review`
+candidates the automated pipeline couldn't confidently column-map) and
+marked Decision = Yes/Maybe/No (12/9/10). Went through all 12 Yes rows to
+see which were actually processable — a human "Yes" here means "worth a
+GitHub issue," not "verified IRW-ready," and it showed: only 5 of the 12
+were real, usable item-response data.
+
+**Processed (5 new tables, all QC-clean, license-verified CC0/CC BY):**
+- `iandolo_2021_asq.csv` — 40-item Attachment Style Questionnaire, 348
+  respondents (Spain/Italy/Japan), cov_country/age/gender/romantic_status.
+  Dropped 3 isolated `7`s on a nominally 1-6 scale (data-entry errors, one
+  per item, cross-checked per-item per datastandard.md).
+- `dasilva_2019_hexaco24.csv` — 24-item HEXACO short form (Portuguese),
+  240 respondents, itemcov_dimension/itemcov_reverse_scored from the
+  source file's own item→dimension table.
+- `mendes_2019_snycq.csv` — 12-item Short New York Cognition Questionnaire
+  (continuous 0-100 VAS), 248 respondents × 7 pre/post-scan
+  administrations (wave), from the MPI-Leipzig connectome dataset
+  (DVN/VMJ6NV). That dataset's Dataverse `termsOfUse` says "CC0 ... with
+  the following additional/modified terms and conditions:" and then
+  states none — resolved as effectively unrestricted CC0, not a real
+  caveat. Canonicalized the source file's inconsistent `specific`/`vague`
+  column naming (same bipolar item, labeled differently across
+  administration blocks) into one item.
+- `tutrin_2020_meq30.csv` — 15-item MEQ-30 mystical-experience subscale
+  (0-5 scale), 81 respondents, extracted from one column-block inside a
+  190-item Russian Freediving Federation survey (DVN/DEJQM4) where most
+  other columns are opaque federation-specific items with no recoverable
+  meaning — only the clearly-labeled MEQ-30 block was extracted.
+- `lee_2025_nursing_exam.csv` — 50-item binary (correct/incorrect) exam
+  responses, 117 examinees (111 nursing students + 6 generative AI
+  platforms), DVN/PWV6H2. The triage row had originally picked "Dataset 2.
+  Domains of items" (item metadata, not responses) as the data file — the
+  real response matrix was "Dataset 1" on the same landing page, sitting
+  right next to it.
+
+**Skipped (Yes but not actually usable):**
+- DASS-8/12/21 caregivers (figshare 21393054) — every sheet is derived
+  statistical output (Mann-Whitney rank tables, CFA-implied correlation
+  matrices), no raw item responses anywhere in the file.
+- Migration risk questionnaire (DVN/QFNHTI) — a free-text/checkmark
+  risk-category cross-tab (destination countries, transport modes), not
+  numeric ordinal item data.
+- COPSOQ III Czech "Additional file 2" (figshare 31311364) — factor
+  loadings and per-item descriptive stats (M/SD/skew/kurtosis) only, no
+  raw responses.
+- Parental Behavior Inventory (figshare 30445876) — all 8 sheets are
+  supplementary tables (loadings, item wording, a blank instrument form),
+  no filled-in respondent data.
+- AI Decision Dependence & Cognitive Caution 2025 (figshare 30747542) —
+  article no longer resolves via the figshare API (404); likely taken
+  down or made private since triage ran.
+
+**Discovered as duplicates of already-processed IRW content:**
+- Media Freedom IRT (DVN/ENOEQS) — already in the repo as
+  `data/MMF_Solis_2020.r` (issue #599), already uploaded.
+- Cognitive Assessment Data Matrix (figshare 32519529, "...Anonymized")
+  is the **same dataset** as figshare 32114668 ("...DATA_MATRIX_TRANSLATED"),
+  already processed in batch 3 as `yandun2026_attention/memory/language/
+  logical_thinking` (same 4 authors, identical per-respondent values —
+  32114668's raw file has real children's full names in a `NAME` column,
+  32519529 is a pseudonymized republish of the exact same rows). Wrote and
+  then deleted a redundant `yanduncartagena_2026_cognitive_matrix.py`
+  before catching this — comparing against `TITLE`/author name in
+  `search_terms_log.csv`-style dedup wouldn't have caught this since it's
+  a different DOI; only diffing actual cell values against
+  `data/yandun2026_cognitive.py`'s known column-boundary logic surfaced it.
+  **While comparing, found a real bug in the already-shipped batch-3
+  tables**: `yandun2026_cognitive.py`'s column boundaries for the
+  Language/Logical-Thinking subscales are off by one column — `language`
+  (cols 14-18) wrongly includes "Relates numbers with clues" (a Logical
+  Thinking item per the source header), and `logical_thinking` (cols
+  19-21) is missing it, so it only has 3 of the true 4 items. Confirmed
+  against the raw header's own group-boundary row (`Language and
+  Communication` spans exactly 4 columns, `Logical Thinking` spans 4, not
+  5/3). Tracked as an open fix in `TODO.md` — the already-uploaded
+  `yandun2026_language`/`yandun2026_logical_thinking` Redivis tables need
+  reprocessing.
+
+Biblio rows for the 5 new tables are in `biblio_humaneye_batch1.csv`,
+ready to paste into the dictionary sheet.
+
+The 9 Maybe-decision rows were left untouched — per the sheet's own
+legend ("Maybe = start github issue and @ someone"), that's a manual
+GitHub-issue workflow outside this pipeline, not a processing queue item.
