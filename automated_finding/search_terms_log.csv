@@ -2771,3 +2771,33 @@ date,query,output_file,notes
 2026-08-01,growth mindset,plos_batch15_triage.csv,PLOS ONE batch 15; recycled from non-PLOS pool (search_terms_log.csv)
 2026-08-01,career adaptability,plos_batch15_triage.csv,PLOS ONE batch 15; recycled from non-PLOS pool (search_terms_log.csv)
 2026-08-01,delay discounting,plos_batch15_triage.csv,PLOS ONE batch 15; recycled from non-PLOS pool (search_terms_log.csv)
+2026-08-02,Big Five personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,cognitive reflection,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,stop signal,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,theory of mind,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,math anxiety,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,emotion regulation,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,impulsivity,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,self-compassion,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,attachment style,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,loneliness,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,grief,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,mindfulness,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,moral reasoning,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,trust in government,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,social emotional learning,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,eysenck personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,narcissistic personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,dark triad personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,psychopathic personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,borderline personality,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,generalized anxiety disorder,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,social anxiety,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,health anxiety,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,death anxiety,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,panic disorder,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,bipolar disorder,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,emotional exhaustion,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,posttraumatic stress,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,childhood trauma,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,perceived stress,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method

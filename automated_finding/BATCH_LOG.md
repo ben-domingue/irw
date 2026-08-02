@@ -4902,3 +4902,231 @@ were deleted outright per the adjudication findings earlier in this
 session; `jiang_2024_student_thriving.py` was fixed in place (the
 `cov_completion_time_s` rename) and its 21 tables regenerated and
 uploaded with that fix applied.
+
+## Standing rule: minimum sample size (2026-08-02)
+
+ben-domingue set a permanent floor for this pipeline: never ship a
+dataset with fewer than 50 unique `id` values; ask before shipping
+anything with 50-99. Saved to memory `feedback_min_sample_size`. Applies
+to every batch from now on, not just PLOS ONE discovery.
+
+## Pooled SAPA-Project personality table, 2017-2024 (2026-08-02)
+
+`data/sapa-personality.R` (existing `sapa_personality` table, 2013-2014
+window) and `data/icar_sapa.R` (existing `icar_sapa` table, 2010-2013
+window, cognitive ability not personality) were checked for redundancy at
+ben-domingue's request before adding a third SAPA table -- confirmed not
+redundant with each other (different constructs, non-overlapping windows,
+no item overlap).
+
+TODO.md had 7 not-yet-processed SAPA-Project annual personality releases
+(2017 through 2023-24, DVN/PNGUT5, DVN/7A9YMV, DVN/FUUB2Q, DVN/YOEEDQ,
+DVN/JOGYUD, DVN/BVF52I, DVN/3BTT82, all CC0 1.0) awaiting a scope decision.
+Downloaded all 7 SAPAdata CSVs directly (file ids 10988792, 10988863,
+10988866, 10988879, 10988881, 10988884, 10988887) and confirmed their
+135-item `q_###` column header is byte-identical across all 7 (hashed) --
+same fixed item bank every year, only the respondent cohort changes.
+Given that, and that the existing `sapa_personality` table is already a
+single continuous-window table (not split internally), ben-domingue
+decided (2026-08-02) to pool all 7 years into one new table with
+`cov_year`, rather than 7 separate tables or a single-year-only table.
+
+Full pooled population is ~2,284,508 unique respondents / ~155.7M
+item-response rows -- far larger than typical for this pipeline (would be
+~8-12GB as plain CSV). ben-domingue's direction: take a random sample of
+1,000,000 respondents (seed=42) after pooling, save as plain CSV, and
+document the sampling in the biblio Notes field. Per-year raw ids are
+file-local and overlap across years (2017-2019 files even share id values
+up into the millions from what looks like a shared master-rownumber
+space), so `id` is a composite `"<orig_id>_<year>"` string rather than a
+numeric offset.
+
+Wrote `data/condon_2024_sapa_personality.py` (fetches each year's SAPAdata
+CSV directly from Dataverse by file id, concatenates, samples, melts to
+long format). First run wrote to `automated_finding/` directly (not
+`irw_output/`) per ben-domingue's initial request, since he wanted to
+upload it somewhere separate from the rest of that day's batch; output
+confirmed correct (68,188,858 rows, 999,998 ids -- 2 short of 1,000,000
+because a couple of sampled respondents had zero non-NA item responses
+and dropped out during the NA-drop step -- 135 items, resp 1-6, all 7
+years present). ben-domingue then decided (same session) to add it to
+Redivis alongside the rest of the current batch instead, so the file was
+moved into `irw_output/` and the script's `OUT_PATH` updated to write
+there directly on any future re-run.
+
+Biblio entry (`biblio_condon_2024_sapa_personality.csv`, 1 row) written
+noting: the sampling method, the composite-id scheme, and its relationship
+to `sapa_personality` (non-overlapping window, different and larger item
+pool -- no respondent or item duplication) and `icar_sapa` (unrelated
+construct). Uploaded to Redivis and pasted into the dictionary sheet
+(confirmed 2026-08-02, ben-domingue); `irw_output/condon_2024_sapa_personality.csv`
+and `biblio_condon_2024_sapa_personality.csv` gone from disk as expected.
+
+## PLOS ONE batch 16 (2026-08-02)
+
+30 search terms recycled from `search_terms_log.csv`'s non-PLOS pool per
+`SKILL.md`'s reuse method (Big Five personality, cognitive reflection, stop
+signal, theory of mind, math anxiety, emotion regulation, impulsivity,
+self-compassion, attachment style, loneliness, grief, mindfulness, moral
+reasoning, trust in government, social emotional learning, eysenck
+personality, narcissistic/dark-triad/psychopathic/borderline personality,
+generalized anxiety disorder, social/health/death anxiety, panic disorder,
+bipolar disorder, emotional exhaustion, posttraumatic stress, childhood
+trauma, perceived stress) — logged to `search_terms_log.csv`.
+`irw_discover_plos.py` run: 3,065 candidates -> 18 `good` + 527
+`human_assistance` (rest `no_usable_file`/`not_item_response`/
+`download_failed`/`error`/`timeout`). `irw_retriage_ha.py` on the
+`human_assistance` bucket -> 98 `worth_retrying` + 1 `recoverable_format` +
+155 `human_review` + 163 `aggregate_continuous` + 110 `not_item_response`.
+
+**New standing rule applied for the first time this batch**: ben-domingue
+set a minimum-N floor when invoking this session (`feedback_min_sample_size`
+memory) — never ship N(unique id)<50, ask before shipping 50-99. Of the 18
+`good` rows: 3 dropped for N<50 (selfish-intentions N=48, emotion-regulation/
+face-recognition N=42, eye-contact-perception N=22), 4 in the 50-99 band
+were all declined by ben-domingue when asked (mindfulness/compassion N=56,
+health policy attitudes N=59, avoidance/anxiety-over-time N=91, schools'
+resilience tool N=91), 1 (`0235595`, imitation task, N=121) turned out to be
+a duplicate of a candidate already deferred from batch 13 — left alone
+rather than reprocessed.
+
+Of the remaining 10 `good` candidates (N>=100): `qiang_2025_red_tape` (DOI
+`0327359`) turned out to be an **exact duplicate** of a paper already fully
+processed and uploaded in batch 15 (`data/qiang_2025_red_tape.py` already
+existed on disk with 8 tables shipped) -- confirms the discovery-run DOI
+exclusion list wasn't fully refreshed before this run; not reprocessed, no
+changes made to the existing script. 6 more were structurally disqualified
+after inspection (all confirmed via the source paper's own Methods text
+rather than guessed):
+- `0236271` (puppy behavior test) -- confirmed via WebFetch that the "Data
+  averaged" sheet is an inter-rater average across 3 assessors, not raw
+  single-administration scores. Skipped.
+- `0201698` (positive/negative affect, Spanish children) -- confirmed all 5
+  columns (PA, SPdict, PRdict, FRdict, HDdict) are summed PANAS-C/CASAFS
+  subscale composites, not raw items. Skipped.
+- `0352434` (MBSR perioperative HCC) -- mostly HADS/SUPPH subscale sums;
+  the one repeated-measures raw column (NRS pain, 4 timepoints) is a single
+  item, which the standing no-single-item-scale rule excludes. Skipped.
+- `0246894` (COVID-19 unusualness/stress network study, Korea) -- all 6
+  columns are subscale composite sums (values up to 36, too large for a
+  single Likert item); consistent with prior findings on this exact DOI
+  from an earlier batch (`BATCH_LOG.md` lines ~1269/1356). Skipped.
+- `0268756` (handwriting allographic features) -- per-letter forensic
+  handwriting feature codes (stroke shape, crossbar position, etc.), not
+  psychological item response; a possible nominal-standard candidate but
+  out of scope for the core pipeline this pass. Skipped.
+- `0276665` (Swiss summer camp socio-emotional development) -- genuine
+  92-item pre/post multi-scale battery with reverse-coded ("R"-suffix)
+  items, but bundles at least 3 distinct scales under one item-numbering
+  sequence with unclear boundaries -- needs the paper's Measures section
+  mapped in detail. Deferred, not skipped; added to
+  `plos_deferred_candidates.csv`.
+
+Remaining 3 `good` candidates shipped, 7 tables, 3 papers (all confirmed
+via WebFetch against the source paper's Methods text before scripting):
+- `daiku_2021_dirty_dozen`/`_lie_scale`/`_lying_frequency` (`0249815`,
+  Daiku, Serota & Levine 2021, "A few prolific liars in Japan", N=305):
+  Dark Triad Dirty Dozen (12i), lie scale (3i, paper notes the authors
+  themselves excluded it from their own analysis for low reliability but
+  it's genuine raw data), and a 10-item lying-frequency-by-target/channel
+  count scale. The `guilt`/`ability`/`acceptance`/`confidence` columns were
+  confirmed to be 4 unrelated single-question measures (not sub-items of
+  one scale) -- not shipped, since each is a single-item measure on its
+  own. `totallie` (aggregate) and `lastlie` (categorical text) also not
+  shipped.
+- `horiuchi_2024_attachment`/`_dissociation`/`_rsmsm` (`0298214`, Horiuchi,
+  Nishimura, Taniike & Tachibana 2024, N=214 Survey 1 / N=225 Survey 2):
+  ADAS-R-derived attachment items (20i), Child Dissociative Checklist
+  (20i, same Survey-1 sample), and the paper's own new RS-MSM scale (20i,
+  separate Survey-2 sample). Both raw files needed a 2-3 row header offset
+  (blank super-header + group-label row before the real column names).
+- `jimenezherrera_2022_moral_sensitivity` (`0270049`, Jimenez-Herrera et
+  al. 2022, Moral Sensitivity Questionnaire Spanish validation, N=751,
+  9 items).
+
+**`worth_retrying` pool (98 rows)**: bulk-checked all DOIs against
+`BATCH_LOG.md`/`TODO.md` before any manual review -- 32 were already-known
+duplicates from earlier batches (batches 6/8/9/10/11/12/13/14/15's
+worth_retrying/deferred pools, e.g. `0262716` = `anjum_2022_gad7`), left
+untouched. Of the 66 genuinely-new rows, the top ~13 by N were downloaded
+and inspected (25 more have no parseable N and weren't reached this pass).
+4 papers shipped, 11 tables:
+- `pavic_2022_vaccine_conspiracy`/`_natural_immunity`/`_healthcare_trust`/
+  `_science_literacy` (`0264722`, Pavic & Suljok 2022, N=577): 4 named
+  instruments (Shapiro et al. vaccine-conspiracy scale 7i, VAX
+  natural-immunity subscale 3i, Shea et al. healthcare-trust scale 8i,
+  Oxford/Eurobarometer science-literacy scale 15i binary). `_rec`
+  (reverse-coded duplicate) and `_total` (composite) columns excluded;
+  text-Likert labels recoded to 1-5 (confirmed via `WebFetch` against the
+  paper's Measures section for what each prefix means).
+- `tuason_2021_covid_coping_enjoy`/`_loneliness_emotional`/
+  `_loneliness_social`/`_wellbeing`/`_sense_of_agency` (`0248591`, Tuason,
+  Guss & Boyd 2021, "Thriving during COVID-19", N=938): author-created
+  23-item COVID coping/enjoyment checklist (binary), De Jong
+  Gierveld/Van Tilburg loneliness scale (emotional + social subscales, 3i
+  each, text "Yes"/"More or less"/"No" recoded 0-2), an 8-item wellbeing
+  scale, and the 6-item Sense of Agency Scale. The WB (coded 18-24) and
+  S_Agency (coded 97-105) columns initially looked like a data artifact --
+  confirmed via cardinality check (WB: exactly 7 distinct values per item,
+  matching a 7-point scale; S_Agency: exactly 9, matching the paper's
+  stated 9-point Likert) that these are just an offset raw-value coding
+  from the source survey platform, not corrupted data. `_rec` and
+  `_Total`/`_Mn`/`_overall` columns excluded as reverse-duplicates/
+  composites.
+- `gumus_2025_dietarian_identity` (`0327116`, Gumus, Macit, Demirci &
+  Kizil 2025, Turkish Dietarian Identity Questionnaire validation, N=487,
+  33 items): used the file's own pre-recoded `DIQ##value` numeric columns
+  (1-7) rather than the parallel text-Likert `DIQ##` columns holding the
+  same items; `Total*` subscale-sum columns excluded.
+- `machado_2020_cat_separation` (`0230999`, Machado, Oliveira, Machado,
+  Ceballos & Sant'Anna 2020, cat separation-related-problems questionnaire,
+  N=223 cats): 7-item binary problem-behavior checklist; non-human
+  respondents (id = cat, owner is a covariate), consistent with prior
+  `muller_2016_dog_inhibition` precedent that IRW's format doesn't require
+  human respondents. Housing/environment columns (access to toys, outdoor
+  access, etc.) are covariates, not part of the same construct -- not
+  shipped as items.
+
+6 more of the top-13 were inspected and skipped/deferred (all confirmed,
+not guessed):
+- `0153663` (predicting higher-ed performance) -- subject-level exam/GPA
+  scores across different domains (English/Math/Psychology raw test
+  scores, HS grades, course credits), not a Likert item battery. Skipped.
+- `0284383` (CAM/homeopathy beliefs) -- every column already a computed
+  subscale/composite score (Big Five traits, numeracy, death anxiety,
+  etc.), no raw items present. Skipped.
+- `0268773` (Chinese college students anxiety/depression) -- all 6 columns
+  are named composite instruments (SF-36 PCS/MCS, PSQI, depression,
+  anxiety totals), no raw items. Skipped.
+- `0154145` (facial affect labeling, schizophrenia/BPD) -- derived
+  task-accuracy ratios and clinical composite scores (BPDSI, PANSS, BDI),
+  not raw Likert items. Skipped.
+- `0217482` (leader-follower dyad job resources) -- all columns are
+  mean-centered/standardized (z-scored) derived variables, not raw items.
+  Skipped.
+- `0278201` (fWHR/mandibular-angle vs. personality) -- the 16 personality
+  columns are Cattell 16PF primary-factor scores (already-scored composite
+  output of a full battery), not raw item responses. Skipped.
+- `0189915` (Sierra Leone health-insurance willingness-to-pay, N=4648) --
+  large (83-column) household survey with cryptic section codes
+  (SAQ/SBQ/SCQ/SDQ/SEQ) spanning unrelated topics (livestock, demographics,
+  health); the actual WTP items aren't identifiable without the survey
+  instrument/codebook. Deferred, not skipped; added to
+  `plos_deferred_candidates.csv`.
+- `0220658` (trust/proximity vaccine propensity, N=1006) -- only 4 items,
+  each on a different response scale/construct (trust, 2 likelihood
+  ratings, 1 belief rating); too heterogeneous to treat as one coherent
+  instrument without more text from the paper. Deferred; added to
+  `plos_deferred_candidates.csv`.
+
+Remaining ~53 of the 66 genuinely-new `worth_retrying` rows (mostly N<100
+or unparsed-N) not individually reviewed this pass -- `plos_batch16_
+triage.csv`/`plos_batch16_retriage.csv` held them; per the pattern used in
+the batches 6/9/12/13 sweep, these are being written off rather than kept
+open-ended, since the highest-N/most-promising rows were already covered.
+
+Two staging biblio files this batch: `biblio_plos_batch16.csv` (7 rows,
+the `good`-candidate tables) and `biblio_plos_batch16_worthretrying.csv`
+(11 rows, the `worth_retrying`-pool tables) -- left as separate files per
+ben-domingue's mid-batch instruction to remove each as its own tables are
+added, rather than consolidated into one file first.

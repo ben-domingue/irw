@@ -590,11 +590,19 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   hold: 0-response ambiguity, anchor labels not documented in the source.
   Needs the anchor-label question resolved before it can be processed.
 
-- [ ] **SAPA 7 annual releases** (2017–2024, DOIs DVN/PNGUT5 through
-  DVN/3BTT82, all CC0, none in IRW yet) — decision needed on scope: process
-  all 7 years separately, most recent only, or pool with `cov_year`. File
-  IDs and format details are in `BATCH_LOG.md`'s "Pipeline improvements"
-  section.
+- [x] **SAPA 7 annual releases (2017-2024) pooled into `condon_2024_sapa_personality`
+  and uploaded** (confirmed 2026-08-02, ben-domingue): all 7 years share an
+  identical 135-item personality item bank (confirmed by hashing headers), so
+  pooled into one table with `cov_year` rather than 7 separate tables, per
+  ben-domingue's decision. Full pool was ~2.28M respondents/~155.7M rows --
+  too large for this pipeline's usual scale -- so a random sample of
+  1,000,000 respondents (seed=42) was taken instead; documented in the
+  biblio Notes field along with its relationship to the existing
+  `sapa_personality`/`icar_sapa` tables (confirmed not redundant with
+  either). `irw_output/condon_2024_sapa_personality.csv` and
+  `biblio_condon_2024_sapa_personality.csv` gone from disk as expected. See
+  `BATCH_LOG.md`'s "Pooled SAPA-Project personality table, 2017-2024" entry
+  for full detail.
 
 - [ ] **`human_review` backlog** — several hundred rows accumulated across
   all batches, tracked in the "Automated queue - Human eye" Google Sheet
@@ -855,4 +863,57 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   actually two multi-rating report *modules*, not two Likert items --
   needs the raw S1 Data file opened and the per-session item structure
   mapped out before it can be shipped.
+
+- [x] **PLOS ONE batch 16 — `biblio_plos_batch16.csv` (7 rows, `good`
+  candidates) closed out** (confirmed 2026-08-02, ben-domingue):
+  `daiku_2021_dirty_dozen`/`_lie_scale`/`_lying_frequency`,
+  `horiuchi_2024_attachment`/`_dissociation`/`_rsmsm`,
+  `jimenezherrera_2022_moral_sensitivity` (all CC BY 4.0) uploaded to
+  Redivis and pasted into the dictionary sheet; `biblio_plos_batch16.csv`
+  and its 7 `irw_output/*.csv` files gone from disk as expected. New
+  standing min-N rule (`feedback_min_sample_size`) applied for the first
+  time: 3 `good` candidates dropped for N<50, 4 in the 50-99 band declined
+  by ben-domingue when asked, 1 (`0235595`) was a duplicate of an
+  already-deferred batch-13 candidate. `qiang_2025_red_tape` (`0327359`)
+  turned out to be an exact duplicate of an already-shipped batch-15 paper
+  -- not reprocessed. See `BATCH_LOG.md`'s "PLOS ONE batch 16" entry for
+  full per-dataset detail.
+
+- [x] **PLOS ONE batch 16 — `biblio_plos_batch16_worthretrying.csv` (11
+  rows) closed out** (confirmed 2026-08-02, ben-domingue): `pavic_2022_
+  vaccine_conspiracy`/`_natural_immunity`/`_healthcare_trust`/
+  `_science_literacy`, `tuason_2021_covid_coping_enjoy`/
+  `_loneliness_emotional`/`_loneliness_social`/`_wellbeing`/
+  `_sense_of_agency`, `gumus_2025_dietarian_identity`,
+  `machado_2020_cat_separation` (all CC BY 4.0) uploaded to Redivis and
+  pasted into the dictionary sheet; `biblio_plos_batch16_worthretrying.csv`
+  and all 11 `irw_output/*.csv` files gone from disk as expected. See
+  `BATCH_LOG.md`'s "PLOS ONE batch 16" entry for full detail, including 6
+  more top-N `worth_retrying` rows that were inspected and skipped
+  (confirmed composite/derived data, not raw items) and 2 more deferred to
+  `plos_deferred_candidates.csv` (Sierra Leone health-insurance WTP survey
+  needing a codebook; trust/proximity vaccine-propensity study, only 4
+  heterogeneous items).
+
+- [x] **`automated_finding/human_review_plos_batch16.csv`** (155 rows,
+  batch 16's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-02, ben-domingue); file gone
+  from disk as expected.
+
+- [ ] **PLOS ONE batch 16 — ~53 of 66 genuinely-new `worth_retrying` rows
+  not individually reviewed** (2026-08-02, written off rather than left
+  open-ended, matching the batches 6/9/12/13 sweep pattern): mostly N<100
+  or unparsed-N rows; the highest-N/most-promising rows in the pool were
+  already covered this batch. DOI/title/N are only in the now-deleted
+  `plos_batch16_retriage.csv` -- would need re-running `process_one` on
+  the DOI if reconsidered later.
+
+- [ ] **PLOS ONE batch 16 — Swiss summer camp socio-emotional study
+  deferred** (`10.1371/journal.pone.0276665`, N=256, 92 items, CC BY 4.0):
+  genuine pre/post multi-scale battery (PREALT/POSTALT 14i,
+  PREEST/POSTEST 9i, a ~20-item numbered TIM/EMO/SOC/ACT block with
+  reverse-coded "R"-suffix items, plus S8/S9 blocks) but bundles at least
+  3 distinct scales under one item-numbering sequence -- needs the paper's
+  Measures section mapped in detail before splitting. Row held in
+  `plos_deferred_candidates.csv`.
 
