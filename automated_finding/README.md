@@ -248,6 +248,7 @@ a processing script, check the dataset's DOI against the
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `no_usable_file` | No resolvable tabular file on the landing page | Skip |
+| `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
 | `download_failed` | Network or HTTP error | Retry manually if important |
 | `error` | Unexpected pipeline error | Check `reasons` |
@@ -290,9 +291,39 @@ run (`_load_auto_exclusions()`) — no local file needed. (The "to be
 processed" queue sheet was dropped as an exclusion source 2026-07-14 — see
 the note in Step 1 above.)
 ```
---all          disable relevance filter
---out <path>   output path (default: candidates.csv)
+--all              disable relevance filter
+--out <path>       output path (default: candidates.csv)
+--since <YYYY-MM-DD>  keep only hits published/created on or after this date
+--sources <names>  query only these sources (see SOURCE_MAP in the script)
 ```
+`--since` filters client-side on each hit's `published` date after the
+source's normal (unfiltered) pagination — not every source API supports a
+date-range query param, but `Hit.published` is a comparable ISO date string
+for all of them. A hit with no `published` value is kept, not dropped.
+
+### `irw_discover_monthly.py`
+Incremental wrapper around `irw_discover_updated.py` for a fixed
+`TERM_LIST`, meant to run on a schedule (see the `schedule` skill) rather
+than by hand. For each term it looks up the date of its own most recent
+prior run from `search_terms_log.csv` (rows it wrote itself, recognized by
+an `output_file` starting with `monthly_candidates_` — this avoids
+misreading an unrelated row, e.g. a PLOS batch that happens to reuse the
+same term text, as a repository-API run) and passes that as `--since`; a
+term run for the first time falls back to `--default-lookback-days` (90).
+After a run it appends one `search_terms_log.csv` row per term with today's
+date, so the next scheduled run advances automatically.
+```
+--sources <names>            sources to query (default: osf dataverse)
+--default-lookback-days <n>  --since to use for a term with no prior run (default: 90)
+--out <path>                 output CSV (default: monthly_candidates_<today>.csv)
+--dry-run                    print each term's computed --since date and exit
+```
+`TERM_LIST` at the top of the script is a starting draft, not a finished
+list — it leans on constructs `BATCH_LOG.md` explicitly credits with past
+hits, using bare/root forms (e.g. `"grit"` not `"grit scale"`) since
+BATCH_LOG.md found qualified forms miss page-1 relevance-ranked results the
+bare form catches. Edit it freely; `search_terms_log.csv` doesn't record
+per-term hit counts precisely enough to rank terms automatically.
 
 ### `irw_batch_updated.py`
 Resolves landing pages to data files, downloads, triages, and writes
@@ -300,7 +331,12 @@ Resolves landing pages to data files, downloads, triages, and writes
 `.csv`/`.tsv`/`.xlsx`/`.xls`/`.sav`/`.dta`/`.sas7bdat`/`.rdata`/`.rda`/`.rds`
 on a landing page (`TABULAR_EXT`) — the SPSS/Stata/SAS/R formats were added
 2026-07-14; see the "Pipeline fix" note in `BATCH_LOG.md` for why and what
-it needed (`pyreadstat`/`pyreadr`, see Prerequisites in `SKILL.md`).
+it needed (`pyreadstat`/`pyreadr`, see Prerequisites in `SKILL.md`). Files
+over `MAX_FILE_BYTES` (200MB) are flagged `file_too_large` and never
+downloaded — added 2026-08-02 after `.dta` files up to 1.58GB OOM-killed
+the process twice; see `TODO.md`'s (closed) "no file-size guard" note.
+`irw_discover_plos.py` and `irw_process_queue.py` share the same guard via
+`polite_get()`/`resolve_data_files()`.
 ```
 --limit <n>    process only the first N rows
 --resume       continue from checkpoint after interruption

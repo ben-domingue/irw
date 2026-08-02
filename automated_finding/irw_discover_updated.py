@@ -22,6 +22,7 @@ Three things this does that a naive search doesn't:
 Run:
     python irw_discover_updated.py "self-efficacy scale" "reading assessment"
     python irw_discover_updated.py --all "questionnaire"   # disable relevance filter
+    python irw_discover_updated.py --since 2026-07-01 "personality scale"  # only hits published/created on or after this date
 """
 
 from __future__ import annotations
@@ -549,12 +550,18 @@ def _load_auto_exclusions() -> set:
 
 
 def discover(queries, exclude: set, relevance_on: bool, sources=None,
-             on_hit=None) -> list:
+             on_hit=None, since: str | None = None) -> list:
     """Discover candidates across all sources for each query.
 
     on_hit: optional callable(Hit) invoked immediately when a new candidate
     passes all filters — use this to write results incrementally rather than
     waiting for the full run to finish.
+    since: optional "YYYY-MM-DD" — drop hits whose `published` date is
+    earlier than this. Applied client-side after each source's normal
+    (unfiltered) pagination, since not every source API supports a
+    date-range query param and `Hit.published` already carries a comparable
+    ISO date string for all of them. A hit with no `published` value is
+    kept rather than dropped, since a missing date isn't evidence it's old.
     """
     import time as _time
     active = sources if sources is not None else SOURCES
@@ -574,6 +581,8 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                 if hit.doi and hit.doi in exclude:
                     continue
                 if not is_relevant(hit, relevance_on):
+                    continue
+                if since and hit.published and hit.published[:10] < since:
                     continue
                 seen.add(key)
                 results.append(hit)
@@ -596,6 +605,8 @@ def main():
     ap.add_argument("--out", default="candidates.csv")
     ap.add_argument("--sources", metavar="NAME", nargs="+",
                     help=f"query only these sources (choices: {', '.join(SOURCE_MAP)})")
+    ap.add_argument("--since", metavar="YYYY-MM-DD",
+                    help="only keep hits published/created on or after this date")
     args = ap.parse_args()
 
     queries = args.queries or ["item response theory"]
@@ -629,7 +640,7 @@ def main():
         outf.flush()
 
     discover(queries, exclude, relevance_on=not args.all, sources=active_sources,
-             on_hit=on_hit)
+             on_hit=on_hit, since=args.since)
     outf.close()
 
     print(f"{len(hits)} candidates found -> {args.out}")

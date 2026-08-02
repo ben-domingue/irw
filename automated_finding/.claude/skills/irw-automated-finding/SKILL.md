@@ -91,6 +91,12 @@ python irw_discover_updated.py "search term 1" "search term 2" --out candidates.
   8 translations), all logged and run together, not as a separate follow-up.
 - After the run, append every term (English and each translation) to
   `search_terms_log.csv` as its own row.
+- For a **recurring, incremental** run of a fixed term list against OSF/
+  Dataverse (e.g. a scheduled monthly check) rather than a one-off manual
+  run, use `irw_discover_monthly.py` instead — it computes `--since` per
+  term from its own prior runs so each pass only surfaces what's new. See
+  `README.md`'s `irw_discover_monthly.py` entry for details; edit its
+  `TERM_LIST` before relying on it, it's a starting draft.
 
 ## Step 2 — Triage
 
