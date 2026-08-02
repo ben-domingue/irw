@@ -8,9 +8,10 @@ user <- redivis$user("bdomingu")
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("metadata")
 meta <- table$to_tibble()
-meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
-              "n_items", "responses_per_participant", "responses_per_item", 
-              "density")]
+if (!"variables" %in% names(meta)) meta$variables <- NA_character_ ##first run after this fix, or a historical gap -- forces a one-time refetch for those rows below rather than crashing
+meta<-meta[,c("table", "n_responses", "n_categories", "n_participants",
+              "n_items", "responses_per_participant", "responses_per_item",
+              "density", "variables")]
 dim(meta)
 old.tables<-meta$table
 length(old.tables)
@@ -134,29 +135,25 @@ length(unique(summaries$table))
 ##add dataset
 summaries<-merge(summaries,nt)
 
-##get variable names for each dataset
-library(redivis)
-library(tibble)
-
-
-# fetch all tables
-dataset_tables<-list()
-for (dataset in unique(summaries$dataset)) {
-    ds <- redivis$organization("datapages")$dataset(dataset) ##edited
-    dataset_tables[[dataset]] <- ds$list_tables()
-}
-dataset_tables<-unlist(dataset_tables)
-
-# Extract table names and variables, storing variables as concatenated strings
-table_vars_df <- tibble(
-  table = sapply(dataset_tables, function(table) table$name),
-  variables = sapply(dataset_tables, function(table) {
-    var_list <- table$list_variables()
-    paste(sapply(var_list, function(v) v$name), collapse = "| ")  # Concatenate variables
+##get variable names -- only for tables missing them (newly added tables,
+##or any historical row where 'variables' was never recorded). Reuse the
+##already-known value for every other table instead of re-calling
+##list_variables() for ~2000+ already-known tables on every single run
+##(this loop used to do exactly that, unconditionally, and was the reason
+##a plain run_pipeline.sh run could take 2+ hours -- see TODO.md). `tables`/
+##`new.tables` (built above at the "new tables" step) already cover every
+##currently-live table, old and new alike, so no need to re-fetch
+##list_tables() a second time either.
+need_vars <- which(is.na(summaries$variables) | summaries$variables=="")
+if (length(need_vars)>0) {
+  jj <- match(summaries$table[need_vars], new.tables)
+  new_vars <- sapply(jj, function(i) {
+    var_list <- tables[[i]]$list_variables()
+    paste(sapply(var_list, function(v) v$name), collapse = "| ")
   })
-)
-
-meta<-merge(summaries,table_vars_df,by='table')
+  summaries$variables[need_vars] <- new_vars
+}
+meta <- summaries
 dim(meta)
 meta$variables<-tolower(meta$variables) ##https://github.com/itemresponsewarehouse/Rpkg/issues/109
 

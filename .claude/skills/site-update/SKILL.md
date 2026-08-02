@@ -1,6 +1,6 @@
 ---
 name: site-update
-description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
+description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
 # IRW Site/Metadata Update
@@ -21,24 +21,29 @@ Confirmed with Ben (2026-07-27) — see `references/pipeline.md` for the full
 script-by-script writeup this was built from:
 
 - Core pipeline order: `01_metadata.R` → `02_biblio.R` → `03_tags.R` →
-  `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `09_hero_status.R` (must run
-  **last**, it reads `metadata.csv` written by 01).
-- **`05` and `06` are excluded from `run_pipeline.sh`'s default order as of
-  2026-07-28 — read `TODO.md` before touching either.** `05_comps.R` has
-  three confirmed bugs (wrong column list, an undefined `toadd` variable, and
-  a final write that silently ignores the freshly-computed data) found during
-  a live run; `06_nominal.R` looks structurally sound on inspection but was
-  never actually verified standalone. Don't assume 06 is broken just because
-  05 is, and don't attempt to fix either without first reading `TODO.md`'s
-  full trace of what's actually wrong — a narrow patch to the reported crash
-  alone would leave 05 "succeeding" while still silently doing nothing.
+  `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `08_itemtext.R` →
+  `09_hero_status.R` (must run **last**, it reads `metadata.csv` written by
+  01). `05`/`06` were fixed and `08` was added to the default order
+  2026-08-02 — see `TODO.md` for history if any of the three regress.
+- **Item text split of responsibility (confirmed with Ben, 2026-08-02): this
+  skill produces metadata FOR item text that's already been procured; the
+  separate `irw-auto-itemtext` skill (`itemtext/.claude/skills/irw-auto-itemtext/`)
+  is what procures/extracts the item text itself** (writes
+  `{table}__items.csv` from source papers — never touches
+  `itemtext_metadata`). `08_itemtext.R` reads `irw::irw_list_itemtext_tables()`
+  (tables whose item text is already available) and writes readability stats
+  (Flesch-Kincaid etc.) to `itemtext_metadata.csv` — squarely "produce
+  metadata for already-procured item text," so it lives in this skill's
+  pipeline, not the extraction skill's. No code overlap between the two;
+  only the incremental `08_itemtext.R` is wired into `run_pipeline.sh` — the
+  full-recompute variant (`hotfixes/08_itemtext_recompute.R`) stays a
+  deliberate, rare, manual operation outside the default pipeline.
 - `04_tables.R` (QC) is being superseded by this skill's audit workflow —
   details of exactly how are still being worked out with Ben; don't assume
   `04_tables.R` itself needs to keep running standalone.
-- `08_itemtext.R` (itemtext readability stats) is out of scope here — it
-  belongs to the separate `itemtext/` pipeline area.
-- `metadata/hotfixes/` is out of scope for now (Ben, 2026-07-27) — don't run
-  anything in there as part of this skill.
+- `metadata/hotfixes/` (other than `08_itemtext_recompute.R`, see above) is
+  out of scope for now (Ben, 2026-07-27) — don't run anything else in there
+  as part of this skill.
 
 ## Before doing anything
 
@@ -54,7 +59,8 @@ script-by-script writeup this was built from:
   OpenAI/GPT-4o implementation on 2026-07-27; it will otherwise prompt
   interactively — fine in a foreground run, don't run that stage unattended
   without it set). R packages: `redivis`, `gsheet`, `dplyr`, `tidyr`,
-  `tibble`, `httr`, `glue`, `progress`, `jsonlite`, `purrr`, `readr`, `irw`.
+  `tibble`, `httr`, `glue`, `progress`, `jsonlite`, `purrr`, `readr`, `irw`,
+  plus `quanteda`/`quanteda.textstats` for stage 08's readability stats.
 - **Workflows 1 and 2 never upload to Redivis.** Every numbered script just
   writes a local CSV/JSON, and the audit only reads. Don't tell Ben something
   was "uploaded" when it was only regenerated or read locally — that's what
@@ -73,10 +79,10 @@ source Google Sheets or newly live in Redivis (e.g. a new
 `item_response_warehouse_3` table, or an edited dictionary-sheet row).
 
 ```bash
-scripts/run_pipeline.sh                 # full default sequence: 01 02 03 07 09 (05/06 excluded, see TODO.md)
+scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 07 08 09
 scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 scripts/run_pipeline.sh --no-09         # everything except the hero JSON
-scripts/run_pipeline.sh 05              # try the known-broken comps stage explicitly
+scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 ```
 
 What it does, per stage:
@@ -195,13 +201,13 @@ python3 ../.claude/skills/site-update/scripts/upload_meta.py --yes      # skip t
 What it does: for each known local CSV present (`metadata.csv` → table
 `metadata`, `biblio.csv` → `biblio`, `tags.csv` → `tags`,
 `comps_biblio.csv`/`nominal_biblio.csv`/`simsyn_biblio.csv` →
-`comps_biblio`/`nominal_biblio`/`simsyn_biblio`, `simsyn_metadata.csv` →
-`simsyn_metadata`, `comps_metadata.csv`/`nominal_metadata.csv` →
-`comps_metadata`/`nominal_metadata` — these last two are almost never present
-since `05`/`06` are excluded/broken, see `TODO.md`), it fully replaces that
-table's data on `redivis.user("bdomingu").dataset("irw_meta", version="next")`
-— a **draft** version. `hero_stats.json` is deliberately not in this list;
-it isn't a Redivis table, it goes to the separate `irw_site` repo.
+`comps_biblio`/`nominal_biblio`/`simsyn_biblio`,
+`comps_metadata.csv`/`nominal_metadata.csv`/`simsyn_metadata.csv` →
+`comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `itemtext_metadata.csv`
+→ `itemtext_metadata`), it fully replaces that table's data on
+`redivis.user("bdomingu").dataset("irw_meta", version="next")` — a **draft**
+version. `hero_stats.json` is deliberately not in this list; it isn't a
+Redivis table, it goes to the separate `irw_site` repo.
 
 **Nothing is live after this runs.** `version="next"` writes to a draft —
 review and publish it by hand on the Redivis site afterward. This mirrors

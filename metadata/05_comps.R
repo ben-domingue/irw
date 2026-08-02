@@ -7,9 +7,7 @@ user <- redivis$user("bdomingu")
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("comps_metadata")
 meta <- table$to_tibble()
-meta<-meta[,c("table", "n_responses", "n_categories", "n_participants", 
-              "n_items", "responses_per_participant", "responses_per_item", 
-              "density")]
+meta<-meta[,c("table", "n_responses", "n_actors")]
 dim(meta)
 old.tables<-meta$table
 length(old.tables)
@@ -26,6 +24,23 @@ nt<-data.frame(do.call("rbind",new.tables))
 new.tables<-nt$table
 tables<-do.call("c",tables)
 
+##to add
+toadd<-new.tables %in% old.tables
+print("add")
+new.tables[!toadd]
+##to remove
+torem<-old.tables %in% new.tables
+print("remove")
+old.tables[!torem]
+
+##remove tables
+dim(meta)
+ii<-match(old.tables[!torem],meta$table)
+if (length(ii)>0) {
+  meta[ii,]
+  meta<-meta[-ii,]
+}
+dim(meta)
 
 f<-function(tab) {
     getvars<-function(tab) {
@@ -84,7 +99,7 @@ if (length(ii)>0) {
   summaries<-meta
 }
 
-write.csv(meta,'comps_metadata.csv',quote=FALSE,row.names=FALSE)
+write.csv(summaries,'comps_metadata.csv',quote=FALSE,row.names=FALSE)
 
 
 

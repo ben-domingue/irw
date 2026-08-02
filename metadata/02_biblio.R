@@ -129,9 +129,17 @@ getrows<-function(l) {
     new_data_rows <- irw_dict[is.na(match(tolower(irw_dict$table), tolower(biblio$table))) | is.na(biblio$BibTex[match(tolower(irw_dict$table), tolower(biblio$table))]), ]
     ##remove nonpublic elements before calling ChatGPT
     new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
+    ## the 4 dictionary sheets (core/comps/nom/sim) are independently
+    ## maintained and have drifted: core's license column is "Derived License"
+    ## (with a space), comps/nom/sim already use "Derived_License" (underscore)
+    ## -- confirmed 2026-08-02. Normalize to Derived_License before select()
+    ## so this works across all 4 without hardcoding either sheet's spelling.
+    if ("Derived License" %in% names(new_data_rows) && !("Derived_License" %in% names(new_data_rows))) {
+        new_data_rows <- dplyr::rename(new_data_rows, Derived_License=`Derived License`)
+    }
     new_data_rows <- new_data_rows |>
-    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`, `Derived License`) |>
-    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`, Derived_License=`Derived License`)
+    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`, Derived_License) |>
+    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
     new_data_rows <- new_data_rows %>%
         mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
     new_data_rows <- generate_bibtex(new_data_rows)

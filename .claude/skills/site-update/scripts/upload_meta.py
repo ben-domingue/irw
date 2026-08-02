@@ -45,8 +45,9 @@ FILE_TABLE_MAP = {
     "nominal_biblio": "nominal_biblio",
     "simsyn_biblio": "simsyn_biblio",
     "simsyn_metadata": "simsyn_metadata",
-    "comps_metadata": "comps_metadata",   # 05_comps.R is broken as of 2026-07-28 (see TODO.md) -- rarely present
-    "nominal_metadata": "nominal_metadata",  # 06_nominal.R excluded from run_pipeline.sh's default order
+    "comps_metadata": "comps_metadata",     # 05_comps.R fixed 2026-08-02, back in run_pipeline.sh's default order
+    "nominal_metadata": "nominal_metadata", # 06_nominal.R verified working 2026-08-02, likewise
+    "itemtext_metadata": "itemtext_metadata",  # 08_itemtext.R joined the default order 2026-08-02
 }
 
 ADD2REDIVIS_ENV = Path(__file__).resolve().parents[5] / "data" / "add2redivis" / ".env"

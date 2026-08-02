@@ -30,7 +30,7 @@ How to run (from metadata/):
 
 Known file -> table mapping: metadata, biblio, tags, comps_biblio,
 nominal_biblio, simsyn_biblio, simsyn_metadata, comps_metadata,
-nominal_metadata. hero_stats.json is NOT here -- it's not a Redivis table,
-it goes to the separate irw_site repo.
+nominal_metadata, itemtext_metadata. hero_stats.json is NOT here -- it's
+not a Redivis table, it goes to the separate irw_site repo.
 
 Full details: see the script's own docstring and SKILL.md's "Workflow 3".

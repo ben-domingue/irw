@@ -30,106 +30,45 @@ NA rows filled. 182 remain, in two different buckets:
    families) -- a gap in the dictionary sheet itself, not fixable from
    `biblio.csv`'s side. List not yet compiled/handed to Ben.
 
-## 01_metadata.R re-pulls variable lists for every table, every run (found 2026-08-02)
+## Resolved 2026-08-02 (kept here for history -- see git log for the actual diffs)
 
-Observed live: a plain `run_pipeline.sh` default run sat in `01_metadata.R`
-for 45+ minutes with an active Redivis socket and low steady CPU -- not
-hung, just slow. Traced to two separate loops in the file that behave very
-differently:
-
-- Lines 19-130 (`f()`, the per-table stats: `n_responses`, `n_categories`,
-  `n_participants`, `n_items`, density, etc.) *does* reuse correctly -- it's
-  only called for `new.tables[!toadd]`, i.e. tables not already present in
-  the `metadata.csv` pulled from the live `irw_meta:metadata` Redivis table.
-- Lines 142-157 (`table_vars_df`, the per-table variable-name listing used
-  for the `longitudinal` flag) does **not** reuse anything -- it loops over
-  every table in `unique(summaries$dataset)` (old + new alike, ~2000+ table
-  and growing) and calls `table$list_variables()` on each one, every single
-  run, regardless of whether that table's row already exists in `meta`. It
-  also redundantly re-calls `ds$list_tables()` per dataset even though the
-  identical result was already fetched into `tables` at line 22.
-
-**Recommended fix:** thread the same `toadd`/`old.tables` reuse logic through
-the variable-listing loop -- only fetch `list_variables()` for tables in
-`new.tables[!toadd]`, and carry forward the previously-fetched `variables`
-string for every other table (it doesn't change once a table is live, so
-there's no correctness reason to redo it). Don't touch this without
-confirming with Ben first, same as 05/06 below -- worth checking whether
-`variables` is ever expected to change for an existing table (e.g. a
-hotfix editing an already-shipped table) before assuming it's safe to
-skip unconditionally.
-
-## Discuss folding 08_itemtext.R into this skill (Ben, 2026-07-28)
-
-Currently explicitly out of scope (see SKILL.md and `references/pipeline.md`)
--- it belongs to the separate `itemtext/` pipeline
-(`itemtext/.claude/skills/irw-auto-itemtext/`), and `run_pipeline.sh` doesn't
-have it wired up as a stage at all. Ben: in the long run he wants `08` (item-
-text readability metadata -- word/char counts, Flesch-Kincaid, incremental
-vs. the `hotfixes/08_itemtext_recompute.R` full-recompute variant) included
-in *this* skill instead. Needs a real conversation before implementing --
-at minimum: how it should relate to the separate `irw-auto-itemtext` skill
-(which does the actual item-text *extraction* that `08` then summarizes --
-folding `08` in here doesn't obviously mean moving that skill too), whether
-it fits `run_pipeline.sh`'s snapshot/diff pattern the same way (it's
-incremental-only by design, unlike 01/05/06/07/09), and where in the run
-order it'd go. Don't just wire it into `DEFAULT_ORDER` without that
-discussion.
-
-## 05_comps.R is broken -- needs a real fix, not a patch (found 2026-07-28)
-
-Confirmed three separate bugs while diagnosing a live-run crash. Fixing just
-the reported crash would leave a script that "succeeds" but is still wrong
--- see #3.
-
-1. **Line 10-12 crash (the one that actually surfaced):** `meta <- meta[,
-   c("table","n_responses","n_categories","n_participants","n_items",
-   "responses_per_participant","responses_per_item","density")]` -- these
-   columns don't exist on the real `comps_metadata` Redivis table. Its
-   actual schema is `table`/`n_responses`/`n_actors`, matching what this
-   file's own `getvars()` computes (comps is pairwise-comparison data, not
-   item-response data -- the 7-column list was copy-pasted from
-   `01_metadata.R` and never adapted).
-2. **`toadd` is referenced (line 61: `nms<-new.tables[!toadd]`) but never
-   defined anywhere in the file.** `01_metadata.R` and `07_simsyn.R` both
-   compute it (`toadd <- new.tables %in% old.tables`) before using it;
-   `05_comps.R` doesn't. Even with #1 fixed, this crashes next. The
-   script's own header comment ("this kinda works... a lot of the
-   functionality outside of the f() function is not tested") suggests it
-   was last run interactively, reusing a `toadd` left over in the console
-   from having just run `01_metadata.R` in the same session -- it has
-   likely never completed a standalone `Rscript 05_comps.R` run.
-3. **Line 87 writes `meta`, not `summaries`.** `summaries` (old + newly
-   computed rows for new `irw_competitions` tables) is built correctly a
-   few lines above, then never used -- `write.csv(meta, 'comps_metadata.csv',
-   ...)` writes only the old data back out unchanged. Fixing #1 and #2
-   alone gives you a script that runs without error but silently never
-   picks up new competition tables.
-
-**Recommended fix:** don't patch these three spots independently -- rewrite
-`05_comps.R`'s control flow to mirror `07_simsyn.R` (which has the correct
-`toadd`/`torem`/`summaries` structure already) adapted for comps' 2-column
-`n_responses`/`n_actors` schema, rather than reusing 01's 7-column shape.
-
-## 06_nominal.R -- probably fine, just unverified (2026-07-28)
-
-Traced the same way as 05 above and found no equivalent bugs: `toadd` is
-defined correctly, the final `write.csv` uses `summaries` (not stale data),
-and its column handling is actually *more* robust than 01/05/07 -- it reads
-`names(meta)` from whatever the live Redivis table already has instead of
-hardcoding a column list, so it isn't vulnerable to the same schema-mismatch
-that broke 05. The only issue found in this file was the retry-loop success
-check expecting `length(testvec)==7` when its own `getvars()` actually
-returns 5 elements -- already fixed (2026-07-28, see `06_nominal.R`).
-
-It was never actually run this session (the pipeline halted at 05 first).
-**Don't assume it needs the same rewrite as 05** -- next time it's in
-scope, just try running it standalone (`Rscript 06_nominal.R` from
-`metadata/`) before touching anything.
-
-## Until 05 is fixed
-
-`scripts/run_pipeline.sh`'s default stage order excludes both 05 and 06 (see
-that script's `DEFAULT_ORDER`) so a normal run doesn't keep dying on 05
-before ever reaching 07/09. Both are still runnable explicitly:
-`scripts/run_pipeline.sh 05` / `scripts/run_pipeline.sh 06`.
+- **`02_biblio.R`'s `getrows()`: `Derived License` column name differs
+  across the 4 dictionary sheets.** The earlier same-day fix for
+  `Derived_License` always being `NA` (see the `biblio.csv` item above)
+  hardcoded `` `Derived License` `` (with a space), matching only the core
+  dictionary sheet. Surfaced as a hard crash (`Column 'Derived License'
+  doesn't exist`) partway through a full `run_pipeline.sh` run, on the
+  `comps` dictionary specifically. Checked all 4 sheets directly (two
+  consecutive fetches each, to rule out the day's recurring flakiness) --
+  confirmed real and consistent: `comps`/`nominal`/`simsyn` all use
+  `Derived_License` (underscore), only `core` uses `Derived License`
+  (space). Fixed with a normalize-before-select step in `getrows()` so it
+  works regardless of which spelling a given sheet uses. Verified: a full
+  `run_pipeline.sh` run completes end-to-end across all 4 dbs with 0
+  changes.
+- **`01_metadata.R`'s unconditional per-table variable-listing loop**
+  (previously made a plain `run_pipeline.sh` run take 2+ hours) -- fixed to
+  reuse `variables` for tables already known, matching the `toadd`-based
+  reuse the stats loop already had. Verified: a full re-run with no new
+  tables dropped from 45+ min to 19s, with `metadata.csv` diffing as 0
+  added/removed/changed (proves the reuse is correct, not just faster).
+- **`05_comps.R`'s three bugs** (wrong 7-column schema copy-pasted from
+  `01_metadata.R`, undefined `toadd`, final write using stale `meta` instead
+  of computed `summaries`) -- rewritten to mirror `07_simsyn.R`'s structure,
+  adapted for comps' real `table`/`n_responses`/`n_actors` schema. Verified
+  standalone: picked up `costa_gine_2023_wpt_matches` cleanly, 23 rows, no
+  errors.
+- **`06_nominal.R`** -- verified standalone, no bugs found (matches the
+  earlier "probably fine" assessment). Picked up `cos101_2026_openended`
+  cleanly, 12 rows, no errors. No code changes.
+- **`08_itemtext.R` folded into `run_pipeline.sh`** as a real stage,
+  positioned right before `09`. Confirmed architecture split with Ben: this
+  skill produces metadata FOR item text that's already been procured; the
+  separate `irw-auto-itemtext` skill procures/extracts the item text itself
+  (`{table}__items.csv` from source papers) -- no code overlap. Only the
+  incremental script is wired in; `hotfixes/08_itemtext_recompute.R` stays a
+  manual, out-of-pipeline operation. `upload_meta.py`'s file->table map
+  updated to include `itemtext_metadata`. Verified standalone (9s, "No new
+  tables to process" -- handled gracefully by the diff step).
+- `run_pipeline.sh`'s `DEFAULT_ORDER` is now `(01 02 03 05 06 07 08 09)` --
+  full default order restored/extended, nothing excluded anymore.

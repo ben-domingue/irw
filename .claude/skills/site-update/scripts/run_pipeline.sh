@@ -4,30 +4,36 @@
 # reimplements their logic) and wraps each with a before/after snapshot so
 # diff_csv.py can report what changed -- never a silent overwrite.
 #
-# Default order matches Ben's sequencing (2026-07-27):
+# Default order (2026-08-02):
 #   01 (metadata.csv) -> 02 (biblio.csv + comps/nominal/simsyn biblio, one
 #   script) -> 03 (tags.csv) -> 05 (comps_metadata.csv) -> 06
-#   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 09 (hero_stats.json,
-#   must run LAST since it reads metadata.csv written by 01)
+#   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 08
+#   (itemtext_metadata.csv) -> 09 (hero_stats.json, must run LAST since it
+#   reads metadata.csv written by 01)
 #
-# 05 and 06 are DROPPED from the default order (2026-07-28, see TODO.md):
-# 05_comps.R has three confirmed bugs (wrong column list, undefined `toadd`,
-# writes stale data instead of the computed result) and reliably crashes,
-# which -- combined with `set -e` -- previously blocked 07/09 from ever
-# running. 06_nominal.R looks fine on inspection but was never actually
-# verified standalone; leaving it out too until someone runs it directly.
-# Both are still runnable explicitly: `scripts/run_pipeline.sh 05` /
-# `scripts/run_pipeline.sh 06`.
+# 05 and 06 were dropped from the default order 2026-07-28 (three confirmed
+# bugs in 05_comps.R, 06_nominal.R never verified standalone) and restored
+# 2026-08-02 after both were fixed/verified -- see TODO.md for the full
+# history if either regresses.
 #
-# 04 (QC) and 08 (itemtext metadata) are intentionally excluded here: 04 is
-# superseded by audit_tables.R for this skill (see SKILL.md workflow 2); 08
-# belongs to the separate itemtext pipeline. hotfixes/ are out of scope per
-# Ben (2026-07-27) -- ignored.
+# 08_itemtext.R (readability-stats metadata for item text) joined the
+# default order 2026-08-02. Split of responsibility, confirmed with Ben:
+# this skill produces metadata FOR item text that's already been procured;
+# the separate `irw-auto-itemtext` skill is what procures/extracts that item
+# text in the first place ({table}__items.csv from source papers) -- no code
+# overlap between the two. Only the incremental script is wired in here (it
+# already skips tables already in itemtext_metadata); the full-recompute
+# variant (`hotfixes/08_itemtext_recompute.R`) stays a deliberate, rare,
+# manual operation, not a routine pipeline stage.
+#
+# 04 (QC) is intentionally excluded here: superseded by audit_tables.R for
+# this skill (see SKILL.md workflow 2). hotfixes/ (other than 08's recompute
+# variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 07 09)
+#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
-#   scripts/run_pipeline.sh 05              # try the known-broken comps stage explicitly
+#   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
@@ -37,7 +43,8 @@
 # "deprecated and highly discouraged" interactive-token warning). Also
 # needs ANTHROPIC_API_KEY set for 02_biblio.R's BibTeX-generation fallback
 # (it calls Claude Haiku 4.5 and will prompt interactively if unset -- fine
-# for a foreground run, not for unattended use).
+# for a foreground run, not for unattended use). Stage 08 additionally needs
+# the `quanteda`/`quanteda.textstats` R packages installed.
 
 set -euo pipefail
 
@@ -66,7 +73,7 @@ fi
 
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
-                          [09]=09_hero_status.R )
+                          [08]=08_itemtext.R [09]=09_hero_status.R )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
@@ -75,9 +82,10 @@ declare -A STAGE_OUTPUTS=(
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
   [07]="simsyn_metadata.csv"
+  [08]="itemtext_metadata.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 07 09)  # 05, 06 excluded -- see TODO.md
+DEFAULT_ORDER=(01 02 03 05 06 07 08 09)
 
 stages=()
 for a in "$@"; do
