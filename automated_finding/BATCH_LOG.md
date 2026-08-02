@@ -4260,3 +4260,257 @@ columns, `Logical Thinking` spans 4). Regenerated all 4 subscale CSVs
 `cleaned_index.csv` updated. **Re-uploaded to Redivis (confirmed
 2026-08-02, ben-domingue)** — `irw_output/cleaned/` and `cleaned_index.csv`
 removed from disk as expected.
+
+## PLOS ONE batch 15 (2026-08-01)
+
+30 terms pulled from the recyclable non-PLOS pool in `search_terms_log.csv`
+(per the `TODO.md` "Large pool of recyclable PLOS search terms" item),
+favoring generic-but-established construct/scale names not yet tried
+against PLOS: resilience, self-esteem, self-control, locus of control,
+social support, emotional intelligence, parenting sense of competence,
+family resilience, body image, academic burnout, meaning in life, work
+engagement, psychological safety, organizational justice, problematic
+smartphone use, fear of missing out, exercise self-efficacy, relationship
+satisfaction, intimate partner violence, dyadic adjustment, acculturative
+stress, post-traumatic growth, pain catastrophizing, illness perception,
+right-wing authoritarianism, conspiracy mentality, self-regulated
+learning, growth mindset, career adaptability, delay discounting. All 30
+logged in `search_terms_log.csv`.
+
+`python3 irw_discover_plos.py <30 terms> --out plos_batch15_triage.csv`,
+run in the background (~2h10m wall clock).
+
+**Triage**: 2,335 candidates → **33 `good`** (1.41% — the best hit rate of
+any PLOS batch to date, beating batch 13's previous high of 0.91%), 450
+`human_assistance`, 1,770 `no_usable_file`, 37 `not_item_response`, 27
+`download_failed`, 17 `error`, 1 `crashed` (isolated to its own worker
+process per the crash-isolation design — did not affect the rest of the
+run).
+
+**Retriage** (`irw_retriage_ha.py`) on the 450 `human_assistance` rows →
+`plos_batch15_retriage.csv`: 144 `human_review`, 121 `aggregate_continuous`
+(drop), 94 `worth_retrying`, 89 `not_item_response` (drop), 2
+`recoverable_format`. `human_review_plos_batch15.csv` (144 rows) staged,
+ready to paste into the "Human eye" sheet. `plos_batch15_worthretrying.csv`
+(96 rows: 94 `worth_retrying` + 2 `recoverable_format`) staged for a future
+hand-review pass — not yet reviewed.
+
+**Good-candidate review** (all 33 hand-checked per SKILL.md's "needs a human glance more than usual" note — fetched the full SI file list per candidate and loaded each tabular file to inspect real columns/shapes, not just the triage-flagged file): 7 papers processed -> 22 tables, 1 duplicate caught, 3 skipped as not-a-fit, 22 deferred.
+
+**Processed** (`biblio_plos_batch15.csv`, 22 rows):
+- `ngo_2025_green_*` (`10.1371/journal.pone.0323879`, N=237): standard
+  Theory-of-Planned-Behaviour battery, 5 constructs x 4 items each, 1-5 --
+  `_green_attitude`, `_green_subjective_norm`, `_green_pbc`,
+  `_green_purchase_intention`, `_green_purchase_behavior`.
+- `zeng_2025_academic_buoyancy_efa`/`_cfa` (`10.1371/journal.pone.0318347`):
+  two separate samples, not the same instrument administered twice -- EFA
+  sample (N=209, all 32 candidate items) and CFA sample (N=423, the
+  21-item subset retained after EFA item reduction).
+- `fitriana_2022_hapwork_efa`/`_field` (`10.1371/journal.pone.0261617`):
+  Happiness at Work Scale validation, EFA sample (N=105, 31 items) and
+  field-study sample (N=370, 18-item final scale + demographics).
+- `komura_2026_gqs_*`/`_mdmt_*` (`10.1371/journal.pone.0340449`, N=148):
+  two validated instruments administered together in a human-AI creative
+  collaboration study -- Godspeed Questionnaire Series (5 subscales,
+  anthropomorphism/animacy/likeability/perceived_intelligence/
+  perceived_safety, 1-5) and Multi-Dimensional Measure of Trust (4
+  subscales, reliable/capable/ethical/sincere, 0-7).
+- `yang_2026_igd_criteria`/`_benefits` (`10.1371/journal.pone.0351550`,
+  N=1032 adolescent gamers, 2 waves): 9 raw DSM-5 IGD criteria items
+  (binary) and 4 perceived-benefit rating items (1-10) -- derived severity
+  sum scores/diagnosis flags (`dIGD_S`/`sIGD_S`/`dG_IGD`/`sG_IGD`) not
+  shipped. `_benefits` had a repeated-constant-fractional-value pattern
+  (e.g. 4.44 exactly 4 times) on an otherwise strictly-integer 1-10 scale
+  in a handful of cells -- consistent with mean/imputed substitution for
+  missing responses, not genuine raw ratings; dropped (13 cells).
+- `lee_2020_vr_usability` (`10.1371/journal.pone.0238437`, N=60): 17-item
+  VR mental-illness-simulation usability scale, 0-10. `satisfaction_level`/
+  `communication_competency`/`VR_experience` single categorical ratings
+  kept as text covariates, not shipped as items (no single-item scales).
+- `cox_2024_feedback_perceptions` (`10.1371/journal.pone.0300205`, N=29):
+  5-item feedback-perceptions survey, pre/post intervention (wave=1/2).
+
+**Duplicate caught**: "The impact of classroom interaction on willingness
+to communicate..." (`10.1371/journal.pone.0328226`, Liu et al.) is the
+*same paper* already processed in batch 13 as `liu_2025_classroom_interaction`/
+`_willingness_communicate`/`_speaking_selfefficacy`/`_foreign_lang_enjoyment`
+-- slipped through this run's DOI-exclusion filter (1,109 DOIs excluded at
+discovery time), most likely because the exclusion list snapshot predates
+batch 13's dictionary-sheet paste. Not reprocessed.
+
+**Correction (2026-08-01, same day, ben-domingue): the "animal study"
+skips were re-examined** -- IRW's core id/item/resp format doesn't
+require human respondents, only a valid id/item/resp shape, and the
+original skip (mice/dogs in batch 15's own review, above) was an
+unwarranted overgeneralization from that precedent rather than an actual
+standing rule. Re-inspected both at the raw-column level:
+- `muller_2016_dog_inhibition` (`10.1371/journal.pone.0147753`, N=41
+  dogs): the paper bundles 4 different tasks in one file, but only the
+  inhibitory-control (cylinder) task has a genuine multi-item structure --
+  `Inhibition1`/`Inhibition2`/`Inhibition3`, 3 trials, 0/1/2 ordinal,
+  confirmed real variation (33/5/1 and similar splits, not degenerate).
+  resp=0 is a valid third scale point, not a missing code -- standard
+  cylinder/detour-task scoring (0 = no inhibition/direct approach, 1 =
+  partial detour, 2 = full successful detour), and appears with real
+  frequency per trial (1/10/4 occurrences), not an isolated fluke. The
+  other 3 tasks (size-constancy, on/off, four-string) are each a single
+  binary/latency outcome per dog -- not multi-item, so not shipped.
+  `InhibitionScore` (a derived summary, not a consistent raw sum of the 3
+  trials) not shipped either. cov_sex/cov_treatment kept.
+- ~~`fushuku_2023_mouse_temperature`~~ (`10.1371/journal.pone.0292649`,
+  N=20 mice): added, then **removed same-day (ben-domingue catch)** --
+  a circadian body-temperature time series is a physiological/biomarker
+  measurement, not a response to any item or stimulus. It happened to be
+  structurally shippable as id/item/resp (id=mouse, item=time-of-day,
+  resp=temperature), but shape alone isn't the bar -- IRW's format not
+  requiring *human* respondents doesn't mean it accepts *any*
+  continuous-measurement table that fits the id/item/resp shape. Script
+  and output deleted. The paper's other 4 SI files were already
+  correctly left out (see original note, since superseded): S2
+  heart-rate/locomotor blocks with unlabeled repeated columns; S3 a wide
+  organ-weight/plasma-metabolite panel with mixed units and a stray
+  units-header row; S4 an elevated-plus-maze table with only 1-2
+  non-derived raw items; S5 a pure statistical-test-result table, not
+  data at all.
+`muller_2016_dog_inhibition` added to `biblio_plos_batch15.csv`.
+
+**Skipped as not-a-fit** (2):
+- "Design and psychometric evaluation of schools' resilience tool..."
+  (`10.1371/journal.pone.0253906`): an 11-expert content-validity-index
+  panel rating 91 items, not respondent survey data -- different genre,
+  too small a rater panel to be useful.
+- "Hurts less, lasts longer"... benzathine penicillin
+  (`10.1371/journal.pone.0302493`): the only quantitative data is a single
+  NRS pain rating repeated across 5 timepoints -- one item, violates the
+  no-single-item-scale rule.
+
+**Second review pass (2026-08-01, same day, ben-domingue): full column-level
+inspection of all 21 remaining deferred candidates.** 13 of the 21 turned
+out to be processable after all with a closer look (several had been
+deferred on first pass purely from shape/title without opening the full
+column list) -- 12 papers processed -> 31 more tables
+(`biblio_plos_batch15.csv` was 55 rows total at this point; see the later
+"Correction" note above for the mouse-temperature table that was added
+then removed, bringing the final count to 54):
+- `wu_2024_proactive_personality`/`_resilience`/`_self_control`/
+  `_video_addiction` (`0312597`, N=560): 4 clean column-prefix blocks
+  (A/B/C/D), construct names inferred from paper order.
+- `gerber_2022_altruism`/`_self_esteem` (`0276665`, N=256, pre/post
+  wave=1/2): ALT (14i, 0-4) and EST (9i, -2 to 2) blocks shipped; a third
+  20-item TIM/EMO/SOC/ACT block with reverse-worded items and an unclear
+  construct name was NOT shipped -- needs the paper.
+- `pakseresht_2021_gmfood_risk_ranking` (`0252580`, N=535): only the
+  clean 4-item risk-dimension ranking task shipped; the file's
+  scenario-contingent sub-item ratings and inconsistent-scale
+  responsibility-allocation items were left out (needs the paper to
+  interpret the randomized scenario-assignment design safely).
+- `fadhliah_2022_disaster_media_trust` (`0264089`, N=75): 8 named-channel
+  rating items shipped from S1; S2 (all-`Unnamed:` columns, no real
+  headers) not shipped.
+- `kowal_2021_kidney_donor_body_image` (`0249397`, N=25): 35-item body-image
+  questionnaire; a 9999 sentinel value in 3 items filtered as missing.
+- `chuang_2018_disease_checklist` (`0194178`, N=60): 10-item binary
+  chronic-disease checklist (not the paper's main outcome scale, which
+  isn't in this file); constant-zero `disease3` dropped.
+- `qiang_2025_red_tape`/`_ne_scale`/`_job_performance`/`_surface_acting`/
+  `_job_dissatisfaction`/`_coping`/`_workplace_friendship`/
+  `_abusive_supervision` (`0327359`, N=396): 8 tables -- 2 column-code
+  blocks (RE, NE) plus 6 more scales split from the file's own numbered,
+  fully-worded item text (17-42 in the original questionnaire); item 35's
+  Chinese-language duplicate of item 36 dropped, single-item column 42
+  (daily overtime) not shipped, and an ambiguous duplicate `CO`-prefixed
+  8-column block left out.
+- `yoshimura_2026_es_scale`/`_isu_scale`/`_psych_safety` (`0346791`,
+  N=522): 3 column-prefix blocks; `ps3m` confirmed as psychological
+  safety by both its prefix and the paper's own construct naming.
+  `retain_care`/`retain_general` (single-item outcomes) not shipped.
+- `wijesinghe_2025_sustained_agile_usage` (`0316538`, N=391): only the
+  SAU (Sustained Agile Usage) block shipped, matching the paper's
+  headline construct by name; ~10 other 2-5-letter-coded blocks in the
+  same file are mostly single-item or unlabeled and were left out.
+- `bartoli_2022_badge_notifications` (`0270888`, N=1009): item = named
+  app, resp = badge-notification enablement (0/100 binary encoding, left
+  as-is).
+- `fatima_2025_mslq` (`0319763`, N=349): the 81-item MSLQ from
+  `S1_Dataset`; `S1_Appendix` (8-expert CVI panel, same small-panel genre
+  as other skips) not shipped.
+- `wang_2026_perceived_usefulness`/`_teaching_presence`/
+  `_technology_anxiety`/`_attitude`/`_behavioral_intention` (`0346229`,
+  N=500): standard TAM battery, 5 clean column-prefix blocks.
+- `rodriguezmuniz_2016_washback_survey` (`0167544`, N=51): 17-item teacher
+  survey; open-text `OA1-OA6`/`Remarks` columns not shipped.
+
+**Confirmed as not-a-fit** (1 more): HK animal-assisted humane education
+SEL study (`0249033`, N=110) -- the `Prosocial_T0/T1/T2` etc. columns'
+value ranges (e.g. 6-25) confirm they're derived subscale sum scores, not
+raw items; the paper's actual raw item data isn't in this file.
+
+**Still deferred** (7 of the 21, genuinely needs more time or the source
+paper): PMO strategic-plans survey (`0306702`, N=303, 9 distinct Likert
+blocks with no item text or construct labels -- needs the paper to name
+them safely); kinesthetic-robot-programming curricula study (`0294786`,
+N=28, 6 bundled SI files with per-task workload/confidence deltas,
+custom multi-file logic needed); WFH/hybrid-workplace-flexibility
+preference study (`0348206`, N=751, 335 columns with conditional/
+skip-logic sparsity, needs dedicated time to understand the Qualtrics
+structure); Thailand migrant-worker discrimination/violence study
+(`0300388`, N=494, cryptic q-number columns, most of the q75-124 range
+didn't even reach 50% non-missing in this pass -- needs a codebook);
+medicinal-plants naturalistic-memory study (`0214300`, N=200, unclear
+whether rows are individual respondents or already-aggregated citation
+counts -- needs verification); PROMPTa writing-skills assessment study
+(`0337342`, N=46, messy duplicate-column two-cohort structure with
+P/M/E-suffixed rubric dimensions, needs untangling); learning-emotion
+offline-environment study (`0294407`, N=128, item values run into the
+hundreds, inconsistent with individual Likert responses -- likely
+corpus-level word-frequency counts, not per-respondent data, probably
+not a fit at all). `plos_batch15_triage.csv` still holds these 7 rows.
+
+**Non-human candidates revisited across past batches (2026-08-01,
+prompted by the batch-15 dog/mouse correction above):** searched
+`BATCH_LOG.md` for prior "animal"/non-human skips.
+- Batch 13's archerfish symbol-value-discrimination study
+  (`10.1371/journal.pone.0174044`) was skipped with the reasoning
+  "non-human subjects (fish), out of IRW's scope" -- re-opened and
+  confirmed still not worth shipping, but for a different reason: its
+  only SI file is a 12-row per-fish shot-count summary (3 shape-choice
+  counts + a derived total), too thin and already session-aggregated to
+  be a meaningful raw item-response table. The "out of scope" framing was
+  wrong; the thinness/aggregation judgment stands.
+- Batch 11's "Personality predicts dispersal and settlement" mesocosm
+  dataset (figshare 32605179) was skipped as "animal behavioral ecology
+  data... not human item responses" -- re-opened, and one file
+  (`models_all_data_FIN.csv`) turned out to be a genuine repeated-trial
+  personality assay (activity/bite-count/time-vigorous x2 trials each,
+  N=79 fish, continuous) rather than the spatial/temporal territory-
+  tracking data in the deposit's other 5 files. Shipped briefly as
+  `gismann_2026_fish_personality`, then **removed same-day (ben-domingue
+  call, 2026-08-01)**: the `time_vigorous_s_{1,2}` items are a
+  response-time-like measure (seconds spent in a behavioral state) mixed
+  into the same `resp` column as the count/index items (`bites`,
+  `activity`) -- IRW convention keeps response time in its own `rt`
+  column rather than folding it into `resp` as if it were an ordinary
+  item. Dropped rather than restructured (e.g. splitting `time_vigorous`
+  into a proper `rt` column against a 2-item `bites`/`activity` table),
+  per ben-domingue's simplicity call. Script and output deleted. Still
+  correctly excludes the deposit's other 5 tracking files, per the
+  original re-examination.
+No other animal/non-human skips found in `BATCH_LOG.md`'s history beyond
+this and the archerfish case above.
+
+**QC follow-up (2026-08-01, ben-domingue): value-semantics checks on the
+non-human/edge-case tables.**
+- `komura_2026_mdmt_reliable`/`_capable`/`_ethical`/`_sincere` (MDMT,
+  Multi-Dimensional Measure of Trust): resp=0 confirmed valid, not a
+  missing/sentinel code. Per-item value counts form a smooth, contiguous,
+  roughly unimodal distribution from 0 up through 7 (e.g. `mdmt_capable_1`:
+  {0:2, 1:3, 2:11, 3:22, 4:31, 5:33, 6:32, 7:14}) -- a sentinel code would
+  show up as an isolated spike disconnected from the natural distribution,
+  not a smooth left tail. Consistent with MDMT's published 0("Not at
+  all")-7("Extremely") response format. A few items (`capable_4`,
+  `ethical_3/4`, `sincere_*`) simply had no 0 responses in this N=148
+  sample -- sampling variation, not evidence of a different scale.
+- `muller_2016_dog_inhibition`: resp=0 confirmed valid -- standard
+  cylinder/detour-task scoring (0 = direct/no-inhibition approach, 1 =
+  partial detour, 2 = full successful detour on first attempt), occurring
+  10/1/4 times across the 3 trials respectively, not an isolated fluke.

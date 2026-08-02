@@ -29,12 +29,12 @@ SUBSCALES = {
         "items": [f"mem{i}" for i in range(1, 6)],
     },
     "language": {
-        "cols":  list(range(14, 19)),
-        "items": [f"lang{i}" for i in range(1, 6)],
+        "cols":  list(range(14, 18)),
+        "items": [f"lang{i}" for i in range(1, 5)],
     },
     "logical_thinking": {
-        "cols":  list(range(19, 22)),
-        "items": [f"log{i}" for i in range(1, 4)],
+        "cols":  list(range(18, 22)),
+        "items": [f"log{i}" for i in range(1, 5)],
     },
 }
 

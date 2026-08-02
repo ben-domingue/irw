@@ -3,6 +3,45 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **PLOS ONE batch 15 — `automated_finding/human_review_plos_batch15.csv`**
+  (144 rows) pasted into the "Human eye" sheet (confirmed 2026-08-01,
+  ben-domingue); file gone from disk as expected. See `BATCH_LOG.md`'s
+  "PLOS ONE batch 15" entry.
+
+- [ ] **PLOS ONE batch 15 — `automated_finding/plos_batch15_worthretrying.csv`**
+  (96 rows: 94 `worth_retrying` + 2 `recoverable_format`) staged, needs a
+  hand-review pass (same process as prior batches' worth_retrying
+  backlog). See `BATCH_LOG.md`'s "PLOS ONE batch 15" entry.
+
+- [x] **PLOS ONE batch 15 — `automated_finding/biblio_plos_batch15.csv`**
+  (53 rows) uploaded to Redivis and pasted into the dictionary sheet
+  (confirmed 2026-08-01, ben-domingue); file and all 53
+  `irw_output/*.csv` files gone from disk as expected. All 26
+  non-duplicate `good` candidates from batch 15 were reviewed in two
+  passes: 23 papers processed -> 53 tables total. Includes 1
+  non-human-subject table (`muller_2016_dog_inhibition`) included on
+  reconsideration since IRW's id/item/resp format doesn't require human
+  respondents. Two other non-human candidates were added then removed
+  same-day: `fushuku_2023_mouse_temperature` (ben-domingue catch,
+  2026-08-01: physiological/biomarker measurement, not a response to any
+  item/stimulus) and `gismann_2026_fish_personality` (ben-domingue call,
+  2026-08-01: mixed a response-time-like measure -- seconds spent in
+  vigorous movement -- into the same resp column as count/index items;
+  IRW convention keeps response time in its own `rt` column rather than
+  as an item, so dropped rather than restructured, for simplicity). See
+  `BATCH_LOG.md`'s "PLOS ONE batch 15" entry (both passes) for full
+  per-dataset detail.
+
+- [ ] **PLOS ONE batch 15 — 7 candidates still genuinely deferred**
+  (PMO strategic-plans survey, kinesthetic-robot-programming curricula,
+  WFH/hybrid-workplace-flexibility preferences, Thailand migrant-worker
+  discrimination/violence, medicinal-plants naturalistic-memory,
+  PROMPTa writing-skills, learning-emotion offline-environment) — each
+  needs either the source paper/codebook or dedicated untangling time.
+  See `BATCH_LOG.md`'s "PLOS ONE batch 15" entry (second review pass) for
+  per-candidate reasons. `plos_batch15_triage.csv` still holds these 7
+  rows.
+
 - [x] **`biblio_worthretrying_sweep_20260801.csv` (32 rows) uploaded/
   pasted** (confirmed 2026-08-01, ben-domingue): the 10 papers / 32
   tables from the PLOS worth_retrying backlog sweep (see `BATCH_LOG.md`
