@@ -1,45 +1,45 @@
-# IRW table-name consistency audit -- 2026-07-28
+# IRW table-name consistency audit -- 2026-08-02
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
-Dictionary sheets skipped (--skip-dict).
+Dictionary sheets included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (185 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (88 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
-| cricket | comp |  |  | 1 |  |  |
-| debate | comp |  |  | 1 |  |  |
-| epl_matches_2021-2022 | comp |  |  | 1 |  |  |
-| league_of_legends | comp |  |  | 1 |  |  |
-| mlb_baseball | comp |  |  | 1 |  |  |
-| nhl_hockey | comp |  |  | 1 |  |  |
-| anthropomorphism_health_voropaeva_2026 | core |  |  | 1 |  |  |
-| chen_2019_cdrsc | core |  |  | 1 |  |  |
-| chen_2019_csq | core |  |  | 1 |  |  |
-| chinvararak_2021_bdi | core |  |  | 1 |  |  |
-| chinvararak_2021_ecr | core |  |  | 1 |  |  |
-| chinvararak_2021_phq15 | core |  |  | 1 |  |  |
-| chinvararak_2021_ssq | core |  |  | 1 |  |  |
-| chinvararak_2021_ylseq | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-1-4849 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-14548-19396 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-19397-24245 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-24246-29094 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-29095-33943 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-33944-38790 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-4850-9698 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100101-9699-14547 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100102-1-141 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100103-1-1479 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100104-1-254 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100104-1286-2448 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100104-255-1285 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100105-1-2450 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100105-2451-3888 | core |  |  | 1 |  |  |
-| covid19risktool_peters_2025_100106-1-439 | core |  |  | 1 |  |  |
-_...and 155 more, see the .txt or .csv._
+| racialsocialnormsbrazilianstudents_portella_2022 | core |  |  | 1 |  |  |
+| su_2024_isi | core |  |  | 1 |  |  |
+| su_2024_phq9 | core |  |  | 1 |  |  |
+| su_2024_pss14 | core |  |  | 1 |  |  |
+| cricket | comp |  | 1 | 1 |  |  |
+| debate | comp |  | 1 | 1 |  |  |
+| epl_matches_2021-2022 | comp |  | 1 | 1 |  |  |
+| league_of_legends | comp |  | 1 | 1 |  |  |
+| mlb_baseball | comp |  | 1 | 1 |  |  |
+| nhl_hockey | comp |  | 1 | 1 |  |  |
+| anthropomorphism_health_voropaeva_2026 | core |  | 1 | 1 |  |  |
+| condon_2024_sapa_personality | core |  | 1 | 1 |  |  |
+| daiku_2021_dirty_dozen | core |  | 1 | 1 |  |  |
+| daiku_2021_lie_scale | core |  | 1 | 1 |  |  |
+| daiku_2021_lying_frequency | core |  | 1 | 1 |  |  |
+| dolzdelcastellar_2021_faces | core | 1 |  |  | 1 |  |
+| gumus_2025_dietarian_identity | core |  | 1 | 1 |  |  |
+| horiuchi_2024_attachment | core |  | 1 | 1 |  |  |
+| horiuchi_2024_dissociation | core |  | 1 | 1 |  |  |
+| horiuchi_2024_rsmsm | core |  | 1 | 1 |  |  |
+| jimenezherrera_2022_moral_sensitivity | core |  | 1 | 1 |  |  |
+| machado_2020_cat_separation | core |  | 1 | 1 |  |  |
+| pavic_2022_healthcare_trust | core |  | 1 | 1 |  |  |
+| pavic_2022_natural_immunity | core |  | 1 | 1 |  |  |
+| pavic_2022_science_literacy | core |  | 1 | 1 |  |  |
+| pavic_2022_vaccine_conspiracy | core |  | 1 | 1 |  |  |
+| su_2024_gad7 | core |  | 1 | 1 |  |  |
+| tuason_2021_covid_coping_enjoy | core |  | 1 | 1 |  |  |
+| tuason_2021_loneliness_emotional | core |  | 1 | 1 |  |  |
+| tuason_2021_loneliness_social | core |  | 1 | 1 |  |  |
+_...and 58 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 

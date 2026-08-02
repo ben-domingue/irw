@@ -130,8 +130,8 @@ getrows<-function(l) {
     ##remove nonpublic elements before calling ChatGPT
     new_data_rows <- new_data_rows[!new_data_rows$table %in% irw_notpub$table,]
     new_data_rows <- new_data_rows |>
-    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`) |>
-    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
+    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`, `Derived License`) |>
+    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`, Derived_License=`Derived License`)
     new_data_rows <- new_data_rows %>%
         mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
     new_data_rows <- generate_bibtex(new_data_rows)

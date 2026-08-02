@@ -32,6 +32,13 @@ def load(path: Path, key: str) -> pd.DataFrame:
     if key not in df.columns:
         raise SystemExit(f"key column '{key}' not found in {path} (columns: {list(df.columns)})")
     df["_key"] = df[key].astype(str).str.strip().str.lower()
+    n_before = len(df)
+    dup_keys = df.loc[df["_key"].duplicated(), "_key"].unique().tolist()
+    if dup_keys:
+        df = df.drop_duplicates(subset="_key", keep="first")
+        print(f"   ! {path.name}: dropped {n_before - len(df)} duplicate-key row(s) before diffing "
+              f"(source CSV had >1 row for the same '{key}', e.g. {dup_keys[:5]}) "
+              f"-- check the upstream source (Google Sheet fetches have been flaky today)")
     return df.set_index("_key", drop=True)
 
 

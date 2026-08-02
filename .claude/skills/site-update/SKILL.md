@@ -1,13 +1,18 @@
 ---
 name: site-update
-description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, hero_stats.json), or to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", or "which tables are missing from the dictionary/tags/biblio".
+description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
 # IRW Site/Metadata Update
 
-Two workflows over the `metadata/` pipeline (`ben-domingue/irw`, this repo). Both
-**call the actual numbered R scripts in `metadata/`** — this skill never
-reimplements their logic, only orchestrates them and reports what changed.
+Three workflows over the `metadata/` pipeline (`ben-domingue/irw`, this repo).
+Workflows 1 and 2 **call the actual numbered R scripts in `metadata/`** — this
+skill never reimplements their logic, only orchestrates them and reports what
+changed. Workflow 3 is this skill's own script (`upload_meta.py`) — there's no
+existing numbered script to call, since uploading was previously a manual,
+out-of-scope step (see `data/add2redivis/upload.py` for the sibling script
+this was modeled on, which does the equivalent for the actual IRW data tables
+rather than the metadata tables).
 Everything here works from the repo root; the numbered scripts themselves
 expect to run with `metadata/` as the working directory (matching their
 existing convention, e.g. `09_hero_status.R`'s docstring).
@@ -50,11 +55,11 @@ script-by-script writeup this was built from:
   interactively — fine in a foreground run, don't run that stage unattended
   without it set). R packages: `redivis`, `gsheet`, `dplyr`, `tidyr`,
   `tibble`, `httr`, `glue`, `progress`, `jsonlite`, `purrr`, `readr`, `irw`.
-- **Nothing here uploads to Redivis.** Every numbered script just writes a
-  local CSV/JSON. Getting that data into the actual `irw_meta:bdxt` Redivis
-  tables is a separate, manual step outside this skill's scope — don't
-  attempt it, and don't tell Ben something was "uploaded" when it was only
-  regenerated locally.
+- **Workflows 1 and 2 never upload to Redivis.** Every numbered script just
+  writes a local CSV/JSON, and the audit only reads. Don't tell Ben something
+  was "uploaded" when it was only regenerated or read locally — that's what
+  Workflow 3 is for, and it's a distinct, explicit action (see below), never
+  an automatic side effect of running 1 or 2.
 - **Never silently overwrite.** Workflow 1 always snapshots before running
   and diffs after — if you're ever tempted to skip the diff step to save
   time, don't; that diff is the whole point (see "Safeguards" below for why
@@ -171,6 +176,60 @@ it.
 
 `04_tables.R`'s exact QC role alongside this audit is still to be worked out
 with Ben — don't assume this replaces it outright.
+
+## Workflow 3 — Upload the regenerated CSVs to Redivis
+
+**Prerequisite: run workflow 1 first, in the same directory, and review its
+diff output.** This is the manual-merge step workflows 1/2's docs used to
+describe as entirely out of scope — it's now in scope, as its own explicit,
+confirmed action, added 2026-08-02.
+
+```bash
+cd metadata
+python3 ../.claude/skills/site-update/scripts/upload_meta.py            # all known files present in cwd
+python3 ../.claude/skills/site-update/scripts/upload_meta.py biblio tags # only these
+python3 ../.claude/skills/site-update/scripts/upload_meta.py --dry-run  # show the plan, upload nothing
+python3 ../.claude/skills/site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
+```
+
+What it does: for each known local CSV present (`metadata.csv` → table
+`metadata`, `biblio.csv` → `biblio`, `tags.csv` → `tags`,
+`comps_biblio.csv`/`nominal_biblio.csv`/`simsyn_biblio.csv` →
+`comps_biblio`/`nominal_biblio`/`simsyn_biblio`, `simsyn_metadata.csv` →
+`simsyn_metadata`, `comps_metadata.csv`/`nominal_metadata.csv` →
+`comps_metadata`/`nominal_metadata` — these last two are almost never present
+since `05`/`06` are excluded/broken, see `TODO.md`), it fully replaces that
+table's data on `redivis.user("bdomingu").dataset("irw_meta", version="next")`
+— a **draft** version. `hero_stats.json` is deliberately not in this list;
+it isn't a Redivis table, it goes to the separate `irw_site` repo.
+
+**Nothing is live after this runs.** `version="next"` writes to a draft —
+review and publish it by hand on the Redivis site afterward. This mirrors
+`data/add2redivis/upload.py`'s existing pattern for the IRW data tables
+themselves.
+
+**Credentials are deliberately separate from workflow 1/2's token.**
+`~/.redivis_api_token` (used by `run_pipeline.sh`/`audit_tables.R`) is
+read-only — confirmed 2026-08-02, every table in `irw_meta` returned `403
+insufficient_scope: data.edit` when tested. `upload_meta.py` instead reuses
+the write-scoped token already sitting in `data/add2redivis/.env` (loaded via
+`python-dotenv`, resolved by path — never read or echoed directly). If that
+token ever needs rotating, do it in that one `.env` file; don't invent a
+second write-scoped token file for this script alone.
+
+Before replacing a table, it lists that table's existing uploads and warns if
+there's more than one upload name present — `replace_on_conflict` only
+replaces the upload named after the table itself, so a stray differently-named
+upload left over from manual work would silently survive a "replace" and
+could leave stale rows. This is a warning, not an auto-fix — investigate on
+the Redivis site rather than assuming the warning is spurious.
+
+**Run for real end-to-end for the first time on 2026-08-02** — all 7 present
+files (`metadata`, `biblio`, `tags`, `comps_biblio`, `nominal_biblio`,
+`simsyn_biblio`, `simsyn_metadata`) uploaded cleanly to the `next` draft with
+no stray-upload warnings on any table. Ben still needs to review and publish
+that draft version on the Redivis site by hand — this script never does that
+part.
 
 ## Safeguards (read before generating anything that resembles a description)
 

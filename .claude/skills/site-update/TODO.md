@@ -1,5 +1,64 @@
 # site-update TODO
 
+## biblio.csv: 182 rows still have Derived_License=NA (bug fixed + backfilled 2026-08-02, 2 remaining sub-issues)
+
+`02_biblio.R`'s `getrows()` built new biblio rows via a `select()` that never
+included the dictionary's `Derived License` column at all (line ~132-134) --
+every row it ever added got `Derived_License` filled with `NA` by
+`bind_rows()`, regardless of whether the dictionary had a real license value.
+Confirmed 2026-08-02: 1,878 of 2,833 rows (66%) in `biblio.csv` had `NA`
+there. Not a licensing-verification gap (per `feedback_license_verification`
+-- the license IS checked upstream before a dataset is processed) -- purely
+a reporting gap in this one column. **Fixed going forward**: `select()` now
+includes `` `Derived License` ``, renamed to `Derived_License`.
+
+**Backfilled 2026-08-02** via a one-off join of `biblio.csv`'s `table`
+against the dictionary sheet's `table`/`Derived License` columns (a plain
+re-run of `02_biblio.R` would NOT have fixed these -- its match logic only
+reprocesses rows that are new-to-biblio or missing `BibTex`, so an
+already-populated `Derived_License=NA` row never qualifies). 1,690 of 1,872
+NA rows filled. 182 remain, in two different buckets:
+
+1. **6 rows with no dictionary entry at all**: `su_2024_isi`, `su_2024_phq9`,
+   `su_2024_pss14`, `racialsocialnormsbrazilianstudents_portella_2022`,
+   `wvs_panasiuk_security`, `wvs_panasiuk_science`. Same orphan-biblio shape
+   as the `liang_2026`/`ren2019` case resolved earlier this session (biblio
+   row exists with no backing dictionary row) -- not yet investigated for
+   these 6 specifically.
+2. **176 rows where the dictionary row exists but its own `Derived License`
+   cell is blank too** (e.g. the `heekerens2025_*`, `parenting_anunciacao_2025_*`
+   families) -- a gap in the dictionary sheet itself, not fixable from
+   `biblio.csv`'s side. List not yet compiled/handed to Ben.
+
+## 01_metadata.R re-pulls variable lists for every table, every run (found 2026-08-02)
+
+Observed live: a plain `run_pipeline.sh` default run sat in `01_metadata.R`
+for 45+ minutes with an active Redivis socket and low steady CPU -- not
+hung, just slow. Traced to two separate loops in the file that behave very
+differently:
+
+- Lines 19-130 (`f()`, the per-table stats: `n_responses`, `n_categories`,
+  `n_participants`, `n_items`, density, etc.) *does* reuse correctly -- it's
+  only called for `new.tables[!toadd]`, i.e. tables not already present in
+  the `metadata.csv` pulled from the live `irw_meta:metadata` Redivis table.
+- Lines 142-157 (`table_vars_df`, the per-table variable-name listing used
+  for the `longitudinal` flag) does **not** reuse anything -- it loops over
+  every table in `unique(summaries$dataset)` (old + new alike, ~2000+ table
+  and growing) and calls `table$list_variables()` on each one, every single
+  run, regardless of whether that table's row already exists in `meta`. It
+  also redundantly re-calls `ds$list_tables()` per dataset even though the
+  identical result was already fetched into `tables` at line 22.
+
+**Recommended fix:** thread the same `toadd`/`old.tables` reuse logic through
+the variable-listing loop -- only fetch `list_variables()` for tables in
+`new.tables[!toadd]`, and carry forward the previously-fetched `variables`
+string for every other table (it doesn't change once a table is live, so
+there's no correctness reason to redo it). Don't touch this without
+confirming with Ben first, same as 05/06 below -- worth checking whether
+`variables` is ever expected to change for an existing table (e.g. a
+hotfix editing an already-shipped table) before assuming it's safe to
+skip unconditionally.
+
 ## Discuss folding 08_itemtext.R into this skill (Ben, 2026-07-28)
 
 Currently explicitly out of scope (see SKILL.md and `references/pipeline.md`)
