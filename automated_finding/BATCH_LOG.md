@@ -4514,3 +4514,391 @@ non-human/edge-case tables.**
   cylinder/detour-task scoring (0 = direct/no-inhibition approach, 1 =
   partial detour, 2 = full successful detour on first attempt), occurring
   10/1/4 times across the 3 trials respectively, not an isolated fluke.
+
+## PLOS ONE batch 15 — final resolution of the 7 deferred candidates (2026-08-02)
+
+Re-examined all 7 with the same full-column inspection method; 5 turned
+out processable, 2 genuinely need a person. `biblio_plos_batch15_deferred.csv`
+(17 rows, 5 papers) and `human_review_plos_batch15_deferred.csv` (2 rows)
+staged.
+
+**Processed** (5 papers -> 17 tables):
+- `sandhu_2024_pmo_q13`/`_q16`/`_q18`/`_q19`/`_q20`/`_q21`/`_q22`/`_q23`/
+  `_q24`/`_q26`/`_q32` (`0306702`, N=303): 11 distinct 1-5 Likert blocks
+  shipped under their raw Qualtrics codes (no item text/construct labels
+  in the file), same generic-naming treatment already used for `qiang_
+  2025_ne_scale`/`yoshimura_2026_es_scale` etc. in this batch. Real
+  per-block N variation consistent with skip logic (193-260 respondents
+  per block out of 303).
+- `ajaykumar_2023_nasa_tlx`/`_experience` (`0294786`, N=27): the standard
+  NASA-TLX (6 items) and a 5-item prior-experience block, pulled out of
+  the paper's 6 bundled SI files -- the other 4 (per-task unsuccessful-
+  demo counts, task times, suboptimality/force-torque deltas, body-part
+  interaction counts) are derived/per-condition metrics, not a clean item
+  set, and stay unshipped.
+- `chuemchit_2024_partner_violence`/`_nonpartner_violence` (`0300388`,
+  N=405/494): re-examination found 2 clean, clearly-named 5-item binary
+  scales (violence by type: economic/cyber/psychological/physical/
+  sexual) hiding among the ~65 cryptic q-number columns that caused the
+  original defer -- the missingness pattern in the partner-violence items
+  (89/494 NaN) is consistent with legitimate skip logic (only asked if
+  the respondent had a partner in the past 12 months), not a data
+  problem. The cryptic q-columns themselves remain unshipped.
+- `dasilva_2019_medicinal_plants` (`0214300`, N=200): confirmed the
+  `Code` column is an individual respondent identifier (e.g. "1F21" =
+  subject 1, female, 21yo), resolving the original uncertainty. resp is
+  0 (not mentioned) or a 1-15 order-of-mention code from a free-list
+  salience task -- the value range exactly matching the item count
+  supports the rank-order reading over a count/binary one.
+- `puro_2025_prompta_writing` (`0337342`, N=46): shipped only the
+  simpler of the file's two side-by-side column blocks for the same 46
+  students (Pre Test, 9 per-round task scores, Post Test); the second
+  block's P/M/E-suffixed columns are consistently higher-valued and
+  their exact meaning (different rubric? different rater?) isn't
+  documented in the file, so left unshipped.
+
+**Human review** (2, `human_review_plos_batch15_deferred.csv`):
+- WFH/hybrid-workplace-flexibility preference study (`0348206`, N=751):
+  335 columns with extensive Qualtrics conditional/skip-logic sparsity --
+  needs dedicated time to map the branching structure, not a quick
+  column-prefix read.
+- Learning-emotion offline-environment study (`0294407`, N=128): item
+  values run into the hundreds (e.g. "Joy" up to 663), inconsistent with
+  any individual Likert/rating response -- looks like corpus-level
+  word-frequency counts from automated text analysis rather than raw
+  per-respondent item data; needs a person to confirm against the paper
+  before it could ever be shipped.
+
+## PLOS ONE batch 15 — resolution of the 96-row worth_retrying/recoverable_format pool (2026-08-02)
+
+Full per-row disposition of `plos_batch15_worthretrying.csv` (94
+`worth_retrying` + 2 `recoverable_format`). Re-fetched and inspected every
+row's SI file at the column level (not just the retriage reason string).
+
+**Duplicates caught** (2, not reprocessed): `10.1371/journal.pone.0206800`
+(MSCS) already shipped as `trevisan_2018_mscs` (batch 9's QC-catch entry);
+`10.1371/journal.pone.0230331` (Self-Image Scale) already shipped as
+`brederecke_2020_self_image`. Same DOI-exclusion-staleness pattern as the
+Liu duplicate caught earlier in this batch.
+
+**Processed** (13 papers -> 74 tables, `biblio_plos_batch15_worthretrying.csv`):
+- `dasilva_2018_mbds`/`_bsq`/`_whoqol`/`_phcs`/`_tfeq` (`0199480`, N up to
+  2096): 5 validated instruments (item subsets) bundled in one file --
+  MBSRQ-style body-areas items, Body Shape Questionnaire, WHOQOL-BREF,
+  Perceived Health Competence Scale, Three-Factor Eating Questionnaire.
+- `wang_2024_emotion1`-`5` (`0303965`, N=1460): 5 achievement-emotion
+  subscales, unlabeled construct names (no item text in file).
+- `jiang_2024_*` (`0312338`, N=707): **21 tables** from one file -- a
+  huge bundle of column-prefix-coded subscales (student thriving/
+  institutional integrity/growth mindset/campus-involvement domains).
+  Item columns held **text-coded 7-point Likert responses in Chinese**
+  (不同意/同意/有些同意/etc.) -- recoded 1-7 via an explicit map. This
+  and the `an_2020`/`huang_2023`/`chen_2021` recodes below are new
+  non-English text-Likert cases beyond the English ones `SKILL.md`
+  already documents.
+- `jablonska_2020_instagram_addiction`/`_profile_grooming`/
+  `_upward_comparison`/`_downward_comparison`/`_rses`/`_hads`/`_swls`
+  (`0229354`, N=974): text-coded English 7-point Likert recoded; the
+  54-item battery split cleanly by full item-text content into 7 scales,
+  three of them recognizable validated instruments (Rosenberg Self-Esteem
+  Scale, an HADS-style anxiety/depression set, Satisfaction With Life
+  Scale).
+- `yu_2025_mobile_addiction`/`_bedtime_procrastination`/
+  `_physical_activity` (`0331340`, N=376, 3 waves T0/T1/T2): raw items
+  for all 3 scales, "Average score" columns (derived) excluded.
+- `huang_2023_b_scale`/`_c_scale`/`_d_scale`/`_e_scale` (`0290452`,
+  N=631): 4 column-prefix blocks; the c (binary) and e (4-point) blocks
+  each had a handful of out-of-range values (22/44/11/33 etc.) on
+  otherwise strictly-bounded items -- a digit-duplication data-entry
+  pattern (e.g. "2" mistyped as "22") -- filtered.
+- `wesselmann_2018_drri`/`_social_support`/`_pcl`/`_trait_anxiety`/
+  `_state_anxiety`/`_needs`/`_distress`/`_ostracism`/`_msp` (`0208438`,
+  N up to 128): **9 tables**, no usable id column in the file (row index
+  used instead) -- includes a raw PTSD Checklist (PCL-20) and a
+  Multidimensional Scale of Perceived Support. `*R`-suffixed
+  reverse-coded duplicate columns and derived composite totals excluded.
+- `an_2020_efl_self_regulated` (`0240094`, N=525): 49-item scale. The
+  SPSS export kept numeric string codes for the Likert midpoints (2-6)
+  but exported the two endpoint labels as Chinese text that had been
+  mis-decoded as Latin-1 (recovered via
+  `.encode('latin1').decode('gb18030')`) -- a new failure mode worth
+  remembering for future non-English `.sav` files with partially-corrupt
+  value labels. Q51 (values up to 197, not part of the 1-7 scale)
+  excluded.
+- `chen_2021_acculturation`/`_enculturation` (`0258323`, N=310): 2
+  24-item subscales, text-coded English frequency Likert ("never" ...
+  "always") recoded 1-5.
+- `avilatamayo_2022_empl_stab`/`_work_envir`/`_skills_dev`/`_workf_div`/
+  `_work_life` (`0266711`, N=433): 5 named CSR subscales, text-coded
+  7-point Likert recoded; a stray non-integer value (4.368159) appearing
+  alongside the text categories looked like a mean-imputed substitute for
+  missing responses and was dropped.
+- `shan_2020_pd`/`_hs`/`_ph`/`_f`/`_cs`/`_g` (`0240103`, N=202): 6
+  column-prefix blocks, text-coded 5-point agreement Likert recoded.
+- `kokoszka_2022_soc`/`_hamd`/`_zjn`/`_who5`/`_paid` (`0263766`,
+  semicolon-delimited, N=100): 5 named validated instruments (Sense of
+  Coherence, Hamilton Depression Rating Scale, WHO-5, Problem Areas In
+  Diabetes) bundled in one file. SOC block had a `99` sentinel/missing
+  code (isolated single occurrences on an otherwise 1-5 scale) -- filtered.
+- `rodriguezquiroga_2024_epistemic_trust` (`0311352`,
+  semicolon-delimited, N=1018): 15-item Epistemic Trust, Mistrust, and
+  Credulity Inventory.
+
+All 74 tables passed the standard per-item degenerate/rare-value scan
+(no flags).
+
+**Confirmed skip, not a fit** (11): systematic-review/scoping-review
+datasets where rows are papers or measures, not people (`0305567`
+teleworking, `0311889` dance, `0338521` personality-measures) --
+`0256497` (all open-text feedback, no Likert items) -- `0229138`,
+`0163281`, `0276734` (pure aggregated/descriptive-statistics summary
+tables, not respondent-level data) -- `0315442` (expert-panel
+content-validity table, same genre as the earlier schools'-resilience-
+tool/MSLQ-appendix skips) -- `0269012` (demographics only, qualitative
+study) -- `0343308` (item-development/factor-loading meta-table, not
+respondent data) -- `0344768` (N=9 scenario-summary table, not real
+per-respondent data).
+
+**Human review** (45 rows, `human_review_plos_batch15_worthretrying.csv`):
+mostly datasets whose numeric columns turned out to be derived composite/
+subscale totals rather than raw items (confirmed by column-name/value-
+range inspection, e.g. named `*_score`/`*Total`/`*Scale` columns with
+in-range-but-clearly-pre-aggregated values), plus a handful of
+structurally ambiguous or overly complex cases (dyadic Z-scored data,
+1086-column multi-rater/multi-wave personality battery, video-level
+rather than person-level units of analysis, thin single-item-only files).
+Full per-row reasons are in the conversation record for this session;
+each needs a person with more time or the source paper, not further
+automated inspection.
+
+**Confirmed structurally good, not yet scripted** (25 -- an explicit,
+tracked follow-up, distinct from human_review since these don't need
+human judgment on fit, just scripting time): `0247993` (elderly social
+support network composition, Slovenia), `0207458` (interpersonal justice
+climate, 32 items, text-Likert), `0214914` (patient safety climate, 33
+items), `0189592` (Vienna brachial-plexus psychosocial, binary C/D/E item
+blocks only), `0242902` (health mindsets/protective behaviors), `0291207`
+(sex-trafficking coping self-efficacy, 10 abuse-type severity items),
+`0228961` (nudging creativity, 6-item pre-scale), `0295514` (luxury
+purchase intention, 30 items, full text), `0237846` (neuroticism +
+smartphone addiction, full text), `0288563` (social support/cognitive
+appraisals, 2 scales), `0273763` (conspiracy thinking, 3 scales incl.
+26-item SCATI), `0323811` (frontline servant leadership, many named
+2-4-letter-coded subscales), `0255445` (carbon-reduction pro-environmental
+behavior, 15 items), `0209845` (children's jealousy/friendship beliefs,
+several scales), `0199924` (entrepreneurial intention Italy), `0283850`
+(entrepreneurial intention Transdanubia, full text), `0201007` (GYPES
+patient empowerment, 15 items), `0338728` (organizational resilience UAE,
+14 items, full text), `0205559` (coaching justice, match-level repeated
+observations), `0236987` (trait creativity/mood, experience-sampling
+data), `0237710` (diabetes medication adherence Ghana), `0252329`
+(couples extrinsic emotion regulation, full text, small N), `0262716`
+(anxiety Bangladesh, 6 raw GAD-7-style items among a huge N=2313), `0270420`
+(dental-learner adaptability, small N=18 but clean), `0310351`
+(cross-cultural acculturation measures, 35+ items). `plos_batch15_worthretrying.csv`
+kept on disk until these are resolved (script or human-review handoff).
+
+## PLOS ONE batch 15 — scripting the 25 confirmed-good candidates (2026-08-02)
+
+Worked through the "confirmed structurally good, not yet scripted" list.
+`biblio_plos_batch15_worthretrying_round2.csv` (66 rows, 24 papers) staged.
+
+**Reclassified on closer inspection** (1): `0252329` (couples extrinsic
+emotion regulation) turned out to be a 23-expert content-validity panel
+(raters' fields: "Methodologist"/"Health Psychology"/etc., responses
+"Suitable"/"Essential") -- not respondent data. Same genre as the other
+CVI-panel skips this batch (schools' resilience tool, MSLQ appendix,
+Delphi table). Not scripted.
+
+**Processed** (24 papers -> 66 tables):
+- `cugmas_2021_elderly_social_support` (`0247993`, N=558): support-
+  network composition by relationship type (count, not binary as
+  originally assumed -- corrected after inspecting the actual value
+  distribution).
+- `pecino_2018_justice_climate`/`_extrarole_wfb` (`0207458`, N=442): the
+  40 "cl"-prefixed columns turned out to span **two different** text-coded
+  6-point scales (confirmed by checking each column's own category set,
+  not just the shared prefix) -- a "how many coworkers" climate scale
+  (items 1-6) and a personal frequency scale (items 7-40) -- shipped as
+  two tables rather than one mixed-scale table.
+- `deilkas_2019_patient_safety_climate` (`0214914`, N=112): 62 of the
+  file's ~74 "Q"-numbered columns share one 5-point agreement scale;
+  the rest (Q2/Q3/Q3a-g: a "Very good"-"Very bad" scale; Q66-74:
+  demographics) were excluded after the same per-column category-set
+  check.
+- `hruby_2018_interview_a`-`_e` (`0189592`, N=8): recovered a second,
+  entirely different table buried in the same sheet below the SF-36/
+  FKB-20 data (a structured-interview scoring block starting at row 21,
+  needing `header=21` to parse) -- 5 binary blocks. With N=8, several
+  items had zero variance across all 8 cases; dropped per-item (each
+  block keeps >=2 items after filtering).
+- `johnhenderson_2020_health_mindset`/`_disinfection_behavior`
+  (`0242902`, N=192): one isolated out-of-range value (11 on a 1-5 item)
+  dropped as a data-entry error.
+- `twis_2024_adverse_experience_types` (`0291207`, N=93): 10 of 11
+  "*Scale"-suffixed columns are themselves the raw per-type severity
+  items (not aggregates, despite the name) -- `CSAbuseScale` (constant
+  0) dropped.
+- `agogue_2020_self_perceived_creativity` (`0228961`, N=200).
+- `majeed_2024_luxury_purchase` (`0295514`, N=267, full item text kept).
+- `petrocchi_2020_neuroticism` (`0237846`, N=160): only the 10-item
+  neuroticism block shipped -- the file's `Smartphone_addiction_*` items
+  were >55% blank (96/160 empty on item 1 alone) and excluded as too
+  sparse to be reliable, a judgment call not caught by the original
+  triage.
+- `gillman_2023_appraisals`/`_pss` (`0288563`, N=412): both blocks had
+  scattered unique-looking fractional values (e.g. 2.227143) on
+  otherwise strictly integer items -- the same mean/interpolation-
+  imputation signature caught earlier in `yang_2026_igd_benefits` --
+  filtered to integers only.
+- `arnulf_2022_conspiracy_thinking`/`_general_knowledge` (`0273763`,
+  N=398): only `CT2` (14i) and `GK` (12i, binary) shipped -- `CT1`'s
+  response cells had the item text itself leaked into them (unusable),
+  and `SCATI` (70i) turned out to be a forced-choice nominal code
+  (SF/MT/MF/ST-style) rather than an ordinal Likert response, so doesn't
+  fit the core standard.
+- `song_2025_ep`/`_sb`/`_ac`/`_fg`/`_co`/`_au`/`_hu`/`_st`/`_sc`/`_lwb`/
+  `_wwb`/`_pwb`/`_pj`/`_cs`/`_er` (`0323811`, N=486): **15 tables** from
+  one file, using a generic column-prefix auto-detection helper (regex
+  `^([A-Za-z]+)(\d+)$`, group by prefix, require >=2 members) -- the
+  same technique paid off again in `idemudia_2025` and had already been
+  used for `jiang_2024_student_thriving` earlier in this batch; worth
+  keeping as a standard first move on any large unlabeled-block file.
+- `singleton_2021_carbon_reduction` (`0255445`, N=106).
+- `lavallee_2019_sseb`/`_oseb`/`_loneliness`/`_jealousy`/`_harmony`/
+  `_cas` (`0209845`, N up to 280): 6 clean baseline scales shipped; the
+  file's scenario-condition blocks (VIG/INT/STB/etc. x4 conditions) and
+  large derived-column tail were not -- needs the paper.
+- `molino_2018_d5_scale`/`_d6_scale` (`0199924`, N=658): text-coded
+  Italian endpoints ("Per niente d'accordo"/"Del tutto daccordo")
+  recoded.
+- `makai_2023_entrepreneurial_transdanubia` (`0283850`, N=144, full
+  item text kept).
+- `acunamora_2018_gypes` (`0201007`, N=273): a 999 sentinel (131/404
+  responses on item 1 alone) filtered as missing.
+- `muir_2025_resilience_opinions`/`_behaviours` (`0338728`, N=70): same
+  per-column category-set check found two different scales under
+  sequential item numbering (opinions: agree/disagree; behaviours:
+  frequency); a handful of combined multi-select cells (e.g. "Agree,
+  Strongly Agree", a checkbox-entry artifact) dropped.
+- `debacker_2018_decisionjustification`/`_justice_appraisal` (`0205559`,
+  N=96, `match_number` used as `wave`).
+- `zhang_2020_trait_creativity_mood` (`0236987`, N=54, experience-
+  sampling, `day` used as `wave`): a duplicate-named `tired`/`tired.1`
+  column pair confirmed NOT to be a read artifact (only 5% value
+  agreement) -- both kept as distinct items.
+- `afaya_2020_general_knowledge`/`_diet_knowledge`/`_monitoring_
+  knowledge`/`_exercise_knowledge`/`_medication_knowledge`/
+  `_footcare_knowledge`/`_complications_knowledge` (`0237710`, N=330):
+  **7 tables**, one per diabetes-knowledge domain.
+- `anjum_2022_gad7` (`0262716`, N=2313): 6 of the 7 standard GAD-7 items
+  (E20 in the file is an intro screening item, not part of the battery).
+- `otaki_2022_dental_adaptability` (`0270420`, N=18, small).
+- `idemudia_2025_d101`/`_e201`/`_s101`/`_s201`/`_s301`/`_t101`/`_t201`
+  (`0310351`, N=329): **7 tables**, same generic prefix-detection
+  approach as `song_2025`; same imputation-fraction pattern as
+  `gillman_2023` found and filtered.
+
+All 66 tables re-scanned after the imputation-fraction and zero-variance
+fixes above -- clean, no remaining flags. Two stale intermediate files
+from mid-fix iterations (`muir_2025_organizational_resilience.csv`,
+`pecino_2018_interpersonal_justice.csv`, both superseded by their
+2-table splits) deleted before finalizing.
+
+**Recurring lesson this round**: several files that looked like one
+mixed-up scale on first pass (`pecino_2018`, `muir_2025`) were actually
+*two* different response scales sharing one column-numbering sequence --
+checking each column's own category set (not just trusting a shared
+name prefix) caught this every time it happened. Worth doing by default
+on any multi-item block before assuming it's a single scale.
+
+## PLOS ONE batch 15 — user adjudication pass on resp/rt semantics (2026-08-02)
+
+Ben spot-checked several tables' actual response semantics; two findings
+required removing tables, one required a script fix.
+
+- **`dasilva_2018_mbds`/`_bsq`/`_whoqol`/`_phcs`/`_tfeq` removed** (all 5
+  tables from `10.1371/journal.pone.0199480`). `mbds` turned out to have
+  79% fractional values, smoothly and densely distributed (0.1, 0.2, 0.3
+  ... up to 5.0) -- not the rare-isolated-imputation pattern caught
+  elsewhere in this batch, but a distribution consistent with averaged/
+  computed composite scores rather than raw single-item Likert
+  responses. Given that finding, all 5 tables from this file (which the
+  original QC pass had marked clean, since the "<5% fractional" rare-
+  imputation check doesn't catch a *majority*-fractional column) were
+  removed rather than assuming only `mbds` was affected. Script and
+  biblio rows deleted.
+- **`dasilva_2019_medicinal_plants` removed** (`10.1371/journal.pone.0214300`).
+  The shipped "order-of-mention" interpretation of the 0-15 values
+  doesn't hold up against the actual distribution: order-of-mention
+  should make low values (1-6) common and high values (15) rare, but the
+  data shows the reverse (15 occurs 175x, 2 occurs 2x) -- the true
+  meaning of the non-zero values is unknown. Script and biblio row
+  deleted.
+- **`jiang_2024_*` (all 21 tables) regenerated** with a script fix: the
+  source's `totalseconds` field (one whole-survey completion-time scalar
+  per respondent, duplicated across every item-row) had been mapped to
+  the `rt` column name. Per datastandard.md, `rt` is reserved for
+  response-level (per-item) timing; a single value copied across an
+  entire respondent's rows is not that. Renamed to `cov_completion_time_s`
+  and reshipped as a covariate instead. New standing rule saved to memory
+  (`feedback_rt_column_scope`) so this isn't repeated on a future batch.
+- **Confirmed valid, no change needed**: `debacker_2018_*` resp=0 (smooth
+  0-5 distribution, real low anchor); `kokoszka_2022_who5` resp=0 (WHO-5's
+  own official scale is 0-5, "At no time" to "All of the time");
+  `cugmas_2021_elderly_social_support` (genuine relationship-type
+  counts, 0-14); `puro_2025_prompta_writing` (raw ~8-20-point rubric
+  scores); `jiang_2024_*` completion-time *values* themselves (a
+  milliseconds reading would put even the slowest respondent under 7
+  seconds for a 100+-item survey, which is impossible -- seconds is the
+  only plausible unit, matching the source's own `totalseconds` label).
+- **`hruby_2018_interview_a`-`_e` removed at Ben's request** (N=8, too
+  small). Script, all 5 output tables, and biblio rows deleted.
+- **Genuinely uncertain, flagged not resolved**: `zhang_2020`'s
+  `tired`/`tired.1` pair -- correctly aligned at the observation level
+  (the original "5% agreement" note was a miscalculation, grouped
+  incorrectly by `id` alone without accounting for repeated
+  observations), the two columns correlate at r=0.74 with a real but
+  moderate spread between them -- consistent with either a same-item
+  test-retest check within one ESM prompt, or two distinct Chinese mood
+  words both glossed as "tired" in English. Left as two separate items
+  (already the safer choice), semantic distinction unresolved.
+
+Biblio files updated: `dasilva_2018_*` rows removed from
+`biblio_plos_batch15_worthretrying.csv`, `dasilva_2019_medicinal_plants`
+row removed from `biblio_plos_batch15_deferred.csv`,
+`hruby_2018_interview_*` rows removed from
+`biblio_plos_batch15_worthretrying_round2.csv`. **Next step (Ben's
+request): consolidate all of this batch's separate biblio/human_review
+staging files (deferred, worthretrying round 1, worthretrying round 2)
+into a single biblio CSV and a single human_review CSV once adjudication
+is finished.**
+
+## PLOS ONE batch 15 — consolidation (2026-08-02)
+
+Merged the 3 separate biblio staging files (`biblio_plos_batch15_deferred.csv`
+17 rows, `biblio_plos_batch15_worthretrying.csv` 69 rows post-adjudication,
+`biblio_plos_batch15_worthretrying_round2.csv` 61 rows post-adjudication)
+into `biblio_plos_batch15_final.csv` (146 rows, no duplicate table names)
+and the 2 human_review staging files
+(`human_review_plos_batch15_deferred.csv` 2 rows,
+`human_review_plos_batch15_worthretrying.csv` 45 rows) into
+`human_review_plos_batch15_final.csv` (47 rows, no duplicate DOIs). The 5
+source files deleted after merging.
+
+Cross-checked the 146-row biblio against `irw_output/` and found it
+empty. Initial read was that Ben had cleared it ahead of upload and the
+consolidated files would need a regenerate-then-upload step -- wrong:
+moments later Ben confirmed the biblio/human_review/data files were
+already uploaded and pasted (see `TODO.md`'s entries, both marked done).
+`irw_output/` being empty was simply the normal post-upload cleanup,
+same as every other batch. `biblio_plos_batch15_final.csv`,
+`human_review_plos_batch15_final.csv`, and the now-superseded
+`plos_batch15_worthretrying.csv` (the original 96-row triage/retriage
+source, no longer needed once every row's disposition was captured
+downstream) all deleted. `dasilva_2018_body_image.py`,
+`dasilva_2019_medicinal_plants.py`, and `hruby_2018_brachial_plexus.py`
+were deleted outright per the adjudication findings earlier in this
+session; `jiang_2024_student_thriving.py` was fixed in place (the
+`cov_completion_time_s` rename) and its 21 tables regenerated and
+uploaded with that fix applied.

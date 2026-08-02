@@ -8,10 +8,42 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   ben-domingue); file gone from disk as expected. See `BATCH_LOG.md`'s
   "PLOS ONE batch 15" entry.
 
-- [ ] **PLOS ONE batch 15 — `automated_finding/plos_batch15_worthretrying.csv`**
-  (96 rows: 94 `worth_retrying` + 2 `recoverable_format`) staged, needs a
-  hand-review pass (same process as prior batches' worth_retrying
-  backlog). See `BATCH_LOG.md`'s "PLOS ONE batch 15" entry.
+- [x] **PLOS ONE batch 15 — `automated_finding/biblio_plos_batch15_final.csv`**
+  (146 rows, consolidated from 3 separate staging files at ben-domingue's
+  request) uploaded to Redivis and pasted into the dictionary sheet
+  (confirmed 2026-08-02, ben-domingue); file and all `irw_output/*.csv`
+  files gone from disk as expected. Covers the worth_retrying/
+  recoverable_format pool and the previously-deferred candidates:
+  `biblio_plos_batch15_deferred.csv` (17 rows: 5 papers -> 17 tables),
+  `biblio_plos_batch15_worthretrying.csv` (69 rows post-adjudication: 13
+  papers -> tables, 2 duplicates caught, 11 confirmed not-a-fit), and
+  `biblio_plos_batch15_worthretrying_round2.csv` (61 rows
+  post-adjudication: 24 papers -> tables; a 25th, `0252329`, turned out
+  to be a content-validity panel not respondent data, reclassified as
+  skip). A same-day adjudication pass (ben-domingue spot-checking
+  resp/rt semantics) removed 6 tables (`dasilva_2018_*` x5,
+  `dasilva_2019_medicinal_plants`) and 5 more (`hruby_2018_interview_*`)
+  before consolidation, and fixed `jiang_2024_*`'s misuse of the `rt`
+  column name (now `cov_completion_time_s` -- see memory
+  `feedback_rt_column_scope`). See `BATCH_LOG.md`'s "PLOS ONE batch 15"
+  entries (worth_retrying resolution, scripting the 25 confirmed-good,
+  final resolution of the 7 deferred, user adjudication pass, and
+  consolidation) for full DOI-level detail. Two recurring techniques
+  worth reusing on future batches: (1) a generic column-prefix
+  auto-detector (regex `^([A-Za-z]+)(\d+)$`, group by prefix, require
+  >=2 members) for large files with many unlabeled Likert blocks; (2)
+  checking each column's own category set rather than trusting a shared
+  name prefix, which caught two files (`pecino_2018`, `muir_2025`)
+  secretly mixing two different response scales under one numbering
+  sequence.
+
+- [x] **`automated_finding/human_review_plos_batch15_final.csv`** (47
+  rows, consolidated from `human_review_plos_batch15_deferred.csv` (2
+  rows) and `human_review_plos_batch15_worthretrying.csv` (45 rows))
+  pasted into the "Human eye" sheet (confirmed 2026-08-02, ben-domingue);
+  file gone from disk as expected. Mostly datasets whose numeric columns
+  turned out to be derived composite/subscale totals rather than raw
+  items, plus a few structurally ambiguous/complex cases.
 
 - [x] **PLOS ONE batch 15 — `automated_finding/biblio_plos_batch15.csv`**
   (53 rows) uploaded to Redivis and pasted into the dictionary sheet
@@ -31,16 +63,6 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   as an item, so dropped rather than restructured, for simplicity). See
   `BATCH_LOG.md`'s "PLOS ONE batch 15" entry (both passes) for full
   per-dataset detail.
-
-- [ ] **PLOS ONE batch 15 — 7 candidates still genuinely deferred**
-  (PMO strategic-plans survey, kinesthetic-robot-programming curricula,
-  WFH/hybrid-workplace-flexibility preferences, Thailand migrant-worker
-  discrimination/violence, medicinal-plants naturalistic-memory,
-  PROMPTa writing-skills, learning-emotion offline-environment) — each
-  needs either the source paper/codebook or dedicated untangling time.
-  See `BATCH_LOG.md`'s "PLOS ONE batch 15" entry (second review pass) for
-  per-candidate reasons. `plos_batch15_triage.csv` still holds these 7
-  rows.
 
 - [x] **`biblio_worthretrying_sweep_20260801.csv` (32 rows) uploaded/
   pasted** (confirmed 2026-08-01, ben-domingue): the 10 papers / 32
