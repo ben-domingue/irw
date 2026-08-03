@@ -2801,3 +2801,133 @@ date,query,output_file,notes
 2026-08-02,posttraumatic stress,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
 2026-08-02,childhood trauma,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
 2026-08-02,perceived stress,plos_batch16_triage.csv,batch 16: recycled from non-PLOS search_terms_log rows per SKILL.md term-selection method
+2026-08-02,item response theory,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,reaction time task,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,reading fluency,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,phonological awareness,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,mathematics achievement,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,stroop,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,n-back,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,patient reported outcomes,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,numeracy,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,phonics,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,lexical decision,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,word recognition,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,depression,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,anxiety,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,stress,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,psychopathy,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,neuroticism,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,pain,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,reading comprehension,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,narcissism,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,PTSD,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,ADHD,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,autism spectrum,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,substance use,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,vocabulary,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,spelling,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,working memory,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,inhibition,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,fatigue,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-02,wellbeing,plos_batch17_triage.csv,batch 17: recycled from non-PLOS pool per SKILL.md reuse method
+2026-08-03,personality,monthly_candidates_2026-08-03.csv,"monthly automated run; 10 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,self-esteem,monthly_candidates_2026-08-03.csv,"monthly automated run; 5 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,grit,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,self-efficacy,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,emotion regulation,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,resilience,monthly_candidates_2026-08-03.csv,"monthly automated run; 4 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,procrastination,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,perfectionism,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,narcissism,monthly_candidates_2026-08-03.csv,"monthly automated run; 3 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,dark triad,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,locus of control,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,self-control,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,optimism,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,attachment,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,social desirability,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,alexithymia,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,shyness,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,authenticity,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,creativity,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,curiosity,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,rumination,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,depression,monthly_candidates_2026-08-03.csv,"monthly automated run; 22 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,anxiety,monthly_candidates_2026-08-03.csv,"monthly automated run; 30 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,burnout,monthly_candidates_2026-08-03.csv,"monthly automated run; 3 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,perceived stress,monthly_candidates_2026-08-03.csv,"monthly automated run; 4 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,loneliness,monthly_candidates_2026-08-03.csv,"monthly automated run; 5 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,post-traumatic stress,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,childhood trauma,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,insomnia,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,eating disorder,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,substance use,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,internet addiction,monthly_candidates_2026-08-03.csv,"monthly automated run; 3 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,gaming disorder,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,phobia,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,obsessive-compulsive,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,suicide risk,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,dissociation,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,health anxiety,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,math anxiety,monthly_candidates_2026-08-03.csv,"monthly automated run; 12 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,impostor syndrome,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,well-being,monthly_candidates_2026-08-03.csv,"monthly automated run; 11 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,life satisfaction,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,quality of life,monthly_candidates_2026-08-03.csv,"monthly automated run; 8 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,health literacy,monthly_candidates_2026-08-03.csv,"monthly automated run; 7 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,illness perception,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,fatigue,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,sleep quality,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,medication adherence,monthly_candidates_2026-08-03.csv,"monthly automated run; 3 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,body image,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,eating behavior,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,flourishing,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,happiness,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,hope,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,vitality,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,positive affect,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,gratitude,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,social support,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,relationship satisfaction,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,empathy,monthly_candidates_2026-08-03.csv,"monthly automated run; 8 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,trust,monthly_candidates_2026-08-03.csv,"monthly automated run; 4 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,conspiracy beliefs,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,vaccine trust,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,academic motivation,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,working memory,monthly_candidates_2026-08-03.csv,"monthly automated run; 5 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,executive function,monthly_candidates_2026-08-03.csv,"monthly automated run; 5 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,test anxiety,monthly_candidates_2026-08-03.csv,"monthly automated run; 12 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,self-regulated learning,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,growth mindset,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,academic buoyancy,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,learning motivation,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,meaning in life,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,stroop,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,flanker,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,simon task,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,go/no-go,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,stop signal,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,task switching,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,prospective memory,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,job crafting,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,work engagement,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,psychological capital,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,organizational justice,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,psychological safety,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,job satisfaction,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,workplace incivility,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,microaggressions,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,turnover intention,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,abusive supervision,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,surface acting,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,coping,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,financial literacy,monthly_candidates_2026-08-03.csv,"monthly automated run; 3 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,risk perception,monthly_candidates_2026-08-03.csv,"monthly automated run; 0 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,science literacy,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,purchase intention,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,technology acceptance,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,delay discounting,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,sport motivation,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,physical activity enjoyment,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,youth development,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,employability skills,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
