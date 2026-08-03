@@ -90,7 +90,7 @@ def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     def _read_tabular(header):
         if name.endswith((".xlsx", ".xls")):
             return pd.read_excel(_src(), header=header)
-        if name.endswith(".tsv"):
+        if name.endswith((".tsv", ".tab")):
             return pd.read_csv(_src(), sep="\t", header=header)
         return pd.read_csv(_src(), header=header)
 

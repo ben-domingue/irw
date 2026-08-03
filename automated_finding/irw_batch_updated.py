@@ -49,7 +49,7 @@ import pandas as pd
 from irw_triage_updated import load_table, triage_dataset, irw_metadata
 
 UA = {"User-Agent": "irw-batch/1.0 (research; contact your-email)"}
-TABULAR_EXT = (".csv", ".tsv", ".xlsx", ".xls",
+TABULAR_EXT = (".csv", ".tsv", ".tab", ".xlsx", ".xls",
                ".sav", ".dta", ".sas7bdat", ".rdata", ".rda", ".rds")
 PER_DOMAIN_DELAY = 1.5          # seconds between hits to the same domain
 CHECKPOINT = "irw_batch_checkpoint.jsonl"
