@@ -3,6 +3,25 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_falih_2026.csv`** (2 rows: `falih_2026_mds16`,
+  `falih_2026_dass21`) pasted into the dictionary sheet (confirmed
+  2026-08-03, ben-domingue); file gone from disk as expected. See
+  `BATCH_LOG.md`'s "First scheduled monthly discovery run + triage" entry.
+
+- [ ] **First scheduled monthly discovery run (2026-08-03) — follow-up items
+  not yet done**: 6 `download_failed` retries (4 look like transient
+  Dataverse 403s, 2 are real parsing bugs — a UTF-8 decode error and a CSV
+  field-count mismatch); 4 `worth_retrying` + 5 `human_review` rows from
+  the `irw_retriage_ha.py` pass (`irw_retriage_ha.csv`, includes the
+  Ukrainian SOA-questionnaire candidate); manually checking whether the
+  three named-instrument OSF candidates that triaged `no_usable_file` even
+  after the `.tab` fix (Vanderbilt ADHD Diagnostic Parent Rating Scale,
+  BDI-II, Resuscitation Self-Efficacy Scale for Nurses) are truly missing
+  a file or just hiding one behind a restricted sub-component; and the
+  Bem Sex-Role Inventory candidate, which landed in `aggregate_continuous`
+  on the automated retriage pass but is a named validated instrument worth
+  a manual second look. See `BATCH_LOG.md` for full detail.
+
 - [x] **PLOS ONE batch 15 — `automated_finding/human_review_plos_batch15.csv`**
   (144 rows) pasted into the "Human eye" sheet (confirmed 2026-08-01,
   ben-domingue); file gone from disk as expected. See `BATCH_LOG.md`'s
