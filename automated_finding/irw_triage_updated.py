@@ -91,8 +91,17 @@ def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
         if name.endswith((".xlsx", ".xls")):
             return pd.read_excel(_src(), header=header)
         if name.endswith((".tsv", ".tab")):
-            return pd.read_csv(_src(), sep="\t", header=header)
-        return pd.read_csv(_src(), header=header)
+            try:
+                return pd.read_csv(_src(), sep="\t", header=header)
+            except UnicodeDecodeError:
+                # Some Dataverse/OSF exports (esp. non-English deposits) are
+                # Latin-1/cp1252, not UTF-8 -- fall back rather than fail
+                # outright (confirmed real case: 10.7910/DVN/33EY6I).
+                return pd.read_csv(_src(), sep="\t", header=header, encoding="latin-1")
+        try:
+            return pd.read_csv(_src(), header=header)
+        except UnicodeDecodeError:
+            return pd.read_csv(_src(), header=header, encoding="latin-1")
 
     if name.endswith(".sav"):
         # pandas.read_spss (via pyreadstat) accepts a file-like object directly.

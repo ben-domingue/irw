@@ -5325,3 +5325,239 @@ sheet. All 30 search terms already carried the `plos_batch17_triage.csv`
 tag in `search_terms_log.csv` from the earlier orphaned logging, so no
 further logging needed this batch.
 
+## Backlog-resolution pass across 13 deferred/open items (2026-08-03)
+
+Ben-domingue gave explicit steering for this pass: "anything that is
+low-priority or hard to recover, let's give up (and strike from list)" --
+bias toward closing items out rather than deferring again. Worked through
+every open deferred candidate and monthly-discovery follow-up item on the
+list (parallelized across 4 sub-agents for the paper-read-heavy PLOS items
+plus direct work on the monthly-discovery bucket). Net result: **24 new
+IRW tables processed** (11 papers/datasets), **1 general pipeline bug
+fixed**, **7 items struck** with reasons logged, **1 dataset newly
+license-blocked** (logged, not lost).
+
+### Processed -> `biblio_backlog_resolution.csv` (24 rows, ready for
+Redivis upload + dictionary paste)
+
+- **HELMA health-literacy scale** (`10.1371/journal.pone.0149202`, PLOS
+  batch17 deferred, N=582) -> 7 tables (`ghanbari_2016_helma_access/
+  _reading/_understand/_appraise/_use/_comm/_numeracy`). The S4 scoring
+  manual didn't match the raw `.sav` columns, so each subscale's response
+  encoding was verified directly from per-item value_counts instead of
+  trusting the manual: access/reading/understand/appraise/use/comm are
+  clean 1-5 Likert, numeracy is clean binary correct/incorrect (confirming
+  the original triage flag). `data/ghanbari_2016_helma.py`.
+- **Swiss summer camp socio-emotional study** (`10.1371/journal.pone.0276665`,
+  PLOS batch16 deferred, `good`-flagged, N=256, 92 items) -> 3 tables
+  (`gerber_2022_altruism`, `_selfesteem`, `_eas_temperament`). The paper's
+  Measures section cleanly mapped every column: adapted Self-Report
+  Altruism Scale (14 items), Maintier & Alaphilippe self-esteem
+  questionnaire (9 items), French EAS temperament questionnaire (20 items,
+  4 subscales x 5, reverse-coded "R"-suffix items flipped per the paper's
+  own convention). One-off camp-control columns (S8-S10/Q10/Q12) dropped.
+  `data/gerber_2022_swisscamp.py`.
+- **Imitation task** (`10.1371/journal.pone.0235595`, PLOS batch13
+  deferred) -> `vaporova_2020_imitation` (3 binary items, N=82). The
+  "multi-block layout issue" was just a stacked Infants/Children +
+  Adults sheet with two different column sets; the imitation scale only
+  exists in the first (regular) block. `data/vaporova_2020_imitation.py`.
+- **Illusory-body-ownership embodiment questionnaire**
+  (`10.1371/journal.pone.0277080`, PLOS batch13 deferred) ->
+  `preussmattsson_2022_ownership` (24 items = 6 statements x 4 conditions,
+  N=50). The originally-flagged sheet (N=30) is below the N=50 floor, but
+  a second sheet in the same workbook ("SCR Experiment-Questionnaire")
+  administers the identical 6-item questionnaire to a different N=50
+  sample -- used that instead, clearing the floor without a judgment call.
+  No out-of-range values found on inspection. `data/preussmattsson_2022_ownership.py`.
+- **Situational-motivation EMA study** (`10.1371/journal.pone.0307369`,
+  the same DOI deferred separately in both batch 9 and batch 13 -- resolved
+  once, closing both TODO entries) -> 2 tables (`strohacker_2024_bmzi_motive`,
+  `strohacker_2024_arms_readiness`; 11 and 10 items, N=22, 519 EMA
+  sessions, `wave` = session sequence). Turned out simpler than the old
+  triage note suggested: the raw sheet is a flat one-row-per-session table
+  once an embedded codebook row is skipped -- a header-offset issue, not
+  deep reconstruction. `data/strohacker_2024_situational.py`.
+- **MnemoCity Task usability survey** (`10.1371/journal.pone.0161858`,
+  PLOS batch12 deferred) -> `rodriguezandres_2016_mnemocity_usability` (9
+  items, N=160). Paper's Methods text cleanly separated the 9 raw 1-5
+  Likert usability/satisfaction items from derived CBTT/MnemoCity
+  cognitive-task scores and composite means. `data/rodriguezandres_2016_mnemocity_usability.py`.
+- **Clinton-voter activism longitudinal study**
+  (`10.1371/journal.pone.0221754`, PLOS batch8 deferred) -> 2 tables
+  (`dwyer_2019_clinton_cesd`, `dwyer_2019_clinton_activist`). The raw
+  `.sav` already has an explicit `Wave` column (1=T2, 2=T3) with genuinely
+  varying CESD responses -> mapped to `wave` 2/3; the 8-item Activist
+  scale is baseline-only (constant across a person's wave-rows) so shipped
+  cross-sectionally. `data/dwyer_2019_clinton_activism.py`.
+- **Emotional-eating chain-mediation study**
+  (`10.1371/journal.pone.0280701`, PLOS batch8 deferred) -> 4 tables
+  (`yang_2023_emotional_eating_eesr/_cesd/_uppsp/_ders`; EES-R 23 items,
+  CES-D 20, UPPS-P short form 20, DERS 36). The cryptic `@10.`/`@11.`-style
+  block labels were matched to instrument item counts from the paper's
+  Measures section. `data/yang_2023_emotional_eating.py`.
+- **Chinese EFL learning study** (`10.1371/journal.pone.0280919`, PLOS
+  batch8 deferred) -- **struck**: the 481-vs-942 row mismatch traced to a
+  non-unique `index` key (even `Gender` differs across rows sharing the
+  same index in 243/285 duplicated-index groups) -- not a clean dedupe or
+  wide-to-long artifact, and per steering non-English item-level recoding
+  on top of that isn't worth pursuing. Row was never in
+  `plos_deferred_candidates.csv` (tracked only in `TODO.md`); removed from
+  `TODO.md`.
+- **Children's implicit/voluntary attention-in-time study**
+  (`10.1371/journal.pone.0123625`, PLOS batch12 deferred) -- **struck**:
+  checked all 62 per-participant sheet headers directly -- 4 different
+  column schemas across sheets (not uniform), so a trivial glob+concat
+  isn't possible; genuine per-sheet reconciliation needed. Struck per the
+  hard-to-recover steering. Removed from `TODO.md`.
+- **Portuguese preoperative-stress study**
+  (`10.1371/journal.pone.0263275`, PLOS batch17 deferred) -- **struck**:
+  the paper's Methods section revealed the IE*/IT*-prefixed columns are
+  NOT full IDATE state/trait scales -- they're 4-item fragments surviving
+  an IRT-based item-reduction into a novel pooled "B-MEPS" instrument
+  (drawing from a reduced STAI, MADRS, SRQ-20, and FSPQ), with no codebook
+  resolving each fragment's original response-category semantics. Removed
+  from `plos_deferred_candidates.csv`.
+
+### Struck outright (per explicit "give up on hard-to-recover" steering)
+
+- **PLOS ONE batch17 -- 86 of 101 unreviewed `worth_retrying` rows**:
+  written off per the established batches-6/9/12/13/16 pattern.
+  `plos_retriage_batch17.csv` deleted. Removed from `TODO.md`.
+- **PLOS ONE batch14 Auricular Acupuncture exam-anxiety study**
+  (`10.1371/journal.pone.0168338`, N=44) -- already flagged low-priority;
+  confirmed no new reason to revisit. Row removed from
+  `plos_deferred_candidates.csv`; already had a fuller writeup earlier in
+  this log, so no new TODO ghost entry.
+- **Batch21 Romanian teachers' lifelong-learning survey**
+  (figshare `10.6084/m9.figshare.31836016`, N=70) -- 7 bundled instruments
+  in one non-English file needing per-item reverse-coding judgment calls
+  across a non-English instrument; exactly the "hard to recover" case per
+  steering. Real, clean, CC BY 4.0 data -- left on the table by choice, not
+  because it's unusable, in case a future pass wants to revisit with more
+  time. Removed from `TODO.md`.
+- **Batch21 visual-impairment functional-mobility kinematics dataset**
+  (Dataverse `DVN/0LWF5Z`, N=54) -- one fresh WebSearch attempt for the
+  source manuscript (title search + author-name search) still turned up
+  nothing findable as of 2026-08-03; struck per steering (missing paper
+  blocks the NASA-TLX subscale-order mapping, can't guess it). Removed
+  from `TODO.md`.
+
+### Monthly discovery (2026-08-03) follow-ups resolved
+
+- **Pipeline fix**: `load_table()` in `irw_triage_updated.py` now falls
+  back to `latin-1` when a `.csv`/`.tab` file fails UTF-8 decoding, instead
+  of failing the whole candidate outright. Confirmed real impact: one of
+  the 6 `download_failed` rows (`10.7910/DVN/33EY6I`) was a
+  semicolon-delimited Hungarian math-anxiety dataset that decodes cleanly
+  under latin-1 -- turned out to be a near-duplicate of an
+  already-known/already-flagged `aggregate_continuous` dataset
+  (`10.7910/DVN/XOPDQ5`, "Expectancies... Mathematics Anxiety"), so not
+  reprocessed, but the fix itself is general and should help future runs.
+- **4 Dataverse 403s** (`DVN/TZPHXF`, `DVN/DLW5QY`, `DVN/ZKYKW0`,
+  `DVN/JQEYBB`): confirmed via the dataset API that none of the underlying
+  files are actually access-restricted (all `restricted: null`), so the
+  403 isn't a real permissions gate -- retried directly with `curl`, all 4
+  still 403'd. Per steering, one retry was enough; struck.
+- **Field-count-mismatch CSV** (`osf.io/y2mcb`, "Database_March 2025.csv"):
+  investigated directly -- semicolon-delimited Hungarian file with
+  unescaped embedded newlines/quotes in free-text open-ended answer
+  columns (health-behavior goals), not a fixable delimiter/encoding issue,
+  and the bulk of the content is open-ended text rather than item
+  responses anyway. Logged as a known limitation, not pursued further.
+- **4 `worth_retrying` rows** from `irw_retriage_ha.csv`, each given a real
+  look:
+  - `10.7910/DVN/OLOMAI` ("The Trait-State-Experience Pathway...") ->
+    **processed**: `nabizadehchianeh_2026_tempsa` (TEMPS-A short form, 39
+    binary items, N=713 after dropping 3 duplicate-ID rows -- the actual
+    cause of the original `dup_id_item` QC failure). Derived
+    TEMPS-A-subscale totals and SAM pleasure/arousal ratings excluded
+    (different instrument / composite scores). `data/nabizadehchianeh_2026_tempsa.py`.
+  - `osf.io/gdbq2` (bystander/moral-disengagement study, `JSP_Bystander_SPSS__data.sav`)
+    -- structurally excellent (clean id, 8 well-labeled instrument blocks:
+    ERQ, distancing, bystander behavior, bystander intervention, moral
+    disengagement, GSE, POMS, subjective well-being; N=1122, all clean
+    ordinal ranges) but the OSF node has **no license set at all** (checked
+    via API, not an unresolved UUID) -- per the license rule, not
+    processed. Logged to `license_blocked_candidates.csv` instead of
+    silently dropped, since it's otherwise a strong candidate.
+  - `10.7910/DVN/ZA15RI` (Spanish-language "Psychological Uses of AI in
+    Adolescence" scale-development study) -- **struck**: multiple bundled
+    Spanish-language instruments (a novel MPUAI scale, HPN happiness item,
+    SS social-support scale) under one numbering sequence needing
+    per-block mapping in a non-English file; hard-to-recover per steering.
+  - `10.7910/DVN/IRIKMP` (Namibian drought-adaptation psychosocial survey,
+    300 columns) -- **struck**: mostly one-off multi-select
+    concern/barrier checkbox columns rather than coherent Likert scale
+    blocks; would need substantial digging to locate the actual named
+    psychosocial-outcome scales.
+- **5 `human_review` rows** staged to `human_review_monthly_20260803.csv`
+  for the "Human eye" sheet (unchanged from `irw_retriage_ha.py`'s
+  classification: reaction-time trial data with an uninformative item
+  column, a 2-participant correspondence database, a heart-failure
+  diet-intervention pilot with no clear item columns, a Kenya/Malawi
+  managerial-personality dataset, and the Ukrainian SOA-questionnaire
+  codebook-only file).
+- **3 named-instrument OSF candidates flagged `no_usable_file`** -- checked
+  each for a hidden/restricted sub-component:
+  - Vanderbilt ADHD Diagnostic Parent Rating Scale (`osf.io/9urkt`):
+    confirmed genuinely no data file -- only a masked manuscript and R
+    analysis scripts (`.Rmd`, no raw data attached). Struck.
+  - Resuscitation Self-Efficacy Scale for Nurses (`osf.io/5amfx`):
+    confirmed the OSF node has zero files and zero child components.
+    Struck.
+  - **BDI-II in Mexican University Students** (`osf.io/6dutb`) --
+    **processed**: a real data file (`BDI.dat`) was hiding behind an
+    extension (`.dat`) the pipeline doesn't recognize as tabular. The
+    project's own `CODEBOOK.txt` documents it precisely: 21 tab-separated
+    columns, no header, each 0-3 ordinal (the 21 BDI-II items). License
+    resolved via the OSF license-id lookup (`563c1cf88c5e4a3877f9e96a` ->
+    "CC-By Attribution 4.0 International"). N=508.
+    `marquezpalacios_2026_bdi2` -> `data/marquezpalacios_2026_bdi2.py`.
+- **Bem Sex-Role Inventory** (`10.7910/DVN/R6WE4P`) -- landed in
+  `aggregate_continuous` on the automated retriage pass (mis-detected id
+  column driving a spurious `dup_id_item` ratio). Manual check confirmed
+  20 clean, self-descriptively-named raw BSRI trait-rating items
+  ("Willing to take risks", "Forceful", "Warm", ... -- the standard 20-item
+  short form), 1-7 Likert, no missingness, N=695. No id column in the
+  source file -- used row index. **Processed**: `holden_2026_bsri` ->
+  `data/holden_2026_bsri.py`.
+
+### Housekeeping
+
+Three scripts from the parallelized sub-agents (`data/dwyer_2019_clinton_activism.py`,
+`data/rodriguezandres_2016_mnemocity_usability.py`,
+`data/yang_2023_emotional_eating.py`) initially read their raw SI file
+from a local `automated_finding/scratch_raw/` cache the sub-agent created,
+rather than fetching remotely like every other script in `data/` --
+patched all three to fetch directly from the PLOS SI URL
+(`https://journals.plos.org/plosone/article/file?type=supplementary&id=<DOI>.s001`)
+matching the established convention, re-ran and re-verified identical
+output, then deleted `scratch_raw/` (would have silently broken
+reproducibility otherwise). `irw_triage.csv`, `irw_retriage_ha.csv`, and
+`monthly_candidates_2026-08-03.csv` deleted now that every row has been
+captured here or in a staged CSV.
+
+**Output this pass**: 24 tables across 11 papers/datasets ->
+`biblio_backlog_resolution.csv` (24 rows), staged for Redivis upload +
+dictionary paste. `human_review_monthly_20260803.csv` (5 rows) staged for
+the "Human eye" sheet. 1 dataset newly added to
+`license_blocked_candidates.csv`. 7 items struck with reasons above. 1
+general pipeline fix (latin-1 fallback in `load_table()`).
+
+**False-alarm note**: `biblio_plos_batch17.csv` and its 12 `irw_output/*.csv`
+files were found missing from disk partway through this pass. Initially
+treated as accidental data loss and reconstructed from this entry's detail
+plus each `data/*.py` script's Source/DOI header comments (all 9 scripts
+re-run, row/id/item counts matched the log above). Turned out to be a
+false alarm: ben-domingue was concurrently working in the same repo during
+this session, confirmed the upload/dictionary-paste (catching and fixing a
+real bug along the way -- `carney_2023_substance_use`'s Description field
+had an unescaped internal comma breaking the CSV), and deleted the files
+per the normal post-upload cleanup convention -- reflected in `TODO.md`'s
+now-`[x]` entries for both files. The reconstructed files were deleted
+again once this was discovered, to match the legitimate post-upload state.
+Worth knowing for future sessions: `automated_finding/` is a live working
+directory the user may be editing concurrently, not an exclusively
+agent-owned scratch space -- re-check TODO.md/BATCH_LOG.md and consider
+`git status`/mtimes before treating a missing staging CSV as data loss.
