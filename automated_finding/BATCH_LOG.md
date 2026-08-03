@@ -5130,3 +5130,81 @@ the `good`-candidate tables) and `biblio_plos_batch16_worthretrying.csv`
 (11 rows, the `worth_retrying`-pool tables) -- left as separate files per
 ben-domingue's mid-batch instruction to remove each as its own tables are
 added, rather than consolidated into one file first.
+
+## First scheduled monthly discovery run + triage (2026-08-03)
+
+Landed the first live run of `irw_discover_monthly.py` (a new script added
+this batch -- see its own docstring and `README.md` for the incremental
+`--since`-per-term design): 100 terms against OSF+Dataverse. The cloud
+routine that ran it hit two access issues that shaped how the output got
+handled -- both worth knowing about before relying on this routine again:
+- The container's egress allowlist blocked `api.osf.io` and
+  `dataverse.harvard.edu` outright on the first scheduled fire; fixed by
+  widening the environment's network egress allowlist, then re-run
+  succeeded.
+- The routine's GitHub App lacks write access to this repo, so it
+  couldn't push its branch/PR on the successful run either -- it sent the
+  two output files (`monthly_candidates_2026-08-03.csv`,
+  `search_terms_log.csv` rows) directly instead. Landed manually: cross-
+  checked the 223 raw hits against the live IRW dictionary (the routine's
+  own exclusion check had separately failed on a Google Sheets egress
+  block) and deduped, dropping 13 already-known-DOI rows and 80 in-run
+  duplicates (one dataset matching multiple search terms) -- 130 unique
+  candidates. GitHub App write access still needs to be granted by a repo
+  admin before a future run can open its own PR; until then this manual
+  landing step repeats each month.
+
+Full triage (`irw_batch_updated.py`) on the 130: 1 `good`, 38
+`human_assistance`, 3 `not_item_response`, 81 `no_usable_file`, 1
+`license_restricted` (cc-by-nc-sa, correctly excluded), 6
+`download_failed` (4 transient-looking 403s on Dataverse, plus 2 real
+parsing bugs -- a UTF-8 decode error and a CSV field-count mismatch --
+not yet investigated).
+
+**Pipeline fix found via this batch**: `.tab` files (Dataverse's default
+archival format for tabular data) were invisible to the whole
+discover/triage pipeline -- absent from `TABULAR_EXT`, and even if added
+there, `load_table()`'s `_read_tabular` only special-cased `.tsv` for
+tab-separated parsing, so a `.tab` file would've been silently misread
+with a comma separator. Fixed both (now recognizes and correctly parses
+`.tab`). Confirmed real impact, not theoretical: 2 of the first 10 rows
+in this batch flipped from `no_usable_file` to `human_assistance` once
+fixed, including one of the batch's named-instrument candidates (Bem
+Sex-Role Inventory replication data, `10.7910/DVN/R6WE4P`). This is a
+standing gap, not specific to this batch -- some unknown number of past
+Dataverse `no_usable_file` rows in earlier batches may have had a `.tab`
+file available; re-triaging historical batches to find out is a scope
+decision left open, not done as part of this fix.
+
+Retriage (`irw_retriage_ha.py`) on the 38 `human_assistance` rows: 9
+`not_item_response` (drop), 20 `aggregate_continuous`, 4 `worth_retrying`
+(not yet reviewed -- see URLs in the retriage CSV), 5 `human_review`
+(needs a person; includes the Ukrainian SOA-questionnaire candidate).
+Note the Bem Sex-Role Inventory candidate above landed in
+`aggregate_continuous` on this automated pass (dup_id_item ratio 11x) --
+flagged as a judgment call worth a manual second look given it's a
+named, validated instrument, not acted on further this batch.
+
+The 1 `good` candidate was written up: Falih (2026), a CC0 Harvard
+Dataverse deposit ("maladaptive daydreaming, depression, anxiety and
+stress data", N=262) containing two distinct instruments in one raw
+`.tab` file -- Maladaptive Daydreaming Scale-16 (0-10 scale) and DASS-21
+(0-3 scale) -- split into two output tables per datastandard.md's
+one-instrument-per-file rule: `falih_2026_mds16` and `falih_2026_dass21`
+(`data/falih_2026_mds16.py`, `data/falih_2026_dass21.py`). Six all-null
+section-header artifact columns in the raw file (`MDS16`, `DASS21`,
+`DEPRESSI`, `ANXIETY`, `STRESS`, `V52`) were dropped rather than shipped
+as empty items/covariates. Both tables passed full QC (unique id,
+integer-only responses, no sentinel/imputed values, no aggregate
+totals in the item list). Staged as `biblio_falih_2026.csv` (2 rows) --
+not yet pasted into the dictionary sheet.
+
+Not yet done from this batch, left open in `TODO.md`: the 6
+`download_failed` retries, the 2 real parsing-bug investigations, the 4
+`worth_retrying` and 5 `human_review` rows from the retriage pass, and
+manually checking the OSF pages for the three named-instrument
+candidates (Vanderbilt ADHD Diagnostic Parent Rating Scale, BDI-II,
+Resuscitation Self-Efficacy Scale for Nurses) that triaged
+`no_usable_file` even after the `.tab` fix -- their landing pages may be
+hiding a file behind a restricted sub-component rather than truly
+having none.
