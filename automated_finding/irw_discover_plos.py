@@ -47,7 +47,7 @@ from concurrent.futures import TimeoutError as FutureTimeoutError
 import requests
 
 from irw_discover_updated import Hit, is_relevant, norm_doi, _load_auto_exclusions
-from irw_batch_updated import check_license, TABULAR_EXT, polite_get
+from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
 from irw_triage_updated import load_table, triage_dataset
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact your-email)"}
@@ -78,23 +78,37 @@ def search_plos(query: str, eissn: str, max_rows: int = 300, page_size: int = 10
     are exhausted."""
     start = 0
     while start < max_rows:
-        try:
-            r = requests.get(
-                PLOS_SEARCH_API,
-                params={
-                    "q": f'everything:"{query}"',
-                    "fq": f'eissn:"{eissn}" AND doc_type:full',
-                    "fl": "id,title_display,abstract,publication_date",
-                    "rows": page_size,
-                    "start": start,
-                    "wt": "json",
-                },
-                headers=UA, timeout=30)
-            r.raise_for_status()
-            docs = r.json().get("response", {}).get("docs", [])
-        except Exception as e:
-            print(f"[plos] {e}", flush=True)
-            return
+        # A few-second local network dropout (seen repeatedly in practice --
+        # DNS resolution failures, connection-refused) otherwise kills the
+        # whole remaining query list. Retry a transient connection error a
+        # couple of times with backoff before giving up on this page.
+        for attempt in range(3):
+            try:
+                r = requests.get(
+                    PLOS_SEARCH_API,
+                    params={
+                        "q": f'everything:"{query}"',
+                        "fq": f'eissn:"{eissn}" AND doc_type:full',
+                        "fl": "id,title_display,abstract,publication_date",
+                        "rows": page_size,
+                        "start": start,
+                        "wt": "json",
+                    },
+                    headers=UA, timeout=30)
+                r.raise_for_status()
+                docs = r.json().get("response", {}).get("docs", [])
+                break
+            except (requests.exceptions.ConnectionError,
+                     requests.exceptions.Timeout) as e:
+                if attempt == 2:
+                    print(f"[plos] {e}", flush=True)
+                    return
+                wait = 5 * (attempt + 1)
+                print(f"[plos] transient error, retrying in {wait}s: {e}", flush=True)
+                time.sleep(wait)
+            except Exception as e:
+                print(f"[plos] {e}", flush=True)
+                return
         if not docs:
             return
         for d in docs:
@@ -249,6 +263,10 @@ def process_one(hit: Hit) -> dict:
     try:
         content = polite_get(file_url).content
         df = load_table(content, filename=fname)
+    except FileTooLarge as e:
+        return {**base, "flag": "file_too_large", "reasons": str(e),
+                "n_responses": "", "n_participants": "", "n_items": "",
+                "density": "", "data_file": fname}
     except Exception as e:
         return {**base, "flag": "download_failed", "reasons": str(e)[:200],
                 "n_responses": "", "n_participants": "", "n_items": "",

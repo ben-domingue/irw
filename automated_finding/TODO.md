@@ -102,24 +102,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   was converted but then ruled out-of-scope by ben-domingue (2026-08-01)
   and removed — don't re-surface it without checking why first.
 
-- [ ] **`biblio_comps_padel.csv` / `biblio_nominal_cos101.csv`** (1 row
-  each) still need pasting into the competitions/nominal Google Sheets
-  (see the two links in memory `project_alt_data_standards`). **Corrected
-  2026-08-02** to the standard automated_finding biblio-staging column
-  format (`table, table.lower, Description, URL (for data), Reference,
-  DOI (for paper), Original License, Custom License, Public Reshare?,
-  Derived License, Custom License, Notes, Contributor, Date` — see memory
-  `feedback_dict_format`) after an earlier draft wrongly used the
-  `metadata/comps_biblio.csv`/`nominal_biblio.csv` *regenerated-snapshot*
-  format instead (fewer columns, has `BibTex`, no `table.lower`/`Original
-  License`/`Public Reshare?`/`Contributor`/`Date` — that format is what
-  the metadata pipeline produces from the sheet, not what gets pasted
-  into it). Not yet confirmed pasted. Neither of the two uploaded tables
-  has had a
-  human QC pass yet either (no established check for `text`-column data,
-  unlike the numeric resp-error checks the core standard has — worth a
-  decision on what that should look like). `DVN/J9KSHU` remains
-  license-blocked (CC BY-NC-SA) and untouched.
+- [x] **`biblio_comps_padel.csv` / `biblio_nominal_cos101.csv`** (1 row
+  each, competitions/nominal Google Sheets — see the two links in memory
+  `project_alt_data_standards`) believed pasted (2026-08-02, ben-domingue:
+  "I believe these have already been added to the relevant online
+  resources" — not independently re-verified; both files are gone from
+  disk, consistent with the Dropbox-sync file-loss pattern noted elsewhere
+  in this file, discovered 2026-08-02 before confirmation could be
+  double-checked). Neither of the two uploaded tables has had a human QC
+  pass yet (no established check for `text`-column data, unlike the
+  numeric resp-error checks the core standard has — worth a decision on
+  what that should look like). `DVN/J9KSHU` remains license-blocked (CC
+  BY-NC-SA) and untouched.
 
 - [x] **PLOS ONE batch 14 — `dejesus_2017_{lequesne,sf36,womac,gpm}` pasted
   into the dictionary sheet** (confirmed 2026-08-01, ben-domingue, from the
@@ -165,9 +159,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the two items below). See `BATCH_LOG.md`'s "Continuous/bounded-response
   repo-based discovery (Batch 21)" entry for the full per-row accounting.
 
-- [ ] **`automated_finding/human_review_continuous.csv`** (21 rows, Batch
-  21's `human_review` rows from `irw_retriage_ha.py`) — needs pasting into
-  the "Human eye" sheet.
+- [x] **`automated_finding/human_review_continuous.csv`** (21 rows, Batch
+  21's `human_review` rows from `irw_retriage_ha.py`) believed pasted into
+  the "Human eye" sheet (2026-08-02, ben-domingue: "I believe these have
+  already been added to the relevant online resources" — not independently
+  re-verified; file is gone from disk, consistent with the Dropbox-sync
+  file-loss pattern noted elsewhere in this file).
 
 - [ ] **Batch 21 — Romanian teachers' lifelong-learning survey deferred,
   needs a careful multi-scale split** (figshare 10.6084/m9.figshare.31836016,
@@ -642,14 +639,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   but the 4 items may span two different SWAN questionnaire modules —
   needs SWAN-codebook access to confirm).
 
-- [ ] **Portella 2022 racial-attitudes dictionary/tags fix needs pasting in**
-  (`automated_finding/dictionary_fix_portella_2022.csv`,
-  `automated_finding/tags_fix_portella_2022.csv`) — replaces the existing
+- [x] **Portella 2022 racial-attitudes dictionary/tags fix** believed
+  pasted (2026-08-02, ben-domingue: "I believe these have already been
+  added to the relevant online resources" — not independently
+  re-verified; `dictionary_fix_portella_2022.csv`, `tags_fix_portella_2022.csv`,
+  and `irw_output/portella_2022_racial_attitudes.csv` are all gone from
+  disk, consistent with the Dropbox-sync file-loss pattern noted elsewhere
+  in this file). Replaced the existing
   `racialsocialnormsbrazilianstudents_portella_2022` row (broken processing
   script, never actually live; see `BATCH_LOG.md`'s "User-directed fix"
-  entry, 2026-07-16) with a `portella_2022_racial_attitudes` row. Once
-  pasted, `irw_output/portella_2022_racial_attitudes.csv` is ready to upload
-  to Redivis.
+  entry, 2026-07-16) with a `portella_2022_racial_attitudes` row.
 
 - [x] **Peters 2025 COVID-19 Risk Tool — `biblio_peters_2025_precautions.csv`
   (6 rows) closed out** (confirmed 2026-07-31, ben-domingue):
@@ -694,16 +693,30 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the attribute detail, or treat conjoint designs as out of scope). See
   `BATCH_LOG.md`'s "Batch 19" entry for the full reasoning on all 17 rows.
 
-- [ ] **Pipeline improvement: no file-size guard in `irw_batch_updated.py`.**
-  Batch 19 hit a Dataverse candidate (`DVN/BRCRS5`) whose files were six
-  `.dta` files up to 1.4GB each — loading it OOM-killed the triage process
-  twice (~21GB RSS on a 30GB machine) before it was manually excluded and
-  the run resumed. Batch 20 hit the identical failure mode again
-  (`DVN/EHBGOW`, six `.dta` files up to 1.58GB each) — now two batches in a
-  row. Worth adding a size check (e.g. via each repo API's reported file
-  size, skip/flag anything over some threshold without a full download) so
-  this fails gracefully instead of silently killing the process. Not done —
-  no one has picked this up yet.
+- [x] **Pipeline improvement: no file-size guard in `irw_batch_updated.py`
+  — fixed 2026-08-02.** Batch 19 hit a Dataverse candidate (`DVN/BRCRS5`)
+  whose files were six `.dta` files up to 1.4GB each — loading it
+  OOM-killed the triage process twice (~21GB RSS on a 30GB machine) before
+  it was manually excluded and the run resumed. Batch 20 hit the identical
+  failure mode again (`DVN/EHBGOW`, six `.dta` files up to 1.58GB each) —
+  two batches in a row. Fixed with a `MAX_FILE_BYTES` (200MB) ceiling in
+  `irw_batch_updated.py`, checked two ways: (1) each repo resolver
+  (Zenodo/Figshare/Dryad/Dataverse/OSF) now reads the file size the API
+  already reports and skips/flags oversized tabular files before ever
+  downloading them; (2) `polite_get()` streams the response and aborts
+  early (`FileTooLarge`) as a backstop for sources that don't expose size
+  upfront (e.g. PLOS supplementary files in `irw_discover_plos.py`).
+  Oversized files get a new `file_too_large` flag (distinct from
+  `no_usable_file`) so they're visible for manual/future handling rather
+  than silently dropped or crashing the run. Verified against the actual
+  `DVN/EHBGOW` record: the 1.58GB file and six other >200MB `.dta` files
+  are now correctly skipped while two small legitimate `.xlsx` files on
+  the same record still get triaged normally. `irw_process_queue.py`
+  (retired/stale per `README.md`) updated to match the new
+  `resolve_data_files()` 3-tuple return signature for consistency, though
+  it was already broken on an unrelated pre-existing import error
+  (`QUEUE_SHEET_URL` no longer exists in `irw_discover_updated.py`) and
+  wasn't otherwise touched.
 
 - [x] **Pipeline improvement: `coerce_to_irw()`/`load_table()` gave up too
   early on two specific, recurring, recoverable patterns — fixed

@@ -33,7 +33,7 @@ import requests
 import pandas as pd
 
 from irw_triage_updated  import load_table, coerce_to_irw, run_qc, irw_metadata, print_report, triage_dataset, Triage
-from irw_batch_updated   import resolve_data_files, polite_get, TABULAR_EXT
+from irw_batch_updated   import resolve_data_files, polite_get, TABULAR_EXT, FileTooLarge
 from irw_discover_updated import QUEUE_SHEET_URL, norm_doi
 
 # Redivis tables that contain DOIs of datasets already in the IRW.
@@ -117,7 +117,7 @@ def process_one(row: dict, out_dir: str) -> dict:
     # Build a minimal batch-style row so we can reuse resolve_data_files.
     batch_row = {"source": src, "url": url, "doi": doi}
 
-    files, license_raw = resolve_data_files(batch_row)
+    files, license_raw, oversized = resolve_data_files(batch_row)
     from irw_batch_updated import check_license
     license_norm, blocked, _ = check_license(license_raw)
     result["license"] = license_norm
@@ -128,8 +128,13 @@ def process_one(row: dict, out_dir: str) -> dict:
         return result
 
     if not files:
-        result["status"] = "no_usable_file"
-        result["note"]   = "resolver found no tabular files on the landing page"
+        if oversized:
+            names = "; ".join(f"{n} ({s:,} bytes)" for n, s in oversized)
+            result["status"] = "file_too_large"
+            result["note"]   = f"tabular file(s) exceed the size ceiling, not downloaded: {names}"
+        else:
+            result["status"] = "no_usable_file"
+            result["note"]   = "resolver found no tabular files on the landing page"
         return result
 
     file_url, fname = files[0]
@@ -140,6 +145,10 @@ def process_one(row: dict, out_dir: str) -> dict:
     try:
         content = polite_get(file_url).content
         df_raw  = load_table(content, filename=fname)
+    except FileTooLarge as e:
+        result["status"] = "file_too_large"
+        result["note"]   = str(e)
+        return result
     except Exception as e:
         result["status"] = "download_failed"
         result["note"]   = str(e)[:200]

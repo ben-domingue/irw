@@ -23,6 +23,8 @@ Flags produced:
     good              confident mapping + clean QC (still needs a human glance)
     human_assistance  got data, but mapping/QC needs a person
     no_usable_file    landing page had no resolvable tabular file
+    file_too_large    tabular file exists but exceeds MAX_FILE_BYTES; flagged
+                      for manual/future handling rather than downloaded
     download_failed   network/HTTP error fetching the file
     error             unexpected problem (message recorded)
 
@@ -53,6 +55,21 @@ TABULAR_EXT = (".csv", ".tsv", ".tab", ".xlsx", ".xls",
                ".sav", ".dta", ".sas7bdat", ".rdata", ".rda", ".rds")
 PER_DOMAIN_DELAY = 1.5          # seconds between hits to the same domain
 CHECKPOINT = "irw_batch_checkpoint.jsonl"
+
+# Files over this size are flagged file_too_large instead of downloaded.
+# pandas readers (esp. read_stata/read_excel) can expand well beyond a
+# file's on-disk size in memory -- batches 19 and 20 each OOM-killed this
+# script outright (no traceback, ~21GB RSS on a 30GB box) on Dataverse
+# candidates whose .dta files ran 1.4-1.58GB. See TODO.md's "no file-size
+# guard" pipeline-improvement note.
+MAX_FILE_BYTES = 200 * 1024 * 1024  # 200MB
+
+
+class FileTooLarge(Exception):
+    def __init__(self, size: int, limit: int = MAX_FILE_BYTES):
+        self.size = size
+        self.limit = limit
+        super().__init__(f"{size:,} bytes, over the {limit:,}-byte ceiling")
 
 
 # ---------------------------------------------------------------------------
@@ -87,83 +104,95 @@ def check_license(raw: str) -> tuple[str, bool, bool]:
 def _zenodo_files(url: str) -> tuple:
     m = re.search(r"(?:record|records)/(\d+)", url)
     if not m:
-        return [], ""
+        return [], "", []
     r = requests.get(f"https://zenodo.org/api/records/{m.group(1)}",
                      headers=UA, timeout=30)
     r.raise_for_status()
     data = r.json()
     license_raw = (data.get("metadata", {}).get("license", {}) or {}).get("id", "")
-    out = []
+    out, oversized = [], []
     for f in data.get("files", []):
         key = f.get("key", "")
         link = f.get("links", {}).get("self", "")
         if key.lower().endswith(TABULAR_EXT) and link:
+            if (f.get("size") or 0) > MAX_FILE_BYTES:
+                oversized.append((key, f.get("size")))
+                continue
             out.append((link, key))
-    return out, license_raw
+    return out, license_raw, oversized
 
 
 def _figshare_files(url: str) -> tuple:
     m = re.search(r"articles/(?:[^/]+/)?(?:[^/]+/)?(\d+)", url)
     if not m:
-        return [], ""
+        return [], "", []
     r = requests.get(f"https://api.figshare.com/v2/articles/{m.group(1)}",
                      headers=UA, timeout=30)
     r.raise_for_status()
     data = r.json()
     license_raw = (data.get("license") or {}).get("name", "")
-    out = []
+    out, oversized = [], []
     for f in data.get("files", []):
         name = f.get("name", "")
         dl = f.get("download_url", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
+            if (f.get("size") or 0) > MAX_FILE_BYTES:
+                oversized.append((name, f.get("size")))
+                continue
             out.append((dl, name))
-    return out, license_raw
+    return out, license_raw, oversized
 
 
 def _dryad_files(doi: str) -> tuple:
     if not doi:
-        return [], ""
+        return [], "", []
     enc = requests.utils.quote(f"doi:{doi}", safe="")
     base = "https://datadryad.org/api/v2"
     r = requests.get(f"{base}/datasets/{enc}/versions", headers=UA, timeout=30)
     r.raise_for_status()
     versions = r.json().get("_embedded", {}).get("stash:versions", [])
     if not versions:
-        return [], ""
+        return [], "", []
     latest_ver = versions[-1]
     license_raw = latest_ver.get("license", "")
     files_link = latest_ver.get("_links", {}).get("stash:files", {}).get("href", "")
     if not files_link:
-        return [], license_raw
+        return [], license_raw, []
     r2 = requests.get(f"https://datadryad.org{files_link}", headers=UA, timeout=30)
     r2.raise_for_status()
-    out = []
+    out, oversized = [], []
     for f in r2.json().get("_embedded", {}).get("stash:files", []):
         name = f.get("path", "")
         dl = f.get("_links", {}).get("stash:download", {}).get("href", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
+            if (f.get("size") or 0) > MAX_FILE_BYTES:
+                oversized.append((name, f.get("size")))
+                continue
             out.append((f"https://datadryad.org{dl}", name))
-    return out, license_raw
+    return out, license_raw, oversized
 
 
 def _dataverse_files(url: str, doi: str) -> tuple:
     pid = f"doi:{doi}" if doi else None
     if not pid:
-        return [], ""
+        return [], "", []
     r = requests.get("https://dataverse.harvard.edu/api/datasets/:persistentId/",
                      params={"persistentId": pid}, headers=UA, timeout=30)
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
     license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
-    out = []
+    out, oversized = [], []
     for f in latest.get("files", []):
         df = f.get("dataFile", {})
         name = df.get("filename", "")
         fid = df.get("id")
         if name.lower().endswith(TABULAR_EXT) and fid:
+            if (df.get("filesize") or 0) > MAX_FILE_BYTES:
+                oversized.append((name, df.get("filesize")))
+                continue
             out.append((f"https://dataverse.harvard.edu/api/access/datafile/{fid}",
                         name))
-    return out, license_raw
+    return out, license_raw, oversized
 
 
 def _osf_files(url: str) -> tuple:
@@ -178,17 +207,25 @@ def _osf_files(url: str) -> tuple:
         f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
         headers=UA, timeout=30)
     r2.raise_for_status()
-    out = []
+    out, oversized = [], []
     for f in r2.json().get("data", []):
-        name = f.get("attributes", {}).get("name", "")
+        attrs = f.get("attributes", {})
+        name = attrs.get("name", "")
         dl = f.get("links", {}).get("download", "")
         if name.lower().endswith(TABULAR_EXT) and dl:
+            if (attrs.get("size") or 0) > MAX_FILE_BYTES:
+                oversized.append((name, attrs.get("size")))
+                continue
             out.append((dl, name))
-    return out, license_raw
+    return out, license_raw, oversized
 
 
 def resolve_data_files(row: dict) -> tuple:
-    """Dispatch to the right repository resolver. Returns ([(file_url, name)], license_str)."""
+    """Dispatch to the right repository resolver. Returns
+    ([(file_url, name)], license_str, [(name, size_bytes)]) -- the third
+    element lists tabular files that were skipped for exceeding
+    MAX_FILE_BYTES, so callers can flag them distinctly from
+    'no_usable_file'."""
     src = (row.get("source") or "").lower()
     url = row.get("url") or ""
     doi = row.get("doi") or ""
@@ -204,8 +241,8 @@ def resolve_data_files(row: dict) -> tuple:
         if src == "osf":
             return _osf_files(url)
     except Exception:
-        return [], ""
-    return [], ""
+        return [], "", []
+    return [], "", []
 
 
 # ---------------------------------------------------------------------------
@@ -214,14 +251,48 @@ def resolve_data_files(row: dict) -> tuple:
 
 _last_hit = defaultdict(float)
 
-def polite_get(url: str) -> requests.Response:
+def polite_get(url: str, max_bytes: int = MAX_FILE_BYTES) -> requests.Response:
+    """GET with per-domain rate limiting and a streaming size ceiling.
+    Raises FileTooLarge (before the full body is buffered) if the response
+    is bigger than max_bytes -- a backstop for downloads where a repo API
+    doesn't expose file size upfront (e.g. PLOS supplementary files),
+    complementing the pre-download size checks in the repo resolvers
+    above.
+
+    Retries a transient connection error (seen repeatedly in practice --
+    brief local dropouts causing DNS-resolution failures or
+    connection-refused) a couple of times with backoff before giving up,
+    so a several-second blip doesn't get recorded as a permanent
+    download_failed."""
     dom = urlparse(url).netloc
-    wait = PER_DOMAIN_DELAY - (time.time() - _last_hit[dom])
-    if wait > 0:
-        time.sleep(wait)
-    resp = requests.get(url, headers=UA, timeout=120)
-    _last_hit[dom] = time.time()
-    resp.raise_for_status()
+    for attempt in range(3):
+        wait = PER_DOMAIN_DELAY - (time.time() - _last_hit[dom])
+        if wait > 0:
+            time.sleep(wait)
+        try:
+            resp = requests.get(url, headers=UA, timeout=120, stream=True)
+            _last_hit[dom] = time.time()
+            resp.raise_for_status()
+            break
+        except (requests.exceptions.ConnectionError,
+                requests.exceptions.Timeout):
+            _last_hit[dom] = time.time()
+            if attempt == 2:
+                raise
+            time.sleep(5 * (attempt + 1))
+    cl = resp.headers.get("Content-Length")
+    if cl and int(cl) > max_bytes:
+        resp.close()
+        raise FileTooLarge(int(cl), max_bytes)
+    chunks, total = [], 0
+    for chunk in resp.iter_content(chunk_size=1 << 20):
+        total += len(chunk)
+        if total > max_bytes:
+            resp.close()
+            raise FileTooLarge(total, max_bytes)
+        chunks.append(chunk)
+    resp._content = b"".join(chunks)
+    resp._content_consumed = True
     return resp
 
 
@@ -233,7 +304,7 @@ def process_one(row: dict) -> dict:
     base = {"source": row.get("source", ""), "title": row.get("title", ""),
             "url": row.get("url", ""), "doi": row.get("doi", "")}
 
-    files, license_raw = resolve_data_files(row)
+    files, license_raw, oversized = resolve_data_files(row)
     license_norm, blocked, unknown = check_license(license_raw)
     base["license"] = license_norm
 
@@ -244,6 +315,13 @@ def process_one(row: dict) -> dict:
                 "density": "", "data_file": ""}
 
     if not files:
+        if oversized:
+            names = "; ".join(f"{n} ({s:,} bytes)" for n, s in oversized)
+            return {**base, "flag": "file_too_large",
+                    "reasons": f"tabular file(s) exceed the {MAX_FILE_BYTES:,}-byte "
+                               f"ceiling, not downloaded: {names}",
+                    "n_responses": "", "n_participants": "", "n_items": "",
+                    "density": "", "data_file": oversized[0][0]}
         return {**base, "flag": "no_usable_file",
                 "reasons": "no resolvable tabular file on landing page "
                            f"(checked {', '.join(TABULAR_EXT)})",
@@ -255,6 +333,10 @@ def process_one(row: dict) -> dict:
     try:
         content = polite_get(file_url).content
         df = load_table(content, filename=fname)
+    except FileTooLarge as e:
+        return {**base, "flag": "file_too_large", "reasons": str(e),
+                "n_responses": "", "n_participants": "", "n_items": "",
+                "density": "", "data_file": fname}
     except Exception as e:
         return {**base, "flag": "download_failed", "reasons": str(e)[:200],
                 "n_responses": "", "n_participants": "", "n_items": "",
@@ -309,7 +391,8 @@ def append_checkpoint(path: str, key: str, result: dict):
 # ---------------------------------------------------------------------------
 
 FLAG_ORDER = ["good", "human_assistance", "not_item_response",
-              "no_usable_file", "license_restricted", "download_failed", "error"]
+              "no_usable_file", "file_too_large", "license_restricted",
+              "download_failed", "error"]
 
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               resume: bool, checkpoint: str = CHECKPOINT) -> pd.DataFrame:
