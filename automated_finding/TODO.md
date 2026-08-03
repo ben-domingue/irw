@@ -3,6 +3,27 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch17.csv`** (12 rows:
+  `hicks_2020_bioveda`, `stachl_2020_belonging`, `bittencourt_2021_dfs2`,
+  `hewei_2022_msva_purchase`, `carney_2023_substance_use`,
+  `sun_2026_eap_usage/_difficulty/_content/_methods`, `shen_2020_sas20`,
+  `yu_2015_family_environment`, `jelinek_2021_cdi`) uploaded to Redivis and
+  pasted into the dictionary sheet (confirmed 2026-08-03, ben-domingue);
+  file and `irw_output/plos_batch17/` both gone from disk as expected.
+  Note: the original file had a malformed row (`carney_2023_substance_use`'s
+  Description field had an unescaped internal comma, breaking CSV
+  structure and causing a bad paste) -- fixed before the successful paste.
+  See `BATCH_LOG.md`'s "PLOS ONE batch 17" entry for full per-dataset
+  detail.
+
+- [x] **`automated_finding/human_review_plos_batch17.csv`** (146 rows)
+  pasted into the "Human eye" sheet (confirmed 2026-08-03, ben-domingue);
+  file gone from disk as expected.
+
+- [x] **PLOS ONE batch 17 — 86 of 101 worth_retrying rows** written off
+  (2026-08-03), matching the batches-6/9/12/13/16 pattern.
+  `plos_retriage_batch17.csv` deleted.
+
 - [x] **`automated_finding/biblio_falih_2026.csv`** (2 rows: `falih_2026_mds16`,
   `falih_2026_dass21`) pasted into the dictionary sheet (confirmed
   2026-08-03, ben-domingue); file gone from disk as expected. See

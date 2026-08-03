@@ -5208,3 +5208,120 @@ Resuscitation Self-Efficacy Scale for Nurses) that triaged
 `no_usable_file` even after the `.tab` fix -- their landing pages may be
 hiding a file behind a restricted sub-component rather than truly
 having none.
+
+## PLOS ONE batch 17 (2026-08-03)
+
+Ran the 30 already-logged-but-never-executed terms found orphaned in
+`search_terms_log.csv` (dated 2026-08-02, tagged `plos_batch17_triage.csv`
+but with no corresponding output file, `BATCH_LOG.md` entry, or `TODO.md`
+item -- an earlier session apparently logged the terms without ever running
+or landing the discovery pass, consistent with this repo's documented
+Dropbox-sync file-loss pattern). Recycled non-PLOS instrument/construct
+terms per `SKILL.md`'s reuse method: item response theory, reaction time
+task, reading fluency, phonological awareness, mathematics achievement,
+stroop, n-back, patient reported outcomes, numeracy, phonics, lexical
+decision, word recognition, depression, anxiety, stress, psychopathy,
+neuroticism, pain, reading comprehension, narcissism, PTSD, ADHD, autism
+spectrum, substance use, vocabulary, spelling, working memory, inhibition,
+fatigue, wellbeing.
+
+**Mid-run incident**: a per-candidate worker (crash-isolated via
+`ProcessPoolExecutor`, `irw_discover_plos.py`) hit a `FutureTimeoutError`
+and, instead of being killed, ran on unattended for 30+ minutes, growing to
+~22GB RSS and dropping host free memory to 332MB of 30GB before being
+SIGTERM'd by hand. Root cause: `pool.shutdown(wait=False,
+cancel_futures=True)` only drops futures that haven't started yet --
+`ProcessPoolExecutor` has no public API to kill an already-running task, so
+the timed-out worker kept executing (almost certainly deep in an `.xlsx`
+parse, a known memory-blowup pattern per `README.md`'s Prerequisites note)
+even after the driver logged a `timeout` row and moved on. Fixed by adding
+`_kill_pool_workers()`, which grabs the pool's underlying
+`multiprocessing.Process` objects via the `_processes` internal (stable
+across CPython 3.3-3.13 in practice) and forcibly `.terminate()`s/`.kill()`s
+them on timeout. Landed mid-run, so it didn't help this run's own
+orphaned worker (already loaded with the old code) but applies to every
+run from here on. Not a size-guard gap -- `MAX_FILE_BYTES` (2026-08-02)
+guards download size, not in-memory parse size, and this file was well
+under the 200MB download ceiling.
+
+3660 candidates -> 24 `good` + 512 `human_assistance` + 99
+`not_item_response` + 26 `error` + 25 `download_failed` + 2970
+`no_usable_file` + 3 `timeout` + 1 `crashed` (the crash: a single
+corrupt file segfaulted its isolated worker, correctly recorded and the
+batch continued). Retriage (`irw_retriage_ha.py`) on the 512
+`human_assistance` rows: 101 `worth_retrying` + 146 `human_review` + 183
+`aggregate_continuous` + 82 `not_item_response`.
+
+**Good-candidate review** (24 rows): applied the standing min-N rule first
+(`feedback_min_sample_size`) -- 9 dropped for N<50, 1 (N=91, avoidance-
+behavior/anxiety study) referred to ben-domingue who said ship if otherwise
+clean. Of the 15 survivors, full inspection (downloaded every file,
+checked `extract_si_files()`'s complete SI list, checked column
+values/ranges) found:
+- **Real, shippable**: `hicks_2020_bioveda` (16 binary items, N=770),
+  `stachl_2020_belonging` (13 items 0-4, N=183, "." sentinel), `bittencourt_
+  2021_dfs2` (Brazilian-Portuguese Dispositional Flow Scale 2, 36 items
+  1-5, N=681), `hewei_2022_msva_purchase` (14 items 1-5, N=752;
+  completion-time column parsed to `cov_completion_time_s`, IP+geolocation
+  column dropped as PII), `carney_2023_substance_use` (8-substance binary
+  checklist, N=414), `sun_2026_eap_syllabus` (4 distinct question blocks
+  under one 1-5 scale, split into 4 files -- usage/difficulty/content/
+  methods -- by item-numbering reset, N=650 each), `shen_2020_sas20`
+  (Zung SAS-20, merged from 5 per-hospital files with identical columns,
+  id offset per hospital, text-coded Likert like "considerable
+  time(3.0)" decoded to its embedded number, N=1647).
+- **False positives, dropped**: `10.1371/journal.pone.0193861` (bibliometric
+  systematic review of citation metrics, not human item response),
+  `10.1371/journal.pone.0142551` (file holds only derived signal-detection
+  stats -- counts, z-scores, d'/c -- no raw per-trial responses),
+  `10.1371/journal.pone.0143395` (only composite "Depressive symptoms"/
+  "GALES" scores + genotype, no raw items), `10.1371/journal.pone.0180298`
+  (only baseline/follow-up composite anxiety scores, no raw items),
+  `10.1371/journal.pone.0238022` (triage's n_participants=112 was actually
+  the row count -- true N=14 unique subjects, below the min-N floor;
+  second SI file is fMRI ROI activation, not item data anyway),
+  `10.1371/journal.pone.0215433` (Ghana Multidimensional Poverty Index --
+  derived/weighted deprivation indicators from a household economic
+  survey, not psychometric item responses despite fitting the mechanical
+  binary-item schema).
+- **Deferred, too complex to rush**: `10.1371/journal.pone.0299971`
+  (health-literacy self-care survey bundling at least 6 distinct scales --
+  ACCESS/10, INT/7, ATT/10, SE/8, SC/15, a 66-item HL block, FL/6 --
+  including reverse-coded `_R` duplicate columns needing exclusion; named
+  3 of the 4 confirmed instruments via WebFetch of the Methods text but
+  the HL/SC blocks need more paper time).
+
+**worth_retrying pool** (101 rows, N from 22 to 6297): per ben-domingue's
+direction, hand-reviewed the top 15 by N rather than all 101 or none.
+Found 2 more real, shippable tables: `yu_2015_family_environment` (Family
+Environment Scale, 21 raw items E1-E21 kept, 10 derived subscale-total
+columns excluded, N=4582 -- caught a real id-column bug: the raw `Number`
+column is *not* a unique person id, rows sharing a `Number` have different
+Gender/Age, so `id` falls back to row index per `datastandard.md`'s
+"Missing person ID" guidance) and `jelinek_2021_cdi` (Children's
+Depression Inventory, 27 items 0-2, N=1515, `cov_sub_sample` distinguishes
+the paper's CFA/EFA subsamples). 2 more deferred as genuinely promising
+but too complex for this pass (added to `plos_deferred_candidates.csv`):
+HELMA health-literacy scale (`10.1371/journal.pone.0149202`, 7 named
+subscales with inconsistent response encodings per block -- some
+text-coded frequency Likert, one correct/incorrect) and a 231-column
+Portuguese preoperative-stress file (`10.1371/journal.pone.0263275`)
+bundling genuine IDATE (Brazilian STAI) state/trait items and an SRQ item
+among medication-dosage and VAS columns. The other 11 of the top 15 were
+firm/historical/physiological data (EMG sensor signals, 18th-century
+baptism records, firm-year panel data), composite-scores-only files (SF-36/
+PSQI/CES-D totals, Big-Five/CRT/numeracy totals, neuropsych test batteries,
+session-level averages/SDs), stimulus materials (pre-rated word-pair norms,
+not respondent data), or demographic/derived-index survey data with no
+coherent item battery (UDAYA India adolescent survey) -- confirmed
+not-a-fit, not shipped. Remaining 86 unreviewed rows written off per the
+established batches-6/9/12/13/16 pattern; DOI/title/n/items are in
+`plos_retriage_batch17.csv` if reconsidered later.
+
+**Output**: 12 tables across 9 papers -> `biblio_plos_batch17.csv` (12
+rows), staged for Redivis upload + dictionary paste.
+`human_review_plos_batch17.csv` (146 rows) staged for the "Human eye"
+sheet. All 30 search terms already carried the `plos_batch17_triage.csv`
+tag in `search_terms_log.csv` from the earlier orphaned logging, so no
+further logging needed this batch.
+

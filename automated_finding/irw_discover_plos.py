@@ -314,6 +314,31 @@ def _new_pool() -> ProcessPoolExecutor:
     return ProcessPoolExecutor(max_workers=1)
 
 
+def _kill_pool_workers(pool: ProcessPoolExecutor) -> None:
+    """Forcibly terminates any live worker OS processes in `pool`.
+
+    `ProcessPoolExecutor.shutdown(wait=False, cancel_futures=True)` only
+    drops futures that haven't started yet -- it does NOT stop a worker
+    that's already mid-task, since the stdlib gives no public API for that.
+    On a timeout the worker is still out there, still holding whatever
+    memory it had (confirmed 2026-08-03: an abandoned timed-out worker
+    parsing an .xlsx ran unattended for 30+ minutes and grew to ~22GB RSS,
+    nearly OOMing the host, before being killed by hand). `_processes` is
+    an internal attribute (stable across CPython 3.3-3.13 in practice, used
+    here defensively) mapping pid -> the underlying multiprocessing.Process;
+    grab it before shutdown() tears the pool down and terminate it directly.
+    """
+    procs = list(getattr(pool, "_processes", {}).values())
+    for p in procs:
+        if p.is_alive():
+            p.terminate()
+    for p in procs:
+        p.join(timeout=5)
+        if p.is_alive():
+            p.kill()
+            p.join(timeout=5)
+
+
 def process_one_isolated(hit: Hit, pool: ProcessPoolExecutor) -> tuple[dict, ProcessPoolExecutor]:
     """Runs process_one(hit) in a subprocess. Returns (row, pool) -- pool is
     replaced with a fresh one if the worker crashed or hung."""
@@ -332,6 +357,7 @@ def process_one_isolated(hit: Hit, pool: ProcessPoolExecutor) -> tuple[dict, Pro
                 _new_pool())
     except FutureTimeoutError:
         pool.shutdown(wait=False, cancel_futures=True)
+        _kill_pool_workers(pool)
         return ({**base, "flag": "timeout",
                  "reasons": f"exceeded {_PROCESS_TIMEOUT}s"},
                 _new_pool())
