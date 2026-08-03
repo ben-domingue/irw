@@ -18,10 +18,10 @@ list -- it's not a Redivis table, it goes to the separate irw_site repo.
 
 Usage (run from metadata/, same convention as the other pipeline scripts):
     cd metadata
-    python3 ../.claude/skills/site-update/scripts/upload_meta.py            # all known files present in cwd
-    python3 ../.claude/skills/site-update/scripts/upload_meta.py biblio tags # only these
-    python3 ../.claude/skills/site-update/scripts/upload_meta.py --dry-run  # show plan, upload nothing
-    python3 ../.claude/skills/site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
+    python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py            # all known files present in cwd
+    python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py biblio tags # only these
+    python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --dry-run  # show plan, upload nothing
+    python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
 
 Credentials: reuses the same write-scoped (data.edit) REDIVIS_API_TOKEN
 already used by data/add2redivis/upload.py, loaded from that script's own

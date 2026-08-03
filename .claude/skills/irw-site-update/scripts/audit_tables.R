@@ -20,8 +20,8 @@
 ##
 ## Usage (run from metadata/, same convention as the numbered pipeline scripts):
 ##   cd metadata
-##   ../.claude/skills/site-update/scripts/run_pipeline.sh   # generate fresh CSVs first
-##   Rscript ../.claude/skills/site-update/scripts/audit_tables.R
+##   ../.claude/skills/irw-site-update/scripts/run_pipeline.sh   # generate fresh CSVs first
+##   Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R
 ## Optional: --dir <path>          (defaults to cwd, i.e. metadata/)
 ##           --out <path>          (markdown report; default table_audit_report.md)
 ##           --skip-dict           (skip the four Google Sheet dictionary pulls -- faster, less complete)

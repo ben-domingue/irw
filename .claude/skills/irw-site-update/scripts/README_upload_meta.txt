@@ -15,17 +15,17 @@ Notes before use:
 
 How to run (from metadata/):
 
-  python3 ../.claude/skills/site-update/scripts/upload_meta.py --dry-run
+  python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --dry-run
       # see the plan (which files, which tables, row counts) without
       # uploading anything -- always do this first
 
-  python3 ../.claude/skills/site-update/scripts/upload_meta.py
+  python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py
       # upload all known files present in metadata/, with a y/n confirm
 
-  python3 ../.claude/skills/site-update/scripts/upload_meta.py biblio tags
+  python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py biblio tags
       # only these two
 
-  python3 ../.claude/skills/site-update/scripts/upload_meta.py --yes
+  python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes
       # skip the confirmation prompt
 
 Known file -> table mapping: metadata, biblio, tags, comps_biblio,

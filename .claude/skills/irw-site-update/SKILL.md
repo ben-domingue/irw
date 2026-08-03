@@ -1,5 +1,5 @@
 ---
-name: site-update
+name: irw-site-update
 description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
@@ -122,8 +122,8 @@ misreport those tables as absent everywhere.
 ```bash
 scripts/run_pipeline.sh                                              # generate fresh CSVs first
 cd metadata
-Rscript ../.claude/skills/site-update/scripts/audit_tables.R
-Rscript ../.claude/skills/site-update/scripts/audit_tables.R --skip-dict   # faster, skips the 4 Google Sheet pulls
+Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R
+Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R --skip-dict   # faster, skips the 4 Google Sheet pulls
 ```
 
 Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim"))`
@@ -192,10 +192,10 @@ confirmed action, added 2026-08-02.
 
 ```bash
 cd metadata
-python3 ../.claude/skills/site-update/scripts/upload_meta.py            # all known files present in cwd
-python3 ../.claude/skills/site-update/scripts/upload_meta.py biblio tags # only these
-python3 ../.claude/skills/site-update/scripts/upload_meta.py --dry-run  # show the plan, upload nothing
-python3 ../.claude/skills/site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
+python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py            # all known files present in cwd
+python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py biblio tags # only these
+python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --dry-run  # show the plan, upload nothing
+python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
 ```
 
 What it does: for each known local CSV present (`metadata.csv` → table
