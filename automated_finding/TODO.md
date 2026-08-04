@@ -58,11 +58,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   entry for the full per-DOI accounting. `plos_retriage_batch18.csv`
   deleted.
 
-- [ ] **`automated_finding/biblio_batch18_nancount.csv` (14 rows, 5 papers
-  -> 14 tables) awaiting upload/paste** (2026-08-04): from the review of
-  batch 18's 16 unresolved-count `worth_retrying` rows below. Needs
-  Redivis upload + pasting into the dictionary sheet, then this file and
-  the 14 `irw_output/*.csv` files can be deleted.
+- [x] **`automated_finding/biblio_batch18_nancount.csv`** (14 rows, 5
+  papers -> 14 tables, from the review of batch 18's 16 unresolved-count
+  `worth_retrying` rows below) uploaded to Redivis and pasted into the
+  dictionary sheet (confirmed 2026-08-04, ben-domingue); file and all 14
+  `irw_output/*.csv` files gone from disk as expected.
 
 - [x] **PLOS ONE batch 18 — 16 `worth_retrying` rows with unresolved
   n_participants/n_items reviewed** (2026-08-04): fetched each article page
