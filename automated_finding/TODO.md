@@ -28,13 +28,45 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-03, ben-domingue); file gone
   from disk as expected.
 
-- [ ] **PLOS ONE batch 18 — 57 `worth_retrying` rows not yet reviewed**
-  (2026-08-03): `plos_retriage_batch18.csv` retriage output has 57 rows
-  flagged `worth_retrying` (out of 337 `human_assistance` rows total, the
-  rest split across `human_review`/`aggregate_continuous`/
-  `not_item_response`). Not hand-reviewed yet this session — next PLOS
-  batch 18 follow-up should work through these before moving to a new
-  discovery batch.
+- [x] **`automated_finding/biblio_batch18_worthretrying.csv`** (16 rows, 13
+  papers -> 17 tables, from the batch 18 `worth_retrying` review below)
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-04, ben-domingue); file and all 17 `irw_output/*.csv` files gone
+  from disk as expected.
+
+- [x] **PLOS ONE batch 18 — 57 `worth_retrying` rows reviewed** (2026-08-04):
+  `plos_retriage_batch18.csv`'s 57 `worth_retrying` rows split into 3 pools
+  before review: 7 were exact-DOI duplicates of candidates already
+  reviewed/struck in batches 10/11/14 (skipped without re-review — search
+  terms across batches keep resurfacing the same PLOS articles, this is
+  expected and not a bug); 16 had no resolved n_participants/n_items from
+  the automated pass (still open, see item below); the remaining 34 were
+  split into 3 groups of ~11-12 and reviewed in parallel by 3 agents, each
+  fetching the full article page + ALL Supporting Information files (not
+  just the first, which is all `process_one()` inspects) and applying the
+  standard license/N>=50/no-single-item/raw-vs-composite checks. Result:
+  13 papers processed to 17 tables (`zhou_2025_ehealth_literacy`/
+  `_peer_relationship`, `hayek_2022_attitude`/`_subj_norm`/`_self_efficacy`,
+  `ribeiro_2024_msk_hq`, `stolz_2015_death_attitudes`/`_authoritarianism`,
+  `doustmohammadian_2017_fnlit`, `koo_2016_comm_technique_use`/`_opinion`,
+  `mccarlie_2022_ortho_literacy`, `latifi_2026_insect_fear`,
+  `teodorini_2020_modafinil_attitudes`, `duong_2025_tbl_experience`/
+  `_confidence`), all CC BY 4.0. 21 other candidates skipped, overwhelmingly
+  because the only SI file available was pre-computed composite/subscale
+  totals rather than raw item-level responses (a recurring pattern this
+  batch) — see `BATCH_LOG.md`'s "PLOS ONE batch 18 worth_retrying review"
+  entry for the full per-DOI accounting. `plos_retriage_batch18.csv`
+  deleted.
+
+- [ ] **PLOS ONE batch 18 — 16 `worth_retrying` rows with unresolved
+  n_participants/n_items still unreviewed** (2026-08-04): these rows'
+  automated triage pass couldn't parse a clean participant/item count
+  (likely a parse failure on the first SI file, or a non-tabular structure)
+  so they were held out of the review pass above rather than guessed at.
+  DOIs: 10.1371/journal.pone.0176698, 0277323, 0345874, 0339999, 0259364,
+  0257726, 0324707, 0229772, 0189592, 0299537, 0119855, 0299736, 0276734,
+  0257552, 0269201, 0304140. Needs a person or agent to fetch each article
+  page directly and manually inspect the SI files before deciding.
 
 - [x] **`automated_finding/biblio_plos_batch17.csv`** (12 rows:
   `hicks_2020_bioveda`, `stachl_2020_belonging`, `bittencourt_2021_dfs2`,

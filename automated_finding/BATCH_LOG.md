@@ -5829,3 +5829,101 @@ staged for Redivis upload + dictionary paste. `human_review_plos_batch18.csv`
 need hand review (left open in `TODO.md`). 1 pipeline bug fixed
 (`irw_discover_plos.py` timeout-handler crash). 1 standing convention
 change (CSV-only output, codified in `datastandard.md`).
+
+## 2026-08-04: PLOS ONE batch 18 worth_retrying review
+
+Worked through the 57 `worth_retrying` rows left open from batch 18's retriage
+(`plos_retriage_batch18.csv`), per the standing note in `TODO.md`.
+
+**Triage before review**: checked all 57 DOIs against `BATCH_LOG.md`/`TODO.md`
+for prior appearances first (search terms across PLOS batches keep
+resurfacing the same articles). 7 were exact-DOI duplicates already
+reviewed/struck in earlier batches — skipped without re-review:
+`10.1371/journal.pone.0272095` (batch 10/13, Dutch self/other/meta-personality,
+deferred as too complex, unrelated to this decision), `0168338` (batch 14,
+struck for good, N=44), `0234997` (batch 10, all composite totals),
+`0256001` (batch 10, T1-T4 composite columns), `0272987` (batch 9, all
+composite scores), `0270464` (batch 9/10, composite-only), `0203336` (batch
+9, BSI/FSB composite scores). 16 more had no resolved `n_participants`/
+`n_items` from the automated triage pass — held out rather than reviewed
+blind; left open in `TODO.md` with the DOI list for a follow-up pass.
+
+**Review of the remaining 34**: split into 3 groups (~11-12 each) and
+reviewed in parallel by 3 agents. Each agent fetched the full article page
++ ALL Supporting Information files (not just the first — `process_one()`'s
+single-file inspection is exactly why these needed a second look) and
+applied the standard checks: explicit CC0/CC-BY/CC-BY-SA confirmed on the
+page, N>=50, no single-item scales, raw item-level responses vs.
+pre-computed composite/subscale totals (the dominant reason for skips this
+batch — see below).
+
+**Processed (13 papers -> 17 tables, all CC BY 4.0)**:
+- `zhou_2025_ehealth_literacy` (8i) / `_peer_relationship` (16i) — Chinese
+  university students, N=14,892; composite id (region-group + within-group
+  Number, since Number resets per group) since the raw Number column
+  wasn't globally unique. `10.1371/journal.pone.0330637`
+- `hayek_2022_attitude` (4i) / `_subj_norm` (3i) / `_self_efficacy` (5i) —
+  Theory-of-Planned-Behaviour survey of Lebanese secondary students, N=345,
+  -2..2 scale. `10.1371/journal.pone.0265595`
+- `ribeiro_2024_msk_hq` (14i) — European Portuguese MSK-HQ, N=190, baseline
+  (T0) only (T1 item-level responses weren't shared, only a T1 total).
+  `10.1371/journal.pone.0308623`
+- `stolz_2015_death_attitudes` (6i) / `_authoritarianism` (8i) — Austrian
+  national euthanasia-attitudes survey, N=1958/1965; authoritarianism scale
+  matches the paper's own S2 Table (alpha=0.79). `10.1371/journal.pone.0124320`
+- `doustmohammadian_2017_fnlit` (58i) — Food and Nutrition Literacy scale,
+  Iranian elementary schoolchildren, N=373, 10 sub-domains, 0-4 scale.
+  `10.1371/journal.pone.0179196`
+- `koo_2016_comm_technique_use` (12i) / `_opinion` (18i) — Maryland nurse
+  practitioners' oral-health-literacy communication survey, N=212/211, 1-4
+  scale, value 9 ("not applicable") filtered as sentinel.
+  `10.1371/journal.pone.0146545`
+- `mccarlie_2022_ortho_literacy` (11i) — binary orthodontic-literacy quiz,
+  N=159 (paper's own abstract says 172; triage's N=58 estimate was simply
+  wrong). `10.1371/journal.pone.0273328`
+- `latifi_2026_insect_fear` (32i) — Insect Fear Questionnaire, Iranian
+  schoolchildren, N=1369, 1-5 scale. `10.1371/journal.pone.0344126`
+- `teodorini_2020_modafinil_attitudes` (8i) — attitudes toward modafinil for
+  cognitive enhancement, N=284 of 345 total rows (168-column file, only
+  Q10.1_1-8 was a genuine Likert battery, rest was drug-use
+  history/checkboxes/free text). `10.1371/journal.pone.0227818`
+- `duong_2025_tbl_experience` (19i) / `_confidence` (4i) — team-based-learning
+  pre/post study, Vietnamese nursing students, N=186, mapped pre/post to
+  `wave` 1/2; two other scale blocks in the same file (TBL-SAI, class
+  engagement) not shipped — ambiguous raw-vs-recoded column pairs (e.g.
+  `D4_Q` vs `D4`) couldn't be resolved without the original questionnaire.
+  `10.1371/journal.pone.0323656`
+
+**Skipped (21, dominant reason: SI file has only pre-computed composite/
+subscale totals, not raw items)**: `0243958` (exam scores by course, not
+item responses), `0267580` (incoherent single-item vaccination-intention
+outcome), `0273579` (PHQ/GAD/ULS/DOCS/RFS totals only, CC0 but content
+doesn't qualify), `0152457` (demographics/MMSE total only), `0222929`
+(FSS/MADRS totals only), `0199605` (DASS/Rosenberg/SWEMWBS totals only),
+`0323489` (PSQI total + actigraphy metrics only), `0241982` (composite
+totals, one column explicitly mean-imputed), `0270427` (N=41, below
+minimum, also weak battery), `0342247` (categorical
+professional-practices survey, not ordinal item response), `0311248`
+(physical-activity outcome measures, no Likert battery), `0267181` (ASD-MBQ
+subscale/composite totals only), `0254953` (clinical t-scores/diagnostic
+flags only), `0294593` (fractional composite/latent-variable SEM scores),
+`0326825` (project-level matrices, not person-level), `0308973` (aggregate
+observer/self totals only), `0200609` (mean/composite construct scores
+only, codebook confirms), `0271030` (5-column aggregate subscale file),
+`0154240` (rich multi-scale file but Spanish text-category responses need
+verified official scoring keys not evident from the data alone — flagged
+for dedicated future processing rather than shipped this pass), `0217482`
+(mean/Z-score composites only), `0342678` (PROMIS T-scores + single-item
+measures only), `0315442` (Delphi panel, N=panelists well under 50 by
+design), `0136786` (EEG/P300 + composite neuropsych scores, physiological
+not item-level), `0196718` (N=49, below minimum, and composite totals
+only).
+
+No license-blocked candidates this pass — every skip was content-driven;
+all 34 reviewed articles carried an explicit CC BY 4.0 (or CC0) statement.
+
+**Output this pass**: 17 tables across 13 papers ->
+`biblio_batch18_worthretrying.csv`, staged for Redivis upload + dictionary
+paste (open in `TODO.md`). 16 rows with unresolved n_participants/n_items
+still need a manual look (open in `TODO.md` with the DOI list).
+`plos_retriage_batch18.csv` deleted.
