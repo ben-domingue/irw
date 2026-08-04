@@ -2931,3 +2931,33 @@ date,query,output_file,notes
 2026-08-03,physical activity enjoyment,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
 2026-08-03,youth development,monthly_candidates_2026-08-03.csv,"monthly automated run; 1 candidates; sources=osf,dataverse; since=2026-05-05"
 2026-08-03,employability skills,monthly_candidates_2026-08-03.csv,"monthly automated run; 2 candidates; sources=osf,dataverse; since=2026-05-05"
+2026-08-03,secondary traumatic stress,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,fear of negative evaluation,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,parenting self-efficacy,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,family functioning,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,internet addiction,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,work-family conflict,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,specific phobia,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,fatigue severity,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,workplace bullying,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,team cohesion,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,counterproductive work behavior,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,smartphone addiction,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,technostress,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,problematic internet use,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,health literacy,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,sport anxiety,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,sedentary behavior,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,relationship conflict,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,early numeracy,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,caregiver burnout,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,chronic pain,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,functional disability,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,pain self-efficacy,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,authoritarianism,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,intergroup contact,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,disinformation,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,test anxiety,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,spatial reasoning,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,divergent thinking,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-03,career decision making,plos_batch18_triage.csv,PLOS batch18; recycled from non-PLOS rows per SKILL.md term-reuse method

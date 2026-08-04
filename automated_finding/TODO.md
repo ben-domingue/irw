@@ -3,6 +3,39 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch18_full.csv`** (33 rows,
+  consolidated from all 4 parallel-agent review passes over batch 18's 18
+  `good` candidates: `valverdeberrocoso_2021_sqd`/`_tictip`/
+  `_learning_design`, `pietraszkiewicz_2017_leader_eval`,
+  `sun_2021_blockchain_loan_adoption`, `matarboumosleh_2017_spai26`/`_phq2`/
+  `_gad2`, `zeng_2026_gai_ttf`/`_role_adapt`/`_self_efficacy`/
+  `_inst_support`/`_exploration`/`_exploitation`/`_learning_effect`,
+  `ordak_2026_vaccine_misreasoning`, `evans_2023_vaccine_hesitancy`/
+  `_vaccination_norms`, `choy_2022_affect`/`_extraneous_events`/
+  `_intent_career`/`_lifelong_career`/`_resilience`, `nam_2024_khlat`/
+  `_selfcare`/`_access`/`_medint`/`_attitude`/`_selfeff`/`_function`,
+  `jung_2018_media_use`, `yang_2025_intercultural_contact`/`_aiccs`)
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-03, ben-domingue); file and all 33 `irw_output/*.csv` files gone
+  from disk as expected. See `BATCH_LOG.md`'s batch 18 good-candidate
+  review entries (2026-08-03) for full per-paper detail. 4 papers were
+  reviewed and skipped (aggregate/derived data or a choice-experiment
+  structure that doesn't fit the schema); 2 more skipped pre-emptively for
+  N<50 before review even started (N=14, N=24).
+
+- [x] **`automated_finding/human_review_plos_batch18.csv`** (116 rows,
+  batch 18's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-03, ben-domingue); file gone
+  from disk as expected.
+
+- [ ] **PLOS ONE batch 18 — 57 `worth_retrying` rows not yet reviewed**
+  (2026-08-03): `plos_retriage_batch18.csv` retriage output has 57 rows
+  flagged `worth_retrying` (out of 337 `human_assistance` rows total, the
+  rest split across `human_review`/`aggregate_continuous`/
+  `not_item_response`). Not hand-reviewed yet this session — next PLOS
+  batch 18 follow-up should work through these before moving to a new
+  discovery batch.
+
 - [x] **`automated_finding/biblio_plos_batch17.csv`** (12 rows:
   `hicks_2020_bioveda`, `stachl_2020_belonging`, `bittencourt_2021_dfs2`,
   `hewei_2022_msva_purchase`, `carney_2023_substance_use`,
@@ -948,4 +981,3 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`gerber_2022_altruism`, `_selfesteem`, `_eas_temperament`). The paper's
   Measures section cleanly mapped every column. See `BATCH_LOG.md`'s
   "Backlog-resolution pass" entry.
-

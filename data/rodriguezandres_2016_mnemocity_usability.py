@@ -68,12 +68,6 @@ def convert():
     print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
 
-    try:
-        import pyreadr
-        pyreadr.write_rdata(out_path.replace(".csv", ".RData"), long, df_name="d")
-    except ImportError:
-        print("pyreadr not available; skipped .RData export")
-
 
 if __name__ == "__main__":
     convert()

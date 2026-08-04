@@ -5561,3 +5561,271 @@ Worth knowing for future sessions: `automated_finding/` is a live working
 directory the user may be editing concurrently, not an exclusively
 agent-owned scratch space -- re-check TODO.md/BATCH_LOG.md and consider
 `git status`/mtimes before treating a missing staging CSV as data loss.
+
+## 2026-08-03: PLOS ONE 4-paper `good`-candidate review (manual, ad hoc)
+
+Four PLOS ONE papers flagged `good` by `irw_discover_plos.py` were reviewed
+by hand (fetch full SI file list per article, not just the triage-flagged
+file, per the "human glance" rule).
+
+- **`10.1371/journal.pone.0287795`** (concealable stigmatized identities in
+  academic science/engineering) -- **skipped**. Triage flagged S2 Appendix
+  (de-identified data, N=2013) as tabular, but it contains only demographic
+  classification / identity-holding indicators (gender, race, income,
+  first-gen status, 8 binary "do you hold identity X" flags) -- not a
+  coherent multi-item psychometric scale with a shared underlying
+  construct. The actual Likert-scale measure described in Methods (4-point
+  concealable-stigma ratings, 1=not stigmatized to 4=extremely
+  stigmatized) is not in this file; only its regression results are shared
+  (S4 Table). No raw item-response data to ship.
+- **`10.1371/journal.pone.0180298`** (avoidance behavior, social anxiety
+  disorder vs. specific phobia) -- **skipped**. S1/S2 Dataset (SAD n=91,
+  phobia n=130) each contain only 6 columns: participant id, "General
+  anxiety baseline/follow-up" (BAI total, values like 21/10/6 consistent
+  with a 0-63 sum score, not 0-3 per-item), "Avoidance" (single aggregate
+  score), number of disorders, treatment flag. Derived/aggregate scores
+  only -- no raw BAI or avoidance-situation item-level data shared.
+- **`10.1371/journal.pone.0256283`** (ICT integration in teacher education,
+  Spain) -- **processed**, 3 tables from one raw response sheet
+  (`journal.pone.0256283_S2_File.xlsx`, actually `.s003` -- `.s001` is a
+  TIFF diagram, `.s002` the survey-instrument PDF): `valverdeberrocoso_
+  2021_sqd` (24 items, 1-6, N=251), `valverdeberrocoso_2021_tictip` (28
+  items, 1-6, N=251 -- raw sheet has one more TICTIP item than the paper's
+  reported 27, shipped as administered rather than guessing which one the
+  paper's factor analysis dropped), `valverdeberrocoso_2021_learning_
+  design` (22 items across SPA/RES/PRA dimensions via `item_family`, 1-6,
+  N=251). No covariates in the raw sheet despite Methods describing
+  demographics. No imputation language found in the article text.
+  `data/valverdeberrocoso_2021_ict.py`.
+- **`10.1371/journal.pone.0186045`** (leader evaluation and team
+  cohesiveness) -- **processed**, `pietraszkiewicz_2017_leader_eval`: team
+  members' other-ratings of their leader on 4 skill items (management,
+  moderation, empathy, motivation), 0-10 scale with a documented 99=no-data
+  sentinel (confirmed via the file's own DataDictionary sheet), 2 waves
+  (Time I month 3 / Time II month 9), N=258. The parallel `SelfEvaluation`
+  sheet (leaders self-rating, same 4 items/waves) was **not** shipped:
+  only 45 leaders, below the N>=50 floor. Also dropped: single-item
+  OOE1/OOE2 (overall rating) and FutureL1/"Future L2" (binary
+  team-cohesiveness network question) -- both single-item measures;
+  O_Attendance2 (wave-2-only covariate, not an item); NameL/NamesM (PII,
+  real names) and duplicate "Gender M"/"Gender L" columns.
+  `data/pietraszkiewicz_2017_leader_eval.py`.
+
+All 4 articles confirmed CC BY 4.0 on the article page itself ("This is an
+open access article distributed under the terms of the Creative Commons
+Attribution License...").
+
+**Output**: 4 tables across 2 papers -> `biblio_plos_4paper_review.csv`
+(4 rows), staged for Redivis upload + dictionary paste. 2 papers skipped
+(1 derived-scores-only, 1 not-item-response-data) -- no further action
+needed on those two.
+
+## 2026-08-03 -- PLOS ONE batch 18: 4-paper review (8 tables shipped, 1 skipped)
+
+Reviewed 4 PLOS ONE papers flagged `good` by `irw_discover_plos.py` triage,
+each already confirmed with a downloadable tabular SI file and CC BY 4.0
+license on the article page (all 4 license statements individually
+re-confirmed on the article page during this review, verbatim: "This is an
+open access article distributed under the terms of the Creative Commons
+Attribution License..."). For each, fetched the full article page (Methods,
+Data Availability, full Supporting Information list, not just the file
+triage flagged) before deciding.
+
+- **Ordak (2026)**, "Statistical misreasoning in online content about
+  vaccines" (DOI `10.1371/journal.pone.0355341`) -- **processed**. Only one
+  SI file (S1 File, `.s001`): 597 anti-vaccination Facebook posts, each
+  hand-coded 0/1 for presence of 10 statistical-misreasoning types
+  (correlation-causation fallacy, base rate neglect, denominator neglect,
+  cherry picking, relative-vs-absolute risk error, small sample fallacy,
+  intuitive reasoning error, random fluctuation misinterpretation,
+  overinterpretation of percentages, graphical scale misreading). No
+  survey instrument -- the focal unit (`id`) is the post, not a person,
+  same category as the previously-shipped dog-cognition table. Binary
+  checklist-style coding fits the item-response shape cleanly: clean data,
+  no NaN, no sentinel, N=597 posts x 10 items, `resp` 0/1.
+  `data/ordak_2026_vaccine_misreasoning.py`.
+- **Evans et al. (2023)**, "Outcomes of a social media campaign to promote
+  COVID-19 vaccination in Nigeria" (DOI `10.1371/journal.pone.0290757`) --
+  **processed, 2 tables**. Triage flagged S1 Dataset (`.s003`) as the
+  tabular file, but the article also has an S2 File codebook (`.s002`,
+  DOCX) that was essential to interpret the raw column names -- fetched
+  and read it before writing the script. 3-wave RCT-style survey (baseline
+  + 2 follow-ups) with `treat` (campaign vs. comparison state, derived
+  from state but itself a raw group-assignment field, not a composite) and
+  two distinct 5-item 1-5 Likert scales per wave: a vaccine-hesitancy index
+  (benefit/everyone/safe/stress/unneces) and a pro-vaccination social-norms
+  scale (close/family/friends/healthc/nigerian), split into 2 output files
+  per the one-scale-per-file rule. Excluded as derived/aggregate: `fivec*`/
+  `norms*` (row-mean composites, codebook marks with `*`), `vaxxed*`/
+  `ltfu*` (derived binaries), and the single-item primary vaccination-status
+  outcome (not a scale). Checked the paper's imputation language explicitly
+  ("imput" appears 15x) -- confirmed it only describes downstream
+  carry-forward and multiple-imputation-by-chained-equations robustness
+  checks performed in Stata for analysis, not baked into the shared raw
+  file; the wave-2/3 NaN counts match the reported attrition pattern
+  exactly, confirming this is the pre-imputation raw file.
+  `data/evans_2023_vaccine_hesitancy.py` (N=1933, 5 items, resp 1-5),
+  `data/evans_2023_vaccination_norms.py` (N=1933, 5 items, resp 1-5).
+- **Fragaszy et al. (2015)**, "'Vision for Action' in Young Children
+  Aligning Multi-Featured Objects" (DOI `10.1371/journal.pone.0140033`) --
+  **skipped, N too small**. Only SI file is S1 Table (`.s001`): downloaded
+  and inspected -- confirmed genuinely trial-by-trial categorical/ordinal
+  alignment scoring (success/failure per trial, clock-face alignment
+  rubric per attempt, contact-angle categories), not raw kinematic/motion-
+  capture data, so it would have been in-scope on content grounds (same
+  reasoning that let the earlier dog-cognition dataset through). But the
+  raw data has only 27 unique children (`Subject and trial` column parses
+  to 27 distinct subject codes across 372 trial rows) -- well under the
+  N>=50 floor, so skipped regardless of shape. No nonhuman primate raw
+  data was in the SI file (the primate comparison in the paper draws on
+  other published studies, not new data attached here).
+- **Choy et al. (2022)**, "Career choice of tourism students in a
+  triple-whammy crisis" (DOI `10.1371/journal.pone.0279411`) --
+  **processed, 5 tables**. Only SI file (S1 Data, `.s001`) already had
+  clean construct-prefixed item columns (Affect1-3, Extraneous1-4,
+  Intent1-3, Lifelong1-3, Resilience1-4), 6-point Likert (1=Disagree
+  strongly...6=Agree strongly per Methods), split into 5 files (one per
+  construct) per the one-scale-per-file rule. Found and filtered a `-999`
+  missing-value sentinel present on every item column (5-45 occurrences
+  per item) -- numerically it sits far outside the 1-6 range so it's an
+  unambiguous sentinel, not a borderline judgment call.
+  `data/choy_2022_career_choice.py` writes all 5:
+  `choy_2022_affect` (N=366, 3 items), `choy_2022_extraneous_events`
+  (N=402, 4 items), `choy_2022_intent_career` (N=402, 3 items),
+  `choy_2022_lifelong_career` (N=391, 3 items), `choy_2022_resilience`
+  (N=402, 4 items); all resp 1-6.
+
+**Output**: 8 tables across 3 papers -> `biblio_plos_batch18.csv` (8 rows),
+staged for Redivis upload + dictionary paste. 1 paper skipped (N=27 < 50
+floor) -- no further action needed on it.
+
+## 2026-08-03: PLOS ONE 4-paper `good`-candidate review #2 (manual, ad hoc)
+
+Four more PLOS ONE papers flagged `good` by `irw_discover_plos.py` were
+reviewed by hand (fetched full article + SI file list per paper, not just
+the triage-flagged file).
+
+- **`10.1371/journal.pone.0245964`** (SME Blockchain-loan adoption,
+  extended complexity theory) -- **processed**. Only one tabular SI file
+  (`S1 Data.csv`, `.s002`; `.s001` is a DOCX appendix) -- exactly the one
+  triage flagged. 5 constructs (perceived risk, reward sensitivity,
+  perceived fairness, complexity, usage intention) x 3 items, 7-pt Likert,
+  no covariates in the file. All 15 items clean integers 1-7, N=296.
+  -> `sun_2021_blockchain_loan_adoption` (296 ids, 15 items, resp 1-7).
+  `data/sun_2021_blockchain_loan_adoption.py`.
+- **`10.1371/journal.pone.0182239`** (depression/anxiety/smartphone
+  addiction in university students) -- **processed**, 3 tables from one
+  raw file (`S1 Dataset.xls`, only SI file). SPAI-26 (4-pt Likert),
+  PHQ-2 (0-3), GAD-2 (0-3) are three distinct instruments -> one file
+  each per datastandard.md. Subscale/total columns
+  (Compulsive_Behavior/Functional_Impairment/Withdrawal/Tolerance/
+  TotAddiction_Score, Depression_score, Anxiety_score) excluded as
+  composites. Missing values coded as literal string "." throughout
+  (items and covariates) -- coerced to NaN and dropped.
+  -> `matarboumosleh_2017_spai26` (683 ids, 26 items, resp 1-4),
+  `matarboumosleh_2017_phq2` (416 ids, 2 items, resp 0-3),
+  `matarboumosleh_2017_gad2` (417 ids, 2 items, resp 0-3).
+  `data/matarboumosleh_2017_smartphone_depr_anx.py`.
+- **`10.1371/journal.pone.0346696`** (GAI-assisted learning, human-AI
+  collaboration) -- **processed**, 7 tables from one raw file (`S1
+  File.xlsx`, only SI file; opaque `Q1..Q39` column names). The HTML
+  article renders Table 2 ("Measurement Items and Sources") as an image,
+  so the Q-number -> construct/item-code mapping was pulled from the PLOS
+  full-text XML asset instead (`.../article/asset?id=...xml`), which has
+  the table as real text: TTF=Q5-9, RA=Q10-14, SE=Q15-19, IS=Q20-24,
+  Exploration=Q25-29, Exploitation=Q30-34, LE=Q35-39 (7 constructs x 5
+  items, 7-pt Likert). Items renamed to their construct-prefixed codes
+  (TTF1..TTF5 etc.) per Table 2 rather than left as raw Q-numbers.
+  Q1/Q2/Q4 (identity, GAI-usage duration, academic field) and
+  Q3_Choice1-5 (GAI-tool multi-select checkboxes) kept as covariates. All
+  35 items clean integers 1-7, N=207. -> `zeng_2026_gai_ttf`,
+  `_role_adapt`, `_self_efficacy`, `_inst_support`, `_exploration`,
+  `_exploitation`, `_learning_effect` (207 ids, 5 items each, resp 1-7).
+  `data/zeng_2026_gai_learning.py`.
+- **`10.1371/journal.pone.0348206`** (WFH/hybrid workplace flexibility
+  preferences during COVID-19) -- **skipped, not item-response data**.
+  Triage flagged `S2 File.xlsx` (751 respondents, 335 columns); inspected
+  the actual file plus `S1 File` (the DOCX survey instrument). The core
+  measure is a best-worst-scaling discrete-choice experiment (14 choice
+  tasks x 4 attribute-combinations, `Q3.2_1`..`Q3.15_4`) plus scattered
+  multi-select checkboxes, categorical demographics, and several
+  ambiguous free-text/derived columns (`hair`, `nail`, `summing`,
+  `marking`) with no codebook resolving them cleanly. This is a choice
+  experiment, not a rateable Likert item battery -- doesn't fit the
+  standard long id/item/resp schema without extensive, uncertain
+  codebook reverse-engineering (datastandard.md's "process data and
+  trials" edge case: flag for human review rather than force-fitting).
+
+All 4 articles confirmed CC BY 4.0 on the article page itself ("This is an
+open access article distributed under the terms of the Creative Commons
+Attribution License...").
+
+**Output**: 11 tables across 3 papers -> `biblio_plos_batch_2026_08_03.csv`
+(11 rows), staged for Redivis upload + dictionary paste. 1 paper skipped
+(best-worst-scaling choice experiment, not Likert item data).
+
+## 2026-08-03: PLOS ONE batch 18 — discovery, retriage, good-candidate review, and RData cleanup
+
+**Discovery**: 30 English terms recycled from `search_terms_log.csv` (non-
+PLOS rows not yet tried against PLOS, per the term-reuse method in
+`SKILL.md`) run against PLOS ONE via `irw_discover_plos.py` ->
+`plos_batch18_triage.csv` (1,998 candidates: 18 `good`, 337
+`human_assistance`, rest `no_usable_file`/`not_item_response`/
+`download_failed`/`error`/`timeout`).
+
+**Pipeline bug found and fixed mid-run**: `irw_discover_plos.py`'s
+`process_one_isolated()` called `pool.shutdown(wait=False,
+cancel_futures=True)` *before* `_kill_pool_workers(pool)` on a
+`FutureTimeoutError` — but `shutdown()` clears `pool._processes` to
+`None`, so `_kill_pool_workers` then crashed with `AttributeError:
+'NoneType' object has no attribute 'values'`. This propagated all the way
+out of `main()`, silently killing the whole batch while the timed-out
+worker was left running unsupervised (exactly the "abandoned worker"
+failure mode the function's own docstring already warned about — the
+fix for that just hadn't been ordered correctly). Fixed by reordering
+(kill workers first, then shutdown) and defensively guarding against
+`None` in `_kill_pool_workers`. Recovered by killing the stuck
+process/orphaned worker and resuming with `--resume` (skipped the 168
+candidates already captured before the crash).
+
+**Retriage** (`irw_retriage_ha.py` on the 337 `human_assistance` rows):
+116 `human_review` (-> `human_review_plos_batch18.csv`, staged for the
+"Human eye" sheet), 99 `aggregate_continuous`, 65 `not_item_response`, 57
+`worth_retrying` (not yet reviewed — see `TODO.md`).
+
+**Good-candidate review**: of 18 `good` rows, 2 skipped pre-emptively for
+N<50 (football-VR N=14, flicker-light N=24) without spending review time.
+Remaining 16 papers split across 4 parallel background agents (4 papers
+each), each independently reading the full article + all SI files (not
+just the one triage flagged), verifying raw-vs-derived data, and writing
+processing scripts per `datastandard.md`. Results: 12 papers processed ->
+33 tables total; 4 skipped (2 aggregate/derived-only, 1 choice-experiment
+structure out of schema scope, 1 N=27 after inspection). Per-paper detail
+already in this log under "PLOS ONE 4-paper `good`-candidate review",
+"PLOS ONE 4-paper `good`-candidate review #2", "PLOS ONE batch 18" (Ordak/
+Evans/Choy), and the Nam/Jung/Shin/Yang group (Shin skipped for
+aggregate-only data, the other 3 processed -> 10 tables, biblio rows
+written directly to `biblio_plos_batch18_full.csv` since that group's
+agent didn't stage its own file). All 4 groups' staging CSVs consolidated
+into one `biblio_plos_batch18_full.csv` (33 rows) after verifying every
+referenced `irw_output/*.csv` exists with the correct schema and N>=50;
+the 4 individual per-group staging files were deleted once merged.
+
+**RData cleanup (ben-domingue, 2026-08-03): stop writing `.RData` output
+files in this pipeline, CSV only.** Redivis upload only ever consumes the
+`.csv`; the parallel `pyreadr.write_rdata(...)` call that had crept into
+~20 `data/*.py` scripts (inherited from `CLAUDE.md`'s general "both `.csv`
+and `.RData`" convention for the main `data/` pipeline, which does not
+apply to `automated_finding`) was dead weight. Stripped the RData-writing
+code from all 20 affected scripts (including the 3 group-B/C/D scripts
+just written this batch), deleted all `.RData` files already generated in
+`irw_output/`, and added an explicit note to `datastandard.md`'s "Enforce
+column order and save" section stating CSV-only overrides the general
+convention for this pipeline specifically, so this doesn't recur.
+
+**Output this pass**: 33 tables across 12 papers -> `biblio_plos_batch18_full.csv`,
+staged for Redivis upload + dictionary paste. `human_review_plos_batch18.csv`
+(116 rows) staged for the "Human eye" sheet. 57 `worth_retrying` rows still
+need hand review (left open in `TODO.md`). 1 pipeline bug fixed
+(`irw_discover_plos.py` timeout-handler crash). 1 standing convention
+change (CSV-only output, codified in `datastandard.md`).

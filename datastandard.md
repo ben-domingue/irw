@@ -169,6 +169,13 @@ long = long[out_cols]
 long.to_csv(path, index=False)
 ```
 
+**CSV only — do not also write a `.RData` file.** This overrides the general
+`data/` convention (`CLAUDE.md`'s "both `.csv` and `.RData`") specifically
+for the `automated_finding` pipeline: Redivis upload only ever consumes the
+`.csv`, so a parallel `pyreadr.write_rdata(...)` call is dead weight in
+every script that has one — skip it entirely rather than wrapping it in a
+try/except.
+
 Print a summary line for each file:
 ```python
 print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "

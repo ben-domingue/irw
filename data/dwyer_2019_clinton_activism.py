@@ -66,15 +66,6 @@ def _save(long, out_name):
     long.to_csv(out_path, index=False)
     print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
-    try:
-        pyreadr_save(long, out_path)
-    except Exception as e:
-        print(f"  ({out_name} RData export skipped: {e})")
-
-
-def pyreadr_save(long, out_path):
-    import pyreadr
-    pyreadr.write_rdata(out_path.replace(".csv", ".RData"), long, df_name="d")
 
 
 def convert():

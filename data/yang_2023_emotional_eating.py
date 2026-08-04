@@ -77,11 +77,6 @@ def _process(df, cols, valid_min, valid_max, cov_cols, out_name, item_prefix):
     long.to_csv(out_path, index=False)
     print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
-    try:
-        import pyreadr
-        pyreadr.write_rdata(out_path.replace(".csv", ".RData"), long, df_name="d")
-    except Exception as e:
-        print(f"  ({out_name} RData export skipped: {e})")
 
 
 def convert():

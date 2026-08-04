@@ -328,7 +328,7 @@ def _kill_pool_workers(pool: ProcessPoolExecutor) -> None:
     here defensively) mapping pid -> the underlying multiprocessing.Process;
     grab it before shutdown() tears the pool down and terminate it directly.
     """
-    procs = list(getattr(pool, "_processes", {}).values())
+    procs = list((getattr(pool, "_processes", None) or {}).values())
     for p in procs:
         if p.is_alive():
             p.terminate()
@@ -356,8 +356,8 @@ def process_one_isolated(hit: Hit, pool: ProcessPoolExecutor) -> tuple[dict, Pro
                             "e.g. a corrupt .sav/.xlsx file)"},
                 _new_pool())
     except FutureTimeoutError:
-        pool.shutdown(wait=False, cancel_futures=True)
         _kill_pool_workers(pool)
+        pool.shutdown(wait=False, cancel_futures=True)
         return ({**base, "flag": "timeout",
                  "reasons": f"exceeded {_PROCESS_TIMEOUT}s"},
                 _new_pool())

@@ -113,12 +113,6 @@ def convert():
         long.to_pickle(out_path.replace(".csv", ".pkl"))  # scratch, not shipped
         os.remove(out_path.replace(".csv", ".pkl"))
 
-        try:
-            import pyreadr
-            pyreadr.write_rdata(out_path.replace(".csv", ".RData"), long, df_name="d")
-        except Exception as e:
-            print(f"WARNING: could not write RData for {out_name}: {e}")
-
         print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
               f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
 

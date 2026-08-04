@@ -72,12 +72,6 @@ def convert():
     out_name = "preussmattsson_2022_ownership"
     csv_path = os.path.join(OUT_DIR, out_name + ".csv")
     long.to_csv(csv_path, index=False)
-    try:
-        import pyreadr
-        pyreadr.write_rdata(os.path.join(OUT_DIR, out_name + ".RData"),
-                             long, df_name="d")
-    except ImportError:
-        long.to_pickle(os.path.join(OUT_DIR, out_name + ".rdata_fallback.pkl"))
 
     print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
           f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
