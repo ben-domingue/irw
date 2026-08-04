@@ -5927,3 +5927,64 @@ all 34 reviewed articles carried an explicit CC BY 4.0 (or CC0) statement.
 paste (open in `TODO.md`). 16 rows with unresolved n_participants/n_items
 still need a manual look (open in `TODO.md` with the DOI list).
 `plos_retriage_batch18.csv` deleted.
+
+## 2026-08-04: PLOS ONE batch 18 nan-count review
+
+Follow-up to the worth_retrying review above: the 16 rows whose automated
+triage pass couldn't resolve a clean n_participants/n_items were held out
+of that pass rather than guessed at. Reviewed all 16 directly this session
+(fetched each article page, listed every SI file via `extract_si_files()`,
+downloaded and manually inspected each tabular one — same standard checks:
+explicit CC-BY/CC0 confirmed on page, N>=50, no single-item scales, raw
+items vs. composite/aggregate totals). All 16 carried explicit CC BY 4.0.
+
+**Processed (5 papers -> 14 tables)**:
+- `jaracz_2017_temperament` (109i, binary) / `_job_stress` (8i, 0-5) —
+  Polish nurses/civil servants, N=200 (of 258 raw rows; 58 rows with every
+  scale column blank, no group label either, dropped as non-respondents).
+  MBI_WE/MBI_DEP/MBI_ocena_wm/MBI_general composite columns excluded.
+  `10.1371/journal.pone.0176698`
+- `fan_2025_mbi_exhaustion` (9i) / `_accomplishment` (8i) /
+  `_depersonalization` (5i) — full raw 22-item Maslach Burnout Inventory,
+  split into its 3 standard subscales, resident physicians in China,
+  N=636, 0-6 scale. `10.1371/journal.pone.0324707`
+- `weatherspoon_2015_family_physicians_freq`/`_effectiveness` (17i each,
+  N=69/55) and `_pediatricians_freq`/`_effectiveness` (17i each,
+  N=194/158) — companion survey to the already-shipped
+  `koo_2016_comm_technique_*` (same Horowitz/Kleinman research group,
+  same 1-5-scale-with-9-sentinel instrument design, different professional
+  populations). `10.1371/journal.pone.0119855`
+- `kuczyk_2024_facemask_fba` (42i) / `_fbe` (27i) — expectations/
+  experiences wearing face masks in German inpatient/day hospitals, N=142,
+  5-pt agreement (SAV numeric-coded, no text mapping needed once read with
+  `apply_value_formats=False`). `10.1371/journal.pone.0304140`
+- `fukuda_2021_health_literacy` (46i) / `_info_reliability` (8i) /
+  `_withholding_behavior` (6i) — Japanese educators' COVID-19 survey,
+  N=994-1000, HLS-EU-Q47-style task-difficulty scale (item 39 missing from
+  source) plus an information-source-trust scale and a binary
+  activity-withholding scale, all in the same file. No id column in
+  source; row index used. `10.1371/journal.pone.0257552`
+
+**Skipped (11)**: `0277323` (systematic-review study-characteristics
+table, not item response), `0339999` (CGSS extract of heterogeneous
+single demographic/attitude items — gender, birth year, religion,
+education, political trust — not a coherent multi-item scale),
+`0257726` (PLOS SI file is only a stimulus-image catalog; real response
+data is at Mendeley Data `10.17632/68mkyrb4n3.1`, not chased this pass —
+logged as a lead in `TODO.md`), `0229772` (clinical/lab dataset — dosing,
+staging, lab values — not item-response), `0189592` (N=30, below minimum,
+also a header-offset file not worth fixing at that N), `0299537` (N=35,
+below minimum), `0299736` (N=18, below minimum, and the one scale column
+present is an aggregate score anyway), `0276734` (PLOS SI file is only a
+descriptive-statistics summary table; real database is at GitHub/Zenodo
+`10.5281/zenodo.6793420`, not chased this pass — logged as a lead),
+`0269201` (idep./ddep. columns are binary multi-select checkbox flags,
+not an ordinal scale), `0345874` (categorical vignette-choice data,
+N~3 coaches, far below minimum), `0259364` (N=22, below minimum).
+
+No license-blocked candidates — every skip was content- or N-driven.
+
+**Output this pass**: 14 tables across 5 papers ->
+`biblio_batch18_nancount.csv`, staged for Redivis upload + dictionary
+paste (open in `TODO.md`). 2 external-repo leads (Mendeley, Zenodo) not
+yet chased, logged in `TODO.md` for the regular repo-based pipeline.

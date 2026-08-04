@@ -58,15 +58,46 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   entry for the full per-DOI accounting. `plos_retriage_batch18.csv`
   deleted.
 
-- [ ] **PLOS ONE batch 18 — 16 `worth_retrying` rows with unresolved
-  n_participants/n_items still unreviewed** (2026-08-04): these rows'
-  automated triage pass couldn't parse a clean participant/item count
-  (likely a parse failure on the first SI file, or a non-tabular structure)
-  so they were held out of the review pass above rather than guessed at.
-  DOIs: 10.1371/journal.pone.0176698, 0277323, 0345874, 0339999, 0259364,
-  0257726, 0324707, 0229772, 0189592, 0299537, 0119855, 0299736, 0276734,
-  0257552, 0269201, 0304140. Needs a person or agent to fetch each article
-  page directly and manually inspect the SI files before deciding.
+- [ ] **`automated_finding/biblio_batch18_nancount.csv` (14 rows, 5 papers
+  -> 14 tables) awaiting upload/paste** (2026-08-04): from the review of
+  batch 18's 16 unresolved-count `worth_retrying` rows below. Needs
+  Redivis upload + pasting into the dictionary sheet, then this file and
+  the 14 `irw_output/*.csv` files can be deleted.
+
+- [x] **PLOS ONE batch 18 — 16 `worth_retrying` rows with unresolved
+  n_participants/n_items reviewed** (2026-08-04): fetched each article page
+  directly and manually inspected every tabular SI file (the automated
+  triage pass had failed to parse a clean participant/item count for these
+  16, likely a header-offset or non-tabular-shaped file, so they'd been
+  held out of the earlier review pass rather than guessed at). Result: 5
+  papers processed to 14 tables (`jaracz_2017_temperament`/`_job_stress`,
+  `fan_2025_mbi_exhaustion`/`_accomplishment`/`_depersonalization`,
+  `weatherspoon_2015_family_physicians_freq`/`_effectiveness`,
+  `weatherspoon_2015_pediatricians_freq`/`_effectiveness`,
+  `kuczyk_2024_facemask_fba`/`_fbe`, `fukuda_2021_health_literacy`/
+  `_info_reliability`/`_withholding_behavior`), all CC BY 4.0. 11 skipped:
+  1 systematic-review characteristics table (not item response), 1
+  heterogeneous-single-items CGSS extract (not a coherent scale), 2 real
+  scales whose actual raw data lives in an external repo not the PLOS SI
+  file (Mendeley: `10.1371/journal.pone.0257726`; GitHub/Zenodo
+  `10.5281/zenodo.6793420`: `10.1371/journal.pone.0276734` — both logged
+  as leads below), 2 aggregate/composite-only files, 1 binary-checkbox
+  (not ordinal) file, and 4 below the N=50 minimum (N=18/22/30/`~3
+  coaches`). See `BATCH_LOG.md`'s "PLOS ONE batch 18 nan-count review"
+  entry for the full per-DOI accounting.
+
+- [ ] **Two batch-18 nan-count leads pointing to external repos, not yet
+  chased** (2026-08-04): `10.1371/journal.pone.0257726` ("Specificity of
+  spiders among fear- and disgust-eliciting arthropods") says its real
+  response data is at Mendeley Data `10.17632/68mkyrb4n3.1` (the PLOS SI
+  file itself is only a stimulus-image catalog, not response data);
+  `10.1371/journal.pone.0276734` ("The effect of mindfulness...low back
+  pain") says its data is at `https://github.com/nirakara-lab/RCT_Minfulness_Chronic_Back_Pain`
+  / Zenodo `10.5281/zenodo.6793420` (the PLOS SI file is only a
+  descriptive-statistics summary table). Neither has been fetched/opened
+  yet — worth a follow-up pass through the regular repo-based pipeline
+  (Mendeley/Zenodo/GitHub aren't PLOS's connector, so `irw_discover_plos.py`
+  won't find these on its own).
 
 - [x] **`automated_finding/biblio_plos_batch17.csv`** (12 rows:
   `hicks_2020_bioveda`, `stachl_2020_belonging`, `bittencourt_2021_dfs2`,
