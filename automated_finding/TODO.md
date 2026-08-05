@@ -3,16 +3,16 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-- [ ] **`automated_finding/biblio_batch19_good.csv` (51 rows, 16 papers ->
-  51 tables) awaiting upload/paste** (2026-08-04): from PLOS ONE batch
-  19's `good`-candidate review. Needs Redivis upload + pasting into the
-  dictionary sheet, then this file and the 51 `irw_output/*.csv` files can
-  be deleted.
+- [x] **`automated_finding/biblio_batch19_good.csv`** (51 rows, 16 papers
+  -> 51 tables, from PLOS ONE batch 19's `good`-candidate review) uploaded
+  to Redivis and pasted into the dictionary sheet (confirmed 2026-08-04,
+  ben-domingue); file and all 51 `irw_output/*.csv` files gone from disk
+  as expected.
 
-- [ ] **`automated_finding/human_review_plos_batch19.csv` (148 rows)
-  awaiting paste** (2026-08-04): batch 19's `human_review` rows from
-  `irw_retriage_ha.py`. Needs pasting into the "Human eye" sheet, then
-  this file can be deleted.
+- [x] **`automated_finding/human_review_plos_batch19.csv`** (148 rows,
+  batch 19's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-04, ben-domingue); file gone
+  from disk as expected.
 
 - [ ] **PLOS ONE batch 19 — 95 `worth_retrying` rows not yet reviewed**
   (2026-08-04): `plos_retriage_batch19.csv` has 95 rows flagged
