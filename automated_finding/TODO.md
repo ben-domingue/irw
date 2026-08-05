@@ -3,6 +3,24 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **`automated_finding/biblio_batch19_good.csv` (51 rows, 16 papers ->
+  51 tables) awaiting upload/paste** (2026-08-04): from PLOS ONE batch
+  19's `good`-candidate review. Needs Redivis upload + pasting into the
+  dictionary sheet, then this file and the 51 `irw_output/*.csv` files can
+  be deleted.
+
+- [ ] **`automated_finding/human_review_plos_batch19.csv` (148 rows)
+  awaiting paste** (2026-08-04): batch 19's `human_review` rows from
+  `irw_retriage_ha.py`. Needs pasting into the "Human eye" sheet, then
+  this file can be deleted.
+
+- [ ] **PLOS ONE batch 19 — 95 `worth_retrying` rows not yet reviewed**
+  (2026-08-04): `plos_retriage_batch19.csv` has 95 rows flagged
+  `worth_retrying` from the retriage of batch 19's 507 `human_assistance`
+  rows. Not hand-reviewed yet — next PLOS batch 19 follow-up should work
+  through these before moving to a new discovery batch (same pattern as
+  batch 18's worth_retrying backlog).
+
 - [x] **`automated_finding/biblio_plos_batch18_full.csv`** (33 rows,
   consolidated from all 4 parallel-agent review passes over batch 18's 18
   `good` candidates: `valverdeberrocoso_2021_sqd`/`_tictip`/

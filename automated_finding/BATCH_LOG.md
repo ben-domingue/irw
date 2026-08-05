@@ -5988,3 +5988,110 @@ No license-blocked candidates — every skip was content- or N-driven.
 `biblio_batch18_nancount.csv`, staged for Redivis upload + dictionary
 paste (open in `TODO.md`). 2 external-repo leads (Mendeley, Zenodo) not
 yet chased, logged in `TODO.md` for the regular repo-based pipeline.
+
+## PLOS ONE batch 19 (2026-08-04)
+
+**Discovery**: 30 terms recycled from `search_terms_log.csv` (non-PLOS,
+English-only, not yet tried on PLOS ONE, per the SKILL.md term-reuse
+method) — self-efficacy, sleep quality, empathy, attachment, life
+satisfaction, big five, occupational stress, job stress, coping,
+self-concept, positive and negative affect, parenting style, alcohol use
+disorder, eating attitudes, academic self-efficacy, procrastination,
+flourishing, subjective wellbeing, ethnic identity, job satisfaction,
+burnout, suicidal ideation, transformational leadership, employee
+engagement, social media addiction, nomophobia, marital satisfaction,
+romantic jealousy, child temperament, moral injury. 2,657 candidates ->
+26 `good` + 507 `human_assistance` + rest `no_usable_file`/`error`/etc.
+One `crashed` row (a corrupt `.sav`) correctly isolated by the per-worker
+crash handling, batch continued normally.
+
+**Retriage** (`irw_retriage_ha.py` on the 507 `human_assistance` rows):
+148 `human_review`, 134 `aggregate_continuous`, 128 `not_item_response`,
+95 `worth_retrying`, 2 `recoverable_format`.
+
+**Good-candidate review**: 26 `good` rows split by N — 5 below the N=50
+floor skipped outright without review (a dental lab bond-strength study
+N=7, two N<25 lab studies, a Ghanaian pediatric-pain-instrument
+content-validity study N=13, a Kawaii-emotions study N=42). The remaining
+21 (N>=50) were split into 3 groups of 7 and reviewed in parallel by 3
+agents (fetch full article page + every SI file, not just the one the
+automated triage grabbed; verify license/N/raw-vs-composite per the
+standard checks).
+
+Result: **16 papers -> 51 tables**, all CC BY 4.0:
+- `malinowska_2021_saq_physicians`/`_nurses` (41i each) — Polish Safety
+  Attitudes Questionnaire, N=738/1190. `10.1371/journal.pone.0260926`
+- `lunacortes_2019_satisfaction`/`_self_congruity`/`_social_value`/
+  `_isncc`/`_interperson_conn`/`_isnbi` (6 tables, N=444) — Gen-Y tourist
+  virtual-social-network survey, Spain. `10.1371/journal.pone.0217758`
+- `martinezsoto_2024_spiritual_leadership` (26i, N=299) — Colombian
+  Adventist teachers, Fry's spiritual leadership model.
+  `10.1371/journal.pone.0299671`
+- `zhao_2025_nat_env_perception`/`_leisure_involvement`/
+  `_place_attachment`/`_restor_env_perception`/`_psych_recovery_eval` (5
+  tables, N=199) — Changsha urban forest park survey.
+  `10.1371/journal.pone.0325755`
+- `saputra_2023_system_quality`/`_info_quality`/`_perceived_ease_of_use`/
+  `_perceived_usefulness`/`_job_performance` (5 tables, N=118) —
+  information-system job-performance survey.
+  `10.1371/journal.pone.0285293`
+- `cooper_2018_offensive_topics`/`_funny_topics` (34i each, N=1637) —
+  instructor humor gender-perception study.
+  `10.1371/journal.pone.0201258`
+- `liu_2023_brand_trust`/`_attitude`/`_subjective_norm`/
+  `_perceived_control`/`_purchase_intention`/`_purchase_behavior` (6
+  tables, N=544) — agricultural regional-brand consumer study.
+  `10.1371/journal.pone.0295133`
+- `thanh_2025_attitude`/`_perceived_control`/`_green_behavior`/
+  `_green_knowledge`/`_environ_concern` (5 tables, N=407) — employee
+  green-behavior survey. `10.1371/journal.pone.0320053`
+- `zhang_2025_coercive_pressure`/`_normative_pressure`/
+  `_environ_awareness`/`_self_efficacy`/`_green_supply_intent` (5 tables,
+  N=292) — Chinese manufacturing green-supply-chain study.
+  `10.1371/journal.pone.0322200`
+- `salleh_2023_aim_iam_fim` (12i, N=170) — Malay AIM-IAM-FIM
+  implementation-outcome scale; the paper's claimed n=235 CFA sample
+  turned out to be byte-identical to the n=170 EFA sample across all 4
+  candidate source URLs (2 PLOS SI files + 2 Dataverse DOIs) — only the
+  one real dataset shipped. `10.1371/journal.pone.0294238`
+- `ahmed_2019_wellbeing` (4i, ONS4-style) / `_food_consumption` (14i, FCS)
+  — Ghana sugarcane/oil-palm/jatropha wellbeing survey, N=850.
+  `10.1371/journal.pone.0215433`
+- `fisher_2019_belonging`/`_structure`/`_preparedness` (2i each, N varies
+  353-466) — underrepresented-minority/women PhD STEM survey.
+  `10.1371/journal.pone.0209279`
+- `karpudewan_2022_stp_efa` (33i, N=300) / `_stp_cca` (29i, N=397) —
+  Malaysian STEM-teaching-practices instrument, 2 independent validation
+  samples. `10.1371/journal.pone.0268509`
+- `jiang_2025_sacie`/`_teaching_motivation`/`_inclusive_efficacy`/
+  `_empathy` (4 tables, N=240) — pre-service teacher empathy/inclusive
+  education. `10.1371/journal.pone.0321066`
+- `dahlstrom_2022_scoare` (20 constructs, retrospective pre/post -> wave,
+  N=159) — research-mentor workshop evaluation.
+  `10.1371/journal.pone.0262418`
+- `gesbert_2021_tdeq` (25i, N=64) — Talent Development Environment
+  Questionnaire, Swiss elite youth soccer players; N=64 falls in the
+  50-99 borderline band, shipped per ben-domingue's explicit approval
+  (2026-08-04) since the data was otherwise clean/genuinely raw.
+  `10.1371/journal.pone.0246823`
+
+**Skipped (10)**: `0287795` (each column is a distinct demographic/identity
+indicator, not repeated items of one instrument), `0201698` (only a
+composite PA score + dichotomized indicators), `0295904` (only
+derived/grouped covariates, real CD-RISC raw items never actually shared
+despite being described in the paper), `0249033` (composite subscale
+totals at 3 timepoints only), `0254795` (composite wellbeing index +
+unrelated single-item covariates only) — all false positives on the
+automated `good` flag, confirming the standing "good needs a human glance"
+caution. Plus the 5 N<50 rows skipped pre-review (dental lab study N=7,
+two lab studies N=10/24, pediatric-pain content-validity study N=13,
+Kawaii-emotions study N=42).
+
+No license-blocked candidates — all 26 `good` rows carried explicit CC BY
+4.0.
+
+**Output this pass**: 51 tables across 16 papers ->
+`biblio_batch19_good.csv`, staged for Redivis upload + dictionary paste
+(open in `TODO.md`). `human_review_plos_batch19.csv` (148 rows) staged for
+the "Human eye" sheet (open in `TODO.md`). 95 `worth_retrying` rows not
+yet hand-reviewed (open in `TODO.md`, same pattern as batch 18).
