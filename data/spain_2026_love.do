@@ -119,6 +119,7 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
+replace resp = . if resp == 3
 drop if missing(resp)
 sort id item
 drop p3_1 p3_2 p3_3 p3_4 p3_5 p3_6 p3_7 p3_8 p3_9
@@ -161,6 +162,7 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
+replace resp = . if resp == 3
 drop if missing(resp)
 sort id item
 drop p4_1 p4_2 p4_3 p4_4 p4_5 p4_6 p4_7 p4_8
@@ -202,6 +204,7 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
+replace resp = . if resp == 3
 drop if missing(resp)
 sort id item
 drop p16_1 p16_2 p16_3 p16_4 p16_5 p16_6 p16_7
@@ -350,6 +353,7 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
+replace resp = . if resp == 3
 drop if missing(resp)
 sort id item
 drop p19 p22a
