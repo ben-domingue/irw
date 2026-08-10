@@ -6283,3 +6283,116 @@ All 5 affected scripts (`ali_2021_covid_nurses_wellbeing.py`,
 regenerated and `biblio_batch19_worthretrying.csv`'s Notes column updated
 per-table with the fix. No table's N or item count changed except
 `reyes_2022_eheals` (528 -> 527, the fake key-row respondent removed).
+
+## PLOS ONE batch 20 (2026-08-10)
+
+Discovery run with 30 recycled search terms pulled from the non-PLOS pool
+in `search_terms_log.csv` (per `SKILL.md`'s term-recycling guidance —
+~1,016 candidates were available; picked 30 clean instrument/construct/
+task names spanning cognitive tasks, clinical/psychopathology constructs,
+and org-behavior constructs): executive function, numerical cognition,
+response style, reaction time, attentional control, cognitive flexibility,
+temporal discounting, risk perception, probabilistic reversal learning,
+dyslexia, alexithymia, schizotypy, interoceptive awareness, self-harm,
+non-suicidal self-injury, intolerance of uncertainty, need for closure,
+humor styles, boredom proneness, system justification, just world belief,
+moral foundations, stereotype threat, academic dishonesty, compulsive
+buying, doomscrolling, technoference, abusive supervision, perceived
+organizational support, entrepreneurial intention.
+
+2,478 candidates -> 17 `good` + 355 `human_assistance` + 2,015
+`no_usable_file` + 53 `not_item_response` + 27 `download_failed` + 11
+`error`. Retriage (`irw_retriage_ha.py`) on the `human_assistance` bucket:
+52 `worth_retrying`, 116 `human_review`, 129 `aggregate_continuous`, 58
+`not_item_response`.
+
+**`good`-candidate review**: 3 of 17 dropped pre-review for N<50
+(archerfish symbol-value task N=12, non-human; eye-contact-perception task
+N=22; cerebral-palsy eye-tracking-vocabulary study N=40). Remaining 14
+reviewed in 2 parallel passes (fetch full article + all SI files, verify
+license/raw-vs-composite/item structure). Result: **10 papers processed
+-> 10 tables**, all CC BY 4.0:
+- `abukhalaf_2025_housing_risk`/`_disaster_prep` (10.1371/journal.pone.0310665,
+  N=816): hurricane risk-perception + preparedness-intention items.
+  Shipped as **continuous 0-1 resp**, not discretized to 1-5 -- the
+  paper's own Methods text (Sec 3.3) states responses use a "Likert or
+  Rising scales format" translated to a continuous 0.0-1.0 metric, and the
+  raw file has genuine non-anchor decimal values confirming this.
+- `zvi_2022_harassment_perception`/`_rei`/`_legal_judgment`
+  (10.1371/journal.pone.0272606, N=211, lawyers + law students): 3
+  distinct scales in one SI file (11-item vignette perception 1-5, 24-item
+  Rational-Experiential Inventory 1-5, 27-item legal-judgment ratings 1-7)
+  -> 3 tables per the "multiple scales in one file" rule.
+- `kitayama_2022_hweat`/`_hweat_retest` (10.1371/journal.pone.0268124):
+  18-item Japanese Healthy Work Environment Assessment Tool, 1-5 Likert.
+  Main validation sample (S2 Data, N=202) and a separate test-retest
+  sample (S1 Data, N=50, 2 waves) shipped as 2 tables -- correct SI file
+  indices confirmed by reading the article's Supporting Information list
+  text directly (S1 Data = .s003, S2 Data = .s004; .s001/.s002 are
+  unrelated DOCX supplements).
+- `xiao_2026_entrepreneurial_intention` (10.1371/journal.pone.0352807,
+  N=1389): 40-item, 7-construct entrepreneurship survey, 1-5 Likert.
+  2 extra column blocks (IC1-7, CS1-11, 18 cols) excluded -- absent from
+  the paper's own Variable Codebook sheet, construct undocumented.
+- `iqbal_2022_curriculum_skills` (10.1371/journal.pone.0265880, N=482):
+  38-item, 6-construct curriculum-delivery/entrepreneurial-skills survey,
+  1-7 Likert. 3 isolated single-cell outliers (CM3=23, CM5=32, ICT2=32)
+  dropped as data-entry errors.
+- `ritzel_2020_farmer_burden` (10.1371/journal.pone.0241075, N=801): 13-item
+  administrative-burden/compliance-cost/psychological-cost/knowledge
+  survey, response range genuinely varies by sub-battery (1-4 to 1-8). No
+  person-ID column in the source file -- row index used as id.
+
+4 of 14 skipped: penalty-kicking task (10.1371/journal.pone.0135423,
+per-participant aggregated percentages, not raw trial data), freeway-rain
+driving-risk study (10.1371/journal.pone.0149442, single-item ordinal
+outcome), Spanish-children affect study (10.1371/journal.pone.0201698,
+composite/dichotomized subscale scores only), Berlin PrEP study
+(10.1371/journal.pone.0260168, heterogeneous single items with mixed
+response scales, no coherent instrument). 3 more skipped from group B:
+caste/labor-market self-confidence study (10.1371/journal.pone.0327299,
+single-item belief question, rest is task performance/demographics),
+concealable-stigmatized-identities study (10.1371/journal.pone.0287795,
+heterogeneous identity-classification questions, no uniform response
+scale), college-employment-willingness study (10.1371/journal.pone.0278164,
+N=12,897 but categorical/free-text/checkbox mix, not a Likert scale).
+
+**One `good` candidate caught and struck after deeper inspection**:
+Japanese-schoolteachers radiation-risk-perception study
+(10.1371/journal.pone.0212917, N=550, 21 items) -- the paper's Methods
+text describes a uniform 1-4 response scale ("1) Yes, 2) Probably, 3)
+Probably not, 4) No") for all 21 items, but the actual SI data (correct
+file, .s003, confirmed by reading the article's SI list) shows 19 of 21
+items using only codes {1,2}, one using {2,3}, and one using {4,5} -- a
+per-item code-shift pattern inconsistent with a single coherent 4-point
+scale answered by 550 people (implausible that ~90% of items got zero
+"probably not"/"no" responses). Reads as heterogeneous single-choice
+items with their own codebooks rather than the described psychometric
+scale. Not shipped; not re-flagged for human_review since the underlying
+ambiguity (mismatch between paper text and file) needs the actual
+questionnaire/codebook, not just another automated pass.
+
+`worth_retrying` (52 rows) and `human_review` (116 rows,
+`human_review_plos_batch20.csv`) not yet reviewed/pasted this session --
+open items, see `TODO.md`. `plos_batch20_triage.csv` and
+`plos_retriage_batch20.csv` retained until both are closed out.
+
+### QC catch on batch 20 output (2026-08-10)
+
+ben-domingue asked whether the fractional values in
+`abukhalaf_2025_housing_risk`/`_disaster_prep` were valid or imputed.
+Checked: each item column had a small number of cells (4-12 out of 816)
+holding a single repeated non-anchor decimal shared across several
+*different* respondents (e.g. 7 different ids all =0.4199 on
+`risk1_flood`; 9 different ids all =0.5708 on `risk1_wind_damage`) rather
+than distinct per-respondent values -- a true continuous slider would not
+produce the exact same decimal across unrelated people. No imputation
+language found in the paper's text, but the pattern is unambiguous mean/
+constant imputation for missing responses. Fixed `abukhalaf_2025_housing_risk.py`
+to snap resp to 4 decimal places and keep only the genuine anchor values
+(0/.25/.5/.75/1 for the 13 risk items, 0/.1/.../.9/1.0 for the 3
+preparedness items), dropping 90 imputed cells from housing_risk and 4
+from disaster_prep. Also corrected the biblio Description/Notes fields
+(previously described as "continuous 0-1", now correctly described as a
+discrete 5-point/11-point anchor scale) and re-verified zero non-anchor
+values remain in either output file.

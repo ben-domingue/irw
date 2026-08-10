@@ -3,6 +3,26 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch20.csv`** (10 rows, 6 papers ->
+  10 tables, from PLOS ONE batch 20's `good`-candidate review) uploaded to
+  Redivis and pasted into the dictionary sheet (confirmed 2026-08-10,
+  ben-domingue); file and all 10 `irw_output/*.csv` files gone from disk
+  as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 20" entry for full
+  per-paper detail, including a QC catch/fix the same day: the
+  `abukhalaf_2025_*` tables' fractional values were partly mean/constant-
+  imputed cells masquerading as raw slider responses (caught by
+  ben-domingue's question), fixed to keep only genuine anchor values.
+
+- [x] **`automated_finding/human_review_plos_batch20.csv`** (116 rows,
+  batch 20's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-10, ben-domingue); file deleted
+  from the repo.
+
+- [ ] **PLOS ONE batch 20 — 52 `worth_retrying` rows not yet reviewed**
+  (`plos_retriage_batch20.csv`, 2026-08-10). Same review process as prior
+  batches (fetch full article + all SI files, license/N>=50/raw-vs-
+  composite checks) still needed.
+
 - [x] **`automated_finding/biblio_batch19_good.csv`** (51 rows, 16 papers
   -> 51 tables, from PLOS ONE batch 19's `good`-candidate review) uploaded
   to Redivis and pasted into the dictionary sheet (confirmed 2026-08-04,
