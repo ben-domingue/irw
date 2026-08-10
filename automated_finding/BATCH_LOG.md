@@ -6095,3 +6095,191 @@ No license-blocked candidates — all 26 `good` rows carried explicit CC BY
 (open in `TODO.md`). `human_review_plos_batch19.csv` (148 rows) staged for
 the "Human eye" sheet (open in `TODO.md`). 95 `worth_retrying` rows not
 yet hand-reviewed (open in `TODO.md`, same pattern as batch 18).
+
+## PLOS ONE batch 19 — worth_retrying review (2026-08-09)
+
+Reviewed `plos_retriage_batch19.csv`'s 95 `worth_retrying` rows. **38 were
+duplicate DOIs already reviewed and decided (all skips) in earlier
+batches** (0199605, 0135377, 0150312, 0194569, 0323489, 0230103, 0197276,
+0256983, 0122311, 0280919, 0200129, 0277516, 0269012, 0258606, 0278201,
+0338521, 0345874, 0294593, 0262465, 0277323, 0212914, 0343308, 0321373,
+0217482, 0270464, 0200609, 0272095, 0272987, 0292302, 0322635, 0305567,
+0224159, 0234997, 0288386, 0252329, 0268773, 0315442, 0171186, 0223482 —
+same "search terms keep resurfacing the same PLOS articles" pattern noted
+in batch 18's review) — not re-reviewed, since their content-driven skip
+reasons (composite/aggregate-only, N<50, not-item-response, etc.) don't
+change on a resurface.
+
+**56 genuinely new DOIs** split into 3 groups of ~19 and reviewed in
+parallel by 3 agents (each fetching the full article page + ALL Supporting
+Information files, verifying CC BY license, N>=50, item-level-not-composite
+structure per the standard checks).
+
+Result: **23 papers -> 70 tables**, all CC BY 4.0:
+- `malik_2018_individual_motivation`/`_organizational_motivation`/
+  `_social_motivation` (22i/36i/14i, N=360) — physician motivation tool,
+  Lahore, Pakistan. `10.1371/journal.pone.0209546`
+- `sinche_2017_skill_development`/`_skill_importance` (15i each, N=7278/3820)
+  — PhD transferable-skills evaluation. `10.1371/journal.pone.0185023`
+- `sugiura_2015_disaster_characteristics` (40i, N=1407) — personal
+  characteristics of 2011 Great East Japan Earthquake survivors.
+  `10.1371/journal.pone.0130349`
+- `ali_2021_phq9`/`_gad7`/`_isi`/`_iesr`/`_spfi` (9i/7i/7i/22i/16i, N~165-170)
+  — COVID-19 nurses wellbeing, Kenya; text-category responses re-coded
+  ordinally via keyword rank functions. `10.1371/journal.pone.0254074`
+- `okamura_2018_eol_attitude`/`_burnout` (6i/17i, N=261) — end-of-life-care
+  attitude/burnout, Japan. `10.1371/journal.pone.0202277`
+- `batistafoguet_2021_mlq` (45i, N=300) — Multifactor Leadership
+  Questionnaire, Prolific/US sample only (Catalan Police sample was DOCX
+  documentation, not tabular). `10.1371/journal.pone.0254329`
+- `vonhippel_2023_fsfi` (21i, N=428) — Female Sexual Function Index items
+  extracted from an otherwise qualitative/demographic breast-cancer
+  survivorship survey CSV. `10.1371/journal.pone.0293298`
+- `yang_2023_green_brand_image`/`_perceived_value`/`_consumption_intent`
+  (12i/3i/4i, N=341) — green agricultural-brand consumer study, China.
+  `10.1371/journal.pone.0292633`
+- `butt_2022_user_satisfaction`/`_task_tech_fit`/`_performance_impact`/
+  `_cognitive_absorption`/`_actual_usage`/`_institutional_factors` (6
+  tables, N=404) — online-learning cognitive-absorption study.
+  `10.1371/journal.pone.0269609`
+- `petrowski_2019_tics` (57i, N=2463) — Trier Inventory for Chronic Stress
+  short version, German sample. `10.1371/journal.pone.0222277`
+- `lai_2023_social_adaptability`/`_parent_relation_father`/
+  `_parent_relation_mother`/`_teacher_student_rel`/`_peer_relationship` (5
+  tables, N~1322-1324) — AI-in-education adolescent social-adaptability
+  study. `10.1371/journal.pone.0283170`
+- `campos_2023_oes`/`_pidaq`/`_swls` (7i/24i/5i, N=7593) — aesthetic dental
+  treatment/orofacial appearance/life satisfaction, Finland/Brazil.
+  `10.1371/journal.pone.0287235`
+- `dussel_2022_pcl17`/`_hads14` (17i/14i, N=780) — psychological symptoms
+  in French hospital workers during COVID-19 first wave.
+  `10.1371/journal.pone.0267032`
+- `forycka_2022_mbi_gss`/`_mswbi`/`_rs14` (16i/7i/14i, N~1075-1395) —
+  Polish medical students resilience/wellbeing/burnout, COVID-19 era.
+  `10.1371/journal.pone.0261652`
+- `direkvand_2022_mjsi` (25i, N=121) — Iranian midwives job-satisfaction
+  instrument. `10.1371/journal.pone.0262665`
+- `decamp_2022_online_discussion` (12i, N=117) — online teaching-practices
+  self-report instrument. `10.1371/journal.pone.0275880`
+- `petrowski_2020_attachment` (12i, N=2381) — ECR-based attachment scale,
+  1-7. `10.1371/journal.pone.0230864`
+- `pierro_2018_selfforgive_s1`/`_s2`/`_s3`, `_locomotion_s1`/`_s3`/`_s4`,
+  `_assessment_s1`/`_s3`/`_s4`, `_posaffect_s3`, `_negaffect_s3`,
+  `_tf_past`/`_present`/`_future_s4`, `_hfs_s4` (15 tables across 4 studies,
+  N=85-323 per study) — self-forgiveness/regulatory-mode study.
+  `10.1371/journal.pone.0193357`
+- `konerding_2019_patientsatisfaction` (7i, N=1884) — short SERVQUAL-based
+  patient-satisfaction scale, 6 European countries.
+  `10.1371/journal.pone.0197924`
+- `jo_2023_sni`/`_sno`/`_pbc`/`_arp`/`_crp`/`_cfs` (6 tables, N=345) —
+  social-networking-intensity/isolation-risk study, university students.
+  `10.1371/journal.pone.0283997`
+- `girma_2021_phq9`/`_oslo3` (9i/3i, N=546) — depression among pregnant
+  women, Jimma, Ethiopia. `10.1371/journal.pone.0250927`
+- `reyes_2022_eheals` (8i, N=528) — eHealth Literacy Scale, undergraduates.
+  `10.1371/journal.pone.0266802`
+- `pedroso_2021_ifsq_laissezfaire`/`_pressuring`/`_restriction`/
+  `_responsiveness` (11i/17i/11i/12i, N=465) — Infant Feeding Style
+  Questionnaire, cross-cultural adaptation, Brazil.
+  `10.1371/journal.pone.0257991`
+
+**Skipped (23)**: `0276794` (aggregate subscale composites only, not raw
+items), `0310193` (single-item happiness measure only), `0338906`
+(third-party AAMC data, not authorized for public sharing), `0187367`
+(self-report vs. actual grades, not a psychometric instrument), `0258484`
+(data explicitly not shareable), `0343275` (technical energy-grid data,
+not survey), `0255746` (claimed EPDS/DASS-21/PSQI/PSS items not actually
+in the SI file, only demographics/binary outcomes), `0173768` (N=26),
+`0227877` (real data hosted at figshare, not the PLOS SI — external lead,
+not chased), `0339591` (composite-only wave totals, not raw MSES/ESSS/
+GAD-7 items), `0314338` (ambiguous Chinese-labeled construct-to-column
+mapping, item count mismatch vs. paper text — flagged for human review
+rather than guessed), `0296290` (dairy-cow microbiome data, not item
+response), `0312010` (ambiguous interleaved demographic/item columns,
+inconsistent per-item coding schemes — flagged for human review),
+`0319473` (scoping review, not primary data), `0312750` (categorical
+yes/no eating-behavior items, not an ordinal scale), `0202230` (rat
+lever-press behavioral data, not survey items), `0217595` (SI file has
+only covariates, no item-level AUDIT-C data despite Data Availability
+claim), `0160805` (subscale/total scores only, no raw items), `0294896`
+(genomic/SNP cohort data, not psychometric items), `0279871` (N=41),
+`0161076` (ecology/plant-parasite paper, not human item response),
+`0203689` (composite subscale averages only, no raw CFPQ items), `0242326`
+(aggregate correlation/regression tables only, no raw items).
+
+**Deferred, N in the 50-99 borderline band (10, structurally clean but
+below the usual N>=100 comfort zone)**: `0192774` (N=83, cataract
+surgery wellbeing), `0201641` (N=82, HIV posttraumatic growth), `0346872`
+(N=62, bipolar affect/impulsivity), `0233412` (N=81, dezocine
+depression), `0224254` (N=54, EI training), `0218017` (N=80, music/affect
+regulation), `0180041` (N=64, choice-induced preference/depression),
+`0241041` (N=53, Tactile Biography questionnaire), `0150375` (N=58, heart
+rate/attachment), `0151747` (N=60, heart rate variability/attachment).
+**ben-domingue decision (2026-08-09): skip all 10** rather than ship —
+below the comfort threshold despite being clean.
+
+No license-blocked candidates — all 23 shipped papers carried explicit
+CC BY 4.0.
+
+**Output this pass**: 70 tables across 23 papers ->
+`biblio_batch19_worthretrying.csv`, staged for Redivis upload + dictionary
+paste (open in `TODO.md`). This closes out batch 19's `worth_retrying`
+backlog end-to-end; `plos_retriage_batch19.csv` deleted.
+
+### QC spot-check pass on batch 19 worth_retrying output (2026-08-09)
+
+ben-domingue spot-checked per-item `resp` distributions across the 70
+newly-shipped tables and flagged 6 suspicious patterns before upload. Two
+turned out to be real bugs, three were genuine scale-range mismatches
+against the source paper's documented Methods text, and two were false
+alarms (data confirmed genuine on inspection):
+
+- **`ali_2021_spfi`** (real bug): the freq-family value map had a text
+  typo -- `"A little bit"` where the raw file's actual category text is
+  `"Very Little"` -- so every genuine "Very Little" response silently
+  mapped to NaN and was dropped, which is why `resp=1` never appeared in
+  items 7-16. Fixed the map to match the raw text exactly (also
+  tightened the true-family map to a contiguous 0-4 code, dropping an
+  unused "Very Little" key that never matched anything in that family).
+  Re-shipped with `resp` 0-4 for both families (was 0-5/0-4 with a gap).
+- **`reyes_2022_eheals`** (real bug): row 0 of the source CSV is a
+  Qualtrics codebook "Key: 1 = ..." row, not a respondent. The
+  digit-extraction regex pulled a stray "1" out of that key text for
+  every item and shipped a fake `id=1` respondent (resp=1 on all 8
+  items, garbled `cov_*` values containing the raw key text itself). Now
+  dropped before processing; N corrected 528 -> 527.
+- **`lai_2023_parent_relation_father`/`_mother`** (scale-range fix):
+  shipped as 1-6, but the paper's Methods text (confirmed via WebFetch)
+  documents an 18-item, 5-point (1-5) Parent-Child Relationship scale.
+  `FUQIN1` alone had 62/1319 responses of 6 while its mother-report
+  counterpart `MUQIN1` had zero -- inconsistent with a genuine shared 1-6
+  scale for that item -- so capped to 1-5 (all other stray 6s across both
+  blocks were isolated single-row artifacts anyway). Also noted: the raw
+  file has 20 FUQIN/MUQIN columns vs. the paper's stated 18 items; which
+  2 are extra/non-scale is unresolved without the actual codebook, so all
+  20 are still shipped as-is.
+- **`lai_2023_teacher_student_rel`** (scale-range fix): shipped as 0-6,
+  but the paper documents 7 items on a 5-point (1-5) scale; the 0s/6s
+  were isolated single-row artifacts. Capped to 1-5.
+- **`lai_2023_peer_relationship`** (scale-range fix): shipped as 0-6, but
+  the paper documents 18 items on a 6-point (1-6) scale (6 is a genuine,
+  common response, unlike the father/mother scale above). The 0s were
+  isolated single-row artifacts on 3 items. Floor corrected to 1.
+- **`pierro_2018_tf_future_s4`** (false alarm, no change): `resp=1` never
+  appears on any of the 4 future-focus items. Checked the raw SPSS file
+  directly -- genuinely no `1.0` values in the source data (N=189); past-
+  and present-focus items in the same study do have a couple of 1s, so
+  this reads as real (if skewed) respondent behavior on the future-focus
+  items specifically, not a coding/label mismatch.
+- **`vonhippel_2023_fsfi`** (false alarm, no change): `resp=6` appears
+  only 4 times, exclusively on `fsfi_19`. Confirmed the source's own
+  category text for that item explicitly includes "more than once per
+  day" as a 6th response option beyond the other items' 0-5 range --
+  genuine, not an artifact of the rank-coding function.
+
+All 5 affected scripts (`ali_2021_covid_nurses_wellbeing.py`,
+`lai_2023_social_adaptability.py`'s 4 relationship-scale outputs,
+`reyes_2022_eheals.py`) re-run and re-verified; `irw_output/*.csv`
+regenerated and `biblio_batch19_worthretrying.csv`'s Notes column updated
+per-table with the fix. No table's N or item count changed except
+`reyes_2022_eheals` (528 -> 527, the fake key-row respondent removed).

@@ -14,12 +14,28 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-04, ben-domingue); file gone
   from disk as expected.
 
-- [ ] **PLOS ONE batch 19 — 95 `worth_retrying` rows not yet reviewed**
-  (2026-08-04): `plos_retriage_batch19.csv` has 95 rows flagged
-  `worth_retrying` from the retriage of batch 19's 507 `human_assistance`
-  rows. Not hand-reviewed yet — next PLOS batch 19 follow-up should work
-  through these before moving to a new discovery batch (same pattern as
-  batch 18's worth_retrying backlog).
+- [x] **`automated_finding/biblio_batch19_worthretrying.csv`** (70 rows, 23
+  papers -> 70 tables, from the batch 19 `worth_retrying` review below)
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-09, ben-domingue); file and all 70 `irw_output/*.csv` files gone
+  from disk as expected. Includes a QC spot-check pass (same day) that
+  caught and fixed 2 real bugs (`ali_2021_spfi`, `reyes_2022_eheals`) and
+  3 scale-range mismatches in `lai_2023_social_adaptability.py`'s
+  relationship-scale outputs — see `BATCH_LOG.md`'s "PLOS ONE batch 19 —
+  worth_retrying review" and "QC spot-check pass on batch 19
+  worth_retrying output" entries (2026-08-09) for full per-paper/per-fix
+  detail.
+
+- [x] **PLOS ONE batch 19 — 95 `worth_retrying` rows reviewed** (2026-08-09):
+  38 were duplicate DOIs already decided in earlier batches (not
+  re-reviewed); the 56 genuinely new DOIs were split into 3 groups and
+  reviewed in parallel (fetch full article + all SI files, license/N>=50/
+  raw-vs-composite checks). Result: 23 papers -> 70 tables shipped (see
+  `biblio_batch19_worthretrying.csv` item above), 23 skipped (content- or
+  N-driven), 10 more in the N=50-99 borderline band written off per
+  ben-domingue's explicit decision (2026-08-09) rather than shipped. Full
+  per-DOI accounting in `BATCH_LOG.md`. `plos_retriage_batch19.csv` deleted
+  — this closes out batch 19 end-to-end.
 
 - [x] **`automated_finding/biblio_plos_batch18_full.csv`** (33 rows,
   consolidated from all 4 parallel-agent review passes over batch 18's 18
