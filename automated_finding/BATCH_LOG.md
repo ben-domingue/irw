@@ -6396,3 +6396,234 @@ from disaster_prep. Also corrected the biblio Description/Notes fields
 (previously described as "continuous 0-1", now correctly described as a
 discrete 5-point/11-point anchor scale) and re-verified zero non-anchor
 values remain in either output file.
+
+### PLOS ONE batch 20 worth_retrying — group 1 review (2026-08-10)
+
+Reviewed 17 of the 52 `worth_retrying` rows (first group of a 3-way split
+of `plos_retriage_batch20.csv`'s pool). For every candidate, fetched the
+full article page and downloaded every SI file that looked tabular (not
+just the one file `irw_discover_plos.py`'s triage happened to pick),
+per SKILL.md's "needs a human glance more than usual" note.
+
+**3 papers -> 6 tables shipped**, all CC BY 4.0, all N>=105:
+- `wiedemann_2021_risk_perception`/`_text_readability`
+  (10.1371/journal.pone.0253762, N=344): a single German-language SPSS
+  file (`.s007`, no SI caption -- identified as the raw data file via its
+  SPSS variable labels, since the other 6 SI files are PDF questionnaire/
+  vignette text) holds 2 distinct instrument blocks, F01-F06 (risk-
+  communication perception, 5 items) and F11-F16 (semantic-differential
+  text-readability rating, 6 items), both 7-point -- split per the
+  "multiple scales in one file" rule.
+- `monier_2026_sti`/`_pot` (10.1371/journal.pone.0352176, N=105-107):
+  single XLSX SI file (header on row 2, banner row above), 2 scales --
+  10-item French Self-Transcendence Inventory and a 7-item Passage-of-
+  Time-judgment battery (subjective speed of time passing at 7 different
+  time referents, consistent "_7vite" column suffix). Source `ID` resets
+  within each of the 2 diagnostic groups (Parkinson's/control), so
+  `id` = group + ID (composite, verified unique) instead. 16 fully-blank
+  trailing rows (no group, no item data -- a sheet-extension artifact)
+  dropped before building `id`. One isolated out-of-range value
+  (STI1=8 on an otherwise 1-7 scale, single occurrence) dropped as a
+  data-entry error.
+- `schmidt_2017_pds`/`_fas` (10.1371/journal.pone.0182845, N=232/236):
+  single SPSS file (`pd.read_spss` needed `convert_categoricals=False`
+  -- default returns German value-label text instead of numeric codes,
+  caught before shipping). Most of the file is composite indices/task-
+  performance scores, but 2 short raw-item instruments survive: German
+  Pubertal Development Scale (3 items, 1-4) and Family Affluence Scale II
+  (4 items, response range genuinely varies 0-2/0-3 by item per the
+  paper's Methods). No person-ID column -- row index used as `id`. One
+  isolated fractional value dropped per table (pub_2_1=2.5, ses_3_1=1.5)
+  as data-entry errors.
+
+**11 of 14 remaining candidates skipped** -- all had a Data Availability
+statement pointing to genuine SI files, but none held raw item-level
+psychometric data on inspection:
+- `0117947` (theory of mind/sharing preschoolers): file holds only
+  composite task-outcome variables (accuracy/RT scores), no Likert items.
+- `0121651` (ADHD EF training RCT): file holds only derived task/subscale
+  totals (SSRT, Stroop interference scores, CBTT/Raven norm scores,
+  VVGK subscale sums) -- no raw item responses.
+- `0139930` (abacus training, math/task-switching): file holds only
+  composite RT/accuracy scores, several already Z-standardized.
+- `0154145` (facial affect labeling, schizophrenia/BPD): file holds only
+  per-condition aggregate accuracy/error rates (e.g. `f_a_100`, `f_a_ratio`),
+  not raw per-trial labeling responses.
+- `0164382` (psychological distance, children's future preferences): file
+  holds only composite task scores (drink/TV/game sub-scores, similarity-
+  task totals), not Likert items.
+- `0192837` (napping/CBM-Appraisal PTSD-analogue training): the file's
+  `mood1`-`mood5` columns don't match the paper's own description (Methods
+  states a 0-10 Likert mood scale; raw values range up to 62) -- mismatch
+  between described instrument and actual data, same pattern that struck
+  the batch-20 radiation-risk-perception `good` candidate. Rest of file is
+  pre-summed clinical totals (`sum_BDI`, `sum_PTCI*`, `sum_IES`, etc).
+- `0195239` (autistic traits/social anxiety, 2 studies): both SI files
+  hold only composite task-condition accuracy scores plus SPAI/AQ totals
+  -- no raw items.
+- `0212482` (physical-activity breaks, EF/academic achievement): file
+  holds only composite/index/t-score columns, no raw items.
+- `0220658` (trust/proximity/vaccine propensity): file has only 4-5
+  heterogeneous single-item covariates (trust, 2 risk-likelihood
+  questions, news consumption, vaccine belief) -- no coherent multi-item
+  instrument, same "heterogeneous single items" pattern as the Berlin
+  PrEP skip in the earlier good-candidate pass.
+- `0270464` (staff burnout/child behavior, 2-yr longitudinal): paper's
+  Methods confirms the Chinese CBCL has 112 raw items, but the shared file
+  only contains `Int_1`-`Int_12`/`Ext_1`-`Ext_12`/`Total_1`-`Total_12` --
+  these are subscale-total scores *per wave* (up to 12 waves, matching
+  `no_waves`), not per-item raw responses.
+- `0288386` (EF/psychopathology dimensional models): file has only 6
+  columns, all composite task/dimension scores (Stroop/TMT/ToL + BASC
+  dimension totals), no raw items.
+- `0346872` (bipolar affect/impulsivity): all 3 SI files inspected --
+  S1 Data is sociodemographic/clinical-scale *totals* only (BIS
+  total+subscales, MADRS, YMRS, PANAS total/positive/negative), S2/S3
+  Data are mediation-analysis regression-coefficient tables, not raw
+  data. No raw item-level data anywhere in this paper's SI.
+
+**1 skipped for data-provenance concern, not a content problem**:
+`0331030` (seborrheic dermatitis, anxiety/personality/QoL) structurally
+had 2 real raw-item scales (21-item Beck Anxiety Inventory, 0-3; a
+7-item Bortner-personality-labeled block, 1-8) with clean per-item
+distributions -- but the paper's own abstract states the study was
+conducted on "210 adult South Dakota patients" while every author is
+affiliated with a hospital in Ankara, Turkey, and the SI file's only
+person-identifier column ("ad soyad" = "name surname") is non-unique
+(duplicated across rows with different ages/genders, i.e. not a real
+per-person id despite the label). Both signals independently suggest the
+paper text and/or SI file may not be reliably authored/curated -- not
+shipped; not re-flagged for human_review since the issue is
+authenticity/provenance, not something a closer read of the Methods
+would resolve.
+
+Output: `biblio_batch20_wr_group1.csv` (6 rows), 6 files in
+`irw_output/`. Groups 2 and 3 of the 52-row `worth_retrying` pool were
+handled separately in parallel (see `biblio_batch20_wr_group2.csv` if
+present) -- `plos_retriage_batch20.csv` retained until all groups close
+out.
+
+### PLOS ONE batch 20 worth_retrying — group 2 review (2026-08-10)
+
+Reviewed 16 of the 52 rows (second group of the 3-way split), same method
+(full article + all SI files, license/N/raw-vs-composite/no-single-item
+checks).
+
+**4 papers -> 9 tables shipped**, all CC BY 4.0:
+- `skurvydas_2024_vigour` (10.1371/journal.pone.0307744, N=1140): 4-item
+  BRUMS Vigour subscale, 0-4. Rest of S1 Dataset (IPAQ, SSREIT, PSS-10,
+  single-item ratings) is pre-aggregated totals -- excluded.
+- `gordils_2021_interracial_comp`/`_discrimination`/`_intergroup_anxiety`/
+  `_behavioral_avoidance`/`_interracial_trust`
+  (10.1371/journal.pone.0245671, N=2549): 5 distinct scales (5/9/4/11/4
+  items, all 1-7) in one file -> 5 tables. Study 1 (S1 Data) + Study 2
+  (S4 Data) merged (paper confirms identical procedures), Study 2 ids
+  offset +100000; both filtered to `AttentionCheck==2` (Study 1 N=847
+  exactly matches the paper; Study 2 lands at 1702 vs. the paper's
+  reported 1645 -- likely a race-comparison-only subset not applied here,
+  documented as a judgment call in Notes).
+- `sun_2016_risky_choice_graph` (10.1371/journal.pone.0146914, N=189):
+  4-item binary risky-choice task (probability-bet vs. money-bet), resp
+  1/0, Experiment 1 only (Experiment 2 N=43 only has per-person
+  aggregates; Experiment 3 N=140 only a single trial).
+- `janoffbulman_2016_moralmotives_s1`/`_s2`
+  (10.1371/journal.pone.0152479, N=311/295): 30-item Model of Moral
+  Motives Scale, 1-7, kept as 2 separate study tables rather than merged
+  (no "identical to Study 1" language for Study 2 in the paper).
+  Subscale-composite and manipulation/attention-check columns excluded;
+  Study 3 (country-level aggregate, N=32) out of scope.
+
+12 skipped, all for composite/derived-only data or N too small on closer
+inspection: `0210272` (aggregated RT/accuracy only), `0338521`
+(scoping-review rows, not respondents), `0172144` (only figure means/SEs
+shared per Data Availability, raw data DUA-restricted), `0194574`
+(population-normed percentiles / single composite scores, not raw items
+-- same pattern as the retracted `stenson_2021_sleep_emotion`), `0121478`
+(genuinely raw item data across MMSE/ADAS/NPI/SF-12/QoL-AD x3 waves, but
+true N=30 per-arm -- triage's n_participants=73 was wrong), `0329815`
+(PRISMA-ScR study-extraction spreadsheet, not participant data),
+`0317981` (retrospective chart-review abstraction, no item structure),
+`0277247` (only derived binary loneliness classification shared, not the
+raw 3-item scale), `0138698` (all candidate columns already-computed
+task/IQ composites), `0256983` (same paper as the retracted batch-7
+`stenson_2021_sleep_emotion` -- re-verified all 8 SI files still
+pre-averaged), `0125124` (all 113 columns derived subscale totals/
+proportions/trimmed-mean RTs), `0241694` (PLOS SI is stimulus-validation
+stats only; linked Figshare deposit has only proprietary unreadable
+E-Prime/E-Merge binaries).
+
+Output: `biblio_batch20_wr_group2.csv` (9 rows), 9 files in `irw_output/`.
+
+### PLOS ONE batch 20 worth_retrying — group 3 review (2026-08-10)
+
+Reviewed the remaining 16 rows (third group). This group's agent stalled
+mid-run (600s watchdog) after having already scripted most candidates; a
+resume pass confirmed no work was lost, verified every already-written
+output via pandas (N/item count/resp range), finished the 3 unreviewed
+candidates, and built the biblio CSV.
+
+**8 papers -> 15 tables shipped**, all CC BY 4.0:
+`abouhashish_2025_chatgpt_attitudes` (N=240, 40 items),
+`biswas_2024_digital_center_quality` (N=332, 26 items),
+`busch_2022_course_alleviate`/`_exacerbate` (N=1175/1176),
+`derubeis_2017_bdi`/`_arsq` (N=72, 3 waves),
+`vanteffelen_2020_pid5_hostility`/`_trait_anger`/`_aq_hostility`/`_foa`/
+`_rpq` (N=347-376, 5 scales from one file), `selm_2019_climate_knowledge`
+(N=199, 3 items), `audretsch_2021_entrepreneurial_ecosystems` (N=1849, 15
+items), `kiraly_2024_perinatal_mh_freq`/`_symptoms` (N=96, 16/19 items).
+
+8 skipped: `0178759` (only composite/z-score/sum columns), `0266940`
+(SI is ANOVA summary tables only), `0226953` (exam/homework scores, not
+item-response format), `0338906` (third-party AAMC data, not authorized
+for public re-sharing per its own terms), `0119395` (pre-aggregated
+proportion-correct per item block, not raw trial responses), `0211618`
+(composite subscale totals only), `0216149` (raw data buried in a messy
+multi-sheet exploratory workbook with derived/exclusion sheets, ambiguous
+which sheet is authoritative -- skipped for reliability rather than
+guessing), `0351397` (EEG/ERP summary statistics and per-subject task
+metrics, not item-response data; N=39 also below the floor).
+
+Output: `biblio_batch20_wr_group3.csv` (15 rows), 15 files in
+`irw_output/`.
+
+### PLOS ONE batch 20 worth_retrying — all 3 groups consolidated (2026-08-10)
+
+All 52 `worth_retrying` rows now closed out end-to-end (3 pre-filtered
+for N<50 before review: story-time cerebellar-activation study N=22,
+facial-disgust/estradiol study N=44, language-skills longitudinal study
+N=41). Combined total across the 3 groups: **15 papers -> 30 tables**,
+all CC BY 4.0, merged into `biblio_batch20_worthretrying_final.csv` (30
+rows; the 3 per-group files deleted after merging, content fully
+captured here). All 30 `irw_output/*.csv` files verified present with
+sane N/item-count/resp-range via pandas. `plos_retriage_batch20.csv`
+deleted -- this closes out PLOS ONE batch 20 end-to-end (`good` candidates
+already shipped 2026-08-10, `human_review` rows already pasted
+2026-08-10).
+
+### QC pass on batch 20 worth_retrying output (2026-08-10)
+
+ben-domingue caught two issues in the just-consolidated output before
+upload:
+- **`abouhashish_2025_chatgpt_attitudes`**: `cov_year_of_study` values
+  carried a stray bullet+tab prefix copied straight from the source
+  checkbox form (e.g. `"•\tFourth Year"`) plus inconsistent
+  capitalization (`"Fourth year"` vs `"Fourth Year"` vs `"third year"`).
+  Fixed in `abouhashish_2025_chatgpt_attitudes.py` to strip the
+  bullet/tab/whitespace prefix and title-case the result; regenerated
+  (now cleanly `First/Second/Third/Fourth Year`, N/item counts unchanged).
+- **`gordils_2021_interracial_comp`/`_discrimination`/
+  `_intergroup_anxiety`/`_behavioral_avoidance`** (not `_interracial_trust`,
+  which was clean): ben-domingue asked whether the fractional resp values
+  were imputed. Checked directly against the raw Study 2 (S4 Data) file --
+  each scale's *second* item column (COMP2, DISCRIM2, ANX2, AVOID2) was
+  bit-for-bit identical to that scale's own pre-computed composite mean
+  column (e.g. `AVOID2 == AVOID`) for all 1774 Study-2 rows, a spreadsheet
+  artifact (dragged-formula or copy/paste error in the source file), not a
+  genuine raw response -- exactly the kind of imputed/derived value
+  datastandard.md's "checking for imputed values" rule exists to catch.
+  Study 1's own item2 columns were verified unaffected (integer-only, no
+  match to any composite). Fixed `gordils_2021_interracial.py` to null out
+  the four corrupted Study-2 columns before melting; all 4 affected
+  outputs regenerated with zero fractional resp values remaining (N
+  unchanged at 2549, item counts unchanged). `biblio_batch20_worthretrying_
+  final.csv`'s Notes column updated per-table with both fixes.

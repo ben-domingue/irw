@@ -18,10 +18,21 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-10, ben-domingue); file deleted
   from the repo.
 
-- [ ] **PLOS ONE batch 20 — 52 `worth_retrying` rows not yet reviewed**
-  (`plos_retriage_batch20.csv`, 2026-08-10). Same review process as prior
-  batches (fetch full article + all SI files, license/N>=50/raw-vs-
-  composite checks) still needed.
+- [x] **`automated_finding/biblio_batch20_worthretrying_final.csv`** (30
+  rows, 15 papers -> 30 tables, from PLOS ONE batch 20's `worth_retrying`
+  review, all 3 groups) uploaded to Redivis and pasted into the dictionary
+  sheet (confirmed 2026-08-10, ben-domingue); file and all 30
+  `irw_output/*.csv` files gone from disk as expected (already gone before
+  cleanup was attempted -- consistent with this directory's known
+  Dropbox-sync file-loss pattern, not a script bug). See `BATCH_LOG.md`'s
+  "PLOS ONE batch 20 worth_retrying — all 3 groups consolidated" and "QC
+  pass on batch 20 worth_retrying output" entries for full per-DOI detail,
+  including 2 fixes applied before upload: `abouhashish_2025_chatgpt_
+  attitudes`'s `cov_year_of_study` had a stray bullet/tab prefix + case
+  inconsistency (cleaned), and 4 of the 5 `gordils_2021_*` tables had a
+  corrupted item2 column in their Study-2 source data (identical to the
+  scale's own composite mean, not a raw response -- dropped). This closes
+  out PLOS ONE batch 20's `worth_retrying` pool end-to-end.
 
 - [x] **`automated_finding/biblio_batch19_good.csv`** (51 rows, 16 papers
   -> 51 tables, from PLOS ONE batch 19's `good`-candidate review) uploaded
