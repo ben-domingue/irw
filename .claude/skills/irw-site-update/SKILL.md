@@ -76,7 +76,7 @@ script-by-script writeup this was built from:
 Regenerates the small local CSVs that get merged (by hand) into the
 dictionary/tags/biblio/metadata Redivis tables, from whatever's new in the
 source Google Sheets or newly live in Redivis (e.g. a new
-`item_response_warehouse_3` table, or an edited dictionary-sheet row).
+`item_response_warehouse_4` table, or an edited dictionary-sheet row).
 
 ```bash
 scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 07 08 09
@@ -129,7 +129,7 @@ Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R --skip-dict   #
 Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim"))`
 — the exported R-package accessor already used by the tags/itemtext skills,
 not a raw re-query of Redivis. It wraps exactly the Redivis datasets the
-numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3` (01),
+numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3`/`_4` (01),
 `comp` → `irw_competitions` (05), `nom` → `irw_nominal` (06), `sim` →
 `irw_simsyn` (07).
 
