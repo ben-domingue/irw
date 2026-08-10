@@ -5,7 +5,7 @@
 library(redivis)
 Sys.setenv(REDIVIS_API_TOKEN = trimws(readLines("~/.redivis_api_token", n = 1)))
 
-datasets <- c("item_response_warehouse", "item_response_warehouse_2", "item_response_warehouse_3")
+datasets <- c("item_response_warehouse", "item_response_warehouse_2", "item_response_warehouse_3", "item_response_warehouse_4")
 
 rows <- list()
 for (name in datasets) {

@@ -2991,3 +2991,33 @@ date,query,output_file,notes
 2026-08-04,romantic jealousy,plos_batch19_triage.csv,PLOS batch19; recycled from non-PLOS rows per SKILL.md term-reuse method
 2026-08-04,child temperament,plos_batch19_triage.csv,PLOS batch19; recycled from non-PLOS rows per SKILL.md term-reuse method
 2026-08-04,moral injury,plos_batch19_triage.csv,PLOS batch19; recycled from non-PLOS rows per SKILL.md term-reuse method
+2026-08-10,"executive function",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"numerical cognition",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"response style",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"reaction time",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"attentional control",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"cognitive flexibility",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"temporal discounting",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"risk perception",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"probabilistic reversal learning",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"dyslexia",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"alexithymia",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"schizotypy",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"interoceptive awareness",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"self-harm",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"non-suicidal self-injury",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"intolerance of uncertainty",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"need for closure",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"humor styles",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"boredom proneness",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"system justification",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"just world belief",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"moral foundations",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"stereotype threat",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"academic dishonesty",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"compulsive buying",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"doomscrolling",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"technoference",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"abusive supervision",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"perceived organizational support",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance
+2026-08-10,"entrepreneurial intention",plos_batch20_triage.csv,PLOS ONE batch 20; recycled from non-PLOS search_terms_log pool per SKILL.md guidance

@@ -25,15 +25,19 @@ totals <- Reduce(`+`, lapply(by_dataset, function(df) {
 total_df <- data.frame(created_at = all_times, n_tables = totals)
 
 xlim <- range(growth$created_at)
+ies_start <- as.POSIXct("2024-09-01", tz = "UTC")
 
 p_total <- ggplot(total_df, aes(x = created_at, y = n_tables)) +
   geom_step(linewidth = 1, color = "black") +
+  geom_vline(xintercept = as.numeric(ies_start), linetype = "dashed", color = "grey40") +
+  annotate("text", x = ies_start, y = Inf, label = "IES start", vjust = 1.5, hjust = -0.1, color = "grey40", size = 3.2) +
   scale_x_datetime(limits = xlim) +
   labs(x = NULL, y = "Total tables", title = "Growth of the IRW core datasets") +
   theme_minimal()
 
 p_by_dataset <- ggplot(growth, aes(x = created_at, y = n_tables, color = dataset)) +
   geom_step(linewidth = 1) +
+  geom_vline(xintercept = as.numeric(ies_start), linetype = "dashed", color = "grey40") +
   scale_x_datetime(limits = xlim) +
   labs(x = NULL, y = "Number of tables", color = "Dataset") +
   theme_minimal()
