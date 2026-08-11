@@ -48,6 +48,22 @@ if (length(missing_from_items) == 0 && length(extra_in_items) == 0) {
     }
 }
 
+cat("\n=== Bare-integer item check ===\n")
+item_vals <- unique(df$item)
+looks_bare_integer <- length(item_vals) > 0 && all(grepl("^[0-9]+$", trimws(as.character(item_vals))))
+if (looks_bare_integer) {
+    cat("CAUTION: this table's `item` values are bare integers (e.g. \"",
+        item_vals[1], "\") rather than named codes. An exact item-set match (above) only ",
+        "confirms the *set* of integers is right, not that each integer's item_text was ",
+        "mapped to the correct paper item -- resp type/range plausibility is not enough ",
+        "evidence either, since multiple items typically share the same range. Manually ",
+        "confirm the item order/count against the paper (position in the instrument, ",
+        "subscale grouping, reverse-scored markers) before treating this as validated. ",
+        "See SKILL.md Step 4.\n", sep = "")
+} else {
+    cat("Item identifiers are not bare integers -- no extra reconstruction caution needed.\n")
+}
+
 cat("\n=== Resp set check ===\n")
 if (!has_resp) {
     if (!is.na(raw_resp_col)) {
