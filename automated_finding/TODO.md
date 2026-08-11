@@ -3,6 +3,30 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch23.csv`** (28 rows, merged from
+  Groups A/B/C, 14 papers -> 28 tables, from PLOS ONE batch 23's full
+  `good` (13) + `worth_retrying` (40) pool, reviewed in 3 parallel passes,
+  2026-08-11) uploaded to Redivis and pasted into the dictionary sheet
+  (confirmed 2026-08-11, ben-domingue); file and all 28 `irw_output/*.csv`
+  files gone from disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch
+  23" entries (Groups A/B/C) for full per-paper detail, including the
+  "Post-review ordinality fixes" entry (same day, ben-domingue's
+  questions): `simard_2018_fgf2_behavior` was cut down to `simard_2018_
+  epm_behavior` (EPM-only, 3 items — FST/OF dropped for relying on
+  response-time-like latency items to clear the 2-item minimum) and
+  `klatt_2016_speed_estimation`'s `resp` was changed from a raw speed
+  estimate to signed estimation error against each trial's known true
+  speed.
+- [x] **`automated_finding/human_review_plos_batch23.csv`** (106 rows,
+  batch 23's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone
+  from disk as expected.
+- [ ] **PLOS ONE batch 23 — one candidate flagged for a second look**:
+  `10.1371/journal.pone.0242326` (Caprara et al. self-efficacy-in-negative-
+  emotions study, N=1695, 3 named scales incl. MNESRES/PANAS/SWLS) — Group
+  C found only a codebook + figure-data SI files, no raw-response file, but
+  didn't rule out a missed SI attachment. Worth a second check of the
+  article's full SI list before writing off.
 - [x] **`automated_finding/biblio_plos_batch22.csv`** (38 rows, 15 papers ->
   38 tables, from PLOS ONE batch 22's `good`+`worth_retrying` review, done
   autonomously while ben-domingue was away from the computer 2026-08-10)

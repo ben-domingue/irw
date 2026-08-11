@@ -6992,3 +6992,247 @@ for the "Human eye" sheet. This closes out PLOS ONE batch 22 end-to-end.
 `plos_batch22_good*.csv`/`plos_batch22_worthretrying*.csv`/
 `plos_batch22_group*.csv` intermediate files deleted -- content fully
 captured here.
+
+### PLOS ONE batch 23 — discovery + full review, all 3 groups (2026-08-11)
+
+Discovery: `irw_discover_plos.py` run with 30 recycled English search
+terms pulled from `search_terms_log.csv`'s non-PLOS pool (per the
+"Large pool of recyclable PLOS search terms" backlog item) —
+`enneagram personality`, `depression anxiety stress`, `mood disorder`,
+`ptsd symptom`, `teacher stress`, `stress resilience`,
+`interpersonal competence`, `emotional self-efficacy`, `hostility`,
+`shame`, `guilt`, `coparenting`, `alcohol dependence`, `drug use disorder`,
+`racial identity`, `work values`, `social phobia`, `bereavement`,
+`obsessive compulsive`, `organizational commitment`,
+`transactional leadership`, `servant leadership`, `leader-member exchange`,
+`organizational trust`, `organizational justice`, `knowledge sharing`,
+`problematic social media use`, `cyberchondria`, `phubbing`,
+`online gaming addiction`. 1,884 candidates -> 13 `good` + 314
+`human_assistance`. Retriage (`irw_retriage_ha.py`) on the 314 gave 40
+`worth_retrying` + 106 `human_review` + 86 `aggregate_continuous` + 82
+`not_item_response`. 4 of the 13 `good` rows were pre-filtered out for
+N<50 before review (11p, 20p, 27p — also non-human/mouse — and a 20p case)
+per `feedback_min_sample_size`, leaving 9 `good` + 40 `worth_retrying` = 49
+candidates split into 3 groups of ~16-17 and reviewed in parallel by 3
+agents, each fetching the full article + ALL Supporting Information files
+(not just the one the automated pass inspected) and applying the standard
+license/N>=50/no-single-item/raw-vs-composite checks.
+
+**Overall result: 14 papers -> 28 tables shipped, all CC BY 4.0.** No
+candidate landed in the 50-99 borderline-N band needing ben-domingue's
+sign-off this batch — every skip failed on a harder criterion (composite-
+only data, confirmed N<50, not respondent item-response data at all, e.g.
+chart-review/case-registry/animal-electrophysiology/qualitative studies).
+28 output CSVs independently re-verified after all three groups' reports
+(N/item count/resp range/no-null ids) — clean. `biblio_plos_batch23.csv`
+(28 rows, merged from the three groups' staging files) staged for the
+dictionary sheet; `human_review_plos_batch23.csv` (106 rows) staged for
+the "Human eye" sheet.
+
+#### Group A — 16 hand-assigned candidates
+
+Fetched each article's full text
+(Methods/Measures, Data Availability, license) plus the complete Supporting
+Information file list (not just the one the automated triage inspected),
+then downloaded and pandas/pyreadstat-inspected every candidate SI file.
+
+**6 papers -> 13 tables shipped, all CC BY 4.0:**
+- `alves_2017_hamd17` (17-item Hamilton Depression Rating Scale, raw
+  clinician-rated items, N=291; sentinel 999 on item 5 — matches the
+  paper's documented single missing value — filtered).
+- `busch_2023_stigma` (8 binary concealable-stigmatized-identity self-report
+  items, N=1970).
+- `ni_2025_relationship_network`/`_strategic_orientation`/
+  `_knowledge_transfer`/`_open_innovation` (8/3/4/9-item Likert battery on
+  Chinese SME innovation behavior, N=329, clean 1-5, no missing).
+- `tasaygar_2025_bai` (21-item Beck Anxiety Inventory, N=210; PII name
+  column dropped and also found non-unique across distinct patients so row
+  index used as id instead; one isolated soru5=4 value dropped as a
+  data-entry error against the 0-3 scale) and `tasaygar_2025_sdasi` (4 raw
+  SDASI severity components from the same file; one isolated non-integer
+  value on the extent item dropped).
+- `klatt_2016_speed_estimation` (48-trial raw verbal car-speed-estimate
+  task, continuous km/h, N=60; the file's road-crossing-behavior columns
+  were per-condition aggregates over repeated trials, not raw
+  single-observation responses, and were not shipped).
+- `muharam_2022_srq29` (29-item SRQ mental-health screening, binary, N=159;
+  PII name/phone columns dropped, row index used as id).
+- `nordhoff_2021_trust`/`_motive`/`_safety` (12/4/6-item Likert scales on
+  trust/motive/safety for SAE Level 2 automated cars, N=112-116 after
+  filtering; sentinel code 99 — documented in the paper as "prefer not to
+  respond"/"not applicable" — filtered out; row index used as id, no id
+  column in source).
+
+**10 papers skipped** (content failures, one line each): `0131613`
+(behavioral game-performance counts — kills/deaths/comment tallies — not
+item responses), `0279360` (accuracy columns are means over ~9 trials per
+condition, a computed composite, not raw per-trial data — same failure
+mode as the `stenson_2021_sleep_emotion` retraction), `0180298` (shared
+file has only pre-computed composite anxiety/avoidance scores, no raw
+items), `0273579` (CC0, otherwise strong 5-wave longitudinal design, but
+the "minimal data set" SI file holds only composite PHQ/GAD/ULS/DOCS/RFS
+totals per visit, no raw items), `0217482` (dyadic leader-follower "pairwise
+data matrix" SI file holds only composite/centered/z-scored variables, no
+raw IaW/WE/OLBI items), `0161840` (SPSS file holds only composite
+Type-A/Type-D/HADS/etc. scores, no raw items — also used hot-deck
+imputation on composites per the paper, moot since no raw data present),
+`0241991` (background-data file holds only composite scale totals and
+graph-theory network metrics, no raw items), `0234997` (SPSS file holds
+only composite BL/FU scale scores, no raw items), `0150312` (SPSS file
+holds only composite scale scores, no raw items).
+
+All 13 output CSVs verified with pandas (N/item count/resp range/no-null
+ids) after writing. `biblio_plos_batch23_groupA.csv` (13 rows) merged into
+`biblio_plos_batch23.csv` along with Groups B and C below.
+
+#### Group B — 16 candidates
+
+Same method as Group A: full article text + all SI files fetched and
+inspected per candidate, not just the one the automated triage pass
+opened.
+
+**2 papers -> 3 tables shipped, all CC BY 4.0:**
+- `yang_2018_cesd` (20-item CES-D-style depression scale, 1-4, N=358) and
+  `yang_2018_anxiety` (companion 20-item anxiety scale, 1-4, N=358) — from
+  a study of female migrant entertainment-venue workers in China. Raw
+  items were hiding in a 270-column SAV file alongside dozens of
+  precomputed subscale sums/covariates; confirmed the E1-E20/E21-E40
+  blocks are genuinely raw (range 1-4, not the much larger summed range).
+- `witus_2022_narrator_perception` (3-item narrator-perception scale —
+  trustworthy/comforting/knowledgeable, 1-4, N=809 — only respondents in a
+  video arm of a COVID-19 vaccination-video RCT answered these; verified
+  against the S1 Appendix's full survey-flow diagram and item text). No id
+  column in source, row index used per datastandard.md; `cov_narrator_
+  gender` records the male/female narrator arm.
+
+**14 papers skipped**, one line each: `0233831` (SSRS/CD-RISC/SCL-90,
+N=1472 — SI file has only subscale scores/means, no raw items), `0270464`
+(role stress/burnout/CBCL, longitudinal — only per-wave subscale totals),
+`0294593` (info literacy — SI file literally labeled "Mean of IL" etc., no
+raw items), `0224254` (EI training RCT, N=54 — only subscale/total scores,
+also would have been borderline-N even if raw), `0211618` (humour/
+reappraisal — only derived indices, no raw items), `0272987` (irrational
+beliefs, multi-study — checked all 5 SI files, every one composite-only),
+`0195239` (autistic traits/social cognition — RT/accuracy from flanker and
+visual-search tasks, not a Likert item response), `0350293` (QoL post-DBS-
+OCD — paper states QoL was collected as qualitative interview text, not
+numeric), `0254953` (CBCL/YSR DSM scales — only subscale sums), `0203689`
+(CFPQ/PPAPP parenting — only subscale scores, incl. parent/staff/
+difference versions), `0269443` ("mixed method" motherhood study — Data
+Availability statement says passive data isn't public yet, and the only
+quantitative instrument, PHQ-9, isn't in either shared SI file), `0199605`
+(retirement time-use/mental health — only scale totals), `0315442` (Delphi
+PSNS questionnaire — actual expert panel is N=16, not the 61 the automated
+triage reported; below N=50), `0279871` (food marketing/attentional bias —
+article text confirms final analytic N=41; below N=50).
+
+No candidates landed in the 50-99 borderline-N band this group. Files:
+3 scripts in `data/` (`yang_2018_cesd.py`, `yang_2018_anxiety.py`,
+`witus_2022_narrator_perception.py`), 3 CSVs in `irw_output/`,
+`biblio_plos_batch23_groupB.csv` (3 rows, merged into `biblio_plos_
+batch23.csv`).
+
+#### Group C — 17 candidates (mostly unresolved n/item count from the
+automated pass — header-offset, non-tabular, or genuinely not item-
+response data)
+
+Same method as Groups A/B.
+
+**6 papers -> 12 tables shipped, all CC BY 4.0:**
+- `naja_2024_challenges` (5-item binary "which challenges do you face"
+  checklist, N=371, dieticians in the UAE; the triage-reported "27 items"
+  was a miscount — the SI file's other columns are recoded covariates plus
+  one derived binary resilience group, not raw CD-RISC items).
+- `shi_2021_gentrification` (23-item, 1-5 Likert SEM survey on super-
+  gentrification drivers, N=209 — matched triage's report exactly).
+- `zhang_2024_attractiveness`/`_expertise`/`_parasocial`/`_viewer_dsp`/
+  `_streamer_dsp`/`_gift_intention` (6 constructs, 23 items total, N=325,
+  1-5 Likert, all clean — pan-entertainment live-streaming gift-giving
+  study).
+- `simard_2018_fgf2_behavior` (7-item mouse behavioral battery — FST/EPM/
+  OF outcome measures, N=67 mice, `treat`=Fluoxetine vs Vehicle; same
+  animals verified across all 3 test sheets via exact-match merge).
+- `orovou_2021_pcl5` (20-item PCL-5 PTSD checklist, 0-4, N=469) and
+  `orovou_2021_lec5` (17 binary trauma-exposure items, companion LEC-5)
+  from the same Greek psychometric-validation study; response anchors
+  confirmed via SPSS value labels.
+- `warwas_2022_sharing_economy` (8 binary Yes/No sharing-economy
+  participation items recoded to 1/0, N=1000, Polish demographic survey).
+
+**11 papers skipped**, one line each: `0294151` (maternal separation rats
+— real data is multi-block electrophysiology/behavioral Excel sheets;
+behavioral-score block only ~30 rats/group, rest is raw per-event synaptic-
+current time series, not person-item structured), `0192329` (rat cerebral
+cortex microstructure — SI file is aggregate effect-size/CI summary by
+brain region, composite/derived), `0309205` (rare-disease clustering — 912
+families not the reported 11598, sparse case-level phenotype listing with
+only positive endorsements, a case registry not a fixed-item instrument),
+`0163811` (autopsy consent — confirmed chart-audit database, one row per
+patient, no repeated-item structure), `0307349` (caregiver anxiety — SAV
+file, N=80, only precomputed subscale/total scores for STAI/PSS/MBI/etc.,
+no raw item columns despite a rich named-instrument battery), `0259364`
+(VR provider survey — genuine 62-item instrument but only 17 complete
+respondent records, under N=50), `0317981` (self-harm Kenya — confirmed
+retrospective chart-review, one row per patient), `0242326` (Caprara et
+al. self-efficacy study, N=1695, 3 named scales — only a codebook + figure-
+data SI files found, no raw-response file; flagged in `TODO.md` for a
+second SI-list check rather than written off outright), `0172144` (PTSD/
+gender fear generalization — paper states raw data is in a restricted VA
+computing environment, only figure means/SEs shared), `0345874` (coaching
+power, Foucauldian — quantitative component is only 30 rows, 10 scenarios
+x 3 coaches, plus primarily qualitative), `0319473` (stepped care — this
+is a scoping review of 68 studies, not a primary survey; the "dataset" is
+study-level extraction data, not respondent item responses).
+
+All license checks CC BY 4.0 confirmed on the article page. Files: 7
+scripts in `data/` (`naja_2024_challenges.py`, `shi_2021_gentrification.py`,
+`zhang_2024_giftgiving.py`, `simard_2018_fgf2_behavior.py`,
+`orovou_2021_pcl5.py`, `warwas_2022_sharing_economy.py` — the zhang script
+produces all 6 tables), 12 CSVs in `irw_output/`,
+`biblio_plos_batch23_groupC.csv` (12 rows, merged into `biblio_plos_
+batch23.csv`).
+
+This closes out PLOS ONE batch 23's discovery + `good`/`worth_retrying`
+review end-to-end. `plos_batch23_triage.csv`, `plos_batch23_retriage.csv`,
+`plos_batch23_good.csv`, `plos_batch23_worthretrying.csv`, and the three
+`biblio_plos_batch23_group{A,B,C}.csv` files are being deleted now that
+their content is captured here and merged into `biblio_plos_batch23.csv`.
+
+#### Post-review ordinality fixes (2026-08-11, ben-domingue's questions)
+
+Two shipped tables were revised after ben-domingue questioned whether
+`resp` was ordinally meaningful:
+
+- **`simard_2018_fgf2_behavior` -> `simard_2018_epm_behavior`, dropped to
+  EPM only.** The original 7-item file bundled outcome measures from three
+  distinct standardized behavioral tests (FST/EPM/OF) into one table, and
+  two of those items (`fst_latency_immobility_s`, `of_latency_centre_s`)
+  were time-to-first-occurrence latencies -- response-time-like measures,
+  not substantive responses in their own right, per
+  `feedback_rt_column_scope`. Removing the two latency items left FST and
+  OF with only 1 item each, below IRW's 2-item minimum, so those two
+  scales couldn't ship standalone; there's no accuracy-type reframing
+  available for behavioral-duration measures the way there was for
+  klatt's speed task (no "true" target being judged), so per
+  ben-domingue's direction the fix was to ship EPM only (3 items: time in
+  open arms, % of distance in open arms, total distance traveled -- no
+  latency component in any of the three). `data/simard_2018_fgf2_
+  behavior.py` deleted, replaced by `data/simard_2018_epm_behavior.py`;
+  old combined output/biblio row replaced with the EPM-only table (N=67
+  mice, unchanged).
+- **`klatt_2016_speed_estimation` — `resp` changed from raw verbal speed
+  estimate to signed estimation error.** ben-domingue pointed out the true
+  speed of each approaching car is known (45/50/55 km/h, encoded in every
+  item's own name, e.g. `@44898_nis_45_trottoir`), so the raw estimate
+  alone doesn't capture what the study is actually measuring
+  (over/under-estimation of an approaching car's speed). `resp` is now
+  `estimate - true_target_speed` per trial (parsed from the item name),
+  preserving the same within-item ordinal direction (higher = greater
+  overestimation) while tying the response to accuracy rather than a
+  free-floating magnitude judgment. `data/klatt_2016_speed_estimation.py`
+  updated in place; N/item count unchanged (60 ids, 48 items), resp range
+  now -45 to 50 (signed error, km/h) instead of 10-100 (raw estimate).
+
+Both fixes verified by re-running each script and diffing `biblio_plos_
+batch23.csv`'s table list against `irw_output/*.csv` (28 tables, exact
+match). No other batch-23 tables were affected.
