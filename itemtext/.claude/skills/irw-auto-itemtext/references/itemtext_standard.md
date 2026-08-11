@@ -1,7 +1,8 @@
 # IRW Item Text Schema
 
 Verbatim field definitions, copied from https://itemresponsewarehouse.org/itemtext.html
-(2026-07-27) so this skill doesn't need to re-fetch the page every run. This is the
+(2026-08-11, as of datapages/irw commit `3da46a86662018e6f9bf09cfd89ee4ac51c6e947`
+/ PR #97) so this skill doesn't need to re-fetch the page every run. This is the
 schema of the **merged** `{table}__items.csv` — the output of joining the four
 per-table tabs (instrument, sections, items, responses) on `table` / `section_id` / `item`.
 
@@ -17,6 +18,14 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
+
+`instructions` and `section_prompt` are scoped differently: `instructions` applies to
+the entire table regardless of `section_id`; `section_prompt` applies only to the items
+sharing one or more specific `section_id` values. The same span of source text should
+never be recorded in both fields. If framing or task-level text applies across the whole
+table, record it once in `instructions`. If it is specific to a subset of items sharing
+a `section_id` (e.g. a passage or context given before a testlet), record it in
+`section_prompt` only, even if it superficially resembles instructional language.
 
 **`resp_raw`** (per the public schema page): when the scoring key can't be recovered —
 i.e. the item is on some categorical/lettered coding in the source material that doesn't

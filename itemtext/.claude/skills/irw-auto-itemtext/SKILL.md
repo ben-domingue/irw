@@ -101,14 +101,31 @@ Build the 4-tab structure (see `references/itemtext_standard.md` for exact colum
 in memory or as a scratch CSV — you don't have to actually create Sheets tabs, just
 produce data shaped like them before merging:
 
-- **instrument/instructions** — full instrument name + literal instructions text.
-- **section_id/section_prompt** — only for testlets/shared-passage items. If the
-  instrument has no such grouping, still emit one `section_id` per item (e.g.
-  `<table>_1`) with a blank `section_prompt`, rather than omitting the column — the
-  merge step needs a join key.
+- **instrument/instructions** — full instrument name + literal instructions text that
+  applies to the entire table regardless of `section_id`.
+- **section_id/section_prompt** — only for testlets/shared-passage items, and scoped to
+  just the items sharing that `section_id` (e.g. a passage or context given before a
+  testlet). If the instrument has no such grouping, still emit one `section_id` per item
+  (e.g. `<table>_1`) with a blank `section_prompt`, rather than omitting the column — the
+  merge step needs a join key. Never record the same span of source text in both
+  `instructions` and `section_prompt` — decide which one it belongs to (whole-table
+  framing goes in `instructions`; testlet/passage-specific text goes in `section_prompt`
+  only, even if it reads like instructional language) and record it once. See
+  `references/itemtext_standard.md` for the full rule.
 - **item/item_text/correct_response** — `item` values must be exactly the ones from
   Step 2's ground truth, not invented. `correct_response` blank when there's no scoring
-  key; semicolon-separated when multiple answers are correct (e.g. `A;C`).
+  key; semicolon-separated when multiple answers are correct (e.g. `A;C`). **When the
+  ground-truth `item` values are bare integers** (e.g. `1`, `2`, `3` rather than named
+  codes like `q1_anx`), you have to reconstruct which paper item each integer refers to
+  — usually by position/order in the instrument. Confirming that `resp`'s type and range
+  look plausible for that item (e.g. "a 1–5 Likert item exists") is not sufficient
+  validation on its own, since many items in the same instrument share the same response
+  range and would pass that check regardless of which one you picked. Before assigning
+  `item_text` to a specific bare-integer `item`, cross-check the paper's stated item
+  count and presentation order, and any distinguishing wording/position cues (item
+  numbering in a table/appendix, subscale grouping, reverse-scored markers) — don't rely
+  on range-matching alone. If the mapping is genuinely ambiguous, say so and log it per
+  Step 6b rather than guessing.
 - **resp/option_text** — `resp` values must be exactly the ones from Step 2's ground
   truth. Map extracted option text onto that existing numeric/ordinal coding — for a
   standard Likert-style instrument this is usually the ascending order the paper
@@ -117,6 +134,14 @@ produce data shaped like them before merging:
   a categorical/lettered code with no way to tie it to the existing numeric `resp`), put
   the raw option in a `raw_resp` column instead of forcing it into `resp` — see
   `gilbert_meta_11` for a real example of this pattern.
+
+**Match the source's terseness.** Transcribe `instructions`, `section_prompt`,
+`item_text`, and `option_text` at the same level of brevity as the source material. If
+the paper's instructions are one short sentence, keep it one short sentence — don't
+expand it into an explanatory paraphrase. If item stems are terse phrases (e.g. "Felt
+nervous"), keep them terse; don't pad them into full explanatory sentences or add
+clarifying boilerplate that isn't in the original text. The goal is a literal transcript,
+not a rewrite for clarity.
 
 Merge the four pieces (`items` as the base, then `sections`, `instrument`, `responses`,
 each via `merge(..., all.x=TRUE)` on shared key columns) into one data frame — this is
