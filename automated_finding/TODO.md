@@ -15,10 +15,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-10, ben-domingue); file gone
   from disk as expected.
 
-- [ ] **PLOS ONE batch 21 — 52 `worth_retrying` rows not yet reviewed**
-  (`plos_batch21_retriage.csv`). Same review method as batch 20's
-  worth_retrying pool (full article + all SI files, license/N/raw-vs-
-  composite/no-single-item checks).
+- [ ] **`automated_finding/biblio_plos_batch21_worthretrying.csv`** (55
+  rows, 14 papers -> 55 tables, from PLOS ONE batch 21's `worth_retrying`
+  pool) needs uploading to Redivis and pasting into the dictionary sheet.
+  See `BATCH_LOG.md`'s "PLOS ONE batch 21 worth_retrying — all 33
+  non-duplicate candidates resolved" entry for full per-paper detail,
+  including a genuine external lead not yet chased: `0227877`'s real
+  data is at Figshare `10.6084/m9.figshare.c.4792323`, not the PLOS SI
+  (worth a follow-up through the regular repo-based pipeline).
 
 - [x] **`automated_finding/biblio_plos_batch20.csv`** (10 rows, 6 papers ->
   10 tables, from PLOS ONE batch 20's `good`-candidate review) uploaded to

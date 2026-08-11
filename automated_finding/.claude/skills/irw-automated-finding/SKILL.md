@@ -9,10 +9,15 @@ Orchestrates the multi-step pipeline in `automated_finding/` that finds,
 triages, and standardizes candidate datasets for the Item Response Warehouse.
 The scripts and full column/flag reference already live in
 `automated_finding/README.md` — read it before running anything unfamiliar.
-The output format itself — schema, naming, edge cases — is defined in
-`datastandard.md` at the repo root; this file does not restate it. This file
-is the orchestration layer: which step to run, in what order, and the
-pipeline-specific hard rules that must not be skipped.
+The output format itself — schema, naming, edge cases, and what counts as
+a legitimate candidate in the first place (e.g. what `id` is allowed to
+identify, what a "response" is) — is defined in `datastandard.md` at the
+repo root; this file does not restate it. That makes `datastandard.md`
+the authority not just when writing a script (Step 3), but for any
+triage/review judgment call about whether a candidate fits — check it
+before inventing a fit-or-skip rule that isn't written down anywhere.
+This file is the orchestration layer: which step to run, in what order,
+and the pipeline-specific hard rules that must not be skipped.
 
 Work from inside `automated_finding/`.
 
@@ -137,6 +142,20 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
   documented skip reason) and every `human_review` row is in the "human eye"
   tab, delete the local triage CSV — it's temporary; `search_terms_log.csv`
   is the permanent record.
+- **Non-human/animal subjects are not, by themselves, a reason to skip.**
+  `datastandard.md`'s `id`-column definition already establishes this —
+  `id` is "the focal unit being measured — typically a person, but
+  sometimes another entity" (its own example is a word in a lexical
+  task). A repeated-measures item/trial battery on animals fits the
+  standard id/item/resp long format exactly as well as a human Likert
+  survey does. Skip a candidate for the same reasons you'd skip a human
+  one (composite-only data, N too small, no real item structure, no
+  per-subject repeats) — not simply because the subject isn't human.
+  (2026-08-10: a cichlid mate-preference candidate was dropped pre-review
+  on "non-human" grounds alone during PLOS batch 21's worth_retrying pass
+  — that reasoning wasn't grounded in `datastandard.md` and was wrong;
+  re-evaluate any future non-human candidate on content merits per the
+  actual standard, not an invented species restriction.)
 
 ## Step 2b — Retriage `human_assistance` (recommended before reviewing by hand)
 

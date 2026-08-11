@@ -6699,3 +6699,111 @@ after the agent's report. `biblio_plos_batch21.csv` (25 rows) staged in
 sheet. `worth_retrying` (52 rows) not yet reviewed -- open item, see
 `TODO.md`. `plos_batch21_triage.csv` and `plos_batch21_retriage.csv`
 retained until both are closed out.
+
+### PLOS ONE batch 21 worth_retrying — review begins (2026-08-10)
+
+52 `worth_retrying` rows from `plos_batch21_retriage.csv` triaged before
+deep review by grepping each DOI against this log for prior verdicts
+(same method as batch 9's backlog-sweep and batch 20's group reviews):
+
+**18 of 52 are duplicates of candidates already confirmed as content
+problems in earlier batches** -- not re-reviewed, skip reasons carried
+forward as previously recorded: `0211618`/`0272987` (composite subscale
+totals only), `0276794`/`0322635` (aggregate subscale composites only),
+`0343308` (item-development/factor-loading meta-table, not primary
+data), `0271030` (5-column aggregate subscale file), `0302350`
+(heterogeneous demographic/clinical survey, no item structure),
+`0319473`/`0338521`/`0305567` (scoping reviews / rows-are-papers-not-
+people, not primary respondent data), `0160805` (subscale/total scores
+only, no raw items), `0267580` (incoherent single-item vaccination-
+intention), `0267181` (ASD-MBQ physical-activity outcome measures, no
+Likert battery), `0280758` (CEO/firm panel data, not individual survey),
+`0203336` (BSI/FSB subscale totals + physiology only, composite),
+`0315442` (Delphi expert-panel tables, not respondent-level),
+`0206555` (video-game-expertise database, not respondent data),
+`0294593` (fractional composite/latent-variable SEM scores only).
+
+1 more (`0195766`, cichlid fish mate-preference study) dropped
+pre-review on "non-human" grounds alone -- ben-domingue confirmed the
+drop is fine to leave as-is here, but flagged that reasoning as wrong in
+general (IRW's schema is species-agnostic); `SKILL.md` updated with a
+standing rule so future non-human candidates get evaluated on content
+merits, not species.
+
+**33 remain, split into 2 parallel review groups** (17 + 16, same
+fetch-article-plus-SI / license / raw-vs-composite / N / item-structure
+method as batch 20). 9 of the 33 carry prior-batch context worth
+prioritizing (real item-level data previously confirmed present but
+left unscripted for lack of codebook time): `0227877` (atlas of
+personality -- real data reportedly on Figshare, not the PLOS SI itself,
+external lead not yet chased), `0258606`/`0197276` (in an earlier
+"screened but not hand-verified" pool, genuinely unknown either way),
+`0252329` (couples emotion-regulation questionnaire, "confirmed
+structurally good, not yet scripted"), `0272095` (Dutch self/other/meta
+personality, 1086-col multi-rater HEXACO), `0280919` (Chinese EFL
+learning, real items w/ Chinese-text Likert labels + 481-vs-942 row
+mismatch to resolve), `0314338` (PE-teacher/student sports study,
+ambiguous Chinese-labeled construct-to-column mapping), `0230103`
+(French school-subject self-concept, 249 cols/5 domain scales, has a DOB
+column to strip), `0257577` (disordered-eating-in-athletes, N=802, 3
+waves, ~20 subscale prefixes in a 665-col file). Results to follow.
+
+### PLOS ONE batch 21 worth_retrying — all 33 non-duplicate candidates resolved (2026-08-10)
+
+Both parallel groups (17 + 16 candidates) finished and independently
+re-verified with pandas (N/item count/resp range/no-null-id) before
+merging. **14 papers -> 55 tables shipped**, all CC BY 4.0:
+
+Group A (7 papers -> 22 tables): `pilch_2021_coping_covid` (coping
+behavior/protection motivation/fear-of-COVID/IPIP-BFM-20 personality, 4
+tables), `shineha_2024_genome_edited_food` (public+expert attitudes
+toward genome-edited food, 3 tables), `marquessanchez_2023_kidmed`
+(KIDMED dietary index, 1 table), `chanal_2020_selfconcept` (5
+school-subject self-concept domains -- Ecole/Maths/Francais/Anglais/
+EducPhy, DOB/PII column stripped, 5 tables), `zhao_2025_digital_literacy`
+(CFPS panel digital-literacy items with a `wave` column, N=6202, 1
+table), `weeldenburg_2022_target_pe` (BRPEQ motivation + TARGET-MTPQ, id
+column false-alarm resolved, 2 tables), `de_vries_2022_hexaco` (HEXACO
+self/other/meta -- successfully unpacked the previously-deferred
+1086-column multi-rater structure with a `rater` column on the "other"
+table -- plus BAT burnout core+secondary and EWWS well-being, 6 tables).
+
+Group B (7 papers -> 33 tables): `sondell_2018_dementia_motivation`
+(staff-rated motivation, text-Likert recoded per paper, 1 table),
+`dominguez_2018_job_crafting` (JCS/UWES/MBI/ITL, resolves the previously
+"unknown quality" `0197276` lead, 4 tables), `stoyel_2021_disordered_
+eating` (the flagged priority lead -- N=802, 3-wave EDI/PANAS/EDE-Q
+subscale battery, 21 tables), `antes_2020_pdm` (professional
+decision-making, pre/post binary items, 1 table), `benitezsillero_2021_
+bullying` (EBIPQ, N=1441, 1 table), `dong_2025_teacher_leadership`
+(text-Likert recoded per paper, 1 table), `taylorabdulai_2025_covid_
+vaccine` (Yes/No item batteries, 4 tables).
+
+19 papers skipped, one line each: `0227877` (**external lead, not
+chased** -- real data is at Figshare `10.6084/m9.figshare.c.4792323`, not
+the PLOS SI), `0252329` (23-expert content-validity panel, not respondent
+data), `0280919` (unresolvable 481-vs-942 row mismatch from a non-unique
+index key), `0152462` (web-log pageviews + exam grades only, no survey
+data), `0334407` (genuinely qualitative thematic-interview data),
+`0314338` (Chinese-labeled columns don't reconcile with the paper's
+described instruments), `0294723` (opaque letter-prefixed columns, no
+codebook, mismatched vs. paper), `0284553` (demographics only, no
+item-level data), `0267055`/`0313189` (composite/derived index variables
+only), `0328215` (SI is a variable-extraction codebook, not primary
+data), `0294116` (raw-item SI covers only N=40, below the floor),
+`0321423` (SI is included-studies characteristics tables, a scoping
+review of *other* scales), `0295239` (no tabular SI, only DOCX
+appendices), `0213015` (composite WHOQOL domain scores + pre-aggregated
+flags only), `0262639` (session/presentation-level behavioral coding, not
+person-level self-report -- same failure mode as the AAA-conference paper
+skipped in this batch's `good` review), `0283720` (SI is the blank survey
+instrument, no responses), `0238372` (raw-response SI covers only N=49),
+`0241188` (all columns are derived composite indices).
+
+All 55 outputs independently re-verified (N/item count/resp range/no
+null ids) after both agents' reports -- clean. `biblio_plos_batch21_
+worthretrying.csv` (55 rows, merged from both groups) staged in
+`automated_finding/` for the dictionary sheet. This closes out PLOS ONE
+batch 21 end-to-end (`good` candidates already shipped, `human_review`
+rows already pasted). `plos_batch21_triage.csv` and `plos_batch21_
+retriage.csv` deleted -- content fully captured here.
