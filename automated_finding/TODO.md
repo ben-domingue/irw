@@ -3,6 +3,23 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch21.csv`** (25 rows, 4 papers ->
+  25 tables, from PLOS ONE batch 21's `good`-candidate review) uploaded to
+  Redivis and pasted into the dictionary sheet (confirmed 2026-08-10,
+  ben-domingue); file and all 25 `irw_output/*.csv` files gone from disk
+  as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 21" entry for full
+  per-paper detail.
+
+- [x] **`automated_finding/human_review_plos_batch21.csv`** (115 rows,
+  batch 21's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-10, ben-domingue); file gone
+  from disk as expected.
+
+- [ ] **PLOS ONE batch 21 — 52 `worth_retrying` rows not yet reviewed**
+  (`plos_batch21_retriage.csv`). Same review method as batch 20's
+  worth_retrying pool (full article + all SI files, license/N/raw-vs-
+  composite/no-single-item checks).
+
 - [x] **`automated_finding/biblio_plos_batch20.csv`** (10 rows, 6 papers ->
   10 tables, from PLOS ONE batch 20's `good`-candidate review) uploaded to
   Redivis and pasted into the dictionary sheet (confirmed 2026-08-10,

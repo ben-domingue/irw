@@ -6627,3 +6627,75 @@ upload:
   outputs regenerated with zero fractional resp values remaining (N
   unchanged at 2549, item counts unchanged). `biblio_batch20_worthretrying_
   final.csv`'s Notes column updated per-table with both fixes.
+
+## PLOS ONE batch 21 (2026-08-10)
+
+Discovery run with 30 recycled search terms pulled from the non-PLOS pool
+in `search_terms_log.csv` (per `SKILL.md`'s term-recycling guidance;
+filtered to ASCII/English-looking terms not yet tried against PLOS,
+~982 candidates available): academic procrastination, imposter syndrome,
+grit, eating disorder, body dissatisfaction, climate anxiety, vaccine
+hesitancy, workplace ostracism, moral disengagement, financial literacy,
+sense of belonging, dark triad, cyberbullying, gaming disorder, religious
+coping, forgiveness, psychological capital, work-life balance, parenting
+stress, sport confidence, self-determination, racial prejudice,
+conspiracy beliefs, medication adherence, trust in science, gratitude,
+career indecision, sexual harassment, weight stigma, teacher
+self-efficacy.
+
+1,921 candidates -> 18 `good` + 319 `human_assistance` + 1,523
+`no_usable_file` + 35 `not_item_response` + 14 `download_failed` + 12
+`error`. Retriage (`irw_retriage_ha.py`) on the `human_assistance`
+bucket: 52 `worth_retrying`, 115 `human_review`, 77 `aggregate_continuous`,
+75 `not_item_response`.
+
+**`good`-candidate review**: 5 of the 18 were duplicates of candidates
+already reviewed and skipped in earlier batches (caught by DOI grep
+against `BATCH_LOG.md` before review, saving re-work): `0327299`
+(caste-equality, single-item belief question -- batch 20), `0260168`
+(Berlin PrEP, heterogeneous single items -- batch 20), `0348206`
+(WFH/hybrid-workplace, best-worst-scaling choice experiment, not Likert
+-- batch 15), `0295904` (dieticians turnover, real CD-RISC items
+described in the paper but never actually shared in the file -- batch
+18), `0254795` (physicians wellbeing, composite index only -- batch 18).
+Remaining 7 reviewed (fetch full article + SI files, verify
+license/raw-vs-composite/N/item structure). Result: **3 papers processed
+-> 24 tables**, plus 1 more paper -> 1 table (25 total), all CC BY 4.0
+except one CC0:
+- `yuebo_2024_online_learning` (10.1371/journal.pone.0297515, N=245): ISS
+  model + TPACK survey, 10 distinct 4-5-item constructs (sysquality,
+  srvquality, infoquality, use, satisfaction, netbenefit, tk, tck, pck,
+  tpack) in one SI file -> 10 tables per the multiple-scales rule.
+  Aggregate TK/TCK/PCK/TPACK mean columns excluded.
+- `anh_2026_finwellbeing` (10.1371/journal.pone.0340002, N=306): financial
+  socialization/technology/capability survey, 6 constructs (finsocial
+  ization, ai_adoption, finbehavior, finwellbeing, finliteracy,
+  digitaltrust) -> 6 tables.
+- `pang_2023_nev_adoption` (10.1371/journal.pone.0285815, N=309): new
+  energy vehicle adoption survey, 8 constructs (perceived_usefulness/
+  ease_use/risk/cost/enjoyment, media_influence, social_norms,
+  behavioral_intent) -> 8 tables.
+- `baaziz_2023_sms2` (10.1371/journal.pone.0295262, N=780, CC0): 18-item
+  Arabic Sport Motivation Scale (SMS-II). Note: the article's own
+  caption-to-file mapping for its 3 SI files was internally inconsistent;
+  `.s003` (780-row combined EFA+CFA sample) used instead of the captioned
+  `.s001`, confirmed via HTTP redirect inspection.
+
+3 of the 7 skipped: `0207691` (AAA gender-bias, observational coding of
+conference Q&A rounds -- id resets each round, not a stable person
+identifier, not a self-report instrument), `0118221`
+(Mindfulness/Compassion, only composite empathic-responsiveness indices
++ a binary outcome, no raw items), `0131613` (Sexism/gaming, behavioral
+game-performance data -- kills/deaths, coded comments -- not a
+self-report instrument). All 3 had triage N/item counts that didn't match
+actual file content, another confirmation of the standing "good needs a
+human glance" caution.
+
+All 25 outputs re-verified directly (N/item count/resp range/no-null-id)
+after the agent's report. `biblio_plos_batch21.csv` (25 rows) staged in
+`automated_finding/` for the dictionary sheet.
+
+`human_review_plos_batch21.csv` (115 rows) staged for the "Human eye"
+sheet. `worth_retrying` (52 rows) not yet reviewed -- open item, see
+`TODO.md`. `plos_batch21_triage.csv` and `plos_batch21_retriage.csv`
+retained until both are closed out.
