@@ -3,6 +3,33 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch22.csv`** (38 rows, 15 papers ->
+  38 tables, from PLOS ONE batch 22's `good`+`worth_retrying` review, done
+  autonomously while ben-domingue was away from the computer 2026-08-10)
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-11, ben-domingue); file and all 38 `irw_output/*.csv` files gone
+  from disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 22" entry for
+  full per-paper detail, including one QC catch (`wekker_2018_mfsq`:
+  non-integer imputed cells on an integer 1-7 scale, dropped) and 2
+  dup_id_item false-positive fixes resolved by falling back to row-index
+  ids (`akrawi_2025_sclc`, `xu_2022_ples_aa`, `roettl_2018_*`). A
+  ben-domingue follow-up question confirmed `tomioka_2022_srh_importance`'s
+  resp=3 is a genuine "Not very important" response category (codebook:
+  1=Very important...4=Not important), not missingness or an error — no
+  respondent in the sample happened to pick category 4.
+
+- [x] **`automated_finding/human_review_plos_batch22.csv`** (77 rows, batch
+  22's `human_review` rows from `irw_retriage_ha.py`) pasted into the
+  "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone from
+  disk as expected.
+
+- [ ] **Batch 22 — one N=50-99 borderline candidate not shipped, no
+  ben-domingue decision needed**: `10.1371/journal.pone.0311487` (natural
+  soundscapes/mood recovery, N=68) was independently disqualified on
+  content grounds (composite-only STAI-S/UWIST-MACL scores, no raw items)
+  so it didn't reach a pure N judgment call — logged here only for
+  completeness, no action needed.
+
 - [x] **`automated_finding/biblio_plos_batch21.csv`** (25 rows, 4 papers ->
   25 tables, from PLOS ONE batch 21's `good`-candidate review) uploaded to
   Redivis and pasted into the dictionary sheet (confirmed 2026-08-10,

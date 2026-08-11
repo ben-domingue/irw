@@ -6864,3 +6864,131 @@ when the paper is silent; item 10 now requires acting on a non-integer-
 on-integer-scale signal (explain or drop) rather than treating it as
 merely a "note it and move on" observation. See `datastandard.md` for
 the updated text.
+
+## PLOS ONE batch 22 (2026-08-10)
+
+30 recycled English search terms (validated instrument/construct names
+already used successfully against non-PLOS sources per `search_terms_log.csv`,
+never before tried against PLOS ONE, per `SKILL.md`'s term-recycling
+guidance): organizational citizenship behavior, work locus of control,
+creative self-efficacy, internet gaming disorder, exercise motivation, sport
+motivation, athletic identity, physical self-concept, couple satisfaction,
+sexual function, health-related quality of life, illness anxiety, climate
+change attitudes, civic engagement, political trust, implicit bias, media
+literacy, need for cognition, vocational identity, career self-efficacy,
+prospective memory, reading motivation, mathematics self-concept, STEM
+attitudes, prolonged grief disorder, trait anxiety, hedonic wellbeing,
+eudaimonic wellbeing, psychological wellbeing, optimism scale. All logged to
+`search_terms_log.csv`.
+
+`irw_discover_plos.py` run: 1,684 candidates -> 1,344 `no_usable_file` + 272
+`human_assistance` + 27 `not_item_response` + 16 `download_failed` + 15
+`error` + 10 `good`. `irw_retriage_ha.py` on the `human_assistance` bucket:
+90 `aggregate_continuous`, 77 `human_review`, 54 `worth_retrying`, 51
+`not_item_response`.
+
+**Dedup pass before review**: cross-checked all 10 `good` + 54
+`worth_retrying` DOIs against this file's own history (grep on the 7-digit
+`pone.XXXXXXX` suffix) — 48 were exact-DOI repeats of candidates already
+reviewed and struck in earlier batches (search terms keep resurfacing the
+same PLOS articles across different query terms, expected, not re-reviewed).
+That left 35 genuinely new candidates (7 `good` + 28 `worth_retrying`), split
+into two groups of ~17-18 and reviewed in parallel by 2 agents, each fetching
+the full article page + ALL Supporting Information files (not just the one
+`process_one()` flags) and applying the standard license/N>=50/no-single-item/
+raw-vs-composite checks.
+
+**Result: 15 papers -> 38 tables shipped, all CC BY 4.0.**
+
+Group A (10 papers -> 23 tables): `zeng_2025_megaproject_msr`/`_seap`/`_ecm`
+(39/11/15-item megaproject social-responsibility survey, Chinese-led Thailand
+infrastructure, N=458), `tomioka_2022_srh_importance`/`_sufficiency`/
+`_support_types`/`_future_needs` (Japanese nurse survey on
+adolescent/young-adult cancer-patient sexual/reproductive health support,
+N=865), `wang_2026_veteran_expectations` (3-item behavioral-expectations
+scale, Chinese veterans, N=624; raw file N=624 vs. paper's 525
+post-validity-screen N -- shipped as-is, all rows clean and in-range),
+`buczel_2022_inoculation_belief` (6-item misinformation-belief scale 1-11,
+inoculation-technique RCT, N=137, `treat` column; a companion composite
+accuracy-count block excluded per the composite-exclusion rule),
+`cacciatore_2021_isel`/`_crisis_care_satisfaction`/`_ongoing_satisfaction`
+(12/9/9-item bereaved-parent grief-support scales, N=345-362),
+`beck_2021_hads`/`_iesr`/`_pss10`/`_cdrisc10` (14/22/10/10-item COVID-19
+cohort battery, N=214-279, `cov_role` patient-vs-relative; triage's
+text-coded-Likert flag was a false positive, item columns were already clean
+numeric), `akrawi_2025_sclc` (13-item Dutch SCLC scale, pharmacy-technician
+simulation training, N=129; dup_id_item flag traced to one accidental
+data-entry ID reuse, not repeated measures -- row index used as id),
+`gabriel_2026_knowledge_correct`/`_knowledge_confidence`/`_media_use`
+(9/9/6-item German farmer/advisor agricultural-knowledge survey, N=2022,
+binary knowledge quiz confirmed genuinely binary via codebook, not Likert),
+`alasmari_2025_ai_trust_confidence`/`_compare` (4/5-item AI-trust survey,
+N=327-335; "Unsure" responses on the compare scale treated as non-response
+and dropped, 8 all-Unsure respondents excluded from that table), `xu_2022_
+ples_aa` (16-item PLES-AA scale across 4 dimensions, Chinese tertiary-ed
+administrators, N=197; dup_id_item flag traced to one accidental participant
+ID reuse -- row index used as id). One naming correction made mid-review:
+`buczel_2022_inoculation_belief` was initially mis-attributed to
+"Pennycook" by a sub-review pass before being corrected to the paper's
+actual authors (Buczel, Szyszka, Siwiak, Szpitalak & Polczyk).
+
+Group B (5 papers -> 15 tables): `zheng_2015_ibdq` (32-item Chinese IBDQ,
+ulcerative colitis QoL, N=224; source name-initials id column not unique,
+row index used instead), `wekker_2018_mfsq` (18-item McCoy Female Sexuality
+Questionnaire, RCT 5-year follow-up, N=177, `treat` column; scattered
+non-integer cells on an integer 1-7 scale found and dropped per
+datastandard.md's imputation-check rule -- paper only documents
+mean-imputation at the domain-score level, but contamination reached raw
+item cells in the shared file), `roettl_2018_game_attitude`/`_arousal`/
+`_brand_attitude`/`_brand_recognition`/`_scepticism` (6/3/24/8/9-item video
+game-technology/brand-placement battery, 2D/3D/VR between-subjects, N=234,
+`cov_condition`; triage's 1.6x duplicate-ratio flag was a false signal from
+varying brand-column counts, confirmed via condition value counts matching
+the paper's N exactly; single-item `F25_Presence` excluded), `zubair_2021_
+psm`/`_political_support`/`_altruism`/`_social_impact`/`_org_performance`
+(5/3/4/4/8-item public-service-motivation/organizational-performance survey,
+N=405, zero missing; kept PSM1 despite the paper dropping it from its own
+measurement model for low factor loading -- this is raw item data, not the
+paper's analysis subset), `ganbat_2022_pollution_symptoms`/`_disease_risk`/
+`_leave_type` (8/5/5-item binary wintertime-absenteeism checklists,
+Ulaanbaatar private-sector survey, N=1329; a 4th "reasons for absence"
+block excluded -- 66-68% `8888` not-applicable sentinel since it's only
+answered by the absent subset, not the full sample).
+
+**19 papers skipped** (content/N failures, one line each): `0265087`
+(aggregate demographic table only), `0304580` (country-year macro panel, no
+item structure), `0200483` (headerless file, no codebook to confirm a
+recurring value's meaning), `0199002` (only per-subject aggregate outcomes
+shared, no raw trial data), `0118697` (USDA food-composition data, not human
+responses), `0256590` (economic/demographic household variables, not
+psychometric items), `0293541` (N=16, nominal checkbox responses),
+`0260224` (app-usage behavioral log, no validated-scale items), `0267931`
+(no id/item/wave columns, pre-binarized + already kNN-imputed), `0257487`
+(raw checkbox items don't align 1:1 with respondent IDs; the alternate file
+is a derived agreement code, not a raw item), `0162911` (every SF-36 column
+already a subscale/summary composite), `0170891` (single composite Kiddy-
+KINDL total per wave, already mean-imputed), `0318986` (one stance code per
+video, effectively single-item), `0272652` (real per-patient file is
+composite IIEF/IPSS sums only, also N~51), `0312826` (literature
+data-extraction/charting table, no respondents), `0177398` (N=22), `0171610`
+(sensor event-log data, N=6), `0124797` (neuroimaging cluster-coordinate
+tables, zero person-level rows, also access-gated), `0275372` (N=29;
+otherwise clean raw 3-wave 13-item deliberation-voting data -- worth
+revisiting if a larger-sample version appears).
+
+**1 held for borderline N, not shipped**: `0311487` (natural
+soundscapes/mood recovery, N=68 unique participants in the 50-99 band) --
+also independently disqualified on content grounds (both SI files hold only
+pre-summed STAI-S/UWIST-MACL composite scores, not raw items), so the N
+question didn't need ben-domingue's sign-off this time, but noting the band
+for the record per `feedback_min_sample_size`.
+
+All 38 output CSVs independently re-verified after both agents' reports
+(N/item count/resp range/no null ids) -- clean. `biblio_plos_batch22.csv`
+(38 rows, merged from both groups' review) staged in `automated_finding/`
+for the dictionary sheet. `human_review_plos_batch22.csv` (77 rows) staged
+for the "Human eye" sheet. This closes out PLOS ONE batch 22 end-to-end.
+`plos_batch22_triage.csv`, `plos_batch22_retriage.csv`, and all
+`plos_batch22_good*.csv`/`plos_batch22_worthretrying*.csv`/
+`plos_batch22_group*.csv` intermediate files deleted -- content fully
+captured here.
