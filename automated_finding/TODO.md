@@ -15,14 +15,21 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-10, ben-domingue); file gone
   from disk as expected.
 
-- [ ] **`automated_finding/biblio_plos_batch21_worthretrying.csv`** (55
+- [x] **`automated_finding/biblio_plos_batch21_worthretrying.csv`** (55
   rows, 14 papers -> 55 tables, from PLOS ONE batch 21's `worth_retrying`
-  pool) needs uploading to Redivis and pasting into the dictionary sheet.
-  See `BATCH_LOG.md`'s "PLOS ONE batch 21 worth_retrying — all 33
-  non-duplicate candidates resolved" entry for full per-paper detail,
-  including a genuine external lead not yet chased: `0227877`'s real
-  data is at Figshare `10.6084/m9.figshare.c.4792323`, not the PLOS SI
-  (worth a follow-up through the regular repo-based pipeline).
+  pool) uploaded to Redivis and pasted into the dictionary sheet
+  (confirmed 2026-08-10, ben-domingue); file and all 55 `irw_output/*.csv`
+  files gone from disk as expected. See `BATCH_LOG.md`'s "PLOS ONE batch
+  21 worth_retrying — all 33 non-duplicate candidates resolved" entry for
+  full per-paper detail, including the QC fix to `de_vries_2022_hexaco_
+  meta` (69 non-integer resp values dropped) prompted by ben-domingue's
+  questions and documented in the "QC pass on batch 21 output" entry.
+
+- [ ] **Figshare external lead not yet chased**: `0227877` ("An atlas of
+  personality, emotion and behaviour", batch 21 worth_retrying) — the
+  PLOS SI has no raw data; the real dataset is at Figshare
+  `10.6084/m9.figshare.c.4792323`. Worth a follow-up through the regular
+  repo-based pipeline (Step 1/2), not PLOS-specific.
 
 - [x] **`automated_finding/biblio_plos_batch20.csv`** (10 rows, 6 papers ->
   10 tables, from PLOS ONE batch 20's `good`-candidate review) uploaded to
