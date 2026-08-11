@@ -3,6 +3,44 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch24.csv`** (28 rows, merged from
+  Groups A/B/C, 12 papers -> 28 tables, from PLOS ONE batch 24's `good`
+  (7 fresh) + `worth_retrying` (36 fresh) pool after de-duping 9 already-
+  decided DOIs, reviewed in 3 parallel passes, 2026-08-11) uploaded to
+  Redivis and pasted into the dictionary sheet (confirmed 2026-08-11,
+  ben-domingue); file and all 28 `irw_output/*.csv` files gone from disk
+  as expected. See `BATCH_LOG.md`'s "PLOS ONE batch 24" entry for full
+  per-paper detail, including the `li_2025_policy_environment` QC fix
+  (non-integer/out-of-range Policy Environment items filtered to integer
+  1-7 values only) and the `binette_2022_extinction` strain-merge (two
+  N<50 strain sheets combined via `cov_strain` since both share an
+  identical 3-phase design; non-integer `resp` values confirmed genuine
+  by re-checking the raw source Excel directly, per ben-domingue's
+  question). A second ben-domingue question confirmed
+  `szameitat_2015_occupation_multitask`'s `resp=0` values are a genuine
+  "not at all" response category (explicit text->value map, non-matching/
+  blank cells dropped before writing), not missingness.
+
+- [x] **`automated_finding/human_review_plos_batch24.csv`** (103 rows,
+  batch 24's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone
+  from disk as expected.
+
+- [ ] **PLOS ONE batch 24 — 2 candidates in the N=50-99 borderline band**,
+  reviewed but not shipped, awaiting a decision: `10.1371/journal.pone.
+  0335166` (nursing literacy practices, Karolinska, N=67, 10 closed
+  ordinal 1-4 items) and `10.1371/journal.pone.0229591` (early visual
+  language/deaf children, analytic-sample N=56, partly opaque item codes
+  mixed with already-scored subtest scores). See `BATCH_LOG.md`'s "PLOS
+  ONE batch 24" entry.
+
+- [ ] **PLOS ONE batch 24 — one candidate needing human follow-up**:
+  `10.1371/journal.pone.0286787` (OSCE nursing exam) has real-looking
+  response data but opaque uncoded variable names (`V1`/`v4`...) with no
+  accessible codebook (Dryad reviewer link 404s, public DOI unresolvable)
+  and >=3 instruments apparently bundled with inconsistent naming — too
+  much mis-mapping risk to guess at. Worth author contact if pursued.
+
 - [x] **`automated_finding/biblio_plos_batch23.csv`** (28 rows, merged from
   Groups A/B/C, 14 papers -> 28 tables, from PLOS ONE batch 23's full
   `good` (13) + `worth_retrying` (40) pool, reviewed in 3 parallel passes,
@@ -486,8 +524,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   real instrument/construct/task names rather than guesses. Filtering
   `search_terms_log.csv` to non-PLOS, English-only rows not yet tried
   against PLOS turned up ~1,200 candidates in one pass; batch 12
-  (2026-07-30) used 30, batch 13 (2026-07-31) used 30 more, leaving
-  ~1,140 unused. See `SKILL.md`'s "Alternate discovery source:
+  (2026-07-30) used 30, batch 13 (2026-07-31) used 30 more, batch 24
+  (2026-08-11) used 30 more (this pass also added a `langdetect` check —
+  the earlier plain-ASCII filter had let ASCII-safe non-English terms like
+  "Angst"/"dolor"/"Antwortstil" slip through undetected), leaving roughly
+  1,050-1,080 unused. See `SKILL.md`'s "Alternate discovery source:
   single-journal search (PLOS ONE)" section (term-selection bullet) for
   the exact filtering method. Expect several more batches' worth of
   higher-quality-than-average terms before this pool runs dry — pull from

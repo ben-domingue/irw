@@ -7236,3 +7236,165 @@ Two shipped tables were revised after ben-domingue questioned whether
 Both fixes verified by re-running each script and diffing `biblio_plos_
 batch23.csv`'s table list against `irw_output/*.csv` (28 tables, exact
 match). No other batch-23 tables were affected.
+
+## PLOS ONE batch 24 (2026-08-11)
+
+**Term selection**: continued drawing from the recyclable non-PLOS English
+term pool (`SKILL.md`'s method) instead of inventing new terms. Filtering
+`search_terms_log.csv` to non-PLOS, not-yet-tried-on-PLOS rows and running
+each candidate through `langdetect` (the previous ASCII-only filter had
+let ASCII-safe non-English terms like "Angst"/"dolor"/"Antwortstil" through
+undetected in earlier passes) gave a clean pool. 30 terms used this batch:
+academic motivation, organisational citizenship behaviour, organizational
+learning, sedentary behaviour, health behavior, relationship quality,
+relationship commitment, school readiness, early literacy, heritage
+culture, somatic symptoms, critical thinking, career maturity,
+task-switching, sustained attention, reading self-concept, morphological
+awareness, mathematical fluency, eating pathology, dissociative symptoms,
+complicated grief, interoception, tic severity, selective mutism,
+perfectionism, openness to experience, reactive aggression, hope theory,
+emotional granularity, helicopter parenting. Logged in
+`search_terms_log.csv`.
+
+2,048 candidates -> 11 `good` + 319 `human_assistance` + 1,645
+`no_usable_file` + 48 `not_item_response` + 14 `error` + 10
+`download_failed` + 1 `crashed`. Retriage (`irw_retriage_ha.py`) on the
+`human_assistance` bucket gave 41 `worth_retrying` + 103 `human_review` +
+112 `aggregate_continuous` + 63 `not_item_response`.
+
+Before review, the combined `good`+`worth_retrying` pool (52 rows) was
+checked against `BATCH_LOG.md` for DOIs already decided in earlier
+batches -- 9 duplicates found (all previously skipped as composite-only or
+not-a-fit: `0253906`, `0249033`, `0201698`, `0253779`, `0277516`,
+`0304132`, `0262465`, `0302350`, `0294151`), leaving 43 fresh candidates
+(7 good + 36 worth_retrying). Split into 3 groups of ~14-15 and reviewed
+in parallel, same method as batch 23: full article text + all Supporting
+Information files fetched and inspected per candidate, not just the file
+the automated triage pass opened; license/N>=50/no-single-item/raw-vs-
+composite checks applied throughout.
+
+**12 papers -> 28 tables shipped, all CC BY 4.0:**
+
+Group A (4 papers -> 18 tables):
+- `liem_2024_customer_pressure`/`_env_mgmt_acct`/`_attitude_env`/
+  `_green_competitive_adv`/`_perceived_benefit_ema`/`_cleaner_production`/
+  `_perceived_benefit_cp` (7 tables, `10.1371/journal.pone.0306616`, N=234
+  Vietnamese manufacturing managers, 1-5 Likert across 7 constructs).
+- `ravenscroft_2017_transition` (`10.1371/journal.pone.0179904`, N=306
+  parents across 8 EU countries, 25 ordinal 1-5 items the paper itself
+  analyzed as one PCA battery; non-comparable checkbox/categorical fields
+  in the same file dropped).
+- `mohammed_2021_patient_safety_culture` (42-item HSOPSC, 1-5) and
+  `mohammed_2021_job_satisfaction` (5-item companion scale)
+  (`10.1371/journal.pone.0245966`, N=411 Ethiopian health care
+  professionals; derived composite dimension scores in the same file
+  excluded).
+- `li_2025_marketing_exploration`/`_exploitation`/`_culture`/`_learning`/
+  `_operation`/`_corporate_performance`/`_market_environment`/
+  `_policy_environment` (8 tables, `10.1371/journal.pone.0326329`, N=352
+  individuals at 47 Chinese heritage-brand firms, 7-point Likert). QC
+  catch: Policy Environment items (PE2-PE5) had non-integer values, some
+  exceeding the stated 1-7 max (e.g. PE2=7.35) -- a multiplicative
+  artifact affecting ~11% of rows -- filtered to integer 1-7 values only
+  rather than guessing the multiplier.
+
+Group B (3 papers -> 4 tables):
+- `mascherini_2021_meddiet` (`10.1371/journal.pone.0252395`, N=1383,
+  11-item Med Diet Score food-frequency scale, 0-5, two waves pre/during
+  Italian COVID lockdown; the same file's PGWBI-A wellbeing scale was
+  subscale-composite-only, excluded).
+- `rivero_2022_piccolo_mother`/`_father` (`10.1371/journal.pone.0266762`,
+  N=155 each, 29-item PICCOLO observational parenting checklist, 0-2,
+  separate mother/father raters on the same children).
+- `binette_2022_extinction` (`10.1371/journal.pone.0264797`, N=63 rats,
+  42-item trial/block-level freezing measure, 0-100 continuous). Two
+  strain sheets (Long-Evans N=31, Wistar N=32) individually fell below
+  N=50; merged into one file with `cov_strain` and an id offset since both
+  share an identical core 3-phase design -- non-human subjects evaluated
+  purely on structural fit per `SKILL.md`'s standing rule, not excluded
+  for being rats.
+
+Group C (5 papers -> 6 tables):
+- `albeitawi_2025_preceptor_needs` (`10.1371/journal.pone.0337101`, N=400
+  Jordanian clinical educators, 7-item 4-point priority-rating scale).
+- `zou_2025_critical_thinking` (70-item Critical Thinking Disposition
+  Inventory, 7-pt) and `zou_2025_task_difficulty` (5-item difficulty
+  scale, `wave`=1-3 across 3 writing tasks) (`10.1371/journal.pone.0324486`,
+  N=201 college students).
+- `szameitat_2015_multitask_examples` (43-item, -3 to 3, "is this an
+  example of multitasking") and `szameitat_2015_occupation_multitask`
+  (15-item, 0-6, multitasking demand per occupation)
+  (`10.1371/journal.pone.0140371`, N=366/347).
+- `corti_2023_academic_adaptation` (`10.1371/journal.pone.0294440`, N=953
+  Spanish university students, 7-item academic-adaptation Likert scale).
+
+**23 papers skipped**, one line each: `0279255` (value-added scores --
+pre-computed VA quartile rankings/imputation notebooks, not raw items),
+`0325183` (eye-tracking cerebral palsy, N=30, below N>=50), `0349399`
+(EFL linguistic complexity -- columns are computed linguistic indices per
+essay, not item responses), `0246449` (ADHD cognitive training follow-up
+-- only subscale totals at each timepoint, also N=49), `0212482` (PA
+brain breaks -- only derived cognitive composite scores), `0282137`
+(IPAQ validity/asthma -- only IPAQ-derived aggregate MET-minute
+variables, not the 8 raw items), `0224254` (EI training RCT -- only
+EQ-i/STEU/STEM subscale/total scores), `0280758` (CEO narcissism -- firm-
+year archival/constructed data, no legitimate id/item/resp mapping),
+`0311369` (ESG/TFP manufacturing policy -- firm-year archival financial
+panel, not survey items), `0225669` (business process improvement --
+real Phase-2 Likert data exists but every item value is a suspicious
+long-decimal average, e.g. 4.904761904761905, consistent with an already-
+aggregated score not a raw rating; Phase-1 data separately N=22), `0271030`
+(demoralization -- only 3 mean scale scores per subject), `0321373`
+(anxiety/depression/Big Five -- only scale totals), `0177765` (GPAQ vs
+SenseWear -- only derived MET-minute summaries, raw GPAQ items not
+provided), `0199605` (retirement time use -- only composite totals and
+pre-aggregated time-use hours), `0224159` (romantic attachment -- only
+composite scores), `0200129` (perimenopausal quality of health -- only
+subscale-level composite scores), `0278201` (fWHR/personality -- only
+16PF's already-scored factor scores), `0139930` (abacus training -- only
+condition-averaged accuracy/RT, not raw trial-level data), `0177398`
+(story time/cerebellar activation, N=22, below N>=50), `0317077` (biology
+exam questions -- item-attribute coding of questions, no examinees, not
+a person-item table), `0341317` (AI MCQ Bloom's -- rater-coded scores of
+questions, not people), `0230495` (conservation causal models --
+study-level literature coding of ~1,027 papers, not person-item data),
+`0207589` (anti-saccades/Parkinson's -- every column already a per-subject
+aggregate, no raw trial/item data), `0286787` (OSCE nursing -- opaque
+uncoded variable names, no accessible codebook, Dryad link 404s, >=3
+instruments bundled with inconsistent naming -- flagged for human
+follow-up rather than guessed), `0216149` (executive functions structure
+-- confirmed composite-only across all 8 tasks), `0187098` (sleep
+deprivation/divided attention -- composite-only per-condition metrics),
+`0150435` (DAOA/schizophrenia -- only genotyping data shared, no
+neurocognitive battery in SI despite being described in Methods),
+`0284383` (CAM/homeopathy beliefs -- every substantive column a
+pre-computed mean/sum score).
+
+**2 candidates in the N=50-99 borderline band, not shipped, no
+ben-domingue decision yet**: `0335166` (nursing literacy practices,
+Karolinska -- N=67, 10 closed ordinal 1-4 items on note-taking practices
+found in a secondary "Original dataset for analysis" sheet after the
+primary WebFetch summary missed it); `0229591` (early visual language/
+deaf children -- analytic-sample N=56, subset of a larger 254-row
+multi-wave file with partly opaque item codes mixed with already-scored
+subtest scores).
+
+**1 candidate skipped on both N and format grounds**: `0173584` (Socratic
+dialog effectiveness) -- N=81 (borderline) and raw per-problem responses
+are open-ended qualitative strategy descriptions, not numeric; would need
+a scoring rubric applied first even if N were resolved.
+
+All license checks CC BY 4.0 confirmed on the article page. Files: 11
+scripts in `data/` (`liem_2024_env_stewardship.py`,
+`ravenscroft_2017_transition.py`, `mohammed_2021_patient_safety.py`,
+`li_2025_marketing_capability.py`, `mascherini_2021_meddiet.py`,
+`rivero_2022_piccolo_mother.py`, `rivero_2022_piccolo_father.py`,
+`binette_2022_extinction.py`, `albeitawi_2025_preceptor_needs.py`,
+`zou_2025_critical_thinking.py` -- produces both `zou_2025_*` tables --
+`szameitat_2015_multitask.py` -- produces both `szameitat_2015_*` tables
+-- and `corti_2023_academic_adaptation.py`), 28 CSVs in `irw_output/`,
+`biblio_plos_batch24.csv` (28 rows, merged from
+`biblio_plos_batch24_group{A,B,C}.csv`).
+
+`human_review_plos_batch24.csv` (103 rows, from `irw_retriage_ha.py`)
+staged for the "Human eye" sheet.
