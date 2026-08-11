@@ -6807,3 +6807,60 @@ worthretrying.csv` (55 rows, merged from both groups) staged in
 batch 21 end-to-end (`good` candidates already shipped, `human_review`
 rows already pasted). `plos_batch21_triage.csv` and `plos_batch21_
 retriage.csv` deleted -- content fully captured here.
+
+### QC pass on batch 21 output, prompted by ben-domingue (2026-08-10)
+
+ben-domingue asked three targeted questions about resp semantics before
+upload: are `de_vries_2022_hexaco_meta`'s non-integer values imputed?
+Do `sondell_2018_dementia_motivation`'s and `stoyel_2021_*`'s resp=0
+values indicate missingness?
+
+- **`de_vries_2022_hexaco_meta`**: yes, a real problem. 69 of 38304 cells
+  (0.18%) held non-integer values (e.g. 3.5) despite the paper's Methods
+  stating a plain integer 1-5 HEXACO scale, with no documented
+  half-point option. Confirmed the values are present in the raw SPSS
+  file itself (not a script artifact) and isolated to the meta-perception
+  rater slot only -- self/other perception tables from the same file have
+  zero non-integer cells. No explanation found in the paper; treated as
+  an unexplained artifact per datastandard.md's imputation-check rule and
+  dropped. Fixed `de_vries_2022_hexaco.py` to filter non-integer resp in
+  both the `melt_and_save()` helper and the separately-coded
+  other-perception block; regenerated (N=399, items=96, resp 1-5 clean
+  integers; the other 3 HEXACO/BAT/EWWS tables from the same script were
+  already clean and unaffected). Biblio Notes updated.
+- **`sondell_2018_dementia_motivation`**: resp=0 confirmed genuine, not
+  missingness. Fetched the article directly: "Each participant's
+  eagerness to participate was classified using a five-point Likert
+  scale [0, no motivation (is present without participating); 1, low
+  motivation...]" -- 0 is staff's lowest-motivation rating for a
+  participant who is present but not engaged, a real observed category,
+  not a non-response code. No fix needed.
+- **`stoyel_2021_*`**: resp=0 confirmed genuine for both instrument
+  families. EDI subscales (drive_thinness/body_dissat/bulimia/
+  maturity_fears/interocept_awareness/ineffectiveness/perfectionism/
+  interpersonal_distrust, coded 0-3): the paper states "numerical scores
+  of 0 0 0 1 2 3 were applied respectively" to the underlying 6-point
+  Never..Always response, i.e. the three lowest-severity raw categories
+  are conventionally collapsed to a single 0 -- a standard, published EDI
+  scoring rule, not missingness (each output row is still one raw item
+  response transformed by a documented per-item rule, not a
+  cross-item composite). EDE-Q subscales (restraint/eating_concern/
+  shape_concern/weight_concern/binge_purge, coded 0-6): 0 = "not at all"/
+  "no days" on the EDE-Q's standard 0-6 frequency/severity anchor, a
+  well-established instrument convention; distribution shape (smooth,
+  monotone-declining from 0) is consistent with a real lowest-severity
+  anchor rather than a sentinel. No fix needed.
+
+**Follow-up (persistent-issue fix, not just this batch's output):** this
+is the second time in this batch alone that a `resp` semantics question
+(0 = valid vs. missingness; non-integer = imputed vs. genuine) needed a
+person to ask before shipping. `datastandard.md`'s "What to verify
+before saving" checklist items 4 and 10 strengthened: item 4 now
+requires *positively confirming* every recurring value's meaning against
+the paper's own text (not just checking that it's not statistically rare
+or isolated -- a real non-response code can be common and smoothly
+distributed too) and flagging for human review rather than shipping
+when the paper is silent; item 10 now requires acting on a non-integer-
+on-integer-scale signal (explain or drop) rather than treating it as
+merely a "note it and move on" observation. See `datastandard.md` for
+the updated text.

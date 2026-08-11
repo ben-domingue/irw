@@ -31,6 +31,12 @@
 # substitution"/"LOCF" language found); missing responses are simply NaN in
 # the raw file and are dropped here.
 #
+# The meta-perception slot (_3) contained 69 non-integer resp values (e.g.
+# 3.5) not explained by any documented half-point option -- an unexplained
+# artifact in the raw file, isolated to that one rater slot (self/other
+# have zero). Dropped rather than kept as continuous data; see the
+# integer-round filter in melt_and_save()/the other-perception block.
+#
 # No person-ID column exists in the raw file (informed-consent/background
 # columns only) -- the row index is used as `id`. Final published analytic
 # sample was N=359 after listwise exclusions for the paper's own models; all
@@ -75,6 +81,18 @@ def melt_and_save(df, item_cols, out_name, extra_id_vars=None, rater_map=None):
                     var_name="item", value_name="resp")
     long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
+    # All HEXACO/BAT/EWWS items are documented as an integer 1-5 scale
+    # (see header comment); non-integer values (e.g. 3.5) are not a
+    # described response option and are dropped as unexplained artifacts
+    # per datastandard.md's imputation-check rule, rather than kept
+    # because they're rare or in-range.
+    n_before = len(long)
+    long = long[long["resp"] == long["resp"].round()].reset_index(drop=True)
+    n_dropped = n_before - len(long)
+    if n_dropped:
+        print(f"{out_name}.csv: dropped {n_dropped} non-integer resp values "
+              f"(no documented half-point option)")
+    long["resp"] = long["resp"].astype(int)
     if rater_map is not None:
         long["rater"] = long["item"].map(rater_map)
     out_cols = ["id", "item", "resp"] + (["rater"] if rater_map is not None else [])
@@ -121,6 +139,8 @@ def convert():
                          var_name="item", value_name="resp")
         long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
         long = long.dropna(subset=["resp"]).reset_index(drop=True)
+        long = long[long["resp"] == long["resp"].round()].reset_index(drop=True)
+        long["resp"] = long["resp"].astype(int)
         long["rater"] = rater_label
         other_frames.append(long)
     other_long = pd.concat(other_frames, ignore_index=True)[["id", "item", "resp", "rater"]]
