@@ -861,16 +861,25 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   in `BATCH_LOG.md`. This first pass of the PLOS ONE pilot is closed out
   end-to-end.
 
-- [ ] **Note on this working directory**: `automated_finding/` lives inside
-  a Dropbox-synced folder. Twice during the 2026-07-26 PLOS session, files
-  written here (a `biblio_*.csv` append, and 7 `irw_output/*.csv` tables)
-  disappeared from disk with no git record — most likely a Dropbox sync
-  event from another device overwriting/reverting local changes mid-edit,
-  not a bug in the processing scripts themselves (all source `.py` scripts
-  in `data/` were untouched and the CSVs regenerated cleanly). If output
-  files or biblio rows look incomplete partway through a session, check
-  whether they simply need regenerating from the `data/*.py` script before
-  assuming the underlying data/logic was wrong.
+- [x] **Correction on this working directory (2026-08-11, ben-domingue)**:
+  earlier entries in this file attributed staging CSVs and
+  `irw_output/*.csv` files disappearing from disk to a "Dropbox-sync
+  file-loss pattern" (files written here supposedly reverted by a sync
+  event from another device). That diagnosis was wrong — ben-domingue
+  deletes those files himself, by hand, as part of uploading each table to
+  Redivis and pasting its biblio/human_review rows into the sheets. A
+  `biblio_*.csv`/`human_review_*.csv`/`irw_output/*.csv` being gone after
+  a batch is confirmed is the *expected* end state, not data loss and not
+  a `automated_finding/` /Dropbox interaction to route around. Going
+  forward: after ben-domingue confirms a batch's rows were pasted, expect
+  those files to already be gone — no need to diagnose it, just confirm
+  and move on. If a file goes missing *before* confirmation (mid-session,
+  before anything was uploaded), that's still worth investigating as a
+  real anomaly — this correction only covers the expected post-confirmation
+  case. The many "consistent with the Dropbox-sync file-loss pattern"
+  notes elsewhere in this file's history are stale explanations for what
+  was actually this normal cleanup step; left as-is since they're
+  historical log entries, not live guidance.
 
 - [ ] **Gyurkovics/Stafford/Levita conflict-task dataset (osf.io/7vbtr)** —
   by far the strongest find from the batch-18 conflict-task search: trial-
