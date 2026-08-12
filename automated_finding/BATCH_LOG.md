@@ -7806,3 +7806,147 @@ Cleaned up: `pmc_batch1_triage.csv`/`pmc_batch1_retriage.csv`,
 all deleted — every actionable row is now in `human_review/`,
 `irw_output/`+`biblio_pmc_batch3.csv`, `pmc_deferred_candidates.csv`, or
 this entry.
+
+### Sample-size floor tightened: N<50-99 ask -> N<100 skip outright (2026-08-12)
+
+Ben-domingue simplified `feedback_min_sample_size`: the old rule ("N<50
+skip, N 50-99 ask ben-domingue first") is now "N<100 skip outright, no
+asking required." Applied for the first time in the next entry (the 14
+deferred-candidate resolution), which is why two of that batch's N=50-99
+candidates were skipped without a go/no-go question.
+
+### Resolution of the 14 deferred PMC candidates (2026-08-12)
+
+Worked through every row in `pmc_deferred_candidates.csv` (open since the
+"worth_retrying review — pmc1/plos26/pmc2" entry above) — read each
+paper's full text, re-fetched raw files via Europe PMC's
+`supplementaryFiles` endpoint (PLOS's own SI listing for the one PLOS ONE
+row), and either wrote a bespoke `data/*.py` script or logged a skip
+reason. Full column reads (not just triage-heuristic-sampled columns)
+were done for every candidate per the deferral notes' own instructions.
+
+**Shipped: 9 papers -> 30 tables** (`biblio_pmc_deferred.csv`, 30 rows,
+all CC BY 4.0, confirmed per-paper via Europe PMC's `license` field or
+the article's own CC BY notice):
+
+- `10.7717/peerj.18809` (Galgam et al. 2025, WHOQOL-BREF among African
+  medical/health science students, N=349) -> `galgam_2025_whoqol_bref`.
+  26-item scale with 4 different response-wording families (poor-good,
+  satisfaction, amount/degree, frequency) all sharing an internal 1-5
+  leading-digit code; items 1-2 lacked the leading digit and were mapped
+  from the supplementary codebook sheet instead.
+- `10.7717/peerj.20153` (Burgess et al. 2025, SOAS anthropomorphism scale,
+  N=120 children) -> `burgess_2025_soas`. The title's "6-item" scale is
+  the *result* of the paper's own CFA-based item reduction from an
+  original 13 -- Table 4's "Final factor loading" column identifies the
+  surviving items (SOAS5/7/9/10/11/12) exactly; baseline + ~14-day retest
+  shipped as 2 waves.
+- `10.7717/peerj.15053` (Gizaw et al. 2023, 2-wave PHQ-9, Addis Ababa
+  healthcare providers, N=577 observations) -> `gizaw_2023_phq9`. The
+  deferred note assumed `hw_id` was a real cross-wave person key, but it
+  fails datastandard.md's uniqueness check outright (collides across
+  people with different ages even *within* one wave) -- shipped as row
+  index id instead, i.e. two cross-sectional PHQ-9 samples rather than a
+  linked panel.
+- `10.7717/peerj.16184` (Agarwal et al. 2023, DREEM educational-
+  environment scale, N=300) -> `agarwal_2023_dreem`. The deferred note's
+  "24-item, 2-condition" guess didn't match the file at all -- full
+  column read + paper text confirmed the real DREEM instrument (50 items,
+  3 true waves: precovid/covid/postcovid). One source column-name typo
+  (`q37precobid` for `precovid`) handled explicitly. precovid columns
+  were text-labelled, covid/postcovid columns were the same underlying
+  0-4 codes without SPSS labels attached -- verified identical coding
+  scheme before merging.
+- `10.7717/peerj.17265` (Abdullah et al. 2024, abdominal-bloating SEM
+  study, N=323) -> 12 tables (`abdullah_2024_bsq_sevgen`/`_sev24`,
+  `_hbbloat_attitude`/`_subjnorm`/`_pbc`, `_hpbbloat_diet`/`_awareness`/
+  `_physact`/`_stress`/`_treat`, `_ssbloat`, `_blqol`). Full paper read
+  confirmed 6 distinct named instruments (HB-Bloat's 3 subscales,
+  HPB-Bloat's 5 subscales, BSQ-M's 2 subscales, SS-Bloat, BLQoL-M), each
+  present in the file only as an item-reduced subset (e.g. HB-Bloat's
+  13-item attitude subscale down to 3 retained columns) -- one file per
+  subscale per datastandard.md. Two single-item constructs (I1
+  "intention", P5, an isolated item with no paired code) excluded per the
+  no-single-item-scale policy. Two isolated out-of-stated-range values
+  (a single 6 on a 1-5 item in two different subscales) dropped as
+  data-entry errors, not real anchors.
+- `10.7717/peerj.16295` (Moon & Kim 2023, coping/self-esteem/pregnancy-
+  stress among married immigrant pregnant women, N=206) -> 6 tables
+  (`moon_2023_selfesteem`, `_korean_proficiency`, `_coping_problem`,
+  `_coping_emotion`, `_spousal_support`, `_pregnancy_stress`). Note: the
+  deferred CSV's title field for this DOI was simply wrong ("sports
+  participation") -- verified the correct paper via full-text XML before
+  proceeding. Full read found 5 scales, not the 3 the deferral note
+  guessed at (self-esteem, Korean proficiency, stress-coping) --
+  spousal-support and pregnancy-stress items were also present and
+  shippable. `9` is a shared cross-scale missing-code sentinel (dropped);
+  a `6` appearing exactly once per item across all 11 pregnancy-stress
+  items (same respondent row each time, scale is confirmed 1-4 via the
+  file's own value labels) dropped as a sentinel/entry error. Several
+  items' text labels only exported for the first item per scale (an SPSS
+  export quirk) -- mapped back to the same numeric codes as their
+  sibling items.
+- `10.7717/peerj.5756` (Cucchi, Hampton & Moulton-Perkins 2018, RFQ
+  mentalizing study in eating disorders, N=229) -> 6 tables
+  (`cucchi_2018_rfq`, `_scoff`, `_pts`, `_kims`, `_tas20`, `_rmet`). The
+  deferred note had only inspected 25 of 162 columns; a full read found
+  five more shippable raw-item instruments beyond RFQ that the note never
+  saw (SCOFF, IRI Perspective-Taking, KIMS, TAS-20, RMET), while
+  confirming RFQc/RFQu really are a nonlinearly-*recoded* (0-3)
+  transformation of the raw RFQ1-8 items (not additional raw items) per
+  the paper's own Table 2. RMET's raw `EYES1-36` selection codes are
+  categorical (which of 4 words chosen), not ordinal, so the file's own
+  per-item `correct`/`incorrect` scoring columns were shipped instead.
+- `10.7717/peerj.9990` (Dalky et al. 2020, SF-36 among Syrian refugee
+  women, N=523) -> `dalky_2020_sf36`. The file's `factor_1..36` and named
+  subscale columns are the RAND 0-100 *transformed* scoring output;
+  shipped the genuine raw SF-36 items instead, identified via each
+  column's own SPSS value-label metadata (35 items: PF, role-physical,
+  role-emotional, social functioning, pain, the combined vitality+mental-
+  health 9-item block, general health perceptions, and the general-
+  health/health-transition single items).
+- `10.1371/journal.pone.0277247` (Mistry et al. 2022, loneliness among
+  Bangladeshi older adults, N=2077, PLOS ONE) -> `mistry_2022_hardship`.
+  8-item binary hardship/concern battery, confirmed consistently coded
+  1=no/2=yes across all 8 items via the file's own Stata value labels.
+  The paper's abstract confirms this is two *independent* cross-sectional
+  survey rounds (1032 in 2020, 1045 in 2021), not a panel -- `round`
+  shipped as a covariate, not `wave`. The single-item loneliness outcome
+  (`lone`) kept as a covariate rather than its own file (no-single-item
+  policy).
+
+**Skipped (5 of 14)**:
+- `10.7717/peerj.19326` (N=53) and `10.7717/peerj.12078` (N=99) -- skipped
+  outright under the new N<100 floor (see previous entry). No
+  ben-domingue go/no-go needed under the new rule; the Spanish-
+  translation work `peerj.19326` would have needed was not done.
+- `10.7717/peerj.2319` (N=50) -- the Europe PMC fetch that previously
+  timed out succeeded on retry, but both SI files turned out to be
+  "Distribution of the TCI subscales across subjects and specialties"
+  tables -- pre-computed TCI (Temperament and Character Inventory)
+  subscale scores, not raw items -- so this would have been an
+  aggregate-only skip regardless of sample size; N=50 also fails the new
+  floor independently.
+- `10.7717/peerj.19403` (deferred CSV claimed N=591) -- the ZTPI/LPFS/PICD
+  item batteries the deferral note flagged were real, but a full read
+  found the file is mostly blank-padded rows: only 126 of 591 rows carry
+  any data at all, and only 63 of those have the raw ZTPI items (LPFS and
+  PICD are present only as pre-computed subscale totals, no raw items for
+  either). The paper's own participant-count breakdown by education level
+  sums to exactly 63 (2+8+31+9+13), confirming N=63 is the real usable
+  sample, not 591. N=63<100 -> skip under the new floor.
+- `10.1038/s41598-024-58598-3` (PBAT-1/2/3 EMA daily-diary study, N=113)
+  -- skipped for PII, not scripted. The raw file has `LocationLatitude`/
+  `LocationLongitude` columns populated for essentially every one of
+  11,865 rows (488 unique locations clustering around Frankfurt,
+  Germany) -- real GPS coordinates, a hard PII violation under the
+  pipeline's blanket PII policy regardless of how clean the rest of the
+  data (the VID/Session-ID id/wave structure the deferral note flagged)
+  would otherwise have been.
+
+`biblio_pmc_deferred.csv` (30 rows) is ready for ben-domingue to upload to
+Redivis and paste into the dictionary sheet — standard pattern, not yet
+confirmed done (see `TODO.md`). `pmc_deferred_candidates.csv` deleted —
+every row is now accounted for above (shipped, skipped-and-logged, or, in
+`peerj.2319`'s case, skipped after a successful retry showed the data
+itself doesn't qualify).

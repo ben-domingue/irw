@@ -73,18 +73,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   scales). See `BATCH_LOG.md`'s "worth_retrying review — pmc1/plos26/pmc2"
   entry for per-paper detail.
 
-- [ ] **14 candidates deferred as genuinely promising but not yet
-  scripted** (2026-08-12, from the same worth_retrying review) — kept in
-  `automated_finding/pmc_deferred_candidates.csv` (standing file, same
-  treatment as `plos_deferred_candidates.csv` — don't delete). Notable
-  ones: a clean WHOQOL-BREF-style scale (`10.7717/peerj.18809`, N=349,
-  ready to script), two cases where the automated item-detection heuristic
-  missed real raw items entirely — same failure mode already fixed once
-  this batch for `shu_2024_gad7`/`phq9` — (`10.7717/peerj.19403`'s
-  ZTPI/LPFS/PICD items, `10.1038/s41598-024-58598-3`'s EMA daily-diary
-  data), and two N=50-99 candidates needing a ben-domingue go/no-go
-  (`10.7717/peerj.19326` N=53, `10.7717/peerj.12078` N=99). See
-  `pmc_deferred_candidates.csv` for the full list with reasons.
+- [ ] **`automated_finding/biblio_pmc_deferred.csv`** (30 rows, 9 papers ->
+  30 tables, from resolving all 14 candidates in the now-deleted
+  `pmc_deferred_candidates.csv`, 2026-08-12) needs to be uploaded to
+  Redivis and pasted into the dictionary sheet — standard pattern, not yet
+  confirmed done by ben-domingue. Don't delete this file (or the 30
+  `irw_output/*.csv` files it covers) until that's confirmed. See
+  `BATCH_LOG.md`'s "Resolution of the 14 deferred PMC candidates" entry
+  for full per-paper detail, including why 5 of the 14 were skipped (3 for
+  the new N<100 floor, 1 for turning out to be aggregate-only data after a
+  successful fetch retry, 1 for real GPS-coordinate PII).
 
 - [x] **`automated_finding/biblio_plos_batch25.csv`** (23 rows, 6 papers ->
   23 tables, from PLOS ONE batch 25's `good` (3 fresh) + `worth_retrying`
