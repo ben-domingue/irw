@@ -118,5 +118,9 @@ curated entry with a worse one.
 
 ## Outstanding
 
-- The single yellow-bucket item from the whole audit — `florida_twins_friends` (2 undocumented items, `friends20`/`friends21`) — has drafted website text (see `batch01_pilot.md`) but it was never pasted into the live `itemtext_issues.qmd` at `/home/ben/Dropbox/projects/irw/irw_site/itemtext_issues.qmd`.
+- Nothing outstanding. The single yellow-bucket item from the whole audit —
+  `florida_twins_friends` (2 undocumented items, `friends20`/`friends21`) —
+  was pasted into the live `itemtext_issues.qmd` at
+  `/home/ben/Dropbox/projects/irw/irw_site/itemtext_issues.qmd`
+  (datapages/irw commit `c13e950`).
 - No further audit batches are scheduled; the pool is exhausted. A future re-run would only make sense after a substantial batch of new itemtext tables is added, or periodically as a spot-check.
