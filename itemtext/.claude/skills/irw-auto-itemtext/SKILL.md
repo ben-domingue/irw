@@ -134,7 +134,15 @@ produce data shaped like them before merging:
   `instructions` and `section_prompt` — decide which one it belongs to (whole-table
   framing goes in `instructions`; testlet/passage-specific text goes in `section_prompt`
   only, even if it reads like instructional language) and record it once. See
-  `references/itemtext_standard.md` for the full rule.
+  `references/itemtext_standard.md` for the full rule. **When a table has more than one
+  `section_id`, check whether the framing text actually differs by section before
+  defaulting to `instructions`** — e.g. a self-report and parent-report block of the same
+  instrument often share near-identical wording that differs only in a few words ("how
+  you feel" vs. "how your child feels"). If the wording varies at all across sections,
+  that's decisive: it's section-specific and belongs in `section_prompt` for each section,
+  never in `instructions`, even if it reads like generic whole-table framing at a glance.
+  Only text that is truly identical across every section (or a genuinely single-section
+  table with no other candidate text) should go in `instructions`.
 - **item/item_text/correct_response** — `item` values must be exactly the ones from
   Step 2's ground truth, not invented. `correct_response` blank when there's no scoring
   key; semicolon-separated when multiple answers are correct (e.g. `A;C`). **When the
