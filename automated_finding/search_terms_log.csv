@@ -3201,3 +3201,4 @@ date,query,output_file,notes
 2026-08-12,aggression scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
 2026-08-12,creativity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
 2026-08-12,religiosity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,"[weekly] 15 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",pmc_monthly_candidates_weekly_2026-08-12.csv,pmc monthly-script automated run; mode=weekly; 60 candidates triaged; 0/15 terms covered
