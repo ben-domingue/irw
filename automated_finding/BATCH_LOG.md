@@ -7690,3 +7690,119 @@ Updated: `SKILL.md`, `README.md`, `.gitignore`, `irw_discover_updated.py`,
 `human_review_pmc_batch1.csv`).
 
 43 `human_assistance` rows not yet retriaged (open item, see `TODO.md`).
+
+### worth_retrying review — pmc1/plos26/pmc2 (2026-08-12)
+
+Retriaged the two leftover `human_assistance` triage files
+(`plos_batch26_triage.csv` 107 rows, `pmc_batch2_triage.csv` 43 rows) with
+`irw_retriage_ha.py`: PLOS batch 26 -> 41 `human_review` (written to
+`human_review/human_review_plos_batch26.csv`), 32 `aggregate_continuous`,
+23 `not_item_response` (both dropped), 11 `worth_retrying`. PMC batch 2 ->
+19 `human_review` (written to `human_review/human_review_pmc_batch2.csv`),
+11 `aggregate_continuous`, 6 `not_item_response` (dropped), 7
+`worth_retrying`.
+
+Then reviewed all `worth_retrying` rows across all three sources
+(pmc_batch1_retriage.csv 31 + plos26 11 + pmc2 7 = 49 rows, 45 unique DOIs
+after 4 overlaps between pmc1/pmc2) by re-downloading each candidate's raw
+file and running it through `coerce_to_irw()`/inspecting the actual
+category values — the retriage heuristic's `reasons` string is a
+classification signal, not a verified verdict, and this pass found it
+wrong in both directions: several `worth_retrying` rows turned out to be
+aggregate/composite data (not raw items) mis-triaged as recoverable, and
+conversely `10.7717/peerj.18225` had genuine raw GAD-7/PHQ-9 items sitting
+in the file that `coerce_to_irw()`'s column-detection simply missed
+entirely (worth flagging: this heuristic gap likely affects other
+`worth_retrying`/`human_review` rows too, not just this one candidate).
+
+**Shipped: 3 papers -> 8 tables** (`biblio_pmc_batch3.csv`):
+- `10.7717/peerj.20868` (Han et al. 2026, insomnia/anxiety/depression
+  network analysis in elderly Jiangsu Province adults, N=2086, CC BY 4.0)
+  -> `han_2026_gad7`, `han_2026_phq9`, `han_2026_isi`. Two earlier SI
+  files (s001/s002.xlsx) held a messier alternate insomnia/depression item
+  set (one insomnia item was a malformed comma-concatenated 3-value
+  string); s006.xlsx was used instead — clean, complete, codebook-matching
+  raw GAD-7/PHQ-9/ISI-7 items plus pre-computed `*_Score` totals (excluded
+  as aggregates). ISI items are internally consistent 5-point scales but
+  vary item-to-item between 0-4 and 1-5 coding — permitted per
+  datastandard.md since direction/range only needs to be consistent
+  *within* each item.
+- `10.7717/peerj.16375` (Valdivia Ramos et al. 2023, Mexican OMS-HC stigma
+  scale, N=556, CC BY 4.0) -> `valdivia_2023_oms`. 15 items, 5-category
+  text Likert recoded 1-5; no raw id column, row index used.
+- `10.7717/peerj.7369` (Gea-Caballero et al. 2019, PES-NWI short-form
+  validation, N=269, CC BY 4.0) -> `geacaballero_2019_pes_nwi` (30-item
+  4-point Likert) + `geacaballero_2019_pes_nwi_short` (31-item yes/no
+  short-form being validated against it) — one file bundled two parallel
+  item sets over the same constructs, split per datastandard.md's "one
+  file per scale" rule. A couple of Likert categories had raw typos
+  ("alsolutely disagree", "absolutely disagree.") normalized before
+  mapping.
+- `10.7717/peerj.18225` (Shu et al. 2024, adolescent family/school status
+  and depression/suicidal-ideation study, N=1190, CC BY 4.0) ->
+  `shu_2024_gad7`, `shu_2024_phq9`. The retriage heuristic flagged this as
+  `worth_retrying` on a "low-confidence id" reason and only surfaced 6
+  guessed item columns (all non-instrument covariates) — the raw
+  GAD1-7/PHQ1-9 columns were sitting right there in the file, just missed
+  by `coerce_to_irw()`'s automatic item detection. `id` = `number`
+  (verified unique). A couple of categories had trailing-period typos
+  ("Not at all.") normalized before mapping.
+
+**Skipped (27 of 45, not real per-item response data or below the min
+sample floor)** — grouped by reason:
+- *Aggregate/composite scores mistaken for raw items* (the column names
+  matched a known instrument but held pre-computed subscale/scale totals,
+  not per-item responses): `10.7717/peerj.3928` (LADA QoL — also had a
+  nonsense id column, `BMI`), `10.7717/peerj.10752` (MEIM), `10.7717/peerj.14240`
+  (postpartum depression/QoL), `10.7717/peerj.2978` (dental anxiety — id
+  fallback was `age`), `10.7717/peerj.17308` (magic-watching wellbeing —
+  id fallback was `Duration`), `10.1371/journal.pone.0233831` (SCL-90,
+  Chinese subscale names not items), `10.1371/journal.pone.0196718` (pain
+  burden HIV, Portuguese scale totals), `10.1371/journal.pone.0239002`
+  (3-wave subscale totals across 5 named scales), `10.1371/journal.pone.0234997`
+  (baseline/follow-up scale totals), `10.1371/journal.pone.0284383`
+  (construct-level composite scores).
+- *Not survey/item-response data at all* (mis-triaged structural false
+  positives): `10.1186/s12889-020-09058-w` (a demographic stats-summary
+  table), `10.1038/s41598-025-33041-3` (a correlation matrix),
+  `10.1371/journal.pone.0269327` (a factor-model fit-index table),
+  `10.1186/s12889-025-25237-z` (a measurement-invariance fit table),
+  `10.1371/journal.pmen.0000333` (a participation-count table),
+  `10.1371/journal.pgph.0003340` (a literature-search log),
+  `10.1371/journal.pone.0152462` (clickstream/action-log data, 135k rows),
+  `10.7717/peerj.19587` (a family demographic table, no instrument),
+  `10.1038/s41598-025-12221-1` (business-type summary counts).
+- *Wrong file / not usable as shared*: `10.7717/peerj.18378` (the SI file
+  was a data dictionary/codebook, not the data itself; no other file
+  available).
+- *Structurally real but not a coherent human item-response battery*:
+  `10.7717/peerj.16617` (hormone assay values mixed with genotype codes),
+  `10.7717/peerj.17468` (AI-chatbot vignette ratings with inconsistent,
+  non-comparable per-column scale ranges — not a human Likert battery),
+  `10.7717/peerj.18676` (n_id=2 after melt — aggregated rater-level data,
+  not per-respondent), `10.7717/peerj.14730` (sheep attention-bias study —
+  legitimate animal behavioral data per this pipeline's non-human policy,
+  but the "items" are heterogeneous non-comparable metrics — times,
+  counts, binary flags — not one coherent scale).
+- *Too messy to be worth the decode time this pass*: `10.7717/peerj.15582`
+  (leishmaniasis study — every text category has inconsistent typos:
+  "stronglly agree", "disagrree", "netural").
+- *Below the min-sample floor*: `10.7717/peerj.21309` (epilepsy QoL,
+  N=32 — see `feedback_min_sample_size`).
+
+**Deferred (14 of 45)**: genuinely promising, real item batteries that
+need more work than this pass had time for — a paper-text check, a
+multi-scale split, a wave-aware script, non-English translation, or (for
+two) a ben-domingue N=50-99 call. Written to the new standing file
+`pmc_deferred_candidates.csv` (same treatment as `plos_deferred_candidates.csv`
+— never delete). Full list with reasons is in the file; see `TODO.md` for
+the summary.
+
+One fetch failure (`10.7717/peerj.2319`, Europe PMC timeout) is included
+in the deferred count — needs a retry, not a data problem.
+
+Cleaned up: `pmc_batch1_triage.csv`/`pmc_batch1_retriage.csv`,
+`plos_batch26_triage.csv`/`_retriage.csv`, `pmc_batch2_triage.csv`/`_retriage.csv`
+all deleted — every actionable row is now in `human_review/`,
+`irw_output/`+`biblio_pmc_batch3.csv`, `pmc_deferred_candidates.csv`, or
+this entry.

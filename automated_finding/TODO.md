@@ -23,14 +23,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   naming, nothing further to do. See `BATCH_LOG.md`'s "Human review sheet
   deprecated" entry.
 
-- [ ] **PMC connector batch 1 — 31 `worth_retrying` rows from
-  `irw_retriage_ha.py` not yet reviewed** (2026-08-12): plausible data
-  worth a second look — mostly text-coded Likert responses needing
-  decoding, low-confidence id-column mappings needing a manual check, or
-  apparent longitudinal/repeated-measures duplicates needing a `wave`
-  column. See `pmc_batch1_retriage.csv`'s `worth_retrying` rows (kept on
-  disk, not deleted, since this item is still open) for the full list with
-  URLs and per-row reasoning.
+- [x] **PMC connector batch 1's 31 `worth_retrying` rows — reviewed**
+  (2026-08-12). See "worth_retrying review — pmc1/plos26/pmc2" in
+  `BATCH_LOG.md` for the full 45-candidate accounting (this batch's rows
+  plus plos26/pmc2 below, deduped by DOI). `pmc_batch1_retriage.csv`
+  deleted — fully captured elsewhere.
 
 - [x] **PLOS ONE batch 26** (2026-08-12, `plos_batch26_triage.csv`, 497
   candidates): its 1 `good` candidate (LGB medical students mental health
@@ -38,9 +35,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the supplementary file, a hard PII violation regardless of the paper's
   CC BY license. See `BATCH_LOG.md`'s "PLOS ONE batch 26" entry.
 
-- [ ] **PLOS ONE batch 26 — 107 `human_assistance` rows not yet
-  retriaged** (2026-08-12). `plos_batch26_triage.csv` kept on disk for
-  this.
+- [x] **PLOS ONE batch 26's 107 `human_assistance` rows — retriaged**
+  (2026-08-12): 41 `human_review` (written to
+  `human_review/human_review_plos_batch26.csv`), 32 `aggregate_continuous`
+  (dropped), 23 `not_item_response` (dropped), 11 `worth_retrying`
+  (reviewed — see the entry above). `plos_batch26_triage.csv` deleted —
+  fully captured elsewhere.
 
 - [x] **`automated_finding/biblio_pmc_batch2.csv`** (6 rows, 1 paper -> 6
   tables, from PMC connector batch 2, 2026-08-12) uploaded to Redivis and
@@ -50,8 +50,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Its other `good` candidate (nursing profession survey) was skipped per
   the new PII policy (real `date of birth` column).
 
-- [ ] **PMC connector batch 2 — 43 `human_assistance` rows not yet
-  retriaged** (2026-08-12). `pmc_batch2_triage.csv` kept on disk for this.
+- [x] **PMC connector batch 2's 43 `human_assistance` rows — retriaged**
+  (2026-08-12): 19 `human_review` (written to
+  `human_review/human_review_pmc_batch2.csv`), 11 `aggregate_continuous`
+  (dropped), 6 `not_item_response` (dropped), 7 `worth_retrying`
+  (reviewed — see the entry above). `pmc_batch2_triage.csv` deleted —
+  fully captured elsewhere.
+
+- [ ] **`automated_finding/biblio_pmc_batch3.csv`** (8 rows, 3 papers ->
+  8 tables, from the pmc1/plos26/pmc2 `worth_retrying` review, 2026-08-12)
+  needs Redivis upload + pasting into the dictionary sheet. Scripts:
+  `data/han_2026_gad7.py` / `han_2026_phq9.py` / `han_2026_isi.py` (one
+  paper, 3 scales), `data/valdivia_2023_oms.py`,
+  `data/geacaballero_2019_pes_nwi.py` (+ `_short` sibling, same paper, 2
+  scales), `data/shu_2024_gad7.py` / `shu_2024_phq9.py` (one paper, 2
+  scales). See `BATCH_LOG.md`'s "worth_retrying review — pmc1/plos26/pmc2"
+  entry for per-paper detail.
+
+- [ ] **14 candidates deferred as genuinely promising but not yet
+  scripted** (2026-08-12, from the same worth_retrying review) — kept in
+  `automated_finding/pmc_deferred_candidates.csv` (standing file, same
+  treatment as `plos_deferred_candidates.csv` — don't delete). Notable
+  ones: a clean WHOQOL-BREF-style scale (`10.7717/peerj.18809`, N=349,
+  ready to script), two cases where the automated item-detection heuristic
+  missed real raw items entirely — same failure mode already fixed once
+  this batch for `shu_2024_gad7`/`phq9` — (`10.7717/peerj.19403`'s
+  ZTPI/LPFS/PICD items, `10.1038/s41598-024-58598-3`'s EMA daily-diary
+  data), and two N=50-99 candidates needing a ben-domingue go/no-go
+  (`10.7717/peerj.19326` N=53, `10.7717/peerj.12078` N=99). See
+  `pmc_deferred_candidates.csv` for the full list with reasons.
 
 - [x] **`automated_finding/biblio_plos_batch25.csv`** (23 rows, 6 papers ->
   23 tables, from PLOS ONE batch 25's `good` (3 fresh) + `worth_retrying`
