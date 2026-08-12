@@ -7398,3 +7398,91 @@ scripts in `data/` (`liem_2024_env_stewardship.py`,
 
 `human_review_plos_batch24.csv` (103 rows, from `irw_retriage_ha.py`)
 staged for the "Human eye" sheet.
+
+## PLOS ONE batch 25 (2026-08-11)
+
+Discovery run: 30 recycled non-PLOS English terms (health behaviour,
+physical fitness, creative thinking, career exploration, processing
+speed, oral reading fluency, print awareness, text comprehension,
+mathematical reasoning, fraction knowledge, emotion dysregulation,
+proactive aggression, basic psychological needs, ambivalence over
+emotional expression, scientific reasoning, fake news discernment,
+overprotective parenting, authoritative parenting, harsh parenting,
+fathering, sibling relationship, family cohesion, academic help-seeking,
+academic cheating, cooperative learning, teacher-student relationship,
+thriving at work, work meaningfulness, turnover intention, ethical
+leadership), pulled from the `TODO.md` recyclable-terms pool per the
+usual method (filter `search_terms_log.csv` to non-PLOS English rows not
+yet tried against PLOS, `langdetect`-checked, hand-filtered for clean
+instrument/construct names). All 30 logged to `search_terms_log.csv`.
+
+`irw_discover_plos.py` result: 1,650 candidates -> 6 `good` + 278
+`human_assistance` (+ 1,281 `no_usable_file`, 48 `not_item_response`, 13
+`error`, 12 `download_failed`, 1 `timeout`). `irw_retriage_ha.py` on the
+`human_assistance` bucket: 41 `worth_retrying`, 87 `human_review`, 84
+`aggregate_continuous`, 66 `not_item_response`.
+
+**`good` review (6 candidates)**: 2 below N>=50 dropped immediately
+(`0253779` altered-states flicker N=24, `0243811` songbird vocal
+preference N=12). `0201698` (positive/negative affect, Spanish children)
+inspected and skipped -- all substantive columns (PA, SPdict/PRdict/
+FRdict/HDdict) are pre-computed composite/dichotomized scores, no raw
+items despite a header-offset read initially suggesting otherwise. 3
+shipped: `grandahl_2017_hpv_beliefs` (15-item 6-point HPV-belief scale,
+Swedish adolescents, N=753 -> 731 after "Do not know" treated as
+non-response per datastandard.md), `zhu_2026_llm_meteorology_performance`
+(5-item 1-5 LLM-performance rating, meteorology grad students, N=348),
+`tsai_2017_treeit` (older-adults' TAM + Zhang et al.'s 14 usability
+heuristics for a social platform UI, N=101 -- 17 separate tables: TAM
+PU/PEOU/BI plus H1-H14, each heuristic named and item-counted directly
+from the paper's Methods text since the raw column groups (H1-1..H1-6
+etc.) needed the article to disambiguate exact per-heuristic item counts
+correctly -- an initial guess at the split was wrong on 4 of the 14 and
+caught by a KeyError before any output was saved).
+
+**`worth_retrying` review (41 rows)**: 21 were exact-DOI duplicates of
+candidates already decided (skipped, mostly composite-only) in earlier
+batches (6/8/9/10/15/16/18/19/24) -- not re-reviewed, matches the
+established batches-6/9/12/13/16/18 pattern of the same PLOS articles
+resurfacing under different search terms. Of the 20 genuinely new DOIs:
+3 ruled out from the title/caption alone without downloading (`0133213`
+seabird recruitment sample-size table, not participant data; `0311564`
+scoping-review data-extraction table; `0258200` firm-year archival R&D
+panel, not survey items). Of the remaining 17 downloaded and inspected:
+4 shipped (`han_2015_peer_assisted_learning`: 12-item 1-5 course
+evaluation, N=205; `he_2019_flipped_classroom_attitudes`/`_satisfaction`:
+12-item/8-item 1-5 scales from a pharmacy-education RCT, N=137, "9" =
+not-applicable sentinel filtered; `theobald_2017_group_dynamics`:
+2-item 1-6 comfort/dominator perception scale with `wave`=Topic (3
+group-work rounds), N=684); 9 skipped as composite/aggregate-only or
+otherwise not item-response (`0334111` aging/rural — IADL/GDS/SWEMWBS are
+pre-scored totals; `0244603` and `0270999` preschool/referee fitness —
+heterogeneous-unit physical test batteries, not a coherent item scale;
+`0334232` facial-expression-engagement — correlation/results tables only;
+`0339378` ADHD Delphi priorities — a variable dictionary, not response
+data; `0351407` tDCS post-COVID — composite clinical characteristics,
+N=55; `0240843` UDAYA India adolescents — all columns are derived survey
+indices/covariates, no raw item battery; `0283117` children's friendship
+nominations — sociometric structure too far from id/item/resp to fit
+without a deeper look; `0157447` STEM-pipeline confidence — huge messy
+multi-institution survey with no clear person-ID column, deferred rather
+than guessed); 4 deferred, not shipped this pass (see TODO.md): `0242967`
+counterfactual-reasoning task (N=54, real per-trial correctness data, but
+in the 50-99 borderline band -- needs ben-domingue's decision per
+`feedback_min_sample_size`); `0151634` music-listening ESM study (N=967,
+1502 observations, but "goals"/"effects" columns are 1-10 rankings across
+6 goal categories per observation -- structure needs more time to map
+correctly, not rushed); `0138269` sentence-comprehension reading task
+(item values are response-time-derived scores divided by syllable count,
+not Likert responses -- `rt`-column semantics unclear, deferred);
+`0329483` Arabic-language artistic-skills/academic-engagement
+questionnaire (N=102, real ~26-item 1-5 Likert data, CC BY 4.0, but item
+labels are in Arabic and need translation before shipping -- deferred).
+
+**Result**: 6 papers -> 23 tables (`biblio_plos_batch25.csv`, 23 rows).
+Scripts in `data/`: `grandahl_2017_hpv_beliefs.py`,
+`zhu_2026_llm_meteorology_performance.py`, `tsai_2017_treeit.py` (17
+tables), `han_2015_peer_assisted_learning.py`,
+`he_2019_flipped_classroom.py` (2 tables), `theobald_2017_group_dynamics.py`.
+`human_review_plos_batch25.csv` (87 rows, from `irw_retriage_ha.py`)
+staged for the "Human eye" sheet.

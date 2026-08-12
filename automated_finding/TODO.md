@@ -3,6 +3,35 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_plos_batch25.csv`** (23 rows, 6 papers ->
+  23 tables, from PLOS ONE batch 25's `good` (3 fresh) + `worth_retrying`
+  (4 fresh) pool, 2026-08-11) uploaded to Redivis and pasted into the
+  dictionary sheet (confirmed 2026-08-11, ben-domingue); file and all 23
+  `irw_output/*.csv` files gone from disk as expected. See `BATCH_LOG.md`'s
+  "PLOS ONE batch 25" entry for full per-paper detail, including the
+  `tsai_2017_treeit` 17-table split (TAM PU/PEOU/BI + Zhang et al.'s 14
+  named usability heuristics) and the `grandahl_2017_hpv_beliefs` "do not
+  know" treated as non-response.
+
+- [x] **`automated_finding/human_review_plos_batch25.csv`** (87 rows,
+  batch 25's `human_review` rows from `irw_retriage_ha.py`) pasted into
+  the "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone
+  from disk as expected.
+
+- [ ] **PLOS ONE batch 25 — 4 `worth_retrying` candidates deferred, not
+  shipped**: `10.1371/journal.pone.0242967` (counterfactual-reasoning task,
+  N=54, real per-trial data but in the N=50-99 borderline band — needs a
+  ben-domingue decision per `feedback_min_sample_size`); `10.1371/journal.
+  pone.0151634` (music-listening ESM study, N=967, but "goals"/"effects"
+  columns are 1-10 rankings across 6 goal categories per observation —
+  structure needs more time to map correctly); `10.1371/journal.pone.
+  0138269` (sentence-comprehension reading task — item values are
+  response-time-derived scores divided by syllable count, `rt`-column
+  semantics unclear); `10.1371/journal.pone.0329483` (Arabic-language
+  artistic-skills/academic-engagement questionnaire, N=102, real ~26-item
+  1-5 Likert data, CC BY 4.0, but item labels need translation from Arabic
+  before shipping). See `BATCH_LOG.md`'s "PLOS ONE batch 25" entry.
+
 - [x] **`automated_finding/biblio_plos_batch24.csv`** (28 rows, merged from
   Groups A/B/C, 12 papers -> 28 tables, from PLOS ONE batch 24's `good`
   (7 fresh) + `worth_retrying` (36 fresh) pool after de-duping 9 already-
@@ -527,8 +556,11 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (2026-07-30) used 30, batch 13 (2026-07-31) used 30 more, batch 24
   (2026-08-11) used 30 more (this pass also added a `langdetect` check —
   the earlier plain-ASCII filter had let ASCII-safe non-English terms like
-  "Angst"/"dolor"/"Antwortstil" slip through undetected), leaving roughly
-  1,050-1,080 unused. See `SKILL.md`'s "Alternate discovery source:
+  "Angst"/"dolor"/"Antwortstil" slip through undetected), batch 25
+  (2026-08-11) used 30 more (had to hand-filter langdetect's output further
+  — several short non-English fragments like "Antwortstil"/"Psychopathie"/
+  "Trainingsmotivation" were still mis-tagged `en` on strings this short),
+  leaving roughly 1,020-1,050 unused. See `SKILL.md`'s "Alternate discovery source:
   single-journal search (PLOS ONE)" section (term-selection bullet) for
   the exact filtering method. Expect several more batches' worth of
   higher-quality-than-average terms before this pool runs dry — pull from
