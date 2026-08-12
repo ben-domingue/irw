@@ -1,18 +1,27 @@
 # Audit diff: dumas_organisciak_2022
 
-**Real replace-candidate.** Current curation only has `item_text` = the bare
-object name (e.g. "book") and no `instructions`/`option_text` at all --
-essentially a placeholder. This extraction adds, from
-DumasOrganisciakDoherty2020PACA.pdf (OSF qcmex): task description
-(Alternate Uses Task, 2-min generation window, 4 coders rating Originality
-0-4) and the two rating-scale endpoint anchors ("totally ordinary" / "maximally
-novel" per the paper's exact wording -- p.26). Note the paper states coders
-used a **0-4** scale but the live IRW `resp` values are **1-5**; treated as a
-+1 shift applied during IRW processing, not verified against the raw data
-file itself -- flag this specifically if approving the replace. Interior
-points (2,3,4) intentionally left blank; the paper only describes where
-responses tend to cluster (around the scale midpoint), not per-point rating
-anchors for a rater to apply.
+**Correction (2026-08-12): this report originally said current curation had
+no `option_text` at all -- that was wrong, caused by reading a truncated R
+tibble print during the initial check. Curation already has resp=1/5 labeled
+`"totally ordinary"`/`"maximally novel"`, exactly matching this extraction's
+independently-sourced values. The real gap is smaller than first stated.**
+
+**Real replace-candidate, but a modest one.** Current curation has no
+`instructions` column at all (confirmed: the column is absent, not just
+blank) -- no field describing the Alternate Uses Task procedure. This
+extraction adds that task description, sourced from
+DumasOrganisciakDoherty2020PACA.pdf (OSF qcmex): Alternate Uses Task, 2-min
+generation window per object, 4 coders rating Originality 0-4. The
+`option_text` "mismatches" below are cosmetic only -- I appended a
+parenthetical `"(paper coder scale 4)"` note to the existing endpoint labels;
+the core wording ("totally ordinary" / "maximally novel") is unchanged from
+curation. Note the paper states coders used a **0-4** scale but the live IRW
+`resp` values are **1-5**; treated as a +1 shift applied during IRW
+processing, not verified against the raw data file itself -- flag this
+specifically if approving the replace. Interior points (2,3,4) intentionally
+left blank in both curation and this extraction; the paper only describes
+where responses tend to cluster (around the scale midpoint), not per-point
+rating anchors for a rater to apply.
 
 Classification (suggested): **review**
 
