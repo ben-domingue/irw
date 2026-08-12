@@ -50,7 +50,7 @@ from irw_discover_updated import Hit, is_relevant, norm_doi, _load_auto_exclusio
 from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
 from irw_triage_updated import load_table, triage_dataset
 
-UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact your-email)"}
+UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 PLOS_SEARCH_API = "https://api.plos.org/search"
 PLOS_ARTICLE_URL = "https://journals.plos.org/{slug}/article?id={doi}"
 
@@ -301,6 +301,39 @@ FIELDNAMES = ["source", "journal", "doi", "title", "url", "license", "flag",
               "n_responses", "n_participants", "n_items", "density",
               "n_other_files"]
 
+# Permanent, cross-run record of every DOI this connector has ever
+# triaged -- shared by manual (`python irw_discover_plos.py ...`) and
+# scheduled (irw_discover_plos_monthly.py) invocations alike, so a term
+# searched by hand and the same term in the scheduled high-yield list don't
+# re-download and re-triage the same candidate. Distinct from `--resume`,
+# which only dedups within a single --out file. Not the same signal as
+# "already in the IRW dictionary" (_load_auto_exclusions) -- a candidate
+# can be seen here (attempted) long before it's shipped (or ever, if it was
+# rejected) there.
+SEEN_DOIS_PATH = "plos_seen_dois.csv"
+
+
+def load_seen_dois(path: str = SEEN_DOIS_PATH) -> set:
+    import os
+    if not os.path.exists(path):
+        return set()
+    with open(path, newline="", encoding="utf-8") as f:
+        return {row["doi"] for row in csv.DictReader(f) if row.get("doi")}
+
+
+def append_seen_dois(dois, path: str = SEEN_DOIS_PATH) -> None:
+    import os
+    from datetime import datetime, timezone
+    if not dois:
+        return
+    file_exists = os.path.exists(path)
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["doi", "date"])
+        if not file_exists:
+            writer.writeheader()
+        writer.writerows({"doi": d, "date": today} for d in dois)
+
 # Native readstat/openpyxl code (pyreadstat's .sav parser especially) can
 # segfault outright on a corrupt file -- that's a C-level crash, not a
 # catchable Python exception, so a bare try/except around process_one()
@@ -385,6 +418,10 @@ def main():
     ap.add_argument("--journals", default=DEFAULT_JOURNAL,
                     help="comma-separated journal slugs to search, from: "
                          f"{', '.join(JOURNALS)} (default: {DEFAULT_JOURNAL})")
+    ap.add_argument("--ignore-seen-dois", action="store_true",
+                    help=f"don't consult/update {SEEN_DOIS_PATH} (the cross-run dedup "
+                         "store shared with irw_discover_plos_monthly.py) -- use to "
+                         "deliberately re-triage a DOI, e.g. after a script fix")
     args = ap.parse_args()
 
     journals = [j.strip() for j in args.journals.split(",") if j.strip()]
@@ -393,11 +430,17 @@ def main():
         raise SystemExit(f"Unknown journal slug(s): {bad}. Choose from: {list(JOURNALS)}")
 
     exclude = _load_auto_exclusions()
-    print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary\n")
+    print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary")
+
+    global_seen = set() if args.ignore_seen_dois else load_seen_dois()
+    if global_seen:
+        print(f"Excluding {len(global_seen):,} DOIs already triaged in a prior run "
+              f"(manual or scheduled -- see {SEEN_DOIS_PATH})")
 
     already_done = _load_done_dois(args.out) if args.resume else set()
     if already_done:
-        print(f"Resuming: {len(already_done)} DOIs already in {args.out}, skipping them\n")
+        print(f"Resuming: {len(already_done)} DOIs already in {args.out}, skipping them")
+    print()
 
     outf = open(args.out, "a" if args.resume and already_done else "w",
                 newline="", encoding="utf-8")
@@ -406,6 +449,7 @@ def main():
         writer.writeheader()
 
     seen = set(already_done)
+    newly_seen = []
     n_done = 0
     pool = _new_pool()
     try:
@@ -413,9 +457,10 @@ def main():
             for q in args.queries:
                 print(f"[{journal}] [query] {q}", flush=True)
                 for hit in from_plos(q, journal):
-                    if hit.doi in seen or hit.doi in exclude:
+                    if hit.doi in seen or hit.doi in exclude or hit.doi in global_seen:
                         continue
                     seen.add(hit.doi)
+                    newly_seen.append(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
                     writer.writerow(row)
                     outf.flush()
@@ -430,6 +475,8 @@ def main():
     finally:
         pool.shutdown(wait=False)
         outf.close()
+        if not args.ignore_seen_dois:
+            append_seen_dois(newly_seen)
 
     print(f"\n{n_done} candidates processed -> {args.out}")
 

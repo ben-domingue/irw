@@ -24,7 +24,8 @@ hit counts) and BATCH_LOG.md (which batches such terms fed) before trusting
 it as-is.
 
 Run:
-    python irw_discover_monthly.py                      # full run, osf+dataverse
+    python irw_discover_monthly.py                      # full run (~100 terms), osf+dataverse
+    python irw_discover_monthly.py --mode weekly         # HIGH_YIELD_TERMS subset (~15 terms)
     python irw_discover_monthly.py --dry-run             # show since-dates only, no queries
     python irw_discover_monthly.py --sources osf dataverse surf aussda scholars_portal
 """
@@ -169,6 +170,30 @@ TERM_LIST = [
     "employability skills",
 ]
 
+# Small, proven-yield subset for a weekly pass -- same shortlist used by
+# irw_discover_plos_monthly.py / irw_discover_pmc_monthly.py's
+# HIGH_YIELD_TERMS (kept identical across connectors on purpose, since the
+# yield signal is about the construct, not the source). Edit freely as
+# per-source yield data comes in; they don't need to stay in sync going
+# forward.
+HIGH_YIELD_TERMS = [
+    "self-esteem",
+    "grit",
+    "self-efficacy",
+    "depression",
+    "anxiety",
+    "burnout",
+    "perceived stress",
+    "well-being",
+    "life satisfaction",
+    "loneliness",
+    "academic motivation",
+    "work engagement",
+    "resilience",
+    "procrastination",
+    "growth mindset",
+]
+
 DEFAULT_SOURCES = ["osf", "dataverse"]
 
 
@@ -209,6 +234,11 @@ def append_log_rows(rows: list[dict], log_path: str = LOG_PATH) -> None:
 
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--mode", choices=["weekly", "full"], default="full",
+                     help="weekly: HIGH_YIELD_TERMS subset (~15 terms), for a frequent "
+                          "small-scope pass. full: TERM_LIST (~100 terms), the original "
+                          "monthly sweep. Default 'full' preserves this script's original "
+                          "behavior for the existing scheduled routine.")
     ap.add_argument("--sources", metavar="NAME", nargs="+", default=DEFAULT_SOURCES,
                      help=f"sources to query (choices: {', '.join(SOURCE_MAP)})")
     ap.add_argument("--default-lookback-days", type=int, default=90,
@@ -216,7 +246,7 @@ def main():
     ap.add_argument("--dry-run", action="store_true",
                      help="print each term's computed --since date and exit, no queries run")
     ap.add_argument("--out", default=None,
-                     help=f"output CSV (default: {OUT_PREFIX}<today>.csv)")
+                     help=f"output CSV (default: {OUT_PREFIX}<mode>_<today>.csv)")
     args = ap.parse_args()
 
     unknown = set(args.sources) - set(SOURCE_MAP)
@@ -224,22 +254,24 @@ def main():
         ap.error(f"Unknown sources: {', '.join(unknown)}. Choices: {', '.join(SOURCE_MAP)}")
     active_sources = [SOURCE_MAP[s] for s in args.sources]
 
+    terms = HIGH_YIELD_TERMS if args.mode == "weekly" else TERM_LIST
+
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     fallback_since = (datetime.now(timezone.utc) - timedelta(days=args.default_lookback_days)).strftime("%Y-%m-%d")
 
     since_by_term = {}
-    for term in TERM_LIST:
+    for term in terms:
         prior = last_run_date(term)
         since_by_term[term] = prior if prior else fallback_since
 
     if args.dry_run:
-        print(f"Sources: {', '.join(args.sources)}")
+        print(f"Mode: {args.mode} ({len(terms)} terms). Sources: {', '.join(args.sources)}")
         for term, since in since_by_term.items():
             origin = "prior monthly run" if last_run_date(term) else f"first run, {args.default_lookback_days}d lookback"
             print(f"  {term!r}: since={since} ({origin})")
         return
 
-    out_path = args.out or f"{OUT_PREFIX}{today}.csv"
+    out_path = args.out or f"{OUT_PREFIX}{args.mode}_{today}.csv"
     exclude = _load_auto_exclusions()
     if exclude:
         print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary")
@@ -249,7 +281,7 @@ def main():
     writer = csv.DictWriter(outf, fieldnames=fieldnames)
     writer.writeheader()
 
-    hits_by_term = {term: 0 for term in TERM_LIST}
+    hits_by_term = {term: 0 for term in terms}
 
     def on_hit(h, term):
         hits_by_term[term] += 1

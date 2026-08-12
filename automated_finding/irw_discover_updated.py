@@ -37,7 +37,7 @@ from dataclasses import dataclass, asdict
 
 import requests
 
-UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact your-email)"}
+UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 
 # ---------------------------------------------------------------------------
 # RELEVANCE FILTER (tiered)

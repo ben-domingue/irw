@@ -344,6 +344,37 @@ def _load_done_dois(path: str) -> set:
         return {row["doi"] for row in csv.DictReader(f) if row.get("doi")}
 
 
+# Permanent, cross-run record of every DOI this connector has ever triaged
+# -- shared by manual (`python irw_discover_pmc.py ...`) and scheduled
+# (irw_discover_pmc_monthly.py) invocations alike, so a term searched by
+# hand and the same term in the scheduled high-yield list don't
+# re-download and re-triage the same candidate. See irw_discover_plos.py's
+# identical SEEN_DOIS_PATH for the full rationale (same design, mirrored).
+SEEN_DOIS_PATH = "pmc_seen_dois.csv"
+
+
+def load_seen_dois(path: str = SEEN_DOIS_PATH) -> set:
+    import os
+    if not os.path.exists(path):
+        return set()
+    with open(path, newline="", encoding="utf-8") as f:
+        return {row["doi"] for row in csv.DictReader(f) if row.get("doi")}
+
+
+def append_seen_dois(dois, path: str = SEEN_DOIS_PATH) -> None:
+    import os
+    from datetime import datetime, timezone
+    if not dois:
+        return
+    file_exists = os.path.exists(path)
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["doi", "date"])
+        if not file_exists:
+            writer.writeheader()
+        writer.writerows({"doi": d, "date": today} for d in dois)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("queries", nargs="*", default=["item response theory"])
@@ -356,6 +387,10 @@ def main():
     ap.add_argument("--journals", default=DEFAULT_JOURNALS,
                     help="comma-separated journal slugs to search, from: "
                          f"{', '.join(JOURNALS)} (default: all)")
+    ap.add_argument("--ignore-seen-dois", action="store_true",
+                    help=f"don't consult/update {SEEN_DOIS_PATH} (the cross-run dedup "
+                         "store shared with irw_discover_pmc_monthly.py) -- use to "
+                         "deliberately re-triage a DOI, e.g. after a script fix")
     args = ap.parse_args()
 
     journals = [j.strip() for j in args.journals.split(",") if j.strip()]
@@ -364,11 +399,17 @@ def main():
         raise SystemExit(f"Unknown journal slug(s): {bad}. Choose from: {list(JOURNALS)}")
 
     exclude = _load_auto_exclusions()
-    print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary\n")
+    print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary")
+
+    global_seen = set() if args.ignore_seen_dois else load_seen_dois()
+    if global_seen:
+        print(f"Excluding {len(global_seen):,} DOIs already triaged in a prior run "
+              f"(manual or scheduled -- see {SEEN_DOIS_PATH})")
 
     already_done = _load_done_dois(args.out) if args.resume else set()
     if already_done:
-        print(f"Resuming: {len(already_done)} DOIs already in {args.out}, skipping them\n")
+        print(f"Resuming: {len(already_done)} DOIs already in {args.out}, skipping them")
+    print()
 
     outf = open(args.out, "a" if args.resume and already_done else "w",
                 newline="", encoding="utf-8")
@@ -377,6 +418,7 @@ def main():
         writer.writeheader()
 
     seen = set(already_done)
+    newly_seen = []
     n_done = 0
     pool = _new_pool()
     try:
@@ -384,9 +426,10 @@ def main():
             for q in args.queries:
                 print(f"[{journal}] [query] {q}", flush=True)
                 for hit in from_pmc(q, journal):
-                    if hit.doi in seen or hit.doi in exclude:
+                    if hit.doi in seen or hit.doi in exclude or hit.doi in global_seen:
                         continue
                     seen.add(hit.doi)
+                    newly_seen.append(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
                     writer.writerow(row)
                     outf.flush()
@@ -401,6 +444,8 @@ def main():
     finally:
         pool.shutdown(wait=False)
         outf.close()
+        if not args.ignore_seen_dois:
+            append_seen_dois(newly_seen)
 
     print(f"\n{n_done} candidates processed -> {args.out}")
 
