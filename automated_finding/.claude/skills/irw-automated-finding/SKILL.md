@@ -1,6 +1,6 @@
 ---
 name: irw-automated-finding
-description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_discover_plos.py, irw_process_queue.py) or its TODO.md/BATCH_LOG.md. Also applies to searching individual open-access journals (e.g. PLOS ONE) directly, as opposed to data repositories.
+description: This skill should be used when the user asks to "find new datasets for IRW", "run discovery", "search for item response datasets", "triage candidates", "retriage human_assistance rows", "process the queue", or otherwise references the automated_finding pipeline (irw_discover_updated.py, irw_batch_updated.py, irw_retriage_ha.py, irw_discover_plos.py, irw_discover_pmc.py, irw_process_queue.py) or its TODO.md/BATCH_LOG.md. Also applies to searching individual open-access journals (e.g. PLOS ONE, or any journal in irw_discover_pmc.py's JOURNALS list) directly, as opposed to data repositories, and to the journal_scout/ yield-measurement study used to decide which journals are worth adding to that list.
 ---
 
 # IRW Automated Finding Pipeline
@@ -341,6 +341,90 @@ python irw_discover_plos.py "term1" "term2" --out plos_triage.csv --resume   # a
   `api.crossref.org` first (publisher-agnostic, works for any journal by
   `container-title` + bibliographic query), same as this pilot did before
   committing to a full run.
+
+## Alternate discovery source: Europe-PMC-based multi-journal search
+
+`irw_discover_pmc.py` generalizes the single-journal-search idea above to
+any journal that's well-indexed in Europe PMC, without writing a new
+publisher-specific scraper for each one. Use it when the user asks to
+search a non-PLOS open-access journal directly, or references the
+`journal_scout/` yield study.
+
+**Why this generalizes where `irw_discover_plos.py` couldn't**: that
+script works by scraping `journals.plos.org`'s article HTML, which is
+PLOS-specific plumbing — the earlier note about BMC needing a new parser
+and Frontiers being an unscrapable JS SPA was written against that
+approach. `irw_discover_pmc.py` never touches a publisher's own website:
+it calls Europe PMC's `{PMCID}/supplementaryFiles` endpoint, which returns
+an article's Supporting Information archive the same way regardless of
+publisher, as long as the article is deposited in PMC. One connector, many
+journals — the engineering cost of adding a journal is close to zero
+*if* it's well-indexed in Europe PMC (see the caveat below; several are not).
+
+```bash
+python irw_discover_pmc.py "PHQ-9" "self-esteem scale" --out pmc_triage.csv
+python irw_discover_pmc.py "term" --limit 10 --out pmc_test.csv   # sanity check first
+python irw_discover_pmc.py "term" --journals peerj,heliyon --out pmc_triage.csv   # subset of journals
+python irw_discover_pmc.py "term1" "term2" --out pmc_triage.csv --resume   # after an interrupted run
+```
+
+- **Term selection**: same rule as the PLOS section above — recycle terms
+  from `search_terms_log.csv` that haven't been run against this source
+  yet (`file` column won't mention "pmc"), rather than inventing new ones.
+  This is a distinct search surface from both the repo connectors and
+  `irw_discover_plos.py`, so a term already used against either is not a
+  duplicate query here.
+- **Which journals are in `JOURNALS`, and why not more**: the list is the
+  "harvest now" / "sample manually first" tiers from a dedicated yield
+  study — `journal_scout/journal_yield_summary.md` (2026-08-11/12), which
+  measured `pct_with_data_like_supp` on a reproducible 100-article sample
+  per candidate journal against a PLOS ONE positive control, plus license
+  mix and Europe-PMC-index reliability. **Don't add a journal to
+  `JOURNALS` without a yield measurement backing it up** — the same
+  "don't build a new-journal connector speculatively" rule from the PLOS
+  section applies here, just at the level of adding an ISSN to a list
+  instead of writing a scraper. The PLOS family (PLOS ONE and siblings)
+  scored well in that study too but was deliberately kept on
+  `irw_discover_plos.py` rather than migrated, to avoid running two
+  discovery paths over the same journals.
+- **Not every OA journal is reachable this way, even if it's fully open
+  and CC-BY.** The yield study found several journals (Frontiers in
+  Education, Journal of Statistical Software, Large-scale Assessments in
+  Education, Collabra: Psychology, Education Sciences/MDPI) whose true
+  publication volume — cross-checked against Crossref — is 6x-600x what
+  Europe PMC's own ISSN search reports. Those journals are essentially
+  invisible to Europe PMC's index regardless of their real yield, so this
+  connector cannot reach them; check `journal_scout/journal_yield_summary.md`
+  before assuming a plausible-looking journal is a `JOURNALS` candidate.
+- **License is fetched per-candidate, not scraped from an HTML page**:
+  `fetch_core_license()` reads the `license` field off Europe PMC's
+  `resultType=core` record — same source `journal_scout`'s Step 4 used.
+  Unlike PLOS's `extract_license()` (regex over the article page), this
+  doesn't need the article's HTML at all.
+- **No Data Availability / external-repo-link tracking** (PLOS's
+  `external_link` column has no equivalent here) — this connector's whole
+  point is the attached-SI-file path; chasing a DAS-mentioned external repo
+  is the regular repo-based pipeline's job, and would need a full-text XML
+  fetch per candidate this script doesn't do today. If that turns out to
+  matter, it's a known gap, not an oversight — see the script's docstring.
+- **Same crash isolation as `irw_discover_plos.py`**: `load_table()` can
+  still hit a native segfault on a corrupt `.sav`/`.xlsx`, so each
+  candidate runs in its own worker process, same as the PLOS script. The
+  isolation harness is duplicated in `irw_discover_pmc.py` rather than
+  imported from `irw_discover_plos.py` — each discovery script stays
+  self-contained, matching the "no shared dependencies between scripts"
+  norm the rest of the pipeline follows.
+- **Re-running `journal_scout/`**: the study itself (resolve → yearly
+  counts → sample → license → assemble) is five scripts in
+  `journal_scout/`, each caching its raw API responses under
+  `journal_scout/cache/` (gitignored, regenerable) with skip-if-exists —
+  rerunning after editing `journal_scout/journals_candidates.py` only
+  re-fetches what changed. See the scripts' own docstrings for the
+  per-step detail; `journal_yield_summary.md` documents what couldn't be
+  measured and why (the PMC Journal List's deposit-scope field has no
+  scrapable/API path, so a same-source IN_PMC-ratio proxy is used instead;
+  `SPRINGER_API_KEY`-gated Springer OA counts were skipped since no key is
+  set in this environment).
 
 ## After finishing a batch
 
