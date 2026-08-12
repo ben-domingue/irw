@@ -1,268 +1,55 @@
-*** This Stata Do File processes the spain_2026_love study ***
+*** This Stata Do File processes the spain_2025_democracy study ***
 
 clear all
 set more off
 
-cd "H:\My Drive\Ben Domingue\Stata Do Files\spain_2026_love"
+cd "H:\My Drive\Ben Domingue\Stata Do Files\spain_2025_democracy"
 
-import delimited "3508_num.csv", delimiter(";") varnames(1) case(preserve) encoding("UTF-8") clear
+* import study dataset
 
-* recover true variable names from the CIS header labels
+import delimited "3497_num.csv", delimiter(";") varnames(1) case(preserve) encoding("UTF-8") clear
 
-foreach var of varlist _all {
-    local lab : variable label `var'
-    local newname = substr("`lab'", 1, strpos("`lab'", ":") - 1)
-    rename `var' `newname'
-}
+* convert column names to lowercase
 
 rename *, lower
 
+* destring
+
 destring _all, replace force
 
-gen long id = _n
-
-* rename covariates
+* clean covariates
 
 rename sexo cov_sex
 rename edad cov_age
 
-* clean covariates
-
-replace cov_age = . if cov_age == 999
-
 label define sex_lbl 1 "Hombre" 2 "Mujer"
 label values cov_sex sex_lbl
 
+* generate id
+
+gen long id = _n
+
+order id cov_*, first
+
 compress
 
-save "spain_2026_love_master.dta", replace
+save "spain_2025_democracy_master.dta", replace
 
-**# Bookmark 1: importance
+**# Bookmark 1: system
 
 * ============================================================
-* importance (P1_1 to P1_10)
+* system (P2, P7, P11)
 * ============================================================
 
-use "spain_2026_love_master.dta", clear
+use "spain_2025_democracy_master.dta", clear
 
-local survey_cols p1_1 p1_2 p1_3 p1_4 p1_5 p1_6 p1_7 p1_8 p1_9 p1_10
+local survey_cols p2 p7 p11
 
 keep id cov_* `survey_cols'
 
-replace p1_1 = . if inlist(p1_1, 8, 9)
-replace p1_2 = . if inlist(p1_2, 8, 9)
-replace p1_3 = . if inlist(p1_3, 8, 9)
-replace p1_4 = . if inlist(p1_4, 8, 9)
-replace p1_5 = . if inlist(p1_5, 8, 9)
-replace p1_6 = . if inlist(p1_6, 8, 9)
-replace p1_7 = . if inlist(p1_7, 8, 9)
-replace p1_8 = . if inlist(p1_8, 8, 9)
-replace p1_9 = . if inlist(p1_9, 8, 9)
-replace p1_10 = . if inlist(p1_10, 8, 9)
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local survey_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-drop if missing(item) | item == ""
-drop if missing(resp)
-sort id item
-drop p1_1 p1_2 p1_3 p1_4 p1_5 p1_6 p1_7 p1_8 p1_9 p1_10
-export delimited using "spain_2026_love_importance.csv", replace
-
-**# Bookmark 2: association
-
-* ============================================================
-* association (P3_1 to P3_9)
-* ============================================================
-
-use "spain_2026_love_master.dta", clear
-
-local survey_cols p3_1 p3_2 p3_3 p3_4 p3_5 p3_6 p3_7 p3_8 p3_9
-
-keep id cov_* `survey_cols'
-
-replace p3_1 = . if inlist(p3_1, 8, 9)
-replace p3_2 = . if inlist(p3_2, 8, 9)
-replace p3_3 = . if inlist(p3_3, 8, 9)
-replace p3_4 = . if inlist(p3_4, 8, 9)
-replace p3_5 = . if inlist(p3_5, 8, 9)
-replace p3_6 = . if inlist(p3_6, 8, 9)
-replace p3_7 = . if inlist(p3_7, 8, 9)
-replace p3_8 = . if inlist(p3_8, 8, 9)
-replace p3_9 = . if inlist(p3_9, 8, 9)
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local survey_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-drop if missing(item) | item == ""
-replace resp = . if resp == 3
-drop if missing(resp)
-sort id item
-drop p3_1 p3_2 p3_3 p3_4 p3_5 p3_6 p3_7 p3_8 p3_9
-export delimited using "spain_2026_love_association.csv", replace
-
-**# Bookmark 3: attitudes
-
-* ============================================================
-* attitudes (P4_1 to P4_8)
-* ============================================================
-
-use "spain_2026_love_master.dta", clear
-
-local survey_cols p4_1 p4_2 p4_3 p4_4 p4_5 p4_6 p4_7 p4_8
-
-keep id cov_* `survey_cols'
-
-replace p4_1 = . if inlist(p4_1, 8, 9)
-replace p4_2 = . if inlist(p4_2, 8, 9)
-replace p4_3 = . if inlist(p4_3, 8, 9)
-replace p4_4 = . if inlist(p4_4, 8, 9)
-replace p4_5 = . if inlist(p4_5, 8, 9)
-replace p4_6 = . if inlist(p4_6, 8, 9)
-replace p4_7 = . if inlist(p4_7, 8, 9)
-replace p4_8 = . if inlist(p4_8, 8, 9)
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local survey_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-drop if missing(item) | item == ""
-replace resp = . if resp == 3
-drop if missing(resp)
-sort id item
-drop p4_1 p4_2 p4_3 p4_4 p4_5 p4_6 p4_7 p4_8
-export delimited using "spain_2026_love_attitudes.csv", replace
-
-**# Bookmark 4: apps
-
-* ============================================================
-* apps (P16_1 to P16_7)
-* ============================================================
-
-use "spain_2026_love_master.dta", clear
-
-local survey_cols p16_1 p16_2 p16_3 p16_4 p16_5 p16_6 p16_7
-
-keep id cov_* `survey_cols'
-
-replace p16_1 = . if inlist(p16_1, 0, 8, 9)
-replace p16_2 = . if inlist(p16_2, 0, 8, 9)
-replace p16_3 = . if inlist(p16_3, 0, 8, 9)
-replace p16_4 = . if inlist(p16_4, 0, 8, 9)
-replace p16_5 = . if inlist(p16_5, 0, 8, 9)
-replace p16_6 = . if inlist(p16_6, 0, 8, 9)
-replace p16_7 = . if inlist(p16_7, 0, 8, 9)
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local survey_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-drop if missing(item) | item == ""
-replace resp = . if resp == 3
-drop if missing(resp)
-sort id item
-drop p16_1 p16_2 p16_3 p16_4 p16_5 p16_6 p16_7
-export delimited using "spain_2026_love_apps.csv", replace
-
-**# Bookmark 5: gestures
-
-* ============================================================
-* gestures (P7, P8, P9)
-* ============================================================
-
-use "spain_2026_love_master.dta", clear
-
-local survey_cols p7 p8 p9
-
-keep id cov_* `survey_cols'
-
+replace p2 = . if inlist(p2, 3, 8, 9)
 replace p7 = . if inlist(p7, 8, 9)
-replace p8 = . if inlist(p8, 8, 9)
-replace p9 = . if inlist(p9, 8, 9)
-
-tempfile long_data
-save `long_data', emptyok replace
-
-foreach var of local survey_cols {
-    preserve
-    keep id cov_* `var'
-    gen item = "`var'"
-    rename `var' resp
-    order id item resp cov_*
-    append using `long_data'
-    save `long_data', replace
-    restore
-}
-
-use `long_data', clear
-drop if missing(item) | item == ""
-drop if missing(resp)
-sort id item
-drop p7 p8 p9
-export delimited using "spain_2026_love_gestures.csv", replace
-
-**# Bookmark 6: conceptions
-
-* ============================================================
-* conceptions (P10, P11, P12, P13)
-* ============================================================
-
-use "spain_2026_love_master.dta", clear
-
-local survey_cols p10 p11 p12 p13
-
-keep id cov_* `survey_cols'
-
-replace p10 = . if inlist(p10, 8, 9)
 replace p11 = . if inlist(p11, 8, 9)
-replace p12 = . if inlist(p12, 8, 9)
-replace p13 = . if inlist(p13, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace
@@ -282,24 +69,26 @@ use `long_data', clear
 drop if missing(item) | item == ""
 drop if missing(resp)
 sort id item
-drop p10 p11 p12 p13
-export delimited using "spain_2026_love_conceptions.csv", replace
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_system.csv", replace
 
-**# Bookmark 7: usage
+**# Bookmark 2: parties
 
 * ============================================================
-* usage (P15, P15A, P15B)
+* parties (P3P_1 to P3P_5)
 * ============================================================
 
-use "spain_2026_love_master.dta", clear
+use "spain_2025_democracy_master.dta", clear
 
-local survey_cols p15 p15a p15b
+local survey_cols p3p_1 p3p_2 p3p_3 p3p_4 p3p_5
 
 keep id cov_* `survey_cols'
 
-replace p15 = . if inlist(p15, 8, 9)
-replace p15a = . if inlist(p15a, 0, 8, 9)
-replace p15b = . if inlist(p15b, 0, 8, 9)
+replace p3p_1 = . if inlist(p3p_1, 3, 8, 9)
+replace p3p_2 = . if inlist(p3p_2, 3, 8, 9)
+replace p3p_3 = . if inlist(p3p_3, 3, 8, 9)
+replace p3p_4 = . if inlist(p3p_4, 3, 8, 9)
+replace p3p_5 = . if inlist(p3p_5, 3, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace
@@ -319,23 +108,26 @@ use `long_data', clear
 drop if missing(item) | item == ""
 drop if missing(resp)
 sort id item
-drop p15 p15a p15b
-export delimited using "spain_2026_love_usage.csv", replace
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_parties.csv", replace
 
-**# Bookmark 8: desire
+**# Bookmark 3: internal
 
 * ============================================================
-* desire (P19, P22A)
+* internal (P3AP_1 to P3AP_5)
 * ============================================================
 
-use "spain_2026_love_master.dta", clear
+use "spain_2025_democracy_master.dta", clear
 
-local survey_cols p19 p22a
+local survey_cols p3ap_1 p3ap_2 p3ap_3 p3ap_4 p3ap_5
 
 keep id cov_* `survey_cols'
 
-replace p19 = . if inlist(p19, 0, 8, 9)
-replace p22a = . if inlist(p22a, 0, 8, 9)
+replace p3ap_1 = . if inlist(p3ap_1, 3, 8, 9)
+replace p3ap_2 = . if inlist(p3ap_2, 3, 8, 9)
+replace p3ap_3 = . if inlist(p3ap_3, 3, 8, 9)
+replace p3ap_4 = . if inlist(p3ap_4, 3, 8, 9)
+replace p3ap_5 = . if inlist(p3ap_5, 3, 8, 9)
 
 tempfile long_data
 save `long_data', emptyok replace
@@ -353,8 +145,207 @@ foreach var of local survey_cols {
 
 use `long_data', clear
 drop if missing(item) | item == ""
-replace resp = . if resp == 3
 drop if missing(resp)
 sort id item
-drop p19 p22a
-export delimited using "spain_2026_love_desire.csv", replace
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_internal.csv", replace
+
+**# Bookmark 4: judiciary
+
+* ============================================================
+* judiciary (P4JU_1 to P4JU_4)
+* ============================================================
+
+use "spain_2025_democracy_master.dta", clear
+
+local survey_cols p4ju_1 p4ju_2 p4ju_3 p4ju_4
+
+keep id cov_* `survey_cols'
+
+replace p4ju_1 = . if inlist(p4ju_1, 3, 8, 9)
+replace p4ju_2 = . if inlist(p4ju_2, 3, 8, 9)
+replace p4ju_3 = . if inlist(p4ju_3, 3, 8, 9)
+replace p4ju_4 = . if inlist(p4ju_4, 3, 8, 9)
+
+tempfile long_data
+save `long_data', emptyok replace
+
+foreach var of local survey_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_data'
+    save `long_data', replace
+    restore
+}
+
+use `long_data', clear
+drop if missing(item) | item == ""
+drop if missing(resp)
+sort id item
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_judiciary.csv", replace
+
+**# Bookmark 5: media
+
+* ============================================================
+* media (P5ME_1 to P5ME_4)
+* ============================================================
+
+use "spain_2025_democracy_master.dta", clear
+
+local survey_cols p5me_1 p5me_2 p5me_3 p5me_4
+
+keep id cov_* `survey_cols'
+
+replace p5me_1 = . if inlist(p5me_1, 3, 8, 9)
+replace p5me_2 = . if inlist(p5me_2, 3, 8, 9)
+replace p5me_3 = . if inlist(p5me_3, 3, 8, 9)
+replace p5me_4 = . if inlist(p5me_4, 3, 8, 9)
+
+tempfile long_data
+save `long_data', emptyok replace
+
+foreach var of local survey_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_data'
+    save `long_data', replace
+    restore
+}
+
+use `long_data', clear
+drop if missing(item) | item == ""
+drop if missing(resp)
+sort id item
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_media.csv", replace
+
+**# Bookmark 6: efficacy
+
+* ============================================================
+* efficacy (P8DE_1 to P8DE_4)
+* ============================================================
+
+use "spain_2025_democracy_master.dta", clear
+
+local survey_cols p8de_1 p8de_2 p8de_3 p8de_4
+
+keep id cov_* `survey_cols'
+
+replace p8de_1 = . if inlist(p8de_1, 3, 8, 9)
+replace p8de_2 = . if inlist(p8de_2, 3, 8, 9)
+replace p8de_3 = . if inlist(p8de_3, 3, 8, 9)
+replace p8de_4 = . if inlist(p8de_4, 3, 8, 9)
+
+tempfile long_data
+save `long_data', emptyok replace
+
+foreach var of local survey_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_data'
+    save `long_data', replace
+    restore
+}
+
+use `long_data', clear
+drop if missing(item) | item == ""
+drop if missing(resp)
+sort id item
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_efficacy.csv", replace
+
+**# Bookmark 7: trust
+
+* ============================================================
+* trust (P10GR_1 to P10GR_10)
+* ============================================================
+
+use "spain_2025_democracy_master.dta", clear
+
+local survey_cols p10gr_1 p10gr_2 p10gr_3 p10gr_4 p10gr_5 p10gr_6 p10gr_7 p10gr_8 p10gr_9 p10gr_10
+
+keep id cov_* `survey_cols'
+
+replace p10gr_1 = . if inlist(p10gr_1, 98, 99)
+replace p10gr_2 = . if inlist(p10gr_2, 98, 99)
+replace p10gr_3 = . if inlist(p10gr_3, 98, 99)
+replace p10gr_4 = . if inlist(p10gr_4, 98, 99)
+replace p10gr_5 = . if inlist(p10gr_5, 98, 99)
+replace p10gr_6 = . if inlist(p10gr_6, 98, 99)
+replace p10gr_7 = . if inlist(p10gr_7, 98, 99)
+replace p10gr_8 = . if inlist(p10gr_8, 98, 99)
+replace p10gr_9 = . if inlist(p10gr_9, 98, 99)
+replace p10gr_10 = . if inlist(p10gr_10, 98, 99)
+
+tempfile long_data
+save `long_data', emptyok replace
+
+foreach var of local survey_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_data'
+    save `long_data', replace
+    restore
+}
+
+use `long_data', clear
+drop if missing(item) | item == ""
+drop if missing(resp)
+sort id item
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_trust.csv", replace
+
+**# Bookmark 8: priorities
+
+* ============================================================
+* priorities (P12_1 to P12_8)
+* ============================================================
+
+use "spain_2025_democracy_master.dta", clear
+
+local survey_cols p12_1 p12_2 p12_3 p12_4 p12_5 p12_6 p12_7 p12_8
+
+keep id cov_* `survey_cols'
+
+replace p12_1 = . if inlist(p12_1, 8, 9)
+replace p12_2 = . if inlist(p12_2, 8, 9)
+replace p12_3 = . if inlist(p12_3, 8, 9)
+replace p12_4 = . if inlist(p12_4, 8, 9)
+replace p12_5 = . if inlist(p12_5, 8, 9)
+replace p12_6 = . if inlist(p12_6, 8, 9)
+replace p12_7 = . if inlist(p12_7, 8, 9)
+replace p12_8 = . if inlist(p12_8, 8, 9)
+
+tempfile long_data
+save `long_data', emptyok replace
+
+foreach var of local survey_cols {
+    preserve
+    keep id cov_* `var'
+    gen item = "`var'"
+    rename `var' resp
+    order id item resp cov_*
+    append using `long_data'
+    save `long_data', replace
+    restore
+}
+
+use `long_data', clear
+drop if missing(item) | item == ""
+drop if missing(resp)
+sort id item
+keep id cov_* item resp
+export delimited using "spain_2025_democracy_priorities.csv", replace
