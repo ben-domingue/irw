@@ -101,6 +101,17 @@ diff_itemtext <- function(table, gt, cand) {
   gt$item <- as.character(gt$item)
   cand$item <- as.character(cand$item)
 
+  # Redivis-stored itemtext entries sometimes lack an optional column entirely
+  # (e.g. no `instructions` column at all) rather than storing it all-NA --
+  # backfill any missing standard column on either side so collapse_item()
+  # and friends don't fail on a length-0 column.
+  standard_cols <- c("instrument", "instructions", "section_prompt",
+                      "item_text", "correct_response", "option_text")
+  for (col in standard_cols) {
+    if (!(col %in% names(gt))) gt[[col]] <- NA_character_
+    if (!(col %in% names(cand))) cand[[col]] <- NA_character_
+  }
+
   metrics_rows <- list()
   mismatch_rows <- list()
 
