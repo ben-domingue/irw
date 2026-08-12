@@ -1,13 +1,13 @@
 ## Plot table-count growth over time for the 3 core IRW datasets.
 ## Top panel: total tables across all 3 datasets combined.
 ## Bottom panel: each dataset separately.
-## Input: metadata/hotfixes/dataset_growth.csv (from dataset_growth.R)
-## Output: metadata/hotfixes/dataset_growth.png
+## Input: metadata/table_count/dataset_growth.csv (from dataset_growth.R)
+## Output: metadata/table_count/dataset_growth.png
 
 library(ggplot2)
 library(patchwork)
 
-growth <- read.csv("metadata/hotfixes/dataset_growth.csv")
+growth <- read.csv("dataset_growth.csv")
 growth$created_at <- as.POSIXct(growth$created_at, tz = "UTC")
 growth <- growth[order(growth$dataset, growth$created_at), ]
 
@@ -44,4 +44,4 @@ p_by_dataset <- ggplot(growth, aes(x = created_at, y = n_tables, color = dataset
 
 p <- p_total / p_by_dataset
 
-ggsave("metadata/hotfixes/dataset_growth.png", p, width = 8, height = 8, dpi = 150)
+ggsave("dataset_growth.png", p, width = 8, height = 8, dpi = 150)

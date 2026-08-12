@@ -1,6 +1,6 @@
 ## Pull timestamped table counts across every version of the 3 core IRW
 ## datasets on Redivis, for plotting growth over time.
-## Output: metadata/hotfixes/dataset_growth.csv
+## Output: metadata/table_count/dataset_growth.csv
 
 library(redivis)
 Sys.setenv(REDIVIS_API_TOKEN = trimws(readLines("~/.redivis_api_token", n = 1)))
@@ -34,4 +34,4 @@ for (name in datasets) {
 
 growth <- do.call(rbind, rows)
 growth <- growth[order(growth$dataset, growth$created_at), ]
-write.csv(growth, "metadata/hotfixes/dataset_growth.csv", row.names = FALSE)
+write.csv(growth, "dataset_growth.csv", row.names = FALSE)
