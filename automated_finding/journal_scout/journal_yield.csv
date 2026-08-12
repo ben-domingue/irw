@@ -1,0 +1,298 @@
+journal,issn_l,publisher,in_pmc,pmc_deposit_scope_proxy,year,n_records,n_fulltext,n_oa,pct_fulltext,pct_oa,springer_oa_n,sample_n,pct_with_supp,pct_with_data_like_supp,pct_data_like_ambiguous_only,median_data_files,pct_cc_by,pct_cc_by_nc,pct_cc_by_nc_nd,pct_license_other,pct_license_unknown
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2015,29765,29765,29765,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2016,23022,23022,23022,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2017,21150,21150,21150,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2018,18833,18833,18833,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2019,16227,16225,16225,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2020,16684,16682,16682,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2021,16625,16623,16623,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2022,16068,16066,16065,1.0,1.0,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2023,15030,14926,14926,0.993,0.993,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2024,17792,17571,17570,0.988,0.988,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS ONE,1932-6203,Public Library of Science,TRUE,0.993,2025,19600,19550,19550,0.997,0.997,,100,96.0,24.0,7.0,1,98.0,0.0,0.0,2.0,0.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2015,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2016,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2017,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2018,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2019,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2020,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2021,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2022,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,UNKNOWN,,2023,0,0,0,,,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,TRUE,,2024,124,122,122,0.984,0.984,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Mental Health,2837-8156,Public Library of Science,TRUE,,2025,293,292,291,0.997,0.993,,100,91.0,24.0,1.0,1,97.0,0.0,0.0,0.0,3.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2015,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2016,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2017,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2018,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2019,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,UNKNOWN,0.992,2020,0,0,0,,,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,TRUE,0.992,2021,53,53,53,1.0,1.0,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,TRUE,0.992,2022,759,758,758,0.999,0.999,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,TRUE,0.992,2023,1059,1051,1051,0.992,0.992,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,TRUE,0.992,2024,1094,1081,1080,0.988,0.987,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Global Public Health,2767-3375,Public Library of Science,TRUE,0.992,2025,1145,1143,1143,0.998,0.998,,100,92.0,31.0,0.0,1,97.0,0.0,0.0,3.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2015,155,155,155,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2016,271,271,271,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2017,274,274,274,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2018,239,239,239,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2019,290,290,290,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2020,343,343,343,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2021,335,335,335,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2022,237,237,237,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2023,175,174,174,0.994,0.994,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2024,158,158,158,1.0,1.0,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Medicine,1549-1277,Public Library of Science,TRUE,0.994,2025,195,194,194,0.995,0.995,,100,83.0,19.0,3.0,2,94.0,0.0,0.0,6.0,0.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2015,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2016,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2017,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2018,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2019,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2020,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,UNKNOWN,0.995,2021,0,0,0,,,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,TRUE,0.995,2022,121,121,120,1.0,0.992,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,TRUE,0.995,2023,200,199,199,0.995,0.995,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,TRUE,0.995,2024,239,239,239,1.0,1.0,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+PLOS Digital Health,2767-3170,Public Library of Science,TRUE,0.995,2025,329,328,328,0.997,0.997,,100,89.0,15.0,1.0,1,93.0,0.0,0.0,6.0,1.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2015,2026,2026,2026,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2016,2127,2127,2127,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2017,2311,2311,2311,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2018,2729,2729,2729,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2019,3019,3019,3019,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2020,3845,3845,3845,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2021,6440,6440,6440,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2022,8532,8532,8532,1.0,1.0,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2023,5003,4982,4982,0.996,0.996,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2024,3583,3524,3524,0.984,0.984,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+Frontiers in Psychology,1664-1078,Frontiers Media SA,TRUE,0.996,2025,4270,4254,4254,0.996,0.996,,100,81.0,3.0,1.0,1,100.0,0.0,0.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2015,47,47,47,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2016,61,61,61,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2017,41,41,41,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2018,62,62,62,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2019,91,91,91,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2020,135,135,135,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2021,202,202,202,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2022,323,323,323,1.0,1.0,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2023,447,445,445,0.996,0.996,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2024,800,792,792,0.99,0.99,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Psychology,2050-7283,Springer (Biomed Central Ltd.),TRUE,0.996,2025,1567,1564,1564,0.998,0.998,,100,87.0,2.0,0.0,1,50.0,0.0,50.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2015,1322,1322,1322,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2016,1247,1247,1247,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2017,1078,1078,1078,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2018,1321,1321,1321,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2019,1763,1763,1763,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2020,1921,1921,1921,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2021,2338,2338,2338,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2022,2463,2463,2462,1.0,1.0,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2023,2564,2560,2560,0.998,0.998,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2024,3632,3592,3592,0.989,0.989,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Public Health,1471-2458,Springer (Biomed Central Ltd.),TRUE,0.998,2025,4859,4845,4845,0.997,0.997,,100,88.0,6.0,2.0,1,58.0,0.0,42.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2015,108,108,108,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2016,174,174,174,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2017,181,181,181,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2018,180,180,180,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2019,246,246,246,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2020,299,299,299,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2021,287,287,287,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2022,339,339,339,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2023,302,302,302,1.0,1.0,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2024,326,324,324,0.994,0.994,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+BMC Medical Research Methodology,1471-2288,Springer (Biomed Central Ltd.),TRUE,1.0,2025,299,298,298,0.997,0.997,,100,91.0,9.0,4.0,2,71.0,0.0,29.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2015,802,802,802,1.0,1.0,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2016,1294,1294,1294,1.0,1.0,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2017,1377,1377,1377,1.0,1.0,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2018,1933,1933,1933,1.0,1.0,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2019,2124,2124,2121,1.0,0.999,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2020,2264,2264,2263,1.0,1.0,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2021,2115,2115,2109,1.0,0.997,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2022,1855,1855,1853,1.0,0.999,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2023,2106,2081,2080,0.988,0.988,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2024,2011,1995,1994,0.992,0.992,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+PeerJ,2167-8359,PeerJ,TRUE,0.988,2025,1775,1745,1741,0.983,0.981,,100,98.0,79.0,9.0,1,97.0,3.0,0.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2015,10938,10938,10934,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2016,21056,21056,21055,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2017,25341,25341,25341,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2018,18166,18166,18166,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2019,20424,20424,20424,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2020,22463,22463,22461,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2021,24534,24534,24534,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2022,22653,22653,22653,1.0,1.0,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2023,23108,23029,23029,0.997,0.997,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2024,32221,31872,31872,0.989,0.989,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Scientific Reports,2045-2322,Springer Science and Business Media LLC,TRUE,0.997,2025,48695,48616,48615,0.998,0.998,,100,96.0,20.0,3.0,1,29.0,0.0,71.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2015,251,251,251,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2016,426,426,426,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2017,682,682,682,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2018,1029,1029,1029,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2019,717,717,717,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2020,677,677,677,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2021,669,669,669,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2022,564,564,564,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2023,596,596,596,1.0,1.0,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2024,655,654,654,0.998,0.998,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Royal Society Open Science,2054-5703,The Royal Society,TRUE,1.0,2025,624,623,623,0.998,0.998,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2015,29,29,28,1.0,0.966,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2016,159,159,159,1.0,1.0,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2017,268,268,268,1.0,1.0,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2018,594,594,592,1.0,0.997,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2019,1971,1971,1959,1.0,0.994,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2020,2721,2721,2708,1.0,0.995,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2021,2850,2850,2828,1.0,0.992,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2022,4006,4005,3996,1.0,0.998,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2023,11247,11172,10511,0.993,0.935,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2024,17664,17382,17285,0.984,0.979,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Heliyon,2405-8440,Elsevier,TRUE,0.993,2025,1894,1861,1254,0.983,0.662,,100,97.0,4.0,1.0,3,30.0,26.0,44.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),UNKNOWN,0.986,2015,0,0,0,,,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2016,33,33,33,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2017,49,49,49,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2018,53,53,53,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2019,48,48,48,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2020,64,64,64,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2021,83,83,83,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2022,104,104,104,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2023,73,72,72,0.986,0.986,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2024,82,81,81,0.988,0.988,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Cognitive Research: Principles and Implications,2365-7464,Springer (Biomed Central Ltd.),TRUE,0.986,2025,86,86,86,1.0,1.0,,100,93.0,1.0,0.0,2,99.0,0.0,1.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2015,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2016,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2017,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2018,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2019,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2020,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",UNKNOWN,1.0,2021,0,0,0,,,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",TRUE,1.0,2022,1,1,0,1.0,0.0,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",TRUE,1.0,2023,19,19,19,1.0,1.0,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",TRUE,1.0,2024,12,12,12,1.0,1.0,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Open Psychology Data,2050-9863,"Ubiquity Press, Ltd.",TRUE,1.0,2025,6,6,6,1.0,1.0,,37,91.9,8.1,5.4,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,UNKNOWN,1.0,2015,0,0,0,,,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2016,3,3,3,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2017,34,34,34,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2018,53,53,53,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2019,27,27,27,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2020,43,43,43,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2021,63,63,63,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2022,134,134,134,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2023,221,221,221,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2024,131,131,131,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Journal of Intelligence,2079-3200,MDPI AG,TRUE,1.0,2025,164,164,164,1.0,1.0,,100,78.0,15.0,15.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2015,35,35,35,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2016,30,30,30,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2017,87,87,87,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2018,117,117,117,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2019,178,178,178,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2020,174,174,174,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2021,187,187,187,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2022,549,549,549,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2023,1010,1008,1008,0.998,0.998,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2024,1239,1239,1239,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavioral Sciences,2076-328X,MDPI AG,TRUE,0.998,2025,1784,1784,1784,1.0,1.0,,100,84.0,12.0,12.0,1,100.0,0.0,0.0,0.0,0.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2015,112,23,10,0.205,0.089,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2016,129,26,17,0.202,0.132,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2017,174,38,23,0.218,0.132,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2018,181,45,38,0.249,0.21,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2019,181,63,51,0.348,0.282,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2020,200,80,67,0.4,0.335,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2021,286,163,143,0.57,0.5,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2022,287,166,153,0.578,0.533,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2023,277,170,155,0.614,0.56,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2024,240,160,153,0.667,0.637,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Behavior Research Methods,1554-351X,Springer - Psychonomic Society,TRUE,0.614,2025,341,211,208,0.619,0.61,,100,97.0,1.0,0.0,1,99.0,0.0,0.0,0.0,1.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2015,85,13,0,0.153,0.0,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2016,136,20,1,0.147,0.007,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2017,126,24,7,0.19,0.056,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2018,80,21,4,0.263,0.05,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2019,93,23,8,0.247,0.086,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2020,124,31,15,0.25,0.121,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2021,153,49,31,0.32,0.203,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2022,92,36,27,0.391,0.293,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2023,119,49,34,0.412,0.286,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2024,99,42,31,0.424,0.313,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Assessment,1073-1911,SAGE Publications,TRUE,0.412,2025,109,25,21,0.229,0.193,,86,100.0,0.0,0.0,,73.3,26.7,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2015,50,50,1,1.0,0.02,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2016,71,71,1,1.0,0.014,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2017,45,45,3,1.0,0.067,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2018,26,26,0,1.0,0.0,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2019,56,56,3,1.0,0.054,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2020,52,52,5,1.0,0.096,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2021,57,57,9,1.0,0.158,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2022,54,54,11,1.0,0.204,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2023,43,43,16,1.0,0.372,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2024,36,36,10,1.0,0.278,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+Educational and Psychological Measurement,0013-1644,SAGE Publications,TRUE,1.0,2025,52,33,17,0.635,0.327,,43,100.0,0.0,0.0,,53.5,46.5,0.0,0.0,0.0
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2015,0,0,0,,,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2016,0,0,0,,,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2017,0,0,0,,,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,TRUE,1.0,2018,1,1,0,1.0,0.0,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,TRUE,1.0,2019,2,2,0,1.0,0.0,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,TRUE,1.0,2020,3,3,0,1.0,0.0,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2021,0,0,0,,,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,TRUE,1.0,2022,1,1,0,1.0,0.0,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,TRUE,1.0,2023,1,1,0,1.0,0.0,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2024,0,0,0,,,,,,,,,,,,,
+European Journal of Psychological Assessment,1015-5759,Hogrefe Publishing Group,UNKNOWN,1.0,2025,0,0,0,,,,,,,,,,,,,
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2015,42,42,0,1.0,0.0,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2016,46,46,0,1.0,0.0,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2017,55,55,4,1.0,0.073,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2018,58,58,3,1.0,0.052,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2019,26,26,1,1.0,0.038,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2020,28,28,2,1.0,0.071,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2021,34,34,5,1.0,0.147,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2022,50,50,12,1.0,0.24,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2023,24,24,3,1.0,0.125,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2024,29,29,7,1.0,0.241,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Applied Psychological Measurement,0146-6216,SAGE Publications,TRUE,1.0,2025,38,33,13,0.868,0.342,,23,91.3,13.0,13.0,1,65.2,34.8,0.0,0.0,0.0
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2015,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2016,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2017,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2018,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2019,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2020,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2021,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2022,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),TRUE,1.0,2023,1,1,0,1.0,0.0,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2024,0,0,0,,,,,,,,,,,,,
+Journal of Educational Measurement,0022-0655,Wiley (Blackwell Publishing),UNKNOWN,1.0,2025,0,0,0,,,,,,,,,,,,,
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2015,42,7,5,0.167,0.119,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2016,61,10,4,0.164,0.066,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2017,43,4,0,0.093,0.0,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2018,41,4,1,0.098,0.024,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2019,40,12,8,0.3,0.2,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2020,41,19,15,0.463,0.366,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2021,76,33,31,0.434,0.408,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2022,70,38,32,0.543,0.457,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2023,45,21,21,0.467,0.467,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2024,48,20,20,0.417,0.417,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Psychometrika,0033-3123,Cambridge University Press,TRUE,0.467,2025,96,94,94,0.979,0.979,,100,91.0,11.0,10.0,1,88.0,3.0,2.0,7.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2015,63,11,0,0.175,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2016,74,14,0,0.189,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2017,44,10,1,0.227,0.023,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2018,73,7,1,0.096,0.014,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2019,111,17,0,0.153,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2020,65,9,0,0.138,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2021,55,4,0,0.073,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2022,44,1,0,0.023,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2023,62,13,4,0.21,0.065,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2024,62,14,5,0.226,0.081,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Multivariate Behavioral Research,0027-3171,Informa UK (Taylor & Francis),TRUE,0.21,2025,68,3,0,0.044,0.0,,9,77.8,22.2,22.2,20,66.7,0.0,33.3,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2015,92,15,4,0.163,0.043,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2016,99,15,10,0.152,0.101,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2017,103,19,10,0.184,0.097,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2018,106,21,13,0.198,0.123,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2019,111,27,18,0.243,0.162,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2020,132,35,25,0.265,0.189,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2021,167,70,58,0.419,0.347,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2022,120,62,59,0.517,0.492,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2023,120,51,46,0.425,0.383,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2024,165,75,69,0.455,0.418,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+Memory & Cognition,0090-502X,Springer - Psychonomic Society,TRUE,0.425,2025,150,84,79,0.56,0.527,,100,94.0,0.0,0.0,,100.0,0.0,0.0,0.0,0.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2015,222,48,18,0.216,0.081,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2016,210,54,23,0.257,0.11,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2017,206,38,22,0.184,0.107,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2018,171,30,17,0.175,0.099,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2019,219,77,47,0.352,0.215,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2020,356,124,94,0.348,0.264,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2021,228,106,93,0.465,0.408,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2022,228,118,95,0.518,0.417,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2023,194,95,90,0.49,0.464,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2024,164,86,78,0.524,0.476,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0
+"Attention, Perception & Psychophysics",1943-3921,Springer - Psychonomic Society,TRUE,0.49,2025,202,101,97,0.5,0.48,,100,96.0,0.0,0.0,,99.0,0.0,0.0,0.0,1.0

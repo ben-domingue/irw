@@ -32,6 +32,19 @@ human_review_*.csv
 # Scratch / test run outputs
 test_*.csv
 
+# irw_discover_pmc.py triage output — regenerable, same lifecycle as the
+# candidates*.csv / irw_triage*.csv patterns above.
+pmc_triage*.csv
+pmc_test*.csv
+
+# journal_scout/ raw API response cache — regenerable (skip-if-exists reruns
+# rebuild it), and grows large (~40MB) since it holds one JSON file per
+# journal/year/query-variant and per sampled article. The CSVs it feeds
+# (journals_resolved.csv, step2_yearly_counts.csv, step3_supp_manifest.csv,
+# step4_license.csv, journal_yield.csv, journal_yield_summary.md) are the
+# actual deliverables and stay tracked.
+journal_scout/cache/
+
 # Python
 __pycache__/
 *.pyc
