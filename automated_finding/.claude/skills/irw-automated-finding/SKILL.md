@@ -63,8 +63,29 @@ same way if missing.
    relocated into `automated_finding/` after the user couldn't locate them).
    `license_blocked_candidates.csv` and prior `human_review_*.csv`/
    `biblio_*.csv` files already follow this repo-tracked pattern.
+5. **Pick a discovery mode before running anything.** There are three
+   independent, non-overlapping discovery sources, each with its own
+   script, journal/repo scope, and term-recycling pool — check which one
+   the user means (they may say "PLOS", name a specific journal from
+   `irw_discover_pmc.py`'s `JOURNALS`, or just say "find candidates" /
+   "run discovery", which defaults to the repo-based mode below). If it's
+   genuinely ambiguous, ask rather than guessing:
 
-## Step 1 — Discover
+   1. **PLOS journals** — `irw_discover_plos.py`. See "Alternate discovery
+      source: single-journal search (PLOS ONE)" below.
+   2. **The Europe-PMC-covered journals** — `irw_discover_pmc.py` (PeerJ,
+      Scientific Reports, and the rest of `JOURNALS` — deliberately *not*
+      PLOS, which stays on mode 1). See "Alternate discovery source:
+      Europe-PMC-based multi-journal search" below.
+   3. **Data repositories** (Dataverse/Zenodo/OSF/Dryad/Figshare/...) —
+      `irw_discover_updated.py`, Steps 1-4 immediately below.
+
+   These three pull from disjoint search surfaces, so a term already run
+   against one is *not* a duplicate query against another — each has its
+   own term-recycling rule (see the "Term selection" note in each mode's
+   section) rather than one shared one.
+
+## Step 1 — Discover (mode 3: data repositories)
 
 ```bash
 python irw_discover_updated.py "search term 1" "search term 2" --out candidates.csv
@@ -250,7 +271,7 @@ There is no `cleaned_index.csv` to update (eliminated 2026-06-24) —
 `BATCH_LOG.md` is the record of what's been cleaned, uploaded, and
 biblio-entered per batch.
 
-## Alternate discovery source: single-journal search (PLOS ONE)
+## Alternate discovery source: single-journal search (PLOS ONE) (mode 1)
 
 `irw_discover_plos.py` is a different discovery mode from Steps 1-4 above,
 not a variant of them — it searches a single open-access *journal* rather
@@ -342,7 +363,7 @@ python irw_discover_plos.py "term1" "term2" --out plos_triage.csv --resume   # a
   `container-title` + bibliographic query), same as this pilot did before
   committing to a full run.
 
-## Alternate discovery source: Europe-PMC-based multi-journal search
+## Alternate discovery source: Europe-PMC-based multi-journal search (mode 2)
 
 `irw_discover_pmc.py` generalizes the single-journal-search idea above to
 any journal that's well-indexed in Europe PMC, without writing a new
