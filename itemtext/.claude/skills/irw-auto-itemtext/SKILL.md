@@ -95,6 +95,29 @@ dataset's own repository page) before giving up.
 Cache anything fetched (PDF or scraped page text) under `itemtext/.cache/<table>/` so a
 retry on a rate-limited or slow source doesn't refetch it.
 
+### Step 3b — Verify the table name/description actually matches what you found
+
+Before extracting, check that the instrument you're about to transcribe is the one the
+table is actually built from — don't assume the table name or dictionary Description
+names the right instrument just because it's the obvious reading of the source paper.
+A paper commonly administers several instruments (a named scale plus demographic/
+comorbidity checklists, or several scales in the same battery), and the table name can
+end up describing the wrong one. Cross-check the live `item`/`resp` values from Step 2
+against what you're about to transcribe: does the item count, response range, and item
+content actually match the named instrument, or does it look like a different measure
+from the same study? Real examples hit in testing: a table named for a kinesiophobia
+scale (TSK-17) whose live items were actually a baseline comorbidity checklist from the
+same paper's Table I; a table named for the Insomnia Severity Index whose live items
+were actually that study's PHQ-9; a table named for the FAD-Plus whose live items were
+actually the Rosenberg Self-Esteem Scale administered alongside it. In each case the
+live data matched a *different* instrument in the same source than the one implied by
+the table name.
+
+If you find a mismatch: extract against what the live data actually is (not what the
+name implies), set the `instrument` field to the correct instrument name, and log it via
+Step 6b so the table name/dictionary Description can be corrected — don't force-fit the
+extraction to match the table's name.
+
 ## Step 4 — Extract and structure
 
 Build the 4-tab structure (see `references/itemtext_standard.md` for exact columns),
