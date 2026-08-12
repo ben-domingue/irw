@@ -73,16 +73,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   scales). See `BATCH_LOG.md`'s "worth_retrying review — pmc1/plos26/pmc2"
   entry for per-paper detail.
 
-- [ ] **`automated_finding/biblio_pmc_deferred.csv`** (30 rows, 9 papers ->
+- [x] **`automated_finding/biblio_pmc_deferred.csv`** (30 rows, 9 papers ->
   30 tables, from resolving all 14 candidates in the now-deleted
-  `pmc_deferred_candidates.csv`, 2026-08-12) needs to be uploaded to
-  Redivis and pasted into the dictionary sheet — standard pattern, not yet
-  confirmed done by ben-domingue. Don't delete this file (or the 30
-  `irw_output/*.csv` files it covers) until that's confirmed. See
-  `BATCH_LOG.md`'s "Resolution of the 14 deferred PMC candidates" entry
-  for full per-paper detail, including why 5 of the 14 were skipped (3 for
-  the new N<100 floor, 1 for turning out to be aggregate-only data after a
-  successful fetch retry, 1 for real GPS-coordinate PII).
+  `pmc_deferred_candidates.csv`, 2026-08-12) uploaded to Redivis and
+  pasted into the dictionary sheet (confirmed 2026-08-12, ben-domingue);
+  file and all 30 `irw_output/*.csv` files removed. See `BATCH_LOG.md`'s
+  "Resolution of the 14 deferred PMC candidates" entry for full per-paper
+  detail, including why 5 of the 14 were skipped (3 for the new N<100
+  floor, 1 for turning out to be aggregate-only data after a successful
+  fetch retry, 1 for real GPS-coordinate PII).
 
 - [x] **`automated_finding/biblio_plos_batch25.csv`** (23 rows, 6 papers ->
   23 tables, from PLOS ONE batch 25's `good` (3 fresh) + `worth_retrying`
