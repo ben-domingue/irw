@@ -259,29 +259,48 @@ curation, the curation was the stale one, not the extraction.
    This compares the staged extraction against `irw::irw_itemtext(table)` (current
    curation) using the same edit-ratio/Jaccard/resp-set-alignment/swap-tolerant
    instructions-section_prompt logic validated across the 100-table eval, and prints a
-   suggested classification (`confirm` or `review`) plus an itemized mismatch list.
-4. **Route the result**:
-   - **`confirm`** (no meaningful diff): append one row to `itemtext/audit_confirmed.csv`
-     (columns `table,date,note`; create with a header if it doesn't exist) and stop — no
-     Redivis write. Don't re-audit this table again unless asked to.
-   - **`review`, and the diff looks like a genuine correction** (fresh extraction matches
-     a live `irw::irw_fetch(table)` check where curation has a gap — missing items,
-     missing `resp` categories, a stale resp range, etc.): leave the diff report at
-     `itemtext/audit_pending_review/<table>_diff.md` and tell the user it's ready for
-     review — **never run `upload.py` on an audit-mode table without the user's explicit
-     per-table or per-batch approval first**, since `upload.py` replaces a table's entire
-     content on conflict (no row-level merge) — a wrong auto-replace can't be partially
-     undone. Only after approval, copy the approved tables' CSVs from `audit_staging/`
-     into a clean temp directory and run `python3 upload.py <tempdir>`.
-   - **`review`, but it's a genuine judgment call** (terseness-style difference, a
-     table-name mismatch per Step 3b, or any other case where neither version is clearly
-     more correct): log it via Step 6b (`itemtext/pending_index_notes.csv`) instead of
-     queuing it as a replace-candidate.
-5. **Diff-quality caveat**: `diff_itemtext.R`'s `confirm`/`review` split is mechanical
-   (similarity thresholds) — treat it as a starting triage, not a final answer. A
-   `review` result still needs a human judgment call on which of the two outcomes above
-   it belongs to; read the actual mismatches before deciding, the same way the eval's
-   diagnosis sessions did.
+   suggested classification (`confirm` or `review`) plus an itemized mismatch list. This
+   split is mechanical (similarity thresholds) — treat it as a starting triage, not a
+   final answer; every `review` result needs the human judgment call in step 4 below,
+   reading the actual mismatches rather than trusting the label.
+4. **Route the result into one of four statuses** (not just confirm/review — a `review`
+   result always resolves into exactly one of green/yellow/red/gray):
+   - 🟢 **Green** — `confirm`, or a `review` where the mismatches turn out to be noise
+     (e.g. cosmetic wording, not substance). Append one row to
+     `itemtext/audit_confirmed.csv` (columns `table,date,note`; create with a header if it
+     doesn't exist) and stop — no Redivis write, no further action unless re-audited later.
+   - 🔴 **Red** — the diff shows a genuine, evidence-backed problem with the *curated*
+     version (fresh extraction matches a live `irw::irw_fetch(table)` check where curation
+     has a gap — missing items, missing `resp` categories, a stale resp range, items that
+     don't exist in live data, etc.) that needs human review and likely replacement. File
+     a GitHub issue (`gh issue create --repo ben-domingue/irw --label "data fix" --label
+     "ITEMS"`, title `` `table_name` <short description> ``, body with Summary/Evidence/
+     Recommended fix sections — see #1594/#1600-1607 for the template) **and** list it in
+     the batch report. **Never run `upload.py` on an audit-mode table without the user's
+     explicit per-table or per-batch approval first** — filing the issue is not the same
+     as approval to replace; `upload.py` replaces a table's entire content on conflict (no
+     row-level merge), so nothing gets auto-uploaded. Only after explicit approval, copy
+     the approved tables' CSVs from `audit_staging/` into a clean temp directory and run
+     `python3 upload.py <tempdir>`.
+   - 🟡 **Yellow** — the curated version is fine to keep as-is, but there's a specific,
+     articulable limitation worth telling website users about (e.g. some items aren't
+     documented in the one source checked, a translation is independently-derived rather
+     than verbatim-sourced) — distinct from red because there's no evidence the curated
+     content is *wrong*, just an honest caveat about what was and wasn't confirmed. Draft
+     the exact `.qmd` `.callout-warning` block for `itemtext_issues.qmd` (match the
+     existing page's format — see batch01_pilot.md for a worked example) and include it in
+     the batch report for later extraction to the website; don't edit
+     `itemtext_issues.qmd` directly as part of this routine.
+   - ⚪ **Gray** — could not be independently confirmed at all (source blocked, no primary
+     material found, or a same-instrument-different-source-language ambiguity like
+     `mpsycho_rogers_ocd`'s wording variant) and there's *no evidence either way* — not
+     confirmed clean (so not green) and no specific issue to document (so not yellow).
+     Log via Step 6b (`itemtext/pending_index_notes.csv`) as a candidate for retry later
+     with a different source, not as a resolved outcome.
+5. **Batch report**: write one `itemtext/audit_batch_reports/batchNN_<label>.md` per
+   audit-mode run, using `batch01_pilot.md` as the template — a summary count table, then
+   one section per status with the per-table detail (including yellow's ready-to-paste
+   website text and red's issue links).
 
 ## Batch behavior
 
@@ -293,9 +312,9 @@ curation, the curation was the stale one, not the extraction.
   redirect before continuing.
 - **"Audit itemtext"** — same pacing caveat as the queue: Step 3's lookup is still the
   slow part, so process a handful of already-done tables per session (start with a small
-  pilot batch before committing to all ~421), report the confirm/review/document
-  breakdown, and let the user redirect rather than trying to reprocess everything
-  unattended.
+  pilot batch before committing to all ~421), write the batch report (green/yellow/red/gray
+  breakdown per the Audit mode section above), and let the user redirect rather than
+  trying to reprocess everything unattended.
 
 ## Expect a real "couldn't fully automate this one" bucket
 
