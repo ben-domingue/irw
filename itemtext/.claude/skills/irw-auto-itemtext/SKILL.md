@@ -95,6 +95,27 @@ dataset's own repository page) before giving up.
 Cache anything fetched (PDF or scraped page text) under `itemtext/.cache/<table>/` so a
 retry on a rate-limited or slow source doesn't refetch it.
 
+**If the dictionary URL points at a CRAN package** (MPsychoR, psychTools, psychotools,
+PCMRS, etc.), check the package's own `Rd_db()` documentation before searching for a
+paper — it's faster and more authoritative than reconstructing item wording from a paper
+citation:
+```r
+library(tools)
+db <- Rd_db("MPsychoR")
+Rd2txt(db[["Dataset.Rd"]])
+```
+This has recovered full verbatim item wording directly for several tables across this
+skill's use.
+
+**If a source codebook is an old binary `.doc` file (not `.docx`)**, Python's
+`zipfile`-based `.docx` parser can't read it — convert it first:
+```bash
+soffice --headless --convert-to txt file.doc
+```
+LibreOffice is available in this environment; this has recovered otherwise-inaccessible
+codebook text (e.g. old Florida Twin Project codebooks) that would otherwise look like a
+dead end.
+
 ### Step 3b — Verify the table name/description actually matches what you found
 
 Before extracting, check that the instrument you're about to transcribe is the one the
@@ -111,7 +132,12 @@ same paper's Table I; a table named for the Insomnia Severity Index whose live i
 were actually that study's PHQ-9; a table named for the FAD-Plus whose live items were
 actually the Rosenberg Self-Esteem Scale administered alongside it. In each case the
 live data matched a *different* instrument in the same source than the one implied by
-the table name.
+the table name. A subtler variant: a table named for the Reading the Mind in the Eyes
+Test (RMET) whose live items were actually the Imposing Memory Task, a distinct
+secondary Theory-of-Mind measure from the same paper — here both instruments were
+independently plausible names for the paper's ToM battery, so the mismatch only showed
+up by checking the live item content (story-vignette text, not eye-photo trials) against
+what RMET items actually look like, not by the name alone looking obviously wrong.
 
 If you find a mismatch: extract against what the live data actually is (not what the
 name implies), set the `instrument` field to the correct instrument name, and log it via
@@ -191,6 +217,12 @@ mismatched values instead of just TRUE/FALSE. It checks:
 - `unique(resp)` matches `irw::irw_fetch(table)$resp` exactly (skipped, by design, when
   the table uses `raw_resp` instead because no scoring key was recoverable).
 
+**Also check row count per item** (`table(gt$item)` on the live data) even when the item
+*set* matches exactly — a matching set doesn't rule out one item code silently standing
+in for two different questions. This caught a real case where one item had 4x the row
+count of every other item because it was quietly conflating two distinct questions under
+one code; content review alone didn't surface it, the row-count anomaly did.
+
 **Do not force a match.** If the paper discloses a different item count than the live
 data (e.g. `fivpei_perrig_2023_attdiff`: 28 items per the paper vs. 21 in the data, noted
 in the index sheet), or text can't be fully recovered for every item, emit whatever
@@ -262,7 +294,14 @@ curation, the curation was the stale one, not the extraction.
    suggested classification (`confirm` or `review`) plus an itemized mismatch list. This
    split is mechanical (similarity thresholds) — treat it as a starting triage, not a
    final answer; every `review` result needs the human judgment call in step 4 below,
-   reading the actual mismatches rather than trusting the label.
+   reading the actual mismatches rather than trusting the label. **When eyeballing
+   `irw::irw_itemtext()` or `irw::irw_fetch()` output manually (outside the scripts
+   above)**, always use `nrow()`/explicit `unique()` on the exact columns needed rather
+   than scanning a bare `print()` or `head()` — a tibble's default print truncates to 10
+   rows, and a truncated view has caused both a false "mismatch" alarm (an alphabetically-
+   first subset of items looked like the wrong instrument until the full set was pulled)
+   and an overstated real finding (claiming a field was "entirely missing" when a
+   truncated print just hadn't shown the populated rows).
 4. **Route the result into one of four statuses** (not just confirm/review — a `review`
    result always resolves into exactly one of green/yellow/red/gray):
    - 🟢 **Green** — `confirm`, or a `review` where the mismatches turn out to be noise
@@ -276,7 +315,12 @@ curation, the curation was the stale one, not the extraction.
      a GitHub issue (`gh issue create --repo ben-domingue/irw --label "data fix" --label
      "ITEMS"`, title `` `table_name` <short description> ``, body with Summary/Evidence/
      Recommended fix sections — see #1594/#1600-1607 for the template) **and** list it in
-     the batch report. **Never run `upload.py` on an audit-mode table without the user's
+     the batch report. **If the problem looks like it could be systemic** (a mislabeled
+     instrument, a swapped dictionary field) rather than a one-off, check sibling tables
+     from the same paper/project before writing the issue — every apparent mislabel found
+     across this skill's use turned out to be isolated to the one table once siblings were
+     checked, so note in the issue whether you verified that (and how), rather than
+     leaving it open-ended. **Never run `upload.py` on an audit-mode table without the user's
      explicit per-table or per-batch approval first** — filing the issue is not the same
      as approval to replace; `upload.py` replaces a table's entire content on conflict (no
      row-level merge), so nothing gets auto-uploaded. Only after explicit approval, copy
