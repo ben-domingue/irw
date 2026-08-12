@@ -3,3 +3,6 @@ suicide_reinbergs_2025_gad,2026-08-12,"Fresh extraction (standard GAD-2, Spitzer
 mpsycho_learnemo,2026-08-12,"Fresh extraction from MPsychoR::learnemo package docs matches current curation exactly -- 0 mismatches, all fields 1.0 similarity."
 mhscdc_fried_2020_conscientiousness,2026-08-12,"Fresh extraction from Measures_Baseline.pdf (OSF mvdpe) matches current curation -- 0.99 item_text similarity (minor punctuation diffs only), 1.0 option_text."
 mhscdc_fried_2020_loneliness,2026-08-12,"Fresh extraction from Measures_Baseline.pdf (OSF mvdpe) matches current curation -- 0.99 item_text similarity, 1.0 option_text. Confirms the 5-item live table is a subset of the full 8-item UCLA loneliness scale (matches source exactly, not a discrepancy)."
+alsecypiamh_wu_2022_pei,2026-08-12,"Fresh extraction (standard Gallup Positive Experience Index wording, independently recalled/verified) matches current curation exactly -- 0 mismatches, all fields 1.0 similarity."
+florida_twins_panas,2026-08-12,"Fresh extraction from W1_Child codebook LDBase.docx (same source as florida_twins_friends) matches current curation exactly -- 0 mismatches, all fields 1.0 similarity."
+gilbert_meta_87,2026-08-12,"Fresh extraction from Trexler 2025 preprint (OSF, Appendix B.4 Survey Questionnaires) matches current curation exactly -- 0 mismatches, all 11 item stems verbatim match."
