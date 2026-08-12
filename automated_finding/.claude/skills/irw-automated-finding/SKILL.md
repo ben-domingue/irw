@@ -51,17 +51,22 @@ same way if missing.
    already been decided" — read both, but they answer different questions.
 3. Read `search_terms_log.csv` — the permanent record of every query already
    run through `irw_discover_updated.py`. Only add genuinely new terms.
-4. Note: this skill cannot write to the queue Google Sheet directly (no
-   Sheets-editing tool is available, only Drive read/download). Prepare new
-   rows as a CSV **directly in `automated_finding/`** (repo-tracked, not
-   scratchpad or `/tmp`) and tell the user what to paste in, rather than
-   claiming the sheet was updated. Earlier batches used a scratchpad/`/tmp`
-   path for these staging CSVs (e.g. `/tmp/biblio_batchN.csv`) — don't
-   repeat that: the scratchpad directory is tied to the session that
-   created it, so the user can't reliably find it afterward (confirmed
-   2026-07-15 — biblio/human-review rows for a resolved batch had to be
-   relocated into `automated_finding/` after the user couldn't locate them).
-   `license_blocked_candidates.csv` and prior `human_review_*.csv`/
+4. **The old queue Google Sheet (both its "human eye" and "to be processed"
+   tabs) is deprecated as of 2026-08-12** — it grew to ~4,846 rows on the
+   "human eye" tab alone and became unmanageable. Don't read from it, write
+   to it, or tell the user to paste anything into it. Rows that flag
+   `human_review` now go straight into a permanent CSV under
+   `human_review/` in this repo — see Step 2/2b below for exactly which
+   rows that means and the naming convention. `biblio_*.csv` rows (for
+   Redivis/dictionary-sheet entries) still follow the older "prepare a CSV
+   directly in `automated_finding/`, tell the user what to paste in" pattern
+   — that part is unaffected by this change, only the human-review
+   destination changed. Earlier batches used a scratchpad/`/tmp` path for
+   staging CSVs (e.g. `/tmp/biblio_batchN.csv`) — don't repeat that: the
+   scratchpad directory is tied to the session that created it, so the user
+   can't reliably find it afterward (confirmed 2026-07-15 — biblio rows for
+   a resolved batch had to be relocated into `automated_finding/` after the
+   user couldn't locate them). `license_blocked_candidates.csv` and prior
    `biblio_*.csv` files already follow this repo-tracked pattern.
 5. **Pick a discovery mode before running anything.** There are three
    independent, non-overlapping discovery sources, each with its own
@@ -91,6 +96,13 @@ same way if missing.
 python irw_discover_updated.py "search term 1" "search term 2" --out candidates.csv
 ```
 
+- Exclusion (`_load_auto_exclusions()`) now checks two sources: DOIs already
+  in the IRW dictionary, and DOIs already logged in any `human_review/*.csv`
+  (added 2026-08-12, replacing the old "human eye" sheet dedup that never
+  actually existed as an automated check). This means a candidate a person
+  already reviewed and passed on in a past batch won't resurface in a new
+  discovery run. `irw_discover_plos.py` and `irw_discover_pmc.py` share the
+  same function, so this applies to all three discovery modes automatically.
 - Pick terms not already in `search_terms_log.csv`. Good sources of new terms:
   named instruments not yet covered, constructs adjacent to recent batches,
   or a domain the user names explicitly.
@@ -160,9 +172,9 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
   processed DOIs were ever added to it). Don't add that step back in.
 - `human_assistance` rows → run Step 2b before deciding what to do with them.
 - Once every `good`/`worth_retrying` row has a processing script (or a
-  documented skip reason) and every `human_review` row is in the "human eye"
-  tab, delete the local triage CSV — it's temporary; `search_terms_log.csv`
-  is the permanent record.
+  documented skip reason) and every `human_review` row has been written to
+  `human_review/` (see Step 2b), delete the local triage CSV — it's
+  temporary; `search_terms_log.csv` is the permanent record.
 - **Non-human/animal subjects are not, by themselves, a reason to skip.**
   `datastandard.md`'s `id`-column definition already establishes this —
   `id` is "the focal unit being measured — typically a person, but
@@ -187,9 +199,26 @@ python irw_retriage_ha.py --input irw_triage.csv --out irw_retriage_ha.csv
 Sub-classifies each `human_assistance` row into `not_item_response` /
 `aggregate_continuous` / `wrong_file_selected` / `recoverable_format` /
 `worth_retrying` / `human_review` (see README for what each means and the
-typical action). Usually resolves ~60% of the bucket automatically. Only
-`human_review` rows need a person — add those to the "human eye" tab of the
-queue sheet; everything else is either dropped or handled per its bucket.
+typical action). Usually resolves ~60% of the bucket automatically.
+
+**Only rows whose `refined_flag` is literally `human_review` go into
+`human_review/`.** Write them to
+`human_review/human_review_<mode>_batch<N>.csv` in this repo (e.g.
+`human_review_pmc_batch1.csv`, `human_review_plos_batch27.csv`,
+`human_review_batch14.csv` for the repository-discovery mode) — a
+permanent, git-tracked archive, replacing the old "human eye" queue-sheet
+tab (deprecated 2026-08-12). These files are never deleted and nothing
+needs to be pasted anywhere; they double as the exclusion list new
+discovery runs check (see Step 1). The other five buckets are **not**
+human-review rows and must **not** go in `human_review/` — they still need
+machine-side follow-up (a re-download, a re-read with a different
+delimiter, a second look for a wave column, etc.) before anyone can decide
+anything, so they stay exactly where they already lived: dropped
+(`not_item_response`, and `aggregate_continuous` when it's a genuine
+composite), or kept on disk as the batch's own retriage CSV with an open
+`TODO.md` entry until acted on (`recoverable_format`, `wrong_file_selected`,
+`worth_retrying`, and `aggregate_continuous` when it turns out to be a
+legitimate continuous per-item response).
 
 **When reviewing `human_review` rows by hand, check the reason string
 first.** Rows whose only reason is "Could not confidently identify item
@@ -487,10 +516,13 @@ python irw_discover_pmc.py "term1" "term2" --out pmc_triage.csv --resume   # aft
    `irw_triage*.csv`, `irw_retriage*.csv`, any `triage_test*.csv` sanity
    check, `irw_batch_checkpoint.jsonl`) and they're disposable *once* every
    actionable row has landed in `BATCH_LOG.md`, a `data/*.py` script, or a
-   CSV handed to the user for the queue/dictionary sheet. Don't delete a
-   `human_review_*.csv` or biblio CSV until the user has confirmed the rows
-   were actually pasted into the sheet — check whether that item is still
-   open in `TODO.md`, don't assume from an earlier "yes." **Never delete
-   `license_blocked_candidates.csv`** — unlike the per-batch temp files, it's
-   a standing, cumulative list (like `search_terms_log.csv`), not disposable
-   once a batch is written up.
+   CSV handed to the user for the dictionary sheet. Don't delete a biblio
+   CSV until the user has confirmed the rows were actually pasted into the
+   dictionary sheet — check whether that item is still open in `TODO.md`,
+   don't assume from an earlier "yes." **Never delete a
+   `human_review/human_review_*.csv` or `license_blocked_candidates.csv`** —
+   unlike the per-batch temp files, these are standing, cumulative records
+   (like `search_terms_log.csv`), not disposable once a batch is written up.
+   `human_review/` files in particular need no confirmation step at all —
+   there's no sheet to paste them into anymore (deprecated 2026-08-12), the
+   file written during the batch *is* the permanent record.

@@ -1,6 +1,11 @@
 """
 irw_process_queue.py
 ====================
+STALE / NOT RUN (see SKILL.md's Step 3 note, and the queue sheet linked
+below was deprecated 2026-08-12 — see README.md's "Keeping the queue
+current"). This intermediate queue-processing stage was eliminated
+2026-06-24; kept here for reference only, not as a script to execute.
+
 Processes datasets that have been manually added to the IRW processing queue
 Google Sheet. For each queued dataset that has not already been processed:
 

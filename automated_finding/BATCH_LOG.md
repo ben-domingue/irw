@@ -7652,4 +7652,41 @@ candidates below:
 **Result: 1 paper -> 6 tables** (`biblio_pmc_batch2.csv`, 6 rows). Script:
 `data/sun_2024_ai_leasing_adoption.py`.
 
+### Human review sheet deprecated (2026-08-12)
+
+The old queue Google Sheet's "human eye" tab (and, along with it, the
+sibling "to be processed" tab this pipeline never used) is deprecated —
+it had grown to ~4,846 rows and become unmanageable to review. Decided
+by ben-domingue.
+
+Replacement: `human_review/` in this repo now holds one permanent,
+git-tracked CSV per batch (`human_review_<mode>_batch<N>.csv`, e.g. the
+existing `human_review_pmc_batch1.csv`) instead of rows staged for
+pasting into the sheet. These files are never deleted — same standing-
+record treatment as `license_blocked_candidates.csv` and
+`search_terms_log.csv`. Only rows whose `flag`/`refined_flag` is
+literally `human_review` go here; `worth_retrying`/`recoverable_format`/
+`wrong_file_selected`/etc. rows still need machine follow-up and continue
+to be tracked as open `TODO.md` items with their own retriage CSV on disk,
+unchanged from prior practice.
+
+The old sheet's "human eye" tab was exported once to
+`human_review/googlesheet_humaneye.csv` (4,846 rows) as a frozen
+historical snapshot before being retired.
+
+`irw_discover_updated.py`'s `_load_auto_exclusions()` now also reads every
+`doi` column across `human_review/*.csv` and excludes those DOIs from new
+discovery runs, on top of the existing IRW-dictionary exclusion — so a
+candidate a person already reviewed and passed on won't resurface in a
+later batch. `irw_discover_plos.py` and `irw_discover_pmc.py` share this
+function, so the exclusion applies to all three discovery modes.
+`.gitignore`'s blanket `human_review_*.csv` rule (previously treating
+these as regenerable per-batch temp output) was removed so the folder can
+actually be tracked in git.
+
+Updated: `SKILL.md`, `README.md`, `.gitignore`, `irw_discover_updated.py`,
+`irw_process_queue.py` (docstring note only, already stale/not run),
+`TODO.md` (resolved the one open "needs pasting" item for
+`human_review_pmc_batch1.csv`).
+
 43 `human_assistance` rows not yet retriaged (open item, see `TODO.md`).

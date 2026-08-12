@@ -10,14 +10,20 @@ Three things this does that a naive search doesn't:
   - SOURCES   : queries 5 repositories, not 1 (breadth = recall)
   - PAGINATION: walks every page per source, so you don't miss results
   - DEDUP     : merges by DOI across sources, falls back to title
-  - EXCLUDE   : automatically skips datasets already in the IRW. The
-                exclusion set is fetched live from the IRW dictionary Google
-                Sheet on every run (_load_auto_exclusions()) — no local file
-                to maintain. (The processing-queue "to be processed" sheet
-                was dropped from this check 2026-07-14 -- it's a manually
-                maintained tab other contributors use, not something this
-                pipeline's own good/worth_retrying candidates ever land in,
-                so treating it as an exclusion source no longer made sense.)
+  - EXCLUDE   : automatically skips datasets already in the IRW, or already
+                logged as a genuinely-ambiguous human_review row in a past
+                batch. The exclusion set is fetched live from the IRW
+                dictionary Google Sheet plus every doi column found under
+                human_review/*.csv on every run (_load_auto_exclusions()) —
+                no local file to maintain. (The processing-queue "to be
+                processed" sheet was dropped from this check 2026-07-14 --
+                it's a manually maintained tab other contributors use, not
+                something this pipeline's own good/worth_retrying candidates
+                ever land in, so treating it as an exclusion source no
+                longer made sense. The "human eye" tab of that same queue
+                sheet was deprecated entirely 2026-08-12 in favor of
+                human_review/*.csv, which is what's now used for exclusion
+                instead.)
 
 Run:
     python irw_discover_updated.py "self-efficacy scale" "reading assessment"
@@ -31,6 +37,7 @@ import os
 import sys
 import re
 import csv
+import glob
 import time
 import argparse
 from dataclasses import dataclass, asdict
@@ -542,11 +549,40 @@ def _load_existing_irw_dois() -> set:
         return set()
 
 
+def _load_human_review_exclusions() -> set:
+    """Load DOIs already logged as a human_review row in a past batch.
+
+    Reads every human_review/*.csv (the permanent archive replacing the old
+    "human eye" queue-sheet tab, deprecated 2026-08-12) relative to cwd — the
+    pipeline is always run from inside automated_finding/, same assumption
+    _load_existing_irw_dois() and everything else here already makes. A file
+    without a `doi` column (unlikely, but tolerate it) contributes nothing
+    rather than erroring.
+    """
+    dois = set()
+    for path in glob.glob(os.path.join("human_review", "*.csv")):
+        try:
+            with open(path, newline="", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                if not reader.fieldnames or "doi" not in reader.fieldnames:
+                    continue
+                for row in reader:
+                    d = norm_doi(row.get("doi", "") or "")
+                    if "/" in d and " " not in d:
+                        dois.add(d)
+        except Exception as e:
+            print(f"[warn] Could not read {path}: {e}", file=sys.stderr)
+    return dois
+
+
 def _load_auto_exclusions() -> set:
-    """Load DOIs to exclude: already in the IRW dictionary."""
+    """Load DOIs to exclude: already in the IRW dictionary, or already
+    logged as a human_review row in a past batch."""
     existing = _load_existing_irw_dois()
-    print(f"[exclude] {len(existing)} DOIs already in IRW", flush=True)
-    return existing
+    reviewed = _load_human_review_exclusions()
+    print(f"[exclude] {len(existing)} DOIs already in IRW, "
+          f"{len(reviewed)} already logged in human_review/", flush=True)
+    return existing | reviewed
 
 
 def discover(queries, exclude: set, relevance_on: bool, sources=None,

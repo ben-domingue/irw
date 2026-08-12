@@ -19,15 +19,18 @@ irw_metadata.csv
 irw_discovered*.csv
 candidates*.csv
 
-# Triage / retriage / human-review outputs — regenerable from the candidate
-# lists via irw_batch_updated.py / irw_retriage_ha.py. Includes the historical
+# Triage / retriage outputs — regenerable from the candidate lists via
+# irw_batch_updated.py / irw_retriage_ha.py. Includes the historical
 # irw_triage_summary*.csv naming and the current irw_triage_batchN.csv /
-# irw_retriage_batchN.csv / triage_testN.csv / human_review_batchN.csv pattern.
+# irw_retriage_batchN.csv / triage_testN.csv pattern.
+# NOTE: human_review_*.csv is deliberately NOT ignored here (2026-08-12) —
+# those files now live permanently in human_review/ as the archived record
+# of genuinely-ambiguous rows (replacing the old "human eye" queue-sheet
+# tab), not a regenerable temp output. See human_review/ and SKILL.md.
 irw_triage_summary*.csv
 irw_triage*.csv
 irw_retriage*.csv
 triage_test*.csv
-human_review_*.csv
 
 # Scratch / test run outputs
 test_*.csv

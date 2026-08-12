@@ -25,10 +25,10 @@ dropped for three batches until caught).
 
 ```bash
 # 1. Search across repositories. Exclusion is automatic and live: the script
-#    fetches DOIs already in the IRW dictionary directly from the Google
-#    Sheet on every run (see _load_auto_exclusions() in
-#    irw_discover_updated.py) — there is no local metadata file to
-#    regenerate first.
+#    fetches DOIs already in the IRW dictionary from the Google Sheet, plus
+#    every DOI already logged in human_review/*.csv, on every run (see
+#    _load_auto_exclusions() in irw_discover_updated.py) — there is no local
+#    metadata file to regenerate first.
 python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
 
 # 2. Test on 10 rows before running everything
@@ -41,9 +41,10 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 # 4. Open irw_triage.csv, sort by flag ('good' first), review candidates.
 #    `good`/`worth_retrying` rows go straight to Step 2 (write a processing
 #    script) -- there is no "add to a queue tab" staging step for these; see
-#    the note below. For human_review rows from irw_retriage_ha.py, add them
-#    to the "human eye" tab:
-#    https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8
+#    the note below. For human_review rows from irw_retriage_ha.py, write
+#    them to human_review/human_review_<mode>_batch<N>.csv in this repo — a
+#    permanent, git-tracked archive (replacing the old "human eye" sheet,
+#    deprecated 2026-08-12; see "Keeping the queue current" below).
 
 # 5. Once actionable rows are captured, delete the local triage CSV.
 #    It is a temporary working file — search_terms_log.csv is the permanent record.
@@ -52,7 +53,7 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 The triage step downloads each candidate and runs automated checks — it does
 **not** save any data files. Its only output is `irw_triage.csv` (a temporary
 working file — delete it once `good`/`worth_retrying` candidates have a
-processing script and human_review rows are in the "human eye" tab).
+processing script and human_review rows have been written to `human_review/`).
 
 **Note on the "to be processed" tab:** the queue sheet has a second tab by
 this name, and older docs described writing `good` rows there as a staging
@@ -64,10 +65,10 @@ directly in the dictionary sheet. `irw_discover_updated.py` also dropped it
 as a dedup-exclusion source the same day (2026-07-14) — it's a manually
 maintained tab for other, non-pipeline contributors, not something this
 pipeline's own candidates ever land in, so excluding on it no longer made
-sense. Exclusion now runs off the IRW dictionary alone. The tab itself still
-exists and still gets manual additions from others; this pipeline just
-doesn't read or write it anymore. Don't resurrect either the "add to
-to-be-processed" step or the exclusion check.
+sense. **As of 2026-08-12 the entire queue sheet — this tab included — is
+deprecated**, see "Keeping the queue current" below. This pipeline never
+read or wrote this tab in the first place, so nothing here changes for it;
+it's flagged deprecated purely for whoever else was using it.
 
 **Every new search term must also be run translated into several other
 languages in the same discovery run** — non-English repositories surface real
@@ -203,16 +204,20 @@ what's been processed, uploaded, and biblio-entered per batch.
 
 ## Keeping the queue current
 
-The [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) has two tabs:
+**The [queue Google Sheet](https://docs.google.com/spreadsheets/d/1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/edit) — both tabs — is deprecated as of 2026-08-12.**
+Its "human eye" tab had grown to ~4,846 rows and become unmanageable. Neither
+tab should be read from or written to anymore, by this pipeline or anyone
+else:
 
-| Tab | Purpose |
-|---|---|
-| **to be processed** | A place other (manual, non-pipeline) contributors queue datasets. This automated pipeline neither writes to it nor reads it — `good`/`worth_retrying` candidates go straight to a processing script and from there into the dictionary sheet, and exclusion runs off the dictionary alone. Don't add a "stage it here first" step, and don't add it back as an exclusion source. |
-| **human eye** | Datasets with `refined_flag = human_review` that need a person to open the raw file and decide if they're worth processing. Once a decision is made, either write a processing script (if eligible) or drop it — there's no intermediate tab to move it to. |
+| Tab | Former purpose | Status |
+|---|---|---|
+| **to be processed** | A place other (manual, non-pipeline) contributors queued datasets. This automated pipeline never wrote to it or read it. | Deprecated 2026-08-12 along with the rest of the sheet — see above. |
+| **human eye** | Datasets with `refined_flag = human_review` that needed a person to open the raw file and decide if they're worth processing. | Deprecated 2026-08-12. Replaced by `human_review/human_review_<mode>_batch<N>.csv` files in this repo — a permanent, git-tracked archive rather than a shared sheet. Only rows whose `flag`/`refined_flag` is literally `human_review` go here; other Step 1b buckets (`worth_retrying`, `recoverable_format`, etc.) still need machine follow-up and are tracked in `TODO.md` instead, same as before. |
 
 | Source | When it's checked | What it excludes |
 |---|---|---|
 | IRW dictionary / Redivis (`bdomingu/irw_meta`) | Step 1 (discovery), automatically; also worth a manual double check in Step 2 before writing a script | DOIs already in the IRW |
+| `human_review/*.csv` | Step 1 (discovery), automatically, via the same `_load_auto_exclusions()` call | DOIs already logged as a human_review row in a past batch |
 
 No local metadata files needed, but this check is now manual per dataset —
 there is no longer a pipeline step that runs it automatically. Before writing

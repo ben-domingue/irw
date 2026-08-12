@@ -15,9 +15,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (0=never..6=always) confirmed against the paper's own Methods text,
   2026-08-12 — not a missingness sentinel.
 
-- [ ] **`automated_finding/human_review_pmc_batch1.csv`** (33 rows, PMC
+- [x] **`human_review/human_review_pmc_batch1.csv`** (33 rows, PMC
   connector batch 1's `human_review` rows from `irw_retriage_ha.py`,
-  2026-08-12) needs to be pasted into the "Human eye" sheet.
+  2026-08-12) — no longer needs pasting anywhere. The old "human eye" queue
+  sheet was deprecated 2026-08-12 (unmanageable at ~4,846 rows); this file
+  is already the permanent archived record in its correct location and
+  naming, nothing further to do. See `BATCH_LOG.md`'s "Human review sheet
+  deprecated" entry.
 
 - [ ] **PMC connector batch 1 — 31 `worth_retrying` rows from
   `irw_retriage_ha.py` not yet reviewed** (2026-08-12): plausible data
@@ -1013,8 +1017,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   logged with title/URL/contributors but not yet structurally inspected —
   see the CSV for the full list.
 
-- [ ] **6 items sitting in the "Human eye" sheet from the English-terms
-  backlog**, needing a person (not another automated attempt): `DVN/HIT56P`
+- [ ] **6 items from the English-terms backlog, still needing a person**
+  (not another automated attempt) — originally logged to the now-deprecated
+  "Human eye" sheet (see `human_review/googlesheet_humaneye.csv` for the
+  frozen export): `DVN/HIT56P`
   (no id column, needs cross-file linkage across baseline/followup waves),
   `DVN/S0HEZI` (unredacted PII in every row — real name/email/IP/GPS),
   `figshare 32953286` (mixed item types — usage flags + vignettes +
