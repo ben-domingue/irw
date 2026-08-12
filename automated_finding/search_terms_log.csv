@@ -3171,3 +3171,33 @@ date,query,output_file,notes
 2026-08-11,work meaningfulness,plos_batch25_triage.csv,PLOS batch 25 - recycled non-PLOS English term
 2026-08-11,turnover intention,plos_batch25_triage.csv,PLOS batch 25 - recycled non-PLOS English term
 2026-08-11,ethical leadership,plos_batch25_triage.csv,PLOS batch 25 - recycled non-PLOS English term
+2026-08-12,Rosenberg self-esteem scale,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Perceived Stress Scale,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Satisfaction with Life Scale,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Ten Item Personality Inventory,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,State-Trait Anxiety Inventory,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Pittsburgh Sleep Quality Index,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Raven's Progressive Matrices,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Self-Compassion Scale,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,PANAS,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Strengths and Difficulties Questionnaire,pmc_batch1_triage.csv,PMC connector batch 1 - recycled PLOS-validated term
+2026-08-12,Warwick-Edinburgh Mental Wellbeing Scale,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,Yale Food Addiction Scale,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,Yale-Brown Obsessive Compulsive Scale,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,Wisconsin Card Sorting Task,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,Zimbardo Time Perspective Inventory,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,body image,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,attachment style,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,burnout,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,alexithymia,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,career decision making,pmc_batch2_triage.csv,PMC connector batch 2 - recycled PLOS-validated term
+2026-08-12,UCLA Loneliness Scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,resilience scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,narcissism scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,gratitude scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,mindfulness scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,rumination scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,empathy scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,aggression scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,creativity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
+2026-08-12,religiosity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term

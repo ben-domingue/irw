@@ -3,6 +3,52 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`automated_finding/biblio_pmc_batch1.csv`** (11 rows, 5 papers ->
+  11 tables, from the first real `irw_discover_pmc.py` batch, 2026-08-12)
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-12, ben-domingue); file and all 11 `irw_output/*.csv` files gone
+  from disk as expected. See `BATCH_LOG.md`'s "Europe-PMC connector batch
+  1" entry for full per-paper detail, including the two rejected false
+  positives (PCIQ-F, cannabis anxiety/depression) and the three
+  multi-scale-split papers (Hospice Comfort Questionnaire, Cloninger
+  personality study, spinal cord injury QoL). MBI-SS response scale
+  (0=never..6=always) confirmed against the paper's own Methods text,
+  2026-08-12 — not a missingness sentinel.
+
+- [ ] **`automated_finding/human_review_pmc_batch1.csv`** (33 rows, PMC
+  connector batch 1's `human_review` rows from `irw_retriage_ha.py`,
+  2026-08-12) needs to be pasted into the "Human eye" sheet.
+
+- [ ] **PMC connector batch 1 — 31 `worth_retrying` rows from
+  `irw_retriage_ha.py` not yet reviewed** (2026-08-12): plausible data
+  worth a second look — mostly text-coded Likert responses needing
+  decoding, low-confidence id-column mappings needing a manual check, or
+  apparent longitudinal/repeated-measures duplicates needing a `wave`
+  column. See `pmc_batch1_retriage.csv`'s `worth_retrying` rows (kept on
+  disk, not deleted, since this item is still open) for the full list with
+  URLs and per-row reasoning.
+
+- [x] **PLOS ONE batch 26** (2026-08-12, `plos_batch26_triage.csv`, 497
+  candidates): its 1 `good` candidate (LGB medical students mental health
+  study) was reviewed and skipped — real participant email addresses in
+  the supplementary file, a hard PII violation regardless of the paper's
+  CC BY license. See `BATCH_LOG.md`'s "PLOS ONE batch 26" entry.
+
+- [ ] **PLOS ONE batch 26 — 107 `human_assistance` rows not yet
+  retriaged** (2026-08-12). `plos_batch26_triage.csv` kept on disk for
+  this.
+
+- [x] **`automated_finding/biblio_pmc_batch2.csv`** (6 rows, 1 paper -> 6
+  tables, from PMC connector batch 2, 2026-08-12) uploaded to Redivis and
+  pasted into the dictionary sheet (confirmed 2026-08-12, ben-domingue);
+  file and all 6 `irw_output/sun_2024_*.csv` files gone from disk as
+  expected. See `BATCH_LOG.md`'s "PMC connector batch 2 — result" entry.
+  Its other `good` candidate (nursing profession survey) was skipped per
+  the new PII policy (real `date of birth` column).
+
+- [ ] **PMC connector batch 2 — 43 `human_assistance` rows not yet
+  retriaged** (2026-08-12). `pmc_batch2_triage.csv` kept on disk for this.
+
 - [x] **`automated_finding/biblio_plos_batch25.csv`** (23 rows, 6 papers ->
   23 tables, from PLOS ONE batch 25's `good` (3 fresh) + `worth_retrying`
   (4 fresh) pool, 2026-08-11) uploaded to Redivis and pasted into the

@@ -7486,3 +7486,170 @@ tables), `han_2015_peer_assisted_learning.py`,
 `he_2019_flipped_classroom.py` (2 tables), `theobald_2017_group_dynamics.py`.
 `human_review_plos_batch25.csv` (87 rows, from `irw_retriage_ha.py`)
 staged for the "Human eye" sheet.
+
+## Europe-PMC connector batch 1 (2026-08-12)
+
+First real batch run of `irw_discover_pmc.py` (mode 2), the new
+Europe-PMC-based multi-journal connector added this session (see
+`journal_scout/journal_yield_summary.md` for how the 11-journal
+`JOURNALS` list was chosen, and the SKILL.md "Europe-PMC-based
+multi-journal search" section for how the connector works).
+
+**Term selection**: recycled 10 terms already validated against PLOS ONE
+from `search_terms_log.csv` (per the "Term selection" rule in that mode's
+SKILL.md section — a term proven to surface real candidates elsewhere is
+worth trying on a new search surface before inventing new ones): Rosenberg
+self-esteem scale, Perceived Stress Scale, Satisfaction with Life Scale,
+Ten Item Personality Inventory, State-Trait Anxiety Inventory, Pittsburgh
+Sleep Quality Index, Raven's Progressive Matrices, Self-Compassion Scale,
+PANAS, Strengths and Difficulties Questionnaire. Run against all 11
+journals in `JOURNALS` (PLOS excluded by design — stays on
+`irw_discover_plos.py`).
+
+**Result**: 888 candidates processed (`pmc_batch1_triage.csv`), 0
+crashed/timeout. Flags: 466 `no_usable_file`, 274 `license_restricted`,
+117 `human_assistance`, 13 `not_item_response`, 7 `good`, 6 `error`, 4
+`download_failed`, 1 `file_too_large`. Two journals (Multivariate
+Behavioral Research, Applied Psychological Measurement) returned zero
+candidates for these terms — consistent with `journal_scout`'s finding
+that both are very low-volume in Europe PMC, not a bug. PeerJ's `good`
+rate (5/160 ≈ 3.1%) came in well above the ~1% PLOS ONE baseline, matching
+`journal_scout`'s prediction that PeerJ would outperform PLOS ONE on
+data-like supplementary yield.
+
+**Manual review of all 7 `good` candidates** (a `good` flag here needs a
+human glance more than usual — same caution as the PLOS pipeline, since
+`irw_discover_pmc.py` also only inspects the first tabular file in the
+archive, not the whole manifest):
+
+- **Rejected, false positive — PCIQ-F** (`10.1186/s12874-021-01376-w`,
+  bmcmrm): the auto-picked file is an item-development/face-validity
+  review table (panel clarity/importance ratings + an editorial "decision
+  taken" column like "Rewritten"), not respondent-level item responses.
+- **Rejected, false positive — cannabis anxiety/depression**
+  (`10.7717/peerj.2782`, peerj): despite the title, the auto-picked file
+  is a substance-use/exclusion-screening form (caffeine/alcohol/
+  tobacco/cannabis use in the last 8/24h, psychiatric history) — not the
+  actual anxiety/depression scale. No other tabular file exists in the
+  archive to recover the real scale data from.
+- **Shipped as-is (2)**: PANAS fibromyalgia and Maslach Burnout
+  Inventory-Student Survey — both clean single-instrument files, no
+  covariate/item mixups.
+- **Shipped after manual re-work (3 papers -> 9 tables)**: Hospice
+  Comfort Questionnaire (auto-picked file was a strict subset of a richer
+  file with 12 additional covariates — used the richer one instead);
+  Cloninger personality study (one file bundled 4 distinct instruments —
+  TCI, SWLS, PANAS, a Social Support scale — split into 4 tables per
+  datastandard.md's one-scale-per-file rule); spinal cord injury QoL (one
+  file bundled WHOQOL-BREF + SWLS + 13 demographic/clinical covariates the
+  auto-triage had counted as items — split into 2 tables, covariates moved
+  out). All three needed the file/column-level review that `good` alone
+  doesn't guarantee — see each script's QC-note comment for specifics.
+
+Every response scale was verified per-item (not merged min/max) with no
+values isolated to a single item, and confirmed as pure integers (no
+imputation artifacts) before shipping. License confirmed CC BY 4.0 on all
+5 papers via Europe PMC's own `license` field (not scraped HTML).
+
+**Result: 5 papers -> 11 tables** (`biblio_pmc_batch1.csv`, 11 rows), all
+CC BY 4.0, all N>=189. Scripts in `data/`: `estevezlopez_2016_panas.py`,
+`lopezgomez_2025_mbi_ss.py` (3 tables), `xu_2025_hcq_p.py`,
+`lee_2024_cloninger.py` (4 tables), `altahla_2024_sci_qol.py` (2 tables).
+
+### PMC connector batch 1 — retriage of the 117 `human_assistance` rows (2026-08-12)
+
+`pmc_batch1_triage.csv` was deleted after the `good` rows above were
+captured, per the normal end-of-batch cleanup — but that meant its 117
+`human_assistance` rows never got the `irw_retriage_ha.py` (Step 2b) pass
+the PLOS pipeline does routinely. Regenerated the triage CSV by rerunning
+the same 10 terms from batch 1 (887 candidates this time vs 888 — one row
+came back `timeout` instead of clean, otherwise an exact match including
+the same 7 `good` hits) and ran `irw_retriage_ha.py` on it.
+
+**Retriage result** (117 rows): 20 `not_item_response` (drop), 33
+`aggregate_continuous` (drop), 33 `human_review` (genuinely ambiguous —
+written to `human_review_pmc_batch1.csv`, staged for the "Human eye"
+sheet), 31 `worth_retrying` (plausible data worth a second look — see
+open `TODO.md` item). 31/888 ≈ 3.5%, in line with the ~2-4% additional
+yield this step recovers on PLOS batches.
+
+### PMC connector batch 2 + PLOS ONE batch 26 (2026-08-12)
+
+Two more discovery runs kicked off in parallel — Europe PMC (mode 2) and
+PLOS (mode 1) hit different domains (`www.ebi.ac.uk` vs
+`api.plos.org`/`journals.plos.org`), so `polite_get`'s per-domain rate
+limiter doesn't create any contention between them.
+
+- **PMC connector batch 2** (`pmc_batch2_triage.csv`): 10 more terms
+  recycled from the PLOS-validated pool in `search_terms_log.csv`:
+  Warwick-Edinburgh Mental Wellbeing Scale, Yale Food Addiction Scale,
+  Yale-Brown Obsessive Compulsive Scale, Wisconsin Card Sorting Task,
+  Zimbardo Time Perspective Inventory, body image, attachment style,
+  burnout, alexithymia, career decision making. Run against all 11
+  `JOURNALS`.
+- **PLOS ONE batch 26** (`plos_batch26_triage.csv`): 10 terms recycled
+  from the repo-connector-validated pool (not yet run against PLOS):
+  UCLA Loneliness Scale, resilience scale, narcissism scale, gratitude
+  scale, mindfulness scale, rumination scale, empathy scale, aggression
+  scale, creativity scale, religiosity scale. Run against
+  `plosone,mentalhealth,globalpublichealth`.
+
+### PLOS ONE batch 26 — result (2026-08-12)
+
+497 candidates processed. Flags: 381 `no_usable_file`, 107
+`human_assistance`, 6 `not_item_response`, 1 `error`, 1 `download_failed`,
+1 `good`.
+
+**The 1 `good` candidate was reviewed and skipped, not shipped**:
+"Mental health in gay, lesbian and bisexual medical students"
+(`10.1371/journal.pmen.0000108`, PLOS Mental Health, N=404). The
+supplementary file has a literal `Endereço de e-mail` (Portuguese for
+"Email address") column — real participant emails attached to detailed
+psychological data (Beck Depression Inventory, STAI, an internalized-
+homophobia/sexual-identity scale, a resilience scale, a QoL scale) for a
+small, narrow population (LGB medical students, likely one institution).
+A hard PII violation under `datastandard.md`'s checklist regardless of the
+paper's own CC BY license, and the combination of identity + mental-health
+data + a narrow population is a re-identification risk that goes beyond
+"just drop the email column" — skipped entirely per ben-domingue's
+decision (2026-08-12), not processed further. (Also, independent of the
+PII issue: the file bundles ~6 distinct instruments across 206 columns
+with conditional gay/lesbian-vs-bisexual branching, so this would have
+been a substantial multi-table split even without the PII problem.)
+
+107 `human_assistance` rows not yet retriaged (open item, see `TODO.md`).
+
+Both this batch and PMC connector batch 2 (previous entry) hit different
+domains, confirmed no rate-limit contention running concurrently.
+
+### PMC connector batch 2 — result (2026-08-12)
+
+412 candidates processed. Flags: 234 `no_usable_file`, 126
+`license_restricted`, 43 `human_assistance`, 6 `not_item_response`, 2
+`good`, 1 `download_failed`.
+
+**New standing policy, decided this batch**: any PII in a raw source file
+now means skip the whole candidate, not scrub-and-ship the offending
+column. See the new hard rule in this file's SKILL.md Step 4 and
+`feedback_pii_skip_entirely` in auto-memory. Applied to both `good`
+candidates below:
+
+- **Skipped — nursing profession social-representation survey**
+  (`10.7717/peerj.13903`, peerj, N=141, 48 items): raw file has a real
+  `date of birth` column (actual birthdates, e.g. `1995-05-04`, not just
+  birth years) plus a couple of open-text "please specify who" columns.
+  On its own this would have been a routine fix (drop the DOB column, ship
+  the rest — the 48 opinion items themselves are not sensitive), but per
+  the new blanket policy it's skipped outright rather than re-litigated as
+  "low severity."
+- **Shipped — AI computing leasing adoption survey**
+  (`10.1016/j.heliyon.2024.e36620`, heliyon, N=281): clean, no PII,
+  sequential `NO` id. 18 items split into 6 three-item constructs
+  (innovation, risk, performance expectancy, price value,
+  task-technology fit, usage), 1-7 scale, matching the `multi_scale*`
+  flag. See `data/` script below for the split.
+
+**Result: 1 paper -> 6 tables** (`biblio_pmc_batch2.csv`, 6 rows). Script:
+`data/sun_2024_ai_leasing_adoption.py`.
+
+43 `human_assistance` rows not yet retriaged (open item, see `TODO.md`).

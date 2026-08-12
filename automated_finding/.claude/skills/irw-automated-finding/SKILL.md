@@ -235,6 +235,29 @@ One additional hard rule applies at this stage that isn't in
 `datastandard.md`, because it's a pipeline/triage concern rather than an
 output-format one:
 
+- **PII in the raw source file — skip the dataset entirely, don't
+  scrub-and-ship.** `datastandard.md`'s "no PII" checklist item is phrased
+  as "don't include it in the output," which reads as permission to drop
+  the offending column(s) and process the rest. That's not the policy for
+  this pipeline: if the raw supplementary file contains real names,
+  emails, birthdates, IP/GPS, or national ID numbers *anywhere* — even in
+  a column that would never be selected as an item or covariate — treat
+  the whole candidate as skip, the same tier as an unresolvable license,
+  not a fixable QC warning. Decided 2026-08-12 after two PMC-connector
+  candidates surfaced real PII (a participant email column on a study of
+  LGB medical students' mental health — skipped outright given the
+  compounding sensitivity of email + stigmatized-identity data on a
+  narrow population; a real `date of birth` column on an otherwise
+  unremarkable nursing-profession opinion survey — also skipped, even
+  though that case looked "lower severity" and the standard fix would
+  have just been dropping one column). The point of a blanket rule is to
+  not re-litigate severity per candidate — a source file containing PII at
+  all is reason enough to skip, regardless of how contained the fix would
+  otherwise look. Log the skip in `BATCH_LOG.md` with what the PII was and
+  why, same as a license-blocked candidate, but there is no
+  `pii_blocked_candidates.csv` standing file — unlike a license issue,
+  there's no path to later un-blocking a PII-flagged candidate, so nothing
+  needs to persist past the batch writeup.
 - **License.** Only proceed if the license is explicitly verified as open
   (`cc0`, `cc-by`, `cc-by-sa`, or equivalent) on the source page itself. A
   triage `license` of `unknown` does not count as verified — skip. A bare
