@@ -7950,3 +7950,132 @@ confirmed done (see `TODO.md`). `pmc_deferred_candidates.csv` deleted —
 every row is now accounted for above (shipped, skipped-and-logged, or, in
 `peerj.2319`'s case, skipped after a successful retry showed the data
 itself doesn't qualify).
+
+## PMC weekly high-yield discovery+triage batch 3 (2026-08-12)
+
+Scheduled routine run (`irw_discover_pmc_monthly.py --mode weekly`, PR #1612)
+found 60 candidates across HIGH_YIELD_TERMS x JOURNALS (0/15 terms fully
+covered before hitting `--limit=60`): 1 `good`, 30 `human_assistance`, 20
+`no_usable_file`, 3 `not_item_response`, 3 `license_restricted`, 2
+`download_failed`, 1 `error`. `irw_retriage_ha.py` sub-classified the 30
+`human_assistance` rows: 10 `not_item_response`, 9 `aggregate_continuous`,
+9 `worth_retrying`, 2 `human_review`.
+
+**Shipped (18 tables, 6 papers, all CC BY 4.0, all N>=116):**
+- `10.7717/peerj.18709` (Altahla et al. 2024, spinal-cord-injury QoL, the
+  batch's one `good` row) -> `altahla_2024_whoqol` / `_swls`. The raw
+  workbook's 4 sheets included a `GP` (healthy comparison, n=223) sheet
+  the original triage never saw (only read the first sheet) -- combined
+  with the SCI sheet (n=189) via `cov_group`, ids offset +100000 for GP.
+  A 30-person test-retest subsample (`participants test`/`re test`
+  sheets) was left unshipped -- its own 1-30 id numbering can't be
+  reliably linked back to the main sample's ids.
+- `10.7717/peerj.3034` (Alexander 2017, attachment/binge eating) ->
+  `alexander_2017_dsi` / `_ecr`. Raw file had junk annotation rows
+  ("*Differentiation of self(DSI)" etc.) mixed into the data rows and a
+  non-unique `Subject code` -- dropped via numeric coercion, row index
+  used as `id`. 4 more instruments in the same file (PA, EAS, Binge EA,
+  Anti-fat) not processed this pass -- see TODO.md.
+- `10.7717/peerj.16035` (Silva et al. 2023, ECOHIS) -> `silva_2023_ecohis`.
+  13 raw items shipped; 4 composite/scoring columns (SCORE, ESRED,
+  escoreF1/2) excluded -- these caused the original aggregate_continuous
+  flag.
+- `10.7717/peerj.4903` (Medvedev 2018, well-being constructs) ->
+  `medvedev_2018_oxh` / `_ql` / `_sl` / `_pan` (Oxford Happiness, a QoL
+  scale, SWLS, PANAS). Each item had a reverse-scored duplicate column
+  (`OXH1R` = 7-`OXH1`, etc.) -- excluded per resp_direction*, only the
+  as-recorded raw items shipped.
+- `10.7717/peerj.17910` (Li et al. 2024, physique anxiety/food addiction)
+  -> `li_2024_fa` / `_bdyz` / `_spa` / `_sad`. `_bdyz` genuinely only has
+  4 of a presumably-longer body-image scale (items 1/2/6/9) in the raw
+  file -- not a parsing error, confirmed by inspecting the raw columns
+  directly.
+- `10.7717/peerj.1464` (Lee et al. 2015, parental temperament) ->
+  `lee_2015_cbcl` (100-item Korean CBCL only). The same file has a large
+  multi-informant JTCI temperament battery (child/mother/father-report,
+  7 subscales each, i-/m-/p- prefixed columns) that's genuinely
+  recoverable item data but wasn't disentangled this pass -- needs the
+  paper's Methods text to confirm subscale-abbreviation mapping per
+  informant. See TODO.md.
+- `10.7717/peerj.16295` (Moon et al. 2023, immigrant pregnant women) ->
+  `moon_2023_selfesteem` / `_coping` / `_support` / `_pregstress`. The
+  original "low-confidence id column" retriage flag was a false
+  positive -- the raw .sav has an unambiguous `id` column. Each scale
+  used `9` (support additionally had one non-integer `1.6`) as a
+  sentinel for a handful of cells -- filtered by the scale's own
+  observed valid range rather than a blanket dropna.
+
+**Not recoverable (aggregate_continuous, confirmed composite/derived-only
+by inspecting raw columns directly rather than re-guessing from the QC
+heuristic):**
+- `10.7717/peerj.5451` (oral health QoL, n=769) -- all 18 non-demographic
+  columns are pre-computed clinical/composite indices (SOHO, senseofcoherence,
+  locus, pufaindex, TDI, etc.), no raw item columns at all.
+- `10.7717/peerj.4484` (temperament/character, n=72) -- TCI subscale
+  export pattern (`_raw`/`_Miss`/`_cut` suffixes only), same
+  pre-computed-subscale-only shape as the `peerj.2319` TCI case in the
+  backlog-resolution entry above. No raw items.
+- `10.7717/peerj.10904` (cardiovascular coping, n=42) -- mostly
+  physiological/statistical derived columns; a genuine but marginal
+  3-item x ~5-timepoint SAM (Self-Assessment Manikin) battery is present
+  but not extracted this pass (small n, small item count, wave-structure
+  verification needed) -- see TODO.md.
+- `10.7717/peerj.13162` (maternal self-efficacy, Chilean adolescent
+  mothers, n=79) -- genuinely recoverable (6 real subscales: selfreg,
+  adaptivefunctioning, affect, socialcommunication, interaction,
+  socialemotionaldevelopment, each with its own `_sum` composite to
+  exclude) but not processed this pass given the number of subscales
+  needing individual verification -- see TODO.md.
+
+**`worth_retrying` (9 rows) disposition:**
+- `10.7717/peerj.16295` -> processed, see above (4 tables).
+- `10.7717/peerj.16617` (performance anxiety, hormonal) -- raw file is
+  cortisol/progesterone/amylase assay values plus 3 single subscale-sum
+  columns (Somatic/Worry/Concentration-Disruption items), no raw item
+  columns. Skip.
+- `10.7717/peerj.21309` (epilepsy QoL) -- raw file gives GAD-7/HDRS/
+  QOLIE-10 only as single composite Score columns, not itemized. Skip.
+- `10.7717/peerj.19326` (executive functioning QoL, Spanish, n=53) --
+  SF-12 (12 items) and a 23-item scale (EPY) are genuinely present as
+  named item columns, but stored as SPSS labeled-categorical values with
+  no numeric code surviving `pd.to_numeric` -- needs the .sav's value
+  labels decoded. N=53 also falls in the 50-99 ask-first band. Deferred
+  to TODO.md pending both the decode and a ben-domingue go/no-go.
+- `10.7717/peerj.19467` (Buteyko breathing, asthma) -- text-coded
+  categorical responses (`rarely`/`mostly`/`sometimes`, etc.) with no
+  confirmed ordinal order, and one item block (`YK1_F1` etc.) turned out
+  to be free-text activity names, not scale responses. Skip pending the
+  paper's response-key.
+- `10.7717/peerj.4305` (postnatal depression) -- EPDS/DASS/BDI/PAI all
+  given only as single composite Score columns; remaining columns are
+  statistical dummy-coded variables. Skip.
+- `10.7717/peerj.16864` (medical students, cognitive/affective) -- real
+  text-Likert item columns (e.g. "Frequently"/"Sometimes"/"Rarely"/
+  "Seldom") but "Rarely" vs "Seldom" have no confirmed relative order,
+  and the same sheet mixes in an unrelated academic-integrity/bullying
+  item block. Skip pending the paper's response key.
+- `10.7717/peerj.18378` (parenting styles, NSSI) -- the .xlsx supplementary
+  file is a 3-column codebook (Variable/Code/Description), not response
+  data; the actual data is in a `.rar` archive not opened this pass.
+  `wrong_file_selected`, not `worth_retrying` -- see TODO.md.
+- `10.7717/peerj.17308` (magic and positive emotions) -- SWLS and other
+  named scales present only as single composite-total columns (not
+  itemized). Skip.
+
+**2 `human_review` rows** (`10.7717/peerj.18167` e-cigarettes/dental
+students, `10.7717/peerj.14128` children's temperament/injuries) written to
+`human_review/human_review_pmc_batch3.csv` — permanent record, replacing
+the deprecated "human eye" sheet.
+
+**2 `download_failed` rows** (`10.7717/peerj.17440`, `10.7717/peerj.2421`)
+are an environment bug, not a data problem — both are legacy `.xls` files
+and the triage sandbox was missing `xlrd`. Worth a manual retry with
+`pip install xlrd`. **1 `error` row** (`10.7717/peerj.18828`,
+`'int' object has no attribute 'lower'`) is a real bug in
+`irw_discover_pmc.py`'s triage logic, not yet fixed — see TODO.md.
+
+`biblio_pmc_batch3.csv` (18 rows) is ready for ben-domingue to upload to
+Redivis and paste into the dictionary sheet.
+`pmc_monthly_candidates_weekly_2026-08-12.csv` and
+`pmc_retriage_weekly_2026-08-12.csv` deleted — every row is now accounted
+for above (shipped, skipped-and-logged, or deferred to TODO.md).

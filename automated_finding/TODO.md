@@ -1352,3 +1352,40 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (`gerber_2022_altruism`, `_selfesteem`, `_eas_temperament`). The paper's
   Measures section cleanly mapped every column. See `BATCH_LOG.md`'s
   "Backlog-resolution pass" entry.
+
+- [ ] **`automated_finding/biblio_pmc_batch3.csv`** (18 rows, PMC weekly
+  batch 3, 2026-08-12) needs uploading to Redivis and pasting into the
+  dictionary sheet. See `BATCH_LOG.md`'s "PMC weekly high-yield
+  discovery+triage batch 3" entry for full detail.
+
+- [ ] **PMC batch 3 — deferred recoverable candidates** (2026-08-12), not
+  processed this pass, each documented in `BATCH_LOG.md`:
+  - `10.7717/peerj.13162` (Chilean adolescent mothers, n=79) -- 6 real
+    subscales (selfreg, adaptivefunctioning, affect, socialcommunication,
+    interaction, socialemotionaldevelopment), each with a `_sum` composite
+    to exclude. Straightforward but time-consuming (6 subscales to verify).
+  - `10.7717/peerj.1464` (Lee et al. 2015) -- the multi-informant JTCI
+    temperament battery (child/mother/father-report, 7 subscales each,
+    i-/m-/p- prefixed) in the same file as the already-shipped
+    `lee_2015_cbcl`. Needs the paper's Methods text to confirm which
+    subscale abbreviation maps to which JTCI dimension per informant.
+  - `10.7717/peerj.19326` (executive functioning QoL, Spanish, n=53) --
+    SF-12 + a 23-item EPY scale, stored as SPSS labeled-categorical values
+    needing decode. N=53 also needs a ben-domingue go/no-go (50-99 band).
+  - `10.7717/peerj.19467` (Buteyko asthma) and `10.7717/peerj.16864`
+    (medical students cognitive/affective) -- both have real text-Likert
+    item columns but no confirmed category order; need the paper's
+    response key before recoding.
+  - `10.7717/peerj.18378` (parenting styles, NSSI) -- `wrong_file_selected`,
+    not actually reviewed: the .xlsx is a codebook, real data is in an
+    unopened `.rar`.
+  - `10.7717/peerj.10904` (cardiovascular coping, n=42) -- a marginal
+    3-item x ~5-timepoint SAM battery, small n/item count, not extracted.
+
+- [ ] **`irw_discover_pmc.py` triage bug**: `'int' object has no attribute
+  'lower'` on `10.7717/peerj.18828` (COVID-19/children study) during PMC
+  batch 3 (2026-08-12) -- real pipeline bug, not yet root-caused or fixed.
+
+- [ ] **2 `download_failed` rows from PMC batch 3** (`10.7717/peerj.17440`,
+  `10.7717/peerj.2421`) -- legacy `.xls` files, sandbox was missing
+  `xlrd`. Retry manually with `pip install xlrd`.
