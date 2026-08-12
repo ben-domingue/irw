@@ -9,6 +9,7 @@ metadata/**/*.txt
 .Rhistory
 itemtext/.cache/
 itemtext/skill_test/
+itemtext/audit_staging/
 
 ##deprecated package
 irw_pkg/
