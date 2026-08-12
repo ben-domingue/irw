@@ -1,0 +1,2 @@
+table,note
+florida_twins_friends,"Audit mode (fresh blind extraction) confirmed 19/21 items (friends1-friends19) exactly against W1_Child codebook LDBase.docx. friends20 (My friends attend the same school as me.) and friends21 (My friends are older than me.) are in the live data and current curation but not documented in that codebook -- left blank in the fresh extraction rather than guessed; not evidence the existing curated text is wrong, just unverified against this one source. See itemtext/audit_pending_review/florida_twins_friends_diff.md."
