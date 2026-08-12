@@ -8079,3 +8079,22 @@ Redivis and paste into the dictionary sheet.
 `pmc_monthly_candidates_weekly_2026-08-12.csv` and
 `pmc_retriage_weekly_2026-08-12.csv` deleted — every row is now accounted
 for above (shipped, skipped-and-logged, or deferred to TODO.md).
+
+## Duplicate-processing incident: moon_2023 / peerj.16295 (2026-08-12)
+
+`10.7717/peerj.16295` (PMC10629385, Moon & Kim 2023) was shipped twice
+today via two uncoordinated pathways: the 11:30 "resolve 14 deferred PMC
+candidates" pass (`data/moon_2023_pregnancy_stress.py`, 6 tables) and the
+15:05 "PMC weekly batch 3" pass (`data/moon_2023_selfesteem.py`, 4
+overlapping/lower-quality tables). Root cause: `pmc_seen_dois.csv` didn't
+exist until the 14:17 weekly discovery run created it, so that run's fresh
+search had nothing to exclude the DOI on, and the dictionary-based
+exclusion only catches DOIs already uploaded to Redivis, not ones shipped
+locally hours earlier. Both biblio CSVs got uploaded before the
+duplication was noticed; ben-domingue resolved it directly on Redivis by
+dropping the 4 tables from the newer (15:05) pass and keeping the 6-table
+version from the deferred-candidate pass. Fix: Step 3 in SKILL.md now
+requires grepping `data/*.py`
+for the DOI before writing a new script, regardless of what
+`pmc_seen_dois.csv` says. `data/moon_2023_selfesteem.py` deleted from the
+repo as part of this cleanup.

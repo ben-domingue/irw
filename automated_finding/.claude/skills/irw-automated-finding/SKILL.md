@@ -237,6 +237,24 @@ and `cleaned_index.csv` no longer exist. The README hasn't been updated to
 match; treat `BATCH_LOG.md`'s latest workflow notes as authoritative over the
 README when they conflict.
 
+**Before writing a new script, check the DOI hasn't already been shipped
+via a different pathway.** `pmc_seen_dois.csv`/the PLOS equivalent only
+catch re-*discovery* within the same connector, and only once that file
+exists and is up to date — they don't catch a DOI that was already turned
+into a `data/*.py` script through a different route (e.g. a manual
+worth_retrying/deferred-candidate pass) earlier the same day, before that
+run's bookkeeping was committed. Run
+`grep -rl "DOI: <the doi>" ../data/*.py` (scripts embed the source DOI in
+their header comment, see e.g. `data/moon_2023_pregnancy_stress.py`) before
+writing a new script for any candidate — if a script already exists for
+that DOI, stop and reconcile with the existing one instead of writing a
+second, independent script. (2026-08-12: this exact gap let
+`10.7717/peerj.16295` get shipped twice — once via a deferred-candidate
+resolution pass, again ~3.5 hours later via the next weekly discovery run,
+because `pmc_seen_dois.csv` didn't exist yet when the second run's search
+executed. Two conflicting `data/moon_2023_*.py` scripts and biblio rows
+were both uploaded before the duplication was noticed.)
+
 Current practice (see batches 7–9 in `BATCH_LOG.md` and e.g.
 `data/frikha_2023_motivation.py`, `data/germann_2026_terrorism.py`): for each
 `good` or `worth_retrying` candidate, write one bespoke script directly in
