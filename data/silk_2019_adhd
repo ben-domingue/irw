@@ -1,0 +1,185 @@
+# Data Wrangling
+library(tidyverse)
+library(dplyr)
+library(janitor)
+
+df <- read.csv("pone.0211053.s004.csv")
+df <- clean_names(df)
+
+df$id <- seq(1, nrow(df))
+
+df <- df %>%  
+  rename(cov_age = "age",
+         cov_male = "child_gender_0_female_1_male",
+         cov_ADHD = "group_0_control_1_adhd")
+
+
+# Inattentive criteria symptoms
+closeatt <- df %>% 
+  select(id, closeatt, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+susatt <- df %>% 
+  select(id, susatt, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+listen <- df %>% 
+  select(id, distract, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp")  %>% 
+  relocate(item, resp, .after = id)
+
+instruct <- df %>% 
+  select(id, instruct, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+org <- df %>% 
+  select(id, org, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>%
+  relocate(item, resp, .after = id)
+
+avoid <- df %>%
+  select(id, avoid, starts_with("cov")) %>% 
+         pivot_longer(-c(id, starts_with("cov")),
+         names_to = "item",
+         values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+loses <- df %>% 
+  select(id, loses, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+distract <- df %>% 
+  select(id, distract, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+forget <- df %>% 
+  select(id, forget, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+
+# Hyperactive/Impulsive Criteria Symptoms
+fidget <- df %>% 
+  select(id, fidget, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+seat <- df %>% 
+  select(id, seat, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+runs <- df %>% 
+  select(id, runs, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+quiet <- df %>% 
+  select(id, quiet, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+motor <- df %>% 
+  select(id, motor, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+talks <- df %>% 
+  select(id, talks, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+blurts <- df %>% 
+  select(id, blurts, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+turn <- df %>% 
+  select(id, turn, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+interrupt <- df %>% 
+  select(id, interrupt, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+
+# Presence of Externalizing Disorder
+presence_of_externalising_disorder <- df %>% 
+  select(id, presence_of_externalising_disorder, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+
+# Presence of Internalizing Disorder
+presence_of_internalising_disorder <- df %>% 
+  select(id, presence_of_internalising_disorder, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+
+# Merging symptoms into their criteria
+inattentive_criteria <- df %>% 
+  select(id, closeatt, susatt, listen, instruct, org, avoid, loses, distract, forget, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+hyperactive_impulsive_criteria <- df %>% 
+  select(id, fidget, seat, runs, quiet, motor, talks, blurts, turn, interrupt, starts_with("cov")) %>% 
+  pivot_longer(-c(id, starts_with("cov")),
+               names_to = "item",
+               values_to = "resp") %>% 
+  relocate(item, resp, .after = id)
+
+# Create csv
+write.csv(inattentive_criteria, "adhd_silk_2019_inattentive_criteria.csv", row.names = FALSE)
+write.csv(hyperactive_impulsive_criteria, "adhd_silk_2019_hyperactive_impulsive_criteria.csv", row.names = FALSE)
+write.csv(presence_of_externalising_disorder, "adhd_silk_2019_externalising_disorder.csv", row.names = FALSE)
+write.csv(presence_of_internalising_disorder, "adhd_silk_2019_internalizing_disorder.csv", row.names = FALSE)
+
