@@ -1353,9 +1353,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Measures section cleanly mapped every column. See `BATCH_LOG.md`'s
   "Backlog-resolution pass" entry.
 
-- [ ] **`automated_finding/biblio_pmc_batch3.csv`** (18 rows, PMC weekly
-  batch 3, 2026-08-12) needs uploading to Redivis and pasting into the
-  dictionary sheet. See `BATCH_LOG.md`'s "PMC weekly high-yield
+- [x] **`automated_finding/biblio_pmc_batch3.csv`** (18 rows, PMC weekly
+  batch 3, 2026-08-12) uploaded to Redivis and pasted into the dictionary
+  sheet (confirmed 2026-08-12, ben-domingue); file gone from disk as
+  expected. See `BATCH_LOG.md`'s "PMC weekly high-yield
   discovery+triage batch 3" entry for full detail.
 
 - [ ] **PMC batch 3 — deferred recoverable candidates** (2026-08-12), not
