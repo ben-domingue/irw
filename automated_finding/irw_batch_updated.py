@@ -50,7 +50,7 @@ import pandas as pd
 
 from irw_triage_updated import load_table, triage_dataset, irw_metadata
 
-UA = {"User-Agent": "irw-batch/1.0 (research; contact your-email)"}
+UA = {"User-Agent": "irw-batch/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 TABULAR_EXT = (".csv", ".tsv", ".tab", ".xlsx", ".xls",
                ".sav", ".dta", ".sas7bdat", ".rdata", ".rda", ".rds")
 PER_DOMAIN_DELAY = 1.5          # seconds between hits to the same domain
@@ -369,6 +369,37 @@ def process_one(row: dict) -> dict:
 def _key(row: dict) -> str:
     return row.get("doi") or row.get("url") or row.get("title", "")
 
+# Permanent, cross-run record of every candidate key (doi/url/title, same
+# as _key()) this script has ever triaged -- distinct from CHECKPOINT,
+# which is scoped to a single (possibly interrupted) run and, without
+# --resume, gets wiped on every fresh invocation. Shared by every manual
+# `python irw_batch_updated.py ...` call and by the scheduled monthly/
+# weekly repos routine alike, so a candidate one already triaged doesn't
+# get re-downloaded by the other. Mirrors irw_discover_plos.py's/
+# irw_discover_pmc.py's SEEN_DOIS_PATH design.
+SEEN_KEYS_PATH = "repo_triage_seen_keys.csv"
+
+
+def load_seen_keys(path: str = SEEN_KEYS_PATH) -> set:
+    if not os.path.exists(path):
+        return set()
+    with open(path, newline="", encoding="utf-8") as f:
+        return {row["key"] for row in csv.DictReader(f) if row.get("key")}
+
+
+def append_seen_keys(keys, path: str = SEEN_KEYS_PATH) -> None:
+    import datetime as _dt
+    if not keys:
+        return
+    file_exists = os.path.exists(path)
+    today = _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%d")
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=["key", "date"])
+        if not file_exists:
+            writer.writeheader()
+        writer.writerows({"key": k, "date": today} for k in keys)
+
+
 def load_done(path: str) -> dict:
     done = {}
     if os.path.exists(path):
@@ -395,8 +426,16 @@ FLAG_ORDER = ["good", "human_assistance", "not_item_response",
               "download_failed", "error"]
 
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
-              resume: bool, checkpoint: str = CHECKPOINT) -> pd.DataFrame:
+              resume: bool, checkpoint: str = CHECKPOINT,
+              ignore_seen_keys: bool = False) -> pd.DataFrame:
     rows = list(csv.DictReader(open(candidates_csv, encoding="utf-8")))
+
+    global_seen = set() if ignore_seen_keys else load_seen_keys()
+    if global_seen:
+        print(f"Excluding {len(global_seen):,} candidates already triaged in a prior "
+              f"run (manual or scheduled -- see {SEEN_KEYS_PATH})")
+        rows = [r for r in rows if _key(r) not in global_seen]
+
     if limit:
         rows = rows[:limit]
 
@@ -407,6 +446,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
         os.remove(checkpoint)   # fresh run
 
     results = list(done.values())
+    newly_seen = []
     for i, row in enumerate(rows, 1):
         k = _key(row)
         if k in done:
@@ -416,7 +456,11 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
         res = process_one(row)
         append_checkpoint(checkpoint, k, res)
         results.append(res)
+        newly_seen.append(k)
         print(f"        -> {res['flag']}", flush=True)
+
+    if not ignore_seen_keys:
+        append_seen_keys(newly_seen)
 
     df = pd.DataFrame(results)
     if not df.empty:
@@ -435,9 +479,14 @@ def main():
                     help="process only the first N (use this to test first!)")
     ap.add_argument("--resume", action="store_true",
                     help="skip rows already in the checkpoint")
+    ap.add_argument("--ignore-seen-keys", action="store_true",
+                    help=f"don't consult/update {SEEN_KEYS_PATH} (the cross-run dedup "
+                         "store shared with the scheduled repos routine) -- use to "
+                         "deliberately re-triage a candidate, e.g. after a script fix")
     args = ap.parse_args()
 
-    df = run_batch(args.candidates_csv, args.out, args.limit, args.resume)
+    df = run_batch(args.candidates_csv, args.out, args.limit, args.resume,
+                    ignore_seen_keys=args.ignore_seen_keys)
     print("\n" + "=" * 50)
     if df.empty:
         print("No results.")
