@@ -227,9 +227,61 @@ they've pasted it into the actual sheet.
 ## Idempotency & caching
 
 - Never reprocess a table that already has a local `{table}__items.csv` or an already-
-  populated Sheet1 row, unless told to redo it.
+  populated Sheet1 row, unless told to redo it. **Exception: Audit mode (below)
+  deliberately targets already-done tables — that guard protects the queue workflow from
+  duplicating in-flight human work and doesn't apply there.**
 - Cache fetched PDFs/pages under `itemtext/.cache/<table>/` (gitignored) so retries on
   paywalled/rate-limited sources don't refetch.
+
+## Audit mode — reprocessing tables that already have itemtext
+
+Triggered by **"audit itemtext for X"** / **"audit the itemtext batch"**. Unlike the
+queue workflow, this deliberately reprocesses tables that already have a curated Redivis
+itemtext entry, to check whether that curation has drifted from the live
+`irw::irw_fetch(table)` data. Motivated by
+[ben-domingue/irw#1594](https://github.com/ben-domingue/irw/issues/1594) and a follow-up
+audit that both found: every time a from-scratch extraction disagreed with existing
+curation, the curation was the stale one, not the extraction.
+
+1. **Candidate list** = `irw::irw_list_itemtext_tables()` directly — the ~421 tables that
+   already have an itemtext entry. Don't run `list_candidates.R`'s queue diff or check
+   Sheet1/index-workbook status for these; that machinery exists to avoid duplicating
+   unclaimed human work on new tables and isn't relevant here.
+2. **Extract** — same as Steps 2–4 above (fetch the live `item`/`resp` target via
+   `table_context.R`, find the source paper, extract and structure). Write the result to
+   a staging path, not `itemtext/<table>__items.csv` — e.g.
+   `itemtext/audit_staging/<table>__items.csv` — so it can never be picked up by a stray
+   `python3 upload.py .` before review.
+3. **Diff** — run:
+   ```bash
+   Rscript .claude/skills/irw-auto-itemtext/scripts/diff_itemtext.R <table> itemtext/audit_staging/<table>__items.csv itemtext/audit_pending_review/<table>_diff.md
+   ```
+   This compares the staged extraction against `irw::irw_itemtext(table)` (current
+   curation) using the same edit-ratio/Jaccard/resp-set-alignment/swap-tolerant
+   instructions-section_prompt logic validated across the 100-table eval, and prints a
+   suggested classification (`confirm` or `review`) plus an itemized mismatch list.
+4. **Route the result**:
+   - **`confirm`** (no meaningful diff): append one row to `itemtext/audit_confirmed.csv`
+     (columns `table,date,note`; create with a header if it doesn't exist) and stop — no
+     Redivis write. Don't re-audit this table again unless asked to.
+   - **`review`, and the diff looks like a genuine correction** (fresh extraction matches
+     a live `irw::irw_fetch(table)` check where curation has a gap — missing items,
+     missing `resp` categories, a stale resp range, etc.): leave the diff report at
+     `itemtext/audit_pending_review/<table>_diff.md` and tell the user it's ready for
+     review — **never run `upload.py` on an audit-mode table without the user's explicit
+     per-table or per-batch approval first**, since `upload.py` replaces a table's entire
+     content on conflict (no row-level merge) — a wrong auto-replace can't be partially
+     undone. Only after approval, copy the approved tables' CSVs from `audit_staging/`
+     into a clean temp directory and run `python3 upload.py <tempdir>`.
+   - **`review`, but it's a genuine judgment call** (terseness-style difference, a
+     table-name mismatch per Step 3b, or any other case where neither version is clearly
+     more correct): log it via Step 6b (`itemtext/pending_index_notes.csv`) instead of
+     queuing it as a replace-candidate.
+5. **Diff-quality caveat**: `diff_itemtext.R`'s `confirm`/`review` split is mechanical
+   (similarity thresholds) — treat it as a starting triage, not a final answer. A
+   `review` result still needs a human judgment call on which of the two outcomes above
+   it belongs to; read the actual mismatches before deciding, the same way the eval's
+   diagnosis sessions did.
 
 ## Batch behavior
 
@@ -239,6 +291,11 @@ they've pasted it into the actual sheet.
   judgment-heavy part, don't try to batch dozens unattended — process a handful, report
   what landed vs. what's in the "couldn't fully automate" bucket, and let the user
   redirect before continuing.
+- **"Audit itemtext"** — same pacing caveat as the queue: Step 3's lookup is still the
+  slow part, so process a handful of already-done tables per session (start with a small
+  pilot batch before committing to all ~421), report the confirm/review/document
+  breakdown, and let the user redirect rather than trying to reprocess everything
+  unattended.
 
 ## Expect a real "couldn't fully automate this one" bucket
 
