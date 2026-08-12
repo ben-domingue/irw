@@ -57,11 +57,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (reviewed — see the entry above). `pmc_batch2_triage.csv` deleted —
   fully captured elsewhere.
 
-- [ ] **`automated_finding/biblio_pmc_batch3.csv`** (8 rows, 3 papers ->
+- [x] **`automated_finding/biblio_pmc_batch3.csv`** (8 rows, 3 papers ->
   8 tables, from the pmc1/plos26/pmc2 `worth_retrying` review, 2026-08-12)
-  needs Redivis upload + pasting into the dictionary sheet. Scripts:
-  `data/han_2026_gad7.py` / `han_2026_phq9.py` / `han_2026_isi.py` (one
-  paper, 3 scales), `data/valdivia_2023_oms.py`,
+  uploaded to Redivis and pasted into the dictionary sheet (confirmed
+  2026-08-12, ben-domingue); file and all 8 `irw_output/*.csv` files gone
+  from disk as expected. `resp=0` in `han_2026_phq9`/`han_2026_gad7` and
+  `shu_2024_gad7`/`shu_2024_phq9` double-checked against each paper's own
+  pre-computed `*_Score`/`*total` columns (row-wise sum of raw items
+  matched exactly for every respondent, zero mismatches) — confirms `0`
+  ("not at all") is a genuine response, not a missingness sentinel.
+  Scripts: `data/han_2026_gad7.py` / `han_2026_phq9.py` / `han_2026_isi.py`
+  (one paper, 3 scales), `data/valdivia_2023_oms.py`,
   `data/geacaballero_2019_pes_nwi.py` (+ `_short` sibling, same paper, 2
   scales), `data/shu_2024_gad7.py` / `shu_2024_phq9.py` (one paper, 2
   scales). See `BATCH_LOG.md`'s "worth_retrying review — pmc1/plos26/pmc2"
