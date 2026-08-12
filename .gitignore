@@ -8,8 +8,7 @@ metadata/**/*.txt
 .DS_Store
 .Rhistory
 itemtext/.cache/
-itemtext/skill_test/sessionB_batch/.cache/
-itemtext/skill_test/sessionB_batch/.gt_*.rds
+itemtext/skill_test/
 
 ##deprecated package
 irw_pkg/
