@@ -3,6 +3,80 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **`automated_finding/biblio_pmc_batch4.csv`** (41 rows, 18 papers ->
+  41 tables, consolidated from all of PMC batch 4's `good` (3 papers) +
+  `worth_retrying` (15 papers across 4 parallel review passes) pool,
+  2026-08-12) needs upload to Redivis and pasting into the dictionary
+  sheet. All 41 output files verified present in `irw_output/` before this
+  CSV was assembled. `reuter_2021_campuslife` (originally 42nd row) was
+  removed post-review, 2026-08-12 (ben-domingue catch) — mixed binary
+  Yes/No and 3-point Less/Same/More items under one file with no confirmed
+  underlying instrument, same problem as the sheets the script already
+  excluded elsewhere in the same workbook. See `BATCH_LOG.md`'s "PMC batch
+  4 — full accounting" entry for the full per-paper/per-DOI detail
+  (including the 2 repeat known-false-positives from batch 1, all skip
+  reasons, and the N/item count corrections the automated pass got wrong
+  for several papers).
+
+- [x] **13 PMC batch 4 candidates flagged as an "N=50-99 ask-first band"
+  — corrected, this was a policy-application error, not an open item**
+  (2026-08-12): `feedback_min_sample_size` was already updated 2026-08-12
+  to a flat N>=100 skip floor with no ask-first band (see `SKILL.md`'s
+  Step 4), but these 13 got logged as awaiting a ben-domingue go/no-go
+  anyway. All are N<100, so all are simply **skipped**, no decision
+  needed: `10.7717/peerj.17536` (n=50-63), `10.7717/peerj.19403` (n=63),
+  `10.7717/peerj.15582` (n=69), `10.7717/peerj.4443` Exp1 (n=52),
+  `10.7717/peerj.19679` (n=94), `10.7717/peerj.2978` (n=52), `10.7717/
+  peerj.16065` (n=54), `10.7717/peerj.6988` (n=91), `10.7717/peerj.12078`
+  (n=99), `10.7717/peerj.5969` (n=85), `10.7717/peerj.15030` (n=60),
+  `10.7717/peerj.14730` (n=81), `10.7717/peerj.20827` (n=91). None had
+  content flaws beyond N where checked; if the floor ever moves back down
+  these DOIs are the ones to revisit, but no standing list is kept per
+  `feedback_min_sample_size` (log-and-move-on, same as any other skip).
+
+- [ ] **`automated_finding/biblio_plos_batch27_worthretrying.csv`** (19
+  rows, 8 papers -> 19 tables, from manual review of all of PLOS batch 27's
+  `good` + `worth_retrying` pool, 2026-08-12) needs upload to Redivis and
+  pasting into the dictionary sheet. Scripts: `data/schafer_2016_music_
+  goals_effects.py`, `data/srivani_2022_education4.py`, `data/liu_2025_
+  teacher_support.py`, `data/babaei_2023_oral_health.py`, `data/gholami_
+  2017_periodontal_knowledge.py`, `data/wen_2022_pyd.py`, `data/powell_
+  2018_empathy.py`. See `BATCH_LOG.md`'s "PLOS ONE batch 27 — full
+  accounting" entry (and the two preceding worth_retrying-review entries
+  it summarizes) for every skipped DOI and why. Two post-review fixes
+  same day (ben-domingue catches): `carus_2021_snowboard_speed.py` deleted
+  entirely — its 2 "items" were a GPS-measured actual speed and a
+  subjective estimate, a bias/calibration measurement rather than a real
+  item-response pair, the same problem class as the previously-rejected
+  fish/mouse physiological-measurement candidates; `wen_2022_pyd_s1`/`_s2`
+  merged into one `wen_2022_pyd.csv` with a `cov_study` column (same
+  instrument, same items, same scale, two independent samples — see memory
+  `feedback_collapse_same_instrument`). `plos_batch27_triage.csv`/
+  `plos_batch27_retriage.csv` can be deleted once this upload is
+  confirmed.
+
+- [x] **11 PLOS batch 27 candidates flagged as an "N=50-99 ask-first
+  band" — corrected, this was a policy-application error, not an open
+  item** (2026-08-12): same fix as the PMC batch 4 entry above — all are
+  N<100 and simply skipped, no ben-domingue decision needed:
+  `10.1371/journal.pone.0260934` (n=83), `10.1371/journal.pone.0141321`
+  (n=82), `10.1371/journal.pone.0241721` (n=66), `10.1371/
+  journal.pone.0218017` (n=80), `10.1371/journal.pone.0151747` (n=60),
+  `10.1371/journal.pone.0117947` (n=86), `10.1371/journal.pone.0241041`
+  (n=53), `10.1371/journal.pone.0257274` (n=83), `10.1371/
+  journal.pone.0150375` (n=58), `10.1371/journal.pone.0149777` (n=54),
+  `10.1371/journal.pone.0203664` (n=61).
+
+- [x] **`liu_2025_ydcy` QC fix** (2026-08-12, ben-domingue catch): the
+  shipped table had a constant column (`YDCY1`, resp=1 for all 879
+  respondents, zero variance) counted as an item, and 58 zero values
+  isolated to a single item (`YDCY3`) with no 0s anywhere else in the
+  5-item block — the exact cross-item data-entry-error signature in
+  `datastandard.md`. Fixed in `data/liu_2025_teacher_support.py`: dropped
+  `YDCY1`, tightened `YDCY`'s valid range to 1-5. Regenerated
+  `liu_2025_ydcy.csv` (now 4 items, resp 1-5, was 5 items resp 0-5); biblio
+  row updated in `biblio_plos_batch27_worthretrying.csv`.
+
 - [x] **`automated_finding/biblio_pmc_batch1.csv`** (11 rows, 5 papers ->
   11 tables, from the first real `irw_discover_pmc.py` batch, 2026-08-12)
   uploaded to Redivis and pasted into the dictionary sheet (confirmed

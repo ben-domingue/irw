@@ -8098,3 +8098,666 @@ requires grepping `data/*.py`
 for the DOI before writing a new script, regardless of what
 `pmc_seen_dois.csv` says. `data/moon_2023_selfesteem.py` deleted from the
 repo as part of this cleanup.
+
+## PLOS batch 27 worth_retrying manual review (2026-08-12)
+
+Manually reviewed all 5 `worth_retrying` DOIs from PLOS ONE batch 27's
+`irw_retriage_ha.py` output (fetched each article page plus every
+Supporting Information file, not just the first tabular one). DOI dedup
+checked first (`grep -rl "DOI: <doi>" data/*.py`) -- none previously
+shipped.
+
+**Shipped (3 papers, 7 tables):**
+- `10.1371/journal.pone.0270974` (Wen 2022, PYD scale) -> two independent
+  samples (S1 Data n=476, S2 Data n=471, no overlapping ids), 26-item
+  Positive Youth Development scale, 1-5 Likert, clean. Data Availability
+  files don't confirm a rural/urban correspondence for S1 vs S2, so files
+  are named `wen_2022_pyd_s1`/`_s2` after the SI item rather than guessing
+  a rural/urban label. Script: `data/wen_2022_pyd.py`.
+- `10.1371/journal.pone.0246931` (Carus 2021, snowboard speed) -> thin but
+  genuine 2-item table (GPS-tracked actual speed vs self-estimated speed,
+  km/h), n=312. Reported n/items from the automated pass (312/8) mostly
+  matched; the other 6 columns in the source file are derived
+  error/percent-error values excluded as composites. Script:
+  `data/carus_2021_snowboard_speed.py`.
+- `10.1371/journal.pone.0194569` (Powell 2018, empathy/trust/economic
+  decisions) -> richest of the five. Confirmed via the paper's Methods text
+  ("the same measures as described in Experiment 1 were used" in
+  Experiment 2) that QCAE, Trust, and the affect/memory checks were
+  identically administered across both experiments, so the two subsamples
+  (n=317 + n=202, non-overlapping ids after +100000 offset for Experiment
+  2) were merged into single files, giving n=523. Four scales shipped:
+  31-item QCAE (1-4 Likert), 3-item Trust (1-4 Likert), 5-item affective
+  state (1-4 Likert), 5-item binary incidental-memory check. Composite
+  columns (CE/AE/TrustScore/MemoryScore, economic-game decision variables)
+  excluded. Script: `data/powell_2018_empathy.py`.
+
+**Skipped (2 papers):**
+- `10.1371/journal.pone.0154145` (van Dijke 2016, facial affect labeling in
+  schizophrenia/BPD) -- the only SI file (`SI_raw data face processing.sav`,
+  n=153) contains only per-condition aggregate error counts and ratios
+  (e.g. `f_a_100`, `h_n_ratio`) computed across trials, not raw per-trial
+  labeling responses. No genuine item/trial-level data available. Skip:
+  content problem (aggregate-only).
+- `10.1371/journal.pone.0272987` (Turner 2022, irrational beliefs/worker
+  mental health) -- reported n=51/items=5 from the automated pass was
+  wrong; true N is 362 per study (Study 1 and Study 2, cross-sectional, not
+  repeated-measures). However all 5 SI data files (S1 File R script, S2/S4
+  File CSVs, S3/S5 File SAVs) turned out to be latent-profile-analysis
+  inputs: standardized/z-scored composite subscale scores (e.g. `intrin`,
+  `MentalWellbeing`, `Depression` as a single per-person total), not raw
+  item-level responses to the underlying instruments (iPBI, R-MAWS,
+  SWEMWBS, PSS, Procrastination Scale, ITS). No raw item data was ever
+  shared for any of the six named instruments. Skip: content problem
+  (aggregate/composite-only), independent of the N correction.
+
+`biblio_plos_batch27_worthretrying.csv` (7 rows) is ready for ben-domingue
+to upload to Redivis and paste into the dictionary sheet.
+
+**PLOS ONE batch 27 — 5 more `worth_retrying` DOIs, full manual review:**
+
+A separate set of 5 DOIs classified `worth_retrying` by `irw_retriage_ha.py`
+in batch 27 were fetched in full (article page + all SI files) and
+hand-inspected.
+
+Shipped (3 papers, 11 output tables):
+- `10.1371/journal.pone.0314338` (Liu, Yan & Li 2025, PE teacher support /
+  middle-school sport participation, China) -- Dryad-hosted SAV (S1 File),
+  n=879 confirmed via `id.nunique()`. Raw file has 7 distinct item-prefix
+  groups (JSZC/YDJC/YDLQ/NLGZ/YDCY/JJQX/XLJK) plus a trailing block of
+  already-computed subscale sums/means (excluded as composites). The
+  paper's English text only explicitly names 4 instruments while the data
+  has 7 prefix groups, so each prefix group was shipped as its own file
+  under a neutral label rather than guessing an unconfirmed English
+  construct name. Scripts: `data/liu_2025_teacher_support.py` ->
+  `liu_2025_teacher_support` (15 items, 1-7), `liu_2025_perceived_competence`
+  (4 items, 1-5), `liu_2025_ydlq` (10 items, 1-5), `liu_2025_nlgz` (4 items,
+  1-5), `liu_2025_ydcy` (5 items, 0-5), `liu_2025_jjqx` (10 items, 1-5),
+  `liu_2025_xljk` (12 items, binary 0/1).
+- `10.1371/journal.pone.0284366` (Babaei et al. 2023, community oral-health
+  trial, Tehran schoolchildren) -- S1 File is the CONSORT PDF, actual SAV
+  data is S2 File; n=739 confirmed. 3 raw item groups across 3 waves
+  (baseline/1yr/2nd follow-up): child hygiene behavior (3 items, 1-5 +
+  6="do not know" sentinel filtered), mother-reported hygiene behavior (3
+  items, same scale), caries/gum knowledge-attitude (16 items, 1-4
+  agree/disagree + 5="do not know" sentinel filtered, one stray
+  non-integer glitch value dropped). Excluded DI/CI/OHIS clinical exam
+  indices and reverse-coded companion columns (QD*.A0 etc.) as composites.
+  `IC` column is intervention/control group, not an identity card -- no
+  PII. Script: `data/babaei_2023_oral_health.py` ->
+  `babaei_2023_child_hygiene_behavior`, `babaei_2023_mother_hygiene_behavior`,
+  `babaei_2023_oral_kap`.
+- `10.1371/journal.pone.0169668` (Gholami et al. 2017, periodontal-knowledge
+  mass-media campaign, Iranian adults) -- S1 File SAV, n=543 confirmed. The
+  raw `BaselineFollow.N.Knowledge.Qx` columns store the *chosen
+  multiple-choice option code* (nominal, 4-5 options + "don't
+  know"/"no answer" sentinels), not an ordinal response, so `resp` was
+  built from the paired `.recoded` correct/incorrect (0/1) columns instead
+  -- the genuine per-item scored response used in the paper. 3 items x 3
+  waves (baseline + 2 follow-ups). Script:
+  `data/gholami_2017_periodontal_knowledge.py` ->
+  `gholami_2017_periodontal_knowledge`.
+
+Skipped (2 papers):
+- `10.1371/journal.pone.0203689` (Gubbels et al. 2018, energy-balance
+  parenting practices, child-care triads) -- the shared SAV (S2 File) 
+  contains only already-computed subscale scores (e.g.
+  `PPDietChildcontrol`, `SPPAEngagement`) -- decimal means, not raw
+  item-level responses. No raw item column exists anywhere in the file.
+  Skip: content problem (composite-only, no genuine `resp` data available).
+- `10.1371/journal.pone.0252543` (Padrós-Blázquez et al. 2021, GSAM
+  enjoyment-modulator scale, Morelia adults) -- the shared XLSX (S2 File)
+  has 571 rows but a `cod` (participant id) column that is non-null for
+  only 128 of them (matching the triage's reported n=128) with an
+  unexplained `study` grouping column (values up to 405, mostly NaN) that
+  doesn't reconcile with the paper's reported N (1884: 273 pilot + 1611
+  final). No codebook or Methods text clarifies what the extra 443
+  id-less rows represent or how `study` maps to the pilot/final samples.
+  Flagged as ambiguous rather than guessed at -- skip pending author
+  contact or further clarification, not a clean content/PII/N failure.
+
+11 new rows appended to `biblio_plos_batch27_worthretrying.csv` (now 18
+rows total) for ben-domingue to upload to Redivis and paste into the
+dictionary sheet.
+
+## PLOS ONE batch 27 — full accounting (2026-08-12)
+
+Batch 27 (`plos_batch27_triage.csv`, 1,667 candidates from 30 recycled
+non-PLOS search terms) closed out end-to-end.
+
+**`good` candidates (9), reviewed directly:** 6 fell below the N=50 floor
+(N=16/22/24/28/14/48) and were skipped outright. One (N=232, "What drives
+consumer participation in virtual CSR?", `10.1371/journal.pone.0342470`)
+looked strong on paper but its 19 "item" columns turned out to be
+per-respondent averages of several underlying survey questions each
+(values like 3.75/4.25/4.33/4.67 aren't reachable on a single Likert item)
+-- skipped as aggregate/composite, not raw response data. Two more
+(N=83 "RE-AIM cognitive health pilot" `10.1371/journal.pone.0260934`; N=82
+"Procedural Metacognition and False Belief Understanding in 3- to
+5-Year-Olds" `10.1371/journal.pone.0141321`) are real raw-item candidates
+in the 50-99 ask-first band -- not shipped, added to TODO.md.
+
+**A fifth group (schafer/music-listening), full manual review:** 1 of 5
+shipped -- `10.1371/journal.pone.0151634` (Schafer et al. 2016, music
+listening goals/effects) -> two 3-item diary-episode scales (`wave` =
+episode order), n=121 respondents / 1502 episodes (the automated pass's
+reported n=967 was wrong -- real n confirmed by unique-id count). Script:
+`data/schafer_2016_music_goals_effects.py` -> `schafer_2016_music_goals`,
+`schafer_2016_music_effects`. The other 4 in this group were skipped for
+content reasons after full article+SI review: `10.1371/journal.pone.0152928`
+(water intake CRT -- only pre-computed daily-intake estimates deposited,
+no raw FFQ items), `10.1371/journal.pone.0318986` (conspiracy videos --
+video-level content-analysis data, not person x item), `10.1371/journal.
+pone.0289686` (Poland historical partitions -- school-level aggregate
+administrative data, no individual respondents), `10.1371/journal.pone.
+0224159` (romantic attachment anxiety, n=1502 confirmed but only
+pre-computed subscale-mean columns deposited, no raw ECR/support/control
+items).
+
+**4 candidates with unresolved n_participants/n_items from the automated
+pass, hand-checked:** 1 shipped -- `10.1371/journal.pone.0261717` (Srivani
+et al. 2022, Education 4.0 / English-learning agreement scale) -> 11 raw
+items (0-2 agreement scale), n=145, a sparse -1 sentinel (20/1595 cells,
+isolated to 5 of 11 items) dropped as data-entry artifact. Script:
+`data/srivani_2022_education4.py` -> `srivani_2022_education4`. 1 deferred
+to the 50-99 band -- `10.1371/journal.pone.0241721` (Theory of Mind
+longitudinal stability): the one clean extractable item battery inside a
+131x334-column mega-file (Wellman-style ToM tasks) only has n=66
+non-missing respondents; needs a ben-domingue go/no-go plus real
+extraction effort given the surrounding derived columns. 2 skipped for
+content: `10.1371/journal.pone.0202494` (Dutch orthopaedic sport-advice
+survey -- all 4 SI files are pre-aggregated physician-survey summary
+tables, no per-respondent data) and `10.1371/journal.pone.0289081`
+(Scholars180 optometry presentation assessment -- both raw-data SI files
+have only n=43, below floor).
+
+**7 more candidates with unresolved counts, skipped by title/content match
+without a full fetch** (scoping reviews, a Delphi-technique expert panel,
+a qualitative interpretive-vignette study, a rat electrophysiology study,
+and an ML facial-expression-recognition engagement study -- none of these
+structurally contain a person x item response matrix, unlike the 4 above
+which were plausible enough to warrant checking): `10.1371/journal.pone.
+0345874` (underwater rugby coaching vignette study), `10.1371/journal.pone.
+0334232` (facial expression recognition/ML), `10.1371/journal.pone.0225243`
+(Delphi technique hospital community benefit), `10.1371/journal.pone.
+0272531` (eye-movement translation/paraphrase task -- not an item-response
+task), `10.1371/journal.pone.0338521` (personality-across-cultures scoping
+review), `10.1371/journal.pone.0294151` (rat synaptic activity, not item
+response), `10.1371/journal.pone.0285226` (MENA digital-health scoping
+review).
+
+**3 candidates skipped outright for N<50** (no review needed):
+`10.1371/journal.pone.0270427` (n=41), `10.1371/journal.pone.0177398`
+(n=22), `10.1371/journal.pone.0224326` (n=24).
+
+**11 candidates in the 50-99 ask-first band, not shipped, added to
+TODO.md** for a ben-domingue go/no-go: the 2 `good`-flagged ones above,
+the 1 `worth_retrying` ToM-longitudinal one above, plus 8 more
+`worth_retrying` rows never individually content-reviewed since they're
+gated on the N decision first: `10.1371/journal.pone.0218017` (n=80,
+music/negative affect, 41 items), `10.1371/journal.pone.0151747` (n=60,
+attachment/HRV, 88 items), `10.1371/journal.pone.0117947` (n=86, ToM &
+sharing preschool, 7 items), `10.1371/journal.pone.0241041` (n=53, Tactile
+Biography questionnaire, 14 items), `10.1371/journal.pone.0257274` (n=83,
+dying-within-dyads palliative care, 23 items), `10.1371/journal.pone.
+0150375` (n=58, attachment/HRV ostracism, 63 items), `10.1371/journal.pone.
+0149777` (n=54, 30 Days Wild nature engagement, 12 items), `10.1371/
+journal.pone.0203664` (n=61, L2 acquisition PE intervention refugees, 7
+items).
+
+**Second worth_retrying group (Liu/Babaei/Gholami/Gubbels/Padros-Blazquez)
+and third group (Wen/Carus/Powell/van Dijke/Turner)** covered in the two
+entries immediately above this one.
+
+**Net result for batch 27:** 8 papers shipped, 21 tables total (2
+schafer_2016 + 1 srivani_2022 + 7 liu_2025 + 3 babaei_2023 + 1 gholami_2017
++ 2 wen_2022 + 1 carus_2021 + 4 powell_2018). `biblio_plos_batch27_
+worthretrying.csv` (21 rows) is ready for ben-domingue to upload to Redivis
+and paste into the dictionary sheet. `human_review/human_review_plos_
+batch27.csv` (78 rows) is the permanent human-review record, no action
+needed. `plos_batch27_triage.csv` and `plos_batch27_retriage.csv` can be
+deleted once the biblio CSV is confirmed uploaded.
+
+## PMC connector batch 4 — 7 `worth_retrying` candidates, manual review (2026-08-12)
+
+Full manual review (article page + all supplementary files via
+`{PMCID}/supplementaryFiles`) of the 7 `worth_retrying` rows from PMC
+connector batch 4's retriage. License confirmed CC BY for all 7 via
+Europe PMC's `resultType=core` `license` field. Verdicts:
+
+- **Shipped — Gobbens (2018), "Associations of ADL and IADL disability with
+  physical and mental dimensions of quality of life in people aged 75
+  years and older," PeerJ, `10.7717/peerj.5425`, PMC6087617.** SI file
+  `peerj-06-5425-s001.sav` (377 rows, all age ≥75, no PII) has three clean
+  raw-item scales: 11-item ADL, 7-item IADL (both 1-4), and the 12-item
+  SF-12. `data/gobbens_2018_adl_iadl_sf12.py` → `gobbens_2018_adl.csv`
+  (377 ids), `gobbens_2018_iadl.csv` (377 ids), `gobbens_2018_sf12.csv`
+  (374 ids).
+- **Shipped — Amarilla-Donoso et al. (2020), "Quality of life after hip
+  fracture: a 12-month prospective study," PeerJ, `10.7717/peerj.9215`,
+  PMC7304420.** SI file `peerj-08-9215-s001.sav` (224 ids, unique
+  `ID_BASDAT`, no PII) is a longitudinal baseline/1-month/6-month/1-year
+  cohort with four raw-item instruments: 12-item SF-12, 5-item EQ-5D,
+  10-item Barthel Index, 8-item Lawton-Brody IADL — each written with a
+  `wave` column (1-4) rather than one column per timepoint.
+  `data/amarilla_2020_hip_fracture.py` → `amarilla_2020_sf12.csv`,
+  `amarilla_2020_eq5d.csv`, `amarilla_2020_barthel.csv`,
+  `amarilla_2020_lawton_brody.csv` (224 ids each, natural attrition by
+  wave, lowest N=202 at 1-year).
+  Verified n_items reported by the automated triage (91) was wrong — the
+  real per-scale item counts are 12/5/10/8.
+- **Shipped — Almuqbil et al. (2022), "Postpartum depression and
+  health-related quality of life: a Saudi Arabian perspective," PeerJ,
+  `10.7717/peerj.14240`, PMC9575671.** SI file `peerj-10-14240-s001.xlsx`
+  has a clean 10-item EPDS (0-3, 253 complete respondents) plus
+  SUM/categorical/numerical aggregates (excluded) and an SF-12 block. The
+  SF-12 block was **not** shipped — its response columns are free text
+  with many rows holding concatenated multi-answer strings (e.g. "Most of
+  the time,  A good bit of the time") rather than one clean category per
+  cell, not reliably parseable without guessing. `data/almuqbil_2022_
+  epds.py` → `almuqbil_2022_epds.csv` (253 ids, 10 items).
+  Reported n_items (43) was wrong — real EPDS item count is 10; the 43
+  count evidently included SF-12/demographic columns.
+- **Skipped — "Analysis of influence of physical health factors on
+  subjective wellbeing of middle-aged and elderly women in China,"
+  `10.1186/s12889-022-12655-6`, PMC9169341.** SI file (CFPS-derived
+  panel, 4997 ids × 2 waves) has exactly one response-like variable
+  (`happy`, a single subjective-wellbeing item, 1-5) with every other
+  column a person-level demographic/health covariate (income, social
+  status, chronic disease, smoking, etc.) — not an item battery, fails
+  the "at least 2 distinct items" rule.
+- **Skipped — "Analysis of influencing factors of anxiety and depression
+  in maintenance hemodialysis patients...," `10.7717/peerj.16068`,
+  PMC10518163.** SI file (n=120) has only pre-computed `SAS score`/`SDS
+  score` totals, no raw anxiety/depression items.
+- **Skipped — "The impact of COVID-19 on the achievement of public school
+  students in British Columbia...," `10.1016/j.heliyon.2025.e42851`,
+  PMC11891674.** SI file (`mmc1.xlsx`, 3765 rows) is district/province-
+  level aggregate proficiency counts (`DATA_LEVEL` = "District Level" /
+  "Province Level"), not per-student response data — no `id` unit exists
+  at the individual level.
+- **Skipped — "The severity of mobile phone addiction and its
+  relationship with quality of life in Chinese university students,"
+  `10.7717/peerj.8859`, PMC7271884.** SI file (`.sav`, n=2312) has only a
+  pre-computed `MobilePhoneAddictionScore1` total, no raw addiction-scale
+  items.
+
+`grep -rl "DOI: <doi>" data/*.py` confirmed none of the 7 had been shipped
+via any earlier pathway before this review. `biblio_pmc_batch4_
+worthretrying.csv` (8 rows: 3 papers, 3+4+1 tables) is ready for
+ben-domingue to upload to Redivis and paste into the dictionary sheet.
+
+## PMC batch 4, worth_retrying manual review (5 candidates, 2026-08-12)
+
+Manual full review (article + all supplementary files via the
+`/supplementaryFiles` zip endpoint, not just the first tabular file) of 5
+`worth_retrying` rows from the PMC batch-4 retriage. `grep -rl "DOI: <doi>"
+data/*.py` confirmed none of the 5 had been shipped via any earlier
+pathway. All 5 papers are CC BY 4.0 (verified via Europe PMC core
+`license` field).
+
+- **Skipped — "Internet addiction and poor quality of life...suicidal
+  ideation of senior high school students in Chongqing, China,"
+  `10.7717/peerj.7357`, PMC6719746.** SI file `peerj-07-7357-s001.sav`
+  (n=26688) has only pre-computed composite/binary columns (DEP 12-60
+  depression total, QOL 6-30 total, IA 1-2 binary internet-addiction
+  classification, SI 0-1 binary suicidal-ideation flag) — no raw item
+  data at all, and the person-level `ID` column is non-unique (2925
+  unique values across 26688 rows). Reported n=26688/items=6 reflects
+  this administrative dataset's row count, not usable item-response data.
+- **Skipped — "Pronounced social inequality in health-related factors and
+  quality of life in women and men from Austria...overweight or obese,"
+  `10.7717/peerj.6773`, PMC6510219 — reconsidered as ship, see below.**
+  (Initial read of the 567-column ATHIS microdata extract looked like an
+  administrative dump; on closer inspection columns LQ1-LQ26 are the raw
+  WHOQOL-BREF items the paper's QOL domain scores are computed from.)
+- **Shipped — Burkert & Freidl (2019), PeerJ, `10.7717/peerj.6773`,
+  PMC6510219.** SI file `peerj-07-6773-s001.sav` is the full ATHIS
+  2014/2015 microdata (567 cols); most of it is unrelated survey content,
+  but LQ1-LQ26 are the raw WHOQOL-BREF items (1-5 Likert, German
+  variable labels in the .sav metadata) underlying the paper's four
+  domain scores. No missing values, no PII (only birth-related column is
+  a 3-level birth-country code, not a DOB). `data/burkert_2019_
+  whoqol_bref.py` → `burkert_2019_whoqol_bref.csv` (15771 ids, 26 items).
+  Reported n_items (41) was wrong — real WHOQOL-BREF item count is 26.
+- **Skipped — "Nicotine smoking is associated with impaired cognitive
+  performance in Pakistani young people," `10.7717/peerj.11470`,
+  PMC8179217.** SI file `peerj-09-11470-s001.xlsx` (5 sheets, n~102) has
+  only per-subject summary/aggregate scores per cognitive test (MMSE
+  total, Edinburgh Handedness Inventory total, PRM percent-correct, CRT
+  raw score) — no trial-level or item-level responses anywhere in the
+  workbook, all sheets have subjects as columns with a single aggregate
+  score row per test.
+- **Shipped — Mancone, Tosti, Corrado & Diotaiuti (2024), PeerJ,
+  `10.7717/peerj.18195`, PMC11470773.** SI file `peerj-12-18195-s001.sav`
+  (n=160) has Rey Auditory Verbal Learning Test 5-trial raw scores:
+  SESS_1-5 (correct-recall count per trial, 0-15) and INTRU_1-5
+  (intrusion-error count per trial) — genuine per-trial repeated
+  measures, not the paper's reported aggregate outcomes
+  (TOTALE_Repetitions/TOTAL_INTRUSIONS/DELAYED_RECALLS/
+  FALSE_RICOGNITIONSI, excluded). Split into two files per trial-score
+  type. `data/mancone_2024_ravlt.py` →
+  `mancone_2024_ravlt_recall.csv` (160 ids, 5 items) and
+  `mancone_2024_ravlt_intrusion.csv` (160 ids, 5 items).
+- **Shipped — Arza-Moncunill, Medina-Mirapeix & Martin-San Agustin (2023),
+  PeerJ, `10.7717/peerj.16246`, PMC10588714.** SI file
+  `peerj-11-16246-s004.sav` (n=272) has the 43 retained items of the
+  Expectations of Physiotherapists Questionnaire (7-point Likert, "very
+  much disagree" to "very much agree" per the paper's Methods). Split by
+  area per SI file `peerj-11-16246-s005.docx`'s item-to-subtheme mapping:
+  clinical care (22 items) and administrative activities (21 items).
+  `data/arzamoncunill_2023_epq.py` →
+  `arzamoncunill_2023_epq_clinical.csv` (272 ids, 22 items) and
+  `arzamoncunill_2023_epq_admin.csv` (272 ids, 21 items).
+
+`biblio_pmc_batch4_manual5.csv` (5 rows for the 3 shipped tables/5 files)
+is ready for ben-domingue to upload to Redivis and paste into the
+dictionary sheet.
+
+## PMC batch 4, worth_retrying manual review (10 no-resolved-N candidates, 2026-08-12)
+
+Manual full review (article + all supplementary files via the
+`/supplementaryFiles` zip endpoint) of 10 `worth_retrying` rows from PMC
+batch 4's retriage that had no resolved participant/item count from the
+automated pass. `grep -rl "DOI: <doi>" data/*.py` confirmed none of the 10
+had been shipped via any earlier pathway. Licenses confirmed CC BY 4.0 for
+all 10 via Europe PMC core `license` field.
+
+- **Shipped — Allen, Interian, Reddy, Rodriguez & Myers (2025), PeerJ,
+  `10.7717/peerj.19057`, PMC11892457.** SI file
+  `peerj-13-19057-s001.xlsx` sheet `questionnaire_scoring` (n=156 rows,
+  145 after dropping 11 pilot/`test_only` administrations flagged in the
+  `summary` sheet) has three raw-item instruments: the 27-item Kirby
+  Monetary Choice Questionnaire (binary smaller-sooner/larger-later
+  choices), the 16-item short Barratt Impulsiveness Scale (0-3), and the
+  20-item UPPS-P (1-4). IDs are a mix of plain integers and cohort-coded
+  strings (e.g. `001SP23`) — kept as strings per datastandard.md rather
+  than force-coercing to numeric (an earlier draft of the script did that
+  and silently dropped 51 valid string-ID participants down to 94; fixed
+  before shipping). Other item pools in the same sheet (`be`/`bb`/`ba`/`a`
+  prefixes: BDI-II, BAS/BIS, ATQ items) have ~54% missingness (only
+  administered to a subset) and were left out. `data/allen_2025_
+  delaydiscount.py` → `allen_2025_delaydiscount.csv`, `allen_2025_bis.csv`,
+  `allen_2025_upps.csv` (145 ids each).
+- **Shipped — Zhao & Zhou (2024), PeerJ, `10.7717/peerj.18134`,
+  PMC11466236.** SI file `peerj-12-18134-s001.sav` (n=1106, 884 with
+  valid item data) is a two-wave (T1/T2) panel of Chinese senior high
+  schoolers with three raw-item instruments at both waves: 6-item
+  depression, 6-item anxiety, 12-item NSSI (all 0-4 frequency).
+  Aggregate `T1D/T2D/T1A/T2A/T1N/T2N` totals excluded. Written with a
+  `wave` column (1=T1, 2=T2) per datastandard.md's longitudinal
+  convention rather than separate T1/T2 item names. `data/zhao_2024_
+  nssi.py` → `zhao_2024_depression.csv`, `zhao_2024_anxiety.csv`,
+  `zhao_2024_nssi.csv` (884 ids each).
+- **Shipped — Khattak, Ehsan, Khalid, Iqbal, Chaudhary, Baig, Alsharari &
+  Memon (2026), PeerJ, `10.7717/peerj.21098`, PMC13156951.** SI file
+  `peerj-14-21098-s001.sav` (n=400 practicing dentists) has three raw
+  binary-item instruments: 4-item attitude (agree/disagree; item 4 does
+  not exist, only 1/2/3/5 retained by the original authors), 4-item
+  clinical readiness (yes/no), 4-item confidence. The `knowledge` column
+  is a pre-computed low/moderate/high composite and excluded.
+  `data/khattak_2026_blscpr.py` → `khattak_2026_attitude.csv`,
+  `khattak_2026_cr.csv`, `khattak_2026_confidence.csv` (400 ids each).
+- **Shipped — Reuter, Forster & Kruger (2021), PeerJ, `10.7717/peerj.12528`,
+  PMC8679900.** SI file `peerj-09-12528-s001.xlsx` has four sheets; two
+  are clean homogeneous item batteries with no person-ID column in the
+  source (anonymous survey rows, row index used as `id` per
+  datastandard.md): `Emotions` (39-item binary mood/emotion checklist,
+  n=514) and `Mental health` (6-item campus-life/social-connection scale,
+  mixed Yes/No and Less/About-the-same/More response options mapped to
+  0/1 and 0/1/2 respectively, n=519). The other two sheets
+  (`Longitudinal data I`/`II`) are heterogeneous single-purpose
+  health-behavior counts in mixed units (hours, days, times) plus a
+  handful of suicide-ideation items — not a psychometric scale, left out
+  (could be revisited separately). `data/reuter_2021_emotions.py` →
+  `reuter_2021_emotions.csv` (514 ids), `reuter_2021_campuslife.csv`
+  (519 ids).
+- **Skipped — "The impact of history of depression and access to weapons
+  on suicide risk assessment: a comparison of ChatGPT-3.5 and
+  ChatGPT-4," `10.7717/peerj.17468`, PMC11143969.** SI file is ChatGPT-3.5
+  vs. ChatGPT-4 risk ratings on suicide-risk vignettes (`Model` column:
+  3.0/4.0, 80 rows each) — AI-generated model output, not human item
+  response data.
+- **Skipped — "Depression and bipolar disorder subtypes differ in their
+  genetic correlations with biological rhythms," `10.1038/
+  s41598-022-19720-5`, PMC9492698.** SI file is LDSC genetic-correlation
+  and MAGMA gene-level summary statistics (SNP/gene aggregate tables),
+  not person-level item response data.
+- **Skipped — "Association of heat shock protein polymorphisms with
+  patient susceptibility to coronary artery disease comorbid depression
+  and anxiety in a Chinese population," `10.7717/peerj.11636`,
+  PMC8216166.** SI file has only pre-computed `GAD-7 score`/`PHQ-9 score`
+  totals plus SNP genotype columns — no raw depression/anxiety item data
+  anywhere in the workbook (Sheet2/Sheet3 empty).
+- **Human review — "Self-reported depression and anxiety rates among
+  females with cutaneous leishmaniasis in Hubuna, Saudi Arabia,"
+  `10.7717/peerj.15582`, PMC10289083.** SI file `peerj-11-15582-s001.sav`
+  has only n=69 unique respondents (50-99 band) and opaque unlabeled
+  columns (`VAR00008`...`VAR00048`) needing the paper's text to interpret
+  — not resolved in this pass, needs a human decision per the min-sample-
+  size policy rather than an automated ship/skip.
+- **Human review — "An extended research of crossmodal correspondence
+  between color and sound in psychology and cognitive ergonomics,"
+  `10.7717/peerj.4443`, PMC5835347.** Two SI files: Exp1
+  (`peerj-06-4443-s001.xlsx`, color-hue matching to abstract properties
+  like Sharpness/Roughness/Tempo/Pitch, 20 trials × n=52 unique subjects —
+  50-99 band) and Exp2 (`peerj-06-4443-s002.xlsx`, sound-color pairing
+  accuracy/RT, n=20 — below the N=50 floor, skip that part). Exp1's
+  response is a chosen RGB hex color code per trial, not a
+  straightforward numeric scale value — would need a considered categorical/
+  numeric encoding decision even setting aside the borderline N; flagged
+  for human review rather than guessing at an encoding.
+- **Skipped — "Influence of diurnal variations on cognitive coordination
+  and misunderstanding in elite male handball players," `10.7717/
+  peerj.20370`, PMC12812274.** SI file is aggregate count/percentage
+  summary tables by match and category (e.g. "Similar"/"Complementary"/
+  "Contradictory"/"Misunderstanding" sharing modes per match), not raw
+  per-player/per-trial response data — no individual-level `id` unit
+  exists in the file.
+
+`biblio_pmc_batch4_manual10.csv` (11 rows for the 4 shipped papers/11
+tables) is ready for ben-domingue to upload to Redivis and paste into the
+dictionary sheet.
+
+## PMC batch 4 — full accounting (2026-08-12)
+
+Europe-PMC-connector batch 4 (`pmc_batch4_triage.csv`, 1,502 candidates
+from 30 recycled non-PMC terms, heavy on named instruments, across all 11
+`JOURNALS`) closed out end-to-end. Flags: 10 `good`, 128 `human_assistance`,
+540 `license_restricted`, 30 `not_item_response`, 779 `no_usable_file`, plus
+a handful of `error`/`download_failed`/`file_too_large`/`timeout`.
+`irw_retriage_ha.py` sub-classified the 128 `human_assistance` rows: 48
+`aggregate_continuous`, 39 `worth_retrying`, 21 `not_item_response`, 20
+`human_review` (written to `human_review/human_review_pmc_batch4.csv`,
+permanent record, no action needed).
+
+**`good` candidates (10), reviewed directly:** 2 were repeat known false
+positives from PMC batch 1 (`10.1186/s12874-021-01376-w` PCIQ-F
+item-development table; `10.7717/peerj.2782` cannabis
+exclusion-screening form -- both skipped again without re-review, same
+reasoning as batch 1). 3 skipped: `10.7717/peerj.1611` (rat pharmacokinetics,
+N=20), `10.7717/peerj.3508` (video game cognitive screen, N=16),
+`10.7717/peerj.4837` (lumpfish welfare, N=20) -- all below the N=50 floor.
+1 skipped for content: `10.7717/peerj.17902` (alfalfa leafcutting bee
+study) -- ecological/behavioral count data (offspring/cocoon counts per
+capsule/cage/nest), not a person x item response structure despite the
+non-human note in SKILL.md (that note applies to genuine repeated
+item/trial batteries on animal subjects, not field-ecology outcome
+counts). 1 deferred to the 50-99 ask-first band: `10.7717/peerj.17536`
+(serum proteomics cognitive impairment, verified N=50-63 across messy
+multi-header sheets, real MMSE/MoCA data but needs real extraction
+effort). 3 shipped: `10.7717/peerj.17174` (Kilic 2024, taekwondo
+nutrition/mental toughness, N=276) -> `kilic_2024_nutrition_attitude`
+(21 items, 1-5), `kilic_2024_mental_toughness` (11 items, 1-5);
+`10.7717/peerj.12604` (Pauli & Wilhelmy 2021, PPOS-D6, N=332) ->
+`pauli_2021_ppos_d6` (6 items, 0-5), `pauli_2021_coercion_attitudes` (15
+items, 0-5, same sample); `10.7717/peerj.11474` (Morales et al. 2021,
+ASMR/emotion regulation, N=177 confirmed, reported N=179 was slightly off)
+-> `morales_2021_erq` (10 items, 1-7), `morales_2021_asmr15` (15 items,
+1-5). Scripts: `data/kilic_2024_taekwondo.py`, `data/pauli_2021_ppos_d6.py`,
+`data/morales_2021_asmr.py`.
+
+**39 `worth_retrying` rows, split into 4 parallel review passes** (full
+article + all supplementary files fetched per candidate via Europe PMC's
+`supplementaryFiles` endpoint):
+
+*Group 1 (7 candidates) -- 3 shipped, 8 tables:* `10.7717/peerj.5425`
+(Gobbens 2018, ADL/IADL/SF-12, N=377/377/374) -> `data/gobbens_2018_adl_
+iadl_sf12.py`; `10.7717/peerj.9215` (Amarilla-Donoso et al. 2020, hip
+fracture, SF-12/EQ-5D/Barthel/Lawton-Brody, longitudinal N=224, reported
+items=91 was wrong -- real per-scale counts 12/5/10/8) -> `data/amarilla_
+2020_hip_fracture.py`; `10.7717/peerj.14240` (Almuqbil et al. 2022, EPDS,
+N=253, reported items=43 was wrong -- real=10, SF-12 block skipped as
+unparseable) -> `data/almuqbil_2022_epds.py`. 4 skipped: `10.1186/
+s12889-022-12655-6` (single-item outcome, fails >=2-items rule),
+`10.7717/peerj.16068` (pre-computed SAS/SDS totals only), `10.1016/
+j.heliyon.2025.e42851` (district-level aggregate counts, no individual
+id), `10.7717/peerj.8859` (pre-computed addiction-score total only).
+
+*Group 2 (7 candidates) -- 5 shipped, 12 tables:* `10.7717/peerj.19587`
+(Hen-Herbst & Fogel 2025, family routines/QoL, pre/during-COVID wave,
+N=253) -> `data/hen-herbst_2025_family_routines.py` (3 files: routine
+frequency 28 items 1-4, routine importance 28 items 1-3, family QoL 21
+items 1-5; an undocumented FCOPE battery excluded, response scale never
+confirmed in this paper's Methods); `10.7717/peerj.18676` (Mohamed et al.
+2024, PPOS medical students, N=143, reported items=26 was wrong -- 8 were
+composite/transformed scores) -> `data/mohamed_2024_ppos.py` (18 items,
+1-6, wave=year2/year4); `10.7717/peerj.2245` (Johannisson 2016, IPIP-NEO-120,
+N=200, auto-triage had rows/columns inverted -- real N=200/120 items not
+155/200) -> `data/johannisson_2016_ipip_neo.py`; `10.7717/peerj.10752`
+(Habibi et al. 2021, MEIM, N=426, auto pass had grabbed the wrong SI file
+-- the real 12-item raw file was s001.csv not s002.csv) -> `data/habibi_
+2021_meim.py`; `10.7717/peerj.16384` (Liu et al. 2023, hypertension-doctor
+medication-adherence survey, N=236, 6 genuine multi-item batteries,
+single-item questions excluded) -> `data/liu_2023_medication_adherence.py`.
+1 deferred to the 50-99 band: `10.7717/peerj.19403` (Sterna et al. 2025,
+time perception/personality disorders, ZTPI-20 genuine but only 63 of 126
+rows carry any item data, verified N=63). 1 skipped for PII: `10.7717/
+peerj.18800` (disaster medicine training) -- all 3 raw .sav files carry a
+real 10-digit institutional student ID number (confirmed via the English
+codebook as "Öğrenci No: Student Number"), skipped whole per the PII
+policy rather than dropping the column.
+
+*Group 3 (5 candidates) -- 3 shipped, 5 tables:* `10.7717/peerj.6773`
+(Burkert & Freidl 2019, WHOQOL-BREF, N=15771, reported "41 items" was
+wrong -- real data is the raw 26-item WHOQOL-BREF buried in a 567-column
+ATHIS microdata extract) -> `data/burkert_2019_whoqol_bref.py`; `10.7717/
+peerj.18195` (Mancone et al. 2024, RAVLT 5-trial raw recall/intrusion
+scores, N=160) -> `data/mancone_2024_ravlt.py` (2 files); `10.7717/
+peerj.16246` (Arza-Moncunill et al. 2023, EPQ, N=272, 43 items split
+clinical/admin per the SI's own subtheme mapping) -> `data/arzamoncunill_
+2023_epq.py` (2 files). 2 skipped: `10.7717/peerj.7357` (Chongqing
+internet addiction/suicidal ideation, N=26688 reported but SI has only
+pre-computed composite/binary columns plus a non-unique id, no raw items);
+`10.7717/peerj.11470` (Pakistani nicotine cognition, only per-subject
+aggregate test scores across all 5 SI sheets, no trial-level data).
+
+*Group 4 -- 10 candidates with unresolved n_participants/n_items from the
+automated pass, hand-checked -- 4 shipped, 11 tables:* `10.7717/
+peerj.19057` (Allen et al. 2025, delay discounting/impulsivity, N=145
+after excluding 11 pilot rows) -> `data/allen_2025_delaydiscount.py` (3
+files: MCQ 27 binary items, BIS 16 items, UPPS-P 20 items); `10.7717/
+peerj.18134` (Zhao & Zhou 2024, NSSI/depression/anxiety, N=884, T1/T2
+wave) -> `data/zhao_2024_nssi.py` (3 files); `10.7717/peerj.21098`
+(Khattak et al. 2026, BLS/CPR dentist survey, N=400) -> `data/khattak_
+2026_blscpr.py` (3 files, 4 binary items each); `10.7717/peerj.12528`
+(Reuter et al. 2021, COVID-19 student wellbeing, N=514/519) -> `data/
+reuter_2021_emotions.py` (2 files). 4 skipped: `10.7717/peerj.17468`
+(ChatGPT suicide-risk comparison -- confirmed AI model output, not human
+data), `10.1038/s41598-022-19720-5` (LDSC/MAGMA gene-level aggregate
+stats only), `10.7717/peerj.11636` (composite GAD-7/PHQ-9 totals + SNP
+genotypes only, no raw items), `10.7717/peerj.20370` (handball diurnal
+variation, aggregate match-level tables only). 2 deferred: `10.7717/
+peerj.15582` (leishmaniasis, verified N=69, plus opaque unlabeled
+columns), `10.7717/peerj.4443` (crossmodal color/sound, Exp1 N=52 with
+RGB-hex trial responses needing an encoding decision; Exp2 N=20 skipped
+outright).
+
+**Net result for PMC batch 4:** 15 papers shipped from the worth_retrying
+pool (3+5+3+4) + 3 from the good pool = 18 papers, 8+12+5+11+6 = 42 tables
+total. `biblio_pmc_batch4.csv` (42 rows) is ready for ben-domingue to
+upload to Redivis and paste into the dictionary sheet.
+`human_review/human_review_pmc_batch4.csv` (20 rows) is the permanent
+human-review record, no action needed. `pmc_batch4_triage.csv` and
+`pmc_batch4_retriage.csv` can be deleted once the biblio CSV is confirmed
+uploaded.
+
+**4 more candidates in the 50-99 ask-first band, not shipped, joining the
+9 already flagged directly from the retriage output:** `10.7717/
+peerj.17536` (serum proteomics, N=50-63, messy structure), `10.7717/
+peerj.19403` (ZTPI, N=63, half the rows blank), `10.7717/peerj.15582`
+(leishmaniasis, N=69), `10.7717/peerj.4443` Exp1 (crossmodal color/sound,
+N=52, RGB-hex encoding question). Combined PMC batch 4 ask-band total:
+13 candidates.
+
+## QC pass on PLOS batch 27 / PMC batch 4 output, and policy corrections (2026-08-12)
+
+ben-domingue spot-checked several of today's shipped tables and caught
+real issues, plus a policy-application error that had crept back in.
+
+**Policy correction — the N=50-99 "ask-first band" no longer exists.**
+`feedback_min_sample_size` was already flattened to a hard N>=100 skip
+floor earlier the same day (2026-08-12, resolving the old 50-99 ask-first
+band from 2026-08-01), but today's PLOS batch 27 and PMC batch 4 write-ups
+both re-introduced an "awaiting ben-domingue go/no-go" holding pattern for
+24 N<50-100 candidates combined (11 PLOS + 13 PMC). Corrected: all 24 are
+simply skipped, no decision needed, per the already-standing rule. Added
+to `SKILL.md`'s Step 4 explicitly so this doesn't happen a third time.
+
+**`liu_2025_ydcy` (PLOS batch 27 / actually a PLOS 0314338 Liu 2025 table,
+listed under PMC batch 4 write-up by mistake -- it's `data/liu_2025_
+teacher_support.py`, a PLOS ONE script):** `YDCY1` was constant (resp=1
+for all 879 respondents, confirmed within every `cov_grade` level) -- a
+gating/filter question, not a real scale item. `YDCY3`'s 58 zero values
+were isolated to that single item, no 0s anywhere else in the 5-item
+block -- the exact cross-item data-entry-error signature `datastandard.md`
+describes. Fixed: dropped `YDCY1` from the item set, tightened `YDCY`'s
+valid range to 1-5. Regenerated (`liu_2025_ydcy.csv`: 4 items, resp 1-5,
+was 5 items resp 0-5); biblio row corrected.
+
+**`carus_2021_snowboard_speed` — removed entirely.** On review this
+doesn't fit the item-response schema: its 2 "items" were a GPS-tracked
+actual speed and a self-estimated speed, i.e. an objective physical
+measurement paired with a subjective estimate used to compute a
+bias/calibration score, not two responses to comparable stimuli. Same
+problem class as the previously-rejected fish/mouse physiological-
+measurement candidates (`fushuku_2023_mouse_temperature`,
+`gismann_2026_fish_personality`, both PLOS batch 15). Script and output
+deleted; biblio row removed.
+
+**`reuter_2021_campuslife` — removed entirely.** Mixed 4 binary Yes/No
+items with 2 three-point Less/About the same/More items under one file
+with no confirmed underlying instrument name -- the same "heterogeneous
+single-purpose survey items rather than a psychometric scale" problem the
+script itself already used to justify excluding the "Longitudinal data"
+sheets in the same workbook. `reuter_2021_emotions.csv` (the genuine
+39-item checklist from the same paper) is unaffected and still shipped.
+Output deleted, script trimmed to only produce `reuter_2021_emotions`,
+biblio row removed.
+
+**`wen_2022_pyd_s1`/`_s2` — merged into one file.** Same 26-item Positive
+Youth Development scale, same response scale, given to two independently-
+recruited samples (no overlapping raw ids) -- ben-domingue's explicit
+preference (2026-08-12) is to collapse same-instrument multi-sample data
+into one file with a `cov_study` column rather than ship split files, the
+same pattern `powell_2018_empathy.py` already used correctly for its own
+Experiment 1/2 merge. Rewrote `data/wen_2022_pyd.py` to merge both samples
+into `wen_2022_pyd.csv` (947 ids, 26 items, resp 1-5, `cov_study`=s1/s2).
+Caught a real bug while doing this: the first offset attempt (+100000 for
+S2 ids) collided with S1, whose raw `fid` values are household-style codes
+already exceeding 470000 -- fixed to offset dynamically past S1's actual
+observed max. New memory `feedback_collapse_same_instrument` records this
+preference generally; also added to `SKILL.md`'s Step 4.
+
+**Confirmed clean, no action needed:** `amarilla_2020_barthel`'s resp
+values (0/5/10/15) are the Barthel Index's standard per-item scoring
+(different items have different maxima by design -- feeding/bathing cap
+at 5-10, transfers/mobility cap at 15), not an error.
+`mancone_2024_ravlt_recall`'s resp values (3-15) are raw per-trial
+words-recalled counts against a 15-word list, standard RAVLT scoring, also
+not an error.
+
+Net change to today's totals: PLOS batch 27 now 8 papers / 19 tables (was
+21 -- lost carus's 1 table, wen's 2-file split collapsed to 1); PMC batch
+4 now 18 papers / 41 tables (was 42 -- lost reuter_campuslife's 1 table).
+Both biblio CSVs regenerated and re-verified against `irw_output/`.

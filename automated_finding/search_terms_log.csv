@@ -3202,3 +3202,63 @@ date,query,output_file,notes
 2026-08-12,creativity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
 2026-08-12,religiosity scale,plos_batch26_triage.csv,PLOS batch 26 - recycled non-PLOS English term
 2026-08-12,"[weekly] 15 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",pmc_monthly_candidates_weekly_2026-08-12.csv,pmc monthly-script automated run; mode=weekly; 60 candidates triaged; 0/15 terms covered
+2026-08-12,health promotion,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,physical education,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,early childhood,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,preschool assessment,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,decision making under uncertainty,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,L2 reading,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,language proficiency,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,positive psychology,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,affect regulation,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,trust in news,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,authoritarian parenting,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,father involvement,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,school belonging,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,inquiry-based learning,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,peer learning,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,compulsive shopping,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,proactive behavior,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,physical activity enjoyment,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,eating competence,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,sports injury,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,athlete burnout,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,competitive anxiety,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,flow state,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,coach behavior,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,coaching efficacy,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,physical literacy,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,attachment security,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,theory of mind development,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,home learning environment,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,national identity,plos_batch27_triage.csv,PLOS batch 27 - recycled non-PLOS English term
+2026-08-12,Beck Depression Inventory,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,NEO Five-Factor Inventory,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Connor-Davidson Resilience Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Fagerstrom Test for Nicotine Dependence,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Beck Hopelessness Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Life Orientation Test,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Marlowe-Crowne Social Desirability Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Dyadic Adjustment Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Multidimensional Health Locus of Control Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Subjective Happiness Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Test Anxiety Inventory,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Medical Outcomes Study Social Support Survey,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Narcissistic Personality Inventory,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Frost Multidimensional Perfectionism Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Dutch Eating Behavior Questionnaire,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Domain-Specific Risk-Taking Scale,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Attention Network Test,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,Dot Probe Task,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,basic psychological needs,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,career exploration,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,parenting sense of competence,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,cognitive reflection,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,prospective memory,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,cognitive flexibility,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,relationship conflict,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,death anxiety,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,counterproductive work behavior,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,sedentary behaviour,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,internet addiction,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,meaning in life,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)

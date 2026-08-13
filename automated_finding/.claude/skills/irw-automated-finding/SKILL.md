@@ -327,6 +327,34 @@ output-format one:
   a per-batch temp file — don't delete it. It exists so a strong,
   ready-to-process candidate isn't lost the moment its triage CSV gets
   cleaned up.
+- **Sample size floor is N(unique id)>=100, flat, no ask-first band.**
+  Originally a hard floor of 50 with a 50-99 ask-first band (set
+  2026-08-01), simplified 2026-08-12 (memory `feedback_min_sample_size`) —
+  the middle band was adding a round trip per candidate for marginal
+  value. Check unique `id` count before writing a script; N<100 → skip
+  outright and log why, the same as any other skip, no need to surface it
+  to ben-domingue first. Don't reintroduce a 50-99 holding pattern in
+  `TODO.md` — a batch that logs candidates as "awaiting a ben-domingue
+  go/no-go" between N=50 and 100 is re-litigating an already-decided
+  question (happened once, 2026-08-12, PLOS batch 27/PMC batch 4 — fixed
+  same day once caught).
+- **Same instrument across multiple samples → one merged file, not
+  split files.** When a paper gives the *same* instrument (same items,
+  same response scale) to two or more independently-recruited samples,
+  ship one file with a `cov_study` covariate distinguishing the samples,
+  even if the paper's own Data Availability listing splits them into
+  separate SI attachments (e.g. "S1 Data"/"S2 Data"). Only merge when the
+  paper's Methods text or a clear structural match (identical item
+  columns, identical response range) confirms identical administration —
+  see `datastandard.md`'s "Confirmed identical administration" guidance —
+  and offset the second sample's `id` past the first sample's actual
+  observed max rather than assuming a round-number gap is enough (raw id
+  columns can be household-style codes well into six digits, not small
+  sequential integers). `powell_2018_empathy.py` did this correctly the
+  first time; `wen_2022_pyd.py` split two same-instrument samples into
+  separate files and was corrected after the fact (ben-domingue,
+  2026-08-12) — see memory `feedback_collapse_same_instrument` for the
+  full rationale.
 
 When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,
