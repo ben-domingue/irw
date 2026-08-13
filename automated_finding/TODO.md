@@ -3,23 +3,20 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-- [ ] **`automated_finding/biblio_plos28_pmc5.csv`** (25 rows, 13 papers ->
+- [x] **`automated_finding/biblio_plos28_pmc5.csv`** (25 rows, 13 papers ->
   25 tables, consolidated from `biblio_batch28_group1.csv` (4 rows, 3
   papers) + `biblio_batch28_group2.csv` (11 rows, 8 papers) +
   `biblio_batch28_group3.csv` (10 rows, 2 papers), from 3 parallel review
   passes over PLOS ONE batch 28's `good`+`worth_retrying` pool (48
   candidates) and PMC batch 5's `good`+`worth_retrying` pool (20
-  candidates), 2026-08-12) needs upload to Redivis + paste into the
-  dictionary sheet. **Note (2026-08-13): the merged CSV was found missing
-  from disk before any upload was confirmed, while all 25 `irw_output/
-  *.csv` files were still present** — unlike the usual post-confirmation
-  cleanup pattern (where the biblio CSV and its output files disappear
-  together once ben-domingue has pasted/uploaded), so this does NOT look
-  like a completed upload; regenerated from the per-table scripts/
-  output-file metadata and re-verified (n/items/resp ranges recomputed
-  directly from each `irw_output/*.csv`, matching the original values).
-  Still needs actual upload + dictionary-sheet paste before this item can
-  be closed. All 25 `irw_output/*.csv` files verified present. See
+  candidates), 2026-08-12) uploaded to Redivis and pasted into the
+  dictionary sheet (confirmed 2026-08-13, ben-domingue); file and all 25
+  `irw_output/*.csv` files removed as expected. (2026-08-13 note for the
+  record: the merged CSV had gone missing pre-confirmation while the
+  output files were still present — an inversion of the usual
+  post-confirmation pattern — so it was regenerated from the per-table
+  scripts/output-file metadata, n/items/resp re-verified against each
+  `irw_output/*.csv`, before this upload.) See
   `BATCH_LOG.md`'s "Batch 28, group 1/2/3" entries for full per-DOI detail
   (shipped + all skip reasons). Two candidates deliberately left unshipped
   rather than silently dropped, worth a look if revisiting:
