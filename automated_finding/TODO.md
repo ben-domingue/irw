@@ -3,6 +3,39 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **`automated_finding/biblio_plos28_pmc5.csv`** (25 rows, 13 papers ->
+  25 tables, consolidated from `biblio_batch28_group1.csv` (4 rows, 3
+  papers) + `biblio_batch28_group2.csv` (11 rows, 8 papers) +
+  `biblio_batch28_group3.csv` (10 rows, 2 papers), from 3 parallel review
+  passes over PLOS ONE batch 28's `good`+`worth_retrying` pool (48
+  candidates) and PMC batch 5's `good`+`worth_retrying` pool (20
+  candidates), 2026-08-12) needs upload to Redivis + paste into the
+  dictionary sheet. **Note (2026-08-13): the merged CSV was found missing
+  from disk before any upload was confirmed, while all 25 `irw_output/
+  *.csv` files were still present** — unlike the usual post-confirmation
+  cleanup pattern (where the biblio CSV and its output files disappear
+  together once ben-domingue has pasted/uploaded), so this does NOT look
+  like a completed upload; regenerated from the per-table scripts/
+  output-file metadata and re-verified (n/items/resp ranges recomputed
+  directly from each `irw_output/*.csv`, matching the original values).
+  Still needs actual upload + dictionary-sheet paste before this item can
+  be closed. All 25 `irw_output/*.csv` files verified present. See
+  `BATCH_LOG.md`'s "Batch 28, group 1/2/3" entries for full per-DOI detail
+  (shipped + all skip reasons). Two candidates deliberately left unshipped
+  rather than silently dropped, worth a look if revisiting:
+  `10.1371/journal.pone.0311248` (smartphone-use study, only 2 single-item
+  continuous measures plus implausible step-count outliers) and
+  `10.1371/journal.pone.0208004` (RIKNO 2.0 + MSKQ MS-knowledge
+  questionnaires, n=1219, CC-BY — raw items are multiple-choice with
+  full answer-text options; scoring requires parsing underline-marked
+  correct answers out of a bilingual Word document that doesn't align
+  cleanly enough to automate safely, needs a human-built answer key).
+  One PMC candidate flagged for a dedicated follow-up pass rather than a
+  rushed script: `10.7717/peerj.12040` (dementia schedule, 811 rows x 424
+  cols, real item-level data across cognitive/depression/IADL/medical/
+  socioeconomic instruments, CC BY, but the true respondent-level `id`
+  couldn't be confidently determined without a codebook).
+
 - [x] **`automated_finding/biblio_pmc_batch4.csv`** (41 rows, 18 papers ->
   41 tables, consolidated from all of PMC batch 4's `good` (3 papers) +
   `worth_retrying` (15 papers across 4 parallel review passes) pool,

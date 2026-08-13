@@ -3262,3 +3262,63 @@ date,query,output_file,notes
 2026-08-12,sedentary behaviour,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
 2026-08-12,internet addiction,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
 2026-08-12,meaning in life,pmc_batch4_triage.csv,PMC batch 4 - recycled non-PMC English term (named instruments)
+2026-08-12,inquiry learning,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,injury anxiety,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,sport flow,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,play behavior,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,individualism collectivism,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,work readiness,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,job search self-efficacy,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,academic-career integration,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,vocational interests,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,meaningful work,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,career calling,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,professional identity,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,STEM career interest,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,standardized testing,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,high-stakes testing,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,patient-reported outcome measures,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,item difficulty,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,functional limitation,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,learning strategies,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,impostor syndrome,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,workplace burnout,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,leadership style,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,screen time,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,prosocial behavior,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,job insecurity,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,emotional eating,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,psychological flexibility,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,body surveillance,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,workplace incivility,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,flow experience,plos_batch28_triage.csv,recycled from non-PLOS search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,item response theory,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,reaction time task,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,reading fluency,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,phonological awareness,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,mathematics achievement,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,n-back,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,phonics,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,word recognition,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,theory of mind,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,moral reasoning,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,trust in government,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,social emotional learning,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,eysenck personality,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,psychopathic personality,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,borderline personality,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,depression anxiety stress,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,secondary traumatic stress,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,childhood trauma,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,teacher stress,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,fear of negative evaluation,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,locus of control,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,emotional self-efficacy,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,parenting self-efficacy,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,family functioning,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,family resilience,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,eating attitudes,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,academic burnout,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,ethnic identity,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,work-family conflict,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-12,specific phobia,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule

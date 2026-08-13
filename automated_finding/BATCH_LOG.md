@@ -8761,3 +8761,270 @@ Net change to today's totals: PLOS batch 27 now 8 papers / 19 tables (was
 21 -- lost carus's 1 table, wen's 2-file split collapsed to 1); PMC batch
 4 now 18 papers / 41 tables (was 42 -- lost reuter_campuslife's 1 table).
 Both biblio CSVs regenerated and re-verified against `irw_output/`.
+
+## 2026-08-12 -- Batch 28, group 2: 23-candidate manual review (mixed PLOS/PMC pool)
+
+Reviewed a 23-row mixed pool (`/tmp/batch28_5_group2.csv`: plos_good/
+plos_wr/pmc_good/pmc_wr) one candidate at a time -- fetched the article
+page + Data Availability statement for each, downloaded and inspected
+every Supporting Information / Europe-PMC-supplementary file (not just
+the first), checked license/N/PII/raw-vs-composite per candidate. 8
+papers shipped -> 11 tables; 15 skipped.
+
+**Shipped** (all CC BY 4.0, `grep -rl "DOI: ..." data/*.py` confirmed no
+prior duplicate before writing):
+- `jaen_2024_odor_id.py` -- 10.1371/journal.pone.0301264 (9-item NIH
+  Toolbox Odor ID, binary correct/incorrect, n=845). Used the "NIH Tolbox
+  Sensory items" sheet of S1 Data, not the messier raw "Monell Data"
+  sheet in the same workbook.
+- `ellis_2016_calculus_instructor.py` -> 2 tables (`ellis_2016_calc_
+  instrqual`, `ellis_2016_calc_instrprac`) -- 10.1371/journal.pone.0157447
+  (n=4925/4931). S2 File's 37-column raw survey mixes SAT/ACT scores,
+  single yes/no items, and checklist "reason" items with two clean 8-item
+  6-point-Likert batteries (Q18Post_*, Q19Post_*); only those two were
+  kept as items. `Institution` column is confirmed by the codebook (S2
+  File readme) to be a random anonymous per-institution id, not PII.
+- `quinn_2023_roommate_cesd.py` -- 10.1371/journal.pone.0286709 (20-item
+  CES-D, 3 waves, n=490 individuals from 245 roommate dyads). SPSS file
+  has actor(`_A`)/partner(`_P`) columns for every item; kept actor-only
+  to avoid double counting/ambiguous focal-unit assignment. `id` =
+  `Dyad_ID*10 + Indiv_ID` (verified unique).
+- `sun_2026_tiktok_travel.py` -- 10.1371/journal.pone.0349305 (29-item,
+  7-point Likert, n=406).
+- `shinohara_2021_testimony.py` -- 10.1371/journal.pone.0261075 (9
+  behavioral-response measures -- reward-allocation ranks + explicit
+  evaluation ratings toward puppets -- n=128 children).
+- `temesgen_2025_elephant_conflict.py` -> 2 tables (`temesgen_2025_
+  elephant_park_attitude`, `temesgen_2025_elephant_conserv_attitude`) --
+  10.7717/peerj.19428 (two 7-item, 5-point-Likert attitude batteries,
+  n=395 households, Ethiopia). Europe PMC's supplementary CSV embeds
+  several stacked tables (household demographics, 2 attitude tables, a
+  logistic-regression table) in one file with no delimiter between them;
+  parsed by fixed row ranges. The source table's own footnote states
+  "0=missing value" -- filtered as sentinel, not a real scale point.
+- `liu_2022_fragmented_reading.py` -> 2 tables (`liu_2022_fragreading_
+  frq`, `liu_2022_fragreading_cdq`) -- 10.7717/peerj.13861 (22-item FRQ +
+  11-item CDQ, both 5-point Likert, n=916 Chinese university students).
+- `regalado_2023_tourism_value.py` -- 10.1371/journal.pone.0286923
+  (19-item, 5-point Likert, n=384). DAS text read as a future promise
+  ("will be made available") but both listed SI files (S1/S2, identical
+  content) already contain the full raw item data -- didn't skip on the
+  DAS wording alone without checking the actual files.
+
+`biblio_batch28_group2.csv` (11 rows) prepared for Redivis upload +
+dictionary-sheet paste -- not yet confirmed by ben-domingue as of this
+writing; see `TODO.md`.
+
+**Skipped, N<100 (flat floor, no ask-first band):** 10.1371/
+journal.pone.0181209 (n=47), 10.1371/journal.pone.0122311 (n=44),
+10.7717/peerj.2319 (n=50), 10.7717/peerj.5441 (n=62), 10.1371/
+journal.pone.0246446 (n=14 grackles), 10.1371/journal.pone.0224282 (n=76
+rats), 10.1371/journal.pone.0189592 (n=8 brachial-plexus patients).
+
+**Skipped, aggregate/composite only (no raw item-level file):**
+10.1371/journal.pone.0199605 (retirement mental health -- S1 File is
+baseline/post *_total subscale scores only, e.g. `base_dass_total`,
+`base_rosenberg`, no per-item columns); 10.1371/journal.pone.0290153
+(Hungarian aphasia screening test HAST -- "HAST scores"/"WAB scores"
+sheets are subtest totals, e.g. word comprehension/naming/fluency sums,
+not raw item-level pass/fail); 10.1371/journal.pone.0279255 (Luxembourg
+value-added scores -- OSF repo confirmed to hold only school VA
+quartile-ranking aggregates, already flagged `plos_good` but the "good"
+SI file was itself the aggregate, not raw).
+
+**Skipped, no raw item file despite DAS claim:** 10.1371/
+journal.pone.0115135 (BDI depression x genetic-variant study, n=888) --
+all 6 SI files are SNP/genotype figures and tables (S1/S2 Fig, S1-S4
+Table); no BDI item-level or even total-score file was ever attached,
+despite the DAS stating "all relevant data are within ... Supporting
+Information files".
+
+**Skipped, not item-response data:** 10.1016/j.heliyon.2024.e30702 (pure
+molecular biology -- RBM15/YTHDF2/CD82 trophoblast mechanism study, no
+survey/behavioral data at all); 10.7717/peerj.14014 (mouse peripheral
+monoamine/hormone biomarker levels via ELISA, no survey data);
+10.1186/s12889-025-25430-0 (a scoping review + thematic analysis, not a
+primary dataset).
+
+**Skipped, marginal fit / data-quality concerns -- logged rather than
+shipped, could be revisited:** 10.1371/journal.pone.0311248 (smartphone-
+use-reduction study, n=490) -- S2 File's only two constructs are single-
+item continuous measures (self-reported minutes of phone screen time,
+step count) at 2 waves; only 2 distinct "items" total and each is itself
+a single-item measure duplicated across waves rather than a real
+multi-item scale, plus the step-count column has implausible outliers
+(up to 243,000 steps/day) that would need real per-row QC before
+shipping. Judged not worth the cleanup effort relative to construct
+thinness; flagged here rather than silently dropped in case someone
+wants to revisit with more per-row outlier work.
+
+No PII found in any candidate reviewed this batch (checked every shipped
+file's full column list, not just the columns used).
+
+## Batch 28, group 1 (2026-08-12)
+
+Reviewed a 23-row mixed pool (`/tmp/batch28_5_group1.csv`: plos_good/
+plos_wr/pmc_good/pmc_wr, PLOS ONE + PeerJ/Sci Reports/BMC Public Health)
+by hand -- for each PLOS row, fetched the full article page and inspected
+every Supporting Information attachment (not just the first tabular one);
+for each PMC row, pulled Europe PMC's `supplementaryFiles` bundle (or the
+publisher's direct static-content URL when the EuropePMC zip endpoint
+truncated on a couple of large multi-file bundles) and full-text XML.
+
+**Shipped (3 papers, 4 tables):** `data/bukurov_2022_comq12sf36.py` ->
+`bukurov_2022_comq12` (12-item COMQ-12, n=246, 2 waves) +
+`bukurov_2022_sf36` (36-item SF-36, n=246) -- S5 Appendix (SAV) held raw
+per-item COMQ-12/SF-36 responses alongside ~90 derived/scaled/factor-score
+columns that were excluded. `data/miedema_2023_ecs40.py` ->
+`miedema_2023_ecs40` (40-item binary Economic Coercion Scale item pool,
+n=930, Bangladesh survey, bilingual Yes/No response text recoded 1/0).
+`data/alfort_2023_finger_fx_prom.py` -> `alfort_2023_finger_fx_prom`
+(46-item hand/arm PROM, Diffic/Often/Bother blocks all raw 1-5, n=5504,
+2 waves baseline/follow-up) -- pulled from a 21341-row Swedish Fracture
+Register extract; only ~25% of registered fracture cases completed the
+PROM, but that subset clears the N>=100 floor easily. All four verified
+CC BY 4.0 on the article page itself, no PII in any of the three raw
+files (checked every column, not just the ones used), no dupe DOI in
+`data/*.py`. `biblio_batch28_group1.csv` (4 rows) ready for Redivis
+upload + dictionary-sheet paste.
+
+**Skipped, N<100 (triage n confirmed, no need to open the file further):**
+`10.1371/journal.pone.0284300` (biology knowledge quiz, n=98),
+`10.1371/journal.pone.0197161` (nursing rotation, n=50),
+`10.1371/journal.pone.0196481` (ARMD vision, n=47),
+`10.1371/journal.pone.0222096` (rat ABR audiograms, n=30),
+`10.1371/journal.pone.0118221` (mindfulness/compassion, n=56),
+`10.7717/peerj.13944` (finger-tapping, n=30, also only 2 items).
+
+**Skipped, not real item-response data (composite/aggregate/qualitative/
+non-human-subject-instrument only):**
+- `10.1371/journal.pone.0217482` (leader independence): S1 Data is
+  already a "pairwise data matrix" of dyad-level composite/Z-scored scale
+  totals (`A_WE`, `A_EXHAU`, etc.), not raw items.
+- `10.1371/journal.pone.0193861` ("metric" term usage review): a
+  systematic-review paper; its SI is PDFs/XLSX study-inventory lists, no
+  respondent data at all.
+- `10.1371/journal.pone.0334407` (Saudi adolescents, obesity
+  perceptions): S1 File is qualitative interview coding (Theme/Subtheme/
+  Feedback text), not numeric item responses.
+- `10.1371/journal.pone.0256497` (reproductive PROM feasibility): S1 Data
+  is a mix of open-text usability feedback and single sum scores, a
+  feasibility study rather than raw scale items.
+- `10.1371/journal.pone.0249719` (osteopathic-care PROM UK): both SI
+  files contain only pre-computed sum/composite scores (`BQ baseline sum
+  score`, GRoC/satisfaction single ratings), no raw items.
+- `10.1371/journal.pone.0190042` (maternal separation rats): SI sheets are
+  physiological/behavioral-apparatus measures (zone times, EtOH intake,
+  body weights) across weeks, not item-response data -- same class as
+  previously-rejected fish/mouse physiological-measurement candidates.
+- `10.1371/journal.pone.0338328` (DeepSeek vs ChatGPT exam performance):
+  AI model output comparison, not human item responses.
+- `10.7717/peerj.21222` (skin-cancer screening preferences/trust): the
+  attached CSV (1403 x 363) is clinical/demographic/lesion-count exam
+  data; the paper's actual "preference"/"trust" survey items are not
+  present as columns anywhere in the file (likely reported only as
+  in-text aggregate stats) -- wrong-file-for-the-construct, not a raw
+  item battery.
+- `10.1038/s41598-023-49465-8` (MRI brain-age dementia conversion):
+  MOESM1 xlsx is aggregate summary/comparison tables only.
+- `10.7717/peerj.2987` (K6 item-response pattern analysis): s001.xlsx is
+  aggregate frequency-count tables per response category (secondary
+  analysis of an existing survey), not per-person raw data.
+- `10.1186/s12889-022-12500-w` (multi-lingual COVID workplace-prevention
+  survey): MOESM2 (`Survey Data`, n=627) is a heterogeneous checklist of
+  yes/no/categorical items about unrelated topics (masking, testing
+  policy, who-pays, training, vaccination) rather than a single coherent
+  scale/instrument -- same "heterogeneous single-purpose survey items"
+  problem class that got `reuter_2021_campuslife` removed post-review
+  2026-08-12.
+- `10.7717/peerj.17676` (PCSK9 inhibitor / rat cognition): Europe PMC has
+  no tabular supplementary file at all for this article (figures only) --
+  `no_usable_file`, not a content-quality skip.
+
+**Ambiguous -- flagged for a human decision, not shipped, not simply
+skipped:** `10.1371/journal.pone.0208004` (Risk knowledge of people with
+relapsing-remitting MS, RIKNO 2.0 + MSKQ questionnaires, n=1219, S1
+Dataset SAV). This is a strong, clean, CC-BY, N>=1200 candidate with real
+per-item structure -- but the raw items are multiple-choice with full
+answer-text response options (not numeric/ordinal), and `datastandard.md`
+requires `resp` to be numeric. The source questionnaire (S1 Appendix DOCX)
+marks each item's correct answer via Word run-level underline formatting
+("For each question, the correct answer is underlined"), which *could* be
+parsed to build a correct/incorrect (0/1) scoring key, but the underline
+spans didn't cleanly align to full answer-option text in a spot check
+(e.g. one item's underline landed on the word "correct" in the question
+stem rather than on an answer option) -- automating this reliably across
+19 RIKNO + 25 MSKQ items in 6 languages carries real risk of a silently
+wrong scoring key. Left unprocessed rather than guess; worth a human
+building the correct-answer key by hand from S1 Appendix if this is
+revisited.
+
+No PII found in any of the four shipped files (COMQ-12/SF-36, ECS-40,
+finger-fracture PROM) -- reviewed every raw column, not just the ones
+used, including the Swedish Fracture Register extract's 211 columns
+(only clinical event dates and hospital-internal surgeon codes, no names
+or dates of birth).
+
+## 2026-08-12 -- PLOS ONE batch 28 + PMC batch 5: discovery, and batch 28
+## group 3 (22-candidate manual review, mixed PLOS/PMC pool)
+
+Ran parallel discovery: `irw_discover_plos.py` (PLOS ONE batch 28, 30
+terms recycled from the non-PLOS pool of `search_terms_log.csv` per
+SKILL.md's term-selection rule) and `irw_discover_pmc.py` (PMC batch 5,
+30 terms recycled from the non-PMC pool). PLOS batch 28: 1,419 candidates
+-> 10 `good`, 252 `human_assistance`, rest excluded (`no_usable_file` etc).
+PMC batch 5: 737 candidates -> 4 `good`, 73 `human_assistance`, 256
+`license_restricted`, rest excluded.
+
+`irw_retriage_ha.py` on both `human_assistance` pools: PLOS 28 -> 38
+`worth_retrying`, 67 `human_review` (-> `human_review/human_review_plos_
+batch28.csv`), 84 `aggregate_continuous`, 63 `not_item_response`. PMC 5 ->
+16 `worth_retrying`, 18 `human_review` (-> `human_review/human_review_pmc_
+batch5.csv`), 24 `aggregate_continuous`, 15 `not_item_response`.
+
+Combined the two batches' `good` (14) + `worth_retrying` (54) pools = 68
+candidates, split into 3 groups of ~23 and reviewed in parallel (see
+group 1 and group 2 entries above). Group 3's 22-candidate review:
+
+**Shipped -- 2 papers, 10 tables**, both CC BY 4.0, no duplicate DOI found
+in `data/*.py`:
+- `10.1371/journal.pone.0280919` (Hua et al 2023, Chinese university EFL
+  blended-teaching survey, n=942) -> `data/hua_2023_efl_learning_scales.py`
+  -> `hua_2023_efl_academic_self_concept` (26 items, 1-6),
+  `_course_experience` (16 items, 1-5), `_study_engagement` (14 items,
+  1-7), `_academic_procrastination` (3 items, 1-5).
+- `10.1371/journal.pone.0321999` (Li et al 2025, sports-tourism
+  social-media revisit-intention survey, n=435) ->
+  `data/li_2025_sports_tourism_socialmedia.py` ->
+  `li_2025_socmedia_usefulness`/`_enjoyment`/`_infoquality`/`_satisfaction`/
+  `_ewom`/`_revisit` (3-6 items each, 1-5).
+
+**Skipped (19)**: below N>=100 floor (5: pone.0200971 rat N~72,
+pone.0348196 N=55, pone.0207589 N=76 composite, pone.0231077 N=85,
+peerj.16295-adjacent pone.0308973 N~50-52); composite/pre-computed data
+only, no raw items (11: pone.0246894, pone.0322635, pone.0207589,
+pone.0231077, pone.0321373, pone.0283117 residualized/z-score derived
+vars, pone.0240439 one-off physiological assays, peerj.16799,
+s12889-025-25237-z CFA fit tables only, s41598-021-98736-9 composite +
+N=96, s41598-025-17956-5 aggregate stats only); wrong data type entirely
+(3: pone.0174500 clinical measurements only, pone.0275045 systematic-
+review coding sheet, s41598-025-33041-3 transcriptomic data only); real
+PII found in the raw file, whole candidate skipped (3: pone.0321373 real
+phone numbers, pone.0122522 name/phone/birth date/postal code,
+peerj.13903 real date of birth).
+
+**Flagged for human review, not auto-decided**: `10.7717/peerj.12040`
+(dementia schedule, 811 rows x 424 cols, real item-level data spanning
+cognitive/depression/IADL/medical/socioeconomic instruments, CC BY) --
+the declared n=101 doesn't match any obvious `id` column (`EDNumber`
+alone gives 101 uniques but is household/enumeration-district level, not
+respondent level); needs a codebook before the true respondent id and
+scale boundaries can be trusted.
+
+All 25 tables across groups 1/2/3 consolidated into
+`biblio_plos28_pmc5.csv` (25 rows, 13 papers), all `irw_output/*.csv`
+files verified present -- see `TODO.md` for the pending upload item.
+`plos_batch28_triage.csv`, `plos_batch28_retriage.csv`,
+`pmc_batch5_triage.csv`, `pmc_batch5_retriage.csv`,
+`biblio_batch28_group{1,2,3}.csv`, and the `/tmp` staging CSVs deleted --
+fully captured in this entry and in `biblio_plos28_pmc5.csv`.
