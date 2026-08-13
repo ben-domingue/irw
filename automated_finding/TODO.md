@@ -3,12 +3,14 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-- [ ] **`automated_finding/biblio_pmc_batch4.csv`** (41 rows, 18 papers ->
+- [x] **`automated_finding/biblio_pmc_batch4.csv`** (41 rows, 18 papers ->
   41 tables, consolidated from all of PMC batch 4's `good` (3 papers) +
   `worth_retrying` (15 papers across 4 parallel review passes) pool,
-  2026-08-12) needs upload to Redivis and pasting into the dictionary
-  sheet. All 41 output files verified present in `irw_output/` before this
-  CSV was assembled. `reuter_2021_campuslife` (originally 42nd row) was
+  2026-08-12) uploaded to Redivis and pasted into the dictionary sheet
+  (confirmed 2026-08-12, ben-domingue); file and all 41 `irw_output/*.csv`
+  files gone from disk as expected. All 41 output files verified present
+  in `irw_output/` before this CSV was assembled. `reuter_2021_campuslife`
+  (originally 42nd row) was
   removed post-review, 2026-08-12 (ben-domingue catch) — mixed binary
   Yes/No and 3-point Less/Same/More items under one file with no confirmed
   underlying instrument, same problem as the sheets the script already
@@ -34,10 +36,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   these DOIs are the ones to revisit, but no standing list is kept per
   `feedback_min_sample_size` (log-and-move-on, same as any other skip).
 
-- [ ] **`automated_finding/biblio_plos_batch27_worthretrying.csv`** (19
+- [x] **`automated_finding/biblio_plos_batch27_worthretrying.csv`** (19
   rows, 8 papers -> 19 tables, from manual review of all of PLOS batch 27's
-  `good` + `worth_retrying` pool, 2026-08-12) needs upload to Redivis and
-  pasting into the dictionary sheet. Scripts: `data/schafer_2016_music_
+  `good` + `worth_retrying` pool, 2026-08-12) uploaded to Redivis and
+  pasted into the dictionary sheet (confirmed 2026-08-12, ben-domingue);
+  file and all 19 `irw_output/*.csv` files gone from disk as expected.
+  Scripts: `data/schafer_2016_music_
   goals_effects.py`, `data/srivani_2022_education4.py`, `data/liu_2025_
   teacher_support.py`, `data/babaei_2023_oral_health.py`, `data/gholami_
   2017_periodontal_knowledge.py`, `data/wen_2022_pyd.py`, `data/powell_
@@ -52,8 +56,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   merged into one `wen_2022_pyd.csv` with a `cov_study` column (same
   instrument, same items, same scale, two independent samples — see memory
   `feedback_collapse_same_instrument`). `plos_batch27_triage.csv`/
-  `plos_batch27_retriage.csv` can be deleted once this upload is
-  confirmed.
+  `plos_batch27_retriage.csv` already deleted (done earlier the same day,
+  before this upload confirmation).
 
 - [x] **11 PLOS batch 27 candidates flagged as an "N=50-99 ask-first
   band" — corrected, this was a policy-application error, not an open
