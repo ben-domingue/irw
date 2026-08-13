@@ -3,6 +3,15 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **Two off-construct `worth_retrying` leads from the 2026-08-13
+  repo-mode RT search**, not chased since they're not response-time data:
+  a discrete-choice pharmacy-preference study, N=6688
+  (`frontiersin.figshare.com/.../13351250`, dup_id_item ratio 2.0x --
+  check if it's genuinely repeated-choice-task structure before writing a
+  script); a heart-rate-complexity/cognitive-task study with text-coded
+  Likert item columns (`frontiersin.figshare.com/.../17083529`, needs the
+  standard text-Likert-value mapping fix).
+
 - [x] **`automated_finding/biblio_plos28_pmc5.csv`** (25 rows, 13 papers ->
   25 tables, consolidated from `biblio_batch28_group1.csv` (4 rows, 3
   papers) + `biblio_batch28_group2.csv` (11 rows, 8 papers) +

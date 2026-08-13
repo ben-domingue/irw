@@ -9028,3 +9028,98 @@ files verified present -- see `TODO.md` for the pending upload item.
 `pmc_batch5_triage.csv`, `pmc_batch5_retriage.csv`,
 `biblio_batch28_group{1,2,3}.csv`, and the `/tmp` staging CSVs deleted --
 fully captured in this entry and in `biblio_plos28_pmc5.csv`.
+
+## Batch 29 (PLOS) / Batch 6 (PMC) / repo-mode response-time push (2026-08-13)
+
+Targeted response-time discovery across all three modes in parallel, per
+`datastandard.md`'s `rt` column (per-item response-level attribute, seconds,
+paired with a valid `resp` -- not a whole-survey completion time). New terms
+(checked against `search_terms_log.csv` first; most obvious RT task names
+like Stroop/flanker/go-no-go/IAT/Posner/n-back/digit span/reading span/
+visual search/mental rotation were already extensively searched in batch 18
+and batch 19 and skipped as duplicates): **response time, response latency,
+decision time, choice reaction time, simple reaction time, mouse-tracking
+task, self-paced reading**. Dropped "psychomotor vigilance task" before
+searching -- PVT trials have no accuracy dimension (responded/lapsed only),
+so there's no valid `resp` to pair with `rt`. English-only for PLOS/PMC;
+repo mode also translated into the standard 8 languages (63 queries total).
+All terms logged in `search_terms_log.csv`.
+
+**PLOS batch 29**: 662 candidates -> 4 `good`, 59 `human_assistance`
+(retriaged: 9 worth_retrying, 24 human_review -> `human_review/
+human_review_plos_batch29.csv`, 20 aggregate_continuous, 6
+not_item_response), 28 not_item_response, 6 download_failed, 1 error.
+Of the 4 `good`: only `10.1371/journal.pone.0190634` (Wingenbach et al.
+2018, N=111) cleared the N>=100 floor; the other 3 (pone.0279360 N=58,
+pone.0298534 N=20, pone.0123625 N=62) skipped outright.
+
+**Written then retracted**: `data/wingenbach_2018_facial_emotion_rt.py` ->
+N=111, 28 items (9 emotions x 3 intensity levels + neutral), `resp` =
+unbiased hit-rate accuracy per condition (Wagner's-formula bias-corrected
+%correct, 0-100), `rt` = mean response latency per condition in seconds.
+Confirmed the "good flag needs a human glance" rule from SKILL.md: the
+triage script's own pick (S1 Data) was a separate valence/arousal
+mood-rating instrument, not the task data at all -- the real accuracy data
+was S2 ("Unbiased hit rates data") and RT was S3 ("Response latencies
+data"), found by reading the article's full SI file list. But both S2 and
+S3 values are themselves **means across ~12 actors per condition**, not
+raw per-trial responses -- exactly the composite-disguised-as-response
+failure mode `datastandard.md`'s "Aggregate/index columns masquerading as
+raw responses" section already documents from the `stenson_2021_
+sleep_emotion` retraction (PLOS ONE batch 6, 2026-07-28: a mean/contrast
+score across ~15 trials shipped as a raw per-trial rating). Missed the
+same check here -- should have confirmed against the paper's Methods that
+each S2/S3 cell was a single raw observation before shipping, not after.
+Caught and retracted by ben-domingue 2026-08-13 before upload: **the IRW
+is meant to hold trial-level responses specifically -- a per-subject
+per-condition mean, even when correctly computed and even when it varies
+meaningfully by item, doesn't qualify, no exception for RT/accuracy
+tasks.** Script, `irw_output/wingenbach_2018_facial_emotion_rt.{csv,RData}`,
+and `biblio_rt_batch29.csv` all deleted; no biblio row for this batch.
+
+**PMC batch 6**: only 52 candidates total across the `JOURNALS` list for
+these 7 terms -- thin surface for this construct in Europe PMC's covered
+journals. 0 `good`; 3 `human_assistance` retriaged to 1 worth_retrying, 2
+human_review (`human_review/human_review_pmc_batch6.csv`). The 1
+worth_retrying (`PMC12376440`, text-coded Likert item columns) not chased
+further this batch -- not RT-related, off this batch's target construct.
+
+**Repo mode** (`candidates_rt_batch.csv`, 372 candidates across Zenodo/OSF/
+Dryad/Figshare/DataCite/Dataverse): 0 `good`, 0 worth_retrying on first
+pass; 15 `human_assistance` retriaged to 3 worth_retrying, 3 human_review
+(`human_review/human_review_repo_rt_batch.csv` -- see note below on
+filename), 3 aggregate_continuous, 6 not_item_response. The most promising
+miss: `10.6084/m9.figshare.11320100` (Grundy, "The specificity and
+reliability of conflict adaptation: A mouse-tracking study" -- Flanker +
+Stroop tasks, per-trial `error` (accuracy) and `RT` columns, condition =
+congruent/incongruent) was auto-flagged `not_item_response` because the
+triage script picked up a spurious 2-value id column on the wide raw-data
+sheet; manual inspection confirmed real per-trial structure (13536 rows,
+96 trials x 2 tasks) but **N=71 participants, below the N>=100 floor** --
+skipped, not a triage bug worth fixing. Of the 3 worth_retrying: a
+discrete-choice pharmacy-preference study (N=6688) and a heart-rate-
+complexity/cognitive-task study (text-Likert items) are both off this
+batch's RT/accuracy target and logged in `TODO.md` as open leads rather
+than chased now; a third (`Table 6.xls`, PLOS figshare, "Mean (SDs)
+log-transformed RTs...") turned out to be a 5.6KB aggregate summary table,
+not raw per-subject data -- dropped.
+
+**Takeaway**: this batch shipped zero tables in the end. Response-time-
+as-primary-outcome data is doubly scarce in this pipeline's reachable
+sources: (1) most RT tasks in the literature run N<100 (typical
+cognitive-psych lab sample sizes) -- tripped up 3 of 4 PLOS `good` rows
+and the one strong repo-mode candidate (Grundy, N=71); (2) even the one
+candidate that cleared N>=100 turned out to report per-condition means
+rather than raw per-trial responses once actually inspected, which is
+disproportionately likely for RT/accuracy tasks specifically since authors
+routinely pre-aggregate trials into condition means before ever
+publishing supplementary data. Confirmed 2026-08-13: **no exception to
+trial-level-only for RT data** -- see the retraction note above. Future RT
+searches should expect a very low true-good rate even among triage `good`
+flags and verify trial-level-ness explicitly before writing a script, not
+just before shipping.
+
+`plos_batch29_triage.csv`, `plos_batch29_retriage_ha.csv`,
+`pmc_batch6_triage.csv`, `pmc_batch6_retriage_ha.csv`, `candidates_rt_batch.csv`,
+`irw_triage_rt.csv`, `irw_triage_rt_retriage_ha.csv` can be deleted --
+fully captured in this entry, nothing pending upload from this batch.

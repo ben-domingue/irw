@@ -3322,3 +3322,80 @@ date,query,output_file,notes
 2026-08-12,ethnic identity,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
 2026-08-12,work-family conflict,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
 2026-08-12,specific phobia,pmc_batch5_triage.csv,recycled from non-PMC search_terms_log.csv pool per SKILL.md term-selection rule
+2026-08-13,response time,plos_batch29_triage.csv,response-time discovery push: new unused term (per-item rt paired with accuracy resp)
+2026-08-13,response latency,plos_batch29_triage.csv,response-time discovery push: new unused term
+2026-08-13,decision time,plos_batch29_triage.csv,response-time discovery push: new unused term
+2026-08-13,choice reaction time,plos_batch29_triage.csv,response-time discovery push: new unused term
+2026-08-13,simple reaction time,plos_batch29_triage.csv,response-time discovery push: new unused term
+2026-08-13,mouse-tracking task,plos_batch29_triage.csv,response-time discovery push: new unused term
+2026-08-13,self-paced reading,plos_batch29_triage.csv,response-time discovery push: new unused term (marginal, requires paired comprehension-accuracy resp)
+2026-08-13,response time,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,response latency,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,decision time,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,choice reaction time,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,simple reaction time,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,mouse-tracking task,pmc_batch6_triage.csv,response-time discovery push: new unused term
+2026-08-13,self-paced reading,pmc_batch6_triage.csv,response-time discovery push: new unused term (marginal, requires paired comprehension-accuracy resp)
+2026-08-13,response time,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,tiempo de respuesta,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,Antwortzeit,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,temps de réponse,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,响应时间,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,応答時間,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,وقت الاستجابة,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,responstijd,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,응답 시간,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,response latency,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,latencia de respuesta,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,Antwortlatenz,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,latence de réponse,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,反应潜伏期,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,反応潜時,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,كمون الاستجابة,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,responslatentie,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,반응 잠재기,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,decision time,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,tiempo de decisión,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,Entscheidungszeit,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,temps de décision,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,决策时间,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,意思決定時間,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,وقت اتخاذ القرار,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,beslissingstijd,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,의사결정 시간,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,choice reaction time,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,tiempo de reacción de elección,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,Wahlreaktionszeit,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,temps de réaction de choix,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,选择反应时间,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,選択反応時間,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,زمن رد الفعل الاختياري,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,keuzereactietijd,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,선택 반응시간,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,simple reaction time,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,tiempo de reacción simple,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,einfache Reaktionszeit,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,temps de réaction simple,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,简单反应时间,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,単純反応時間,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,زمن رد الفعل البسيط,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,eenvoudige reactietijd,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,단순 반응시간,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,mouse-tracking task,candidates_rt_batch.csv,response-time discovery push: new unused term
+2026-08-13,tarea de seguimiento del ratón,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,Maus-Tracking-Aufgabe,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,tâche de suivi de la souris,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,鼠标追踪任务,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,マウストラッキング課題,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,مهمة تتبع الفأرة,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,muistracking-taak,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,마우스 트래킹 과제,candidates_rt_batch.csv,response-time discovery push: Korean translation
+2026-08-13,self-paced reading,candidates_rt_batch.csv,response-time discovery push: new unused term (marginal, requires paired comprehension-accuracy resp)
+2026-08-13,lectura a ritmo propio,candidates_rt_batch.csv,response-time discovery push: Spanish translation
+2026-08-13,selbstgesteuertes Lesen,candidates_rt_batch.csv,response-time discovery push: German translation
+2026-08-13,lecture à rythme propre,candidates_rt_batch.csv,response-time discovery push: French translation
+2026-08-13,自定步速阅读,candidates_rt_batch.csv,response-time discovery push: Chinese (Simplified) translation
+2026-08-13,自己ペース読解,candidates_rt_batch.csv,response-time discovery push: Japanese translation
+2026-08-13,القراءة الذاتية الوتيرة,candidates_rt_batch.csv,response-time discovery push: Arabic translation
+2026-08-13,zelfgestuurd lezen,candidates_rt_batch.csv,response-time discovery push: Dutch translation
+2026-08-13,자기 조절 읽기,candidates_rt_batch.csv,response-time discovery push: Korean translation
