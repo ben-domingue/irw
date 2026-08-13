@@ -44,4 +44,4 @@ p_by_dataset <- ggplot(growth, aes(x = created_at, y = n_tables, color = dataset
 
 p <- p_total / p_by_dataset
 
-ggsave("dataset_growth.png", p, width = 8, height = 8, dpi = 150)
+ggsave("dataset_growth.pdf", p, width = 8, height = 8, dpi = 150)
