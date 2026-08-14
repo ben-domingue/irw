@@ -3,6 +3,16 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **Triage script's `good` flag doesn't catch two content-level
+  failure modes**, surfaced by all 3 `good` rows in PR #1625
+  (2026-08-14 alt-source run) turning out unshippable on human review:
+  (1) no check against the N>=100 sample-size floor -- a `good` row can
+  have any N; (2) no detection of composite/aggregate columns
+  masquerading as raw item responses (e.g. columns literally named
+  `Pre`/`Post` counted as 2 "items"). Worth adding both as automated QC
+  checks in `irw_batch_updated.py` -- see the "PR #1625 follow-up" entry
+  in `BATCH_LOG.md` for the specific cases that motivated this.
+
 - [ ] **Two off-construct `worth_retrying` leads from the 2026-08-13
   repo-mode RT search**, not chased since they're not response-time data:
   a discrete-choice pharmacy-preference study, N=6688

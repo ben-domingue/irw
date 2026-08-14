@@ -9123,3 +9123,47 @@ just before shipping.
 `pmc_batch6_triage.csv`, `pmc_batch6_retriage_ha.csv`, `candidates_rt_batch.csv`,
 `irw_triage_rt.csv`, `irw_triage_rt_retriage_ha.csv` can be deleted --
 fully captured in this entry, nothing pending upload from this batch.
+
+**PR #1625 follow-up (2026-08-14 alt-source ad hoc run) -- all 3 `good`
+rows are false positives, none shippable.** Human-reviewed each of the 3
+`good` flags from the zenodo/dryad/figshare/datacite/scholars_portal/surf
+alt-source discovery run:
+
+- **Cognitive Activation Strategies and Self-Efficacy** (figshare
+  10.25415/ujhb.33093377.v1, UJ repo, CC BY) -- real raw per-teacher
+  Likert data, genuinely two separate scales in one workbook ("Cognitive
+  activation" 24 items, "Self-efficacy" 26 items) that the triage script
+  only partially counted (missed the second sheet entirely). But **N=64
+  on both sheets, below the N>=100 floor** -- skipped outright, not a
+  triage bug worth chasing further.
+- **From Hesitation to Confidence: Longitudinal Changes in Medical
+  Students' Presentation Skills and Anxiety** (figshare
+  10.6084/m9.figshare.33110519.v2, CC BY) -- the workbook's only two
+  sheets are "Students" (demographics) and "Summary table"; the "2 items"
+  the triage script counted are literally columns named `Pre`/`Post`,
+  themselves composite pre/post anxiety scores, plus `pre-A`...`post-F`
+  columns that are per-subscale composite averages -- no raw item-level
+  sheet exists anywhere in the file. Same failure mode as the
+  `wingenbach_2018` retraction (composite/index columns masquerading as
+  raw responses) -- dropped, not processed.
+- **Validity and reliability of the Vietnamese version of the Index
+  Dental Anxiety and Fear** (figshare 10.6084/m9.figshare.33140489.v1,
+  Le, Son 2026, CC BY) -- real raw per-respondent item-level data,
+  correctly flagged `multi_scale` (4 real subscales: IDAF-4C 8 items,
+  IDAF-P 5 items, IDAF-S 10 items, DFS 20 items, N=291 first
+  administration). Would otherwise have been the one real shippable lead
+  from this batch, but **the "Second administration" file (test-retest,
+  N=111) in the same dataset entry has a column of actual respondent full
+  names** (Vietnamese names, e.g. "Võ Ngọc Hoài An") sitting next to the
+  anonymized "Responser N" placeholder column -- confirmed present for
+  the file's respondents, not a one-off. Per the 2026-08-12 PII rule
+  (skip the whole candidate, never scrub-and-ship just the offending
+  column), the entire candidate is skipped, including the otherwise-clean
+  First administration file, since it's the same dataset/respondent pool.
+
+**Takeaway**: the automated triage `good` flag doesn't check sample size
+against the N>=100 floor or detect composite/aggregate columns
+disguised as items -- both slipped past QC checks that only look for
+structural/format errors, not content-level correctness. Worth adding
+both checks to the triage script itself rather than relying on a human
+catching every batch; logged as an open item in TODO.md.
