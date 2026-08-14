@@ -46,6 +46,18 @@ import requests
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 
+# Source connectors raise this to signal a hard block (e.g. an AWS WAF
+# bot-challenge) rather than a transient error -- retrying within this run
+# won't help. discover() catches it, stops calling that source for the rest
+# of the run (across all remaining queries/terms), and logs it once instead
+# of eating a wasted, silently-failing request per query. See dataverse
+# 2026-08-14 WAF block (BATCH_LOG.md) for the incident that prompted this.
+class SourceBlocked(Exception):
+    pass
+
+
+_blocked_sources: set[str] = set()
+
 # ---------------------------------------------------------------------------
 # RELEVANCE FILTER (tiered)
 # ---------------------------------------------------------------------------
@@ -222,9 +234,18 @@ def from_dataverse(query: str, max_pages: int = 5, per: int = 50):
                 "https://dataverse.harvard.edu/api/search",
                 params={"q": query, "type": "dataset", "per_page": per, "start": start},
                 headers=UA, timeout=30)
+            if r.headers.get("x-amzn-waf-action") == "challenge":
+                raise SourceBlocked(
+                    f"dataverse.harvard.edu is behind an AWS WAF JS "
+                    f"bot-challenge (HTTP {r.status_code}, empty body) -- "
+                    "site-wide, not query-specific; no header/retry fixes "
+                    "this, needs Harvard to allowlist or the challenge to "
+                    "lift")
             r.raise_for_status()
             data = r.json().get("data", {})
             items = data.get("items", [])
+        except SourceBlocked:
+            raise
         except Exception as e:
             print(f"[dataverse] {e}", file=sys.stderr); return
         if not items:
@@ -609,28 +630,40 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
         q_start = _time.time()
         print(f"[query {i}/{total}] {q}", flush=True)
         for src in active:
+            if src.__name__ in _blocked_sources:
+                continue
             src_new = 0
-            for hit in src(q):
-                key = hit.doi or f"{hit.source}:{hit.title.strip().lower()}"
-                if not key or key in seen:
-                    continue
-                if hit.doi and hit.doi in exclude:
-                    continue
-                if not is_relevant(hit, relevance_on):
-                    continue
-                if since and hit.published and hit.published[:10] < since:
-                    continue
-                seen.add(key)
-                results.append(hit)
-                q_new += 1
-                src_new += 1
-                if on_hit:
-                    on_hit(hit)
+            try:
+                for hit in src(q):
+                    key = hit.doi or f"{hit.source}:{hit.title.strip().lower()}"
+                    if not key or key in seen:
+                        continue
+                    if hit.doi and hit.doi in exclude:
+                        continue
+                    if not is_relevant(hit, relevance_on):
+                        continue
+                    if since and hit.published and hit.published[:10] < since:
+                        continue
+                    seen.add(key)
+                    results.append(hit)
+                    q_new += 1
+                    src_new += 1
+                    if on_hit:
+                        on_hit(hit)
+            except SourceBlocked as e:
+                _blocked_sources.add(src.__name__)
+                print(f"  [{src.__name__:20}] BLOCKED, skipping for rest "
+                      f"of run -- {e}", file=sys.stderr, flush=True)
+                continue
             if src_new:
                 print(f"  [{src.__name__:20}] +{src_new}", flush=True)
         elapsed = _time.time() - t0
         print(f"  → {q_new} new this query | {len(results)} total | "
               f"{elapsed:.0f}s elapsed", flush=True)
+    if _blocked_sources:
+        print(f"[discover] sources blocked this run (see BLOCKED lines "
+              f"above for why): {', '.join(sorted(_blocked_sources))}",
+              file=sys.stderr, flush=True)
     return results
 
 
