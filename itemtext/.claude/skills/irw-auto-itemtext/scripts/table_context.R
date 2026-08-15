@@ -67,7 +67,7 @@ check_tab <- function(name) {
 for (nm in c("queue", "tables_excluded", "xz_todo", "nj_todo")) check_tab(nm)
 
 cat("\n=== Local state ===\n")
-out_csv <- paste0(table, "__items.csv")
+out_csv <- file.path("itemtables", paste0(table, "__items.csv"))
 if (file.exists(out_csv)) {
     cat(out_csv, "already exists locally -- check before overwriting.\n")
 } else {

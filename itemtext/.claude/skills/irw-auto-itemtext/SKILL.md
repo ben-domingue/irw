@@ -11,7 +11,9 @@ from its source paper and writes it as a validated `{table}__items.csv`, ready f
 (copied verbatim from itemresponsewarehouse.org/itemtext.html) — read it before
 extracting anything, don't re-derive the schema from a merged example alone.
 
-Work from inside `itemtext/`.
+Work from inside `itemtext/`. **All output — `{table}__items.csv` files,
+`audit_confirmed.csv`, and `pending_index_notes.csv` — goes in `itemtext/itemtables/`,
+not the `itemtext/` root.**
 
 ## Output path: CSV-direct, not Sheets-fill
 
@@ -36,8 +38,8 @@ manual Sheets-fill workflow on a different table — don't modify it.
 ## Before doing anything
 
 1. Read `references/itemtext_standard.md` for the schema and the per-tab column layout.
-2. Check whether a `{table}__items.csv` already exists locally in `itemtext/` for the
-   table in question — if so, don't reprocess without being told to redo it.
+2. Check whether a `{table}__items.csv` already exists locally in `itemtext/itemtables/`
+   for the table in question — if so, don't reprocess without being told to redo it.
 3. Note: there's no standing local cache directory yet. If you fetch a paywalled or
    rate-limited source PDF, save it under `itemtext/.cache/<table>/` (already gitignored)
    so a retry doesn't re-fetch it. Create the directory if it doesn't exist.
@@ -230,17 +232,17 @@ partial/defensible structure you have and record the discrepancy per Step 6b —
 pad, guess, or drop items silently to make the counts line up.
 
 Only once this passes (or the discrepancy is deliberately accepted and logged) does the
-CSV get written as `itemtext/<table>__items.csv`.
+CSV get written as `itemtext/itemtables/<table>__items.csv`.
 
 ## Step 6 — Write the output
 
 ```r
-write.csv(items, file = "<table>__items.csv", row.names = FALSE)
+write.csv(items, file = "itemtables/<table>__items.csv", row.names = FALSE)
 ```
 
-Written directly into `itemtext/` (not a subdirectory) — this is where `upload.py`
-expects to find files (`python3 upload.py .` uploads everything in the current
-directory). Don't upload automatically; that's a separate, explicit step (see
+Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where
+`upload.py` expects to find files (`python3 upload.py itemtables` uploads everything in
+that directory). Don't upload automatically; that's a separate, explicit step (see
 "Uploading", below) since it pushes to the shared `bdomingu/IRW_text:next` Redivis
 dataset.
 
@@ -249,17 +251,17 @@ dataset.
 There is no tool that can write into the index workbook's NOTES column directly — same
 gap as Step 1's cross-check tabs, just on the write side. When validation surfaces a
 real discrepancy (item-count mismatch, partial coverage, source inaccessible), append a
-row to `itemtext/pending_index_notes.csv` (columns: `table,note`; create the file with a
-header if it doesn't exist yet) and tell the user what to paste into Sheet1's NOTES
-column — don't claim the index sheet was updated. This is a standing, cumulative file
-like `automated_finding/license_blocked_candidates.csv` — append to it across batches,
-don't delete it once a batch is written up; only remove a row once the user confirms
-they've pasted it into the actual sheet.
+row to `itemtext/itemtables/pending_index_notes.csv` (columns: `table,note`; create the
+file with a header if it doesn't exist yet) and tell the user what to paste into Sheet1's
+NOTES column — don't claim the index sheet was updated. This is a standing, cumulative
+file like `automated_finding/license_blocked_candidates.csv` — append to it across
+batches, don't delete it once a batch is written up; only remove a row once the user
+confirms they've pasted it into the actual sheet.
 
 ## Idempotency & caching
 
-- Never reprocess a table that already has a local `{table}__items.csv` or an already-
-  populated Sheet1 row, unless told to redo it. **Exception: Audit mode (below)
+- Never reprocess a table that already has a local `itemtables/{table}__items.csv` or an
+  already-populated Sheet1 row, unless told to redo it. **Exception: Audit mode (below)
   deliberately targets already-done tables — that guard protects the queue workflow from
   duplicating in-flight human work and doesn't apply there.**
 - Cache fetched PDFs/pages under `itemtext/.cache/<table>/` (gitignored) so retries on
@@ -281,9 +283,9 @@ curation, the curation was the stale one, not the extraction.
    unclaimed human work on new tables and isn't relevant here.
 2. **Extract** — same as Steps 2–4 above (fetch the live `item`/`resp` target via
    `table_context.R`, find the source paper, extract and structure). Write the result to
-   a staging path, not `itemtext/<table>__items.csv` — e.g.
+   a staging path, not `itemtext/itemtables/<table>__items.csv` — e.g.
    `itemtext/audit_staging/<table>__items.csv` — so it can never be picked up by a stray
-   `python3 upload.py .` before review.
+   `python3 upload.py itemtables` before review.
 3. **Diff** — run:
    ```bash
    Rscript .claude/skills/irw-auto-itemtext/scripts/diff_itemtext.R <table> itemtext/audit_staging/<table>__items.csv itemtext/audit_pending_review/<table>_diff.md
@@ -306,8 +308,9 @@ curation, the curation was the stale one, not the extraction.
    result always resolves into exactly one of green/yellow/red/gray):
    - 🟢 **Green** — `confirm`, or a `review` where the mismatches turn out to be noise
      (e.g. cosmetic wording, not substance). Append one row to
-     `itemtext/audit_confirmed.csv` (columns `table,date,note`; create with a header if it
-     doesn't exist) and stop — no Redivis write, no further action unless re-audited later.
+     `itemtext/itemtables/audit_confirmed.csv` (columns `table,date,note`; create with a
+     header if it doesn't exist) and stop — no Redivis write, no further action unless
+     re-audited later.
    - 🔴 **Red** — the diff shows a genuine, evidence-backed problem with the *curated*
      version (fresh extraction matches a live `irw::irw_fetch(table)` check where curation
      has a gap — missing items, missing `resp` categories, a stale resp range, items that
@@ -339,8 +342,8 @@ curation, the curation was the stale one, not the extraction.
      material found, or a same-instrument-different-source-language ambiguity like
      `mpsycho_rogers_ocd`'s wording variant) and there's *no evidence either way* — not
      confirmed clean (so not green) and no specific issue to document (so not yellow).
-     Log via Step 6b (`itemtext/pending_index_notes.csv`) as a candidate for retry later
-     with a different source, not as a resolved outcome.
+     Log via Step 6b (`itemtext/itemtables/pending_index_notes.csv`) as a candidate for
+     retry later with a different source, not as a resolved outcome.
 5. **Batch report**: write one `itemtext/audit_batch_reports/batchNN_<label>.md` per
    audit-mode run, using `batch01_pilot.md` as the template — a summary count table, then
    one section per status with the per-table detail (including yellow's ready-to-paste
@@ -368,16 +371,16 @@ for every table — some papers simply don't disclose full item text (see
 different item count than what's in the live data, and some only give categorical
 scoring with no recoverable numeric key. **Don't treat anything short of 100% coverage
 as a failure of the skill** — a partial extraction with an honest discrepancy note in
-`pending_index_notes.csv` is a correct outcome, not an incomplete one. Move on to the
-next candidate rather than forcing a fabricated match.
+`itemtables/pending_index_notes.csv` is a correct outcome, not an incomplete one. Move
+on to the next candidate rather than forcing a fabricated match.
 
 ## Uploading (separate, explicit step — don't do this automatically)
 
 ```bash
-python3 upload.py .
+python3 upload.py itemtables
 ```
 
-Uploads every `*.csv` in the current directory to `bdomingu/IRW_text:next` on Redivis
+Uploads every `*.csv` in `itemtext/itemtables/` to `bdomingu/IRW_text:next` on Redivis
 (prompts before overwriting anything already there). Only run this when the user
 explicitly asks to upload — it's a shared-system write, same caution as any other
 Redivis upload in this repo.
