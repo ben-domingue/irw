@@ -1529,8 +1529,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   mapping confirmed against the paper's own Measures section item counts,
   not just column names -- the prefixes don't literally spell out the
   construct: `u`=uncertainty, `r`=conflict, `c`=continuity, `p`=political
-  skill). `biblio_plos_monthly_2026-08-15.csv` (9 rows) ready for Redivis
-  upload + dictionary-sheet paste.
+  skill). `biblio_plos_monthly_2026-08-15.csv` (9 rows) uploaded to
+  Redivis and pasted into the dictionary sheet (confirmed 2026-08-15,
+  ben-domingue); file and all 9 `irw_output/*.csv` files gone from disk
+  as expected.
 - [ ] **1 of 3 `worth_retrying` candidates from the 2026-08-15 PLOS monthly
   re-run still open**: `10.1371/journal.pone.0341726` (N=385) -- real
   PSS-10/GAD-7/PHQ-9 item-level data confirmed present (0-3/1-4 Likert
