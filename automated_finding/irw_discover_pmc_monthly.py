@@ -17,6 +17,14 @@ search endpoint has no date-range parameter wired up here either.
 --limit bounds each run's total triaged-candidate count for the same
 rate-limit/runtime reasons as the PLOS version.
 
+--per-term-cap bounds how many new candidates a single term may consume
+out of that budget (default: max(1, limit // len(terms))) -- same fix and
+same rationale as irw_discover_plos_monthly.py: without it a broad term
+early in the fixed-order term list can exhaust --limit by itself every
+run, since there's no date-range filter to shrink its result set over
+time and the loop always starts at terms[0]. See that file's docstring
+for the 2026-08-15 incident that motivated this.
+
 Run:
     python irw_discover_pmc_monthly.py --mode weekly
     python irw_discover_pmc_monthly.py --mode full --limit 150
@@ -88,6 +96,10 @@ def main():
                           f"full={DEFAULT_LIMIT_BY_MODE['full']})")
     ap.add_argument("--out", default=None,
                      help=f"output CSV (default: {OUT_PREFIX}<mode>_<today>.csv)")
+    ap.add_argument("--per-term-cap", type=int, default=None,
+                     help="max new candidates a single term may consume out of --limit "
+                          "(default: max(1, limit // n_terms), so a run's budget spreads "
+                          "across the whole term list instead of one broad term eating it)")
     ap.add_argument("--dry-run", action="store_true",
                      help="print term/journal counts and seen-DOI store size, no queries run")
     args = ap.parse_args()
@@ -99,6 +111,7 @@ def main():
 
     terms = HIGH_YIELD_TERMS if args.mode == "weekly" else FULL_TERM_LIST
     limit = args.limit if args.limit is not None else DEFAULT_LIMIT_BY_MODE[args.mode]
+    per_term_cap = args.per_term_cap if args.per_term_cap is not None else max(1, limit // len(terms))
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     seen = load_seen_dois()
@@ -107,7 +120,7 @@ def main():
         print(f"Mode: {args.mode} ({len(terms)} terms) x journals: {', '.join(journals)}")
         print(f"Seen-DOI store ({SEEN_DOIS_PATH}): {len(seen):,} DOIs already attempted "
               f"by any manual or scheduled run (never re-triaged)")
-        print(f"Limit this run: {limit}")
+        print(f"Limit this run: {limit} (per-term cap: {per_term_cap})")
         return
 
     exclude = _load_auto_exclusions()
@@ -123,12 +136,16 @@ def main():
     skip = seen | exclude
     newly_attempted = []
     n_done = 0
-    terms_fully_covered = 0
+    terms_visited = 0
+    terms_capped = 0
     pool = _new_pool()
-    capped = False
+    limit_hit = False
     try:
         for term in terms:
             print(f"\n[term] {term!r}", flush=True)
+            terms_visited += 1
+            term_done = 0
+            term_capped = False
             for journal in journals:
                 for hit in from_pmc(term, journal):
                     if hit.doi in skip:
@@ -139,15 +156,20 @@ def main():
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1
+                    term_done += 1
                     print(f"  [{row['flag']:18}] {hit.title[:70]}", flush=True)
-                    if n_done >= limit:
-                        capped = True
+                    if term_done >= per_term_cap:
+                        term_capped = True
                         break
-                if capped:
+                    if n_done >= limit:
+                        limit_hit = True
+                        break
+                if term_capped or limit_hit:
                     break
-            if not capped:
-                terms_fully_covered += 1
-            if capped:
+            if term_capped:
+                terms_capped += 1
+                print(f"  (hit --per-term-cap={per_term_cap} for this term, moving on)", flush=True)
+            if limit_hit:
                 print(f"\nHit --limit={limit}; stopping. Remaining terms picked up next run "
                       f"(seen-DOI state persists).", flush=True)
                 break
@@ -157,14 +179,16 @@ def main():
         append_seen_dois(newly_attempted)
 
     print(f"\n{n_done} candidates triaged -> {out_path}")
-    print(f"{terms_fully_covered}/{len(terms)} terms fully covered this run")
+    print(f"{terms_visited}/{len(terms)} terms visited this run "
+          f"({terms_capped} hit the per-term cap of {per_term_cap})")
 
     _append_log_rows([{
         "date": today,
         "query": f"[{args.mode}] {len(terms)} terms x journals={','.join(journals)}",
         "output_file": out_path,
         "notes": f"pmc monthly-script automated run; mode={args.mode}; "
-                 f"{n_done} candidates triaged; {terms_fully_covered}/{len(terms)} terms covered",
+                 f"{n_done} candidates triaged; {terms_visited}/{len(terms)} terms visited "
+                 f"({terms_capped} hit per-term cap {per_term_cap})",
     }])
 
 

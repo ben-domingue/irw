@@ -3508,3 +3508,6 @@ date,query,output_file,notes
 2026-08-14,resilience,alt_source_candidates_2026-08-14.csv,"ad hoc manual run; sources scheduled routines never query; 1 candidates; sources=zenodo,dryad,figshare,datacite,scholars_portal,surf; since=2026-05-16"
 2026-08-14,procrastination,alt_source_candidates_2026-08-14.csv,"ad hoc manual run; sources scheduled routines never query; 1 candidates; sources=zenodo,dryad,figshare,datacite,scholars_portal,surf; since=2026-05-16"
 2026-08-14,growth mindset,alt_source_candidates_2026-08-14.csv,"ad hoc manual run; sources scheduled routines never query; 1 candidates; sources=zenodo,dryad,figshare,datacite,scholars_portal,surf; since=2026-05-16"
+2026-08-15,[full] 100 terms x journals=plosone,plos_monthly_candidates_full_2026-08-15.csv,plos monthly-script automated run; mode=full; 150 candidates triaged; 1/100 terms covered
+2026-08-15,[full] 100 terms x journals=plosone,plos_monthly_candidates_full_2026-08-15.csv,plos monthly-script automated run; mode=full; 150 candidates triaged; 2/100 terms covered
+2026-08-15,[full] 100 terms x journals=plosone,plos_monthly_candidates_full_2026-08-15.csv,plos monthly-script automated run; mode=full; 95 candidates triaged; 100/100 terms visited (95 hit per-term cap 1); supersedes prior two rows this date (pre-per-term-cap-fix, stuck on personality/grit)

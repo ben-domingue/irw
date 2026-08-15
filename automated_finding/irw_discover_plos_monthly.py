@@ -29,10 +29,19 @@ append_seen_dois() directly.
 
 --limit bounds each run's total triaged-candidate count (real downloads are
 the expensive, rate-limit-relevant part -- see README.md's triage timing
-note). If a run hits the cap, remaining terms for that mode are left
-untried and picked up on the next scheduled run naturally (seen-DOI state
-persists across runs) -- print a clear notice so a human doesn't assume the
-term list was fully covered.
+note).
+
+--per-term-cap bounds how many new candidates a single term may consume
+out of that budget (default: max(1, limit // len(terms))). Without this,
+a broad single-word term early in the list (e.g. "personality") can return
+close to its max_rows=300 every run and alone exhaust --limit, since there
+is no date-range filter to shrink its result set over time (see below) --
+observed in practice on 2026-08-15: two consecutive full-mode runs both
+covered only 2/100 terms ("personality", "grit"), because the loop always
+starts at terms[0] and seen-DOI dedup alone wasn't shrinking personality's
+new-hit count fast enough to let the run progress. Capping per-term intake
+spreads a run's budget across the whole term list instead of letting early
+terms starve later ones.
 
 Run:
     python irw_discover_plos_monthly.py --mode weekly
@@ -106,6 +115,10 @@ def main():
                           f"full={DEFAULT_LIMIT_BY_MODE['full']})")
     ap.add_argument("--out", default=None,
                      help=f"output CSV (default: {OUT_PREFIX}<mode>_<today>.csv)")
+    ap.add_argument("--per-term-cap", type=int, default=None,
+                     help="max new candidates a single term may consume out of --limit "
+                          "(default: max(1, limit // n_terms), so a run's budget spreads "
+                          "across the whole term list instead of one broad term eating it)")
     ap.add_argument("--dry-run", action="store_true",
                      help="print term/journal counts and seen-DOI store size, no queries run")
     args = ap.parse_args()
@@ -117,6 +130,7 @@ def main():
 
     terms = HIGH_YIELD_TERMS if args.mode == "weekly" else FULL_TERM_LIST
     limit = args.limit if args.limit is not None else DEFAULT_LIMIT_BY_MODE[args.mode]
+    per_term_cap = args.per_term_cap if args.per_term_cap is not None else max(1, limit // len(terms))
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     seen = load_seen_dois()
@@ -125,7 +139,7 @@ def main():
         print(f"Mode: {args.mode} ({len(terms)} terms) x journals: {', '.join(journals)}")
         print(f"Seen-DOI store ({SEEN_DOIS_PATH}): {len(seen):,} DOIs already attempted "
               f"by any manual or scheduled run (never re-triaged)")
-        print(f"Limit this run: {limit}")
+        print(f"Limit this run: {limit} (per-term cap: {per_term_cap})")
         return
 
     exclude = _load_auto_exclusions()
@@ -141,16 +155,18 @@ def main():
     skip = seen | exclude
     newly_attempted = []
     n_done = 0
-    terms_fully_covered = 0
+    terms_visited = 0
+    terms_capped = 0
     pool = _new_pool()
-    capped = False
+    limit_hit = False
     try:
         for term in terms:
             print(f"\n[term] {term!r}", flush=True)
-            any_hit = False
+            terms_visited += 1
+            term_done = 0
+            term_capped = False
             for journal in journals:
                 for hit in from_plos(term, journal):
-                    any_hit = True
                     if hit.doi in skip:
                         continue
                     skip.add(hit.doi)
@@ -159,15 +175,20 @@ def main():
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1
+                    term_done += 1
                     print(f"  [{row['flag']:18}] {hit.title[:70]}", flush=True)
-                    if n_done >= limit:
-                        capped = True
+                    if term_done >= per_term_cap:
+                        term_capped = True
                         break
-                if capped:
+                    if n_done >= limit:
+                        limit_hit = True
+                        break
+                if term_capped or limit_hit:
                     break
-            if not capped:
-                terms_fully_covered += 1
-            if capped:
+            if term_capped:
+                terms_capped += 1
+                print(f"  (hit --per-term-cap={per_term_cap} for this term, moving on)", flush=True)
+            if limit_hit:
                 print(f"\nHit --limit={limit}; stopping. Remaining terms picked up next run "
                       f"(seen-DOI state persists).", flush=True)
                 break
@@ -177,14 +198,16 @@ def main():
         append_seen_dois(newly_attempted)
 
     print(f"\n{n_done} candidates triaged -> {out_path}")
-    print(f"{terms_fully_covered}/{len(terms)} terms fully covered this run")
+    print(f"{terms_visited}/{len(terms)} terms visited this run "
+          f"({terms_capped} hit the per-term cap of {per_term_cap})")
 
     _append_log_rows([{
         "date": today,
         "query": f"[{args.mode}] {len(terms)} terms x journals={','.join(journals)}",
         "output_file": out_path,
         "notes": f"plos monthly-script automated run; mode={args.mode}; "
-                 f"{n_done} candidates triaged; {terms_fully_covered}/{len(terms)} terms covered",
+                 f"{n_done} candidates triaged; {terms_visited}/{len(terms)} terms visited "
+                 f"({terms_capped} hit per-term cap {per_term_cap})",
     }])
 
 
