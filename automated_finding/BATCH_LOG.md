@@ -9221,3 +9221,43 @@ on a `dup_id_item`-flagged row):
 
 Triage artifact kept on disk (not deleted) until the 3 `worth_retrying`
 scripts are written: `plos_monthly_2026-08-15_retriage_ha.csv`.
+
+## PLOS monthly re-run — 2 worth_retrying scripts written (2026-08-15)
+
+Wrote and verified processing scripts for 2 of the 3 `worth_retrying`
+candidates surfaced above:
+
+- `data/islam_2022_online_addiction.py` (`10.1371/journal.pone.0279062`,
+  N=428, cc-by) -> 5 tables: `islam_2022_igds9sf` (9 items, 1-5),
+  `islam_2022_gdt` (4 items, 1-5), `islam_2022_phq9` (9 items, 0-3),
+  `islam_2022_gad7` (7 items, 0-3), `islam_2022_bsmas` (6 items, 1-5).
+  No `id` column in source -- row index used. 9 non-PII covariates carried
+  through (`cov_age`, `cov_sex`, `cov_marital_status`,
+  `cov_academic_grades`, `cov_family_type`, `cov_monthly_income`,
+  `cov_living_status`, `cov_hours_internet_use`, `cov_hours_playing_game`).
+  `Sum_*` composite columns excluded. No imputation language found in the
+  article text.
+- `data/huo_2025_construction_partnerships.py`
+  (`10.1371/journal.pone.0334555`, N=230, cc-by) -> 4 tables:
+  `huo_2025_project_uncertainty` (8 items), `huo_2025_relationship_
+  conflict` (4 items), `huo_2025_relationship_continuity` (3 items),
+  `huo_2025_political_skill` (8 items), all 1-5. No `id` column and no
+  covariates at all in the source SI file (paper mentions gender/tenure/
+  work-status controls were collected but they aren't in the shared
+  file). **Item-prefix mapping required reading the paper's Measures
+  section, not just eyeballing column names**: raw columns are
+  `p1`-`p8`/`r1`-`r4`/`u1`-`u8`/`c1`-`c3`, and a naive guess (`r`=
+  continuity, `c`=conflict) would have been backwards -- the paper states
+  "project uncertainty using eight items" (matches `u`, 8 cols),
+  "relationship conflict based on four-item scale" (matches `r`, 4 cols),
+  "relationship continuity...using three items" (matches `c`, 3 cols),
+  and the shortened 8-item Political Skill Inventory (matches `p`, 8
+  cols) -- confirmed by item-count cross-check against each prefix's
+  actual column count, not assumed from the letters themselves.
+
+`biblio_plos_monthly_2026-08-15.csv` (9 rows) prepared for Redivis
+upload + dictionary-sheet paste, following the standard column order
+(license "CC BY 4.0", Contributor "automated", Public Reshare "Public").
+Third candidate (`10.1371/journal.pone.0341726`) left open in `TODO.md`
+-- needs column-range extraction work before it can be scripted.
+`plos_monthly_2026-08-15_retriage_ha.csv` deleted, fully captured here.

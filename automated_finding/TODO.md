@@ -1518,16 +1518,22 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `10.7717/peerj.2421`) -- legacy `.xls` files, sandbox was missing
   `xlrd`. Retry manually with `pip install xlrd`.
 
-- [ ] **3 `worth_retrying` scripts from the 2026-08-15 PLOS monthly re-run**
-  (see `BATCH_LOG.md` entry same date) -- all cc-by, all real item-level
-  data confirmed by direct re-download (original triage's `n_participants`
-  was wrong on all three, corrected N shown below):
-  - `10.1371/journal.pone.0279062` (N=428) -- IGDS9-SF (9 items), GDT
-    (4 items), PHQ-9, GAD-7, BSMAS (6 items); drop the `Sum_*` composite
-    columns, 5 separate scale files.
-  - `10.1371/journal.pone.0334555` (N=230) -- p1-8/r1-4/u1-8/c1-3, clean
-    item codes, straightforward.
-  - `10.1371/journal.pone.0341726` (N=385) -- PSS-10/GAD-7/PHQ-9 embedded
-    in verbose full-question-text column headers mixed with one-off
-    demographic/yes-no items; needs column-range identification before
-    writing the script (more work than the other two).
+- [x] **2 of 3 `worth_retrying` scripts from the 2026-08-15 PLOS monthly
+  re-run written and shipped** (see `BATCH_LOG.md` entry same date):
+  `data/islam_2022_online_addiction.py` (`10.1371/journal.pone.0279062`,
+  N=428) -> 5 tables (`islam_2022_igds9sf/_gdt/_phq9/_gad7/_bsmas`,
+  `Sum_*` composite columns dropped); `data/huo_2025_construction_
+  partnerships.py` (`10.1371/journal.pone.0334555`, N=230) -> 4 tables
+  (`huo_2025_project_uncertainty/_relationship_conflict/
+  _relationship_continuity/_political_skill`; item-prefix-to-construct
+  mapping confirmed against the paper's own Measures section item counts,
+  not just column names -- the prefixes don't literally spell out the
+  construct: `u`=uncertainty, `r`=conflict, `c`=continuity, `p`=political
+  skill). `biblio_plos_monthly_2026-08-15.csv` (9 rows) ready for Redivis
+  upload + dictionary-sheet paste.
+- [ ] **1 of 3 `worth_retrying` candidates from the 2026-08-15 PLOS monthly
+  re-run still open**: `10.1371/journal.pone.0341726` (N=385) -- real
+  PSS-10/GAD-7/PHQ-9 item-level data confirmed present (0-3/1-4 Likert
+  values verified) but buried under extremely verbose full-question-text
+  column headers mixed with one-off demographic/yes-no items; needs
+  careful column-range identification before a script can be written.
