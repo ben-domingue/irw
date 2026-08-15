@@ -1517,3 +1517,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 - [ ] **2 `download_failed` rows from PMC batch 3** (`10.7717/peerj.17440`,
   `10.7717/peerj.2421`) -- legacy `.xls` files, sandbox was missing
   `xlrd`. Retry manually with `pip install xlrd`.
+
+- [ ] **3 `worth_retrying` scripts from the 2026-08-15 PLOS monthly re-run**
+  (see `BATCH_LOG.md` entry same date) -- all cc-by, all real item-level
+  data confirmed by direct re-download (original triage's `n_participants`
+  was wrong on all three, corrected N shown below):
+  - `10.1371/journal.pone.0279062` (N=428) -- IGDS9-SF (9 items), GDT
+    (4 items), PHQ-9, GAD-7, BSMAS (6 items); drop the `Sum_*` composite
+    columns, 5 separate scale files.
+  - `10.1371/journal.pone.0334555` (N=230) -- p1-8/r1-4/u1-8/c1-3, clean
+    item codes, straightforward.
+  - `10.1371/journal.pone.0341726` (N=385) -- PSS-10/GAD-7/PHQ-9 embedded
+    in verbose full-question-text column headers mixed with one-off
+    demographic/yes-no items; needs column-range identification before
+    writing the script (more work than the other two).

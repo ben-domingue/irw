@@ -9167,3 +9167,57 @@ disguised as items -- both slipped past QC checks that only look for
 structural/format errors, not content-level correctness. Worth adding
 both checks to the triage script itself rather than relying on a human
 catching every batch; logged as an open item in TODO.md.
+
+## PLOS monthly full-sweep re-run + `--per-term-cap` fix verification (2026-08-15)
+
+Verified the `--per-term-cap` fix (see `project_automated_finding_routines`
+memory / commit `5d2c007`) by re-running `irw_discover_plos_monthly.py
+--mode full` locally: 100/100 terms visited in one pass (vs 2/100 stuck on
+"personality"/"grit" pre-fix), 95 candidates triaged -> `plos_monthly_
+candidates_full_2026-08-15.csv` (2 `good`, 17 `human_assistance`, 74
+`no_usable_file`, 2 `not_item_response`).
+
+**Both `good` rows skipped, N<100 floor**: `10.1371/journal.pone.0180298`
+(anxiety/avoidance, n=91) and `10.1371/journal.pone.0286080` (COVID-19
+nurse vital-signs interpretation, n=24).
+
+**17 `human_assistance` rows retriaged** (`irw_retriage_ha.py`): 5
+`not_item_response`, 7 `aggregate_continuous` (auto-dropped), 5
+`human_review` (hand-inspected below). All 5 `human_review` rows had
+wildly-wrong `n_participants` in the original triage row -- the
+low-confidence auto-mapping that failed with `dup_id_item` also botched
+the row count, so a fresh direct download+re-parse was needed for each
+before any N-floor judgment was possible (do NOT trust `n_participants`
+on a `dup_id_item`-flagged row):
+
+- `10.1371/journal.pone.0292844` (math anxiety, real N=97 not 2) -- still
+  under the 100 floor once corrected. Skip.
+- `10.1371/journal.pone.0159561` (financial education/impulsivity, N=414)
+  -- N is fine, but `Extraversion1/2`, `Agreeableness1/2`, etc. range
+  11-40 and `Risk1/2` range 5-20: these are summed subscale **totals**,
+  not raw items (2 "items" per trait with that wide a range can't be
+  single Likert responses). Reclassify `aggregate_continuous`, skip.
+- `10.1371/journal.pone.0279062` (Bangladeshi adolescents' online
+  addictive behaviors, N=428, cc-by) -- **real item-level data**, 4
+  validated instruments in one file: `IGDS9-SF1`-`9` (gaming disorder),
+  `GDT1`-`4`, `PHQ1`-`9` (depression), `GAD1`-`7` (anxiety), `BSMAS1`-`6`
+  (Bergen social media addiction) -- each with an accompanying `Sum_*`
+  composite column to exclude. Genuinely promising; flagged
+  `worth_retrying`, script not yet written.
+- `10.1371/journal.pone.0334555` (construction-industry political
+  skill/relationship conflict, N=230, cc-by) -- **real item-level data**,
+  clean short item codes already close to IRW-ready: `p1`-`p8` (political
+  skill), `r1`-`r4` (relationship continuity), `u1`-`u8` (uncertainty),
+  `c1`-`c3` (conflict), 1-5 Likert values. Flagged `worth_retrying`,
+  script not yet written.
+- `10.1371/journal.pone.0341726` (community pharmacist job
+  satisfaction/mental health, N=385, cc-by) -- real item-level PSS-10/
+  GAD-7/PHQ-9 batteries are in the file (0-3 Likert values confirmed) but
+  buried under extremely verbose full-question-text column headers mixed
+  with one-off demographic/yes-no items; needs careful column-range
+  identification before a script can be written. Flagged `worth_retrying`
+  (more work needed than the other two), not `human_review` since the
+  content question is resolved -- only the extraction mechanics remain.
+
+Triage artifact kept on disk (not deleted) until the 3 `worth_retrying`
+scripts are written: `plos_monthly_2026-08-15_retriage_ha.csv`.
