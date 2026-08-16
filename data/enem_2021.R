@@ -1,9 +1,9 @@
 library(tidyverse)
 library(vroom)
 
-year <- 2015
-standard_prova_codes <- c(231, 234, 235, 238, 240, 241, 242, 244, 245, 246)
-regular_prova_codes  <- c(231, 234, 235, 238, 240, 241, 242, 244, 245, 246, 253, 254)
+year <- 2021
+standard_prova_codes <- c(879, 880, 881, 882, 889, 890, 891, 892, 899, 900, 901, 902, 909, 910, 911, 912)
+regular_prova_codes  <- c(879, 880, 881, 882, 885, 886, 887, 889, 890, 891, 892, 895, 896, 897, 899, 900, 901, 902, 905, 906, 907, 909, 910, 911, 912, 915, 916, 917)
 
 # INEP response codes: A-E, "." blank, "*" double mark
 ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")
