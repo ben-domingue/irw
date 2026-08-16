@@ -9261,3 +9261,85 @@ upload + dictionary-sheet paste, following the standard column order
 Third candidate (`10.1371/journal.pone.0341726`) left open in `TODO.md`
 -- needs column-range extraction work before it can be scripted.
 `plos_monthly_2026-08-15_retriage_ha.csv` deleted, fully captured here.
+
+## PMC backlog sweep — good/human_assistance follow-up (2026-08-16)
+
+Ben pointed at commit `3167335c34b826f0cf06c2118046c9aa41e3adf1` -- a
+93-candidate full-mode `irw_discover_pmc.py` run (100 terms x `JOURNALS`)
+that was **never merged to `main`** (it's the child of `d16de99`, which
+*is* on `main`, but the candidates-CSV commit itself is dangling --
+fetched directly by SHA via `git fetch origin <sha>` since no branch
+contains it). Its 2 `good` + 25 `human_assistance` rows had not been
+acted on. Recovered the candidates CSV from the dangling commit and
+worked the pool:
+
+**`good` (2 rows):**
+- `10.7717/peerj.6254` (Matranga & Lumia 2019, THinK HPV-knowledge
+  questionnaire, N=220, cc-by) -> `data/matranga_2019_hpv_knowledge.py`,
+  16 items (`q1`-`q16`), resp 1-6, covariates `cov_recruitment_group`
+  (Ob/Gyn dept vs. university clinic), `cov_age`, `cov_education`,
+  `cov_place_of_birth`, `cov_place_of_living`. No PII (place-of-birth/
+  living are categorical region codes, not free text).
+- `10.1038/s41598-024-66435-w` (dispersal-ability radiation study,
+  N=9) -- skipped outright, below the N>=100 floor.
+
+**`human_assistance` (25 rows) -> `irw_retriage_ha.py`:** 10
+`human_review`, 8 `worth_retrying`, 6 `aggregate_continuous`, 1
+`not_item_response`.
+- 10 `human_review` rows written to
+  `human_review/human_review_pmc_batch7.csv` (all shared the generic
+  "No clear automated classification" reason, not the usually-recoverable
+  "could not confidently identify item columns" one -- not spot-checked
+  further here).
+- Of the 8 `worth_retrying` rows, investigated the ones with usable N:
+  - `10.7717/peerj.19127` (Ajlan & Ashri 2025, dental faculty stem-cell
+    knowledge/attitude, N=101 after dropping 1 duplicate `Fsno`, cc-by)
+    -> `data/ajlan_2025_stemcell_knowledge.py`, 30 items (the file's
+    "a"-suffixed numeric recodes of each Yes/No/Likert item), mixed
+    3-/4-level ordinal scales per item (expected for this instrument).
+    Covariates: age bracket, gender, nationality, speciality (all
+    categorical, no PII in the free-text "specify" columns either --
+    just nationality/speciality names).
+  - `10.7717/peerj.3928` (ADDQoL-19/DTSQ-s diabetes QoL, N=372
+    apparent) -- the "dup_id_item" flag was real duplicate `Code`
+    values, not a longitudinal wave column; and the file itself only
+    exposes 2 raw items per instrument (rest are subscale/total
+    composites) -- not usable, dropped.
+  - `10.7717/peerj.14740` (IFIH1/DHX58 hepatitis chronicity, N=1334
+    apparent) -- raw file is SNP genotype data (`rs####` columns), not
+    item-response data at all -- dropped, `not_item_response` in
+    substance even though retriage called it `worth_retrying`.
+  - `10.7717/peerj.20207` (N=52) and `10.7717/peerj.9845` (N=19) --
+    below the N>=100 floor regardless of the id-mapping question,
+    dropped.
+  - `10.7717/peerj.20689` (N=59) -- below the N>=100 floor, dropped.
+  - `10.7717/peerj.20180` (TRX training) and `10.7717/peerj.18241`
+    (parental thermal conditions) -- text-coded Likert columns, N not
+    yet checked; left open in `TODO.md`.
+- Of the 6 `aggregate_continuous` rows, investigated the ones with N>=100:
+  - `10.7717/peerj.20310` (Sinsopa & Tripakornkusol 2025, modified
+    STOP-Bang OSA screening, N=188, cc-by) -- reclassified: the file mixes
+    8 binary screening items with continuous anthropometric inputs and
+    composite scores; the binary items themselves are genuine per-item
+    data -> `data/sinsopa_2025_stopbang.py`, 7 items (dropped `bmi35`,
+    constant/zero-variance in this BMI<35 inclusion-criteria sample),
+    resp 0/1.
+  - `10.7717/peerj.13069` (lacunes/T2DM cognitive impairment, N=227) --
+    file is composite-only (MMSE grouping, Lacunar Score, Total SVD
+    Score), no raw item columns -- dropped.
+  - `10.7717/peerj.7208` (bee sulfoxaflor olfactory conditioning,
+    N=102) -- the flagged file is one row per bee with an aggregated
+    "learning level" count across trials, not per-trial data -- dropped.
+  - `10.7717/peerj.19801` (N=92) and `10.7717/peerj.19555` (N=18) --
+    below the N>=100 floor, dropped without further content review.
+  - `10.1038/s41598-023-42115-z` (aversive-traits study, N=151) -- not
+    yet checked against the paper text to confirm genuine continuous
+    per-item ratings vs. a composite export; left open in `TODO.md`.
+- `10.7717/peerj.17565` (herring gull diet preference) -- confirmed
+  `not_item_response` (scraped article-prose fragment, not a dataset),
+  dropped.
+
+`biblio_pmc_backlog_2026-08-16.csv` (3 rows) prepared for Redivis upload
++ dictionary-sheet paste. The original dangling-commit candidates CSV and
+the retriage output were both scratch files (never committed to the
+repo) and are not tracked anywhere beyond this writeup.

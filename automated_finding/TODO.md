@@ -3,6 +3,20 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **2 unresolved leads from the PMC backlog-sweep retriage
+  (2026-08-16, dangling commit `3167335c`)**: `10.7717/peerj.20180` (TRX
+  suspension training study) and `10.7717/peerj.18241` (parental thermal
+  conditions/alarm calls study) both have text-coded Likert item columns
+  ("Strongly Agree" etc., not numeric codes) and unknown N -- need the
+  file downloaded, N checked against the >=100 floor, and the standard
+  text-Likert-value recode before a go/no-go call can be made.
+- [ ] **1 unresolved `aggregate_continuous` lead**:
+  `10.1038/s41598-023-42115-z` ("On the (number of) aversive traits...",
+  N=151, 17 cols) -- >50 unique values after melt could be genuine
+  continuous per-item trait ratings or a composite/VAS export; needs the
+  standard continuous-column verification against the paper text before
+  deciding (see memory `feedback_continuous_column_verification`).
+
 - [ ] **Triage script's `good` flag doesn't catch two content-level
   failure modes**, surfaced by all 3 `good` rows in PR #1625
   (2026-08-14 alt-source run) turning out unshippable on human review:
