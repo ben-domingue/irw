@@ -9792,3 +9792,86 @@ example.
 - **Deliberately excluded**: the single-item measures in the same file
   (`BENEFIT_ONESELF`, `TRUST_METHOD`, `TRUST_PEW`, `CLIM_TRUST`,
   `BENEFIT_REGION_MOST`/`_LEAST`) — IRW does not take single-item tables.
+
+## Harvard Dataverse WAF block lifted (2026-08-17)
+
+HMDC replied on ticket #423164 (https://help.hmdc.harvard.edu/Ticket/Display.html?id=423164):
+"Scripted API access restrictions have been lifted. We're keeping an eye on
+site traffic, but hope the traffic mitigation work we've done will prevent us
+from needing to disable it again. Just beware that may be necessary if traffic
+does spike back to where it was before."
+
+Verified independently the same day, not taken on faith:
+- `curl -sS -o /dev/null -w '%{http_code}' https://dataverse.harvard.edu/api/info/version` -> `200`
+- `GET /api/search?q=grit+scale&type=dataset&per_page=2` -> `200` with real
+  dataset JSON (e.g. `doi:10.7910/DVN/VBKUSG`, "Grit scale for Indian Adults").
+  No `x-amzn-waf-action: challenge`, no 202/0-byte response.
+
+So the block was site-wide and temporary exactly as they said, and waiting
+rather than escalating or engineering around it was the right call. No code
+change is needed to recover: the blocked-source handling added during the
+outage is self-clearing — the dataverse `--since` window reopens from
+2026-08-03, the DataCite publisher backfill switches itself off once dataverse
+answers, and candidates parked as retryable re-enter triage on the next run.
+
+**Open action: the first post-restoration run must be deliberately small and
+slow** (see TODO.md item 1b). Their message explicitly reserves the right to
+re-disable scripted access if traffic spikes back, and our self-healing design
+otherwise aims a compounding burst at them the moment they reopen: a two-week
+`--since` window, all 100 terms on a 90-day lookback, and the whole retryable
+backlog re-triaging at once. Subset the terms, cut `max_pages`, raise
+`PER_DOMAIN_DELAY` for that first pass, then return to normal cadence.
+
+## Throttled first post-restoration Dataverse run (2026-08-17)
+
+Executed the small-and-slow first pass required by TODO item 1b, immediately
+after the WAF block lifted.
+
+```
+python3 irw_discover_monthly.py --mode weekly --sources dataverse \
+  --out monthly_candidates_weekly_2026-08-17.csv
+python3 irw_batch_updated.py monthly_candidates_weekly_2026-08-17.csv \
+  --out monthly_triage_weekly_2026-08-17.csv
+```
+
+Deliberately scoped: the 15-term `HIGH_YIELD_TERMS` subset rather than the
+~100-term `TERM_LIST`, and `--sources dataverse` alone so osf/datacite
+couldn't muddy the read on whether Dataverse itself was healthy. ~75 requests
+max at the built-in 0.5s page spacing, a few minutes wall clock.
+
+**Dataverse is genuinely healthy.** All 15 terms returned from a live search;
+all 15 `search_terms_log.csv` rows recorded `sources=dataverse` with no
+`blocked=` segment, which is the honest-degradation machinery affirmatively
+confirming the source was reached (contrast the 2026-08-17 full run's rows,
+which carry the retroactive `blocked=dataverse` correction). Every term's
+`--since` computed to 2026-08-03, confirming that correction took.
+
+5 candidates -> 2 human_assistance, 1 not_item_response, 1 below_min_n,
+1 download_failed.
+
+- The `download_failed` is **not** a WAF re-block: a 403 on
+  `DVN/7P3PFB`, whose license reads "access can be requested from the
+  authors" — a real access restriction. Left out of
+  `repo_triage_seen_keys.csv` for a later retry per normal behavior, but it
+  will keep 403ing; not worth chasing.
+- Two CC0 `human_assistance` rows worth eyes, both flagged only because
+  `resp` had >50 unique values after the melt (the continuous/aggregate
+  heuristic), so both need the usual manual check of whether real ordinal
+  items are in there:
+  - `DVN/TG1GYA` "Wellbeing, Race, Rurality and SES" — N=530,920, 42 items.
+    Large enough to be worth real attention.
+  - `DVN/X2C2PL` preoperative anxiety, gynecologic surgery, Vietnam —
+    N=394, 59 items.
+
+Notably the ~2-week reopened window yielded only 5 candidates from these 15
+terms, so the feared recovery burst was modest in practice. Cleared to return
+to normal cadence (`--mode full`, full source set, scheduled routines).
+
+**Housekeeping:** `dataverse_allowlist_request.md` deleted 2026-08-17 as moot.
+It held the allowlist request Ben sent to support@dataverse.harvard.edu on
+2026-08-17; no allowlist was ever granted or needed, since HMDC lifted the
+restriction site-wide instead (ticket #423164). Full text recoverable from git
+history at commit `06ddd0c` if the block ever returns and a request is worth
+re-sending — but note its central ask (allowlist us specifically) was the
+wrong frame: the restriction was deliberate, temporary, and site-wide, and
+waiting was what actually worked.

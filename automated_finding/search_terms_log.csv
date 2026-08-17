@@ -3613,3 +3613,18 @@ date,query,output_file,notes
 2026-08-17,physical activity enjoyment,monthly_candidates_full_2026-08-17.csv,"monthly automated run; 0 candidates; sources=osf; since=2026-08-14; blocked=dataverse (retroactive correction 2026-08-17: dataverse WAF-challenged every request on this run and was never actually searched)"
 2026-08-17,youth development,monthly_candidates_full_2026-08-17.csv,"monthly automated run; 0 candidates; sources=osf; since=2026-08-14; blocked=dataverse (retroactive correction 2026-08-17: dataverse WAF-challenged every request on this run and was never actually searched)"
 2026-08-17,employability skills,monthly_candidates_full_2026-08-17.csv,"monthly automated run; 0 candidates; sources=osf; since=2026-08-14; blocked=dataverse (retroactive correction 2026-08-17: dataverse WAF-challenged every request on this run and was never actually searched)"
+2026-08-17,self-esteem,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,grit,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,self-efficacy,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,depression,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,anxiety,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 2 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,burnout,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,perceived stress,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,well-being,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 1 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,life satisfaction,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,loneliness,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,academic motivation,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 1 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,work engagement,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 1 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,resilience,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,procrastination,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,growth mindset,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
