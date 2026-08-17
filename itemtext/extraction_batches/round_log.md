@@ -403,3 +403,27 @@ verifying.
   back-translation from a Brazilian adaptation, NO_ROUTE on verification. Weakest of all 50 tables;
   a candidate for dropping rather than fixing. batch_002 now holds only this table plus sidecars,
   which still document all 12.
+
+## 2026-08-17 — ALSECYPIAMH_WU_2022 family, chased on Ben's question
+
+`data/ALSECYPIAMH_WU_2022.r` produces **10** IRW tables (CPS, SDQ, SWEMWBS, SWLS, PEI, NEI,
+PHQ, Empathy, MIL, PIL). Status of each for itemtext:
+
+- **7 already have itemtext on Redivis** (cps, empathy, nei, pei, pil, swemwbs, swls), which is
+  why the availability audit lists only 2 of the family -- the audit was seeded from tables
+  *without* itemtext. No coverage gap there.
+- **PHQ** -- ours, batch_004.
+- **MIL** -- `pending` in queue_state.csv; batch_006+ will pick it up.
+- **SDQ** -- appears in NEITHER the availability audit NOR the itemtext list. **Genuine coverage
+  gap**, same class as the four `himmelstein-*` tables. The SDQ is well documented and
+  `addy_2021_sdq_ghana` was extracted successfully, so this is likely easy yield.
+
+PHQ mapping: NO_ROUTE now *established*, not assumed. The OSF raw file `CPS Study 2.sav` labels
+39 of its 92 columns but not PHQ1/PHQ2; the OSF supplementary docx covers only the CPS; the JORA
+paper is paywalled and not in Europe PMC OA. Live means (PHQ1 0.939, PHQ2 0.816) distinguish the
+two items but there is no external anchor for which canonical PHQ-2 item should be higher.
+
+**Side finding worth using:** that same supplementary docx contains the full bilingual CPS items
+AND per-item means/SDs by subgroup (Tables S1, S2). `alsecypiamh_wu_2022_cps` itemtext is already
+live and has never been verified -- those per-item means make it checkable by Step 5b route 1.
+Fold this into the pre-existing-issues audit (consolidated-state item 8).
