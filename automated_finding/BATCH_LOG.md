@@ -9343,3 +9343,45 @@ worked the pool:
 + dictionary-sheet paste. The original dangling-commit candidates CSV and
 the retriage output were both scratch files (never committed to the
 repo) and are not tracked anywhere beyond this writeup.
+
+## PMC monthly run 2026-08-16 clobbered the same-day backlog sweep
+
+Ben pointed at commit `f34a51ed` -- the cron'd PMC monthly full-mode run
+(20:58 UTC, 91 candidates: 0 `good`, 7 `human_assistance`, 41
+`license_restricted`, 33 `no_usable_file`, 3 `not_item_response`, 5
+`download_failed`, 2 `error`), merged to `main` as PR #1638.
+
+**The defect.** `irw_discover_pmc_monthly.py` names its default output
+`pmc_monthly_candidates_<mode>_<UTC-date>.csv`. That disambiguates weekly
+from full, but *not* two full-mode runs on the same day -- and this
+morning's manual backlog sweep (`3167335c`, issue #1637) had already
+written that exact path. The evening run opened it `"w"` and replaced 93
+rows with 91. Merging PR #1638 carried both commits onto `main`
+(correcting this morning's writeup above: `3167335c` was dangling *at the
+time it was written*, but PR #1638 later brought it in -- and clobbered
+its file in the same merge). Verified: `git merge-base --is-ancestor` says
+both `3167335c` and `f34a51ed` are ancestors of `origin/main`.
+
+Two things limited the damage. The two runs share **zero PMCIDs** (93 vs
+91, fully disjoint) -- the `pmc_seen_dois.csv` store did its job, so no
+triage work was duplicated and the search space isn't exhausted. And the
+morning run's 2 `good` + 25 `human_assistance` rows were already worked in
+the entry above, so what was actually lost was the audit record of the
+other 66 rows (the `license_restricted` / `no_usable_file` verdicts) --
+the rows that keep a later sweep from re-triaging the same articles.
+
+**Recovered.** Morning content restored to
+`pmc_monthly_candidates_full_2026-08-16.csv` (93 rows) from `3167335c`;
+evening content moved to `pmc_monthly_candidates_full_2026-08-16-2.csv`
+(91 rows) -- i.e. the names the fix below would have produced. Both runs
+had logged the same `output_file` in `search_terms_log.csv`; the
+91-candidate row now points at the `-2` name.
+
+**Fixed.** New `resolve_out_path()` in `irw_discover_updated.py` appends
+`-2`, `-3`, ... when the default path is taken, printing a notice; an
+explicit `--out` still overwrites (caller's choice). Wired into all three
+scheduled discovery scripts -- `irw_discover_monthly.py`,
+`irw_discover_plos_monthly.py`, `irw_discover_pmc_monthly.py` -- since all
+three had the identical line. Suffixed names still start with `OUT_PREFIX`,
+so `irw_discover_monthly.py`'s per-term `--since` lookup (which recognizes
+its own rows by that prefix) keeps matching them.

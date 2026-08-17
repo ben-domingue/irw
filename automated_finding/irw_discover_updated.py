@@ -606,6 +606,30 @@ def _load_auto_exclusions() -> set:
     return existing | reviewed
 
 
+def resolve_out_path(explicit: str | None, default: str) -> str:
+    """Pick a candidates-CSV path that will not clobber an existing run.
+
+    The scheduled discovery scripts name their output by mode and UTC date,
+    so two runs of the same mode on the same day collide -- e.g. a manual
+    backlog sweep in the morning and the cron'd monthly run that evening
+    (2026-08-16, which lost the morning sweep's 93 triaged rows on main).
+    When the default path is taken, append `-2`, `-3`, ... until the name is
+    free. An explicit --out is the caller's choice and is returned as-is.
+    """
+    if explicit:
+        return explicit
+    if not os.path.exists(default):
+        return default
+    stem, ext = os.path.splitext(default)
+    n = 2
+    while os.path.exists(f"{stem}-{n}{ext}"):
+        n += 1
+    path = f"{stem}-{n}{ext}"
+    print(f"[out] {default} already exists (earlier run today) -- writing {path}",
+          flush=True)
+    return path
+
+
 def discover(queries, exclude: set, relevance_on: bool, sources=None,
              on_hit=None, since: str | None = None) -> list:
     """Discover candidates across all sources for each query.

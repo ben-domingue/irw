@@ -38,7 +38,7 @@ import os
 import argparse
 from datetime import datetime, timezone
 
-from irw_discover_updated import _load_auto_exclusions
+from irw_discover_updated import _load_auto_exclusions, resolve_out_path
 from irw_discover_pmc import (
     from_pmc, process_one_isolated, _new_pool, JOURNALS, DEFAULT_JOURNALS,
     FIELDNAMES, SEEN_DOIS_PATH, load_seen_dois, append_seen_dois,
@@ -128,7 +128,7 @@ def main():
     print(f"Excluding {len(seen):,} DOIs already triaged in a prior run "
           f"(manual or scheduled -- see {SEEN_DOIS_PATH})")
 
-    out_path = args.out or f"{OUT_PREFIX}{args.mode}_{today}.csv"
+    out_path = resolve_out_path(args.out, f"{OUT_PREFIX}{args.mode}_{today}.csv")
     outf = open(out_path, "w", newline="", encoding="utf-8")
     writer = csv.DictWriter(outf, fieldnames=FIELDNAMES, extrasaction="ignore")
     writer.writeheader()

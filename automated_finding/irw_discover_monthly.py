@@ -50,7 +50,7 @@ from datetime import datetime, timedelta, timezone
 from dataclasses import asdict
 
 from irw_discover_updated import (
-    discover, SOURCE_MAP, _load_auto_exclusions,
+    discover, SOURCE_MAP, _load_auto_exclusions, resolve_out_path,
 )
 
 LOG_PATH = "search_terms_log.csv"
@@ -308,7 +308,7 @@ def main():
             print(f"  {term!r}: since={since} ({origin})")
         return
 
-    out_path = args.out or f"{OUT_PREFIX}{args.mode}_{today}.csv"
+    out_path = resolve_out_path(args.out, f"{OUT_PREFIX}{args.mode}_{today}.csv")
     exclude = _load_auto_exclusions()
     if exclude:
         print(f"Excluding {len(exclude):,} DOIs already in the IRW dictionary")

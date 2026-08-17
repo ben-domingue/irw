@@ -320,9 +320,21 @@ date, so the next scheduled run advances automatically.
 ```
 --sources <names>            sources to query (default: osf dataverse)
 --default-lookback-days <n>  --since to use for a term with no prior run (default: 90)
---out <path>                 output CSV (default: monthly_candidates_<today>.csv)
+--out <path>                 output CSV (default: monthly_candidates_<mode>_<today>.csv)
 --dry-run                    print each term's computed --since date and exit
 ```
+The default output name is mode- and date-stamped, so two runs of the same
+mode on the same UTC day would collide. All three scheduled discovery
+scripts (`irw_discover_monthly.py`, `irw_discover_plos_monthly.py`,
+`irw_discover_pmc_monthly.py`) therefore route the default through
+`resolve_out_path()` in `irw_discover_updated.py`, which appends `-2`,
+`-3`, ... rather than overwriting an earlier run's candidates. An explicit
+`--out` is taken at face value and *will* overwrite. This matters because a
+manual backlog sweep and a cron'd monthly run can land on the same day: on
+2026-08-16 the evening PMC monthly run overwrote the morning sweep's 93
+triaged rows, and merging the run's PR carried the loss onto `main`
+(recovered as `pmc_monthly_candidates_full_2026-08-16.csv` +
+`...-2.csv`).
 `TERM_LIST` at the top of the script is a starting draft, not a finished
 list — it leans on constructs `BATCH_LOG.md` explicitly credits with past
 hits, using bare/root forms (e.g. `"grit"` not `"grit scale"`) since
