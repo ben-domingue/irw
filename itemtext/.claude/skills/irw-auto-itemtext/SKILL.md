@@ -11,6 +11,28 @@ from its source paper and writes it as a validated `{table}__items.csv`, ready f
 (copied verbatim from itemresponsewarehouse.org/itemtext.html) — read it before
 extracting anything, don't re-derive the schema from a merged example alone.
 
+## THE PRIME COMMANDMENT — `item` is the join key
+
+**`item` must be common between the response table and the itemtext table.** The entire
+purpose of an itemtext table is to be joinable to `irw::irw_fetch(table)` on `item`;
+every `item` value must appear in the live data exactly as the live data spells it, and
+the two sets must match. Nothing else in this skill outranks that. A beautifully
+transcribed instrument whose `item` values don't line up is worthless — it cannot be
+linked to a single response.
+
+Consequences to keep in front of you:
+
+- Take `item` values verbatim from Step 2's ground truth. Never invent, normalise,
+  re-case, re-order, or "tidy" them, and never carry over the source file's own column
+  names when the IRW table renamed them.
+- `resp`/`option_text` is the second join axis and the same logic applies: shipping
+  `raw_resp` (label strings) when the live table stores integers leaves the text
+  unlinkable to any response. `raw_resp` is a genuine last resort for when no scoring key
+  exists anywhere — not a default when the paper is merely silent. Read
+  `data/<table>.py|R` first (Step 4) and verify with Step 5b route 9.
+- This is what `validate_items.R` exists to enforce (Step 5), and why it is a hard gate
+  rather than advice. Step 5b then checks the mapping *within* those matching sets.
+
 Work from inside `itemtext/`. **All output — `{table}__items.csv` files,
 `audit_confirmed.csv`, and `pending_index_notes.csv` — goes in `itemtext/itemtables/`,
 not the `itemtext/` root.**
