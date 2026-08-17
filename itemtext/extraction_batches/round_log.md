@@ -365,3 +365,41 @@ verifying.
   script fixes (Python `csv` writes `"NA"` where R writes `NA`).
 - **BATCH_PROCESS.md** -- state moved out of gitignored `.cache/` into tracked
   `extraction_batches/`; round-trigger prompt now carries the Step 5b requirement.
+
+## 2026-08-17 — batch_002 reviewed and staged
+
+- 12 tables, 11 PASS + 1 WARN. Reviewed table by table with Ben; two spot-checked in depth.
+- FIXES MADE DURING REVIEW:
+  - `alasmari_2025_ai_trust_confidence` shipped `raw_resp` (label strings) because the paper never
+    states its 1-4 coding direction -- but `data/alasmari_2025_ai_trust_confidence.py` defines
+    RESP_MAP outright. Converted to `resp`, then confirmed empirically: label counts in the raw S1
+    .xlsx match integer counts in the live table in all 16 item x level cells. Its sibling
+    `_compare` had already done this correctly, so the two were inconsistent.
+  - `ajaykumar_2023_nasa_tlx`: item_text was the official NASA-TLX Appendix A definitions while the
+    paper says it administered an "Adapted ... modified version" it never reproduces. Reduced to
+    dimension names, then RESTORED to the definitions on Ben's call -- they describe the construct
+    far better than a bare label and the divergence belongs in the public note. Dimension name now
+    prefixes each definition, matching the TLX document's own title+description layout.
+  - `alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup`: option_text shortened.
+    Confirmed the dichotomisation is the STUDY's (source columns FD2_FD6_*_b; our script only casts
+    to int), so "Aware"/"Not aware" are their categories.
+  - `alexander_2017_dsi`: spot-check against the Skowron & Friedlander (1998) published Appendix
+    verified all 23 item texts verbatim AND scored 23/23 on the block test using the published
+    subscale key. This RETRACTED an error I had introduced earlier in the day: I had grouped items
+    by reading their text rather than using the published key, misassigned dsi_4, scored 21/23, and
+    "corrected" the provenance note's ER(11)+EC(12) to 10/13. The paper and instrument were right.
+  - Three tables emitted a separate section_id per item with blank prompts, against the standard's
+    "single trivial <table>_1" rule: alasmari_2025_ai_trust_confidence, albeitawi_2025_preceptor_needs,
+    alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup. Collapsed.
+- SKILL.md gained: the PRIME COMMANDMENT section (`item` must be common between the resp and
+  itemtext tables; raw_resp breaks linkage and is a last resort, not a default when the paper is
+  merely silent), the rule to read `data/<table>.py|R` before falling back to raw_resp, and Step 5b
+  route 9 (response-frequency matching) plus explicit naming of the two mapping axes.
+- STAGED IN `clean/` (11), `uploaded` still blank pending Ben's push: ahmed_2019_wellbeing,
+  ajaykumar_2023_nasa_tlx, alasmari_2025_ai_trust_compare, alasmari_2025_ai_trust_confidence,
+  albeitawi_2025_preceptor_needs, both alcoholhealthwarninglabel_brennan_2022_*,
+  alcoholstroop_jones2024, alexander_2017_dsi, algner2022_cse, algner2022_mimi16.
+- HELD (1): `algner2022_oss` -- 2 of 6 items have no recoverable text, one of the other four is a
+  back-translation from a Brazilian adaptation, NO_ROUTE on verification. Weakest of all 50 tables;
+  a candidate for dropping rather than fixing. batch_002 now holds only this table plus sidecars,
+  which still document all 12.
