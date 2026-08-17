@@ -9,58 +9,44 @@ than the underlying situation warrants.
 
 Source batches: itemtables/batch_001, itemtables/batch_002, itemtables/batch_003, itemtables/batch_004, itemtables/batch_005
 
-## `16_personalityfactors` (batch_001)
-
-<!-- mapping_basis=unknown text_source=unknown -->
-<!-- full note: Extracted by an agent that crashed mid-round (spend limit); no provenance was reported. Needs re-check. A skim also found the instructions text describing "(1) disagree ... (5) agree" while option_text uses "strongly disagree"/"neither agree not disagree" (sic). -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## 16_personalityfactors
-The origin of the item text was not recorded during extraction; the basis for the item-to-text alignment was not recorded
-:::
-:::
-```
-
 ## `abdullah_2024_bsq_sev24` (batch_001)
 
-<!-- mapping_basis=unknown text_source=unknown source=10.7717/peerj.17265 -->
-<!-- full note: Same crashed round as above; provenance not reported. Known: option_text (verbal anchors for the BSQ-M Sev24 scale) is not disclosed in the paper or supplement and is blank throughout. -->
+<!-- mapping_basis=paper_explicit text_source=canonical_instrument source=10.3390/ijerph18052487 -->
+<!-- full note: Re-sourced 2026-08-17 (was mapping_basis=unknown). The 2024 paper's own .sav carries no variable or value labels and the article reproduces no BSQ item wording. Text verified verbatim against Table 1 of the BSQ-M validation paper the 2024 study cites as its instrument source (Mahd-Abdullah et al. 2021, IJERPH 18:2487, CC BY), which lists every item bilingually against its own code (SEV241-SEV245) -- an exact code-to-text match, no inference. That table also publishes the administered Malay wording; the English was kept. option_text is blank because BSQ options are per-item multiple-choice categories that neither paper publishes. Ordering corroborated: the paper states Sev24 item 5 uses a 1-8 scale and SEV24_5 is the only 8-level item in the live data. Note SEV241 is marked a reverse item there. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
 ## abdullah_2024_bsq_sev24
-The origin of the item text was not recorded during extraction; the basis for the item-to-text alignment was not recorded
+Response-option labels are not published for this scale (the BSQ uses per-item multiple-choice categories), so only item text is available
 :::
 :::
 ```
 
 ## `abdullah_2024_bsq_sevgen` (batch_001)
 
-<!-- mapping_basis=paper_order text_source=canonical_instrument source=10.7717/peerj.17265 -->
-<!-- full note: item_text taken from the original English BSQ-M SevGen wording rather than the study's own materials. Live data has 6 of the original 7 items (item 2 absent), and the paper's stated per-item scale ranges do not match the live per-item resp ranges. option_text blank throughout. -->
+<!-- mapping_basis=paper_explicit text_source=canonical_instrument source=10.3390/ijerph18052487 -->
+<!-- full note: Upgraded 2026-08-17 from paper_order/canonical_instrument. Text verified verbatim against Table 1 of the BSQ-M validation paper (Mahd-Abdullah et al. 2021, IJERPH 18:2487, CC BY), which ties each item to its own code (SEVG1-SEVG7) bilingually -- exact match for all six live items, no order inference. SEVG2 ('On days that you have bloating, how often does it usually happen?') is published there but absent from the live data, consistent with the dataset note. Both papers' stated per-item scale ranges still disagree with the live per-item resp ranges (e.g. items 3/4/6 documented 1-5, observed 1-4; item 7 documented 1-7, observed 1-4 plus 6-7); item/resp sets validated against live data regardless. option_text blank for the same reason as sev24. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
 ## abdullah_2024_bsq_sevgen
-Item text comes from the published original instrument rather than this study's own materials; the item-to-text alignment is inferred from the order items appear in the source, not from an explicit code-to-text mapping
+Response-option labels are not published for this scale (the BSQ uses per-item multiple-choice categories), so only item text is available; the source papers' stated per-item scale ranges also do not match the ranges actually present in the data
 :::
 :::
 ```
 
 ## `abdullah_2024_hpbbloat_stress` (batch_001)
 
-<!-- mapping_basis=paper_order text_source=study_materials source=10.7717/peerj.11444 -->
-<!-- full note: Mapping is an explicit inference: item wording is published only for the final 17-item scale, which renumbers items sequentially, so SM2/SM4/SM8 were mapped to final items #9/#13/#17 by assuming ascending order within the original subscale is preserved. Defensible but not documented in the source. -->
+<!-- mapping_basis=reconstructed text_source=study_materials source=10.7717/peerj.11444 -->
+<!-- full note: Re-checked 2026-08-17; downgraded paper_order -> reconstructed, which is the honest label for a renumbered final form. Confirmed there is no route to a verified mapping: both supplementary .sav files (EFA n=152, CFA n=323) carry SM1-SM8 column names with NO variable labels, and neither the article nor Supplemental Information 3 publishes wording against the original SM codes -- S3 is the final 17-item form, which renumbers items 1-17 and interleaves the five subscales round-robin (D,HA,PA,SM,T), putting the stress-management items at #4, #9, #13, #17. The mapping SM1->#4, SM2->#9, SM4->#13, SM8->#17 therefore rests on assuming ascending order within the subscale is preserved. Natural given the round-robin construction, but unverifiable from any published source; a permutation among these four is the residual risk. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
 ## abdullah_2024_hpbbloat_stress
-The item-to-text alignment is inferred from the order items appear in the source, not from an explicit code-to-text mapping
+The source publishes item wording only for the final renumbered 17-item form, so the match between each item code and its text is inferred from subscale ordering rather than documented
 :::
 :::
 ```
@@ -82,7 +68,7 @@ Item SDQ_7 carries a reversed response-option order in the source codebook (0=ce
 ## `aguirre_camacho_2021_champion` (batch_001)
 
 <!-- mapping_basis=paper_explicit text_source=study_materials source=10.1371/journal.pone.0249562 -->
-<!-- full note: Paper's Table 2 reproduces both the English original and the administered Spanish wording; the Spanish was used. Caveat: only the 1/5 endpoints are labeled in the source and those labels are recorded in ENGLISH while item_text is Spanish -- a within-table language mismatch worth resolving. -->
+<!-- full note: Re-checked 2026-08-17 and confirmed correct as shipped: the paper's Table 2 gives the Spanish wording used, and the paper labels the response anchors only in English ('strongly disagree' / 'strongly agree' in the Measures section), with the middle three points unlabeled in any language. The within-table language mismatch is a property of the source, not the extraction. MAPPING VERIFIED NUMERICALLY 2026-08-17: the item code chain is IRW item1-8 <- .sav columns Champ1-8 (data/aguirre_camacho_2021_fbc.py; ChampB1-8 are the retest at wave=1), and the .sav carries NO per-item variable labels, so Champ<N> <-> Table 2 item N was initially only numeric correspondence. Checked it against Table 4's per-item M/SD/floor%/ceiling%: all eight means match to +-0.01 in order, and the two near-tied pairs (items 3 vs 5, both M=3.03; items 6 vs 7) are separated correctly by their floor/ceiling percentages, so the mapping is pinned item-by-item rather than just as a set. Small residuals (item 1 ceiling 21.9 vs 20.9; item 6 floor 18.8 vs 18.0) are expected: the paper analyzed the EM-imputed file while the IRW script drops non-integer imputed cells. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
@@ -96,13 +82,13 @@ Item text is the study's administered Spanish wording, but the 1/5 scale anchors
 ## `aguirre_camacho_2021_shai` (batch_001)
 
 <!-- mapping_basis=paper_order text_source=translated_substitute source=10.1371/journal.pone.0249562 -->
-<!-- full note: The study administered a Spanish SHAI-18 but the paper quotes no item text in either language. Text is the English original (Salkovskis et al. 2002) via a third-party clinical PDF, cross-checked against an independent validation table. Content/order match the standard SHAI-18, but this is NOT the wording participants saw. -->
+<!-- full note: REBUILT 2026-08-17 after a spot-check. The first version invented an item stem per item and compressed the response statements into short anchors (a paraphrase of novopsych's tabular rendering) -- e.g. item 2 lost '(of my age)' and item 12's fourth statement 'I usually think that I am seriously ill' flattened to 'Usually'. The SHAI/HAI-18 actually has NO item stems: each item is a group of four complete statements, the same forced-choice shape as alsuhibani_2022_npi_s3. Now transcribed literally -- item_text blank throughout (hence the expected 100%-blank audit WARN), all 72 option_texts verbatim, section 2 carrying the pre-item-15 section instruction. Source: psychology-tools.com/test/health-anxiety-inventory, cross-checked item 1 against the HAI appendix wording and item 4 against blueprint/ebchelp. Text is still the English original for a Spanish administration. Code-to-item ordering is HAnx1-18 -> items 1-18; corroborated by every item's content matching its canonical position. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
 ## aguirre_camacho_2021_shai
-Item text is the English SHAI-18 original; the study administered a Spanish translation whose exact wording is not recoverable from the paper or its materials
+Item text is the English SHAI-18 original; the study administered a Spanish translation whose exact wording is not recoverable from the paper or its materials. The instrument has no separate item stems -- each item is a group of four statements, so all of the text sits in option_text
 :::
 :::
 ```
@@ -263,8 +249,8 @@ Item text is the standard published PHQ-2 wording; the study's own materials are
 
 ## `alsuhibani_2022_gcbs` (batch_004)
 
-<!-- mapping_basis=paper_explicit text_source=canonical_instrument source=10.1371/journal.pone.0259053 -->
-<!-- full note: 15-item Generic Conspiracist Beliefs Scale. Canonical Brotherton et al. (2013) item wording confirmed via the CRAN psychotools Rd_db() documentation (ConspiracistBeliefs2016.Rd), with instructions and the "Definitely not true"->"Definitely true" response text from the paper and openpsychometrics.org. Item/resp sets and per-item row counts matched ground truth exactly. -->
+<!-- mapping_basis=data_labels text_source=canonical_instrument source=10.1371/journal.pone.0259053 -->
+<!-- full note: 15-item Generic Conspiracist Beliefs Scale. Canonical Brotherton et al. (2013) item wording confirmed via the CRAN psychotools Rd_db() documentation (ConspiracistBeliefs2016.Rd), with instructions and the "Definitely not true"->"Definitely true" response text from the paper and openpsychometrics.org. Item/resp sets and per-item row counts matched ground truth exactly. | RECLASSIFIED 2026-08-17 (mapping-verification sweep): paper_explicit -> data_labels. The study's own PLOS supplementary .sav files DO carry full variable labels for every GCBS item (s003 as GCBS1..15, s004 as GCBS01..15), which the extraction missed. Live table pools both samples (1508 + 638 = 2146 ids) and the two label sets agree. Diffed our text against them: 14/15 identical apart from a trailing period we add, and GCBS_13 differed substantively -- the study wrote 'rumours', we had the US-spelled canonical 'rumors'. Corrected to the study's own wording. -->
 
 ```
 ::: {.g-col-4 .dataset-item}

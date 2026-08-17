@@ -274,3 +274,75 @@ verifying.
   committed. `circuit_breaker.flag` moved with them but stays gitignored -- its presence is transient
   control state, not history. BATCH_PROCESS.md paths updated throughout, including inside the
   round-trigger prompt, which also now carries the Step 5b mapping-verification requirement.
+
+---
+
+# CONSOLIDATED STATE as of 2026-08-17 (supersedes the "OPEN ITEMS as of 2026-08-17
+# (session closing)" section above, which is now partly stale)
+
+## Where the pipeline is
+
+- Queue: **50 done, 10 failed, 1283 pending** of 1343 AVAILABLE. Batches 001-005 complete;
+  006-011 not started (the cron job is gone; recreate from BATCH_PROCESS.md, and delete
+  `extraction_batches/circuit_breaker.flag` first or Step 0 self-cancels).
+- Realized yield 50/60 = 83.3% of tables the availability audit called AVAILABLE.
+- **batch_001 is CLOSED**: 6 tables uploaded 2026-08-17, 1 held
+  (`abdullah_2024_hpbbloat_stress`), 1 blocked at extraction (`agarwal_2023_dreem`),
+  4 uploaded in the earlier pass. Its sidecars still document all 12.
+- Batches 002-005: extracted and verified, **not yet reviewed by Ben, nothing uploaded**.
+
+## Health of batches 002-005 (all re-checked 2026-08-17, nothing left to re-run)
+
+- `normalize_nulls.R`: clean. One file (`alsuhibani_2022_gcbs`, batch_004) had been left with
+  Python-quoted `"NA"` by a manual spelling fix and is now normalized.
+- `audit_batch.R`: 36 PASS + 3 WARN, all three explained and expected --
+  `algner2022_oss` (partial coverage, 2 of 6 items unrecoverable), `ali_2021_isi`
+  (row-count anomaly on isi_1/2/3, legitimately skippable severity-anchor items),
+  `alsuhibani_2022_npi_s3` (100% blank item_text, correct for a forced-choice instrument).
+- Mapping verification: complete for all 50 tables (`mapping_verification.csv`).
+- Third-party-website sourcing (the failure mode that produced the bad first
+  `aguirre_camacho_2021_shai`): swept. Only 3 tables in 002-005 were website-sourced.
+  `alsuhibani_2022_gcbs` was replaced with the study's own `.sav` labels; `alves_2017_hamd17`
+  and `amarilla_2020_lawton_brody` were inspected and are structurally correct (domain-name
+  stems with genuine severity/descriptive anchors, not a paraphrased grid).
+
+## What needs a human, in priority order
+
+1. **Paste issues-page callouts for batches 002-005.** `fixes/itemtext_issues_draft.md`
+   regenerated 2026-08-17 from corrected provenance: 24 callouts, of which **20 are not yet
+   on the live page** and 4 already are (skip `abdullah_2024_bsq_sevgen`, `addy_2021_sdq_ghana`,
+   `aguirre_camacho_2021_champion`, `aguirre_camacho_2021_shai`). Apply the usual bar --
+   concrete text-vs-table mismatches only, not gaps the source never published; the generator
+   flags every `canonical_instrument` source, which sweeps in unremarkable cases.
+2. **Two data-level defects, outside itemtext, in the underlying IRW tables:**
+   - `alves_2017_hamd17` -- 9 out-of-range responses (items 6/14/16 are 0-2 HDRS items
+     carrying stray 3s and 4s).
+   - `altahla_2024_whoqol_bref` -- strict duplicate of `altahla_2024_whoqol` (all 4,914
+     id/item/resp triples identical); should be one table per the collapse convention.
+3. **Decide the 7 pilot tables still marked `pending`** in queue_state.csv (ali_2021_phq9,
+   conner_2017_lot, consideration_future_consequences, cordova2019_clinical_edu_environment,
+   cucchi_2018_pts, iwasa_2016_padua_inventory, preussmattsson_2022_ownership). They already
+   have output in `itemtables/pilot/`; left as `pending` they will be re-extracted from
+   scratch by batch_006.
+4. **`ALSECYPIAMH_WU_2022_PHQ`** -- unverifiable 2-item mapping, paywalled source. Needs the
+   paper or an author email, or should be dropped.
+5. **`alomari_2025_student_questionnaire`** -- table name/dictionary misattribution (named
+   "alomari", actual source Xie et al. 2026, DOI 10.1371/journal.pone.0340806). Dictionary
+   problem, deliberately not on the public issues page.
+6. **`alexander_2017_dsi`** -- its provenance note claims the DSI-R's ER(11)+EC(12) split, but
+   content and data both give 10/13. One item is mislabelled in the note (not in the data).
+7. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
+   (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
+   tables that fall between both audits.
+
+## What changed in the skill (so future rounds don't repeat this session)
+
+- **SKILL.md Step 5b (new, REQUIRED)** -- mapping verification against the data, 8 routes +
+  2 exemptions, `item_stats.R` and `mapping_structure.R`, outcomes recorded in
+  `mapping_verification.csv`. Set-level checks cannot catch a permuted mapping.
+- **SKILL.md Step 4** -- stemless / four-statement-group instruments: `item_text` blank is
+  correct, and clinical-website grids are paraphrases, not the instrument.
+- **SKILL.md Step 6d** -- re-run normalize + audit after ANY later edit, including one-line
+  script fixes (Python `csv` writes `"NA"` where R writes `NA`).
+- **BATCH_PROCESS.md** -- state moved out of gitignored `.cache/` into tracked
+  `extraction_batches/`; round-trigger prompt now carries the Step 5b requirement.

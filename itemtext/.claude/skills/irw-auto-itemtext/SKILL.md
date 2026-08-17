@@ -171,6 +171,26 @@ produce data shaped like them before merging:
   never in `instructions`, even if it reads like generic whole-table framing at a glance.
   Only text that is truly identical across every section (or a genuinely single-section
   table with no other candidate text) should go in `instructions`.
+- **Some instruments have no item stems at all — do not invent them.** In a
+  four-statement-group instrument (SHAI/HAI-18, BDI, and forced-choice scales like the
+  NPI-13), an "item" *is* a set of complete alternative statements you choose between;
+  there is no question stem. The correct shape is `item_text` **blank** for every row with
+  all the words in `option_text` (`aguirre_camacho_2021_shai`,
+  `alsuhibani_2022_npi_s3`). `audit_batch.R` will report `100% of rows have blank
+  item_text` — that WARN is the expected, correct result here, not something to fix.
+  Clinician-rated scales are the neighbouring case and *do* have stems: the domain name is
+  the stem and the severity anchors are the options (`alves_2017_hamd17`:
+  "Anxiety - Psychic" / "No difficulty", "Tension and irritability", …).
+
+  **The trap:** clinical-assessment websites re-render these instruments as a tidy grid
+  with an invented stem per row and the four statements squeezed into short column
+  headers. That grid is a *paraphrase*, and transcribing it silently loses wording — a
+  first pass at `aguirre_camacho_2021_shai` built from one produced stems that don't exist
+  in the instrument, dropped "(of my age)" from item 2, and flattened item 12's "I usually
+  think that I am seriously ill" to "Usually". It passed `validate_items.R` and
+  `audit_batch.R` cleanly, and was only caught by a human spot-check. **If a source
+  presents an instrument as a grid of stems × short anchors, find the instrument's own
+  prose form before transcribing.**
 - **item/item_text/correct_response** — `item` values must be exactly the ones from
   Step 2's ground truth, not invented. `correct_response` blank when there's no scoring
   key; semicolon-separated when multiple answers are correct (e.g. `A;C`). **When the
@@ -421,6 +441,14 @@ an editorial call, so a human reviews and pastes.
 Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/batch_<NNN>
 ```
+
+**Re-run both after ANY later edit to a CSV**, including a one-line fix made with a
+script. Python's `csv` writer and R's `write.csv` disagree about absent values — a
+`DictWriter` round-trip turns the bare `NA` token into a quoted `"NA"` string, which
+`read.csv` silently reads back as the same value, so nothing downstream complains. Every
+manual repair in this pipeline so far has needed a normalize pass afterwards, and one
+(a spelling fix to `alsuhibani_2022_gcbs`) sat unnormalized in `batch_004` until a later
+sweep caught it.
 
 `normalize_nulls.R` makes the on-disk representation of absent values match the
 convention across the 422 published tables (the `NA` token, as `write.csv` emits it).
