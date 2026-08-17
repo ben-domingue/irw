@@ -206,7 +206,15 @@ HIGH_YIELD_TERMS = [
     "growth mindset",
 ]
 
-DEFAULT_SOURCES = ["osf", "dataverse"]
+# datacite is here so the blocked-source backfill in from_datacite() can
+# actually fire on a scheduled run: it lifts a publisher's _DATACITE_SKIP entry
+# exactly when that publisher's own connector is blocked, which is worthless if
+# datacite is never queried. It also carries its own weight when nothing is
+# blocked -- it aggregates ICPSR, UK Data Service, DANS and hundreds of other
+# repositories no other connector reaches (its skip list keeps it from
+# duplicating the ones that do). Listed last so the sources it backfills for
+# get their block detected before it runs; see _effective_datacite_skip().
+DEFAULT_SOURCES = ["osf", "dataverse", "datacite"]
 
 
 def _parse_logged_sources(notes: str) -> set[str] | None:

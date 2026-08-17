@@ -9464,6 +9464,23 @@ values share: a year-only date is dropped only when its year precedes the
 cutoff's year. Errs toward keeping, matching the existing rule that a
 missing date isn't evidence a hit is old.
 
+**Third gap, and the one that would have made all of the above cosmetic.**
+The backfill was dormant where it mattered: `DEFAULT_SOURCES` was
+`["osf", "dataverse"]`, so the scheduled repos routine never queried
+DataCite at all and the skip-lifting logic could only fire for someone
+passing `--sources ... datacite` by hand. `datacite` is now in the defaults,
+listed last so the connectors it backfills for have their block detected
+first. It earns its place independent of the WAF too -- it reaches ICPSR, UK
+Data Service, DANS and hundreds of repositories no other connector covers,
+with `_DATACITE_SKIP` preventing duplication of the ones that do.
+
+One-time cost: `last_run_date()` requires a prior row whose sources are a
+superset of the current set, so widening the set makes all 100 terms fall
+back to the 90-day lookback (2026-05-19) for a single run rather than assume
+DataCite was covered by history it never took part in. Deliberate -- the
+fallback only ever searches wider. Runs after that re-narrow to the
+incremental window.
+
 Verified end-to-end against live services with Dataverse genuinely blocked:
 fail-fast fires, DataCite lifts the skip, the year-only date survives
 `--since 2026-01-01`, and `10.7910/dvn/krwi6e` (Validation of the Turkish

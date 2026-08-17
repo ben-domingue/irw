@@ -343,8 +343,17 @@ next run's `--since` lookup trusts — logging a WAF-challenged source as
 searched would advance its watermark past a window nobody ever queried and
 skip it forever. Leaving it out means the lookup finds no covering row and
 falls back to the default lookback, which only ever searches wider.
+
+Changing `--sources` has the same effect on purpose: the lookup requires a
+prior row whose sources are a *superset* of the current set, so adding a
+source makes every term fall back to the 90-day lookback for one run rather
+than assume the newcomer was covered by history it never participated in.
+`datacite` was added to the defaults on 2026-08-17, so the first run after
+that is a heavy one — 100 terms over a 90-day window across three sources.
+That is a one-time cost; subsequent runs re-narrow to the incremental
+window.
 ```
---sources <names>            sources to query (default: osf dataverse)
+--sources <names>            sources to query (default: osf dataverse datacite)
 --default-lookback-days <n>  --since to use for a term with no prior run (default: 90)
 --out <path>                 output CSV (default: monthly_candidates_<mode>_<today>.csv)
 --dry-run                    print each term's computed --since date and exit
