@@ -9572,3 +9572,47 @@ their own branches and open their own PRs (#1636, #1638) and commit directly
 are narrow fixed-domain API connectors, a different shape of work from the
 broad multi-domain web research that the sandbox whitelist genuinely does
 break.
+
+## Harvard's answer: deliberate, temporary, site-wide (2026-08-17, ticket #423164)
+
+Reply to the allowlist request, same day:
+
+> Harvard University IT has temporarily restricted non-browser API access to
+> the site, in response to higher than usual traffic that has been impacting
+> site performance and availability. This should be a temporary measure, and
+> we expect to restore API access again once site traffic is back under
+> control, and a more permanent solution is in place.
+
+Confirms the diagnosis exactly -- deliberate, site-wide, aimed at
+non-browser clients generally, nothing to do with IRW specifically or with
+where our requests originate. It also settles the strategy: **wait, don't
+chase.** No allowlist was granted, and pressing for a personal exception
+while they are actively shedding load would be unlikely to work and a poor
+posture toward a repository this project depends on. The TODO item is closed
+to further action; only the restoration watch remains.
+
+For the record on whether we contributed: our Dataverse footprint is ~500
+discovery requests spread over ~4 minutes (100 terms x <=5 pages, 0.5s
+spacing), plus triage at 1.5s/domain. Not plausibly a driver of a
+site-performance incident, but worth knowing the number if they ever ask.
+
+**Recovery burst -- the non-obvious consequence, and it needs handling.**
+Every self-healing property built today compounds into a single spike aimed
+at the site the moment it reopens:
+- dataverse's `--since` window reopens at 2026-08-03 and widens every day
+  the block persists (correct, and the whole point of the 759afc7 fix);
+- all 100 terms already fall back to the 90-day lookback because datacite
+  joined DEFAULT_SOURCES in 34a4ed6;
+- every candidate held retryably by the ac92152 triage fix re-enters the
+  queue at once, each costing a listing fetch plus a file download.
+
+So the first post-restoration run is the widest, heaviest run this pipeline
+has ever pointed at Harvard Dataverse -- landing on a site that just told us
+it is struggling with traffic. Individually each behaviour is right; together
+they are exactly the wrong first impression after asking for consideration.
+
+Plan: make the first pass after restoration deliberately small and slow -- a
+subset of terms, reduced `max_pages`, raised `PER_DOMAIN_DELAY` -- and only
+return to normal cadence once it completes cleanly. Tracked as TODO item
+(1b). Nothing to change until access actually returns; re-probe with
+`curl -sI https://dataverse.harvard.edu/api/info/version`.

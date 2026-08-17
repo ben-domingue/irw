@@ -1563,13 +1563,30 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   DataCite backfills the publisher for *discovery*, and triage now flags
   blocked candidates retryably instead of retiring them), so nothing is
   silently lost. Two things remain:
-  (1) **Allowlist request SENT 2026-08-17** to support@dataverse.harvard.edu
-  (ben-domingue) -- awaiting reply, stated turnaround within 24 business
-  hours. This is the only route that restores full coverage including file
-  downloads, since DataCite gives metadata only and the download endpoints
-  are equally blocked. Text as drafted: `dataverse_allowlist_request.md`.
-  If it goes quiet, their open office hours (Wednesdays 11:00-13:00 ET,
-  RSVP to the same address) suit a policy ask better than a ticket.
+  (1) **ANSWERED 2026-08-17 -- ticket #423164. Nothing further to ask.**
+  Harvard University IT has *deliberately and temporarily* restricted
+  non-browser API access site-wide, in response to higher-than-usual traffic
+  hurting site performance and availability. They expect to restore API
+  access once traffic is under control and a permanent solution is in place.
+  So: no allowlist was granted, the restriction is intentional rather than a
+  misconfiguration, and it is expected to lift on its own. **Do not escalate
+  or chase this** -- pressing for a personal exception while they are
+  actively shedding load is both unlikely to work and bad form toward a
+  repository IRW depends on. Just wait. (Our own footprint is small enough
+  that we are near-certainly not the cause: ~500 discovery requests over
+  ~4 minutes at 0.5s spacing, plus triage at 1.5s/domain.)
+  Ticket: https://help.hmdc.harvard.edu/Ticket/Display.html?id=423164
+
+  (1b) **Throttle the FIRST run after access is restored** -- see the
+  "recovery burst" note in BATCH_LOG.md (2026-08-17). Our self-healing
+  design means restoration triggers a compounding spike at exactly the site
+  that just asked for relief: the dataverse `--since` window reopens all the
+  way back to 2026-08-03 (wider every day it stays blocked), all 100 terms
+  are already falling back to a 90-day lookback since datacite joined
+  DEFAULT_SOURCES, and every candidate held retryably in the meantime
+  re-enters triage at once. Make the first post-restoration pass small and
+  slow (subset of terms, reduced `max_pages`, raised `PER_DOMAIN_DELAY`),
+  then return to normal cadence.
   (2) Re-probe occasionally -- `curl -sI https://dataverse.harvard.edu/api/info/version`
   tells you. When it clears, everything self-heals: the `--since` window
   reopens from 2026-08-03, the DataCite backfill switches itself off, and
