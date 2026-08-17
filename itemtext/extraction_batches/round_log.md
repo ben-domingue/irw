@@ -314,24 +314,30 @@ verifying.
    `aguirre_camacho_2021_champion`, `aguirre_camacho_2021_shai`). Apply the usual bar --
    concrete text-vs-table mismatches only, not gaps the source never published; the generator
    flags every `canonical_instrument` source, which sweeps in unremarkable cases.
-2. **Two data-level defects, outside itemtext, in the underlying IRW tables:**
+2. **The `fixes/*.csv` corrected tables are still unuploaded** (confirmed with Ben
+   2026-08-17, in his todo pile). Their issues-page notes are written and HELD in
+   `fixes/itemtext_issues_suggestions.md` -- three of them replace existing live callouts
+   with wording that is only true once the fix is live, so they must be pasted WHEN those
+   tables upload, not before. `dumas_organisciak_2022` from that set was already added to
+   the live page (it describes a paper-vs-data scale discrepancy, independent of the fixes).
+3. **Two data-level defects, outside itemtext, in the underlying IRW tables:**
    - `alves_2017_hamd17` -- 9 out-of-range responses (items 6/14/16 are 0-2 HDRS items
      carrying stray 3s and 4s).
    - `altahla_2024_whoqol_bref` -- strict duplicate of `altahla_2024_whoqol` (all 4,914
      id/item/resp triples identical); should be one table per the collapse convention.
-3. **Decide the 7 pilot tables still marked `pending`** in queue_state.csv (ali_2021_phq9,
+4. **Decide the 7 pilot tables still marked `pending`** in queue_state.csv (ali_2021_phq9,
    conner_2017_lot, consideration_future_consequences, cordova2019_clinical_edu_environment,
    cucchi_2018_pts, iwasa_2016_padua_inventory, preussmattsson_2022_ownership). They already
    have output in `itemtables/pilot/`; left as `pending` they will be re-extracted from
    scratch by batch_006.
-4. **`ALSECYPIAMH_WU_2022_PHQ`** -- unverifiable 2-item mapping, paywalled source. Needs the
+5. **`ALSECYPIAMH_WU_2022_PHQ`** -- unverifiable 2-item mapping, paywalled source. Needs the
    paper or an author email, or should be dropped.
-5. **`alomari_2025_student_questionnaire`** -- table name/dictionary misattribution (named
+6. **`alomari_2025_student_questionnaire`** -- table name/dictionary misattribution (named
    "alomari", actual source Xie et al. 2026, DOI 10.1371/journal.pone.0340806). Dictionary
    problem, deliberately not on the public issues page.
-6. **`alexander_2017_dsi`** -- its provenance note claims the DSI-R's ER(11)+EC(12) split, but
+7. **`alexander_2017_dsi`** -- its provenance note claims the DSI-R's ER(11)+EC(12) split, but
    content and data both give 10/13. One item is mislabelled in the note (not in the data).
-7. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
+8. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
    (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
    tables that fall between both audits.
 

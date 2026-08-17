@@ -1,5 +1,35 @@
 # Suggested `itemtext_issues.qmd` additions/updates — audit fix pass (2026-08-15)
 
+## STATUS 2026-08-17 — HELD, PENDING UPLOAD OF THE `fixes/` CSVs
+
+Confirmed with Ben 2026-08-17: **the corrected tables in `itemtext/fixes/*.csv` have NOT
+been uploaded** — they are still in his todo pile. That is why most of this file is still
+unpasted, and it is deliberate, not an oversight.
+
+Three of the entries below (`gilbert_meta_35`, `gilbert_meta_42`,
+`sv-maia2_randelovic_2021_erq`) would **replace existing callouts** on the live page with
+more precise wording, and that wording describes the coverage of the *fixed* table — e.g.
+"4 of 12 democratic-values items have no item text" is only true once
+`fixes/gilbert_meta_35__items.csv` is live. **Paste these when the corresponding fix
+uploads, not before**, or the page will describe a table that doesn't exist yet.
+
+Current live wording, for comparison when the time comes:
+- `gilbert_meta_35` — "codebook contain only 8 items, response data contains 12"
+- `gilbert_meta_42` — "only item text for `phq` and `pss`"
+- `sv-maia2_randelovic_2021_erq` — "Paper references a 1-7 scale, IRW table is on 1-5"
+
+Already resolved, do not re-paste:
+- `dumas_organisciak_2022` — **added to the live page 2026-08-17**. It was safe to add ahead
+  of the fixes because it describes a paper-vs-live-data scale discrepancy, not the fixed
+  table's coverage; verified directly against live data (resp values 1,2,3,4,5 over 10
+  items, against the paper's stated 0-4).
+
+Still conditional on Ben's judgment regardless of upload state:
+- `political_psychology` — do not add without his confirmation that item numbering drifts.
+- `preschool_sel_akt` — only if the `emtb4_6s_t1` prompt gap wasn't resolved before upload.
+
+---
+
 Draft only — nothing has been pasted into the live file
 (`/home/ben/Dropbox/projects/irw/irw_site/itemtext_issues.qmd`, datapages/irw repo).
 These are candidates for tables where a real gap remains even after the
