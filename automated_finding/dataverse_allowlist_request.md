@@ -1,7 +1,14 @@
 # Draft: Harvard Dataverse allowlist request
 
-**Status:** draft, not sent. Ben to review/edit and submit.
-**Where to send:** https://support.dataverse.harvard.edu/ (support form).
+**Status:** draft, not sent. Ben to review/edit and send.
+**Where to send:** email **support@dataverse.harvard.edu** — that is the
+contact route; there is no web form (an earlier version of this file said
+there was, which was wrong). Their stated turnaround is within 24 business
+hours, Mon-Fri. Contact page: https://support.dataverse.harvard.edu/support
+**Alternative worth considering:** they hold open virtual office hours,
+Wednesdays 11:00-13:00 ET, RSVP by emailing the same address. For a
+"please allowlist our harvester" conversation that may get further faster
+than a ticket — it's a policy question, not a bug report.
 **Context:** see `BATCH_LOG.md`, 2026-08-17 entry.
 
 Facts below were verified 2026-08-17 and are worth re-checking before
@@ -68,6 +75,10 @@ itemresponsewarehouse@stanford.edu
 
 - Confirm the block is still active: `curl -sI https://dataverse.harvard.edu/api/info/version`
   (look for `x-amzn-waf-action: challenge`). If it is gone, no need to send.
+- Their support site (`support.dataverse.harvard.edu`) returns 403 Akamai
+  "Access Denied" to command-line clients, so it can't be checked from here
+  — it loads normally in a browser. Unrelated to the Dataverse WAF block;
+  just means don't try to verify the contact page with curl.
 - The NSF-support claim and the exact project description should be checked
   against how IRW is normally described publicly — adjust to taste.
 - If they ask for specifics: the search connector is

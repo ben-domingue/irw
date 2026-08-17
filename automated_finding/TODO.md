@@ -1566,8 +1566,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   (1) **Ask Harvard to allowlist the IRW client** -- the only route that
   restores full coverage including file downloads, since DataCite gives
   metadata only and the download endpoints are equally blocked. Draft at
-  `dataverse_allowlist_request.md`; send via
-  https://support.dataverse.harvard.edu/ .
+  `dataverse_allowlist_request.md`; email it to
+  **support@dataverse.harvard.edu** (there is no web form). They also run
+  open office hours Wednesdays 11:00-13:00 ET, RSVP to the same address,
+  which may suit a policy ask better than a ticket.
   (2) Re-probe occasionally -- `curl -sI https://dataverse.harvard.edu/api/info/version`
   tells you. When it clears, everything self-heals: the `--since` window
   reopens from 2026-08-03, the DataCite backfill switches itself off, and
