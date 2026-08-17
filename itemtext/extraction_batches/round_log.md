@@ -337,7 +337,20 @@ verifying.
    problem, deliberately not on the public issues page.
 7. **`alexander_2017_dsi`** -- its provenance note claims the DSI-R's ER(11)+EC(12) split, but
    content and data both give 10/13. One item is mislabelled in the note (not in the data).
-8. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
+8. **AUDIT THE PRE-EXISTING ISSUES-PAGE ENTRIES** (Ben's request, 2026-08-17). The 13 callouts
+   that were live on https://itemresponsewarehouse.org/itemtext_issues.html BEFORE today's work
+   have never been re-checked against current data, and today's sweep showed how easily such a
+   claim goes stale or turns out to be imprecise. They are:
+   singh_2025_identity_pba, paampsmartsud_saba_2023_ders, namprb_siwiak_2024_ssub,
+   sv-maia2_randelovic_2021_erq, fivpei_perrig_2023_attdiff, oxfordcovid_xue_2024_at,
+   socialstereotype_hughes_2025_judgement, gilbert_meta_51, gilbert_meta_42, gilbert_meta_38,
+   gilbert_meta_35, florida_twins_friends, addy_2021_sdq_ghana.
+   For each: does the stated mismatch still hold against the live IRW table and the current
+   itemtext? Several are item-count claims ("paper has 28 items, IRW contains only 21") that are
+   directly checkable with irw::irw_fetch, and three already have more precise replacement wording
+   drafted in fixes/itemtext_issues_suggestions.md pending the fixes/ upload. Expect some entries
+   to be resolvable/removable and some to need sharpening.
+9. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
    (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
    tables that fall between both audits.
 
