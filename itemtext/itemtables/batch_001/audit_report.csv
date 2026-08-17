@@ -1,8 +1,2 @@
 "table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
-"16_personalityfactors","PASS",163,163,TRUE,TRUE,FALSE,TRUE,0,0,""
-"abdullah_2024_bsq_sev24","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
-"abdullah_2024_bsq_sevgen","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "abdullah_2024_hpbbloat_stress","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
-"aguirre_camacho_2021_champion","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
-"aguirre_camacho_2021_shai","WARN",18,18,TRUE,TRUE,FALSE,TRUE,100,0,"100% of rows have blank item_text"
-"ahmed_2019_food_consumption","PASS",14,14,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
