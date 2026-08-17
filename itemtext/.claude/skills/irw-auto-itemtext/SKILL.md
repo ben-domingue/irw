@@ -214,6 +214,17 @@ produce data shaped like them before merging:
   the raw option in a `raw_resp` column instead of forcing it into `resp` — see
   `gilbert_meta_11` for a real example of this pattern.
 
+  **Before falling back to `raw_resp`, read the IRW processing script** —
+  `data/<table>.py` or `data/<table>.R`. The paper is the authority on what participants
+  saw, but the processing script is the authority on **what the integers in the IRW table
+  mean**, and it very often contains the literal label→number mapping the paper omits.
+  `alasmari_2025_ai_trust_confidence` shipped with `raw_resp` on the grounds that the paper
+  never states its 1–4 coding direction, while `data/alasmari_2025_ai_trust_confidence.py`
+  defines `RESP_MAP = {not confident: 1, neutral: 2, somewhat confident: 3, very confident:
+  4}` outright — and its sibling table from the same paper had already used its own script's
+  mapping correctly. Check the script whenever `resp` is numeric but the source only
+  discloses labels; `raw_resp` is for when neither source can tie them together.
+
 **Match the source's terseness.** Transcribe `instructions`, `section_prompt`,
 `item_text`, and `option_text` at the same level of brevity as the source material. If
 the paper's instructions are one short sentence, keep it one short sentence — don't

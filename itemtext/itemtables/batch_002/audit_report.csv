@@ -2,7 +2,7 @@
 "ahmed_2019_wellbeing","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
 "ajaykumar_2023_nasa_tlx","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
 "alasmari_2025_ai_trust_compare","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
-"alasmari_2025_ai_trust_confidence","PASS",4,4,TRUE,NA,TRUE,TRUE,0,0,"using raw_resp (no scoring key recoverable) -- resp-set check skipped by design"
+"alasmari_2025_ai_trust_confidence","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
 "albeitawi_2025_preceptor_needs","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
 "alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
 "alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,57.1,"57.1% of rows have blank option_text"
