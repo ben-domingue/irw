@@ -9616,3 +9616,49 @@ subset of terms, reduced `max_pages`, raised `PER_DOMAIN_DELAY` -- and only
 return to normal cadence once it completes cleanly. Tracked as TODO item
 (1b). Nothing to change until access actually returns; re-probe with
 `curl -sI https://dataverse.harvard.edu/api/info/version`.
+
+## Two content-level gaps in the `good` flag, closed (2026-08-17)
+
+Longstanding TODO item, motivated by all 3 `good` rows in PR #1625 turning
+out unshippable. Both fixes land in `irw_triage_updated.py` -- the TODO
+guessed `irw_batch_updated.py`, but `triage_dataset()`/`run_qc()` is where
+flags are actually decided.
+
+**1. Sample-size floor.** `MIN_PARTICIPANTS = 100`, enforced as its own
+terminal flag `below_min_n` rather than as a QC failure. A QC failure routes
+to `human_assistance`, which would be wrong here: N is not something a human
+can adjudicate or a script can fix, so a reviewer would only re-derive "too
+small" by hand. Checked *after* the content gate, so a file that isn't item
+response data is still reported as `not_item_response` -- the more useful
+diagnosis -- rather than as too small. Caught PR #1625's N=64 case.
+
+**2. Composite columns masquerading as items.** This is the subtle one: a
+summary table melts into a perfectly well-formed id/item/resp frame and
+passes every structural check above it. The only tell is what the items are
+NAMED. `composite_items*` flags labels naming a computed quantity -- all of
+them is a `fail` (-> human_assistance), some is a `warn`. Caught PR #1625's
+`Pre`/`Post` + `pre-A`...`post-F` case, the same failure mode as the
+`wingenbach_2018` retraction.
+
+Matching is deliberately token-wise rather than substring, because the
+obvious implementation is wrong in both directions: `meaning_1` must not
+trip on "mean" and `scoreboard_2` must not trip on "score", while
+`anxiety_total` and `PHQ9_score` must. `pre`/`post` are matched only against
+a whole label (optionally with a short subscale suffix like `pre-A`), since
+`pre_anxiety_3` is a genuine raw item at a pre-wave, not a composite.
+
+Verified on both PR #1625 shapes, a clean N=150 control that must still flag
+`good` (it does), a mixed file where one stray `total_score` sits among 10
+real items (stays `good`, warns -- one composite shouldn't sink a real
+scale), the N=99/100 boundary, and 14 label unit-cases including every
+substring trap above.
+
+`FLAG_ORDER` in `irw_batch_updated.py` gained `below_min_n`, placed after
+`not_item_response` so the summary still sorts actionable flags first.
+
+**Unrelated pre-existing breakage noticed while checking imports:**
+`irw_process_queue.py` no longer imports -- it wants `QUEUE_SHEET_URL` from
+`irw_discover_updated.py`, removed in `0bc73c8` when the queue sheet was
+deprecated (2026-08-12). Not touched here; the script is likely obsolete
+along with the sheet, but it should be either fixed or deleted rather than
+left as a module that raises on import.

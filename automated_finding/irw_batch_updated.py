@@ -452,7 +452,7 @@ def append_checkpoint(path: str, key: str, result: dict):
 # Batch driver
 # ---------------------------------------------------------------------------
 
-FLAG_ORDER = ["good", "human_assistance", "not_item_response",
+FLAG_ORDER = ["good", "human_assistance", "not_item_response", "below_min_n",
               "no_usable_file", "file_too_large", "license_restricted",
               "download_failed", "error"]
 

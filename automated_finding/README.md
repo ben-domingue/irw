@@ -252,6 +252,7 @@ a processing script, check the dataset's DOI against the
 | `good` | Confident column mapping, no QC errors | Strong candidate — write a processing script (Step 2) |
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
+| `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
 | `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
@@ -276,6 +277,15 @@ than retried one doomed request at a time.
 ### QC warning glossary
 
 Starred names (`*`) are heuristics beyond the official IRW validator.
+
+`composite_items*` is one of the more consequential: a summary table melts
+into a perfectly well-formed id/item/resp frame and passes every structural
+check, so the only tell is what the items are NAMED. All labels naming a
+computed score (`Pre`/`Post`, `*_total`, `*_score`, `subscale_*`) is a `fail`
+-> human_assistance; some is a `warn`. Matching is token-wise, so `meaning_1`
+doesn't trip on "mean" and a real item like `pre_anxiety_3` doesn't trip on
+"pre" (only a whole-label `pre`/`post`, optionally with a short subscale
+suffix, counts).
 
 | Warning | Meaning |
 |---|---|

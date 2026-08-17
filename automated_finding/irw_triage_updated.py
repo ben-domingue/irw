@@ -44,6 +44,39 @@ IRW_REQUIRED = ["id", "item", "resp"]
 
 PERSON_LEVEL_COLS = {"wave", "treat"}
 ITEM_LEVEL_PREFIXES = ("itemcov_", "qmatrix", "item_family", "rater")
+
+# Flat sample-size floor: fewer than this many distinct respondents and the
+# candidate is skipped outright, no human adjudication (there used to be a
+# 50-99 "ask first" band; it was retired 2026-08-12). Enforced here so a
+# too-small dataset can never reach the `good` pile in the first place.
+MIN_PARTICIPANTS = 100
+
+# Item labels that name a computed quantity rather than a question asked.
+# A file whose "items" are all composites is a summary table, not raw
+# item-response data -- the failure mode behind the wingenbach_2018
+# retraction and 2 of the 3 false-positive `good` rows in PR #1625.
+_COMPOSITE_TOKENS = {
+    "total", "totals", "composite", "subscale", "subscales", "overall",
+    "average", "averages", "avg", "mean", "sum", "index", "score", "scores",
+}
+# Whole-label pre/post markers (optionally with a short subscale suffix, e.g.
+# "pre-A", "post_F"). Matched only against the ENTIRE label: a genuine raw
+# item at a pre-wave is usually "pre_anxiety_3", which must not trip this.
+_PREPOST_LABEL = re.compile(
+    r"^(pre|post|baseline|follow[-_ ]?up)[-_ ]?[a-z0-9]{0,2}$", re.I)
+
+
+def _looks_composite(label) -> bool:
+    """Does this item label name a computed score rather than a question?"""
+    s = str(label).strip()
+    if not s:
+        return False
+    if _PREPOST_LABEL.match(s):
+        return True
+    # Token-wise, so "meaning_1" doesn't match on "mean" and "scoreboard_2"
+    # doesn't match on "score".
+    tokens = {t.lower() for t in re.split(r"[^A-Za-z0-9]+", s) if t}
+    return bool(tokens & _COMPOSITE_TOKENS)
 RESPONSE_LEVEL_COLS = {"rt", "date"}
 
 
@@ -507,6 +540,24 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"({list(dominant.index)[:4]}) — IRW requires "
                                 "separate files per scale."))
 
+    # Composite columns masquerading as items. A summary table melts into a
+    # perfectly well-formed id/item/resp frame and passes every structural
+    # check above -- the only tell is what the items are NAMED.
+    if "item" in df.columns:
+        labels = [i for i in df["item"].unique() if str(i).strip()]
+        comp = [i for i in labels if _looks_composite(i)]
+        if labels and len(comp) == len(labels):
+            checks.append(Check("composite_items*", "fail",
+                                f"every item label names a computed score "
+                                f"({[str(c) for c in comp[:4]]}) — this looks "
+                                "like a summary/aggregate table, not raw "
+                                "item-level responses"))
+        elif comp:
+            checks.append(Check("composite_items*", "warn",
+                                f"{len(comp)}/{len(labels)} item labels name "
+                                f"computed scores ({[str(c) for c in comp[:4]]}) "
+                                "— drop them, or confirm they are real items"))
+
     # IRW's own density signal — very sparse data is worth a look
     meta = irw_metadata(df)
     if meta["density"] < 0.01:
@@ -613,6 +664,17 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
                        "for IRW.")
         return Triage("not_item_response", reasons + ir_reasons,
                       coerce, checks, meta)
+
+    # Sample-size floor. Its own terminal flag rather than a QC failure: N is
+    # not something a human can adjudicate or a script can fix, so routing it
+    # to human_assistance would just spend review time re-deriving "too small".
+    # Checked after the content gate so a not_item_response file is still
+    # reported as such (the more useful diagnosis) rather than as too small.
+    if meta["n_participants"] < MIN_PARTICIPANTS:
+        reasons.append(f"Only {meta['n_participants']} distinct respondents — "
+                       f"below the IRW floor of {MIN_PARTICIPANTS}. Skip; no "
+                       "human review needed.")
+        return Triage("below_min_n", reasons, coerce, checks, meta)
 
     fails = [c for c in checks if c.status == "fail"]
     warns = [c for c in checks if c.status == "warn"]

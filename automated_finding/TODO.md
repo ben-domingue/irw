@@ -17,15 +17,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   standard continuous-column verification against the paper text before
   deciding (see memory `feedback_continuous_column_verification`).
 
-- [ ] **Triage script's `good` flag doesn't catch two content-level
-  failure modes**, surfaced by all 3 `good` rows in PR #1625
-  (2026-08-14 alt-source run) turning out unshippable on human review:
-  (1) no check against the N>=100 sample-size floor -- a `good` row can
-  have any N; (2) no detection of composite/aggregate columns
-  masquerading as raw item responses (e.g. columns literally named
-  `Pre`/`Post` counted as 2 "items"). Worth adding both as automated QC
-  checks in `irw_batch_updated.py` -- see the "PR #1625 follow-up" entry
-  in `BATCH_LOG.md` for the specific cases that motivated this.
+- [x] **Triage script's `good` flag doesn't catch two content-level
+  failure modes** -- **fixed 2026-08-17**. Both checks added to
+  `irw_triage_updated.py` (not `irw_batch_updated.py` as this item
+  originally guessed -- `triage_dataset()`/`run_qc()` is where flags are
+  decided): (1) `MIN_PARTICIPANTS = 100` now gates via its own terminal
+  `below_min_n` flag rather than a QC failure, since N is not something a
+  human can adjudicate or a script can fix -- routing it to
+  `human_assistance` would just spend review time re-deriving "too small";
+  (2) `composite_items*` flags item labels that name a computed score
+  (`Pre`/`Post`, `*_total`, `*_score`, `subscale_*`) -- all of them is a
+  `fail`, some is a `warn`. Verified against both PR #1625 false-positive
+  shapes plus controls; see `BATCH_LOG.md`'s 2026-08-17 entry.
 
 - [ ] **Two off-construct `worth_retrying` leads from the 2026-08-13
   repo-mode RT search**, not chased since they're not response-time data:
