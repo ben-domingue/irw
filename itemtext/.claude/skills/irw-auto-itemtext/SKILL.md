@@ -265,12 +265,21 @@ pad, guess, or drop items silently to make the counts line up.
 Only once this passes (or the discrepancy is deliberately accepted and logged) does the
 CSV get written as `itemtext/itemtables/<table>__items.csv`.
 
-### Step 5b — Verify the item↔text mapping against the data (REQUIRED)
+### Step 5b — Verify the item↔text and option↔resp mappings against the data (REQUIRED)
 
 Everything in Step 5 checks *sets*. If `item_text` for items 3 and 5 were swapped, the
 item set, the resp set, the row counts and the whole audit still pass — and the table
 ships a plausible, confidently-wrong mapping that no downstream check will ever catch.
 So mapping is verified separately, against numbers, and the outcome is recorded.
+
+There are **two mapping axes**, and they fail independently:
+- `item_text` ↔ `item` — is each item's text attached to the right code? (routes 1–8)
+- `option_text` ↔ `resp` — is each option's text attached to the right level, and is the
+  coding direction right? (route 9, and the reverse-keying signal in route 6)
+
+A table can be right on one and wrong on the other. Verify whichever axis carried
+inference; usually that's the first, but any table built from a categorical source file
+whose IRW `resp` is numeric has made a decision on the second too.
 
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/item_stats.R <table>
@@ -327,6 +336,21 @@ descending order of strength:
    permutation; doesn't prove adjacent items aren't swapped. Worked example:
    `ahmed_2019_food_consumption`, where days-per-week consumption ordered maize 5.01 >
    … > milk 1.20 exactly as food groups should.
+9. **Response-frequency matching**, for the *other* mapping axis — `option_text`↔`resp`
+   rather than `item_text`↔`item`. Whenever the source data file stores **labels** while
+   the IRW table stores **integers**, count each label per item in the source and each
+   integer per item in the live table: a correct mapping matches cell for cell, and a
+   flipped direction or any permuted level breaks it immediately. This is decisive, not
+   circumstantial. Worked example: `alasmari_2025_ai_trust_confidence`, whose raw S1
+   `.xlsx` holds "not confident"/"neutral"/… and whose live table holds 1–4 — all 16
+   item × level counts matched exactly (e.g. 25/83/156/71 raw vs 25/83/156/71 live),
+   confirming `neutral = 2` sits between "not confident" and "somewhat confident" rather
+   than at an end.
+
+   **Use this to check the processing script rather than trust it.** `data/<table>.py|R`
+   tells you what the mapping is *meant* to be; only the counts show what actually
+   produced the live data. Reach for it any time a table was built from a categorical
+   source, and especially before converting a `raw_resp` table to `resp`.
 
 **Check for two exemptions first — both are stronger than any statistic and cost nothing:**
 
