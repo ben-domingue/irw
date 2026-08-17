@@ -385,6 +385,30 @@ descending order of strength:
   this teaching model…" against columns `Q1`..`Q15`), the tie is a label match, not an
   order inference.
 
+**Prefer the source labels over every statistical route, and check them at both levels.**
+A `.sav`/`.xlsx` that labels its columns ties code to text at the source, which is stronger
+than any inference this step can test. Three things make that tie verifiable rather than
+assumed, and all three are cheap:
+
+- **Check variable labels AND value labels.** `alsuhibani_2022_npi_s3`'s variable labels are
+  bare column names, while its *value* labels carry the paired forced-choice statements. "The
+  file has no item text" is a claim about the level you looked at.
+- **Read how the processing script derives the IRW code**, because that is where the tie can
+  break. Three patterns, in ascending risk: the code IS the source column name (nothing to get
+  wrong); a number-preserving rename (`LOC1` -> `LOC_01`, `BBASAL_3` -> `barthel_3`, mechanical,
+  just read the dict); or **positional assignment** (`df.columns = ["id"] + ITEMS + ...`, or
+  `f"{prefix}{i+1}"` over a column-index range), where the code keeps no trace of the source
+  name and a shifted range is undetectable from the output alone. 10 of the 50 audited tables
+  are positional, and every mapping defect found in the batch_003/005 review was one of them.
+  For positional codes, diff the shipped `item_text` against the source header at that position
+  — mechanical, and it settles the table outright.
+- **Watch for truncation and artifacts.** SPSS caps variable labels at 255 characters (9 labels
+  in `amarilla_2020_hip_fracture`'s file sit at the cap, e.g. `RMH3_BASAL` ends mid-phrase at
+  "...felt calm & peaceful? (prior"), so for long items the label is a *prefix* and anything
+  shipped beyond it came from elsewhere. Labels also carry wave suffixes ("prior hip fracture"),
+  leading numbering ("1. "), A-/B- markers, and spreadsheet concatenation artifacts — strip
+  those deliberately, and say so in provenance.
+
 And before reaching for statistics at all, **re-check whether the source data file has
 variable labels** — the sweep found `alsuhibani_2022_gcbs` had been extracted from the
 paper as `paper_explicit` when the study's own `.sav` files labelled every GCBS item, which
