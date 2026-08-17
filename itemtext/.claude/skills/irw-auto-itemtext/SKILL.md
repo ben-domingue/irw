@@ -234,6 +234,107 @@ pad, guess, or drop items silently to make the counts line up.
 Only once this passes (or the discrepancy is deliberately accepted and logged) does the
 CSV get written as `itemtext/itemtables/<table>__items.csv`.
 
+### Step 5b — Verify the item↔text mapping against the data (REQUIRED)
+
+Everything in Step 5 checks *sets*. If `item_text` for items 3 and 5 were swapped, the
+item set, the resp set, the row counts and the whole audit still pass — and the table
+ships a plausible, confidently-wrong mapping that no downstream check will ever catch.
+So mapping is verified separately, against numbers, and the outcome is recorded.
+
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/item_stats.R <table>
+```
+
+That prints per-item n, mean, SD and floor/ceiling % from the live data, in the shape
+papers publish them. Then look for something in the source to match it against, in
+descending order of strength:
+
+1. **Per-item descriptive statistics.** Most validation papers have a table of per-item
+   M (SD), floor/ceiling %, item-total correlations or factor loadings. Match it in order.
+   Means usually identify each item outright; when two items' means are within ~0.02
+   (which happens — `item_stats.R` flags it), **floor/ceiling % is what breaks the tie**.
+   Do not declare a match on means alone in that case. Worked example:
+   `aguirre_camacho_2021_champion`, where the paper's Table 4 pinned all 8 items and
+   separated the near-tied 3-vs-5 and 6-vs-7 pairs.
+2. **Per-item response ranges**, whenever an instrument's items do *not* all share one
+   scale. The pattern of which items take which range is a structural signature, and it
+   needs no published statistics at all. Worked example: `alves_2017_hamd17` — HDRS-17
+   assigns 0–4 to items 1,2,3,7–11,15 and 0–2 to the rest, and the live data matched all
+   17. Also how the two `abdullah_2024_bsq_*` tables were corroborated.
+3. **Subscale totals.** If the paper reports subscale means/SDs/ranges, sum the live
+   items you assigned to each subscale and compare. This pins subscale *membership* and
+   the numbering at subscale boundaries, but not order within a subscale — record it as
+   partial. Worked example: `aguirre_camacho_2021_shai`.
+4. **A parameter the item text itself implies.** If each item's text states quantities
+   that imply a difficulty/rate/dose, compute it and check the responses track it. This
+   is the strongest route when it applies. Worked example: `allen_2025_delaydiscount`,
+   where each Kirby MCQ item implies `k=(LDR-SIR)/(SIR*delay)`; the proportion choosing
+   the delayed reward correlated with k at Spearman +0.96 across 27 items.
+5. **Subscale block structure**, via
+   `Rscript .claude/skills/irw-auto-itemtext/scripts/mapping_structure.R <table> <group1> <group2> …`.
+   Most multi-subscale instruments have a published, fixed item-number→subscale
+   assignment, which is a testable prediction about the data: same-subscale items should
+   intercorrelate most. Worked examples: `alexander_2017_dsi` (21/23 — good enough to
+   verify a `reconstructed` mapping), `algner2022_mimi16` (15/16). **Know when this test
+   is underpowered**: it cannot separate facets that are nearly collinear, and a low
+   score then is NOT evidence of a bad mapping — `alsuhibani_2022_gcbs` scored 8/15 only
+   because the GCBS is dominated by a general factor (rival-facet r = 0.45–0.64), and
+   `algner2022_uwes` scored 6/9 because UWES dedication and absorption overlap. Say which
+   it is rather than reporting the fraction bare.
+6. **Keying polarity.** On a scale with reverse-worded items whose data are still raw, the
+   sign pattern in the correlation matrix reveals each item's polarity class. Worked
+   example: `algner2022_cse`, where CSE1 correlated +0.31…+0.45 with every odd item and
+   −0.06…−0.36 with every even one, exactly the canonical CSES odd-positive/even-negative
+   keying. Verifies polarity per item, not order within a polarity class. Same idea pins
+   the reverse-keyed triple {3,4,26} in `altahla_2024_whoqol`.
+7. **A marker item.** Some instruments have one item whose distribution is unmistakable —
+   EPDS item 10 (self-harm) must be the least endorsed in any community sample
+   (`almuqbil_2022_epds`: 0.44 with 73.9% at zero, against 0.80–1.77 for the rest). Pins
+   that one item.
+8. **Semantic coherence of the response distribution**, when the resp scale is
+   diagnostic of content (frequencies, counts, difficulty). Rules out a random
+   permutation; doesn't prove adjacent items aren't swapped. Worked example:
+   `ahmed_2019_food_consumption`, where days-per-week consumption ordered maize 5.01 >
+   … > milk 1.20 exactly as food groups should.
+
+**Check for two exemptions first — both are stronger than any statistic and cost nothing:**
+
+- **Self-describing item codes.** If the code names its own content (`TLXEffort`,
+  `increase_cancer_risk`, `afraid`, or a Stroop stimulus word like `ALCOHOL`), a
+  permutation is impossible without being self-evident. 7 of the 50 audited tables were
+  exempt on this ground alone.
+- **Explicit code labels in the paper.** If the paper's item table prefixes each item with
+  the very code the data uses (`alomari_2025_student_questionnaire`: "Q1: I believe that
+  this teaching model…" against columns `Q1`..`Q15`), the tie is a label match, not an
+  order inference.
+
+And before reaching for statistics at all, **re-check whether the source data file has
+variable labels** — the sweep found `alsuhibani_2022_gcbs` had been extracted from the
+paper as `paper_explicit` when the study's own `.sav` files labelled every GCBS item, which
+both settled the mapping and caught a wording error ('rumors' where the study wrote
+'rumours').
+
+Two traps:
+
+- **Match the right subset.** A paper's per-item table almost always describes one wave
+  (usually baseline) or one subsample, while the IRW table may pool several.
+  `item_stats.R` splits by wave for this reason. Pooled-vs-single-wave comparison
+  produces spurious near-misses — `champion` reads 3.60 pooled vs 3.62 at wave 0.
+- **Expect small residuals** where the paper analyzed an imputed file and the IRW script
+  dropped imputed cells, or vice versa. Order and relative spacing are the signal, not
+  the third decimal.
+
+`data_labels` tables are exempt: when the source file's own variable labels tie code to
+text, the mapping is authoritative at the source and there is nothing for statistics to
+add. **Every other `mapping_basis` requires this step.** Record the outcome as a row in
+`itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`)
+with `status` one of `VERIFIED` / `PARTIAL` / `NO_ROUTE` / `NOT_NEEDED`, and `evidence`
+stating the actual numbers compared. **`NO_ROUTE` is a legitimate outcome** — a source
+with no per-item statistics, no range structure and no subscale totals cannot be checked,
+and saying so is required rather than letting "couldn't check" read as "checked". A
+`NO_ROUTE` table on an inferred `mapping_basis` should carry a `public_note` and is a
+candidate for holding back from upload (see `abdullah_2024_hpbbloat_stress`).
+
 ## Step 6 — Write the output
 
 ```r
@@ -287,6 +388,13 @@ missing.
   final form); the mapping was rebuilt from other evidence.
 - `unknown` — not established. Use this honestly rather than guessing; it marks the
   table for re-checking.
+
+`mapping_basis` records *how* the mapping was arrived at; Step 5b records whether it was
+then **checked against the data**. They are independent, and the pair is what tells you
+how much to trust a table: `paper_explicit` + `NO_ROUTE` can still be a numeric
+correspondence nobody verified (this was true of `aguirre_camacho_2021_champion` until its
+Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other than
+`data_labels` must have a `mapping_verification.csv` row before it is promoted to `clean/`.
 
 `text_source` — where the words themselves came from:
 - `study_materials` — this study's own paper, supplement, questionnaire, or data file.

@@ -1,0 +1,31 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_1","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Feeding",NA,"Unable",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_1","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Feeding",NA,"Needs help cutting, spreading butter, etc.",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_1","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Feeding",NA,"Independent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_10","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Stairs",NA,"Unable",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_10","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Stairs",NA,"Needs help",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_10","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Stairs",NA,"Independent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_2","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bathing",NA,"Dependent",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_2","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bathing",NA,"Independent",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_3","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Grooming",NA,"Needs help with personal care",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_3","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Grooming",NA,"Independent face/hair/teeth, etc.",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_4","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Dressing",NA,"Dependent",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_4","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Dressing",NA,"Needs help, but can do about half unaided",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_4","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Dressing",NA,"Independent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_5","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bowels",NA,"Incontinent (or needs to be given enemata)",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_5","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bowels",NA,"Occasional accident (once/week)",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_5","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bowels",NA,"Continent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_6","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bladder",NA,"Incontinent or catheterized and unable to manage",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_6","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bladder",NA,"Occasional",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_6","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Bladder",NA,"Continent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_7","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Toilet use",NA,"Dependent",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_7","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Toilet use",NA,"Needs some help",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_7","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Toilet use",NA,"Independent",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_8","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Transfer",NA,"Unable - no sitting balance",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_8","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Transfer",NA,"Major help",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_8","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Transfer",NA,"Minor help",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_8","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Transfer",NA,"Independent",15
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_9","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Mobility",NA,"Immobile",0
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_9","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Mobility",NA,"Wheelchair independent",5
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_9","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Mobility",NA,"Walks with help of one person",10
+"amarilla_2020_barthel","amarilla_2020_barthel_1","barthel_9","Barthel Index of Activities of Daily Living (10-item)",NA,NA,"Mobility",NA,"Independent",15

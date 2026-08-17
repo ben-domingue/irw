@@ -1,0 +1,17 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Anxious","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how anxious did you feel yesterday?",NA,"not at all",1
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Anxious","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how anxious did you feel yesterday?",NA,"very little",2
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Anxious","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how anxious did you feel yesterday?",NA,"moderately satisfied",3
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Anxious","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how anxious did you feel yesterday?",NA,"very satisfied",4
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Happiness","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how happy did you feel yesterday?",NA,"not at all",1
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Happiness","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how happy did you feel yesterday?",NA,"very little",2
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Happiness","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how happy did you feel yesterday?",NA,"moderately satisfied",3
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Happiness","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how happy did you feel yesterday?",NA,"very satisfied",4
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Statisfaction","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how satisfied are you with your life nowadays?",NA,"not at all",1
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Statisfaction","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how satisfied are you with your life nowadays?",NA,"very little",2
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Statisfaction","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how satisfied are you with your life nowadays?",NA,"moderately satisfied",3
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Statisfaction","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how satisfied are you with your life nowadays?",NA,"very satisfied",4
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Worthwhile","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how worthwhile are the things that you do in your life?",NA,"not at all",1
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Worthwhile","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how worthwhile are the things that you do in your life?",NA,"very little",2
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Worthwhile","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how worthwhile are the things that you do in your life?",NA,"moderately satisfied",3
+"ahmed_2019_wellbeing","ahmed_2019_wellbeing_1","Worthwhile","ONS4-style subjective wellbeing questions (Dolan & Metcalfe)",NA,NA,"Overall, how worthwhile are the things that you do in your life?",NA,"very satisfied",4

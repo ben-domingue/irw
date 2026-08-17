@@ -13,3 +13,6 @@ itemtext/audit_staging/
 
 ##deprecated package
 irw_pkg/
+
+# LibreOffice lock files
+.~lock.*#
