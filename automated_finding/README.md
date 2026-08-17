@@ -306,6 +306,24 @@ source's normal (unfiltered) pagination — not every source API supports a
 date-range query param, but `Hit.published` is a comparable ISO date string
 for all of them. A hit with no `published` value is kept, not dropped.
 
+**Blocked sources.** A connector raises `SourceBlocked` when it hits a hard
+block (an AWS WAF bot-challenge, say) rather than a transient error.
+`discover()` then drops that source for the rest of the run instead of
+burning a doomed request per query, and `blocked_sources()` exposes the set
+of short names so callers can react. Two consumers today:
+- `irw_discover_monthly.py` excludes them from the `sources=` it logs (see
+  above), so a block can never masquerade as coverage.
+- `from_datacite()` lifts that publisher's entry from `_DATACITE_SKIP`
+  (mapping in `_DATACITE_FALLBACK_FOR`), so DataCite backfills a repository
+  whose own connector is down. Those records are normally filtered as
+  duplicates; while the connector is blocked they are the only way to see
+  that repository at all. Self-restoring — nothing blocked, nothing
+  un-skipped. The backfill deliberately does **not** count as searching the
+  source: DataCite's index is partial, so the `--since` window still reopens.
+
+See BATCH_LOG.md's 2026-08-17 entry for the Harvard Dataverse incident that
+prompted both.
+
 ### `irw_discover_monthly.py`
 Incremental wrapper around `irw_discover_updated.py` for a fixed
 `TERM_LIST`, meant to run on a schedule (see the `schedule` skill) rather
@@ -317,6 +335,14 @@ same term text, as a repository-API run) and passes that as `--since`; a
 term run for the first time falls back to `--default-lookback-days` (90).
 After a run it appends one `search_terms_log.csv` row per term with today's
 date, so the next scheduled run advances automatically.
+
+Only sources that were actually *reachable* go into that row's `sources=`
+note; any that hard-blocked (see `blocked_sources()` below) are listed under
+`blocked=` instead. This matters because the `sources=` note is what the
+next run's `--since` lookup trusts — logging a WAF-challenged source as
+searched would advance its watermark past a window nobody ever queried and
+skip it forever. Leaving it out means the lookup finds no covering row and
+falls back to the default lookback, which only ever searches wider.
 ```
 --sources <names>            sources to query (default: osf dataverse)
 --default-lookback-days <n>  --since to use for a term with no prior run (default: 90)

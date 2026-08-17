@@ -58,6 +58,19 @@ class SourceBlocked(Exception):
 
 _blocked_sources: set[str] = set()
 
+
+def blocked_sources() -> set[str]:
+    """Short names (as in SOURCE_MAP / --sources) of every source that hit a
+    hard block so far in this process.
+
+    Callers that record what they searched MUST subtract this before writing
+    that record down: a source that WAF-challenged every request was not
+    actually searched, and any bookkeeping that treats it as searched (an
+    incremental --since watermark, a seen-key ledger) will silently skip that
+    window forever. See irw_discover_monthly.py's log rows for the consumer,
+    and BATCH_LOG.md's 2026-08-17 entry for the run where this went wrong."""
+    return {name.replace("from_", "", 1) for name in _blocked_sources}
+
 # ---------------------------------------------------------------------------
 # RELEVANCE FILTER (tiered)
 # ---------------------------------------------------------------------------
@@ -383,9 +396,45 @@ _DATACITE_SKIP = {
     "open science framework", "osf",
 }
 
+# Which _DATACITE_SKIP publisher strings belong to which connector. When that
+# connector is BLOCKED, its publishers stop being duplicates and become the only
+# way to see that repository at all -- so the skip lifts and DataCite backfills
+# it. This is what saves a run like 2026-08-17, where Harvard's site-wide WAF
+# challenge made dataverse unreachable while DataCite still indexed 321 Harvard
+# Dataverse hits for "personality" alone. Restores itself automatically: nothing
+# is blocked next run, nothing is un-skipped.
+_DATACITE_FALLBACK_FOR = {
+    "dataverse":       {"harvard dataverse"},
+    "zenodo":          {"zenodo"},
+    "figshare":        {"figshare"},
+    "dryad":           {"dryad data"},
+    "osf":             {"open science framework", "osf"},
+    "scholars_portal": {"scholars portal", "scholars portal dataverse"},
+    "surf":            {"surf"},
+    "aussda":          {"aussda", "austrian social science data archive"},
+}
+
+
+def _effective_datacite_skip() -> set[str]:
+    """_DATACITE_SKIP minus the publishers whose own connector is blocked.
+
+    Note this is evaluated per query, not once per run: a source that blocks on
+    query 1 has its DataCite backfill active from query 2 on. Only if DataCite
+    is ordered BEFORE the blocked source in --sources does the very first query
+    miss the backfill, which costs one query's worth of that publisher."""
+    skip = set(_DATACITE_SKIP)
+    for src in blocked_sources():
+        skip -= _DATACITE_FALLBACK_FOR.get(src, set())
+    return skip
+
+
 def from_datacite(query: str, max_pages: int = 5, per: int = 25):
     """DataCite REST API — aggregates datasets from ICPSR, UK Data Service, DANS,
     and hundreds of other repositories not covered by the other connectors."""
+    skip = _effective_datacite_skip()
+    if skip != _DATACITE_SKIP:
+        print(f"  [datacite] backfilling for blocked source(s): "
+              f"{', '.join(sorted(_DATACITE_SKIP - skip))}", flush=True)
     for page in range(1, max_pages + 1):
         try:
             r = requests.get(
@@ -403,7 +452,7 @@ def from_datacite(query: str, max_pages: int = 5, per: int = 25):
         for item in items:
             a = item.get("attributes", {})
             publisher = a.get("publisher", "").lower()
-            if any(s in publisher for s in _DATACITE_SKIP):
+            if any(s in publisher for s in skip):
                 continue
             titles = a.get("titles", [{}])
             title = titles[0].get("title", "") if titles else ""
@@ -630,6 +679,23 @@ def resolve_out_path(explicit: str | None, default: str) -> str:
     return path
 
 
+def _older_than(published: str, since: str) -> bool:
+    """Is `published` strictly older than the `since` cutoff?
+
+    Sources disagree on date granularity: most give a full ISO timestamp, but
+    DataCite exposes only `publicationYear` ("2026"). A naive string compare
+    reads "2026" < "2026-08-03" as True and silently drops every current-year
+    DataCite record -- i.e. exactly the recent ones a --since run is looking
+    for. So compare at the coarsest granularity the two values share: a
+    year-only date is dropped only when its year precedes the cutoff's year.
+    Errs toward keeping (triage does the precision work), consistent with the
+    existing rule that a missing date isn't evidence a hit is old."""
+    p = published[:10]
+    if len(p) == 4:
+        return p < since[:4]
+    return p < since
+
+
 def discover(queries, exclude: set, relevance_on: bool, sources=None,
              on_hit=None, since: str | None = None) -> list:
     """Discover candidates across all sources for each query.
@@ -666,7 +732,7 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                         continue
                     if not is_relevant(hit, relevance_on):
                         continue
-                    if since and hit.published and hit.published[:10] < since:
+                    if since and hit.published and _older_than(hit.published, since):
                         continue
                     seen.add(key)
                     results.append(hit)

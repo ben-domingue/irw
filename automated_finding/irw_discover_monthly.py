@@ -51,6 +51,7 @@ from dataclasses import asdict
 
 from irw_discover_updated import (
     discover, SOURCE_MAP, _load_auto_exclusions, resolve_out_path,
+    blocked_sources,
 )
 
 LOG_PATH = "search_terms_log.csv"
@@ -335,12 +336,30 @@ def main():
     total = sum(hits_by_term.values())
     print(f"\n{total} candidates found -> {out_path}")
 
+    # Only log the sources that were actually reachable. A source that hard-
+    # blocked (WAF challenge etc.) contributed nothing, so claiming it in the
+    # sources= note would let last_run_date() advance its --since past a window
+    # nobody ever searched -- an invisible, permanent hole in coverage. Leaving
+    # it out instead means the next run finds no covering row for it and falls
+    # back to the (always-safe, only-ever-wider) default lookback.
+    blocked = blocked_sources() & set(args.sources)
+    searched = [s for s in args.sources if s not in blocked]
+    if blocked:
+        print(f"\n!! BLOCKED this run, NOT logged as searched: "
+              f"{','.join(sorted(blocked))} -- their since-window is left "
+              f"un-advanced so a later run re-covers it", file=sys.stderr, flush=True)
+    if not searched:
+        print("!! every requested source was blocked -- this run searched "
+              "nothing; the log rows record 0 sources so no watermark moves",
+              file=sys.stderr, flush=True)
+
+    blocked_note = f"; blocked={','.join(sorted(blocked))}" if blocked else ""
     log_rows = [
         {
             "date": today,
             "query": term,
             "output_file": out_path,
-            "notes": f"monthly automated run; {n} candidates; sources={','.join(args.sources)}; since={since_by_term[term]}",
+            "notes": f"monthly automated run; {n} candidates; sources={','.join(searched)}; since={since_by_term[term]}{blocked_note}",
         }
         for term, n in hits_by_term.items()
     ]

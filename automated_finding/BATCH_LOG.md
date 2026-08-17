@@ -9385,3 +9385,99 @@ scheduled discovery scripts -- `irw_discover_monthly.py`,
 three had the identical line. Suffixed names still start with `OUT_PREFIX`,
 so `irw_discover_monthly.py`'s per-term `--since` lookup (which recognizes
 its own rows by that prefix) keeps matching them.
+
+## Dataverse WAF block recorded as a successful search (2026-08-17)
+
+Prompted by reviewing commit `a1ed152` ("Log repos backlog-acceleration full
+sweep (2026-08-17)"): 100 terms x `osf,dataverse`, 0 candidates. The 0 is
+unremarkable on its own -- `irw_discover_monthly.py` is incremental and every
+row carried `since=2026-08-14`, a 3-day OSF window. The problem was what the
+run wrote down about Dataverse.
+
+**The bug.** `discover()` tracks hard-blocked sources in `_blocked_sources`
+and correctly stops calling them after the first `SourceBlocked` (the
+fail-fast added 2026-08-14 in `64f0610`), but never told the caller.
+`irw_discover_monthly.py` built its log note from `args.sources`
+unconditionally, so all 100 rows asserted `sources=osf,dataverse` when
+Dataverse had WAF-challenged every single request. `last_run_date()` reads
+those rows on the next fire and advances `--since` accordingly -- so the
+unsearched window was about to be skipped permanently, invisibly, with each
+run re-certifying the gap as covered. Note the irony: that function's
+docstring goes to real lengths to prevent exactly this failure for the
+*source-set-mismatch* case, but a source that was in the set and silently
+failed walked straight through the same guard.
+
+Already happened twice: the 2026-08-14 monthly run was blocked too (its
+output file contains 3 hits, all `osf`, 0 `dataverse`), and its rows claimed
+`since=2026-08-03`. So Dataverse's genuinely-unsearched window was
+2026-08-03 -> 2026-08-17 and widening every fire.
+
+**Not a cloud-sandbox problem.** Probed from a local (non-cloud) IP:
+`x-amzn-waf-action: challenge`, HTTP 202, 0 bytes -- identical from a browser
+UA, from no UA, and on the homepage as well as `/api`. Site-wide block at
+Harvard's edge; no header, UA, or backoff change touches it. Every other
+connector (osf, zenodo, dryad, datacite, surf, aussda, plos, pmc eutils)
+returned 200 in under 2s the same minute. This is single-source fragility,
+not the automation being flagged.
+
+**Fixed, three parts:**
+- `blocked_sources()` in `irw_discover_updated.py` exposes the set
+  `discover()` already tracked. Any caller that records what it searched must
+  subtract it first.
+- `irw_discover_monthly.py` logs only reachable sources, appends
+  `blocked=<names>`, and warns on stderr. A blocked source therefore never
+  advances its own `--since`; the next run finds no covering row and falls
+  back (the fallback only ever searches *wider*, so it is always safe).
+  PLOS/PMC monthlies were checked and need no change -- they gate on a
+  seen-DOI ledger, not a date window, so a failed source there burns nothing.
+- `search_terms_log.csv`: the 200 false rows (08-14, 08-17) corrected in
+  place to `sources=osf; blocked=dataverse (retroactive correction ...)`.
+  The code fix alone would not have healed a hole already written to disk.
+  Verified after: a `osf dataverse` run now resumes from 2026-08-03, while an
+  `osf`-only run keeps its tight 2026-08-17 watermark.
+
+**Mitigation -- DataCite backfills a blocked repository.** `_DATACITE_SKIP`
+filtered out `harvard dataverse` because the direct connector covered it;
+while that connector is blocked the exclusion made Dataverse *doubly*
+invisible (blocked at the front door, filtered at the side door). DataCite
+still indexes it fine -- `publisher:"Harvard Dataverse" AND personality`
+returns 321 DOIs. `_effective_datacite_skip()` now lifts a publisher's skip
+exactly when its own connector is blocked, per `_DATACITE_FALLBACK_FOR`
+(mapped for all 8 connectors, not just dataverse). Self-restoring: nothing
+blocked next run means nothing un-skipped. Confirmed live -- with dataverse
+blocked, DataCite surfaced `10.7910/dvn/rl99ks` (JobCannon Psychometric
+Response Dataset), which the run would otherwise never have seen.
+
+The backfill deliberately does *not* count as having searched the source:
+DataCite's index is partial, so the `--since` window still reopens later.
+
+**Second bug, found by smoke-testing that mitigation.** The backfill was
+inert in the one mode that needs it. DataCite exposes only
+`publicationYear` ("2026"), and `discover()`'s `--since` filter compared
+raw strings: `"2026" < "2026-08-03"` is lexicographically True, so *every*
+current-year DataCite record was being dropped -- precisely the recent ones
+an incremental run wants. This was a live bug independent of the WAF
+incident; DataCite has been in `SOURCES` all along, so any `--since` run
+has been silently discarding its entire current-year yield. Now routed
+through `_older_than()`, which compares at the coarsest granularity the two
+values share: a year-only date is dropped only when its year precedes the
+cutoff's year. Errs toward keeping, matching the existing rule that a
+missing date isn't evidence a hit is old.
+
+Verified end-to-end against live services with Dataverse genuinely blocked:
+fail-fast fires, DataCite lifts the skip, the year-only date survives
+`--since 2026-01-01`, and `10.7910/dvn/krwi6e` (Validation of the Turkish
+AI-Specific Teacher Attitude Questionnaire, 2026) comes back -- a Harvard
+Dataverse record the pipeline was blind to on all three counts before.
+
+**Also available, unused so far:** `dataverse.harvard.edu/oai?verb=Identify`
+(OAI-PMH) returns 200 -- not behind the challenge. A worthwhile second route
+if the WAF persists and the DataCite backfill proves too thin.
+
+**Housekeeping note:** the cloud routine writes CRLF line endings into
+`search_terms_log.csv` while local scripts write LF, so the file is mixed.
+Harmless to `csv`, but a whole-file rewrite in text mode silently normalizes
+every line and turns a 200-row edit into a 3,600-row diff. Four legacy rows
+also carry unquoted commas in `notes` (they parse as 5 fields); irrelevant to
+the monthly rows, but `_parse_logged_sources` would see a truncated note if
+one ever landed in that shape.

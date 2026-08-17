@@ -1553,3 +1553,19 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   values verified) but buried under extremely verbose full-question-text
   column headers mixed with one-off demographic/yes-no items; needs
   careful column-range identification before a script can be written.
+
+- [ ] **Harvard Dataverse is WAF-blocked; watch for it lifting**
+  (2026-08-17, see BATCH_LOG.md). `dataverse.harvard.edu` returns
+  `x-amzn-waf-action: challenge` / HTTP 202 / 0 bytes on every path,
+  from cloud *and* local IPs -- site-wide, not us being flagged, and no
+  UA/backoff fix exists. The pipeline now degrades honestly rather than
+  silently (blocked sources are excluded from the logged `sources=`, and
+  DataCite backfills the publisher), so nothing is urgent, but two things
+  are worth doing while it persists:
+  (1) re-probe periodically -- one `curl -sI https://dataverse.harvard.edu/api/info/version`
+  tells you; when it clears, the `--since` window reopens from 2026-08-03
+  on its own and the DataCite backfill switches itself off;
+  (2) if it drags on, wire up the OAI-PMH route --
+  `dataverse.harvard.edu/oai?verb=Identify` returns 200 and is *not*
+  behind the challenge, so a connector on that endpoint would restore
+  full coverage rather than DataCite's partial index.
