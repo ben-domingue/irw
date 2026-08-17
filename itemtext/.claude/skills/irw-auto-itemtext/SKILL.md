@@ -258,6 +258,72 @@ file like `automated_finding/license_blocked_candidates.csv` — append to it ac
 batches, don't delete it once a batch is written up; only remove a row once the user
 confirms they've pasted it into the actual sheet.
 
+### Step 6c — Record how the item text was matched to the item codes
+
+**Every extraction must record its provenance**, because neither `validate_items.R`
+nor `audit_batch.R` can tell a verified mapping from a guessed one — both only check
+that the *set* of item/resp values matches. A table whose item text came verbatim from
+the source data file's own variable labels and a table whose text was aligned by
+assuming the paper lists items in code order look identical to both scripts. Without a
+structured record, that difference survives only as prose in `notes.csv`, if at all.
+
+Append a row to `itemtables/batch_<NNN>/provenance.csv` (columns:
+`table,mapping_basis,text_source,source_ref,note,public_note,uploaded`; create with a
+header if it doesn't exist) for **every** table, not just problematic ones. `uploaded`
+is a date, filled in only once a table has actually been pushed to Redivis — it's what
+distinguishes a table that was promoted out of the batch folder from one that went
+missing.
+
+`mapping_basis` — how each `item` code was tied to its `item_text`:
+- `data_labels` — the source data file's own variable labels / column headers tie code
+  to text. No inference. This is the strongest case and worth actively seeking: `.sav`,
+  `.xlsx` and Google Forms exports frequently carry it (see `agogue_2020`, and most of
+  the `alsuhibani_2022_*` / `amarilla_2020_*` / `ali_2021_*` tables).
+- `paper_explicit` — the paper reproduces items alongside numbering/codes that match
+  the live data's codes.
+- `paper_order` — the paper lists the items but ties them to nothing; alignment is
+  *inferred* from presentation order. Defensible, but say so.
+- `reconstructed` — codes carry no ordering information (bare integers, or a renumbered
+  final form); the mapping was rebuilt from other evidence.
+- `unknown` — not established. Use this honestly rather than guessing; it marks the
+  table for re-checking.
+
+`text_source` — where the words themselves came from:
+- `study_materials` — this study's own paper, supplement, questionnaire, or data file.
+- `canonical_instrument` — the published original instrument, not this study's materials.
+- `translated_substitute` — a different language version than the one administered.
+- `unknown`.
+
+`public_note`, when non-empty, is a one-sentence caveat written for the public issues
+page, used verbatim and always emitted regardless of the other fields — use it for
+caveats orthogonal to provenance (e.g. `aguirre_camacho_2021_champion`, whose item text
+is correctly sourced but whose scale anchors are in a different language than its items).
+
+Then generate draft callouts for the public page:
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/draft_issues_qmd.R itemtables/batch_<NNN>
+```
+This writes `fixes/itemtext_issues_draft.md`. It never edits
+`../irw_site/itemtext_issues.qmd` directly — what to tell the public about a dataset is
+an editorial call, so a human reviews and pastes.
+
+### Step 6d — Normalize and audit before the batch is considered done
+
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/batch_<NNN>
+```
+
+`normalize_nulls.R` makes the on-disk representation of absent values match the
+convention across the 422 published tables (the `NA` token, as `write.csv` emits it).
+`audit_batch.R` re-checks the whole batch against live data and flags row-count
+anomalies, coverage gaps, and `option_text` padded with its own `resp` value.
+
+**Note for uploads:** `upload.py` walks a directory recursively and treats *every*
+`.csv` as a table, so `notes.csv`, `provenance.csv` and `audit_report.csv` would be
+uploaded as if they were data. Upload from a filtered directory containing only
+`*__items.csv`, never by pointing it at a batch folder.
+
 ## Idempotency & caching
 
 - Never reprocess a table that already has a local `itemtables/{table}__items.csv` or an
