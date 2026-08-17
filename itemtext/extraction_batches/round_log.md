@@ -463,3 +463,44 @@ label mid-block (items 01-14 "Barely", items 15-29 "Rarely").
 signal that they went to Redivis; stamped uploaded=2026-08-17. Those disk deletions were swept
 into commit bcf671d by an over-broad `git add -A` -- no loss, but the commit message does not
 mention them.
+
+## 2026-08-17 — batches 004 and 005 re-evaluated under the updated process
+
+Same discipline as batch_003: trace every table's item codes to its processing script, then verify
+against the actual source file rather than trusting the `data_labels` label.
+
+**batch_004 (9 tables) -> 7 VERIFIED, 1 NOT_NEEDED, 1 NO_ROUTE.** The whole `alsuhibani_2022_*`
+cluster was checked against the study's own PLOS `.sav` variable labels: consp_s1 5/5, ecrs_s3
+12/12, pads_s1 10/10, pads_s2 8/8, sers 20/20, gcbs 15/15, and loc 24/24 once the source labels'
+leading "N." numbering is dropped. `loc`/`sers`/`gcbs` are cross-study renames documented in the
+script, not inferences. `npi_s3` has no item text to verify (forced-choice, blank by design -- its
+audit WARN is expected). `ALSECYPIAMH_WU_2022_PHQ` stays NO_ROUTE.
+
+**batch_005 (8 tables) -> 8 VERIFIED.** Two substantive corrections:
+
+1. **`amarilla_2020_lawton_brody` was wrongly called NO_ROUTE by me earlier today.** I had checked
+   the paper and its total-index supplement and concluded no per-domain source existed. The study's
+   `.sav` labels **263 of its 278 columns**, including `LYBRODYBASAL1` = "A. Ability to Use Telephone
+   prior hip fracture" through `LYBRODYBASAL8`. All 8 item_texts match. paper_order -> data_labels,
+   NO_ROUTE -> VERIFIED, public_note removed. Its siblings verified the same way: barthel 10/10,
+   eq5d 5/5, sf12 12/12.
+2. **The three `altahla_2024_*` tables had paraphrased item text.** Their source headers are not
+   opaque -- they carry the full item text numbered 1-31 (1-26 WHOQOL-BREF, 27-31 SWLS) -- and the
+   script replaces the header positionally. Checking shipped text against those headers gave only
+   17/26 for WHOQOL and 3/5 for SWLS: 9 WHOQOL items were a paraphrase (shipped "How much do you
+   feel that pain prevents you..." vs the source's and the instrument's "To what extent do you feel
+   that physical pain prevents you..."). item_text rebuilt from the source headers, which for WHOQOL
+   are the canonical wording. paper_explicit/translated_substitute -> data_labels/study_materials.
+   Sheet1 and GP headers verified identical. option_text was already right (per-item WHOQOL anchors).
+
+**Two notes corrected as inaccurate:**
+- `altahla_2024_whoqol_bref`'s note claimed it is "a genuinely distinct sample ... not a duplicate
+  upload". It is the SCI-only subsample of `altahla_2024_whoqol`, which is the combined SCI+healthy
+  file (189+223=412) carrying cov_group; all 4,914 of its (id,item,resp) triples appear there
+  identically. Redundant at the response-data level.
+- The altahla language caveat was right in substance but vague: the paper confirms a Chinese sample,
+  so participants read a Chinese version while the shipped English text is the study's own labelling.
+
+**Cumulative verification across all 50 tables: 27 VERIFIED, 6 PARTIAL, 3 NO_ROUTE, 14 NOT_NEEDED.**
+NOT started: staging 004/005 to `clean/` -- deliberately held while Ben uploads batch_003 from
+there, to avoid mixing batches in the staging directory.
