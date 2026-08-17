@@ -427,3 +427,39 @@ two items but there is no external anchor for which canonical PHQ-2 item should 
 AND per-item means/SDs by subgroup (Tables S1, S2). `alsecypiamh_wu_2022_cps` itemtext is already
 live and has never been verified -- those per-item means make it checkable by Step 5b route 1.
 Fold this into the pre-existing-issues audit (consolidated-state item 8).
+
+## 2026-08-17 — batch_003 re-evaluated with focus on `item` mapping, then staged
+
+Prompted by two spot-checks that turned up oddities. Every table's item-code provenance was
+traced to its processing script and verified against the actual source file.
+
+**Item-mapping findings (the point of the pass).** Four `ali_2021_*` tables and both
+`alkouri_2025_*` tables assign item codes POSITIONALLY from raw column indices, so being
+`data_labels` did not by itself make them inference-free -- the tie depends on header
+positions. All were checked directly against the source files:
+- `ali_2021_gad7` 7/7, `ali_2021_iesr` 22/22 exact against the S1 headers.
+- `ali_2021_spfi` 15/16; the deviation is a corrected source typo ("emphathetic").
+- `ali_2021_isi` positions confirmed, but 6/7 texts had been silently normalised to canonical
+  ISI wording (source has "NOTICABLE", "Difficult falling asleep"). Kept the canonical wording;
+  `text_source` corrected study_materials -> canonical_instrument, because the note had claimed
+  verbatim transcription and that was false.
+- `almuqbil_2022_epds` UPGRADED paper_order -> data_labels: the study's own file carries the
+  item wording in its column headers. 10/10 verified.
+- `alkouri_2025_coping` / `_icu_stressors`: item mapping verified against source column order;
+  response mapping verified by frequency matching (95/95 and 145/145 item x level cells).
+
+**Two real defects fixed.** Both alkouri tables had option rows for `item_01` ONLY, with every
+other item carrying a single NA-resp row -- 18 of 19 and 28 of 29 items had no linkable response
+options. Rebuilt as full grids (95 and 145 rows). `audit_batch.R` gained a check for exactly this
+asymmetry (some items have option rows while others in the same table have none); blank
+option_text alone stays a note rather than a WARN, since it is legitimate table-wide.
+A source quirk surfaced and is now represented: the stressor questionnaire changes its level-2
+label mid-block (items 01-14 "Barely", items 15-29 "Rarely").
+
+**Result:** batch_003 verification is 9 VERIFIED + 1 PARTIAL (`algner2022_uwes`). All 10 moved to
+`clean/`; batch_003 retains only its sidecars.
+
+**batch_002 uploaded**: the 11 staged tables were removed from `clean/` by Ben, the documented
+signal that they went to Redivis; stamped uploaded=2026-08-17. Those disk deletions were swept
+into commit bcf671d by an over-broad `git add -A` -- no loss, but the commit message does not
+mention them.
