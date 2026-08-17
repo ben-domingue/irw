@@ -1,14 +1,15 @@
 # Draft: Harvard Dataverse allowlist request
 
-**Status:** draft, not sent. Ben to review/edit and send.
-**Where to send:** email **support@dataverse.harvard.edu** — that is the
-contact route; there is no web form (an earlier version of this file said
-there was, which was wrong). Their stated turnaround is within 24 business
-hours, Mon-Fri. Contact page: https://support.dataverse.harvard.edu/support
-**Alternative worth considering:** they hold open virtual office hours,
-Wednesdays 11:00-13:00 ET, RSVP by emailing the same address. For a
-"please allowlist our harvester" conversation that may get further faster
-than a ticket — it's a policy question, not a bug report.
+**Status: SENT 2026-08-17** by ben-domingue, to
+**support@dataverse.harvard.edu**. Awaiting reply — their stated turnaround
+is within 24 business hours, Mon-Fri, so expect something by ~2026-08-18.
+Kept here as the record of what was asked; the text below may differ from
+what was actually sent if it was edited before sending.
+
+**If no reply, or the reply doesn't resolve it:** they hold open virtual
+office hours, Wednesdays 11:00-13:00 ET (next: 2026-08-19), RSVP to the same
+address. An allowlist request is a policy question rather than a bug report,
+so a conversation may get further than a ticket.
 **Context:** see `BATCH_LOG.md`, 2026-08-17 entry.
 
 Facts below were verified 2026-08-17 and are worth re-checking before
