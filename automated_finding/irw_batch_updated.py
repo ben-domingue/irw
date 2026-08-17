@@ -49,6 +49,15 @@ import requests
 import pandas as pd
 
 from irw_triage_updated import load_table, triage_dataset, irw_metadata
+from irw_discover_updated import SourceBlocked
+
+
+class FileListUnreachable(Exception):
+    """Couldn't retrieve a dataset's file listing (network/HTTP/parse error).
+
+    Deliberately distinct from "the listing was retrieved and had no tabular
+    file" -- the first is retryable and must not become a sticky verdict, the
+    second is a real finding about the dataset."""
 
 UA = {"User-Agent": "irw-batch/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
 TABULAR_EXT = (".csv", ".tsv", ".tab", ".xlsx", ".xls",
@@ -178,6 +187,12 @@ def _dataverse_files(url: str, doi: str) -> tuple:
         return [], "", []
     r = requests.get("https://dataverse.harvard.edu/api/datasets/:persistentId/",
                      params={"persistentId": pid}, headers=UA, timeout=30)
+    if r.headers.get("x-amzn-waf-action") == "challenge":
+        raise SourceBlocked(
+            f"dataverse.harvard.edu is behind an AWS WAF JS bot-challenge "
+            f"(HTTP {r.status_code}, empty body) -- site-wide, not "
+            "query-specific. The same block hits /api/access/datafile, so no "
+            "Dataverse candidate can be triaged until it lifts.")
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
     license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
@@ -240,8 +255,16 @@ def resolve_data_files(row: dict) -> tuple:
             return _dataverse_files(url, doi)
         if src == "osf":
             return _osf_files(url)
-    except Exception:
-        return [], "", []
+    except SourceBlocked:
+        raise
+    except Exception as e:
+        # Distinguish "we could not reach the listing" from "we read the
+        # listing and it holds nothing tabular". Both used to return an empty
+        # file list, which process_one reported as no_usable_file -- a sticky
+        # verdict recorded against a dataset nobody ever actually looked at.
+        # Harvard's WAF made this concrete: every blocked Dataverse candidate
+        # was being retired as "no resolvable tabular file on landing page".
+        raise FileListUnreachable(f"{type(e).__name__}: {str(e)[:150]}") from e
     return [], "", []
 
 
@@ -304,7 +327,15 @@ def process_one(row: dict) -> dict:
     base = {"source": row.get("source", ""), "title": row.get("title", ""),
             "url": row.get("url", ""), "doi": row.get("doi", "")}
 
-    files, license_raw, oversized = resolve_data_files(row)
+    try:
+        files, license_raw, oversized = resolve_data_files(row)
+    except (SourceBlocked, FileListUnreachable) as e:
+        # Retryable, so it must land on a TRANSIENT_FLAGS flag -- never on a
+        # sticky verdict that would retire the candidate for good.
+        return {**base, "flag": "download_failed",
+                "reasons": f"could not retrieve file listing -- {e}"[:200],
+                "n_responses": "", "n_participants": "", "n_items": "",
+                "density": "", "data_file": ""}
     license_norm, blocked, unknown = check_license(license_raw)
     base["license"] = license_norm
 
@@ -425,6 +456,16 @@ FLAG_ORDER = ["good", "human_assistance", "not_item_response",
               "no_usable_file", "file_too_large", "license_restricted",
               "download_failed", "error"]
 
+# Flags that mean "we couldn't reach the data", not "we evaluated the data".
+# These must NEVER enter the seen-keys ledger: a source outage would otherwise
+# permanently retire every candidate it touched, including after the outage
+# clears. Concretely, Harvard's 2026-08-17 WAF block makes _dataverse_files()
+# fail on an empty body -> download_failed; without this guard the next run
+# would filter those DOIs out forever and the block would quietly cost us the
+# candidates rather than just delaying them. Everything else is a real verdict
+# about the dataset and stays sticky. See BATCH_LOG.md 2026-08-17.
+TRANSIENT_FLAGS = {"download_failed", "error"}
+
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               resume: bool, checkpoint: str = CHECKPOINT,
               ignore_seen_keys: bool = False) -> pd.DataFrame:
@@ -447,17 +488,48 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
 
     results = list(done.values())
     newly_seen = []
+    n_retryable = 0
+    blocked_srcs: dict[str, str] = {}   # source -> why, once it hard-blocks
     for i, row in enumerate(rows, 1):
         k = _key(row)
         if k in done:
             continue
+        src = (row.get("source") or "").lower()
+        if src in blocked_srcs:
+            # Already known unreachable this run -- don't spend a doomed
+            # request per row. Still recorded (retryably) so the candidate
+            # shows up in the output and comes back on the next run.
+            res = {**{"source": row.get("source", ""), "title": row.get("title", ""),
+                      "url": row.get("url", ""), "doi": row.get("doi", ""),
+                      "license": ""},
+                   "flag": "download_failed",
+                   "reasons": f"skipped -- {src} blocked earlier this run: "
+                              f"{blocked_srcs[src]}"[:200],
+                   "n_responses": "", "n_participants": "", "n_items": "",
+                   "density": "", "data_file": ""}
+            append_checkpoint(checkpoint, k, res)
+            results.append(res)
+            n_retryable += 1
+            continue
         print(f"[{i}/{len(rows)}] {row.get('source',''):9} "
               f"{(row.get('title','') or '')[:55]}", flush=True)
         res = process_one(row)
+        if res.get("flag") == "download_failed" and "WAF" in res.get("reasons", ""):
+            blocked_srcs[src] = "AWS WAF bot-challenge"
+            print(f"        !! {src} appears blocked -- skipping its remaining "
+                  f"rows this run (they stay retryable)", flush=True)
         append_checkpoint(checkpoint, k, res)
         results.append(res)
-        newly_seen.append(k)
+        if res.get("flag") not in TRANSIENT_FLAGS:
+            newly_seen.append(k)
+        else:
+            n_retryable += 1
         print(f"        -> {res['flag']}", flush=True)
+
+    if n_retryable:
+        print(f"\n{n_retryable} candidate(s) left OUT of {SEEN_KEYS_PATH} "
+              f"({'/'.join(sorted(TRANSIENT_FLAGS))}) so a later run retries "
+              f"them once the source is reachable again", flush=True)
 
     if not ignore_seen_keys:
         append_seen_keys(newly_seen)

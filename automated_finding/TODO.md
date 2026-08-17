@@ -1560,12 +1560,33 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   from cloud *and* local IPs -- site-wide, not us being flagged, and no
   UA/backoff fix exists. The pipeline now degrades honestly rather than
   silently (blocked sources are excluded from the logged `sources=`, and
-  DataCite backfills the publisher), so nothing is urgent, but two things
-  are worth doing while it persists:
-  (1) re-probe periodically -- one `curl -sI https://dataverse.harvard.edu/api/info/version`
-  tells you; when it clears, the `--since` window reopens from 2026-08-03
-  on its own and the DataCite backfill switches itself off;
-  (2) if it drags on, wire up the OAI-PMH route --
-  `dataverse.harvard.edu/oai?verb=Identify` returns 200 and is *not*
-  behind the challenge, so a connector on that endpoint would restore
-  full coverage rather than DataCite's partial index.
+  DataCite backfills the publisher for *discovery*, and triage now flags
+  blocked candidates retryably instead of retiring them), so nothing is
+  silently lost. Two things remain:
+  (1) **Ask Harvard to allowlist the IRW client** -- the only route that
+  restores full coverage including file downloads, since DataCite gives
+  metadata only and the download endpoints are equally blocked. Draft at
+  `dataverse_allowlist_request.md`; send via
+  https://support.dataverse.harvard.edu/ .
+  (2) Re-probe occasionally -- `curl -sI https://dataverse.harvard.edu/api/info/version`
+  tells you. When it clears, everything self-heals: the `--since` window
+  reopens from 2026-08-03, the DataCite backfill switches itself off, and
+  the retryable candidates come back on the next triage run. No code change
+  needed, so this is informational, not a chore.
+
+  **Do NOT wire up OAI-PMH** (an earlier version of this item recommended
+  it -- wrong). `dataverse.harvard.edu/oai` does return 200 and is not
+  behind the challenge, but the feed is dead for our purposes: `from=`
+  is honored correctly, and `from=2025-06-01` already returns
+  `noRecordsMatch`, so nothing newer than ~mid-2025 is in it. It also
+  exposes only 42 curated sets (AfricaRice, Bioversity, CGIAR...), not
+  Harvard's general holdings. It cannot discover new datasets, which is the
+  entire job.
+
+  **Also do not engineer around the challenge** (headless-browser token
+  minting, solver services). It circumvents an access control the operator
+  deliberately put up, it breaks whenever they retune it, and it puts a
+  crawler that identifies itself as Stanford's IRW in an adversarial
+  posture with a repository the project depends on long-term. The UA
+  already declares itemresponsewarehouse@stanford.edu -- keep asking
+  through the front door.

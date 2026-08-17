@@ -252,11 +252,26 @@ a processing script, check the dataset's DOI against the
 | `good` | Confident column mapping, no QC errors | Strong candidate — write a processing script (Step 2) |
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
-| `no_usable_file` | No resolvable tabular file on the landing page | Skip |
+| `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
 | `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
-| `download_failed` | Network or HTTP error | Retry manually if important |
-| `error` | Unexpected pipeline error | Check `reasons` |
+| `download_failed` | Couldn't reach the data (network/HTTP error, unparseable listing, or a source-wide block) | **Retryable** — see the note below |
+| `error` | Unexpected pipeline error | **Retryable** — check `reasons` |
+
+
+`download_failed` and `error` are `TRANSIENT_FLAGS`: they mean "we could not
+reach the data", not "we evaluated the data". Candidates carrying them are
+deliberately **not** written to `repo_triage_seen_keys.csv`, so a later run
+picks them up again once the source is reachable — a source outage delays
+candidates rather than retiring them. Every other flag is a real verdict
+about the dataset and is sticky. Keep that distinction when adding flags:
+routing a transport failure to a sticky flag silently discards datasets. (It
+did — see BATCH_LOG.md 2026-08-17, where a WAF block was being recorded as
+`no_usable_file`.)
+
+A source that hard-blocks mid-batch (WAF challenge) is detected once and its
+remaining rows are skipped for the rest of the run, recorded retryably rather
+than retried one doomed request at a time.
 
 ### QC warning glossary
 

@@ -9498,3 +9498,77 @@ every line and turns a 200-row edit into a 3,600-row diff. Four legacy rows
 also carry unquoted commas in `notes` (they parse as 5 fields); irrelevant to
 the monthly rows, but `_parse_logged_sources` would see a truncated note if
 one ever landed in that shape.
+
+## Triage burned WAF-blocked candidates as permanent verdicts (2026-08-17)
+
+Follow-up to the entry above, and the more damaging half of it. Fixing
+discovery only moved the problem one stage down: the same WAF blocks
+triage's fetch paths (`_dataverse_files()` -> `/api/datasets/:persistentId`
+and `polite_get()` -> `/api/access/datafile/`, both 202/0 bytes), so the
+DataCite backfill was surfacing Harvard Dataverse candidates that triage
+then could not open.
+
+What happened to them was worse than "download_failed". `resolve_data_files()`
+caught every exception and returned an empty file list, which is
+indistinguishable from a dataset that genuinely has no tabular file -- so
+`process_one()` recorded `no_usable_file`, reason "no resolvable tabular
+file on landing page". That is a *sticky* verdict, and `run_batch()` appended
+every triaged key to `repo_triage_seen_keys.csv` regardless of flag. Net
+effect: a WAF-blocked candidate was permanently retired, with a false reason
+on record, and would never be retried even after the block lifted. Same bug
+class as the discovery-watermark one, one stage downstream and worse -- the
+discovery version lost a date window, this one loses specific datasets.
+
+**Fixed:**
+- `FileListUnreachable` separates "couldn't reach the listing" from "read the
+  listing, nothing tabular in it". `resolve_data_files()` raises instead of
+  returning empty; `process_one()` maps both it and `SourceBlocked` to
+  `download_failed`.
+- `TRANSIENT_FLAGS = {"download_failed", "error"}` are excluded from
+  `repo_triage_seen_keys.csv`. Retryable is not the same as evaluated. This
+  is general -- it protects against any source outage, not just this WAF.
+- `_dataverse_files()` detects `x-amzn-waf-action: challenge` and raises
+  `SourceBlocked`; `run_batch()` then skips that source's remaining rows for
+  the rest of the run (still recording them retryably) instead of spending a
+  doomed 30s request per row.
+
+Verified against the live block with 3 real Harvard Dataverse DOIs: one
+request made rather than three, all three flagged `download_failed` with the
+WAF reason, and nothing written to the seen-keys ledger.
+
+**Ledger checked, no repair needed.** No Harvard Dataverse keys were retired
+during the block window -- `repo_triage_seen_keys.csv` has 153 entries dated
+2026-08-14 and none are `10.7910/DVN` or dataverse.harvard.edu (the 08-14
+monthly run found only OSF hits, and the 08-17 run found nothing to triage).
+The bug was live but hadn't yet cost us a specific dataset. It would have on
+the next scheduled run, since `34a4ed6` had just started feeding Dataverse
+candidates back into triage via DataCite.
+
+## Cloud vs. local for the Dataverse search — revisited, no change (2026-08-17)
+
+Asked whether these searches should move off the cloud routines. They
+shouldn't; location is the wrong axis.
+
+`202` + `x-amzn-waf-action: challenge` is a *JavaScript* challenge: the
+client is expected to execute `challenge.js` and return a token. `requests`
+and `curl` cannot, so they are blocked on any network. Confirmed by
+reproducing identically from a local IP and from the cloud sandbox, with a
+browser UA, with no UA, and on the site root as well as `/api`. Moving the
+Dataverse search local restores nothing.
+
+The axis that would matter is headless-HTTP-client vs. real browser, and we
+are deliberately not crossing it -- see the TODO item for why (circumvents a
+deliberate access control, brittle, and a bad long-term posture toward a
+repository the project depends on). The sanctioned route is an allowlist
+request; draft written to `dataverse_allowlist_request.md` for ben-domingue
+to review and send via support.dataverse.harvard.edu.
+
+Cloud routines themselves are fine and stay as they are. The one
+cloud-specific access incident was the 2026-08-03 egress allowlist blocking
+`api.osf.io`/`dataverse.harvard.edu` (fixed by widening it), and the GitHub
+App write limitation from that same entry is resolved -- routines now push
+their own branches and open their own PRs (#1636, #1638) and commit directly
+(`a1ed152`). PMC and PLOS routines are landing candidates unattended. These
+are narrow fixed-domain API connectors, a different shape of work from the
+broad multi-domain web research that the sandbox whitelist genuinely does
+break.
