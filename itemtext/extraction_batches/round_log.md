@@ -566,3 +566,39 @@ was dropped. Recorded `unknown`/`NO_ROUTE` rather than aligning canonical wordin
 - Verbatim source typos kept and disclosed rather than silently normalised, per the new rule:
   `anjum_2022_gad7` E21 "not being able to sleep or control worrying" (canonical: "stop"), E24 "hart
   to sit still"; `arnulf_2022_general_knowledge` "principle street for finance in New York".
+
+## batch_007 — 2026-08-17
+
+12 claimed, **11 written, 1 blocked** (8.3%). audit_batch.R: 9 PASS + 2 WARN, both explained in notes.csv
+(neither is an itemtext defect). Verification: 4 VERIFIED, 1 NO_ROUTE, 7 NOT_NEEDED.
+
+**Blocked:** `atmadjaja_2026_pos` — the figshare xlsx has bare headers (CQ1-4/POS1-4/EWE1-4/ITS1-4), no
+codebook, no labels, no second sheet, empty figshare references, and no companion paper locatable by
+title or by any of the three author names. Honest no-source block.
+
+**TWO BAD SOURCE LABELS, of different kinds — the notable finding of this round.** The core model ranks
+source labels first; both of these would have shipped wrong text to anyone who trusted them blindly:
+1. `bakker_2020_rses` (NOT yet extracted, warned in advance): in the shared PLOS .sav, five of seven
+   labelled RSES columns contradict their own column names (`satisfied301` is labelled "I feel that I'm
+   a person of worth"; `goodqualities303` is labelled "...I am a failure") and three columns have no
+   label at all. Filed as #1654 before extraction. Its sibling `bakker_2020_pss10` is unaffected and
+   shipped.
+2. `baka2023_bpnsf`: the .sav's VALUE labels state 1 = "Strongly agree" ... 7 = "Strongly disagree",
+   but the data say otherwise. Verified independently by the orchestrator: the 24 items split into two
+   clean blocks (within-block r 0.37/0.44, between -0.23); one block correlates +0.37 with the same
+   study's work-engagement mean and the other negatively; and the Polish item content identifies the
+   positive block as SATISFACTION ("poczucie wolności i swobody wyboru") and the negative as FRUSTRATION
+   ("czuję się wykluczony/a"). Under the file's stated direction a satisfaction item would have to
+   correlate negatively. Anchors shipped reversed, documented. NOTE the diagnostic needs both halves —
+   correlation alone fits either direction until item content fixes which block is which.
+
+Both are now in SKILL.md core model §2, along with Stata's 80-char label cap (vs SPSS's 255) and the
+do-file `label variable` recovery route, found via `audretsch_2021_entrepreneurial_ecosystems`.
+
+**Needs a human decision:** `artistic_preferences` ships 30 of 56 items with NO stem text — they are
+painting-PAIR stimuli with no verbal prompt (images ship in the archive), the same no-stem case as a
+forced-choice instrument. Its opaque name also hides three instruments (APS 1-30, TIPI 31-40, a
+16-word vocabulary check list 41-56); the dictionary description covers only the first.
+`arzamoncunill_2023_epq_clinical` ships the supplement's short CATEGORY DESCRIPTORS rather than literal
+stems, because the study published full Spanish wording only for the 26 items retained in its final
+questionnaire while the live table holds all 22 clinical items of the 43-item pretest pool.
