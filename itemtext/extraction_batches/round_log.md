@@ -717,3 +717,56 @@ proved FALSE in `bakker_2020_rses`. A candidate to hold.
 concealable identities and the survey's actual 4-point stigma measure is absent from IRW. Added as a
 third case to #1651. Both `butt_2022` agents independently derived and verified the same
 "code number = position within construct block" convention on their shared file.
+
+## batch_005 retry — 2026-08-18
+
+Re-attempted the 4 tables `batch_005` left BLOCKED. **1 written, 3 still blocked** — but all
+four now have a settled answer rather than a "retry later".
+
+**`american_multiracial_face` — RESOLVED.** The original block was based on a false premise: 9 of
+the 19 rater-level `.sav` files were reported missing from the paper's OSF project (osf.io/qsdrp).
+All 21 are present; the earlier listing failure was transient. The table's 2,252 bare-integer items
+were reconstructed by re-running `data/american_multiracial_face.R`'s own logic — alphabetical
+`ls()` → `mget` → `rbind` of the 19 files it reads, drop `rating==0`, `unique(case_lbl)` →
+`row_number()` — and the reconstruction is **exact**: 2,252 unique case labels and 117,880 rows,
+per-item n identical for all 2,252 items, per-item means agreeing to max |diff| 5.3e-15 (cor =
+1.000) against `irw_fetch()`. Each case label encodes attribute + face + expression version
+(`Amb_F2`, `RaceProt_F100S_6`), and the attribute was assigned **by source file**, not by parsing
+the label, so no inference entered. Wording and 1–7 anchors are verbatim from the study's own OSF
+codebook. Attribute-block means independently corroborate the published norms over the smaller
+released face set (ambiguity 3.662 vs 3.649; expression 3.937 vs 3.964; masculinity/femininity
+4.727 vs 4.783; White prototypicality 3.745 vs 3.770; attractiveness 4.636 vs 4.641).
+
+**Generalisable rule (new): when the IRW item code is an order-dependent integer assigned inside
+the processing script, re-run the script rather than trying to infer the order.** The script is
+deterministic, the raw files are usually still on the source repository, and per-item n/mean give
+an exact, falsifiable check on the result — a stronger verification than any statistical route in
+Step 5b. Both prior rounds treated "arbitrary integer assigned across a 19-file rbind" as
+inherently unrecoverable; it is not.
+
+Its 2 audit WARNs are both expected: 71.4% blank `option_text` because the survey labelled only
+scale points 1 and 7, and the row-count flag because rating counts vary by design (raters saw
+subsets; n runs 32–71 around a median of 52, and the low end is the smile-genuineness block, where
+"0 = N/A this person is not smiling" is recoded to NA by the script).
+
+**Response-data gap found (not an itemtext defect).** `data/american_multiracial_face.R` reads 19
+of the 21 available `.sav` files, silently omitting `Smile_Black_prototypicality_trans.sav` (6,202
+usable ratings of 119 smiling faces) and `Neutral_Smile_final_trans.sav` (4,322 ratings of 118
+neutral faces). Black prototypicality is the only one of the six racial-prototypicality traits with
+no smiling-photo ratings in the IRW table. Not yet filed as an issue.
+
+**The three `amorim_2025_climej_*` tables — still blocked, but the reason has changed.** The AWS
+WAF challenge on Harvard Dataverse `doi:10.7910/DVN/DB8K7V` has cleared (the API returns 200), so
+the deposit was finally inspected — and it does not contain the item text. Its single file,
+`DadosPublicizados.xlsx`, has a `Dicionário` sheet that repeats the variable NAME in the "Questão"
+column for all 128 CLIMEJ, 17 WQD and 9 EPSO items (`Questão` for CLIMEJ57 is literally
+"CLIMEJ57"), and gives only scale width ("1 a 5 Concordância") with no anchor labels. So these are
+no longer "retry when Dataverse is reachable" — the remaining routes are author contact, the
+unpublished in-press CLIMEJ pilot paper, the Portuguese WDQ item bank, and the Gomide & Siqueira
+(2008) book chapter.
+
+**Lesson for the blocked bucket generally:** two of these four blocks were about *access*, and
+access-based blocks are worth retrying cheaply, but the retry's real job is to convert "couldn't
+reach it" into "reached it, and here is what it does or doesn't contain". Three of the four ended
+up in the second state without any new item text, which is still a better outcome than leaving them
+on a retry list forever.
