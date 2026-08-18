@@ -812,6 +812,18 @@ reordered, item 12 not an LTE-Q item), so canonical wording was deliberately not
 - ISSUES PAGE: 9 callouts added (now 58). Omitted: `bakumenko_2023_adyghe_values`,
   `benitezsillero_2021_bullying` and `boyd_prism_2024`, which carry no caveat.
 
+- UPLOADED 2026-08-18 (12): the whole batch. Stamped in `itemtables/batch_008/provenance.csv` and
+  `mapping_verification.csv`; uploaded CSVs removed from batch_008/, sidecars kept. `clean/` is empty
+  again. **batch_008 is closed** — nothing held, nothing blocked, the first batch to close complete.
+- **#1661 filed** (`data fix`): `data/beck_2021_covid_burden.py` reads
+  `data/journal.pone.0250590_S1_Data.xlsx`, a local file that is absent from the working tree and has
+  no git history, so the four `beck_2021_*` tables cannot be regenerated from a clean clone. The
+  script's own header already carries the fetchable PLOS supplement URL, and 561 of the other
+  `data/*.py` scripts fetch by `requests.get` — a small fix. Does not affect the shipped tables'
+  correctness, only reproducibility.
+- Already-tracked items from this batch, not re-filed: `bitew_2020_self_efficacy`'s 9-of-10 GSE
+  coverage and code offset are in **#1655**, and `bakker_2020_rses` closed **#1654**.
+
 ## batch_009 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `51_liking` exists only in
