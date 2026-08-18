@@ -724,6 +724,18 @@ questionnaire while the live table holds all 22 clinical items of the 43-item pr
   its wording, and `arzamoncunill_2023_epq_clinical` now opens by saying none of its item text is the
   wording respondents read.
 
+- UPLOADED 2026-08-18 (11): all 11 staged tables. Stamped in `itemtables/batch_007/provenance.csv`
+  and `mapping_verification.csv`; the uploaded CSVs removed from batch_007/, sidecars kept. `clean/`
+  is empty again. **batch_007 is closed** except `atmadjaja_2026_pos`, which was blocked at
+  extraction and never wrote a CSV.
+- WORKFLOW CHANGE (Ben, 2026-08-18): the agent now **edits `irw_site/itemtext_issues.qmd` directly**
+  instead of leaving drafts for a human to paste. SKILL.md Step 6c and the audit-mode yellow bullet
+  updated, including the correct path (`../../irw_site/` from `itemtext/`, not `../irw_site/`), the
+  requirement to apply the issues-page bar and log the drops, and the standing warning that
+  `draft_issues_qmd.R` emits a nonsense callout for blocked tables. BATCH_PROCESS.md gains a
+  **Triage and staging** section — the protocol had none, which is why the step had to be explained
+  from scratch mid-round.
+
 ## batch_008 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked** — the first full round. audit_batch.R: **12/12 PASS**.

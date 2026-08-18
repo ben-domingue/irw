@@ -683,9 +683,34 @@ Then generate draft callouts for the public page:
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/draft_issues_qmd.R itemtables/batch_<NNN>
 ```
-This writes `fixes/itemtext_issues_draft.md`. It never edits
-`../irw_site/itemtext_issues.qmd` directly — what to tell the public about a dataset is
-an editorial call, so a human reviews and pastes.
+This writes `fixes/itemtext_issues_draft.md`. The script itself only drafts — **you then
+apply the edit directly** to `itemtext_issues.qmd` in the separate site checkout
+(`irw/irw_site/`, a sibling of `irw/src/`, so `../../irw_site/` from `itemtext/` — note
+it is NOT `../irw_site/`). Confirmed with the user 2026-08-18, replacing the earlier
+draft-and-human-pastes rule.
+
+The draft is a starting point, not the text to paste:
+
+- **Apply the issues-page bar yourself.** The page lists concrete text-vs-table
+  mismatches, not gaps the source never published. A caveat that amounts to "the source
+  never printed the anchors" does not earn an entry; "the canonical prompt we shipped
+  describes a face-to-face session the study ran online" does. Record in the round's
+  `round_log.md` entry which drafts you dropped and why — batch_006 dropped 3 of 10 and
+  batch_007 2 of 12 on this basis.
+- **The script emits a callout for BLOCKED tables too**, templated from their empty
+  provenance fields, which reads as "the origin of the item text was not recorded" for a
+  table that shipped no item text at all. Always drop those. It has happened in both
+  rounds run so far.
+- **Rewrite the prose.** The templated sentences are conservative to the point of being
+  alarming, and several read worse than the underlying situation. Where you verified a
+  claim with numbers, put the numbers in the callout — a reader can act on "correlates
+  0.88-0.90 with the other two amotivation items" and cannot act on "looks unreliable".
+- Match the page's existing format exactly (`::: {.g-col-4 .dataset-item}` wrapping
+  `::: {.callout-warning collapse='true'}` with the table name as an `##` heading), append
+  before the final `:::` that closes the `.grid` div, and check the div count balances
+  before committing.
+- Commit `itemtext_issues.qmd` **by path** in the site repo. That checkout usually has
+  other people's in-flight vignette work in it; `git add -A` there will sweep it up.
 
 ### Step 6c-bis — The checklist this all reduces to
 
@@ -810,10 +835,10 @@ curation, the curation was the stale one, not the extraction.
      documented in the one source checked, a translation is independently-derived rather
      than verbatim-sourced) — distinct from red because there's no evidence the curated
      content is *wrong*, just an honest caveat about what was and wasn't confirmed. Draft
-     the exact `.qmd` `.callout-warning` block for `itemtext_issues.qmd` (match the
-     existing page's format — see batch01_pilot.md for a worked example) and include it in
-     the batch report for later extraction to the website; don't edit
-     `itemtext_issues.qmd` directly as part of this routine.
+     the `.qmd` `.callout-warning` block for `itemtext_issues.qmd` (match the
+     existing page's format — see batch01_pilot.md for a worked example), include it in
+     the batch report, and apply it to the live page under the same rules as Step 6c —
+     direct edits to `itemtext_issues.qmd` are the agreed workflow as of 2026-08-18.
    - ⚪ **Gray** — could not be independently confirmed at all (source blocked, no primary
      material found, or a same-instrument-different-source-language ambiguity like
      `mpsycho_rogers_ocd`'s wording variant) and there's *no evidence either way* — not

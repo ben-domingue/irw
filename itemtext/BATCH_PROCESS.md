@@ -220,6 +220,39 @@ response data — several WARNs this session pointed at data defects worth their
 Never run upload.py or clean/upload_text.py — uploading is a separate, explicit, human-triggered step.
 ```
 
+## Triage and staging (after a round, before upload)
+
+Extraction leaves a batch validated but unshipped. Triage is the per-table go/no-go that
+turns `itemtables/batch_NNN/` into an upload. Done for batches 001, 006 and 007; the shape
+is the same each time.
+
+1. **Re-run the gates live** rather than trusting the round's own report —
+   `normalize_nulls.R` then `audit_batch.R` on the batch. They re-check against current
+   live data, so a table that passed at extraction time can still surface something.
+2. **Re-check the round's substantive claims yourself**, especially any table whose notes
+   ask for it, any source override, and any positional mapping. Both triaged rounds turned
+   up something this way: batch_006's audit error (a PLOS table that is an image), and
+   batch_007's `baaziz_2023_sms2` file inconsistency. Cached sources under `.cache/<table>/`
+   usually make this minutes of work, not hours.
+3. **Decide per table: stage or hold.** Stage into `itemtables/clean/` — **only
+   `*__items.csv` may go there**, since `upload_text.py` treats every `.csv` as a table.
+   Hold anything whose fate depends on an open decision (batch_006 held
+   `APFCompact_Ptacek_2024_DASS-21` pending #1653, a duplicate-table question) and leave it
+   in the batch folder. A table needing a *policy* call rather than a check — is this text
+   good enough to ship — is the user's to make, not yours: ask, don't hold silently.
+4. **Issues page**: draft, then apply directly, per SKILL.md Step 6c.
+5. **Log it** in `round_log.md` under that batch: what was staged, what was held and why,
+   which issues-page drafts were dropped, and what the re-checks found.
+6. **On the user's confirmation that the upload happened**, stamp `uploaded=<date>` in the
+   batch's `provenance.csv` and in `mapping_verification.csv`, and delete the uploaded
+   `__items.csv` files from the batch folder — sidecars stay, so the folder still documents
+   every table the batch claimed. `clean/` is cleared by the user, not by you. **Never stamp
+   ahead of confirmation**; a stamp that runs ahead of the actual upload is worse than none.
+
+Both CSVs are CRLF with every field quoted. Reserialising them with a default `csv.writer`
+rewrites the whole file — check that a `QUOTE_ALL` + `\r\n` round-trip is byte-identical
+before writing, or edit the target lines in place.
+
 ## Repo hygiene when committing a round
 
 `git commit` writes **everything staged**, not just what you added. Background routines in this
