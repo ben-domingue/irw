@@ -3628,3 +3628,18 @@ date,query,output_file,notes
 2026-08-17,resilience,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
 2026-08-17,procrastination,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
 2026-08-17,growth mindset,monthly_candidates_weekly_2026-08-17.csv,monthly automated run; 0 candidates; sources=dataverse; since=2026-08-03
+2026-08-17,self-esteem,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 19 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,grit,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 2 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,self-efficacy,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 5 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,depression,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 20 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,anxiety,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 26 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,burnout,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 7 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,perceived stress,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 7 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,well-being,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 14 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,life satisfaction,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 11 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,loneliness,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 11 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,academic motivation,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 11 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,work engagement,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 1 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,resilience,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 3 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,procrastination,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 13 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
+2026-08-17,growth mindset,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 5 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
