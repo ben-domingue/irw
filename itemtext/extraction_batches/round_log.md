@@ -567,6 +567,28 @@ was dropped. Recorded `unknown`/`NO_ROUTE` rather than aligning canonical wordin
   `anjum_2022_gad7` E21 "not being able to sleep or control worrying" (canonical: "stop"), E24 "hart
   to sit still"; `arnulf_2022_general_knowledge` "principle street for finance in New York".
 
+**Follow-up 2026-08-18 (human spot-check of 5 of the 11 tables).** No extraction defects found:
+`anh_2026_finbehavior`'s nine OCR'd stems are character-exact against the Table 3 image (including
+its inconsistent terminal punctuation), the two `anjum_2022_gad7` typos are genuinely in the .sav
+labels, all 14 `..._AOT` texts match the codebook (which itself documents the four `_rev` codes as
+reverse-coded copies with no wording of their own), all 50 `art` codes match the .rda colnames, and
+49/49 `an_2020` Chinese labels match after stripping source numbering. The corrected means note is
+right (2.980-3.016, SD 0.956-1.021).
+
+But the check turned up an **availability-audit error**: the PLOS Table 3 that supplied FB's text is
+an *image*, and it prints wording for all six constructs in the file, not just FB. The five sibling
+tables (`anh_2026_finsocialization`, `_ai_adoption`, `_finwellbeing`, `_finliteracy`,
+`_digitaltrust`, 36 items) were classified UNAVAILABLE/BLOCKED on reasoning like "the paper only
+names the source scale without reproducing wording" — true of the article text, false of the paper.
+`grep "shop around"` over the scraped text returns 0 hits and the table's HTML endpoint 404s; only
+the PNG carries it. All five reclassified AVAILABLE and inserted at the head of the pending queue
+(1,228 pending). The rule is now in SKILL.md Step 3.
+
+~100 of the 324 UNAVAILABLE/BLOCKED rows citing a PLOS/PMC-family source give reasoning of that same
+"paper does not reproduce the wording" form, so some fraction is probably recoverable the same way.
+**Deliberately not swept now** (Ben, 2026-08-18): defer to one big re-sweep once substantially more
+of the queue is processed, rather than interrupting extraction to re-audit.
+
 ## batch_007 — 2026-08-17
 
 12 claimed, **11 written, 1 blocked** (8.3%). audit_batch.R: 9 PASS + 2 WARN, both explained in notes.csv
@@ -753,7 +775,7 @@ subsets; n runs 32–71 around a median of 52, and the low end is the smile-genu
 of the 21 available `.sav` files, silently omitting `Smile_Black_prototypicality_trans.sav` (6,202
 usable ratings of 119 smiling faces) and `Neutral_Smile_final_trans.sav` (4,322 ratings of 118
 neutral faces). Black prototypicality is the only one of the six racial-prototypicality traits with
-no smiling-photo ratings in the IRW table. Not yet filed as an issue.
+no smiling-photo ratings in the IRW table. Filed as ben-domingue/irw#1660.
 
 **The three `amorim_2025_climej_*` tables — still blocked, but the reason has changed.** The AWS
 WAF challenge on Harvard Dataverse `doi:10.7910/DVN/DB8K7V` has cleared (the API returns 200), so

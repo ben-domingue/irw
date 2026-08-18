@@ -256,6 +256,32 @@ LibreOffice is available in this environment; this has recovered otherwise-inacc
 codebook text (e.g. old Florida Twin Project codebooks) that would otherwise look like a
 dead end.
 
+**A journal table can be an image, and image tables are invisible to every text route.**
+Do not conclude "the paper doesn't reproduce the items" until you have looked at the
+article's *table images*. In `anh_2026_finbehavior` the PLOS paper's Table 3 prints
+verbatim wording for all 45 items of six constructs, keyed to the S1 CSV's own variable
+codes — and none of it is reachable by text: `grep "shop around"` over the scraped
+article text returns 0 hits, and the table's HTML endpoint
+(`.../article/table?id=...t003`) returns 404. Only the PNG has it. This is exactly how
+five sibling tables (`anh_2026_finsocialization`, `_ai_adoption`, `_finwellbeing`,
+`_finliteracy`, `_digitaltrust`) were wrongly classified UNAVAILABLE/BLOCKED with the
+reasoning "the paper only names the source scale without reproducing wording" — a
+sentence that is true of the text and false of the paper. So:
+
+- On PLOS/PMC-family sources, fetch the table assets before giving up. PLOS serves them
+  as `https://journals.plos.org/plosone/article/figure/image?size=large&id=<DOI>.t003`
+  (`.t001`, `.t002`, … for the others) — verified 2026-08-18; it 302s to a signed
+  storage.googleapis.com URL, so follow redirects (`curl -L`). PMC serves `/bin/*.jpg`
+  under the article. Cache under `itemtext/.cache/<table>/` and read the image directly.
+- A measurement/psychometrics paper that reports loadings, alpha, AVE or CR per item
+  almost always prints the item wording in that same measurement-model table. If you
+  found a "Measurement model assessment" table, look at it.
+- OCR from an image is a level-1 source but a fallible transcription. Say so in the note
+  so a human knows to spot-check, and check the punctuation and casing character by
+  character rather than normalising to what the sentence "should" say.
+- The same trap applies in reverse to the availability audit: a verdict of "text not
+  published" that was reached without opening the tables is not final.
+
 ### Step 3b — Verify the table name/description actually matches what you found
 
 Before extracting, check that the instrument you're about to transcribe is the one the
