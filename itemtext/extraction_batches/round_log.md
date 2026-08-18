@@ -991,6 +991,30 @@ each for a stated reason:
 Plus two honest extraction blocks that never wrote a CSV: `arnulf_2022_conspiracy_thinking` (007)
 and `atmadjaja_2026_pos` (007), and `agarwal_2023_dreem` (001, copyrighted DREEM).
 
+### Standing exclusion added 2026-08-18: `enem*`
+
+Ben: **do not extract ENEM item text — it is being handled separately.** The 52 `enem*` rows are
+now `status=excluded` in `queue_state.csv` (a new status; only `pending` rows are claimable), and
+the exclusion is written into BATCH_PROCESS.md's state table, its Standing exclusions section and
+the round-trigger prompt, plus SKILL.md.
+
+Queue is now **1,176 pending** (was 1,228), 109 done, 11 failed, 52 excluded.
+
+This changes every volume statistic quoted for this pipeline, because the ENEM tables dominate the
+corpus: they are **2.12 billion of the 2.44 billion pending responses, 87% of all pending volume**.
+Restated on the remaining 1,176 tables (320M responses):
+
+| non-enem pending tables | share of non-enem pending response volume |
+|---|---|
+| top 25 | 93.5% |
+| top 50 | 96.0% |
+| top 100 | 97.7% |
+
+So the priority-block argument survives — it just gets cheaper. Roughly **two rounds over the top 25
+non-enem tables covers 93.5%** of the volume that is actually in scope, rather than five rounds over
+50. The largest in-scope tables are `criticalperiod_syntax` (107M) and `condon_2024_sapa_personality`
+(68M), which between them are more than half of all remaining pending volume.
+
 ## batch_005 retry — 2026-08-18
 
 Re-attempted the 4 tables `batch_005` left BLOCKED. **1 written, 3 still blocked** — but all

@@ -8,7 +8,7 @@ covers per-table extraction) — this file covers the batching/scheduling layer.
 
 | Path | What it is |
 |---|---|
-| `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** |
+| `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`/`excluded`. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** `excluded` means do not extract, ever — see the standing exclusions below. |
 | `extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
 | `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
@@ -20,6 +20,16 @@ Everything except `queue_state.csv` is rederived from disk each round, so a roun
 that dies partway (API limit, crash) is safely resumable — the next firing sees
 what's missing and continues. Tables left `in_progress` by a dead round need
 manual reconciliation back to `pending`.
+
+## Standing exclusions — do NOT extract these
+
+**`enem*` (52 tables): item text is being handled separately by Ben. Do not extract it.**
+Recorded 2026-08-18. All 52 rows are marked `status=excluded` in `queue_state.csv` so no round can
+claim them; do not flip them back to `pending`, and do not extract an `enem*` table even if asked to
+process "everything remaining". They are the Brazilian national exam (ENEM) tables and they dominate
+the corpus by volume — 2.12 billion of what were 2.44 billion pending responses, i.e. **87% of all
+pending response volume** — so any statistic about queue coverage should say whether it includes
+them. Post-exclusion the queue is 1,176 pending.
 
 ## Scheduling
 
@@ -96,7 +106,9 @@ condition fired and when, then stop. Do nothing else.
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
 - Take the first 12 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
-  is nearly empty — don't stall).
+  is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
+  "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
+  handling separately). Never re-mark an excluded row as pending.
 - Immediately rewrite queue_state.csv marking exactly those tables status="in_progress",
   batch="batch_<NNN>", timestamp=<now ISO 8601>, BEFORE dispatching, so nothing is double-claimed.
 

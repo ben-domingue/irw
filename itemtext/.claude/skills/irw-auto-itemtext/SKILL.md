@@ -173,6 +173,14 @@ This means: **do not** attempt to write into the Sheet1 `instrument`/`sections`/
 spreadsheets. `join.R` still exists and still works the old way for anyone using the
 manual Sheets-fill workflow on a different table — don't modify it.
 
+## Standing exclusion: `enem*`
+
+**Do not extract item text for any `enem*` table.** Ben is handling the ENEM (Brazilian national
+exam) item text separately, confirmed 2026-08-18. All 52 are marked `status=excluded` in
+`extraction_batches/queue_state.csv`; never flip one back to `pending`, and skip them even when
+asked to process "the rest of the queue". If a user asks specifically for an `enem*` table, say it
+is excluded and check with them before doing anything.
+
 ## Before doing anything
 
 1. Read `references/itemtext_standard.md` for the schema and the per-tab column layout.
