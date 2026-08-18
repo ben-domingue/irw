@@ -943,6 +943,31 @@ concealable identities and the survey's actual 4-point stigma measure is absent 
 third case to #1651. Both `butt_2022` agents independently derived and verified the same
 "code number = position within construct block" convention on their shared file.
 
+**TRIAGED 2026-08-18.** Gates re-run live: `normalize_nulls.R` clean (0 of 12), `audit_batch.R`
+11 PASS + 1 WARN (the `cacciatore` row-count spread, already explained as applicability-driven
+missingness). **STAGED all 12, nothing held.**
+
+- **`buzgova_2023_rses` shipped on Ben's call, with new evidence.** The round flagged it as a hold
+  candidate: no labels at any level, data stored pre-reversed (so the polarity route that caught
+  `bakker_2020_rses` is dead), leaving "RSESn = Rosenberg item n" as an unverifiable assumption —
+  the very assumption that proved FALSE in bakker. The orchestrator found positive support for one
+  position: **RSES8 has both the lowest mean (1.53) and the lowest item-rest correlation (0.36, vs
+  0.40-0.57 for the rest)** — the known signature of Rosenberg item 8 ("I wish I could have more
+  respect for myself"), the scale's classic misfitting item. The same signature sat at position 8 in
+  `bang_2023_self_esteem`, and in the permuted bakker file position 8 was one of the three columns
+  whose name and label agreed. Alpha 0.805 against the paper's 0.81. Positions 1-7, 9 and 10 remain
+  unconfirmed. Recorded in the evidence string and stated in the callout. Options offered were ship
+  with a strong callout / hold / ship item 8 only.
+- **Paper-vs-data discrepancy confirmed on `buzgova_2023_soc`**: the paper reports Cronbach's alpha
+  0.92; the released data give **0.765** (n=1096, corrected item-totals 0.29-0.53). Recomputed
+  independently. Not filed as an issue — it is a property of the study's own release, not an IRW
+  defect — but it is now stated in that table's callout, since anyone recomputing the scale hits it.
+  `rses` (0.805 vs 0.81) and `gds` (total mean 3.44) reconcile fine, so it is specific to SOC-13.
+- ISSUES PAGE: 10 callouts added (now 77). Only `butt_2022_task_tech_fit` and
+  `butt_2022_user_satisfaction` carry no caveat. **Candidates were read from `notes.csv` directly**
+  rather than from the draft script's output, per the batch_009 lesson.
+- `busch_2023_stigma`'s table-name mismatch is already tracked as the third case in **#1651**.
+
 ## batch_005 retry — 2026-08-18
 
 Re-attempted the 4 tables `batch_005` left BLOCKED. **1 written, 3 still blocked** — but all
