@@ -69,8 +69,20 @@ Use the highest available, and say which one you used:
 4. **A third-party reproduction** — clinical-assessment sites, handouts. Last resort, and
    see the grid trap in Step 4.
 
-**Level 1 outranks the rest, but it is not infallible — cross-check it.** When both the
-column NAME and the LABEL encode item identity, they must agree. In `bakker_2020_rses`'s
+**Level 1 outranks the rest, but it is not infallible — cross-check it.** Both kinds of
+label can be wrong, and batch_007 hit one of each.
+
+*Value labels* can state the wrong direction. `baka2023_bpnsf`'s `.sav` says 1 = "Strongly
+agree" … 7 = "Strongly disagree", but its satisfaction items correlate **+0.37** with the
+same study's work-engagement mean (whose 0–6 Never..Always coding is unambiguous) while its
+frustration items correlate negatively — which is only possible if the scale actually runs
+1 = disagree … 7 = agree. The shipped anchors were reversed to match the data, and that
+override is documented in provenance. Note the diagnostic needs BOTH halves: the correlation
+pattern alone is consistent with either direction depending on which block is satisfaction,
+so read the item content to fix which block is which before concluding anything.
+
+*Variable labels* can be scrambled relative to the column NAME. When both encode item
+identity, they must agree. In `bakker_2020_rses`'s
 source file (PLOS 10.1371/journal.pone.0227958.s004) they don't: `satisfied301` is labelled
 "I feel that I'm a person of worth", `goodqualities303` is labelled "All in all, I am
 inclined to feel that I am a failure", and three columns carry no label at all — five of
