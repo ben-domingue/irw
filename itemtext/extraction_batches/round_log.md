@@ -1058,8 +1058,26 @@ Sidecars merged; queue reconciled (nothing left `in_progress`); `mapping_verific
 123 rows. Verification: **4 VERIFIED, 2 PARTIAL, 6 NOT_NEEDED**; bases: 8 `data_labels`,
 2 `paper_explicit`, 2 `reconstructed`; 9 of 12 carry a public_note.
 
-> **DO NOT UPLOAD THIS BATCH YET.** `validate_items.R`, `audit_batch.R`, `normalize_nulls.R` and
-> `verify_batch.R` were ALL unrun — every one needs live data and the export quota is exhausted.
+> **UPDATE 2026-08-18, later the same evening: THREE OF THE FOUR GATES NOW PASS.** The quota blocks
+> *exports*, not *queries* — so the gates' substance can be run without egress after all.
+> - **Item/resp sets vs live data, via server-side `SELECT DISTINCT`: 12/12 PASS.** Every table's
+>   item set and resp set match the live warehouse exactly (`geography` 1458/1458, `sapa_personality`
+>   696/696, `condon_2024_sapa_personality` 135/135). That is `validate_items.R`'s substance.
+> - **`verify_batch.R`: 6 PASS, 1 NO VERDICT, 5 MISSING(exempt)** — and it ran for real. Six of the
+>   seven agent-written scripts re-ran their own evidence live and passed. The exception is
+>   `verify_geography.R`, which was written against `irw_fetch` rather than the query path and dies
+>   on the quota error; its mapping is nonetheless confirmed by the SQL gate above. **This is the
+>   pilot's headline measurement: evidence-as-code works.**
+> - **`normalize_nulls.R`: clean, 0 of 12 changed.**
+> - Still unrun: **`audit_batch.R`** alone, because it calls `irw_fetch` for per-item coverage.
+>   That check is expressible as a `GROUP BY` (see `table_sets.R`) and rewriting it is the obvious
+>   next tooling step.
+>
+> **`emidy2024_fevs` IS live** — 49M rows, 1.76 GB, in `item_response_warehouse_3`. Its agent
+> reported the table as not-yet-uploaded; that was the misleading "table does not exist in IRW"
+> error again, and I repeated the claim before checking. The 761MB TODO entry is stale.
+>
+> Original note, still true of `audit_batch.R` only:
 > Each agent satisfied the gate's *substance* by other means (the `table_context.R` fetch that
 > succeeded before the quota tripped, plus server-side aggregate queries), and the CSVs pass a local
 > structural check — correct columns, no `raw_resp`, no duplicate (item,resp) pairs, row counts
