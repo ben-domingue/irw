@@ -504,3 +504,24 @@ audit WARN is expected). `ALSECYPIAMH_WU_2022_PHQ` stays NO_ROUTE.
 **Cumulative verification across all 50 tables: 27 VERIFIED, 6 PARTIAL, 3 NO_ROUTE, 14 NOT_NEEDED.**
 NOT started: staging 004/005 to `clean/` -- deliberately held while Ben uploads batch_003 from
 there, to avoid mixing batches in the staging directory.
+
+## 2026-08-17 — batch_003 uploaded, batch_004 staged
+
+- batch_003's 10 tables were uploaded by Ben and cleared from `clean/`; stamped uploaded=2026-08-17
+  in provenance.csv and mapping_verification.csv. batch_003 now holds only its sidecars.
+- STAGED IN `clean/` (8 of batch_004's 9): alsuhibani_2022_consp_s1, _ecrs_s3, _gcbs, _loc, _npi_s3,
+  _pads_s1, _pads_s2, _sers. Audit on the staging dir: 7 PASS + 1 expected WARN (npi_s3's blank
+  item_text, correct for a forced-choice instrument). Every one verified item-by-item against the
+  study's own .sav labels.
+- HELD (1): `ALSECYPIAMH_WU_2022_PHQ`. Still the only NO_ROUTE in the batch and the decision on it
+  is still open -- my recommendation is to ship it with its public note, for consistency with
+  almuqbil_2022_epds and altahla_2024_swls, whose mappings rest on the same "column N = instrument
+  item N" convention; the difference is only that PHQ has no marker item to corroborate it and just
+  two items, so a wrong guess would affect the whole table.
+- ISSUES PAGE (main, commit 5c47bbb, now 26 entries): added `alsuhibani_2022_loc` (paper says
+  five-point, data and the study's SPSS file show six). The other seven need no callout -- no
+  text-vs-table discrepancy survived verification.
+- Deliberately NOT added: a note explaining `alsuhibani_2022_npi_s3`'s blank item_text. It is a
+  correct encoding of a forced-choice instrument rather than a mismatch, so it fails the page's
+  bar -- but a user seeing a 100%-empty item_text column may well wonder, so it is worth revisiting
+  whether the page should carry explanatory entries as well as discrepancy ones.
