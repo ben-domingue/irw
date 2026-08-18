@@ -361,7 +361,16 @@ verifying.
    broken to a user. Under the current bar (concrete text-vs-table mismatches only) it gets no
    entry, which is why it was left off. Same question would apply to `aguirre_camacho_2021_shai`
    and `alsuhibani_2022_npi_s3` as a class.
-11. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
+11. **Pull the 4 earliest-uploaded itemtext tables back from Redivis to verify them.**
+   `abouhashish_2025_chatgpt_attitudes`, `abukhalaf_2025_disaster_prep`, `addy_2021_sdq_ghana`
+   and `agogue_2020_self_perceived_creativity` were uploaded in the first batch_001 pass and
+   removed from disk before ever being committed, so they exist only on Redivis and cannot be
+   re-checked locally. Every other uploaded table (27 of them) was recovered from git history and
+   swept with the current audit, including the new per-item resp-coverage check, and came back
+   clean. Fetch these four with `irw::irw_itemtext(<table>)`, write them to a scratch dir, and run
+   `audit_batch.R` over it. All four are `data_labels`, so the risk is low -- but they are the only
+   uploaded tables never checked by the current tooling.
+12. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
    (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
    tables that fall between both audits.
 
@@ -536,3 +545,20 @@ there, to avoid mixing batches in the staging directory.
   correct encoding of a forced-choice instrument rather than a mismatch, so it fails the page's
   bar -- but a user seeing a 100%-empty item_text column may well wonder, so it is worth revisiting
   whether the page should carry explanatory entries as well as discrepancy ones.
+
+## 2026-08-17 — batch_005 reviewed; new per-item resp-coverage check
+
+- All 8 tables VERIFIED (7 data_labels verified against source labels/headers, hamd17 via the
+  response-range fingerprint). Audit: 7 PASS + 1 WARN, the WARN now pointing at a real data defect
+  rather than an itemtext one.
+- NEW AUDIT CHECK: per-item resp coverage. validate_items.R compares the resp SET table-wide, so an
+  item can lack option rows for levels its own respondents used and still pass, with the join then
+  silently dropping those responses. It found `alves_2017_hamd17`'s HamD9Baixa (Agitation) covering
+  0-2 while 14 respondents scored 3 and one scored 4 -- a real 0-4 range from a later HDRS variant,
+  since the 0-2 anchors are Hamilton's original 1960 scoring that the rest of the table follows.
+  Added rows for 3 and 4 with blank option_text rather than mixing HDRS versions within one table.
+- Swept the check over every other local table AND 27 already-uploaded tables recovered from git
+  history: no other table has the defect.
+- `alves_2017_hamd17`'s 9 stray out-of-range values on items 6, 14 and 16 are a RESPONSE-DATA
+  problem, now filed as ben-domingue/irw#1642 with the `data fix` label rather than put on the
+  itemtext issues page. The agitation version mismatch did go on the page (main, 6f12f00, 27 entries).
