@@ -771,6 +771,47 @@ the bakker labels, which is mutual corroboration. `bitew_2020_lte` is a MODIFIED
 reordered, item 12 not an LTE-Q item), so canonical wording was deliberately not substituted.
 `data/beck_2021_covid_burden.py` reads a local xlsx that is not in the repo -- a reproducibility gap.
 
+**TRIAGED 2026-08-18.** Gates re-run live: `normalize_nulls.R` clean (0 of 12), `audit_batch.R`
+**12/12 PASS**, no anomalies. Independent per-item `resp` coverage check: 0 gaps and 0 duplicate
+(item,resp) pairs across all 12.
+
+- STAGED IN `clean/` (12 -- the whole batch, nothing held or blocked).
+- **11 of the 12 re-verified against source by the orchestrator**, all clean:
+  `bakker_2020_rses` (see below); `bakumenko_2023_adyghe_values` positional map reproduced from the
+  raw workbook (item_1..7 = columns 6..12, the seven "Оцените важность..." headers, and the block is
+  cleanly bounded -- column 13 starts a different question series); `bang_2023_self_esteem` polarity
+  structure recomputed from the .xlsx; `bitew_2020_self_efficacy`'s +1 GSE offset checked label by
+  label against the canonical GSE-10; `bitew_2020_osss3` canonical text and per-item anchor sets;
+  `bitew_2020_lte`/`_phq9` against the .sav labels (PHQ8 ships the full two-part canonical item, not
+  just the "so slowly" half its label emphasises); `benitezsillero_2021_bullying` 14/14 against the
+  paper's Table 1 IMAGE; `boyd_prism_2024` 22/22 against the .rds haven labels after the documented
+  `${Q2}` -> `[NAME]` substitution (the two unshipped labelled columns are `Often`/`Platform`,
+  covariates, correctly excluded); `beck_2021_iesr` 22/22 against the German IES-R PDF including the
+  pre-1996 orthography; `beck_2021_pss10`'s subscale split confirmed by the source column names
+  themselves (PSS_PH_1,2,3,6,9,10 / PSS_PSE_4,5,7,8 = the canonical assignment). Only
+  `bartoli_2022_badge_notifications` was not re-derived -- its item codes are the app names.
+- **`bakker_2020_rses` confirmed independently, and the evidence is stark.** Per-column means on the
+  1-4 Strongly Disagree..Strongly Agree scale: `goodqualities303`, labelled "...I am inclined to feel
+  that I am a failure", = **1.47**; `nogood302`, labelled "I have a number of good qualities", =
+  **3.27**. Every negatively-worded LABEL floors (1.47/1.54/1.94/1.99) and every positively-worded one
+  ceilings (3.16-3.43). The labels win; the names are the wrong half. All ten columns are labelled.
+- **`bang_2023_self_esteem` downgraded VERIFIED -> PARTIAL** in `verification_merged.csv` and
+  `mapping_verification.csv`. Its own evidence string already said the routes pin polarity class and
+  the position of S8 but NOT the order within each polarity block -- the status field overstated it.
+  Recomputed from the .xlsx: positives {S1,S2,S4,S6,S7} +0.31..+0.73, negatives {S3,S5,S9,S10}, S8
+  near-zero against the positive block except +0.50 with S10. That leaves 5!x4! orders consistent
+  with the evidence; the shipped one is the standard administration order, an assumption. Shipped
+  with a strong issues-page entry saying so, consistent with Ben's ship-and-disclose calls on
+  `artistic_preferences`, `baaziz_2023_sms2` and `arzamoncunill_2023_epq_clinical`.
+- **Convention worth knowing: "offered but unused" response levels are handled inconsistently across
+  the corpus, and the gate forces it.** `boyd_prism_2024` keeps option rows for a level three of its
+  items never saw (every item offered the full 5-point scale), which passes because other items in
+  the table use that level. `arora2025_blueq_pedagogical` had to DROP its unused level 1, because no
+  item in that table used it and `validate_items.R` compares resp SETS table-wide, so the extra row
+  would fail the gate. Same situation, opposite output, decided by the gate rather than by judgment.
+- ISSUES PAGE: 9 callouts added (now 58). Omitted: `bakumenko_2023_adyghe_values`,
+  `benitezsillero_2021_bullying` and `boyd_prism_2024`, which carry no caveat.
+
 ## batch_009 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `51_liking` exists only in
