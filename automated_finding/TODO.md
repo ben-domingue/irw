@@ -3,13 +3,13 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-- [ ] **`biblio_issue1562.csv` (1 row) pending upload/paste**: GitHub issue
-  #1562 resolved as a mostly-duplicate deposit (its HEXACO-24 block shipped
-  2026-08-01 as `dasilva_2019_hexaco24`), but its unshipped CRT block is now
-  `automated_finding/irw_output/dasilva_2019_crt.csv` — 3 items, 211
-  respondents, ids joinable to the HEXACO table. Needs uploading to Redivis
-  and the biblio row pasted into the dictionary sheet. See `BATCH_LOG.md`'s
-  "GitHub issue #1562" entry.
+- [x] **`biblio_issue1562.csv` (1 row) uploaded/pasted** (confirmed
+  2026-08-18, ben-domingue): GitHub issue #1562 resolved as a mostly-
+  duplicate deposit (its HEXACO-24 block shipped 2026-08-01 as
+  `dasilva_2019_hexaco24`); its unshipped CRT block shipped as
+  `dasilva_2019_crt` — 3 items, 211 respondents, ids joinable to the
+  HEXACO table. `biblio_issue1562.csv` and the `irw_output/` CSV removed
+  from disk. See `BATCH_LOG.md`'s "GitHub issue #1562" entry.
 
 - [ ] **2 unresolved leads from the PMC backlog-sweep retriage
   (2026-08-16, dangling commit `3167335c`)**: `10.7717/peerj.20180` (TRX
