@@ -476,10 +476,14 @@ assumed, and all three are cheap:
   are positional, and every mapping defect found in the batch_003/005 review was one of them.
   For positional codes, diff the shipped `item_text` against the source header at that position
   — mechanical, and it settles the table outright.
-- **Watch for truncation and artifacts.** SPSS caps variable labels at 255 characters (9 labels
-  in `amarilla_2020_hip_fracture`'s file sit at the cap, e.g. `RMH3_BASAL` ends mid-phrase at
-  "...felt calm & peaceful? (prior"), so for long items the label is a *prefix* and anything
-  shipped beyond it came from elsewhere. Labels also carry wave suffixes ("prior hip fracture"),
+- **Watch for truncation and artifacts.** Label fields have hard caps and long items hit them:
+  **SPSS truncates variable labels at 255 characters** (9 labels in
+  `amarilla_2020_hip_fracture`'s file sit at the cap, e.g. `RMH3_BASAL` ends mid-phrase at
+  "...felt calm & peaceful? (prior"), and **Stata truncates at 80** — which bites much sooner.
+  When a `.dta` label is truncated, the study's own **do-file** usually carries the full text in
+  its `label variable` statements, and that is still a level-1 source; `audretsch_2021_
+  entrepreneurial_ecosystems` was recovered that way from its S3 File. So for long items the
+  label may be a *prefix*, and anything shipped beyond it came from somewhere you must name. Labels also carry wave suffixes ("prior hip fracture"),
   leading numbering ("1. "), A-/B- markers, and spreadsheet concatenation artifacts — strip
   those deliberately, and say so in provenance.
 
