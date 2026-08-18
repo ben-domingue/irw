@@ -41,6 +41,51 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
     and `10.1371/journal.pone.0321423` (medication adherence scoping
     review -- likely not primary item response data at all).
 
+- [ ] **Step 2b backlog: 4 older triage CSVs had never been retriaged**
+  (found 2026-08-18 while checking whether the 08-18 PLOS run's skipped
+  Step 2b was a one-off -- it was not). Retriage has now been run and the
+  outputs committed as `alt_source_retriage_ha_2026-08-14.csv`,
+  `monthly_retriage_ha_weekly_2026-08-17.csv`,
+  `pmc_monthly_retriage_ha_full_2026-08-16.csv`, and
+  `pmc_monthly_retriage_ha_full_2026-08-16-2.csv` (99 `human_assistance`
+  rows in total). Outcome:
+  - **`human_review` (15 rows) is almost entirely already-known**: 13 were
+    already logged in `human_review/googlesheet_humaneye.csv`. Of the 2
+    genuinely new, one (`10.6084/m9.figshare.29145239.v1`, N=27) is below
+    the N>=100 floor and was skipped outright; the other is archived as
+    `human_review/human_review_altsource_batch1.csv`
+    (`10.6084/m9.figshare.32887717.v1`, Tinder use / general
+    trust-and-wellbeing, N unknown).
+  - **`not_item_response` (48 rows)** dropped, per the standard bucket
+    handling.
+  - **Remaining machine-side leads, after pruning everything below the
+    N>=100 floor** -- `aggregate_continuous` needs the continuous-column
+    verification (memory `feedback_continuous_column_verification`),
+    `worth_retrying` needs a re-download and/or the text-Likert recode:
+    - alt-source aggregate: figshare `21070342.v8` (N=262),
+      `33090965.v1` (347), `32994878.v1` (204), `33154514.v1` (128),
+      `30826265.v1` (1132)
+    - alt-source worth_retrying: figshare `33227889.v1` (417),
+      `33075128.v1` (142), `33202694.v1` (3244), plus two Frontiers
+      supplementary tables with unknown N
+      (`10.1371/journal.pone.0318638.t006`,
+      `10.3389/fpsyg.2021.762225.s002`). Note
+      `10.3389/fpubh.2020.597389.s002` (N=6688) is the same
+      pharmacy-preference discrete-choice study already listed in the
+      2026-08-13 repo-mode RT item above -- don't double-chase it.
+    - repos-weekly aggregate (Dataverse): `10.7910/dvn/x2c2pl` (N=394,
+      preoperative anxiety) and `10.7910/dvn/tg1gya` (N=530920,
+      wellbeing/race/rurality -- large enough to be worth the check
+      even if it turns out to be composite scores).
+    - PMC aggregate: `10.7717/peerj.15581` (184), `.20310` (188),
+      `.7208` (102), `.13069` (227)
+    - PMC worth_retrying: `10.7717/peerj.5185` (N=1731 but only 2 items
+      -- check it isn't a 1-item scale in disguise), `.3928` (371),
+      `.14740` (1334), `.19127` (101)
+  - Everything below N=100 in these four files was dropped outright per
+    the flat floor (memory `feedback_min_sample_size`), not carried as a
+    lead.
+
 - [x] **Triage script's `good` flag doesn't catch two content-level
   failure modes** -- **fixed 2026-08-17**. Both checks added to
   `irw_triage_updated.py` (not `irw_batch_updated.py` as this item
