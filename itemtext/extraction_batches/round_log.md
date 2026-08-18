@@ -894,6 +894,11 @@ one-position shift gives 4). `bukurov_2022_sf36` shipped genuinely item-specific
   `public_note`, so a caveat recorded solely in `notes.csv` is invisible to it. Worth checking
   `notes.csv` directly during triage rather than trusting the draft set to be complete.
 
+- UPLOADED 2026-08-18 (9): the nine staged tables. Stamped in `itemtables/batch_009/provenance.csv`
+  and `mapping_verification.csv`; their CSVs removed from batch_009/, sidecars kept. `clean/` is
+  empty again. **batch_009 is closed except the three held `brand_raffaelli_2024_*` tables**, whose
+  CSVs stay in batch_009/ with blank `uploaded` stamps pending #1656/#1657.
+
 ## batch_010 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `cacciatore`'s row-count
