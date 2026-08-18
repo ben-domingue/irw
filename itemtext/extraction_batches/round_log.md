@@ -704,6 +704,25 @@ questionnaire while the live table holds all 22 clinical items of the 43-item pr
 - **#1655 commented**: `baka2023_olbi` ships 8 of the OLBI's 16 items, a third instance of that
   pattern -- though here the study's own .sav holds only 8, so it may be a short administration
   rather than a processing-script drop.
+- **Post-triage follow-ups (2026-08-18).** Independent per-item `resp` coverage check across all 11
+  staged tables: **0** items missing an option row for a level their own respondents used, **0**
+  option rows for unused levels, **0** duplicate (item,resp) pairs. This is the check
+  `validate_items.R` cannot do, since it compares the resp SET over the whole table;
+  `artistic_preferences` is the good test case, spanning 8 distinct resp values because APS is 1-5,
+  TIPI 1-7 and the vocabulary list 0/1, with every item's own range covered.
+- `autonomysupport_mokken` was the one table nobody had independently re-read (the `mokken` package
+  was not installed). Ben installed it; verified against `man/autonomySupport.Rd`: all 7 item texts
+  exact against the Rd's Content column, item codes are the Rd's Short names and the package
+  colnames, anchors verbatim from the Details section (1 = "not at all/never", 5 =
+  "certainly/always"; 2-4 genuinely undocumented). "(inversely coded)" is correctly stripped from
+  `Decide` -- it is an annotation, not item text -- and `Choose` really does have only levels 1-4 in
+  the package data, so its 4 option rows are right. **All 11 staged tables are now independently
+  verified.**
+- Ben's call on the two remaining judgment items (2026-08-18): **disclose, don't change the data.**
+  Both issues-page callouts strengthened accordingly -- `baaziz_2023_sms2` now states plainly that
+  the text shown for item 16 is probably not the item respondents answered and should not be used as
+  its wording, and `arzamoncunill_2023_epq_clinical` now opens by saying none of its item text is the
+  wording respondents read.
 
 ## batch_008 — 2026-08-17
 
