@@ -673,3 +673,47 @@ Other results: `broadband_inventories` is the 181-item AMBI — one instrument, 
 the plural name — verified with max per-item mean difference 0.000 against the raw file (a
 one-position shift gives 4). `bukurov_2022_sf36` shipped genuinely item-specific anchor sets across
 6 real sections and confirmed direction against the file's own `_highgood` recode.
+
+## batch_010 — 2026-08-17
+
+12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `cacciatore`'s row-count
+spread is applicability-driven missingness — a matrix rating care providers respondents only rated
+if they encountered them). Verification: 4 VERIFIED, 4 PARTIAL, 4 NOT_NEEDED.
+
+**Infrastructure failure worth noting:** group 3 (gai/gds/lsita) was killed by an API content-filter
+error before it read anything — three tables lost to one failure. Re-dispatched as three SEPARATE
+single-table agents and all three then passed, so the filter trip was spurious rather than anything
+about the data. **Lesson: grouping three tables per agent means one infrastructure failure costs
+three tables. Isolation retry is the right response, and finer-grained agents would reduce the blast
+radius.**
+
+**All five `buzgova_2023_*` tables share one `.sav` with NO labels at any level** (variable, value,
+or variable_to_label — checked across all ~105 columns), so none could use `data_labels`. Each
+established its scale direction from the data by a different route, and all five turned out to be
+stored **already reverse-scored**:
+- `rses` — all 45 inter-item r positive (0.12–0.63, none negative); alpha 0.806 vs the paper's 0.81.
+- `soc` — the canonical SOC-13 reverse set {1,2,3,7,10} ranks **1st of all 1,287** possible 5-item
+  subsets on method-factor strength; per-item means correlate r=0.87 with an independent Czech
+  SOC-13 sample.
+- `gds` — all 15 corrected item-totals positive; total mean 3.44/15 with 72.9% in the published 0–4
+  "normal" band (the flipped reading would put the average respondent in the severe range).
+- `lsita` — the raw column sum reproduces the paper's published total exactly (36.30/8.68/12–62 vs
+  36.34/8.66/12–62).
+- `gai` — all 20 item-rest correlations positive with low means, consistent with uniform anxious
+  keying and nothing pre-reversed.
+Consequence: `option_text` is deliberately NON-UNIFORM within `rses`, `gds` and `lsita` — reverse
+items carry flipped anchors because that is how the data are stored. All carry public notes.
+
+**Skill gained** (route 3): reproducing a published total settles subscale assignment AND stored
+reverse-coding direction at once, since a scale summed the wrong way misses the published mean by an
+obvious margin.
+
+**Weakest table:** `buzgova_2023_rses` (PARTIAL). Because the data are pre-reversed the keying-polarity
+route is dead, and an exhaustive search over all 252 five-item subsets found no reverse-wording method
+factor to substitute. Its item order rests on "RSESn = Rosenberg item n" — the exact assumption that
+proved FALSE in `bakker_2020_rses`. A candidate to hold.
+
+**Also:** `busch_2023_stigma` does not measure stigma — its items are binary self-reports of
+concealable identities and the survey's actual 4-point stigma measure is absent from IRW. Added as a
+third case to #1651. Both `butt_2022` agents independently derived and verified the same
+"code number = position within construct block" convention on their shared file.
