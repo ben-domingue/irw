@@ -860,6 +860,31 @@ the plural name — verified with max per-item mean difference 0.000 against the
 one-position shift gives 4). `bukurov_2022_sf36` shipped genuinely item-specific anchor sets across
 6 real sections and confirmed direction against the file's own `_highgood` recode.
 
+**TRIAGED 2026-08-18.** Gates re-run live: `normalize_nulls.R` clean (0 of 12), `audit_batch.R`
+11 PASS + 1 WARN (the `51_liking` row-count anomaly, already explained and not code conflation).
+
+- STAGED IN `clean/` (9): brain_hemisphere, brederecke_2020_phq4, brederecke_2020_sis,
+  broadband_inventories, buczel_2022_inoculation_belief, bukurov_2022_sf36, burgess_2025_soas,
+  burkert_2019_whoqol_bref, busch_2022_course_alleviate.
+- **HELD (3) — Ben's call, 2026-08-18: hold all three `brand_raffaelli_2024_*` tables.** Each ships
+  ONE sentence repeated across all 51-59 items (the rating stem) plus two anchor labels, because the
+  item code is a randomised Qualtrics loop position and the processing script drops `Condition`, so
+  brand identity is unrecoverable (#1656). No per-item information is conveyed. `liking_20` has the
+  additional defect in #1657 (~25% of rows recoded with a rotated choice map, 1,028 "Dislike"
+  answers stored as 7). The options offered were: ship two and hold `liking_20`; ship all three with
+  callouts; hold all three. Revisit if #1656 is fixed by adding `cov_condition`, which would make the
+  brand recoverable via Brands 2024.xlsx + the .qsf loop tables and turn these into real item text.
+- Re-verified against source by the orchestrator: `broadband_inventories` **181/181** exact against
+  the AMBI codebook (including the kept typo "when Im feeling badly"); `brain_hemisphere` 20/20
+  against its codebook; `brederecke_2020_sis` — the reversal is not an override at all, the .sav
+  names those two columns "SIS Item 4 recoded" / "SIS Item 9 recoded" and they are exactly the two
+  negatively-worded items; `burkert_2019_whoqol_bref` recomputed from live data — LQ3/LQ4/LQ26
+  correlate +0.18..+0.46 with unambiguously positive items and 52.5% of respondents sit at LQ3=5,
+  confirming they are stored already-reversed and the shipped reversed anchors are right.
+- ISSUES PAGE: 6 callouts added (now 64). Omitted: `brederecke_2020_phq4`, `burgess_2025_soas` and
+  `brain_hemisphere` (no caveat), plus the three held brand tables — their callouts wait on the hold,
+  the same treatment `APFCompact_Ptacek_2024_DASS-21` got in batch_006.
+
 ## batch_010 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `cacciatore`'s row-count

@@ -7,130 +7,130 @@ before pasting: the sentences below are templated from structured provenance
 fields and are deliberately conservative, so some will read as more alarming
 than the underlying situation warrants.
 
-Source batches: itemtables/batch_008
+Source batches: itemtables/batch_009
 
-## `bakker_2020_rses` (batch_008)
+## `brand_raffaelli_2024_familiarity_24` (batch_009)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0227958 S4 supporting-information .sav (SPSS variable + value labels); paper Methods -->
-<!-- full note: IRW item codes ARE the .sav column names (data/bakker_2020_pss_rses.py melts RSES_COLS by name; no positional step), and all 10 RSES columns carry a variable label -- but 7 of the 10 labels contradict their own column name (issue #1654). Text taken from the LABELS, verified against the data: see verification_group1.csv. Labels transcribed verbatim, no edits (they carry no numbering or wave suffixes and none is at the 255-char SPSS cap). option_text from the .sav value labels (1 Strongly Disagree .. 4 Strongly Agree), identical to MAP_RSES in the processing script; all 10 items use all 4 levels. No instructions text is recorded anywhere in the .sav or the paper, so instructions is blank. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## bakker_2020_rses
-The IRW item codes for this table are unreliable as descriptions of item content: 7 of the 10 columns in the study's SPSS file carry a variable label that does not match the column name (e.g. the column named goodqualities303 is labelled, and behaves as, 'All in all, I am inclined to feel that I am a failure'). The item_text shipped here follows the SPSS labels, which the data's reverse-keying structure confirms; join on the item code and read the text, not the code.
-:::
-:::
-```
-
-## `bang_2023_self_esteem` (batch_008)
-
-<!-- mapping_basis=reconstructed text_source=translated_substitute source=PLOS ONE 10.1371/journal.pone.0284340 S4 supporting-information .xlsx (no item text; 'Data dictionary' sheet gives scale-level descriptions only); paper Methods (Measures: Self-esteem); Rosenberg (1965) canonical wording -->
-<!-- full note: IRW item codes ARE the source column names (S1..S10, melted by name), but neither the data file nor the paper ties any code to an item stem, so the code-to-text mapping was RECONSTRUCTED and verified from the raw data's keying polarity (see verification_group1.csv). Item text is the canonical English RSES wording, NOT the Korean text administered (Jon 1974) -- that translation could not be sourced verbatim. Anchors are the paper's own: 1 'almost never', 4 'always'; 2 and 3 unlabelled and left blank rather than padded. Live data are stored raw/unreversed (the paper reverse-codes the five negative items for scoring), so the same anchors apply to every item. -->
+<!-- mapping_basis=unknown text_source=study_materials source=ResearchBox 1892 'BRAND Dataset' (Zenodo doi:10.5281/zenodo.15039646), Raffaelli, Bocchi, Estes & Adelman (2024) Behav Res Methods, doi:10.3758/s13428-024-02525-x; files ' Materials/Brand_Name_Prolific_2024.qsf', ' Materials/Brand_Logos_Prolific_2024.qsf', ' Data/index_match_2024.xlsx', ' Materials/Brands 2024.xlsx' -->
+<!-- full note: mapping_basis=unknown deliberately: the item code is a Qualtrics loop position, and a BlockRandomizer assigns each respondent one of ten brand lists, so each code covers ten different brands (index_match_2024.xlsx; verified 48=Target, 228=Bacardi, ... against Brands 2024.xlsx). No brand name was shipped. item_text and option_text are verbatim from the .qsf. Anchor capitalisation differs between the two administrations ('Not Familiar at all'/'Very Familiar' in the brand-name survey, 'Not familiar at all'/'Very familiar' in the logo survey); the logo-survey casing is shipped. item_text uses the brand-name survey's wording; the logo administration read 'this logo' in place of 'this brand'. instructions is the sentence that is identical across both administrations; the rest of each survey's intro differs and was therefore not put in instructions. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## bang_2023_self_esteem
-Item text for this table is the canonical English Rosenberg Self-Esteem Scale wording; the study administered the Korean version (Jon, 1974), whose verbatim wording is not reproduced in the paper or the data file. The item order was reconstructed from the reverse-keying pattern in the raw responses, not from any code-to-text key.
+## brand_raffaelli_2024_familiarity_24
+The numbered item codes are question positions in a counterbalanced design, not brands: each code was answered about a different brand depending on which of ten lists the respondent was randomised to, and the list assignment is not carried in the IRW table, so items are not brand-identifiable. Rows with item_family = logo were rated on a logo image and their prompt read 'this logo' rather than 'this brand'.
 :::
 :::
 ```
 
-## `bartoli_2022_badge_notifications` (batch_008)
+## `brand_raffaelli_2024_liking_20` (batch_009)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0270888 S1 Dataset (journal.pone.0270888.s001.xlsx) column headers; task wording from the article Methods -->
-<!-- full note: item codes ARE the S1 spreadsheet's column headers (verbatim rename in data/bartoli_2022_badge_notifications.py), so there is no mapping step. instructions is the paper's literal task text ('Where would you click first on this screen?'). Deviations disclosed: item_text uses the apps' conventional names where headers differ in casing/spacing (Youtube/Linkedin/Justeat -> YouTube/LinkedIn/Just Eat); option_text is descriptive because the click task had no labelled options. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## bartoli_2022_badge_notifications
-This table records a single-click behavioural task rather than a questionnaire: resp=100 marks the one app each participant clicked first and resp=0 the other fourteen, and the response-option text is descriptive rather than wording participants saw.
-:::
-:::
-```
-
-## `beck_2021_iesr` (batch_008)
-
-<!-- mapping_basis=paper_explicit text_source=canonical_instrument source=German IES-R form, (c) Maercker & Schuetzwohl 1998 (https://www.psychologie.uzh.ch/dam/jcr:211930d4-83bd-405a-9dc2-66b7dfbacc66/IES-R_Fragebogen_Auswertung.pdf), the version cited as ref 72 by Beck et al. 2021 (PLOS ONE 10.1371/journal.pone.0250590); item codes from S1 Data columns PP_/PR_D30_IESR1-22 -->
-<!-- full note: Number-preserving derivation: data/beck_2021_covid_burden.py maps the trailing digit of each source column to iesr_<n>, and those numbers are the canonical IES-R item numbers, so code->text is a numbering match, not an order guess. The four observed resp levels match the German version's four anchors (the English IES-R has five), which independently identifies the version. Transcribed verbatim from the official German form incl. its pre-1996 orthography; only the blank event line in the instructions was shortened. -->
+<!-- mapping_basis=unknown text_source=study_materials source=ResearchBox 1892 'BRAND Dataset' (Zenodo doi:10.5281/zenodo.15039646), doi:10.3758/s13428-024-02525-x; files ' Materials/Brand_Name.qsf', ' Materials/Logo_Controls_Prolific.qsf', ' Materials/Brand_Memory_Task_Prolific.qsf', ' Materials/Logo_Memory_Task_Prolific.qsf', ' Data/index_match.xlsx' -->
+<!-- full note: Same reasoning as the 2024 sibling, confirmed independently for Study 1 (index_match.xlsx, 50 positions x 10 lists; Condition present in all four raw files). item_text and option_text verbatim from the .qsf ('Dislike' / 'Like' at 1 and 7, points 2-6 unlabelled and left blank). item_text uses the brand wording; the two logo administrations read 'this logo'. instructions is the sentence identical across all four Study 1 surveys. DEFECT DISCLOSED, not corrected here because it is in the response data: the logo Familiarity-Liking 2020 subsample's resp values were mis-recoded by the processing script (see notes_group1.csv), so for those ~305 respondents the shipped anchors do not describe their stored values. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## beck_2021_iesr
-Item text is the official German IES-R (Maercker & Schuetzwohl 1998) as administered; resp 1-4 are the category indices (ueberhaupt nicht/selten/manchmal/oft), not that version's traditional 0/1/3/5 scoring weights.
+## brand_raffaelli_2024_liking_20
+The numbered item codes are question positions in a counterbalanced design, not brands: each code was answered about a different brand depending on which of ten lists the respondent was randomised to, and that assignment is not carried in the IRW table. In addition, the logo Familiarity-Liking subsample's responses were mis-recoded during processing (values shifted one point, with 'Dislike' stored as 7), so the anchors shown here do not describe roughly a quarter of the rows.
 :::
 :::
 ```
 
-## `beck_2021_pss10` (batch_008)
+## `brand_raffaelli_2024_liking_24` (batch_009)
 
-<!-- mapping_basis=paper_explicit text_source=translated_substitute source=Cohen, Kamarck & Mermelstein (1983) PSS-10 canonical wording; item codes from S1 Data columns PP_/PR_D30_PSS_PH_1..10 / _PSE_4,5,7,8 of PLOS ONE 10.1371/journal.pone.0250590 -->
-<!-- full note: Number-preserving derivation (trailing digit of the source column -> pss10_<n>), and the source columns additionally tag each item's subscale (PH vs PSE), which matches the canonical PSS-10 assignment of items 4,5,7,8 as the positively-worded items -- so the code->text tie is a numbering+subscale match. Text is the original English PSS-10 because the study administered a German version it never names. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## beck_2021_pss10
-The PSS-10 was administered in German, but the study names no German translation, so the item text shown is the original English PSS-10 wording; note also that items 4, 5, 7 and 8 are stored unreversed.
-:::
-:::
-```
-
-## `bitew_2020_lte` (batch_008)
-
-<!-- mapping_basis=data_labels text_source=study_materials source=https://doi.org/10.1371/journal.pone.0240914 S1 File (.sav) SPSS variable labels -->
-<!-- full note: Item codes LTE1..LTE12 are the .sav column names verbatim (data/bitew_2020_ethiopia_battery.py melts them unchanged). item_text is the SPSS variable label with the leading item number stripped - an abbreviation, not the administered wording. Option labels no/yes supplied from the paper's description of the scale, not from value labels (the .sav has none for LTE). -->
+<!-- mapping_basis=unknown text_source=study_materials source=ResearchBox 1892 (https://researchbox.org/1892): Brand_Name_Prolific_2024.xlsx / Brand_Logos_Prolific_2024.xlsx Qualtrics label rows and .qsf survey definitions; Brands 2024.xlsx. Paper: 10.3758/s13428-024-02525-x -->
+<!-- full note: Question stem and 1=Dislike / 7=Like anchors transcribed verbatim from the .qsf question and choice text (2-6 are unlabeled and left blank). Item-level brand identity is not recoverable: the loop table pairs each of the 59 item slots with ten brands and a block randomizer assigns respondents to one of ten lists via the `Condition` field, which the IRW script drops. The Qualtrics column labels name only list 1's brand and would be wrong for 90% of respondents, so they were deliberately NOT shipped as item_text. Instructions are the span that is identical in both surveys; each survey's condition-specific opening paragraph (brand vs logo) was not used. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## bitew_2020_lte
-Item text for this table is the study's abbreviated SPSS variable labels (e.g. 'self illness'), not the full administered item wording, which the study never published; item 12 (intimate partner violence) is not part of the original LTE-Q.
+## brand_raffaelli_2024_liking_24
+Item codes in this table do not identify particular brands: each item slot was filled with one of ten different brands depending on a randomized list assignment that is not retained in the IRW data, and respondents in the logo condition (item_family = logo) rated a logo image with the wording 'like or dislike this logo'.
 :::
 :::
 ```
 
-## `bitew_2020_osss3` (batch_008)
+## `brederecke_2020_sis` (batch_009)
 
-<!-- mapping_basis=data_labels text_source=canonical_instrument source=Kocalevent et al. / Berg et al. (2018) OSSS-3 standardization (paper ref 28); mapping confirmed against S1 File (.sav) variable labels and response ranges -->
-<!-- full note: Item codes OSSS1..OSSS3 are the .sav column names verbatim. Canonical OSSS-3 wording and per-item anchors used because the .sav labels are terse paraphrases and carry no anchor text; position confirmed by the 1-4 / 1-5 / 1-5 range signature and OSSST = sum of the three items. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## bitew_2020_osss3
-Item wording is the canonical English OSSS-3 rather than the study's administered Amharic version; item 1's variable label in the source file ('others worry for me') reads oddly against the canonical item-1 content, though its 4-category response range identifies it as item 1.
-:::
-:::
-```
-
-## `bitew_2020_phq9` (batch_008)
-
-<!-- mapping_basis=data_labels text_source=canonical_instrument source=PLOS ONE 10.1371/journal.pone.0240914 S1 File (SPSS .sav, https://doi.org/10.1371/journal.pone.0240914.s001); PHQ-9 canonical wording -->
-<!-- full note: Item codes ARE the source column names (data/bitew_2020_ethiopia_battery.py melts PHQ1..PHQ9 verbatim; no positional step). The .sav variable labels are numbered symptom mnemonics in canonical PHQ-9 order, which fixes the code->item tie; the words themselves are the canonical English PHQ-9 because the study used a locally validated Amharic version not reproduced in the paper. The .sav carries no value labels for PHQ, so the 0-3 anchors are the canonical Not at all / Several days / More than half the days / Nearly every day. One source file (S1) serves all four bitew_2020_* tables in this batch. -->
+<!-- mapping_basis=paper_explicit text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0230331 Table 3 (items and factor loadings, numbered 1-11, English plus the administered German wording); S1 Dataset (.sav) for the recode flags -->
+<!-- full note: item_text transcribed verbatim from Table 3, keeping the paper's own format of English wording followed by the administered German in parentheses. Anchors 1 = strongly disagree / 5 = strongly agree from the Methods; scale points 2-4 are unlabeled and left blank. Items 4 and 9 are stored reverse-coded per the .sav labels, so their anchors are shipped reversed. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## bitew_2020_phq9
-Item wording is the canonical English PHQ-9; the study administered a locally validated Amharic translation whose exact wording is not published.
+## brederecke_2020_sis
+SIS items 4 and 9 are stored reverse-coded in the source data, so for those two items resp 1 corresponds to 'strongly agree' and resp 5 to 'strongly disagree'; the other nine items run 1 = strongly disagree to 5 = strongly agree.
 :::
 :::
 ```
 
-## `bitew_2020_self_efficacy` (batch_008)
+## `broadband_inventories` (batch_009)
 
-<!-- mapping_basis=data_labels text_source=canonical_instrument source=PLOS ONE 10.1371/journal.pone.0240914 S1 File (SPSS .sav); General Self-Efficacy Scale (Schwarzer & Jerusalem, 1995) -->
-<!-- full note: Item codes ARE the source column names (verbatim melt of SEFFICA1..SEFFICA9; no positional step). The paper states a 10-item GSE was used; the .sav holds SEFFICAY (GSE item 1) plus SEFFICA1-9 (GSE items 2-10), and the IRW script ships only the latter nine, so codes run one behind GSE numbering. Alignment fixed by the .sav variable labels: SEFFICA5 'can solve most issues' = GSE6, SEFFICA6 'get silent' = GSE7 'remain calm', SEFFICA7 'find options' = GSE8. Option text is transcribed verbatim from the .sav value labels (never/sometimes/right/very/right), not the canonical GSE anchors. Same S1 source file as the other bitew_2020_* tables. -->
+<!-- mapping_basis=data_labels text_source=study_materials source=openpsychometrics.org AMBI_data_Dec2019.zip (codebook.txt + data.csv); https://openpsychometrics.org/tests/AMBI/; Yarkoni 2010 J Res Pers 44:180-198 -->
+<!-- full note: Codebook of the raw data package keys each column prefix Q1..Q181 to its verbatim statement; IRW item = that number (q17a -> 17). HTML entities decoded; source typos kept. Confirmed by exact per-item mean match against the raw data.csv columns. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## bitew_2020_self_efficacy
-The IRW table contains 9 of the 10 General Self-Efficacy Scale items (GSE item 1 exists in the source file but was not shipped), and item code SEFFICAn is GSE item n+1; the response anchors are the authors' own shorthand (never/sometimes/right/very/right) for the GSE's Not at all true...Exactly true scale.
+## broadband_inventories
+The instructions text, quoted verbatim from the AMBI test page, describes a five-point scale, but the items were administered on the seven-point Strongly disagree..Strongly agree scale that the IRW resp values 1-7 encode.
+:::
+:::
+```
+
+## `buczel_2022_inoculation_belief` (batch_009)
+
+<!-- mapping_basis=paper_explicit text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0267463, S2 File Appendices A-D; S1 Data (xlsx) column names -->
+<!-- full note: Item codes are the raw xlsx column names and are self-describing (source type x misinformation/retraction); S2 Appendix C labels the four ratings per scenario as 'Belief in misinformation' and 'Belief in retraction (C/E/T)', which map one-to-one onto them. Item wording varies by scenario across six counterbalanced configurations, so item_text is the condition plus a Scenario 1 example rather than a single administered sentence -- a deliberate deviation from literal single-sentence transcription. option_text holds the 0-10 numeric anchors the participant saw; resp is those plus one, as stored in the source xlsx. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## buczel_2022_inoculation_belief
+Each of these six items pools six different scenario-specific question wordings that were counterbalanced across participants, so item_text names the item's condition and quotes one scenario's wording as an example rather than the single sentence any one participant read.
+:::
+:::
+```
+
+## `bukurov_2022_sf36` (batch_009)
+
+<!-- mapping_basis=data_labels text_source=canonical_instrument source=PLOS ONE 10.1371/journal.pone.0274513 S5 Appendix (.sav) variable labels; RAND 36-Item Health Survey 1.0 (public domain) for wording -->
+<!-- full note: The .sav variable labels tie each Q{n}SF36_V1 column to its SF-36 item and the IRW code drops only the _V1 suffix; labels are terse summaries so the administered-language words come from the canonical RAND-36. Per-item response ranges and the .sav's own _highgood recodes independently confirm the item block structure and the 1..k coding direction. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## bukurov_2022_sf36
+Item and option wording is the public-domain English RAND 36-Item Health Survey; this study administered a Serbian-language SF-36, so the text is canonical rather than the exact wording participants read.
+:::
+:::
+```
+
+## `burkert_2019_whoqol_bref` (batch_009)
+
+<!-- mapping_basis=data_labels text_source=canonical_instrument source=Burkert & Freidl (2019) PeerJ 7:e6773, doi:10.7717/peerj.6773 -- data file peerj-07-6773-s001.sav (variable + value labels for LQ1-LQ26); German WHOQOL-BREF wording from https://psydix.org/psychologische-testverfahren/img/whoqol-bref-auswertung.pdf (Angermeyer, Kilian & Matschinger German version, (c) WHO) -->
+<!-- full note: Codes are the source .sav column names (verbatim, non-positional). Variable labels are terse German keywords sufficient to pin the mapping, so mapping_basis=data_labels; the administered wording is the published German WHOQOL-BREF (text_source=canonical_instrument) and every one of the 26 items was diffed against its own variable label AND its own value-label anchor set before shipping -- all 26 agree, including the item-specific anchor sets (LQ1/LQ15 sehr schlecht..sehr gut; LQ2/LQ16-25 sehr unzufrieden..sehr zufrieden; LQ3-9 ueberhaupt nicht..aeusserst; LQ10-14 ueberhaupt nicht..voellig; LQ26 frequency). DEVIATION DISCLOSED: option_text for LQ3, LQ4 and LQ26 is shipped in REVERSED order relative to the .sav value labels, because the delivered data are pre-reverse-coded (see verification row). Second deviation: the source PDF renders item 24 with a duplicated fragment ('...in Anspruch nehmen zu koennen? zu koennen?'); shipped without the duplication. Section prompts are the instrument's own four block lead-ins; a typo in the source ('In er folgenden Frage') was corrected to 'In der folgenden Frage'. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## burkert_2019_whoqol_bref
+Items LQ3 (pain), LQ4 (dependence on medical treatment) and LQ26 (negative feelings) are stored already reverse-coded, so for these three items resp = 5 means the most favourable quality-of-life answer; the option text shipped here reflects that stored direction, not the order printed on the questionnaire.
+:::
+:::
+```
+
+## `busch_2022_course_alleviate` (batch_009)
+
+<!-- mapping_basis=paper_explicit text_source=study_materials source=Busch et al. (2022) PLOS ONE 17(6):e0269201, doi:10.1371/journal.pone.0269201 -- S1 Appendix survey instrument, question Q105; Table 3 percentages -->
+<!-- full note: Codes are the source .csv column names (verbatim, non-positional) and are self-describing. S1 Appendix reproduces Q105's 13 checkbox options verbatim; transcribed literally. option_text is descriptive ('Selected this aspect' / 'Did not select this aspect') because a select-all checkbox has no printed response labels in the source. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## busch_2022_course_alleviate
+These are checkbox options from a single select-all-that-apply survey question, not independently administered items: resp = 1 means the respondent ticked that aspect and resp = 0 means they did not tick it, so a 0 is not necessarily a substantive disagreement.
 :::
 :::
 ```
