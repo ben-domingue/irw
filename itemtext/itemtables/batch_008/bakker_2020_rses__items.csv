@@ -1,0 +1,41 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"bakker_2020_rses","bakker_2020_rses_1","satisfied301","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","satisfied301","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","satisfied301","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","satisfied301","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","nogood302","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I have a number of good qualities",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","nogood302","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I have a number of good qualities",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","nogood302","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I have a number of good qualities",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","nogood302","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel that I have a number of good qualities",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","goodqualities303","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"All in all, I am inclined to feel that I am a failure",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","goodqualities303","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"All in all, I am inclined to feel that I am a failure",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","goodqualities303","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"All in all, I am inclined to feel that I am a failure",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","goodqualities303","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"All in all, I am inclined to feel that I am a failure",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","dowell304","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I am able to do things as well as most other people",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","dowell304","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I am able to do things as well as most other people",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","dowell304","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I am able to do things as well as most other people",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","dowell304","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I am able to do things as well as most other people",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","noproud305","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel I do not have much to be proud of",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","noproud305","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel I do not have much to be proud of",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","noproud305","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel I do not have much to be proud of",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","noproud305","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I feel I do not have much to be proud of",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","usefull306","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I take a positive attitude toward myself",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","usefull306","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I take a positive attitude toward myself",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","usefull306","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I take a positive attitude toward myself",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","usefull306","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I take a positive attitude toward myself",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","worth307","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"On the whole, I am satisfied with myself",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","worth307","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"On the whole, I am satisfied with myself",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","worth307","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"On the whole, I am satisfied with myself",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","worth307","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"On the whole, I am satisfied with myself",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","morerespect308","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I wish I could have more respect for myself",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","morerespect308","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I wish I could have more respect for myself",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","morerespect308","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I wish I could have more respect for myself",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","morerespect308","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I wish I could have more respect for myself",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","failure309","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I certainly feel useless at times",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","failure309","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I certainly feel useless at times",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","failure309","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I certainly feel useless at times",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","failure309","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"I certainly feel useless at times",NA,"Strongly Agree",4
+"bakker_2020_rses","bakker_2020_rses_1","positiveattitude310","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"At times I think I am no good at all",NA,"Strongly Disagree",1
+"bakker_2020_rses","bakker_2020_rses_1","positiveattitude310","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"At times I think I am no good at all",NA,"Disagree",2
+"bakker_2020_rses","bakker_2020_rses_1","positiveattitude310","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"At times I think I am no good at all",NA,"Agree",3
+"bakker_2020_rses","bakker_2020_rses_1","positiveattitude310","Rosenberg Self-Esteem Scale (RSES), Amharic version",NA,NA,"At times I think I am no good at all",NA,"Strongly Agree",4

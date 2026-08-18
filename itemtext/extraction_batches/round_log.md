@@ -602,3 +602,38 @@ forced-choice instrument. Its opaque name also hides three instruments (APS 1-30
 `arzamoncunill_2023_epq_clinical` ships the supplement's short CATEGORY DESCRIPTORS rather than literal
 stems, because the study published full Spanish wording only for the 26 items retained in its final
 questionnaire while the live table holds all 22 clinical items of the 43-item pretest pool.
+
+## batch_008 — 2026-08-17
+
+12 claimed, **12 written, 0 blocked** — the first full round. audit_batch.R: **12/12 PASS**.
+Verification: 11 VERIFIED, 1 NOT_NEEDED. (An initial ERROR on `boyd_prism_2024` was a transient
+irw_fetch failure; the table fetches fine on retry, 606 ids / 22 items.)
+
+**`bakker_2020_rses` RESOLVED — and it overturned my own #1654.** I had filed that issue concluding
+the .sav's column NAMES looked right and the labels shuffled. The opposite is true, and the data
+settle it: `goodqualities303` is labelled "...I am inclined to feel that I am a failure" and sits at
+the FLOOR (mean 1.5 of 4); `nogood302` is labelled "I have a number of good qualities" and sits at
+the CEILING (3.3). A positively-worded self-esteem item cannot floor in a general sample. Read in
+column order the labels reproduce a standard circulated RSES administration order (items
+7,3,9,4,5,10,1,8,6,2); the names were assigned by numbering columns in Rosenberg's ORIGINAL order
+without noticing the form was permuted. My issue also wrongly said three columns were unlabelled --
+I had mis-transcribed their names (`usefull306`, `morerespect308`, `positiveattitude310`); all ten
+are labelled. #1654 corrected and closed; SKILL.md §2 now says the name is at least as likely to be
+wrong as the label, and to decide with keying polarity and item means rather than tidiness. The
+table ships a public_note that its item codes must not be read as item content.
+Bonus: the paper's Methods states the RSES ran 1=strongly agree..4=strongly disagree; cross-checked
+against the PSS-10 in the same file, the .sav's opposite direction is correct and the paper is wrong.
+
+**#1655 filed (`data fix`):** two tables ship fewer items than their source holds --
+`anjum_2022_gad7` (6 of GAD-7's 7) and `bitew_2020_self_efficacy` (9 of the GSE's 10). The latter
+also has an OFFSET: `SEFFICAY` is GSE item 1 and is dropped, so `SEFFICAn` = GSE item n+1. Verified
+independently against the .sav labels (SEFFICA5 "can solve most issues" = GSE 6; SEFFICA6 "get
+silent" = GSE 7 "remain calm"; SEFFICA7 "find options" = GSE 8).
+
+**Other findings:** `beck_2021_iesr` uses a 4-anchor German IES-R and IRW stores the category index
+1-4, NOT that version's 0/1/3/5 scoring weights -- summing `resp` gives a different scale from the
+paper's (public_note). `bang_2023_self_esteem` had no item text at any level in its source, and its
+order was reconstructed from keying polarity -- landing on the same permuted administration order as
+the bakker labels, which is mutual corroboration. `bitew_2020_lte` is a MODIFIED 12-item LTE (items
+reordered, item 12 not an LTE-Q item), so canonical wording was deliberately not substituted.
+`data/beck_2021_covid_burden.py` reads a local xlsx that is not in the repo -- a reproducibility gap.

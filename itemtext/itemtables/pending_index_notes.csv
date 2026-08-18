@@ -1,2 +1,3 @@
 table,note
 arnulf_2022_conspiracy_thinking,"Item text not recoverable: the study's S1 File (.sav) labels the CT2 columns with bare codes only, the paper does not reproduce the BCTI items, and it describes the measure as 15-item while the data hold 14 columns (CT2_1..CT2_14) with no record of which was dropped."
+bitew_2020_self_efficacy,IRW table has 9 of the 10 General Self-Efficacy Scale items; source .sav column SEFFICAY (GSE item 1) is not shipped by data/bitew_2020_ethiopia_battery.py. Item code SEFFICAn = GSE item n+1.
