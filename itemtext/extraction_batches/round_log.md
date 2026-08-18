@@ -1035,25 +1035,69 @@ gains a phantom level and MIN/MAX come back NA.
 **`validate_items.R` should be rewritten on top of this** — not done yet, deliberately, because
 agents were still reading that file mid-round.
 
-### Round status
+### Round status: 12 dispatched, **12 written, 0 blocked** — but NOT gate-verified
 
-Dispatched 12 agents, one per table, at the top 12 in-scope tables by volume (`neurips_2020` pulled
-before dispatch: 27,613 image-stimulus items, a different deliverable, still `pending`).
+One agent per table, at the top 12 in-scope tables by volume (`neurips_2020` pulled before dispatch:
+27,613 image-stimulus items, a different deliverable, still `pending`). **Round 2 of the pilot was
+NOT dispatched** — with `irw_fetch` down there is no hard gate to run, and thirteen more agents
+would produce unvalidated output. Those 13 tables stay `pending`.
 
-**Round 2 of the pilot was NOT dispatched** — with `irw_fetch` down there is no hard gate to run, and
-thirteen more agents would produce unvalidated output. The 13 tables of round 2 stay `pending`.
+Sidecars merged; queue reconciled (nothing left `in_progress`); `mapping_verification.csv` now holds
+123 rows. Verification: **4 VERIFIED, 2 PARTIAL, 6 NOT_NEEDED**; bases: 8 `data_labels`,
+2 `paper_explicit`, 2 `reconstructed`; 9 of 12 carry a public_note.
 
-Findings from the agents that did report are recorded below as they land. Notable already:
-`chen_2022_sasc` is NOT the Social Anxiety Scale for Children — it is the 22-item Smartphone
-Addiction Scale for College Students, confirmed from the source .sav's own variable labels and its
-`PSU` total-score column; the dictionary Description is wrong. `depression_anxiety_stress` pools
-three instruments (DASS-42, TIPI, a 16-word vocabulary check) under a name that signals one.
-`emidy2024_fevs` is not yet live in IRW at all — its 761MB upload is still an open item in
-`automated_finding/TODO.md` — so that one's gate cannot run for a different reason.
+> **DO NOT UPLOAD THIS BATCH YET.** `validate_items.R`, `audit_batch.R`, `normalize_nulls.R` and
+> `verify_batch.R` were ALL unrun — every one needs live data and the export quota is exhausted.
+> Each agent satisfied the gate's *substance* by other means (the `table_context.R` fetch that
+> succeeded before the quota tripped, plus server-side aggregate queries), and the CSVs pass a local
+> structural check — correct columns, no `raw_resp`, no duplicate (item,resp) pairs, row counts
+> reconciling against each table's scale structure. But the gates themselves have not run. Run all
+> four when the export window rolls over, THEN triage. Nothing is staged in `clean/`.
 
-One process finding worth keeping: an agent reported that a sibling overwrote its scratch `cand.csv`
-mid-run, producing a spurious validation failure. **Agents must namespace temp files under
-`.cache/<table>/`**; a less obvious collision could ship one table's rows under another's name.
+**On the pilot's actual question — can agent-written evidence replace hand re-derivation? Yes, and
+better than expected.** Two examples worth reading before designing the next round:
+
+- `twod_rotation_mather2023` had no prose stems to transcribe (algorithmically generated hexomino
+  figures). It took the `artistic_preferences` shape, then recovered the instruction line by reading
+  it off the stimulus PNGs and pixel-hashing the headers to confirm it identical across all 304. It
+  verified against the paper's Table S7 (58 published Ns match the live row counts EXACTLY, r=0.9999
+  on proportion correct), then mechanically recovered each figure's target rotation from the images
+  and showed the 12 items the study's own code drops as "not requiring mental rotation" all come out
+  at 0° — 12/12 against a 25.7% base rate, p=8.1e-08. And it still filed PARTIAL, because the 304
+  figures reuse only 111 distinct stimulus panels so panel-mates cannot be separated.
+- `criticalperiod_syntax` reconstructed per-item scored accuracy from the raw per-option endorsement
+  file and matched live means at r=0.9812 against a permutation null of 0.353 — then filed PARTIAL
+  because 4 option pairs rest on a global convention rather than their own numbers.
+
+Both applied the strict VERIFIED definition against their own interest in claiming a clean result,
+which is exactly what that change was for. 7 `verify_<table>.R` scripts were written (the 5 missing
+are `data_labels`, correctly exempt) and several default to server-side queries rather than
+`irw_fetch` — the agents found that workaround independently, mid-round.
+
+**Step 3b findings: three tables in one round pool instruments under a name signalling one, and all
+three are openpsychometrics-style releases.** `riasec` is only items 1-48; 49-58 are the TIPI and
+59-74 a 16-word vocabulary check. `depression_anxiety_stress` is DASS-42 + TIPI + the same
+vocabulary check. `chen_2022_sasc` is worse than pooled — it is outright misnamed: not the Social
+Anxiety Scale for Children but the 22-item **Smartphone Addiction Scale for College Students**,
+confirmed from the source .sav's variable labels and its own `PSU` total-score column. The
+dictionary Description needs correcting; this looks systematic for that source and is worth a
+standing note in SKILL.md.
+
+Other findings: `ftna_kasper_2022`'s items are whole-subject exam grades, not questions, and its
+0-4 → E-D-C-B-A scale was pinned twice from the study's own do-files. `geography` ships the place
+type alongside the name (`Georgia (country)` vs `Georgia (region)`) because 46 names are shared by
+two places — an annotation, disclosed. `emidy2024_fevs` is not live in IRW at all (761MB upload
+still open in `automated_finding/TODO.md`), and OPM has REDACTED the DEIA item text from the
+technical report it currently serves, so that wording came from a Wayback capture.
+
+`geography` shows as PRESENT on the index workbook's `xz_todo` tab — probably flagged-for-later
+rather than claimed, but confirm nobody is mid-work on it before shipping.
+
+**Process finding: the session scratchpad is shared across parallel agents.** Two agents
+independently reported a sibling overwriting their `cand.csv` mid-run, one wasting a retry on the
+resulting spurious failure. Now fixed in BATCH_PROCESS.md — scratch files must be namespaced under
+`.cache/<table>/`. A subtler collision could ship one table's rows under another's name, and neither
+`validate_items.R` nor `audit_batch.R` would catch it.
 
 ### Skill changes 2026-08-18 (the "now" phase, before scaling the pipeline)
 

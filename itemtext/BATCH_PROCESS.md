@@ -126,16 +126,31 @@ of that one prompt.
 Give each agent a distinct sidecar suffix (`notes_<table>.csv`, `provenance_<table>.csv`,
 `verification_<table>.csv`) so they cannot collide, and glob for those suffixes at merge time.
 
+**Tell each agent to namespace its SCRATCH files too, under `itemtext/.cache/<table>/`.** The
+session scratchpad is shared across parallel agents: in batch_011 two agents independently reported
+that a sibling overwrote their `cand.csv` mid-run, and one spent a retry chasing the spurious
+validation failure that caused. Both caught it — but a collision on a candidate CSV is exactly the
+failure that could ship one table's rows under another table's name, and neither `validate_items.R`
+nor `audit_batch.R` would notice, because each only compares the file in front of it against the
+live data that file claims to describe.
+
+**The ground-truth step is the expensive one — treat it that way.** Every `table_context.R` and
+`irw_fetch` call EXPORTS THE WHOLE TABLE. In batch_011 twelve agents pointed at the corpus's largest
+tables exhausted a 200GB/30-day Redivis export quota account-wide (see round_log 2026-08-18), and
+the failure was reported as "table does not exist in IRW", which sent four agents chasing a phantom
+missing table. Prefer `scripts/table_sets.R`: it answers the same item/resp-set question with a
+server-side `GROUP BY` and is not subject to the export limit.
+
 When several tables in a round come from ONE source file (common — five `butt_2022_*`, five
-`buzgova_2023_*`, four `baka2023_*` in recent rounds), split them across groups and tell each agent
-explicitly which sibling tables belong to another agent and must not be touched. Two agents
-independently deriving the same convention from the same file is useful corroboration; two agents
-writing the same files is a race. Each subagent prompt must tell it to:
+`buzgova_2023_*`, four `baka2023_*` in recent rounds), tell each agent explicitly which sibling
+tables belong to another agent and must not be touched. Two agents independently deriving the same
+convention from the same file is useful corroboration; two agents writing the same files is a race.
+Each subagent prompt must tell it to:
 
 - cd to /home/ben/Dropbox/projects/irw/src/itemtext/ and read
   .claude/skills/irw-auto-itemtext/SKILL.md in full (plus references/itemtext_standard.md) before
   doing anything, and follow it precisely.
-- Process its 3 assigned tables ONE AT A TIME via SKILL.md Steps 2-6:
+- Process its ONE assigned table via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the
   source's terseness) -> validate_items.R as a HARD GATE (Step 5) -> Step 5b mapping verification
@@ -143,8 +158,8 @@ writing the same files is a race. Each subagent prompt must tell it to:
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
 - Do SKILL.md Step 5b for every table whose mapping_basis is not `data_labels`, and record it in
-  the per-group verification sidecar below. Do NOT write to itemtext/mapping_verification.csv
-  directly — concurrent groups would clobber each other; the orchestrator merges the sidecars.
+  the per-table verification sidecar below. Do NOT write to itemtext/mapping_verification.csv
+  directly — concurrent agents would clobber each other; the orchestrator merges the sidecars.
   validate_items.R and audit_batch.R only compare SETS -- they cannot catch item_text mapped to the
   wrong item code, which is the one error that silently ships wrong content. Step 5b lists eight
   routes (per-item statistics, response-range fingerprint, implied parameter, subscale blocks,
@@ -158,10 +173,10 @@ writing the same files is a race. Each subagent prompt must tell it to:
   bot-walled; python-docx table parsing (LibreOffice silently drops Word table cells);
   Rd_db() for CRAN packages; soffice --convert-to txt for legacy .doc.
 - NEVER pad an unlabeled scale point with its own number — leave option_text blank.
-- Write itemtables/batch_<NNN>/notes_group<K>.csv (header table,note) with a row for every table
-  that didn't get a clean pass, including passes carrying a real caveat.
-- Write itemtables/batch_<NNN>/provenance_group<K>.csv (header
-  table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for EVERY table,
+- Write itemtables/batch_<NNN>/notes_<table>.csv (header table,note) if its table didn't get a
+  clean pass, including a pass carrying a real caveat.
+- Write itemtables/batch_<NNN>/provenance_<table>.csv (header
+  table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for its table,
   clean or not. Vocabularies are defined in SKILL.md Step 6c. Record mapping_basis=unknown honestly
   rather than guessing.
 - Write itemtables/batch_<NNN>/verification_<table>.csv (header
@@ -180,7 +195,7 @@ writing the same files is a race. Each subagent prompt must tell it to:
   the source file itself ties code to text.
 - NOT touch itemtables/pilot/pending_index_notes.csv (a separate, older file).
 
-Wait for all groups to finish.
+Wait for all agents to finish.
 
 ## Step 3 — Merge sidecars
 
