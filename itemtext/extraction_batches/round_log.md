@@ -589,6 +589,38 @@ the PNG carries it. All five reclassified AVAILABLE and inserted at the head of 
 **Deliberately not swept now** (Ben, 2026-08-18): defer to one big re-sweep once substantially more
 of the queue is processed, rather than interrupting extraction to re-audit.
 
+**TRIAGED 2026-08-18.** 11 written tables reviewed against the batch_001 model; gates re-run live
+first (`normalize_nulls.R` clean, 0 of 11 changed; `audit_batch.R` **11/11 PASS**;
+`mapping_verification.csv` complete, 12 rows).
+
+- STAGED IN `clean/` for Ben to upload (10): an_2020_efl_self_regulated, andrich_mudfold,
+  anh_2026_finbehavior, anjum_2022_gad7, AOMT_..._AOT, AOMT_..._BRS, arnulf_2022_general_knowledge,
+  arora2025_blueq_pedagogical, arora2025_blueq_synchronous, art. `uploaded` still blank in
+  provenance.csv -- stamp on confirmation. Verified `clean/` holds no non-`__items.csv` file.
+- HELD (1): `APFCompact_Ptacek_2024_DASS-21` -- #1653 says it is a complete duplicate of
+  `ptacek2023_dass21`; the item text should follow whichever table survives. Stays in batch_006.
+- Still blocked at extraction (1): `arnulf_2022_conspiracy_thinking`.
+- Independent re-checks of the 6 tables not covered by the 2026-08-18 spot-check, all clean:
+  arora ped/sync positional claim confirmed against `data/arora2025_blueq.py` (0-based cols 3-12
+  and 15-20) and the spreadsheet's row-2 header, 16/16 exact; DASS-21's 21 stems are canonical and
+  its header subscale letters reproduce the published key at all 21 positions; AOMT BRS 20/20
+  against the codebook; arnulf general knowledge 12/12 against the .sav labels; andrich_mudfold's
+  codes are self-describing (the `mudfold` package is not installed here, so its published-means
+  check was not re-run).
+- ISSUES PAGE: 7 of the 10 draft callouts added to `irw_site/itemtext_issues.qmd` (now 39 total) --
+  an_2020_efl_self_regulated, anjum_2022_gad7, both AOMT_... tables, arnulf_2022_general_knowledge,
+  arora2025_blueq_synchronous, art. Deliberately NOT added, per the issues-page bar:
+  `arora2025_blueq_pedagogical` (its only caveat is that the source never published anchors -- its
+  sibling IS listed, because the canonical prompt says "face-to-face component" for sessions the
+  study ran online, which is a concrete mismatch); `anh_2026_finbehavior` and `andrich_mudfold`
+  (no caveat at all); `APFCompact_Ptacek_2024_DASS-21` (held, not shipping); and
+  `arnulf_2022_conspiracy_thinking`, whose auto-generated callout ("the origin of the item text was
+  not recorded") is an artifact of templating over a blocked table that shipped no text.
+- NOTED, not acted on: `arora2025_blueq_asynchronous` is a third sibling from the same spreadsheet,
+  marked BLOCKED by the availability audit ("Dataverse page returned no fetchable content"), but its
+  seven item texts sit in the cached raw.xlsx at cols 23-29 exactly where `data/arora2025_blueq.py`
+  reads async1-7. Left for the deferred BLOCKED re-sweep (#1648) per Ben, 2026-08-18.
+
 ## batch_007 — 2026-08-17
 
 12 claimed, **11 written, 1 blocked** (8.3%). audit_batch.R: 9 PASS + 2 WARN, both explained in notes.csv
