@@ -437,7 +437,16 @@ descending order of strength:
    needs no published statistics at all. Worked example: `alves_2017_hamd17` — HDRS-17
    assigns 0–4 to items 1,2,3,7–11,15 and 0–2 to the rest, and the live data matched all
    17. Also how the two `abdullah_2024_bsq_*` tables were corroborated.
-3. **Subscale totals.** If the paper reports subscale means/SDs/ranges, sum the live
+3. **Published totals and subscale totals.** If the paper reports a total or subscale
+   mean/SD/range, compute it from the live items and compare. This settles TWO things at once
+   and is often the fastest decisive check: whether your subscale assignment is right, and
+   **whether the items are stored raw or already reverse-scored** — because a scale summed in
+   the wrong direction misses the published mean by a wide, obvious margin. Worked example:
+   `buzgova_2023_lsita`'s raw column sum gives 36.30 / SD 8.68 / range 12-62 against a
+   published 36.34 / 8.66 / 12-62, so the four canonical reverse items must already be
+   reversed in the table. `buzgova_2023_gds` was settled the same way against the GDS-15's
+   published 0-4 "normal" band (mean 3.44, 72.9% inside it; the flipped reading would put the
+   average community-dwelling respondent in the severe range). Sum the live
    items you assigned to each subscale and compare. This pins subscale *membership* and
    the numbering at subscale boundaries, but not order within a subscale — record it as
    partial. Worked example: `aguirre_camacho_2021_shai`.
