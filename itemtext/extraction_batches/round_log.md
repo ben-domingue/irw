@@ -621,6 +621,15 @@ first (`normalize_nulls.R` clean, 0 of 11 changed; `audit_batch.R` **11/11 PASS*
   seven item texts sit in the cached raw.xlsx at cols 23-29 exactly where `data/arora2025_blueq.py`
   reads async1-7. Left for the deferred BLOCKED re-sweep (#1648) per Ben, 2026-08-18.
 
+- UPLOADED 2026-08-18 (12): the 10 staged above, plus the two tables that were already sitting in
+  `clean/` — `american_multiracial_face` (batch_005, previously unstamped) and
+  `amarilla_2020_lawton_brody` (a re-upload of the corrected version from 2589531, so its stamp moves
+  2026-08-17 -> 2026-08-18). Stamped in each batch's provenance.csv and in mapping_verification.csv;
+  the uploaded CSVs removed from batch_005/ and batch_006/ per the batch_001 convention, sidecars
+  kept. `clean/` is empty again. **batch_006 is closed** except `APFCompact_Ptacek_2024_DASS-21`
+  (held on #1653) and `arnulf_2022_conspiracy_thinking` (blocked at extraction); its sidecars still
+  document all 12 tables the batch claimed.
+
 ## batch_007 — 2026-08-17
 
 12 claimed, **11 written, 1 blocked** (8.3%). audit_batch.R: 9 PASS + 2 WARN, both explained in notes.csv
