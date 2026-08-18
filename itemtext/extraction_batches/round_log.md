@@ -881,9 +881,18 @@ one-position shift gives 4). `bukurov_2022_sf36` shipped genuinely item-specific
   negatively-worded items; `burkert_2019_whoqol_bref` recomputed from live data — LQ3/LQ4/LQ26
   correlate +0.18..+0.46 with unambiguously positive items and 52.5% of respondents sit at LQ3=5,
   confirming they are stored already-reversed and the shipped reversed anchors are right.
-- ISSUES PAGE: 6 callouts added (now 64). Omitted: `brederecke_2020_phq4`, `burgess_2025_soas` and
-  `brain_hemisphere` (no caveat), plus the three held brand tables — their callouts wait on the hold,
-  the same treatment `APFCompact_Ptacek_2024_DASS-21` got in batch_006.
+- ISSUES PAGE: **9 callouts added (now 67)** — all nine staged tables. The three held brand tables
+  get none while held, the same treatment `APFCompact_Ptacek_2024_DASS-21` got in batch_006.
+  I first omitted `brederecke_2020_phq4`, `burgess_2025_soas` and `brain_hemisphere` as
+  caveat-free, then re-read them and reversed that: phq4 ships terse English data-file labels for a
+  German administration AND anchors that differ from the published PHQ-4 ("On single days" for
+  "Several days"); burgess has non-contiguous codes (SOAS5,7,9,10,11,12) pointing into a 13-item
+  administration, with no labels in the source at all; brain_hemisphere's `instructions` field
+  describes the response scale rather than quoting participant-facing text, and the dataset is the
+  20-item version of a scale now published with 24. **None of the three had a `public_note` in
+  provenance, so `draft_issues_qmd.R` generated nothing for them** — the drafting script only sees
+  `public_note`, so a caveat recorded solely in `notes.csv` is invisible to it. Worth checking
+  `notes.csv` directly during triage rather than trusting the draft set to be complete.
 
 ## batch_010 — 2026-08-17
 
