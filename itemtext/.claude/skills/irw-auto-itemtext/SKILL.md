@@ -69,6 +69,15 @@ Use the highest available, and say which one you used:
 4. **A third-party reproduction** — clinical-assessment sites, handouts. Last resort, and
    see the grid trap in Step 4.
 
+**Level 1 outranks the rest, but it is not infallible — cross-check it.** When both the
+column NAME and the LABEL encode item identity, they must agree. In `bakker_2020_rses`'s
+source file (PLOS 10.1371/journal.pone.0227958.s004) they don't: `satisfied301` is labelled
+"I feel that I'm a person of worth", `goodqualities303` is labelled "All in all, I am
+inclined to feel that I am a failure", and three columns carry no label at all — five of
+seven labelled RSES columns contradict their own names, which otherwise follow canonical
+order and numbering. An extraction that trusted those labels would ship five items wrong.
+A one-minute sanity read of names against labels catches this; see issue #1654.
+
 Two failures today came from skipping level 1 when it existed: `alsuhibani_2022_gcbs` was
 built from the paper while the study's `.sav` labelled every item (which is how a wording
 error got in), and `altahla_2024_whoqol` shipped a paraphrase while the source headers held
