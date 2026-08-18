@@ -1034,7 +1034,42 @@ datasource is configured — which is always — so `fetch_single_data` falls th
 from the warehouse, and two wrote that into their notes before the real cause was found. Filed as
 **#1663**, together with the whole-table-export design.
 
-### The fix, and it is a good one: `scripts/table_sets.R`
+### BOTH PACKAGE-SIDE PROBLEMS ARE FIXED — Rpkg#121 (Ben, 2026-08-18)
+
+Branch `fix/quota-errors-and-table-sets` on itemresponsewarehouse/Rpkg, see #1663:
+
+- **Error classification.** `.irw_handle_datasource_error()` now classifies export-quota /
+  rate-limit / `RESOURCE_EXHAUSTED` as a `"quota"` error and stops immediately, saying it is an
+  account-wide export limit rather than a problem with the table. The check runs BEFORE the
+  `invalid_request` check, since the quota failure arrives as `[400 invalid_request] Cannot export
+  more than 200GB…`. Unclassified errors are collected across the four datasources and re-raised, so
+  **"does not exist in IRW" now means all four genuinely returned not-found.** That single message
+  produced three wrong conclusions in one evening (four agents deciding their table had been deleted,
+  and my own repeated claim that `emidy2024_fevs` was not uploaded).
+- **`irw_table_sets(name, source = "core", per_item = FALSE)`** — the server-side path, now in the
+  package: row count, item set, resp set, optionally per-item n / resp min / max / level count, with
+  the literal `"NA"` token dropped so it matches what `irw_fetch()` returns. Validated live:
+  `condon_2024_sapa_personality` gives 135 items and resp 1-6 in **13 seconds with no export**,
+  against a 4.55 GB download; `criticalperiod_syntax` (107M rows) likewise.
+- Also in the PR: `irw_info()` no longer calls `to_tibble()` just to read column names.
+
+**Consequence for this pipeline: `scripts/table_sets.R` and the inline query helper now in
+`audit_batch.R` are both interim.** Once Rpkg#121 lands, replace them with `irw_table_sets()` —
+`audit_batch.R` wants `per_item = TRUE`, which is exactly its coverage and row-count check. Keeping
+two implementations of the same resolution logic is how they drift.
+
+**Still outstanding: `metadata/01_metadata.R`,** which lives outside the package repo and was not
+touched. Its `get_statistics()` path is fine; the problem is the fallback, which drops to
+`to_tibble()` on the FULL table whenever a table's `resp` count comes back NULL. Run across the whole
+corpus, hitting that fallback on a handful of large tables makes a real dent in the 200 GB window and
+hitting it broadly exhausts it. Replacement is a `SELECT COUNT(DISTINCT …)` / `GROUP BY` on the
+table's `qualified_reference` — reuse `irw_table_sets()` once the PR lands, or inline the query if
+the script shouldn't depend on the package.
+
+**And the export billing project on the datapages datasets is still the fix that removes the cap
+without every caller changing.**
+
+### The interim fix: `scripts/table_sets.R`
 
 Server-side aggregates are unaffected by the export limit. `table_sets.R <table>` resolves the table
 across the four core datasources and returns the item set, the resp set and per-item n/range from

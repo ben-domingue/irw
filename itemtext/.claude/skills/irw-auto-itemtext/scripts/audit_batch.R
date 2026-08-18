@@ -69,6 +69,9 @@ error_row <- function(table, note) {
 }
 
 # ---------------------------------------------------------------------------
+# INTERIM: once irw_table_sets(per_item = TRUE) lands (Rpkg#121), use it here --
+# it answers exactly this question and this helper can go.
+#
 # live_summary(table): one row per (item, resp) with a count, straight from a
 # server-side GROUP BY. resp is NULL for rows whose stored value is the literal
 # "NA" token or blank, which is how irw_fetch() coerces them -- keeping those

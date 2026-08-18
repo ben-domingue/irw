@@ -1,5 +1,11 @@
 # Usage: Rscript table_sets.R <table>
 #
+# INTERIM. This is superseded by `irw_table_sets(name, source, per_item)` in the
+# irw R package (itemresponsewarehouse/Rpkg#121, branch
+# fix/quota-errors-and-table-sets), which does the same thing with the same
+# semantics. Once that lands, call the package function and delete this file
+# rather than maintaining a second copy of the shard-resolution logic.
+#
 # Prints the exact `item` and `resp` value sets for a live IRW table WITHOUT
 # downloading it, using a server-side aggregate query.
 #
