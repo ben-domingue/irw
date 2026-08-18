@@ -207,6 +207,32 @@ audit_one <- function(path) {
                     paste(utils::head(without, 6), collapse = ", "),
                     if (length(without) > 6) ", ..." else "", ")"))
             }
+
+            # Per-item resp coverage. validate_items.R compares the resp SET over
+            # the whole table, so an item can be missing option rows for levels
+            # that its own respondents actually used and still pass -- the table's
+            # other items supply those values. Joining itemtext to the response
+            # data on (item, resp) then silently drops those responses. This is a
+            # finer-grained version of the check above and would have caught the
+            # alkouri_2025_* defect on its own.
+            if ("resp" %in% names(items)) {
+                live_lv <- tapply(suppressWarnings(as.numeric(df$resp)), df$item,
+                                  function(v) sort(unique(v[!is.na(v)])))
+                cand_lv <- tapply(suppressWarnings(as.numeric(items$resp)), items$item,
+                                  function(v) sort(unique(v[!is.na(v)])))
+                gaps <- character(0)
+                for (i in names(live_lv)) {
+                    m <- setdiff(live_lv[[i]], cand_lv[[i]])
+                    if (length(m)) gaps <- c(gaps, paste0(i, "(", paste(m, collapse = ","), ")"))
+                }
+                if (length(gaps)) {
+                    status <- "WARN"
+                    notes <- c(notes, paste0(
+                        length(gaps), " item(s) have live resp values with no option_text row: ",
+                        paste(utils::head(gaps, 6), collapse = ", "),
+                        if (length(gaps) > 6) ", ..." else ""))
+                }
+            }
         }
         # Padding an unlabeled scale point with its own number is worse than
         # leaving it blank: it reads as a real label downstream, and it
