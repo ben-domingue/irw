@@ -321,6 +321,14 @@ produce data shaped like them before merging:
   `audit_batch.R` cleanly, and was only caught by a human spot-check. **If a source
   presents an instrument as a grid of stems × short anchors, find the instrument's own
   prose form before transcribing.**
+- **When one item code covers several concrete wordings (counterbalanced or randomised
+  designs), name the condition and give an example, and say you did.** The schema assumes one
+  text per item; some studies break that by design. In `buczel_2022_inoculation_belief` each
+  participant saw one of six counterbalanced scenarios, so an item's literal sentence differs
+  across respondents. `item_text` there names what the item measures and quotes one scenario as
+  an example, disclosed in a `public_note`. Do NOT pick one participant's wording and present it
+  as if it were the item. The same applies to piped text (`${Q2}`-style tokens): substitute the
+  study's own published placeholder, e.g. `[NAME]`, rather than a value from the data.
 - **item/item_text/correct_response** — `item` values must be exactly the ones from
   Step 2's ground truth, not invented. `correct_response` blank when there's no scoring
   key; semicolon-separated when multiple answers are correct (e.g. `A;C`). **When the
