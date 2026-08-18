@@ -29,16 +29,16 @@ dropped for three batches until caught).
 #    every DOI already logged in human_review/*.csv, on every run (see
 #    _load_auto_exclusions() in irw_discover_updated.py) — there is no local
 #    metadata file to regenerate first.
-python irw_discover_updated.py "PHQ-9" "reading assessment" --out candidates.csv
+python irw_discover_updated.py "PHQ-9" "reading assessment" --out runs/candidates.csv
 
 # 2. Test on 10 rows before running everything
-python irw_batch_updated.py candidates.csv --limit 10 --out triage_test.csv
+python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv
 
 # 3. Full run — safe to interrupt and resume
-python irw_batch_updated.py candidates.csv --out irw_triage.csv
-python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume
 
-# 4. Open irw_triage.csv, sort by flag ('good' first), review candidates.
+# 4. Open runs/irw_triage.csv, sort by flag ('good' first), review candidates.
 #    `good`/`worth_retrying` rows go straight to Step 2 (write a processing
 #    script) -- there is no "add to a queue tab" staging step for these; see
 #    the note below. For human_review rows from irw_retriage_ha.py, write
@@ -51,9 +51,32 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume
 ```
 
 The triage step downloads each candidate and runs automated checks — it does
-**not** save any data files. Its only output is `irw_triage.csv` (a temporary
+**not** save any data files. Its only output is `runs/irw_triage.csv` (a temporary
 working file — delete it once `good`/`worth_retrying` candidates have a
 processing script and human_review rows have been written to `human_review/`).
+
+## Where files live
+
+Per-run output — candidate lists, triage and retriage CSVs, sanity-check
+files — is written to **`runs/`**, which is gitignored in full. The top
+level of `automated_finding/` holds only scripts and standing, cumulative
+records. That split, introduced 2026-08-18, is what keeps the directory
+readable: before it, every scheduled cloud run committed another
+`*_candidates_*.csv` / `*_retriage_*.csv` pair to the top level.
+
+| Location | Holds | Lifecycle |
+|---|---|---|
+| `runs/` | `candidates*.csv`, `irw_triage*.csv`, `irw_retriage*.csv`, `triage_test*.csv`, the dated `*_monthly_*` outputs | Disposable once the batch is written up in `BATCH_LOG.md`. Gitignored. |
+| top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
+| `human_review/` | `human_review_<mode>_batch<N>.csv` | Permanent archive of genuinely-ambiguous rows. Tracked. |
+| `irw_output/` | downloaded/converted data | Regenerable, gitignored. |
+
+Every script routes its `--out` through `in_runs_dir()` in
+`irw_discover_updated.py`, so a bare filename (`--out candidates.csv`) is
+placed in `runs/` automatically; a path with a directory component
+(`--out /tmp/x.csv`) is honored as given. Input paths go through
+`resolve_in_path()`, which falls back to `runs/<name>` when a bare filename
+isn't at the working directory — so older commands still work.
 
 **Note on the "to be processed" tab:** the queue sheet has a second tab by
 this name, and older docs described writing `good` rows there as a staging
@@ -101,7 +124,7 @@ After a full triage run the `human_assistance` bucket is usually large (hundreds
 of rows). Most of it is recoverable without re-downloading anything:
 
 ```bash
-python irw_retriage_ha.py --input irw_triage.csv --out irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
 ```
 
 This reads the 400-char `reasons` strings already in the triage CSV and
@@ -322,7 +345,8 @@ processed" queue sheet was dropped as an exclusion source 2026-07-14 — see
 the note in Step 1 above.)
 ```
 --all              disable relevance filter
---out <path>       output path (default: candidates.csv)
+--out <path>       output path (default: runs/candidates.csv; a bare
+                   filename is placed in runs/ automatically)
 --since <YYYY-MM-DD>  keep only hits published/created on or after this date
 --sources <names>  query only these sources (see SOURCE_MAP in the script)
 ```
@@ -380,7 +404,7 @@ window.
 ```
 --sources <names>            sources to query (default: osf dataverse datacite)
 --default-lookback-days <n>  --since to use for a term with no prior run (default: 90)
---out <path>                 output CSV (default: monthly_candidates_<mode>_<today>.csv)
+--out <path>                 output CSV (default: runs/monthly_candidates_<mode>_<today>.csv)
 --dry-run                    print each term's computed --since date and exit
 ```
 The default output name is mode- and date-stamped, so two runs of the same
@@ -393,7 +417,7 @@ scripts (`irw_discover_monthly.py`, `irw_discover_plos_monthly.py`,
 manual backlog sweep and a cron'd monthly run can land on the same day: on
 2026-08-16 the evening PMC monthly run overwrote the morning sweep's 93
 triaged rows, and merging the run's PR carried the loss onto `main`
-(recovered as `pmc_monthly_candidates_full_2026-08-16.csv` +
+(recovered as `runs/pmc_monthly_candidates_full_2026-08-16.csv` +
 `...-2.csv`).
 `TERM_LIST` at the top of the script is a starting draft, not a finished
 list — it leans on constructs `BATCH_LOG.md` explicitly credits with past
@@ -417,7 +441,7 @@ the process twice; see `TODO.md`'s (closed) "no file-size guard" note.
 ```
 --limit <n>    process only the first N rows
 --resume       continue from checkpoint after interruption
---out <path>   output path (default: irw_triage.csv)
+--out <path>   output path (default: runs/irw_triage.csv)
 ```
 
 ### `irw_process_queue.py` — retired, do not run
@@ -441,8 +465,8 @@ Post-hoc refinement of `human_assistance` rows using metadata already in the
 triage CSV — no re-download required. Adds `refined_flag` and `refined_reason`
 columns and prints a summary with actionable follow-up lists.
 ```
---input <path>   triage CSV to read (default: irw_triage.csv)
---output <path>  refined CSV to write (default: irw_retriage_ha.csv)
+--input <path>   triage CSV to read (default: runs/irw_triage.csv)
+--output <path>  refined CSV to write (default: runs/irw_retriage_ha.csv)
 ```
 Run this after any full batch triage to reduce the manual review burden before
 deciding which `human_assistance` cases to escalate.
@@ -459,7 +483,7 @@ in batches 14 and 15, before this tool existed).
 ```bash
 python irw_extract_evaluated_dois.py                        # print count + list
 python irw_extract_evaluated_dois.py --out dois.txt          # write to file
-python irw_extract_evaluated_dois.py --check candidates.csv  # report matches in a candidate file
+python irw_extract_evaluated_dois.py --check runs/candidates.csv  # report matches in a candidate file
 ```
 Run the `--check` form against a merged candidate file before triaging it,
 same as the license/dictionary checks. It's a heuristic (only catches

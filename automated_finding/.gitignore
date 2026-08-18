@@ -12,21 +12,26 @@ irw_batch_checkpoint.jsonl
 # Google Sheets instead — but harmless to ignore if someone generates it by hand.
 irw_metadata.csv
 
-# Discovery-run candidate lists — regenerable from search_terms_log.csv + the
-# scripts. Covers both the pre-batch-10 naming (irw_discovered*.csv) and the
-# current one (candidates*.csv, e.g. candidates_batch11.csv, candidates_test10.csv,
-# candidates_batch14_intl2.csv, candidates_batch13_merged.csv).
+# ── Per-run pipeline output: runs/ ─────────────────────────────────────────
+# Every disposable per-run artifact -- candidate lists, triage/retriage
+# outputs, sanity-check files -- is written to runs/ (see in_runs_dir() in
+# irw_discover_updated.py, which every script routes its --out through).
+# The whole directory is ignored: these are regenerable from
+# search_terms_log.csv + the scripts, and BATCH_LOG.md is the durable
+# record of what each run decided. Ignoring it also stops the scheduled
+# cloud routines from committing a fresh candidates/triage CSV every week
+# (the pile-up that prompted the runs/ move, 2026-08-18).
+#
+# NOT in runs/, and deliberately tracked -- these are standing, cumulative
+# records, not per-run temp files: search_terms_log.csv, plos_seen_dois.csv,
+# pmc_seen_dois.csv, repo_triage_seen_keys.csv, license_blocked_candidates.csv,
+# plos_deferred_candidates.csv, and human_review/*.csv.
+runs/
+
+# Legacy top-level names, kept so an old checkout or a hand-run script that
+# still writes to cwd doesn't get committed. New runs land in runs/ instead.
 irw_discovered*.csv
 candidates*.csv
-
-# Triage / retriage outputs — regenerable from the candidate lists via
-# irw_batch_updated.py / irw_retriage_ha.py. Includes the historical
-# irw_triage_summary*.csv naming and the current irw_triage_batchN.csv /
-# irw_retriage_batchN.csv / triage_testN.csv pattern.
-# NOTE: human_review_*.csv is deliberately NOT ignored here (2026-08-12) —
-# those files now live permanently in human_review/ as the archived record
-# of genuinely-ambiguous rows (replacing the old "human eye" queue-sheet
-# tab), not a regenerable temp output. See human_review/ and SKILL.md.
 irw_triage_summary*.csv
 irw_triage*.csv
 irw_retriage*.csv

@@ -68,7 +68,28 @@ same way if missing.
    a resolved batch had to be relocated into `automated_finding/` after the
    user couldn't locate them). `license_blocked_candidates.csv` and prior
    `biblio_*.csv` files already follow this repo-tracked pattern.
-5. **Pick a discovery mode before running anything.** There are three
+5. **Know where files go: every per-run output belongs in `runs/`.**
+   The candidate lists, triage outputs, retriage outputs, and sanity-check
+   CSVs this pipeline generates all live in `automated_finding/runs/` —
+   never at the top level of `automated_finding/`. Pass `--out
+   runs/<name>.csv` explicitly; the scripts also route a bare `--out
+   name.csv` into `runs/` themselves (`in_runs_dir()` in
+   `irw_discover_updated.py`), and resolve a bare *input* filename to
+   `runs/<name>.csv` if it isn't at cwd (`resolve_in_path()`), so an older
+   command still works. `runs/` is gitignored in full — don't `git add -f`
+   anything in it, and don't report a run as "committed" on the strength of
+   a file being written there.
+
+   What stays at the top level of `automated_finding/` is the standing,
+   cumulative record — never write these into `runs/`:
+   `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`,
+   `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`,
+   `plos_deferred_candidates.csv`, any `pii_blocked_candidates.csv`, the
+   `biblio_*.csv` handed to the user for the dictionary sheet, plus
+   `BATCH_LOG.md`, `TODO.md`, and the `human_review/` directory. Rule of
+   thumb: if deleting it after the batch write-up would lose information,
+   it does not belong in `runs/`.
+6. **Pick a discovery mode before running anything.** There are three
    independent, non-overlapping discovery sources, each with its own
    script, journal/repo scope, and term-recycling pool — check which one
    the user means (they may say "PLOS", name a specific journal from
@@ -93,7 +114,7 @@ same way if missing.
 ## Step 1 — Discover (mode 3: data repositories)
 
 ```bash
-python irw_discover_updated.py "search term 1" "search term 2" --out candidates.csv
+python irw_discover_updated.py "search term 1" "search term 2" --out runs/candidates.csv
 ```
 
 - Exclusion (`_load_auto_exclusions()`) now checks two sources: DOIs already
@@ -139,9 +160,9 @@ python irw_discover_updated.py "search term 1" "search term 2" --out candidates.
 ## Step 2 — Triage
 
 ```bash
-python irw_batch_updated.py candidates.csv --limit 10 --out triage_test.csv   # sanity check first
-python irw_batch_updated.py candidates.csv --out irw_triage.csv               # full run
-python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # if interrupted
+python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv   # sanity check first
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv     # full run
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume   # if interrupted
 ```
 
 - **Expect this to be slow.** Each candidate is a real network download plus
@@ -165,7 +186,7 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
   merge results. Used successfully 2026-07-15; see `BATCH_LOG.md`'s
   "English-terms re-discovery" entry for the concrete phase-1/phase-2
   pattern.
-- Sort `irw_triage.csv` by `flag`, `good` first.
+- Sort `runs/irw_triage.csv` by `flag`, `good` first.
 - `good` rows → go straight to Step 3 (write a processing script). There is
   no "stage it in the queue sheet first" step — that tab exists but this
   pipeline doesn't write to it (confirmed 2026-07-14: none of batches 14-16's
@@ -193,7 +214,7 @@ python irw_batch_updated.py candidates.csv --out irw_triage.csv --resume      # 
 ## Step 2b — Retriage `human_assistance` (recommended before reviewing by hand)
 
 ```bash
-python irw_retriage_ha.py --input irw_triage.csv --out irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
 ```
 
 Sub-classifies each `human_assistance` row into `not_item_response` /
@@ -386,9 +407,9 @@ deposited in any of those systems. Confirmed in the 2026-07-26 pilot (see
 against one journal, none overlapping the IRW dictionary.
 
 ```bash
-python irw_discover_plos.py "PHQ-9" "self-esteem scale" --out plos_triage.csv
-python irw_discover_plos.py "term" --limit 10 --out plos_test.csv   # sanity check first
-python irw_discover_plos.py "term1" "term2" --out plos_triage.csv --resume   # after an interrupted run
+python irw_discover_plos.py "PHQ-9" "self-esteem scale" --out runs/plos_triage.csv
+python irw_discover_plos.py "term" --limit 10 --out runs/plos_test.csv   # sanity check first
+python irw_discover_plos.py "term1" "term2" --out runs/plos_triage.csv --resume   # after an interrupted run
 ```
 
 - **Term selection: recycle non-PLOS terms from `search_terms_log.csv`
@@ -481,10 +502,10 @@ journals — the engineering cost of adding a journal is close to zero
 *if* it's well-indexed in Europe PMC (see the caveat below; several are not).
 
 ```bash
-python irw_discover_pmc.py "PHQ-9" "self-esteem scale" --out pmc_triage.csv
-python irw_discover_pmc.py "term" --limit 10 --out pmc_test.csv   # sanity check first
-python irw_discover_pmc.py "term" --journals peerj,heliyon --out pmc_triage.csv   # subset of journals
-python irw_discover_pmc.py "term1" "term2" --out pmc_triage.csv --resume   # after an interrupted run
+python irw_discover_pmc.py "PHQ-9" "self-esteem scale" --out runs/pmc_triage.csv
+python irw_discover_pmc.py "term" --limit 10 --out runs/pmc_test.csv   # sanity check first
+python irw_discover_pmc.py "term" --journals peerj,heliyon --out runs/pmc_triage.csv   # subset of journals
+python irw_discover_pmc.py "term1" "term2" --out runs/pmc_triage.csv --resume   # after an interrupted run
 ```
 
 - **Term selection**: same rule as the PLOS section above — recycle terms
@@ -558,9 +579,10 @@ python irw_discover_pmc.py "term1" "term2" --out pmc_triage.csv --resume   # aft
    only what's currently actionable — don't let resolved items linger there
    the way they used to linger unchecked in the old combined file.
 3. Delete temp files once their content is captured elsewhere — this
-   pipeline generates several per batch (`candidates*.csv`,
-   `irw_triage*.csv`, `irw_retriage*.csv`, any `triage_test*.csv` sanity
-   check, `irw_batch_checkpoint.jsonl`) and they're disposable *once* every
+   pipeline generates several per batch, all of them under `runs/`
+   (`runs/candidates*.csv`, `runs/irw_triage*.csv`, `runs/irw_retriage*.csv`,
+   any `runs/triage_test*.csv` sanity check, plus
+   `irw_batch_checkpoint.jsonl` at top level) and they're disposable *once* every
    actionable row has landed in `BATCH_LOG.md`, a `data/*.py` script, or a
    CSV handed to the user for the dictionary sheet. Don't delete a biblio
    CSV until the user has confirmed the rows were actually pasted into the

@@ -49,7 +49,7 @@ import requests
 import pandas as pd
 
 from irw_triage_updated import load_table, triage_dataset, irw_metadata
-from irw_discover_updated import SourceBlocked
+from irw_discover_updated import SourceBlocked, in_runs_dir, resolve_in_path
 
 
 class FileListUnreachable(Exception):
@@ -557,6 +557,8 @@ def main():
                          "deliberately re-triage a candidate, e.g. after a script fix")
     args = ap.parse_args()
 
+    args.candidates_csv = resolve_in_path(args.candidates_csv)
+    args.out = in_runs_dir(args.out)
     df = run_batch(args.candidates_csv, args.out, args.limit, args.resume,
                     ignore_seen_keys=args.ignore_seen_keys)
     print("\n" + "=" * 50)

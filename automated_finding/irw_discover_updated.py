@@ -655,8 +655,43 @@ def _load_auto_exclusions() -> set:
     return existing | reviewed
 
 
+RUNS_DIR = "runs"
+
+
+def in_runs_dir(path: str) -> str:
+    """Put a per-run output file in runs/ unless it already names a directory.
+
+    Every disposable per-run artifact of this pipeline (candidate lists,
+    triage/retriage outputs, sanity-check files) lives in `runs/` so the
+    top level of automated_finding/ holds only standing records --
+    search_terms_log.csv, *_seen_dois.csv, repo_triage_seen_keys.csv,
+    license_blocked_candidates.csv, plos_deferred_candidates.csv,
+    human_review/. A bare filename ("candidates.csv") is rewritten to
+    "runs/candidates.csv"; a path with any directory component (an
+    explicit "/tmp/x.csv" or an already-runs/-prefixed name) is honored
+    as given.
+    """
+    if os.path.dirname(path):
+        return path
+    os.makedirs(RUNS_DIR, exist_ok=True)
+    return os.path.join(RUNS_DIR, path)
+
+
+def resolve_in_path(path: str) -> str:
+    """Find a per-run input file, looking in runs/ if it isn't at cwd.
+
+    Lets `irw_batch_updated.py candidates.csv` keep working now that the
+    discovery scripts write to runs/candidates.csv."""
+    if path and not os.path.exists(path) and not os.path.dirname(path):
+        alt = os.path.join(RUNS_DIR, path)
+        if os.path.exists(alt):
+            return alt
+    return path
+
+
 def resolve_out_path(explicit: str | None, default: str) -> str:
-    """Pick a candidates-CSV path that will not clobber an existing run.
+    """Pick a per-run output path in runs/ that will not clobber an
+    existing run.
 
     The scheduled discovery scripts name their output by mode and UTC date,
     so two runs of the same mode on the same day collide -- e.g. a manual
@@ -666,7 +701,8 @@ def resolve_out_path(explicit: str | None, default: str) -> str:
     free. An explicit --out is the caller's choice and is returned as-is.
     """
     if explicit:
-        return explicit
+        return in_runs_dir(explicit)
+    default = in_runs_dir(default)
     if not os.path.exists(default):
         return default
     stem, ext = os.path.splitext(default)
@@ -786,6 +822,7 @@ def main():
     print()
 
     fieldnames = ["source", "title", "doi", "published", "url"]
+    args.out = in_runs_dir(args.out)
     outf = open(args.out, "w", newline="", encoding="utf-8")
     writer = csv.DictWriter(outf, fieldnames=fieldnames)
     writer.writeheader()

@@ -27,6 +27,7 @@ from __future__ import annotations
 
 import re
 import pandas as pd
+from irw_discover_updated import in_runs_dir, resolve_in_path
 
 # ---------------------------------------------------------------------------
 # Pattern helpers
@@ -277,6 +278,7 @@ def main():
                     help="output CSV (default: irw_retriage_ha.csv)")
     args = ap.parse_args()
 
+    args.input = resolve_in_path(args.input)
     df = pd.read_csv(args.input)
     ha = df[df["flag"] == "human_assistance"].copy()
     print(f"Loaded {len(ha)} human_assistance rows from {args.input}")
@@ -290,6 +292,7 @@ def main():
         lambda f: FLAG_ORDER.index(f) if f in FLAG_ORDER else 99)
     ha = ha.sort_values("_order").drop(columns="_order").reset_index(drop=True)
 
+    args.output = in_runs_dir(args.output)
     ha.to_csv(args.output, index=False)
     print(f"Wrote {len(ha)} rows to {args.output}\n")
 

@@ -46,7 +46,9 @@ from concurrent.futures import TimeoutError as FutureTimeoutError
 
 import requests
 
-from irw_discover_updated import Hit, is_relevant, norm_doi, _load_auto_exclusions
+from irw_discover_updated import (
+    Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
+)
 from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
 from irw_triage_updated import load_table, triage_dataset
 
@@ -437,6 +439,7 @@ def main():
         print(f"Excluding {len(global_seen):,} DOIs already triaged in a prior run "
               f"(manual or scheduled -- see {SEEN_DOIS_PATH})")
 
+    args.out = in_runs_dir(args.out)
     already_done = _load_done_dois(args.out) if args.resume else set()
     if already_done:
         print(f"Resuming: {len(already_done)} DOIs already in {args.out}, skipping them")

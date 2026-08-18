@@ -43,6 +43,7 @@ Run:
 
 from __future__ import annotations
 
+import os
 import csv
 import sys
 import argparse
@@ -250,7 +251,10 @@ def last_run_date(term: str, active_sources: set[str], log_path: str = LOG_PATH)
             for row in csv.DictReader(f):
                 if row.get("query", "").strip().lower() != term.strip().lower():
                     continue
-                if not row.get("output_file", "").startswith(OUT_PREFIX):
+                # basename: output_file gained a runs/ prefix 2026-08-18;
+                # historical rows are bare filenames.
+                if not os.path.basename(
+                        row.get("output_file", "")).startswith(OUT_PREFIX):
                     continue
                 logged_sources = _parse_logged_sources(row.get("notes", ""))
                 if logged_sources is None or not active_sources.issubset(logged_sources):
