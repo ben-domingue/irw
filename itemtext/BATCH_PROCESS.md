@@ -114,15 +114,17 @@ condition fired and when, then stop. Do nothing else.
 
 ## Step 2 — Dispatch extraction (parallel subagents)
 
-Split into groups of 3. Dispatch one Agent call per group (subagent_type "general-purpose"), all
-in the same message so they run in parallel.
+**Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
+they run in parallel. Twelve agents sits under the concurrency cap, so this costs no wall clock.
 
-**If a group dies (API error, content filter, spend limit), re-dispatch its tables as SEPARATE
-single-table agents rather than as another group of 3.** Grouping means one infrastructure failure
-costs three tables' work: batch_010's group 3 was killed by a content-filter error before it read
-anything, and all three tables passed on individual retry — the trip was spurious, not about the
-data. Give the retried agents distinct sidecar suffixes (notes_<table>.csv etc.) so they cannot
-collide with each other, and remember to glob for those suffixes at merge time.
+This replaces the earlier groups-of-3, which lost three tables to every single failure:
+batch_010's group 3 was killed by a content-filter error before it read anything, and all three
+tables passed on individual retry — the trip was spurious, not about the data. One table per agent
+makes the blast radius of an infrastructure failure exactly one table, and a retry is a re-dispatch
+of that one prompt.
+
+Give each agent a distinct sidecar suffix (`notes_<table>.csv`, `provenance_<table>.csv`,
+`verification_<table>.csv`) so they cannot collide, and glob for those suffixes at merge time.
 
 When several tables in a round come from ONE source file (common — five `butt_2022_*`, five
 `buzgova_2023_*`, four `baka2023_*` in recent rounds), split them across groups and tell each agent
@@ -162,21 +164,30 @@ writing the same files is a race. Each subagent prompt must tell it to:
   table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for EVERY table,
   clean or not. Vocabularies are defined in SKILL.md Step 6c. Record mapping_basis=unknown honestly
   rather than guessing.
-- Write itemtables/batch_<NNN>/verification_group<K>.csv (header
-  table,batch,mapping_basis,uploaded,route,status,evidence) with a row for every table whose
-  mapping_basis is NOT data_labels, per SKILL.md Step 5b. status is VERIFIED/PARTIAL/NO_ROUTE, and
-  `evidence` must contain the actual numbers compared, not a description of intent. This sidecar is
-  why verification now arrives WITH the batch instead of being reconstructed weeks later by a sweep.
+- Write itemtables/batch_<NNN>/verification_<table>.csv (header
+  table,batch,mapping_basis,uploaded,route,status,evidence) for every table whose mapping_basis is
+  NOT data_labels, per SKILL.md Step 5b. status is VERIFIED/PARTIAL/NO_ROUTE, and `evidence` must
+  contain the actual numbers compared, not a description of intent. This sidecar is why
+  verification now arrives WITH the batch instead of being reconstructed weeks later by a sweep.
+  **VERIFIED means the route distinguishes every item from every other item.** Pinning a polarity
+  class, a subscale or some positions is PARTIAL. State in the evidence what the route does NOT
+  establish, then choose the status to match that sentence.
+- **Also write itemtables/batch_<NNN>/verify_<table>.R — a re-runnable version of that evidence.**
+  Copy .claude/skills/irw-auto-itemtext/references/verify_template.R. It must fetch its own data,
+  print the numbers it compares, and end with exactly "VERDICT: PASS" or "VERDICT: FAIL". Verify the
+  MAPPING, not the plumbing: re-checking item counts is not evidence, because validate_items.R
+  already did it and the result merely looks like evidence. Skip only for data_labels tables, where
+  the source file itself ties code to text.
 - NOT touch itemtables/pilot/pending_index_notes.csv (a separate, older file).
 
 Wait for all groups to finish.
 
 ## Step 3 — Merge sidecars
 
-Merge notes_group*.csv into notes.csv, provenance_group*.csv into provenance.csv, and
-verification_group*.csv into verification_merged.csv (header once, data rows concatenated), then
-delete the per-group files. If a group was re-dispatched per-table after a failure its sidecars will
-carry a different suffix (e.g. notes_gds.csv) — glob for those too or they are silently dropped.
+Merge notes_*.csv into notes.csv, provenance_*.csv into provenance.csv, and verification_*.csv
+into verification_merged.csv (header once, data rows concatenated), then delete the per-table files.
+Leave the verify_<table>.R scripts in place — they are the batch's re-runnable evidence and triage
+executes them.
 
 Then merge verification_merged.csv into the permanent `itemtext/mapping_verification.csv`, and add a
 NOT_NEEDED row for every written table that has no verification row because its mapping_basis is
@@ -184,8 +195,13 @@ data_labels. Every written table must end up with exactly one tracker row.
 
 ## Step 4 — Normalize and audit
 
-Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R itemtables/batch_<NNN>
-Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_<NNN>
+
+A verify FAIL or NO VERDICT, or a lint ERROR, means a table's own claim did not reproduce: mark that
+table failed rather than done, and say so in the round_log entry.
 
 ## Step 5 — Update queue state and check the circuit breaker
 
@@ -239,10 +255,15 @@ turns `itemtables/batch_NNN/` into an upload. Done for batches 001, 006 and 007;
 is the same each time.
 
 1. **Re-run the gates live** rather than trusting the round's own report —
-   `normalize_nulls.R` then `audit_batch.R` on the batch. They re-check against current
-   live data, so a table that passed at extraction time can still surface something.
+   `normalize_nulls.R`, `audit_batch.R`, then `verify_batch.R` and `lint_verification.R`
+   on the batch. The first two re-check against current live data, so a table that passed at
+   extraction time can still surface something; `verify_batch.R` re-runs each table's own
+   mapping evidence, and `lint_verification.R` catches a status that claims more than its
+   evidence supports.
 2. **Re-check the round's substantive claims yourself**, especially any table whose notes
-   ask for it, any source override, and any positional mapping. Both triaged rounds turned
+   ask for it, any source override, and any positional mapping. With `verify_<table>.R` in
+   place this should mean *reading and running* the script rather than rebuilding the
+   analysis — if a script is thin or checks the wrong thing, that is itself the finding. Both triaged rounds turned
    up something this way: batch_006's audit error (a PLOS table that is an image), and
    batch_007's `baaziz_2023_sms2` file inconsistency. Cached sources under `.cache/<table>/`
    usually make this minutes of work, not hours.
@@ -252,7 +273,10 @@ is the same each time.
    `APFCompact_Ptacek_2024_DASS-21` pending #1653, a duplicate-table question) and leave it
    in the batch folder. A table needing a *policy* call rather than a check — is this text
    good enough to ship — is the user's to make, not yours: ask, don't hold silently.
-4. **Issues page**: draft, then apply directly, per SKILL.md Step 6c.
+4. **Issues page**: draft, then apply directly, per SKILL.md Step 6c. Read the draft file's
+   **REVIEW THESE TOO** section — it lists shipped tables that earned no draft, with their
+   `notes.csv` text, because the drafter only sees `public_note` and three batch_009 tables
+   were missed that way.
 5. **Log it** in `round_log.md` under that batch: what was staged, what was held and why,
    which issues-page drafts were dropped, and what the re-checks found.
 6. **On the user's confirmation that the upload happened**, stamp `uploaded=<date>` in the

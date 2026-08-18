@@ -2,12 +2,24 @@
 #
 # Turns the structured provenance recorded per batch into draft callout blocks
 # for the public item-text issues page (itemtext_issues.qmd in the datapages/irw
-# repo, checked out locally at ../irw_site/itemtext_issues.qmd).
+# repo, checked out locally at ../../irw_site/itemtext_issues.qmd -- note it is a
+# sibling of src/, NOT ../irw_site/).
 #
-# It deliberately does NOT edit that page. Following the precedent already set
-# by fixes/itemtext_issues_suggestions.md, it writes a draft file for a human to
-# review and paste, because deciding what to tell the public about a dataset is
-# an editorial call, not a mechanical one.
+# This script only DRAFTS. Since 2026-08-18 the agent applies the edit to that
+# page directly (SKILL.md Step 6c); the draft is a starting point whose wording
+# is meant to be rewritten, not pasted.
+#
+# Two things this script cannot see, both of which have cost real callouts:
+#   1. Blocked tables write no CSV but still have a provenance row with empty
+#      fields, which templated into "the origin of the item text was not
+#      recorded" -- nonsense for a table that shipped no text. Such rows are now
+#      skipped: a table earns a callout only if its __items.csv exists.
+#   2. A caveat recorded ONLY in notes.csv, with no public_note and clean
+#      structured fields, produces no draft at all. Three batch_009 tables were
+#      missed that way. Every shipped table with no draft is now listed in a
+#      REVIEW section at the end of the output with its full note, so the
+#      triager reads it and decides rather than trusting the draft set to be
+#      complete.
 #
 # Input: each batch dir's provenance.csv, with columns
 #   table, mapping_basis, text_source, source_ref, note
@@ -62,6 +74,8 @@ sentence_for <- function(r) {
 }
 
 rows <- list()
+undrafted <- list()
+blocked <- list()
 for (d in batch_dirs) {
     p <- file.path(d, "provenance.csv")
     if (!file.exists(p)) {
@@ -69,8 +83,20 @@ for (d in batch_dirs) {
         next
     }
     prov <- read.csv(p, stringsAsFactors = FALSE)
+    notes_path <- file.path(d, "notes.csv")
+    notes <- if (file.exists(notes_path)) read.csv(notes_path, stringsAsFactors = FALSE) else NULL
     for (i in seq_len(nrow(prov))) {
         r <- as.list(prov[i, ])
+        # A blocked table wrote no CSV, so it has nothing to warn the public about.
+        # Careful: a CSV is ALSO absent once a table has been uploaded and promoted
+        # out of the batch folder, and those very much do need callouts -- tell the
+        # two apart by provenance's `uploaded` stamp, not by the file alone.
+        shipped <- file.exists(file.path(d, paste0(r$table, "__items.csv"))) ||
+            (!is.null(r$uploaded) && !is.na(r$uploaded) && nzchar(trimws(r$uploaded)))
+        if (!shipped) {
+            blocked[[length(blocked) + 1]] <- r$table
+            next
+        }
         # A hand-written public_note always earns a callout, even when the
         # structured fields look clean: some caveats are orthogonal to
         # provenance (e.g. aguirre_camacho_2021_champion, whose item text is
@@ -79,7 +105,12 @@ for (d in batch_dirs) {
         has_public_note <- !is.null(r$public_note) && !is.na(r$public_note) &&
             nzchar(trimws(r$public_note))
         if (!has_public_note &&
-            !(r$mapping_basis %in% FLAG_MAPPING || r$text_source %in% FLAG_TEXT)) next
+            !(r$mapping_basis %in% FLAG_MAPPING || r$text_source %in% FLAG_TEXT)) {
+            nt <- if (!is.null(notes) && r$table %in% notes$table)
+                paste(notes$note[notes$table == r$table], collapse = " | ") else ""
+            undrafted[[length(undrafted) + 1]] <- list(table = r$table, batch = basename(d), note = nt)
+            next
+        }
         r$batch <- basename(d)
         r$sentence <- sentence_for(r)
         if (is.na(r$sentence)) next
@@ -87,8 +118,8 @@ for (d in batch_dirs) {
     }
 }
 
-if (!length(rows)) {
-    cat("No tables need a public caveat across:", paste(batch_dirs, collapse = ", "), "\n")
+if (!length(rows) && !length(undrafted)) {
+    cat("Nothing to draft or review across:", paste(batch_dirs, collapse = ", "), "\n")
     quit(save = "no")
 }
 
@@ -126,7 +157,44 @@ for (r in rows) {
         "```",
         ""), con)
 }
+if (length(undrafted)) {
+    writeLines(c(
+        "---",
+        "",
+        "## REVIEW THESE TOO -- no draft generated",
+        "",
+        "These tables shipped but earned no draft callout: their provenance carries no",
+        "`public_note` and its structured fields look clean. That is NOT the same as",
+        "having no caveat -- this script cannot see anything recorded only in",
+        "`notes.csv`, and three batch_009 tables were missed exactly that way. Read each",
+        "note below and decide; if it warrants a callout, write one by hand.",
+        ""), con)
+    for (u in undrafted) {
+        writeLines(c(
+            sprintf("- **`%s`** (%s)", u$table, u$batch),
+            if (nzchar(u$note)) paste0("    - ", gsub("[\r\n]+", " ", u$note))
+            else "    - (no notes.csv entry either)",
+            ""), con)
+    }
+}
+
+if (length(blocked)) {
+    writeLines(c(
+        "---",
+        "",
+        sprintf("Skipped %d table%s with a provenance row but no shipped CSV (blocked at",
+                length(blocked), if (length(blocked) == 1L) "" else "s"),
+        sprintf("extraction): %s", paste(sprintf("`%s`", unlist(blocked)), collapse = ", ")),
+        ""), con)
+}
+
 close(con)
 
 cat(sprintf("Wrote %d draft callout%s to %s\n", length(rows),
             if (length(rows) == 1L) "" else "s", out_path))
+if (length(undrafted))
+    cat(sprintf("  plus %d shipped table%s with no draft -- READ the REVIEW section\n",
+                length(undrafted), if (length(undrafted) == 1L) "" else "s"))
+if (length(blocked))
+    cat(sprintf("  skipped %d blocked table%s (nothing shipped)\n",
+                length(blocked), if (length(blocked) == 1L) "" else "s"))

@@ -991,6 +991,43 @@ each for a stated reason:
 Plus two honest extraction blocks that never wrote a CSV: `arnulf_2022_conspiracy_thinking` (007)
 and `atmadjaja_2026_pos` (007), and `agarwal_2023_dreem` (001, copyrighted DREEM).
 
+### Skill changes 2026-08-18 (the "now" phase, before scaling the pipeline)
+
+Four changes, each pinned to something that actually went wrong in batches 006-010.
+
+1. **`verify_<table>.R` is now required for every non-`data_labels` table** — a re-runnable version
+   of the Step 5b evidence, written by the extracting agent, alongside the CSV. Prose evidence
+   ("per-item means 4.80, 4.85 ... match Table 1") cannot be re-run, so triaging 006-010 meant
+   re-deriving ~11 of every 12 tables by hand; that was the whole cost of triage. Contract: fetch
+   your own data, print the numbers compared, last line exactly `VERDICT: PASS`/`FAIL`, verify the
+   MAPPING not the plumbing. `references/verify_template.R` is a working example (the real
+   `arora2025_blueq_pedagogical` check — it runs and passes against live data), and
+   `scripts/verify_batch.R` runs a whole batch and reports PASS/FAIL/MISSING, with
+   `MISSING(exempt)` for `data_labels` tables.
+2. **`draft_issues_qmd.R` fixed on both counts.** It no longer emits a callout for tables that
+   shipped no CSV (the "the origin of the item text was not recorded" nonsense that appeared for
+   `arnulf_2022_conspiracy_thinking` and `atmadjaja_2026_pos`) — and it distinguishes "blocked" from
+   "already uploaded" by provenance's `uploaded` stamp, so re-running it on a closed batch still
+   drafts correctly. It now also prints a **REVIEW THESE TOO** section listing every shipped table
+   that earned no draft, with its `notes.csv` text, which is the blind spot that cost three
+   batch_009 callouts: the drafter only ever sees `public_note`.
+3. **`scripts/lint_verification.R` (new)** — catches a status claiming more than its evidence
+   supports. Regression-tested against the bug that motivated it: with `bang_2023_self_esteem`
+   flipped back to VERIFIED it fires on that row's own words ("...not the order within each polarity
+   class, so adjacent same-polarity swaps are not independently excluded"). The hedge list was
+   deliberately narrowed after a first pass produced mostly false positives — words like "ambiguous"
+   and "underpowered" show up in good evidence describing a rival route that failed. On the current
+   111-row corpus it reports 0 ERROR and 7 WARN, and those 7 are a real historical finding: rows
+   from batches 001-005 marked NOT_NEEDED while their `mapping_basis` is `paper_explicit`, which
+   SKILL.md does not exempt. SKILL.md now also defines VERIFIED strictly — the route must
+   distinguish every item from every other; pinning a class, block or subset is PARTIAL.
+4. **One agent per table, not groups of three.** batch_010 lost three tables to one content-filter
+   error and all three passed on individual retry. Twelve agents sit under the concurrency cap, so
+   this costs no wall clock and makes a failure's blast radius exactly one table.
+
+Both the triage section and the round-trigger prompt in BATCH_PROCESS.md were updated, so a
+stateless cron firing picks all of this up.
+
 ### Standing exclusion added 2026-08-18: `enem*`
 
 Ben: **do not extract ENEM item text — it is being handled separately.** The 52 `enem*` rows are

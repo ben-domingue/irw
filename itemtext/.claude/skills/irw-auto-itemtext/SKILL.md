@@ -609,7 +609,25 @@ text, the mapping is authoritative at the source and there is nothing for statis
 add. **Every other `mapping_basis` requires this step.** Record the outcome as a row in
 `itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`)
 with `status` one of `VERIFIED` / `PARTIAL` / `NO_ROUTE` / `NOT_NEEDED`, and `evidence`
-stating the actual numbers compared. **`NO_ROUTE` is a legitimate outcome** — a source
+stating the actual numbers compared.
+
+**`VERIFIED` has a strict meaning: the route distinguishes every item from every other
+item.** If it pins a polarity class, a subscale, a block, a direction, or some of the
+positions, that is `PARTIAL` — however strong the evidence is for the part it does pin.
+`bang_2023_self_esteem` shipped as VERIFIED while its own evidence string said the routes
+pin polarity class and one item's position but *not* the order within each polarity class;
+the status field is self-reported and it inflates. Say in the evidence what the route does
+NOT establish, then pick the status to match that sentence. `lint_verification.R` flags
+rows whose evidence hedges while the status claims VERIFIED.
+
+**Write the check as a script, not only as prose — `verify_<table>.R`, in the batch
+directory, for every table that is not `data_labels`.** An `evidence` string cannot be
+re-run: checking it means rebuilding the analysis from the source, which is what made
+triaging batches 006-010 slow. Copy `references/verify_template.R`; the contract is that
+the script fetches its own data, prints the numbers it compares, and ends with exactly
+`VERDICT: PASS` or `VERDICT: FAIL`. Verify the mapping, not the plumbing: a script that
+re-checks item counts is worse than none, because `validate_items.R` already did that and
+the result *looks* like evidence. `verify_batch.R <batch_dir>` runs them all. **`NO_ROUTE` is a legitimate outcome** — a source
 with no per-item statistics, no range structure and no subscale totals cannot be checked,
 and saying so is required rather than letting "couldn't check" read as "checked". A
 `NO_ROUTE` table on an inferred `mapping_basis` should carry a `public_note` and is a
@@ -739,17 +757,27 @@ Before a table leaves your hands, all of these are true and recorded:
    `data/<table>.py|R`.
 8. Every deviation from literal transcription is named in provenance, and every claim in
    the note is one you actually checked.
-9. A `mapping_verification.csv` row exists unless `mapping_basis` is `data_labels`.
-10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained.
+9. A `mapping_verification.csv` row exists unless `mapping_basis` is `data_labels`, its
+   `status` matches what the evidence actually establishes (VERIFIED means every item is
+   distinguished from every other), and a re-runnable `verify_<table>.R` sits beside the CSV.
+10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained;
+   `verify_batch.R` and `lint_verification.R` are clean or each flag is explained.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
 ```bash
-Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R itemtables/batch_<NNN>
-Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_<NNN>
+Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_<NNN>
 ```
 
-**Re-run both after ANY later edit to a CSV**, including a one-line fix made with a
+The last two are the mapping-side gates: `verify_batch.R` re-runs each table's own
+`verify_<table>.R`, and `lint_verification.R` checks that no row claims more than its
+evidence supports. A FAIL or NO VERDICT means the round's own claim did not reproduce —
+read the output before staging that table.
+
+**Re-run the first two after ANY later edit to a CSV**, including a one-line fix made with a
 script. Python's `csv` writer and R's `write.csv` disagree about absent values — a
 `DictWriter` round-trip turns the bare `NA` token into a quoted `"NA"` string, which
 `read.csv` silently reads back as the same value, so nothing downstream complains. Every
