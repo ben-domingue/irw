@@ -334,13 +334,13 @@ Item text is a canonical published reproduction of the HDRS-17 rather than the s
 ## `amarilla_2020_lawton_brody` (batch_005)
 
 <!-- mapping_basis=paper_order text_source=canonical_instrument source=10.7717/peerj.9215 -->
-<!-- full note: 8-domain Lawton-Brody IADL, resp {0,1}. The study's raw-data supplement stores only the total index score, not per-domain items, so the lawtonbrody_1-8 mapping was inferred from the standard Lawton & Brody (1969) presentation order -- which does match the order the paper itself lists the 8 domains. Item/option text transcribed from the canonical 1969 instrument (BGS reproduction PDF). -->
+<!-- full note: 8-domain Lawton-Brody IADL, resp {0,1}. The study's raw-data supplement stores only the total index score, not per-domain items, so the lawtonbrody_1-8 mapping was inferred from the standard Lawton & Brody (1969) presentation order -- which does match the order the paper itself lists the 8 domains. Item text transcribed from the canonical 1969 instrument (BGS reproduction PDF). REVISED 2026-08-18: option_text was originally the instrument's 3-5 literal levels per domain, which made resp -> option_text many-to-one (three telephone levels all scored 1) -- the only such table across all 70 extracted. Because the live table stores the dichotomized dependency score rather than the administered level, option_text now names the scored category and lists the instrument levels sharing it, making the mapping a function. Level-to-score grouping follows the BGS reproduction cited above, which also corrected Housekeeping (was 1,1,1,0,0; source has 1,1,1,1,0). Row count 31 -> 16; resp set {0,1} unchanged, so audit_batch.R resp_set_match still passes. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
 ## amarilla_2020_lawton_brody
-The study's data supplement records only the total IADL score, so the item-to-domain mapping follows the standard Lawton & Brody (1969) ordering rather than an explicit mapping in the source, and item text comes from the canonical instrument
+Live resp (0/1) is the Lawton-Brody dependency score, not the administered response -- each domain's 3-5 instrument levels collapse to able/unable, so option_text lists the levels that share each score rather than a single literal option label. Separately, the study's data supplement records only the total IADL score, so the item-to-domain mapping follows the standard Lawton & Brody (1969) ordering rather than an explicit mapping in the source, and item text comes from the canonical instrument
 :::
 :::
 ```
