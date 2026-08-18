@@ -306,73 +306,29 @@ verifying.
   and `amarilla_2020_lawton_brody` were inspected and are structurally correct (domain-name
   stems with genuine severity/descriptive anchors, not a paraphrased grid).
 
-## What needs a human, in priority order
+## What needs a human — now tracked as GitHub issues (2026-08-17)
 
-1. **Paste issues-page callouts for batches 002-005.** `fixes/itemtext_issues_draft.md`
-   regenerated 2026-08-17 from corrected provenance: 24 callouts, of which **20 are not yet
-   on the live page** and 4 already are (skip `abdullah_2024_bsq_sevgen`, `addy_2021_sdq_ghana`,
-   `aguirre_camacho_2021_champion`, `aguirre_camacho_2021_shai`). Apply the usual bar --
-   concrete text-vs-table mismatches only, not gaps the source never published; the generator
-   flags every `canonical_instrument` source, which sweeps in unremarkable cases.
-2. **The `fixes/*.csv` corrected tables are still unuploaded** (confirmed with Ben
-   2026-08-17, in his todo pile). Their issues-page notes are written and HELD in
-   `fixes/itemtext_issues_suggestions.md` -- three of them replace existing live callouts
-   with wording that is only true once the fix is live, so they must be pasted WHEN those
-   tables upload, not before. `dumas_organisciak_2022` from that set was already added to
-   the live page (it describes a paper-vs-data scale discrepancy, independent of the fixes).
-3. **Two data-level defects, outside itemtext, in the underlying IRW tables:**
-   - `alves_2017_hamd17` -- 9 out-of-range responses (items 6/14/16 are 0-2 HDRS items
-     carrying stray 3s and 4s).
-   - `altahla_2024_whoqol_bref` -- strict duplicate of `altahla_2024_whoqol` (all 4,914
-     id/item/resp triples identical); should be one table per the collapse convention.
-4. **Decide the 7 pilot tables still marked `pending`** in queue_state.csv (ali_2021_phq9,
-   conner_2017_lot, consideration_future_consequences, cordova2019_clinical_edu_environment,
-   cucchi_2018_pts, iwasa_2016_padua_inventory, preussmattsson_2022_ownership). They already
-   have output in `itemtables/pilot/`; left as `pending` they will be re-extracted from
-   scratch by batch_006.
-5. **`ALSECYPIAMH_WU_2022_PHQ`** -- unverifiable 2-item mapping, paywalled source. Needs the
-   paper or an author email, or should be dropped.
-6. **`alomari_2025_student_questionnaire`** -- table name/dictionary misattribution (named
-   "alomari", actual source Xie et al. 2026, DOI 10.1371/journal.pone.0340806). Dictionary
-   problem, deliberately not on the public issues page.
-7. **`alexander_2017_dsi`** -- its provenance note claims the DSI-R's ER(11)+EC(12) split, but
-   content and data both give 10/13. One item is mislabelled in the note (not in the data).
-8. **AUDIT THE PRE-EXISTING ISSUES-PAGE ENTRIES** (Ben's request, 2026-08-17). The 13 callouts
-   that were live on https://itemresponsewarehouse.org/itemtext_issues.html BEFORE today's work
-   have never been re-checked against current data, and today's sweep showed how easily such a
-   claim goes stale or turns out to be imprecise. They are:
-   singh_2025_identity_pba, paampsmartsud_saba_2023_ders, namprb_siwiak_2024_ssub,
-   sv-maia2_randelovic_2021_erq, fivpei_perrig_2023_attdiff, oxfordcovid_xue_2024_at,
-   socialstereotype_hughes_2025_judgement, gilbert_meta_51, gilbert_meta_42, gilbert_meta_38,
-   gilbert_meta_35, florida_twins_friends, addy_2021_sdq_ghana.
-   For each: does the stated mismatch still hold against the live IRW table and the current
-   itemtext? Several are item-count claims ("paper has 28 items, IRW contains only 21") that are
-   directly checkable with irw::irw_fetch, and three already have more precise replacement wording
-   drafted in fixes/itemtext_issues_suggestions.md pending the fixes/ upload. Expect some entries
-   to be resolvable/removable and some to need sharpening.
-9. **OPEN DECISION (Ben, deferred 2026-08-17 -- revisit after batch_005): ship or hold
-   `ALSECYPIAMH_WU_2022_PHQ`.** The only NO_ROUTE left in a shippable batch. Its mapping rests on
-   the "column N = instrument item N" convention that `almuqbil_2022_epds` and `altahla_2024_swls`
-   also rest on and that shipped; the differences are that PHQ has no marker item to corroborate it
-   and only two items, so a wrong guess affects the whole table. Currently HELD in batch_004.
-10. **OPEN DECISION (Ben, deferred 2026-08-17): should itemtext_issues.qmd carry EXPLANATORY entries
-   as well as discrepancy ones?** Prompted by `alsuhibani_2022_npi_s3`, whose `item_text` is 100%
-   empty -- correct for a forced-choice instrument (all text is in option_text) but liable to look
-   broken to a user. Under the current bar (concrete text-vs-table mismatches only) it gets no
-   entry, which is why it was left off. Same question would apply to `aguirre_camacho_2021_shai`
-   and `alsuhibani_2022_npi_s3` as a class.
-11. **Pull the 4 earliest-uploaded itemtext tables back from Redivis to verify them.**
-   `abouhashish_2025_chatgpt_attitudes`, `abukhalaf_2025_disaster_prep`, `addy_2021_sdq_ghana`
-   and `agogue_2020_self_perceived_creativity` were uploaded in the first batch_001 pass and
-   removed from disk before ever being committed, so they exist only on Redivis and cannot be
-   re-checked locally. Every other uploaded table (27 of them) was recovered from git history and
-   swept with the current audit, including the new per-item resp-coverage check, and came back
-   clean. Fetch these four with `irw::irw_itemtext(<table>)`, write them to a scratch dir, and run
-   `audit_batch.R` over it. All four are `data_labels`, so the risk is low -- but they are the only
-   uploaded tables never checked by the current tooling.
-12. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
-   (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
-   tables that fall between both audits.
+The prose list that used to live here has been converted to issues on ben-domingue/irw,
+all labelled `ITEMS`, so it stops drifting out of date in this file:
+
+| issue | matter |
+|---|---|
+| #1643 | ship-or-hold `ALSECYPIAMH_WU_2022_PHQ` (unverifiable 2-item mapping) |
+| #1644 | `fixes/*.csv` corrected tables unuploaded; their issues-page notes held with them |
+| #1645 | verify the 4 earliest-uploaded tables, recoverable only from Redivis |
+| #1646 | audit the 13 issues-page callouts predating the 2026-08-17 review |
+| #1647 | coverage gaps: `ALSECYPIAMH_WU_2022_SDQ` and the four `himmelstein-*` tables |
+| #1648 | re-triage the 218 BLOCKED availability-audit tables |
+| #1649 | should the issues page carry explanatory entries as well as discrepancies? |
+| #1650 | decide the fate of the 7 pilot tables still `pending` in the queue |
+| #1651 | table-naming/dictionary mismatches: `alomari_2025_student_questionnaire`, `allen_2025_bis` |
+| #1652 | `altahla_2024_whoqol_bref` duplicates `altahla_2024_whoqol`'s responses |
+
+Plus #1642 (`data fix` label, not ITEMS): `alves_2017_hamd17`'s 9 out-of-range responses.
+
+Still held, not filed as issues because they are extraction outcomes rather than open
+questions: `agarwal_2023_dreem` (copyrighted DREEM, source inaccessible) and
+`algner2022_oss` (2 of 6 items have no recoverable text, one of the rest a back-translation).
 
 ## What changed in the skill (so future rounds don't repeat this session)
 
