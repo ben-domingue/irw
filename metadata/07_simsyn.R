@@ -51,12 +51,11 @@ dim(meta)
 ##Redivis caps *data export* at 200 GB per rolling 30 days per user and that
 ##quota is shared across every source, so this fallback burned the same
 ##allowance the core warehouse needs. Queries are not subject to the cap.
+##The filter is `resp IS NOT NULL` only -- see the long note in 01_metadata.R
+##for why the literal "NA" token must NOT be excluded here.
 count_resp_via_query<-function(tab) {
   ref<-tab$qualified_reference
-  sql<-sprintf(paste("SELECT COUNT(*) AS n FROM `%s`",
-                     "WHERE resp IS NOT NULL",
-                     "AND TRIM(CAST(resp AS STRING)) NOT IN ('NA', '')"),
-               ref)
+  sql<-sprintf("SELECT COUNT(*) AS n FROM `%s` WHERE resp IS NOT NULL", ref)
   res<-redivis$query(sql)$to_tibble()
   n<-as.numeric(res$n[1])
   if (length(n)!=1 || is.na(n)) stop("count query returned no value for ",ref)

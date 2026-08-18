@@ -30,6 +30,31 @@ What to check in the 2026-08-24 log:
   `metadata.csv` entirely (existing behaviour) -- it never falls back to an
   export. So watch for `giving up on <table>` lines as well.
 
+## Two things the corpus scan turned up (NOT fixed -- your call)
+
+I scanned the `resp` statistics for all 3,032 tables in `metadata.csv`.
+
+**1. 47 tables have a stale `n_responses`.** The server-side `count` no longer
+matches what `metadata.csv` says -- e.g. `western_reserve_project` is 1,445,422
+on Redivis vs 1,066,535 published, `mhscdc_fried_2020_dass` is exactly double.
+The script only fetches stats for *newly added* tables, so a table that gets
+re-uploaded keeps its original row forever. 37 of the 47 are integer `resp`,
+8 string, 2 float, so this is re-uploads, not a type issue. Fixing it means
+periodically refetching existing rows -- cheap now that counting is a query.
+
+**2. 8 tables in `metadata.csv` no longer resolve at all:**
+`enem_2023_1mil_{ch,cn,lc,mt}` and `enem_2024_1mil_{ch,cn,lc,mt}`, all listed
+under `item_response_warehouse_2`. They 404. Either they moved shard or were
+removed; either way those rows are dead.
+
+**3. 310 of 3,024 tables have a string-typed `resp`,** and on those the
+literal `"NA"` token is common -- `dscore_denver_weber_2019` is 118,589 `"NA"`
+out of 142,899 rows, `FACIT_YOUNT_2021_limitations` 10,276 of 42,200. The
+published `n_responses` counts those rows as responses. Whether it should is
+a real question, but changing it is a change to what `n_responses` *means*
+across the whole corpus, so I left it alone -- see the comment above
+`count_resp_via_query()` in 01_metadata.R.
+
 ## 05_comps.R and 07_simsyn.R got the same treatment
 
 - `07_simsyn.R` had the identical NULL-count -> `to_tibble()` fallback; it now

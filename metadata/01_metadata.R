@@ -57,16 +57,22 @@ dim(meta)
 ##subject to the export cap, and this one returns a single row, so the same
 ##number now costs nothing against the quota.
 ##
-##`resp` is integer/float on most tables but string on some; where it is a
-##string it can carry a literal "NA" token (and blanks) rather than a true
-##SQL NULL, so both are excluded here to match the non-missing count the
-##`count` statistic reports on the main path.
+##The filter is `resp IS NOT NULL` and nothing more, because that is exactly
+##what the `count` statistic on the main path reports -- confirmed on
+##polca_election (21,420 rows, 1,292 NULL resp, count = 20,128). Do NOT also
+##exclude the literal "NA" token here: 310 of the 3,024 core tables have a
+##string-typed `resp`, and on those the token is common (dscore_denver_
+##weber_2019 is 118,589 of 142,899 rows). The `count` statistic counts those
+##rows, the old to_tibble() fallback counted them too (R reads "NA" in a
+##character column as the string "NA", not as NA), and the n_responses
+##already published in metadata.csv includes them. Filtering the token out
+##here would make the fallback disagree with the main path on exactly those
+##tables. Dropping "NA" responses corpus-wide may well be the right call, but
+##it is a deliberate change to what n_responses means, and it belongs on the
+##main path, not hidden in a fallback.
 count_resp_via_query<-function(tab) {
   ref<-tab$qualified_reference
-  sql<-sprintf(paste("SELECT COUNT(*) AS n FROM `%s`",
-                     "WHERE resp IS NOT NULL",
-                     "AND TRIM(CAST(resp AS STRING)) NOT IN ('NA', '')"),
-               ref)
+  sql<-sprintf("SELECT COUNT(*) AS n FROM `%s` WHERE resp IS NOT NULL", ref)
   res<-redivis$query(sql)$to_tibble()
   n<-as.numeric(res$n[1])
   if (length(n)!=1 || is.na(n)) stop("count query returned no value for ",ref)
