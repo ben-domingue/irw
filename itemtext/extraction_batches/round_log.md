@@ -991,6 +991,70 @@ each for a stated reason:
 Plus two honest extraction blocks that never wrote a CSV: `arnulf_2022_conspiracy_thinking` (007)
 and `atmadjaja_2026_pos` (007), and `agarwal_2023_dreem` (001, copyrighted DREEM).
 
+## batch_011 — 2026-08-18 — PILOT, HALTED PART-WAY. READ THIS BEFORE RESUMING.
+
+### Incident: the Redivis export quota was exhausted, and it was this round that did it
+
+**`irw_fetch()` is dead account-wide until the 30-day export window rolls over.** Confirmed
+first-hand by calling Redivis directly, which gives the error `irw` hides:
+
+```
+[400 invalid_request] Cannot export more than 200GB within a 30 day period,
+unless the dataset's owner has configured an export billing project.
+You have exported 204GB in the past 30 days...
+```
+
+`tbl$get()` still works (metadata, row counts); only data export is blocked. This affects everything
+that calls `irw_fetch` — the metadata pipeline, vignettes, other sessions — not just itemtext.
+
+**Cause, plainly: the priority block was ordered by response volume, so it pointed twelve parallel
+agents at the twelve largest tables in the corpus, and `irw_fetch` downloads whole tables.**
+`condon_2024_sapa_personality` is 68M rows, `criticalperiod_syntax` 107M, `emidy2024_fevs` 48M. The
+hard gate they were feeding (`validate_items.R`) needs only `unique(item)` and `unique(resp)` — a few
+dozen values. We egressed hundreds of millions of rows to compute them. Sorting the queue by size was
+the right call for value per round and the wrong call for this, and nothing in the protocol connected
+the two.
+
+**Compounding it, the error is misreported.** `irw:::.irw_handle_datasource_error` returns
+`invisible(NULL)` for any error that is not invalid/auth/not_found whenever more than one core
+datasource is configured — which is always — so `fetch_single_data` falls through to
+`"table does not exist in IRW"`. Four agents independently concluded their table had been removed
+from the warehouse, and two wrote that into their notes before the real cause was found. Filed as
+**#1663**, together with the whole-table-export design.
+
+### The fix, and it is a good one: `scripts/table_sets.R`
+
+Server-side aggregates are unaffected by the export limit. `table_sets.R <table>` resolves the table
+across the four core datasources and returns the item set, the resp set and per-item n/range from
+`GROUP BY` queries — quota-free, seconds rather than minutes, and it works right now while
+`irw_fetch` does not. Validated against two tables whose sets were known independently
+(`rosenberg_selfesteem`, `bakker_2020_rses`). Two details it has to get right and does: `resp` is
+stored as a STRING carrying a literal `"NA"` token, which must be excluded and cast, or the resp set
+gains a phantom level and MIN/MAX come back NA.
+
+**`validate_items.R` should be rewritten on top of this** — not done yet, deliberately, because
+agents were still reading that file mid-round.
+
+### Round status
+
+Dispatched 12 agents, one per table, at the top 12 in-scope tables by volume (`neurips_2020` pulled
+before dispatch: 27,613 image-stimulus items, a different deliverable, still `pending`).
+
+**Round 2 of the pilot was NOT dispatched** — with `irw_fetch` down there is no hard gate to run, and
+thirteen more agents would produce unvalidated output. The 13 tables of round 2 stay `pending`.
+
+Findings from the agents that did report are recorded below as they land. Notable already:
+`chen_2022_sasc` is NOT the Social Anxiety Scale for Children — it is the 22-item Smartphone
+Addiction Scale for College Students, confirmed from the source .sav's own variable labels and its
+`PSU` total-score column; the dictionary Description is wrong. `depression_anxiety_stress` pools
+three instruments (DASS-42, TIPI, a 16-word vocabulary check) under a name that signals one.
+`emidy2024_fevs` is not yet live in IRW at all — its 761MB upload is still an open item in
+`automated_finding/TODO.md` — so that one's gate cannot run for a different reason.
+
+One process finding worth keeping: an agent reported that a sibling overwrote its scratch `cand.csv`
+mid-run, producing a spurious validation failure. **Agents must namespace temp files under
+`.cache/<table>/`**; a less obvious collision could ship one table's rows under another's name.
+
 ### Skill changes 2026-08-18 (the "now" phase, before scaling the pipeline)
 
 Four changes, each pinned to something that actually went wrong in batches 006-010.
