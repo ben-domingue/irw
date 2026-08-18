@@ -69,6 +69,16 @@ Use the highest available, and say which one you used:
 4. **A third-party reproduction** — clinical-assessment sites, handouts. Last resort, and
    see the grid trap in Step 4.
 
+**Separate the two questions the ranking answers.** A source can be authoritative for
+*which item a code refers to* without being the best rendering of *what the respondent
+read*. Terse internal labels are the common case: `bitew_2020_osss3`'s `.sav` labels items
+"others worry for me" — enough to pin the mapping, not the administered wording. The right
+move there is to use the label for the MAPPING and the best available text for the WORDS,
+and to say in provenance that you did exactly that (`mapping_basis=data_labels`,
+`text_source=canonical_instrument` is a perfectly coherent pair). What you must not do is
+silently upgrade terse labels into polished canonical wording without recording the swap —
+that is how `ali_2021_isi` ended up claiming verbatim transcription it hadn't done.
+
 **Level 1 outranks the rest, but it is not infallible — cross-check it.** Both kinds of
 label can be wrong, and batch_007 hit one of each.
 
