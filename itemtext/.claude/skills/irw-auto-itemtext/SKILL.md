@@ -11,9 +11,98 @@ from its source paper and writes it as a validated `{table}__items.csv`, ready f
 (copied verbatim from itemresponsewarehouse.org/itemtext.html) — read it before
 extracting anything, don't re-derive the schema from a merged example alone.
 
+## THE PRIME COMMANDMENT — `item` is the join key
+
+**`item` must be common between the response table and the itemtext table.** The entire
+purpose of an itemtext table is to be joinable to `irw::irw_fetch(table)` on `item`;
+every `item` value must appear in the live data exactly as the live data spells it, and
+the two sets must match. Nothing else in this skill outranks that. A beautifully
+transcribed instrument whose `item` values don't line up is worthless — it cannot be
+linked to a single response.
+
+Consequences to keep in front of you:
+
+- Take `item` values verbatim from Step 2's ground truth. Never invent, normalise,
+  re-case, re-order, or "tidy" them, and never carry over the source file's own column
+  names when the IRW table renamed them.
+- `resp`/`option_text` is the second join axis and the same logic applies: shipping
+  `raw_resp` (label strings) when the live table stores integers leaves the text
+  unlinkable to any response. `raw_resp` is a genuine last resort for when no scoring key
+  exists anywhere — not a default when the paper is merely silent. Read
+  `data/<table>.py|R` first (Step 4) and verify with Step 5b route 9.
+- This is what `validate_items.R` exists to enforce (Step 5), and why it is a hard gate
+  rather than advice. Step 5b then checks the mapping *within* those matching sets.
+
 Work from inside `itemtext/`. **All output — `{table}__items.csv` files,
 `audit_confirmed.csv`, and `pending_index_notes.csv` — goes in `itemtext/itemtables/`,
 not the `itemtext/` root.**
+
+## The core model — read this before the steps
+
+Everything below is one idea in four parts. The steps implement it; this section is what
+they are implementing, consolidated after reviewing all 50 tables of batches 001-005.
+
+### 1. An itemtext table is a JOIN, not a document
+
+Its value is entirely in linking to `irw::irw_fetch(table)`. Two keys carry that link and
+they fail independently:
+
+| axis | what must hold | what breaks it |
+|---|---|---|
+| `item` ↔ `item_text` | every live `item` appears, spelled exactly as the live data spells it | invented/normalised codes; a positional rename nobody checked |
+| `resp` ↔ `option_text` | every `resp` level a respondent actually used has a row for that item | option rows for one item only; a level omitted; `raw_resp` when the live table is numeric |
+
+`validate_items.R` enforces both as SETS over the whole table, which is necessary and not
+sufficient — an item can lack the levels its own respondents used and still pass, because
+another item supplies those values. `audit_batch.R` closes that gap per item.
+
+### 2. Sources rank, and the ranking is not negotiable
+
+Use the highest available, and say which one you used:
+
+1. **The source data file's own labels.** SPSS variable labels, value labels, spreadsheet
+   column headers. This ties code to text at the source — no inference at all. **Check both
+   levels**: `alsuhibani_2022_npi_s3`'s variable labels are bare column names while its
+   *value* labels carry the forced-choice statements.
+2. **The study's own paper or supplement**, where it reproduces items against codes.
+3. **The published instrument** (canonical wording).
+4. **A third-party reproduction** — clinical-assessment sites, handouts. Last resort, and
+   see the grid trap in Step 4.
+
+Two failures today came from skipping level 1 when it existed: `alsuhibani_2022_gcbs` was
+built from the paper while the study's `.sav` labelled every item (which is how a wording
+error got in), and `altahla_2024_whoqol` shipped a paraphrase while the source headers held
+the canonical text. **Before concluding a source doesn't exist, open the data file.**
+
+### 3. How the IRW `item` code was derived decides how much checking you owe
+
+Read `data/<table>.py|R` and classify. This is the single most useful five minutes in the
+whole process:
+
+| pattern | example | what you owe |
+|---|---|---|
+| code IS the source column name | `mc1`, `HamD3Baixa`, `PADS1` | nothing — there is no mapping step |
+| number-preserving rename | `LOC1`→`LOC_01`, `BBASAL_3`→`barthel_3` | read the dict; it is mechanical |
+| **positional assignment** | `df.columns = ["id"] + ITEMS`, `f"{pfx}{i+1}"` over a column range | **diff shipped `item_text` against the source header at that position** |
+
+10 of the 50 audited tables are positional, and every mapping defect found in review was
+one of them. `data_labels` in provenance does NOT imply inference-free; it describes where
+the words came from, not how the code was assigned.
+
+### 4. Transcribe literally, and disclose every deviation
+
+The output claims to be what the study administered. Three rules:
+
+- **Don't silently normalise.** `ali_2021_isi` shipped canonical ISI wording while its
+  source headers read "NOTICABLE" and "Difficult falling asleep", and the note claimed
+  verbatim transcription. Correcting an obvious source typo is defensible; not saying so
+  is not.
+- **Don't invent structure.** Some instruments have no item stems (see Step 4), some have
+  no option labels, some vary option wording by item. Blank is a valid, meaningful value.
+- **Notes must survive an audit.** Several provenance notes reviewed today asserted things
+  that were false — "transcribed verbatim" when normalised, "not a duplicate upload" when
+  it was a strict subset, "the .sav has no item text" when only the variable labels lacked
+  it. A wrong note is worse than no note, because it stops the next person looking.
 
 ## Output path: CSV-direct, not Sheets-fill
 
@@ -171,6 +260,26 @@ produce data shaped like them before merging:
   never in `instructions`, even if it reads like generic whole-table framing at a glance.
   Only text that is truly identical across every section (or a genuinely single-section
   table with no other candidate text) should go in `instructions`.
+- **Some instruments have no item stems at all — do not invent them.** In a
+  four-statement-group instrument (SHAI/HAI-18, BDI, and forced-choice scales like the
+  NPI-13), an "item" *is* a set of complete alternative statements you choose between;
+  there is no question stem. The correct shape is `item_text` **blank** for every row with
+  all the words in `option_text` (`aguirre_camacho_2021_shai`,
+  `alsuhibani_2022_npi_s3`). `audit_batch.R` will report `100% of rows have blank
+  item_text` — that WARN is the expected, correct result here, not something to fix.
+  Clinician-rated scales are the neighbouring case and *do* have stems: the domain name is
+  the stem and the severity anchors are the options (`alves_2017_hamd17`:
+  "Anxiety - Psychic" / "No difficulty", "Tension and irritability", …).
+
+  **The trap:** clinical-assessment websites re-render these instruments as a tidy grid
+  with an invented stem per row and the four statements squeezed into short column
+  headers. That grid is a *paraphrase*, and transcribing it silently loses wording — a
+  first pass at `aguirre_camacho_2021_shai` built from one produced stems that don't exist
+  in the instrument, dropped "(of my age)" from item 2, and flattened item 12's "I usually
+  think that I am seriously ill" to "Usually". It passed `validate_items.R` and
+  `audit_batch.R` cleanly, and was only caught by a human spot-check. **If a source
+  presents an instrument as a grid of stems × short anchors, find the instrument's own
+  prose form before transcribing.**
 - **item/item_text/correct_response** — `item` values must be exactly the ones from
   Step 2's ground truth, not invented. `correct_response` blank when there's no scoring
   key; semicolon-separated when multiple answers are correct (e.g. `A;C`). **When the
@@ -193,6 +302,17 @@ produce data shaped like them before merging:
   a categorical/lettered code with no way to tie it to the existing numeric `resp`), put
   the raw option in a `raw_resp` column instead of forcing it into `resp` — see
   `gilbert_meta_11` for a real example of this pattern.
+
+  **Before falling back to `raw_resp`, read the IRW processing script** —
+  `data/<table>.py` or `data/<table>.R`. The paper is the authority on what participants
+  saw, but the processing script is the authority on **what the integers in the IRW table
+  mean**, and it very often contains the literal label→number mapping the paper omits.
+  `alasmari_2025_ai_trust_confidence` shipped with `raw_resp` on the grounds that the paper
+  never states its 1–4 coding direction, while `data/alasmari_2025_ai_trust_confidence.py`
+  defines `RESP_MAP = {not confident: 1, neutral: 2, somewhat confident: 3, very confident:
+  4}` outright — and its sibling table from the same paper had already used its own script's
+  mapping correctly. Check the script whenever `resp` is numeric but the source only
+  discloses labels; `raw_resp` is for when neither source can tie them together.
 
 **Match the source's terseness.** Transcribe `instructions`, `section_prompt`,
 `item_text`, and `option_text` at the same level of brevity as the source material. If
@@ -233,6 +353,153 @@ pad, guess, or drop items silently to make the counts line up.
 
 Only once this passes (or the discrepancy is deliberately accepted and logged) does the
 CSV get written as `itemtext/itemtables/<table>__items.csv`.
+
+### Step 5b — Verify the item↔text and option↔resp mappings against the data (REQUIRED)
+
+Everything in Step 5 checks *sets*. If `item_text` for items 3 and 5 were swapped, the
+item set, the resp set, the row counts and the whole audit still pass — and the table
+ships a plausible, confidently-wrong mapping that no downstream check will ever catch.
+So mapping is verified separately, against numbers, and the outcome is recorded.
+
+The two mapping axes are defined in the core model above; routes 1–8 below verify
+`item_text`↔`item`, route 9 verifies `option_text`↔`resp`, and route 6's reverse-keying
+signal touches both. Verify whichever axis carried inference — usually the first, but any
+table built from a categorical source whose IRW `resp` is numeric has made a decision on
+the second too. **Start by classifying the code derivation (core model §3): if it is
+positional, the header diff settles the table faster than any statistical route.**
+
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/item_stats.R <table>
+```
+
+That prints per-item n, mean, SD and floor/ceiling % from the live data, in the shape
+papers publish them. Then look for something in the source to match it against, in
+descending order of strength:
+
+1. **Per-item descriptive statistics.** Most validation papers have a table of per-item
+   M (SD), floor/ceiling %, item-total correlations or factor loadings. Match it in order.
+   Means usually identify each item outright; when two items' means are within ~0.02
+   (which happens — `item_stats.R` flags it), **floor/ceiling % is what breaks the tie**.
+   Do not declare a match on means alone in that case. Worked example:
+   `aguirre_camacho_2021_champion`, where the paper's Table 4 pinned all 8 items and
+   separated the near-tied 3-vs-5 and 6-vs-7 pairs.
+2. **Per-item response ranges**, whenever an instrument's items do *not* all share one
+   scale. The pattern of which items take which range is a structural signature, and it
+   needs no published statistics at all. Worked example: `alves_2017_hamd17` — HDRS-17
+   assigns 0–4 to items 1,2,3,7–11,15 and 0–2 to the rest, and the live data matched all
+   17. Also how the two `abdullah_2024_bsq_*` tables were corroborated.
+3. **Subscale totals.** If the paper reports subscale means/SDs/ranges, sum the live
+   items you assigned to each subscale and compare. This pins subscale *membership* and
+   the numbering at subscale boundaries, but not order within a subscale — record it as
+   partial. Worked example: `aguirre_camacho_2021_shai`.
+4. **A parameter the item text itself implies.** If each item's text states quantities
+   that imply a difficulty/rate/dose, compute it and check the responses track it. This
+   is the strongest route when it applies. Worked example: `allen_2025_delaydiscount`,
+   where each Kirby MCQ item implies `k=(LDR-SIR)/(SIR*delay)`; the proportion choosing
+   the delayed reward correlated with k at Spearman +0.96 across 27 items.
+5. **Subscale block structure**, via
+   `Rscript .claude/skills/irw-auto-itemtext/scripts/mapping_structure.R <table> <group1> <group2> …`.
+   Most multi-subscale instruments have a published, fixed item-number→subscale
+   assignment, which is a testable prediction about the data: same-subscale items should
+   intercorrelate most. Worked examples: `alexander_2017_dsi` (21/23 — good enough to
+   verify a `reconstructed` mapping), `algner2022_mimi16` (15/16). **Know when this test
+   is underpowered**: it cannot separate facets that are nearly collinear, and a low
+   score then is NOT evidence of a bad mapping — `alsuhibani_2022_gcbs` scored 8/15 only
+   because the GCBS is dominated by a general factor (rival-facet r = 0.45–0.64), and
+   `algner2022_uwes` scored 6/9 because UWES dedication and absorption overlap. Say which
+   it is rather than reporting the fraction bare.
+6. **Keying polarity.** On a scale with reverse-worded items whose data are still raw, the
+   sign pattern in the correlation matrix reveals each item's polarity class. Worked
+   example: `algner2022_cse`, where CSE1 correlated +0.31…+0.45 with every odd item and
+   −0.06…−0.36 with every even one, exactly the canonical CSES odd-positive/even-negative
+   keying. Verifies polarity per item, not order within a polarity class. Same idea pins
+   the reverse-keyed triple {3,4,26} in `altahla_2024_whoqol`.
+7. **A marker item.** Some instruments have one item whose distribution is unmistakable —
+   EPDS item 10 (self-harm) must be the least endorsed in any community sample
+   (`almuqbil_2022_epds`: 0.44 with 73.9% at zero, against 0.80–1.77 for the rest). Pins
+   that one item.
+8. **Semantic coherence of the response distribution**, when the resp scale is
+   diagnostic of content (frequencies, counts, difficulty). Rules out a random
+   permutation; doesn't prove adjacent items aren't swapped. Worked example:
+   `ahmed_2019_food_consumption`, where days-per-week consumption ordered maize 5.01 >
+   … > milk 1.20 exactly as food groups should.
+9. **Response-frequency matching**, for the *other* mapping axis — `option_text`↔`resp`
+   rather than `item_text`↔`item`. Whenever the source data file stores **labels** while
+   the IRW table stores **integers**, count each label per item in the source and each
+   integer per item in the live table: a correct mapping matches cell for cell, and a
+   flipped direction or any permuted level breaks it immediately. This is decisive, not
+   circumstantial. Worked example: `alasmari_2025_ai_trust_confidence`, whose raw S1
+   `.xlsx` holds "not confident"/"neutral"/… and whose live table holds 1–4 — all 16
+   item × level counts matched exactly (e.g. 25/83/156/71 raw vs 25/83/156/71 live),
+   confirming `neutral = 2` sits between "not confident" and "somewhat confident" rather
+   than at an end.
+
+   **Use this to check the processing script rather than trust it.** `data/<table>.py|R`
+   tells you what the mapping is *meant* to be; only the counts show what actually
+   produced the live data. Reach for it any time a table was built from a categorical
+   source, and especially before converting a `raw_resp` table to `resp`.
+
+**Check for two exemptions first — both are stronger than any statistic and cost nothing:**
+
+- **Self-describing item codes.** If the code names its own content (`TLXEffort`,
+  `increase_cancer_risk`, `afraid`, or a Stroop stimulus word like `ALCOHOL`), a
+  permutation is impossible without being self-evident. 7 of the 50 audited tables were
+  exempt on this ground alone.
+- **Explicit code labels in the paper.** If the paper's item table prefixes each item with
+  the very code the data uses (`alomari_2025_student_questionnaire`: "Q1: I believe that
+  this teaching model…" against columns `Q1`..`Q15`), the tie is a label match, not an
+  order inference.
+
+**Prefer the source labels over every statistical route, and check them at both levels.**
+A `.sav`/`.xlsx` that labels its columns ties code to text at the source, which is stronger
+than any inference this step can test. Three things make that tie verifiable rather than
+assumed, and all three are cheap:
+
+- **Check variable labels AND value labels.** `alsuhibani_2022_npi_s3`'s variable labels are
+  bare column names, while its *value* labels carry the paired forced-choice statements. "The
+  file has no item text" is a claim about the level you looked at.
+- **Read how the processing script derives the IRW code**, because that is where the tie can
+  break. Three patterns, in ascending risk: the code IS the source column name (nothing to get
+  wrong); a number-preserving rename (`LOC1` -> `LOC_01`, `BBASAL_3` -> `barthel_3`, mechanical,
+  just read the dict); or **positional assignment** (`df.columns = ["id"] + ITEMS + ...`, or
+  `f"{prefix}{i+1}"` over a column-index range), where the code keeps no trace of the source
+  name and a shifted range is undetectable from the output alone. 10 of the 50 audited tables
+  are positional, and every mapping defect found in the batch_003/005 review was one of them.
+  For positional codes, diff the shipped `item_text` against the source header at that position
+  — mechanical, and it settles the table outright.
+- **Watch for truncation and artifacts.** SPSS caps variable labels at 255 characters (9 labels
+  in `amarilla_2020_hip_fracture`'s file sit at the cap, e.g. `RMH3_BASAL` ends mid-phrase at
+  "...felt calm & peaceful? (prior"), so for long items the label is a *prefix* and anything
+  shipped beyond it came from elsewhere. Labels also carry wave suffixes ("prior hip fracture"),
+  leading numbering ("1. "), A-/B- markers, and spreadsheet concatenation artifacts — strip
+  those deliberately, and say so in provenance.
+
+And before reaching for statistics at all, **re-check whether the source data file has
+variable labels** — the sweep found `alsuhibani_2022_gcbs` had been extracted from the
+paper as `paper_explicit` when the study's own `.sav` files labelled every GCBS item, which
+both settled the mapping and caught a wording error ('rumors' where the study wrote
+'rumours').
+
+Two traps:
+
+- **Match the right subset.** A paper's per-item table almost always describes one wave
+  (usually baseline) or one subsample, while the IRW table may pool several.
+  `item_stats.R` splits by wave for this reason. Pooled-vs-single-wave comparison
+  produces spurious near-misses — `champion` reads 3.60 pooled vs 3.62 at wave 0.
+- **Expect small residuals** where the paper analyzed an imputed file and the IRW script
+  dropped imputed cells, or vice versa. Order and relative spacing are the signal, not
+  the third decimal.
+
+`data_labels` tables are exempt: when the source file's own variable labels tie code to
+text, the mapping is authoritative at the source and there is nothing for statistics to
+add. **Every other `mapping_basis` requires this step.** Record the outcome as a row in
+`itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`)
+with `status` one of `VERIFIED` / `PARTIAL` / `NO_ROUTE` / `NOT_NEEDED`, and `evidence`
+stating the actual numbers compared. **`NO_ROUTE` is a legitimate outcome** — a source
+with no per-item statistics, no range structure and no subscale totals cannot be checked,
+and saying so is required rather than letting "couldn't check" read as "checked". A
+`NO_ROUTE` table on an inferred `mapping_basis` should carry a `public_note` and is a
+candidate for holding back from upload (see `abdullah_2024_hpbbloat_stress`).
 
 ## Step 6 — Write the output
 
@@ -288,6 +555,13 @@ missing.
 - `unknown` — not established. Use this honestly rather than guessing; it marks the
   table for re-checking.
 
+`mapping_basis` records *how* the mapping was arrived at; Step 5b records whether it was
+then **checked against the data**. They are independent, and the pair is what tells you
+how much to trust a table: `paper_explicit` + `NO_ROUTE` can still be a numeric
+correspondence nobody verified (this was true of `aguirre_camacho_2021_champion` until its
+Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other than
+`data_labels` must have a `mapping_verification.csv` row before it is promoted to `clean/`.
+
 `text_source` — where the words themselves came from:
 - `study_materials` — this study's own paper, supplement, questionnaire, or data file.
 - `canonical_instrument` — the published original instrument, not this study's materials.
@@ -307,12 +581,42 @@ This writes `fixes/itemtext_issues_draft.md`. It never edits
 `../irw_site/itemtext_issues.qmd` directly — what to tell the public about a dataset is
 an editorial call, so a human reviews and pastes.
 
+### Step 6c-bis — The checklist this all reduces to
+
+Before a table leaves your hands, all of these are true and recorded:
+
+1. `validate_items.R` passes (item set, resp set) — hard gate, Step 5.
+2. You know which of the three code-derivation patterns applies (core model §3), and for
+   positional codes you diffed shipped text against the source header at that position.
+3. You used the highest available source (core model §2) and **opened the data file** before
+   concluding a better source didn't exist.
+4. Every item has an option row for every `resp` level its own respondents used — or the
+   gap is a known response-data defect and you said so.
+5. `section_id` is a single trivial `<table>_1` unless there is real testlet/passage
+   grouping with genuine `section_prompt` text.
+6. `item_text` blank where the instrument has no stems; `option_text` blank where no labels
+   exist; neither padded with numbers.
+7. `resp` is used, not `raw_resp`, unless no scoring key exists anywhere including
+   `data/<table>.py|R`.
+8. Every deviation from literal transcription is named in provenance, and every claim in
+   the note is one you actually checked.
+9. A `mapping_verification.csv` row exists unless `mapping_basis` is `data_labels`.
+10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained.
+
 ### Step 6d — Normalize and audit before the batch is considered done
 
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/batch_<NNN>
 ```
+
+**Re-run both after ANY later edit to a CSV**, including a one-line fix made with a
+script. Python's `csv` writer and R's `write.csv` disagree about absent values — a
+`DictWriter` round-trip turns the bare `NA` token into a quoted `"NA"` string, which
+`read.csv` silently reads back as the same value, so nothing downstream complains. Every
+manual repair in this pipeline so far has needed a normalize pass afterwards, and one
+(a spelling fix to `alsuhibani_2022_gcbs`) sat unnormalized in `batch_004` until a later
+sweep caught it.
 
 `normalize_nulls.R` makes the on-disk representation of absent values match the
 convention across the 422 published tables (the `NA` token, as `write.csv` emits it).

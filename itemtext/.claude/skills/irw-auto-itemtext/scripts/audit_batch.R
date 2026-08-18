@@ -186,6 +186,54 @@ audit_one <- function(path) {
         if (pct_missing_opt > 0) {
             notes <- c(notes, paste0(pct_missing_opt, "% of rows have blank option_text"))
         }
+        # Blank option_text is legitimate table-wide (day counts, behaviour-scored
+        # items, unlabeled scale points), which is why the coverage figure above
+        # only notes rather than warns. What is NOT legitimate is the asymmetric
+        # case: some items carry their option rows while other items in the same
+        # table carry none. That means those items' response options can't be
+        # linked to any resp value, and it slips past validate_items.R because the
+        # resp *set* over the whole table still matches. Caught in the wild on
+        # alkouri_2025_coping / alkouri_2025_icu_stressors (2026-08-17), where
+        # item_01 had all five options and items 2..n had a single NA-resp row.
+        if ("item" %in% names(items)) {
+            opts_per_item <- tapply(!is_blank(items$option_text), items$item, sum)
+            with_opts <- sum(opts_per_item > 0)
+            without <- names(opts_per_item)[opts_per_item == 0]
+            if (with_opts > 0 && length(without) > 0) {
+                status <- "WARN"
+                notes <- c(notes, paste0(
+                    length(without), " of ", length(opts_per_item),
+                    " items have NO option_text rows while others do (",
+                    paste(utils::head(without, 6), collapse = ", "),
+                    if (length(without) > 6) ", ..." else "", ")"))
+            }
+
+            # Per-item resp coverage. validate_items.R compares the resp SET over
+            # the whole table, so an item can be missing option rows for levels
+            # that its own respondents actually used and still pass -- the table's
+            # other items supply those values. Joining itemtext to the response
+            # data on (item, resp) then silently drops those responses. This is a
+            # finer-grained version of the check above and would have caught the
+            # alkouri_2025_* defect on its own.
+            if ("resp" %in% names(items)) {
+                live_lv <- tapply(suppressWarnings(as.numeric(df$resp)), df$item,
+                                  function(v) sort(unique(v[!is.na(v)])))
+                cand_lv <- tapply(suppressWarnings(as.numeric(items$resp)), items$item,
+                                  function(v) sort(unique(v[!is.na(v)])))
+                gaps <- character(0)
+                for (i in names(live_lv)) {
+                    m <- setdiff(live_lv[[i]], cand_lv[[i]])
+                    if (length(m)) gaps <- c(gaps, paste0(i, "(", paste(m, collapse = ","), ")"))
+                }
+                if (length(gaps)) {
+                    status <- "WARN"
+                    notes <- c(notes, paste0(
+                        length(gaps), " item(s) have live resp values with no option_text row: ",
+                        paste(utils::head(gaps, 6), collapse = ", "),
+                        if (length(gaps) > 6) ", ..." else ""))
+                }
+            }
+        }
         # Padding an unlabeled scale point with its own number is worse than
         # leaving it blank: it reads as a real label downstream, and it
         # inflates the coverage figure above so the table looks cleaner than

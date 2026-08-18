@@ -13,3 +13,9 @@ itemtext/audit_staging/
 
 ##deprecated package
 irw_pkg/
+
+# LibreOffice lock files
+.~lock.*#
+
+# transient control flag for the itemtext batch loop (its presence is the state)
+itemtext/extraction_batches/circuit_breaker.flag

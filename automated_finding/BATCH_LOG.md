@@ -9662,3 +9662,216 @@ substring trap above.
 deprecated (2026-08-12). Not touched here; the script is likely obsolete
 along with the sheet, but it should be either fixed or deleted rather than
 left as a module that raises on import.
+
+## Issue #1597 — TISP dataset (2026-08-17)
+
+Manual, issue-driven processing rather than a discovery run — GitHub issue
+[#1597](https://github.com/ben-domingue/irw/issues/1597) proposed by
+@sinew-07, who asked to see the automated tooling applied to it as a worked
+example.
+
+- **Source**: Mede et al. (2025), *Perceptions of science, science
+  communication, and climate change attitudes in 68 countries – the TISP
+  dataset*, Scientific Data 12:114, DOI `10.1038/s41597-024-04100-7`.
+  Data at <https://osf.io/5c3qd/>, file `02_data/survey-data/ds_main.csv`.
+- **License**: OSF node reports license id `563c1cf88c5e4a3877f9e96a`;
+  `GET https://api.osf.io/v2/licenses/563c1cf88c5e4a3877f9e96a/` resolves to
+  "CC-By Attribution 4.0 International" — verified open, proceed.
+- **Duplicate check**: no `data/*.py` embeds this DOI, and no
+  `metadata/biblio.csv` row matches TISP/Mede/the DOI. Net-new.
+- **File choice**: `ds_main` (cleaned, unweighted, N=71,922) over `ds_final`
+  (adds post-stratification weights, drops to N=69,534) and `ds_full` (raw
+  uncleaned) — keeps the full valid sample, per the issue's proposal.
+- **Script**: `data/mede_2025_tisp.py`, downloading straight from the OSF
+  file id so it's reproducible without a local copy. Source CSV is
+  semicolon-delimited, UTF-8-with-BOM, and has a few invalid bytes in
+  free-text columns (read with `encoding_errors="replace"`; those columns
+  aren't carried through).
+- **15 tables written.** The issue proposed only the four scales the data
+  descriptor psychometrically validates; ben-domingue asked (2026-08-17) to
+  add the remaining item batteries in the same questionnaire too, so all 15
+  are shipped:
+
+  | table | items | rows | ids | resp |
+  |---|---|---|---|---|
+  | `mede_2025_trust_scientists` | 12 | 862,607 | 71,915 | 1–5 |
+  | `mede_2025_scipop` | 8 | 575,008 | 71,917 | 1–5 |
+  | `mede_2025_outspokenness` | 3 | 215,638 | 71,912 | 1–5 |
+  | `mede_2025_sdo` | 4 | 282,881 | 70,788 | 1–10 |
+  | `mede_2025_sciinfo` | 10 | 714,665 | 71,901 | 1–7 |
+  | `mede_2025_sciengage` | 4 | 287,182 | 71,908 | 1–7 |
+  | `mede_2025_normperc` | 6 | 429,449 | 71,895 | 1–5 |
+  | `mede_2025_willvul` | 3 | 210,348 | 70,463 | 1–5 |
+  | `mede_2025_goals_priority` | 4 | 287,278 | 71,908 | 1–5 |
+  | `mede_2025_goals_tackle` | 4 | 287,231 | 71,896 | 1–5 |
+  | `mede_2025_clim_emotions` | 9 | 643,228 | 71,910 | 1–5 |
+  | `mede_2025_clim_government` | 7 | 502,882 | 71,902 | 1–5 |
+  | `mede_2025_clim_polsupport` | 5 | 331,613 | 69,927 | 1–3 |
+  | `mede_2025_clim_weather_past` | 6 | 428,753 | 71,514 | 1–5 |
+  | `mede_2025_clim_weather_future` | 6 | 407,894 | 68,056 | 1–5 |
+
+  Named `mede_2025_*` per the `authorname_year_construct` convention rather
+  than the issue's proposed `tisp_mede_2025_*` prefix (confirmed with
+  ben-domingue).
+
+- **Where the response ranges come from — do not shortcut this on a rerun.**
+  The master questionnaire
+  (`05_survey-materials/questionnaire/master/core-questionnaire_english.docx`,
+  a `.docx` whose `word/document.xml` unzips to readable text) lists every
+  block's numbered answer options verbatim, including the source variable
+  name per row. That is the authoritative codebook here; the paper's prose
+  only gives endpoint anchors for most batteries. Reading it caught a real
+  in-range sentinel:
+
+  **`CLIM_POLSUPPORT` is "Not at all (1) / Moderately (2) / Very much (3) /
+  Not applicable (4)"** — 4 is a non-response code, not a scale point. It is
+  ~5% of responses and, crucially, sits at a near-identical rate on all five
+  items (3,395–4,539), so the cross-item *isolation* check in
+  `datastandard.md` would have passed it. This is exactly the failure mode
+  that section's "a distribution-shape check alone is not sufficient" warning
+  describes. Valid max is set to 3 so the 4s are dropped. Every other
+  battery's options are a plain 1–5 or 1–7 ladder with no extra category, and
+  `SCIINFO`/`SCIENGAGE`'s smallest-at-the-top 1–7 shape is a genuine frequency
+  ladder ("Never" … "Once or more per day"), not a hidden code.
+
+- **Mechanical re-verification of all 15 tables after the sentinel finding**
+  (prompted by ben-domingue asking whether the other tables had been
+  re-checked on the same basis — the first pass had been an eyeball over a
+  printed option dump, which is the same kind of check that nearly missed
+  `CLIM_POLSUPPORT`). Redone as code, two ways:
+  1. Scanned *every* numbered option label anywhere in the questionnaire
+     against a non-response regex (`don't know|not applicable|prefer not|no
+     opinion|refuse|n/a`). Exactly three hits besides the polsupport one, and
+     all three are demographic, not item, columns: `DEM_GENDER` "Prefer not
+     to say (99)" and `DEM_POL_conservative`/`DEM_POL_right` "I don't know
+     (99)". All are coded `99`, all already NA in `ds_main`, none reachable
+     as a `resp`.
+  2. Per table, compared the shipped `resp` value set against the code set
+     its own questionnaire block offers. 13 matched automatically;
+     `TRUST_SCI` and `WILLVUL` needed a manual read because their variable
+     names sit at line-start rather than in parentheses (60 option lines =
+     12 items x 5, and 15 = 3 x 5, codes exactly 1-5, all substantive).
+     No table ships a value absent from its codebook, and no table ships a
+     non-substantive code.
+- **`SCIENGAGE`'s 7 was queried and kept — deliberately.** 967 people report
+  engaging in science-related *public protests* "once or more per day",
+  which reads implausibly. It is not a sentinel: it is the documented top of
+  the same frequency ladder `SCIINFO` uses, and the item's distribution is a
+  smooth monotone decay (50,943 / 6,240 / 4,409 / 3,639 / 3,094 / 2,453 /
+  967) — the *opposite* of the polsupport signature, which was a flat ~5%
+  bump sitting at the top code at near-identical rates across all items.
+  What it actually reflects is extreme/acquiescent responding: those 967
+  respondents average 4.14 sevens across the 10 `SCIINFO` items vs 0.38 for
+  everyone else, and 26.5% of them straight-line all four `SCIENGAGE` items
+  vs 8.3% baseline. That is respondent behaviour, not a coding artifact, so
+  it stays — filtering it would be silently editing the source. Downstream
+  users can model it; a future reader tempted to "clean" it should read this
+  note first.
+- **QC (all 15)**: every item uses exactly its documented category set — the
+  per-item distinct-category count equals the expected count on every item of
+  every table, so there are no unfiltered sentinels and no isolated
+  data-entry values. No duplicate `id`+`item`, no NaN, no fractional `resp`,
+  column order `id,item,resp,cov_*` everywhere. `id` is the row index (source
+  `ID_QUALTRICS` is unique per row but a non-numeric string). No imputation:
+  `imput`, `MICE`, `LOCF`, `mean substitution` have zero occurrences in the
+  paper's full text. PII scan over every string column (email/IP regex,
+  counts only, values never printed) found zero hits; the free-text
+  `DEM_GENDER_2_TEXT` column is dropped.
+- **Batteries not fielded in every country** — all verified as whole-country
+  omissions by design, not sparse damage (every country still present in a
+  given table has ≥975 rows in it): SDO and weather-past drop 1 country
+  (Malaysia; Albania), willvul 1 (Mexico), polsupport 2 (Argentina,
+  Malaysia), weather-future 3 (Brazil, Malaysia, Mexico).
+- **13 covariates carried through**: sample/team, country, continent, survey
+  language, gender, age, age group, education, income (USD; source uses a
+  comma decimal separator, converted), political conservatism, left–right
+  placement, religiosity, urban/rural.
+- **Biblio rows**: `biblio_issue1597.csv` (15 rows). **Done 2026-08-17** —
+  ben-domingue uploaded all 15 tables to Redivis and pasted the biblio rows,
+  then cleared the `irw_output/` files and the staging CSV as usual.
+- **Deliberately excluded**: the single-item measures in the same file
+  (`BENEFIT_ONESELF`, `TRUST_METHOD`, `TRUST_PEW`, `CLIM_TRUST`,
+  `BENEFIT_REGION_MOST`/`_LEAST`) — IRW does not take single-item tables.
+
+## Harvard Dataverse WAF block lifted (2026-08-17)
+
+HMDC replied on ticket #423164 (https://help.hmdc.harvard.edu/Ticket/Display.html?id=423164):
+"Scripted API access restrictions have been lifted. We're keeping an eye on
+site traffic, but hope the traffic mitigation work we've done will prevent us
+from needing to disable it again. Just beware that may be necessary if traffic
+does spike back to where it was before."
+
+Verified independently the same day, not taken on faith:
+- `curl -sS -o /dev/null -w '%{http_code}' https://dataverse.harvard.edu/api/info/version` -> `200`
+- `GET /api/search?q=grit+scale&type=dataset&per_page=2` -> `200` with real
+  dataset JSON (e.g. `doi:10.7910/DVN/VBKUSG`, "Grit scale for Indian Adults").
+  No `x-amzn-waf-action: challenge`, no 202/0-byte response.
+
+So the block was site-wide and temporary exactly as they said, and waiting
+rather than escalating or engineering around it was the right call. No code
+change is needed to recover: the blocked-source handling added during the
+outage is self-clearing — the dataverse `--since` window reopens from
+2026-08-03, the DataCite publisher backfill switches itself off once dataverse
+answers, and candidates parked as retryable re-enter triage on the next run.
+
+**Open action: the first post-restoration run must be deliberately small and
+slow** (see TODO.md item 1b). Their message explicitly reserves the right to
+re-disable scripted access if traffic spikes back, and our self-healing design
+otherwise aims a compounding burst at them the moment they reopen: a two-week
+`--since` window, all 100 terms on a 90-day lookback, and the whole retryable
+backlog re-triaging at once. Subset the terms, cut `max_pages`, raise
+`PER_DOMAIN_DELAY` for that first pass, then return to normal cadence.
+
+## Throttled first post-restoration Dataverse run (2026-08-17)
+
+Executed the small-and-slow first pass required by TODO item 1b, immediately
+after the WAF block lifted.
+
+```
+python3 irw_discover_monthly.py --mode weekly --sources dataverse \
+  --out monthly_candidates_weekly_2026-08-17.csv
+python3 irw_batch_updated.py monthly_candidates_weekly_2026-08-17.csv \
+  --out monthly_triage_weekly_2026-08-17.csv
+```
+
+Deliberately scoped: the 15-term `HIGH_YIELD_TERMS` subset rather than the
+~100-term `TERM_LIST`, and `--sources dataverse` alone so osf/datacite
+couldn't muddy the read on whether Dataverse itself was healthy. ~75 requests
+max at the built-in 0.5s page spacing, a few minutes wall clock.
+
+**Dataverse is genuinely healthy.** All 15 terms returned from a live search;
+all 15 `search_terms_log.csv` rows recorded `sources=dataverse` with no
+`blocked=` segment, which is the honest-degradation machinery affirmatively
+confirming the source was reached (contrast the 2026-08-17 full run's rows,
+which carry the retroactive `blocked=dataverse` correction). Every term's
+`--since` computed to 2026-08-03, confirming that correction took.
+
+5 candidates -> 2 human_assistance, 1 not_item_response, 1 below_min_n,
+1 download_failed.
+
+- The `download_failed` is **not** a WAF re-block: a 403 on
+  `DVN/7P3PFB`, whose license reads "access can be requested from the
+  authors" — a real access restriction. Left out of
+  `repo_triage_seen_keys.csv` for a later retry per normal behavior, but it
+  will keep 403ing; not worth chasing.
+- Two CC0 `human_assistance` rows worth eyes, both flagged only because
+  `resp` had >50 unique values after the melt (the continuous/aggregate
+  heuristic), so both need the usual manual check of whether real ordinal
+  items are in there:
+  - `DVN/TG1GYA` "Wellbeing, Race, Rurality and SES" — N=530,920, 42 items.
+    Large enough to be worth real attention.
+  - `DVN/X2C2PL` preoperative anxiety, gynecologic surgery, Vietnam —
+    N=394, 59 items.
+
+Notably the ~2-week reopened window yielded only 5 candidates from these 15
+terms, so the feared recovery burst was modest in practice. Cleared to return
+to normal cadence (`--mode full`, full source set, scheduled routines).
+
+**Housekeeping:** `dataverse_allowlist_request.md` deleted 2026-08-17 as moot.
+It held the allowlist request Ben sent to support@dataverse.harvard.edu on
+2026-08-17; no allowlist was ever granted or needed, since HMDC lifted the
+restriction site-wide instead (ticket #423164). Full text recoverable from git
+history at commit `06ddd0c` if the block ever returns and a request is worth
+re-sending — but note its central ask (allowlist us specifically) was the
+wrong frame: the restriction was deliberate, temporary, and site-wide, and
+waiting was what actually worked.

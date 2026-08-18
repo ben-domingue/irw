@@ -101,20 +101,68 @@ f<-function(tab) {
   }
   return(testvec)
 }
-out<-list()
+##incremental fetch cache. The loop below can run for hours (~550 tables on a
+##big week) and used to accumulate everything in memory until the single
+##write.csv() at the bottom, so any interruption -- a laptop shutdown, a
+##dropped connection -- threw away the entire run. Each table's stats are now
+##appended to metadata_fetch_cache.csv as soon as they come back, and a re-run
+##reuses whatever is already there and fetches only the remainder. It is a
+##pure cache: deleting the file just means the next run refetches. Entries
+##older than cache.max.age.days are ignored so stale stats can't leak in.
+cache.file<-'metadata_fetch_cache.csv'
+stat.cols<-c("n_responses","n_categories","n_participants","n_items",
+             "responses_per_participant","responses_per_item","density")
+cache.cols<-c("table",stat.cols,"fetched_at")
+cache.max.age.days<-30
+
+read_cache<-function() {
+  empty<-setNames(data.frame(matrix(numeric(0),nrow=0,ncol=length(cache.cols)),
+                             stringsAsFactors=FALSE),cache.cols)
+  if (!file.exists(cache.file)) return(empty)
+  cc<-tryCatch(read.csv(cache.file,stringsAsFactors=FALSE),
+               error=function(e) {
+                 message("  ! unreadable ",cache.file,", ignoring it: ",conditionMessage(e))
+                 NULL
+               })
+  if (is.null(cc) || nrow(cc)==0 || !all(cache.cols %in% names(cc))) return(empty)
+  cc<-cc[,cache.cols]
+  age<-difftime(Sys.time(),as.POSIXct(cc$fetched_at,tz="UTC"),units="days")
+  cc<-cc[!is.na(age) & age<=cache.max.age.days,]
+  cc[!duplicated(cc$table,fromLast=TRUE),] ##newest entry for a table wins
+}
+
+append_cache<-function(tabname,testvec) {
+  row<-as.data.frame(c(list(table=tabname),as.list(testvec),
+                       list(fetched_at=format(Sys.time(),tz="UTC"))),
+                     stringsAsFactors=FALSE)
+  had.file<-file.exists(cache.file)
+  write.table(row[,cache.cols],cache.file,sep=",",row.names=FALSE,
+              col.names=!had.file,append=had.file)
+}
 
 nms<-new.tables[!toadd]
-ii<-match(nms,new.tables)
-if (length(ii)>0) {
-  for (i in ii) {
-    print(which(i==ii))
-    out[[as.character(i)]]<-f(tables[[i]])
+if (length(nms)>0) {
+  cached<-read_cache()
+  cached<-cached[cached$table %in% nms,]
+  if (nrow(cached)>0) message("resuming: ",nrow(cached)," of ",length(nms),
+                              " tables already fetched in ",cache.file)
+  todo<-nms[!(nms %in% cached$table)]
+  for (k in seq_along(todo)) {
+    print(paste0(k,"/",length(todo)," ",todo[k]))
+    i<-match(todo[k],new.tables)
+    testvec<-f(tables[[i]])
+    if (length(testvec)==7) append_cache(todo[k],testvec) else
+      message("  ! giving up on ",todo[k]," -- no stats after 4 attempts")
   }
-  summaries<-data.frame(do.call("rbind",out))
-  summaries$table<-nms[1:nrow(summaries)]
-  library(tidyr)
-  summaries_new<-as_tibble(summaries)
-  length(ii)
+  fetched<-read_cache()
+  fetched<-fetched[fetched$table %in% nms,]
+  dropped<-setdiff(nms,fetched$table)
+  if (length(dropped)>0) message("no stats for ",length(dropped)," table(s), left out of metadata.csv: ",
+                                 paste(dropped,collapse=", "))
+}
+library(tidyr)
+if (length(nms)>0 && nrow(fetched)>0) {
+  summaries_new<-as_tibble(fetched[,c("table",stat.cols)])
   dim(summaries_new)
   head(meta)
   head(summaries_new)

@@ -1557,15 +1557,43 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   column headers mixed with one-off demographic/yes-no items; needs
   careful column-range identification before a script can be written.
 
-- [ ] **Harvard Dataverse is WAF-blocked; watch for it lifting**
-  (2026-08-17, see BATCH_LOG.md). `dataverse.harvard.edu` returns
+- [ ] **2 CC0 `human_assistance` rows from the 2026-08-17 post-restoration
+  Dataverse run** (`monthly_triage_weekly_2026-08-17.csv`). Both were flagged
+  solely by the ">50 unique resp values after melt" continuous/aggregate
+  heuristic, so both need the usual manual look for real ordinal items:
+  - `10.7910/DVN/TG1GYA` "Replication Data for: Wellbeing, Race, Rurality and
+    SES" -- N=530,920, 42 items, CC0. The large one; worth doing first.
+  - `10.7910/DVN/X2C2PL` preoperative anxiety / gynecologic surgery, Vietnam
+    -- N=394, 59 items, CC0.
+
+- [x] **DONE 2026-08-17. Harvard Dataverse WAF block lifted; throttled first
+  run (1b) completed and clean -- see BATCH_LOG.md "Throttled first
+  post-restoration Dataverse run".** 15-term dataverse-only pass: all terms
+  searched live, all log rows recorded `sources=dataverse` with no `blocked=`,
+  5 candidates, no WAF signal (the lone 403 was an author-restricted file).
+  Normal cadence is cleared to resume -- `--mode full`, full source set,
+  scheduled routines. Two CC0 `human_assistance` rows came out of it and are
+  tracked as a separate open item below. Original context retained:
+  HMDC replied on ticket
+  #423164 that scripted API access restrictions have been lifted; they are
+  watching traffic and warn it may be re-disabled if load spikes back.
+  Verified locally the same day: `/api/info/version` -> 200, and a live
+  `/api/search?q=grit+scale` returns real dataset JSON (no challenge).
+  Everything self-heals with no code change -- the `--since` window reopens
+  from 2026-08-03, the DataCite publisher backfill switches itself off, and
+  the retryably-held candidates re-enter triage on the next run. The only
+  remaining work is (1b): **make that first pass small and slow.** Their
+  warning makes this a courtesy we owe them, not just prudence.
+  Historical record of the block follows.
+
+  `dataverse.harvard.edu` had returned
   `x-amzn-waf-action: challenge` / HTTP 202 / 0 bytes on every path,
   from cloud *and* local IPs -- site-wide, not us being flagged, and no
-  UA/backoff fix exists. The pipeline now degrades honestly rather than
-  silently (blocked sources are excluded from the logged `sources=`, and
+  UA/backoff fix existed. The pipeline was made to degrade honestly rather
+  than silently (blocked sources are excluded from the logged `sources=`, and
   DataCite backfills the publisher for *discovery*, and triage now flags
-  blocked candidates retryably instead of retiring them), so nothing is
-  silently lost. Two things remain:
+  blocked candidates retryably instead of retiring them), so nothing was
+  silently lost. Two things remained:
   (1) **ANSWERED 2026-08-17 -- ticket #423164. Nothing further to ask.**
   Harvard University IT has *deliberately and temporarily* restricted
   non-browser API access site-wide, in response to higher-than-usual traffic
@@ -1590,11 +1618,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   re-enters triage at once. Make the first post-restoration pass small and
   slow (subset of terms, reduced `max_pages`, raised `PER_DOMAIN_DELAY`),
   then return to normal cadence.
-  (2) Re-probe occasionally -- `curl -sI https://dataverse.harvard.edu/api/info/version`
-  tells you. When it clears, everything self-heals: the `--since` window
-  reopens from 2026-08-03, the DataCite backfill switches itself off, and
-  the retryable candidates come back on the next triage run. No code change
-  needed, so this is informational, not a chore.
+  (2) ~~Re-probe occasionally~~ **DONE -- cleared 2026-08-17.** Keep the probe
+  (`curl -sI https://dataverse.harvard.edu/api/info/version`) in mind as the
+  first diagnostic if dataverse yields collapse again; HMDC explicitly said
+  they may have to re-disable scripted access if traffic spikes.
 
   **Do NOT wire up OAI-PMH** (an earlier version of this item recommended
   it -- wrong). `dataverse.harvard.edu/oai` does return 200 and is not

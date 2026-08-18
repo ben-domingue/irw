@@ -8,9 +8,9 @@ covers per-table extraction) — this file covers the batching/scheduling layer.
 
 | Path | What it is |
 |---|---|
-| `.cache/extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** |
-| `.cache/extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
-| `.cache/extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
+| `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** |
+| `extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
+| `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `audit_report.csv`. |
 | `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — its `upload_text.py` walks recursively and treats every `.csv` as a table. Ben clears it after uploading. |
 
@@ -68,11 +68,11 @@ Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
 - itemtables/batch_011 already exists (round cap reached)
-- zero rows with status=="pending" in .cache/extraction_batches/queue_state.csv (queue exhausted)
-- .cache/extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
+- zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
+- extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
 To self-cancel: call CronList, find the job whose prompt contains "ITEMTEXT_BATCH_ROUND_V1", call
-CronDelete on its id, append one line to .cache/extraction_batches/round_log.md saying which stop
+CronDelete on its id, append one line to extraction_batches/round_log.md saying which stop
 condition fired and when, then stop. Do nothing else.
 
 ## Step 1 — Claim this round's tables
@@ -95,10 +95,19 @@ in the same message so they run in parallel. Each subagent prompt must tell it t
 - Process its 3 assigned tables ONE AT A TIME via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the
-  source's terseness) -> validate_items.R as a HARD GATE (Step 5) -> on pass write
-  itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a block, write NO CSV and log why.
-  One retry max on transient failures. A partial/honest "couldn't automate this one" is a correct
-  outcome per SKILL.md, not a failure.
+  source's terseness) -> validate_items.R as a HARD GATE (Step 5) -> Step 5b mapping verification
+  (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
+  block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
+  automate this one" is a correct outcome per SKILL.md, not a failure.
+- Do SKILL.md Step 5b for every table whose mapping_basis is not `data_labels`, and append its row
+  to itemtext/mapping_verification.csv (table,batch,mapping_basis,uploaded,route,status,evidence).
+  validate_items.R and audit_batch.R only compare SETS -- they cannot catch item_text mapped to the
+  wrong item code, which is the one error that silently ships wrong content. Step 5b lists eight
+  routes (per-item statistics, response-range fingerprint, implied parameter, subscale blocks,
+  keying polarity, marker item, subscale totals, semantic coherence) plus two exemptions
+  (self-describing codes, explicit code labels in the paper) and the two scripts item_stats.R and
+  mapping_structure.R. status=NO_ROUTE is a legitimate, expected outcome -- record it rather than
+  leaving a table looking checked.
 - Prefer sources that carry embedded labels — .sav/.xlsx/Forms exports very often tie each item
   code to its text directly, which makes the mapping authoritative instead of inferred. Useful
   access tricks: Europe PMC's supplementaryFiles zip endpoint when PMC/publisher links are
@@ -129,12 +138,12 @@ Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R    itemtables/bat
 
 - Table wrote a CSV AND audit_batch.R says PASS or WARN -> status="done". No CSV, or FAIL/ERROR ->
   status="failed". Never leave a table in_progress.
-- If >30% of this round's tables ended up failed: write .cache/extraction_batches/circuit_breaker.flag
+- If >30% of this round's tables ended up failed: write extraction_batches/circuit_breaker.flag
   explaining what happened, self-cancel exactly as in Step 0, log it, and stop.
 
 ## Step 6 — Log, then re-check the cap
 
-- Append an entry to .cache/extraction_batches/round_log.md: batch id, timestamp, table count,
+- Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
 - If this round completed itemtables/batch_011, self-cancel now and log "cap reached".
@@ -145,5 +154,5 @@ Never run upload.py or clean/upload_text.py — uploading is a separate, explici
 
 ## Open items
 
-See the tail of `.cache/extraction_batches/round_log.md` — kept there so the
+See the tail of `extraction_batches/round_log.md` — kept there so the
 list stays next to the run history rather than drifting out of date here.
