@@ -637,3 +637,39 @@ order was reconstructed from keying polarity -- landing on the same permuted adm
 the bakker labels, which is mutual corroboration. `bitew_2020_lte` is a MODIFIED 12-item LTE (items
 reordered, item 12 not an LTE-Q item), so canonical wording was deliberately not substituted.
 `data/beck_2021_covid_burden.py` reads a local xlsx that is not in the repo -- a reproducibility gap.
+
+## batch_009 — 2026-08-17
+
+12 claimed, **12 written, 0 blocked**. audit: 11 PASS + 1 WARN (explained: `51_liking` exists only in
+the brand-name subsample, so ~300 rows vs a 1,197 median — not conflation). Verification: 7 VERIFIED,
+3 NO_ROUTE, 2 NOT_NEEDED.
+
+**The round's major finding: the four `brand_raffaelli_2024_*` tables' item codes do NOT identify
+brands, and one of them is mis-recoded.**
+- The Qualtrics `.qsf` loop table is 59 rows x 10 brand fields with a BlockRandomizer assigning each
+  respondent to one of ten brand lists, so `1_liking` is a loop POSITION carrying a different brand
+  per condition. `data/brand_brand_raffaelli_2024.r` drops `Condition`, making the brand
+  unrecoverable. Confirmed independently on the live table: no condition column, and pooled per-item
+  means span only 4.05-4.70 across 59 supposed brands. Both agents reached this separately. No brand
+  names were shipped as item_text — they would be wrong for ~90% of respondents. Filed **#1656**.
+- **#1657 (verified against the study's own .qsf):** the `lp` (logo-Prolific) subsample of
+  `brand_raffaelli_2024_liking_20` is recoded with a rotated choice map. `Logo_Controls_Prolific.qsf`
+  defines choice id 9 = "Dislike 1" and id 8 = "Like 7", but the script maps 9→7 and 2→1. Every `lp`
+  response is shifted one point down and **1,028 "Dislike" answers are stored as 7**. ~25% of the
+  table's rows. The corrected distribution matches the sibling logo sample's shape; the shipped one
+  does not.
+
+**Second value-label override of the day, verified:** `burkert_2019_whoqol_bref` stores LQ3/LQ4/LQ26
+already reverse-coded against its own value labels — 66.2% of respondents sit at LQ4=5 ("extremely
+dependent on medical treatment") and all three correlate +0.39/+0.34/+0.53 with the other 23 items.
+Anchors shipped reversed. This produced the generalisable rule now in route 6: **reverse-coding
+status is a property of the TABLE, not the instrument** — the corpus holds WHOQOL-BREF stored raw in
+`altahla_2024_whoqol` and pre-reversed here.
+
+**Also new in the skill:** Step 4 now covers items whose wording varies per participant by design
+(`buczel_2022_inoculation_belief`, six counterbalanced scenarios) and piped `${...}` tokens.
+
+Other results: `broadband_inventories` is the 181-item AMBI — one instrument, not a battery, despite
+the plural name — verified with max per-item mean difference 0.000 against the raw file (a
+one-position shift gives 4). `bukurov_2022_sf36` shipped genuinely item-specific anchor sets across
+6 real sections and confirmed direction against the file's own `_highgood` recode.
