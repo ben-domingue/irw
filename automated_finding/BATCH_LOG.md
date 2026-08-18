@@ -9910,3 +9910,73 @@ a re-surfacing of an already-covered deposit, not a new candidate.
   them would have made a sparse block of an otherwise complete table.
 
 Biblio row for the dictionary sheet: `biblio_issue1562.csv` (1 row).
+
+## GitHub issue #233 — Harvard Dataverse DVN/QOO7QX (2026-08-18)
+
+Issue #233 pointed at `doi:10.7910/DVN/QOO7QX`, "PROMIS Pediatric Measure
+Evaluation" (Forrest, deposited 2020-12-21, published 2021-02-16). **CC0 1.0**,
+confirmed on the Dataverse landing page's own license block (`rightsIdentifier:
+CC0-1.0`), not a bare UUID. Not in the dictionary — no `QOO7QX` row, and the
+existing `promis1wave1_*` tables are the *adult* PROMIS Wave 1 study
+(`DVN/0NGAKG`), a different data collection.
+
+**20 new tables**, ~1.38M responses, from `data/forrest_2021_promis_peds.py`.
+Ten PROMIS pediatric item banks, each fielded in a child self-report and a
+parent-proxy edition, calibrated on a sample pooled across school, clinic and
+internet-panel settings:
+
+| construct | child (ids / items) | proxy (ids / items) |
+|---|---|---|
+| family_belonging | 1845 / 55 | 960 / 55 |
+| family_involve | 1845 / 58 | 958 / 58 |
+| global_health | 3635 / 18 | 1807 / 21 |
+| life_satisfaction | 1992 / 56 | 963 / 56 |
+| meaning_purpose | 1895 / 55 | 926 / 55 |
+| phys_activity | 2011 / 79 | 1032 / 79 |
+| phys_stress | 1843 / 43 | 924 / 43 |
+| positive_affect | 1869 / 53 | 909 / 53 |
+| psych_stress | 1874 / 64 | 913 / 64 |
+| strength | 1824 / 25 | 917 / 25 |
+
+Decisions worth recording:
+- **Child and proxy kept as separate files, not merged with a `rater` column.**
+  The two editions are separately-worded, separately-calibrated instruments —
+  the proxy items carry a `_PX`/`_Proxy` suffix and are reworded in the third
+  person ("My child's life was perfect") — so they are two scales, not one
+  scale with two raters.
+- **`id` is `childid` for child files and `parentid` for proxy files.** Each
+  proxy parent appears exactly once and rates exactly one child, so `parentid`
+  identifies the rated child too; `childid` is missing for ~3% of proxy rows
+  and so is not usable there. The global-health proxy file is the exception —
+  it ships no `parentid` at all, and its `childid` is complete and unique.
+- **Non-ordinal first categories dropped, per item.** Five items code a "not
+  applicable" state as category 1 below the ordinal anchors: `PedGlobal9`/`10`
+  (1 = Do not go to school), `PedGlobal12` (1 = Do not work a job), `PAC_M_016`
+  (1 = Did not have recess), `PAC_M_019` (1 = Did not take gym/PE class), plus
+  their proxy twins. Those responses were dropped — it's 728 responses on
+  `PAC_M_016` alone, i.e. common enough to pass a rarity check while still not
+  being a scale point. **"None" is not one of these**: on `PAC_M_029`/`030`/
+  `067` and `PAC_S_003` it is the bottom of a duration scale ("None" / "Less
+  than 15 minutes" / ... / "60 minutes or more") and was kept.
+- **Composites dropped**: `cfull_theta`/`pfull_theta`/`cSF8_theta`/`cSF4_theta`
+  and their SEs (IRT scores), and `pgh7`/`pgh7px` (sum of the PGH-7 items).
+- **Duplicate ids.** Each child file had at most one exactly-duplicated row
+  (dropped as redundant). Four proxy files had one id appearing twice with
+  *conflicting* responses; both records were dropped, since there is no basis
+  for picking one.
+- **Covariates mapped to labels** from the deposit's codebook PDFs (gender,
+  ethnicity, race, setting, chronic condition, respondent relationship, parent
+  education); age and grade left numeric. The race codes are bit-flag values
+  (1/2/4/8/16/32) but no combined value ever occurs, so each maps to one label.
+- Sparse items are genuine, not a processing artifact: `PedGlobal4_Proxy` has
+  176 responses because the source only asked it of 176 parents (the codebook
+  shows 1631 missing), and `Global01_ProxyA`/`ProxyB` are two wordings of the
+  same question, both fielded near-universally.
+
+**Item text is available for every one of these 20 tables** — the deposit ships
+20 codebook PDFs (plus `MySQLWorkbench.pdf` covering the proxy global-health
+items) with the full stem and every response-option label. Item names were kept
+in source form specifically so they join. Worth an `irw-auto-itemtext` pass
+once these are uploaded.
+
+Biblio rows for the dictionary sheet: `biblio_issue233.csv` (20 rows).
