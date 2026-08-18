@@ -3,6 +3,21 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **`biblio_issue233.csv` (20 rows) uploaded/pasted** (confirmed
+  2026-08-18, ben-domingue): GitHub issue #233, Harvard Dataverse
+  `DVN/QOO7QX` "PROMIS Pediatric Measure Evaluation" (CC0 1.0). Ten PROMIS
+  pediatric item banks x child-report/parent-proxy editions = 20 tables,
+  ~1.38M responses, from `data/forrest_2021_promis_peds.py`.
+  `biblio_issue233.csv` and the `irw_output/` CSVs removed from disk. See
+  `BATCH_LOG.md`'s "GitHub issue #233" entry.
+
+- [ ] **Item text available for all 20 `forrest_2021_*` tables**: the
+  `DVN/QOO7QX` deposit ships 20 codebook PDFs (plus `MySQLWorkbench.pdf`,
+  which covers the proxy global-health items) carrying the full stem and
+  every response-option label for each bank. Item names were kept in source
+  form specifically so they join. Worth an `irw-auto-itemtext` pass now that
+  the tables are up.
+
 - [x] **`biblio_issue1562.csv` (1 row) uploaded/pasted** (confirmed
   2026-08-18, ben-domingue): GitHub issue #1562 resolved as a mostly-
   duplicate deposit (its HEXACO-24 block shipped 2026-08-01 as
