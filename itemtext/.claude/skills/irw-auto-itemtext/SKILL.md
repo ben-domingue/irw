@@ -463,6 +463,16 @@ descending order of strength:
    −0.06…−0.36 with every even one, exactly the canonical CSES odd-positive/even-negative
    keying. Verifies polarity per item, not order within a polarity class. Same idea pins
    the reverse-keyed triple {3,4,26} in `altahla_2024_whoqol`.
+   **Reverse-coding status is a property of the TABLE, not of the instrument — check it every
+   time.** The corpus already holds the same instrument stored both ways: WHOQOL-BREF's canonical
+   reverse triple (items 3 pain, 4 medical treatment, 26 negative feelings) is stored RAW in
+   `altahla_2024_whoqol` (item 4 has the table's only negative item-total) and stored ALREADY
+   REVERSED in `burkert_2019_whoqol_bref`, where LQ3/LQ4/LQ26 correlate +0.39/+0.34/+0.53 with the
+   other 23 items and 66% of respondents sit at LQ4=5 — impossible for "extremely dependent on
+   medical treatment" in a general-population sample. In the second case the stored direction also
+   contradicts the file's own value labels, so the shipped anchors were reversed to match the data.
+   Never carry a reverse-key assumption from the instrument, a sibling table, or a previous study.
+
 7. **A marker item.** Some instruments have one item whose distribution is unmistakable —
    EPDS item 10 (self-harm) must be the least endorsed in any community sample
    (`almuqbil_2022_epds`: 0.44 with 73.9% at zero, against 0.80–1.77 for the rest). Pins
