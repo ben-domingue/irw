@@ -91,8 +91,18 @@ override is documented in provenance. Note the diagnostic needs BOTH halves: the
 pattern alone is consistent with either direction depending on which block is satisfaction,
 so read the item content to fix which block is which before concluding anything.
 
-*Variable labels* can be scrambled relative to the column NAME. When both encode item
-identity, they must agree. In `bakker_2020_rses`'s
+*Variable labels* can disagree with the column NAME. When both encode item identity they
+must agree, and when they don't, **the name is at least as likely to be the wrong one** —
+so decide with the data, not with which looks tidier. In `bakker_2020_rses` seven of ten
+RSES columns disagree, and the labels win: `goodqualities303` is labelled "…I am a failure"
+and sits at the floor (mean 1.5 of 4), while `nogood302` is labelled "I have a number of
+good qualities" and sits at the ceiling (3.3). A positively-worded item cannot floor in a
+general sample. Read in column order the labels reproduce a standard circulated RSES
+administration order; the names were assigned by someone numbering columns in the
+instrument's original order without noticing the form was permuted. **Keying polarity and
+item means settle these in minutes** — see routes 6 and 1. When the codes end up meaning
+something other than they look like, say so in a `public_note`: this table's ships one
+warning that its item codes must not be read as item content. In `bakker_2020_rses`'s
 source file (PLOS 10.1371/journal.pone.0227958.s004) they don't: `satisfied301` is labelled
 "I feel that I'm a person of worth", `goodqualities303` is labelled "All in all, I am
 inclined to feel that I am a failure", and three columns carry no label at all — five of
