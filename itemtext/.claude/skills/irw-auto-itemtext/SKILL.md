@@ -37,6 +37,73 @@ Work from inside `itemtext/`. **All output — `{table}__items.csv` files,
 `audit_confirmed.csv`, and `pending_index_notes.csv` — goes in `itemtext/itemtables/`,
 not the `itemtext/` root.**
 
+## The core model — read this before the steps
+
+Everything below is one idea in four parts. The steps implement it; this section is what
+they are implementing, consolidated after reviewing all 50 tables of batches 001-005.
+
+### 1. An itemtext table is a JOIN, not a document
+
+Its value is entirely in linking to `irw::irw_fetch(table)`. Two keys carry that link and
+they fail independently:
+
+| axis | what must hold | what breaks it |
+|---|---|---|
+| `item` ↔ `item_text` | every live `item` appears, spelled exactly as the live data spells it | invented/normalised codes; a positional rename nobody checked |
+| `resp` ↔ `option_text` | every `resp` level a respondent actually used has a row for that item | option rows for one item only; a level omitted; `raw_resp` when the live table is numeric |
+
+`validate_items.R` enforces both as SETS over the whole table, which is necessary and not
+sufficient — an item can lack the levels its own respondents used and still pass, because
+another item supplies those values. `audit_batch.R` closes that gap per item.
+
+### 2. Sources rank, and the ranking is not negotiable
+
+Use the highest available, and say which one you used:
+
+1. **The source data file's own labels.** SPSS variable labels, value labels, spreadsheet
+   column headers. This ties code to text at the source — no inference at all. **Check both
+   levels**: `alsuhibani_2022_npi_s3`'s variable labels are bare column names while its
+   *value* labels carry the forced-choice statements.
+2. **The study's own paper or supplement**, where it reproduces items against codes.
+3. **The published instrument** (canonical wording).
+4. **A third-party reproduction** — clinical-assessment sites, handouts. Last resort, and
+   see the grid trap in Step 4.
+
+Two failures today came from skipping level 1 when it existed: `alsuhibani_2022_gcbs` was
+built from the paper while the study's `.sav` labelled every item (which is how a wording
+error got in), and `altahla_2024_whoqol` shipped a paraphrase while the source headers held
+the canonical text. **Before concluding a source doesn't exist, open the data file.**
+
+### 3. How the IRW `item` code was derived decides how much checking you owe
+
+Read `data/<table>.py|R` and classify. This is the single most useful five minutes in the
+whole process:
+
+| pattern | example | what you owe |
+|---|---|---|
+| code IS the source column name | `mc1`, `HamD3Baixa`, `PADS1` | nothing — there is no mapping step |
+| number-preserving rename | `LOC1`→`LOC_01`, `BBASAL_3`→`barthel_3` | read the dict; it is mechanical |
+| **positional assignment** | `df.columns = ["id"] + ITEMS`, `f"{pfx}{i+1}"` over a column range | **diff shipped `item_text` against the source header at that position** |
+
+10 of the 50 audited tables are positional, and every mapping defect found in review was
+one of them. `data_labels` in provenance does NOT imply inference-free; it describes where
+the words came from, not how the code was assigned.
+
+### 4. Transcribe literally, and disclose every deviation
+
+The output claims to be what the study administered. Three rules:
+
+- **Don't silently normalise.** `ali_2021_isi` shipped canonical ISI wording while its
+  source headers read "NOTICABLE" and "Difficult falling asleep", and the note claimed
+  verbatim transcription. Correcting an obvious source typo is defensible; not saying so
+  is not.
+- **Don't invent structure.** Some instruments have no item stems (see Step 4), some have
+  no option labels, some vary option wording by item. Blank is a valid, meaningful value.
+- **Notes must survive an audit.** Several provenance notes reviewed today asserted things
+  that were false — "transcribed verbatim" when normalised, "not a duplicate upload" when
+  it was a strict subset, "the .sav has no item text" when only the variable labels lacked
+  it. A wrong note is worse than no note, because it stops the next person looking.
+
 ## Output path: CSV-direct, not Sheets-fill
 
 **Confirmed with the user (2026-07-27): this skill writes `{table}__items.csv` directly
@@ -294,14 +361,12 @@ item set, the resp set, the row counts and the whole audit still pass — and th
 ships a plausible, confidently-wrong mapping that no downstream check will ever catch.
 So mapping is verified separately, against numbers, and the outcome is recorded.
 
-There are **two mapping axes**, and they fail independently:
-- `item_text` ↔ `item` — is each item's text attached to the right code? (routes 1–8)
-- `option_text` ↔ `resp` — is each option's text attached to the right level, and is the
-  coding direction right? (route 9, and the reverse-keying signal in route 6)
-
-A table can be right on one and wrong on the other. Verify whichever axis carried
-inference; usually that's the first, but any table built from a categorical source file
-whose IRW `resp` is numeric has made a decision on the second too.
+The two mapping axes are defined in the core model above; routes 1–8 below verify
+`item_text`↔`item`, route 9 verifies `option_text`↔`resp`, and route 6's reverse-keying
+signal touches both. Verify whichever axis carried inference — usually the first, but any
+table built from a categorical source whose IRW `resp` is numeric has made a decision on
+the second too. **Start by classifying the code derivation (core model §3): if it is
+positional, the header diff settles the table faster than any statistical route.**
 
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/item_stats.R <table>
@@ -515,6 +580,28 @@ Rscript .claude/skills/irw-auto-itemtext/scripts/draft_issues_qmd.R itemtables/b
 This writes `fixes/itemtext_issues_draft.md`. It never edits
 `../irw_site/itemtext_issues.qmd` directly — what to tell the public about a dataset is
 an editorial call, so a human reviews and pastes.
+
+### Step 6c-bis — The checklist this all reduces to
+
+Before a table leaves your hands, all of these are true and recorded:
+
+1. `validate_items.R` passes (item set, resp set) — hard gate, Step 5.
+2. You know which of the three code-derivation patterns applies (core model §3), and for
+   positional codes you diffed shipped text against the source header at that position.
+3. You used the highest available source (core model §2) and **opened the data file** before
+   concluding a better source didn't exist.
+4. Every item has an option row for every `resp` level its own respondents used — or the
+   gap is a known response-data defect and you said so.
+5. `section_id` is a single trivial `<table>_1` unless there is real testlet/passage
+   grouping with genuine `section_prompt` text.
+6. `item_text` blank where the instrument has no stems; `option_text` blank where no labels
+   exist; neither padded with numbers.
+7. `resp` is used, not `raw_resp`, unless no scoring key exists anywhere including
+   `data/<table>.py|R`.
+8. Every deviation from literal transcription is named in provenance, and every claim in
+   the note is one you actually checked.
+9. A `mapping_verification.csv` row exists unless `mapping_basis` is `data_labels`.
+10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
