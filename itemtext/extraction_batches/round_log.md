@@ -562,3 +562,16 @@ there, to avoid mixing batches in the staging directory.
 - `alves_2017_hamd17`'s 9 stray out-of-range values on items 6, 14 and 16 are a RESPONSE-DATA
   problem, now filed as ben-domingue/irw#1642 with the `data fix` label rather than put on the
   itemtext issues page. The agitation version mismatch did go on the page (main, 6f12f00, 27 entries).
+- batch_004's 8 staged tables were uploaded and cleared from `clean/`; stamped uploaded=2026-08-17.
+  `ALSECYPIAMH_WU_2022_PHQ` remains held and unstamped (open decision 9).
+- STAGED IN `clean/` (batch_005, all 8): altahla_2024_swls, altahla_2024_whoqol,
+  altahla_2024_whoqol_bref, alves_2017_hamd17, amarilla_2020_barthel, amarilla_2020_eq5d,
+  amarilla_2020_lawton_brody, amarilla_2020_sf12. All 8 pass validate_items.R; staging-dir audit is
+  7 PASS + 1 WARN, the WARN being alves_2017_hamd17 pointing at the response-data defect filed as
+  ben-domingue/irw#1642, not at the item text.
+- ISSUES PAGE (main, 82ba79b, now 30 entries): added the three altahla_2024 language callouts;
+  whoqol_bref's also records that it duplicates altahla_2024_whoqol's responses. alves_2017_hamd17
+  was added earlier (6f12f00).
+- batch_005 now holds only its sidecars. With this, all five batches are through review: 50 tables
+  extracted, 47 uploaded or staged, 3 held (agarwal_2023_dreem blocked at extraction,
+  algner2022_oss, ALSECYPIAMH_WU_2022_PHQ).
