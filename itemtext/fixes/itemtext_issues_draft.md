@@ -7,144 +7,158 @@ before pasting: the sentences below are templated from structured provenance
 fields and are deliberately conservative, so some will read as more alarming
 than the underlying situation warrants.
 
-Source batches: itemtables/batch_006
+Source batches: itemtables/batch_007
 
-## `an_2020_efl_self_regulated` (batch_006)
+## `artistic_preferences` (batch_007)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0240094 S1 Data (.sav, SPSS variable+value labels); S1 Appendix (Chinese TSELSS) -->
-<!-- full note: Item codes Q1-Q49 are the .sav column names, melted verbatim by data/an_2020_efl_self_regulated.py (no positional assignment). Item text = SPSS variable labels, mis-encoded in the file and recovered via latin1->gb18030; leading source numbering ("1.", "12.\t") stripped, otherwise verbatim Chinese including original punctuation. Value labels label only resp 1 and 7; 2-6 left blank rather than padded with their own numbers. Q50/Q51 (gender, age) are not in the live item set. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## an_2020_efl_self_regulated
-This table pools three instruments from the same survey: the TSELSS strategy items (Q1-Q26), an English-learning enjoyment/environment block (Q27-Q33), and a 16-item English language self-efficacy questionnaire (Q34-Q49); item text is in the original Chinese.
-:::
-:::
-```
-
-## `anjum_2022_gad7` (batch_006)
-
-<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0262716 S1 Data (SPSS .sav); data/anjum_2022_anxiety_bangladesh.py -->
-<!-- full note: Item codes E21-E26 are the source .sav's own column names (no rename). item_text from the SPSS variable labels with the leading 'E2x_' prefix stripped; otherwise verbatim, including the source's 'sleep' (for 'stop') in E21 and 'hart' (for 'hard') in E24, which were NOT corrected. option_text/resp from the .sav value labels (labels9/labels10, 0-3), matching LIKERT_MAP in the processing script; per-item label counts in the .sav match the live integer counts cell for cell. -->
+<!-- mapping_basis=data_labels text_source=study_materials source=https://openpsychometrics.org/_rawdata/APS_data.zip (codebook.txt); https://openpsychometrics.org/tests/APS/ -->
+<!-- full note: Item text for items 31-56 transcribed verbatim from the APS_data codebook (TIPI1-10 stems and 7 anchor labels; VCL1-16 words and the check-list instruction). Items 1-30 are painting-pair stimuli with no verbal stem, so item_text is blank and only resp 1/5 carry the codebook's anchors ('strong preference for option A'/'...option B'); resp 2-4 left blank rather than padded. Section prompt for items 1-30 is the test page's Procedure sentence. IRW item codes are POSITIONAL (data/artistic_preferences.R assigns row_number() over the retained columns); the column selection was reproduced from the raw data.csv and all 56 positions matched. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## anjum_2022_gad7
-The IRW table covers 6 of the GAD-7's 7 items; item 1 ('Feeling nervous, anxious, or on edge') is in the source file but was not included in the IRW release. Two item wordings follow the source file's own labels, which differ from canonical GAD-7 wording ('sleep' for 'stop', 'hart' for 'hard').
+## artistic_preferences
+Items 1-30 are image-pair items from the Artistic Preferences Scales (choose which of two paintings you prefer and by how much) and have no text stem; the paintings are distributed with the source dataset. Items 31-40 are the Ten Item Personality Inventory and items 41-56 a 16-word vocabulary check list administered in the same session.
 :::
 :::
 ```
 
-## `AOMT_BR_SF_EDPANAB_Geiger_2021_AOT` (batch_006)
+## `arzamoncunill_2023_epq_clinical` (batch_007)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=OSF osf.io/hx8qt Stage2/Codebook.xlsx (Anonymized_Dataset + response_labels sheets) and Stage2/.../StudyMaterialsEn.pdf p.15; data/AOMT_BR_SF_EDPANAB_Geiger_2021.R -->
-<!-- full note: Item codes are the source CSVs' own column names (dataCleaned_NA/BG.csv), taken verbatim by the processing script; the study codebook keys item wording to those exact variable names, so no positional inference. Instructions verbatim from StudyMaterialsEn.pdf; option labels verbatim from the codebook's response_list_AOT. The four *_rev codes are documented in the codebook as reverse-coded copies, so they carry their parent item's text with reversed option_text. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## AOMT_BR_SF_EDPANAB_Geiger_2021_AOT
-AOT3_rev, AOT5_rev, AOT7_rev and AOT8_rev are reverse-coded duplicates of AOT3, AOT5, AOT7 and AOT8 rather than additional items: same statement, response options in reverse order.
-:::
-:::
-```
-
-## `AOMT_BR_SF_EDPANAB_Geiger_2021_BRS` (batch_006)
-
-<!-- mapping_basis=data_labels text_source=study_materials source=OSF osf.io/hx8qt Stage2/Codebook.xlsx (Anonymized_Dataset + response_labels sheets) and Stage2/.../StudyMaterialsEn.pdf pp.15-16; data/AOMT_BR_SF_EDPANAB_Geiger_2021.R -->
-<!-- full note: Item codes BSR1-10/MOT1-10 are the source CSVs' own column names, taken verbatim by the processing script; the codebook keys wording to those names. Item text and instructions verbatim from the codebook and the materials PDF; option labels verbatim from response_list_BSR_MOT. The instruction block printed for BSR is applied table-wide because the codebook assigns MOT the same response list. -->
+<!-- mapping_basis=paper_explicit text_source=study_materials source=https://doi.org/10.7717/peerj.16246 (PMC10588714); supplement peerj-11-16246-s005.docx -->
+<!-- full note: Supplement S5 maps each database item number to a 'Category of coded statement' descriptor; the 22 numbers it lists for the clinical care area are exactly the 22 E-codes in the live table and exactly the CLINICAL_ITEMS list in data/arzamoncunill_2023_epq.py. item_text = those descriptors verbatim (trailing whitespace stripped); they are short category labels, not the literal Spanish stems, which the paper publishes (appendix S3) only for the 26 items retained in the final questionnaire. The .sav (peerj-11-16246-s004.sav) carries NO variable or value labels -- checked both levels. instructions = the paper's own English rendering of the shared stem ('The desirable software for your center should allow (the following attributes)'); the Spanish original in S3 reads 'EL SOFTWARE DESEABLE PARA SU CENTRO DEBERIA PERMITIR....'. Anchors 'very much disagree' (1) / 'very much agree' (7) from the paper's Methods; 2-6 unlabelled and left blank. Option rows emitted only for the levels each item's own respondents used (E1 has no 3; E11 and E14 have no 2). -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## AOMT_BR_SF_EDPANAB_Geiger_2021_BRS
-This table combines the 10 Bullshit Receptivity Scale items (BSR*) with the 10 motivational-quotation control statements (MOT*) from the same study; both were rated on the same 'profoundness' scale.
+## arzamoncunill_2023_epq_clinical
+Item text here is the study supplement's short category descriptor for each item number, not the literal questionnaire wording: the study administered a 43-item pretest pool but published full item wording only for the 26 items kept in the final questionnaire.
 :::
 :::
 ```
 
-## `APFCompact_Ptacek_2024_DASS-21` (batch_006)
+## `atmadjaja_2026_pos` (batch_007)
 
-<!-- mapping_basis=data_labels text_source=canonical_instrument source=OSF osf.io/cwjxq (Dataset.csv headers); DASS-21, Lovibond & Lovibond 1995 (maic.qld.gov.au DASS-21 form) -->
-<!-- full note: Item codes are the source CSV's own column headers, which carry the canonical DASS-21 item number and subscale letter (S/A/D); those letters match the published DASS-21 subscale key at all 21 positions. Words come from the canonical English DASS-21 form, not the study's own materials, because the Czech translation used is not published in the OSF record or the paper. Typographic apostrophes normalised to ASCII; otherwise verbatim. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## APFCompact_Ptacek_2024_DASS-21
-Item text is the canonical English DASS-21 wording; the study administered a Czech translation that is not published in its materials.
-:::
-:::
-```
-
-## `arnulf_2022_conspiracy_thinking` (batch_006)
-
-<!-- mapping_basis=unknown text_source=unknown source=PLOS ONE 10.1371/journal.pone.0273763 S1 File (.sav) -->
-<!-- full note: BLOCKED, no CSV written. CT2 variable labels are bare codes; the paper does not reproduce the BCTI items and describes it as 15-item while the data hold 14 columns, so no defensible code-to-text tie exists. -->
+<!-- mapping_basis=unknown text_source=unknown source=https://doi.org/10.6084/m9.figshare.32747610.v1 -->
+<!-- full note: BLOCKED, no CSV written. Source xlsx ('Master Data Paper.xlsx', single sheet) has only bare headers No./Name/CQ1-4/POS1-4/EWE1-4/ITS1-4 -- opened and inspected, no second sheet, no codebook, no labels. Figshare record has empty references and related_materials; no companion publication found by title or author search. Neither item wording nor the response-anchor labels are recoverable. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## arnulf_2022_conspiracy_thinking
+## atmadjaja_2026_pos
 The origin of the item text was not recorded during extraction; the basis for the item-to-text alignment was not recorded
 :::
 :::
 ```
 
-## `arnulf_2022_general_knowledge` (batch_006)
+## `audretsch_2021_entrepreneurial_ecosystems` (batch_007)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0273763 S1 File (.sav) variable and value labels -->
-<!-- full note: Item text taken verbatim from each GK column's SPSS variable label (embedded line breaks replaced with a single space); option_text from the columns' value labels (0=Incorrect, 1=Correct), which are scoring labels rather than presented options since the test is open-answer. The .sav label for GK62 reads 'principle street', which the paper's prose spells 'principal'; the .sav wording was kept unaltered. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## arnulf_2022_general_knowledge
-Response options are Correct/Incorrect scoring labels from the source data file - the general-knowledge test was open-answer, so participants did not choose from these.
-:::
-:::
-```
-
-## `arora2025_blueq_pedagogical` (batch_006)
-
-<!-- mapping_basis=data_labels text_source=study_materials source=Harvard Dataverse doi:10.7910/DVN/ZZPUWB, datafile 10809863 (row 2 = item text); anchors/instructions from jeehp 2024;21:31 Supplement 4; paper jeehp 2025;22:5 (PMC11955914) -->
-<!-- full note: Processing script assigns ped1-ped10 positionally to spreadsheet columns 3-12; diffed against the file's own row-2 item-text header at those positions -- exact. Item wording transcribed literally from that header (includes the study's 'i.e.'/'e.g.' spacing). Anchors and section starting prompt are canonical BLUE-Q, not in the data file. -->
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0247609; S2 File (.dta) variable labels + S3 File do-file 'label variable' statements; scale anchors from article sections 4.2-4.3 -->
+<!-- full note: IRW item codes ARE the source .dta column names (data/audretsch_2021_entrepreneurial_ecosystems.py ITEM_COLS), so no mapping step. .dta labels are truncated at Stata's 80-char cap; full text taken from the do-file's label variable commands. Labels transcribed verbatim including an unclosed parenthesis in political_eship and non-standard grammar elsewhere. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## arora2025_blueq_pedagogical
-Response anchors and instructions are taken from the published BLUE-Q instrument; the study's data file records only numeric codes.
+## audretsch_2021_entrepreneurial_ecosystems
+The paper quotes a different wording for the ee_quality item than the study's own data file label; the data file label is what is shipped here. Only the endpoints of the 1-7 scale (1 = very weak, 7 = very strong) are documented, so the intermediate options are blank.
 :::
 :::
 ```
 
-## `arora2025_blueq_synchronous` (batch_006)
+## `autonomysupport_mokken` (batch_007)
 
-<!-- mapping_basis=data_labels text_source=study_materials source=Harvard Dataverse doi:10.7910/DVN/ZZPUWB, datafile 10809863 (row 2 = item text); anchors/instructions from jeehp 2024;21:31 Supplement 4; paper jeehp 2025;22:5 (PMC11955914) -->
-<!-- full note: Positional assignment sync1-sync6 to spreadsheet columns 15-20; diffed against the file's row-2 item-text header at those positions -- exact. Anchors and section starting prompt are canonical BLUE-Q, not in the data file. -->
-
-```
-::: {.g-col-4 .dataset-item}
-::: {.callout-warning collapse='true'}
-## arora2025_blueq_synchronous
-Response anchors and instructions are taken from the published BLUE-Q instrument; the study's data file records only numeric codes.
-:::
-:::
-```
-
-## `art` (batch_006)
-
-<!-- mapping_basis=data_labels text_source=study_materials source=OSF https://osf.io/xacbt/ (mac_art_17_18_19.rda, moh_art.rda); McCarron & Kuperman 2021, Behav Res 53:2226-2237, doi:10.3758/s13428-021-01556-y (PMC8021296) -->
-<!-- full note: Item codes are the source .rda column names verbatim (author names) -- self-describing, no mapping step. item_text repeats the name as presented on the checklist. correct_response=1 for all 50 (all are real published authors; the 50 foils were excluded upstream). option_text is a description of the check-box, not printed label text; instructions are the paper's description of the administered instruction. -->
+<!-- mapping_basis=data_labels text_source=study_materials source=CRAN package mokken 3.1.2, man/autonomySupport.Rd item table (Short/Content) and details; data/mokken.R uses colnames(autonomySupport) verbatim as item codes -->
+<!-- full note: Item codes are the dataset's own column names and the package documentation tables Short-name -> item content directly, so the tie is at the source. Response anchors (1 = not at all/never, 5 = certainly/always) from the same Rd details section. -->
 
 ```
 ::: {.g-col-4 .dataset-item}
 ::: {.callout-warning collapse='true'}
-## art
-Item text is the author name shown on the checklist; the ART has no printed response labels, so 'Checked'/'Not checked' describes the check-box rather than quoting the instrument.
+## autonomysupport_mokken
+Item 'Decide' is reverse-worded in the original questionnaire; the IRW responses are the raw, unreversed scores.
+:::
+:::
+```
+
+## `avilesgonzalez2019_ces` (batch_007)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0217106; S2 File pone.0217106.s002.sav SPSS variable labels and value labels (figshare file 15243404) -->
+<!-- full note: IRW item codes ARE the .sav column names (data/avilesgonzalez2019_ces.py CES_ITEM_COLS). Item text = SPSS variable labels with the leading item number stripped; source typos retained verbatim. option_text = the .sav's own value labels, which are stored in upper case and were rendered in sentence case. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## avilesgonzalez2019_ces
+Item text comes from the study's SPSS file, which stores the English Caring Efficacy Scale wording (with several typographical errors preserved here) even though the respondents were Italian nurses.
+:::
+:::
+```
+
+## `baaziz_2023_sms2` (batch_007)
+
+<!-- mapping_basis=paper_explicit text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0295262, Table 7 (numbered items 1-18, Arabic with English back-translation); Table 2 per-item M/SD; S3 Data xlsx (pone.0295262.s003) -->
+<!-- full note: IRW item codes Item1..Item18 ARE the source .xlsx column names (data/baaziz_2023_sms2.py melts Item1..Item18 by name); no positional assignment. The .xlsx carries no header text, so item text comes from the paper's Table 7, whose item numbers 1-18 match the column numbers. Shipped text is the paper's own English back-translation (the administered language was Arabic; the Arabic wording is printed alongside in Table 7). Only the 7-point scale endpoints are documented (1 = Not at all true, 7 = Very true), so options 2-6 are blank; no instruction text is reproduced in the paper, so instructions is blank. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## baaziz_2023_sms2
+The paper's item 16 ("So that others praise me for what I do") reads as an external-regulation statement but sits in the amotivation subscale block in the data, where it correlates 0.87 with the two amotivation items and near zero with the external-regulation ones - the printed wording for that item looks unreliable.
+:::
+:::
+```
+
+## `baka2023_bpnsf` (batch_007)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=figshare 10.6084/m9.figshare.21988799 (Baza repozytorium Baka.Prusik.sav) SPSS variable labels; response anchors from the same file's value labels -->
+<!-- full note: One .sav serves all four baka2023_* tables (olbi, bpnsf, uwes, jcs). IRW item codes BPNSF_1..BPNSF_24 ARE the source column names with the wave prefix f2/f3 stripped by data/baka2023_jobcrafting.py; no positional assignment. Item text = SPSS variable labels verbatim (Polish, source typos such as 'w prazy' in BPNSF_7 retained). DEVIATION: the .sav's value labels for every BPNSF variable read 1='Strongly agree' .. 7='Strongly disagree', which is contradicted by the data - satisfaction items (1,3,4,7,9,12,13,14,16,19,21,24) correlate +0.28..+0.40 with the UWES mean (whose own 0-6 Never..Always labels are unambiguous) while frustration items correlate -0.02..-0.22, so a high number means agreement. The anchors are therefore shipped in the corrected ascending direction (1 = Strongly disagree, 4 = Neutral, 7 = Strongly agree). Scale points 2,3,5,6 are labelled only with their own digit in the file and are left blank. The sibling OLBI table's descending labels are genuine (all 8 OLBI items, including positively-worded ones, correlate negatively with UWES), so this is specific to BPNSF. No instructions text in the .sav, left blank. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## baka2023_bpnsf
+The study's data file labels the BPNSF response scale as 1 = Strongly agree to 7 = Strongly disagree, but the responses themselves run the other way (need-satisfaction items rise with work engagement), so the anchors here are given in the corrected direction: 1 = Strongly disagree, 7 = Strongly agree.
+:::
+:::
+```
+
+## `baka2023_jcs` (batch_007)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=figshare 10.6084/m9.figshare.21988799 (Baza repozytorium Baka.Prusik.sav) SPSS variable + value labels -->
+<!-- full note: Same .sav as the other three baka2023_* tables. IRW item codes JCS_1..JCS_21 ARE the source column names with the wave prefix stripped (data/baka2023_jobcrafting.py); no positional assignment. Item text = SPSS variable labels verbatim (Polish, including the stray space before the full stop in JCS_3 and before the comma in JCS_19, as stored). option_text = the file's own value labels, 1=Never .. 5=Very often (wave-1 and wave-3 variables carry the English labels, the wave-2 variables the identical Polish set Nigdy..Bardzo często; the English set is shipped). All 21 items use all 5 levels in the live data. No instructions text in the .sav, left blank. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## baka2023_jcs
+Item stems are in Polish as administered, but the response anchors carried by the study's data file are English glosses rather than the Polish wording participants saw.
+:::
+:::
+```
+
+## `baka2023_olbi` (batch_007)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=figshare 10.6084/m9.figshare.21988799 (Baza repozytorium Baka.Prusik.sav) SPSS variable + value labels -->
+<!-- full note: IRW item codes OLBI_1..OLBI_8 ARE the source .sav column names (wave prefix f2/f3 stripped by data/baka2023_jobcrafting.py); no positional assignment. Item text = SPSS variable labels verbatim (Polish); option text = SPSS value labels verbatim (English, 1=Completely agree .. 4=Completely disagree). No instructions text exists in the .sav, left blank rather than invented. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## baka2023_olbi
+Item stems are in Polish as administered, but the response anchors carried by the study's data file are English glosses rather than the Polish wording participants saw.
+:::
+:::
+```
+
+## `baka2023_uwes` (batch_007)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=figshare 10.6084/m9.figshare.21988799 (Baza repozytorium Baka.Prusik.sav) SPSS variable + value labels -->
+<!-- full note: IRW item codes UWES_1..UWES_17 ARE the source .sav column names (wave prefix stripped); no positional assignment. Item text = SPSS variable labels verbatim (Polish UWES-17); option text = SPSS value labels verbatim, 0=Never .. 6=Always, matching the published UWES 0-6 scale and the live resp range 0-6. UWES_10's label had a leading space which was stripped; no other edits. No instructions text in the .sav, left blank. -->
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## baka2023_uwes
+Item stems are in Polish as administered, but the response anchors carried by the study's data file are English glosses rather than the Polish wording participants saw.
 :::
 :::
 ```

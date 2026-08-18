@@ -666,6 +666,45 @@ forced-choice instrument. Its opaque name also hides three instruments (APS 1-30
 stems, because the study published full Spanish wording only for the 26 items retained in its final
 questionnaire while the live table holds all 22 clinical items of the 43-item pretest pool.
 
+**TRIAGED 2026-08-18.** Gates re-run live: `normalize_nulls.R` clean (0 of 11), `audit_batch.R`
+9 PASS + 2 WARN (both already explained in notes.csv, neither an itemtext defect).
+
+- STAGED IN `clean/` (11 -- the whole written batch): artistic_preferences,
+  arzamoncunill_2023_epq_clinical, audretsch_2021_entrepreneurial_ecosystems,
+  autonomysupport_mokken, avilesgonzalez2019_ces, baaziz_2023_sms2, baka2023_bpnsf,
+  baka2023_jcs, baka2023_olbi, baka2023_uwes, bakker_2020_pss10. Nothing held.
+- **`artistic_preferences` decided by Ben (2026-08-18): ship all 56 as-is**, blank `item_text` for
+  the 30 painting-pair items with the public_note explaining the images, matching the
+  `aguirre_camacho_2021_shai` / `alsuhibani_2022_npi_s3` precedent. The alternatives considered were
+  shipping only items 31-56 (fails validate_items.R by design) and holding the table.
+- **The `baka2023_bpnsf` anchor reversal was independently re-verified** (notes.csv asked for a human
+  check before upload). Sorting the 24 items by CONTENT rather than canonical item number gives a
+  clean split against the UWES mean (0-6 Never..Always, unambiguous): all 12 positively-worded items
+  +0.28..+0.40 (freedom of choice +0.37, "did things that really interest me" +0.40), all 12
+  negatively-worded -0.03..-0.22 ("I feel excluded" -0.11, "I feel like a failure" -0.18). The .sav's
+  stated direction would require the opposite. The shipped reversal is correct.
+- Other independent re-checks, all clean: all 70 `baka2023_*` item texts exact against the .sav
+  labels; `audretsch` 15/15 prefix-match against the .dta, with every label at exactly 80 chars
+  extended by the do-file and every label under 80 matching to the character -- textbook Stata
+  truncation; `artistic_preferences`' positional map reproduced from the raw data.csv (56 columns
+  ra1a..v6a, tipi1-10, vcl1-16, so item 31 = tipi1 and item 41 = vcl1); `avilesgonzalez2019_ces`
+  30/30 and `bakker_2020_pss10` 10/10 against their .sav labels. Note the PSS-10 sibling's column
+  names and labels AGREE at all 10 positions -- the naming defect was specific to the RSES table.
+- **`baaziz_2023_sms2`: the "unexplained" items 16-18 mean gap is the study's own supplements
+  disagreeing.** Concatenating the CFA and EFA halves does not reproduce the "Totale" file that IRW
+  is built from (Item17 off by 0.43, Item16 by 0.30, while Item4/5/18 match exactly). The paper's
+  Table 2 matches the Totale file for items 1-15. Separately the item-16 evidence is stronger than
+  the note's "looks unreliable": its printed text is external-regulation content, but it correlates
+  0.88-0.90 with items 17/18 and 0.02/0.04/-0.03 with the three external items, so position 16 is an
+  amotivation item and Table 7 almost certainly misprinted its wording. Neither affects the item
+  mapping, which is a header label match. Not filed as an issue -- both are upstream of IRW.
+- ISSUES PAGE: 10 callouts added (now 49 total). Omitted: `bakker_2020_pss10` (no caveat) and
+  `atmadjaja_2026_pos`, whose auto-generated callout is again templating noise over a blocked table
+  that shipped no text -- the second round where `draft_issues_qmd.R` has done this.
+- **#1655 commented**: `baka2023_olbi` ships 8 of the OLBI's 16 items, a third instance of that
+  pattern -- though here the study's own .sav holds only 8, so it may be a short administration
+  rather than a processing-script drop.
+
 ## batch_008 — 2026-08-17
 
 12 claimed, **12 written, 0 blocked** — the first full round. audit_batch.R: **12/12 PASS**.
