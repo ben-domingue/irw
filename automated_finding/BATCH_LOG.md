@@ -9875,3 +9875,38 @@ history at commit `06ddd0c` if the block ever returns and a request is worth
 re-sending — but note its central ask (allowlist us specifically) was the
 wrong frame: the restriction was deliberate, temporary, and site-wide, and
 waiting was what actually worked.
+
+## GitHub issue #1562 — figshare 7582019 (2026-08-18)
+
+Issue #1562 pointed at
+`10.6084/m9.figshare.7582019.v1` (Da Silva & Ramos 2019, "Incomplete
+Information Choices, Cognitive Ability and Personality", CC BY 4.0).
+
+**Already partly processed.** The deposit's HEXACO-24 block shipped on
+2026-08-01 as `dasilva_2019_hexaco24` via the "human eye" sheet review
+follow-through — the `grep -rl "DOI: <doi>" ../data/*.py` duplicate check
+in Step 3 caught it before any new work was done. Issue #1562 is therefore
+a re-surfacing of an already-covered deposit, not a new candidate.
+
+**What was still unshipped, and is now: 1 new table.**
+- `dasilva_2019_crt.csv` — 3-item Cognitive Reflection Test (bat-and-ball,
+  machines, lily pads), binary correct/incorrect, Portuguese, 211
+  respondents, 633 rows. Scoring is the depositors' own (`Acerto N`
+  columns on the workbook's "Completas" sheet); per-person sums reproduce
+  their `Acertos Total` column exactly (284 = 284), so nothing was
+  re-scored from the free-text answers.
+- **id space is shared with `dasilva_2019_hexaco24`** — both follow "Base
+  de dados" row order, and all 211 CRT ids are a subset of that table's
+  240, so the two tables join per respondent.
+- The join to recover those ids is on the submission timestamp, not the
+  answer text: "Completas" stores cleaned numeric versions of the
+  free-text answers ("100 minutos" → `100.0`), so an answer-text join
+  fails on ~21 rows. One timestamp is shared by two distinct respondents;
+  they're separable because only one answered all three CRT items, which
+  every "Completas" respondent did by definition.
+- **Workbook items 4-6 dropped.** They're a conditional alternate form,
+  shown only to respondents who said they already knew the classic items,
+  and were answered by 22 people — far under the N>=100 floor. Shipping
+  them would have made a sparse block of an otherwise complete table.
+
+Biblio row for the dictionary sheet: `biblio_issue1562.csv` (1 row).
