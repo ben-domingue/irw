@@ -531,3 +531,38 @@ there, to avoid mixing batches in the staging directory.
 - batch_005 now holds only its sidecars. With this, all five batches are through review: 50 tables
   extracted, 47 uploaded or staged, 3 held (agarwal_2023_dreem blocked at extraction,
   algner2022_oss, ALSECYPIAMH_WU_2022_PHQ).
+
+## batch_006 — 2026-08-17 (first round under the consolidated skill)
+
+12 claimed, **11 written, 1 blocked** (8.3% failure, well under the breaker). audit_batch.R: **11/11 PASS**,
+no anomalies. Verification: 7 VERIFIED, 1 PARTIAL, 1 NO_ROUTE, 3 NOT_NEEDED.
+
+The new Step 5b/core-model discipline visibly changed behaviour — agents classified the code
+derivation before extracting, and two positional tables (`arora2025_blueq_pedagogical`,
+`_synchronous`) got the required header diff rather than an assumption.
+
+**Blocked (honest):** `arnulf_2022_conspiracy_thinking`. The shared .sav labels its CT2 columns with
+bare codes and no item-text value labels (its CT1 siblings DO carry them, but those items aren't in
+IRW); the paper describes a 15-item inventory while the data hold 14 columns with no record of which
+was dropped. Recorded `unknown`/`NO_ROUTE` rather than aligning canonical wording by guess.
+
+**Findings worth a human eye:**
+- `APFCompact_Ptacek_2024_DASS-21` is a **complete duplicate** of `ptacek2023_dass21` -- identical item
+  sets, all 6,279 (id,item,resp) triples shared, same 299 ids -- and the older table additionally has
+  cov_gender/cov_age. Neither has itemtext yet. Filed as #1653 (`data fix`); the extracted item text
+  should follow whichever table survives.
+- `anjum_2022_gad7` ships **6 of GAD-7's 7 items**: `E20_Anxiety` exists in the source .sav but the
+  processing script never ships it. Response-data question, not itemtext.
+- `an_2020_efl_self_regulated` pools **three instruments** (TSELSS Q1-26, an enjoyment/environment
+  block Q27-33, and a 16-item English Language Self-Efficacy Questionnaire Q34-49) while the table
+  name signals only the first. Same shape as `AOMT_..._BRS`, which combines the Bullshit Receptivity
+  Scale with motivational-quotation controls. Both carry public_notes.
+- `AOMT_..._AOT`'s 14 codes are a 10-item scale plus 4 reverse-coded duplicates (`AOT3_rev` = 6 - AOT3,
+  confirmed empirically); the duplicates ship the parent text with reversed option_text.
+- `anh_2026_finbehavior`: all nine items sit within 0.04 of the scale midpoint (means 2.980-3.016,
+  SDs 0.956-1.021, n=306). Unusual enough to check the S1 file against. NOTE: the extracting agent
+  reported this as "exactly 3.000 for all nine", which is false -- corrected in notes.csv. Its item
+  text also came from OCR of an image table, so it deserves a transcription spot-check.
+- Verbatim source typos kept and disclosed rather than silently normalised, per the new rule:
+  `anjum_2022_gad7` E21 "not being able to sleep or control worrying" (canonical: "stop"), E24 "hart
+  to sit still"; `arnulf_2022_general_knowledge` "principle street for finance in New York".
