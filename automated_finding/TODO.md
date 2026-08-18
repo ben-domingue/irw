@@ -17,6 +17,30 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   standard continuous-column verification against the paper text before
   deciding (see memory `feedback_continuous_column_verification`).
 
+- [ ] **5 unresolved leads from the PLOS backlog-sweep retriage
+  (2026-08-18)**, all in
+  `plos_monthly_retriage_ha_full_2026-08-18.csv`. The run committed its
+  95-row candidates CSV on branch `automated/plos-backlog-2026-08-18`
+  (commit `3404058`) without running Step 2b, and its message called the 5
+  `human_assistance` rows "for human review"; the retriage has now been
+  run and **none** of them is `human_review`, so no
+  `human_review/human_review_plos_batch30.csv` was warranted. What they
+  actually need:
+  - `aggregate_continuous` (3) -- confirm resp is a genuine continuous
+    per-item response and not a composite/VAS export, per memory
+    `feedback_continuous_column_verification`:
+    `10.1371/journal.pone.0182956` (burnout/coping, N=1322, 62 items),
+    `10.1371/journal.pone.0177240` (construal level & delay discounting,
+    N=135, 13 items), and `10.1371/journal.pone.0289027` (emotions during
+    numerical problems, N=112, 6 items -- this one is `dup_id_item` at
+    ratio 1.0x, so check for a wave column before assuming continuous).
+  - `worth_retrying` (2) -- text-coded Likert item columns needing the
+    standard recode, and both are **already logged** in
+    `human_review/googlesheet_humaneye.csv`, so check that record first:
+    `10.1371/journal.pone.0172835` (muscle fatigue / movement coordination)
+    and `10.1371/journal.pone.0321423` (medication adherence scoping
+    review -- likely not primary item response data at all).
+
 - [x] **Triage script's `good` flag doesn't catch two content-level
   failure modes** -- **fixed 2026-08-17**. Both checks added to
   `irw_triage_updated.py` (not `irw_batch_updated.py` as this item
