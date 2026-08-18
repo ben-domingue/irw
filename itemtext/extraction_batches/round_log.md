@@ -968,6 +968,29 @@ missingness). **STAGED all 12, nothing held.**
   rather than from the draft script's output, per the batch_009 lesson.
 - `busch_2023_stigma`'s table-name mismatch is already tracked as the third case in **#1651**.
 
+- UPLOADED 2026-08-18 (12): the whole batch. Stamped in `itemtables/batch_010/provenance.csv` and
+  `mapping_verification.csv`; CSVs removed from batch_010/, sidecars kept. `clean/` is empty again.
+  **batch_010 is closed complete** — nothing held, nothing blocked, like batch_008.
+
+### State after batches 001 and 006-010 were triaged and closed (2026-08-18)
+
+`mapping_verification.csv` now holds 111 rows, 102 of them stamped as uploaded:
+**60 VERIFIED, 31 NOT_NEEDED, 12 PARTIAL, 8 NO_ROUTE.** Seven tables remain written but unshipped,
+each for a stated reason:
+
+| table | batch | why it is held |
+|---|---|---|
+| `abdullah_2024_hpbbloat_stress` | 001 | `reconstructed` mapping, NO_ROUTE, 3 items |
+| `algner2022_oss` | 002 | 2 of 6 items have no recoverable text |
+| `ALSECYPIAMH_WU_2022_PHQ` | 004 | unverifiable 2-item mapping (#1643) |
+| `APFCompact_Ptacek_2024_DASS-21` | 006 | complete duplicate of `ptacek2023_dass21` (#1653) |
+| `brand_raffaelli_2024_liking_20` | 009 | loop-position codes (#1656) + rotated choice map (#1657) |
+| `brand_raffaelli_2024_liking_24` | 009 | loop-position codes (#1656) |
+| `brand_raffaelli_2024_familiarity_24` | 009 | loop-position codes (#1656) |
+
+Plus two honest extraction blocks that never wrote a CSV: `arnulf_2022_conspiracy_thinking` (007)
+and `atmadjaja_2026_pos` (007), and `agarwal_2023_dreem` (001, copyrighted DREEM).
+
 ## batch_005 retry — 2026-08-18
 
 Re-attempted the 4 tables `batch_005` left BLOCKED. **1 written, 3 still blocked** — but all
