@@ -125,9 +125,17 @@ whole process:
 | code IS the source column name | `mc1`, `HamD3Baixa`, `PADS1` | nothing — there is no mapping step |
 | number-preserving rename | `LOC1`→`LOC_01`, `BBASAL_3`→`barthel_3` | read the dict; it is mechanical |
 | **positional assignment** | `df.columns = ["id"] + ITEMS`, `f"{pfx}{i+1}"` over a column range | **diff shipped `item_text` against the source header at that position** |
+| **script-generated integer** | `row_number()` over `unique(...)` of a multi-file `rbind` | **re-run the script over the raw files** — do not try to infer the order |
 
 10 of the 50 audited tables are positional, and every mapping defect found in review was
-one of them. `data_labels` in provenance does NOT imply inference-free; it describes where
+one of them. A fourth pattern looks unrecoverable and is not: when the code is an
+integer the script itself invents (`row_number()` over `unique(case_lbl)` across an rbind of 19 raw
+files, in `american_multiracial_face`), **re-run the script rather than reason about it**. The
+script is deterministic, the raw files are usually still on the source repository, and the result
+is checkable outright — reproducing per-item n for every item and per-item means to ~1e-15 against
+`irw_fetch()` proves the mapping rather than supporting it, which no statistical route in Step 5b
+can do. Two earlier rounds wrote this table off as "an arbitrary, order-dependent integer
+assignment" without attempting the re-run. `data_labels` in provenance does NOT imply inference-free; it describes where
 the words came from, not how the code was assigned.
 
 ### 4. Transcribe literally, and disclose every deviation
