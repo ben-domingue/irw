@@ -45,6 +45,24 @@ if (length(ii)>0) {
 }
 dim(meta)
 
+##Server-side row count, used when a variable's precomputed `count` statistic
+##comes back NULL. This used to be `df <- tab$to_tibble()`, i.e. download the
+##entire table just to count its rows -- see the longer note in 01_metadata.R.
+##Redivis caps *data export* at 200 GB per rolling 30 days per user and that
+##quota is shared across every source, so this fallback burned the same
+##allowance the core warehouse needs. Queries are not subject to the cap.
+count_resp_via_query<-function(tab) {
+  ref<-tab$qualified_reference
+  sql<-sprintf(paste("SELECT COUNT(*) AS n FROM `%s`",
+                     "WHERE resp IS NOT NULL",
+                     "AND TRIM(CAST(resp AS STRING)) NOT IN ('NA', '')"),
+               ref)
+  res<-redivis$query(sql)$to_tibble()
+  n<-as.numeric(res$n[1])
+  if (length(n)!=1 || is.na(n)) stop("count query returned no value for ",ref)
+  n
+}
+
 f<-function(tab) {
   getvars<-function(tab) {
       variables <- tab$list_variables() 
@@ -52,11 +70,10 @@ f<-function(tab) {
       stats<-lapply(variables,function(x) x$get_statistics() ) 
       ##
       names(stats)<-nms
-      n_responses<-stats$resp$count
+      n_responses<-stats[["resp"]]$count ##[[ ]] not $: $ partial-matches e.g. a lone `resp_time`
       if (is.null(n_responses)) {
-          df <- tab$to_tibble()
-          df<-df[!is.na(df$resp),]
-          n_responses<-length(df$resp)
+          message("  no server-side resp count for ",tab$name,"; counting via query")
+          n_responses<-count_resp_via_query(tab)
       }
       ##
       #n_categories<-stats$resp$numDistinct #see june 13 2025 email 'Redivis API deprecation notice for "statistics" property on variable.get endpoint'

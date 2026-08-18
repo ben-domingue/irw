@@ -46,6 +46,33 @@ if (length(ii)>0) {
 }
 dim(meta)
 
+##Server-side row count, used when a variable's precomputed `count` statistic
+##comes back NULL. This used to be `df <- tab$to_tibble(); sum(!is.na(df$resp))`,
+##i.e. download the entire table just to count its rows. Redivis caps *data
+##export* at 200 GB per rolling 30 days per user and the core warehouse is
+##181.8 GB across its four shards, so a handful of large tables falling into
+##that fallback is enough to burn the month's allowance -- which is what
+##happened on 2026-08-18 (204 GB used account-wide), blocking irw_fetch() for
+##every user and every table until the window rolled over. Queries are not
+##subject to the export cap, and this one returns a single row, so the same
+##number now costs nothing against the quota.
+##
+##`resp` is integer/float on most tables but string on some; where it is a
+##string it can carry a literal "NA" token (and blanks) rather than a true
+##SQL NULL, so both are excluded here to match the non-missing count the
+##`count` statistic reports on the main path.
+count_resp_via_query<-function(tab) {
+  ref<-tab$qualified_reference
+  sql<-sprintf(paste("SELECT COUNT(*) AS n FROM `%s`",
+                     "WHERE resp IS NOT NULL",
+                     "AND TRIM(CAST(resp AS STRING)) NOT IN ('NA', '')"),
+               ref)
+  res<-redivis$query(sql)$to_tibble()
+  n<-as.numeric(res$n[1])
+  if (length(n)!=1 || is.na(n)) stop("count query returned no value for ",ref)
+  n
+}
+
 f<-function(tab) {
   getvars<-function(tab) {
       variables <- tab$list_variables() 
@@ -53,11 +80,10 @@ f<-function(tab) {
       stats<-lapply(variables,function(x) x$get_statistics() ) 
       ##
       names(stats)<-nms
-      n_responses<-stats$resp$count
+      n_responses<-stats[["resp"]]$count ##[[ ]] not $: $ partial-matches e.g. a lone `resp_time`
       if (is.null(n_responses)) {
-          df <- tab$to_tibble()
-          df<-df[!is.na(df$resp),]
-          n_responses<-length(df$resp)
+          message("  no server-side resp count for ",tab$name,"; counting via query")
+          n_responses<-count_resp_via_query(tab)
       }
       ##
       #n_categories<-stats$resp$numDistinct #see june 13 2025 email 'Redivis API deprecation notice for "statistics" property on variable.get endpoint'

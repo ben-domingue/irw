@@ -42,6 +42,27 @@ if (length(ii)>0) {
 }
 dim(meta)
 
+##Distinct-actor count, done server-side. This used to be
+##`df <- tab$to_tibble(); length(unique(c(df$agent_a,df$agent_b)))` -- a full
+##table export on EVERY table, every run, purely to count distinct agents.
+##Redivis caps *data export* at 200 GB per rolling 30 days per user and that
+##quota is shared with the core warehouse (181.8 GB across four shards), which
+##is what got exhausted account-wide on 2026-08-18. Queries are not subject to
+##the cap. COUNT(DISTINCT) ignores NULLs, matching `unique()` on a column with
+##no missing agents -- verified equal to comps_metadata.csv on all 23 tables.
+count_actors_via_query<-function(tab) {
+  ref<-tab$qualified_reference
+  sql<-sprintf(paste("SELECT COUNT(DISTINCT agent) AS n FROM (",
+                     "SELECT CAST(agent_a AS STRING) AS agent FROM `%s`",
+                     "UNION ALL",
+                     "SELECT CAST(agent_b AS STRING) AS agent FROM `%s` )"),
+               ref, ref)
+  res<-redivis$query(sql)$to_tibble()
+  n<-as.numeric(res$n[1])
+  if (length(n)!=1 || is.na(n)) stop("actor count query returned no value for ",ref)
+  n
+}
+
 f<-function(tab) {
     getvars<-function(tab) {
       variables <- tab$list_variables() 
@@ -49,10 +70,9 @@ f<-function(tab) {
       stats<-lapply(variables,function(x) x$get_statistics() ) 
       ##
       names(stats)<-nms
-      n_responses<-stats$winner$count
+      n_responses<-stats[["winner"]]$count
       ##
-      df <- tab$to_tibble()
-      n_actors<-length(unique(c(df$agent_a,df$agent_b)))
+      n_actors<-count_actors_via_query(tab)
       testvec<-c(n_responses=n_responses,
                  n_actors=n_actors
                  )

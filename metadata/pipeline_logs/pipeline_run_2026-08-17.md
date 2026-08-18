@@ -1,0 +1,492 @@
+# IRW metadata pipeline run -- 2026-08-17
+
+## Workflow 1: generate + diff (run_pipeline.sh)
+```
+== Snapshotting current CSVs before running anything ==
+
+== Stage 01: Rscript 01_metadata.R ==
+Warning: No reference id was provided for the dataset, which may cause your code to break if the name changes. Consider using the qualified reference "irw_meta:bdxt"
+[1] 3032    9
+[1] 3032
+Warning: No reference id was provided for the dataset, which may cause your code to break if the name changes. Consider using the qualified reference "item_response_warehouse:as2e"
+Warning: No reference id was provided for the dataset, which may cause your code to break if the name changes. Consider using the qualified reference "item_response_warehouse_2:epbx"
+Warning: No reference id was provided for the dataset, which may cause your code to break if the name changes. Consider using the qualified reference "item_response_warehouse_3:5xaj"
+Warning: No reference id was provided for the dataset, which may cause your code to break if the name changes. Consider using the qualified reference "item_response_warehouse_4:980f"
+[1] "add"
+  [1] "enem_2025_1mil_ch"                                 
+  [2] "enem_2025_1mil_lc"                                 
+  [3] "enem_2025_1mil_cn"                                 
+  [4] "enem_2025_1mil_mt"                                 
+  [5] "lee_2024_swls"                                     
+  [6] "estevezlopez_2016_panas"                           
+  [7] "lopezgomez_2025_mbi_cynicism"                      
+  [8] "xu_2025_hcq_p"                                     
+  [9] "lopezgomez_2025_mbi_exhaustion"                    
+ [10] "altahla_2024_whoqol_bref"                          
+ [11] "lee_2024_panas"                                    
+ [12] "lee_2024_tci"                                      
+ [13] "lopezgomez_2025_mbi_efficacy"                      
+ [14] "lee_2024_social_support"                           
+ [15] "altahla_2024_swls"                                 
+ [16] "gabriel_2026_knowledge_correct"                    
+ [17] "tsai_2017_treeit_h5_memory"                        
+ [18] "schmidt_2017_pds"                                  
+ [19] "monier_2026_sti"                                   
+ [20] "liu_2025_nlgz"                                     
+ [21] "binette_2022_extinction"                           
+ [22] "taylorabdulai_2025_info_source"                    
+ [23] "c19prc_uk_mcbride_2021_tmsi"                       
+ [24] "tsai_2017_treeit_h12_language"                     
+ [25] "zubair_2021_political_support"                     
+ [26] "gholami_2017_periodontal_knowledge"                
+ [27] "silk_2019_hyperactive"                             
+ [28] "liem_2024_cleaner_production"                      
+ [29] "silk_2019_inattentive"                             
+ [30] "tomioka_2022_srh_importance"                       
+ [31] "anh_2026_ai_adoption"                              
+ [32] "jaen_2024_odor_id"                                 
+ [33] "sun_2024_price_value"                              
+ [34] "spain_2024_values_values"                          
+ [35] "szameitat_2015_multitask_examples"                 
+ [36] "c19prc_uk_mcbride_2021_eds_duringpandemic"         
+ [37] "abdullah_2024_hpbbloat_diet"                       
+ [38] "hen-herbst_2025_family_routine_freq"               
+ [39] "vanteffelen_2020_trait_anger"                      
+ [40] "c19prc_uk_mcbride_2021_nationalpride"              
+ [41] "yuebo_2024_netbenefit"                             
+ [42] "pauli_2021_coercion_attitudes"                     
+ [43] "allen_2025_delaydiscount"                          
+ [44] "allen_2025_upps"                                   
+ [45] "liu_2022_fragreading_frq"                          
+ [46] "smpi_lorenzoluaces_2020_gad7"                      
+ [47] "liu_2025_teacher_support"                          
+ [48] "pilch_2021_protection_motivation"                  
+ [49] "reuter_2021_emotions"                              
+ [50] "c19prc_uk_mcbride_2021_aq10"                       
+ [51] "pang_2023_perceived_risk"                          
+ [52] "altahla_2024_whoqol"                               
+ [53] "tomioka_2022_srh_support_types"                    
+ [54] "li_2025_corporate_performance"                     
+ [55] "tsai_2017_treeit_h2_visibility"                    
+ [56] "stoyel_2021_drive_thinness"                        
+ [57] "powell_2018_affect"                                
+ [58] "hua_2023_efl_study_engagement"                     
+ [59] "anh_2026_finbehavior"                              
+ [60] "taylorabdulai_2025_conspiracy"                     
+ [61] "spain_2023_science_interest"                       
+ [62] "stoyel_2021_maturity_fears"                        
+ [63] "anh_2026_digitaltrust"                             
+ [64] "li_2025_socmedia_infoquality"                      
+ [65] "agarwal_2023_dreem"                                
+ [66] "zhang_2024_expertise"                              
+ [67] "li_2025_policy_environment"                        
+ [68] "stoyel_2021_perfectionism"                         
+ [69] "c19prc_uk_mcbride_2021_hopefulness"                
+ [70] "ni_2025_open_innovation"                           
+ [71] "c19prc_uk_mcbride_2021_vaccineattitudes"           
+ [72] "c19prc_uk_mcbride_2021_quarantine_support"         
+ [73] "de_vries_2022_bat_secondary"                       
+ [74] "spain_2024_values_political"                       
+ [75] "transyouth_leshin_2026_parents_posaff"             
+ [76] "moon_2023_pregnancy_stress"                        
+ [77] "nordhoff_2021_safety"                              
+ [78] "zvi_2022_harassment_perception"                    
+ [79] "tsai_2017_treeit_h3_match"                         
+ [80] "wen_2022_pyd"                                      
+ [81] "sun_2024_innovation"                               
+ [82] "derubeis_2017_arsq"                                
+ [83] "zeng_2025_megaproject_msr"                         
+ [84] "ganbat_2022_pollution_disease_risk"                
+ [85] "marquessanchez_2023_kidmed"                        
+ [86] "sun_2024_task_tech_fit"                            
+ [87] "c19prc_uk_mcbride_2021_crt"                        
+ [88] "shinohara_2021_testimony"                          
+ [89] "c19prc_uk_mcbride_2021_family_prelockdown"         
+ [90] "liu_2025_jjqx"                                     
+ [91] "muharam_2022_srq29"                                
+ [92] "mascherini_2021_meddiet"                           
+ [93] "bukurov_2022_sf36"                                 
+ [94] "anh_2026_finsocialization"                         
+ [95] "c19prc_uk_mcbride_2021_humanitarianism"            
+ [96] "yuebo_2024_tk"                                     
+ [97] "spain_2025_ai_datause"                             
+ [98] "dalky_2020_sf36"                                   
+ [99] "pilch_2021_personality_ipip20"                     
+[100] "c19prc_uk_mcbride_2021_protective_behaviours"      
+[101] "li_2024_fa"                                        
+[102] "tsai_2017_treeit_h6_feedback"                      
+[103] "transyouth_leshin_2026_youth_posaff"               
+[104] "schmidt_2017_fas"                                  
+[105] "c19prc_uk_mcbride_2021_dai"                        
+[106] "c19prc_uk_mcbride_2021_contacttracingapp"          
+[107] "c19prc_uk_mcbride_2021_childimpact"                
+[108] "chanal_2020_francais"                              
+[109] "spain_2025_ai_possibilities"                       
+[110] "moon_2023_selfesteem"                              
+[111] "zhu_2026_llm_meteorology_performance"              
+[112] "arzamoncunill_2023_epq_clinical"                   
+[113] "spain_2023_science_benefits"                       
+[114] "ravenscroft_2017_transition"                       
+[115] "de_vries_2022_hexaco_meta"                         
+[116] "c19prc_uk_mcbride_2021_trustinstitutions"          
+[117] "islam_2022_phq9"                                   
+[118] "anh_2026_finliteracy"                              
+[119] "tsai_2017_treeit_h14_document"                     
+[120] "smpi_lorenzoluaces_2020_phq9"                      
+[121] "szameitat_2015_occupation_multitask"               
+[122] "powell_2018_qcae"                                  
+[123] "c19prc_uk_mcbride_2021_protect"                    
+[124] "cucchi_2018_rfq"                                   
+[125] "kilic_2024_mental_toughness"                       
+[126] "stoyel_2021_ineffectiveness"                       
+[127] "chanal_2020_maths"                                 
+[128] "powell_2018_memory"                                
+[129] "rivero_2022_piccolo_father"                        
+[130] "spain_2023_science_dangers"                        
+[131] "taylorabdulai_2025_incentives"                     
+[132] "c19prc_uk_mcbride_2021_eu_identity"                
+[133] "abdullah_2024_hpbbloat_treat"                      
+[134] "transyouth_leshin_2026_parents_dep"                
+[135] "de_vries_2022_hexaco_self"                         
+[136] "zhao_2024_anxiety"                                 
+[137] "c19prc_uk_mcbride_2021_wordsum"                    
+[138] "temesgen_2025_elephant_park_attitude"              
+[139] "c19prc_uk_mcbride_2021_itq"                        
+[140] "pang_2023_perceived_ease_use"                      
+[141] "cucchi_2018_rmet"                                  
+[142] "spain_2023_identity_pride"                         
+[143] "roettl_2018_game_attitude"                         
+[144] "stoyel_2021_body_dissat"                           
+[145] "amarilla_2020_barthel"                             
+[146] "pilch_2021_coping_behavior"                        
+[147] "selm_2019_climate_knowledge"                       
+[148] "c19prc_uk_mcbride_2021_lockdown_contact_behaviours"
+[149] "ellis_2016_calc_instrqual"                         
+[150] "beck_2021_pss10"                                   
+ [ reached 'max' / getOption("max.print") -- omitted 399 entries ]
+[1] "remove"
+character(0)
+[1] 3032    9
+[1] 3032    9
+[1] 1
+[1] 2
+[1] 3
+[1] 4
+[1] 5
+[1] 6
+[1] 7
+[1] 8
+[1] 9
+[1] 10
+[1] 11
+[1] 12
+[1] 13
+[1] 14
+[1]  15 461
+[1] 16
+[1] 17
+[1] 18
+[1] 19
+[1] 20
+[1] 21
+[1] 22
+[1] 23
+[1] 24
+[1] 25
+[1] 26
+[1] 27
+[1] 28
+[1] 29
+[1] 30
+[1] 31
+[1] 32
+[1] 33
+[1] 34
+[1] 35
+[1] 36
+[1] 37
+[1] 38
+[1] 39
+[1] 40
+[1] 41
+[1] 42
+[1] 43
+[1] 44
+[1] 45
+[1] 46
+[1] 47
+[1] 48
+[1] 49
+[1] 50
+[1] 51
+[1] 52
+[1] 53
+[1] 54
+[1] 55
+[1] 56
+[1] 57
+[1] 58
+[1] 59
+[1] 60
+[1] 61
+[1] 62
+[1] 63
+[1] 64
+[1] 65
+[1] 66
+[1] 67
+[1] 68
+[1] 69
+[1] 70
+[1] 71
+[1] 72
+[1] 73
+[1] 74
+[1] 75
+[1] 76
+[1] 77
+[1] 78
+[1] 79
+[1] 80
+[1] 81
+[1] 82
+[1] 83
+[1] 84
+[1] 85
+[1] 86
+[1] 87
+[1] 88
+[1] 89
+[1] 90
+[1] 91
+[1] 92
+[1] 93
+[1] 94
+[1] 95
+[1] 96
+[1] 97
+[1] 98
+[1] 99
+[1] 100
+[1] 101
+[1] 102
+[1] 103
+[1] 104
+[1] 105
+[1] 106
+[1] 107
+[1] 108
+[1] 109
+[1] 110
+[1] 111
+[1] 112
+[1] 113
+[1] 114
+[1] 115
+[1] 116
+[1] 117
+[1] 118
+[1] 119
+[1] 120
+[1] 121
+[1] 122
+[1] 123
+[1] 124
+[1] 125
+[1] 126
+[1] 127
+[1] 128
+[1] 129
+[1] 130
+[1] 131
+[1] 132
+[1] 133
+[1] 134
+[1] 135
+[1] 136
+[1] 137
+[1] 138
+[1] 139
+[1] 140
+[1] 141
+[1] 142
+[1] 143
+[1] 144
+[1] 145
+[1] 146
+[1] 147
+[1] 148
+[1] 149
+[1] 150
+[1] 151
+[1] 152
+[1] 153
+[1] 154
+[1] 155
+[1] 156
+[1] 157
+[1] 158
+[1] 159
+[1] 160
+[1] 161
+[1] 162
+[1] 163
+[1] 164
+[1] 165
+[1] 166
+[1] 167
+[1] 168
+[1] 169
+[1] 170
+[1] 171
+[1] 172
+[1] 173
+[1] 174
+[1] 175
+[1] 176
+[1] 177
+[1] 178
+[1] 179
+[1] 180
+[1] 181
+[1] 182
+[1] 183
+[1] 184
+[1] 185
+[1] 186
+[1] 187
+[1] 188
+[1] 189
+[1] 190
+[1] 191
+[1] 192
+[1] 193
+[1] 194
+[1] 195
+[1] 196
+[1] 197
+[1] 198
+[1] 199
+[1] 200
+[1] 201
+[1] 202
+[1] 203
+[1] 204
+[1] 205
+[1] 206
+[1] 207
+[1] 208
+[1] 209
+[1] 210
+[1] 211
+[1] 212
+[1] 213
+[1] 214
+[1] 215
+[1] 216
+[1] 217
+[1] 218
+[1] 219
+[1] 220
+[1] 221
+[1] 222
+[1] 223
+[1] 224
+[1] 225
+[1] 226
+[1] 227
+[1] 228
+[1] 229
+[1] 230
+[1] 231
+[1] 232
+[1] 233
+[1] 234
+[1] 235
+[1] 236
+[1] 237
+[1] 238
+[1] 239
+[1] 240
+[1] 241
+[1] 242
+[1] 243
+[1] 244
+[1] 245
+[1] 246
+[1] 247
+[1] 248
+[1] 249
+[1] 250
+[1] 251
+[1] 252
+[1] 253
+[1] 254
+[1] 255
+[1] 256
+[1] 257
+[1] 258
+[1] 259
+[1] 260
+[1] 261
+[1] 262
+[1] 263
+[1] 264
+[1] 265
+[1] 266
+[1] 267
+[1] 268
+[1] 269
+[1] 270
+[1] 271
+[1] 272
+[1] 273
+[1] 274
+[1] 275
+[1] 276
+[1] 277
+[1] 278
+[1] 279
+[1] 280
+[1] 281
+[1] 282
+[1] 283
+[1] 284
+[1] 285
+[1] 286
+[1] 287
+[1] 288
+[1] 289
+[1] 290
+[1] 291
+[1] 292
+[1] 293
+[1] 294
+[1] 295
+[1] 296
+[1] 297
+[1] 298
+[1] 299
+[1] 300
+[1] 301
+[1] 302
+[1] 303
+[1] 304
+[1] 305
+[1] 306
+[1] 307
+[1] 308
+[1] 309
+[1] 310
+[1] 311
+[1] 312
+[1] 313
+[1] 314
+[1] 315
+[1] 316
+[1] 317
+[1] 318
+[1] 319
+[1] 320
+[1] 321
+[1] 322
