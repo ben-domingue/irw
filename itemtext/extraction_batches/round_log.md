@@ -1007,13 +1007,25 @@ You have exported 204GB in the past 30 days...
 `tbl$get()` still works (metadata, row counts); only data export is blocked. This affects everything
 that calls `irw_fetch` — the metadata pipeline, vignettes, other sessions — not just itemtext.
 
-**Cause, plainly: the priority block was ordered by response volume, so it pointed twelve parallel
-agents at the twelve largest tables in the corpus, and `irw_fetch` downloads whole tables.**
-`condon_2024_sapa_personality` is 68M rows, `criticalperiod_syntax` 107M, `emidy2024_fevs` 48M. The
-hard gate they were feeding (`validate_items.R`) needs only `unique(item)` and `unique(resp)` — a few
-dozen values. We egressed hundreds of millions of rows to compute them. Sorting the queue by size was
-the right call for value per round and the wrong call for this, and nothing in the protocol connected
-the two.
+**Attribution, corrected 2026-08-18 after measuring rather than assuming.** My first writeup said
+this round caused the exhaustion. That is overstated, and the numbers say so: the twelve round-1
+tables total **10.1 GB** for one full export each (`condon_2024_sapa_personality` 4.55 GB,
+`criticalperiod_syntax` 3.31 GB, `ftna_kasper_2022` 0.68 GB, the rest under 0.6 GB). Add this
+session's triage — `audit_batch.R` over batches 007-010 (47 mostly-small tables), three
+`resp_check.R` passes, assorted single fetches — and the session's plausible total is on the order of
+**15-25 GB**, not 204 GB. The round was the straw, not the load.
+
+What actually consumed the other ~180 GB inside the rolling window is not determinable from here
+(other sessions, vignette work, the tag pipeline and the manuscript analyses all fetch tables, and
+`metadata/01_metadata.R` has a `to_tibble()` fallback for any table whose server-side `resp` count
+comes back NULL). **The structural fact is the one that matters: the core warehouse is 181.8 GB
+across its four datasets, so any workflow that exports every table once consumes ~91% of the monthly
+allowance in a single pass.** With a cap that tight relative to the corpus, exhaustion was going to
+happen; this round is simply when it did.
+
+The pipeline-side lesson stands regardless: `irw_fetch` always exports the whole table, and the hard
+gate it feeds (`validate_items.R`) needs only `unique(item)` and `unique(resp)` — a few dozen values.
+Egressing 68 million rows to compute 135 item codes is indefensible whoever spends the quota.
 
 **Compounding it, the error is misreported.** `irw:::.irw_handle_datasource_error` returns
 `invisible(NULL)` for any error that is not invalid/auth/not_found whenever more than one core
