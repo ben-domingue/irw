@@ -350,7 +350,18 @@ verifying.
    directly checkable with irw::irw_fetch, and three already have more precise replacement wording
    drafted in fixes/itemtext_issues_suggestions.md pending the fixes/ upload. Expect some entries
    to be resolvable/removable and some to need sharpening.
-9. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
+9. **OPEN DECISION (Ben, deferred 2026-08-17 -- revisit after batch_005): ship or hold
+   `ALSECYPIAMH_WU_2022_PHQ`.** The only NO_ROUTE left in a shippable batch. Its mapping rests on
+   the "column N = instrument item N" convention that `almuqbil_2022_epds` and `altahla_2024_swls`
+   also rest on and that shipped; the differences are that PHQ has no marker item to corroborate it
+   and only two items, so a wrong guess affects the whole table. Currently HELD in batch_004.
+10. **OPEN DECISION (Ben, deferred 2026-08-17): should itemtext_issues.qmd carry EXPLANATORY entries
+   as well as discrepancy ones?** Prompted by `alsuhibani_2022_npi_s3`, whose `item_text` is 100%
+   empty -- correct for a forced-choice instrument (all text is in option_text) but liable to look
+   broken to a user. Under the current bar (concrete text-vs-table mismatches only) it gets no
+   entry, which is why it was left off. Same question would apply to `aguirre_camacho_2021_shai`
+   and `alsuhibani_2022_npi_s3` as a class.
+11. Still not started from the older list: re-triage the 218 BLOCKED availability-audit tables
    (batches 002-005 found access tricks that postdate the triage); the four `himmelstein-*`
    tables that fall between both audits.
 
