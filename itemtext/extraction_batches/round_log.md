@@ -1069,9 +1069,18 @@ Sidecars merged; queue reconciled (nothing left `in_progress`); `mapping_verific
 >   on the quota error; its mapping is nonetheless confirmed by the SQL gate above. **This is the
 >   pilot's headline measurement: evidence-as-code works.**
 > - **`normalize_nulls.R`: clean, 0 of 12 changed.**
-> - Still unrun: **`audit_batch.R`** alone, because it calls `irw_fetch` for per-item coverage.
->   That check is expressible as a `GROUP BY` (see `table_sets.R`) and rewriting it is the obvious
->   next tooling step.
+> - **`audit_batch.R` rewritten onto the query path and run: 7 PASS + 5 WARN, item and resp sets
+>   TRUE for all 12.** Everything it needs from live data — the item set, the resp set, each item's
+>   own resp levels, each item's row count — is a single `GROUP BY`, so it no longer downloads the
+>   response tables at all. `irw_fetch` survives only as a fallback if the query route itself fails.
+>   All five WARNs are the row-count-spread check firing on things the extracting agents had already
+>   documented, and each is now explained in `notes.csv`: FEVS routes q82-q84 to respondent subsets;
+>   `ftna_kasper_2022`'s three shared subject codes appear in both waves; `geography` is an ADAPTIVE
+>   practice system so per-item n varies by design; `sapa_personality` uses planned missingness;
+>   `twod_rotation_mather2023` has 70 retained items at n>10000 against 234 pilot items near 1,224,
+>   plus the expected 100% blank item_text for an image-stimulus instrument. **No defects.**
+>
+> **All four gates have now run. batch_011 is fully verified and ready to triage.**
 >
 > **`emidy2024_fevs` IS live** — 49M rows, 1.76 GB, in `item_response_warehouse_3`. Its agent
 > reported the table as not-yet-uploaded; that was the misleading "table does not exist in IRW"

@@ -1,7 +1,16 @@
 # Usage: Rscript audit_batch.R <batch_dir> [output_csv]
 #
 # Batch-level sanity audit: for every <table>__items.csv in <batch_dir>,
-# merges it against the live Redivis response data (irw::irw_fetch(table))
+# merges it against the live Redivis response data.
+#
+# It does NOT download the response tables. Everything this script needs from
+# live data -- the item set, the resp set, each item's own resp levels, and each
+# item's row count -- is one GROUP BY, so it asks Redivis for the summary instead
+# of exporting the rows to compute it here. That is both faster and quota-safe:
+# on 2026-08-18 the account's 200GB/30-day export limit was exhausted, and since
+# the core warehouse is 181.8GB a single full pass over it spends ~91% of a
+# month's allowance. Exports are capped; queries are not. irw::irw_fetch() is
+# kept only as a fallback for the case where the query route itself fails.
 # and runs the same checks validate_items.R does per-table (item-set,
 # resp-set, required columns) PLUS the checks SKILL.md's Step 5 calls out
 # as necessary but that validate_items.R doesn't currently automate:
@@ -59,6 +68,52 @@ error_row <- function(table, note) {
          pct_option_text_missing = NA, note = note)
 }
 
+# ---------------------------------------------------------------------------
+# live_summary(table): one row per (item, resp) with a count, straight from a
+# server-side GROUP BY. resp is NULL for rows whose stored value is the literal
+# "NA" token or blank, which is how irw_fetch() coerces them -- keeping those
+# rows in the count matters, because the row-count anomaly check below compares
+# each item's TOTAL rows, missingness included.
+#
+# The core warehouse is sharded across four datasets and a table lives in
+# exactly one; resolving it costs a metadata read, which is not an export.
+CORE_DATASETS <- c("item_response_warehouse:as2e", "item_response_warehouse_2:epbx",
+                   "item_response_warehouse_3:5xaj", "item_response_warehouse_4:980f")
+
+live_summary <- function(table) {
+    q <- NULL
+    for (ds in CORE_DATASETS) {
+        ok <- tryCatch({
+            tb <- redivis::redivis$user("datapages")$dataset(ds)$table(table)
+            suppressWarnings(tb$get())
+            TRUE
+        }, error = function(e) FALSE)
+        if (ok) { q <- sprintf("datapages.%s.%s", sub(":.*$", "", ds), table); break }
+    }
+    if (!is.null(q)) {
+        out <- tryCatch({
+            sql <- sprintf(paste(
+                "SELECT CAST(item AS STRING) AS item,",
+                "  CASE WHEN resp IS NOT NULL AND TRIM(CAST(resp AS STRING)) NOT IN ('NA','')",
+                "       THEN CAST(resp AS FLOAT64) END AS resp,",
+                "  COUNT(*) AS n",
+                "FROM `%s` GROUP BY 1, 2"), q)
+            d <- suppressWarnings(redivis::redivis$query(sql)$to_tibble())
+            data.frame(item = as.character(d$item), resp = as.numeric(d$resp),
+                       n = as.numeric(d$n), stringsAsFactors = FALSE)
+        }, error = function(e) NULL)
+        if (!is.null(out) && nrow(out)) return(out)
+    }
+    # Fallback: the old whole-table export. Only reached if the query route
+    # failed outright -- it is the expensive path, not the default one.
+    df <- irw::irw_fetch(table)
+    agg <- stats::aggregate(list(n = rep(1L, nrow(df))),
+                            by = list(item = as.character(df$item),
+                                      resp = suppressWarnings(as.numeric(df$resp))),
+                            FUN = sum, na.action = stats::na.pass)
+    agg[, c("item", "resp", "n")]
+}
+
 audit_one <- function(path) {
     table <- sub("__items\\.csv$", "", basename(path))
     items <- tryCatch(read.csv(path, stringsAsFactors = FALSE),
@@ -67,10 +122,10 @@ audit_one <- function(path) {
         return(error_row(table, "could not read csv"))
     }
 
-    df <- tryCatch(irw::irw_fetch(table), error = function(e) NULL)
-    if (is.null(df)) {
+    live <- tryCatch(live_summary(table), error = function(e) NULL)
+    if (is.null(live) || !nrow(live)) {
         return(error_row(table,
-            "irw::irw_fetch() failed -- table not found on Redivis or network issue"))
+            "could not read live data -- table not found on Redivis, or the query and fetch routes both failed"))
     }
 
     notes <- character(0)
@@ -98,7 +153,7 @@ audit_one <- function(path) {
                     else if ("resp_raw" %in% names(items)) "resp_raw" else NA
 
     # -- item set match --
-    live_items <- unique(df$item)
+    live_items <- unique(live$item)
     cand_items <- unique(items$item)
     missing_items <- setdiff(live_items, cand_items)
     extra_items <- setdiff(cand_items, live_items)
@@ -116,7 +171,7 @@ audit_one <- function(path) {
 
     # -- resp set match (skipped when using raw_resp by design) --
     if (has_resp) {
-        live_resp <- sort(unique(df$resp))
+        live_resp <- sort(unique(live$resp))
         cand_resp <- sort(unique(items$resp))
         missing_resp <- setdiff(live_resp, cand_resp)
         extra_resp <- setdiff(cand_resp, live_resp)
@@ -155,7 +210,8 @@ audit_one <- function(path) {
     # A matching item *set* doesn't rule out one item code silently standing
     # in for two different questions -- flag items whose live row count is a
     # clear outlier relative to the table's typical per-item row count.
-    live_counts <- table(df$item)
+    # one row per (item, resp) in `live`, so weight by n to get the row count
+    live_counts <- tapply(live$n, live$item, sum)
     if (length(live_counts) >= 3) {
         med <- stats::median(live_counts)
         if (med > 0) {
@@ -216,7 +272,7 @@ audit_one <- function(path) {
             # finer-grained version of the check above and would have caught the
             # alkouri_2025_* defect on its own.
             if ("resp" %in% names(items)) {
-                live_lv <- tapply(suppressWarnings(as.numeric(df$resp)), df$item,
+                live_lv <- tapply(live$resp, live$item,
                                   function(v) sort(unique(v[!is.na(v)])))
                 cand_lv <- tapply(suppressWarnings(as.numeric(items$resp)), items$item,
                                   function(v) sort(unique(v[!is.na(v)])))
@@ -261,8 +317,8 @@ audit_one <- function(path) {
         n_items_live = length(live_items),
         n_items_candidate = length(cand_items),
         item_set_match = length(missing_items) == 0 && length(extra_items) == 0,
-        resp_set_match = if (has_resp) length(setdiff(sort(unique(df$resp)), sort(unique(items$resp)))) == 0 &&
-                                        length(setdiff(sort(unique(items$resp)), sort(unique(df$resp)))) == 0
+        resp_set_match = if (has_resp) length(setdiff(sort(unique(live$resp)), sort(unique(items$resp)))) == 0 &&
+                                        length(setdiff(sort(unique(items$resp)), sort(unique(live$resp)))) == 0
                           else NA,
         uses_raw_resp = !is.na(raw_resp_col),
         canonical_nulls = canonical_nulls,
