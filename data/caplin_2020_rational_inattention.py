@@ -24,14 +24,16 @@
 # with no unit conversion. `date/time` (session start, constant per
 # participant) is parsed to Unix seconds.
 #
-# `max` and `mudding` are between-subject design covariates, not per-round
-# noise: both are constant within each of the 814 participants (one value
-# for all 40 of their rounds) and vary across participants (`max` in
-# {1,2,3,6}, `mudding` in {2,3}). The analysis code refers to `max`
-# explicitly as the "difficulty treatment" throughout (e.g. "in the
-# separate difficulty treatments", grouping by `df['max']`), so it's
-# carried through as `cov_difficulty`; `mudding` is carried through as
-# `cov_mudding`.
+# `max` is a between-subject design covariate, not per-round noise: it's
+# constant within each of the 814 participants (one value for all 40 of
+# their rounds) and varies across participants (`max` in {1,2,3,6}). The
+# analysis code refers to it explicitly as the "difficulty treatment"
+# throughout (e.g. "in the separate difficulty treatments", grouping by
+# `df['max']`), so it's carried through as an unprefixed `difficulty`
+# column, matching `incentives` below rather than `cov_*` -- it's a
+# manipulated experimental condition, not a demographic attribute of the
+# person. `mudding` (also between-subject, `{2,3}`) is dropped per
+# request.
 #
 # `Incentives` (the paper's core manipulated variable -- the monetary
 # incentive on offer that round) varies both across participants at a
@@ -90,8 +92,7 @@ def convert():
         "time_round": "rt",
         "age": "cov_age",
         "sex": "cov_sex",
-        "max": "cov_difficulty",
-        "mudding": "cov_mudding",
+        "max": "difficulty",
         "Incentives": "incentives",
     })
 
@@ -104,8 +105,8 @@ def convert():
         .astype("int64") // 10**9
     )
 
-    long = df[["id", "item", "resp", "rt", "date", "incentives", "cov_age",
-               "cov_sex", "cov_difficulty", "cov_mudding"]].copy()
+    long = df[["id", "item", "resp", "rt", "date", "incentives", "difficulty",
+               "cov_age", "cov_sex"]].copy()
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
