@@ -3645,3 +3645,4 @@ date,query,output_file,notes
 2026-08-17,growth mindset,monthly_candidates_weekly_2026-08-17-2.csv,"monthly automated run; 5 candidates; sources=osf,dataverse,datacite; since=2026-05-19"
 2026-08-18,[full] 100 terms x journals=plosone,plos_monthly_candidates_full_2026-08-18.csv,plos monthly-script automated run; mode=full; 95 candidates triaged; 100/100 terms visited (95 hit per-term cap 1)
 2026-08-18,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-08-18.csv,plos monthly-script automated run; mode=weekly; 56 candidates triaged; 15/15 terms visited (14 hit per-term cap 4)
+2026-08-19,"[full] 100 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",runs/pmc_monthly_candidates_full_2026-08-19.csv,pmc monthly-script automated run; mode=full; 13 candidates triaged; 100/100 terms visited (13 hit per-term cap 1)
