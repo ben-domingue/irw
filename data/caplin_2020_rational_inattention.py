@@ -24,16 +24,27 @@
 # with no unit conversion. `date/time` (session start, constant per
 # participant) is parsed to Unix seconds.
 #
+# `max` and `mudding` are between-subject design covariates, not per-round
+# noise: both are constant within each of the 814 participants (one value
+# for all 40 of their rounds) and vary across participants (`max` in
+# {1,2,3,6}, `mudding` in {2,3}). The analysis code refers to `max`
+# explicitly as the "difficulty treatment" throughout (e.g. "in the
+# separate difficulty treatments", grouping by `df['max']`), so it's
+# carried through as `cov_difficulty`; `mudding` is carried through as
+# `cov_mudding`.
+#
 # Dropped as not fitting the schema: `Score` (a cumulative running total
 # across rounds -- a composite, not a raw response), `BonusResult` and
 # `Clock Stop Digits` (derived/ambiguous, not raw responses), and the
-# per-round stimulus-design columns (`Incentives`, `Decoys/*`,
-# `non-decoys/*`, `Number of Shape/*`, `Round Mudding/*`, `m`, `max`,
-# `mudding`, `n`) -- these vary at the person-round level (not constant
-# per item), so they don't fit either `cov_*` (person-invariant) or
-# `itemcov_*` (item-invariant), and there's no standard response-level
-# column for them. `N` and `TotalRound` are constant across the whole
-# file (24 and 40 respectively) and carry no information.
+# per-round stimulus-design columns `Incentives`, `Number of Shape/*`, and
+# `Round Mudding/*` -- these vary both across participants at a fixed
+# Round *and* across rounds within a fixed participant (verified), so
+# they're genuinely per-trial randomized content with no home in either
+# `cov_*` (person-invariant) or `itemcov_*` (item-invariant), and there's
+# no standard response-level column for them. `Decoys/*` and
+# `non-decoys/*` take a single fixed value across the entire file (always
+# octagon/decagon vs. seven-sided/nine-sided) and carry no information, as
+# do `m`, `n`, `N`, and `TotalRound` (each constant across all 32,560 rows).
 #
 # No PII: `usercode` is an anonymized hash, no names/emails/GPS present.
 
@@ -70,6 +81,8 @@ def convert():
         "time_round": "rt",
         "age": "cov_age",
         "sex": "cov_sex",
+        "max": "cov_difficulty",
+        "mudding": "cov_mudding",
     })
 
     df["item"] = df["item"].astype(int).map(lambda n: f"round_{n:02d}")
@@ -80,7 +93,8 @@ def convert():
         .astype("int64") // 10**9
     )
 
-    long = df[["id", "item", "resp", "rt", "date", "cov_age", "cov_sex"]].copy()
+    long = df[["id", "item", "resp", "rt", "date", "cov_age", "cov_sex",
+               "cov_difficulty", "cov_mudding"]].copy()
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
