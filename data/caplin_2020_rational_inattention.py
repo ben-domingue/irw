@@ -33,18 +33,27 @@
 # carried through as `cov_difficulty`; `mudding` is carried through as
 # `cov_mudding`.
 #
+# `Incentives` (the paper's core manipulated variable -- the monetary
+# incentive on offer that round) varies both across participants at a
+# fixed Round and across rounds within a fixed participant, the same
+# variation pattern as `rt`. Unlike `rt`, it isn't one of the schema's
+# named response-level columns (`wave`/`treat`/`rt`/`date`), and it isn't
+# person-invariant (`cov_*`) or item-invariant (`itemcov_*`) either --
+# there's no documented slot in datastandard.md for a third arbitrary
+# response-level value. Kept anyway per explicit request, as a plain
+# unprefixed `incentives` column so it isn't mistaken for a `cov_*`/
+# `itemcov_*` field with those invariance guarantees.
+#
 # Dropped as not fitting the schema: `Score` (a cumulative running total
 # across rounds -- a composite, not a raw response), `BonusResult` and
 # `Clock Stop Digits` (derived/ambiguous, not raw responses), and the
-# per-round stimulus-design columns `Incentives`, `Number of Shape/*`, and
-# `Round Mudding/*` -- these vary both across participants at a fixed
-# Round *and* across rounds within a fixed participant (verified), so
-# they're genuinely per-trial randomized content with no home in either
-# `cov_*` (person-invariant) or `itemcov_*` (item-invariant), and there's
-# no standard response-level column for them. `Decoys/*` and
-# `non-decoys/*` take a single fixed value across the entire file (always
-# octagon/decagon vs. seven-sided/nine-sided) and carry no information, as
-# do `m`, `n`, `N`, and `TotalRound` (each constant across all 32,560 rows).
+# per-round stimulus-design columns `Number of Shape/*` and
+# `Round Mudding/*` -- same person-and-item-varying pattern as
+# `Incentives` above, but without that variable's direct role in the
+# paper's design to justify the deviation. `Decoys/*` and `non-decoys/*`
+# take a single fixed value across the entire file (always octagon/decagon
+# vs. seven-sided/nine-sided) and carry no information, as do `m`, `n`,
+# `N`, and `TotalRound` (each constant across all 32,560 rows).
 #
 # No PII: `usercode` is an anonymized hash, no names/emails/GPS present.
 
@@ -83,18 +92,20 @@ def convert():
         "sex": "cov_sex",
         "max": "cov_difficulty",
         "mudding": "cov_mudding",
+        "Incentives": "incentives",
     })
 
     df["item"] = df["item"].astype(int).map(lambda n: f"round_{n:02d}")
     df["resp"] = pd.to_numeric(df["resp"], errors="coerce")
     df["rt"] = pd.to_numeric(df["rt"], errors="coerce")
+    df["incentives"] = pd.to_numeric(df["incentives"], errors="coerce")
     df["date"] = (
         pd.to_datetime(df["date/time"], format="%d/%m/%Y - %H:%M:%S", errors="coerce")
         .astype("int64") // 10**9
     )
 
-    long = df[["id", "item", "resp", "rt", "date", "cov_age", "cov_sex",
-               "cov_difficulty", "cov_mudding"]].copy()
+    long = df[["id", "item", "resp", "rt", "date", "incentives", "cov_age",
+               "cov_sex", "cov_difficulty", "cov_mudding"]].copy()
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
