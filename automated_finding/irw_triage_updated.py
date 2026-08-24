@@ -110,7 +110,24 @@ def _looks_header_offset(df: pd.DataFrame) -> bool:
 
 def load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     """Read csv/tsv/xlsx/sav/dta/sas7bdat/RData/rds into a DataFrame from a
-    path or raw bytes."""
+    path or raw bytes.
+
+    Column labels are coerced to str on the way out. A spreadsheet whose
+    header row is bare numbers (1, 2, 3 ... -- common for item grids)
+    hands pandas an integer Index, and every downstream `c.lower()` /
+    `c.startswith()` in this module then dies with "'int' object has no
+    attribute 'lower'", which process_one records as a bare `error`
+    against a perfectly readable file."""
+    return _stringify_columns(_load_table(path_or_bytes, filename))
+
+
+def _stringify_columns(df: pd.DataFrame) -> pd.DataFrame:
+    if df is not None and not all(isinstance(c, str) for c in df.columns):
+        df = df.rename(columns=str)
+    return df
+
+
+def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
     name = (filename or str(path_or_bytes)).lower()
 
     def _src():

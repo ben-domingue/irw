@@ -10169,3 +10169,76 @@ the items now tracked in `TODO.md`: the `pone.0242267` delimiter re-read,
 the two remaining `human_review` rows, the `download_failed`-vs-restricted
 classification fix in `_dataverse_files()`, and an item-text pass over the
 four `gao_2022_*` tables.
+
+## Weekly repos run 2026-08-24 re-triaged after a resolver-dispatch fix
+
+The scheduled weekly high-yield run (PR #1676, branch
+`automated/repos-weekly-2026-08-24`) reported **91 candidates, 60 triaged,
+0 good** — 58 `no_usable_file`, 2 `download_failed`. That zero was an
+artifact of three bugs, not a property of the candidates.
+
+**1. `resolve_data_files()` dispatched on `source`, not host.** DataCite is
+a metadata aggregator, not a host, but the dispatch only knew
+`zenodo`/`figshare`/`dryad`/`dataverse`/`osf`; a `datacite` row fell
+through to `return [], "", []`, which `process_one` recorded as
+"no resolvable tabular file on landing page". 87 of the 91 candidates were
+`source=datacite`, and that alone produced 57 of the 58 `no_usable_file`
+verdicts — against landing pages no resolver had ever been pointed at.
+Dispatch now tries a URL-host lookup (`_HOST_RESOLVERS`) before falling
+back to `source`. The host map is deliberately narrow: `_dataverse_files()`
+hardcodes the Harvard API base, so `entrepot.recherche.data.gouv.fr`,
+`data.ru.nl` and `ssh.datastations.nl` are **not** routed to it.
+
+**2. No Mendeley Data resolver existed at all.** 50 of the 91 candidate
+URLs were `data.mendeley.com`. Its landing pages are JS-rendered, so even
+a generic scraper would see nothing — but the public API needs no key and
+returns files plus licence in one call. Spot-checking 8 of the 29 Mendeley
+rows retired as `no_usable_file`, every one had a usable `.csv`, `.xlsx`
+or `.sav` sitting in the deposit. Added `_mendeley_files()`.
+
+**3. Numeric spreadsheet headers crashed the coercer.** A header row of
+bare numbers hands pandas an integer Index, and the `c.lower()` /
+`c.startswith()` calls in `irw_triage_updated.py` then raise "'int' object
+has no attribute 'lower'" — logged as a bare `error` against a perfectly
+readable file. `load_table()` now coerces column labels to `str` on every
+read path. (In the cloud run these same two rows had failed earlier, as
+`download_failed`, because **`openpyxl` is missing from the cloud
+sandbox** — worth adding to the routine's environment; locally they got
+past the read and hit this bug instead.)
+
+**The 58 keys the run appended to `repo_triage_seen_keys.csv` were
+removed.** `load_seen_keys()` makes verdicts permanent, so the false
+negatives would never have been retried. They were the file's trailing 58
+lines with no overlap against earlier rows, so the removal was exact; the
+two deliberately-retired license-blocked Dataverse keys (`DVN/7P3PFB`,
+`DVN/FG3CCK`) predate this commit and were left in place.
+
+### Re-triage result (all 91, `runs/retriage_weekly_2026-08-24.csv`)
+
+| flag | before | after |
+|---|---|---|
+| good | 0 | 1 |
+| human_assistance | 0 | 23 |
+| below_min_n | 0 | 9 |
+| license_restricted | 0 | 2 |
+| file_too_large | 0 | 1 |
+| no_usable_file | 58 | 41 |
+| download_failed / error | 2 | 0 |
+
+The 41 remaining `no_usable_file` rows were checked and look correct: the
+5 figshare ones really do ship only `.docx`/`.pdf` supplements, 6 Mendeley
+ones only a `.zip`, and the rest sit on hosts with no resolver
+(scidb.cn, openICPSR, IQB, PsychArchives, ...). Two `license_restricted`
+rows are CC BY-NC-ND — correctly blocked now, where before they were
+silently mislabelled `no_usable_file`.
+
+Step 2b **was** run this time (`runs/retriage_ha_weekly_2026-08-24.csv`):
+the 23 `human_assistance` rows refine to 9 `human_review`, 6
+`aggregate_continuous`, 6 `worth_retrying`, 2 `not_item_response`. The 9
+`human_review` rows collapse to 4 unique datasets after removing DataCite
+version duplicates, written to
+`human_review/human_review_repo_2026-08-24.csv`.
+
+The single `good` row (`osf.io/47bhk`, N=410 x 40, 16,400 responses,
+density 1.0) has **no license** on the OSF node, so it is not processable
+as it stands — tracked in `TODO.md`.

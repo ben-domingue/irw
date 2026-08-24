@@ -27,6 +27,40 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   text (Ren ships bare codes like `c65b`; Abramson's README gives only
   short variable descriptions, with full wording in the paper appendix).
 
+- [ ] **4 `human_review` rows from the 2026-08-24 weekly repos re-triage**
+  (`human_review/human_review_repo_2026-08-24.csv`): three Mendeley
+  deposits (`6by7h52sfg` nurse personality/burnout, `mrcthr8nxf` bedtime
+  procrastination/PERMA, `j33ytz7wsx` EFL self-efficacy/anxiety) and one
+  Taylor & Francis figshare deposit (article 33307366, ISO 9001 /
+  national customer satisfaction). All four resolved to a real tabular
+  file; none sub-classified automatically.
+
+- [ ] **`osf.io/47bhk` is the run's only `good` row but has no license**
+  (2026-08-24): "Sports Club Membership Value, Satisfaction, Engagement
+  and Well-being Dataset (China, 2021)", N=410 x 40 items, 16,400
+  responses, density 1.0 — clean, and the largest thing the weekly run
+  surfaced. The OSF node is public but `node_license` is null, so under
+  the standing rule it cannot be processed. Author email
+  (`processing_notes/Licensing.txt` template) is the only way forward.
+  Note the triage flag: `license_unknown` is recorded as a soft note in
+  `reasons`, not a hard gate, so a `good` row can still be unusable —
+  always read the `license` column before queueing.
+
+- [ ] **DataCite emits one candidate per DOI version, so datasets triage
+  2-3x** (2026-08-24): `10.17632/j33ytz7wsx` and `10.17632/j33ytz7wsx.1`
+  are the same Mendeley deposit and each got downloaded and triaged
+  separately; the 23 `human_assistance` rows in the weekly re-triage
+  collapse to ~9 unique datasets, and 9 `human_review` rows to 4. Worth
+  collapsing version suffixes in `irw_discover_updated.py`'s dedupe (and
+  in `_key()`) before the next weekly run.
+
+- [ ] **Mendeley `.zip`-only deposits are still `no_usable_file`**
+  (2026-08-24): 6 of the 41 remaining `no_usable_file` rows are Mendeley
+  deposits whose only payload is a `.zip` (e.g. `vb5rz5y7x8`,
+  `Datasets_Final_040426.zip`). `TABULAR_EXT` has no archive handling
+  anywhere in the pipeline; a peek-inside-the-zip resolver would be a
+  general win, not a Mendeley-specific one.
+
 - [ ] **`10.1371/journal.pone.0242267` needs a delimiter re-read
   (2026-08-24)**: `S1_Dataset.csv` parsed as one column whose header is
   the tab-joined string `id\tI1\tI2\t...ES1..A1..`. That is a read

@@ -235,6 +235,61 @@ def _osf_files(url: str) -> tuple:
     return out, license_raw, oversized
 
 
+def _mendeley_files(url: str) -> tuple:
+    """Mendeley Data (data.mendeley.com).
+
+    Reached almost entirely via DataCite, whose records point at the
+    landing page. That page is JS-rendered, so a scraper sees no files at
+    all -- which is how the 2026-08-24 weekly run retired 29 Mendeley
+    deposits as no_usable_file when every one I spot-checked had a .csv,
+    .xlsx or .sav sitting right there. The public API needs no key and
+    returns files and licence in one call."""
+    m = re.search(r"/datasets/([A-Za-z0-9]+)", url)
+    if not m:
+        return [], "", []
+    r = requests.get(
+        f"https://data.mendeley.com/public-api/datasets/{m.group(1)}",
+        headers=UA, timeout=30)
+    r.raise_for_status()
+    data = r.json()
+    lic = data.get("data_licence") or {}
+    license_raw = lic.get("short_name") or lic.get("url") or ""
+    out, oversized = [], []
+    for f in data.get("files", []):
+        name = f.get("filename", "")
+        cd = f.get("content_details") or {}
+        dl = cd.get("download_url", "")
+        if name.lower().endswith(TABULAR_EXT) and dl:
+            size = f.get("size") or cd.get("size") or 0
+            if size > MAX_FILE_BYTES:
+                oversized.append((name, size))
+                continue
+            out.append((dl, name))
+    return out, license_raw, oversized
+
+
+# Hosts we can resolve regardless of which index surfaced the candidate.
+# Deliberately narrow: _dataverse_files() hardcodes the Harvard API base,
+# so other Dataverse installations (entrepot.recherche.data.gouv.fr,
+# data.ru.nl, ...) must NOT be routed here.
+_HOST_RESOLVERS = [
+    ("data.mendeley.com", lambda url, doi: _mendeley_files(url)),
+    ("zenodo.org",        lambda url, doi: _zenodo_files(url)),
+    ("figshare.com",      lambda url, doi: _figshare_files(url)),
+    ("osf.io",            lambda url, doi: _osf_files(url)),
+    ("datadryad.org",     lambda url, doi: _dryad_files(doi)),
+    ("dataverse.harvard.edu", _dataverse_files),
+]
+
+
+def _host_resolver(url: str):
+    host = (urlparse(url).netloc or "").lower()
+    for suffix, fn in _HOST_RESOLVERS:
+        if host == suffix or host.endswith("." + suffix):
+            return fn
+    return None
+
+
 def resolve_data_files(row: dict) -> tuple:
     """Dispatch to the right repository resolver. Returns
     ([(file_url, name)], license_str, [(name, size_bytes)]) -- the third
@@ -245,6 +300,15 @@ def resolve_data_files(row: dict) -> tuple:
     url = row.get("url") or ""
     doi = row.get("doi") or ""
     try:
+        # Host first, source second. `source` records which index surfaced
+        # the candidate, not where the data lives, so dispatching on it
+        # alone silently retired every datacite row -- 87 of the 91
+        # candidates in the 2026-08-24 weekly run -- as no_usable_file
+        # without any resolver ever being called. Most of those rows point
+        # at hosts already handled below.
+        by_host = _host_resolver(url)
+        if by_host is not None:
+            return by_host(url, doi)
         if src == "zenodo":
             return _zenodo_files(url)
         if src == "figshare":
