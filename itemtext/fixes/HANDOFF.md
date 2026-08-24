@@ -1,7 +1,25 @@
 # Item text corrections — handoff
 
-State as of 2026-08-24. Nothing uploaded to Redivis. All work committed
-(`78bc4e9`, `5e3ca13`).
+State as of 2026-08-24. **The 10 clean tables are uploaded** to the `irw_text`
+draft version (`next`) and verified. The draft is **not yet released** — until
+it is, `v6.3` remains live and still carries the old text.
+
+### Uploading replaces nothing — read this before shipping the rest
+
+`upload_text.py` / `upload.py` **append** to an existing table. They do not
+replace its contents, despite what #1644 and upload.py's own comments say.
+`replace_on_conflict` replaces an *upload of the same name*; data inherited
+from the prior version survives alongside it. A first attempt on 2026-08-24
+produced 10 tables holding old rows **plus** new ones (e.g.
+`singh_2025_identity_pit` at 45 rows, still carrying the orphaned `pit5`).
+
+This never surfaced before because the extraction batches only ever created
+*new* tables. Correction is the first workstream to overwrite existing ones.
+
+**The working procedure:** delete the target tables from the draft version
+first, then upload — they are recreated with only the new content. Verify with
+an actual `count(*) / count(distinct item)` query, never `numRows`, which
+reported stale values throughout the incident.
 
 ## What is now verified
 
@@ -19,9 +37,10 @@ they had never been through before:
 identical to published wherever both carry text, and every structural change
 maps to the filed issue. These are patches, not rewrites.
 
-## Ready to upload — no further judgment needed
+## Uploaded 2026-08-24 — pending release
 
-Ten of the seventeen. Text identical to published, item and resp sets
+Ten of the seventeen. Verified in the draft by query: rows and distinct-item
+counts match the local files exactly for all ten. Text identical to published, item and resp sets
 match live data, differences are exactly the filed defect:
 
 | table | issue | change vs published |
@@ -83,11 +102,15 @@ Description edit belonging to the metadata pipeline; text is in
 
 ## Shipping order
 
-1. Upload the 10 clean tables.
-2. Paste their issues-page entries — including the three that **replace**
-   existing live callouts (`gilbert_meta_35`, `gilbert_meta_42`,
-   `sv-maia2_randelovic_2021_erq`), which only become true after upload. See
-   `fixes/itemtext_issues_suggestions.md` and #1644.
-3. Work the decision list above.
+1. ~~Upload the 10 clean tables.~~ Done 2026-08-24, pending release.
+2. **Release the draft version.** Until then the corrections are not live.
+3. After release, update **one** issues-page callout:
+   `sv-maia2_randelovic_2021_erq` (its 1–5 anchors are inferred). The other two
+   replacement callouts — `gilbert_meta_35`, `gilbert_meta_42` — must **not** be
+   pasted: those tables were not uploaded. `dumas_organisciak_2022` was already
+   added 2026-08-17. See `fixes/itemtext_issues_suggestions.md` and #1644.
+4. Close #1598, #1599, #1600, #1601, #1602, #1603, #1604, #1609, #1613, #1619
+   once released.
+5. Work the decision list above.
 4. Close out #1645 (4 tables never checked by current tooling) and #1646 (13
    stale live callouts).
