@@ -36,7 +36,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   file; none sub-classified automatically.
 
 - [ ] **`osf.io/47bhk` is the run's only `good` row but has no license**
-  (2026-08-24): "Sports Club Membership Value, Satisfaction, Engagement
+  (2026-08-24, filed as issue #1678): "Sports Club Membership Value, Satisfaction, Engagement
   and Well-being Dataset (China, 2021)", N=410 x 40 items, 16,400
   responses, density 1.0 — clean, and the largest thing the weekly run
   surfaced. The OSF node is public but `node_license` is null, so under
