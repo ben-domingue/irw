@@ -3,6 +3,32 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [ ] **3 IRW-eligible datasets recovered from the 2026-08-18..20 scheduled
+  runs' `human_assistance` bucket (2026-08-24)**, each verified by hand
+  (file downloaded, columns read) but with no processing script yet:
+  `10.1371/journal.pone.0279071` (PLOS ONE, CC BY, N=1087, Chinese COVID
+  stress survey — PSS-10 + 28-item mood + 20-item coping, item stems as
+  column headers); `10.1038/s41598-024-65095-0` (Sci Rep, CC BY, N=1587 —
+  PSQI components, 10-item Barthel ADL, PHQ-9, 3-item loneliness);
+  `10.7910/DVN/NGRR1Q` (Harvard Dataverse, CC0, N=1200 x 2 waves —
+  diaspora-attachment Likert grids plus a `treatment_group` -> `treat`
+  column). See `BATCH_LOG.md`'s "Step 2b retriage of the four unlogged
+  scheduled runs" entry for the full accounting.
+
+- [ ] **`10.1371/journal.pone.0242267` needs a delimiter re-read
+  (2026-08-24)**: `S1_Dataset.csv` parsed as one column whose header is
+  the tab-joined string `id\tI1\tI2\t...ES1..A1..`. That is a read
+  problem, not a content problem — re-read with `sep='\t'` and re-triage.
+  Filed as `human_review` in `human_review/human_review_plos_batch30.csv`
+  along with `10.1371/journal.pone.0313538`, which still needs eyes.
+
+- [ ] **`download_failed` should not swallow Dataverse access restrictions
+  (2026-08-24)**: both `download_failed` rows from the 2026-08-20 repos
+  sweep (`DVN/7P3PFB`, `DVN/FG3CCK`) are permanently restricted files, not
+  transient errors, so they sit in a retry bucket that will never resolve.
+  `_dataverse_files()` in `irw_batch_updated.py` already sees the
+  `restricted` field on each file record — flag those at resolve time.
+
 - [x] **`biblio_issue233.csv` (20 rows) uploaded/pasted** (confirmed
   2026-08-18, ben-domingue): GitHub issue #233, Harvard Dataverse
   `DVN/QOO7QX` "PROMIS Pediatric Measure Evaluation" (CC0 1.0). Ten PROMIS

@@ -9980,3 +9980,86 @@ in source form specifically so they join. Worth an `irw-auto-itemtext` pass
 once these are uploaded.
 
 Biblio rows for the dictionary sheet: `biblio_issue233.csv` (20 rows).
+
+## Step 2b retriage of the four unlogged scheduled runs (2026-08-24)
+
+The four scheduled cloud routines that ran 2026-08-18 → 2026-08-20 each
+opened a PR carrying only its candidate CSV and committed its
+seen-keys/search-terms bookkeeping to `main`, but **none of them ran
+Step 2b**, none wrote `human_review/` rows, and none were logged here.
+Confirmed by the absence of a `refined_flag` column in all four CSVs
+(cf. the "Cloud runs skip retriage" note). Runs covered:
+
+| run | PR | branch | rows | flags |
+|---|---|---|---|---|
+| PLOS weekly 2026-08-18 | #1664 | `automated/plos-weekly-2026-08-18` | 56 | 45 no_usable_file, 6 human_assistance, 5 below_min_n |
+| PMC backlog 2026-08-19 | #1666 | `automated/pmc-backlog-2026-08-19` | 13 | 7 no_usable_file, 5 license_restricted, 1 human_assistance |
+| PMC weekly 2026-08-19 | #1668 | `automated/pmc-weekly-2026-08-19` | 54 | 30 no_usable_file, 17 license_restricted, 3 below_min_n, 2 not_item_response, 2 human_assistance |
+| repos backlog 2026-08-20 | #1673 | `automated/repos-backlog-2026-08-20` | 19 | 10 below_min_n, 4 human_assistance, 2 license_restricted, 2 download_failed, 1 no_usable_file |
+
+No `good` rows in any of the four. Retriage of the 13 `human_assistance`
+rows (11 distinct candidates — `DVN/NGRR1Q` appeared 3×) gave
+5 `human_review`, 6 `aggregate_continuous`, 2 `worth_retrying`. The
+`human_review` rows are archived as `human_review/human_review_plos_batch30.csv`,
+`human_review_pmc_batch8.csv`, `human_review_pmc_batch9.csv`, and
+`human_review_repo_2026-08-20.csv`.
+
+**Every lead was then downloaded and inspected by hand** (the retriage
+buckets are heuristic; three of them were wrong in both directions):
+
+Drops — genuinely composite, no item-level data in the deposit:
+- `10.1371/journal.pone.0277351` (Buddhism precepts / neuroticism, N=644):
+  file holds `Neuro`, `CSI_dep`, `PSStot`, `SBI5-PP` — scale totals only.
+- `10.1371/journal.pone.0339591` (exercise self-efficacy, 371 rows):
+  `T1..T4 Exercise self-efficacy` totals only. Retriage called this
+  `worth_retrying` on a longitudinal-design guess; the waves are real but
+  each wave carries one composite, so it would be a single-item table.
+- `10.1371/journal.pone.0276794` (adolescent well-being, N=377): six
+  dichotomised subscale indicators × 2 waves, built for the LCA. Retriage
+  called it `worth_retrying` on a text-Likert guess; the `.sav` is numeric
+  0/1 composites.
+
+Drops — not item-response data (these were the `human_review` rows, all
+resolvable from the column list alone):
+- `10.7717/peerj.14971` — maize combining-ability / grain-nutrient trial.
+- PMC11225727 (`10.1016/...`, generative-AI-in-healthcare) — a qualitative
+  review table (`Ranked by relevance`, `What`, `Why`, `How`, ...).
+- `10.7910/DVN/CORNFB` — a systematic-review extraction sheet
+  (`AI systems object of study`, `Antecedents`, `Mediators`, ...).
+- `10.1371/journal.pone.0313538` and `10.1371/journal.pone.0242267` are
+  left as genuine human_review: 0242267's CSV has a single tab-joined
+  header cell (`id\tI1\tI2\t...`) — a delimiter problem, not a content one,
+  and worth a re-read.
+
+Real finds — three IRW-eligible datasets the runs would otherwise have
+buried in the `human_assistance` bucket:
+- **`10.1371/journal.pone.0279071`** (PLOS ONE, CC BY, N=1087): Chinese
+  COVID stress survey, `S1_Dataset.xlsx`, item stems as column headers —
+  PSS-10, a 28-item mood scale, a 20-item coping scale, and more. The
+  `>50 unique values` trip came from the survey-metadata columns (`序号`,
+  `所用时间`) being melted in with the items.
+- **`10.1038/s41598-024-65095-0`** (Sci Rep, CC BY, N=1587): PSQI
+  components, 10-item Barthel ADL, PHQ-9 (`P1..P9`), 3-item loneliness,
+  alongside the composites that tripped the heuristic.
+- **`10.7910/DVN/NGRR1Q`** (Harvard Dataverse, CC0, N=1200 × 2 waves):
+  diaspora-attachment survey experiment with real Likert grids
+  (`Q3grid_1..4`, `Q6grid_1..4`, `Q8grid_1..7`, `Q14_*`, `Q15_*`) plus a
+  `treatment_group` column that maps to `treat`.
+
+The 2 `download_failed` rows both resolve to "not openly accessible",
+not to a transient error — reclassify rather than retry:
+- `10.7910/DVN/7P3PFB` — dataset terms read "Access can be requested from
+  the authors", so it was never open in the first place.
+- `10.7910/DVN/FG3CCK` — dataset license is CC0 but the API reports
+  `restricted=True` on `Replication_data.tab` itself.
+
+**Pipeline note (Dataverse downloads):** `irw_batch_updated.py` builds a
+bare `/api/access/datafile/<id>` URL and `requests` follows the `303`, so
+the 403 it recorded here is a real, permanent access restriction, not a
+transient fetch error. The gap is in the *classification*: a restricted
+file lands in `download_failed`, which is a retry bucket, so it will be
+re-attempted forever. `_dataverse_files()` already parses the file records
+that carry `restricted` — worth flagging those as access-restricted at
+resolve time instead. Note also that a deposit-level CC0 license does not
+imply file-level access (`FG3CCK` is CC0 with `restricted=True` on the only
+data file).
