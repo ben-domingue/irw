@@ -10155,10 +10155,14 @@ time:
   `restricted=True` on `Replication_data.tab` while its Stata do-file is
   open) were appended to `license_blocked_candidates.csv` with contacts,
   and their keys added to `repo_triage_seen_keys.csv` so triage stops
-  re-attempting a 403 that will never clear on its own. FG3CCK reads like
-  a deposit-configuration oversight rather than a deliberate restriction --
-  the author already chose CC0 -- so it is a good candidate for a short
-  permission email if someone wants the lead; no email has been sent.
+  re-attempting a 403 that will never clear on its own. Neither deposit's
+  data file was ever downloaded, so nothing from either has entered the IRW
+  and there is nothing to retract. **Both are marked dead as of 2026-08-24**
+  (ben-domingue) -- no author email sent and none planned. FG3CCK does read
+  like a deposit-configuration oversight rather than a deliberate
+  restriction (the author already chose CC0), so it is worth revisiting only
+  if they later unrestrict the file to match their own terms; it is not an
+  open lead in the meantime.
 
 This closes the four runs. Nothing from 2026-08-18..20 is left open except
 the items now tracked in `TODO.md`: the `pone.0242267` delimiter re-read,
