@@ -83,7 +83,7 @@ Description edit belonging to the metadata pipeline; text is in
 
 ## Shipping order
 
-1. Upload the 8 clean tables.
+1. Upload the 10 clean tables.
 2. Paste their issues-page entries — including the three that **replace**
    existing live callouts (`gilbert_meta_35`, `gilbert_meta_42`,
    `sv-maia2_randelovic_2021_erq`), which only become true after upload. See

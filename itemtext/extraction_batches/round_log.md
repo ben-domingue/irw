@@ -1286,3 +1286,23 @@ access-based blocks are worth retrying cheaply, but the retry's real job is to c
 reach it" into "reached it, and here is what it does or doesn't contain". Three of the four ended
 up in the second state without any new item text, which is still a better outcome than leaving them
 on a retry list forever.
+
+## TODO (added 2026-08-24, from Ben) — sweep the notes/flagged rows on the index workbook
+
+Revisit the rows in the itemtext index workbook
+(https://docs.google.com/spreadsheets/d/1jvwxYJ3gjSpEDtx4km-8czvDXu7iEIHhF5V5Y9VWNG0/edit?gid=0#gid=0)
+that carry a note or are otherwise flagged — typically the ones with **no link to a Google Sheet
+of item text**, i.e. tables whose processing was started and abandoned for some reason. Go through
+those, work out why each stalled, and add the ones that can now be finished.
+
+Scope notes for whoever picks this up:
+- **Scope is `Sheet1` (`gid=0`) only** — per Ben, that's where the valuable notes live. The other
+  tabs (`queue`, `xz_todo`, `nj_todo`, `tables_excluded`) are not part of this sweep.
+- Expect a mix of causes: genuinely unavailable source text, access blocks that may since have
+  cleared (see the batch_005 retry above — access blocks are cheap to retry and the retry's job is
+  to convert "couldn't reach it" into a settled answer), items already extracted but never linked
+  back into the sheet, and rows flagged-for-later by a human that nobody returned to.
+- Cross-check against `extraction_batches/queue_state.csv` and the batch sidecars before
+  re-extracting — some of these may already have text sitting in `clean/` or a staging dir that was
+  simply never linked on the sheet.
+- Anything `enem*` stays out of scope (Ben handles those separately).
