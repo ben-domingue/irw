@@ -69,52 +69,43 @@ error_row <- function(table, note) {
 }
 
 # ---------------------------------------------------------------------------
-# INTERIM: once irw_table_sets(per_item = TRUE) lands (Rpkg#121), use it here --
-# it answers exactly this question and this helper can go.
+# live_sets(table): everything this script needs from live data -- the item set,
+# the resp set, each item's row count, and each item's own resp levels -- with
+# no export.
 #
-# live_summary(table): one row per (item, resp) with a count, straight from a
-# server-side GROUP BY. resp is NULL for rows whose stored value is the literal
-# "NA" token or blank, which is how irw_fetch() coerces them -- keeping those
-# rows in the count matters, because the row-count anomaly check below compares
-# each item's TOTAL rows, missingness included.
+# Shard resolution and the canonical item/resp sets come from
+# irw::irw_table_sets() (Rpkg#121, in irw >= 1.0.1). This file used to carry its
+# own copy of both; the package owns that logic now so the two cannot drift, and
+# its resp coercion is the one that matches irw_fetch() (the literal "NA" token
+# and blanks drop out).
 #
-# The core warehouse is sharded across four datasets and a table lives in
-# exactly one; resolving it costs a metadata read, which is not an export.
-CORE_DATASETS <- c("item_response_warehouse:as2e", "item_response_warehouse_2:epbx",
-                   "item_response_warehouse_3:5xaj", "item_response_warehouse_4:980f")
+# The per-item detail is one further GROUP BY against the qualified reference the
+# package resolved. irw_table_sets(per_item = TRUE) is deliberately NOT used for
+# it: it returns each item's resp min/max/level COUNT, and the per-item coverage
+# check below needs the actual SET of levels an item's respondents used (it is
+# what caught the alkouri_2025_* defect). Its `n` also counts only non-missing
+# resp, where the row-count anomaly check wants each item's TOTAL rows,
+# missingness included -- so `resp` is left NULL rather than filtered out, and
+# the rows still count.
+live_sets <- function(table) {
+    s <- irw::irw_table_sets(table, source = "core", per_item = FALSE)
+    sql <- sprintf(paste(
+        "SELECT CAST(item AS STRING) AS item,",
+        "  CASE WHEN resp IS NOT NULL AND TRIM(CAST(resp AS STRING)) NOT IN ('NA','')",
+        "       THEN SAFE_CAST(TRIM(CAST(resp AS STRING)) AS FLOAT64) END AS resp,",
+        "  COUNT(*) AS n",
+        "FROM `%s` GROUP BY 1, 2"), s$table)
+    d <- suppressWarnings(redivis::redivis$query(sql)$to_tibble())
+    item <- as.character(d$item)
+    resp <- as.numeric(d$resp)
+    n <- as.numeric(d$n)
 
-live_summary <- function(table) {
-    q <- NULL
-    for (ds in CORE_DATASETS) {
-        ok <- tryCatch({
-            tb <- redivis::redivis$user("datapages")$dataset(ds)$table(table)
-            suppressWarnings(tb$get())
-            TRUE
-        }, error = function(e) FALSE)
-        if (ok) { q <- sprintf("datapages.%s.%s", sub(":.*$", "", ds), table); break }
-    }
-    if (!is.null(q)) {
-        out <- tryCatch({
-            sql <- sprintf(paste(
-                "SELECT CAST(item AS STRING) AS item,",
-                "  CASE WHEN resp IS NOT NULL AND TRIM(CAST(resp AS STRING)) NOT IN ('NA','')",
-                "       THEN CAST(resp AS FLOAT64) END AS resp,",
-                "  COUNT(*) AS n",
-                "FROM `%s` GROUP BY 1, 2"), q)
-            d <- suppressWarnings(redivis::redivis$query(sql)$to_tibble())
-            data.frame(item = as.character(d$item), resp = as.numeric(d$resp),
-                       n = as.numeric(d$n), stringsAsFactors = FALSE)
-        }, error = function(e) NULL)
-        if (!is.null(out) && nrow(out)) return(out)
-    }
-    # Fallback: the old whole-table export. Only reached if the query route
-    # failed outright -- it is the expensive path, not the default one.
-    df <- irw::irw_fetch(table)
-    agg <- stats::aggregate(list(n = rep(1L, nrow(df))),
-                            by = list(item = as.character(df$item),
-                                      resp = suppressWarnings(as.numeric(df$resp))),
-                            FUN = sum, na.action = stats::na.pass)
-    agg[, c("item", "resp", "n")]
+    counts <- tapply(n, item, sum)
+    levels <- tapply(resp, item, function(v) sort(unique(v[!is.na(v)])))
+    list(items = as.character(s$items),
+         resp = suppressWarnings(as.numeric(s$resp)),
+         counts = counts,
+         levels = levels)
 }
 
 audit_one <- function(path) {
@@ -125,10 +116,12 @@ audit_one <- function(path) {
         return(error_row(table, "could not read csv"))
     }
 
-    live <- tryCatch(live_summary(table), error = function(e) NULL)
-    if (is.null(live) || !nrow(live)) {
-        return(error_row(table,
-            "could not read live data -- table not found on Redivis, or the query and fetch routes both failed"))
+    live <- tryCatch(live_sets(table), error = function(e) conditionMessage(e))
+    if (is.character(live)) {
+        return(error_row(table, paste0("could not read live data: ", live)))
+    }
+    if (!length(live$items)) {
+        return(error_row(table, "live table has no item values"))
     }
 
     notes <- character(0)
@@ -156,7 +149,7 @@ audit_one <- function(path) {
                     else if ("resp_raw" %in% names(items)) "resp_raw" else NA
 
     # -- item set match --
-    live_items <- unique(live$item)
+    live_items <- live$items
     cand_items <- unique(items$item)
     missing_items <- setdiff(live_items, cand_items)
     extra_items <- setdiff(cand_items, live_items)
@@ -174,7 +167,7 @@ audit_one <- function(path) {
 
     # -- resp set match (skipped when using raw_resp by design) --
     if (has_resp) {
-        live_resp <- sort(unique(live$resp))
+        live_resp <- sort(live$resp)
         cand_resp <- sort(unique(items$resp))
         missing_resp <- setdiff(live_resp, cand_resp)
         extra_resp <- setdiff(cand_resp, live_resp)
@@ -213,8 +206,7 @@ audit_one <- function(path) {
     # A matching item *set* doesn't rule out one item code silently standing
     # in for two different questions -- flag items whose live row count is a
     # clear outlier relative to the table's typical per-item row count.
-    # one row per (item, resp) in `live`, so weight by n to get the row count
-    live_counts <- tapply(live$n, live$item, sum)
+    live_counts <- live$counts
     if (length(live_counts) >= 3) {
         med <- stats::median(live_counts)
         if (med > 0) {
@@ -275,8 +267,7 @@ audit_one <- function(path) {
             # finer-grained version of the check above and would have caught the
             # alkouri_2025_* defect on its own.
             if ("resp" %in% names(items)) {
-                live_lv <- tapply(live$resp, live$item,
-                                  function(v) sort(unique(v[!is.na(v)])))
+                live_lv <- live$levels
                 cand_lv <- tapply(suppressWarnings(as.numeric(items$resp)), items$item,
                                   function(v) sort(unique(v[!is.na(v)])))
                 gaps <- character(0)

@@ -136,10 +136,22 @@ live data that file claims to describe.
 
 **The ground-truth step is the expensive one — treat it that way.** Every `table_context.R` and
 `irw_fetch` call EXPORTS THE WHOLE TABLE. In batch_011 twelve agents pointed at the corpus's largest
-tables exhausted a 200GB/30-day Redivis export quota account-wide (see round_log 2026-08-18), and
-the failure was reported as "table does not exist in IRW", which sent four agents chasing a phantom
-missing table. Prefer `scripts/table_sets.R`: it answers the same item/resp-set question with a
-server-side `GROUP BY` and is not subject to the export limit.
+tables exhausted a 200GB/30-day Redivis export quota account-wide (see round_log 2026-08-18). Prefer
+`irw::irw_table_sets()` — or `scripts/table_sets.R`, now a thin CLI wrapper over it: it answers the
+same item/resp-set question with server-side aggregate queries and is not subject to the export
+limit. `audit_batch.R` uses the same route.
+
+That quota window has since rolled over and exports work again, but the arithmetic that made
+exhaustion inevitable has not changed: the core warehouse is 181.8GB against a 200GB/30-day cap, so
+one full pass spends ~91% of a month's allowance. The durable fix is an export billing project on
+the datapages datasets, which is still outstanding. Until then, treat the query route as the default
+and an export as a decision.
+
+The misreporting half of that incident IS fixed. Rpkg#121 landed (irw >= 1.0.1): an export-quota
+failure used to surface as "table does not exist in IRW", which sent four agents chasing a phantom
+missing table, and `irw_fetch()` now names an account-wide export limit as such. **"does not exist
+in IRW" can again be taken at face value** — it means all four core datasources genuinely returned
+not-found.
 
 When several tables in a round come from ONE source file (common — five `butt_2022_*`, five
 `buzgova_2023_*`, four `baka2023_*` in recent rounds), tell each agent explicitly which sibling

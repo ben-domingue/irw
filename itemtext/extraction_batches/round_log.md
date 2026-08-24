@@ -991,9 +991,12 @@ each for a stated reason:
 Plus two honest extraction blocks that never wrote a CSV: `arnulf_2022_conspiracy_thinking` (007)
 and `atmadjaja_2026_pos` (007), and `agarwal_2023_dreem` (001, copyrighted DREEM).
 
-## batch_011 — 2026-08-18 — PILOT, HALTED PART-WAY. READ THIS BEFORE RESUMING.
+## batch_011 — 2026-08-18 — extracted and gate-verified; UNTRIAGED. Blockers cleared 2026-08-24.
 
 ### Incident: the Redivis export quota was exhausted, and it was this round that did it
+
+**RESOLVED 2026-08-24 — see "Both blockers cleared" at the end of this section. The account
+below is kept because the arithmetic that caused it still holds; the state it describes does not.**
 
 **`irw_fetch()` is dead account-wide until the 30-day export window rolls over.** Confirmed
 first-hand by calling Redivis directly, which gives the error `irw` hides:
@@ -1053,12 +1056,22 @@ Branch `fix/quota-errors-and-table-sets` on itemresponsewarehouse/Rpkg, see #166
   against a 4.55 GB download; `criticalperiod_syntax` (107M rows) likewise.
 - Also in the PR: `irw_info()` no longer calls `to_tibble()` just to read column names.
 
-**Consequence for this pipeline: `scripts/table_sets.R` and the inline query helper now in
-`audit_batch.R` are both interim.** Once Rpkg#121 lands, replace them with `irw_table_sets()` —
-`audit_batch.R` wants `per_item = TRUE`, which is exactly its coverage and row-count check. Keeping
-two implementations of the same resolution logic is how they drift.
+**Consequence for this pipeline — DONE 2026-08-24.** `scripts/table_sets.R` and the inline query
+helper in `audit_batch.R` were both interim copies of the shard-resolution logic. Both now call
+`irw::irw_table_sets()`; `table_sets.R` is a thin CLI wrapper over it. One correction to the plan
+recorded here: `per_item = TRUE` turned out NOT to be the right call for `audit_batch.R`. It returns
+each item's resp min/max and level *count*, but the per-item coverage check needs the actual *set*
+of levels an item's respondents used — that is the check that caught the `alkouri_2025_*` defect —
+and its `n` counts only non-missing resp, where the row-count anomaly check wants each item's total
+rows, missingness included. So `audit_batch.R` takes the canonical item/resp sets and the resolved
+qualified reference from the package and runs one further `GROUP BY` for the per-item detail. Still
+no export. Re-run over batch_011 afterwards: byte-identical to the shipped `audit_report.csv`,
+7 PASS / 5 WARN.
 
-**Still outstanding: `metadata/01_metadata.R`,** which lives outside the package repo and was not
+Possible Rpkg follow-up: a `per_item` variant that returns the per-item resp *set* and total rows
+would let `audit_batch.R` drop its remaining query.
+
+**`metadata/01_metadata.R` — also done.** which lives outside the package repo and was not
 touched. Its `get_statistics()` path is fine; the problem is the fallback, which drops to
 `to_tibble()` on the FULL table whenever a table's `resp` count comes back NULL. Run across the whole
 corpus, hitting that fallback on a handful of large tables makes a real dent in the 200 GB window and
@@ -1067,7 +1080,26 @@ table's `qualified_reference` — reuse `irw_table_sets()` once the PR lands, or
 the script shouldn't depend on the package.
 
 **And the export billing project on the datapages datasets is still the fix that removes the cap
-without every caller changing.**
+without every caller changing — still outstanding, and now the only part of this that is.**
+
+### Both blockers cleared — 2026-08-24, verified live
+
+- **Rpkg#121 landed.** Installed `irw` is 1.0.1; `irw_table_sets(name, source = "core", per_item =
+  FALSE)` is exported with exactly the signature the PR described, and
+  `.irw_handle_datasource_error()` carries the `"quota"` branch. Checked live:
+  `irw_table_sets("machivallianism_test_main")` → 1,469,720 rows / 20 items / resp 1–5;
+  `irw_table_sets("chen_2022_sasc")` → 1,698,642 rows / 22 items / resp 1–5. Seconds, no export.
+- **The export quota has rolled over.** `irw_fetch("machivallianism_test_main")` returned 1,469,720
+  rows with no `[400 invalid_request]`. So the round's held-over instruction to "re-run
+  validate_items.R once the quota resets before uploading" (recorded in `notes.csv` for
+  `close_relationships` and others) is now actionable.
+- **`metadata/01_metadata.R`'s `to_tibble()` fallback is gone**, replaced by a
+  `redivis$query(sql)$to_tibble()` at line 86, with the change recorded in the comment at line 60.
+
+**batch_011 is therefore unblocked and its next step is triage** (`BATCH_PROCESS.md` §"Triage and
+staging"), with two things carried in from this round: `verify_geography.R` is the only agent script
+written against `irw_fetch` rather than the query path, and `geography` is flagged on the index
+workbook's `xz_todo` tab, so confirm nobody is mid-work on it before it ships.
 
 ### The interim fix: `scripts/table_sets.R`
 
