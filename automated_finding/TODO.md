@@ -3,17 +3,16 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
-- [ ] **3 IRW-eligible datasets recovered from the 2026-08-18..20 scheduled
-  runs' `human_assistance` bucket (2026-08-24)**, each verified by hand
-  (file downloaded, columns read) but with no processing script yet:
-  `10.1371/journal.pone.0279071` (PLOS ONE, CC BY, N=1087, Chinese COVID
-  stress survey — PSS-10 + 28-item mood + 20-item coping, item stems as
-  column headers); `10.1038/s41598-024-65095-0` (Sci Rep, CC BY, N=1587 —
-  PSQI components, 10-item Barthel ADL, PHQ-9, 3-item loneliness);
-  `10.7910/DVN/NGRR1Q` (Harvard Dataverse, CC0, N=1200 x 2 waves —
-  diaspora-attachment Likert grids plus a `treatment_group` -> `treat`
-  column). See `BATCH_LOG.md`'s "Step 2b retriage of the four unlogged
-  scheduled runs" entry for the full accounting.
+- [x] **3 IRW-eligible datasets recovered from the 2026-08-18..20 scheduled
+  runs' `human_assistance` bucket (2026-08-24)** — all three processed the
+  same day: `data/gao_2022_covid_stress.py` (PLOS ONE, CC BY, N=1087 → 4
+  tables), `data/ren_2024_rural_elderly.py` (Sci Rep, CC BY, N=1587 → 5
+  tables), `data/abramson_2026_diaspora.py` (Harvard Dataverse, CC0,
+  N=1706 across 2 waves → 4 tables). 13 tables, ~181k responses.
+
+- [ ] **`biblio_batch_2026-08-24.csv` (13 rows) staged, not yet pasted**:
+  dictionary-sheet rows for the 13 tables above. The `irw_output/` CSVs are
+  on disk and upload-ready. Paste the rows and upload, then delete both.
 
 - [ ] **`10.1371/journal.pone.0242267` needs a delimiter re-read
   (2026-08-24)**: `S1_Dataset.csv` parsed as one column whose header is

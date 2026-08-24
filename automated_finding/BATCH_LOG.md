@@ -10063,3 +10063,62 @@ that carry `restricted` — worth flagging those as access-restricted at
 resolve time instead. Note also that a deposit-level CC0 license does not
 imply file-level access (`FG3CCK` is CC0 with `restricted=True` on the only
 data file).
+
+## Step 3 for the three recovered datasets (2026-08-24)
+
+All three leads from the retriage entry above were processed the same day.
+13 tables, ~181k responses, all `irw_output/` CSVs written and QC'd
+(per-item `value_counts()` inspected for every table, not merged min/max).
+Dictionary rows staged in `biblio_batch_2026-08-24.csv`.
+
+**`data/gao_2022_covid_stress.py`** — `10.1371/journal.pone.0279071`,
+PLOS ONE, CC BY 4.0. 1,087 respondents x 4 instruments:
+`gao_2022_pss10` (10 items, 1-5), `gao_2022_stress_response` (28, 1-5),
+`gao_2022_scsq` (20, 1-4), `gao_2022_emotional_resilience` (11, 1-6).
+The S1 Dataset is the raw survey export; the paper analyses 873 after its
+own validity screening, which the deposit does not mark, so all 1,087
+submissions are kept. Source headers are the Chinese item stems (the first
+column of each block also carries the questionnaire instruction text), so
+items are numbered positionally within each instrument — the numbering is
+already embedded in the stems, so item text joins back. `所用时间` is
+whole-survey completion time and is exported as `cov_completion_time_s`,
+not `rt`. `提交答卷时间` becomes `date` in Unix seconds. One age cell held
+`19620621` — a birth date typed into the age field; dropped as a
+data-entry error rather than carried into `cov_age`.
+
+**`data/ren_2024_rural_elderly.py`** — `10.1038/s41598-024-65095-0`,
+Sci Rep, CC BY 4.0. 1,587 rural Chinese older adults x 5 instruments:
+`ren_2024_psqi` (13 items, 1-4), `ren_2024_adl` (10 Barthel items,
+weighted 0/5/10/15), `ren_2024_phq9` (9, 1-4), `ren_2024_loneliness`
+(3, 1-3), `ren_2024_eq5d` (5, 1-3). Excluded: the PSQI *component* scores
+`SleepQuality1-7` (composites of the raw items) and the PSQI open-ended
+items `c61_1`-`c64_1` and `c65a` (bedtime/latency/duration, continuous),
+plus every total and its `Z*` standardisation. The EQ-5D dimensions ship
+as country-tariff utility *decrements* rather than levels (e.g. `UM` in
+{0, 0.0766, 0.2668}); each has exactly three strictly ordered values, so
+the documented 1-3 severity level is recovered by ranking — the script
+asserts the three-value structure rather than assuming it.
+
+**`data/abramson_2026_diaspora.py`** — `10.7910/DVN/NGRR1Q`, Harvard
+Dataverse, CC0 1.0. Two-wave pre-registered survey experiment on
+Jewish-Americans, 1,200 per wave, 719 wave-2 repeats. 4 tables:
+`abramson_2026_israel_policy` (Q3grid_1-4, 1-5),
+`abramson_2026_israel_attachment` (Q4grid_1-3, 1-5),
+`abramson_2026_mobilization` (Q6grid_1-4, 11-point),
+`abramson_2026_jewish_identity` (Q8grid_1-7, 1-5). 1,706 distinct people
+after panel linking (1,200 wave-1 + 481 new in wave 2 + 25 wave-2 repeats
+whose `caseid_w1` has no matching wave-1 record). `caseid` ranges are
+disjoint across waves, so linking on `caseid_w1` is unambiguous; the
+script asserts no duplicate `id`/`wave` pair survives. `treatment_group`
+(1=control, 2-4 = three appeal vignettes) becomes `treat` 0/1 with the
+specific arm kept as `cov_treatment_arm`. Single-item measures (`Q5_1`,
+`Q7`, `Q9a_scale`, `Q10`) and the analysis recodes are not exported.
+
+**Sentinel check worth reusing:** rather than guessing whether a
+"don't know" code hid inside the 1-5 grids, the Abramson script
+reconstructs the deposit's own `Q3_index`/`Q4_index`/`Q6_index` from the
+raw items using the README's documented reverse-codes and asserts an exact
+match. If a value in range were being treated as missing by the authors,
+the means would not reproduce. That is a stronger check than a rarity or
+distribution-shape test and it is cheap whenever the deposit ships both
+the items and the index built from them.
