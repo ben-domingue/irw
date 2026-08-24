@@ -302,6 +302,11 @@ audit_one <- function(path) {
         if ("resp" %in% names(items)) {
             padded <- !is_blank(items$option_text) &
                 trimws(as.character(items$option_text)) == trimws(as.character(items$resp))
+            # A labeled option whose resp is NA (e.g. a "Don't know" choice the
+            # source offered but that maps to missing in the live data) makes the
+            # == comparison NA, not FALSE -- and any(NA) is NA, which is an error
+            # inside if(). Such a row is by definition not padded.
+            padded[is.na(padded)] <- FALSE
             if (any(padded)) {
                 status <- "WARN"
                 notes <- c(notes, paste0(
