@@ -128,9 +128,11 @@ def main():
     redivis.authenticate()
     dataset = redivis.user("bdomingu").dataset("irw_meta", version="next")
 
+    mismatches = []
     for stem, path in files.items():
         table_name = FILE_TABLE_MAP[stem]
         table = dataset.table(table_name)
+        expected = count_rows(path)
 
         try:
             existing_uploads = [u.name for u in table.list_uploads()]
@@ -154,9 +156,46 @@ def main():
                 raise_on_fail=True,
                 replace_on_conflict=True,
             )
-        print(f"  done: {table_name}")
+        # Verify the table really ends up holding the rows we just uploaded. A
+        # successful upload call does NOT imply a successful *replace*:
+        # replace_on_conflict only replaces an upload whose name matches, and a
+        # draft table can carry rows inherited from the released version that
+        # list_uploads() does not expose. When that happens the new rows land
+        # BESIDE the old ones and the table silently doubles -- exactly what
+        # happened to comps_metadata (23 unique rows -> 90 -> 180 across
+        # successive weekly runs, found 2026-08-24, with the stray-upload check
+        # above seeing nothing because there was no listable stray upload).
+        # Comparing numRows here turns that silent corruption into a loud
+        # failure on the first run it happens.
+        try:
+            actual = table.get().properties.get("numRows")
+            actual = int(actual) if actual is not None else None
+        except Exception as e:
+            print(f"  ! {table_name}: uploaded, but could not read back numRows ({e}) -- VERIFY BY HAND")
+            mismatches.append((table_name, expected, "unknown"))
+            continue
 
-    print("\nAll uploads complete on the 'next' (draft) version of bdomingu/irw_meta.")
+        if actual == expected:
+            print(f"  done: {table_name}  ({actual} rows, matches local)")
+        else:
+            print(f"  !! {table_name}: expected {expected} rows, table now has {actual}")
+            if actual is not None and actual > expected:
+                print("     Rows were APPENDED, not replaced -- this table is holding data the "
+                      "upload did not replace (typically inherited from the released version and "
+                      "not listed as an upload). Fix on the Redivis site: delete the table's "
+                      "existing data (or the table itself) on the 'next' draft, then re-run this "
+                      "script for just this file.")
+            mismatches.append((table_name, expected, actual))
+
+    if mismatches:
+        print(f"\n*** UPLOAD VERIFICATION FAILED for {len(mismatches)} of {len(files)} table(s):")
+        for name, exp, act in mismatches:
+            print(f"      {name}: expected {exp}, got {act}")
+        print("    Do NOT publish the draft version until these are resolved.")
+        sys.exit(1)
+
+    print("\nAll uploads complete and row-count verified on the 'next' (draft) version "
+          "of bdomingu/irw_meta.")
     print("Nothing is live yet -- review and publish the new version on the Redivis site.")
 
 

@@ -2,6 +2,16 @@
 ##################################################################################
 ##Construct metadata.csv
 
+##Write plain integers, never scientific notation. With R's default scipen=0,
+##write.csv() emits whichever representation is shorter, so the biggest tables
+##in the warehouse were being published at TWO significant digits: metadata.csv
+##held enem_2023_1mil_cn as n_responses=4.5e+07 (really 44,986,496) and
+##n_participants=1e+06 (really 999,722). A 2026-08-24 audit found 98 such cells
+##across 43 tables, all of them the large enem_* shards. The values were correct
+##in memory and only lost precision at write time, so this one line fixes every
+##affected row on the next run.
+options(scipen=999)
+
 ##tables from last version of metadata
 library(redivis)
 user <- redivis$user("bdomingu")
@@ -121,17 +131,31 @@ f<-function(tab) {
       testvec
   }
   try.counter<-0
+  last.err<-NA_character_
   while (try.counter<4) { #sometimes the download fails, this gives multiple tries to get that
       had_error<-FALSE
       testvec<-tryCatch(getvars(tab), error=function(e) {
           message("  ! request failed (attempt ", try.counter+1, "/4): ", conditionMessage(e))
           had_error<<-TRUE
+          last.err<<-conditionMessage(e)
           NULL
       })
       if (had_error) Sys.sleep(5) #network failure -- back off before retrying
       if (length(testvec)==7) try.counter<-100 else try.counter<-try.counter+1
   }
+  ##the refresh pass below needs to tell "this table is gone" apart from "the
+  ##network flaked", so carry the last error message back with the result
+  if (length(testvec)!=7) attr(testvec,"last.error")<-last.err
   return(testvec)
+}
+
+##Does an error message mean the table genuinely no longer exists, as opposed
+##to a transient network/API failure? Only a definite not-found is treated as
+##dead; anything else leaves the existing row untouched. See the refresh pass
+##below for why this distinction matters.
+is_missing_table_error<-function(msg) {
+  if (is.null(msg) || is.na(msg)) return(FALSE)
+  grepl("not[ _]?found|404|does not exist|no such table", msg, ignore.case=TRUE)
 }
 ##incremental fetch cache. The loop below can run for hours (~550 tables on a
 ##big week) and used to accumulate everything in memory until the single
@@ -146,6 +170,32 @@ stat.cols<-c("n_responses","n_categories","n_participants","n_items",
              "responses_per_participant","responses_per_item","density")
 cache.cols<-c("table",stat.cols,"fetched_at")
 cache.max.age.days<-30
+
+##Rolling refresh of ALREADY-KNOWN tables.
+##
+##Until 2026-08-24 this script only ever fetched stats for tables that were new
+##since the last run, so a table that got re-uploaded to Redivis kept its
+##original metadata.csv row forever. A corpus scan on 2026-08-18 found 47 rows
+##whose server-side count no longer matched what metadata.csv published --
+##western_reserve_project was 1,445,422 on Redivis vs 1,066,535 published, and
+##mhscdc_fried_2020_dass was out by exactly a factor of two. That scan also
+##found 8 rows (enem_2023_1mil_* and enem_2024_1mil_*) that list_tables() still
+##returns but which 404 on access, so the "remove tables" step near the top of
+##this script cannot see them -- from its point of view they are still live.
+##
+##Both problems have the same cause (existing rows are never revisited) and the
+##same fix: re-fetch a slice of the existing rows on every run. Counting is a
+##query now rather than a table export, so this costs nothing against the
+##200 GB/30-day export quota; the cost is API latency, hence the per-run cap.
+##
+##refresh.per.run tables are refreshed each run, oldest-first by last refresh,
+##so the corpus is swept on a rolling basis. Set to 0 to disable the pass
+##entirely. The log is deliberately a SEPARATE file from cache.file: the fetch
+##cache expires after cache.max.age.days (it exists to resume an interrupted
+##run), whereas the refresh log must persist indefinitely to drive the rotation.
+refresh.per.run<-200
+refresh.log.file<-'metadata_refresh_log.csv'
+dead.tables.file<-'metadata_dead_tables.csv'
 
 read_cache<-function() {
   empty<-setNames(data.frame(matrix(numeric(0),nrow=0,ncol=length(cache.cols)),
@@ -211,6 +261,106 @@ if (length(nms)>0 && nrow(fetched)>0) {
 
 str(summaries)
 length(unique(summaries$table))
+
+##---------------------------------------------------------------------------
+##Rolling refresh pass (see refresh.per.run above for the why).
+##Re-fetch stats for a slice of the tables that were ALREADY in metadata.csv,
+##oldest-refreshed first, and update their rows in place. Tables fetched
+##earlier in this same run are excluded -- their numbers are already current.
+##---------------------------------------------------------------------------
+read_refresh_log<-function() {
+  empty<-data.frame(table=character(0),refreshed_at=character(0),stringsAsFactors=FALSE)
+  if (!file.exists(refresh.log.file)) return(empty)
+  rl<-tryCatch(read.csv(refresh.log.file,stringsAsFactors=FALSE),
+               error=function(e) {
+                 message("  ! unreadable ",refresh.log.file,", ignoring it: ",conditionMessage(e))
+                 NULL
+               })
+  if (is.null(rl) || nrow(rl)==0 || !all(c("table","refreshed_at") %in% names(rl))) return(empty)
+  rl<-rl[,c("table","refreshed_at")]
+  rl[!duplicated(rl$table,fromLast=TRUE),] ##newest entry per table wins
+}
+
+if (refresh.per.run>0) {
+  just.fetched<-if (length(nms)>0) nms else character(0)
+  candidates<-setdiff(intersect(summaries$table,new.tables),just.fetched)
+  rlog<-read_refresh_log()
+  ##never-refreshed tables sort first, then oldest refresh first
+  last.at<-rlog$refreshed_at[match(candidates,rlog$table)]
+  last.time<-suppressWarnings(as.POSIXct(last.at,tz="UTC"))
+  ord<-order(is.na(last.time)==FALSE, last.time, candidates) ##NA (never) first, then oldest, name as tiebreak
+  todo.refresh<-head(candidates[ord],refresh.per.run)
+  message("refresh pass: ",length(todo.refresh)," of ",length(candidates),
+          " existing table(s) this run (refresh.per.run=",refresh.per.run,")")
+
+  refreshed.rows<-list(); dead<-character(0); flaky<-character(0); changed<-list()
+  for (k in seq_along(todo.refresh)) {
+    tb<-todo.refresh[k]
+    message("  refresh ",k,"/",length(todo.refresh)," ",tb)
+    i<-match(tb,new.tables)
+    testvec<-f(tables[[i]])
+    if (length(testvec)==7) {
+      old<-summaries[summaries$table==tb,stat.cols,drop=FALSE]
+      new<-as.numeric(testvec[stat.cols])
+      oldv<-suppressWarnings(as.numeric(unlist(old[1,])))
+      if (length(oldv)==length(new) && !isTRUE(all.equal(oldv,new))) {
+        changed[[tb]]<-data.frame(table=tb,
+                                  column=stat.cols,
+                                  old_value=oldv,
+                                  new_value=new,
+                                  stringsAsFactors=FALSE)[oldv!=new | is.na(oldv)!=is.na(new),]
+      }
+      for (cc in stat.cols) summaries[summaries$table==tb,cc]<-testvec[[cc]]
+      refreshed.rows[[tb]]<-data.frame(table=tb,
+                                       refreshed_at=format(Sys.time(),tz="UTC"),
+                                       stringsAsFactors=FALSE)
+    } else {
+      err<-attr(testvec,"last.error")
+      if (is_missing_table_error(err)) {
+        dead<-c(dead,tb)
+        message("  !! ",tb," is listed by list_tables() but does not resolve -- marking dead")
+      } else {
+        flaky<-c(flaky,tb)
+        message("  ! ",tb," failed to refresh (kept as-is): ",if (is.null(err)) "unknown" else err)
+      }
+    }
+  }
+
+  ##report what actually moved -- this is the 47-stale-rows problem made visible
+  if (length(changed)>0) {
+    chg<-do.call("rbind",changed)
+    message("refresh: ",length(changed)," table(s) had stats that no longer matched metadata.csv")
+    print(utils::head(chg,40))
+    write.csv(chg,'metadata_refresh_changes.csv',row.names=FALSE)
+  } else message("refresh: no stat changes among the refreshed tables")
+
+  ##dead tables: drop the row AND record it, so the enem_2023/2024-style rows
+  ##cannot sit in metadata.csv indefinitely. Only definite not-found errors get
+  ##here; transient failures land in `flaky` and leave the row alone.
+  if (length(dead)>0) {
+    message("refresh: dropping ",length(dead)," dead table(s) from metadata.csv: ",
+            paste(dead,collapse=", "))
+    prev.dead<-if (file.exists(dead.tables.file)) {
+      tryCatch(read.csv(dead.tables.file,stringsAsFactors=FALSE),error=function(e) NULL)
+    } else NULL
+    dd<-data.frame(table=dead,detected_at=format(Sys.time(),tz="UTC"),stringsAsFactors=FALSE)
+    if (!is.null(prev.dead) && all(c("table","detected_at") %in% names(prev.dead)))
+      dd<-rbind(prev.dead[,c("table","detected_at")],dd)
+    write.csv(dd[!duplicated(dd$table,fromLast=TRUE),],dead.tables.file,row.names=FALSE)
+    summaries<-summaries[!(summaries$table %in% dead),]
+  }
+  if (length(flaky)>0)
+    message("refresh: ",length(flaky)," table(s) failed transiently and were left unchanged: ",
+            paste(flaky,collapse=", "))
+
+  ##only log tables we actually refreshed, so a failure retries next run rather
+  ##than going to the back of the queue
+  if (length(refreshed.rows)>0) {
+    newlog<-do.call("rbind",refreshed.rows)
+    allog<-rbind(read_refresh_log(),newlog)
+    write.csv(allog[!duplicated(allog$table,fromLast=TRUE),],refresh.log.file,row.names=FALSE)
+  }
+}
 
 ##add dataset
 summaries<-merge(summaries,nt)
