@@ -21,7 +21,7 @@ maps to the filed issue. These are patches, not rewrites.
 
 ## Ready to upload — no further judgment needed
 
-Eight PASS with clean diffs. Text identical to published, item and resp sets
+Ten of the seventeen. Text identical to published, item and resp sets
 match live data, differences are exactly the filed defect:
 
 | table | issue | change vs published |
@@ -34,12 +34,16 @@ match live data, differences are exactly the filed defect:
 | `singh_2025_identity_pit` | #1619 | −1 orphaned item (`pit5`) |
 | `singh_2025_identity_cse` | #1609 | option_text 0.82 — scale direction reversed, the intended repair |
 | `sv-maia2_randelovic_2021_erq` | #1600 | option_text 0.81 — 1–7→1–5 rescale, the intended repair |
+| `eammi_grahe_2018_npi` | #1613 | statements moved into `option_text`; gate's "100% blank item_text" is correct for a forced-choice instrument |
+| `eammi_grahe_2018_socmedia` | #1604 | `SocMedia_bias_dummy` resp populated; row-count anomaly resolved below |
 
 Caveat carried, not blocking: `erq`'s 1–5 anchor wording is **inferred** from
 the 1–7 labels, not source-verified. Its replacement issues-page callout says
 so and must be pasted with the upload.
 
 ## Needs a human before upload
+
+Seven of the seventeen.
 
 | table | issue | what needs deciding |
 |---|---|---|
@@ -50,7 +54,6 @@ so and must be pasted with the upload.
 | `gilbert_meta_35` | #1615 | Knowingly incomplete (gated Dataverse). Shipping replaces an existing callout. |
 | `gilbert_meta_42` | #1620 | Knowingly incomplete (gated openICPSR). Same. |
 | `preschool_sel_akt` | #1611 | 47 of 48 items; `emtb4_6s_t1` prompt unrecoverable. Conditional callout depends on whether this is resolved first. |
-| `eammi_grahe_2018_socmedia` | #1604 | `SocMedia_bias_dummy` row-count anomaly in live data. Probably a subset-asked item; confirm it is not item-code conflation. |
 | `political_psychology` | #1594 | **Not fixed.** Item numbers may be assigned by column position, not variable name. Needs confirmation before anything touches this table. |
 
 ### Not a defect — do not "fix"
@@ -58,6 +61,13 @@ so and must be pasted with the upload.
 `eammi_grahe_2018_npi` (#1613) shows *100% blank item_text* in the gate. That
 is correct: NPI-13 is forced-choice, there is no item stem, and the two
 statements live in `option_text` at resp 1 and 2. The gate cannot know this.
+
+`eammi_grahe_2018_socmedia`'s row-count anomaly is resolved: `SocMedia_bias_dummy`
+has n=140 against ~3,179 for its siblings, and every response is the value 1
+(`lo=1 hi=1 n_lev=1`). Fewer rows, not more, so it is not item-code conflation.
+It is a degenerate flag variable with zero variance — arguably not an item at
+all, which is a **data-side** observation worth filing separately (same class as
+#1618/#1622). It does not block the item text upload.
 
 `gilbert_meta_78`/`_80` show *100% blank option_text*: PPVT and WJ are ability
 items scored 0/1 with no labeled options. Their row-count anomalies are
