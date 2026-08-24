@@ -10122,3 +10122,46 @@ match. If a value in range were being treated as missing by the authors,
 the means would not reproduce. That is a stronger check than a rarity or
 distribution-shape test and it is cheap whenever the deposit ships both
 the items and the index built from them.
+
+## Close-out of the 2026-08-18..20 scheduled runs (2026-08-24)
+
+The 13 tables and `biblio_batch_2026-08-24.csv` were uploaded/pasted
+(ben-domingue, 2026-08-24); both the staged biblio CSV and the
+`irw_output/` outputs are off disk. Remaining bookkeeping done at the same
+time:
+
+- **`resp = 0` in `ren_2024_adl` positively confirmed as a real scale
+  point**, per `datastandard.md`'s requirement to cite the paper's own
+  description rather than infer from distribution shape. The paper states
+  the coding item by item -- "The scale comprises two items scoring 0 or 5
+  points, six items scoring 0, 5, or 10 points, and the last two items
+  scoring 0, 5, 10, or 15 points" -- which matches the file exactly
+  (Bathing/Grooming max 5; Feeding/Dressing/BowelControl/BladderControl/
+  ToiletUse/StairClimbing max 10; Transfer/Mobility max 15) -- and names
+  the anchor: "The score ranges from 0 (total dependence) to 100 (complete
+  independence)". Three corroborating checks: `sum(10 items) == ADL`
+  exactly for all 1,587 rows *including* the 166 rows containing a zero
+  (a missing code could not reproduce the authors' own total); the four
+  respondents scoring 0 on every item carry through to `ZADL = -8.89`
+  rather than being dropped; and 0 occurs on all ten items, 9-149 times
+  each, scaling with item difficulty rather than isolated to one item.
+  There are no NaNs in the item block at all -- missingness was handled
+  upstream, "1622 participants completed the questionnaires. After
+  evaluation, there were 1587 qualified questionnaires".
+
+- **The two permanently-restricted Dataverse deposits are now recorded and
+  retired from the retry pile.** `DVN/7P3PFB` (terms: "Access can be
+  requested from the authors") and `DVN/FG3CCK` (CC0 deposit, but
+  `restricted=True` on `Replication_data.tab` while its Stata do-file is
+  open) were appended to `license_blocked_candidates.csv` with contacts,
+  and their keys added to `repo_triage_seen_keys.csv` so triage stops
+  re-attempting a 403 that will never clear on its own. FG3CCK reads like
+  a deposit-configuration oversight rather than a deliberate restriction --
+  the author already chose CC0 -- so it is a good candidate for a short
+  permission email if someone wants the lead; no email has been sent.
+
+This closes the four runs. Nothing from 2026-08-18..20 is left open except
+the items now tracked in `TODO.md`: the `pone.0242267` delimiter re-read,
+the two remaining `human_review` rows, the `download_failed`-vs-restricted
+classification fix in `_dataverse_files()`, and an item-text pass over the
+four `gao_2022_*` tables.

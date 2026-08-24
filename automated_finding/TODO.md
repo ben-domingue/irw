@@ -10,9 +10,22 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   tables), `data/abramson_2026_diaspora.py` (Harvard Dataverse, CC0,
   N=1706 across 2 waves → 4 tables). 13 tables, ~181k responses.
 
-- [ ] **`biblio_batch_2026-08-24.csv` (13 rows) staged, not yet pasted**:
-  dictionary-sheet rows for the 13 tables above. The `irw_output/` CSVs are
-  on disk and upload-ready. Paste the rows and upload, then delete both.
+- [x] **`biblio_batch_2026-08-24.csv` (13 rows) uploaded/pasted** (confirmed
+  2026-08-24, ben-domingue): the 13 tables from `gao_2022_covid_stress.py`,
+  `ren_2024_rural_elderly.py` and `abramson_2026_diaspora.py`, ~181k
+  responses. `biblio_batch_2026-08-24.csv` and the `irw_output/` CSVs
+  removed from disk. See `BATCH_LOG.md`'s "Step 3 for the three recovered
+  datasets" entry.
+
+- [ ] **Item text available for the 4 `gao_2022_*` tables**: the S1 Dataset's
+  own column headers are the full Chinese item stems for all 69 items
+  (PSS-10, the 28-item stress-response scale, SCSQ, ERQ), and the script's
+  positional item numbering (`PSS_1`, `SRQ_1`, ...) follows the numbering
+  embedded in those stems, so they join directly on `item`. No PDF parsing
+  needed -- worth an `irw-auto-itemtext` pass, including the translated
+  text. `ren_2024_*` and `abramson_2026_*` have no comparable in-deposit
+  text (Ren ships bare codes like `c65b`; Abramson's README gives only
+  short variable descriptions, with full wording in the paper appendix).
 
 - [ ] **`10.1371/journal.pone.0242267` needs a delimiter re-read
   (2026-08-24)**: `S1_Dataset.csv` parsed as one column whose header is
