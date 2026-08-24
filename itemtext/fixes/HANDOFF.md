@@ -1,8 +1,15 @@
 # Item text corrections — handoff
 
-State as of 2026-08-24. **The 10 clean tables are uploaded** to the `irw_text`
-draft version (`next`) and verified. The draft is **not yet released** — until
-it is, `v6.3` remains live and still carries the old text.
+State as of 2026-08-24. **13 of the 17 are resolved.** Nine corrections are
+live in `irw_text` **v7.0** (released 20:03). Three more — `gilbert_meta_35`,
+`gilbert_meta_42`, `preschool_sel_akt` — are uploaded to the draft and awaiting
+release. `gilbert_meta_78`/`_80` were resolved by removing their itemtext
+tables (the PPVT-4 / WJ-III licensing question), and `dumas_organisciak_2022`
+is being removed from IRW.
+
+Remaining: **3 tables**, all needing a decision rather than a check —
+`threat_isler_2024_exp4_cog_crt` (#1605), `double_marking_steele_2022` (#1616),
+`political_psychology` (#1594).
 
 ### Uploading replaces nothing — read this before shipping the rest
 
