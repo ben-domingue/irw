@@ -75,7 +75,7 @@ from irw_discover_updated import (
     Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
 )
 from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
-from irw_triage_updated import load_table, triage_dataset
+from irw_triage_updated import load_table, triage_dataset, preflight_deps
 
 EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 EUROPEPMC_SUPPL = "https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/supplementaryFiles"
@@ -378,6 +378,7 @@ def append_seen_dois(dois, path: str = SEEN_DOIS_PATH) -> None:
 
 
 def main():
+    preflight_deps()
     ap = argparse.ArgumentParser()
     ap.add_argument("queries", nargs="*", default=["item response theory"])
     ap.add_argument("--out", default="pmc_triage.csv")

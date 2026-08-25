@@ -39,6 +39,24 @@ no sudo, no system package changes) rather than fighting with a venv.
 Supporting Information files — `openpyxl` only handles `.xlsx`); install the
 same way if missing.
 
+**This is enforced, not advisory.** Every entry point calls
+`preflight_deps()` (in `irw_triage_updated.py`) as the first statement of
+`main()`: it checks the optional readers, attempts a
+`pip install --user --break-system-packages` for whatever is missing, and
+aborts the run with `SystemExit` if any are still absent. Do not remove or
+work around that call. The reason is concrete — a missing reader does not
+fail loudly, it makes `load_table()` raise per-file, which the callers
+record as a per-row `download_failed` that looks exactly like a dead URL,
+and the DOI/key is then written to the seen ledger so the candidate is never
+retried. The 2026-08-24 repos run and the 2026-08-25 PLOS run each lost
+double-digit candidates this way (see `BATCH_LOG.md`).
+
+**Cloud/CCR runs start from a bare sandbox.** `preflight_deps()`'s
+auto-install handles this, but if the sandbox blocks outbound pip the run
+will now abort rather than silently produce an all-`no_usable_file` result —
+that abort is the correct outcome, and the fix is to install the packages in
+the environment, not to skip the check.
+
 ## Before doing anything
 
 1. Read `TODO.md` — the short list of currently open action items (on-hold

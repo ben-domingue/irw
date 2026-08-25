@@ -187,7 +187,11 @@ def process_one(row: dict, out_dir: str) -> dict:
 # Main
 # ---------------------------------------------------------------------------
 
+from irw_triage_updated import preflight_deps
+
+
 def main():
+    preflight_deps()
     import argparse
     ap = argparse.ArgumentParser()
     ap.add_argument("--out-dir", default=os.path.join("irw_output", "queue"))

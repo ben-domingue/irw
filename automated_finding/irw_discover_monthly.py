@@ -281,7 +281,11 @@ def append_log_rows(rows: list[dict], log_path: str = LOG_PATH) -> None:
         writer.writerows(rows)
 
 
+from irw_triage_updated import preflight_deps
+
+
 def main():
+    preflight_deps()
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["weekly", "full"], default="full",
                      help="weekly: HIGH_YIELD_TERMS subset (~15 terms), for a frequent "

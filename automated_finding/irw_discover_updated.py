@@ -793,7 +793,11 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
     return results
 
 
+from irw_triage_updated import preflight_deps
+
+
 def main():
+    preflight_deps()
     ap = argparse.ArgumentParser()
     ap.add_argument("queries", nargs="*", default=["item response theory"])
     ap.add_argument("--all", action="store_true", help="disable relevance filter")

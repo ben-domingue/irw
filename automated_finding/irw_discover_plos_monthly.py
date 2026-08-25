@@ -103,7 +103,11 @@ def _append_log_rows(rows: list[dict], path: str = LOG_PATH) -> None:
         writer.writerows(rows)
 
 
+from irw_triage_updated import preflight_deps
+
+
 def main():
+    preflight_deps()
     ap = argparse.ArgumentParser()
     ap.add_argument("--mode", choices=["weekly", "full"], default="weekly")
     ap.add_argument("--journals", default=DEFAULT_JOURNAL,

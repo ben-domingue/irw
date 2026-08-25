@@ -40,6 +40,77 @@ import pandas as pd
 
 UA = {"User-Agent": "irw-triage/1.0 (research)"}
 
+
+# ---------------------------------------------------------------------------
+# Dependency preflight
+# ---------------------------------------------------------------------------
+# load_table() dispatches on file extension into pandas readers that are
+# themselves thin wrappers around optional third-party packages. If one of
+# those is missing, pandas raises ImportError *per file*, which the callers
+# record as a per-row `download_failed` — indistinguishable, in the output
+# CSV, from a dead URL. The rows then get written to the seen-DOIs/seen-keys
+# ledgers, so the false negative becomes permanent.
+#
+# This has bitten the scheduled cloud runs repeatedly (2026-08-24 repos run;
+# 2026-08-25 PLOS run lost 10 of 12 candidates this way, one of them a strong
+# multi-scale dataset). So: fail loudly at startup instead of quietly per row.
+# Every entry point calls preflight_deps() as the first thing in main().
+
+# module name -> what it lets us read
+OPTIONAL_READERS = {
+    "openpyxl":   ".xlsx",
+    "pyreadstat": ".sav / .sas7bdat",
+    "pyreadr":    ".RData / .rds",
+}
+
+
+def preflight_deps(required=None, autoinstall=True):
+    """Abort the run if a table-reader dependency is missing.
+
+    Tries a `pip install --user` first (cloud sandboxes start bare), then
+    re-checks. Raises SystemExit rather than returning False: a run that
+    cannot read half the formats it will encounter should not proceed to
+    write verdicts into the seen-keys ledgers.
+    """
+    import importlib
+    import subprocess
+    import sys
+
+    names = list(required or OPTIONAL_READERS)
+
+    def missing():
+        out = []
+        for n in names:
+            try:
+                importlib.import_module(n)
+            except ImportError:
+                out.append(n)
+        return out
+
+    gone = missing()
+    if gone and autoinstall:
+        print(f"[preflight] missing table readers: {', '.join(gone)} — installing",
+              flush=True)
+        subprocess.run(
+            [sys.executable, "-m", "pip", "install", "--user",
+             "--break-system-packages", *gone],
+            check=False)
+        importlib.invalidate_caches()
+        gone = missing()
+
+    if gone:
+        detail = "\n".join(f"    {n:<12} needed for {OPTIONAL_READERS.get(n, '?')}"
+                            for n in gone)
+        raise SystemExit(
+            "[preflight] ABORTING — cannot read all supported table formats.\n"
+            f"{detail}\n"
+            "    Install with:\n"
+            "      pip3 install --user --break-system-packages "
+            + " ".join(gone) + "\n"
+            "    Running without these silently flags readable files as\n"
+            "    `download_failed` and burns their DOIs in the seen-keys ledger."
+        )
+
 IRW_REQUIRED = ["id", "item", "resp"]
 
 PERSON_LEVEL_COLS = {"wave", "treat"}

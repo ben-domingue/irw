@@ -48,7 +48,7 @@ from urllib.parse import urlparse
 import requests
 import pandas as pd
 
-from irw_triage_updated import load_table, triage_dataset, irw_metadata
+from irw_triage_updated import load_table, triage_dataset, irw_metadata, preflight_deps
 from irw_discover_updated import SourceBlocked, in_runs_dir, resolve_in_path
 
 
@@ -608,6 +608,7 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
 
 
 def main():
+    preflight_deps()
     ap = argparse.ArgumentParser()
     ap.add_argument("candidates_csv")
     ap.add_argument("--out", default="irw_triage.csv")
