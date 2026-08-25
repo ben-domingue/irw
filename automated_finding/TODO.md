@@ -53,14 +53,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   script is easy; if it does not, this is a `treat`-column study, not an
   IRW table. Not guessed at.
 
-- [ ] **Raw Google Forms exports are a recurring PII risk the `good` flag
+- [x] **Raw Google Forms exports are a recurring PII risk the `good` flag
   cannot see.** Both doomscrolling deposits
   (`figshare.29857874`, `figshare.28979105`) triaged `good` and both carry a
   `Respondent's Name (Real Name/Initial)` column of actual given names plus
   second-precision timestamps. Skipped per
   `feedback_pii_skip_entirely`. Worth considering a triage-time warning when
   a column name matches `name|email|phone|address|birth` so these surface as
-  something other than `good`.
+  something other than `good`. — **fixed 2026-08-25**: `screen_for_pii()` plus the terminal `pii_suspected` flag now run ahead of every other verdict in `triage_dataset()`. See the BATCH_LOG entry for the two-tier design and the 24/27 verification.
 
 - [ ] **Build a Mendeley Data discovery connector.** Highest actionable rate
   measured anywhere in the system: 5 `good` + 21 `worth_retrying` out of 117
@@ -192,13 +192,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `reasons`, not a hard gate, so a `good` row can still be unusable —
   always read the `license` column before queueing.
 
-- [ ] **DataCite emits one candidate per DOI version, so datasets triage
+- [x] **DataCite emits one candidate per DOI version, so datasets triage
   2-3x** (2026-08-24): `10.17632/j33ytz7wsx` and `10.17632/j33ytz7wsx.1`
   are the same Mendeley deposit and each got downloaded and triaged
   separately; the 23 `human_assistance` rows in the weekly re-triage
   collapse to ~9 unique datasets, and 9 `human_review` rows to 4. Worth
   collapsing version suffixes in `irw_discover_updated.py`'s dedupe (and
-  in `_key()`) before the next weekly run.
+  in `_key()`) before the next weekly run. — **fixed 2026-08-25**: `canonical_doi()` in `irw_discover_updated.py` collapses Mendeley/figshare/Dryad version suffixes, used by `_key()`, `load_seen_keys()` and the discovery dedupe. Scoped to those prefixes so PLOS-style DOIs ending in `.digits` are untouched.
 
 - [ ] **Mendeley `.zip`-only deposits are still `no_usable_file`**
   (2026-08-24): 6 of the 41 remaining `no_usable_file` rows are Mendeley
@@ -589,13 +589,13 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone
   from disk as expected.
 
-- [ ] **PLOS ONE batch 24 — 2 candidates in the N=50-99 borderline band**,
+- [x] **PLOS ONE batch 24 — 2 candidates in the N=50-99 borderline band**,
   reviewed but not shipped, awaiting a decision: `10.1371/journal.pone.
   0335166` (nursing literacy practices, Karolinska, N=67, 10 closed
   ordinal 1-4 items) and `10.1371/journal.pone.0229591` (early visual
   language/deaf children, analytic-sample N=56, partly opaque item codes
   mixed with already-scored subtest scores). See `BATCH_LOG.md`'s "PLOS
-  ONE batch 24" entry.
+  ONE batch 24" entry. — **closed 2026-08-25, no decision needed**: the flat N>=100 floor with no ask-first band was settled 2026-08-12 (memory `feedback_min_sample_size`); both are N<100 and simply skipped — the same policy-application error already corrected for PLOS batch 27 and PMC batch 4.
 
 - [ ] **PLOS ONE batch 24 — one candidate needing human follow-up**:
   `10.1371/journal.pone.0286787` (OSCE nursing exam) has real-looking
@@ -648,12 +648,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   "Human eye" sheet (confirmed 2026-08-11, ben-domingue); file gone from
   disk as expected.
 
-- [ ] **Batch 22 — one N=50-99 borderline candidate not shipped, no
+- [x] **Batch 22 — one N=50-99 borderline candidate not shipped, no
   ben-domingue decision needed**: `10.1371/journal.pone.0311487` (natural
   soundscapes/mood recovery, N=68) was independently disqualified on
   content grounds (composite-only STAI-S/UWIST-MACL scores, no raw items)
   so it didn't reach a pure N judgment call — logged here only for
-  completeness, no action needed.
+  completeness, no action needed. — **closed 2026-08-25**: the item says so itself; N<100 is a flat skip and the candidate was independently disqualified anyway.
 
 - [x] **`automated_finding/biblio_plos_batch21.csv`** (25 rows, 4 papers ->
   25 tables, from PLOS ONE batch 21's `good`-candidate review) uploaded to
@@ -1837,9 +1837,9 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - `10.7717/peerj.10904` (cardiovascular coping, n=42) -- a marginal
     3-item x ~5-timepoint SAM battery, small n/item count, not extracted.
 
-- [ ] **`irw_discover_pmc.py` triage bug**: `'int' object has no attribute
+- [x] **`irw_discover_pmc.py` triage bug**: `'int' object has no attribute
   'lower'` on `10.7717/peerj.18828` (COVID-19/children study) during PMC
-  batch 3 (2026-08-12) -- real pipeline bug, not yet root-caused or fixed.
+  batch 3 (2026-08-12) -- real pipeline bug, not yet root-caused or fixed. — **fixed 2026-08-24, closed 2026-08-25**: this is the numeric-spreadsheet-header bug; `load_table()` now coerces column labels to `str` on every read path, which is exactly the `'int' object has no attribute 'lower'` failure. Nothing further to root-cause.
 
 - [ ] **2 `download_failed` rows from PMC batch 3** (`10.7717/peerj.17440`,
   `10.7717/peerj.2421`) -- legacy `.xls` files, sandbox was missing
