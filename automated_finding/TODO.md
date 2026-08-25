@@ -39,8 +39,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   A 45-term pilot is running as
   `runs/candidates_nonlatin_pilot_2026-08-25.csv` — size the payoff from that
   before committing to all 1,215. The Spanish/German/French/Dutch terms were
-  affected too and are not in that 1,215 count.
-
+  affected too and are not in that 1,215 count. **Decided 2026-08-25 (ben-domingue): size it with the pilot first, then decide** — same justification path as the 2026-07-15 English alt-format re-discovery (575 terms re-run, 186 previously-invisible candidates, 21 new tables). The 45-term pilot is queued behind the education sweep and writes to `runs/candidates_nonlatin_pilot_2026-08-25.csv`; compare its per-term candidate rate against those same terms' original rows in `search_terms_log.csv` to get the recovery rate, then judge the remaining ~1,170. Note the ~1,215 figure counts only non-Latin-script terms — the Spanish/German/French/Dutch ones hit the same bug and are a further pool on top.
 - [ ] **Work the 1,983 candidates just un-blocked from
   `googlesheet_humaneye.csv`.** Of its 4,833 rows only 31 were ever
   adjudicated; the rest were being excluded from every discovery run as
