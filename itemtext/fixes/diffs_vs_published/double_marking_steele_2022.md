@@ -5,7 +5,7 @@ Classification (suggested): **review**
 ## Summary
 
 - item coverage: OK (missed=0, extra=0)
-- resp-set alignment rate: 1
+- resp-set alignment rate: 0.8333
 - mean item_text similarity: 0.0188
 - mean option_text similarity: 1
 - mean context (instructions/section_prompt) similarity: n/a
@@ -13,6 +13,7 @@ Classification (suggested): **review**
 
 ## Itemized mismatches
 
+- `presentation` -- resp_set_mismatch (curated={15,20,35,42,45,48,52,55,58,62,65,68,74,83,92,100} fresh={0,1,15,20,35,42,45,48,52,55,58,62,65,68,74,83,92,100})
 - `abstract` -- item_text_mismatch
 - `discussion` -- item_text_mismatch
 - `introduction` -- item_text_mismatch
