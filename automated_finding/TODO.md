@@ -17,6 +17,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   term list, or drop the weekly cadence and run monthly full sweeps only.
   This is a ben-domingue call, not a code fix.
 
+- [ ] **The monthly routines' `--limit 150` is now spread across 125 terms.**
+  `per_term_cap = max(1, limit // len(terms))`, so each term gets exactly 1
+  candidate — it was already 1 at 100 terms, so this is not a regression, but
+  a 125-term sweep at `--limit 150` is very broad and very shallow. If the
+  education terms are to get a fair test, the monthly PLOS/PMC/repos routines
+  want a higher `--limit` (or `--per-term-cap 3-5` explicitly). That is a
+  change to the cloud routine prompts, not to the code, so it needs
+  ben-domingue. Folds into the scheduled-runs decision above.
 - [ ] **Re-run the ~1,215 non-Latin-script repo terms under the fixed
   relevance filter.** They were all run under an English-only title gate that
   discarded essentially every non-English-titled hit before triage (fixed
@@ -70,7 +78,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   not a new scraper. The 26 leads found so far are in
   `mendeley_leads_2026-08-25.csv` — process those first regardless.
 
-- [ ] **Add educational-measurement terms to
+- [x] **Add educational-measurement terms to
   `irw_discover_monthly.py`'s `TERM_LIST`.** It is ~100 terms of self-report
   psychology with six executive-function tasks and nothing else on ability
   or achievement. Zero queries have ever been run, in any mode, for `rasch`,
@@ -79,7 +87,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   assessment`, `essay scoring`, `spatial ability`, `reasoning test`,
   `science achievement`, `literacy assessment`, `multiple choice exam`,
   `IPIP`, `SDQ`, `schwartz values`, `emotion recognition`. The 20-term
-  English set used for the 2026-08-25 one-off runs is a ready starting list.
+  English set used for the 2026-08-25 one-off runs is a ready starting list. — **done 2026-08-25**: 25 terms added to `irw_discover_monthly.py`'s `TERM_LIST` (100 -> 125), which `irw_discover_plos_monthly.py` and `irw_discover_pmc_monthly.py` both import as `FULL_TERM_LIST`, so one edit covers all three monthly sweeps. Deliberately NOT added to `HIGH_YIELD_TERMS` (the weekly subset): per the same discipline the SKILL applies to journals, a term earns that list with a measured yield, and the one-off PLOS education run (26 `human_assistance` from 300 candidates) is about par, not proven high-yield.
 
 - [ ] **Review the education-gap runs' output.** PLOS mode gave 8
   `worth_retrying` (`runs/plos_edu_retriage_ha_2026-08-25.csv`) and 5

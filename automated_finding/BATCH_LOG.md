@@ -10697,3 +10697,44 @@ false positives; re-checked end to end that the doomscrolling file now
 returns `pii_suspected` flagging exactly one column, while the CAPQ, FTD-SS
 and CES-D files this batch shipped are unaffected. `README.md`'s flag table
 updated.
+
+### Education terms added to the standing monthly term list (2026-08-25)
+
+Follow-up to Finding 7. The one-off sweeps proved the gap was real (they
+recovered `alexandrowicz_2018_cesd` and the six `sumner_2022_*` tables), but
+a one-off does not change what the scheduled routines search — so 25 terms
+were added to `irw_discover_monthly.py`'s `TERM_LIST`, 100 -> 125.
+`irw_discover_plos_monthly.py` and `irw_discover_pmc_monthly.py` both do
+`from irw_discover_monthly import TERM_LIST as FULL_TERM_LIST`, so the one
+edit covers the repos, PLOS and PMC monthly sweeps alike.
+
+Added, in two groups:
+
+* **ability / achievement** — reading comprehension, listening
+  comprehension, vocabulary test, spelling test, literacy assessment,
+  mathematics achievement, numeracy, science achievement, achievement test,
+  student assessment, classroom assessment, multiple choice exam, essay
+  scoring, knowledge test, language proficiency, concept inventory,
+  reasoning test, spatial ability, cognitive ability, emotion recognition
+  accuracy.
+* **psychometric method** — rasch analysis, item bank, differential item
+  functioning, test equating, computerized adaptive testing. A paper doing
+  IRT/DIF/equating work almost always deposits the item-level responses it
+  modelled, which makes these unusually high-precision terms for the IRW
+  specifically.
+
+**Not added to `HIGH_YIELD_TERMS`** (the 15-term weekly subset). Same
+discipline the SKILL applies to adding a journal: a term earns that list
+with a measured yield, and the only evidence so far — the one-off PLOS
+education run, 26 `human_assistance` out of 300 candidates — is about par
+for PLOS, not proven high-yield. Revisit once the monthly sweeps have run
+these terms a couple of times.
+
+**Consequence worth knowing**: `per_term_cap = max(1, limit // len(terms))`,
+so at the routines' `--limit 150` each term now gets exactly 1 candidate.
+That was already true at 100 terms (150//100 = 1), so this is not a
+regression — but a 125-term sweep at that limit is very broad and very
+shallow, and the new terms will not get a fair test until the monthly
+routines run with a higher `--limit` or an explicit `--per-term-cap`. Logged
+in `TODO.md` against the scheduled-runs decision, since it is a change to the
+cloud routine prompts rather than to the code.

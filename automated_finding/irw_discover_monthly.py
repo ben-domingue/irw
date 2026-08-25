@@ -178,6 +178,41 @@ TERM_LIST = [
     # Sport / physical
     "sport motivation",
     "physical activity enjoyment",
+    # Educational measurement / ability testing.
+    # Added 2026-08-25 after the discovery audit found this list carried no
+    # ability or achievement coverage at all -- 3,764 logged queries and not
+    # one for rasch, item bank, concept inventory, spatial ability, student
+    # assessment, essay scoring or test equating, in any mode. That is the
+    # IRW's own core domain and it is where large, item-rich, IRT-relevant
+    # data lives. The one-off 2026-08-25 sweep over these terms recovered
+    # alexandrowicz_2018_cesd and sumner_2022_* (see BATCH_LOG.md).
+    "reading comprehension",
+    "listening comprehension",
+    "vocabulary test",
+    "spelling test",
+    "literacy assessment",
+    "mathematics achievement",
+    "numeracy",
+    "science achievement",
+    "achievement test",
+    "student assessment",
+    "classroom assessment",
+    "multiple choice exam",
+    "essay scoring",
+    "knowledge test",
+    "language proficiency",
+    "concept inventory",
+    "reasoning test",
+    "spatial ability",
+    "cognitive ability",
+    "emotion recognition accuracy",
+    # Psychometric method terms -- a paper doing IRT/DIF/equating work almost
+    # always deposits the item-level responses it modelled.
+    "rasch analysis",
+    "item bank",
+    "differential item functioning",
+    "test equating",
+    "computerized adaptive testing",
     # Misc
     "youth development",
     "employability skills",
