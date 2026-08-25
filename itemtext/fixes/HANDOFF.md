@@ -2,14 +2,13 @@
 
 State as of 2026-08-25. **16 of the 17 are resolved.** Nine corrections are
 live in `irw_text` **v7.0** (released 2026-08-24 20:03). Three more —
-`gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt` — are
-uploaded to the draft and awaiting release (`preschool_sel_akt` re-uploaded
-2026-08-25, now complete at 65/65 items). `gilbert_meta_78`/`_80` were
+`gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt`,
+`threat_isler_2024_exp4_cog_crt` and `gilbert_meta_35` — are uploaded to the
+draft and awaiting release. `gilbert_meta_78`/`_80` were
 resolved by removing their itemtext tables (the PPVT-4 / WJ-III licensing
 question), `dumas_organisciak_2022` is being removed from IRW, and
-`gilbert_meta_35` was resolved by removing its itemtext table (item-to-text
-mapping unverifiable — see its row below; #1615 reopened pending
-@joshgilbert1994).
+`gilbert_meta_35`'s mapping was corrected outright once @joshgilbert1994
+answered — see its row below.
 
 Remaining: **3 tables**, none of them a text-extraction problem —
 `gilbert_meta_78`/`_80` (#1607/#1606) are a licensing call on PPVT-4 and
@@ -85,7 +84,7 @@ Seven of the seventeen.
 | `gilbert_meta_80` | #1606 | Same, **WJ-III Picture Vocabulary** (`fork`, `fish`…). |
 | `double_marking_steele_2022` | #1616 | **Done 2026-08-25.** Rubric item_text uploaded (108 rows). option_text deliberately left as the generic band descriptors per @xingyi-zhang. Fixed en route: duplicate `abstract` N/S rows, and `presentation`'s missing N/S rows. audit_batch.R now PASSes. |
 | `threat_isler_2024_exp4_cog_crt` | #1605 | **Done 2026-08-25.** option_text for all 3 items and correct_response verified against the study's own Qualtrics .qsf (OSF grafm, Experiment 4): code 1 is the correct answer in all three items. Also fixed a wrong `table` value in the file (`..._cognitive_crt` -> `..._cog_crt`). audit_batch.R PASS. |
-| `gilbert_meta_35` | #1615 | **Corrected file ready, NOT uploaded 2026-08-25.** @joshgilbert1994 confirmed `values1k`/`_l` are real and that the `values1/2/3` prefix is the wave, so IRW's letters are the source's letters. The Dataverse **API** is not WAF-blocked (the web page is): the `.dta` variable labels name 6 items outright and `Replication_do_file.do` line 49 gives the 8-item scale as a,c,d,e,f,g,i,j. **The published text was wrong on 7 of 8 items** — laid onto a-h in order, shifted by the 4 non-scale items. Rewritten to 8 items x 4 options, b/h/k/l omitted, and the reversed option labels fixed on e/j. Needs Ben's go-ahead to re-upload. |
+| `gilbert_meta_35` | #1615 | **Done 2026-08-25.** @joshgilbert1994 confirmed `values1k`/`_l` are real and that the `values1/2/3` prefix is the wave, so IRW's letters are the source's letters. The Dataverse **API** is not WAF-blocked (the web page is): the `.dta` variable labels name 6 items outright and `Replication_do_file.do` line 49 gives the 8-item scale as a,c,d,e,f,g,i,j. **The published text was wrong on 7 of 8 items** — laid onto a-h in order, shifted by the 4 non-scale items. Rewritten to 8 items x 4 options, b/h/k/l omitted, and the reversed option labels fixed on e/j. Uploaded and verified at 32 rows / 8 items; issues-page entry added for the 4 omitted items. |
 | `gilbert_meta_42` | #1620 | **Done 2026-08-25.** Ships 12 of 20 items; the 4 `life_satisfaction_*` and 4 `locus_of_control_*` items omitted (no text available). Draft verified at 60 rows. Open follow-up on the issue: the `stress` section prompt does not fit `stress_b`/`stress_c`. |
 | `preschool_sel_akt` | #1611 | **Done 2026-08-25.** Complete: all 65 items now carry text. @xingyi-zhang found `emtb4_6s_t1`'s prompt (it sits under the raw-score twin on the next page); verified against the codebook. Also confirmed the `emtb1_4`/`_5` reconstruction, and stripped a trailing "Scored" variable-label artifact from all 17 `akt*` items. Issues-page callout removed. |
 | `political_psychology` | #1594 | **Not fixed.** Item numbers may be assigned by column position, not variable name. Needs confirmation before anything touches this table. |
