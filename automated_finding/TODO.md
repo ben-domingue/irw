@@ -3,6 +3,79 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
+
+- [ ] **Decide what to do about the scheduled cloud runs.** Throughput fell
+  from ~26 new `data/*.py` scripts/day (2026-07-26..08-13, manual batches) to
+  ~1.4/day (08-14..08-25, scheduled runs) — an 18x drop. The bugs behind each
+  individual run are now fixed, but two design problems are not: a scheduled
+  run surfaces candidates into a PR and stops, with nobody reviewing the
+  `good`+`worth_retrying` pool (which is where all the manual-batch yield
+  came from); and the weekly runs re-search the same 15 high-yield terms
+  behind a seen-DOI ledger, so they are mined out by construction. Options:
+  fold a "review the pool" step into the routine prompt, rotate the weekly
+  term list, or drop the weekly cadence and run monthly full sweeps only.
+  This is a ben-domingue call, not a code fix.
+
+- [ ] **Re-run the ~1,215 non-Latin-script repo terms under the fixed
+  relevance filter.** They were all run under an English-only title gate that
+  discarded essentially every non-English-titled hit before triage (fixed
+  2026-08-25). Same shape as the 2026-07-15 English alt-format re-discovery.
+  A 45-term pilot is running as
+  `runs/candidates_nonlatin_pilot_2026-08-25.csv` — size the payoff from that
+  before committing to all 1,215. The Spanish/German/French/Dutch terms were
+  affected too and are not in that 1,215 count.
+
+- [ ] **Work the 1,983 candidates just un-blocked from
+  `googlesheet_humaneye.csv`.** Of its 4,833 rows only 31 were ever
+  adjudicated; the rest were being excluded from every discovery run as
+  though they had been. A first cut — cleanly-parsing, explicit open
+  license, N>=100, >=3 items — is 173 unique candidates, triaged as
+  `runs/triage_backlog_recovered_2026-08-25.csv`. That filter is
+  conservative (it drops every row whose columns are shifted by the Sheets
+  export, and every row with no N recorded), so there is more in there.
+
+- [ ] **Build a Mendeley Data discovery connector.** Highest actionable rate
+  measured anywhere in the system: 5 `good` + 21 `worth_retrying` out of 117
+  candidates (22%), all CC BY, against PLOS ONE's ~1% good. Mendeley's own
+  search API needs OAuth, but DataCite indexes it under prefix `10.17632`
+  with no key (`?query=...&prefix=10.17632`), so this is a small connector,
+  not a new scraper. The 26 leads found so far are in
+  `mendeley_leads_2026-08-25.csv` — process those first regardless.
+
+- [ ] **Add educational-measurement terms to
+  `irw_discover_monthly.py`'s `TERM_LIST`.** It is ~100 terms of self-report
+  psychology with six executive-function tasks and nothing else on ability
+  or achievement. Zero queries have ever been run, in any mode, for `rasch`,
+  `item bank`, `concept inventory`, `spelling test`, `listening
+  comprehension`, `knowledge test`, `student assessment`, `classroom
+  assessment`, `essay scoring`, `spatial ability`, `reasoning test`,
+  `science achievement`, `literacy assessment`, `multiple choice exam`,
+  `IPIP`, `SDQ`, `schwartz values`, `emotion recognition`. The 20-term
+  English set used for the 2026-08-25 one-off runs is a ready starting list.
+
+- [ ] **Review the education-gap runs' output.** PLOS mode gave 8
+  `worth_retrying` (`runs/plos_edu_retriage_ha_2026-08-25.csv`) and 5
+  `human_review` (archived). Repo mode and PMC mode were still running when
+  the audit was written — `runs/candidates_edu_2026-08-25.csv` needs a Step 2
+  triage, `runs/pmc_edu_2026-08-25.csv` a Step 2b.
+
+- [ ] **`biblio_batch_2026-08-25b.csv` (8 rows) needs uploading/pasting** —
+  `alexandrowicz_2018_cesd`, the six `sumner_2022_*` tables, and
+  `altman_2020_capq`. 365,409 responses. See the BATCH_LOG entry for the
+  per-table coding decisions.
+
+- [ ] **Item text is cheap for two of the new tables.** `altman_2020_capq`:
+  the .sav's variable labels are the full CAPQ item stems and the item ids
+  are the source column names, so they join directly. `sumner_2022_*`: the
+  source labels are positional ("FTD-SS Item 1"), so those need the
+  published instruments instead.
+
+- [ ] **`AMBIGUOUS_TERMS` in `irw_discover_updated.py` is dead code** — the
+  relevance-filter header documents it as a tier ("ambiguous terms do NOT
+  pass on their own, they only add confidence"), but nothing references it.
+  Either implement the tier or delete the list and the paragraph.
+
 - [x] **Cloud routine sandbox is missing `openpyxl` and `pyreadstat`
   (fixed in-repo 2026-08-25)** — `preflight_deps()` added to
   `irw_triage_updated.py` and called as the first statement of `main()` in

@@ -105,25 +105,44 @@ DEFAULT_JOURNALS = ",".join(JOURNALS)
 # Phase 1: discover — cheap Europe PMC search, resultType=lite
 # ---------------------------------------------------------------------------
 
+# Count of search queries that exhausted their retries. A failed query is
+# otherwise indistinguishable from a query that legitimately returned nothing,
+# which is how the 2026-08-19 backlog sweep logged "100/100 terms visited"
+# while roughly two thirds of them never actually ran. Read this at the end of
+# a run and put it in the search_terms_log note.
+SEARCH_FAILURES = 0
+
+
 def _europepmc_get(params: dict) -> dict | None:
     """GET against the Europe PMC search endpoint, through polite_get so
     every call (search and file download alike) shares one per-domain rate
-    limit against www.ebi.ac.uk."""
+    limit against www.ebi.ac.uk.
+
+    Returns None only after all retries are exhausted, and bumps
+    SEARCH_FAILURES when it does. HTTPError is retried alongside the
+    connection errors: Europe PMC returns transient 404s and stub bodies
+    under load, and treating those as "no results" silently empties a sweep.
+    """
+    global SEARCH_FAILURES
     url = EUROPEPMC_SEARCH + "?" + urlencode(params)
-    for attempt in range(3):
+    for attempt in range(4):
         try:
             r = polite_get(url)
             return r.json()
         except (requests.exceptions.ConnectionError,
-                requests.exceptions.Timeout) as e:
-            if attempt == 2:
-                print(f"[pmc] {e}", flush=True)
+                requests.exceptions.Timeout,
+                requests.exceptions.HTTPError,
+                ValueError) as e:   # ValueError covers a non-JSON stub body
+            if attempt == 3:
+                SEARCH_FAILURES += 1
+                print(f"[pmc] QUERY FAILED after 4 attempts: {e}", flush=True)
                 return None
             wait = 5 * (attempt + 1)
             print(f"[pmc] transient error, retrying in {wait}s: {e}", flush=True)
             time.sleep(wait)
         except Exception as e:
-            print(f"[pmc] {e}", flush=True)
+            SEARCH_FAILURES += 1
+            print(f"[pmc] QUERY FAILED: {e}", flush=True)
             return None
     return None
 
@@ -452,6 +471,13 @@ def main():
             append_seen_dois(newly_seen)
 
     print(f"\n{n_done} candidates processed -> {args.out}")
+    if SEARCH_FAILURES:
+        print(f"WARNING: {SEARCH_FAILURES} search queries failed after all "
+              f"retries -- their journal/term combinations were NOT actually "
+              f"searched, even though any DOIs found by the ones that did run "
+              f"have been written to {SEEN_DOIS_PATH}. Record this count in "
+              f"the search_terms_log note and re-run the affected terms with "
+              f"--ignore-seen-dois.", flush=True)
 
 
 if __name__ == "__main__":

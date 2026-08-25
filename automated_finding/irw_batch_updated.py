@@ -49,7 +49,8 @@ import requests
 import pandas as pd
 
 from irw_triage_updated import load_table, triage_dataset, irw_metadata, preflight_deps
-from irw_discover_updated import SourceBlocked, in_runs_dir, resolve_in_path
+from irw_discover_updated import (SourceBlocked, in_runs_dir, resolve_in_path,
+                                  canonical_doi)
 
 
 class FileListUnreachable(Exception):
@@ -462,7 +463,10 @@ def process_one(row: dict) -> dict:
 # ---------------------------------------------------------------------------
 
 def _key(row: dict) -> str:
-    return row.get("doi") or row.get("url") or row.get("title", "")
+    doi = row.get("doi")
+    if doi:
+        return canonical_doi(doi)
+    return row.get("url") or row.get("title", "")
 
 # Permanent, cross-run record of every candidate key (doi/url/title, same
 # as _key()) this script has ever triaged -- distinct from CHECKPOINT,
@@ -479,7 +483,11 @@ def load_seen_keys(path: str = SEEN_KEYS_PATH) -> set:
     if not os.path.exists(path):
         return set()
     with open(path, newline="", encoding="utf-8") as f:
-        return {row["key"] for row in csv.DictReader(f) if row.get("key")}
+        # Canonicalise on load as well as on write: the ledger predates
+        # canonical_doi() and still holds raw per-version keys, which would
+        # otherwise stop matching once _key() started collapsing them.
+        return {canonical_doi(row["key"]) if "/" in row["key"] else row["key"]
+                for row in csv.DictReader(f) if row.get("key")}
 
 
 def append_seen_keys(keys, path: str = SEEN_KEYS_PATH) -> None:
@@ -624,8 +632,14 @@ def main():
 
     args.candidates_csv = resolve_in_path(args.candidates_csv)
     args.out = in_runs_dir(args.out)
+    # Derive the checkpoint from the output name. It used to be one fixed
+    # top-level file for every run, and a non-resume run deletes it on start --
+    # so two triage runs going at once silently wiped each other's progress and
+    # a --resume afterwards resumed against the wrong run's rows.
+    args.checkpoint = os.path.splitext(args.out)[0] + ".checkpoint.jsonl"
     df = run_batch(args.candidates_csv, args.out, args.limit, args.resume,
-                    ignore_seen_keys=args.ignore_seen_keys)
+                   checkpoint=args.checkpoint,
+                   ignore_seen_keys=args.ignore_seen_keys)
     print("\n" + "=" * 50)
     if df.empty:
         print("No results.")

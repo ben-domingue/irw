@@ -10330,3 +10330,252 @@ The paper itself reports only the MBI, AUDIT-C, PSQI and physical activity;
 the JPSE and DUSOCS blocks were administered but not analysed there.
 
 `biblio_batch_2026-08-25.csv` (5 rows) written for upload.
+
+## 2026-08-25 — System audit of the discovery pipeline, plus gap-filling runs
+
+A full review of how the automated finding system is actually performing,
+requested by ben-domingue, together with one-off searches against the
+surfaces the review found uncovered. Six defects were found and fixed; three
+new discovery surfaces were opened; 8 tables / 365,409 responses were
+recovered from candidates the pipeline had already scored as unusable.
+
+### Finding 1 — throughput collapsed 18x when the work moved to scheduled cloud runs
+
+New `data/*.py` scripts added per day (`git log --diff-filter=A`):
+
+| window | days | scripts | per day |
+|---|---|---|---|
+| 2026-07-26 .. 2026-08-13 (manual batches) | 19 | ~490 | ~26 |
+| 2026-08-14 .. 2026-08-25 (scheduled runs) | 12 | 17 | ~1.4 |
+
+The break is exactly at the 2026-08-13/14 switch to weekly/monthly cloud
+routines. Every scheduled run since has needed a local rescue, and each
+rescue found real data the run had reported as nothing: missing sandbox
+readers (2026-08-25, recovered `lee_2020_*`), resolver dispatch on `source`
+instead of host plus no Mendeley resolver (2026-08-24, 0 good became 1 good
++ 23 human_assistance), PLOS/PMC per-term starvation (2026-08-15), Europe
+PMC 404s emptying two thirds of a sweep (2026-08-19).
+
+Two structural causes on top of the bugs:
+
+* **A scheduled run surfaces candidates into a PR and stops.** The manual
+  batches worked because somebody reviewed the whole `good` + `worth_retrying`
+  pool of a large candidate file. Nothing in the scheduled design does that
+  step, and it is where essentially all the yield was.
+* **The weekly runs re-search 15 fixed high-yield terms behind a seen-DOI
+  ledger**, so they are mined out by construction: the terms are the same
+  every week and everything they return has already been retired. 91
+  candidates -> 60 triaged -> 0 good on 2026-08-24 is the expected steady
+  state of that design, not a bad week.
+
+### Finding 2 — the multilingual strategy was nullified by an English-only relevance gate
+
+`is_relevant()` matches the *title* of a hit against English-only regexes.
+Non-English repository records have non-English titles, so every one was
+dropped before triage unless it happened to carry a Latin-script instrument
+name ("Rosenberg"). 1,215 unique non-Latin-script repo queries were run in
+2026-06/07 under that gate, plus the Spanish/German/French/Dutch ones.
+
+Verified directly before the fix — all False:
+
+    Datos de la prueba de comprensión lectora en escolares chilenos
+    Leistungstest Mathematik Sekundarstufe I Rohdaten
+    小学生数学成就测验数据
+    초등학생 어휘 검사 문항 반응 자료
+
+**Fixed**: `TRANSLATED_TERMS_LATIN` / `TRANSLATED_TERMS_NOBOUNDARY` added to
+`irw_discover_updated.py`, at the same tier as STRONG/CONSTRUCT. CJK and
+Arabic need a boundary-free matcher (`\b` never fires between two CJK
+characters in Python's `re`), so they compile separately. Verified on 10
+positives and 7 negatives (soil surveys, hydrology, price surveys still
+blocked). Note the multilingual practice had *also* lapsed independently:
+733 non-Latin queries in June, 463 in July, 39 in August.
+
+**Consequence**: the ~1,215 non-Latin terms are now worth re-running, the
+same way the 575 pre-fix English terms were re-run on 2026-07-15. A 45-term
+pilot was launched to size the payoff.
+
+### Finding 3 — the retired queue sheet became a permanent blocklist
+
+`_load_human_review_exclusions()` reads every `human_review/*.csv` and
+excludes those DOIs from all future discovery. That directory contains
+`googlesheet_humaneye.csv`, the 4,833-row export of the "human eye" tab —
+which was retired on 2026-08-12 *because nobody could work through it*. Of
+its 4,833 rows, **31 ever got a Decision and 32 an Evaluator**. The other
+~4,800 were never looked at, and 2,335 DOIs' worth of them were being
+excluded from every run as though they had been adjudicated.
+
+**Fixed**: rows from `googlesheet_*` now only count as reviewed if their
+Decision cell actually reads yes/no/maybe (some rows are column-shifted, so
+"non-empty" is not enough). Exclusions from `human_review/` drop from 2,335
+to 352 — 1,983 candidates restored to discoverability. The per-batch
+`human_review_*.csv` files keep their existing exclude-everything semantics.
+
+Mining that pool directly: filtering to rows that parse cleanly, carry an
+explicit open license, N>=100 and >=3 items gives **191 candidates (173
+unique)**, mostly Dataverse and figshare, several very large. Triage of that
+set is `runs/triage_backlog_recovered_2026-08-25.csv`.
+
+### Finding 4 — two discovery connectors were written but never wired up
+
+`from_gesis()` and `from_openaire()` are fully implemented in
+`irw_discover_updated.py` but appear in neither `SOURCES` nor `SOURCE_MAP`,
+so no run — manual or scheduled — could ever call them.
+
+* `from_gesis()` returns HTTP 403 on every query as of today. Left unwired,
+  now with a comment saying why.
+* `from_openaire()` **works**, and reaches hosts nothing else does
+  (sciencedb.cn, openICPSR, DANS/4TU, national repositories, SAGE).
+
+**Fixed**: `OPTIONAL_SOURCES = [from_openaire]` — reachable as
+`--sources openaire`, deliberately *not* in the default set, since OpenAIRE
+is an aggregator and folding it in would multiply every scheduled run's cost
+for records the dedicated connectors already return.
+
+### Finding 5 — Mendeley Data is the highest-yield uncovered surface in the system
+
+A one-off OpenAIRE pass (37 terms: 17 proven high-yield + the 20 education
+terms below) returned 1,920 candidates. By DOI prefix: 527 APA, 417
+figshare, 223 SAGE, **122 Mendeley Data**, 89 Zenodo, 49 Harvard Dataverse,
+37 openICPSR. Rewriting the doi.org URLs to canonical landing pages gives
+472 rows the existing resolvers can handle.
+
+Triaging the 117 unique Mendeley rows:
+
+| flag | n |
+|---|---|
+| human_assistance | 48 |
+| below_min_n | 34 |
+| no_usable_file | 24 |
+| **good** | **5** |
+| license_restricted | 4 |
+| not_item_response | 2 |
+
+Step 2b on the 48: 22 `aggregate_continuous`, **21 `worth_retrying`**, 2
+`human_review`, 2 `not_item_response`, 1 `recoverable_format`.
+
+**5 good + 21 worth_retrying out of 117 is a 22% actionable rate**, against
+PLOS ONE's ~1% good + 2-4% recoverable. Every one is CC BY. The 26
+actionable leads are saved as `mendeley_leads_2026-08-25.csv` (a standing
+worklist, not a per-run temp file). Mendeley has no discovery connector of
+its own — its own search API requires OAuth — but DataCite indexes it under
+prefix `10.17632` and needs no key, so a Mendeley-scoped DataCite pass is
+the obvious next connector.
+
+### Finding 6 — three smaller defects, all fixed
+
+* **Europe PMC failures were indistinguishable from empty results.**
+  `_europepmc_get()` retried only `ConnectionError`/`Timeout`; an
+  `HTTPError` fell through to the bare `except` and returned `None`, which
+  `search_pmc()` read as "no results" — the 2026-08-19 mechanism where ~520
+  transient 404s silently emptied a sweep while the log recorded "100/100
+  terms visited". Now retries `HTTPError` and non-JSON stub bodies over 4
+  attempts, counts what still fails in `SEARCH_FAILURES`, and prints an
+  explicit warning at end of run saying those terms were not searched and
+  need `--ignore-seen-dois`. (This closes the item ben-domingue deferred on
+  2026-08-19 pending "a few more days of runs" — this is that review.)
+* **DataCite version duplicates.** `canonical_doi()` added to
+  `irw_discover_updated.py` and used by `_key()`, `load_seen_keys()` and the
+  discovery dedupe. Scoped to Mendeley/figshare/Dryad prefixes on purpose:
+  most DOIs legitimately end in `.digits`, so a blanket rule would corrupt
+  `10.1371/journal.pone.0235154`. Confirmed live — DataCite returns
+  `10.17632/9mphhb9zhz`, `.1` and `.2` as three records of one deposit.
+* **Two concurrent triage runs clobbered each other.** `CHECKPOINT` was one
+  fixed top-level file and a non-resume run *deletes* it on start, so
+  starting a second triage wiped the first's progress and a later `--resume`
+  resumed against the wrong rows. Observed in this session. The checkpoint
+  is now derived from the output filename.
+* Also: figshare titles carry HTML (`<p>Rasch analysis results ...`), and
+  the supplementary-file patterns are `^`-anchored, so the leading `<p>` made
+  every one unreachable and figure/table supplements sailed through to die at
+  triage. Titles are now tag-stripped before matching.
+* Noted, not fixed: `AMBIGUOUS_TERMS` is documented in the relevance-filter
+  header as a tier but is never referenced anywhere — dead code.
+  `irw_process_queue.py` still fails at import (`QUEUE_SHEET_URL`).
+
+### Finding 7 — the term list has no educational-measurement coverage
+
+3,764 queries have been logged. Probing the 3,764 for education/ability
+terms: **zero queries ever, in any mode**, for `rasch`, `item bank`,
+`concept inventory`, `spelling test`, `listening comprehension`,
+`knowledge test`, `student assessment`, `classroom assessment`,
+`essay scoring`, `spatial ability`, `reasoning test`, `science achievement`,
+`literacy assessment`, `multiple choice exam`, `IPIP`, `SDQ`,
+`schwartz values`, `emotion recognition`. `irw_discover_monthly.py`'s
+100-term `TERM_LIST` is almost entirely self-report psychology constructs;
+its only ability entries are six executive-function tasks.
+
+That is the IRW's own core domain, and it is where large, item-rich,
+IRT-relevant data lives.
+
+### One-off runs fired to cover the gaps
+
+1. **Education/ability terms, repository mode** — 20 English terms plus 12
+   of them translated into the batch-9 language set (Spanish, German,
+   French, Chinese, Japanese, Arabic, Dutch, Korean) = 122 queries across
+   all 8 default sources, run *after* the relevance-filter fix so the
+   translated terms can actually return anything.
+   `runs/candidates_edu_2026-08-25.csv`.
+2. **Education/ability terms, PLOS mode** — the 20 English terms against
+   plosone + mentalhealth + globalpublichealth, `--limit 300`. Result: 237
+   `no_usable_file`, 32 `below_min_n`, 26 `human_assistance`, 4
+   `not_item_response`, 1 `download_failed`. Step 2b: 12
+   `aggregate_continuous`, 8 `worth_retrying`, 5 `human_review` (archived
+   to `human_review/human_review_plos_edu_2026-08-25.csv`), 1
+   `not_item_response`.
+3. **Education/ability terms, PMC mode** — the same 20 terms across all of
+   `JOURNALS`, `--limit 300`. Zero search failures under the new retry.
+4. **OpenAIRE** — see Finding 5.
+5. **Non-Latin re-discovery pilot** — 45 of the 1,215 already-run
+   non-Latin-script repo terms, re-run under the fixed filter, to size
+   whether the full 1,215 are worth re-running. Queued behind (1).
+
+### Datasets recovered and processed — 8 tables, 365,409 responses
+
+All three were candidates the pipeline had already scored as unusable.
+
+**`data/alexandrowicz_2018_cesd.py`** — `10.1371/journal.pone.0197908`,
+PLOS ONE, CC BY 4.0. Triaged as "Could not confidently identify item
+columns": the S2 File is R `write.table()` output — space-separated, every
+label quoted, row names in an unnamed leading column — so a comma read
+collapses it to one column. Re-read with whitespace separation it is a clean
+518 x 22 matrix. `alexandrowicz_2018_cesd`: 514 ids x 20 CES-D items =
+10,273 responses, resp 0-3, density 0.999. Items 4/8/12/16 carry an `r` in
+their source name and are exported as stored.
+
+**`data/sumner_2022_ftdss.py`** — `10.1371/journal.pone.0278841`, PLOS ONE,
+CC BY 4.0. Two independent failures: the triage took the article's first
+tabular-looking SI file, `.s001`, which is captioned as a dataset but is
+actually a Word document (the same trap already logged for `pone.0356791`);
+and the real file, `.s002`, is tab-delimited under a `.csv` name. 934
+respondents x 6 instruments, one file each per the standard, with the four
+recruitment samples collapsed into `cov_study`:
+
+| table | items | ids | responses | resp |
+|---|---|---|---|---|
+| `sumner_2022_ftdss` | 29 | 934 | 27,086 | 1-4 |
+| `sumner_2022_olife` | 104 | 926 | 96,304 | 1-2 |
+| `sumner_2022_spq` | 74 | 929 | 68,746 | 1-2 |
+| `sumner_2022_asi` | 29 | 929 | 26,941 | 1-2 |
+| `sumner_2022_lshs` | 16 | 927 | 14,832 | 1-5 |
+| `sumner_2022_ipip_neo` | 48 | 928 | 44,544 | 1-5 |
+
+All density 1.000. Scale/subscale totals and `nItemsMissing_*` excluded.
+FTD-SS administration order (fixed vs randomised) is a property of the
+administration, so it is `cov_item_order` on that table only.
+
+**`data/altman_2020_capq.py`** — `10.17632/y8wwtmxxzg`, Mendeley Data,
+CC BY 4.0. From the OpenAIRE/Mendeley pass; never seen by any prior run.
+`altman_2020_capq`: 4,053 ids x 19 CAPQ items = 76,683 responses, resp 0-5,
+density 0.996. Triage had guessed 7 items; the .sav's variable labels make
+the 19-item block unambiguous and carry the full item stems, so item text
+comes free. One row of 4,053 has a blank case number but complete responses
+and is given an id past the observed max rather than dropped.
+`CAPQ_GLOBAL`, its Box-Cox transform and `CAPQ_SF` are derived and excluded.
+
+**Checked and rejected**: `10.1371/journal.pone.0317077` (biology exams,
+N=2,684 x 10) looked like the strongest education-gap hit but its rows are
+exam *items* described by instructor, Bloom's level and visual-model flags —
+item metadata, not person x item responses.
+
+`biblio_batch_2026-08-25b.csv` (8 rows) written for upload.

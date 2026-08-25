@@ -117,6 +117,73 @@ AMBIGUOUS_TERMS = [       # match too much alone; only count WITH a term above
     "responses", "measure", "score", "battery",
 ]
 
+# TRANSLATED STRONG/CONSTRUCT TERMS.
+# Every discovery batch is supposed to run each English term in 8 more
+# languages (see SKILL.md Step 1), but this filter reads the *title* of the
+# hit, and a Spanish/German/Chinese repository record has a Spanish/German/
+# Chinese title. With an English-only vocabulary the gate discarded almost
+# every non-English hit before triage ever saw it -- the only ones that got
+# through were titles carrying a Latin-script instrument name ("Rosenberg").
+# That silently nullified ~1,200 non-English queries run in 2026-06/07.
+# These are deliberately the same tier as STRONG/CONSTRUCT: translations of
+# generic ambiguous words ("test", "escala", "問卷") are NOT here, for the
+# same reason AMBIGUOUS_TERMS aren't.
+TRANSLATED_TERMS_LATIN = [
+    # es
+    "respuesta al ítem", "psicométric", "cuestionario", "autoinforme",
+    "análisis factorial", "rendimiento académico", "comprensión lectora",
+    "vocabulario", "competencia lingüística", "razonamiento", "habilidad espacial",
+    "autoestima", "depresión", "ansiedad", "bienestar", "personalidad",
+    "motivación", "resiliencia", "calidad de vida", "soledad", "agotamiento",
+    "inteligencia", "aptitud", "conocimientos previos", "alfabetización",
+    # de
+    "itemantwort", "psychometri", "fragebogen", "selbstbericht",
+    "faktorenanalyse", "schulleistung", "leseverständnis", "wortschatz",
+    "sprachkompetenz", "denkaufgaben", "räumliches vorstellungsvermögen",
+    "selbstwertgefühl", "depressiv", "angst", "wohlbefinden", "persönlichkeit",
+    "motivation", "resilienz", "lebensqualität", "einsamkeit", "burnout",
+    "intelligenz", "kompetenzmessung", "leistungstest",
+    # fr
+    "réponse à l'item", "psychométri", "questionnaire", "auto-évaluation",
+    "analyse factorielle", "rendement scolaire", "compréhension écrite",
+    "vocabulaire", "compétence linguistique", "raisonnement", "capacité spatiale",
+    "estime de soi", "dépression", "anxiété", "bien-être", "personnalité",
+    "motivation", "résilience", "qualité de vie", "solitude", "épuisement",
+    "intelligence", "aptitude",
+    # nl
+    "itemrespons", "psychometri", "vragenlijst", "zelfrapportage",
+    "factoranalyse", "schoolprestatie", "begrijpend lezen", "woordenschat",
+    "taalvaardigheid", "redeneer", "ruimtelijk inzicht", "zelfwaardering",
+    "depressie", "angst", "welbevinden", "persoonlijkheid", "motivatie",
+    "veerkracht", "levenskwaliteit", "eenzaamheid", "burn-out", "intelligentie",
+    "vaardigheidstoets", "leerlingtoets",
+]
+# Scripts with no word boundaries (\b never fires between two CJK/Arabic
+# characters, so these must be matched as bare substrings).
+TRANSLATED_TERMS_NOBOUNDARY = [
+    # zh
+    "项目反应", "心理测量", "问卷", "自评", "因素分析", "学业成就", "成就测验",
+    "阅读理解", "词汇", "语言能力", "推理", "空间能力", "自尊", "抑郁", "焦虑",
+    "幸福感", "人格", "动机", "心理韧性", "生活质量", "孤独", "倦怠", "智力",
+    "认知测验", "学生评估", "量表信效度",
+    # ja
+    "項目反応", "心理測定", "質問紙", "自己報告", "因子分析", "学業成績",
+    "学力テスト", "読解力", "語彙", "言語能力", "推論", "空間能力", "自尊感情",
+    "抑うつ", "不安", "幸福感", "性格", "動機づけ", "レジリエンス", "生活の質",
+    "孤独感", "バーンアウト", "知能", "認知テスト",
+    # ko
+    "문항반응", "심리측정", "설문", "자기보고", "요인분석", "학업성취",
+    "성취도 검사", "읽기 이해", "어휘", "언어 능력", "추론", "공간 능력",
+    "자아존중감", "우울", "불안", "행복", "성격", "동기", "회복탄력성",
+    "삶의 질", "외로움", "소진", "지능", "인지 검사",
+    # ar
+    "استجابة المفردة", "القياس النفسي", "استبيان", "التقرير الذاتي",
+    "التحليل العاملي", "التحصيل الدراسي", "الفهم القرائي", "المفردات",
+    "الكفاءة اللغوية", "الاستدلال", "القدرة المكانية", "تقدير الذات",
+    "الاكتئاب", "القلق", "الرفاهية", "الشخصية", "الدافعية", "المرونة النفسية",
+    "جودة الحياة", "الوحدة", "الاحتراق النفسي", "الذكاء",
+]
+
 # EXCLUSIONS: clinical/epidemiology study language. A construct word like
 # "depression" pulls in huge amounts of MEDICAL research that studies the
 # outcome without measuring it via item responses (e.g. "aspirin and risk of
@@ -177,6 +244,10 @@ _RE_INSTRUMENT = _matcher(INSTRUMENT_TERMS)
 _RE_STRONG     = _matcher(STRONG_TERMS)
 _RE_CONSTRUCT  = _matcher(CONSTRUCT_TERMS)
 _RE_EXCLUDE    = _matcher(EXCLUDE_TERMS)
+_RE_TRANS_LAT  = _matcher(TRANSLATED_TERMS_LATIN)
+# No \b here on purpose -- see TRANSLATED_TERMS_NOBOUNDARY.
+_RE_TRANS_NB   = re.compile(
+    "|".join(re.escape(t) for t in TRANSLATED_TERMS_NOBOUNDARY))
 
 # Supplementary-file titles: journal papers upload individual tables, figures,
 # and data sheets as repository items. These are never standalone datasets and
@@ -193,6 +264,31 @@ _RE_SUPPLEMENTARY = re.compile(
     r"|_\d+\.\d+\.\d+\.tar$",
     re.IGNORECASE
 )
+
+
+# Repositories that mint a DOI *per version* of the same deposit. DataCite
+# indexes every version as its own record, so one Mendeley deposit arrives as
+# `10.17632/j33ytz7wsx`, `.1` and `.2` -- three candidates, three downloads,
+# three triage verdicts, and three rows for a human to read, all of the same
+# data. Figshare does the same with a `.vN` suffix. Collapsing the suffix is
+# scoped to these prefixes on purpose: most DOIs legitimately end in `.digits`
+# (`10.1371/journal.pone.0235154`), so a blanket rule would corrupt them.
+_VERSIONED_DOI_RULES = (
+    (re.compile(r"^10\.17632/[^/]+?(\.\d+)$"),               1),  # Mendeley Data
+    (re.compile(r"^10\.6084/m9\.figshare\.[^/]+?(\.v\d+)$"), 1),  # figshare
+    (re.compile(r"^10\.5061/dryad\.[^/]+?(\.\d+)$"),         1),  # Dryad
+)
+
+
+def canonical_doi(doi: str) -> str:
+    """Strip a repository version suffix so every version of one deposit maps
+    to a single dedup key. Returns the DOI unchanged when no rule applies."""
+    d = (doi or "").strip().lower()
+    for rx, grp in _VERSIONED_DOI_RULES:
+        m = rx.match(d)
+        if m:
+            return d[: m.start(grp)]
+    return d
 
 
 @dataclass
@@ -221,18 +317,25 @@ def is_relevant(h: Hit, enabled: bool) -> bool:
     PHQ-9 in a clinical cohort still has the item-response data we want."""
     if not enabled:
         return True
+    # figshare (and some DataCite records) carry HTML in the title, e.g.
+    # "<p>Rasch analysis results for the Rasch model ...</p>". The
+    # supplementary-file patterns below are anchored at "^", so the leading
+    # "<p>" made every one of them unreachable and figure/table supplements
+    # sailed through the gate to die at triage as no_usable_file.
+    title = re.sub(r"<[^>]+>", " ", h.title).strip()
     # Supplementary file naming convention — never a standalone dataset, always
     # blocked regardless of content or instrument mentions.
-    if _RE_SUPPLEMENTARY.search(h.title):
+    if _RE_SUPPLEMENTARY.search(title):
         return False
-    text = h.title.lower()
+    text = title.lower()
     # Named instrument always passes — validation studies have the data.
     if _RE_INSTRUMENT.search(text):
         return True
     # Epi/medical study language blocks everything else.
     if _RE_EXCLUDE.search(text):
         return False
-    return bool(_RE_STRONG.search(text) or _RE_CONSTRUCT.search(text))
+    return bool(_RE_STRONG.search(text) or _RE_CONSTRUCT.search(text)
+                or _RE_TRANS_LAT.search(text) or _RE_TRANS_NB.search(title))
 
 
 # ---------------------------------------------------------------------------
@@ -553,7 +656,22 @@ _DATACITE_SKIP.update({"scholars portal", "scholars portal dataverse", "surf",
 SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
            from_datacite, from_scholars_portal, from_surf]
 
-SOURCE_MAP = {fn.__name__.replace("from_", ""): fn for fn in SOURCES}
+# Opt-in only -- reachable with `--sources openaire ...`, deliberately NOT in
+# SOURCES. OpenAIRE is an aggregator like DataCite (it re-indexes Zenodo,
+# figshare, SAGE, national repositories, sciencedb.cn, ...), so folding it
+# into the default set would multiply every scheduled run's cost for a large
+# fraction of records the dedicated connectors already return. It does reach
+# hosts nothing else does, though, which is why it's wired up at all: before
+# 2026-08-25 from_openaire() was defined but absent from SOURCES *and*
+# SOURCE_MAP, i.e. dead code no run could ever call.
+#
+# from_gesis() is deliberately still not wired: as of 2026-08-25 the GESIS
+# Vitrine endpoint it calls returns HTTP 403 for every query, so it yields
+# nothing. Fix the endpoint before adding it here.
+OPTIONAL_SOURCES = [from_openaire]
+
+SOURCE_MAP = {fn.__name__.replace("from_", ""): fn
+              for fn in SOURCES + OPTIONAL_SOURCES}
 
 
 # ---------------------------------------------------------------------------
@@ -636,7 +754,27 @@ def _load_human_review_exclusions() -> set:
                 reader = csv.DictReader(f)
                 if not reader.fieldnames or "doi" not in reader.fieldnames:
                     continue
+                # googlesheet_humaneye.csv is the export of the retired "human
+                # eye" queue tab. It is NOT a record of decisions: of its 4,833
+                # rows only 31 ever got a Decision and 32 an Evaluator -- the
+                # tab was retired in 2026-08-12 precisely because nobody could
+                # work through it. Excluding all of it turned an unworked
+                # backlog into a permanent blocklist, hiding ~2,300 candidates
+                # from every future discovery run. Only the rows somebody
+                # actually adjudicated count as reviewed; the rest stay
+                # discoverable. (The per-batch human_review_*.csv files keep
+                # their original exclude-everything semantics.)
+                decision_col = next(
+                    (c for c in reader.fieldnames if c.startswith("Decision")), None)
+                gate = decision_col if os.path.basename(path).startswith(
+                    "googlesheet_") else None
                 for row in reader:
+                    # Only the three real decision values count. Some rows in
+                    # that sheet are column-shifted (a title or a source name
+                    # landed in the Decision cell), and those are not decisions.
+                    if gate and (row.get(gate) or "").strip().lower() not in (
+                            "yes", "no", "maybe"):
+                        continue
                     d = norm_doi(row.get("doi", "") or "")
                     if "/" in d and " " not in d:
                         dois.add(d)
@@ -761,7 +899,11 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
             src_new = 0
             try:
                 for hit in src(q):
-                    key = hit.doi or f"{hit.source}:{hit.title.strip().lower()}"
+                    # Collapse repository version suffixes so one deposit is
+                    # one candidate: DataCite indexes every version of a
+                    # Mendeley/figshare/Dryad deposit as its own record.
+                    key = (canonical_doi(hit.doi) if hit.doi
+                           else f"{hit.source}:{hit.title.strip().lower()}")
                     if not key or key in seen:
                         continue
                     if hit.doi and hit.doi in exclude:

@@ -3763,3 +3763,202 @@ date,query,output_file,notes
 2026-08-24,procrastination,runs/monthly_candidates_weekly_2026-08-24.csv,"monthly automated run; 13 candidates; sources=osf,dataverse,datacite; since=2026-08-17"
 2026-08-24,growth mindset,runs/monthly_candidates_weekly_2026-08-24.csv,"monthly automated run; 4 candidates; sources=osf,dataverse,datacite; since=2026-08-17"
 2026-08-25,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-08-25.csv,plos monthly-script automated run; mode=weekly; 56 candidates triaged; 15/15 terms visited (14 hit per-term cap 4)
+2026-08-25,rasch analysis,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,item bank,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,concept inventory,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,achievement test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,multiple choice exam,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,reasoning test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,spatial ability,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,science achievement,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,knowledge test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,vocabulary test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,spelling test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,listening comprehension,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,literacy assessment,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,student assessment,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,classroom assessment,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,essay scoring,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,peer assessment,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,emotion recognition accuracy,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,differential item functioning,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test equating,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de rendimiento,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Leistungstest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de rendement,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,成就测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,学力テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار التحصيل,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prestatietoets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,성취도 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,reading comprehension test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de comprensión lectora,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Leseverständnistest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de compréhension écrite,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,阅读理解测试,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,読解力テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار الفهم القرائي,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,begrijpend lezen toets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,읽기 이해 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de vocabulario,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Wortschatztest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de vocabulaire,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,词汇测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,語彙テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار المفردات,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,woordenschattoets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,어휘 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,mathematics test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de matemáticas,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Mathematiktest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de mathématiques,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,数学测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,数学テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار الرياضيات,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,rekentoets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,수학 시험,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de conocimientos,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Wissenstest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de connaissances,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,知识测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,知識テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار المعرفة,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,kennistoets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,지식 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de razonamiento,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Denkaufgabentest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de raisonnement,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,推理测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,推論テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار الاستدلال,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,redeneertest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,추론 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,habilidad espacial,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,räumliches Vorstellungsvermögen,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,capacité spatiale,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,空间能力,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,空間能力,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,القدرة المكانية,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,ruimtelijk inzicht,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,공간 능력,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,item response theory,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,teoría de respuesta al ítem,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Item-Response-Theorie,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,théorie de réponse à l'item,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,项目反应理论,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,項目反応理論,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,نظرية استجابة المفردة,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,itemresponstheorie,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,문항반응이론,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,evaluación del estudiante,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Schülerleistungserhebung,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,évaluation des élèves,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,学生评估,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,学習評価,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,تقييم الطلاب,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,leerlingtoetsing,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,학생 평가,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,language proficiency test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba de competencia lingüística,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Sprachtest,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test de compétence linguistique,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,语言能力测试,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,語学能力試験,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار الكفاءة اللغوية,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,taalvaardigheidstoets,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,언어 능력 시험,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,cognitive test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,prueba cognitiva,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,kognitiver Test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,test cognitif,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,认知测验,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,認知テスト,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,اختبار معرفي,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,cognitieve test,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,인지 검사,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,school exam,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,examen escolar,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,Schulprüfung,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,examen scolaire,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,学校考试,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,学校試験,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,امتحان مدرسي,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,schoolexamen,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,학교 시험,runs/candidates_edu_2026-08-25.csv,"one-off education/ability gap sweep; sources=dataverse,zenodo,osf,dryad,figshare,datacite,scholars_portal,surf; run after the is_relevant() translated-vocabulary fix"
+2026-08-25,rasch analysis,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,rasch analysis,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,item bank,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,item bank,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,concept inventory,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,concept inventory,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,achievement test,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,achievement test,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,multiple choice exam,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,multiple choice exam,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,reasoning test,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,reasoning test,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,spatial ability,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,spatial ability,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,science achievement,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,science achievement,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,knowledge test,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,knowledge test,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,vocabulary test,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,vocabulary test,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,spelling test,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,spelling test,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,listening comprehension,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,listening comprehension,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,literacy assessment,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,literacy assessment,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,student assessment,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,student assessment,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,classroom assessment,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,classroom assessment,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,essay scoring,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,essay scoring,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,peer assessment,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,peer assessment,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,emotion recognition accuracy,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,emotion recognition accuracy,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,differential item functioning,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,differential item functioning,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,test equating,runs/plos_edu_2026-08-25.csv,"one-off education/ability gap sweep; plosone,mentalhealth,globalpublichealth; --limit 300 (run stopped at term 6/20)"
+2026-08-25,test equating,runs/pmc_edu_2026-08-25.csv,one-off education/ability gap sweep; all JOURNALS; --limit 300
+2026-08-25,self-esteem,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,grit,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,self-efficacy,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,depression,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,anxiety,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,burnout,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,perceived stress,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,well-being,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,life satisfaction,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,loneliness,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,academic motivation,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,work engagement,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,resilience,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,procrastination,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,growth mindset,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,item response theory,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,psychometric validation,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,rasch analysis,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,item bank,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,concept inventory,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,achievement test,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,multiple choice exam,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,reasoning test,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,spatial ability,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,science achievement,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,knowledge test,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,vocabulary test,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,spelling test,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,listening comprehension,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,literacy assessment,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,student assessment,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,classroom assessment,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,essay scoring,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,peer assessment,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,emotion recognition accuracy,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,differential item functioning,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-25,test equating,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
