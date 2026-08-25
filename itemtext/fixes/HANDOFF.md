@@ -1,6 +1,6 @@
 # Item text corrections — handoff
 
-State as of 2026-08-25. **15 of the 17 are resolved.** Nine corrections are
+State as of 2026-08-25. **16 of the 17 are resolved.** Nine corrections are
 live in `irw_text` **v7.0** (released 2026-08-24 20:03). Three more —
 `gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt` — are
 uploaded to the draft and awaiting release (`preschool_sel_akt` re-uploaded
@@ -11,11 +11,13 @@ question), `dumas_organisciak_2022` is being removed from IRW, and
 mapping unverifiable — see its row below; #1615 reopened pending
 @joshgilbert1994).
 
-Remaining: **2 tables**, both needing a decision rather than a check —
-`threat_isler_2024_exp4_cog_crt` (#1605) and `political_psychology` (#1594).
-Note that #1594's suspected defect — item numbers assigned by column position
-rather than variable name — is the same class of failure that `gilbert_meta_35`
-turned out to have.
+Remaining: **3 tables**, none of them a text-extraction problem —
+`gilbert_meta_78`/`_80` (#1607/#1606) are a licensing call on PPVT-4 and
+WJ-III wording, and `political_psychology` (#1594) needs its item-numbering
+confirmed. Note that #1594's suspected defect — item numbers assigned by
+column position rather than variable name — is the same class of failure that
+`gilbert_meta_35` turned out to have, so treat it as likely rather than
+suspected.
 
 ### Uploading replaces nothing — read this before shipping the rest
 
@@ -82,7 +84,7 @@ Seven of the seventeen.
 | `gilbert_meta_78` | #1607 | Reproduces actual **PPVT-4** target words (`ankle`, `appliance`…). Commercial instrument — **licensing call, not a data call.** |
 | `gilbert_meta_80` | #1606 | Same, **WJ-III Picture Vocabulary** (`fork`, `fish`…). |
 | `double_marking_steele_2022` | #1616 | **Done 2026-08-25.** Rubric item_text uploaded (108 rows). option_text deliberately left as the generic band descriptors per @xingyi-zhang. Fixed en route: duplicate `abstract` N/S rows, and `presentation`'s missing N/S rows. audit_batch.R now PASSes. |
-| `threat_isler_2024_exp4_cog_crt` | #1605 | `crt2`/`crt3` have no option_text although the scale has 4 response categories. Real gap. |
+| `threat_isler_2024_exp4_cog_crt` | #1605 | **Done 2026-08-25.** option_text for all 3 items and correct_response verified against the study's own Qualtrics .qsf (OSF grafm, Experiment 4): code 1 is the correct answer in all three items. Also fixed a wrong `table` value in the file (`..._cognitive_crt` -> `..._cog_crt`). audit_batch.R PASS. |
 | `gilbert_meta_35` | #1615 | **Pulled 2026-08-25.** Source has `values_a`-`values_j` (10) and codebook wording for 8; the IRW table has 12 items. IRW's letters are therefore not the source's, so the a-h text mapping is unverifiable. Item text removed from the draft; issue reopened, @joshgilbert1994 asked about `values_k`/`_l` provenance and label order. |
 | `gilbert_meta_42` | #1620 | **Done 2026-08-25.** Ships 12 of 20 items; the 4 `life_satisfaction_*` and 4 `locus_of_control_*` items omitted (no text available). Draft verified at 60 rows. Open follow-up on the issue: the `stress` section prompt does not fit `stress_b`/`stress_c`. |
 | `preschool_sel_akt` | #1611 | **Done 2026-08-25.** Complete: all 65 items now carry text. @xingyi-zhang found `emtb4_6s_t1`'s prompt (it sits under the raw-score twin on the next page); verified against the codebook. Also confirmed the `emtb1_4`/`_5` reconstruction, and stripped a trailing "Scored" variable-label artifact from all 17 `akt*` items. Issues-page callout removed. |
