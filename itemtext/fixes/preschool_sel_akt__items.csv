@@ -1,55 +1,55 @@
 "table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
-"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy) Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad) Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry) Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid) Scored",NA,"Incorrect",0
-"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry) Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy) Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid) Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad) Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Same Valence",1
-"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry) Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad) Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy) Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel? Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid) Scored",NA,"Correct",2
-"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face Scored",NA,"Correct",2
+"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face",NA,"Incorrect",0
+"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face",NA,"Incorrect",0
+"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy)",NA,"Incorrect",0
+"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad)",NA,"Incorrect",0
+"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry)",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face",NA,"Incorrect",0
+"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Incorrect",0
+"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid)",NA,"Incorrect",0
+"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry)",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face",NA,"Same Valence",1
+"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face",NA,"Same Valence",1
+"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy)",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face",NA,"Same Valence",1
+"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid)",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad)",NA,"Same Valence",1
+"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face",NA,"Same Valence",1
+"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Same Valence",1
+"preschool_sel_akt","main","akt1_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Angry)",NA,"Correct",2
+"preschool_sel_akt","main","akt4_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt2_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Happy face",NA,"Correct",2
+"preschool_sel_akt","main","akt1_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Sad)",NA,"Correct",2
+"preschool_sel_akt","main","akt3_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt2_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Angry face",NA,"Correct",2
+"preschool_sel_akt","main","akt4_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt3_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt4_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt1_3s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Happy)",NA,"Correct",2
+"preschool_sel_akt","main","akt4_6s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt2_1s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Sad face",NA,"Correct",2
+"preschool_sel_akt","main","akt3_2s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt4_5s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt4_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does she/he feel?",NA,"Correct",2
+"preschool_sel_akt","main","akt1_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"How does he/she feel? (Afraid)",NA,"Correct",2
+"preschool_sel_akt","main","akt2_4s_t1","Affect Knowledge Test-Shortened",NA,NA,"Point to the Afraid face",NA,"Correct",2
 "preschool_sel_akt","main","emta1_1s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me which one of these feels the same as this one (Mad)",NA,"Incorrect",0
 "preschool_sel_akt","main","emta1_1s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me which one of these feels the same as this one (Mad)",NA,"Same Valence",1
 "preschool_sel_akt","main","emta1_1s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me which one of these feels the same as this one (Mad)",NA,"Correct",2
@@ -191,6 +191,6 @@
 "preschool_sel_akt","main","emtb4_5s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels happy",NA,"Incorrect",0
 "preschool_sel_akt","main","emtb4_5s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels happy",NA,"Same Valence",1
 "preschool_sel_akt","main","emtb4_5s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels happy",NA,"Correct",2
-"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,NA,NA,"Incorrect",0
-"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,NA,NA,"Same Valence",1
-"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,NA,NA,"Correct",2
+"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels sad",NA,"Incorrect",0
+"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels sad",NA,"Same Valence",1
+"preschool_sel_akt","main","emtb4_6s_t1","Emotion Matching Task (EMT; Morgan, Izard & King, 2010)",NA,NA,"Show me the one who feels sad",NA,"Correct",2

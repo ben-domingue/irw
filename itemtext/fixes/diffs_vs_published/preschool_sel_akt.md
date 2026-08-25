@@ -4,64 +4,88 @@ Classification (suggested): **review**
 
 ## Summary
 
-- item coverage: MISMATCH (missed=0, extra=48)
+- item coverage: OK (missed=0, extra=0)
 - resp-set alignment rate: 1
-- mean item_text similarity: 1
+- mean item_text similarity: 0.9234
 - mean option_text similarity: 1
 - mean context (instructions/section_prompt) similarity: n/a
 - instructions/section_prompt swaps detected: 0
 
 ## Itemized mismatches
 
-- `emta1_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta1_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta1_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta1_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta1_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta1_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta2_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta3_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emta4_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb1_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb2_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb3_6s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_1s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_2s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_3s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_4s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_5s_t1` -- extra_item (in fresh extraction but not in current curation)
-- `emtb4_6s_t1` -- extra_item (in fresh extraction but not in current curation)
+- `emtb4_6s_t1` -- item_text_mismatch
 
 ## Field-level values for mismatched items
 
-(none)
+### `akt1_4s_t1` / item_text (similarity 0.8108)
+- curated: `How does he/she feel? (Afraid) Scored`
+- fresh: `How does he/she feel? (Afraid)`
+
+### `akt1_2s_t1` / item_text (similarity 0.8056)
+- curated: `How does he/she feel? (Angry) Scored`
+- fresh: `How does he/she feel? (Angry)`
+
+### `akt1_3s_t1` / item_text (similarity 0.8056)
+- curated: `How does he/she feel? (Happy) Scored`
+- fresh: `How does he/she feel? (Happy)`
+
+### `akt1_1s_t1` / item_text (similarity 0.7941)
+- curated: `How does he/she feel? (Sad) Scored`
+- fresh: `How does he/she feel? (Sad)`
+
+### `akt4_1s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt4_6s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt3_2s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt4_2s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt3_3s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt4_3s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt4_5s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt4_4s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt3_1s_t1` / item_text (similarity 0.75)
+- curated: `How does she/he feel? Scored`
+- fresh: `How does she/he feel?`
+
+### `akt2_4s_t1` / item_text (similarity 0.7742)
+- curated: `Point to the Afraid face Scored`
+- fresh: `Point to the Afraid face`
+
+### `akt2_2s_t1` / item_text (similarity 0.7667)
+- curated: `Point to the Angry face Scored`
+- fresh: `Point to the Angry face`
+
+### `akt2_3s_t1` / item_text (similarity 0.7667)
+- curated: `Point to the Happy face Scored`
+- fresh: `Point to the Happy face`
+
+### `akt2_1s_t1` / item_text (similarity 0.75)
+- curated: `Point to the Sad face Scored`
+- fresh: `Point to the Sad face`
+
+### `emtb4_6s_t1` / item_text (similarity 0)
+- curated: `NA`
+- fresh: `Show me the one who feels sad`
+

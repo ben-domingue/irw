@@ -1,15 +1,21 @@
 # Item text corrections — handoff
 
-State as of 2026-08-24. **13 of the 17 are resolved.** Nine corrections are
-live in `irw_text` **v7.0** (released 20:03). Three more — `gilbert_meta_35`,
-`gilbert_meta_42`, `preschool_sel_akt` — are uploaded to the draft and awaiting
-release. `gilbert_meta_78`/`_80` were resolved by removing their itemtext
-tables (the PPVT-4 / WJ-III licensing question), and `dumas_organisciak_2022`
-is being removed from IRW.
+State as of 2026-08-25. **15 of the 17 are resolved.** Nine corrections are
+live in `irw_text` **v7.0** (released 2026-08-24 20:03). Three more —
+`gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt` — are
+uploaded to the draft and awaiting release (`preschool_sel_akt` re-uploaded
+2026-08-25, now complete at 65/65 items). `gilbert_meta_78`/`_80` were
+resolved by removing their itemtext tables (the PPVT-4 / WJ-III licensing
+question), `dumas_organisciak_2022` is being removed from IRW, and
+`gilbert_meta_35` was resolved by removing its itemtext table (item-to-text
+mapping unverifiable — see its row below; #1615 reopened pending
+@joshgilbert1994).
 
-Remaining: **3 tables**, all needing a decision rather than a check —
-`threat_isler_2024_exp4_cog_crt` (#1605), `double_marking_steele_2022` (#1616),
-`political_psychology` (#1594).
+Remaining: **2 tables**, both needing a decision rather than a check —
+`threat_isler_2024_exp4_cog_crt` (#1605) and `political_psychology` (#1594).
+Note that #1594's suspected defect — item numbers assigned by column position
+rather than variable name — is the same class of failure that `gilbert_meta_35`
+turned out to have.
 
 ### Uploading replaces nothing — read this before shipping the rest
 
@@ -75,11 +81,11 @@ Seven of the seventeen.
 |---|---|---|
 | `gilbert_meta_78` | #1607 | Reproduces actual **PPVT-4** target words (`ankle`, `appliance`…). Commercial instrument — **licensing call, not a data call.** |
 | `gilbert_meta_80` | #1606 | Same, **WJ-III Picture Vocabulary** (`fork`, `fish`…). |
-| `double_marking_steele_2022` | #1616 | Only whole-content rewrite in the set (item_text similarity 0.019). Review as a rewrite. Separately: `presentation` has live resp 0/1 with no option_text row, and the boilerplate option_text problem is still unresolved. |
+| `double_marking_steele_2022` | #1616 | **Done 2026-08-25.** Rubric item_text uploaded (108 rows). option_text deliberately left as the generic band descriptors per @xingyi-zhang. Fixed en route: duplicate `abstract` N/S rows, and `presentation`'s missing N/S rows. audit_batch.R now PASSes. |
 | `threat_isler_2024_exp4_cog_crt` | #1605 | `crt2`/`crt3` have no option_text although the scale has 4 response categories. Real gap. |
-| `gilbert_meta_35` | #1615 | Knowingly incomplete (gated Dataverse). Shipping replaces an existing callout. |
-| `gilbert_meta_42` | #1620 | Knowingly incomplete (gated openICPSR). Same. |
-| `preschool_sel_akt` | #1611 | 47 of 48 items; `emtb4_6s_t1` prompt unrecoverable. Conditional callout depends on whether this is resolved first. |
+| `gilbert_meta_35` | #1615 | **Pulled 2026-08-25.** Source has `values_a`-`values_j` (10) and codebook wording for 8; the IRW table has 12 items. IRW's letters are therefore not the source's, so the a-h text mapping is unverifiable. Item text removed from the draft; issue reopened, @joshgilbert1994 asked about `values_k`/`_l` provenance and label order. |
+| `gilbert_meta_42` | #1620 | **Done 2026-08-25.** Ships 12 of 20 items; the 4 `life_satisfaction_*` and 4 `locus_of_control_*` items omitted (no text available). Draft verified at 60 rows. Open follow-up on the issue: the `stress` section prompt does not fit `stress_b`/`stress_c`. |
+| `preschool_sel_akt` | #1611 | **Done 2026-08-25.** Complete: all 65 items now carry text. @xingyi-zhang found `emtb4_6s_t1`'s prompt (it sits under the raw-score twin on the next page); verified against the codebook. Also confirmed the `emtb1_4`/`_5` reconstruction, and stripped a trailing "Scored" variable-label artifact from all 17 `akt*` items. Issues-page callout removed. |
 | `political_psychology` | #1594 | **Not fixed.** Item numbers may be assigned by column position, not variable name. Needs confirmation before anything touches this table. |
 
 ### Not a defect — do not "fix"
@@ -112,10 +118,12 @@ Description edit belonging to the metadata pipeline; text is in
 1. ~~Upload the 10 clean tables.~~ Done 2026-08-24, pending release.
 2. **Release the draft version.** Until then the corrections are not live.
 3. After release, update **one** issues-page callout:
-   `sv-maia2_randelovic_2021_erq` (its 1–5 anchors are inferred). The other two
-   replacement callouts — `gilbert_meta_35`, `gilbert_meta_42` — must **not** be
-   pasted: those tables were not uploaded. `dumas_organisciak_2022` was already
-   added 2026-08-17. See `fixes/itemtext_issues_suggestions.md` and #1644.
+   `sv-maia2_randelovic_2021_erq` (its 1–5 anchors are inferred).
+   `gilbert_meta_42`'s callout was already updated 2026-08-25 to match what
+   actually shipped (12 of 20 items). `gilbert_meta_35`'s callout was **removed**
+   2026-08-25 — its itemtext table is being pulled, so there is no text-vs-table
+   mismatch left to describe. `dumas_organisciak_2022` was already added
+   2026-08-17. See `fixes/itemtext_issues_suggestions.md` and #1644.
 4. Close #1598, #1599, #1600, #1601, #1602, #1603, #1604, #1609, #1613, #1619
    once released.
 5. Work the decision list above.
