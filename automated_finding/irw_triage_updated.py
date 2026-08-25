@@ -732,9 +732,89 @@ def looks_like_item_response(df: pd.DataFrame) -> tuple:
     return is_ir, reasons
 
 
+# ---------------------------------------------------------------------------
+# PII screen
+# ---------------------------------------------------------------------------
+# The pipeline's rule is that a raw source file containing real names, emails,
+# birthdates, addresses, phone numbers or national IDs *anywhere* is a
+# whole-candidate skip, not a drop-the-column fix (SKILL.md Step 4, memory
+# feedback_pii_skip_entirely). Nothing enforced that at triage time, so such a
+# file could -- and did -- come back flagged `good`: both "Questionnaire
+# Response — Doomscrolling" deposits (figshare 29857874 / 28979105, 2026-08-25)
+# scored `good` with a `Respondent's Name (Real Name/Initial)` column of actual
+# given names sitting in the raw header. Raw Google Forms exports are the
+# recurring shape.
+#
+# Matched against the RAW header, because the coercion step usually drops these
+# columns before anything else looks at them.
+#
+# Deliberately conservative about `name`: a bare "name" matches "item name",
+# "scale name", "variable name", so a person-qualifier is required. Likewise
+# only a full date of birth counts -- a `birthyr`/`birth year` column is a
+# legitimate covariate, not PII.
+# Two tiers, because Google Forms exports use the full item stem as the column
+# label. "I often spend hours using my phone before bed" is an item, not a
+# phone-number field -- so the contact-detail patterns only fire on labels that
+# actually read like a form field (<=5 words), while the patterns that never
+# occur inside an item stem fire at any length.
+_RE_PII_STRONG = re.compile(
+    r"(?:"
+    # a person-qualified name -- never a bare "name", which matches "item
+    # name" / "variable name" / "filename"
+    r"(?:respondent|participant|student|patient|employee|subject|customer|"
+    r"your|full|first|last|real|given|maiden)[\s_\-]*'?s?[\s_\-]*names?\b"
+    r"|\bnames?[\s_\-]*of[\s_\-]*(?:the[\s_\-]*)?"
+    r"(?:respondent|participant|student|patient|child|parent)"
+    r"|\bsurnames?\b(?![\s_\-]*of\b)"
+    r"|\bdate[\s_\-]*of[\s_\-]*birth\b|\bbirth[\s_\-]*date\b|\bdob\b"
+    r"|\bip[\s_\-]*address\b"
+    r"|\bpassport[\s_\-]*(?:no|number)?\b|\bsocial[\s_\-]*security\b|\bssn\b"
+    r"|\bnational[\s_\-]*id\b"
+    r"|\bnombre[\s_\-]*(?:completo|del[\s_\-]*(?:participante|encuestado))\b"
+    r"|\bapellidos?\b|姓名|氏名"
+    r")",
+    re.IGNORECASE)
+
+_RE_PII_WEAK = re.compile(
+    r"(?:"
+    r"\be[\s_\-]?mail\b|\bcorreo[\s_\-]*electr|\bcourriel\b"
+    r"|\b(?:tele)?phone\b|\bmobile[\s_\-]*(?:no|number)\b"
+    r"|\bcontact[\s_\-]*(?:no|number|details)\b"
+    r"|\b(?:home|street|postal|mailing|residential)[\s_\-]*address\b"
+    r")",
+    re.IGNORECASE)
+
+_MAX_WEAK_WORDS = 5
+
+
+def screen_for_pii(columns) -> list[str]:
+    """Return the raw column labels that look like direct identifiers."""
+    hits = []
+    for c in columns:
+        label = str(c)
+        if _RE_PII_STRONG.search(label):
+            hits.append(label)
+        elif (_RE_PII_WEAK.search(label)
+              and len(label.split()) <= _MAX_WEAK_WORDS):
+            hits.append(label)
+    return hits
+
+
 def triage_dataset(df_raw: pd.DataFrame) -> Triage:
     coerce = coerce_to_irw(df_raw)
     reasons = []
+
+    # PII first: it disqualifies the whole candidate regardless of how well
+    # the file parses, so it must beat every other verdict including `good`.
+    pii = screen_for_pii(df_raw.columns)
+    if pii:
+        reasons.append(
+            "Raw file has column(s) that look like direct identifiers: "
+            + ", ".join(repr(c) for c in pii[:5])
+            + ". Per the pipeline's PII rule this is a whole-candidate skip, "
+              "not a drop-the-column fix. Confirm the column really holds "
+              "personal data before overriding.")
+        return Triage("pii_suspected", reasons, coerce, [], None)
 
     if coerce.df is None:
         reasons.append("Automatic IRW formatting failed — needs a human to map "

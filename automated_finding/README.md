@@ -276,6 +276,7 @@ a processing script, check the dataset's DOI against the
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
+| `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
 | `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |

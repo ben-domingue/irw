@@ -35,6 +35,33 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   conservative (it drops every row whose columns are shifted by the Sheets
   export, and every row with no N recorded), so there is more in there.
 
+- [ ] **43 actionable leads from the recovered backlog** —
+  `backlog_recovered_leads_2026-08-25.csv` (3 good + 40 worth_retrying from
+  the 173 candidates un-blocked from `googlesheet_humaneye.csv`). Largest:
+  `dvn/rwpomi` (12,622 x 11, CC0), `dvn/me8oji` (1,646 x 42, CC0),
+  `dvn/xpuru1` (1,201 x 39, CC BY), `dvn/l6g8ul` (1,067 x 46, CC0),
+  `dvn/7cyiqg` (199 x 256, CC0). All three `good` rows were already checked
+  by hand and none shipped — see the BATCH_LOG entry.
+
+- [ ] **Decide: is `10.7910/dvn/1ufrud` (trolley problem, CC0) IRW-eligible?**
+  1,597 respondents x ~4 vignettes, `flip` 0/1, already long. The catch is
+  that the vignette is a *crossing* of one-track victim type x five-track
+  victim type (exactly two of nine dummies are 1 per row), so an "item"
+  would be a cell of a factorial experimental manipulation — ~21 cells,
+  density ~0.2 — rather than an item of a validated battery. Same judgment
+  class as the rejected `carus_2021_snowboard_speed`. If it counts, the
+  script is easy; if it does not, this is a `treat`-column study, not an
+  IRW table. Not guessed at.
+
+- [ ] **Raw Google Forms exports are a recurring PII risk the `good` flag
+  cannot see.** Both doomscrolling deposits
+  (`figshare.29857874`, `figshare.28979105`) triaged `good` and both carry a
+  `Respondent's Name (Real Name/Initial)` column of actual given names plus
+  second-precision timestamps. Skipped per
+  `feedback_pii_skip_entirely`. Worth considering a triage-time warning when
+  a column name matches `name|email|phone|address|birth` so these surface as
+  something other than `good`.
+
 - [ ] **Build a Mendeley Data discovery connector.** Highest actionable rate
   measured anywhere in the system: 5 `good` + 21 `worth_retrying` out of 117
   candidates (22%), all CC BY, against PLOS ONE's ~1% good. Mendeley's own

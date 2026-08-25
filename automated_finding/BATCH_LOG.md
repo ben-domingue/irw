@@ -10614,3 +10614,86 @@ Four corroborating checks:
   — a missing code could not produce a valid total of 0.
 
 The script's coding notes were updated to record this.
+
+### Recovered-backlog triage — results (2026-08-25)
+
+The 173 unique candidates pulled out of the ex-blocklist (Finding 3) triaged
+as 3 `good`, 160 `human_assistance`, 7 `below_min_n`, 3 `not_item_response`.
+Step 2b on the 160: 102 `aggregate_continuous`, **40 `worth_retrying`**, 12
+`not_item_response`, 6 `human_review` (archived to
+`human_review/human_review_backlog_recovered_2026-08-25.csv`).
+
+**43 actionable leads** saved to `backlog_recovered_leads_2026-08-25.csv`
+(standing worklist, not a per-run temp file). Largest: `dvn/rwpomi`
+(12,622 x 11, CC0), `dvn/me8oji` (1,646 x 42, CC0), `dvn/xpuru1`
+(1,201 x 39, CC BY), `dvn/l6g8ul` (1,067 x 46, CC0), `dvn/7cyiqg`
+(199 x 256, CC0). That is 43 actionable candidates out of a pool the
+discovery runs had been treating as permanently decided.
+
+All three `good` rows were checked by hand rather than queued, per the
+standing rule that a `good` flag needs a human glance. None was shipped:
+
+* **`10.6084/m9.figshare.29857874` (722 x 41) and
+  `10.6084/m9.figshare.28979105` (202 x 41), "Questionnaire Response —
+  Doomscrolling", CC BY — skipped outright for PII.** Both are Google Forms
+  exports whose fourth column is `Respondent's Name (Real Name/Initial)`,
+  holding actual given names ("Rei", "Anton", ...) — 185 distinct values in
+  the smaller file — alongside a second-precision submission `Timestamp`,
+  `Age` and `Gender`. Under the pipeline's blanket rule (memory
+  `feedback_pii_skip_entirely`, SKILL Step 4) a source file containing real
+  names anywhere is a whole-candidate skip, not a drop-the-column fix, so
+  neither was processed and neither has entered the IRW. The two deposits are
+  the same instrument and overlap in respondents (the same names appear in
+  both), so the smaller is a subset of the larger. Worth noting as a class:
+  raw Google Forms exports are a recurring PII risk and the `good` flag
+  cannot see it.
+* **`10.7910/dvn/1ufrud` "Partisanship and the Trolley Problem", CC0 — left
+  for a decision, not shipped.** The file is already long: 5,843 rows over
+  1,597 respondents, ~4 vignettes each, with `flip` (0/1) as the response.
+  But the vignette is not one column — exactly two of the nine
+  `onenazi`/`onecrim`/`onenon`/`oneimm`/`onerep`/`onedem`/`onedog`/
+  `fiverep`/`fivedem` dummies are 1 on every row, because the design crosses
+  the one-track victim type with the five-track victim type. So the "item"
+  would be a (one-type x five-type) cell of a factorial manipulation, giving
+  ~21 possible cells at ~4 per respondent and a density near 0.2. Whether an
+  experimental vignette cell counts as an item or belongs in `treat` is a
+  genuine judgment call of the same class as the rejected
+  `carus_2021_snowboard_speed` and the fish/mouse measurement candidates, so
+  it is surfaced in `TODO.md` rather than guessed at.
+
+### PII screen added to triage (2026-08-25)
+
+Prompted by the two doomscrolling deposits above, which both scored `good`
+with a `Respondent's Name (Real Name/Initial)` column of actual given names
+in the raw header. The pipeline's PII rule existed only as a Step 4
+instruction for a human reviewer; nothing enforced it at triage time, so a
+file full of real names could and did come back as the most promising flag
+the pipeline emits.
+
+`screen_for_pii()` in `irw_triage_updated.py` now matches the **raw** header
+(the coercion step usually drops these columns before anything else sees
+them) and `triage_dataset()` returns a new terminal flag `pii_suspected`
+ahead of every other verdict, listing the offending column names so a human
+can override a false positive.
+
+Two tiers, because Google Forms exports use the full item stem as the column
+label:
+
+* **strong** — person-qualified name ("Respondent's Name", "first name",
+  "surname" but not "surname_of_first_author"), date of birth, IP address,
+  passport/SSN/national ID, `姓名`/`氏名`/`Apellidos`. Fire at any length;
+  these do not occur inside an item stem.
+* **weak** — email, phone, mobile/contact number, home/postal address. Fire
+  only on labels of <=5 words, i.e. things that read like a form field. This
+  is what keeps "1. I often spend Hours using my phone or other digital
+  devices before bed" and "I feel anxious when I cannot check my email during
+  the working day" from tripping it — smartphone- and internet-addiction
+  scales would otherwise flag on every run.
+
+A bare `name` is deliberately never matched ("item name", "variable_name",
+"filename"), and `birthyr`/`birth year` is not PII — only a full date of
+birth is. Verified on 24 positives and 27 negatives with no misses and no
+false positives; re-checked end to end that the doomscrolling file now
+returns `pii_suspected` flagging exactly one column, while the CAPQ, FTD-SS
+and CES-D files this batch shipped are unaffected. `README.md`'s flag table
+updated.
