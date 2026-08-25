@@ -1,22 +1,38 @@
 # Item text corrections — handoff
 
-State as of 2026-08-25. **16 of the 17 are resolved.** Nine corrections are
-live in `irw_text` **v8.0** (released 2026-08-24). Three more —
-`gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt`,
-`threat_isler_2024_exp4_cog_crt` and `gilbert_meta_35` — are uploaded to the
-draft and awaiting release. `gilbert_meta_78`/`_80` were
-resolved by removing their itemtext tables (the PPVT-4 / WJ-III licensing
-question), `dumas_organisciak_2022` is being removed from IRW, and
-`gilbert_meta_35`'s mapping was corrected outright once @joshgilbert1994
-answered — see its row below.
+State as of 2026-08-25. **The correction workstream is complete and released
+as `irw_text` v9.0** (531 tables). All 17 corrections are resolved:
 
-Remaining: **3 tables**, none of them a text-extraction problem —
-`gilbert_meta_78`/`_80` (#1607/#1606) are a licensing call on PPVT-4 and
-WJ-III wording, and `political_psychology` (#1594) needs its item-numbering
-confirmed. Note that #1594's suspected defect — item numbers assigned by
-column position rather than variable name — is the same class of failure that
-`gilbert_meta_35` turned out to have, so treat it as likely rather than
-suspected.
+- **14 shipped**: the nine live since v8.0, plus `gilbert_meta_42` (12 of 20
+  items), `double_marking_steele_2022`, `preschool_sel_akt` (65/65),
+  `threat_isler_2024_exp4_cog_crt` and `gilbert_meta_35` (corrected mapping,
+  8 items) released in v9.0.
+- **3 resolved by removing the itemtext table**: `gilbert_meta_78`/`_80`
+  (#1607/#1606, PPVT-4 / WJ-III licensing) and `political_psychology` (#1594,
+  item-to-text mapping unverifiable). `dumas_organisciak_2022` (#1598) was
+  uploaded but its table is being removed from IRW, so #1598 stays open on
+  that separate decision.
+
+v9.0 also released the 11 `batch_011` extraction tables.
+
+### The failure mode worth carrying forward
+
+`gilbert_meta_35` (#1615) is the one to remember. Its 8 published statements
+had been laid onto items `values_a`..`values_h` in the order a paper listed
+them, but the study's replication do-file builds the scale from
+`values_a, c, d, e, f, g, i, j` — four non-scale items sit inside that range,
+so every item after the first carried the next one's text. **7 of 8 wrong,
+and live for months.**
+
+Both gates passed it: the item *set* matched live data exactly, and each text
+was individually plausible. `audit_batch.R` and `diff_itemtext.R` cannot see
+this. What caught it was the source's own variable labels plus its replication
+code naming the scale items.
+
+**Rule:** anchor an item-to-text mapping in something that names items —
+variable labels, a codebook keyed by variable name, replication code. Never in
+the order statements appear in a paper. Where the anchor covers only some
+items, ship those and omit the rest.
 
 ### Uploading replaces nothing — read this before shipping the rest
 
@@ -116,17 +132,23 @@ Description edit belonging to the metadata pipeline; text is in
 
 ## Shipping order
 
-1. ~~Upload the 10 clean tables.~~ Done 2026-08-24, pending release.
-2. **Release the draft version.** Until then the corrections are not live.
-3. After release, update **one** issues-page callout:
+1. ~~Upload the 10 clean tables.~~ Done 2026-08-24, released in v8.0.
+2. ~~Release the draft version.~~ Done 2026-08-25 as **v9.0**.
+3. ~~After release, update the issues-page callouts.~~ Done 2026-08-25
+   (datapages/irw `5295beb`): `gilbert_meta_35` added (8 of 12 items, and
+   `values_e`/`_j` run in the opposite direction), `gilbert_meta_42` rewritten
+   to match what shipped, `preschool_sel_akt` removed (gap closed). Original
+   note follows: update **one** issues-page callout:
    `sv-maia2_randelovic_2021_erq` (its 1–5 anchors are inferred).
    `gilbert_meta_42`'s callout was already updated 2026-08-25 to match what
    actually shipped (12 of 20 items). `gilbert_meta_35`'s callout was **removed**
    2026-08-25 — its itemtext table is being pulled, so there is no text-vs-table
    mismatch left to describe. `dumas_organisciak_2022` was already added
    2026-08-17. See `fixes/itemtext_issues_suggestions.md` and #1644.
-4. Close #1598, #1599, #1600, #1601, #1602, #1603, #1604, #1609, #1613, #1619
-   once released.
-5. Work the decision list above.
+4. ~~Close the resolved issues.~~ Done: #1594, #1599, #1600, #1601, #1602,
+   #1603, #1604, #1605, #1606, #1607, #1609, #1611, #1613, #1615, #1616,
+   #1619, #1620, #1644. **#1598 stays open** on the separate
+   `dumas_organisciak_2022` removal decision.
+5. ~~Work the decision list above.~~ Done.
 4. Close out #1645 (4 tables never checked by current tooling) and #1646 (13
    stale live callouts).
