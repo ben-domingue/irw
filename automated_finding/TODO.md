@@ -5,7 +5,7 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
-- [ ] **Decide what to do about the scheduled cloud runs.** Throughput fell
+- [x] **Decide what to do about the scheduled cloud runs.** Throughput fell
   from ~26 new `data/*.py` scripts/day (2026-07-26..08-13, manual batches) to
   ~1.4/day (08-14..08-25, scheduled runs) — an 18x drop. The bugs behind each
   individual run are now fixed, but two design problems are not: a scheduled
@@ -15,8 +15,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   behind a seen-DOI ledger, so they are mined out by construction. Options:
   fold a "review the pool" step into the routine prompt, rotate the weekly
   term list, or drop the weekly cadence and run monthly full sweeps only.
-  This is a ben-domingue call, not a code fix.
-
+  This is a ben-domingue call, not a code fix. — **decided 2026-08-25 (ben-domingue): keep the routines as discovery+triage and work the pools locally.** The processing step stays with a person, because that is what produced ~26 scripts/day. Done as part of the decision: a daily nudge routine `IRW daily search nudge` (`trig_014YcLgR2Sa2D8P2yAkvQFTx`, cron `0 15 * * *` = 8am PT, read-only) now reads `TODO.md` and the two leads CSVs each morning and names one concrete thing to work; and the two runaway PR-watcher one-offs on #1676 / #1681 (`trig_01UfLcQ11WAtgNEgyR6Yp5WF`, `trig_0184pheJDQbsY8tBE1uPkY7S`) were disabled — they had been re-arming hourly since 2026-08-24 against PRs an agent is told never to merge.
+- [ ] **Thin the standing weekly discovery routines** — follow-on from the decision
+  above. The weekly repos/PLOS/PMC routines re-search the same 15 `HIGH_YIELD_TERMS`
+  behind a seen-DOI ledger, so they are mined out by construction; and the monthly
+  sweeps want a higher `--limit` (or explicit `--per-term-cap 3-5`) now that
+  `TERM_LIST` is 125 terms. **Blocked on routine IDs**: the `RemoteTrigger` `list`
+  action returns only the newest page and this tool exposes no cursor for it, so the
+  standing routines (created ~2026-08-13/14) are unreachable from here. Get their IDs
+  from https://claude.ai/code/routines and hand them over, or edit them there.
 - [ ] **The monthly routines' `--limit 150` is now spread across 125 terms.**
   `per_term_cap = max(1, limit // len(terms))`, so each term gets exactly 1
   candidate — it was already 1 at 100 terms, so this is not a regression, but
