@@ -1,7 +1,7 @@
 # Item text corrections — handoff
 
 State as of 2026-08-25. **16 of the 17 are resolved.** Nine corrections are
-live in `irw_text` **v7.0** (released 2026-08-24 20:03). Three more —
+live in `irw_text` **v8.0** (released 2026-08-24). Three more —
 `gilbert_meta_42`, `double_marking_steele_2022`, `preschool_sel_akt`,
 `threat_isler_2024_exp4_cog_crt` and `gilbert_meta_35` — are uploaded to the
 draft and awaiting release. `gilbert_meta_78`/`_80` were
