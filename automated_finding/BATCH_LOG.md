@@ -10579,3 +10579,38 @@ exam *items* described by instructor, Bloom's level and visual-model flags —
 item metadata, not person x item responses.
 
 `biblio_batch_2026-08-25b.csv` (8 rows) written for upload.
+
+### `altman_2020_capq` — `resp = 0` positively confirmed as a real scale point (2026-08-25)
+
+Asked by ben-domingue after the batch above. Per `datastandard.md`'s
+requirement to cite the source's own description rather than infer from
+distribution shape, and following the `ren_2024_adl` precedent:
+
+**The .sav carries the full labelled scale**, so no inference is needed:
+0 = "no", 1 = "yes, but only once or a very minor problem", 2 = "yes, but
+only a couple of times or a minor problem", 3 = "yes, a few times or moderate
+problems", 4 = "yes, many times or a somewhat serious problem", 5 = "yes,
+very many times or a serious problem". All 19 items share the one label set
+(`labels7`). 0 is the bottom anchor of a 6-point severity scale — the "this
+problem did not happen" response.
+
+Four corroborating checks:
+
+* **No SPSS user-missing declared.** `missing_ranges` is empty for every
+  CAPQ variable, so 0 was never configured as a missing code.
+* **NaN exists separately** on every item (5-33 per item, 229 incomplete
+  rows of 4,053). Missingness already has its own representation, so 0 is not
+  doing that job.
+* **0 occurs on all 19 items, 47-95% each** — not isolated to one item, which
+  is the cross-item data-entry-error signature. Its rate tracks item severity
+  the way a problems checklist should: "Medical problems" 94.8%, "To lose a
+  job" 93.3%, "Blackouts or flashbacks" 94.7% (rare, severe) against "To
+  procrastinate" 47.2%, "Memory loss" 51.3%, "lower energy level" 55.6%
+  (common, mild).
+* **The authors' own `CAPQ_GLOBAL` reproduces exactly** as the plain sum of
+  the 19 raw items on all 3,824 complete cases (max |diff| = 0.0), including
+  the 3,816 that contain at least one zero. The 541 respondents answering 0
+  to every item carry through to `CAPQ_GLOBAL = 0` rather than being dropped
+  — a missing code could not produce a valid total of 0.
+
+The script's coding notes were updated to record this.

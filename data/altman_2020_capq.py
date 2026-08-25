@@ -23,8 +23,22 @@ altman_2020_capq   19 CAPQ items, resp 0-5
 
 Coding notes
 ------------
-* Every CAPQ item is a 0-5 frequency rating of how often cannabis use has
-  caused that problem. The 0-5 range holds on all 19 items in the file.
+* `resp = 0` is a real scale point, not a missingness sentinel. The .sav's
+  own value labels give the full 6-point scale: 0 = "no", 1 = "yes, but only
+  once or a very minor problem", 2 = "yes, but only a couple of times or a
+  minor problem", 3 = "yes, a few times or moderate problems", 4 = "yes, many
+  times or a somewhat serious problem", 5 = "yes, very many times or a serious
+  problem". Four corroborating checks: no SPSS user-missing range is declared
+  on any CAPQ variable; NaN exists separately on every item (5-33 each), so
+  missingness already has its own representation; 0 occurs on all 19 items,
+  47-95% each, and its rate tracks item severity the way a problems checklist
+  should ("To lose a job" 93.3%, "Medical problems" 94.8% vs "To
+  procrastinate" 47.2%, "Memory loss" 51.3%) rather than being isolated to
+  one item; and the authors' own `CAPQ_GLOBAL` equals the plain sum of the 19
+  raw items on all 3,824 complete cases, including the 3,816 that contain at
+  least one zero. The 541 respondents answering 0 to every item carry through
+  to `CAPQ_GLOBAL = 0` rather than being dropped, which a missing code could
+  not produce.
 * `CAPQ_GLOBAL`, `CAPQ_GLOBAL_BC` (a Box-Cox transform of it) and `CAPQ_SF`
   are derived scores and are excluded, as is `Usepermonth_BC`.
 * `Consent` and `Mjuseever` are constant (1) -- screening confirmations, not
