@@ -10242,3 +10242,91 @@ version duplicates, written to
 The single `good` row (`osf.io/47bhk`, N=410 x 40, 16,400 responses,
 density 1.0) has **no license** on the OSF node, so it is not processable
 as it stands — tracked in `TODO.md`.
+
+## 2026-08-25 — PLOS weekly re-triage: the 12 `download_failed` rows were a missing-dependency artifact
+
+The weekly PLOS high-yield run (`b9a2fe5` / `12fd10c`) reported "none
+reached a usable-file/good flag": 44 `no_usable_file`, 12
+`download_failed`. Ten of those 12 `download_failed` rows carry the
+reason text ``Import pyreadstat` failed`` (6) or ``Import openpyxl`
+failed`` (4) — i.e. the file downloaded fine and the *cloud sandbox*
+could not parse it. This is the same gap flagged in the 2026-08-24 entry
+("`openpyxl` is missing from the cloud sandbox — worth adding to the
+routine's environment"), still unfixed, and it is now demonstrably
+producing false negatives on `.sav`/`.xlsx` Supporting Information, which
+is exactly where PLOS psychometric data lives.
+
+Re-ran `process_one()` on all 12 locally (`runs/plos_retriage_weekly_2026-08-25.csv`):
+
+| flag | before | after |
+|---|---|---|
+| human_assistance | 0 | 4 |
+| below_min_n | 0 | 5 |
+| not_item_response | 0 | 1 |
+| download_failed | 12 | 2 |
+
+The 2 still-failing rows are genuine, not dependency-related
+(`pone.0278721` Excel-engine detection; `pone.0150881` a CSV with a
+6-field preamble).
+
+Step 2b was run (`runs/plos_retriage_ha_weekly_2026-08-25.csv`): 2
+`aggregate_continuous`, 1 `worth_retrying`, 1 `human_review`, all four
+written to `human_review/human_review_plos_2026-08-25.csv`.
+
+**One of them is a strong candidate that the run reported as a failure.**
+`10.1371/journal.pone.0235154` (medical-student burnout, Hong Kong;
+CC BY) ships a 746 x 162 `.sav` with SPSS variable labels carrying full
+item text: MBI-22 (0-6), Jefferson Scale of Physician Empathy 20 items
+(1-7), DUSOCS 10 items (1-4), PSQI 5A-9 (0-3), AUDIT/drinking 3 items,
+plus clean covariates. Multi-scale, so it splits into separate files per
+the standard; item text comes free from the labels. The
+`aggregate_continuous` refinement is an artifact of the automatic melt
+pulling free-text/derived columns (`PSQI_1` bedtime strings, component
+scores) in alongside the item blocks. Not yet processed.
+
+`10.1371/journal.pone.0356791` (young Chinese physicians, N=504 x 69)
+also parsed successfully on the retry and is worth a look; note its
+`S1_File` labelled `(XLSX)` at `.s001` is actually a `.docx` — the real
+table is a different supplement id.
+
+### `lee_2020_*` processed (2026-08-25)
+
+`data/lee_2020_medical_students.py` — the `pone.0235154` candidate recovered
+above. 5 tables, 44,941 responses, written to `irw_output/`:
+
+| table | items | ids | responses | resp | density |
+|---|---|---|---|---|---|
+| `lee_2020_burnout` | 22 | 733 | 15,396 | 0-6 | 0.955 |
+| `lee_2020_empathy` | 20 | 687 | 13,532 | 1-7 | 0.985 |
+| `lee_2020_sleep_quality` | 14 | 691 | 9,313 | 0-3 | 0.963 |
+| `lee_2020_social_support` | 10 | 702 | 4,553 | 1-3 | 0.649 |
+| `lee_2020_alcohol_use` | 3 | 717 | 2,147 | 0-4 / 0-5 | 0.998 |
+
+Decisions worth recording, all driven off the `.sav`'s own variable and value
+labels rather than inference:
+
+* **MBI and JPSE are untransformed at the item level** — verified by
+  reconstructing the authors' own `MBI_EE`/`MBI_DP`/`MBI_PA` and
+  `JPSE_sum_total` as plain sums of the stored items (they match on every
+  complete case). For the JSPE that also means items 11-20 must already be
+  stored reverse-scored, since a valid total requires it. Exported as stored.
+* **DUSOCS category 4 is a sentinel**, not a fourth ordinal step — its value
+  label is "There is no such person" (spouse, children, co-workers... for a
+  student sample). Set to NA, which is why that table's density is 0.649 and
+  `DUSOCS_2` ("children or grandchildren") has only 71 responses.
+* **PSQI split**: only the 0-3 frequency/severity items (5A-5J, 6-9) are item
+  responses. Items 1-4 are clock times and durations typed as free text with a
+  parallel `_remarks` column. `PSQI_5J_plus` is the zero-filled variant of
+  `PSQI_5J` behind the authors' `component5_plus`; the raw `PSQI_5J` is used so
+  no imputed values enter the table.
+* **AUDIT-C** kept at the source's own category counts (Q2 has six, Q1/Q3
+  five), not the collapsed 0-4 scoring in `drinking_habit_2_transform`.
+* All derived columns (subscale sums, ranks, cut-point indicators, PSQI
+  components, GSLTPAQ score, pack-years) excluded. Free-text columns checked
+  for PII — none present (responses are generic: "Mother", "Best friend",
+  "Anxiety") — and not exported, since they hold no item responses.
+
+The paper itself reports only the MBI, AUDIT-C, PSQI and physical activity;
+the JPSE and DUSOCS blocks were administered but not analysed there.
+
+`biblio_batch_2026-08-25.csv` (5 rows) written for upload.

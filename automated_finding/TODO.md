@@ -3,6 +3,52 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+- [x] **Cloud routine sandbox is missing `openpyxl` and `pyreadstat`
+  (fixed in-repo 2026-08-25)** — `preflight_deps()` added to
+  `irw_triage_updated.py` and called as the first statement of `main()` in
+  all 8 entry points: it auto-installs the missing readers and aborts the
+  run if they are still absent, so a bare sandbox can no longer produce a
+  quiet all-`download_failed` result that burns DOIs in the seen ledger.
+  Documented in `SKILL.md`'s Prerequisites. Original diagnosis: 10 of
+  the 12 `download_failed` rows in the weekly PLOS run (`b9a2fe5`) were
+  purely `Import pyreadstat failed` / `Import openpyxl failed`, and one of
+  them (`pone.0235154`) is a strong multi-scale candidate. Every scheduled
+  cloud run silently drops `.sav`/`.xlsx` Supporting Information this way,
+  and the DOIs get written to `plos_seen_dois.csv`, making the false
+  negative permanent. Fix: add
+  `pip3 install --user --break-system-packages pandas openpyxl pyreadstat pyreadr`
+  (or the equivalent env setup) to the routine prompts for all PLOS/PMC/repo
+  jobs, and have them assert `python3 -c "import pandas, openpyxl, pyreadstat, pyreadr"`
+  before Step 2. Until then, `download_failed` rows from cloud runs need a
+  local re-triage pass.
+
+- [ ] **`irw_process_queue.py` is broken on `main`** (found 2026-08-25, not
+  caused by that day's changes): it imports `QUEUE_SHEET_URL` from
+  `irw_discover_updated.py`, which no longer defines it — the module fails at
+  import, so `--help` doesn't even run. Presumably fallout from retiring the
+  human-review queue sheet (2026-08-12). Either repoint it at the
+  `human_review/*.csv` files or delete the script.
+
+- [x] **`pone.0235154` (medical-student burnout, HK, CC BY) processed
+  2026-08-25** — `data/lee_2020_medical_students.py`, 5 tables / 44,941
+  responses. See the BATCH_LOG entry for the coding decisions.
+
+- [x] **`biblio_batch_2026-08-25.csv` (5 rows) uploaded/pasted** (confirmed
+  2026-08-25, ben-domingue): the 5 `lee_2020_*` tables, 44,941 responses.
+  `biblio_batch_2026-08-25.csv` and the `irw_output/lee_2020_*.csv` removed
+  from disk.
+
+- [ ] **Item text for the 5 `lee_2020_*` tables** — unusually cheap here: the
+  `.sav`'s SPSS variable labels carry the full item stem for every item and the
+  value labels carry every response option, so no transcription from the PDF is
+  needed. Item ids in the tables (`MBI_1`, `JPSE_1`, `DUSOCS_1`, `PSQI_5A`,
+  `Drinking_habit_1`, ...) are the source column names, so they join directly.
+
+- [ ] **`pone.0356791` (young Chinese physicians, N=504 x 69) worth a look** —
+  parsed cleanly on the 2026-08-25 re-triage. Note its `S1_File` is captioned
+  `(XLSX)` but `.s001` is actually a `.docx`; the real table is a different
+  supplement id.
+
 - [x] **3 IRW-eligible datasets recovered from the 2026-08-18..20 scheduled
   runs' `human_assistance` bucket (2026-08-24)** — all three processed the
   same day: `data/gao_2022_covid_stress.py` (PLOS ONE, CC BY, N=1087 → 4
