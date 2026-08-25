@@ -1319,6 +1319,121 @@ reach it" into "reached it, and here is what it does or doesn't contain". Three 
 up in the second state without any new item text, which is still a better outcome than leaving them
 on a retry list forever.
 
+## batch_011 TRIAGE — 2026-08-24
+
+All four gates re-run live, no export spent (queries only; see the blockers-cleared note above).
+
+- `audit_batch.R` — first re-run reproduced the shipped `audit_report.csv` byte-identically
+  (7 PASS / 5 WARN). After the `criticalperiod_syntax` edit below it is 6 PASS / 6 WARN.
+- `normalize_nulls.R --dry-run` — 0 of 12 files would change.
+- `verify_batch.R` — **7 PASS, 5 MISSING(exempt)**, up from the round's 6 PASS + 1 no-verdict.
+- `lint_verification.R` — 12 rows, 0 ERROR, 1 WARN (`condon`, see A below; the WARN is expected
+  and correct — the evidence does still hedge, legitimately).
+
+### verify_geography.R — converted off irw_fetch, and it found a real comparison bug
+
+It was the only agent script with an unconditional `irw::irw_fetch()`. It needs per-item row count
+and mean resp, i.e. one `GROUP BY`, so it now takes the qualified reference from
+`irw_table_sets()` and queries it (irw_fetch kept as a fallback, as `verify_riasec.R` and
+`verify_twod_rotation_mather2023.R` already do).
+
+Running it then failed 1440 of 1458 items — **not a mapping defect, a missing-value convention
+mismatch.** `geography` has 281,706 rows (2.8% of 10,087,305) with a missing `resp`: the
+answer.csv events where the user gave no answer. The script's own definition,
+`accuracy(place) = mean(place_asked == place_answered)`, scores a no-answer as 0; the IRW
+processing script maps those events to missing instead. Score them as 0 on both sides and the
+two agree on **1458/1458, max |diff| 5e-07**. VERDICT: PASS. Both the count fix and the
+convention fix are in the script with the reasoning written down.
+
+Worth knowing beyond itemtext: whether a slepemapy no-answer *should* be a missing resp or an
+incorrect one is a live question about the response table, not about item text. Not filed.
+
+### Decisions (Ben, 2026-08-24)
+
+- **A. `condon_2024_sapa_personality` stays VERIFIED.** The stale half of its hedge — that
+  `validate_items.R` could not be run — was a quota artifact and is deleted from the evidence;
+  the item/resp gate was reproduced server-side and re-confirmed by `audit_batch.R` today
+  (135/135, resp 1-6). What remains is that the four intermediate anchors are transcribed from
+  the official SPI-135 form rather than re-derived, which is provenance of wording, not an
+  unproven mapping. `lint_verification.R` will keep flagging it; that is the right behaviour.
+- **B. `geography` ships.** The `xz_todo` check was waived.
+- **C. `chen_2022_sasc` ships.** Ben has already made the SAS-C naming correction in the metadata.
+- **D. `twod_rotation_mather2023` is HELD** from this upload — 100% blank `item_text` because the
+  items are images, and a row with no item text was judged not worth shipping. Extraction is not
+  in doubt (audit and verify both pass); CSV and sidecars stay in the batch folder.
+- **D. `criticalperiod_syntax` ships WITH machine-generated picture descriptions.** Its six
+  sentence-to-picture items (q1, q2, q3, q5, q6, q7) have two picture answer choices that the
+  source prints only as figures. Those twelve rows now carry a description of each panel in
+  `option_text`, prefixed `[machine-generated image description] ` — the only text in the table
+  not transcribed from the source. The panel-to-resp assignment is not inferred: the SI answer key
+  names the correct panel (1. Bottom, 2. Bottom, 3. Top, 5. Bottom, 6. Bottom, 7. Top) and these
+  are two-alternative forced choices, so accuracy 1 identifies the chosen panel. Descriptions were
+  written from `mmc1.pdf` pp.45-47 rendered at 300dpi; the thumbnails are genuinely misleading at
+  low resolution (in q1 both animals run *rightward*, which reverses who is chasing whom), so
+  zoom before describing.
+
+  Consequence: the file goes from a uniform 100%-blank `option_text` (which passed) to 93.7% blank
+  plus a new WARN, "89 of 95 items have NO option_text rows while others do". **That asymmetry is
+  by design, not the `alkouri_2025_*` defect the check exists for** — the 89 grammaticality items
+  are "choose all that apply", where accuracy 1 can mean selecting *or* not selecting the sentence,
+  so no single option was chosen and a label there would be exactly the padding flagged on
+  `agogue_2020`. Recorded in `notes.csv`.
+
+### Issues page
+
+`criticalperiod_syntax` callout written by hand and applied directly to
+`irw_site/itemtext_issues.qmd` (79 entries now) — the drafter only sees `public_note`, so it
+produced the q10_4 duplicated-label point but nothing about the machine-generated descriptions.
+The 8 other drafts from `draft_issues_qmd.R` were then triaged against the page's bar (concrete
+text-vs-table mismatches, not gaps the source never published) and **6 applied, 2 dropped**. The
+page is at 85 entries.
+
+- Applied as drafted, all four being cases where the table NAME misleads about its contents:
+  `chen_2022_sasc` (SAS-C smartphone addiction, not Social Anxiety Scale for Children -- the
+  dictionary Description is fixed but the table name still reads the wrong way, which is why this
+  still earns a callout), `depression_anxiety_stress` (pools DASS-42 + TIPI + vocabulary check),
+  `riasec` (only items 1-48 are RIASEC), `ftna_kasper_2022` (items are whole-subject exam grades,
+  and the three core subjects reuse one item code across two different examinations -- a real join
+  hazard).
+- Applied trimmed, keeping only the half that clears the bar: `geography` (kept: the "(type)"
+  annotation appended to each place name is added text, not part of the source name; cut: "the task
+  published no options"), `sapa_personality` (kept: 17 of 696 items ship the dictionary's
+  abbreviated shorthand rather than the sentence the participant read; cut: "the instruction text
+  was never published").
+- Dropped: `emidy2024_fevs` -- nothing mismatches, it records that the text came from OPM's
+  published FEVS instrument because the .dta labels truncate at Stata's 80 characters, i.e. it
+  describes doing the right thing. And `twod_rotation_mather2023` -- held, so there is no item text
+  on the site to caveat; the draft is worth keeping if it ever ships.
+
+**Lesson on the drafter:** it turns `public_note` into a callout mechanically and does not judge, so
+it drafts for every table that has a note whether or not the note clears the bar, and misses
+anything recorded only in `notes.csv`. Both halves of that showed up in this batch -- 2 of 9 drafts
+did not belong on the page, and the `criticalperiod_syntax` machine-generated-description caveat,
+the single most important one in the round, had to be written by hand.
+
+### CLOSED 2026-08-24 — 11 of 12 uploaded
+
+Ben confirmed the upload. `uploaded=2026-08-24` stamped on 11 rows in
+`itemtables/batch_011/provenance.csv` and 11 `batch_011` rows in `mapping_verification.csv`; the
+11 `__items.csv` deleted from the batch folder, sidecars and the seven `verify_*.R` kept. The held
+`twod_rotation_mather2023__items.csv` and its unstamped rows stay in place.
+
+`queue_state.csv` needed no edit — all 12 were already `done` from extraction time. Note that
+`twod_rotation_mather2023` therefore reads `done` in the queue despite not being uploaded; the
+queue has no `held` status, so the hold is recorded in `notes.csv` and here instead. Anyone
+reconciling queue counts against what is live on the site should expect that one-table gap.
+
+Batch totals for the round: **11 uploaded, 1 held, 0 failed.**
+
+### Still open
+
+Nothing. The six `notes.csv` entries that ended with "re-run validate_items.R once the quota
+resets before uploading" (`close_relationships`, `emidy2024_fevs`, `ftna_kasper_2022`, `geography`,
+`machivallianism_test_main`, `sapa_personality`) each carry a `[DISCHARGED 2026-08-24: ...]`
+sentence saying the window rolled over, Rpkg#121 landed, and `audit_batch.R` re-checked the gate
+against live data — so no future reader re-runs a gate on account of a note that outlived its
+cause.
+
 ## TODO (added 2026-08-24, from Ben) — sweep the notes/flagged rows on the index workbook
 
 Revisit the rows in the itemtext index workbook

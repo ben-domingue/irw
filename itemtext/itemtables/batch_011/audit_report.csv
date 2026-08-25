@@ -2,7 +2,7 @@
 "chen_2022_sasc","PASS",22,22,TRUE,TRUE,FALSE,TRUE,0,0,""
 "close_relationships","PASS",36,36,TRUE,TRUE,FALSE,TRUE,0,0,""
 "condon_2024_sapa_personality","PASS",135,135,TRUE,TRUE,FALSE,TRUE,0,0,""
-"criticalperiod_syntax","PASS",95,95,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"criticalperiod_syntax","WARN",95,95,TRUE,TRUE,FALSE,TRUE,0,93.7,"93.7% of rows have blank option_text | 89 of 95 items have NO option_text rows while others do (q10_2, q10_4, q11_3, q11_4, q12_1, q12_2, ...)"
 "depression_anxiety_stress","PASS",68,68,TRUE,TRUE,FALSE,TRUE,0,0,""
 "emidy2024_fevs","WARN",93,93,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=530983: q82, q83, q84"
 "ftna_kasper_2022","WARN",11,11,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=633038: english_num, kiswahili_num, math_num"

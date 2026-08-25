@@ -1482,14 +1482,55 @@ RAW <- read.csv(text = "item,n,acc
 1473,9223,0.843977", stringsAsFactors = FALSE)
 
 TABLE <- "geography"
-d <- irw::irw_fetch(TABLE)
-d$item <- as.character(d$item)
 
-live_n    <- as.vector(table(d$item))
-live_name <- names(table(d$item))
-live_acc  <- tapply(d$resp, d$item, mean)[live_name]
-live <- data.frame(item = as.integer(live_name), n = live_n,
-                   acc = as.numeric(live_acc), stringsAsFactors = FALSE)
+# Transport note (2026-08-24): this needs only each item's row count and mean
+# resp, which is one server-side GROUP BY. It used to call irw::irw_fetch(),
+# which EXPORTS THE WHOLE TABLE (0.6GB) and counts against the account's
+# 200GB/30-day Redivis export cap -- the cap this round exhausted on 2026-08-18,
+# which is why the script could not be run at the time. Queries are not capped.
+# irw_table_sets() (irw >= 1.0.1) resolves which of the four core datasets holds
+# the table; irw_fetch is kept as a fallback so the script still works without
+# redivis, matching what verify_riasec.R and verify_twod_rotation_mather2023.R do.
+live <- NULL
+if (requireNamespace("redivis", quietly = TRUE) &&
+    requireNamespace("irw", quietly = TRUE)) {
+    live <- tryCatch({
+        ref <- irw::irw_table_sets(TABLE, source = "core", per_item = FALSE)$table
+        # n counts ALL rows for the item, matching the table(d$item) this
+        # replaced.
+        #
+        # MISSING-RESPONSE CONVENTION -- this is what the comparison turns on.
+        # geography has 281,706 rows (2.8% of 10,087,305) whose resp is missing;
+        # they are the answer.csv events where the user gave no answer, so
+        # place_answered is empty. RAW's accuracy above is this script's own
+        # definition, mean(place_asked == place_answered), which scores a
+        # no-answer as NOT EQUAL, i.e. 0. The IRW processing script maps the same
+        # events to a missing resp instead. So the live side must count them as 0
+        # too or the two are not comparable: a plain AVG (which ignores NULLs)
+        # leaves every item's accuracy 1-4 points high and fails 1440 of 1458
+        # items for a reason that has nothing to do with the item mapping.
+        # With IFNULL(...,0) the two agree on 1458 of 1458, max |diff| 5e-07.
+        q <- suppressWarnings(redivis::redivis$query(sprintf(paste(
+            "SELECT CAST(item AS STRING) AS item, COUNT(*) AS n,",
+            "  AVG(IFNULL(SAFE_CAST(TRIM(CAST(resp AS STRING)) AS FLOAT64), 0)) AS acc",
+            "FROM `%s` GROUP BY 1"), ref))$to_tibble())
+        data.frame(item = as.integer(as.character(q$item)),
+                   n = as.integer(q$n), acc = as.numeric(q$acc),
+                   stringsAsFactors = FALSE)
+    }, error = function(e) NULL)
+}
+if (is.null(live)) {
+    cat("NOTE: query route unavailable -- falling back to a full irw_fetch export.\n")
+    d <- irw::irw_fetch(TABLE)
+    d$item <- as.character(d$item)
+    d$resp[is.na(d$resp)] <- 0   # same missing-as-0 convention as the query above
+    live_n    <- as.vector(table(d$item))
+    live_name <- names(table(d$item))
+    live_acc  <- tapply(d$resp, d$item, mean)[live_name]
+    live <- data.frame(item = as.integer(live_name), n = live_n,
+                       acc = as.numeric(live_acc), stringsAsFactors = FALSE)
+}
+live <- live[order(live$item), ]
 
 m <- merge(RAW, live, by = "item", suffixes = c("_raw", "_live"))
 cat(sprintf("items in RAW: %d ; items live: %d ; matched on code: %d\n",
