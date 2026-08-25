@@ -1,10 +1,10 @@
 # Audit diff: gilbert_meta_42
 
-Classification (suggested): **confirm**
+Classification (suggested): **review**
 
 ## Summary
 
-- item coverage: OK (missed=0, extra=0)
+- item coverage: MISMATCH (missed=8, extra=0)
 - resp-set alignment rate: 1
 - mean item_text similarity: 1
 - mean option_text similarity: 1
@@ -13,30 +13,14 @@ Classification (suggested): **confirm**
 
 ## Itemized mismatches
 
-- `stress_a_index` -- option_text_presence_mismatch (resp=5)
-- `stress_a_index` -- option_text_presence_mismatch (resp=3)
-- `stress_a_index` -- option_text_presence_mismatch (resp=6)
-- `stress_a_index` -- option_text_presence_mismatch (resp=2)
-- `stress_a_index` -- option_text_presence_mismatch (resp=4)
-- `stress_a_index` -- option_text_presence_mismatch (resp=0)
-- `stress_a_index` -- option_text_presence_mismatch (resp=1)
-- `stress_a_index` -- option_text_presence_mismatch (resp=7)
-- `stress_c` -- option_text_presence_mismatch (resp=5)
-- `stress_c` -- option_text_presence_mismatch (resp=6)
-- `stress_c` -- option_text_presence_mismatch (resp=3)
-- `stress_c` -- option_text_presence_mismatch (resp=4)
-- `stress_c` -- option_text_presence_mismatch (resp=2)
-- `stress_c` -- option_text_presence_mismatch (resp=7)
-- `stress_c` -- option_text_presence_mismatch (resp=1)
-- `stress_c` -- option_text_presence_mismatch (resp=0)
-- `stress_b` -- option_text_presence_mismatch (resp=4)
-- `stress_b` -- option_text_presence_mismatch (resp=3)
-- `stress_b` -- option_text_presence_mismatch (resp=1)
-- `stress_b` -- option_text_presence_mismatch (resp=0)
-- `stress_b` -- option_text_presence_mismatch (resp=5)
-- `stress_b` -- option_text_presence_mismatch (resp=2)
-- `stress_b` -- option_text_presence_mismatch (resp=6)
-- `stress_b` -- option_text_presence_mismatch (resp=7)
+- `life_satisfaction_a` -- missed_item (in current curation but not in fresh extraction)
+- `life_satisfaction_b` -- missed_item (in current curation but not in fresh extraction)
+- `life_satisfaction_c` -- missed_item (in current curation but not in fresh extraction)
+- `life_satisfaction_d` -- missed_item (in current curation but not in fresh extraction)
+- `locus_of_control_a` -- missed_item (in current curation but not in fresh extraction)
+- `locus_of_control_b` -- missed_item (in current curation but not in fresh extraction)
+- `locus_of_control_c` -- missed_item (in current curation but not in fresh extraction)
+- `locus_of_control_d` -- missed_item (in current curation but not in fresh extraction)
 
 ## Field-level values for mismatched items
 
