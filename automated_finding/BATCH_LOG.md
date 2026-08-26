@@ -11267,3 +11267,77 @@ Recurring lessons from the pass, worth carrying into the next one:
    reconstructed figshare URL fetched an unrelated genomics table.
 5. **Get author names from the deposit record.** See the `zhang`/`peng`
    near-miss above.
+
+## 2026-08-26 — Triaging the education-gap sweeps (TODO #10)
+
+The three sweeps fired on 2026-08-25 against the educational-measurement term
+gap left 2,266 repo candidates untriaged, plus a PMC output whose Step 2b had
+never been run.
+
+### PMC mode — Step 2b, and the sweep's first real payoff
+
+`irw_retriage_ha.py` on `runs/pmc_edu_2026-08-25.csv`: of its 7
+`human_assistance` rows, 4 `human_review` (archived to
+`human_review/human_review_pmc_edu_2026-08-26.csv`), 2 `worth_retrying`, 1
+`aggregate_continuous`.
+
+Its single `good` row is **exactly what the education terms were added for**:
+
+**`data/trang_2023_vocabulary_learning.py`** — `10.1016/j.heliyon.2023.e16009`,
+Heliyon, CC BY 4.0. 722 Vietnamese learners of English x all 62 items of Gu's
+(2018) Vocabulary Learning Questionnaire, 1-7. Two tables:
+`trang_2023_vocabulary_beliefs` (10 items, 7,220 responses) and
+`trang_2023_vocabulary_strategies` (52 items, 37,544), both density 1.000.
+
+Two things worth recording about it:
+
+* **License needed a second look.** Crossref lists only Elsevier's TDM
+  licenses for this article, which conflicts with the triage's `cc-by`.
+  Europe PMC's `resultType=core` record says `license: cc by` and
+  `isOpenAccess: Y`, and Heliyon is a gold-OA CC BY journal — the Elsevier
+  TDM entries are boilerplate that sits alongside CC BY, not instead of it.
+  Worth knowing as a recurring false alarm on Elsevier-published OA.
+* **The item-to-scale mapping came from the spreadsheet's own three-row
+  merged header** (construct / dimension / `Q` number), not from inference.
+  The deposit also ships the questionnaire as `mmc2.docx`, but that appendix
+  is Gu's *original* instrument "with deleted items highlighted" and the
+  highlighting is absent from the file's XML, so its numbering (1-58, with
+  the guessing and dictionary blocks untagged) cannot be aligned to the 62
+  administered columns. Forward-filling the merged header gives all 62
+  unambiguously, and incidentally explains the appendix's gaps exactly:
+  items 18-31 are the guessing and dictionary blocks, and Activation is the
+  material beyond 58. **Multi-row merged headers are worth checking for
+  before reaching for a separate codebook.**
+
+### PLOS mode — resolving the `worth_retrying` bucket
+
+**`data/sirventruiz_2025_pdat.py`** — `10.1371/journal.pone.0326853`, PLOS ONE,
+CC BY 4.0. The 26-item Predictors of Dropout in Addiction Treatment scale,
+1-5. 22,828 responses.
+
+**This is repeated-measures data and ships with a `wave` column** — which is
+why triage flagged it rather than passing it. The file has 878 rows over 243
+`Patient.ID` values (most patients contribute 1-6 assessments, one
+contributes 39), so a naive melt produces duplicate id/item pairs. `wave` is
+the within-patient rank of `Days.between.admission.and.PDAT`; two of the 878
+rows share a (patient, day) pair, so the rank uses `method="first"` and the
+script asserts every (id, wave, item) triple is unique afterwards. The raw day
+count is kept as a covariate so the actual spacing is not lost; `date` is not
+used, since the deposit gives days relative to admission rather than absolute
+timestamps.
+
+Also checked from the same bucket and not shipped:
+`10.1371/journal.pone.0153663` (851 x 22) has no item block — its columns are
+subtest scores and background variables, not items.
+`10.1371/journal.pone.0247152` (VISA-A, 449 x 7 items on 0-10) is real but
+thin; left on the list.
+
+`biblio_batch_2026-08-26.csv` (3 rows, 67,592 responses) written for upload.
+
+### Repo mode — metadata-only pre-pass over 2,266 candidates
+
+A full triage of 2,266 candidates would run about a day, so per SKILL.md's
+"narrow the pool first" note the candidates went through a resolve-only pass
+(`runs/edu_prepass_2026-08-26.csv`): each repository's file listing, no
+downloads, no parsing. Canonical-DOI dedupe collapsed 2,266 rows to 2,237
+unique deposits first.
