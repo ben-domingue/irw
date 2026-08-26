@@ -11591,6 +11591,12 @@ Written alongside the CSVs (the CSVs are kept as the machine-readable copy):
     biblio_escs_2026-08-26.tsv      20 rows, 14 cols
     biblio_batch_2026-08-26b.tsv     1 row,  14 cols
 
+**Correction to the above (later the same day): TSV is not quote-immune.**
+Sheets does apply quote handling to pasted tab-delimited text. See the
+"double quotes broke the paste" entry at the end of this file -- the safe
+precondition is no tab, newline, carriage return **or double quote** in any
+field, not just the first three.
+
 **Do this for every future biblio hand-off.** Earlier batches today were
 pasted from CSV and appear to have landed, but the same latent shift applies
 to any row whose Description or Reference contains a comma — which is nearly
@@ -12077,3 +12083,53 @@ One wrinkle the first pass of that last check surfaced: the six CMSCE rows
 say "4,190 **examinees** x 302 items", not "respondents", so a regex written
 for the batch-3 phrasing reported them as malformed. Widened, they verify
 clean. Descriptions are prose, so parse them loosely.
+
+
+### Double quotes broke the combined paste at row 8 (2026-08-26)
+
+ben-domingue spotted `alan_2018_teacher_warmth` and "several others after" it
+coming out wrong in the sheet. The file itself was structurally clean --
+56 lines, exactly 14 tab-separated fields each on a raw `split('\t')`, pure
+ASCII, no duplicate table name -- so the fault was in the paste, not the
+write.
+
+**The one special character in the file was the double quote**, in nine
+`Reference` fields, and its distribution matches the symptom exactly:
+
+    row 3  alan_2018_student_gender_attitudes      has "
+    row 4  alan_2018_teacher_extrinsic_motivation  has "
+    row 5  alan_2018_teacher_gender_attitudes      has "
+    row 6  alan_2018_teacher_growth_mindset        has "
+    row 7  alan_2018_teacher_modern_teaching       has "
+    row 8  alan_2018_teacher_warmth                has "   <- first bad row
+    row 9  alloubani_2021_stai_state
+    ...
+
+Row 8 is the **last** row of the consecutive quoted block -- where a parser
+in quote-mode breaks out and the alignment goes wrong, then carries forward.
+The other three quoted rows are `balparda_2021_korq_*` and
+`rogers_2021_financial_knowledge`.
+
+**This falsifies the 2026-08-26 conclusion recorded earlier in this file**,
+that "Sheets splits pasted text on tabs and treats the rest literally, so no
+quoting is involved and nothing can shift". Quoting *is* involved. The
+earlier fix -- moving from CSV to TSV -- was still right and still solved the
+comma problem; the precondition was just stated too weakly.
+
+**Fixed by stripping the quotes**, which were decorative anyway: they wrapped
+a paper title inside `Replication Data for: "..."`. APA does not quote
+article titles, so removing them is also more correct bibliographically than
+keeping them. No other field changed.
+
+**The verification bug worth remembering.** The pre-merge check that "no
+field holds a tab or newline" was written as `bad in line` over whole lines
+rather than over fields -- and every line in a TSV is of course full of tabs,
+so that check could never have caught anything. It has to be per field:
+
+    for r in rows:
+        for v in r:
+            assert not (set('"\t\r\n') & set(v))
+
+A file-level substring test for the delimiter is always vacuous. The same
+pass now also rejects any field whose first character is `=`, `+`, `-`, `@`
+or `'`, since Sheets reads those as formula or literal-text prefixes.

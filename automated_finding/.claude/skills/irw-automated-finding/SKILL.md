@@ -634,8 +634,24 @@ column is a nominal-standard candidate only at **three or more** categories.
 **Hand biblio rows over as `.tsv`, not `.csv`.** Google Sheets splits pasted
 text on commas without honouring CSV quoting, so every comma inside a
 `Description` or `Reference` becomes a column break -- and those fields nearly
-always contain commas. Verify no field holds a tab or newline, then write
-tab-separated.
+always contain commas.
+
+**But TSV is not quote-immune.** Sheets *does* apply quote handling to pasted
+tab-delimited text, so a `"` anywhere in a field can put it in quote-mode and
+shift the alignment from the end of the quoted run onward. A 55-row biblio
+broke at exactly the last row of its six-row quoted block. The safe
+precondition per field is **no tab, newline, carriage return or double
+quote**, plus no leading `=`, `+`, `-`, `@` or `'` (Sheets reads those as
+formula or literal-text prefixes). Quotes in a `Reference` are decorative --
+APA does not quote article titles -- so strip them.
+
+**Check that per field, never per line.** `'\t' in line` is vacuously true for
+every line of a TSV, so a file-level substring test for the delimiter catches
+nothing. Iterate fields:
+
+    for r in rows:
+        for v in r:
+            assert not (set('"\t\r\n') & set(v))
 
 **On Dataverse, download `format=original`, not the `.tab` conversion.** One
 batch hit three distinct defects from the conversion alone: SPSS user-missing
