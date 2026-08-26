@@ -5,6 +5,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [ ] **Dryad downloads are blocked; decide what to do about it** (found
+  2026-08-26). `_dryad_files()` lists versions and files fine, but
+  `/api/v2/files/{id}/download` returns 401 and `/downloads/file_stream/{id}`
+  returns a JS bot-challenge page. Dryad is one of the eight default sources,
+  so every Dryad candidate ever downloaded has failed this way and been
+  retried forever as a transient `download_failed`. Options: drop dryad from
+  `DEFAULT_SOURCES`, get an API token, or route it through DataCite's
+  backfill the way blocked publishers already are. Related: the same retry
+  batch showed 13 figshare S3 404s (files genuinely gone) and 13
+  Dataverse 401/403/400s -- neither is retryable either, so
+  `download_failed` needs a terminal sibling for "access denied / file gone"
+  rather than sending them round the retry loop. That is the same gap as the
+  older Dataverse-restrictions item below.
+
 - [x] **`biblio_nominal_2026-08-26.tsv` (2 rows) pasted into the nominal sheet**
   (confirmed 2026-08-26, ben-domingue): `goldberg_2018_spa_computer_use`
   (709 x 2, categories A-L) and `mthimkhulu_2023_pirls_reading_mc`

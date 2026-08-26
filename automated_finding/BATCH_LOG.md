@@ -11794,3 +11794,45 @@ is the complete fresh biblio for all 60. Its Notes field now also records the
 panel structure -- 1,016 distinct respondents, median 53 tables each -- since
 that is not evident from 60 separate dictionary rows and matters to anyone
 pooling IRW tables as if they were independent samples.
+
+### Why the education-sweep retries kept failing: Dryad is behind a bot challenge (2026-08-26)
+
+The 187-candidate retry set came back ~52/53 `download_failed` on two separate
+attempts, hours apart, which had been diagnosed as "the throttling has not
+cleared". That diagnosis was wrong. Classifying the failures by cause:
+
+| n | cause |
+|---|---|
+| 30 | **Dryad 401 Unauthorized** on the download endpoint |
+| 13 | 404 from figshare's S3 backing store -- files genuinely gone |
+| 9 | 403 Dataverse -- restricted files |
+| 4 | 400 Dataverse -- bad request |
+| 3 | **429 rate limit -- the only genuinely retryable ones** |
+| 3 | CSV tokenizing errors (delimiter problems, recoverable) |
+
+**Only 5% were retryable.** Retrying the set was the wrong strategy from the
+start; the lesson is to classify a failure bucket before re-running it.
+
+**The Dryad half is a source-level block, not a per-candidate problem.**
+`_dryad_files()` resolves versions and file listings fine; it is the download
+that fails. Neither available path works unauthenticated:
+
+* `/api/v2/files/{id}/download` -> 401 Unauthorized
+* `/downloads/file_stream/{id}` -> HTTP 200, but the body is a JS
+  bot-challenge page reading "Validating...", not the file
+
+This is the same class as the Harvard Dataverse WAF challenge from 2026-08-17
+and needs credentials or a headless browser, not a URL change.
+
+**A near-miss worth recording.** The `file_stream` path was briefly adopted as
+a fix, on the strength of a `stream=True` probe whose `r.raw.read(80)` returned
+gzip magic bytes -- which looked like file content but was the *gzip-compressed
+HTML* of the challenge page. Had that shipped, `load_table()` would have been
+handed 4KB of HTML to parse as CSV on every Dryad candidate, and a bogus table
+is far worse than a loud failure. The API URL is kept deliberately for that
+reason: 401 fails visibly. **When probing a download, check content-type and
+Content-Disposition, not just that bytes came back.**
+
+Dryad is one of the eight default discovery sources, so every Dryad candidate
+the pipeline has downloaded has been failing this way and being retried
+forever as a transient `download_failed`.

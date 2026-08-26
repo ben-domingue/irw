@@ -178,6 +178,18 @@ def _dryad_files(doi: str) -> tuple:
             if (f.get("size") or 0) > MAX_FILE_BYTES:
                 oversized.append((name, f.get("size")))
                 continue
+            # Dryad downloads are not reachable unauthenticated as of
+            # 2026-08-26, and neither available path is usable:
+            #   /api/v2/files/{id}/download  -> 401 Unauthorized
+            #   /downloads/file_stream/{id}  -> HTTP 200, but the body is a
+            #                                   JS bot-challenge page reading
+            #                                   "Validating...", not the file
+            # The API URL is kept deliberately. It fails loudly with a 401,
+            # whereas the file_stream path would hand `load_table` 4KB of HTML
+            # to parse as a CSV and could yield a bogus table. Same class of
+            # problem as the Harvard Dataverse WAF challenge (BATCH_LOG
+            # 2026-08-17); it needs credentials or a headless browser, not a
+            # URL change.
             out.append((f"https://datadryad.org{dl}", name))
     return out, license_raw, oversized
 
