@@ -11836,3 +11836,48 @@ Content-Disposition, not just that bytes came back.**
 Dryad is one of the eight default discovery sources, so every Dryad candidate
 the pipeline has downloaded has been failing this way and being retried
 forever as a transient `download_failed`.
+
+### The education term sweep's biggest single find: a medical licensing exam (2026-08-26)
+
+**`data/choi_2026_cmsce.py`** -- `10.7910/DVN/TQZQ6L`, Harvard Dataverse,
+CC0 1.0. Korea's Clinical Medical Science Comprehensive Examination, deposited
+for a study of whether the exam could move to computerized adaptive testing.
+
+**6 tables, 8,762,841 responses** -- larger than the entire ESCS collection,
+and dichotomously scored achievement data, which the warehouse has far less of
+than self-report.
+
+| table | examinees | items | responses |
+|---|---|---|---|
+| `choi_2026_cmsce_2019_1` | 4,190 | 302 | 1,265,380 |
+| `choi_2026_cmsce_2019_2` | 5,586 | 301 | 1,681,386 |
+| `choi_2026_cmsce_2020_1` | 5,388 | 304 | 1,637,952 |
+| `choi_2026_cmsce_2020_2` | 3,972 | 304 | 1,207,488 |
+| `choi_2026_cmsce_2021_1` | 4,662 | 263 | 1,225,610 |
+| `choi_2026_cmsce_2021_2` | 6,585 | 265 | 1,745,025 |
+
+All six at density 1.000 -- nobody skipped an item.
+
+It was found by `computerized adaptive testing`, one of the terms added on
+2026-08-25 after the audit found the standing 100-term list had no ability or
+achievement coverage at all. That term had never been run in any mode before.
+
+**Six tables rather than one, and the script asserts why.** The forms share no
+items whatsoever: checked pairwise across all fifteen pairs, every intersection
+is empty, and the 1,739 distinct items are exactly the sum of the six counts.
+Stacking them would give a block-diagonal matrix 83% missing by construction
+and imply a linking design the deposit does not support. The assertion is in
+the script so a future version cannot quietly merge them.
+
+The files carry no identifier column at all -- every one of the ~302 columns
+is an item -- so `id` is row position within a form and is deliberately not
+comparable across forms.
+
+**A dedup near-miss worth noting.** Three rows in the same profiled pool
+(`dvn/dup1tt`, `dvn/terjak`, `dvn/ymbild`) were ESCS tables already shipped
+earlier the same day, and the duplicate check missed them: the leads carry the
+DOI lowercased while the script embeds it as `DVN/DUP1TT`. `grep -rl` is
+case-sensitive. Use `grep -rli` when checking whether a DOI already has a
+processing script.
+
+`biblio_cmsce_2026-08-26.tsv` (6 rows) written for upload.
