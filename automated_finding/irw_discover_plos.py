@@ -135,7 +135,7 @@ def from_plos(query: str, journal: str = DEFAULT_JOURNAL):
         # Filter on combined text, but keep the Hit's title clean.
         probe = Hit("plos", f"{title} {abstract}", "", doi,
                      d.get("publication_date", "")[:10])
-        if not is_relevant(probe, enabled=True):
+        if not is_relevant(probe, enabled=True, query=query):
             continue
         yield Hit(f"plos:{journal}", title,
                   PLOS_ARTICLE_URL.format(slug=journal, doi=doi), norm_doi(doi),

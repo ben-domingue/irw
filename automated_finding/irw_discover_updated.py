@@ -309,12 +309,24 @@ def norm_doi(s: str) -> str:
     return s
 
 
-def is_relevant(h: Hit, enabled: bool) -> bool:
+def is_relevant(h: Hit, enabled: bool, query: str = "") -> bool:
     """Relevant if the title names an instrument, or carries a strong/construct
     signal — and isn't clinical/epi study language. Word-boundary matched so
     short acronyms don't match inside other words. Ambiguous words don't pass.
     Named instruments override the exclusion gate: a validation study of the
-    PHQ-9 in a clinical cohort still has the item-response data we want."""
+    PHQ-9 in a clinical cohort still has the item-response data we want.
+
+    `query` is the search term that surfaced this hit. A title that contains
+    the very term we searched for is relevant by construction, and checking
+    that is strictly better than widening the global vocabulary: it only
+    admits "fatigue" for the fatigue query, not for every query. Without it
+    the filter silently contradicted the search list -- measured 2026-08-25,
+    87 of the 125 standing terms in irw_discover_monthly.TERM_LIST produced
+    titles this function dropped, including 9 of the 15 weekly high-yield
+    terms (grit, self-efficacy, resilience, procrastination, perceived
+    stress, loneliness, life satisfaction, growth mindset, work engagement).
+    The pipeline was searching for "grit" and discarding datasets titled
+    "Grit" before triage ever saw them."""
     if not enabled:
         return True
     # figshare (and some DataCite records) carry HTML in the title, e.g.
@@ -334,8 +346,16 @@ def is_relevant(h: Hit, enabled: bool) -> bool:
     # Epi/medical study language blocks everything else.
     if _RE_EXCLUDE.search(text):
         return False
-    return bool(_RE_STRONG.search(text) or _RE_CONSTRUCT.search(text)
-                or _RE_TRANS_LAT.search(text) or _RE_TRANS_NB.search(title))
+    if (_RE_STRONG.search(text) or _RE_CONSTRUCT.search(text)
+            or _RE_TRANS_LAT.search(text) or _RE_TRANS_NB.search(title)):
+        return True
+    # The searched-for term itself, matched whole so "hope" does not fire
+    # inside "hopeless" and a two-word term must appear as a phrase.
+    q = (query or "").strip().lower()
+    if len(q) >= 3:
+        if re.search(r"(?<!\w)" + re.escape(q) + r"(?!\w)", text):
+            return True
+    return False
 
 
 # ---------------------------------------------------------------------------
@@ -908,7 +928,7 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                         continue
                     if hit.doi and hit.doi in exclude:
                         continue
-                    if not is_relevant(hit, relevance_on):
+                    if not is_relevant(hit, relevance_on, query=q):
                         continue
                     if since and hit.published and _older_than(hit.published, since):
                         continue

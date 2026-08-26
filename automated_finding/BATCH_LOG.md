@@ -10855,3 +10855,56 @@ worth re-triaging.
 The CES-D row is the pointed one: that is the dataset that had to be recovered
 by hand this morning, and it would now come through triage with the right
 respondent count on its own.
+
+### The relevance filter was discarding the terms the pipeline searches for (2026-08-25)
+
+Found while measuring the non-Latin re-discovery pilot (TODO #2). The pilot
+ran 45 already-searched non-Latin-script terms under the fixed filter:
+
+* **45 terms -> 246 candidates**, of which **57 (23%) would not have survived
+  the old English-only gate.**
+* Splitting those 57: **32 have a non-Latin-script title** — the intended
+  effect of the translation fix. The other **25 are plain ASCII**, and they
+  were passing only because a cognate happened to sit in the new translated
+  list (`motivation` 28, `cuestionario` 7, `burnout` 3, `personalidad` 1).
+
+That second group is the real finding. `motivation` and `burnout` are not in
+`CONSTRUCT_TERMS` or `STRONG_TERMS` at all — the translated list was
+accidentally papering over a hole in the *English* vocabulary.
+
+Auditing that properly against `irw_discover_monthly.TERM_LIST`:
+
+> **87 of the 125 standing search terms produce titles the relevance filter
+> drops.** Nine of the fifteen weekly `HIGH_YIELD_TERMS` are among them:
+> `grit`, `self-efficacy`, `resilience`, `procrastination`,
+> `perceived stress`, `loneliness`, `life satisfaction`, `growth mindset`,
+> `work engagement`.
+
+The pipeline was searching for "grit", getting back a dataset titled "Grit",
+and throwing it away before triage. Every repo-mode run since June has done
+this. It is very likely a larger yield leak than everything else found today
+combined, and it would explain a great deal about repo mode's poor yield
+relative to PLOS (where the filter reads title *and* abstract, so a full-text
+match usually carries the term through anyway).
+
+**Fix — pass the query into the gate, don't widen the vocabulary.**
+`is_relevant()` takes an optional `query` and passes any title containing the
+term that surfaced it. This is strictly better than adding 87 words to
+`CONSTRUCT_TERMS`: it admits "fatigue" for the fatigue query without admitting
+materials-fatigue datasets to every other query. Matched with
+`(?<!\w)...(?!\w)` so `hope` does not fire inside `hopeless` and a two-word
+term must appear as a phrase. The supplementary-file and
+clinical/epi exclusion gates still run first and still win.
+
+Wired through all three discovery modes (`discover()`, `from_plos()`,
+`from_pmc()` all have the query in scope).
+
+Verified: 0 of 125 standing terms are now dropped by their own query; 10
+precision cases pass, including `Fatigue testing of welded steel joints`
+passing for `fatigue` but not for `burnout`, `Hopeless diagnosis registry`
+still failing for `hope`, and `Engagement at work` still failing for
+`work engagement`.
+
+**Consequence**: this changes what discovery returns for every mode, so the
+2026-07/08 repo-mode runs are now materially under-sampled — a far stronger
+case for a broad re-run than the non-Latin pilot alone was making.

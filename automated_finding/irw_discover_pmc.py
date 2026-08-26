@@ -187,7 +187,7 @@ def from_pmc(query: str, journal: str):
     for d in search_pmc(query, issn):
         title = d.get("title", "")
         probe = Hit("pmc", title, "", d.get("doi", ""), d.get("firstPublicationDate", "")[:10])
-        if not is_relevant(probe, enabled=True):
+        if not is_relevant(probe, enabled=True, query=query):
             continue
         if d.get("hasSuppl") != "Y":
             continue
