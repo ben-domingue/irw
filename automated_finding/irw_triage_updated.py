@@ -832,6 +832,38 @@ _RE_PII_WEAK = re.compile(
     r")",
     re.IGNORECASE)
 
+# Columns whose *label* is too generic to judge ("name" matches "item name",
+# "variable_name", "filename") but whose *contents* settle it. A bare NAME
+# column holding 259 distinct short alphabetic strings over 278 rows is a
+# roster of people, not metadata -- 10.17632/6rbv3fbz8d (2026-08-25) stored
+# respondents' given names exactly that way and the header-only screen let it
+# through.
+_RE_BARE_NAME_LABEL = re.compile(
+    r"^(?:name|names|nombre|nome|nom|navn|namn|isim|ad|ime)$", re.IGNORECASE)
+
+
+def _looks_like_person_names(series) -> bool:
+    """True when a column's values read as a list of personal names."""
+    v = series.dropna().astype(str).str.strip()
+    v = v[v != ""]
+    if len(v) < 20:
+        return False
+    # Mostly short, alphabetic, and nearly all distinct.
+    alpha = v.str.match(r"^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ .'-]{0,40}$")
+    if alpha.mean() < 0.8:
+        return False
+    if v.str.len().mean() > 30:
+        return False
+    # A roster is high-cardinality in absolute terms; a categorical column
+    # ("Control"/"Treatment", a 6-level profession) is not, however long the
+    # file is. The ratio alone was too tight -- a roster with common repeated
+    # first names sits well under half.
+    if v.nunique() < 15 or v.nunique() / len(v) < 0.3:
+        return False
+    # Guard against a free-text answer column: real names are 1-4 tokens.
+    return v.str.split().str.len().mean() <= 4
+
+
 _MAX_WEAK_WORDS = 5
 # Second guard for the weak tier. The word-count test alone does not survive
 # SPSS name mangling: a stripped item stem ("Ioftenfeelanxiouscheckingmyemail")
@@ -839,8 +871,12 @@ _MAX_WEAK_WORDS = 5
 _MAX_WEAK_CHARS = 60
 
 
-def screen_for_pii(columns) -> list[str]:
-    """Return the raw column labels that look like direct identifiers."""
+def screen_for_pii(columns, df=None) -> list[str]:
+    """Return the raw column labels that look like direct identifiers.
+
+    Pass `df` to additionally content-check generically-named columns -- a
+    bare `NAME` cannot be judged from its label alone, only from what is in
+    it."""
     hits = []
     for c in columns:
         label = str(c)
@@ -849,6 +885,9 @@ def screen_for_pii(columns) -> list[str]:
         elif (_RE_PII_WEAK.search(label)
               and len(label.split()) <= _MAX_WEAK_WORDS
               and len(label) <= _MAX_WEAK_CHARS):
+            hits.append(label)
+        elif (df is not None and _RE_BARE_NAME_LABEL.match(label.strip())
+              and _looks_like_person_names(df[c])):
             hits.append(label)
     return hits
 
@@ -859,7 +898,7 @@ def triage_dataset(df_raw: pd.DataFrame) -> Triage:
 
     # PII first: it disqualifies the whole candidate regardless of how well
     # the file parses, so it must beat every other verdict including `good`.
-    pii = screen_for_pii(df_raw.columns)
+    pii = screen_for_pii(df_raw.columns, df_raw)
     if pii:
         reasons.append(
             "Raw file has column(s) that look like direct identifiers: "

@@ -11020,3 +11020,68 @@ collapsed onto `Gender_M1F2`. `bullied` is the study's single self-labelling
 criterion and is carried as a covariate, not shipped as a one-item table.
 
 `biblio_batch_2026-08-25c.csv` (10 rows) written for upload.
+
+### Worklist pass 2 — 3 more tables, and three instructive skips (2026-08-25)
+
+**`data/chen_2026_mobile_phone_addiction.py`** — `10.7910/DVN/QS5D8C`, Harvard
+Dataverse, CC0 1.0. 195 Chinese college students x three instruments:
+`chen_2026_mobile_phone_addiction` (20 items), `chen_2026_self_control` (19),
+`chen_2026_social_anxiety` (11), all 1-5, all density 1.000, 9,750 responses.
+Two source quirks handled: `序号` ("serial number") is **not** an identifier —
+27 of its 195 values repeat — so `id` is the row position; and the
+social-anxiety block's first column is headed `7.SA.Q1` with a dot where the
+other ten use a hyphen, a header typo matched by pattern rather than
+hand-corrected.
+
+Batch total: **`biblio_batch_2026-08-25c.csv` is now 13 rows / 81,809
+responses.**
+
+**Three skips, each for a different reason:**
+
+* **`10.17632/6rbv3fbz8d` — PII.** Structurally excellent (278 respondents x
+  PRO 20 / TM 18 / PHQ 9 / GRIT 8 / DASS 21, all clean ordinal blocks), and it
+  ships a column literally called `NAME` holding respondents' given names —
+  259 distinct over 278 rows ("SANA A", "ABEER", "ADEENA J", "AIMAN"). Skipped
+  whole per the standing rule.
+* **`10.17632/fkyw9v8yj2` / `10.17632/nfzwfhw4k4` — unexplained recode, not
+  shipped.** These are two Mendeley deposits of the **byte-identical** file
+  (same SHA, same author, same day), so one dataset, not two. The SPSS labels
+  identify it beyond doubt — items read "In general, I am satisfied with
+  myself", "Sometimes I feel useless" (Rosenberg), on a labelled 5-point scale
+  where 3 = "fair". But **3 does not occur once in 2,870 responses**, on any
+  of the ten items. A midpoint that no respondent ever chose is not raw data;
+  something was recoded, the deposit has no linked article, and the derived
+  `selfesteem` column is neither the sum nor the rounded mean of the items, so
+  it gives no way in. Left as an open lead needing the paper rather than
+  shipped with an unexplained coding.
+* **`10.17632/nr9388gbzf` — unidentifiable constructs.** 700 respondents x
+  ~241 columns of clean ordinal blocks (AQ×28, GQ×27, IQ×19, FQ×18, HQ×15,
+  OQ×15, BQ×14, CQ×14, KQ×13, ...) with a real `id` and full demographics —
+  structurally one of the best things in the pool. But the deposit ships only
+  the `.sav`, the item columns carry **no variable labels** (23 of 241 are
+  labelled, and those merely echo their own names), and the letter prefixes
+  decode to nothing. Naming nine IRW tables `nr9388_aq`, `nr9388_gq` would be
+  worthless. Same call as `10.7717/peerj.12040`: flagged for a dedicated pass
+  once the paper is in hand, not rushed.
+
+### PII screen, fifth hardening: content-checking a bare `NAME` column
+
+`6rbv3fbz8d` slipped through because the screen deliberately ignores a bare
+`name` label — it has to, or "item name", "variable_name" and "filename"
+would flag on every run. The label genuinely cannot settle it; the contents
+can. `_looks_like_person_names()` now content-checks columns labelled exactly
+`name`/`nombre`/`nome`/`isim`/... : it fires when the values are mostly short
+alphabetic strings of 1-4 tokens, at least 15 distinct, and at least 30%
+distinct overall.
+
+The first cut required >=50% distinct and **missed a realistic roster** where
+common first names repeat; the absolute-count floor is what separates a roster
+from a categorical column, not the ratio alone. Verified: the real `NAME`
+column flags; a 2-category column, a 6-value profession column, `item_0..59`
+metadata, a free-text answer column and a numeric-coded column all stay clean;
+and CAPQ, FTD-SS, TFEQ, NAQ-R and BICDIS are unaffected.
+
+That is five PII deposits caught across today's worklist (8 of 69 leads
+overall), and the screen has been corrected five times on live cases — bare
+`IP`, SPSS-concatenated `PhoneNumber`, national ID numbers, `birthdate`, and
+now content-checked `NAME`.
