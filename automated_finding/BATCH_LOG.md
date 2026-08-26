@@ -10908,3 +10908,49 @@ still failing for `hope`, and `Engagement at work` still failing for
 **Consequence**: this changes what discovery returns for every mode, so the
 2026-07/08 repo-mode runs are now materially under-sampled — a far stronger
 case for a broad re-run than the non-Latin pilot alone was making.
+
+### Re-ranked lead worklist (2026-08-25)
+
+The "top eight leads, nothing shippable" result earlier in the day was a
+sampling artifact: ranking by response count selects for panel waves,
+firm-level economics and scraped listings, which are exactly the files that
+are not item batteries. Re-ranked all 69 standing leads (26 Mendeley + 43
+recovered-backlog) by *instrument shape* — groups of >=3 columns sharing a
+prefix, each with 2-12 distinct numeric values — with the hardened PII screen
+in front. Saved as `lead_worklist_2026-08-25.csv` (standing file, not a run
+artifact).
+
+| verdict | n |
+|---|---|
+| instrument (>=5-column block) | 25 |
+| thin | 35 |
+| **PII — hard skip** | **8** |
+| no_usable_file | 1 |
+
+Triage flags across the pool: 6 `good`, 54 `human_assistance`.
+
+Note the scorer had to be validated before it was trusted: it initially scored
+`altman_2020_capq` — shipped the same day — at zero item blocks, which is what
+led to the two coercion bugs recorded above. After those fixes it reads that
+file correctly at 19.
+
+**The 25 instrument-shaped leads are all CC BY or CC0**, and several are
+recognisable instruments with clean multi-scale structure:
+
+| DOI | shape | blocks |
+|---|---|---|
+| `10.17632/dt5hj5j792` | 516 x 46 | CQ×17, TCQ×9, CQ_A×7, GQ×6 (**good**) |
+| `10.17632/dkv4dyxdwx` | 198 x 37 | Burnout×10 (**good**) |
+| `10.6084/m9.figshare.16577462` | 213 x 54 | i×51 — Three-Factor Eating Questionnaire validation |
+| `10.3389/fpsyg.2022.980180.s003` | 334 x 118 | political_resilience×49, anomie×7, violent_beh_intention×7, relative_deprivation×6 |
+| `10.17632/nr9388gbzf` | 700 x 241 | AQ×28, GQ×27, IQ×19, FQ×18 |
+| `10.17632/95cmh2ftwk` | 472 x 84 | DASS×21, MBS×16, BFI×11 |
+| `10.17632/mgwtzjww7g` | 867 x 25 | naq×22 — NAQ-R, itself an IRT/DIF paper |
+| `10.17632/jkwhf3ys6z` | 184 x 149 | PS×17, WB×12, MOLBI×10 |
+| `10.7910/dvn/qs5d8c` | 195 x 56 | MPA-Q×20, SC-Q×19, SA-Q×10 |
+
+**Five more PII deposits** beyond the three found by hand, all caught by the
+patterns added today: `10.17632/hj5jknzww5` (`IPAddress`),
+`10.6084/m9.figshare.27211839` and `10.3389/fevo.2022.892752.s002`
+(`birthdate`), plus the two doomscrolling files. Eight of 69 leads (12%) carry
+PII — this pool is raw survey exports, and the screen is earning its keep.
