@@ -5,6 +5,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [x] **`biblio_batch_2026-08-26.csv` (3 rows) uploaded/pasted** (confirmed
+  2026-08-26, ben-domingue): 67,592 responses —
+  `trang_2023_vocabulary_beliefs` / `_strategies` (Gu's Vocabulary Learning
+  Questionnaire, 722 Vietnamese EFL learners, the first thing the
+  educational-measurement term gap produced) and `sirventruiz_2025_pdat` (the
+  26-item PDAT, repeated measures with a `wave` column). Staged CSV and
+  `irw_output/` files off disk as expected.
+
 - [x] **`biblio_batch_2026-08-25c.csv` (40 rows) uploaded/pasted** (confirmed
   2026-08-25, ben-domingue): 187,097 responses across 40 tables from 13
   deposits — `wang_2025_*` (4), `senyurt_2023_burnout`,
