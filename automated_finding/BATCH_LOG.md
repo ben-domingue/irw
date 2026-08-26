@@ -11663,3 +11663,45 @@ Blocks under 5 items are not shipped (26 fragments), and `ppq/vitamin` is
 excluded as a count of supplements taken rather than a rating.
 
 `biblio_escs_2026-08-26.tsv` regenerated at 55 rows.
+
+### Follow-up: the SPA blocks were grouped wrongly, not merely numerous (2026-08-26)
+
+ben-domingue asked why SPA produced so many tables. Investigating it, the
+count was not the problem -- the grouping was. `TechnicalReport_ESCS.doc`
+describes the SPA as genuinely holding about ten instruments (79 IPIP items,
+80 forced-choice BFI pairs, 18 skills, nine talents, seven cultural domains, a
+medical history, 27 changeability ratings, beliefs about intelligence, and
+"the number of each of 133 types of possessions that they own"). Many tables
+is the right answer; the ones being produced were the wrong many.
+
+Three faults, all from pooling unnamed prefixes by response scale:
+
+* **Unrelated instruments were merged.** `spa_scale5` combined the seven
+  cultural-familiarity domains (FAMJAZ/FAMCOU/FAMCLS/FAMRAP/FAMDES/FAMSTR/
+  FAMRCK) with possession counts (POSELC, POSREL) purely because they share a
+  0-5 range.
+* **Possession counts were being shipped as items at all.** The POS* families
+  are counts of objects owned, not ratings -- the same class of thing as the
+  PPQ's `vitamin` columns. Now dropped by a prefix rule (~1.1M "responses"
+  removed, which is why the total falls from 6.93M to 5.83M).
+* **One instrument was split by scale.** The 18 skill items landed in two
+  tables because eight top out at 5 and ten at 6.
+
+Fixed by grouping strictly on prefix rather than scale, plus three explicit
+mechanisms: `PREFIX_GROUPS` merges the seven FAM* families into one
+`cultural_familiarity` block; `SINGLE_INSTRUMENT` marks the IPIP file as one
+2,539-item bank whatever its prefixes (removing the pooling had re-shattered
+it into fourteen tables); and a named block is never scale-split, trusting the
+report over a vote. `spa/COMPUT` is also dropped -- eight unrelated computer
+questions on mixed 2/3/5-point formats, not an instrument.
+
+SPA now yields 12 tables that line up with the report item-for-item:
+`spa_ipip` 79, `spa_bfi_forced_choice` 80, `spa_cultural_familiarity` 105
+(7 x 15), `spa_skills` 18, `spa_talents` 9, `spa_medical_history` 28,
+`spa_changeability` 27, `spa_beliefs_about_intelligence` 6, plus
+`spa_skill_proficiency`, `spa_spey`, `spa_speo`.
+
+**Final: 56 tables, 5,825,800 responses.** Verified no duplicate names, no
+count or administrative columns, and every table on a single scale except
+`spa_skills`, which is deliberate.
+

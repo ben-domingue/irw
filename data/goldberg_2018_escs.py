@@ -164,7 +164,11 @@ BLOCK_NAMES = {
     ("spa", "PQ"):     "ipip",
     ("spa", "MEDHIS"): "medical_history",
     ("spa", "CHGTRT"): "changeability",
-    ("spa", "YSKILL"): "skills",
+    ("spa", "YSKILL"):  "skills",
+    ("spa", "ABILITY"): "talents",
+    ("spa", "PSKILL"):  "skill_proficiency",
+    ("spa", "VINTELL"): "beliefs_about_intelligence",
+    ("prs", "mpr"):     "mpr",
 }
 
 # Whole blocks to exclude, with the reason: administrative counts and
@@ -173,7 +177,31 @@ BLOCK_DROP = {
     ("hpq", "submiss"): "missing-response count, not an item",
     ("pf16", "smiss"):  "missing-response count, not an item",
     ("ppq", "vitamin"): "count of supplements taken, not a rating",
+    ("spa", "COMPUT"):  "grab-bag of unrelated computer questions on mixed "
+                        "2/3/5-point formats, not one instrument",
 }
+
+# Prefix patterns that are quantity counts rather than responses. The
+# technical report describes the SPA's POS* block as "the number of each of
+# 133 types of possessions that they own" -- a count of objects owned, not a
+# rating of anything.
+DROP_PREFIX_RE = {"spa": re.compile(r"^POS")}
+
+# Several prefixes that are one instrument. The report describes the SPA as
+# asking respondents to rate "their knowledge of examples (real and not) from
+# each of seven diverse cultural domains (e.g., musical artists)" -- the seven
+# FAM* families are those domains, so they belong in one table with the domain
+# recoverable from the item name.
+PREFIX_GROUPS = {
+    "spa": [(re.compile(r"^FAM"), "cultural_familiarity")],
+}
+
+# Mailings that are a single instrument whatever their column prefixes. The
+# IPIP file is described as "Combined data for all IPIP items administered to
+# this sample": one 2,539-item bank, prefixed by whichever mailing each item
+# arrived in. Splitting on those prefixes would produce fourteen tables that
+# are one instrument.
+SINGLE_INSTRUMENT = {"ipip"}
 
 # A mailing whose items share one prefix but two scales. The report says the
 # PAS holds "216 person-descriptive adjectives" (rated 1-7) alongside "160
@@ -259,6 +287,13 @@ def _blocks(d, items, mailing, num):
         if v.empty or v.nunique() < 2:
             continue
         prefix = re.sub(r"\d+$", "", str(c)) or "(bare)"
+        if mailing in SINGLE_INSTRUMENT:
+            prefix = ""
+        else:
+            for rx, name in PREFIX_GROUPS.get(mailing, []):
+                if rx.match(prefix):
+                    prefix = name
+                    break
         by_prefix.setdefault(prefix, []).append((c, int(v.max())))
 
     # Where each item has its own column name (the adjective lists), a
@@ -271,8 +306,16 @@ def _blocks(d, items, mailing, num):
 
     groups = collections.OrderedDict()
     for prefix, cols in by_prefix.items():
+        named = ((mailing, prefix) in BLOCK_NAMES
+                 or any(n == prefix for _, n in PREFIX_GROUPS.get(mailing, []))
+                 or mailing in SINGLE_INSTRUMENT)
         if mailing in SCALE_SPLIT:
             scales = sorted(SCALE_SPLIT[mailing])
+        elif named:
+            # The technical report calls this one instrument, so trust it over
+            # a scale vote: the 18 SPA skill items are one block even though
+            # eight of them top out at 5 and ten at 6.
+            scales = [max(m for _, m in cols)]
         elif len(cols) == 1 and shared:
             scales = shared
         else:
@@ -280,32 +323,17 @@ def _blocks(d, items, mailing, num):
         for c, mx in cols:
             hi = min((sc for sc in scales if mx <= sc), default=max(scales))
             groups.setdefault((prefix, hi), []).append(c)
-
-    pooled = collections.OrderedDict()
-    for (prefix, hi), cols in groups.items():
-        if (mailing, prefix) in BLOCK_DROP:
-            key = (prefix, hi)
-        elif (mailing, prefix) in BLOCK_NAMES or mailing in SCALE_SPLIT:
-            key = (prefix, hi)
-        else:
-            key = ("", hi)
-        pooled.setdefault(key, []).extend(cols)
-    return pooled
+    return groups
 
 
 def _suffix(mailing, prefix, hi, groups):
     if mailing in SCALE_SPLIT:
         return SCALE_SPLIT[mailing][hi]
-    if len(groups) == 1:
+    if len(groups) == 1 or mailing in SINGLE_INSTRUMENT:
         return ""                       # single-instrument mailing
     named = BLOCK_NAMES.get((mailing, prefix))
     if named:
         return named
-    if prefix == "":
-        # A pooled scale-mate group. If it is the only unnamed group, the
-        # scale alone is enough to tell it apart.
-        unnamed = [k for k in groups if k[0] == ""]
-        return f"scale{hi}" if len(unnamed) > 1 else "other"
     return re.sub(r"[^0-9a-z]+", "_", prefix.lower()).strip("_")
 
 
@@ -332,6 +360,9 @@ def main():
         groups = _blocks(d, items, mailing, num)
         for (prefix, hi), cols in groups.items():
             reason = BLOCK_DROP.get((mailing, prefix))
+            rx = DROP_PREFIX_RE.get(mailing)
+            if reason is None and rx and rx.match(prefix):
+                reason = "quantity count, not an item response"
             if reason:
                 print(f"  [skip] {mailing}/{prefix} ({len(cols)} cols): {reason}")
                 continue
