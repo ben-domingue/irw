@@ -10794,3 +10794,64 @@ naming all five offending columns, the doomscrolling file still does, and
 the three datasets shipped today (CAPQ, FTD-SS, CES-D) flag nothing and are
 unaffected. Regression set is now 13 positives / 13 negatives on top of the
 original 24/27.
+
+### Two coercion bugs found while re-ranking the leads (2026-08-25)
+
+Both surfaced from the same observation: an instrument-shape scorer written to
+re-rank the standing leads reported `blk=0` for `altman_2020_capq` — a file
+already shipped that day, so a known-good instrument. That could not be right.
+
+**1. `.sav`/`.dta` were read with value labels applied.** `load_table()` called
+`pd.read_spss(...)` and `pd.read_stata(...)` at their defaults, and both
+default `convert_categoricals=True`. Every labelled numeric variable therefore
+came back as its label string — a 0-5 CAPQ item arrived as `"no"`,
+`"yes, but only once or a very minor problem"`, and so on. The column is then
+non-numeric, `resp` fails the ordinal checks, and the candidate lands in
+`human_assistance`, often with the reason *"item columns appear to hold
+text-coded Likert responses rather than numeric codes"* — which reads as a
+property of the data but is entirely an artifact of the argument.
+
+Measured across the recorded run outputs: **108 `.sav`/`.dta` candidates** sit
+in `worth_retrying`/`human_assistance`, 16 of them carrying exactly that
+reason. SPSS and Stata deposits are most of the psychology data this pipeline
+sees. Both calls now pass `convert_categoricals=False`. Nothing is lost —
+triage never reads the labels, and a processing script opens the file itself
+with `pyreadstat` when it wants the item stems (that is how
+`altman_2020_capq` and `lee_2020_*` got theirs).
+
+**2. A wide file with no id column had its first column stolen as the id.**
+This is the bigger of the two. When no column met the id heuristic,
+`coerce_to_irw()` fell back to `df.columns[0]`. In a wide person x item export
+that is not the id — it is the first demographic. The result is that every
+respondent collapses onto its handful of values.
+
+Caught live on `10.17632/fkyw9v8yj2` (CC BY): 287 respondents answering a
+10-item, 4-point Rosenberg self-esteem scale, first column is gender, so
+triage reported **"Only 2 distinct respondents"** and skipped the whole thing
+as `below_min_n`. Three sibling Mendeley deposits behaved identically
+(`nfzwfhw4k4` 2 ids, `dfzf2kxmr3` 5, `mgwtzjww7g` 3). Note the interaction:
+this failure was *masked* before fix 1, because with categoricals converted
+the first column was a string and never got picked.
+
+The shape itself carries the identity — one row is one respondent — so the
+fallback now synthesises the id from row position and leaves every source
+column available to be an item or a covariate. Confidence stays `low`, since
+"this file is one row per person" is still a guess about the shape.
+
+The `as fallback` note appears on 23 rows across the recorded runs (13
+`human_assistance`, 7 `worth_retrying`, 3 `human_review`); all of them are
+worth re-triaging.
+
+**Verified after both fixes:**
+
+| file | id source | before | after |
+|---|---|---|---|
+| `sumner_2022` FTD-SS | real `'ID'` column | 934 ids, high | 934 ids, high — unchanged |
+| `altman_2020` CAPQ | real `Case` column | 4,053 ids | 4,053 ids — unchanged |
+| `alexandrowicz_2018` CES-D, read with no index column | none | would collapse onto `sex` (2) | **518 ids** |
+| `10.17632/fkyw9v8yj2` RSES | none | `below_min_n`, 2 ids | `human_assistance`, **287 ids x 16 cols** |
+| doomscrolling / dengue | — | `pii_suspected` | `pii_suspected` — unchanged |
+
+The CES-D row is the pointed one: that is the dataset that had to be recovered
+by hand this morning, and it would now come through triage with the right
+respondent count on its own.

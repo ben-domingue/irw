@@ -226,9 +226,28 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
 
     if name.endswith(".sav"):
         # pandas.read_spss (via pyreadstat) accepts a file-like object directly.
-        return pd.read_spss(_src())
+        #
+        # convert_categoricals=False is essential, not cosmetic. Both read_spss
+        # and read_stata default it to True, which replaces every labelled
+        # numeric variable with its label string -- so a 0-5 CAPQ item comes
+        # back as "no" / "yes, but only once or a very minor problem". The
+        # column is then non-numeric, `resp` fails the ordinal checks, and the
+        # candidate lands in human_assistance, typically with the reason "item
+        # columns appear to hold text-coded Likert responses rather than
+        # numeric codes" -- which reads like a property of the data but is
+        # entirely an artifact of this argument. Measured 2026-08-25: 108
+        # .sav/.dta candidates sat in worth_retrying/human_assistance across
+        # the run outputs, 16 of them with exactly that reason. SPSS/Stata
+        # deposits are most of the psychology data this pipeline sees, so the
+        # default was a systematic false-negative source.
+        #
+        # Nothing is lost: triage never reads the labels, and a processing
+        # script opens the file itself (pyreadstat.read_sav) when it wants the
+        # item stems. Genuine string variables are unaffected -- only labelled
+        # numerics change.
+        return pd.read_spss(_src(), convert_categoricals=False)
     if name.endswith(".dta"):
-        return pd.read_stata(_src())
+        return pd.read_stata(_src(), convert_categoricals=False)
     if name.endswith(".sas7bdat"):
         return pd.read_sas(_src(), format="sas7bdat")
     if name.endswith((".rdata", ".rda", ".rds")):
@@ -335,12 +354,25 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
             id_col = c
             break
     if id_col is None:
-        id_col = df.columns[0]
+        # No identifier column. In a wide person x item export that is normal
+        # and it does NOT mean the id is the first column -- taking column 0
+        # grabs a real variable (typically the first demographic) and collapses
+        # every respondent onto its handful of values. Seen live on
+        # 10.17632/fkyw9v8yj2 (2026-08-25): 287 respondents x a 10-item RSES,
+        # first column is gender, so triage reported "Only 2 distinct
+        # respondents" and skipped it as below_min_n. The shape itself carries
+        # the identity -- one row is one respondent -- so synthesise the id
+        # from row position and leave every real column available to be an item
+        # or covariate.
+        df = df.copy()
+        id_col = "__row_id__"
+        df[id_col] = range(1, n + 1)
         id_fallback = True
         notes.append(
-            f"No column met the id heuristic (≥50% unique, non-float); "
-            f"used first column '{id_col}' as fallback — verify this is the "
-            "person identifier."
+            "No column met the id heuristic (≥50% unique, non-float); used the "
+            "row position as the person id (one row = one respondent) and kept "
+            "every source column available as an item or covariate — verify "
+            "the file really is one row per person."
         )
 
     # Detect trial_* columns — signals trials-based data that can't be melted.
@@ -402,7 +434,7 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
 
         # P0 fix #2: fallback forces low confidence regardless of heuristic result.
         if id_fallback:
-            confidence = "low"
+            confidence = "low"   # row-position id is a guess about the shape
         else:
             confidence = "high" if _looks_like_id(df[id_col], n) else "low"
         return Coercion(long, confidence, "wide-to-long", notes, orig_cols)
