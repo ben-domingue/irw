@@ -12182,3 +12182,75 @@ here. The cheap decisive step -- reading the live sheet to see what the paste
 actually produced -- was taken only on the third attempt, and it immediately
 showed the header matched and nothing had landed, which killed both standing
 theories at once. **Read the target before theorising about the transport.**
+
+## 2026-08-26 — Reviewing the weekly high-yield PMC sweep's commits
+
+Two cloud commits (`67ac7c0` bookkeeping, `e19ee15` candidates) from the
+weekly high-yield PMC run: 15 terms, 37 candidates, **0 auto-flagged good** —
+19 `no_usable_file`, 15 `license_restricted` (cc-by-nc, genuine skips), 2
+`below_min_n`, 1 `human_assistance`. As usual for a cloud run, Step 2b never
+executed and neither `TODO.md` nor this file was touched, so the actionable
+rows were still sitting unworked in `runs/`.
+
+### The `below_min_n` bucket contained a false skip worth 147,535 responses
+
+`10.1038/s41598-024-63589-5` (Tang, Xiang & Liu 2024, *Scientific Reports*,
+CC BY) was recorded as "only 7 distinct respondents — below the IRW floor of
+100. Skip; no human review needed." Its own triage row contradicts that:
+208,556 responses over 125 items at **density 238.3**. A density two orders of
+magnitude above 1.0 means the id column is wrong, and it was — the deposit has
+**no id column at all**, so the heuristic fell back on a 7-category demographic.
+The file is 1,682 rows × 133 columns of clean 1–5 Likert blocks.
+
+**Generalisable check: density >> 1 falsifies a `below_min_n` verdict.**
+`n_responses / (n_participants × n_items)` is already computed and written into
+every triage row. A `below_min_n` row whose density is far above 1 is not a
+small study, it is a misidentified id, and the two are trivially separable
+without opening the file. Nothing in the pipeline looks at this today; the
+skip reason is even phrased "no human review needed", which is what kept it
+out of `human_review/`. Logged in `TODO.md` as a triage fix.
+
+Shipped as `data/tang_2024_migrant_children.py` — 13 tables, 1,682 VET-school
+students, **147,535 responses**, 37 covariates on every table:
+
+    tang_2024_swls                             5 items    8,376
+    tang_2024_academic_satisfaction            6 items   10,044
+    tang_2024_self_efficacy                    5 items    8,380
+    tang_2024_outcome_expectations             5 items    8,405
+    tang_2024_goal_progress                    4 items    6,726
+    tang_2024_panas_positive                   5 items    8,376
+    tang_2024_panas_negative                   7 items   11,737
+    tang_2024_environmental_support            3 items    5,035
+    tang_2024_self_construal                  12 items   20,121
+    tang_2024_caregiver_child_attachment      17 items   28,455
+    tang_2024_caregiver_child_conflict         5 items    8,380
+    tang_2024_caregiver_child_communication    5 items    8,391
+    tang_2024_caregiver_child_regulation       9 items   15,109
+
+The column prefixes in the deposit do not match the paper's item labels, so
+**the prefix→construct map was verified by matching item means against the
+paper's own per-item tables** rather than read off the prefix: `SWB1..SWB5`
+reproduce Table 6's `LS1..LS5` totals exactly, `ESP1..ESP3` reproduce Table
+18, and `ES1/3/4/7/8/10/12` reproduce Table 16's `NPA1/3/4/7/8/10/12` — which
+identifies `ES` as the 12-item Chinese PANAS and gives the paper's own
+positive/negative split for free. `CCA` (17 items) is caregiver-child
+*attachment*, not co-activity: its correlation matrix is cleanly bipolar in
+exactly the trust-and-communication vs. alienation pattern, and Model II names
+those two subscales. `CCCLIT` (4 items) is the one block that could not be
+named and is **not** shipped — see `TODO.md`.
+
+`biblio_tang_2024_2026-08-26.tsv` (13 rows) written for pasting. `run_qc`
+passes on all 13 tables; the single warning (`CCC1`, 69% of responses at one
+value) is a floor effect on a conflict item, not imputation.
+
+### The rest of the sweep
+
+The 15 `license_restricted` rows are all cc-by-nc and are correct skips. The
+one `human_assistance` row (`10.7717/peerj.21420`, PeerJ, CC BY, tourists'
+perception of vipers) was **already** in
+`human_review/human_review_pmc_edu_2026-08-26.csv` from the same day's
+education sweep — a duplicate lead, not a new one, and still unworked; its
+reason string is the "could not confidently identify item columns" +
+mangled-header shape that README Step 1b flags as disproportionately
+recoverable. The other `below_min_n` row (Japanese macaque personality
+ratings, 32 subjects × 55 items, density 1.0) is a genuine skip.

@@ -3,6 +3,44 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-26 weekly PMC sweep review (BATCH_LOG.md, same date)
+
+- [x] **`biblio_tang_2024_2026-08-26.tsv` (13 rows) pasted into the dictionary
+  sheet** (confirmed 2026-08-26, ben-domingue) -- 147,535 responses across 13
+  tables from one CC BY *Scientific Reports* deposit
+  (`10.1038/s41598-024-63589-5`), rescued from a false `below_min_n` skip.
+  The 13 `irw_output/` CSVs written by `data/tang_2024_migrant_children.py`
+  were uploaded the same day (confirmed 2026-08-26, ben-domingue); the staged
+  TSV and CSVs are gone from disk accordingly.
+
+- [ ] **Triage fix: `density >> 1` falsifies a `below_min_n` verdict.**
+  The Tang 2024 row was skipped as "only 7 distinct respondents" while
+  carrying density 238.3 in the same row -- which can only mean the id column
+  was misidentified (that deposit has no id column at all, so the heuristic
+  fell back on a 7-category demographic). Density is already computed for
+  every candidate, so this is a one-line guard in the `below_min_n` branch of
+  `irw_triage_updated.py`: when density is far above 1, the verdict is
+  "misidentified id", not "too small", and the row belongs in
+  `human_review/` rather than being dropped with "no human review needed".
+
+- [ ] **Name `CCCLIT` in the Tang 2024 deposit, or confirm dropping it.**
+  A 4-item 1-5 block (~6,700 responses) alongside the caregiver-child
+  attachment/conflict/communication/regulation blocks. By elimination it
+  should be the paper's caregiver-child *co-activity* variable -- that is the
+  only named family-relationship construct left unaccounted for -- but the
+  abbreviation does not support that reading and the paper publishes no item
+  table for it, so it was held rather than named on a guess. Everything else
+  in the deposit is shipped.
+
+- [ ] **`10.7717/peerj.21420` is still unworked** (PeerJ, CC BY, tourists'
+  perception of vipers). Flagged `human_assistance` by the weekly PMC sweep
+  and already sitting in `human_review/human_review_pmc_edu_2026-08-26.csv`
+  from the same day's education sweep -- one lead, found twice, actioned
+  neither time. Its reason string is the mangled-header /
+  "could not confidently identify item columns" shape that README Step 1b
+  says is disproportionately recoverable: the real header row is offset a
+  row or two down in `peerj-14-21420-s001.xlsx`.
+
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
 - [ ] **A biblio paste can fail for reasons not visible in the file, and there
