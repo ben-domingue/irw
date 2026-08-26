@@ -11416,3 +11416,77 @@ Two things that nearly went wrong and are worth carrying forward:
   and died on the third dataset. `_fetch()` now selects the raw file by rule —
   the largest `.tab` that is neither a `_scales` file nor a `-1` version
   artifact — with the registry filename kept only as a hint.
+
+### Step 2b + retry on the education repo sweep (2026-08-26)
+
+**Step 2b** on the 523-row triage: of its 268 `human_assistance` rows —
+**112 `worth_retrying`**, 75 `not_item_response`, 41 `human_review` (archived
+to `human_review/human_review_edu_repo_2026-08-26.csv`), 39
+`aggregate_continuous`, 1 `recoverable_format`.
+
+Leads saved as `edu_leads_2026-08-26.csv` (119 rows: the 6 `good` plus the
+worth_retrying pool, 118 explicitly open-licensed) and, more usefully,
+`edu_leads_shortlist_2026-08-26.csv` — the 76 that are **questionnaire-shaped**
+(100 <= N <= 50,000 and 8 <= items <= 700).
+
+That filter matters. Ranked by raw response count the pool is topped by
+census-scale replication files — "Who Marries Differently Aged Spouses"
+(3.9M "participants" x 13 "items"), air-pollution and international-
+organisation datasets in the tens of millions — none of which is item-response
+data. This is the same ranking trap that produced the earlier "top eight leads,
+nothing shippable" result; shape beats size.
+
+**Duplicate check caught one**: `10.1371/journal.pone.0340479.s002`, one of the
+six `good` rows, already has `data/yang2026_efl_learner_perspective.py` from a
+different route (commit `d045a53`). Not reprocessed.
+
+**Retry pass.** The chained metadata-only retry of the 267 rate-limited
+pre-pass errors recovered **76 more resolvable deposits** (134 still erroring,
+57 genuinely fileless). Combined with the triage's 111 `download_failed`/
+`error` rows that gave a 187-candidate retry set — but the first 31 came back
+30/31 `download_failed`, so the throttling had not cleared and the run was
+stopped rather than burning the attempts. `runs/candidates_edu_retry2_2026-08-26.csv`
+is ready to re-run later. Worth remembering that `download_failed` and `error`
+are `TRANSIENT_FLAGS`, so none of this is written to the seen-key ledger.
+
+### PIRLS 2023 — the term gap's second real payoff
+
+**`data/mthimkhulu_2023_pirls_reading.py`** —
+`10.25403/UPresearchdata.24784086`, University of Pretoria, CC BY 4.0.
+South African grade-4 learners' item-level responses to the PIRLS 2023
+achievement booklets. `mthimkhulu_2023_pirls_reading`: **1,894 learners x 15
+items = 21,254 responses**, resp 0-3.
+
+Points worth recording:
+
+* **Only 15 of the file's 73 columns are items.** The rest are plausible
+  values (five sets of five), sampling weights and identifiers. The triage
+  estimated 58 items because it counted those. Plausible values are imputed
+  proficiency draws, not responses.
+* **Matrix sampling is why N is 1,894, not 12,422.** Each learner gets one of
+  18 booklets; only 1,894 saw this passage, and per-item counts run
+  1,122-1,769. The lower denominator is correct, not a defect.
+* **The four multiple-choice items are scored, not shipped raw.** They store
+  which option was chosen (1-4 = A-D) — nominal, and not commensurate with the
+  eleven already-scored constructed-response items. Each item's own value
+  labels mark the correct option with an asterisk (`C*`, `A*`, `B*`), so the
+  script reads the key off the file rather than hardcoding it. Per
+  ben-domingue's standing preference the discarded information is preserved:
+  `data/mthimkhulu_2023_pirls_reading_nominal.py` ships the raw option letters
+  as `mthimkhulu_2023_pirls_reading_mc` (1,680 learners x 4 items = 5,486
+  responses, categories A-D) to `output_noncore/`, with
+  `biblio_nominal_pirls_2026-08-26.csv` for the nominal sheet.
+* Item text sits in the SPSS variable labels ("WHAT DO OCTOPUSES USE TO MAKE
+  DOORS"), and item ids are the source column names, so an item-text pass
+  joins directly.
+* `6` ("Not reached") and `9` ("Omitted or invalid") are filtered as missing
+  codes. Neither occurs in this file, but the filter keeps a future version
+  from slipping them in as scores.
+
+**Checked and rejected: `10.7910/DVN/UODU1O` "PISA 2022 Turkey Dataset"** —
+despite the title it is the derived analysis file. Its columns are PISA's
+scale indices (`BELONG`, `ANXMAT`, `TEACHSUP`, ...) and ten plausible values
+each for maths, reading and science. No item responses.
+
+`biblio_batch_2026-08-26b.csv` (1 row) and
+`biblio_nominal_pirls_2026-08-26.csv` (1 row) written for upload.
