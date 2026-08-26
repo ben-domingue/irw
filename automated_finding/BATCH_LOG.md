@@ -11206,3 +11206,64 @@ Two decisions worth recording:
   which is what the standard requires; precedent is `lee_2020_alcohol_use`.
 
 **`biblio_batch_2026-08-25c.csv` is now 31 rows / 167,367 responses.**
+
+### Worklist pass 5 — the last three deposits (2026-08-25)
+
+**`data/peng_2024_grit_efl.py`** — `10.17632/ddy7jc4mvb`, CC BY 4.0. 310
+Chinese EFL students. Same reconstruction technique as `kermen_2022_*`, and it
+resolved two prefixes (`CB`, `TB`) that decoded to nothing: the deposit's
+composites are each the exact sum of a specific set of blocks —
+
+    Grit == sum(COI 4 + POE 4)                8 items
+    FLE  == sum(FLEP 5 + FLET 3 + FLEA 3)    11 items   foreign language enjoyment
+    FLB  == sum(CB 8 + TB 5)                 13 items   foreign language boredom
+
+— so `CB`/`TB` are the two boredom facets. 3 tables, 9,920 responses, density
+1.000. `Y成绩` (an achievement test score) and the categorical bandings are
+excluded. **Note the near-miss**: this was first written as `zhang_2024_*` on
+an unchecked assumption about the author; the deposit's contributor is Jinchang
+Peng. Author names must come from the deposit record, not from memory.
+
+**`data/rosyid_2025_academic_citizenship.py`** — `10.17632/dfzf2kxmr3`,
+CC BY 4.0. 189 Indonesian undergraduates. 3 tables, 4,710 responses. Between
+0.2% and 0.4% of each block's values are fractional (3.05, 3.36, 3.86) where
+every real response is an integer 1-5 — the signature of mean-substitution for
+missing answers. **Imputed values are not responses**, so the script NAs any
+non-integer rather than shipping it; 15 cells in total, which is why the
+densities sit just under 1.000.
+
+**`data/dalichaouche_2026_covid_kap.py`** — `10.6084/m9.figshare.31851586`,
+CC BY 4.0. 300 Algerian university students, a COVID-19
+knowledge-attitudes-practices questionnaire. 3 tables, 5,100 responses,
+density 1.000. Shipped as three tables rather than one because the response
+formats differ — knowledge is scored right/wrong (0-1), attitudes and
+practices are 3-point (0-2). The symptom checkboxes and infection-history
+questions are individual clinical questions rather than a scored instrument
+and are not exported, the same call made for `senyurt_2023_burnout`.
+
+### Batch closed: 40 tables / 187,097 responses from 13 deposits
+
+`biblio_batch_2026-08-25c.csv` is 40 rows. Every source is CC BY 4.0 or CC0
+1.0, and none of the 13 deposits had been seen by any prior discovery run —
+they came from the Mendeley/OpenAIRE pass and the recovered
+`googlesheet_humaneye.csv` pool, both opened up today.
+
+Recurring lessons from the pass, worth carrying into the next one:
+
+1. **Reconstruct the derived score.** Whenever a deposit ships both items and
+   any score built from them, that score identifies the block exactly. It
+   cracked `kermen_2022_*` (four bare letter prefixes) and `peng_2024_*`
+   (two). It fails only when the derived columns are subscale means over
+   undocumented subsets (`gan_2024_*`).
+2. **Assert the range, don't assume it.** The assertions caught a 9-point
+   scale mistaken for 7-point (`milson_2026_body_satisfaction`), a constant
+   item hiding a mixed-format block (`gan_2024`'s social support), and
+   mean-imputed cells (`rosyid_2025_*`).
+3. **Check the id column actually identifies.** Five of the 13 deposits had a
+   plausible-looking id column that repeated (`序号` twice, `N°`, `Code_Name`,
+   `ID`), and one had none at all. Row position was the right answer six
+   times.
+4. **Take the landing URL from the lead row, never reconstruct it.** A
+   reconstructed figshare URL fetched an unrelated genomics table.
+5. **Get author names from the deposit record.** See the `zhang`/`peng`
+   near-miss above.
