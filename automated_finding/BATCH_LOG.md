@@ -11341,3 +11341,78 @@ A full triage of 2,266 candidates would run about a day, so per SKILL.md's
 (`runs/edu_prepass_2026-08-26.csv`): each repository's file listing, no
 downloads, no parsing. Canonical-DOI dedupe collapsed 2,266 rows to 2,237
 unique deposits first.
+
+### The Eugene-Springfield Community Sample — 19 core tables, 6,875,090 responses (2026-08-26)
+
+The repo-mode education sweep's `good` rows included three CC0 Harvard
+Dataverse deposits titled "(12) Hogan Personality Inventory", "(13)
+Temperament and Character Inventory" and "(19) Jackson Personality Inventory".
+The numbering was the tell: they belong to **`ESCS-Data`, Lewis R. Goldberg's
+Eugene-Springfield Community Sample** — 28 datasets, all CC0, being a panel of
+~1,100 Oregon adults mailed a long series of personality, interest and health
+questionnaires from the mid-1990s onward. The same `id` runs through every
+dataset and joins to a shared demographics file, so these are linked
+measurements on one sample rather than 19 unrelated ones.
+
+It surfaced because **`IPIP` was one of the probe terms measured as having zero
+coverage in any mode** on 2026-08-25 — a direct return on the term additions.
+
+`data/goldberg_2018_escs.py` builds 19 tables:
+
+| table | ids | items | responses | resp |
+|---|---|---|---|---|
+| `goldberg_2018_ipip` | 960 | 2,539 | 1,894,532 | 1-5 |
+| `goldberg_2018_eps` | 726 | 576 | 415,915 | 1-7 |
+| `goldberg_2018_spa` | 730 | 446 | 321,159 | 0-9 |
+| `goldberg_2018_tci` | 736 | 295 | 216,632 | 1-5 |
+| `goldberg_2018_pf16` | 680 | 186 | 126,308 | 0-3 |
+| `goldberg_2018_hpi` | 475 | 206 | 97,784 | 0-1 |
+| `goldberg_2018_hpq` | 706 | 40 | 28,240 | 0-5 |
+| ...and 12 more (525-PDA, SDV, PRS, BRI, PAS, CPI, PPQ, SBO, 360-PDA, CISS, JPI-R, DOP) | | | | |
+
+**6,875,090 responses.** `biblio_escs_2026-08-26.csv` (19 rows).
+
+Handling decisions, all confirmed with ben-domingue:
+
+* **Letter-coded columns are carved out, not discarded.** 82 of SPA's 528
+  columns hold letters. The collection's `TechnicalReport_ESCS.doc` identifies
+  80 of them as "80 forced-choice BFI pairs" — each item presents two
+  descriptors and the respondent picks one, so "A"/"B" is an unordered choice,
+  not an ordinal rating. Coding it 0/1 would invent an order the instrument
+  does not have. `data/goldberg_2018_escs_nominal.py` ships them under IRW's
+  experimental **nominal** standard: `text` column instead of `resp`, output
+  to `automated_finding/output_noncore/`, and
+  `biblio_nominal_escs_2026-08-26.csv` in the nominal biblio's own column
+  format for the separate nominal sheet — **not** the main dictionary.
+  - `goldberg_2018_spa_bfi_forced_choice`: 729 ids x 80 items = 57,441
+    responses, categories A/B.
+  - `goldberg_2018_spa_computer_use`: 709 ids x 2 items = 1,388 responses,
+    categories A-L. Thin, and the collection ships no key for the labels —
+    included because the carve-out was asked for, easy to drop.
+  - Note the `COMPUT` family spans ten columns of which eight are ordinal and
+    stay in the core table, so membership is decided by the values, not the
+    column name.
+* **Zero-variance items are dropped, not the instrument containing them**
+  (EPS had three: `typfeeln`, `typfeels`, `typfeelv`), matching the
+  `liu_2025_ydcy` precedent.
+* **Nine datasets are excluded** because their columns interleave raw items
+  with derived scores and the collection ships no codebook to separate them:
+  NEO-PI-R (275 columns spanning 175 distinct values 0-180), Comprehensive
+  Health Survey, Six Factor Personality Questionnaire, Self/Peer Inventories,
+  Personality-Emotions-Attitudes, plus the Activity Vector Analysis and
+  Thematic Apperception Test (values to 99,119 and 11,289 — not item
+  responses) and the MPQ, which ships no raw `.tab` at all. **Worth a second
+  pass with `TechnicalReport_ESCS.doc` in hand** — several are large.
+
+Two things that nearly went wrong and are worth carrying forward:
+
+* **My survey initially reported 35% "non-integer" values in IPIP**, which
+  looked like mass imputation. It was an artifact of `(x % 1 != 0)` counting
+  NaN as non-integer. Every value in every included file is an integer; IPIP's
+  0.777 density is genuine planned missingness, since that file pools every
+  IPIP item ever administered across several mailings.
+* **Filenames in this collection are not predictable** (`525_PDA.tab` vs
+  `525PDA_words.txt`, `JPI-R.tab`, `16PF.tab`). The first build hardcoded them
+  and died on the third dataset. `_fetch()` now selects the raw file by rule —
+  the largest `.tab` that is neither a `_scales` file nor a `-1` version
+  artifact — with the registry filename kept only as a hint.
