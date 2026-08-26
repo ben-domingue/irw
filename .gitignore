@@ -19,3 +19,4 @@ irw_pkg/
 
 # transient control flag for the itemtext batch loop (its presence is the state)
 itemtext/extraction_batches/circuit_breaker.flag
+__pycache__/
