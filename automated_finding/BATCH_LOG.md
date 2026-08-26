@@ -11490,3 +11490,50 @@ each for maths, reading and science. No item responses.
 
 `biblio_batch_2026-08-26b.csv` (1 row) and
 `biblio_nominal_pirls_2026-08-26.csv` (1 row) written for upload.
+
+### Correction: the nominal biblio paste format (2026-08-26)
+
+The two nominal biblio files drafted earlier today
+(`biblio_nominal_escs_2026-08-26.csv`, `biblio_nominal_pirls_2026-08-26.csv`)
+**would not paste** and have been deleted. Both used the 7-column layout of
+`metadata/nominal_biblio.csv` — `table,DOI__for_paper_,Reference_x,
+URL__for_data_,Derived_License,Description,BibTex`. That file is a **Redivis
+snapshot regenerated from the sheet**, not the sheet itself; its headers are
+Redivis-sanitised, and `metadata/biblio.csv` carries the identical seven
+columns for the core dictionary, which is the tell that neither reflects a
+paste format.
+
+The live nominal sheet has **13 columns**, read straight off its CSV export:
+
+    table, table lower, Description, URL (for data), Reference,
+    DOI (for paper), Original License, Custom License, Public Reshare?,
+    Derived_License, Notes, Contributor, Date
+
+**It is close to the core dictionary layout but not identical** — three
+differences that will silently misalign a paste:
+
+| | core dictionary | nominal sheet |
+|---|---|---|
+| second column | `table.lower` (dot) | `table lower` (space) |
+| `Custom License` | appears **twice** | appears **once** |
+| derived-licence column | `Derived License` (space) | `Derived_License` (underscore) |
+
+Value conventions, from the completed rows: `Public Reshare?` = `Public`,
+`Derived_License` mirrors `Original License`, `Custom License` blank,
+`Contributor` = `automated`, `Date` in `MM-DD-YYYY`.
+
+All three of today's nominal tables are now in a single
+**`biblio_nominal_2026-08-26.csv`** (3 rows, 13 columns, header verified
+identical to the live sheet's):
+
+| table | respondents x items | responses | categories |
+|---|---|---|---|
+| `goldberg_2018_spa_bfi_forced_choice` | 729 x 80 | 57,441 | A/B |
+| `goldberg_2018_spa_computer_use` | 709 x 2 | 1,388 | A-L |
+| `mthimkhulu_2023_pirls_reading_mc` | 1,680 x 4 | 5,486 | A-D |
+
+**Also spotted in the live sheet**: the existing `cos101_2026_openended` row
+is shifted by one from `Contributor` onward — its `Contributor` cell is blank
+and its `Date` cell reads `automated`. Presumably the same
+wrong-format problem when that row was drafted. Worth fixing when someone is
+next in the sheet; nothing this batch depends on it.
