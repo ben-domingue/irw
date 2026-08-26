@@ -516,7 +516,7 @@ def from_gesis(query: str, max_pages: int = 5, per: int = 25):
 # filtering avoids pulling in thousands of Zenodo/Figshare records we already have).
 _DATACITE_SKIP = {
     "zenodo", "figshare", "dryad data", "harvard dataverse",
-    "open science framework", "osf",
+    "open science framework", "osf", "mendeley data",
 }
 
 # Which _DATACITE_SKIP publisher strings belong to which connector. When that
@@ -531,6 +531,7 @@ _DATACITE_FALLBACK_FOR = {
     "zenodo":          {"zenodo"},
     "figshare":        {"figshare"},
     "dryad":           {"dryad data"},
+    "mendeley":        {"mendeley data"},
     "osf":             {"open science framework", "osf"},
     "scholars_portal": {"scholars portal", "scholars portal dataverse"},
     "surf":            {"surf"},
@@ -590,6 +591,71 @@ def from_datacite(query: str, max_pages: int = 5, per: int = 25):
             return
         time.sleep(0.5)
 
+
+
+def from_mendeley(query: str, max_pages: int = 5, per: int = 25):
+    """Mendeley Data, via DataCite's index of its DOI prefix 10.17632.
+
+    Mendeley's own search API needs OAuth, but every Mendeley deposit is
+    registered with DataCite under prefix 10.17632, which is queryable with no
+    key. Measured actionable rate is the highest of any source wired up here --
+    5 good + 21 worth_retrying out of 117 candidates on 2026-08-25 (22%),
+    against PLOS ONE's ~1% good -- which is why it gets a dedicated connector
+    rather than being left to the generic DataCite sweep, where its records
+    compete with every other publisher's for the same page budget.
+
+    Two Mendeley-specific details:
+
+    * **Versioned and unversioned DOIs are both returned.** A deposit appears
+      as 10.17632/abc123.1 and again as 10.17632/abc123. `norm_doi` strips a
+      `.v3`-style suffix but not Mendeley's bare `.1`, so without the extra
+      strip here every deposit arrives twice and each version is triaged
+      separately.
+    * Only the base DOI resolves to the landing page used downstream, so the
+      stripped form is what is yielded.
+    """
+    seen = set()
+    for page in range(1, max_pages + 1):
+        try:
+            r = requests.get(
+                "https://api.datacite.org/dois",
+                params={"query": query, "prefix": "10.17632",
+                        "resource-type-id": "dataset",
+                        "page[size]": per, "page[number]": page},
+                headers=UA, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+            items = data.get("data", [])
+        except Exception as e:
+            # Deliberately does NOT raise SourceBlocked, unlike the connectors
+            # that talk to a repository directly. This one's transport IS
+            # DataCite, so a hard block here blocks from_datacite too -- and
+            # _DATACITE_FALLBACK_FOR["mendeley"] would then be pointing the
+            # backfill at the very host that just failed. Print and return, as
+            # from_datacite does.
+            print(f"[mendeley] {e}", file=sys.stderr)
+            return
+        if not items:
+            return
+        for item in items:
+            a = item.get("attributes", {})
+            titles = a.get("titles", [{}])
+            title = titles[0].get("title", "") if titles else ""
+            doi = norm_doi(a.get("doi", ""))
+            # Mendeley versions its DOIs as `<base>.1`, `<base>.2`; the base
+            # DOI is the stable identity and the only form that resolves.
+            doi = re.sub(r"\.\d+$", "", doi)
+            if not doi or doi in seen:
+                continue
+            seen.add(doi)
+            slug = doi.split("/")[-1]
+            url = f"https://data.mendeley.com/datasets/{slug}"
+            published = str(a.get("publicationYear", ""))
+            yield Hit("mendeley", title, url, doi, published)
+        meta = data.get("meta", {})
+        if page >= meta.get("totalPages", 1):
+            return
+        time.sleep(0.5)
 
 def _dataverse_connector(name: str, base_url: str):
     """Generate a Dataverse-compatible source function for a given instance."""
@@ -674,7 +740,7 @@ _DATACITE_SKIP.update({"scholars portal", "scholars portal dataverse", "surf",
 
 
 SOURCES = [from_dataverse, from_zenodo, from_osf, from_dryad, from_figshare,
-           from_datacite, from_scholars_portal, from_surf]
+           from_datacite, from_scholars_portal, from_surf, from_mendeley]
 
 # Opt-in only -- reachable with `--sources openaire ...`, deliberately NOT in
 # SOURCES. OpenAIRE is an aggregator like DataCite (it re-indexes Zenodo,
