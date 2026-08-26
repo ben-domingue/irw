@@ -5,6 +5,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [x] **`biblio_nominal_2026-08-26.tsv` (2 rows) pasted into the nominal sheet**
+  (confirmed 2026-08-26, ben-domingue): `goldberg_2018_spa_computer_use`
+  (709 x 2, categories A-L) and `mthimkhulu_2023_pirls_reading_mc`
+  (1,680 x 4, categories A-D). Pasted from **TSV** after the CSV would not
+  split — see the BATCH_LOG correction; hand over TSV for every biblio from
+  now on. The biblio file is off disk; **the two CSVs are still in
+  `automated_finding/output_noncore/`**, which differs from the core pattern
+  where `irw_output/` is cleared on upload — check whether the nominal tables
+  themselves still need uploading to the `irw_nominal` Redivis dataset.
+
 - [ ] **`germann_2026_*` tables have colliding `id`s** — tracked in
   [#1683](https://github.com/ben-domingue/irw/issues/1683) (`data fix`).
   Found 2026-08-26 by `irw_lint_covariates.py`, the first thing it caught on
