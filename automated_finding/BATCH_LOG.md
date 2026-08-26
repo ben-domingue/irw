@@ -11736,3 +11736,61 @@ as below MIN_BLOCK.
 This is the pattern to apply to any remaining unnamed block: match on item
 count against the report, and leave the source prefix in place where the count
 is ambiguous.
+
+### Rebuild: the adjective mailings had been silently dropped (2026-08-26)
+
+Answering ben-domingue's question about the PRS split turned up a regression
+introduced by the SPA fix earlier the same day. Removing the pool-by-scale rule
+also removed the only thing holding the **person-descriptive adjective lists**
+together: each adjective is its own column with its own name (`abusive`,
+`active`, `adventur`, ...), so under strict prefix grouping each became a
+one-item family, fell below `MIN_BLOCK`, and was skipped.
+
+**~1.0M responses vanished without an error**, including two entire mailings:
+
+| table | items | responses |
+|---|---|---|
+| `goldberg_2018_pda525` | 525 | 366,849 |
+| `goldberg_2018_pda360` | 360 | 405,141 |
+| `goldberg_2018_eps_adjectives` | 242 | 173,902 |
+| `goldberg_2018_sdv_adjectives` | ~80 | 55,482 |
+
+The 57 rows already pasted were all *correct* -- BRI, PRS, SPA, DOP, PAS, PPQ
+and SDV each check out against the technical report -- so nothing needed
+retracting. What was needed was the missing four.
+
+Two things made this hard to see, both worth remembering:
+
+* **1,205 skip lines scrolled past** and were not read. The build reported a
+  plausible table count and a plausible total, so nothing looked wrong.
+* **The totals nearly cancelled.** Dropping ~1.1M possession pseudo-responses
+  and ~1.0M adjective responses in the same change left the grand total at
+  5,825,800 across successive builds, which read as "unchanged" rather than
+  "two large errors in opposite directions".
+
+**Fix, and the guard that should have caught it.** Singleton families are
+pooled into one `<mailing>_adjectives` block again, split only by scale. More
+importantly the script now *balances its books per mailing*: every numeric
+column must end up either shipped or skipped with a printed reason, asserted
+at the end of each mailing, and the per-mailing tally is printed. The first
+run of that assertion immediately caught three EPS columns that were being
+filtered as constants before grouping without being counted.
+
+Per-mailing accounting from the rebuild -- every line balances:
+
+    eps    579 -> 576 shipped,   3 skipped (constant)
+    spa    446 -> 305 shipped, 141 skipped (possession counts, COMPUT grab-bag)
+    pda525 525 -> 525 shipped,   0 skipped
+    sdv    517 -> 517 shipped,   0 skipped
+    prs    508 -> 452 shipped,  56 skipped (54 constant, 2 genetics questions)
+    bri    504 -> 504 shipped,   0 skipped
+    pas    498 -> 498 shipped,   0 skipped
+    ppq    432 -> 409 shipped,  23 skipped
+    ipip  2539 -> 2539 shipped,  0 skipped
+    ... and so on for every mailing
+
+**Final: 60 tables, 6,823,703 responses.** `biblio_goldberg_escs_2026-08-26.tsv`
+is the complete fresh biblio for all 60. Its Notes field now also records the
+panel structure -- 1,016 distinct respondents, median 53 tables each -- since
+that is not evident from 60 separate dictionary rows and matters to anyone
+pooling IRW tables as if they were independent samples.

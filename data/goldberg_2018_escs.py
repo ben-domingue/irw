@@ -221,7 +221,7 @@ SCALE_SPLIT = {"pas": {5: "ipip_scales", 7: "adjectives"}}
 # Mailings where each adjective occupies its own column. Pool the
 # single-column families into one block per scale rather than shipping
 # hundreds of one-item tables.
-POOLED = {"eps": "adjectives", "sdv": "adjectives"}
+POOLED = {}   # per-mailing name override for the pooled singleton block
 
 MIN_BLOCK = 5   # fewer columns than this is a fragment, not an instrument
 
@@ -305,14 +305,23 @@ def _blocks(d, items, mailing, num):
                     break
         by_prefix.setdefault(prefix, []).append((c, int(v.max())))
 
+    # Where every item has its own column name (the person-descriptive
+    # adjective lists: "abusive", "active", "adventur", ...), each family has
+    # one member. Left alone they all fall under MIN_BLOCK and vanish -- which
+    # silently dropped ~1.0M responses, including the whole 525- and
+    # 360-adjective mailings, until it was caught on 2026-08-26. Pool them
+    # into one block per mailing, split only by scale.
+    singles = {p: cols for p, cols in by_prefix.items() if len(cols) == 1}
+    if len(singles) >= MIN_BLOCK:
+        for p in singles:
+            del by_prefix[p]
+        by_prefix[POOLED.get(mailing, "adjectives")] = [
+            t for cols in singles.values() for t in cols]
+
     # Where each item has its own column name (the adjective lists), a
     # per-family scale vote is meaningless -- every family has one member, so
     # its own maximum always "wins" and 20 adjectives nobody rated 9 become a
     # phantom 1-8 scale. Pool all singleton families and vote once over them.
-    singleton = [t for p, cols in by_prefix.items() if len(cols) == 1 for t in cols]
-    shared = (_scales_for(collections.Counter(m for _, m in singleton))
-              if len(singleton) >= MIN_BLOCK else None)
-
     groups = collections.OrderedDict()
     for prefix, cols in by_prefix.items():
         named = ((mailing, prefix) in BLOCK_NAMES
@@ -325,8 +334,6 @@ def _blocks(d, items, mailing, num):
             # a scale vote: the 18 SPA skill items are one block even though
             # eight of them top out at 5 and ten at 6.
             scales = [max(m for _, m in cols)]
-        elif len(cols) == 1 and shared:
-            scales = shared
         else:
             scales = _scales_for(collections.Counter(m for _, m in cols))
         for c, mx in cols:
@@ -367,6 +374,16 @@ def main():
         items = [c for c in items if not (num[c].isna() & d[c].notna()).any()]
 
         groups = _blocks(d, items, mailing, num)
+        n_in = len(items)
+        n_out = 0
+        # Columns that never reached a group: empty, or constant across every
+        # respondent. Counted here so the accounting below is exhaustive.
+        grouped = {c for cols in groups.values() for c in cols}
+        prefiltered = [c for c in items if c not in grouped]
+        if prefiltered:
+            print(f"  [skip] {mailing}: {len(prefiltered)} empty/constant "
+                  f"column(s) {prefiltered[:4]}")
+        n_dropped = len(prefiltered)
         for (prefix, hi), cols in groups.items():
             reason = BLOCK_DROP.get((mailing, prefix))
             rx = DROP_PREFIX_RE.get(mailing)
@@ -374,10 +391,12 @@ def main():
                 reason = "quantity count, not an item response"
             if reason:
                 print(f"  [skip] {mailing}/{prefix} ({len(cols)} cols): {reason}")
+                n_dropped += len(cols)
                 continue
             if len(cols) < MIN_BLOCK:
                 print(f"  [skip] {mailing}/{prefix} ({len(cols)} cols): "
                       f"below MIN_BLOCK={MIN_BLOCK}")
+                n_dropped += len(cols)
                 continue
 
             long = d.rename(columns={idcol: "id"}).melt(
@@ -394,6 +413,7 @@ def main():
             if long["item"].nunique() < MIN_BLOCK:
                 print(f"  [skip] {mailing}/{prefix}: below MIN_BLOCK after "
                       f"dropping {len(constant)} constant item(s)")
+                n_dropped += len(cols)
                 continue
 
             long = long.merge(dem, on="id", how="left")
@@ -416,10 +436,19 @@ def main():
             long.to_csv(path, index=False)
             n_id, n_it = long["id"].nunique(), long["item"].nunique()
             total += len(long); n_tables += 1
+            n_out += long["item"].nunique() + len(constant)
             note = f"  [{len(constant)} constant dropped]" if constant else ""
             print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "
                   f"resp {long['resp'].min()}-{long['resp'].max()}, "
                   f"density {len(long)/(n_id*n_it):.3f}{note}", flush=True)
+
+        # Every numeric column must end up either shipped or skipped with a
+        # printed reason. Silent loss is how the adjective mailings vanished.
+        assert n_out + n_dropped == n_in, (
+            f"{mailing}: {n_in} columns in, {n_out} shipped, {n_dropped} "
+            f"skipped -- {n_in - n_out - n_dropped} unaccounted for")
+        print(f"  [{mailing}] {n_in} numeric columns: {n_out} shipped, "
+              f"{n_dropped} skipped", flush=True)
 
     total += _forced_choice(dem, cov_cols); n_tables += 1
     print(f"\n{n_tables} tables, {total:,} responses")
