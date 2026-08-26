@@ -11705,3 +11705,34 @@ SPA now yields 12 tables that line up with the report item-for-item:
 count or administrative columns, and every table on a single scale except
 `spa_skills`, which is deliberate.
 
+
+### The PRS split, checked line-by-line against the report (2026-08-26)
+
+ben-domingue asked what the ten PRS tables are for. Checking each against
+`TechnicalReport_ESCS.doc`'s description of the Personal Reactions Survey, the
+ten tables are exactly the ten components it lists -- the split is right, but
+three names were uninformative and are now fixed:
+
+| table | items | the report's words |
+|---|---|---|
+| `prs_hexaco` | 192 | "the new 192-item HEXACO Personality Inventory (Lee & Ashton, 2004)" |
+| `prs_bas_bis` | 20 | "the 20 items included in the four Behavioral Activation System (BAS) and Behavioral Inhibition System (BIS) scales from Carver and White (1994)" |
+| `prs_gray_wilson` | 23 | "the 23 items selected by Jackson (2003) as markers of the major factors in the Gray-Wilson Personality Questionnaire" |
+| `prs_music_preferences` | 22 | "Music (22 kinds)" |
+| `prs_reading_preferences` | 35 | "Reading (35 kinds)" |
+| `prs_movie_preferences` | 18 | "Movies (18 kinds)" |
+| `prs_tv_preferences` | 34 | "Television programs (34 kinds)" |
+| `prs_ipip` | 80 | "80 new IPIP items intended to measure sensation-seeking, hyperactivity, fearfulness, and obsessive-compulsive symptoms" |
+| `prs_peo`, `prs_pey` | 14 + 14 | "A revised and expanded version of the Freyd-Goldberg survey of potentially disturbing events" |
+
+`pr`->`bas_bis`, `mpr`->`gray_wilson` and `ppq`->`ipip` were renamed: each is
+matched by item count, and 20, 23 and 80 are each unique within this mailing,
+so the mapping is unambiguous. `peo`/`pey` are left under their source
+prefixes -- the report describes only one disturbing-events survey and gives no
+basis for saying which of the two 14-item halves is which, so naming them
+would be a guess. The two genetics questions the report mentions are dropped
+as below MIN_BLOCK.
+
+This is the pattern to apply to any remaining unnamed block: match on item
+count against the report, and leave the source prefix in place where the count
+is ambiguous.

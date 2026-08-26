@@ -168,7 +168,16 @@ BLOCK_NAMES = {
     ("spa", "ABILITY"): "talents",
     ("spa", "PSKILL"):  "skill_proficiency",
     ("spa", "VINTELL"): "beliefs_about_intelligence",
-    ("prs", "mpr"):     "mpr",
+    # Matched by item count, which is unambiguous in each case: the report
+    # names "the 20 items included in the four Behavioral Activation System
+    # (BAS) and Behavioral Inhibition System (BIS) scales", "the 23 items
+    # selected by Jackson (2003) as markers of the major factors in the
+    # Gray-Wilson Personality Questionnaire", and "80 new IPIP items intended
+    # to measure sensation-seeking, hyperactivity, fearfulness, and
+    # obsessive-compulsive symptoms".
+    ("prs", "pr"):      "bas_bis",
+    ("prs", "mpr"):     "gray_wilson",
+    ("prs", "ppq"):     "ipip",
 }
 
 # Whole blocks to exclude, with the reason: administrative counts and
