@@ -5,17 +5,20 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
-- [ ] **`germann_2026_*` tables have colliding `id`s** (found 2026-08-26 by
-  `irw_lint_covariates.py`, the first thing it caught on real output).
-  30,072 of 228,070 rows in `germann_2026_immigration.csv` are duplicate
-  `(id, wave, item)` keys, and the covariates prove they are different
-  people, not repeated measures — `id=20`/`wave=pre` carries both
-  `cov_age=57, cov_gender=1` and `cov_age=51, cov_gender=2`. The source's
-  respondent number is evidently only unique within some sub-sample (country
-  or survey round) that `data/germann_2026_terrorism.py` does not fold into
-  `id`. All five `germann_2026_*` tables share the pattern. Needs the script
-  fixed and the tables re-uploaded — until then those tables merge two
-  respondents into one person for any model fit on them.
+- [ ] **`germann_2026_*` tables have colliding `id`s** — tracked in
+  [#1683](https://github.com/ben-domingue/irw/issues/1683) (`data fix`).
+  Found 2026-08-26 by `irw_lint_covariates.py`, the first thing it caught on
+  real output. 30,072 of 228,070 rows in `germann_2026_immigration.csv` are
+  duplicate `(id, wave, item)` keys. Root cause: the raw file carries both
+  `newid` (unique across all 76,466 rows) and `id`, and
+  `data/germann_2026_terrorism.py` uses `id`, which restarts from 1 in each
+  of the three country samples — `newid = region * 100000 + id`, region
+  1/2/3 = England/Scotland/Wales. Melting on `newid` gives 0 duplicate keys
+  and 0 covariates varying within a person. Same issue also establishes that
+  `wave` is wrong here: every respondent appears exactly once, so pre/during/
+  post separates different people (a natural experiment), not timepoints —
+  it belongs in `cov_*` or `treat`. Corrected N is 76,466, not the ≈53k
+  recorded in `BATCH_LOG.md`.
 
 - [x] **`biblio_batch_2026-08-26.csv` (3 rows) uploaded/pasted** (confirmed
   2026-08-26, ben-domingue): 67,592 responses —
