@@ -11148,3 +11148,61 @@ Three judgment calls, all recorded in the script:
   noting as a reason to keep those assertions rather than widen them.
 
 **`biblio_batch_2026-08-25c.csv` is now 25 rows / 131,878 responses.**
+
+### Worklist pass 4 — identifying opaque blocks by reconstruction (2026-08-25)
+
+Two deposits whose item columns carry no labels at all, resolved without the
+papers by using the deposits' own derived variables as a key.
+
+**`data/kermen_2022_anxiety_self_efficacy.py`** — `10.17632/3gx5f24fpv`,
+CC BY 4.0. 325 Turkish high school students. The items are named with bare
+letters (`b1`-`b17`, `c1`-`c16`, `d1`-`d20`, `e1`-`e20`) and the file has no
+variable labels, so the prefixes decode to nothing. But the deposit also
+carries four scored variables, and **each reconstructs exactly as the plain
+sum of one block on every complete case**:
+
+| scored var | block | construct | items | resp |
+|---|---|---|---|---|
+| `effi` | `b1`-`b17` | self-efficacy | 17 | 1-5 |
+| `regu` | `c1`-`c16` | self-regulation | 16 | 1-5 |
+| `anx` | `d1`-`d20` | anxiety | 20 | 0-3 |
+| `att` | `e1`-`e20` | attention | 20 | 1-4 |
+
+That is a positive identification rather than a guess, and the script asserts
+all four sums before writing anything — if the mapping ever stopped holding it
+would fail loudly rather than ship a mislabelled table. 4 tables, 23,725
+responses, all density 1.000.
+
+**This reconstruct-the-derived-score technique is the general answer to the
+`nr9388gbzf` problem** recorded above (opaque letter prefixes, no codebook).
+It works whenever a deposit ships both the items and any score built from
+them, which is common. It did *not* work for the Gan deposit below, whose
+derived columns are subscale means over undocumented subsets — worth knowing
+as its limit.
+
+**`data/gan_2024_diabetes_depression.py`** — `10.3389/fendo.2024.1390564`,
+Frontiers in Endocrinology, CC BY 4.0. 318 Chinese type 2 diabetes patients.
+Two tables: `gan_2024_depression` (18 items) and `gan_2024_alexithymia` (19
+items, 1-5), 11,764 responses, both density 1.000. The Chinese prefixes name
+the constructs directly, and the `@` block's derived companions `DIF`, `DDF`
+and `EOT` are the Toronto Alexithymia Scale's three canonical subscales
+(`@1` is absent from the file, so this is 19 of the TAS-20's 20 items).
+
+Two decisions worth recording:
+
+* **The `社` social-support block is not shipped.** Its 32 columns are not one
+  instrument: 11 are 1-4 Likert items, 17 are 0/1 multi-select checkbox
+  options under two parent questions, and three of those (`社69`, `社79`,
+  `社710`) are constant 0 — options nobody selected. Mixing response formats
+  in one table is what got `reuter_2021_campuslife` pulled, and the checkbox
+  options are alternatives within a question rather than items in their own
+  right. Splitting it correctly needs the instrument, which the deposit does
+  not include. The script's constant-item assertion is what surfaced this.
+* **The depression block's per-item maxima vary by design** — four items 0-1,
+  eight 0-2, one 0-3, five 0-4. That is the Hamilton scale's own structure,
+  corroborated by the deposit's derived factor columns (weight, cognitive
+  impairment, retardation, sleep disturbance, somatic anxiety) and by `抑162`,
+  the second part of its two-part item 16. Each item is ordinal within itself,
+  which is what the standard requires; precedent is `lee_2020_alcohol_use`.
+
+**`biblio_batch_2026-08-25c.csv` is now 31 rows / 167,367 responses.**
