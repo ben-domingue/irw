@@ -1,0 +1,6628 @@
+{
+ "generated": "2026-08-26",
+ "scripts_scanned": 1214,
+ "n_terms": 994,
+ "terms": {
+  "age": {
+   "count": 513,
+   "aliases": {
+    "Age": 165,
+    "age": 157,
+    "AGE": 27,
+    "edad": 24,
+    ".": 17,
+    "X003": 9,
+    "Edad": 5,
+    "Alter": 3,
+    "idade": 3,
+    "A1": 2,
+    "Age (years)": 2,
+    "EDAD": 2,
+    "Q1": 2,
+    "Q1AGE": 2,
+    "Q212": 2,
+    "Wiek": 2,
+    "alter": 2,
+    "cov_age2": 2,
+    "demographics.age": 2,
+    "na_if": 2,
+    "resp": 2,
+    "wiek": 2,
+    "年龄": 2,
+    "1. Idade": 1,
+    "1_current_age": 1,
+    "1、Your age:": 1,
+    "2. Age": 1,
+    "3nAge": 1,
+    "4、您的年龄是？": 1,
+    "@2. Your age": 1,
+    "@5、Your age？": 1,
+    "A": 1,
+    "A2_age": 1,
+    "AGECHRON": 1,
+    "AGEN": 1,
+    "ANA2_AGE": 1,
+    "Age (Years)": 1,
+    "Age - years": 1,
+    "Age.2": 1,
+    "Age_participant": 1,
+    "Age_yr": 1,
+    "Ageinyears": 1,
+    "CRC_Age": 1,
+    "D1": 1,
+    "DE02_01": 1,
+    "DEM_AGE": 1,
+    "Inj_Age": 1,
+    "Leeftijd": 1,
+    "M1_age": 1,
+    "N3": 1,
+    "P20": 1,
+    "P23": 1,
+    "P8": 1,
+    "Q47_age": 1,
+    "Q9_Age": 1,
+    "Usia": 1,
+    "Vek": 1,
+    "W3Xage": 1,
+    "WIEK": 1,
+    "What is your age?": 1,
+    "X5": 1,
+    "\\(AGE\\) How old are you": 1,
+    "\\xa0What is your age in years?\\xa0": 1,
+    "age101": 1,
+    "age_base": 1,
+    "age_raw": 1,
+    "age_screen": 1,
+    "age_screening": 1,
+    "age_t1": 1,
+    "ageyrsround": 1,
+    "alter_neu": 1,
+    "bq2age": 1,
+    "cov_age_int": 1,
+    "cq3age": 1,
+    "dem_age": 1,
+    "edad_tramos": 1,
+    "idade1": 1,
+    "mothage": 1,
+    "mothers_age": 1,
+    "p02a03": 1
+   }
+  },
+  "gender": {
+   "count": 390,
+   "aliases": {
+    "Gender": 139,
+    "gender": 103,
+    "sex": 12,
+    "GENDER": 11,
+    "X001": 9,
+    "as.numeric": 8,
+    "Sex": 5,
+    "1.Gender": 2,
+    "A2": 2,
+    "Geschlecht": 2,
+    "Q213": 2,
+    "Sexe": 2,
+    "demographics.gender": 2,
+    "gender0": 2,
+    "s1": 2,
+    "x": 2,
+    "性别": 2,
+    "1. Gender": 1,
+    "1. What is your gender?": 1,
+    "1.1 您的性别?\\n Your gender is?": 1,
+    "1、您的性别：": 1,
+    "2_gender": 1,
+    "3、您的性别：（男=1，女=0）": 1,
+    "6. No Sabe": 1,
+    "7. Otro (especifique)": 1,
+    "@1, Your gender": 1,
+    "@4、Your gender": 1,
+    "A3_gender": 1,
+    "CRC_Gender": 1,
+    "D4": 1,
+    "DE01": 1,
+    "DEM_GENDER": 1,
+    "G": 1,
+    "GEND1": 1,
+    "GENDERS": 1,
+    "GenderIdentity": 1,
+    "GenderM": 1,
+    "Gender_M1F2": 1,
+    "Gender_participant": 1,
+    "Genre": 1,
+    "Gernder(1=Male, 2=Female)": 1,
+    "Geslacht": 1,
+    "Género": 1,
+    "Jantina": 1,
+    "Jenis Kelamin": 1,
+    "Kindly indicate your gender\\n": 1,
+    "M2_gender": 1,
+    "Male": 1,
+    "N1": 1,
+    "P6": 1,
+    "PLEC": 1,
+    "Ple": 1,
+    "Plec_sl": 1,
+    "Pohlavi": 1,
+    "Q10_Gender": 1,
+    "Q2": 1,
+    "Q2_Gender": 1,
+    "Q4": 1,
+    "Q46_gender": 1,
+    "Sexo": 1,
+    "Unnamed: 2": 1,
+    "W3XGENDER": 1,
+    "What is your gender identity? - Selected Choice": 1,
+    "X3": 1,
+    "XB": 1,
+    "Your gender is?": 1,
+    "\\(GENDER\\) Gender": 1,
+    "cinsiyet": 1,
+    "cov_1": 1,
+    "cov_gender_str": 1,
+    "d1pohlavi": 1,
+    "data": 1,
+    "dem_gender": 1,
+    "female": 1,
+    "gander": 1,
+    "gend": 1,
+    "gender102": 1,
+    "gender2": 1,
+    "gender_A2b": 1,
+    "genero": 1
+   }
+  },
+  "sex": {
+   "count": 171,
+   "aliases": {
+    "sex": 49,
+    "Sex": 38,
+    "sexo": 29,
+    "SEX": 15,
+    "Gender": 4,
+    "gender": 4,
+    "Sexo": 3,
+    "Q4SEX": 2,
+    "SEXO": 2,
+    "Sexe": 2,
+    ".": 1,
+    "ANA1_SEX": 1,
+    "CRC_Sex": 1,
+    "Inj_Sex": 1,
+    "P19": 1,
+    "Q2_Sex": 1,
+    "SEXRESPO": 1,
+    "Sex (-1 - М, 1 - F)": 1,
+    "SexR": 1,
+    "c7": 1,
+    "male": 1,
+    "p02a02": 1,
+    "p220": 1,
+    "p30": 1,
+    "q9_sex": 1,
+    "rph_sexo": 1,
+    "s2": 1,
+    "s_sex": 1,
+    "sex [1=M; 2=F]": 1,
+    "sex_code": 1,
+    "性别": 1
+   }
+  },
+  "education": {
+   "count": 141,
+   "aliases": {
+    "Education": 43,
+    "education": 25,
+    "edu": 9,
+    "EDUCATION": 4,
+    "EDU": 3,
+    "Edu": 3,
+    "Education level": 3,
+    ".": 2,
+    "Educational level": 2,
+    "escolaridade": 2,
+    "1.4 您的最高学历是?\\nPlease specify your highest education? \\n": 1,
+    "3.What is your current level of education?": 1,
+    "4、Your education:": 1,
+    "4、受教育程度": 1,
+    "CRC_Education": 1,
+    "D5": 1,
+    "DEM_EDU": 1,
+    "ED": 1,
+    "EDU_4C": 1,
+    "ESTUDIOS": 1,
+    "Ed": 1,
+    "EduAtt": 1,
+    "EduLevel": 1,
+    "Edu_Background": 1,
+    "Edu_Degree": 1,
+    "Education Level": 1,
+    "Education background": 1,
+    "Educational Level": 1,
+    "Educational background": 1,
+    "Educatoin": 1,
+    "Estudios": 1,
+    "Etude": 1,
+    "LevelOfEducation": 1,
+    "Levelofeducation": 1,
+    "Nivelestu": 1,
+    "P9": 1,
+    "Pendidikan": 1,
+    "Q49_education": 1,
+    "Your education is?": 1,
+    "\\(EDUCATION\\) What level of education": 1,
+    "cov_4": 1,
+    "ed": 1,
+    "educat3": 1,
+    "education [1=BEP/CAP; 2=BAC; 3=BAC+2; 4=BAC+3; 5=BAC+5; 6=BAC+8]": 1,
+    "education107": 1,
+    "education_cat": 1,
+    "education_level": 1,
+    "educationlevel": 1,
+    "estudios": 1,
+    "highest_education": 1,
+    "izobrazba": 1,
+    "level_education": 1,
+    "niv": 1,
+    "rph_nivel": 1,
+    "scholarity": 1
+   }
+  },
+  "marital_status": {
+   "count": 45,
+   "aliases": {
+    "marital_status": 7,
+    "Marital status": 6,
+    "MaritalStatus": 5,
+    "MARITALS": 2,
+    "Marital_status": 2,
+    "marital": 2,
+    "s4": 2,
+    "A3": 1,
+    "ANA3_SATUS": 1,
+    "CIVIL_STATUS": 1,
+    "Estacivi": 1,
+    "Estadocivil": 1,
+    "Mar": 1,
+    "Marital": 1,
+    "Marital Status": 1,
+    "Marital Status:": 1,
+    "MaritalstatusR": 1,
+    "MartialStatus": 1,
+    "Martial_status": 1,
+    "Medeni Durum": 1,
+    "P7": 1,
+    "STANCYWIL": 1,
+    "What is your marital status?": 1,
+    "marry": 1,
+    "martial": 1,
+    "status": 1
+   }
+  },
+  "grade": {
+   "count": 39,
+   "aliases": {
+    "grade": 11,
+    "Grade": 8,
+    "GRADE": 5,
+    "2.Grade": 2,
+    "年级": 2,
+    "4cGrade": 1,
+    "@3. Your grade": 1,
+    "@7、What grade are you currently in？": 1,
+    "Grade (year of study):": 1,
+    "Klasa": 1,
+    "N2": 1,
+    "Q5_Grade": 1,
+    "X4": 1,
+    "klasa": 1,
+    "sinif": 1,
+    "socio07ap": 1
+   }
+  },
+  "country": {
+   "count": 37,
+   "aliases": {
+    "Country": 15,
+    "country": 14,
+    "COUNTRY": 2,
+    "COUNTRY_NAME": 1,
+    "Country_12C": 1,
+    "Germany": 1,
+    "UK": 1,
+    "ctrycd": 1,
+    "grupo": 1
+   }
+  },
+  "income": {
+   "count": 37,
+   "aliases": {
+    "income": 9,
+    "Income": 7,
+    "INCOME": 3,
+    "Monthly income": 3,
+    "6、您的收入": 1,
+    "INCOME_MONTHLY": 1,
+    "Income (self or family), can be described as": 1,
+    "Income_5C": 1,
+    "M_income": 1,
+    "Monthly Income": 1,
+    "Monthly disposable income (RMB)": 1,
+    "P12": 1,
+    "Penghasilan": 1,
+    "dem_income": 1,
+    "hh_income": 1,
+    "month_income": 1,
+    "monthly.income": 1,
+    "quest_74": 1,
+    "s monthly per capita income is": 1
+   }
+  },
+  "race": {
+   "count": 36,
+   "aliases": {
+    "race": 17,
+    "Race": 8,
+    "race_ethnicity": 2,
+    "CRC_Race": 1,
+    "Q2": 1,
+    "Q48_race": 1,
+    "RACE": 1,
+    "dem_race": 1,
+    "race2": 1,
+    "race_fixed": 1,
+    "socio05c": 1,
+    "socio05p": 1
+   }
+  },
+  "group": {
+   "count": 32,
+   "aliases": {
+    "Group": 11,
+    "group": 8,
+    "Group_1Parkison2_Control": 2,
+    "Control": 1,
+    "GROUP": 1,
+    "IC": 1,
+    "X1": 1,
+    "group [0=control; 1=autism]": 1,
+    "grp": 1,
+    "grupa": 1,
+    "组别": 1
+   }
+  },
+  "condition": {
+   "count": 25,
+   "aliases": {
+    "Condition": 6,
+    "condition": 6,
+    "Studie": 2,
+    "condname": 2,
+    "positive_negative": 2,
+    "Condizione": 1,
+    "Med_Cond": 1,
+    "PID": 1,
+    "Positive_Negative": 1,
+    "appraisal_conditions": 1,
+    "cond": 1,
+    "condition1singleun2singlein3groupun4groupin": 1
+   }
+  },
+  "ethnicity": {
+   "count": 23,
+   "aliases": {
+    "ethnicity": 6,
+    "Ethnicity": 5,
+    "ETHNIC": 1,
+    "Ethn": 1,
+    "Ethnic": 1,
+    "Ethnicity.simplified": 1,
+    "Kaum": 1,
+    "ethncty": 1,
+    "ethnic": 1,
+    "ethnicity104": 1,
+    "etnia": 1,
+    "q4": 1,
+    "socio04c": 1,
+    "socio04p": 1
+   }
+  },
+  "nationality": {
+   "count": 22,
+   "aliases": {
+    "Nationality": 12,
+    "nationality": 4,
+    "DE03": 1,
+    "Nacionalidad": 1,
+    "Natinality": 1,
+    "P5": 1,
+    "Q3_Nationality": 1,
+    "nation": 1
+   }
+  },
+  "major": {
+   "count": 18,
+   "aliases": {
+    "major": 6,
+    "Major": 4,
+    "3.Major": 2,
+    "专业": 2,
+    "MAJOR": 1,
+    "Major studied": 1,
+    "N5": 1,
+    "What is your major?": 1
+   }
+  },
+  "age_group": {
+   "count": 14,
+   "aliases": {
+    "Age": 5,
+    "Age group": 2,
+    "age": 2,
+    "AgeGroup": 1,
+    "Agegroup": 1,
+    "age_rec": 1,
+    "cov_3": 1,
+    "recoded.Age": 1
+   }
+  },
+  "employment": {
+   "count": 14,
+   "aliases": {
+    "Employment": 2,
+    "employment": 2,
+    "EmpStat": 1,
+    "EmpStatus": 1,
+    "Empl": 1,
+    "Employement": 1,
+    "Employment Status": 1,
+    "Employment status": 1,
+    "occu": 1,
+    "quest_72": 1,
+    "trabaja": 1,
+    "zaposlitev": 1
+   }
+  },
+  "region": {
+   "count": 14,
+   "aliases": {
+    "Region": 4,
+    "region": 4,
+    "CODE": 1,
+    "REG": 1,
+    "data": 1,
+    "mantaghe": 1,
+    "q5": 1,
+    "regiãodopaís": 1
+   }
+  },
+  "religion": {
+   "count": 14,
+   "aliases": {
+    "religion": 6,
+    "religion0": 2,
+    "7cReligion": 1,
+    "Agama": 1,
+    "Q16": 1,
+    "RELIGION": 1,
+    "Religious_Deno": 1,
+    "s your religion": 1
+   }
+  },
+  "study": {
+   "count": 14,
+   "aliases": {
+    "study": 3,
+    "1a": 1,
+    "1b": 1,
+    "1c": 1,
+    "2": 1,
+    "3": 1,
+    "4": 1,
+    "5a": 1,
+    "5b": 1,
+    "Sample Type": 1,
+    "Study": 1,
+    "supp": 1
+   }
+  },
+  "male": {
+   "count": 13,
+   "aliases": {
+    "if_else": 3,
+    "male": 3,
+    "s_male": 2,
+    "s_male_num": 1
+   }
+  },
+  "occupation": {
+   "count": 13,
+   "aliases": {
+    "Occupation": 6,
+    "occupation": 2,
+    "3、Your occupation:": 1,
+    "5、您的职业": 1,
+    "Occupationnew": 1,
+    "Ocupation": 1,
+    "P10": 1
+   }
+  },
+  "language": {
+   "count": 12,
+   "aliases": {
+    "Language": 6,
+    "language": 2,
+    "startlanguage": 2,
+    "UserLanguage": 1,
+    "languagepref": 1
+   }
+  },
+  "school": {
+   "count": 12,
+   "aliases": {
+    "School": 3,
+    "school": 2,
+    "@1、Your School：": 1,
+    "ANA18_SCHOOL": 1,
+    "IDSCHOOL": 1,
+    "Name of Secondary School": 1,
+    "SCHOOLNAME": 1,
+    "Szko": 1,
+    "skole": 1
+   }
+  },
+  "bmi": {
+   "count": 11,
+   "aliases": {
+    "BMI": 8,
+    "BMC": 1,
+    "bmi": 1,
+    "round": 1
+   }
+  },
+  "educ": {
+   "count": 10,
+   "aliases": {
+    "educ": 5,
+    ".": 1,
+    "contains": 1,
+    "dem_educ": 1,
+    "p02a11a": 1,
+    "p6210": 1
+   }
+  },
+  "location": {
+   "count": 10,
+   "aliases": {
+    "location": 4,
+    "Location": 3,
+    "Domisili": 1,
+    "Located": 1,
+    "Q4_Location": 1
+   }
+  },
+  "profession": {
+   "count": 10,
+   "aliases": {
+    "profession": 4,
+    "Meslek": 1,
+    "PROFESSI": 1,
+    "Profession": 1,
+    "profesion": 1,
+    "profiss": 1,
+    "profissão": 1
+   }
+  },
+  "edu": {
+   "count": 9,
+   "aliases": {
+    "ed_level": 3,
+    "edu": 2,
+    "edu0": 2,
+    "Education Level": 1,
+    "demographics.education": 1
+   }
+  },
+  "female": {
+   "count": 9,
+   "aliases": {
+    "female": 4,
+    "Female": 3,
+    "c": 1,
+    "female_b": 1
+   }
+  },
+  "job": {
+   "count": 8,
+   "aliases": {
+    "Job": 4,
+    "job": 2,
+    "JOB": 1,
+    "current_job": 1
+   }
+  },
+  "year": {
+   "count": 8,
+   "aliases": {
+    "year": 5,
+    "YEAR": 1,
+    "Year": 1,
+    "Year / Level": 1
+   }
+  },
+  "age_range": {
+   "count": 7,
+   "aliases": {
+    "cov_age_range_str": 2,
+    "Age": 1,
+    "Age_range": 1,
+    "edad_tramos": 1,
+    "substr": 1,
+    "tramoebs2": 1
+   }
+  },
+  "experience": {
+   "count": 7,
+   "aliases": {
+    "Experience": 3,
+    "2、Time of work or research related to gentrification": 1,
+    "Years of experience": 1,
+    "experience": 1,
+    "exprience": 1
+   }
+  },
+  "family_income": {
+   "count": 7,
+   "aliases": {
+    "@4.家庭月收入": 1,
+    "INCOME": 1,
+    "Total_Family_income": 1,
+    "family income": 1,
+    "family_income": 1,
+    "familyincome": 1,
+    "收入": 1
+   }
+  },
+  "field": {
+   "count": 7,
+   "aliases": {
+    "field": 4,
+    "3、1. 您的学科为": 1,
+    "Field": 1,
+    "domaine": 1
+   }
+  },
+  "married": {
+   "count": 7,
+   "aliases": {
+    "married": 5,
+    "cov_2": 1,
+    "married_b": 1
+   }
+  },
+  "only_child": {
+   "count": 7,
+   "aliases": {
+    "4.Only-child": 2,
+    "6、请问您是否是独生子女？（是=1，否=0）": 1,
+    "ONLY CHILD": 1,
+    "Only_Child": 1,
+    "onlychild": 1,
+    "独生子女": 1
+   }
+  },
+  "residence": {
+   "count": 7,
+   "aliases": {
+    "residence": 2,
+    "MZAM": 1,
+    "RESIDECE": 1,
+    "RESIDENCE": 1,
+    "Residence": 1,
+    "stan": 1
+   }
+  },
+  "role": {
+   "count": 7,
+   "aliases": {
+    "3_role": 1,
+    "Role": 1,
+    "Role_Binary": 1,
+    "cov_role.rename": 1,
+    "data": 1,
+    "df2": 1,
+    "role_cat": 1
+   }
+  },
+  "sample": {
+   "count": 7,
+   "aliases": {
+    "sample": 4,
+    "LAB": 1,
+    "Sample": 1,
+    "case_when": 1
+   }
+  },
+  "engnat": {
+   "count": 6,
+   "aliases": {
+    "engnat": 6
+   }
+  },
+  "state": {
+   "count": 6,
+   "aliases": {
+    "state": 3,
+    "5. Em que estado você reside?": 1,
+    "estado": 1,
+    "inputstate": 1
+   }
+  },
+  "urban": {
+   "count": 6,
+   "aliases": {
+    "urban": 4,
+    "5、您的家庭所在地？（城市=1，农村=0）": 1,
+    "DEM_RESIDENCE": 1
+   }
+  },
+  "age_band": {
+   "count": 5,
+   "aliases": {
+    "age": 2,
+    "2、您的年龄段：": 1,
+    "Age2": 1,
+    "Your age is?": 1
+   }
+  },
+  "child_gender": {
+   "count": 5,
+   "aliases": {
+    "child_gender": 2,
+    "Child gender": 1,
+    "ChildGender": 1,
+    "性别.1": 1
+   }
+  },
+  "class": {
+   "count": 5,
+   "aliases": {
+    "class": 2,
+    "Class": 1,
+    "IDCLASS": 1,
+    "Q3CLAS": 1
+   }
+  },
+  "completion_time_s": {
+   "count": 5,
+   "aliases": {
+    "totalseconds": 2,
+    "Duration__in_seconds_": 1,
+    "Unnamed: 1": 1
+   }
+  },
+  "education_level": {
+   "count": 5,
+   "aliases": {
+    "4. Escolaridade": 1,
+    "Education_Level": 1,
+    "Educational level": 1,
+    "Niveau": 1,
+    "quest_68": 1
+   }
+  },
+  "hand": {
+   "count": 5,
+   "aliases": {
+    "hand": 5
+   }
+  },
+  "hhsize": {
+   "count": 5,
+   "aliases": {
+    "hhsize_b": 1,
+    "p1_1": 1,
+    "p6008": 1,
+    "pessoas_por_moradia": 1,
+    "total_pers": 1
+   }
+  },
+  "institution": {
+   "count": 5,
+   "aliases": {
+    "A1": 1,
+    "Institution": 1,
+    "inst": 1,
+    "institui": 1,
+    "instituição": 1
+   }
+  },
+  "marital": {
+   "count": 5,
+   "aliases": {
+    "Marital": 3,
+    "NewMARITAL": 1,
+    "marital3": 1
+   }
+  },
+  "orientation": {
+   "count": 5,
+   "aliases": {
+    "orientation": 5
+   }
+  },
+  "academic_year": {
+   "count": 4,
+   "aliases": {
+    "4.What is your current academic year?": 1,
+    "Acad_yr": 1,
+    "Academic year": 1,
+    "Academic_Year": 1
+   }
+  },
+  "child_age": {
+   "count": 4,
+   "aliases": {
+    "Child age": 1,
+    "ChildAge": 1,
+    "focal_child_demo_age": 1,
+    "年龄": 1
+   }
+  },
+  "degree": {
+   "count": 4,
+   "aliases": {
+    "Degree": 3,
+    "Degree Program": 1
+   }
+  },
+  "english": {
+   "count": 4,
+   "aliases": {
+    "english": 3,
+    "English": 1
+   }
+  },
+  "faculty": {
+   "count": 4,
+   "aliases": {
+    "Faculty": 3,
+    "Your Faculty": 1
+   }
+  },
+  "familysize": {
+   "count": 4,
+   "aliases": {
+    "familysize": 4
+   }
+  },
+  "height": {
+   "count": 4,
+   "aliases": {
+    "Height": 2,
+    "HEIGHT": 1,
+    "visina": 1
+   }
+  },
+  "hispanic": {
+   "count": 4,
+   "aliases": {
+    "hispanic": 3,
+    "race_3": 1
+   }
+  },
+  "identity": {
+   "count": 4,
+   "aliases": {
+    "1、Please choose your identity": 1,
+    "Identity": 1,
+    "Q1": 1,
+    "identity": 1
+   }
+  },
+  "out": {
+   "count": 4,
+   "aliases": {
+    "list": 4
+   }
+  },
+  "session_id": {
+   "count": 4,
+   "aliases": {
+    "session_id": 4
+   }
+  },
+  "smoking": {
+   "count": 4,
+   "aliases": {
+    "SMOKING": 2,
+    "Smoking": 2
+   }
+  },
+  "socialclass": {
+   "count": 4,
+   "aliases": {
+    "Q206": 2,
+    "class": 2
+   }
+  },
+  "voted": {
+   "count": 4,
+   "aliases": {
+    "voted": 4
+   }
+  },
+  "weight": {
+   "count": 4,
+   "aliases": {
+    "Weight": 2,
+    "WEIGHT": 1,
+    "teza": 1
+   }
+  },
+  "affiliation": {
+   "count": 3,
+   "aliases": {
+    "affiliation": 2,
+    "Affiliation": 1
+   }
+  },
+  "agegroup": {
+   "count": 3,
+   "aliases": {
+    "AGEGROUP": 2,
+    "DEM_AGEGRP": 1
+   }
+  },
+  "birth_year": {
+   "count": 3,
+   "aliases": {
+    "A1": 1,
+    "Birth": 1,
+    "Birth_year": 1
+   }
+  },
+  "black": {
+   "count": 3,
+   "aliases": {
+    "race_2": 1,
+    "s_black": 1,
+    "s_black_num": 1
+   }
+  },
+  "department": {
+   "count": 3,
+   "aliases": {
+    "A5": 1,
+    "dep.Name": 1,
+    "department": 1
+   }
+  },
+  "device": {
+   "count": 3,
+   "aliases": {
+    "Device": 2,
+    "device": 1
+   }
+  },
+  "dob": {
+   "count": 3,
+   "aliases": {
+    "DateNaiss": 1,
+    "nascimento": 1
+   }
+  },
+  "family_type": {
+   "count": 3,
+   "aliases": {
+    "@5.家庭类型": 1,
+    "Family type": 1,
+    "Tipofam": 1
+   }
+  },
+  "father_education": {
+   "count": 3,
+   "aliases": {
+    "DADEDU": 1,
+    "papedu": 1,
+    "s education": 1
+   }
+  },
+  "field_cat": {
+   "count": 3,
+   "aliases": {
+    "field_cat": 3
+   }
+  },
+  "field_of_study": {
+   "count": 3,
+   "aliases": {
+    "Study": 1,
+    "ensenyament": 1,
+    "qfield": 1
+   }
+  },
+  "handedness": {
+   "count": 3,
+   "aliases": {
+    "Handedness": 2,
+    "handedness": 1
+   }
+  },
+  "ideology": {
+   "count": 3,
+   "aliases": {
+    "Ideology": 1,
+    "dem_ideoly": 1,
+    "ideology": 1
+   }
+  },
+  "ideology1": {
+   "count": 3,
+   "aliases": {
+    "political1": 3
+   }
+  },
+  "ideology2": {
+   "count": 3,
+   "aliases": {
+    "political2": 3
+   }
+  },
+  "ideology3": {
+   "count": 3,
+   "aliases": {
+    "political3": 3
+   }
+  },
+  "ideology_avg": {
+   "count": 3,
+   "aliases": {
+    "politicalavg": 2,
+    "ideology": 1
+   }
+  },
+  "long": {
+   "count": 3,
+   "aliases": {
+    "df": 3
+   }
+  },
+  "marriage": {
+   "count": 3,
+   "aliases": {
+    "Marriage": 3
+   }
+  },
+  "monthly_income": {
+   "count": 3,
+   "aliases": {
+    "Monthly income": 2,
+    "A3": 1
+   }
+  },
+  "mother_education": {
+   "count": 3,
+   "aliases": {
+    "MOMEDU": 1,
+    "momedu": 1,
+    "s education": 1
+   }
+  },
+  "order": {
+   "count": 3,
+   "aliases": {
+    "NA": 1,
+    "as.integer": 1,
+    "order": 1
+   }
+  },
+  "party": {
+   "count": 3,
+   "aliases": {
+    "party": 2,
+    "party2": 1
+   }
+  },
+  "position": {
+   "count": 3,
+   "aliases": {
+    "Current position": 1,
+    "Position": 1,
+    "position_2": 1
+   }
+  },
+  "race_ethnicity": {
+   "count": 3,
+   "aliases": {
+    "race ethnicity": 2,
+    "What is your racial or ethnic identification? - Selected Choice": 1
+   }
+  },
+  "rank": {
+   "count": 3,
+   "aliases": {
+    "A2": 1,
+    "Rank": 1,
+    "rank": 1
+   }
+  },
+  "school_type": {
+   "count": 3,
+   "aliases": {
+    "SCHOOLTY": 1,
+    "School": 1,
+    "Type_sch": 1
+   }
+  },
+  "school_year": {
+   "count": 3,
+   "aliases": {
+    "School year": 1,
+    "SchoolYear": 1,
+    "Year of medical school": 1
+   }
+  },
+  "semester": {
+   "count": 3,
+   "aliases": {
+    "In which semester you are?": 1,
+    "Semester": 1,
+    "semestre": 1
+   }
+  },
+  "speciality": {
+   "count": 3,
+   "aliases": {
+    "Q4_Speciality": 1,
+    "Speciality": 1,
+    "Spécialité": 1
+   }
+  },
+  "teacher": {
+   "count": 3,
+   "aliases": {
+    "Leraar": 1,
+    "teacher": 1,
+    "teacher_id": 1
+   }
+  },
+  "total_time": {
+   "count": 3,
+   "aliases": {
+    "Temps total": 1,
+    "total_time": 1
+   }
+  },
+  "treatment": {
+   "count": 3,
+   "aliases": {
+    "Treatment": 2,
+    "treatment": 1
+   }
+  },
+  "vr_experience": {
+   "count": 3,
+   "aliases": {
+    "VR_experience": 2,
+    "vr_exp": 1
+   }
+  },
+  "years_experience": {
+   "count": 3,
+   "aliases": {
+    "1.3 您在大型项目行业工作了多少年?\\nHow many years have you worked in the megaproject industry?": 1,
+    "Kindly indicate your years of expertise as a clinical educator \\n": 1,
+    "YEAE": 1
+   }
+  },
+  "years_teaching": {
+   "count": 3,
+   "aliases": {
+    "Yearsofteaching": 1,
+    "years_teaching_bin": 1,
+    "yearsteaching": 1
+   }
+  },
+  "abuse": {
+   "count": 2,
+   "aliases": {
+    "abuse": 2
+   }
+  },
+  "age2": {
+   "count": 2,
+   "aliases": {
+    "cov_age": 2
+   }
+  },
+  "age_bracket": {
+   "count": 2,
+   "aliases": {
+    "2. What is your age?": 1,
+    "Q1_Age": 1
+   }
+  },
+  "age_cat": {
+   "count": 2,
+   "aliases": {
+    "Age_5C": 1,
+    "edad_cat": 1
+   }
+  },
+  "age_months": {
+   "count": 2,
+   "aliases": {
+    "age_months": 1,
+    "month": 1
+   }
+  },
+  "agegrp": {
+   "count": 2,
+   "aliases": {
+    "agegrp0": 2
+   }
+  },
+  "ai_familiarity": {
+   "count": 2,
+   "aliases": {
+    "Familiarty": 2
+   }
+  },
+  "ai_use_frequency": {
+   "count": 2,
+   "aliases": {
+    "Frequent use": 2
+   }
+  },
+  "alcohol": {
+   "count": 2,
+   "aliases": {
+    "ALCOHOL": 2
+   }
+  },
+  "assess_date": {
+   "count": 2,
+   "aliases": {
+    "Assess_Date": 2
+   }
+  },
+  "attention": {
+   "count": 2,
+   "aliases": {
+    "attention": 2
+   }
+  },
+  "category": {
+   "count": 2,
+   "aliases": {
+    "Category": 2
+   }
+  },
+  "center": {
+   "count": 2,
+   "aliases": {
+    "Center": 2
+   }
+  },
+  "child_age_months": {
+   "count": 2,
+   "aliases": {
+    "age_months": 2
+   }
+  },
+  "child_number": {
+   "count": 2,
+   "aliases": {
+    "child_number_t1": 1,
+    "na_if": 1
+   }
+  },
+  "children_count": {
+   "count": 2,
+   "aliases": {
+    "7. Quantos filhos você tem?": 1,
+    "presentbabynumber": 1
+   }
+  },
+  "city": {
+   "count": 2,
+   "aliases": {
+    "City": 1,
+    "city": 1
+   }
+  },
+  "civil_status": {
+   "count": 2,
+   "aliases": {
+    "civil status": 1,
+    "civilstatus": 1
+   }
+  },
+  "college": {
+   "count": 2,
+   "aliases": {
+    "College": 1,
+    "学院": 1
+   }
+  },
+  "company_size": {
+   "count": 2,
+   "aliases": {
+    "Company Size": 1,
+    "Company size": 1
+   }
+  },
+  "contract_type": {
+   "count": 2,
+   "aliases": {
+    "Type of contract": 1,
+    "contractual": 1
+   }
+  },
+  "counterbalance": {
+   "count": 2,
+   "aliases": {
+    "counterbalance": 2
+   }
+  },
+  "division": {
+   "count": 2,
+   "aliases": {
+    "division": 1,
+    "q61_division": 1
+   }
+  },
+  "duration_seconds": {
+   "count": 2,
+   "aliases": {
+    "Duration (in seconds)": 1,
+    "duration_seconds": 1
+   }
+  },
+  "education_father": {
+   "count": 2,
+   "aliases": {
+    "ANA5_EDUCAT_FA": 1,
+    "Q13_FatherEducation": 1
+   }
+  },
+  "education_years": {
+   "count": 2,
+   "aliases": {
+    "Educationyrs": 1,
+    "subj_ed_yr": 1
+   }
+  },
+  "educationlevel": {
+   "count": 2,
+   "aliases": {
+    "Highesteducationlevel": 2
+   }
+  },
+  "employment_status": {
+   "count": 2,
+   "aliases": {
+    "Employment_status": 1,
+    "employment_status": 1
+   }
+  },
+  "empsect": {
+   "count": 2,
+   "aliases": {
+    "empsect0": 2
+   }
+  },
+  "enddate": {
+   "count": 2,
+   "aliases": {
+    "cov_enddate_unix": 1,
+    "enddate": 1
+   }
+  },
+  "ethnic": {
+   "count": 2,
+   "aliases": {
+    "Ethnic": 1,
+    "p5465": 1
+   }
+  },
+  "experien": {
+   "count": 2,
+   "aliases": {
+    "EXPERIEN": 2
+   }
+  },
+  "experience_years": {
+   "count": 2,
+   "aliases": {
+    "EXPERIEN": 1,
+    "expyrs": 1
+   }
+  },
+  "factor1": {
+   "count": 2,
+   "aliases": {
+    "faktor1": 2
+   }
+  },
+  "factor2": {
+   "count": 2,
+   "aliases": {
+    "faktor2": 2
+   }
+  },
+  "family_location": {
+   "count": 2,
+   "aliases": {
+    "FAMILYLOCATION": 1,
+    "Family_Location": 1
+   }
+  },
+  "family_size": {
+   "count": 2,
+   "aliases": {
+    "Family size": 1,
+    "family_size_rec": 1
+   }
+  },
+  "father_job": {
+   "count": 2,
+   "aliases": {
+    "papjob": 1,
+    "s job": 1
+   }
+  },
+  "filter": {
+   "count": 2,
+   "aliases": {
+    "filter_$": 1,
+    "filter__": 1
+   }
+  },
+  "firm_size": {
+   "count": 2,
+   "aliases": {
+    "SIZE": 1,
+    "Size": 1
+   }
+  },
+  "genotype": {
+   "count": 2,
+   "aliases": {
+    "Genotype": 2
+   }
+  },
+  "gibberishcheck": {
+   "count": 2,
+   "aliases": {
+    "gibberish2chk": 1,
+    "gibberishchk": 1
+   }
+  },
+  "grade_level": {
+   "count": 2,
+   "aliases": {
+    "GRADELEV": 1,
+    "grade_level": 1
+   }
+  },
+  "hba1c": {
+   "count": 2,
+   "aliases": {
+    "hba1c": 1,
+    "round": 1
+   }
+  },
+  "health": {
+   "count": 2,
+   "aliases": {
+    "Health": 1,
+    "Health condition": 1
+   }
+  },
+  "height_cm": {
+   "count": 2,
+   "aliases": {
+    "@3、您的身高（cm）": 1,
+    "@4. Your height is (in unit: cm)": 1
+   }
+  },
+  "hospital": {
+   "count": 2,
+   "aliases": {
+    "HOSPITAL": 1,
+    "hos.Name": 1
+   }
+  },
+  "household_registration": {
+   "count": 2,
+   "aliases": {
+    "5.Household registration type": 2
+   }
+  },
+  "ideo": {
+   "count": 2,
+   "aliases": {
+    "ideo": 1
+   }
+  },
+  "idx": {
+   "count": 2,
+   "aliases": {
+    "next": 2
+   }
+  },
+  "income_source": {
+   "count": 2,
+   "aliases": {
+    "Income": 1,
+    "incomesourse": 1
+   }
+  },
+  "industry": {
+   "count": 2,
+   "aliases": {
+    "IND": 1,
+    "Industry": 1
+   }
+  },
+  "is_female": {
+   "count": 2,
+   "aliases": {
+    "is.female": 1
+   }
+  },
+  "job_father": {
+   "count": 2,
+   "aliases": {
+    "ANA7_JOB_FA": 1,
+    "Q11_Jobfather": 1
+   }
+  },
+  "job_position": {
+   "count": 2,
+   "aliases": {
+    "Job_Position": 1,
+    "Positions": 1
+   }
+  },
+  "lang": {
+   "count": 2,
+   "aliases": {
+    "Lang": 1,
+    "p02a08": 1
+   }
+  },
+  "lastpage": {
+   "count": 2,
+   "aliases": {
+    "lastpage": 2
+   }
+  },
+  "latino": {
+   "count": 2,
+   "aliases": {
+    "dem_latino": 1,
+    "latino_nonLat": 1
+   }
+  },
+  "learning_type": {
+   "count": 2,
+   "aliases": {
+    "Learning type": 2
+   }
+  },
+  "length_of_service": {
+   "count": 2,
+   "aliases": {
+    "4_length_of_service": 1,
+    "LengthOfService": 1
+   }
+  },
+  "literate": {
+   "count": 2,
+   "aliases": {
+    "p6160": 1,
+    "q13_read_write": 1
+   }
+  },
+  "locale": {
+   "count": 2,
+   "aliases": {
+    "locale": 2
+   }
+  },
+  "mother_age": {
+   "count": 2,
+   "aliases": {
+    "age_M": 1,
+    "mother_demo_2": 1
+   }
+  },
+  "mother_job": {
+   "count": 2,
+   "aliases": {
+    "mamjob": 1,
+    "s job": 1
+   }
+  },
+  "motherlanguage": {
+   "count": 2,
+   "aliases": {
+    "Motherlanguage": 2
+   }
+  },
+  "multilingual": {
+   "count": 2,
+   "aliases": {
+    "Speaksotherlanguage": 2
+   }
+  },
+  "net_monthly_income": {
+   "count": 2,
+   "aliases": {
+    "net_monthly_income": 2
+   }
+  },
+  "news_time": {
+   "count": 2,
+   "aliases": {
+    "t.news": 2
+   }
+  },
+  "num_children": {
+   "count": 2,
+   "aliases": {
+    "ANA8_SONS": 1,
+    "Q15_Number_children": 1
+   }
+  },
+  "origin": {
+   "count": 2,
+   "aliases": {
+    "Origin": 2
+   }
+  },
+  "parent_education": {
+   "count": 2,
+   "aliases": {
+    "@3.您的文化程度": 1,
+    "socio07": 1
+   }
+  },
+  "place_of_living": {
+   "count": 2,
+   "aliases": {
+    "Place of living": 1,
+    "Place_of_living": 1
+   }
+  },
+  "private": {
+   "count": 2,
+   "aliases": {
+    "private": 2
+   }
+  },
+  "program": {
+   "count": 2,
+   "aliases": {
+    "IFSI": 1,
+    "program": 1
+   }
+  },
+  "province": {
+   "count": 2,
+   "aliases": {
+    "Wilaya": 1,
+    "province": 1
+   }
+  },
+  "race_category": {
+   "count": 2,
+   "aliases": {
+    "race categories": 2
+   }
+  },
+  "relationship": {
+   "count": 2,
+   "aliases": {
+    "Relationship": 1,
+    "relationship": 1
+   }
+  },
+  "religiosity": {
+   "count": 2,
+   "aliases": {
+    "ANA13_RELIGIO": 1,
+    "Religios": 1
+   }
+  },
+  "response": {
+   "count": 2,
+   "aliases": {
+    "Response": 1,
+    "Response2": 1
+   }
+  },
+  "risk_group": {
+   "count": 2,
+   "aliases": {
+    "FBCGroups": 1,
+    "Risk1": 1
+   }
+  },
+  "risk_type": {
+   "count": 2,
+   "aliases": {
+    "rityp": 2
+   }
+  },
+  "rows": {
+   "count": 2,
+   "aliases": {
+    "df": 2
+   }
+  },
+  "ses_high": {
+   "count": 2,
+   "aliases": {
+    "s_highses_num": 1,
+    "s_ses_high": 1
+   }
+  },
+  "ses_low": {
+   "count": 2,
+   "aliases": {
+    "s_lowses_num": 1,
+    "s_ses_low": 1
+   }
+  },
+  "ses_med": {
+   "count": 2,
+   "aliases": {
+    "s_medses_num": 1,
+    "s_ses_med": 1
+   }
+  },
+  "setting": {
+   "count": 2,
+   "aliases": {
+    "mode_F": 2
+   }
+  },
+  "sf_pols": {
+   "count": 2,
+   "aliases": {
+    "sf_pols": 1
+   }
+  },
+  "sick": {
+   "count": 2,
+   "aliases": {
+    "Sick": 2
+   }
+  },
+  "sick_leave": {
+   "count": 2,
+   "aliases": {
+    "sick_leave": 2
+   }
+  },
+  "social_net_time": {
+   "count": 2,
+   "aliases": {
+    "t.soc.net": 2
+   }
+  },
+  "sport": {
+   "count": 2,
+   "aliases": {
+    "Sport": 1,
+    "sport": 1
+   }
+  },
+  "startdate": {
+   "count": 2,
+   "aliases": {
+    "cov_startdate_unix": 1,
+    "startdate": 1
+   }
+  },
+  "study_year": {
+   "count": 2,
+   "aliases": {
+    "Study_year": 2
+   }
+  },
+  "subject": {
+   "count": 2,
+   "aliases": {
+    "Subject": 2
+   }
+  },
+  "trans": {
+   "count": 2,
+   "aliases": {
+    "trans": 1,
+    "trans1": 1
+   }
+  },
+  "treat_condition": {
+   "count": 2,
+   "aliases": {
+    "treat2_lawenf": 1,
+    "treat_info": 1
+   }
+  },
+  "trial": {
+   "count": 2,
+   "aliases": {
+    "Trial": 1,
+    "Trial2": 1
+   }
+  },
+  "university": {
+   "count": 2,
+   "aliases": {
+    "University": 2
+   }
+  },
+  "university_type": {
+   "count": 2,
+   "aliases": {
+    "tipouni": 1
+   }
+  },
+  "v7_a": {
+   "count": 2,
+   "aliases": {
+    "V7_A": 2
+   }
+  },
+  "vaccine_status": {
+   "count": 2,
+   "aliases": {
+    "vaccine status": 2
+   }
+  },
+  "voivodeship": {
+   "count": 2,
+   "aliases": {
+    "Voivodeship": 1,
+    "voivodeship": 1
+   }
+  },
+  "vr_frequency": {
+   "count": 2,
+   "aliases": {
+    "VR_frequency": 1,
+    "vr_exp_frequ": 1
+   }
+  },
+  "weekly_hours": {
+   "count": 2,
+   "aliases": {
+    "HoursTotal": 1,
+    "weeklyHours": 1
+   }
+  },
+  "weight_kg": {
+   "count": 2,
+   "aliases": {
+    "@4、您的体重（kg）": 1,
+    "@5. Your weight is (in: kg)": 1
+   }
+  },
+  "work": {
+   "count": 2,
+   "aliases": {
+    "work": 2
+   }
+  },
+  "work_experience": {
+   "count": 2,
+   "aliases": {
+    "Work experience": 1,
+    "Years of working experience in MICE": 1
+   }
+  },
+  "ac": {
+   "count": 1,
+   "aliases": {
+    "AC": 1
+   }
+  },
+  "academic_discipline": {
+   "count": 1,
+   "aliases": {
+    "Academic Disciplines": 1
+   }
+  },
+  "academic_field": {
+   "count": 1,
+   "aliases": {
+    "Q4": 1
+   }
+  },
+  "academic_grades": {
+   "count": 1,
+   "aliases": {
+    "Academic grades": 1
+   }
+  },
+  "academic_performance": {
+   "count": 1,
+   "aliases": {
+    "学习成绩": 1
+   }
+  },
+  "academic_society": {
+   "count": 1,
+   "aliases": {
+    "A11": 1
+   }
+  },
+  "academic_year_group": {
+   "count": 1,
+   "aliases": {
+    "acyear": 1
+   }
+  },
+  "accuracycheck": {
+   "count": 1,
+   "aliases": {
+    "accuracy": 1
+   }
+  },
+  "activity": {
+   "count": 1,
+   "aliases": {
+    "p606": 1
+   }
+  },
+  "add": {
+   "count": 1,
+   "aliases": {
+    "add": 1
+   }
+  },
+  "adult_status_percep": {
+   "count": 1,
+   "aliases": {
+    "adult_Q": 1
+   }
+  },
+  "age_at_injury": {
+   "count": 1,
+   "aliases": {
+    "cov_7": 1
+   }
+  },
+  "age_at_release": {
+   "count": 1,
+   "aliases": {
+    "S99R item 1": 1
+   }
+  },
+  "age_category": {
+   "count": 1,
+   "aliases": {
+    "idade2": 1
+   }
+  },
+  "age_child": {
+   "count": 1,
+   "aliases": {
+    "agechild": 1
+   }
+  },
+  "age_first_job": {
+   "count": 1,
+   "aliases": {
+    "cp1": 1
+   }
+  },
+  "age_gp": {
+   "count": 1,
+   "aliases": {
+    "age_gp": 1
+   }
+  },
+  "age_mother": {
+   "count": 1,
+   "aliases": {
+    "agemother": 1
+   }
+  },
+  "age_rank": {
+   "count": 1,
+   "aliases": {
+    "starank": 1
+   }
+  },
+  "age_w1": {
+   "count": 1,
+   "aliases": {
+    "age_w1": 1
+   }
+  },
+  "age_wave1": {
+   "count": 1,
+   "aliases": {
+    "w1_age": 1
+   }
+  },
+  "age_wave2": {
+   "count": 1,
+   "aliases": {
+    "w2_age": 1
+   }
+  },
+  "age_years": {
+   "count": 1,
+   "aliases": {
+    "Age_yrs": 1
+   }
+  },
+  "agecat": {
+   "count": 1,
+   "aliases": {
+    "agecat": 1
+   }
+  },
+  "aggregate_medical_history": {
+   "count": 1,
+   "aliases": {
+    "Aggregate Medical History": 1
+   }
+  },
+  "agile_experience": {
+   "count": 1,
+   "aliases": {
+    "Agile Experience": 1
+   }
+  },
+  "ai_policy_exists": {
+   "count": 1,
+   "aliases": {
+    "ai_policy_exists": 1
+   }
+  },
+  "aig_version": {
+   "count": 1,
+   "aliases": {
+    "cov_session_id": 1
+   }
+  },
+  "ais_severity": {
+   "count": 1,
+   "aliases": {
+    "cov_9": 1
+   }
+  },
+  "aitype": {
+   "count": 1,
+   "aliases": {
+    "aitype": 1
+   }
+  },
+  "alcdays_past8month": {
+   "count": 1,
+   "aliases": {
+    "ALCDAYS_PAST8MONTH": 1
+   }
+  },
+  "alcohol_drug_treatment": {
+   "count": 1,
+   "aliases": {
+    "ADT": 1
+   }
+  },
+  "anger": {
+   "count": 1,
+   "aliases": {
+    "Anger": 1
+   }
+  },
+  "antibiotics_current_uti": {
+   "count": 1,
+   "aliases": {
+    "antibiotics_currentUTI": 1
+   }
+  },
+  "antibiotics_non_uti": {
+   "count": 1,
+   "aliases": {
+    "antibiotics_nonUTI": 1
+   }
+  },
+  "antibiotics_prevent_uti": {
+   "count": 1,
+   "aliases": {
+    "antibiotics_preventUTI": 1
+   }
+  },
+  "antihunting_avg": {
+   "count": 1,
+   "aliases": {
+    "antihuntingav": 1
+   }
+  },
+  "anxiety_diagnosis": {
+   "count": 1,
+   "aliases": {
+    "Anxiety Diagnosis": 1
+   }
+  },
+  "anxiety_symptoms": {
+   "count": 1,
+   "aliases": {
+    "Anxiety Symptoms": 1
+   }
+  },
+  "arabic_word": {
+   "count": 1,
+   "aliases": {
+    "wordlist_ar_word": 1
+   }
+  },
+  "area": {
+   "count": 1,
+   "aliases": {
+    "Area": 1
+   }
+  },
+  "area_of_study": {
+   "count": 1,
+   "aliases": {
+    "Area_of_study": 1
+   }
+  },
+  "armed_forces_status": {
+   "count": 1,
+   "aliases": {
+    "Q82": 1
+   }
+  },
+  "armed_forces_years": {
+   "count": 1,
+   "aliases": {
+    "Q83": 1
+   }
+  },
+  "asian": {
+   "count": 1,
+   "aliases": {
+    "race_1": 1
+   }
+  },
+  "attchk5e": {
+   "count": 1,
+   "aliases": {
+    "ATTCHK5e": 1
+   }
+  },
+  "attend_school": {
+   "count": 1,
+   "aliases": {
+    "attend_school_base": 1
+   }
+  },
+  "aud_sud_diagnoses": {
+   "count": 1,
+   "aliases": {
+    "AUD_SUD_DIAGNOSES": 1
+   }
+  },
+  "average_high": {
+   "count": 1,
+   "aliases": {
+    "Averagehigh": 1
+   }
+  },
+  "award": {
+   "count": 1,
+   "aliases": {
+    "award": 1
+   }
+  },
+  "ay": {
+   "count": 1,
+   "aliases": {
+    "AY": 1
+   }
+  },
+  "background": {
+   "count": 1,
+   "aliases": {
+    "Background": 1
+   }
+  },
+  "band": {
+   "count": 1,
+   "aliases": {
+    "Name_band": 1
+   }
+  },
+  "bed_time": {
+   "count": 1,
+   "aliases": {
+    "Bed Time": 1
+   }
+  },
+  "best_foreign": {
+   "count": 1,
+   "aliases": {
+    "best_foreign": 1
+   }
+  },
+  "biodiversity": {
+   "count": 1,
+   "aliases": {
+    "Biodiversity": 1
+   }
+  },
+  "birth_cohort": {
+   "count": 1,
+   "aliases": {
+    "Birth Cohort": 1
+   }
+  },
+  "birth_type": {
+   "count": 1,
+   "aliases": {
+    "Naissance": 1
+   }
+  },
+  "birthcity": {
+   "count": 1,
+   "aliases": {
+    "cidadedenascimento": 1
+   }
+  },
+  "birthdate": {
+   "count": 1,
+   "aliases": {
+    "birthdate": 1
+   }
+  },
+  "birthyr": {
+   "count": 1,
+   "aliases": {
+    "birthyr": 1
+   }
+  },
+  "bisexual": {
+   "count": 1,
+   "aliases": {
+    "bisexual": 1
+   }
+  },
+  "blm_support": {
+   "count": 1,
+   "aliases": {
+    "blm_support": 1
+   }
+  },
+  "bmiktg": {
+   "count": 1,
+   "aliases": {
+    "bmiktg": 1
+   }
+  },
+  "born_in_us": {
+   "count": 1,
+   "aliases": {
+    "quest_65a": 1
+   }
+  },
+  "brand": {
+   "count": 1,
+   "aliases": {
+    "Brand": 1
+   }
+  },
+  "breed": {
+   "count": 1,
+   "aliases": {
+    "Breed": 1
+   }
+  },
+  "c6": {
+   "count": 1,
+   "aliases": {
+    "N6": 1
+   }
+  },
+  "c7": {
+   "count": 1,
+   "aliases": {
+    "N7": 1
+   }
+  },
+  "caffeine": {
+   "count": 1,
+   "aliases": {
+    "Caffeine": 1
+   }
+  },
+  "career": {
+   "count": 1,
+   "aliases": {
+    "carrera": 1
+   }
+  },
+  "career_years": {
+   "count": 1,
+   "aliases": {
+    "Career": 1
+   }
+  },
+  "caregiver_gender": {
+   "count": 1,
+   "aliases": {
+    "性别": 1
+   }
+  },
+  "cat_age": {
+   "count": 1,
+   "aliases": {
+    "Cat_age": 1
+   }
+  },
+  "cat_sex": {
+   "count": 1,
+   "aliases": {
+    "Cat_sex": 1
+   }
+  },
+  "catch1": {
+   "count": 1,
+   "aliases": {
+    "Catch1": 1
+   }
+  },
+  "caucasian": {
+   "count": 1,
+   "aliases": {
+    "caucasian": 1
+   }
+  },
+  "certification_type": {
+   "count": 1,
+   "aliases": {
+    "A8-1": 1
+   }
+  },
+  "certified_nurse": {
+   "count": 1,
+   "aliases": {
+    "A8": 1
+   }
+  },
+  "ces": {
+   "count": 1,
+   "aliases": {
+    "CES": 1
+   }
+  },
+  "cexpect_financial_support": {
+   "count": 1,
+   "aliases": {
+    "cfinsupport": 1
+   }
+  },
+  "cgender": {
+   "count": 1,
+   "aliases": {
+    "cgender": 1
+   }
+  },
+  "chandle_money": {
+   "count": 1,
+   "aliases": {
+    "chandlemon": 1
+   }
+  },
+  "check_mc": {
+   "count": 1,
+   "aliases": {
+    "mc": 1
+   }
+  },
+  "check_mc1": {
+   "count": 1,
+   "aliases": {
+    "mc1": 1
+   }
+  },
+  "check_mc2": {
+   "count": 1,
+   "aliases": {
+    "mc2": 1
+   }
+  },
+  "check_mindset": {
+   "count": 1,
+   "aliases": {
+    "manichck": 1
+   }
+  },
+  "check_raw1": {
+   "count": 1,
+   "aliases": {
+    "Q5_2_1": 1
+   }
+  },
+  "check_raw2": {
+   "count": 1,
+   "aliases": {
+    "Q5_3_1": 1
+   }
+  },
+  "check_raw3": {
+   "count": 1,
+   "aliases": {
+    "Q106_1": 1
+   }
+  },
+  "check_raw4": {
+   "count": 1,
+   "aliases": {
+    "Q107_1": 1
+   }
+  },
+  "chemotherapy_history": {
+   "count": 1,
+   "aliases": {
+    "chem": 1
+   }
+  },
+  "child_disability": {
+   "count": 1,
+   "aliases": {
+    "disabilities_focalchild": 1
+   }
+  },
+  "child_ethnicity": {
+   "count": 1,
+   "aliases": {
+    "ChildEthnicity": 1
+   }
+  },
+  "child_female": {
+   "count": 1,
+   "aliases": {
+    "female": 1
+   }
+  },
+  "childhood_state": {
+   "count": 1,
+   "aliases": {
+    "place": 1
+   }
+  },
+  "children_details": {
+   "count": 1,
+   "aliases": {
+    "Nome completo e idade do(s) seu(s) filho(s)": 1
+   }
+  },
+  "chpc": {
+   "count": 1,
+   "aliases": {
+    "CHPC": 1
+   }
+  },
+  "chronic_condition": {
+   "count": 1,
+   "aliases": {
+    "socio22": 1
+   }
+  },
+  "chronic_condition_group": {
+   "count": 1,
+   "aliases": {
+    "CHRONIC2": 1
+   }
+  },
+  "cismen": {
+   "count": 1,
+   "aliases": {
+    "cismen": 1
+   }
+  },
+  "city_tier": {
+   "count": 1,
+   "aliases": {
+    "City tier": 1
+   }
+  },
+  "ckd_stage": {
+   "count": 1,
+   "aliases": {
+    "CKDStage": 1
+   }
+  },
+  "cl_posting": {
+   "count": 1,
+   "aliases": {
+    "CL_posting": 1
+   }
+  },
+  "class_id": {
+   "count": 1,
+   "aliases": {
+    "class_id": 1
+   }
+  },
+  "class_level": {
+   "count": 1,
+   "aliases": {
+    "ClassL": 1
+   }
+  },
+  "class_year": {
+   "count": 1,
+   "aliases": {
+    "q3": 1
+   }
+  },
+  "classmate_disability": {
+   "count": 1,
+   "aliases": {
+    "ANA20_DISAB_MATE": 1
+   }
+  },
+  "classmate_disability_yn": {
+   "count": 1,
+   "aliases": {
+    "ANA20BIS_DISAB_SINO": 1
+   }
+  },
+  "classroom_integration": {
+   "count": 1,
+   "aliases": {
+    "ANA19_INTEGR": 1
+   }
+  },
+  "clinical_stage": {
+   "count": 1,
+   "aliases": {
+    "clinical_year": 1
+   }
+  },
+  "cog_impair": {
+   "count": 1,
+   "aliases": {
+    "scognimpar": 1
+   }
+  },
+  "cohort": {
+   "count": 1,
+   "aliases": {
+    "cohort": 1
+   }
+  },
+  "coldpressor": {
+   "count": 1,
+   "aliases": {
+    "ColdPressor": 1
+   }
+  },
+  "collection_mode": {
+   "count": 1,
+   "aliases": {
+    "Data collection mode": 1
+   }
+  },
+  "cols_renamed": {
+   "count": 1,
+   "aliases": {
+    "cov_cols.rename": 1
+   }
+  },
+  "communication_competency": {
+   "count": 1,
+   "aliases": {
+    "communication_competency": 1
+   }
+  },
+  "commute_leave_time": {
+   "count": 1,
+   "aliases": {
+    "commute_leave_time": 1
+   }
+  },
+  "commute_miles": {
+   "count": 1,
+   "aliases": {
+    "commute_miles": 1
+   }
+  },
+  "company_size_group": {
+   "count": 1,
+   "aliases": {
+    "Companies": 1
+   }
+  },
+  "conced": {
+   "count": 1,
+   "aliases": {
+    "conced": 1
+   }
+  },
+  "concussion_history": {
+   "count": 1,
+   "aliases": {
+    "Concussion History": 1
+   }
+  },
+  "concussion_number": {
+   "count": 1,
+   "aliases": {
+    "Concussion Number": 1
+   }
+  },
+  "condition_coat": {
+   "count": 1,
+   "aliases": {
+    "condcoat": 1
+   }
+  },
+  "condition_empathy": {
+   "count": 1,
+   "aliases": {
+    "condemp": 1
+   }
+  },
+  "condition_num": {
+   "count": 1,
+   "aliases": {
+    "condition": 1
+   }
+  },
+  "condnum": {
+   "count": 1,
+   "aliases": {
+    "condnum": 1
+   }
+  },
+  "confidence": {
+   "count": 1,
+   "aliases": {
+    "Confidence": 1
+   }
+  },
+  "confidence_future": {
+   "count": 1,
+   "aliases": {
+    "Confidence in future development": 1
+   }
+  },
+  "continent": {
+   "count": 1,
+   "aliases": {
+    "COUNTRY_CONT": 1
+   }
+  },
+  "contingent": {
+   "count": 1,
+   "aliases": {
+    "contingent": 1
+   }
+  },
+  "corranswer": {
+   "count": 1,
+   "aliases": {
+    "corrAnswer": 1
+   }
+  },
+  "country_language": {
+   "count": 1,
+   "aliases": {
+    "country_language": 1
+   }
+  },
+  "country_of_birth": {
+   "count": 1,
+   "aliases": {
+    "Country of Birth": 1
+   }
+  },
+  "country_of_origin": {
+   "count": 1,
+   "aliases": {
+    "quest_65b": 1
+   }
+  },
+  "country_of_residence": {
+   "count": 1,
+   "aliases": {
+    "Current Country of Residence": 1
+   }
+  },
+  "country_of_schooling": {
+   "count": 1,
+   "aliases": {
+    "quest_69": 1
+   }
+  },
+  "country_origin": {
+   "count": 1,
+   "aliases": {
+    "ANA9_COUNTRY_OR": 1
+   }
+  },
+  "country_residence": {
+   "count": 1,
+   "aliases": {
+    "ANA10_COUNTRY_RE": 1
+   }
+  },
+  "countryofbirth": {
+   "count": 1,
+   "aliases": {
+    "Country.of.birth": 1
+   }
+  },
+  "countryofresidence": {
+   "count": 1,
+   "aliases": {
+    "Country.of.residence": 1
+   }
+  },
+  "county": {
+   "count": 1,
+   "aliases": {
+    "county": 1
+   }
+  },
+  "covid": {
+   "count": 1,
+   "aliases": {
+    "COVID": 1
+   }
+  },
+  "covid_concern": {
+   "count": 1,
+   "aliases": {
+    "COVIDconcern": 1
+   }
+  },
+  "covid_test": {
+   "count": 1,
+   "aliases": {
+    "COV19Test": 1
+   }
+  },
+  "covid_training": {
+   "count": 1,
+   "aliases": {
+    "COVID19Training": 1
+   }
+  },
+  "covid_wp_guidance": {
+   "count": 1,
+   "aliases": {
+    "COVID19WPGuidance": 1
+   }
+  },
+  "cpay_bils": {
+   "count": 1,
+   "aliases": {
+    "cpaybills": 1
+   }
+  },
+  "cpcd": {
+   "count": 1,
+   "aliases": {
+    "CPCD": 1
+   }
+  },
+  "csection_type": {
+   "count": 1,
+   "aliases": {
+    "TypeOfCsection": 1
+   }
+  },
+  "cum_gpa": {
+   "count": 1,
+   "aliases": {
+    "StudySemester_cumGPA": 1
+   }
+  },
+  "curiosity": {
+   "count": 1,
+   "aliases": {
+    "Curiosity": 1
+   }
+  },
+  "current_country": {
+   "count": 1,
+   "aliases": {
+    "Q81": 1
+   }
+  },
+  "currently_employed": {
+   "count": 1,
+   "aliases": {
+    "Currently employed": 1
+   }
+  },
+  "days_admission_to_pdat": {
+   "count": 1,
+   "aliases": {
+    "Days.between.admission.and.PDAT": 1
+   }
+  },
+  "days_pdat_to_48h_request": {
+   "count": 1,
+   "aliases": {
+    "Days.between.PDAT.and.48.hour.request": 1
+   }
+  },
+  "days_pdat_to_anticraving": {
+   "count": 1,
+   "aliases": {
+    "Days.between.PDAT.and.anticraving.medication": 1
+   }
+  },
+  "days_pdat_to_discharge": {
+   "count": 1,
+   "aliases": {
+    "Days.between.PDAT.and.discharge": 1
+   }
+  },
+  "days_per_week": {
+   "count": 1,
+   "aliases": {
+    "Daysperweek": 1
+   }
+  },
+  "degree_level": {
+   "count": 1,
+   "aliases": {
+    "N4": 1
+   }
+  },
+  "democrat": {
+   "count": 1,
+   "aliases": {
+    "democrat": 1
+   }
+  },
+  "democratclick": {
+   "count": 1,
+   "aliases": {
+    "democratclick": 1
+   }
+  },
+  "denomination": {
+   "count": 1,
+   "aliases": {
+    "Q2": 1
+   }
+  },
+  "department_detail": {
+   "count": 1,
+   "aliases": {
+    "A5-1": 1
+   }
+  },
+  "depend_renda": {
+   "count": 1,
+   "aliases": {
+    "depend_renda": 1
+   }
+  },
+  "depression_diagnosis": {
+   "count": 1,
+   "aliases": {
+    "Depression Diagnosis": 1
+   }
+  },
+  "depression_severity": {
+   "count": 1,
+   "aliases": {
+    "severity.depression.online": 1
+   }
+  },
+  "diabetes_years": {
+   "count": 1,
+   "aliases": {
+    "DB_year": 1
+   }
+  },
+  "diagnosis": {
+   "count": 1,
+   "aliases": {
+    "diagnosis": 1
+   }
+  },
+  "diagnosis_group": {
+   "count": 1,
+   "aliases": {
+    "NOPD_OTHERPD_NPD": 1
+   }
+  },
+  "diagnostico_de_covid": {
+   "count": 1,
+   "aliases": {
+    "diagnostico_de_covid": 1
+   }
+  },
+  "diet_pattern": {
+   "count": 1,
+   "aliases": {
+    "dietarypattern": 1
+   }
+  },
+  "digital_center": {
+   "count": 1,
+   "aliases": {
+    "PDC": 1
+   }
+  },
+  "disability": {
+   "count": 1,
+   "aliases": {
+    "disability": 1
+   }
+  },
+  "disability_degree": {
+   "count": 1,
+   "aliases": {
+    "disability_degree": 1
+   }
+  },
+  "disability_family": {
+   "count": 1,
+   "aliases": {
+    "ANA15_DISAB_FAM": 1
+   }
+  },
+  "disability_friend": {
+   "count": 1,
+   "aliases": {
+    "ANA16_DISAB_FRI": 1
+   }
+  },
+  "disability_self": {
+   "count": 1,
+   "aliases": {
+    "ANA14_DISABILITY": 1
+   }
+  },
+  "disciplinary_history": {
+   "count": 1,
+   "aliases": {
+    "Disciplinary": 1
+   }
+  },
+  "disease_duration": {
+   "count": 1,
+   "aliases": {
+    "long": 1
+   }
+  },
+  "display": {
+   "count": 1,
+   "aliases": {
+    "display": 1
+   }
+  },
+  "disruptions": {
+   "count": 1,
+   "aliases": {
+    "Disruptions": 1
+   }
+  },
+  "district": {
+   "count": 1,
+   "aliases": {
+    "District": 1
+   }
+  },
+  "donate_hours": {
+   "count": 1,
+   "aliases": {
+    "o2c_donate_hours_KLPS": 1
+   }
+  },
+  "donate_money": {
+   "count": 1,
+   "aliases": {
+    "o2d_donate_money_KLPS": 1
+   }
+  },
+  "draw": {
+   "count": 1,
+   "aliases": {
+    "draw": 1
+   }
+  },
+  "drinking": {
+   "count": 1,
+   "aliases": {
+    "Drinking": 1
+   }
+  },
+  "drugdays_past8month": {
+   "count": 1,
+   "aliases": {
+    "DRUGDAYS_PAST8MONTH": 1
+   }
+  },
+  "dur_worklife": {
+   "count": 1,
+   "aliases": {
+    "durWorklife": 1
+   }
+  },
+  "duration": {
+   "count": 1,
+   "aliases": {
+    "duration": 1
+   }
+  },
+  "duty_hour_group": {
+   "count": 1,
+   "aliases": {
+    "duty_hour": 1
+   }
+  },
+  "duty_place": {
+   "count": 1,
+   "aliases": {
+    "duty_place": 1
+   }
+  },
+  "duty_type": {
+   "count": 1,
+   "aliases": {
+    "dut_type": 1
+   }
+  },
+  "ea": {
+   "count": 1,
+   "aliases": {
+    "df1": 1
+   }
+  },
+  "ea_child_order": {
+   "count": 1,
+   "aliases": {
+    "EmpEA.Child.Version": 1
+   }
+  },
+  "ea_self_order": {
+   "count": 1,
+   "aliases": {
+    "EmpEA.Self.Version": 1
+   }
+  },
+  "east_region": {
+   "count": 1,
+   "aliases": {
+    "Is it the east": 1
+   }
+  },
+  "ecommerce_experience": {
+   "count": 1,
+   "aliases": {
+    "Your social e-commerce Purchase experience is?": 1
+   }
+  },
+  "econ_background": {
+   "count": 1,
+   "aliases": {
+    "Econ": 1
+   }
+  },
+  "economic": {
+   "count": 1,
+   "aliases": {
+    "Economic": 1
+   }
+  },
+  "economic_integration": {
+   "count": 1,
+   "aliases": {
+    "Economic integration": 1
+   }
+  },
+  "edad": {
+   "count": 1,
+   "aliases": {
+    "edad": 1
+   }
+  },
+  "education_area": {
+   "count": 1,
+   "aliases": {
+    "Q6_Education_area": 1
+   }
+  },
+  "education_dih": {
+   "count": 1,
+   "aliases": {
+    "izobrazbadih": 1
+   }
+  },
+  "education_heterogeneity": {
+   "count": 1,
+   "aliases": {
+    "Heterogeneity of Educational Level": 1
+   }
+  },
+  "education_mother": {
+   "count": 1,
+   "aliases": {
+    "Q14_MotherEducation": 1
+   }
+  },
+  "education_partner": {
+   "count": 1,
+   "aliases": {
+    "ANA5BIS_EDUCAT_PA": 1
+   }
+  },
+  "education_rec": {
+   "count": 1,
+   "aliases": {
+    "education_rec": 1
+   }
+  },
+  "education_respondent": {
+   "count": 1,
+   "aliases": {
+    "ANA4_EDUCAT_RE": 1
+   }
+  },
+  "educational": {
+   "count": 1,
+   "aliases": {
+    "neducativo": 1
+   }
+  },
+  "educational_stage": {
+   "count": 1,
+   "aliases": {
+    "Educational Stage": 1
+   }
+  },
+  "educators": {
+   "count": 1,
+   "aliases": {
+    "Educators": 1
+   }
+  },
+  "efa_cfa": {
+   "count": 1,
+   "aliases": {
+    "efa_cfa": 1
+   }
+  },
+  "egeface_group": {
+   "count": 1,
+   "aliases": {
+    "EGEFACE_Group": 1
+   }
+  },
+  "employed": {
+   "count": 1,
+   "aliases": {
+    "cov_5": 1
+   }
+  },
+  "employed_full_time": {
+   "count": 1,
+   "aliases": {
+    "Employed_full_time": 1
+   }
+  },
+  "employed_part_time": {
+   "count": 1,
+   "aliases": {
+    "Employed_Part_time": 1
+   }
+  },
+  "employer_type": {
+   "count": 1,
+   "aliases": {
+    "HSE": 1
+   }
+  },
+  "employment_type": {
+   "count": 1,
+   "aliases": {
+    "Emplo_type": 1
+   }
+  },
+  "enddate_stata": {
+   "count": 1,
+   "aliases": {
+    "clock": 1
+   }
+  },
+  "english_fluency": {
+   "count": 1,
+   "aliases": {
+    "English": 1
+   }
+  },
+  "english_ielts": {
+   "count": 1,
+   "aliases": {
+    "English Proficiency(IELTS)": 1
+   }
+  },
+  "english_level": {
+   "count": 1,
+   "aliases": {
+    "E_L": 1
+   }
+  },
+  "entrance_score": {
+   "count": 1,
+   "aliases": {
+    "University entrance average score is": 1
+   }
+  },
+  "environment": {
+   "count": 1,
+   "aliases": {
+    "environment": 1
+   }
+  },
+  "equality": {
+   "count": 1,
+   "aliases": {
+    "equality": 1
+   }
+  },
+  "esc": {
+   "count": 1,
+   "aliases": {
+    "ESC": 1
+   }
+  },
+  "escolaridade": {
+   "count": 1,
+   "aliases": {
+    "escolaridade": 1
+   }
+  },
+  "estado_civil": {
+   "count": 1,
+   "aliases": {
+    "estado_civil": 1
+   }
+  },
+  "eth": {
+   "count": 1,
+   "aliases": {
+    "ethnicitysimplified": 1
+   }
+  },
+  "ethnicity_gen": {
+   "count": 1,
+   "aliases": {
+    "ethnicity_gen": 1
+   }
+  },
+  "ethnicity_self": {
+   "count": 1,
+   "aliases": {
+    "q7": 1
+   }
+  },
+  "ever_attend_school": {
+   "count": 1,
+   "aliases": {
+    "ever_school_base": 1
+   }
+  },
+  "exclusion_flag": {
+   "count": 1,
+   "aliases": {
+    "excl": 1
+   }
+  },
+  "exercise": {
+   "count": 1,
+   "aliases": {
+    "Exercise": 1
+   }
+  },
+  "exercise_freq": {
+   "count": 1,
+   "aliases": {
+    "Weekly exercise frequency": 1
+   }
+  },
+  "exp_id": {
+   "count": 1,
+   "aliases": {
+    "exp_id": 1
+   }
+  },
+  "expect_financial_support": {
+   "count": 1,
+   "aliases": {
+    "sfinsupport": 1
+   }
+  },
+  "experience_smart_devices": {
+   "count": 1,
+   "aliases": {
+    "Experience with \\nsmart fitness devices": 1
+   }
+  },
+  "expertise_years": {
+   "count": 1,
+   "aliases": {
+    "expertise_years": 1
+   }
+  },
+  "face_to_face_sessions": {
+   "count": 1,
+   "aliases": {
+    "face2face": 1
+   }
+  },
+  "facility_category": {
+   "count": 1,
+   "aliases": {
+    "categoria": 1
+   }
+  },
+  "facility_certification": {
+   "count": 1,
+   "aliases": {
+    "A2": 1
+   }
+  },
+  "family": {
+   "count": 1,
+   "aliases": {
+    "lp": 1
+   }
+  },
+  "family_complete": {
+   "count": 1,
+   "aliases": {
+    "family_complete": 1
+   }
+  },
+  "family_configuration": {
+   "count": 1,
+   "aliases": {
+    "3. Configuração familiar": 1
+   }
+  },
+  "family_economic_situation": {
+   "count": 1,
+   "aliases": {
+    "Family Economic Situation": 1
+   }
+  },
+  "family_economic_status": {
+   "count": 1,
+   "aliases": {
+    "Familyeconomic": 1
+   }
+  },
+  "family_history": {
+   "count": 1,
+   "aliases": {
+    "Family_history": 1
+   }
+  },
+  "family_member": {
+   "count": 1,
+   "aliases": {
+    "2. Membro da família": 1
+   }
+  },
+  "family_phobia": {
+   "count": 1,
+   "aliases": {
+    "Q17_Fobia_family": 1
+   }
+  },
+  "family_status": {
+   "count": 1,
+   "aliases": {
+    "famst": 1
+   }
+  },
+  "faminc": {
+   "count": 1,
+   "aliases": {
+    "faminc_new": 1
+   }
+  },
+  "father_age": {
+   "count": 1,
+   "aliases": {
+    "age_F": 1
+   }
+  },
+  "father_education_years": {
+   "count": 1,
+   "aliases": {
+    "f_ed_yr": 1
+   }
+  },
+  "father_working_status": {
+   "count": 1,
+   "aliases": {
+    "working_status_F": 1
+   }
+  },
+  "favors_gifts_log": {
+   "count": 1,
+   "aliases": {
+    "Favors and gifts(logarithm)": 1
+   }
+  },
+  "feminism": {
+   "count": 1,
+   "aliases": {
+    "feminism": 1
+   }
+  },
+  "field_cnpq": {
+   "count": 1,
+   "aliases": {
+    "areadocnpq": 1
+   }
+  },
+  "field_study": {
+   "count": 1,
+   "aliases": {
+    "cursodegraduação": 1
+   }
+  },
+  "financial_sufficiency": {
+   "count": 1,
+   "aliases": {
+    "fin_suf": 1
+   }
+  },
+  "financially_stable": {
+   "count": 1,
+   "aliases": {
+    "financially.stable2": 1
+   }
+  },
+  "finger": {
+   "count": 1,
+   "aliases": {
+    "finger": 1
+   }
+  },
+  "firm": {
+   "count": 1,
+   "aliases": {
+    "FIRM": 1
+   }
+  },
+  "firm_type": {
+   "count": 1,
+   "aliases": {
+    "Type": 1
+   }
+  },
+  "first_degree": {
+   "count": 1,
+   "aliases": {
+    "MBChB_first_degree": 1
+   }
+  },
+  "first_health_info_source": {
+   "count": 1,
+   "aliases": {
+    "firstsource": 1
+   }
+  },
+  "first_language": {
+   "count": 1,
+   "aliases": {
+    "First Language": 1
+   }
+  },
+  "first_langugage": {
+   "count": 1,
+   "aliases": {
+    "first_language": 1
+   }
+  },
+  "first_task": {
+   "count": 1,
+   "aliases": {
+    "First task": 1
+   }
+  },
+  "flying_phobic_group": {
+   "count": 1,
+   "aliases": {
+    "VAR00001": 1
+   }
+  },
+  "fne_score": {
+   "count": 1,
+   "aliases": {
+    "FNE_SCORE": 1
+   }
+  },
+  "fne_sum": {
+   "count": 1,
+   "aliases": {
+    "FNE_sum": 1
+   }
+  },
+  "fobcode": {
+   "count": 1,
+   "aliases": {
+    "fobcode": 1
+   }
+  },
+  "fobgender": {
+   "count": 1,
+   "aliases": {
+    "fobgender": 1
+   }
+  },
+  "followed_account": {
+   "count": 1,
+   "aliases": {
+    "Have watched or followed such accouts": 1
+   }
+  },
+  "form": {
+   "count": 1,
+   "aliases": {
+    "Tingkatan": 1
+   }
+  },
+  "format_1on1": {
+   "count": 1,
+   "aliases": {
+    "1on1": 1
+   }
+  },
+  "format_clinic": {
+   "count": 1,
+   "aliases": {
+    "Klinik": 1
+   }
+  },
+  "format_lecture": {
+   "count": 1,
+   "aliases": {
+    "Vorlesung": 1
+   }
+  },
+  "format_online": {
+   "count": 1,
+   "aliases": {
+    "Online": 1
+   }
+  },
+  "format_practicum": {
+   "count": 1,
+   "aliases": {
+    "Praktikum": 1
+   }
+  },
+  "format_seminar": {
+   "count": 1,
+   "aliases": {
+    "Seminar": 1
+   }
+  },
+  "frequency": {
+   "count": 1,
+   "aliases": {
+    "wordlist_relative_frequency": 1
+   }
+  },
+  "gagebrth": {
+   "count": 1,
+   "aliases": {
+    "gagebrth": 1
+   }
+  },
+  "gai_duration": {
+   "count": 1,
+   "aliases": {
+    "Q2": 1
+   }
+  },
+  "gaming_prevalence": {
+   "count": 1,
+   "aliases": {
+    "gaming_prevalence": 1
+   }
+  },
+  "gang": {
+   "count": 1,
+   "aliases": {
+    "Name_gang": 1
+   }
+  },
+  "gay": {
+   "count": 1,
+   "aliases": {
+    "gay": 1
+   }
+  },
+  "gen": {
+   "count": 1,
+   "aliases": {
+    "gen": 1
+   }
+  },
+  "gender_male": {
+   "count": 1,
+   "aliases": {
+    "Gender(Male_1)": 1
+   }
+  },
+  "gender_rec": {
+   "count": 1,
+   "aliases": {
+    "gender_rec": 1
+   }
+  },
+  "generation_status": {
+   "count": 1,
+   "aliases": {
+    "gen.stat2": 1
+   }
+  },
+  "genetics_experience": {
+   "count": 1,
+   "aliases": {
+    "Experience": 1
+   }
+  },
+  "gestational_age": {
+   "count": 1,
+   "aliases": {
+    "GA": 1
+   }
+  },
+  "goal_differ": {
+   "count": 1,
+   "aliases": {
+    "goal_differ": 1
+   }
+  },
+  "going_school": {
+   "count": 1,
+   "aliases": {
+    "Q8_Going_school": 1
+   }
+  },
+  "gpa": {
+   "count": 1,
+   "aliases": {
+    "GPA": 1
+   }
+  },
+  "grade_year": {
+   "count": 1,
+   "aliases": {
+    "Leerjaar": 1
+   }
+  },
+  "graph_condition": {
+   "count": 1,
+   "aliases": {
+    "condition": 1
+   }
+  },
+  "group_vs_single": {
+   "count": 1,
+   "aliases": {
+    "GroupVSsingle1single2group": 1
+   }
+  },
+  "group_young_vs_older": {
+   "count": 1,
+   "aliases": {
+    "grpYvsO": 1
+   }
+  },
+  "grupo": {
+   "count": 1,
+   "aliases": {
+    "Grupo": 1
+   }
+  },
+  "grupo_de_risco": {
+   "count": 1,
+   "aliases": {
+    "grupo_de_risco": 1
+   }
+  },
+  "handedness_rec": {
+   "count": 1,
+   "aliases": {
+    "handedness_rec": 1
+   }
+  },
+  "has_children": {
+   "count": 1,
+   "aliases": {
+    "chi_yn": 1
+   }
+  },
+  "hdi": {
+   "count": 1,
+   "aliases": {
+    "human_development_index": 1
+   }
+  },
+  "headphone": {
+   "count": 1,
+   "aliases": {
+    "demographics.headphones": 1
+   }
+  },
+  "health_sector": {
+   "count": 1,
+   "aliases": {
+    "Kindly indicate the health sector you currently work at\\n": 1
+   }
+  },
+  "health_status": {
+   "count": 1,
+   "aliases": {
+    "healthstatus": 1
+   }
+  },
+  "health_training": {
+   "count": 1,
+   "aliases": {
+    "Formaciónsanitaria": 1
+   }
+  },
+  "healthlitsubj": {
+   "count": 1,
+   "aliases": {
+    "healthlitsubj": 1
+   }
+  },
+  "healthstatus": {
+   "count": 1,
+   "aliases": {
+    "healthstatus": 1
+   }
+  },
+  "hh_age": {
+   "count": 1,
+   "aliases": {
+    "bsln_cntr_h_head_age": 1
+   }
+  },
+  "hh_male": {
+   "count": 1,
+   "aliases": {
+    "bsln_head_sex": 1
+   }
+  },
+  "hh_size": {
+   "count": 1,
+   "aliases": {
+    "hh_size": 1
+   }
+  },
+  "hhie_score": {
+   "count": 1,
+   "aliases": {
+    "hhie_score": 1
+   }
+  },
+  "hi": {
+   "count": 1,
+   "aliases": {
+    "demographics.hearingImpariments": 1
+   }
+  },
+  "high_school_age": {
+   "count": 1,
+   "aliases": {
+    "18.4": 1
+   }
+  },
+  "higheducation": {
+   "count": 1,
+   "aliases": {
+    "higheducation": 1
+   }
+  },
+  "highest_degree": {
+   "count": 1,
+   "aliases": {
+    "highest_degree": 1
+   }
+  },
+  "home_location": {
+   "count": 1,
+   "aliases": {
+    "HomeLocation": 1
+   }
+  },
+  "homelang_english": {
+   "count": 1,
+   "aliases": {
+    "s_homelang_english": 1
+   }
+  },
+  "hostility": {
+   "count": 1,
+   "aliases": {
+    "Hostility": 1
+   }
+  },
+  "hotel_discipline": {
+   "count": 1,
+   "aliases": {
+    "hotel": 1
+   }
+  },
+  "hours_internet_use": {
+   "count": 1,
+   "aliases": {
+    "Hours of internet use": 1
+   }
+  },
+  "hours_playing_game": {
+   "count": 1,
+   "aliases": {
+    "Hours of playing game": 1
+   }
+  },
+  "household_expenditure_log": {
+   "count": 1,
+   "aliases": {
+    "Annual household expenditure (logarithm)": 1
+   }
+  },
+  "household_income": {
+   "count": 1,
+   "aliases": {
+    "Household_Income": 1
+   }
+  },
+  "household_income_log": {
+   "count": 1,
+   "aliases": {
+    "Annual household income (logarithm)": 1
+   }
+  },
+  "household_size": {
+   "count": 1,
+   "aliases": {
+    "hhsize": 1
+   }
+  },
+  "housing": {
+   "count": 1,
+   "aliases": {
+    "housing_d": 1
+   }
+  },
+  "how_fear": {
+   "count": 1,
+   "aliases": {
+    "Q18_how_fear": 1
+   }
+  },
+  "hs_in_stl": {
+   "count": 1,
+   "aliases": {
+    "quest_70": 1
+   }
+  },
+  "hs_name": {
+   "count": 1,
+   "aliases": {
+    "quest_70a": 1
+   }
+  },
+  "hs_name_clean": {
+   "count": 1,
+   "aliases": {
+    "quest_70a_clean": 1
+   }
+  },
+  "hukou": {
+   "count": 1,
+   "aliases": {
+    "@2.您的户口所在地": 1
+   }
+  },
+  "ic": {
+   "count": 1,
+   "aliases": {
+    "ic": 1
+   }
+  },
+  "idade": {
+   "count": 1,
+   "aliases": {
+    "idade": 1
+   }
+  },
+  "identified": {
+   "count": 1,
+   "aliases": {
+    "identified1unidentified2identified": 1
+   }
+  },
+  "ideo_rating": {
+   "count": 1,
+   "aliases": {
+    "ideo_rating": 1
+   }
+  },
+  "ideoextreme": {
+   "count": 1,
+   "aliases": {
+    "ideoextreme": 1
+   }
+  },
+  "ideology_distance": {
+   "count": 1,
+   "aliases": {
+    "distance": 1
+   }
+  },
+  "ielts_writing": {
+   "count": 1,
+   "aliases": {
+    "ielts_writing": 1
+   }
+  },
+  "iep": {
+   "count": 1,
+   "aliases": {
+    "s_iep": 1
+   }
+  },
+  "illness_count": {
+   "count": 1,
+   "aliases": {
+    "illness": 1
+   }
+  },
+  "income_band": {
+   "count": 1,
+   "aliases": {
+    "Your Monthly income is?": 1
+   }
+  },
+  "income_usd": {
+   "count": 1,
+   "aliases": {
+    "DEM_INCOME_USD": 1
+   }
+  },
+  "independent": {
+   "count": 1,
+   "aliases": {
+    "independent": 1
+   }
+  },
+  "individualism": {
+   "count": 1,
+   "aliases": {
+    "national_individualism": 1
+   }
+  },
+  "infancy": {
+   "count": 1,
+   "aliases": {
+    "18.1": 1
+   }
+  },
+  "information": {
+   "count": 1,
+   "aliases": {
+    "information": 1
+   }
+  },
+  "information_acquisition": {
+   "count": 1,
+   "aliases": {
+    "Information acquisition": 1
+   }
+  },
+  "injuries": {
+   "count": 1,
+   "aliases": {
+    "Injuries": 1
+   }
+  },
+  "injury_cause": {
+   "count": 1,
+   "aliases": {
+    "cov_12": 1
+   }
+  },
+  "injury_duration": {
+   "count": 1,
+   "aliases": {
+    "cov_6": 1
+   }
+  },
+  "injury_level": {
+   "count": 1,
+   "aliases": {
+    "cov_10": 1
+   }
+  },
+  "injury_state": {
+   "count": 1,
+   "aliases": {
+    "cov_13": 1
+   }
+  },
+  "injury_type": {
+   "count": 1,
+   "aliases": {
+    "cov_8": 1
+   }
+  },
+  "injustice": {
+   "count": 1,
+   "aliases": {
+    "injustice": 1
+   }
+  },
+  "insulin_injection": {
+   "count": 1,
+   "aliases": {
+    "injection": 1
+   }
+  },
+  "integrity_check": {
+   "count": 1,
+   "aliases": {
+    "integrity": 1
+   }
+  },
+  "intellectual_disability": {
+   "count": 1,
+   "aliases": {
+    "Intellectual disability": 1
+   }
+  },
+  "interaction": {
+   "count": 1,
+   "aliases": {
+    "interaction": 1
+   }
+  },
+  "interaction_term": {
+   "count": 1,
+   "aliases": {
+    "polidxcondition": 1
+   }
+  },
+  "interaction_type": {
+   "count": 1,
+   "aliases": {
+    "Type of interaction": 1
+   }
+  },
+  "intercultural_training": {
+   "count": 1,
+   "aliases": {
+    "Intercultural Training(1=yes, 2=no)": 1
+   }
+  },
+  "interest": {
+   "count": 1,
+   "aliases": {
+    "Interest": 1
+   }
+  },
+  "interest_in_health": {
+   "count": 1,
+   "aliases": {
+    "interestinhealth": 1
+   }
+  },
+  "internet_holiday": {
+   "count": 1,
+   "aliases": {
+    "Intvac": 1
+   }
+  },
+  "internet_schoolday": {
+   "count": 1,
+   "aliases": {
+    "Intsch": 1
+   }
+  },
+  "interviewed": {
+   "count": 1,
+   "aliases": {
+    "Interviewed": 1
+   }
+  },
+  "item_order": {
+   "count": 1,
+   "aliases": {
+    "FTD-SS Item Order": 1
+   }
+  },
+  "items": {
+   "count": 1,
+   "aliases": {
+    "set": 1
+   }
+  },
+  "job_mother": {
+   "count": 1,
+   "aliases": {
+    "Q12_Jobmother": 1
+   }
+  },
+  "job_respondent": {
+   "count": 1,
+   "aliases": {
+    "ANA6_JOB_RE": 1
+   }
+  },
+  "job_satisfaction": {
+   "count": 1,
+   "aliases": {
+    "Satisfied": 1
+   }
+  },
+  "job_type": {
+   "count": 1,
+   "aliases": {
+    "Q19": 1
+   }
+  },
+  "kid": {
+   "count": 1,
+   "aliases": {
+    "kid": 1
+   }
+  },
+  "kldb": {
+   "count": 1,
+   "aliases": {
+    "kldb": 1
+   }
+  },
+  "knee": {
+   "count": 1,
+   "aliases": {
+    "Knee": 1
+   }
+  },
+  "labor_contract": {
+   "count": 1,
+   "aliases": {
+    "labor contract": 1
+   }
+  },
+  "language_code": {
+   "count": 1,
+   "aliases": {
+    "Lang": 1
+   }
+  },
+  "law_enforce_contact": {
+   "count": 1,
+   "aliases": {
+    "dem_lawenf": 1
+   }
+  },
+  "lawsuit_history": {
+   "count": 1,
+   "aliases": {
+    "Lawsuit": 1
+   }
+  },
+  "leader": {
+   "count": 1,
+   "aliases": {
+    "Leader": 1
+   }
+  },
+  "learning_disability": {
+   "count": 1,
+   "aliases": {
+    "Learning Disability": 1
+   }
+  },
+  "left_behind_type": {
+   "count": 1,
+   "aliases": {
+    "Left-behind type": 1
+   }
+  },
+  "leftright": {
+   "count": 1,
+   "aliases": {
+    "leftright": 1
+   }
+  },
+  "length_unemployment": {
+   "count": 1,
+   "aliases": {
+    "length_unemployment": 1
+   }
+  },
+  "lep": {
+   "count": 1,
+   "aliases": {
+    "s_lep": 1
+   }
+  },
+  "level": {
+   "count": 1,
+   "aliases": {
+    "Level": 1
+   }
+  },
+  "lexicality": {
+   "count": 1,
+   "aliases": {
+    "lexicality": 1
+   }
+  },
+  "lgbtq": {
+   "count": 1,
+   "aliases": {
+    "lgbtq2": 1
+   }
+  },
+  "lgtb": {
+   "count": 1,
+   "aliases": {
+    "lgtb": 1
+   }
+  },
+  "liberal": {
+   "count": 1,
+   "aliases": {
+    "liberal": 1
+   }
+  },
+  "life_education": {
+   "count": 1,
+   "aliases": {
+    "lied": 1
+   }
+  },
+  "life_satisfaction": {
+   "count": 1,
+   "aliases": {
+    "Life satisfaction": 1
+   }
+  },
+  "live": {
+   "count": 1,
+   "aliases": {
+    "live3": 1
+   }
+  },
+  "liveinus": {
+   "count": 1,
+   "aliases": {
+    "liveinus": 1
+   }
+  },
+  "lives_with_partner": {
+   "count": 1,
+   "aliases": {
+    "withpartner": 1
+   }
+  },
+  "living": {
+   "count": 1,
+   "aliases": {
+    "Living condition": 1
+   }
+  },
+  "living_alone": {
+   "count": 1,
+   "aliases": {
+    "living_alone": 1
+   }
+  },
+  "living_condition": {
+   "count": 1,
+   "aliases": {
+    "Living condition": 1
+   }
+  },
+  "living_location": {
+   "count": 1,
+   "aliases": {
+    "Living location": 1
+   }
+  },
+  "living_situation": {
+   "count": 1,
+   "aliases": {
+    "living_situation": 1
+   }
+  },
+  "living_space": {
+   "count": 1,
+   "aliases": {
+    "living_space": 1
+   }
+  },
+  "living_status": {
+   "count": 1,
+   "aliases": {
+    "Living status": 1
+   }
+  },
+  "living_with": {
+   "count": 1,
+   "aliases": {
+    "LivingW": 1
+   }
+  },
+  "loc_of_educ_institution": {
+   "count": 1,
+   "aliases": {
+    "Location of Educational Institution": 1
+   }
+  },
+  "locality": {
+   "count": 1,
+   "aliases": {
+    "locality": 1
+   }
+  },
+  "location_rec": {
+   "count": 1,
+   "aliases": {
+    "location_rec": 1
+   }
+  },
+  "lonely": {
+   "count": 1,
+   "aliases": {
+    "lone": 1
+   }
+  },
+  "loss": {
+   "count": 1,
+   "aliases": {
+    "loss": 1
+   }
+  },
+  "lps": {
+   "count": 1,
+   "aliases": {
+    "LPS": 1
+   }
+  },
+  "lr": {
+   "count": 1,
+   "aliases": {
+    "lr": 1
+   }
+  },
+  "macro_region": {
+   "count": 1,
+   "aliases": {
+    "macro_region": 1
+   }
+  },
+  "magazine_use": {
+   "count": 1,
+   "aliases": {
+    "magazine": 1
+   }
+  },
+  "main": {
+   "count": 1,
+   "aliases": {
+    "main": 1
+   }
+  },
+  "major_group": {
+   "count": 1,
+   "aliases": {
+    "Major_Group": 1
+   }
+  },
+  "manager": {
+   "count": 1,
+   "aliases": {
+    "A7": 1
+   }
+  },
+  "manager_role": {
+   "count": 1,
+   "aliases": {
+    "A7-1": 1
+   }
+  },
+  "manipcheck": {
+   "count": 1,
+   "aliases": {
+    "manip": 1
+   }
+  },
+  "maritalstatus": {
+   "count": 1,
+   "aliases": {
+    "maritalstatus": 1
+   }
+  },
+  "marriage_status": {
+   "count": 1,
+   "aliases": {
+    "MARIGE STATUS": 1
+   }
+  },
+  "masters_main_language": {
+   "count": 1,
+   "aliases": {
+    "MasterMainLang": 1
+   }
+  },
+  "material_wellbeing": {
+   "count": 1,
+   "aliases": {
+    "Material Well-Being": 1
+   }
+  },
+  "maternal_education": {
+   "count": 1,
+   "aliases": {
+    "Maternaleducation": 1
+   }
+  },
+  "math_elementary_grade": {
+   "count": 1,
+   "aliases": {
+    "mathelementarygrade": 1
+   }
+  },
+  "math_highschool_exitexam": {
+   "count": 1,
+   "aliases": {
+    "mathhighschoolgrade": 1
+   }
+  },
+  "math_jjhighschool_grade": {
+   "count": 1,
+   "aliases": {
+    "mathjuniorhighschoolgrade": 1
+   }
+  },
+  "mathcheck": {
+   "count": 1,
+   "aliases": {
+    "math": 1
+   }
+  },
+  "medical_expenses": {
+   "count": 1,
+   "aliases": {
+    "cons": 1
+   }
+  },
+  "medical_history": {
+   "count": 1,
+   "aliases": {
+    "MEDICALHISTORY": 1
+   }
+  },
+  "mental_health_problem": {
+   "count": 1,
+   "aliases": {
+    "MHP": 1
+   }
+  },
+  "mice_degree": {
+   "count": 1,
+   "aliases": {
+    "Do you have a degree in MICE (4-year)": 1
+   }
+  },
+  "middle_eastern": {
+   "count": 1,
+   "aliases": {
+    "race_4": 1
+   }
+  },
+  "migration": {
+   "count": 1,
+   "aliases": {
+    "s_migr": 1
+   }
+  },
+  "ml_percent": {
+   "count": 1,
+   "aliases": {
+    "ml_percent_cat": 1
+   }
+  },
+  "moralgroup": {
+   "count": 1,
+   "aliases": {
+    "ntgroup": 1
+   }
+  },
+  "mother_educ": {
+   "count": 1,
+   "aliases": {
+    "mother_demo_3": 1
+   }
+  },
+  "mother_education_years": {
+   "count": 1,
+   "aliases": {
+    "m_ed_yr": 1
+   }
+  },
+  "mother_language": {
+   "count": 1,
+   "aliases": {
+    "Motherlang": 1
+   }
+  },
+  "mother_n_children": {
+   "count": 1,
+   "aliases": {
+    "child_demo_num": 1
+   }
+  },
+  "mother_working_status": {
+   "count": 1,
+   "aliases": {
+    "working_status_M": 1
+   }
+  },
+  "mscl_gsi": {
+   "count": 1,
+   "aliases": {
+    "MSCL_GSI": 1
+   }
+  },
+  "mstatus": {
+   "count": 1,
+   "aliases": {
+    "mstatus": 1
+   }
+  },
+  "multimorbidity": {
+   "count": 1,
+   "aliases": {
+    "MultimorbidityR": 1
+   }
+  },
+  "multiracial": {
+   "count": 1,
+   "aliases": {
+    "race_7": 1
+   }
+  },
+  "musical_training": {
+   "count": 1,
+   "aliases": {
+    "GMS.Musical.Training": 1
+   }
+  },
+  "musicianship": {
+   "count": 1,
+   "aliases": {
+    "demographics.musicianIdentification": 1
+   }
+  },
+  "n_beds": {
+   "count": 1,
+   "aliases": {
+    "A4": 1
+   }
+  },
+  "n_chronic_conditions": {
+   "count": 1,
+   "aliases": {
+    "CHRONIC1": 1
+   }
+  },
+  "n_courses": {
+   "count": 1,
+   "aliases": {
+    "Anzahl der Kurse": 1
+   }
+  },
+  "name_knowledge": {
+   "count": 1,
+   "aliases": {
+    "Namenskenntnis": 1
+   }
+  },
+  "nation": {
+   "count": 1,
+   "aliases": {
+    "NATION": 1
+   }
+  },
+  "national_team_player": {
+   "count": 1,
+   "aliases": {
+    "National_TeamPlayer": 1
+   }
+  },
+  "native": {
+   "count": 1,
+   "aliases": {
+    "race_5": 1
+   }
+  },
+  "neg_profit": {
+   "count": 1,
+   "aliases": {
+    "NEGPRO": 1
+   }
+  },
+  "neurologist": {
+   "count": 1,
+   "aliases": {
+    "Neurologist": 1
+   }
+  },
+  "new_generation": {
+   "count": 1,
+   "aliases": {
+    "Between generations": 1
+   }
+  },
+  "nid": {
+   "count": 1,
+   "aliases": {
+    "nid": 1
+   }
+  },
+  "nk_assistenzarzt": {
+   "count": 1,
+   "aliases": {
+    "Assistenzarzt": 1
+   }
+  },
+  "nk_dozent": {
+   "count": 1,
+   "aliases": {
+    "Dozent": 1
+   }
+  },
+  "nk_hilfskraft": {
+   "count": 1,
+   "aliases": {
+    "Hilfskraft": 1
+   }
+  },
+  "nk_oberarzt": {
+   "count": 1,
+   "aliases": {
+    "Oberarzt": 1
+   }
+  },
+  "nk_professor": {
+   "count": 1,
+   "aliases": {
+    "Professor": 1
+   }
+  },
+  "no_foreign_lang": {
+   "count": 1,
+   "aliases": {
+    "no_foreign_lang": 1
+   }
+  },
+  "nonbinary": {
+   "count": 1,
+   "aliases": {
+    "nonbinary": 1
+   }
+  },
+  "nordic_background": {
+   "count": 1,
+   "aliases": {
+    "Nordic background": 1
+   }
+  },
+  "normal_university_grad": {
+   "count": 1,
+   "aliases": {
+    "Graduated from Normal University": 1
+   }
+  },
+  "num_letters": {
+   "count": 1,
+   "aliases": {
+    "wordlist_number_of_letters": 1
+   }
+  },
+  "num_siblings": {
+   "count": 1,
+   "aliases": {
+    "sibs": 1
+   }
+  },
+  "num_students": {
+   "count": 1,
+   "aliases": {
+    "numberstudents": 1
+   }
+  },
+  "number_mh_diagnoses": {
+   "count": 1,
+   "aliases": {
+    "NUMBER_MH_DIAGNOSES": 1
+   }
+  },
+  "nvs_cat": {
+   "count": 1,
+   "aliases": {
+    "nvs_cat": 1
+   }
+  },
+  "nz_european": {
+   "count": 1,
+   "aliases": {
+    "NZEurop": 1
+   }
+  },
+  "occupation_type": {
+   "count": 1,
+   "aliases": {
+    "work": 1
+   }
+  },
+  "occupational_status": {
+   "count": 1,
+   "aliases": {
+    "occupational status": 1
+   }
+  },
+  "odds_winning": {
+   "count": 1,
+   "aliases": {
+    "odds_winning": 1
+   }
+  },
+  "oncall_frequency": {
+   "count": 1,
+   "aliases": {
+    "Oncallfreq": 1
+   }
+  },
+  "onset_illness": {
+   "count": 1,
+   "aliases": {
+    "Onset_illness": 1
+   }
+  },
+  "operation_history": {
+   "count": 1,
+   "aliases": {
+    "oper": 1
+   }
+  },
+  "ophthalmologist": {
+   "count": 1,
+   "aliases": {
+    "Ophthalmologist": 1
+   }
+  },
+  "other": {
+   "count": 1,
+   "aliases": {
+    "s_other_race_num": 1
+   }
+  },
+  "other_nonantibiotic": {
+   "count": 1,
+   "aliases": {
+    "other_nonantibiotic": 1
+   }
+  },
+  "p_group": {
+   "count": 1,
+   "aliases": {
+    "P_Group": 1
+   }
+  },
+  "paralysis_type": {
+   "count": 1,
+   "aliases": {
+    "cov_11": 1
+   }
+  },
+  "parent_age": {
+   "count": 1,
+   "aliases": {
+    "ParentAge": 1
+   }
+  },
+  "parent_education_years": {
+   "count": 1,
+   "aliases": {
+    "par_ed_yr": 1
+   }
+  },
+  "parent_ethnicity": {
+   "count": 1,
+   "aliases": {
+    "ParentEthnicity": 1
+   }
+  },
+  "parent_gender": {
+   "count": 1,
+   "aliases": {
+    "ParentGender": 1
+   }
+  },
+  "parent_relationship": {
+   "count": 1,
+   "aliases": {
+    "Parentrelationship": 1
+   }
+  },
+  "parentesco": {
+   "count": 1,
+   "aliases": {
+    "p6050": 1
+   }
+  },
+  "parenting_style": {
+   "count": 1,
+   "aliases": {
+    "父母的教养方式": 1
+   }
+  },
+  "part_time_work": {
+   "count": 1,
+   "aliases": {
+    "PartTime": 1
+   }
+  },
+  "participating_course_grade": {
+   "count": 1,
+   "aliases": {
+    "Participating_Course_Grade": 1
+   }
+  },
+  "partner": {
+   "count": 1,
+   "aliases": {
+    "pareja": 1
+   }
+  },
+  "partner_age": {
+   "count": 1,
+   "aliases": {
+    "partage": 1
+   }
+  },
+  "partner_conversation_time": {
+   "count": 1,
+   "aliases": {
+    "partconv": 1
+   }
+  },
+  "partner_job": {
+   "count": 1,
+   "aliases": {
+    "partjob": 1
+   }
+  },
+  "party_member": {
+   "count": 1,
+   "aliases": {
+    "Party": 1
+   }
+  },
+  "partyid": {
+   "count": 1,
+   "aliases": {
+    "partyid": 1
+   }
+  },
+  "past_covid_infection": {
+   "count": 1,
+   "aliases": {
+    "PastCOVIDinfection": 1
+   }
+  },
+  "paternal_education": {
+   "count": 1,
+   "aliases": {
+    "Paternaleducation": 1
+   }
+  },
+  "patient_turnover_group": {
+   "count": 1,
+   "aliases": {
+    "pt_turn": 1
+   }
+  },
+  "pattern": {
+   "count": 1,
+   "aliases": {
+    "pattern": 1
+   }
+  },
+  "pedagogical_tenure": {
+   "count": 1,
+   "aliases": {
+    "Pedagogical tenure": 1
+   }
+  },
+  "pensioner": {
+   "count": 1,
+   "aliases": {
+    "Pensioner": 1
+   }
+  },
+  "perceived_risk": {
+   "count": 1,
+   "aliases": {
+    "Perceivedrisk": 1
+   }
+  },
+  "perdas_p_covid": {
+   "count": 1,
+   "aliases": {
+    "perdas_p_covid": 1
+   }
+  },
+  "perpetrator": {
+   "count": 1,
+   "aliases": {
+    "perp": 1
+   }
+  },
+  "personality_type": {
+   "count": 1,
+   "aliases": {
+    "Prsnlty_type": 1
+   }
+  },
+  "physagg": {
+   "count": 1,
+   "aliases": {
+    "PhysAgg": 1
+   }
+  },
+  "physical_health": {
+   "count": 1,
+   "aliases": {
+    "PHealth": 1
+   }
+  },
+  "pid3": {
+   "count": 1,
+   "aliases": {
+    "pid3": 1
+   }
+  },
+  "place_of_birth": {
+   "count": 1,
+   "aliases": {
+    "Place of birth": 1
+   }
+  },
+  "point": {
+   "count": 1,
+   "aliases": {
+    "point": 1
+   }
+  },
+  "pol_conservative": {
+   "count": 1,
+   "aliases": {
+    "DEM_POL_conservative": 1
+   }
+  },
+  "pol_interest": {
+   "count": 1,
+   "aliases": {
+    "pol_interest": 1
+   }
+  },
+  "pol_right": {
+   "count": 1,
+   "aliases": {
+    "DEM_POL_right": 1
+   }
+  },
+  "polid": {
+   "count": 1,
+   "aliases": {
+    "polid": 1
+   }
+  },
+  "polish_elementary_grade": {
+   "count": 1,
+   "aliases": {
+    "polishelementarygrade": 1
+   }
+  },
+  "polish_highschool_exitexam": {
+   "count": 1,
+   "aliases": {
+    "polishhighschoolexitexam": 1
+   }
+  },
+  "polish_highschool_grade": {
+   "count": 1,
+   "aliases": {
+    "polishhighschoolgrade": 1
+   }
+  },
+  "polish_jhighschool_grade": {
+   "count": 1,
+   "aliases": {
+    "polishjuniorhighschoolgrade": 1
+   }
+  },
+  "political_ideology": {
+   "count": 1,
+   "aliases": {
+    "politics": 1
+   }
+  },
+  "political_orientation": {
+   "count": 1,
+   "aliases": {
+    "ANA12_POLITICAL": 1
+   }
+  },
+  "political_party": {
+   "count": 1,
+   "aliases": {
+    "party": 1
+   }
+  },
+  "politics": {
+   "count": 1,
+   "aliases": {
+    "preferred_party": 1
+   }
+  },
+  "popdensity": {
+   "count": 1,
+   "aliases": {
+    "popdensity": 1
+   }
+  },
+  "population": {
+   "count": 1,
+   "aliases": {
+    "Population": 1
+   }
+  },
+  "pos": {
+   "count": 1,
+   "aliases": {
+    "wordlist_pos": 1
+   }
+  },
+  "position_experience": {
+   "count": 1,
+   "aliases": {
+    "tempodeexperiêncianomej": 1
+   }
+  },
+  "position_leadership": {
+   "count": 1,
+   "aliases": {
+    "cargodeliderança": 1
+   }
+  },
+  "position_work": {
+   "count": 1,
+   "aliases": {
+    "cargonaej": 1
+   }
+  },
+  "postal_code": {
+   "count": 1,
+   "aliases": {
+    "postna": 1
+   }
+  },
+  "powerdistance": {
+   "count": 1,
+   "aliases": {
+    "national_powerdistance": 1
+   }
+  },
+  "prefecture": {
+   "count": 1,
+   "aliases": {
+    "A3": 1
+   }
+  },
+  "pregnancy_complications": {
+   "count": 1,
+   "aliases": {
+    "pregnancycompli": 1
+   }
+  },
+  "pregnancy_number": {
+   "count": 1,
+   "aliases": {
+    "pregnancynumber": 1
+   }
+  },
+  "pregnancy_planned": {
+   "count": 1,
+   "aliases": {
+    "pregnancyhope": 1
+   }
+  },
+  "preschool_age": {
+   "count": 1,
+   "aliases": {
+    "18.2": 1
+   }
+  },
+  "present_ah": {
+   "count": 1,
+   "aliases": {
+    "prisotnaah": 1
+   }
+  },
+  "president_support": {
+   "count": 1,
+   "aliases": {
+    "president": 1
+   }
+  },
+  "prev_hospitalization": {
+   "count": 1,
+   "aliases": {
+    "Prev_hospitalization": 1
+   }
+  },
+  "primary_school_age": {
+   "count": 1,
+   "aliases": {
+    "18.3": 1
+   }
+  },
+  "primary_workplace": {
+   "count": 1,
+   "aliases": {
+    "PrimaryWP": 1
+   }
+  },
+  "prior_ai_pd": {
+   "count": 1,
+   "aliases": {
+    "prior_ai_pd_cat": 1
+   }
+  },
+  "prior_depressive_episode_yn": {
+   "count": 1,
+   "aliases": {
+    "Prior Depressive Episode(s) Y/N": 1
+   }
+  },
+  "prior_depressive_episodes": {
+   "count": 1,
+   "aliases": {
+    "# of Prior Depressive Episodes": 1
+   }
+  },
+  "prior_healthcare_experience": {
+   "count": 1,
+   "aliases": {
+    "Previous work experience in healthcare": 1
+   }
+  },
+  "prior_training": {
+   "count": 1,
+   "aliases": {
+    "PriorTraining": 1
+   }
+  },
+  "professional_background": {
+   "count": 1,
+   "aliases": {
+    "professionalbackground": 1
+   }
+  },
+  "professional_experience": {
+   "count": 1,
+   "aliases": {
+    "prof.exp": 1
+   }
+  },
+  "professional_status": {
+   "count": 1,
+   "aliases": {
+    "professional_status": 1
+   }
+  },
+  "professional_title": {
+   "count": 1,
+   "aliases": {
+    "Professional Title": 1
+   }
+  },
+  "programme": {
+   "count": 1,
+   "aliases": {
+    "programme": 1
+   }
+  },
+  "provider_group": {
+   "count": 1,
+   "aliases": {
+    "group": 1
+   }
+  },
+  "provocation": {
+   "count": 1,
+   "aliases": {
+    "Provocation": 1
+   }
+  },
+  "psychiatrist": {
+   "count": 1,
+   "aliases": {
+    "Psychiatrist": 1
+   }
+  },
+  "psychological_integration": {
+   "count": 1,
+   "aliases": {
+    "Psychological integration": 1
+   }
+  },
+  "psychotic_disorder": {
+   "count": 1,
+   "aliases": {
+    "Psychotic disorder": 1
+   }
+  },
+  "qualification": {
+   "count": 1,
+   "aliases": {
+    "QUALIFIC": 1
+   }
+  },
+  "question": {
+   "count": 1,
+   "aliases": {
+    "Question": 1
+   }
+  },
+  "raca": {
+   "count": 1,
+   "aliases": {
+    "raca": 1
+   }
+  },
+  "race2": {
+   "count": 1,
+   "aliases": {
+    "race2": 1
+   }
+  },
+  "race_black": {
+   "count": 1,
+   "aliases": {
+    "race_black": 1
+   }
+  },
+  "race_cat": {
+   "count": 1,
+   "aliases": {
+    "race_cat": 1
+   }
+  },
+  "race_mixed": {
+   "count": 1,
+   "aliases": {
+    "race_mixed": 1
+   }
+  },
+  "race_other": {
+   "count": 1,
+   "aliases": {
+    "race_other": 1
+   }
+  },
+  "race_white": {
+   "count": 1,
+   "aliases": {
+    "race_white": 1
+   }
+  },
+  "racial_minority": {
+   "count": 1,
+   "aliases": {
+    "racialminority": 1
+   }
+  },
+  "radio_use": {
+   "count": 1,
+   "aliases": {
+    "radio": 1
+   }
+  },
+  "radiotherapy_history": {
+   "count": 1,
+   "aliases": {
+    "radio": 1
+   }
+  },
+  "rank_child": {
+   "count": 1,
+   "aliases": {
+    "Q16_Rank_child": 1
+   }
+  },
+  "ranking": {
+   "count": 1,
+   "aliases": {
+    "ranking": 1
+   }
+  },
+  "raw": {
+   "count": 1,
+   "aliases": {
+    "raw": 1
+   }
+  },
+  "readingcheck1": {
+   "count": 1,
+   "aliases": {
+    "rc1": 1
+   }
+  },
+  "readingcheck2": {
+   "count": 1,
+   "aliases": {
+    "rc2": 1
+   }
+  },
+  "realm_cat": {
+   "count": 1,
+   "aliases": {
+    "realm_cat": 1
+   }
+  },
+  "reason_for_discharge": {
+   "count": 1,
+   "aliases": {
+    "Reason.for.discharge": 1
+   }
+  },
+  "recruitment_group": {
+   "count": 1,
+   "aliases": {
+    "Group": 1
+   }
+  },
+  "redcap_id": {
+   "count": 1,
+   "aliases": {
+    "REDCap_id": 1
+   }
+  },
+  "regular_exercise": {
+   "count": 1,
+   "aliases": {
+    "Regularexercise": 1
+   }
+  },
+  "rel_status": {
+   "count": 1,
+   "aliases": {
+    "RelStatus": 1
+   }
+  },
+  "relationship_status": {
+   "count": 1,
+   "aliases": {
+    "Relationship_Status": 1
+   }
+  },
+  "religion_belief": {
+   "count": 1,
+   "aliases": {
+    "Religionbelief": 1
+   }
+  },
+  "religion_influence": {
+   "count": 1,
+   "aliases": {
+    "Religion": 1
+   }
+  },
+  "religious": {
+   "count": 1,
+   "aliases": {
+    "DEM_RELIGIOUS": 1
+   }
+  },
+  "remote_work": {
+   "count": 1,
+   "aliases": {
+    "Remotly_work": 1
+   }
+  },
+  "renda_familiar": {
+   "count": 1,
+   "aliases": {
+    "renda_familiar": 1
+   }
+  },
+  "renda_pos_pandemia": {
+   "count": 1,
+   "aliases": {
+    "renda_pos_pandemia": 1
+   }
+  },
+  "repeat_year": {
+   "count": 1,
+   "aliases": {
+    "Is this the second time for that year (Level)?": 1
+   }
+  },
+  "republican": {
+   "count": 1,
+   "aliases": {
+    "republican": 1
+   }
+  },
+  "republicanclick": {
+   "count": 1,
+   "aliases": {
+    "republicanclick": 1
+   }
+  },
+  "residence_duration": {
+   "count": 1,
+   "aliases": {
+    "redidura": 1
+   }
+  },
+  "residency": {
+   "count": 1,
+   "aliases": {
+    "residency": 1
+   }
+  },
+  "resilience": {
+   "count": 1,
+   "aliases": {
+    "Resilience": 1
+   }
+  },
+  "respondent_gender": {
+   "count": 1,
+   "aliases": {
+    "Respondant gender": 1
+   }
+  },
+  "respondent_relationship": {
+   "count": 1,
+   "aliases": {
+    "socio24": 1
+   }
+  },
+  "retest_interval_days": {
+   "count": 1,
+   "aliases": {
+    "INTERVAL": 1
+   }
+  },
+  "retired": {
+   "count": 1,
+   "aliases": {
+    "Retired": 1
+   }
+  },
+  "risk_contact": {
+   "count": 1,
+   "aliases": {
+    "Risk2": 1
+   }
+  },
+  "romantic_relationship": {
+   "count": 1,
+   "aliases": {
+    "Relacion romantica": 1
+   }
+  },
+  "rural": {
+   "count": 1,
+   "aliases": {
+    "rural": 1
+   }
+  },
+  "sat_total": {
+   "count": 1,
+   "aliases": {
+    "FINAL_SAT_total": 1
+   }
+  },
+  "satisfaction_level": {
+   "count": 1,
+   "aliases": {
+    "satisfaction_level": 1
+   }
+  },
+  "satisfaction_with_major": {
+   "count": 1,
+   "aliases": {
+    "Saticfactionwithmajor": 1
+   }
+  },
+  "scale_group": {
+   "count": 1,
+   "aliases": {
+    "scale": 1
+   }
+  },
+  "scholarship": {
+   "count": 1,
+   "aliases": {
+    "Scholarship": 1
+   }
+  },
+  "school_area": {
+   "count": 1,
+   "aliases": {
+    "School_area": 1
+   }
+  },
+  "school_grade": {
+   "count": 1,
+   "aliases": {
+    "ANA17_GRADE": 1
+   }
+  },
+  "school_id": {
+   "count": 1,
+   "aliases": {
+    "school_id": 1
+   }
+  },
+  "school_level": {
+   "count": 1,
+   "aliases": {
+    "School_level": 1
+   }
+  },
+  "school_site": {
+   "count": 1,
+   "aliases": {
+    "SCHOOL": 1
+   }
+  },
+  "schooling": {
+   "count": 1,
+   "aliases": {
+    "Schooling": 1
+   }
+  },
+  "schooltype": {
+   "count": 1,
+   "aliases": {
+    "Q7_schooltype": 1
+   }
+  },
+  "scl_gsi": {
+   "count": 1,
+   "aliases": {
+    "SCL_GSI": 1
+   }
+  },
+  "score_a": {
+   "count": 1,
+   "aliases": {
+    "score_A": 1
+   }
+  },
+  "score_c": {
+   "count": 1,
+   "aliases": {
+    "score_C": 1
+   }
+  },
+  "score_e": {
+   "count": 1,
+   "aliases": {
+    "score_E": 1
+   }
+  },
+  "score_i": {
+   "count": 1,
+   "aliases": {
+    "score_I": 1
+   }
+  },
+  "score_r": {
+   "count": 1,
+   "aliases": {
+    "score_R": 1
+   }
+  },
+  "score_s": {
+   "count": 1,
+   "aliases": {
+    "score_S": 1
+   }
+  },
+  "scored": {
+   "count": 1,
+   "aliases": {
+    "scored": 1
+   }
+  },
+  "screener": {
+   "count": 1,
+   "aliases": {
+    "Q1_1": 1
+   }
+  },
+  "sduration": {
+   "count": 1,
+   "aliases": {
+    "durationinseconds": 1
+   }
+  },
+  "seat_rank_preference": {
+   "count": 1,
+   "aliases": {
+    "RANK": 1
+   }
+  },
+  "secondary": {
+   "count": 1,
+   "aliases": {
+    "Secondary": 1
+   }
+  },
+  "secondary_school_diploma": {
+   "count": 1,
+   "aliases": {
+    "Secondary school diploma": 1
+   }
+  },
+  "sector": {
+   "count": 1,
+   "aliases": {
+    "Sector": 1
+   }
+  },
+  "segment": {
+   "count": 1,
+   "aliases": {
+    "segmento": 1
+   }
+  },
+  "self_care": {
+   "count": 1,
+   "aliases": {
+    "Self-care ability": 1
+   }
+  },
+  "self_labelled_bullied": {
+   "count": 1,
+   "aliases": {
+    "bullied": 1
+   }
+  },
+  "self_perceived_health": {
+   "count": 1,
+   "aliases": {
+    "Self_perception_of_health": 1
+   }
+  },
+  "self_rated_ability": {
+   "count": 1,
+   "aliases": {
+    "Personal Ability": 1
+   }
+  },
+  "selfcare": {
+   "count": 1,
+   "aliases": {
+    "Self-care ability": 1
+   }
+  },
+  "seniority": {
+   "count": 1,
+   "aliases": {
+    "Seniority": 1
+   }
+  },
+  "service_years": {
+   "count": 1,
+   "aliases": {
+    "A1": 1
+   }
+  },
+  "ses": {
+   "count": 1,
+   "aliases": {
+    "SES": 1
+   }
+  },
+  "sex_male": {
+   "count": 1,
+   "aliases": {
+    "sex_male": 1
+   }
+  },
+  "sexo": {
+   "count": 1,
+   "aliases": {
+    "sexo": 1
+   }
+  },
+  "sexual_orientation": {
+   "count": 1,
+   "aliases": {
+    "sexual orientation": 1
+   }
+  },
+  "sexuality": {
+   "count": 1,
+   "aliases": {
+    "Sexuality": 1
+   }
+  },
+  "sgender": {
+   "count": 1,
+   "aliases": {
+    "sgender": 1
+   }
+  },
+  "shandle_money": {
+   "count": 1,
+   "aliases": {
+    "shandmoney": 1
+   }
+  },
+  "shifts": {
+   "count": 1,
+   "aliases": {
+    "shifts": 1
+   }
+  },
+  "sias_ges": {
+   "count": 1,
+   "aliases": {
+    "SIAS_GES": 1
+   }
+  },
+  "sias_score": {
+   "count": 1,
+   "aliases": {
+    "SIAS_SCORE": 1
+   }
+  },
+  "siblings": {
+   "count": 1,
+   "aliases": {
+    "sibling": 1
+   }
+  },
+  "sima": {
+   "count": 1,
+   "aliases": {
+    "sima": 1
+   }
+  },
+  "singing_abilities": {
+   "count": 1,
+   "aliases": {
+    "GMS.Singing.Abilities": 1
+   }
+  },
+  "size_residence": {
+   "count": 1,
+   "aliases": {
+    "size_residence": 1
+   }
+  },
+  "size_workplace": {
+   "count": 1,
+   "aliases": {
+    "size_workplace": 1
+   }
+  },
+  "skin_color": {
+   "count": 1,
+   "aliases": {
+    "skin_color": 1
+   }
+  },
+  "smoke": {
+   "count": 1,
+   "aliases": {
+    "Smoke": 1
+   }
+  },
+  "smoker_status": {
+   "count": 1,
+   "aliases": {
+    "\\(SMOKER\\) What is your smoking status": 1
+   }
+  },
+  "smoking_per_day": {
+   "count": 1,
+   "aliases": {
+    "Smoking Per Day": 1
+   }
+  },
+  "sns_experience": {
+   "count": 1,
+   "aliases": {
+    "SNS Experience": 1
+   }
+  },
+  "social_class": {
+   "count": 1,
+   "aliases": {
+    "6. Em comparação com a sua cidade, em qual classe social você se encontra?": 1
+   }
+  },
+  "social_integration": {
+   "count": 1,
+   "aliases": {
+    "Social integration": 1
+   }
+  },
+  "social_relations": {
+   "count": 1,
+   "aliases": {
+    "social relations": 1
+   }
+  },
+  "social_status": {
+   "count": 1,
+   "aliases": {
+    "Social status": 1
+   }
+  },
+  "socioeconomic": {
+   "count": 1,
+   "aliases": {
+    "SES": 1
+   }
+  },
+  "socioeconomic_status": {
+   "count": 1,
+   "aliases": {
+    "socioeconomic status": 1
+   }
+  },
+  "socioeconomicstatus": {
+   "count": 1,
+   "aliases": {
+    "socioeconomicstatus": 1
+   }
+  },
+  "source": {
+   "count": 1,
+   "aliases": {
+    "source": 1
+   }
+  },
+  "source_income": {
+   "count": 1,
+   "aliases": {
+    "Source_income": 1
+   }
+  },
+  "source_region": {
+   "count": 1,
+   "aliases": {
+    "Soure": 1
+   }
+  },
+  "source_survey": {
+   "count": 1,
+   "aliases": {
+    "Survey": 1
+   }
+  },
+  "spanish_fluency": {
+   "count": 1,
+   "aliases": {
+    "Spanish": 1
+   }
+  },
+  "spay_bils": {
+   "count": 1,
+   "aliases": {
+    "spaybills": 1
+   }
+  },
+  "specialty": {
+   "count": 1,
+   "aliases": {
+    "especialidad": 1
+   }
+  },
+  "specialty_category": {
+   "count": 1,
+   "aliases": {
+    "Kindly indicate your specialty according to core board certification\\n": 1
+   }
+  },
+  "sport_experience": {
+   "count": 1,
+   "aliases": {
+    "D7": 1
+   }
+  },
+  "src": {
+   "count": 1,
+   "aliases": {
+    "cov_source_columns": 1
+   }
+  },
+  "ssd": {
+   "count": 1,
+   "aliases": {}
+  },
+  "ssr_familiarity": {
+   "count": 1,
+   "aliases": {
+    "1.5 您对社会责任熟悉吗? \\nAre you familiar with social responsibility?\\n": 1
+   }
+  },
+  "startdate_stata": {
+   "count": 1,
+   "aliases": {
+    "clock": 1
+   }
+  },
+  "status": {
+   "count": 1,
+   "aliases": {
+    "status": 1
+   }
+  },
+  "steady_partner": {
+   "count": 1,
+   "aliases": {
+    "Steady partner": 1
+   }
+  },
+  "stem_major": {
+   "count": 1,
+   "aliases": {
+    "STEM.major.clean": 1
+   }
+  },
+  "still_working": {
+   "count": 1,
+   "aliases": {
+    "PRACA": 1
+   }
+  },
+  "story": {
+   "count": 1,
+   "aliases": {
+    "story": 1
+   }
+  },
+  "student": {
+   "count": 1,
+   "aliases": {
+    "Student": 1
+   }
+  },
+  "student_leader": {
+   "count": 1,
+   "aliases": {
+    "学生干部": 1
+   }
+  },
+  "student_status": {
+   "count": 1,
+   "aliases": {
+    "student": 1
+   }
+  },
+  "study_level": {
+   "count": 1,
+   "aliases": {
+    "étude": 1
+   }
+  },
+  "study_or_work": {
+   "count": 1,
+   "aliases": {
+    "StudyWork": 1
+   }
+  },
+  "study_schedule": {
+   "count": 1,
+   "aliases": {
+    "Study schedule": 1
+   }
+  },
+  "studydegr": {
+   "count": 1,
+   "aliases": {
+    "studydegr": 1
+   }
+  },
+  "sub_sample": {
+   "count": 1,
+   "aliases": {
+    "sub_sample": 1
+   }
+  },
+  "subject_taught": {
+   "count": 1,
+   "aliases": {
+    "Subject": 1
+   }
+  },
+  "subjective_health": {
+   "count": 1,
+   "aliases": {
+    "Subjective health": 1
+   }
+  },
+  "subjectno": {
+   "count": 1,
+   "aliases": {
+    "subjectno": 1
+   }
+  },
+  "subsample": {
+   "count": 1,
+   "aliases": {
+    "subsample": 1
+   }
+  },
+  "substance_use_disorder": {
+   "count": 1,
+   "aliases": {
+    "Substance use disorder": 1
+   }
+  },
+  "suicidality": {
+   "count": 1,
+   "aliases": {
+    "suic": 1
+   }
+  },
+  "supplement": {
+   "count": 1,
+   "aliases": {
+    "supplement": 1
+   }
+  },
+  "surroundings_vs_others": {
+   "count": 1,
+   "aliases": {
+    "ljokolicavsostali": 1
+   }
+  },
+  "survey_duration_sec": {
+   "count": 1,
+   "aliases": {
+    "Duration (in seconds)": 1
+   }
+  },
+  "survey_round": {
+   "count": 1,
+   "aliases": {
+    "round": 1
+   }
+  },
+  "survey_weight": {
+   "count": 1,
+   "aliases": {
+    "weight": 1
+   }
+  },
+  "symptom_duration": {
+   "count": 1,
+   "aliases": {
+    "Duration of symptoms": 1
+   }
+  },
+  "teaches_ml": {
+   "count": 1,
+   "aliases": {
+    "teach_ML": 1
+   }
+  },
+  "teaching_experience": {
+   "count": 1,
+   "aliases": {
+    "Teaching Experience": 1
+   }
+  },
+  "team_group": {
+   "count": 1,
+   "aliases": {
+    "team_group": 1
+   }
+  },
+  "team_number": {
+   "count": 1,
+   "aliases": {
+    "TeamNumber": 1
+   }
+  },
+  "team_size": {
+   "count": 1,
+   "aliases": {
+    "Team Size": 1
+   }
+  },
+  "teamid": {
+   "count": 1,
+   "aliases": {
+    "teamid": 1
+   }
+  },
+  "teamsize": {
+   "count": 1,
+   "aliases": {
+    "teamsize": 1
+   }
+  },
+  "tenure_track": {
+   "count": 1,
+   "aliases": {
+    "tenuretrack": 1
+   }
+  },
+  "test_taker_intent": {
+   "count": 1,
+   "aliases": {
+    "test_taker_intent": 1
+   }
+  },
+  "testosterone": {
+   "count": 1,
+   "aliases": {
+    "Testo": 1
+   }
+  },
+  "therapy_insulin": {
+   "count": 1,
+   "aliases": {
+    "inzulinskath": 1
+   }
+  },
+  "therapy_oral": {
+   "count": 1,
+   "aliases": {
+    "peroralnath": 1
+   }
+  },
+  "tics_score": {
+   "count": 1,
+   "aliases": {
+    "TICS_SCORE": 1
+   }
+  },
+  "tics_sum": {
+   "count": 1,
+   "aliases": {
+    "TICS_sum": 1
+   }
+  },
+  "tid": {
+   "count": 1,
+   "aliases": {
+    "tid": 1
+   }
+  },
+  "tiktok_use_duration": {
+   "count": 1,
+   "aliases": {
+    "Daily TikTok ssage duration": 1
+   }
+  },
+  "time": {
+   "count": 1,
+   "aliases": {
+    "Zeit": 1
+   }
+  },
+  "time_exclude": {
+   "count": 1,
+   "aliases": {
+    "TimeExclude": 1
+   }
+  },
+  "time_with_owner": {
+   "count": 1,
+   "aliases": {
+    "Time_with_owner": 1
+   }
+  },
+  "times_taught": {
+   "count": 1,
+   "aliases": {
+    "timestaught": 1
+   }
+  },
+  "tool_chatgpt": {
+   "count": 1,
+   "aliases": {
+    "Q3_Choice1": 1
+   }
+  },
+  "tool_deepseek": {
+   "count": 1,
+   "aliases": {
+    "Q3_Choice3": 1
+   }
+  },
+  "tool_doubao": {
+   "count": 1,
+   "aliases": {
+    "Q3_Choice4": 1
+   }
+  },
+  "tool_other": {
+   "count": 1,
+   "aliases": {
+    "Q3_Choice5": 1
+   }
+  },
+  "tool_wenxin_yiyan": {
+   "count": 1,
+   "aliases": {
+    "Q3_Choice2": 1
+   }
+  },
+  "top_result": {
+   "count": 1,
+   "aliases": {
+    "top_result": 1
+   }
+  },
+  "topic": {
+   "count": 1,
+   "aliases": {
+    "Topic": 1
+   }
+  },
+  "total_spend": {
+   "count": 1,
+   "aliases": {
+    "TotalSpend": 1
+   }
+  },
+  "trade_type": {
+   "count": 1,
+   "aliases": {
+    "Trade type": 1
+   }
+  },
+  "train_hours_weekly": {
+   "count": 1,
+   "aliases": {
+    "Train_Hours_Weekly": 1
+   }
+  },
+  "travel_companion": {
+   "count": 1,
+   "aliases": {
+    "P11": 1
+   }
+  },
+  "treatment_arm": {
+   "count": 1,
+   "aliases": {
+    "treatment_group": 1
+   }
+  },
+  "trial_id": {
+   "count": 1,
+   "aliases": {
+    "trial_id": 1
+   }
+  },
+  "trial_order": {
+   "count": 1,
+   "aliases": {
+    "trial_order": 1
+   }
+  },
+  "tv_holiday": {
+   "count": 1,
+   "aliases": {
+    "TVvac": 1
+   }
+  },
+  "tv_schoolday": {
+   "count": 1,
+   "aliases": {
+    "TVsch": 1
+   }
+  },
+  "unemployed": {
+   "count": 1,
+   "aliases": {
+    "Unemployed": 1
+   }
+  },
+  "unemployment_benefits": {
+   "count": 1,
+   "aliases": {
+    "unemployment_benefits": 1
+   }
+  },
+  "urban_integration": {
+   "count": 1,
+   "aliases": {
+    "Urban integration": 1
+   }
+  },
+  "urban_rural": {
+   "count": 1,
+   "aliases": {
+    "q6_urban_rural": 1
+   }
+  },
+  "us_resident": {
+   "count": 1,
+   "aliases": {
+    "place2": 1
+   }
+  },
+  "use_experience": {
+   "count": 1,
+   "aliases": {
+    "Use experience": 1
+   }
+  },
+  "use_per_month": {
+   "count": 1,
+   "aliases": {
+    "Usepermonth": 1
+   }
+  },
+  "user_range": {
+   "count": 1,
+   "aliases": {
+    "find_user_range": 1
+   }
+  },
+  "vem_diagnosis_general": {
+   "count": 1,
+   "aliases": {
+    "VEM.diagnosis.general": 1
+   }
+  },
+  "verbagg": {
+   "count": 1,
+   "aliases": {
+    "VerbAgg": 1
+   }
+  },
+  "victim": {
+   "count": 1,
+   "aliases": {
+    "vict": 1
+   }
+  },
+  "video_number": {
+   "count": 1,
+   "aliases": {
+    "Video Number": 1
+   }
+  },
+  "vinculo": {
+   "count": 1,
+   "aliases": {
+    "vinculo": 1
+   }
+  },
+  "wage_income_log": {
+   "count": 1,
+   "aliases": {
+    "Logarithm of wage income": 1
+   }
+  },
+  "ward_type": {
+   "count": 1,
+   "aliases": {
+    "A6": 1
+   }
+  },
+  "weekly_working_hours": {
+   "count": 1,
+   "aliases": {
+    "Weekly working hours": 1
+   }
+  },
+  "white": {
+   "count": 1,
+   "aliases": {
+    "race_6": 1
+   }
+  },
+  "win": {
+   "count": 1,
+   "aliases": {
+    "win": 1
+   }
+  },
+  "work4law": {
+   "count": 1,
+   "aliases": {
+    "work4law": 1
+   }
+  },
+  "work_hours": {
+   "count": 1,
+   "aliases": {
+    "wk_hr": 1
+   }
+  },
+  "work_location": {
+   "count": 1,
+   "aliases": {
+    "work location": 1
+   }
+  },
+  "work_status": {
+   "count": 1,
+   "aliases": {
+    "WorkStatus": 1
+   }
+  },
+  "work_study": {
+   "count": 1,
+   "aliases": {
+    "Do you work and study?": 1
+   }
+  },
+  "work_type": {
+   "count": 1,
+   "aliases": {
+    "Work_type": 1
+   }
+  },
+  "workenvironment": {
+   "count": 1,
+   "aliases": {
+    "workenvironment": 1
+   }
+  },
+  "working_unit": {
+   "count": 1,
+   "aliases": {
+    "UNIT": 1
+   }
+  },
+  "wrestling_style": {
+   "count": 1,
+   "aliases": {
+    "D6": 1
+   }
+  },
+  "year_of_study": {
+   "count": 1,
+   "aliases": {
+    "\\xa0 Year of Study:\\n": 1
+   }
+  },
+  "years_edu": {
+   "count": 1,
+   "aliases": {
+    "Years_Edu": 1
+   }
+  },
+  "years_education": {
+   "count": 1,
+   "aliases": {
+    "YearsEducation": 1
+   }
+  },
+  "years_employment": {
+   "count": 1,
+   "aliases": {
+    "years_of_employment": 1
+   }
+  },
+  "years_in_country": {
+   "count": 1,
+   "aliases": {
+    "ANA11_COUNTRY_TI": 1
+   }
+  },
+  "years_in_us": {
+   "count": 1,
+   "aliases": {
+    "Q80": 1
+   }
+  },
+  "years_nursing": {
+   "count": 1,
+   "aliases": {
+    "A9": 1
+   }
+  },
+  "years_of_service": {
+   "count": 1,
+   "aliases": {
+    "Years of Service": 1
+   }
+  },
+  "years_of_training": {
+   "count": 1,
+   "aliases": {
+    "Years_of_Training": 1
+   }
+  },
+  "years_oncology_nursing": {
+   "count": 1,
+   "aliases": {
+    "A10": 1
+   }
+  },
+  "years_online": {
+   "count": 1,
+   "aliases": {
+    "yearsonline": 1
+   }
+  },
+  "years_practicing": {
+   "count": 1,
+   "aliases": {
+    "how_long_practicing": 1
+   }
+  },
+  "years_retired": {
+   "count": 1,
+   "aliases": {
+    "EMERYTURA": 1
+   }
+  },
+  "years_work": {
+   "count": 1,
+   "aliases": {
+    "Years of work": 1
+   }
+  },
+  "zip": {
+   "count": 1,
+   "aliases": {
+    "zip": 1
+   }
+  }
+ }
+}

@@ -67,7 +67,7 @@ readable: before it, every scheduled cloud run committed another
 | Location | Holds | Lifecycle |
 |---|---|---|
 | `runs/` | `candidates*.csv`, `irw_triage*.csv`, `irw_retriage*.csv`, `triage_test*.csv`, the dated `*_monthly_*` outputs | Disposable once the batch is written up in `BATCH_LOG.md`. Gitignored. |
-| top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
+| top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `cov_vocabulary.json`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
 | `human_review/` | `human_review_<mode>_batch<N>.csv` | Permanent archive of genuinely-ambiguous rows. Tracked. |
 | `irw_output/` | downloaded/converted data | Regenerable, gitignored. |
 
@@ -212,6 +212,21 @@ Before uploading a file from `irw_output/` to Redivis, run through
 `datastandard.md`'s "What to verify before saving" checklist. The QC
 warnings printed during triage (and recorded in the triage CSV, glossary
 below) point at exactly what to check in each file.
+
+Then lint the finished tables — this is a check on output, not a converter,
+and it never rewrites a file:
+
+```bash
+python irw_lint_covariates.py irw_output/*.csv
+# and, when you still have the raw source to hand, the stronger form:
+python irw_lint_covariates.py irw_output/hao_2025_anxiety.csv --raw raw/hao.xlsx
+```
+
+`irw_lint_covariates.py` catches the covariate mistakes that survive every
+structural check — a demographic column that was dropped, melted into
+`item`/`resp` as though it were a scale item, or left without its `cov_`
+prefix. It exits non-zero on any `error`-severity finding, so it can gate a
+batch. See its entry under Scripts for the checks and the vocabulary.
 
 One more hard rule applies at this stage that lives in `SKILL.md`, not
 `datastandard.md`, because it's a pipeline/triage concern rather than an
@@ -427,6 +442,51 @@ BATCH_LOG.md found qualified forms miss page-1 relevance-ranked results the
 bare form catches. Edit it freely; `search_terms_log.csv` doesn't record
 per-term hit counts precisely enough to rank terms automatically.
 
+### `irw_discover_plos.py`
+Journal connector, not a repository connector: searches PLOS ONE (and the
+rest of the PLOS family) via the PLOS Solr API, then reads each article page
+for tabular Supporting Information files. Those files are attached to the
+article and never appear in Dataverse/Zenodo/OSF/Dryad/Figshare, so
+`irw_discover_updated.py` cannot see them. PLOS is 100% CC-BY, so the license
+question is settled up front. Candidates go through the same
+`triage_dataset()` as everything else, and every attempted DOI is recorded in
+`plos_seen_dois.csv` whatever flag it got.
+```
+--out <path>          triage output (default: runs/)
+--limit <n>           stop after N triaged candidates
+--resume              continue from checkpoint
+--journals <list>     restrict to named PLOS journals
+--ignore-seen-dois    re-attempt DOIs already in plos_seen_dois.csv
+```
+
+### `irw_discover_pmc.py`
+The same idea generalized to any journal well-indexed in Europe PMC, whose
+`{PMCID}/supplementaryFiles` endpoint returns the SI archive identically
+regardless of publisher — which is what avoids hand-writing a scraper per
+publisher (and sidesteps unscrapable JS-only sites). Its `JOURNALS` list is
+the "harvest now" / "sample manually first" tiers from
+`journal_scout/journal_yield_summary.md`, minus the PLOS family already
+covered above. Seen DOIs go to `pmc_seen_dois.csv`. Same flags as
+`irw_discover_plos.py`.
+
+### `irw_discover_plos_monthly.py` / `irw_discover_pmc_monthly.py`
+Scheduled wrappers for the two journal connectors, mirroring
+`irw_discover_monthly.py`'s weekly/full split. Incrementality here is **not**
+a `--since` date filter — neither the PLOS Solr API nor the Europe PMC search
+endpoint has one wired up — it rides on the persistent seen-DOI stores
+(`plos_seen_dois.csv` / `pmc_seen_dois.csv`), which manual runs share.
+```
+--mode weekly|full    weekly = HIGH_YIELD_TERMS subset; full = the ~100-term
+                      construct list imported from irw_discover_monthly.py
+--journals <list>     restrict the journal set
+--limit <n>           total triaged candidates for the run
+--per-term-cap <n>    cap one term's share of that budget
+                      (default: max(1, limit // len(terms))) — without it a
+                      broad term eats the whole run
+--out <path>          triage output
+--dry-run             list what would be searched, download nothing
+```
+
 ### `irw_batch_updated.py`
 Resolves landing pages to data files, downloads, triages, and writes
 `triage.csv`. No data files are saved — triage only. Recognizes
@@ -437,7 +497,7 @@ it needed (`pyreadstat`/`pyreadr`, see Prerequisites in `SKILL.md`). Files
 over `MAX_FILE_BYTES` (200MB) are flagged `file_too_large` and never
 downloaded — added 2026-08-02 after `.dta` files up to 1.58GB OOM-killed
 the process twice; see `TODO.md`'s (closed) "no file-size guard" note.
-`irw_discover_plos.py` and `irw_process_queue.py` share the same guard via
+`irw_discover_plos.py` shares the same guard via
 `polite_get()`/`resolve_data_files()`.
 ```
 --limit <n>    process only the first N rows
@@ -445,11 +505,24 @@ the process twice; see `TODO.md`'s (closed) "no file-size guard" note.
 --out <path>   output path (default: runs/irw_triage.csv)
 ```
 
-### `irw_process_queue.py` — retired, do not run
+### `irw_process_queue.py` — retired, do not run, do not benchmark
 Used to bulk-download and heuristically standardize every queued dataset to
 `irw_output/queue/`. Eliminated 2026-06-24 in favor of one bespoke script per
-dataset in `data/` (see Step 2 above) — the file is kept in this directory
-for reference but is stale and should not be executed.
+dataset in `data/` (see Step 2 above). The file is kept in this directory for
+reference only.
+
+It **does not import on `main`** — it wants a `QUEUE_SHEET_URL` that
+`irw_discover_updated.py` no longer defines (see `TODO.md`) — so it cannot be
+run even by accident, and `irw_output/queue/` and `cleaned_index.csv` no
+longer exist.
+
+It is also **not this pipeline's conversion step and must not be treated as a
+baseline for one.** Nothing here converts a dataset to IRW format
+automatically: triage evaluates candidates and writes no data files, and the
+conversion is a bespoke `data/<author>_<year>_<construct>.py` per dataset.
+An outside evaluation in 2026-08 measured a proposed automatic converter
+against `irw_process_queue.py` and reported a large win; the comparison was
+against retired code, and says nothing about the path actually in use.
 
 ### `irw_triage_updated.py`
 Evaluate a single file directly (useful for spot-checking). `load_table()`
@@ -460,6 +533,50 @@ is shared between both entry points:
 python irw_triage_updated.py path/to/data.csv
 python irw_triage_updated.py https://example.com/data.csv
 ```
+
+### `irw_lint_covariates.py`
+Lints **finished** IRW tables for covariate handling. It reads output, never
+writes it, and is meant to run between Step 2 and upload.
+
+```bash
+python irw_lint_covariates.py irw_output/*.csv          # lint output
+python irw_lint_covariates.py out.csv --raw source.xlsx # also vs. the source
+python irw_lint_covariates.py irw_output/*.csv --json   # machine-readable
+python irw_lint_covariates.py --mine                    # rebuild the vocabulary
+```
+
+Checks, in reporting order:
+
+| code | severity | what it means |
+|---|---|---|
+| `unprefixed_covariate` | error | an output column is a known covariate but has no `cov_` prefix |
+| `covariate_as_item` | error | a demographic was melted into `item`, so its values sit in `resp` — passes every structural check while losing the covariate |
+| `missed_covariate` | warn | `--raw` only: the source published a covariate the output has no column for |
+| `covariate_varies_within_id` | warn | a `cov_` column takes more than one value within a person (or person-wave, when the table has a `wave` column) — it is item-level (`itemcov_`), timepoint-level (`wave`), or the `id` is colliding |
+| `nonstandard_cov_name` | info | the corpus overwhelmingly spells this covariate differently (`cov_edu` → `cov_education`) |
+
+Exit status is 1 if anything `error`-severity was found, 0 otherwise, so
+`python irw_lint_covariates.py irw_output/*.csv || ...` gates a batch.
+
+**The vocabulary is mined from `data/`, not hand-typed.** `--mine` sweeps
+every `data/*.py`, `*.R`, `*.do` for renames whose target is a `cov_*` column
+and records each source name against the canonical term — which is how it
+knows `Alter`, `Sexo`, `Idade`, `性别`, and `"12. What is your gender?"` are
+all covariates. The result is committed as `cov_vocabulary.json` (~1,200
+scripts, ~1,000 terms). Re-run `--mine` when a batch of new scripts lands;
+the vocabulary gets better as the corpus grows.
+
+Mined names are noisy, so the lookup drops opaque codes (`q1_1`, `18.1`,
+`A2`), id-like names (`PID`), and script locals that leak out of the R
+patterns (`df`, `.`, `raw`). Three-letter abbreviations (`ses`, `edu`, `gpa`)
+are admitted only once two scripts have used them. If the linter still
+misfires on a real item label, tighten `_alias_is_usable()` rather than
+hand-editing the JSON — the JSON is regenerated.
+
+The idea and the mining approach are from the covariate vocabulary in
+`AryanSudhirDev/automated-finding-v2` (`v2/knowledge/`,
+`v2/stages/precoerce.py`), re-implemented here as a check on output instead
+of a step inside an automatic converter.
 
 ### `irw_retriage_ha.py`
 Post-hoc refinement of `human_assistance` rows using metadata already in the

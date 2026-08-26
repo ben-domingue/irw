@@ -5,6 +5,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [ ] **`germann_2026_*` tables have colliding `id`s** (found 2026-08-26 by
+  `irw_lint_covariates.py`, the first thing it caught on real output).
+  30,072 of 228,070 rows in `germann_2026_immigration.csv` are duplicate
+  `(id, wave, item)` keys, and the covariates prove they are different
+  people, not repeated measures — `id=20`/`wave=pre` carries both
+  `cov_age=57, cov_gender=1` and `cov_age=51, cov_gender=2`. The source's
+  respondent number is evidently only unique within some sub-sample (country
+  or survey round) that `data/germann_2026_terrorism.py` does not fold into
+  `id`. All five `germann_2026_*` tables share the pattern. Needs the script
+  fixed and the tables re-uploaded — until then those tables merge two
+  respondents into one person for any model fit on them.
+
 - [x] **`biblio_batch_2026-08-26.csv` (3 rows) uploaded/pasted** (confirmed
   2026-08-26, ben-domingue): 67,592 responses —
   `trang_2023_vocabulary_beliefs` / `_strategies` (Gu's Vocabulary Learning
