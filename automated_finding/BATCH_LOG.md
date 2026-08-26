@@ -10954,3 +10954,69 @@ patterns added today: `10.17632/hj5jknzww5` (`IPAddress`),
 `10.6084/m9.figshare.27211839` and `10.3389/fevo.2022.892752.s002`
 (`birthdate`), plus the two doomscrolling files. Eight of 69 leads (12%) carry
 PII — this pool is raw survey exports, and the screen is earning its keep.
+
+### First pass over the re-ranked worklist — 10 tables, 72,059 responses (2026-08-25)
+
+Working `lead_worklist_2026-08-25.csv` top-down. Five deposits, all CC BY,
+none previously seen by any run.
+
+**`data/wang_2025_growth_mindset.py`** — `10.17632/dt5hj5j792`, Mendeley,
+CC BY 4.0. 516 Chinese junior high school students x four instruments. The
+deposit ships `Questionnaire.docx` alongside the data, which is what makes the
+source's column naming safe to map — the `CQ` prefix is reused for two
+different instruments and only the questionnaire resolves it:
+
+| table | source cols | items | resp |
+|---|---|---|---|
+| `wang_2025_growth_mindset` | `GQ1-6` | 6 | 1-6 |
+| `wang_2025_cognitive_fusion` | `TCQ1-9` | 9 | 1-7 |
+| `wang_2025_impulse_control` | `CQ1-4` | 4 | 1-5 |
+| `wang_2025_automatic_thoughts` | `CQ1_A-CQ7_A` + `CQ8-CQ20` | 20 | 0-4 |
+
+Two `resp` decisions, each grounded in the questionnaire rather than the
+distribution: the ATS's **0 is a real scale point** ("Never", and the modal
+response at 5,632/10,317), while the CFQ's **0 is not** — that scale is
+documented as anchored at 1, so its 12 zeros (1-2 on each of the nine items)
+are set to NA. Two ATS responses of 5 on `CQ1_A` alone exceed the documented
+0-4 range and are the isolated-to-one-item data-entry signature, so they are
+also NA'd. `V58` matches nothing in the questionnaire and is not exported.
+
+**`data/senyurt_2023_burnout.py`** — `10.17632/dkv4dyxdwx`, CC BY 4.0. 198
+Turkish healthcare workers, 10 items, 1-7, 1,975 responses. The deposit ships
+no instrument document, so the scale is described structurally rather than
+named. The file's `Q1`-`Q13` yes/no pandemic questions are individual items,
+not a scored instrument, and are not exported (same call as
+`reuter_2021_campuslife`). Free-text columns scanned for identifiers: none.
+Covariates deliberately limited to gender, age, profession and marital status
+— `City` (54 values) and `Expertise` (74 specialties) over 198 respondents are
+a real re-identification surface for a small professional population.
+
+**`data/sokolovskii_2021_tfeq.py`** — `10.6084/m9.figshare.16577462`, CC BY
+4.0. 213 Russian university students x the 51-item Three-Factor Eating
+Questionnaire, 10,863 responses, density 1.000. From the recovered-backlog
+pool. `ID1` is the identifier (unique on all 213 rows); `Скан` and `Номер` are
+data-entry batch bookkeeping — `Номер` has only 173 distinct values over 213
+rows, so it is a within-batch sequence, not a person id.
+
+**`data/doherty_2023_bicdis.py`** — `10.17632/95cmh2ftwk`, CC BY 4.0. 472
+Irish consultant doctors, 2019. Three tables: `doherty_2023_dass21` (21 items,
+0-3), `doherty_2023_burnout` (16 items, 1-7), `doherty_2023_bfi10` (10 items,
+1-5). Two verifications the script asserts rather than assumes: the deposit's
+own `DASStotal` equals the plain sum of `DASS1`..`DASS21` on every complete
+case, confirming those are the raw DASS-21 items; and `BFI1R` = 6 - `BFI1`
+exactly (likewise 3, 4, 5, 7), confirming the `*R` columns are stored
+reversals of items already present — shipping both would put one response in
+the table twice under two names, so only the raw ten are exported. The 16-item
+burnout block is *not* named: `MBIsubscaleEE/C/PA` hint at the MBI but do not
+sum to the item total, so the identification cannot be verified from the file.
+
+**`data/daderman_2023_naqr.py`** — `10.17632/mgwtzjww7g`, CC BY 4.0. 867
+respondents x the 22-item NAQ-R, 19,074 responses, density 1.000 — the
+item-level data behind an IRT/DIF study of workplace bullying. Two of today's
+fixes were both needed to get here: it had been triaged `worth_retrying` for
+"text-coded Likert responses" (the `convert_categoricals` artifact), and it
+has **no id column at all**, so before the row-position fallback it would have
+collapsed onto `Gender_M1F2`. `bullied` is the study's single self-labelling
+criterion and is carried as a covariate, not shipped as a one-item table.
+
+`biblio_batch_2026-08-25c.csv` (10 rows) written for upload.
