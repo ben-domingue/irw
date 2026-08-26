@@ -11569,3 +11569,31 @@ What stays nominal is the genuinely multi-category material:
 **The general rule this settles**, worth applying to future carve-outs: a
 letter- or option-coded column is only a nominal-standard candidate when it
 has **three or more** categories. Two categories go to core.
+
+### Correction: paste biblio rows as TSV, not CSV (2026-08-26)
+
+`biblio_nominal_2026-08-26.csv` would not split into columns on paste. The
+file was not malformed — 13 fields per row, RFC4180-quoted, verified by
+`csv.reader`. The problem is the paste path: **Google Sheets splits pasted
+text on commas but does not honour CSV quoting**, so every comma inside a
+quoted `Description` or `Reference` becomes a column break and the row shifts
+from that point on. Since those two fields always contain commas, the failure
+is systematic, not occasional.
+
+**Fix: hand over a `.tsv` instead.** Sheets splits pasted text on tabs and
+treats the rest literally, so no quoting is involved and nothing can shift.
+Verified safe for these files: no field in any of them contains a tab,
+newline or carriage return, which is the one precondition.
+
+Written alongside the CSVs (the CSVs are kept as the machine-readable copy):
+
+    biblio_nominal_2026-08-26.tsv    2 rows, 13 cols
+    biblio_escs_2026-08-26.tsv      20 rows, 14 cols
+    biblio_batch_2026-08-26b.tsv     1 row,  14 cols
+
+**Do this for every future biblio hand-off.** Earlier batches today were
+pasted from CSV and appear to have landed, but the same latent shift applies
+to any row whose Description or Reference contains a comma — which is nearly
+all of them — so it is worth a spot-check of the recently-pasted rows in both
+sheets. This may also be the real cause of the `cos101_2026_openended`
+column-shift noted above, rather than a wrong column layout at drafting time.
