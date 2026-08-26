@@ -11085,3 +11085,66 @@ That is five PII deposits caught across today's worklist (8 of 69 leads
 overall), and the screen has been corrected five times on live cases — bare
 `IP`, SPSS-concatenated `PhoneNumber`, national ID numbers, `birthdate`, and
 now content-checked `NAME`.
+
+### Worklist pass 3 — 12 more tables (2026-08-25)
+
+**`data/eldor_2022_radicalization_resilience.py`** — `10.3389/fpsyg.2022.980180`,
+Frontiers in Psychology, CC BY 4.0. 334 Norwegian school students; nine
+measures, all on the same 1-7 scale, 27,469 responses:
+
+| table | items | ids | responses |
+|---|---|---|---|
+| `eldor_2022_political_resilience` | 49 | 331 | 15,573 |
+| `eldor_2022_anomie` | 7 | 309 | 2,160 |
+| `eldor_2022_violent_intentions` | 7 | 304 | 2,112 |
+| `eldor_2022_relative_deprivation` | 6 | 303 | 1,806 |
+| `eldor_2022_school_resilience` | 5 | 320 | 1,593 |
+| `eldor_2022_violent_extremism` | 5 | 305 | 1,505 |
+| `eldor_2022_symbolic_threat` | 3 | 303 | 906 |
+| `eldor_2022_realistic_threat` | 3 | 302 | 905 |
+| `eldor_2022_collective_anger` | 3 | 305 | 909 |
+
+`ResponseId` is unique on all 334 rows and is used as `id`; the Qualtrics
+export was checked for the IP/geolocation columns such exports often carry —
+none present. `Duration__in_seconds_` is whole-survey completion time, so it
+is `cov_completion_time_s` and explicitly not `rt`. Excluded: eleven derived
+scale scores, the stored reversals `violent_beh_intentio_4r/5r/7r` whose
+originals are already in the block, the `political_resilience_42RC` recode,
+and the constant `I_1`.
+
+**Also a lesson about the URL this was fetched from.** The first attempt
+pulled `Table_1.xls` — a 33 x 9 table of biome types and sequencers from an
+unrelated genomics article — because a figshare landing URL was reconstructed
+from the DOI suffix (`...980180.s003`) rather than taken from the lead row.
+Frontiers supplementary DOIs do not encode the figshare article id; the real
+article is 21531195, and it is in the `url` column of the worklist. Use the
+recorded URL, never a reconstructed one.
+
+**`data/milson_2026_social_media_self_esteem.py`** — `10.25421/yorksj.32113705`,
+York St John University, CC BY 4.0. 904 sexual and gender minority young
+adults: `milson_2026_self_esteem` (10 Rosenberg items, 1-4),
+`milson_2026_social_media_use` (9 items, 0-4),
+`milson_2026_body_satisfaction` (6 items, 1-9). All density 1.000, 22,600
+responses.
+
+Three judgment calls, all recorded in the script:
+
+* **No usable identifier.** `Code_Name` holds self-generated participant
+  codes ("Wi03", "La24") and repeats — 816 distinct over 904 — while `ID` has
+  60 distinct values. `id` is therefore the row position, and `Code_Name` is
+  dropped rather than carried: it is pseudonymous rather than anonymous,
+  being derived from the participant's own details, and nothing needs it.
+* **Free-text identity fields are not exported.** `Gender_6_TEXT` (47
+  distinct self-descriptions) and `Ethnicity_Text` are dropped; on a
+  904-person minority sample free-text self-description is a real
+  re-identification surface and adds nothing analytically. The coded
+  `Gender`/`Sexuality`/`Ethnicity`/`Identity` categories are carried, as the
+  deposit publishes them. This is a narrower call than the LGB
+  medical-students skip (2026-08-12), which turned on the deposit carrying
+  participant *email addresses* — there is no direct identifier here.
+* **The body-satisfaction block is a 9-point scale**, uniformly 1-9 on all
+  six items. The script's range assertion caught this: a first look had
+  truncated the value list at 7 and the initial draft asserted 1-7. Worth
+  noting as a reason to keep those assertions rather than widen them.
+
+**`biblio_batch_2026-08-25c.csv` is now 25 rows / 131,878 responses.**
