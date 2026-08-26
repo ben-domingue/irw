@@ -3962,3 +3962,4 @@ date,query,output_file,notes
 2026-08-25,emotion recognition accuracy,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
 2026-08-25,differential item functioning,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
 2026-08-25,test equating,runs/candidates_openaire_2026-08-25.csv,first-ever OpenAIRE run; sources=openaire; connector existed but was unwired
+2026-08-26,"[weekly] 15 terms x journals=peerj,screports,jofintelligence,mbr,behavsci,apm,bmcmrm,jopd,bmcpubhealth,heliyon,psychometrika",runs/pmc_monthly_candidates_weekly_2026-08-26.csv,pmc monthly-script automated run; mode=weekly; 37 candidates triaged; 15/15 terms visited (8 hit per-term cap 4)
