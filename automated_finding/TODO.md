@@ -101,11 +101,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the audit was written — `runs/candidates_edu_2026-08-25.csv` needs a Step 2
   triage, `runs/pmc_edu_2026-08-25.csv` a Step 2b.
 
-- [ ] **`biblio_batch_2026-08-25b.csv` (8 rows) needs uploading/pasting** —
+- [x] **`biblio_batch_2026-08-25b.csv` (8 rows) needs uploading/pasting** —
   `alexandrowicz_2018_cesd`, the six `sumner_2022_*` tables, and
   `altman_2020_capq`. 365,409 responses. See the BATCH_LOG entry for the
-  per-table coding decisions.
-
+  per-table coding decisions. — **uploaded/pasted, confirmed 2026-08-25 (ben-domingue)**: the 8 tables (`alexandrowicz_2018_cesd`, six `sumner_2022_*`, `altman_2020_capq`), 365,409 responses. `biblio_batch_2026-08-25b.csv` and the `irw_output/*.csv` files are off disk as expected. `altman_2020_capq` shipped with all 19 items including the three above 93% zeros (`CAPQ6`, `CAPQ8`, `CAPQ10`) — the floor effect is a real property of a problems checklist and all six categories are used on every item.
 - [ ] **Item text is cheap for two of the new tables.** `altman_2020_capq`:
   the .sav's variable labels are the full CAPQ item stems and the item ids
   are the source column names, so they join directly. `sumner_2022_*`: the
