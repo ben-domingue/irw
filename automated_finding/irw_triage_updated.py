@@ -766,25 +766,45 @@ _RE_PII_STRONG = re.compile(
     r"|\bnames?[\s_\-]*of[\s_\-]*(?:the[\s_\-]*)?"
     r"(?:respondent|participant|student|patient|child|parent)"
     r"|\bsurnames?\b(?![\s_\-]*of\b)"
-    r"|\bdate[\s_\-]*of[\s_\-]*birth\b|\bbirth[\s_\-]*date\b|\bdob\b"
+    r"|\bdate[\s_\-]*of[\s_\-]*birth\b|\bbirth[\s_\-]*date\b|\bbirthday\b|\bdob\b"
     r"|\bip[\s_\-]*address\b"
+    # a column labelled exactly "IP" (or ip_addr) in a survey export is the
+    # respondent's address -- 10.7910/dvn/l6g8ul (2026-08-25) stored them
+    # geolocated, e.g. "112.96.199.12(guangdong-guangzhou)". Anchored to the
+    # whole label so it cannot fire inside an unrelated abbreviation.
+    r"|^ip$|^ip[\s_\-]?addr(?:ess)?$"
     r"|\bpassport[\s_\-]*(?:no|number)?\b|\bsocial[\s_\-]*security\b|\bssn\b"
     r"|\bnational[\s_\-]*id\b"
     r"|\bnombre[\s_\-]*(?:completo|del[\s_\-]*(?:participante|encuestado))\b"
-    r"|\bapellidos?\b|姓名|氏名"
+    r"|\bapellidos?\b|姓名|氏名|이름"
+    # national identity numbers, non-English. 身份证(号) is the PRC resident ID
+    # card -- seen alongside pupil and parent names in a school survey
+    # (10.7910/dvn/7cyiqg, 2026-08-25).
+    r"|身份证|身分證|주민등록번호|マイナンバー"
+    r"|\bcpf\b|\bcurp\b|\bnric\b|\bnik\b[\s_\-]*(?:ktp)?"
     r")",
     re.IGNORECASE)
 
 _RE_PII_WEAK = re.compile(
     r"(?:"
     r"\be[\s_\-]?mail\b|\bcorreo[\s_\-]*electr|\bcourriel\b"
-    r"|\b(?:tele)?phone\b|\bmobile[\s_\-]*(?:no|number)\b"
-    r"|\bcontact[\s_\-]*(?:no|number|details)\b"
+    # Trailing \b is deliberately optional before "num"/"no": SPSS strips
+    # spaces out of variable names, so "Phone Number" arrives as
+    # "PhoneNumberNomborTelefon" and a trailing \b never fires
+    # (10.7910/dvn/llppie, 2026-08-25 -- real phone numbers and a full
+    # block/floor/house address, missed on the first pass because of this).
+    r"|\b(?:tele)?phone(?:[\s_\-]*(?:no\b|num)|\b)"
+    r"|\bmobile[\s_\-]*(?:no\b|num)|\bcontact[\s_\-]*(?:no\b|num|details\b)"
     r"|\b(?:home|street|postal|mailing|residential)[\s_\-]*address\b"
+    r"|\b(?:house|block|floor|apartment|flat)[\s_\-]*(?:no\b|num)"
     r")",
     re.IGNORECASE)
 
 _MAX_WEAK_WORDS = 5
+# Second guard for the weak tier. The word-count test alone does not survive
+# SPSS name mangling: a stripped item stem ("Ioftenfeelanxiouscheckingmyemail")
+# is also one "word". A real field label stays short; an item stem does not.
+_MAX_WEAK_CHARS = 60
 
 
 def screen_for_pii(columns) -> list[str]:
@@ -795,7 +815,8 @@ def screen_for_pii(columns) -> list[str]:
         if _RE_PII_STRONG.search(label):
             hits.append(label)
         elif (_RE_PII_WEAK.search(label)
-              and len(label.split()) <= _MAX_WEAK_WORDS):
+              and len(label.split()) <= _MAX_WEAK_WORDS
+              and len(label) <= _MAX_WEAK_CHARS):
             hits.append(label)
     return hits
 

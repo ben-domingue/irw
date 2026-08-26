@@ -10738,3 +10738,59 @@ shallow, and the new terms will not get a fair test until the monthly
 routines run with a higher `--limit` or an explicit `--per-term-cap`. Logged
 in `TODO.md` against the scheduled-runs decision, since it is a change to the
 cloud routine prompts rather than to the code.
+
+### Working the recovered-backlog leads — top 8 (2026-08-25, TODO #4)
+
+Zero shipped from the eight largest open-licensed leads. Worth recording in
+full, because the failure modes are informative about what that pool is.
+
+| DOI | shape | verdict |
+|---|---|---|
+| `10.6084/m9.figshare.32761266` | 85,146 x 5 | job postings (job_title, company_name, salary) — not item response |
+| `10.7910/dvn/rwpomi` | 12,622 x 11 | KLIPS panel; QoL/IncJQ/HardJQ/SoftJQ/SES5 are continuous derived indices (440-43,531 unique values on 0-1 scales), not items |
+| `10.7910/dvn/me8oji` | 1,646 x 42 | firm-level supply-chain economics (bullwhip effect, patent counts) |
+| `10.7910/dvn/7cyiqg` | 199 x 256 | **PII** — 身份证号 (PRC national ID), 学生姓名 / 父亲姓名 / 母亲姓名 (pupil and both parents' names) |
+| `10.7910/dvn/l6g8ul` | 1,107 x 49 | **PII** — full respondent IPs, geolocated (`112.96.199.12(广东-广州)`) |
+| `10.7910/dvn/llppie` | 355 x 116 | **PII** — real phone numbers, full block/floor/house address, `Birthday` back to 1930 |
+| `10.7910/dvn/alygqs` | 6,821 x 5 | not yet examined |
+| `10.7910/dvn/xpuru1` | 1,203 x 45 | still open — pre/post political measures mixed with change indices, needs a closer read |
+
+**Three of eight carried PII.** That is far above the rate elsewhere in the
+pipeline, and it makes sense: this pool is raw survey exports (Google Forms,
+Wenjuanxing, SPSS straight off the collection instrument) rather than
+deposit-prepared analysis files. Anyone working the remaining 35 leads should
+expect the same and check before investing in a script.
+
+The `llppie` case is the one that matters most: it is CC0, a genuinely good
+dengue KAP instrument (25 knowledge + 8 attitude + 11 practice binary items,
+N=354, item text in the SPSS labels) — and it still has to be skipped whole,
+because the deposit ships respondents' phone numbers and home addresses.
+
+### The PII screen was hardened three times on these (2026-08-25)
+
+Each of the three catches above exposed a real gap in the screen added
+earlier today:
+
+* **`7cyiqg`** was caught, but only via `姓名`. Added the national-identity
+  patterns it should also have matched: `身份证` / `身分證` (PRC resident ID),
+  `주민등록번호`, `マイナンバー`, plus `CPF`, `CURP`, `NRIC`, `NIK`.
+* **`l6g8ul`** was **missed**. Its column is bare `IP`, and the screen only
+  had `ip address`. Added `^ip$` / `^ip_addr(ess)?$`, anchored to the whole
+  label so it cannot fire inside `IPIP`, `IPAQ` or `recipient`.
+* **`llppie`** was **missed**, and this is the general lesson: **SPSS strips
+  spaces out of variable names**, so "Phone Number" arrives as
+  `PhoneNumberNomborTelefon` and a *trailing* `\b` never fires. The
+  contact-detail patterns now accept `phone`/`mobile`/`contact` followed
+  directly by `num`, and the address patterns accept
+  `house|block|floor|apartment|flat` + `num`. `Birthday` added alongside
+  `date of birth`.
+  That change alone would have let a stripped item stem
+  ("Ioftenfeelanxiouscheckingmyemail") match as one "word", so the weak tier
+  now also requires the label to be <=60 characters — a real field label is
+  short, a stripped item stem is not.
+
+Re-verified after each change: the dengue file returns `pii_suspected`
+naming all five offending columns, the doomscrolling file still does, and
+the three datasets shipped today (CAPQ, FTD-SS, CES-D) flag nothing and are
+unaffected. Regression set is now 13 positives / 13 negatives on top of the
+original 24/27.
