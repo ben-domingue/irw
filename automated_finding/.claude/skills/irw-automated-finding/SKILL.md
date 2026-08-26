@@ -636,14 +636,16 @@ text on commas without honouring CSV quoting, so every comma inside a
 `Description` or `Reference` becomes a column break -- and those fields nearly
 always contain commas.
 
-**But TSV is not quote-immune.** Sheets *does* apply quote handling to pasted
-tab-delimited text, so a `"` anywhere in a field can put it in quote-mode and
-shift the alignment from the end of the quoted run onward. A 55-row biblio
-broke at exactly the last row of its six-row quoted block. The safe
-precondition per field is **no tab, newline, carriage return or double
-quote**, plus no leading `=`, `+`, `-`, `@` or `'` (Sheets reads those as
-formula or literal-text prefixes). Quotes in a `Reference` are decorative --
-APA does not quote article titles -- so strip them.
+**Keep fields boring anyway.** A 55-row biblio once failed to paste
+repeatedly while being verifiably well-formed, and the cause was never found
+(see `BATCH_LOG.md`, 2026-08-26). Since the failing component is the paste
+path and it cannot be inspected, the cheap insurance is to keep every field
+to plain prose: no tab, newline, carriage return or double quote, no leading
+`=`, `+`, `-`, `@` or `'` (Sheets reads those as formula or literal-text
+prefixes). Quotes in a `Reference` are decorative -- APA does not quote
+article titles -- so strip them. **Do not claim to know what Sheets does to a
+pasted quote**; that was asserted here once on a coincidence and did not hold
+up when tested.
 
 **Check that per field, never per line.** `'\t' in line` is vacuously true for
 every line of a TSV, so a file-level substring test for the delimiter catches
@@ -652,6 +654,13 @@ nothing. Iterate fields:
     for r in rows:
         for v in r:
             assert not (set('"\t\r\n') & set(v))
+
+**When a paste goes wrong, read the target sheet before theorising.** Fetch
+its CSV export: it shows the real header (so a layout mismatch is ruled in or
+out immediately) and exactly which rows landed and how they aligned. That one
+step killed two plausible-looking theories at once and showed nothing had
+half-landed. Verifying the *file* again is the wrong instinct once the file
+has already been checked -- the fault is downstream of it.
 
 **On Dataverse, download `format=original`, not the `.tab` conversion.** One
 batch hit three distinct defects from the conversion alone: SPSS user-missing

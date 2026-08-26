@@ -5,16 +5,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
-- [ ] **`biblio_combined_2026-08-26.tsv` (55 rows) needs uploading/pasting**
-  -- 9,191,758 responses across 55 tables, one row per staged CSV in
-  `irw_output/`. This is the merge of the three separate TSVs that were
-  pending (CMSCE 6, edu batch 2 11, edu batch 3 38); those three files have
-  been deleted now that every row is carried over verbatim. Verified before
-  merging: identical 14-column headers, 14 fields per row, no tabs or
-  newlines in any field, no duplicate table name, and every row's
-  `N x M = R` re-checked against the CSV it describes. See the CMSCE and the
-  two "education profile" entries in `BATCH_LOG.md` for the per-deposit
-  coding decisions.
+- [ ] **A biblio paste can fail for reasons not visible in the file, and there
+  is no diagnostic for it.** On 2026-08-26 the 55-row combined biblio failed
+  to paste repeatedly while being verifiably well-formed (14 tab-delimited
+  fields per line, pure ASCII, nothing special in any field, header identical
+  to the live sheet's). It eventually went in after two speculative content
+  changes, and it is not known which -- or whether either -- mattered. See
+  the BATCH_LOG entry. Worth either finding the real mechanism next time it
+  happens, or standardising on File > Import > "Append to current sheet",
+  which uses a real parser instead of the clipboard and would make the
+  question moot.
 
 - [ ] **Decide whether Qualtrics geo-IP coordinates count as PII**
   (`10.7910/DVN/JC6F9O`, Hemesath & Tepe 2025, CC0). The export carries

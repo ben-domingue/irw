@@ -12133,3 +12133,52 @@ so that check could never have caught anything. It has to be per field:
 A file-level substring test for the delimiter is always vacuous. The same
 pass now also rejects any field whose first character is `=`, `+`, `-`, `@`
 or `'`, since Sheets reads those as formula or literal-text prefixes.
+
+### The 55-row combined biblio is in -- but the paste failure was never diagnosed (2026-08-26)
+
+**Confirmed by ben-domingue and verified against the live sheet: all 55 rows
+are in the dictionary.** It went from 3,943 to 3,998 rows; all 55 tables are
+present exactly once, every one at 14 fields, and spot-checks of
+`alan_2018_teacher_warmth` (the row that had been breaking) and
+`rogers_2021_financial_knowledge` show correct column alignment.
+`biblio_combined_2026-08-26.tsv` and the `irw_output/` CSVs are off disk.
+
+**Honest record: the cause of the paste failure was never established, and
+the fix is confounded.** Two changes were made and one route was suggested,
+in that order, and it is not known which mattered:
+
+1. double quotes stripped from nine `Reference` fields;
+2. `;` (53) and `*` (1) replaced, making the file's punctuation a strict
+   subset of the goldberg batch that had pasted cleanly hours earlier;
+3. File > Import > "Append to current sheet" offered as a route that
+   bypasses the clipboard parser entirely.
+
+Do not record any of these as *the* fix. What follows is what was actually
+established, which is worth more than the guesses:
+
+* **The file was well-formed throughout.** 56 lines, exactly 14 tab-delimited
+  fields each on a raw `split('\t')`, pure ASCII, no tab/CR/newline/quote
+  inside any field, no leading `=`/`+`/`-`/`@`/`'`, no duplicate table name.
+  Every failed paste was of a file that passed all of those.
+* **The sheet's header was byte-identical to the file's.** Fetched from the
+  live CSV export, not from `metadata/` -- so it was never a layout mismatch.
+* **Nothing half-landed.** Before the successful paste, zero of the 55 rows
+  were in the sheet, so there was never partial damage to undo.
+
+**Two wrong diagnoses, and why each looked right.** The first was double
+quotes: they sat in nine `Reference` fields, six of them a consecutive block
+whose *last* row was exactly the row ben-domingue named as the first bad one.
+That is a strong-looking coincidence and it was stated far too confidently --
+including a correction written into this file claiming Sheets applies quote
+handling to pasted TSV. **That claim is unproven; removing the quotes did not
+fix the paste.** The second was semicolons, which were genuinely the one
+punctuation difference from a known-good batch -- but they appear in rows 1
+and 2, which were reported as fine, so they never fit the symptom either.
+
+**The lesson is about method, not about Sheets.** Verifying the file harder
+was the wrong move once the file had already been verified clean three ways;
+the failing component was the paste path, which cannot be inspected from
+here. The cheap decisive step -- reading the live sheet to see what the paste
+actually produced -- was taken only on the third attempt, and it immediately
+showed the header matched and nothing had landed, which killed both standing
+theories at once. **Read the target before theorising about the transport.**
