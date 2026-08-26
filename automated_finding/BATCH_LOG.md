@@ -11881,3 +11881,35 @@ case-sensitive. Use `grep -rli` when checking whether a DOI already has a
 processing script.
 
 `biblio_cmsce_2026-08-26.tsv` (6 rows) written for upload.
+
+### Education shortlist, second pass -- 11 more tables (2026-08-26)
+
+**`data/aditama_2024_strs.py`** -- `10.17632/b4byp3rn7j`, CC BY 4.0. 1,924
+Indonesian secondary students x the 28-item Student-Teacher Relationship
+Scale, 53,872 responses, density 1.000. The deposit also ships Winsteps
+output (item/person statistics, a Wright map, local-dependence tables), so the
+file selector names `Data Instrumen.xlsx` explicitly. The source header mixes
+`item_` and `Item_` case within one block -- a typo, not two instruments, both
+on the same 1-5 scale -- so it is matched case-insensitively.
+
+**`data/baquerotomas_2026_emotion_regulation.py`** -- `10.7910/DVN/MXYEMC`,
+CC0 1.0. 566 Spanish university students x seven named instruments, 62,260
+responses, all density 1.000: DERS (28, 0-4), SPSI (25, 0-4), PIL (20, 1-7),
+EMAS (12, 1-7), NEO-FFI (9, 1-5), PHQ-9 (9, 0-3), GAD-7 (7, 0-3). Seven
+tables, not one -- they span four different response scales.
+
+**`data/demirbag_2025_epistemological_beliefs.py`** -- `10.7910/DVN/HYZ6QH`,
+CC0 1.0. 1,073 Turkish middle-school students x three constructs, 76,183
+responses, all density 1.000: epistemological beliefs (26), academic emotions
+(24), goal orientations (21). All on 1-5 but distinct constructs, named by
+their source prefixes and the deposit's own title.
+
+None of the three deposits carries an identifier column; `id` is row position
+in each.
+
+**Deferred: `10.7910/DVN/CZJJAF`** ("An Ordinal Item Response Model for
+Understanding Attitudes"). Its `v*` block spans 1-1999, so the prefix mixes
+item responses with survey-variable codes -- a World-Values-Survey-style
+extract that needs the codebook before the item columns can be separated.
+
+`biblio_edu_batch2_2026-08-26.tsv` (11 rows) written for upload.
