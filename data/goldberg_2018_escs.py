@@ -55,15 +55,24 @@ Coding notes
 * Demographics (`SEX`, `AGE`, `EDUC`, `ETHNIC`, `EMPLOY`, `MARITAL`) are
   joined from dataset ( 0) and carried as covariates. `SEXN` is dropped as a
   numeric duplicate of `SEX`.
-* **Letter-coded columns are excluded from these tables, not discarded.**
-  `resp` must be at least ordinal, and an A/B answer is unordered. SPA is the
-  case that matters: 82 of its 528 columns are letter-coded and 446 are the
-  0-9 ordinal block. Those 82 are real responses in an unordered-category
-  format, so they are carved out by
-  `data/goldberg_2018_escs_nominal.py` under IRW's experimental *nominal*
-  standard -- `text` column instead of `resp`, output to
-  `automated_finding/output_noncore/`, biblio row to the separate nominal
-  sheet rather than the main dictionary.
+* **SPA's letter-coded columns split two ways.** 82 of its 528 columns hold
+  letters rather than the 0-9 ordinal block.
+  - `TRPAIR1`..`TRPAIR80` are the collection's "80 forced-choice BFI pairs"
+    (per `TechnicalReport_ESCS.doc`): each item offers two descriptors and the
+    respondent picks one. With exactly **two** response categories the
+    distinction between ordered and unordered is vacuous -- a dichotomy is
+    trivially ordinal, and standard dichotomous IRT applies directly -- so
+    this ships as a **core** table, `goldberg_2018_spa_bfi_forced_choice`,
+    alongside the collection's other true/false instruments (CPI, HPI,
+    JPI-R). "A" is coded 1 and "B" 2, matching CPI's own 1/2 coding in this
+    same collection. **Which descriptor is "A" is a property of the form, not
+    of the trait**, so the direction is arbitrary per item; a dichotomous
+    model absorbs that, but do not read 1 < 2 as a trait ordering.
+  - `COMPUT7` and `COMPUT9` have up to twelve unlabelled categories and stay
+    genuinely nominal; `data/goldberg_2018_escs_nominal.py` ships those under
+    IRW's experimental nominal standard (`text` column, output to
+    `automated_finding/output_noncore/`, biblio row to the separate nominal
+    sheet).
 * **Zero-variance items are dropped** where they occur, not the instrument
   containing them; the per-table output reports how many and which.
 * Source item names (`c1`..`c462`, `s1`..`s430`, ...) are kept so item text
@@ -205,7 +214,35 @@ def main():
         print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "
               f"resp {long['resp'].min()}-{long['resp'].max()}, "
               f"density {len(long)/(n_id*n_it):.3f}{note}", flush=True)
-    print(f"\n{len(INSTRUMENTS)} tables, {total:,} responses")
+    total += _forced_choice(dem, cov_cols)
+    print(f"\n{len(INSTRUMENTS) + 1} tables, {total:,} responses")
+
+
+def _forced_choice(dem, cov_cols) -> int:
+    """SPA's 80 forced-choice BFI pairs, as a dichotomous core table."""
+    d = _fetch("10.7910/DVN/IOA6EE")
+    idcol = d.columns[0]
+    items = [c for c in d.columns if re.match(r"^TRPAIR\d+$", str(c))]
+    assert len(items) == 80, len(items)
+
+    long = d.rename(columns={idcol: "id"}).melt(
+        id_vars=["id"], value_vars=items, var_name="item", value_name="choice")
+    long["choice"] = long["choice"].astype(str).str.strip()
+    long = long[long["choice"].isin(["A", "B"])]
+    long["resp"] = long["choice"].map({"A": 1, "B": 2})
+    long = long.drop(columns=["choice"]).merge(dem, on="id", how="left")
+    long = long[["id", "item", "resp"] + cov_cols]
+
+    assert long["resp"].isin([1, 2]).all()
+    assert long.groupby("item")["resp"].nunique().min() > 1
+    assert not long.duplicated(["id", "item"]).any()
+
+    path = os.path.join(OUTDIR, "goldberg_2018_spa_bfi_forced_choice.csv")
+    long.to_csv(path, index=False)
+    n_id, n_it = long["id"].nunique(), long["item"].nunique()
+    print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "
+          f"resp 1-2 (A/B), density {len(long)/(n_id*n_it):.3f}")
+    return len(long)
 
 
 if __name__ == "__main__":

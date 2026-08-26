@@ -10,16 +10,16 @@ Output goes to `automated_finding/output_noncore/`, the response lives in a
 `text` column rather than `resp`, and the biblio row belongs in the separate
 nominal sheet -- not the main IRW dictionary.
 
-`data/goldberg_2018_escs.py` builds the 19 core-standard tables from this
-collection. When it reaches SPA it drops 82 of the file's 528 columns because
-their values are letters, not ordinal codes. Those 82 are not junk -- they are
-genuine responses in an unordered-category format -- so they are carved out
-here instead of discarded.
+`data/goldberg_2018_escs.py` builds the core-standard tables from this
+collection. When it reaches SPA it sets aside 82 of the file's 528 columns
+because their values are letters rather than ordinal codes. Eighty of those
+are the forced-choice BFI pairs and are dichotomous, so that script ships them
+as a core table itself; the two that remain are genuinely
+multi-category and are handled here.
 
-Tables written (to output_noncore/)
------------------------------------
-goldberg_2018_spa_bfi_forced_choice   80 items, responses "A"/"B"
-goldberg_2018_spa_computer_use         2 items, responses "A".."L"
+Table written (to output_noncore/)
+----------------------------------
+goldberg_2018_spa_computer_use   2 items, responses "A".."L"
 
 What these are
 --------------
@@ -27,21 +27,22 @@ The collection's `TechnicalReport_ESCS.doc` describes SPA as including
 "79 new IPIP items ... plus **80 forced-choice BFI pairs**", and asks
 respondents to indicate "their present computer use and skills".
 
-* `TRPAIR1`..`TRPAIR80` are those forced-choice Big Five pairs: each item
-  presents two descriptors and the respondent picks one. "A" and "B" identify
-  which member of the pair was chosen, so the response is an unordered
-  category -- the nominal standard's first subtype ("which option was picked,
-  not correctness"). Coding it 0/1 would imply an order the instrument does
-  not have.
 * `COMPUT7` and `COMPUT9` are computer-use questions with up to twelve
-  unlabelled categories ("A".."L"). Note the `COMPUT` family spans ten
-  columns; the other eight are ordinal and stay in the core table, so
+  unlabelled categories ("A".."L") and no key for what they mean. Twelve
+  unordered categories is genuinely nominal. Note the `COMPUT` family spans
+  ten columns; the other eight are ordinal and stay in the core table, so
   membership here is decided by the values, not the name.
+* `TRPAIR1`..`TRPAIR80`, the collection's 80 forced-choice BFI pairs, are
+  **not** here. They have exactly two categories, and a dichotomy is trivially
+  ordinal -- standard dichotomous IRT applies directly -- so
+  `data/goldberg_2018_escs.py` ships them as the core table
+  `goldberg_2018_spa_bfi_forced_choice` with "A"/"B" coded 1/2, matching CPI's
+  own coding elsewhere in this collection. (ben-domingue, 2026-08-26.)
 
-**A caveat on the computer-use table**: it is only two items, and the
-collection ships no key for what "A".."L" mean, so its analytic value is
-limited. It is included because the carve-out was asked for explicitly; drop
-it if the thinness is not worth a row in the nominal sheet.
+**A caveat**: this is only two items, and the collection ships no key for what
+"A".."L" mean, so its analytic value is limited. It is included because the
+carve-out was asked for explicitly; drop it if the thinness is not worth a row
+in the nominal sheet.
 
 Coding notes
 ------------
@@ -65,8 +66,7 @@ UA = {"User-Agent": "Mozilla/5.0 (IRW-research)"}
 OUTDIR = os.path.join("..", "automated_finding", "output_noncore")
 
 BLOCKS = [
-    (re.compile(r"^TRPAIR\d+$"), "spa_bfi_forced_choice", 80),
-    (re.compile(r"^COMPUT\d+$"), "spa_computer_use",       2),
+    (re.compile(r"^COMPUT\d+$"), "spa_computer_use", 2),
 ]
 
 

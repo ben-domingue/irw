@@ -11537,3 +11537,35 @@ is shifted by one from `Contributor` onward — its `Contributor` cell is blank
 and its `Date` cell reads `automated`. Presumably the same
 wrong-format problem when that row was drafted. Worth fixing when someone is
 next in the sheet; nothing this batch depends on it.
+
+### Correction: the forced-choice BFI pairs belong in core, not nominal (2026-08-26)
+
+ben-domingue's call, and correct: **two categories is just dichotomous.** With
+exactly two response options the ordered/unordered distinction is vacuous --
+any dichotomy is trivially ordinal, and standard dichotomous IRT applies to it
+directly. Putting `goldberg_2018_spa_bfi_forced_choice` in the nominal sheet
+also sat oddly beside CPI, HPI and JPI-R, which are already core true/false
+tables *from the same collection*.
+
+Moved. `data/goldberg_2018_escs.py` now builds it as a core table with "A"
+coded 1 and "B" 2, matching CPI's own 1/2 coding elsewhere in the collection:
+**729 ids x 80 items = 57,441 responses**, density 0.985. Documented in the
+script, since it is a real caveat: which descriptor is labelled "A" is a
+property of the form rather than of the trait, so item direction is arbitrary
+and 1 < 2 must not be read as a trait ordering — a dichotomous model absorbs
+that, a naive sum score would not.
+
+`biblio_escs_2026-08-26.csv` is now **20 rows / 6,932,531 responses**.
+
+What stays nominal is the genuinely multi-category material:
+
+| table | respondents x items | responses | categories |
+|---|---|---|---|
+| `goldberg_2018_spa_computer_use` | 709 x 2 | 1,388 | A-L (12) |
+| `mthimkhulu_2023_pirls_reading_mc` | 1,680 x 4 | 5,486 | A-D (4) |
+
+`biblio_nominal_2026-08-26.csv` is now 2 rows.
+
+**The general rule this settles**, worth applying to future carve-outs: a
+letter- or option-coded column is only a nominal-standard candidate when it
+has **three or more** categories. Two categories go to core.
