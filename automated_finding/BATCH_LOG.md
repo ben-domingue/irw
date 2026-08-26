@@ -12036,3 +12036,44 @@ re-ship them.
 | `10.7910/DVN/XNKYZS` | the response data ("Dataset 1") is not deposited -- only a Q-matrix, item parameters and R code. |
 | `10.7910/DVN/EM3AZ2` | a serial-transmission chain experiment; the only battery is a 5-item need-for-affect scale, and the `_afs1`/`_afs2` columns are other participants' retellings rather than responses. Low value for the disentangling required. |
 | `10.7910/DVN/CZJJAF` | still deferred -- needs the codebook (`v*` block spans 1-1999, mixing items with survey-variable codes). |
+
+### The ESCS collection is in, and the pending biblios were merged (2026-08-26)
+
+**Confirmed by ben-domingue: `biblio_goldberg_escs_2026-08-26.tsv` (60 rows /
+6,823,703 responses) has been pasted.** The Eugene-Springfield Community
+Sample is in the dictionary. Both the biblio TSV and the `irw_output/` CSVs
+are off disk, the usual clear-on-upload signal.
+
+The three biblios still pending were then **merged into a single
+`biblio_combined_2026-08-26.tsv`, 55 rows / 9,191,758 responses** -- one row
+per staged CSV in `irw_output/`:
+
+| rows | was |
+|---|---|
+| 6 | `biblio_cmsce_2026-08-26.tsv` |
+| 11 | `biblio_edu_batch2_2026-08-26.tsv` |
+| 38 | `biblio_edu_batch3_2026-08-26.tsv` |
+
+The three source files are deleted; every row is carried over verbatim.
+
+**Checks run before merging**, worth repeating on any future consolidation --
+a merged paste file is a place where a silent column shift would be expensive
+to unpick:
+
+* all four source files share a byte-identical 14-column header (they did);
+* every row has exactly 14 fields;
+* no field contains a tab, newline or carriage return -- the precondition for
+  the TSV paste path to be safe at all;
+* no table name appears in more than one source file;
+* the row set and the `irw_output/*.csv` set match exactly in both
+  directions -- 55 and 55, nothing orphaned either way;
+* **every row's `N x M = R` re-parsed from its own Description and checked
+  against the CSV it describes.** All 55 matched. This is the check worth
+  keeping: a Description is written by hand at build time and a table can be
+  rebuilt afterwards, so it is the field most likely to drift out of date,
+  and nothing else in the pipeline would notice.
+
+One wrinkle the first pass of that last check surfaced: the six CMSCE rows
+say "4,190 **examinees** x 302 items", not "respondents", so a regex written
+for the batch-3 phrasing reported them as malformed. Widened, they verify
+clean. Descriptions are prose, so parse them loosely.

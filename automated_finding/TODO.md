@@ -5,11 +5,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
-- [ ] **`biblio_edu_batch3_2026-08-26.tsv` (38 rows) needs uploading/pasting**
-  -- 236,602 responses across 38 tables from 17 deposits, all CC0 1.0 or
-  CC BY 4.0. See the "Education profile, third pass" entry in `BATCH_LOG.md`
-  for the per-deposit coding decisions. The `irw_output/` CSVs are staged
-  alongside.
+- [ ] **`biblio_combined_2026-08-26.tsv` (55 rows) needs uploading/pasting**
+  -- 9,191,758 responses across 55 tables, one row per staged CSV in
+  `irw_output/`. This is the merge of the three separate TSVs that were
+  pending (CMSCE 6, edu batch 2 11, edu batch 3 38); those three files have
+  been deleted now that every row is carried over verbatim. Verified before
+  merging: identical 14-column headers, 14 fields per row, no tabs or
+  newlines in any field, no duplicate table name, and every row's
+  `N x M = R` re-checked against the CSV it describes. See the CMSCE and the
+  two "education profile" entries in `BATCH_LOG.md` for the per-deposit
+  coding decisions.
 
 - [ ] **Decide whether Qualtrics geo-IP coordinates count as PII**
   (`10.7910/DVN/JC6F9O`, Hemesath & Tepe 2025, CC0). The export carries
