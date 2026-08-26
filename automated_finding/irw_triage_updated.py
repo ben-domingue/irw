@@ -31,6 +31,7 @@ from __future__ import annotations
 
 import io
 import os
+import collections
 import re
 from dataclasses import dataclass, field
 from math import sqrt
@@ -659,6 +660,44 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 f"Item names suggest {len(dominant)} subscales "
                                 f"({list(dominant.index)[:4]}) — IRW requires "
                                 "separate files per scale."))
+
+    # Response-scale homogeneity. The existing multi_scale* check reads item
+    # *names*; this one reads the responses themselves, which is what actually
+    # catches a mailing that bundled several instruments. Two distinct
+    # failures fall out of the same per-item range profile:
+    #   * a substantial minority of items on a different range  -> two scales
+    #     in one table, which breaks "one file per scale" and leaves `resp`
+    #     meaning different things in different rows;
+    #   * one or two isolated items off the modal range -> almost always not
+    #     an item at all (an administrative or count column swept in).
+    # Both were live defects in the 2026-08-26 Eugene-Springfield build:
+    # `sdv` spanned 1-5, 1-7, 1-8 and 1-9 at once, and `submiss` -- a
+    # missing-response count, 94.8% zero -- was the only column in the HPQ
+    # outside its 1-5 scale.
+    if {"item", "resp"}.issubset(df.columns):
+        rng = df.dropna(subset=["resp"]).groupby("item")["resp"].agg(["min", "max"])
+        if len(rng) >= 3:
+            profile = collections.Counter(zip(rng["min"], rng["max"]))
+            (modal, modal_n), = profile.most_common(1)
+            off = rng[(rng["min"] != modal[0]) | (rng["max"] != modal[1])]
+            # Only a range that *exceeds* the modal one is evidence of a
+            # different scale; an item nobody answered at the ceiling simply
+            # has a lower observed max.
+            over = off[(off["max"] > modal[1]) | (off["min"] < modal[0])]
+            share = len(over) / len(rng)
+            if share >= 0.15:
+                other = collections.Counter(zip(over["min"], over["max"]))
+                checks.append(Check("resp_scale_mixed", "fail",
+                    f"items span more than one response scale: "
+                    f"{modal_n} on {modal[0]}-{modal[1]} and {len(over)} on "
+                    f"{[f'{a}-{b}' for a, b in list(other)[:3]]}. IRW requires "
+                    "one file per scale; split before submitting."))
+            elif len(over):
+                checks.append(Check("item_scale_outlier", "warn",
+                    f"{len(over)} item(s) fall outside the table's "
+                    f"{modal[0]}-{modal[1]} scale: {list(over.index)[:4]}. An "
+                    "isolated out-of-range column is usually not an item -- "
+                    "check for an administrative or count field."))
 
     # Composite columns masquerading as items. A summary table melts into a
     # perfectly well-formed id/item/resp frame and passes every structural

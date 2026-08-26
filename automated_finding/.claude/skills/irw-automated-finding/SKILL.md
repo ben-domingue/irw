@@ -584,6 +584,68 @@ python irw_discover_pmc.py "term1" "term2" --out runs/pmc_triage.csv --resume   
   `SPRINGER_API_KEY`-gated Springer OA counts were skipped since no key is
   set in this environment).
 
+## Lessons that cost real work (added 2026-08-26)
+
+Each of these came from a live failure in one session. They are cheap to
+follow and expensive to rediscover.
+
+**Run your own output through `run_qc()`.** A Step 3 script writes straight
+to `irw_output/` and never touches triage, so *none* of the QC checks run on
+it. The 2026-08-26 Eugene-Springfield build shipped 20 tables in which nine
+mixed two or more response scales, plus two administrative columns
+(`submiss`, `smiss` -- missing-response counts) carried as items, and nothing
+objected. Two checks now exist for exactly this — `resp_scale_mixed` (fail)
+and `item_scale_outlier` (warn) — but they only help if the script calls them.
+Import `run_qc` and assert no `fail` before writing.
+
+**A script that drops columns must balance its books.** After melting, assert
+that every source column is either in the output or was skipped for a printed
+reason. The same build silently lost ~1.0M responses -- two entire mailings of
+person-descriptive adjectives -- because each adjective is its own column, so
+under a group-by-prefix rule each became a one-item group and fell below the
+minimum block size. 1,205 skip lines scrolled past unread. Worse, the loss was
+invisible in the totals: it landed in the same change that correctly dropped
+~1.1M possession counts, so the grand total barely moved.
+
+**Assert output filenames are unique.** Two blocks that resolve to the same
+table name overwrite each other with no error. Caught only because a table
+appeared twice in a build log.
+
+**Rank candidate pools by instrument shape, not response count.** Sorting
+leads by `n_responses` puts census-scale replication files on top -- millions
+of "participants" by a dozen "items" -- and none of it is item-response data.
+This produced a "top eight leads, nothing shippable" result twice before the
+pattern was recognised. Filter to roughly `100 <= N <= 50,000` and
+`8 <= items <= 700`, or score by the presence of a coherent block of columns
+sharing a prefix and a small ordinal range.
+
+**Take landing URLs from the lead row; never reconstruct them.** A figshare
+URL rebuilt from a Frontiers supplementary DOI fetched a completely unrelated
+genomics table. Supplementary DOIs do not encode the figshare article id.
+
+**Read author names off the deposit record.** A script was written as
+`zhang_2024_*` on an assumption; the contributor was Jinchang Peng.
+
+**Two response categories belong in core, not nominal.** With exactly two
+options the ordered/unordered distinction is vacuous -- a dichotomy is
+trivially ordinal and standard dichotomous IRT applies. An option-coded
+column is a nominal-standard candidate only at **three or more** categories.
+
+**Hand biblio rows over as `.tsv`, not `.csv`.** Google Sheets splits pasted
+text on commas without honouring CSV quoting, so every comma inside a
+`Description` or `Reference` becomes a column break -- and those fields nearly
+always contain commas. Verify no field holds a tab or newline, then write
+tab-separated.
+
+**Get sheet column layouts from the live sheet, not from `metadata/`.**
+`metadata/biblio.csv` and `metadata/nominal_biblio.csv` are Redivis snapshots
+*regenerated from* the sheets; their headers are sanitised
+(`DOI__for_paper_`) and identical to each other, so neither is a paste format.
+Fetch the sheet's own CSV export and read row 1. The nominal sheet in
+particular is close to the core dictionary but not the same: `table lower`
+with a space, a single `Custom License` rather than two, and `Derived_License`
+with an underscore.
+
 ## After finishing a batch
 
 1. Append a dated entry to `BATCH_LOG.md` summarizing what ran and what was
