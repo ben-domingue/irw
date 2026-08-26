@@ -5,6 +5,27 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [ ] **`biblio_edu_batch3_2026-08-26.tsv` (38 rows) needs uploading/pasting**
+  -- 236,602 responses across 38 tables from 17 deposits, all CC0 1.0 or
+  CC BY 4.0. See the "Education profile, third pass" entry in `BATCH_LOG.md`
+  for the per-deposit coding decisions. The `irw_output/` CSVs are staged
+  alongside.
+
+- [ ] **Decide whether Qualtrics geo-IP coordinates count as PII**
+  (`10.7910/DVN/JC6F9O`, Hemesath & Tepe 2025, CC0). The export carries
+  `LocationLatitude`/`LocationLongitude` at 4 decimal places for every row.
+  It was skipped whole under `feedback_pii_skip_entirely`, which was written
+  about names and emails; if coarse geo-IP coordinates are acceptable to drop
+  rather than disqualifying, the deposit is worth about 132,000 responses
+  (the 20-item GAAIS x 6,620 rows, though only 4,156 `ResponseId`s are
+  distinct so the duplication needs sorting out first). Not decided
+  unilaterally.
+
+- [ ] **The education profile's `thin`/`not_instrument` tail is unworked.**
+  All 36 `instrument` rows of `runs/edu_work_profile_2026-08-26.csv` have now
+  been adjudicated (30 shipped or skipped this pass, 6 previously). The other
+  38 rows were never opened.
+
 - [ ] **Dryad downloads are blocked; decide what to do about it** (found
   2026-08-26). `_dryad_files()` lists versions and files fine, but
   `/api/v2/files/{id}/download` returns 401 and `/downloads/file_stream/{id}`

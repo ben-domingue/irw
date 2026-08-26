@@ -11913,3 +11913,126 @@ item responses with survey-variable codes -- a World-Values-Survey-style
 extract that needs the codebook before the item columns can be separated.
 
 `biblio_edu_batch2_2026-08-26.tsv` (11 rows) written for upload.
+
+### Education profile, third pass -- 38 tables from 17 deposits (2026-08-26)
+
+Worked `runs/edu_work_profile_2026-08-26.csv` top-down. Of its 36 `instrument`
+rows, five were already shipped (three ESCS tables plus CMSCE and the three
+batch-2 deposits), leaving 30. Those 30 produced **38 tables / 236,602
+responses** across 17 deposits, plus seven documented skips.
+`biblio_edu_batch3_2026-08-26.tsv` (38 rows) is written for upload.
+
+**The dedup check found the case-sensitivity trap again**, as expected from
+the CMSCE entry: `grep -rli` was used throughout and correctly matched
+`DVN/DUP1TT` in `data/goldberg_2018_escs.py` against the lead's lowercased
+`dvn/dup1tt`.
+
+| deposit | tables | responses | what it is |
+|---|---|---|---|
+| `10.7910/DVN/MTQGSF` | 1 | 79,002 | 18-item financial-literacy **test**, 4,389 Polish adults, 0/1 scored |
+| `10.7910/DVN/FGBZCK` | 6 | 31,037 | Alan/Ertac/Mumcu (ReStat 2018) classroom gender stereotypes |
+| `10.7910/DVN/23NDKX` | 4 | 30,811 | Manolika: film/book genre preferences, Mini-IPIP, Dirty Dozen |
+| `10.7910/DVN/DWWZSI` | 1 | 14,420 | CFC-14, 1,030 Italian adolescents, 1-7 |
+| `10.7910/DVN/C51SE3` | 4 | 14,854 | Xu et al., three AI-service samples pooled |
+| `10.7910/DVN/OSXHWE` | 2 | 14,412 | STAI Y-1 and Y-2, oncology nurses, trait at three periods |
+| `10.7910/DVN/LTMAHE` | 2 | 8,347 | KEPAQ Functional + Emotional |
+| `10.7910/DVN/FCNTSN` | 1 | 7,857 | 27 campus sustainability indicators |
+| `10.7910/DVN/4E3UDL` | 1 | 6,340 | 10-item ProSBq |
+| `10.17632/w5f55333p4.2` | 1 | 5,642 | Dispositional Greed Scale, two Peruvian samples pooled |
+| `10.7910/DVN/URNE8Q` | 2 | 4,236 | KORQ Activity Limitation + Symptoms |
+| `10.6084/m9.figshare.33312225` | 2 | 4,296 | digital financial literacy / financial resilience, Peru |
+| `10.6084/m9.figshare.33204345` | 4 | 3,552 | CDSS interaction experiment, Chinese clinicians |
+| `10.7910/DVN/QBUOHG` | 4 | 3,400 | task/skill diversity, burnout, turnover intention |
+| `10.17632/fzw7dthwh6` | 1 | 3,016 | 13-item financial-knowledge **test**, Brazilian students |
+| `10.7910/DVN/QAWGJV` | 1 | 3,000 | 30-item interest inventory, randomised motivation strategies |
+| `10.7910/DVN/5VEZ7T` | 1 | 2,380 | CFC-14 again, Slovak teachers, on a **1-6** scale |
+
+Three of these are ability/achievement rather than self-report -- the two
+financial-knowledge tests (79,002 + 3,016 dichotomous responses) and Okoro's
+post-test inventory -- which is what the educational-measurement term list was
+added for.
+
+**Every script in this batch calls `run_qc` and balances its books**, per the
+lessons section of the SKILL. That was not decoration; it paid for itself
+three times:
+
+* `run_qc` **caught a real scale question in `cao_2026_cdss`**: the perceived-
+  autonomy block failed `resp_scale_mixed`, three items topping out at 6 and
+  one at 7. Checking the distributions, only 4 of 222 respondents ever chose
+  7, so it is one left-skewed 1-7 scale with an unused top category on three
+  items -- the same "vote, don't read off the maximum" problem as the ESCS
+  adjectives. The check is waived in the script through a named
+  `ALLOWED_FAILS` entry that prints the waiver at build time, rather than
+  silently, and rather than splitting a four-item subscale in two.
+* The column-accounting assertion **caught a covariate mis-assignment** in
+  `perales_2026_*`: forward-filling the workbook's dimension header row let
+  the blank spacer column inherit "Formality status" and win the lookup, so
+  the real column went unaccounted. Without the assertion it would have
+  shipped the spacer as a covariate.
+* The same assertion **caught the legend row in `arabaci_2025_*`**: the
+  workbook's 201st row is not a respondent but a codebook line spelling out
+  "1= Strongly disagree; 5=Strongly agree" in every item column. Dataverse's
+  `.tab` conversion coerces it to missing and silently loses it; reading the
+  `.xlsx` original made it visible, and it now doubles as the documented
+  source for the covariate codings.
+
+**Read the original, not Dataverse's `.tab` conversion.** Three separate
+defects in this batch came from the conversion, and all three are invisible
+without comparing:
+
+1. `manolika_2021_*` -- SPSS user-missing cells arrive as `0`, which reads as a
+   sixth category on a 1-5 preference scale. In the `.sav` original there is
+   not a single zero in the file.
+2. `arabaci_2025_*` -- the legend row above, coerced to missing.
+3. `alloubani_2021_*` -- the `.tab` hides that every column is
+   `SMEAN(...)`-imputed, since only the `.sav` carries variable labels.
+
+That last one is the sharpest of the three. **Alloubani's deposit is
+mean-imputed and says so only in its variable labels.** Every one of the 80
+item columns is labelled `SMEAN(Qn...)`, SPSS's series-mean replacement. The
+imputed cells turn out to be exactly the non-integer values -- each equals
+either the column's mean over the integer values or 5 minus it, the reversal
+having been applied after imputation -- so dropping non-integers restores the
+observed responses exactly and nothing imputed ships. 67 cells of 14,480.
+Per `feedback_continuous_column_verification`, a fractional value in a Likert
+column is always worth chasing to its source.
+
+**Two instruments identified from their value labels alone.** The Alloubani
+deposit names its blocks only `Y1` and `Y2P1..P3`. The `Y1` block's reverse-
+keyed items are 1, 2, 5, 8, 10, 11, 15, 16, 19 and 20 -- exactly the published
+STAI Form Y-1 reverse set -- and the `Y2` blocks use the trait form's "Almost
+Never".."Almost Always" wording. That fixes state vs trait, and makes `P1/P2/
+P3` three administrations of the trait form, i.e. a `wave` column. The
+assertion on the reverse set is kept in the script so the identification is
+checkable rather than asserted in prose.
+
+**Collapsing across samples, twice.** Per `feedback_collapse_same_instrument`:
+`xu_2023_*` pools three studies (223 + 232 + 281) per scale with `cov_study`
+rather than shipping twelve near-identical files, and `aiquipa_2026_dgs` pools
+two Peruvian samples (308 + 498) into one 7-item file.
+
+**Dummy expansions can be reconstructed, and should be.** Bialowolski's
+deposit ships demographics only as regression dummies with the modal category
+dropped. Taking the index of whichever indicator is 1, and the omitted index
+where none is, recovers the original survey codes including the reference
+category -- eight covariates that would otherwise have been discarded as
+"dummy expansion, skip".
+
+**Two duplicate deposits, both shipped once.** `10.7910/DVN/UWTICO` is a
+byte-identical re-deposit of `10.7910/DVN/4E3UDL` (md5
+`7dbbcc3aaf56f16d67ac27b3a03209dc`); `10.6084/m9.figshare.33126869` is the
+same 291 x 27 sustainability data as `10.7910/DVN/FCNTSN` by the same authors.
+Both are recorded in the shipping script's docstring so a later pass does not
+re-ship them.
+
+#### What was skipped, and why
+
+| candidate | reason |
+|---|---|
+| `10.7910/DVN/JC6F9O` | **PII**: the Qualtrics export carries `LocationLatitude`/`LocationLongitude` at 4 decimal places for all 6,620 rows. Per `feedback_pii_skip_entirely` the whole candidate is skipped, not the column. Worth ~132k responses (20-item GAAIS x 6,620) if ben-domingue judges geo-IP coordinates acceptable -- flagged rather than decided. |
+| `10.7910/DVN/KTCXTE` | licence: "This dataset not to be distributed/posted outside of the Harvard Dataverse." Not open. |
+| `10.7910/DVN/TCLUWN` | no item-level data -- every column is a subtest score, total or standardised composite. |
+| `10.7910/DVN/GWISTQ` | no item battery; a search-behaviour experiment with coded URL variables. |
+| `10.7910/DVN/XNKYZS` | the response data ("Dataset 1") is not deposited -- only a Q-matrix, item parameters and R code. |
+| `10.7910/DVN/EM3AZ2` | a serial-transmission chain experiment; the only battery is a 5-item need-for-affect scale, and the `_afs1`/`_afs2` columns are other participants' retellings rather than responses. Low value for the disentangling required. |
+| `10.7910/DVN/CZJJAF` | still deferred -- needs the codebook (`v*` block spans 1-1999, mixing items with survey-variable codes). |

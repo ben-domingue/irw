@@ -637,6 +637,33 @@ text on commas without honouring CSV quoting, so every comma inside a
 always contain commas. Verify no field holds a tab or newline, then write
 tab-separated.
 
+**On Dataverse, download `format=original`, not the `.tab` conversion.** One
+batch hit three distinct defects from the conversion alone: SPSS user-missing
+cells arrive as `0` (a spurious sixth category on a 1-5 scale), a workbook's
+trailing codebook-legend row is coerced to missing and silently dropped, and
+`.sav` variable labels -- which is where a deposit admits to being
+`SMEAN(...)`-imputed -- do not survive at all. The conversion is lossy in ways
+that look like clean data.
+
+**A fractional value in a Likert column is an imputation until proven
+otherwise.** Chase it: if the non-integer cells each equal the column's mean
+over the integer cells (or its reflection, when a reverse-code was applied
+after imputation), the file is mean-imputed and those cells must be dropped,
+not shipped.
+
+**An item's observed maximum is not its scale.** `run_qc`'s
+`resp_scale_mixed` reads it as one, so a rarely-endorsed top category on a few
+items of a subscale trips it. Check the response distributions before
+splitting: a handful of respondents reaching 7 on one item of four, with the
+rest topping out at 6, is one left-skewed scale, not two. Waive the check
+through a named, printed exemption rather than either splitting a real
+subscale or silently dropping the assert.
+
+**Demographics deposited as regression dummies are recoverable.** Take the
+index of whichever indicator is 1, and the omitted index where none is -- the
+omitted index *is* the reference category. That turns "skip, dummy expansion"
+into eight real covariates.
+
 **Get sheet column layouts from the live sheet, not from `metadata/`.**
 `metadata/biblio.csv` and `metadata/nominal_biblio.csv` are Redivis snapshots
 *regenerated from* the sheets; their headers are sanitised
