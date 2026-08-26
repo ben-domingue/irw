@@ -5,6 +5,17 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [x] **`biblio_batch_2026-08-25c.csv` (40 rows) uploaded/pasted** (confirmed
+  2026-08-25, ben-domingue): 187,097 responses across 40 tables from 13
+  deposits — `wang_2025_*` (4), `senyurt_2023_burnout`,
+  `sokolovskii_2021_tfeq`, `doherty_2023_*` (3), `daderman_2023_naqr`,
+  `chen_2026_*` (3), `eldor_2022_*` (9), `milson_2026_*` (3),
+  `kermen_2022_*` (4), `gan_2024_*` (2), `peng_2024_*` (3),
+  `rosyid_2025_*` (3), `dalichaouche_2026_*` (3). All CC BY 4.0 or CC0 1.0,
+  none previously seen by any discovery run. The staged CSV and the
+  `irw_output/` files are off disk as expected. See the five "worklist pass"
+  entries in `BATCH_LOG.md` for the per-deposit coding decisions.
+
 - [x] **Decide what to do about the scheduled cloud runs.** Throughput fell
   from ~26 new `data/*.py` scripts/day (2026-07-26..08-13, manual batches) to
   ~1.4/day (08-14..08-25, scheduled runs) — an 18x drop. The bugs behind each
@@ -49,14 +60,41 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   conservative (it drops every row whose columns are shifted by the Sheets
   export, and every row with no N recorded), so there is more in there.
 
-- [ ] **43 actionable leads from the recovered backlog** —
+- [x] **43 actionable leads from the recovered backlog** —
   `backlog_recovered_leads_2026-08-25.csv` (3 good + 40 worth_retrying from
   the 173 candidates un-blocked from `googlesheet_humaneye.csv`). Largest:
   `dvn/rwpomi` (12,622 x 11, CC0), `dvn/me8oji` (1,646 x 42, CC0),
   `dvn/xpuru1` (1,201 x 39, CC BY), `dvn/l6g8ul` (1,067 x 46, CC0),
   `dvn/7cyiqg` (199 x 256, CC0). All three `good` rows were already checked
-  by hand and none shipped — see the BATCH_LOG entry.
+  by hand and none shipped — see the BATCH_LOG entry. — **worked 2026-08-25**: re-ranked by instrument shape into `lead_worklist_2026-08-25.csv` (69 leads: 25 instrument, 35 thin, 8 PII, 1 no_usable_file), then processed top-down. **40 tables / 187,097 responses shipped from 13 deposits**, all CC BY/CC0, none previously seen by any run. See the five worklist passes in `BATCH_LOG.md`. What remains of the 69 is the `thin` tail plus the four items below.
+- [ ] **Three deposits that need the paper before they can ship** (all
+  2026-08-25, all CC BY, all structurally strong — see `BATCH_LOG.md` for the
+  full reasoning):
+  - `10.17632/nr9388gbzf` — 700 respondents x ~241 columns of clean ordinal
+    blocks (AQ×28, GQ×27, IQ×19, FQ×18, HQ×15, OQ×15, BQ×14, CQ×14, KQ×13) with
+    a real `id` and full demographics. No variable labels, no codebook, and the
+    reconstruct-the-derived-score trick does not apply (no composites shipped),
+    so the letter prefixes decode to nothing. The paper would unlock ~9 tables.
+  - `10.17632/fkyw9v8yj2` (= `nfzwfhw4k4`, byte-identical) — Rosenberg items
+    on a labelled 5-point scale whose midpoint ("fair") occurs **zero times in
+    2,870 responses**. Unexplained recode; the derived `selfesteem` column is
+    neither the sum nor the rounded mean, so it gives no way in.
+  - `10.3389/fendo.2024.1390564`'s `社` social-support block — 32 columns
+    mixing 1-4 Likert items with 0/1 multi-select checkbox options (three of
+    them constant 0). Needs the instrument to split correctly. The other two
+    blocks from this deposit shipped.
 
+- [ ] **`10.17632/kh5zvysyph` (visual-spatial ability, 128 x 239, CC BY) is
+  probably trials data, not item responses** — its blocks are `MR*_ACC`,
+  `OUT_MR*_ACC`, `Out_MC_ACC`, i.e. per-trial accuracy on mental-rotation
+  tasks. `datastandard.md` handles trials-based data differently from an item
+  battery; decide which shape applies before writing anything. Relevant to the
+  educational-measurement gap (spatial ability), so worth the look.
+
+- [ ] **The `thin` tail of `lead_worklist_2026-08-25.csv`** — 35 leads scored
+  as having no item block of 5+ columns. Some are genuinely not item-response
+  data; some are small real scales the scorer's threshold missed. Worth one
+  sweep at a lower threshold before the file is considered worked.
 - [ ] **Decide: is `10.7910/dvn/1ufrud` (trolley problem, CC0) IRW-eligible?**
   1,597 respondents x ~4 vignettes, `flip` 0/1, already long. The catch is
   that the vignette is a *crossing* of one-track victim type x five-track
