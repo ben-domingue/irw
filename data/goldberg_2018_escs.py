@@ -16,8 +16,24 @@ searched in any mode.
 
 Tables written
 --------------
-One per instrument, `goldberg_2018_<acronym>`. All carry the shared
-demographic covariates. See INSTRUMENTS below for the full list.
+One per **instrument block**, `goldberg_2018_<mailing>[_<block>]`, all carrying
+the shared demographic covariates.
+
+**Why blocks and not one table per mailing.** These are omnibus mailings: a
+single questionnaire commonly bundles several distinct instruments on
+different response scales. `TechnicalReport_ESCS.doc` says so explicitly --
+the Personal Reactions Survey, for instance, contains "the new 192-item
+HEXACO Personality Inventory", the 20 BAS/BIS items, 23 Gray-Wilson markers,
+and preference ratings for "Music (22 kinds), Reading (35 kinds)". Shipping a
+mailing as one table would mix 1-5, 1-7, 1-3 and 1-4 responses under one
+`resp` column, which is both wrong per the data standard and quietly
+misleading. So each mailing is split into blocks by column-name family and
+response scale, and each block ships as its own table.
+
+Block names come from the technical report where it identifies them
+unambiguously (the item counts match: `pc`[192] is the HEXACO-PI, `v`[342] the
+VIA-IS adaptation, `value`[66] the Schwartz Value Survey); otherwise the
+source prefix is used as-is rather than guessed at.
 
 Which datasets are and are not included
 ---------------------------------------
@@ -73,13 +89,22 @@ Coding notes
     IRW's experimental nominal standard (`text` column, output to
     `automated_finding/output_noncore/`, biblio row to the separate nominal
     sheet).
-* **Zero-variance items are dropped** where they occur, not the instrument
+* **Zero-variance items are dropped** where they occur, not the block
   containing them; the per-table output reports how many and which.
+* **Administrative columns are excluded.** `submiss` in the HPQ and `smiss`
+  in the 16PF are missing-response counts, not items -- each is the only
+  column in its file outside the instrument's scale, and `submiss` is 94.8%
+  zero where all 39 real HPQ items are 1-5 with no zeros at all.
+* **Blocks smaller than MIN_BLOCK items are not shipped.** A three-column
+  fragment is not an instrument; the run prints what it skipped.
+* **Count columns are excluded**: the PPQ's `vitamin*` records how many
+  supplements a respondent takes, not a rating.
 * Source item names (`c1`..`c462`, `s1`..`s430`, ...) are kept so item text
   can join back; the IPIP deposit additionally ships `IPIP2539items.xls` with
   the text of all 2,539 items.
 """
 
+import collections
 import io
 import os
 import re
@@ -92,28 +117,76 @@ UA = {"User-Agent": "Mozilla/5.0 (IRW-research)"}
 OUTDIR = "irw_output"
 DEMOGRAPHICS = ("10.7910/DVN/VGMXJX", "demographics.tab")
 
-# doi, raw file, table suffix, expected item count, (lo, hi)
-INSTRUMENTS = [
-    ("10.7910/DVN/GCV3ZZ", "EPS.tab",      "eps",      579, (1, 7)),
-    ("10.7910/DVN/IOA6EE", "SPA.tab",      "spa",      528, (0, 9)),
-    ("10.7910/DVN/GHYMEV", "525PDA.tab",   "pda525",   525, (1, 7)),
-    ("10.7910/DVN/LHHONE", "SDV.tab",      "sdv",      517, (1, 9)),
-    ("10.7910/DVN/XJ6MXH", "PRS.tab",      "prs",      508, (1, 7)),
-    ("10.7910/DVN/LXKJIV", "BRI.tab",      "bri",      504, (1, 5)),
-    ("10.7910/DVN/QYKXUE", "PAS.tab",      "pas",      498, (1, 7)),
-    ("10.7910/DVN/VBLMYO", "CPI.tab",      "cpi",      462, (1, 2)),
-    ("10.7910/DVN/BTNABX", "PPQ.tab",      "ppq",      432, (0, 9)),
-    ("10.7910/DVN/WV5BYC", "SBO.tab",      "sbo",      430, (1, 5)),
-    ("10.7910/DVN/ZNGS1K", "360PDA.tab",   "pda360",   360, (1, 9)),
-    ("10.7910/DVN/ANMXHR", "CISS.tab",     "ciss",     320, (1, 6)),
-    ("10.7910/DVN/DUP1TT", "JPI-R.tab",    "jpir",     300, (0, 1)),
-    ("10.7910/DVN/MH6FCC", "DOP.tab",      "dop",      299, (1, 9)),
-    ("10.7910/DVN/TERJAK", "TCI.tab",      "tci",      295, (1, 5)),
-    ("10.7910/DVN/YMBILD", "HPI.tab",      "hpi",      206, (0, 1)),
-    ("10.7910/DVN/ID7PMC", "16PF.tab",     "pf16",     186, (0, 3)),
-    ("10.7910/DVN/SVGXVF", "HPQ.tab",      "hpq",       40, (0, 5)),
-    ("10.7910/DVN/UF52WY", "IPIP2539.tab", "ipip",    2539, (1, 5)),
+# doi, raw file (a hint only -- see _fetch), mailing slug
+MAILINGS = [
+    ("10.7910/DVN/GCV3ZZ", "EPS.tab",      "eps"),
+    ("10.7910/DVN/IOA6EE", "SPA.tab",      "spa"),
+    ("10.7910/DVN/GHYMEV", "525_PDA.tab",  "pda525"),
+    ("10.7910/DVN/LHHONE", "SDV.tab",      "sdv"),
+    ("10.7910/DVN/XJ6MXH", "PRS.tab",      "prs"),
+    ("10.7910/DVN/LXKJIV", "BRI.tab",      "bri"),
+    ("10.7910/DVN/QYKXUE", "PAS.tab",      "pas"),
+    ("10.7910/DVN/VBLMYO", "CPI.tab",      "cpi"),
+    ("10.7910/DVN/BTNABX", "PPQ.tab",      "ppq"),
+    ("10.7910/DVN/WV5BYC", "SBO.tab",      "sbo"),
+    ("10.7910/DVN/ZNGS1K", "360PDA.tab",   "pda360"),
+    ("10.7910/DVN/ANMXHR", "CISS.tab",     "ciss"),
+    ("10.7910/DVN/DUP1TT", "JPI-R.tab",    "jpir"),
+    ("10.7910/DVN/MH6FCC", "DOP.tab",      "dop"),
+    ("10.7910/DVN/TERJAK", "TCI.tab",      "tci"),
+    ("10.7910/DVN/YMBILD", "HPI.tab",      "hpi"),
+    ("10.7910/DVN/ID7PMC", "16PF.tab",     "pf16"),
+    ("10.7910/DVN/SVGXVF", "HPQ.tab",      "hpq"),
+    ("10.7910/DVN/UF52WY", "IPIP2539.tab", "ipip"),
 ]
+
+# Blocks the technical report names unambiguously; the item counts match.
+# (mailing, source prefix) -> table suffix. Anything unlisted keeps its prefix.
+BLOCK_NAMES = {
+    ("dop", "ai_"):    "avocational_interests",
+    ("dop", "vig_"):   "ab5c_vignettes",
+    ("eps", "q"):      "ipip",
+    ("eps", "rcesd"):  "cesd",
+    ("eps", "event"):  "life_events",
+    ("eps", "spirit"): "spirituality",
+    ("ppq", "v"):      "via_strengths",
+    ("ppq", "bel"):    "beliefs",
+    ("prs", "pc"):     "hexaco",
+    ("prs", "books"):  "reading_preferences",
+    ("prs", "tv"):     "tv_preferences",
+    ("prs", "music"):  "music_preferences",
+    ("prs", "movies"): "movie_preferences",
+    ("sdv", "d"):      "ipip_temperament",
+    ("sdv", "value"):  "schwartz_values",
+    ("sdv", "desir"):  "desirability",
+    ("sdv", "view"):   "views",
+    ("sdv", "likely"): "likelihood",
+    ("spa", "PQ"):     "ipip",
+    ("spa", "MEDHIS"): "medical_history",
+    ("spa", "CHGTRT"): "changeability",
+    ("spa", "YSKILL"): "skills",
+}
+
+# Whole blocks to exclude, with the reason: administrative counts and
+# quantity counts, neither of which is an item response.
+BLOCK_DROP = {
+    ("hpq", "submiss"): "missing-response count, not an item",
+    ("pf16", "smiss"):  "missing-response count, not an item",
+    ("ppq", "vitamin"): "count of supplements taken, not a rating",
+}
+
+# A mailing whose items share one prefix but two scales. The report says the
+# PAS holds "216 person-descriptive adjectives" (rated 1-7) alongside "160
+# additional IPIP items" and "122 items from previously published scales"
+# (1-5). The prefix cannot separate them; the per-item scale can.
+SCALE_SPLIT = {"pas": {5: "ipip_scales", 7: "adjectives"}}
+
+# Mailings where each adjective occupies its own column. Pool the
+# single-column families into one block per scale rather than shipping
+# hundreds of one-item tables.
+POOLED = {"eps": "adjectives", "sdv": "adjectives"}
+
+MIN_BLOCK = 5   # fewer columns than this is a fragment, not an instrument
 
 COVS = {"SEX": "cov_sex", "AGE": "cov_age", "EDUC": "cov_education",
         "ETHNIC": "cov_ethnicity", "EMPLOY": "cov_employment",
@@ -150,6 +223,92 @@ def _fetch(doi: str, filename: str | None = None) -> pd.DataFrame:
     return pd.read_csv(io.BytesIO(raw.content), sep="\t", low_memory=False)
 
 
+def _scales_for(maxima):
+    """The genuine response scales inside one prefix family.
+
+    Splitting on each item's *observed* maximum is wrong: an item nobody
+    answered at the top of the scale looks like its own scale. So a maximum
+    only counts as a real scale if a substantial share of the family reaches
+    it; everything else is mapped up to the nearest real scale at or above it.
+    That keeps the PAS's genuine 1-5/1-7 split (281 vs 213 items) while
+    leaving the 360 adjectives as one 1-9 scale despite 20 of them topping
+    out at 8.
+    """
+    n = sum(maxima.values())
+    real = sorted(m for m, c in maxima.items() if c >= max(2, 0.25 * n))
+    return real or [max(maxima)]
+
+
+def _blocks(d, items, mailing, num):
+    """Group a mailing's item columns into instrument blocks.
+
+    Rules, in order:
+
+    1. **Different response scales are always different tables.** Mixing 1-5
+       and 1-9 responses under one `resp` column is the defect this split
+       exists to fix. Scales are decided per prefix family by `_scales_for`.
+    2. **Within a scale, a prefix is only its own table if the technical
+       report names it.** Otherwise same-scale prefixes are pooled. Without
+       this the IPIP bank -- 2,539 items on one 1-5 scale, prefixed by
+       whichever mailing each item arrived in -- shatters into nine tables
+       that are really one instrument.
+    """
+    by_prefix = collections.OrderedDict()
+    for c in items:
+        v = num[c].dropna()
+        if v.empty or v.nunique() < 2:
+            continue
+        prefix = re.sub(r"\d+$", "", str(c)) or "(bare)"
+        by_prefix.setdefault(prefix, []).append((c, int(v.max())))
+
+    # Where each item has its own column name (the adjective lists), a
+    # per-family scale vote is meaningless -- every family has one member, so
+    # its own maximum always "wins" and 20 adjectives nobody rated 9 become a
+    # phantom 1-8 scale. Pool all singleton families and vote once over them.
+    singleton = [t for p, cols in by_prefix.items() if len(cols) == 1 for t in cols]
+    shared = (_scales_for(collections.Counter(m for _, m in singleton))
+              if len(singleton) >= MIN_BLOCK else None)
+
+    groups = collections.OrderedDict()
+    for prefix, cols in by_prefix.items():
+        if mailing in SCALE_SPLIT:
+            scales = sorted(SCALE_SPLIT[mailing])
+        elif len(cols) == 1 and shared:
+            scales = shared
+        else:
+            scales = _scales_for(collections.Counter(m for _, m in cols))
+        for c, mx in cols:
+            hi = min((sc for sc in scales if mx <= sc), default=max(scales))
+            groups.setdefault((prefix, hi), []).append(c)
+
+    pooled = collections.OrderedDict()
+    for (prefix, hi), cols in groups.items():
+        if (mailing, prefix) in BLOCK_DROP:
+            key = (prefix, hi)
+        elif (mailing, prefix) in BLOCK_NAMES or mailing in SCALE_SPLIT:
+            key = (prefix, hi)
+        else:
+            key = ("", hi)
+        pooled.setdefault(key, []).extend(cols)
+    return pooled
+
+
+def _suffix(mailing, prefix, hi, groups):
+    if mailing in SCALE_SPLIT:
+        return SCALE_SPLIT[mailing][hi]
+    if len(groups) == 1:
+        return ""                       # single-instrument mailing
+    named = BLOCK_NAMES.get((mailing, prefix))
+    if named:
+        return named
+    if prefix == "":
+        # A pooled scale-mate group. If it is the only unnamed group, the
+        # scale alone is enough to tell it apart.
+        unnamed = [k for k in groups if k[0] == ""]
+        return f"scale{hi}" if len(unnamed) > 1 else "other"
+    return re.sub(r"[^0-9a-z]+", "_", prefix.lower()).strip("_")
+
+
 def main():
     dem = _fetch(*DEMOGRAPHICS).rename(columns={"ID": "id"}).rename(columns=COVS)
     dem = dem[["id"] + [c for c in COVS.values() if c in dem.columns]]
@@ -157,65 +316,73 @@ def main():
     cov_cols = [c for c in dem.columns if c != "id"]
 
     os.makedirs(OUTDIR, exist_ok=True)
-    total = 0
-    for doi, filename, suffix, n_expected, (lo, hi) in INSTRUMENTS:
+    total = n_tables = 0
+    written = set()
+    for doi, filename, mailing in MAILINGS:
         d = _fetch(doi, filename)
         idcol = d.columns[0]
+        assert d[idcol].is_unique, f"{mailing}: {idcol} is not unique"
         items = list(d.columns[1:])
-        assert len(items) == n_expected, (suffix, len(items), n_expected)
-        n_declared = len(items)
-        assert d[idcol].is_unique, f"{suffix}: {idcol} is not unique"
 
-        # Some files interleave letter-coded multiple-choice columns with the
-        # ordinal block (SPA has 82 such columns, values "A".."H"). Those are
-        # nominal, so they are not IRW responses at all -- drop the whole
-        # column, not just its cells, and report how many.
-        nonnumeric = []
-        for c in items:
-            co = pd.to_numeric(d[c], errors="coerce")
-            if (co.isna() & d[c].notna()).any():
-                nonnumeric.append(c)
-        items = [c for c in items if c not in nonnumeric]
+        # Letter-coded columns are not ordinal; SPA's forced-choice pairs are
+        # handled separately and its 12-category ones go to the nominal script.
+        num = d[items].apply(pd.to_numeric, errors="coerce")
+        items = [c for c in items if not (num[c].isna() & d[c].notna()).any()]
 
-        long = d.rename(columns={idcol: "id"}).melt(
-            id_vars=["id"], value_vars=items, var_name="item", value_name="resp")
-        long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
-        long = long.dropna(subset=["resp"])
-        # Everything that survives is integral; a fractional value would mean a
-        # derived column slipped into the block.
-        assert (long["resp"] % 1 == 0).all(), f"{suffix}: fractional values present"
-        long["resp"] = long["resp"].astype(int)
+        groups = _blocks(d, items, mailing, num)
+        for (prefix, hi), cols in groups.items():
+            reason = BLOCK_DROP.get((mailing, prefix))
+            if reason:
+                print(f"  [skip] {mailing}/{prefix} ({len(cols)} cols): {reason}")
+                continue
+            if len(cols) < MIN_BLOCK:
+                print(f"  [skip] {mailing}/{prefix} ({len(cols)} cols): "
+                      f"below MIN_BLOCK={MIN_BLOCK}")
+                continue
 
-        assert long["resp"].between(lo, hi).all(), (
-            suffix, long["resp"].min(), long["resp"].max())
-        # Zero-variance items carry no information and are not item responses
-        # in any useful sense; drop them rather than the whole instrument, the
-        # same call made for `liu_2025_ydcy`'s constant YDCY1.
-        nun = long.groupby("item")["resp"].nunique()
-        constant = sorted(nun[nun <= 1].index)
-        if constant:
-            long = long[~long["item"].isin(constant)]
-        assert long.groupby("item")["resp"].nunique().min() > 1
-        assert not long.duplicated(["id", "item"]).any()
+            long = d.rename(columns={idcol: "id"}).melt(
+                id_vars=["id"], value_vars=cols, var_name="item", value_name="resp")
+            long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
+            long = long.dropna(subset=["resp"])
+            assert (long["resp"] % 1 == 0).all(), f"{mailing}/{prefix}: fractional"
+            long["resp"] = long["resp"].astype(int)
 
-        long = long.merge(dem, on="id", how="left")
-        long = long[["id", "item", "resp"] + cov_cols]
+            nun = long.groupby("item")["resp"].nunique()
+            constant = sorted(nun[nun <= 1].index)
+            if constant:
+                long = long[~long["item"].isin(constant)]
+            if long["item"].nunique() < MIN_BLOCK:
+                print(f"  [skip] {mailing}/{prefix}: below MIN_BLOCK after "
+                      f"dropping {len(constant)} constant item(s)")
+                continue
 
-        path = os.path.join(OUTDIR, f"goldberg_2018_{suffix}.csv")
-        long.to_csv(path, index=False)
-        n_id, n_it = long["id"].nunique(), long["item"].nunique()
-        total += len(long)
-        drops = []
-        if nonnumeric:
-            drops.append(f"{len(nonnumeric)} non-numeric col(s) dropped: {nonnumeric[:3]}")
-        if constant:
-            drops.append(f"{len(constant)} constant item(s) dropped: {constant[:3]}")
-        note = ("  [" + "; ".join(drops) + "]") if drops else ""
-        print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "
-              f"resp {long['resp'].min()}-{long['resp'].max()}, "
-              f"density {len(long)/(n_id*n_it):.3f}{note}", flush=True)
-    total += _forced_choice(dem, cov_cols)
-    print(f"\n{len(INSTRUMENTS) + 1} tables, {total:,} responses")
+            long = long.merge(dem, on="id", how="left")
+            long = long[["id", "item", "resp"] + cov_cols]
+            assert not long.duplicated(["id", "item"]).any()
+
+            observed_hi = int(long["resp"].max())
+            suffix = _suffix(mailing, prefix, observed_hi, groups)
+            name = f"goldberg_2018_{mailing}" + (f"_{suffix}" if suffix else "")
+            # Two buckets can still land on the same name (a named block
+            # spanning scales, or two pooled groups whose observed maxima
+            # coincide). Writing both would silently lose the first, so
+            # disambiguate on the source prefix and fail if even that clashes.
+            if name in written:
+                extra = re.sub(r"[^0-9a-z]+", "_", prefix.lower()).strip("_") or f"n{len(written)}"
+                name = f"{name}_{extra}"
+            assert name not in written, f"duplicate table name {name}"
+            written.add(name)
+            path = os.path.join(OUTDIR, f"{name}.csv")
+            long.to_csv(path, index=False)
+            n_id, n_it = long["id"].nunique(), long["item"].nunique()
+            total += len(long); n_tables += 1
+            note = f"  [{len(constant)} constant dropped]" if constant else ""
+            print(f"{path}: {n_id} ids x {n_it} items = {len(long)} responses, "
+                  f"resp {long['resp'].min()}-{long['resp'].max()}, "
+                  f"density {len(long)/(n_id*n_it):.3f}{note}", flush=True)
+
+    total += _forced_choice(dem, cov_cols); n_tables += 1
+    print(f"\n{n_tables} tables, {total:,} responses")
 
 
 def _forced_choice(dem, cov_cols) -> int:

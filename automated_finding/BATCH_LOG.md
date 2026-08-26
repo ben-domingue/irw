@@ -11597,3 +11597,69 @@ to any row whose Description or Reference contains a comma — which is nearly
 all of them — so it is worth a spot-check of the recently-pasted rows in both
 sheets. This may also be the real cause of the `cos101_2026_openended`
 column-shift noted above, rather than a wrong column layout at drafting time.
+
+### Correction: the ESCS mailings had to be split by instrument block (2026-08-26)
+
+ben-domingue's spot-checks — `resp=0` in `hpq`, `resp=0`/`resp>5` in `ppq` —
+found one defect and, through it, a systemic one. **The original 20-table
+build should not have been uploaded.**
+
+**The defect.** All 669 zeros in `goldberg_2018_hpq` sat on a single column,
+`submiss`: 94.8% zero, max 3, while all 39 real items (`h1`-`h39`) are 1-5
+with no zeros at all. It is a **missing-response count, not an item**.
+`pf16` had the same thing as `smiss`. Both were swept in by the build's
+"every column after the id is an item" rule.
+
+**The systemic problem behind it.** Chasing PPQ's four odd columns showed
+that the ESCS questionnaires are **omnibus mailings bundling several distinct
+instruments on different response scales**, and the build shipped each mailing
+as a single table. `TechnicalReport_ESCS.doc` says so plainly — the Personal
+Reactions Survey holds "the new 192-item HEXACO Personality Inventory", 20
+BAS/BIS items, 23 Gray-Wilson markers, and preference ratings for "Music (22
+kinds), Reading (35 kinds)". Nine of the twenty tables mixed scales; `sdv`
+alone spanned 1-5, 1-7, 1-8 and 1-9 under one `resp` column.
+
+**Rebuilt to split by block.** Each mailing is now divided by column-name
+family and response scale, one table per block. Two rules, in order:
+
+1. Different response scales are always different tables.
+2. Within a scale, a prefix is its own table only if the technical report
+   names it; otherwise same-scale prefixes are pooled.
+
+Rule 2 matters as much as rule 1: without it the IPIP bank — 2,539 items on
+one 1-5 scale, prefixed by whichever mailing each item arrived in — shattered
+into nine tables that are really one instrument.
+
+Three subtleties the rebuild had to get right, each caught by re-checking
+rather than by assumption:
+
+* **Scales must be voted on, not read off each item's observed maximum.** An
+  item nobody answered at the top of the scale looks like its own scale; the
+  first attempt split 20 of the 360 adjectives into a phantom "1-8" table. A
+  maximum now counts as a real scale only if a substantial share of the family
+  reaches it.
+* **Singleton families need a pooled vote.** Where every item has its own
+  column name (the adjective lists), a per-family vote is meaningless — each
+  family has one member, so its own maximum always wins. Those are pooled and
+  voted on once.
+* **Two buckets can produce the same table name**, which silently overwrites
+  the first file. Caught when `sdv_desirability` was written three times and
+  `spa_scale5` twice. There is now a hard `written` guard that disambiguates
+  on the source prefix and asserts.
+
+**Result: 55 tables, 6,927,387 responses** (was 20 tables / 6,875,090 with
+mixed scales). Verified: no table holds more than one substantial scale, no
+duplicate filenames, no administrative or count columns anywhere, and
+ben-domingue's two original checks now come back clean — `hpq` is 39 items,
+1-5, zero zeros; no PPQ block has a zero, and the only values above 5 sit in
+`ppq_scale8`, which genuinely is a 1-8 scale.
+
+The blocks the technical report names come out at exactly the counts it
+states: `prs_hexaco` 192, `ppq_via_strengths` 342, `sdv_schwartz_values` 66,
+`dop_ab5c_vignettes` 90, `dop_avocational_interests` 209, `eps_ipip` 256, and
+the PAS split of 216 adjectives / 282 IPIP-and-published-scale items.
+
+Blocks under 5 items are not shipped (26 fragments), and `ppq/vitamin` is
+excluded as a count of supplements taken rather than a rating.
+
+`biblio_escs_2026-08-26.tsv` regenerated at 55 rows.
