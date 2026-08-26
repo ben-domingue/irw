@@ -43,6 +43,24 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
+- [ ] **`biblio_mendeley_2026-08-26.tsv` (17 rows) needs uploading/pasting**
+  — 56,383 responses across 17 tables from 5 Mendeley deposits, all CC BY
+  4.0. `irw_output/` CSVs staged alongside. See the Mendeley entry in
+  `BATCH_LOG.md`.
+
+- [ ] **Work `mendeley_leads_2026-08-26.csv` (31 leads).** The connector's
+  first run: 5 `good`, 25 `worth_retrying`, 1 `recoverable_format`, already
+  ranked by instrument shape (29 of 31 pass the shape filter). Largest:
+  `zktjjx93sv` 509x260, `4n5x4ffzn5` 495x101, `94p8m47y58` 1402x126,
+  `n45sjtxmzy` 2763x43. Given the measured 27% rate this is the best-value
+  pool currently open.
+
+- [ ] **`10.17632/hwp4wsb549` returns an empty file listing at every
+  version** (Personality Traits and Academic Motivation, 388x65, CC BY). The
+  Mendeley files API gives `[]` for v1 and 404 for v2/v3, so nothing can be
+  fetched programmatically. Needs someone to open the landing page and see
+  whether the files are actually there.
+
 - [ ] **A biblio paste can fail for reasons not visible in the file, and there
   is no diagnostic for it.** On 2026-08-26 the 55-row combined biblio failed
   to paste repeatedly while being verifiably well-formed (14 tab-delimited
@@ -224,13 +242,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   a column name matches `name|email|phone|address|birth` so these surface as
   something other than `good`. — **fixed 2026-08-25**: `screen_for_pii()` plus the terminal `pii_suspected` flag now run ahead of every other verdict in `triage_dataset()`. See the BATCH_LOG entry for the two-tier design and the 24/27 verification.
 
-- [ ] **Build a Mendeley Data discovery connector.** Highest actionable rate
-  measured anywhere in the system: 5 `good` + 21 `worth_retrying` out of 117
-  candidates (22%), all CC BY, against PLOS ONE's ~1% good. Mendeley's own
-  search API needs OAuth, but DataCite indexes it under prefix `10.17632`
-  with no key (`?query=...&prefix=10.17632`), so this is a small connector,
-  not a new scraper. The 26 leads found so far are in
-  `mendeley_leads_2026-08-25.csv` — process those first regardless.
+- [x] **Build a Mendeley Data discovery connector.** — **done 2026-08-26**:
+  `from_mendeley()` is in `SOURCES`, reaching Mendeley through DataCite's
+  index of prefix `10.17632`. It dedupes Mendeley's versioned DOIs
+  (`<base>.1`) to the base, is in `_DATACITE_SKIP` so the generic sweep stops
+  duplicating it, and is in `_DATACITE_FALLBACK_FOR` so the skip lifts if it
+  blocks. Measured on 7 terms: 123 unique candidates, 114 triaged, **31
+  actionable (27%)** — higher than the 22% that justified building it. The
+  26 standing leads were worked first, as this item required: 17 tables /
+  56,383 responses shipped from 5 deposits.
 
 - [x] **Add educational-measurement terms to
   `irw_discover_monthly.py`'s `TERM_LIST`.** It is ~100 terms of self-report

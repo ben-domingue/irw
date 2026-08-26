@@ -12254,3 +12254,114 @@ reason string is the "could not confidently identify item columns" +
 mangled-header shape that README Step 1b flags as disproportionately
 recoverable. The other `below_min_n` row (Japanese macaque personality
 ratings, 32 subjects × 55 items, density 1.0) is a genuine skip.
+
+### Mendeley Data: 17 tables from the standing leads, and the connector is built (2026-08-26)
+
+Two halves, in the order `TODO.md` specified -- work the leads first, then
+build the connector.
+
+#### Half one: the 26 standing leads
+
+`mendeley_leads_2026-08-25.csv` had 26 rows. Seven already had scripts (found
+with `grep -rli`, case-insensitively -- the CMSCE lesson), and four were the
+already-recorded deferrals (`kh5zvysyph` trials data, `nr9388gbzf` no
+codebook, `fkyw9v8yj2`/`nfzwfhw4k4` the unexplained recode). Of the remainder,
+**5 deposits shipped as 17 tables / 56,383 responses**, all CC BY 4.0:
+
+| deposit | tables | responses | what it is |
+|---|---|---|---|
+| `10.17632/62rjwfhm6j` | 4 | 24,384 | 1,016 tourists: ecosystem services + 3 constructs |
+| `10.17632/jkwhf3ys6z` | 8 | 12,328 | 184 Hungarian entrepreneurs, eight instruments |
+| `10.17632/zhcyyxwpr6` | 3 |  9,835 | 281 employees: PsyCap, life satisfaction, mood |
+| `10.17632/dmv73kyjdp` | 1 |  5,276 | 22-item mental-health-literacy **knowledge test**, 0/1 |
+| `10.17632/btrrmwtfmh` | 1 |  4,560 | GDS-15, 304 adults aged 60+, 0/1 |
+
+**An unnamed block identified by reconstruction.** Szabó's deposit carries
+`w2_SQ001..004` with no label and no matching total. Scoring them as a PSS-4 --
+reversing items 2 and 3, which are exactly the two with `_neg` copies in the
+file -- reproduces the deposit's own `Stress` column for all 184 rows. That is
+the same trick as recovering a reference category from dummies: **when a block
+is unlabelled, try to reproduce a derived column the depositor left behind.**
+The assertion stays in the script so the identification is checkable.
+
+Three derived families in that deposit were each *verified* before being
+dropped rather than assumed: `w7_SQ*` = `PS* - 1`, `c3_SQ*_num_neg` =
+`5 - MOLBI*`, `w2_SQ00n_neg` = `4 - w2_SQ00n`.
+
+**`id` was not what it looked like.** Szabó's `id` column repeats: 35 of its
+values sit on two rows each, and those pairs are different people -- different
+age, gender and responses. The closest pair (code 206) still differs on 12
+columns. So they are two respondents sharing a code, not a duplicated record;
+both are kept and `id` is row position. Worth checking `is_unique` on any
+deposit-supplied identifier before trusting it, and checking *how much* an
+apparent duplicate pair differs before deleting either row.
+
+**Two skipped for PII, and one is the clearest case yet.** `hj5jknzww5` is a
+raw Qualtrics export carrying **330 distinct real IP addresses** alongside
+lat/long and second-precision timestamps; `6rbv3fbz8d` carries student names.
+Both skipped whole per `feedback_pii_skip_entirely`. The IP-address case is
+worth noting beside the still-open geo-IP question from `DVN/JC6F9O`: an IP
+address is not a borderline call the way a rounded city centroid is.
+
+Four more deposits had no item-level data at all (only scale totals):
+`568zdsvs2s`, `2b2y5rw75s`, `b4pdcc4mh4`, `6rbv3fbz8d`. And `kkzjk253cy`, a
+"PHQ-9 Student Depression Dataset", is not usable for a subtler reason: its
+cell values do not correspond to their column headers -- the answer under
+"little interest or pleasure" is "I frequently think...", and so on across all
+nine items. Whatever produced it scrambled question and response.
+
+`hwp4wsb549` returns an empty file listing at every version, so nothing can be
+fetched; it re-appears in the new leads file and needs a manual look at the
+landing page.
+
+#### Half two: the connector
+
+**`from_mendeley()` is wired into `SOURCES`.** It reaches Mendeley Data
+through DataCite's index of DOI prefix `10.17632`, so no OAuth and no scraper.
+Three things it has to get right, all Mendeley-specific:
+
+* **Versioned DOIs.** Mendeley registers `10.17632/abc123` *and*
+  `10.17632/abc123.1`, `.2`, ... `norm_doi` strips a `.v3`-style suffix but
+  not a bare `.1`, so without an extra strip every deposit arrives twice and
+  each version is triaged separately. A test query returned 43 DataCite
+  records for 20 actual deposits.
+* **`_DATACITE_SKIP`** now contains `mendeley data`, so the generic DataCite
+  sweep stops returning the same records and spending its page budget on them.
+* **`_DATACITE_FALLBACK_FOR["mendeley"]`** lifts that skip if the dedicated
+  connector ever blocks -- the same self-healing arrangement the other
+  connectors have.
+
+It deliberately does **not** raise `SourceBlocked` on error, unlike the
+connectors that talk to a repository directly. Its transport *is* DataCite, so
+a hard block here blocks `from_datacite` too, and the fallback would be
+pointing at the host that just failed. It prints and returns, as
+`from_datacite` does. That asymmetry is commented in the code, since it looks
+like an omission otherwise.
+
+#### The yield, measured
+
+Seven terms -> **123 unique candidates -> 114 triaged -> 5 `good` + 25
+`worth_retrying` + 1 `recoverable_format` = 31 actionable (27%)**.
+
+That is *higher* than the 22% that justified building the connector, and
+against PLOS ONE's ~1% `good` it is not close. Full triage distribution:
+
+    human_assistance    54     (-> 25 worth_retrying, 28 human_review, 1 recoverable)
+    no_usable_file      28
+    below_min_n         12
+    license_restricted   9
+    good                 5
+    not_item_response    3
+    pii_suspected        2
+    download_failed      1
+
+The 31 are in **`mendeley_leads_2026-08-26.csv`**, already ranked by
+instrument shape rather than response count -- 29 of the 31 pass the
+`100 <= N <= 50,000`, `8 <= items <= 700` filter, which is itself a sign of
+the source's quality. Notable: `zktjjx93sv` (509 x 260, health literacy),
+`4n5x4ffzn5` (495 x 101, Rasch marital quality), `94p8m47y58` (1,402 x 126),
+`n45sjtxmzy` (2,763 x 43).
+
+`biblio_mendeley_2026-08-26.tsv` (17 rows) is written for upload, built with
+the same per-field checks as the last one: 14 fields, ASCII, no tab/CR/
+newline/double-quote in any field, no leading `=+-@'`.
