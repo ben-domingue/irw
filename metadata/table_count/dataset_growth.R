@@ -1,11 +1,11 @@
-## Pull timestamped table counts across every version of the 3 core IRW
+## Pull timestamped table counts across every version of the 6 core IRW
 ## datasets on Redivis, for plotting growth over time.
 ## Output: metadata/table_count/dataset_growth.csv
 
 library(redivis)
 Sys.setenv(REDIVIS_API_TOKEN = trimws(readLines("~/.redivis_api_token", n = 1)))
 
-datasets <- c("item_response_warehouse", "item_response_warehouse_2", "item_response_warehouse_3", "item_response_warehouse_4")
+datasets <- c("item_response_warehouse", "item_response_warehouse_2", "item_response_warehouse_3", "item_response_warehouse_4", "item_response_warehouse_5", "item_response_warehouse_6")
 
 rows <- list()
 for (name in datasets) {

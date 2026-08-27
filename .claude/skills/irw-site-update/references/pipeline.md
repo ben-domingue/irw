@@ -10,7 +10,7 @@ the scripts win.
 
 | # | Script | Output | What it does |
 |---|---|---|---|
-| 01 | `01_metadata.R` | `metadata.csv` | Diffs current Redivis tables (`item_response_warehouse`/`_2`/`_3`/`_4`) against the last-known `irw_meta` metadata table; for genuinely new tables, computes `n_responses`/`n_categories`/`n_participants`/`n_items`/density via the Redivis API; adds `variables` (pipe-joined, lowercased var names) and a `longitudinal` flag (`grepl("wave"\|"date", variables)`). |
+| 01 | `01_metadata.R` | `metadata.csv` | Diffs current Redivis tables (`item_response_warehouse`/`_2`/`_3`/`_4`/`_5`/`_6`) against the last-known `irw_meta` metadata table; for genuinely new tables, computes `n_responses`/`n_categories`/`n_participants`/`n_items`/density via the Redivis API; adds `variables` (pipe-joined, lowercased var names) and a `longitudinal` flag (`grepl("wave"\|"date", variables)`). |
 | 02 | `02_biblio.R` | `biblio.csv`, `comps_biblio.csv`, `nominal_biblio.csv`, `simsyn_biblio.csv` | One script, four passes (loops over a `dbs` list) — one per source (core/comps/nom/sim), each with its **own** Google Sheet dictionary URL. For each: reads that source's dictionary sheet, finds rows not yet in the corresponding Redivis biblio table (or missing `BibTex`), fetches BibTeX from `doi.org` when a DOI exists, else falls back to a Claude call (`anthropic_chat()`, `claude-haiku-4-5`, `ANTHROPIC_API_KEY`) to synthesize one from Reference/URL text. Strips non-`Public Reshare?` rows *before* ever calling the API. **Swapped from OpenAI/GPT-4o to Claude on 2026-07-27** at Ben's request — plain `httr` POST to `https://api.anthropic.com/v1/messages` (no R SDK exists for Anthropic), `x-api-key`/`anthropic-version: 2023-06-01` headers, single-turn, no thinking/tools. |
 | 03 | `03_tags.R` | `tags.csv` | Snapshot of the single flat "IRW Tags" Google Sheet (no per-source variant — applies loosely across all sources, though in practice used for core). Selects columns `c(1,6:12,3)` = table, Age Range, Child Age, Sample, Construct type, Measurement tool, Item format, Primary Language(s), Construct Name. No synthesis. |
 | 05 | `05_comps.R` | `comps_metadata.csv` | Same shape as 01 but for `irw_competitions` (pairwise-comparison/arena-style data — `winner`/`agent_a`/`agent_b` columns). Author's own comment: "a lot of the functionality outside of the f() function is not tested." Its own biblio-generation half is dead/commented-out code (02 covers comps biblio instead). |
@@ -45,7 +45,8 @@ installed copy 2026-07-27) exports `irw_list_tables(source = "core")`, with
 (`Rpkg/R/redivis-datasets.R`) it maps to:
 
 - `core` → `item_response_warehouse:as2e`, `item_response_warehouse_2:epbx`,
-  `item_response_warehouse_3:5xaj`, `item_response_warehouse_4:980f` (all
+  `item_response_warehouse_3:5xaj`, `item_response_warehouse_4:980f`,
+  `item_response_warehouse_5:3ykx`, `item_response_warehouse_6:fpe6` (all
   under `datapages`)
 - `sim` → `bdomingu/irw_simsyn:0btg`
 - `comp` → `bdomingu/irw_competitions:cmd7`

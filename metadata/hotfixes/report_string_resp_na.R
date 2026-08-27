@@ -84,7 +84,8 @@ if (summary.only) { print_summary(done); quit(status = 0) }
 
 ## ---- find string-typed resp tables across all four core shards -------------
 shards <- c("item_response_warehouse", "item_response_warehouse_2",
-            "item_response_warehouse_3", "item_response_warehouse_4")
+            "item_response_warehouse_3", "item_response_warehouse_4",
+            "item_response_warehouse_5", "item_response_warehouse_6")
 targets <- list()
 ## --limit has to short-circuit the SCAN, not just the measure loop: the scan is
 ## one list_variables() call per table over ~3,650 tables, so scanning

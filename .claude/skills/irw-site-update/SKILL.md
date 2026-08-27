@@ -1,6 +1,6 @@
 ---
 name: irw-site-update
-description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_3 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
+description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_5 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
 # IRW Site/Metadata Update
@@ -76,7 +76,7 @@ script-by-script writeup this was built from:
 Regenerates the small local CSVs that get merged (by hand) into the
 dictionary/tags/biblio/metadata Redivis tables, from whatever's new in the
 source Google Sheets or newly live in Redivis (e.g. a new
-`item_response_warehouse_4` table, or an edited dictionary-sheet row).
+`item_response_warehouse_6` table, or an edited dictionary-sheet row).
 
 ```bash
 scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 07 08 09
@@ -129,7 +129,7 @@ Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R --skip-dict   #
 Ground truth is `irw::irw_list_tables(source = c("core","comp","nom","sim"))`
 — the exported R-package accessor already used by the tags/itemtext skills,
 not a raw re-query of Redivis. It wraps exactly the Redivis datasets the
-numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3`/`_4` (01),
+numbered scripts use: `core` → `item_response_warehouse`/`_2`/`_3`/`_4`/`_5`/`_6` (01),
 `comp` → `irw_competitions` (05), `nom` → `irw_nominal` (06), `sim` →
 `irw_simsyn` (07).
 

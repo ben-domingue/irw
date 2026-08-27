@@ -1,7 +1,7 @@
 ##tables on redivis
 library(redivis)
 red<-list()
-for (dataset in c("item_response_warehouse","item_response_warehouse_2","item_response_warehouse_3","item_response_warehouse_4")) {
+for (dataset in c("item_response_warehouse","item_response_warehouse_2","item_response_warehouse_3","item_response_warehouse_4","item_response_warehouse_5","item_response_warehouse_6")) {
     v1<- redivis$organization("datapages")$dataset(dataset,version='latest')
     tables<-v1$list_tables()
     red[[dataset]]<-sapply(tables,function(x) x$name)
