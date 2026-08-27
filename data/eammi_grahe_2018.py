@@ -1,15 +1,30 @@
 import pandas as pd
 import numpy as np
+import io
 import os
 import re
+import requests
 
-def convert_to_irw(input_file, output_dir='eammi_grahe_2018'):
+# EAMMi2 (Grahe et al. 2018), OSF project https://osf.io/qtqpb/
+RAW_URL = "https://osf.io/download/c3pf6/"  # EAMMi2-Data1.2.xlsx
+
+def fetch_raw(input_file=None):
+    """Read the raw workbook, downloading it from OSF unless a local copy is given."""
+    if input_file and os.path.exists(input_file):
+        return input_file
+    r = requests.get(RAW_URL, timeout=600)
+    r.raise_for_status()
+    return io.BytesIO(r.content)
+
+
+def convert_to_irw(input_file=None, output_dir='eammi_grahe_2018'):
     try:
-        df = pd.read_excel(input_file, sheet_name='EAMMi2_Data')
-        dups_df = pd.read_excel(input_file, sheet_name='suspicious duplicate Ps', 
+        src = fetch_raw(input_file)
+        df = pd.read_excel(src, sheet_name='EAMMi2_Data')
+        dups_df = pd.read_excel(src, sheet_name='suspicious duplicate Ps', 
                                 skiprows=1, names=['Pair', 'ResponseId', 'Date', 'Action'])
     except Exception as e:
-        print(f"Error loading file {input_file}: {e}")
+        print(f"Error loading data: {e}")
         return
 
     # remove duplicates
@@ -43,7 +58,14 @@ def convert_to_irw(input_file, output_dir='eammi_grahe_2018'):
     # Added str(c) to safely avoid TypeErrors on non-string column names
     cols_to_keep = [
         c for c in df.columns 
-        if not re.search(r'(Click|Submit|Count|TEXT|StartDate|EndDate|Status|Progress|Finished|Recipient|External|Distribution|informedconsent|comments)', str(c), re.IGNORECASE)
+        if not re.search(r'(Click|Submit|Count|TEXT|StartDate|EndDate|Status|Progress|Finished|Recipient|External|Distribution|informedconsent|comments'
+                          # The codebook marks these "computed": *_biascheck is
+                          # the SUM of a scale's items and *_bias_dummy is a
+                          # response-bias flag (1 = all same answer). Neither is
+                          # an item, and the scale-prefix matching below would
+                          # otherwise sweep them into the socmedia, mindful,
+                          # belong, efficacy, support and stress tables.
+                          r'|biascheck|bias_dummy|bias-dummy)', str(c), re.IGNORECASE)
     ]
     df = df[cols_to_keep]
     id_vars = ['id', 'rt', 'date'] + [c for c in df.columns if str(c).startswith('cov_')]
@@ -135,4 +157,4 @@ def convert_to_irw(input_file, output_dir='eammi_grahe_2018'):
     print("Processing complete.")
 
 if __name__ == "__main__":    
-    convert_to_irw('raw_data/EAMMi2-Data1.2.xlsx')
+    convert_to_irw()

@@ -30,6 +30,7 @@ COV_MAP = {
     "lr":     "cov_lr",
     "region": "cov_region",
 }
+COV_ORDER = list(COV_MAP.values()) + ["cov_attack_timing"]
 
 
 def fetch_data() -> pd.DataFrame:
@@ -42,19 +43,24 @@ def fetch_data() -> pd.DataFrame:
     return pd.read_csv(io.BytesIO(b"".join(chunks)), sep="\t", low_memory=False)
 
 
-def derive_wave(df: pd.DataFrame) -> pd.Series:
-    attack    = pd.to_numeric(df["attack"],    errors="coerce")
+def derive_attack_timing(df: pd.DataFrame) -> pd.Series:
+    # Each respondent appears exactly once (76,466 rows, 76,466 distinct
+    # newid), so pre/during/post separates *different* people interviewed
+    # before, during and after the London Bridge attack. That is a
+    # between-subjects grouping, not a longitudinal wave, so it ships as a
+    # covariate (see datastandard.md).
+    attack     = pd.to_numeric(df["attack"],     errors="coerce")
     postattack = pd.to_numeric(df["postattack"], errors="coerce")
-    wave = pd.Series("pre", index=df.index)
-    wave[postattack == 1] = "post"
-    wave[attack == 1]     = "during"
-    return wave
+    timing = pd.Series("pre", index=df.index)
+    timing[postattack == 1] = "post"
+    timing[attack == 1]     = "during"
+    return timing
 
 
 def make_scale(df: pd.DataFrame, items: list[str], resp_as_float: bool = False) -> pd.DataFrame:
-    cov_cols = [c for c in COV_MAP.values() if c in df.columns]
-    long = df[["id", "wave"] + cov_cols + items].melt(
-        id_vars=["id", "wave"] + cov_cols,
+    cov_cols = [c for c in COV_ORDER if c in df.columns]
+    long = df[["id"] + cov_cols + items].melt(
+        id_vars=["id"] + cov_cols,
         value_vars=items,
         var_name="item",
         value_name="resp",
@@ -63,7 +69,7 @@ def make_scale(df: pd.DataFrame, items: list[str], resp_as_float: bool = False) 
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
     if not resp_as_float:
         long["resp"] = long["resp"].astype(int)
-    col_order = ["id", "item", "resp", "wave"] + cov_cols
+    col_order = ["id", "item", "resp"] + cov_cols
     return long[col_order].sort_values(["id", "item"]).reset_index(drop=True)
 
 
@@ -81,7 +87,12 @@ def convert():
     raw = fetch_data()
     raw.columns = raw.columns.str.lower()
 
-    raw["wave"] = derive_wave(raw)
+    # `id` restarts from 1 in each of the three country sub-samples, so it
+    # collides across them; `newid` (= country prefix * 100000 + id) is
+    # unique across all rows and is the real person identifier.
+    raw["id"] = raw["newid"].astype("Int64")
+
+    raw["cov_attack_timing"] = derive_attack_timing(raw)
     for src, dst in COV_MAP.items():
         if src in raw.columns:
             raw = raw.rename(columns={src: dst})

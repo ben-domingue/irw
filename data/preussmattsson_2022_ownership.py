@@ -25,6 +25,15 @@
 # per "one scale per file". No out-of-range values were found in S1-S6 for
 # this sheet (checked programmatically: all values fall within -3..+3), and
 # no imputation-related language appears in the paper text.
+#
+# The four conditions are a within-subjects 2x2 factorial -- every
+# participant completes all four, and the 6 statements are worded
+# identically across them -- so the condition is an experimental
+# manipulation, not a property of the item. It ships as cov_condition
+# rather than as a suffix on the item code, giving 6 items with n=200 each
+# (50 participants x 4 conditions) instead of 24 items with n=50. `treat`
+# would be wrong here: datastandard.md defines it as a binary
+# treatment/control split, and this is a within-subjects factorial.
 
 import io
 import os
@@ -56,8 +65,8 @@ def convert():
         for s in range(6):
             col = base + s
             vals = pd.to_numeric(data[col], errors="coerce")
-            item_name = f"S{s+1}_{cond}"
-            records.append(pd.DataFrame({"id": id_col, "item": item_name, "resp": vals}))
+            records.append(pd.DataFrame({"id": id_col, "item": f"S{s+1}",
+                                         "resp": vals, "cov_condition": cond}))
 
     long = pd.concat(records, ignore_index=True)
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
@@ -66,7 +75,7 @@ def convert():
     # sanity: all Likert values within documented -3..+3 range
     assert long["resp"].between(-3, 3).all(), "out-of-range value found in S1-S6"
 
-    out_cols = ["id", "item", "resp"]
+    out_cols = ["id", "item", "resp", "cov_condition"]
     long = long[out_cols]
 
     out_name = "preussmattsson_2022_ownership"
@@ -74,7 +83,7 @@ def convert():
     long.to_csv(csv_path, index=False)
 
     print(f"{out_name}: rows={len(long)} ids={long['id'].nunique()} "
-          f"items={long['item'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
+          f"items={long['item'].nunique()} conds={long['cov_condition'].nunique()} resp={long['resp'].min():.0f}-{long['resp'].max():.0f}")
 
 
 if __name__ == "__main__":

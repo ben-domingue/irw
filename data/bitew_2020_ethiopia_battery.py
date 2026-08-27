@@ -3,14 +3,22 @@
 # DOI: 10.1371/journal.pone.0240914
 # Supporting Information: https://doi.org/10.1371/journal.pone.0240914.s001
 #
-# Raw file has 5 raw-item scales: a 6-item anxiety measure, a 9-item
-# self-efficacy measure, the 3-item Oslo Social Support Scale (OSSS-3),
+# Raw file has 5 raw-item scales: a 6-item anxiety measure, the 10-item
+# General Self-Efficacy Scale, the 3-item Oslo Social Support Scale (OSSS-3),
 # PHQ-9, and the 12-item List of Threatening Experiences (LTE-Q). All
 # *TOT/*T/SESCORE/PHQCAT total/category columns excluded as aggregates.
 # ANXIETY/SEFFICA items are text-coded with unusual/abbreviated category
 # labels (e.g. "half/more", "right", "very/right") -- the ordinal
 # direction below is inferred from label semantics, not confirmed against
 # a published scoring key for these exact wordings.
+#
+# Self-efficacy note: the source file holds all ten GSE columns, but the
+# first is named SEFFICAY ("perform difficult work" = GSE item 1) rather
+# than SEFFICA0, so the remaining codes are offset by one: SEFFICAn is GSE
+# item n+1. Confirmed by three near-exact label matches (SEFFICA5 "can
+# solve most issues" = GSE 6, SEFFICA6 "get silent" = GSE 7, SEFFICA7
+# "find options" = GSE 8). Item codes are kept as the source headers, so
+# anyone reading SEFFICA1 as GSE item 1 will be off by one position.
 
 from __future__ import annotations
 
@@ -34,7 +42,7 @@ COV_RENAME = {"GENDER": "cov_gender", "AGE": "cov_age", "RESIDENCE": "cov_reside
 
 SCALES_TEXT = {
     "bitew_2020_anxiety": ([f"ANXIETY{i}" for i in range(1, 7)], MAP_ANXIETY),
-    "bitew_2020_self_efficacy": ([f"SEFFICA{i}" for i in range(1, 10)], MAP_SEFFICA),
+    "bitew_2020_self_efficacy": (["SEFFICAY"] + [f"SEFFICA{i}" for i in range(1, 10)], MAP_SEFFICA),
 }
 SCALES_NUMERIC = {
     "bitew_2020_osss3": [f"OSSS{i}" for i in range(1, 4)],

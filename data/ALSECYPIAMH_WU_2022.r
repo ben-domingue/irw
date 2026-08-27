@@ -1,12 +1,10 @@
-Data: https://osf.io/jqzbx/
-  Paper: 
-  library(haven)
+# Data: https://osf.io/jqzbx/
+# Paper: Wu et al. (2022), adaptation and validation of the Claremont
+#   Purpose Scale for Chinese adolescents.
+library(haven)
 library(dplyr)
 library(tidyr)
-library(openxlsx)
 library(readr)
-library(readxl)
-library(sas7bdat)
 
 remove_na <- function(df) {
   df <- df[!(rowSums(is.na(df[, -which(names(df) %in% c("id"))])) == (ncol(df) - 1)), ]
@@ -14,9 +12,19 @@ remove_na <- function(df) {
 }
 
 
-preStudy_df <- read_sav("CPS Pre-Study.sav")
-study1 <- read_sav("CPS Study 1.sav")
-study2 <- read_sav("CPS Study 2.sav")
+# The three .sav files are not in the repo; fetch them from the OSF project
+# (osf.io/jqzbx) so the script runs from a clean checkout.
+osf_sav <- function(file, key) {
+  if (!file.exists(file)) {
+    download.file(paste0("https://osf.io/download/", key, "/"), file,
+                  mode = "wb", quiet = TRUE)
+  }
+  read_sav(file)
+}
+
+preStudy_df <- osf_sav("CPS Pre-Study.sav", "7x6bn")
+study1 <- osf_sav("CPS Study 1.sav", "x9jcu")
+study2 <- osf_sav("CPS Study 2.sav", "sj7xc")
 
 preStudy_df [] <- lapply(preStudy_df, function(col) { # Remove column labels for each column
   attr(col, "label") <- NULL
@@ -70,8 +78,12 @@ save(CPS_df, file="ALSECYPIAMH_WU_2022_CPS.Rdata")
 write.csv(CPS_df, "ALSECYPIAMH_WU_2022_CPS.csv", row.names=FALSE)
 
 # ---------- Process SDQ Datasets ----------
+# SDQ_Pro is the SDQ prosocial *subscale score*, not an item: it carries the
+# SPSS label "Prosocial Behaviour" (the five items carry none) and equals
+# round(mean(SDQ_Pro1..SDQ_Pro5)) for all 7,841 respondents with no
+# exceptions. Dropped so the table is the five real items.
 SDQ_df <- study2 |>
-  select(starts_with("SDQ"), id)
+  select(starts_with("SDQ"), id, -SDQ_Pro)
 SDQ_df <- remove_na(SDQ_df)
 SDQ_df <- pivot_longer(SDQ_df, cols=-c(id), names_to="item", values_to="resp")
 
