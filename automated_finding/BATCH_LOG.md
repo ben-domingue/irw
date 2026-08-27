@@ -12382,3 +12382,186 @@ quote, no leading `=+-@'`), so it is consistent with the punctuation theory
 but does not confirm it — the earlier failure was never reproduced or
 explained. The TODO item asking for either a real mechanism or a switch to
 File > Import stays open.
+
+
+### Mendeley leads batch -- 121 tables from 23 deposits (2026-08-27)
+
+Worked `mendeley_leads_2026-08-26.csv` (31 leads, all CC BY 4.0) end to end,
+plus two single leads raised in the same session.
+
+**Result: 23 deposits -> 121 tables / 758,832 responses.**
+`biblio_mendeley_batch_2026-08-27.tsv` (121 rows) is written for upload. The
+121 CSVs were uploaded and cleared from `irw_output/` the same day.
+
+**The first cut of that TSV was written with CRLF line terminators and did not
+paste correctly.** `csv.writer`'s default `lineterminator` is `\r\n`, and
+opening the handle with `newline=""` preserves it, so every row ended in a
+stray CR. Regenerated with `lineterminator="\n"`. Also flattened to pure
+ASCII at the same time -- the source titles carry curly apostrophes, an `(R)`
+symbol and accented Turkish/Spanish letters, none of which need to survive
+into a paste. **This is a plausible cause of the 55-row biblio that "failed to
+paste repeatedly while being verifiably well-formed" (2026-08-26, cause never
+found)** -- that check verified delimiters and field counts, which CRLF passes.
+Worth checking line terminators first the next time a paste misbehaves.
+
+**Second defect in the same TSV: the Date column was emitted as ISO
+`2026-08-27` and left for Sheets to auto-convert, which it did for 113 of the
+121 rows and not for the other 8.** Verified by exporting the dictionary tab
+(gid `1337607315`) and diffing it field-by-field against the file: all 121
+rows landed, contiguous at sheet rows 4021-4141, no duplicates, and every one
+of the other 13 columns matched exactly -- the ONLY mismatches were 113 Date
+cells reading `8/27/2026` against 8 reading the literal `2026-08-27`
+(celik_2026_academic_motivation, khoa_2023_assurance, khoa_2023_knowledge_use,
+khulwa_2025_motivation_1..4, lestari_2026_cognitive_flexibility). The sheet's
+own convention is overwhelmingly M/D/YYYY (3,474 pre-existing rows, vs 206 in
+ISO -- probably earlier automated batches that hit exactly this). Fix: emit
+the date already formatted as `8/27/2026` so no conversion is needed. Do not
+hand Sheets an ISO date and assume it converts uniformly.
+
+**Root cause of the misaligned paste: consecutive tabs from always-blank
+cells.** The dictionary format mandates three blank columns -- H and K
+(`Custom License` x2) and L (`Notes`) -- which in a TSV become a `\t\t` run at
+H and a `\t\t\t` run at K-L. Google Sheets' text-to-columns collapses repeated
+delimiters into one; OpenOffice does not. So the same file opens correctly in
+OpenOffice and misaligns in Sheets, shifting everything after H left by 1 and
+everything after L left by 2 more -- Contributor and Date land in K and L
+instead of M and N. This also explains the date-formatting symptom: a date
+landing in a text-formatted column stays literal text, so which rows convert
+depends on where their cells land. Confirmed that the file itself is sound:
+121 rows x 14 fields, LF, pure ASCII, no novel characters versus the 4,020
+existing rows, Description/Reference shorter than existing maxima, and commas
+ruled out (3,743 existing rows contain commas and every sheet row is 14 cols).
+
+**Resolved: delivered as a fully-quoted `.csv` and imported via
+`File > Import > Append to current sheet`.** Import honours both RFC4180
+quoting and empty fields, where Sheets' paste honours neither -- so the
+delimiter was never the thing to fix, the delivery path was. (Sheets did not
+offer a working TSV import route here, so the tab-separated variant was
+abandoned rather than pursued.) Verified against the live dictionary tab: all
+121 rows present, contiguous at sheet rows 4022-4142, 14 columns each, no
+duplicates, zero field mismatches across 1,694 cells. The `.tsv` and a `.xlsx`
+variant were deleted; `biblio_mendeley_batch_2026-08-27.csv` is the record.
+The standing lesson in the skill's SKILL.md said the opposite ("hand biblio
+rows over as .tsv, not .csv") and has been corrected.
+
+Note for anyone regenerating this TSV: the per-table counts in its Description
+column are computed from `irw_output/*.csv`, which is emptied on upload. A
+regeneration that reads an empty directory silently produces a header-only
+file (this happened once here). Re-run the 23 `data/*.py` scripts first -- all
+23 were verified to reproduce their output exactly on 2026-08-27 -- and assert
+the file count before writing.
+
+| deposit | script | tables | responses |
+|---|---|---|---|
+| n45sjtxmzy | nguyen_2026_sdt_online_learning.py | 6 | 104,994 |
+| 94p8m47y58 | yao_2020_intolerance_uncertainty.py | 6 | 118,924 |
+| hwp4wsb549 | celik_2026_motivation_distance_ed.py | 6 | 81,220 |
+| 6y7sbzjbny | lestari_2026_teacher_executive_function.py | 3 | 62,800 |
+| kmkhx3tzjx | figalova_2021_pss_bdi_stai.py | 4 | 46,917 |
+| whsbpyxy6w | nguyen_2026_learner_autonomy.py | 7 | 34,247 |
+| 6n78w5pz74 | ribeiro_2019_academic_motivation.py | 1 | 33,553 |
+| bsxgbt8wnp | fraijo_2022_mslq.py | 1 | 28,107 |
+| 826gmw6ypw | avci_2024_entrepreneurial_orientation.py | 27 | 27,647 |
+| j8tkztz636 | nguyen_2026_online_learning_misfit.py | 5 | 27,345 |
+| htwjk32j59 | pham_2026_digital_burnout.py | 8 | 25,536 |
+| wjsv27cc7v | ventura_2025_hbdi.py | 4 | 23,120 |
+| bj5vtsj7bj | clipa_2025_mslq_romania.py | 1 | 18,224 |
+| c5gpdtj8jv | saha_2026_cesd_depression.py | 1 | 17,840 |
+| tdsspksw83 | hoai_2026_blended_learning.py | 7 | 17,400 |
+| tpgsnk4928 | khoa_2023_knowledge_management.py | 5 | 16,896 |
+| hg4x8cn7zb | lee_2019_academic_motivation_scale.py | 1 | 16,525 |
+| mhfkgs7z3c | khulwa_2025_tiktok_engagement.py | 6 | 13,113 |
+| ywjhb9mw82 | chen_2026_identity_construction.py | 10 | 12,936 |
+| 4sn3936svj | erguvan_2022_rasch_gender.py | 1 | 11,950 |
+| 3fhcxn3zd3 | lozano_2018_whodas.py | 6 | 8,764 |
+| hwvsd5zd4d | dai_2025_music_motivation.py | 1 | 6,764 |
+| xd27t4g547 | ramadan_2026_genai_competency.py | 4 | 4,010 |
+
+**`10.17632/zktjjx93sv` is PII-blocked -- skipped entirely.** This was the
+largest lead in the pool (563 x 300) and was flagged `worth_retrying`. The
+`.sav` carries a `Mobile` column of real Bangladeshi mobile numbers (331
+distinct), plus `respondent` and `Hhhead` first-name columns, interviewer
+names, and union/upazila-level location. Per the blanket rule this is a
+whole-candidate skip, not a drop-the-column fix. No `pii_blocked_candidates.csv`
+exists by design -- there is no path to un-blocking it.
+
+Other skips:
+- `2hkrbgv5kb` -- every column is a composite (brain-quadrant totals,
+  multiple-intelligences totals, 0-100 percentages). No raw items.
+- `hk7syttw3b` -- country-level indicator table (Dimension/Pais/Ano/Indicador/
+  Valor/Fuente), 19 rows. Not item response and N<100.
+- `hd2z967zjh` -- duplicate deposit, same first author as `j8tkztz636`. Its
+  small file is byte-identical to j8tkztz636's; its 3,676-row file carries 811
+  exact-duplicate rows. Shipped once, via j8tkztz636.
+- `h3yhs5gy3w` -- SPM items are option-coded 1..8 (which distractor was
+  chosen), not ordinal. A nominal-standard candidate needing the answer key;
+  NOT shipped to core. Left open in TODO.md.
+
+**Also in this session, outside the leads CSV:**
+- `10.7910/dvn/terjak` was recommended by the daily nudge but is ALREADY
+  SHIPPED -- it is mailing #13 of `data/goldberg_2018_escs.py` (Eugene-
+  Springfield, 60 tables, confirmed pasted 2026-08-26). Nothing marks worked
+  rows in the lead CSVs, so shipped datasets keep resurfacing as
+  recommendations. TODO item added.
+- `10.7717/peerj.21420` -- SKIP. TODO.md diagnosed this as a header-offset
+  problem ("the real header row is offset a row or two down"). That was wrong.
+  All five sheets of `peerj-14-21420-s001.xlsx` are aggregate contingency
+  tables -- counts, percentages and Yates chi-square results. There is no
+  per-respondent row anywhere in the file, so no `id` can exist.
+
+**Coding decisions worth remembering:**
+- **999 is a missing sentinel in `94p8m47y58`**, not a response: 40% of BDI
+  cells, 27% of BAI/GAD/EPQ. Recoded to missing before melting, which is why
+  the six instruments have different respondent counts. Recode happens BEFORE
+  the sequential id is assigned -- a first pass clobbered the legitimate row
+  with id 999.
+  **`0` is NOT a sentinel in either BDI table, checked 2026-08-27** (asked by
+  ben-domingue). The two deposits express missingness in complementary ways
+  and both leave 0 as a real response: `kmkhx3tzjx` uses `NaN` (28,938 NaN
+  cells vs 5,220 zeros; the 1,378 rows with any NaN are exactly the 1,378
+  entirely-NaN rows), while `94p8m47y58` has zero native NaN and carries all
+  missingness in 999 at row level (11,844 BDI cells / 21 items = exactly 564
+  fully-999 rows). Both show the monotone non-clinical gradient
+  (0 > 1 > 2 > 3) and a per-item 0-rate varying 2.5-3x across items, where a
+  sentinel would be flat and co-occur within rows. In `kmkhx3tzjx` the 34
+  all-zero BDI rows also score LOWER on PSS (1.35 vs 1.82) -- they are
+  low-distress respondents, not non-responders.
+- **`chen_2026_ir` has no `resp=1`, and that is correct.** The bottom category
+  is rare across the whole deposit -- RF 0.09%, IN and CH 0.17% -- so the
+  expected count in IR's 1,176 cells is ~1-2 and observing 0 is unremarkable
+  (P ~ 0.2). IR is the sparsest block at the bottom generally (only six 2s).
+  This is the opposite situation from the 6-vs-7 maximum split, where the
+  observed 7-rate is ~2.5% and three blocks having zero 7s cannot be chance.
+  IR stays 1-7 with floor non-use.
+- **`resp_scale_mixed` fires on floor non-use** and was waived by name in
+  `hoai_2026` (8/30 items never drew the bottom category; one item had exactly
+  one respondent at 1) and `chen_2026`. It is NOT waived where the maximum
+  differs: `ywjhb9mw82` genuinely mixes 6-point and 7-point blocks -- PR, AI
+  and IL contain zero 7s across 1,176 cells each, which at an observed 7-rate
+  of ~2.5% cannot be chance.
+- **Subscales ship as separate tables**, following the KEPAQ/KORQ/STAI
+  precedent in the 2026-08-26 education batches. The first cut of
+  `nguyen_2026_sdt_*` pooled COM/REL/AUT into one BPNS table and `run_qc`'s
+  multi_scale check objected; splitting them cleared it.
+- **`3fhcxn3zd3` has a genuine `wave` column** -- 178 baseline and 96
+  follow-up WHODAS administrations with identical item suffixes, so pre/post
+  goes in `wave` rather than becoming two instruments.
+- **`6n78w5pz74` merged two samples into one table** with `cov_study`, per the
+  same-instrument rule; sample B's ids are offset past sample A's observed max.
+- **Regression dummies recovered** in `c5gpdtj8jv`: three dummy groups became
+  `cov_academic_year`, `cov_field` and `cov_psychological_factor`, with the
+  omitted indicator as the reference level.
+- **Delimiter recoveries**: `kmkhx3tzjx` (1725x1 -> 1725x79) and
+  `hwp4wsb549`'s `TEZ_VERI_UNI.csv` (653x12 -> 653x89) are both
+  semicolon-delimited. `hwp4wsb549` was also recorded in TODO.md as returning
+  an empty file listing at every attempt; the Mendeley public API returns both
+  its files without trouble, so that item is resolved.
+- **Book-balancing caught a real drop**: the `unaccounted source columns`
+  assert flagged `EPQn13/17/21/.../46` in `94p8m47y58` -- the EPQn family is
+  not sequentially numbered, so an explicit list silently missed nine columns.
+  Now matched by regex.
+- **Stale-output hazard, hit and fixed**: `nguyen_2026_sdt_*` was renamed after
+  its first run, leaving seven files under the old names in `irw_output/`
+  (including a `nguyen_2026_bpns` from the pre-split version). The output
+  directory had 122 files for 121 built tables. Verified by rebuilding the
+  count from the scripts, not from the directory.

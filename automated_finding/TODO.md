@@ -32,14 +32,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   table for it, so it was held rather than named on a guess. Everything else
   in the deposit is shipped.
 
-- [ ] **`10.7717/peerj.21420` is still unworked** (PeerJ, CC BY, tourists'
-  perception of vipers). Flagged `human_assistance` by the weekly PMC sweep
-  and already sitting in `human_review/human_review_pmc_edu_2026-08-26.csv`
-  from the same day's education sweep -- one lead, found twice, actioned
-  neither time. Its reason string is the mangled-header /
-  "could not confidently identify item columns" shape that README Step 1b
-  says is disproportionately recoverable: the real header row is offset a
-  row or two down in `peerj-14-21420-s001.xlsx`.
+- [x] **`10.7717/peerj.21420` resolved as a SKIP** (2026-08-27). The
+  header-offset diagnosis recorded here was wrong: all five sheets of
+  `peerj-14-21420-s001.xlsx` are aggregate contingency tables (counts,
+  percentages, Yates chi-square), with no per-respondent row anywhere, so no
+  `id` column can exist. Not recoverable -- the data was never published at
+  the respondent level.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
@@ -50,18 +48,75 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   and the `irw_output/` CSVs are off disk as expected. See the Mendeley entry
   in `BATCH_LOG.md` for the per-deposit coding decisions.
 
-- [ ] **Work `mendeley_leads_2026-08-26.csv` (31 leads).** The connector's
-  first run: 5 `good`, 25 `worth_retrying`, 1 `recoverable_format`, already
-  ranked by instrument shape (29 of 31 pass the shape filter). Largest:
-  `zktjjx93sv` 509x260, `4n5x4ffzn5` 495x101, `94p8m47y58` 1402x126,
-  `n45sjtxmzy` 2763x43. Given the measured 27% rate this is the best-value
-  pool currently open.
+- [x] **`mendeley_leads_2026-08-26.csv` (31 leads) worked** (2026-08-27):
+  23 deposits -> 121 tables / 758,832 responses, 5 skipped, 3 deferred (below).
+  See the 2026-08-27 entry in `BATCH_LOG.md`. Note `zktjjx93sv`, listed here
+  as the largest lead, turned out to be PII-blocked (real mobile numbers and
+  respondent names) and was skipped entirely.
 
-- [ ] **`10.17632/hwp4wsb549` returns an empty file listing at every
-  version** (Personality Traits and Academic Motivation, 388x65, CC BY). The
-  Mendeley files API gives `[]` for v1 and 404 for v2/v3, so nothing can be
-  fetched programmatically. Needs someone to open the landing page and see
-  whether the files are actually there.
+- [x] **The 121 `irw_output/` CSVs are uploaded** (confirmed 2026-08-27,
+  ben-domingue). 758,832 responses across 23 Mendeley deposits, all CC BY 4.0.
+  The CSVs are off disk as expected.
+
+- [x] **`biblio_mendeley_batch_2026-08-27.csv` (121 rows) uploaded/pasted**
+  (confirmed 2026-08-27, ben-domingue). Verified against the live dictionary
+  tab: all 121 rows present, contiguous at sheet rows 4022-4142, 14 columns
+  each, no duplicates, and zero field mismatches across 1,694 cells. Landed
+  via **File > Import > Append to current sheet**, comma-separated -- the
+  `.tsv` paste path misaligned because the three mandated blank columns become
+  consecutive tabs that Sheets collapses. See `BATCH_LOG.md` and the corrected
+  lesson in the skill's SKILL.md.
+
+  If this ever needs regenerating: `irw_output/` is emptied on upload, and the
+  row counts in the Description column are computed from those CSVs -- re-run
+  the 23 `data/*.py` scripts first (all verified reproducible 2026-08-27) and
+  assert the file count before writing.
+
+- [ ] **Three Mendeley deposits deferred, each for a specific reason**
+  (2026-08-27, all CC BY 4.0, all downloadable):
+  - `10.17632/4n5x4ffzn5` (Javanese marital quality, 840x111) -- the workbook
+    has four sections (Bagian I-IV) with subtotal ("T") columns and unnamed
+    blocks interspersed between the item columns, plus a stray section-label
+    row 0 and `?` as a missing code. Shipping it needs the instrument or the
+    paper to tell items from subtotals; guessing risks shipping subtotals as
+    items.
+  - `10.17632/mrrc83rt3b` (Indian healthcare-worker wellbeing, 240x60) --
+    three coherent text-Likert blocks (a 9-item UWES-shaped engagement scale,
+    an 8-item COVID-stress scale, a numeric job-affect block). Blocked on
+    category ORDER: one block offers both "Rare" and "Less than a day or two"
+    as distinct options in the same column (39 vs 4 responses), and whether
+    those are the same rank or adjacent ranks is not inferable from the data.
+    Needs the paper's Methods. Checked for PII -- clean.
+  - `10.17632/ry2dvfydjd` (Integrated Palliative care Outcome Scale Rasch
+    analysis, 300 rows / 260 distinct patients) -- repeated measures whose
+    wave structure needs the paper, and it carries a `DOA` admission-date
+    column alongside age and 29-category diagnosis. Not PII by the letter of
+    the rule (no name/email/DOB/GPS/ID), but worth a human look before
+    shipping a palliative-care cohort.
+
+- [ ] **`10.17632/h3yhs5gy3w` is a nominal-standard candidate, not core**
+  (Myszkowski & Storme 2018, "A snapshot of g?", 499x12, CC BY). The SPM
+  items are option-coded 1..8 -- which distractor the respondent chose, not
+  an ordinal rating -- so they belong in the nominal standard, or in core
+  once scored against an answer key. The key is not in the deposit. Deliberately
+  NOT shipped to core in the 2026-08-27 batch.
+
+- [ ] **Lead CSVs have no "worked" marker, so shipped datasets keep getting
+  recommended.** On 2026-08-27 the daily nudge routine recommended
+  `10.7910/dvn/terjak` as the day's best lead; it had already shipped on
+  2026-08-26 as mailing #13 of `data/goldberg_2018_escs.py`. The dedup
+  practice exists (`grep -rli <key> ../data/*.py`) but nothing writes the
+  result back, so every consumer of the lead CSVs re-derives it or, like the
+  nudge, skips it. Options: a `worked` column written back after each batch,
+  or have the nudge run the grep itself before recommending.
+
+- [x] **`10.17632/hwp4wsb549` empty-file-listing problem is gone**
+  (2026-08-27). The Mendeley public API now returns both files
+  (`TEZ_412VERI.xlsx`, `TEZ_VERI_UNI.csv`) without trouble. Shipped as
+  `data/celik_2026_motivation_distance_ed.py` -- 6 tables / 81,220 responses
+  across two samples (AMS-28, distance-ed-26, TIPI-10 on 412 respondents;
+  BFI-44, distance-ed-16, BPNS-24 on 653). The CSV is semicolon-delimited,
+  which is why a default read produced a 653x12 mess.
 
 - [x] **A biblio paste can fail for reasons not visible in the file.**
   On 2026-08-26 the 55-row combined biblio failed to paste repeatedly while

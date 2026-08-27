@@ -631,10 +631,51 @@ options the ordered/unordered distinction is vacuous -- a dichotomy is
 trivially ordinal and standard dichotomous IRT applies. An option-coded
 column is a nominal-standard candidate only at **three or more** categories.
 
-**Hand biblio rows over as `.tsv`, not `.csv`.** Google Sheets splits pasted
-text on commas without honouring CSV quoting, so every comma inside a
-`Description` or `Reference` becomes a column break -- and those fields nearly
-always contain commas.
+**Hand biblio rows over as a fully-quoted `.csv` for `File > Import`, NOT as a
+`.tsv` for pasting.** (Superseded the previous advice on 2026-08-27 -- that
+said the opposite; see below for why both halves were half-right.)
+
+The old rule said `.tsv`, because Google Sheets' *paste* splits text on commas
+without honouring CSV quoting, so every comma inside a `Description` or
+`Reference` becomes a column break. That part is still true of the paste path.
+But `.tsv` fails the paste path too, for a different reason: the dictionary
+format mandates three always-blank columns -- H and K (`Custom License` x2) and
+L (`Notes`) -- which in a TSV become consecutive tabs. Sheets' text-to-columns
+collapses repeated delimiters into one; OpenOffice does not. So a TSV opens
+correctly in OpenOffice and misaligns in Sheets, shifting `Contributor` and
+`Date` three columns left. Re-copying the cells out of OpenOffice does not
+help -- the clipboard still carries text that Sheets re-splits.
+
+The fix is to change the *delivery path*, not the delimiter. Sheets' **import**
+honours both RFC4180 quoting and empty fields, where its paste honours
+neither. So:
+
+- Write the file with `csv.QUOTE_ALL`, LF terminators, pure ASCII.
+- Tell ben-domingue: **File > Import > Upload > Import location: "Append to
+  current sheet" > Separator type: comma.**
+- Confirmed working 2026-08-27 on a 121-row batch: all 121 rows landed
+  contiguous at 14 columns with zero field mismatches across 1,694 cells.
+  An `.xlsx` also works and avoids delimiters entirely, but the quoted CSV is
+  what was actually verified end-to-end.
+
+**Verify a paste/import by exporting the target tab, not by re-checking the
+file.** The dictionary tab is gid `1337607315`
+(`https://docs.google.com/spreadsheets/d/<id>/export?format=csv&gid=1337607315`
+-- the default export returns a cover tab instead). Diff it field-by-field
+against the source rows. On 2026-08-27 that localised a problem to one column
+in 8 rows and simultaneously proved alignment, completeness and no-duplicates
+for everything else; two rounds of re-checking the file itself had found
+nothing, because the file was fine.
+
+**Emit the `Date` column pre-formatted as `M/D/YYYY`, never ISO.** The sheet's
+own convention is `M/D/YYYY` (3,474 rows vs 206 in ISO). Handing Sheets
+`2026-08-27` and letting it auto-convert is unreliable -- on 2026-08-27 it
+converted 113 of 121 rows and left 8 as literal left-aligned text.
+
+**`csv.writer` defaults to CRLF.** Its `lineterminator` is `\r\n`, and opening
+the handle with `newline=""` preserves it. Pass `lineterminator="\n"`
+explicitly and verify with `file X.csv` (should not say "CRLF line
+terminators").
 
 **Keep fields boring anyway.** A 55-row biblio once failed to paste
 repeatedly while being verifiably well-formed, and the cause was never found
