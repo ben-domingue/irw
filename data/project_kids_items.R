@@ -1,7 +1,33 @@
 library(tidyverse)
 library(readr)
 
-df_raw <- read_csv('PK_ItemLevelData.csv')
+# Project KIDS, LDbase (https://ldbase.org). Both files download without an
+# account and are open-licensed.
+ITEM_URL <- "https://ldbase.org/system/files/datasets/2021-05/PK_ItemLevelData.csv"
+# Total Scores data (DOI 10.33009/ldbase.1620844399.85a0, ODC-By): carries
+# `treatment` (RCT arm) and `project` (which of the 9 RCTs), linkable to the
+# item-level file on PK_ID. See issue #416.
+FULL_URL <- "https://ldbase.org/system/files/datasets/2021-08/PK_FullData.csv"
+
+ldbase_csv <- function(file, url) {
+  if (!file.exists(file)) download.file(url, file, mode = "wb", quiet = TRUE)
+  read_csv(file, show_col_types = FALSE)
+}
+
+df_raw  <- ldbase_csv('PK_ItemLevelData.csv', ITEM_URL)
+df_full <- ldbase_csv('PK_FullData.csv',      FULL_URL)
+
+# Attach the RCT arm and study id before pk_id is dropped. `treat` is
+# defined as binary treatment/control in datastandard.md, so the 59
+# participants coded 2 (a third arm, in projects 3 and 5) and the 1 with no
+# value are left blank rather than folded into either group; cov_project
+# keeps the 9 RCTs distinguishable.
+df_full <- df_full |>
+  select(PK_ID, treatment, project) |>
+  mutate(treat = if_else(treatment %in% c(0, 1), treatment, NA_real_),
+         cov_project = project) |>
+  select(PK_ID, treat, cov_project)
+df_raw <- df_raw |> left_join(df_full, by = "PK_ID")
 
 names(df_raw) <- tolower(names(df_raw))
 
@@ -23,6 +49,8 @@ for (i in 1:ncol(df_raw)) {
 }
 
 
+drop_vars <- setdiff(drop_vars, c("treat", "cov_project"))
+
 df_raw <- df_raw |>
   # drop unneeded variables
   select(-all_of(drop_vars),
@@ -32,7 +60,11 @@ df_raw <- df_raw |>
          -starts_with('ssrs'),
          -starts_with('tq')) |>
   # create participant ID
-  mutate(id = row_number()) 
+  mutate(id = row_number())
+
+# person-level columns carried onto every response row at the end
+person_cols <- df_raw |> select(id, treat, cov_project)
+df_raw <- df_raw |> select(-treat, -cov_project)
 
 # transform tosrec assessment variables
 tosrec <- df_raw |>
@@ -143,123 +175,124 @@ four <- df_raw |>
   select(id, item, wave, wave_temp, resp) 
 
 df <- rbind(four, kbit, three, tosrec, tosrec2, two)
+df <- df |> left_join(person_cols, by = "id")
 
 df$check <- str_sub(df$item, 1, 5)
 
 df_ctopp <- df %>%
   filter(grepl("ctopp",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_mf <- df %>%
   filter(grepl("wj_mf",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_kbit <- df %>%
   filter(grepl("kbit",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 
 df_wj_lw_grade <- df %>%
   filter(grepl("wj_lw",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_lw_wave <- df %>%
   filter(grepl("wj_lw",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pc_grade <- df %>%
   filter(grepl("wj_pc",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pc_wave <- df %>%
   filter(grepl("wj_pc",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pv_grade <- df %>%
   filter(grepl("wj_pv",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pv_wave <- df %>%
   filter(grepl("wj_pv",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ak_grade <- df %>%
   filter(grepl("wj_ak",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ak_wave <- df %>%
   filter(grepl("wj_ak",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_sa <- df %>%
   filter(grepl("wj_sa",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wa_grade <- df %>%
   filter(grepl("wj_wa",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wa_wave <- df %>%
   filter(grepl("wj_wa",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wf <- df %>%
   filter(grepl("wj_wf",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ap <- df %>%
   filter(grepl("wj_ap",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_qc <- df %>%
   filter(grepl("wj_qc",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_told_grade <- df %>%
   filter(grepl("told",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_told_wave <- df %>%
   filter(grepl("told",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_spell_grade <- df %>%
   filter(grepl("wj_sp",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_spell_wave <- df %>%
   filter(grepl("wj_sp",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_tosrec <- df %>%
   filter(grepl("tosre",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_topel <- df %>%
   filter(grepl("topel",df$check)) %>%
-  select(id, item, wave_temp, resp) %>%
+  select(id, item, wave_temp, resp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 write.csv(df_ctopp, "project_kids_ctopp.csv", row.names=FALSE)

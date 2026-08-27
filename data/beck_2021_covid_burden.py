@@ -24,13 +24,24 @@
 # still present in the raw columns (confirmed non-zero NaNs among included
 # patients), consistent with this being the raw, non-imputed file.
 
+import io
 import os
 import re
+
 import pandas as pd
+import requests
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-RAW = os.path.join(BASE, "journal.pone.0250590_S1_Data.xlsx")
+RAW_URL = ("https://journals.plos.org/plosone/article/file"
+           "?id=10.1371/journal.pone.0250590.s002&type=supplementary")
+UA = {"User-Agent": "irw-batch/1.0 (research)"}
 OUT_DIR = os.path.join(BASE, "..", "automated_finding", "irw_output")
+
+
+def fetch_raw():
+    r = requests.get(RAW_URL, headers=UA, timeout=300)
+    r.raise_for_status()
+    return io.BytesIO(r.content)
 
 
 def item_number(colname, prefix_pattern):
@@ -70,7 +81,8 @@ def build_instrument(df, pp_cols, pr_cols, out_name):
 
 
 def convert():
-    df = pd.read_excel(RAW, sheet_name="STATA")
+    os.makedirs(OUT_DIR, exist_ok=True)
+    df = pd.read_excel(fetch_raw(), sheet_name="STATA")
 
     hads_pp = [c for c in df.columns if c.startswith("PP_D30_HADS")]
     hads_pr = [c for c in df.columns if c.startswith("PR_D30_HADS")]

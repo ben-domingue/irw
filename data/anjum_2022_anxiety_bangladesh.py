@@ -13,10 +13,12 @@ OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 # DOI: 10.1371/journal.pone.0262716
 # Anjum et al. (2022), "Anxiety among urban, semi-urban and rural school
 # adolescents in Dhaka, Bangladesh: Investigating prevalence and
-# associated factors". S1 Data. CC BY 4.0. N=2313. GAD-7 raw items
-# (E21-E26, 6 of the 7 standard items -- E20 in the file is an
-# introductory screening item, not part of the numbered battery),
-# text-coded 4-point frequency scale ("Not at all".."Nearly every day")
+# associated factors". S1 Data. CC BY 4.0. N=2313. All 7 GAD-7 raw items
+# (E20_Anxiety, E21-E26). E20_Anxiety is GAD-7 item 1 ("Feeling nervous,
+# anxious"), confirmed by its SPSS variable label and by the fact that the
+# file's own E_GAD7_Total_Score equals the sum of E20_Anxiety + E21..E26
+# for 100% of respondents (it matches E21..E26 alone for only 49%).
+# Text-coded 4-point frequency scale ("Not at all".."Nearly every day")
 # recoded 0-3. Derived score/category columns
 # (E_GAD7_Total_Score/Cat_GAD7/Recat_GAD7 etc.) not shipped.
 URL = ("https://journals.plos.org/plosone/article/file"
@@ -25,7 +27,7 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
 COV_MAP = {"A2_age": "cov_age", "A3_gender": "cov_gender", "School_area": "cov_school_area"}
 LIKERT_MAP = {"Not at all": 0, "Several days": 1, "More than half of the days": 2, "Nearly every day": 3}
-ITEM_COLS = ["E21", "E22", "E23", "E24", "E25", "E26"]
+ITEM_COLS = ["E20_Anxiety", "E21", "E22", "E23", "E24", "E25", "E26"]
 
 
 def fetch() -> pd.DataFrame:

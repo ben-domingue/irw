@@ -26,6 +26,15 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
 ITEM_COLS = [f"HamD{i}Baixa" for i in range(1, 18)]
 
+# The HDRS-17 scores its items on two ranges by design: items 4, 5, 6, 12,
+# 13, 14, 16 and 17 are 0-2, the rest 0-4. Items 6, 14 and 16 each carry a
+# handful of values above their maximum (9 observations in total out of 291
+# respondents per item) -- isolated out-of-range values, i.e. data entry
+# rather than a genuinely wider scale, so they are dropped here per
+# datastandard.md. Item 9 (agitation) is left alone: it is a 0-4 item.
+MAX_RESP = {f"HamD{i}Baixa": (2 if i in (4, 5, 6, 12, 13, 14, 16, 17) else 4)
+            for i in range(1, 18)}
+
 
 def fetch_data() -> pd.DataFrame:
     r = requests.get(SI_URL, headers=UA, timeout=60)
@@ -44,6 +53,11 @@ def convert():
     # sentinel missing-value code (documented in the paper for item 5)
     long = long[long["resp"] != 999]
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
+    # isolated out-of-range values (see MAX_RESP)
+    n_before = len(long)
+    long = long[long["resp"] <= long["item"].map(MAX_RESP)]
+    long = long[long["resp"] >= 0].reset_index(drop=True)
+    print(f"dropped {n_before - len(long)} out-of-range observations")
     long["resp"] = long["resp"].astype(int)
     long = long[["id", "item", "resp"]]
 
