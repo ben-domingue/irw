@@ -3,6 +3,42 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-27 repo-mode discovery sweep (155 new terms, 6,048 candidates)
+
+- [x] **Zenodo connector was returning an empty `url` for every hit** --
+  fixed 2026-08-27 in `irw_discover_updated.py` (`from_zenodo`). Zenodo's
+  InvenioRDM migration dropped `links["html"]`; the record page is now
+  `links["self_html"]`. Reading the retired key gave every Zenodo Hit an
+  empty url, so `resolve_data_files()` found no files and the candidate was
+  retired as `no_tabular_file` without any resolver being called. **1,508
+  rows -- 25% of the 2026-08-27 pool -- were zeroed this way**, and the
+  same applies to every repo-mode run since the migration. The fix falls
+  back to `links["html"]` and then to `https://zenodo.org/records/{id}`.
+
+  **Still open: past runs under-reported Zenodo.** Any repo-mode batch in
+  `BATCH_LOG.md` whose Zenodo rows all came back `no_usable_file` was
+  measuring this bug, not the deposits. Worth re-running the Zenodo half of
+  the recent term pools before concluding Zenodo is a low-yield surface.
+
+- [x] **Dataverse resolver only ever reached Harvard** -- fixed 2026-08-27
+  in `irw_batch_updated.py`. `_dataverse_files()` hardcoded
+  `dataverse.harvard.edu`, so a SURF/DANS or Scholars Portal/Borealis
+  persistentId was queried against Harvard (403), and `surf` /
+  `scholars_portal` additionally matched no branch in `resolve_data_files()`
+  at all -- falling through to `return [], "", []`, which is exactly the
+  silent-empty-list failure the datacite comment above that dispatch warns
+  about. 503 rows in this run. The resolver now derives the installation
+  from the landing-page host, following the doi.org redirect when the URL is
+  a bare DOI, and file-access URLs are built against the same instance.
+
+- [ ] **Figshare 403s under concurrency.** A metadata-only pass at 8 threads
+  drew 1,858 `403 Forbidden` responses from `api.figshare.com`; the same
+  article ids return `200` when retried serially. These are throttle
+  artifacts, not dead records -- but note `polite_get()`'s per-domain delay
+  does not apply to the resolver helpers, which call `requests.get` directly.
+  Any parallel driver over `resolve_data_files()` needs its own backoff, or
+  the rate limiting should move into the resolvers.
+
 ## From the 2026-08-27 table-name audit (issue #1686)
 
 Evidence: `naming_audit_suspects.csv` + `naming_audit_README.md`. The audit is

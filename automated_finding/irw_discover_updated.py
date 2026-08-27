@@ -411,8 +411,16 @@ def from_zenodo(query: str, max_pages: int = 5, per: int = 25):
             return
         for h in hits:
             md = h.get("metadata", {})
-            yield Hit("zenodo", md.get("title", ""),
-                      h.get("links", {}).get("html", ""),
+            # Zenodo's InvenioRDM migration dropped links["html"]; the record
+            # page is now links["self_html"]. Reading the old key yielded an
+            # empty url for every hit, which made resolve_data_files() find no
+            # files and retire the candidate as "no_tabular_file" -- 1,508 rows
+            # (25% of the pool) in the 2026-08-27 repo sweep, silently.
+            links = h.get("links", {})
+            url = links.get("self_html") or links.get("html") or ""
+            if not url and h.get("id"):
+                url = f"https://zenodo.org/records/{h['id']}"
+            yield Hit("zenodo", md.get("title", ""), url,
                       norm_doi(h.get("doi", "")), md.get("publication_date", ""))
         time.sleep(0.5)
 

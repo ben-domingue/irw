@@ -194,11 +194,39 @@ def _dryad_files(doi: str) -> tuple:
     return out, license_raw, oversized
 
 
+def _dataverse_instance(url: str, doi: str) -> str:
+    """Which Dataverse installation hosts this record.
+
+    The resolver used to hardcode dataverse.harvard.edu, so every non-Harvard
+    installation (SURF/DANS, Scholars Portal/Borealis, ICPSR-adjacent, ...)
+    got its persistentId queried against Harvard, which answers 403. Those
+    rows then surfaced as no_usable_file -- 503 of them in the 2026-08-27
+    repo sweep -- against datasets no resolver had actually read.
+
+    A landing-page URL already names the host. A bare doi.org link does not,
+    so follow the redirect (HEAD, no body) to find out."""
+    host = (urlparse(url).netloc or "").lower()
+    if host and "doi.org" not in host and "hdl.handle.net" not in host:
+        return f"https://{host}"
+    target = url or (f"https://doi.org/{doi}" if doi else "")
+    if target:
+        try:
+            resp = requests.head(target, headers=UA, timeout=30,
+                                 allow_redirects=True)
+            h = (urlparse(resp.url).netloc or "").lower()
+            if h and "doi.org" not in h:
+                return f"https://{h}"
+        except Exception:
+            pass
+    return "https://dataverse.harvard.edu"
+
+
 def _dataverse_files(url: str, doi: str) -> tuple:
     pid = f"doi:{doi}" if doi else None
     if not pid:
         return [], "", []
-    r = requests.get("https://dataverse.harvard.edu/api/datasets/:persistentId/",
+    base = _dataverse_instance(url, doi)
+    r = requests.get(f"{base}/api/datasets/:persistentId/",
                      params={"persistentId": pid}, headers=UA, timeout=30)
     if r.headers.get("x-amzn-waf-action") == "challenge":
         raise SourceBlocked(
@@ -218,8 +246,7 @@ def _dataverse_files(url: str, doi: str) -> tuple:
             if (df.get("filesize") or 0) > MAX_FILE_BYTES:
                 oversized.append((name, df.get("filesize")))
                 continue
-            out.append((f"https://dataverse.harvard.edu/api/access/datafile/{fid}",
-                        name))
+            out.append((f"{base}/api/access/datafile/{fid}", name))
     return out, license_raw, oversized
 
 
@@ -328,7 +355,10 @@ def resolve_data_files(row: dict) -> tuple:
             return _figshare_files(url)
         if src == "dryad":
             return _dryad_files(doi)
-        if src == "dataverse":
+        if src in ("dataverse", "surf", "scholars_portal"):
+            # SURF/DANS and Scholars Portal/Borealis are Dataverse
+            # installations; without these names they matched no branch at
+            # all and fell through to the empty-list return below.
             return _dataverse_files(url, doi)
         if src == "osf":
             return _osf_files(url)
