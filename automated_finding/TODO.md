@@ -63,16 +63,15 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   fetched programmatically. Needs someone to open the landing page and see
   whether the files are actually there.
 
-- [ ] **A biblio paste can fail for reasons not visible in the file, and there
-  is no diagnostic for it.** On 2026-08-26 the 55-row combined biblio failed
-  to paste repeatedly while being verifiably well-formed (14 tab-delimited
-  fields per line, pure ASCII, nothing special in any field, header identical
-  to the live sheet's). It eventually went in after two speculative content
-  changes, and it is not known which -- or whether either -- mattered. See
-  the BATCH_LOG entry. Worth either finding the real mechanism next time it
-  happens, or standardising on File > Import > "Append to current sheet",
-  which uses a real parser instead of the clipboard and would make the
-  question moot.
+- [x] **A biblio paste can fail for reasons not visible in the file.**
+  On 2026-08-26 the 55-row combined biblio failed to paste repeatedly while
+  being verifiably well-formed; it went in after two speculative content
+  changes and the mechanism was never established. — **closed 2026-08-26
+  (ben-domingue): "don't worry about the paste issue, it is working ok now."**
+  Both subsequent pastes (55 rows, then 17) went in clean first time. Not
+  investigated further. The per-field discipline the files are now written to
+  is recorded in `SKILL.md` and costs nothing to keep: ASCII, no tab, CR,
+  newline or double quote in any field, no leading `=`/`+`/`-`/`@`/`'`.
 
 - [ ] **Decide whether Qualtrics geo-IP coordinates count as PII**
   (`10.7910/DVN/JC6F9O`, Hemesath & Tepe 2025, CC0). The export carries
