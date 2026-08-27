@@ -1,0 +1,184 @@
+table,name_surname,name_year,resolved_first_author,resolved_all_authors,resolved_year,doi,registrant,verdict,batch_date,proposed_name,note
+alomari_2025_student_questionnaire,alomari,2025,Xie,Xie; Zhu; Wang; Bai; Zhang,2026,10.1371/journal.pone.0340806,,name_absent_from_authors,6/23/2026,xie_2026_student_questionnaire,"RENAMED to xie_2026_student_questionnaire (agreed on #1651, completed across IRW3, irw_text and the dictionary). This is the only rename carried out; the other 15 stand as they are."
+burgess_2025_soas,burgess,2025,David,David; Stowe; Caruana; Norberg,2025,10.7717/peerj.20153,,name_absent_from_authors,8/12/2026,david_2025_soas,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+clifford_2018_police_blame,clifford,2018,Boudreau,Boudreau; MacKenzie; Simmons,2019,10.1086/703540,,name_absent_from_authors,6/23/2026,boudreau_2019_police_blame,RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. 
+dalky_2020_sf36,dalky,2020,Nabolsi,Nabolsi; Safadi; Sun; Ahmad; Al-Maharma; Halasa; Saleh; Dohrn,2020,10.7717/peerj.9990,,name_absent_from_authors,8/12/2026,nabolsi_2020_sf36,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+gizaw_2023_phq9,gizaw,2023,Workneh,Workneh; Worku; Assefa; Berhane,2023,10.7717/peerj.15053,,name_absent_from_authors,8/12/2026,workneh_2023_phq9,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kern_2021_connectedness,kern,2021,Yang,Yang; Beevi; Low; Lee; Hall,2021,10.6084/m9.figshare.14870235.v1,figshare,name_absent_from_authors,6/23/2026,yang_2021_connectedness,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kern_2021_engagement,kern,2021,Yang,Yang; Beevi; Low; Lee; Hall,2021,10.6084/m9.figshare.14870235.v1,figshare,name_absent_from_authors,6/23/2026,yang_2021_engagement,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kern_2021_happiness,kern,2021,Yang,Yang; Beevi; Low; Lee; Hall,2021,10.6084/m9.figshare.14870235.v1,figshare,name_absent_from_authors,6/23/2026,yang_2021_happiness,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kern_2021_learning,kern,2021,Yang,Yang; Beevi; Low; Lee; Hall,2021,10.6084/m9.figshare.14870235.v1,figshare,name_absent_from_authors,6/23/2026,yang_2021_learning,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kern_2021_life_satisfaction,kern,2021,Yang,Yang; Beevi; Low; Lee; Hall,2021,10.6084/m9.figshare.14870235.v1,figshare,name_absent_from_authors,6/23/2026,yang_2021_life_satisfaction,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kilic_2024_mental_toughness,kilic,2024,Özsarı,Özsarı; Kara; Dilek; Uysal; Tek; Deli,2024,10.7717/peerj.17174,,name_absent_from_authors,8/12/2026,ozsari_2024_mental_toughness,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+kilic_2024_nutrition_attitude,kilic,2024,Özsarı,Özsarı; Kara; Dilek; Uysal; Tek; Deli,2024,10.7717/peerj.17174,,name_absent_from_authors,8/12/2026,ozsari_2024_nutrition_attitude,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference string carries the correct title but the same fabricated surname, so Screen 1 (name vs Reference) cannot see it"
+nakano_2020_osce_contact_precautions,nakano,2020,Nagoshi,Nagoshi; Cooper; Meyer; Cherabuddi; Close; Dow; Markham; Stalvey,2019,10.3352/jeehp.2019.16.31,,name_absent_from_authors,6/23/2026,nagoshi_2019_osce_contact_precautions,RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. 
+perfectionismlit_2021_engagement,perfectionismlit,2021,Hill,Hill,2021,10.25421/yorksj.16595141.v1,figshare-inst,name_absent_from_authors,6/23/2026,hill_2021_engagement,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference is an author-less dataset citation; name derived from the dataset title, not an author"
+perfectionismlit_2021_prepost,perfectionismlit,2021,Hill,Hill,2021,10.25421/yorksj.16595141.v1,figshare-inst,name_absent_from_authors,6/23/2026,hill_2021_prepost,"RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. Reference is an author-less dataset citation; name derived from the dataset title, not an author"
+divia_2025_tiktok_fomo_shopping,divia,2025,Arifin,Arifin,2025,10.6084/m9.figshare.29378996.v2,figshare,given_name_used,6/23/2026,arifin_2025_tiktok_fomo_shopping,RENAMING DECLINED -- see naming_audit_README.md. proposed_name documents what the correct name would be; it is not a task list. 
+lee_2025_nursing_exam,lee,2025,Ko,Ko; Lee; Jeong,2025,10.3352/jeehp.2025.22.23,,non_first_author,8/1/2026,,
+pietraszkiewicz_2017_leader_eval,pietraszkiewicz,2017,Rovira-Asenjo,Rovira-Asenjo; Pietraszkiewicz; Sczesny; Gumí; Guimerà; Sales-Pardo,2017,10.1371/journal.pone.0186045,,non_first_author,8/3/2026,,
+rosetti_2023_cas,rosetti,2023,Ramírez-López,Ramírez-López; Rosetti; Poma,2023,10.1089/eco.2022.0049,,non_first_author,6/23/2026,,
+rosetti_2023_gad7,rosetti,2023,Ramírez-López,Ramírez-López; Rosetti; Poma,2023,10.1089/eco.2022.0049,,non_first_author,6/23/2026,,
+villarrealzegarra2026_trif,villarrealzegarra,2026,Escobar-Agreda,Escobar-Agreda; Villareal-Zegarra; Reategui-Rivera; Paredes-Gonzales; Rojas-Mezarina,2026,10.64898/2026.07.01.26356790,,non_first_author,7/15/2026,,"Villareal-Zegarra is 2nd author; table spells it with -rr-, source record with -r-"
+westhoff2023_pbat,westhoff,2023,Hofmann,Hofmann; Westhoff; Heshmati; Siepe; Hayes; Vogelbacher; Ciarrochi,2023,10.17605/osf.io/ejtzs,osf,non_first_author,7/13/2026,,
+westhoff2023_stopd,westhoff,2023,Hofmann,Hofmann; Westhoff; Heshmati; Siepe; Hayes; Vogelbacher; Ciarrochi,2023,10.17605/osf.io/ejtzs,osf,non_first_author,7/13/2026,,
+goldberg_2018_eps_adjectives,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_eps_cesd,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_eps_ipip,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_eps_life_events,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_eps_s11,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_eps_spirituality,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GCV3ZZ,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_pda525,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/GHYMEV,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sbo,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/WV5BYC,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_adjectives,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_desirability,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_force,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_happy,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_influ,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_ipip_temperament,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_likelihood,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_schwartz_values,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+goldberg_2018_sdv_views,goldberg,2018,Saucier,Saucier,2018,10.7910/DVN/LHHONE,dataverse,named_for_corpus_pi,2026-08-26,,Eugene-Springfield Community Sample (Goldberg corpus); Dataverse creator of record is Gerard Saucier
+duong_2025_tbl_confidence,duong,2025,Ngoc,Ngoc; Quynh; Hoang Thi Phuong,2025,10.1371/journal.pone.0323656,,name_order_ambiguous,8/4/2026,,"Vietnamese name ""Lan Duong Thi Ngoc"" parsed by Crossref as family=Ngoc; Duong is plausibly the family name"
+duong_2025_tbl_experience,duong,2025,Ngoc,Ngoc; Quynh; Hoang Thi Phuong,2025,10.1371/journal.pone.0323656,,name_order_ambiguous,8/4/2026,,"Vietnamese name ""Lan Duong Thi Ngoc"" parsed by Crossref as family=Ngoc; Duong is plausibly the family name"
+avci_2024_aktif_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_bagmsz_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_basrmaarzu_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_belirsiz_kac,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_bskdaykontrol_odak,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_gecmis_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_guc_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_ickontrol_odak,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_ikyoz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_issahp_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_kazanc_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_kimlik_com,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_kimlik_dar,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_kimlik_miss,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_oz_norm,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_risk_algi,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_risk_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_sansdaykontrol_odak,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_statu_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_sureklgel_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_tmlamacoz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_toplmfayd_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_urunpazgeloz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_yatrmciliskoz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_yencevolsoz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_zorbasetoz_yeterlk,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+avci_2024_zorunluluk_gir_yonel,avci,2024,Avci,Avci,2025,10.17632/826gmw6ypw,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+frikha_2023_pe_acrs,frikha,2023,Frikha,Frikha; Mezghanni; Chaâri; Ben Said; Alibrahim; Alhumaid; Hassan; Alharbi; Amira; Abouzeid,2024,10.1371/journal.pone.0297822,,year_mismatch,6/24/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+frikha_2023_pe_ms,frikha,2023,Frikha,Frikha; Mezghanni; Chaâri; Ben Said; Alibrahim; Alhumaid; Hassan; Alharbi; Amira; Abouzeid,2024,10.1371/journal.pone.0297822,,year_mismatch,6/24/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+galindo_2023_beliefs,galindo,2023,GALINDO DOMINGUEZ,GALINDO DOMINGUEZ,2026,10.7910/dvn/edevgy,dataverse,year_mismatch,6/9/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+galindo_2023_emotional_intelligence,galindo,2023,GALINDO DOMINGUEZ,GALINDO DOMINGUEZ,2026,10.7910/dvn/edevgy,dataverse,year_mismatch,6/9/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+galindo_2023_loneliness,galindo,2023,GALINDO DOMINGUEZ,GALINDO DOMINGUEZ,2026,10.7910/dvn/edevgy,dataverse,year_mismatch,6/9/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+galindo_2023_social_support,galindo,2023,GALINDO DOMINGUEZ,GALINDO DOMINGUEZ,2026,10.7910/dvn/edevgy,dataverse,year_mismatch,6/9/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_cognition,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_getting_along,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_life_activities,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_mobility,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_participation,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+lozano_2018_self_care,lozano,2018,Lozano,Lozano,2019,10.17632/3fhcxn3zd3,mendeley,year_mismatch,8/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+nteveros_2021_mbi,nteveros,2021,Nteveros,Nteveros; Kyprianou; Artemiadis; Charalampous; Christoforaki; Cheilidis; Germanos; Bargiotas; Chatzittofis; Zis,2020,10.1371/journal.pone.0241335,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+nteveros_2021_psqi_disturbance,nteveros,2021,Nteveros,Nteveros; Kyprianou; Artemiadis; Charalampous; Christoforaki; Cheilidis; Germanos; Bargiotas; Chatzittofis; Zis,2020,10.1371/journal.pone.0241335,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+nteveros_2021_who5,nteveros,2021,Nteveros,Nteveros; Kyprianou; Artemiadis; Charalampous; Christoforaki; Cheilidis; Germanos; Bargiotas; Chatzittofis; Zis,2020,10.1371/journal.pone.0241335,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+shin2024_creactability_adaptability,shin,2024,Shin,Shin; Kim; Lee; Lee,2025,10.3389/fspor.2025.1521073,,year_mismatch,6/8/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+shin2024_creactability_creativity,shin,2024,Shin,Shin; Kim; Lee; Lee,2025,10.3389/fspor.2025.1521073,,year_mismatch,6/8/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+shin2024_creactability_quickness,shin,2024,Shin,Shin; Kim; Lee; Lee,2025,10.3389/fspor.2025.1521073,,year_mismatch,6/8/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_authalien,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_authexternal,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_authliving,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_power,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_relationship,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study1_se,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study3_auth,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study3_power,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study3_se,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+wang_2016_study3_social_desirability,wang,2016,Wang,Wang,2015,10.1371/journal.pone.0146050,,year_mismatch,7/27/2026,,"name year vs record year differ; DOI column often holds the dataset DOI, whose year is the deposit year"
+marquezpalacios_2026_bdi2,marquezpalacios,2026,,,,,,no_doi_unverifiable,8/3/2026,,"DOI cell empty; URL implies 10.17605/osf.io/6DUTB, which is not registered with Crossref or DataCite"
+opladen2025_edeq,opladen,2025,,,,,,no_doi_unverifiable,6/8/2026,,"DOI cell empty; URL implies 10.17605/osf.io/58XB9, which is not registered with Crossref or DataCite"
+opladen2025_fkg,opladen,2025,,,,,,no_doi_unverifiable,6/8/2026,,"DOI cell empty; URL implies 10.17605/osf.io/58XB9, which is not registered with Crossref or DataCite"
+opladen2025_fks,opladen,2025,,,,,,no_doi_unverifiable,6/8/2026,,"DOI cell empty; URL implies 10.17605/osf.io/58XB9, which is not registered with Crossref or DataCite"
+opladen2025_wi,opladen,2025,,,,,,no_doi_unverifiable,6/8/2026,,"DOI cell empty; URL implies 10.17605/osf.io/58XB9, which is not registered with Crossref or DataCite"
+schoepp2022_test_anxiety,schoepp,2022,,,,,,no_doi_unverifiable,7/13/2026,,"DOI cell empty; URL implies 10.17605/osf.io/R67WB, which is not registered with Crossref or DataCite"
+aguirre_camacho_2021_champion,,,,,,10.1371/journal.pone.0249562,,not_author_named,7/30/2026,,
+aguirre_camacho_2021_shai,,,,,,10.1371/journal.pone.0249562,,not_author_named,7/30/2026,,
+burnout_assessment_tool_teachers,,,,,,10.7910/DVN/NFREES,dataverse,not_author_named,6/7/2026,,
+chen2022b_psychabuse,,,,,,10.3389/fpsyg.2022.852256,,not_author_named,7/26/2026,,
+chen2022b_selfesteem,,,,,,10.3389/fpsyg.2022.852256,,not_author_named,7/26/2026,,
+chen2022b_socsupport,,,,,,10.3389/fpsyg.2022.852256,,not_author_named,7/26/2026,,
+cinar_tanriverdi_2023_gad7,,,,,,10.1371/journal.pone.0288769,,not_author_named,7/26/2026,,
+cinar_tanriverdi_2023_pmss,,,,,,10.1371/journal.pone.0288769,,not_author_named,7/26/2026,,
+colomer_perez_2021_asa,,,,,,10.1371/journal.pone.0260827,,not_author_named,8/1/2026,,
+colomer_perez_2021_soc13,,,,,,10.1371/journal.pone.0260827,,not_author_named,8/1/2026,,
+conspiracy_asd__asd_aq10,,,,,,,,not_author_named,6/7/2026,,
+conspiracy_asd__cognitive_flexibility,,,,,,,,not_author_named,6/7/2026,,
+conspiracy_asd__conspiracy_gcbs,,,,,,,,not_author_named,6/7/2026,,
+conspiracy_asd__schizotypy,,,,,,,,not_author_named,6/7/2026,,
+conspiracy_asd__thinking_styles,,,,,,,,not_author_named,6/7/2026,,
+contreras_valdez_2022_bsq,,,,,,10.1371/journal.pone.0266507,,not_author_named,7/26/2026,,
+contreras_valdez_2022_edeq,,,,,,10.1371/journal.pone.0266507,,not_author_named,7/26/2026,,
+contreras_valdez_2022_rses,,,,,,10.1371/journal.pone.0266507,,not_author_named,7/26/2026,,
+dass21_depression_anxiety_stress,,,,,,10.7910/DVN/TAISB2,dataverse,not_author_named,6/7/2026,,
+dass21_medical_graduates_bangladesh,,,,,,10.7910/DVN/NZ7VFL,dataverse,not_author_named,6/7/2026,,
+de_vries_2022_bat_burnout_core,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+de_vries_2022_bat_secondary,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+de_vries_2022_eudaimonic_wellb,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+de_vries_2022_hexaco_meta,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+de_vries_2022_hexaco_other,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+de_vries_2022_hexaco_self,,,,,,10.1371/journal.pone.0272095,,not_author_named,8/10/2026,,
+di_riso_2025_contact_behavior,,,,,,10.1371/journal.pone.0314607,,not_author_named,7/26/2026,,
+di_riso_2025_mask_emotion,,,,,,10.1371/journal.pone.0314607,,not_author_named,7/26/2026,,
+dpt_noncog__emotional_intelligence,,,,,,,,not_author_named,6/7/2026,,
+dpt_noncog__grit,,,,,,,,not_author_named,6/7/2026,,
+dpt_noncog__interpersonal_reactivity,,,,,,,,not_author_named,6/7/2026,,
+dpt_noncog__intolerance_of_uncertainty,,,,,,,,not_author_named,6/7/2026,,
+dpt_noncog__psychological_flexibility,,,,,,,,not_author_named,6/7/2026,,
+dpt_noncog__social_intelligence,,,,,,,,not_author_named,6/7/2026,,
+kraft_todd_2017_care_measure,,,,,,10.1371/journal.pone.0177758,,not_author_named,7/26/2026,,
+kraft_todd_2017_competence,,,,,,10.1371/journal.pone.0177758,,not_author_named,7/26/2026,,
+kraft_todd_2017_panas,,,,,,10.1371/journal.pone.0177758,,not_author_named,7/26/2026,,
+kraft_todd_2017_warmth,,,,,,10.1371/journal.pone.0177758,,not_author_named,7/26/2026,,
+leon_guereno_2020_breq,,,,,,10.1371/journal.pone.0231628,,not_author_named,7/26/2026,,
+leon_guereno_2020_resilience,,,,,,10.1371/journal.pone.0231628,,not_author_named,7/26/2026,,
+ma2021_sme_covid,,,,,,10.1371/journal.pone.0257036,,not_author_named,6/9/2026,,
+ma2026_bsmas,,,,,,10.21203/rs.3.rs-9429022/v1,,not_author_named,7/14/2026,,
+ma2026_igds,,,,,,10.21203/rs.3.rs-9429022/v1,,not_author_named,7/14/2026,,
+ma2026_sabas,,,,,,10.21203/rs.3.rs-9429022/v1,,not_author_named,7/14/2026,,
+mfq_adolescent_athletes,,,,,,,,not_author_named,6/7/2026,,
+pcss_adolescent_athletes,,,,,,,,not_author_named,6/7/2026,,
+personality_entrepreneurship_brazil__abex,,,,,,,,not_author_named,6/7/2026,,
+personality_entrepreneurship_brazil__con,,,,,,,,not_author_named,6/7/2026,,
+personality_entrepreneurship_brazil__ex,,,,,,,,not_author_named,6/7/2026,,
+personality_entrepreneurship_brazil__inem,,,,,,,,not_author_named,6/7/2026,,
+personality_entrepreneurship_brazil__neu,,,,,,,,not_author_named,6/7/2026,,
+personality_handwriting__financial_behavior,,,,,,,,not_author_named,6/7/2026,,
+personality_handwriting__graphology,,,,,,,,not_author_named,6/7/2026,,
+quarter_life_crisis__cd,,,,,,,,not_author_named,6/7/2026,,
+quarter_life_crisis__iuc,,,,,,,,not_author_named,6/7/2026,,
+quarter_life_crisis__mwb,,,,,,,,not_author_named,6/7/2026,,
+ruiz_parra_2023_bdi2,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_iip32,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_ipo83,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_iri_pt,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_maas,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_pid5bf,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_rfq8,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_scl90r,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+ruiz_parra_2023_tas20,,,,,,10.1371/journal.pone.0274378,,not_author_named,7/28/2026,,
+van_der_donk_2019_bdi,,,,,,10.1371/journal.pone.0212304,,not_author_named,7/26/2026,,
+wu2021_burnout,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2021_career_expectation,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2021_empathy,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2021_panas,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2021_resilience,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2021_swls,,,,,,10.3389/fpsyg.2021.708342,,not_author_named,6/8/2026,,
+wu2026_liking,,,,,,10.1371/journal.pone.0342855,,not_author_named,6/8/2026,,
+wu2026_novel,,,,,,10.1371/journal.pone.0342855,,not_author_named,6/8/2026,,
+wu2026_typical,,,,,,10.1371/journal.pone.0342855,,not_author_named,6/8/2026,,
+xu2024_emotional_exhaust,,,,,,10.7910/dvn/atlxc5,dataverse,not_author_named,6/8/2026,,
+xu2024_noncompliance,,,,,,10.7910/dvn/atlxc5,dataverse,not_author_named,6/8/2026,,
+xu2024_self_efficacy,,,,,,10.7910/dvn/atlxc5,dataverse,not_author_named,6/8/2026,,
+xu2024_turnover_intent,,,,,,10.7910/dvn/atlxc5,dataverse,not_author_named,6/8/2026,,
+xu2024_unethical_behav,,,,,,10.7910/dvn/atlxc5,dataverse,not_author_named,6/8/2026,,

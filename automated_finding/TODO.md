@@ -3,6 +3,53 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-27 table-name audit (issue #1686)
+
+Evidence: `naming_audit_suspects.csv` + `naming_audit_README.md`. The audit is
+complete and the attribution errors are fixed. **Renaming the 15 remaining
+mis-named tables was considered and declined** (see #1686) -- do not queue it, and
+do not treat the CSV's `proposed_name` column as a work list.
+
+- [ ] **Add a naming gate to the pipeline.** At the point the pipeline picks a
+  table name, resolve the DOI and require the chosen surname to appear in the
+  resolved author list; refuse to name the table otherwise. This would have caught
+  all 16 bad names, and it costs nothing at creation time, when nothing else
+  references the name yet -- which is why enforcing the convention forward is cheap
+  and enforcing it backward is not. **Proposed only; Ben to schedule -- do not
+  implement unprompted.** Two carve-outs are mandatory, both of which produced real
+  false positives during the audit:
+  - Compound and particled surnames. Matching only the Crossref `family` field
+    falsely flags `van Teffelen`, `Lopes de Jesus`, `Makowska-Tlomak`, `von Hippel`
+    and ~35 others. Match every contiguous run of surname words joined without
+    separators, absorb trailing nobiliary particles from `given`, and map Turkish
+    dotless `i` explicitly -- it has no NFKD decomposition.
+  - Dataverse lists only the depositor. `cavojova_2017_cfc` and `cosenza_2015_cfc`
+    look fabricated against the creator list but are correct per the record's
+    linked publication. A gate reading only creators will produce confident false
+    accusations.
+
+- [ ] **Make script headers record the resolved author list alongside `DOI:`.**
+  The cheap half of the fix and probably the highest value per line: every
+  fabrication traced to commit `b830262`, whose scripts record `Source:`, `DOI:`
+  and `License:` but **no author field at all**, so the naming step had nothing to
+  read and supplied a surname from nothing. Worth doing regardless of whether the
+  gate above is scheduled.
+
+- [ ] **Open a separate issue for `DOI (for paper)` column hygiene.** This is a
+  distinct defect from naming and does not belong on #1686. Across the 1,945
+  automated rows: **465 hold a dataset DOI** (figshare, Mendeley, Dataverse, OSF,
+  Zenodo, Dryad) in a column meant for the paper DOI, which is what drives roughly
+  55 spurious year mismatches -- the deposit year is not the paper year. Alongside:
+  33 full URLs, 22 cells prefixed `data doi: `, 10 PLOS `.sNNN` supplement
+  suffixes, 4 reading `not yet published`, and 2 cramming several DOIs plus
+  free-text notes into one cell.
+
+- [ ] **Six tables could not be name-checked at all** -- no DOI in the sheet and
+  the DOI implied by their URL is not registered with Crossref or DataCite, so
+  these are unverified rather than clean: `marquezpalacios_2026_bdi2`,
+  `opladen2025_edeq`, `opladen2025_wi`, `opladen2025_fkg`, `opladen2025_fks`,
+  `schoepp2022_test_anxiety`. Low priority.
+
 ## From the 2026-08-26 weekly PMC sweep review (BATCH_LOG.md, same date)
 
 - [x] **`biblio_tang_2024_2026-08-26.tsv` (13 rows) pasted into the dictionary
