@@ -65,7 +65,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   via **File > Import > Append to current sheet**, comma-separated -- the
   `.tsv` paste path misaligned because the three mandated blank columns become
   consecutive tabs that Sheets collapses. See `BATCH_LOG.md` and the corrected
-  lesson in the skill's SKILL.md.
+  lesson in the skill's SKILL.md. The file itself is deleted -- biblio files
+  are not kept once their rows are on the sheet (ben-domingue, 2026-08-27),
+  which matches the history: every past `biblio_*` file was added and later
+  removed, and none are tracked today.
 
   If this ever needs regenerating: `irw_output/` is emptied on upload, and the
   row counts in the Description column are computed from those CSVs -- re-run
