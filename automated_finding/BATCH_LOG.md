@@ -12365,3 +12365,20 @@ the source's quality. Notable: `zktjjx93sv` (509 x 260, health literacy),
 `biblio_mendeley_2026-08-26.tsv` (17 rows) is written for upload, built with
 the same per-field checks as the last one: 14 fields, ASCII, no tab/CR/
 newline/double-quote in any field, no leading `=+-@'`.
+
+### The 17 Mendeley rows are in (2026-08-26)
+
+Confirmed by ben-domingue and verified against the live sheet: all 17 tables
+present exactly once, every one at 14 fields, alignment spot-checked on
+`szabo_2025_pss4` (the longest `Notes` field in the batch). The dictionary
+went 3,998 -> 4,028 rows, the extra 13 being the concurrent `tang_2024_*`
+batch. `biblio_mendeley_2026-08-26.tsv` and the `irw_output/` CSVs are off
+disk.
+
+The paste was clean first time. That is one data point, not a diagnosis: this
+file was written to the same per-field discipline as the one that failed
+repeatedly this morning (ASCII only, 14 fields, no tab/CR/newline/double
+quote, no leading `=+-@'`), so it is consistent with the punctuation theory
+but does not confirm it — the earlier failure was never reproduced or
+explained. The TODO item asking for either a real mechanism or a switch to
+File > Import stays open.

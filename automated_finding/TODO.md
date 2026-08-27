@@ -43,10 +43,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-25 system audit (see BATCH_LOG.md for evidence)
 
-- [ ] **`biblio_mendeley_2026-08-26.tsv` (17 rows) needs uploading/pasting**
-  — 56,383 responses across 17 tables from 5 Mendeley deposits, all CC BY
-  4.0. `irw_output/` CSVs staged alongside. See the Mendeley entry in
-  `BATCH_LOG.md`.
+- [x] **`biblio_mendeley_2026-08-26.tsv` (17 rows) uploaded/pasted**
+  (confirmed 2026-08-26, ben-domingue) — 56,383 responses across 17 tables
+  from 5 Mendeley deposits, all CC BY 4.0. Verified against the live sheet:
+  all 17 present exactly once at 14 fields, alignment spot-checked. The TSV
+  and the `irw_output/` CSVs are off disk as expected. See the Mendeley entry
+  in `BATCH_LOG.md` for the per-deposit coding decisions.
 
 - [ ] **Work `mendeley_leads_2026-08-26.csv` (31 leads).** The connector's
   first run: 5 `good`, 25 `worth_retrying`, 1 `recoverable_format`, already
