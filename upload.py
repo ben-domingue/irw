@@ -64,16 +64,20 @@ def upload_table(dataset, file_list, common_items, if_replace):
         count+=1
         file_path = file.split('/')[-1]
         file_name = file_path.split('.')[0]
-        table = None
-        # If this is a new table, create one on Redivis.
-        if file_path not in common_items:
-            table = (
-                dataset
-                .table(file_name) # Get the file name without type
-                .create()
-            )
-        else:
+        # Redivis uploads APPEND. `replace_on_conflict` only replaces an
+        # *upload of the same name*; rows inherited from the prior released
+        # version survive alongside it, silently doubling the table. So for a
+        # table that already exists we delete it from the draft first and
+        # recreate it -- that is the only true replace. See
+        # itemtext/fixes/HANDOFF.md, which documents the same defect for item
+        # text, and issue #1677/#1683 where a batch came back at exactly 2x.
+        table = dataset.table(file_name)
+        if file_path in common_items and table.exists():
+            print(f"Replacing '{file_name}': deleting the draft table first "
+                  f"(uploads append, so this is the only true replace).")
+            table.delete()
             table = dataset.table(file_name)
+        table = table.create()
         upload = table.upload(file_name)
 
         # Upload the dataset
@@ -87,6 +91,13 @@ def upload_table(dataset, file_list, common_items, if_replace):
                 replace_on_conflict=if_replace
             )
         print(f"'{file}' has been uploaded. {count} / {total_file}")
+
+    # Verify with an actual row count. `numRows` is NOT reliable here -- it
+    # reported "no change" for tables that had just doubled.
+    print("\nVerify every table with a count(*) query against the draft, e.g.\n"
+          "  redivis.query('select count(*), count(distinct id), count(distinct item) '\n"
+          "                'from `datapages.<dataset>:<ref>:next.<table>`')\n"
+          "and compare against the source CSV. Do not trust numRows.")
 
 def check_if_table_already_exist(dataset, file_list):
     """Check if the datasets are already on Redivis and ask wether to replace them"""
