@@ -12749,3 +12749,67 @@ Batch total across both halves: **24 tables / 889,761 responses** staged in
 - **`emiral_2025_aips`'s four unnamed blocks** (~110 items) and the `TKO` =
   Basic Personality Traits Inventory hypothesis, as recorded in the first half
   of this batch.
+
+## 2026-08-27 -- tier B triage + its two largest deposits
+
+**Triage.** 432 of the 463 tier-B leads triaged (31 already in
+`repo_triage_seen_keys.csv`). Unlike tier A, tier B produced `good` rows
+directly -- 31 of them -- because these are mostly small single-instrument
+questionnaire deposits the mapper handles without help, where tier A's larger
+multi-instrument SPSS files always needed a judgment call.
+
+| outcome | n |
+|---|---|
+| good | 31 |
+| worth_retrying (after Step 2b) | 80 |
+| human_review | 129 (`human_review/human_review_repo_tierB_2026-08-27.csv`) |
+| download_failed | 68 |
+| below_min_n | 44 |
+| not_item_response | 49 |
+| recoverable_format | 11 |
+| aggregate_continuous | 9 |
+
+**The ranking underrates volume, and this is the evidence.** Tier B scored
+*lower* than tier A on every signal the scorer can read, yet carries ~7.8M
+candidate responses against tier A's 1.3M. The score reads titles and
+filenames; it cannot see row counts. Worth fixing before the next sweep --
+`resolve_data_files()` already returns file sizes for most sources, so a size
+term is cheap.
+
+### Shipped from the top of tier B
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `tu_2022_achievement_motivation` | 3,729,840 | 124,328 | 30 |
+| `wicherts_2023_5pft` | 623,105 | 8,954 | 70 |
+
+- **`tu_2022_achievement_motivation` is the largest table this pipeline has
+  produced.** 30 achievement-motivation items (1-4) from 124,328 Chinese
+  college students, CC BY 4.0. `id` is the row index, NOT the source's
+  `number` column: `number` resolves only 78,728 distinct values over 124,328
+  rows because it is a within-school running number -- `SCHOOL`+`number` gets
+  to 123,816 and `+GRADE` to 124,179, still short. No fully duplicated rows
+  exist, so the row is the questionnaire. `number` and `SCHOOL` ship as
+  covariates. `AGE` had 43 impossible values (max 18,172,860,104) and is
+  bounded to 10-100; `ifpoor` is constant at 1 and dropped. Both the
+  id-choice and the constancy claims are asserted at run time so a future
+  deposit revision cannot invalidate them silently.
+- **`wicherts_2023_5pft`**: 70 items (14 per Big Five factor) on a 1-7 scale
+  across Dutch cohorts 1982-2007, CC0. `TWNO` is labelled "Participant ID
+  no." but gives 8,936 distinct values over 8,954 rows and pairing it with
+  `Testweek` does not separate them either, so `id` is again the row index
+  with the source keys kept as covariates. Six cells held an 8 on a 1-7
+  scale, spread over five different items -- one stray value per item across
+  8,954 respondents is a data-entry error, dropped rather than clamped.
+
+### Skipped
+
+- **`10.7910/DVN/FDSXMR` (Jungherr et al., TTIP attitudes, 9,108 x 46) --
+  SKIPPED, not item response data.** Every column is rescaled to 0-1:
+  `ttip_sign_1` has 7 distinct values between 0 and 1, i.e. a 7-point scale
+  normalised, and the same holds for the 13- and 25-level columns. The rest
+  are regression dummies (`edu_low_d`, `pid_cdu_d`, `isco1_d`) and
+  content-analysis codes of open-ended mentions (`Pro*_d_1` / `Contra*_d_1`),
+  two of which are constant. Neither raw responses nor a coherent instrument.
+  This was the 3rd-largest tier-B lead at 418,968 nominal responses; the
+  triage counted transformed columns as items.
