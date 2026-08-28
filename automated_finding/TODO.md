@@ -3,6 +3,47 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-27 tier-B batch -- CLOSED
+
+- [x] **Tier B closed 2026-08-28 (ben-domingue's call).** 432 of the 463
+  tier-B leads triaged, Step 2b run, and the highest-value deposits worked:
+  **22 tables / 4,749,229 responses** staged to `irw_output/` with
+  `biblio_tierB_2026-08-27.csv` (22 rows) prepared for the dictionary. See
+  `BATCH_LOG.md` for the per-deposit coding decisions.
+
+  Tier B is closed as a *worklist*, not exhausted. Deliberately left unworked,
+  and still recoverable from `runs/triage_tierB_2026-08-27.csv` and
+  `runs/retriage_tierB_2026-08-27.csv` if anyone wants them:
+
+  - **~65 `worth_retrying` rows, ~950k responses.** The tail after the top
+    dozen; mostly 200-600 respondent single-instrument deposits.
+  - **19 of the 31 `good` rows, ~120k responses.** The small tail -- largely
+    100-300 respondent Indonesian marketing surveys at 3-10k responses each,
+    several needing header-offset repair. Low yield per unit of work.
+  - **129 `human_review` rows** in
+    `human_review/human_review_repo_tierB_2026-08-27.csv`.
+  - **68 `download_failed`** rows, deliberately left out of
+    `repo_triage_seen_keys.csv` so a later run retries them.
+
+- [ ] **The lead ranker cannot see dataset size, and tier B proved it costs
+  us.** Tier B scored *lower* than tier A on every signal the scorer reads
+  (title wording, filename, file count, license) yet carried ~7.8M candidate
+  responses to tier A's 1.3M -- because the 3.7M-response
+  `tu_2022_achievement_motivation` deposit looks, from its title and filename,
+  exactly like a 300-respondent survey. `resolve_data_files()` already returns
+  file sizes for most sources, so adding a size term to
+  `runs/rank_2026-08-27.py` is cheap and would put deposits like that at the
+  top of tier A instead of the middle of tier B.
+
+- [ ] **Two named leads deferred for identity reasons, both otherwise clean.**
+  `10.7910/DVN/YCXDBI` (Teacher Work Ability Scale, 36 items x 4 samples,
+  2,539 respondents, CC0) has the literal string "Anonymized" in its Dataverse
+  author field, so there is no name for `authorname_year_construct`;
+  recoverable if the paper behind it is identified. And Mendeley `8bphntrc65`
+  (spiteful/strategic punishment, 315 x 205) was skipped under the blanket PII
+  rule for an `initials` column alongside race/gender/age -- the weakest PII
+  case seen in this batch and a reasonable overrule candidate.
+
 ## From the 2026-08-27 tier-A batch
 
 - [x] **`biblio_tierA_2026-08-27.csv` (24 rows) imported into the dictionary**
