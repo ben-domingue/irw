@@ -13021,5 +13021,39 @@ before this run.
 **Skipped:** `zenodo` light-reaction-test deposit at 85 respondents, below the
 N>=100 floor.
 
-**Still open from this pool: 14 of the 18 leads** (~137k responses), plus the
+### Four more deposits worked -- 15 tables staged, 85,307 responses
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `wu_2024_achievement_emotions` | 27,740 | 1,460 | 19 |
+| `turpochaparro_2026_social_network_addiction` | 8,456 | 354 | 24 |
+| `ysladomendez_2023_mbi` | 6,666 | 303 | 22 |
+| `li_2026_coach_leadership` | 5,575 | 223 | 25 |
+| `alkhaldi_2023_whoqol_autism` | 5,220 | 201 | 26 |
+| `chatzoudes_2021_ethical_leadership` | 4,527 | 503 | 9 |
+| `li_2026_sport_commitment` | 4,460 | 223 | 20 |
+| `chatzoudes_2021_service_delivery` | 4,024 | 503 | 8 |
+| `li_2026_team_cohesion` | 4,014 | 223 | 18 |
+| `turpochaparro_2026_self_esteem` | 3,540 | 354 | 10 |
+| `turpochaparro_2026_family_communication` | 3,540 | 354 | 10 |
+| `chatzoudes_2021_job_satisfaction` | 2,515 | 503 | 5 |
+| `chatzoudes_2021_emotional_exhaustion` | 2,012 | 503 | 4 |
+| `chatzoudes_2021_trust` | 1,509 | 503 | 3 |
+| `chatzoudes_2021_turnover_intention` | 1,509 | 503 | 3 |
+
+- **`li_2026_*`: 18 score columns identified by cardinality, not by name.**
+  15 subscale dimensions plus one overall mean per instrument, all named in
+  Chinese. Rather than transliterate, the script asserts every score column has
+  more than 5 distinct values and every item column at most 5 -- the scores run
+  9 to 158 levels against the items' 5. A first pass hard-coded the count at 14
+  and the assert caught it.
+- **`ysladomendez_2023_mbi`: `BS` is the burnout total, `BS1`..`BS22` the
+  items.** They differ only by the numeric suffix, so the item match requires
+  one; a prefix match would have put a 1-67 total into a 0-6 item set. Only the
+  MBI ships -- the deposit's 17-item binary block and 10-item 1-5 block are
+  unnamed with no codebook.
+- **`turpochaparro_2026_*`**: the book-balancing assert surfaced three further
+  computed columns (`EXC`, `AUEST`, `COM`) beyond the three anticipated.
+
+**Still open from this pool: 10 of the 18 leads** (~52k responses), plus the
 PISA re-publication held pending a dictionary/#1342 check.
