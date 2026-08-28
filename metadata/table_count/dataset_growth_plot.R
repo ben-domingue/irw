@@ -1,5 +1,5 @@
-## Plot table-count growth over time for the 3 core IRW datasets.
-## Top panel: total tables across all 3 datasets combined.
+## Plot table-count growth over time for the core IRW datasets.
+## Top panel: total tables across all datasets combined.
 ## Bottom panel: each dataset separately.
 ## Input: metadata/table_count/dataset_growth.csv (from dataset_growth.R)
 ## Output: metadata/table_count/dataset_growth.png
@@ -11,7 +11,7 @@ growth <- read.csv("dataset_growth.csv")
 growth$created_at <- as.POSIXct(growth$created_at, tz = "UTC")
 growth <- growth[order(growth$dataset, growth$created_at), ]
 
-## Combine the 3 datasets' step functions into one total-over-time series:
+## Combine the datasets' step functions into one total-over-time series:
 ## at every version timestamp (across all datasets), carry forward each
 ## dataset's most recent table count and sum them.
 all_times <- sort(unique(growth$created_at))
