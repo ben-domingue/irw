@@ -12921,3 +12921,60 @@ term is cheap.
   no name for the `authorname_year_construct` convention. Recoverable if the
   paper behind it is identified -- the four sample files are otherwise clean
   (TWAS_01..TWAS_36, 1-7, 821+853+481+384 respondents).
+
+## 2026-08-28 -- Zenodo re-run against the fixed connector
+
+The connector fix (9d481e6) was necessary but not sufficient: the broken read
+had also **poisoned the seen-keys ledger**. 357 Zenodo keys sat in
+`repo_triage_seen_keys.csv`, and 92 of them were written pre-fix as
+`no_usable_file` -- a verdict recorded against deposits no resolver had ever
+looked at, and permanently excluding them from every future sweep.
+
+**Ledger repaired.** The 92 pre-fix keys were released (list kept in
+`runs/zenodo_released_keys_2026-08-28.csv`) and re-triaged. Result: **4
+recovered leads / ~31k responses**, and the other 88 now carry real verdicts
+(65 genuine `no_usable_file`, 3 `license_restricted`, 8 `human_review`)
+instead of non-verdicts.
+
+**Zenodo was dark, not thin.** Re-running 140 *previously-used* repo-mode terms
+against Zenodo only returned 1,342 candidates, of which **801 were new** --
+absent from both the ledger and the 6,048-candidate 2026-08-27 sweep. Every
+one of the 801 carried a URL, which is the direct evidence the fix works at
+discovery time; before it they would all have arrived with an empty `url` and
+died as `no_tabular_file`.
+
+| step | result |
+|---|---|
+| discovery (140 terms, zenodo only) | 1,342 candidates, 801 new |
+| prefilter (tabular + open licence) | 276 keeps (275 CC BY, 1 CC BY-SA) |
+| ranking | 13 tier A, 48 tier B, 126 C, 89 D |
+| triage of the 61 A+B | 2 good, 54 human_assistance, 4 below_min_n, 1 download_failed |
+| Step 2b retriage | 13 worth_retrying, 38 human_review, 2 aggregate_continuous, 1 not_item_response |
+
+**15 shippable leads, 437,228 responses**, led by:
+
+| resp | deposit |
+|---|---|
+| 251,601 | PISA 2018 and 2022 (35,943 x 7) -- see the caveat below |
+| 32,120 | Chinese secondary EFL learners' achievement emotions (1,460 x 22) |
+| 21,288 | Aging, loneliness (887 x 24) |
+| 20,623 | Ethical leadership / organizational outcomes (503 x 41) |
+| 19,008 | PANAS psychometrics (594 x 32) |
+| 18,286 | Coach leadership and team cohesion (223 x 82) |
+| 17,061 | Physical Activity convergent validity (363 x 47) |
+| 16,112 | Network psychometric analysis (1,007 x 16) |
+
+**Caveat on the largest lead:** the PISA deposit is a re-publication of PISA
+2018/2022 variables, not an original instrument. IRW already carries PISA
+tables and issue #1342 is open on PISA per-country exclusion, so it should be
+checked against the dictionary and against #1342 before anyone writes a script
+for it -- the 251,601 figure is more than half this batch's total and should
+not be assumed additive.
+
+46 `human_review` rows filed to `human_review/human_review_zenodo_2026-08-28.csv`.
+
+**Open: the backlog is much larger than this sample.** 140 of 2,598 prior
+repo-mode terms produced 801 unseen deposits and 276 open-licensed keeps. The
+remaining ~2,458 terms have never had working Zenodo coverage. At the observed
+rate (140 terms = 31 minutes) a full sweep is ~9 hours unattended and is
+one-time: future runs inherit the fix automatically.
