@@ -12978,3 +12978,48 @@ repo-mode terms produced 801 unseen deposits and 276 open-licensed keeps. The
 remaining ~2,458 terms have never had working Zenodo coverage. At the observed
 rate (140 terms = 31 minutes) a full sweep is ~9 hours unattended and is
 one-time: future runs inherit the fix automatically.
+
+### Zenodo re-run leads -- first 3 deposits worked
+
+8 tables, 49,056 responses -- the whole of `irw_output/` at this point, since
+the 22 tables of the earlier tier-A/tier-B batches were uploaded and cleared
+before this run.
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `wu_2024_achievement_emotions` | 27,740 | 1,460 | 19 |
+| `alkhaldi_2023_whoqol_autism` | 5,220 | 201 | 26 |
+| `chatzoudes_2021_ethical_leadership` | 4,527 | 503 | 9 |
+| `chatzoudes_2021_service_delivery` | 4,024 | 503 | 8 |
+| `chatzoudes_2021_job_satisfaction` | 2,515 | 503 | 5 |
+| `chatzoudes_2021_emotional_exhaustion` | 2,012 | 503 | 4 |
+| `chatzoudes_2021_turnover_intention` | 1,509 | 503 | 3 |
+| `chatzoudes_2021_trust` | 1,509 | 503 | 3 |
+
+- **`chatzoudes_2021_*`: each construct has an unsuffixed summary column** sat
+  directly beside its items (`Ethical_Leadership` next to
+  `Ethical_Leadership_01`..`_09`). They are subscale means -- `Ethical_
+  Leadership` runs 1.556-5.0, `Service_Delivery` 2.25-5.0, values no 1-5 item
+  can take. Matching items on the construct name rather than on the numeric
+  suffix would have swept all six into the item sets.
+- **`alkhaldi_2023_whoqol_autism`: `Quality` is an item, `Quality_of_life` is a
+  domain score**, differing by suffix alone -- so the two are separated by an
+  explicit list rather than a pattern, with a run-time check that every named
+  "score" really is fractional or >5 levels. Six cells across five items held a
+  0 on the WHOQOL-BREF's 1-5 scale (one or two per item out of 201
+  respondents); dropped as data-entry errors.
+- **`wu_2024_achievement_emotions`**: codes are `VAR{subscale}{position}` and
+  the deposit names no construct per subscale group, so the codes are kept
+  verbatim rather than renamed to guessed emotion labels, with the group in
+  `itemcov_subscale`.
+
+**Deferred, same reason as the TWAS deposit:** `zenodo.20475015` (30 items,
+1-5, 344 respondents, IRT-based scale development) lists its author as
+"Anonymous, Anonymous", so there is no name for
+`authorname_year_construct`. Clean otherwise.
+
+**Skipped:** `zenodo` light-reaction-test deposit at 85 respondents, below the
+N>=100 floor.
+
+**Still open from this pool: 14 of the 18 leads** (~137k responses), plus the
+PISA re-publication held pending a dictionary/#1342 check.
