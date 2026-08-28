@@ -142,7 +142,7 @@ def process_one(row: dict, out_dir: str) -> dict:
             result["note"]   = "resolver found no tabular files on the landing page"
         return result
 
-    file_url, fname = files[0]
+    file_url, fname = files[0][0], files[0][1]
     result["data_file"] = fname
     if len(files) > 1:
         result["note"] = f"{len(files)-1} additional file(s) on landing page — only first processed"

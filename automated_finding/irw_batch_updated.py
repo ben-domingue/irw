@@ -128,7 +128,7 @@ def _zenodo_files(url: str) -> tuple:
             if (f.get("size") or 0) > MAX_FILE_BYTES:
                 oversized.append((key, f.get("size")))
                 continue
-            out.append((link, key))
+            out.append((link, key, f.get("size") or 0))
     return out, license_raw, oversized
 
 
@@ -149,7 +149,7 @@ def _figshare_files(url: str) -> tuple:
             if (f.get("size") or 0) > MAX_FILE_BYTES:
                 oversized.append((name, f.get("size")))
                 continue
-            out.append((dl, name))
+            out.append((dl, name, f.get("size") or 0))
     return out, license_raw, oversized
 
 
@@ -190,7 +190,7 @@ def _dryad_files(doi: str) -> tuple:
             # problem as the Harvard Dataverse WAF challenge (BATCH_LOG
             # 2026-08-17); it needs credentials or a headless browser, not a
             # URL change.
-            out.append((f"https://datadryad.org{dl}", name))
+            out.append((f"https://datadryad.org{dl}", name, f.get("size") or 0))
     return out, license_raw, oversized
 
 
@@ -246,7 +246,7 @@ def _dataverse_files(url: str, doi: str) -> tuple:
             if (df.get("filesize") or 0) > MAX_FILE_BYTES:
                 oversized.append((name, df.get("filesize")))
                 continue
-            out.append((f"{base}/api/access/datafile/{fid}", name))
+            out.append((f"{base}/api/access/datafile/{fid}", name, df.get("filesize") or 0))
     return out, license_raw, oversized
 
 
@@ -271,7 +271,7 @@ def _osf_files(url: str) -> tuple:
             if (attrs.get("size") or 0) > MAX_FILE_BYTES:
                 oversized.append((name, attrs.get("size")))
                 continue
-            out.append((dl, name))
+            out.append((dl, name, attrs.get("size") or 0))
     return out, license_raw, oversized
 
 
@@ -304,7 +304,7 @@ def _mendeley_files(url: str) -> tuple:
             if size > MAX_FILE_BYTES:
                 oversized.append((name, size))
                 continue
-            out.append((dl, name))
+            out.append((dl, name, size))
     return out, license_raw, oversized
 
 
@@ -332,7 +332,10 @@ def _host_resolver(url: str):
 
 def resolve_data_files(row: dict) -> tuple:
     """Dispatch to the right repository resolver. Returns
-    ([(file_url, name)], license_str, [(name, size_bytes)]) -- the third
+    ([(file_url, name, size_bytes)], license_str, [(name, size_bytes)]) -- the
+    file entries carry the size the repo API reported (0 when it reports
+    none), so callers can rank candidates by data volume without a second
+    round of network calls. The third
     element lists tabular files that were skipped for exceeding
     MAX_FILE_BYTES, so callers can flag them distinctly from
     'no_usable_file'."""
@@ -467,7 +470,7 @@ def process_one(row: dict) -> dict:
                 "density": "", "data_file": ""}
 
     # Use the first tabular file. (Multi-file datasets -> human territory.)
-    file_url, fname = files[0]
+    file_url, fname = files[0][0], files[0][1]
     try:
         content = polite_get(file_url).content
         df = load_table(content, filename=fname)
