@@ -246,7 +246,36 @@ def _load_table(path_or_bytes, filename: str = "") -> pd.DataFrame:
         # script opens the file itself (pyreadstat.read_sav) when it wants the
         # item stems. Genuine string variables are unaffected -- only labelled
         # numerics change.
-        return pd.read_spss(_src(), convert_categoricals=False)
+        try:
+            return pd.read_spss(_src(), convert_categoricals=False)
+        except Exception as e:
+            # pyreadstat trusts the .sav header's declared encoding. Files
+            # written by localised SPSS builds routinely declare one they do
+            # not honour, and the read dies with "Unable to convert string to
+            # the requested encoding (invalid byte sequence)". The file is
+            # fine and fully downloaded -- but the exception propagates to
+            # process_one(), which records it as `download_failed`, i.e. a
+            # verdict that reads like a dead URL. 19 of the 28 download_failed
+            # rows in the 2026-08-27 tier-A run were this, all Spanish- or
+            # Turkish-language deposits, every one of them a real instrument.
+            if "encoding" not in str(e).lower():
+                raise
+            import pyreadstat, tempfile, os as _os
+            data = _src()
+            raw = data.read() if hasattr(data, "read") else open(data, "rb").read()
+            tmp = tempfile.NamedTemporaryFile(suffix=".sav", delete=False)
+            try:
+                tmp.write(raw); tmp.close()
+                for enc in ("latin1", "cp1252", "utf-8"):
+                    try:
+                        df, _meta = pyreadstat.read_sav(
+                            tmp.name, apply_value_formats=False, encoding=enc)
+                        return df
+                    except Exception:
+                        continue
+                raise
+            finally:
+                _os.unlink(tmp.name)
     if name.endswith(".dta"):
         return pd.read_stata(_src(), convert_categoricals=False)
     if name.endswith(".sas7bdat"):

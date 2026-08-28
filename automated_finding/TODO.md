@@ -31,6 +31,23 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   from the landing-page host, following the doi.org redirect when the URL is
   a bare DOI, and file-access URLs are built against the same instance.
 
+- [x] **`.sav` encoding failures were being recorded as `download_failed`** --
+  fixed 2026-08-27 in `irw_triage_updated.py` (`load_table`). `pyreadstat`
+  trusts the header's declared encoding, and files written by localised SPSS
+  builds routinely declare one they do not honour, dying with "Unable to
+  convert string to the requested encoding (invalid byte sequence)". The file
+  is fully downloaded and fine, but the exception reaches `process_one()`,
+  which records `download_failed` -- a verdict indistinguishable from a dead
+  URL. **19 of the 28 `download_failed` rows in the 2026-08-27 tier-A run were
+  this**, all Spanish- or Turkish-language deposits, every one a real
+  instrument. `load_table` now falls back to `pyreadstat.read_sav` with
+  latin1/cp1252/utf-8; 19/19 parse after the fix.
+
+  Third defect of the same class found this session, after the Zenodo and
+  Dataverse connectors above: a real failure wearing a "nothing here" label.
+  Worth a standing habit -- when a verdict means "no data", check that a
+  resolver/reader actually ran.
+
 - [ ] **Figshare 403s under concurrency.** A metadata-only pass at 8 threads
   drew 1,858 `403 Forbidden` responses from `api.figshare.com`; the same
   article ids return `200` when retried serially. These are throttle
