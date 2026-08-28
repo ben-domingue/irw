@@ -525,13 +525,16 @@ export delimited using "pezzuti_2025_coolpeople_main_materialism_Chile.csv", rep
 use "pezzuti_2025_coolpeople_main.csv", clear
 
 * keep only id, covariates, and respective variables
-keep id cov_* korean_big5_*
+* note: one source column is misspelled "koean_big5_art" (Openness item,
+* "has little interest in art"); the korean_big5_* wildcard alone drops it
+keep id cov_* korean_big5_* koean_big5_art
+rename koean_big5_art korean_big5_art
 
 * keep only country(ies)-specific observations
 keep if cov_country == "South Korea"
 
 * create long-format data from wide data
-local question_cols korean_big5_conservative korean_big5_trustworthy korean_big5_lazy korean_big5_sociable korean_big5_faults korean_big5_nervous korean_big5_imaginative korean_big5_thorough korean_big5_laidback
+local question_cols korean_big5_conservative korean_big5_trustworthy korean_big5_lazy korean_big5_sociable korean_big5_faults korean_big5_nervous korean_big5_imaginative korean_big5_thorough korean_big5_laidback korean_big5_art
 
 tempfile long_big5
 save `long_big5', emptyok replace
@@ -549,7 +552,7 @@ foreach var of local question_cols {
 
 use `long_big5', clear
 
-drop korean_big5_conservative korean_big5_trustworthy korean_big5_lazy korean_big5_sociable korean_big5_faults korean_big5_nervous korean_big5_imaginative korean_big5_thorough korean_big5_laidback
+drop korean_big5_conservative korean_big5_trustworthy korean_big5_lazy korean_big5_sociable korean_big5_faults korean_big5_nervous korean_big5_imaginative korean_big5_thorough korean_big5_laidback korean_big5_art
 
 drop if missing(item) | item == ""
 
