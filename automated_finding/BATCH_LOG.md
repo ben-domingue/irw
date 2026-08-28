@@ -12636,3 +12636,116 @@ All licenses verified CC BY 4.0 on the source page.
   psychiatric/Asperger-diagnosis columns. Per the blanket rule, a source file
   containing PII at all is reason enough to skip the whole candidate -- no
   scrub-and-ship of the remaining 91,203 responses.
+
+## 2026-08-27 (cont.) -- the remaining 14 tier-A leads: 11 deposits -> 14 more tables
+
+Batch total across both halves: **24 tables / 889,761 responses** staged in
+`irw_output/`. All licenses verified open (CC BY 4.0 or CC0 1.0).
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `benchelbi_2021_mtq48` | 40,944 | 853 | 48 |
+| `huang_2023_medseq` | 37,818 | 1,719 | 22 |
+| `kumlander_2018_scs` | 29,639 | 1,710 | 26 |
+| `ilic_2019_whoqol_bref` | 19,580 | 759 | 26 |
+| `kumlander_2018_bdi` | 14,791 | 1,703 | 13 |
+| `livacicrojas_2021_lvq` | 14,421 | 759 | 19 |
+| `woodall_2020_bfi44` | 11,924 | 271 | 44 |
+| `rodriguezsantero_2024_sats36` | 11,421 | 318 | 36 |
+| `atik_2026_climate_anxiety` | 11,148 | 929 | 12 |
+| `atik_2026_psych_resilience` | 11,148 | 929 | 12 |
+| `daderman_2023_naq_r` | 6,688 | 304 | 22 |
+| `hahn_2025_sqc` | 3,910 | 230 | 17 |
+| `daderman_2023_wis` | 2,982 | 426 | 7 |
+| `alqerem_2024_diabetic_health_literacy` | 2,800 | 400 | 7 |
+
+### Coding decisions
+
+- **`kumlander_2018_*`: the second file is a WAVE, not a second sample.**
+  `pone.0207706.s007.sav` (n=1,497) carries SPSS labels reading "Beck
+  Depression Inventory, revised, 1, **wave 2**" and a `_2` suffix on every
+  column against the first file's `_1`; 1,742 -> 1,497 is attrition. Neither
+  file has a respondent identifier, so the waves cannot be joined -- `wave`
+  needs the same `id` on both occasions. Shipping wave 2 as extra rows would
+  present ~1,497 repeat measurements as ~1,497 additional people (+86% on the
+  person count) and break the independence assumption of any IRT model fitted
+  to the table. Wave 1 only; wave 2 is recoverable if the authors supply a
+  linking id. Also: -999/-888 are missing codes, and the BDI here is the
+  revised (Raitasalo) form scored 1-5, not 0-3.
+- **`ilic_2019_whoqol_bref`: the deposit's two .sav files are the same data.**
+  Identical on all 29 shared columns; they differ only in the year variable's
+  name (`godina` vs `studyyear`). Treating them as two samples would have
+  doubled 760 respondents into a fictitious 1,520. One cell of `who1` holds a
+  6 on a scale whose own value labels define five levels ('Jako lose' ..
+  'Odlicno'); no other item exceeds 5 and it is 1 observation in 755, so it is
+  dropped as a data-entry error rather than clamped. The three `*cor` columns
+  are reverse-scored recodes of items 3, 4 and 26 and are dropped as derived.
+- **`atik_2026_*`: the two files name the same items differently.** `EFA.sav`
+  uses the Turkish initials `CIK`/`GIK`, `CFA.sav` uses `CI`/`GI`, for the
+  same 12+12 items in the same order on the same 1-5 scale. Mapped onto the
+  CFA names before pooling; without that the pooled tables would carry 48 item
+  codes for a 24-item pair of instruments. Two genuinely different samples
+  (606 + 323), pooled per the same-instrument rule with `cov_sample` and
+  offset ids.
+- **`rodriguezsantero_2024_sats36`: `Item40`-`Item43` are not items.** Their
+  labels are "40. Sexo", "41. Edad", "42. Tipo de Bachillerato", "43. Cuantas
+  materias de Matematicas...". Matching the item-number pattern would have put
+  a 0-54 age variable into a 1-7 item set. They also are *not* duplicates of
+  the similarly-named `Tipo_Bachillerato`/`Numero_materias` columns -- an
+  assert established that: `Item42` is the raw 5-category response for all 318
+  respondents while `Tipo_Bachillerato` is a 2-category recode with 175
+  missing. Both forms ship as covariates.
+- **`livacicrojas_2021_lvq`: item text was being used as the column name.**
+  Columns are 90-character English sentences ("Item 1= Does as he/she ougth to
+  do in a given situation"), carrying the source's typos and `R*`
+  reverse-scoring markers. Renamed to `Item1`..`Item19` by the leading number
+  in the label, not by column order, so a reordering cannot silently renumber.
+- **`daderman_2023_*`: EQ-5D not shipped.** `H2` is constant at 1 across all
+  426 respondents; a zero-variance dimension carries no item response
+  information, and dropping it to salvage the other four would ship a
+  four-dimension EQ-5D, which is not the instrument. `EQ_VAS` and `EQ5D_Index`
+  ship as covariates. NAQ-R items topping out at 3 or 4 are non-use of upper
+  categories in a low-incivility sample, not a different format -- the items
+  reaching 5 are spread across the block, not confined to one subscale.
+- **`woodall_2020_bfi44`: responses are already reverse-scored.** The file is
+  named "With Reversed Scores" and exactly 16 of 44 item columns carry an
+  `RRRRR` suffix, matching the BFI-44's 16 reverse-keyed items. No un-reversed
+  copy is published. The suffix is kept in the item code so the transformation
+  stays visible rather than hidden behind a tidier name.
+- **`benchelbi_2021_mtq48`: the deposit is anonymised** -- creator `XXXXXXXX`,
+  affiliation `XXXXXX`. Authors taken from the companion paper the record
+  itself cites (10.5281/zenodo.5390587), whose sample matches the deposit
+  description exactly (853 Tunisian participants, 444/409 by sex, 409/444 by
+  athlete status, aged 14-27).
+- **`hahn_2025_sqc`: non-contiguous item numbering preserved.** `SQC_1..8, 10,
+  12, 13, 17, ...` -- the validation dropped items from a longer pilot pool and
+  the deposit keeps the original numbers. Renumbering would break the join to
+  the source's own labels.
+
+### Skipped
+
+- **`10.34894/KYFSP5` (MWYS, Multidimensional Wellbeing in Youth Scale) --
+  SKIPPED, PII.** `MWYS_Study 3.sav` carries `Geboortedatum`, a full date of
+  birth (`1998-03-10`), alongside ten free-text fields including
+  `Stoornis_nu_TEXT` (current disorder). Blanket rule.
+- **`10.17632/rj6t9w4v2j` (Turkish Transgender Congruence Scale) -- SKIPPED,
+  PII.** `rumuz` holds what are presented as pseudonyms but are actual Turkish
+  given names (`Pamir`, `Ozgur`, `Ege`, `Eren`, `Cinar`, `Yanki`), and the
+  free-text fields disclose surgical and legal history ("I had a mastectomy,
+  waiting on the court for the uterus") in a transgender sample. Identifying
+  and highly sensitive.
+
+### Deferred -- needs a person
+
+- **`10.5281/zenodo.1295642` (Gonzalez-Robles et al. 2018, OASIS/ODSIS/BAI/
+  BDI/PANAS/QLI, 583 rows).** Rich deposit -- six instruments, and OASIS is
+  measured pre *and* post so it would carry a real `wave`. Blocked on the
+  identifier: `User` gives 428 distinct values over 583 rows, and
+  `(Study, User)` still only 430, so 153 rows share a person key with nothing
+  in the file saying whether those are repeated administrations or a
+  non-person identifier. Not shipped rather than inventing an id. Two isolated
+  data-entry errors also noted for whoever picks it up: `BAI21pre` has one
+  value of 13 on a 0-3 scale and `PANASR1pre` one value of 10 on a 1-5 scale.
+- **`emiral_2025_aips`'s four unnamed blocks** (~110 items) and the `TKO` =
+  Basic Personality Traits Inventory hypothesis, as recorded in the first half
+  of this batch.
