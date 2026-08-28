@@ -3,6 +3,39 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-27 tier-A batch
+
+- [x] **`biblio_tierA_2026-08-27.csv` (24 rows) imported into the dictionary**
+  (confirmed 2026-08-27, ben-domingue) -- 889,761 responses across 24 tables
+  from 16 deposits, all licenses verified CC BY 4.0 or CC0 1.0. The 24
+  `irw_output/` CSVs were uploaded the same day and are off disk as expected.
+  `livacicrojas_2023_lvq` was renamed from `..._2021_...` before upload; the
+  deposit is dated 2023-12-27.
+
+- [ ] **`10.5281/zenodo.1295642` (Gonzalez-Robles 2018) is deferred on its
+  identifier.** Six instruments (OASIS, ODSIS, BAI, BDI, PANAS, QLI) and a real
+  pre/post `wave` on OASIS, but `User` gives 428 distinct values over 583 rows
+  and `(Study, User)` only 430 -- 153 rows share a person key with nothing in
+  the file to say whether they are repeated administrations or a non-person
+  identifier. Needs a human call or an email to the authors. Two isolated
+  data-entry errors already located for whoever takes it: `BAI21pre` has one
+  value of 13 on a 0-3 scale, `PANASR1pre` one value of 10 on a 1-5 scale.
+
+- [ ] **`emiral_2025_aips`: ~110 more items available if four blocks can be
+  named.** `PYAYT` (18), `TBO` (35), `TKO` (45) and `IBO` (12) are the study's
+  convergent-validity measures; the Zenodo record has an empty description, no
+  codebook, and the paper is paywalled. Hypothesis worth one check: `TKO` is
+  the Basic Personality Traits Inventory -- 45 items, six factors, and its
+  composite columns read as extraversion / conscientiousness / agreeableness /
+  emotional instability / openness / negative valence. Not acted on.
+
+- [ ] **`kumlander_2018_*` wave 2 is recoverable with a linking id.** The
+  deposit's second file is a follow-up wave of the same cohort (n=1,497) with
+  no respondent identifier in either file, so it could not be joined and was
+  left out rather than shipped as ~1,497 fictitious extra people. An email to
+  the authors asking for a linking id would add ~38k responses across the SCS
+  and BDI tables.
+
 ## From the 2026-08-27 repo-mode discovery sweep (155 new terms, 6,048 candidates)
 
 - [x] **Zenodo connector was returning an empty `url` for every hit** --
