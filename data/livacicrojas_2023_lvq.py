@@ -1,6 +1,6 @@
 """Leadership Virtues Questionnaire (LVQ).
 
-Source: Livacic-Rojas, Pablo, Harvard Dataverse 10.7910/DVN/AEX8PP, CC0 1.0 --
+Source: Livacic-Rojas, Pablo (2023), Harvard Dataverse 10.7910/DVN/AEX8PP, CC0 1.0 --
 "Replication Data for: Data base of Validation and Analysis of the metric
 Properties of the Leadership Virtues Questionnaire". Single .xlsx, 759
 respondents x 19 columns, every column an LVQ item on a 1-5 scale.
@@ -24,7 +24,7 @@ import requests
 DOI = "10.7910/DVN/AEX8PP"
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        "..", "automated_finding", "irw_output")
-TABLE = "livacicrojas_2021_lvq"
+TABLE = "livacicrojas_2023_lvq"
 
 # Harvard Dataverse answers 403 to requests without a User-Agent.
 UA = {"User-Agent": "irw-batch/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
