@@ -12877,3 +12877,47 @@ term is cheap.
 
 **Still open: 19 of the 31 `good` deposits** (~120k responses) and 77
 `worth_retrying` rows (~2.6M).
+
+### Tier B `worth_retrying` -- top deposits worked
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `kotsou_2016_scs` | 40,404 | 1,554 | 26 |
+| `kotsou_2016_panas` | 31,080 | 1,554 | 20 |
+| `antunez_2013_tmms24` | 24,360 | 1,015 | 24 |
+| `kotsou_2016_plc` | 23,310 | 1,554 | 15 |
+| `kotsou_2016_bdi` | 20,202 | 1,554 | 13 |
+| `sekowski_2025_mast` | 18,210 | 607 | 30 |
+| `sekowski_2025_pies` | 14,568 | 607 | 24 |
+| `kotsou_2016_life_satisfaction` | 7,770 | 1,554 | 5 |
+| `kotsou_2016_happiness` | 6,216 | 1,554 | 4 |
+| `antunez_2013_rmeq` | 5,075 | 1,015 | 5 |
+
+- **`kotsou_2016_panas` is stored as text.** Its 20 columns hold the strings
+  `A1`..`A5` rather than 1..5, so melting without conversion gives a
+  non-numeric `resp`. The prefix is stripped with an assert that every observed
+  value matches `A[1-5]`, so a different coding cannot pass silently.
+- **`kotsou_2016_bdi` spans two naming styles** -- `BDI_1`..`BDI_12` plus a
+  bare `BDI13`. Matching only `BDI_\d+` would have shipped a 12-item BDI
+  without complaint.
+- **`antunez_2013_rmeq` items genuinely differ in response format** (1-4, 1-5,
+  0-6 across five items). That is the published rMEQ, not a coding error, so
+  no single-range assert is applied to that block.
+- **`sekowski_2025`'s four `SBQ_*` columns are not shipped**: the SBQ-R's four
+  items each use a different response format (0-4, 0-6, 1-3). One table would
+  make `resp` ambiguous; splitting gives four single-item tables. Left for a
+  person, with an assert that fires if the formats ever converge.
+
+### Skipped from this pool
+
+- **PII (3 deposits):** figshare 30093970 carries a `来自IP` column of full IP
+  addresses with geolocation (`115.213.229.187(浙江-丽水)`); Harvard
+  `10.7910/DVN/Z3MV4J` (Nosek & Smyth replication, 11,819 rows) carries
+  `IPADDRES` and `zipcode`; Mendeley `8bphntrc65` carries an `initials` column
+  alongside race, gender and age. The last is the weakest of the three and is
+  flagged as an overrule candidate rather than a settled call.
+- **`10.7910/DVN/YCXDBI` (Teacher Work Ability Scale, 36 items x 4 samples)
+  deferred**: the deposit's author field is literally "Anonymized", so there is
+  no name for the `authorname_year_construct` convention. Recoverable if the
+  paper behind it is identified -- the four sample files are otherwise clean
+  (TWAS_01..TWAS_36, 1-7, 821+853+481+384 respondents).
