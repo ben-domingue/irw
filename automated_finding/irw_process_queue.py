@@ -54,7 +54,7 @@ def _load_redivis_dois() -> set:
     """Fetch DOIs already in the IRW from Redivis. Returns empty set on failure."""
     try:
         import redivis
-        ds = redivis.user("bdomingu").dataset("irw_meta:bdxt")
+        ds = redivis.user("datapages").dataset("irw_meta:bdxt")
         dois = set()
         for table in ds.list_tables():
             df = table.to_pandas_dataframe(dtype_backend="numpy")

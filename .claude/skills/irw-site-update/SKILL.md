@@ -205,7 +205,7 @@ What it does: for each known local CSV present (`metadata.csv` → table
 `comps_metadata.csv`/`nominal_metadata.csv`/`simsyn_metadata.csv` →
 `comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `itemtext_metadata.csv`
 → `itemtext_metadata`), it fully replaces that table's data on
-`redivis.user("bdomingu").dataset("irw_meta", version="next")` — a **draft**
+`redivis.user("datapages").dataset("irw_meta", version="next")` — a **draft**
 version. `hero_stats.json` is deliberately not in this list; it isn't a
 Redivis table, it goes to the separate `irw_site` repo.
 

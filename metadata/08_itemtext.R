@@ -4,6 +4,7 @@
 ## Requires: quanteda, quanteda.textstats
 
 library(redivis)
+source("redivis_config.R")
 library(quanteda)
 library(quanteda.textstats)
 
@@ -17,7 +18,7 @@ lt <- irw::irw_list_itemtext_tables()
 lt <- lt[!lt %in% remove]
 
 ## tables already in Redivis
-user    <- redivis$user("bdomingu")
+user    <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table   <- dataset$table("itemtext_metadata")
 existing <- as.data.frame(table$to_tibble())

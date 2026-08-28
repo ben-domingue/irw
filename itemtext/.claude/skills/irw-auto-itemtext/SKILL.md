@@ -642,7 +642,7 @@ write.csv(items, file = "itemtables/<table>__items.csv", row.names = FALSE)
 Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where
 `upload.py` expects to find files (`python3 upload.py itemtables` uploads everything in
 that directory). Don't upload automatically; that's a separate, explicit step (see
-"Uploading", below) since it pushes to the shared `bdomingu/IRW_text:next` Redivis
+"Uploading", below) since it pushes to the shared `datapages/irw_text:next` Redivis
 dataset.
 
 ### Step 6b — Logging discrepancies (no Sheets-write tool available)
@@ -917,7 +917,7 @@ on to the next candidate rather than forcing a fabricated match.
 python3 upload.py itemtables
 ```
 
-Uploads every `*.csv` in `itemtext/itemtables/` to `bdomingu/IRW_text:next` on Redivis
+Uploads every `*.csv` in `itemtext/itemtables/` to `datapages/irw_text:next` on Redivis
 (prompts before overwriting anything already there). Only run this when the user
 explicitly asks to upload — it's a shared-system write, same caution as any other
 Redivis upload in this repo.

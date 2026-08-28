@@ -254,7 +254,7 @@ else:
 
 | Source | When it's checked | What it excludes |
 |---|---|---|
-| IRW dictionary / Redivis (`bdomingu/irw_meta`) | Step 1 (discovery), automatically; also worth a manual double check in Step 2 before writing a script | DOIs already in the IRW |
+| IRW dictionary / Redivis (`datapages/irw_meta`) | Step 1 (discovery), automatically; also worth a manual double check in Step 2 before writing a script | DOIs already in the IRW |
 | `human_review/*.csv` | Step 1 (discovery), automatically, via the same `_load_auto_exclusions()` call | DOIs already logged as a human_review row in a past batch |
 
 No local metadata files needed, but this check is now manual per dataset —

@@ -3,6 +3,7 @@
 ##Construct biblio.csv
 library(gsheet)
 library(redivis)
+source("redivis_config.R")
 library(httr)
 library(glue)
 library(dplyr)
@@ -159,22 +160,22 @@ getrows<-function(l) {
 
 dbs<-list(
     core=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
-              user="bdomingu",
+              user=IRW_OWNER,
               dataset="irw_meta",
               table="biblio",
               file.out="biblio.csv"),
     comps=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
-              user="bdomingu",
+              user=IRW_OWNER,
               dataset="irw_meta",
               table="comps_biblio",
               file.out="comps_biblio.csv"),
     nom=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
-             user="bdomingu",
+             user=IRW_OWNER,
              dataset="irw_meta",
              table="nominal_biblio",
              file.out="nominal_biblio.csv"),
     sim=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
-             user="bdomingu",
+             user=IRW_OWNER,
              dataset="irw_meta",
              table="simsyn_biblio",
              file.out="simsyn_biblio.csv")

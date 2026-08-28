@@ -9,7 +9,7 @@ Notes before use:
    ../../../../data/add2redivis/.env (same token add2redivis/upload.py uses).
    That's a different token from ~/.redivis_api_token (read-only, used by
    run_pipeline.sh/audit_tables.R) -- this script needs data.edit scope.
-3. Targets redivis.user("bdomingu").dataset("irw_meta", version="next") --
+3. Targets redivis.user("datapages").dataset("irw_meta", version="next") --
    a DRAFT version. Nothing is live until you review and publish it by hand
    on the Redivis site afterward.
 

@@ -48,9 +48,9 @@ installed copy 2026-07-27) exports `irw_list_tables(source = "core")`, with
   `item_response_warehouse_3:5xaj`, `item_response_warehouse_4:980f`,
   `item_response_warehouse_5:3ykx`, `item_response_warehouse_6:fpe6` (all
   under `datapages`)
-- `sim` → `bdomingu/irw_simsyn:0btg`
-- `comp` → `bdomingu/irw_competitions:cmd7`
-- `nom` → `bdomingu/irw_nominal:614n`
+- `sim` → `datapages/irw_simsyn:0btg`
+- `comp` → `datapages/irw_competitions:cmd7`
+- `nom` → `datapages/irw_nominal:614n`
 
 This is the same accessor the `tags` and `itemtext` skills already depend on
 (`irw::irw_list_tables()`/`irw::irw_list_itemtext_tables()`), so

@@ -135,7 +135,7 @@ def main():
     redivis.authenticate()
 
     # Set API in terminal as: export REDIVIS_API_TOKEN=your_access_token
-    dataset = redivis.user("bdomingu").dataset("irw_text",version="next")
+    dataset = redivis.user("datapages").dataset("irw_text:07b6",version="next")
     file_list, common_items, if_replace = check_if_table_already_exist(dataset, file_list)
     upload_table(dataset, file_list, common_items, if_replace)
 

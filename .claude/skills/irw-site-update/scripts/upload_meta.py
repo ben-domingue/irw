@@ -7,7 +7,7 @@ this skill's scope" -- it now IS in scope, as an explicit, confirmed action
 distinct from the read-only generate/diff/audit steps. It still never runs
 automatically as part of run_pipeline.sh or audit_tables.R.
 
-Only ever touches redivis.user("bdomingu").dataset("irw_meta", version="next")
+Only ever touches redivis.user("datapages").dataset("irw_meta", version="next")
 -- a draft version. After running this, review the draft on the Redivis site
 and publish it by hand; nothing here publishes automatically.
 
@@ -36,7 +36,7 @@ import os
 import sys
 from pathlib import Path
 
-# file stem (no .csv) -> Redivis table name within bdomingu/irw_meta
+# file stem (no .csv) -> Redivis table name within datapages/irw_meta
 FILE_TABLE_MAP = {
     "metadata": "metadata",
     "biblio": "biblio",
@@ -65,7 +65,7 @@ def load_token() -> str:
         raise SystemExit(
             f"No REDIVIS_API_TOKEN in env, and {ADD2REDIVIS_ENV} not found.\n"
             "Either export REDIVIS_API_TOKEN yourself (must have data.edit scope "
-            "for bdomingu/irw_meta), or point ADD2REDIVIS_ENV at the right .env file."
+            "for datapages/irw_meta), or point ADD2REDIVIS_ENV at the right .env file."
         )
     load_dotenv(dotenv_path=ADD2REDIVIS_ENV)
     token = os.getenv("REDIVIS_API_TOKEN")
@@ -106,7 +106,7 @@ def main():
         print(f"No known CSVs found in {args.dir.resolve()}. Known names: {list(FILE_TABLE_MAP)}")
         sys.exit(1)
 
-    print("Plan -- local file -> bdomingu/irw_meta (version=next) table, full replace:")
+    print("Plan -- local file -> datapages/irw_meta (version=next) table, full replace:")
     for stem, path in files.items():
         print(f"  {path}  ({count_rows(path)} data rows)  ->  {FILE_TABLE_MAP[stem]}")
 
@@ -126,7 +126,7 @@ def main():
     os.environ["REDIVIS_API_TOKEN"] = token
     import redivis
     redivis.authenticate()
-    dataset = redivis.user("bdomingu").dataset("irw_meta", version="next")
+    dataset = redivis.user("datapages").dataset("irw_meta", version="next")
 
     mismatches = []
     for stem, path in files.items():
@@ -195,7 +195,7 @@ def main():
         sys.exit(1)
 
     print("\nAll uploads complete and row-count verified on the 'next' (draft) version "
-          "of bdomingu/irw_meta.")
+          "of datapages/irw_meta.")
     print("Nothing is live yet -- review and publish the new version on the Redivis site.")
 
 

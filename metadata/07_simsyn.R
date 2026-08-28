@@ -4,7 +4,8 @@
 
 ##tables from last version of metadata
 library(redivis)
-user <- redivis$user("bdomingu")
+source("redivis_config.R")
+user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("simsyn_metadata")
 meta <- table$to_tibble()
@@ -18,7 +19,7 @@ length(old.tables)
 ##new tables
 tables<-new.tables<-list()
 for (dataset in c("irw_simsyn")) {
-    v1<- redivis$organization("bdomingu")$dataset(dataset)
+    v1<- redivis$organization(IRW_OWNER)$dataset(dataset)
     tabs<-v1$list_tables()
     new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
     tables[[dataset]]<-tabs
@@ -272,7 +273,7 @@ write.csv(summaries,'simsyn_metadata.csv',quote=FALSE,row.names=FALSE)
 ## irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
 
 ## # Read the current biblio file
-## user <- redivis$user("bdomingu")
+## user <- redivis$user(IRW_OWNER)
 ## dataset <- user$dataset("irw_meta")
 ## biblio_table <- dataset$table("simsyn_biblio:qahg")
 ## biblio <- biblio_table$to_tibble()

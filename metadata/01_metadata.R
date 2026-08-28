@@ -14,7 +14,8 @@ options(scipen=999)
 
 ##tables from last version of metadata
 library(redivis)
-user <- redivis$user("bdomingu")
+source("redivis_config.R")
+user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("metadata")
 meta <- table$to_tibble()
@@ -28,8 +29,8 @@ length(old.tables)
 
 ##new tables
 tables<-new.tables<-list()
-for (dataset in c("item_response_warehouse","item_response_warehouse_2","item_response_warehouse_3","item_response_warehouse_4","item_response_warehouse_5","item_response_warehouse_6")) {
-     v1<- redivis$organization("datapages")$dataset(dataset)
+for (dataset in IRW_CORE_DATASETS) {
+     v1<- redivis$organization(IRW_OWNER)$dataset(dataset)
      tabs<-v1$list_tables()
      new.tables[[dataset]]<-data.frame(table=sapply(tabs,function(x) x$name),dataset=dataset)
      tables[[dataset]]<-tabs

@@ -1,5 +1,6 @@
 library(redivis)
-user <- redivis$user("bdomingu")
+source("../redivis_config.R")
+user <- redivis$user(IRW_OWNER)
 dataset <- user$dataset("irw_meta")
 table <- dataset$table("metadata")
 meta <- table$to_tibble()

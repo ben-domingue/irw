@@ -1,8 +1,9 @@
 ##tables on redivis
 library(redivis)
+source("redivis_config.R")
 red<-list()
-for (dataset in c("item_response_warehouse","item_response_warehouse_2","item_response_warehouse_3","item_response_warehouse_4","item_response_warehouse_5","item_response_warehouse_6")) {
-    v1<- redivis$organization("datapages")$dataset(dataset,version='latest')
+for (dataset in IRW_CORE_DATASETS) {
+    v1<- redivis$organization(IRW_OWNER)$dataset(dataset,version='latest')
     tables<-v1$list_tables()
     red[[dataset]]<-sapply(tables,function(x) x$name)
 }
@@ -29,14 +30,14 @@ missing_license <- with(irw_dict, {
 flagged_rows <- irw_dict[missing_core | missing_license, ]
 
 ##biblio/redivis
-## user <- redivis$user("bdomingu")
+## user <- redivis$user(IRW_OWNER)
 ## dataset <- user$dataset("irw_meta:bdxt:latest")
 ## bib <- dataset$table("biblio:qahg")
 ## bib<-bib$to_tibble()
 bib<-read.csv("biblio.csv")
 
 ##metadata/redivis
-## user <- redivis$user("bdomingu")
+## user <- redivis$user(IRW_OWNER)
 ## dataset <- user$dataset("irw_meta:bdxt:latest")
 ## met <- dataset$table("metadata:h5gs")
 ## met<-met$to_tibble()
