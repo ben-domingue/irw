@@ -12565,3 +12565,74 @@ Other skips:
   (including a `nguyen_2026_bpns` from the pre-split version). The output
   directory had 122 files for 121 built tables. Verified by rebuilding the
   count from the scripts, not from the directory.
+
+## 2026-08-27 -- tier A of the repo-mode sweep: 5 deposits -> 10 tables / 670,547 responses
+
+Worked the top six `worth_retrying` leads by volume from
+`runs/retriage_tierA_2026-08-27.csv`. Five shipped, one skipped for PII.
+All licenses verified CC BY 4.0 on the source page.
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `onah_2021_covid_knowledge` | 197,250 | 7,890 | 25 |
+| `onah_2021_covid_info_sources` | 78,900 | 7,890 | 10 |
+| `floreskanter_2021_cerq` | 247,932 | 6,887 | 36 |
+| `emiral_2025_aips` | 16,767 | 729 | 23 |
+| `kalczajanosi_2021_covid_fear` | 21,042 | 1,503 | 14 |
+| `kalczajanosi_2021_vaccine_skepticism` | 16,533 | 1,503 | 11 |
+| `kalczajanosi_2021_covid_risk` | 18,036 | 1,503 | 12 |
+| `risticdedic_2025_dhq_importance` | 24,756 | 834 | 30 |
+| `risticdedic_2025_dhq_currentstate` | 24,663 | 834 | 30 |
+| `risticdedic_2025_dhq_expectation` | 24,668 | 834 | 30 |
+
+### Coding decisions
+
+- **`onah_2021_covid_knowledge`: the correct/incorrect polarity is not
+  constant across items.** SPSS codes all 25 knowledge items 1/2, but
+  `COVID_11`, `_12`, `_15`, `_21`, `_22` and `_23` label 1='incorrect' and
+  2='correct' while the other 19 label 1='correct'. A blanket 1/0 map would
+  have silently inverted six of 25 items -- and would have looked fine,
+  since the resulting p-values stay in a plausible range. The script reads
+  each item's value labels rather than assuming. (`COVID_11`'s label carries
+  the typo `icorrect`, so the recode tests for the negation before the
+  positive.) Recoded p-values run .247-.758, no item pinned at a boundary.
+- **`kalczajanosi_2021_*`: four composite columns dropped.** `Scepticism`
+  (5-25), `Risk` (6-30), `Fear` (4-20) and `Vaccine_hesitancy_total` (15-75)
+  are subscale/total sums -- their ranges alone put them off the 1-5 item
+  scale. The three subscales ship separately per the KEPAQ/KORQ precedent.
+  `disease` (241 distinct free-text conditions) dropped as unstructured text
+  in a health context. The book-balancing assert caught `country_merged` and
+  `vaccine_intention_merged`, collapsed recodes not visible in the first 60
+  columns; kept as covariates since the collapse rule is not recoverable
+  from the raw codes.
+- **`risticdedic_2025_dhq`: three tables, not one.** 30 statements are each
+  rated on three separate 0-100 sliders (importance / current state /
+  expectation). Pooling would make `resp` mean three different things in one
+  column, so each facet is its own table sharing the same 30 item codes --
+  one item text table joins to all three. `id` is the school, not a person:
+  the school version is answered once per institution, which is the
+  "sometimes another entity" case in `datastandard.md`.
+- **`emiral_2025_aips`: only 23 of 133 available items shipped, deliberately.**
+  The deposit carries four further blocks (`PYAYT` 18, `TBO` 35, `TKO` 45,
+  `IBO` 12) that are the study's convergent-validity measures. The Zenodo
+  record has an empty description, there is no codebook, and the paper
+  (Clinical Psychologist 29(2), 2025) is paywalled -- so no source names those
+  instruments. Not shipped rather than named on a guess. Open lead: `TKO` is
+  *probably* the Basic Personality Traits Inventory (45 items, six factors,
+  composites named `TKODIS`/`TKOSor`/`TKOUyum`/`TKODTu`/`TKOGAciklik`/
+  `TKOOlDeger`, reading as extraversion / conscientiousness / agreeableness /
+  emotional instability / openness / negative valence). Inference from column
+  names only; ~110 items recoverable if someone confirms it.
+
+### Skipped
+
+- **`10.17632/5tjkv36r3s` (Dolfi et al. 2024, Romanian AQ/EQ validation,
+  916 respondents x up to 452 columns) -- SKIPPED, PII.** `Cod_unic` holds
+  live participant codes (`MEM2411UM`, 903 distinct). `val_2.xlsx`'s own
+  column header documents the construction: all initials of the
+  respondent's name, then day and month of birth, then the mother's first
+  name initials. That is initials plus a partial date of birth plus a family
+  member's initials, sitting alongside age, gender, region, education and
+  psychiatric/Asperger-diagnosis columns. Per the blanket rule, a source file
+  containing PII at all is reason enough to skip the whole candidate -- no
+  scrub-and-ship of the remaining 91,203 responses.
