@@ -13055,5 +13055,9 @@ N>=100 floor.
 - **`turpochaparro_2026_*`**: the book-balancing assert surfaced three further
   computed columns (`EXC`, `AUEST`, `COM`) beyond the three anticipated.
 
+**Uploaded 2026-08-28 (ben-domingue).** All 15 tables are on Redivis and their
+`biblio_zenodo_2026-08-28.csv` rows are in the dictionary; the staged CSVs are
+off disk as expected.
+
 **Still open from this pool: 10 of the 18 leads** (~52k responses), plus the
 PISA re-publication held pending a dictionary/#1342 check.

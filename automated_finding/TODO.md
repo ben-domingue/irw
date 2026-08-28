@@ -13,10 +13,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `runs/zenodo_released_keys_2026-08-28.csv`) and re-triaged: 4 leads
   recovered, the other 88 now carry real verdicts.
 
-- [x] **15 tables / 85,307 responses staged and biblio prepared**
-  (2026-08-28) from 6 Zenodo deposits, all CC BY 4.0, all new to IRW (creates,
-  not replaces). `biblio_zenodo_2026-08-28.csv`. Awaiting ben-domingue's
-  check + upload.
+- [x] **15 tables / 85,307 responses uploaded and in biblio** (confirmed
+  2026-08-28, ben-domingue) from 6 Zenodo deposits, all CC BY 4.0, all new to
+  IRW (creates, not replaces). The 15 `irw_output/` CSVs are off disk as
+  expected, and the `biblio_zenodo_2026-08-28.csv` rows are in the dictionary.
 
 - [ ] **THE BIG ONE: ~2,458 prior repo-mode terms have never had working
   Zenodo coverage.** A 140-term sample returned 1,342 candidates of which
