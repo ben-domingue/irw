@@ -12813,3 +12813,67 @@ term is cheap.
   two of which are constant. Neither raw responses nor a coherent instrument.
   This was the 3rd-largest tier-B lead at 418,968 nominal responses; the
   triage counted transformed columns as items.
+
+### Tier B `good` rows -- first 8 deposits worked
+
+12 tables total now staged (including the two large tier-B deposits above),
+4,558,034 responses.
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `prihastiwi_2026_adcap` | 60,600 | 1,010 | 60 |
+| `nurjanah_2019_hls47` | 48,363 | 1,029 | 47 |
+| `matosaslopez_2022_bars_teaching` | 23,239 | 2,324 | 10 |
+| `matosaslopez_2024_teacher_assessment` | 22,230 | 2,223 | 10 |
+| `wu_2025_drone_delivery` | 18,924 | 498 | 38 |
+| `huang_2023_utaut_mobile_shopping` | 14,384 | 389 | 37 |
+| `matosaslopez_2024_questionnaire_quality` | 6,669 | 2,223 | 3 |
+| `apaza_2026_sdo` | 4,984 | 356 | 14 |
+| `apaza_2026_self_esteem` | 3,560 | 356 | 10 |
+| `apaza_2026_meim_r` | 2,136 | 356 | 6 |
+
+- **`prihastiwi_2026_adcap` has a three-row hierarchical header.** Row 0 is the
+  aspect, row 1 the indicator, row 2 the questionnaire's own item number, and
+  data starts at row 3. Read with `header=0` -- the natural call -- the aspect
+  names become the column labels and 59 of 60 columns come back
+  `Unnamed: N`. The row-2 numbers are used as item codes so `item` is
+  `AdCap_1`, `AdCap_8`, `AdCap_16` ... rather than a positional renumbering,
+  and the aspect ships as `itemcov_aspect`.
+- **`wu_2025_drone_delivery`: ten of the 48 columns are construct means, not
+  items.** Each sits as a header immediately above the block it summarises and
+  betrays itself by holding fractional values and 13-17 distinct levels where
+  every real item has exactly 5. The script identifies them by that property
+  and asserts it finds ten, rather than trusting a hard-coded list; 38 items
+  ship with `itemcov_construct`.
+- **`matosaslopez_2022_bars_teaching` pools two deposits.** 15160903
+  (blended, 1,436) and 15151307 (face-to-face, 888) administer the same
+  10-item BARS scale -- identical Spanish labels in identical order, the
+  face-to-face file merely prefixing each with its number. One table with
+  `cov_teaching_mode`, matched on the labels rather than on column position.
+- **`huang_2023_utaut_mobile_shopping`**: nine cells hold a 0 on a 1-7 scale
+  and all nine are in the three price-value items. Confined to one construct
+  and absent from the other 34, that is a not-applicable code; dropped, with
+  an assert that any out-of-range value stays inside the PV block.
+- **`apaza_2026_*`** splits into three tables because the deposit's three
+  instruments use 1-5, 1-4 and 1-7 -- one table would put three response
+  formats in one column.
+
+### Not shipped from the `good` rows
+
+- **PII (4 deposits):** `zenodo.16068892` and `zenodo.16009161` carry a `Nama`
+  column of real respondent names; `zenodo.15164966` carries names plus a
+  `No HP` column of live Indonesian mobile numbers (`081232491293`); and
+  `zenodo.21121992` uses a name column as its header row, with given names
+  (Assifa, Assyifa nuraini) alongside religion, province, income and
+  occupation.
+- **Duplicate deposit:** `zenodo.12619790` and `10.17632/txm4zf982j` are the
+  same file (`work well-being dataset.sav`, 283x21) mirrored on Zenodo and
+  Mendeley. Counted once, still to work.
+- **Probable overlapping subset:** figshare 30236407 ("Questionnaire Score Test
+  Set", 102 respondents) has a strict subset of `wu_2025_drone_delivery`'s
+  columns, no demographics, and 25 of its 102 rows reproduce a row of the
+  larger file exactly across all 50 columns. Appending it would double-count
+  respondents with no way to say which 25. Larger file only.
+
+**Still open: 19 of the 31 `good` deposits** (~120k responses) and 77
+`worth_retrying` rows (~2.6M).
