@@ -3,6 +3,46 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-28 Zenodo re-run
+
+- [x] **Zenodo connector fix validated end to end** (2026-08-28). The fix in
+  `9d481e6` was necessary but not sufficient -- it had also poisoned
+  `repo_triage_seen_keys.csv`, where 92 Zenodo keys sat as `no_usable_file`
+  verdicts against deposits no resolver had ever opened. Released (backup at
+  `repo_triage_seen_keys.csv.bak`, list at
+  `runs/zenodo_released_keys_2026-08-28.csv`) and re-triaged: 4 leads
+  recovered, the other 88 now carry real verdicts.
+
+- [x] **15 tables / 85,307 responses staged and biblio prepared**
+  (2026-08-28) from 6 Zenodo deposits, all CC BY 4.0, all new to IRW (creates,
+  not replaces). `biblio_zenodo_2026-08-28.csv`. Awaiting ben-domingue's
+  check + upload.
+
+- [ ] **THE BIG ONE: ~2,458 prior repo-mode terms have never had working
+  Zenodo coverage.** A 140-term sample returned 1,342 candidates of which
+  **801 were new** -- absent from both the ledger and the 6,048-candidate
+  2026-08-27 sweep -- yielding 276 open-licensed keeps and 15 shippable leads.
+  Zenodo was dark, not thin. The full sweep is ~9 hours unattended and
+  one-time; future runs inherit the fix automatically. Agreed with
+  ben-domingue on 2026-08-28 to fire this "later in the afternoon".
+  Command shape:
+  `python3 irw_discover_updated.py <terms> --sources zenodo --out runs/<name>.csv`
+  then prefilter -> rank -> triage as in `BATCH_LOG.md`'s 2026-08-28 entry.
+
+- [ ] **10 of the 18 Zenodo leads still unworked** (~52k responses). The tail:
+  item text used as column headers, several header-offset files, one allergy
+  survey that is mostly clinical binaries rather than an instrument. Two are
+  blocked on deposits whose author field is literally "Anonymous"
+  (`zenodo.20475015`, and `10.7910/DVN/YCXDBI` from tier B) -- clean data, no
+  name for `authorname_year_construct`.
+
+- [ ] **PISA re-publication held.** `zenodo` PISA 2018/2022 deposit, 35,943 x 7
+  = 251,601 nominal responses, was the largest lead of the Zenodo batch. It is
+  a re-publication of PISA variables rather than an original instrument; IRW
+  already carries PISA tables and #1342 is open on PISA per-country exclusion.
+  Check against the dictionary and #1342 before writing a script -- do not
+  assume those responses are additive.
+
 ## From the 2026-08-27 tier-B batch -- CLOSED
 
 - [x] **Tier B closed 2026-08-28 (ben-domingue's call).** 432 of the 463
