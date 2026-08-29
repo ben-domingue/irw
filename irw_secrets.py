@@ -6,18 +6,19 @@ which is read-only and is what the site/analysis code uses.
 
 Historically each uploader called a bare `load_dotenv()`, which only finds a
 `.env` in the caller's own directory -- so the same write token got copied into
-four `.env` files inside the Dropbox-synced project tree. This module replaces
-that with one resolved path outside Dropbox.
+four `.env` files inside the Dropbox-synced project tree. Those copies were
+deleted on 2026-08-29 and the token they held was revoked; this module replaces
+them with one resolved path outside Dropbox.
 
 Resolution order:
 
   1. `REDIVIS_API_TOKEN` already exported in the environment (CI, one-off runs).
   2. The path in `IRW_REDIVIS_WRITE_ENV`, if set.
   3. `~/.config/irw/redivis-write.env`  <-- the normal case.
-  4. A `.env` next to the calling script -- DEPRECATED, warns on use.
 
-Step 4 exists only so this change is non-breaking on machines that still have
-the old in-tree copies. It goes away once those are deleted.
+There is deliberately no fallback to a `.env` beside the calling script: that
+is the pattern that produced the duplicates, and a stray `.env` silently
+working again is exactly the failure this module exists to prevent.
 
 Note that `~/.config/irw/` is intentionally *not* in Dropbox, so it does not
 sync: each machine needs its own copy of the token file.
@@ -26,7 +27,6 @@ sync: each machine needs its own copy of the token file.
 from __future__ import annotations
 
 import os
-import sys
 from pathlib import Path
 
 VAR = "REDIVIS_API_TOKEN"
@@ -52,39 +52,24 @@ def _read_env_file(path: Path) -> str | None:
 def load_write_token(caller: str | None = None) -> str:
     """Return the write-scoped token, and export it so `redivis` can see it.
 
-    `caller` should be the calling script's `__file__`; it is used only to find
-    the deprecated adjacent `.env`.
+    `caller` is accepted and ignored; it remains in the signature so the call
+    sites reading `__file__` do not all need editing.
     """
     token = os.environ.get(VAR)
     if token:
         return token
 
     override = os.environ.get("IRW_REDIVIS_WRITE_ENV")
-    candidates = [Path(override).expanduser()] if override else [DEFAULT_PATH]
+    path = Path(override).expanduser() if override else DEFAULT_PATH
 
-    legacy = Path(caller).resolve().parent / ".env" if caller else None
-    if legacy is not None:
-        candidates.append(legacy)
-
-    for path in candidates:
-        token = _read_env_file(path)
-        if not token:
-            continue
-        if path == legacy:
-            print(
-                f"WARNING: read {VAR} from {path}.\n"
-                f"         That in-tree copy is deprecated and syncs to Dropbox. "
-                f"Move it to {DEFAULT_PATH} (chmod 600) and delete this one.",
-                file=sys.stderr,
-            )
+    token = _read_env_file(path)
+    if token:
         os.environ[VAR] = token
         return token
 
     raise SystemExit(
         f"No {VAR} found.\n"
-        f"  Looked in: the environment, then {DEFAULT_PATH}"
-        + (f", then {legacy}" if legacy else "")
-        + ".\n"
+        f"  Looked in: the environment, then {path}.\n"
         f"This must be a *write-scoped* (data.edit on datapages) token -- not the\n"
         f"read-only one in ~/.redivis_api_token. Create the file with:\n"
         f"  install -d -m 700 ~/.config/irw\n"
