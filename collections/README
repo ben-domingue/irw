@@ -1,0 +1,97 @@
+Collections: labelled groupings of IRW tables (issue #1633).
+
+A collection answers "give me all the tables of this type" -- RCTs, Big Five
+inventories, depression scales, tables carrying a Q matrix. Tables belong to any
+number of collections at once, so membership is stored long (one row per
+table-collection pair), not as a column per collection.
+
+WHY LONG FORMAT MATTERS: adding a collection is a DATA change. One line in
+registry.csv, optionally one file in curated/. Nothing in ../metadata/10_collections.R
+changes, and nothing in the R package, the Python package or the site changes.
+A column-per-collection design would make every new collection an ~8-file change
+across three repos. Do not add per-collection branches anywhere.
+
+---------------------------------------------------------------- files
+
+registry.csv          The spec. One row per collection, version controlled.
+                      Columns: collection, label, kind, definition, rule,
+                      maintainer, added.
+curated/<slug>.csv    Hand-picked members for <slug>. Columns: table, basis,
+                      note. Optional for rule-based collections (members are
+                      unioned in); REQUIRED when rule = curated.
+curated/*.review.csv  Staging only. Candidates a human has not promoted yet.
+                      Never read by the pipeline -- purely a worklist.
+
+Outputs land in ../metadata/ (collections.csv, collection_members.csv,
+collections_report.txt) and are gitignored like every other pipeline output.
+This directory holds the irreplaceable hand-authored input, which is why it sits
+here and not under metadata/ -- src/.gitignore has `metadata/**/*.csv`.
+
+---------------------------------------------------------------- kind
+
+Exactly three values:
+
+  design      how the study was run, and what structure the data carries.
+              rct, clustered, q_matrix, continuous_response.
+  instrument  which measure was administered. big_five, promis.
+  construct   what is being measured. depression, math.
+
+---------------------------------------------------------------- rule grammar
+
+  var:treat                 the named variable is present
+  var:date+wave             ALL named variables present            (+ = AND)
+  var_any:booklet|block_id  ANY named variable present             (| = OR)
+  var_prefix:qmatrix        any variable starting with the prefix
+  meta:longitudinal         a logical column of metadata.csv
+  cname:<regex>             case-insensitive regex over tags.csv "construct name"
+  curated                   members come only from curated/<slug>.csv
+
+Prefer `meta:` over re-deriving something metadata.csv already publishes. The
+`longitudinal` collection reuses the published flag even though that flag is
+loose (it greps the concatenated variable string, so cov_birthdate matches).
+Two different answers to "is this table longitudinal?" would be worse than nine
+loose rows.
+
+---------------------------------------------------------------- derived fields
+
+coverage, n_tables and basis are COMPUTED by 10_collections.R and must not be
+authored in registry.csv -- authoring them is how they drift out of step with
+the membership they describe.
+
+  metadata-complete   rule read metadata.csv, so it saw every documented table.
+                      NOT the same as "the whole warehouse": metadata.csv has no
+                      rows for warehouses 5 and 6, and 403 tables are missing
+                      from it. The script warns when configured core datasets
+                      are absent.
+  tagged-subset-only  rule read tags.csv, which covers 2,251 of 3,650 tables --
+                      and coverage collapses in the newer warehouses (w1 99.6%,
+                      w2 77.4%, w3 27.2%, w4 34.7%). These collections are
+                      biased toward older warehouses and cannot honestly be
+                      called "all". The denominator is appended to `definition`
+                      automatically.
+  curated-only        a human chose the members.
+
+---------------------------------------------------------------- adding one
+
+1. Add a line to registry.csv. Write the definition as the inclusion criterion
+   ("what counts"), not a description of the topic.
+2. If it needs hand-picked members, add curated/<slug>.csv.
+3. cd ../metadata && Rscript 10_collections.R
+4. Read collections_report.txt. Check the count is what you expected and, for a
+   cname: rule, spot-check the matched construct names -- a broad regex is the
+   easy mistake. `\bmath` catches "mathematics anxiety".
+5. Upload with the site-update skill's upload_meta.py.
+
+---------------------------------------------------------------- two invariants
+
+1. MEMBERSHIP IS CONFIRMED-ONLY. There is no candidate/status column. Scouting
+   output stays in curated/*.review.csv until a human promotes it. A published
+   collection is one somebody stands behind.
+
+2. THIS STAGE NEVER OPENS THE TAGS GOOGLE SHEET. cname: rules read the already
+   published tags.csv, whose "construct name" is column 3 of 03_tags.R's
+   positional KEEP_COLS. Column 4 ("Context Text" -- verbatim excerpts from
+   source papers) is structurally unreachable from here, and that is a
+   guarantee, not a convention. Do not "improve" the stage by reading the sheet
+   directly -- any script that needs column 4 has to justify itself separately,
+   and this one does not need it at all.

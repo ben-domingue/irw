@@ -48,6 +48,8 @@ FILE_TABLE_MAP = {
     "comps_metadata": "comps_metadata",     # 05_comps.R fixed 2026-08-02, back in run_pipeline.sh's default order
     "nominal_metadata": "nominal_metadata", # 06_nominal.R verified working 2026-08-02, likewise
     "itemtext_metadata": "itemtext_metadata",  # 08_itemtext.R joined the default order 2026-08-02
+    "collections": "collections",                # 10_collections.R, issue #1633 -- registry, one row per collection
+    "collection_members": "collection_members",  # 10_collections.R, issue #1633 -- long, one row per (table, collection)
 }
 
 sys.path.insert(0, str(next(

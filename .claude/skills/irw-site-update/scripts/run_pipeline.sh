@@ -16,6 +16,12 @@
 # 2026-08-02 after both were fixed/verified -- see TODO.md for the full
 # history if either regresses.
 #
+# 10_collections.R (issue #1633) runs BETWEEN 08 and 09 -- numeric order is
+# deliberately not run order here, as it already isn't for 04. It must follow
+# 01 and 03 (it reads metadata.csv and tags.csv off disk) and precede 09, which
+# stays last. It needs no credentials and no Redivis access at all, so it is
+# the one stage that is fully reviewable offline.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -34,6 +40,7 @@
 #   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
+#   scripts/run_pipeline.sh 10              # just the collections tables
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
@@ -73,7 +80,8 @@ fi
 
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
-                          [08]=08_itemtext.R [09]=09_hero_status.R )
+                          [08]=08_itemtext.R [10]=10_collections.R
+                          [09]=09_hero_status.R )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
@@ -83,9 +91,19 @@ declare -A STAGE_OUTPUTS=(
   [06]="nominal_metadata.csv"
   [07]="simsyn_metadata.csv"
   [08]="itemtext_metadata.csv"
+  [10]="collections.csv collection_members.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 09)
+DEFAULT_ORDER=(01 02 03 05 06 07 08 10 09)
+
+# Join key for the diff, per output file. Everything is keyed on `table` except
+# the two collections outputs (issue #1633): the registry is one row per
+# collection, and collection_members is LONG -- `table` repeats there, so it
+# needs a composite key or the differ de-duplicates it into a meaningless diff.
+declare -A DIFF_KEY=(
+  [collections.csv]="collection"
+  [collection_members.csv]="table,collection"
+)
 
 stages=()
 for a in "$@"; do
@@ -133,7 +151,8 @@ for stage in "${stages[@]}"; do
   echo "-- Stage $stage diff --"
   for f in ${STAGE_OUTPUTS[$stage]:-}; do
     [[ -z "$f" ]] && continue
-    python3 "$SCRIPT_DIR/diff_csv.py" "$SNAPSHOT_DIR/$f" "$METADATA_DIR/$f"
+    python3 "$SCRIPT_DIR/diff_csv.py" "$SNAPSHOT_DIR/$f" "$METADATA_DIR/$f" \
+      --key "${DIFF_KEY[$f]:-table}"
   done
   if [[ "$stage" == "09" ]]; then
     echo "hero_stats.json written -- not a keyed CSV, review the file directly"
