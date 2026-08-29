@@ -4,6 +4,7 @@ Source: https://data.mendeley.com/datasets/y8wwtmxxzg
 DOI: 10.17632/y8wwtmxxzg
 Data: MPS(121519).sav
 License: CC BY 4.0
+Item text: shipped (SPSS variable labels for the stems, value labels for the 0-5 anchors)
 
 4,053 cannabis-using adults answering the 19-item Cannabis-Associated Problems
 Questionnaire (CAPQ), deposited alongside a gender-based differential item

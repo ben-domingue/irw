@@ -1,0 +1,69 @@
+# Shared response-data source for validate_items.R and audit_batch.R.
+#
+# Both gates ask the same question -- what are this table's item and resp
+# values? -- and both used to answer it only from live Redivis data. That is
+# right for the itemtext pipeline, whose tables are already published, but it
+# cannot serve the automated_finding pipeline, which generates item text at
+# processing time from a response CSV staged in irw_output/ that is not live
+# yet (and must not be uploaded before its item text has been checked against
+# it). See automated_finding SKILL.md Step 3.5.
+#
+# So the data source becomes a parameter. Passing no override reproduces the
+# previous behaviour exactly; the live route is untouched.
+#
+# A local read is also quota-free, which matters: on 2026-08-18 the account's
+# 200GB/30-day Redivis export limit was exhausted by a single round.
+
+# Coerce a resp vector the way irw_fetch()/irw_table_sets() do: the literal
+# "NA" token and blanks are missing, everything else is numeric. Keeping this
+# in one place is the point -- a local gate that treated "NA" as a level while
+# the live gate dropped it would disagree about the resp set for reasons that
+# have nothing to do with the item text.
+coerce_resp <- function(x) {
+    s <- trimws(as.character(x))
+    s[s %in% c("NA", "")] <- NA_character_
+    suppressWarnings(as.numeric(s))
+}
+
+# The response data as a data.frame with `item` (character) and `resp`.
+# resp_csv: path to a staged IRW response CSV, or NA for live.
+get_resp <- function(table, resp_csv = NA) {
+    if (is.na(resp_csv) || !nzchar(resp_csv)) {
+        return(irw::irw_fetch(table))
+    }
+    if (!file.exists(resp_csv)) {
+        stop("response CSV not found: ", resp_csv)
+    }
+    d <- read.csv(resp_csv, stringsAsFactors = FALSE)
+
+    # An items CSV carries `item` and `resp` too, so pointing this at the file
+    # being validated would compare it against itself and PASS vacuously.
+    # `id` is required of every IRW response table and absent from an items
+    # table, so it is what separates them.
+    if (any(c("item_text", "option_text") %in% names(d)) && !("id" %in% names(d))) {
+        stop("response CSV ", resp_csv, " looks like an itemtext table, not a ",
+             "response table -- pass the staged IRW response CSV instead")
+    }
+    missing <- setdiff(c("id", "item", "resp"), names(d))
+    if (length(missing)) {
+        stop("response CSV ", resp_csv, " has no `",
+             paste(missing, collapse = "`/`"), "` column -- is it an IRW response table?")
+    }
+    d$item <- as.character(d$item)
+    d
+}
+
+# The same summary shape audit_batch.R's live_sets() returns -- items, resp,
+# per-item row counts, per-item resp levels -- computed from a local CSV.
+# Row counts include rows with missing resp, and levels exclude them, matching
+# live_sets(): the row-count anomaly check wants total rows, the per-item
+# coverage check wants the levels respondents actually used.
+resp_sets_local <- function(path) {
+    d <- get_resp(NA_character_, path)
+    item <- as.character(d$item)
+    resp <- coerce_resp(d$resp)
+    list(items = sort(unique(item)),
+         resp = sort(unique(resp[!is.na(resp)])),
+         counts = tapply(rep(1, length(item)), item, sum),
+         levels = tapply(resp, item, function(v) sort(unique(v[!is.na(v)]))))
+}

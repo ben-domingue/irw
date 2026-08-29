@@ -67,9 +67,10 @@ readable: before it, every scheduled cloud run committed another
 | Location | Holds | Lifecycle |
 |---|---|---|
 | `runs/` | `candidates*.csv`, `irw_triage*.csv`, `irw_retriage*.csv`, `triage_test*.csv`, the dated `*_monthly_*` outputs | Disposable once the batch is written up in `BATCH_LOG.md`. Gitignored. |
-| top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `cov_vocabulary.json`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
+| top level | `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`, `repo_triage_seen_keys.csv`, `license_blocked_candidates.csv`, `plos_deferred_candidates.csv`, `itemtext_provenance.csv`, `cov_vocabulary.json`, `biblio_*.csv`, `BATCH_LOG.md`, `TODO.md` | Standing records — never delete, never move into `runs/`. Tracked. |
 | `human_review/` | `human_review_<mode>_batch<N>.csv` | Permanent archive of genuinely-ambiguous rows. Tracked. |
 | `irw_output/` | downloaded/converted data | Regenerable, gitignored. |
+| `itemtext_output/` | `<table>__items.csv` generated alongside the batch's response tables (Step 3.5) | Regenerable, gitignored. **Only `*__items.csv`** — `itemtext/upload.py` walks recursively and uploads every `.csv` as a table. |
 
 Every script routes its `--out` through `in_runs_dir()` in
 `irw_discover_updated.py`, so a bare filename (`--out candidates.csv`) is

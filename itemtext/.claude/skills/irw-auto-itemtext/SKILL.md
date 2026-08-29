@@ -423,6 +423,14 @@ what becomes `{table}__items.csv`.
 Rscript .claude/skills/irw-auto-itemtext/scripts/validate_items.R <table> <candidate_items.csv>
 ```
 
+For a table in this pipeline, always run it exactly as above — against live
+data. `--resp-csv <path>` (and `audit_batch.R`'s `--resp-dir <dir>`) exist for
+the `irw-automated-finding` pipeline only, which generates item text at
+processing time from a response CSV staged in `automated_finding/irw_output/`
+that is not published yet; see that skill's Step 3.5. Don't reach for the flag
+here to work around a fetch failure — a local CSV that has drifted from the
+live table would make this gate lie.
+
 This is the non-negotiable gate — same logic as `join.R`, but reports the actual
 mismatched values instead of just TRUE/FALSE. It checks:
 - Required columns present.

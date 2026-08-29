@@ -3,6 +3,14 @@ irw_output/
 output_noncore/
 downloads/
 
+# Item text generated alongside a batch's response tables (SKILL.md Step 3.5),
+# staged for upload to the irw_text Redivis dataset. Same lifecycle as
+# irw_output/: regenerable from the data/*.py script, and cleared once the
+# upload is confirmed. ONLY *__items.csv belongs in here -- itemtext/upload.py
+# walks a directory recursively and treats every .csv it finds as a table.
+# The durable record is itemtext_provenance.csv, which is tracked.
+itemtext_output/
+
 # Ephemeral batch run state
 irw_batch_checkpoint.jsonl
 *.log
@@ -25,7 +33,7 @@ irw_metadata.csv
 # NOT in runs/, and deliberately tracked -- these are standing, cumulative
 # records, not per-run temp files: search_terms_log.csv, plos_seen_dois.csv,
 # pmc_seen_dois.csv, repo_triage_seen_keys.csv, license_blocked_candidates.csv,
-# plos_deferred_candidates.csv, and human_review/*.csv.
+# plos_deferred_candidates.csv, itemtext_provenance.csv, and human_review/*.csv.
 runs/
 
 # Legacy top-level names, kept so an old checkout or a hand-run script that

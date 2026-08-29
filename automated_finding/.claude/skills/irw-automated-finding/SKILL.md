@@ -311,11 +311,185 @@ directory — the script IS the queue-processing step, and its output in
 `irw_output/` is upload-ready (not a rough draft), so get the QC checks in
 Step 4 right the first time.
 
+**While you have the raw file open, note whether the item text is there** —
+variable/value labels, stem-bearing column headers, a codebook in the deposit.
+Step 3.5 turns that into a shipped item text table in the same batch, and it
+is far cheaper to see now than to rediscover later. Record the verdict in the
+script's header comment alongside the existing `Source:`/`DOI:`/`Data:`/
+`License:` lines, whichever way it goes:
+
+```
+Item text: shipped (SPSS variable + value labels)
+Item text: not shipped — labels are positional ("FTD-SS Item 1"); needs the published FTD-SS
+```
+
+That header is the only permanent per-candidate record of the source, so a
+"not shipped" line is what stops the next pass re-deriving the same answer.
+
+## Step 3.5 — Item text, when it's cheap
+
+Item text ships **in the same batch as the response table**, not in a later
+`irw-auto-itemtext` pass. Step 3 is the only moment when the raw deposit, the
+source paper, and the item-code derivation are all in hand at once — a later
+pass has to re-find the paper from the dictionary DOI and reverse-engineer
+`data/<table>.py` to learn how the codes were assigned. It is also the safest
+moment: of 50 tables audited by the itemtext pipeline, 10 had positional or
+script-generated item codes and *every mapping defect found in review was one
+of them*. Here you wrote that mapping, so it is known rather than
+reconstructed.
+
+**THE PRIME COMMANDMENT — `item` is the join key.** Every `item` value in the
+item text table must appear in the response table, spelled exactly as the
+response table spells it, and the two sets must match. Same for `resp`. Never
+invent either one. A perfectly transcribed instrument whose `item` values
+don't line up cannot be linked to a single response and is worthless.
+
+### Do it only when the text is already in hand
+
+Attempt extraction only from what Step 3 already gave you. Do **not** let item
+text slow the batch down — the goal is still to maximize data in the IRW.
+
+**Cheap — extract now:**
+
+- SPSS/Stata variable labels *and* value labels (`pyreadstat` exposes both:
+  `meta.column_names_to_labels`, `meta.variable_value_labels`). Check both
+  levels — the stem is usually in the variable label, the response options in
+  the value labels.
+- Spreadsheet column headers that are full item stems.
+- A codebook / questionnaire / data-dictionary file already in the same
+  deposit.
+- An appendix or supplementary file of the open-access paper already fetched.
+
+**Not cheap — record and move on:**
+
+- The paper is paywalled, or the instrument is a multi-hop citation away.
+- The labels are positional ("FTD-SS Item 1", "Q1"), so the *published*
+  instrument is needed to know what was asked.
+- The wording exists only in a table *image* (OCR), a third-party
+  reproduction, or a translated substitute.
+
+When you skip, say **where the text actually is** in the `data/<table>.py`
+header and in the `BATCH_LOG.md` entry, so a later pass starts from an answer
+instead of re-deriving one. That is the whole cost of skipping — one sentence.
+
+Two carve-outs: **never extract item text for `enem*` tables** (Ben handles
+those separately), and a table skipped for PII/license/N<100 has its item text
+skipped with it.
+
+### Schema and extraction rules — do not restate them here
+
+The item text schema is defined in
+`itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md`
+(paths in this section are from the repo root, `irw/src/`) — field
+definitions, the `raw_resp` fallback, the merge logic. The extraction
+judgment rules — `instructions` vs. `section_prompt`, when to leave
+`item_text` blank rather than invent a stem, matching the source's terseness,
+never padding an unlabeled scale point with its own number — are Step 4 of
+`irw-auto-itemtext`'s SKILL.md. Read them there and follow them; this file
+deliberately does not fork a second copy, for the same reason it defers the
+response schema to `datastandard.md`.
+
+The two rules worth repeating because they are what the gate actually
+enforces: one row per item × response option, and `section_id` is never blank
+(use `<table>_1` throughout when the instrument has no real testlet grouping —
+the merge needs a join key).
+
+### Output
+
+Write to `automated_finding/itemtext_output/<table>__items.csv` — double
+underscore, and the case of `<table>` exactly as the response table spells it.
+
+**Only `*__items.csv` may ever live in that directory.** `itemtext/upload.py`
+walks a directory recursively and treats every `.csv` in it as a table to
+upload, so a stray `provenance.csv` or `notes.csv` would be uploaded as if it
+were data. This has happened before; it is why `itemtext/itemtables/clean/`
+exists on the other side.
+
+### Gate it against the staged response CSV
+
+The response CSV must be **final** before item text is generated from it — the
+item and resp sets are checked against the exact file that will ship. Run all
+three, in order, from `itemtext/` (as the itemtext skill's own steps do):
+
+```bash
+cd itemtext
+S=.claude/skills/irw-auto-itemtext/scripts
+
+# 1. Canonical on-disk nulls. NOT optional: our processing scripts are Python,
+#    and Python's csv writer emits "NA" where the corpus convention is a bare
+#    NA token. Nothing downstream complains; the audit below will.
+Rscript $S/normalize_nulls.R ../automated_finding/itemtext_output
+
+# 2. Hard per-table gate — item set and resp set must match exactly.
+Rscript $S/validate_items.R <table> \
+    ../automated_finding/itemtext_output/<table>__items.csv \
+    --resp-csv ../automated_finding/irw_output/<table>.csv
+
+# 3. Batch-wide audit: per-item row-count anomalies, option coverage, blank
+#    item_text, duplicate rows with conflicting text.
+#    Give the report an explicit path OUTSIDE itemtext_output/ -- it defaults
+#    to <dir>/audit_report.csv, which would leave a non-items CSV sitting in
+#    the upload folder.
+Rscript $S/audit_batch.R ../automated_finding/itemtext_output \
+    ../automated_finding/runs/itemtext_audit_report.csv \
+    --resp-dir ../automated_finding/irw_output
+```
+
+Before handing the batch over, confirm the folder is clean:
+
+```bash
+ls automated_finding/itemtext_output | grep -v '__items\.csv$'   # must print nothing
+```
+
+`--resp-csv` / `--resp-dir` are what make this work before upload: without
+them both scripts read live Redivis data, which a table in this pipeline does
+not have yet. A FAIL is disqualifying — fix it or ship the response table
+alone. Explain every WARN rather than ignoring it.
+
+### Record the provenance
+
+Append one row per attempted table to `automated_finding/itemtext_provenance.csv`
+(tracked, cumulative, never deleted at batch close — same class as
+`license_blocked_candidates.csv`). Columns, matching the itemtext pipeline's own
+record so the two stay diffable:
+
+```
+table,mapping_basis,text_source,source_ref,note,public_note,uploaded
+```
+
+- `mapping_basis` — how the item↔text tie was established: `data_labels` /
+  `paper_explicit` / `paper_order` / `reconstructed` / `unknown`.
+- `text_source` — where the wording came from: `study_materials` /
+  `canonical_instrument` / `translated_substitute` / `unknown`.
+- `public_note` — a one-sentence caveat for the public issues page, or blank.
+- `uploaded` — a date, stamped **only** once Ben confirms. Never ahead of it.
+
+Write it `QUOTE_ALL` with CRLF, matching the file's existing rows.
+
+A cheap-gate table should almost always be `data_labels` + `study_materials`,
+which is the one basis exempt from needing a `verify_<table>.R`. If you find
+yourself writing anything else, that is a signal the table failed the
+cheapness test — re-read the gate above before continuing.
+
+Nothing needs mirroring into `itemtext/`. That pipeline derives its queue by
+diffing live `irw_list_itemtext_tables()` against `irw_list_tables()`, so an
+uploaded table drops out of it automatically, and a newly found table was
+never in `queue_state.csv` to begin with.
+
 ## Step 4 — QC before submitting
 
 Before uploading a file from `irw_output/` to Redivis, run through
 `datastandard.md`'s "What to verify before saving" checklist — the QC
 warnings recorded in the triage CSV point at exactly what to check.
+
+If the batch also produced item text, its gate chain (Step 3.5:
+`normalize_nulls.R` → `validate_items.R --resp-csv` → `audit_batch.R
+--resp-dir`) is part of this checklist, and `itemtext_output/` must contain
+nothing but `*__items.csv`. Item text is checked against the *final* response
+CSV: if a table's response file changes after its item text was written — a
+recoded `resp`, a dropped item, a renamed code — regenerate the item text and
+re-run the gates. A stale item text table is worse than none, because it
+still joins.
 
 One additional hard rule applies at this stage that isn't in
 `datastandard.md`, because it's a pipeline/triage concern rather than an
@@ -745,10 +919,14 @@ with an underscore.
    decided (new search terms used, candidate counts, good/skip decisions,
    batch/table names) — following the existing style already in the file.
    This is what lets the next run (by Claude or a human) avoid repeating
-   work.
+   work. Include one item text line per shipped table: shipped (and from
+   what), or not shipped and where the text actually is.
 2. Reconcile `TODO.md`: remove any item the batch resolved, add any new
    open item the batch surfaced (an on-hold dataset, an uninvestigated
-   `worth_retrying` case, a pending upload). `TODO.md` should always reflect
+   `worth_retrying` case, a pending upload). The pending-upload checkbox
+   covers **both** folders in one confirmation, e.g.
+   `- [ ] biblio_X.csv (N rows) + M item text tables need uploading/pasting`.
+   `TODO.md` should always reflect
    only what's currently actionable — don't let resolved items linger there
    the way they used to linger unchecked in the old combined file.
 3. Delete temp files once their content is captured elsewhere — this
@@ -767,3 +945,25 @@ with an underscore.
    `human_review/` files in particular need no confirmation step at all —
    there's no sheet to paste them into anymore (deprecated 2026-08-12), the
    file written during the batch *is* the permanent record.
+   **Never delete `itemtext_provenance.csv`** either — it is a standing
+   record, not a per-batch temp file.
+
+### Uploading a batch that includes item text
+
+The two folders go to two different Redivis datasets, in this order:
+
+| Folder | Dataset | Upload with |
+|---|---|---|
+| `irw_output/` | `item_response_warehouse_4` | `irw_output/upload_4.py` |
+| `itemtext_output/` | `irw_text:07b6` | `itemtext/upload.py` |
+
+**Response tables first.** Item text that references a table which isn't live
+yet is a dangling reference.
+
+**A held or rejected response table holds its item text with it.** If Ben
+doesn't ship a table, don't ship its `__items.csv` — say so explicitly rather
+than letting it ride along.
+
+Stamp `uploaded=<date>` in `itemtext_provenance.csv` per table, only after
+Ben confirms, never ahead of it. Uploading is always human-triggered; don't
+run either upload script yourself.

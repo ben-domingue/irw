@@ -13250,3 +13250,90 @@ tables whose responses start at 0 and the nine that reach 5:
   an instrument: `q0001`..`q0025` mix 5-, 4-, 3- and 7-point formats, the
   description is empty and no codebook ships. Grouping the items into scales
   would be invention.
+
+---
+
+## 2026-08-29 — Item text folded into the finding pipeline (Step 3.5)
+
+Pipeline change, not a discovery batch. Item text is now generated **at
+processing time, in the same batch as the response table**, instead of being
+noticed at Step 3 and deferred to a later `irw-auto-itemtext` pass.
+
+**Why.** Step 3 is the only moment when the raw deposit, the source paper and
+the item-code derivation are all in hand at once. Before this, that knowledge
+was written down as prose in a `TODO.md` bullet and then thrown away — the
+triage CSV is deleted at batch close, the raw download is never persisted, and
+no full text is ever fetched — so a later pass had to re-find the paper from
+the dictionary DOI and reverse-engineer `data/<table>.py` to learn how the
+codes were assigned. Four such bullets were still open (`altman_2020_capq`,
+5x `lee_2020_*`, 4x `gao_2022_*`, 20x `forrest_2021_*`).
+
+It is also the safest moment. The itemtext skill records that of 50 audited
+tables, 10 had positional or script-generated item codes and *every mapping
+defect found in review was one of them*. At Step 3 we write that mapping, so
+it is known rather than reconstructed — these tables should land at
+`mapping_basis=data_labels`, the one basis exempt from needing a
+`verify_<table>.R`.
+
+**Scope: only when the text is already in hand** (Ben, this session) — SPSS/
+Stata variable+value labels, stem-bearing column headers, a codebook in the
+deposit, or the OA paper's appendix. A paywalled paper, positional labels
+needing the published instrument, image-only tables/OCR, or a translated
+substitute all fail the gate: note where the text actually is and move on.
+Discovery throughput is not traded for item text. `enem*` stays excluded, and
+a table skipped for PII/license/N<100 has its item text skipped with it.
+
+**What changed:**
+
+- `SKILL.md` — new **Step 3.5**, between the processing script and QC. Carries
+  the prime commandment (`item` is the join key, never invented), the
+  cheapness gate, the output/upload-folder rules, the gate chain, and the
+  provenance contract. It deliberately does *not* restate the item text schema
+  or the extraction judgment rules — those stay in
+  `itemtext/.claude/skills/irw-auto-itemtext/`, cited the same way this file
+  already defers the response schema to `datastandard.md`. Step 3, Step 4 and
+  the batch-close section updated to match.
+- **`itemtext_output/`** — new staging folder, sibling of `irw_output/`,
+  gitignored. Uploads to `irw_text:07b6` via `itemtext/upload.py`, *not* to
+  `item_response_warehouse_4`. **Only `*__items.csv` may live in it** —
+  `upload.py` walks recursively and treats every `.csv` as a table.
+- **`itemtext_provenance.csv`** — new standing, tracked, cumulative record at
+  the top level (same class as `license_blocked_candidates.csv`; never deleted
+  at batch close). Columns match the itemtext pipeline's own `provenance.csv`
+  so the two stay diffable, `QUOTE_ALL` + CRLF like the existing files.
+- **`validate_items.R --resp-csv` / `audit_batch.R --resp-dir`** (in
+  `itemtext/.claude/skills/irw-auto-itemtext/scripts/`, plus a shared
+  `fetch_resp.R`) — the gates could only read live Redivis data, which a table
+  in this pipeline does not have yet. They now accept the staged response CSV.
+  Without the flags behaviour is unchanged, verified by diff.
+
+**Verification.** `audit_batch.R` on `itemtext/itemtables/batch_012` gives a
+byte-identical `audit_report.csv` from the live route and the local route, and
+the patched script's live output is byte-identical to the pre-change script's.
+`validate_items.R` likewise agrees across original/patched/local for both
+batch_012 tables. Negative controls: a mismatched response table FAILs loudly
+naming the differing items, a missing file and a malformed flag error out, and
+pointing `--resp-csv` at an items CSV is now rejected rather than passing
+vacuously by self-comparison (`id` is what separates the two shapes).
+
+**Defect found by running it:** `audit_batch.R` defaults its report to
+`<batch_dir>/audit_report.csv`, which drops a non-items CSV straight into the
+upload folder — precisely the `upload.py` hazard above. The documented command
+now passes an explicit path into `runs/`, followed by a check that
+`itemtext_output/` holds nothing but `*__items.csv`.
+
+**First table through it: `altman_2020_capq`** (19 items x 6 anchors = 114
+rows), closing half of the oldest of those four TODO bullets. Item ids are the
+source column names `CAPQ1`..`CAPQ19`, so the .sav's variable labels give each
+stem with no positional inference, and all 19 share one value-label set for
+the 0-5 anchors. PASS on both routes with identical reports.
+`instructions` is left blank: the CAPQ items are noun phrases that clearly
+hang off a shared stem, but neither the .sav nor the deposit records its
+wording, so it is not invented. No `public_note` — "the source never published
+the stem" is a gap, not a text-vs-table mismatch, and does not earn an issues-
+page entry. Staged in `itemtext_output/`, `uploaded` unstamped pending Ben.
+
+Remaining from those bullets and unchanged by this: `sumner_2022_*` (positional
+labels, needs the published FTD-SS), and the `lee_2020_*` / `gao_2022_*` /
+`forrest_2021_*` clusters, all of which now have a supported path via
+`--resp-dir` once someone regenerates their response CSVs.

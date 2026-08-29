@@ -1,4 +1,12 @@
-# Usage: Rscript audit_batch.R <batch_dir> [output_csv]
+# Usage: Rscript audit_batch.R <batch_dir> [output_csv] [--resp-dir <dir>]
+#
+# --resp-dir audits against local IRW response CSVs (<dir>/<table>.csv)
+# instead of live Redivis data, for tables that are not published yet -- the
+# automated_finding pipeline generates item text at processing time from the
+# CSVs staged in irw_output/ (see automated_finding SKILL.md Step 3.5). A
+# table with no CSV in <dir> is an ERROR row, not a silent fall back to live:
+# mixing the two sources within one report would make it unreadable.
+# Without the flag the behaviour is unchanged: live data.
 #
 # Batch-level sanity audit: for every <table>__items.csv in <batch_dir>,
 # merges it against the live Redivis response data.
@@ -31,9 +39,31 @@
 # or notes.csv -- read-only against batch output, write-only to the report.
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 1) stop("Usage: Rscript audit_batch.R <batch_dir> [output_csv]")
+
+# --resp-dir <dir>, stripped before the positional args are read so existing
+# calls keep working untouched.
+resp_dir <- NA_character_
+i <- match("--resp-dir", args)
+if (!is.na(i)) {
+    if (length(args) < i + 1) stop("--resp-dir needs a directory")
+    resp_dir <- args[i + 1]
+    args <- args[-c(i, i + 1)]
+    if (!dir.exists(resp_dir)) stop("--resp-dir not a directory: ", resp_dir)
+}
+
+if (length(args) < 1) {
+    stop("Usage: Rscript audit_batch.R <batch_dir> [output_csv] [--resp-dir <dir>]")
+}
 batch_dir <- sub("/$", "", args[1])
 out_path <- if (length(args) >= 2) args[2] else file.path(batch_dir, "audit_report.csv")
+
+# Resolve the helper next to this script, however the script was invoked.
+script_dir <- {
+    a <- commandArgs(trailingOnly = FALSE)
+    f <- sub("^--file=", "", a[grep("^--file=", a)])
+    if (length(f)) dirname(normalizePath(f[1])) else "."
+}
+source(file.path(script_dir, "fetch_resp.R"))
 
 files <- list.files(batch_dir, pattern = "__items\\.csv$", full.names = TRUE)
 if (length(files) == 0) stop("No *__items.csv files found in ", batch_dir)
@@ -108,6 +138,17 @@ live_sets <- function(table) {
          levels = levels)
 }
 
+# <resp-dir>/<table>.csv -- the automated_finding staging convention
+# (irw_output/<table>.csv, one CSV per measurement scale, named for the table).
+local_resp_path <- function(table) {
+    p <- file.path(resp_dir, paste0(table, ".csv"))
+    if (!file.exists(p)) {
+        stop("no response CSV at ", p,
+             " -- every table in the batch needs one when --resp-dir is used")
+    }
+    p
+}
+
 audit_one <- function(path) {
     table <- sub("__items\\.csv$", "", basename(path))
     items <- tryCatch(read.csv(path, stringsAsFactors = FALSE),
@@ -116,9 +157,13 @@ audit_one <- function(path) {
         return(error_row(table, "could not read csv"))
     }
 
-    live <- tryCatch(live_sets(table), error = function(e) conditionMessage(e))
+    live <- tryCatch(
+        if (is.na(resp_dir)) live_sets(table) else resp_sets_local(local_resp_path(table)),
+        error = function(e) conditionMessage(e))
     if (is.character(live)) {
-        return(error_row(table, paste0("could not read live data: ", live)))
+        return(error_row(table, paste0(
+            if (is.na(resp_dir)) "could not read live data: " else "could not read response CSV: ",
+            live)))
     }
     if (!length(live$items)) {
         return(error_row(table, "live table has no item values"))

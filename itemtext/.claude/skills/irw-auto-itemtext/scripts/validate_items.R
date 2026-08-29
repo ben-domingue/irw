@@ -1,4 +1,11 @@
 # Usage: Rscript validate_items.R <table> <path/to/table__items.csv>
+#            [--resp-csv <path/to/response.csv>]
+#
+# --resp-csv checks against a local IRW response CSV instead of live Redivis
+# data. Use it for a table that is not published yet -- the automated_finding
+# pipeline generates item text at processing time from the CSV staged in
+# irw_output/, before either table is uploaded (see automated_finding
+# SKILL.md Step 3.5). Without the flag the behaviour is unchanged: live data.
 #
 # Same non-negotiable gate as itemtext/join.R (item-set and resp-set must
 # match live response data exactly), but reports exactly which values differ
@@ -8,12 +15,36 @@
 # treated as valid output -- do not skip straight to writing/uploading.
 
 args <- commandArgs(trailingOnly = TRUE)
-if (length(args) < 2) stop("Usage: Rscript validate_items.R <table> <items_csv>")
+
+# --resp-csv <path>, stripped out before the positional args are read so the
+# existing two-argument call keeps working untouched.
+resp_csv <- NA_character_
+i <- match("--resp-csv", args)
+if (!is.na(i)) {
+    if (length(args) < i + 1) stop("--resp-csv needs a path")
+    resp_csv <- args[i + 1]
+    args <- args[-c(i, i + 1)]
+}
+
+if (length(args) < 2) {
+    stop("Usage: Rscript validate_items.R <table> <items_csv> [--resp-csv <response_csv>]")
+}
 table <- args[1]
 items_path <- args[2]
 
+# Resolve the helper next to this script, however the script was invoked.
+script_dir <- {
+    a <- commandArgs(trailingOnly = FALSE)
+    f <- sub("^--file=", "", a[grep("^--file=", a)])
+    if (length(f)) dirname(normalizePath(f[1])) else "."
+}
+source(file.path(script_dir, "fetch_resp.R"))
+
 items <- read.csv(items_path, stringsAsFactors = FALSE)
-df <- irw::irw_fetch(table)
+df <- get_resp(table, resp_csv)
+cat("Response data source: ",
+    if (is.na(resp_csv)) "live (irw::irw_fetch)" else paste0("local CSV ", resp_csv),
+    "\n\n", sep = "")
 
 cat("=== Column check ===\n")
 required <- c("table", "section_id", "item", "instrument", "instructions",

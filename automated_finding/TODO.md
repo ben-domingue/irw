@@ -614,6 +614,15 @@ do not treat the CSV's `proposed_name` column as a work list.
   are the source column names, so they join directly. `sumner_2022_*`: the
   source labels are positional ("FTD-SS Item 1"), so those need the
   published instruments instead.
+  — **`altman_2020_capq` done 2026-08-29, awaiting upload**: written to
+  `itemtext_output/altman_2020_capq__items.csv` (19 items x 6 anchors = 114
+  rows) as the first end-to-end exercise of the new Step 3.5 integration.
+  Gates PASS against both the staged CSV and live data, with identical
+  reports. `instructions` left blank — the CAPQ stems are noun phrases
+  hanging off a shared prompt the deposit never records, and inventing it is
+  not allowed. Provenance row in `itemtext_provenance.csv`, `uploaded`
+  unstamped. The `sumner_2022_*` half stands: positional labels fail the
+  cheapness gate, so they still need the published FTD-SS.
 
 - [ ] **`AMBIGUOUS_TERMS` in `irw_discover_updated.py` is dead code** — the
   relevance-filter header documents it as a tier ("ambiguous terms do NOT
