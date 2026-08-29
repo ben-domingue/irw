@@ -203,7 +203,8 @@ What it does: for each known local CSV present (`metadata.csv` → table
 `comps_biblio.csv`/`nominal_biblio.csv`/`simsyn_biblio.csv` →
 `comps_biblio`/`nominal_biblio`/`simsyn_biblio`,
 `comps_metadata.csv`/`nominal_metadata.csv`/`simsyn_metadata.csv` →
-`comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `itemtext_metadata.csv`
+`comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `nominal_tags.csv` →
+`nominal_tags`, `itemtext_metadata.csv`
 → `itemtext_metadata`), it fully replaces that table's data on
 `redivis.user("datapages").dataset("irw_meta", version="next")` — a **draft**
 version. `hero_stats.json` is deliberately not in this list; it isn't a
@@ -217,11 +218,14 @@ themselves.
 **Credentials are deliberately separate from workflow 1/2's token.**
 `~/.redivis_api_token` (used by `run_pipeline.sh`/`audit_tables.R`) is
 read-only — confirmed 2026-08-02, every table in `irw_meta` returned `403
-insufficient_scope: data.edit` when tested. `upload_meta.py` instead reuses
-the write-scoped token already sitting in `data/add2redivis/.env` (loaded via
-`python-dotenv`, resolved by path — never read or echoed directly). If that
-token ever needs rotating, do it in that one `.env` file; don't invent a
-second write-scoped token file for this script alone.
+insufficient_scope: data.edit` when tested. `upload_meta.py` instead uses the
+write-scoped token, resolved — like every other IRW uploader — by the shared
+helper `src/irw_secrets.py` (`load_write_token()`), which reads, in order: an
+already-exported `REDIVIS_API_TOKEN`, then `~/.config/irw/redivis-write.env`.
+Never read or echo the value directly. Rotate in that one file and every
+uploader picks it up; don't invent a second write-scoped token file for this
+script alone. Note `~/.config/` is outside Dropbox and does not sync, so each
+machine needs its own copy of it.
 
 Before replacing a table, it lists that table's existing uploads and warns if
 there's more than one upload name present — `replace_on_conflict` only
@@ -248,14 +252,16 @@ part.
 from a `metadata/03b_describe.R` that doesn't exist.
 
 What *does* exist today, and why it matters:
-- `03_tags.R` selects columns `c(1,6:12,3)` from the "IRW Tags" sheet into
-  `tags.csv` — this happens to exclude column 4, "Context Text" (the
-  **verbatim excerpt** field, confirmed against the live sheet header), so
-  raw paper text never reaches the public `tags.csv` today. This is
-  incidental to a hardcoded column index, not an explicit check — if that
-  sheet's columns are ever reordered, this protection silently breaks with
-  no error. **If you ever touch `03_tags.R`'s column selection, flag this
-  explicitly to Ben before changing it.**
+- `03_tags.R` selects columns `c(1,6:12,3)` from each tags sheet into
+  `tags.csv` / `nominal_tags.csv` — this excludes column 4, "Context Text"
+  (the **verbatim excerpt** field, confirmed against the live sheet header),
+  so raw paper text never reaches the public CSVs today. This rests on a
+  hardcoded column index, not a by-name check — if a sheet's columns are ever
+  reordered, the protection silently breaks with no error. The script now at
+  least asserts column *count* and that row 1 is the instruction row, but
+  neither catches a reorder. **If you ever touch `03_tags.R`'s column
+  selection, flag this explicitly to Ben before changing it**, and confirm the
+  output has no `context text` column.
 - `diff_csv.py`'s long-text flag (above) is this skill's stopgap for the
   same underlying concern — a public metadata/biblio/tags CSV should never
   gain a full paragraph of raw source text — but it's a length heuristic,

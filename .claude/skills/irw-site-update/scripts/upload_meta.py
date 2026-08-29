@@ -23,13 +23,12 @@ Usage (run from metadata/, same convention as the other pipeline scripts):
     python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --dry-run  # show plan, upload nothing
     python3 ../.claude/skills/irw-site-update/scripts/upload_meta.py --yes      # skip the confirmation prompt
 
-Credentials: reuses the same write-scoped (data.edit) REDIVIS_API_TOKEN
-already used by data/add2redivis/upload.py, loaded from that script's own
-.env file. This is deliberately a *different* token from ~/.redivis_api_token
-(the read-only one run_pipeline.sh/audit_tables.R use) -- that one lacks
-data.edit scope, confirmed 2026-08-02 (403 insufficient_scope on every table
-in this dataset). An already-exported REDIVIS_API_TOKEN env var wins over
-the .env file, same precedence as add2redivis/upload.py.
+Credentials: the write-scoped (data.edit) REDIVIS_API_TOKEN, resolved by the
+shared helper in src/irw_secrets.py -- normally ~/.config/irw/redivis-write.env,
+with an already-exported env var winning. This is deliberately a *different*
+token from ~/.redivis_api_token (the read-only one run_pipeline.sh/audit_tables.R
+use) -- that one lacks data.edit scope, confirmed 2026-08-02 (403
+insufficient_scope on every table in this dataset).
 """
 import argparse
 import os
@@ -41,6 +40,7 @@ FILE_TABLE_MAP = {
     "metadata": "metadata",
     "biblio": "biblio",
     "tags": "tags",
+    "nominal_tags": "nominal_tags",  # 03_tags.R nom branch, issue #1689; no comp/sim equivalent by design
     "comps_biblio": "comps_biblio",
     "nominal_biblio": "nominal_biblio",
     "simsyn_biblio": "simsyn_biblio",
@@ -50,28 +50,14 @@ FILE_TABLE_MAP = {
     "itemtext_metadata": "itemtext_metadata",  # 08_itemtext.R joined the default order 2026-08-02
 }
 
-ADD2REDIVIS_ENV = Path(__file__).resolve().parents[5] / "data" / "add2redivis" / ".env"
+sys.path.insert(0, str(next(
+    p for p in Path(__file__).resolve().parents
+    if (p / "src" / "irw_secrets.py").is_file()) / "src"))
+from irw_secrets import load_write_token
 
 
 def load_token() -> str:
-    token = os.getenv("REDIVIS_API_TOKEN")
-    if token:
-        return token
-    try:
-        from dotenv import load_dotenv
-    except ImportError:
-        raise SystemExit("Missing dependency: pip install python-dotenv")
-    if not ADD2REDIVIS_ENV.exists():
-        raise SystemExit(
-            f"No REDIVIS_API_TOKEN in env, and {ADD2REDIVIS_ENV} not found.\n"
-            "Either export REDIVIS_API_TOKEN yourself (must have data.edit scope "
-            "for datapages/irw_meta), or point ADD2REDIVIS_ENV at the right .env file."
-        )
-    load_dotenv(dotenv_path=ADD2REDIVIS_ENV)
-    token = os.getenv("REDIVIS_API_TOKEN")
-    if not token:
-        raise SystemExit(f"{ADD2REDIVIS_ENV} exists but has no REDIVIS_API_TOKEN in it.")
-    return token
+    return load_write_token(__file__)
 
 
 def discover_files(dir_path: Path, names: list[str]) -> dict[str, Path]:

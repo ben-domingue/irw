@@ -5,10 +5,12 @@ Notes before use:
 1. Run workflow 1 first (run_pipeline.sh) and review its diff output --
    this script does not regenerate anything, only uploads what's already
    sitting in metadata/.
-2. Credentials: reuses the write-scoped REDIVIS_API_TOKEN already sitting in
-   ../../../../data/add2redivis/.env (same token add2redivis/upload.py uses).
-   That's a different token from ~/.redivis_api_token (read-only, used by
-   run_pipeline.sh/audit_tables.R) -- this script needs data.edit scope.
+2. Credentials: the write-scoped REDIVIS_API_TOKEN, resolved by the shared
+   helper src/irw_secrets.py -- an exported REDIVIS_API_TOKEN wins, otherwise
+   ~/.config/irw/redivis-write.env (chmod 600, outside Dropbox, does not sync
+   between machines). Same token every IRW uploader uses. That's a different
+   token from ~/.redivis_api_token (read-only, used by run_pipeline.sh/
+   audit_tables.R) -- this script needs data.edit scope.
 3. Targets redivis.user("datapages").dataset("irw_meta", version="next") --
    a DRAFT version. Nothing is live until you review and publish it by hand
    on the Redivis site afterward.

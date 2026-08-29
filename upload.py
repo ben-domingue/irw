@@ -2,7 +2,14 @@ import redivis
 import argparse
 import os
 import sys
-from dotenv import load_dotenv
+from pathlib import Path
+
+# The write-scoped Redivis token resolves through one shared helper (repo
+# src/irw_secrets.py) instead of a bare load_dotenv() next to each script.
+sys.path.insert(0, str(next(
+    p for p in Path(__file__).resolve().parents
+    if (p / "src" / "irw_secrets.py").is_file()) / "src"))
+from irw_secrets import load_write_token
 
 # 1. Read the file name or directory name in the arguments
 # 2. Check if the file or directory exists
@@ -135,17 +142,12 @@ def main():
     set_working_directory_to_current()
     file_list = parse_table()
 
-    load_dotenv()
-    TOKEN = os.getenv("REDIVIS_API_TOKEN")
-
-    if not TOKEN:
-        print("Error: REDIVIS_API_TOKEN is not set in the .env file.")
-        sys.exit(1)
+    load_write_token(__file__)
 
     # Authenticate with Redivis
     redivis.authenticate()
 
-    # Set API in terminal as: export REDIVIS_API_TOKEN=your_access_token
+    # Token comes from ~/.config/irw/redivis-write.env; see src/irw_secrets.py.
     dataset = redivis.user("datapages").dataset("item_response_warehouse",version="next")
     file_list, common_items, if_replace = check_if_table_already_exist(dataset, file_list)
     upload_table(dataset, file_list, common_items, if_replace)
