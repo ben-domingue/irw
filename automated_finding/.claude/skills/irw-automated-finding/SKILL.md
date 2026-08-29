@@ -725,6 +725,92 @@ rest topping out at 6, is one left-skewed scale, not two. Waive the check
 through a named, printed exemption rather than either splitting a real
 subscale or silently dropping the assert.
 
+**Observed support is not the permitted response set.** It is a lower bound on
+what the instrument allowed, and the two must never be conflated — an item that
+was never answered at some category tells you nothing about whether that
+category existed. The scale checks are built around that distinction and split
+into three dispositions:
+
+| observed support of an item, vs the modal (plurality) support | check |
+|---|---|
+| identical, or nested inside it (never below its floor) | nothing — *no observed evidence of incompatible coding* |
+| reaches **below** the modal floor while sharing its **ceiling** | `resp_scale_nested_support` — **warn**, ambiguous |
+| **exceeds** the modal ceiling, or drops below the floor **and** stops short of the ceiling | `resp_scale_mixed` (fail) / `item_scale_outlier` (warn) |
+
+Read the first row precisely: **a pass means no observed evidence contradicts a
+common scale; it does not prove that every item has an identical response
+scale.** An item observed 3-5 in a 1-5 table clears because nothing contradicts
+one shared scale — not because one shared scale has been established. Do not
+report it as "scales verified".
+
+A note on the word *nested*, which the table uses twice in different senses.
+In the middle row it names the relationship between two items' **observed
+supports** — one contains the other (`[1,5]` inside `[0,5]`) — not a claim that
+either sits inside the instrument's permitted set, which `run_qc` never sees.
+
+The middle row is the one that needs judgment. Majority items observed 1-5 with
+a minority observed 0-5 fits *both* "one 0-5 scale whose zero went unobserved on
+most items" and "a 0-5 item sitting among 1-5 items" — the data cannot separate
+them, and neither can this check. It says so instead of guessing. `nguyen_2026_mspss`
+is this shape (8 of 12 items stop at 2, 4 reach 1, every ceiling at 7), as are
+the standing `resp_scale_mixed` waivers in `chen_2026_identity_construction.py`
+and `hoai_2026_blended_learning.py` — those two now surface as
+`resp_scale_nested_support` warns rather than fails, so their waivers are likely
+redundant, but neither script was re-run against its deposit when this landed;
+re-check before deleting either.
+
+**To clear a `resp_scale_nested_support`, verify externally and say so in code.** Read
+the deposit's codebook and pass the documented set to `run_qc`:
+
+```python
+checks = run_qc(long, permitted_values={0, 1, 2, 3, 4, 5})   # or a per-item dict
+```
+
+It confirms only when every item has a documented set, all those sets are equal,
+and nothing observed falls outside — a set contradicted by the data, or one that
+differs per item, confirms nothing and the warn stands. That is deliberate:
+per-item sets that disagree *are* two scales.
+
+Two further diagnostics come with `permitted_values=`, so that supplying it can
+never quietly weaken the result:
+
+* **`resp_outside_permitted` (fail)** — a response outside its item's documented
+  set. Raised independently of the range heuristics, so a documented violation
+  is caught even in a table too small for them. The codebook is authoritative:
+  either it is wrong, or the wrong columns were melted.
+* **`permitted_values_unusable` (warn)** — the documentation was supplied but is
+  incomplete or malformed (an item missing from the dict, an empty set, a
+  non-numeric or non-finite value). The table is then treated as undocumented
+  and the ambiguity warn stands. Reported explicitly, so a broken codebook is
+  never mistaken for an absent one.
+
+Values are normalised to float before comparison, so `1`, `1.0`, a numpy scalar
+and `"1"` are the same permitted category, and missing responses are dropped
+before any comparison — `NaN` is never a response category.
+
+**`permitted_values` will not rescue a weighted instrument.** It validates each
+item's observed responses against that item's documented allowed set, and it
+can clear `resp_scale_nested_support` when every item's documented set is the
+*same* set. It does **not**, by itself, clear `resp_scale_mixed`. Hand the
+Barthel Index its correct per-item sets and the result is unchanged — no
+`resp_outside_permitted` (the documentation is genuinely honoured), but
+`resp_scale_mixed` still fails, because incompatible per-item ceilings are
+precisely what that check exists to catch and no observation can separate a
+weighted instrument from a bundled mailing. Heterogeneous or weighted per-item
+coding therefore still needs an explicit named waiver in the script, or an
+instrument-specific validation rule. Supplying documentation is not a
+substitute for either, and a union set like `{0,5,10,15}` is not a workaround —
+it would wrongly permit `15` on a 0/5 item and still not clear the check.
+
+Two cases still need a named waiver. The **ceiling** case above, and a
+**weighted instrument** whose per-item point ceilings genuinely differ — the
+Barthel Index is the reference example (Bathing/Grooming 0/5, six items 0/5/10,
+Transfers/Mobility 0/5/10/15). That is one instrument and one file per
+`datastandard.md`, but its ceilings are incompatible rather than nested, so it
+lands on the fail arm, and from observed values alone it is indistinguishable
+from a mailing that bundled two scales — precisely what the check exists to
+catch. Do not weaken the check for it — declare the exemption.
+
 **Demographics deposited as regression dummies are recoverable.** Take the
 index of whichever indicator is 1, and the omitted index where none is -- the
 omitted index *is* the reference category. That turns "skip, dummy expansion"

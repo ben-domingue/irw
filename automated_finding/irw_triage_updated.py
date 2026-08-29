@@ -499,11 +499,82 @@ class Check:
     detail: str
 
 
+def _as_value_set(raw, where):
+    """Coerce one caller-supplied permitted-value collection to floats.
+
+    Returns (frozenset, None) or (None, reason). Normalising to float is what
+    lets 1, 1.0, numpy scalars and Decimals compare equal against responses
+    read back off disk. Anything non-numeric, non-finite or empty is a
+    rejection with a reason, never a silent near-miss.
+    """
+    if raw is None:
+        return None, f"{where}: no permitted values given"
+    if isinstance(raw, (str, bytes)):
+        return None, f"{where}: expected a collection of numbers, got a string"
+    try:
+        vals = list(raw)
+    except TypeError:
+        return None, (f"{where}: expected a collection of numbers, got "
+                      f"{type(raw).__name__}")
+    if not vals:
+        return None, f"{where}: permitted-value set is empty"
+    out = set()
+    for v in vals:
+        try:
+            f = float(v)
+        except (TypeError, ValueError):
+            return None, f"{where}: {v!r} is not a number"
+        if f != f or f in (float("inf"), float("-inf")):
+            return None, f"{where}: {v!r} is not a finite value"
+        out.add(f)
+    return frozenset(out), None
+
+
+def _normalize_permitted(df: pd.DataFrame, permitted_values):
+    """Caller-supplied codebook -> ({item: frozenset(float)}, None) or (None, reason).
+
+    `permitted_values` is the codebook talking, not the data. Accepts either
+    one collection shared by every item, or a dict keyed by item label. The
+    documentation must be complete and well formed to be used at all: an item
+    absent from the dict, a non-numeric value, or an empty set rejects the
+    whole thing with a reason, so a broken codebook can never be mistaken for
+    an absent one.
+    """
+    if permitted_values is None:
+        return None, None
+    items = list(pd.unique(df["item"]))
+    if not items:
+        return None, "permitted_values: table has no items"
+    if isinstance(permitted_values, dict):
+        missing = [i for i in items if i not in permitted_values]
+        if missing:
+            return None, ("documentation is incomplete -- no permitted values "
+                          f"for {[str(m) for m in missing[:4]]}"
+                          f"{' and others' if len(missing) > 4 else ''}")
+        per_item = {}
+        for i in items:
+            s, why = _as_value_set(permitted_values[i], f"item {str(i)!r}")
+            if s is None:
+                return None, why
+            per_item[i] = s
+        return per_item, None
+    shared, why = _as_value_set(permitted_values, "permitted_values")
+    if shared is None:
+        return None, why
+    return {i: shared for i in items}, None
+
+
 def run_qc(df: pd.DataFrame, coercion_method: str = "",
-           original_cols: list = None) -> list:
+           original_cols: list = None, permitted_values=None) -> list:
     """QC checks. The first block is ported directly from the IRW's official
     validate_irw.R (statuses: pass=OK, warn=NOTE, fail=ERROR). The second block
-    is extra heuristics we add on top, clearly labelled."""
+    is extra heuristics we add on top, clearly labelled.
+
+    `permitted_values` is optional documented codebook information -- a set of
+    allowed responses shared by every item, or a dict keyed by item label. It
+    is the only thing that can settle `resp_scale_nested_support`, which is otherwise
+    unresolvable from observed values alone. Omitting it never makes a check
+    stricter; it just leaves the ambiguity standing as a warn."""
     checks = []
     original_cols = original_cols or []
 
@@ -675,15 +746,79 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # missing-response count, 94.8% zero -- was the only column in the HPQ
     # outside its 1-5 scale.
     if {"item", "resp"}.issubset(df.columns):
-        rng = df.dropna(subset=["resp"]).groupby("item")["resp"].agg(["min", "max"])
+        # Work off numerically-coerced responses so that "outside the
+        # documented set" and "outside the modal range" are decided in the same
+        # value space. Missing responses are dropped here and are never treated
+        # as a response category, in either comparison. `resp_num` is the same
+        # coercion the resp_numeric check above already computed.
+        observed = df.assign(_resp_num=resp_num).dropna(subset=["_resp_num"])
+
+        # Documented permitted values, if the caller supplied any. These are
+        # evaluated before -- and independently of -- the observed-range
+        # heuristics, so a documented violation is reported even in a table too
+        # small for the modal-range logic below.
+        per_item, why_unusable = _normalize_permitted(df, permitted_values)
+        if why_unusable:
+            checks.append(Check("permitted_values_unusable", "warn",
+                f"permitted_values was supplied but cannot be used: "
+                f"{why_unusable}. This table is therefore treated as "
+                "undocumented -- any resp_scale_nested_support finding still "
+                "stands. Fix the documentation rather than dropping the "
+                "argument."))
+        violations = {}
+        if per_item is not None:
+            for item_name, grp in observed.groupby("item"):
+                bad = sorted(set(grp["_resp_num"]) - per_item[item_name])
+                if bad:
+                    violations[item_name] = bad
+            if violations:
+                shown = list(violations.items())[:3]
+                checks.append(Check("resp_outside_permitted", "fail",
+                    f"{len(violations)} item(s) carry responses outside their "
+                    "documented permitted values: "
+                    + "; ".join(f"{k} has {[f'{v:g}' for v in vals[:4]]}"
+                                for k, vals in shown)
+                    + ". The documented set is authoritative -- either the "
+                      "codebook is wrong, or the wrong columns were melted."))
+        # Documentation settles the nested-support question only when it is
+        # usable, unviolated, and says every item shares one response set.
+        docs_confirm_one_scale = (per_item is not None and not violations
+                                  and len(set(per_item.values())) == 1)
+
+        rng = observed.groupby("item")["_resp_num"].agg(["min", "max"])
         if len(rng) >= 3:
             profile = collections.Counter(zip(rng["min"], rng["max"]))
             (modal, modal_n), = profile.most_common(1)
             off = rng[(rng["min"] != modal[0]) | (rng["max"] != modal[1])]
-            # Only a range that *exceeds* the modal one is evidence of a
-            # different scale; an item nobody answered at the ceiling simply
-            # has a lower observed max.
-            over = off[(off["max"] > modal[1]) | (off["min"] < modal[0])]
+
+            # `modal` is the plurality of *observed* ranges. It is not the
+            # instrument's permitted response set, and the two must not be
+            # conflated -- observed support is a lower bound on what was
+            # permitted, never a statement of it. Three dispositions:
+            #
+            #  * support that EXCEEDS the modal ceiling, or that drops below
+            #    the modal floor while also stopping short of its ceiling (a
+            #    translated scale, 0-4 mixed with 1-5) -> incompatible ranges,
+            #    a real defect. Both were live in the 2026-08-26
+            #    Eugene-Springfield build: `sdv` spanned 1-5, 1-7, 1-8 and 1-9
+            #    at once, and `submiss` -- a missing-response count, 94.8%
+            #    zero -- was the only column in the HPQ outside its 1-5 scale.
+            #
+            #  * support NESTED inside the modal range -> ordinary; an item
+            #    nobody answered at an endpoint just has narrower support.
+            #
+            #  * support that reaches BELOW the modal floor while sharing its
+            #    ceiling -> genuinely ambiguous, and reported as such rather
+            #    than decided here. Majority 1-5 with a minority 0-5 is equally
+            #    consistent with one 0-5 scale whose bottom went unobserved on
+            #    most items, and with a 0-5 item sitting among 1-5 items. The
+            #    data cannot separate them; only the codebook can. Pass
+            #    `permitted_values=` to settle it, otherwise this is a warn for
+            #    a human. (nguyen_2026_mspss is this shape: 8 of 12 items stop
+            #    at 2 while 4 reach 1, so the modal becomes 2-7.)
+            over = off[(off["max"] > modal[1])
+                       | ((off["min"] < modal[0]) & (off["max"] < modal[1]))]
+            nested = off[(off["min"] < modal[0]) & (off["max"] == modal[1])]
             share = len(over) / len(rng)
             if share >= 0.15:
                 other = collections.Counter(zip(over["min"], over["max"]))
@@ -698,6 +833,21 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                     f"{modal[0]}-{modal[1]} scale: {list(over.index)[:4]}. An "
                     "isolated out-of-range column is usually not an item -- "
                     "check for an administrative or count field."))
+            if len(nested) and not docs_confirm_one_scale:
+                lows = sorted({float(v) for v in nested["min"]})
+                checks.append(Check("resp_scale_nested_support", "warn",
+                    f"{len(nested)} item(s) show nested observed support with a "
+                    f"shared ceiling: {[str(i) for i in nested.index[:4]]} reach "
+                    f"down to {[f'{v:g}' for v in lows]} while the table's modal "
+                    f"observed support is {modal[0]:g}-{modal[1]:g} and every "
+                    f"ceiling agrees at {modal[1]:g}. Permitted response sets "
+                    "require external verification -- observed support is a "
+                    "lower bound on what an instrument permitted, so this is "
+                    "equally consistent with one shared scale whose bottom "
+                    "category went unobserved on most items, and with a "
+                    "genuinely wider scale on these items. Resolve it from the "
+                    "codebook and pass permitted_values=; do not resolve it "
+                    "from the data."))
 
     # Composite columns masquerading as items. A summary table melts into a
     # perfectly well-formed id/item/resp frame and passes every structural

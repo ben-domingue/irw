@@ -285,14 +285,54 @@ a processing script, check the dataset's DOI against the
 
 ### Flag values
 
+**What a clean `run_qc` result does and does not mean.** No findings means *no
+observed evidence of incompatible response coding*. It is not a verification
+that the items' permitted response scales are identical — `run_qc` sees
+observations, and observed support is only a lower bound on what an instrument
+permitted. An item observed 3-5 inside an otherwise 1-5 table passes because
+nothing contradicts one shared scale, not because one shared scale has been
+established. In one line: **a pass means no observed evidence contradicts a
+common scale; it does not prove that every item has an identical response
+scale.** A `warn` means the observations fit both ordinary category non-use
+and a genuine coding difference, so documentation or a human is required. A
+`fail` is reserved for a pattern incompatible with the modal scale or with
+documented permitted values.
+
 | Flag | Meaning | Action |
 |---|---|---|
 | `good` | Confident column mapping, no QC errors | Strong candidate — write a processing script (Step 2) |
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
-| `resp_scale_mixed` | Items span more than one response scale (a fail from `run_qc`) | Split into one table per scale before submitting |
+| `resp_scale_mixed` | Items span more than one response scale (a fail from `run_qc`) — observed support that **exceeds** the modal ceiling, or that drops below the modal floor **while also** stopping short of that ceiling (a translated scale, 0-4 mixed with 1-5). Those ranges are incompatible, not merely narrower | Split into one table per scale before submitting. A **weighted** instrument whose per-item point ceilings legitimately differ (e.g. the Barthel Index, 0/5 · 0/5/10 · 0/5/10/15) will still fire and cannot be distinguished from a bundled mailing by observed values alone — waive it by name in the script, with the reason |
+| `resp_scale_nested_support` | Nested observed support with a shared ceiling (a warn from `run_qc`): some items reach below the modal floor while every ceiling agrees. "Nested" describes the *relationship between the items' observed supports* — one contains the other — not that either is nested inside the instrument's permitted set, which `run_qc` cannot see. **Permitted response sets require external verification** — observed support is a lower bound on what an instrument permitted, never a statement of it, so this is equally consistent with one shared scale whose bottom category went unobserved on most items and with a genuinely wider scale on those items | Check the codebook, then pass `permitted_values=` to `run_qc` (one set shared by every item, or a dict keyed by item label) to confirm and clear it. Do not clear it from the data alone |
 | `item_scale_outlier` | One or two items fall outside the table's scale (a warn from `run_qc`) | Usually an administrative or count column swept in as an item — check and drop it |
+| `resp_outside_permitted` | A response falls outside its item's **documented** permitted values (a fail from `run_qc`, only reachable when the caller passes `permitted_values=`) | The documented set is authoritative: either the codebook is wrong, or the wrong columns were melted. Fix one of them — do not drop the argument |
+| `permitted_values_unusable` | `permitted_values=` was supplied but could not be used (a warn from `run_qc`): an item absent from the dict, an empty set, a non-numeric or non-finite value | The table is treated as undocumented and any `resp_scale_nested_support` finding stands. Reported explicitly so a broken codebook never looks like an absent one — fix the documentation |
+
+**What `permitted_values` does and does not do.** It validates whether each
+item's observed responses fall inside that item's documented allowed set. It
+can clear `resp_scale_nested_support`, but only when all three of these hold:
+
+1. **the documentation is usable** — every item in the table has a documented
+   set, and every value in it is numeric and finite (a non-numeric label, a
+   non-finite value, an empty set, or an item missing from the dict all raise
+   `permitted_values_unusable` instead);
+2. **every item's observed responses are a subset of that item's documented
+   set** — nothing observed falls outside it, for any item (a violation raises
+   `resp_outside_permitted`, and the ambiguity finding stands);
+3. **every item's documented set is the *same* set** — per-item sets that
+   disagree are two response scales, not one, so they never confirm.
+
+It does **not**, by itself, clear `resp_scale_mixed`. An instrument with genuinely heterogeneous or weighted
+per-item coding (the Barthel Index: Bathing/Grooming 0/5, six items 0/5/10,
+Transfers/Mobility 0/5/10/15) will still fail that check even when you supply
+its correct per-item sets, because incompatible ceilings are exactly the
+pattern `resp_scale_mixed` exists to catch and observed values cannot
+distinguish a weighted instrument from a bundled mailing. Such instruments
+still need an explicit named waiver in the processing script, or an
+instrument-specific validation rule — supplying documentation is not a
+substitute for either.
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
 | `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
