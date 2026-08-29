@@ -13137,3 +13137,91 @@ Two costs, both real:
   post-decompression size; `.RData`/`.Rds` deserve a lower byte cap than the
   200MB download limit. Until then, large-file triage needs the per-row
   subprocess + `ulimit -v` pattern used here.
+
+## 2026-08-29 -- Zenodo backlog leads worked: 24 tables / 689,621 responses
+
+First pass through the 110 leads of the backlog sweep, largest first.
+`biblio_zenodo_backlog_2026-08-29.csv` (24 rows) is prepared. Lint: 24 tables,
+0 errors, 0 warnings.
+
+| table | resp | ids | items |
+|---|---|---|---|
+| `lapietra_2026_volcanic_risk_perception` | 163,575 | 10,905 | 15 |
+| `osorio_2023_dos` | 107,622 | 5,303 | 21 |
+| `hernandezmantilla_2024_cmni` | 73,713 | 782 | 97 |
+| `hernandezmantilla_2024_cfni` | 65,688 | 782 | 84 |
+| `silva_2022_crsy` | 57,008 | 3,563 | 16 |
+| `ye_2025_xc` | 35,200 | 1,408 | 25 |
+| `ye_2025_mm` | 28,160 | 1,408 | 20 |
+| `ye_2025_jl` | 18,304 | 1,408 | 13 |
+| `baekgaard_2023_mastery` | 17,295 | 2,483 | 7 |
+| `ye_2025_tq` | 16,896 | 1,408 | 12 |
+| `skarzauskiene_2026_big_five` | 13,704 | 998 | 14 |
+| 13 smaller `baekgaard_2023_*` / `skarzauskiene_2026_*` tables | 92,456 | | |
+
+### Coding decisions
+
+- **`lapietra_2026`: the person key is (`sample`, `record`).** `record`
+  restarts within each of the three samples and repeats 512 times across the
+  file, so keying on it alone would have merged 512 pairs of distinct
+  respondents. That is exactly the 1.04 density triage flagged.
+- **`baekgaard_2023`: the item-to-subscale mapping was recovered from the
+  data.** The .sav has no variable labels and no codebook, but ships six
+  `*_add` composites; each turns out to be the arithmetic MEAN (not the sum)
+  of a contiguous item block, exact on every complete case. A first attempt
+  assuming sums found nothing. The script re-verifies the identity at run
+  time. The 15 items belonging to no composite are left unshipped.
+- **`osorio_2023_dos`: `pais` indexes a 240-entry ISO country list**, so the
+  six observed codes are mapped through the file's own value labels; reading
+  them as 1..6 would have mislabelled every country.
+- **`silva_2022_crsy`: all 16 administered items ship, not just the 12 the
+  published scale kept**, with `itemcov_retained` marking which survived.
+  Items are numbered by their ORIGINAL questionnaire position parsed from the
+  labels, because the columns were renumbered after deletion (`Res_6` is item
+  7, `Res_10` is item 14). `Number`, labelled "Number of the participants",
+  holds 284 distinct values over 3,563 rows and is not a person key.
+- **`hernandezmantilla_2024` is a duplicate deposit.** zenodo.12608500 and
+  zenodo.13997042 share 209 columns identical row for row; the earlier differs
+  only by a stray SPSS `filter_$`. Counted once. CMNI items 21/35/46 ship as
+  separate `Hombre_`/`Mujer_` items -- they are opposite-direction wordings
+  ("I control the women in my life" vs "my life is controlled by men") answered
+  by different numbers of people (75 vs 775), which merging would hide.
+- **`ye_2025_*` block names are the deposit's own codes, deliberately.** Every
+  item column is unlabelled with no codebook. The pinyin initials and item
+  counts line up suggestively with the paper's four constructs (MM/20@1-5 with
+  the Clance IP Scale, TQ/12@1-5 with the SCS Short Form) but that is inference,
+  not evidence, so the codes are kept verbatim -- same call as
+  `wu_2024_achievement_emotions`. Safe to rename once confirmed.
+- **`skarzauskiene_2026` blocks come from the deposit's own data dictionary**,
+  formed by (variable group, IDENTICAL response-option set) at 4+ items;
+  several groups mix formats, and 9 is a "don't know" sentinel, not a level.
+
+### Rejected, with reasons
+
+- **`zenodo.18023199` -- the sweep's headline lead (2,776,192 responses) is
+  NOT ITEM RESPONSE DATA.** `Database v2.xls` is a firm-year accounting panel:
+  60,352 rows of company x year, columns `TOTAL ASSETS`, `NET INCOME AVAILABLE
+  TO COMMON`, `MARKET VALUE`, plus World Bank country indicators. The "35,572
+  participants" were company names and the 1.70 density was the same company
+  recurring across years. This removes a third of the sweep's headline total
+  and is a caution about trusting `n_responses` before opening the file.
+- **`zenodo.10069489` (Ryff psychometrics): PII.** `Nombredeusuario` holds
+  3,130 distinct real personal email addresses (99.6% contain "@"). Whole
+  candidate skipped. **Worth telling the depositors** -- this is live PII in a
+  public CC BY record.
+- **`zenodo.18704709` (499,958 responses): PII.** `IPAddress_1` (470 distinct
+  IPs) plus `LocationLatitude_1`/`LocationLongitude_1`.
+- **`zenodo.16310936` (590,403 responses): IMPUTED VALUES.** Structurally
+  ideal -- a labelled two-wave battery of DASS-21, CYRM, DERS, LOT-R, GQ-6, SHS
+  and slider blocks, 951 respondents, no PII -- but the responses are partially
+  imputed: `DASS_1_1` is on a 0-3 scale yet only 75% integer-valued (e.g.
+  1.9541), and `CYRM_1_1` is 35% integer with 460 distinct values over 951
+  rows. An imputed value landing on an integer is indistinguishable from an
+  observed one, so the observed subset cannot be filtered back out. Worth an
+  email asking for the pre-imputation file.
+- **`zenodo.6875363` (621,000 responses): deferred, needs a human call.** The
+  Lazarus/White 23-country vaccine survey (Nature Medicine 2023) is real
+  23,000-respondent data, but it is a 30-question general attitude survey, not
+  an instrument: `q0001`..`q0025` mix 5-, 4-, 3- and 7-point formats, the
+  description is empty and no codebook ships. Grouping the items into scales
+  would be invention.

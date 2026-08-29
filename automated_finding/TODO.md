@@ -25,15 +25,31 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   ~800 new deposits and 15 leads; the real numbers were 5.6x and 7.3x that.
   See `BATCH_LOG.md` for the full table and the two size-term costs.
 
-- [ ] **110 leads / 8.36M responses from the backlog sweep, none worked.**
-  By far the largest lead pool the pipeline has produced, in
-  `runs/triage_zenodo_backlog_2026-08-28.csv` +
-  `runs/retriage_zenodo_backlog_2026-08-28.csv` (12 good, 95 worth_retrying,
-  3 recoverable_format). Top: 2,776,192 responses (35,572 x 46, religiosity /
-  financial reporting), 621,000 (COVID vaccine hesitancy), 590,403
-  (extended process model of emotion regulation), 499,958 (age-related
-  differences in emotion regulation). 264 human_review rows filed to
-  `human_review/human_review_zenodo_backlog_2026-08-28.csv`.
+- [x] **24 tables / 689,621 responses staged from the backlog leads**
+  (2026-08-29), 7 deposits, all CC BY 4.0, all creates not replaces.
+  `biblio_zenodo_backlog_2026-08-29.csv` (24 rows) prepared; lint clean
+  (0 errors, 0 warnings). Awaiting ben-domingue's check + upload.
+  See `BATCH_LOG.md` for per-deposit coding decisions.
+
+- [ ] **~100 of the 110 backlog leads still unworked.** Worked so far: the
+  largest 7 shippable deposits. The remaining tail is in
+  `runs/leadwork_2026-08-29.csv` (rank-ordered by response count, with a
+  `status` column) alongside `runs/triage_zenodo_backlog_2026-08-28.csv` and
+  `runs/retriage_zenodo_backlog_2026-08-28.csv`.
+
+- [ ] **The sweep's headline total was inflated by a third.** The top lead
+  (2,776,192 responses) turned out to be a firm-year accounting panel, not
+  item response data, and three of the next four largest were rejected for PII
+  or imputed values. Realistic remaining yield is well under the 8.36M
+  figure -- `n_responses` from triage counts columns, not instruments, so
+  leads should be opened before being counted.
+
+- [ ] **Two emails worth sending.** (a) `zenodo.10069489` publishes 3,130 real
+  personal email addresses in a public CC BY deposit -- the depositors should
+  be told regardless of whether IRW ever uses it. (b) `zenodo.16310936` has an
+  excellent two-wave instrument battery that is unusable only because the
+  posted values are partially imputed; the raw file would be worth ~590k
+  responses.
 
 - [ ] **`load_table` has no in-memory size guard, and the size term now feeds
   it big files.** A 79.7MB `.RData` SIGKILLed the triage run at row 345/441:

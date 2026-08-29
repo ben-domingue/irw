@@ -33,6 +33,22 @@ VALID = {1, 2, 3, 4, 5}
 DK = 9          # "Don't know / did not answer" / "N/A"
 MIN_ITEMS = 4
 
+# The dictionary's "Variable Description" strings make serviceable but verbose
+# covariate names ("cov_respondent_s_gender"). Map the ones the IRW corpus
+# already has a settled spelling for onto that spelling.
+CANONICAL = {
+    "cov_respondent_s_gender": "cov_gender",
+    "cov_respondent_s_age_banded": "cov_age",
+    "cov_education_level": "cov_education",
+    "cov_population_size_of_area_of_residence": "cov_area_population_size",
+    "cov_district_of_residence": "cov_district",
+    "cov_current_employment_main_occupation": "cov_occupation",
+    "cov_sector_of_employment": "cov_employment_sector",
+    "cov_average_household_income_per_month_banded": "cov_household_income",
+    "cov_monthly_income_per_household_member_banded":
+        "cov_income_per_household_member",
+}
+
 SLUG = {
     "Science Engagement & Interest": "science_engagement",
     "Trust in Science & Institutions": "trust_science",
@@ -82,6 +98,7 @@ def main(data_path=None, dict_path=None):
             continue
         name = "cov_" + re.sub(r"[^a-z0-9]+", "_",
                                str(row["Variable Description"]).lower()).strip("_")
+        name = CANONICAL.get(name, name)
         opts = parse_options(row["opts"])
         cov[name] = d[col].map(opts) if opts else d[col]
     covdf = pd.DataFrame(cov)
