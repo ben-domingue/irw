@@ -20,7 +20,7 @@ torok_2025_news_source_trust            8 items, 1-5
 torok_2025_social_media_effects         4 items, 1-5
 torok_2025_facebook_uses                4 items, 1-5
 torok_2025_data_disclosure              8 items, 1-2
-torok_2025_legality_knowledge           8 items, 1-2
+torok_2025_legality_beliefs             8 items, 1-2
 torok_2025_data_security               12 items, 1-4
 torok_2025_ai_acceptance                4 items, 1-3
 torok_2025_discourse_responsibility     6 items, 1-5
@@ -41,6 +41,15 @@ Coding notes
   choices between two unranked statements, "a) ... b) ..."), and the many
   single-question items (`E1`-`E7`, `I1`, `I4`, ...), which would each be a
   one-item table.
+* `torok_2025_legality_beliefs` is beliefs, not scored knowledge, and is named
+  so deliberately: the stem is "Ön szerint jogszerű-e vagy nem?" ("in your
+  opinion, is this lawful or not?"), no answer key is shipped, and the battery
+  is not keyable without one -- M16_4 (using Bitcoin) and M16_5 (transferring
+  money outside the EU) describe lawful acts while M16_1/2/7/8 describe
+  copyright infringement, so a correctness key would reverse two of the eight.
+  As shipped the latent trait is permissiveness in judging online acts. M16_4
+  also draws 420 "don't know" responses against 80-127 elsewhere in the
+  battery, which is why it ships 583 responses against a median of 907.
 * Response counts vary across tables because the internet-behaviour batteries
   were only asked of internet users (`E3`), so N per table is reported at
   write time rather than assumed to be 1,003.
@@ -82,7 +91,7 @@ BATTERIES = [
     ("M5", "social_media_effects", 4, 5),
     ("M8", "facebook_uses", 4, 5),
     ("M14", "data_disclosure", 8, 2),
-    ("M16", "legality_knowledge", 8, 2),
+    ("M16", "legality_beliefs", 8, 2),
     ("M15", "data_security", 12, 4),
     ("M17", "ai_acceptance", 4, 3),
     ("M18", "discourse_responsibility", 6, 5),

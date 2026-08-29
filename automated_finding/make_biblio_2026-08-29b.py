@@ -97,7 +97,7 @@ BLURB = {
  "torok_2025_social_media_effects": (f"Agreement with 4 statements about the effects of online contact on relationships, 1-5 scale, {S_TOR}", TOR),
  "torok_2025_facebook_uses": (f"Agreement with 4 statements about what Facebook is good for, 1-5 scale, {S_TOR}", TOR),
  "torok_2025_data_disclosure": (f"Willingness to disclose each of 8 kinds of personal data in exchange for a free service, yes/no, {S_TOR}", TOR),
- "torok_2025_legality_knowledge": (f"Judgements of whether each of 8 online acts is lawful, yes/no, {S_TOR}", TOR),
+ "torok_2025_legality_beliefs": (f"Beliefs about whether each of 8 online acts is lawful, yes/no, {S_TOR}; the stem asks for the respondent's own opinion and no answer key is shipped -- the battery mixes four copyright-infringement acts with two that are lawful (using Bitcoin, transferring money outside the EU), so scoring for correctness would reverse two of the eight items", TOR),
  "torok_2025_data_security": (f"How secure personal data is felt to be with each of 12 named institutions and platforms, 1-4 scale, {S_TOR}", TOR),
  "torok_2025_ai_acceptance": (f"Acceptance of artificial intelligence in 4 named domains, 1-3 scale, {S_TOR}", TOR),
  "torok_2025_discourse_responsibility": (f"How far each of 6 named actors should be responsible for improving the quality of online discourse, 1-5 scale, {S_TOR}", TOR),

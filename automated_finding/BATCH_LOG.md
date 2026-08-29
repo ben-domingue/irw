@@ -13438,6 +13438,20 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   `authorname_year_construct`. Third instance of this class in the backlog
   (with `zenodo.20475015` and `10.7910/DVN/YCXDBI`).
 
+**Naming corrected before upload: `torok_2025_legality_knowledge` ->
+`torok_2025_legality_beliefs`.** The stem is "Ön szerint jogszerű-e vagy nem?"
+("in your opinion, is this lawful or not?"), no answer key is shipped, and the
+battery is not keyable without one: M16_4 (using Bitcoin) and M16_5
+(transferring money outside the EU) describe lawful acts, while M16_1/2/7/8
+describe copyright infringement, so a correctness key would reverse two of the
+eight items. As shipped the latent trait is permissiveness in judging online
+acts, not legal knowledge. Related: M16_4 draws 420 "don't know" responses
+against 80-127 across the rest of the battery -- a real hole in public
+understanding of Bitcoin's legal status in 2019, and the reason that item ships
+583 responses against a battery median of 907. Caught by inspecting the value
+labels rather than by any gate; `run_qc` and the item text gates both pass a
+mis-named table without complaint.
+
 ### Item text pipeline, exercised end to end inside a discovery batch
 
 20 `__items.csv` written in the same pass as their response tables, gated
