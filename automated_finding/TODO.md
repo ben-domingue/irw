@@ -5,24 +5,25 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-08-29 batch
 
-- [ ] **44 tables / 281,705 responses + 20 item text tables need uploading**
-  (staged 2026-08-29). `irw_output/` holds 44 CSVs from four CC BY 4.0 Zenodo
-  deposits -- `soderberg_2024_*` (8), `estevez_2021_*` (8), `chen_2024_*` (16),
-  `torok_2025_*` (12) -- with `biblio_2026-08-29b.csv` (44 rows, quoted CSV for
-  File > Import > Append) ready for the dictionary. `itemtext_output/` holds 20
-  `__items.csv` (8 Soderberg + 12 Torok), all gated PASS against the staged
-  response CSVs. Response tables go to `item_response_warehouse_4` first, item
-  text to `irw_text:07b6` after. Stamp `uploaded` in
-  `itemtext_provenance.csv` once confirmed. **No `itemtext_issues.qmd` entry is
-  needed for any of the 20** -- checked per-item, not just at table level: no
-  observed response lacks an option row, no blank or duplicated item_text.
-  Nothing to edit in the datapages/irw repo for this batch.
+- [x] **44 tables / 281,705 responses uploaded, biblio imported, and 21 item
+  text tables uploaded** (confirmed 2026-08-29, ben-domingue). The four CC BY
+  4.0 Zenodo deposits -- `soderberg_2024_*` (8), `estevez_2021_*` (8),
+  `chen_2024_*` (16), `torok_2025_*` (12) -- are in
+  `item_response_warehouse_4`, the 44 `biblio_2026-08-29b.csv` rows are in the
+  dictionary, and the 20 new `__items.csv` plus the previously orphaned
+  `altman_2020_capq` are in `irw_text:07b6`. All 21 rows of
+  `itemtext_provenance.csv` are stamped `uploaded=2026-08-29`. `irw_output/`,
+  `itemtext_output/` and the biblio CSV are off disk as expected. No
+  `itemtext_issues.qmd` entry was needed for any of the 20 -- checked per-item,
+  not just at table level: no observed response lacks an option row, no blank
+  or duplicated item_text.
 
-- [ ] **`altman_2020_capq__items.csv` is orphaned in `itemtext_output/`.** Its
-  response table shipped and `irw_output/` was cleared, so the file has no
-  response CSV to gate against and its `uploaded` column is still blank -- it
-  ERRORs every `audit_batch.R --resp-dir` run until it goes up. Either upload
-  it to `irw_text:07b6` with this batch's item text, or say it is not going.
+- [x] **`altman_2020_capq__items.csv` orphan cleared** (2026-08-29). It went up
+  with this batch's item text and is stamped in `itemtext_provenance.csv`.
+  The lesson stands for next time: an `__items.csv` left in `itemtext_output/`
+  after its response table ships has no CSV to gate against and ERRORs every
+  `audit_batch.R --resp-dir` run until it is uploaded -- ship item text in the
+  same pass as its response table, or it strands.
 
 - [ ] **Non-Latin-script re-run is in flight.** 955 terms, all default repo
   sources, chunked into `runs/candidates_nonlatin_NN_2026-08-29.csv`
