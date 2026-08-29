@@ -18,16 +18,36 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   IRW (creates, not replaces). The 15 `irw_output/` CSVs are off disk as
   expected, and the `biblio_zenodo_2026-08-28.csv` rows are in the dictionary.
 
-- [ ] **THE BIG ONE: ~2,458 prior repo-mode terms have never had working
-  Zenodo coverage.** A 140-term sample returned 1,342 candidates of which
-  **801 were new** -- absent from both the ledger and the 6,048-candidate
-  2026-08-27 sweep -- yielding 276 open-licensed keeps and 15 shippable leads.
-  Zenodo was dark, not thin. The full sweep is ~9 hours unattended and
-  one-time; future runs inherit the fix automatically. Agreed with
-  ben-domingue on 2026-08-28 to fire this "later in the afternoon".
-  Command shape:
-  `python3 irw_discover_updated.py <terms> --sources zenodo --out runs/<name>.csv`
-  then prefilter -> rank -> triage as in `BATCH_LOG.md`'s 2026-08-28 entry.
+- [x] **THE BIG ONE: full Zenodo backlog sweep -- DONE** (2026-08-28/29).
+  2,458 terms, zenodo only, 4h44m, exit 0. 6,081 candidates -> 4,485
+  genuinely new -> 1,563 open-licensed keeps -> 451 tier A+B triaged ->
+  **110 shippable leads, 8,356,581 responses**. The 140-term sample projected
+  ~800 new deposits and 15 leads; the real numbers were 5.6x and 7.3x that.
+  See `BATCH_LOG.md` for the full table and the two size-term costs.
+
+- [ ] **110 leads / 8.36M responses from the backlog sweep, none worked.**
+  By far the largest lead pool the pipeline has produced, in
+  `runs/triage_zenodo_backlog_2026-08-28.csv` +
+  `runs/retriage_zenodo_backlog_2026-08-28.csv` (12 good, 95 worth_retrying,
+  3 recoverable_format). Top: 2,776,192 responses (35,572 x 46, religiosity /
+  financial reporting), 621,000 (COVID vaccine hesitancy), 590,403
+  (extended process model of emotion regulation), 499,958 (age-related
+  differences in emotion regulation). 264 human_review rows filed to
+  `human_review/human_review_zenodo_backlog_2026-08-28.csv`.
+
+- [ ] **`load_table` has no in-memory size guard, and the size term now feeds
+  it big files.** A 79.7MB `.RData` SIGKILLed the triage run at row 345/441:
+  `MAX_FILE_BYTES` caps the download at 200MB, but pyreadr expands RData many
+  times over. Worked around with per-row subprocesses under `ulimit -v`
+  (all 10 large deposits then passed), not fixed. A lower byte cap for
+  `.RData`/`.Rds` specifically, or a post-load memory check, would remove the
+  need for that dance.
+
+- [ ] **98 prefilter `resolve_error:FileListUnreachable` rows worth a retry.**
+  Transient failures from the backlog sweep, deliberately excluded from the
+  keeps rather than retired, in
+  `runs/prefilter_zenodo_backlog_2026-08-28.csv`. Plus 8 `download_failed`
+  triage rows kept out of the seen-keys ledger for the same reason.
 
 - [ ] **10 of the 18 Zenodo leads still unworked** (~52k responses). The tail:
   item text used as column headers, several header-offset files, one allergy

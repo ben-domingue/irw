@@ -13061,3 +13061,79 @@ off disk as expected.
 
 **Still open from this pool: 10 of the 18 leads** (~52k responses), plus the
 PISA re-publication held pending a dictionary/#1342 check.
+
+## 2026-08-28/29 -- THE BIG ONE: full Zenodo backlog sweep
+
+The one-time sweep of every prior repo-mode term that had never had working
+Zenodo coverage. 2,458 terms (the 2,598-term prior repo-mode pool minus the
+140 already sampled), `--sources zenodo` only, 4h44m unattended, exit 0.
+
+| step | result |
+|---|---|
+| discovery (2,458 terms, zenodo only) | 6,081 candidates, **every one with a URL** |
+| minus 183 already in `repo_triage_seen_keys.csv` | |
+| minus 1,413 already seen in prior sweeps | |
+| genuinely new deposits | **4,485** |
+| prefilter (tabular + open licence) | **1,563 keeps (35%)** |
+| ranking | 133 tier A, 318 B, 744 C, 368 D |
+| triage of the 451 A+B | 380 human_assistance, 25 below_min_n, 18 not_item_response, 12 good, 8 download_failed, 7 pii_suspected, 1 error |
+| Step 2b retriage | 95 worth_retrying, 264 human_review, 10 aggregate_continuous, 8 not_item_response, 3 recoverable_format |
+
+**110 shippable leads, 8,356,581 responses.** The 140-term sample projected
+~800 new deposits and 15 leads; the full sweep returned 4,485 new deposits
+(5.6x) and 110 leads. Zenodo was very dark indeed. Top leads:
+
+| resp | p x i | deposit |
+|---|---|---|
+| 2,776,192 | 35,572 x 46 | Influence of Religiosity on Financial Reporting |
+| 621,000 | 23,000 x 27 | COVID-19 Vaccine Hesitancy, pandemic's third year |
+| 590,403 | 782 x 621 | Extended Process Model of emotion regulation |
+| 499,958 | 1,484 x 294 | Age-Related Differences in Emotion Regulation |
+| 399,964 | 10,393 x 37 | Volcanic risk perception |
+| 313,655 | 8,260 x 38 | 10-day experience sampling, subjective experience |
+| 186,970 | 29,700 x 6 | Moral Foundations or Ethical Capture? |
+| 180,948 | 2,645 x 74 | Anticipated administrative burden |
+
+264 human_review rows -> `human_review/human_review_zenodo_backlog_2026-08-28.csv`.
+
+### The size term earned its keep, and cost something too
+
+This was the first batch ranked by `rank_leads.py` with the new size signal.
+Against the old scorer it moved **307 rows up and 5 down, including 46 lifted
+from tier B into tier A** -- the `tu_2022` failure mode caught 46 times in one
+batch. The single largest lead of the whole sweep (2.78M responses, a 78MB
+`Database v2.xls`) is one of those large deposits; the old scorer would have
+left it in the tier-B tail exactly as it did with `tu_2022`.
+
+Two costs, both real:
+
+- **It promotes big non-instrument deposits.** A 196MB Fitbit/fatigue dataset
+  and a 132MB ENCODE RNA-seq deposit both reached tier B. `T_NEG` blocks
+  "sequencing" but not "RNA-seq". Triage rejects them cheaply, so this is
+  noise rather than a defect.
+- **It promotes exactly the deposits that OOM triage.** The first triage run
+  was SIGKILLed (exit 137) at row 345/441 on a 79.7MB `.RData`
+  (`replication_data_20220910.RData`, "Homophily in Voting Behavior").
+  `MAX_FILE_BYTES` caps the *download* at 200MB, but pyreadr expands RData
+  many times over in memory and 14GB free was not enough. Nothing was lost --
+  344 verdicts were in the checkpoint -- but a plain `--resume` would have
+  walked back into the same row and died in a loop.
+
+  Worked around, not fixed: the remaining 107 ran as two passes, the 97 rows
+  under 40MB in one process, then the 10 large deposits **one process each
+  under an 8GB `ulimit -v`**, so an oversized expansion raises a catchable
+  MemoryError or dies alone. All 10 exited 0. Keeping them mattered -- the
+  2.78M-response top lead came out of that pass.
+
+### Still open from this sweep
+
+- **110 leads, 8.36M responses, none worked.** By far the largest lead pool
+  the pipeline has produced.
+- **98 prefilter `resolve_error:FileListUnreachable`** rows, deliberately not
+  in the keeps and not retired -- transient, worth a retry pass.
+- **8 `download_failed`** rows, left out of `repo_triage_seen_keys.csv` so a
+  later run retries them.
+- **The in-memory guard is not written.** `load_table` still has no ceiling on
+  post-decompression size; `.RData`/`.Rds` deserve a lower byte cap than the
+  200MB download limit. Until then, large-file triage needs the per-row
+  subprocess + `ulimit -v` pattern used here.
