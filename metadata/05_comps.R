@@ -2,6 +2,13 @@
 
 
 ##tables from last version of metadata
+##Write plain integers, never scientific notation. With R's default scipen=0,
+##write.csv() emits whichever representation is shorter, so the largest tables
+##get published at TWO significant digits (e.g. n_responses=4.5e+07 for a real
+##44,986,496). Same fix, same reason, as 01_metadata.R -- it was applied there
+##after the 2026-08-24 audit but never propagated to this script, which only
+##started to matter once large tables landed in this source.
+options(scipen=999)
 library(redivis)
 source("redivis_config.R")
 user <- redivis$user(IRW_OWNER)

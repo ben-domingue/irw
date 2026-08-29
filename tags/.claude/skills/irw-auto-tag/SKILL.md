@@ -12,7 +12,12 @@ from inside `tags/`.
 Two sheets matter here and they are not interchangeable:
 
 - **"IRW Tags"** (`1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g`, gid
-  `126134123`) — the sheet this skill fills in.
+  `126134123`) — the sheet this skill fills in. **Core tables only.** Nominal
+  tables have their own sheet, "IRW Tags Nominal"
+  (`1v3toO6OPts_HIjcjHTOb9_v2Ne2oXZSTkGTeO6fUyrg`, gid `126134123`), same 13
+  columns, staged via `tags/nominal_tags_staging.csv`; `comp` and `sim` have no
+  tags by design. Check which source a table belongs to before staging a row —
+  see `Rpkg/inst/developer/tags.md`.
 - **"IRW Data Dictionary"** (`1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s`,
   gid `0`) — the *only* place to look up a table's paper/citation info. If a
   table isn't there, or has no usable info there, **do not search the open

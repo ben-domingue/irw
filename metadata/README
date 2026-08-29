@@ -18,7 +18,9 @@ Manual run order, if not using the skill:
 
 1. 01_metadata.R: makes metadata.csv [numbers computed from raw core tables such as # of unique `id`s]
 2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source]
-3. 03_tags.R: makes tags.csv [pulls together hand-annotated tags]
+3. 03_tags.R: makes tags.csv and nominal_tags.csv [pulls together hand-annotated tags,
+   one Google Sheet per source. comp/sim deliberately have no tags --
+   see Rpkg/inst/developer/tags.md]
 5. 05_comps.R: makes comps_metadata.csv [same idea as 01_metadata.R, for the irw_competitions source]
 6. 06_nominal.R: makes nominal_metadata.csv [same idea as 01_metadata.R, for the irw_nominal source]
 7. 07_simsyn.R: makes simsyn_metadata.csv [same idea as 01_metadata.R, for the irw_simsyn source]

@@ -6,7 +6,7 @@
 #
 # Default order (2026-08-02):
 #   01 (metadata.csv) -> 02 (biblio.csv + comps/nominal/simsyn biblio, one
-#   script) -> 03 (tags.csv) -> 05 (comps_metadata.csv) -> 06
+#   script) -> 03 (tags.csv + nominal_tags.csv) -> 05 (comps_metadata.csv) -> 06
 #   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 08
 #   (itemtext_metadata.csv) -> 09 (hero_stats.json, must run LAST since it
 #   reads metadata.csv written by 01)
@@ -78,7 +78,7 @@ declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
   [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv"
-  [03]="tags.csv"
+  [03]="tags.csv nominal_tags.csv"
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
   [07]="simsyn_metadata.csv"

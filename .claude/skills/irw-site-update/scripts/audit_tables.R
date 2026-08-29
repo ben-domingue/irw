@@ -83,7 +83,9 @@ metadata_csvs <- c(core = "metadata.csv", comp = "comps_metadata.csv",
                     nom  = "nominal_metadata.csv", sim  = "simsyn_metadata.csv")
 biblio_csvs   <- c(core = "biblio.csv", comp = "comps_biblio.csv",
                     nom  = "nominal_biblio.csv", sim  = "simsyn_biblio.csv")
-tags_csv_path <- "tags.csv"  # single flat sheet; no per-source equivalent for comp/nom/sim
+## Per-source tag CSVs. core and nom have one each (03_tags.R); comp and sim
+## deliberately have none -- see Rpkg/inst/developer/tags.md.
+tags_csvs <- c(core = "tags.csv", nom = "nominal_tags.csv")
 
 ## Same four dictionary sheets 02_biblio.R already reads per source.
 dict_urls <- c(
@@ -129,13 +131,13 @@ message("Fetching dictionary sheets ...")
 dict  <- setNames(lapply(sources, get_dict), sources)
 meta  <- setNames(lapply(sources, function(s) read_table_col(metadata_csvs[[s]])), sources)
 bib   <- setNames(lapply(sources, function(s) read_table_col(biblio_csvs[[s]])), sources)
-tags  <- read_table_col(tags_csv_path)
+tags  <- lapply(tags_csvs, read_table_col)
 
 ## ---- build one presence matrix per source ---------------------------------
 build_matrix <- function(src) {
   cols <- list(redivis = live[[src]], metadata_csv = meta[[src]], biblio_csv = bib[[src]])
   if (!is.null(dict[[src]])) cols$dictionary_sheet <- dict[[src]]
-  if (src == "core") cols$tags_csv <- tags
+  if (src %in% names(tags_csvs) && !is.null(tags[[src]])) cols$tags_csv <- tags[[src]]
 
   all_tables <- unique(unlist(cols))
   if (length(all_tables) == 0) return(NULL)
