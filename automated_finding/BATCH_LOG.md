@@ -13337,3 +13337,126 @@ Remaining from those bullets and unchanged by this: `sumner_2022_*` (positional
 labels, needs the published FTD-SS), and the `lee_2020_*` / `gao_2022_*` /
 `forrest_2021_*` clusters, all of which now have a supported path via
 `--resp-dir` once someone regenerates their response CSVs.
+
+## 2026-08-29b -- non-Latin-script re-run launched; Zenodo backlog leads worked (44 tables)
+
+### Discovery: the 955 non-Latin-script terms, re-run under the fixed relevance filter
+
+`runs/run_nonlatin_2026-08-29.sh` (background) re-runs every non-Latin-script
+term ever logged -- 955 distinct terms pulled out of `search_terms_log.csv` --
+against all default repo sources. These were all originally run under the
+English-only title gate that discarded non-English-titled hits before triage
+(fixed 2026-08-25), so the pool has never actually been searched. The run is
+chunked 120 terms at a time into `runs/candidates_nonlatin_NN_2026-08-29.csv`
+so partial results survive an interruption; log in
+`runs/discover_nonlatin_2026-08-29.log`. Pace at 45 terms: ~18s/term, ~209
+candidates, i.e. **~4.6 candidates/term against 2.5/term on the Zenodo backlog
+sweep** -- the surface is at least as productive as the sweep that produced 110
+leads. Full run ~4.7 hours.
+
+The 45-term pilot the TODO queued (`runs/candidates_nonlatin_pilot_2026-08-25.csv`,
+246 candidates) turned out not to be sizeable as designed: its terms were never
+written to `search_terms_log.csv` and the output carries no query column, so
+per-term recovery could not be computed against the originals. Superseded by
+the full run rather than reconstructed.
+
+One thing to watch in the log: `api.figshare.com/v2/articles/search` is
+returning `422 Unprocessable Entity` for some queries -- possibly the
+non-Latin payload, possibly the known figshare throttling. Not yet diagnosed.
+
+### Lead work: 4 deposits from `runs/leadwork_2026-08-29.csv`, 44 tables, 281,705 responses
+
+Worked top-down through the unworked tail (102 of the 110 backlog leads had no
+`data/*.py` script). All four shipped deposits are CC BY 4.0 and new to IRW.
+
+- **`zenodo.13332148` -- Soderberg & Molsa (2024), 10-day experience sampling
+  of Finnish school students. 8 tables / 72,538 responses.** One .sav at one
+  row per momentary assessment: the start-up survey repeats down every row of
+  a person (verified constant within `ID4`, max 1 distinct value across all 32
+  start-up variables) and is de-duplicated to 300 students for five tables;
+  the ESM blocks keep all 8,260 occasions with the deposit's own
+  `Time = (Day-1)*8+(Session+2)` as `wave`, which is a real key --
+  `(ID4, Time)` has 0 duplicates. Dropped as single-item constructs:
+  `SchoolEnj` and `SchoolAbs` (carried as covariates instead), `PeerRel_all`,
+  and `SchooldaySatisfaction` (1-10, a different format).
+  `SessionInstanceResponseLapse`/`SessionLength` are whole-session timings and
+  are not `rt`. **Item text shipped for all 8** from the .sav's variable and
+  value labels.
+
+- **`zenodo.5156068` -- Estevez et al. (2021), Spanish primary-school homework
+  motivation. 8 tables / 70,766 responses.** No variable labels at all, so the
+  blocks are split on column prefixes and named for them. Two findings worth
+  keeping: (a) `ALUMNO` is not a usable id -- 863 rows, 862 distinct values,
+  and the two rows sharing `ALUMNO=4` differ on age and nearly every response,
+  so they are two students with a collided code; `id` is row position instead.
+  (b) The deposit's four composites decode four subscales of the 43-item IAM
+  block exactly, found by ranking items on their correlation with each
+  composite and testing the top-d subset rather than enumerating C(43,5):
+  perceived competence = mean(IAM1..IAM4), anxiety = mean(IAM9_recod, IAM10,
+  IAM11), intrinsic motivation = mean(IAM35..IAM39_recod), negative feelings =
+  mean(IAM40, IAM42, IAM43). Recorded in the script header for a later item
+  text pass. Item text not shipped -- no labels, no codebook.
+
+- **`zenodo.13855427` -- Chen (2024), Chinese fitness coaches. 16 tables /
+  57,095 responses.** Sixteen prefix blocks, deliberately not renamed: `TS` is
+  confirmed thrill seeking by its one stray variable label and JE/DS/SC/TS read
+  as four of the Five-Dimensional Curiosity Scale's subscales, but the fifth is
+  absent and the other eleven prefixes decode to nothing in the deposit. **The
+  scale is 1-7 even though almost every item tops out at 6** -- the sixteen
+  block-mean columns the deposit also ships each have a maximum of exactly 7.0,
+  which is only reachable if the items run to 7. Asserted in the script before
+  those columns are dropped, so no table was split on an observed maximum.
+
+- **`zenodo.15168213` -- Torok et al. (2025), "Trust, Awareness, and Risk
+  Perception in the Online Environment", n=1,003 Hungarian CATI survey.
+  12 tables / 81,306 responses, and the batch's best item text.** Every column
+  carries a full Hungarian variable label and every battery a full value-label
+  set, so twelve item batteries came out with their shared stem as
+  `instructions`, the per-item wording as `item_text`, and every anchor as
+  `option_text`. 99 / -1 / -2 are the survey's declared no-answer sentinels and
+  are dropped from both the responses and the option rows. Not shipped, all
+  non-ordinal: `E4` and `M10` (check-all, each column constant at its own
+  option index), `M6` (forced choice between two unranked statements), and the
+  single-question items.
+
+### Rejected this pass
+
+- **`zenodo.15710961` (rank 7, 186,970 responses) -- not item response data.**
+  V-Dem/WGI country-year indicators plus a regression script; the deposit's
+  author field is also literally "Anon, Anon".
+- **`zenodo.17947681` (rank 20, Pan 2025, self-compassion and suicidal ideation,
+  905 Chinese college students) -- PII, skipped whole.** The export carries
+  `来自IP` with 894 distinct real IP addresses annotated to city level
+  ("183.136.250.208(浙江-温州)") alongside second-precision submission times.
+  Blanket PII rule. **Worth noting as a pattern**: this is a Wenjuanxing (问卷星)
+  raw export, and that platform includes the IP column by default -- the same
+  standing risk raw Google Forms exports carry, and equally invisible to a
+  `good` flag. `screen_for_pii()` should learn the column name.
+- **`zenodo.19912968` (rank 19, 75,189 responses) -- deferred on identity.**
+  Clean-looking two-wave narcissism/status-motivation battery, but the creator
+  field is "Anonymous, Anonymous", so there is no surname for
+  `authorname_year_construct`. Third instance of this class in the backlog
+  (with `zenodo.20475015` and `10.7910/DVN/YCXDBI`).
+
+### Item text pipeline, exercised end to end inside a discovery batch
+
+20 `__items.csv` written in the same pass as their response tables, gated
+against the staged CSVs (not live Redivis) via `--resp-csv`/`--resp-dir`:
+`normalize_nulls.R` normalised 20 of 20, `validate_items.R` PASSed item and
+resp sets for all 20, and `audit_batch.R` finished 19 PASS / 1 WARN. The single
+WARN is real and explained: `torok_2025_legality_knowledge`'s `M16_4` ("Is it
+lawful to use Bitcoin?") has 583 responses against a battery median of 907 --
+respondents answered "don't know" far more often on that one question.
+
+Two mechanical lessons, both cheap to keep:
+
+- **`audit_batch.R --resp-dir` fails any table in the directory whose response
+  CSV is gone.** `itemtext_output/altman_2020_capq__items.csv` has been sitting
+  there since its response table shipped and `irw_output/` was cleared, so it
+  ERRORs every batch audit from now until it is uploaded. Audit a copy of the
+  directory with the orphan removed, and get the orphan uploaded.
+- **A `data/*.py` script that writes to a bare `"irw_output"` puts it in
+  whatever directory you ran from.** The first run of the Soderberg script was
+  launched from `src/` and created `src/irw_output/` and `src/itemtext_output/`.
+  The three scripts written today resolve both paths relative to `__file__`
+  instead; worth copying.

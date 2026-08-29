@@ -3,6 +3,44 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-08-29 batch
+
+- [ ] **44 tables / 281,705 responses + 20 item text tables need uploading**
+  (staged 2026-08-29). `irw_output/` holds 44 CSVs from four CC BY 4.0 Zenodo
+  deposits -- `soderberg_2024_*` (8), `estevez_2021_*` (8), `chen_2024_*` (16),
+  `torok_2025_*` (12) -- with `biblio_2026-08-29b.csv` (44 rows, quoted CSV for
+  File > Import > Append) ready for the dictionary. `itemtext_output/` holds 20
+  `__items.csv` (8 Soderberg + 12 Torok), all gated PASS against the staged
+  response CSVs. Response tables go to `item_response_warehouse_4` first, item
+  text to `irw_text:07b6` after. Stamp `uploaded` in
+  `itemtext_provenance.csv` once confirmed.
+
+- [ ] **`altman_2020_capq__items.csv` is orphaned in `itemtext_output/`.** Its
+  response table shipped and `irw_output/` was cleared, so the file has no
+  response CSV to gate against and its `uploaded` column is still blank -- it
+  ERRORs every `audit_batch.R --resp-dir` run until it goes up. Either upload
+  it to `irw_text:07b6` with this batch's item text, or say it is not going.
+
+- [ ] **Non-Latin-script re-run is in flight.** 955 terms, all default repo
+  sources, chunked into `runs/candidates_nonlatin_NN_2026-08-29.csv`
+  (~4.7h, log at `runs/discover_nonlatin_2026-08-29.log`). When it finishes:
+  concatenate the chunks, prefilter with `prefilter_candidates.py`, rank with
+  `rank_leads.py`, triage tier A+B. Early rate is ~4.6 candidates/term against
+  2.5/term on the Zenodo backlog sweep. **The terms were never logged**, so
+  append all 955 to `search_terms_log.csv` with the run's output file when it
+  completes. Note the Spanish/German/French/Dutch terms hit the same
+  English-only gate and are a further pool on top of these 955.
+
+- [ ] **`api.figshare.com/v2/articles/search` returns 422 on some queries**
+  in the non-Latin run. Distinct from the known 403-under-concurrency issue
+  below; may be the non-Latin payload. Not diagnosed.
+
+- [ ] **Teach `screen_for_pii()` the Wenjuanxing column names.** Raw 问卷星
+  exports carry `来自IP` (IP address annotated to city) and `提交答卷时间`
+  by default, exactly the way raw Google Forms exports carry a name column.
+  `zenodo.17947681` triaged clean and was caught only by eye. The existing
+  `name|email|phone|address|birth` pattern is ASCII-only.
+
 ## From the 2026-08-28 Zenodo re-run
 
 - [x] **Zenodo connector fix validated end to end** (2026-08-28). The fix in
@@ -38,11 +76,16 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   "don't know" sentinel dropped. See `BATCH_LOG.md` for per-deposit coding
   decisions.
 
-- [ ] **~100 of the 110 backlog leads still unworked.** Worked so far: the
-  largest 7 shippable deposits. The remaining tail is in
-  `runs/leadwork_2026-08-29.csv` (rank-ordered by response count, with a
-  `status` column) alongside `runs/triage_zenodo_backlog_2026-08-28.csv` and
-  `runs/retriage_zenodo_backlog_2026-08-28.csv`.
+- [ ] **~95 of the 110 backlog leads still unworked.** Worked so far: the
+  largest 7 shippable deposits, plus 4 more on 2026-08-29 (Soderberg, Estevez,
+  Chen, Torok -- 44 tables / 281,705 responses) and 3 rejected the same day
+  (`zenodo.15710961` not item data, `zenodo.17947681` PII, `zenodo.19912968`
+  anonymous author). The remaining tail is in `runs/leadwork_2026-08-29.csv`
+  (rank-ordered by response count) alongside
+  `runs/triage_zenodo_backlog_2026-08-28.csv` and
+  `runs/retriage_zenodo_backlog_2026-08-28.csv`. Next unworked by size:
+  `zenodo.17109143` (Mehrotra, rural India gender-discrimination lab games --
+  check whether it is trials or an instrument), then the long 20k-50k tail.
 
 - [ ] **The sweep's headline total was inflated by a third.** The top lead
   (2,776,192 responses) turned out to be a firm-year accounting panel, not
