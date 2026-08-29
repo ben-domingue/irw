@@ -1,0 +1,37 @@
+table,verdict,n_categories,n_unique,range_resp,pct_noninteger,resp_class,item_format,construct_name
+estcrm_selfeff,CONFLICT - scout flagged disagreeing signals,161,161,10.25,0.941693811074919,unbounded,Slider/continuous,Teaching self-efficacy scale
+lsbq_maleki_2025_persian_comprehension,CONFLICT - scout flagged disagreeing signals,59,59,74.2,0.275181723779855,unbounded,Slider/continuous,Persian Comperehension
+DEMOS,REVIEW - many categories but shape not a clean VAS,2876,2876,1121.863,0.97728978978979,unbounded,NA,NA
+det_naismith_2023,REVIEW - many categories but shape not a clean VAS,1152,1152,9.37801248251486,0.333333333333333,unclear,Constructed Response,Certified DET for Independent Writing
+realpic_souza2021,REVIEW - many categories but shape not a clean VAS,968,968,5.4375,0.962128475551294,unclear,Likert Scale/selected response,RealPic: Picture Norms of Common Real-World Items
+yu2025,REVIEW - many categories but shape not a clean VAS,572,572,199.9,0.379619443425824,unclear,Mixed,Perceptual response variability in size estimation and reproduction
+vollbracht_et_al_2026_ambulatory_assessment,REVIEW - many categories but shape not a clean VAS,151,151,150,0,unbounded,Mixed,Psychometric properties in ambulatory assessment
+chile_2023_social-welfare-survey_yy,REVIEW - many categories but shape not a clean VAS,149,149,13999999,0,unbounded,Mixed,CASEN Income
+chile_2023_social-welfare-survey_u,REVIEW - many categories but shape not a clean VAS,134,134,1440,0,unbounded,Mixed,CASEN Use of Time
+estcrm_epia,REVIEW - many categories but shape not a clean VAS,111,111,110,0,unclear,Likert Scale/selected response,Eysenck Personality Inventory – Impulsivity Subscale
+wine_luckett2021,REVIEW - many categories but shape not a clean VAS,100,100,100,0,unclear,Mixed,Discrimination of Complex Odor Mixtures: A Study Using Wine Aroma Models
+ehealth_rioux_2025_triplep,REVIEW - many categories but shape not a clean VAS,93,93,100,0,unclear,Slider/continuous,Positive Parenting Program
+ehealth_rioux_2025_beam,REVIEW - many categories but shape not a clean VAS,93,93,100,0,unclear,Slider/continuous,Building Emotional Awareness and Mental Health
+ehealth_rioux_2025_abiliti,REVIEW - many categories but shape not a clean VAS,91,91,100,0,unclear,Slider/continuous,Questions on AbilitiCBT
+deception_professors,REVIEW - many categories but shape not a clean VAS,83,83,100,0,unclear,Mixed,The Importance of Being Honest
+deception_game,REVIEW - many categories but shape not a clean VAS,79,79,100,0,unclear,Likert Scale/selected response,Feelings of Deception After Economic Game Participation
+simsalRbim_Mice_LargeValence,REVIEW - many categories but shape not a clean VAS,78,78,87,0,unbounded,NA,NA
+simsalRbim_Monkey_LargeValence,REVIEW - many categories but shape not a clean VAS,77,77,500,0,unbounded,NA,NA
+mclaughlin_samuel_2025_auditory_session_2,REVIEW - many categories but shape not a clean VAS,76,76,100,0.00559174497031187,unclear,Constructed Response,Assessing Sandwich Builder as a measure of auditory short-term memory and Auditory speech perception test (speech transcription accuracy)
+chile_2023_children-adolescents-survey_cp_c,REVIEW - many categories but shape not a clean VAS,71,71,89.5,0.0266664324844761,unbounded,Mixed,Cuidador Principal
+eammi_grahe_2018_marriage_identity_allocation,REVIEW - many categories but shape not a clean VAS,69,69,100,0,bounded,Likert Scale/selected response,Marital Central Identity
+gilbert_meta_95,REVIEW - many categories but shape not a clean VAS,63,63,10,0.0942028985507246,bounded,Likert Scale/selected response,Key Features Questions (KFQ)
+uti_newlands_2023_wpai,WEAK - fewer than 60 categories; may be a long Likert or a count,53,53,72,0.0102827763496144,unbounded,Mixed,Work Productivity & Activity Impairment
+florida_twins_par,WEAK - fewer than 60 categories; may be a long Likert or a count,39,39,25,0.00492309672437094,unbounded,Likert Scale/selected response,My parents Scale
+simsalRbim_Mice_LowValence,WEAK - fewer than 60 categories; may be a long Likert or a count,33,33,35,0,unclear,NA,NA
+chile_2023_social-welfare-survey_rr,WEAK - fewer than 60 categories; may be a long Likert or a count,32,32,130,0,unbounded,Mixed,CASEN Social Relationships
+contreras_valdez_2022_edeq,WEAK - fewer than 60 categories; may be a long Likert or a count,31,31,50,0,unbounded,NA,NA
+immer12_immer,WEAK - fewer than 60 categories; may be a long Likert or a count,29,29,29,0,unclear,Likert Scale/selected response,Ratings of 2002 olympics pairs figure skating
+opladen2025_edeq,WEAK - fewer than 60 categories; may be a long Likert or a count,28,28,112,0,unbounded,NA,NA
+identity_fusion_gomez_2025,WEAK - fewer than 60 categories; may be a long Likert or a count,27,27,6,0.000448510943667025,unclear,Mixed,"Identity Fusion, Perceived Self-verification and Willingness to fight and die"
+chile_2023_social-welfare-survey_ss,WEAK - fewer than 60 categories; may be a long Likert or a count,22,22,30,0,unbounded,Mixed,CASEN Health
+thomeczek2025_les,WEAK - fewer than 60 categories; may be a long Likert or a count,20,20,19,0,unclear,Slider/continuous,Party Positions
+double_marking_steele_2022,WEAK - fewer than 60 categories; may be a long Likert or a count,18,18,100,0,bounded,Likert Scale/selected response,The Value of Double Marking in Dissertation Assessment
+mclaughlin_samuel_2025_auditory_session_1,WEAK - fewer than 60 categories; may be a long Likert or a count,18,18,8.5,0.394422310756972,unclear,Slider/continuous,Assessing Sandwich Builder as a measure of auditory short-term memory
+eammi_grahe_2018_marriage_timing,WEAK - fewer than 60 categories; may be a long Likert or a count,15,15,16,0,unclear,Likert Scale/selected response,Ideal Marital Timing
+piterova-slovak-science-related-populism,WEAK - fewer than 60 categories; may be a long Likert or a count,12,12,98,0,unbounded,NA,NA

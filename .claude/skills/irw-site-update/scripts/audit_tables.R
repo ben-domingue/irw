@@ -86,6 +86,11 @@ biblio_csvs   <- c(core = "biblio.csv", comp = "comps_biblio.csv",
 ## Per-source tag CSVs. core and nom have one each (03_tags.R); comp and sim
 ## deliberately have none -- see Rpkg/inst/developer/tags.md.
 tags_csvs <- c(core = "tags.csv", nom = "nominal_tags.csv")
+## Collections (issue #1633) exist for core only. Long format, so `table`
+## repeats -- read_table_col() uniques it, which is what the presence matrix
+## wants. Included so a collection pointing at a table that no longer exists
+## shows up here rather than only failing at fetch time.
+collection_csvs <- c(core = "collection_members.csv")
 
 ## Same four dictionary sheets 02_biblio.R already reads per source.
 dict_urls <- c(
@@ -132,12 +137,14 @@ dict  <- setNames(lapply(sources, get_dict), sources)
 meta  <- setNames(lapply(sources, function(s) read_table_col(metadata_csvs[[s]])), sources)
 bib   <- setNames(lapply(sources, function(s) read_table_col(biblio_csvs[[s]])), sources)
 tags  <- lapply(tags_csvs, read_table_col)
+colls <- lapply(collection_csvs, read_table_col)
 
 ## ---- build one presence matrix per source ---------------------------------
 build_matrix <- function(src) {
   cols <- list(redivis = live[[src]], metadata_csv = meta[[src]], biblio_csv = bib[[src]])
   if (!is.null(dict[[src]])) cols$dictionary_sheet <- dict[[src]]
   if (src %in% names(tags_csvs) && !is.null(tags[[src]])) cols$tags_csv <- tags[[src]]
+  if (src %in% names(collection_csvs) && !is.null(colls[[src]])) cols$collection_members_csv <- colls[[src]]
 
   all_tables <- unique(unlist(cols))
   if (length(all_tables) == 0) return(NULL)

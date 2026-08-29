@@ -1,0 +1,20 @@
+table,basis,note
+ai_fear_dong_2026_ai,curated:scout,n_categories=101 range=100 pct_noninteger=0 item_format=Slider/continuous
+ai_fear_dong_2026_other_fear,curated:scout,n_categories=101 range=100 pct_noninteger=0 item_format=Slider/continuous
+ai_fear_dong_2026_own_fear,curated:scout,n_categories=101 range=100 pct_noninteger=0 item_format=Slider/continuous
+ai_fear_dong_2026_requirement,curated:scout,n_categories=101 range=100 pct_noninteger=0 item_format=Slider/continuous
+climatechange_geiger_2025,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Mixed' but that is a tagging error, not a data fact"
+cognitive_load_klimova_2023_know,curated:scout,n_categories=81 range=999 pct_noninteger=0 item_format=Constructed Response
+emoji_scheffler_2024,curated:scout,n_categories=101 range=100 pct_noninteger=0 item_format=Slider/continuous
+figure_skating,curated:scout,n_categories=1103 range=20.33 pct_noninteger=0.95 item_format=Constructed Response
+klippel_irw,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Slider/continuous' but that is a tagging error, not a data fact"
+lsbq_maleki_2025_non_persian_proficiency,curated:scout,n_categories=89 range=10 pct_noninteger=0.408 item_format=Slider/continuous
+much_tte_2025_currentmotivation,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact"
+nas_rogoza_2024_study5_nas,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact"
+nas_rogoza_2024_study5_ngs,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact"
+nas_rogoza_2024_study5_nvs,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact"
+opentsstvr_linnig_2025_vas,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact; construct name states VAS (visual analogue scale)"
+tears,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Likert Scale/selected response' but that is a tagging error, not a data fact"
+test_taking_much_2025_cm,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'Mixed' but that is a tagging error, not a data fact"
+westhoff2023_pbat,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'NA' but that is a tagging error, not a data fact; BATCH_LOG.md records this ingestion as a 0-100 continuous slider"
+westhoff2023_stopd,curated:bd,"0-100 integer VAS shape (n_categories=101, range=100, all integer); item_format tag says 'NA' but that is a tagging error, not a data fact; BATCH_LOG.md records this ingestion as a 0-100 continuous slider"

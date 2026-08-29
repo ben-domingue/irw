@@ -1,6 +1,6 @@
 ---
 name: irw-site-update
-description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_5 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
+description: Use this skill when asked to regenerate or refresh the IRW dictionary, metadata, tags, or biblio CSVs that feed the Redivis "irw_meta:bdxt" dataset (metadata.csv, biblio.csv, tags.csv, comps_metadata.csv, nominal_metadata.csv, simsyn_metadata.csv, comps/nominal/simsyn biblio.csv, itemtext_metadata.csv, collections.csv, collection_members.csv, hero_stats.json), to audit/reconcile table names across the metadata/tags/biblio tables and the live Redivis IRW datasets, or to actually upload those regenerated CSVs into the Redivis irw_meta tables. Also applies to phrases like "run the metadata pipeline", "update Redivis metadata", "check for table name mismatches", "add item_response_warehouse_5 to metadata", "which tables are missing from the dictionary/tags/biblio", or "upload biblio/tags/metadata to Redivis".
 ---
 
 # IRW Site/Metadata Update
@@ -22,9 +22,20 @@ script-by-script writeup this was built from:
 
 - Core pipeline order: `01_metadata.R` → `02_biblio.R` → `03_tags.R` →
   `05_comps.R` → `06_nominal.R` → `07_simsyn.R` → `08_itemtext.R` →
-  `09_hero_status.R` (must run **last**, it reads `metadata.csv` written by
-  01). `05`/`06` were fixed and `08` was added to the default order
-  2026-08-02 — see `TODO.md` for history if any of the three regress.
+  `10_collections.R` → `09_hero_status.R` (must run **last**, it reads
+  `metadata.csv` written by 01). `05`/`06` were fixed and `08` was added to the
+  default order 2026-08-02 — see `TODO.md` for history if any of the three
+  regress. **Numeric order is not run order**: `10` runs before `09`, and `04`
+  is excluded entirely.
+- **Collections (issue #1633, added 2026-08-29):** `10_collections.R` builds
+  `collections.csv` + `collection_members.csv` from the version-controlled
+  registry at `src/collections/registry.csv`. Alone among the stages it needs
+  **no credentials and no Redivis access**, so it is fully reviewable offline.
+  Adding a collection is a *data* change — one line in `registry.csv`,
+  optionally one file in `src/collections/curated/` — and requires no edit to
+  this skill, the R/Python packages, or the site. See
+  `src/collections/README` for the rule grammar. Do not add per-collection
+  branches anywhere.
 - **Item text split of responsibility (confirmed with Ben, 2026-08-02): this
   skill produces metadata FOR item text that's already been procured; the
   separate `irw-auto-itemtext` skill (`itemtext/.claude/skills/irw-auto-itemtext/`)
@@ -83,6 +94,7 @@ scripts/run_pipeline.sh                 # full default sequence: 01 02 03 05 06 
 scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 scripts/run_pipeline.sh 08              # just the itemtext metadata stage
+scripts/run_pipeline.sh 10              # just the collections tables (no credentials needed)
 ```
 
 What it does, per stage:
@@ -205,7 +217,9 @@ What it does: for each known local CSV present (`metadata.csv` → table
 `comps_metadata.csv`/`nominal_metadata.csv`/`simsyn_metadata.csv` →
 `comps_metadata`/`nominal_metadata`/`simsyn_metadata`, `nominal_tags.csv` →
 `nominal_tags`, `itemtext_metadata.csv`
-→ `itemtext_metadata`), it fully replaces that table's data on
+→ `itemtext_metadata`, `collections.csv` → `collections`,
+`collection_members.csv` → `collection_members`), it fully replaces that
+table's data on
 `redivis.user("datapages").dataset("irw_meta", version="next")` — a **draft**
 version. `hero_stats.json` is deliberately not in this list; it isn't a
 Redivis table, it goes to the separate `irw_site` repo.

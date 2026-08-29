@@ -26,12 +26,18 @@ LONG_TEXT_FLAG = 2000
 
 
 def load(path: Path, key: str) -> pd.DataFrame:
+    # `key` may name several columns, comma-separated, for tables whose identity
+    # needs more than one -- collection_members.csv is long, so `table` alone
+    # repeats and would be silently de-duplicated into a meaningless diff.
+    cols = key_cols(key)
     if path is None or not path.exists():
-        return pd.DataFrame(columns=[key])
+        return pd.DataFrame(columns=cols)
     df = pd.read_csv(path, dtype=str, keep_default_na=False)
-    if key not in df.columns:
-        raise SystemExit(f"key column '{key}' not found in {path} (columns: {list(df.columns)})")
-    df["_key"] = df[key].astype(str).str.strip().str.lower()
+    missing = [c for c in cols if c not in df.columns]
+    if missing:
+        raise SystemExit(f"key column(s) {missing} not found in {path} (columns: {list(df.columns)})")
+    df["_key"] = (df[cols].astype(str)
+                  .apply(lambda r: "\u001f".join(v.strip().lower() for v in r), axis=1))
     n_before = len(df)
     dup_keys = df.loc[df["_key"].duplicated(), "_key"].unique().tolist()
     if dup_keys:
@@ -40,6 +46,25 @@ def load(path: Path, key: str) -> pd.DataFrame:
               f"(source CSV had >1 row for the same '{key}', e.g. {dup_keys[:5]}) "
               f"-- check the upstream source (Google Sheet fetches have been flaky today)")
     return df.set_index("_key", drop=True)
+
+
+def key_cols(key: str) -> list[str]:
+    return [c.strip() for c in key.split(",") if c.strip()]
+
+
+def label(df: pd.DataFrame, k, key: str) -> str:
+    """Human-readable identity for one row. With a composite key the key itself
+    is not a column, so join the parts the way a reader would say them."""
+    cols = key_cols(key)
+    row = df.loc[k]
+    return " / ".join(str(row[c]) for c in cols)
+
+
+def label_many(df: pd.DataFrame, keys, key: str) -> list[str]:
+    cols = key_cols(key)
+    if len(cols) == 1:
+        return df.loc[keys, cols[0]].tolist()
+    return df.loc[keys, cols].apply(lambda r: " / ".join(str(v) for v in r), axis=1).tolist()
 
 
 def classify_long_text(value: str) -> str | None:
@@ -55,7 +80,9 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("old_csv", type=Path, help="pre-run snapshot (may not exist for a brand-new file)")
     ap.add_argument("new_csv", type=Path, help="freshly written CSV from the R pipeline")
-    ap.add_argument("--key", default="table", help="join key column (default: table)")
+    ap.add_argument("--key", default="table",
+                    help="join key column, or several comma-separated for a composite "
+                         "key (default: table)")
     ap.add_argument("--out", type=Path, default=None, help="diff CSV path (default: <new_csv>.diff.csv)")
     args = ap.parse_args()
 
@@ -74,16 +101,16 @@ def main():
     flags = []
 
     for k in added_keys:
-        rows.append({"table": new.loc[k, args.key], "status": "added", "column": "", "old_value": "", "new_value": ""})
+        rows.append({"table": label(new, k, args.key), "status": "added", "column": "", "old_value": "", "new_value": ""})
         for col in new.columns:
             if col in ("_key",):
                 continue
             flag = classify_long_text(new.loc[k, col])
             if flag:
-                flags.append((new.loc[k, args.key], col, flag))
+                flags.append((label(new, k, args.key), col, flag))
 
     for k in removed_keys:
-        rows.append({"table": old.loc[k, args.key], "status": "removed", "column": "", "old_value": "", "new_value": ""})
+        rows.append({"table": label(old, k, args.key), "status": "removed", "column": "", "old_value": "", "new_value": ""})
 
     changed_keys = []
     shared_cols = [c for c in new.columns if c in old.columns and c != "_key"]
@@ -94,12 +121,12 @@ def main():
             changed_keys.append(k)
             for col in changed_cols:
                 rows.append({
-                    "table": row_new[args.key], "status": "changed", "column": col,
+                    "table": label(new, k, args.key), "status": "changed", "column": col,
                     "old_value": row_old[col], "new_value": row_new[col],
                 })
                 flag = classify_long_text(row_new[col])
                 if flag:
-                    flags.append((row_new[args.key], col, flag))
+                    flags.append((label(new, k, args.key), col, flag))
 
     diff_df = pd.DataFrame(rows, columns=["table", "status", "column", "old_value", "new_value"])
     out_path = args.out or args.new_csv.with_suffix(".diff.csv")
@@ -110,11 +137,11 @@ def main():
     print(f"   removed: {len(removed_keys)}")
     print(f"   changed: {len(changed_keys)}")
     if len(added_keys):
-        sample = ", ".join(sorted(new.loc[added_keys, args.key].tolist())[:10])
+        sample = ", ".join(sorted(label_many(new, added_keys, args.key))[:10])
         more = f" (+{len(added_keys)-10} more)" if len(added_keys) > 10 else ""
         print(f"     + {sample}{more}")
     if len(removed_keys):
-        sample = ", ".join(sorted(old.loc[removed_keys, args.key].tolist())[:10])
+        sample = ", ".join(sorted(label_many(old, removed_keys, args.key))[:10])
         more = f" (+{len(removed_keys)-10} more)" if len(removed_keys) > 10 else ""
         print(f"     - {sample}{more}")
     if flags:
