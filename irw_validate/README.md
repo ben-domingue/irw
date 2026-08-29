@@ -40,22 +40,76 @@ decision, and it exists because the checks were written for *triage* — is a
 machine's guess at a conversion worth a human's time — and are now also asked to
 gate *publication*, which has a different cost of being wrong.
 
-`resp_scale_mixed` is the worked example. It is `fail` today, and
-`data/cao_2026_cdss.py` documents a table that trips it legitimately: an unused
-top category on a left-skewed 1–7 scale reads as a second scale. Had every
-heuristic become a blocking error, the gate would have rejected that correct
-table on day one.
+Response-scale checks illustrate the distinction. An unused top category can
+make items on one scale have different observed ranges. Upload already capped
+that heuristic at `warn`, but callers of `run_qc()` still received a raw `fail`.
+The shared checks now emit `warn` for observed range differences in either
+direction; a response-scale `fail` requires explicit documentation, as below.
 
 | profile | used by | contents |
 |---|---|---|
 | `core` | `validate_irw.R` parity, external contributors | the five R checks only |
-| `triage` | `run_qc`'s 50 callers | core + heuristics, **exactly today's severities** |
+| `triage` | callers of `run_qc` | core + heuristics; raw `fail` becomes `error`, raw `warn` stays `warn` |
 | `upload` | the gate, the CLI, CI (default) | core + heuristics + the standard's prose rules; heuristics capped at `warn` except `GATE_ERRORS` |
 | `legacy` | the 922 `.Rdata` sweep (1.5, not built) | `upload` minus rules that postdate the tables |
 
-`GATE_ERRORS` is currently exactly `{resp_variation*}` — a `resp` with one
-distinct value carries no information for any model, at any altitude. It grows
-one documented case at a time.
+`GATE_ERRORS` contains `resp_variation*`, `resp_outside_permitted` and
+`resp_scale_mixed`. The latter two block only when the shared check emits a
+documentation-backed `fail`; the same `resp_scale_mixed` name can also carry a
+width-only `warn`, which remains nonblocking unless strict mode is selected.
+
+## Response-scale evidence
+
+`run_qc()` accepts optional `permitted_values` and `item_constructs` arguments.
+`validate_frame()` and `validate_file()` accept the same information through
+`context`. These are Python API inputs; there are no corresponding CLI flags or
+automatic codebook extraction.
+
+`permitted_values` is either one collection of allowed numeric responses shared
+by all items, or a mapping from item identifiers to their allowed collections.
+Use the source's documented categories, never categories inferred from the
+observed responses. `item_constructs` maps each item identifier to an explicit,
+documented construct name. Prefixes and disjoint respondent sets are not
+construct evidence.
+
+Item keys must match the original identifiers exactly. Permitted categories
+must be finite numeric values (numeric strings are accepted). Integer codes
+retain exact precision; fractional categories are compared at the response's
+floating-point storage precision, without an approximate matching tolerance.
+
+```python
+from irw_validate import validate_frame, validate_file
+
+# Illustrative codebook for one construct assessed in two item formats.
+context = {
+    "permitted_values": {
+        "mc_1": {0, 1}, "mc_2": {0, 1}, "cr_1": {0, 1, 2, 3},
+    },
+    "item_constructs": {
+        "mc_1": "reasoning", "mc_2": "reasoning", "cr_1": "reasoning",
+    },
+}
+report = validate_frame(df, label="reasoning", context=context)
+file_report = validate_file("out/reasoning.csv", context=context)
+# With run_qc imported by a conversion script: run_qc(df, **context)
+```
+
+| Evidence | Raw check result | Meaning |
+|---|---|---|
+| At least three observed items have different min/max ranges, all forming a chain of nested intervals | `resp_scale_nested_support`: `warn` | Unequal observed coverage; this does not establish different scales |
+| At least three observed items have crossing ranges | `resp_scale_mixed`: `warn` when at least 15% differ from the modal min/max pair; otherwise `item_scale_outlier`: `warn` | Inspect the source and distributions; neither direction nor the majority range makes this a failure |
+| Complete usable permitted values, with every observed response allowed | No width-only finding | Unequal documented sets are legitimate, including weighted Barthel items or multiple-choice/constructed-response items |
+| A response outside a usable documented permitted set | `resp_outside_permitted`: `fail` | A documented coding violation; valid entries of a partial item mapping are still checked |
+| Missing or unusable entries in supplied permitted-value metadata | `permitted_values_unusable`: `warn` | Coverage is incomplete; do not treat the supplied metadata as full validation |
+| Complete explicit construct mapping identifies at least two constructs with different observed group min/max ranges | `resp_scale_mixed`: `fail` | Documented construct separation plus distinct observed ranges; independent of permitted sets and the three-item heuristic threshold |
+| Unusable supplied construct mapping | `item_constructs_unusable`: `warn` | No strong construct conclusion can be drawn from this mapping |
+
+The two documented failures become `error` under `triage`, `upload` and
+`legacy`; `core` excludes these response-scale checks. Complete permitted values
+suppress only width warnings, not a documented construct finding. A warning is
+not permission to drop an item or split a scale: `multi_scale*` remains a
+prefix-based warning requiring source verification before a split. Strict mode
+can make warnings block; default upload does not.
 
 ## The override
 
@@ -76,15 +130,18 @@ checks, so unrelated failures keep blocking.
 ## The 50 callers
 
 `data/*.py` scripts do `from irw_triage_updated import run_qc` and read
-`.name` / `.status` / `.detail`. **None of them needed an edit.** The check
-bodies were *moved* into `_checks.py` verbatim and re-exported, so `run_qc`
-behaves exactly as before — profiles are layered on top by `core.py`, never
-underneath.
+`.name` / `.status` / `.detail`. That interface and the existing positional
+arguments remain compatible. The implementation lives in `_checks.py` and is
+re-exported by triage; profiles are layered on top by `core.py`. The optional
+documentation inputs above refine response-scale results without requiring
+existing callers to provide them.
 
 `tests/test_validate.py` pins the exact `(name, status)` emission order for eight
-fixtures, captured before the move. That golden test is the reason the refactor
-was safe to make at all: 50 files that otherwise only fail at someone else's
-runtime.
+fixtures, captured before the move with one reviewed correction: text-only
+responses still fail numeric checks but no longer produce a spurious numeric
+range finding. Response-scale regression tests in
+`irw_validate/tests/` additionally cover the shared checks and public API profile
+behavior, and run in the existing unittest CI suite.
 
 ## Staying merged
 

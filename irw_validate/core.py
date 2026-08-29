@@ -119,7 +119,11 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
 
 def validate_frame(df, *, label: str = "", profile: str = "upload",
                    context: dict | None = None) -> Report:
-    """Run every check the profile asks for against an in-memory frame."""
+    """Run every check the profile asks for against an in-memory frame.
+
+    context may supply external codebook ``permitted_values`` and documented
+    ``item_constructs`` mappings; see irw_validate/README.md for their contract.
+    """
     context = context or {}
     if is_item_text(label):
         return _validate_item_text(df, label, profile)
@@ -128,7 +132,9 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
 
     for check in run_qc(df,
                         coercion_method=context.get("coercion_method", ""),
-                        original_cols=context.get("original_cols")):
+                        original_cols=context.get("original_cols"),
+                        permitted_values=context.get("permitted_values"),
+                        item_constructs=context.get("item_constructs")):
         report.checks_run.append(check.name)
         severity = severity_for(check.name, check.status, profile)
         if severity is None:
