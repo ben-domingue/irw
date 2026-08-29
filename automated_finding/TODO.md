@@ -25,11 +25,18 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   ~800 new deposits and 15 leads; the real numbers were 5.6x and 7.3x that.
   See `BATCH_LOG.md` for the full table and the two size-term costs.
 
-- [x] **24 tables / 689,621 responses staged from the backlog leads**
-  (2026-08-29), 7 deposits, all CC BY 4.0, all creates not replaces.
-  `biblio_zenodo_backlog_2026-08-29.csv` (24 rows) prepared; lint clean
-  (0 errors, 0 warnings). Awaiting ben-domingue's check + upload.
-  See `BATCH_LOG.md` for per-deposit coding decisions.
+- [x] **24 tables / 689,621 responses uploaded and in biblio** (confirmed
+  2026-08-29, ben-domingue), 7 deposits, all CC BY 4.0, all creates not
+  replaces. The `irw_output/` CSVs are off disk as expected and the
+  `biblio_zenodo_backlog_2026-08-29.csv` rows are in the dictionary. Lint was
+  clean (0 errors, 0 warnings) and the scale encodings were verified before
+  upload: `resp=0` is a labelled anchor in `osorio_2023_dos` ("Nada cierto",
+  with refusals on a separate non-numeric code) and a real level in
+  `baekgaard_2023_*` (no user-missing declared, the authors' own composites
+  average over it, smooth unimodal distribution); `resp=5` is the top
+  substantive anchor in all nine `skarzauskiene_2026_*` tables, with the 9
+  "don't know" sentinel dropped. See `BATCH_LOG.md` for per-deposit coding
+  decisions.
 
 - [ ] **~100 of the 110 backlog leads still unworked.** Worked so far: the
   largest 7 shippable deposits. The remaining tail is in

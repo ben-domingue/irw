@@ -13196,6 +13196,31 @@ First pass through the 110 leads of the backlog sweep, largest first.
   formed by (variable group, IDENTICAL response-option set) at 4+ items;
   several groups mix formats, and 9 is a "don't know" sentinel, not a level.
 
+**Uploaded 2026-08-29 (ben-domingue).** All 24 tables are on Redivis and their
+`biblio_zenodo_backlog_2026-08-29.csv` rows are in the dictionary; the staged
+CSVs are off disk as expected.
+
+**Scale encodings verified before upload**, on ben-domingue's check of the two
+tables whose responses start at 0 and the nine that reach 5:
+
+- `osorio_2023_dos` `resp=0` is the labelled bottom anchor "Nada cierto 0",
+  identical across all 21 items, and "No quiero contestar" is a separate
+  non-numeric code (`'a'`) that never enters `resp`. The per-item zero rate
+  runs 16-71% and tracks item severity -- the highest, `dos06` at 71%, is "My
+  partner or best friend wouldn't tolerate me expressing my true feelings" --
+  so it is a genuine floor effect, not a miscoded sentinel.
+- `baekgaard_2023_*` `resp=0` is a real level on three independent grounds:
+  the .sav declares no missing ranges and no user-missing values (only
+  `Meetingattendance` carries value labels at all); the authors' own `*_add`
+  composites include 201-1,019 rows containing zeros per block and the mean
+  identity holds exactly on those rows, with a composite minimum of 0.00; and
+  the pooled distribution is smooth and unimodal (0:5,398, 1:11,395, 2:14,228,
+  3:16,618, 4:13,994) rather than spiking at 0.
+- `skarzauskiene_2026_*` `resp=5` is the top substantive anchor in every one of
+  the nine blocks ("I completely agree" / "Very often" / "Very important"); the
+  sentinel is 9 ("Don't know / did not answer"), confirmed dropped from every
+  staged file.
+
 ### Rejected, with reasons
 
 - **`zenodo.18023199` -- the sweep's headline lead (2,776,192 responses) is
