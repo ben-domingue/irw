@@ -13,7 +13,10 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `__items.csv` (8 Soderberg + 12 Torok), all gated PASS against the staged
   response CSVs. Response tables go to `item_response_warehouse_4` first, item
   text to `irw_text:07b6` after. Stamp `uploaded` in
-  `itemtext_provenance.csv` once confirmed.
+  `itemtext_provenance.csv` once confirmed. **No `itemtext_issues.qmd` entry is
+  needed for any of the 20** -- checked per-item, not just at table level: no
+  observed response lacks an option row, no blank or duplicated item_text.
+  Nothing to edit in the datapages/irw repo for this batch.
 
 - [ ] **`altman_2020_capq__items.csv` is orphaned in `itemtext_output/`.** Its
   response table shipped and `irw_output/` was cleared, so the file has no

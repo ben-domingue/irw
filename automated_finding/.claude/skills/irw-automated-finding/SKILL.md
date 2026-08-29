@@ -446,6 +446,48 @@ them both scripts read live Redivis data, which a table in this pipeline does
 not have yet. A FAIL is disqualifying — fix it or ship the response table
 alone. Explain every WARN rather than ignoring it.
 
+### Decide whether the table needs an issues-page entry
+
+The public issues page (`itemtext_issues.qmd` in the datapages/irw repo, checked
+out at `irw/irw_site/itemtext_issues.qmd` -- a sibling of `src/`, not
+`src/../irw_site/`) lists **concrete mismatches between the item text and the
+IRW table**: the table has 6 items and the codebook 5, the paper describes a 1-7
+scale and the table is on 1-5, the item codes don't identify what was asked.
+That is the whole bar. It is not a place for gaps the source never published,
+for ordinary missingness, or for a caveat about the study.
+
+Two things make this a real step rather than a formality:
+
+- **A non-empty `public_note` always forces a public callout**, even when the
+  structured fields are clean (`draft_issues_qmd.R`, line ~100). So writing a
+  chatty `public_note` publishes it. Put anything that is not a text-vs-table
+  mismatch in `note`, which is internal.
+- **A `data_labels` + `study_materials` table earns no callout by default** --
+  the data file itself ties each code to its text, so there is nothing to
+  caveat. If a cheap-gate table seems to need one, re-read the bar first.
+
+`validate_items.R` and `audit_batch.R` will not find these for you: they check
+item and resp sets at the **table** level, so a per-item defect can sit under a
+PASS. Run this scan over the batch before deciding:
+
+```python
+# for each __items.csv with a staged response CSV
+# 1. observed resp for an item with no option_text row  -> real mismatch
+# 2. blank item_text                                    -> real gap
+# 3. one item_text on two different items               -> conflation
+# 4. option rows never endorsed for that item           -> NOT an issue
+# 5. blank option_text at unlabeled midpoints           -> NOT an issue, required
+```
+
+Only 1-3 are issues-page material. 4 and 5 are normal and must not be published:
+an unendorsed anchor is a fact about the responses, not a defect in the text, and
+an unlabeled scale point is *required* to be blank rather than padded with its
+own number (`audit_batch.R` warns when you pad it).
+
+If a table does earn an entry, write the `public_note` as the one sentence that
+would go in the callout, and say so in the batch's `TODO.md` handoff -- the page
+lives in another repo and is edited there, not here.
+
 ### Record the provenance
 
 Append one row per attempted table to `automated_finding/itemtext_provenance.csv`
