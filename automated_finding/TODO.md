@@ -121,15 +121,22 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   - **68 `download_failed`** rows, deliberately left out of
     `repo_triage_seen_keys.csv` so a later run retries them.
 
-- [ ] **The lead ranker cannot see dataset size, and tier B proved it costs
-  us.** Tier B scored *lower* than tier A on every signal the scorer reads
-  (title wording, filename, file count, license) yet carried ~7.8M candidate
-  responses to tier A's 1.3M -- because the 3.7M-response
-  `tu_2022_achievement_motivation` deposit looks, from its title and filename,
-  exactly like a 300-respondent survey. `resolve_data_files()` already returns
-  file sizes for most sources, so adding a size term to
-  `runs/rank_2026-08-27.py` is cheap and would put deposits like that at the
-  top of tier A instead of the middle of tier B.
+- [x] **Lead ranker now sees dataset size** (2026-08-29, `cf4f307`). The
+  premise needed correcting first: `resolve_data_files()` returned sizes only
+  for files it SKIPPED as oversized, so every resolver computed each file's
+  size for the `MAX_FILE_BYTES` check and then discarded it. It now returns
+  `(url, name, size_bytes)` triples. The per-batch rank/prefilter scripts in
+  `runs/` had drifted apart and were folded into reusable `rank_leads.py` and
+  `prefilter_candidates.py`; the size term moves `tu_2022` from 7 (tier B) to
+  10 (tier A) -- its `data.sav` is 6,095,027 bytes against 18k-41k for the
+  tier-A deposits ranked above it. On the backlog sweep it moved 307 rows up
+  and 5 down, 46 of them from tier B into tier A.
+
+  Two costs, both on record in `BATCH_LOG.md`: it also promotes large
+  non-instrument deposits (a 196MB Fitbit set, a 132MB ENCODE RNA-seq set
+  reached tier B -- `T_NEG` blocks "sequencing" but not "RNA-seq"), and it
+  promotes exactly the deposits that OOM triage, which is what forced the
+  `FORMAT_MAX_BYTES` guard above.
 
 - [ ] **Two named leads deferred for identity reasons, both otherwise clean.**
   `10.7910/DVN/YCXDBI` (Teacher Work Ability Scale, 36 items x 4 samples,
@@ -632,12 +639,16 @@ do not treat the CSV's `proposed_name` column as a work list.
   before Step 2. Until then, `download_failed` rows from cloud runs need a
   local re-triage pass.
 
-- [ ] **`irw_process_queue.py` is broken on `main`** (found 2026-08-25, not
-  caused by that day's changes): it imports `QUEUE_SHEET_URL` from
-  `irw_discover_updated.py`, which no longer defines it — the module fails at
-  import, so `--help` doesn't even run. Presumably fallout from retiring the
-  human-review queue sheet (2026-08-12). Either repoint it at the
-  `human_review/*.csv` files or delete the script.
+- [x] **`irw_process_queue.py` import fixed** (2026-08-29, `ca67872`). It
+  imported `QUEUE_SHEET_URL` from `irw_discover_updated.py`, which no longer
+  defines it, so the module died at import with an error that read like a
+  missing dependency rather than "this stage was retired". Neither option in
+  the original note was right: repointing it at `human_review/*.csv` would
+  resurrect a stage eliminated 2026-06-24, and deleting it would lose a
+  reference the README still cites. Instead the URL is defined locally so the
+  module imports, and `main()` exits 2 naming the current flow. The footer
+  `irw_batch_updated.py` printed after every triage run, still telling people
+  to use the retired queue sheet, was fixed at the same time.
 
 - [x] **`pone.0235154` (medical-student burnout, HK, CC BY) processed
   2026-08-25** — `data/lee_2020_medical_students.py`, 5 tables / 44,941
