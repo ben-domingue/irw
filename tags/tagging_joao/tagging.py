@@ -1,3 +1,14 @@
+# RETIRED 2026-08-29. This script is not runnable as-is.
+#
+# It authenticated to OpenAI via a bare load_dotenv() that read src/metadata/.env
+# from the current working directory. That file has been deleted and the OpenAI
+# keys it held were revoked as part of the credential consolidation, so
+# ChatOpenAI() below will fail at construction. IRW no longer uses OpenAI.
+#
+# Kept for reference only. To revive it you would need a new OpenAI key and an
+# explicit path to it -- do not reintroduce a bare load_dotenv(); see
+# src/irw_secrets.py for the pattern IRW uses for the Redivis write token.
+
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.output_parsers import StrOutputParser
