@@ -6,7 +6,8 @@
 #
 # Default order (2026-08-02):
 #   01 (metadata.csv) -> 02 (biblio.csv + comps/nominal/simsyn biblio, one
-#   script) -> 03 (tags.csv + nominal_tags.csv) -> 05 (comps_metadata.csv) -> 06
+#   script) -> 03 (tags.csv + nominal_tags.csv) -> 03b
+#   (construct_descriptions.csv) -> 05 (comps_metadata.csv) -> 06
 #   (nominal_metadata.csv) -> 07 (simsyn_metadata.csv) -> 08
 #   (itemtext_metadata.csv) -> 09 (hero_stats.json, must run LAST since it
 #   reads metadata.csv written by 01)
@@ -34,6 +35,7 @@
 #   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
+#   scripts/run_pipeline.sh 03b             # just the construct descriptions
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
@@ -45,6 +47,16 @@
 # (it calls Claude Haiku 4.5 and will prompt interactively if unset -- fine
 # for a foreground run, not for unattended use). Stage 08 additionally needs
 # the `quanteda`/`quanteda.textstats` R packages installed.
+#
+# Stage 03b (issue #1406, added 2026-08-29) needs STANFORD_AI_API_KEY -- it
+# paraphrases the tags sheet's verbatim "Context Text" excerpts via Stanford's
+# AI API Gateway rather than a public LLM API, per counsel's guidance on that
+# issue. Unlike 02, it errors out immediately rather than prompting if the key
+# is missing. It is incremental: rows are keyed by a hash of their excerpt, so
+# a normal weekly run only pays for excerpts that are new or edited (a first
+# full run is ~2400 calls; steady state is a handful). Never blocks the
+# pipeline on review -- rows whose paraphrase sits too close to the source are
+# published with an empty description and reported at the end of the stage.
 
 set -euo pipefail
 
@@ -72,6 +84,7 @@ if [[ ! -f "$METADATA_DIR/01_metadata.R" ]]; then
 fi
 
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
+                          [03b]=03b_describe.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [09]=09_hero_status.R )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
@@ -79,13 +92,14 @@ declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
   [02]="biblio.csv comps_biblio.csv nominal_biblio.csv simsyn_biblio.csv"
   [03]="tags.csv nominal_tags.csv"
+  [03b]="construct_descriptions.csv"
   [05]="comps_metadata.csv"
   [06]="nominal_metadata.csv"
   [07]="simsyn_metadata.csv"
   [08]="itemtext_metadata.csv"
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 09)
+DEFAULT_ORDER=(01 02 03 03b 05 06 07 08 09)
 
 stages=()
 for a in "$@"; do

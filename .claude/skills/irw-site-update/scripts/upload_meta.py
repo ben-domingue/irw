@@ -40,6 +40,7 @@ FILE_TABLE_MAP = {
     "metadata": "metadata",
     "biblio": "biblio",
     "tags": "tags",
+    "construct_descriptions": "construct_descriptions",  # 03b_describe.R, issue #1406; paraphrased only -- never the sheet's raw Context Text
     "nominal_tags": "nominal_tags",  # 03_tags.R nom branch, issue #1689; no comp/sim equivalent by design
     "comps_biblio": "comps_biblio",
     "nominal_biblio": "nominal_biblio",

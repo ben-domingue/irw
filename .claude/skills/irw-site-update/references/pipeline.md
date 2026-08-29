@@ -13,6 +13,7 @@ the scripts win.
 | 01 | `01_metadata.R` | `metadata.csv` | Diffs current Redivis tables (`item_response_warehouse`/`_2`/`_3`/`_4`/`_5`/`_6`) against the last-known `irw_meta` metadata table; for genuinely new tables, computes `n_responses`/`n_categories`/`n_participants`/`n_items`/density via the Redivis API; adds `variables` (pipe-joined, lowercased var names) and a `longitudinal` flag (`grepl("wave"\|"date", variables)`). |
 | 02 | `02_biblio.R` | `biblio.csv`, `comps_biblio.csv`, `nominal_biblio.csv`, `simsyn_biblio.csv` | One script, four passes (loops over a `dbs` list) — one per source (core/comps/nom/sim), each with its **own** Google Sheet dictionary URL. For each: reads that source's dictionary sheet, finds rows not yet in the corresponding Redivis biblio table (or missing `BibTex`), fetches BibTeX from `doi.org` when a DOI exists, else falls back to a Claude call (`anthropic_chat()`, `claude-haiku-4-5`, `ANTHROPIC_API_KEY`) to synthesize one from Reference/URL text. Strips non-`Public Reshare?` rows *before* ever calling the API. **Swapped from OpenAI/GPT-4o to Claude on 2026-07-27** at Ben's request — plain `httr` POST to `https://api.anthropic.com/v1/messages` (no R SDK exists for Anthropic), `x-api-key`/`anthropic-version: 2023-06-01` headers, single-turn, no thinking/tools. |
 | 03 | `03_tags.R` | `tags.csv`, `nominal_tags.csv` | Loops a per-source `dbs` list, same shape as 02 — one hand-annotated Google Sheet per source. `core` = the "IRW Tags" sheet; `nom` = "IRW Tags Nominal" (`1v3toO6O…`, gid `126134123`), added for issue #1689. `comp`/`sim` deliberately have no tags — see `Rpkg/inst/developer/tags.md`. Selects columns `c(1,6:12,3)` by **position**, which omits col 4 "Context Text" (verbatim paper excerpts) — the only thing keeping raw source text out of the public CSVs. Also asserts the row-1 instruction row is present (sentinel `should match what is on redivis`) rather than dropping row 1 blind. |
+| 03b | `03b_describe.R` | `construct_descriptions.csv` | Issue #1406, added 2026-08-29. The **only** sanctioned reader of the tags sheet's column 4 ("Context Text" — verbatim paper excerpts). Paraphrases each excerpt via Stanford's AI API Gateway (`aiapi-prod.stanford.edu/v1`, OpenAI-compatible, `STANFORD_AI_API_KEY`) — a closed environment, per counsel's guidance on the issue. Caches on `digest(paste(table, context_text))` so only new/edited excerpts cost a call; the cache stores **no raw text**. Any shared 6-gram between excerpt and paraphrase → `provenance = "pending review"` and a `NA` description in the public CSV. `--review` prints raw vs. rewrite for flagged rows, pulling raw text live from the sheet and storing none. Core sheet only — no `nom` branch by decision. |
 | 05 | `05_comps.R` | `comps_metadata.csv` | Same shape as 01 but for `irw_competitions` (pairwise-comparison/arena-style data — `winner`/`agent_a`/`agent_b` columns). Author's own comment: "a lot of the functionality outside of the f() function is not tested." Its own biblio-generation half is dead/commented-out code (02 covers comps biblio instead). |
 | 06 | `06_nominal.R` | `nominal_metadata.csv` | Same shape as 01 but for `irw_nominal` (free-text/nominal responses — `text` column instead of `resp`). Same dead commented-out biblio block. |
 | 07 | `07_simsyn.R` | `simsyn_metadata.csv` | Near-identical to 01, for `irw_simsyn`. Same dead commented-out biblio block. |
@@ -74,17 +75,18 @@ storing a hash rather than raw text, and similarity-flagged rows getting
 `construct_description = NA` with `provenance = "pending review"` rather
 than a published draft.
 
-**Grepped `metadata/`, `tags/`, `itemtext/` for `construct_description`,
-`pending review`/`pending_review`, `hash`, `similarity` (2026-07-27) — none
-of that system exists in the codebase today.** The only hit was one aside in
-`tags/.claude/skills/irw-auto-tag/SKILL.md` (line 123) naming
-`metadata/03b_describe.R` as the hypothetical source of a "public-facing
-paraphrased `construct_description`" field, explicitly caveated "(if it
-exists)". That file does not exist (confirmed via `find`).
+That was a confirmed gap from 2026-07-27 until **2026-08-29, when it was built
+as `metadata/03b_describe.R` (stage `03b`) for issue #1406** — hash cache,
+6-gram overlap flag, pending-review withholding, and a live-from-the-sheet
+review view, with Stanford's AI API Gateway as the LLM so paywalled excerpts
+stay in a closed environment. See this skill's `SKILL.md` §Safeguards for the
+operational detail.
 
-What *does* exist, and stands in for the missing system today:
+The three items below predate 03b and all still hold:
 
-1. **`03_tags.R`'s column selection is an accidental safeguard.** The "IRW
+1. **`03_tags.R`'s column selection is an accidental safeguard**, and remains
+   the guard for `tags.csv` specifically — 03b reads column 4 in a separate
+   script precisely so 03 never has to. The "IRW
    Tags" sheet's actual column order (pulled live 2026-07-27):
    `table, Rater, Construct Name, Context Text, Item text available?, Age
    Range, Child Age, Sample, Construct type, Measurement tool, Item format,
@@ -111,9 +113,6 @@ What *does* exist, and stands in for the missing system today:
 
 Ben's direction (2026-07-27): "we should come back to safeguards. they may
 not be actionable in present state but perhaps we can fix that as we build
-out this skill." Read this as: the length-heuristic stopgap above is the
-interim fix, and if/when a real description-generation step gets built
-(e.g. an actual `03b_describe.R`), that's the point to design the real
-hash-cache + similarity-flag + `provenance = "pending review"` system —
-ask Ben what corpus similarity should be measured against and what
-threshold should trigger a flag before building it; don't guess.
+out this skill." That was actioned on 2026-08-29 by `03b_describe.R` (above);
+the answers he gave then were: similarity measured against the row's own source
+excerpt (not a corpus), and any shared 6-gram triggers the flag.

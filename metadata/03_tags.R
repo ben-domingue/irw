@@ -15,6 +15,11 @@ library(gsheet)
 ##from source papers, and this positional selection is the only thing keeping
 ##that raw text out of the public CSVs. Reordering the sheet silently changes
 ##what gets published. See .claude/skills/irw-site-update/SKILL.md.
+##
+##Column 4 does have one sanctioned reader: 03b_describe.R (issue #1406), which
+##paraphrases those excerpts into construct_descriptions.csv and never persists
+##the raw text. That work lives there specifically so this script can stay
+##lightweight and deterministic -- do not pull it in here.
 KEEP_COLS <- c(1, 6:12, 3)
 
 ##Row 1 of every tags sheet is a template/instruction row, not data, and is

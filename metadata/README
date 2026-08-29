@@ -6,12 +6,14 @@ CSV against what it replaced (added/removed/changed rows, flagged if any
 cell looks like a suspiciously long raw-text dump), and never overwrites
 silently.
 
-  scripts/run_pipeline.sh     # generate: 01 -> 02 -> 03 -> 05 -> 06 -> 07 -> 09
+  scripts/run_pipeline.sh     # generate: 01 -> 02 -> 03 -> 03b -> 05 -> 06 -> 07 -> 09
   scripts/audit_tables.R      # cross-source table-name consistency audit;
                                # run AFTER run_pipeline.sh, in the same directory
 
 Needs ANTHROPIC_API_KEY set (02_biblio.R's BibTeX-generation fallback calls
-Claude when a DOI-based lookup fails) and Redivis credentials configured
+Claude when a DOI-based lookup fails), STANFORD_AI_API_KEY set (03b_describe.R
+paraphrases the tags sheet's verbatim excerpts through Stanford's AI API
+Gateway rather than a public LLM API), and Redivis credentials configured
 externally, as before.
 
 Manual run order, if not using the skill:
@@ -21,6 +23,14 @@ Manual run order, if not using the skill:
 3. 03_tags.R: makes tags.csv and nominal_tags.csv [pulls together hand-annotated tags,
    one Google Sheet per source. comp/sim deliberately have no tags --
    see Rpkg/inst/developer/tags.md]
+3b. 03b_describe.R: makes construct_descriptions.csv [paraphrases the tags
+   sheet's "Context Text" column -- verbatim paper excerpts -- into publishable
+   descriptions. This is the ONLY script that reads that column; 03_tags.R
+   deliberately never does. Caches on a hash of the excerpt so it is cheap to
+   re-run, and never writes raw excerpt text to disk. Paraphrases too close to
+   their source are withheld pending human review -- run
+   `Rscript 03b_describe.R --review` to see them. Issue #1406]
+
 5. 05_comps.R: makes comps_metadata.csv [same idea as 01_metadata.R, for the irw_competitions source]
 6. 06_nominal.R: makes nominal_metadata.csv [same idea as 01_metadata.R, for the irw_nominal source]
 7. 07_simsyn.R: makes simsyn_metadata.csv [same idea as 01_metadata.R, for the irw_simsyn source]

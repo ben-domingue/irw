@@ -243,15 +243,35 @@ part.
 
 ## Safeguards (read before generating anything that resembles a description)
 
-**Confirmed gap (2026-07-27, verified by grepping `metadata/`, `tags/`,
-`itemtext/`)**: the hash-cache / similarity-flagged / `construct_description
-= NA` + `provenance = "pending review"` system Ben originally described does
-**not exist anywhere in this codebase today**. The only reference to
-`construct_description` in the whole repo is one aside in
-`tags/.claude/skills/irw-auto-tag/SKILL.md` calling it a hypothetical field
-from a `metadata/03b_describe.R` that doesn't exist.
+**Built 2026-08-29 (issue #1406).** The hash-cache / similarity-flagged /
+`construct_description = NA` + `provenance = "pending review"` system Ben
+described now exists as `metadata/03b_describe.R`, pipeline stage `03b`. It
+supersedes the "confirmed gap" note that stood here from 2026-07-27. How it
+works:
 
-What *does* exist today, and why it matters:
+- It is the **only sanctioned reader of the tags sheet's column 4** ("Context
+  Text", the verbatim excerpts). It paraphrases each excerpt via Stanford's AI
+  API Gateway — a closed environment approved for High Risk data, chosen over a
+  public LLM API per counsel's guidance on issue #1406 — and writes only the
+  paraphrase.
+- **Raw excerpt text is never persisted.** `describe_cache.csv` keys on
+  `digest(paste(table, context_text))` and carries no text column;
+  `write_cache()` hard-errors on any unexpected column rather than trusting the
+  caller. The Google Sheet stays the sole store of the raw text.
+- A paraphrase sharing a run of 6+ consecutive tokens with its source gets
+  `provenance = "pending review"` and `construct_description = NA` in the public
+  CSV. The window shrinks for excerpts under 6 tokens (163 of 2342 non-blank
+  excerpts as of 2026-08-29) so short excerpts aren't silently exempt from the
+  only check there is. **6 is the main copyright-risk lever, confirmed with Ben
+  — don't loosen it without asking.**
+- `Rscript 03b_describe.R --review` pulls raw text live from the sheet for
+  flagged rows only and prints raw vs. rewrite; nothing is stored. A human
+  clears a row by setting `reviewed = TRUE` on its `row_hash` in the cache.
+- Output `construct_descriptions.csv` (`table | construct_name |
+  construct_description | provenance`) is its **own** Redivis table, in
+  `FILE_TABLE_MAP`. It is not joined into `tags.csv` or `metadata.csv`.
+
+Still true, and still worth knowing:
 - `03_tags.R` selects columns `c(1,6:12,3)` from each tags sheet into
   `tags.csv` / `nominal_tags.csv` — this excludes column 4, "Context Text"
   (the **verbatim excerpt** field, confirmed against the live sheet header),
@@ -268,10 +288,10 @@ What *does* exist today, and why it matters:
   not hash-based or similarity-based, and has no `provenance`/pending-review
   concept at all.
 
-**If a future task asks this skill to generate a new paraphrased
-description-type field** (e.g. an eventual `03b_describe.R`), that's the
-moment to actually build the hash-cache + similarity-flag +
-`provenance = "pending review"` system Ben described, rather than assuming
-it already exists or bolting it on as an afterthought — ask Ben for the
-specifics (similarity against what corpus, what triggers a flag) before
-writing it, per `references/pipeline.md`'s notes on this gap.
+**If a future task asks for another paraphrased description-type field**,
+extend `03b_describe.R` rather than starting over — its cache/flag/review
+machinery is the pattern, and any new field must keep the same two invariants
+(no raw text persisted, nothing published above the overlap threshold). The
+nominal tags sheet is deliberately *not* covered yet: 03b is core-only by
+decision (2026-08-29), and adding `nom` is one more entry in a `dbs`-style
+list, not a redesign.
