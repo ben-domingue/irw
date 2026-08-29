@@ -39,7 +39,29 @@ import pandas as pd
 
 from irw_triage_updated  import load_table, coerce_to_irw, run_qc, irw_metadata, print_report, triage_dataset, Triage
 from irw_batch_updated   import resolve_data_files, polite_get, TABULAR_EXT, FileTooLarge
-from irw_discover_updated import QUEUE_SHEET_URL, norm_doi
+from irw_discover_updated import norm_doi
+
+# The queue sheet was retired 2026-08-12 and irw_discover_updated no longer
+# exports QUEUE_SHEET_URL, which made this module raise ImportError on import
+# -- an error that reads like a missing dependency rather than "this stage no
+# longer exists". The URL is kept here so the module still imports (its
+# helpers are referenced elsewhere and by the README) while main() refuses to
+# run against a sheet nobody maintains.
+QUEUE_SHEET_URL = (
+    "https://docs.google.com/spreadsheets/d/"
+    "1hiJb3-Cv7SpNwwtwAGmdqn-fZyJ4624P5HE6VZZTOw8/export?format=csv"
+)
+
+RETIRED = (
+    "irw_process_queue.py is retired and must not be run.\n\n"
+    "The intermediate queue-processing stage was eliminated 2026-06-24 and "
+    "the Google Sheet it reads was deprecated 2026-08-12, so this script "
+    "would fetch a queue nobody maintains and write output nobody collects.\n\n"
+    "Instead: triage with irw_batch_updated.py, refine human_assistance rows "
+    "with irw_retriage_ha.py, then write a per-dataset script in data/ for the "
+    "good / worth_retrying candidates. See README.md ('Keeping the queue "
+    "current') and the irw-automated-finding skill for the current flow."
+)
 
 # Redivis tables that contain DOIs of datasets already in the IRW.
 # Both biblio and metadata tables are scanned; DOI-like tokens are extracted
@@ -191,6 +213,11 @@ from irw_triage_updated import preflight_deps
 
 
 def main():
+    print(RETIRED, file=sys.stderr)
+    raise SystemExit(2)
+
+
+def _retired_main():
     preflight_deps()
     import argparse
     ap = argparse.ArgumentParser()

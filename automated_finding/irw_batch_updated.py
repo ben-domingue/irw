@@ -36,6 +36,7 @@ USAGE — always start small, then scale:
 
 from __future__ import annotations
 
+import datetime
 import os
 import re
 import csv
@@ -73,6 +74,28 @@ CHECKPOINT = "irw_batch_checkpoint.jsonl"
 # candidates whose .dta files ran 1.4-1.58GB. See TODO.md's "no file-size
 # guard" pipeline-improvement note.
 MAX_FILE_BYTES = 200 * 1024 * 1024  # 200MB
+
+# Some formats expand far more than others, so one global ceiling is not
+# enough. R serialization is the worst offender: it is gzip-compressed on
+# disk and pyreadr materialises the whole object, so the ratio is routinely
+# 10-40x rather than the 2-4x a .dta or .xlsx costs. A 79,699,579-byte
+# .RData ("Homophily in Voting Behavior", 10.5281/zenodo.7070556) SIGKILLed
+# the 2026-08-28 backlog triage at row 345 of 441 with ~14GB free --
+# comfortably inside the 200MB download cap, and fatal anyway. Nothing was lost only
+# because the run checkpoints; an unattended batch that dies this way stops
+# dead. 25MB here bounds the expanded object at roughly 1GB.
+FORMAT_MAX_BYTES = {
+    (".rdata", ".rda", ".rds"): 25 * 1024 * 1024,
+}
+
+
+def format_ceiling(filename: str) -> int:
+    """The size ceiling that applies to this file, by extension."""
+    name = (filename or "").lower()
+    for exts, limit in FORMAT_MAX_BYTES.items():
+        if name.endswith(exts):
+            return limit
+    return MAX_FILE_BYTES
 
 
 class FileTooLarge(Exception):
@@ -471,8 +494,24 @@ def process_one(row: dict) -> dict:
 
     # Use the first tabular file. (Multi-file datasets -> human territory.)
     file_url, fname = files[0][0], files[0][1]
+    # Formats that expand hard in memory get a tighter ceiling than the
+    # download cap, checked BEFORE the download so an oversized .RData costs
+    # nothing and, more importantly, cannot OOM-kill an unattended batch.
+    declared = files[0][2] if len(files[0]) > 2 else 0
+    ceiling = format_ceiling(fname)
+    if ceiling < MAX_FILE_BYTES and declared > ceiling:
+        return {**base, "flag": "file_too_large",
+                "reasons": f"{fname}: {declared:,} bytes exceeds the "
+                           f"{ceiling:,}-byte ceiling for this format, which "
+                           "expands 10-40x in memory; not downloaded",
+                "n_responses": "", "n_participants": "", "n_items": "",
+                "density": "", "data_file": fname}
     try:
         content = polite_get(file_url).content
+        # The repo API does not always report a size; re-check once the bytes
+        # are in hand, before handing them to a reader that would expand them.
+        if ceiling < MAX_FILE_BYTES and len(content) > ceiling:
+            raise FileTooLarge(len(content), ceiling)
         df = load_table(content, filename=fname)
     except FileTooLarge as e:
         return {**base, "flag": "file_too_large", "reasons": str(e),
@@ -583,6 +622,37 @@ FLAG_ORDER = ["good", "human_assistance", "not_item_response", "below_min_n",
 # about the dataset and stays sticky. See BATCH_LOG.md 2026-08-17.
 TRANSIENT_FLAGS = {"download_failed", "error"}
 
+OVERSIZED_PATH = "oversized_candidates.csv"
+
+
+def append_oversized(rows) -> None:
+    """Record file_too_large candidates so a sticky verdict does not lose them."""
+    rows = [r for r in rows]
+    if not rows:
+        return
+    cols = ["date_added", "source", "title", "url", "doi", "license",
+            "data_file", "reasons"]
+    today = datetime.date.today().isoformat()
+    existing = set()
+    if os.path.exists(OVERSIZED_PATH):
+        with open(OVERSIZED_PATH, newline="", encoding="utf-8") as fh:
+            existing = {r.get("doi") or r.get("url")
+                        for r in csv.DictReader(fh)}
+    new = [r for r in rows if (r.get("doi") or r.get("url")) not in existing]
+    if not new:
+        return
+    write_header = not os.path.exists(OVERSIZED_PATH)
+    with open(OVERSIZED_PATH, "a", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=cols, extrasaction="ignore")
+        if write_header:
+            w.writeheader()
+        for r in new:
+            w.writerow({**{c: r.get(c, "") for c in cols},
+                        "date_added": today})
+    print(f"{len(new)} oversized candidate(s) recorded in {OVERSIZED_PATH}",
+          flush=True)
+
+
 def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               resume: bool, checkpoint: str = CHECKPOINT,
               ignore_seen_keys: bool = False) -> pd.DataFrame:
@@ -648,6 +718,13 @@ def run_batch(candidates_csv: str, out_csv: str, limit: int | None,
               f"({'/'.join(sorted(TRANSIENT_FLAGS))}) so a later run retries "
               f"them once the source is reachable again", flush=True)
 
+    # file_too_large is a sticky verdict, so these candidates never surface in
+    # a later run's output -- but they are real datasets a person can still
+    # process by hand, and the format ceilings deliberately reject files a
+    # bigger machine could read. Park them somewhere visible instead of
+    # letting the ledger swallow them silently.
+    append_oversized(r for r in results if r.get("flag") == "file_too_large")
+
     if not ignore_seen_keys:
         append_seen_keys(newly_seen)
 
@@ -696,8 +773,10 @@ def main():
             print(f"  {flag:18} {counts[flag]}")
     print(f"\nFull summary -> {args.out}")
     print("Work the 'good' rows first; they're sorted to the top.")
-    print("Add candidates you want to process to the queue sheet,")
-    print("then run irw_process_queue.py.")
+    # The queue sheet and irw_process_queue.py were retired (2026-06-24 /
+    # 2026-08-12); pointing people at them was sending them to a dead end.
+    print("Refine the human_assistance rows with irw_retriage_ha.py, then")
+    print("write a per-dataset script in data/ for good / worth_retrying.")
 
 
 if __name__ == "__main__":

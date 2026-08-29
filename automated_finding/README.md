@@ -295,7 +295,7 @@ a processing script, check the dataset's DOI against the
 | `item_scale_outlier` | One or two items fall outside the table's scale (a warn from `run_qc`) | Usually an administrative or count column swept in as an item — check and drop it |
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
-| `file_too_large` | Tabular file exceeds `MAX_FILE_BYTES` (200MB) — not downloaded | Revisit manually later if the dataset looks valuable |
+| `file_too_large` | Tabular file exceeds its ceiling — `MAX_FILE_BYTES` (200MB), or 25MB for `.rdata`/`.rda`/`.rds` via `FORMAT_MAX_BYTES` — not downloaded. Also logged to `oversized_candidates.csv` | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
 | `download_failed` | Couldn't reach the data (network/HTTP error, unparseable listing, or a source-wide block) | **Retryable** — see the note below |
 | `error` | Unexpected pipeline error | **Retryable** — check `reasons` |
@@ -501,6 +501,21 @@ downloaded — added 2026-08-02 after `.dta` files up to 1.58GB OOM-killed
 the process twice; see `TODO.md`'s (closed) "no file-size guard" note.
 `irw_discover_plos.py` shares the same guard via
 `polite_get()`/`resolve_data_files()`.
+
+`FORMAT_MAX_BYTES` adds a **tighter, per-format ceiling** on top of that
+(`format_ceiling()`), because one global limit is not enough: R
+serialization is gzipped on disk and `pyreadr` materialises the whole
+object, so `.rdata`/`.rda`/`.rds` expand far more than the 2-4x a `.dta`
+or `.xlsx` costs. A 79.7MB `.RData` — well inside the 200MB cap —
+SIGKILLed the 2026-08-28 backlog triage at row 345 of 441 with ~14GB free.
+Those formats are now capped at **25MB**, checked against the size the repo
+API reports *before* the download, and re-checked against the received
+bytes when the API reports no size.
+
+Because `file_too_large` is a sticky verdict, capped candidates are also
+appended to **`oversized_candidates.csv`** (date, source, title, url, doi,
+licence, file, reason) — they are real datasets a person can still process
+on a bigger machine, and the ledger would otherwise swallow them silently.
 ```
 --limit <n>    process only the first N rows
 --resume       continue from checkpoint after interruption

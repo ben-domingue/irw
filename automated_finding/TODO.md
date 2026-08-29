@@ -58,13 +58,26 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   posted values are partially imputed; the raw file would be worth ~590k
   responses.
 
-- [ ] **`load_table` has no in-memory size guard, and the size term now feeds
-  it big files.** A 79.7MB `.RData` SIGKILLed the triage run at row 345/441:
-  `MAX_FILE_BYTES` caps the download at 200MB, but pyreadr expands RData many
-  times over. Worked around with per-row subprocesses under `ulimit -v`
-  (all 10 large deposits then passed), not fixed. A lower byte cap for
-  `.RData`/`.Rds` specifically, or a post-load memory check, would remove the
-  need for that dance.
+- [x] **In-memory size guard added** (2026-08-29). `FORMAT_MAX_BYTES` /
+  `format_ceiling()` in `irw_batch_updated.py` put a tighter, per-format
+  ceiling on top of `MAX_FILE_BYTES`: `.rdata`/`.rda`/`.rds` are capped at
+  25MB, since pyreadr materialises the whole gzipped object and the 79.7MB
+  `.RData` that SIGKILLed the backlog triage sat comfortably inside the 200MB
+  download cap. Checked against the API-reported size before downloading, and
+  against the received bytes when the API reports none. Verified end to end on
+  10.5281/zenodo.7070556, the deposit that caused the kill: it now returns
+  `file_too_large` without downloading, and normal candidates are unaffected.
+  Because that verdict is sticky, capped candidates are also appended to
+  `oversized_candidates.csv` so they stay recoverable by hand.
+
+- [x] **`irw_process_queue.py` no longer crashes on import** (2026-08-29). It
+  imported `QUEUE_SHEET_URL`, removed from `irw_discover_updated` when the
+  queue sheet was deprecated, so the module raised ImportError -- an error
+  that read like a missing dependency rather than "this stage no longer
+  exists". The URL is defined locally so the module imports, and `main()` now
+  exits 2 with an explanation pointing at the current flow. The stale
+  "add candidates to the queue sheet, then run irw_process_queue.py" footer
+  printed after every triage run is replaced with the real next step.
 
 - [ ] **98 prefilter `resolve_error:FileListUnreachable` rows worth a retry.**
   Transient failures from the backlog sweep, deliberately excluded from the

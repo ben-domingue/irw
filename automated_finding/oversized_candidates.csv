@@ -1,0 +1,2 @@
+date_added,source,title,url,doi,license,data_file,reasons
+2026-08-29,zenodo,Homophily in Voting Behavior,https://zenodo.org/records/7070556,10.5281/zenodo.7070556,cc-by,replication_data_20220910.RData,"replication_data_20220910.RData: 79,699,579 bytes exceeds the 26,214,400-byte ceiling for this format, which expands 10-40x in memory; not downloaded"
