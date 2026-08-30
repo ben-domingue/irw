@@ -13474,3 +13474,87 @@ Two mechanical lessons, both cheap to keep:
   launched from `src/` and created `src/irw_output/` and `src/itemtext_output/`.
   The three scripts written today resolve both paths relative to `__file__`
   instead; worth copying.
+
+## 2026-08-29c -- non-Latin-script sweep: closed out
+
+The 955-term re-run (launched earlier the same day, see 2026-08-29b) completed
+at 16:58, 8/8 chunks, exit 0, ~4.5h. Full pipeline, end to end:
+
+| stage | count |
+|---|---|
+| terms | 955 |
+| raw hits | 1,871 |
+| unique deposits | 690 |
+| prefilter keeps | 112 |
+| tier A+B leads | 38 |
+| triaged | 27 |
+| `good` | **0** |
+| retriage -> worth_retrying | 3 |
+| retriage -> human_review | 12 |
+
+**Yield, honestly stated: 0.72 unique deposits per term, not the ~4.6
+candidates/term the running log suggested.** 63% of raw hits were the same
+deposits resurfacing under translated synonyms of one another -- an expected
+consequence of running nine languages of near-synonyms, but it means any
+per-term rate read off a live log during this kind of sweep is inflated by
+roughly 3x. Read the rate after dedup, not during.
+
+Three leads survive as `worth_retrying`, all deferred rather than worked:
+`mendeley 4xtjnbwjt8` (人工智能与抑郁水平, 10,671p x 456i -- the largest thing
+the sweep found), `zenodo.6844831` (supervisor-subordinate dyads, low-confidence
+id column), and `zenodo.19912968`, which is already on the TODO as deferred on
+identity (author field "Anonymous, Anonymous"). 12 `human_review` rows are in
+`human_review/human_review_repo_nonlatin_2026-08-29.csv`.
+
+### What the sweep actually taught us
+
+**1. The ranker was English-only, and nobody had noticed.** `T_STRONG`/`T_MED`
+scored every non-English-titled deposit at zero on the strongest cheap signal
+the ranker has -- the identical defect to the relevance gate fixed on
+2026-08-25, one stage further down the pipeline, and exactly backwards for a
+sweep whose purpose is to reach those deposits. 105 of 690 deposits carried a
+non-Latin title; 99 matched nothing. Fixed in `cb6f8c8`/`268c220` with
+CJK/Arabic/Cyrillic (bare) and Spanish/Portuguese/German/French/Dutch/Turkish
+(word-anchored) vocabulary. The first attempt was worse than the bug: an
+unanchored `test` matched "Hypotheses Testing". Latin tokens must stay
+anchored, and that trap is now a comment in the file.
+
+**2. All 180 `resolve_error:FileListUnreachable` rows are one thing.** 145 are
+SRDA (`10.6141`, Taiwan's Survey Research Data Archive at Academia Sinica) and
+33 are openICPSR (`10.3886`). Neither is a Dataverse -- the DOI resolves to
+`srda.sinica.edu.tw`, which has no Dataverse API -- but the DataCite sweep
+labels them `dataverse`, so the resolver derives the installation from the
+landing host and fails. They will fail identically on every future retry
+because the error is retryable and the cause is not. Recorded in `TODO.md`;
+not fixed here.
+
+**3. The seen-keys ledger has no memory of its own verdicts.** 11 of the 38
+leads produced no triage row at all, including the five highest-scoring leads
+in the batch. They were skipped correctly -- all 11 are in
+`repo_triage_seen_keys.csv` -- but that file is `key,date` only, so there is no
+way to ask what the previous verdict was or which connector produced it. Five
+were seen on 2026-08-13 or 08-26, i.e. **before the three connector fixes of
+08-27**, and four of those five are `10.34894/*` = DataverseNL, triaged while
+`_dataverse_files()` could still only reach Harvard. This is the same reasoning
+this log already recorded for Zenodo ("a batch whose rows all came back
+no_usable_file was measuring the bug") -- it applies to DataverseNL too, and
+went unnoticed because the earlier write-up named only Zenodo.
+
+So the sweep's result is not "zero good". It is **zero good among the 27
+actually examined, with the 5 best leads never examined**, excluded on verdicts
+produced by connectors that have since been fixed. Releasing those keys is a
+one-line operation (the 08-28 Zenodo release is the precedent) but mutates a
+standing record, so it was left for a decision rather than done. Deliberately
+NOT escalated to the Year 3 board (#1702): item 16 of that write-up states that
+acquisition is not the constraint and more tables is not a priority, so an
+acquisition-pipeline bookkeeping change does not belong on it.
+
+### Verdict on the surface
+
+On the evidence here the non-Latin pool is **not** a second Zenodo backlog. It
+cost 4.5h of discovery plus ~2h of prefilter/triage and produced 3 deferred
+leads and 12 human_review rows. The Spanish/German/French/Dutch terms that hit
+the same English-only gate are a further pool on top of these 955 -- but that
+pool should be sized against this result, not against the 2026-07-15 English
+alt-format re-discovery, which returned 21 new tables and set an expectation
+this run did not meet.
