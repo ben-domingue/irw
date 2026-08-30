@@ -14,6 +14,14 @@ Re-run this whenever you suspect the sheet's dropdowns have changed (a new
 option added, e.g.) -- references/vocab.md is hand-maintained and won't
 update itself; diff this output against it.
 
+NOTE (2026-08-29, issue #1720): "Sample" and "Construct type" are no longer
+governed by this script alone. TAG_VOCAB in metadata/tag_normalize.R is now the
+authoritative list for those two columns, and 03_tags.R stops the pipeline on
+any atom outside it. If this script reports a value those lists don't have,
+that is a real finding -- reconcile them rather than editing vocab.md alone.
+Also note this script reads the SHEET, which still holds
+"Internet-based (Mturkers, etc)"; the export renames it to "Internet-based".
+
 Usage: python derive_vocab.py
 """
 import csv

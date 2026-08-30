@@ -15,12 +15,19 @@ CSV export is reachable). So the sheet's actual data-validation dropdown
 rules can't be read directly.
 
 Every list below was instead derived by **enumerating every non-empty
-value actually entered** across ~1960 rows of the live sheet (`python
-scripts/derive_vocab.py`, run 2026-07-27), which is a strong proxy: these
-columns show zero stray/off-list values, consistent with enforced dropdown
-validation. If you suspect the sheet's dropdowns have since changed (a new
-option added), re-run `derive_vocab.py` and diff its output against this
-file — don't assume this file is exhaustive forever.
+value actually entered** in the live sheet (`python scripts/derive_vocab.py`,
+last run 2026-08-29 over ~2450 rows), which is a strong proxy: these columns
+show zero stray/off-list values, consistent with enforced dropdown validation.
+If you suspect the sheet's dropdowns have since changed (a new option added),
+re-run `derive_vocab.py` and diff its output against this file — don't assume
+this file is exhaustive forever.
+
+**Two of these lists are no longer a proxy.** `Sample` and `Construct type` are
+now enforced in code: `TAG_VOCAB` in `metadata/tag_normalize.R` is the
+authoritative list, and `03_tags.R` **stops the pipeline** on any atom outside
+it rather than publishing it (issue #1720). If you need to add a value to
+either column, add it there too or the next export fails. The remaining
+columns are still enumerated proxies with nothing enforcing them.
 
 ## Age Range (single-select)
 
@@ -43,14 +50,22 @@ including whenever `Age Range` is `Adult (18+)`, `Elderly (minimum age
 
 ## Sample (multi-select, comma-separated)
 
-One option contains a literal comma — write it exactly as
-`Internet-based (Mturkers, etc)`, no extra quoting needed (the CSV writer
-in `stage_tag_row.py` quotes the whole field automatically since it
-contains a comma).
+**This column has two forms — write the sheet's, not the published one.**
+Write `Internet-based (Mturkers, etc)` exactly as listed, matching what human
+raters have always entered; `03_tags.R` renames it to `Internet-based` on
+export. Do not write `Internet-based` into the sheet: it would leave the sheet
+internally inconsistent for no gain, since the export normalizes either way.
+
+Background: that literal comma is why the value has to be quoted, and the
+inconsistent quoting that resulted spawned three separate workarounds — a
+34-line parser in `Rpkg`, a tilde-swap in `irw_site`, and nothing at all in
+`Python-pkg`, where filtering on it silently matched no tables. All three are
+gone; the rename on export is what replaced them. The sheet itself keeps the
+old form until there is a service account to change it (#1708).
 
 - `Program-based`
 - `General/non-specific`
-- `Internet-based (Mturkers, etc)`
+- `Internet-based (Mturkers, etc)` — exported as `Internet-based`
 - `Educational`
 - `Clinical`
 - `Targeted/specific`
@@ -58,6 +73,11 @@ contains a comma).
 - `Non-human`
 
 ## Construct type (multi-select, comma-separated)
+
+Order doesn't matter. `03_tags.R` sorts atoms into canonical order on export,
+so `Behavioral, Opinion/attitude` and `Opinion/attitude, Behavioral` become the
+same published string — don't spend effort hand-sorting, and don't treat a
+differently-ordered existing row as a discrepancy.
 
 - `Developmental`
 - `Affective/mental health`
