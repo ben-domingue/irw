@@ -25,6 +25,23 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `audit_batch.R --resp-dir` run until it is uploaded -- ship item text in the
   same pass as its response table, or it strands.
 
+- [ ] **ANES 2016 feeling thermometers — permission requested 2026-08-29.**
+  `doi:10.7910/DVN/OHRGWV` (Brensinger & Sotoudeh, *ASR*, "Party, Race, and
+  Neutrality") is a Harvard Dataverse replication package labelled CC0 whose
+  only data file is the ANES 2016 Time Series (`anes_timeseries_2016_Stata13.tab`,
+  4,270 respondents, 1,842 variables) — downloadable with one unauthenticated
+  curl, no registration. The CC0 label is the depositors', who could only
+  license their own R code, so the governing terms are ANES's, which gate
+  access behind registration. **ben-domingue emailed anes@electionstudies.org
+  2026-08-29 requesting permission — awaiting response.** Draft at
+  `irw_site/.claude/worktrees/response-style-vignette-edits/scouting/outreach/05_anes_2016_permission.md`;
+  it closes the question left UNRESOLVED in `02_anes_2012_note.md` in the same
+  directory. If granted: post-election group/institution thermometers
+  V162095-V162113 plus CASI racial-group V162310-V162314, with pre-election
+  V161086-V161096 as a second `wave`; continuous 0-100 with ~3,600 valid per
+  item, sentinels -9/998/999 dropped. Ask also covers whether the answer
+  extends to other public-use Time Series waves.
+
 - [ ] **145 SRDA + 33 openICPSR records are mislabelled `dataverse` and fail
   forever.** All 180 `resolve_error:FileListUnreachable` rows of the 2026-08-29
   non-Latin prefilter are this: `10.6141` resolves to `srda.sinica.edu.tw`
