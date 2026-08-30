@@ -6,7 +6,8 @@ The Item Response Warehouse (IRW) is an **open-source, large-scale** repository 
 - [IRW Paper: ](https://osf.io/preprints/psyarxiv/7bd54)describes IRW in detail, including data format, inclusion criteria, and our vision in the future
 - [IRW Data Dictionary: ](https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=0#gid=0)maintains a record of the descriptions, origins, and licenses of the processed datasets.
 - [IRW Datasets: ](https://redivis.com/datasets/as2e-cv7jb41fd/tables)stores all processed datasets on Redivis.
-- [IRW Code: ](https://github.com/KingArthur0205/irw/tree/main/data)a list of code used to standardize datasets into IRW format.
+- [IRW Code: ](https://github.com/ben-domingue/irw/tree/main/data)a list of code used to standardize datasets into IRW format.
+- [Project Map: ](ARCHITECTURE.md)which repo owns what, where the data lives, and which document is authoritative when two disagree.
 - **Contact Us:** for any question, please contact us at itemresponsewarehouse@stanford.edu.
 
 ## Installation & Getting Started
