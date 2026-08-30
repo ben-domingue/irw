@@ -55,10 +55,12 @@ credential exists anywhere in this repo (`grep -ri
 "googlesheets4\|gs4_auth\|service_account\|GOOGLE"` across the repo turns up
 nothing). The user was asked how to handle this and chose **CSV staging**,
 matching the pattern `automated_finding` already uses for its own
-no-write-access queue sheet: stage rows in `tags/tags_queue_staging.csv`
+no-write-access queue sheet: write rows to `tags/tags_auto.csv`
 (repo-tracked — **not** scratchpad or `/tmp`, which can't be found again
-once the session ends) and tell the user what to paste into the sheet.
-Don't claim the sheet was updated.
+once the session ends). Don't claim the sheet was updated: it isn't, and
+it doesn't need to be. Since #1723 that file is a real pipeline input —
+`03_tags.R` unions it into `tags.csv` on every run, so rows reach the
+published Redivis table without anyone touching the Sheet.
 
 If direct write is ever wanted later, it needs a Google service-account (or
 OAuth) credential the user provisions themselves — that's not something to
@@ -151,18 +153,32 @@ echo '{"table": "table_a", "construct_name": "...", "context_text": "...",
        "primary_languages": "eng", "notes": ""}' \
   | python3 scripts/stage_tag_row.py
 ```
-Sets `Rater = "claude-auto"` automatically. Refuses to add a table already
-in `tags/tags_queue_staging.csv` unless `--force` is passed — this is the
-local half of idempotency; `check_table_status.py` (Step 1) is the live-sheet
-half.
+Sets `Rater = "claude-auto"` automatically, which is load-bearing: `03_tags.R`
+**halts** if any row in this file has a different Rater, on the grounds that a
+human row placed here would be silently outranked by the Sheet and lost.
+Refuses to add a table already in `tags/tags_auto.csv` unless `--force` is
+passed — the local half of idempotency; `check_table_status.py` (Step 1) is the
+live-sheet half.
 
 ## Step 6 — Hand off
 
-Once a batch is staged, tell the user exactly what's in
-`tags/tags_queue_staging.csv` and that it needs to be pasted into the "IRW
-Tags" sheet by hand (no write path exists — see above). Don't delete the
-staging file until the user confirms the rows actually made it into the
-sheet.
+Open a pull request with the new rows in `tags/tags_auto.csv`. **Merging is the
+accept** — no pasting, and nothing to confirm afterwards.
+
+Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with two rules
+worth knowing:
+
+- **A human row in the Sheet always wins**, keyed on `table`. If someone has
+  already tagged a table by hand, the auto row for it is dropped at export.
+- **That is also the retirement path.** A superseded auto row stops being
+  published whether or not anyone remembers to delete it, so leaving stale rows
+  in the file is untidy rather than dangerous. Delete them in the same PR when
+  you notice them.
+
+Auto rows face the same `TAG_VOCAB` enforcement as human rows, so a value
+outside the controlled vocabulary halts the pipeline instead of publishing.
+Run `Rscript tests/test_tags_union.R` from `metadata/` to check the union
+offline before opening the PR.
 
 ## Batch behavior
 
