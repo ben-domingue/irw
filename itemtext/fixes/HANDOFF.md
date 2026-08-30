@@ -1,5 +1,10 @@
 # Item text corrections — handoff
 
+> **Working directories archived 2026-08-29.** The audit diffs and the pilot
+> extractions that fed this workstream now live in
+> `itemtext/archive_v9_correction_workstream/`. They were being read as a live
+> review queue. See `itemtext/audit_queue_status_20260829/README.md`.
+
 State as of 2026-08-25. **The correction workstream is complete and released
 as `irw_text` v9.0** (531 tables). All 17 corrections are resolved:
 

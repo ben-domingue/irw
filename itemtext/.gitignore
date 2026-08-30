@@ -1,0 +1,4 @@
+# Diagnostic extractions from the closed v9.0 correction workstream.
+# Contains PPVT-4 / WJ-III material removed from the release under #1606/#1607.
+# Keep local; this repo is public.
+archive_v9_correction_workstream/audit_staging/
