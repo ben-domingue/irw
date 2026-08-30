@@ -161,7 +161,7 @@ Output is the same **wide, one-column-per-source shape** `zz` had — no
 same as `04_tables.R` printing `zz` to the console used to give Ben.
 Writes **a fresh report every run** — nothing is tracked or accumulated
 across runs (confirmed with Ben: he triages the current list by hand each
-time, no queue file needed here unlike `tags/tags_queue_staging.csv`).
+time, no queue file needed here unlike `tags/tags_auto.csv`).
 
 Output, all written to `metadata/` (path configurable via `--out`):
 - `table_audit_report_incomplete.txt` — **the one to open first.** Fixed-

@@ -8,7 +8,7 @@
 ##
 ## Produces a FRESH report every run (nothing persisted/tracked across runs
 ## -- Ben triages the current list by hand each time, so there is no queue
-## file here unlike tags/tags_queue_staging.csv or
+## file here unlike tags/tags_auto.csv or
 ## automated_finding/license_blocked_candidates.csv).
 ##
 ## REQUIRES workflow 1 (scripts/run_pipeline.sh) to have already been run in

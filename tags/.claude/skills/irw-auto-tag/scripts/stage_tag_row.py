@@ -5,9 +5,15 @@ Never writes to the Google Sheet directly -- there is no write-capable tool
 wired up for it (confirmed: only the public CSV export is reachable; no
 googlesheets4/service-account credentials exist in this repo). This mirrors
 automated_finding's established pattern: stage rows in a repo-tracked CSV
-(tags/tags_queue_staging.csv, NOT scratchpad or /tmp -- a scratchpad path
-can't be found again once the session ends) and have the user paste them
-into the sheet, rather than claiming the sheet was updated.
+(tags/tags_auto.csv, NOT scratchpad or /tmp -- a scratchpad path can't be
+found again once the session ends) rather than claiming the sheet was
+updated.
+
+Since issue #1723 that file is a real pipeline input: metadata/03_tags.R
+unions it into tags.csv on every run, human rows in the Sheet winning on
+conflict. So rows written here reach the published table via a merged PR,
+with no paste step. Rater is forced to "claude-auto" below because
+03_tags.R refuses to run on a file containing any other rater.
 
 Refuses to add a table that's already in the staging file (local
 idempotency) unless --force is passed. This does NOT check the live sheet --
@@ -27,7 +33,7 @@ import sys
 from pathlib import Path
 
 # scripts/ -> irw-auto-tag/ -> skills/ -> .claude/ -> tags/
-STAGING_PATH = Path(__file__).resolve().parents[4] / "tags_queue_staging.csv"
+STAGING_PATH = Path(__file__).resolve().parents[4] / "tags_auto.csv"
 
 COLUMNS = [
     "table", "Rater", "Construct Name", "Context Text", "Item text available?",
