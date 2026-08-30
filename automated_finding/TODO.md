@@ -59,7 +59,32 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Check the access terms before building anything. Rows are in
   `runs/prefilter_nonlatin_2026-08-29.csv`.
 
-- [ ] **Non-Latin-script re-run: discovery and prefilter DONE, triage running.** 955 terms, all default repo
+- [x] **Non-Latin-script re-run CLOSED** (2026-08-29/30). 955 terms -> 1,871
+  hits -> 690 unique deposits -> 112 keeps -> 38 tier A+B leads -> 27 triaged
+  -> **0 good**, 3 worth_retrying, 12 human_review. See `BATCH_LOG.md`
+  (2026-08-29c) for the full accounting and the three findings. The surface is
+  not a second Zenodo backlog; size any Spanish/German/French/Dutch follow-up
+  against this result rather than against the 2026-07-15 English re-discovery.
+
+- [ ] **3 `worth_retrying` leads from the non-Latin sweep, unworked.**
+  `mendeley 4xtjnbwjt8` (人工智能与抑郁水平, 10,671 x 456 -- much the largest
+  thing the sweep found, flagged only for duplicate (id,item) keys consistent
+  with repeated measures), `zenodo.6844831` (supervisor-subordinate dyads,
+  249 x 52, only issue is a low-confidence id column), and `zenodo.19912968`,
+  which is already deferred above on its "Anonymous, Anonymous" author field.
+  Rows in `runs/retriage_nonlatin_2026-08-29.csv`.
+
+- [ ] **The seen-keys ledger records no verdict, so a fixed connector never
+  un-blocks what it buried.** `repo_triage_seen_keys.csv` is `key,date` only.
+  11 of the 38 non-Latin leads were skipped as already-seen, including the five
+  highest-scoring in the batch; five of those were seen before the 2026-08-27
+  connector fixes and four are `10.34894/*` (DataverseNL, triaged while the
+  Dataverse resolver could only reach Harvard). Two separable things: release
+  and re-triage those five keys (the 2026-08-28 Zenodo release is the
+  precedent, backup + released-list in `runs/`), and decide whether the ledger
+  should carry a verdict and connector epoch. Neither done -- both mutate a
+  standing record. **Deliberately not escalated to #1702**: item 16 of that
+  write-up says acquisition is not the Year 3 constraint. 955 terms, all default repo
   sources, chunked into `runs/candidates_nonlatin_NN_2026-08-29.csv`
   (~4.7h, log at `runs/discover_nonlatin_2026-08-29.log`). When it finishes:
   concatenate the chunks, prefilter with `prefilter_candidates.py`, rank with

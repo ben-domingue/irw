@@ -24,7 +24,7 @@ IRW standard (the checks below mirror this):
   treat     0/1 if data come from an RCT
   rt        response time in seconds
   date      longitudinal timing in Unix seconds
-  multiple scales -> must be split into separate files
+  multiple constructs -> must be split into separate tables
 """
 
 from __future__ import annotations
@@ -678,7 +678,7 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                                 "correctly aligned after conversion."))
 
     # P2 #7: multi-scale detection — distinct item-name prefixes suggest separate
-    # scales that must be split into separate files.
+    # constructs that must be split into separate tables.
     if "item" in df.columns:
         prefixes = [re.split(r"[\d_]", str(i))[0].lower()
                     for i in df["item"].unique() if str(i)]
@@ -688,14 +688,14 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
             checks.append(Check("multi_scale*", "warn",
                                 f"Item names suggest {len(dominant)} subscales "
                                 f"({list(dominant.index)[:4]}) — IRW requires "
-                                "separate files per scale."))
+                                "separate tables per construct."))
 
     # Response-scale homogeneity. The existing multi_scale* check reads item
     # *names*; this one reads the responses themselves, which is what actually
     # catches a mailing that bundled several instruments. Two distinct
     # failures fall out of the same per-item range profile:
     #   * a substantial minority of items on a different range  -> two scales
-    #     in one table, which breaks "one file per scale" and leaves `resp`
+    #     in one table, which breaks "one table per construct" and leaves `resp`
     #     meaning different things in different rows;
     #   * one or two isolated items off the modal range -> almost always not
     #     an item at all (an administrative or count column swept in).
@@ -720,7 +720,7 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
                     f"items span more than one response scale: "
                     f"{modal_n} on {modal[0]}-{modal[1]} and {len(over)} on "
                     f"{[f'{a}-{b}' for a, b in list(other)[:3]]}. IRW requires "
-                    "one file per scale; split before submitting."))
+                    "one table per construct; split before submitting."))
             elif len(over):
                 checks.append(Check("item_scale_outlier", "warn",
                     f"{len(over)} item(s) fall outside the table's "

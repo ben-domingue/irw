@@ -292,7 +292,7 @@ a processing script, check the dataset's DOI against the
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
-| `resp_scale_mixed` | Items span more than one response scale (a fail from `run_qc`) | Split into one table per scale before submitting |
+| `resp_scale_mixed` | Items span more than one response scale (a fail from `run_qc`) | Check whether the table bundles more than one construct; if so, split into separate tables per construct. A single construct measured with mixed item formats (e.g. 0/1 multiple-choice alongside 0-3 constructed-response) belongs in one table |
 | `item_scale_outlier` | One or two items fall outside the table's scale (a warn from `run_qc`) | Usually an administrative or count column swept in as an item — check and drop it |
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
@@ -333,7 +333,7 @@ suffix, counts).
 |---|---|
 | `resp_direction*` | Cannot auto-verify coding direction within items — confirm no unreversed items |
 | `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses. Verify which: a composite/subscale sum is not a response and must be dropped; a genuinely continuous per-item response (e.g. a 0–100 slider) is legitimate — keep `resp` as a float, don't coerce to integer |
-| `multi_scale*` | Item names suggest 2+ subscales — IRW requires separate files per scale |
+| `multi_scale*` | Item names suggest 2+ subscales — IRW requires separate tables per construct |
 | `imputed_values*` | Column names or value distributions suggest imputed data — IRW requires removal |
 | `date_numeric*` / `date_range*` | `date` column not numeric or too small for Unix seconds |
 | `rt_units*` / `rt_negative*` | `rt` looks like milliseconds, or has negative values |

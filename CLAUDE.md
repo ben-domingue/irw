@@ -6,6 +6,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 The **Item Response Warehouse (IRW)** is a large-scale open-source repository that standardizes and aggregates item response datasets to facilitate psychometric research. Published in *Behavior Research Methods* (2025). Data lives on Redivis; this repo contains the processing pipeline.
 
+**Start with [`ARCHITECTURE.md`](ARCHITECTURE.md)** — which repo owns what, where
+the data lives, and which document is authoritative when two disagree.
+
 ## Running Things
 
 **Streamlit dataset builder:**
