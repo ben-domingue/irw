@@ -7,6 +7,11 @@
 
 library(gsheet)
 
+##Multi-select normalisation for `sample` and `construct type`, applied after
+##the sheet export and before write_csv. See tag_normalize.R and issue #1720.
+##The Google Sheet itself is deliberately not modified.
+source("tag_normalize.R")
+
 ##Columns kept, by POSITION, from the 13-column sheet:
 ##  1 table, 6:12 Age Range .. Primary Language(s), 3 Construct Name
 ##
@@ -51,6 +56,10 @@ get_tags <- function(db) {
     n <- apply(tag[, -1], 1, function(x) sum(!is.na(x)))
     print(paste0(db$name, ": ", nrow(tag), " rows -> ", db$file.out,
                  " (", sum(n == 0), " named but untagged)"))
+
+    ##Normalise the multi-select columns before writing. Fails loudly on any
+    ##atom outside the controlled vocabulary rather than publishing it.
+    tag <- normalize_tag_columns(tag)
 
     readr::write_csv(tag, db$file.out)
     invisible(tag)
