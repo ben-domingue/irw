@@ -1,0 +1,242 @@
+[
+ {
+  "table": "florida_twins_auth",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "pisa2022_read",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "enem_2022_1mil_cn",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "dwyer_2025_genomics_pb",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "cfc_balaji_2019",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "gilbert_meta_40",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "florida_twins_grades",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "perceived_injustice_mourin",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "pass20_klosowska_2025_pass_hospital",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "preschool_sel_pl",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "pisa2009_math",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "aspirations_sonmez_2022",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "preschool_sel_akt",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "oxfordcovid_xue_2024_brs",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "shu_2025_translation_eib",
+  "warehouse": "item_response_warehouse"
+ },
+ {
+  "table": "jeilani_2024_self_efficacy",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "ecuador_2011_safety_crime",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "magiccats_ozono_2020",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "uti_newlands_2023_wpai",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "gahps_korner_2021",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "mexico_2025_q4safety_harassment",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "jeilani_2024_personal_growth",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "anunciacao_2025_personality_deference",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "mexico_2024_q4safety_govperformance",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "colombia_2023_politics_risks",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "heise_2024_mental_falsesign",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "mexico_2023_quality_low",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "gmc_kay_2025",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "eammi_grahe_2018_marriage_identity_allocation",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "sun_2025_morality_study1_fairnesshexaco",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "validatedtouchvideo_smit_2025_strength",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "lavallee_2019_oseb",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "spain_2025_sex_attitudes",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "buzgova_2023_gai",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "teicher_2015_mace_peer_physical",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "wolf_2017_study2_vitality_pre",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "ajaykumar_2023_experience",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "shan_2020_pd",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "alsuhibani_2022_paranoia_s3",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "shan_2020_g",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "dudasova_2021_gratitude",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "bitew_2020_osss3",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "pellerin2020_3dws",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "afaya_2020_footcare_knowledge",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "idemudia_2025_t201",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "pierro_2018_locomotion_s3",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "spain_2026_love_desire",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "pierro_2018_assessment_s4",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_sci",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_polarization_brexit",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_trustsource",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_tmsi",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "spain_2023_science_activities",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_protective_behaviours",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "spain_2023_identity_authenticity",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "spain_2023_identity_territorial",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_socialdistance",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "silk_2019_inattentive",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "parentalempathy_gonzalez_2021_empates_self_pilot",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "abdullah_2024_hbbloat_pbc",
+  "warehouse": "item_response_warehouse_4"
+ }
+]
