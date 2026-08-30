@@ -25,15 +25,36 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   `audit_batch.R --resp-dir` run until it is uploaded -- ship item text in the
   same pass as its response table, or it strands.
 
-- [ ] **Non-Latin-script re-run is in flight.** 955 terms, all default repo
+- [ ] **145 SRDA + 33 openICPSR records are mislabelled `dataverse` and fail
+  forever.** All 180 `resolve_error:FileListUnreachable` rows of the 2026-08-29
+  non-Latin prefilter are this: `10.6141` resolves to `srda.sinica.edu.tw`
+  (Taiwan's Survey Research Data Archive, Academia Sinica) and `10.3886` to
+  openICPSR, neither of which is a Dataverse. The DataCite sweep labels them
+  `dataverse`, so `_dataverse_files()` derives the installation from the
+  landing host, finds no Dataverse API, and returns FileListUnreachable --
+  the third instance of "a real failure wearing a nothing-here label" in this
+  log. Two separate things to decide: (a) the resolver should verify the
+  derived host actually serves a Dataverse API and return a terminal
+  `wrong_repository` rather than a retryable error; (b) whether SRDA is worth
+  a connector at all -- it is Taiwan's national survey archive (Taiwan Social
+  Change Survey, TEPS) and surfaced only because we searched in Chinese, but
+  access is likely registration-gated, which would make it license-blocked.
+  Check the access terms before building anything. Rows are in
+  `runs/prefilter_nonlatin_2026-08-29.csv`.
+
+- [ ] **Non-Latin-script re-run: discovery and prefilter DONE, triage running.** 955 terms, all default repo
   sources, chunked into `runs/candidates_nonlatin_NN_2026-08-29.csv`
   (~4.7h, log at `runs/discover_nonlatin_2026-08-29.log`). When it finishes:
   concatenate the chunks, prefilter with `prefilter_candidates.py`, rank with
   `rank_leads.py`, triage tier A+B. Early rate is ~4.6 candidates/term against
-  2.5/term on the Zenodo backlog sweep. **The terms were never logged**, so
-  append all 955 to `search_terms_log.csv` with the run's output file when it
-  completes. Note the Spanish/German/French/Dutch terms hit the same
-  English-only gate and are a further pool on top of these 955.
+  **Results**: 1,871 hits -> 690 unique deposits (63% duplicate rate across
+  translated terms, so the real yield is 0.72 unique deposits/term, not the
+  ~4.6 candidates/term the running log suggested). Prefilter: 112 keeps, 363
+  no_tabular_file, 35 license_unclear, 180 resolve errors (see above). Ranked
+  to 38 tier A+B leads in `runs/leads_nonlatin_2026-08-29.csv`; triage running
+  to `runs/triage_nonlatin_2026-08-29.csv`. The 955 terms are logged.
+  Note the Spanish/German/French/Dutch terms hit the same English-only gate and
+  are a further pool on top of these 955.
 
 - [ ] **`api.figshare.com/v2/articles/search` returns 422 on some queries**
   in the non-Latin run. Distinct from the known 403-under-concurrency issue
