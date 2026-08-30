@@ -6576,3 +6576,958 @@ date,query,output_file,notes
 2026-08-28,schoolexamen,runs/candidates_zenodo_backlog_2026-08-28.csv,full Zenodo backlog sweep (re-run of prior repo-mode term against fixed zenodo connector)
 2026-08-28,학교 시험,runs/candidates_zenodo_backlog_2026-08-28.csv,full Zenodo backlog sweep (re-run of prior repo-mode term against fixed zenodo connector)
 2026-08-28,psychometric validation,runs/candidates_zenodo_backlog_2026-08-28.csv,full Zenodo backlog sweep (re-run of prior repo-mode term against fixed zenodo connector)
+2026-08-29,认知反思,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,認知的熟慮,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التفكير المعرفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인지적 반성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,停止信号任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ストップシグナル課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة إشارة التوقف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정지 신호 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心智理论,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心の理論,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,نظرية العقل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,마음 이론,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,قلق الرياضيات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수학 불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反应风格,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反応スタイル,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,أسلوب الاستجابة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반응 스타일,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,执行功能,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,実行機能,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الوظيفة التنفيذية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,실행 기능,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反应时间,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反応時間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,زمن الاستجابة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반응 시간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,工作记忆,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ワーキングメモリ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الذاكرة العاملة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,작업 기억,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,抑制,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الكف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التثبيط,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,억제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,n-back任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,nバック課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة n-back,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,n-back 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Stroop任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ストループ課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة ستروب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,스트룹 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,侧抑制任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,フランカー課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة الفلانكر,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,플랭커 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,阅读流利性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,読みの流暢性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,طلاقة القراءة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,읽기 유창성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,阅读理解,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,読解力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الفهم القرائي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,읽기 이해,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,语音意识,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,音韻意識,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الوعي الصوتي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,음운 인식,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学成绩,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学の学力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التحصيل الرياضي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수학 성취,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,计算能力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数の概念理解,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المهارة الحسابية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수리 능력,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,语音拼读法,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,フォニックス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الصوتيات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,파닉스,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,词汇判断,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,語彙判断,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القرار المعجمي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,어휘 판단,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,词语识别,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,語の認識,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعرف على الكلمات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,단어 재인,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,词汇量,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,語彙,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المفردات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,어휘,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,拼写,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,スペリング,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإملاء,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,철자법,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,算术,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,算数,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الحساب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,산수,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数字认知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数の認知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإدراك العددي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수 인지,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,患者报告结局,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,患者報告アウトカム,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,النتائج التي يُبلغ عنها المريض,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,환자 보고 결과,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,抑郁,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,うつ病,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاكتئاب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,우울증,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القلق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,压力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ストレス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الضغط النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,스트레스,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,PTSD（创伤后应激障碍）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,PTSD（心的外傷後ストレス障害）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اضطراب ما بعد الصدمة (PTSD),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,PTSD（외상 후 스트레스 장애）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ADHD（注意缺陷多动障碍）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ADHD（注意欠如・多動症）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اضطراب نقص الانتباه وفرط الحركة (ADHD),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ADHD（주의력 결핍 과잉행동 장애）,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自闭症谱系,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自閉スペクトラム症,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,طيف التوحد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자폐 스펙트럼,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,物质使用,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,物質使用,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تعاطي المواد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,물질 사용,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疼痛,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,痛み,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الألم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,통증,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,睡眠质量,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,睡眠の質,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,جودة النوم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수면의 질,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疲劳,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疲労,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإرهاق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,피로,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,精神病态,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,サイコパシー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,السيكوباتية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정신병질,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,神经质,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,神経症傾向,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,العصابية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,신경증,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,情绪调节,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,感情調節,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تنظيم المشاعر,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정서 조절,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,冲动性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,衝動性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاندفاعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,충동성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,共情,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,移情,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,共感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعاطف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공감,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自我同情,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,セルフ・コンパッション,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعاطف مع الذات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기 자비,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,依恋,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,愛着,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعلق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,애착,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,孤独感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الوحدة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,외로움,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,悲伤,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,哀伤,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,悲嘆,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الحزن,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الحداد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,슬픔,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,애도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,大五人格,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ビッグファイブ人格,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الشخصية الخمسة الكبرى,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,빅 파이브 성격,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自恋,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自己愛,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,النرجسية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기애,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,幸福感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ウェルビーイング,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الرفاه النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,웰빙,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自我效能感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自己効力感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الكفاءة الذاتية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기 효능감,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,正念,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,マインドフルネス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اليقظة الذهنية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,마음챙김,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,生活满意度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,生活満足度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الرضا عن الحياة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,삶의 만족도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,价值观,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,価値観,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القيم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,가치관,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,道德推理,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,道徳的推論,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التفكير الأخلاقي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,도덕적 추론,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,对政府的信任,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,政府への信頼,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الثقة بالحكومة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정부 신뢰,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会情感学习,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会情動的学習,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعلم الاجتماعي والعاطفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사회정서학습,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,组织承诺,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,組織コミットメント,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الالتزام التنظيمي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,조직 몰입,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,变革型领导,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,変革型リーダーシップ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القيادة التحويلية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,변혁적 리더십,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职场欺凌,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,職場いじめ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التنمر في مكان العمل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직장 내 괴롭힘,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,工作投入,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ワーク・エンゲージメント,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الانخراط في العمل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직무 열의,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,组织公正,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,組織的公正,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,العدالة التنظيمية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,조직 공정성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理安全感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理的安全性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الأمان النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,심리적 안전감,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,组织公民行为,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,組織市民行動,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,سلوك المواطنة التنظيمية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,조직 시민 행동,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,智能手机成瘾,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,スマートフォン依存,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,إدمان الهاتف الذكي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,스마트폰 중독,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社交媒体成瘾,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ソーシャルメディア依存,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,إدمان وسائل التواصل الاجتماعي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,소셜 미디어 중독,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,网络游戏障碍,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ゲーム障害,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اضطراب الألعاب عبر الإنترنت,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,게임 장애,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,技术压力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,テクノストレス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ضغط التكنولوجيا,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,테크노스트레스,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,错失恐惧,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,見逃し恐怖,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الخوف من تفويت الأحداث,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,놓침에 대한 두려움,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体活动,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体活動,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,النشاط البدني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,신체 활동,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,运动动机,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,運動動機,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الدافعية للتمرين,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,운동 동기,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健康素养,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ヘルスリテラシー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الثقافة الصحية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,건강 리터러시,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,运动员认同,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,アスレチック・アイデンティティ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الهوية الرياضية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,운동 정체성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,运动焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,スポーツ不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,قلق الرياضة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,스포츠 불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,关系满意度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,関係満足度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الرضا العلائقي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,관계 만족도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,婚姻满意度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,夫婦満足度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الرضا الزوجي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,결혼 만족도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,亲密伴侣暴力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,親密なパートナーからの暴力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,العنف بين الشركاء الحميمين,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,친밀한 파트너 폭력,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,浪漫嫉妒,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ロマンチックな嫉妬,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الغيرة الرومانسية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,낭만적 질투,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,入学准备,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,就学準備,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاستعداد للمدرسة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학교 준비도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,早期识字,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,初期リテラシー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,محو الأمية المبكر,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,초기 문해력,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,儿童气质,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,子どもの気質,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مزاج الطفل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,아동 기질,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化适应,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化変容,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التثاقف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문화 적응,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化适应压力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化変容ストレス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ضغط التثاقف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문화 적응 스트레스,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,双文化认同,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,バイカルチュラル・アイデンティティ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الهوية الثقافية المزدوجة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,이중문화 정체성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化能力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,文化的コンピテンス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الكفاءة الثقافية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문화적 역량,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,创伤后成长,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心的外傷後成長,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,النمو ما بعد الصدمة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,외상 후 성장,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,同情疲劳,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,共感疲労,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,إرهاق التعاطف,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공감 피로,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,道德损伤,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,モラル・インジャリー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإصابة الأخلاقية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,도덕적 손상,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疼痛灾难化,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,痛みの破局的思考,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,كارثية الألم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,통증 파국화,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疾病感知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疾病認知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تصور المرض,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,질병 인식,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,慢性疼痛,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الألم المزمن,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,만성 통증,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健康相关生活质量,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健康関連QOL,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,جودة الحياة المرتبطة بالصحة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,건강 관련 삶의 질,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,右翼威权主义,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,右翼権威主義,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاستبداد اليميني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,우익 권위주의,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会支配取向,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会的支配志向性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التوجه نحو الهيمنة الاجتماعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사회 지배 지향성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,偏见,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,偏見,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التحيز,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,편견,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,气候变化态度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,気候変動に対する態度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مواقف تغير المناخ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,기후 변화 태도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,民粹主义,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ポピュリズム,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الشعبوية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,포퓰리즘,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,公民参与,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,市民的関与,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المشاركة المدنية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,시민 참여,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,性别歧视,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,両価的性差別主義,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التمييز الجنسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,양가적 성차별주의,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,元认知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,メタ認知,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ما وراء المعرفة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,메타인지,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自我调节学习,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自己調整学習,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التعلم الذاتي المنظم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기 조절 학습,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,考试焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,試験不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,قلق الاختبارات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,시험 불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,成长型思维,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,グロースマインドセット,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,عقلية النمو,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,성장 마인드셋,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,批判性思维,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,批判的思考,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التفكير الناقد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,비판적 사고,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空间推理,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空間推論,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاستدلال المكاني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공간 추론,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,认知需求,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,認知欲求,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الحاجة إلى التفكير,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인지 욕구,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职业适应性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,キャリア適応性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القدرة على التكيف المهني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,진로 적응성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职业认同,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,職業的アイデンティティ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الهوية المهنية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직업 정체성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职业决策,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,進路決定,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,صنع القرار المهني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,진로 의사결정,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职业决策困难,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,進路未決定,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التردد المهني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,진로 미결정,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,慢性痛,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,生活质量,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,生活の質,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,جودة الحياة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,삶의 질,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,功能障碍,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,機能障害,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإعاقة الوظيفية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,기능 장애,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,症状清单,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,症状チェックリスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,قائمة الأعراض,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,증상 체크리스트,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,用药依从性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,服薬アドヒアランス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الالتزام بالدواء,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,약물 순응도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,患者满意度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,患者満足度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,رضا المريض,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,환자 만족도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会支配指向性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사회적 지배 지향성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,种族偏见,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,人種的偏見,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التحيز العنصري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인종 편견,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,群际接触,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,集団間接触,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاتصال بين المجموعات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,집단 간 접촉,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,环境态度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,環境態度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المواقف البيئية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,환경 태도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,气候变化信念,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,気候変動に関する信念,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,معتقدات تغير المناخ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,기후변화 신념,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学生投入,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学習への取り組み,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مشاركة الطلاب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학생 참여,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,教师自我效能感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,教師の自己効力感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,كفاءة المعلم الذاتية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,교사 자기 효능감,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学业动机,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学業的動機づけ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الدافعية الأكاديمية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학업 동기,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学习策略,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学習方略,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,استراتيجيات التعلم,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학습 전략,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,民族认同,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,民族的アイデンティティ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الهوية العرقية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,민족 정체성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,污名,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,スティグマ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الوصمة الاجتماعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,낙인,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,求助行为,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,援助要請,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,طلب المساعدة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,도움 추구,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,强迫症,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,強迫性障害,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الوسواس القهري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,강박 장애,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,饮食态度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,食行動,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المواقف الغذائية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,식이 태도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健康焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健康不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القلق الصحي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,건강 불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,躯体化,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体化,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التجسيم النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,신체화,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,歧视,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,差別,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التمييز,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,차별,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,跨文化,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,異文化間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,عبر الثقافات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문화 간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教信仰,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教的信念,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المعتقدات الدينية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,종교적 신념,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,灵性健康,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,スピリチュアリティ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الرفاهية الروحية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,영적 웰빙,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,应对策略,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,コーピング方略,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,استراتيجيات المواجهة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,대처 전략,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,情绪化进食,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,感情的摂食,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الأكل العاطفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정서적 섭식,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理灵活性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理的柔軟性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المرونة النفسية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,심리적 유연성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教应对,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教的コーピング,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التكيف الديني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,종교적 대처,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,性别角色态度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,性役割態度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مواقف الأدوار الجندرية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,성역할 태도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,未来时间洞察力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,未来展望,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,منظور الزمن المستقبلي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,미래시간전망,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理权利感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理的権利感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاستحقاق النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,심리적 특권의식,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,嫉妒量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,妬み尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس الحسد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,질투 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体监视,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体監視,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مراقبة الجسد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,신체 감시,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,沉思量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反芻尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس الاجترار الفكري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반추 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,工作激情,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ワークパッション,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الشغف بالعمل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직무열정,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,焦虑敏感性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,不安感受性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,حساسية القلق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,불안 민감성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,对人工智能的信任,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,人工知能への信頼,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الثقة بالذكاء الاصطناعي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인공지능 신뢰,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,育儿压力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,育児ストレス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التوتر الأبوي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,양육 스트레스,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,财务焦虑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,経済的不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القلق المالي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,재정 불안,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职场无礼行为,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,職場での無礼な行動,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,السلوك غير المهذب في مكان العمل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직장 무례함,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理资本,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理的資本,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,رأس المال النفسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,심리적 자본,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,疫苗犹豫,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ワクチン忌避,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التردد في تلقي اللقاح,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,백신 주저,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心流体验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,フロー体験,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تجربة التدفق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,몰입 경험,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,好奇心量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,好奇心尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس الفضول,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,호기심 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,亲环境行为,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,環境配慮行動,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,السلوك الموالي للبيئة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,친환경 행동,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,食物不安全,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,食料不安,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,انعدام الأمن الغذائي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,식량 불안정,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,微歧视,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,マイクロアグレッション,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاعتداءات الدقيقة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,미묘한 차별,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自我表露,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自己開示,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإفصاح عن الذات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기 개방,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,求助态度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,援助要請態度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مواقف طلب المساعدة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,도움 요청 태도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会赞许性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会的望ましさ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المرغوبية الاجتماعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사회적 바람직성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,心理一致感,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,首尾一貫感覚,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الشعور بالتماسك,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,일관성 감각,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,真实型领导,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,オーセンティックリーダーシップ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القيادة الأصيلة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,진성 리더십,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,工作重塑,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ジョブ・クラフティング,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,إعادة صياغة الوظيفة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,잡 크래프팅,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,痛苦承受力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,苦痛耐性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تحمل الضيق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,고통 감내력,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体欣赏,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,身体への肯定的評価,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تقدير الجسد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,신체 존중감,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,健食症,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,オルトレキシア,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الأورثوركسيا,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,오르토렉시아,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,直觉性饮食,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,直感的摂食,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الأكل الحدسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직관적 식사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,失眠严重程度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,不眠重症度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,شدة الأرق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,불면증 심각도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,医疗不信任,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,医療不信,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,عدم الثقة الطبية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,의료 불신,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,职场排斥,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,職場での排斥,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,النبذ في مكان العمل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,직장 따돌림,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,人工智能素养,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,AIリテラシー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,محو الأمية في الذكاء الاصطناعي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인공지능 리터러시,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,攻击性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,攻撃性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,العدوان,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공격성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,创造力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,創造性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الإبداع,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,창의성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,好奇心 (zh),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,好奇心 (ja),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الفضول,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,호기심,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,嫉妒,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,嫉妬,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الحسد,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,질투,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,坚毅,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,グリット,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المثابرة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,그릿,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,乐观,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,楽観性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التفاؤل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,낙관성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教性 (zh),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,宗教性 (ja),candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التدين,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,종교성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反刍思维,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反芻思考,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الاجترار الفكري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반추,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,임포스터,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,冒名顶替,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,インポスター,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المحتال,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,饮酒,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,飲酒,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,استهلاك الكحول,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,음주,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,药物使用,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,薬物使用,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تعاطي المخدرات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,약물 사용,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,性别角色,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,性役割,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الدور الجندري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,성역할,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,网络游戏,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,インターネットゲーム,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ألعاب الإنترنت,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인터넷 게임,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,经济不平等,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,経済的不平等,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,عدم المساواة الاقتصادية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,경제적 불평등,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会支配,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,社会的支配,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,الهيمنة الاجتماعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사회적 지배,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,西蒙任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,サイモン課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة سيمون,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사이먼 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,西蒙效应,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,サイモン効果,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تأثير سيمون,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,사이먼 효과,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,情绪Stroop,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,感情ストループ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ستروب العاطفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,정서 스트룹,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数字Stroop,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数的ストループ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ستروب العددي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,숫자 스트룹,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空间Stroop,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空間ストループ,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ستروب المكاني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공간 스트룹,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,多源干扰任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,マルチソース干渉課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة التداخل متعدد المصادر,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,다중 출처 간섭 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,点探测任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ドットプローブ課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة النقطة المسبار,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,점탐사 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,注意偏向任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,注意バイアス課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة التحيز الانتباهي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,주의 편향 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Navon任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ナヴォン課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة نافون,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,네이번 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,整体-局部任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,全体-局所課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة الكل والجزء,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,전체-부분 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,AX-CPT持续性操作测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار AX-CPT,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,持续性操作任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,持続的遂行課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة الأداء المستمر,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,지속수행 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空间刺激反应相容性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空間的刺激反応適合性,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,توافق المثير والاستجابة المكاني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공간 자극-반응 양립성,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,一致性效应,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,一致性効果,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تأثير التطابق,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,일치성 효과,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,冲突适应,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,葛藤適応,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,التكيف مع التعارض,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,갈등 적응,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反应抑制任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反応抑制課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة تثبيط الاستجابة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반응 억제 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,内隐联想测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,潜在連合テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار الارتباط الضمني,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,암묵적 연합 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,瑞文渐进矩阵,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,レーヴン漸進的マトリックス,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مصفوفات رافن التتابعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,레이븐 누진행렬 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Posner线索任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,ポズナー手がかり課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة بوزنر للإشارة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,포스너 단서 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,视觉搜索任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,視覚探索課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة البحث البصري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,시각 탐색 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数字广度任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数唱課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة مدى الأرقام,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,숫자 폭 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,阅读广度任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,リーディングスパン課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة مدى القراءة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,읽기 폭 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,爱荷华博弈任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,アイオワギャンブリング課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة آيوا للمقامرة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,아이오와 도박 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,气球模拟风险任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,風船アナログリスク課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة المخاطرة بالبالون,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,풍선 아날로그 위험 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,独裁者博弈,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,独裁者ゲーム,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,لعبة الديكتاتور,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,독재자 게임,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,科尔西方块任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,コルシブロック課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة كورسي لضرب المكعبات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,코르시 블록 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,压力感知量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,知覚ストレス尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس الإجهاد المدرك,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,지각된 스트레스 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,UCLA孤独量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,UCLA孤独感尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس UCLA للشعور بالوحدة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,UCLA 외로움 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,多维感知社会支持量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,多次元領域社会的支援認知尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,المقياس متعدد الأبعاد للدعم الاجتماعي المدرك,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,다차원적 지각된 사회적 지지 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Buss-Perry攻击性问卷,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,バス・ペリー攻撃性質問紙,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,استبيان باس بيري للعدوان,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Buss-Perry 공격성 질문지,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,领域特定风险承担量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,領域別リスクテイキング尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس المخاطرة الخاص بالمجال,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,영역별 위험감수 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,问题赌博严重程度指数,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,問題ギャンブル重症度指数,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مؤشر شدة القمار الإشكالي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문제도박 심각도 지수,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Barratt冲动性量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,バラット衝動性尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس باريت للاندفاعية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Barratt 충동성 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Maslach职业倦怠量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,マスラック・バーンアウト・インベントリー,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,قائمة مسلاش للاحتراق الوظيفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,Maslach 소진 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,生活满意度量表,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,人生満足度尺度,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مقياس الرضا عن الحياة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,삶의 만족도 척도,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,酒精使用障碍识别测试,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,アルコール使用障害同定テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار تحديد اضطرابات استخدام الكحول,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,响应时间,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,応答時間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,وقت الاستجابة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,응답 시간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反应潜伏期,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,反応潜時,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,كمون الاستجابة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,반응 잠재기,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,决策时间,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,意思決定時間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,وقت اتخاذ القرار,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,의사결정 시간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,选择反应时间,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,選択反応時間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,زمن رد الفعل الاختياري,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,선택 반응시간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,简单反应时间,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,単純反応時間,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,زمن رد الفعل البسيط,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,단순 반응시간,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,鼠标追踪任务,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,マウストラッキング課題,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,مهمة تتبع الفأرة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,마우스 트래킹 과제,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自定步速阅读,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,自己ペース読解,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القراءة الذاتية الوتيرة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,자기 조절 읽기,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,成就测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学力テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار التحصيل,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,성취도 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,阅读理解测试,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,読解力テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار الفهم القرائي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,읽기 이해 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,词汇测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,語彙テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار المفردات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,어휘 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,数学テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار الرياضيات,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,수학 시험,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,知识测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,知識テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار المعرفة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,지식 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,推理测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,推論テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار الاستدلال,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,추론 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空间能力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,空間能力,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,القدرة المكانية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,공간 능력,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,项目反应理论,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,項目反応理論,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,نظرية استجابة المفردة,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,문항반응이론,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学生评估,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学習評価,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,تقييم الطلاب,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학생 평가,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,语言能力测试,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,語学能力試験,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار الكفاءة اللغوية,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,언어 능력 시험,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,认知测验,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,認知テスト,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,اختبار معرفي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,인지 검사,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学校考试,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,学校試験,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,امتحان مدرسي,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources
+2026-08-29,학교 시험,candidates_nonlatin_all_2026-08-29.csv,non-Latin-script re-run under the fixed relevance filter (English-only title gate removed 2026-08-25); all default repo sources

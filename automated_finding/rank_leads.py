@@ -27,12 +27,37 @@ import re
 from collections import Counter
 
 # Title signals that a deposit is an item-response instrument.
+#
+# These are matched against deposit titles in whatever language the repository
+# recorded them, so the vocabulary is multilingual. An English-only title regex
+# here is the same defect that the relevance gate had until 2026-08-25 -- it
+# silently scores every non-English deposit at zero on the strongest cheap
+# signal, which is exactly backwards for a sweep whose whole point is to reach
+# them. Measured on the 2026-08-29 non-Latin sweep: 105 of 690 deposits carry a
+# non-Latin-script title and 99 of those matched nothing.
+#
+# Latin-script additions keep \b word boundaries; CJK/Arabic/Cyrillic cannot
+# use them (no word breaks), so those alternatives are matched bare. Do not
+# move a Latin token into the bare group -- an unanchored "test" matches
+# "Hypotheses Testing" and "Testing the Darwinian function".
+_T_STRONG_EN = (r"questionnaire|inventory|likert|psychometric|rasch|"
+                r"item response|factor structur|validation of the|scale")
+_T_MED_EN = (r"scale|survey|assessment|test|items|responses|measure|"
+             r"reliability|validity|instrument")
+_T_STRONG_LAT = (r"cuestionario|escala|inventario|question[aá]rio|fragebogen|"
+                 r"skala|[ée]chelle|vragenlijst|schaal|[oö]l[cç]ek")
+_T_MED_LAT = (r"encuesta|prueba|fiabilidad|validez|pesquisa|teste|umfrage|"
+              r"befragung|messung|enqu[eê]te|mesure|meting|anket|"
+              r"[oö]l[cç][uü]m")
+_T_STRONG_CJK = (r"问卷|量表|心理测量|信度|效度|質問紙|尺度|アンケート|信頼性|妥当性|"
+                 r"설문지|척도|문항|신뢰도|타당도|استبيان|استبانة|مقياس|"
+                 r"опросник|шкала|анкета")
+_T_MED_CJK = (r"调查|测验|测试|评估|項目|調査|評価|조사|검사|평가|"
+              r"استطلاع|اختبار|تقييم|тест|анкетирование")
 T_STRONG = re.compile(
-    r"\b(questionnaire|inventory|likert|psychometric|rasch|item response|"
-    r"factor structur|validation of the|scale)\b", re.I)
+    rf"(\b({_T_STRONG_EN}|{_T_STRONG_LAT})\b)|({_T_STRONG_CJK})", re.I)
 T_MED = re.compile(
-    r"\b(scale|survey|assessment|test|items|responses|measure|"
-    r"reliability|validity|instrument)\b", re.I)
+    rf"(\b({_T_MED_EN}|{_T_MED_LAT})\b)|({_T_MED_CJK})", re.I)
 # Deposits that are structurally not per-respondent item data.
 T_NEG = re.compile(
     r"\b(systematic review|meta-analys|bibliometric|simulation|genome|"
