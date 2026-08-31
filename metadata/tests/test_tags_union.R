@@ -125,6 +125,37 @@ guards <- function() {
     expect_error(run_union(c("human_tbl"), reordered),
                  "header does not match the expected 13-column layout",
                  "a reordered auto header is refused before KEEP_COLS can misfire")
+
+    ##Sentinel rows: SKILL.md Steps 2/5 tell the tagger to stage table + Rater +
+    ##Notes only, every tag field blank, when a source is paywalled or has no
+    ##working link. Neither Rater nor Notes survives KEEP_COLS, so publishing one
+    ##yields a bare table name that reads as "tagged" everywhere downstream.
+    ###1723's first live union (2026-08-31) shipped 5 of these.
+    write_row <- function(path, values) {
+        d <- as.data.frame(matrix("", nrow = 1, ncol = length(AUTO_COLS)),
+                           stringsAsFactors = FALSE)
+        names(d) <- AUTO_COLS
+        for (nm in names(values)) d[1, nm] <- values[[nm]]
+        readr::write_csv(d, path)
+        path
+    }
+
+    sentinel <- write_row(tempfile(fileext = ".csv"), list(
+        table = "paywalled_tbl", Rater = AUTO_RATER,
+        Notes = "cannot fully access due to paywall"))
+    out <- run_union(c("human_tbl"), sentinel)
+    check(!("paywalled_tbl" %in% out$table),
+          "a tag-less sentinel auto row is not published")
+    check(nrow(out) == 1,
+          "dropping a sentinel leaves the sheet rows untouched")
+
+    ##The guard keys on "no tag content at all", not "some fields missing" --
+    ##a partially tagged auto row must still publish.
+    partial <- write_row(tempfile(fileext = ".csv"), list(
+        table = "partial_tbl", Rater = AUTO_RATER, `Age Range` = "Adult (18+)"))
+    out2 <- run_union(c("human_tbl"), partial)
+    check("partial_tbl" %in% out2$table,
+          "an auto row with any real tag content is still published")
 }
 guards()
 

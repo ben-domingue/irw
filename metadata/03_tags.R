@@ -135,6 +135,27 @@ get_tags <- function(db) {
     if (!is.null(auto)) {
         superseded <- auto$table %in% tag$table
         auto <- auto[!superseded, ]
+        ##Drop sentinel rows: the tagger stages `table`/`Rater`/`Notes` only,
+        ##with every tag field blank, when a source is paywalled or has no
+        ##working link (SKILL.md Steps 2/5). That row is a local marker meaning
+        ##"attempted, unavailable" -- but neither Rater nor Notes survives
+        ##KEEP_COLS, so publishing one yields a row that is nothing but a table
+        ##name. It asserts the table is tagged without saying anything about it,
+        ##and it makes the table read as covered in audit_tables.R's tags_csv
+        ##column, so it will never resurface as needing tags. The `nom` branch
+        ##below already refuses its staging file for exactly this reason
+        ##("would publish 14 tag-less rows"); this is that guard in code rather
+        ##than prose. First live union (2026-08-31, #1723) published 5 of them.
+        ##They stay in tags_auto.csv -- that file plus the Sheet is what stops
+        ##the tagger retrying a paywalled source, so nothing is re-attempted.
+        empty <- apply(auto[, -1, drop = FALSE], 1,
+                       function(x) all(is.na(x) | trimws(as.character(x)) == ""))
+        if (any(empty)) {
+            print(paste0(db$name, ": dropped ", sum(empty),
+                         " tag-less auto row(s) (sentinels, not tags): ",
+                         paste(auto$table[empty], collapse = ", ")))
+            auto <- auto[!empty, , drop = FALSE]
+        }
         stopifnot(identical(names(auto), names(tag)))
         tag <- rbind(tag, auto)
         print(paste0(db$name, ": +", nrow(auto), " auto rows from ", db$file.auto,

@@ -165,7 +165,7 @@ live-sheet half.
 Open a pull request with the new rows in `tags/tags_auto.csv`. **Merging is the
 accept** — no pasting, and nothing to confirm afterwards.
 
-Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with two rules
+Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with three rules
 worth knowing:
 
 - **A human row in the Sheet always wins**, keyed on `table`. If someone has
@@ -174,6 +174,17 @@ worth knowing:
   published whether or not anyone remembers to delete it, so leaving stale rows
   in the file is untidy rather than dangerous. Delete them in the same PR when
   you notice them.
+- **Sentinel rows are staged but never published.** The blank rows Steps 2 and 5
+  tell you to write for a paywalled source or a dead link — `table`, `Rater` and
+  `Notes` only — are dropped at the union. Neither `Rater` nor `Notes` survives
+  `KEEP_COLS`, so publishing one would put a bare table name in the public tags
+  table: it would assert the table is tagged while saying nothing about it, and
+  `audit_tables.R` would count it as covered, so it could never resurface as
+  needing tags. Keep writing them — they still live in `tags_auto.csv`, and that
+  file plus the Sheet is what stops the tagger re-attempting a paywalled source.
+  They just stop at the export boundary. (Added after the first live union on
+  2026-08-31 published 5 of them; `tests/test_tags_union.R` now covers both the
+  drop and the fact that a *partially* tagged row still publishes.)
 
 Auto rows face the same `TAG_VOCAB` enforcement as human rows, so a value
 outside the controlled vocabulary halts the pipeline instead of publishing.
