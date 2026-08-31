@@ -5,7 +5,7 @@ Dictionary sheets included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (84 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (82 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -24,8 +24,6 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | nguyen_2026_isi | core | 1 |  |  | 1 |  |
 | nguyen_2026_mspss | core | 1 |  |  | 1 |  |
 | nguyen_2026_pic | core | 1 |  |  | 1 |  |
-| szabo_2025_bwas | core | 1 |  |  | 1 |  |
-| tang_2024_caregiver_child_attachment | core | 1 |  |  | 1 |  |
 | hachenberger_2025_stroop_main_nominal | nom |  | 1 | 1 |  |  |
 | hachenberger_2025_stroop_pilot_nominal | nom |  | 1 | 1 |  |  |
 | abdullah_2024_hbbloat_subjnorm | core |  | 1 | 1 |  | 1 |
@@ -39,7 +37,9 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | hachenberger_2025_gonogo_pilot | core |  | 1 | 1 |  | 1 |
 | hachenberger_2025_stroop_main_bin | core |  | 1 | 1 |  | 1 |
 | hachenberger_2025_stroop_pilot_bin | core |  | 1 | 1 |  | 1 |
-_...and 54 more, see the .txt or .csv._
+| hachenberger_2025_webexec_main | core |  | 1 | 1 |  | 1 |
+| hachenberger_2025_webexec_pilot | core |  | 1 | 1 |  | 1 |
+_...and 52 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
