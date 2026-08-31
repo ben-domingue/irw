@@ -104,11 +104,17 @@ self-cancel. Nothing is left `in_progress`, so the queue is clean to resume:
    (it reads only AVAILABLE rows). Batches 002-005 discovered access tricks that did
    not exist at triage time -- Europe PMC supplementaryFiles zip, python-docx table
    parsing, SPSS variable labels -- so this is plausibly high-yield.
-5. **Four `himmelstein-*` tables fall through the gap between both audits.**
-   `status_report_20260814.md` Thread 2 flagged them as wrongly excluded (their item
-   text is in a public GitHub repo cited by the dictionary itself), and they appear
-   nowhere in `availability_audit_full.csv`. Needs a Shipley-copyright judgment call
-   first for two of them.
+5. **Four `himmelstein-*` tables fell through the gap between both audits** --
+   resolved 2026-08-31 (issue #1692), and all four now carry a row in
+   `queue_state.csv`, which they previously did not. `status_report_20260814.md`
+   Thread 2 flagged them as wrongly excluded (their item text is in a public GitHub
+   repo cited by the dictionary itself), and they appear nowhere in
+   `availability_audit_full.csv`. Outcome: `impossible_question` extracted
+   (`batch_014`, 90 items); the two Shipley tables are **excluded** -- the
+   copyright judgment call is settled, WPS barred the source study itself, see the
+   commercial-instrument section in `SKILL.md`; `admc_raw` is **pending** and needs
+   its own round (38 items, several ADMC subtests, 0-6 scale, js text not keyed to
+   the `a1_*`/`dr*` codes).
 6. **Paste the drafted issues-page callouts.** `fixes/itemtext_issues_draft.md` has 25
    generated callouts across batches 001-005. `addy_2021_sdq_ghana` is ALREADY LIVE on
    the page -- skip it or you will duplicate. Some others are noise: the rule flags any

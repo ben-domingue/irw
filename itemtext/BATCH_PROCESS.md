@@ -13,7 +13,7 @@ covers per-table extraction) — this file covers the batching/scheduling layer.
 | `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
 | `mapping_verification.csv` | Permanent, cross-batch record of how each table's item↔text mapping was verified (`route`, `status`, `evidence`). One row per table, ever. Fed by each batch's `verification_merged.csv`. |
-| `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Append across batches; never reset. |
+| `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Columns `table,note,status`; `status` is one of `pending`/`blocked`/`excluded`/`note_only`/`resolved` (see SKILL.md Step 6b). Append across batches; never reset. |
 | `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — its `upload_text.py` walks recursively and treats every `.csv` as a table. Ben clears it after uploading. |
 
 Everything except `queue_state.csv` is rederived from disk each round, so a round
