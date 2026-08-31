@@ -163,7 +163,11 @@ mats <- Filter(Negate(is.null), lapply(sources, build_matrix))
 DISPLAY_COLS <- c("redivis", "dictionary_sheet", "biblio_csv", "metadata_csv", "tags_csv")
 
 incomplete_list <- lapply(mats, function(m) {
-  ind_cols <- setdiff(names(m), c("table", "category"))
+  ## collection_members_csv is a curated label, not a coverage source -- most
+  ## tables legitimately belong to no collection (1253 of ~4100 core), so its
+  ## absence is not a gap. Counting it (added #1633, 2026-08-29) pushed every
+  ## table short only tags over the threshold: bucket A went 66 -> 1694.
+  ind_cols <- setdiff(names(m), c("table", "category", "collection_members_csv"))
   n_present <- rowSums(m[, ind_cols, drop = FALSE])
   n_total   <- length(ind_cols)
   keep <- n_present <= n_total - 2   # zz: n<4 of 5 == missing at least 2

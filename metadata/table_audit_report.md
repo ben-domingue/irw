@@ -5,7 +5,7 @@ Dictionary sheets included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (1694 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (84 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -39,7 +39,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | hachenberger_2025_gonogo_pilot | core |  | 1 | 1 |  | 1 |
 | hachenberger_2025_stroop_main_bin | core |  | 1 | 1 |  | 1 |
 | hachenberger_2025_stroop_pilot_bin | core |  | 1 | 1 |  | 1 |
-_...and 1664 more, see the .txt or .csv._
+_...and 54 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
