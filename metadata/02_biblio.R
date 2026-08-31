@@ -79,6 +79,61 @@ anthropic_chat <- function(prompt, model = "claude-haiku-4-5", max_tokens = 1024
   }
 }
 
+## A BibTeX value is "blank" if it is NA or whitespace-only. nzchar(NA) is TRUE,
+## so the is.na() arm has to come first.
+blank_bibtex <- function(x) is.na(x) | trimws(x) == ""
+
+## Reuse BibTeX already generated on a previous run.
+##
+## getrows() takes its baseline from the *Redivis* biblio table, so a dictionary
+## row that has not been published there yet looks brand new on every run. Rows
+## with no DOI fall through fetch_bibtex_from_doi() to generate_bibtex(), which
+## calls Claude -- and the model does not return byte-identical BibTeX twice. On
+## 2026-08-31 that churned 31 tables (the mexico_2023_mobility_*,
+## spain_2017_politics_*, spain_2018_housing_* and colombia_2023_politics_network
+## families, none of them published to biblio on Redivis). The churn is not
+## cosmetic: three lost their {{corporate author}} double-bracing -- which makes
+## BibTeX parse an institution as a personal name -- and mexico_2023_mobility_assets
+## came back with an empty author field.
+##
+## Publishing the draft would mask it, but only until the next unpublished row
+## shows up, and it leaves every intervening weekly run emitting a noisy diff that
+## a real regression could hide in. Seeding from file.out instead makes the run
+## idempotent regardless of publish state: generate once, then reuse.
+seed_from_local <- function(biblio, file.out) {
+  if (!file.exists(file.out)) return(biblio)
+  ## trim_ws=FALSE: the cache must be byte-faithful. doi.org returns BibTeX with
+  ## a leading space, and readr trims it by default -- which would rewrite 55
+  ## rows on the first seeded run for no reason other than the read.
+  local <- tryCatch(readr::read_csv(file.out, show_col_types = FALSE, trim_ws = FALSE),
+                    error = function(e) NULL)
+  if (is.null(local) || !all(c("table", "BibTex") %in% names(local))) return(biblio)
+  local <- local[!blank_bibtex(local$BibTex), , drop = FALSE]
+  if (nrow(local) == 0) return(biblio)
+
+  lkey <- tolower(local$table)
+  local <- local[!duplicated(lkey), , drop = FALSE]
+  lkey  <- lkey[!duplicated(lkey)]
+
+  ## (a) backfill rows the Redivis table has but with no BibTeX
+  idx <- which(blank_bibtex(biblio$BibTex))
+  hit <- match(tolower(biblio$table)[idx], lkey)
+  ok  <- !is.na(hit)
+  if (any(ok)) {
+    biblio$BibTex[idx[ok]] <- local$BibTex[hit[ok]]
+    message(sprintf("  seeded %d BibTeX value(s) from %s", sum(ok), file.out))
+  }
+
+  ## (b) carry over rows the Redivis table does not have at all -- the case that
+  ## caused the churn. Non-public rows are dropped downstream as before.
+  extra <- local[is.na(match(lkey, tolower(biblio$table))), , drop = FALSE]
+  if (nrow(extra) > 0) {
+    biblio <- dplyr::bind_rows(biblio, extra)
+    message(sprintf("  carried over %d cached row(s) absent from the Redivis table", nrow(extra)))
+  }
+  biblio
+}
+
 # Function to iterate through new_data_rows for BibTex
 generate_bibtex <- function(df) {
   missing_bibtex_indices <- which(is.na(df$BibTex) | df$BibTex == "")
@@ -124,6 +179,8 @@ getrows<-function(l) {
     biblio_table <- dataset$table(table)
     biblio <- biblio_table$to_tibble()
     head(biblio)
+    ## reuse previously generated BibTeX before deciding what is "new"
+    biblio <- seed_from_local(biblio, file.out)
     ##
     irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
     ## Find rows in dictionary whose Filename is not in biblio
