@@ -181,6 +181,37 @@ exam) item text separately, confirmed 2026-08-18. All 52 are marked `status=excl
 asked to process "the rest of the queue". If a user asks specifically for an `enem*` table, say it
 is excluded and check with them before doing anything.
 
+## Standing exclusion: commercially published instruments the source cannot share
+
+**If the source study is itself barred from publishing the items, IRW does not publish
+them either — and does not open a negotiation with the rights holder.** Settled
+2026-08-31 on the Shipley Institute of Living Scale (issue #1692): the FPT repository's
+`materials/README.md` states the Shipley tasks "cannot be shared at all, not even
+example items" on Western Psychological Services' instruction, and the task js ships a
+copyright placeholder in place of the stimuli. When a publisher has already refused the
+people who ran the study, that is the answer, not the opening of a request.
+
+Applies whenever *both* hold:
+
+1. the instrument is commercially published (a test publisher sells it), **and**
+2. the source study visibly withholds the items on the publisher's instruction — a
+   README stating the bar, a placeholder in the task code, a materials folder that ships
+   every other task's stimuli but not this one.
+
+Then: mark `status=excluded` in `extraction_batches/queue_state.csv`, log the row in
+`itemtables/pending_index_notes.csv` with `status=excluded` and the quoted evidence, and
+stop. Do **not** reconstruct the items from a third-party copy, a review article, or
+model knowledge of the instrument — the bar is on publishing the items, not on where
+they were obtained.
+
+This is *narrower* than "the instrument is copyrighted". A commercial scale reproduced
+in full in an open-access paper's appendix is still extractable from that appendix; the
+item-text disclaimer covers a user's downstream reuse. What it does not cover is IRW
+republishing an instrument whose publisher has affirmatively refused it.
+
+Currently excluded under this rule: `himmelstein-shipley_vocabulary-2025`,
+`himmelstein-shipley_abstraction-2025`.
+
 ## Before doing anything
 
 1. Read `references/itemtext_standard.md` for the schema and the per-tab column layout.
@@ -658,8 +689,14 @@ dataset.
 There is no tool that can write into the index workbook's NOTES column directly — same
 gap as Step 1's cross-check tabs, just on the write side. When validation surfaces a
 real discrepancy (item-count mismatch, partial coverage, source inaccessible), append a
-row to `itemtext/itemtables/pending_index_notes.csv` (columns: `table,note`; create the
-file with a header if it doesn't exist yet) and tell the user what to paste into Sheet1's
+row to `itemtext/itemtables/pending_index_notes.csv` (columns: `table,note,status`;
+create the file with a header if it doesn't exist yet). `status` is one of `pending`
+(extractable, just not done yet), `blocked` (needs something IRW doesn't have — author
+contact, a paywalled book chapter, a source that never published the items), `excluded`
+(a decision, never to be re-queued — see the two standing-exclusion sections above),
+`note_only` (item text is written; the row is a caveat about the table, not a gap), or
+`resolved` (was a gap, since filled). Only `excluded` is permanent; keep it in sync with
+`extraction_batches/queue_state.csv` and tell the user what to paste into Sheet1's
 NOTES column — don't claim the index sheet was updated. This is a standing, cumulative
 file like `automated_finding/license_blocked_candidates.csv` — append to it across
 batches, don't delete it once a batch is written up; only remove a row once the user
