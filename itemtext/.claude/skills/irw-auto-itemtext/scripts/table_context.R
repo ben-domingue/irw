@@ -17,7 +17,17 @@ table_lower <- tolower(table)
 library(gsheet)
 
 cat("=== Ground truth from irw::irw_fetch(\"", table, "\") ===\n", sep = "")
+# Resolve the shared fetch helper next to this script, however it was invoked
+# (same idiom as validate_items.R/audit_batch.R).
+script_dir <- {
+    a <- commandArgs(trailingOnly = FALSE)
+    f <- sub("^--file=", "", a[grep("^--file=", a)])
+    if (length(f)) dirname(normalizePath(f[1])) else "."
+}
+source(file.path(script_dir, "fetch_resp.R"))
+
 df <- irw::irw_fetch(table)
+if (is.null(df) || !nrow(df)) .stop_no_live_data(table)
 items <- sort(unique(df$item))
 resps <- sort(unique(df$resp))
 cat("N items:", length(items), "\n")

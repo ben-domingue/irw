@@ -29,7 +29,17 @@ if (length(args) < 1) stop("Usage: Rscript mapping_structure.R <table> [group1 g
 table <- args[1]
 groups <- if (length(args) > 1) strsplit(args[-1], ",") else list()
 
+# Resolve the shared fetch helper next to this script, however it was invoked
+# (same idiom as validate_items.R/audit_batch.R).
+script_dir <- {
+    a <- commandArgs(trailingOnly = FALSE)
+    f <- sub("^--file=", "", a[grep("^--file=", a)])
+    if (length(f)) dirname(normalizePath(f[1])) else "."
+}
+source(file.path(script_dir, "fetch_resp.R"))
+
 df <- irw::irw_fetch(table)
+if (is.null(df) || !nrow(df)) .stop_no_live_data(table)
 df$resp <- suppressWarnings(as.numeric(df$resp))
 df$id <- as.character(df$id)
 df$item <- as.character(df$item)

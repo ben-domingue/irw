@@ -183,6 +183,26 @@ is excluded and check with them before doing anything.
 
 ## Before doing anything
 
+0. **Check the `irw` package version — these scripts require `irw >= 1.0.1`.**
+
+   ```bash
+   Rscript -e 'v <- packageVersion("irw"); cat(as.character(v), if (v < "1.0.1") "-- TOO OLD, upgrade\n" else "-- ok\n")'
+   ```
+
+   Upgrade with `Rscript -e 'remotes::install_github("itemresponsewarehouse/Rpkg")'`.
+
+   Two hard dependencies on 1.0.1, and both fail confusingly on 1.0.0:
+   - `irw_fetch()` in 1.0.0 knows only warehouse shards 1–2 (1965 of 4052 tables). Any
+     table in shards 3–6 reports "does not exist in the IRW database" — a table that is
+     in fact live. The gates then have nothing to compare against.
+   - `audit_batch.R` calls `irw::irw_table_sets()`, added in 1.0.1 (Rpkg#121). On 1.0.0 it
+     dies with `'irw_table_sets' is not an exported object`, for every table.
+
+   `get_resp()` in `scripts/fetch_resp.R` now aborts on an empty live fetch and names this
+   as the likely cause, so you should not have to diagnose it from scratch — but check the
+   version first anyway, because `audit_batch.R` fails before any guard can help.
+   See ben-domingue/irw#1736.
+
 1. Read `references/itemtext_standard.md` for the schema and the per-tab column layout.
 2. Check whether a `{table}__items.csv` already exists locally in `itemtext/itemtables/`
    for the table in question — if so, don't reprocess without being told to redo it.
@@ -784,6 +804,15 @@ The last two are the mapping-side gates: `verify_batch.R` re-runs each table's o
 `verify_<table>.R`, and `lint_verification.R` checks that no row claims more than its
 evidence supports. A FAIL or NO VERDICT means the round's own claim did not reproduce —
 read the output before staging that table.
+
+**`lint_verification.R` reads a batch directory via `<batch_dir>/verification_merged.csv`**
+— a per-batch extract of that round's `mapping_verification.csv` rows. Batches 006–011 each
+carry one; write one for your round too, or lint by passing the central
+`itemtext/mapping_verification.csv` path instead. This is not optional bookkeeping: a batch
+directory with no `verification_merged.csv` used to be skipped with a bare message, so an
+unverified round passed this gate by being invisible rather than by being checked. It is now
+reported as an ERROR naming the batch, but the file still has to exist for the round's rows
+to actually be linted.
 
 **Re-run the first two after ANY later edit to a CSV**, including a one-line fix made with a
 script. Python's `csv` writer and R's `write.csv` disagree about absent values — a

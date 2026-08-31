@@ -25,11 +25,41 @@ coerce_resp <- function(x) {
     suppressWarnings(as.numeric(s))
 }
 
+# A failed live fetch must not be handed back to a caller that will treat it as
+# data. irw_fetch() signals "table not found" with a message() and
+# invisible(NULL) rather than stop() -- deliberate upstream (fetch.R: quota,
+# timeout and transport errors ARE re-raised; only not-found is softened), but
+# the caller has to honour it. Unguarded, R's set semantics turn the absence
+# into a confident accusation: setdiff(x, NULL) returns all of x, so "no ground
+# truth" and "ground truth disagrees with every code" are indistinguishable in
+# validate_items.R's output, and the obvious response to it is to damage a
+# correct CSV. See ben-domingue/irw#1736.
+.stop_no_live_data <- function(table) {
+    v <- tryCatch(as.character(utils::packageVersion("irw")),
+                  error = function(e) "not installed")
+    stop("irw_fetch(", shQuote(table), ") returned no rows, so there is no ground truth to\n",
+         "  compare against. NOTHING was checked -- this is a missing dependency, not a\n",
+         "  finding about the CSV. Do not 'fix' the CSV in response to this.\n",
+         "  Likely causes:\n",
+         if (isTRUE(try(utils::packageVersion("irw") < "1.0.1", silent = TRUE)))
+             paste0("    1. THE LIKELY ONE: the installed irw package (", v, ") is too old to see the\n",
+                    "       warehouse shard this table lives in; these scripts need >= 1.0.1.\n",
+                    "       Fix: Rscript -e 'remotes::install_github(\"itemresponsewarehouse/Rpkg\")'\n")
+         else
+             paste0("    1. (ruled out) irw ", v, " is recent enough to see every warehouse shard.\n"),
+         "    2. The table name is misspelled.\n",
+         "    3. A Redivis version pin is active and this table postdates the pinned release\n",
+         "       (irw_get_version() reports pins; irw_reset_version() clears them).\n",
+         call. = FALSE)
+}
+
 # The response data as a data.frame with `item` (character) and `resp`.
 # resp_csv: path to a staged IRW response CSV, or NA for live.
 get_resp <- function(table, resp_csv = NA) {
     if (is.na(resp_csv) || !nzchar(resp_csv)) {
-        return(irw::irw_fetch(table))
+        d <- irw::irw_fetch(table)
+        if (is.null(d) || !nrow(d)) .stop_no_live_data(table)
+        return(d)
     }
     if (!file.exists(resp_csv)) {
         stop("response CSV not found: ", resp_csv)

@@ -38,16 +38,32 @@ HEDGE <- paste0(
     "(remain|remains|are|is) unconfirmed|",
     "only pins|pins only|verifies .* not ")
 
+# Batches requested but skipped for want of a verification file. A skip used to
+# be a bare message(), which meant an unverified batch passed this gate by being
+# INVISIBLE rather than by being checked -- and linted alongside a batch that did
+# have a file, the run still reported success. Collected and reported as ERROR
+# flags below instead. See ben-domingue/irw#1736.
+skipped <- character(0)
+
 read_one <- function(a) {
     p <- if (dir.exists(a)) file.path(a, "verification_merged.csv") else a
-    if (!file.exists(p)) { message("skipping ", a, " -- no verification file"); return(NULL) }
+    if (!file.exists(p)) {
+        skipped <<- c(skipped, a)
+        message("skipping ", a, " -- no verification file")
+        return(NULL)
+    }
     d <- read.csv(p, stringsAsFactors = FALSE)
     d$..src <- p
     d$..dir <- if (dir.exists(a)) a else NA_character_
     d
 }
 v <- do.call(rbind, Filter(Negate(is.null), lapply(sub("/$", "", args), read_one)))
-if (is.null(v) || !nrow(v)) stop("nothing to lint")
+if (is.null(v) || !nrow(v))
+    stop("nothing to lint -- no verification rows were found in: ",
+         paste(sub("/$", "", args), collapse = ", "),
+         "\n  A batch directory is linted via its verification_merged.csv; batches that record",
+         "\n  their rows only in the central itemtext/mapping_verification.csv must be linted by",
+         "\n  passing that file's path instead. Nothing was checked.", call. = FALSE)
 
 flags <- list()
 add <- function(sev, table, msg) flags[[length(flags) + 1]] <<- list(sev = sev, table = table, msg = msg)
@@ -83,6 +99,10 @@ for (d in unique(na.omit(v$..dir))) {
     for (t in setdiff(csvs, v$table[v$..dir %in% d]))
         add("ERROR", t, sprintf("ships a CSV in %s but has no verification row", d))
 }
+
+for (a in skipped)
+    add("ERROR", basename(sub("/$", "", a)),
+        sprintf("requested for linting but has no verification_merged.csv -- %s was NOT checked", a))
 
 if (!length(flags)) {
     cat(sprintf("lint_verification: %d rows, no problems found\n", nrow(v)))
