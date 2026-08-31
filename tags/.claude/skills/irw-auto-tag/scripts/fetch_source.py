@@ -28,6 +28,7 @@ import argparse
 import io
 import re
 import sys
+import time
 from pathlib import Path
 
 import requests
@@ -37,6 +38,15 @@ import requests
 UA = {"User-Agent": "irw-auto-tag/2.0 (research; ben.domingue@gmail.com)"}
 CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache"
 OPENALEX = "https://api.openalex.org/works/doi:{}"
+EPMC_SEARCH = ("https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+               "?query=DOI:%22{}%22&format=json&resultType=core")
+EPMC_FULLTEXT = "https://www.ebi.ac.uk/europepmc/webservices/rest/{}/fullTextXML"
+
+# Courtesy pause between HTTP attempts. NCBI serves a reCAPTCHA to repeated
+# unauthenticated hits, which is how a table that fetched cleanly on one run
+# comes back "paywalled" on the next -- reachability was measurably
+# rate-sensitive before this.
+REQUEST_DELAY_S = 1.0
 
 # Minimum *visible prose* (not raw bytes) for a page to count as source text.
 # Raw byte count cannot distinguish an article from a challenge page: the
@@ -104,12 +114,19 @@ def openalex_locations(doi):
 def visible_text(html_or_text):
     """Strip markup and collapse whitespace, so what is measured is prose."""
     try:
+        import warnings
+
         from bs4 import BeautifulSoup
 
-        soup = BeautifulSoup(html_or_text, "html.parser")
-        for tag in soup(["script", "style", "noscript"]):
-            tag.decompose()
-        text = soup.get_text(" ")
+        with warnings.catch_warnings():
+            # Europe PMC returns JATS XML; html.parser handles it fine for
+            # text extraction, and bs4's "that looks like XML" warning is
+            # noise on stderr the skill would otherwise have to read past.
+            warnings.simplefilter("ignore")
+            soup = BeautifulSoup(html_or_text, "html.parser")
+            for tag in soup(["script", "style", "noscript"]):
+                tag.decompose()
+            text = soup.get_text(" ")
     except Exception:
         text = re.sub(r"<[^>]*>", " ", html_or_text)
     return re.sub(r"\s+", " ", text).strip()
@@ -128,6 +145,31 @@ def classify(text):
     if len(prose) < MIN_USEFUL_CHARS:
         return False, f"too_short:{len(prose)}_chars_visible"
     return True, f"{len(prose)}_chars_visible"
+
+
+def europepmc_fulltext(doi):
+    """Full text via the Europe PMC API, or None.
+
+    Preferred over scraping a PMC article page: it is a real API, returns
+    JATS XML rather than a rendered page, and does not challenge repeat
+    callers. Only open-access records expose fullTextXML -- everything else
+    404s and falls through to the URL candidates.
+    """
+    doi = doi.strip().removeprefix("https://doi.org/").removeprefix("doi.org/")
+    try:
+        r = requests.get(EPMC_SEARCH.format(doi), headers=UA, timeout=30)
+        if r.status_code != 200:
+            return None
+        hits = r.json().get("resultList", {}).get("result", [])
+        if not hits or not hits[0].get("pmcid"):
+            return None
+        pmcid = hits[0]["pmcid"]
+        r = requests.get(EPMC_FULLTEXT.format(pmcid), headers=UA, timeout=40)
+        if r.status_code != 200:
+            return None
+    except (requests.RequestException, ValueError):
+        return None
+    return visible_text(r.text), f"https://europepmc.org/article/PMC/{pmcid}"
 
 
 def extract(response):
@@ -189,10 +231,27 @@ def main():
 
     attempted = []
     rejected = []
+
+    # Europe PMC first: an API beats scraping a page that may be a captcha.
+    if args.doi and not args.no_oa:
+        got = europepmc_fulltext(args.doi)
+        if got:
+            text, source = got
+            ok, reason = classify(text)
+            if ok:
+                CACHE_DIR.mkdir(exist_ok=True)
+                path.write_text(text, encoding="utf-8", errors="replace")
+                print(f"OK oa_status={oa_status} source={source} "
+                      f"final_url={source} content={reason} attempts=1 -> {path}")
+                return
+            rejected.append(f"{source} -> {reason}")
+            attempted.append(source)
+
     for url in candidates:
         if url in attempted:
             continue
         attempted.append(url)
+        time.sleep(REQUEST_DELAY_S)
         got, reason = try_url(url)
         rejected.append(f"{url} -> {reason}")
         if got is None:

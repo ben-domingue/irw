@@ -1,10 +1,10 @@
 TABLE                                                RESULT     DETAIL
-oxfordcovid_xue_2024_brs                             REACHED    OK oa_status=bronze source=https://link.springer.com/content/pdf/10.3758/s13428-023-02121-5.pdf final_url=https://link.springer.com/article/10.3758/s13428-023-02121-5 content=15061_chars_visible attempts=1
+oxfordcovid_xue_2024_brs                             REACHED    OK oa_status=bronze source=https://europepmc.org/article/PMC/PMC10124709 final_url=https://europepmc.org/article/PMC/PMC10124709 content=55145_chars_visible attempts=1
 dwyer_2025_genomics_pb                               REACHED    OK oa_status=diamond source=https://pmc.ncbi.nlm.nih.gov/articles/PMC12187021/ final_url=https://pmc.ncbi.nlm.nih.gov/articles/PMC12187021/ content=46352_chars_visible attempts=3
 pass20_klosowska_2025_pass_hospital                  REACHED    OK oa_status=green source=https://ruj.uj.edu.pl/handle/item/552041 final_url=https://ruj.uj.edu.pl/handle/item/552041 content=13686_chars_visible attempts=2
 gmc_kay_2025                                         FAILED       rejected https://osf.io/uzrgk/files/osfstorage?view_only=aca403a5146240bda740e1e6d640751f -> too_short:3_cha
-heise_2024_mental_falsesign                          REACHED    OK oa_status=hybrid source=https://www.ncbi.nlm.nih.gov/pmc/articles/12379850 final_url=https://pmc.ncbi.nlm.nih.gov/articles/PMC12379850/ content=121168_chars_visible attempts=4
-abdullah_2024_hbbloat_pbc                            FAILED       rejected https://europepmc.org/article/PMC/PMC11067892 -> too_short:676_chars_visible
+heise_2024_mental_falsesign                          REACHED    OK oa_status=hybrid source=https://europepmc.org/article/PMC/PMC12379850 final_url=https://europepmc.org/article/PMC/PMC12379850 content=116010_chars_visible attempts=1
+abdullah_2024_hbbloat_pbc                            REACHED    OK oa_status=gold source=https://europepmc.org/article/PMC/PMC11067892 final_url=https://europepmc.org/article/PMC/PMC11067892 content=55041_chars_visible attempts=1
 sun_2025_morality_study1_fairnesshexaco              FAILED       rejected https://osf.io/5e9y3/overview -> too_short:3_chars_visible
 pisa2022_read                                        FAILED       rejected https://www.oecd.org/en/data/datasets/pisa-2022-database.html -> http_403
 c19prc_uk_mcbride_2021_protective_behaviours         REACHED    OK oa_status=green source=https://pure.ulster.ac.uk/en/datasets/db603221-fb79-46ca-a2d6-4a11e0fe0058 final_url=https://pure.ulster.ac.uk/en/datasets/the-covid-19-psychological-research-consortium-study-2020-2021/ content=8064_chars_visible attempts=1
@@ -25,32 +25,41 @@ ABDONE
 
 --------------------------------------------------------------------------
 Re-fetch of the 22 tables that yielded no tags in the 2.2 scoring run
-(#1721), using the OpenAlex-aware fetch_source.py from #1744.
+(#1721), using the OpenAlex + Europe PMC fetch_source.py from #1744.
 
 Before: 0 of 22 reachable.
-After:  9 of 22 reachable with verified prose.
+After:  10 of 22 reachable with verified prose.
 
 Reproduce (dictionary lookup supplies --doi/--url per table):
     python3 scripts/lookup_dictionary.py TABLE
     python3 scripts/fetch_source.py TABLE --doi ... --url ... --force
 
-Two cautions on reading this file.
+Three cautions on reading this file.
 
 1. "REACHED" means a non-blocker page with >=1500 visible characters. It
    does NOT mean the text is the right paper. oxfordcovid_xue_2024_brs
    resolves to "A Stan tutorial on Bayesian IRTree models" -- the
    dictionary's `doi` names a different work than its `reference`. That is
-   a dictionary defect, not a fetch defect.
+   a dictionary defect, not a fetch defect. ecuador_2011_safety_crime
+   clears the floor at 4419 chars but is a portal navigation menu, not a
+   description of the instrument; it is a weak pass.
 
 2. An earlier version of this measurement scored 14 of 22 by counting raw
-   bytes. Five of those five were blocker pages: a reCAPTCHA challenge
-   (abdullah_2024_hbbloat_pbc -- the very table cited in #1744 as proof
-   PeerJ is open), the OSF JavaScript shell at a constant 4207 bytes
+   bytes. Five of those were blocker pages: a reCAPTCHA challenge
+   (abdullah_2024_hbbloat_pbc -- the very table #1744 cites as proof PeerJ
+   is open), and the OSF JavaScript shell at a constant 4207 bytes
    (gmc_kay_2025, sun_2025_morality_study1_fairnesshexaco,
    aspirations_sonmez_2022, gahps_korner_2021). Byte count is not a
    content check.
 
-The 13 still unreachable split into:
+3. Scraping PMC article pages is rate-sensitive: NCBI serves a reCAPTCHA to
+   repeated unauthenticated callers, so heise_2024_mental_falsesign fetched
+   cleanly on one run and came back "paywalled" an hour later. That is why
+   PMC-hosted articles now go through the Europe PMC REST API instead
+   (JATS XML, no challenge). Any reachability number taken by scraping
+   should be assumed to decay on re-run; this one should not.
+
+The 12 still unreachable split into:
   - OECD/PISA (pisa2022_read, pisa2009_math): http_403, oa_status=closed.
     Genuinely closed; the real source is PISA technical documentation, not
     an article.
