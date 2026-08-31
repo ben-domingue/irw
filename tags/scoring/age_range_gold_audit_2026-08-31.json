@@ -1,0 +1,708 @@
+[
+ {
+  "table": "margaretto_2025_translation_study_2_generalknowledge_1",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 68.0,
+  "pct_u18": 0.0,
+  "n": 220,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "ecps_sahm_2024_dtl",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 100.0,
+  "pct_u18": 0.0,
+  "n": 13253,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "ecps_sahm_2024_trust",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 100.0,
+  "pct_u18": 0.0,
+  "n": 15254,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_riskbehaviour_c19",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 90.0,
+  "pct_u18": 0.0,
+  "n": 2878,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "kemp_2019_mss_positive",
+  "gold": "Adult (18+)",
+  "min": 19.0,
+  "max": 75.0,
+  "pct_u18": 0.0,
+  "n": 584,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "gilbert_meta_98",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 104.0,
+  "pct_u18": 0.0,
+  "n": 8608,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "narcissism_schneider_2025_study2_idasii",
+  "gold": "Adult (18+)",
+  "min": 22.0,
+  "max": 34.0,
+  "pct_u18": 0.0,
+  "n": 3,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "oxfordcovid_xue_2024_rse",
+  "gold": "Mixed",
+  "min": 11.0,
+  "max": 342.0,
+  "pct_u18": 66.81,
+  "n": 1160,
+  "data_label": "Mixed",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2023_identity_state",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 98.0,
+  "pct_u18": 0.0,
+  "n": 7615,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "tsai_2017_treeit_h3_match",
+  "gold": "Elderly (minimum age >50)",
+  "min": 57.0,
+  "max": 87.0,
+  "pct_u18": 0.0,
+  "n": 101,
+  "data_label": "Elderly (minimum age >50)",
+  "verdict": "agree"
+ },
+ {
+  "table": "pierro_2018_locomotion_s1",
+  "gold": "Adult (18+)",
+  "min": 17.0,
+  "max": 79.0,
+  "pct_u18": 0.31,
+  "n": 323,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "pierro_2018_tf_past_s4",
+  "gold": "Adult (18+)",
+  "min": 20.0,
+  "max": 45.0,
+  "pct_u18": 0.0,
+  "n": 189,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "colombia_2023_politics_voting",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 114.0,
+  "pct_u18": 0.0,
+  "n": 46392,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "margaretto_2025_translation_study_2_lextale",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 68.0,
+  "pct_u18": 0.0,
+  "n": 220,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "opentsstvr_linnig_2025_ssq",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 30.0,
+  "pct_u18": 0.0,
+  "n": 98,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "arnulf_2022_general_knowledge",
+  "gold": "Adult (18+)",
+  "min": 19.0,
+  "max": 77.0,
+  "pct_u18": 0.0,
+  "n": 397,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2024_politics_beliefs",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 94.0,
+  "pct_u18": 0.0,
+  "n": 2562,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "gilbert_meta_59",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 45.0,
+  "pct_u18": 0.0,
+  "n": 1154,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "colombia_2023_politics_anticorruption",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 114.0,
+  "pct_u18": 0.0,
+  "n": 46392,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "spain_2026_disinformation_humorperception",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 95.0,
+  "pct_u18": 0.0,
+  "n": 3490,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "socialstereotype_hughes_2025_judgement",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 79.0,
+  "pct_u18": 0.0,
+  "n": 297,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "mexico_2025_q1safety_govtrust",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 98.0,
+  "pct_u18": 0.0,
+  "n": 23481,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "silvia_2024_funny",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 88.0,
+  "pct_u18": 0.0,
+  "n": 1842,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "chile_2023_social-welfare-survey_ee",
+  "gold": "Mixed",
+  "verdict": "no_cov_age"
+ },
+ {
+  "table": "spain_2025_democracy_parties",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 97.0,
+  "pct_u18": 0.0,
+  "n": 4010,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "mhscdc_fried_2020_procrastination",
+  "gold": "Adult (18+)",
+  "verdict": "no_cov_age"
+ },
+ {
+  "table": "mfq_adolescent_athletes",
+  "gold": "Child (<18y)",
+  "min": 13.0,
+  "max": 18.0,
+  "pct_u18": 98.684,
+  "n": 152,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "spain_2025_ai_regulation",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 95.0,
+  "pct_u18": 0.0,
+  "n": 3880,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "gilbert_meta_68",
+  "gold": "Child (<18y)",
+  "min": 0.0,
+  "max": 18.25,
+  "pct_u18": 99.989,
+  "n": 9413,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "mexico_2024_q4safety_govperformance",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 98.0,
+  "pct_u18": 0.0,
+  "n": 23451,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "pechorro_impulsivity_2021_ypitris",
+  "gold": "Adult (18+)",
+  "min": 18.1848049281314,
+  "max": 41.8069815195072,
+  "pct_u18": 0.0,
+  "n": 427,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "mexico_2025_q2safety_govperformance",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 98.0,
+  "pct_u18": 0.0,
+  "n": 23717,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "fomonegativeaffect_cremer_2026_phq",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 25.0,
+  "pct_u18": 0.0,
+  "n": 461,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2025_sanitation_system",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 97.0,
+  "pct_u18": 0.0,
+  "n": 2426,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "tsai_2017_treeit_h10_closure",
+  "gold": "Elderly (minimum age >50)",
+  "min": 57.0,
+  "max": 87.0,
+  "pct_u18": 0.0,
+  "n": 101,
+  "data_label": "Elderly (minimum age >50)",
+  "verdict": "agree"
+ },
+ {
+  "table": "mexico_2023_quality_wellbeingservice",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 98.0,
+  "pct_u18": 0.0,
+  "n": 78896,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "pezzuti_2025_coolpeople_benevolent",
+  "gold": "Mixed",
+  "min": 1.0,
+  "max": 85.0,
+  "pct_u18": 0.446,
+  "n": 5608,
+  "data_label": "Mixed",
+  "verdict": "agree"
+ },
+ {
+  "table": "gilbert_meta_105",
+  "gold": "Child (<18y)",
+  "min": 11.0,
+  "max": 17.0,
+  "pct_u18": 100.0,
+  "n": 1031,
+  "data_label": "Child (<18y)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2025_ageism_elderpriority",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 97.0,
+  "pct_u18": 0.0,
+  "n": 5005,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "spain_2024_ideology_leaders",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 93.0,
+  "pct_u18": 0.0,
+  "n": 3884,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "lys_2020_rape_2_rma_pre",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 40.0,
+  "pct_u18": 0.0,
+  "n": 142,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "disgust_berger2014",
+  "gold": "Adult (18+)",
+  "min": 12.0,
+  "max": 85.0,
+  "pct_u18": 0.919,
+  "n": 1414,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "validatedtouchvideo_smit_2025_strength",
+  "gold": "Adult (18+)",
+  "min": 17.0,
+  "max": 63.0,
+  "pct_u18": 0.282,
+  "n": 355,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "xue_2024_full_dataset",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 73.0,
+  "pct_u18": 0.0,
+  "n": 137,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "ilearnathome_regalado_2025",
+  "gold": "Adult (18+)",
+  "min": 21.0,
+  "max": 65.0,
+  "pct_u18": 0.0,
+  "n": 909,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "wang_2016_study1_authliving",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 33.0,
+  "pct_u18": 0.0,
+  "n": 104,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "colombia_2023_politics_hurdles",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 114.0,
+  "pct_u18": 0.0,
+  "n": 46392,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "uruguay_2022_technology_places",
+  "gold": "Mixed",
+  "verdict": "non_numeric",
+  "vals": [
+   "[59,64)",
+   "[64,69)",
+   "[69,74)",
+   "[74,79)",
+   "[79,84)",
+   "[84,89)",
+   "[94,99)",
+   "[14,19)"
+  ]
+ },
+ {
+  "table": "song_2025_ac",
+  "gold": "Adult (18+)",
+  "min": 1.0,
+  "max": 5.0,
+  "pct_u18": 100.0,
+  "n": 485,
+  "data_label": "Child (<18y)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "song_2025_cs",
+  "gold": "Adult (18+)",
+  "min": 1.0,
+  "max": 5.0,
+  "pct_u18": 100.0,
+  "n": 485,
+  "data_label": "Child (<18y)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "uruguay_2022_technology_skills",
+  "gold": "Mixed",
+  "verdict": "non_numeric",
+  "vals": [
+   "[64,69)",
+   "[39,44)",
+   "[59,64)",
+   "[49,54)",
+   "[79,84)",
+   "[84,89)",
+   "[34,39)",
+   "[74,79)"
+  ]
+ },
+ {
+  "table": "anunciacao_2025_personality_succorance",
+  "gold": "Mixed",
+  "min": 0.0,
+  "max": 90.0,
+  "pct_u18": 28.267,
+  "n": 272842,
+  "data_label": "Mixed",
+  "verdict": "agree"
+ },
+ {
+  "table": "chile_2024_safety_programs",
+  "gold": "Mixed",
+  "verdict": "non_numeric",
+  "vals": [
+   "15-19",
+   "20-29",
+   "30-39",
+   "40-49",
+   "50-59",
+   "60-69",
+   "70+"
+  ]
+ },
+ {
+  "table": "pass20_klosowska_2025_pass_hospital",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 85.0,
+  "pct_u18": 0.0,
+  "n": 104,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2024_values_institutions",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 97.0,
+  "pct_u18": 0.0,
+  "n": 2841,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "phq9_xiong_2025",
+  "gold": "Mixed",
+  "min": 8.0,
+  "max": 70.0,
+  "pct_u18": 62.571,
+  "n": 9506,
+  "data_label": "Mixed",
+  "verdict": "agree"
+ },
+ {
+  "table": "wang_2016_study1_power",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 33.0,
+  "pct_u18": 0.0,
+  "n": 104,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "vollbracht_et_al_2026_ambulatory_assessment",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 68.0,
+  "pct_u18": 0.0,
+  "n": 406,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2026_disinformation_memes",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 95.0,
+  "pct_u18": 0.0,
+  "n": 3456,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "qi_2025_panas",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 28.0,
+  "pct_u18": 0.0,
+  "n": 134,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "hyatt_2023_aggression_prelim2_epa",
+  "gold": "Adult (18+)",
+  "min": 20.0,
+  "max": 76.0,
+  "pct_u18": 0.0,
+  "n": 322,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "neurodegenerative_huizinga_2019_cvc",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 95.0,
+  "pct_u18": 0.0,
+  "n": 1460,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "gilbert_meta_66",
+  "gold": "Adult (18+)",
+  "verdict": "non_numeric",
+  "vals": [
+   "35-44",
+   "25-34",
+   "45-59",
+   "60+",
+   "18-24"
+  ]
+ },
+ {
+  "table": "spain_2025_europe_agreement",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 96.0,
+  "pct_u18": 0.0,
+  "n": 2427,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "dwyer_2025_genomics_pc",
+  "gold": "Adult (18+)",
+  "min": 3.0,
+  "max": 59.0,
+  "pct_u18": 0.221,
+  "n": 453,
+  "data_label": "Mixed",
+  "verdict": "disagree"
+ },
+ {
+  "table": "ccapsvtskhpacr_mercedes_2023_physical",
+  "gold": "Adult (18+)",
+  "min": 36.0,
+  "max": 86.0,
+  "pct_u18": 0.0,
+  "n": 194,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2025_democracy_trust",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 97.0,
+  "pct_u18": 0.0,
+  "n": 4010,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "autism_blotner_2025_s1_views",
+  "gold": "Adult (18+)",
+  "min": 18.0,
+  "max": 67.0,
+  "pct_u18": 0.0,
+  "n": 535,
+  "data_label": "Adult (18+)",
+  "verdict": "agree"
+ },
+ {
+  "table": "spain_2025_sanitation_hospital",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 90.0,
+  "pct_u18": 0.0,
+  "n": 248,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ },
+ {
+  "table": "margaretto_2025_translation_study_1_vocabulary_2",
+  "gold": "Mixed",
+  "min": 18.0,
+  "max": 48.0,
+  "pct_u18": 0.0,
+  "n": 231,
+  "data_label": "Adult (18+)",
+  "verdict": "disagree"
+ }
+]
