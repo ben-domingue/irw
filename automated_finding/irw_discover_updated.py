@@ -547,6 +547,35 @@ _DATACITE_FALLBACK_FOR = {
 }
 
 
+# DOI prefixes for repositories that surface through DataCite (labelled
+# `dataverse`) but that no connector here can actually reach, so every
+# candidate from them is a guaranteed dead end. Unlike _DATACITE_SKIP, these
+# are NOT duplicates of a dedicated connector and there is nothing to back
+# fill -- they are dropped at discovery so they never consume a triage slot
+# or get burned into repo_triage_seen_keys.csv on a verdict that reflects the
+# connector rather than the dataset.
+#
+# Measured cost of not doing this: the 2026-08-31 weekly run triaged 60
+# candidates and 49 of them (82%) were 10.3886, all no_usable_file. The
+# 2026-08-29 non-Latin prefilter produced 180 `resolve_error:FileListUnreachable`
+# rows, all of them these two prefixes. See TODO.md.
+#
+#   10.3886 -- openICPSR. Landing page is a real dataset but files are behind
+#              an authenticated ICPSR download; there is no open API.
+#   10.6141 -- SRDA, Taiwan's Survey Research Data Archive (Academia Sinica).
+#              Not a Dataverse despite the label; access is registration-gated,
+#              which would likely make it license-blocked even if reachable.
+#
+# If either ever gets a working connector, drop its prefix here and the
+# candidates come back on the next run (they are not in the seen-keys ledger).
+_UNREACHABLE_DOI_PREFIXES = ("10.3886/", "10.6141/")
+
+
+def _unreachable_repo(doi: str) -> bool:
+    """True if `doi` belongs to a repository no connector can fetch files from."""
+    return bool(doi) and doi.lower().startswith(_UNREACHABLE_DOI_PREFIXES)
+
+
 def _effective_datacite_skip() -> set[str]:
     """_DATACITE_SKIP minus the publishers whose own connector is blocked.
 
@@ -981,6 +1010,7 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
     import time as _time
     active = sources if sources is not None else SOURCES
     seen, results = set(), []
+    n_unreachable = 0
     total = len(queries)
     t0 = _time.time()
     for i, q in enumerate(queries, 1):
@@ -1002,6 +1032,9 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                         continue
                     if hit.doi and hit.doi in exclude:
                         continue
+                    if _unreachable_repo(hit.doi):
+                        n_unreachable += 1
+                        continue
                     if not is_relevant(hit, relevance_on, query=q):
                         continue
                     if since and hit.published and _older_than(hit.published, since):
@@ -1022,6 +1055,11 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
         elapsed = _time.time() - t0
         print(f"  → {q_new} new this query | {len(results)} total | "
               f"{elapsed:.0f}s elapsed", flush=True)
+    if n_unreachable:
+        print(f"[discover] dropped {n_unreachable} hit(s) from repositories no "
+              f"connector can fetch files from "
+              f"({', '.join(p.rstrip('/') for p in _UNREACHABLE_DOI_PREFIXES)}) "
+              f"-- see _UNREACHABLE_DOI_PREFIXES", flush=True)
     if _blocked_sources:
         print(f"[discover] sources blocked this run (see BLOCKED lines "
               f"above for why): {', '.join(sorted(_blocked_sources))}",

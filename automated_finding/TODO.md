@@ -59,6 +59,35 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   Check the access terms before building anything. Rows are in
   `runs/prefilter_nonlatin_2026-08-29.csv`.
 
+  **Partly handled 2026-08-31:** both prefixes are now dropped at discovery
+  via `_UNREACHABLE_DOI_PREFIXES` in `irw_discover_updated.py`, so they no
+  longer consume triage slots. This was prompted by the 2026-08-31 weekly
+  repos run, where 49 of the 60 triaged candidates (82%) were `10.3886` and
+  every one came back `no_usable_file` -- a verdict about the connector, not
+  the datasets, now permanently in `repo_triage_seen_keys.csv`. Still open:
+  (a) the resolver fix, which matters for any *other* non-Dataverse host the
+  DataCite sweep mislabels, and (b) the SRDA connector decision. Reversing the
+  drop is a one-line edit and the candidates return, since nothing filtered at
+  discovery reaches the seen-keys ledger.
+
+- [ ] **`--limit` silently discards the untriaged remainder of a run, and the
+  scheduled routines lose them for good.** `run_batch()` in
+  `irw_batch_updated.py` does `rows = rows[:limit]` after the seen-key filter,
+  and `discover()` neither scores nor sorts -- so the triaged subset is just
+  whichever search terms happened to come first, not the best candidates. The
+  remainder exists only in the run's `runs/*.csv`, which is gitignored and, on
+  a cloud routine, on a machine that goes away. The weekly repos routine uses a
+  rolling `--since` window (2026-08-31 ran `--since 2026-08-24`), so next
+  week's `--since 2026-08-31` will never re-surface them. Measured on
+  2026-08-31: 182 candidates found, 60 triaged, **122 dropped without a
+  record** -- and that is a normal week, not an outlier. Three ways out, cheapest
+  first: (1) the `_UNREACHABLE_DOI_PREFIXES` drop above frees most of the
+  budget on its own and may make this moot -- re-measure on the next weekly run
+  before building anything; (2) raise `--limit` in the routine; (3) append the
+  untriaged remainder to a tracked backlog CSV, the way
+  `plos_deferred_candidates.csv` already works, and have the next run read it
+  before the fresh candidates. Do not do (3) until (1) has been measured.
+
 - [x] **Non-Latin-script re-run CLOSED** (2026-08-29/30). 955 terms -> 1,871
   hits -> 690 unique deposits -> 112 keeps -> 38 tier A+B leads -> 27 triaged
   -> **0 good**, 3 worth_retrying, 12 human_review. See `BATCH_LOG.md`
