@@ -83,7 +83,7 @@ def cache_path(table):
 
 
 def openalex_locations(doi):
-    """Return (oa_status, [urls]) for a DOI: open locations, best first.
+    """Return (oa_status, [urls], title) for a DOI: open locations, best first.
 
     Never raises -- OpenAlex being down or not knowing the DOI degrades to
     the old DOI-resolution behaviour rather than failing the fetch.
@@ -92,10 +92,10 @@ def openalex_locations(doi):
     try:
         r = requests.get(OPENALEX.format(doi), headers=UA, timeout=30)
         if r.status_code != 200:
-            return f"openalex_http_{r.status_code}", []
+            return f"openalex_http_{r.status_code}", [], None
         work = r.json()
     except (requests.RequestException, ValueError) as e:
-        return f"openalex_error_{type(e).__name__}", []
+        return f"openalex_error_{type(e).__name__}", [], None
 
     oa_status = (work.get("open_access") or {}).get("oa_status", "unknown")
     urls = []
@@ -108,7 +108,7 @@ def openalex_locations(doi):
             u = loc.get(key)
             if u and u not in urls:
                 urls.append(u)
-    return oa_status, urls
+    return oa_status, urls, work.get("title")
 
 
 def visible_text(html_or_text):
@@ -130,6 +130,36 @@ def visible_text(html_or_text):
     except Exception:
         text = re.sub(r"<[^>]*>", " ", html_or_text)
     return re.sub(r"\s+", " ", text).strip()
+
+
+def _squash(s):
+    return re.sub(r"[^a-z0-9]+", "", (s or "").lower())
+
+
+def is_the_right_work(text, doi, title):
+    """Does this text actually belong to the work we asked for?
+
+    A page can be real prose and still be the wrong page -- a journal's
+    article *listing* has thousands of words, no blocker markers, and
+    nothing to do with the article. An article's own page or PDF almost
+    always carries its DOI or its title, so require one of them.
+
+    Returns (ok, reason). Unknown identity (no DOI and no title) passes:
+    with nothing to check against, refusing would reject every --url-only
+    fetch, which is the data-portal case.
+    """
+    if not doi and not title:
+        return True, "identity_unchecked"
+    squashed = _squash(text)
+    if doi and _squash(doi) in squashed:
+        return True, "doi_in_text"
+    # Titles get typeset with line breaks, entities and smart quotes, so
+    # compare on a squashed prefix rather than the whole string.
+    if title:
+        probe = _squash(title)[:60]
+        if len(probe) >= 20 and probe in squashed:
+            return True, "title_in_text"
+    return False, "wrong_work:doi_and_title_absent"
 
 
 def classify(text):
@@ -187,7 +217,7 @@ def extract(response):
         return f"[PDF extraction failed: {type(e).__name__}: {e}]"
 
 
-def try_url(url):
+def try_url(url, doi=None, title=None):
     """Fetch one candidate. Returns ((text, final_url) | None, reason)."""
     try:
         r = requests.get(url, headers=UA, timeout=30, allow_redirects=True)
@@ -197,6 +227,9 @@ def try_url(url):
         return None, f"http_{r.status_code}"
     text = extract(r)
     ok, reason = classify(text)
+    if not ok:
+        return None, reason
+    ok, reason = is_the_right_work(text, doi, title)
     if not ok:
         return None, reason
     return (text, r.url), reason
@@ -221,9 +254,10 @@ def main():
         return
 
     oa_status = "not_checked"
+    title = None
     candidates = []
     if args.doi and not args.no_oa:
-        oa_status, candidates = openalex_locations(args.doi)
+        oa_status, candidates, title = openalex_locations(args.doi)
     if args.doi:
         candidates.append(f"https://doi.org/{args.doi}")
     if args.url:
@@ -239,6 +273,8 @@ def main():
             text, source = got
             ok, reason = classify(text)
             if ok:
+                ok, reason = is_the_right_work(text, args.doi, title)
+            if ok:
                 CACHE_DIR.mkdir(exist_ok=True)
                 path.write_text(text, encoding="utf-8", errors="replace")
                 print(f"OK oa_status={oa_status} source={source} "
@@ -252,7 +288,7 @@ def main():
             continue
         attempted.append(url)
         time.sleep(REQUEST_DELAY_S)
-        got, reason = try_url(url)
+        got, reason = try_url(url, args.doi, title)
         rejected.append(f"{url} -> {reason}")
         if got is None:
             continue

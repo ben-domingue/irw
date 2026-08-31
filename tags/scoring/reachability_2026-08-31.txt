@@ -36,13 +36,24 @@ Reproduce (dictionary lookup supplies --doi/--url per table):
 
 Three cautions on reading this file.
 
-1. "REACHED" means a non-blocker page with >=1500 visible characters. It
-   does NOT mean the text is the right paper. oxfordcovid_xue_2024_brs
-   resolves to "A Stan tutorial on Bayesian IRTree models" -- the
-   dictionary's `doi` names a different work than its `reference`. That is
-   a dictionary defect, not a fetch defect. ecuador_2011_safety_crime
-   clears the floor at 4419 chars but is a portal navigation menu, not a
-   description of the instrument; it is a weak pass.
+1. "REACHED" means a non-blocker page of >=1500 visible characters that
+   also carries the requested DOI or title. That identity check matters:
+   the Journal of Open Psychology Data galley URL for 10.5334/jopd.56
+   redirects to the journal's *article listing*, which is 12,722 characters
+   of real prose with no blocker markers -- it passes every length and
+   blocker test and is not the paper. It is now rejected as
+   `wrong_work:doi_and_title_absent`.
+
+   The check verifies the text matches the DOI it was asked for. It cannot
+   catch a dictionary entry naming the WRONG DOI: oxfordcovid_xue_2024_brs
+   used to resolve to "A Stan tutorial on Bayesian IRTree models", and the
+   fetch would have been confidently correct about it. That was a
+   dictionary defect and was fixed at source on 2026-08-31 -- all 17
+   oxfordcovid_* tables now carry 10.5334/jopd.56, matching their
+   `reference` field. The run recorded above predates that fix.
+
+   ecuador_2011_safety_crime clears the floor at 4419 chars but is a portal
+   navigation menu, not a description of the instrument; a weak pass.
 
 2. An earlier version of this measurement scored 14 of 22 by counting raw
    bytes. Five of those were blocker pages: a reCAPTCHA challenge
