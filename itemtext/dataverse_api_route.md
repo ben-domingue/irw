@@ -91,11 +91,41 @@ are in, and cost one request.
   The paper is cited in the dictionary and openly readable on Harvard DASH. `UNAVAILABLE` still held,
   but on that reasoning nobody would have retried it.
 
+## How big is the target class? 51 tables, ~30 records
+
+Two numbers have been quoted for this class and both were wrong, in the same way: each counted the
+*words auditors used* rather than the thing they described.
+
+| count | what it actually measures |
+|---|---|
+| 62 | #1696's figure. The **union** of "cites Dataverse" and "cites WAF" — it includes rows that are not Dataverse at all. |
+| 36 | Rows citing Dataverse **and** using the literal phrases *WAF* / *bot-challenge* / *no fetchable content*. |
+| **51** | **Every** `BLOCKED` row citing Dataverse. All of them are blocked on access. |
+
+The 36 undercounts because auditors described one event in many ways. These three rows are the same
+AWS bot-challenge, and only the first is counted by a WAF-keyed regex:
+
+- `germann_2026_immigration` — "an empty/blocked response consistent with the AWS WAF bot-challenge"
+- `feng2026_competence` — "returned empty content to WebFetch (JS-rendered/blocked)"
+- `galindo_2023_social_support` — "Every dataverse.harvard.edu endpoint returned empty/0-byte responses"
+
+So the useful statement is not "51 of the Dataverse rows are access-blocked" but **there is no
+Dataverse `BLOCKED` row that is blocked for a substantive reason**. None says the source published no
+items; every one records a failed fetch. The class to re-audit is simply "Dataverse + BLOCKED", and
+no phrase-matching is needed to define it.
+
+Recompute both counts any time with check `[B]` of `itemtext/sibling_consistency_sweep.py`, which
+also names the rows a WAF-keyed regex misses.
+
 ## Next
 
-23 of the 36 Dataverse+WAF `BLOCKED` rows have no resolvable DOI in the dictionary and need one
-before they can be re-audited this way. The 13 that do are listed in the #1751 thread.
+**Tables are not fetches.** The 51 tables resolve to roughly **30 distinct Dataverse records**,
+because one record often backs several tables — `DVN/ZDNSFJ` alone covers all six `feng2026_*`
+tables, `DVN/ALYGQS` covers four `germann_2026_*`, and `DVN/ATLXC5`, `DVN/EDEVGY` and `DVN/IREEJJ`
+cover three each. Budget the sweep as ~30 API calls, not 51.
 
-Note the count discrepancy: #1696 cites "62 of the 217 BLOCKED" as Dataverse WAF bot-challenges. By
-the audit's own text, 36 rows cite both a Dataverse/Harvard source and a WAF/bot-challenge; 53 cite
-Dataverse, 46 cite WAF, and 63 cite either. The 62 appears to be the union.
+Seven of the 51 cite no resolvable record id in their audit row and need a DOI found first; that
+lookup, not the WAF, is the remaining manual work.
+
+And remember what the route does not buy: **reachable is not published.** `LUKGIA` was fully
+reachable and still had no item wording in it. Expect a real verdict per table, not text per table.
