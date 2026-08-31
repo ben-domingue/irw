@@ -55,6 +55,31 @@ rather than `BLOCKED`, which is a settled answer instead of an unexamined block.
 **Expect that mix.** The value of the route is that each table gets a real verdict, not that every
 table yields text.
 
+## Two traps worth knowing before you call something UNAVAILABLE
+
+**A DSpace/DASH "TEXT" bundle is auto-extracted and can be silently truncated.** The text copy of
+this paper stops at char 99,564 of 99,652 — exactly where `Supplementary Appendices` begins, so the
+appendix headings survive and none of their content does. Reading it, you would conclude the
+appendices were unexaminable. Fetch the `ORIGINAL` bundle instead:
+
+```bash
+UUID=<dspace item uuid>                     # from /server/api/discover/search/objects?query=...
+curl -sL "https://dash.harvard.edu/server/api/core/items/$UUID/bundles"
+# then the ORIGINAL bundle's bitstream, not TEXT:
+curl -sL -o manuscript.pdf ".../server/api/core/bitstreams/<id>/content"
+```
+
+The 71-page PDF carries all six appendices; the auto-extracted text carried none of them. Extract
+with `pypdf` — the naive zlib-stream trick returns 5.5M characters of font data for a PDF 1.6 file.
+
+**Check the Dataverse record's own access flags before assuming a human could get further.** For
+`LUKGIA` the answer was no: license CC BY-NC-SA 4.0, `restricted=False` and no embargo on all six
+files, so the API had already retrieved the complete public set and a browser or institutional login
+adds nothing. Where a human *does* still help is off-Dataverse — the publisher's supplementary data
+(403 to automated access) and emailing the authors, whose readme names a contact for data requests.
+`dataFile.restricted` and `latestVersion.license` in the record JSON tell you which situation you
+are in, and cost one request.
+
 ## Two audit-hygiene points this surfaced
 
 - **Siblings from one source file were classified inconsistently.** `gilbert_meta_110` was already
