@@ -186,6 +186,8 @@ it is cheaper to fix than a wrong tag, because nothing downstream trusts a blank
 
 ### A3. `child age`, as a consequence
 
+> **Decided by Ben, 2026-09-01.** Derived, as framed here.
+
 Same referent, derived from the same column when A1 applied, half-open bands so
 the boundaries do not overlap: `Early (<6y)` = `[0, 6)`, `Child (6-12y)` =
 `[6, 12)`, `Adolescent (12-18y)` = `[12, 18)`. Multi-select: include every band
@@ -437,8 +439,9 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Seven decisions; **1, 2, 3 and 5 are settled** (2026-09-01) and are struck
-through below for the record. Defaults on the rest are what the document says, so
+Seven decisions; **1, 2, 3, 4 and 5 are settled** (2026-09-01) and are struck
+through below for the record. Only **6** (telling the RAs) and **7** (the merge
+policy) are open. Defaults on the rest are what the document says, so
 "approve" with no comment takes them as written.
 
 1. ~~**`age range` referent = the shipped table.**~~ (§A0) — **decided
@@ -453,8 +456,10 @@ through below for the record. Defaults on the rest are what the document says, s
    — **decided 2026-09-01: yes**, both clauses, with "catch-all" scoped to the
    frame facet (§B2) so the 133 `General` + setting-atom rows stand. Ships
    through `tag_normalize.R` per §B3, so it is not waiting on decision 7.
-4. **`child age` gets derived too** (§A3), from the same `cov_age` column.
-   Say no and I leave that column entirely to human raters.
+4. ~~**`child age` gets derived too** (§A3), from the same `cov_age` column.~~
+   — **decided 2026-09-01: yes**, framing as written: half-open bands, same
+   `cov_age`, same `MINOR_SHARE`, blank whenever `age range` is `Adult (18+)`,
+   `Elderly`, `Non-human` or blank.
 5. ~~**Blank beats a guess** (§A2).~~ — **decided 2026-09-01: yes**, blank
    whenever the source does not state it explicitly. Governs new tagging only;
    no existing cell is blanked, since nothing records which of today's tags were
