@@ -103,18 +103,33 @@ proceed.
 ## Step 3 — Fetch the source text
 
 ```bash
-python3 scripts/fetch_source.py table_a --doi 10.1037/a0022874   # prefer DOI when present
-python3 scripts/fetch_source.py table_a --url https://...        # else use the dictionary URL
+python3 scripts/fetch_source.py table_a --doi 10.1037/a0022874 --url https://...
 ```
-This resolves `https://doi.org/{doi}` (or fetches the URL directly),
-caches the raw text under `.cache/` (gitignored — not committed), and
-reports HTTP status / final URL / byte count. It does **not** decide
-whether the content is paywalled — read the cached file yourself (`Read
-.cache/{table}.txt`) and judge that. **If it's paywalled, login-gated, or
-otherwise unreachable/unusable**, stop for that table and stage a row with
-every field blank except `table`, `Rater`, and
-`Notes = "cannot fully access due to paywall"` — don't guess content from
-the Description/Reference text alone.
+Pass **both** when the dictionary has both — they are tried in order, not
+as alternatives. Given a DOI the script asks OpenAlex where an open copy
+lives and tries those locations (PDFs first, extracted to text) before
+falling back to resolving the DOI itself, then the URL. It caches under
+`.cache/` (gitignored — not committed).
+
+It reports `oa_status` from OpenAlex, and **that is what you judge a
+paywall on — not the fetch failing.** Those are different findings:
+
+| Outcome | What it means | What to do |
+|---|---|---|
+| `OK ... content=N_chars_visible` | Got prose that is not a blocker page | Read `.cache/{table}.txt` and continue to Step 4 |
+| `UNREACHABLE oa_status=closed` | No open copy exists | Stage `Notes = "cannot fully access due to paywall"` |
+| `UNREACHABLE oa_status=gold\|green\|hybrid\|bronze\|diamond` | An open copy **exists** and something else blocked us — a WAF, a captcha, a JS-only page, a dead link | **Not a paywall.** Stage `Notes = "no working link"`, and it is worth reporting: these are fixable |
+
+The script rejects blocker pages rather than caching them, and prints the
+reason per candidate (`blocker:recaptcha`, `too_short:3_chars_visible`,
+`http_403`). This matters because raw byte count cannot tell an article
+from a challenge page: the reCAPTCHA interstitial served for a fully
+open-access PeerJ paper was 21kB, and OSF's JavaScript shell is a
+consistent 4.2kB. Both used to cache and read as "the source".
+
+Still read the cached file and judge it yourself — the script screens out
+blockers, it does not confirm the text is the *right* paper. A dictionary
+`doi` can point at a different article than the `reference` field names.
 
 Cached text persists across runs specifically so a paywalled or
 rate-limited source isn't re-hit on every retry.

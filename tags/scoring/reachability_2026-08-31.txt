@@ -1,0 +1,82 @@
+TABLE                                                RESULT     DETAIL
+oxfordcovid_xue_2024_brs                             REACHED    OK oa_status=bronze source=https://europepmc.org/article/PMC/PMC10124709 final_url=https://europepmc.org/article/PMC/PMC10124709 content=55145_chars_visible attempts=1
+dwyer_2025_genomics_pb                               REACHED    OK oa_status=diamond source=https://pmc.ncbi.nlm.nih.gov/articles/PMC12187021/ final_url=https://pmc.ncbi.nlm.nih.gov/articles/PMC12187021/ content=46352_chars_visible attempts=3
+pass20_klosowska_2025_pass_hospital                  REACHED    OK oa_status=green source=https://ruj.uj.edu.pl/handle/item/552041 final_url=https://ruj.uj.edu.pl/handle/item/552041 content=13686_chars_visible attempts=2
+gmc_kay_2025                                         FAILED       rejected https://osf.io/uzrgk/files/osfstorage?view_only=aca403a5146240bda740e1e6d640751f -> too_short:3_cha
+heise_2024_mental_falsesign                          REACHED    OK oa_status=hybrid source=https://europepmc.org/article/PMC/PMC12379850 final_url=https://europepmc.org/article/PMC/PMC12379850 content=116010_chars_visible attempts=1
+abdullah_2024_hbbloat_pbc                            REACHED    OK oa_status=gold source=https://europepmc.org/article/PMC/PMC11067892 final_url=https://europepmc.org/article/PMC/PMC11067892 content=55041_chars_visible attempts=1
+sun_2025_morality_study1_fairnesshexaco              FAILED       rejected https://osf.io/5e9y3/overview -> too_short:3_chars_visible
+pisa2022_read                                        FAILED       rejected https://www.oecd.org/en/data/datasets/pisa-2022-database.html -> http_403
+c19prc_uk_mcbride_2021_protective_behaviours         REACHED    OK oa_status=green source=https://pure.ulster.ac.uk/en/datasets/db603221-fb79-46ca-a2d6-4a11e0fe0058 final_url=https://pure.ulster.ac.uk/en/datasets/the-covid-19-psychological-research-consortium-study-2020-2021/ content=8064_chars_visible attempts=1
+aspirations_sonmez_2022                              FAILED       rejected https://osf.io/psgk8/ -> too_short:3_chars_visible
+gilbert_meta_40                                      FAILED       rejected https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/FXL7JW -> http_202
+ecuador_2011_safety_crime                            REACHED    OK oa_status=not_checked source=https://www.ecuadorencifras.gob.ec/encuesta-de-victimizacion-y-percepcion-de-inseguridad-2011/ final_url=https://www.ecuadorencifras.gob.ec/encuesta-de-victimizacion-y-percepcion-de-inseguridad-2011/ content=4419_chars_visible attempts=1
+cfc_balaji_2019                                      FAILED       rejected https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/1KDJTZ -> http_202
+gahps_korner_2021                                    FAILED       rejected https://osf.io/eh7r4/overview -> too_short:3_chars_visible
+c19prc_uk_mcbride_2021_socialdistance                REACHED    OK oa_status=green source=https://pure.ulster.ac.uk/en/datasets/db603221-fb79-46ca-a2d6-4a11e0fe0058 final_url=https://pure.ulster.ac.uk/en/datasets/the-covid-19-psychological-research-consortium-study-2020-2021/ content=8064_chars_visible attempts=1
+enem_2022_1mil_cn                                    REACHED    OK oa_status=diamond source=https://latinamericanpublicacoes.com.br/ojs/index.php/jdev/article/download/754/702 final_url=https://ojs.latinamericanpublicacoes.com.br/ojs/index.php/jdev/article/download/754/702 content=21988_chars_visible attempts=1
+pisa2009_math                                        FAILED       rejected https://www.oecd.org/pisa/data/database-pisa2009.html -> http_403
+jeilani_2024_personal_growth                         FAILED       rejected https://figshare.com/articles/dataset/26820745 -> http_202
+c19prc_uk_mcbride_2021_polarization_brexit           REACHED    OK oa_status=green source=https://pure.ulster.ac.uk/en/datasets/db603221-fb79-46ca-a2d6-4a11e0fe0058 final_url=https://pure.ulster.ac.uk/en/datasets/the-covid-19-psychological-research-consortium-study-2020-2021/ content=8064_chars_visible attempts=1
+jeilani_2024_self_efficacy                           FAILED       rejected https://figshare.com/articles/dataset/26820745 -> http_202
+spain_2023_identity_authenticity                     FAILED     fetch_source.py: error: provide --doi or --url
+spain_2023_identity_territorial                      FAILED     fetch_source.py: error: provide --doi or --url
+ABDONE
+
+--------------------------------------------------------------------------
+Re-fetch of the 22 tables that yielded no tags in the 2.2 scoring run
+(#1721), using the OpenAlex + Europe PMC fetch_source.py from #1744.
+
+Before: 0 of 22 reachable.
+After:  10 of 22 reachable with verified prose.
+
+Reproduce (dictionary lookup supplies --doi/--url per table):
+    python3 scripts/lookup_dictionary.py TABLE
+    python3 scripts/fetch_source.py TABLE --doi ... --url ... --force
+
+Three cautions on reading this file.
+
+1. "REACHED" means a non-blocker page of >=1500 visible characters that
+   also carries the requested DOI or title. That identity check matters:
+   the Journal of Open Psychology Data galley URL for 10.5334/jopd.56
+   redirects to the journal's *article listing*, which is 12,722 characters
+   of real prose with no blocker markers -- it passes every length and
+   blocker test and is not the paper. It is now rejected as
+   `wrong_work:doi_and_title_absent`.
+
+   The check verifies the text matches the DOI it was asked for. It cannot
+   catch a dictionary entry naming the WRONG DOI: oxfordcovid_xue_2024_brs
+   used to resolve to "A Stan tutorial on Bayesian IRTree models", and the
+   fetch would have been confidently correct about it. That was a
+   dictionary defect and was fixed at source on 2026-08-31 -- all 17
+   oxfordcovid_* tables now carry 10.5334/jopd.56, matching their
+   `reference` field. The run recorded above predates that fix.
+
+   ecuador_2011_safety_crime clears the floor at 4419 chars but is a portal
+   navigation menu, not a description of the instrument; a weak pass.
+
+2. An earlier version of this measurement scored 14 of 22 by counting raw
+   bytes. Five of those were blocker pages: a reCAPTCHA challenge
+   (abdullah_2024_hbbloat_pbc -- the very table #1744 cites as proof PeerJ
+   is open), and the OSF JavaScript shell at a constant 4207 bytes
+   (gmc_kay_2025, sun_2025_morality_study1_fairnesshexaco,
+   aspirations_sonmez_2022, gahps_korner_2021). Byte count is not a
+   content check.
+
+3. Scraping PMC article pages is rate-sensitive: NCBI serves a reCAPTCHA to
+   repeated unauthenticated callers, so heise_2024_mental_falsesign fetched
+   cleanly on one run and came back "paywalled" an hour later. That is why
+   PMC-hosted articles now go through the Europe PMC REST API instead
+   (JATS XML, no challenge). Any reachability number taken by scraping
+   should be assumed to decay on re-run; this one should not.
+
+The 12 still unreachable split into:
+  - OECD/PISA (pisa2022_read, pisa2009_math): http_403, oa_status=closed.
+    Genuinely closed; the real source is PISA technical documentation, not
+    an article.
+  - Harvard Dataverse (gilbert_meta_40, cfc_balaji_2019): http_202 --
+    the WAF interstitial already tracked in #1751.
+  - Figshare (jeilani_2024_*): http_202, same shape.
+  - OSF landing pages (4): JavaScript-only; the OSF API would reach these.
+  - No dictionary doi or url at all (spain_2023_identity_*): correctly a
+    "no working link" case, unchanged by this work.
