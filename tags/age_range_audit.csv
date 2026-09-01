@@ -1052,7 +1052,7 @@ kemp_2019_mss_negative,584,584,19.0,75.0,55,0,584,0.0,0,0,0,derived,Adult (18+),
 konerding_2019_patientsatisfaction,1884,1841,21.0,99.0,70,0,1841,0.0,0,0,0,derived,Adult (18+),,
 kotsou_2016_scs,1554,278,56.0,236061972.0,255,0,278,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 56.0-236061972.0"
 koksal_2023_psycap,281,281,22.0,49.0,28,0,281,0.0,0,0,0,derived,Adult (18+),,
-lai_2023_parent_relation_father,1323,1299,5.0,26.0,16,1281,18,0.013857,1,236,1044,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+lai_2023_parent_relation_father,1323,1299,5.0,26.0,16,1281,18,0.013857,1,236,1044,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 1.386% (< 2%), so not Mixed"
 kushnir2017_ftnd,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
 kushnir2017_bfi,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
 kushnir2017_tsrq,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
@@ -1093,11 +1093,11 @@ lec5_xiong_2025,9506,9506,8.0,70.0,62,5948,3558,0.37429,0,1983,3965,derived,Mixe
 lee_2020_vr_usability,60,60,21.0,27.0,7,0,60,0.0,0,0,0,derived,Adult (18+),,
 latifi_2026_insect_fear,1369,1369,6.0,18.0,13,1185,184,0.134405,0,347,838,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 lhsbrasil_couto_2023_ses,464,464,18.0,79.0,60,0,464,0.0,0,0,0,derived,Adult (18+),,
-lai_2023_teacher_student_rel,1323,1299,5.0,26.0,16,1281,18,0.013857,1,237,1043,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+lai_2023_teacher_student_rel,1323,1299,5.0,26.0,16,1281,18,0.013857,1,237,1043,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 1.386% (< 2%), so not Mixed"
 lee_2020_burnout,733,718,17.0,31.0,15,16,702,0.022284,0,0,16,derived,Mixed,Adolescent (12-18y),
-lai_2023_social_adaptability,1323,1299,5.0,26.0,16,1281,18,0.013857,1,235,1045,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
-lai_2023_parent_relation_mother,1322,1298,5.0,26.0,16,1280,18,0.013867,1,236,1043,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
-lai_2023_peer_relationship,1324,1300,5.0,26.0,16,1282,18,0.013846,1,236,1045,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+lai_2023_social_adaptability,1323,1299,5.0,26.0,16,1281,18,0.013857,1,235,1045,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 1.386% (< 2%), so not Mixed"
+lai_2023_parent_relation_mother,1322,1298,5.0,26.0,16,1280,18,0.013867,1,236,1043,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 1.387% (< 2%), so not Mixed"
+lai_2023_peer_relationship,1324,1300,5.0,26.0,16,1282,18,0.013846,1,236,1045,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 1.385% (< 2%), so not Mixed"
 lee_2020_sleep_quality,691,680,17.0,31.0,14,16,664,0.023529,0,0,16,derived,Mixed,Adolescent (12-18y),
 liu_2017_communication,350,350,27.0,70.0,36,0,350,0.0,0,0,0,derived,Adult (18+),,
 liu_2017_qol,350,350,27.0,70.0,36,0,350,0.0,0,0,0,derived,Adult (18+),,

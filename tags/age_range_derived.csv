@@ -862,6 +862,7 @@ kemp_2019_mss_positive,Adult (18+),,derived_cov_age,19.0,75.0,584,0.0,2026-09-01
 kemp_2019_mss_negative,Adult (18+),,derived_cov_age,19.0,75.0,584,0.0,2026-09-01
 konerding_2019_patientsatisfaction,Adult (18+),,derived_cov_age,21.0,99.0,1841,0.0,2026-09-01
 koksal_2023_psycap,Adult (18+),,derived_cov_age,22.0,49.0,281,0.0,2026-09-01
+lai_2023_parent_relation_father,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
 kushnir2017_ftnd,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
 kushnir2017_bfi,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
 kushnir2017_tsrq,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
@@ -891,7 +892,11 @@ lec5_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,7
 lee_2020_vr_usability,Adult (18+),,derived_cov_age,21.0,27.0,60,0.0,2026-09-01
 latifi_2026_insect_fear,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,18.0,1369,0.134405,2026-09-01
 lhsbrasil_couto_2023_ses,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
+lai_2023_teacher_student_rel,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
 lee_2020_burnout,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,718,0.022284,2026-09-01
+lai_2023_social_adaptability,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
+lai_2023_parent_relation_mother,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1298,0.013867,2026-09-01
+lai_2023_peer_relationship,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1300,0.013846,2026-09-01
 lee_2020_sleep_quality,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,680,0.023529,2026-09-01
 liu_2017_communication,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
 liu_2017_qol,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
