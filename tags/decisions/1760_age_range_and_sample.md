@@ -2,9 +2,12 @@
 
 **Status: all seven decisions made by Ben on 2026-09-01.** The rules below are
 what was approved; the reasoning is kept intact so each answer's basis stays
-visible. They fold into
-`tags/.claude/skills/irw-auto-tag/references/vocab.md`, and this file goes away
-once they are implemented and #1760 is closed with the after-action report.
+visible. They are folded into
+`tags/.claude/skills/irw-auto-tag/references/vocab.md`, which is what the tagger
+reads; this file is the record of *why*, and it is where a change to any of
+these rules gets argued and recorded. It was written as a proposal, and the
+reasoning is kept in that form on purpose — the case as it was put is what makes
+each answer legible later.
 
 Context: #1760 asked @SamuelEnrique and @saviranadela which referent they had
 in mind when tagging. No reply as of 2026-09-01. The question they were asked
@@ -580,16 +583,22 @@ on it, and the record and the notification are then the same artifact.
 
 ## If approved
 
-1. Fold A and B into `vocab.md`; delete this file.
-2. Close #1743 — A1 row 3 is the sentence it asks for.
+1. ~~Fold A and B into `vocab.md`~~ — **done**, and this file moved from
+   `tags/proposals/` to `tags/decisions/` rather than being deleted: `vocab.md`
+   now carries the rules and links here for the reasoning.
+2. Close #1743 — A1 row 3 is the sentence it asks for. **Pending** the run.
 3. Unblock **2.3** (#1722): `age range` and `sample` gain per-column rules, so
    they stop holding the other columns.
-4. Implement A1/A3 as a derivation step in the auto-tagger (it currently reads
-   only sources, never `cov_age`), with the basis field from A4.
+4. Implement A1/A3 as a derivation step (the tagger currently reads only
+   sources, never `cov_age`), with the basis field from A4. The precedence side
+   is **done**: `03_tags.R` reads `tags/age_range_derived.csv`, which outranks
+   the Sheet for these two columns only and creates a row for an untagged table.
+   What remains is the script that computes the file.
 5. Regenerate, and report the diff **before** anything publishes: how many tags
    changed, in which direction, and how many tables gained a first tag.
-6. Implement B2 in `tag_normalize.R` (§B3) — mechanical, ships independently of
-   everything above, and independently of decision 7.
+6. ~~Implement B2 in `tag_normalize.R` (§B3)~~ — **done**. Verified against
+   `tags.csv`: 181 rows change, `General/non-specific` goes 831 → 650, no other
+   result set moves. Tests in `metadata/tests/test_tags_union.R`.
 7. Post the after-action report as the last comment on #1760 and close it. The
    RAs are on that thread; the record and the notification are one artifact.
 
