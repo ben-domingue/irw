@@ -49,28 +49,28 @@ algner2022_tis,612,612,21.0,67.0,45,0,612,0.0,0,0,0,derived,Adult (18+),,
 algner2022_psgbi,500,500,19.0,69.0,48,0,500,0.0,0,0,0,derived,Adult (18+),,
 alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup,1087,1087,18.0,69.0,52,0,1087,0.0,0,0,0,derived,Adult (18+),,
 alcoholhealthwarninglabel_brennan_2022_intentions_postexposure,1755,1755,18.0,69.0,52,0,1755,0.0,0,0,0,derived,Adult (18+),,
-alsyouf_2024_performance_expectancy,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+alsyouf_2024_performance_expectancy,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 amarilla_2020_barthel,224,224,66.0,99.0,31,0,224,0.0,0,0,0,derived,Elderly (minimum age >50),,
 amarilla_2020_eq5d,224,224,66.0,99.0,31,0,224,0.0,0,0,0,derived,Elderly (minimum age >50),,
 amatus_cipora_2024_amas,1106,848,18.0,56.0,25,0,848,0.0,0,0,0,derived,Adult (18+),,
 altahla_2024_whoqol,412,189,1.0,5.0,5,189,0,0.0,189,0,0,unusable,,,"looks like banded codes: 5 distinct values, max 5.0"
-alsyouf_2024_social_influence,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_openness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_conscientiousness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+alsyouf_2024_social_influence,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_openness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_conscientiousness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 alsuhibani_2022_pads_s2,1508,1508,18.0,86.0,68,0,1508,0.0,0,0,0,derived,Adult (18+),,
 alsuhibani_2022_pads_s1,449,447,17.0,72.0,49,1,446,0.002237,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.224% (< 2%), so not Mixed"
 alsuhibani_2022_sers,2146,2146,18.0,86.0,68,0,2146,0.0,0,0,0,derived,Adult (18+),,
 amarilla_2020_sf12,224,224,66.0,99.0,31,0,224,0.0,0,0,0,derived,Elderly (minimum age >50),,
 amarilla_2020_lawton_brody,224,224,66.0,99.0,31,0,224,0.0,0,0,0,derived,Elderly (minimum age >50),,
-alsyouf_2024_effort_expectancy,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_management_support,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_extraversion,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_neuroticism,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_facilitating_conditions,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+alsyouf_2024_effort_expectancy,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_management_support,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_extraversion,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_neuroticism,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_facilitating_conditions,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 altman_2020_capq,4053,4023,18.0,75.0,58,0,4023,0.0,0,0,0,derived,Adult (18+),,
-alsyouf_2024_continuance_intention,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_end_user_support,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-alsyouf_2024_agreeableness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+alsyouf_2024_continuance_intention,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_end_user_support,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+alsyouf_2024_agreeableness,472,472,1.0,7.0,7,472,0,0.0,454,18,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 alsuhibani_2022_paranoia_s3,638,638,18.0,80.0,62,0,638,0.0,0,0,0,derived,Adult (18+),,
 alsuhibani_2022_npi_s3,638,638,18.0,80.0,62,0,638,0.0,0,0,0,derived,Adult (18+),,
 alsuhibani_2022_loc,2570,2568,17.0,86.0,69,1,2567,0.000389,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.039% (< 2%), so not Mixed"
@@ -175,7 +175,7 @@ avci_2024_sansdaykontrol_odak,216,216,18.0,73.0,41,0,216,0.0,0,0,0,derived,Adult
 avci_2024_yatrmciliskoz_yeterlk,216,216,18.0,73.0,41,0,216,0.0,0,0,0,derived,Adult (18+),,
 avci_2024_statu_gir_yonel,216,216,18.0,73.0,41,0,216,0.0,0,0,0,derived,Adult (18+),,
 bilotta_2018_tas20,1362,1362,18.0,73.0,55,0,1362,0.0,0,0,0,derived,Adult (18+),,
-biswas_2024_digital_center_quality,332,332,1.0,6.0,6,332,0,0.0,317,15,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+biswas_2024_digital_center_quality,332,332,1.0,6.0,6,332,0,0.0,317,15,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 bitew_2020_anxiety,694,682,18.0,37.0,14,0,682,0.0,0,0,0,derived,Adult (18+),,
 bang_2023_depression,37,37,21.0,47.0,23,0,37,0.0,0,0,0,derived,Adult (18+),,
 bicb-j_ishiguro_2025,1974,1974,18.0,82.0,63,0,1974,0.0,0,0,0,derived,Adult (18+),,
@@ -223,7 +223,7 @@ blum_2018_imak_bin,317,317,0.0,66.0,46,8,309,0.025237,1,0,7,derived,Mixed,"Early
 bitew_2020_self_efficacy,690,678,18.0,37.0,14,0,678,0.0,0,0,0,derived,Adult (18+),,
 brand_raffaelli_2024_liking_20,1197,1164,18.0,81.0,59,0,1164,0.0,0,0,0,derived,Adult (18+),,
 brederecke_2020_sis,1367,1367,16.0,89.0,72,7,1360,0.005121,0,0,7,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.512% (< 2%), so not Mixed"
-boudreau_2022_police_reform,1621,1621,1.0,6.0,6,1621,0,0.0,1427,194,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+boudreau_2022_police_reform,1621,1621,1.0,6.0,6,1621,0,0.0,1427,194,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 c19prc_uk_mcbride_2021_family_prelockdown,1074,1074,18.0,83.0,64,0,1074,0.0,0,0,0,derived,Adult (18+),,
 c19prc_uk_mcbride_2021_eds_prepandemic,1166,1166,18.0,83.0,66,0,1166,0.0,0,0,0,derived,Adult (18+),,
 c19prc_uk_mcbride_2021_family_duringlockdown,1074,1074,18.0,83.0,64,0,1074,0.0,0,0,0,derived,Adult (18+),,
@@ -319,7 +319,7 @@ celik_2026_distance_ed_attitudes_16,653,653,17.0,46.0,17,2,651,0.003063,0,0,2,de
 ccapsvtskhpacr_mercedes_2023_tsk,194,194,36.0,86.0,41,0,194,0.0,0,0,0,derived,Adult (18+),,
 ccapsvtskhpacr_mercedes_2023_hada,194,194,36.0,86.0,41,0,194,0.0,0,0,0,derived,Adult (18+),,
 campos_2023_oes,7593,7591,18.0,84.0,61,0,7591,0.0,0,0,0,derived,Adult (18+),,
-carney_2023_substance_use,414,414,1.0,29.0,16,25,389,0.060386,2,0,23,quarantine,,,ages 1.0-29.0 are equally consistent with months; unit not stated in the data
+carney_2023_substance_use,414,414,1.0,29.0,16,25,389,0.060386,2,0,23,quarantine,,,"ages 1.0-29.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 celik_2026_distance_ed_attitudes_26,412,412,17.0,26.0,11,2,410,0.004854,0,0,2,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.485% (< 2%), so not Mixed"
 caetano-santos-lsas-2021,436,436,18.0,61.0,37,0,436,0.0,0,0,0,derived,Adult (18+),,
 c19prc_uk_mcbride_2021_wordsum,2058,2058,18.0,89.0,68,0,2058,0.0,0,0,0,derived,Adult (18+),,
@@ -340,7 +340,7 @@ chen2025_self_esteem,1100,1100,1.0,3.0,3,1100,0,0.0,1100,0,0,unusable,,,"looks l
 chen2022b_psychabuse,417,417,15.0,19.0,5,336,81,0.194245,0,0,336,derived,Mixed,Adolescent (12-18y),
 chen2022_ses,303,303,10.0,15.0,6,303,0,0.0,0,157,146,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 chatzoudes_2021_service_delivery,503,503,1.0,4.0,4,503,0,0.0,503,0,0,unusable,,,"looks like banded codes: 4 distinct values, max 4.0"
-chavez_2026_bpnsfs,806,806,2.0,16.0,7,806,0,0.0,1,7,798,quarantine,,,ages 2.0-16.0 are equally consistent with months; unit not stated in the data
+chavez_2026_bpnsfs,806,806,2.0,16.0,7,806,0,0.0,1,7,798,derived,Child (<18y),Adolescent (12-18y),
 chen_2022_cesd,77211,77211,16.0,27.0,12,349,76862,0.00452,0,0,349,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.452% (< 2%), so not Mixed"
 chen_2022_gad,77211,77211,16.0,27.0,12,349,76862,0.00452,0,0,349,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.452% (< 2%), so not Mixed"
 chen2022_cls,303,303,10.0,15.0,6,303,0,0.0,0,157,146,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
@@ -649,23 +649,23 @@ florida_twins_leq,607,607,9.642710472,20.39972621,294,527,80,0.131796,0,96,431,d
 florida_twins_media,608,608,9.642710472,20.39972621,294,528,80,0.131579,0,96,432,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 florida_twins_nes,1353,1353,9.237508556,20.39972621,942,1352,80,0.055866,0,515,1049,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 florida_twins_pals,784,784,9.237508556,18.13278576,362,782,2,0.002551,0,150,632,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.255% (< 2%), so not Mixed"
-forrest_2021_positive_affect_proxy,909,909,5.0,17.0,13,909,0,0.0,10,354,545,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_positive_affect_proxy,909,909,5.0,17.0,13,909,0,0.0,10,354,545,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_phys_activity_child,2011,2011,8.0,17.0,10,2011,0,0.0,0,791,1220,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_positive_affect_child,1869,1869,8.0,17.0,10,1869,0,0.0,0,777,1092,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_phys_stress_child,1843,1843,8.0,17.0,10,1843,0,0.0,0,732,1111,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_global_health_child,3635,3635,8.0,17.0,10,3635,0,0.0,0,2152,1483,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
-forrest_2021_family_involve_proxy,958,958,5.0,17.0,13,958,0,0.0,11,347,600,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
-forrest_2021_life_satisfaction_proxy,963,963,5.0,17.0,13,963,0,0.0,10,378,575,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_family_involve_proxy,958,958,5.0,17.0,13,958,0,0.0,11,347,600,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
+forrest_2021_life_satisfaction_proxy,963,963,5.0,17.0,13,963,0,0.0,10,378,575,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_meaning_purpose_child,1895,1895,8.0,17.0,10,1895,0,0.0,0,762,1133,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
-forrest_2021_global_health_proxy,1807,1807,5.0,17.0,13,1807,0,0.0,35,906,866,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
-forrest_2021_phys_activity_proxy,1032,1031,5.0,17.0,13,1031,0,0.0,12,367,652,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
-forrest_2021_meaning_purpose_proxy,926,926,5.0,17.0,13,926,0,0.0,10,351,565,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_global_health_proxy,1807,1807,5.0,17.0,13,1807,0,0.0,35,906,866,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
+forrest_2021_phys_activity_proxy,1032,1031,5.0,17.0,13,1031,0,0.0,12,367,652,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
+forrest_2021_meaning_purpose_proxy,926,926,5.0,17.0,13,926,0,0.0,10,351,565,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 forrest_2021_life_satisfaction_child,1992,1992,8.0,17.0,10,1992,0,0.0,0,801,1191,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
-forrest_2021_phys_stress_proxy,924,924,5.0,17.0,13,924,0,0.0,10,355,559,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_phys_stress_proxy,924,924,5.0,17.0,13,924,0,0.0,10,355,559,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 FomoNegativeAffect_cremer_2026_phq,461,461,18.0,25.0,8,0,461,0.0,0,0,0,derived,Adult (18+),,
 forrest_2021_family_involve_child,1845,1845,8.0,17.0,10,1845,0,0.0,0,734,1111,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 FomoNegativeAffect_cremer_2026_rrs,459,459,18.0,25.0,8,0,459,0.0,0,0,0,derived,Adult (18+),,
-forrest_2021_family_belonging_proxy,960,960,5.0,17.0,13,960,0,0.0,11,347,602,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_family_belonging_proxy,960,960,5.0,17.0,13,960,0,0.0,11,347,602,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 FomoNegativeAffect_cremer_2026_panas,461,461,18.0,25.0,8,0,461,0.0,0,0,0,derived,Adult (18+),,
 forrest_2021_family_belonging_child,1845,1845,8.0,17.0,10,1845,0,0.0,0,734,1111,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 FomoNegativeAffect_cremer_2026_fomo,459,459,18.0,25.0,8,0,459,0.0,0,0,0,derived,Adult (18+),,
@@ -681,7 +681,7 @@ friedman_2018_risks_discrimination,3110,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0
 gan_2015_ucla_loneliness,71,71,66.0,94.0,23,0,71,0.0,0,0,0,derived,Elderly (minimum age >50),,
 friedman_2018_risks_government,3110,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 forycka_2022_mbi_gss,1395,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
-forrest_2021_psych_stress_proxy,913,913,5.0,17.0,13,913,0,0.0,10,357,546,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_psych_stress_proxy,913,913,5.0,17.0,13,913,0,0.0,10,357,546,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 Forthmann-2024-creative_quality,202,202,17.0,75.0,27,2,200,0.009901,0,0,2,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.990% (< 2%), so not Mixed"
 forycka_2022_mswbi,1361,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 Forthmann-2024-cleverness_ratings,202,202,17.0,75.0,27,2,200,0.009901,0,0,2,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.990% (< 2%), so not Mixed"
@@ -696,11 +696,11 @@ forrest_2021_psych_stress_child,1874,1874,8.0,17.0,10,1874,0,0.0,0,740,1134,deri
 forrest_2021_strength_child,1824,1824,8.0,17.0,10,1824,0,0.0,0,756,1068,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 franco_2024_unfolding,137,137,17.0,76.0,49,2,135,0.014599,0,0,2,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.460% (< 2%), so not Mixed"
 frikha_2023_pe_acrs,308,308,19.0,35.0,15,0,308,0.0,0,0,0,derived,Adult (18+),,
-forrest_2021_strength_proxy,917,916,5.0,17.0,13,916,0,0.0,12,346,558,quarantine,,,ages 5.0-17.0 are equally consistent with months; unit not stated in the data
+forrest_2021_strength_proxy,917,916,5.0,17.0,13,916,0,0.0,12,346,558,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 gao2025_attachment_anxiety,459,459,1.0,3.0,3,459,0,0.0,459,0,0,unusable,,,"looks like banded codes: 3 distinct values, max 3.0"
 fraijo_2022_mslq,347,347,17.0,29.0,13,17,330,0.048991,0,0,17,derived,Mixed,Adolescent (12-18y),
-gerber_2022_selfesteem,255,255,6.0,16.0,11,255,0,0.0,0,181,74,quarantine,,,ages 6.0-16.0 are equally consistent with months; unit not stated in the data
-gerber_2022_altruism,256,256,6.0,16.0,11,256,0,0.0,0,181,75,quarantine,,,ages 6.0-16.0 are equally consistent with months; unit not stated in the data
+gerber_2022_selfesteem,255,255,6.0,16.0,11,255,0,0.0,0,181,74,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
+gerber_2022_altruism,256,256,6.0,16.0,11,256,0,0.0,0,181,75,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 gcbs_brotherton_2013_tipi,2495,2495,13.0,33769.0,65,580,1915,0.232465,0,0,580,unusable,,,"ages outside [0, 120]: 13.0-33769.0"
 germann_2026_immigration,76445,72185,18.0,96.0,76,0,72185,0.0,0,0,0,derived,Adult (18+),,
 genpsych_russell_2024_llama3,1001,1001,18.0,86.0,65,0,1001,0.0,0,0,0,derived,Adult (18+),,
@@ -714,10 +714,10 @@ gao2025_sse,459,459,1.0,3.0,3,459,0,0.0,459,0,0,unusable,,,"looks like banded co
 genpsych_russell_2024_mixtral,998,998,18.0,85.0,63,0,998,0.0,0,0,0,derived,Adult (18+),,
 gao2025_spiritual_wellbeing,459,459,1.0,3.0,3,459,0,0.0,459,0,0,unusable,,,"looks like banded codes: 3 distinct values, max 3.0"
 germann_2026_state_intervention,76151,71896,18.0,96.0,76,0,71896,0.0,0,0,0,derived,Adult (18+),,
-gerber_2022_eas_temperament,256,256,6.0,16.0,11,256,0,0.0,0,181,75,quarantine,,,ages 6.0-16.0 are equally consistent with months; unit not stated in the data
+gerber_2022_eas_temperament,256,256,6.0,16.0,11,256,0,0.0,0,181,75,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 garciabatista_2021_erq,187,187,23.0,66.0,36,0,187,0.0,0,0,0,derived,Adult (18+),,
 germann_2026_environment,76189,71941,18.0,96.0,76,0,71941,0.0,0,0,0,derived,Adult (18+),,
-gerber_2022_self_esteem,255,255,6.0,16.0,11,255,0,0.0,0,181,74,quarantine,,,ages 6.0-16.0 are equally consistent with months; unit not stated in the data
+gerber_2022_self_esteem,255,255,6.0,16.0,11,255,0,0.0,0,181,74,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 GBJW_fadplus_goto2021,802,802,18.0,80.0,51,0,802,0.0,0,0,0,derived,Adult (18+),,
 ghanbari_2016_helma_access,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 genpsych_russell_2024_gpt4o,999,999,18.0,95.0,67,0,999,0.0,0,0,0,derived,Adult (18+),,
@@ -726,53 +726,53 @@ GART_Grolig_2020,120,120,13.0,73.0,43,19,101,0.158333,0,0,19,derived,Mixed,Adole
 genpsych_russell_2024_gemma,1001,1000,18.0,81.0,62,0,1000,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_32,4513,4513,8.0,25.0,17,4464,49,0.010858,0,65,4399,derived,Child (<18y),Adolescent (12-18y),"both sides of 18 present but the smaller group is 1.086% (< 2%), so not Mixed"
 gilbert_meta_31,12560,12560,0.0,219.0,141,21,12539,0.001672,21,0,0,unusable,,,"ages outside [0, 120]: 0.0-219.0"
-gilbert_meta_22,5364,5359,6.0,21.0,16,5192,167,0.031163,0,1378,3814,quarantine,,,ages 6.0-21.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_22,5364,5359,6.0,21.0,16,5192,167,0.031163,0,1378,3814,quarantine,,,"ages 6.0-21.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 gilbert_meta_24,644,644,6.5,9.5,7,644,0,0.0,0,644,0,derived,Child (<18y),Child (6-12y),
 gilbert_meta_16,4031,3948,7.0,13.0,7,3948,0,0.0,0,3936,12,derived,Child (<18y),Child (6-12y),
-gilbert_meta_19,51612,28465,5.0,14.0,10,28465,0,0.0,690,24589,3186,quarantine,,,ages 5.0-14.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_18,51652,28475,5.0,14.0,10,28475,0,0.0,690,24596,3189,quarantine,,,ages 5.0-14.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_19,51612,28465,5.0,14.0,10,28465,0,0.0,690,24589,3186,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",
+gilbert_meta_18,51652,28475,5.0,14.0,10,28475,0,0.0,690,24596,3189,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",
 gilbert_meta_28,8857,8857,18.0,70.0,47,0,8857,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_27,8857,8857,18.0,70.0,47,0,8857,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_107,1170,1031,11.0,17.0,7,1031,0,0.0,0,114,917,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 gilbert_meta_106,1171,1031,11.0,17.0,7,1031,0,0.0,0,114,917,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 gilbert_meta_105,1170,1031,11.0,17.0,7,1031,0,0.0,0,114,917,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
-gilbert_meta_13,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,quarantine,,,ages 3.0-18.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_13,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 ghanbari_2016_helma_use,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
-gilbert_meta_15,3510,3381,3.0,18.0,16,3181,200,0.059154,27,1092,2062,quarantine,,,ages 3.0-18.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_30,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,ages 2.0-20.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_29,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,ages 2.0-20.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_15,3510,3381,3.0,18.0,16,3181,200,0.059154,27,1092,2062,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
+gilbert_meta_30,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,"ages 2.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_29,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,"ages 2.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 ghanbari_2016_helma_understand,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 ghanbari_2016_helma_reading,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 ghanbari_2016_helma_numeracy,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 ghanbari_2016_helma_appraise,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
-gilbert_meta_14,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,quarantine,,,ages 3.0-18.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_14,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 gholami_2017_periodontal_knowledge,543,543,1.0,4.0,4,543,0,0.0,543,0,0,unusable,,,"looks like banded codes: 4 distinct values, max 4.0"
 ghanbari_2016_helma_comm,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
-gilbert_meta_17,51652,28475,5.0,14.0,10,28475,0,0.0,690,24596,3189,quarantine,,,ages 5.0-14.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_70,6391,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,ages 1.0-20.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_17,51652,28475,5.0,14.0,10,28475,0,0.0,690,24596,3189,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",
+gilbert_meta_70,6391,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,"ages 1.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 gilbert_meta_49,200,187,16.0,68.0,28,4,183,0.02139,0,0,4,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_67,281,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 gilbert_meta_62,741,713,23.0,90.0,56,0,713,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_65,281,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 gilbert_meta_45,249,240,21.0,63.0,35,0,240,0.0,0,0,0,derived,Adult (18+),,
-gilbert_meta_47,162,162,5.55,7.07,92,162,0,0.0,41,121,0,quarantine,,,ages 5.55-7.07 are equally consistent with months; unit not stated in the data
-gilbert_meta_46,156,156,5.46,7.39,88,156,0,0.0,45,111,0,quarantine,,,ages 5.46-7.39 are equally consistent with months; unit not stated in the data
-gilbert_meta_68,9413,9413,0.0,18.25,132,9412,1,0.000106,23,8889,500,quarantine,,,ages 0.0-18.25 are equally consistent with months; unit not stated in the data
+gilbert_meta_47,162,162,5.55,7.07,92,162,0,0.0,41,121,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+gilbert_meta_46,156,156,5.46,7.39,88,156,0,0.0,45,111,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+gilbert_meta_68,9413,9413,0.0,18.25,132,9412,1,0.000106,23,8889,500,quarantine,,,"ages 0.0-18.25 are equally consistent with months, and the unit changes the tag; not stated in the data"
 gilbert_meta_38,839,839,20.0,65.0,43,0,839,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_44,243,243,60.0,94.0,31,0,243,0.0,0,0,0,derived,Elderly (minimum age >50),,
 gilbert_meta_60,2558,2549,10.0,51.0,35,956,1593,0.375049,0,1,955,derived,Mixed,Adolescent (12-18y),
-gilbert_meta_56,2712,2712,0.0,18.0,12,2711,1,0.000369,13,2447,251,quarantine,,,ages 0.0-18.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_56,2712,2712,0.0,18.0,12,2711,1,0.000369,13,2447,251,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.037% (< 2%), so not Mixed"
 gilbert_meta_4,999,973,17.0,44.0,25,1,972,0.001028,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.103% (< 2%), so not Mixed"
 gilbert_meta_59,1154,1154,18.0,45.0,25,0,1154,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_58,1154,1154,18.0,45.0,25,0,1154,0.0,0,0,0,derived,Adult (18+),,
-gilbert_meta_55,1763,1763,5.10335397720337,10.5160846710205,734,1763,0,0.0,24,1739,0,quarantine,,,ages 5.10335397720337-10.5160846710205 are equally consistent with months; unit not stated in the data
+gilbert_meta_55,1763,1763,5.10335397720337,10.5160846710205,734,1763,0,0.0,24,1739,0,derived,Child (<18y),Child (6-12y),
 gilbert_meta_33,1610,1592,13.0,18.0,6,1580,23,0.014348,0,0,1580,derived,Child (<18y),Adolescent (12-18y),"both sides of 18 present but the smaller group is 1.435% (< 2%), so not Mixed"
 gilbert_meta_66,281,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 gilbert_meta_61,2559,2550,10.0,51.0,35,957,1593,0.375294,0,1,956,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_5,2928,2920,13.0595483779907,15.7097873687744,592,2920,0,0.0,0,0,2920,derived,Child (<18y),Adolescent (12-18y),
 gilbert_meta_37,839,839,20.0,65.0,43,0,839,0.0,0,0,0,derived,Adult (18+),,
-gilbert_meta_41,3230,3230,4.0,10.0,7,3230,0,0.0,571,2659,0,quarantine,,,ages 4.0-10.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_69,9410,9410,0.0,18.25,132,9409,1,0.000106,24,8886,499,quarantine,,,ages 0.0-18.25 are equally consistent with months; unit not stated in the data
+gilbert_meta_41,3230,3230,4.0,10.0,7,3230,0,0.0,571,2659,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+gilbert_meta_69,9410,9410,0.0,18.25,132,9409,1,0.000106,24,8886,499,quarantine,,,"ages 0.0-18.25 are equally consistent with months, and the unit changes the tag; not stated in the data"
 gilbert_meta_57,1154,1154,18.0,45.0,25,0,1154,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_85,940,931,13.0,21.0,9,893,38,0.040816,0,0,893,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_86,1244,1234,17.0,96.0,78,3,1231,0.002431,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.243% (< 2%), so not Mixed"
@@ -781,8 +781,8 @@ girma_2021_oslo3,546,546,14.0,19.0,6,364,182,0.333333,0,0,364,derived,Mixed,Adol
 gilbert_meta_84,917,908,13.0,21.0,9,872,36,0.039648,0,0,872,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_9,1646,1646,14.0,88.0,67,34,1612,0.020656,0,0,34,derived,Mixed,Adolescent (12-18y),
 gmc_kay_2025,492,492,18.0,81.0,62,0,492,0.0,0,0,0,derived,Adult (18+),,
-gilbert_meta_72,5388,5125,5.0,18.0,14,5117,8,0.001561,11,3038,2068,quarantine,,,ages 5.0-18.0 are equally consistent with months; unit not stated in the data
-gilbert_meta_71,6389,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,ages 1.0-20.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_72,5388,5125,5.0,18.0,14,5117,8,0.001561,11,3038,2068,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.156% (< 2%), so not Mixed"
+gilbert_meta_71,6389,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,"ages 1.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 goksel_2026_embarrassment_authenticity,2100,2100,18.0,85.0,65,0,2100,0.0,0,0,0,derived,Adult (18+),,
 girma_2021_phq9,546,546,14.0,19.0,6,364,182,0.333333,0,0,364,derived,Mixed,Adolescent (12-18y),
 gizaw_2023_phq9,577,577,21.0,73.0,48,0,577,0.0,0,0,0,derived,Adult (18+),,
@@ -796,7 +796,7 @@ goksel_2026_embarrassment_liking,300,300,18.0,78.0,53,0,300,0.0,0,0,0,derived,Ad
 gilbert_meta_87,1244,1234,17.0,96.0,78,3,1231,0.002431,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.243% (< 2%), so not Mixed"
 gillman_2023_appraisals,405,404,18.0,63.0,46,0,404,0.0,0,0,0,derived,Adult (18+),,
 goksel_2026_embarrassment_affectivetrust,300,300,18.0,78.0,53,0,300,0.0,0,0,0,derived,Adult (18+),,
-gilbert_meta_73,5386,5124,5.0,18.0,14,5116,8,0.001561,11,3037,2068,quarantine,,,ages 5.0-18.0 are equally consistent with months; unit not stated in the data
+gilbert_meta_73,5386,5124,5.0,18.0,14,5116,8,0.001561,11,3037,2068,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.156% (< 2%), so not Mixed"
 gilbert_meta_83,941,932,13.0,21.0,9,894,38,0.040773,0,0,894,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_97,8609,8609,18.0,104.0,70,0,8609,0.0,0,0,0,derived,Adult (18+),,
 goldberg_2018_eps_adjectives,726,726,18.0,83.0,62,0,726,0.0,0,0,0,derived,Adult (18+),,
@@ -889,7 +889,7 @@ hannachi_2025_eco_anxiety_cas,534,533,17.0,77.0,56,5,528,0.009381,0,0,5,derived,
 hannachi_2025_eco_anxiety_affect,534,533,17.0,77.0,56,5,528,0.009381,0,0,5,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.938% (< 2%), so not Mixed"
 guatemala_2024_homes_water,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
 guatemala_2024_homes_publiceducation,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
-hahn_2025_sqc,230,230,6.0,17.0,12,230,0,0.0,0,76,154,quarantine,,,ages 6.0-17.0 are equally consistent with months; unit not stated in the data
+hahn_2025_sqc,230,230,6.0,17.0,12,230,0,0.0,0,76,154,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 guatemala_2024_homes_trash,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
 guatemala_2024_homes_parks,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
 guatemala_2024_homes_publichealth,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
@@ -899,46 +899,46 @@ guatemala_2024_homes_energy,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived
 guatemala_2024_homes_nutrition,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
 guatemala_2024_homes_lighting,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
 guatemala_2024_homes_transport,6886,6886,16.0,97.0,80,3,6883,0.000436,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.044% (< 2%), so not Mixed"
-horiuchi_2024_rsmsm,225,165,6.0,12.0,7,165,0,0.0,0,152,13,quarantine,,,ages 6.0-12.0 are equally consistent with months; unit not stated in the data
+horiuchi_2024_rsmsm,225,165,6.0,12.0,7,165,0,0.0,0,152,13,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 hexaco_silvia_2025,530,530,18.0,95.0,60,0,530,0.0,0,0,0,derived,Adult (18+),,
 holden_2026_bsri,695,695,19.0,83.0,63,0,695,0.0,0,0,0,derived,Adult (18+),,
-heise_2024_mental_falsesign,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+heise_2024_mental_falsesign,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 hayek_2022_self_efficacy,345,345,15.0,18.0,4,306,39,0.113043,0,0,306,derived,Mixed,Adolescent (12-18y),
-heise_2024_mental_divdesires,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+heise_2024_mental_divdesires,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 hayek_2022_subj_norm,345,345,15.0,18.0,4,306,39,0.113043,0,0,306,derived,Mixed,Adolescent (12-18y),
 herrera_2018_iri,556,556,15.0,88.0,58,30,526,0.053957,0,0,30,derived,Mixed,Adolescent (12-18y),
 herrera_2018_beliefs_about_empathy,556,556,15.0,88.0,58,30,526,0.053957,0,0,30,derived,Mixed,Adolescent (12-18y),
-horiuchi_2024_attachment,213,193,6.0,12.0,7,193,0,0.0,0,165,28,quarantine,,,ages 6.0-12.0 are equally consistent with months; unit not stated in the data
-heise_2024_mental_truebel,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
-heise_2024_mental_vpt,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
-heise_2024_mental_knowexpert,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+horiuchi_2024_attachment,213,193,6.0,12.0,7,193,0,0.0,0,165,28,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
+heise_2024_mental_truebel,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+heise_2024_mental_vpt,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+heise_2024_mental_knowexpert,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 herrera_2018_se_d_items,439,439,15.0,88.0,58,28,411,0.063781,0,0,28,derived,Mixed,Adolescent (12-18y),
-horiuchi_2024_dissociation,214,194,6.0,12.0,7,194,0,0.0,0,166,28,quarantine,,,ages 6.0-12.0 are equally consistent with months; unit not stated in the data
+horiuchi_2024_dissociation,214,194,6.0,12.0,7,194,0,0.0,0,166,28,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)",
 hellstrom_2019_psqi,632,627,19.0,822.0,37,0,627,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 19.0-822.0"
-heise_2024_mental_falsebel,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+heise_2024_mental_falsebel,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 hellstrom_2019_isi,631,626,19.0,822.0,37,0,626,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 19.0-822.0"
 hellstrom_2019_pss14,618,613,19.0,822.0,37,0,613,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 19.0-822.0"
-heise_2024_mental_knowaccess,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+heise_2024_mental_knowaccess,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 herrera_2018_attitudes_homeless,439,439,15.0,88.0,58,28,411,0.063781,0,0,28,derived,Mixed,Adolescent (12-18y),
 hellstrom_2019_sci,633,628,19.0,822.0,37,0,628,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 19.0-822.0"
-heise_2024_mental_divbeliefs,206,206,3.0,8.0,6,206,0,0.0,96,110,0,quarantine,,,ages 3.0-8.0 are equally consistent with months; unit not stated in the data
+heise_2024_mental_divbeliefs,206,206,3.0,8.0,6,206,0,0.0,96,110,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 hao_2025_social_regulation,650,650,12.0,15.0,4,650,0,0.0,0,0,650,derived,Child (<18y),Adolescent (12-18y),
 hayek_2022_attitude,345,345,15.0,18.0,4,306,39,0.113043,0,0,306,derived,Mixed,Adolescent (12-18y),
-huang_2023_d_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,quarantine,,,ages 2.0-16.0 are equally consistent with months; unit not stated in the data
+huang_2023_d_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,derived,Child (<18y),Adolescent (12-18y),
 ipip_openpsychometrics_sc,1001,1001,14.0,72.0,56,19,982,0.018981,0,0,19,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.898% (< 2%), so not Mixed"
-huang_2023_b_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,quarantine,,,ages 2.0-16.0 are equally consistent with months; unit not stated in the data
+huang_2023_b_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,derived,Child (<18y),Adolescent (12-18y),
 ibrahim_2015_bfi,200,200,20.0,85.0,57,0,200,0.0,0,0,0,derived,Adult (18+),,
 iandolo_2021_asq,348,348,18.0,37.0,20,0,348,0.0,0,0,0,derived,Adult (18+),,
 hyatt_2023_aggression_neo,880,655,19.0,76.0,57,0,655,0.0,0,0,0,derived,Adult (18+),,
 hyatt_2023_aggression_rpa,657,655,19.0,76.0,57,0,655,0.0,0,0,0,derived,Adult (18+),,
 ipip_openpsychometrics_do,1001,1001,14.0,72.0,56,19,982,0.018981,0,0,19,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.898% (< 2%), so not Mixed"
-huang_2023_e_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,quarantine,,,ages 2.0-16.0 are equally consistent with months; unit not stated in the data
+huang_2023_e_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,derived,Child (<18y),Adolescent (12-18y),
 hyatt_2023_aggression_cab,657,655,19.0,76.0,57,0,655,0.0,0,0,0,derived,Adult (18+),,
 ibrahim_2015_sf36,200,200,20.0,85.0,57,0,200,0.0,0,0,0,derived,Adult (18+),,
 hyatt_2023_aggression_prelim2_epa,322,322,20.0,76.0,51,0,322,0.0,0,0,0,derived,Adult (18+),,
 ilearnathome_regalado_2025,909,909,21.0,65.0,44,0,909,0.0,0,0,0,derived,Adult (18+),,
 ipip_openpsychometrics_as,1004,1004,14.0,72.0,56,19,985,0.018924,0,0,19,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.892% (< 2%), so not Mixed"
-imps2025_hf,2475,2469,2.5,12.3750858306885,369,2469,0,0.0,1663,803,3,quarantine,,,ages 2.5-12.3750858306885 are equally consistent with months; unit not stated in the data
+imps2025_hf,2475,2469,2.5,12.3750858306885,369,2469,0,0.0,1663,803,3,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 ipip_openpsychometrics_ad,1000,1000,14.0,72.0,56,19,981,0.019,0,0,19,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.900% (< 2%), so not Mixed"
 identity_fusion_gomez_2025,2577,2570,18.0,88.0,66,0,2570,0.0,0,0,0,derived,Adult (18+),,
 huang_2016_neo_neuroticism,114,114,47.0,67.0,19,0,114,0.0,0,0,0,derived,Adult (18+),,
@@ -947,7 +947,7 @@ huang_2016_neo_conscientious,114,114,47.0,67.0,19,0,114,0.0,0,0,0,derived,Adult 
 hpwt_bayona_2025_workcharacteristics,504,499,21.0,75.0,47,0,499,0.0,0,0,0,derived,Adult (18+),,
 hpwt_bayona_2025_jobperformance,504,499,21.0,75.0,47,0,499,0.0,0,0,0,derived,Adult (18+),,
 huang_2016_cesd,113,113,47.0,67.0,19,0,113,0.0,0,0,0,derived,Adult (18+),,
-huang_2023_c_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,quarantine,,,ages 2.0-16.0 are equally consistent with months; unit not stated in the data
+huang_2023_c_scale,631,631,2.0,16.0,7,631,0,0.0,1,1,629,derived,Child (<18y),Adolescent (12-18y),
 hpwt_bayona_2025_jobsatisfaction,504,499,21.0,75.0,47,0,499,0.0,0,0,0,derived,Adult (18+),,
 jeon_2019_cbi,464,464,33.0,72.0,36,0,464,0.0,0,0,0,derived,Adult (18+),,
 jeilani_2024_social_support_family,663,663,1.0,3.0,3,663,0,0.0,663,0,0,unusable,,,"looks like banded codes: 3 distinct values, max 3.0"
@@ -1052,7 +1052,7 @@ kemp_2019_mss_negative,584,584,19.0,75.0,55,0,584,0.0,0,0,0,derived,Adult (18+),
 konerding_2019_patientsatisfaction,1884,1841,21.0,99.0,70,0,1841,0.0,0,0,0,derived,Adult (18+),,
 kotsou_2016_scs,1554,278,56.0,236061972.0,255,0,278,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 56.0-236061972.0"
 koksal_2023_psycap,281,281,22.0,49.0,28,0,281,0.0,0,0,0,derived,Adult (18+),,
-lai_2023_parent_relation_father,1323,1299,5.0,26.0,16,1281,18,0.013857,1,236,1044,quarantine,,,ages 5.0-26.0 are equally consistent with months; unit not stated in the data
+lai_2023_parent_relation_father,1323,1299,5.0,26.0,16,1281,18,0.013857,1,236,1044,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 kushnir2017_ftnd,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
 kushnir2017_bfi,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
 kushnir2017_tsrq,319,319,19.0,71.0,44,0,319,0.0,0,0,0,derived,Adult (18+),,
@@ -1074,8 +1074,8 @@ kotsou_2016_plc,1554,278,56.0,236061972.0,255,0,278,0.0,0,0,0,unusable,,,"ages o
 komura_2026_gqs_perceived_intelligence,148,148,20.0,78.0,40,0,148,0.0,0,0,0,derived,Adult (18+),,
 komura_2026_mdmt_capable,148,148,20.0,78.0,40,0,148,0.0,0,0,0,derived,Adult (18+),,
 koksal_2023_life_satisfaction,281,281,22.0,49.0,28,0,281,0.0,0,0,0,derived,Adult (18+),,
-li_2021_knowledge_sharing,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
-li_2021_sustainable_innov_behav,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+li_2021_knowledge_sharing,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
+li_2021_sustainable_innov_behav,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 leon_guereno_2020_resilience,1850,8,18.0,74.0,5,0,8,0.0,0,0,0,unusable,,,only 8 respondents with an age
 lhsbrasil_couto_2023_pss,464,464,18.0,79.0,60,0,464,0.0,0,0,0,derived,Adult (18+),,
 lee_2024_social_support,527,527,18.0,28.0,11,0,527,0.0,0,0,0,derived,Adult (18+),,
@@ -1084,20 +1084,20 @@ lee_2024_swls,527,527,18.0,28.0,11,0,527,0.0,0,0,0,derived,Adult (18+),,
 lee_2020_empathy,687,675,17.0,31.0,15,16,659,0.023704,0,0,16,derived,Mixed,Adolescent (12-18y),
 lee_2020_social_support,702,690,17.0,31.0,15,16,674,0.023188,0,0,16,derived,Mixed,Adolescent (12-18y),
 lee_2020_alcohol_use,717,702,17.0,31.0,15,16,686,0.022792,0,0,16,derived,Mixed,Adolescent (12-18y),
-li_2021_cultural_intelligence,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+li_2021_cultural_intelligence,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 lee_2024_tci,527,527,18.0,28.0,11,0,527,0.0,0,0,0,derived,Adult (18+),,
 lhsbrasil_couto_2023_lhs,464,464,18.0,79.0,60,0,464,0.0,0,0,0,derived,Adult (18+),,
 leon_guereno_2020_breq,1850,8,18.0,74.0,5,0,8,0.0,0,0,0,unusable,,,only 8 respondents with an age
-li_2021_org_cultural_diversity,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+li_2021_org_cultural_diversity,336,336,1.0,6.0,6,336,0,0.0,322,14,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 lec5_xiong_2025,9506,9506,8.0,70.0,62,5948,3558,0.37429,0,1983,3965,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 lee_2020_vr_usability,60,60,21.0,27.0,7,0,60,0.0,0,0,0,derived,Adult (18+),,
-latifi_2026_insect_fear,1369,1369,6.0,18.0,13,1185,184,0.134405,0,347,838,quarantine,,,ages 6.0-18.0 are equally consistent with months; unit not stated in the data
+latifi_2026_insect_fear,1369,1369,6.0,18.0,13,1185,184,0.134405,0,347,838,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 lhsbrasil_couto_2023_ses,464,464,18.0,79.0,60,0,464,0.0,0,0,0,derived,Adult (18+),,
-lai_2023_teacher_student_rel,1323,1299,5.0,26.0,16,1281,18,0.013857,1,237,1043,quarantine,,,ages 5.0-26.0 are equally consistent with months; unit not stated in the data
+lai_2023_teacher_student_rel,1323,1299,5.0,26.0,16,1281,18,0.013857,1,237,1043,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 lee_2020_burnout,733,718,17.0,31.0,15,16,702,0.022284,0,0,16,derived,Mixed,Adolescent (12-18y),
-lai_2023_social_adaptability,1323,1299,5.0,26.0,16,1281,18,0.013857,1,235,1045,quarantine,,,ages 5.0-26.0 are equally consistent with months; unit not stated in the data
-lai_2023_parent_relation_mother,1322,1298,5.0,26.0,16,1280,18,0.013867,1,236,1043,quarantine,,,ages 5.0-26.0 are equally consistent with months; unit not stated in the data
-lai_2023_peer_relationship,1324,1300,5.0,26.0,16,1282,18,0.013846,1,236,1045,quarantine,,,ages 5.0-26.0 are equally consistent with months; unit not stated in the data
+lai_2023_social_adaptability,1323,1299,5.0,26.0,16,1281,18,0.013857,1,235,1045,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+lai_2023_parent_relation_mother,1322,1298,5.0,26.0,16,1280,18,0.013867,1,236,1043,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+lai_2023_peer_relationship,1324,1300,5.0,26.0,16,1282,18,0.013846,1,236,1045,quarantine,,,"ages 5.0-26.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
 lee_2020_sleep_quality,691,680,17.0,31.0,14,16,664,0.023529,0,0,16,derived,Mixed,Adolescent (12-18y),
 liu_2017_communication,350,350,27.0,70.0,36,0,350,0.0,0,0,0,derived,Adult (18+),,
 liu_2017_qol,350,350,27.0,70.0,36,0,350,0.0,0,0,0,derived,Adult (18+),,
@@ -1225,15 +1225,15 @@ mavromoustakos_2016_fasq,115,115,18.0,64.0,41,0,115,0.0,0,0,0,derived,Adult (18+
 mede_2025_trust_scientists,71915,71707,18.0,100.0,77,0,71707,0.0,0,0,0,derived,Adult (18+),,
 mbft_anunciacao_2024,272845,272842,0.0,90.0,90,77125,195717,0.282673,73310,38,3777,derived,Mixed,"Early (<6y), Adolescent (12-18y)",
 meng-competitiveness-2023,2385,2385,18.0,30.0,13,0,2385,0.0,0,0,0,derived,Adult (18+),,
-meloni_2015_deq_ce_child,76,76,6.0,11.0,6,76,0,0.0,0,76,0,quarantine,,,ages 6.0-11.0 are equally consistent with months; unit not stated in the data
+meloni_2015_deq_ce_child,76,76,6.0,11.0,6,76,0,0.0,0,76,0,derived,Child (<18y),Child (6-12y),
 metacogmonitoring_double2025,300,300,18.0,76.0,56,0,300,0.0,0,0,0,derived,Adult (18+),,
-meloni_2015_deq_oe_child,76,76,6.0,11.0,6,76,0,0.0,0,76,0,quarantine,,,ages 6.0-11.0 are equally consistent with months; unit not stated in the data
+meloni_2015_deq_oe_child,76,76,6.0,11.0,6,76,0,0.0,0,76,0,derived,Child (<18y),Child (6-12y),
 meloni_2015_parent_interests,76,76,31.0,55.0,23,0,76,0.0,0,0,0,derived,Adult (18+),,
 merlo2025_eng_cognitive,1065,1065,14.0,19.0,6,860,205,0.192488,0,0,860,derived,Mixed,Adolescent (12-18y),
 merlo2025_eng_emotional,1065,1065,14.0,19.0,6,860,205,0.192488,0,0,860,derived,Mixed,Adolescent (12-18y),
 merlo2025_eng_comprehensive,1065,1065,14.0,19.0,6,860,205,0.192488,0,0,860,derived,Mixed,Adolescent (12-18y),
 merlo2025_eng_agentic,1065,1065,14.0,19.0,6,860,205,0.192488,0,0,860,derived,Mixed,Adolescent (12-18y),
-meloni_2015_child_disab_knowledge,76,76,6.0,11.0,6,76,0,0.0,0,76,0,quarantine,,,ages 6.0-11.0 are equally consistent with months; unit not stated in the data
+meloni_2015_child_disab_knowledge,76,76,6.0,11.0,6,76,0,0.0,0,76,0,derived,Child (<18y),Child (6-12y),
 meloni_2015_parent_divers_ed,76,76,31.0,55.0,23,0,76,0.0,0,0,0,derived,Adult (18+),,
 meloni_2015_deq_oe_parent,76,76,31.0,55.0,23,0,76,0.0,0,0,0,derived,Adult (18+),,
 mekheimer_2026_paf,160,160,28.0,58.0,27,0,160,0.0,0,0,0,derived,Adult (18+),,
@@ -1241,8 +1241,8 @@ mentalrotation_wolf_2024,37,37,18.0,22.0,5,0,37,0.0,0,0,0,derived,Adult (18+),,
 merlo2025_eet,1065,1065,14.0,19.0,6,860,205,0.192488,0,0,860,derived,Mixed,Adolescent (12-18y),
 mekheimer_2026_cai,160,160,28.0,58.0,27,0,160,0.0,0,0,0,derived,Adult (18+),,
 mexico_2023_quality_cablecars,78896,78896,18.0,98.0,81,0,78896,0.0,0,0,0,derived,Adult (18+),,
-meloni_2015_child_ia_frequency,76,76,6.0,11.0,6,76,0,0.0,0,76,0,quarantine,,,ages 6.0-11.0 are equally consistent with months; unit not stated in the data
-meloni_2015_child_ia_satisfaction,76,76,6.0,11.0,6,76,0,0.0,0,76,0,quarantine,,,ages 6.0-11.0 are equally consistent with months; unit not stated in the data
+meloni_2015_child_ia_frequency,76,76,6.0,11.0,6,76,0,0.0,0,76,0,derived,Child (<18y),Child (6-12y),
+meloni_2015_child_ia_satisfaction,76,76,6.0,11.0,6,76,0,0.0,0,76,0,derived,Child (<18y),Child (6-12y),
 meloni_2015_deq_ce_parent,76,76,31.0,55.0,23,0,76,0.0,0,0,0,derived,Adult (18+),,
 mekheimer_2026_flp,160,160,28.0,58.0,27,0,160,0.0,0,0,0,derived,Adult (18+),,
 mekheimer_2026_id,160,160,28.0,58.0,27,0,160,0.0,0,0,0,derived,Adult (18+),,
@@ -1413,8 +1413,8 @@ nomt_hooper_2024_study2,393,391,18.0,57.0,38,0,391,0.0,0,0,0,derived,Adult (18+)
 odachi_2022_bfs,417,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 odachi_2022_fear_covid19,417,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 odachi_2022_hads,417,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
-okamura_2018_burnout,261,261,2.0,7.0,6,261,0,0.0,248,13,0,quarantine,,,ages 2.0-7.0 are equally consistent with months; unit not stated in the data
-okamura_2018_eol_attitude,261,261,2.0,7.0,6,261,0,0.0,248,13,0,quarantine,,,ages 2.0-7.0 are equally consistent with months; unit not stated in the data
+okamura_2018_burnout,261,261,2.0,7.0,6,261,0,0.0,248,13,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
+okamura_2018_eol_attitude,261,261,2.0,7.0,6,261,0,0.0,248,13,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 onecm_kay_2025,492,492,18.0,81.0,62,0,492,0.0,0,0,0,derived,Adult (18+),,
 opentsstvr_linnig_2025_ssq,98,98,18.0,30.0,12,0,98,0.0,0,0,0,derived,Adult (18+),,
 opentsstvr_linnig_2025_vas,98,98,18.0,30.0,12,0,98,0.0,0,0,0,derived,Adult (18+),,
@@ -1572,7 +1572,7 @@ pranckeviciene_2022_gad7,1358,1358,18.0,57.0,36,0,1358,0.0,0,0,0,derived,Adult (
 potocnik_2024_diabetes,289,287,30.0,91.0,47,0,287,0.0,0,0,0,derived,Adult (18+),,
 prpt_hellmann_2021_achievementmotive,1413,1413,18.0,400.0,60,0,1413,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 18.0-400.0"
 pranckeviciene_2022_phq9,1358,1358,18.0,57.0,36,0,1358,0.0,0,0,0,derived,Adult (18+),,
-previc_bohn2023,1190,1190,3.00616016427105,8.02737850787132,931,1190,0,0.0,588,602,0,quarantine,,,ages 3.00616016427105-8.02737850787132 are equally consistent with months; unit not stated in the data
+previc_bohn2023,1190,1190,3.00616016427105,8.02737850787132,931,1190,0,0.0,588,602,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 powell_2018_affect,523,523,18.0,77.0,43,0,523,0.0,0,0,0,derived,Adult (18+),,
 queiros_2018_qcae,562,562,18.0,60.0,43,0,562,0.0,0,0,0,derived,Adult (18+),,
 randomness_angelike_2024_conscientiousness,835,835,18.0,87.0,67,0,835,0.0,0,0,0,derived,Adult (18+),,
@@ -1584,20 +1584,20 @@ quarter_life_crisis__iuc,90,90,18.0,25.0,8,0,90,0.0,0,0,0,derived,Adult (18+),,
 randomness_angelike_2024_ncs,835,835,18.0,87.0,67,0,835,0.0,0,0,0,derived,Adult (18+),,
 rapm_poulton_2022_untimed,608,608,13.0,84.0,54,26,582,0.042763,0,0,26,derived,Mixed,Adolescent (12-18y),
 rahman_2022_phq9,677,677,18.0,29.0,11,0,677,0.0,0,0,0,derived,Adult (18+),,
-qiang_2025_surface_acting,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+qiang_2025_surface_acting,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 rdatasets_gssabortion,64814,64586,18.0,89.0,72,0,64586,0.0,0,0,0,derived,Adult (18+),,
 qi_2025_self_esteem,134,134,18.0,28.0,11,0,134,0.0,0,0,0,derived,Adult (18+),,
-qiang_2025_job_performance,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-qiang_2025_job_dissatisfaction,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-qiang_2025_abusive_supervision,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-qiang_2025_red_tape,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+qiang_2025_job_performance,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+qiang_2025_job_dissatisfaction,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+qiang_2025_abusive_supervision,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+qiang_2025_red_tape,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 qol_islam_2025,1147,1147,60.0,100.0,32,0,1147,0.0,0,0,0,derived,Elderly (minimum age >50),,
-qiang_2025_coping,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+qiang_2025_coping,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 qi_2025_swls,134,134,18.0,28.0,11,0,134,0.0,0,0,0,derived,Adult (18+),,
-qiang_2025_workplace_friendship,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+qiang_2025_workplace_friendship,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 qi_2025_self_concept_clarity,134,134,18.0,28.0,11,0,134,0.0,0,0,0,derived,Adult (18+),,
 qi_2025_self_construal,134,134,18.0,28.0,11,0,134,0.0,0,0,0,derived,Adult (18+),,
-qiang_2025_ne_scale,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+qiang_2025_ne_scale,396,396,1.0,7.0,7,396,0,0.0,385,11,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 qi_2025_panas,134,134,18.0,28.0,11,0,134,0.0,0,0,0,derived,Adult (18+),,
 rmet_higgins_2022_tom,1182,1182,18.0,88.0,70,0,1182,0.0,0,0,0,derived,Adult (18+),,
 rmet_higgins_2022_rmet,1222,1222,18.0,88.0,70,0,1222,0.0,0,0,0,derived,Adult (18+),,
@@ -1646,7 +1646,7 @@ rosetti2023_climate_knowledge,468,468,18.0,25.0,8,0,468,0.0,0,0,0,derived,Adult 
 romadlon_2022_bdi,200,200,29.0,72.0,37,0,200,0.0,0,0,0,derived,Adult (18+),,
 romadlon_2022_mfi20,200,200,29.0,72.0,37,0,200,0.0,0,0,0,derived,Adult (18+),,
 rosetti_2023_gad7,468,468,18.0,25.0,8,0,468,0.0,0,0,0,derived,Adult (18+),,
-rodriguezandres_2016_mnemocity_usability,159,159,5.0,10.0,6,159,0,0.0,28,131,0,quarantine,,,ages 5.0-10.0 are equally consistent with months; unit not stated in the data
+rodriguezandres_2016_mnemocity_usability,159,159,5.0,10.0,6,159,0,0.0,28,131,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 rodriguezmuniz_2016_washback_survey,51,49,1.0,3.0,3,49,0,0.0,49,0,0,unusable,,,"looks like banded codes: 3 distinct values, max 3.0"
 rodriguezsantero_2024_sats36,318,318,0.0,54.0,24,4,314,0.012579,3,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 1.258% (< 2%), so not Mixed"
 shorttripm_silvia_2025,1151,1150,18.0,95.0,62,0,1150,0.0,0,0,0,derived,Adult (18+),,
@@ -2048,7 +2048,7 @@ van_der_donk_2019_bdi,566,566,18.0,71.0,51,0,566,0.0,0,0,0,derived,Adult (18+),,
 validatedtouchvideo_smit_2025_threat,355,355,17.0,63.0,32,1,354,0.002817,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.282% (< 2%), so not Mixed"
 vermeiren_2022_nd,236,236,18.0,77.0,34,0,236,0.0,0,0,0,derived,Adult (18+),,
 wang_2016_study1_authexternal,104,104,18.0,33.0,13,0,104,0.0,0,0,0,derived,Adult (18+),,
-vocab_assessment_3_to_8_year_old_children,581,581,3.014373716632444,7.994524298425736,486,581,0,0.0,332,249,0,quarantine,,,ages 3.014373716632444-7.994524298425736 are equally consistent with months; unit not stated in the data
+vocab_assessment_3_to_8_year_old_children,581,581,3.014373716632444,7.994524298425736,486,581,0,0.0,332,249,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 west_2021_retaliatory_aggression_bscs,289,165,18.0,24.0,7,0,165,0.0,0,0,0,derived,Adult (18+),,
 weida_2020_financial_security,371,371,-83.0,63.0,39,2,369,0.005391,2,0,0,unusable,,,"ages outside [0, 120]: -83.0-63.0"
 west_2021_retaliatory_aggression_acq,265,167,18.0,24.0,7,0,167,0.0,0,0,0,derived,Adult (18+),,
@@ -2068,12 +2068,12 @@ wang_2025_impulse_control,516,516,12.0,17.0,6,516,0,0.0,0,0,516,derived,Child (<
 wang_2025_growth_mindset,516,516,12.0,17.0,6,516,0,0.0,0,0,516,derived,Child (<18y),Adolescent (12-18y),
 wang_2025_cognitive_fusion,515,515,12.0,17.0,6,515,0,0.0,0,0,515,derived,Child (<18y),Adolescent (12-18y),
 wang_2025_automatic_thoughts,516,516,12.0,17.0,6,516,0,0.0,0,0,516,derived,Child (<18y),Adolescent (12-18y),
-wang_2026_technology_anxiety,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-wang_2026_behavioral_intention,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+wang_2026_technology_anxiety,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+wang_2026_behavioral_intention,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 wang_2016_study3_social_desirability,210,210,15.0,65.0,34,1,209,0.004762,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.476% (< 2%), so not Mixed"
-wang_2026_teaching_presence,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-wang_2026_perceived_usefulness,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
-wang_2026_attitude,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,ages 1.0-7.0 are equally consistent with months; unit not stated in the data
+wang_2026_teaching_presence,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+wang_2026_perceived_usefulness,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
+wang_2026_attitude,500,500,1.0,7.0,7,500,0,0.0,359,141,0,quarantine,,,"starts at 1.0 and covers 7 values up to 7.0: the shape of a band code, not an age"
 wolf_2017_study2_vitality_post,264,256,18.0,60.0,43,0,256,0.0,0,0,0,derived,Adult (18+),,
 wolf_2017_study2_posaff_post,264,256,18.0,60.0,43,0,256,0.0,0,0,0,derived,Adult (18+),,
 wolf_2017_study2_posaff_pre,264,256,18.0,60.0,43,0,256,0.0,0,0,0,derived,Adult (18+),,
@@ -2093,7 +2093,7 @@ wicherts_2023_5pft,8954,8954,18.0,25.0,8,0,8954,0.0,0,0,0,derived,Adult (18+),,
 westhoff2023_pbat,113,113,19.0,32.0,13,0,113,0.0,0,0,0,derived,Adult (18+),,
 wiedemann_2021_risk_perception,344,342,18.0,37.0,18,0,342,0.0,0,0,0,derived,Adult (18+),,
 west_2021_retaliatory_aggression_cast,268,141,18.0,24.0,7,0,141,0.0,0,0,0,derived,Adult (18+),,
-wijesinghe_2025_sustained_agile_usage,391,391,0.0,6.0,7,391,0,0.0,390,1,0,quarantine,,,ages 0.0-6.0 are equally consistent with months; unit not stated in the data
+wijesinghe_2025_sustained_agile_usage,391,391,0.0,6.0,7,391,0,0.0,390,1,0,derived,Child (<18y),Early (<6y),
 williams-brat2020_study1,206,206,18.0,46.0,29,0,206,0.0,0,0,0,derived,Adult (18+),,
 wolf_2017_study2_video_liking,264,256,18.0,60.0,43,0,256,0.0,0,0,0,derived,Adult (18+),,
 west_2021_retaliatory_aggression_study4_deq,210,167,18.0,24.0,7,0,167,0.0,0,0,0,derived,Adult (18+),,
@@ -2111,7 +2111,7 @@ wvs_panasiuk_science,98531,98531,-5.0,103.0,95,2668,97885,0.026533,2060,0,1788,u
 wolters2026_wi,83,83,19.0,72.0,26,0,83,0.0,0,0,0,derived,Adult (18+),,
 xiong_2025_dass21,974,974,18.0,25.0,8,0,974,0.0,0,0,0,derived,Adult (18+),,
 wu2026_liking,200,200,1.0,4.0,4,200,0,0.0,200,0,0,unusable,,,"looks like banded codes: 4 distinct values, max 4.0"
-wu_2025_drone_delivery,498,498,1.0,6.0,6,498,0,0.0,494,4,0,quarantine,,,ages 1.0-6.0 are equally consistent with months; unit not stated in the data
+wu_2025_drone_delivery,498,498,1.0,6.0,6,498,0,0.0,494,4,0,quarantine,,,"starts at 1.0 and covers 6 values up to 6.0: the shape of a band code, not an age"
 wolters2026_symptom_concerns,83,83,19.0,72.0,26,0,83,0.0,0,0,0,derived,Adult (18+),,
 wu2026_novel,200,200,1.0,4.0,4,200,0,0.0,200,0,0,unusable,,,"looks like banded codes: 4 distinct values, max 4.0"
 wooly_hartman2022,1561,1561,15.0,97.0,72,1,1560,0.000641,0,0,1,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.064% (< 2%), so not Mixed"
@@ -2146,8 +2146,8 @@ yang_2023_perceived_value,341,341,1.0,5.0,5,341,0,0.0,341,0,0,unusable,,,"looks 
 yang_2025_aiccs,130,130,18.0,221.0,7,0,130,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 18.0-221.0"
 yang_2025_intercultural_contact,130,130,18.0,221.0,7,0,130,0.0,0,0,0,unusable,,,"ages outside [0, 120]: 18.0-221.0"
 yang_2026_erq,1033,1033,17.0,23.0,7,59,974,0.057115,0,0,59,derived,Mixed,Adolescent (12-18y),
-yang_2026_igd_benefits,1032,1032,6.0,18.0,6,1031,1,0.000969,0,1,1030,quarantine,,,ages 6.0-18.0 are equally consistent with months; unit not stated in the data
-yang_2026_igd_criteria,1032,1032,6.0,18.0,6,1031,1,0.000969,0,1,1030,quarantine,,,ages 6.0-18.0 are equally consistent with months; unit not stated in the data
+yang_2026_igd_benefits,1032,1032,6.0,18.0,6,1031,1,0.000969,0,1,1030,derived,Child (<18y),Adolescent (12-18y),"both sides of 18 present but the smaller group is 0.097% (< 2%), so not Mixed"
+yang_2026_igd_criteria,1032,1032,6.0,18.0,6,1031,1,0.000969,0,1,1030,derived,Child (<18y),Adolescent (12-18y),"both sides of 18 present but the smaller group is 0.097% (< 2%), so not Mixed"
 yang_2026_pars3,1033,1033,17.0,23.0,7,59,974,0.057115,0,0,59,derived,Mixed,Adolescent (12-18y),
 yang_2026_rrs,1033,1033,17.0,23.0,7,59,974,0.057115,0,0,59,derived,Mixed,Adolescent (12-18y),
 yang_2026_stress_response,1033,1033,17.0,23.0,7,59,974,0.057115,0,0,59,derived,Mixed,Adolescent (12-18y),

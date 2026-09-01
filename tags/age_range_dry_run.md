@@ -6,20 +6,20 @@ Derived from each table's own `cov_age`, Redivis-side. Nothing has been publishe
 
 | outcome | tables |
 |---|---|
-| new row | 740 |
-| confirmed | 607 |
-| changed | 379 |
+| new row | 775 |
+| confirmed | 628 |
+| changed | 382 |
 | filled a blank | 5 |
 | Non-human preserved | 4 |
-| **total derived** | **1,735** |
+| **total derived** | **1,794** |
 
 ## Every change, by direction
 
 | from | to | tables |
 |---|---|---|
 | `Mixed` | `Adult (18+)` | 334 |
-| `Child (<18y)` | `Mixed` | 30 |
-| `Adult (18+)` | `Mixed` | 11 |
+| `Child (<18y)` | `Mixed` | 32 |
+| `Adult (18+)` | `Mixed` | 12 |
 | `Mixed` | `Elderly (minimum age >50)` | 3 |
 | `Adult (18+)` | `Child (<18y)` | 1 |
 
@@ -31,11 +31,11 @@ Derived from each table's own `cov_age`, Redivis-side. Nothing has been publishe
 | unusable | 98 | looks like banded codes: N distinct values, max N.N |
 | unusable | 65 | ages outside [N, N]: N.N-N.N |
 | unusable | 16 | ages outside [N, N]: -N.N-N.N |
-| quarantine | 104 | ages equally consistent with months; held for a human |
+| quarantine | 45 | ages equally consistent with months; held for a human |
 
 ## Where the 2% floor decided the tag
 
-209 table(s) have respondents on both sides of 18 but too few on the smaller side to count as `Mixed`.
+214 table(s) have respondents on both sides of 18 but too few on the smaller side to count as `Mixed`.
 
 | table | ages | under 18 | of | share | tag |
 |---|---|---|---|---|---|
@@ -46,8 +46,8 @@ Derived from each table's own `cov_age`, Redivis-side. Nothing has been publishe
 | `lsbq_maleki_2025_persian_switching` | 15–59 | 6 | 314 | 1.91% | `Adult (18+)` |
 | `lsbq_maleki_2025_persian_comprehension` | 15–59 | 6 | 315 | 1.90% | `Adult (18+)` |
 | `ipip_openpsychometrics_ad` | 14–72 | 19 | 1000 | 1.90% | `Adult (18+)` |
-| `ipip_openpsychometrics_do` | 14–72 | 19 | 1001 | 1.90% | `Adult (18+)` |
 | `ipip_openpsychometrics_sc` | 14–72 | 19 | 1001 | 1.90% | `Adult (18+)` |
+| `ipip_openpsychometrics_do` | 14–72 | 19 | 1001 | 1.90% | `Adult (18+)` |
 | `ipip_openpsychometrics_as` | 14–72 | 19 | 1004 | 1.89% | `Adult (18+)` |
 | `teq_novak_2021_bfin` | 15–62 | 3 | 165 | 1.82% | `Adult (18+)` |
 | `lsbq_maleki_2025_dominant_language_home_community` | 15–59 | 5 | 279 | 1.79% | `Adult (18+)` |

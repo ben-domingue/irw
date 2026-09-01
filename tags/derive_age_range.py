@@ -83,13 +83,29 @@ def classify(r):
         return None, None, "unusable", (
             f"looks like banded codes: {int(r.n_distinct)} distinct values, max {hi}")
 
+    # A wider band signature the strict test above misses: a column that starts
+    # at 1 (or 0) and covers a small contiguous range is a category code, not an
+    # age. alsyouf_2024_* runs 1-7 with exactly 7 distinct values and would
+    # otherwise have derived `Child (<18y)` for what is almost certainly an
+    # adult sample in age brackets. Starting point matters: a real 6-12 primary
+    # school study also has ~7 distinct values, but it does not start at 1.
+    if lo <= 1 and hi <= 12 and int(r.n_distinct) <= hi:
+        return None, None, "quarantine", (
+            f"starts at {lo} and covers {int(r.n_distinct)} values up to {hi}: "
+            "the shape of a band code, not an age")
+
     # Months, not years, would read as a plausible age in years and derive a
     # confidently wrong tag -- an infant study coded 12-36 months would come out
     # `Mixed`. Nothing in the data distinguishes the two units, so this shape is
     # held for a human rather than guessed at either way.
-    if hi <= 36 and lo <= 6:
+    #
+    # Only where the unit CHANGES the tag, though. At a maximum of 18 the table
+    # is `Child (<18y)` whether those are years or months, so there is nothing
+    # to hold: 91 of the 104 tables this first quarantined were of that shape.
+    if 18 < hi <= 36 and lo <= 6:
         return None, None, "quarantine", (
-            f"ages {lo}-{hi} are equally consistent with months; unit not stated in the data")
+            f"ages {lo}-{hi} are equally consistent with months, and the unit "
+            "changes the tag; not stated in the data")
 
     u18, a18 = int(r.n_u18), int(r.n_a18)
     known = u18 + a18

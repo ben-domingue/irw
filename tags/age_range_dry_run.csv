@@ -280,6 +280,7 @@ chen2022b_selfesteem,,Mixed,new row
 chen_2019_csq,,Mixed,new row
 chen2022b_psychabuse,,Mixed,new row
 chen2022_ses,,Child (<18y),new row
+chavez_2026_bpnsfs,Child (<18y),Child (<18y),confirmed
 chen_2022_cesd,Adult (18+),Adult (18+),confirmed
 chen_2022_gad,Adult (18+),Adult (18+),confirmed
 chen2022_cls,,Child (<18y),new row
@@ -529,15 +530,23 @@ florida_twins_leq,Child (<18y),Mixed,changed
 florida_twins_media,Child (<18y),Mixed,changed
 florida_twins_nes,Child (<18y),Mixed,changed
 florida_twins_pals,Child (<18y),Child (<18y),confirmed
+forrest_2021_positive_affect_proxy,,Child (<18y),new row
 forrest_2021_phys_activity_child,,Child (<18y),new row
 forrest_2021_positive_affect_child,,Child (<18y),new row
 forrest_2021_phys_stress_child,,Child (<18y),new row
 forrest_2021_global_health_child,,Child (<18y),new row
+forrest_2021_family_involve_proxy,,Child (<18y),new row
+forrest_2021_life_satisfaction_proxy,,Child (<18y),new row
 forrest_2021_meaning_purpose_child,,Child (<18y),new row
+forrest_2021_global_health_proxy,,Child (<18y),new row
+forrest_2021_phys_activity_proxy,,Child (<18y),new row
+forrest_2021_meaning_purpose_proxy,,Child (<18y),new row
 forrest_2021_life_satisfaction_child,,Child (<18y),new row
+forrest_2021_phys_stress_proxy,,Child (<18y),new row
 FomoNegativeAffect_cremer_2026_phq,Adult (18+),Adult (18+),confirmed
 forrest_2021_family_involve_child,,Child (<18y),new row
 FomoNegativeAffect_cremer_2026_rrs,Adult (18+),Adult (18+),confirmed
+forrest_2021_family_belonging_proxy,,Child (<18y),new row
 FomoNegativeAffect_cremer_2026_panas,Adult (18+),Adult (18+),confirmed
 forrest_2021_family_belonging_child,,Child (<18y),new row
 FomoNegativeAffect_cremer_2026_fomo,Adult (18+),Adult (18+),confirmed
@@ -549,6 +558,7 @@ florida_twins_panas,Child (<18y),Mixed,changed
 gao_2022_pss10,,Adult (18+),new row
 gan_2015_rrs,,Elderly (minimum age >50),new row
 gan_2015_ucla_loneliness,,Elderly (minimum age >50),new row
+forrest_2021_psych_stress_proxy,,Child (<18y),new row
 Forthmann-2024-creative_quality,Mixed,Adult (18+),changed
 Forthmann-2024-cleverness_ratings,Mixed,Adult (18+),changed
 gao_2022_emotional_resilience,,Adult (18+),new row
@@ -561,7 +571,10 @@ forrest_2021_psych_stress_child,,Child (<18y),new row
 forrest_2021_strength_child,,Child (<18y),new row
 franco_2024_unfolding,Adult (18+),Adult (18+),confirmed
 frikha_2023_pe_acrs,,Adult (18+),new row
+forrest_2021_strength_proxy,,Child (<18y),new row
 fraijo_2022_mslq,,Mixed,new row
+gerber_2022_selfesteem,,Child (<18y),new row
+gerber_2022_altruism,,Child (<18y),new row
 germann_2026_immigration,,Adult (18+),new row
 genpsych_russell_2024_llama3,Adult (18+),Adult (18+),confirmed
 genpsych_russell_2024_gpt3_5,Adult (18+),Adult (18+),confirmed
@@ -569,8 +582,10 @@ gcb5_2025,Adult (18+),Adult (18+),confirmed
 germann_2026_redistribution,,Adult (18+),new row
 genpsych_russell_2024_mixtral,Adult (18+),Adult (18+),confirmed
 germann_2026_state_intervention,,Adult (18+),new row
+gerber_2022_eas_temperament,,Child (<18y),new row
 garciabatista_2021_erq,,Adult (18+),new row
 germann_2026_environment,,Adult (18+),new row
+gerber_2022_self_esteem,,Child (<18y),new row
 GBJW_fadplus_goto2021,Adult (18+),Adult (18+),confirmed
 ghanbari_2016_helma_access,,Mixed,new row
 genpsych_russell_2024_gpt4o,Adult (18+),Adult (18+),confirmed
@@ -580,30 +595,41 @@ genpsych_russell_2024_gemma,Adult (18+),Adult (18+),confirmed
 gilbert_meta_32,Child (<18y),Child (<18y),confirmed
 gilbert_meta_24,Child (<18y),Child (<18y),confirmed
 gilbert_meta_16,Child (<18y),Child (<18y),confirmed
+gilbert_meta_19,Child (<18y),Child (<18y),confirmed
+gilbert_meta_18,Child (<18y),Child (<18y),confirmed
 gilbert_meta_28,Mixed,Adult (18+),changed
 gilbert_meta_27,Mixed,Adult (18+),changed
 gilbert_meta_107,Child (<18y),Child (<18y),confirmed
 gilbert_meta_106,Child (<18y),Child (<18y),confirmed
 gilbert_meta_105,Child (<18y),Child (<18y),confirmed
+gilbert_meta_13,Adult (18+),Mixed,changed
 ghanbari_2016_helma_use,,Mixed,new row
+gilbert_meta_15,Child (<18y),Mixed,changed
 ghanbari_2016_helma_understand,,Mixed,new row
 ghanbari_2016_helma_reading,,Mixed,new row
 ghanbari_2016_helma_numeracy,,Mixed,new row
 ghanbari_2016_helma_appraise,,Mixed,new row
+gilbert_meta_14,Child (<18y),Mixed,changed
 ghanbari_2016_helma_comm,,Mixed,new row
+gilbert_meta_17,Child (<18y),Child (<18y),confirmed
 gilbert_meta_49,Mixed,Mixed,confirmed
 gilbert_meta_62,Adult (18+),Adult (18+),confirmed
 gilbert_meta_45,Adult (18+),Adult (18+),confirmed
+gilbert_meta_47,Child (<18y),Child (<18y),confirmed
+gilbert_meta_46,Child (<18y),Child (<18y),confirmed
 gilbert_meta_38,Adult (18+),Adult (18+),confirmed
 gilbert_meta_44,Elderly (minimum age >50),Elderly (minimum age >50),confirmed
 gilbert_meta_60,Child (<18y),Mixed,changed
+gilbert_meta_56,Child (<18y),Child (<18y),confirmed
 gilbert_meta_4,Adult (18+),Adult (18+),confirmed
 gilbert_meta_59,Adult (18+),Adult (18+),confirmed
 gilbert_meta_58,Adult (18+),Adult (18+),confirmed
+gilbert_meta_55,Child (<18y),Child (<18y),confirmed
 gilbert_meta_33,Child (<18y),Child (<18y),confirmed
 gilbert_meta_61,Child (<18y),Mixed,changed
 gilbert_meta_5,Child (<18y),Child (<18y),confirmed
 gilbert_meta_37,Adult (18+),Adult (18+),confirmed
+gilbert_meta_41,Child (<18y),Child (<18y),confirmed
 gilbert_meta_57,Adult (18+),Adult (18+),confirmed
 gilbert_meta_85,Child (<18y),Mixed,changed
 gilbert_meta_86,,Adult (18+),filled a blank
@@ -612,6 +638,7 @@ girma_2021_oslo3,,Mixed,new row
 gilbert_meta_84,Child (<18y),Mixed,changed
 gilbert_meta_9,Adult (18+),Mixed,changed
 gmc_kay_2025,Adult (18+),Adult (18+),confirmed
+gilbert_meta_72,Child (<18y),Child (<18y),confirmed
 goksel_2026_embarrassment_authenticity,Adult (18+),Adult (18+),confirmed
 girma_2021_phq9,,Mixed,new row
 gizaw_2023_phq9,,Adult (18+),new row
@@ -625,6 +652,7 @@ goksel_2026_embarrassment_liking,Adult (18+),Adult (18+),confirmed
 gilbert_meta_87,,Adult (18+),filled a blank
 gillman_2023_appraisals,,Adult (18+),new row
 goksel_2026_embarrassment_affectivetrust,Adult (18+),Adult (18+),confirmed
+gilbert_meta_73,Child (<18y),Child (<18y),confirmed
 gilbert_meta_83,Child (<18y),Mixed,changed
 gilbert_meta_97,Adult (18+),Adult (18+),confirmed
 goldberg_2018_eps_adjectives,,Adult (18+),new row
@@ -716,6 +744,7 @@ hannachi_2025_eco_anxiety_cas,Adult (18+),Adult (18+),confirmed
 hannachi_2025_eco_anxiety_affect,Adult (18+),Adult (18+),confirmed
 guatemala_2024_homes_water,Mixed,Adult (18+),changed
 guatemala_2024_homes_publiceducation,Mixed,Adult (18+),changed
+hahn_2025_sqc,,Child (<18y),new row
 guatemala_2024_homes_trash,Mixed,Adult (18+),changed
 guatemala_2024_homes_parks,Mixed,Adult (18+),changed
 guatemala_2024_homes_publichealth,Mixed,Adult (18+),changed
@@ -725,27 +754,42 @@ guatemala_2024_homes_energy,Mixed,Adult (18+),changed
 guatemala_2024_homes_nutrition,Mixed,Adult (18+),changed
 guatemala_2024_homes_lighting,Mixed,Adult (18+),changed
 guatemala_2024_homes_transport,Mixed,Adult (18+),changed
+horiuchi_2024_rsmsm,,Child (<18y),new row
 hexaco_silvia_2025,Adult (18+),Adult (18+),confirmed
 holden_2026_bsri,,Adult (18+),new row
+heise_2024_mental_falsesign,Child (<18y),Child (<18y),confirmed
 hayek_2022_self_efficacy,,Mixed,new row
+heise_2024_mental_divdesires,Child (<18y),Child (<18y),confirmed
 hayek_2022_subj_norm,,Mixed,new row
 herrera_2018_iri,,Mixed,new row
 herrera_2018_beliefs_about_empathy,,Mixed,new row
+horiuchi_2024_attachment,,Child (<18y),new row
+heise_2024_mental_truebel,Child (<18y),Child (<18y),confirmed
+heise_2024_mental_vpt,Child (<18y),Child (<18y),confirmed
+heise_2024_mental_knowexpert,Child (<18y),Child (<18y),confirmed
 herrera_2018_se_d_items,,Mixed,new row
+horiuchi_2024_dissociation,,Child (<18y),new row
+heise_2024_mental_falsebel,Child (<18y),Child (<18y),confirmed
+heise_2024_mental_knowaccess,Child (<18y),Child (<18y),confirmed
 herrera_2018_attitudes_homeless,,Mixed,new row
+heise_2024_mental_divbeliefs,Child (<18y),Child (<18y),confirmed
 hao_2025_social_regulation,,Child (<18y),new row
 hayek_2022_attitude,,Mixed,new row
+huang_2023_d_scale,,Child (<18y),new row
 ipip_openpsychometrics_sc,Adult (18+),Adult (18+),confirmed
+huang_2023_b_scale,,Child (<18y),new row
 ibrahim_2015_bfi,,Adult (18+),new row
 iandolo_2021_asq,,Adult (18+),new row
 hyatt_2023_aggression_neo,Adult (18+),Adult (18+),confirmed
 hyatt_2023_aggression_rpa,Adult (18+),Adult (18+),confirmed
 ipip_openpsychometrics_do,Adult (18+),Adult (18+),confirmed
+huang_2023_e_scale,,Child (<18y),new row
 hyatt_2023_aggression_cab,Adult (18+),Adult (18+),confirmed
 ibrahim_2015_sf36,,Adult (18+),new row
 hyatt_2023_aggression_prelim2_epa,Adult (18+),Adult (18+),confirmed
 ilearnathome_regalado_2025,Adult (18+),Adult (18+),confirmed
 ipip_openpsychometrics_as,Adult (18+),Adult (18+),confirmed
+imps2025_hf,,Child (<18y),new row
 ipip_openpsychometrics_ad,Adult (18+),Adult (18+),confirmed
 identity_fusion_gomez_2025,Adult (18+),Adult (18+),confirmed
 huang_2016_neo_neuroticism,,Adult (18+),new row
@@ -754,6 +798,7 @@ huang_2016_neo_conscientious,,Adult (18+),new row
 hpwt_bayona_2025_workcharacteristics,Adult (18+),Adult (18+),confirmed
 hpwt_bayona_2025_jobperformance,Adult (18+),Adult (18+),confirmed
 huang_2016_cesd,,Adult (18+),new row
+huang_2023_c_scale,,Child (<18y),new row
 hpwt_bayona_2025_jobsatisfaction,Adult (18+),Adult (18+),confirmed
 jeon_2019_cbi,,Adult (18+),new row
 jelinek_2021_cdi,,Child (<18y),new row
@@ -844,6 +889,7 @@ lee_2024_tci,,Adult (18+),new row
 lhsbrasil_couto_2023_lhs,Adult (18+),Adult (18+),confirmed
 lec5_xiong_2025,Mixed,Mixed,confirmed
 lee_2020_vr_usability,,Adult (18+),new row
+latifi_2026_insect_fear,,Mixed,new row
 lhsbrasil_couto_2023_ses,Adult (18+),Adult (18+),confirmed
 lee_2020_burnout,,Mixed,new row
 lee_2020_sleep_quality,,Mixed,new row
@@ -958,12 +1004,15 @@ mavromoustakos_2016_fasq,,Adult (18+),new row
 mede_2025_trust_scientists,,Adult (18+),new row
 mbft_anunciacao_2024,Adult (18+),Mixed,changed
 meng-competitiveness-2023,Adult (18+),Adult (18+),confirmed
+meloni_2015_deq_ce_child,,Child (<18y),new row
 metacogmonitoring_double2025,Adult (18+),Adult (18+),confirmed
+meloni_2015_deq_oe_child,,Child (<18y),new row
 meloni_2015_parent_interests,,Adult (18+),new row
 merlo2025_eng_cognitive,,Mixed,new row
 merlo2025_eng_emotional,,Mixed,new row
 merlo2025_eng_comprehensive,,Mixed,new row
 merlo2025_eng_agentic,,Mixed,new row
+meloni_2015_child_disab_knowledge,,Child (<18y),new row
 meloni_2015_parent_divers_ed,,Adult (18+),new row
 meloni_2015_deq_oe_parent,,Adult (18+),new row
 mekheimer_2026_paf,,Adult (18+),new row
@@ -971,6 +1020,8 @@ mentalrotation_wolf_2024,Adult (18+),Adult (18+),confirmed
 merlo2025_eet,,Mixed,new row
 mekheimer_2026_cai,,Adult (18+),new row
 mexico_2023_quality_cablecars,Mixed,Adult (18+),changed
+meloni_2015_child_ia_frequency,,Child (<18y),new row
+meloni_2015_child_ia_satisfaction,,Child (<18y),new row
 meloni_2015_deq_ce_parent,,Adult (18+),new row
 mekheimer_2026_flp,,Adult (18+),new row
 mekheimer_2026_id,,Adult (18+),new row
@@ -1115,6 +1166,8 @@ niazi_2020_mfq,,Adult (18+),new row
 niazi_2020_mfq_stereotype,,Adult (18+),new row
 nit_must_2014,Child (<18y),Child (<18y),confirmed
 nomt_hooper_2024_study2,Adult (18+),Adult (18+),confirmed
+okamura_2018_burnout,,Child (<18y),new row
+okamura_2018_eol_attitude,,Child (<18y),new row
 onecm_kay_2025,Adult (18+),Adult (18+),confirmed
 opentsstvr_linnig_2025_ssq,Adult (18+),Adult (18+),confirmed
 opentsstvr_linnig_2025_vas,Adult (18+),Adult (18+),confirmed
@@ -1246,6 +1299,7 @@ powell_2018_memory,,Adult (18+),new row
 pranckeviciene_2022_gad7,,Adult (18+),new row
 potocnik_2024_diabetes,Mixed,Adult (18+),changed
 pranckeviciene_2022_phq9,,Adult (18+),new row
+previc_bohn2023,Child (<18y),Child (<18y),confirmed
 powell_2018_affect,,Adult (18+),new row
 queiros_2018_qcae,,Adult (18+),new row
 randomness_angelike_2024_conscientiousness,Adult (18+),Adult (18+),confirmed
@@ -1306,6 +1360,7 @@ rosetti2023_climate_knowledge,,Adult (18+),new row
 romadlon_2022_bdi,,Adult (18+),new row
 romadlon_2022_mfi20,,Adult (18+),new row
 rosetti_2023_gad7,,Adult (18+),new row
+rodriguezandres_2016_mnemocity_usability,,Child (<18y),new row
 rodriguezsantero_2024_sats36,,Adult (18+),new row
 shorttripm_silvia_2025,Adult (18+),Adult (18+),confirmed
 selm_2019_climate_knowledge,,Adult (18+),new row
@@ -1640,6 +1695,7 @@ van_der_donk_2019_bdi,,Adult (18+),new row
 validatedtouchvideo_smit_2025_threat,Adult (18+),Adult (18+),confirmed
 vermeiren_2022_nd,Adult (18+),Adult (18+),confirmed
 wang_2016_study1_authexternal,Adult (18+),Adult (18+),confirmed
+vocab_assessment_3_to_8_year_old_children,Child (<18y),Child (<18y),confirmed
 west_2021_retaliatory_aggression_bscs,Adult (18+),Adult (18+),confirmed
 west_2021_retaliatory_aggression_acq,Adult (18+),Adult (18+),confirmed
 weeldenburg_2022_targetmtpq,,Child (<18y),new row
@@ -1678,6 +1734,7 @@ wicherts_2023_5pft,,Adult (18+),new row
 westhoff2023_pbat,,Adult (18+),new row
 wiedemann_2021_risk_perception,,Adult (18+),new row
 west_2021_retaliatory_aggression_cast,Adult (18+),Adult (18+),confirmed
+wijesinghe_2025_sustained_agile_usage,,Child (<18y),new row
 williams-brat2020_study1,Adult (18+),Adult (18+),confirmed
 wolf_2017_study2_video_liking,Adult (18+),Adult (18+),confirmed
 west_2021_retaliatory_aggression_study4_deq,Adult (18+),Adult (18+),confirmed
@@ -1707,6 +1764,8 @@ yang_2023_emotional_eating_ders,,Adult (18+),new row
 yang_2023_emotional_eating_eesr,,Adult (18+),new row
 yang_2023_emotional_eating_uppsp,,Adult (18+),new row
 yang_2026_erq,,Mixed,new row
+yang_2026_igd_benefits,,Child (<18y),new row
+yang_2026_igd_criteria,,Child (<18y),new row
 yang_2026_pars3,,Mixed,new row
 yang_2026_rrs,,Mixed,new row
 yang_2026_stress_response,,Mixed,new row

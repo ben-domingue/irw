@@ -241,19 +241,19 @@ above, which was a substring match. Of those:
 
 | | tables |
 |---|---|
-| Derived | **1,735** |
+| Derived | **1,794** |
 | Unusable — fewer than 30 respondents with an age | 166 |
 | Unusable — banded codes (the `cov_age_band` shape) | 98 |
 | Unusable — ages outside `[0, 120]` | 81 |
-| Quarantined — ages equally consistent with months | 104 |
+| Quarantined — band-shaped, or months where the unit changes the tag | 45 |
 
 Against the currently published column:
 
 | outcome | tables |
 |---|---|
-| New row, on a table nothing had tagged | **740** |
-| Confirmed — the human tag was already right | 607 |
-| **Changed** | **379** |
+| New row, on a table nothing had tagged | **775** |
+| Confirmed — the human tag was already right | 628 |
+| **Changed** | **382** |
 | Filled a blank | 5 |
 | `Non-human` preserved (the derivation is refused) | 4 |
 
@@ -262,20 +262,40 @@ Every change, by direction:
 | from | to | tables |
 |---|---|---|
 | `Mixed` | `Adult (18+)` | 334 |
-| `Child (<18y)` | `Mixed` | 30 |
-| `Adult (18+)` | `Mixed` | 11 |
+| `Child (<18y)` | `Mixed` | 32 |
+| `Adult (18+)` | `Mixed` | 12 |
 | `Mixed` | `Elderly (minimum age >50)` | 3 |
 | `Adult (18+)` | `Child (<18y)` | 1 |
 
 All seven tables named in #1760 resolve to `Adult (18+)`.
 
 The estimate offered before the run was "a few hundred rows move, the large
-majority `Mixed` → `Adult (18+)`". That held: 379 and 334.
+majority `Mixed` → `Adult (18+)`". That held: 382 and 334.
 
 **The 2% floor decided 209 tables**, all of which have respondents on both sides
 of 18. The closest call is `kim_2023_*` at 1.98% — 4 respondents under 18 of
 202. Nothing sits between 1.98% and 2%, so the exact threshold is not
 load-bearing anywhere in the corpus today.
+
+### A third shape the quarantine exposed
+
+The first pass quarantined 104 tables as possibly-months. Reviewing that list
+found two things, and both are now in the guards:
+
+- **91 of the 104 were quarantined for nothing.** Where the maximum age is 18 or
+  below, the table is `Child (<18y)` whether the unit is years or months — the
+  ambiguity does not change the tag, so there is nothing to hold. The months
+  quarantine now applies only where `18 < max ≤ 36`.
+- **A band shape the strict test missed.** `alsyouf_2024_*` runs 1–7 with
+  exactly 7 distinct values: an age-bracket code, not an age, and it would have
+  derived `Child (<18y)` for what is almost certainly an adult sample. The
+  strict test (`<6 distinct` and `max < 10`) let it through. A second, wider
+  test now quarantines a column that starts at 0 or 1 and covers a small
+  contiguous range. Where it starts matters: a real 6–12 primary-school study
+  has a similar number of distinct values but does not begin at 1.
+
+Net: quarantine 104 → **45** (32 band-shaped, 13 genuinely month-ambiguous), and
+59 more tables derive.
 
 ### Two bugs the dry run caught
 

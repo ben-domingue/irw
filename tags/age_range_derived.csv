@@ -280,6 +280,7 @@ chen2022b_selfesteem,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,417,0.1
 chen_2019_csq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,22.0,235,0.051064,2026-09-01
 chen2022b_psychabuse,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,417,0.194245,2026-09-01
 chen2022_ses,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,15.0,303,0.0,2026-09-01
+chavez_2026_bpnsfs,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,806,0.0,2026-09-01
 chen_2022_cesd,Adult (18+),,derived_cov_age,16.0,27.0,77211,0.00452,2026-09-01
 chen_2022_gad,Adult (18+),,derived_cov_age,16.0,27.0,77211,0.00452,2026-09-01
 chen2022_cls,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,15.0,303,0.0,2026-09-01
@@ -529,15 +530,23 @@ florida_twins_leq,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.6
 florida_twins_media,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,608,0.131579,2026-09-01
 florida_twins_nes,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1353,0.055866,2026-09-01
 florida_twins_pals,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,18.13278576,784,0.002551,2026-09-01
+forrest_2021_positive_affect_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,909,0.0,2026-09-01
 forrest_2021_phys_activity_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,2011,0.0,2026-09-01
 forrest_2021_positive_affect_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1869,0.0,2026-09-01
 forrest_2021_phys_stress_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1843,0.0,2026-09-01
 forrest_2021_global_health_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,3635,0.0,2026-09-01
+forrest_2021_family_involve_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,958,0.0,2026-09-01
+forrest_2021_life_satisfaction_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,963,0.0,2026-09-01
 forrest_2021_meaning_purpose_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1895,0.0,2026-09-01
+forrest_2021_global_health_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,1807,0.0,2026-09-01
+forrest_2021_phys_activity_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,1031,0.0,2026-09-01
+forrest_2021_meaning_purpose_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,926,0.0,2026-09-01
 forrest_2021_life_satisfaction_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1992,0.0,2026-09-01
+forrest_2021_phys_stress_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,924,0.0,2026-09-01
 FomoNegativeAffect_cremer_2026_phq,Adult (18+),,derived_cov_age,18.0,25.0,461,0.0,2026-09-01
 forrest_2021_family_involve_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1845,0.0,2026-09-01
 FomoNegativeAffect_cremer_2026_rrs,Adult (18+),,derived_cov_age,18.0,25.0,459,0.0,2026-09-01
+forrest_2021_family_belonging_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,960,0.0,2026-09-01
 FomoNegativeAffect_cremer_2026_panas,Adult (18+),,derived_cov_age,18.0,25.0,461,0.0,2026-09-01
 forrest_2021_family_belonging_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1845,0.0,2026-09-01
 FomoNegativeAffect_cremer_2026_fomo,Adult (18+),,derived_cov_age,18.0,25.0,459,0.0,2026-09-01
@@ -549,6 +558,7 @@ florida_twins_panas,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9
 gao_2022_pss10,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
 gan_2015_rrs,Elderly (minimum age >50),,derived_cov_age,66.0,94.0,71,0.0,2026-09-01
 gan_2015_ucla_loneliness,Elderly (minimum age >50),,derived_cov_age,66.0,94.0,71,0.0,2026-09-01
+forrest_2021_psych_stress_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,913,0.0,2026-09-01
 Forthmann-2024-creative_quality,Adult (18+),,derived_cov_age,17.0,75.0,202,0.009901,2026-09-01
 Forthmann-2024-cleverness_ratings,Adult (18+),,derived_cov_age,17.0,75.0,202,0.009901,2026-09-01
 gao_2022_emotional_resilience,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
@@ -561,7 +571,10 @@ forrest_2021_psych_stress_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)
 forrest_2021_strength_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1824,0.0,2026-09-01
 franco_2024_unfolding,Adult (18+),,derived_cov_age,17.0,76.0,137,0.014599,2026-09-01
 frikha_2023_pe_acrs,Adult (18+),,derived_cov_age,19.0,35.0,308,0.0,2026-09-01
+forrest_2021_strength_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,916,0.0,2026-09-01
 fraijo_2022_mslq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,29.0,347,0.048991,2026-09-01
+gerber_2022_selfesteem,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,255,0.0,2026-09-01
+gerber_2022_altruism,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,256,0.0,2026-09-01
 germann_2026_immigration,Adult (18+),,derived_cov_age,18.0,96.0,72185,0.0,2026-09-01
 genpsych_russell_2024_llama3,Adult (18+),,derived_cov_age,18.0,86.0,1001,0.0,2026-09-01
 genpsych_russell_2024_gpt3_5,Adult (18+),,derived_cov_age,18.0,84.0,1000,0.0,2026-09-01
@@ -569,8 +582,10 @@ gcb5_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
 germann_2026_redistribution,Adult (18+),,derived_cov_age,18.0,96.0,72184,0.0,2026-09-01
 genpsych_russell_2024_mixtral,Adult (18+),,derived_cov_age,18.0,85.0,998,0.0,2026-09-01
 germann_2026_state_intervention,Adult (18+),,derived_cov_age,18.0,96.0,71896,0.0,2026-09-01
+gerber_2022_eas_temperament,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,256,0.0,2026-09-01
 garciabatista_2021_erq,Adult (18+),,derived_cov_age,23.0,66.0,187,0.0,2026-09-01
 germann_2026_environment,Adult (18+),,derived_cov_age,18.0,96.0,71941,0.0,2026-09-01
+gerber_2022_self_esteem,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,255,0.0,2026-09-01
 GBJW_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
 ghanbari_2016_helma_access,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 genpsych_russell_2024_gpt4o,Adult (18+),,derived_cov_age,18.0,95.0,999,0.0,2026-09-01
@@ -580,30 +595,41 @@ genpsych_russell_2024_gemma,Adult (18+),,derived_cov_age,18.0,81.0,1000,0.0,2026
 gilbert_meta_32,Child (<18y),Adolescent (12-18y),derived_cov_age,8.0,25.0,4513,0.010858,2026-09-01
 gilbert_meta_24,Child (<18y),Child (6-12y),derived_cov_age,6.5,9.5,644,0.0,2026-09-01
 gilbert_meta_16,Child (<18y),Child (6-12y),derived_cov_age,7.0,13.0,3948,0.0,2026-09-01
+gilbert_meta_19,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28465,0.0,2026-09-01
+gilbert_meta_18,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28475,0.0,2026-09-01
 gilbert_meta_28,Adult (18+),,derived_cov_age,18.0,70.0,8857,0.0,2026-09-01
 gilbert_meta_27,Adult (18+),,derived_cov_age,18.0,70.0,8857,0.0,2026-09-01
 gilbert_meta_107,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
 gilbert_meta_106,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
 gilbert_meta_105,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
+gilbert_meta_13,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
 ghanbari_2016_helma_use,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_15,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3381,0.059154,2026-09-01
 ghanbari_2016_helma_understand,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 ghanbari_2016_helma_reading,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 ghanbari_2016_helma_numeracy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 ghanbari_2016_helma_appraise,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_14,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
 ghanbari_2016_helma_comm,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_17,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28475,0.0,2026-09-01
 gilbert_meta_49,Mixed,Adolescent (12-18y),derived_cov_age,16.0,68.0,187,0.02139,2026-09-01
 gilbert_meta_62,Adult (18+),,derived_cov_age,23.0,90.0,713,0.0,2026-09-01
 gilbert_meta_45,Adult (18+),,derived_cov_age,21.0,63.0,240,0.0,2026-09-01
+gilbert_meta_47,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.55,7.07,162,0.0,2026-09-01
+gilbert_meta_46,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.46,7.39,156,0.0,2026-09-01
 gilbert_meta_38,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
 gilbert_meta_44,Elderly (minimum age >50),,derived_cov_age,60.0,94.0,243,0.0,2026-09-01
 gilbert_meta_60,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2549,0.375049,2026-09-01
+gilbert_meta_56,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.0,2712,0.000369,2026-09-01
 gilbert_meta_4,Adult (18+),,derived_cov_age,17.0,44.0,973,0.001028,2026-09-01
 gilbert_meta_59,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
 gilbert_meta_58,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
+gilbert_meta_55,Child (<18y),Child (6-12y),derived_cov_age,5.10335397720337,10.5160846710205,1763,0.0,2026-09-01
 gilbert_meta_33,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,18.0,1592,0.014348,2026-09-01
 gilbert_meta_61,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2550,0.375294,2026-09-01
 gilbert_meta_5,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0595483779907,15.7097873687744,2920,0.0,2026-09-01
 gilbert_meta_37,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
+gilbert_meta_41,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,4.0,10.0,3230,0.0,2026-09-01
 gilbert_meta_57,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
 gilbert_meta_85,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,931,0.040816,2026-09-01
 gilbert_meta_86,Adult (18+),,derived_cov_age,17.0,96.0,1234,0.002431,2026-09-01
@@ -612,6 +638,7 @@ girma_2021_oslo3,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,546,0.33333
 gilbert_meta_84,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,908,0.039648,2026-09-01
 gilbert_meta_9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,88.0,1646,0.020656,2026-09-01
 gmc_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+gilbert_meta_72,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,18.0,5125,0.001561,2026-09-01
 goksel_2026_embarrassment_authenticity,Adult (18+),,derived_cov_age,18.0,85.0,2100,0.0,2026-09-01
 girma_2021_phq9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,546,0.333333,2026-09-01
 gizaw_2023_phq9,Adult (18+),,derived_cov_age,21.0,73.0,577,0.0,2026-09-01
@@ -625,6 +652,7 @@ goksel_2026_embarrassment_liking,Adult (18+),,derived_cov_age,18.0,78.0,300,0.0,
 gilbert_meta_87,Adult (18+),,derived_cov_age,17.0,96.0,1234,0.002431,2026-09-01
 gillman_2023_appraisals,Adult (18+),,derived_cov_age,18.0,63.0,404,0.0,2026-09-01
 goksel_2026_embarrassment_affectivetrust,Adult (18+),,derived_cov_age,18.0,78.0,300,0.0,2026-09-01
+gilbert_meta_73,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,18.0,5124,0.001561,2026-09-01
 gilbert_meta_83,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,932,0.040773,2026-09-01
 gilbert_meta_97,Adult (18+),,derived_cov_age,18.0,104.0,8609,0.0,2026-09-01
 goldberg_2018_eps_adjectives,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
@@ -716,6 +744,7 @@ hannachi_2025_eco_anxiety_cas,Adult (18+),,derived_cov_age,17.0,77.0,533,0.00938
 hannachi_2025_eco_anxiety_affect,Adult (18+),,derived_cov_age,17.0,77.0,533,0.009381,2026-09-01
 guatemala_2024_homes_water,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
 guatemala_2024_homes_publiceducation,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+hahn_2025_sqc,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,17.0,230,0.0,2026-09-01
 guatemala_2024_homes_trash,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
 guatemala_2024_homes_parks,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
 guatemala_2024_homes_publichealth,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
@@ -725,27 +754,42 @@ guatemala_2024_homes_energy,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436
 guatemala_2024_homes_nutrition,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
 guatemala_2024_homes_lighting,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
 guatemala_2024_homes_transport,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+horiuchi_2024_rsmsm,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,165,0.0,2026-09-01
 hexaco_silvia_2025,Adult (18+),,derived_cov_age,18.0,95.0,530,0.0,2026-09-01
 holden_2026_bsri,Adult (18+),,derived_cov_age,19.0,83.0,695,0.0,2026-09-01
+heise_2024_mental_falsesign,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
 hayek_2022_self_efficacy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
+heise_2024_mental_divdesires,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
 hayek_2022_subj_norm,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
 herrera_2018_iri,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,556,0.053957,2026-09-01
 herrera_2018_beliefs_about_empathy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,556,0.053957,2026-09-01
+horiuchi_2024_attachment,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,193,0.0,2026-09-01
+heise_2024_mental_truebel,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_vpt,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_knowexpert,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
 herrera_2018_se_d_items,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,439,0.063781,2026-09-01
+horiuchi_2024_dissociation,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,194,0.0,2026-09-01
+heise_2024_mental_falsebel,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_knowaccess,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
 herrera_2018_attitudes_homeless,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,439,0.063781,2026-09-01
+heise_2024_mental_divbeliefs,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
 hao_2025_social_regulation,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
 hayek_2022_attitude,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
+huang_2023_d_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
 ipip_openpsychometrics_sc,Adult (18+),,derived_cov_age,14.0,72.0,1001,0.018981,2026-09-01
+huang_2023_b_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
 ibrahim_2015_bfi,Adult (18+),,derived_cov_age,20.0,85.0,200,0.0,2026-09-01
 iandolo_2021_asq,Adult (18+),,derived_cov_age,18.0,37.0,348,0.0,2026-09-01
 hyatt_2023_aggression_neo,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
 hyatt_2023_aggression_rpa,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
 ipip_openpsychometrics_do,Adult (18+),,derived_cov_age,14.0,72.0,1001,0.018981,2026-09-01
+huang_2023_e_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
 hyatt_2023_aggression_cab,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
 ibrahim_2015_sf36,Adult (18+),,derived_cov_age,20.0,85.0,200,0.0,2026-09-01
 hyatt_2023_aggression_prelim2_epa,Adult (18+),,derived_cov_age,20.0,76.0,322,0.0,2026-09-01
 ilearnathome_regalado_2025,Adult (18+),,derived_cov_age,21.0,65.0,909,0.0,2026-09-01
 ipip_openpsychometrics_as,Adult (18+),,derived_cov_age,14.0,72.0,1004,0.018924,2026-09-01
+imps2025_hf,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.5,12.3750858306885,2469,0.0,2026-09-01
 ipip_openpsychometrics_ad,Adult (18+),,derived_cov_age,14.0,72.0,1000,0.019,2026-09-01
 identity_fusion_gomez_2025,Adult (18+),,derived_cov_age,18.0,88.0,2570,0.0,2026-09-01
 huang_2016_neo_neuroticism,Adult (18+),,derived_cov_age,47.0,67.0,114,0.0,2026-09-01
@@ -754,6 +798,7 @@ huang_2016_neo_conscientious,Adult (18+),,derived_cov_age,47.0,67.0,114,0.0,2026
 hpwt_bayona_2025_workcharacteristics,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
 hpwt_bayona_2025_jobperformance,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
 huang_2016_cesd,Adult (18+),,derived_cov_age,47.0,67.0,113,0.0,2026-09-01
+huang_2023_c_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
 hpwt_bayona_2025_jobsatisfaction,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
 jeon_2019_cbi,Adult (18+),,derived_cov_age,33.0,72.0,464,0.0,2026-09-01
 jelinek_2021_cdi,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,16.0,1515,0.0,2026-09-01
@@ -844,6 +889,7 @@ lee_2024_tci,Adult (18+),,derived_cov_age,18.0,28.0,527,0.0,2026-09-01
 lhsbrasil_couto_2023_lhs,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
 lec5_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,70.0,9506,0.37429,2026-09-01
 lee_2020_vr_usability,Adult (18+),,derived_cov_age,21.0,27.0,60,0.0,2026-09-01
+latifi_2026_insect_fear,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,18.0,1369,0.134405,2026-09-01
 lhsbrasil_couto_2023_ses,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
 lee_2020_burnout,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,718,0.022284,2026-09-01
 lee_2020_sleep_quality,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,680,0.023529,2026-09-01
@@ -958,12 +1004,15 @@ mavromoustakos_2016_fasq,Adult (18+),,derived_cov_age,18.0,64.0,115,0.0,2026-09-
 mede_2025_trust_scientists,Adult (18+),,derived_cov_age,18.0,100.0,71707,0.0,2026-09-01
 mbft_anunciacao_2024,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
 meng-competitiveness-2023,Adult (18+),,derived_cov_age,18.0,30.0,2385,0.0,2026-09-01
+meloni_2015_deq_ce_child,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
 metacogmonitoring_double2025,Adult (18+),,derived_cov_age,18.0,76.0,300,0.0,2026-09-01
+meloni_2015_deq_oe_child,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
 meloni_2015_parent_interests,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
 merlo2025_eng_cognitive,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
 merlo2025_eng_emotional,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
 merlo2025_eng_comprehensive,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
 merlo2025_eng_agentic,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+meloni_2015_child_disab_knowledge,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
 meloni_2015_parent_divers_ed,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
 meloni_2015_deq_oe_parent,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
 mekheimer_2026_paf,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
@@ -971,6 +1020,8 @@ mentalrotation_wolf_2024,Adult (18+),,derived_cov_age,18.0,22.0,37,0.0,2026-09-0
 merlo2025_eet,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
 mekheimer_2026_cai,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
 mexico_2023_quality_cablecars,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+meloni_2015_child_ia_frequency,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+meloni_2015_child_ia_satisfaction,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
 meloni_2015_deq_ce_parent,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
 mekheimer_2026_flp,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
 mekheimer_2026_id,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
@@ -1115,6 +1166,8 @@ niazi_2020_mfq,Adult (18+),,derived_cov_age,17.0,64.0,300,0.003333,2026-09-01
 niazi_2020_mfq_stereotype,Adult (18+),,derived_cov_age,17.0,64.0,300,0.003333,2026-09-01
 nit_must_2014,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,16.0,1800,0.0,2026-09-01
 nomt_hooper_2024_study2,Adult (18+),,derived_cov_age,18.0,57.0,391,0.0,2026-09-01
+okamura_2018_burnout,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.0,7.0,261,0.0,2026-09-01
+okamura_2018_eol_attitude,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.0,7.0,261,0.0,2026-09-01
 onecm_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
 opentsstvr_linnig_2025_ssq,Adult (18+),,derived_cov_age,18.0,30.0,98,0.0,2026-09-01
 opentsstvr_linnig_2025_vas,Adult (18+),,derived_cov_age,18.0,30.0,98,0.0,2026-09-01
@@ -1246,6 +1299,7 @@ powell_2018_memory,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
 pranckeviciene_2022_gad7,Adult (18+),,derived_cov_age,18.0,57.0,1358,0.0,2026-09-01
 potocnik_2024_diabetes,Adult (18+),,derived_cov_age,30.0,91.0,287,0.0,2026-09-01
 pranckeviciene_2022_phq9,Adult (18+),,derived_cov_age,18.0,57.0,1358,0.0,2026-09-01
+previc_bohn2023,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.00616016427105,8.02737850787132,1190,0.0,2026-09-01
 powell_2018_affect,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
 queiros_2018_qcae,Adult (18+),,derived_cov_age,18.0,60.0,562,0.0,2026-09-01
 randomness_angelike_2024_conscientiousness,Adult (18+),,derived_cov_age,18.0,87.0,835,0.0,2026-09-01
@@ -1306,6 +1360,7 @@ rosetti2023_climate_knowledge,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,202
 romadlon_2022_bdi,Adult (18+),,derived_cov_age,29.0,72.0,200,0.0,2026-09-01
 romadlon_2022_mfi20,Adult (18+),,derived_cov_age,29.0,72.0,200,0.0,2026-09-01
 rosetti_2023_gad7,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+rodriguezandres_2016_mnemocity_usability,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.0,10.0,159,0.0,2026-09-01
 rodriguezsantero_2024_sats36,Adult (18+),,derived_cov_age,0.0,54.0,318,0.012579,2026-09-01
 shorttripm_silvia_2025,Adult (18+),,derived_cov_age,18.0,95.0,1150,0.0,2026-09-01
 selm_2019_climate_knowledge,Adult (18+),,derived_cov_age,18.0,91.0,192,0.0,2026-09-01
@@ -1640,6 +1695,7 @@ van_der_donk_2019_bdi,Adult (18+),,derived_cov_age,18.0,71.0,566,0.0,2026-09-01
 validatedtouchvideo_smit_2025_threat,Adult (18+),,derived_cov_age,17.0,63.0,355,0.002817,2026-09-01
 vermeiren_2022_nd,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
 wang_2016_study1_authexternal,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+vocab_assessment_3_to_8_year_old_children,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.014373716632444,7.994524298425736,581,0.0,2026-09-01
 west_2021_retaliatory_aggression_bscs,Adult (18+),,derived_cov_age,18.0,24.0,165,0.0,2026-09-01
 west_2021_retaliatory_aggression_acq,Adult (18+),,derived_cov_age,18.0,24.0,167,0.0,2026-09-01
 weeldenburg_2022_targetmtpq,Child (<18y),Adolescent (12-18y),derived_cov_age,10.0,18.0,3150,0.002222,2026-09-01
@@ -1678,6 +1734,7 @@ wicherts_2023_5pft,Adult (18+),,derived_cov_age,18.0,25.0,8954,0.0,2026-09-01
 westhoff2023_pbat,Adult (18+),,derived_cov_age,19.0,32.0,113,0.0,2026-09-01
 wiedemann_2021_risk_perception,Adult (18+),,derived_cov_age,18.0,37.0,342,0.0,2026-09-01
 west_2021_retaliatory_aggression_cast,Adult (18+),,derived_cov_age,18.0,24.0,141,0.0,2026-09-01
+wijesinghe_2025_sustained_agile_usage,Child (<18y),Early (<6y),derived_cov_age,0.0,6.0,391,0.0,2026-09-01
 williams-brat2020_study1,Adult (18+),,derived_cov_age,18.0,46.0,206,0.0,2026-09-01
 wolf_2017_study2_video_liking,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
 west_2021_retaliatory_aggression_study4_deq,Adult (18+),,derived_cov_age,18.0,24.0,167,0.0,2026-09-01
@@ -1707,6 +1764,8 @@ yang_2023_emotional_eating_ders,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2
 yang_2023_emotional_eating_eesr,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
 yang_2023_emotional_eating_uppsp,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
 yang_2026_erq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
+yang_2026_igd_benefits,Child (<18y),Adolescent (12-18y),derived_cov_age,6.0,18.0,1032,0.000969,2026-09-01
+yang_2026_igd_criteria,Child (<18y),Adolescent (12-18y),derived_cov_age,6.0,18.0,1032,0.000969,2026-09-01
 yang_2026_pars3,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
 yang_2026_rrs,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
 yang_2026_stress_response,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
