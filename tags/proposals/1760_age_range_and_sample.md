@@ -17,6 +17,48 @@ and `metadata/metadata.csv` (4,134 live tables).
 
 ---
 
+## The evidence this rests on
+
+Restated here so this file stands alone; the source is #1760.
+
+Many IRW tables carry `cov_age`, so for those the `age range` tag can be
+compared against the ages actually present. On a random sample of **70 tagged
+tables that have `cov_age`**:
+
+- `Adult (18+)` agreed with the data **28 of 30** times.
+- `Mixed` disagreed **26 of 29** times — and in **25 of those the table contains
+  no respondent under 18 at all**, with a minimum age of exactly 18.
+
+Six of the contested tables, with the ages actually in them:
+
+| table | ages present | respondents under 18 |
+|---|---|---|
+| `colombia_2023_politics_voting` | 18 – 114 (n=46,392) | 0 |
+| `mexico_2023_quality_wellbeingservice` | 18 – 98 (n=78,896) | 0 |
+| `spain_2025_democracy_parties` | 18 – 97 (n=4,010) | 0 |
+| `spain_2024_politics_beliefs` | 18 – 94 (n=2,562) | 0 |
+| `margaretto_2025_translation_study_2_lextale` | 18 – 68 (n=220) | 0 |
+| `silvia_2024_funny` | 18 – 88 (n=1,842) | 0 |
+
+Mostly national survey programmes (CIS, ENSU and similar), plus a few lab
+studies. **This is not the signature of careless tagging** — careless tagging
+scatters. It is the signature of a consistent rule that differs from the one the
+filters assume, which is why the fix is a stated convention rather than a QC
+pass.
+
+Current distribution of the column, across the 2,480 tagged rows:
+
+| `age range` | rows |
+|---|---|
+| `Adult (18+)` | 1,260 |
+| `Mixed` | 700 |
+| `Child (<18y)` | 416 |
+| blank | 45 |
+| `Elderly (minimum age >50)` | 43 |
+| `Non-human` | 16 |
+
+---
+
 ## Rule A — `age range`
 
 ### A0. Referent
@@ -212,6 +254,70 @@ be wrong. An earlier draft of mine had exactly that; the data says otherwise.
 
 ---
 
+## Worked examples
+
+The six tables from #1760, plus the `sample` example, run through both rules.
+Current tags are from `metadata/tags.csv` as of 2026-09-01; ages are from #1760.
+
+| table | ages | `age range` now → under A | `sample` now → under B |
+|---|---|---|---|
+| `colombia_2023_politics_voting` | 18–114, 0 under 18 | `Mixed` → **`Adult (18+)`** (A1 row 5) | `General/non-specific, Representative` → **`Representative`** (B2 contradiction) |
+| `mexico_2023_quality_wellbeingservice` | 18–98, 0 under 18 | `Mixed` → **`Adult (18+)`** | `General/non-specific` → unchanged |
+| `spain_2025_democracy_parties` | 18–97, 0 under 18 | `Mixed` → **`Adult (18+)`** | `General/non-specific` → unchanged |
+| `spain_2024_politics_beliefs` | 18–94, 0 under 18 | `Mixed` → **`Adult (18+)`** | `General/non-specific` → unchanged |
+| `margaretto_2025_translation_study_2_lextale` | 18–68, 0 under 18 | `Mixed` → **`Adult (18+)`** | `Educational, Targeted/specific` → unchanged |
+| `silvia_2024_funny` | 18–88, 0 under 18 | `Mixed` → **`Adult (18+)`** | `Targeted/specific` → unchanged |
+| `mexico_2023_quality_low` | — | `Mixed` → **`Adult (18+)`** | `General/non-specific` → unchanged |
+
+Three things this shows, which matter more than the individual rows:
+
+1. **A is decisive where it applies.** Every one of these resolves on the data,
+   with no judgment call and no tolerance needed — all six have zero respondents
+   under 18.
+2. **B fires only on contradictions.** One row of seven changes. B is not a
+   re-tagging campaign; it is a definition that happens to invalidate 181 rows
+   out of 2,480.
+3. **B does not re-open settled rows.** `mexico_2023_quality_low` is the `sample`
+   example in #1760 — human said `General/non-specific`, the auto-tagger said
+   `Representative`. B does not adjudicate that: it says only that the two can
+   never *both* stand. Whether ENSU counts as `Representative` turns on whether
+   INEGI claims representativeness, which is B2's "the claim must be the
+   source's" test, and it is a per-table read, not something this rule decides
+   in advance.
+
+---
+
+## Alternatives I considered and rejected
+
+**The source-study referent (option 2 in #1760).** Defensible on its own terms —
+a survey with a broad frame that releases 18+ microdata *is* describing that
+study. Rejected because it makes the column unverifiable in principle: there is
+no artifact in the IRW against which "the study's target population" can be
+checked, so the column could never be audited, only re-litigated. The
+tie-breaker is #1709/#1702's lesson about hand-maintained counts: anything not
+derivable drifts.
+
+**A frame precedence list** (`Representative` beats `Targeted/specific` beats
+`General/non-specific`; pick one). This was my first draft, and the data killed
+it: 49 rows carry `Representative, Targeted/specific` together, and a
+nationally-representative sample *of teachers* is genuinely both. A precedence
+list would have quietly deleted the restriction that made those samples worth
+collecting.
+
+**Splitting `sample` into two columns**, one per facet — which is what the
+column actually is. Rejected for now as out of scope: it breaks
+`irw_filter(sample=)` for every existing user and needs a Sheets write path
+(#1732, blocked behind #1723). B2 gets the same correctness inside the existing
+column. Worth revisiting if the column is ever versioned.
+
+**Waiting for the RAs.** Two working days with no reply, against an item-2 track
+that is fully blocked and a coverage figure moving the wrong way — 61.7% to
+55.3% between 2026-08-29 and 2026-08-31, as 484 new tables arrived against 35
+newly tagged ones (#1702). The asymmetry is that a written rule is cheap to
+correct and a blocked track is not.
+
+---
+
 ## Confidence, honestly
 
 - **A1** — high. Fully mechanical, and the guard makes its own failure visible;
@@ -231,6 +337,49 @@ The weakest point in the whole proposal is `MINOR_SHARE`. It is a threshold
 chosen to sit between two failure modes rather than derived from anything, which
 is why it is named, isolated, and recorded per row instead of buried.
 
+## What I need from you
+
+Six decisions. Defaults are what the document currently says, so "approve" with
+no comment means all six as written.
+
+1. **`age range` referent = the shipped table.** (§A0) — the load-bearing one.
+2. **`MINOR_SHARE = 0.02`.** Set it to `0` for a purely literal rule; nothing in
+   #1760's cases changes either way. This is the parameter I am least able to
+   defend from first principles.
+3. **`Representative` and `Targeted/specific` may co-occur** (§B2), and
+   `General/non-specific` is the residual that never co-occurs with either.
+4. **`child age` gets derived too** (§A3), from the same `cov_age` column.
+   Say no and I leave that column entirely to human raters.
+5. **Blank beats a guess** (§A2). This will *reduce* filled cells on tables
+   whose source states nothing explicit about age. If you would rather keep a
+   best-guess tag with the basis recorded as `source_inferred`, say so — it is a
+   one-line change, and it is a real trade-off, not an oversight.
+6. **Whether to tell the RAs**, and in what terms — draft below.
+
+## Draft note to the RAs, for your edit
+
+> On the tagging conventions question in #1760: we have gone ahead and written
+> the rules down rather than leave the tag work blocked, so nothing here is a
+> judgment about your tagging — the rule you were being asked about had never
+> been stated, which is the actual defect.
+>
+> For `age range`, the tag now describes the **table as shipped in the IRW**, not
+> the source study's target population. Where a table has a `cov_age` column we
+> derive the tag from the ages actually present, so most of these stop being a
+> judgment call. Tables tagged `Mixed` whose data contain no respondents under 18
+> will be re-derived to `Adult (18+)` — that is a change of convention, not a
+> correction of your work.
+>
+> For `sample`, the three overlapping values now have a stated boundary:
+> `General/non-specific` means "no representativeness claim and no restricted
+> frame", so it never appears alongside `Representative` or `Targeted/specific`.
+> Those two *can* appear together — a representative sample of a specific
+> population is both.
+>
+> If either rule is not what you intended, say so on #1760 and we will change the
+> rule; it is written down now, so disagreeing with it is a concrete edit rather
+> than an open question.
+
 ## If approved
 
 1. Fold A and B into `vocab.md`; delete this file.
@@ -246,3 +395,13 @@ is why it is named, isolated, and recorded per row instead of buried.
    labels being consistently at odds with `cov_age` in one specific direction is
    evidence they applied a rule; it was just a different one from the one the
    filters assume.
+
+---
+
+## If it goes wrong
+
+Tags are regenerated, not hand-maintained: `03_tags.R` rebuilds the published
+table from the sheet plus the automated CSV on every run, and a human row always
+wins over an automated one (#1723). So reversing any of this is changing the
+rule and re-running — not a migration. That is the main reason deciding now is
+the low-risk option rather than the bold one.
