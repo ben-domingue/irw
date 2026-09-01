@@ -180,13 +180,16 @@ The output claims to be what the study administered. Three rules:
   Leave the `_translated` columns out entirely for a table administered in English — do not
   emit empty columns to no purpose.
 
-  **Two things this touches beyond the CSV.** `validate_items.R` checks that required columns
-  are *present* and tolerates extras, so the gate is unaffected. But the four `_translated`
-  columns and `language` are **not yet in the public schema** at
-  itemresponsewarehouse.org/itemtext.html (mirrored in `references/itemtext_standard.md`), and
-  `upload.py` hands the CSV to Redivis, which infers fields from the file — so a table shipping
-  them adds columns to `irw_text`. Get that agreed before uploading such a table, and update the
-  public page in the same pass.
+  **Schema status: agreed, 2026-09-01.** The four `_translated` columns and `language` are
+  part of the published schema at itemresponsewarehouse.org/itemtext.html (mirrored in
+  `references/itemtext_standard.md`), so a table carrying them is uploadable without any
+  further sign-off. `validate_items.R` checks that required columns are *present* and
+  tolerates extras, so the gate is unaffected. `upload.py` hands the CSV to Redivis, which
+  infers fields from the file — the first such upload is what widens `irw_text` to hold them.
+  Whether the already-uploaded tables get backfilled is still open (irw#1777) —
+  `ALSECYPIAMH_WU_2022_SDQ` and `altahla_2024_whoqol` ship English for non-English
+  administrations, and `burkert_2019_whoqol_bref` ships German with no translation. The rule
+  above governs every new table regardless.
 
 ## Output path: CSV-direct, not Sheets-fill
 
