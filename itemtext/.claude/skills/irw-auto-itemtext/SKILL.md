@@ -152,6 +152,41 @@ The output claims to be what the study administered. Three rules:
   that were false — "transcribed verbatim" when normalised, "not a duplicate upload" when
   it was a strict subset, "the .sav has no item text" when only the variable labels lacked
   it. A wrong note is worse than no note, because it stops the next person looking.
+- **Ship the language the study administered, and put English alongside it.** Confirmed
+  with the user 2026-09-01. Shipping only an English rendering of a non-English instrument
+  discards what respondents actually read, and it had been happening by default. The rule
+  now:
+
+  | field | holds |
+  |---|---|
+  | `item_text`, `option_text`, `instructions`, `section_prompt` | the **administered** wording, verbatim |
+  | `item_text_translated`, `option_text_translated`, `instructions_translated`, `section_prompt_translated` | the English translation |
+  | `language` | the administered language, named plainly (`German`, `Croatian`, `Spanish`) |
+
+  **Never translate `item` or `resp`.** They are the join keys — `item` is a code and `resp`
+  a number, and both must match `irw::irw_fetch(table)` exactly. Only the text fields get a
+  translated twin.
+
+  Prefer the study's own translation when the record supplies one (`weber2026_name_knowledge`
+  ships `Item_wording_English.xlsx` next to its German questionnaire); say in provenance whose
+  translation it is. If you translate it yourself, say that too — it is a deviation like any
+  other.
+
+  When the administered original genuinely cannot be recovered and only an English version
+  exists, put the English in the base field, leave the `_translated` columns empty, and mark
+  `text_source=translated_substitute`. That is now the **fallback**, not the default, and it
+  is the case the vocabulary in Step 6c was written for.
+
+  Leave the `_translated` columns out entirely for a table administered in English — do not
+  emit empty columns to no purpose.
+
+  **Two things this touches beyond the CSV.** `validate_items.R` checks that required columns
+  are *present* and tolerates extras, so the gate is unaffected. But the four `_translated`
+  columns and `language` are **not yet in the public schema** at
+  itemresponsewarehouse.org/itemtext.html (mirrored in `references/itemtext_standard.md`), and
+  `upload.py` hands the CSV to Redivis, which infers fields from the file — so a table shipping
+  them adds columns to `irw_text`. Get that agreed before uploading such a table, and update the
+  public page in the same pass.
 
 ## Output path: CSV-direct, not Sheets-fill
 
@@ -762,7 +797,10 @@ Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other 
 `text_source` — where the words themselves came from:
 - `study_materials` — this study's own paper, supplement, questionnaire, or data file.
 - `canonical_instrument` — the published original instrument, not this study's materials.
-- `translated_substitute` — a different language version than the one administered.
+- `translated_substitute` — a different language version than the one administered. Since
+  2026-09-01 this is the FALLBACK only, for when the administered original cannot be
+  recovered at all; the default is to ship the administered wording with English in the
+  `_translated` columns (core model section 4).
 - `unknown`.
 
 `public_note`, when non-empty, is a one-sentence caveat written for the public issues
