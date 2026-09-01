@@ -372,6 +372,16 @@ When you skip, say **where the text actually is** in the `data/<table>.py`
 header and in the `BATCH_LOG.md` entry, so a later pass starts from an answer
 instead of re-deriving one. That is the whole cost of skipping — one sentence.
 
+**Say which label levels you checked, not just what you concluded.** A skip
+verdict is the one output here that nothing downstream re-tests: no gate runs
+on a table that was never attempted, so the prose in the header is the whole
+record. `estevez_2021_*` (#1770) was skipped on "no variable labels and no
+value labels for any item"; the file carried value labels for all 82 shipped
+items, and the verdict had been written from the variable-label level alone.
+Name both levels — "no variable labels; value labels present but only on the
+covariates", "both levels empty" — so the next reader can tell a checked
+absence from an unchecked one.
+
 Two carve-outs: **never extract item text for `enem*` tables** (Ben handles
 those separately), and a table skipped for PII/license/N<100 has its item text
 skipped with it.
