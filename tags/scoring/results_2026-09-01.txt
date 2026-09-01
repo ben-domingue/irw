@@ -29,6 +29,16 @@ multi-select columns -- how they miss, not just whether:
   A subset or superset is a granularity disagreement on a genuinely
   multi-faceted answer; a disjoint miss is a different answer entirely.
 
+multi-select, per-atom (micro-averaged) -- partial credit:
+  column                  tp    fp    fn  precision   recall      F1
+  child_age                4     1     0      80.0%   100.0%   88.9%
+  sample                  20    18    21      52.6%    48.8%   50.6%
+  construct_type          32     8    14      80.0%    69.6%   74.4%
+  primary_languages       33     0     3     100.0%    91.7%   95.7%
+  Precision below recall means over-tagging; recall below precision
+  means it names too few facets. They fail differently, and a single
+  exact-match number cannot tell you which.
+
 confusions (gold -> predicted):
   age_range:
       2x  Mixed  ->  Adult (18+)
