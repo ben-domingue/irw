@@ -53,6 +53,41 @@ TAG_RENAMES <- c(
 TAG_ATOM_REPAIRS <- c("Internet-based (Mturkers" = "Internet-based")
 TAG_ATOM_DROP    <- c("etc)")
 
+##`sample` holds two facets in one multi-select column (#1760, decided
+##2026-09-01). SETTING answers "how were these people reached" and its values
+##combine freely. FRAME answers "how broad was the sampling", and there
+##`General/non-specific` is the catch-all: it is not used when one of the other
+##two applies, so it never co-occurs with them.
+##
+##Enforced here, on the read side, for the same reason the renames above are:
+##the Sheet is not writable from code (#1708 / 6.1), this is idempotent, and it
+##repairs rows entered years ago as well as rows entered tomorrow. 181 of the
+##2,480 rows in the sheet carry the contradiction today, across 13 studies --
+##all of them human rows.
+##
+##SCOPE, deliberately narrow: only the frame atoms displace `General`. A setting
+##atom does not, because it answers a different question -- "Educational,
+##General/non-specific" means "recruited through a school, no restricted frame,
+##no representativeness claim", which is a real statement and not a conflict.
+##133 rows are of that shape and are left alone. Widening this to "any other
+##atom displaces General" would leave `General/non-specific` meaning what a
+##blank cell already means.
+##
+##`Representative` and `Targeted/specific` are independent and MAY co-occur: a
+##nationally representative sample of teachers is both, and 49 rows say so.
+##Never collapse them.
+FRAME_RESIDUAL <- "General/non-specific"
+FRAME_SPECIFIC <- c("Representative", "Targeted/specific")
+
+##Drops the residual when a more specific frame value is present. Returns atoms
+##unchanged for every column other than `sample`.
+apply_frame_residual <- function(atoms, column) {
+    if (!identical(column, "sample")) return(atoms)
+    if (!FRAME_RESIDUAL %in% atoms) return(atoms)
+    if (!any(FRAME_SPECIFIC %in% atoms)) return(atoms)
+    atoms[atoms != FRAME_RESIDUAL]
+}
+
 normalize_multiselect <- function(x, column, vocab = TAG_VOCAB) {
     stopifnot(column %in% names(vocab))
     allowed <- vocab[[column]]
@@ -75,6 +110,11 @@ normalize_multiselect <- function(x, column, vocab = TAG_VOCAB) {
         hit <- atoms %in% names(TAG_ATOM_REPAIRS)
         atoms[hit] <- TAG_ATOM_REPAIRS[atoms[hit]]
         atoms <- atoms[!atoms %in% TAG_ATOM_DROP]
+
+        ##3b. `sample` only: drop the catch-all when a specific frame value is
+        ##    present (#1760). Before the vocabulary check below, so the result
+        ##    is what gets validated and published.
+        atoms <- apply_frame_residual(atoms, column)
 
         if (!length(atoms)) return(NA_character_)
 
