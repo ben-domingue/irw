@@ -117,6 +117,54 @@ no phrase-matching is needed to define it.
 Recompute both counts any time with check `[B]` of `itemtext/sibling_consistency_sweep.py`, which
 also names the rows a WAF-keyed regex misses.
 
+## Sweep result (2026-09-01, all 27 records)
+
+The class was swept end to end under #1751. **27/27 records answered the API at HTTP 200**, and the
+verdicts split three ways:
+
+| outcome | tables | records |
+|---|---|---|
+| item wording published and now reachable → `AVAILABLE` | **16** | 11 |
+| reachable, wording genuinely not published → `UNAVAILABLE` | 26 | 13 |
+| reachable but instrument licensed → `UNAVAILABLE (copyrighted)` | 1 | 1 |
+| still `BLOCKED` — guestbook, see below | 2 | 2 |
+
+`BLOCKED` fell 214 → 171 audit-wide. What predicts the outcome is the **file listing**: a record
+carrying a file named `Questionnaire`, `Codebook`, `Item_wording` or `Appendix` almost always yields;
+a record holding a single bare data file almost never does. Score the listing before downloading
+anything.
+
+Item wording turns up in more places than a codebook, though:
+
+- a dedicated mapping file — `Item_wording_English.xlsx` (`3CKJV1`), an explicit `Item` / `Item wording` table
+- a codebook that pairs each variable with its administered question **and options** (`OXIMKR`, `SNLKUE`)
+- the administered instrument as a PDF (`FXL7JW`, `5W9HXM`, `K0SRS8`, `DWCBOE`)
+- **the data file's own column headers** — `8LBLYS` embeds code and wording together
+  (`(BFI_1) Is talkative`), and `IREEJJ`'s headers are the full question text
+- **instrument identification plus a code→subscale map**, with no wording at all (`EDEVGY`: MSPSS,
+  WLEIS, Hughes 2004). That meets the same liberal bar already applied to GAD-7 and RSES elsewhere.
+
+## Two access modes the WAF story does not cover
+
+**A guestbook gate is not a WAF block, and the API cannot pass it.** `DUBA3J` and `XUEU90` list every
+file with `restricted: false`, and every download returns:
+
+```
+{"status":"ERROR","message":"You may not download this file without the required Guestbook response for guestbookID 269."}
+```
+
+`restricted: false` therefore does **not** mean downloadable — check by attempting one download, not by
+reading the flag. `DUBA3J`'s listing names Hindi and Math testing booklets and Headmaster/Teacher
+questionnaires, so item text is very likely there; it needs a human to complete the guestbook form in a
+browser. Both stay `BLOCKED` deliberately, as human-actionable rather than settled.
+
+**The WAF filters on User-Agent, not just on being a page.** `urllib` was refused 403 on all 27 records
+where `curl` got 200 on all 27. Two audit rows claim the *API* returned a bot-challenge; it does not.
+Use `curl`, or set a browser-like UA — and treat "the API is blocked" in an old verdict as untested.
+
+Finally, `?format=original` is only valid for **ingested tabular** files. On a PDF or .docx it returns a
+JSON error body that a parser will report as a corrupt file; drop the parameter for those.
+
 ## Next
 
 **Tables are not fetches.** The 51 tables resolve to roughly **30 distinct Dataverse records**,
