@@ -123,3 +123,56 @@ Emotion Matching Task item `emtb4_6s_t1` has no recoverable prompt text in the s
 :::
 :::
 ```
+
+## New entries (conditional — only when item text actually ships): `galindo_2023_beliefs`, `galindo_2023_emotional_intelligence`, `galindo_2023_loneliness`
+
+Added 2026-09-01 at Ben's request, under #1751. These three tables were
+reclassified `BLOCKED` → `AVAILABLE` in the Dataverse API sweep on the
+**liberal bar** — Ben approved that call on condition it is noted here.
+
+Why they are the unusual case: the Harvard Dataverse record
+(`doi:10.7910/DVN/EDEVGY`) does **not** reproduce any item wording. Its
+`Dataset_Documentation.docx` identifies each instrument exactly and pins every
+code to its subscale (SS01-SS08 = MSPSS, Family SS01-02/05/07 and Friends
+SS03-04/06/08; EI01-EI16 = WLEIS, SEA/OEA/UOE/ROE in blocks of four;
+LN01-LN03 = Hughes et al. 2004 Short Loneliness Scale; all 1-5 Likert), and
+`AVAILABLE` rests on those three instruments being freely published elsewhere —
+the same bar already applied to GAD-7 and RSES in this audit.
+
+That makes the eventual `item_text` **sourced from the instrument literature,
+not from the study's own materials**, which is a genuine text-vs-table gap and
+therefore in scope for this page. The concrete risk is language: the
+documentation states the scales were "administered in each participant's
+language" (Spanish, Basque and Greek), so English canonical wording would not
+be what any respondent actually read.
+
+Do not paste until `irw-auto-itemtext` has actually shipped these tables — the
+callouts describe item text that does not exist yet. If the extraction instead
+locates the administered translations, drop these entries rather than pasting.
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## galindo_2023_beliefs
+Item text is the canonical published wording of the Multidimensional Scale of Perceived Social Support, not wording taken from this study's materials -- the source deposit documents only the code-to-subscale mapping. Items were administered in Spanish, Basque or Greek depending on the respondent, so the English wording shown here is not what any respondent read.
+:::
+:::
+```
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## galindo_2023_emotional_intelligence
+Item text is the canonical published wording of the Wong and Law Emotional Intelligence Scale, not wording taken from this study's materials -- the source deposit documents only the code-to-subscale mapping (SEA EI01-04, OEA EI05-08, UOE EI09-12, ROE EI13-16). Items were administered in Spanish, Basque or Greek, so the English wording shown here is not what any respondent read.
+:::
+:::
+```
+
+```
+::: {.g-col-4 .dataset-item}
+::: {.callout-warning collapse='true'}
+## galindo_2023_loneliness
+Item text is the canonical published wording of the Hughes et al. (2004) Three-Item Loneliness Scale, not wording taken from this study's materials -- the source deposit documents only the code-to-subscale mapping. Items were administered in Spanish, Basque or Greek, so the English wording shown here is not what any respondent read.
+:::
+:::
+```
