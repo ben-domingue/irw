@@ -1,8 +1,10 @@
-# Proposed decision rules: `age range` and `sample`
+# Decision rules: `age range` and `sample`
 
-**Status: proposed, awaiting Ben's approval. Nothing here is in force.**
-If approved, these fold into
-`tags/.claude/skills/irw-auto-tag/references/vocab.md` and this file goes away.
+**Status: all seven decisions made by Ben on 2026-09-01.** The rules below are
+what was approved; the reasoning is kept intact so each answer's basis stays
+visible. They fold into
+`tags/.claude/skills/irw-auto-tag/references/vocab.md`, and this file goes away
+once they are implemented and #1760 is closed with the after-action report.
 
 Context: #1760 asked @SamuelEnrique and @saviranadela which referent they had
 in mind when tagging. No reply as of 2026-09-01. The question they were asked
@@ -439,9 +441,9 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Seven decisions; **1–6 are settled** (2026-09-01) and are struck through below
-for the record. Only **7** (the merge policy) is open, and it is the one that
-decides whether Rule A reaches a user at all. Defaults on the rest are what the document says, so
+Seven decisions, **all settled 2026-09-01**, struck through below for the
+record. What follows is the reasoning as it was put to Ben, kept intact so the
+basis of each answer stays visible. Defaults on the rest are what the document says, so
 "approve" with no comment takes them as written.
 
 1. ~~**`age range` referent = the shipped table.**~~ (§A0) — **decided
@@ -469,9 +471,9 @@ decides whether Rule A reaches a user at all. Defaults on the rest are what the 
    after-action report as the last comment on #1760 and close it. The RAs are
    already on that thread, so the record and the notification are the same
    artifact. Draft below.
-7. **How a derived tag interacts with an existing human row** — see immediately
-   below. This one is not optional: without an answer, most of Rule A cannot
-   publish.
+7. ~~**How a derived tag interacts with an existing human row.**~~ — **decided
+   2026-09-01: option (a)**, a per-column exception for `age range`. Scope
+   spelled out below.
 
 ### 7, in full — the merge policy is in the way
 
@@ -509,6 +511,27 @@ My recommendation is **(a)**, with the derived rows carrying their `min`/`max`/
 under-18 share so any disagreement is inspectable rather than mysterious. Note
 that (a) is a change to a rule you set deliberately in #1723, which is why it is
 a decision and not an implementation detail.
+
+> **Decided by Ben, 2026-09-01: (a).**
+
+**Scope of (a), stated plainly, because it is larger than "fix a few rows".**
+
+- It is a **standing precedence rule**, not a one-off edit. For any table with a
+  usable `cov_age`, the derived `age range` outranks the human value — today's
+  rows and every row entered from now on. In effect `age range` becomes a
+  *computed* column for those tables, and a rater's entry there becomes
+  advisory. That is the point, but it should be said out loud.
+- The population is **1,243 tagged tables with `cov_age`**, not the 472 disputed
+  `Mixed` rows. The other 771 are mostly `Adult (18+)`, which the #1760 sample
+  found agreeing with the data 28 times in 30 — so most will be confirmed rather
+  than changed. Best estimate from that sample: a few hundred rows move, the
+  large majority of them `Mixed` → `Adult (18+)`.
+- **Nothing is edited in the Google Sheet.** The override happens at export in
+  `03_tags.R`, so the human value stays where it was typed and reverting is
+  deleting the override and re-running — the same shape as `tag_normalize.R`.
+- **The diff is reported before anything publishes** (adoption step 5). If the
+  real numbers look nothing like the estimate above, that is the moment to stop,
+  not after.
 
 ## Draft after-action report for #1760, for your edit
 
