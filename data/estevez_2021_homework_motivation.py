@@ -5,14 +5,31 @@ Source: https://zenodo.org/records/5156068
 DOI: 10.5281/zenodo.5156068
 Data: BASE_DATOS_PERFILES.sav
 License: CC BY 4.0
-Item text: not shipped -- the .sav carries no variable labels and no value
-    labels for any item, and the deposit has no codebook. The wording is in the
-    paper's instrument appendix (Estevez, Valle, Rodriguez, Pineiro, Vieites,
-    Gonzalez-Suarez & Rodriguez-Llorente); only the four Z-score columns carry
-    any label at all.
+Item text: partially available; not shipped in this batch. **The original
+    claim in this header was wrong and is corrected here** -- reopened and
+    checked independently 2026-09-01 under #1770, against the same file
+    (md5 003fc7cc425aed1d9c65545dd88b1042, matching the Zenodo checksum).
+    * Variable labels: the item stems really are absent -- no item column
+      carries one, and the wording is in the paper's instrument appendix
+      (Estevez, Valle, Rodriguez, Pineiro, Vieites, Gonzalez-Suarez &
+      Rodriguez-Llorente). But only **two** columns in the file carry a
+      variable label at all, `Zperceived.competence` and
+      `Zintrinsic.motivation` -- not "the four Z-score columns"; the file has
+      two Z-score columns.
+    * Value labels: "no value labels for any item" is false. 86 of the 99
+      columns carry them, **including all 82 shipped items** -- 77 on one
+      shared 1-5 set (TOTALMENTE FALSO .. TOTALMENTE CIERTO) and the five
+      homework-block items on item-specific 5-point sets of their own.
+    So this is a real `option_text` extraction with `item_text` blank, not a
+    dead end. Built and gated 2026-09-01 (validate_items.R 8/8 PASS on item
+    and resp sets; audit_batch.R 8 WARN "100% of rows have blank item_text",
+    which is the expected shape here). Held rather than uploaded pending the
+    call in #1770 on whether option-only item text ships.
 
-863 primary school students (ages 9-13) across 7 schools, all items on a
-1-5 format.
+863 primary school students (ages 9-13) across 13 schools, all items on a
+1-5 format. (**Corrected 2026-09-01, #1770**: "7 schools" and "CENTRO, 1-7"
+below were both wrong -- `CENTRO` runs 1-13, all thirteen codes are observed
+in the shipped tables, and the .sav's value labels name each school.)
 
 Tables written
 --------------
@@ -37,7 +54,12 @@ Coding notes
   at 4, all five are on the same 1-5 format, and the three named columns are
   the homework amount/time/time-use items the paper's abstract describes.
   That is a structural inference from the numbering, recorded here rather than
-  hidden.
+  hidden. **Corroborated 2026-09-01 (#1770):** those three columns carry
+  item-specific value labels that name exactly those three quantities --
+  `Cantid.deb` NINGUNO..TODOS (how much homework), `Tiemp.deb` MENOS DE 30
+  MINUTOS..MAS DE 2 HORAS (how long), `Aprov.tiem.deb` LO DESAPROVECHO
+  TOTALMENTE..LO APROVECHO TOTALMENTE (how well the time was used). The
+  inference stands on the source's own labels, not only on the numbering.
 * **`ALUMNO` is not a usable id**: 863 rows carry 862 distinct values, and the
   two rows sharing `ALUMNO=4` differ on age and on nearly every response, so
   they are two students with a collided code rather than one student twice.
@@ -53,9 +75,14 @@ Coding notes
   mean(IAM35..IAM39_recod); negative feelings = mean(IAM40, IAM42, IAM43).
   IAM is shipped as one 43-item table because the remaining 28 items are not
   assigned to any named subscale by anything in the deposit.
-* Covariates: `cov_school` (CENTRO, 1-7), `cov_age` (EDAD, 9-13),
-  `cov_gender` (GENERO, 1/2 -- the deposit does not say which is which),
-  `cov_grade` (CURSO, 1/2).
+* Covariates: `cov_school` (CENTRO, 1-13), `cov_age` (EDAD, 9-13),
+  `cov_gender` (GENERO, 1/2), `cov_grade` (CURSO, 1/2). **All three coded
+  covariates are decoded by the .sav's value labels** (found 2026-09-01,
+  #1770 -- the deposit *does* say which is which, contrary to what this note
+  claimed): GENERO 1=hombre, 2=mujer; CURSO 1=5ºEP, 2=6ºEP; CENTRO 1-13 named
+  (Cruceiro de Canido, Isaac Peral, Centieiras, Ponte de Xuvia, Piñeiros, Ceip
+  San Marcos (Abegondo), Recimil, CEIP Vales Villamarin, Ceip Ponzos, Ceip
+  Esteiro, Ceip Couceiro Freijomil, CPR Santiago Apóstol, CPR Jorge Juan).
 """
 
 import os
