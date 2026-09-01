@@ -237,6 +237,114 @@ local({
     check(identical(out, tag3), "a db with no file.live is untouched (nom)")
 })
 
+##--------------------------------------- derived age tags (#1760, decision 7) ---
+cat("\nderived age tags\n")
+
+write_derived <- function(rows, cols = DERIVED_COLS) {
+    d <- as.data.frame(do.call(rbind, rows), stringsAsFactors = FALSE)
+    names(d) <- cols
+    f <- tempfile(fileext = ".csv")
+    readr::write_csv(d, f)
+    f
+}
+
+##A tag frame in the shape get_tags() has at the point apply_derived_tags runs.
+tag_frame <- function() {
+    data.frame(
+        table = c("has_ages", "no_ages", "confirmed_one"),
+        `age range` = c("Mixed", "Mixed", "Adult (18+)"),
+        `child age (for child-focused studies)` = c("Adolescent (12-18y)", NA, NA),
+        sample = c("Educational", "Clinical", "Representative"),
+        `construct name` = c("A", "B", "C"),
+        check.names = FALSE, stringsAsFactors = FALSE)
+}
+
+drow <- function(tb, ar, ca = NA, basis = DERIVED_BASIS)
+    c(tb, ar, ca, basis, "18", "94", "2562", "0", "2026-09-01")
+
+##The core case: a derived value beats the Sheet, on its own column only.
+local({
+    f <- write_derived(list(drow("has_ages", "Adult (18+)")))
+    out <- apply_derived_tags(tag_frame(), f, "t")
+    r <- out[out$table == "has_ages", ]
+    check(r[["age range"]] == "Adult (18+)",
+          "a derived age range overrides the sheet value")
+    check(is.na(r[["child age (for child-focused studies)"]]),
+          "child age is overridden too, including to blank")
+    check(r[["sample"]] == "Educational" && r[["construct name"]] == "A",
+          "no other column is touched by the override")
+    check(nrow(out) == 3, "a matching derived row does not add a row")
+})
+
+##A table nobody has tagged gets a row created from the derivation alone.
+local({
+    f <- write_derived(list(drow("brand_new", "Child (<18y)", "Early (<6y)")))
+    out <- apply_derived_tags(tag_frame(), f, "t")
+    r <- out[out$table == "brand_new", ]
+    check(nrow(out) == 4 && nrow(r) == 1,
+          "a derived row for an untagged table is added")
+    check(r[["age range"]] == "Child (<18y)" && is.na(r[["sample"]]),
+          "an added row carries only the two derived columns")
+})
+
+##Case-insensitive matching, the trap that cost 308 rows elsewhere.
+local({
+    f <- write_derived(list(drow("HAS_AGES", "Adult (18+)")))
+    out <- apply_derived_tags(tag_frame(), f, "t")
+    check(nrow(out) == 3 && out[out$table == "has_ages", ][["age range"]] == "Adult (18+)",
+          "matching is case-insensitive, so no duplicate row is created")
+})
+
+##Guards.
+local({
+    f <- write_derived(list(drow("has_ages", "Adult (18+)", basis = "vibes")))
+    expect_error(apply_derived_tags(tag_frame(), f, "t"), "whose basis is not",
+                 "a row whose basis is not derived_cov_age is refused")
+
+    f2 <- write_derived(list(drow("has_ages", "Grown-ups")))
+    expect_error(apply_derived_tags(tag_frame(), f2, "t"), "outside the controlled vocabulary",
+                 "an age range outside the vocabulary is refused")
+
+    f3 <- write_derived(list(drow("has_ages", "Mixed"), drow("HAS_AGES", "Adult (18+)")))
+    expect_error(apply_derived_tags(tag_frame(), f3, "t"), "more than once",
+                 "the same table twice in the derived file is refused")
+
+    f4 <- write_derived(list(drow("has_ages", "Adult (18+)")[1:8]),
+                        cols = DERIVED_COLS[1:8])
+    expect_error(apply_derived_tags(tag_frame(), f4, "t"), "header does not match",
+                 "a derived file with the wrong header is refused")
+})
+
+##Absent file and unwired source both degrade to sheet-plus-auto behaviour.
+local({
+    t0 <- tag_frame()
+    check(identical(apply_derived_tags(t0, NULL, "nom"), t0),
+          "a db with no file.derived is untouched (nom)")
+    check(identical(apply_derived_tags(t0, file.path(tempdir(), "nope.csv"), "t"), t0),
+          "a missing derived file leaves the tags unchanged")
+})
+
+##The published `sample` rule from #1760: General is the residual.
+cat("\nsample frame residual (#1760, decision 3)\n")
+local({
+    x <- c("General/non-specific, Representative",
+           "General/non-specific, Targeted/specific",
+           "Educational, General/non-specific",
+           "Representative, Targeted/specific",
+           "General/non-specific")
+    out <- normalize_multiselect(x, "sample")
+    check(out[1] == "Representative" && out[2] == "Targeted/specific",
+          "General/non-specific is dropped beside a specific frame value")
+    check(out[3] == "Educational, General/non-specific",
+          "a setting atom does not displace General/non-specific")
+    check(out[4] == "Representative, Targeted/specific",
+          "Representative and Targeted/specific are never collapsed")
+    check(out[5] == "General/non-specific",
+          "General/non-specific alone is left alone")
+    check(identical(normalize_multiselect(out, "sample"), out),
+          "the rule is idempotent")
+})
+
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
 cat("all tests passed\n")

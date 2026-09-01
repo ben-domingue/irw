@@ -105,6 +105,102 @@ read_auto_tags <- function(path, label) {
     select_tag_cols(auto, label)
 }
 
+##Columns of the derived age file, and the only basis value it may carry.
+DERIVED_COLS  <- c("table", "age range", "child age (for child-focused studies)",
+                   "basis", "min_age", "max_age", "n_age", "share_under_18",
+                   "generated")
+DERIVED_BASIS <- "derived_cov_age"
+AGE_RANGE_VOCAB <- c("Child (<18y)", "Adult (18+)", "Mixed",
+                     "Elderly (minimum age >50)", "Non-human")
+
+##Derived age tags outrank the Sheet -- for two columns only (#1760, decision 7,
+##2026-09-01).
+##
+##This is a deliberate hole in the human-wins precedence set in #1723, and it is
+##scoped as narrowly as the decision allows: `age range` and `child age` on
+##tables whose own `cov_age` supports a derivation. The argument is that such a
+##value is not an opinion competing with a rater's -- it is a measurement of the
+##shipped table, which is what #1760 decided the column describes. Every other
+##column, and every table without usable ages, keeps human precedence untouched.
+##
+##Why it has to exist at all: 03_tags.R drops an auto row for any table a human
+##has tagged, and the Sheet is not writable from code (#1708 / 6.1). Without
+##this, Rule A would tag the ~1,120 untagged tables and change none of the ~472
+##`Mixed` rows that prompted the issue.
+##
+##The Sheet is never modified. The human value stays where it was typed, and
+##reverting this is deleting the file.derived entry and re-running.
+apply_derived_tags <- function(tag, path, label) {
+    if (is.null(path)) return(tag)
+    if (!file.exists(path)) {
+        print(paste0(label, ": no derived age file at ", path,
+                     " -- sheet and auto rows only"))
+        return(tag)
+    }
+    der <- readr::read_csv(path,
+                           col_types = readr::cols(.default = readr::col_character()),
+                           progress = FALSE)
+    if (!nrow(der)) return(tag)
+
+    if (!identical(names(der), DERIVED_COLS)) {
+        stop(label, ": ", path, " header does not match the expected layout. ",
+             "Expected: ", paste(DERIVED_COLS, collapse = ", "),
+             ". Found: ", paste(names(der), collapse = ", "))
+    }
+    basis <- trimws(as.character(der[["basis"]]))
+    bad <- is.na(basis) | basis != DERIVED_BASIS
+    if (any(bad)) {
+        stop(label, ": ", path, " has ", sum(bad), " row(s) whose basis is not '",
+             DERIVED_BASIS, "' (row ", paste(which(bad), collapse = ", "),
+             "). Only a value computed from the table's own cov_age may outrank ",
+             "the Sheet; anything else belongs in the Sheet or the auto file.")
+    }
+    ar <- trimws(as.character(der[["age range"]]))
+    off <- !is.na(ar) & nzchar(ar) & !(ar %in% AGE_RANGE_VOCAB)
+    if (any(off)) {
+        stop(label, ": ", path, " has ", sum(off), " row(s) with an `age range` ",
+             "outside the controlled vocabulary: ",
+             paste0('"', unique(ar[off]), '"', collapse = ", "))
+    }
+    if (anyDuplicated(tolower(der$table))) {
+        dup <- unique(tolower(der$table)[duplicated(tolower(der$table))])
+        stop(label, ": ", path, " names ", length(dup),
+             " table(s) more than once: ", paste(dup, collapse = ", "))
+    }
+
+    cols <- c("age range", "child age (for child-focused studies)")
+    stopifnot(all(cols %in% names(tag)))
+
+    key <- tolower(tag$table)
+    idx <- match(tolower(der$table), key)
+    hit <- !is.na(idx)
+
+    changed <- 0L; confirmed <- 0L
+    for (i in which(hit)) {
+        row <- idx[i]
+        was <- tag[[cols[1]]][row]
+        now <- der[[cols[1]]][i]
+        if (identical(as.character(was), as.character(now))) confirmed <- confirmed + 1L
+        else changed <- changed + 1L
+        for (cl in cols) tag[[cl]][row] <- der[[cl]][i]
+    }
+
+    ##Tables with no row anywhere yet: the derivation is the whole tag row.
+    add <- der[!hit, , drop = FALSE]
+    if (nrow(add)) {
+        blank <- tag[0, , drop = FALSE]
+        blank[seq_len(nrow(add)), ] <- NA_character_
+        blank$table <- tolower(add$table)
+        for (cl in cols) blank[[cl]] <- add[[cl]]
+        tag <- rbind(tag, blank)
+    }
+
+    print(paste0(label, ": derived age tags from ", path, " -- ", changed,
+                 " overridden, ", confirmed, " confirmed, ", nrow(add),
+                 " new row(s)"))
+    tag
+}
+
 get_tags <- function(db) {
     tag <- gsheet2tbl(db$url)
 
@@ -161,6 +257,12 @@ get_tags <- function(db) {
         print(paste0(db$name, ": +", nrow(auto), " auto rows from ", db$file.auto,
                      " (", sum(superseded), " superseded by the sheet)"))
     }
+
+    ##Derived age tags win over both the Sheet and the auto file, for their two
+    ##columns only. After the union so it can override either source; before the
+    ##liveness check so a derived row for a retired table is dropped like any
+    ##other.
+    tag <- apply_derived_tags(tag, db$file.derived, db$name)
 
     ##Drop tags for tables the IRW no longer publishes. 194 of the 2,480 rows
     ##in tags.csv name a table that is not live on Redivis -- retired or
@@ -225,6 +327,7 @@ dbs <- list(
     core = list(name = "core",
                 url = 'https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123',
                 file.auto = "../tags/tags_auto.csv",
+                file.derived = "../tags/age_range_derived.csv",
                 file.live = "metadata.csv",
                 file.out = "tags.csv"),
     ##`nom` has no file.auto on purpose. tags/nominal_tags_staging.csv looks like
