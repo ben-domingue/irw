@@ -1,0 +1,48 @@
+{
+  "generated": "2026-08-31T20:28:48-0700",
+  "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
+  "n_tables": 4134,
+  "coverage": {
+    "tags": {
+      "n": 2286,
+      "pct": 55.3
+    },
+    "itemtext": {
+      "n": 558,
+      "pct": 13.5
+    }
+  },
+  "tags_by_shard": {
+    "item_response_warehouse": {
+      "n_tables": 988,
+      "tagged": 987,
+      "pct": 99.9
+    },
+    "item_response_warehouse_2": {
+      "n_tables": 975,
+      "tagged": 755,
+      "pct": 77.4
+    },
+    "item_response_warehouse_3": {
+      "n_tables": 983,
+      "tagged": 268,
+      "pct": 27.3
+    },
+    "item_response_warehouse_4": {
+      "n_tables": 981,
+      "tagged": 260,
+      "pct": 26.5
+    },
+    "item_response_warehouse_5": {
+      "n_tables": 206,
+      "tagged": 16,
+      "pct": 7.8
+    },
+    "item_response_warehouse_6": {
+      "n_tables": 1,
+      "tagged": 0,
+      "pct": 0
+    }
+  },
+  "orphan_tag_rows": 194
+}
