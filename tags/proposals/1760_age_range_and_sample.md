@@ -279,6 +279,39 @@ definition, not a re-tagging campaign — which is the argument for making this
 call without the RAs: their labels are mostly right, and what is missing is the
 sentence nobody ever wrote down.
 
+**And 181 rows is 13 decisions, not 181.** The contradictions cluster by study,
+because one deposit becomes many tables: `sun_2025` (43 rows), `chile_2024`
+(42), `colombia_2023` (34), `uruguay_2022` (16), `lys_2020` (12), `chile_2023`
+(11), `wvs_panasiuk` (9), `spqvs_barnby` (6), `fryback_2009` (4), and four
+single-table studies. The 49 legitimate `Representative, Targeted/specific` rows
+are 6 studies, led by `guatemala_2024` (17), `florida_twins` (12) and
+`singh_2025` (9). Every one of the 181 is a human sheet row; none came from the
+auto-tagger, which has written only 10 rows in total so far.
+
+### B3. How B2 ships — and why it is not blocked by decision 7
+
+The contradiction rule is **mechanical**, so it does not need the sheet to be
+writable and does not need a human row to be overridden. It belongs in
+`metadata/tag_normalize.R`, which already rewrites these same two columns after
+the sheet export and before `tags.csv` is written (#1720) — the sheet is
+deliberately untouched, the transform is idempotent, and reverting is deleting
+the call and re-running.
+
+Concretely: after splitting a `sample` cell into atoms, drop
+`General/non-specific` if any other frame atom is present. That is the whole
+change, it repairs rows entered years ago as well as rows entered tomorrow, and
+it needs no judgment about any individual study.
+
+What it does **not** do is decide whether a table that currently reads
+`General/non-specific` alone should have been `Representative`. That is a
+per-table read against B2's "the claim must be the source's" test, it is not
+urgent, and it is ordinary tagging work rather than a rule change.
+
+This is the structural difference between Rule A and Rule B2: **A changes what
+the correct value is and therefore collides with the human-row precedence in
+#1723 (decision 7); B2 removes a value that cannot be correct alongside another
+one, and can ship at export today.**
+
 The 49 `Representative, Targeted/specific` rows are the evidence that the
 precedence-list version of this rule (pick one frame value, highest wins) would
 be wrong. An earlier draft of mine had exactly that; the data says otherwise.
