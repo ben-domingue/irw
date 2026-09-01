@@ -165,6 +165,22 @@ name of a survey programme, "undergraduates" or "college students" (which
 routinely include 17-year-olds), "adults" used loosely in an abstract, or the
 construct being measured.
 
+> **Decided by Ben, 2026-09-01.** "Definitely leave blank if we just don't
+> know."
+
+Two things this does and does not reach:
+
+- **It governs what gets written from here on, not a purge.** No existing cell
+  is blanked by this rule, because nothing records which of today's tags were
+  read off a source and which were guesses — the basis field in A4 is what makes
+  that distinguishable from now on. 1,000 tagged tables have no `cov_age` and
+  stay exactly as they are.
+- **Where it bites is new tagging.** Of the 1,891 live tables with no tag row,
+  1,120 have `cov_age` and are settled by A1; the remaining **771** are A2's
+  population, and a meaningful share of them will correctly end up blank rather
+  than tagged. Expect this rule to make coverage look slightly worse and be
+  slightly truer — which is the trade named in decision 5.
+
 Blank is the correct answer far more often than the current sheet suggests, and
 it is cheaper to fix than a wrong tag, because nothing downstream trusts a blank.
 
@@ -421,8 +437,8 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Seven decisions; **1, 2 and 3 are settled** (2026-09-01) and are struck through
-below for the record. Defaults on the rest are what the document says, so
+Seven decisions; **1, 2, 3 and 5 are settled** (2026-09-01) and are struck
+through below for the record. Defaults on the rest are what the document says, so
 "approve" with no comment takes them as written.
 
 1. ~~**`age range` referent = the shipped table.**~~ (§A0) — **decided
@@ -439,10 +455,10 @@ below for the record. Defaults on the rest are what the document says, so
    through `tag_normalize.R` per §B3, so it is not waiting on decision 7.
 4. **`child age` gets derived too** (§A3), from the same `cov_age` column.
    Say no and I leave that column entirely to human raters.
-5. **Blank beats a guess** (§A2). This will *reduce* filled cells on tables
-   whose source states nothing explicit about age. If you would rather keep a
-   best-guess tag with the basis recorded as `source_inferred`, say so — it is a
-   one-line change, and it is a real trade-off, not an oversight.
+5. ~~**Blank beats a guess** (§A2).~~ — **decided 2026-09-01: yes**, blank
+   whenever the source does not state it explicitly. Governs new tagging only;
+   no existing cell is blanked, since nothing records which of today's tags were
+   guesses.
 6. **Whether to tell the RAs**, and in what terms — draft below.
 7. **How a derived tag interacts with an existing human row** — see immediately
    below. This one is not optional: without an answer, most of Rule A cannot
