@@ -1,0 +1,1490 @@
+{
+ "weber2026_name_knowledge": {
+  "X1": {
+   "text": "Ich habe Angst, dass Falschaussagen mit meiner Person in Verbindung gebracht werden.",
+   "translated": "I am afraid that incorrect statements will be associated with me personally.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X2": {
+   "text": "Namensnennung finde ich aus kulturellen Gründen unangenehm.",
+   "translated": "I find being addressed by name uncomfortable for cultural reasons.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X3": {
+   "text": "In der Veranstaltung fühle ich mich wohler.",
+   "translated": "I feel more comfortable during the session.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X4": {
+   "text": "Ich finde es unangenehm, wenn mein Name in der Seminargruppe genannt wird.",
+   "translated": "I find it uncomfortable when my name is mentioned in the seminar group.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X5": {
+   "text": "Ich fühle mich besser auf Prüfungen vorbereitet.",
+   "translated": "I feel better prepared for examinations.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X6": {
+   "text": "Namensnennung finde ich aus persönlichen Gründen unangenehm.",
+   "translated": "I find being addressed by name uncomfortable for personal reasons.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X7": {
+   "text": "Ich fühle mich wertgeschätzter.",
+   "translated": "I feel more appreciated.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X8": {
+   "text": "Ich muss mich mehr überwinden, einen Beitrag zu leisten.",
+   "translated": "I have to overcome myself more to contribute.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X9": {
+   "text": "Ich fühle mich der Lerngruppe/dem Kurs zugehöriger.",
+   "translated": "I feel a stronger sense of belonging to the learning group / course.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X10": {
+   "text": "Wenn ich etwas Falsches sage, denken meine Mitstudierenden schlecht über mich.",
+   "translated": "If I say something incorrect, my fellow students think poorly of me.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X11": {
+   "text": "Ich kann mir die Inhalte längerfristiger merken.",
+   "translated": "I can remember the content for a longer period of time.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X12": {
+   "text": "Ich fühle mich als Person ernstgenommener.",
+   "translated": "I feel taken more seriously as a person.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X13": {
+   "text": "Ich finde Namensnennung unangenehm, weil ich mich in sozialen Situationen leicht unsicher fühle.",
+   "translated": "I find being addressed by name uncomfortable because I feel insecure in social situations.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X14": {
+   "text": "Die Lernumgebung fühlt sich sicherer an.",
+   "translated": "The learning environment feels safer.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X15": {
+   "text": "Ich bin konzentrierter.",
+   "translated": "I am more focused.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X16": {
+   "text": "Ich habe das Gefühl, dass meine Beiträge ernster genommen werden.",
+   "translated": "I have the feeling that my contributions are taken more seriously.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X17": {
+   "text": "Durch die Namensnennung wird in meine Privatsphäre eingegriffen.",
+   "translated": "Being addressed by name interferes with my privacy.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X18": {
+   "text": "Ich fühle mich unter Druck gesetzt, mich zu äußern.",
+   "translated": "I feel pressured to express myself.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X19": {
+   "text": "Ich interessiere mich dadurch mehr für die Inhalte des Fachs.",
+   "translated": "I become more interested in the subject content.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X20": {
+   "text": "Ich verstehe die Inhalte besser.",
+   "translated": "I understand the content better.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X21": {
+   "text": "Ich möchte den Dozenten nicht mit meiner Leistung enttäuschen.",
+   "translated": "I do not want to disappoint the instructor with my performance.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X22": {
+   "text": "Namensnennung empfinde ich als aufdringlich.",
+   "translated": "I perceive being addressed by name as intrusive.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X23": {
+   "text": "Es ist einfacher, Fehler zu machen und Fragen zu stellen.",
+   "translated": "It is easier to make mistakes and ask questions.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X24": {
+   "text": "Wenn ich etwas Falsches sage, denkt der Dozent schlecht über mich.",
+   "translated": "If I say something incorrect, the instructor thinks poorly of me.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X25": {
+   "text": "Ich fühle mich als individuelle Person wahrgenommen.",
+   "translated": "I feel perceived as an individual person.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X26": {
+   "text": "Meine Sicherheit für folgende Prüfungen nimmt zu.",
+   "translated": "My confidence for future examinations increases.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X27": {
+   "text": "Ich bleibe lieber anonym, sodass ich der Veranstaltung stumm folgen kann.",
+   "translated": "I prefer to remain anonymous so that I can follow the session silently.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X28": {
+   "text": "Ich komme durch Namensnennung öfter mit Kommilitonen außerhalb der Veranstaltung ins Gespräch.",
+   "translated": "I have more conversations with fellow students outside the session due to name mention.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X29": {
+   "text": "Ich kann meinen Lernfortschritt mehr reflektieren.",
+   "translated": "I can reflect more on my learning progress.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X30": {
+   "text": "Ich werde nervös, dass ich eher aufgerufen werden könnte.",
+   "translated": "I become nervous that I might be called on more often.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X31": {
+   "text": "Ich werde mir meiner eigenen Präsenz im Raum stärker bewusst.",
+   "translated": "I become more aware of my own presence in the room.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X32": {
+   "text": "Ich habe das Gefühl, von Kommilitonen stärker bewertet zu werden.",
+   "translated": "I have the feeling that I am evaluated more strongly by fellow students.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X33": {
+   "text": "Ich traue mich lieber, Fragen zu stellen.",
+   "translated": "I find it easier to ask questions.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X34": {
+   "text": "Ich versuche soziale Normen sorgsamer zu erfüllen (z. B. Pünktlichkeit).",
+   "translated": "I try to comply more carefully with social norms (e.g., punctuality).",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X35": {
+   "text": "Ich beteilige mich häufiger.",
+   "translated": "I participate more frequently.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X36": {
+   "text": "Ich höre aufmerksamer zu.",
+   "translated": "I listen more attentively.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X37": {
+   "text": "Ich investiere mehr Zeit in die Vor- und Nachbereitung.",
+   "translated": "I invest more time in preparation and follow-up.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X38": {
+   "text": "Ich komme durch Namensnennung öfter mit Kommilitonen während der Veranstaltung ins Gespräch.",
+   "translated": "I come into conversation with fellow students during the session more often due to name use.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X39": {
+   "text": "Ich nutze Fehltermine weniger.",
+   "translated": "I miss fewer sessions.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X40": {
+   "text": "Ich unterlasse ablenkende Tätigkeiten (z. B. Handynutzung).",
+   "translated": "I refrain more from distracting activities (e.g., mobile phone use).",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X41": {
+   "text": "Ich habe das Gefühl, von Kommilitonen stärker bewertet zu werden.",
+   "translated": "I have the feeling that I am evaluated more strongly by fellow students.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X42": {
+   "text": "Die Hemmschwelle, dem Dozenten persönliche Probleme entgegenzubringen, sinkt dadurch.",
+   "translated": "The threshold for addressing personal problems to the instructor decreases as a result.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X43": {
+   "text": "Die Veranstaltung wird dadurch interaktiver.",
+   "translated": "The session becomes more interactive as a result.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X44": {
+   "text": "Der Dozent spricht mich eher an, wenn er glaubt, dass ich Wissensdefizite habe.",
+   "translated": "The instructor addresses me more often if they believe that I have knowledge gaps.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X45": {
+   "text": "Ich nehme Sprechstundenangebote eher wahr.",
+   "translated": "I am more likely to make use of office hour offers.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X46": {
+   "text": "Namensnennung weckt in mir die Hoffnung, dass sich Vorteile im Studienverlauf ergeben (z. B. Promotion, Praktikum).",
+   "translated": "Being addressed by name raises my hope that advantages for me may arise during my studies (e.g., doctoral thesis, internship).",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X47": {
+   "text": "Meine Vorkenntnisse werden eher berücksichtigt.",
+   "translated": "My prior knowledge is taken into account more strongly.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X48": {
+   "text": "Die Veranstaltung wird dadurch strukturierter.",
+   "translated": "The session becomes more structured as a result.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X49": {
+   "text": "Meine Lernerfolge werden eher gelobt.",
+   "translated": "My learning achievements are praised more often.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X50": {
+   "text": "Der Dozent spricht mich gezielter an, um mein Wissen zu überprüfen.",
+   "translated": "The instructor addresses me more specifically to assess my knowledge.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X51": {
+   "text": "Ich habe das Gefühl, dass namentlich bekannte Studierende von Dozierenden bevorzugt werden.",
+   "translated": "I have the feeling that students who are known by name are preferred by instructors.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X52": {
+   "text": "Der Dozent erscheint kompetenter.",
+   "translated": "The instructor appears more competent.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X53": {
+   "text": "Die persönliche Ansprache steigert meine Motivation, mich mit den Inhalten zu beschäftigen.",
+   "translated": "Personal address increases my motivation to engage with the subject content.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X54": {
+   "text": "Ich suche direkt davor oder danach eher das individuelle Gespräch mit dem Dozierenden.",
+   "translated": "I am more likely to seek individual conversation with the instructor directly before or after the session.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X55": {
+   "text": "Der Dozent wird dadurch sympathischer.",
+   "translated": "The instructor becomes more likeable as a result.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X56": {
+   "text": "Ich habe das Gefühl, dass mein Lernerfolg für den Dozenten wichtiger ist.",
+   "translated": "I have the feeling that my learning success is more important to the instructor.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X57": {
+   "text": "Die Ansprache erfolgt selektiv, sodass mein individueller Wissenstand berücksichtigt wird.",
+   "translated": "Addressing is selective, so that my individual level of knowledge is taken into account.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X58": {
+   "text": "Ich werde häufiger angesprochen.",
+   "translated": "I am addressed more frequently.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  },
+  "X59": {
+   "text": "Ich habe das Gefühl, der Dozent möchte mich herauspicken.",
+   "translated": "I have the feeling that the instructor wants to single me out.",
+   "opts": {
+    "1": "Stimme überhaupt nicht zu",
+    "2": "Stimme nicht zu",
+    "3": "Teils/Teils",
+    "4": "Stimme zu",
+    "5": "Stimme voll und ganz zu"
+   }
+  }
+ },
+ "boudreau_2022_police_reform": {
+  "certif": {
+   "text": "All things considered, do you support or oppose creating a statewide process to revoke the certification of police officers guilty of serious crimes or misconduct?",
+   "opts": {
+    "1": "Strongly support creating a statewide process to revoke the certification of police officers guilty of serious crimes or misconduct",
+    "2": "Somewhat support creating a statewide process to revoke the certification of police officers guilty of serious crimes or misconduct",
+    "3": "Somewhat oppose creating a statewide process to revoke the certification of police officers guilty of serious crimes or misconduct",
+    "4": "Strongly oppose creating a statewide process to revoke the certification of police officers guilty of serious crimes or misconduct",
+    "5": "Don’t know"
+   }
+  },
+  "carotid": {
+   "text": "All things considered, do you support or oppose prohibiting the use of a carotid hold by the police?",
+   "opts": {
+    "1": "Strongly support prohibiting the use of a carotid hold by the police",
+    "2": "Somewhat support prohibiting the use of a carotid hold by the police",
+    "3": "Somewhat oppose prohibiting the use of a carotid hold by the police",
+    "4": "Strongly oppose prohibiting the use of a carotid hold by the police",
+    "5": "Don’t know"
+   }
+  },
+  "review": {
+   "text": "All things considered, do you support or oppose creating a division within the state’s Department of Justice to investigate shootings and use of deadly force incidents involving the police?",
+   "opts": {
+    "1": "Strongly support creating a division to investigate shootings and use of deadly force incidents",
+    "2": "Somewhat support creating a division to investigate shootings and use of deadly force incidents",
+    "3": "Somewhat oppose creating a division to investigate shootings and use of deadly force incidents",
+    "4": "Strongly oppose creating a division to investigate shootings and use of deadly force incidents",
+    "5": "Don’t know"
+   }
+  },
+  "interv": {
+   "text": "All things considered, do you support or oppose requiring police officers to physically stop and report another officer using excessive force, and punishing police officers who do not take these actions?",
+   "opts": {
+    "1": "Strongly support requiring police officers to physically stop and report another officer using excessive force, and punishing police officers who do not take these actions",
+    "2": "Somewhat support requiring police officers to physically stop and report another officer using excessive force, and punishing police officers who do not take these actions",
+    "3": "Somewhat oppose requiring police officers to physically stop and report another officer using excessive force, and punishing police officers who do not take these actions",
+    "4": "Strongly oppose requiring police officers to physically stop and report another officer using excessive force, and punishing police officers who do not take these actions",
+    "5": "Don’t know"
+   }
+  }
+ },
+ "kushnir2017_anrt": {
+  "(ANRT_1) These products help people to feel less irritable when they quit smoking": {
+   "text": "These products help people to feel less irritable when they quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_2) These products help people to feel less depressed when they quit smoking": {
+   "text": "These products help people to feel less depressed when they quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_3) These products help people to cope with cigarette cravings": {
+   "text": "These products help people to cope with cigarette cravings",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_4) These products help people to quit smoking": {
+   "text": "These products help people to quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_5) These products help people to feel less anxious when they quit smoking": {
+   "text": "These products help people to feel less anxious when they quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_6) It is reassuring to know that these products are available": {
+   "text": "It is reassuring to know that these products are available",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_7) Knowing that these products exist encourages people to try to quit smoking": {
+   "text": "Knowing that these products exist encourages people to try to quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_8) These products help people to resist the need to smoke in situations where smoking is NOT possible": {
+   "text": "These products help people to resist the need to smoke in situations where smoking is NOT possible",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_9) I am concerned about the side effects of these products": {
+   "text": "I am concerned about the side effects of these products",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_10) I am wary of these products": {
+   "text": "I am wary of these products",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_11) There is a risk of becoming dependent on these products": {
+   "text": "There is a risk of becoming dependent on these products",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  },
+  "(ANRT_12) I do NOT need these products in order to quit smoking": {
+   "text": "I do NOT need these products in order to quit smoking",
+   "opts": {
+    "1": "Strongly disagree",
+    "2": "Do NOT really agree",
+    "3": "More or less agree",
+    "4": "Generally agree",
+    "5": "Fully agree"
+   }
+  }
+ },
+ "karajko2025_ai_risk": {
+  "p8_1": {
+   "text": "Zdravstvo (npr. podrška u dijagnostici, personalizovana medicina).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_2": {
+   "text": "Osiguranje (npr. otkrivanje prevara, personalizovana procjena rizika).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_3": {
+   "text": "Poljoprivreda (npr. robotska žetva, optimizacija usjeva).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_4": {
+   "text": "Finansije (npr. otkrivanje prevara, podrška u donošenju odluka o kreditima).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_5": {
+   "text": "Vojni sektor (npr. automatizovano oružje, sajber sigurnost za zaštitu podataka).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_6": {
+   "text": "Sprovođenje zakona (npr. prediktivno policijsko planiranje kako bi se identifikovala područja gdje je zločin moguć, prepoznavanje lica na javnim mjestima).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_7": {
+   "text": "Zaštita životne sredine (npr. predikcija klime, prognoza energetske žetve).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_8": {
+   "text": "Transport (npr. samovozeća vozila).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_9": {
+   "text": "Proizvodnja (npr. predviđanje potražnje, robotika).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  },
+  "p8_10": {
+   "text": "Upravljanje ljudskim resursima (npr. selekcija životopisa, planiranje radne snage).",
+   "opts": {
+    "1": "Snažno ne odobravam",
+    "2": "Ne odobravam",
+    "3": "Neutralan",
+    "4": "Odobravam",
+    "5": "Snažno odobravam"
+   }
+  }
+ },
+ "karajko2025_ai_governance": {
+  "p12_1": {
+   "text": "Skup zakona koje provodi nacionalna vlast i garantuje etičke standarde i društvenu odgovornost u primjeni VI.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  },
+  "p12_2": {
+   "text": "Dobrovoljne certifikacije koje izdaju pouzdane i kompetentne agencije koje garantuju etičke standarde i društvenu odgovornost u primjeni VI.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  },
+  "p12_3": {
+   "text": "Imati nezavisne stručne subjekte koji nadziru upotrebu i zloupotrebu VI u društvu, uključujući javni sektor, i informišu građane.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  },
+  "p12_4": {
+   "text": "Usvajanje i primjena samoregulisajućeg kodeksa ponašanja ili seta etičkih smjernica pri razvoju ili korištenju proizvoda VI.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  },
+  "p12_5": {
+   "text": "Pružanje jasnih i transparentnih informacija od strane pružaoca usluga koje opisuju svrhu, ograničenja i korištenje podataka proizvoda VI.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  },
+  "p12_6": {
+   "text": "Formiranje dizajnerskih timova koji promovišu raznolikost i društvenu uključenost (npr. rodnu raznolikost, različitu stručnost, etničku pripadnost, itd.) i konsultacije s različitim akterima tokom cijelog životnog ciklusa proizvoda VI.",
+   "opts": {
+    "1": "Uopšte nije važno",
+    "2": "Malo važno",
+    "3": "Umjereno važno",
+    "4": "Važno",
+    "5": "Vrlo važno"
+   }
+  }
+ },
+ "karajko2025_ai_trust": {
+  "p14_1": {
+   "text": "Nacionalne vlade i javne vlasti.",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p14_2": {
+   "text": "Evropska unija (uključujući Evropsku komisiju/Parlament).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p14_3": {
+   "text": "Univerziteti i istraživački centri.",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p14_4": {
+   "text": "Udruženja potrošača, sindikati i društvene organizacije.",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p14_5": {
+   "text": "Tehnološke kompanije koje razvijaju VI proizvode.",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p14_6": {
+   "text": "Kompanije društvenih mreža.",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  }
+ },
+ "balmas2018_leader_personality": {
+  "c1": {
+   "text": "Rate your general attitude towards [Germany; Israel] on the (thermometer) scale ranging from 1=dislike to 5=like",
+   "opts": {
+    "1": "Dislike",
+    "5": "Like"
+   }
+  },
+  "c2": {
+   "text": "Rate your respect for [Germany; Israel] on a scale ranging from 1=not very strong to 5=extremely strong",
+   "opts": {
+    "1": "Not very strong",
+    "5": "Extremely strong"
+   }
+  },
+  "c3": {
+   "text": "Untrustworthy-Trustworthy",
+   "opts": {
+    "1": "Untrustworthy",
+    "5": "Trustworthy"
+   }
+  },
+  "c4": {
+   "text": "Dishonest-Honest",
+   "opts": {
+    "1": "Dishonest",
+    "5": "Honest"
+   }
+  },
+  "c5": {
+   "text": "Cold-Warm",
+   "opts": {
+    "1": "Cold",
+    "5": "Warm"
+   }
+  },
+  "c8": {
+   "text": "Aggressive-Not aggressive",
+   "opts": {
+    "1": "Aggressive",
+    "5": "Not aggressive"
+   }
+  },
+  "c10": {
+   "text": "Threatening-Not threatening",
+   "opts": {
+    "1": "Threatening",
+    "5": "Not threatening"
+   }
+  },
+  "c11": {
+   "text": "Unfriendly-Friendly",
+   "opts": {
+    "1": "Unfriendly",
+    "5": "Friendly"
+   }
+  },
+  "c13": {
+   "text": "Not brave-Brave",
+   "opts": {
+    "1": "Not brave",
+    "5": "Brave"
+   }
+  },
+  "c14": {
+   "text": "Not intelligent-Intelligent",
+   "opts": {
+    "1": "Not intelligent",
+    "5": "Intelligent"
+   }
+  },
+  "c15": {
+   "text": "Not moral-Moral",
+   "opts": {
+    "1": "Not moral",
+    "5": "Moral"
+   }
+  },
+  "c16": {
+   "text": "Not ambitious-Ambitious",
+   "opts": {
+    "1": "Not ambitious",
+    "5": "Ambitious"
+   }
+  },
+  "c18": {
+   "text": "Devious-Not devious",
+   "opts": {
+    "1": "Devious",
+    "5": "Not devious"
+   }
+  },
+  "c26": {
+   "text": "In your opinion, is the attitude towards [Germany; Israel] projected in the article positive or negative? Please rate your position on a scale of 1 to 5 (1=very positive; 5=very negative)",
+   "opts": {
+    "1": "Very negative",
+    "5": "Very positive"
+   }
+  }
+ },
+ "balmas2018_leader_attitudes": {
+  "a3": {
+   "text": "Please, rate your interest in [US; Israel] political issues on a scale of 1 (low interest) to 5 (high interest)",
+   "opts": {
+    "1": "Low interest",
+    "5": "High interest"
+   }
+  },
+  "a4": {
+   "text": "Rate your interest in foreign politics on a scale of 1 (low interest) to 5 (high interest)",
+   "opts": {
+    "1": "Low interest",
+    "5": "High interest"
+   }
+  },
+  "a5": {
+   "text": "Rate your interest in [America's; Israel's] foreign relations with other countries on a scale of 1 (low interest) to 5 (high interest)",
+   "opts": {
+    "1": "Low interest",
+    "5": "High interest"
+   }
+  }
+ },
+ "lee2024_relative_clause": {
+  "__header_row2__": [
+   "ID",
+   "1. s gap ph",
+   "2. o gap ph",
+   "3.o gap cl_SO",
+   "4. SS",
+   "5. SO",
+   "6. OS",
+   "7. OO",
+   "8. SP",
+   "9. OP",
+   "10. PS",
+   "11. PO",
+   "12. PP",
+   "13. SG",
+   "14. OG",
+   "15. PG",
+   "16. S IO",
+   "17. O IO",
+   "18. P IO",
+   "19. missing _SP",
+   "20. resumptive _Prepositional Stranding",
+   "21. missing _OP",
+   "22. PS_OP",
+   "23. resumptive_SP",
+   "24. pied-piping_PP",
+   "25. pied-piping_SP",
+   "",
+   "",
+   "",
+   "",
+   "",
+   ""
+  ]
+ },
+ "Adherence_Zissette_2018_SDB": {
+  "q_s_025_SDB": {
+   "text": "I don’t care what other people think of me.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_026_SDB": {
+   "text": "I never hesitate to go out of my way to help someone in trouble.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_027_SDB": {
+   "text": "I have never intensely disliked anyone.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_028_SDB": {
+   "text": "I sometimes feel angry when I don't get my way.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_029_SDB": {
+   "text": "I like to gossip at times. (By gossip, we mean talking behind people's backs.)",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_030_SDB": {
+   "text": "I do not always tell the truth.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_031_SDB": {
+   "text": "No matter who I'm talking to, I'm always a good listener.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_032_SDB": {
+   "text": "I can remember \"playing sick\" to get out of something.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_056_SDB": {
+   "text": "There have been occasions when I took advantage of someone.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_057_SDB": {
+   "text": "I'm always willing to admit it when I make a mistake.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_058_SDB": {
+   "text": "I always try to practice what I preach.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_059_SDB": {
+   "text": "I don't think it's very difficult to get along with people who talk too much and like attention.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_060_SDB": {
+   "text": "I sometimes try to get even, rather than forgive and forget.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_061_SDB": {
+   "text": "I do admit it if I don't know something.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_062_SDB": {
+   "text": "I am always polite, even to people who are disagreeable.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_063_SDB": {
+   "text": "At times I have really insisted on having things my own way.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_084_SDB": {
+   "text": "There have been occasions when I felt like hitting things.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_085_SDB": {
+   "text": "I would never think of letting someone else be punished for my wrongdoings.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_086_SDB": {
+   "text": "I never resent being asked to return a favor.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_087_SDB": {
+   "text": "I have never been upset when people expressed ideas very different from my own.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_088_SDB": {
+   "text": "There have been times when I was quite jealous of the good fortune of others.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_089_SDB": {
+   "text": "I have almost never felt the urge to tell someone I think they are wrong.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_090_SDB": {
+   "text": "I am sometimes irritated by people who ask favors of me.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_091_SDB": {
+   "text": "I have never felt that I was punished without cause.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_092_SDB": {
+   "text": "I sometimes think when people have a misfortune they only got what they deserved.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  },
+  "q_s_093_SDB": {
+   "text": "I have never intentionally said something that hurt someone's feelings.",
+   "opts": {
+    "1": "Disagree a Lot",
+    "2": "Disagree Somewhat",
+    "3": "Disagree a Little",
+    "4": "Agree a Little",
+    "5": "Agree Somewhat",
+    "6": "Agree a Lot"
+   }
+  }
+ }
+}
