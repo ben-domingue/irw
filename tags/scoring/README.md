@@ -57,6 +57,36 @@ prediction against NA is correct rather than an abstention.
 | `age_range` | 73.0% | 97.4% | 71.1% |
 | `construct_type` | 64.9% | 100% | 64.9% |
 | `sample` | **41.7%** | 94.7% | 39.5% |
+
+### Set equality hides which way a multi-select column fails
+
+`sample` and `construct_type` are scored on set equality, so predicting two of a
+construct's three facets scores the same zero as naming an unrelated one. Those
+two columns have similar exact-match rates and are not alike:
+
+| column | n | exact | subset | superset | disjoint | shares >=1 atom |
+|---|---|---|---|---|---|---|
+| `primary_languages` | 33 | 90.9% | 3 | 0 | 0.0% | **100%** |
+| `construct_type` | 37 | 64.9% | 5 | 2 | 16.2% | **83.8%** |
+| `sample` | 36 | 41.7% | 3 | 0 | **50.0%** | 50.0% |
+
+`construct_type` mostly disagrees about *granularity*: `preschool_sel_akt` gold
+is `{Affective/mental health, Cognitive/educational, Developmental}` and the
+tagger returned two of those three. `sample` mostly picks a *different category*:
+
+    gold Targeted/specific     ->  pred Representative
+    gold General/non-specific  ->  pred Representative
+    gold Educational           ->  pred Targeted/specific
+
+Is a national probability survey `General/non-specific` or `Representative`?
+`vocab.md` lists the nine atoms and defines none of them. 2.1 (#1720) made these
+vocabularies enforced but not defined, which is the same root cause as #1760.
+So `sample`'s 41.7% is not a measure of model capability -- it measures asking a
+model to match a convention nobody has written down.
+
+Consequence for 2.3 (#1722): these two columns should not share a verdict. One
+needs its vocabulary defined; the other mostly needs a scoring rule that credits
+a partial match. Regenerate this table with `score.py`.
 | `child_age` | 75.0% | 66.7% | 50.0% (n=6) |
 
 ## What the numbers say
