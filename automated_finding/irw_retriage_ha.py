@@ -47,7 +47,7 @@ REVIEW_COL_PATTERNS = re.compile(
 )
 
 ITEM_LIKE = re.compile(
-    r"\b(item|q\d+|i\d+|[a-z]{1,4}\d{1,3}r?|[a-z]{2,8}_\d{2,3}|subject|respond|id)\b",
+    r"\b(item|q\d+|i\d+|[a-z]{1,4}\d{1,3}r?|[a-z]{2,8}\d{0,3}_\d{1,3}|subject|respond|id)\b",
     re.IGNORECASE,
 )
 
