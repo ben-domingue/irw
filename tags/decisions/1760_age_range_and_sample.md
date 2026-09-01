@@ -209,7 +209,13 @@ natural thing for #1767's `status.json` to publish.
 
 ### What A does to the corpus, measured
 
-| | count |
+> **Superseded by measurement, 2026-09-01.** The estimates below counted any
+> column whose name *contains* `cov_age`, which also catches `cov_age_band`,
+> `cov_age_group`, `cov_age_range` and `cov_age_months` — 179 tables that have
+> no `cov_age` at all. The corrected figures, and what the rule actually did,
+> are in *The dry run* below. The estimates are left as written.
+
+| | count (as estimated) |
 |---|---|
 | Live tables carrying `cov_age` | 2,363 of 4,134 |
 | …already tagged, so the tag becomes checkable | 1,243 |
@@ -221,6 +227,76 @@ The 1,120 is the part worth noticing. Tag coverage fell 6.4 points between
 2026-08-29 and 2026-08-31 because the denominator grows faster than hand
 tagging; A1 is the first rule here that adds tagged tables **as fast as the
 corpus grows**, because it reads the corpus rather than a person.
+
+---
+
+## The dry run — what Rule A actually did
+
+Run 2026-09-01 over the whole corpus, Redivis-side (`tags/derive_age_range.py`);
+report in `tags/age_range_dry_run.md`, per-table numbers in
+`tags/age_range_audit.csv`. **Nothing was published.**
+
+**2,184** live tables carry a literal `cov_age` column — not the 2,363 estimated
+above, which was a substring match. Of those:
+
+| | tables |
+|---|---|
+| Derived | **1,735** |
+| Unusable — fewer than 30 respondents with an age | 166 |
+| Unusable — banded codes (the `cov_age_band` shape) | 98 |
+| Unusable — ages outside `[0, 120]` | 81 |
+| Quarantined — ages equally consistent with months | 104 |
+
+Against the currently published column:
+
+| outcome | tables |
+|---|---|
+| New row, on a table nothing had tagged | **740** |
+| Confirmed — the human tag was already right | 607 |
+| **Changed** | **379** |
+| Filled a blank | 5 |
+| `Non-human` preserved (the derivation is refused) | 4 |
+
+Every change, by direction:
+
+| from | to | tables |
+|---|---|---|
+| `Mixed` | `Adult (18+)` | 334 |
+| `Child (<18y)` | `Mixed` | 30 |
+| `Adult (18+)` | `Mixed` | 11 |
+| `Mixed` | `Elderly (minimum age >50)` | 3 |
+| `Adult (18+)` | `Child (<18y)` | 1 |
+
+All seven tables named in #1760 resolve to `Adult (18+)`.
+
+The estimate offered before the run was "a few hundred rows move, the large
+majority `Mixed` → `Adult (18+)`". That held: 379 and 334.
+
+**The 2% floor decided 209 tables**, all of which have respondents on both sides
+of 18. The closest call is `kim_2023_*` at 1.98% — 4 respondents under 18 of
+202. Nothing sits between 1.98% and 2%, so the exact threshold is not
+load-bearing anywhere in the corpus today.
+
+### Two bugs the dry run caught
+
+Both were in the implementation, not the rules, and both are fixed and tested.
+
+1. **Below the floor, the tag fell through to `Adult (18+)` regardless of which
+   side held the majority.** `benitezsillero_2021_bullying` — ages 12–20, 1,417
+   respondents under 18 against 24 over — came out `Adult (18+)`. The floor is
+   supposed to hand the table to its *majority* side; it now does.
+2. **A derived age overrode `Non-human` on four tables.** Ages cannot contradict
+   `Non-human`: the derivation has no way to know the respondents are not
+   people, which is why A1 has it short-circuit. `03_tags.R` now refuses that
+   override and reports the count.
+
+### One finding that is not about tagging
+
+The 81 tables with ages outside `[0, 120]` are not a tagging problem — they are
+shipped data that is wrong: 34 with a sentinel maximum (999, 1999, 9999), 16
+with a negative minimum (a date stored as an age, e.g. `-18090`), 31 otherwise
+out of range. `irw_filter()` treats all of them as ages. Filed as **#1779**, and
+it belongs to item 1's validator rather than here.
 
 ---
 
