@@ -1,0 +1,26 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Cantid.deb",NA,NA,NA,NA,NA,"NINGUNO",1
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Cantid.deb",NA,NA,NA,NA,NA,"ALGUNOS",2
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Cantid.deb",NA,NA,NA,NA,NA,"LA MITAD",3
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Cantid.deb",NA,NA,NA,NA,NA,"CASI TODOS",4
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Cantid.deb",NA,NA,NA,NA,NA,"TODOS",5
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Tiemp.deb",NA,NA,NA,NA,NA,"MENOS DE 30 MINUTOS",1
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Tiemp.deb",NA,NA,NA,NA,NA,"DE 30 A UNA HORA",2
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Tiemp.deb",NA,NA,NA,NA,NA,"DE UNA HORA A HORA Y MEDIA",3
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Tiemp.deb",NA,NA,NA,NA,NA,"DE HORA Y MEDIA A DOS HORAS",4
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Tiemp.deb",NA,NA,NA,NA,NA,"MAS DE 2 HORAS",5
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Aprov.tiem.deb",NA,NA,NA,NA,NA,"LO DESAPROVECHO TOTALMENTE",1
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Aprov.tiem.deb",NA,NA,NA,NA,NA,"LO DESAPROVECHO MAS DE LO QUE DEBIERA",2
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Aprov.tiem.deb",NA,NA,NA,NA,NA,"REGULAR",3
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Aprov.tiem.deb",NA,NA,NA,NA,NA,"LO APROVECHO BASTANTE",4
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","Aprov.tiem.deb",NA,NA,NA,NA,NA,"LO APROVECHO TOTALMENTE",5
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE4",NA,NA,NA,NA,NA,"NO SIRVEN PARA NADA",1
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE4",NA,NA,NA,NA,NA,"SON POCO ÚTILES",2
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE4",NA,NA,NA,NA,NA,"SON ALGO ÚTILES",3
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE4",NA,NA,NA,NA,NA,"SON BASTANTE ÚTILES",4
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE4",NA,NA,NA,NA,NA,"SON MUY ÚTILES",5
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE5",NA,NA,NA,NA,NA,"MUY MALO",1
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE5",NA,NA,NA,NA,NA,"TIRANDO A MALO",2
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE5",NA,NA,NA,NA,NA,"REGULAR",3
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE5",NA,NA,NA,NA,NA,"BUENO",4
+"estevez_2021_homework_engagement","estevez_2021_homework_engagement_1","EDE5",NA,NA,NA,NA,NA,"MUY BUENO",5

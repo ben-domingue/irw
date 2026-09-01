@@ -13397,6 +13397,19 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   mean(IAM40, IAM42, IAM43). Recorded in the script header for a later item
   text pass. Item text not shipped -- no labels, no codebook.
 
+  > **Correction, 2026-09-01 (#1770).** "No variable labels at all" and "no
+  > labels, no codebook" are wrong; the entry is left as written and corrected
+  > here. The .sav was reopened independently (md5 matches the Zenodo
+  > checksum): no *variable* label on any item column, true -- but **86 of 99
+  > columns carry value labels, including all 82 shipped items**, plus
+  > `GENERO`, `CURSO` and all thirteen `CENTRO` school names. So the block
+  > split still had to be done on prefixes, but the anchors were extractable
+  > all along. `option_text` for all 8 tables has now been built and gated
+  > (validate_items.R 8/8 PASS, audit_batch.R 8 WARN "100% blank item_text",
+  > expected with the stems still in the paper); held pending the call in
+  > #1770 on whether option-only item text ships. Also corrected there:
+  > the study covers **13** schools, not 7.
+
 - **`zenodo.13855427` -- Chen (2024), Chinese fitness coaches. 16 tables /
   57,095 responses.** Sixteen prefix blocks, deliberately not renamed: `TS` is
   confirmed thrill seeking by its one stray variable label and JE/DS/SC/TS read
@@ -13406,6 +13419,13 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   block-mean columns the deposit also ships each have a maximum of exactly 7.0,
   which is only reachable if the items run to 7. Asserted in the script before
   those columns are dropped, so no table was split on an observed maximum.
+
+  > **Correction, 2026-09-01 (#1770).** The skip verdict was rechecked against
+  > the same .sav and **stands** -- no shipped item carries a variable or a
+  > value label. Two details were wrong: the file has five variable labels,
+  > not one (`TS1` plus the four covariate columns, which carry the
+  > questionnaire's own numbered questions), and `TS1`'s label is the
+  > truncated "thrillseeking 需求刺激，se". Details in the script header.
 
 - **`zenodo.15168213` -- Torok et al. (2025), "Trust, Awareness, and Risk
   Perception in the Online Environment", n=1,003 Hungarian CATI survey.
