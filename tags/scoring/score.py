@@ -43,8 +43,26 @@ RENAME = {"Internet-based (Mturkers, etc)": "Internet-based",
           "Internet-based (Mturkers": "Internet-based"}
 DROP = {"etc)"}
 
+##`sample`'s frame facet, decided in #1760 on 2026-09-01 and enforced on export
+##by metadata/tag_normalize.R. Gold has been through that rule since the
+##2026-09-01 run; predictions were written before it existed, so they get it
+##here. Without this, a prediction of "General/non-specific, Representative"
+##scores as wrong against a gold of "Representative" for a disagreement the
+##convention has since defined away -- which would measure the tagger against a
+##question nobody could answer at the time.
+FRAME_RESIDUAL = "General/non-specific"
+FRAME_SPECIFIC = {"Representative", "Targeted/specific"}
 
-def norm(v, multi):
+
+def apply_frame_residual(atoms, column):
+    if column != "sample" or FRAME_RESIDUAL not in atoms:
+        return atoms
+    if not (FRAME_SPECIFIC & set(atoms)):
+        return atoms
+    return [a for a in atoms if a != FRAME_RESIDUAL]
+
+
+def norm(v, multi, column=None):
     """Canonicalise a cell to a comparable frozen set, or None when empty/NA."""
     if v is None:
         return None
@@ -55,6 +73,7 @@ def norm(v, multi):
         v = v.replace(a, b)
     atoms = [a.strip() for a in v.split(",")]
     atoms = [a for a in atoms if a and a not in DROP]
+    atoms = apply_frame_residual(atoms, column)
     if not atoms:
         return None
     return tuple(sorted(set(atoms)))
@@ -74,12 +93,19 @@ def _miss_kind(gv, pv):
     return "disjoint"        # nothing in common
 
 
+def atom_prf(gv, pv):
+    """Per-atom true/false positives and negatives for one multi-select cell."""
+    g, p = set(gv), set(pv)
+    return len(g & p), len(p - g), len(g - p)
+
+
 def run(pred_path, sample_path):
     gold = {r["table"].strip().lower(): r for r in csv.DictReader(open(GOLD))}
     preds = json.load(open(pred_path))
     sample = {x["table"]: x["warehouse"] for x in json.load(open(sample_path))}
 
     stats = {p: collections.Counter() for p, _, _ in COLS}
+    atoms = {p: collections.Counter() for p, _, _ in COLS}
     confusion = {p: collections.Counter() for p, _, _ in COLS}
     per_ws = collections.defaultdict(collections.Counter)
     abst = []
@@ -96,7 +122,8 @@ def run(pred_path, sample_path):
             continue
         per_ws[ws]["tables"] += 1
         for pkey, gcol, multi in COLS:
-            gv, pv = norm(g.get(gcol), multi), norm(pr.get(pkey), multi)
+            gv, pv = (norm(g.get(gcol), multi, pkey),
+                      norm(pr.get(pkey), multi, pkey))
             s = stats[pkey]
             if pkey == "child_age":
                 if gv is None and pv is None:
@@ -122,11 +149,15 @@ def run(pred_path, sample_path):
                 confusion[pkey][(", ".join(gv), ", ".join(pv))] += 1
             if multi:
                 s[_miss_kind(gv, pv)] += 1
-    return stats, confusion, per_ws, abst, preds
+                tp, fp, fn = atom_prf(gv, pv)
+                atoms[pkey]["tp"] += tp
+                atoms[pkey]["fp"] += fp
+                atoms[pkey]["fn"] += fn
+    return stats, confusion, per_ws, abst, preds, atoms
 
 
 if __name__ == "__main__":
-    stats, confusion, per_ws, abst, preds = run(sys.argv[1], sys.argv[2])
+    stats, confusion, per_ws, abst, preds, atoms = run(sys.argv[1], sys.argv[2])
     tagged = sum(1 for p in preds if p.get("status") == "tagged")
     pct = 100 * len(abst) / len(preds) if preds else 0
     print(f"tables: {len(preds)} attempted | {tagged} tagged | {len(abst)} abstained "
@@ -169,6 +200,34 @@ if __name__ == "__main__":
               f"{f(shared,n):>9s}")
     print("  A subset or superset is a granularity disagreement on a genuinely")
     print("  multi-faceted answer; a disjoint miss is a different answer entirely.")
+
+    ##Partial credit, per ATOM rather than per cell (#1722). Exact match asks
+    ##"did it name the whole answer", which is the right question for a
+    ##single-select column and the wrong one where the gold answer routinely has
+    ##two or three facets: naming two of three scores the same zero as naming
+    ##something unrelated. Micro-averaged over atoms:
+    ##
+    ##  precision = of the atoms it named, how many were right   (over-tagging)
+    ##  recall    = of the atoms gold holds, how many it found   (under-tagging)
+    ##
+    ##Reported ALONGSIDE exact match, never instead of it. A bar set on F1 alone
+    ##would pass a tagger that reliably names one facet of three.
+    print("\nmulti-select, per-atom (micro-averaged) -- partial credit:")
+    print(f"  {'column':20s} {'tp':>5s} {'fp':>5s} {'fn':>5s} "
+          f"{'precision':>10s} {'recall':>8s} {'F1':>7s}")
+    for pkey, _, _ in multi:
+        a = atoms[pkey]
+        tp, fp, fn = a["tp"], a["fp"], a["fn"]
+        if not (tp + fp + fn):
+            continue
+        prec = tp / (tp + fp) if tp + fp else 0.0
+        rec = tp / (tp + fn) if tp + fn else 0.0
+        f1 = 2 * prec * rec / (prec + rec) if prec + rec else 0.0
+        print(f"  {pkey:20s} {tp:5d} {fp:5d} {fn:5d} "
+              f"{100*prec:9.1f}% {100*rec:7.1f}% {100*f1:6.1f}%")
+    print("  Precision below recall means over-tagging; recall below precision")
+    print("  means it names too few facets. They fail differently, and a single")
+    print("  exact-match number cannot tell you which.")
 
     print("\nconfusions (gold -> predicted):")
     for pkey, _, _ in COLS:

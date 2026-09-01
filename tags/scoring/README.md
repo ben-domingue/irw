@@ -1,11 +1,64 @@
 # Auto-tagger scoring (issue #1721, sub-action 2.2)
 
-Scores the `irw-auto-tag` skill against the human-tagged gold set, per column.
-Run 2026-08-30. Reproduce with:
+Scores the `irw-auto-tag` skill against the gold set, per column.
+Predictions were produced 2026-08-30. Reproduce with:
 
 ```bash
 python3 score.py predictions_2026-08-30.json sample_2026-08-30.json
 ```
+
+## Two scored runs, same predictions
+
+`results_2026-08-30.txt` and `results_2026-09-01.txt` are the SAME 60 blind
+predictions scored against gold before and after #1760. Nothing about the tagger
+changed between them. What changed is what it was being marked against:
+
+| column | 2026-08-30 | 2026-09-01 | why |
+|---|---|---|---|
+| `age_range` | 73.0% | **86.5%** | gold is now derived from each table's own `cov_age`; 10 of the 38 scored tables had their gold corrected |
+| `sample` | 41.7% | **44.4%** | `General/non-specific` is the frame residual now, applied to both sides |
+| others | unchanged | unchanged | |
+
+**`age_range`'s 13.5-point gain is entirely gold.** The tagger was right more
+often than the old gold said — which is the finding #1760 was opened to test,
+now measured rather than argued. Cite the 2026-09-01 numbers; the earlier ones
+scored against labels that have since been withdrawn.
+
+## Partial credit, per atom
+
+Exact match asks "did it name the whole answer". For a multi-select column whose
+gold answer routinely has two or three facets, that is the wrong question:
+naming two of three scores the same zero as naming something unrelated. So the
+2026-09-01 run also reports micro-averaged per-atom precision and recall.
+
+| column | exact | precision | recall | F1 |
+|---|---|---|---|---|
+| `primary_languages` | 90.9% | **100.0%** | 91.7% | 95.7% |
+| `construct_type` | 64.9% | 80.0% | 69.6% | 74.4% |
+| `child_age` | 75.0% | 80.0% | 100.0% | 88.9% |
+| `sample` | 44.4% | 52.6% | 48.8% | 50.6% |
+
+The two columns that look similar on exact match are not alike, and this is what
+separates them. `construct_type` **under-tags**: when it names a facet it is
+right 80% of the time, and it misses 30% of the facets gold holds. `sample` is
+wrong in both directions at once, which is what a missing convention looks like
+rather than a granularity disagreement.
+
+`primary_languages` never names a language that is not there; it just misses
+secondary ones. That is the least damaging failure shape available.
+
+These are reported ALONGSIDE exact match, never instead of it — a bar set on F1
+alone would pass a tagger that reliably names one facet of three.
+
+**`sample` barely moved, and that is informative.** The frame rule removes a
+contradiction from the gold but does not teach the tagger anything: these
+predictions were written before the rule existed. The residual errors are now
+diagnosable rather than mysterious — see `results_2026-09-01.txt`, where 8 of 20
+are the tagger claiming `Representative` for a source that never claimed it, and
+5 are it answering the SETTING facet when gold recorded the FRAME. Both are
+things `vocab.md` now states, so `sample` needs the tagger re-run against the
+current vocabulary before any shipping bar is set against it. 44.4% is a
+pre-rule number.
 
 ## Method
 
