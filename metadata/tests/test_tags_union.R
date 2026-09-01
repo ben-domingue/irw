@@ -175,6 +175,68 @@ repo_files <- function() {
 }
 repo_files()
 
+
+##--------------------------------------------- retired tables (#1765, 2.5a) ---
+##drop_retired_tables() removes tags for tables the IRW no longer publishes.
+##The failure modes matter more than the happy path: a missing or truncated
+##metadata.csv must never be able to delete the tag corpus, and the match must
+##be case-insensitive because 308 tag rows differ from their metadata row only
+##by case.
+
+with_oracle <- function(tables, f) {
+    d <- tempfile(); dir.create(d)
+    live <- file.path(d, "metadata.csv")
+    readr::write_csv(data.frame(table = tables), live)
+    on.exit(unlink(d, recursive = TRUE), add = TRUE)
+    f(live)
+}
+
+tag3 <- data.frame(table = c("alive_one", "RETIRED_one", "alive_two"),
+                   `age range` = c("Adult (18+)", "Mixed", "Mixed"),
+                   check.names = FALSE)
+
+##Happy path: the retired row goes, the live ones stay.
+with_oracle(c(paste0("filler", 1:1200), "alive_one", "alive_two"), function(live) {
+    db <- list(name = "t", file.live = live, file.out = file.path(tempdir(), "tags.csv"))
+    out <- drop_retired_tables(tag3, db)
+    check(nrow(out) == 2 && !("RETIRED_one" %in% out$table),
+          "drop_retired_tables removes a tag row whose table is not live")
+    side <- file.path(tempdir(), "retired_tags.csv")
+    check(file.exists(side) && nrow(readr::read_csv(side, show_col_types = FALSE)) == 1,
+          "dropped rows are written to retired_tags.csv, not discarded")
+})
+
+##Case-insensitivity: 308 real rows depend on this.
+with_oracle(c(paste0("filler", 1:1200), "ALIVE_ONE", "alive_two"), function(live) {
+    db <- list(name = "t", file.live = live, file.out = file.path(tempdir(), "tags2.csv"))
+    out <- drop_retired_tables(tag3, db)
+    check("alive_one" %in% out$table,
+          "a tag row matching its metadata row only by case is kept, not dropped")
+})
+
+##A truncated oracle must not be able to wipe the corpus.
+with_oracle(c("alive_one"), function(live) {
+    db <- list(name = "t", file.live = live, file.out = file.path(tempdir(), "tags3.csv"))
+    out <- suppressWarnings(drop_retired_tables(tag3, db))
+    check(nrow(out) == nrow(tag3),
+          "an implausibly small metadata.csv is refused as an oracle, nothing dropped")
+})
+
+##A missing oracle is a warning, not a silent purge and not a hard stop.
+local({
+    db <- list(name = "t", file.live = file.path(tempdir(), "does_not_exist.csv"),
+               file.out = file.path(tempdir(), "tags4.csv"))
+    out <- suppressWarnings(drop_retired_tables(tag3, db))
+    check(nrow(out) == nrow(tag3),
+          "a missing metadata.csv publishes everything rather than dropping it")
+})
+
+##nom has no file.live and must be left entirely alone.
+local({
+    out <- drop_retired_tables(tag3, list(name = "nom", file.out = "nominal_tags.csv"))
+    check(identical(out, tag3), "a db with no file.live is untouched (nom)")
+})
+
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
 cat("all tests passed\n")

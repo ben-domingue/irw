@@ -162,6 +162,23 @@ get_tags <- function(db) {
                      " (", sum(superseded), " superseded by the sheet)"))
     }
 
+    ##Drop tags for tables the IRW no longer publishes. 194 of the 2,480 rows
+    ##in tags.csv name a table that is not live on Redivis -- retired or
+    ##renamed -- and none of them is merely awaiting a metadata row (#1765).
+    ##They are published anyway, so the table overstates coverage, and
+    ##Rpkg's .irw_filter_rows_to_live_tables() then removes them again on read.
+    ##That filter is correct but silent, so the published CSV and irw_tags()
+    ##disagree by ~8% for reasons no user can see. Dropping here makes the
+    ##published table mean what it says and leaves the R-package filter with
+    ##nothing to do.
+    ##
+    ##metadata.csv is the liveness oracle rather than a Redivis call: 01
+    ##runs before 03, and it is currently row-for-row identical to the live
+    ##catalog (4,134 = 4,134, zero drift either way, #1765). Matching is
+    ##case-insensitive -- 308 tag rows differ from their metadata row only by
+    ##case, and a case-sensitive join would silently discard every one.
+    tag <- drop_retired_tables(tag, db)
+
     ##Normalise the multi-select columns before writing. Fails loudly on any
     ##atom outside the controlled vocabulary rather than publishing it -- the
     ##union happens above precisely so auto rows face the same check.
@@ -171,10 +188,44 @@ get_tags <- function(db) {
     invisible(tag)
 }
 
+##Rows whose table is absent from the live catalog. Returns `tag` unchanged,
+##loudly, if the oracle is missing or implausibly small -- a truncated
+##metadata.csv must never be able to delete the tag corpus.
+drop_retired_tables <- function(tag, db, min_oracle_rows = 1000) {
+    if (is.null(db$file.live)) return(tag)          ##nom has its own catalog
+    if (!file.exists(db$file.live)) {
+        warning(db$name, ": ", db$file.live, " not found; publishing ",
+                nrow(tag), " tag rows without a liveness check. Run ",
+                "01_metadata.R first.", call. = FALSE)
+        return(tag)
+    }
+    live <- readr::read_csv(db$file.live, show_col_types = FALSE)
+    if (!"table" %in% names(live) || nrow(live) < min_oracle_rows) {
+        warning(db$name, ": ", db$file.live, " has ", nrow(live),
+                " row(s); too few to trust as a liveness oracle (expected at ",
+                "least ", min_oracle_rows, "). Skipping the retired-table ",
+                "check rather than risk dropping live tags.", call. = FALSE)
+        return(tag)
+    }
+    retired <- !(tolower(tag$table) %in% tolower(live$table))
+    if (any(retired)) {
+        ##Keep them on disk. These rows are real human annotation work, and a
+        ##retired table can come back under the same name.
+        out <- file.path(dirname(db$file.out),
+                         paste0("retired_", basename(db$file.out)))
+        readr::write_csv(tag[retired, , drop = FALSE], out)
+        print(paste0(db$name, ": dropped ", sum(retired),
+                     " tag row(s) for tables no longer live -> ", out))
+        tag <- tag[!retired, , drop = FALSE]
+    }
+    tag
+}
+
 dbs <- list(
     core = list(name = "core",
                 url = 'https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123',
                 file.auto = "../tags/tags_auto.csv",
+                file.live = "metadata.csv",
                 file.out = "tags.csv"),
     ##`nom` has no file.auto on purpose. tags/nominal_tags_staging.csv looks like
     ##an auto file -- same 13 columns -- but it is an empty scaffold: every Rater
