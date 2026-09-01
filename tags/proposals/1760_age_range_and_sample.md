@@ -355,6 +355,46 @@ no comment means all six as written.
    best-guess tag with the basis recorded as `source_inferred`, say so — it is a
    one-line change, and it is a real trade-off, not an oversight.
 6. **Whether to tell the RAs**, and in what terms — draft below.
+7. **How a derived tag interacts with an existing human row** — see immediately
+   below. This one is not optional: without an answer, most of Rule A cannot
+   publish.
+
+### 7, in full — the merge policy is in the way
+
+`03_tags.R` unions the sheet with `tags/*_auto.csv` and **drops any automated
+row for a table a human has already tagged** (#1723). The precedence is
+whole-row, not per-column, and the sheet is read-only from code — there is no
+service account and, per that file's own header comment, there is not going to
+be one until #1708 / #1732.
+
+That splits Rule A's payoff cleanly in two:
+
+| | tables | publishes today? |
+|---|---|---|
+| Tables with `cov_age` and **no** tag row — a derived tag is new information | **1,120** | **yes**, nothing is in the way |
+| Tables with `cov_age` and an existing human tag, including the 472 disputed `Mixed` rows | 1,243 | **no** — the automated row is dropped before it reaches the export |
+
+So as things stand, adopting Rule A would tag 1,120 new tables and change **none**
+of the rows that prompted #1760. Three ways out:
+
+- **(a) A per-column exception.** For `age range` only, a tag with basis
+  `derived_cov_age` outranks a human value; every other column keeps human
+  precedence. Recommended: it is ~10 lines in `03_tags.R`, it is the only option
+  that fixes the defect this issue is about, and it is defensible on exactly the
+  ground that made A0 the right referent — a value computed from the table's own
+  data is not an opinion competing with a rater's, it is a measurement. The
+  human value stays in the sheet and stays recoverable.
+- **(b) Publish the 1,120, leave human rows alone.** Deliverable immediately,
+  no policy change, and dishonest by omission: `irw_filter(age_range = "Mixed")`
+  keeps returning adults-only tables indefinitely.
+- **(c) Wait for a Sheets write path** and fix the rows at source. Correct in
+  principle, blocked behind #1708 / #1732 / 6.1, which is a Ben-decision item
+  with no date.
+
+My recommendation is **(a)**, with the derived rows carrying their `min`/`max`/
+under-18 share so any disagreement is inspectable rather than mysterious. Note
+that (a) is a change to a rule you set deliberately in #1723, which is why it is
+a decision and not an implementation detail.
 
 ## Draft note to the RAs, for your edit
 
