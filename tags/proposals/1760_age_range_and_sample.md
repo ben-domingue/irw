@@ -61,12 +61,26 @@ Current distribution of the column, across the 2,480 tagged rows:
 
 ## Rule A — `age range`
 
-### A0. Referent
+### A0. Referent and definition
+
+> **Decided by Ben, 2026-09-01.** `Mixed` means **more than one of the age
+> ranges we otherwise use is present in the table**.
 
 **The tag describes the shipped IRW table, not the source study or its target
-population.** This is option 1 in #1760.
+population** — option 1 in #1760. The definition above is what settles it:
+"present" is a question you can only ask of a table. Under the source-study
+referent there is nothing for anyone to be present *in*.
 
-Three reasons, in the order they carry weight:
+Operationally, since the categories are not a clean partition (see A0b):
+
+> **`Mixed` = the table contains at least one person under 18 **and** at least
+> one person aged 18 or over.** One boundary, at 18.
+
+That sentence is also what #1743 asks for: `vocab.md` has never said that a
+range crossing 18 is `Mixed`.
+
+Three reasons the shipped-table referent is right, in the order they carry
+weight:
 
 1. Every other column in the sheet describes the shipped table. One column
    silently describing something else is the ambiguity, whatever value it takes.
@@ -78,6 +92,23 @@ Three reasons, in the order they carry weight:
    auditable and self-updating. Under the source-study referent it stays a hand
    label that decays as the corpus grows — the exact failure item 2 exists to
    fix. This third reason holds even if the RAs reply "we meant the study."
+
+### A0b. Two categories that are not person-level bands
+
+`Mixed` has exactly one boundary because two of the neighbouring distinctions
+do **not** create one. Both are easy to read into the plain-language definition
+and neither is intended:
+
+- **`Elderly (minimum age >50)` is a property of the sample, not of a person.**
+  It says the *minimum* age exceeds 50 — everyone in the table is over 50 — not
+  "this respondent is elderly." So a 30–80 sample does not contain "adults and
+  elderly people": it is `Adult (18+)`. Only a table where every respondent is
+  over 50 is `Elderly`. This is why A1 tests `min > 50` before it tests anything
+  about 18.
+- **The child sub-bands live in a different column.** `Early (<6y)` /
+  `Child (6-12y)` / `Adolescent (12-18y)` are values of `child age`, not of
+  `age range`. A 4–15 year-old sample spans three of them and is
+  `Child (<18y)`, not `Mixed`.
 
 ### A1. Derivation, when the table's own ages are usable
 
@@ -99,7 +130,7 @@ Then, in this order, first match wins:
 |---|---|---|
 | 1 | respondents are not human | `Non-human` |
 | 2 | `min(cov_age) > 50` | `Elderly (minimum age >50)` |
-| 3 | under-18s and 18+ both present, **and** the smaller of the two groups is ≥ `MINOR_SHARE` of respondents | `Mixed` |
+| 3 | under-18s and 18+ both present (A0), **and** the smaller of the two groups is ≥ `MINOR_SHARE` of respondents | `Mixed` |
 | 4 | `max(cov_age) < 18` | `Child (<18y)` |
 | 5 | otherwise | `Adult (18+)` |
 
@@ -339,13 +370,17 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Six decisions. Defaults are what the document currently says, so "approve" with
-no comment means all six as written.
+Seven decisions; **1 and 2 are settled** (2026-09-01) and are struck through
+below for the record. Defaults on the rest are what the document says, so
+"approve" with no comment takes them as written.
 
-1. **`age range` referent = the shipped table.** (§A0) — the load-bearing one.
-2. **`MINOR_SHARE = 0.02`.** Set it to `0` for a purely literal rule; nothing in
-   #1760's cases changes either way. This is the parameter I am least able to
-   defend from first principles.
+1. ~~**`age range` referent = the shipped table.**~~ (§A0) — **decided
+   2026-09-01: yes**, with Ben's formulation of `Mixed` adopted as the
+   definition and the two non-boundaries recorded in A0b.
+2. ~~**`MINOR_SHARE = 0.02`**~~ — **decided 2026-09-01: kept at 0.02.** Read
+   literally, "is present" implies `0`; the tolerance was kept deliberately, so
+   a table with three minors out of 46,000 is not served to someone filtering
+   for children.
 3. **`Representative` and `Targeted/specific` may co-occur** (§B2), and
    `General/non-specific` is the residual that never co-occurs with either.
 4. **`child age` gets derived too** (§A3), from the same `cov_age` column.
