@@ -565,11 +565,10 @@ on it, and the record and the notification are then the same artifact.
    only sources, never `cov_age`), with the basis field from A4.
 5. Regenerate, and report the diff **before** anything publishes: how many tags
    changed, in which direction, and how many tables gained a first tag.
-6. Tell @SamuelEnrique and @saviranadela what was decided and why — framed as a
-   re-derivation under a stated rule, not a correction of their work. Their
-   labels being consistently at odds with `cov_age` in one specific direction is
-   evidence they applied a rule; it was just a different one from the one the
-   filters assume.
+6. Implement B2 in `tag_normalize.R` (§B3) — mechanical, ships independently of
+   everything above, and independently of decision 7.
+7. Post the after-action report as the last comment on #1760 and close it. The
+   RAs are on that thread; the record and the notification are one artifact.
 
 ---
 
