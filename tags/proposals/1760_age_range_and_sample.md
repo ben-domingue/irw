@@ -439,9 +439,9 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Seven decisions; **1, 2, 3, 4 and 5 are settled** (2026-09-01) and are struck
-through below for the record. Only **6** (telling the RAs) and **7** (the merge
-policy) are open. Defaults on the rest are what the document says, so
+Seven decisions; **1–6 are settled** (2026-09-01) and are struck through below
+for the record. Only **7** (the merge policy) is open, and it is the one that
+decides whether Rule A reaches a user at all. Defaults on the rest are what the document says, so
 "approve" with no comment takes them as written.
 
 1. ~~**`age range` referent = the shipped table.**~~ (§A0) — **decided
@@ -464,7 +464,11 @@ policy) are open. Defaults on the rest are what the document says, so
    whenever the source does not state it explicitly. Governs new tagging only;
    no existing cell is blanked, since nothing records which of today's tags were
    guesses.
-6. **Whether to tell the RAs**, and in what terms — draft below.
+6. ~~**Whether to tell the RAs**, and in what terms.~~ — **decided
+   2026-09-01:** no separate note. Once every decision is made, post an
+   after-action report as the last comment on #1760 and close it. The RAs are
+   already on that thread, so the record and the notification are the same
+   artifact. Draft below.
 7. **How a derived tag interacts with an existing human row** — see immediately
    below. This one is not optional: without an answer, most of Rule A cannot
    publish.
@@ -506,29 +510,50 @@ under-18 share so any disagreement is inspectable rather than mysterious. Note
 that (a) is a change to a rule you set deliberately in #1723, which is why it is
 a decision and not an implementation detail.
 
-## Draft note to the RAs, for your edit
+## Draft after-action report for #1760, for your edit
 
-> On the tagging conventions question in #1760: we have gone ahead and written
-> the rules down rather than leave the tag work blocked, so nothing here is a
-> judgment about your tagging — the rule you were being asked about had never
-> been stated, which is the actual defect.
+Posted as the last comment on the issue, which closes with it. Addressed to the
+thread rather than to @SamuelEnrique and @saviranadela specifically — they are
+on it, and the record and the notification are then the same artifact.
+
+> **Closing this with the conventions written down.**
 >
-> For `age range`, the tag now describes the **table as shipped in the IRW**, not
-> the source study's target population. Where a table has a `cov_age` column we
-> derive the tag from the ages actually present, so most of these stop being a
-> judgment call. Tables tagged `Mixed` whose data contain no respondents under 18
-> will be re-derived to `Adult (18+)` — that is a change of convention, not a
-> correction of your work.
+> This issue asked two questions we could not settle from the data, and it did
+> not get an answer. That is not a criticism of anyone: the questions were about
+> *intent* — what the existing labels were describing — and the underlying
+> defect was that the rule had never been stated at all. So rather than leave
+> the tag work blocked, the rules are now written, and disagreeing with one is a
+> concrete edit rather than an open question.
 >
-> For `sample`, the three overlapping values now have a stated boundary:
-> `General/non-specific` means "no representativeness claim and no restricted
-> frame", so it never appears alongside `Representative` or `Targeted/specific`.
-> Those two *can* appear together — a representative sample of a specific
-> population is both.
+> **`age range` describes the table as shipped in the IRW**, not the source
+> study's target population. `Mixed` means more than one of the age ranges we
+> otherwise use is present in the table — operationally, at least one person
+> under 18 and at least one person 18 or over, with a 2% floor on the smaller
+> group. Where a table has a usable `cov_age`, the tag is derived from the ages
+> actually present rather than judged. Tables currently tagged `Mixed` whose data
+> contain no respondents under 18 will be re-derived to `Adult (18+)`; that is a
+> change of convention, not a correction of anyone's work — 25 of the 26
+> contested tables have a minimum age of exactly 18, which is a consistent rule
+> being applied, not carelessness.
 >
-> If either rule is not what you intended, say so on #1760 and we will change the
-> rule; it is written down now, so disagreeing with it is a concrete edit rather
-> than an open question.
+> Two things that look like extra boundaries and are not:
+> `Elderly (minimum age >50)` is a property of the whole sample, so a 30–80
+> sample is `Adult (18+)`; and the `Early/Child/Adolescent` bands live in
+> `child age`, so a 4–15 sample is `Child (<18y)`.
+>
+> **`sample` had two facets sharing one column.** `Educational`, `Clinical`,
+> `Program-based` and `Internet-based` answer *how were these people reached*;
+> `Representative`, `Targeted/specific` and `General/non-specific` answer *how
+> broad was the sampling*. `General/non-specific` is a catch-all: it is not used
+> when one of the other two applies, so it never appears alongside them. Those
+> two **can** appear together — a representative sample of a specific population
+> is both. 181 rows across 13 studies are repaired by that rule; 2,299 of 2,480
+> are untouched.
+>
+> Full reasoning, worked examples and the alternatives considered:
+> `tags/proposals/1760_age_range_and_sample.md` (PR #1776).
+>
+> If either rule is not what you intended, say so and we will change the rule.
 
 ## If approved
 
