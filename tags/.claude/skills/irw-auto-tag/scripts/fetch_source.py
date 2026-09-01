@@ -15,14 +15,18 @@ It still does not decide whether content is a paywall -- but it now reports
 OpenAlex's asserted `oa_status`, so that judgement has evidence behind it
 rather than being inferred from a blocked fetch. PDFs are extracted to text.
 
-Data repositories get their own route (#1786). Dataverse and figshare answer a
-bot challenge on their web pages -- Dataverse returns HTTP 202 with a ZERO-byte
-body whatever user agent you send -- while their APIs return the record. Some
-Mendeley records serve a JavaScript shell. All three are asked through their API
-instead, and where the deposit names the paper it backs, that DOI is adopted and
-followed down the ordinary path, which is where usable prose lives. Deposit
-metadata is returned only as a fallback and is labelled `repository_metadata`
-so the caller can tell a catalogue record from a paper.
+Data repositories get their own route (#1786). Their web pages answer a bot
+challenge or a JavaScript shell -- Dataverse returns HTTP 202 with a ZERO-byte
+body whatever user agent you send, and every OSF project page is the same 4.2kB
+of CSS -- while their APIs return the record. OSF, Dataverse, figshare and
+Mendeley are asked through their APIs instead, and where the deposit names the
+paper it backs, that DOI is adopted and followed down the ordinary path, which
+is where usable prose lives. Deposit metadata is returned only as a fallback and
+is labelled `repository_metadata` so the caller can tell a catalogue record from
+a paper.
+
+OSF is the one that matters most by volume: 1,065 of the dictionary's 4,330 rows
+name it, more than Dataverse, figshare and Mendeley combined.
 
 Usage:
     python fetch_source.py TABLE --doi 10.1037/a0022874
@@ -383,6 +387,60 @@ def mendeley_api(doi, url):
     return "\n".join(parts), api, related
 
 
+def osf_api(doi, url):
+    """(text, source, related_doi) from an OSF node or preprint, or None.
+
+    OSF is the largest single source in the dictionary -- 1,065 of 4,330 rows
+    name it, more than Dataverse, figshare and Mendeley combined -- and every
+    one of its project pages is the same 4.2kB JavaScript shell, which the
+    fetcher correctly rejects as `too_short` and then has nothing else to try.
+    The API answers 200 with the record.
+    """
+    ident = None
+    m = re.search(r"osf\.io/([A-Za-z0-9]{5})", url or "")
+    if m:
+        ident = m.group(1)
+    elif doi and "10.17605/osf.io/" in (doi or "").lower():
+        ident = doi.lower().split("10.17605/osf.io/", 1)[1].strip("/ ")
+    if not ident:
+        return None
+
+    attrs = None
+    for kind in ("nodes", "preprints"):
+        api = f"https://api.osf.io/v2/{kind}/{ident}/"
+        try:
+            r = requests.get(api, headers=UA, timeout=30)
+            if r.status_code != 200:
+                continue
+            attrs = (r.json().get("data") or {}).get("attributes") or {}
+        except (requests.RequestException, ValueError, AttributeError):
+            continue
+        if attrs:
+            break
+    if not attrs:
+        return None
+
+    # A preprint record names the published article; a project sometimes does.
+    related = None
+    for key in ("doi", "article_doi", "original_publication_doi"):
+        v = attrs.get(key)
+        if isinstance(v, str) and v.strip().startswith("10.") and "osf.io" not in v.lower():
+            related = v.strip()
+            break
+
+    keep = ("title", "description", "category", "tags", "subjects",
+            "date_published", "node_license")
+    parts = []
+    for k in keep:
+        v = attrs.get(k)
+        if not v:
+            continue
+        if isinstance(v, (list, dict)):
+            v = json.dumps(v)[:1500]
+        parts.append(f"{k}: {v}")
+    return "\n".join(parts), api, related
+
+
 # NOT a route: DataCite (api.datacite.org/dois/<doi>) answers 200 for every one
 # of these DOIs and would look like a universal fallback, but its records are
 # too thin to tag from -- 73 and 109 characters of description for the two
@@ -391,8 +449,20 @@ def mendeley_api(doi, url):
 # carrying nothing but a title. Each repository's own API is what has the
 # description and the related-publication pointer.
 def repository_api(doi, url):
-    """Try every repository API that applies. Never raises."""
-    for fn in (dataverse_api, figshare_api, mendeley_api):
+    """Try every repository API that applies. Never raises.
+
+    The DOI is normalised again here rather than only in main(), so this stays
+    correct for anything that imports and calls it directly. Every prefix test
+    below is a startswith/substring check, and a `https://doi.org/`-prefixed DOI
+    silently skips the Dataverse route and falls through to the 202 page.
+    """
+    doi = (doi or "").strip()
+    for pre in ("https://doi.org/", "http://doi.org/", "doi.org/", "doi:"):
+        if doi.lower().startswith(pre):
+            doi = doi[len(pre):]
+            break
+    doi = doi or None
+    for fn in (dataverse_api, figshare_api, mendeley_api, osf_api):
         try:
             got = fn(doi, url)
         except Exception:                                  # noqa: BLE001
@@ -447,6 +517,20 @@ def main():
 
     if not args.doi and not args.url:
         ap.error("provide --doi or --url")
+
+    # The dictionary stores some DOIs bare and others as
+    # `https://doi.org/10.…`. Normalise ONCE here: every consumer below either
+    # tests a prefix (the repository routes) or builds `https://doi.org/{doi}`
+    # (the candidate list), and the prefixed form silently breaks both -- it
+    # skipped the Dataverse route and produced a doubled, 404-ing URL. Caught
+    # 2026-09-01 on feng2026_autonomy.
+    if args.doi:
+        d = args.doi.strip()
+        for pre in ("https://doi.org/", "http://doi.org/", "doi.org/", "doi:"):
+            if d.lower().startswith(pre):
+                d = d[len(pre):]
+                break
+        args.doi = d
 
     path = cache_path(args.table)
     if path.exists() and not args.force:

@@ -121,11 +121,13 @@ paywall on — not the fetch failing.** Those are different findings:
 | `UNREACHABLE oa_status=closed` | No open copy exists | Stage `Notes = "cannot fully access due to paywall"` |
 | `UNREACHABLE oa_status=gold\|green\|hybrid\|bronze\|diamond` | An open copy **exists** and something else blocked us — a WAF, a captcha, a JS-only page, a dead link | **Not a paywall.** Stage `Notes = "no working link"`, and it is worth reporting: these are fixable |
 
-**Data repositories are asked through their APIs** (#1786). Dataverse and
-figshare serve a challenge on their web pages — Dataverse returns HTTP 202 with
-a zero-byte body regardless of user agent — and some Mendeley records serve a
-JavaScript shell. All three now go through `api/datasets/:persistentId`,
-`api.figshare.com` and Mendeley's `public-api`. Where the deposit names the
+**Data repositories are asked through their APIs** (#1786). Their web pages
+serve a challenge or a JavaScript shell — Dataverse returns HTTP 202 with a
+zero-byte body regardless of user agent, and every OSF project page is the same
+4.2kB of CSS. OSF, Dataverse, figshare and Mendeley now go through
+`api.osf.io/v2`, `api/datasets/:persistentId`, `api.figshare.com` and Mendeley's
+`public-api`. **OSF matters most by volume: 1,065 of the dictionary's 4,330 rows
+name it**, more than the other three combined. Where the deposit names the
 paper it backs, that DOI is adopted and followed down the ordinary path, so the
 usual outcome is the *article*, not the catalogue record. This was worth 8 of
 the 10 unreachable tables in the 2.3 blind run.
