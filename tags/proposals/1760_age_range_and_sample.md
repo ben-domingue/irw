@@ -252,6 +252,24 @@ The one rule the vocabulary needs and has never had:
 > `General/non-specific` is the residual. It **never** co-occurs with
 > `Representative` or `Targeted/specific`.
 
+> **Decided by Ben, 2026-09-01.** "General is a catch-all and shouldn't be used
+> if other terms apply."
+
+**Scope of "other terms": the frame facet only.** `General/non-specific`
+answers *how broad was the sampling*, so it is displaced only by the other two
+answers to that question. It is **not** displaced by a setting atom, which
+answers a different question: `Educational, General/non-specific` says
+"recruited through a school, with no restricted frame and no representativeness
+claim", and that is a real, non-contradictory statement. 133 rows carry
+`General/non-specific` alongside only setting atoms (63 `Internet-based`, 48
+`Educational`, 9 `Clinical`, 8 `Clinical, Educational`, 5 `Educational,
+Internet-based`); under the narrow scope all 133 stand unchanged.
+
+The wider reading — any other atom at all displaces `General` — would strip
+those 133 and leave `General/non-specific` meaning "we know nothing about how
+these people were reached", which is what a blank cell already means. That
+collapse is the reason for the narrow scope.
+
 `Representative` and `Targeted/specific` **may** co-occur, and often should: a
 nationally representative sample *of teachers* is both, and collapsing it to one
 value loses the fact that made it worth collecting.
@@ -403,7 +421,7 @@ is why it is named, isolated, and recorded per row instead of buried.
 
 ## What I need from you
 
-Seven decisions; **1 and 2 are settled** (2026-09-01) and are struck through
+Seven decisions; **1, 2 and 3 are settled** (2026-09-01) and are struck through
 below for the record. Defaults on the rest are what the document says, so
 "approve" with no comment takes them as written.
 
@@ -414,8 +432,11 @@ below for the record. Defaults on the rest are what the document says, so
    literally, "is present" implies `0`; the tolerance was kept deliberately, so
    a table with three minors out of 46,000 is not served to someone filtering
    for children.
-3. **`Representative` and `Targeted/specific` may co-occur** (§B2), and
-   `General/non-specific` is the residual that never co-occurs with either.
+3. ~~**`Representative` and `Targeted/specific` may co-occur** (§B2), and
+   `General/non-specific` is the residual that never co-occurs with either.~~
+   — **decided 2026-09-01: yes**, both clauses, with "catch-all" scoped to the
+   frame facet (§B2) so the 133 `General` + setting-atom rows stand. Ships
+   through `tag_normalize.R` per §B3, so it is not waiting on decision 7.
 4. **`child age` gets derived too** (§A3), from the same `cov_age` column.
    Say no and I leave that column entirely to human raters.
 5. **Blank beats a guess** (§A2). This will *reduce* filled cells on tables
