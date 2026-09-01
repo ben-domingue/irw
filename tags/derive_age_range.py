@@ -42,6 +42,22 @@ DERIVED_COLS = ["table", "age range", "child age (for child-focused studies)",
                 "basis", "min_age", "max_age", "n_age", "share_under_18",
                 "generated"]
 
+# Tables whose age UNIT has been confirmed against the source, releasing them
+# from the months quarantine. The quarantine exists because nothing in the data
+# distinguishes years from months where the two would give different tags; a
+# human reading the source can, and this file is where that reading is recorded
+# with its evidence rather than applied silently. Only `years` is honoured --
+# a table confirmed as months needs its data fixed, not its tag derived.
+UNIT_FILE = os.path.join(HERE, "age_unit_confirmed.csv")
+
+
+def confirmed_years():
+    if not os.path.exists(UNIT_FILE):
+        return set()
+    d = pd.read_csv(UNIT_FILE)
+    return {str(t).strip().lower()
+            for t, u in zip(d["table"], d["unit"]) if str(u).strip() == "years"}
+
 
 def aggregate_sql(dataset, table):
     """One row of table-level age facts, computed Redivis-side.
@@ -63,6 +79,9 @@ def aggregate_sql(dataset, table):
  COUNT(DISTINCT IF({age} >= 6 AND {age} < 12, id, NULL)) AS n_6_12,
  COUNT(DISTINCT IF({age} >= 12 AND {age} < 18, id, NULL)) AS n_12_18
 FROM `datapages.{dataset}.{table}`"""
+
+
+YEARS_OK = set()   # populated in main()/emit() from age_unit_confirmed.csv
 
 
 def classify(r):
@@ -102,7 +121,7 @@ def classify(r):
     # Only where the unit CHANGES the tag, though. At a maximum of 18 the table
     # is `Child (<18y)` whether those are years or months, so there is nothing
     # to hold: 91 of the 104 tables this first quarantined were of that shape.
-    if 18 < hi <= 36 and lo <= 6:
+    if 18 < hi <= 36 and lo <= 6 and str(r.tbl).strip().lower() not in YEARS_OK:
         return None, None, "quarantine", (
             f"ages {lo}-{hi} are equally consistent with months, and the unit "
             "changes the tag; not stated in the data")
@@ -153,6 +172,9 @@ def main():
                          "Redivis -- the aggregates are the expensive half and "
                          "they do not change when a classification rule does")
     args = ap.parse_args()
+
+    global YEARS_OK
+    YEARS_OK = confirmed_years()
 
     if args.from_audit:
         prev = pd.read_csv(os.path.join(HERE, "age_range_audit.csv"))

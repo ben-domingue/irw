@@ -1,0 +1,6 @@
+table,unit,evidence,confirmed
+lai_2023_social_adaptability,years,"Lai et al. (2023) PLOS ONE 10.1371/journal.pone.0283170 -- a study of ADOLESCENTS' social adaptability, self-report scales (QZGX1-18, 1-5). Months would put every respondent under 2 years old and unable to answer a self-report item. cov_age 5-26, 16 distinct.",2026-09-01
+lai_2023_parent_relation_father,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_parent_relation_mother,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_teacher_student_rel,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_peer_relationship,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
