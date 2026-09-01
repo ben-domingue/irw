@@ -15,6 +15,15 @@ It still does not decide whether content is a paywall -- but it now reports
 OpenAlex's asserted `oa_status`, so that judgement has evidence behind it
 rather than being inferred from a blocked fetch. PDFs are extracted to text.
 
+Data repositories get their own route (#1786). Dataverse and figshare answer a
+bot challenge on their web pages -- Dataverse returns HTTP 202 with a ZERO-byte
+body whatever user agent you send -- while their APIs return the record. Some
+Mendeley records serve a JavaScript shell. All three are asked through their API
+instead, and where the deposit names the paper it backs, that DOI is adopted and
+followed down the ordinary path, which is where usable prose lives. Deposit
+metadata is returned only as a fallback and is labelled `repository_metadata`
+so the caller can tell a catalogue record from a paper.
+
 Usage:
     python fetch_source.py TABLE --doi 10.1037/a0022874
     python fetch_source.py TABLE --url https://example.org/page
@@ -26,6 +35,7 @@ gitignored, not committed (see tags/.gitignore).
 """
 import argparse
 import io
+import json
 import re
 import sys
 import time
@@ -202,6 +212,196 @@ def europepmc_fulltext(doi):
     return visible_text(r.text), f"https://europepmc.org/article/PMC/{pmcid}"
 
 
+# Repository landing pages that answer a bot challenge instead of content, and
+# the APIs that answer properly (#1786). Both were measured 2026-09-01: the
+# Dataverse dataset page returns HTTP 202 with a ZERO-byte body regardless of
+# user agent, while api/datasets/:persistentId returns 200 and 8.5kB of JSON for
+# the same record; figshare's article page challenges while api.figshare.com
+# does not. This cost w2 70% of its reachability in the 2.3 blind run -- nine of
+# ten failures there were this, not paywalls, with OpenAlex reporting the
+# records openly available.
+#
+# The metadata is thin on its own. Its real value is the RELATED PUBLICATION:
+# a deposit usually names the paper it backs, and that DOI goes back through the
+# ordinary OpenAlex/Europe PMC path, which is where usable prose lives. Deposit
+# metadata is returned only when there is no such pointer, and is labelled so
+# the caller can tell a paper from a catalogue record.
+DATAVERSE_DOI_PREFIXES = ("10.7910/dvn",)
+FIGSHARE_DOI_MARKERS = ("figshare",)
+MIN_METADATA_CHARS = 300
+
+
+def _dv_fields(payload):
+    """Flatten a Dataverse citation metadata block to {typeName: value}."""
+    blocks = (((payload.get("data") or {}).get("latestVersion") or {})
+              .get("metadataBlocks") or {})
+    fields = (blocks.get("citation") or {}).get("fields") or []
+    return {f.get("typeName"): f.get("value") for f in fields}
+
+
+def _dv_text(value):
+    """Dataverse values are strings, lists, or compound dicts of dicts."""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, list):
+        return " ; ".join(_dv_text(v) for v in value)
+    if isinstance(value, dict):
+        if "value" in value and not isinstance(value["value"], (dict, list)):
+            return str(value["value"])
+        return " ; ".join(_dv_text(v) for v in value.values())
+    return ""
+
+
+def dataverse_api(doi, url):
+    """(text, source, related_doi) from a Dataverse record, or None."""
+    host = "dataverse.harvard.edu"
+    m = re.search(r"https?://([^/]+)/dataset\.xhtml", url or "")
+    if m:
+        host = m.group(1)
+    elif not (doi or "").lower().startswith(DATAVERSE_DOI_PREFIXES):
+        return None
+    if not doi:
+        m = re.search(r"persistentId=(doi:[^&\s]+)", url or "")
+        doi = m.group(1).removeprefix("doi:") if m else None
+    if not doi:
+        return None
+    api = f"https://{host}/api/datasets/:persistentId/?persistentId=doi:{doi}"
+    try:
+        r = requests.get(api, headers=UA, timeout=30)
+        if r.status_code != 200:
+            return None
+        fields = _dv_fields(r.json())
+    except (requests.RequestException, ValueError, AttributeError):
+        return None
+    if not fields:
+        return None
+
+    related = None
+    for entry in (fields.get("publication") or []):
+        if not isinstance(entry, dict):
+            continue
+        idn = _dv_text(entry.get("publicationIDNumber") or "")
+        typ = _dv_text(entry.get("publicationIDType") or "").lower()
+        if idn and ("doi" in typ or idn.startswith("10.")):
+            related = idn.replace("https://doi.org/", "").strip()
+            break
+
+    parts = [f"{k}: {_dv_text(v)}" for k, v in fields.items() if v]
+    return "\n".join(parts), api, related
+
+
+def figshare_api(doi, url):
+    """(text, source, related_doi) from a figshare record, or None.
+
+    Covers figshare-hosted institutional repositories too -- York St John's
+    10.25421/yorksj.* resolves through the same API.
+    """
+    art_id = None
+    if doi and any(m in doi.lower() for m in FIGSHARE_DOI_MARKERS):
+        m = re.search(r"figshare\.(\d+)", doi)
+        art_id = m.group(1) if m else None
+    if art_id is None:
+        m = re.search(r"figshare\.com/articles/[^/]*/?(\d+)", url or "")
+        art_id = m.group(1) if m else None
+    try:
+        if art_id is None and doi:
+            r = requests.get("https://api.figshare.com/v2/articles",
+                             params={"doi": doi}, headers=UA, timeout=30)
+            if r.status_code != 200 or not r.json():
+                return None
+            art_id = r.json()[0]["id"]
+        if art_id is None:
+            return None
+        api = f"https://api.figshare.com/v2/articles/{art_id}"
+        r = requests.get(api, headers=UA, timeout=30)
+        if r.status_code != 200:
+            return None
+        art = r.json()
+    except (requests.RequestException, ValueError, KeyError, IndexError):
+        return None
+
+    related = (art.get("resource_doi") or "").replace("https://doi.org/", "").strip() or None
+    keep = ("title", "description", "citation", "resource_title", "tags",
+            "categories", "funding", "defined_type_name", "license")
+    parts = []
+    for k in keep:
+        v = art.get(k)
+        if not v:
+            continue
+        if isinstance(v, list):
+            v = " ; ".join(x.get("title", "") if isinstance(x, dict) else str(x)
+                           for x in v)
+        elif isinstance(v, dict):
+            v = v.get("name") or str(v)
+        parts.append(f"{k}: {v}")
+    return "\n".join(parts), api, related
+
+
+def mendeley_api(doi, url):
+    """(text, source, related_doi) from a Mendeley Data record, or None.
+
+    Mendeley serves a JavaScript shell to an unauthenticated GET on some
+    records but not others -- two of ten in the 2.3 run -- which reads as
+    `too_short` rather than as a block. `public-api` answers for both.
+    `api.data.mendeley.com` needs OAuth and 401s; this one does not.
+    """
+    ident = None
+    m = re.search(r"data\.mendeley\.com/datasets/([A-Za-z0-9]+)", url or "")
+    if m:
+        ident = m.group(1)
+    elif doi and "10.17632/" in doi.lower():
+        ident = doi.lower().split("10.17632/", 1)[1].split(".")[0].strip("/")
+    if not ident:
+        return None
+    api = f"https://data.mendeley.com/public-api/datasets/{ident}"
+    try:
+        r = requests.get(api, headers=UA, timeout=30)
+        if r.status_code != 200:
+            return None
+        rec = r.json()
+    except (requests.RequestException, ValueError):
+        return None
+
+    related = None
+    for art in (rec.get("articles") or []):
+        cand = (art.get("doi") or {})
+        cand = cand.get("id") if isinstance(cand, dict) else cand
+        if cand and str(cand).startswith("10."):
+            related = str(cand)
+            break
+
+    keep = ("name", "description", "doi", "categories", "data_licence",
+            "articles", "contributors", "institutions", "versions")
+    parts = []
+    for k in keep:
+        v = rec.get(k)
+        if not v:
+            continue
+        if isinstance(v, (list, dict)):
+            v = json.dumps(v)[:2000]
+        parts.append(f"{k}: {v}")
+    return "\n".join(parts), api, related
+
+
+# NOT a route: DataCite (api.datacite.org/dois/<doi>) answers 200 for every one
+# of these DOIs and would look like a universal fallback, but its records are
+# too thin to tag from -- 73 and 109 characters of description for the two
+# Mendeley and Dataverse records measured, against a 300-character floor, and
+# zero for the third. It would convert an honest UNREACHABLE into a success
+# carrying nothing but a title. Each repository's own API is what has the
+# description and the related-publication pointer.
+def repository_api(doi, url):
+    """Try every repository API that applies. Never raises."""
+    for fn in (dataverse_api, figshare_api, mendeley_api):
+        try:
+            got = fn(doi, url)
+        except Exception:                                  # noqa: BLE001
+            got = None
+        if got:
+            return got
+    return None
+
+
 def extract(response):
     """Text of a response -- PDFs decoded, everything else left as-is."""
     ctype = response.headers.get("Content-Type", "").lower()
@@ -266,6 +466,23 @@ def main():
     attempted = []
     rejected = []
 
+    # A repository API, before anything that could be challenged (#1786). If the
+    # deposit names the paper it backs, that DOI is worth far more than the
+    # deposit record, so adopt it and carry on down the ordinary path -- OpenAlex
+    # locations, Europe PMC, then URLs -- exactly as if it had been passed in.
+    repo = repository_api(args.doi, args.url)
+    repo_text = repo_source = None
+    if repo:
+        repo_text, repo_source, related = repo
+        if related and related != args.doi:
+            print(f"NOTE {repo_source} names a related publication: {related}",
+                  file=sys.stderr)
+            args.doi = related
+            oa_status, oa_urls, title = ("not_checked", [], None)
+            if not args.no_oa:
+                oa_status, oa_urls, title = openalex_locations(related)
+            candidates = oa_urls + [f"https://doi.org/{related}"] + candidates
+
     # Europe PMC first: an API beats scraping a page that may be a captcha.
     if args.doi and not args.no_oa:
         got = europepmc_fulltext(args.doi)
@@ -298,6 +515,25 @@ def main():
         print(f"OK oa_status={oa_status} source={url} final_url={final_url} "
               f"content={reason} attempts={len(attempted)} -> {path}")
         return
+
+    # Nothing else worked, but a repository record was readable. It is a
+    # catalogue entry rather than a paper, so it is labelled as one and held to a
+    # lower floor -- a deposit description is legitimately short. The tagger is
+    # expected to leave fields blank rather than infer a sample or an age range
+    # from this; vocab.md already says so, and the reason string is what tells it
+    # which kind of source it is holding.
+    if repo_text:
+        prose = visible_text(repo_text)
+        if len(prose) >= MIN_METADATA_CHARS:
+            CACHE_DIR.mkdir(exist_ok=True)
+            path.write_text(repo_text, encoding="utf-8", errors="replace")
+            print(f"OK oa_status={oa_status} source={repo_source} "
+                  f"final_url={repo_source} "
+                  f"content=repository_metadata:{len(prose)}_chars_visible "
+                  f"attempts={len(attempted) + 1} -> {path}")
+            return
+        rejected.append(f"{repo_source} -> repository_metadata_too_short:"
+                        f"{len(prose)}_chars")
 
     # Nothing readable. oa_status is the useful half of this message: a
     # closed status corroborates a paywall, while an open one means the

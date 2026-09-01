@@ -117,8 +117,18 @@ paywall on — not the fetch failing.** Those are different findings:
 | Outcome | What it means | What to do |
 |---|---|---|
 | `OK ... content=N_chars_visible` | Got prose that is not a blocker page | Read `.cache/{table}.txt` and continue to Step 4 |
+| `OK ... content=repository_metadata:N_chars_visible` | **A catalogue record, not a paper** — the deposit's own title, description, keywords and file list, reached through the repository's API because its web page answers a bot challenge | Read it, but tag only what it actually says. It will usually support `construct_name` and sometimes `construct type`; it almost never states a sample or an age range, and vocab.md's rule against inferring those still binds |
 | `UNREACHABLE oa_status=closed` | No open copy exists | Stage `Notes = "cannot fully access due to paywall"` |
 | `UNREACHABLE oa_status=gold\|green\|hybrid\|bronze\|diamond` | An open copy **exists** and something else blocked us — a WAF, a captcha, a JS-only page, a dead link | **Not a paywall.** Stage `Notes = "no working link"`, and it is worth reporting: these are fixable |
+
+**Data repositories are asked through their APIs** (#1786). Dataverse and
+figshare serve a challenge on their web pages — Dataverse returns HTTP 202 with
+a zero-byte body regardless of user agent — and some Mendeley records serve a
+JavaScript shell. All three now go through `api/datasets/:persistentId`,
+`api.figshare.com` and Mendeley's `public-api`. Where the deposit names the
+paper it backs, that DOI is adopted and followed down the ordinary path, so the
+usual outcome is the *article*, not the catalogue record. This was worth 8 of
+the 10 unreachable tables in the 2.3 blind run.
 
 The script rejects blocker pages rather than caching them, and prints the
 reason per candidate (`blocker:recaptcha`, `too_short:3_chars_visible`,
