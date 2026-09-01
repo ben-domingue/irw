@@ -13,7 +13,8 @@ not_item_response   -- clear evidence the file is not person×item response data
 wrong_file_selected -- correct dataset, but the batch script grabbed the wrong file
                        (e.g. a codebook instead of the data matrix)
 recoverable_format  -- data likely good but file needs re-reading (wrong delimiter,
-                       multi-sheet Excel, etc.)
+                       multi-sheet Excel, one questionnaire holding several
+                       instruments that need splitting per scale, etc.)
 aggregate_continuous -- responses appear continuous/aggregate rather than ordinal
 worth_retrying       -- plausible longitudinal or mapping issue; worth a second download
 human_review         -- genuinely ambiguous; needs eyes on the raw file
@@ -238,6 +239,31 @@ def classify(row: pd.Series) -> tuple[str, str]:
                     "possible longitudinal data but the high repeat rate and resp_ordinal* "
                     "warning suggest responses may be continuous. Quick data check needed.")
 
+    # ── RULE 10b: resp_scale_mixed on a multi-instrument questionnaire ──────
+    # One questionnaire carrying several instruments -- an MBI on 0-6, a coping
+    # scale on 1-5, a personality block on 0/1 -- fails `resp_scale_mixed` every
+    # time, because the automatic single melt pools blocks that were never one
+    # scale. That is not ambiguity: `datastandard.md` already answers it with
+    # "one file per scale". Before this rule such rows fell through to the
+    # human_review default; on the 2026-09-01 PLOS weekly batch that was 5 of
+    # the 7 human_review rows, and all 5 became shipped tables on first
+    # inspection (zhou_2016_*, teo_2021_*, shao_2025_*, smirnov_2025_*, plus one
+    # genuine drop). Routed to recoverable_format -- the file is fine, the
+    # *read* is what needs redoing -- so they stay in the machine-follow-up
+    # pile rather than the eyes-needed one.
+    if "resp_scale_mixed" in reasons and pd.notna(n_part) and n_part >= 100:
+        multi = "multi_scale" in reasons
+        return ("recoverable_format",
+                f"QC failed on resp_scale_mixed with n_participants={n_part:.0f}"
+                + (" plus a multi_scale warning" if multi else "") +
+                " — consistent with one questionnaire carrying several "
+                "instruments on different response scales, which calls for a "
+                "per-scale split (one output file each), not a human decision. "
+                "Re-read the item columns by block prefix, confirm each block's "
+                "range against the paper's Methods rather than against the "
+                "pooled min/max, and check any leftover out-of-range value for "
+                "the single-item isolation that marks a keying slip.")
+
     # ── RULE 11: Low-confidence id mapping only (no hard errors) ────────────
     has_fail = "QC failed" in reasons
     has_big_resp = ">50 unique" in reasons
@@ -305,14 +331,14 @@ def main():
     descriptions = {
         "not_item_response":   "Clearly not item-response data (drop)",
         "wrong_file_selected": "Right dataset, wrong file — check other files",
-        "recoverable_format":  "Wrong delimiter — re-read and re-triage",
+        "recoverable_format":  "Wrong delimiter or per-scale split — re-read and re-triage",
         "aggregate_continuous":"Likely continuous / aggregate measures",
         "worth_retrying":      "Plausible data — worth a second download",
         "human_review":        "Genuinely ambiguous — needs human inspection",
     }
     for flag in FLAG_ORDER:
         n = counts.get(flag, 0)
-        pct = 100 * n / total
+        pct = 100 * n / total if total else 0
         desc = descriptions.get(flag, "")
         print(f"  {flag:22}  {n:3d} ({pct:4.0f}%)  {desc}")
     print("=" * 60)
