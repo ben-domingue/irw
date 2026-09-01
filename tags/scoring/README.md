@@ -193,3 +193,58 @@ Ship per column, as #1722 argues:
 - The gold set is itself human work of unmeasured consistency. A gold/gold
   disagreement rate between raters would tell us what ceiling to expect, and we
   do not have one.
+
+---
+
+# The 2026-09-01 run (2.3, #1722)
+
+Authorised by Ben to settle whether the #1760 rules make `sample` scorable and
+whether the tagger reaches the population 2.3 would actually run on. Two arms,
+eight blind subagents, ten tables each.
+
+**Arm A — the same 38 tables, re-tagged against the rewritten `vocab.md`.**
+Human gold exists, so this measures whether stating the setting/frame boundary
+helps. `predictions_2026-09-01_rerun.json`, scored in
+`results_rerun_2026-09-01.txt`.
+
+**Arm B — 40 tables that have never been tagged**, `seed=1722`, ten each from
+w2/w3/w4/w5 (`sample_untagged_2026-09-01.json`). No gold exists for six of the
+seven columns, so this arm measures REACHABILITY and coverage — and real
+accuracy for `age_range`, because #1760's derivation supplies ground truth from
+each table's own `cov_age`. `score_untagged.py`,
+`results_untagged_2026-09-01.txt`.
+
+## The headline, and why the obvious reading of it is wrong
+
+`sample`'s whole-cell exact match **fell**, 44.4% → 18.2%. It is an artifact.
+
+Gold predates the two-facet split and answers one question: 12 of 34 gold rows
+carry no frame value at all. The tagger, following the new rules, answers both —
+it produced a frame value on **33 of 34** tables against **19 of 38** before. So
+whole-cell matching now punishes it for filling a facet the key leaves blank,
+and 15 of its 33 misses are supersets rather than wrong answers.
+
+Scored per facet, on the tables where gold answered that facet
+(`score_sample_facets.py`), the rules helped on both:
+
+| facet | 2026-08-30 exact | 2026-09-01 exact | precision | recall |
+|---|---|---|---|---|
+| setting | 75.0% | **81.2%** | 87.5% | 87.5% |
+| frame | 26.9% | **45.5%** | 52.4% | 47.8% |
+
+Frame exact match nearly doubled. It is still the worst column in the corpus,
+and the eight agents said why without being asked — see the amendment proposed
+in `tags/decisions/1760_age_range_and_sample.md`.
+
+## What Arm B found
+
+- **75% of never-tagged tables were reached** (10 abstentions in 40), and **9 of
+  the 10 failures are `fetch_failed`, not paywalls**.
+- Reachability is not uniform: w3 100%, w4 90%, **w5 80%**, w2 **30%**. w5 had
+  never been scored before and is the worst-*tagged* shard at 42.7% — this says
+  its gap is not a reachability problem.
+- w2's collapse is one fixable bug: figshare and Harvard Dataverse both answer
+  `HTTP 202` (a pre-render/bot challenge) rather than content.
+- **`age_range` scored 11/12 correct (91.7%) against derived ground truth** on
+  the untagged population — the first accuracy figure in this project measured
+  on the population the tagger would actually run on.

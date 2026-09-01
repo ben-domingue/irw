@@ -1,0 +1,75 @@
+tables: 38 attempted | 34 tagged | 4 abstained (11% of the sample had no usable source)
+
+column                gold   ans   ok  accuracy  coverage   yield
+----------------------------------------------------------------
+age_range               34    27   22     81.5%     79.4%   64.7%
+child_age                7     6    5     83.3%     85.7%   71.4%
+sample                  34    33    6     18.2%     97.1%   17.6%
+construct_type          33    32   19     59.4%     97.0%   57.6%
+measurement_tool        34    33   30     90.9%     97.1%   88.2%
+item_format             34    32   31     96.9%     94.1%   91.2%
+primary_languages       32    32   29     90.6%    100.0%   90.6%
+
+child_age, with NA read as the answer 'not a child-focused study':
+  correctly left blank when gold is NA : 24
+  wrongly filled when gold is NA       : 3
+
+per-warehouse (all columns pooled, tagged tables only):
+  item_response_warehouse       6 tagged,  0 abstained   22/ 40 =  55.0%
+  item_response_warehouse_2     4 tagged,  4 abstained   18/ 25 =  72.0%
+  item_response_warehouse_3    15 tagged,  0 abstained   63/ 88 =  71.6%
+  item_response_warehouse_4     9 tagged,  0 abstained   39/ 55 =  70.9%
+
+multi-select columns -- how they miss, not just whether:
+  column                  n    exact  subset  super  overlap  disjoint   >=1 atom
+  child_age               6    83.3%       0      1        0      0.0%     100.0%
+  sample                 33    18.2%       1     15        0     33.3%      66.7%
+  construct_type         32    59.4%       4      1        1     21.9%      78.1%
+  primary_languages      32    90.6%       3      0        0      0.0%     100.0%
+  A subset or superset is a granularity disagreement on a genuinely
+  multi-faceted answer; a disjoint miss is a different answer entirely.
+
+multi-select, per-atom (micro-averaged) -- partial credit:
+  column                  tp    fp    fn  precision   recall      F1
+  child_age                8     1     0      88.9%   100.0%   94.1%
+  sample                  25    33    13      43.1%    65.8%   52.1%
+  construct_type          25     9    15      73.5%    62.5%   67.6%
+  primary_languages       32     0     3     100.0%    91.4%   95.5%
+  Precision below recall means over-tagging; recall below precision
+  means it names too few facets. They fail differently, and a single
+  exact-match number cannot tell you which.
+
+confusions (gold -> predicted):
+  age_range:
+      3x  Adult (18+)  ->  Mixed
+      2x  Mixed  ->  Child (<18y)
+  child_age:
+      1x  Adolescent (12-18y)  ->  Adolescent (12-18y), Child (6-12y)
+  sample:
+      4x  Educational  ->  Educational, General/non-specific
+      4x  Educational  ->  Educational, Targeted/specific
+      3x  Targeted/specific  ->  Internet-based, Representative
+      3x  General/non-specific  ->  Representative
+      2x  General/non-specific  ->  Educational, Targeted/specific
+      2x  General/non-specific  ->  Targeted/specific
+  construct_type:
+      2x  Affective/mental health, Opinion/attitude  ->  Opinion/attitude
+      1x  Affective/mental health, Cognitive/educational, Developmental  ->  Developmental
+      1x  Cognitive/educational  ->  Physical health/functioning
+      1x  Affective/mental health  ->  Behavioral
+      1x  Affective/mental health, Opinion/attitude  ->  Affective/mental health, Physical health/functioning
+      1x  Affective/mental health, Cognitive/educational, Developmental  ->  Cognitive/educational
+  measurement_tool:
+      3x  Survey/questionnaire  ->  Test
+  item_format:
+      1x  Mixed  ->  Likert Scale/selected response
+  primary_languages:
+      1x  eng, spa  ->  eng
+      1x  chi, eng  ->  chi
+      1x  eng, por  ->  por
+
+abstained:
+  mexico_2023_quality_low                              fetch_failed   item_response_warehouse_2
+  mexico_2024_q4safety_govperformance                  fetch_failed   item_response_warehouse_2
+  mexico_2025_q4safety_harassment                      fetch_failed   item_response_warehouse_2
+  colombia_2023_politics_risks                         fetch_failed   item_response_warehouse_2
