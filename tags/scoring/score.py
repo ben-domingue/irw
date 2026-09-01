@@ -43,8 +43,26 @@ RENAME = {"Internet-based (Mturkers, etc)": "Internet-based",
           "Internet-based (Mturkers": "Internet-based"}
 DROP = {"etc)"}
 
+##`sample`'s frame facet, decided in #1760 on 2026-09-01 and enforced on export
+##by metadata/tag_normalize.R. Gold has been through that rule since the
+##2026-09-01 run; predictions were written before it existed, so they get it
+##here. Without this, a prediction of "General/non-specific, Representative"
+##scores as wrong against a gold of "Representative" for a disagreement the
+##convention has since defined away -- which would measure the tagger against a
+##question nobody could answer at the time.
+FRAME_RESIDUAL = "General/non-specific"
+FRAME_SPECIFIC = {"Representative", "Targeted/specific"}
 
-def norm(v, multi):
+
+def apply_frame_residual(atoms, column):
+    if column != "sample" or FRAME_RESIDUAL not in atoms:
+        return atoms
+    if not (FRAME_SPECIFIC & set(atoms)):
+        return atoms
+    return [a for a in atoms if a != FRAME_RESIDUAL]
+
+
+def norm(v, multi, column=None):
     """Canonicalise a cell to a comparable frozen set, or None when empty/NA."""
     if v is None:
         return None
@@ -55,6 +73,7 @@ def norm(v, multi):
         v = v.replace(a, b)
     atoms = [a.strip() for a in v.split(",")]
     atoms = [a for a in atoms if a and a not in DROP]
+    atoms = apply_frame_residual(atoms, column)
     if not atoms:
         return None
     return tuple(sorted(set(atoms)))
@@ -96,7 +115,8 @@ def run(pred_path, sample_path):
             continue
         per_ws[ws]["tables"] += 1
         for pkey, gcol, multi in COLS:
-            gv, pv = norm(g.get(gcol), multi), norm(pr.get(pkey), multi)
+            gv, pv = (norm(g.get(gcol), multi, pkey),
+                      norm(pr.get(pkey), multi, pkey))
             s = stats[pkey]
             if pkey == "child_age":
                 if gv is None and pv is None:

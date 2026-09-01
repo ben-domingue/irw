@@ -1,0 +1,86 @@
+tables: 60 attempted | 38 tagged | 22 abstained (37% of the sample had no usable source)
+
+column                gold   ans   ok  accuracy  coverage   yield
+----------------------------------------------------------------
+age_range               38    37   32     86.5%     97.4%   84.2%
+child_age                7     4    3     75.0%     57.1%   42.9%
+sample                  38    36   16     44.4%     94.7%   42.1%
+construct_type          37    37   24     64.9%    100.0%   64.9%
+measurement_tool        38    38   33     86.8%    100.0%   86.8%
+item_format             38    22   20     90.9%     57.9%   52.6%
+primary_languages       36    33   30     90.9%     91.7%   83.3%
+
+child_age, with NA read as the answer 'not a child-focused study':
+  correctly left blank when gold is NA : 30
+  wrongly filled when gold is NA       : 1
+
+per-warehouse (all columns pooled, tagged tables only):
+  item_response_warehouse       6 tagged,  9 abstained   21/ 40 =  52.5%
+  item_response_warehouse_2     8 tagged,  7 abstained   28/ 49 =  57.1%
+  item_response_warehouse_3    15 tagged,  0 abstained   74/ 88 =  84.1%
+  item_response_warehouse_4     9 tagged,  6 abstained   35/ 55 =  63.6%
+
+multi-select columns -- how they miss, not just whether:
+  column                  n    exact  subset  super  overlap  disjoint   >=1 atom
+  child_age               4    75.0%       0      1        0      0.0%     100.0%
+  sample                 36    44.4%       2      0        0     50.0%      50.0%
+  construct_type         37    64.9%       5      2        0     16.2%      83.8%
+  primary_languages      33    90.9%       3      0        0      0.0%     100.0%
+  A subset or superset is a granularity disagreement on a genuinely
+  multi-faceted answer; a disjoint miss is a different answer entirely.
+
+confusions (gold -> predicted):
+  age_range:
+      2x  Mixed  ->  Adult (18+)
+      2x  Mixed  ->  Child (<18y)
+      1x  Adult (18+)  ->  Mixed
+  child_age:
+      1x  Adolescent (12-18y)  ->  Adolescent (12-18y), Child (6-12y)
+  sample:
+      5x  General/non-specific  ->  Representative
+      3x  Targeted/specific  ->  Representative
+      3x  General/non-specific  ->  Educational
+      2x  Targeted/specific  ->  Educational
+      1x  Educational  ->  Targeted/specific
+      1x  Educational  ->  Clinical
+  construct_type:
+      2x  Opinion/attitude  ->  Behavioral, Opinion/attitude
+      2x  Affective/mental health, Opinion/attitude  ->  Opinion/attitude
+      1x  Affective/mental health, Cognitive/educational, Developmental  ->  Affective/mental health, Developmental
+      1x  Affective/mental health  ->  Behavioral
+      1x  Affective/mental health, Opinion/attitude  ->  Physical health/functioning
+      1x  Affective/mental health, Cognitive/educational, Developmental  ->  Cognitive/educational
+  measurement_tool:
+      4x  Survey/questionnaire  ->  Test
+      1x  Observational rating  ->  Survey/questionnaire
+  item_format:
+      1x  Likert Scale/selected response  ->  Mixed
+      1x  Mixed  ->  Likert Scale/selected response
+  primary_languages:
+      1x  eng, spa  ->  eng
+      1x  chi, eng  ->  chi
+      1x  eng, por  ->  por
+
+abstained:
+  aspirations_sonmez_2022                              fetch_failed   item_response_warehouse
+  gilbert_meta_40                                      fetch_failed   item_response_warehouse
+  ecuador_2011_safety_crime                            fetch_failed   item_response_warehouse_2
+  cfc_balaji_2019                                      fetch_failed   item_response_warehouse
+  oxfordcovid_xue_2024_brs                             paywall        item_response_warehouse
+  gahps_korner_2021                                    fetch_failed   item_response_warehouse_2
+  c19prc_uk_mcbride_2021_socialdistance                fetch_failed   item_response_warehouse_4
+  dwyer_2025_genomics_pb                               paywall        item_response_warehouse
+  pass20_klosowska_2025_pass_hospital                  paywall        item_response_warehouse
+  gmc_kay_2025                                         paywall        item_response_warehouse_2
+  spain_2023_identity_authenticity                     no_source      item_response_warehouse_4
+  enem_2022_1mil_cn                                    fetch_failed   item_response_warehouse
+  heise_2024_mental_falsesign                          paywall        item_response_warehouse_2
+  abdullah_2024_hbbloat_pbc                            paywall        item_response_warehouse_4
+  spain_2023_identity_territorial                      no_source      item_response_warehouse_4
+  pisa2009_math                                        fetch_failed   item_response_warehouse
+  jeilani_2024_personal_growth                         fetch_failed   item_response_warehouse_2
+  sun_2025_morality_study1_fairnesshexaco              paywall        item_response_warehouse_2
+  c19prc_uk_mcbride_2021_polarization_brexit           fetch_failed   item_response_warehouse_4
+  pisa2022_read                                        paywall        item_response_warehouse
+  jeilani_2024_self_efficacy                           fetch_failed   item_response_warehouse_2
+  c19prc_uk_mcbride_2021_protective_behaviours         paywall        item_response_warehouse_4
