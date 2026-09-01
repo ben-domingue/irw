@@ -87,12 +87,35 @@ by_shard <- lapply(split(seq_len(n), shard), function(idx) {
          pct      = round(100 * sum(live[idx] %in% key(tags$table)) / length(idx), 1))
 })
 
+##Coverage per COLUMN, not just "has a row" (#1760, 2026-09-01).
+##
+##`tags` above counts a live table as covered if it has any row at all. That was
+##a fair proxy while every row came from a human filling the whole sheet line.
+##It stopped being one when `age range` started being derived from `cov_age`:
+##that adds ~775 rows carrying one filled column, which would move the headline
+##from 55% to ~74% without anyone having tagged a construct, a sample or an item
+##format. A number that jumps 19 points for work nobody did is exactly the kind
+##of figure 2.5c exists to stop us quoting.
+TAG_COLUMNS <- c("age range", "child age (for child-focused studies)", "sample",
+                 "construct type", "measurement tool", "item format",
+                 "primary language(s)", "construct name")
+filled <- function(x) !is.na(x) & trimws(as.character(x)) != ""
+live_rows <- tags[key(tags$table) %in% live, , drop = FALSE]
+by_column <- lapply(intersect(TAG_COLUMNS, names(live_rows)), function(cl) {
+    k <- length(unique(key(live_rows$table[filled(live_rows[[cl]])])))
+    list(n = k, pct = pct(k))
+})
+names(by_column) <- intersect(TAG_COLUMNS, names(live_rows))
+
 status <- list(
     generated   = format(Sys.time(), "%Y-%m-%dT%H:%M:%S%z"),
     source      = "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
     n_tables    = n,
     coverage    = list(
+        ##`tags` is "has a row"; `tags_by_column` is what is actually filled.
+        ##Quote the column, not the row, whenever the claim is about tagging.
         tags     = list(n = n_tags, pct = pct(n_tags)),
+        tags_by_column = by_column,
         itemtext = list(n = n_text, pct = pct(n_text))
     ),
     tags_by_shard = by_shard,
@@ -109,6 +132,8 @@ row <- data.frame(
     n_tables        = n,
     tagged          = n_tags,
     tagged_pct      = pct(n_tags),
+    age_range       = by_column[["age range"]]$n,
+    construct_type  = by_column[["construct type"]]$n,
     itemtext        = n_text,
     itemtext_pct    = pct(n_text),
     orphan_tag_rows = status$orphan_tag_rows
@@ -118,6 +143,33 @@ row <- data.frame(
 ##when nothing moved is a no-op rather than a duplicate row -- the pipeline
 ##gets run repeatedly while debugging, and a history padded with identical
 ##rows is harder to read the trend out of.
+##Widening the row without widening the file writes a row with more fields than
+##the header, and every value after the new columns lands under the wrong name.
+##That happened on 2026-09-01 when age_range/construct_type were added: the
+##appended row put 2243 in the `itemtext` column. Append-only is right for the
+##DATA; the SCHEMA still has to be migrated deliberately.
+if (file.exists(hist_out)) {
+    hdr <- names(suppressWarnings(read_tsv(hist_out, n_max = 0,
+                                           show_col_types = FALSE)))
+    if (!identical(hdr, names(row))) {
+        extra <- setdiff(hdr, names(row))
+        if (length(extra)) {
+            stop("status_history.tsv has column(s) this script no longer writes: ",
+                 paste(extra, collapse = ", "),
+                 ". Refusing to append -- widen `row` or migrate the file by hand.")
+        }
+        ##Only new columns: migrate in place, backfilling the older rows.
+        old_rows <- suppressWarnings(read_tsv(hist_out, show_col_types = FALSE,
+                                              col_types = cols(.default = col_character())))
+        for (cl in setdiff(names(row), hdr)) old_rows[[cl]] <- NA_character_
+        old_rows <- old_rows[, names(row), drop = FALSE]
+        write_tsv(old_rows, hist_out)
+        cat("status_history.tsv: added column(s) ",
+            paste(setdiff(names(row), hdr), collapse = ", "),
+            "; ", nrow(old_rows), " earlier row(s) backfilled as NA\n", sep = "")
+    }
+}
+
 unchanged <- FALSE
 if (file.exists(hist_out)) {
     ##Read as character throughout. Type inference would parse `date` as a
