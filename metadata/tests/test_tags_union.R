@@ -287,6 +287,16 @@ local({
           "an added row carries only the two derived columns")
 })
 
+##Ages cannot contradict `Non-human`; the derivation has no way to know.
+local({
+    tf <- tag_frame()
+    tf[["age range"]][tf$table == "no_ages"] <- "Non-human"
+    f <- write_derived(list(drow("no_ages", "Adult (18+)")))
+    out <- apply_derived_tags(tf, f, "t")
+    check(out[out$table == "no_ages", ][["age range"]] == "Non-human",
+          "a Non-human tag is never overridden by a derived age")
+})
+
 ##Case-insensitive matching, the trap that cost 308 rows elsewhere.
 local({
     f <- write_derived(list(drow("HAS_AGES", "Adult (18+)")))

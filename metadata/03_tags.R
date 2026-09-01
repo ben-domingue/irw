@@ -175,11 +175,23 @@ apply_derived_tags <- function(tag, path, label) {
     idx <- match(tolower(der$table), key)
     hit <- !is.na(idx)
 
-    changed <- 0L; confirmed <- 0L
+    changed <- 0L; confirmed <- 0L; preserved <- 0L
     for (i in which(hit)) {
         row <- idx[i]
         was <- tag[[cols[1]]][row]
         now <- der[[cols[1]]][i]
+
+        ##`Non-human` is not a claim about ages, so ages cannot contradict it.
+        ##The derivation has no way to know a table's respondents are not people
+        ##-- that comes from the source -- and left unguarded it retagged four
+        ##`Non-human` tables from their respondents' "ages" (caught in the
+        ##2026-09-01 dry run). vocab.md says Non-human short-circuits; this is
+        ##that sentence in code.
+        if (identical(as.character(was), "Non-human")) {
+            preserved <- preserved + 1L
+            next
+        }
+
         if (identical(as.character(was), as.character(now))) confirmed <- confirmed + 1L
         else changed <- changed + 1L
         for (cl in cols) tag[[cl]][row] <- der[[cl]][i]
@@ -196,8 +208,8 @@ apply_derived_tags <- function(tag, path, label) {
     }
 
     print(paste0(label, ": derived age tags from ", path, " -- ", changed,
-                 " overridden, ", confirmed, " confirmed, ", nrow(add),
-                 " new row(s)"))
+                 " overridden, ", confirmed, " confirmed, ", preserved,
+                 " Non-human preserved, ", nrow(add), " new row(s)"))
     tag
 }
 

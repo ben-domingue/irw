@@ -102,7 +102,11 @@ def classify(r):
         tag = VOCAB_ELDER
     elif u18 and a18 and share >= MINOR_SHARE:
         tag = VOCAB_MIXED
-    elif hi < 18:
+    elif u18 > a18:
+        # Below the floor the table takes the MAJORITY side, which is the whole
+        # point of a tolerance. Falling through to Adult regardless would have
+        # tagged benitezsillero_2021_bullying (ages 12-20, 98% under 18)
+        # `Adult (18+)` -- caught by the dry run, 2026-09-01.
         tag = VOCAB_CHILD
     else:
         tag = VOCAB_ADULT
@@ -128,7 +132,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--batch", type=int, default=25)
+    ap.add_argument("--from-audit", action="store_true",
+                    help="reclassify age_range_audit.csv instead of re-querying "
+                         "Redivis -- the aggregates are the expensive half and "
+                         "they do not change when a classification rule does")
     args = ap.parse_args()
+
+    if args.from_audit:
+        prev = pd.read_csv(os.path.join(HERE, "age_range_audit.csv"))
+        prev = prev.rename(columns={"table": "tbl"})
+        emit(prev)
+        return
 
     os.environ.setdefault(
         "REDIVIS_API_TOKEN",
@@ -175,6 +189,10 @@ def main():
     agg = agg.astype({c: "float64" for c in
                       ("min_age", "max_age") if c in agg.columns}, errors="ignore")
 
+    emit(agg, failed)
+
+
+def emit(agg, failed=()):
     stamp = datetime.date.today().isoformat()
     audit, derived, quarantine = [], [], []
     for r in agg.itertuples():
