@@ -81,3 +81,36 @@ Cheaper than it looks. `itemtext/upload.py` does `dataset.table(<name>)` with
 `replace_on_conflict`, so **each item text table is its own Redivis table** and a
 backfill is a per-table CSV re-upload, not row surgery on a shared table. All the
 cost is in producing the corrected CSVs.
+
+
+## Where the English comes from (decided 2026-09-01, ben-domingue)
+
+**If the instrument's official documentation publishes an English version, ship
+that.** No further adjudication needed. Many tier A tables are well-known
+instruments administered in translation — WHOQOL-BREF, UWES, IES-R, BFI, HEXACO,
+ERQ, MAAS, MAIA, SHS, OLBI, RSES — and the publisher's own English is better
+wording than any rendering written here.
+
+Otherwise translate the administered text faithfully.
+
+Either way `backfill_provenance.csv` records which, per table, in
+`translation_source`:
+
+| value | meaning |
+|---|---|
+| `official_instrument_english` | the instrument publisher's own English for the same numbered items |
+| `study_supplied` | this study's deposit or paper carried its own English rendering |
+| `machine_translation` | translated here from the administered text |
+| `mixed` | different fields from different sources — say which in the note |
+
+The distinction is recorded rather than adjudicated because it is a real
+difference: official English is a *parallel version*, not a translation of the
+administered string, so if a local adaptation diverges from the original the
+`_translated` column stops corresponding word-for-word to the base field. That
+is an acceptable trade for better wording, but it should be legible to anyone
+who later compares the two columns.
+
+`instrument`, `instructions` and `section_prompt` usually have no official
+parallel even when the items do — study-specific framing is written by the
+authors — so a table is commonly `mixed`: official English for the items and
+options, translated framing around them.
