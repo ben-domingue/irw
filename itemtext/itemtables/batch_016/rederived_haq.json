@@ -1,0 +1,236 @@
+{
+ "items": {
+  "HAQ10": {
+   "context": "",
+   "opts": {
+    "0": "No",
+    "1": "Yes"
+   },
+   "stem": "To stand up from a sitting position, do you usually need a special chair, a raised toilet seat, or help from another person?"
+  },
+  "HAQ11": {
+   "context": "",
+   "opts": {
+    "0": "No",
+    "1": "Yes"
+   },
+   "stem": "To walk, do you usually need a cane, crutches, walker, wheelchair, or help from another person?"
+  },
+  "HAQ12": {
+   "context": "",
+   "opts": {
+    "0": "No",
+    "1": "Yes"
+   },
+   "stem": "To reach something, do you usually use long-handled appliances or help from another person?"
+  },
+  "HAQ1a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to dress yourself including tying shoelaces & doing buttons?"
+  },
+  "HAQ1b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to shampoo your hair?"
+  },
+  "HAQ2a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to stand up from a straight chair?"
+  },
+  "HAQ2b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to get in and out of bed?"
+  },
+  "HAQ3a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to cut your own meat?"
+  },
+  "HAQ3b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to lift a full cup or glass to your mouth?"
+  },
+  "HAQ3c": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to open a new milk carton?"
+  },
+  "HAQ4a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to walk outdoors on flat ground?"
+  },
+  "HAQ4b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to climb up five steps?"
+  },
+  "HAQ5a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to wash and dry your body?"
+  },
+  "HAQ5b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to take a tub bath?"
+  },
+  "HAQ5c": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to get on and off the toilet?"
+  },
+  "HAQ6a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to reach and get down a 5 pound object from above your head?"
+  },
+  "HAQ6b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to bend down and pick up clothing from the floor?"
+  },
+  "HAQ7a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to open car doors?"
+  },
+  "HAQ7b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to open previously opened jars?"
+  },
+  "HAQ7c": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to turn faucets on and off?"
+  },
+  "HAQ8a": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to run errands and shop?"
+  },
+  "HAQ8b": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to get in and out of a car?"
+  },
+  "HAQ8c": {
+   "context": "Over the past week",
+   "opts": {
+    "0": "Without any difficulty",
+    "1": "With some difficulty",
+    "2": "With much difficulty",
+    "3": "Unable to do"
+   },
+   "stem": "Are you able to do chores such as vacuuming or yard work?"
+  },
+  "HAQ9": {
+   "context": "",
+   "opts": {
+    "0": "No",
+    "1": "Yes"
+   },
+   "stem": "To get dressed, do you usually need a buttonhook, zipper pull or other gadget, or require help from another person?"
+  }
+ }
+}
