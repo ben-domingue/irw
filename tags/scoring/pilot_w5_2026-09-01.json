@@ -1,0 +1,242 @@
+[
+ {
+  "table": "baekgaard_2023_stigma",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "hoai_2026_learning_experience",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "pham_2026_ktslh",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "ramadan_2026_ai_awareness",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_social_media_effects",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "baekgaard_2023_autonomy_loss",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "chen_2026_il",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "soderberg_2024_peer_support",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_internet_use_frequency",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "skarzauskiene_2026_information_sources",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_autonomy_family_factors",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "skarzauskiene_2026_trust_science",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "skarzauskiene_2026_fake_news_agree",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "pham_2026_bsyn",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "soderberg_2024_esm_morning",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_misfit_learning_misfit",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "clipa_2025_mslq",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_aktif_gir_yonel",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_data_security",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_toplmfayd_gir_yonel",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "baekgaard_2023_learning",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "figalova_2021_pss",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_zorunluluk_gir_yonel",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_misfit_technostress",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_basrmaarzu_gir_yonel",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "ventura_2025_quadrant_a",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "hoai_2026_instructional_design_quality",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "chen_2026_ai",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "lozano_2018_getting_along",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "erguvan_2022_questionnaire",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khulwa_2025_algorithm_awareness",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khulwa_2025_motivation_1",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "lee_2019_academic_motivation_scale",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "ye_2025_jl",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_tmlamacoz_yeterlk",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khoa_2023_knowledge_use",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_yatrmciliskoz_yeterlk",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "yao_2020_bai",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "silva_2022_crsy",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "figalova_2021_stai_state",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_facebook_uses",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_sdt_autonomy",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "celik_2026_tipi",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "hoai_2026_cognitive_presence",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_ickontrol_odak",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khulwa_2025_motivation_4",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khulwa_2025_motivation_3",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_sdt_competence",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_autonomy_school_autonomy_support",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_yencevolsoz_yeterlk",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "lozano_2018_life_activities",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "pham_2026_ktscx",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "baekgaard_2023_mastery",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "chen_2026_bi",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "yao_2020_pswq",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "pham_2026_ktsth",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "soderberg_2024_academic_selfefficacy",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_autonomy_student_ownership",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "hernandezmantilla_2024_cfni",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_news_source_trust",
+  "warehouse": "item_response_warehouse_5"
+ }
+]
