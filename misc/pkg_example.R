@@ -1,5 +1,12 @@
-#devtools::install_github("redivis/redivis-r", ref="main")
-#devtools::install_github("ben-domingue/irw/irw_pkg")
+#remotes::install_github("redivis/redivis-r", ref="main")
+#remotes::install_github("itemresponsewarehouse/Rpkg")
+## imv() and getp() are not in Rpkg. They live in irw_pkg/, which is a
+## gitignored local directory -- it is NOT on GitHub, so install_github()
+## cannot reach it and these two lines only work in a local checkout that
+## still has it. Source rather than install: irw_pkg also declares
+## Package: irw and would collide with the real client package.
+source("../irw_pkg/R/imv.R")
+source("../irw_pkg/R/getp.R")
 
 ##example analysis of one dataset
 dataset <- redivis::user("datapages")$dataset("item_response_warehouse")
@@ -14,7 +21,7 @@ if (all(items %in% 1:length(items))) {
 
 ##load('~/Dropbox/projects/irw/data/pub/4thgrade_math_sirt.Rdata')
 library(irw)
-resp<-irw::long2resp(df)
+resp<-irw::irw_long2resp(df)
 
 
 
@@ -32,7 +39,7 @@ for (i in 1:ntimes) {
     x<-x.hold
     x$oos<-ifelse(x$gr==i,1,0)
     x0<-x[x$oos==0,]
-    resp0<-data.frame(irw::long2resp(x0))
+    resp0<-data.frame(irw::irw_long2resp(x0))
     id<-resp0$id
     resp0$id<-NULL
     ##rasch model

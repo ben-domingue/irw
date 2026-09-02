@@ -10,7 +10,9 @@ This document tells an agent exactly what to produce when converting a raw datas
 
 **Check for duplicates.** Search the IRW dictionary before processing to make sure the dataset is not already in the warehouse.
 
-**Assess complexity.** A dataset with 50 participants and opaque column names in a non-standard format may not be worth the time. Large, well-structured datasets are higher priority.
+**Check the sample size.** The floor is 100 unique `id` values, flat — a table with fewer respondents is skipped outright, with no judgment call in between. Count unique `id`s before writing a script, not after.
+
+**Assess complexity.** A dataset that clears the floor but is small, opaquely labeled, and in a non-standard format may not be worth the time. Large, well-structured datasets are higher priority.
 
 ---
 
