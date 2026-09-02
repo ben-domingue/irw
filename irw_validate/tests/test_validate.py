@@ -247,6 +247,23 @@ class ScoredTables(unittest.TestCase):
         report = validate_frame(df, label="likert_2024__items.csv")
         self.assertIn("resp_ambiguous", [f.check for f in report.errors])
 
+class TableNames(unittest.TestCase):
+    def test_every_table_suffix_is_stripped(self):
+        from irw_validate.core import _table_name
+        for label, want in (("a_2024_x.csv", "a_2024_x"),
+                            ("a_2024_x.Rdata", "a_2024_x"),
+                            ("a_2024_x.rds", "a_2024_x"),
+                            ("dir/a_2024_x.tsv", "a_2024_x"),
+                            ("a_2024_x", "a_2024_x")):
+            self.assertEqual(_table_name(label), want)
+
+    def test_the_extension_does_not_fail_the_lowercase_rule(self):
+        # stripping only .csv made all 922 legacy tables fail name_charset on
+        # the capital R of ".Rdata"
+        df = pd.DataFrame({"id": [1, 2], "item": ["a", "b"], "resp": [1, 2]})
+        report = validate_frame(df, label="fine_2019_table.Rdata", profile="legacy")
+        self.assertNotIn("name_charset", [f.check for f in report.findings])
+
 
 class RPythonParity(unittest.TestCase):
     """The fork cannot silently reopen: one list, two languages, checked here."""

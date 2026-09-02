@@ -15,11 +15,18 @@ from .model import Finding, Report, severity_for
 MAX_BYTES = 512 * 1024 ** 2
 
 
+#: Every extension a table can arrive as. Matched case-insensitively: the legacy
+#: files are `.Rdata`, and stripping only `.csv` made every one of the 922 fail
+#: the lowercase-name rule on the capital R of its own extension.
+TABLE_SUFFIXES = (".csv", ".tsv", ".txt", ".rdata", ".rda", ".rds")
+
+
 def _table_name(label: str) -> str:
     stem = Path(label).name
-    for suffix in (".csv", ".tsv"):
-        if stem.endswith(suffix):
-            stem = stem[: -len(suffix)]
+    low = stem.lower()
+    for suffix in TABLE_SUFFIXES:
+        if low.endswith(suffix):
+            return stem[: -len(suffix)]
     return stem
 
 
@@ -132,6 +139,22 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
         report.findings.append(
             Finding(check.name, severity, check.detail, table=table, group=group))
 
+    # `resp_numeric` as inherited from run_qc measures how many values parse as
+    # numbers over ALL rows, so a float column with missing values fails it --
+    # NaN does not parse. That conflates "not a number" with "not present", and
+    # `resp_na` already reports the second. In the legacy sweep it flagged
+    # 16_personalityfactors, whose resp is float64 and 99% non-null.
+    #
+    # Triage keeps the inherited behaviour (50 callers depend on it); the gate
+    # profiles re-judge it over non-null values only.
+    if profile in ("upload", "legacy") and "resp" in df.columns:
+        import pandas as pd
+        present = df["resp"].dropna()
+        if len(present):
+            parses = pd.to_numeric(present, errors="coerce").notna().mean()
+            if parses >= 0.99:
+                report.findings = [f for f in report.findings if f.check != "resp_numeric"]
+
     if profile in ("upload", "legacy"):
         for finding in (extra.check_name(table)
                         + extra.check_shape(df, table)
@@ -175,6 +198,22 @@ def validate_file(path, *, label: str | None = None, profile: str = "upload",
     import pandas as pd  # deferred: red_up must import this module without pandas
     if path.suffix.lower() in (".csv", ".tsv", ".txt"):
         df = pd.read_csv(path, sep=None, engine="python")
+    elif path.suffix.lower() in (".rdata", ".rda", ".rds"):
+        # The 922 legacy tables in ../data/pub/ (#1703 sub-item 1.5). Not
+        # routed through irw_triage_updated.load_table because that pulls in
+        # the whole discovery pipeline for a two-line read.
+        import pyreadr
+        objs = pyreadr.read_r(str(path))
+        if not objs:
+            raise ValueError(f"{path.name} holds no R object")
+        if len(objs) > 1:
+            # An IRW table file should hold exactly one data frame. More than
+            # one means the file is carrying something else besides the table,
+            # and picking silently would validate the wrong object.
+            raise ValueError(
+                f"{path.name} holds {len(objs)} R objects "
+                f"({', '.join(str(k) for k in objs)}); expected one table")
+        df = next(iter(objs.values()))
     else:
         import sys
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "automated_finding"))
