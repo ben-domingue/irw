@@ -10,16 +10,29 @@ each one actually needs — it does not change anything.
 1. `fetch_published_itemtext.R` pulls `irw_itemtext(<table>)` for every published
    item text table whose tags-sheet language is not English-only (291 of 560).
 2. `classify_administered_language.py` judges **each text field separately**
-   (`item_text`, `option_text`, `instructions`, `section_prompt`) on positive
-   evidence only:
-   - a non-Latin script (CJK, Cyrillic, Arabic, …) → administered wording;
-   - Latin script with >3 non-ASCII letters → administered wording;
-   - ≥25 words and a high English function-word ratio → English;
-   - too little text to judge → `ASCII_SHORT`, which is *not* counted either way.
+   (`item_text`, `option_text`, `instructions`, `section_prompt`). Only two
+   things can prove a field is not English:
+   - a non-Latin script (CJK, Kana, Hangul, Cyrillic, Arabic, …);
+   - Latin script carrying more than three non-ASCII letters (diacritics).
 
-   The short-text guard matters: option labels like "Never" or "A little" carry
-   almost no English function words, and an earlier version of this classifier
-   read them as non-English and invented 45 false "mixed-language" tables.
+   Everything else is `NEEDS_REVIEW`. **Nothing is called non-English on the
+   absence of English.**
+
+   That rule is deliberately weak, because two stronger ones were tried and both
+   produced confident wrong answers:
+
+   - *"few English function words ⇒ non-English"* fires on word-list
+     instruments. `amarilla_2020_barthel` ("Bathing", "Bladder", "Grooming"),
+     `geography` ("Lusaka (city)"), `gilbert_meta_40` ("Add: 4 + 1") are all
+     English and all score zero. It invented **21** non-English tables, caught
+     only by reading samples by eye.
+   - the same rule applied to short option labels ("Never", "A little")
+     invented **45** false mixed-language tables before that.
+
+   Both failures share one cause: English prose is only one of the shapes
+   English item text takes, so a test tuned to prose reads every other shape as
+   foreign. A backfill driven by either version would have machine-translated
+   English word lists into English.
 
 3. `audit_2026-09-01.csv` is the result, one row per table.
 
@@ -35,19 +48,19 @@ It is usable to decide *which tables to look at* and never as the source for wha
 
 | tier | tables | state | what it needs |
 |---|---|---|---|
-| **A** | 104 | already ships the administered wording | add `language`; generate `_translated` |
+| **A** | 83 | at least one field is **provably** in the administered language | add `language`; generate `_translated` for the ADMIN fields only |
 | **B** | 178 | ships English text | confirm the administered language, then either add `language` + `text_source=translated_substitute`, or close as a genuinely English study |
-| **C** | 9 | indeterminate or empty | inspect by hand |
+| **C** | 30 | pure ASCII and not provably either way, or empty | inspect by hand |
 
-Tier A splits three ways, and the split is per field, not per table:
+The tier A/C boundary is *proof*, not likelihood: a table lands in C when no
+field carries a non-Latin script or a diacritic, which happens for word-list
+instruments in any language.
 
-- `ADMIN` (62) — every populated field is in the administered language.
-- `ADMIN_ITEMS_ENG_PARTS` (30) — administered `item_text`, English options or
-  instructions (e.g. `aslec_insomnia_wang2025`: Chinese stems, English anchors).
-- `ENG_ITEMS_ADMIN_PARTS` (12) — the reverse.
-
-Tier A volume: 4,721 distinct item stems and 4,779 distinct option labels,
-~254k characters. Scripts: 84 Latin, 18 CJK/Kana, 1 Cyrillic, 1 Arabic.
+**The per-field verdict is what drives the work, not the table verdict.** A
+table can have Chinese stems and English anchors (`aslec_insomnia_wang2025`,
+`isi_insomnia_wang2025`) or the reverse. Only fields marked `ADMIN` get a
+translated twin; a field already in English is its own translation and must
+never be round-tripped through a translator.
 
 Tier B is 178 tables, but 75 of them have no usable language tag at all, so an
 unknown share are simply English studies needing no action. 180 of the 291
