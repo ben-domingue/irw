@@ -21,7 +21,7 @@ Rules enforced here rather than left to the caller:
   worse than an absent one because nothing downstream can tell which is which.
 * `NA` is treated as empty, matching how these CSVs were written.
 """
-import csv, io, json, os, sys
+import csv, io, json, os, sys, unicodedata
 
 FIELDS = ('instructions', 'section_prompt', 'item_text', 'option_text')
 ORDER = ['table', 'section_id', 'item', 'instrument', 'language',
@@ -35,6 +35,22 @@ def blank(v):
     return (v or '').strip() in ('', 'NA')
 
 
+def key(v):
+    """Lookup key for a source string.
+
+    Published tables are NOT consistently normalised: the sv-maia2_* Serbian
+    tables store decomposed (NFD) Unicode -- "c" plus a combining caron
+    U+030C -- where a hand-written mapping naturally uses precomposed NFC
+    U+010D. The two render identically and compare unequal, so matching is done
+    on NFC-normalised text.
+
+    Only the LOOKUP is normalised. The base field is written back byte for byte
+    as published, because the whole claim of the base column is that it is what
+    the table already serves.
+    """
+    return unicodedata.normalize('NFC', (v or '').strip())
+
+
 def build(table, language, tmap, src_dir, out_dir):
     src = os.path.join(src_dir, table + '.csv')
     rows = list(csv.DictReader(io.open(src, encoding='utf-8')))
@@ -45,12 +61,12 @@ def build(table, language, tmap, src_dir, out_dir):
     for f in FIELDS:
         if f not in rows[0]:
             continue
-        m = tmap.get(f, {})
+        m = {key(k): val for k, val in tmap.get(f, {}).items()}
         for r in rows:
             v = (r.get(f) or '').strip()
             if blank(v) or not m:
                 continue
-            if v not in m:
+            if key(v) not in m:
                 missing.setdefault(f, set()).add(v)
     if missing:
         for f, vs in missing.items():
@@ -65,9 +81,9 @@ def build(table, language, tmap, src_dir, out_dir):
         o['language'] = language
         for f in FIELDS:
             tcol = f + '_translated'
-            m = tmap.get(f, {})
+            m = {key(k): val for k, val in tmap.get(f, {}).items()}
             v = (r.get(f) or '').strip()
-            o[tcol] = '' if (blank(v) or not m) else m[v]
+            o[tcol] = '' if (blank(v) or not m) else m[key(v)]
         out.append({k: o.get(k, '') for k in ORDER})
 
     os.makedirs(out_dir, exist_ok=True)
