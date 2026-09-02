@@ -1,7 +1,13 @@
 suppressMessages(library(irw))
 options(irw.itemtext_disclaimer = FALSE)
-tg  <- read.csv("/tmp/claude-1000/itbf/targets.csv", stringsAsFactors=FALSE)
-out <- "/tmp/claude-1000/itbf/text"
+# Paths default beside this script rather than into a /tmp scratch directory that
+# does not survive the session, which is what made the round 1 check un-rerunnable (#1811).
+# works under Rscript (--file=) and under source() alike
+.a   <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
+here <- if (length(.a)) dirname(normalizePath(sub("^--file=", "", .a[1]))) else getwd()
+targets <- Sys.getenv("ITBF_TARGETS", file.path(here, "targets.csv"))
+tg  <- read.csv(targets, stringsAsFactors=FALSE)
+out <- Sys.getenv("ITBF_SRC", file.path(here, "published"))
 dir.create(out, showWarnings=FALSE, recursive=TRUE)
 for (i in seq_len(nrow(tg))) {
   tb <- tg$table[i]
