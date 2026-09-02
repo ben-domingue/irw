@@ -47,15 +47,60 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
             f"missing required columns for item text: {', '.join(missing)}",
             table=table, group="core"))
         return report
-    for name, dup in (("dup_item_resp",
-                       df.duplicated(subset=[c for c in ("item", "resp")
-                                             if c in df.columns]).sum()),):
-        report.checks_run.append(name)
-        if dup:
+    keys = [c for c in ("item", "resp") if c in df.columns]
+    report.checks_run.append("dup_item_resp")
+    dup = int(df.duplicated(subset=keys).sum()) if keys else 0
+
+    # A scored table is a different object. Where `correct_response` is
+    # populated, `resp` is a scoring key (0 wrong / 1 right) rather than a point
+    # on a scale, so one resp value legitimately carries many option labels --
+    # spanishmegastudy has 1,270 multiple-choice items with three distractors
+    # each, all coded resp=0. Judging that by the Likert rule would flag 1,270
+    # correct items. For a scored table the only thing that still holds is that
+    # no *whole row* should repeat.
+    scored = False
+    if "correct_response" in df.columns:
+        col = df["correct_response"]
+        # notna() first: under pandas 3 an all-NaN column astype(str) keeps the
+        # values MISSING rather than rendering them "nan", so a string-only test
+        # matches nothing and reads an empty column as fully populated.
+        filled = col.notna() & ~col.astype(str).str.strip().isin(("", "NA", "nan", "None"))
+        scored = bool(filled.mean() > 0.5)
+    if scored:
+        exact = int(df.duplicated().sum())
+        if exact:
             report.findings.append(Finding(
-                name, "error",
-                f"{dup} duplicate item+resp rows -- an item text table carries one "
-                f"row per response option, so a repeat is a doubled upload (#1810)",
+                "dup_row", "error",
+                f"{exact} fully identical row(s) in a scored table. `resp` here is a "
+                f"scoring key, so one value carrying several option labels is "
+                f"expected -- but an exact repeat is still a duplicate.",
+                table=table, group="core"))
+    elif dup:
+        # Two different faults produce this, and the distinction matters to
+        # whoever has to fix it, so name which one this is. If the repeated rows
+        # carry the SAME option_text it is a doubled upload (#1810/#1816). If
+        # they carry DIFFERENT option_text, the table is asserting that one
+        # response value means two things -- afps_vangsness_2019 maps resp=1 to
+        # both "Strongly agree" and "Strongly disagree", which is two opposite
+        # scale directions written into one table and is worse than a duplicate.
+        conflicting = 0
+        if "option_text" in df.columns:
+            per_key = df.groupby(keys)["option_text"].nunique(dropna=False)
+            conflicting = int((per_key > 1).sum())
+        if conflicting:
+            report.findings.append(Finding(
+                "resp_ambiguous", "error",
+                f"{conflicting} response value(s) carry more than one option label -- "
+                f"the same `resp` is documented as meaning two different things, so "
+                f"nothing joining item text to responses can resolve it. Usually two "
+                f"opposite scale directions merged into one table.",
+                table=table, group="core"))
+        else:
+            report.findings.append(Finding(
+                "dup_item_resp", "error",
+                f"{dup} duplicate item+resp rows with identical option text -- an item "
+                f"text table carries one row per response option, so a repeat is a "
+                f"doubled upload (#1810)",
                 table=table, group="core"))
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
