@@ -78,7 +78,15 @@ from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLar
 from irw_triage_updated import load_table, triage_dataset, preflight_deps
 
 EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
-EUROPEPMC_SUPPL = "https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/supplementaryFiles"
+# includeInlineImage=false is load-bearing, not an optimisation. Without it
+# Europe PMC packages every inline figure into the zip, and for a large
+# fraction of articles that packaging step dies with a 500 -- which the
+# 2026-09-02 weekly run recorded as `download_failed` for 37 of 60
+# candidates, all CC-BY with hasSuppl=Y. Re-requesting those 37 with the
+# flag set recovered 36. It also shrinks the download to the files we
+# actually read (tabular supplements), so it is faster besides.
+EUROPEPMC_SUPPL = ("https://www.ebi.ac.uk/europepmc/webservices/rest/"
+                   "{pmcid}/supplementaryFiles?includeInlineImage=false")
 ARTICLE_URL = "https://europepmc.org/article/PMC/{pmcid}"
 
 # slug -> (issn_l, display name). See module docstring for how this list
@@ -373,6 +381,12 @@ def _load_done_dois(path: str) -> set:
 # identical SEEN_DOIS_PATH for the full rationale (same design, mirrored).
 SEEN_DOIS_PATH = "pmc_seen_dois.csv"
 
+# Flags that mean "we never actually examined this candidate" -- an infra
+# failure, not a verdict about the data. Recording these in the cross-run
+# ledger would retire the DOI forever on the strength of a transient 500 or
+# a crash, so they are left out and picked up by a later run.
+INCONCLUSIVE_FLAGS = {"download_failed", "error"}
+
 
 def load_seen_dois(path: str = SEEN_DOIS_PATH) -> set:
     import os
@@ -390,7 +404,7 @@ def append_seen_dois(dois, path: str = SEEN_DOIS_PATH) -> None:
     file_exists = os.path.exists(path)
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=["doi", "date"])
+        writer = csv.DictWriter(f, fieldnames=["doi", "date"], lineterminator="\n")
         if not file_exists:
             writer.writeheader()
         writer.writerows({"doi": d, "date": today} for d in dois)
@@ -436,7 +450,7 @@ def main():
 
     outf = open(args.out, "a" if args.resume and already_done else "w",
                 newline="", encoding="utf-8")
-    writer = csv.DictWriter(outf, fieldnames=FIELDNAMES, extrasaction="ignore")
+    writer = csv.DictWriter(outf, fieldnames=FIELDNAMES, extrasaction="ignore", lineterminator="\n")
     if not (args.resume and already_done):
         writer.writeheader()
 
@@ -452,8 +466,9 @@ def main():
                     if hit.doi in seen or hit.doi in exclude or hit.doi in global_seen:
                         continue
                     seen.add(hit.doi)
-                    newly_seen.append(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    if row["flag"] not in INCONCLUSIVE_FLAGS:
+                        newly_seen.append(hit.doi)
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1

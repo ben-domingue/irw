@@ -310,7 +310,7 @@ def append_log_rows(rows: list[dict], log_path: str = LOG_PATH) -> None:
     except FileNotFoundError:
         file_exists = False
     with open(log_path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         if not file_exists:
             writer.writeheader()
         writer.writerows(rows)
@@ -367,7 +367,7 @@ def main():
 
     fieldnames = ["source", "title", "doi", "published", "url"]
     outf = open(out_path, "w", newline="", encoding="utf-8")
-    writer = csv.DictWriter(outf, fieldnames=fieldnames)
+    writer = csv.DictWriter(outf, fieldnames=fieldnames, lineterminator="\n")
     writer.writeheader()
 
     hits_by_term = {term: 0 for term in terms}
