@@ -419,11 +419,13 @@ the merge needs a join key).
 Write to `automated_finding/itemtext_output/<table>__items.csv` — double
 underscore, and the case of `<table>` exactly as the response table spells it.
 
-**Only `*__items.csv` may ever live in that directory.** `itemtext/upload.py`
-walks a directory recursively and treats every `.csv` in it as a table to
-upload, so a stray `provenance.csv` or `notes.csv` would be uploaded as if it
-were data. This has happened before; it is why `itemtext/itemtables/clean/`
-exists on the other side.
+Keep that directory to `*__items.csv` and the batch's own bookkeeping files.
+An uploader walks a directory recursively, so a stray `provenance.csv` or
+`notes.csv` used to be uploaded as if it were data -- this has happened, and it
+is why `itemtext/itemtables/clean/` exists on the other side. `red_up` now
+excludes anything that is not `*__items.csv` when the target is `irw_text`, and
+names what it excluded, so a stray file is visible rather than uploaded. Do not
+treat that as licence to leave junk there.
 
 ### Gate it against the staged response CSV
 
@@ -1016,8 +1018,16 @@ The two folders go to two different Redivis datasets, in this order:
 
 | Folder | Dataset | Upload with |
 |---|---|---|
-| `irw_output/` | `item_response_warehouse_4` | `irw_output/upload_4.py` |
-| `itemtext_output/` | `irw_text:07b6` | `itemtext/upload.py` |
+| `irw_output/` | the newest warehouse shard | `red_up irw_output` |
+| `itemtext_output/` | `irw_text` | `red_up itemtext_output` |
+
+`red_up` picks both defaults itself -- a directory of `*__items.csv` goes to
+`irw_text`, anything else to the newest shard -- and shows the target for
+confirmation before it writes. Do not hardcode a shard number here again: this
+table used to name `item_response_warehouse_4` and went stale two shards ago.
+`red_up` also checks every shard for a table of the same name first, because a
+copy in a newer shard shadows the older one rather than replacing it. See
+`src/red_up/README.md`.
 
 **Response tables first.** Item text that references a table which isn't live
 yet is a dangling reference.

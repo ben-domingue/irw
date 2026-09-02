@@ -8,11 +8,11 @@ description: Use this skill when asked to regenerate or refresh the IRW dictiona
 Three workflows over the `metadata/` pipeline (`ben-domingue/irw`, this repo).
 Workflows 1 and 2 **call the actual numbered R scripts in `metadata/`** — this
 skill never reimplements their logic, only orchestrates them and reports what
-changed. Workflow 3 is this skill's own script (`upload_meta.py`) — there's no
-existing numbered script to call, since uploading was previously a manual,
-out-of-scope step (see `data/add2redivis/upload.py` for the sibling script
-this was modeled on, which does the equivalent for the actual IRW data tables
-rather than the metadata tables).
+changed. Workflow 3 is this skill's own script (`upload_meta.py`), now a thin wrapper
+around `red_up` — the single uploader every IRW dataset goes through. It works
+out which of the thirteen known metadata CSVs are present and hands them to
+`red_up --dataset irw_meta`; the replace, the preserved table descriptions and
+the row-count check all live there. See `red_up/README.md`.
 Everything here works from the repo root; the numbered scripts themselves
 expect to run with `metadata/` as the working directory (matching their
 existing convention, e.g. `09_hero_status.R`'s docstring).
@@ -225,9 +225,8 @@ version. `hero_stats.json` is deliberately not in this list; it isn't a
 Redivis table, it goes to the separate `irw_site` repo.
 
 **Nothing is live after this runs.** `version="next"` writes to a draft —
-review and publish it by hand on the Redivis site afterward. This mirrors
-`data/add2redivis/upload.py`'s existing pattern for the IRW data tables
-themselves.
+review and publish it by hand on the Redivis site afterward. `red_up` never
+publishes, for any dataset.
 
 **Credentials are deliberately separate from workflow 1/2's token.**
 `~/.redivis_api_token` (used by `run_pipeline.sh`/`audit_tables.R`) is

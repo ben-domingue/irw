@@ -87,7 +87,7 @@ def build(table, language, tmap, src_dir, out_dir):
         out.append({k: o.get(k, '') for k in ORDER})
 
     os.makedirs(out_dir, exist_ok=True)
-    # The Redivis table name IS the file's basename: upload.py does
+    # The Redivis table name IS the file's basename: the uploader does
     # dataset.table(<basename minus extension>). All 556 live tables in
     # irw_text are named "<table>__items", so the suffix is REQUIRED here --
     # writing "<table>.csv" would create 78 new tables beside the existing

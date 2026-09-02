@@ -1,13 +1,13 @@
 ---
 name: irw-auto-itemtext
-description: This skill should be used when the user asks to "generate item text for X", "process the itemtext queue", "extract items for this table", or otherwise references transcribing/extracting instrument, section, item, or response-option text for an IRW table from its source paper. Also applies when the user references itemtext/join.R, itemtext/upload.py, the itemtext index workbook, or the itemtext.html public schema.
+description: This skill should be used when the user asks to "generate item text for X", "process the itemtext queue", "extract items for this table", or otherwise references transcribing/extracting instrument, section, item, or response-option text for an IRW table from its source paper. Also applies when the user references itemtext/join.R, uploading item text with red_up, the itemtext index workbook, or the itemtext.html public schema.
 ---
 
 # IRW Item Text Extraction
 
 Transcribes the literal instrument/section/item/response-option text for an IRW table
-from its source paper and writes it as a validated `{table}__items.csv`, ready for
-`itemtext/upload.py`. The output format is defined in `references/itemtext_standard.md`
+from its source paper and writes it as a validated `{table}__items.csv`, ready to upload
+with `red_up`. The output format is defined in `references/itemtext_standard.md`
 (copied verbatim from itemresponsewarehouse.org/itemtext.html) — read it before
 extracting anything, don't re-derive the schema from a merged example alone.
 
@@ -197,7 +197,7 @@ The output claims to be what the study administered. Three rules:
   part of the published schema at itemresponsewarehouse.org/itemtext.html (mirrored in
   `references/itemtext_standard.md`), so a table carrying them is uploadable without any
   further sign-off. `validate_items.R` checks that required columns are *present* and
-  tolerates extras, so the gate is unaffected. `upload.py` hands the CSV to Redivis, which
+  tolerates extras, so the gate is unaffected. The uploader hands the CSV to Redivis, which
   infers fields from the file — the first such upload is what widens `irw_text` to hold them.
   Whether the already-uploaded tables get backfilled is still open (irw#1777) —
   `ALSECYPIAMH_WU_2022_SDQ` and `altahla_2024_whoqol` ship English for non-English
@@ -749,11 +749,10 @@ candidate for holding back from upload (see `abdullah_2024_hpbbloat_stress`).
 write.csv(items, file = "itemtables/<table>__items.csv", row.names = FALSE)
 ```
 
-Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where
-`upload.py` expects to find files (`python3 upload.py itemtables` uploads everything in
-that directory). Don't upload automatically; that's a separate, explicit step (see
-"Uploading", below) since it pushes to the shared `datapages/irw_text:next` Redivis
-dataset.
+Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where the
+upload step expects to find files (`red_up itemtables`). Don't upload automatically;
+that's a separate, explicit step (see "Uploading", below) since it pushes to the shared
+`datapages/irw_text:next` Redivis dataset.
 
 ### Step 6b — Logging discrepancies (no Sheets-write tool available)
 
@@ -937,10 +936,10 @@ convention across the 422 published tables (the `NA` token, as `write.csv` emits
 `audit_batch.R` re-checks the whole batch against live data and flags row-count
 anomalies, coverage gaps, and `option_text` padded with its own `resp` value.
 
-**Note for uploads:** `upload.py` walks a directory recursively and treats *every*
-`.csv` as a table, so `notes.csv`, `provenance.csv` and `audit_report.csv` would be
-uploaded as if they were data. Upload from a filtered directory containing only
-`*__items.csv`, never by pointing it at a batch folder.
+**Note for uploads:** the uploader walks a directory recursively. `red_up` excludes
+every file that is not `*__items.csv` when the target is `irw_text` and lists what it
+excluded, so `notes.csv`, `provenance.csv` and `audit_report.csv` are safe — but read
+that exclusion list rather than assuming, and check the target line says `irw_text`.
 
 ## Idempotency & caching
 
@@ -969,7 +968,7 @@ curation, the curation was the stale one, not the extraction.
    `table_context.R`, find the source paper, extract and structure). Write the result to
    a staging path, not `itemtext/itemtables/<table>__items.csv` — e.g.
    `itemtext/audit_staging/<table>__items.csv` — so it can never be picked up by a stray
-   `python3 upload.py itemtables` before review.
+   `red_up itemtables` before review.
 3. **Diff** — run:
    ```bash
    Rscript .claude/skills/irw-auto-itemtext/scripts/diff_itemtext.R <table> itemtext/audit_staging/<table>__items.csv itemtext/audit_pending_review/<table>_diff.md
@@ -1007,12 +1006,12 @@ curation, the curation was the stale one, not the extraction.
      from the same paper/project before writing the issue — every apparent mislabel found
      across this skill's use turned out to be isolated to the one table once siblings were
      checked, so note in the issue whether you verified that (and how), rather than
-     leaving it open-ended. **Never run `upload.py` on an audit-mode table without the user's
+     leaving it open-ended. **Never run `red_up` on an audit-mode table without the user's
      explicit per-table or per-batch approval first** — filing the issue is not the same
-     as approval to replace; `upload.py` replaces a table's entire content on conflict (no
-     row-level merge), so nothing gets auto-uploaded. Only after explicit approval, copy
+     as approval to replace; an upload replaces a table's entire content (no row-level
+     merge), so nothing gets auto-uploaded. Only after explicit approval, copy
      the approved tables' CSVs from `audit_staging/` into a clean temp directory and run
-     `python3 upload.py <tempdir>`.
+     `red_up <tempdir>`.
    - 🟡 **Yellow** — the curated version is fine to keep as-is, but there's a specific,
      articulable limitation worth telling website users about (e.g. some items aren't
      documented in the one source checked, a translation is independently-derived rather
@@ -1061,13 +1060,15 @@ on to the next candidate rather than forcing a fabricated match.
 ## Uploading (separate, explicit step — don't do this automatically)
 
 ```bash
-python3 upload.py itemtables
+red_up itemtables
 ```
 
-Uploads every `*.csv` in `itemtext/itemtables/` to `datapages/irw_text:next` on Redivis
-(prompts before overwriting anything already there). Only run this when the user
-explicitly asks to upload — it's a shared-system write, same caution as any other
-Redivis upload in this repo.
+`red_up` sees `*__items.csv` and defaults to `datapages/irw_text:next`; it shows the
+target and the full file list, marks each table NEW or UPDATE, and asks before writing
+anything. It uploads only to the draft version, and verifies each table's row count with
+a `count(*)` afterwards. Only run this when the user explicitly asks to upload — it's a
+shared-system write, same caution as any other Redivis upload in this repo. See
+`src/red_up/README.md`.
 
 ### After every upload — reconcile the public issues page
 

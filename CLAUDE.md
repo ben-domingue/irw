@@ -28,8 +28,10 @@ authoritative because it is the thing that actually executes:
 It snapshots each stage's CSVs before and after so `diff_csv.py` can report what
 changed. `04_tables.R` (QC) is deliberately excluded — superseded by
 `audit_tables.R`; `10_collections.R` runs between 08 and 09; `09_hero_status.R`
-must run last. Nothing here uploads to Redivis: `upload_meta.py` is a separate,
+must run last. Nothing here uploads to Redivis: uploading is a separate,
 manual step, and it only ever writes a draft version for a human to publish.
+One tool does every upload — `red_up` (see `red_up/README.md`); the metadata
+CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
 
 **Individual data processing scripts** are run standalone — there is no central build system. Scripts live in `data/` and are executed one at a time to convert raw datasets.
 
