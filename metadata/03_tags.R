@@ -53,6 +53,10 @@ AUTO_COLS <- c(
 ##silently outranked by the Sheet, so refuse it rather than lose it.
 AUTO_RATER <- "claude-auto"
 
+##Tables contributed by an auto file this run, collected for the provenance
+##sidecar written after the union.
+auto_tables <- character()
+
 ##Shared column selection and key normalisation, applied identically to sheet
 ##rows and auto rows. Everything downstream assumes it has run.
 select_tag_cols <- function(tag, label) {
@@ -265,6 +269,18 @@ get_tags <- function(db) {
             auto <- auto[!empty, , drop = FALSE]
         }
         stopifnot(identical(names(auto), names(tag)))
+        ##Which tables the auto file contributed, so the published tags stay
+        ##sweepable. KEEP_COLS drops the `Rater` column on the way in, so once a
+        ##tagger value lands in tags.csv it is indistinguishable from a human's
+        ##-- and a wrong one can then never be found again. A derived column does
+        ##not have that problem (age_range_audit.csv records a verdict and reason
+        ##per table, which is how #1760 could recompute 1,794 of them); a hand
+        ##tag does, and an auto tag inherits it.
+        ##
+        ##Ben's ruling, 2026-09-02 (#1837): misplaced tags are not a deal-breaker
+        ##and are reversible -- but reversible means recorded well enough to
+        ##reverse. This is that record.
+        auto_tables <<- c(auto_tables, as.character(auto$table))
         tag <- rbind(tag, auto)
         print(paste0(db$name, ": +", nrow(auto), " auto rows from ", db$file.auto,
                      " (", sum(superseded), " superseded by the sheet)"))
@@ -299,7 +315,47 @@ get_tags <- function(db) {
     tag <- normalize_tag_columns(tag)
 
     readr::write_csv(tag, db$file.out)
+
+    ##Sidecar rather than a new column in tags.csv: the published schema is read
+    ##by Rpkg, Python-pkg and the site, and none of them should have to change to
+    ##gain an audit trail. One row per table the tagger wrote, listing which of
+    ##its columns still hold the auto value after the sheet and the derived file
+    ##have had their say.
+    write_tag_provenance(tag, db)
     invisible(tag)
+}
+
+##Which columns of a published row came from the tagger rather than a human.
+##A table the tagger wrote but the sheet later superseded contributes nothing:
+##by then the value is the human's.
+write_tag_provenance <- function(tag, db) {
+    ##Derive the name from the output file rather than hardcoding it: `core` and
+    ##`nom` both write into the same directory, and a fixed name meant the second
+    ##source silently overwrote the first's sidecar with an empty file.
+    out <- sub("\\.csv$", "_provenance.csv", db$file.out)
+    cols <- setdiff(names(tag), "table")
+    keep <- tolower(trimws(as.character(tag$table))) %in%
+            tolower(trimws(unique(auto_tables)))
+    rows <- tag[keep, , drop = FALSE]
+    if (!nrow(rows)) {
+        readr::write_csv(data.frame(table = character(), columns = character(),
+                                    rater = character(), generated = character()),
+                         out)
+        return(invisible(NULL))
+    }
+    filled <- function(x) !is.na(x) & trimws(as.character(x)) != ""
+    per <- vapply(seq_len(nrow(rows)), function(i) {
+        set <- cols[vapply(cols, function(cl) filled(rows[[cl]][i]), logical(1))]
+        paste(set, collapse = "; ")
+    }, character(1))
+    readr::write_csv(
+        data.frame(table = rows$table, columns = per, rater = AUTO_RATER,
+                   generated = format(Sys.time(), "%Y-%m-%d"),
+                   stringsAsFactors = FALSE)[per != "", , drop = FALSE],
+        out)
+    print(paste0(db$name, ": wrote ", sum(per != ""),
+                 " provenance row(s) to ", out))
+    invisible(NULL)
 }
 
 ##Rows whose table is absent from the live catalog. Returns `tag` unchanged,
