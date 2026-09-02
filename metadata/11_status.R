@@ -101,9 +101,32 @@ TAG_COLUMNS <- c("age range", "child age (for child-focused studies)", "sample",
                  "primary language(s)", "construct name")
 filled <- function(x) !is.na(x) & trimws(as.character(x)) != ""
 live_rows <- tags[key(tags$table) %in% live, , drop = FALSE]
+##`child age` is not filled for every table and should not be: the vocabulary
+##says leave it blank unless the sample includes children. Reported against all
+##4,134 live tables it reads 17.1% and looks like the worst-covered column in
+##the project; against the 903 tables whose `age range` is `Child (<18y)` or
+##`Mixed` -- the only ones eligible for a value -- it is 78.4%, and the 195
+##blanks are tables with no usable `cov_age` to derive from.
+##
+##That is a measurement bug, not a coverage gap, and it is the same mistake this
+##file was written to stop: quoting a number whose denominator does not match
+##the claim (#1767, #1837).
+ELIGIBLE_WHEN <- list(`child age (for child-focused studies)` =
+                      function(d) trimws(as.character(d[["age range"]])) %in%
+                                  c("Child (<18y)", "Mixed"))
+
 by_column <- lapply(intersect(TAG_COLUMNS, names(live_rows)), function(cl) {
-    k <- length(unique(key(live_rows$table[filled(live_rows[[cl]])])))
-    list(n = k, pct = pct(k))
+    gate <- ELIGIBLE_WHEN[[cl]]
+    rows <- if (is.null(gate)) live_rows else live_rows[gate(live_rows), , drop = FALSE]
+    denom <- if (is.null(gate)) n else length(unique(key(rows$table)))
+    k <- length(unique(key(rows$table[filled(rows[[cl]])])))
+    out <- list(n = k, pct = if (denom > 0) round(100 * k / denom, 1) else 0)
+    if (!is.null(gate)) {
+        out$denominator <- denom
+        out$of <- "tables whose `age range` is Child (<18y) or Mixed"
+        out$pct_of_all_tables <- pct(k)
+    }
+    out
 })
 names(by_column) <- intersect(TAG_COLUMNS, names(live_rows))
 

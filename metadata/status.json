@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-01T19:54:35-0700",
+  "generated": "2026-09-02T16:35:23-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
@@ -14,7 +14,10 @@
       },
       "child age (for child-focused studies)": {
         "n": 708,
-        "pct": 17.1
+        "pct": 78.4,
+        "denominator": 903,
+        "of": "tables whose `age range` is Child (<18y) or Mixed",
+        "pct_of_all_tables": 17.1
       },
       "sample": {
         "n": 2257,
