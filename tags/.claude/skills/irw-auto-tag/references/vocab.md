@@ -167,6 +167,35 @@ Two rules follow, and `metadata/tag_normalize.R` enforces the first on export:
 If recruitment is not described at all, leave the frame facet blank. Silence is
 not the same as `General/non-specific`.
 
+## Primary Language(s) — what evidence licenses a value (decided 2026-09-01, #1803)
+
+**Inference is allowed here, and that is deliberate — the opposite of the
+`Age Range` rule.** Where a source does not state the language of
+administration, infer it from what you do know: the country, the population, a
+forward-backward translation, the language of the instrument's cited version.
+
+The asymmetry is Ben's call and has a reason. A wrong guess is cheap and
+visible; a blank is neither. The corpus is majority non-English and every
+missing value makes it read as more English than it is, so **erring toward
+naming a non-English language is the intended failure direction.** That is not
+true of `age range`, where a wrong tag silently mis-filters a sample.
+
+Two things are still not licensed, because neither is an inference about the
+respondents:
+
+- **A repository record's own language field is not the instrument's language.**
+  Zenodo stamps "Languages: English" on the *record*; Dataverse and figshare do
+  the same. After #1789 the tagger reads mostly repository metadata, so this
+  will come up constantly — and it biases toward English, the one direction this
+  rule exists to avoid. `soderberg_2024_*` is the worked example: the Zenodo
+  record says English, the study is at Åbo Akademi, and the instrument could be
+  Swedish or Finnish. Left blank, correctly.
+- **The language of the paper is not the language of the instrument.** A study
+  published in English having administered a Turkish questionnaire is `tur`.
+
+Record what the respondents read. If an instrument went out in more than one
+language, list them all (`eng, vie`).
+
 ## Construct type (multi-select, comma-separated)
 
 Order doesn't matter. `03_tags.R` sorts atoms into canonical order on export,

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-01T19:02:42-0700",
+  "generated": "2026-09-01T19:54:35-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
@@ -33,8 +33,8 @@
         "pct": 55.9
       },
       "primary language(s)": {
-        "n": 2193,
-        "pct": 53
+        "n": 2237,
+        "pct": 54.1
       },
       "construct name": {
         "n": 2265,
