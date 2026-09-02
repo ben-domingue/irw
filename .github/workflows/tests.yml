@@ -37,10 +37,12 @@ jobs:
       - name: Install
         run: |
           python -m pip install --upgrade pip
-          # pandas is what irw_validate needs; redivis is declared by the
-          # package but no test touches the network.
+          # pandas for irw_validate; redivis because red_up.cli imports it at
+          # module scope even though no test here touches the network. The
+          # first run of this workflow failed on exactly that -- installing
+          # with --no-deps left one pre-existing test unable to import cli.
           python -m pip install pandas
-          python -m pip install -e . --no-deps
+          python -m pip install -e .
 
       - name: red_up
         run: python -m unittest discover -s red_up/tests -t . -v
