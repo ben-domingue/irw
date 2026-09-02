@@ -19,8 +19,11 @@ that makes the laptop unusable for twenty minutes, so:
   for operations that gain nothing from it here;
 * `--max-mb` skips files above a size and records the skip rather than passing
   them silently (default 64 MB, which covers all but ~20 of the 922);
-* `--resume` re-reads the output CSV and skips tables already done, so it can be
-  stopped with Ctrl-C and picked up later;
+* results are appended **as each table finishes**, not held until the end -- the
+  first version buffered everything and wrote once, so a run that timed out at
+  420 seconds produced no file at all and `--resume` had nothing to resume from;
+* `--resume` re-reads that CSV and skips tables already done, so it can be
+  stopped and picked up later;
 * and it is worth running under `nice -n 19`, which the module suggests on
   startup if it is not already niced.
 
@@ -73,13 +76,26 @@ def main(argv: list | None = None) -> int:
         print(f"no .Rdata files under {args.directory}", file=sys.stderr)
         return 2
 
+    FIELDS = ["table", "check", "severity", "message",
+              "n_rows", "n_items", "n_participants"]
+    out_path = pathlib.Path(args.out)
     done: set = set()
-    rows: list = []
-    if args.resume and pathlib.Path(args.out).exists():
-        with open(args.out) as fh:
-            rows = list(csv.DictReader(fh))
-        done = {r["table"] for r in rows}
+    if args.resume and out_path.exists():
+        with out_path.open() as fh:
+            done = {r["table"] for r in csv.DictReader(fh)}
         print(f"resuming: {len(done)} tables already recorded")
+    fresh = not out_path.exists() or not args.resume
+    sink = out_path.open("w" if fresh else "a", newline="")
+    writer = csv.DictWriter(sink, fieldnames=FIELDS)
+    if fresh:
+        writer.writeheader()
+
+    def record(**kw):
+        """One row, flushed. A sweep that loses its work on Ctrl-C is not resumable."""
+        writer.writerow({k: kw.get(k, "") for k in FIELDS})
+        sink.flush()
+
+    n_findings = 0
 
     unreadable = clean = skipped = 0
     started = time.time()
@@ -89,44 +105,42 @@ def main(argv: list | None = None) -> int:
         size_mb = path.stat().st_size / 1024 ** 2
         if size_mb > args.max_mb:
             skipped += 1
-            rows.append({"table": path.stem, "check": "size_skipped", "severity": "info",
-                         "message": f"{size_mb:.0f} MB exceeds --max-mb={args.max_mb:.0f}; "
-                                    f"not opened. Re-run with a higher cap when the "
-                                    f"machine is idle.",
-                         "n_rows": "", "n_items": "", "n_participants": ""})
+            record(table=path.stem, check="size_skipped", severity="info",
+                   message=f"{size_mb:.0f} MB exceeds --max-mb={args.max_mb:.0f}; not "
+                           f"opened. Re-run with a higher cap when the machine is idle.")
+            n_findings += 1
             continue
         try:
             report = validate_file(path, profile=args.profile)
         except Exception as exc:                      # a bad file must not stop the sweep
             unreadable += 1
-            rows.append({"table": path.stem, "check": "unreadable", "severity": "error",
-                         "message": f"{type(exc).__name__}: {exc}"[:300],
-                         "n_rows": "", "n_items": "", "n_participants": ""})
+            record(table=path.stem, check="unreadable", severity="error",
+                   message=f"{type(exc).__name__}: {exc}"[:300])
+            n_findings += 1
             print(f"[{i}/{len(files)}] {path.stem}: UNREADABLE {type(exc).__name__}", flush=True)
             continue
         st = report.stats or {}
         if not report.findings:
             clean += 1
+            # a row per table either way, so --resume knows it was done
+            record(table=path.stem, check="", severity="ok",
+                   n_rows=st.get("n_responses", ""), n_items=st.get("n_items", ""),
+                   n_participants=st.get("n_participants", ""))
         for f in report.findings:
-            rows.append({"table": path.stem, "check": f.check, "severity": f.severity,
-                         "message": f.message[:300],
-                         "n_rows": st.get("n_responses", ""),
-                         "n_items": st.get("n_items", ""),
-                         "n_participants": st.get("n_participants", "")})
+            record(table=path.stem, check=f.check, severity=f.severity,
+                   message=f.message[:300], n_rows=st.get("n_responses", ""),
+                   n_items=st.get("n_items", ""), n_participants=st.get("n_participants", ""))
+            n_findings += 1
         if i % 25 == 0 or i == len(files):
-            print(f"[{i}/{len(files)}] {clean} clean, {len(rows)} findings, "
+            print(f"[{i}/{len(files)}] {clean} clean, {n_findings} findings, "
                   f"{unreadable} unreadable, {time.time()-started:.0f}s", flush=True)
         gc.collect()
 
-    with open(args.out, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=["table", "check", "severity", "message",
-                                           "n_rows", "n_items", "n_participants"])
-        w.writeheader()
-        w.writerows(rows)
+    sink.close()
     print(f"\n{len(files)} tables: {clean} with nothing to report, "
           f"{len(files) - clean - skipped} with at least one finding, "
           f"{unreadable} unreadable, {skipped} skipped for size")
-    print(f"wrote {len(rows)} findings to {args.out}")
+    print(f"wrote {n_findings} findings to {args.out}")
     return 0
 
 
