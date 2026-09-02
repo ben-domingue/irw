@@ -18,6 +18,23 @@ CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
 JSN <- file.path(DIR, "rederived_haq.json")
 fail <- character(0)
 
+# Explicit id-by-item pivot. reshape() is avoided deliberately: irw_fetch()
+# returns a tibble and reshape() names its varying columns differently there
+# than for the data.frame read.csv() gives, which silently broke the column
+# lookup below when this script ran against live data rather than --resp-csv.
+pivot_wide <- function(d, items) {
+    d <- as.data.frame(d)
+    d$item <- as.character(d$item)
+    ids <- unique(d$id)
+    m <- matrix(NA_real_, nrow = length(ids), ncol = length(items),
+                dimnames = list(NULL, items))
+    for (nm in items) {
+        s <- d[d$item == nm, , drop = FALSE]
+        m[match(s$id, ids), nm] <- as.numeric(s$resp)
+    }
+    m
+}
+
 a <- commandArgs(trailingOnly = TRUE)
 i <- match("--resp-csv", a)
 resp_csv <- if (!is.na(i)) a[i + 1] else NA_character_
@@ -89,9 +106,7 @@ if (is.null(live) || !nrow(live)) {
     # disability index is strongly unidimensional and between-category
     # correlations are high anyway.
     its <- grep("^HAQ[1-8][abc]$", unique(live$item), value = TRUE)
-    w <- reshape(live[live$item %in% its, c("id", "item", "resp")], idvar = "id",
-                 timevar = "item", direction = "wide")
-    m <- as.matrix(w[, -1]); colnames(m) <- sub("resp.", "", colnames(m), fixed = TRUE)
+    m  <- pivot_wide(live, sort(its))
     cm <- cor(m, use = "pairwise.complete.obs")
     ct <- substr(colnames(cm), 4, nchar(colnames(cm)) - 1)
     win <- c(); btw <- c()

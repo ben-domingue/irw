@@ -19,6 +19,23 @@ CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
 JSN <- file.path(DIR, "rederived_cesd.json")
 fail <- character(0)
 
+# Explicit id-by-item pivot. reshape() is avoided deliberately: irw_fetch()
+# returns a tibble and reshape() names its varying columns differently there
+# than for the data.frame read.csv() gives, which silently broke the column
+# lookup below when this script ran against live data rather than --resp-csv.
+pivot_wide <- function(d, items) {
+    d <- as.data.frame(d)
+    d$item <- as.character(d$item)
+    ids <- unique(d$id)
+    m <- matrix(NA_real_, nrow = length(ids), ncol = length(items),
+                dimnames = list(NULL, items))
+    for (nm in items) {
+        s <- d[d$item == nm, , drop = FALSE]
+        m[match(s$id, ids), nm] <- as.numeric(s$resp)
+    }
+    m
+}
+
 a <- commandArgs(trailingOnly = TRUE)
 i <- match("--resp-csv", a)
 resp_csv <- if (!is.na(i)) a[i + 1] else NA_character_
@@ -85,10 +102,8 @@ if (is.null(live) || !nrow(live)) {
     # 16 negatively. The shipped stems put the positive wording at exactly those
     # four numbers, so the data should show them as the only reverse-scoring
     # items -- a check on the code-to-text tie that does not use the codebook.
-    w <- reshape(live[, c("id", "item", "resp")], idvar = "id", timevar = "item",
-                 direction = "wide")
-    m <- as.matrix(w[, -1]); colnames(m) <- sub("resp.CESD", "", colnames(m))
-    m <- m[, order(as.integer(colnames(m)))]
+    m <- pivot_wide(live, paste0("CESD", 1:20))
+    colnames(m) <- as.character(1:20)
     cm  <- cor(m, use = "pairwise.complete.obs")
     avg <- (rowSums(cm, na.rm = TRUE) - 1) / (ncol(cm) - 1)
     POS <- c("4", "8", "12", "16")
