@@ -34,10 +34,36 @@ the four text fields hold the wording respondents actually read, verbatim, `lang
 names that language, and the English goes in the parallel `_translated` fields. `item`
 and `resp` are join keys and are never translated. For an English administration,
 `language` and the `_translated` columns are left out entirely rather than emitted
-empty. When the administered original cannot be recovered and only an English version
-exists, the English goes in the base fields, the `_translated` fields stay empty, and
-`text_source=translated_substitute` records the fallback. See SKILL.md's core model
-section 4 for the full rule.
+empty.
+
+**The fallback, and what `language` holds in it.** When the administered original
+cannot be recovered and only an English version exists, the English goes in the base
+fields, the `_translated` fields stay empty, and `text_source=translated_substitute`
+records the fallback.
+
+`language` is populated **whenever the administration was non-English, regardless of
+what the base fields contain** — it is defined as a fact about the study, not a claim
+about `item_text`. So in the fallback a table reads `language=Chinese` while
+`item_text` is English, and that combination is deliberate:
+
+> **Populated `language` + empty `_translated` is the signal that the base fields are
+> NOT the administered wording.** It is also the query that finds tables needing a
+> later backfill (`language != '' AND item_text_translated == ''`). Leaving `language`
+> empty here would make a fallback table indistinguishable from an English
+> administration and destroy that query.
+
+**Recoverability is scoped, so the test is decidable at extraction time.** Look in the
+data deposit and the paper's own supplements. If the administered wording is there,
+ship it; if it is not, take the fallback and say in provenance which files you checked
+and that they contained no text in that script. Do not go hunting off-source for a
+published original — that is a later pass, not a blocker.
+
+Whether the shipped English is the authors' own rendering or a canonical instrument
+does **not** change any of this. `text_source` distinguishes those (`study_materials`
+vs `canonical_instrument` vs `translated_substitute`); the base/`_translated`/`language`
+layout is the same either way.
+
+See SKILL.md's core model section 4 for the full rule.
 
 **`resp_raw`** (per the public schema page): when the scoring key can't be recovered —
 i.e. the item is on some categorical/lettered coding in the source material that doesn't

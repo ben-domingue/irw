@@ -365,8 +365,18 @@ text slow the batch down — the goal is still to maximize data in the IRW.
 - The paper is paywalled, or the instrument is a multi-hop citation away.
 - The labels are positional ("FTD-SS Item 1", "Q1"), so the *published*
   instrument is needed to know what was asked.
-- The wording exists only in a table *image* (OCR), a third-party
-  reproduction, or a translated substitute.
+- The wording exists only in a table *image* (OCR) or a third-party
+  reproduction.
+
+**A non-English administration is not a reason to skip.** This bullet used to
+end "or a translated substitute". Since the administered-language columns
+entered the schema on 2026-09-01 (#1774/#1777) that wording contradicts the
+standard, and read literally it would have skipped seven correctly-extracted
+tables in the PLOS weekly batch (#1783). Language handling is a *schema* rule,
+not a triage rule, and it is owned by `itemtext_standard.md` -- see
+"Administered language" there, and core model section 4 of
+`irw-auto-itemtext`'s SKILL.md. Follow it there rather than re-deriving it
+here.
 
 When you skip, say **where the text actually is** in the `data/<table>.py`
 header and in the `BATCH_LOG.md` entry, so a later pass starts from an answer
