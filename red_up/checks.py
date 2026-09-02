@@ -1,4 +1,4 @@
-"""Cheap local checks run before anything is uploaded.
+"""Local checks run before anything is uploaded.
 
 Deliberately the cheap half of "one validator, one uploader, and a gate
 between them" (#1703). Unifying misc/validate_irw.R with
@@ -94,14 +94,32 @@ def check_schema(report: FileReport, target: Target) -> None:
         report.warnings.append(f"missing required column(s): {', '.join(missing)}")
 
 
-def run_validator(path: Path) -> list[str]:
-    """Seam for the full IRW format validator (#1703 sub-item 1.3).
+def run_validator(path: Path) -> tuple[list[str], list[str]]:
+    """The full IRW format validator (#1703 sub-item 1.3). -> (errors, warnings)
 
-    Returns a list of findings; empty today. When misc/validate_irw.R and
-    run_qc() are merged into one implementation with an exit code, call it
-    here and surface its findings alongside the cheap ones above.
+    Everything above this streams with the csv module because some of these
+    tables are hundreds of MB. The validator needs pandas and a whole frame, so
+    it is imported lazily and skips above `irw_validate.MAX_BYTES` -- and when
+    it skips, it says so as a warning rather than passing quietly.
+
+    A missing dependency is an ERROR, never a pass. Blocking because pandas is
+    not installed is annoying exactly once; passing because pandas is not
+    installed is undetectable forever.
     """
-    return []
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    try:
+        from irw_validate import validate_file
+    except ImportError as exc:
+        return ([f"validator unavailable ({exc}) -- install pandas, or pass "
+                 f"--no-validate to upload without a format check"], [])
+
+    try:
+        report = validate_file(path, profile="upload")
+    except Exception as exc:                      # unreadable, odd encoding, ...
+        return ([f"validator could not read this file: {exc}"], [])
+
+    return ([f"{f.check}: {f.message}" for f in report.errors],
+            [f"{f.check}: {f.message}" for f in report.warnings])
 
 
 def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
@@ -112,6 +130,13 @@ def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
     win. That is a batch-assembly mistake, so it is an error, not a warning.
     """
     reports = [scan(path, table) for path, table in pairs]
+
+    for report in reports:
+        if report.errors:
+            continue          # a file that is not a table yet is not worth validating
+        errors, warnings = run_validator(report.path)
+        report.errors.extend(errors)
+        report.warnings.extend(warnings)
 
     seen: dict[str, list[FileReport]] = {}
     for report in reports:

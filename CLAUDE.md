@@ -105,6 +105,10 @@ Python scripts follow the same logic using `pandas.melt()` instead of `pivot_lon
 
 ## Processing Priorities
 
+**This section is about which *dataset* to process next. For which *kind of work*
+to do at all — corpus trust before gates before reach before volume — see
+[`PRIORITIES.md`](PRIORITIES.md).**
+
 Full guidance: `processing_notes/DataProcessingInstructions.md`. Summary:
 
 - The goal is not to empty the queue — it's to maximize data in the IRW. There will always be more incoming, so use time on what grows the IRW most rather than rushing to clear the backlog.
