@@ -5,19 +5,14 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-01 PLOS weekly batch
 
-- [ ] **21 tables / 280,971 responses + `biblio_2026-09-01.csv` (21 rows) + 9
-  item text tables need uploading.** Staged in `irw_output/` and
-  `itemtext_output/`; response tables first (`item_response_warehouse_4`), then
-  item text (`irw_text:07b6`). Every table passed the `datastandard.md`
-  checklist and all 9 item text tables PASS the three-script gate. Three things
-  to look at before pushing the button, all argued in `BATCH_LOG.md`'s
-  2026-09-01 entry: `smirnov_2025_enrollment_motives` is a multi-select
-  checklist rather than eleven administered probes and is the one table to drop
-  first if that framing is out of scope; `shao_2025_work_engagement` ships the
-  deposit's 1-7 where the paper describes the UWES-9's 0-6; and
-  `xue_2025_coping_style` ships 1-4 where the paper claims a blanket 1-5.
-  Once confirmed, stamp `uploaded=<date>` on the 9 new
-  `itemtext_provenance.csv` rows.
+- [ ] **9 item text tables still need uploading** to `irw_text:07b6` via
+  `itemtext/upload.py`. The response side is done: ben-domingue moved the 21
+  `irw_output/` tables for upload and imported the 21
+  `biblio_2026-09-01.csv` rows into the dictionary (both confirmed
+  2026-09-01, and both files are off disk as expected). Item text goes second
+  because a `__items.csv` referencing a table that isn't live yet is a dangling
+  reference. Once it lands, stamp `uploaded=<date>` on the 9 new
+  `itemtext_provenance.csv` rows -- they are blank until then.
 
 - [ ] **The weekly PLOS routine writes its seen-DOI ledger to `main` before its
   candidates are reviewed.** The 2026-09-01 run pushed `de13a15` (58 DOIs into
@@ -29,17 +24,21 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
   the old openpyxl bug. Either both commits should go on the branch, or the
   ledger append should move to a post-merge step.
 
-- [ ] **`resp_scale_mixed` + `multi_scale` sends multi-instrument
-  questionnaires to `human_review` for no reason.** 7 of the 9
+- [x] **`resp_scale_mixed` + `multi_scale` no longer sends multi-instrument
+  questionnaires to `human_review`** (done 2026-09-01). 7 of the 9
   `human_assistance` rows this week landed in `human_review` with "no clear
-  automated classification"; 5 of those were simply questionnaires carrying
-  several instruments on different response scales, which the standard already
-  answers with "one file per scale". All 7 resolved on first look at the raw
-  file, and 6 became shipped tables. `irw_retriage_ha.py` has no bucket for
-  this; a `multi_scale` rule that recognises several clean per-prefix blocks
-  with differing ranges would move the most productive rows out of the
-  eyes-needed pile. Worth doing before the next weekly run -- this is where the
-  batch's data actually came from.
+  automated classification"; 5 were simply questionnaires carrying several
+  instruments on different response scales, which `datastandard.md` already
+  answers with "one file per scale", and all 5 became shipped tables. Added as
+  RULE 10b in `irw_retriage_ha.py`: `resp_scale_mixed` with
+  `n_participants >= 100` now routes to `recoverable_format` -- the file is
+  fine, the automatic single melt is what needs redoing -- with a note to
+  re-read by block prefix and check each block's range against the paper rather
+  than the pooled min/max. Re-run on this week's rows: 6 `recoverable_format`,
+  1 `worth_retrying`, 2 `human_review`, which is exactly the hand adjudication.
+  No change on `pmc_monthly_candidates_weekly_2026-08-26.csv`. Also fixed a
+  `ZeroDivisionError` in the summary when a run has no `human_assistance` rows
+  at all (hit on `plos_monthly_candidates_weekly_2026-08-25.csv`).
 
 ## From the 2026-08-29 batch
 
