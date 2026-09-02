@@ -103,12 +103,12 @@ Otherwise translate the administered text faithfully.
 Either way `backfill_provenance.csv` records which, per table, in
 `translation_source`:
 
-| value | meaning |
-|---|---|
-| `official_instrument_english` | the instrument publisher's own English for the same numbered items |
-| `study_supplied` | this study's deposit or paper carried its own English rendering |
-| `machine_translation` | translated here from the administered text |
-| `mixed` | different fields from different sources — say which in the note |
+The allowed values live in [`itemtext/provenance_vocab.csv`](../provenance_vocab.csv)
+and are deliberately not restated here — `itemtext/check_provenance.R` validates
+every provenance file against that one list and exits non-zero on anything else.
+Two sessions added this column on the same day with two different vocabularies
+(#1815 and #1820); one file, checked by something that fails, is what stops that
+recurring.
 
 The distinction is recorded rather than adjudicated because it is a real
 difference: official English is a *parallel version*, not a translation of the

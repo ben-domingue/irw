@@ -834,6 +834,15 @@ Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other 
   `_translated` columns (core model section 4).
 - `unknown`.
 
+`translation_source` — where the English in the `_translated` columns came from.
+Separate from `text_source`, which describes the base text. **The allowed values are in
+`itemtext/provenance_vocab.csv`, not here**; `Rscript itemtext/check_provenance.R`
+validates every provenance file against it and exits non-zero on an unknown value.
+
+`machine_translation` means this project generated the English rather than the study's
+authors. That obliges an entry on the public issues page — ratified 2026-09-02 — and
+`check_issues_page.R` now reports those tables as DUE until one exists.
+
 `public_note`, when non-empty, is a one-sentence caveat written for the public issues
 page, used verbatim and always emitted regardless of the other fields — use it for
 caveats orthogonal to provenance (e.g. `aguirre_camacho_2021_champion`, whose item text
