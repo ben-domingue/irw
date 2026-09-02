@@ -227,8 +227,32 @@ Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables
 Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_<NNN>
 
+# Added 2026-09-02. The four gates above check a table against its SOURCE -- do the
+# item and resp sets match, does the mapping reproduce. These two check it against
+# the STANDARD and against the corpus, which nothing in this batch flow did.
+irw-validate itemtables/batch_<NNN>/*__items.csv
+Rscript check_provenance.R ../../irw_site/itemtext_issues.qmd
+
 A verify FAIL or NO VERDICT, or a lint ERROR, means a table's own claim did not reproduce: mark that
 table failed rather than done, and say so in the round_log entry.
+
+An `irw-validate` ERROR means the table breaks the data standard regardless of how well
+its mapping reproduces. Two of its checks exist because of defects found in already-published
+tables on 2026-09-02:
+
+- `dup_item_resp` — the same `item`+`resp` twice with identical option text. That is a
+  doubled upload; four live tables carried it (#1816), one of them serving every item twice
+  for a day.
+- `resp_ambiguous` — one `resp` value carrying two different option labels, i.e. two
+  opposite scale directions merged into one table. `afps_vangsness_2019` says a response of
+  1 means both "Strongly agree" and "Strongly disagree" (#1827). Note that per-item
+  direction differences are legitimate and are NOT flagged — `aip_vangsness_2019` has four
+  reverse-worded items labelled the other way round and passes, correctly.
+
+`check_provenance.R` fails on a `translation_source` value outside
+`itemtext/provenance_vocab.csv`, and reports any `machine_translation` table with no entry
+on the public issues page. A table shipping English this project generated is disclosed —
+ratified 2026-09-02, after 60 such tables were found with no public note at all (#1777).
 
 ## Step 5 — Update queue state and check the circuit breaker
 

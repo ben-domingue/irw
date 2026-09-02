@@ -27,6 +27,8 @@ here <- dirname(sub("^--file=", "",
                     grep("^--file=", commandArgs(FALSE), value = TRUE)[1]))
 if (!length(here) || is.na(here)) here <- "itemtext"
 
+page_is_current <- TRUE     # set FALSE when the page we read may be stale
+
 vocab_path <- file.path(here, "provenance_vocab.csv")
 if (!file.exists(vocab_path)) stop("no provenance_vocab.csv beside this script")
 vocab <- read.csv(vocab_path, stringsAsFactors = FALSE)
@@ -88,9 +90,14 @@ if (file.exists(page)) {
     br <- suppressWarnings(system2("git", c("-C", shQuote(site), "rev-parse",
                                             "--abbrev-ref", "HEAD"),
                                    stdout = TRUE, stderr = FALSE))
-    if (length(br) && !is.na(br[1]) && nzchar(br[1]) && br[1] != "main")
-        cat(sprintf("  NOTE: that checkout is on branch '%s', not main -- it may be stale.\n",
+    if (length(br) && !is.na(br[1]) && nzchar(br[1]) && br[1] != "main") {
+        page_is_current <- FALSE
+        cat(sprintf("  NOTE: that checkout is on branch '%s', not main. The disclosure\n",
                     br[1]))
+        cat("  check below is REPORTED BUT NOT ENFORCED -- a page whose state is\n",
+            "  unknown cannot support a verdict either way. Point this at the site's\n",
+            "  main to enforce it:  Rscript check_provenance.R <path-to-main-copy>\n", sep = "")
+    }
 } else {
     cat(sprintf("\nissues page not found at %s -- skipping the disclosure check\n", page))
 }
@@ -112,4 +119,9 @@ if (file.exists(page) && length(needs_note)) {
     undisclosed <- character(0)
 }
 
-quit(status = if (length(bad) || length(undisclosed)) 1L else 0L)
+## The vocabulary always decides the exit status: it is checked against files in
+## this repository. The disclosure check only decides it when we can trust the
+## copy of the page we read -- otherwise a colleague's branch checkout would
+## fail everyone's gate for a defect that is not there. This exact false
+## positive happened on 2026-09-02, minutes after the 60 entries were merged.
+quit(status = if (length(bad) || (length(undisclosed) && page_is_current)) 1L else 0L)
