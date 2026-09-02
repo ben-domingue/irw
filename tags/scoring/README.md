@@ -193,3 +193,42 @@ Ship per column, as #1722 argues:
 - The gold set is itself human work of unmeasured consistency. A gold/gold
   disagreement rate between raters would tell us what ceiling to expect, and we
   do not have one.
+
+## The w2 re-measurement, 2026-09-01 (#1786)
+
+The 2.3 run reached only 30% of w2 against 80–100% for the other shards. After
+the repository-API fix, three more blind batches:
+
+| batch | result |
+|---|---|
+| **Paired** — the same ten w2 tables, cache cleared | **3/10 → 9/10** |
+| **Fresh** — 20 more never-tagged w2 tables, `seed=1786` | **16/20 (80%)** |
+
+w2 goes from 30% to 80%, which is the range the other shards were already in. Of
+the five remaining abstentions across all 30 tables, **three are genuine
+paywalls** (`oa_status=closed`) and two were OSF shells — since fixed by the OSF
+route.
+
+**What a catalogue record is actually worth.** Sixteen of the 25 tagged tables
+came back as `repository_metadata` rather than a paper, so this is the honest
+question about the fix. Field coverage across those 25:
+
+| field | filled |
+|---|---|
+| `construct_name` | 100% |
+| `item_format` | 100% |
+| `construct_type` | 96% |
+| `measurement_tool` | 96% |
+| `primary_languages` | 88% |
+| `sample` | 72% |
+| **`age_range`** | **32%** |
+
+So a deposit record supports the format and construct fields nearly as well as a
+paper does, supports `sample` when the description states a frame (figshare
+descriptions often do; bare Dataverse records rarely), and **almost never
+supports `age_range`** — which is the correct outcome, because #1760's rule
+forbids inferring an age from "undergraduates" or "adolescents", and because
+that column is derived from `cov_age` anyway.
+
+The fix therefore buys real tagging, not just a lower abstention count — with
+the one exception being the column that no longer needs it.

@@ -1,0 +1,82 @@
+[
+ {
+  "table": "ptacek2023_compact",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "yandun2026_language",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "feng2026_autonomy",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "rosetti2023_climate_knowledge",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "chatton2024_honos13",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "opladen2025_edeq",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "liang2026_intrinsic_motivation",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "imps2025_hf",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "tian2026_digital_competence",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "feng2026_behavioral_intention",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "rosetti_2023_cas",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "kurach2026_financial_literacy",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "perfectionismlit_2021_engagement",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "germann_2026_state_intervention",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "okeke2025_decision_confidence_pre",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "kushnir2017_ftnd",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "galindo_2023_loneliness",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "liang_2026_extrinsic_motivation",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "stenhouse_2026_math_anxiety",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "balmas2018_leader_personality",
+  "warehouse": "item_response_warehouse_2"
+ }
+]
