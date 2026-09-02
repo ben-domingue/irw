@@ -131,13 +131,13 @@ paper / repository
 data/<script>.R                      one script per dataset, self-contained
       |
       v
-upload.py  ---------------------->   a core Redivis shard
+red_up  ------------------------->   a core Redivis shard
       |
       v
 metadata/01..10_*.R                  reads the shards + the Sheets,
       |                              writes CSVs into metadata/
       v
-upload_meta.py  ------------------>  irw_meta, as a DRAFT version
+red_up  ------------------------->   irw_meta, as a DRAFT version
       |
       v
    published by hand on Redivis
@@ -155,11 +155,19 @@ machine, regenerates the metadata CSVs, runs `audit_tables.R` (which cross-check
 names across the metadata, tags and biblio outputs against the live Redivis
 datasets), and opens a GitHub issue with the log.
 
-**Nothing uploads automatically.** The cron job deliberately never runs
-`upload_meta.py`. When `upload_meta.py` is run, it only ever creates a *draft*
-Redivis version — Redivis keeps an unpublished working copy that nobody outside
-the project can see until someone clicks publish. That click is always a human
-action taken after reviewing a diff.
+**Nothing uploads automatically.** The cron job deliberately never uploads.
+Every upload goes through one tool, [`red_up`](red_up/README.md), and it only
+ever creates a *draft* Redivis version — Redivis keeps an unpublished working
+copy that nobody outside the project can see until someone clicks publish. That
+click is always a human action taken after reviewing a diff.
+
+`red_up` replaced thirteen near-identical copies of one script, each hardcoding
+a different dataset, so the destination used to be decided by which file you
+happened to run. It reads the dataset list from `metadata/redivis_config.R`,
+defaults by filename (`*__items.csv` → `irw_text`, otherwise the newest shard),
+checks every shard for an existing table of the same name before writing —
+because a copy in a newer shard *shadows* the older one rather than replacing
+it — and verifies each table with a `count(*)` afterwards.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
@@ -171,7 +179,8 @@ When two documents disagree, this is the order of precedence:
 | Question | Authoritative source |
 |---|---|
 | Output schema, column names, file naming | [`datastandard.md`](datastandard.md) |
-| Redivis owner and dataset names | `IRW_OWNER` / `IRW_CORE_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) |
+| Redivis owner and dataset names | `IRW_OWNER` / `IRW_CORE_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) — `red_up` parses this file rather than restating it |
+| How anything gets uploaded to Redivis | [`red_up/README.md`](red_up/README.md) |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |

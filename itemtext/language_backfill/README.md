@@ -77,10 +77,9 @@ their administered language is a per-paper lookup.
 
 ## Backfill mechanics
 
-Cheaper than it looks. `itemtext/upload.py` does `dataset.table(<name>)` with
-`replace_on_conflict`, so **each item text table is its own Redivis table** and a
-backfill is a per-table CSV re-upload, not row surgery on a shared table. All the
-cost is in producing the corrected CSVs.
+Cheaper than it looks. **Each item text table is its own Redivis table**, so a
+backfill is a per-table CSV re-upload (`red_up <dir>`), not row surgery on a
+shared table. All the cost is in producing the corrected CSVs.
 
 
 ## Where the English comes from (decided 2026-09-01, ben-domingue)
@@ -120,10 +119,11 @@ options, translated framing around them.
 
 Staged files are `<table>__items.csv`, and the suffix is **not cosmetic**.
 
-`upload.py` names the Redivis table after the file's basename
-(`dataset.table(<basename minus extension>)`). All 556 live tables in `irw_text`
-are named `<table>__items`, so a file named `<table>.csv` uploads as a **new
-table beside the existing one** rather than replacing it.
+The Redivis table is named after the file's basename, minus the extension.
+Every live table in `irw_text` is named `<table>__items`, so a file named
+`<table>.csv` would upload as a **new table beside the existing one** rather
+than replacing it — and `red_up` would refuse it outright, since a file without
+the `__items` suffix is not eligible for `irw_text`.
 
 This is easy to get wrong because `irw_list_itemtext_tables()` hides it:
 `Rpkg/R/itemtext.R` does `sub("__items$", "", names)` before returning, so the

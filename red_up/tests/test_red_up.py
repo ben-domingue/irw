@@ -1,0 +1,231 @@
+"""Offline tests for red_up. No network, no credentials.
+
+    python3 -m unittest discover -s red_up/tests
+
+Everything that talks to Redivis lives in push.py/verify.py/plan.index_tables
+and is exercised by the end-to-end procedure in red_up/README.md instead.
+"""
+
+from __future__ import annotations
+
+import tempfile
+import unittest
+from pathlib import Path
+
+from red_up import plan as planning
+from red_up.checks import check_all, check_schema, scan
+from red_up.discover import discover, table_name
+from red_up.targets import (
+    ConfigError,
+    required_columns,
+    Target,
+    eligible,
+    guess_target,
+    load_registry,
+    newest_shard,
+)
+
+RESPONSE = "id,item,resp\n1,a,1\n2,a,0\n"
+ITEMS = "table,item,item_text\nt,a,hello\n"
+
+
+def write(directory: Path, name: str, body: str) -> Path:
+    path = directory / name
+    path.write_text(body)
+    return path
+
+
+class Registry(unittest.TestCase):
+    """The dataset list is parsed from metadata/redivis_config.R, not restated."""
+
+    def test_matches_the_authoritative_config(self):
+        owner, targets = load_registry()
+        self.assertEqual(owner, "datapages")
+        names = [t.name for t in targets]
+        self.assertEqual(
+            names[:6],
+            [f"item_response_warehouse{s}" for s in ("", "_2", "_3", "_4", "_5", "_6")])
+        self.assertEqual(
+            sorted(names[6:]),
+            ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn", "irw_text"])
+        self.assertEqual(newest_shard(targets).name, "item_response_warehouse_6")
+
+    def test_pairs_is_competitions(self):
+        # There is no irw_pairs dataset and never has been; "pairs" is the
+        # label, irw_competitions is the dataset.
+        _, targets = load_registry()
+        comp = next(t for t in targets if t.source == "comp")
+        self.assertEqual(comp.name, "irw_competitions")
+        self.assertIn("pairs", comp.label)
+
+    def test_a_malformed_config_raises_rather_than_emptying_the_menu(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            bad = Path(tmp) / "redivis_config.R"
+            bad.write_text('IRW_OWNER <- "datapages"\n')
+            with self.assertRaises(ConfigError):
+                load_registry(bad)
+
+    def test_commented_out_names_are_not_picked_up(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "redivis_config.R"
+            path.write_text(
+                'IRW_OWNER <- "datapages"\n'
+                'IRW_CORE_DATASETS <- c(\n  "a",\n  # "retired_shard",\n  "b"\n)\n'
+                'IRW_AUX_DATASETS <- c(text = "irw_text")\n')
+            _, targets = load_registry(path)
+            self.assertEqual([t.name for t in targets], ["a", "b", "irw_text"])
+
+
+class Discovery(unittest.TestCase):
+    def test_table_name_keeps_dots_and_double_underscores(self):
+        # The old uploaders used split('.')[0], which truncated any name
+        # containing a dot.
+        self.assertEqual(table_name(Path("eufootball_2010-2020.csv")),
+                         "eufootball_2010-2020")
+        self.assertEqual(table_name(Path("v1.2_scale.csv")), "v1.2_scale")
+        self.assertEqual(table_name(Path("foo__items.csv")), "foo__items")
+
+    def test_non_csv_files_are_reported_not_silently_dropped(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            write(root, "a.csv", RESPONSE)
+            write(root, "notes.R", "x")
+            found = discover(root)
+            self.assertEqual([p.name for p in found.csvs], ["a.csv"])
+            self.assertEqual([p.name for p in found.skipped], ["notes.R"])
+
+
+class TargetGuessing(unittest.TestCase):
+    def setUp(self):
+        _, self.targets = load_registry()
+
+    def test_any_items_file_means_an_item_text_directory(self):
+        # Item-text batches routinely carry provenance.csv/notes.csv beside the
+        # real output, so a majority rule would send those to a shard.
+        files = [Path("provenance.csv"), Path("notes.csv"), Path("audit.csv"),
+                 Path("x__items.csv")]
+        self.assertEqual(guess_target(files, self.targets).name, "irw_text")
+
+    def test_plain_csvs_go_to_the_newest_shard(self):
+        self.assertEqual(guess_target([Path("a.csv")], self.targets).name,
+                         "item_response_warehouse_6")
+
+    def test_eligibility_is_decided_by_the_target(self):
+        text = next(t for t in self.targets if t.is_itemtext)
+        shard = newest_shard(self.targets)
+        self.assertIsNone(eligible(Path("x__items.csv"), text))
+        self.assertIsNotNone(eligible(Path("notes.csv"), text))
+        self.assertIsNone(eligible(Path("x.csv"), shard))
+        self.assertIsNotNone(eligible(Path("x__items.csv"), shard))
+
+
+class Checks(unittest.TestCase):
+    def test_row_count_excludes_the_header(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "a.csv", RESPONSE)
+            report = scan(path, "a")
+            self.assertEqual(report.rows, 2)
+            self.assertEqual(report.columns, ["id", "item", "resp"])
+            self.assertTrue(report.ok)
+
+    def test_a_file_with_no_required_columns_is_an_error(self):
+        # notes.csv / provenance.csv must never become a Redivis table.
+        _, targets = load_registry()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "notes.csv", "note,author\nhi,me\n")
+            report = scan(path, "notes")
+            self.assertTrue(report.ok)          # scan itself does no schema check
+            check_schema(report, newest_shard(targets))
+            self.assertFalse(report.ok)
+
+    def test_some_missing_columns_is_only_a_warning(self):
+        _, targets = load_registry()
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "a.csv", "id,item\n1,a\n")
+            report = scan(path, "a")
+            check_schema(report, newest_shard(targets))
+            self.assertTrue(report.ok)
+            self.assertTrue(any("resp" in w for w in report.warnings))
+
+    def test_schema_depends_on_the_destination(self):
+        # irw_meta's thirteen tables each have their own schema, so requiring
+        # id/item/resp there would reject every one of them.
+        _, targets = load_registry()
+        by_source = {t.source: t for t in targets}
+        self.assertEqual(required_columns(newest_shard(targets)),
+                         ("id", "item", "resp"))
+        self.assertEqual(required_columns(by_source["nom"]), ("id", "item", "resp"))
+        self.assertEqual(required_columns(by_source["text"]),
+                         ("table", "item", "item_text"))
+        self.assertEqual(required_columns(by_source["meta"]), ())
+        self.assertEqual(required_columns(by_source["comp"]), ())
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "biblio.csv", "table,reference,url\nt,r,u\n")
+            report = scan(path, "biblio")
+            check_schema(report, by_source["meta"])
+            self.assertTrue(report.ok)
+
+    def test_empty_and_headerless_files_are_errors(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            self.assertFalse(scan(write(Path(tmp), "a.csv", ""), "a").ok)
+            self.assertFalse(scan(write(Path(tmp), "b.csv", "id,item,resp\n"), "b").ok)
+
+    def test_uppercase_names_warn(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "Foo.csv", RESPONSE)
+            self.assertTrue(any("lowercase" in w for w in scan(path, "Foo").warnings))
+
+    def test_two_files_claiming_one_table_name_is_an_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "x").mkdir()
+            (root / "y").mkdir()
+            a = write(root / "x", "dup.csv", RESPONSE)
+            b = write(root / "y", "dup.csv", RESPONSE)
+            reports = check_all([(a, "dup"), (b, "dup")])
+            self.assertTrue(all(not r.ok for r in reports))
+
+
+class Planning(unittest.TestCase):
+    def setUp(self):
+        _, self.targets = load_registry()
+        self.shard = newest_shard(self.targets)
+
+    def _reports(self, tmp, names):
+        return check_all([(write(Path(tmp), f"{n}.csv", RESPONSE), n) for n in names])
+
+    def test_classification(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._reports(tmp, ["fresh", "here", "older"])
+            index = {
+                "here": ["item_response_warehouse_6"],
+                "older": ["item_response_warehouse", "item_response_warehouse_3"],
+            }
+            items = {i.table: i for i in planning.build(reports, self.shard, index)}
+            self.assertEqual(items["fresh"].status, planning.NEW)
+            self.assertEqual(items["here"].status, planning.UPDATE)
+            # Present in an older shard: uploading into _6 would shadow it,
+            # because clients resolve newest-first.
+            self.assertEqual(items["older"].status, planning.ELSEWHERE)
+            self.assertEqual(items["older"].found_in[-1], "item_response_warehouse_3")
+
+    def test_elsewhere_defaults_to_updating_where_the_table_already_lives(self):
+        from red_up.cli import resolve_elsewhere
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._reports(tmp, ["older"])
+            index = {"older": ["item_response_warehouse", "item_response_warehouse_3"]}
+            items = planning.build(reports, self.shard, index)
+            resolve_elsewhere(items, self.shard, assume=True)
+            self.assertEqual(items[0].dataset, "item_response_warehouse_3")
+
+    def test_ineligible_files_are_excluded_never_uploaded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "x__items.csv", ITEMS)
+            reports = check_all([(path, "x__items")])
+            items = planning.build(reports, self.shard, {})
+            self.assertEqual(items[0].status, planning.EXCLUDED)
+            self.assertIsNone(items[0].dataset)
+
+
+if __name__ == "__main__":
+    unittest.main()

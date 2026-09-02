@@ -5,8 +5,8 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-01 PLOS weekly batch
 
-- [ ] **9 item text tables still need uploading** to `irw_text:07b6` via
-  `itemtext/upload.py`. The response side is done: ben-domingue moved the 21
+- [ ] **9 item text tables still need uploading** to `irw_text` — `red_up
+  <dir>` takes `irw_text` as its default for a directory of `*__items.csv`. The response side is done: ben-domingue moved the 21
   `irw_output/` tables for upload and imported the 21
   `biblio_2026-09-01.csv` rows into the dictionary (both confirmed
   2026-09-01, and both files are off disk as expected). Item text goes second
