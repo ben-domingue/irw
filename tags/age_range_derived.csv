@@ -593,6 +593,7 @@ germann_2026_national_identity,Adult (18+),,derived_cov_age,18.0,96.0,71579,0.0,
 GART_Grolig_2020,Mixed,Adolescent (12-18y),derived_cov_age,13.0,73.0,120,0.158333,2026-09-01
 genpsych_russell_2024_gemma,Adult (18+),,derived_cov_age,18.0,81.0,1000,0.0,2026-09-01
 gilbert_meta_32,Child (<18y),Adolescent (12-18y),derived_cov_age,8.0,25.0,4513,0.010858,2026-09-01
+gilbert_meta_22,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,21.0,5359,0.031163,2026-09-01
 gilbert_meta_24,Child (<18y),Child (6-12y),derived_cov_age,6.5,9.5,644,0.0,2026-09-01
 gilbert_meta_16,Child (<18y),Child (6-12y),derived_cov_age,7.0,13.0,3948,0.0,2026-09-01
 gilbert_meta_19,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28465,0.0,2026-09-01
@@ -605,6 +606,8 @@ gilbert_meta_105,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_a
 gilbert_meta_13,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
 ghanbari_2016_helma_use,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 gilbert_meta_15,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3381,0.059154,2026-09-01
+gilbert_meta_30,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,2.0,20.0,14575,0.000343,2026-09-01
+gilbert_meta_29,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,2.0,20.0,14575,0.000343,2026-09-01
 ghanbari_2016_helma_understand,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 ghanbari_2016_helma_reading,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 ghanbari_2016_helma_numeracy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
@@ -612,11 +615,13 @@ ghanbari_2016_helma_appraise,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0
 gilbert_meta_14,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
 ghanbari_2016_helma_comm,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
 gilbert_meta_17,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28475,0.0,2026-09-01
+gilbert_meta_70,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,1.0,20.0,6026,0.000332,2026-09-01
 gilbert_meta_49,Mixed,Adolescent (12-18y),derived_cov_age,16.0,68.0,187,0.02139,2026-09-01
 gilbert_meta_62,Adult (18+),,derived_cov_age,23.0,90.0,713,0.0,2026-09-01
 gilbert_meta_45,Adult (18+),,derived_cov_age,21.0,63.0,240,0.0,2026-09-01
 gilbert_meta_47,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.55,7.07,162,0.0,2026-09-01
 gilbert_meta_46,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.46,7.39,156,0.0,2026-09-01
+gilbert_meta_68,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.25,9413,0.000106,2026-09-01
 gilbert_meta_38,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
 gilbert_meta_44,Elderly (minimum age >50),,derived_cov_age,60.0,94.0,243,0.0,2026-09-01
 gilbert_meta_60,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2549,0.375049,2026-09-01
@@ -630,6 +635,7 @@ gilbert_meta_61,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2550,0.37529
 gilbert_meta_5,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0595483779907,15.7097873687744,2920,0.0,2026-09-01
 gilbert_meta_37,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
 gilbert_meta_41,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,4.0,10.0,3230,0.0,2026-09-01
+gilbert_meta_69,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.25,9410,0.000106,2026-09-01
 gilbert_meta_57,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
 gilbert_meta_85,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,931,0.040816,2026-09-01
 gilbert_meta_86,Adult (18+),,derived_cov_age,17.0,96.0,1234,0.002431,2026-09-01
@@ -639,6 +645,7 @@ gilbert_meta_84,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,908,0.039648
 gilbert_meta_9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,88.0,1646,0.020656,2026-09-01
 gmc_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
 gilbert_meta_72,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,18.0,5125,0.001561,2026-09-01
+gilbert_meta_71,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,1.0,20.0,6026,0.000332,2026-09-01
 goksel_2026_embarrassment_authenticity,Adult (18+),,derived_cov_age,18.0,85.0,2100,0.0,2026-09-01
 girma_2021_phq9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,546,0.333333,2026-09-01
 gizaw_2023_phq9,Adult (18+),,derived_cov_age,21.0,73.0,577,0.0,2026-09-01

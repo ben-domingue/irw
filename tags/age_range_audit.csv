@@ -726,7 +726,7 @@ GART_Grolig_2020,120,120,13.0,73.0,43,19,101,0.158333,0,0,19,derived,Mixed,Adole
 genpsych_russell_2024_gemma,1001,1000,18.0,81.0,62,0,1000,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_32,4513,4513,8.0,25.0,17,4464,49,0.010858,0,65,4399,derived,Child (<18y),Adolescent (12-18y),"both sides of 18 present but the smaller group is 1.086% (< 2%), so not Mixed"
 gilbert_meta_31,12560,12560,0.0,219.0,141,21,12539,0.001672,21,0,0,unusable,,,"ages outside [0, 120]: 0.0-219.0"
-gilbert_meta_22,5364,5359,6.0,21.0,16,5192,167,0.031163,0,1378,3814,quarantine,,,"ages 6.0-21.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_22,5364,5359,6.0,21.0,16,5192,167,0.031163,0,1378,3814,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 gilbert_meta_24,644,644,6.5,9.5,7,644,0,0.0,0,644,0,derived,Child (<18y),Child (6-12y),
 gilbert_meta_16,4031,3948,7.0,13.0,7,3948,0,0.0,0,3936,12,derived,Child (<18y),Child (6-12y),
 gilbert_meta_19,51612,28465,5.0,14.0,10,28465,0,0.0,690,24589,3186,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",
@@ -739,8 +739,8 @@ gilbert_meta_105,1170,1031,11.0,17.0,7,1031,0,0.0,0,114,917,derived,Child (<18y)
 gilbert_meta_13,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
 ghanbari_2016_helma_use,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_15,3510,3381,3.0,18.0,16,3181,200,0.059154,27,1092,2062,derived,Mixed,"Child (6-12y), Adolescent (12-18y)",
-gilbert_meta_30,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,"ages 2.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
-gilbert_meta_29,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,quarantine,,,"ages 2.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_30,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.034% (< 2%), so not Mixed"
+gilbert_meta_29,14576,14575,2.0,20.0,19,14570,5,0.000343,4008,10109,453,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.034% (< 2%), so not Mixed"
 ghanbari_2016_helma_understand,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 ghanbari_2016_helma_reading,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 ghanbari_2016_helma_numeracy,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
@@ -749,7 +749,7 @@ gilbert_meta_14,3780,3651,3.0,18.0,16,3426,225,0.061627,29,1184,2213,derived,Mix
 gholami_2017_periodontal_knowledge,543,543,1.0,4.0,4,543,0,0.0,543,0,0,unusable,,,"looks like banded codes: 4 distinct values, max 4.0"
 ghanbari_2016_helma_comm,582,582,15.0,18.0,4,502,80,0.137457,0,0,502,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_17,51652,28475,5.0,14.0,10,28475,0,0.0,690,24596,3189,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",
-gilbert_meta_70,6391,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,"ages 1.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_70,6391,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.033% (< 2%), so not Mixed"
 gilbert_meta_49,200,187,16.0,68.0,28,4,183,0.02139,0,0,4,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_67,281,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an age
 gilbert_meta_62,741,713,23.0,90.0,56,0,713,0.0,0,0,0,derived,Adult (18+),,
@@ -757,7 +757,7 @@ gilbert_meta_65,281,0,nan,nan,0,0,0,,0,0,0,unusable,,,only 0 respondents with an
 gilbert_meta_45,249,240,21.0,63.0,35,0,240,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_47,162,162,5.55,7.07,92,162,0,0.0,41,121,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
 gilbert_meta_46,156,156,5.46,7.39,88,156,0,0.0,45,111,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
-gilbert_meta_68,9413,9413,0.0,18.25,132,9412,1,0.000106,23,8889,500,quarantine,,,"ages 0.0-18.25 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_68,9413,9413,0.0,18.25,132,9412,1,0.000106,23,8889,500,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.011% (< 2%), so not Mixed"
 gilbert_meta_38,839,839,20.0,65.0,43,0,839,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_44,243,243,60.0,94.0,31,0,243,0.0,0,0,0,derived,Elderly (minimum age >50),,
 gilbert_meta_60,2558,2549,10.0,51.0,35,956,1593,0.375049,0,1,955,derived,Mixed,Adolescent (12-18y),
@@ -772,7 +772,7 @@ gilbert_meta_61,2559,2550,10.0,51.0,35,957,1593,0.375294,0,1,956,derived,Mixed,A
 gilbert_meta_5,2928,2920,13.0595483779907,15.7097873687744,592,2920,0,0.0,0,0,2920,derived,Child (<18y),Adolescent (12-18y),
 gilbert_meta_37,839,839,20.0,65.0,43,0,839,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_41,3230,3230,4.0,10.0,7,3230,0,0.0,571,2659,0,derived,Child (<18y),"Early (<6y), Child (6-12y)",
-gilbert_meta_69,9410,9410,0.0,18.25,132,9409,1,0.000106,24,8886,499,quarantine,,,"ages 0.0-18.25 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_69,9410,9410,0.0,18.25,132,9409,1,0.000106,24,8886,499,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.011% (< 2%), so not Mixed"
 gilbert_meta_57,1154,1154,18.0,45.0,25,0,1154,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_85,940,931,13.0,21.0,9,893,38,0.040816,0,0,893,derived,Mixed,Adolescent (12-18y),
 gilbert_meta_86,1244,1234,17.0,96.0,78,3,1231,0.002431,0,0,3,derived,Adult (18+),,"both sides of 18 present but the smaller group is 0.243% (< 2%), so not Mixed"
@@ -782,7 +782,7 @@ gilbert_meta_84,917,908,13.0,21.0,9,872,36,0.039648,0,0,872,derived,Mixed,Adoles
 gilbert_meta_9,1646,1646,14.0,88.0,67,34,1612,0.020656,0,0,34,derived,Mixed,Adolescent (12-18y),
 gmc_kay_2025,492,492,18.0,81.0,62,0,492,0.0,0,0,0,derived,Adult (18+),,
 gilbert_meta_72,5388,5125,5.0,18.0,14,5117,8,0.001561,11,3038,2068,derived,Child (<18y),"Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.156% (< 2%), so not Mixed"
-gilbert_meta_71,6389,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,quarantine,,,"ages 1.0-20.0 are equally consistent with months, and the unit changes the tag; not stated in the data"
+gilbert_meta_71,6389,6026,1.0,20.0,19,6024,2,0.000332,1042,4563,419,derived,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)","both sides of 18 present but the smaller group is 0.033% (< 2%), so not Mixed"
 goksel_2026_embarrassment_authenticity,2100,2100,18.0,85.0,65,0,2100,0.0,0,0,0,derived,Adult (18+),,
 girma_2021_phq9,546,546,14.0,19.0,6,364,182,0.333333,0,0,364,derived,Mixed,Adolescent (12-18y),
 gizaw_2023_phq9,577,577,21.0,73.0,48,0,577,0.0,0,0,0,derived,Adult (18+),,
