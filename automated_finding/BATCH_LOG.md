@@ -13406,8 +13406,12 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   > split still had to be done on prefixes, but the anchors were extractable
   > all along. `option_text` for all 8 tables has now been built and gated
   > (validate_items.R 8/8 PASS, audit_batch.R 8 WARN "100% blank item_text",
-  > expected with the stems still in the paper); held pending the call in
-  > #1770 on whether option-only item text ships. Also corrected there:
+  > expected with the stems still in the paper). **#1770 closed on: they do
+  > not ship.** Option-only item text is not shipped where the stems exist one
+  > hop away -- 77 of 82 items would get a generic agreement scale, and no item
+  > would gain its referent. The gated CSVs stay in
+  > `itemtext/fixes/issue_1770_estevez_options/` for a later pass that lifts
+  > the stems from the paper's appendix. Also corrected there:
   > the study covers **13** schools, not 7.
 
 - **`zenodo.13855427` -- Chen (2024), Chinese fitness coaches. 16 tables /

@@ -7,8 +7,10 @@ Data: 2024929健身教练数据(Peerj).sav
 License: CC BY 4.0
 Item text: not shipped -- verdict independently rechecked 2026-09-01 under
     #1770, against the same file (md5 32ce50d9e7a0f8f0f5cf4030be866620,
-    matching the Zenodo checksum), and it stands: **no shipped item carries a
-    variable label or a value label**, so there is nothing here to extract.
+    matching the Zenodo checksum), and it stands: **not one of the 99 columns
+    carries a value label, and the only variable label on a shipped item
+    column is `TS1`'s truncated construct name -- a label, but not a stem**,
+    so there is nothing here to extract.
     The wording is in the PeerJ article this deposit backs, which is open
     access; a later pass with the paper in hand could recover all 74 stems.
     Two details of the original claim were wrong and are corrected here:

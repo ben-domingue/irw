@@ -23,8 +23,17 @@ Item text: partially available; not shipped in this batch. **The original
     So this is a real `option_text` extraction with `item_text` blank, not a
     dead end. Built and gated 2026-09-01 (validate_items.R 8/8 PASS on item
     and resp sets; audit_batch.R 8 WARN "100% of rows have blank item_text",
-    which is the expected shape here). Held rather than uploaded pending the
-    call in #1770 on whether option-only item text ships.
+    which is the expected shape here). **Decided 2026-09-01 on #1770: these
+    do not ship.** Option-only item text is not shipped when the stems exist
+    and are merely one hop away -- 77 of the 82 items would get a generic
+    agreement scale an analyst already infers from `resp in 1..5`, and no item
+    would gain its referent (`Tiemp.deb`'s bin edges say "a duration item",
+    while what the duration is *of* lives in the table name, not in any row we
+    would ship). Shipping them would also count 8 tables as "has item text"
+    when they are half done. The gated CSVs stay in
+    `itemtext/fixes/issue_1770_estevez_options/` as raw material: a later pass
+    that lifts the stems from the paper's instrument appendix merges them with
+    `item_text` filled, without redoing this work.
 
 863 primary school students (ages 9-13) across 13 schools, all items on a
 1-5 format. (**Corrected 2026-09-01, #1770**: "7 schools" and "CENTRO, 1-7"

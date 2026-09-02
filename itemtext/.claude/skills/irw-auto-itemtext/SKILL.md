@@ -465,6 +465,22 @@ produce data shaped like them before merging:
   `audit_batch.R` cleanly, and was only caught by a human spot-check. **If a source
   presents an instrument as a grid of stems × short anchors, find the instrument's own
   prose form before transcribing.**
+- **The converse: do not ship `option_text` alone when the stems exist and are merely one
+  hop away.** The blank-`item_text` shape above is correct only where no stem exists. When
+  the source's value labels give you anchors but the wording is sitting in the paper's
+  instrument appendix, the anchors alone are not worth shipping, and #1770 settled this as
+  policy rather than a per-table call. `estevez_2021_*` (8 tables, 82 items, all labelled)
+  is the worked example: 77 items get `TOTALMENTE FALSO … TOTALMENTE CIERTO`, a generic
+  agreement scale an analyst already infers from `resp ∈ 1..5`; `Tiemp.deb` gets real bin
+  edges (`MENOS DE 30 MINUTOS` …) but *not its referent*, because "time spent on what"
+  lives in the table name and the deposit description, not in any row you would ship. One
+  item of 82 gains something, none gain their question, and all 8 tables would then count
+  as "has item text" in the corpus figures. **Build and gate the rows anyway, park them
+  under `itemtext/fixes/`, and say in the script header that they exist** — they are the
+  right half of a complete instrument, and the later pass that lifts the stems merges them
+  with `item_text` filled instead of starting over. The test is not "did the file give me
+  any text" but **"does a row we ship carry the item's referent"**: if the answer is no and
+  the referent is recoverable elsewhere, hold.
 - **When one item code covers several concrete wordings (counterbalanced or randomised
   designs), name the condition and give an example, and say you did.** The schema assumes one
   text per item; some studies break that by design. In `buczel_2022_inoculation_belief` each
