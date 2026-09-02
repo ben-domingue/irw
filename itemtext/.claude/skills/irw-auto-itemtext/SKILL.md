@@ -177,6 +177,19 @@ The output claims to be what the study administered. Three rules:
   `text_source=translated_substitute`. That is now the **fallback**, not the default, and it
   is the case the vocabulary in Step 6c was written for.
 
+  **In the fallback, `language` still names the administered language.** It is a fact about
+  the study, not a claim about `item_text`, so a fallback table reads `language=Chinese` with
+  an English `item_text`. Populated `language` + empty `_translated` is precisely the signal
+  that the base fields are not what respondents read, and it is how a backfill pass finds
+  these tables later. Do not blank `language` to avoid the apparent contradiction.
+
+  **Recoverability is scoped to the deposit and the paper's own supplements**, which is what
+  makes the test decidable while you are extracting. If the administered wording is in either,
+  ship it. If it is not, take the fallback and record in provenance *which files you checked*
+  and that they held no text in that script — `xue_2025_*` (S3 File, zero CJK characters) and
+  `zhou_2016_*` (the .sav, zero CJK across 109 variable labels and every value label) are the
+  worked examples. Do not go hunting off-source for a published original before shipping.
+
   Leave the `_translated` columns out entirely for a table administered in English — do not
   emit empty columns to no purpose.
 

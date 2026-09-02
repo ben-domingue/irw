@@ -55,8 +55,14 @@ sentence_for <- function(r) {
     }
     parts <- character(0)
     parts <- c(parts, switch(r$text_source,
-        translated_substitute = paste("item text is the published original-language instrument,",
-                                       "not the translated version actually administered in this study"),
+        # Do NOT assume the instrument's native language is English: xue_2025_*
+        # and zhou_2016_* administered natively-Chinese instruments and what
+        # ships is an English rendering, so "the published original-language
+        # instrument" was false for them. Say only what is always true of this
+        # value -- the shipped text is not the administered wording.
+        translated_substitute = paste("the item text here is not the wording respondents read:",
+                                       "the study was administered in another language and only an",
+                                       "English version of the instrument could be recovered"),
         canonical_instrument  = paste("item text comes from the published original instrument",
                                        "rather than this study's own materials"),
         unknown               = "the origin of the item text was not recorded during extraction",
