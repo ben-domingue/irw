@@ -1,0 +1,350 @@
+<title>Where IRW Stands</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --paper:#f2f5f5; --surface:#ffffff; --sunk:#e8eded;
+  --ink:#0f1c1e; --body:#2c3d40; --muted:#5f7274; --hair:#d3dcdc;
+  --accent:#0d5c5f; --accent-soft:#d7e6e5;
+  --ok:#2c6f4f; --warn:#96661a; --gap:#94393a;
+  --ok-bg:#dcebe2; --warn-bg:#f2e6cf; --gap-bg:#f0dcdc;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c1416; --surface:#121d1f; --sunk:#0a1113;
+    --ink:#eaf1f0; --body:#c3d2d1; --muted:#8ba0a0; --hair:#243133;
+    --accent:#63bdb6; --accent-soft:#183034;
+    --ok:#71c496; --warn:#d3a45c; --gap:#dd8a89;
+    --ok-bg:#15302a; --warn-bg:#332714; --gap-bg:#331d1e;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c1416; --surface:#121d1f; --sunk:#0a1113;
+  --ink:#eaf1f0; --body:#c3d2d1; --muted:#8ba0a0; --hair:#243133;
+  --accent:#63bdb6; --accent-soft:#183034;
+  --ok:#71c496; --warn:#d3a45c; --gap:#dd8a89;
+  --ok-bg:#15302a; --warn-bg:#332714; --gap-bg:#331d1e;
+}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--body);font-family:var(--sans);
+  font-size:16px;line-height:1.62;margin:0;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1040px;margin:0 auto;padding:0 28px 96px}
+.col{max-width:68ch}
+
+/* ---- masthead ---- */
+header{padding:56px 0 34px;border-bottom:2px solid var(--ink)}
+.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--accent);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(34px,5.2vw,52px);
+  line-height:1.06;color:var(--ink);margin:0 0 16px;text-wrap:balance;
+  letter-spacing:-.015em}
+.standfirst{font-size:18px;color:var(--body);margin:0;max-width:60ch}
+.asof{font-family:var(--mono);font-size:12px;color:var(--muted);
+  margin:20px 0 0;display:flex;flex-wrap:wrap;gap:6px 22px}
+
+/* ---- sections ---- */
+section{padding-top:56px}
+.dim{display:flex;align-items:baseline;gap:14px;margin:0 0 6px}
+.dim-n{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);
+  border:1px solid var(--accent);border-radius:2px;padding:2px 7px;flex:none}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(24px,3.2vw,31px);
+  line-height:1.16;color:var(--ink);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.verdict{font-size:17px;color:var(--body);margin:10px 0 0;max-width:64ch}
+.verdict strong{color:var(--ink);font-weight:600}
+h3{font-family:var(--sans);font-weight:600;font-size:13px;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--muted);margin:38px 0 14px}
+p{margin:0 0 15px}
+p.col,ul.col{max-width:68ch}
+a{color:var(--accent)}
+
+/* ---- meters ---- */
+.meters{display:grid;gap:9px;margin:0 0 8px}
+.meter{display:grid;grid-template-columns:minmax(140px,1.1fr) 1fr 58px;
+  align-items:center;gap:14px}
+.meter .lab{font-size:14px;color:var(--body)}
+.meter .track{height:9px;background:var(--sunk);border-radius:1px;overflow:hidden}
+.meter .fill{height:100%;background:var(--accent);border-radius:1px}
+.meter .fill.derived{background:repeating-linear-gradient(135deg,
+  var(--accent) 0 5px,var(--accent-soft) 5px 10px)}
+.meter .val{font-family:var(--mono);font-size:13px;color:var(--ink);
+  text-align:right;font-variant-numeric:tabular-nums}
+.scale{display:grid;grid-template-columns:minmax(140px,1.1fr) 1fr 58px;gap:14px;
+  margin-top:8px}
+.scale .ticks{grid-column:2;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10.5px;color:var(--muted);
+  border-top:1px solid var(--hair);padding-top:5px}
+.note{font-size:14px;color:var(--muted);margin:14px 0 0;max-width:62ch}
+
+/* ---- figure band ---- */
+.band{background:var(--surface);border:1px solid var(--hair);border-radius:3px;
+  padding:24px 26px;margin:22px 0 0}
+.band-t{font-family:var(--mono);font-size:11px;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--muted);margin:0 0 18px}
+
+/* ---- stat strip ---- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));
+  gap:1px;background:var(--hair);border:1px solid var(--hair);border-radius:3px;
+  overflow:hidden;margin:22px 0 0}
+.stat{background:var(--surface);padding:16px 18px}
+.stat .n{font-family:var(--mono);font-size:25px;font-weight:500;color:var(--ink);
+  line-height:1.1;font-variant-numeric:tabular-nums;display:block}
+.stat .k{font-size:12.5px;color:var(--muted);margin-top:5px;display:block;line-height:1.4}
+
+/* ---- roadmap table ---- */
+.tw{overflow-x:auto;margin:22px 0 0;border:1px solid var(--hair);border-radius:3px}
+table{border-collapse:collapse;width:100%;background:var(--surface);font-size:14.5px}
+th{font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);text-align:left;font-weight:600;padding:11px 16px;
+  border-bottom:1px solid var(--hair);white-space:nowrap}
+td{padding:11px 16px;border-bottom:1px solid var(--hair);vertical-align:top;color:var(--body)}
+tr:last-child td{border-bottom:0}
+td.it{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+td.nm{color:var(--ink)}
+.chip{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;
+  padding:2px 8px;border-radius:2px;white-space:nowrap}
+.c-ok{background:var(--ok-bg);color:var(--ok)}
+.c-warn{background:var(--warn-bg);color:var(--warn)}
+.c-gap{background:var(--gap-bg);color:var(--gap)}
+
+/* ---- callout ---- */
+.tension{border-left:3px solid var(--warn);background:var(--surface);
+  padding:18px 22px;margin:24px 0 0;border-radius:0 3px 3px 0}
+.tension .t{font-family:var(--sans);font-weight:600;font-size:13px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--warn);margin:0 0 8px}
+.tension p{margin:0;max-width:64ch;font-size:15px}
+
+ul{margin:0 0 15px;padding-left:20px}
+li{margin:0 0 7px}
+code{font-family:var(--mono);font-size:.9em;background:var(--sunk);
+  padding:1px 5px;border-radius:2px;color:var(--ink)}
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
+  font-size:13.5px;color:var(--muted)}
+
+/* ---- freshness strip (see README: the render stamps its own data ages) ---- */
+.fresh{font-family:var(--mono);font-size:11.5px;color:var(--muted);
+  margin:12px 0 0;display:flex;flex-wrap:wrap;align-items:center;gap:5px 10px}
+.fresh .src{color:var(--body)}
+.fresh .sep{opacity:.45}
+.fresh .age{padding:1px 7px;border-radius:2px;white-space:nowrap}
+.fresh .age.live{background:var(--ok-bg);color:var(--ok)}
+.fresh .age.aging{background:var(--warn-bg);color:var(--warn)}
+.fresh .age.stale{background:var(--gap-bg);color:var(--gap)}
+.fresh .why{color:var(--muted);font-family:var(--sans);font-size:12.5px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <p class="kicker">Item Response Warehouse · status read</p>
+  <h1>Where IRW Stands</h1>
+  <p class="standfirst">Three dimensions, measured rather than recalled: how tagging is
+  going, how item text is going, and what the Year&nbsp;3 plan has actually absorbed.</p>
+  <p class="asof">
+    <span>rendered 2 September 2026</span>
+    <span>4,134 live tables</span>
+    <span>every section stamped with the age of the data under it</span>
+  </p>
+</header>
+
+<section>
+  <div class="dim"><span class="dim-n">01</span><h2>Tagging</h2></div>
+  <p class="verdict">Coverage looks like <strong>75%</strong> and is really about
+  <strong>55%</strong>. The headline number is carried by one derived column, and reading
+  it as progress is the specific mistake the per-column reporting was built to stop.</p>
+  <p class="fresh"><span class="src">metadata/status.json</span>
+    <span class="sep">·</span> generated 1 Sep
+    <span class="age live">1 day old</span>
+    <span class="why">regenerated only when <code>11_status.R</code> is run locally</span></p>
+
+  <div class="band">
+    <p class="band-t">Coverage by tag column · 4,134 tables</p>
+    <div class="meters">
+      <div class="meter"><span class="lab">Any tag row</span>
+        <span class="track"><span class="fill" style="width:75.1%"></span></span>
+        <span class="val">75.1%</span></div>
+      <div class="meter"><span class="lab">Age range <em>(derived)</em></span>
+        <span class="track"><span class="fill derived" style="width:73.3%"></span></span>
+        <span class="val">73.3%</span></div>
+      <div class="meter"><span class="lab">Measurement tool</span>
+        <span class="track"><span class="fill" style="width:56.1%"></span></span>
+        <span class="val">56.1%</span></div>
+      <div class="meter"><span class="lab">Item format</span>
+        <span class="track"><span class="fill" style="width:55.9%"></span></span>
+        <span class="val">55.9%</span></div>
+      <div class="meter"><span class="lab">Construct name</span>
+        <span class="track"><span class="fill" style="width:54.8%"></span></span>
+        <span class="val">54.8%</span></div>
+      <div class="meter"><span class="lab">Sample</span>
+        <span class="track"><span class="fill" style="width:54.6%"></span></span>
+        <span class="val">54.6%</span></div>
+      <div class="meter"><span class="lab">Construct type</span>
+        <span class="track"><span class="fill" style="width:54.5%"></span></span>
+        <span class="val">54.5%</span></div>
+      <div class="meter"><span class="lab">Primary language(s)</span>
+        <span class="track"><span class="fill" style="width:54.1%"></span></span>
+        <span class="val">54.1%</span></div>
+      <div class="meter"><span class="lab">Child age</span>
+        <span class="track"><span class="fill" style="width:17.1%"></span></span>
+        <span class="val">17.1%</span></div>
+    </div>
+    <div class="scale"><span class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></span></div>
+    <p class="note">Hatched bar is computed from each table's own <code>cov_age</code>
+    rather than judged by anyone. It added 775 tables that have a tag row and nothing
+    else in it.</p>
+  </div>
+
+  <h3>What moved</h3>
+  <p class="col">The real result this cycle was not coverage, it was <strong>definition</strong>.
+  Writing down what <code>sample</code>'s values mean took the auto-tagger's frame facet from
+  26.9% to 54.5% exact match, and setting from 75.0% to 87.5% — with no change to the tagger
+  at all. Two rounds of stating what a value means bought more than any model or prompt change
+  on offer.</p>
+
+  <div class="stats">
+    <div class="stat"><span class="n">99.9%</span><span class="k">shard 1 tagged</span></div>
+    <div class="stat"><span class="n">88.0%</span><span class="k">shard 2</span></div>
+    <div class="stat"><span class="n">57.9%</span><span class="k">shard 3</span></div>
+    <div class="stat"><span class="n">57.5%</span><span class="k">shard 4</span></div>
+    <div class="stat"><span class="n">60.7%</span><span class="k">shard 5</span></div>
+  </div>
+
+  <div class="tension">
+    <p class="t">The tension</p>
+    <p>Seven of the eight columns have barely moved off 55%, and hand tagging cannot track a
+    denominator that grows by ~500 tables a fortnight. The derived column grows with the corpus
+    by construction; nothing else does. Whether any of the other seven has something derivable
+    in it is still unexplored, and that question is worth more than another tagging push.</p>
+  </div>
+</section>
+
+<section>
+  <div class="dim"><span class="dim-n">02</span><h2>Item text</h2></div>
+  <p class="verdict">Coverage is <strong>14%</strong> and barely moving. What changed this
+  cycle is that the 14% became <strong>honest</strong> — the corpus now says which English
+  it wrote itself, and four tables that were quietly serving every item twice were found and
+  three of them fixed.</p>
+  <p class="fresh"><span class="src">Redivis irw_text v14.0</span>
+    <span class="sep">·</span> live count 2 Sep
+    <span class="age live">today</span>
+    <span class="why">needs a Redivis token — not refreshable from the repo alone</span></p>
+
+  <div class="stats">
+    <div class="stat"><span class="n">579</span><span class="k">tables with item text, of 4,134</span></div>
+    <div class="stat"><span class="n">81</span><span class="k">given their administered language</span></div>
+    <div class="stat"><span class="n">68</span><span class="k">shipping IRW-generated English</span></div>
+    <div class="stat"><span class="n">0</span><span class="k">of those undisclosed <em>(was 60)</em></span></div>
+    <div class="stat"><span class="n">4</span><span class="k">doubled tables found</span></div>
+  </div>
+
+  <h3>What moved</h3>
+  <ul class="col">
+    <li>The administered-language schema shipped: text fields now hold what respondents
+      actually read, with English in parallel <code>_translated</code> columns.</li>
+    <li><strong>81 tables backfilled</strong> — 78 in bulk, plus three where the wording was
+      recovered from the paper for tables the audit could not classify.</li>
+    <li><strong>60 tables were shipping English this project generated with no public
+      note.</strong> Every one now carries a line on the issues page saying so. They were
+      invisible because the reconciler globbed only the batch directories.</li>
+    <li>Four published tables were serving each item twice with different text. Three are
+      fixed and live; the fourth sits in a draft awaiting release.</li>
+  </ul>
+
+  <div class="tension">
+    <p class="t">The tension</p>
+    <p>This is where the effort is going — <strong>55 commits to <code>itemtext/</code> in the
+    last seven days against 26 to <code>tags/</code></strong> — and coverage still moved from
+    13.5% to 14.0%. That is the honest trade: this cycle bought trustworthiness in the tables
+    that exist rather than more tables. Worth doing once. Worth watching if it repeats.</p>
+  </div>
+
+  <p class="note">Still open: 181 tier-B tables need their administered language confirmed,
+  17 are staged but ungated, and two tables need a decision rather than labour — a scale
+  direction and an instrument naming.</p>
+</section>
+
+<section>
+  <div class="dim"><span class="dim-n">03</span><h2>The Year 3 plan</h2></div>
+  <p class="verdict">One item finished end to end, one substantially done, and
+  <strong>four of the first seven have had no time at all</strong>. The catalog half of the
+  plan is where everything went; reach and contribution are where nothing did.</p>
+  <p class="fresh"><span class="src">GitHub API</span>
+    <span class="sep">·</span> read 2 Sep
+    <span class="age live">today</span>
+    <span class="why">issues, PRs and commit counts refresh on every render</span></p>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>&nbsp;</th><th>Status</th><th>Where it actually stands</th></tr></thead>
+      <tbody>
+        <tr><td class="it">1</td><td class="nm">Validator, uploader, and a gate</td>
+          <td><span class="chip c-ok">complete</span></td>
+          <td>All five sub-items. One uploader replacing thirteen copies; one validator with an exit code; the repo's first CI.</td></tr>
+        <tr><td class="it">2</td><td class="nm">Close the tag gap</td>
+          <td><span class="chip c-ok">substantial</span></td>
+          <td>Measurement side closed. The remaining gap is definitional, not effort.</td></tr>
+        <tr><td class="it">3</td><td class="nm">Citable and reproducible at a version</td>
+          <td><span class="chip c-gap">untouched</span></td>
+          <td>Discussed, not started.</td></tr>
+        <tr><td class="it">4</td><td class="nm">Findable by people who have not heard of it</td>
+          <td><span class="chip c-gap">untouched</span></td>
+          <td>No comments, no work.</td></tr>
+        <tr><td class="it">5</td><td class="nm">Ship both packages properly</td>
+          <td><span class="chip c-gap">untouched</span></td>
+          <td>The CRAN blocker is understood and unaddressed.</td></tr>
+        <tr><td class="it">6</td><td class="nm">Make community contribution real</td>
+          <td><span class="chip c-gap">untouched</span></td>
+          <td>10 open PRs; the oldest has waited 69 days. See below.</td></tr>
+        <tr><td class="it">7</td><td class="nm">Scale item text</td>
+          <td><span class="chip c-warn">active</span></td>
+          <td>Absorbing most of the effort. Dimension 02.</td></tr>
+        <tr><td class="it">8–15</td><td class="nm">Blue sky</td>
+          <td><span class="chip c-gap">not this year yet</span></td>
+          <td>Correctly parked until 1–7 are further along.</td></tr>
+        <tr><td class="it">16</td><td class="nm">Stop-doing list</td>
+          <td><span class="chip c-ok">happening</span></td>
+          <td>Acquisition intake stopped on its own — the newest of 245 queued datasets is three weeks old.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tension">
+    <p class="t">The one to look at</p>
+    <p>Item 6 is the only untouched item with a <em>measurable</em> cost. Ten pull requests are
+    open, five have no review at all, and one was approved in conversation on 27 July and never
+    merged. With CI now running on every PR, the mechanical half of that review is answered
+    automatically for the first time — which makes this the cheapest it will ever be to clear.</p>
+  </div>
+</section>
+
+<section>
+  <div class="dim"><span class="dim-n">·</span><h2>What today changed</h2></div>
+  <p class="verdict">Most of the day's output was <strong>gates rather than data</strong> —
+  and the gates immediately found things nobody was looking for.</p>
+  <div class="stats">
+    <div class="stat"><span class="n">32</span><span class="k">pull requests merged</span></div>
+    <div class="stat"><span class="n">13→1</span><span class="k">uploader copies</span></div>
+    <div class="stat"><span class="n">922</span><span class="k">legacy tables swept, a first</span></div>
+    <div class="stat"><span class="n">81</span><span class="k">bad <code>cov_age</code> tables now caught</span></div>
+  </div>
+  <p class="note" style="max-width:68ch">Three defect classes were found by building the check
+  rather than by looking: tables uploaded twice, one <code>resp</code> value documented as
+  meaning two opposite things, and the legacy archive in <code>data/pub/</code> disagreeing with
+  the published corpus on a quarter of its tables — every PISA cycle from 2000 to 2012 is an
+  empty file there.</p>
+</section>
+
+<footer>
+  Figures from <code>metadata/status.json</code> (2026-09-01), live Redivis queries against
+  <code>irw_text</code> v14.0, and the GitHub API. Coverage percentages are of 4,134 live
+  tables. Commit counts cover the seven days to 2 September 2026.
+  Re-rendered each morning; each section carries the age of its own source, because
+  they do not all refresh at the same rate.
+</footer>
+
+</div>
