@@ -58,3 +58,38 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
           Rscript misc/tests/smoke_validate_irw.R
+
+  # A PR to data/ contains a conversion SCRIPT, never a table --
+  # automated_finding/irw_output/ is gitignored, so no output is ever in the
+  # diff. This checks the script's contract; the data is checked by
+  # irw-validate at processing time. See irw_validate/contract.py.
+  contract:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - run: python -m pip install --upgrade pip && python -m pip install -e .
+
+      # Added files block; modified files are annotated and never fail. 776 of
+      # the 843 scripts in data/ predate the validator rule, so failing a PR
+      # that merely edits one would stall the contributor queue this is meant
+      # to unstick.
+      - name: Contract
+        run: |
+          base="origin/${{ github.base_ref }}"
+          git fetch -q origin "${{ github.base_ref }}"
+          added=$(git diff --name-only --diff-filter=A "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
+          modified=$(git diff --name-only --diff-filter=M "$base"...HEAD -- 'data/*.py' 'data/*.R' || true)
+          if [ -z "$added$modified" ]; then echo "no data/ scripts in this PR"; exit 0; fi
+          args=""
+          for f in $added;    do args="$args --added $f";    done
+          for f in $modified; do args="$args --modified $f"; done
+          python -m irw_validate.contract --annotate $args
