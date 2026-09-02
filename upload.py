@@ -108,12 +108,15 @@ def upload_table(dataset, file_list, common_items, if_replace):
 
 def check_if_table_already_exist(dataset, file_list):
     """Check if the datasets are already on Redivis and ask wether to replace them"""
+    # list_tables() already returns every Table with its properties populated
+    # from the list response -- Dataset.list_tables does
+    # Table(name, dataset=self, properties=table). The per-table .get() that
+    # used to be here was a redundant HTTPS round-trip apiece: measured
+    # 2026-09-01 at 0.283s x 567 tables = ~2.7 MINUTES of pure overhead on
+    # every run, before a single byte was uploaded, however few files you were
+    # actually uploading. list_tables() alone takes 2.7 SECONDS.
     tables = dataset.list_tables()
-    processed_df = []
-    for table in tables:
-        table.get()
-        # Properties will now contain the table.get API representation
-        processed_df.append(table.properties["name"])
+    processed_df = [table.properties["name"] for table in tables]
     processed_df_csv = [x +".csv" for x in processed_df]
     file_list_temp = [x.split('/')[-1] for x in file_list]
     common_items = list(set(processed_df_csv) & set(file_list_temp))

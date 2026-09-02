@@ -71,16 +71,20 @@ def upload_table(dataset, file_list, common_items, if_replace):
         count+=1
         file_path = file.split('/')[-1]
         file_name = file_path.split('.')[0]
-        table = None
-        # If this is a new table, create one on Redivis.
-        if file_path not in common_items:
-            table = (
-                dataset
-                .table(file_name) # Get the file name without type
-                .create()
-            )
-        else:
+        # Redivis uploads APPEND. `replace_on_conflict` only replaces an
+        # *upload of the same name*; rows inherited from the prior released
+        # version survive alongside it, silently doubling the table. So for a
+        # table that already exists we delete it from the draft first and
+        # recreate it -- that is the only true replace. See
+        # itemtext/fixes/HANDOFF.md, which documents the same defect for item
+        # text, and issue #1677/#1683 where a batch came back at exactly 2x.
+        table = dataset.table(file_name)
+        if file_path in common_items and table.exists():
+            print(f"Replacing '{file_name}': deleting the draft table first "
+                  f"(uploads append, so this is the only true replace).")
+            table.delete()
             table = dataset.table(file_name)
+        table = table.create()
         upload = table.upload(file_name)
 
         # Upload the dataset
@@ -97,12 +101,15 @@ def upload_table(dataset, file_list, common_items, if_replace):
 
 def check_if_table_already_exist(dataset, file_list):
     """Check if the datasets are already on Redivis and ask wether to replace them"""
+    # list_tables() already returns every Table with its properties populated
+    # from the list response -- Dataset.list_tables does
+    # Table(name, dataset=self, properties=table). The per-table .get() that
+    # used to be here was a redundant HTTPS round-trip apiece: measured
+    # 2026-09-01 at 0.283s x 567 tables = ~2.7 MINUTES of pure overhead on
+    # every run, before a single byte was uploaded, however few files you were
+    # actually uploading. list_tables() alone takes 2.7 SECONDS.
     tables = dataset.list_tables()
-    processed_df = []
-    for table in tables:
-        table.get()
-        # Properties will now contain the table.get API representation
-        processed_df.append(table.properties["name"])
+    processed_df = [table.properties["name"] for table in tables]
     processed_df_csv = [x +".csv" for x in processed_df]
     file_list_temp = [x.split('/')[-1] for x in file_list]
     common_items = list(set(processed_df_csv) & set(file_list_temp))

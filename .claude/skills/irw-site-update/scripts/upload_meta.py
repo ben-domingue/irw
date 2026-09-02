@@ -133,6 +133,24 @@ def main():
                   f"{stray} -- replace_on_conflict only replaces the upload named '{table_name}'; "
                   "these will NOT be removed and may leave stale rows. Check on the Redivis site.")
 
+        # Detecting the doubling after the fact (below) is not enough -- prevent
+        # it. `replace_on_conflict` only replaces an upload of the SAME NAME;
+        # rows inherited from the prior released version survive beside it, and
+        # list_uploads() does not expose them, which is why the stray check
+        # above saw nothing while comps_metadata tripled. Deleting the draft
+        # table and recreating it is the only true replace.
+        if table.exists():
+            desc = None
+            try:
+                desc = table.get().properties.get("description")
+            except Exception:
+                pass
+            print(f"  replacing '{table_name}': deleting the draft table first "
+                  f"(uploads append, so this is the only true replace)")
+            table.delete()
+            table = dataset.table(table_name)
+            table = table.create(description=desc) if desc else table.create()
+
         print(f"Uploading {path} -> {table_name} ...")
         upload = table.upload(table_name)
         with open(path, "rb") as f:
