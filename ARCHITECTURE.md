@@ -161,9 +161,11 @@ ever creates a *draft* Redivis version — Redivis keeps an unpublished working
 copy that nobody outside the project can see until someone clicks publish. That
 click is always a human action taken after reviewing a diff.
 
-**Changes may sit in a draft for up to one week.** Releasing after every upload
-is unmanageable, so batching is the norm and an unreleased draft is a normal
-state rather than a loose end. The week is the outside limit, not a target.
+**Changes may sit in a draft for up to one week, and that is fine.** Releasing
+after every upload is unmanageable, so batching is the norm and an unreleased
+draft is a normal state rather than a loose end. **Live tables being somewhat
+out of date is not a problem to panic about** — a corpus that is a few days
+behind is a corpus working as intended.
 
 Two things follow that are easy to get wrong:
 
@@ -172,12 +174,14 @@ Two things follow that are easy to get wrong:
   `irw_metadata()` and the site all read the *released* version. A script that
   reports a successful upload and a `count(*)` that matches has told you about
   the draft and nothing else.
-- **A correction to already-published data is not a normal draft item.** Adding
-  a table late means the corpus is missing something; correcting one means the
-  corpus is actively serving something wrong, and the week does not apply.
-  Release those when they land. `irw#1816` is the worked example: three item
-  text tables served at 2x for a day, and the fix sat correct-but-invisible in
-  the draft until the version went out.
+- **The one thing that does not wait is a wrong answer.** The line is narrow,
+  and it is not staleness: it is whether the released data would give someone a
+  *wrong* result rather than an *incomplete* one. A table that is missing, or
+  missing its newest rows, is incomplete — that waits happily. `irw#1816` is
+  the other kind: three item text tables served every item twice with different
+  text, so anything joining item text to responses fanned out 2x and returned
+  answers that were not true of the data. Release that kind when it lands;
+  batch everything else.
 
 `python3 -m red_up.drafts` reports every dataset with unreleased changes and how
 long the public corpus has been behind, exiting non-zero past the window. It

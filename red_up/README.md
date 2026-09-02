@@ -153,9 +153,11 @@ Two cautions the tool exists to enforce:
 - **A successful upload is not a published one.** The `count(*)` check in
   `red_up` verifies the draft. Everything users touch reads the released
   version.
-- **Corrections to published data are exempt from the week.** A late addition
-  means the corpus is incomplete; a late correction means it is serving
-  something wrong. See `ARCHITECTURE.md` §4 and `ben-domingue/irw#1816`.
+- **Only a wrong answer skips the week.** Not staleness — the test is whether
+  the released data would give someone a *wrong* result rather than an
+  *incomplete* one. Missing tables and missing rows wait happily; a table
+  returning every item twice (`ben-domingue/irw#1816`) does not. See
+  `ARCHITECTURE.md` §4.
 
 The check counts *time since the last release*, not the age of a table or of the
 draft — both of those reset whenever the draft is touched, so both would read as
