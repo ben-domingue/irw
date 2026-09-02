@@ -481,9 +481,10 @@ be wrong. An earlier draft of mine had exactly that; the data says otherwise.
 
 ---
 
-## Proposed amendment, 2026-09-01 — the frame facet as written is not applicable
+## Amendment, 2026-09-01 — the frame facet as written was not applicable
 
-**Status: proposed, not in force.** Raised by the blind run authorised for 2.3
+**Status: ACCEPTED by Ben, 2026-09-01, both clauses. In force in `vocab.md`.**
+The `Internet-based` question below was deliberately NOT amended. Raised by the blind run authorised for 2.3
 (#1722): eight subagents, no contact with each other, applying B1/B2 to 68
 tables. Five of the eight reported the same defect unprompted, so this is a
 problem with the rule rather than with any rater.
@@ -505,7 +506,8 @@ community" as markers of a restricted frame. Read literally:
   two required something further; both readings are faithful to a different
   sentence of the same document.
 
-Three agents independently converged on the same repair, which is the amendment:
+Three agents independently converged on the same repair, which is the amendment
+as accepted:
 
 > The restriction must be one the study **imposed on top of its setting**, not
 > one implied by the setting itself. Recruiting in a school does not make a
@@ -541,7 +543,7 @@ that claim it in one place and disclaim it in another:
 - `silva_2018` — "regionally representative samples" alongside "non-probabilistic
   sampling designed by convenience".
 
-Both agents resolved it the same way, and the rule should say so:
+Both agents resolved it the same way, and the rule now says so:
 
 > Where a source describes its procedure and also labels it, **the description
 > of the procedure wins**. A claim of representativeness contradicted by the

@@ -8,3 +8,8 @@ predictions_2026-09-01_rerun.json  --  34 tables with gold
   gold answers the frame facet on 22/34; the prediction does on 33/34
   setting  n= 16  exact  81.2%   precision  87.5%   recall  87.5%
   frame    n= 22  exact  45.5%   precision  52.4%   recall  47.8%
+
+predictions_2026-09-01_amended.json  --  34 tables with gold
+  gold answers the frame facet on 22/34; the prediction does on 34/34
+  setting  n= 16  exact  87.5%   precision  93.3%   recall  87.5%
+  frame    n= 22  exact  54.5%   precision  59.1%   recall  56.5%

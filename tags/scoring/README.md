@@ -249,6 +249,49 @@ in `tags/decisions/1760_age_range_and_sample.md`.
   the untagged population — the first accuracy figure in this project measured
   on the population the tagger would actually run on.
 
+## The amended-rule run, 2026-09-01 (#1796)
+
+A third scoring of the same 38 tables, after the `sample` frame rules were
+amended: `Targeted/specific` now requires a restriction the study **imposed on
+top of its setting**, and `Representative` gains a description-beats-label
+tie-break. Same tables, same gold, only the rule changed, so this isolates the
+amendment. `predictions_2026-09-01_amended.json`,
+`results_amended_2026-09-01.txt`.
+
+**Per facet, across all three runs:**
+
+| | 2026-08-30 | rules stated (#1760) | rules amended (#1796) |
+|---|---|---|---|
+| setting exact | 75.0% | 81.2% | **87.5%** |
+| setting precision | 85.7% | 87.5% | **93.3%** |
+| frame exact | 26.9% | 45.5% | **54.5%** |
+| frame precision | 44.4% | 52.4% | **59.1%** |
+
+Both facets improved at every step, and the frame facet has doubled since the
+rules were written down. The tagger did not change once across the three runs —
+only what it was told the values mean.
+
+**Whole-cell `sample` kept falling: 44.4% → 18.2% → 14.7%.** That is the same
+artifact, now at full stretch: the tagger answers the frame facet on **34 of 34**
+tables while gold answers it on 22 of 34. Whole-cell exact match against this
+gold no longer measures the tagger at all, and should not be quoted.
+
+**The amendment changed 12 of the 34 tagged tables**, every one in the same
+direction — `Targeted/specific` → `General/non-specific` where the restriction
+was what the setting already implied (one rural middle school, one university
+subject pool, preschoolers in preschool, US-only MTurk, "emerging adults"
+recruited through participant pools). It held `Targeted/specific` wherever the
+study imposed something extra: an ADHD screening criterion, a nationality plus
+residency screen, recurrent-UTI diagnostic criteria, Czech teachers, a twin
+registry.
+
+**The tie-break fired exactly where it was written for and nowhere else.** On
+`shan_2020_g`/`_pd` the Methods say "convenient sampling" while the authors'
+rebuttal in the same PMC record claims "simple random sampling"; the description
+won and `Representative` was withheld. It correctly did *not* fire on
+`c19prc_uk_mcbride_2021_trustsource`, where quota sampling to a stated national
+frame is a design that matches the claim rather than contradicting it.
+
 ## The w2 re-measurement, 2026-09-01 (#1786)
 
 The 2.3 run reached only 30% of w2 against 80–100% for the other shards. After
