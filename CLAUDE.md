@@ -43,7 +43,6 @@ manual step, and it only ever writes a draft version for a human to publish.
 - **`misc/`** — Utility R functions (reliability, psychometric models).
 - **`tags/`** — Tagging data with human annotators.
 - **`collections/`** — Curated groupings of tables (`registry.csv` + `curated/`), read by `metadata/10_collections.R`.
-- **`irw_pkg/`** — A deprecated local R package, **gitignored** (see `.gitignore`) and therefore absent from GitHub and from any clone. Superseded by `itemresponsewarehouse/Rpkg` for everything except `imv()` and `getp()`, which Rpkg does not export. It declares `Package: irw`, so it collides with the real client package — never install both. Do not link to it from any tracked file.
 - **`training/`** — Workshop and training materials.
 - **`processing_notes/`** — Data processing guidelines and licensing docs.
 - **`automated_finding/`** — Automated pipeline that discovers, triages, and
