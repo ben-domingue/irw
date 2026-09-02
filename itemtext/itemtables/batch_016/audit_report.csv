@@ -1,0 +1,8 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"promis1wave1_anger","PASS",56,56,TRUE,TRUE,FALSE,TRUE,0,0,""
+"promis1wave1_anxiety","PASS",56,56,TRUE,TRUE,FALSE,TRUE,0,0,""
+"promis1wave1_depression","PASS",56,56,TRUE,TRUE,FALSE,TRUE,0,0,""
+"promis1wave1_fatigue","PASS",112,112,TRUE,TRUE,FALSE,TRUE,0,0,""
+"promis1wave1_pain","PASS",168,168,TRUE,TRUE,FALSE,TRUE,0,0,""
+"promis1wave1_physicalfunction","WARN",56,56,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=2497.5: PFC1, PFC2"
+"promis1wave1_social","PASS",112,112,TRUE,TRUE,FALSE,TRUE,0,0,""
