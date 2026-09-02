@@ -9,7 +9,7 @@
 # literal token NA, and only one contains empty strings at all (1,664 NA
 # cells vs 109 empty across the sample). That is exactly what R's write.csv()
 # emits for a true NA by default (na = "NA"), which is how the older join.R +
-# upload.py path produced it -- so it is arguably an artifact rather than a
+# upload path produced it -- so it is arguably an artifact rather than a
 # deliberate choice. It is nonetheless the corpus-wide state, and a corpus
 # split between two conventions is worse than either one, so new batch output
 # is normalized to match rather than diverge.

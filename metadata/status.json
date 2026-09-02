@@ -1,11 +1,45 @@
 {
-  "generated": "2026-08-31T20:28:48-0700",
+  "generated": "2026-09-01T19:54:35-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
     "tags": {
-      "n": 2286,
-      "pct": 55.3
+      "n": 3103,
+      "pct": 75.1
+    },
+    "tags_by_column": {
+      "age range": {
+        "n": 3029,
+        "pct": 73.3
+      },
+      "child age (for child-focused studies)": {
+        "n": 708,
+        "pct": 17.1
+      },
+      "sample": {
+        "n": 2257,
+        "pct": 54.6
+      },
+      "construct type": {
+        "n": 2254,
+        "pct": 54.5
+      },
+      "measurement tool": {
+        "n": 2319,
+        "pct": 56.1
+      },
+      "item format": {
+        "n": 2310,
+        "pct": 55.9
+      },
+      "primary language(s)": {
+        "n": 2237,
+        "pct": 54.1
+      },
+      "construct name": {
+        "n": 2265,
+        "pct": 54.8
+      }
     },
     "itemtext": {
       "n": 558,
@@ -20,23 +54,23 @@
     },
     "item_response_warehouse_2": {
       "n_tables": 975,
-      "tagged": 755,
-      "pct": 77.4
+      "tagged": 858,
+      "pct": 88
     },
     "item_response_warehouse_3": {
       "n_tables": 983,
-      "tagged": 268,
-      "pct": 27.3
+      "tagged": 569,
+      "pct": 57.9
     },
     "item_response_warehouse_4": {
       "n_tables": 981,
-      "tagged": 260,
-      "pct": 26.5
+      "tagged": 564,
+      "pct": 57.5
     },
     "item_response_warehouse_5": {
       "n_tables": 206,
-      "tagged": 16,
-      "pct": 7.8
+      "tagged": 125,
+      "pct": 60.7
     },
     "item_response_warehouse_6": {
       "n_tables": 1,
@@ -44,5 +78,5 @@
       "pct": 0
     }
   },
-  "orphan_tag_rows": 194
+  "orphan_tag_rows": 0
 }

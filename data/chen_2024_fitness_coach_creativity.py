@@ -5,10 +5,20 @@ Source: https://zenodo.org/records/13855427
 DOI: 10.5281/zenodo.13855427
 Data: 2024929健身教练数据(Peerj).sav
 License: CC BY 4.0
-Item text: not shipped -- the .sav has no value labels and only one stray
-    variable label (`TS1` = "thrillseeking 需求刺激"). The wording is in the
-    PeerJ article this deposit backs, which is open access; a later pass with
-    the paper in hand could recover all 74 stems.
+Item text: not shipped -- verdict independently rechecked 2026-09-01 under
+    #1770, against the same file (md5 32ce50d9e7a0f8f0f5cf4030be866620,
+    matching the Zenodo checksum), and it stands: **no shipped item carries a
+    variable label or a value label**, so there is nothing here to extract.
+    The wording is in the PeerJ article this deposit backs, which is open
+    access; a later pass with the paper in hand could recover all 74 stems.
+    Two details of the original claim were wrong and are corrected here:
+    the file has **five** variable labels, not one, and `TS1`'s reads
+    "thrillseeking 需求刺激，se" (a truncated fragment) rather than the tidy
+    string quoted before. The other four are on the covariate columns and are
+    the questionnaire's own numbered questions: `Gender` "1. 您的性别：",
+    `Age` "2. 您的年龄段（单位：岁）", `Seniority` "7. 工作年限",
+    `Monthly` "8. 月收入（人民币）". Value labels really are absent for every
+    one of the 99 columns, so the band boundaries noted below stay unpublished.
 
 732 fitness coaches, every item on a 1-7 agreement format.
 

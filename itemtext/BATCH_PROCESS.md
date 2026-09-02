@@ -14,7 +14,7 @@ covers per-table extraction) — this file covers the batching/scheduling layer.
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
 | `mapping_verification.csv` | Permanent, cross-batch record of how each table's item↔text mapping was verified (`route`, `status`, `evidence`). One row per table, ever. Fed by each batch's `verification_merged.csv`. |
 | `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Columns `table,note,status`; `status` is one of `pending`/`blocked`/`excluded`/`note_only`/`resolved` (see SKILL.md Step 6b). Append across batches; never reset. |
-| `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — its `upload_text.py` walks recursively and treats every `.csv` as a table. Ben clears it after uploading. |
+| `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — an uploader walks recursively, and this directory exists because stray `.csv` files were once uploaded as tables. `red_up` now excludes non-`__items` files when the target is `irw_text` and names what it excluded, but keep the directory clean anyway. Ben clears it after uploading. |
 
 Everything except `queue_state.csv` is rederived from disk each round, so a round
 that dies partway (API limit, crash) is safely resumable — the next firing sees
@@ -272,7 +272,7 @@ response data — several WARNs this session pointed at data defects worth their
 - If this round completed itemtables/batch_011, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
-Never run upload.py or clean/upload_text.py — uploading is a separate, explicit, human-triggered step.
+Never run red_up — uploading is a separate, explicit, human-triggered step.
 ```
 
 ## Triage and staging (after a round, before upload)
@@ -295,7 +295,7 @@ is the same each time.
    batch_007's `baaziz_2023_sms2` file inconsistency. Cached sources under `.cache/<table>/`
    usually make this minutes of work, not hours.
 3. **Decide per table: stage or hold.** Stage into `itemtables/clean/` — **only
-   `*__items.csv` may go there**, since `upload_text.py` treats every `.csv` as a table.
+   `*__items.csv` may go there**, since an uploader walks the directory recursively.
    Hold anything whose fate depends on an open decision (batch_006 held
    `APFCompact_Ptacek_2024_DASS-21` pending #1653, a duplicate-table question) and leave it
    in the batch folder. A table needing a *policy* call rather than a check — is this text

@@ -1,0 +1,16 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"estevez_2021_inter","estevez_2021_inter_1","INTER1",NA,NA,NA,NA,NA,"TOTALMENTE FALSO",1
+"estevez_2021_inter","estevez_2021_inter_1","INTER1",NA,NA,NA,NA,NA,"BASTANTE FALSO",2
+"estevez_2021_inter","estevez_2021_inter_1","INTER1",NA,NA,NA,NA,NA,"MAS O MENOS CIERTO",3
+"estevez_2021_inter","estevez_2021_inter_1","INTER1",NA,NA,NA,NA,NA,"BASTANTE CIERTO",4
+"estevez_2021_inter","estevez_2021_inter_1","INTER1",NA,NA,NA,NA,NA,"TOTALMENTE CIERTO",5
+"estevez_2021_inter","estevez_2021_inter_1","INTER2",NA,NA,NA,NA,NA,"TOTALMENTE FALSO",1
+"estevez_2021_inter","estevez_2021_inter_1","INTER2",NA,NA,NA,NA,NA,"BASTANTE FALSO",2
+"estevez_2021_inter","estevez_2021_inter_1","INTER2",NA,NA,NA,NA,NA,"MAS O MENOS CIERTO",3
+"estevez_2021_inter","estevez_2021_inter_1","INTER2",NA,NA,NA,NA,NA,"BASTANTE CIERTO",4
+"estevez_2021_inter","estevez_2021_inter_1","INTER2",NA,NA,NA,NA,NA,"TOTALMENTE CIERTO",5
+"estevez_2021_inter","estevez_2021_inter_1","INTER3",NA,NA,NA,NA,NA,"TOTALMENTE FALSO",1
+"estevez_2021_inter","estevez_2021_inter_1","INTER3",NA,NA,NA,NA,NA,"BASTANTE FALSO",2
+"estevez_2021_inter","estevez_2021_inter_1","INTER3",NA,NA,NA,NA,NA,"MAS O MENOS CIERTO",3
+"estevez_2021_inter","estevez_2021_inter_1","INTER3",NA,NA,NA,NA,NA,"BASTANTE CIERTO",4
+"estevez_2021_inter","estevez_2021_inter_1","INTER3",NA,NA,NA,NA,NA,"TOTALMENTE CIERTO",5

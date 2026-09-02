@@ -1,13 +1,13 @@
 ---
 name: irw-auto-itemtext
-description: This skill should be used when the user asks to "generate item text for X", "process the itemtext queue", "extract items for this table", or otherwise references transcribing/extracting instrument, section, item, or response-option text for an IRW table from its source paper. Also applies when the user references itemtext/join.R, itemtext/upload.py, the itemtext index workbook, or the itemtext.html public schema.
+description: This skill should be used when the user asks to "generate item text for X", "process the itemtext queue", "extract items for this table", or otherwise references transcribing/extracting instrument, section, item, or response-option text for an IRW table from its source paper. Also applies when the user references itemtext/join.R, uploading item text with red_up, the itemtext index workbook, or the itemtext.html public schema.
 ---
 
 # IRW Item Text Extraction
 
 Transcribes the literal instrument/section/item/response-option text for an IRW table
-from its source paper and writes it as a validated `{table}__items.csv`, ready for
-`itemtext/upload.py`. The output format is defined in `references/itemtext_standard.md`
+from its source paper and writes it as a validated `{table}__items.csv`, ready to upload
+with `red_up`. The output format is defined in `references/itemtext_standard.md`
 (copied verbatim from itemresponsewarehouse.org/itemtext.html) — read it before
 extracting anything, don't re-derive the schema from a merged example alone.
 
@@ -152,6 +152,57 @@ The output claims to be what the study administered. Three rules:
   that were false — "transcribed verbatim" when normalised, "not a duplicate upload" when
   it was a strict subset, "the .sav has no item text" when only the variable labels lacked
   it. A wrong note is worse than no note, because it stops the next person looking.
+- **Ship the language the study administered, and put English alongside it.** Confirmed
+  with the user 2026-09-01. Shipping only an English rendering of a non-English instrument
+  discards what respondents actually read, and it had been happening by default. The rule
+  now:
+
+  | field | holds |
+  |---|---|
+  | `item_text`, `option_text`, `instructions`, `section_prompt` | the **administered** wording, verbatim |
+  | `item_text_translated`, `option_text_translated`, `instructions_translated`, `section_prompt_translated` | the English translation |
+  | `language` | the administered language, named plainly (`German`, `Croatian`, `Spanish`) |
+
+  **Never translate `item` or `resp`.** They are the join keys — `item` is a code and `resp`
+  a number, and both must match `irw::irw_fetch(table)` exactly. Only the text fields get a
+  translated twin.
+
+  Prefer the study's own translation when the record supplies one (`weber2026_name_knowledge`
+  ships `Item_wording_English.xlsx` next to its German questionnaire); say in provenance whose
+  translation it is. If you translate it yourself, say that too — it is a deviation like any
+  other.
+
+  When the administered original genuinely cannot be recovered and only an English version
+  exists, put the English in the base field, leave the `_translated` columns empty, and mark
+  `text_source=translated_substitute`. That is now the **fallback**, not the default, and it
+  is the case the vocabulary in Step 6c was written for.
+
+  **In the fallback, `language` still names the administered language.** It is a fact about
+  the study, not a claim about `item_text`, so a fallback table reads `language=Chinese` with
+  an English `item_text`. Populated `language` + empty `_translated` is precisely the signal
+  that the base fields are not what respondents read, and it is how a backfill pass finds
+  these tables later. Do not blank `language` to avoid the apparent contradiction.
+
+  **Recoverability is scoped to the deposit and the paper's own supplements**, which is what
+  makes the test decidable while you are extracting. If the administered wording is in either,
+  ship it. If it is not, take the fallback and record in provenance *which files you checked*
+  and that they held no text in that script — `xue_2025_*` (S3 File, zero CJK characters) and
+  `zhou_2016_*` (the .sav, zero CJK across 109 variable labels and every value label) are the
+  worked examples. Do not go hunting off-source for a published original before shipping.
+
+  Leave the `_translated` columns out entirely for a table administered in English — do not
+  emit empty columns to no purpose.
+
+  **Schema status: agreed, 2026-09-01.** The four `_translated` columns and `language` are
+  part of the published schema at itemresponsewarehouse.org/itemtext.html (mirrored in
+  `references/itemtext_standard.md`), so a table carrying them is uploadable without any
+  further sign-off. `validate_items.R` checks that required columns are *present* and
+  tolerates extras, so the gate is unaffected. The uploader hands the CSV to Redivis, which
+  infers fields from the file — the first such upload is what widens `irw_text` to hold them.
+  Whether the already-uploaded tables get backfilled is still open (irw#1777) —
+  `ALSECYPIAMH_WU_2022_SDQ` and `altahla_2024_whoqol` ship English for non-English
+  administrations, and `burkert_2019_whoqol_bref` ships German with no translation. The rule
+  above governs every new table regardless.
 
 ## Output path: CSV-direct, not Sheets-fill
 
@@ -698,11 +749,10 @@ candidate for holding back from upload (see `abdullah_2024_hpbbloat_stress`).
 write.csv(items, file = "itemtables/<table>__items.csv", row.names = FALSE)
 ```
 
-Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where
-`upload.py` expects to find files (`python3 upload.py itemtables` uploads everything in
-that directory). Don't upload automatically; that's a separate, explicit step (see
-"Uploading", below) since it pushes to the shared `datapages/irw_text:next` Redivis
-dataset.
+Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where the
+upload step expects to find files (`red_up itemtables`). Don't upload automatically;
+that's a separate, explicit step (see "Uploading", below) since it pushes to the shared
+`datapages/irw_text:next` Redivis dataset.
 
 ### Step 6b — Logging discrepancies (no Sheets-write tool available)
 
@@ -762,7 +812,10 @@ Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other 
 `text_source` — where the words themselves came from:
 - `study_materials` — this study's own paper, supplement, questionnaire, or data file.
 - `canonical_instrument` — the published original instrument, not this study's materials.
-- `translated_substitute` — a different language version than the one administered.
+- `translated_substitute` — a different language version than the one administered. Since
+  2026-09-01 this is the FALLBACK only, for when the administered original cannot be
+  recovered at all; the default is to ship the administered wording with English in the
+  `_translated` columns (core model section 4).
 - `unknown`.
 
 `public_note`, when non-empty, is a one-sentence caveat written for the public issues
@@ -796,10 +849,29 @@ The draft is a starting point, not the text to paste:
   alarming, and several read worse than the underlying situation. Where you verified a
   claim with numbers, put the numbers in the callout — a reader can act on "correlates
   0.88-0.90 with the other two amotivation items" and cannot act on "looks unreliable".
-- Match the page's existing format exactly (`::: {.g-col-4 .dataset-item}` wrapping
-  `::: {.callout-warning collapse='true'}` with the table name as an `##` heading), append
-  before the final `:::` that closes the `.grid` div, and check the div count balances
-  before committing.
+- **Write the note when the table goes live, not when the batch is triaged.** The page
+  describes the data a reader can actually fetch, so a table whose `uploaded` stamp is
+  still blank gets no entry yet — but that means the note is owed *later*, and nothing
+  else will remind you. See the post-upload check under "Uploading" below; it exists
+  because three tables (`emidy2024_fevs`, `mohammed_2021_job_satisfaction`,
+  `himmelstein-impossible_question-2025`) shipped with a written `public_note` that never
+  reached the page, each uploaded in a commit separate from its batch triage.
+- **The page is generated from a YAML list, not hand-written callouts.** Since 2026-09-01
+  `itemtext_issues.qmd` holds one `issues` list inside an R `yaml.load(r"---( ... )---")`
+  block and renders it as a searchable table; the old `::: {.g-col-4 .dataset-item}` /
+  `.callout-warning` blocks are gone. Append entries as
+
+  ```yaml
+  - table: some_table_name
+    issue: |-
+      One paragraph, markdown allowed, no trailing period.
+  ```
+
+  before the closing `)---")`. Order does not matter — the page sorts by table name. Check
+  the YAML still parses (`yaml::yaml.load`) before committing; a stray unquoted `:` or a
+  mis-indented block scalar breaks the whole page, not just one entry.
+- A note you decide is below the bar goes in `fixes/issues_page_dropped.csv` with a reason,
+  so the check below stops re-reporting it. Still log the drop in `round_log.md` too.
 - Commit `itemtext_issues.qmd` **by path** in the site repo. That checkout usually has
   other people's in-flight vignette work in it; `git add -A` there will sweep it up.
 
@@ -864,10 +936,10 @@ convention across the 422 published tables (the `NA` token, as `write.csv` emits
 `audit_batch.R` re-checks the whole batch against live data and flags row-count
 anomalies, coverage gaps, and `option_text` padded with its own `resp` value.
 
-**Note for uploads:** `upload.py` walks a directory recursively and treats *every*
-`.csv` as a table, so `notes.csv`, `provenance.csv` and `audit_report.csv` would be
-uploaded as if they were data. Upload from a filtered directory containing only
-`*__items.csv`, never by pointing it at a batch folder.
+**Note for uploads:** the uploader walks a directory recursively. `red_up` excludes
+every file that is not `*__items.csv` when the target is `irw_text` and lists what it
+excluded, so `notes.csv`, `provenance.csv` and `audit_report.csv` are safe — but read
+that exclusion list rather than assuming, and check the target line says `irw_text`.
 
 ## Idempotency & caching
 
@@ -896,7 +968,7 @@ curation, the curation was the stale one, not the extraction.
    `table_context.R`, find the source paper, extract and structure). Write the result to
    a staging path, not `itemtext/itemtables/<table>__items.csv` — e.g.
    `itemtext/audit_staging/<table>__items.csv` — so it can never be picked up by a stray
-   `python3 upload.py itemtables` before review.
+   `red_up itemtables` before review.
 3. **Diff** — run:
    ```bash
    Rscript .claude/skills/irw-auto-itemtext/scripts/diff_itemtext.R <table> itemtext/audit_staging/<table>__items.csv itemtext/audit_pending_review/<table>_diff.md
@@ -934,12 +1006,12 @@ curation, the curation was the stale one, not the extraction.
      from the same paper/project before writing the issue — every apparent mislabel found
      across this skill's use turned out to be isolated to the one table once siblings were
      checked, so note in the issue whether you verified that (and how), rather than
-     leaving it open-ended. **Never run `upload.py` on an audit-mode table without the user's
+     leaving it open-ended. **Never run `red_up` on an audit-mode table without the user's
      explicit per-table or per-batch approval first** — filing the issue is not the same
-     as approval to replace; `upload.py` replaces a table's entire content on conflict (no
-     row-level merge), so nothing gets auto-uploaded. Only after explicit approval, copy
+     as approval to replace; an upload replaces a table's entire content (no row-level
+     merge), so nothing gets auto-uploaded. Only after explicit approval, copy
      the approved tables' CSVs from `audit_staging/` into a clean temp directory and run
-     `python3 upload.py <tempdir>`.
+     `red_up <tempdir>`.
    - 🟡 **Yellow** — the curated version is fine to keep as-is, but there's a specific,
      articulable limitation worth telling website users about (e.g. some items aren't
      documented in the one source checked, a translation is independently-derived rather
@@ -988,10 +1060,36 @@ on to the next candidate rather than forcing a fabricated match.
 ## Uploading (separate, explicit step — don't do this automatically)
 
 ```bash
-python3 upload.py itemtables
+red_up itemtables
 ```
 
-Uploads every `*.csv` in `itemtext/itemtables/` to `datapages/irw_text:next` on Redivis
-(prompts before overwriting anything already there). Only run this when the user
-explicitly asks to upload — it's a shared-system write, same caution as any other
-Redivis upload in this repo.
+`red_up` sees `*__items.csv` and defaults to `datapages/irw_text:next`; it shows the
+target and the full file list, marks each table NEW or UPDATE, and asks before writing
+anything. It uploads only to the draft version, and verifies each table's row count with
+a `count(*)` afterwards. Only run this when the user explicitly asks to upload — it's a
+shared-system write, same caution as any other Redivis upload in this repo. See
+`src/red_up/README.md`.
+
+### After every upload — reconcile the public issues page
+
+Stamp the `uploaded` date into each table's `provenance.csv` row, then run:
+
+```bash
+Rscript ../.claude/skills/irw-auto-itemtext/scripts/check_issues_page.R
+```
+
+Run from `itemtext/`. It reads every `itemtables/batch_*/provenance.csv`, keeps the rows
+with a non-empty `public_note`, and reports which of the now-live ones are missing from
+`../../irw_site/itemtext_issues.qmd`. Exit status is 1 while anything is DUE, so it can
+gate the wrap-up. Three categories come back:
+
+- **DUE** — live and absent. Apply the issues-page bar (Step 6c), then either add the
+  entry or record the drop in `fixes/issues_page_dropped.csv`.
+- **PENDING** — note written, table not uploaded. Correctly absent; it will turn DUE on
+  the upload that stamps it.
+- **CHECK** — on the page but not marked uploaded. Usually a missing `uploaded` stamp; if
+  it isn't, the page is describing a table nobody can fetch.
+
+This is the step that closes the loop. Without it a note written at triage time is simply
+lost once the upload happens in a later, separate commit — which is how it went wrong for
+batches 011, 013 and 014.

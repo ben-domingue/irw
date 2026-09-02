@@ -131,13 +131,13 @@ paper / repository
 data/<script>.R                      one script per dataset, self-contained
       |
       v
-upload.py  ---------------------->   a core Redivis shard
+red_up  ------------------------->   a core Redivis shard
       |
       v
 metadata/01..10_*.R                  reads the shards + the Sheets,
       |                              writes CSVs into metadata/
       v
-upload_meta.py  ------------------>  irw_meta, as a DRAFT version
+red_up  ------------------------->   irw_meta, as a DRAFT version
       |
       v
    published by hand on Redivis
@@ -155,11 +155,19 @@ machine, regenerates the metadata CSVs, runs `audit_tables.R` (which cross-check
 names across the metadata, tags and biblio outputs against the live Redivis
 datasets), and opens a GitHub issue with the log.
 
-**Nothing uploads automatically.** The cron job deliberately never runs
-`upload_meta.py`. When `upload_meta.py` is run, it only ever creates a *draft*
-Redivis version — Redivis keeps an unpublished working copy that nobody outside
-the project can see until someone clicks publish. That click is always a human
-action taken after reviewing a diff.
+**Nothing uploads automatically.** The cron job deliberately never uploads.
+Every upload goes through one tool, [`red_up`](red_up/README.md), and it only
+ever creates a *draft* Redivis version — Redivis keeps an unpublished working
+copy that nobody outside the project can see until someone clicks publish. That
+click is always a human action taken after reviewing a diff.
+
+`red_up` replaced thirteen near-identical copies of one script, each hardcoding
+a different dataset, so the destination used to be decided by which file you
+happened to run. It reads the dataset list from `metadata/redivis_config.R`,
+defaults by filename (`*__items.csv` → `irw_text`, otherwise the newest shard),
+checks every shard for an existing table of the same name before writing —
+because a copy in a newer shard *shadows* the older one rather than replacing
+it — and verifies each table with a `count(*)` afterwards.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
@@ -171,12 +179,15 @@ When two documents disagree, this is the order of precedence:
 | Question | Authoritative source |
 |---|---|
 | Output schema, column names, file naming | [`datastandard.md`](datastandard.md) |
-| Redivis owner and dataset names | `IRW_OWNER` / `IRW_CORE_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) |
+| Redivis owner and dataset names | `IRW_OWNER` / `IRW_CORE_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) — `red_up` parses this file rather than restating it |
+| How anything gets uploaded to Redivis | [`red_up/README.md`](red_up/README.md) |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
 | Automated-finding procedure | `automated_finding/.claude/skills/irw-automated-finding/SKILL.md` over `automated_finding/README.md`; `automated_finding/BATCH_LOG.md`'s latest notes override both on workflow specifics |
+| Item text schema, and the administered-language rules | [`itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md`](itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md), which mirrors the public page at `itemresponsewarehouse.org/itemtext.html`. It beats the automated-finding SKILL.md, which runs item text extraction at its Step 3.5 but does not own the schema |
+| Item text *extraction judgment* (what goes in `instructions` vs `section_prompt`, when to leave a field blank) | Step 4 of `itemtext/.claude/skills/irw-auto-itemtext/SKILL.md` |
 | Dataset descriptions and licenses | The per-source dictionary Sheet, by convention — no document claims this in writing |
 
 Two entries deserve their reasoning stated, because both are counter-intuitive:
@@ -210,3 +221,25 @@ The pattern is old. The rule that dataset searches must run in nine languages
 rather than English alone was silently dropped for three rounds of discovery
 before anyone caught it — because the instruction lived in two places and the
 copies drifted apart.
+
+**Rule 1 needs a corollary: say which document owns a rule that spans two of
+them.** On 2026-09-01 the item text schema gained the administered-language
+columns, and the automated-finding SKILL.md went on telling its Step 3.5 to
+*skip* any table whose wording existed only as "a translated substitute" — a
+rule that had been correct a day earlier and now contradicted the schema. It
+would have discarded seven correctly-extracted tables.
+
+The near miss is instructive because rule 1 *was* being followed. That file has
+a section headed "Schema and extraction rules — do not restate them here",
+which explicitly delegates to `itemtext_standard.md` and says it "deliberately
+does not fork a second copy". The stale bullet sat a few lines above it, in a
+list about *triage* — whether extracting is cheap enough to do now. Nobody
+classified "is a translation acceptable?" as a schema question, so it was never
+covered by the delegation, and the commits that changed the schema
+(`1331807`, `f43a1c4`) touched only `itemtext/` and never looked outside it.
+
+So: a rule that reads as procedure in one file and as schema in another has two
+plausible owners and will drift. Name the owner in the authority table above —
+item text now has two rows there for exactly this reason — and when you change
+a rule, grep the whole repo for it rather than the directory you are working
+in.

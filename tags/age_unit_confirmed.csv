@@ -1,0 +1,13 @@
+table,unit,evidence,confirmed
+lai_2023_social_adaptability,years,"Lai et al. (2023) PLOS ONE 10.1371/journal.pone.0283170 -- a study of ADOLESCENTS' social adaptability, self-report scales (QZGX1-18, 1-5). Months would put every respondent under 2 years old and unable to answer a self-report item. cov_age 5-26, 16 distinct.",2026-09-01
+lai_2023_parent_relation_father,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_parent_relation_mother,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_teacher_student_rel,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+lai_2023_peer_relationship,years,"Same deposit and same cov_age column as lai_2023_social_adaptability.",2026-09-01
+gilbert_meta_22,years,"Karlan et al. school-based savings RCT (Dataverse 10.7910/DVN/GDP2YP); the deposit describes a school savings programme evaluated over nine months with self-reported savings at school. cov_age 6-21; months would put every respondent under two years old.",2026-09-01
+gilbert_meta_29,years,"Banerji, Berry & Shotland, maternal literacy RCT in India (10.7910/DVN/19PPE7). The paper controls for child's age and grade and measures children's language and math; months would make the respondents 2-20 months old and unable to sit the assessment.",2026-09-01
+gilbert_meta_30,years,"Same deposit and same cov_age column as gilbert_meta_29.",2026-09-01
+gilbert_meta_68,years,"Banerjee et al., 'From Proof of Concept to Scalable Policies' (NBER w22931; Dataverse 10.7910/DVN/DUBA3J). A school RCT teaching at the right level, with Hindi and math outcomes and grade at baseline as a control. cov_age 0-18.25 in 132 steps reads as quarter-years; in months the whole sample would be under 18 months old.",2026-09-01
+gilbert_meta_69,years,"Same deposit and same cov_age column as gilbert_meta_68.",2026-09-01
+gilbert_meta_70,years,"Same deposit and same cov_age column as gilbert_meta_68.",2026-09-01
+gilbert_meta_71,years,"Same deposit and same cov_age column as gilbert_meta_68.",2026-09-01

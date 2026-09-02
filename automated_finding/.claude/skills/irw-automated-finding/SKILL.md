@@ -365,12 +365,32 @@ text slow the batch down — the goal is still to maximize data in the IRW.
 - The paper is paywalled, or the instrument is a multi-hop citation away.
 - The labels are positional ("FTD-SS Item 1", "Q1"), so the *published*
   instrument is needed to know what was asked.
-- The wording exists only in a table *image* (OCR), a third-party
-  reproduction, or a translated substitute.
+- The wording exists only in a table *image* (OCR) or a third-party
+  reproduction.
+
+**A non-English administration is not a reason to skip.** This bullet used to
+end "or a translated substitute". Since the administered-language columns
+entered the schema on 2026-09-01 (#1774/#1777) that wording contradicts the
+standard, and read literally it would have skipped seven correctly-extracted
+tables in the PLOS weekly batch (#1783). Language handling is a *schema* rule,
+not a triage rule, and it is owned by `itemtext_standard.md` -- see
+"Administered language" there, and core model section 4 of
+`irw-auto-itemtext`'s SKILL.md. Follow it there rather than re-deriving it
+here.
 
 When you skip, say **where the text actually is** in the `data/<table>.py`
 header and in the `BATCH_LOG.md` entry, so a later pass starts from an answer
 instead of re-deriving one. That is the whole cost of skipping — one sentence.
+
+**Say which label levels you checked, not just what you concluded.** A skip
+verdict is the one output here that nothing downstream re-tests: no gate runs
+on a table that was never attempted, so the prose in the header is the whole
+record. `estevez_2021_*` (#1770) was skipped on "no variable labels and no
+value labels for any item"; the file carried value labels for all 82 shipped
+items, and the verdict had been written from the variable-label level alone.
+Name both levels — "no variable labels; value labels present but only on the
+covariates", "both levels empty" — so the next reader can tell a checked
+absence from an unchecked one.
 
 Two carve-outs: **never extract item text for `enem*` tables** (Ben handles
 those separately), and a table skipped for PII/license/N<100 has its item text
@@ -399,11 +419,13 @@ the merge needs a join key).
 Write to `automated_finding/itemtext_output/<table>__items.csv` — double
 underscore, and the case of `<table>` exactly as the response table spells it.
 
-**Only `*__items.csv` may ever live in that directory.** `itemtext/upload.py`
-walks a directory recursively and treats every `.csv` in it as a table to
-upload, so a stray `provenance.csv` or `notes.csv` would be uploaded as if it
-were data. This has happened before; it is why `itemtext/itemtables/clean/`
-exists on the other side.
+Keep that directory to `*__items.csv` and the batch's own bookkeeping files.
+An uploader walks a directory recursively, so a stray `provenance.csv` or
+`notes.csv` used to be uploaded as if it were data -- this has happened, and it
+is why `itemtext/itemtables/clean/` exists on the other side. `red_up` now
+excludes anything that is not `*__items.csv` when the target is `irw_text`, and
+names what it excluded, so a stray file is visible rather than uploaded. Do not
+treat that as licence to leave junk there.
 
 ### Gate it against the staged response CSV
 
@@ -996,8 +1018,16 @@ The two folders go to two different Redivis datasets, in this order:
 
 | Folder | Dataset | Upload with |
 |---|---|---|
-| `irw_output/` | `item_response_warehouse_4` | `irw_output/upload_4.py` |
-| `itemtext_output/` | `irw_text:07b6` | `itemtext/upload.py` |
+| `irw_output/` | the newest warehouse shard | `red_up irw_output` |
+| `itemtext_output/` | `irw_text` | `red_up itemtext_output` |
+
+`red_up` picks both defaults itself -- a directory of `*__items.csv` goes to
+`irw_text`, anything else to the newest shard -- and shows the target for
+confirmation before it writes. Do not hardcode a shard number here again: this
+table used to name `item_response_warehouse_4` and went stale two shards ago.
+`red_up` also checks every shard for a table of the same name first, because a
+copy in a newer shard shadows the older one rather than replacing it. See
+`src/red_up/README.md`.
 
 **Response tables first.** Item text that references a table which isn't live
 yet is a dangling reference.

@@ -1,11 +1,64 @@
 # Auto-tagger scoring (issue #1721, sub-action 2.2)
 
-Scores the `irw-auto-tag` skill against the human-tagged gold set, per column.
-Run 2026-08-30. Reproduce with:
+Scores the `irw-auto-tag` skill against the gold set, per column.
+Predictions were produced 2026-08-30. Reproduce with:
 
 ```bash
 python3 score.py predictions_2026-08-30.json sample_2026-08-30.json
 ```
+
+## Two scored runs, same predictions
+
+`results_2026-08-30.txt` and `results_2026-09-01.txt` are the SAME 60 blind
+predictions scored against gold before and after #1760. Nothing about the tagger
+changed between them. What changed is what it was being marked against:
+
+| column | 2026-08-30 | 2026-09-01 | why |
+|---|---|---|---|
+| `age_range` | 73.0% | **86.5%** | gold is now derived from each table's own `cov_age`; 10 of the 38 scored tables had their gold corrected |
+| `sample` | 41.7% | **44.4%** | `General/non-specific` is the frame residual now, applied to both sides |
+| others | unchanged | unchanged | |
+
+**`age_range`'s 13.5-point gain is entirely gold.** The tagger was right more
+often than the old gold said — which is the finding #1760 was opened to test,
+now measured rather than argued. Cite the 2026-09-01 numbers; the earlier ones
+scored against labels that have since been withdrawn.
+
+## Partial credit, per atom
+
+Exact match asks "did it name the whole answer". For a multi-select column whose
+gold answer routinely has two or three facets, that is the wrong question:
+naming two of three scores the same zero as naming something unrelated. So the
+2026-09-01 run also reports micro-averaged per-atom precision and recall.
+
+| column | exact | precision | recall | F1 |
+|---|---|---|---|---|
+| `primary_languages` | 90.9% | **100.0%** | 91.7% | 95.7% |
+| `construct_type` | 64.9% | 80.0% | 69.6% | 74.4% |
+| `child_age` | 75.0% | 80.0% | 100.0% | 88.9% |
+| `sample` | 44.4% | 52.6% | 48.8% | 50.6% |
+
+The two columns that look similar on exact match are not alike, and this is what
+separates them. `construct_type` **under-tags**: when it names a facet it is
+right 80% of the time, and it misses 30% of the facets gold holds. `sample` is
+wrong in both directions at once, which is what a missing convention looks like
+rather than a granularity disagreement.
+
+`primary_languages` never names a language that is not there; it just misses
+secondary ones. That is the least damaging failure shape available.
+
+These are reported ALONGSIDE exact match, never instead of it — a bar set on F1
+alone would pass a tagger that reliably names one facet of three.
+
+**`sample` barely moved, and that is informative.** The frame rule removes a
+contradiction from the gold but does not teach the tagger anything: these
+predictions were written before the rule existed. The residual errors are now
+diagnosable rather than mysterious — see `results_2026-09-01.txt`, where 8 of 20
+are the tagger claiming `Representative` for a source that never claimed it, and
+5 are it answering the SETTING facet when gold recorded the FRAME. Both are
+things `vocab.md` now states, so `sample` needs the tagger re-run against the
+current vocabulary before any shipping bar is set against it. 44.4% is a
+pre-rule number.
 
 ## Method
 
@@ -140,3 +193,140 @@ Ship per column, as #1722 argues:
 - The gold set is itself human work of unmeasured consistency. A gold/gold
   disagreement rate between raters would tell us what ceiling to expect, and we
   do not have one.
+
+---
+
+# The 2026-09-01 run (2.3, #1722)
+
+Authorised by Ben to settle whether the #1760 rules make `sample` scorable and
+whether the tagger reaches the population 2.3 would actually run on. Two arms,
+eight blind subagents, ten tables each.
+
+**Arm A — the same 38 tables, re-tagged against the rewritten `vocab.md`.**
+Human gold exists, so this measures whether stating the setting/frame boundary
+helps. `predictions_2026-09-01_rerun.json`, scored in
+`results_rerun_2026-09-01.txt`.
+
+**Arm B — 40 tables that have never been tagged**, `seed=1722`, ten each from
+w2/w3/w4/w5 (`sample_untagged_2026-09-01.json`). No gold exists for six of the
+seven columns, so this arm measures REACHABILITY and coverage — and real
+accuracy for `age_range`, because #1760's derivation supplies ground truth from
+each table's own `cov_age`. `score_untagged.py`,
+`results_untagged_2026-09-01.txt`.
+
+## The headline, and why the obvious reading of it is wrong
+
+`sample`'s whole-cell exact match **fell**, 44.4% → 18.2%. It is an artifact.
+
+Gold predates the two-facet split and answers one question: 12 of 34 gold rows
+carry no frame value at all. The tagger, following the new rules, answers both —
+it produced a frame value on **33 of 34** tables against **19 of 38** before. So
+whole-cell matching now punishes it for filling a facet the key leaves blank,
+and 15 of its 33 misses are supersets rather than wrong answers.
+
+Scored per facet, on the tables where gold answered that facet
+(`score_sample_facets.py`), the rules helped on both:
+
+| facet | 2026-08-30 exact | 2026-09-01 exact | precision | recall |
+|---|---|---|---|---|
+| setting | 75.0% | **81.2%** | 87.5% | 87.5% |
+| frame | 26.9% | **45.5%** | 52.4% | 47.8% |
+
+Frame exact match nearly doubled. It is still the worst column in the corpus,
+and the eight agents said why without being asked — see the amendment proposed
+in `tags/decisions/1760_age_range_and_sample.md`.
+
+## What Arm B found
+
+- **75% of never-tagged tables were reached** (10 abstentions in 40), and **9 of
+  the 10 failures are `fetch_failed`, not paywalls**.
+- Reachability is not uniform: w3 100%, w4 90%, **w5 80%**, w2 **30%**. w5 had
+  never been scored before and is the worst-*tagged* shard at 42.7% — this says
+  its gap is not a reachability problem.
+- w2's collapse is one fixable bug: figshare and Harvard Dataverse both answer
+  `HTTP 202` (a pre-render/bot challenge) rather than content.
+- **`age_range` scored 11/12 correct (91.7%) against derived ground truth** on
+  the untagged population — the first accuracy figure in this project measured
+  on the population the tagger would actually run on.
+
+## The amended-rule run, 2026-09-01 (#1796)
+
+A third scoring of the same 38 tables, after the `sample` frame rules were
+amended: `Targeted/specific` now requires a restriction the study **imposed on
+top of its setting**, and `Representative` gains a description-beats-label
+tie-break. Same tables, same gold, only the rule changed, so this isolates the
+amendment. `predictions_2026-09-01_amended.json`,
+`results_amended_2026-09-01.txt`.
+
+**Per facet, across all three runs:**
+
+| | 2026-08-30 | rules stated (#1760) | rules amended (#1796) |
+|---|---|---|---|
+| setting exact | 75.0% | 81.2% | **87.5%** |
+| setting precision | 85.7% | 87.5% | **93.3%** |
+| frame exact | 26.9% | 45.5% | **54.5%** |
+| frame precision | 44.4% | 52.4% | **59.1%** |
+
+Both facets improved at every step, and the frame facet has doubled since the
+rules were written down. The tagger did not change once across the three runs —
+only what it was told the values mean.
+
+**Whole-cell `sample` kept falling: 44.4% → 18.2% → 14.7%.** That is the same
+artifact, now at full stretch: the tagger answers the frame facet on **34 of 34**
+tables while gold answers it on 22 of 34. Whole-cell exact match against this
+gold no longer measures the tagger at all, and should not be quoted.
+
+**The amendment changed 12 of the 34 tagged tables**, every one in the same
+direction — `Targeted/specific` → `General/non-specific` where the restriction
+was what the setting already implied (one rural middle school, one university
+subject pool, preschoolers in preschool, US-only MTurk, "emerging adults"
+recruited through participant pools). It held `Targeted/specific` wherever the
+study imposed something extra: an ADHD screening criterion, a nationality plus
+residency screen, recurrent-UTI diagnostic criteria, Czech teachers, a twin
+registry.
+
+**The tie-break fired exactly where it was written for and nowhere else.** On
+`shan_2020_g`/`_pd` the Methods say "convenient sampling" while the authors'
+rebuttal in the same PMC record claims "simple random sampling"; the description
+won and `Representative` was withheld. It correctly did *not* fire on
+`c19prc_uk_mcbride_2021_trustsource`, where quota sampling to a stated national
+frame is a design that matches the claim rather than contradicting it.
+
+## The w2 re-measurement, 2026-09-01 (#1786)
+
+The 2.3 run reached only 30% of w2 against 80–100% for the other shards. After
+the repository-API fix, three more blind batches:
+
+| batch | result |
+|---|---|
+| **Paired** — the same ten w2 tables, cache cleared | **3/10 → 9/10** |
+| **Fresh** — 20 more never-tagged w2 tables, `seed=1786` | **16/20 (80%)** |
+
+w2 goes from 30% to 80%, which is the range the other shards were already in. Of
+the five remaining abstentions across all 30 tables, **three are genuine
+paywalls** (`oa_status=closed`) and two were OSF shells — since fixed by the OSF
+route.
+
+**What a catalogue record is actually worth.** Sixteen of the 25 tagged tables
+came back as `repository_metadata` rather than a paper, so this is the honest
+question about the fix. Field coverage across those 25:
+
+| field | filled |
+|---|---|
+| `construct_name` | 100% |
+| `item_format` | 100% |
+| `construct_type` | 96% |
+| `measurement_tool` | 96% |
+| `primary_languages` | 88% |
+| `sample` | 72% |
+| **`age_range`** | **32%** |
+
+So a deposit record supports the format and construct fields nearly as well as a
+paper does, supports `sample` when the description states a frame (figshare
+descriptions often do; bare Dataverse records rarely), and **almost never
+supports `age_range`** — which is the correct outcome, because #1760's rule
+forbids inferring an age from "undergraduates" or "adolescents", and because
+that column is derived from `cov_age` anyway.
+
+The fix therefore buys real tagging, not just a lower abstention count — with
+the one exception being the column that no longer needs it.

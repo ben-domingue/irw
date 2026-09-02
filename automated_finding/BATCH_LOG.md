@@ -13397,6 +13397,19 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   mean(IAM40, IAM42, IAM43). Recorded in the script header for a later item
   text pass. Item text not shipped -- no labels, no codebook.
 
+  > **Correction, 2026-09-01 (#1770).** "No variable labels at all" and "no
+  > labels, no codebook" are wrong; the entry is left as written and corrected
+  > here. The .sav was reopened independently (md5 matches the Zenodo
+  > checksum): no *variable* label on any item column, true -- but **86 of 99
+  > columns carry value labels, including all 82 shipped items**, plus
+  > `GENERO`, `CURSO` and all thirteen `CENTRO` school names. So the block
+  > split still had to be done on prefixes, but the anchors were extractable
+  > all along. `option_text` for all 8 tables has now been built and gated
+  > (validate_items.R 8/8 PASS, audit_batch.R 8 WARN "100% blank item_text",
+  > expected with the stems still in the paper); held pending the call in
+  > #1770 on whether option-only item text ships. Also corrected there:
+  > the study covers **13** schools, not 7.
+
 - **`zenodo.13855427` -- Chen (2024), Chinese fitness coaches. 16 tables /
   57,095 responses.** Sixteen prefix blocks, deliberately not renamed: `TS` is
   confirmed thrill seeking by its one stray variable label and JE/DS/SC/TS read
@@ -13406,6 +13419,13 @@ Worked top-down through the unworked tail (102 of the 110 backlog leads had no
   block-mean columns the deposit also ships each have a maximum of exactly 7.0,
   which is only reachable if the items run to 7. Asserted in the script before
   those columns are dropped, so no table was split on an observed maximum.
+
+  > **Correction, 2026-09-01 (#1770).** The skip verdict was rechecked against
+  > the same .sav and **stands** -- no shipped item carries a variable or a
+  > value label. Two details were wrong: the file has five variable labels,
+  > not one (`TS1` plus the four covariate columns, which carry the
+  > questionnaire's own numbered questions), and `TS1`'s label is the
+  > truncated "thrillseeking 需求刺激，se". Details in the script header.
 
 - **`zenodo.15168213` -- Torok et al. (2025), "Trust, Awareness, and Risk
   Perception in the Online Environment", n=1,003 Hungarian CATI survey.
@@ -13558,3 +13578,193 @@ the same English-only gate are a further pool on top of these 955 -- but that
 pool should be sized against this result, not against the 2026-07-15 English
 alt-format re-discovery, which returned 21 new tables and set an expectation
 this run did not meet.
+
+## 2026-09-01 — PLOS weekly review: the whole `human_assistance` bucket was processable (21 tables, 280,971 responses)
+
+Follow-up to the scheduled weekly PLOS run of 2026-09-01 (`de13a15` bookkeeping
+straight onto main, `3fd6b14` candidates on a branch, merged as `#1783`). The
+run triaged 58 candidates from the high-yield term subset: 2 `good`, 9
+`human_assistance`, 1 `not_item_response`, 46 `no_usable_file`. It did **not**
+run Step 2b, as no cloud run does.
+
+**The dependency fix works.** Zero `download_failed` rows this week, and the
+sandbox parsed both `.sav` (`pone.0157013`, 123k responses) and several `.xlsx`
+Supporting Information files. That is the first clean confirmation in a
+scheduled run that `preflight_deps()` closed the gap diagnosed on 2026-08-25,
+when 10 of 12 `download_failed` rows were bare `Import pyreadstat/openpyxl
+failed`. The 46 `no_usable_file` rows are all genuine ("no tabular-format
+Supporting Information file on article page"), not a masked reader failure.
+
+### Step 2b found a bug in Step 2b
+
+Run locally on the 9 `human_assistance` rows
+(`runs/plos_retriage_ha_weekly_2026-09-01.csv`), the retriage classified
+`pone.0156167` as **`not_item_response`** — a drop bucket. The file is a
+semicolon-delimited CSV whose columns are `phq9_1;phq9_2;...;phq9_9`: a PHQ-9,
+i.e. exactly what this pipeline exists to find. `classify()` had diagnosed the
+delimiter correctly and then failed its own item-likeness test on the recovered
+header, because `ITEM_LIKE`'s `[a-z]{2,8}_\d{2,3}` alternative needs two digits
+after the underscore and `\b(...)\b` cannot match `phq9` inside `phq9_1` (`_`
+is a word character, so there is no boundary after the `9`). Any
+`prefix<digits>_<one digit>` naming — `phq9_1`, `gad7_1` — was silently
+discarded. Fixed to `[a-z]{2,8}\d{0,3}_\d{1,3}`; the row now classifies as
+`recoverable_format` and shipped as `kohlmann_2016_phq9`.
+
+This is the third instance in this log of a real dataset wearing a
+nothing-here label, and the first where the mislabel came from our own
+retriage rather than a connector.
+
+### Every one of the 9 was resolved; none went to `human_review/`
+
+Retriage put 7 of 9 in `human_review` ("no clear automated classification"),
+almost all of them `QC failed on: resp_scale_mixed` plus `multi_scale` — which
+is not ambiguity, it is a multi-instrument questionnaire, i.e. the ordinary
+case the standard already answers with "one file per scale". Opening the 9 raw
+files resolved all of them without a single genuine `human_review` row, so
+`human_review/` gets no file for this batch. Dispositions:
+
+| DOI | verdict |
+|---|---|
+| `pone.0157013` | processed, 4 tables (`zhou_2016_*`) |
+| `pone.0244338` | processed, 2 tables (`teo_2021_*`) |
+| `pone.0320839` | processed, 4 tables (`shao_2025_*`) |
+| `pone.0320845` | processed, 4 tables (`zhou_2025_*`) |
+| `pone.0330679` | processed, 1 table (`smirnov_2025_enrollment_motives`) |
+| `pone.0156167` | processed, 1 table (`kohlmann_2016_phq9`) |
+| `pone.0327089` | dropped — the 7 "items" are scale totals (SE/PSS/FO/MH) and their means, no item-level data in the deposit |
+| `pone.0224360` | dropped — coral reef resilience indicators, not item response data |
+| `pone.0255648` | license-blocked — S1 File is lavaan output; the data are on `osf.io/hzy8r`, whose OSF node has `node_license: null` and no license relationship at all. Row appended to `license_blocked_candidates.csv` |
+
+Plus the 2 `good` rows, both processed: `pone.0297517` (`wang_2024_*`, 2
+tables) and `pone.0338956` (`xue_2025_*`, 3 tables).
+
+### Tables written (21, to `irw_output/`)
+
+| table | items | ids | responses | resp |
+|---|---|---|---|---|
+| `wang_2024_speaking_self_efficacy` | 15 | 516 | 7,740 | 1-7 |
+| `wang_2024_self_efficacy_sources` | 13 | 519 | 6,747 | 1-7 |
+| `xue_2025_academic_procrastination` | 19 | 579 | 11,001 | 1-5 |
+| `xue_2025_academic_stress` | 20 | 579 | 11,580 | 1-5 |
+| `xue_2025_coping_style` | 20 | 579 | 11,580 | 1-4 |
+| `zhou_2016_burnout` | 15 | 1,129 | 16,927 | 1-7 |
+| `zhou_2016_coping_style` | 20 | 1,129 | 22,571 | 1-5 |
+| `zhou_2016_personality` | 48 | 1,129 | 54,183 | 0-1 |
+| `zhou_2016_anxiety` | 20 | 1,129 | 22,575 | 1-4 |
+| `teo_2021_burnout` | 22 | 329 | 7,238 | 0-6 |
+| `teo_2021_worklife` | 28 | 329 | 9,212 | 1-5 |
+| `shao_2025_authentic_leadership` | 14 | 1,034 | 14,475 | 1-5 |
+| `shao_2025_school_climate` | 10 | 1,034 | 10,340 | 1-5 |
+| `shao_2025_teacher_efficacy` | 12 | 1,034 | 12,408 | 1-9 |
+| `shao_2025_work_engagement` | 9 | 1,034 | 9,306 | 1-7 |
+| `zhou_2025_peer_relationship` | 20 | 514 | 10,280 | 1-5 |
+| `zhou_2025_social_support` | 17 | 514 | 8,738 | 1-5 |
+| `zhou_2025_exercise_self_efficacy` | 8 | 514 | 4,112 | 1-5 |
+| `zhou_2025_pa_intention` | 8 | 514 | 4,112 | 1-5 |
+| `smirnov_2025_enrollment_motives` | 11 | 1,267 | 13,937 | 0-1 |
+| `kohlmann_2016_phq9` | 9 | 1,337 | 11,909 | 0-3 |
+
+`biblio_2026-09-01.csv` (21 rows) written for upload.
+
+### Judgment calls worth re-reading before upload
+
+* **`wang_2024_*` — Study 3 dropped as duplicate people, verified not assumed.**
+  The deposit has five sheets; the paper says Study 3 analysed "responses from
+  students that participated in both Study 1 and Study 2" (N = 304). Checked
+  against the data rather than taken on trust: all 303 distinct EFL-SSES
+  response vectors in Study3 also appear in Study1-efa (168) or Study1-cfa
+  (135), and all 300 distinct EFL-SSSES vectors appear in Study2-efa (132) or
+  Study2-cfa (168). It is a re-analysis of the same respondents, so including
+  it would duplicate people. The remaining efa/cfa phases are separately
+  recruited samples of the same finalized instrument, so they are collapsed per
+  scale with `cov_study` and a 10,000 id offset.
+* **`smirnov_2025_enrollment_motives` is the batch's one borderline fit.** The
+  11 binary columns are the options of a single multiple-choice question
+  ("What were your goals for enrolling into the doctorate?"), not 11 separately
+  administered probes; a `0` means "did not tick", not an explicit no. The
+  source itself treats them as 11 manifest binary indicators (latent class
+  analysis, with Fig 2 reporting per-class selection probabilities), which is
+  why it is shipped rather than dropped — but it is the one table in this batch
+  to drop first if the checklist framing is judged out of scope. The script's
+  header says so in the same terms.
+* **`shao_2025_work_engagement` ships 1-7 where the paper says 0-6.** The
+  Methods describe the UWES-9's published 0 (Never) - 6 (Always) coding; the
+  deposit stores the same seven points as 1-7. Nothing records where the shift
+  came from, so the values are shipped as stored rather than silently
+  decremented.
+* **`xue_2025_coping_style` ships 1-4 where the paper claims 1-5.** The paper
+  applies a blanket "5-point Likert scale (1 = Strongly Disagree, 5 = Strongly
+  Agree)" to all three instruments, but all 20 SCSQ columns top out at 4 across
+  579 respondents and Xie's SCSQ is natively four-point. Shipped as the 1-4 it
+  is; no anchors invented for it.
+* **`zhou_2025_*` block boundaries are proved, not inferred.** The header is
+  `Gender, Grade, Age, 5..24, "peer relationship", 25..41, "social support",
+  42..49, "Exercise self-efficacy", 50..57, "Behavioural intentions..."`. Each
+  named column is exactly the arithmetic mean of the integer block before it —
+  asserted numerically in the script, not eyeballed — which is what fixes the
+  splits. Three of four block sizes match the Methods (20/17/8); the fourth
+  does not (the Methods say the PA-intention subscale has 12 questions, the
+  deposit has 8, and the totals column confirms the mean is over those 8). The
+  8 that exist are shipped and the discrepancy left standing.
+* **Seven single-cell keying slips dropped in `zhou_2016_*`, one in
+  `shao_2025_authentic_leadership`.** Each is a single occurrence isolated to
+  one item (E2/E11/E15 one `6` each on 1-5; J5 one `6` and J9 one `5` on 1-4;
+  G8/G9/G10 one `3` and G9/G12 one `2` on 0/1; `Al1` one `7` on 1-5) against
+  tens of thousands of legitimate responses. A post-hoc sweep of all 21 final
+  tables for any `resp` value confined to a single item or occurring under 10
+  times returns nothing.
+* **Deposit-vs-paper N mismatches, all left as the deposit has them:**
+  `teo_2021_*` 329 rows vs 328 analysed; `shao_2025_*` 1,034 rows vs 1,043
+  reported valid.
+* **No imputation anywhere.** All eight article texts searched for "imput",
+  "missing data", "MICE", "LOCF", "mean substitution", "hot-deck" — the only
+  hit in any of them is `pone.0157013`'s "After exclusion of invalid or missing
+  data, 1129 questionnaires", i.e. deletion.
+* **No PII in any of the eight source files.** The closest is `pone.0157013`'s
+  `A2`, a year of birth (not a date), carried as `cov_birth_year`.
+
+### Item text — 9 of 21 tables shipped
+
+Shipped, all gated (`normalize_nulls.R` → `validate_items.R --resp-csv` →
+`audit_batch.R --resp-dir`, all PASS, no WARN on any of the 9):
+
+* `wang_2024_speaking_self_efficacy`, `wang_2024_self_efficacy_sources` — S2/S3
+  Appendix print both finalized instruments in Chinese and English with the
+  live item codes and the 7 anchors. Administered Chinese in the base fields,
+  the appendices' English in `_translated`, `language = Chinese`. This is the
+  batch's only genuine bilingual shipment.
+* `xue_2025_academic_procrastination`, `xue_2025_academic_stress`,
+  `xue_2025_coping_style` — S3 File lists all 59 stems against the AP/AS/CSS
+  codes the script renames onto, so the mapping is explicit. English only for a
+  Chinese administration, so `translated_substitute`.
+* `zhou_2016_burnout`, `zhou_2016_coping_style`, `zhou_2016_personality`,
+  `zhou_2016_anxiety` — both label levels checked in the `.sav`: English
+  variable labels carry the full stem for all 103 item columns, and value
+  labels exist **only** for covariates A1/A3/A5/A6, none for any item. Anchors
+  therefore come from the Methods; the EPQ block gets no option text because
+  nothing records which of 0/1 is "yes".
+
+Not shipped, and where the text actually is:
+
+* `teo_2021_burnout`, `teo_2021_worklife` — Mind Garden's licensed MBI-HSS(MP)
+  and Areas of Worklife Survey; the deposit and article reproduce no item
+  wording, only subscale structure and anchors. Needs a Mind Garden licence,
+  not another pass over this source.
+* `shao_2025_*` (4 tables) — headers are positional (`Al1`..`WE9`), the article
+  prints one example item per scale. Text is in Walumbwa et al.'s ALQ (Mind
+  Garden), Johnson et al./Liu et al.'s school climate scale, the
+  Tschannen-Moran & Hoy TSES short form, and the Schaufeli UWES-9.
+* `zhou_2025_*` (4 tables) — item columns are bare integers with no label row,
+  and the article prints no item wording. Text is in the four cited
+  Chinese-language instruments (Wei Yunhua; Liang Deqing et al.; Ye Yuemei &
+  Dai Xiaoyang; Chen et al.'s revision of Motl et al.).
+* `smirnov_2025_enrollment_motives` — the option labels are paraphrased by the
+  column names but the verbatim Russian wording is printed only in Fig 1, a
+  raster image.
+* `kohlmann_2016_phq9` — the article names the nine symptoms as tags, not
+  stems. The instrument is the German PHQ-9 (Gesundheitsfragebogen fuer
+  Patienten, Loewe et al.); shipping the English canonical PHQ-9 would
+  substitute a different language version than the one administered, so it is
+  deferred rather than guessed.
+
+Nine rows appended to `itemtext_provenance.csv`, `uploaded` blank.

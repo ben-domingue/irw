@@ -4,10 +4,10 @@
 text correction workstream, which completed and shipped. Files are kept for
 provenance; deleted ones remain in git history.
 
-Do **not** point `upload.py` at this directory. It walks a directory
-recursively and accepts any `.csv` by extension alone, so it would sweep up
-spot-check files, audit reports, and response data alongside item text —
-and would re-publish two tables that were deliberately withdrawn.
+Do **not** point `red_up` at this directory. It holds spot-check files, audit
+reports and response data alongside item text; `red_up` would exclude the
+non-`__items` files and say so, but it would still re-publish two tables that
+were deliberately withdrawn.
 
 ## What is still here, and why
 
@@ -35,6 +35,7 @@ incident. Query the table:
 SELECT COUNT(*) AS n_rows, COUNT(DISTINCT item) AS n_items FROM <table>__items
 ```
 
-And because `upload.py` **appends** — `replace_on_conflict` replaces an upload
-of the same name, not rows inherited from the prior version — delete the target
-table from the draft version before re-uploading an existing table.
+Redivis uploads **append** — `replace_on_conflict` replaces an upload of the
+same name, not rows inherited from the prior version — so the target table has
+to be deleted from the draft before an existing table is re-uploaded. `red_up`
+does this itself, and verifies the resulting row count with a `count(*)`.

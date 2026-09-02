@@ -1,0 +1,1807 @@
+table,age range,child age (for child-focused studies),basis,min_age,max_age,n_age,share_under_18,generated
+aappss_malpas_2019_scl,Adult (18+),,derived_cov_age,18.0,87.0,611,0.0,2026-09-01
+abouhashish_2025_chatgpt_attitudes,Adult (18+),,derived_cov_age,19.0,23.0,240,0.0,2026-09-01
+act_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+addy_2021_sdq_ghana,Mixed,Adolescent (12-18y),derived_cov_age,12.0,24.0,405,0.493827,2026-09-01
+aditama_2024_strs,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,1924,0.0,2026-09-01
+afaya_2020_complications_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_diet_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_exercise_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_footcare_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_general_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_medication_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+afaya_2020_monitoring_knowledge,Adult (18+),,derived_cov_age,30.0,91.0,330,0.0,2026-09-01
+agn_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+agogue_2020_self_perceived_creativity,Adult (18+),,derived_cov_age,18.0,66.0,200,0.0,2026-09-01
+aguirre_camacho_2021_champion,Adult (18+),,derived_cov_age,17.0,35.0,442,0.013575,2026-09-01
+aguirre_camacho_2021_shai,Adult (18+),,derived_cov_age,18.0,34.0,244,0.0,2026-09-01
+ai_fear_dong_2026_ai,Adult (18+),,derived_cov_age,18.0,92.0,10000,0.0,2026-09-01
+ai_fear_dong_2026_incentive,Adult (18+),,derived_cov_age,18.0,91.0,1000,0.0,2026-09-01
+ai_fear_dong_2026_other_fear,Adult (18+),,derived_cov_age,18.0,92.0,10000,0.0,2026-09-01
+ai_fear_dong_2026_own_fear,Adult (18+),,derived_cov_age,18.0,92.0,10000,0.0,2026-09-01
+ai_fear_dong_2026_requirement,Adult (18+),,derived_cov_age,18.0,92.0,10000,0.0,2026-09-01
+aiquipa_2026_dgs,Adult (18+),,derived_cov_age,18.0,75.0,806,0.0,2026-09-01
+alsuhibani_2022_gcbs,Adult (18+),,derived_cov_age,18.0,86.0,2146,0.0,2026-09-01
+alsuhibani_2022_consp_s1,Adult (18+),,derived_cov_age,17.0,72.0,479,0.002088,2026-09-01
+alqerem_2024_diabetic_health_literacy,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,85.0,400,0.03,2026-09-01
+alsuhibani_2022_gcbs_extra_s2,Adult (18+),,derived_cov_age,18.0,86.0,1508,0.0,2026-09-01
+alloubani_2021_stai_trait,Adult (18+),,derived_cov_age,3.0,44.0,181,0.005525,2026-09-01
+almuqbil_2022_epds,Adult (18+),,derived_cov_age,18.0,50.0,253,0.0,2026-09-01
+alloubani_2021_stai_state,Adult (18+),,derived_cov_age,3.0,44.0,181,0.005525,2026-09-01
+alsuhibani_2022_ecrs_s3,Adult (18+),,derived_cov_age,18.0,80.0,638,0.0,2026-09-01
+algner2022_uwes,Adult (18+),,derived_cov_age,21.0,67.0,612,0.0,2026-09-01
+algner2022_sia,Adult (18+),,derived_cov_age,19.0,69.0,500,0.0,2026-09-01
+algner2022_cse,Adult (18+),,derived_cov_age,21.0,67.0,612,0.0,2026-09-01
+algner2022_wis,Adult (18+),,derived_cov_age,19.0,69.0,500,0.0,2026-09-01
+algner2022_oss,Adult (18+),,derived_cov_age,21.0,67.0,612,0.0,2026-09-01
+algner2022_mimi16,Adult (18+),,derived_cov_age,21.0,67.0,612,0.0,2026-09-01
+alexandrowicz_2018_cesd,Adult (18+),,derived_cov_age,21.0,66.5506849315069,514,0.0,2026-09-01
+algner2022_mimi_pool,Adult (18+),,derived_cov_age,19.0,69.0,500,0.0,2026-09-01
+alfort_2023_finger_fx_prom,Mixed,Adolescent (12-18y),derived_cov_age,7.0,97.0,5504,0.042333,2026-09-01
+alcoholhealthwarninglabel_brennan_2022_emotional_arousal_followup,Adult (18+),,derived_cov_age,18.0,69.0,1087,0.0,2026-09-01
+algner2022_tis,Adult (18+),,derived_cov_age,21.0,67.0,612,0.0,2026-09-01
+algner2022_psgbi,Adult (18+),,derived_cov_age,19.0,69.0,500,0.0,2026-09-01
+alcoholhealthwarninglabel_brennan_2022_awareness_harms_followup,Adult (18+),,derived_cov_age,18.0,69.0,1087,0.0,2026-09-01
+alcoholhealthwarninglabel_brennan_2022_intentions_postexposure,Adult (18+),,derived_cov_age,18.0,69.0,1755,0.0,2026-09-01
+amarilla_2020_barthel,Elderly (minimum age >50),,derived_cov_age,66.0,99.0,224,0.0,2026-09-01
+amarilla_2020_eq5d,Elderly (minimum age >50),,derived_cov_age,66.0,99.0,224,0.0,2026-09-01
+amatus_cipora_2024_amas,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+alsuhibani_2022_pads_s2,Adult (18+),,derived_cov_age,18.0,86.0,1508,0.0,2026-09-01
+alsuhibani_2022_pads_s1,Adult (18+),,derived_cov_age,17.0,72.0,447,0.002237,2026-09-01
+alsuhibani_2022_sers,Adult (18+),,derived_cov_age,18.0,86.0,2146,0.0,2026-09-01
+amarilla_2020_sf12,Elderly (minimum age >50),,derived_cov_age,66.0,99.0,224,0.0,2026-09-01
+amarilla_2020_lawton_brody,Elderly (minimum age >50),,derived_cov_age,66.0,99.0,224,0.0,2026-09-01
+altman_2020_capq,Adult (18+),,derived_cov_age,18.0,75.0,4023,0.0,2026-09-01
+alsuhibani_2022_paranoia_s3,Adult (18+),,derived_cov_age,18.0,80.0,638,0.0,2026-09-01
+alsuhibani_2022_npi_s3,Adult (18+),,derived_cov_age,18.0,80.0,638,0.0,2026-09-01
+alsuhibani_2022_loc,Adult (18+),,derived_cov_age,17.0,86.0,2568,0.000389,2026-09-01
+anunciacao_2024_intelligence_gmi,Mixed,Adolescent (12-18y),derived_cov_age,15.0,64.0,1316,0.103343,2026-09-01
+anjum_2022_gad7,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,2313,0.0,2026-09-01
+amorim_2025_climej_florescimentonotrabalho,Adult (18+),,derived_cov_age,2.0,59.0,1218,0.000821,2026-09-01
+amorim_2025_climej_desenhonotrabalho,Adult (18+),,derived_cov_age,2.0,59.0,1218,0.000821,2026-09-01
+amorim_2025_climej_suporteorganizacional,Adult (18+),,derived_cov_age,2.0,59.0,1218,0.000821,2026-09-01
+amorim_2025_climej_climej,Adult (18+),,derived_cov_age,2.0,59.0,1218,0.000821,2026-09-01
+amatus_cipora_2024_bfi_n,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_stai,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_arithmetic,Adult (18+),,derived_cov_age,18.0,56.0,846,0.0,2026-09-01
+amatus_cipora_2024_gad,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_sdq_m,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_sdq_l,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_pisa_me,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+amatus_cipora_2024_tai,Adult (18+),,derived_cov_age,18.0,56.0,848,0.0,2026-09-01
+assessment_time_fournier_2025_phq,Adult (18+),,derived_cov_age,18.0,77.0,398,0.0,2026-09-01
+assessment_time_fournier_2025_bscs,Adult (18+),,derived_cov_age,18.0,77.0,398,0.0,2026-09-01
+assessment_time_fournier_2025_pmpuq,Adult (18+),,derived_cov_age,18.0,77.0,398,0.0,2026-09-01
+assessment_time_fournier_2025_gad,Adult (18+),,derived_cov_age,18.0,77.0,398,0.0,2026-09-01
+assessment_time_fournier_2025_upps,Adult (18+),,derived_cov_age,18.0,77.0,398,0.0,2026-09-01
+arnulf_2022_general_knowledge,Adult (18+),,derived_cov_age,19.0,77.0,397,0.0,2026-09-01
+anunciacao_2025_personality_persistence,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_exhibition,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+apaza_2026_self_esteem,Mixed,Adolescent (12-18y),derived_cov_age,17.0,59.0,356,0.081461,2026-09-01
+anunciacao_2025_personality_order,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+arnulf_2022_conspiracy_thinking,Adult (18+),,derived_cov_age,19.0,77.0,397,0.0,2026-09-01
+anunciacao_2025_personality_dominance,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_autonomy,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_nurturance,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+apaza_2026_meim_r,Mixed,Adolescent (12-18y),derived_cov_age,17.0,59.0,356,0.081461,2026-09-01
+apaza_2026_sdo,Mixed,Adolescent (12-18y),derived_cov_age,17.0,59.0,356,0.081461,2026-09-01
+anunciacao_2025_personality_change,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_intraception,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_affiliation,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_aggression,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_achievement,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_deference,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+anunciacao_2025_personality_succorance,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+autism_blotner_2025_s1_aq,Adult (18+),,derived_cov_age,18.0,67.0,535,0.0,2026-09-01
+autism_blotner_2025_s1_bes,Adult (18+),,derived_cov_age,18.0,67.0,535,0.0,2026-09-01
+autism_blotner_2025_s1_tactics,Adult (18+),,derived_cov_age,18.0,67.0,535,0.0,2026-09-01
+autism_blotner_2025_s1_views,Adult (18+),,derived_cov_age,18.0,67.0,535,0.0,2026-09-01
+autism_blotner_2025_s2_acme,Adult (18+),,derived_cov_age,18.0,71.0,535,0.0,2026-09-01
+autism_blotner_2025_s2_aq,Adult (18+),,derived_cov_age,18.0,71.0,535,0.0,2026-09-01
+autism_blotner_2025_s2_ffmi,Adult (18+),,derived_cov_age,18.0,71.0,535,0.0,2026-09-01
+autism_blotner_2025_s2_qcae,Adult (18+),,derived_cov_age,18.0,71.0,535,0.0,2026-09-01
+avci_2024_aktif_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_bagmsz_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_basrmaarzu_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_belirsiz_kac,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_bskdaykontrol_odak,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_gecmis_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_guc_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_ickontrol_odak,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_ikyoz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_issahp_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_kazanc_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_kimlik_com,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_kimlik_dar,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_kimlik_miss,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_oz_norm,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_risk_algi,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_risk_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+baka2023_olbi,Adult (18+),,derived_cov_age,20.0,71.0,836,0.0,2026-09-01
+baekgaard_2023_mastery,Adult (18+),,derived_cov_age,20.0,66.0,2476,0.0,2026-09-01
+baekgaard_2023_stigma,Adult (18+),,derived_cov_age,20.0,66.0,2467,0.0,2026-09-01
+avci_2024_yencevolsoz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+baka2023_bpnsf,Adult (18+),,derived_cov_age,20.0,71.0,836,0.0,2026-09-01
+baekgaard_2023_autonomy_loss,Adult (18+),,derived_cov_age,20.0,66.0,2467,0.0,2026-09-01
+baekgaard_2023_learning,Adult (18+),,derived_cov_age,20.0,66.0,2463,0.0,2026-09-01
+baekgaard_2023_stress,Adult (18+),,derived_cov_age,20.0,66.0,2468,0.0,2026-09-01
+avci_2024_zorunluluk_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+baaziz_2023_sms2,Mixed,Adolescent (12-18y),derived_cov_age,13.0,30.0,780,0.465385,2026-09-01
+avilesgonzalez2019_ces,Adult (18+),,derived_cov_age,22.0,63.0,215,0.0,2026-09-01
+bakker_2020_pss10,Adult (18+),,derived_cov_age,20.0,40.0,380,0.0,2026-09-01
+bakker_2020_rses,Adult (18+),,derived_cov_age,20.0,40.0,381,0.0,2026-09-01
+baekgaard_2023_compliance,Adult (18+),,derived_cov_age,20.0,66.0,2462,0.0,2026-09-01
+baka2023_uwes,Adult (18+),,derived_cov_age,20.0,71.0,836,0.0,2026-09-01
+balmas2018_leader_attitudes,Adult (18+),,derived_cov_age,18.0,82.0,2163,0.0,2026-09-01
+baka2023_jcs,Adult (18+),,derived_cov_age,20.0,71.0,836,0.0,2026-09-01
+avci_2024_urunpazgeloz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_toplmfayd_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_zorbasetoz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_sureklgel_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_tmlamacoz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_sansdaykontrol_odak,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_yatrmciliskoz_yeterlk,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+avci_2024_statu_gir_yonel,Adult (18+),,derived_cov_age,18.0,73.0,216,0.0,2026-09-01
+bilotta_2018_tas20,Adult (18+),,derived_cov_age,18.0,73.0,1362,0.0,2026-09-01
+bitew_2020_anxiety,Adult (18+),,derived_cov_age,18.0,37.0,682,0.0,2026-09-01
+bang_2023_depression,Adult (18+),,derived_cov_age,21.0,47.0,37,0.0,2026-09-01
+bicb-j_ishiguro_2025,Adult (18+),,derived_cov_age,18.0,82.0,1974,0.0,2026-09-01
+benchelbi_2021_mtq48,Mixed,Adolescent (12-18y),derived_cov_age,14.0,27.0,853,0.305979,2026-09-01
+bcti21_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+bang_2023_self_esteem,Adult (18+),,derived_cov_age,21.0,47.0,37,0.0,2026-09-01
+benitezsillero_2021_bullying,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0355920602327,19.8083504449007,1441,0.016655,2026-09-01
+bang_2023_health,Adult (18+),,derived_cov_age,21.0,47.0,37,0.0,2026-09-01
+bang_2023_parenting_stress,Adult (18+),,derived_cov_age,21.0,47.0,37,0.0,2026-09-01
+balparda_2021_korq_symptoms,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,76.0,157,0.10828,2026-09-01
+bang_2023_anxiety,Adult (18+),,derived_cov_age,21.0,47.0,37,0.0,2026-09-01
+balparda_2021_korq_activity_limitation,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,76.0,157,0.10828,2026-09-01
+balmas2018_leader_personality,Adult (18+),,derived_cov_age,3.0,82.0,2167,0.000461,2026-09-01
+bilotta_2018_scl90,Adult (18+),,derived_cov_age,18.0,73.0,1361,0.0,2026-09-01
+bitew_2020_lte,Adult (18+),,derived_cov_age,18.0,37.0,653,0.0,2026-09-01
+bitew_2020_osss3,Adult (18+),,derived_cov_age,18.0,37.0,656,0.0,2026-09-01
+baumgaertner_2018_vaccine_trust,Adult (18+),,derived_cov_age,18.0,90.0,988,0.0,2026-09-01
+burnout_assessment_tool_teachers,Adult (18+),,derived_cov_age,13.0,65.0,631,0.001585,2026-09-01
+bukurov_2022_comq12,Adult (18+),,derived_cov_age,18.0,77.0,246,0.0,2026-09-01
+buzgova_2023_gds,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,1111,0.0,2026-09-01
+BSCS_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
+bitew_2020_phq9,Adult (18+),,derived_cov_age,18.0,37.0,657,0.0,2026-09-01
+bled_2021_imagery_phenomenology,Adult (18+),,derived_cov_age,18.0,69.0,119,0.0,2026-09-01
+bled_2021_imagery_use,Adult (18+),,derived_cov_age,18.0,69.0,119,0.0,2026-09-01
+bukurov_2022_sf36,Adult (18+),,derived_cov_age,18.0,77.0,246,0.0,2026-09-01
+brederecke_2020_phq4,Adult (18+),,derived_cov_age,16.0,89.0,1365,0.005128,2026-09-01
+buzgova_2023_gai,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,977,0.0,2026-09-01
+brand_raffaelli_2024_familiarity_24,Adult (18+),,derived_cov_age,18.0,83.0,803,0.0,2026-09-01
+buczel_2022_inoculation_belief,Adult (18+),,derived_cov_age,18.0,68.0,137,0.0,2026-09-01
+brand_raffaelli_2024_liking_24,Adult (18+),,derived_cov_age,18.0,83.0,803,0.0,2026-09-01
+brand_raffaelli_2024_recognition_20,Adult (18+),,derived_cov_age,18.0,81.0,576,0.0,2026-09-01
+blum_2018_imak_bin,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,66.0,317,0.025237,2026-09-01
+bitew_2020_self_efficacy,Adult (18+),,derived_cov_age,18.0,37.0,678,0.0,2026-09-01
+brand_raffaelli_2024_liking_20,Adult (18+),,derived_cov_age,18.0,81.0,1164,0.0,2026-09-01
+brederecke_2020_sis,Adult (18+),,derived_cov_age,16.0,89.0,1367,0.005121,2026-09-01
+c19prc_uk_mcbride_2021_family_prelockdown,Adult (18+),,derived_cov_age,18.0,83.0,1074,0.0,2026-09-01
+c19prc_uk_mcbride_2021_eds_prepandemic,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_family_duringlockdown,Adult (18+),,derived_cov_age,18.0,83.0,1074,0.0,2026-09-01
+c19prc_uk_mcbride_2021_bfi10,Adult (18+),,derived_cov_age,18.0,92.0,4949,0.0,2026-09-01
+c19prc_uk_mcbride_2021_dmq,Adult (18+),,derived_cov_age,18.0,83.0,944,0.0,2026-09-01
+c19prc_uk_mcbride_2021_eds_duringpandemic,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_comfort,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_crt,Adult (18+),,derived_cov_age,18.0,83.0,2025,0.0,2026-09-01
+c19prc_uk_mcbride_2021_dai,Adult (18+),,derived_cov_age,18.0,90.0,2878,0.0,2026-09-01
+c19prc_uk_mcbride_2021_facetrust,Adult (18+),,derived_cov_age,18.0,89.0,2983,0.0,2026-09-01
+c19prc_uk_mcbride_2021_aq10,Adult (18+),,derived_cov_age,18.0,90.0,1972,0.0,2026-09-01
+buzgova_2023_soc,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,1121,0.0,2026-09-01
+c19prc_uk_mcbride_2021_childimpact,Adult (18+),,derived_cov_age,18.0,73.0,339,0.0,2026-09-01
+c19prc_uk_mcbride_2021_drinkcontext,Adult (18+),,derived_cov_age,18.0,89.0,1762,0.0,2026-09-01
+c19prc_uk_mcbride_2021_contacttracingapp,Adult (18+),,derived_cov_age,18.0,83.0,1049,0.0,2026-09-01
+c19prc_uk_mcbride_2021_cmq,Adult (18+),,derived_cov_age,18.0,92.0,4621,0.0,2026-09-01
+c19prc_uk_mcbride_2021_conservatism,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_eu_identity,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_brs,Adult (18+),,derived_cov_age,18.0,90.0,3406,0.0,2026-09-01
+c19prc_uk_mcbride_2021_activity,Adult (18+),,derived_cov_age,18.0,83.0,1406,0.0,2026-09-01
+buzgova_2023_qol,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,985,0.0,2026-09-01
+c19prc_uk_mcbride_2021_ecr_attachment,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_bces,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+buzgova_2023_rses,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,1118,0.0,2026-09-01
+buzgova_2023_lsita,Elderly (minimum age >50),,derived_cov_age,60.0,99.0,1122,0.0,2026-09-01
+c19prc_uk_mcbride_2021_minispin,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_mmos_ss,Adult (18+),,derived_cov_age,18.0,90.0,1972,0.0,2026-09-01
+c19prc_uk_mcbride_2021_humanitarianism,Adult (18+),,derived_cov_age,18.0,83.0,1406,0.0,2026-09-01
+c19prc_uk_mcbride_2021_iwah,Adult (18+),,derived_cov_age,18.0,83.0,2025,0.0,2026-09-01
+c19prc_uk_mcbride_2021_nationalpride,Adult (18+),,derived_cov_age,18.0,89.0,2983,0.0,2026-09-01
+c19prc_uk_mcbride_2021_nationalism,Adult (18+),,derived_cov_age,18.0,89.0,2983,0.0,2026-09-01
+c19prc_uk_mcbride_2021_gad7,Adult (18+),,derived_cov_age,18.0,92.0,5364,0.0,2026-09-01
+c19prc_uk_mcbride_2021_iri,Adult (18+),,derived_cov_age,18.0,92.0,3495,0.0,2026-09-01
+c19prc_uk_mcbride_2021_hopefulness,Adult (18+),,derived_cov_age,18.0,92.0,4955,0.0,2026-09-01
+c19prc_uk_mcbride_2021_itq,Adult (18+),,derived_cov_age,18.0,92.0,5364,0.0,2026-09-01
+c19prc_uk_mcbride_2021_lockdown_contact_behaviours,Adult (18+),,derived_cov_age,18.0,92.0,3155,0.0,2026-09-01
+c19prc_uk_mcbride_2021_infosource,Adult (18+),,derived_cov_age,18.0,92.0,4949,0.0,2026-09-01
+c19prc_uk_mcbride_2021_homespace,Adult (18+),,derived_cov_age,18.0,83.0,1379,0.0,2026-09-01
+c19prc_uk_mcbride_2021_ius12,Adult (18+),,derived_cov_age,18.0,83.0,2025,0.0,2026-09-01
+c19prc_uk_mcbride_2021_icd_depression,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_neighbourcomfort,Adult (18+),,derived_cov_age,18.0,92.0,3383,0.0,2026-09-01
+c19prc_uk_mcbride_2021_ocir,Adult (18+),,derived_cov_age,18.0,83.0,1406,0.0,2026-09-01
+c19prc_uk_mcbride_2021_loc,Adult (18+),,derived_cov_age,18.0,90.0,2878,0.0,2026-09-01
+c19prc_uk_mcbride_2021_govsatisfaction,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_handle_c19,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_loneliness,Adult (18+),,derived_cov_age,18.0,92.0,5364,0.0,2026-09-01
+c19prc_uk_mcbride_2021_hygiene,Adult (18+),,derived_cov_age,18.0,83.0,2025,0.0,2026-09-01
+c19prc_uk_mcbride_2021_lockdownbehaviour,Adult (18+),,derived_cov_age,18.0,83.0,1622,0.0,2026-09-01
+c19prc_uk_mcbride_2021_icd_anxiety,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_mabs,Adult (18+),,derived_cov_age,18.0,92.0,4621,0.0,2026-09-01
+c19prc_uk_mcbride_2021_riskreduction_beliefs,Adult (18+),,derived_cov_age,18.0,83.0,2025,0.0,2026-09-01
+c19prc_uk_mcbride_2021_quarantine_support,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_tmsi,Adult (18+),,derived_cov_age,18.0,83.0,1403,0.0,2026-09-01
+c19prc_uk_mcbride_2021_wemwbs,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_socialdistance,Adult (18+),,derived_cov_age,18.0,92.0,3383,0.0,2026-09-01
+c19prc_uk_mcbride_2021_protective_behaviours,Adult (18+),,derived_cov_age,18.0,92.0,3155,0.0,2026-09-01
+c19prc_uk_mcbride_2021_vsa,Adult (18+),,derived_cov_age,18.0,92.0,4621,0.0,2026-09-01
+c19prc_uk_mcbride_2021_trustinstitutions,Adult (18+),,derived_cov_age,18.0,92.0,4949,0.0,2026-09-01
+c19prc_uk_mcbride_2021_selfharm_suicidality,Adult (18+),,derived_cov_age,18.0,90.0,1808,0.0,2026-09-01
+c19prc_uk_mcbride_2021_srgs,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_vaccineattitudes,Adult (18+),,derived_cov_age,18.0,83.0,1405,0.0,2026-09-01
+c19prc_uk_mcbride_2021_shs,Adult (18+),,derived_cov_age,18.0,90.0,2019,0.0,2026-09-01
+c19prc_uk_mcbride_2021_riskbehaviour_c19,Adult (18+),,derived_cov_age,18.0,90.0,2878,0.0,2026-09-01
+c19prc_uk_mcbride_2021_secondwave_restrictions,Adult (18+),,derived_cov_age,18.0,83.0,1166,0.0,2026-09-01
+c19prc_uk_mcbride_2021_polarization_covid,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_trustsource,Adult (18+),,derived_cov_age,18.0,92.0,4949,0.0,2026-09-01
+c19prc_uk_mcbride_2021_protect,Adult (18+),,derived_cov_age,18.0,83.0,1996,0.0,2026-09-01
+c19prc_uk_mcbride_2021_rq,Adult (18+),,derived_cov_age,18.0,90.0,2460,0.0,2026-09-01
+c19prc_uk_mcbride_2021_sdo,Adult (18+),,derived_cov_age,18.0,92.0,4621,0.0,2026-09-01
+c19prc_uk_mcbride_2021_sci,Adult (18+),,derived_cov_age,18.0,83.0,1406,0.0,2026-09-01
+c19prc_uk_mcbride_2021_pads,Adult (18+),,derived_cov_age,18.0,92.0,4949,0.0,2026-09-01
+c19prc_uk_mcbride_2021_phq9,Adult (18+),,derived_cov_age,18.0,92.0,5364,0.0,2026-09-01
+c19prc_uk_mcbride_2021_partyidentity,Adult (18+),,derived_cov_age,18.0,92.0,3349,0.0,2026-09-01
+c19prc_uk_mcbride_2021_polarization_brexit,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+c19prc_uk_mcbride_2021_phq15,Adult (18+),,derived_cov_age,18.0,90.0,2878,0.0,2026-09-01
+cfq_ruiz_2025_cfq,Adult (18+),,derived_cov_age,18.0,79.0,3388,0.0,2026-09-01
+cavojova_2017_cfc,Adult (18+),,derived_cov_age,18.0,63.0,170,0.0,2026-09-01
+campos_2023_swls,Adult (18+),,derived_cov_age,18.0,84.0,7591,0.0,2026-09-01
+celik_2026_bfi,Adult (18+),,derived_cov_age,17.0,46.0,653,0.003063,2026-09-01
+ccapsvtskhpacr_mercedes_2023_beck,Adult (18+),,derived_cov_age,36.0,86.0,194,0.0,2026-09-01
+celik_2026_tipi,Adult (18+),,derived_cov_age,17.0,26.0,412,0.004854,2026-09-01
+campos_2023_pidaq,Adult (18+),,derived_cov_age,18.0,84.0,7591,0.0,2026-09-01
+ccapsvtskhpacr_mercedes_2023_physical,Adult (18+),,derived_cov_age,36.0,86.0,194,0.0,2026-09-01
+celik_2026_academic_motivation,Adult (18+),,derived_cov_age,17.0,26.0,412,0.004854,2026-09-01
+cf_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+celik_2026_bpns,Adult (18+),,derived_cov_age,17.0,46.0,653,0.003063,2026-09-01
+cfq_ruiz_2025_dass,Adult (18+),,derived_cov_age,18.0,79.0,3388,0.0,2026-09-01
+ccapsvtskhpacr_mercedes_2023_sf,Adult (18+),,derived_cov_age,36.0,86.0,194,0.0,2026-09-01
+celik_2026_distance_ed_attitudes_16,Adult (18+),,derived_cov_age,17.0,46.0,653,0.003063,2026-09-01
+ccapsvtskhpacr_mercedes_2023_tsk,Adult (18+),,derived_cov_age,36.0,86.0,194,0.0,2026-09-01
+ccapsvtskhpacr_mercedes_2023_hada,Adult (18+),,derived_cov_age,36.0,86.0,194,0.0,2026-09-01
+campos_2023_oes,Adult (18+),,derived_cov_age,18.0,84.0,7591,0.0,2026-09-01
+celik_2026_distance_ed_attitudes_26,Adult (18+),,derived_cov_age,17.0,26.0,412,0.004854,2026-09-01
+caetano-santos-lsas-2021,Adult (18+),,derived_cov_age,18.0,61.0,436,0.0,2026-09-01
+c19prc_uk_mcbride_2021_wordsum,Adult (18+),,derived_cov_age,18.0,89.0,2058,0.0,2026-09-01
+caetano-santos-masi-2021,Adult (18+),,derived_cov_age,18.0,61.0,436,0.0,2026-09-01
+chen2022_sasc,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,15.0,303,0.0,2026-09-01
+chen2022b_socsupport,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,417,0.194245,2026-09-01
+chen2022b_selfesteem,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,417,0.194245,2026-09-01
+chen_2019_csq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,22.0,235,0.051064,2026-09-01
+chen2022b_psychabuse,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,417,0.194245,2026-09-01
+chen2022_ses,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,15.0,303,0.0,2026-09-01
+chavez_2026_bpnsfs,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,806,0.0,2026-09-01
+chen_2022_cesd,Adult (18+),,derived_cov_age,16.0,27.0,77211,0.00452,2026-09-01
+chen_2022_gad,Adult (18+),,derived_cov_age,16.0,27.0,77211,0.00452,2026-09-01
+chen2022_cls,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,15.0,303,0.0,2026-09-01
+chen_2019_cdrsc,Mixed,Adolescent (12-18y),derived_cov_age,17.0,22.0,235,0.051064,2026-09-01
+chen_2022_sasc,Adult (18+),,derived_cov_age,16.0,27.0,77211,0.00452,2026-09-01
+clipa_2025_mslq,Adult (18+),,derived_cov_age,18.0,50.0,225,0.0,2026-09-01
+chinvararak_2021_phq15,Adult (18+),,derived_cov_age,18.0,83.0,180,0.0,2026-09-01
+climatechange_geiger_2025,Adult (18+),,derived_cov_age,18.0,85.0,3653,0.0,2026-09-01
+chuang_2018_disease_checklist,Elderly (minimum age >50),,derived_cov_age,69.0,94.0,60,0.0,2026-09-01
+chinvararak_2021_ylseq,Adult (18+),,derived_cov_age,18.0,83.0,180,0.0,2026-09-01
+chinvararak_2021_bdi,Adult (18+),,derived_cov_age,18.0,83.0,180,0.0,2026-09-01
+chinvararak_2021_ssq,Adult (18+),,derived_cov_age,18.0,83.0,180,0.0,2026-09-01
+chinvararak_2021_ecr,Adult (18+),,derived_cov_age,18.0,83.0,180,0.0,2026-09-01
+cmq_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+colombia_2023_politics_confidence,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+cognitive_load_klimova_2023_stomp,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+cognitive_load_klimova_2023_masr,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+coh_goodman_2023_causal_beliefs,Adult (18+),,derived_cov_age,20.0,93.0,547,0.0,2026-09-01
+colombia_2023_politics_difficulties,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+cognitive_load_klimova_2023_mlq,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+colombia_2023_politics_bribery,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+coh_goodman_2023_general_survey,Adult (18+),,derived_cov_age,20.0,93.0,555,0.0,2026-09-01
+cogcontrol_gyurkovics_2019_simon,Mixed,Adolescent (12-18y),derived_cov_age,11.95,27.98,118,0.5,2026-09-01
+colombia_2023_politics_attitudes,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+cogcontrol_gyurkovics_2019_sart,Mixed,Adolescent (12-18y),derived_cov_age,11.95,27.98,117,0.495726,2026-09-01
+coh_goodman_2023_racial_comp,Adult (18+),,derived_cov_age,20.0,93.0,563,0.0,2026-09-01
+coh_goodman_2023_health_literacy,Adult (18+),,derived_cov_age,20.0,93.0,533,0.0,2026-09-01
+cognitive_load_klimova_2023_tbzsg,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+cogcontrol_gyurkovics_2019_flanker,Mixed,Adolescent (12-18y),derived_cov_age,11.95,27.98,118,0.5,2026-09-01
+cognitive_load_klimova_2023_know,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+cognitive_load_klimova_2023_pwi,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+colombia_2023_politics_corruption,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_anticorruption,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_candidates,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+cogcontrol_gyurkovics_2019_mwprobe,Mixed,Adolescent (12-18y),derived_cov_age,11.95,27.98,117,0.495726,2026-09-01
+colombia_2023_politics_belonging,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+cognitive_load_klimova_2023_paas,Adult (18+),,derived_cov_age,17.0,23.0,170,0.005882,2026-09-01
+colombia_2023_politics_discrimination,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_channels,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_registration,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_reasons,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_rights,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_voting,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_problems,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_party,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_prevention,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_transparency,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colomer_perez_2021_soc13,Mixed,Adolescent (12-18y),derived_cov_age,16.0,57.0,920,0.082609,2026-09-01
+colombia_2023_politics_wellbeing,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_importance,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_organizations,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_neighbors,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_hurdles,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_guarantees,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_meaning,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_risks,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_spaces,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_mechanisms,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_procedures,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colomer_perez_2021_asa,Mixed,Adolescent (12-18y),derived_cov_age,16.0,57.0,920,0.082609,2026-09-01
+colombia_2023_politics_requisites,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_protection,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_trust,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+colombia_2023_politics_media,Adult (18+),,derived_cov_age,18.0,114.0,46392,0.0,2026-09-01
+conner_2017_curiosity,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conner_2017_hads_anxiety,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conner_2017_flourishing,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conner_2017_cesd,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conner_2017_bfi,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+cucchi_2018_scoff,Adult (18+),,derived_cov_age,18.0,67.0,229,0.0,2026-09-01
+cucchi_2018_rfq,Adult (18+),,derived_cov_age,18.0,67.0,229,0.0,2026-09-01
+cucchi_2018_rmet,Adult (18+),,derived_cov_age,18.0,67.0,203,0.0,2026-09-01
+curiosity_stone_2022_fns,Adult (18+),,derived_cov_age,18.0,72.0,481,0.0,2026-09-01
+cosenza_2015_cfc,Mixed,Adolescent (12-18y),derived_cov_age,16.0,19.0,1030,0.336893,2026-09-01
+contreras_valdez_2022_bsq,Adult (18+),,derived_cov_age,18.0,83.0,1117,0.0,2026-09-01
+cucchi_2018_pts,Adult (18+),,derived_cov_age,18.0,67.0,211,0.0,2026-09-01
+contreras_valdez_2022_rses,Adult (18+),,derived_cov_age,18.0,86.0,973,0.0,2026-09-01
+conspiracy_asd__asd_aq10,Adult (18+),,derived_cov_age,19.0,66.0,431,0.0,2026-09-01
+covid_travel_mackenzie_2021,Adult (18+),,derived_cov_age,18.0,99.0,1310,0.0,2026-09-01
+cucchi_2018_tas20,Adult (18+),,derived_cov_age,18.0,67.0,204,0.0,2026-09-01
+conspiracy_asd__schizotypy,Adult (18+),,derived_cov_age,19.0,66.0,431,0.0,2026-09-01
+cucchi_2018_kims,Adult (18+),,derived_cov_age,18.0,67.0,210,0.0,2026-09-01
+conspiracy_asd__thinking_styles,Adult (18+),,derived_cov_age,19.0,66.0,431,0.0,2026-09-01
+conspiracy_asd__conspiracy_gcbs,Adult (18+),,derived_cov_age,19.0,66.0,431,0.0,2026-09-01
+contreras_valdez_2022_edeq,Adult (18+),,derived_cov_age,18.0,86.0,2090,0.0,2026-09-01
+conner_2017_vitality,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conner_2017_lot,Adult (18+),,derived_cov_age,18.0,25.0,171,0.0,2026-09-01
+conspiracy_asd__cognitive_flexibility,Adult (18+),,derived_cov_age,19.0,66.0,431,0.0,2026-09-01
+DART_Brysbaert_2020_1,Mixed,Adolescent (12-18y),derived_cov_age,17.0,38.0,199,0.125628,2026-09-01
+darkfactorfrench_pischel_2026_normlessness,Adult (18+),,derived_cov_age,18.0,85.0,501,0.0,2026-09-01
+darkfactorfrench_pischel_2026_crime_analog,Adult (18+),,derived_cov_age,18.0,76.0,412,0.0,2026-09-01
+darkfactorfrench_pischel_2026_dictator_game,Adult (18+),,derived_cov_age,18.0,76.0,412,0.0,2026-09-01
+darkfactorfrench_pischel_2026_exploitative,Adult (18+),,derived_cov_age,18.0,76.0,480,0.0,2026-09-01
+dalky_2020_sf36,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,523,0.051625,2026-09-01
+dalichaouche_2026_covid_practices,Adult (18+),,derived_cov_age,19.0,34.0,294,0.0,2026-09-01
+daiku_2021_lying_frequency,Adult (18+),,derived_cov_age,18.0,54.0,305,0.0,2026-09-01
+dejesus_2017_gpm,Elderly (minimum age >50),,derived_cov_age,60.0,85.0,98,0.0,2026-09-01
+dejesus_2017_sf36,Elderly (minimum age >50),,derived_cov_age,60.0,85.0,98,0.0,2026-09-01
+darkfactorfrench_pischel_2026_civic_behavior,Adult (18+),,derived_cov_age,18.0,76.0,412,0.0,2026-09-01
+darkfactorfrench_pischel_2026_sdo7s,Adult (18+),,derived_cov_age,18.0,85.0,501,0.0,2026-09-01
+darkfactorfrench_pischel_2026_interp_dysfx,Adult (18+),,derived_cov_age,18.0,76.0,480,0.0,2026-09-01
+dalichaouche_2026_covid_attitudes,Adult (18+),,derived_cov_age,19.0,34.0,294,0.0,2026-09-01
+darkfactorfrench_pischel_2026_callousness,Adult (18+),,derived_cov_age,18.0,76.0,480,0.0,2026-09-01
+daderman_2023_naqr,Adult (18+),,derived_cov_age,17.0,75.0,861,0.001161,2026-09-01
+dalichaouche_2026_covid_knowledge,Adult (18+),,derived_cov_age,19.0,34.0,294,0.0,2026-09-01
+curiosity_stone_2022_var,Adult (18+),,derived_cov_age,18.0,72.0,481,0.0,2026-09-01
+curiosity_stone_2022_invol,Adult (18+),,derived_cov_age,18.0,72.0,481,0.0,2026-09-01
+daiku_2021_dirty_dozen,Adult (18+),,derived_cov_age,18.0,54.0,305,0.0,2026-09-01
+dejesus_2017_lequesne,Elderly (minimum age >50),,derived_cov_age,60.0,85.0,98,0.0,2026-09-01
+darkfactorfrench_pischel_2026_worldview_cj,Adult (18+),,derived_cov_age,18.0,85.0,501,0.0,2026-09-01
+daiku_2021_lie_scale,Adult (18+),,derived_cov_age,18.0,54.0,305,0.0,2026-09-01
+darkfactorfrench_pischel_2026_d70,Adult (18+),,derived_cov_age,18.0,86.0,163114,0.0,2026-09-01
+dss_mouta_2021,Adult (18+),,derived_cov_age,18.0,64.0,936,0.0,2026-09-01
+dolzdelcastellar_2021_faces,Adult (18+),,derived_cov_age,18.0,56.0,185,0.0,2026-09-01
+dopmeijer_2022_sense_belonging,Mixed,Adolescent (12-18y),derived_cov_age,17.01574264202601,59.85215605749487,3141,0.055715,2026-09-01
+dmirt_forsberg_2024,Adult (18+),,derived_cov_age,17.0,85.0,1046,0.005736,2026-09-01
+dopmeijer_2022_loneliness,Mixed,Adolescent (12-18y),derived_cov_age,17.01574264202601,59.85215605749487,3141,0.055715,2026-09-01
+dominguez_2018_uwes,Adult (18+),,derived_cov_age,23.0,41.0,202,0.0,2026-09-01
+dejesus_2017_womac,Elderly (minimum age >50),,derived_cov_age,60.0,85.0,98,0.0,2026-09-01
+den_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+dopmeijer_2022_performance_pressure,Mixed,Adolescent (12-18y),derived_cov_age,17.01574264202601,59.85215605749487,3141,0.055715,2026-09-01
+dominguez_2018_jcs,Adult (18+),,derived_cov_age,23.0,41.0,202,0.0,2026-09-01
+derubeis_2017_arsq,Mixed,Adolescent (12-18y),derived_cov_age,17.34154688569473,70.20670773442848,72,0.027778,2026-09-01
+derubeis_2017_bdi,Mixed,Adolescent (12-18y),derived_cov_age,17.34154688569473,70.20670773442848,72,0.027778,2026-09-01
+duboz_2021_pss10,Adult (18+),,derived_cov_age,18.0,99.0,1493,0.0,2026-09-01
+dominguez_2018_mbi,Adult (18+),,derived_cov_age,23.0,41.0,202,0.0,2026-09-01
+dopmeijer_2022_ubos,Mixed,Adolescent (12-18y),derived_cov_age,17.01574264202601,59.85215605749487,3141,0.055715,2026-09-01
+dolzdelcastellar_2021_stai,Adult (18+),,derived_cov_age,18.0,56.0,185,0.0,2026-09-01
+depression_hymcohort_tang2022,Mixed,Adolescent (12-18y),derived_cov_age,16.2026009582478,25.1690622861054,448,0.024554,2026-09-01
+dolzdelcastellar_2021_eds,Adult (18+),,derived_cov_age,18.0,56.0,185,0.0,2026-09-01
+dominguez_2018_itl,Adult (18+),,derived_cov_age,23.0,41.0,202,0.0,2026-09-01
+disgust_berger2014,Adult (18+),,derived_cov_age,12.0,85.0,1414,0.009194,2026-09-01
+divia_2025_tiktok_fomo_shopping,Mixed,Adolescent (12-18y),derived_cov_age,12.0,52.0,400,0.045,2026-09-01
+dinic_2025_shortdarktriad,Adult (18+),,derived_cov_age,16.0,88.0,14631,0.003076,2026-09-01
+ders16_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,70.0,9506,0.37429,2026-09-01
+ders_valencia_2025,Adult (18+),,derived_cov_age,18.0,29.0,345,0.0,2026-09-01
+eammi_grahe_2018_belong,Adult (18+),,derived_cov_age,18.0,61.0,2168,0.0,2026-09-01
+eammi_grahe_2018_idea,Adult (18+),,derived_cov_age,18.0,61.0,2168,0.0,2026-09-01
+dvivdtws_ppmial_marcatto_2023_dtw,Adult (18+),,derived_cov_age,20.0,62.0,299,0.0,2026-09-01
+eammi_grahe_2018_american_dream,Adult (18+),,derived_cov_age,18.0,61.0,2163,0.0,2026-09-01
+eammi_grahe_2018_efficacy,Adult (18+),,derived_cov_age,18.0,61.0,2169,0.0,2026-09-01
+dwyer_2025_genomics_pc,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+dvivdtws_ppmial_marcatto_2023_ocs,Adult (18+),,derived_cov_age,20.0,62.0,299,0.0,2026-09-01
+dwyer_2025_genomics_sjc,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+dwyer_2019_clinton_activist,Adult (18+),,derived_cov_age,18.25,75.8333,167,0.0,2026-09-01
+eammi_grahe_2018_marriage_identity_allocation,Adult (18+),,derived_cov_age,18.0,61.0,2167,0.0,2026-09-01
+eammi_grahe_2018_disability_identity,Adult (18+),,derived_cov_age,18.0,61.0,1360,0.0,2026-09-01
+eammi_grahe_2018_exploit,Adult (18+),,derived_cov_age,18.0,61.0,2169,0.0,2026-09-01
+eammi_grahe_2018_marriage_attitudes,Adult (18+),,derived_cov_age,18.0,61.0,2166,0.0,2026-09-01
+dwyer_2025_genomics_gec,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+dwyer_2025_genomics_pb,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+dvivdtws_ppmial_marcatto_2023_snaq,Adult (18+),,derived_cov_age,20.0,62.0,299,0.0,2026-09-01
+dwyer_2025_genomics_os,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+dwyer_2025_genomics_ec,Adult (18+),,derived_cov_age,3.0,59.0,453,0.002208,2026-09-01
+eammi_grahe_2018_mindful,Adult (18+),,derived_cov_age,18.0,61.0,2166,0.0,2026-09-01
+dwyer_2019_clinton_cesd,Adult (18+),,derived_cov_age,18.25,75.8333,167,0.0,2026-09-01
+dvivdtws_ppmial_marcatto_2023_ocb,Adult (18+),,derived_cov_age,20.0,62.0,299,0.0,2026-09-01
+dvivdtws_ppmial_marcatto_2023_cwb,Adult (18+),,derived_cov_age,20.0,62.0,299,0.0,2026-09-01
+duboz_2021_swls,Adult (18+),,derived_cov_age,18.0,99.0,1493,0.0,2026-09-01
+ecps_sahm_2024_ia,Adult (18+),,derived_cov_age,18.0,100.0,13093,0.0,2026-09-01
+ecuador_2011_safety_impact,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117737,0.049143,2026-09-01
+eammi_grahe_2018_npi,Adult (18+),,derived_cov_age,18.0,61.0,2169,0.0,2026-09-01
+ecuador_2011_safety_confidence,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117150,0.049279,2026-09-01
+ecps_sahm_2024_trust,Adult (18+),,derived_cov_age,18.0,100.0,15254,0.0,2026-09-01
+ecps_sahm_2024_stress,Adult (18+),,derived_cov_age,18.0,100.0,15678,0.0,2026-09-01
+ecps_sahm_2024_emotion,Adult (18+),,derived_cov_age,18.0,100.0,12947,0.0,2026-09-01
+eammi_grahe_2018_transgressions,Adult (18+),,derived_cov_age,18.0,61.0,2166,0.0,2026-09-01
+eammi_grahe_2018_moa2,Adult (18+),,derived_cov_age,18.0,61.0,2167,0.0,2026-09-01
+ecuador_2011_safety_crime,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117737,0.049143,2026-09-01
+eammi_grahe_2018_stress,Adult (18+),,derived_cov_age,18.0,61.0,2164,0.0,2026-09-01
+eammi_grahe_2018_physsx,Adult (18+),,derived_cov_age,18.0,61.0,2164,0.0,2026-09-01
+ecps_sahm_2024_dtl,Adult (18+),,derived_cov_age,18.0,100.0,13253,0.0,2026-09-01
+ecps_sahm_2024_vaccine,Adult (18+),,derived_cov_age,18.0,100.0,15318,0.0,2026-09-01
+ecps_sahm_2024_sscd,Adult (18+),,derived_cov_age,18.0,100.0,15550,0.0,2026-09-01
+eammi_grahe_2018_support,Adult (18+),,derived_cov_age,18.0,61.0,2168,0.0,2026-09-01
+eammi_grahe_2018_socmedia,Adult (18+),,derived_cov_age,18.0,61.0,2168,0.0,2026-09-01
+ecps_sahm_2024_distrust,Adult (18+),,derived_cov_age,18.0,100.0,13093,0.0,2026-09-01
+ecps_sahm_2024_identity,Adult (18+),,derived_cov_age,18.0,100.0,15641,0.0,2026-09-01
+ecuador_2011_safety_homesec,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117685,0.049148,2026-09-01
+ecps_sahm_2024_support,Adult (18+),,derived_cov_age,18.0,100.0,15665,0.0,2026-09-01
+eammi_grahe_2018_swb,Adult (18+),,derived_cov_age,18.0,61.0,2168,0.0,2026-09-01
+eammi_grahe_2018_moa1,Adult (18+),,derived_cov_age,18.0,61.0,2166,0.0,2026-09-01
+ecps_sahm_2024_moral,Adult (18+),,derived_cov_age,18.0,100.0,13014,0.0,2026-09-01
+ecuador_2011_safety_avoidance,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117651,0.049179,2026-09-01
+emiral_2025_aips,Adult (18+),,derived_cov_age,17.0,55.0,729,0.001372,2026-09-01
+ecuador_2011_safety_victimtype,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117737,0.049143,2026-09-01
+ecuador_2011_safety_victim,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117737,0.049143,2026-09-01
+ecuador_2011_safety_safety,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117647,0.049122,2026-09-01
+EEEDPRM_Bulut_2021,Mixed,Adolescent (12-18y),derived_cov_age,10.0,70.0,961,0.228928,2026-09-01
+ecuador_2011_safety_operatives,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,115835,0.049208,2026-09-01
+ecuador_2011_safety_places,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117696,0.049161,2026-09-01
+ees_sarling_2024,Adult (18+),,derived_cov_age,18.0,83.0,805,0.0,2026-09-01
+estevez_2021_actitu,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+ecuador_2011_safety_trend,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117058,0.049095,2026-09-01
+erf_breuer_2017_tai,Mixed,Adolescent (12-18y),derived_cov_age,14.0,20.0,433,0.193995,2026-09-01
+erf_breuer_2017_dosp,Mixed,Adolescent (12-18y),derived_cov_age,14.0,20.0,433,0.193995,2026-09-01
+erf_breuer_2017_frmfr,Mixed,Adolescent (12-18y),derived_cov_age,14.0,20.0,433,0.193995,2026-09-01
+envirisk_lalot_2025,Adult (18+),,derived_cov_age,18.0,76.0,2000,0.0,2026-09-01
+erf_breuer_2017_frmmc,Mixed,Adolescent (12-18y),derived_cov_age,14.0,20.0,433,0.193995,2026-09-01
+ecuador_2011_safety_surroundings,Mixed,Adolescent (12-18y),derived_cov_age,16.0,97.0,117584,0.049199,2026-09-01
+estevez_2021_feepad,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_feepr,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_gest,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_homework_engagement,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_inter,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_math_attitudes,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+estevez_2021_motiv,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,13.0,863,0.0,2026-09-01
+evpromisi_stone_2021_cdiag,Adult (18+),,derived_cov_age,21.0,81.0,484,0.0,2026-09-01
+evpromisi_stone_2021_ddedanx,Adult (18+),,derived_cov_age,30.0,70.0,85,0.0,2026-09-01
+evpromisi_stone_2021_ddeddep,Adult (18+),,derived_cov_age,21.0,77.0,283,0.0,2026-09-01
+evpromisi_stone_2021_global,Adult (18+),,derived_cov_age,21.0,81.0,484,0.0,2026-09-01
+extremera_2016_ei,Adult (18+),,derived_cov_age,17.0,64.0,1121,0.000892,2026-09-01
+extremera_2016_sbq,Adult (18+),,derived_cov_age,17.0,64.0,961,0.001041,2026-09-01
+extremera_2016_shs,Adult (18+),,derived_cov_age,17.0,64.0,1123,0.00089,2026-09-01
+extremera_2016_swls,Adult (18+),,derived_cov_age,17.0,64.0,1123,0.00089,2026-09-01
+eyrenci_2025_mental_health_literacy,Adult (18+),,derived_cov_age,18.0,88.0,240,0.0,2026-09-01
+face_memory_amado_2024,Adult (18+),,derived_cov_age,18.0,63.0,597,0.0,2026-09-01
+FAD_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
+falih_2026_dass21,Adult (18+),,derived_cov_age,22.0,50.0,262,0.0,2026-09-01
+falih_2026_mds16,Adult (18+),,derived_cov_age,22.0,50.0,262,0.0,2026-09-01
+fatima_2025_mslq,Adult (18+),,derived_cov_age,21.0,88.0,349,0.0,2026-09-01
+fcupanas_cffsdas_reyna_2018,Mixed,Adolescent (12-18y),derived_cov_age,14.0,65.0,805,0.161844,2026-09-01
+feng2026_autonomy,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_behavioral_intention,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_competence,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_ec,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_intrinsic_motivation,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_perceived_ease_of_use,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+feng2026_perceived_usefulness,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,587,0.037479,2026-09-01
+figalova_2021_bdi,Adult (18+),,derived_cov_age,21.0,91.0,347,0.0,2026-09-01
+figalova_2021_pss,Adult (18+),,derived_cov_age,18.0,91.0,1723,0.0,2026-09-01
+figalova_2021_stai_state,Adult (18+),,derived_cov_age,20.0,81.0,387,0.0,2026-09-01
+figalova_2021_stai_trait,Adult (18+),,derived_cov_age,20.0,81.0,387,0.0,2026-09-01
+fitriana_2022_hapwork_field,Adult (18+),,derived_cov_age,25.0,65.0,370,0.0,2026-09-01
+florida_twins_auth,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1356,0.055749,2026-09-01
+florida_twins_cads,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,18.13278576,1272,0.001571,2026-09-01
+florida_twins_chaos,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.486652977,16.04654346,808,0.0,2026-09-01
+florida_twins_class,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.486652977,16.04654346,806,0.0,2026-09-01
+florida_twins_dbi,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,606,0.132013,2026-09-01
+florida_twins_dweck,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,879,0.083682,2026-09-01
+florida_twins_friends,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1351,0.055944,2026-09-01
+florida_twins_game,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,591,0.133672,2026-09-01
+florida_twins_grades,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1348,0.056101,2026-09-01
+florida_twins_grit,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,18.13278576,782,0.002558,2026-09-01
+florida_twins_hwk,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,602,0.131229,2026-09-01
+florida_twins_leq,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,607,0.131796,2026-09-01
+florida_twins_media,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,608,0.131579,2026-09-01
+florida_twins_nes,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1353,0.055866,2026-09-01
+florida_twins_pals,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,18.13278576,784,0.002551,2026-09-01
+forrest_2021_positive_affect_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,909,0.0,2026-09-01
+forrest_2021_phys_activity_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,2011,0.0,2026-09-01
+forrest_2021_positive_affect_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1869,0.0,2026-09-01
+forrest_2021_phys_stress_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1843,0.0,2026-09-01
+forrest_2021_global_health_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,3635,0.0,2026-09-01
+forrest_2021_family_involve_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,958,0.0,2026-09-01
+forrest_2021_life_satisfaction_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,963,0.0,2026-09-01
+forrest_2021_meaning_purpose_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1895,0.0,2026-09-01
+forrest_2021_global_health_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,1807,0.0,2026-09-01
+forrest_2021_phys_activity_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,1031,0.0,2026-09-01
+forrest_2021_meaning_purpose_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,926,0.0,2026-09-01
+forrest_2021_life_satisfaction_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1992,0.0,2026-09-01
+forrest_2021_phys_stress_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,924,0.0,2026-09-01
+FomoNegativeAffect_cremer_2026_phq,Adult (18+),,derived_cov_age,18.0,25.0,461,0.0,2026-09-01
+forrest_2021_family_involve_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1845,0.0,2026-09-01
+FomoNegativeAffect_cremer_2026_rrs,Adult (18+),,derived_cov_age,18.0,25.0,459,0.0,2026-09-01
+forrest_2021_family_belonging_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,960,0.0,2026-09-01
+FomoNegativeAffect_cremer_2026_panas,Adult (18+),,derived_cov_age,18.0,25.0,461,0.0,2026-09-01
+forrest_2021_family_belonging_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1845,0.0,2026-09-01
+FomoNegativeAffect_cremer_2026_fomo,Adult (18+),,derived_cov_age,18.0,25.0,459,0.0,2026-09-01
+florida_twins_read,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.486652977,16.04654346,809,0.0,2026-09-01
+florida_twins_sch,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.486652977,16.04654346,804,0.0,2026-09-01
+florida_twins_par,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1353,0.055866,2026-09-01
+florida_twins_tech,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.642710472,20.39972621,608,0.131579,2026-09-01
+florida_twins_panas,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.237508556,20.39972621,1351,0.055983,2026-09-01
+gao_2022_pss10,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
+gan_2015_rrs,Elderly (minimum age >50),,derived_cov_age,66.0,94.0,71,0.0,2026-09-01
+gan_2015_ucla_loneliness,Elderly (minimum age >50),,derived_cov_age,66.0,94.0,71,0.0,2026-09-01
+forrest_2021_psych_stress_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,913,0.0,2026-09-01
+Forthmann-2024-creative_quality,Adult (18+),,derived_cov_age,17.0,75.0,202,0.009901,2026-09-01
+Forthmann-2024-cleverness_ratings,Adult (18+),,derived_cov_age,17.0,75.0,202,0.009901,2026-09-01
+gao_2022_emotional_resilience,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
+gao_2022_stress_response,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
+gao_2022_scsq,Adult (18+),,derived_cov_age,18.0,99.0,1081,0.0,2026-09-01
+frikha_2023_pe_ms,Adult (18+),,derived_cov_age,19.0,35.0,308,0.0,2026-09-01
+gan_2015_cesd,Elderly (minimum age >50),,derived_cov_age,66.0,94.0,71,0.0,2026-09-01
+gahps_korner_2021,Adult (18+),,derived_cov_age,18.0,75.0,1134,0.0,2026-09-01
+forrest_2021_psych_stress_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1874,0.0,2026-09-01
+forrest_2021_strength_child,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,17.0,1824,0.0,2026-09-01
+franco_2024_unfolding,Adult (18+),,derived_cov_age,17.0,76.0,137,0.014599,2026-09-01
+frikha_2023_pe_acrs,Adult (18+),,derived_cov_age,19.0,35.0,308,0.0,2026-09-01
+forrest_2021_strength_proxy,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,17.0,916,0.0,2026-09-01
+fraijo_2022_mslq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,29.0,347,0.048991,2026-09-01
+gerber_2022_selfesteem,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,255,0.0,2026-09-01
+gerber_2022_altruism,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,256,0.0,2026-09-01
+germann_2026_immigration,Adult (18+),,derived_cov_age,18.0,96.0,72185,0.0,2026-09-01
+genpsych_russell_2024_llama3,Adult (18+),,derived_cov_age,18.0,86.0,1001,0.0,2026-09-01
+genpsych_russell_2024_gpt3_5,Adult (18+),,derived_cov_age,18.0,84.0,1000,0.0,2026-09-01
+gcb5_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+germann_2026_redistribution,Adult (18+),,derived_cov_age,18.0,96.0,72184,0.0,2026-09-01
+genpsych_russell_2024_mixtral,Adult (18+),,derived_cov_age,18.0,85.0,998,0.0,2026-09-01
+germann_2026_state_intervention,Adult (18+),,derived_cov_age,18.0,96.0,71896,0.0,2026-09-01
+gerber_2022_eas_temperament,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,256,0.0,2026-09-01
+garciabatista_2021_erq,Adult (18+),,derived_cov_age,23.0,66.0,187,0.0,2026-09-01
+germann_2026_environment,Adult (18+),,derived_cov_age,18.0,96.0,71941,0.0,2026-09-01
+gerber_2022_self_esteem,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,16.0,255,0.0,2026-09-01
+GBJW_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
+ghanbari_2016_helma_access,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+genpsych_russell_2024_gpt4o,Adult (18+),,derived_cov_age,18.0,95.0,999,0.0,2026-09-01
+germann_2026_national_identity,Adult (18+),,derived_cov_age,18.0,96.0,71579,0.0,2026-09-01
+GART_Grolig_2020,Mixed,Adolescent (12-18y),derived_cov_age,13.0,73.0,120,0.158333,2026-09-01
+genpsych_russell_2024_gemma,Adult (18+),,derived_cov_age,18.0,81.0,1000,0.0,2026-09-01
+gilbert_meta_32,Child (<18y),Adolescent (12-18y),derived_cov_age,8.0,25.0,4513,0.010858,2026-09-01
+gilbert_meta_22,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,21.0,5359,0.031163,2026-09-01
+gilbert_meta_24,Child (<18y),Child (6-12y),derived_cov_age,6.5,9.5,644,0.0,2026-09-01
+gilbert_meta_16,Child (<18y),Child (6-12y),derived_cov_age,7.0,13.0,3948,0.0,2026-09-01
+gilbert_meta_19,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28465,0.0,2026-09-01
+gilbert_meta_18,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28475,0.0,2026-09-01
+gilbert_meta_28,Adult (18+),,derived_cov_age,18.0,70.0,8857,0.0,2026-09-01
+gilbert_meta_27,Adult (18+),,derived_cov_age,18.0,70.0,8857,0.0,2026-09-01
+gilbert_meta_107,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
+gilbert_meta_106,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
+gilbert_meta_105,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,11.0,17.0,1031,0.0,2026-09-01
+gilbert_meta_13,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
+ghanbari_2016_helma_use,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_15,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3381,0.059154,2026-09-01
+gilbert_meta_30,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,2.0,20.0,14575,0.000343,2026-09-01
+gilbert_meta_29,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,2.0,20.0,14575,0.000343,2026-09-01
+ghanbari_2016_helma_understand,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+ghanbari_2016_helma_reading,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+ghanbari_2016_helma_numeracy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+ghanbari_2016_helma_appraise,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_14,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,3.0,18.0,3651,0.061627,2026-09-01
+ghanbari_2016_helma_comm,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,582,0.137457,2026-09-01
+gilbert_meta_17,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,14.0,28475,0.0,2026-09-01
+gilbert_meta_70,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,1.0,20.0,6026,0.000332,2026-09-01
+gilbert_meta_49,Mixed,Adolescent (12-18y),derived_cov_age,16.0,68.0,187,0.02139,2026-09-01
+gilbert_meta_62,Adult (18+),,derived_cov_age,23.0,90.0,713,0.0,2026-09-01
+gilbert_meta_45,Adult (18+),,derived_cov_age,21.0,63.0,240,0.0,2026-09-01
+gilbert_meta_47,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.55,7.07,162,0.0,2026-09-01
+gilbert_meta_46,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.46,7.39,156,0.0,2026-09-01
+gilbert_meta_68,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.25,9413,0.000106,2026-09-01
+gilbert_meta_38,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
+gilbert_meta_44,Elderly (minimum age >50),,derived_cov_age,60.0,94.0,243,0.0,2026-09-01
+gilbert_meta_60,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2549,0.375049,2026-09-01
+gilbert_meta_56,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.0,2712,0.000369,2026-09-01
+gilbert_meta_4,Adult (18+),,derived_cov_age,17.0,44.0,973,0.001028,2026-09-01
+gilbert_meta_59,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
+gilbert_meta_58,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
+gilbert_meta_55,Child (<18y),Child (6-12y),derived_cov_age,5.10335397720337,10.5160846710205,1763,0.0,2026-09-01
+gilbert_meta_33,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,18.0,1592,0.014348,2026-09-01
+gilbert_meta_61,Mixed,Adolescent (12-18y),derived_cov_age,10.0,51.0,2550,0.375294,2026-09-01
+gilbert_meta_5,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0595483779907,15.7097873687744,2920,0.0,2026-09-01
+gilbert_meta_37,Adult (18+),,derived_cov_age,20.0,65.0,839,0.0,2026-09-01
+gilbert_meta_41,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,4.0,10.0,3230,0.0,2026-09-01
+gilbert_meta_69,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,0.0,18.25,9410,0.000106,2026-09-01
+gilbert_meta_57,Adult (18+),,derived_cov_age,18.0,45.0,1154,0.0,2026-09-01
+gilbert_meta_85,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,931,0.040816,2026-09-01
+gilbert_meta_86,Adult (18+),,derived_cov_age,17.0,96.0,1234,0.002431,2026-09-01
+gobbens_2018_iadl,Elderly (minimum age >50),,derived_cov_age,75.0280629705681,95.44695414099932,377,0.0,2026-09-01
+girma_2021_oslo3,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,546,0.333333,2026-09-01
+gilbert_meta_84,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,908,0.039648,2026-09-01
+gilbert_meta_9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,88.0,1646,0.020656,2026-09-01
+gmc_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+gilbert_meta_72,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,18.0,5125,0.001561,2026-09-01
+gilbert_meta_71,Child (<18y),"Early (<6y), Child (6-12y), Adolescent (12-18y)",derived_cov_age,1.0,20.0,6026,0.000332,2026-09-01
+goksel_2026_embarrassment_authenticity,Adult (18+),,derived_cov_age,18.0,85.0,2100,0.0,2026-09-01
+girma_2021_phq9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,546,0.333333,2026-09-01
+gizaw_2023_phq9,Adult (18+),,derived_cov_age,21.0,73.0,577,0.0,2026-09-01
+gillman_2023_pss,Adult (18+),,derived_cov_age,18.0,63.0,403,0.0,2026-09-01
+gobbens_2018_adl,Elderly (minimum age >50),,derived_cov_age,75.0280629705681,95.44695414099932,377,0.0,2026-09-01
+gobbens_2018_sf12,Elderly (minimum age >50),,derived_cov_age,75.0280629705681,95.44695414099932,374,0.0,2026-09-01
+goksel_2026_embarrassment_emb_perception,Adult (18+),,derived_cov_age,18.0,77.0,600,0.0,2026-09-01
+goksel_2026_embarrassment_appeasement,Adult (18+),,derived_cov_age,18.0,77.0,600,0.0,2026-09-01
+gilbert_meta_98,Adult (18+),,derived_cov_age,18.0,104.0,8608,0.0,2026-09-01
+goksel_2026_embarrassment_liking,Adult (18+),,derived_cov_age,18.0,78.0,300,0.0,2026-09-01
+gilbert_meta_87,Adult (18+),,derived_cov_age,17.0,96.0,1234,0.002431,2026-09-01
+gillman_2023_appraisals,Adult (18+),,derived_cov_age,18.0,63.0,404,0.0,2026-09-01
+goksel_2026_embarrassment_affectivetrust,Adult (18+),,derived_cov_age,18.0,78.0,300,0.0,2026-09-01
+gilbert_meta_73,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,18.0,5124,0.001561,2026-09-01
+gilbert_meta_83,Mixed,Adolescent (12-18y),derived_cov_age,13.0,21.0,932,0.040773,2026-09-01
+gilbert_meta_97,Adult (18+),,derived_cov_age,18.0,104.0,8609,0.0,2026-09-01
+goldberg_2018_eps_adjectives,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goldberg_2018_eps_life_events,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goldberg_2018_eps_ipip,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goldberg_2018_eps_spirituality,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goldberg_2018_eps_s11,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goksel_2026_embarrassment_resilience,Adult (18+),,derived_cov_age,18.0,85.0,899,0.0,2026-09-01
+goldberg_2018_dop_ab5c_vignettes,Adult (18+),,derived_cov_age,18.0,83.0,639,0.0,2026-09-01
+goksel_2026_embarrassment_puremorality,Adult (18+),,derived_cov_age,18.0,80.0,602,0.0,2026-09-01
+goldberg_2018_bri_feel,Adult (18+),,derived_cov_age,18.0,85.0,778,0.0,2026-09-01
+goksel_2026_embarrassment_socialnorm,Adult (18+),,derived_cov_age,19.0,78.0,299,0.0,2026-09-01
+goldberg_2018_bri_ofood,Adult (18+),,derived_cov_age,18.0,85.0,774,0.0,2026-09-01
+goldberg_2018_dop_avocational_interests,Adult (18+),,derived_cov_age,18.0,83.0,639,0.0,2026-09-01
+goldberg_2018_eps_cesd,Adult (18+),,derived_cov_age,18.0,83.0,726,0.0,2026-09-01
+goldberg_2018_bri_bri,Adult (18+),,derived_cov_age,18.0,85.0,778,0.0,2026-09-01
+goksel_2026_embarrassment_purewarmth,Adult (18+),,derived_cov_age,18.0,80.0,602,0.0,2026-09-01
+goksel_2026_embarrassment_wcm,Adult (18+),,derived_cov_age,18.0,80.0,1500,0.0,2026-09-01
+goldberg_2018_bri_curio,Adult (18+),,derived_cov_age,18.0,85.0,777,0.0,2026-09-01
+goldberg_2018_ciss,Adult (18+),,derived_cov_age,18.0,85.0,576,0.0,2026-09-01
+goldberg_2018_cpi,Adult (18+),,derived_cov_age,18.0,85.0,815,0.0,2026-09-01
+goldberg_2018_bri_food,Adult (18+),,derived_cov_age,18.0,85.0,777,0.0,2026-09-01
+goksel_2026_embarrassment_moralityandwarmth,Adult (18+),,derived_cov_age,18.0,80.0,602,0.0,2026-09-01
+goksel_2026_embarrassment_warmth_competence,Adult (18+),,derived_cov_age,19.0,85.0,600,0.0,2026-09-01
+goksel_2026_embarrassment_similarity,Adult (18+),,derived_cov_age,18.0,78.0,300,0.0,2026-09-01
+goksel_2026_embarrassment_socialcompetence,Adult (18+),,derived_cov_age,18.0,85.0,899,0.0,2026-09-01
+goldberg_2018_hpi,Adult (18+),,derived_cov_age,18.0,85.0,475,0.0,2026-09-01
+goldberg_2018_pda360,Adult (18+),,derived_cov_age,18.0,89.0,1121,0.0,2026-09-01
+goldberg_2018_prs_movie_preferences,Adult (18+),,derived_cov_age,18.0,83.0,734,0.0,2026-09-01
+goldberg_2018_ppq_music,Adult (18+),,derived_cov_age,18.0,83.0,677,0.0,2026-09-01
+goldberg_2018_sdv_desirability,Adult (18+),,derived_cov_age,18.0,83.0,699,0.0,2026-09-01
+goldberg_2018_hpq_h,Adult (18+),,derived_cov_age,18.0,85.0,705,0.0,2026-09-01
+goldberg_2018_ppq_via_strengths,Adult (18+),,derived_cov_age,18.0,83.0,679,0.0,2026-09-01
+goldberg_2018_pf16_p,Adult (18+),,derived_cov_age,18.0,85.0,680,0.0,2026-09-01
+goldberg_2018_prs_tv_preferences,Adult (18+),,derived_cov_age,18.0,83.0,731,0.0,2026-09-01
+goldberg_2018_prs_pey,Adult (18+),,derived_cov_age,18.0,83.0,734,0.0,2026-09-01
+goldberg_2018_prs_ipip,Adult (18+),,derived_cov_age,18.0,83.0,735,0.0,2026-09-01
+goldberg_2018_ipip,Adult (18+),,derived_cov_age,18.0,89.0,960,0.0,2026-09-01
+goldberg_2018_sbo,Adult (18+),,derived_cov_age,18.0,85.0,703,0.0,2026-09-01
+goldberg_2018_prs_music_preferences,Adult (18+),,derived_cov_age,18.0,83.0,735,0.0,2026-09-01
+goldberg_2018_prs_bas_bis,Adult (18+),,derived_cov_age,18.0,83.0,735,0.0,2026-09-01
+goldberg_2018_prs_peo,Adult (18+),,derived_cov_age,18.0,83.0,734,0.0,2026-09-01
+goldberg_2018_pas_adjectives,Adult (18+),,derived_cov_age,18.0,85.0,733,0.0,2026-09-01
+goldberg_2018_prs_gray_wilson,Adult (18+),,derived_cov_age,18.0,83.0,735,0.0,2026-09-01
+goldberg_2018_jpir,Adult (18+),,derived_cov_age,18.0,85.0,712,0.0,2026-09-01
+goldberg_2018_pas_ipip_scales,Adult (18+),,derived_cov_age,18.0,85.0,734,0.0,2026-09-01
+goldberg_2018_prs_hexaco,Adult (18+),,derived_cov_age,18.0,83.0,736,0.0,2026-09-01
+goldberg_2018_ppq_beliefs,Adult (18+),,derived_cov_age,18.0,83.0,679,0.0,2026-09-01
+goldberg_2018_pda525,Adult (18+),,derived_cov_age,18.0,85.0,700,0.0,2026-09-01
+goldberg_2018_ppq_dream,Adult (18+),,derived_cov_age,18.0,83.0,677,0.0,2026-09-01
+goldberg_2018_sdv_adjectives,Adult (18+),,derived_cov_age,18.0,83.0,699,0.0,2026-09-01
+goldberg_2018_prs_reading_preferences,Adult (18+),,derived_cov_age,18.0,83.0,734,0.0,2026-09-01
+goldberg_2018_sdv_force,Adult (18+),,derived_cov_age,18.0,83.0,698,0.0,2026-09-01
+goldberg_2018_sdv_happy,Adult (18+),,derived_cov_age,18.0,83.0,696,0.0,2026-09-01
+goldberg_2018_sdv_influ,Adult (18+),,derived_cov_age,18.0,83.0,699,0.0,2026-09-01
+goldberg_2018_sdv_ipip_temperament,Adult (18+),,derived_cov_age,18.0,83.0,701,0.0,2026-09-01
+goldberg_2018_sdv_likelihood,Adult (18+),,derived_cov_age,18.0,83.0,700,0.0,2026-09-01
+goldberg_2018_sdv_schwartz_values,Adult (18+),,derived_cov_age,18.0,83.0,700,0.0,2026-09-01
+goldberg_2018_sdv_views,Adult (18+),,derived_cov_age,18.0,83.0,700,0.0,2026-09-01
+goldberg_2018_spa_beliefs_about_intelligence,Adult (18+),,derived_cov_age,18.0,83.0,730,0.0,2026-09-01
+goldberg_2018_spa_bfi_forced_choice,Adult (18+),,derived_cov_age,18.0,83.0,729,0.0,2026-09-01
+goldberg_2018_spa_changeability,Adult (18+),,derived_cov_age,18.0,83.0,729,0.0,2026-09-01
+goldberg_2018_spa_cultural_familiarity,Adult (18+),,derived_cov_age,18.0,83.0,730,0.0,2026-09-01
+goldberg_2018_spa_ipip,Adult (18+),,derived_cov_age,18.0,83.0,730,0.0,2026-09-01
+goldberg_2018_spa_medical_history,Adult (18+),,derived_cov_age,18.0,83.0,730,0.0,2026-09-01
+goldberg_2018_spa_skill_proficiency,Adult (18+),,derived_cov_age,18.0,83.0,729,0.0,2026-09-01
+goldberg_2018_spa_skills,Adult (18+),,derived_cov_age,18.0,83.0,730,0.0,2026-09-01
+goldberg_2018_spa_speo,Adult (18+),,derived_cov_age,18.0,83.0,714,0.0,2026-09-01
+goldberg_2018_spa_spey,Adult (18+),,derived_cov_age,18.0,83.0,711,0.0,2026-09-01
+goldberg_2018_spa_talents,Adult (18+),,derived_cov_age,18.0,83.0,727,0.0,2026-09-01
+goldberg_2018_tci,Adult (18+),,derived_cov_age,18.0,85.0,736,0.0,2026-09-01
+gomez_2020_mpq,Adult (18+),,derived_cov_age,18.0,86.0,201,0.0,2026-09-01
+guatemala_2024_homes_avenues,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_country,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_drainage,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_emergencies,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+hao_2025_emotional_regulation,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
+hao_2025_self_efficacy,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
+hao_2025_foreign_language_anxiety,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
+haehner_2026_personality_subsaharan_b2i,Mixed,Adolescent (12-18y),derived_cov_age,17.0,21.0,1709,0.026916,2026-09-01
+gumus_2025_dietarian_identity,Adult (18+),,derived_cov_age,19.0,61.0,485,0.0,2026-09-01
+guatemala_2024_homes_roads,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_safety,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_transparency,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+haehner_2026_personality_subsaharan_ecq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,21.0,1705,0.026979,2026-09-01
+hannachi_2025_eco_anxiety_heas,Adult (18+),,derived_cov_age,17.0,77.0,533,0.009381,2026-09-01
+hao_2025_metacognitive_regulation,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
+hannachi_2025_eco_anxiety_cas,Adult (18+),,derived_cov_age,17.0,77.0,533,0.009381,2026-09-01
+hannachi_2025_eco_anxiety_affect,Adult (18+),,derived_cov_age,17.0,77.0,533,0.009381,2026-09-01
+guatemala_2024_homes_water,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_publiceducation,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+hahn_2025_sqc,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,17.0,230,0.0,2026-09-01
+guatemala_2024_homes_trash,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_parks,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_publichealth,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+hannachi_2025_eco_anxiety_cope,Adult (18+),,derived_cov_age,17.0,77.0,533,0.009381,2026-09-01
+guatemala_2024_homes_publicclinic,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_energy,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_nutrition,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_lighting,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+guatemala_2024_homes_transport,Adult (18+),,derived_cov_age,16.0,97.0,6886,0.000436,2026-09-01
+horiuchi_2024_rsmsm,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,165,0.0,2026-09-01
+hexaco_silvia_2025,Adult (18+),,derived_cov_age,18.0,95.0,530,0.0,2026-09-01
+holden_2026_bsri,Adult (18+),,derived_cov_age,19.0,83.0,695,0.0,2026-09-01
+heise_2024_mental_falsesign,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+hayek_2022_self_efficacy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
+heise_2024_mental_divdesires,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+hayek_2022_subj_norm,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
+herrera_2018_iri,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,556,0.053957,2026-09-01
+herrera_2018_beliefs_about_empathy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,556,0.053957,2026-09-01
+horiuchi_2024_attachment,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,193,0.0,2026-09-01
+heise_2024_mental_truebel,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_vpt,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_knowexpert,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+herrera_2018_se_d_items,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,439,0.063781,2026-09-01
+horiuchi_2024_dissociation,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,12.0,194,0.0,2026-09-01
+heise_2024_mental_falsebel,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+heise_2024_mental_knowaccess,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+herrera_2018_attitudes_homeless,Mixed,Adolescent (12-18y),derived_cov_age,15.0,88.0,439,0.063781,2026-09-01
+heise_2024_mental_divbeliefs,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.0,8.0,206,0.0,2026-09-01
+hao_2025_social_regulation,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,650,0.0,2026-09-01
+hayek_2022_attitude,Mixed,Adolescent (12-18y),derived_cov_age,15.0,18.0,345,0.113043,2026-09-01
+huang_2023_d_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
+ipip_openpsychometrics_sc,Adult (18+),,derived_cov_age,14.0,72.0,1001,0.018981,2026-09-01
+huang_2023_b_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
+ibrahim_2015_bfi,Adult (18+),,derived_cov_age,20.0,85.0,200,0.0,2026-09-01
+iandolo_2021_asq,Adult (18+),,derived_cov_age,18.0,37.0,348,0.0,2026-09-01
+hyatt_2023_aggression_neo,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
+hyatt_2023_aggression_rpa,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
+ipip_openpsychometrics_do,Adult (18+),,derived_cov_age,14.0,72.0,1001,0.018981,2026-09-01
+huang_2023_e_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
+hyatt_2023_aggression_cab,Adult (18+),,derived_cov_age,19.0,76.0,655,0.0,2026-09-01
+ibrahim_2015_sf36,Adult (18+),,derived_cov_age,20.0,85.0,200,0.0,2026-09-01
+hyatt_2023_aggression_prelim2_epa,Adult (18+),,derived_cov_age,20.0,76.0,322,0.0,2026-09-01
+ilearnathome_regalado_2025,Adult (18+),,derived_cov_age,21.0,65.0,909,0.0,2026-09-01
+ipip_openpsychometrics_as,Adult (18+),,derived_cov_age,14.0,72.0,1004,0.018924,2026-09-01
+imps2025_hf,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.5,12.3750858306885,2469,0.0,2026-09-01
+ipip_openpsychometrics_ad,Adult (18+),,derived_cov_age,14.0,72.0,1000,0.019,2026-09-01
+identity_fusion_gomez_2025,Adult (18+),,derived_cov_age,18.0,88.0,2570,0.0,2026-09-01
+huang_2016_neo_neuroticism,Adult (18+),,derived_cov_age,47.0,67.0,114,0.0,2026-09-01
+hyatt_2023_aggression_aeq,Adult (18+),,derived_cov_age,18.0,76.0,1321,0.0,2026-09-01
+huang_2016_neo_conscientious,Adult (18+),,derived_cov_age,47.0,67.0,114,0.0,2026-09-01
+hpwt_bayona_2025_workcharacteristics,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
+hpwt_bayona_2025_jobperformance,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
+huang_2016_cesd,Adult (18+),,derived_cov_age,47.0,67.0,113,0.0,2026-09-01
+huang_2023_c_scale,Child (<18y),Adolescent (12-18y),derived_cov_age,2.0,16.0,631,0.0,2026-09-01
+hpwt_bayona_2025_jobsatisfaction,Adult (18+),,derived_cov_age,21.0,75.0,499,0.0,2026-09-01
+jeon_2019_cbi,Adult (18+),,derived_cov_age,33.0,72.0,464,0.0,2026-09-01
+jelinek_2021_cdi,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,16.0,1515,0.0,2026-09-01
+islam_2022_gad7,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,19.0,428,0.226636,2026-09-01
+iwasa_2016_dpssr,Adult (18+),,derived_cov_age,8.0,77.0,481,0.002079,2026-09-01
+islam_2022_phq9,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,19.0,428,0.226636,2026-09-01
+iwasa_2016_asi,Adult (18+),,derived_cov_age,8.0,77.0,481,0.002079,2026-09-01
+jaen_2024_odor_id,Adult (18+),,derived_cov_age,40.0,85.0,845,0.0,2026-09-01
+janoffbulman_2016_moralmotives_s2,Adult (18+),,derived_cov_age,18.0,67.0,293,0.0,2026-09-01
+iwasa_2016_padua_inventory,Adult (18+),,derived_cov_age,8.0,77.0,481,0.002079,2026-09-01
+islam_2022_igds9sf,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,19.0,428,0.226636,2026-09-01
+janoffbulman_2016_moralmotives_s1,Adult (18+),,derived_cov_age,18.0,74.0,310,0.0,2026-09-01
+iwasa_2016_stai_trait,Adult (18+),,derived_cov_age,8.0,77.0,481,0.002079,2026-09-01
+islam_2022_bsmas,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,19.0,428,0.226636,2026-09-01
+islam_2022_gdt,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,19.0,428,0.226636,2026-09-01
+jimenezherrera_2022_moral_sensitivity,Adult (18+),,derived_cov_age,18.0,56.0,749,0.0,2026-09-01
+jo_2023_arp,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+jian-wen-low-sepsis-and-trauma-resuscitation-2024,Adult (18+),,derived_cov_age,24.0,32.0,40,0.0,2026-09-01
+jeon_2019_cesd10,Adult (18+),,derived_cov_age,33.0,72.0,464,0.0,2026-09-01
+jo_2023_cfs,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+jo_2023_crp,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+jo_2023_pbc,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+jo_2023_sni,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+jo_2023_sno,Adult (18+),,derived_cov_age,18.0,66.0,345,0.0,2026-09-01
+johansson-swedish-pss-rasch-analysis-2024,Adult (18+),,derived_cov_age,18.0,65.0,797,0.0,2026-09-01
+johnhenderson_2020_disinfection_behavior,Adult (18+),,derived_cov_age,30.0,99.0,192,0.0,2026-09-01
+johnhenderson_2020_health_mindset,Adult (18+),,derived_cov_age,30.0,99.0,192,0.0,2026-09-01
+jovanovic_2026_conscientiousness_bfi,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,1376,0.316134,2026-09-01
+jovanovic_2026_conscientiousness_dass_d,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,924,0.285714,2026-09-01
+jovanovic_2026_conscientiousness_panas_na,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,403,0.141439,2026-09-01
+jovanovic_2026_conscientiousness_spane_na,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,973,0.388489,2026-09-01
+jovanovic_2026_conscientiousness_yips,Mixed,Adolescent (12-18y),derived_cov_age,15.0,19.0,452,0.378319,2026-09-01
+jung_2018_media_use,Adult (18+),,derived_cov_age,21.0,40.0,2134,0.0,2026-09-01
+kalczajanosi_2021_covid_fear,Adult (18+),,derived_cov_age,18.0,77.0,1503,0.0,2026-09-01
+kalczajanosi_2021_covid_risk,Adult (18+),,derived_cov_age,18.0,77.0,1503,0.0,2026-09-01
+kalczajanosi_2021_vaccine_skepticism,Adult (18+),,derived_cov_age,18.0,77.0,1503,0.0,2026-09-01
+Karim2022_tmoca_subscales_longitudinal,Elderly (minimum age >50),,derived_cov_age,60.0,85.0,46,0.0,2026-09-01
+Karim2022_tmoca_subscales_single,Elderly (minimum age >50),,derived_cov_age,60.0,89.0,233,0.0,2026-09-01
+kokoszka_2022_zjn,Adult (18+),,derived_cov_age,35.0,66.0,100,0.0,2026-09-01
+kermen_2022_self_efficacy,Mixed,Adolescent (12-18y),derived_cov_age,14.0,18.0,325,0.055385,2026-09-01
+kokoszka_2022_soc,Adult (18+),,derived_cov_age,35.0,66.0,100,0.0,2026-09-01
+kermen_2022_attention,Mixed,Adolescent (12-18y),derived_cov_age,14.0,18.0,325,0.055385,2026-09-01
+kilic_2024_nutrition_attitude,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,60.0,276,0.423913,2026-09-01
+kim_2025_hads,Adult (18+),,derived_cov_age,21.0,70.0,286,0.0,2026-09-01
+kilic_2024_mental_toughness,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,60.0,276,0.423913,2026-09-01
+kim_2023_gad7,Adult (18+),,derived_cov_age,13.0,64.0,202,0.019802,2026-09-01
+kinyanjui_2023_substance_use,Adult (18+),,derived_cov_age,16.0,45.0,400,0.005,2026-09-01
+kim_2023_pss10,Adult (18+),,derived_cov_age,13.0,64.0,202,0.019802,2026-09-01
+kim_2025_isi,Adult (18+),,derived_cov_age,21.0,70.0,286,0.0,2026-09-01
+kermen_2022_self_regulation,Mixed,Adolescent (12-18y),derived_cov_age,14.0,18.0,325,0.055385,2026-09-01
+kim_2025_psqi,Adult (18+),,derived_cov_age,21.0,70.0,286,0.0,2026-09-01
+kokoszka_2022_who5,Adult (18+),,derived_cov_age,35.0,66.0,100,0.0,2026-09-01
+kermen_2022_anxiety,Mixed,Adolescent (12-18y),derived_cov_age,14.0,18.0,325,0.055385,2026-09-01
+kokoszka_2022_hamd,Adult (18+),,derived_cov_age,35.0,66.0,100,0.0,2026-09-01
+kim_2025_psas,Adult (18+),,derived_cov_age,21.0,70.0,286,0.0,2026-09-01
+kemp_2019_mss_disorganized,Adult (18+),,derived_cov_age,19.0,75.0,584,0.0,2026-09-01
+kokoszka_2022_paid,Adult (18+),,derived_cov_age,35.0,66.0,100,0.0,2026-09-01
+kim_2023_phq9,Adult (18+),,derived_cov_age,13.0,64.0,202,0.019802,2026-09-01
+kepaq_balparda_2021,Mixed,Adolescent (12-18y),derived_cov_age,14.0,65.0,386,0.07772,2026-09-01
+kemp_2019_mss_positive,Adult (18+),,derived_cov_age,19.0,75.0,584,0.0,2026-09-01
+kemp_2019_mss_negative,Adult (18+),,derived_cov_age,19.0,75.0,584,0.0,2026-09-01
+konerding_2019_patientsatisfaction,Adult (18+),,derived_cov_age,21.0,99.0,1841,0.0,2026-09-01
+koksal_2023_psycap,Adult (18+),,derived_cov_age,22.0,49.0,281,0.0,2026-09-01
+lai_2023_parent_relation_father,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
+kushnir2017_ftnd,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
+kushnir2017_bfi,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
+kushnir2017_tsrq,Adult (18+),,derived_cov_age,19.0,71.0,319,0.0,2026-09-01
+komura_2026_gqs_animacy,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+kuehner_2017_mw_rumination,Adult (18+),,derived_cov_age,19.0,32.0,43,0.0,2026-09-01
+kushnir2017_anrt,Adult (18+),,derived_cov_age,19.0,71.0,316,0.0,2026-09-01
+komura_2026_gqs_perceived_safety,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_mdmt_sincere,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_gqs_likeability,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_mdmt_ethical,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+koksal_2023_work_depression,Adult (18+),,derived_cov_age,22.0,49.0,281,0.0,2026-09-01
+komura_2026_mdmt_reliable,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_gqs_anthropomorphism,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_gqs_perceived_intelligence,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+komura_2026_mdmt_capable,Adult (18+),,derived_cov_age,20.0,78.0,148,0.0,2026-09-01
+koksal_2023_life_satisfaction,Adult (18+),,derived_cov_age,22.0,49.0,281,0.0,2026-09-01
+lhsbrasil_couto_2023_pss,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
+lee_2024_social_support,Adult (18+),,derived_cov_age,18.0,28.0,527,0.0,2026-09-01
+lee_2024_panas,Adult (18+),,derived_cov_age,18.0,28.0,527,0.0,2026-09-01
+lee_2024_swls,Adult (18+),,derived_cov_age,18.0,28.0,527,0.0,2026-09-01
+lee_2020_empathy,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,675,0.023704,2026-09-01
+lee_2020_social_support,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,690,0.023188,2026-09-01
+lee_2020_alcohol_use,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,702,0.022792,2026-09-01
+lee_2024_tci,Adult (18+),,derived_cov_age,18.0,28.0,527,0.0,2026-09-01
+lhsbrasil_couto_2023_lhs,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
+lec5_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,70.0,9506,0.37429,2026-09-01
+lee_2020_vr_usability,Adult (18+),,derived_cov_age,21.0,27.0,60,0.0,2026-09-01
+latifi_2026_insect_fear,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,6.0,18.0,1369,0.134405,2026-09-01
+lhsbrasil_couto_2023_ses,Adult (18+),,derived_cov_age,18.0,79.0,464,0.0,2026-09-01
+lai_2023_teacher_student_rel,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
+lee_2020_burnout,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,718,0.022284,2026-09-01
+lai_2023_social_adaptability,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1299,0.013857,2026-09-01
+lai_2023_parent_relation_mother,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1298,0.013867,2026-09-01
+lai_2023_peer_relationship,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,5.0,26.0,1300,0.013846,2026-09-01
+lee_2020_sleep_quality,Mixed,Adolescent (12-18y),derived_cov_age,17.0,31.0,680,0.023529,2026-09-01
+liu_2017_communication,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2017_qol,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2017_mcmq_coping,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2017_benefit_finding,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2017_ssrs_support,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+lindstrom2021_team_identification,Adult (18+),,derived_cov_age,18.0,76.0,226,0.0,2026-09-01
+lindstrom2021_honesty_humility,Adult (18+),,derived_cov_age,18.0,76.0,227,0.0,2026-09-01
+liu_2017_scale_d,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2017_scale_o,Adult (18+),,derived_cov_age,27.0,70.0,350,0.0,2026-09-01
+liu_2021_vrexp_depression,Adult (18+),,derived_cov_age,18.0,33.0,36,0.0,2026-09-01
+liu_2021_vrexp_breq,Adult (18+),,derived_cov_age,18.0,33.0,36,0.0,2026-09-01
+lindstrom2021_conscientiousness,Adult (18+),,derived_cov_age,18.0,76.0,220,0.0,2026-09-01
+liu_2021_vrexp_brums,Adult (18+),,derived_cov_age,18.0,33.0,36,0.0,2026-09-01
+lindstrom2021_violent_intentions,Adult (18+),,derived_cov_age,18.0,76.0,209,0.0,2026-09-01
+luo_2021_host_ties,Adult (18+),,derived_cov_age,17.0,30.0,229,0.004367,2026-09-01
+luo_2021_conational_ties,Adult (18+),,derived_cov_age,17.0,30.0,229,0.004367,2026-09-01
+luo_2021_ecr,Adult (18+),,derived_cov_age,17.0,30.0,229,0.004367,2026-09-01
+lsbq_maleki_2025_persian_comprehension,Adult (18+),,derived_cov_age,15.0,59.0,315,0.019048,2026-09-01
+luo_2021_acculturation_index,Adult (18+),,derived_cov_age,17.0,30.0,229,0.004367,2026-09-01
+lsbq_maleki_2025_persian_switching,Adult (18+),,derived_cov_age,15.0,59.0,314,0.019108,2026-09-01
+lsbq_maleki_2025_non_persian_proficiency,Adult (18+),,derived_cov_age,15.0,59.0,307,0.019544,2026-09-01
+lsbq_maleki_2025_non_persian_use,Adult (18+),,derived_cov_age,15.0,55.0,290,0.013793,2026-09-01
+lsbq_maleki_2025_dominant_language_home_community,Adult (18+),,derived_cov_age,15.0,59.0,279,0.017921,2026-09-01
+liu_2025_ydlq,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+LOC_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
+liu_2025_ydcy,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+liu_2025_xljk,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+liu_2025_mlq,Adult (18+),,derived_cov_age,17.0,37.0,345,0.002899,2026-09-01
+liu_2025_positive_cognition,Adult (18+),,derived_cov_age,17.0,37.0,345,0.002899,2026-09-01
+liu_2025_teacher_support,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+liu_2025_learning_motivation,Adult (18+),,derived_cov_age,17.0,37.0,345,0.002899,2026-09-01
+liu_2025_nlgz,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+liu_2022_fragreading_cdq,Adult (18+),,derived_cov_age,17.0,48.0,915,0.00765,2026-09-01
+liu_2025_perceived_competence,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+liu_2021_vrexp_experience,Adult (18+),,derived_cov_age,18.0,34.0,39,0.0,2026-09-01
+liu_2022_fragreading_frq,Adult (18+),,derived_cov_age,17.0,48.0,915,0.00765,2026-09-01
+liu_2025_jjqx,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,879,0.0,2026-09-01
+luo_2021_intl_ties,Adult (18+),,derived_cov_age,17.0,30.0,229,0.004367,2026-09-01
+malik_2018_social_motivation,Adult (18+),,derived_cov_age,23.0,49.0,359,0.0,2026-09-01
+lys_2020_rape_3_sj,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+magnus-format-study2_2022,Adult (18+),,derived_cov_age,18.0,70.0,600,0.0,2026-09-01
+lys_2020_rape_3_asi,Adult (18+),,derived_cov_age,18.0,54.0,429,0.0,2026-09-01
+magnus-format-study1_2022,Adult (18+),,derived_cov_age,18.0,78.0,602,0.0,2026-09-01
+makransky_2016_self_efficacy,Adult (18+),,derived_cov_age,17.0,44.0,189,0.005291,2026-09-01
+lys_2020_rape_2_rma,Adult (18+),,derived_cov_age,18.0,40.0,142,0.0,2026-09-01
+lys_2020_rape_3_rma,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+malik_2018_individual_motivation,Adult (18+),,derived_cov_age,23.0,49.0,359,0.0,2026-09-01
+lys_2020_rape_3_sds,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+lys_2020_rape_3_diff,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+lys_2020_rape_2_rma_pre,Adult (18+),,derived_cov_age,18.0,40.0,142,0.0,2026-09-01
+malik_2018_organizational_motivation,Adult (18+),,derived_cov_age,23.0,49.0,359,0.0,2026-09-01
+lys_2020_rape_1_rma,Adult (18+),,derived_cov_age,15.0,79.0,873,0.004582,2026-09-01
+makransky_2016_motivation,Adult (18+),,derived_cov_age,17.0,44.0,189,0.005291,2026-09-01
+lys_2020_rape_3_kpnts,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+lys_2020_rape_3_cons,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+magiccats_ozono_2020,Adult (18+),,derived_cov_age,20.0,71.0,451,0.0,2026-09-01
+lys_2020_rape_3_unjust,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+mancone_2024_ravlt_intrusion,Adult (18+),,derived_cov_age,18.0,29.0,160,0.0,2026-09-01
+makransky_2016_mcq_correct,Adult (18+),,derived_cov_age,17.0,44.0,189,0.005291,2026-09-01
+lys_2020_rape_3_rwa,Adult (18+),,derived_cov_age,18.0,54.0,430,0.0,2026-09-01
+marquessanchez_2023_kidmed,Mixed,Adolescent (12-18y),derived_cov_age,14.0,18.0,235,0.038298,2026-09-01
+margaretto_2025_translation_study_1_lextale,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+margaretto_2025_translation_study_1_generalknowledge,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+matarboumosleh_2017_spai26,Adult (18+),,derived_cov_age,17.0,30.0,663,0.003017,2026-09-01
+marcussonclavertz_2019_velten,Adult (18+),,derived_cov_age,18.0,74.0,106,0.0,2026-09-01
+matarboumosleh_2017_gad2,Adult (18+),,derived_cov_age,17.0,30.0,403,0.002481,2026-09-01
+matosaslopez_2024_teacher_assessment,Adult (18+),,derived_cov_age,17.0,51.0,2223,0.00045,2026-09-01
+manolika_2021_mini_ipip,Adult (18+),,derived_cov_age,18.0,35.0,384,0.0,2026-09-01
+margaretto_2025_translation_study_1_vocabulary_3,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+matosaslopez_2022_bars_teaching,Adult (18+),,derived_cov_age,17.0,48.0,2324,0.002582,2026-09-01
+mascherini_2021_meddiet,Adult (18+),,derived_cov_age,18.0,71.0,1383,0.0,2026-09-01
+matarboumosleh_2017_phq2,Adult (18+),,derived_cov_age,17.0,30.0,402,0.002488,2026-09-01
+margaretto_2025_translation_study_2_readingcomprehension,Adult (18+),,derived_cov_age,18.0,68.0,220,0.0,2026-09-01
+matosaslopez_2024_questionnaire_quality,Adult (18+),,derived_cov_age,17.0,51.0,2223,0.00045,2026-09-01
+margaretto_2025_translation_study_2_generalknowledge_1,Adult (18+),,derived_cov_age,18.0,68.0,220,0.0,2026-09-01
+margaretto_2025_translation_study_1_readingcomprehension,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+margaretto_2025_translation_study_2_lextale,Adult (18+),,derived_cov_age,18.0,68.0,220,0.0,2026-09-01
+margaretto_2025_translation_study_2_generalknowledge_2,Adult (18+),,derived_cov_age,18.0,68.0,220,0.0,2026-09-01
+manolika_2021_movie_preferences,Adult (18+),,derived_cov_age,18.0,35.0,384,0.0,2026-09-01
+margaretto_2025_translation_study_1_vocabulary_2,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+manolika_2021_reading_preferences,Adult (18+),,derived_cov_age,18.0,35.0,384,0.0,2026-09-01
+margaretto_2025_translation_study_1_vocabulary_1,Adult (18+),,derived_cov_age,18.0,48.0,231,0.0,2026-09-01
+margaretto_2025_translation_study_2_vocabulary_full,Adult (18+),,derived_cov_age,18.0,68.0,220,0.0,2026-09-01
+manolika_2021_dirty_dozen,Adult (18+),,derived_cov_age,18.0,35.0,384,0.0,2026-09-01
+mancone_2024_ravlt_recall,Adult (18+),,derived_cov_age,18.0,29.0,160,0.0,2026-09-01
+medvedev_2018_ql,Adult (18+),,derived_cov_age,18.0,55.0,175,0.0,2026-09-01
+medvedev_2018_pan,Adult (18+),,derived_cov_age,18.0,55.0,171,0.0,2026-09-01
+mede_2025_clim_polsupport,Adult (18+),,derived_cov_age,18.0,100.0,69728,0.0,2026-09-01
+mede_2025_normperc,Adult (18+),,derived_cov_age,18.0,100.0,71690,0.0,2026-09-01
+mede_2025_sdo,Adult (18+),,derived_cov_age,18.0,100.0,70584,0.0,2026-09-01
+mede_2025_sciengage,Adult (18+),,derived_cov_age,18.0,100.0,71702,0.0,2026-09-01
+mede_2025_scipop,Adult (18+),,derived_cov_age,18.0,100.0,71710,0.0,2026-09-01
+mede_2025_outspokenness,Adult (18+),,derived_cov_age,18.0,100.0,71705,0.0,2026-09-01
+mede_2025_clim_weather_future,Adult (18+),,derived_cov_age,18.0,100.0,67871,0.0,2026-09-01
+mboya_2020_gds15,Elderly (minimum age >50),,derived_cov_age,60.0,108.0,304,0.0,2026-09-01
+mclaughlin_samuel_2025_auditory_session_1,Adult (18+),,derived_cov_age,18.0,65.0,251,0.0,2026-09-01
+mede_2025_goals_priority,Adult (18+),,derived_cov_age,18.0,100.0,71701,0.0,2026-09-01
+matranga_2019_hpv_knowledge,Adult (18+),,derived_cov_age,18.0,61.0,199,0.0,2026-09-01
+mede_2025_clim_government,Adult (18+),,derived_cov_age,18.0,100.0,71695,0.0,2026-09-01
+mede_2025_sciinfo,Adult (18+),,derived_cov_age,18.0,100.0,71693,0.0,2026-09-01
+mede_2025_clim_emotions,Adult (18+),,derived_cov_age,18.0,100.0,71703,0.0,2026-09-01
+medvedev_2018_oxh,Adult (18+),,derived_cov_age,18.0,55.0,176,0.0,2026-09-01
+mede_2025_goals_tackle,Adult (18+),,derived_cov_age,18.0,100.0,71690,0.0,2026-09-01
+mede_2025_clim_weather_past,Adult (18+),,derived_cov_age,18.0,100.0,71309,0.0,2026-09-01
+mavromoustakos_2016_probability_scale,Adult (18+),,derived_cov_age,18.0,64.0,115,0.0,2026-09-01
+mavromoustakos_2016_ztpi,Adult (18+),,derived_cov_age,18.0,64.0,115,0.0,2026-09-01
+mede_2025_willvul,Adult (18+),,derived_cov_age,18.0,100.0,70264,0.0,2026-09-01
+mavromoustakos_2016_fasq,Adult (18+),,derived_cov_age,18.0,64.0,115,0.0,2026-09-01
+mede_2025_trust_scientists,Adult (18+),,derived_cov_age,18.0,100.0,71707,0.0,2026-09-01
+mbft_anunciacao_2024,Mixed,"Early (<6y), Adolescent (12-18y)",derived_cov_age,0.0,90.0,272842,0.282673,2026-09-01
+meng-competitiveness-2023,Adult (18+),,derived_cov_age,18.0,30.0,2385,0.0,2026-09-01
+meloni_2015_deq_ce_child,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+metacogmonitoring_double2025,Adult (18+),,derived_cov_age,18.0,76.0,300,0.0,2026-09-01
+meloni_2015_deq_oe_child,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+meloni_2015_parent_interests,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
+merlo2025_eng_cognitive,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+merlo2025_eng_emotional,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+merlo2025_eng_comprehensive,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+merlo2025_eng_agentic,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+meloni_2015_child_disab_knowledge,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+meloni_2015_parent_divers_ed,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
+meloni_2015_deq_oe_parent,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
+mekheimer_2026_paf,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
+mentalrotation_wolf_2024,Adult (18+),,derived_cov_age,18.0,22.0,37,0.0,2026-09-01
+merlo2025_eet,Mixed,Adolescent (12-18y),derived_cov_age,14.0,19.0,1065,0.192488,2026-09-01
+mekheimer_2026_cai,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
+mexico_2023_quality_cablecars,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+meloni_2015_child_ia_frequency,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+meloni_2015_child_ia_satisfaction,Child (<18y),Child (6-12y),derived_cov_age,6.0,11.0,76,0.0,2026-09-01
+meloni_2015_deq_ce_parent,Adult (18+),,derived_cov_age,31.0,55.0,76,0.0,2026-09-01
+mekheimer_2026_flp,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
+mekheimer_2026_id,Adult (18+),,derived_cov_age,28.0,58.0,160,0.0,2026-09-01
+medvedev_2018_sl,Adult (18+),,derived_cov_age,18.0,55.0,174,0.0,2026-09-01
+mexico_2023_quality_administration,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_buses,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_corruptionperception,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_police,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_streets,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_trains,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_parks,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_highways,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_schooling,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_corruption,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_confidence,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_transportationstations,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_wellbeingservice,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_roads,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_problems,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_university,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_generalcorruption,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_lightning,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_health,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_drainage,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_healthservice,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_water,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_trash,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_electricgovernment,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_homelightning,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_wellbeing,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2023_quality_low,Adult (18+),,derived_cov_age,18.0,98.0,78896,0.0,2026-09-01
+mexico_2025_q1safety_govtrust,Adult (18+),,derived_cov_age,18.0,98.0,23481,0.0,2026-09-01
+mexico_2024_q4safety_harassment,Adult (18+),,derived_cov_age,18.0,98.0,23439,0.0,2026-09-01
+mexico_2024_q2safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,24114,0.0,2026-09-01
+mexico_2025_q1safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,23591,0.0,2026-09-01
+mexico_2024_q2safety_harassment,Adult (18+),,derived_cov_age,18.0,98.0,24108,0.0,2026-09-01
+mexico_2024_q2safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,24106,0.0,2026-09-01
+mexico_2024_q4safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,23450,0.0,2026-09-01
+mexico_2024_q1safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,24022,0.0,2026-09-01
+mexico_2024_q1safety_govtrust,Adult (18+),,derived_cov_age,18.0,98.0,23904,0.0,2026-09-01
+mexico_2025_q2safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23712,0.0,2026-09-01
+mexico_2024_q3safety_violence,Adult (18+),,derived_cov_age,18.0,98.0,24087,0.0,2026-09-01
+mexico_2024_q2safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,24114,0.0,2026-09-01
+mexico_2025_q1safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23576,0.0,2026-09-01
+mexico_2024_q3safety_govtrust,Adult (18+),,derived_cov_age,18.0,98.0,23962,0.0,2026-09-01
+mexico_2024_q4safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23441,0.0,2026-09-01
+mexico_2025_q2safety_harassment,Adult (18+),,derived_cov_age,18.0,98.0,23712,0.0,2026-09-01
+mexico_2024_q3safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,24086,0.0,2026-09-01
+mexico_2025_q2safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,23717,0.0,2026-09-01
+mexico_2024_q1safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23999,0.0,2026-09-01
+mexico_2024_q3safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,24096,0.0,2026-09-01
+mexico_2025_q1safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,19980,0.0,2026-09-01
+mexico_2024_q4safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,23451,0.0,2026-09-01
+mexico_2025_q2safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,23717,0.0,2026-09-01
+mexico_2024_q3safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,24096,0.0,2026-09-01
+mexico_2024_q1safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,24022,0.0,2026-09-01
+milson_2026_self_esteem,Adult (18+),,derived_cov_age,18.0,34.0,904,0.0,2026-09-01
+mhscdc_fried_2020_motivation,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mexico_2025_q3safety_govtrust,Adult (18+),,derived_cov_age,18.0,98.0,23522,0.0,2026-09-01
+mhscdc_fried_2020_loneliness,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_tired,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+milavic_2019_psisysf,Adult (18+),,derived_cov_age,18.0,25.0,304,0.0,2026-09-01
+mfq_adolescent_athletes,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,18.0,152,0.013158,2026-09-01
+mhscdc_fried_2020_mindfullness,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_dass,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_se,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_conscientiousness,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mexico_2025_q4safety_harassment,Adult (18+),,derived_cov_age,18.0,98.0,23914,0.0,2026-09-01
+mhscdc_fried_2020_procrastination,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mexico_2025_q3safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,23642,0.0,2026-09-01
+mhscdc_fried_2020_smartphone,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_anger,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mhscdc_fried_2020_ps,Adult (18+),,derived_cov_age,18.0,48.0,80,0.0,2026-09-01
+mexico_2025_q4safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23913,0.0,2026-09-01
+milson_2026_body_satisfaction,Adult (18+),,derived_cov_age,18.0,34.0,904,0.0,2026-09-01
+mexico_2025_q3safety_conflicts,Adult (18+),,derived_cov_age,18.0,98.0,23634,0.0,2026-09-01
+mexico_2025_q3safety_violence,Adult (18+),,derived_cov_age,18.0,98.0,23632,0.0,2026-09-01
+mexico_2025_q3safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,23642,0.0,2026-09-01
+mexico_2025_q4safety_perception,Adult (18+),,derived_cov_age,18.0,98.0,23923,0.0,2026-09-01
+mexico_2025_q4safety_govperformance,Adult (18+),,derived_cov_age,18.0,98.0,23923,0.0,2026-09-01
+milson_2026_social_media_use,Adult (18+),,derived_cov_age,18.0,34.0,904,0.0,2026-09-01
+moe2025_erq,Adult (18+),,derived_cov_age,24.0,64.0,95,0.0,2026-09-01
+moe2025_scs,Adult (18+),,derived_cov_age,24.0,64.0,95,0.0,2026-09-01
+moe2025_sis,Adult (18+),,derived_cov_age,24.0,64.0,95,0.0,2026-09-01
+mohammed_2021_job_satisfaction,Adult (18+),,derived_cov_age,21.0,57.0,411,0.0,2026-09-01
+mohammed_2021_patient_safety_culture,Adult (18+),,derived_cov_age,21.0,57.0,411,0.0,2026-09-01
+monier_2026_pot,Elderly (minimum age >50),,derived_cov_age,51.0,80.0,107,0.0,2026-09-01
+monier_2026_sti,Elderly (minimum age >50),,derived_cov_age,51.0,80.0,105,0.0,2026-09-01
+moon_2023_coping_emotion,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,206,0.024272,2026-09-01
+moon_2023_coping_problem,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,206,0.024272,2026-09-01
+moon_2023_korean_proficiency,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,206,0.024272,2026-09-01
+moon_2023_pregnancy_stress,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,205,0.02439,2026-09-01
+moon_2023_selfesteem,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,206,0.024272,2026-09-01
+moon_2023_spousal_support,Mixed,Child (6-12y),derived_cov_age,9.0,42.0,206,0.024272,2026-09-01
+moore_2016_bdi,Adult (18+),,derived_cov_age,18.80355921,67.60301164,271,0.0,2026-09-01
+moral_absolutism_goyal_2025_dt,Adult (18+),,derived_cov_age,18.0,78.0,2412,0.0,2026-09-01
+moral_absolutism_goyal_2025_mfq,Adult (18+),,derived_cov_age,18.0,78.0,2412,0.0,2026-09-01
+moral_absolutism_goyal_2025_moral,Mixed,"Early (<6y), Child (6-12y)",derived_cov_age,1.0,84.0,4198,0.047165,2026-09-01
+moral_absolutism_goyal_2025_mr,Adult (18+),,derived_cov_age,18.0,78.0,2412,0.0,2026-09-01
+moral_absolutism_goyal_2025_nfc,Mixed,"Early (<6y), Child (6-12y)",derived_cov_age,1.0,78.0,2610,0.075862,2026-09-01
+moral_absolutism_goyal_2025_pp,Adult (18+),,derived_cov_age,18.0,78.0,2412,0.0,2026-09-01
+moral_absolutism_goyal_2025_stance,Adult (18+),,derived_cov_age,18.0,80.0,4212,0.0,2026-09-01
+morales_2021_asmr15,Adult (18+),,derived_cov_age,18.0,49.0,177,0.0,2026-09-01
+morales_2021_erq,Adult (18+),,derived_cov_age,18.0,49.0,177,0.0,2026-09-01
+mpsycho_wilpat,Adult (18+),,derived_cov_age,18.0,100.0,796,0.0,2026-09-01
+much_tte_2025_actionorientation,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+much_tte_2025_concentrationtask,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+much_tte_2025_currentmotivation,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+much_tte_2025_effort,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+much_tte_2025_matrixreasoning,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+musifeast17_vanderwalle_2025,Adult (18+),,derived_cov_age,18.0,75.0,701,0.0,2026-09-01
+muslih_2024_rses,Adult (18+),,derived_cov_age,21.0,63.0,260,0.0,2026-09-01
+nabizadehchianeh_2026_tempsa,Adult (18+),,derived_cov_age,18.0,38.0,713,0.0,2026-09-01
+nabwera_2021_bdi,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,358,0.332402,2026-09-01
+nam_2024_access,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_attitude,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_function,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_khlat,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_medint,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_selfcare,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+nam_2024_selfeff,Adult (18+),,derived_cov_age,24.0,66.0,214,0.0,2026-09-01
+narcissism_schneider_2025_study1_morf_hsns,Adult (18+),,derived_cov_age,16.0,72.0,1285,0.002335,2026-09-01
+neurodegenerative_huizinga_2019_user,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+neurodegenerative_huizinga_2019_cvc,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+neurodegenerative_huizinga_2019_brief,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+nas_rogoza_2024_study2_ngs,Adult (18+),,derived_cov_age,18.0,85.0,353,0.0,2026-09-01
+neurodegenerative_huizinga_2019_sims,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+nas_rogoza_2024_study1,Adult (18+),,derived_cov_age,18.0,78.0,369,0.0,2026-09-01
+nas_rogoza_2024_study2_nas,Adult (18+),,derived_cov_age,18.0,85.0,353,0.0,2026-09-01
+neurodegenerative_huizinga_2019_feda,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+neurodegenerative_huizinga_2019_dass,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+neurodegenerative_huizinga_2019_svc,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+nas_rogoza_2024_study2_nvs,Adult (18+),,derived_cov_age,18.0,85.0,353,0.0,2026-09-01
+neurodegenerative_huizinga_2019_vfq,Adult (18+),,derived_cov_age,18.0,95.0,1460,0.0,2026-09-01
+nfc_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+ngo_2025_green_attitude,Mixed,Adolescent (12-18y),derived_cov_age,12.0,25.0,237,0.417722,2026-09-01
+ngo_2025_green_pbc,Mixed,Adolescent (12-18y),derived_cov_age,12.0,25.0,237,0.417722,2026-09-01
+ngo_2025_green_purchase_behavior,Mixed,Adolescent (12-18y),derived_cov_age,12.0,25.0,237,0.417722,2026-09-01
+ngo_2025_green_purchase_intention,Mixed,Adolescent (12-18y),derived_cov_age,12.0,25.0,237,0.417722,2026-09-01
+ngo_2025_green_subjective_norm,Mixed,Adolescent (12-18y),derived_cov_age,12.0,25.0,237,0.417722,2026-09-01
+niazi_2020_mfq,Adult (18+),,derived_cov_age,17.0,64.0,300,0.003333,2026-09-01
+niazi_2020_mfq_stereotype,Adult (18+),,derived_cov_age,17.0,64.0,300,0.003333,2026-09-01
+nit_must_2014,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,16.0,1800,0.0,2026-09-01
+nomt_hooper_2024_study2,Adult (18+),,derived_cov_age,18.0,57.0,391,0.0,2026-09-01
+okamura_2018_burnout,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.0,7.0,261,0.0,2026-09-01
+okamura_2018_eol_attitude,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,2.0,7.0,261,0.0,2026-09-01
+onecm_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+opentsstvr_linnig_2025_ssq,Adult (18+),,derived_cov_age,18.0,30.0,98,0.0,2026-09-01
+opentsstvr_linnig_2025_vas,Adult (18+),,derived_cov_age,18.0,30.0,98,0.0,2026-09-01
+opentsstvr_linnig_2025_vrexperience,Adult (18+),,derived_cov_age,18.0,30.0,98,0.0,2026-09-01
+opladen2025_edeq,Adult (18+),,derived_cov_age,18.0,65.0,211,0.0,2026-09-01
+opladen2025_fkg,Adult (18+),,derived_cov_age,18.0,65.0,210,0.0,2026-09-01
+opladen2025_fks,Adult (18+),,derived_cov_age,18.0,65.0,211,0.0,2026-09-01
+opladen2025_wi,Adult (18+),,derived_cov_age,18.0,65.0,210,0.0,2026-09-01
+osorio_2023_dos,Mixed,Adolescent (12-18y),derived_cov_age,12.0,19.0,5303,0.101452,2026-09-01
+oxfordcovid_xue_2024_at,Mixed,Adolescent (12-18y),derived_cov_age,11.0,62.0,1018,0.345776,2026-09-01
+oxfordcovid_xue_2024_brs,Mixed,Adolescent (12-18y),derived_cov_age,12.0,60.0,344,0.162791,2026-09-01
+oxfordcovid_xue_2024_edeq,Mixed,Adolescent (12-18y),derived_cov_age,11.0,62.0,1028,0.348249,2026-09-01
+oxfordcovid_xue_2024_gad,Mixed,Adolescent (12-18y),derived_cov_age,11.0,62.0,1055,0.343128,2026-09-01
+oxfordcovid_xue_2024_pswq_c,Mixed,Adolescent (12-18y),derived_cov_age,3.0,45.0,958,0.079332,2026-09-01
+oxfordcovid_xue_2024_school,Mixed,Adolescent (12-18y),derived_cov_age,13.0,18.0,139,0.100719,2026-09-01
+oxfordcovid_xue_2024_swemws,Mixed,Adolescent (12-18y),derived_cov_age,11.0,62.0,995,0.351759,2026-09-01
+ozkurt_2026_basic_psych_needs,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,374,0.088235,2026-09-01
+ozkurt_2026_continuance_intention,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,374,0.088235,2026-09-01
+ozkurt_2026_ego_orientation,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,374,0.088235,2026-09-01
+ozkurt_2026_paces_enjoyment,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,374,0.088235,2026-09-01
+ozkurt_2026_sport_motivation,Mixed,Adolescent (12-18y),derived_cov_age,16.0,44.0,374,0.088235,2026-09-01
+pass20_klosowska_2025_dass_online,Adult (18+),,derived_cov_age,19.0,86.0,415,0.0,2026-09-01
+park_2021_pss10,Elderly (minimum age >50),,derived_cov_age,55.0,86.0,208,0.0,2026-09-01
+pavic_2022_science_literacy,Adult (18+),,derived_cov_age,20.0,73.0,577,0.0,2026-09-01
+pass20_klosowska_2025_pass_online,Adult (18+),,derived_cov_age,19.0,86.0,415,0.0,2026-09-01
+pavic_2022_vaccine_conspiracy,Adult (18+),,derived_cov_age,20.0,73.0,577,0.0,2026-09-01
+pass20_klosowska_2025_staix_online,Adult (18+),,derived_cov_age,19.0,86.0,415,0.0,2026-09-01
+pass20_klosowska_2025_pass_hospital,Adult (18+),,derived_cov_age,18.0,85.0,104,0.0,2026-09-01
+park_2021_swls,Elderly (minimum age >50),,derived_cov_age,55.0,86.0,208,0.0,2026-09-01
+parenting_anunciacao_2025_rejection,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+parenting_anunciacao_2025_values,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+pavic_2022_natural_immunity,Adult (18+),,derived_cov_age,20.0,73.0,577,0.0,2026-09-01
+parenting_anunciacao_2025_goals,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+pavic_2022_healthcare_trust,Adult (18+),,derived_cov_age,20.0,73.0,577,0.0,2026-09-01
+park_2024_mbi,Adult (18+),,derived_cov_age,22.0,54.0,329,0.0,2026-09-01
+parenting_anunciacao_2025_materialism,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+park_2024_ageism,Adult (18+),,derived_cov_age,22.0,54.0,329,0.0,2026-09-01
+pass20_klosowska_2025_csq_online,Adult (18+),,derived_cov_age,19.0,86.0,415,0.0,2026-09-01
+parenting_anunciacao_2025_material_rewards,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+parc_balaji_2017,Adult (18+),,derived_cov_age,18.0,23.0,132,0.0,2026-09-01
+parenting_anunciacao_2025_affect,Adult (18+),,derived_cov_age,7.0,60.0,108,0.009259,2026-09-01
+peng_2024_language_boredom,Child (<18y),Adolescent (12-18y),derived_cov_age,14.0,17.0,310,0.0,2026-09-01
+peng_2024_language_enjoyment,Child (<18y),Adolescent (12-18y),derived_cov_age,14.0,17.0,310,0.0,2026-09-01
+personalitychange_kramer_2025_mls,Adult (18+),,derived_cov_age,18.0,75.0,2088,0.0,2026-09-01
+pellerin2020_mwbs_gratbeing,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pellerin2020_cpc_optimism,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pellerin2020_cpc_selfefficacy,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pellerin2020_cpc_hope,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+peng_2024_grit,Child (<18y),Adolescent (12-18y),derived_cov_age,14.0,17.0,310,0.0,2026-09-01
+pellerin2020_asti,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pechorro_impulsivity_2021_ypitris,Adult (18+),,derived_cov_age,18.1848049281314,41.8069815195072,427,0.0,2026-09-01
+pellerin2020_gq6,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pechorro_impulsivity_2021_rpq,Adult (18+),,derived_cov_age,18.1848049281314,41.8069815195072,427,0.0,2026-09-01
+pellerin2020_3dws,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pechorro_impulsivity_2021_iid,Adult (18+),,derived_cov_age,18.1848049281314,41.8069815195072,427,0.0,2026-09-01
+pcl5_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,70.0,9506,0.37429,2026-09-01
+pcss_adolescent_athletes,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,18.0,152,0.013158,2026-09-01
+perfectionismlit_2021_engagement,Child (<18y),Adolescent (12-18y),derived_cov_age,14.0,15.0,64,0.0,2026-09-01
+pds_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+perfectionismlit_2021_prepost,Child (<18y),Adolescent (12-18y),derived_cov_age,14.0,15.0,67,0.0,2026-09-01
+pechorro_impulsivity_2021_bes,Adult (18+),,derived_cov_age,18.1848049281314,41.8069815195072,427,0.0,2026-09-01
+pellerin2020_serenity_acceptance,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+pellerin2020_mwbs_pd,Adult (18+),,derived_cov_age,16.0,81.0,674,0.001484,2026-09-01
+personalitychange_kramer_2025_bfi,Adult (18+),,derived_cov_age,18.0,75.0,2090,0.0,2026-09-01
+pezzuti_2025_coolpeople_main_individualism_USA,Adult (18+),,derived_cov_age,1.0,73.0,841,0.002378,2026-09-01
+pezzuti_2025_coolpeople_main_powerdistance_USA_Chile,Adult (18+),,derived_cov_age,1.0,73.0,1047,0.00191,2026-09-01
+pezzuti_2025_coolpeople_powerful,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_main_trendy_USA,Adult (18+),,derived_cov_age,1.0,73.0,841,0.002378,2026-09-01
+pezzuti_2025_coolpeople_main_tight_USA_Chile,Adult (18+),,derived_cov_age,1.0,73.0,1047,0.00191,2026-09-01
+personalitychange_kramer_2025_swls,Adult (18+),,derived_cov_age,18.0,75.0,2088,0.0,2026-09-01
+pezzuti_2025_coolpeople_autonomous,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_main_uncertaintyavoidance_USA_Chile,Adult (18+),,derived_cov_age,1.0,73.0,1047,0.00191,2026-09-01
+pezzuti_2025_coolpeople_main_nfc,Adult (18+),,derived_cov_age,1.0,75.0,3925,0.006369,2026-09-01
+petrowski_2019_sclk9,Mixed,Adolescent (12-18y),derived_cov_age,14.0,92.0,2502,0.035971,2026-09-01
+pezzuti_2025_coolpeople_main_materialism_Chile,Adult (18+),,derived_cov_age,18.0,55.0,206,0.0,2026-09-01
+petrocchi_2020_neuroticism,Adult (18+),,derived_cov_age,18.0,35.0,160,0.0,2026-09-01
+pezzuti_2025_coolpeople_adventurous,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_main_big5_SouthKorea,Adult (18+),,derived_cov_age,18.0,40.0,294,0.0,2026-09-01
+pezzuti_2025_coolpeople_main_collectivism_USA,Adult (18+),,derived_cov_age,1.0,73.0,841,0.002378,2026-09-01
+personalitychange_kramer_2025_sa,Adult (18+),,derived_cov_age,19.0,69.0,756,0.0,2026-09-01
+personalitychange_kramer_2025_rses,Adult (18+),,derived_cov_age,18.0,75.0,2088,0.0,2026-09-01
+pezzuti_2025_coolpeople_main_masculinity_Chile,Adult (18+),,derived_cov_age,18.0,55.0,206,0.0,2026-09-01
+pezzuti_2025_coolpeople_conforming,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_capable,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_main_collectivism_Mexico_Chile,Adult (18+),,derived_cov_age,18.0,59.0,456,0.0,2026-09-01
+personalitychange_kramer_2025_si,Adult (18+),,derived_cov_age,18.0,75.0,776,0.0,2026-09-01
+personalitychange_kramer_2025_sccs,Adult (18+),,derived_cov_age,18.0,75.0,2088,0.0,2026-09-01
+pezzuti_2025_coolpeople_benevolent,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_hedonistic,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pilch_2021_fear_covid19,Adult (18+),,derived_cov_age,18.0,72.0,387,0.0,2026-09-01
+pierro_2018_tf_past_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pierro_2018_selfforgive_s3,Adult (18+),,derived_cov_age,19.0,50.0,85,0.0,2026-09-01
+pierro_2018_locomotion_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pierro_2018_tf_future_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pierro_2018_negaffect_s3,Adult (18+),,derived_cov_age,19.0,50.0,85,0.0,2026-09-01
+piterova-slovak-science-related-populism,Adult (18+),,derived_cov_age,18.0,84.0,643,0.0,2026-09-01
+pilch_2021_coping_behavior,Adult (18+),,derived_cov_age,18.0,72.0,397,0.0,2026-09-01
+pilch_2021_protection_motivation,Adult (18+),,derived_cov_age,18.0,72.0,397,0.0,2026-09-01
+pierro_2018_selfforgive_s2,Adult (18+),,derived_cov_age,17.0,33.0,97,0.010309,2026-09-01
+pierro_2018_tf_present_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pierro_2018_locomotion_s1,Adult (18+),,derived_cov_age,17.0,79.0,323,0.003096,2026-09-01
+pierro_2018_selfforgive_s1,Adult (18+),,derived_cov_age,17.0,79.0,323,0.003096,2026-09-01
+pierro_2018_hfs_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pilch_2021_personality_ipip20,Adult (18+),,derived_cov_age,18.0,72.0,397,0.0,2026-09-01
+pierro_2018_locomotion_s3,Adult (18+),,derived_cov_age,19.0,50.0,85,0.0,2026-09-01
+pezzuti_2025_coolpeople_warm,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pierro_2018_assessment_s1,Adult (18+),,derived_cov_age,17.0,79.0,323,0.003096,2026-09-01
+pezzuti_2025_coolpeople_traditional,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pierro_2018_assessment_s4,Adult (18+),,derived_cov_age,20.0,45.0,189,0.0,2026-09-01
+pierro_2018_posaffect_s3,Adult (18+),,derived_cov_age,19.0,50.0,85,0.0,2026-09-01
+phq9_xiong_2025,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,8.0,70.0,9506,0.37429,2026-09-01
+pierro_2018_assessment_s3,Adult (18+),,derived_cov_age,19.0,50.0,85,0.0,2026-09-01
+pezzuti_2025_coolpeople_secure,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+pezzuti_2025_coolpeople_single-items,Adult (18+),,derived_cov_age,1.0,85.0,5608,0.004458,2026-09-01
+qi_2025_big_five,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qi_2025_dark_triad,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+ptacek2023_aaq2,Adult (18+),,derived_cov_age,18.0,70.0,298,0.0,2026-09-01
+qi_2025_individualism_collectivism,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qi_2025_modesty,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+ptacek2023_swls,Adult (18+),,derived_cov_age,18.0,70.0,298,0.0,2026-09-01
+ptacek2023_compact,Adult (18+),,derived_cov_age,18.0,70.0,298,0.0,2026-09-01
+ptcichina_zhan_2024,Mixed,Adolescent (12-18y),derived_cov_age,11.0,64.0,1206,0.46866,2026-09-01
+ptacek2023_dass21,Adult (18+),,derived_cov_age,18.0,70.0,298,0.0,2026-09-01
+powell_2018_trust,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
+poza2026_hlseu,Adult (18+),,derived_cov_age,18.0,75.0,101,0.0,2026-09-01
+portella_2022_racial_attitudes,Mixed,"Child (6-12y), Adolescent (12-18y)",derived_cov_age,10.0,54.0,3431,0.068202,2026-09-01
+powell_2018_qcae,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
+powell_2018_memory,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
+pranckeviciene_2022_gad7,Adult (18+),,derived_cov_age,18.0,57.0,1358,0.0,2026-09-01
+potocnik_2024_diabetes,Adult (18+),,derived_cov_age,30.0,91.0,287,0.0,2026-09-01
+pranckeviciene_2022_phq9,Adult (18+),,derived_cov_age,18.0,57.0,1358,0.0,2026-09-01
+previc_bohn2023,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.00616016427105,8.02737850787132,1190,0.0,2026-09-01
+powell_2018_affect,Adult (18+),,derived_cov_age,18.0,77.0,523,0.0,2026-09-01
+queiros_2018_qcae,Adult (18+),,derived_cov_age,18.0,60.0,562,0.0,2026-09-01
+randomness_angelike_2024_conscientiousness,Adult (18+),,derived_cov_age,18.0,87.0,835,0.0,2026-09-01
+quarter_life_crisis__cd,Adult (18+),,derived_cov_age,18.0,25.0,90,0.0,2026-09-01
+quarter_life_crisis__mwb,Adult (18+),,derived_cov_age,18.0,25.0,90,0.0,2026-09-01
+rapm_poulton_2022_timed,Adult (18+),,derived_cov_age,17.0,41.0,479,0.006263,2026-09-01
+quarter_life_crisis__iuc,Adult (18+),,derived_cov_age,18.0,25.0,90,0.0,2026-09-01
+randomness_angelike_2024_ncs,Adult (18+),,derived_cov_age,18.0,87.0,835,0.0,2026-09-01
+rapm_poulton_2022_untimed,Mixed,Adolescent (12-18y),derived_cov_age,13.0,84.0,608,0.042763,2026-09-01
+rahman_2022_phq9,Adult (18+),,derived_cov_age,18.0,29.0,677,0.0,2026-09-01
+rdatasets_gssabortion,Adult (18+),,derived_cov_age,18.0,89.0,64586,0.0,2026-09-01
+qi_2025_self_esteem,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qol_islam_2025,Elderly (minimum age >50),,derived_cov_age,60.0,100.0,1147,0.0,2026-09-01
+qi_2025_swls,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qi_2025_self_concept_clarity,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qi_2025_self_construal,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+qi_2025_panas,Adult (18+),,derived_cov_age,18.0,28.0,134,0.0,2026-09-01
+rmet_higgins_2022_tom,Adult (18+),,derived_cov_age,18.0,88.0,1182,0.0,2026-09-01
+rmet_higgins_2022_rmet,Adult (18+),,derived_cov_age,18.0,88.0,1222,0.0,2026-09-01
+robbins_2019_risk_quality_belief,Adult (18+),,derived_cov_age,18.0,74.0,802,0.0,2026-09-01
+robbins_2019_has_belief,Adult (18+),,derived_cov_age,18.0,74.0,802,0.0,2026-09-01
+rmet_higgins_2022_tas,Adult (18+),,derived_cov_age,18.0,88.0,1222,0.0,2026-09-01
+robbins_2019_farmtype_belief,Adult (18+),,derived_cov_age,18.0,74.0,802,0.0,2026-09-01
+rmet_higgins_2022_aq,Adult (18+),,derived_cov_age,18.0,88.0,1222,0.0,2026-09-01
+ribeiro_2024_msk_hq,Adult (18+),,derived_cov_age,21.0,87.0,189,0.0,2026-09-01
+ren_2019_scpv,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+ren2019_cpti,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+reinwarth_2023_domain_satisfaction,Mixed,Adolescent (12-18y),derived_cov_age,16.0,91.0,2460,0.023577,2026-09-01
+rfq8_wozniakprus_2022,Adult (18+),,derived_cov_age,17.0,50.0,538,0.007435,2026-09-01
+reinwarth_2023_phq4,Mixed,Adolescent (12-18y),derived_cov_age,16.0,91.0,2464,0.023539,2026-09-01
+ren2019_scpv,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+rfq_wozniakprus_2021,Adult (18+),,derived_cov_age,17.0,50.0,538,0.007435,2026-09-01
+ren_2019_ypic,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+ren2019_ypic,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+ren_2019_cpti,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,282,0.0,2026-09-01
+ren_2019_sdq,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,281,0.0,2026-09-01
+reinwarth_2023_loneliness3,Mixed,Adolescent (12-18y),derived_cov_age,16.0,91.0,2465,0.023529,2026-09-01
+ren2019_sdq,Child (<18y),"Child (6-12y), Adolescent (12-18y)",derived_cov_age,9.0,12.0,281,0.0,2026-09-01
+reinwarth_2023_domain_importance,Mixed,Adolescent (12-18y),derived_cov_age,16.0,91.0,2460,0.023577,2026-09-01
+reinwarth_2023_psych_symptoms,Mixed,Adolescent (12-18y),derived_cov_age,16.0,91.0,2465,0.023529,2026-09-01
+reinecke_2018_online_vigilance,Mixed,Adolescent (12-18y),derived_cov_age,14.0,67.0,229,0.052402,2026-09-01
+rzeszutek_2020_wwii_patgrandmother,Adult (18+),,derived_cov_age,18.0,43.0,294,0.0,2026-09-01
+rzeszutek_2020_swls,Adult (18+),,derived_cov_age,18.0,45.0,497,0.0,2026-09-01
+rzeszutek_2020_wwii_matgrandmother,Adult (18+),,derived_cov_age,18.0,44.0,379,0.0,2026-09-01
+rowe_2016_bai,Adult (18+),,derived_cov_age,16.0,54.0,80,0.0125,2026-09-01
+rzeszutek_2020_wwii_patgrandfather,Adult (18+),,derived_cov_age,18.0,44.0,269,0.0,2026-09-01
+rowe_2016_mfi20,Adult (18+),,derived_cov_age,16.0,54.0,80,0.0125,2026-09-01
+rosetti2023_gad7,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+rzeszutek_2020_ghq28,Adult (18+),,derived_cov_age,18.0,45.0,500,0.0,2026-09-01
+rvobgvmaas_lsf_lehing_2024,Adult (18+),,derived_cov_age,21.0,45.0,184,0.0,2026-09-01
+rzeszutek_2020_wwii_matgrandfather,Adult (18+),,derived_cov_age,18.0,43.0,324,0.0,2026-09-01
+romadlon_2022_facit,Adult (18+),,derived_cov_age,29.0,72.0,200,0.0,2026-09-01
+rosetti2023_climate_anxiety,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+rosetti_2023_cas,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+rowe_2016_symptoms,Adult (18+),,derived_cov_age,16.0,54.0,80,0.0125,2026-09-01
+Rosenberg_fadplus_goto2021,Adult (18+),,derived_cov_age,18.0,80.0,802,0.0,2026-09-01
+rosetti2023_climate_knowledge,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+romadlon_2022_bdi,Adult (18+),,derived_cov_age,29.0,72.0,200,0.0,2026-09-01
+romadlon_2022_mfi20,Adult (18+),,derived_cov_age,29.0,72.0,200,0.0,2026-09-01
+rosetti_2023_gad7,Adult (18+),,derived_cov_age,18.0,25.0,468,0.0,2026-09-01
+rodriguezandres_2016_mnemocity_usability,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,5.0,10.0,159,0.0,2026-09-01
+rodriguezsantero_2024_sats36,Adult (18+),,derived_cov_age,0.0,54.0,318,0.012579,2026-09-01
+shorttripm_silvia_2025,Adult (18+),,derived_cov_age,18.0,95.0,1150,0.0,2026-09-01
+selm_2019_climate_knowledge,Adult (18+),,derived_cov_age,18.0,91.0,192,0.0,2026-09-01
+sekowski_2025_mast,Adult (18+),,derived_cov_age,18.0,25.0,607,0.0,2026-09-01
+sd3ypl_klimczak_2019_ses,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,16.0,325,0.0,2026-09-01
+schoepp2022_test_anxiety,Adult (18+),,derived_cov_age,19.0,99.0,130,0.0,2026-09-01
+sekowski_2025_pies,Adult (18+),,derived_cov_age,18.0,25.0,607,0.0,2026-09-01
+sd3ypl_klimczak_2019_sd3,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,16.0,730,0.0,2026-09-01
+sd3ypl_klimczak_2019_bpqa,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,16.0,325,0.0,2026-09-01
+sd3ypl_klimczak_2019_bfq,Child (<18y),Adolescent (12-18y),derived_cov_age,13.0,16.0,325,0.0,2026-09-01
+safiye_2023_mbi,Adult (18+),,derived_cov_age,22.0,64.0,823,0.0,2026-09-01
+sd4_silvia_2025,Adult (18+),,derived_cov_age,18.0,95.0,530,0.0,2026-09-01
+safiye_2023_rfq,Adult (18+),,derived_cov_age,22.0,64.0,823,0.0,2026-09-01
+senyurt_2023_burnout,Adult (18+),,derived_cov_age,22.0,66.0,198,0.0,2026-09-01
+singh_2025_identity_gi,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+singh_2025_identity_pia,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+singh_2025_identity_cse,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+silva_2018_tfeq,Adult (18+),,derived_cov_age,18.0,35.0,2198,0.0,2026-09-01
+silk_2019_hyperactive,Child (<18y),Child (6-12y),derived_cov_age,6.3846679,8.7446957,355,0.0,2026-09-01
+singh_2025_identity_pba,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+silva_2018_mbds,Adult (18+),,derived_cov_age,18.0,35.0,802,0.0,2026-09-01
+silvia_2024_funny,Adult (18+),,derived_cov_age,18.0,88.0,1842,0.0,2026-09-01
+singh_2025_identity_pss,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+silva_2018_phcs,Adult (18+),,derived_cov_age,18.0,35.0,2198,0.0,2026-09-01
+silva_2018_whoqol,Adult (18+),,derived_cov_age,18.0,35.0,2198,0.0,2026-09-01
+silk_2019_inattentive,Child (<18y),Child (6-12y),derived_cov_age,6.3846679,8.7446957,355,0.0,2026-09-01
+singh_2025_identity_irs,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+skalka2025_ai_literacy,Adult (18+),,derived_cov_age,17.0,56.0,1205,0.010788,2026-09-01
+silva_2018_bsq,Adult (18+),,derived_cov_age,18.0,35.0,1396,0.0,2026-09-01
+singh_2025_identity_pit,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+singh_2025_identity_grit,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+singh_2025_identity_pds,Adult (18+),,derived_cov_age,18.0,92.0,1470,0.0,2026-09-01
+skurvydas_2024_vigour,Adult (18+),,derived_cov_age,17.0,79.0,1140,0.001754,2026-09-01
+sleboda_2021_risk_benefit,Adult (18+),,derived_cov_age,15.0,74.0,3202,0.002186,2026-09-01
+socialstereotype_hughes_2025_personality_self,Adult (18+),,derived_cov_age,18.0,79.0,297,0.0,2026-09-01
+song_2023_mpats,Adult (18+),,derived_cov_age,18.0,26.0,1238,0.0,2026-09-01
+smpi_lorenzoluaces_2020_phq9,Adult (18+),,derived_cov_age,18.0,92.0,487,0.0,2026-09-01
+song_2023_rses,Adult (18+),,derived_cov_age,18.0,26.0,1238,0.0,2026-09-01
+socialstereotype_hughes_2025_judgement,Adult (18+),,derived_cov_age,18.0,79.0,297,0.0,2026-09-01
+sned_bendall_2024,Adult (18+),,derived_cov_age,18.0,79.0,801,0.0,2026-09-01
+smpi_lorenzoluaces_2020_gad7,Adult (18+),,derived_cov_age,18.0,92.0,487,0.0,2026-09-01
+song_2023_slwai,Adult (18+),,derived_cov_age,18.0,26.0,1238,0.0,2026-09-01
+socialstereotype_hughes_2025_personality_other,Adult (18+),,derived_cov_age,18.0,79.0,297,0.0,2026-09-01
+smpi_lorenzoluaces_2020_shaps,Adult (18+),,derived_cov_age,18.0,92.0,487,0.0,2026-09-01
+smpi_lorenzoluaces_2020_smpi,Adult (18+),,derived_cov_age,18.0,92.0,487,0.0,2026-09-01
+spain_2023_identity_patriotism,Adult (18+),,derived_cov_age,18.0,98.0,7613,0.0,2026-09-01
+spain_2013_services_purpose,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2023_identity_centralism,Adult (18+),,derived_cov_age,18.0,98.0,7256,0.0,2026-09-01
+spain_2013_services_services,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_internetout,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_functioning,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_complaints,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2023_identity_authenticity,Adult (18+),,derived_cov_age,18.0,98.0,7632,0.0,2026-09-01
+spain_2013_services_othercontact,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_internet,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_inpersonsat,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2023_identity_europe,Adult (18+),,derived_cov_age,18.0,98.0,7435,0.0,2026-09-01
+spain_2023_identity_identification,Adult (18+),,derived_cov_age,18.0,98.0,7638,0.0,2026-09-01
+spain_2013_services_offices,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2013_services_importance,Adult (18+),,derived_cov_age,18.0,95.0,2482,0.0,2026-09-01
+spain_2023_identity_pride,Adult (18+),,derived_cov_age,18.0,98.0,7595,0.0,2026-09-01
+spain_2024_politics_actions,Adult (18+),,derived_cov_age,18.0,94.0,2562,0.0,2026-09-01
+spain_2024_ideology_parties,Adult (18+),,derived_cov_age,18.0,93.0,3885,0.0,2026-09-01
+spain_2024_ideology_leaders,Adult (18+),,derived_cov_age,18.0,93.0,3884,0.0,2026-09-01
+spain_2024_ideology_discomfort,Adult (18+),,derived_cov_age,18.0,94.0,3922,0.0,2026-09-01
+spain_2024_ideology_rights,Adult (18+),,derived_cov_age,18.0,94.0,3927,0.0,2026-09-01
+spain_2023_science_science,Adult (18+),,derived_cov_age,18.0,96.0,2923,0.0,2026-09-01
+spain_2023_science_dangers,Adult (18+),,derived_cov_age,18.0,96.0,2906,0.0,2026-09-01
+spain_2023_science_situations,Adult (18+),,derived_cov_age,18.0,96.0,2918,0.0,2026-09-01
+spain_2023_science_cuts,Adult (18+),,derived_cov_age,18.0,96.0,2900,0.0,2026-09-01
+spain_2023_science_activities,Adult (18+),,derived_cov_age,18.0,96.0,2922,0.0,2026-09-01
+spain_2023_science_benefits,Adult (18+),,derived_cov_age,18.0,96.0,2918,0.0,2026-09-01
+spain_2023_science_engagement,Adult (18+),,derived_cov_age,18.0,96.0,2924,0.0,2026-09-01
+spain_2023_science_technology,Adult (18+),,derived_cov_age,18.0,96.0,2919,0.0,2026-09-01
+spain_2023_identity_state,Adult (18+),,derived_cov_age,18.0,98.0,7615,0.0,2026-09-01
+spain_2024_ideology_society,Adult (18+),,derived_cov_age,18.0,94.0,3927,0.0,2026-09-01
+spain_2024_ideology_sympathy,Adult (18+),,derived_cov_age,18.0,93.0,3832,0.0,2026-09-01
+spain_2024_ideology_territorial,Adult (18+),,derived_cov_age,18.0,94.0,3916,0.0,2026-09-01
+spain_2023_science_functions,Adult (18+),,derived_cov_age,18.0,96.0,2921,0.0,2026-09-01
+spain_2023_science_interest,Adult (18+),,derived_cov_age,18.0,96.0,2921,0.0,2026-09-01
+spain_2023_identity_territorial,Adult (18+),,derived_cov_age,18.0,98.0,7642,0.0,2026-09-01
+spain_2024_ideology_identity,Adult (18+),,derived_cov_age,18.0,94.0,3928,0.0,2026-09-01
+spain_2023_science_future,Adult (18+),,derived_cov_age,18.0,96.0,2895,0.0,2026-09-01
+spain_2023_science_utility,Adult (18+),,derived_cov_age,18.0,96.0,2923,0.0,2026-09-01
+spain_2024_politics_associations,Adult (18+),,derived_cov_age,18.0,94.0,2561,0.0,2026-09-01
+spain_2024_ideology_welfare,Adult (18+),,derived_cov_age,18.0,94.0,3928,0.0,2026-09-01
+spain_2025_ai_awareness,Adult (18+),,derived_cov_age,18.0,96.0,4004,0.0,2026-09-01
+spain_2025_ai_concern,Adult (18+),,derived_cov_age,18.0,96.0,3994,0.0,2026-09-01
+spain_2025_ageism_youthpriority,Adult (18+),,derived_cov_age,18.0,97.0,5005,0.0,2026-09-01
+spain_2025_ai_comfort,Adult (18+),,derived_cov_age,18.0,95.0,3880,0.0,2026-09-01
+spain_2025_ageism_elderslights,Elderly (minimum age >50),,derived_cov_age,65.0,97.0,1030,0.0,2026-09-01
+spain_2025_ageism_bureaucracy,Elderly (minimum age >50),,derived_cov_age,65.0,97.0,1030,0.0,2026-09-01
+spain_2024_values_meaning,Adult (18+),,derived_cov_age,18.0,97.0,2843,0.0,2026-09-01
+spain_2024_politics_political,Adult (18+),,derived_cov_age,18.0,94.0,2552,0.0,2026-09-01
+spain_2025_ai_aspects,Adult (18+),,derived_cov_age,18.0,95.0,3872,0.0,2026-09-01
+spain_2025_ageism_comparison,Adult (18+),,derived_cov_age,18.0,97.0,4973,0.0,2026-09-01
+spain_2024_politics_values,Adult (18+),,derived_cov_age,18.0,94.0,2562,0.0,2026-09-01
+spain_2024_politics_online,Adult (18+),,derived_cov_age,18.0,94.0,2523,0.0,2026-09-01
+spain_2025_ageism_difficulty,Elderly (minimum age >50),,derived_cov_age,65.0,97.0,1028,0.0,2026-09-01
+spain_2024_politics_inperson,Adult (18+),,derived_cov_age,18.0,94.0,2562,0.0,2026-09-01
+spain_2024_values_values,Adult (18+),,derived_cov_age,18.0,97.0,2840,0.0,2026-09-01
+spain_2024_politics_difficulty,Adult (18+),,derived_cov_age,18.0,94.0,2538,0.0,2026-09-01
+spain_2024_values_difficulty,Adult (18+),,derived_cov_age,18.0,97.0,2815,0.0,2026-09-01
+spain_2025_ageism_youthslights,Adult (18+),,derived_cov_age,18.0,34.0,974,0.0,2026-09-01
+spain_2025_ageism_agreement,Adult (18+),,derived_cov_age,18.0,97.0,5004,0.0,2026-09-01
+spain_2024_politics_beliefs,Adult (18+),,derived_cov_age,18.0,94.0,2562,0.0,2026-09-01
+spain_2025_ageism_elderpriority,Adult (18+),,derived_cov_age,18.0,97.0,5005,0.0,2026-09-01
+spain_2025_ai_association,Adult (18+),,derived_cov_age,18.0,96.0,4003,0.0,2026-09-01
+spain_2025_ageism_problems,Adult (18+),,derived_cov_age,18.0,97.0,4940,0.0,2026-09-01
+spain_2024_values_political,Adult (18+),,derived_cov_age,18.0,97.0,2810,0.0,2026-09-01
+spain_2024_values_institutions,Adult (18+),,derived_cov_age,18.0,97.0,2841,0.0,2026-09-01
+spain_2025_europe_spending,Adult (18+),,derived_cov_age,18.0,96.0,2426,0.0,2026-09-01
+spain_2025_europe_policy,Adult (18+),,derived_cov_age,18.0,96.0,2426,0.0,2026-09-01
+spain_2025_europe_effects,Adult (18+),,derived_cov_age,18.0,96.0,2427,0.0,2026-09-01
+spain_2025_europe_impact,Adult (18+),,derived_cov_age,18.0,96.0,2427,0.0,2026-09-01
+spain_2025_democracy_system,Adult (18+),,derived_cov_age,18.0,97.0,4008,0.0,2026-09-01
+spain_2025_democracy_efficacy,Adult (18+),,derived_cov_age,18.0,97.0,4009,0.0,2026-09-01
+spain_2025_europe_attention,Adult (18+),,derived_cov_age,18.0,96.0,2426,0.0,2026-09-01
+spain_2025_ai_tools,Adult (18+),,derived_cov_age,18.0,95.0,3878,0.0,2026-09-01
+spain_2025_ai_sectors,Adult (18+),,derived_cov_age,18.0,95.0,3877,0.0,2026-09-01
+spain_2025_democracy_media,Adult (18+),,derived_cov_age,18.0,97.0,4005,0.0,2026-09-01
+spain_2025_democracy_judiciary,Adult (18+),,derived_cov_age,18.0,97.0,4008,0.0,2026-09-01
+spain_2025_ai_regulation,Adult (18+),,derived_cov_age,18.0,95.0,3880,0.0,2026-09-01
+spain_2025_europe_trust,Adult (18+),,derived_cov_age,18.0,96.0,2388,0.0,2026-09-01
+spain_2025_ai_frequency,Adult (18+),,derived_cov_age,18.0,95.0,2281,0.0,2026-09-01
+spain_2025_ai_eventsagree,Adult (18+),,derived_cov_age,18.0,95.0,3340,0.0,2026-09-01
+spain_2025_ai_datause,Adult (18+),,derived_cov_age,18.0,96.0,4002,0.0,2026-09-01
+spain_2025_europe_agreement,Adult (18+),,derived_cov_age,18.0,96.0,2427,0.0,2026-09-01
+spain_2025_democracy_priorities,Adult (18+),,derived_cov_age,18.0,97.0,4005,0.0,2026-09-01
+spain_2025_ai_possibilities,Adult (18+),,derived_cov_age,18.0,95.0,3880,0.0,2026-09-01
+spain_2025_democracy_parties,Adult (18+),,derived_cov_age,18.0,97.0,4010,0.0,2026-09-01
+spain_2025_democracy_internal,Adult (18+),,derived_cov_age,18.0,97.0,4008,0.0,2026-09-01
+spain_2025_democracy_trust,Adult (18+),,derived_cov_age,18.0,97.0,4010,0.0,2026-09-01
+spain_2025_ai_impact,Adult (18+),,derived_cov_age,18.0,96.0,4002,0.0,2026-09-01
+spain_2025_europe_awareness,Adult (18+),,derived_cov_age,18.0,96.0,2427,0.0,2026-09-01
+spain_2025_ai_risk,Adult (18+),,derived_cov_age,18.0,96.0,4002,0.0,2026-09-01
+spain_2025_sanitation_system,Adult (18+),,derived_cov_age,18.0,97.0,2426,0.0,2026-09-01
+spain_2025_inequality_recognition,Adult (18+),,derived_cov_age,18.0,97.0,4001,0.0,2026-09-01
+spain_2025_inequality_personal,Adult (18+),,derived_cov_age,18.0,97.0,4004,0.0,2026-09-01
+spain_2025_sanitation_mental,Adult (18+),,derived_cov_age,19.0,89.0,239,0.0,2026-09-01
+spain_2025_sanitation_digital,Adult (18+),,derived_cov_age,18.0,97.0,2427,0.0,2026-09-01
+spain_2025_inequality_trajectory,Adult (18+),,derived_cov_age,18.0,97.0,3999,0.0,2026-09-01
+spain_2025_sex_identity,Adult (18+),,derived_cov_age,16.0,98.0,9009,0.005994,2026-09-01
+spain_2025_sanitation_aicomfort,Adult (18+),,derived_cov_age,18.0,97.0,2422,0.0,2026-09-01
+spain_2025_sanitation_regional,Adult (18+),,derived_cov_age,18.0,97.0,2161,0.0,2026-09-01
+spain_2025_sanitation_airegulation,Adult (18+),,derived_cov_age,18.0,97.0,2413,0.0,2026-09-01
+spain_2025_sanitation_coordination,Adult (18+),,derived_cov_age,18.0,97.0,2427,0.0,2026-09-01
+spain_2025_sanitation_aiconcern,Adult (18+),,derived_cov_age,18.0,97.0,2409,0.0,2026-09-01
+spain_2025_sanitation_hospital,Adult (18+),,derived_cov_age,18.0,90.0,248,0.0,2026-09-01
+spain_2025_tourism_importance,Adult (18+),,derived_cov_age,18.0,96.0,2893,0.0,2026-09-01
+spain_2025_sanitation_services,Adult (18+),,derived_cov_age,18.0,97.0,2427,0.0,2026-09-01
+spain_2025_sanitation_primary,Adult (18+),,derived_cov_age,18.0,94.0,1972,0.0,2026-09-01
+spain_2025_sanitation_diagnostics,Adult (18+),,derived_cov_age,18.0,97.0,2425,0.0,2026-09-01
+spain_2025_sex_frequency,Adult (18+),,derived_cov_age,16.0,98.0,9004,0.005886,2026-09-01
+spain_2025_sanitation_specialist,Adult (18+),,derived_cov_age,18.0,89.0,1160,0.0,2026-09-01
+spain_2025_sex_attitudes,Adult (18+),,derived_cov_age,16.0,98.0,9006,0.005996,2026-09-01
+spain_2025_sex_condom,Adult (18+),,derived_cov_age,16.0,83.0,1187,0.00674,2026-09-01
+spain_2025_inequality_leaders,Adult (18+),,derived_cov_age,18.0,97.0,3942,0.0,2026-09-01
+spain_2025_fears_leaders,Adult (18+),,derived_cov_age,18.0,96.0,2034,0.0,2026-09-01
+spain_2025_inequality_inequality,Adult (18+),,derived_cov_age,18.0,97.0,4001,0.0,2026-09-01
+spain_2025_fears_prospect,Adult (18+),,derived_cov_age,18.0,96.0,2048,0.0,2026-09-01
+spain_2026_disinformation_hostility,Adult (18+),,derived_cov_age,18.0,95.0,3480,0.0,2026-09-01
+spain_2026_confidence_prospect,Adult (18+),,derived_cov_age,16.0,94.0,3022,0.007611,2026-09-01
+spain_2026_disinformation_memes,Adult (18+),,derived_cov_age,18.0,95.0,3456,0.0,2026-09-01
+spain_2026_international_eu,Adult (18+),,derived_cov_age,18.0,95.0,6000,0.0,2026-09-01
+spain_2026_elections_moreno,Adult (18+),,derived_cov_age,18.0,97.0,3996,0.0,2026-09-01
+spain_2026_confidence_retrospect,Adult (18+),,derived_cov_age,16.0,94.0,3027,0.007598,2026-09-01
+spain_2026_confidence_expectations,Adult (18+),,derived_cov_age,16.0,94.0,3025,0.007603,2026-09-01
+spain_2026_disinformation_humorperception,Adult (18+),,derived_cov_age,18.0,95.0,3490,0.0,2026-09-01
+spain_2026_elections_montero,Adult (18+),,derived_cov_age,18.0,97.0,3989,0.0,2026-09-01
+spain_2026_international_influence,Adult (18+),,derived_cov_age,18.0,95.0,5989,0.0,2026-09-01
+spain_2026_disinformation_humorclimate,Adult (18+),,derived_cov_age,18.0,95.0,3489,0.0,2026-09-01
+spain_2026_elections_gavira,Adult (18+),,derived_cov_age,18.0,97.0,3717,0.0,2026-09-01
+spain_2026_international_media,Adult (18+),,derived_cov_age,18.0,95.0,5999,0.0,2026-09-01
+spain_2026_elections_garcia,Adult (18+),,derived_cov_age,18.0,97.0,3711,0.0,2026-09-01
+spain_2026_international_confidence,Adult (18+),,derived_cov_age,18.0,95.0,5998,0.0,2026-09-01
+spain_2026_disinformation_concern,Adult (18+),,derived_cov_age,18.0,95.0,3492,0.0,2026-09-01
+spain_2026_disinformation_personalhumor,Adult (18+),,derived_cov_age,18.0,95.0,3493,0.0,2026-09-01
+spain_2026_disinformation_humorlimits,Adult (18+),,derived_cov_age,18.0,95.0,3482,0.0,2026-09-01
+spain_2026_elections_maillo,Adult (18+),,derived_cov_age,18.0,97.0,3755,0.0,2026-09-01
+spain_2026_disinformation_regulation,Adult (18+),,derived_cov_age,18.0,95.0,3492,0.0,2026-09-01
+spain_2026_elections_campaign,Adult (18+),,derived_cov_age,18.0,97.0,4030,0.0,2026-09-01
+spain_2026_elections_leaderscampaign,Adult (18+),,derived_cov_age,18.0,97.0,3960,0.0,2026-09-01
+spain_2026_confidence_macro,Adult (18+),,derived_cov_age,16.0,94.0,3018,0.007621,2026-09-01
+spain_2026_confidence_acquisition,Adult (18+),,derived_cov_age,16.0,94.0,3028,0.007596,2026-09-01
+spain_2026_disinformation_offense,Adult (18+),,derived_cov_age,18.0,95.0,3482,0.0,2026-09-01
+szabo_2025_bwas,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+szabo_2025_pss4,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+szabo_2025_work_conflict,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+spain_2026_love_desire,Adult (18+),,derived_cov_age,18.0,98.0,1508,0.0,2026-09-01
+spain_2026_prostitution_pornography,Adult (18+),,derived_cov_age,16.0,96.0,10019,0.002096,2026-09-01
+spain_2026_love_conceptions,Adult (18+),,derived_cov_age,18.0,98.0,5005,0.0,2026-09-01
+szabo_2025_work_addiction,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+spain_2026_prostitution_prostitution,Adult (18+),,derived_cov_age,16.0,96.0,10013,0.002097,2026-09-01
+szabo_2025_molbi,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+spain_2026_love_gestures,Adult (18+),,derived_cov_age,18.0,98.0,5006,0.0,2026-09-01
+spain_2026_love_association,Adult (18+),,derived_cov_age,18.0,98.0,5006,0.0,2026-09-01
+szabo_2025_wellbeing,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+szabo_2025_passion,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+spq_kay_2025,Adult (18+),,derived_cov_age,18.0,81.0,492,0.0,2026-09-01
+spain_2026_love_attitudes,Adult (18+),,derived_cov_age,18.0,98.0,5007,0.0,2026-09-01
+spain_2026_international_threat,Adult (18+),,derived_cov_age,18.0,95.0,5998,0.0,2026-09-01
+spain_2026_love_importance,Adult (18+),,derived_cov_age,18.0,98.0,5007,0.0,2026-09-01
+szabo_2025_family_conflict,Adult (18+),,derived_cov_age,25.0,82.0,184,0.0,2026-09-01
+spain_2026_love_apps,Adult (18+),,derived_cov_age,18.0,98.0,4579,0.0,2026-09-01
+spain_2026_love_usage,Adult (18+),,derived_cov_age,18.0,98.0,5003,0.0,2026-09-01
+ssd12_habib_2025,Adult (18+),,derived_cov_age,18.0,65.0,200,0.0,2026-09-01
+spain_2026_international_un,Adult (18+),,derived_cov_age,18.0,95.0,5999,0.0,2026-09-01
+spalex_aguasvivas_2020,Adult (18+),,derived_cov_age,1.0,115.0,167096,0.002657,2026-09-01
+taylorabdulai_2025_incentives,Adult (18+),,derived_cov_age,16.0,75.0,377,0.005305,2026-09-01
+taylorabdulai_2025_stop_behavior,Adult (18+),,derived_cov_age,16.0,75.0,377,0.005305,2026-09-01
+taylorabdulai_2025_info_source,Adult (18+),,derived_cov_age,16.0,75.0,377,0.005305,2026-09-01
+teacherjudgements_lohmann_2026_selfconcept,Adult (18+),,derived_cov_age,18.0,47.0,315,0.0,2026-09-01
+taylorabdulai_2025_conspiracy,Adult (18+),,derived_cov_age,17.0,69.0,253,0.003953,2026-09-01
+teicher_2015_mace_distress_helpless,Adult (18+),,derived_cov_age,18.20396988,27.14579055,924,0.0,2026-09-01
+teacherjudgements_lohmann_2026_conscientiousness,Adult (18+),,derived_cov_age,18.0,47.0,315,0.0,2026-09-01
+teicher_2015_mace_nonverbal,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+tang_2024_outcome_expectations,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+teicher_2015_mace_emot_neglect,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+teicher_2015_mace_distress_terrified,Adult (18+),,derived_cov_age,18.20396988,27.14579055,924,0.0,2026-09-01
+teacherjudgements_lohmann_2026_motivation,Adult (18+),,derived_cov_age,18.0,47.0,315,0.0,2026-09-01
+tang_2024_swls,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_caregiver_child_conflict,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1672,0.132177,2026-09-01
+tang_2024_caregiver_child_attachment,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_academic_satisfaction,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1673,0.133293,2026-09-01
+tang_2024_panas_negative,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_environmental_support,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1672,0.132775,2026-09-01
+tang_2024_self_construal,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_caregiver_child_regulation,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_self_efficacy,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_caregiver_child_communication,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1673,0.133293,2026-09-01
+tang_2024_goal_progress,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+tang_2024_panas_positive,Mixed,Adolescent (12-18y),derived_cov_age,15.0,21.0,1675,0.133134,2026-09-01
+teicher_2015_mace_verbal,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1050,0.0,2026-09-01
+teicher_2015_mace_witness_sib,Adult (18+),,derived_cov_age,18.20396988,27.14579055,839,0.0,2026-09-01
+torices_2025_isra_b,Adult (18+),,derived_cov_age,18.0,84.0,108,0.0,2026-09-01
+teq_novak_2021_selfesteem,Adult (18+),,derived_cov_age,15.0,85.0,195,0.015385,2026-09-01
+torices_2025_bapq,Adult (18+),,derived_cov_age,18.0,84.0,108,0.0,2026-09-01
+teq_novak_2021_socdes,Adult (18+),,derived_cov_age,15.0,85.0,197,0.015228,2026-09-01
+test_taking_much_2025_ct,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+teicher_2015_mace_physical,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+teicher_2015_mace_peer_physical,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1050,0.0,2026-09-01
+teicher_2015_mace_phys_neglect,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+teicher_2015_mace_sexual,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+teq_novak_2021_bfin,Adult (18+),,derived_cov_age,15.0,62.0,165,0.018182,2026-09-01
+test_taking_much_2025_ao,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+torices_2025_dflex,Adult (18+),,derived_cov_age,18.0,84.0,108,0.0,2026-09-01
+test_taking_much_2025_ef,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+test_taking_much_2025_cm,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+test_taking_much_2025_mr,Adult (18+),,derived_cov_age,18.0,40.0,1244,0.0,2026-09-01
+teicher_2015_mace_witness_parent,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1051,0.0,2026-09-01
+teodorini_2020_modafinil_attitudes,Adult (18+),,derived_cov_age,18.0,68.0,282,0.0,2026-09-01
+teshome_2021_pss10,Adult (18+),,derived_cov_age,13.0,65.0,798,0.001253,2026-09-01
+teicher_2015_mace_peer_verbal,Adult (18+),,derived_cov_age,18.20396988,27.14579055,1050,0.0,2026-09-01
+tsai_2017_treeit_h11_undo,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+trivia_fastrich_2017,Adult (18+),,derived_cov_age,8.0,79.0,1889,0.000529,2026-09-01
+tsai_2017_treeit_h12_language,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h1_consistency,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tran_2023_phq9,Adult (18+),,derived_cov_age,19.0,30.0,400,0.0,2026-09-01
+torok_2025_news_source_frequency,Adult (18+),,derived_cov_age,18.0,89.0,1003,0.0,2026-09-01
+trevisan_2018_aq,Mixed,Adolescent (12-18y),derived_cov_age,17.65366187542779,25.49486652977413,836,0.0311,2026-09-01
+torok_2025_legality_beliefs,Adult (18+),,derived_cov_age,18.0,85.0,957,0.0,2026-09-01
+torok_2025_data_security,Adult (18+),,derived_cov_age,18.0,89.0,997,0.0,2026-09-01
+torok_2025_news_source_trust,Adult (18+),,derived_cov_age,18.0,89.0,986,0.0,2026-09-01
+tsai_2017_treeit_h10_closure,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+torices_2025_isra_b_sit,Adult (18+),,derived_cov_age,18.0,84.0,108,0.0,2026-09-01
+tran_2023_gi_symptoms,Adult (18+),,derived_cov_age,19.0,30.0,400,0.0,2026-09-01
+torok_2025_facebook_uses,Adult (18+),,derived_cov_age,18.0,83.0,824,0.0,2026-09-01
+tran_2023_gad7,Adult (18+),,derived_cov_age,19.0,30.0,400,0.0,2026-09-01
+torok_2025_news_consumption,Adult (18+),,derived_cov_age,18.0,89.0,640,0.0,2026-09-01
+torok_2025_discourse_responsibility,Adult (18+),,derived_cov_age,18.0,89.0,940,0.0,2026-09-01
+torok_2025_social_media_effects,Adult (18+),,derived_cov_age,18.0,89.0,980,0.0,2026-09-01
+torok_2025_data_disclosure,Adult (18+),,derived_cov_age,18.0,85.0,1001,0.0,2026-09-01
+torok_2025_ai_acceptance,Adult (18+),,derived_cov_age,18.0,85.0,975,0.0,2026-09-01
+torok_2025_manipulation_fear,Adult (18+),,derived_cov_age,18.0,89.0,782,0.0,2026-09-01
+trusz_2025_nfi,Elderly (minimum age >50),,derived_cov_age,52.0,119.0,632,0.0,2026-09-01
+torok_2025_internet_use_frequency,Adult (18+),,derived_cov_age,18.0,89.0,786,0.0,2026-09-01
+tsai_2017_treeit_h13_control,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+trevisan_2018_mscs,Mixed,Adolescent (12-18y),derived_cov_age,17.533196440793976,25.49486652977413,1178,0.046689,2026-09-01
+turner_2022_sr_belief_change,Adult (18+),,derived_cov_age,3.0,54.0,250,0.004,2026-09-01
+twod_rotation_mather2023,Mixed,Adolescent (12-18y),derived_cov_age,14.0,90.0,1020195,0.201362,2026-09-01
+tuason_2021_wellbeing,Adult (18+),,derived_cov_age,18.0,82.0,888,0.0,2026-09-01
+turner_2022_cognitive_mediation,Adult (18+),,derived_cov_age,3.0,54.0,250,0.004,2026-09-01
+tuason_2021_loneliness_social,Adult (18+),,derived_cov_age,18.0,82.0,888,0.0,2026-09-01
+tuason_2021_covid_coping_enjoy,Adult (18+),,derived_cov_age,18.0,82.0,888,0.0,2026-09-01
+tuason_2021_sense_of_agency,Adult (18+),,derived_cov_age,18.0,82.0,888,0.0,2026-09-01
+tu_2022_achievement_motivation,Mixed,Adolescent (12-18y),derived_cov_age,10.0,59.0,122117,0.025811,2026-09-01
+tsai_2017_treeit_tam_pu,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_tam_bi,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tuason_2021_loneliness_emotional,Adult (18+),,derived_cov_age,18.0,82.0,888,0.0,2026-09-01
+tsai_2017_treeit_h9_error,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h7_flexibility,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_tam_peou,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h8_message,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h4_minimalist,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h6_feedback,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h5_memory,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h2_visibility,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h14_document,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+tsai_2017_treeit_h3_match,Elderly (minimum age >50),,derived_cov_age,57.0,87.0,101,0.0,2026-09-01
+uti_newlands_2023_rutiiq,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+uti_newlands_2023_wpai,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+uti_newlands_2023_uclals,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+validatedtouchvideo_smit_2025_strength,Adult (18+),,derived_cov_age,17.0,63.0,355,0.002817,2026-09-01
+validatedtouchvideo_smit_2025_category,Adult (18+),,derived_cov_age,17.0,63.0,355,0.002817,2026-09-01
+uti_newlands_2023_psq,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+uti_newlands_2023_fsdsr,Adult (18+),,derived_cov_age,18.0,84.0,198,0.0,2026-09-01
+uti_newlands_2023_gad,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+validatedtouchvideo_smit_2025_arousal,Adult (18+),,derived_cov_age,17.0,63.0,355,0.002817,2026-09-01
+uti_newlands_2023_phq,Adult (18+),,derived_cov_age,18.0,84.0,240,0.0,2026-09-01
+wang_2016_study1_relationship,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+wang_2016_study1_se,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+wang_2016_study1_power,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+wang_2016_study1_authliving,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+vermeiren_2022_rf,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+vermeiren_2022_vocab,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+vermeiren_2022_comp,Adult (18+),,derived_cov_age,18.0,21.0,199,0.0,2026-09-01
+wang_2016_study3_power,Adult (18+),,derived_cov_age,15.0,65.0,210,0.004762,2026-09-01
+wang_2016_study3_se,Adult (18+),,derived_cov_age,15.0,65.0,210,0.004762,2026-09-01
+vermeiren_2022_gk,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+wang_2016_study3_auth,Adult (18+),,derived_cov_age,15.0,65.0,210,0.004762,2026-09-01
+vanteffelen_2020_foa,Adult (18+),,derived_cov_age,18.0,70.0,376,0.0,2026-09-01
+vermeiren_2022_bfi,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+vollbracht_et_al_2026_ambulatory_assessment,Adult (18+),,derived_cov_age,18.0,68.0,406,0.0,2026-09-01
+vanteffelen_2020_trait_anger,Adult (18+),,derived_cov_age,18.0,70.0,376,0.0,2026-09-01
+vanteffelen_2020_pid5_hostility,Adult (18+),,derived_cov_age,18.0,70.0,376,0.0,2026-09-01
+vanteffelen_2020_aq_hostility,Adult (18+),,derived_cov_age,18.0,70.0,376,0.0,2026-09-01
+wang_2016_study1_authalien,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+vanteffelen_2020_rpq,Adult (18+),,derived_cov_age,18.0,70.0,347,0.0,2026-09-01
+vermeiren_2022_art,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+van_der_donk_2019_bdi,Adult (18+),,derived_cov_age,18.0,71.0,566,0.0,2026-09-01
+validatedtouchvideo_smit_2025_threat,Adult (18+),,derived_cov_age,17.0,63.0,355,0.002817,2026-09-01
+vermeiren_2022_nd,Adult (18+),,derived_cov_age,18.0,77.0,236,0.0,2026-09-01
+wang_2016_study1_authexternal,Adult (18+),,derived_cov_age,18.0,33.0,104,0.0,2026-09-01
+vocab_assessment_3_to_8_year_old_children,Child (<18y),"Early (<6y), Child (6-12y)",derived_cov_age,3.014373716632444,7.994524298425736,581,0.0,2026-09-01
+west_2021_retaliatory_aggression_bscs,Adult (18+),,derived_cov_age,18.0,24.0,165,0.0,2026-09-01
+west_2021_retaliatory_aggression_acq,Adult (18+),,derived_cov_age,18.0,24.0,167,0.0,2026-09-01
+weeldenburg_2022_targetmtpq,Child (<18y),Adolescent (12-18y),derived_cov_age,10.0,18.0,3150,0.002222,2026-09-01
+weber2026_name_knowledge,Adult (18+),,derived_cov_age,19.0,50.0,270,0.0,2026-09-01
+west_2021_retaliatory_aggression_ars,Adult (18+),,derived_cov_age,18.0,24.0,167,0.0,2026-09-01
+wen_2022_pyd,Child (<18y),Adolescent (12-18y),derived_cov_age,10.199999809265137,15.699999809265137,947,0.0,2026-09-01
+west_2021_retaliatory_aggression_bpaq,Adult (18+),,derived_cov_age,18.0,24.0,164,0.0,2026-09-01
+wang2022_dass_anxiety,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+wang2022_dass_stress,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+wang2022_iat,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+wang2022_dass_depression,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+weeldenburg_2022_brpeq_motivation,Child (<18y),Adolescent (12-18y),derived_cov_age,10.0,18.0,3150,0.002222,2026-09-01
+wang2022_igas,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+wang2022_fomo,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,15.0,324,0.0,2026-09-01
+wang_2025_impulse_control,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,516,0.0,2026-09-01
+wang_2025_growth_mindset,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,516,0.0,2026-09-01
+wang_2025_cognitive_fusion,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,515,0.0,2026-09-01
+wang_2025_automatic_thoughts,Child (<18y),Adolescent (12-18y),derived_cov_age,12.0,17.0,516,0.0,2026-09-01
+wang_2016_study3_social_desirability,Adult (18+),,derived_cov_age,15.0,65.0,210,0.004762,2026-09-01
+wolf_2017_study2_vitality_post,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study2_posaff_post,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study2_posaff_pre,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study2_anxiety_pre,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study2_nature_connect,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study2_anxiety_post,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolf_2017_study1_anxiety,Adult (18+),,derived_cov_age,18.0,60.0,132,0.0,2026-09-01
+wolf_2017_study1_posaff,Adult (18+),,derived_cov_age,18.0,60.0,132,0.0,2026-09-01
+wilmer-mrmet-and-rmet-validation-data-set-2022,Mixed,Adolescent (12-18y),derived_cov_age,12.0,88.0,2515,0.246521,2026-09-01
+williams-cps2019,Adult (18+),,derived_cov_age,18.0,46.0,361,0.0,2026-09-01
+wolf_2017_study1_vitality,Adult (18+),,derived_cov_age,18.0,60.0,132,0.0,2026-09-01
+williams-cps2018,Adult (18+),,derived_cov_age,18.0,46.0,186,0.0,2026-09-01
+williams-brat2020-study2,Adult (18+),,derived_cov_age,19.0,46.0,229,0.0,2026-09-01
+wiedemann_2021_text_readability,Adult (18+),,derived_cov_age,18.0,37.0,342,0.0,2026-09-01
+westhoff2023_stopd,Adult (18+),,derived_cov_age,19.0,32.0,113,0.0,2026-09-01
+wicherts_2023_5pft,Adult (18+),,derived_cov_age,18.0,25.0,8954,0.0,2026-09-01
+westhoff2023_pbat,Adult (18+),,derived_cov_age,19.0,32.0,113,0.0,2026-09-01
+wiedemann_2021_risk_perception,Adult (18+),,derived_cov_age,18.0,37.0,342,0.0,2026-09-01
+west_2021_retaliatory_aggression_cast,Adult (18+),,derived_cov_age,18.0,24.0,141,0.0,2026-09-01
+wijesinghe_2025_sustained_agile_usage,Child (<18y),Early (<6y),derived_cov_age,0.0,6.0,391,0.0,2026-09-01
+williams-brat2020_study1,Adult (18+),,derived_cov_age,18.0,46.0,206,0.0,2026-09-01
+wolf_2017_study2_video_liking,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+west_2021_retaliatory_aggression_study4_deq,Adult (18+),,derived_cov_age,18.0,24.0,167,0.0,2026-09-01
+wilmer-mrmet-normative-data-set-2022,Mixed,Adolescent (12-18y),derived_cov_age,12.0,89.0,9295,0.199139,2026-09-01
+wilmer-rmet-normative-data-set-2022,Mixed,Adolescent (12-18y),derived_cov_age,12.0,89.0,17626,0.151254,2026-09-01
+wurm_2016_hbi,Adult (18+),,derived_cov_age,15.0,100.0,5897,0.000339,2026-09-01
+wolters2026_css,Adult (18+),,derived_cov_age,19.0,72.0,83,0.0,2026-09-01
+xu_2016_pqb,Mixed,Adolescent (12-18y),derived_cov_age,15.0,45.0,505,0.120792,2026-09-01
+wolters2026_panas_pa,Adult (18+),,derived_cov_age,19.0,72.0,83,0.0,2026-09-01
+wolf_2017_study2_vitality_pre,Adult (18+),,derived_cov_age,18.0,60.0,256,0.0,2026-09-01
+wolters2026_wi,Adult (18+),,derived_cov_age,19.0,72.0,83,0.0,2026-09-01
+xiong_2025_dass21,Adult (18+),,derived_cov_age,18.0,25.0,974,0.0,2026-09-01
+wolters2026_symptom_concerns,Adult (18+),,derived_cov_age,19.0,72.0,83,0.0,2026-09-01
+wooly_hartman2022,Adult (18+),,derived_cov_age,15.0,97.0,1561,0.000641,2026-09-01
+xu_2023_hi,Adult (18+),,derived_cov_age,16.0,72.0,735,0.002721,2026-09-01
+wurm_2016_mdi,Adult (18+),,derived_cov_age,15.0,100.0,5897,0.000339,2026-09-01
+wolters2026_panas_na,Adult (18+),,derived_cov_age,19.0,72.0,83,0.0,2026-09-01
+xu_2023_mi,Adult (18+),,derived_cov_age,16.0,72.0,735,0.002721,2026-09-01
+xu_2023_oic,Adult (18+),,derived_cov_age,17.0,72.0,512,0.001953,2026-09-01
+xu_2023_pca,Adult (18+),,derived_cov_age,16.0,72.0,735,0.002721,2026-09-01
+xu_2025_hcq_p,Adult (18+),,derived_cov_age,19.0,105.0,359,0.0,2026-09-01
+xue_2024_full_dataset,Adult (18+),,derived_cov_age,18.0,73.0,137,0.0,2026-09-01
+xue_2024_study2_efa,Adult (18+),,derived_cov_age,18.0,76.0,333,0.0,2026-09-01
+xue_2024_study3_cfa,Adult (18+),,derived_cov_age,18.0,76.0,943,0.0,2026-09-01
+yang_2023_emotional_eating_cesd,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
+yang_2023_emotional_eating_ders,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
+yang_2023_emotional_eating_eesr,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
+yang_2023_emotional_eating_uppsp,Adult (18+),,derived_cov_age,18.0,26.0,494,0.0,2026-09-01
+yang_2026_erq,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
+yang_2026_igd_benefits,Child (<18y),Adolescent (12-18y),derived_cov_age,6.0,18.0,1032,0.000969,2026-09-01
+yang_2026_igd_criteria,Child (<18y),Adolescent (12-18y),derived_cov_age,6.0,18.0,1032,0.000969,2026-09-01
+yang_2026_pars3,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
+yang_2026_rrs,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
+yang_2026_stress_response,Mixed,Adolescent (12-18y),derived_cov_age,17.0,23.0,1033,0.057115,2026-09-01
+yao_2020_bai,Adult (18+),,derived_cov_age,18.0,66.0,1008,0.0,2026-09-01
+yao_2020_bdi,Adult (18+),,derived_cov_age,18.0,66.0,821,0.0,2026-09-01
+yao_2020_epq,Adult (18+),,derived_cov_age,18.0,66.0,1008,0.0,2026-09-01
+yao_2020_gad,Adult (18+),,derived_cov_age,18.0,66.0,1008,0.0,2026-09-01
+yao_2020_ius,Adult (18+),,derived_cov_age,18.0,66.0,1383,0.0,2026-09-01
+yao_2020_pswq,Adult (18+),,derived_cov_age,18.0,66.0,1383,0.0,2026-09-01
+yoshimura_2026_es_scale,Adult (18+),,derived_cov_age,20.0,39.0,522,0.0,2026-09-01
+yoshimura_2026_isu_scale,Adult (18+),,derived_cov_age,20.0,39.0,522,0.0,2026-09-01
+yoshimura_2026_psych_safety,Adult (18+),,derived_cov_age,20.0,39.0,522,0.0,2026-09-01
+yu_2015_family_environment,Adult (18+),,derived_cov_age,16.0,26.0,4582,0.007202,2026-09-01
+yu2025,Adult (18+),,derived_cov_age,18.0,49.0,167,0.0,2026-09-01
+zaehl2023_hexaco,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_balance,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_cohesion,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_commitment,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_communication,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_coordination,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zaehl2023_twq_support,Adult (18+),,derived_cov_age,18.0,39.0,54,0.0,2026-09-01
+zvi_2022_harassment_perception,Adult (18+),,derived_cov_age,20.0,68.0,211,0.0,2026-09-01
+zvi_2022_legal_judgment,Adult (18+),,derived_cov_age,20.0,68.0,211,0.0,2026-09-01
+zhao_2025_digital_literacy,Adult (18+),,derived_cov_age,16.0,75.0,6202,0.012238,2026-09-01
+zvi_2022_rei,Adult (18+),,derived_cov_age,20.0,68.0,211,0.0,2026-09-01
+zhou_2025_ehealth_literacy,Adult (18+),,derived_cov_age,18.0,23.0,14892,0.0,2026-09-01
+zhou_2025_peer_relationship,Adult (18+),,derived_cov_age,18.0,23.0,14892,0.0,2026-09-01

@@ -1,0 +1,32 @@
+# Packaging for `red_up` only.
+#
+# This deliberately does NOT package the rest of `src/`: that tree is a corpus
+# of per-dataset processing scripts and pipelines meant to be run in place, not
+# a library. The single explicit entry in `packages` below keeps it that way --
+# do not switch this to setuptools' automatic package discovery.
+#
+# red_up is not in Python-pkg either. That package is the public, read-only IRW
+# client; a write-scoped uploader would change what it is.
+#
+#   pip install -e /path/to/irw/src
+#
+# after which `red_up` is on PATH and `python3 -m red_up` works from anywhere.
+# The install must be editable and must point at a real `src` checkout: red_up
+# reads metadata/redivis_config.R next to itself for the dataset list.
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irw-red-up"
+version = "1.0.0"
+description = "One uploader for every IRW Redivis dataset"
+requires-python = ">=3.9"
+dependencies = ["redivis>=0.18.0"]
+
+[project.scripts]
+red_up = "red_up.cli:main"
+
+[tool.setuptools]
+packages = ["red_up"]

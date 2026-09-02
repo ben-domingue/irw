@@ -16,25 +16,35 @@ the data lives, and which document is authoritative when two disagree.
 streamlit run irw-dataset-builder/main.py
 ```
 
-**Metadata pipeline** (run in order):
+**Metadata pipeline.** `metadata/` holds twelve numbered scripts, and numeric
+order is *not* run order. Do not invent a sequence — run the wrapper, which is
+authoritative because it is the thing that actually executes:
+
 ```bash
-Rscript metadata/01_metadata.R
-Rscript metadata/02_biblio.R
-Rscript metadata/03_tags.R
-Rscript metadata/04_tables.R
+.claude/skills/irw-site-update/scripts/run_pipeline.sh        # default: 01 02 03 05 06 07 08 09
+.claude/skills/irw-site-update/scripts/run_pipeline.sh 01 03  # just metadata.csv + tags.csv
 ```
+
+It snapshots each stage's CSVs before and after so `diff_csv.py` can report what
+changed. `04_tables.R` (QC) is deliberately excluded — superseded by
+`audit_tables.R`; `10_collections.R` runs between 08 and 09; `09_hero_status.R`
+must run last. Nothing here uploads to Redivis: uploading is a separate,
+manual step, and it only ever writes a draft version for a human to publish.
+One tool does every upload — `red_up` (see `red_up/README.md`); the metadata
+CSVs go up with `upload_meta.py`, which is a thin wrapper around it.
 
 **Individual data processing scripts** are run standalone — there is no central build system. Scripts live in `data/` and are executed one at a time to convert raw datasets.
 
 ## Repository Structure
 
-- **`data/`** — 500+ per-dataset processing scripts (R, Python, Stata). Each converts raw data into IRW format. Branch naming convention: `username/dataset_identifier`.
-- **`metadata/`** — Numbered R scripts that maintain and upload dataset metadata to Redivis.
+- **`data/`** — Per-dataset processing scripts (R, Python, Stata), one per dataset. Each converts raw data into IRW format and is self-contained. Branch naming convention: `username/dataset_identifier`.
+- **`metadata/`** — Numbered R scripts that regenerate the metadata, biblio, tags, item text and collections CSVs. Uploading them is a separate manual step (see above).
 - **`irw-dataset-builder/`** — Streamlit web app for interactively building IRW-formatted datasets. Modular tabs in `tabs/`, shared components in `components/`, helpers in `utils/`.
 - **`itemtext/`** — Scripts for extracting and uploading item text content.
 - **`manuscript_src/`** — Reproducible analysis scripts for the IRW paper.
 - **`misc/`** — Utility R functions (reliability, psychometric models).
 - **`tags/`** — Tagging data with human annotators.
+- **`collections/`** — Curated groupings of tables (`registry.csv` + `curated/`), read by `metadata/10_collections.R`.
 - **`training/`** — Workshop and training materials.
 - **`processing_notes/`** — Data processing guidelines and licensing docs.
 - **`automated_finding/`** — Automated pipeline that discovers, triages, and
