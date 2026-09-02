@@ -57,7 +57,4 @@ jobs:
       - name: validate_irw.R still parses
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
-          Rscript -e 'source("misc/validate_irw.R"); \
-            d <- data.frame(id=c(1,2), item=c("a","b"), resp=c(1,2)); \
-            stopifnot(validate_irw_status(validate_irw(d, "ci")) == 0L); \
-            cat("validate_irw.R OK\n")'
+          Rscript misc/tests/smoke_validate_irw.R
