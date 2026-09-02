@@ -161,6 +161,30 @@ ever creates a *draft* Redivis version — Redivis keeps an unpublished working
 copy that nobody outside the project can see until someone clicks publish. That
 click is always a human action taken after reviewing a diff.
 
+**Changes may sit in a draft for up to one week.** Releasing after every upload
+is unmanageable, so batching is the norm and an unreleased draft is a normal
+state rather than a loose end. The week is the outside limit, not a target.
+
+Two things follow that are easy to get wrong:
+
+- **Until the version is released, the upload has not happened** as far as
+  anyone outside the project is concerned. `irw_fetch()`, `irw_itemtext()`,
+  `irw_metadata()` and the site all read the *released* version. A script that
+  reports a successful upload and a `count(*)` that matches has told you about
+  the draft and nothing else.
+- **A correction to already-published data is not a normal draft item.** Adding
+  a table late means the corpus is missing something; correcting one means the
+  corpus is actively serving something wrong, and the week does not apply.
+  Release those when they land. `irw#1816` is the worked example: three item
+  text tables served at 2x for a day, and the fix sat correct-but-invisible in
+  the draft until the version went out.
+
+`python3 -m red_up.drafts` reports every dataset with unreleased changes and how
+long the public corpus has been behind, exiting non-zero past the window. It
+counts **time since the last released version**, because the two obvious clocks
+both lie: a table's `updatedAt` resets for every table in the draft whenever the
+draft is touched, and the draft version's own `createdAt` resets on each upload.
+
 `red_up` replaced thirteen near-identical copies of one script, each hardcoding
 a different dataset, so the destination used to be decided by which file you
 happened to run. It reads the dataset list from `metadata/redivis_config.R`,

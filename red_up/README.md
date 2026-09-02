@@ -113,3 +113,30 @@ Roadmap 1.3–1.5: merging `misc/validate_irw.R` with
 `automated_finding/irw_triage_updated.py::run_qc()` into one validator, the
 GitHub Action, and the sweep over `data/pub/`. `checks.run_validator` is the
 seam it plugs into.
+
+## Drafts, and the one-week window
+
+`red_up` only ever writes a **draft** version. Releasing is a human action on
+Redivis, and project policy allows changes to sit in a draft for **up to one
+week** — releasing after every upload is unmanageable, so batching is expected.
+
+```
+python3 -m red_up.drafts              # every dataset, how far behind each one is
+python3 -m red_up.drafts --verbose    # and what the draft actually changes
+python3 -m red_up.drafts --days 3
+```
+
+Exit code 1 means something is past the window.
+
+Two cautions the tool exists to enforce:
+
+- **A successful upload is not a published one.** The `count(*)` check in
+  `red_up` verifies the draft. Everything users touch reads the released
+  version.
+- **Corrections to published data are exempt from the week.** A late addition
+  means the corpus is incomplete; a late correction means it is serving
+  something wrong. See `ARCHITECTURE.md` §4 and `ben-domingue/irw#1816`.
+
+The check counts *time since the last release*, not the age of a table or of the
+draft — both of those reset whenever the draft is touched, so both would read as
+minutes old on a month-old backlog.

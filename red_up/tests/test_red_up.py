@@ -229,3 +229,90 @@ class Planning(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --- red_up.drafts -----------------------------------------------------------
+
+import datetime as _dt
+
+from red_up import drafts as _drafts
+
+
+class _Version:
+    def __init__(self, tag, released, created_ms):
+        self.properties = {"tag": tag, "isReleased": released, "createdAt": created_ms}
+
+
+class _Table:
+    def __init__(self, name, rows):
+        self.name = name
+        self.properties = {"numRows": rows}
+
+
+def _ms(days_ago, now):
+    return int((now - _dt.timedelta(days=days_ago)).timestamp() * 1000)
+
+
+def _fake_redivis(monkeypatch, versions, draft_tables, released_tables):
+    """Stand in for the redivis module inside inspect()."""
+    class _DS:
+        def __init__(self, version=None):
+            self._v = version
+
+        def list_versions(self):
+            return versions
+
+        def list_tables(self):
+            src = draft_tables if self._v == "next" else released_tables
+            return [_Table(n, r) for n, r in src.items()]
+
+    class _User:
+        def dataset(self, name, version=None):
+            return _DS(version)
+
+    import sys, types
+    mod = types.ModuleType("redivis")
+    mod.user = lambda owner: _User()
+    monkeypatch.setitem(sys.modules, "redivis", mod)
+
+
+def _target(name="irw_text"):
+    from red_up.targets import Target
+    return Target(name=name, label="item text", kind="aux", source="text")
+
+
+def test_drafts_reports_pending_and_age(monkeypatch):
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _fake_redivis(
+        monkeypatch,
+        versions=[_Version("v1.0", True, _ms(10, now)), _Version("next", False, _ms(0.1, now))],
+        draft_tables={"a__items": 10, "b__items": 20, "c__items": 5},
+        released_tables={"a__items": 10, "b__items": 99},
+    )
+    r = _drafts.inspect("datapages", _target(), now)
+    assert r["has_draft"] is True
+    assert r["added"] == ["c__items"]
+    assert r["changed"] == ["b__items"]
+    assert r["removed"] == []
+    assert r["pending"] == 2
+    # age is time since the last RELEASE, not since the draft was touched
+    assert 9.5 < r["days_since_release"] < 10.5
+
+
+def test_drafts_ignores_a_draft_identical_to_the_release(monkeypatch):
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _fake_redivis(
+        monkeypatch,
+        versions=[_Version("v1.0", True, _ms(30, now)), _Version("next", False, _ms(0.1, now))],
+        draft_tables={"a__items": 10},
+        released_tables={"a__items": 10},
+    )
+    r = _drafts.inspect("datapages", _target(), now)
+    assert r["pending"] == 0, "an untouched draft is not a backlog, however old the release"
+
+
+def test_drafts_reports_no_draft(monkeypatch):
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _fake_redivis(monkeypatch, versions=[_Version("v1.0", True, _ms(3, now))],
+                  draft_tables={}, released_tables={"a__items": 10})
+    assert _drafts.inspect("datapages", _target(), now)["has_draft"] is False
