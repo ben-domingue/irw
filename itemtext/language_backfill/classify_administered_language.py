@@ -1,44 +1,79 @@
-import csv,io,os,re,collections,unicodedata
-TXT='/tmp/claude-1000/itbf/text'
-tg={r['table']:r for r in csv.DictReader(io.open('/tmp/claude-1000/itbf/targets.csv',encoding='utf-8'))}
-SCRIPTS=[('CJK',r'[一-鿿]'),('Hangul',r'[가-힯]'),('Kana',r'[぀-ヿ]'),('Cyrillic',r'[Ѐ-ӿ]'),
- ('Arabic',r'[؀-ۿ]'),('Devanagari',r'[ऀ-ॿ]'),('Hebrew',r'[֐-׿]'),('Greek',r'[Ͱ-Ͽ]'),('Thai',r'[฀-๿]')]
-EN=set("the a an of to and or is are you your i in for on with that this it not do does have has was were be been at as if any how much often when what which who please rate following statements agree disagree never always sometimes very my me we they he she her his am can will would should about from by".split())
+"""Classify each text field of a published IRW item text table as administered
+wording or English.
+
+Positive evidence only. Two rules can PROVE a field is not English:
+
+  1. a non-Latin script (CJK, Kana, Hangul, Cyrillic, Arabic, Devanagari,
+     Hebrew, Greek, Thai);
+  2. Latin script carrying more than three non-ASCII letters (diacritics).
+
+Everything else is NEEDS_REVIEW. Nothing is ever called non-English on the
+absence of English.
+
+Two rejected heuristics, both of which produced confident wrong answers:
+
+  * "few English function words => non-English" fires on word-list
+    instruments. `amarilla_2020_barthel` ("Bathing", "Bladder", "Grooming"),
+    `geography` ("Lusaka (city)"), `gilbert_meta_40` ("Add: 4 + 1") are all
+    English and all score zero. It invented 21 non-English tables.
+  * The same rule on short option labels ("Never", "A little") invented 45
+    false mixed-language tables before that.
+
+Both failures share a cause: English prose is only one of the shapes English
+item text takes, so a test tuned to prose reads every other shape as foreign.
+"""
+import csv, io, os, re, sys, collections, unicodedata
+
+TXT = sys.argv[1] if len(sys.argv) > 1 else '/tmp/claude-1000/itbf/text'
+OUT = sys.argv[2] if len(sys.argv) > 2 else '/tmp/claude-1000/itbf/verdict_strict.csv'
+SCRIPTS = [('CJK', r'[一-鿿]'), ('Hangul', r'[가-힯]'),
+           ('Kana', r'[぀-ヿ]'), ('Cyrillic', r'[Ѐ-ӿ]'),
+           ('Arabic', r'[؀-ۿ]'), ('Devanagari', r'[ऀ-ॿ]'),
+           ('Hebrew', r'[֐-׿]'), ('Greek', r'[Ͱ-Ͽ]'),
+           ('Thai', r'[฀-๿]')]
+FIELDS = ('item_text', 'option_text', 'instructions', 'section_prompt')
+
+
 def judge(t):
-    """Return (verdict, script). Only positive evidence counts."""
-    t=re.sub(r'\bNA\b','',t or '').strip()
-    if not t: return 'blank',''
-    sc=[n for n,p in SCRIPTS if len(re.findall(p,t))>2]
-    if sc: return 'ADMIN',';'.join(sc)                    # non-Latin script: definitive
-    dia=len([c for c in t if ord(c)>127 and unicodedata.category(c).startswith('L')])
-    if dia>3: return 'ADMIN','latin-diacritic'            # Latin + diacritics: strong
-    w=re.findall(r"[A-Za-z']+",t.lower())
-    if len(w)<25: return 'ASCII_SHORT',''                 # too little text to judge
-    r=sum(1 for x in w if x in EN)/len(w)
-    if r>=0.15: return 'ENGLISH',''
-    if r<0.05:  return 'ADMIN','latin-nonenglish'
-    return 'ASCII_UNSURE',''
-FIELDS=('item_text','option_text','instructions','section_prompt')
-out=[]
-for fn in sorted(os.listdir(TXT)):
-    if not fn.endswith('.csv'): continue
-    tb=fn[:-4]
-    d=list(csv.DictReader(io.open(os.path.join(TXT,fn),encoding='utf-8')))
-    if not d: out.append([tb,'EMPTY']+['-']*4+['','',tg.get(tb,{}).get('lang_tag','')]); continue
-    per={}; scr=set()
-    for c in FIELDS:
-        if c not in d[0]: per[c]='missing'; continue
-        v,s=judge(' '.join((r.get(c) or '') for r in d)); per[c]=v
-        if s and not s.startswith('latin'): scr.add(s)
-    it=per['item_text']                                    # item_text is the load-bearing field
-    others=[per[c] for c in ('option_text','instructions','section_prompt') if per[c] in ('ADMIN','ENGLISH')]
-    if   it=='ADMIN'   and 'ENGLISH' in others: v='ADMIN_ITEMS_ENG_PARTS'
-    elif it=='ADMIN':                            v='ADMIN'
-    elif it=='ENGLISH' and 'ADMIN' in others:    v='ENG_ITEMS_ADMIN_PARTS'
-    elif it=='ENGLISH':                          v='ENGLISH'
-    else:                                        v='INDETERMINATE'
-    out.append([tb,v]+[per[c] for c in FIELDS]+[';'.join(sorted(scr)),tg.get(tb,{}).get('lang_tag','')])
-w=csv.writer(io.open('/tmp/claude-1000/itbf/verdict.csv','w',encoding='utf-8',newline=''))
-w.writerow(['table','verdict','item_text','option_text','instructions','section_prompt','scripts','lang_tag']); w.writerows(out)
-for k,v in collections.Counter(r[1] for r in out).most_common(): print('  %-24s %d'%(k,v))
-print('total',len(out))
+    """(verdict, script) for one field's concatenated text."""
+    t = re.sub(r'\bNA\b', '', t or '').strip()
+    if not t:
+        return 'blank', ''
+    sc = [n for n, p in SCRIPTS if len(re.findall(p, t)) > 2]
+    if sc:
+        return 'ADMIN', ';'.join(sc)
+    dia = len([c for c in t if ord(c) > 127 and unicodedata.category(c).startswith('L')])
+    if dia > 3:
+        return 'ADMIN', 'latin-diacritic'
+    return 'NEEDS_REVIEW', ''
+
+
+def main():
+    rows = []
+    for fn in sorted(os.listdir(TXT)):
+        if not fn.endswith('.csv'):
+            continue
+        tb = fn[:-4]
+        d = list(csv.DictReader(io.open(os.path.join(TXT, fn), encoding='utf-8')))
+        if not d:
+            rows.append([tb, 'EMPTY'] + ['-'] * 4 + ['']); continue
+        per, scr = {}, set()
+        for c in FIELDS:
+            if c not in d[0]:
+                per[c] = 'missing'; continue
+            v, s = judge(' '.join((r.get(c) or '') for r in d))
+            per[c] = v
+            if s and s != 'latin-diacritic':
+                scr.add(s)
+        verdict = 'HAS_ADMIN_TEXT' if 'ADMIN' in per.values() else 'NEEDS_REVIEW'
+        rows.append([tb, verdict] + [per[c] for c in FIELDS] + [';'.join(sorted(scr))])
+    w = csv.writer(io.open(OUT, 'w', encoding='utf-8', newline=''))
+    w.writerow(['table', 'verdict'] + list(FIELDS) + ['scripts'])
+    w.writerows(rows)
+    for k, v in collections.Counter(r[1] for r in rows).most_common():
+        print('  %-16s %d' % (k, v))
+    print('total', len(rows))
+
+
+if __name__ == '__main__':
+    main()
