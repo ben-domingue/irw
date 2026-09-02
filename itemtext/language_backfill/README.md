@@ -114,3 +114,33 @@ who later compares the two columns.
 parallel even when the items do — study-specific framing is written by the
 authors — so a table is commonly `mixed`: official English for the items and
 options, translated framing around them.
+
+
+## File naming: the `__items` suffix is required
+
+Staged files are `<table>__items.csv`, and the suffix is **not cosmetic**.
+
+`upload.py` names the Redivis table after the file's basename
+(`dataset.table(<basename minus extension>)`). All 556 live tables in `irw_text`
+are named `<table>__items`, so a file named `<table>.csv` uploads as a **new
+table beside the existing one** rather than replacing it.
+
+This is easy to get wrong because `irw_list_itemtext_tables()` hides it:
+`Rpkg/R/itemtext.R` does `sub("__items$", "", names)` before returning, so the
+R package reports `burkert_2019_whoqol_bref` for a table actually called
+`burkert_2019_whoqol_bref__items`. The first 78 files of this backfill were
+written without the suffix on the strength of that listing, which would have
+created 78 duplicate tables. Caught by ben-domingue before upload.
+
+**Check before any upload**, against the raw Redivis names rather than the R
+package's:
+
+```r
+nm <- vapply(redivis::user("datapages")$dataset("irw_text:07b6")$list_tables(),
+             function(t) t$name, character(1))
+fs <- sub("\\.csv$", "", list.files("staged", pattern = "__items\\.csv$"))
+sum(!fs %in% nm)   # must be 0 - anything else creates new tables
+```
+
+The `table` *column* inside the CSV stays the bare table name, with no suffix,
+matching what the published tables carry.
