@@ -109,6 +109,10 @@ only, the EPQ paper gives `very much disagree` / `very much agree` only. So `opt
 keeps the English with an empty `option_text_translated`, which is the schema's documented
 signal that those particular words are not what respondents read.
 
+`staging/` holds only the three uploadable tables. `audit_report.csv` sits beside it in
+`language_backfill/` rather than inside, because `upload.py` walks a directory and treats
+every `.csv` in it as a table — a gate report left in there would land on Redivis as one.
+
 Gates: `validate_items.R` passes on all three against live data (item and resp sets exact),
 `normalize_nulls.R` applied, `audit_batch.R` reports 3/3 PASS with no anomalies.
 `lint_verification.R` emits two WARNs — `baaziz` and `brederecke` are recorded `NOT_NEEDED`
