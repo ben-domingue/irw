@@ -213,6 +213,7 @@ When two documents disagree, this is the order of precedence:
 | Item text schema, and the administered-language rules | [`itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md`](itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md), which mirrors the public page at `itemresponsewarehouse.org/itemtext.html`. It beats the automated-finding SKILL.md, which runs item text extraction at its Step 3.5 but does not own the schema |
 | Item text *extraction judgment* (what goes in `instructions` vs `section_prompt`, when to leave a field blank) | Step 4 of `itemtext/.claude/skills/irw-auto-itemtext/SKILL.md` |
 | Dataset descriptions and licenses | The per-source dictionary Sheet, by convention — no document claims this in writing |
+| What kind of work to do next, and what not to | [`PRIORITIES.md`](PRIORITIES.md) — advisory, and ben-domingue overrules it. `CLAUDE.md`'s "Processing Priorities" answers the narrower question of which *dataset* to pick |
 
 Two entries deserve their reasoning stated, because both are counter-intuitive:
 
