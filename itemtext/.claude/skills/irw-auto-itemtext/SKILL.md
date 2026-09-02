@@ -924,6 +924,13 @@ Before a table leaves your hands, all of these are true and recorded:
    distinguished from every other), and a re-runnable `verify_<table>.R` sits beside the CSV.
 10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained;
    `verify_batch.R` and `lint_verification.R` are clean or each flag is explained.
+11. `irw-validate` passes over the batch's `*__items.csv` — it checks the table against the
+   data standard rather than against its source, and catches the two classes the other
+   gates cannot see: a doubled upload (`dup_item_resp`) and two scale directions in one
+   table (`resp_ambiguous`).
+12. `check_provenance.R` passes — every `translation_source` is in
+   `itemtext/provenance_vocab.csv`, and every `machine_translation` table has a line on the
+   public issues page. English this project generated is always disclosed.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
@@ -932,6 +939,12 @@ Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables
 Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_<NNN>
+
+# Added 2026-09-02. The four gates above check a table against its SOURCE -- do the
+# item and resp sets match, does the mapping reproduce. These two check it against
+# the STANDARD and against the corpus, which nothing in this batch flow did.
+irw-validate itemtables/batch_<NNN>/*__items.csv
+Rscript check_provenance.R ../../irw_site/itemtext_issues.qmd
 ```
 
 The last two are the mapping-side gates: `verify_batch.R` re-runs each table's own
