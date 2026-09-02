@@ -455,6 +455,93 @@ be wrong. An earlier draft of mine had exactly that; the data says otherwise.
 
 ---
 
+## Proposed amendment, 2026-09-01 — the frame facet as written is not applicable
+
+**Status: proposed, not in force.** Raised by the blind run authorised for 2.3
+(#1722): eight subagents, no contact with each other, applying B1/B2 to 68
+tables. Five of the eight reported the same defect unprompted, so this is a
+problem with the rule rather than with any rater.
+
+### The defect: `Targeted/specific` swallows everything
+
+B2 lists "a diagnosis, an occupation, an age band, one institution, a language
+community" as markers of a restricted frame. Read literally:
+
+- **It fires on almost everything.** One agent measured it: `Targeted/specific`
+  applied to **9 of 10** tables in its batch, "which makes
+  `General/non-specific` nearly unreachable and means the frame facet adds
+  little discrimination". A facet that takes one value is not a facet.
+- **It contradicts B2's own blessing of `Educational, General/non-specific`.**
+  That combination is explicitly called a real statement here, and 133 rows
+  carry `General` beside a setting atom — but a school study is "one
+  institution" and a student sample is "an age band", so the clause makes the
+  blessed combination almost empty. Two agents applied the clause literally and
+  two required something further; both readings are faithful to a different
+  sentence of the same document.
+
+Three agents independently converged on the same repair, which is the amendment:
+
+> The restriction must be one the study **imposed on top of its setting**, not
+> one implied by the setting itself. Recruiting in a school does not make a
+> sample `Targeted/specific`; recruiting *teacher-education majors* in a school
+> does. "Undergraduates" is not an age band. `idemudia_2025_t201` is the clean
+> case: "international students, non-South-African nationals, ≥6 months
+> residence" is a restriction beyond being students.
+
+### Second defect: `Internet-based` — delivery or population?
+
+Five agents hit this. The gloss "an online panel or crowdwork platform" excludes
+Google Forms links, WeChat/Weibo distribution, Facebook-group recruitment,
+SurveyMonkey/LimeSurvey and social-media advertising — i.e. most of how data is
+actually collected now. Agents applied the wording consistently, so it is doing
+real work, but one flagged the consequence precisely: *"raters have historically
+used it loosely for any online collection, so this is the atom most likely to
+disagree"* with gold.
+
+That is a prediction, and it is testable rather than arguable: it should be
+checked against the confusion matrix before either the rule or the gold is
+changed. **No amendment proposed yet on this one** — the wording may be right
+and the historical usage wrong, which is the same shape as `age range`, and that
+was resolved by measurement rather than by preference.
+
+### Third: whose claim counts as "the source's claim"?
+
+`Representative` turns on the source's own claim, and two agents hit documents
+that claim it in one place and disclaim it in another:
+
+- `shan_2020` — Methods say "convenient sampling"; the authors' rebuttal letter,
+  bundled into the same PMC record, says "simple random sampling" and "a
+  representative sample".
+- `silva_2018` — "regionally representative samples" alongside "non-probabilistic
+  sampling designed by convenience".
+
+Both agents resolved it the same way, and the rule should say so:
+
+> Where a source describes its procedure and also labels it, **the description
+> of the procedure wins**. A claim of representativeness contradicted by the
+> stated sampling method is not a claim.
+
+A related one, no rule proposed: `anunciacao` claims to be "partially
+representative of Brazil's 5 macro regions". `vocab.md` says nothing about
+hedged claims.
+
+### Fourth, minor: `Program-based` and registries
+
+One agent read a twin registry as arguably "the cohort the study is about" and
+dropped `Program-based` because the phrasing "intervention, programme, or
+cohort" reads as intervention-oriented. Worth one clarifying word either way.
+
+### What is NOT a defect
+
+The `age range` blank rule (decision 5) bit hard — four agents left it blank on
+30–40% of the tables they reached, on mean±SD with no range, on banded groups
+with an open lowest category, and on "undergraduates". Every one of those is the
+rule working as decided. The measured consequence is `age_range` coverage of
+60% on the untagged arm, against 91.7% accuracy where it does answer. That is
+the trade decision 5 chose deliberately, now with numbers on both sides.
+
+---
+
 ## Worked examples
 
 The six tables from #1760, plus the `sample` example, run through both rules.

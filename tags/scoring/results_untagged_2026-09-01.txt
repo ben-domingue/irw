@@ -1,0 +1,27 @@
+untagged arm: 40 tables | 30 tagged | 10 abstained (25%)
+
+reachability by warehouse -- the population 2.3 would actually run on:
+  item_response_warehouse_2    10 drawn   3 tagged   7 abstained   30.0% reached
+  item_response_warehouse_3    10 drawn  10 tagged   0 abstained  100.0% reached
+  item_response_warehouse_4    10 drawn   9 tagged   1 abstained   90.0% reached
+  item_response_warehouse_5    10 drawn   8 tagged   2 abstained   80.0% reached
+
+abstention reasons:
+  fetch_failed       9
+  paywall            1
+
+column coverage among tables it did reach (no accuracy: there is no gold):
+  age_range             18/30   60.0%
+  child_age              5/30   16.7%
+  sample                30/30  100.0%
+  construct_type        29/30   96.7%
+  measurement_tool      30/30  100.0%
+  item_format           30/30  100.0%
+  primary_languages     27/30   90.0%
+  construct_name        26/30   86.7%
+
+age_range accuracy against the cov_age derivation (#1760) -- real gold:
+  tables with derived truth : 15
+  answered                  : 12
+  correct                   : 11  (91.7% of answered)
+    wrong: rowe_2016_mfi20  gold Adult (18+)  ->  predicted Mixed
