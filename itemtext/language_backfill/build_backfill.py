@@ -87,7 +87,14 @@ def build(table, language, tmap, src_dir, out_dir):
         out.append({k: o.get(k, '') for k in ORDER})
 
     os.makedirs(out_dir, exist_ok=True)
-    dst = os.path.join(out_dir, table + '.csv')
+    # The Redivis table name IS the file's basename: upload.py does
+    # dataset.table(<basename minus extension>). All 556 live tables in
+    # irw_text are named "<table>__items", so the suffix is REQUIRED here --
+    # writing "<table>.csv" would create 78 new tables beside the existing
+    # ones rather than replacing them. `irw_list_itemtext_tables()` hides this
+    # by stripping the suffix (Rpkg/R/itemtext.R), which is what made it easy
+    # to get wrong.
+    dst = os.path.join(out_dir, table + '__items.csv')
     w = csv.DictWriter(io.open(dst, 'w', encoding='utf-8', newline=''),
                        fieldnames=ORDER, quoting=csv.QUOTE_ALL)
     w.writeheader()

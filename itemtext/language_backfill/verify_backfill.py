@@ -17,7 +17,7 @@ ok = bad = 0
 for fn in sorted(os.listdir(STAGED)):
     if not fn.endswith('.csv'):
         continue
-    tb = fn[:-4]
+    tb = fn[:-len('__items.csv')] if fn.endswith('__items.csv') else fn[:-4]
     new = list(csv.DictReader(io.open(os.path.join(STAGED, fn), encoding='utf-8')))
     old = list(csv.DictReader(io.open(os.path.join(SRC, tb + '.csv'), encoding='utf-8')))
     errs = []
