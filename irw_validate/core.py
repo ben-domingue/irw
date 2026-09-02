@@ -139,6 +139,31 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
         report.findings.append(
             Finding(check.name, severity, check.detail, table=table, group=group))
 
+    # `dup_id_item` asks whether a `wave`/`timepoint`/`date` column explains a
+    # repeated id+item. That list came from validate_irw.R and is stale: it
+    # predates `rater`, and it never covered trial-level designs. In the legacy
+    # sweep it flagged 101 tables, and of the 57 whose local copy matches what is
+    # published, 14 are explained outright by a column the check does not look
+    # at -- `rater` on eleven of them, plus `trialnum`, `order` and `period`.
+    #
+    # A rater is not a defect: two people rating the same person on the same item
+    # is the design. Same for a repeated trial. `datastandard.md` documents
+    # `rater` as a legitimate column, so a check that treats it as a duplicate is
+    # reporting the standard's own schema as an error.
+    #
+    # NOT included: `group`, `study`, `treatment`. Those describe the person or
+    # the arm, not the occasion, and a person appearing twice under them is a
+    # real question rather than an explanation.
+    if profile in ("upload", "legacy") and {"id", "item"}.issubset(df.columns):
+        if any(f.check == "dup_id_item" for f in report.findings):
+            for col in ("rater", "wave", "timepoint", "date", "trialnum", "trial",
+                        "order", "session", "occasion", "period", "block", "subtest"):
+                if col in df.columns and not df.duplicated(subset=["id", "item", col]).any():
+                    report.findings = [f for f in report.findings
+                                       if f.check != "dup_id_item"]
+                    report.checks_run.append(f"dup_id_item:resolved_by_{col}")
+                    break
+
     # `resp_numeric` as inherited from run_qc measures how many values parse as
     # numbers over ALL rows, so a float column with missing values fails it --
     # NaN does not parse. That conflates "not a number" with "not present", and

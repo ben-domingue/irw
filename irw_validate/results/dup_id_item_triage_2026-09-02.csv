@@ -1,0 +1,58 @@
+table,bucket,resolved_by,other_cols
+AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,unexplained,,Group
+AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,unexplained,,Group
+AOMT_BR_SF_EDPANAB_Geiger_2021_RF,unexplained,,Group
+CV_OASIS_ODSIS_PPE_Novak_2020_BFI,unexplained,,group
+CV_OASIS_ODSIS_PPE_Novak_2020_DSES,unexplained,,group
+CV_OASIS_ODSIS_PPE_Novak_2020_RSES,unexplained,,group
+EWAS_Sanford_2024,unexplained,,study
+Ellipse_Corssley_2024,resolved,rater,rater
+FEDSP_Trzcinska_2023_MonKnow,bare id/item/resp,,
+KTEEM_Schoen_2019-2022,unexplained,,group
+OS_TBMWTFS_Schubert_2023_DMW,unexplained,,group
+OS_TBMWTFS_Schubert_2023_IPIP,unexplained,,group
+OS_TBMWTFS_Schubert_2023_MAAS,unexplained,,group
+OS_TBMWTFS_Schubert_2023_SMW,unexplained,,group
+PTCI_Chinese_Zhan_2024,bare id/item/resp,,
+RD_EppSCQRK_Kipkemoi_2024_scq,bare id/item/resp,,
+alcoholstroop_jones2024,resolved,trialnum,trialnum;stimulus;rt
+autonomysupport_mokken,resolved,rater,rater
+concretewords,bare id/item/resp,,
+cure_data,resolved,period,period
+det_naismith_2023,resolved,rater,cov_gender;cov_test_taker_intent;cov_first_langugage;cov_ielts_writing;itemcov_condition;itemcov_length_characters;rater
+duolingo_en_es__listen,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_en_es__reverse_tap,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_es_en__reverse_tap,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_es_en__reverse_translate,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_fr_en__listen,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_fr_en__reverse_tap,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+duolingo_fr_en__reverse_translate,unexplained,,session;format;rt;part.speech;morphology;dependency.label;dependency.head;stem
+famous_melodies,resolved,rater,rater;rt
+florida_twins_behavior_cads,bare id/item/resp,,
+florida_twins_behavior_cadsyv,bare id/item/resp,,
+florida_twins_behavior_ecs,bare id/item/resp,,
+florida_twins_behavior_friends,bare id/item/resp,,
+florida_twins_behavior_panas,bare id/item/resp,,
+florida_twins_behavior_rcads,bare id/item/resp,,
+florida_twins_behavior_tas,bare id/item/resp,,
+fractals_rating,resolved,rater,rater
+graphmapping_study1,resolved,order,order;rt
+immer12_immer,resolved,rater,rater
+motion,unexplained,,rt
+mpsycho_lakes,resolved,rater,rater;subtest
+non_parametric_mixture_modeling_exp1_Cleaned,unexplained,,rt
+number_pattern_game,bare id/item/resp,,
+pact_project,unexplained,,treatment
+pass20_klosowska_2025_csq_online,unexplained,,cov_age;cov_sex;cov_race;cov_student;cov_employed_full_time;cov_employed_part_time;cov_unemployed;cov_retired;cov_pensioner;cov_net_monthly_income;cov_sick_leave;cov_marital_status;cov_education;cov_residence
+pass20_klosowska_2025_dass_online,unexplained,,cov_age;cov_sex;cov_race;cov_student;cov_employed_full_time;cov_employed_part_time;cov_unemployed;cov_retired;cov_pensioner;cov_net_monthly_income;cov_sick_leave;cov_marital_status;cov_education;cov_residence
+pass20_klosowska_2025_staix_online,unexplained,,cov_age;cov_sex;cov_race;cov_student;cov_employed_full_time;cov_employed_part_time;cov_unemployed;cov_retired;cov_pensioner;cov_net_monthly_income;cov_sick_leave;cov_marital_status;cov_education;cov_residence
+psychtools_sai,unexplained,,occasion
+ptam1_immer,resolved,rater,rater
+ravens_deboeck2012,bare id/item/resp,,
+realpic_souza2021,bare id/item/resp,,
+rr98_accuracy,unexplained,,rt
+smacof_pvq40,bare id/item/resp,,
+sris_silvia2022,unexplained,,study
+swmd_mokken,resolved,rater,rater
+tears,resolved,rater,rater;stimulus;phase
+wine_luckett2021,resolved,rater,rater
