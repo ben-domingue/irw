@@ -1,0 +1,6 @@
+field,value,meaning
+translation_source,official_instrument_english,"The instrument publisher's own English for the same numbered items. A parallel version rather than a translation of the administered string -- so where a local adaptation diverges from the original, this column stops corresponding word-for-word to the base field. Better wording, different provenance claim; that is why it is not merged with study_supplied."
+translation_source,study_supplied,"This study's own deposit, supplement or paper carried an English rendering, and that is what ships."
+translation_source,machine_translation,"No published English existed, so it was translated from the administered text by this project rather than by the authors. Requires an entry on the public issues page (ratified 2026-09-02)."
+translation_source,mixed,"Different fields came from different sources -- say which in the note."
+translation_source,,"No _translated columns: the study was administered in English, so there is nothing to translate."

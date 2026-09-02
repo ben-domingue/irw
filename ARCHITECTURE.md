@@ -211,6 +211,7 @@ When two documents disagree, this is the order of precedence:
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
 | Automated-finding procedure | `automated_finding/.claude/skills/irw-automated-finding/SKILL.md` over `automated_finding/README.md`; `automated_finding/BATCH_LOG.md`'s latest notes override both on workflow specifics |
 | Item text schema, and the administered-language rules | [`itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md`](itemtext/.claude/skills/irw-auto-itemtext/references/itemtext_standard.md), which mirrors the public page at `itemresponsewarehouse.org/itemtext.html`. It beats the automated-finding SKILL.md, which runs item text extraction at its Step 3.5 but does not own the schema |
+| Provenance vocabularies for item text (`translation_source`) | [`itemtext/provenance_vocab.csv`](itemtext/provenance_vocab.csv) — enforced by `itemtext/check_provenance.R`, the way `TAG_VOCAB` is enforced for tags. SKILL.md and `language_backfill/README.md` say when to reach for each value, never what the values are |
 | Item text *extraction judgment* (what goes in `instructions` vs `section_prompt`, when to leave a field blank) | Step 4 of `itemtext/.claude/skills/irw-auto-itemtext/SKILL.md` |
 | Dataset descriptions and licenses | The per-source dictionary Sheet, by convention — no document claims this in writing |
 
