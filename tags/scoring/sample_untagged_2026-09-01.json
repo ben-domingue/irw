@@ -1,0 +1,162 @@
+[
+ {
+  "table": "perfectionismlit_2021_prepost",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "merlo2025_eng_emotional",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "qin_2025_behavioral_intention",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "kushnir2017_bfi",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "kern_2021_life_satisfaction",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "xu2024_emotional_exhaust",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "xu_2025_hcq_p",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "germann_2026_redistribution",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "tang_2024_entrepreneurial_intention",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "quarter_life_crisis__iuc",
+  "warehouse": "item_response_warehouse_2"
+ },
+ {
+  "table": "nteveros_2021_psqi_disturbance",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "niazi_2020_mfq_stereotype",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "jeon_2019_cesd10",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "lee_2025_nursing_exam",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "rowe_2016_mfi20",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "dolzdelcastellar_2021_eds",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "shi2024_ysq_parent",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "silva_2018_tfeq",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "latifi_2026_insect_fear",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "algner2022_uwes",
+  "warehouse": "item_response_warehouse_3"
+ },
+ {
+  "table": "islam_2022_gdt",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "gan_2024_alexithymia",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "li_2025_marketing_culture",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "szameitat_2015_occupation_multitask",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "forycka_2022_mswbi",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "anh_2026_finwellbeing",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "huo_2025_relationship_conflict",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "campos_2023_pidaq",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "eldor_2022_realistic_threat",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "alan_2018_student_gender_attitudes",
+  "warehouse": "item_response_warehouse_4"
+ },
+ {
+  "table": "chen_2026_ir",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "nguyen_2026_misfit_academic_performance",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "chen_2026_ee",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "fraijo_2022_mslq",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "estevez_2021_feepr",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "avci_2024_guc_gir_yonel",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "torok_2025_discourse_responsibility",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "lozano_2018_participation",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "khoa_2023_knowledge_acquisition",
+  "warehouse": "item_response_warehouse_5"
+ },
+ {
+  "table": "celik_2026_bfi",
+  "warehouse": "item_response_warehouse_5"
+ }
+]
