@@ -247,6 +247,40 @@ class ScoredTables(unittest.TestCase):
         report = validate_frame(df, label="likert_2024__items.csv")
         self.assertIn("resp_ambiguous", [f.check for f in report.errors])
 
+class RepeatedMeasures(unittest.TestCase):
+    """A rater or a trial explains a repeated id+item; a group does not."""
+
+    def _rated(self, col="rater"):
+        return pd.DataFrame({"id": [1, 1, 2, 2], "item": ["a", "a", "a", "a"],
+                             "resp": [1, 2, 3, 4], col: [1, 2, 1, 2]})
+
+    def test_a_rater_column_explains_the_repeat(self):
+        report = validate_frame(self._rated(), profile="upload")
+        self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+
+    def test_so_do_trial_and_period(self):
+        for col in ("trialnum", "order", "period", "session", "occasion"):
+            with self.subTest(col=col):
+                report = validate_frame(self._rated(col), profile="upload")
+                self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+
+    def test_a_group_column_does_not(self):
+        # group describes the person, not the occasion -- a person appearing
+        # twice under it is a real question, not an explanation
+        report = validate_frame(self._rated("group"), profile="upload")
+        self.assertIn("dup_id_item", [f.check for f in report.errors])
+
+    def test_a_bare_table_still_fails(self):
+        df = pd.DataFrame({"id": [1, 1], "item": ["a", "a"], "resp": [1, 2]})
+        self.assertIn("dup_id_item",
+                      [f.check for f in validate_frame(df, profile="upload").errors])
+
+    def test_triage_is_unchanged(self):
+        # the 50 callers see what they always saw
+        report = validate_frame(self._rated(), profile="triage")
+        self.assertIn("dup_id_item", [f.check for f in report.findings])
+
+
 class TableNames(unittest.TestCase):
     def test_every_table_suffix_is_stripped(self):
         from irw_validate.core import _table_name
