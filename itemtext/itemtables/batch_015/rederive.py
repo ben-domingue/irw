@@ -87,7 +87,8 @@ out["kushnir2017_anrt"] = {h: {"text": re.sub(r"^\(ANRT_\d+\)\s*", "", h).strip(
 # ---- karajko x3 -----------------------------------------------------------
 d = CACHE + "/karajko2025_ai_governance"
 hdr = xl_header(fetch(d + "/ESM_1.xlsx", "11076712"))
-KAR = {"karajko2025_ai_risk": ("8", ["Snažno ne odobravam","Ne odobravam","Neutralan","Odobravam","Snažno odobravam"]),
+KAR = {"karajko2025_ai_benefit": ("7", ["Uopšte ne","Ne previše","Onako","Donekle","Mnogo"]),
+       "karajko2025_ai_risk": ("8", ["Snažno ne odobravam","Ne odobravam","Neutralan","Odobravam","Snažno odobravam"]),
        "karajko2025_ai_governance": ("12", ["Uopšte nije važno","Malo važno","Umjereno važno","Važno","Vrlo važno"]),
        "karajko2025_ai_trust": ("14", ["Uopšte ne","Ne previše","Onako","Donekle","Mnogo"])}
 for tbl, (blk, opts) in KAR.items():

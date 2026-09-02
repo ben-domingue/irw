@@ -3,6 +3,7 @@
 "balmas2018_leader_attitudes","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
 "balmas2018_leader_personality","PASS",14,14,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
 "boudreau_2022_police_reform","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"karajko2025_ai_benefit","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
 "karajko2025_ai_governance","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
 "karajko2025_ai_risk","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
 "karajko2025_ai_trust","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""

@@ -814,6 +814,108 @@
    }
   }
  },
+ "karajko2025_ai_benefit": {
+  "p7_1": {
+   "text": "Zdravstvo (npr. podrška u dijagnostici, personalizovana medicina).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_2": {
+   "text": "Osiguranje (npr. otkrivanje prevara, personalizovana procjena rizika).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_3": {
+   "text": "Poljoprivreda (npr. robotska žetva, optimizacija usjeva).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_4": {
+   "text": "Finansije (npr. otkrivanje prevara, podrška u donošenju odluka o kreditima).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_5": {
+   "text": "Vojni sektor (npr. automatizovano oružje, sajber sigurnost za zaštitu podataka).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_6": {
+   "text": "Sprovođenje zakona (npr. prediktivno policijsko planiranje kako bi se identifikovala područja gdje je zločin moguć, prepoznavanje lica na javnim mjestima).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_7": {
+   "text": "Zaštita životne sredine (npr. predikcija klime, prognoza energetske žetve).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_8": {
+   "text": "Transport (npr. samovozeća vozila).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_9": {
+   "text": "Proizvodnja (npr. predviđanje potražnje, robotika).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  },
+  "p7_10": {
+   "text": "Upravljanje ljudskim resursima (npr. selekcija životopisa, planiranje radne snage).",
+   "opts": {
+    "1": "Uopšte ne",
+    "2": "Ne previše",
+    "3": "Onako",
+    "4": "Donekle",
+    "5": "Mnogo"
+   }
+  }
+ },
  "karajko2025_ai_risk": {
   "p8_1": {
    "text": "Zdravstvo (npr. podrška u dijagnostici, personalizovana medicina).",
