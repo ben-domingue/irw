@@ -57,6 +57,10 @@ AUTO_RATER <- "claude-auto"
 ##sidecar written after the union.
 auto_tables <- character()
 
+##Tables the derived age file supplied values for, so the sidecar does not
+##credit those columns to the tagger.
+derived_tables <- character()
+
 ##Shared column selection and key normalisation, applied identically to sheet
 ##rows and auto rows. Everything downstream assumes it has run.
 select_tag_cols <- function(tag, label) {
@@ -292,6 +296,14 @@ get_tags <- function(db) {
     ##other.
     tag <- apply_derived_tags(tag, db$file.derived, db$name)
 
+    ##Whatever the derived file supplied is a measurement of the table, not a
+    ##tagger assertion, and must not be credited to the tagger in the sidecar.
+    ##Without this the trail claimed the tagger wrote `age range` on 389 tables
+    ##whose value came from cov_age -- over-inclusive, and an audit trail that
+    ##names the wrong source is worse than none.
+    derived_tables <<- if (!is.null(db$file.derived) && file.exists(db$file.derived))
+        tolower(trimws(readr::read_csv(db$file.derived, show_col_types = FALSE)$table)) else character()
+
     ##Drop tags for tables the IRW no longer publishes. 194 of the 2,480 rows
     ##in tags.csv name a table that is not live on Redivis -- retired or
     ##renamed -- and none of them is merely awaiting a metadata row (#1765).
@@ -344,8 +356,11 @@ write_tag_provenance <- function(tag, db) {
         return(invisible(NULL))
     }
     filled <- function(x) !is.na(x) & trimws(as.character(x)) != ""
+    DERIVED_OWNED <- c("age range", "child age (for child-focused studies)")
     per <- vapply(seq_len(nrow(rows)), function(i) {
         set <- cols[vapply(cols, function(cl) filled(rows[[cl]][i]), logical(1))]
+        if (tolower(trimws(rows$table[i])) %in% derived_tables)
+            set <- setdiff(set, DERIVED_OWNED)
         paste(set, collapse = "; ")
     }, character(1))
     readr::write_csv(
