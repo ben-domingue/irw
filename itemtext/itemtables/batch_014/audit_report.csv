@@ -1,2 +1,3 @@
 "table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"himmelstein-admc_raw-2025","WARN",38,38,TRUE,TRUE,FALSE,TRUE,0,71,"71% of rows have blank option_text | 10 of 38 items have NO option_text rows while others do (dr1, dr10, dr2, dr3, dr4, dr5, ...)"
 "himmelstein-impossible_question-2025","WARN",90,90,TRUE,TRUE,FALSE,TRUE,0,100,"row-count anomaly (possible item-code conflation or missingness skew), median=605: GK_14, GK_2, GK_21, GK_22, GK_23, GK_3, GK_36, GK_4, GK_42, GK_53, ... | 100% of rows have blank option_text"
