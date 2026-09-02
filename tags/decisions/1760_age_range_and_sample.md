@@ -310,6 +310,32 @@ Both were in the implementation, not the rules, and both are fixed and tested.
    people, which is why A1 has it short-circuit. `03_tags.R` now refuses that
    override and reports the count.
 
+### Clearing the quarantine, 2026-09-01
+
+The eight tables held as possibly-months were resolved by reading their sources,
+which #1789's repository routes made possible — the seven `gilbert_meta_*`
+records are Dataverse deposits whose pages had been answering HTTP 202.
+
+**Seven confirmed as years** and released (`tags/age_unit_confirmed.csv`): all
+are school-based education RCTs whose papers control for *grade at baseline* and
+measure literacy or numeracy, so a respondent aged 0–20 **months** could not sit
+the assessment. `gilbert_meta_68`/`_69` run to exactly 18.25 in 132 steps, which
+is quarter-years. Sources: Banerji, Berry & Shotland (maternal literacy in
+India), Banerjee et al. (NBER w22931), and Karlan et al. (school savings).
+
+**`carney_2023_substance_use` stays quarantined, and not over its unit.** The
+unit is plainly years — the paper reports a mean of 22.50 (SD 3.22) and an
+eligibility criterion of **15 to 29 years old**. But the shipped `cov_age` holds
+**two respondents coded age 1**, which the study's own eligibility window
+excludes. Releasing it would derive `Mixed` correctly and then attach
+`Early (<6y)` from those two rows, because they are 8% of the table's under-18s
+and clear the 2% floor. **A tag would be manufactured out of a data error**, so
+the table waits for the fix rather than the rule. Reported to #1779.
+
+That is the honest general shape: the guards catch the tables where the *data*
+is wrong, and releasing one from quarantine on a correct reading of its unit can
+still publish something false. Quarantine 45 → 33.
+
 ### One finding that is not about tagging
 
 The 81 tables with ages outside `[0, 120]` are not a tagging problem — they are
