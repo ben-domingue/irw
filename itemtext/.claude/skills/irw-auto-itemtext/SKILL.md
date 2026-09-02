@@ -850,10 +850,29 @@ The draft is a starting point, not the text to paste:
   alarming, and several read worse than the underlying situation. Where you verified a
   claim with numbers, put the numbers in the callout — a reader can act on "correlates
   0.88-0.90 with the other two amotivation items" and cannot act on "looks unreliable".
-- Match the page's existing format exactly (`::: {.g-col-4 .dataset-item}` wrapping
-  `::: {.callout-warning collapse='true'}` with the table name as an `##` heading), append
-  before the final `:::` that closes the `.grid` div, and check the div count balances
-  before committing.
+- **Write the note when the table goes live, not when the batch is triaged.** The page
+  describes the data a reader can actually fetch, so a table whose `uploaded` stamp is
+  still blank gets no entry yet — but that means the note is owed *later*, and nothing
+  else will remind you. See the post-upload check under "Uploading" below; it exists
+  because three tables (`emidy2024_fevs`, `mohammed_2021_job_satisfaction`,
+  `himmelstein-impossible_question-2025`) shipped with a written `public_note` that never
+  reached the page, each uploaded in a commit separate from its batch triage.
+- **The page is generated from a YAML list, not hand-written callouts.** Since 2026-09-01
+  `itemtext_issues.qmd` holds one `issues` list inside an R `yaml.load(r"---( ... )---")`
+  block and renders it as a searchable table; the old `::: {.g-col-4 .dataset-item}` /
+  `.callout-warning` blocks are gone. Append entries as
+
+  ```yaml
+  - table: some_table_name
+    issue: |-
+      One paragraph, markdown allowed, no trailing period.
+  ```
+
+  before the closing `)---")`. Order does not matter — the page sorts by table name. Check
+  the YAML still parses (`yaml::yaml.load`) before committing; a stray unquoted `:` or a
+  mis-indented block scalar breaks the whole page, not just one entry.
+- A note you decide is below the bar goes in `fixes/issues_page_dropped.csv` with a reason,
+  so the check below stops re-reporting it. Still log the drop in `round_log.md` too.
 - Commit `itemtext_issues.qmd` **by path** in the site repo. That checkout usually has
   other people's in-flight vignette work in it; `git add -A` there will sweep it up.
 
@@ -1049,3 +1068,27 @@ Uploads every `*.csv` in `itemtext/itemtables/` to `datapages/irw_text:next` on 
 (prompts before overwriting anything already there). Only run this when the user
 explicitly asks to upload — it's a shared-system write, same caution as any other
 Redivis upload in this repo.
+
+### After every upload — reconcile the public issues page
+
+Stamp the `uploaded` date into each table's `provenance.csv` row, then run:
+
+```bash
+Rscript ../.claude/skills/irw-auto-itemtext/scripts/check_issues_page.R
+```
+
+Run from `itemtext/`. It reads every `itemtables/batch_*/provenance.csv`, keeps the rows
+with a non-empty `public_note`, and reports which of the now-live ones are missing from
+`../../irw_site/itemtext_issues.qmd`. Exit status is 1 while anything is DUE, so it can
+gate the wrap-up. Three categories come back:
+
+- **DUE** — live and absent. Apply the issues-page bar (Step 6c), then either add the
+  entry or record the drop in `fixes/issues_page_dropped.csv`.
+- **PENDING** — note written, table not uploaded. Correctly absent; it will turn DUE on
+  the upload that stamps it.
+- **CHECK** — on the page but not marked uploaded. Usually a missing `uploaded` stamp; if
+  it isn't, the page is describing a table nobody can fetch.
+
+This is the step that closes the loop. Without it a note written at triage time is simply
+lost once the upload happens in a later, separate commit — which is how it went wrong for
+batches 011, 013 and 014.

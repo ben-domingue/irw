@@ -1,0 +1,85 @@
+#!/usr/bin/env Rscript
+# Usage: Rscript check_issues_page.R [<site_qmd_path>]
+#
+# Run from itemtext/. Reconciles every batch's provenance.csv against the live
+# public issues page and reports which tables owe it an entry.
+#
+# A note is DUE once the table is live, not when the batch is triaged: the page
+# describes the data a reader can actually fetch, so an entry written before
+# upload would describe a table that does not exist yet. That gap is exactly how
+# emidy2024_fevs, mohammed_2021_job_satisfaction and
+# himmelstein-impossible_question-2025 were uploaded with a written public_note
+# that never reached the page -- each was uploaded in a commit separate from the
+# one that triaged its batch, and nothing re-checked afterwards.
+#
+# A note you deliberately dropped as below the issues-page bar goes in
+# fixes/issues_page_dropped.csv (table,reason) so it stops being reported.
+#
+# Exit status 1 if anything is DUE, so it can gate an upload wrap-up.
+
+args <- commandArgs(trailingOnly = TRUE)
+qmd <- if (length(args)) args[1] else "../../irw_site/itemtext_issues.qmd"
+
+if (!file.exists(qmd)) {
+  stop("issues page not found at ", qmd,
+       " -- pass the path explicitly; the site checkout is a sibling of src/")
+}
+page <- paste(readLines(qmd, warn = FALSE), collapse = "\n")
+
+provs <- Sys.glob("itemtables/batch_*/provenance.csv")
+if (!length(provs)) stop("no itemtables/batch_*/provenance.csv found -- run from itemtext/")
+
+rows <- do.call(rbind, lapply(provs, function(f) {
+  x <- read.csv(f, stringsAsFactors = FALSE)
+  for (col in c("table", "public_note", "uploaded")) {
+    if (!col %in% names(x)) x[[col]] <- NA_character_
+  }
+  data.frame(batch = basename(dirname(f)), table = x$table,
+             public_note = x$public_note, uploaded = x$uploaded,
+             stringsAsFactors = FALSE)
+}))
+
+has <- function(v) !is.na(v) & nzchar(trimws(v))
+rows <- rows[has(rows$public_note), ]
+rows$live <- has(rows$uploaded) & trimws(rows$uploaded) != "NA"
+rows$on_page <- vapply(rows$table, function(t) grepl(t, page, fixed = TRUE), logical(1))
+
+dropped <- character(0)
+drop_file <- "fixes/issues_page_dropped.csv"
+if (file.exists(drop_file)) {
+  dropped <- read.csv(drop_file, stringsAsFactors = FALSE)$table
+}
+rows$dropped <- rows$table %in% dropped
+
+due     <- rows[rows$live & !rows$on_page & !rows$dropped, ]
+pending <- rows[!rows$live & !rows$on_page & !rows$dropped, ]
+early   <- rows[!rows$live & rows$on_page, ]
+
+cat(sprintf("%d tables carry a public_note; %d live, %d on the page, %d dropped as below the bar\n",
+            nrow(rows), sum(rows$live), sum(rows$on_page), sum(rows$dropped)))
+
+if (nrow(due)) {
+  cat("\nDUE -- uploaded but absent from the page:\n")
+  for (i in seq_len(nrow(due))) {
+    cat(sprintf("  %-42s %s (uploaded %s)\n", due$table[i], due$batch[i],
+                trimws(due$uploaded[i])))
+  }
+  cat("\nApply the issues-page bar before pasting: concrete text-vs-table\n",
+      "mismatches only, not gaps the source never published. If one of these\n",
+      "does not clear the bar, record it in ", drop_file, " with a reason\n",
+      "rather than leaving it to be re-reported every run.\n", sep = "")
+}
+
+if (nrow(pending)) {
+  cat("\nPENDING -- note written, table not uploaded yet (correctly absent):\n")
+  cat(sprintf("  %-42s %s\n", pending$table, pending$batch), sep = "")
+}
+
+if (nrow(early)) {
+  cat("\nCHECK -- on the page but not marked uploaded; either the provenance\n",
+      "`uploaded` stamp is missing or the page describes a table that isn't live:\n", sep = "")
+  cat(sprintf("  %-42s %s\n", early$table, early$batch), sep = "")
+}
+
+if (!nrow(due)) cat("\nNothing due.\n")
+quit(status = if (nrow(due)) 1L else 0L)
