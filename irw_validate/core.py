@@ -23,10 +23,54 @@ def _table_name(label: str) -> str:
     return stem
 
 
+#: Item text tables have their own schema (`table`/`item`/`item_text`), and the
+#: response-data checks are meaningless against them -- `id` does not exist,
+#: `resp` is an option key rather than an answer, and one row per option is not
+#: a duplicate. red_up already routes on this suffix; so does this.
+ITEMS_SUFFIX = "__items"
+ITEMS_REQUIRED = ("table", "item", "item_text")
+
+
+def is_item_text(label: str) -> bool:
+    return _table_name(label).endswith(ITEMS_SUFFIX)
+
+
+def _validate_item_text(df, label: str, profile: str) -> Report:
+    """The item text schema: check what applies, and say nothing about the rest."""
+    report = Report(label=label, profile=profile)
+    table = _table_name(label)[: -len(ITEMS_SUFFIX)]
+    missing = [c for c in ITEMS_REQUIRED if c not in df.columns]
+    report.checks_run.append("required_columns")
+    if missing:
+        report.findings.append(Finding(
+            "required_columns", "error",
+            f"missing required columns for item text: {', '.join(missing)}",
+            table=table, group="core"))
+        return report
+    for name, dup in (("dup_item_resp",
+                       df.duplicated(subset=[c for c in ("item", "resp")
+                                             if c in df.columns]).sum()),):
+        report.checks_run.append(name)
+        if dup:
+            report.findings.append(Finding(
+                name, "error",
+                f"{dup} duplicate item+resp rows -- an item text table carries one "
+                f"row per response option, so a repeat is a doubled upload (#1810)",
+                table=table, group="core"))
+    for finding in extra.check_name(table):
+        report.checks_run.append(finding.check)
+        report.findings.append(finding)
+    report.stats = {"n_rows": len(df),
+                    "n_items": int(df["item"].nunique()) if "item" in df else 0}
+    return report
+
+
 def validate_frame(df, *, label: str = "", profile: str = "upload",
                    context: dict | None = None) -> Report:
     """Run every check the profile asks for against an in-memory frame."""
     context = context or {}
+    if is_item_text(label):
+        return _validate_item_text(df, label, profile)
     report = Report(label=label, profile=profile)
     table = _table_name(label)
 

@@ -160,6 +160,43 @@ class ExtraChecks(unittest.TestCase):
         self.assertIn("resp_dtype", [f.check for f in report.errors])
 
 
+class ItemText(unittest.TestCase):
+    """An __items.csv has its own schema and must not be judged as response data."""
+
+    def _items(self, n_rep=1):
+        rows = {"table": [], "item": [], "item_text": [], "resp": [], "option_text": []}
+        for _ in range(n_rep):
+            for i in range(1, 4):
+                for r in range(4):
+                    rows["table"].append("t_2024_scale")
+                    rows["item"].append(f"Q{i}")
+                    rows["item_text"].append(f"question {i}")
+                    rows["resp"].append(r)
+                    rows["option_text"].append(f"option {r}")
+        return pd.DataFrame(rows)
+
+    def test_item_text_is_not_judged_as_response_data(self):
+        report = validate_frame(self._items(), label="t_2024_scale__items.csv")
+        self.assertTrue(report.ok, report.findings)
+        self.assertNotIn("required_columns",
+                         [f.check for f in report.errors])
+
+    def test_a_doubled_item_text_table_is_caught(self):
+        # the #1816 defect: an upload appended beside the previous version
+        report = validate_frame(self._items(n_rep=2), label="t_2024_scale__items.csv")
+        self.assertIn("dup_item_resp", [f.check for f in report.errors])
+
+    def test_missing_item_text_columns_block(self):
+        df = pd.DataFrame({"id": [1], "item": ["a"], "resp": [1]})
+        report = validate_frame(df, label="t_2024_scale__items.csv")
+        self.assertIn("required_columns", [f.check for f in report.errors])
+        self.assertIn("item text", report.errors[0].message)
+
+    def test_the_name_cap_still_applies_to_item_text(self):
+        report = validate_frame(self._items(), label=("x" * 41) + "__items.csv")
+        self.assertIn("name_length", [f.check for f in report.errors])
+
+
 class RPythonParity(unittest.TestCase):
     """The fork cannot silently reopen: one list, two languages, checked here."""
 
