@@ -26,6 +26,18 @@ if (!file.exists(qmd)) {
 }
 page <- paste(readLines(qmd, warn = FALSE), collapse = "\n")
 
+# Say which copy of the page this read. The default sibling checkout is often
+# parked on another branch -- on 2026-09-02 it sat 60 entries behind main, and a
+# sibling checker reported a gap that had already been closed. Silence about the
+# source is how a stale answer passes for a real one.
+cat(sprintf("issues page: %s (%d entries)\n", qmd,
+            sum(grepl("^- table:", strsplit(page, "\n")[[1]]))))
+.br <- suppressWarnings(system2("git", c("-C", shQuote(dirname(normalizePath(qmd))),
+                                         "rev-parse", "--abbrev-ref", "HEAD"),
+                                stdout = TRUE, stderr = FALSE))
+if (length(.br) && !is.na(.br[1]) && nzchar(.br[1]) && .br[1] != "main")
+  cat(sprintf("  NOTE: that checkout is on branch '%s', not main -- it may be stale.\n", .br[1]))
+
 # Every provenance record, not only the batches. The language backfill's 78
 # tables live outside itemtables/, and while this glob was batch-only they were
 # invisible here -- which is how 60 tables shipping project-generated English

@@ -2,7 +2,8 @@
 ##
 ## Validate every item text provenance.csv against the one vocabulary.
 ##
-##   Rscript itemtext/check_provenance.R          # exit 1 if anything is off
+##   Rscript itemtext/check_provenance.R                     # exit 1 if anything is off
+##   Rscript itemtext/check_provenance.R path/to/page.qmd    # check against a specific page
 ##
 ## Why this exists. On 2026-09-02 a `translation_source` column was added twice,
 ## in two files, with two vocabularies: `official_instrument_english` /
@@ -68,7 +69,32 @@ if (length(bad)) {
 }
 
 ## A machine translation is IRW-generated content, so it is disclosed publicly.
-page <- file.path(here, "..", "..", "irw_site", "itemtext_issues.qmd")
+##
+## Which copy of the page gets read matters more than it looks. The default is
+## the sibling irw_site checkout, and that working tree is often parked on some
+## other branch -- on 2026-09-02 it sat 60 entries behind main and this check
+## confidently reported a gap that had already been closed. A checker that reads
+## the wrong file and says nothing about it is worse than no checker, so the
+## path is printed, its entry count with it, and the branch named when the
+## checkout is not on main.
+args <- commandArgs(trailingOnly = TRUE)
+page <- if (length(args)) args[1] else
+    file.path(here, "..", "..", "irw_site", "itemtext_issues.qmd")
+
+if (file.exists(page)) {
+    n_entries <- sum(grepl("^- table:", readLines(page, warn = FALSE)))
+    cat(sprintf("\nissues page: %s (%d entries)\n", page, n_entries))
+    site <- dirname(normalizePath(page))
+    br <- suppressWarnings(system2("git", c("-C", shQuote(site), "rev-parse",
+                                            "--abbrev-ref", "HEAD"),
+                                   stdout = TRUE, stderr = FALSE))
+    if (length(br) && !is.na(br[1]) && nzchar(br[1]) && br[1] != "main")
+        cat(sprintf("  NOTE: that checkout is on branch '%s', not main -- it may be stale.\n",
+                    br[1]))
+} else {
+    cat(sprintf("\nissues page not found at %s -- skipping the disclosure check\n", page))
+}
+
 if (file.exists(page) && length(needs_note)) {
     txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
     undisclosed <- needs_note[!vapply(needs_note, grepl, logical(1),
