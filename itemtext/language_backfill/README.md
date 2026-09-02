@@ -81,3 +81,47 @@ Cheaper than it looks. `itemtext/upload.py` does `dataset.table(<name>)` with
 `replace_on_conflict`, so **each item text table is its own Redivis table** and a
 backfill is a per-table CSV re-upload, not row surgery on a shared table. All the
 cost is in producing the corrected CSVs.
+
+## Round 1 — the three tables whose administered wording was in the source (2026-09-01)
+
+Bucket B of the provenance-side scan: tables that shipped English while the administered
+wording sat in the study's own paper or supplements, which is the recoverability test
+SKILL.md sets. Ten other tables looked like this until that test was applied — their
+originals are published, but off-source (WHO's Chinese WHOQOL-BREF, the canonical German
+PHQ-4, a cited validation paper's Chinese PHQ-2-C), which makes them correct-as-shipped
+fallbacks rather than misses.
+
+| table | language | what changed |
+|---|---|---|
+| `baaziz_2023_sms2` | Arabic | All 18 items now carry the Arabic from the paper's Table 7; the authors' English moves to `item_text_translated`. |
+| `brederecke_2020_sis` | German | Table 3's composite `English (German)` string is split — German to `item_text`, English to `item_text_translated`. |
+| `arzamoncunill_2023_epq_clinical` | Spanish | 12 of 22 items get the administered Spanish from Appendix S3, plus the Spanish `instructions` stem; the other 10 have no published wording in any language and keep their English descriptor. |
+
+`build_backfill.py` rebuilds all three from `published/` (pulled with `irw_itemtext()`) into
+`staging/`. The diff against the live tables is deliberately narrow: only `item_text`
+changes, plus `instructions` for the EPQ, plus the five new columns. `item`, `resp` and
+`option_text` are untouched in all three.
+
+**Anchors stay English in all three.** None of the three studies publishes its response
+anchors in the administered language — the SIS paper states them in English and its `.sav`
+labels values `1`..`5` with no text, the SMS-II paper gives `Not at all true` / `Very true`
+only, the EPQ paper gives `very much disagree` / `very much agree` only. So `option_text`
+keeps the English with an empty `option_text_translated`, which is the schema's documented
+signal that those particular words are not what respondents read.
+
+Gates: `validate_items.R` passes on all three against live data (item and resp sets exact),
+`normalize_nulls.R` applied, `audit_batch.R` reports 3/3 PASS with no anomalies.
+`lint_verification.R` emits two WARNs — `baaziz` and `brederecke` are recorded `NOT_NEEDED`
+on a `paper_explicit` basis, which the linter flags because only `data_labels` is exempt.
+That is expected here rather than a gap: both tables already hold a `VERIFIED` row from
+batches 007 and 009, and this round adds no mapping inference to either. In the SMS-II the
+Arabic and English share one numbered table row; in the SIS the German was already inside
+the string being split. Only the EPQ carries new inference, and it is recorded `PARTIAL`
+with the limits stated.
+
+Not uploaded. `itemtext_issues.qmd` still describes the published tables correctly and
+should be updated in the same pass as the upload — three entries go stale at that moment:
+`baaziz_2023_sms2` ("the Arabic wording printed alongside it is not reproduced here"),
+`brederecke_2020_sis` ("English wording followed by the German actually administered"),
+and `arzamoncunill_2023_epq_clinical` ("None of the item text here is the wording
+respondents read", which becomes true of 10 items rather than all 22).
