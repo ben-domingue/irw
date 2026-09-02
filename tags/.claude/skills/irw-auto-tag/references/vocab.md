@@ -133,9 +133,24 @@ combine freely** — `Clinical, Educational, Internet-based` is coherent.
 
 - `Representative` — the source claims probability sampling, or claims the
   sample represents a defined population. **The claim must be the source's**,
-  never inferred from a large *n* or a national-sounding name.
-- `Targeted/specific` — the frame is restricted to a defined subpopulation: a
-  diagnosis, an occupation, an age band, one institution, a language community.
+  never inferred from a large *n* or a national-sounding name. Where a source
+  describes its sampling procedure *and* labels it, **the description of the
+  procedure wins**: a claim of representativeness contradicted by the stated
+  method is not a claim. (Amended 2026-09-01 — `shan_2020` says "convenient
+  sampling" in its Methods while the authors' rebuttal letter in the same PMC
+  record says "simple random sampling"; `silva_2018` says "regionally
+  representative samples" alongside "non-probabilistic sampling designed by
+  convenience".)
+- `Targeted/specific` — the frame is restricted by something the study
+  **imposed on top of its setting**, not by what the setting already implies.
+  Recruiting in a school is not a restriction; recruiting *teacher-education
+  majors* in a school is. **"Undergraduates" is not an age band.** A real
+  restriction looks like: a diagnosis, a screening criterion, a named occupation
+  within a workplace, a residency or language requirement, a single named cohort.
+  (Amended 2026-09-01. The first wording listed "an age band, one institution"
+  as markers, which fires on almost every study — one blind rater measured it
+  applying to 9 of 10 tables — and contradicted the `Educational,
+  General/non-specific` combination blessed below, which 133 rows carry.)
 - `General/non-specific` — **the catch-all**: recruitment is described, and
   there is no representativeness claim and no restricted frame.
 
