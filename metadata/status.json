@@ -1,20 +1,20 @@
 {
-  "generated": "2026-09-01T10:52:08-0700",
+  "generated": "2026-09-01T18:37:42-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
     "tags": {
-      "n": 3061,
-      "pct": 74
+      "n": 3066,
+      "pct": 74.2
     },
     "tags_by_column": {
       "age range": {
-        "n": 3023,
-        "pct": 73.1
+        "n": 3029,
+        "pct": 73.3
       },
       "child age (for child-focused studies)": {
-        "n": 702,
-        "pct": 17
+        "n": 708,
+        "pct": 17.1
       },
       "sample": {
         "n": 2229,
@@ -64,8 +64,8 @@
     },
     "item_response_warehouse_4": {
       "n_tables": 981,
-      "tagged": 559,
-      "pct": 57
+      "tagged": 564,
+      "pct": 57.5
     },
     "item_response_warehouse_5": {
       "n_tables": 206,
