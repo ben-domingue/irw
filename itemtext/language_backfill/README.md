@@ -129,3 +129,25 @@ should be updated in the same pass as the upload — three entries go stale at t
 `brederecke_2020_sis` ("English wording followed by the German actually administered"),
 and `arzamoncunill_2023_epq_clinical` ("None of the item text here is the wording
 respondents read", which becomes true of 10 items rather than all 22).
+
+## Round 2 — the disclosure pass (2026-09-01, staged, NOT gated against live data)
+
+The other half of the bucket: 17 published tables that ship English for a non-English
+administration where the wording genuinely could not be recovered from the deposit or the
+paper's own supplements. No text changes. What changes is that each table now *says so* —
+`language` names the administered language and the four `_translated` columns are present
+and empty, which is the schema's signal that the base text fields are not what respondents
+read. Every language is taken from the table's own provenance note, not inferred here.
+`add_language.py` asserts, per row, that no text field moved.
+
+**Unfinished.** `normalize_nulls.R` has run (0 of 17 needed fixing). `validate_items.R` and
+`audit_batch.R` have NOT been run against live data, so nothing here should be uploaded
+until they have. Provenance rows correcting `text_source` to `translated_substitute` for
+the nine tables currently labelled `canonical_instrument` or `study_materials` are also
+still to write.
+
+Three tables that belong to this set could not be pulled, because they are not published
+item text at all: `algner2022_oss` and `APFCompact_Ptacek_2024_DASS-21` (never uploaded,
+provenance `uploaded` correctly blank) and `altahla_2024_whoqol_bref`, whose provenance
+claims `uploaded=2026-08-17` but which appears in neither `irw_itemtext()` nor
+`metadata/itemtext_metadata.csv` — it went missing between staging and Redivis.
