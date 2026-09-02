@@ -27,6 +27,7 @@ dependencies = ["redivis>=0.18.0"]
 
 [project.scripts]
 red_up = "red_up.cli:main"
+irw-validate = "irw_validate.cli:main"
 
 [tool.setuptools]
-packages = ["red_up"]
+packages = ["red_up", "irw_validate"]

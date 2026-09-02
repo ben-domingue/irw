@@ -114,6 +114,26 @@ Roadmap 1.3–1.5: merging `misc/validate_irw.R` with
 GitHub Action, and the sweep over `data/pub/`. `checks.run_validator` is the
 seam it plugs into.
 
+## The format gate
+
+Since 2026-09-02 `red_up` will not upload a table that
+[`irw_validate`](../irw_validate/README.md) blocks — the other half of
+"one validator, one uploader, and a gate between them" (#1703). Findings appear
+beside the cheap checks, and a blocked file is skipped with its reason shown.
+
+Three things worth knowing:
+
+- **It does not break the streaming design.** The checks above load nothing;
+  the validator needs a whole frame, so it is imported lazily and skipped above
+  `irw_validate.MAX_BYTES` (512 MB), with a warning recording the skip. A check
+  that quietly does not run is worse than one that says it did not.
+- **A missing dependency is an error, not a pass.** If `irw_validate` cannot be
+  imported, the upload is blocked. Blocking because pandas is not installed is
+  annoying exactly once; passing because pandas is not installed is undetectable
+  forever.
+- **Heuristics warn, they do not block** — see the profile table in
+  `irw_validate/README.md` for why.
+
 ## Drafts, and the one-week window
 
 `red_up` only ever writes a **draft** version. Releasing is a human action on

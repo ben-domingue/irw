@@ -9,6 +9,8 @@ and is exercised by the end-to-end procedure in red_up/README.md instead.
 from __future__ import annotations
 
 import tempfile
+import builtins
+from unittest import mock
 import unittest
 from pathlib import Path
 
@@ -316,3 +318,54 @@ def test_drafts_reports_no_draft(monkeypatch):
     _fake_redivis(monkeypatch, versions=[_Version("v1.0", True, _ms(3, now))],
                   draft_tables={}, released_tables={"a__items": 10})
     assert _drafts.inspect("datapages", _target(), now)["has_draft"] is False
+
+
+# --- the format-validator gate (#1703 sub-item 1.4) --------------------------
+
+class ValidatorGate(unittest.TestCase):
+    """red_up refuses a table the format validator blocks."""
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+
+    def _csv(self, name, body):
+        path = Path(self.tmp.name) / name
+        path.write_text(body)
+        return path
+
+    def test_a_broken_table_is_blocked(self):
+        path = self._csv("broken_2024_scale.csv", "id,item,resp\n1,a,x\n2,b,y\n3,c,z\n")
+        report, = check_all([(path, "broken_2024_scale")])
+        self.assertFalse(report.ok)
+        self.assertTrue(any("resp_numeric" in e for e in report.errors), report.errors)
+
+    def test_a_clean_table_passes(self):
+        rows = "\n".join(f"{i},q{j},{(i + j) % 5 + 1}"
+                         for i in range(1, 40) for j in range(1, 5))
+        path = self._csv("ok_2024_scale.csv", "id,item,resp\n" + rows + "\n")
+        report, = check_all([(path, "ok_2024_scale")])
+        self.assertTrue(report.ok, report.errors)
+
+    def test_a_cov_age_sentinel_warns_without_blocking(self):
+        rows = "\n".join(f"{i},q{j},{(i + j) % 5 + 1},{999 if i == 1 else 40}"
+                         for i in range(1, 40) for j in range(1, 5))
+        path = self._csv("sentinel_2024_scale.csv", "id,item,resp,cov_age\n" + rows + "\n")
+        report, = check_all([(path, "sentinel_2024_scale")])
+        self.assertTrue(report.ok, "an already-live defect must not block (#1779)")
+        self.assertTrue(any("cov_range" in w for w in report.warnings), report.warnings)
+
+    def test_a_missing_validator_blocks_rather_than_passes(self):
+        import red_up.checks as checks_mod
+        real_import = builtins.__import__
+
+        def no_irw_validate(name, *a, **kw):
+            if name.startswith("irw_validate"):
+                raise ImportError("no pandas here")
+            return real_import(name, *a, **kw)
+
+        path = self._csv("x_2024_scale.csv", "id,item,resp\n1,a,1\n2,b,2\n")
+        with mock.patch.object(builtins, "__import__", no_irw_validate):
+            errors, warnings = checks_mod.run_validator(path)
+        self.assertTrue(errors, "a missing validator must be an error, never a pass")
+        self.assertIn("validator unavailable", errors[0])

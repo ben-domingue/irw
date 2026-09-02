@@ -1,0 +1,61 @@
+# The first workflow in this repository that runs any of its code.
+#
+# The three that came before it -- "To Do.yml", "In Progress.yml",
+# "Under Review.yml" -- are GitHub Projects card-movers: they never check out
+# the repo and never execute a line of it. So until now, "did this change break
+# the shared tooling?" was a question only a human could answer by cloning.
+#
+# That is the reported cause of the pull-request backlog: five of the eight open
+# PRs have no review at all, and every submission needs manual adjudication
+# because nothing mechanical can speak first. This makes the mechanical part
+# mechanical.
+#
+# Deliberately narrow. It runs the two test suites and nothing else -- no
+# network, no credentials, no Redivis, no dataset downloads. A test job that
+# depends on a third party's uptime teaches people to ignore red marks.
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          # pandas is what irw_validate needs; redivis is declared by the
+          # package but no test touches the network.
+          python -m pip install pandas
+          python -m pip install -e . --no-deps
+
+      - name: red_up
+        run: python -m unittest discover -s red_up/tests -t . -v
+
+      - name: irw_validate
+        run: python -m unittest discover -s irw_validate/tests -t . -v
+
+      # The R validator is the copy external contributors source from a raw
+      # GitHub URL, so it has to keep parsing even though nothing here imports
+      # it. irw_validate's parity test checks that its `# @check` markers still
+      # match CORE_CHECKS; this checks it is still valid R.
+      - name: validate_irw.R still parses
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
+          Rscript -e 'source("misc/validate_irw.R"); \
+            d <- data.frame(id=c(1,2), item=c("a","b"), resp=c(1,2)); \
+            stopifnot(validate_irw_status(validate_irw(d, "ci")) == 0L); \
+            cat("validate_irw.R OK\n")'

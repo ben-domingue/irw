@@ -205,6 +205,7 @@ When two documents disagree, this is the order of precedence:
 | Output schema, column names, file naming | [`datastandard.md`](datastandard.md) |
 | Redivis owner and dataset names | `IRW_OWNER` / `IRW_CORE_DATASETS` in [`metadata/redivis_config.R`](metadata/redivis_config.R) — `red_up` parses this file rather than restating it |
 | How anything gets uploaded to Redivis | [`red_up/README.md`](red_up/README.md) |
+| Whether a table meets the standard | [`irw_validate`](irw_validate/README.md) — `datastandard.md` states the rules, `irw-validate` is the one thing that enforces them, and `red_up` will not upload a table it blocks |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
