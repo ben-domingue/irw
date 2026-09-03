@@ -78,6 +78,14 @@ and the processing script side by side.
 Paste verbatim into `CronCreate` (`recurring: true`, cron `7,22,37,52 * * * *`).
 Adjust the batch cap in Step 0 for the run you want.
 
+**Working directory.** The prompt below names `src/itemtext/`, which is right whenever
+`src` is checked out on `main`. When `src` is on another branch, run the round from a
+worktree instead and substitute that path throughout the prompt — a round must never
+write batch output onto an unrelated branch. The 2026-09-03 restart ran from
+`/home/ben/irw-wt/1709/itemtext/` (branch `itemtext/1709-restart-queue`) because `src`
+was on `tags/construct-type-rules`. `queue_state.csv` was byte-identical between the two
+at fork, so no state was lost; it is the file to reconcile when the branch merges.
+
 ```
 # ITEMTEXT_BATCH_ROUND_V1 (self-identification marker for CronList/CronDelete — do not remove this line)
 
@@ -93,7 +101,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_011 already exists (round cap reached)
+- itemtables/batch_031 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -293,7 +301,7 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_011, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_031, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.
