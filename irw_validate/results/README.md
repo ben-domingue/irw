@@ -218,3 +218,39 @@ The generalisable form: **when a duplication story implies data is missing,
 count the ids before believing it.** All three corrections were stories that fit
 the measurements without being tested against the alternative that fits them
 equally well.
+
+## What has been double-checked
+
+Every verdict rests on the measurements in the CSV, but the ones that rest on a
+*judgment* were re-tested afterwards. Recording which, so a reader knows where
+the soft spots are.
+
+**Held under re-testing:**
+
+- **The four renames**, checked on content rather than on row counts. For each
+  pair the archive's `id` set and `item` set hash **identically** to the live
+  table's — 5,809 ids and 59 items for `Veterans_Affairs_SSVF_Survey_2016-17`,
+  4,588 items for `mturkddm_lexical`, and so on. Not a coincidence of three
+  matching integers.
+- **`rt` as the separator in `duolingo_*`** — measured per column rather than
+  assumed. See Block I in the worklist for the table.
+- **The partial-explanation calls.** Measured as *what fraction of duplicated
+  `id`+`item` groups does this column actually take more than one value in*:
+  `cov_sample` in `selfcompassionscale` 100%, `figure` in `PSR-P_..._PSI` 100%,
+  `rater` in `dumas_Organisciak_2022` 100%, `occasion` in `psychtools_sai` 99.9%,
+  and `age` in `5personalityfactors` **5.6%** — which is why that one alone is
+  `mixed_dedupe_then_source` rather than `document_column`. The split is much
+  sharper than the row-based percentages first suggested; nothing sits near a
+  threshold.
+- **`selfcompassionscale`** specifically: 122 ids appear in more than one of the
+  six samples, and 122 × 12 items = 1,464, exactly the number of duplicated
+  groups. The collision accounts for all of them.
+
+**Corrected under re-testing:** `Fh_Okcsr_Roos_2022_study1_Feeling_Heard`,
+`pact_project`, and `florida_twins_behavior_*` — see the correction note above.
+
+**Not independently re-tested:** the 27 `id_collision` verdicts are each backed
+by a processing script, a probe of the group structure, or both, but only
+`PEMAIW`, `EWAS`, `AOMT`, `OS_Schubert`, `CV_Novak`, `pass20`, `evpromisi` and
+`selfcompassionscale` were examined individually; `sris_silvia2022` and
+`fcupanas_cffsdas_reyna_2018` rest on the group-structure probe alone.
