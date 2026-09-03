@@ -9,6 +9,14 @@ that is how the work actually divides — `PEMAIW_Qiu_2020.R` clears seven table
 in one edit. Take a block, not a table. Ordered by `PRIORITIES.md`: corpus trust
 first, then gates.
 
+**The `id` fix is settled.** For the collision blocks (B–E), prefix `id` with the
+`study`/`group` label that identifies the sample — approved by Ben, 2026-09-02,
+"where appropriate", so use judgment per table. Keep the label as a column too
+(`cov_study`/`cov_group`); folding it into `id` and dropping it loses a real
+covariate. Format is open (`2_1`, `study2_1`) provided it is consistent within a
+table and the separator cannot occur in a source id. This rule is general enough
+that it probably belongs in `datastandard.md`, not only here.
+
 **Nothing here is uploaded by whoever does the work.** Regenerate, verify, hand
 to Ben — uploading is his step, and only ever as a draft version.
 
