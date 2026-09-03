@@ -111,6 +111,15 @@ live_rows <- tags[key(tags$table) %in% live, , drop = FALSE]
 ##That is a measurement bug, not a coverage gap, and it is the same mistake this
 ##file was written to stop: quoting a number whose denominator does not match
 ##the claim (#1767, #1837).
+##`construct name` is not a tag column and is no longer reported as a coverage
+##gap (Ben's ruling, 2026-09-02, #1837). It holds 2,038 distinct values across
+##2,265 tables and 1,871 of them are used exactly once -- "International Math
+##Olympiad problems", "Individual differences in story recall". Those are
+##descriptions, not categories, and a percentage implies a right answer is being
+##missed when there is none to miss. The fill rate is still reported, under a
+##name that says what it is.
+DESCRIPTION_COLS <- c("construct name")
+
 ELIGIBLE_WHEN <- list(`child age (for child-focused studies)` =
                       function(d) trimws(as.character(d[["age range"]])) %in%
                                   c("Child (<18y)", "Mixed"))
@@ -121,6 +130,11 @@ by_column <- lapply(intersect(TAG_COLUMNS, names(live_rows)), function(cl) {
     denom <- if (is.null(gate)) n else length(unique(key(rows$table)))
     k <- length(unique(key(rows$table[filled(rows[[cl]])])))
     out <- list(n = k, pct = if (denom > 0) round(100 * k / denom, 1) else 0)
+    if (cl %in% DESCRIPTION_COLS) {
+        out$kind <- "description"
+        out$note <- paste("free text, not a controlled vocabulary -- a fill rate,",
+                          "not a coverage target (#1837)")
+    }
     if (!is.null(gate)) {
         out$denominator <- denom
         out$of <- "tables whose `age range` is Child (<18y) or Mixed"
