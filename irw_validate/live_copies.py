@@ -31,6 +31,19 @@ How to read it:
   `5personalityfactors`, `realpic_souza2021` (4,116 and 28), the
   `PROMISPME_*_Proxy` tables (53,928 and 56).
 
+**The shape alone is not enough**, and this module got that wrong first time
+round. `florida_twins_behavior_cads` and `ravens_deboeck2012` have the identical
+histogram -- every pair exactly twice, no singletons -- and need opposite
+treatment. The second column is whether the copies ever *disagree*: ravens
+conflicts on 2,977 of its 5,811 pairs because the two rows are two different
+tree nodes; florida_twins conflicts on **0 of 78,146** because they are one
+measurement written twice. The same cohort settles it -- the
+separately-processed `florida_twins_cads` carries the same instrument and
+disagrees on 51.6% of its repeated pairs.
+
+So both columns, always: the histogram says whether repetition is systematic,
+the conflict share says whether the repeats are separate measurements.
+
 The trap this exists to close: `excess_exact > 0` does **not** mean a table
 holds duplicates. In a repeated-measures design a person answering the same
 item the same way twice is byte-identical and entirely real. Three of block H's
@@ -49,18 +62,41 @@ import sys
 import time
 
 FIELDS = ["table", "ref", "n_pairs", "max_copies", "share_singletons",
-          "modal_copies", "shape", "histogram", "error"]
+          "modal_copies", "repeated_pairs", "conflicting_pairs", "conflict_share",
+          "shape", "histogram", "error"]
 
 
-def classify(hist: list[tuple[int, int]]) -> str:
-    """A first read of the shape. Advisory -- look at the histogram itself."""
+def classify(hist: list[tuple[int, int]], conflict_share=None,
+             repeated_pairs=0) -> str:
+    """A first read. Advisory -- look at the histogram and the conflicts.
+
+    **The shape alone is not enough, and mistaking that is how a real fix goes
+    wrong.** `florida_twins_behavior_cads` and `ravens_deboeck2012` have the
+    identical histogram -- every pair exactly twice, no singletons -- and need
+    opposite treatment. What separates them is whether the two copies ever
+    disagree: ravens conflicts on 2,977 of 5,811 pairs because its two rows are
+    two different tree nodes, while florida_twins conflicts on **0 of 78,146**
+    because its two rows are the same measurement written twice.
+
+    Zero disagreement across tens of thousands of pairs is duplication. People
+    vary when you measure them twice, and the same cohort proves it: the
+    separately-processed `florida_twins_cads` holds the same instrument and
+    disagrees on 51.6% of its repeated pairs.
+    """
     if not hist:
         return ""
     total = sum(n for _, n in hist)
     ones = dict(hist).get(1, 0)
+    unanimous = (conflict_share == 0 and repeated_pairs >= 1000)
     if len(hist) == 1 and hist[0][0] > 1:
+        if unanimous:
+            return (f"duplication: every pair repeats exactly {hist[0][0]}x and "
+                    f"none of {repeated_pairs:,} ever disagrees")
         return f"design: every pair repeats exactly {hist[0][0]}x"
     if ones / total < 0.5:
+        if unanimous:
+            return (f"duplication: most pairs repeat but none of "
+                    f"{repeated_pairs:,} disagrees")
         return "repeated measurement: most pairs repeat"
     if max(c for c, _ in hist) <= 2:
         return "duplication or id collision: a tail at 2 only"
@@ -76,10 +112,13 @@ def measure(redivis, idx: dict, table: str) -> dict:
             return rec
         ref = refs[0]
         rec["ref"] = ref
-        sql = f"""SELECT c AS copies, COUNT(*) AS n_pairs FROM (
-                    SELECT CAST(`id` AS STRING) i, CAST(`item` AS STRING) it,
-                           COUNT(*) c FROM `{ref}` GROUP BY i, it)
-                  GROUP BY c ORDER BY c"""
+        sql = f"""
+        WITH g AS (
+          SELECT CAST(`id` AS STRING) i, CAST(`item` AS STRING) it, COUNT(*) c,
+                 COUNT(DISTINCT IFNULL(CAST(`resp` AS STRING),'<<NULL>>')) dr
+          FROM `{ref}` GROUP BY i, it)
+        SELECT c AS copies, COUNT(*) AS n_pairs, SUM(IF(dr > 1, 1, 0)) AS n_conflicting
+        FROM g GROUP BY c ORDER BY c"""
         for attempt in range(4):
             try:
                 rows = redivis.query(sql).to_arrow_table(progress=False).to_pylist()
@@ -95,7 +134,14 @@ def measure(redivis, idx: dict, table: str) -> dict:
         rec["share_singletons"] = (round(dict(hist).get(1, 0) / total, 5)
                                    if total else "")
         rec["modal_copies"] = max(hist, key=lambda x: x[1])[0] if hist else ""
-        rec["shape"] = classify(hist)
+        # Repetition without disagreement is duplication; the shape cannot say
+        # that on its own. See classify().
+        rep = sum(r["n_pairs"] for r in rows if r["copies"] > 1)
+        con = sum(r["n_conflicting"] for r in rows if r["copies"] > 1)
+        rec["repeated_pairs"] = rep
+        rec["conflicting_pairs"] = con
+        rec["conflict_share"] = round(con / rep, 5) if rep else ""
+        rec["shape"] = classify(hist, rec["conflict_share"], rep)
         rec["histogram"] = "|".join(f"{c}:{n}" for c, n in hist)
     except Exception as exc:
         rec["error"] = str(exc)[:300]
@@ -145,6 +191,7 @@ def main(argv=None) -> int:
             f.flush()
             print(f"[{i}/{len(tables)}] {t} max={rec.get('max_copies')} "
                   f"singletons={rec.get('share_singletons')} "
+                  f"conflict={rec.get('conflict_share')} "
                   f"{rec.get('shape', '')} {rec['error'][:50]}")
     return 0
 
