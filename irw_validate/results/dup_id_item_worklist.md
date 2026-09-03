@@ -155,11 +155,40 @@ causes this flag.
 
 `duolingo_{en_es,es_en,fr_en}__{listen,reverse_tap,reverse_translate}` (7 of the 9).
 
-A spaced-repetition trace, so meeting the same lexeme repeatedly **is** the
-design — but `session` leaves most of the excess unseparated (repeats happen
-within one session) and what actually makes rows unique is `rt`. A response time
-is a measurement, not an occasion label. Restore a per-exposure index from the
-source.
+A spaced-repetition trace, so a learner meeting the same lexeme repeatedly **is**
+the design. The problem is that nothing identifies which exposure a row belongs
+to. Measured on `duolingo_fr_en__listen`, over its 7,641 duplicated `id`+`item`
+groups, here is what actually separates them:
+
+| column | separates | |
+|---|---|---|
+| `rt` | 84.1% | a measurement, not an identifier |
+| `dependency_head` | 28.0% | item-level column that **varies within item** |
+| `dependency_label` | 14.4% | ditto |
+| `session` | 9.4% | the only real occasion column, and it barely helps |
+| `morphology` | 8.0% | ditto |
+| `part_speech` | 2.5% | ditto |
+| `format`, `stem` | 0% | constant within item, as they should be |
+
+Two things follow. **`rt` is carrying the load**, which is the defect — a
+response time is a measurement, and rounding it would silently merge rows.
+**And it is not even sufficient:** 861 of the 8,820 excess rows survive grouping
+by all ten columns, so ~10% of the table is genuinely unidentifiable as it
+stands.
+
+The dependency and morphology columns varying *within* an item is the clue to
+the fix, and a second finding in its own right. They are properties of the
+token's syntactic role, so their variation means the same lexeme is being met in
+**different exercises** — which is exactly the exposure index the table is
+missing, present implicitly and never materialised. Per `datastandard.md` an
+`itemcov_*` should be a function of the item; these are not, so `item` is
+under-identifying.
+
+Restore a per-exposure index from the source, and dedupe the byte-identical
+residue (767 rows here) separately.
+
+*Done when:* `excess_pair` is 0. Unlike Blocks A/F this one really should reach
+zero — with an exposure index every row is uniquely keyed.
 
 ### Block J — trial-level, no trial index · 4 tables · 84,777 rows
 
