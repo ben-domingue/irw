@@ -22,6 +22,26 @@ recomputed one, that is printed rather than silently resolved.
 ~90% of the sheet's `Mixed` labels are contradicted by the table's own
 `cov_age` (#1760), so the sheet is not gold for that column.
 
+TWO THINGS THIS RUN CANNOT MEASURE, both disclosed rather than worked around:
+
+1. REACHED and ANSWERED are not the same event, and the arms report them
+   unequally. Agents in both arms filled fields from the Data Dictionary's
+   description sentence when the fetch itself had failed -- Step 2 permits it
+   ("useful context even without a doi") -- so a table can be `tagged` with no
+   source ever read. Path B records `fetch_outcome` and this is visible in its
+   output; the skill's payload has no such field, so PATH A CANNOT DISTINGUISH
+   A TAG READ FROM THE PAPER FROM A TAG READ FROM THE CATALOGUE BLURB. That is
+   reported as an asymmetry, not averaged away.
+
+2. Both arms ran in one worktree and therefore shared `.cache/`. fetch_source.py
+   caches by table name, so whichever arm reached a table first warmed the cache
+   for the other. Per-ARM reachability is consequently not identifiable here.
+   What is identifiable is per-TABLE reachability -- which the cache measures
+   directly, path-independently, and is reported below -- and each arm's
+   willingness to commit a value given the same fetched text. Since both paths
+   invoke the SAME fetcher, per-arm reachability was never the live question;
+   the confound costs little, but it is real and it is stated.
+
 Usage:
     python3 compare_paths.py --key compare_key.json \
         --arm-a armA_1.json armA_2.json --arm-b armB_1.json armB_2.json ...
@@ -121,9 +141,37 @@ def main():
         print(f"{a}: {len(by_arm[a])} rows, {len({r['table'] for r in by_arm[a]})} distinct tables")
 
     table(by_arm, ["untagged", "gold"], lambda r: r["population"],
-          "REACHABILITY by population", arms)
+          "ANSWERED (any field non-blank) by population", arms)
     table(by_arm, ["w1", "w2", "w3", "w4", "w5"], lambda r: r["shard"],
-          "REACHABILITY by shard", arms)
+          "ANSWERED (any field) by shard", arms)
+
+    # Path-independent: did fetch_source.py ever land a source for this table?
+    # The cache is shared between the arms, so this is a property of the TABLE.
+    cache = REPO / "tags/.claude/skills/irw-auto-tag/.cache"
+    cached = {f.stem for f in cache.glob("*.txt")} if cache.exists() else set()
+    print("\nSOURCE ACTUALLY FETCHED, per table (from .cache/, path-independent)")
+    for grp, of in [("untagged", "population"), ("gold", "population")]:
+        tabs = {k["table"] for k in key.values() if k[of] == grp}
+        print(f"  {grp:<10}{pct(len(tabs & cached), len(tabs)):>8}  "
+              f"({len(tabs & cached)} of {len(tabs)})")
+    for sh in ["w1", "w2", "w3", "w4", "w5"]:
+        tabs = {k["table"] for k in key.values() if k["shard"] == sh}
+        if tabs:
+            print(f"  {sh:<10}{pct(len(tabs & cached), len(tabs)):>8}  "
+                  f"({len(tabs & cached)} of {len(tabs)})")
+
+    print("\nTAGGED WITHOUT A FETCHED SOURCE -- values taken from the dictionary")
+    for a in arms:
+        n = [r for r in by_arm[a]
+             if r["status"] == "tagged" and r["table"] not in cached]
+        print(f"  {a:<12}{len(n):>3}   " + ", ".join(r["table"] for r in n[:6]))
+    print("  Path A's payload has no fetch_outcome field, so on its own output")
+    print("  this distinction is not recoverable at all -- see the docstring.")
+
+    print("\nFETCH OUTCOME as each arm reported it (Path A: field not modelled)")
+    for a in arms:
+        tally = Counter(r["fetch_outcome"] or "(not reported)" for r in by_arm[a])
+        print(f"  {a:<12}" + "  ".join(f"{k}={v}" for k, v in sorted(tally.items())))
 
     print("\nABSTENTION reasons")
     for a in arms:

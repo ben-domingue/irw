@@ -1,0 +1,221 @@
+# Two-path comparison, 2026-09-03 (#1704). seed=20260903, 40 tables.
+# Arm A = irw-auto-tag skill as documented (2 agents x 20).
+# Arm B = pilot/scoring harness (4 blind agents x 10).
+# Same 40 tables, shuffled and unlabelled, both arms. Sonnet.
+
+A skill: 40 rows, 40 distinct tables
+B harness: 40 rows, 40 distinct tables
+
+ANSWERED (any field non-blank) by population
+                                     A skill             B harness
+                          reached    abstain    reached    abstain
+untagged                   100.0%          0     100.0%          0
+gold                        85.0%          3      95.0%          1
+
+ANSWERED (any field) by shard
+                                     A skill             B harness
+                          reached    abstain    reached    abstain
+w1                          80.0%          1     100.0%          0
+w2                          80.0%          2      90.0%          1
+w3                         100.0%          0     100.0%          0
+w4                         100.0%          0     100.0%          0
+w5                         100.0%          0     100.0%          0
+
+SOURCE ACTUALLY FETCHED, per table (from .cache/, path-independent)
+  untagged    100.0%  (20 of 20)
+  gold         80.0%  (16 of 20)
+  w1          100.0%  (5 of 5)
+  w2           60.0%  (6 of 10)
+  w3          100.0%  (10 of 10)
+  w4          100.0%  (10 of 10)
+  w5          100.0%  (5 of 5)
+
+TAGGED WITHOUT A FETCHED SOURCE -- values taken from the dictionary
+  A skill       2   liu_2021_vrexp_brums, gmc_kay_2025
+  B harness     3   colombia_2023_politics_reasons, liu_2021_vrexp_brums, gmc_kay_2025
+  Path A's payload has no fetch_outcome field, so on its own output
+  this distinction is not recoverable at all -- see the docstring.
+
+FETCH OUTCOME as each arm reported it (Path A: field not modelled)
+  A skill     (not reported)=40
+  B harness   fetch_failed=3  ok=24  paywall=1  repository_metadata=12
+
+ABSTENTION reasons
+  A skill: 3
+     psychtools_geras                            w1  no working link
+     cognitive_load_klimova_2023_paas            w2  no working link
+     colombia_2023_politics_reasons              w2  no working link
+  B harness: 1
+     cognitive_load_klimova_2023_paas            w2  fetch blocked (http_403) on all three candidate URLs despite
+
+PER-COLUMN FILL, of all 40 (blank = abstention, which vocab.md asks for)
+column                   A skill   B harness    delta
+primary_languages          90.0%       92.5%    +2.5
+item_format                67.5%       67.5%    +0.0
+sample_setting             57.5%       65.0%    +7.5
+measurement_tool           87.5%       97.5%   +10.0
+  ------------------------------------------------------  (held, not published)
+construct_type             77.5%       92.5%   +15.0
+sample_frame               70.0%       70.0%    +0.0
+construct_name             82.5%       92.5%   +10.0
+age_range                  37.5%       37.5%    +0.0
+child_age                   5.0%        5.0%    +0.0
+
+AGREEMENT between the arms, table by table, on the four published columns
+  primary_languages    both answered  35   identical 100.0%
+  item_format          both answered  24   identical  91.7%
+  sample_setting       both answered  21   identical  95.2%
+  measurement_tool     both answered  35   identical  97.1%
+
+age_range vs the cov_age derivation (the only trustworthy gold for it)
+  A skill      answered   4 of the 20 with a derived value   correct  75.0%
+  B harness    answered   4 of the 20 with a derived value   correct 100.0%
+
+wrote armA_as_preds.json, armB_as_preds.json, compare_sample_for_score.json
+now run score.py and score_sample_facets.py over BOTH adapted files
+
+################ score.py, ARM A ################
+tables: 40 attempted | 37 tagged | 3 abstained (8% of the sample had no usable source)
+
+column                gold   ans   ok  accuracy  coverage   yield
+----------------------------------------------------------------
+age_range               22     5    4     80.0%     22.7%   18.2%
+child_age                2     0    0        --      0.0%    0.0%
+sample                  17     9    3     33.3%     52.9%   17.6%
+construct_type          17    14    6     42.9%     82.4%   35.3%
+measurement_tool        17    15   14     93.3%     88.2%   82.4%
+item_format             17    10    7     70.0%     58.8%   41.2%
+primary_languages       17    17   17    100.0%    100.0%  100.0%
+
+child_age, with NA read as the answer 'not a child-focused study':
+  correctly left blank when gold is NA : 20
+  wrongly filled when gold is NA       : 1
+
+per-warehouse (all columns pooled, tagged tables only):
+  item_response_warehouse       4 tagged,  1 abstained   11/ 26 =  42.3%
+  item_response_warehouse_2     4 tagged,  2 abstained    6/ 19 =  31.6%
+  item_response_warehouse_3     6 tagged,  0 abstained   16/ 31 =  51.6%
+  item_response_warehouse_4     8 tagged,  0 abstained   17/ 32 =  53.1%
+  item_response_warehouse_5     1 tagged,  0 abstained    1/  1 = 100.0%
+
+multi-select columns -- how they miss, not just whether:
+  column                  n    exact  subset  super  overlap  disjoint   >=1 atom
+  sample                  9    33.3%       1      2        0     33.3%      66.7%
+  construct_type         14    42.9%       1      0        0     50.0%      50.0%
+  primary_languages      17   100.0%       0      0        0      0.0%     100.0%
+  A subset or superset is a granularity disagreement on a genuinely
+  multi-faceted answer; a disjoint miss is a different answer entirely.
+
+multi-select, per-atom (micro-averaged) -- partial credit:
+  column                  tp    fp    fn  precision   recall      F1
+  sample                   6     8     5      42.9%    54.5%   48.0%
+  construct_type           7     7     9      50.0%    43.8%   46.7%
+  primary_languages       17     0     0     100.0%   100.0%  100.0%
+  Precision below recall means over-tagging; recall below precision
+  means it names too few facets. They fail differently, and a single
+  exact-match number cannot tell you which.
+
+confusions (gold -> predicted):
+  age_range:
+      1x  Adult (18+)  ->  Mixed
+  sample:
+      2x  Targeted/specific  ->  Internet-based, Representative
+      1x  Targeted/specific  ->  General/non-specific, Internet-based
+      1x  General/non-specific  ->  Educational, General/non-specific
+      1x  Internet-based  ->  Internet-based, Targeted/specific
+      1x  Educational, Representative, Targeted/specific  ->  Targeted/specific
+  construct_type:
+      2x  Opinion/attitude  ->  Other
+      2x  Opinion/attitude  ->  Personality
+      1x  Affective/mental health  ->  Developmental
+      1x  Affective/mental health, Opinion/attitude  ->  Opinion/attitude
+      1x  Affective/mental health, Opinion/attitude  ->  Personality
+      1x  Opinion/attitude  ->  Affective/mental health
+  measurement_tool:
+      1x  Survey/questionnaire  ->  Observational rating
+  item_format:
+      2x  Mixed  ->  Likert Scale/selected response
+      1x  Likert Scale/selected response  ->  Mixed
+
+abstained:
+  psychtools_geras                                     no working link item_response_warehouse
+  cognitive_load_klimova_2023_paas                     no working link item_response_warehouse_2
+  colombia_2023_politics_reasons                       no working link item_response_warehouse_2
+
+################ score.py, ARM B ################
+tables: 40 attempted | 39 tagged | 1 abstained (2% of the sample had no usable source)
+
+column                gold   ans   ok  accuracy  coverage   yield
+----------------------------------------------------------------
+age_range               24     6    5     83.3%     25.0%   20.8%
+child_age                2     0    0        --      0.0%    0.0%
+sample                  19    12    2     16.7%     63.2%   10.5%
+construct_type          19    18   10     55.6%     94.7%   52.6%
+measurement_tool        19    19   17     89.5%    100.0%   89.5%
+item_format             19    10   10    100.0%     52.6%   52.6%
+primary_languages       19    18   17     94.4%     94.7%   89.5%
+
+child_age, with NA read as the answer 'not a child-focused study':
+  correctly left blank when gold is NA : 23
+  wrongly filled when gold is NA       : 0
+
+per-warehouse (all columns pooled, tagged tables only):
+  item_response_warehouse       5 tagged,  0 abstained   13/ 32 =  40.6%
+  item_response_warehouse_2     5 tagged,  1 abstained   12/ 25 =  48.0%
+  item_response_warehouse_3     6 tagged,  0 abstained   16/ 31 =  51.6%
+  item_response_warehouse_4     8 tagged,  0 abstained   20/ 32 =  62.5%
+  item_response_warehouse_5     1 tagged,  0 abstained    0/  1 =   0.0%
+
+multi-select columns -- how they miss, not just whether:
+  column                  n    exact  subset  super  overlap  disjoint   >=1 atom
+  sample                 12    16.7%       0      6        0     33.3%      66.7%
+  construct_type         18    55.6%       1      1        0     33.3%      66.7%
+  primary_languages      18    94.4%       0      0        0      5.6%      94.4%
+  A subset or superset is a granularity disagreement on a genuinely
+  multi-faceted answer; a disjoint miss is a different answer entirely.
+
+multi-select, per-atom (micro-averaged) -- partial credit:
+  column                  tp    fp    fn  precision   recall      F1
+  sample                   9    14     4      39.1%    69.2%   50.0%
+  construct_type          14     7     8      66.7%    63.6%   65.1%
+  primary_languages       17     1     1      94.4%    94.4%   94.4%
+  Precision below recall means over-tagging; recall below precision
+  means it names too few facets. They fail differently, and a single
+  exact-match number cannot tell you which.
+
+confusions (gold -> predicted):
+  age_range:
+      1x  Adult (18+)  ->  Mixed
+  sample:
+      2x  Targeted/specific  ->  Internet-based, Representative
+      1x  Targeted/specific  ->  Internet-based, Targeted/specific
+      1x  General/non-specific  ->  Educational, General/non-specific
+      1x  Internet-based  ->  General/non-specific, Internet-based
+      1x  Educational, General/non-specific  ->  Educational, General/non-specific, Internet-based
+      1x  Educational  ->  Educational, Targeted/specific
+  construct_type:
+      2x  Opinion/attitude  ->  Other
+      1x  Opinion/attitude  ->  Personality
+      1x  Affective/mental health, Opinion/attitude  ->  Personality
+      1x  Opinion/attitude  ->  Affective/mental health
+      1x  Opinion/attitude  ->  Cognitive/educational, Opinion/attitude
+      1x  Affective/mental health  ->  Developmental
+  measurement_tool:
+      2x  Survey/questionnaire  ->  Observational rating
+  primary_languages:
+      1x  deu  ->  ger
+
+abstained:
+  cognitive_load_klimova_2023_paas                     fetch blocked (http_403) on all three candidate URLs despite an open copy existing (oa_status=green); not a paywall item_response_warehouse_2
+
+################ score_sample_facets.py ################
+
+armA_as_preds.json  --  23 tables with gold
+  gold answers the frame facet on 13/23; the prediction does on 14/23
+  setting  n=  5  exact  40.0%   precision 100.0%   recall  40.0%
+  frame    n= 13  exact  23.1%   precision  57.1%   recall  28.6%
+
+armB_as_preds.json  --  25 tables with gold
+  gold answers the frame facet on 15/25; the prediction does on 14/25
+  setting  n=  6  exact  50.0%   precision  80.0%   recall  66.7%
+  frame    n= 15  exact  33.3%   precision  62.5%   recall  31.2%
