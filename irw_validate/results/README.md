@@ -77,6 +77,49 @@ list and the fidelity measurement above — not a verdict on the corpus.
 
 ---
 
+# `dup_id_item` triage, 2026-09-02
+
+`dup_id_item_triage_2026-09-02.csv` follows up the 101 tables the sweep flagged.
+
+Ben's method: **where the local `.Rdata` row count matches `metadata.csv`, trust the
+local copy.** That covers 57 of the 101 — 39 differ from what is published and 5 are
+not in `metadata.csv`, so those need live data before anything can be said.
+
+Of the 57:
+
+| | tables | what it means |
+|---|---|---|
+| **explained by a column the check ignores** | 14 | `rater` ×11, plus `trialnum`, `order`, `period` |
+| **bare `id`/`item`/`resp`** | 15 | nothing can explain the repeat — real defects |
+| **unexplained** | 28 | other columns present, none resolves it — needs a per-table look |
+
+## The 14 were the check's fault, and it is fixed
+
+`dup_id_item` asked whether `wave`/`timepoint`/`date` explained a repeated `id`+`item`.
+That list came from `validate_irw.R` and is stale: it predates `rater` and never covered
+trial-level designs. Two raters scoring the same person on the same item is **the design**,
+and `datastandard.md` documents `rater` as a legitimate column — so the check was reporting
+the standard's own schema as an error.
+
+The gate profiles now consult `rater`, `trialnum`, `trial`, `order`, `session`, `occasion`,
+`period`, `block` and `subtest` as well. `triage` is unchanged, because fifty scripts
+depend on it.
+
+Deliberately **not** included: `group`, `study`, `treatment`. Those describe the person or
+the arm rather than the occasion, and a person appearing twice under them is a real
+question, not an explanation. Eleven of the 28 unexplained have exactly such a column.
+
+## What is left
+
+- **15 bare tables** — the `florida_twins_behavior_*` family is six of them, each with
+  100% of rows duplicated and no other column. Candidate for a straight dedupe, but the
+  source should say whether the duplication is in the original.
+- **28 unexplained** — per-table judgment.
+- **44 not yet analysed** — 39 whose local copy disagrees with what is published, 5 absent
+  from `metadata.csv`. These need live data; `data/pub` cannot answer for them.
+
+---
+
 # `dup_id_item` verdicts, 2026-09-02
 
 `dup_id_item_verdicts_2026-09-02.csv` carries a verdict for **all 101** tables the

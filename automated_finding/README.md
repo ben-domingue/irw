@@ -392,6 +392,22 @@ of short names so callers can react. Two consumers today:
 See BATCH_LOG.md's 2026-08-17 entry for the Harvard Dataverse incident that
 prompted both.
 
+**Unavailable sources.** `SourceUnavailable` is the per-query sibling of
+`SourceBlocked`: a connector raises it when *this* query did not complete —
+a proxy or connection failure, a timeout, a 5xx, a malformed response.
+`discover()` records the source against that query (`unsearched_sources(q)`)
+and keeps calling it, since the next term may well succeed.
+
+Every connector raises rather than returns on any exception, which is the
+whole point: a generator that returns early is indistinguishable from one
+that ran out of results, so the old `except Exception: print(...); return`
+made "never searched" look exactly like "searched, found nothing." That is
+what cost the 2026-09-02 monthly sweep 88 of its 125 terms — the outbound
+proxy went down mid-run, all 8 sources swallowed the `ProxyError`, and every
+affected term logged a false `0 candidates; sources=<all 8>`, advancing its
+`--since` watermark past a window nobody had queried. The rerun found 1,330
+candidates in it. An incomplete search is never evidence of an empty one.
+
 ### `irw_discover_monthly.py`
 Incremental wrapper around `irw_discover_updated.py` for a fixed
 `TERM_LIST`, meant to run on a schedule (see the `schedule` skill) rather
@@ -401,16 +417,26 @@ an `output_file` starting with `monthly_candidates_` — this avoids
 misreading an unrelated row, e.g. a PLOS batch that happens to reuse the
 same term text, as a repository-API run) and passes that as `--since`; a
 term run for the first time falls back to `--default-lookback-days` (90).
-After a run it appends one `search_terms_log.csv` row per term with today's
-date, so the next scheduled run advances automatically.
+It appends one `search_terms_log.csv` row per term *the moment that term
+finishes*, with today's date, so the next scheduled run advances
+automatically. Per-term rather than batched at the end: a ~100-term sweep
+runs for hours, and a container restart partway through used to discard the
+record of every term already done. Now an interruption costs only the
+in-flight term — rerun the rest with `--terms`.
 
-Only sources that were actually *reachable* go into that row's `sources=`
-note; any that hard-blocked (see `blocked_sources()` below) are listed under
-`blocked=` instead. This matters because the `sources=` note is what the
-next run's `--since` lookup trusts — logging a WAF-challenged source as
+Only sources that actually *completed a search of that term* go into its
+`sources=` note; anything that hard-blocked (`blocked_sources()`) or failed
+that particular query (`unsearched_sources()`) is named under
+`not_searched=` instead. This matters because the `sources=` note is what
+the next run's `--since` lookup trusts — logging an unreached source as
 searched would advance its watermark past a window nobody ever queried and
 skip it forever. Leaving it out means the lookup finds no covering row and
 falls back to the default lookback, which only ever searches wider.
+
+`--terms <term> ...` restricts a run to a subset of the mode's list (terms
+off the list are accepted too, they just get the default lookback), and
+`--note <text>` is appended to every log row's notes — together they are how
+you re-cover a window an earlier run lost, legibly.
 
 Changing `--sources` has the same effect on purpose: the lookup requires a
 prior row whose sources are a *superset* of the current set, so adding a
