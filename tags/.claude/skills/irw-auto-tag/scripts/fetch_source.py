@@ -38,6 +38,7 @@ Cache lives in ../.cache/ next to this scripts/ dir, one file per table --
 gitignored, not committed (see tags/.gitignore).
 """
 import argparse
+import os
 import io
 import json
 import re
@@ -50,7 +51,18 @@ import requests
 # OpenAlex asks for a contact address in the UA and gives faster, more
 # reliable service to requests that carry one ("the polite pool").
 UA = {"User-Agent": "irw-auto-tag/2.0 (research; ben.domingue@gmail.com)"}
-CACHE_DIR = Path(__file__).resolve().parent.parent / ".cache"
+# One cache per run when asked for one. Concurrent taggers share this directory
+# by default, and it has no locking: during the 2026-09-03 two-path comparison
+# two agents reported files appearing that they had not fetched, and one watched
+# its own entry vanish between fetching it and reading it, because another agent
+# had --force'd the same table. Both worked around it by hand.
+#
+# `--cache-dir`, or IRW_TAG_CACHE, gives a run its own namespace so that cannot
+# happen. The default is unchanged, so a single-agent run keeps sharing the
+# cache across sessions -- which is the point of it: a paywalled or rate-limited
+# source is not re-hit on every retry.
+CACHE_DIR = Path(os.environ.get("IRW_TAG_CACHE") or
+                 (Path(__file__).resolve().parent.parent / ".cache"))
 OPENALEX = "https://api.openalex.org/works/doi:{}"
 EPMC_SEARCH = ("https://www.ebi.ac.uk/europepmc/webservices/rest/search"
                "?query=DOI:%22{}%22&format=json&resultType=core")
@@ -94,6 +106,25 @@ BLOCKER_MARKERS = (
 def cache_path(table):
     safe = "".join(c if c.isalnum() or c in "-_." else "_" for c in table.lower())
     return CACHE_DIR / f"{safe}.txt"
+
+
+def write_cache(path, text):
+    """Write the cache entry so a concurrent reader never sees half of it.
+
+    `Path.write_text` truncates the file and then fills it, so a reader that
+    opens it in between gets an empty or partial file and reads it as the
+    source. Writing to a unique temporary in the same directory and then
+    os.replace()-ing it over the target makes the swap atomic: a reader holds
+    either the whole old entry or the whole new one, never a torn one.
+    """
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.with_suffix(f".{os.getpid()}.tmp")
+    try:
+        tmp.write_text(text, encoding="utf-8", errors="replace")
+        os.replace(tmp, path)
+    finally:
+        if tmp.exists():
+            tmp.unlink()
 
 
 def openalex_locations(doi):
@@ -176,6 +207,36 @@ def is_the_right_work(text, doi, title):
     return False, "wrong_work:doi_and_title_absent"
 
 
+# A page can be long, blocker-free, and still be furniture. Spain's CIS
+# barometer pages return ~16kB of visible Liferay/React menu text with the
+# survey itself loaded client-side; they clear MIN_USEFUL_CHARS and trip no
+# BLOCKER_MARKERS, and three independent raters in the 2026-09-03 two-path
+# comparison mistook them for reachable sources before reading them.
+#
+# What separates chrome from prose is not length but SENTENCE DENSITY. Menu
+# labels and JSON-LD fragments are not sentences. Measured over the 101 cached
+# pages with >=8000 chars of prose, every CIS page falls between 1.48 and 1.77
+# sentences per 1000 characters, the next page up is 3.36, and real articles run
+# 3.7-7.8. The threshold sits in that gap.
+#
+# This WARNS, it does not reject. The failure it catches is rare in the corpus
+# that still needs tagging -- of the 1,427 untagged tables, 543 are PLOS and
+# ~400 are the four repositories #1789 routed through APIs, and none is a
+# government CMS -- so rejecting on a heuristic would risk turning usable
+# fetches into failures to prevent a problem the reader can already see once
+# told to look. The reason string is what tells them to look.
+LOW_DENSITY_MIN_CHARS = 8000
+LOW_DENSITY_PER_1K = 2.5
+
+
+def sentence_density(prose):
+    """Sentences per 1000 characters. A sentence is >=8 words before a stop."""
+    if not prose:
+        return 0.0
+    n = sum(1 for seg in re.split(r"[.!?]+", prose) if len(seg.split()) >= 8)
+    return 1000.0 * n / len(prose)
+
+
 def classify(text):
     """Is this the source, or something standing in front of it?
 
@@ -188,6 +249,10 @@ def classify(text):
             return False, f"blocker:{marker.replace(' ', '_')}"
     if len(prose) < MIN_USEFUL_CHARS:
         return False, f"too_short:{len(prose)}_chars_visible"
+    density = sentence_density(prose)
+    if len(prose) >= LOW_DENSITY_MIN_CHARS and density < LOW_DENSITY_PER_1K:
+        return True, (f"low_prose_density:{density:.2f}_sentences_per_1k:"
+                      f"{len(prose)}_chars_visible")
     return True, f"{len(prose)}_chars_visible"
 
 
@@ -511,6 +576,10 @@ def main():
     ap.add_argument("--doi")
     ap.add_argument("--url")
     ap.add_argument("--force", action="store_true")
+    ap.add_argument("--cache-dir",
+                    help="write the cache here instead of ../.cache. Give each "
+                         "agent in a concurrent run its own, or they will "
+                         "--force over one another's entries.")
     ap.add_argument("--no-oa", action="store_true",
                     help="skip the OpenAlex lookup and resolve the DOI directly")
     args = ap.parse_args()
@@ -532,6 +601,9 @@ def main():
                 break
         args.doi = d
 
+    global CACHE_DIR
+    if args.cache_dir:
+        CACHE_DIR = Path(args.cache_dir)
     path = cache_path(args.table)
     if path.exists() and not args.force:
         print(f"CACHED {path} ({path.stat().st_size} bytes)")
@@ -576,8 +648,7 @@ def main():
             if ok:
                 ok, reason = is_the_right_work(text, args.doi, title)
             if ok:
-                CACHE_DIR.mkdir(exist_ok=True)
-                path.write_text(text, encoding="utf-8", errors="replace")
+                write_cache(path, text)
                 print(f"OK oa_status={oa_status} source={source} "
                       f"final_url={source} content={reason} attempts=1 -> {path}")
                 return
@@ -594,8 +665,7 @@ def main():
         if got is None:
             continue
         text, final_url = got
-        CACHE_DIR.mkdir(exist_ok=True)
-        path.write_text(text, encoding="utf-8", errors="replace")
+        write_cache(path, text)
         print(f"OK oa_status={oa_status} source={url} final_url={final_url} "
               f"content={reason} attempts={len(attempted)} -> {path}")
         return
@@ -609,8 +679,7 @@ def main():
     if repo_text:
         prose = visible_text(repo_text)
         if len(prose) >= MIN_METADATA_CHARS:
-            CACHE_DIR.mkdir(exist_ok=True)
-            path.write_text(repo_text, encoding="utf-8", errors="replace")
+            write_cache(path, repo_text)
             print(f"OK oa_status={oa_status} source={repo_source} "
                   f"final_url={repo_source} "
                   f"content=repository_metadata:{len(prose)}_chars_visible "

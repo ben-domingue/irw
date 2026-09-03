@@ -151,6 +151,8 @@ paywall on — not the fetch failing.** Those are different findings:
 | `OK ... content=repository_metadata:N_chars_visible` | **A catalogue record, not a paper** — the deposit's own title, description, keywords and file list, reached through the repository's API because its web page answers a bot challenge | Read it, but tag only what it actually says. It will usually support `construct_name` and sometimes `construct type`; it almost never states a sample or an age range, and vocab.md's rule against inferring those still binds |
 | `UNREACHABLE oa_status=closed` | No open copy exists | Stage `Notes = "cannot fully access due to paywall"` |
 | `UNREACHABLE oa_status=gold\|green\|hybrid\|bronze\|diamond` | An open copy **exists** and something else blocked us — a WAF, a captcha, a JS-only page, a dead link | **Not a paywall.** Stage `Notes = "no working link"`, and it is worth reporting: these are fixable |
+| `UNREACHABLE oa_status=not_checked` | **No DOI**, so OpenAlex was never asked, and the URL refused us — typically a government or institutional data portal answering 403 | **Not a paywall**, and you cannot show it is one: with no DOI there is no open-access status to appeal to. Stage `Notes = "no working link"` |
+| `OK ... content=low_prose_density:N_sentences_per_1k:M_chars_visible` | Long, blocker-free, and **probably furniture** — a CMS or JavaScript shell whose visible text is menus and metadata rather than the work | **Read it before trusting it.** Tag only what the text actually states; if it turns out to be chrome, treat it as `no working link` rather than tagging from the surrounding page |
 
 **Data repositories are asked through their APIs** (#1786). Their web pages
 serve a challenge or a JavaScript shell — Dataverse returns HTTP 202 with a
@@ -222,6 +224,30 @@ live-sheet half.
 
 Open a pull request with the new rows in `tags/tags_auto.csv`. **Merging is the
 accept** — no pasting, and nothing to confirm afterwards.
+
+### Columns publish per column, against a measured bar
+
+**Staging a value is not deciding to publish it.** Every column this skill fills
+is held to a per-atom precision bar — currently 90% — measured against the human
+gold set by `tags/scoring/`, and a column that has not cleared it is written by
+the tagger, kept in the predictions for later measurement, and **blanked before
+the rows are staged**. Selection is an act performed at assembly, deliberately
+and once, not something each tagging run decides for itself.
+
+As of 2026-09-03 that means `primary language(s)`, `item format`, `measurement
+tool` and the SETTING facet of `sample` publish; `construct type` and
+`sample`'s FRAME facet do not. Those two are not broken — they are measured, and
+they are under the bar: on the 2026-09-03 comparison `construct type` scored
+50.0% per-atom precision and the frame facet 57.1%.
+
+Do not read the current list off this paragraph and assume it is live. **Quote
+`tags/scoring/` and the most recent results file**, the way `status.json` rather
+than prose is what you quote for coverage.
+
+The gate has earned itself once already: #1802 withheld 44 of 60 `primary
+language(s)` rows after four agents disclosed, unprompted, that they had
+inferred the language from the study's *country* — the move the `age range`
+rule forbids and which `vocab.md` had never addressed for language.
 
 Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with three rules
 worth knowing:
