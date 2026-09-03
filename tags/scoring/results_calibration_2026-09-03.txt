@@ -1,7 +1,7 @@
 # w3/w4 calibration, 2026-09-03 (#1704). seed=1704, 150 tables, six blind agents, Sonnet.
-# First run under the rules added 2026-09-03: the Workplace setting atom, the
-# dictionary/source contradiction rule, P4's low_prose_density warning, and
-# P5's per-agent caches. Measurement mode: SKILL.md Step 1 skipped.
+# CORRECTED: the first scoring split `Internet-based (Mturkers, etc)` on its
+# internal comma and dropped it, understating sample-setting fill in BOTH arms.
+# Setting fill is 84.0% (w3/w4) and 51.7% (w5 baseline), not 71.3% and 46.7%.
 
 
 === baseline predictions_pilot_w5: 60 tables ===
@@ -18,7 +18,7 @@ per-column fill, of ALL sampled tables (not of those reached)
 column                      ?      ALL
 primary_languages       73.3%    73.3%
 item_format             83.3%    83.3%
-sample_setting          46.7%    46.7%
+sample_setting          51.7%    51.7%
 measurement_tool       100.0%   100.0%
   ------------------------------------   (held, not published)
 construct_type          81.7%    81.7%
@@ -46,7 +46,7 @@ per-column fill, of ALL sampled tables (not of those reached)
 column                     w3       w4      ALL
 primary_languages       93.8%    91.8%    92.7%
 item_format             93.8%    94.1%    94.0%
-sample_setting          84.6%    61.2%    71.3%
+sample_setting          95.4%    75.3%    84.0%
 measurement_tool       100.0%    97.6%    98.7%
   ---------------------------------------------   (held, not published)
 construct_type          95.4%    94.1%    94.7%
@@ -62,7 +62,3 @@ by batch -- an outlier here is one agent, not one shard
   preds_calib_C4  25 tables   reached 100.0%
   preds_calib_C5  25 tables   reached 100.0%
   preds_calib_C6  25 tables   reached 100.0%
-
-WARNING -- `sample` values outside vocab.md's eight atoms, counted in neither facet:
-  'Internet-based (Mturkers'
-  'etc)'
