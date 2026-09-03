@@ -1532,3 +1532,116 @@ Rounds run from a **worktree** (`/home/ben/irw-wt/1709/itemtext`, branch
 `check_provenance.R`'s `../../irw_site/` argument resolves outside the worktree and was made
 absolute in the round prompt. The prompt itself is now a file,
 `extraction_batches/round_prompt_v1.md`, rather than a 15kB paste re-transcribed per restart.
+
+## batch_016 — 2026-09-03 — first round of the restart. 8 written, 4 blocked. CIRCUIT BREAKER TRIPPED.
+
+12 tables, one agent each, worked in queue order. **8 wrote a CSV, 4 blocked.** At 33.3%
+`failed` the breaker fired, `circuit_breaker.flag` is written and the cron job
+`ITEMTEXT_BATCH_ROUND_V1` has been deleted. Nothing uploaded.
+
+### Gates (all run at round close, against live data)
+
+| gate | result |
+|---|---|
+| `normalize_nulls.R` | 8/8 already clean, 0 normalized |
+| `audit_batch.R` | **6 PASS, 2 WARN** — both WARNs explained in `notes.csv` per Step 5c |
+| `verify_batch.R` | **5 PASS, 3 exempt** — no FAIL, no missing verdict |
+| `lint_verification.R` | **0 ERROR, 3 WARN** (adjudicated below) |
+| `irw-validate` | 8/8 ok |
+| `check_provenance.R` | 232 rows / 18 files, no vocabulary error |
+
+`mapping_verification.csv`: 139 -> 151 rows, no collisions. The 12 added are 4 VERIFIED,
+1 PARTIAL, 4 NO_ROUTE, 3 NOT_NEEDED.
+
+### The four blocks are correct outcomes, not faults
+
+`neurips_2020` and `neurips_2022` (Eedi publishes no wording as text; the 2020 images are barred
+from reuse and 2022 ships none), `icar_sapa` (ICAR pool gated behind registration; 35 of 60 items
+figural — **blocked, not excluded**, since ICAR is public-domain and stays re-queueable), and
+`concretewords` (the table is **transposed** — `item <- x$Participant`, so the item axis holds
+anonymous rater IDs; 1831/1831 match the Qualtrics ID pattern, 0/1831 contain a space).
+
+### Four response-data defects found by extraction
+
+This round found more than any previous one, and none is an item-text problem:
+
+1. **`neurips_2020` item-code collision** — the task-1/2 and task-3/4 releases are anonymised
+   separately and the challenge guide forbids linking their IDs, but `data/neurlps_2020.R` rbinds
+   them and sets `item = question_id + 1`. Result: 27,613 contiguous codes instead of 28,561, and
+   codes 1-948 each pool two different questions (median n 2,515 vs 396). `id` is merged the same
+   way, so persons collide too.
+2. **`neurips_2020` `resp` conflation** — a `rename(IsCorrect = AnswerValue)` before the rbind
+   mixes binary correctness with 1-4 option identity; 22,468 of 27,613 items carry all five levels.
+   This is the `resp_ambiguous` class.
+3. **`concretewords` transposition** — as above.
+4. **`vocabulary_iq` scoring defect** — `data/vocabulary_iq.R` scores *every* column against the
+   vocabulary answer key, so the 30 bundled personality-survey items' 1-5 agreement responses
+   (361,632 non-missing cells) all collapse to `resp=0`. Items 46-75 are unusable as responses.
+
+**Two dictionary/metadata defects** as well: `hypersensitive_narcissism` is the HSNS *plus* the
+Dirty Dozen (22 items, not 10) and its dictionary Reference cites an unrelated study (Jorgenson
+2016 OHBDS); `content_literacy_intervention_g1` is the N=5,494 grade-1-AND-2 replication
+(`doi:10.7910/DVN/HQEMN6`), not the N=674 first-grade trial its dictionary cites, so the `_g1`
+suffix is misleading. `vocabulary_iq` likewise bundles two instruments.
+
+### lint WARNs — adjudicated, statuses kept
+
+`hypersensitive_narcissism`, `machivallianism_test_tipi` and `short_dark_triad` were flagged
+VERIFIED-but-hedging. Reviewed: in all three the mapping axis IS fully established (132/132 cells
+and 22/22 distinct profiles; 10 mutually distinct per-item counts; 135/135 cells and 27 distinct
+profiles — every item separated from every other). The hedges concern the *source's own* fidelity
+and the unlabelled anchors at resp 2/4, which is a different question from item<->text mapping.
+Statuses stand. The lint is a keyword heuristic that correctly prompted the review.
+
+### Process problems this round exposed
+
+**1. The cadence is wrong and a second round fired mid-flight.** BATCH_PROCESS.md sets
+`7,22,37,52` on the assumption a round takes "well under 10 minutes with 4-way parallelism". Under
+one-agent-per-table these agents ran 3.6-16.4 minutes each and the round took ~40. A second firing
+arrived while batch_016 was still `in_progress`; it correctly stood down, but only because a human
+was watching — **Step 0 has no in-flight stop condition**, and none of its three conditions covers
+this.
+
+**2. Step 3's cleanup destroys its own output.** The step says merge into
+`verification_merged.csv`, then delete the per-table files. `rm -f verification_*.csv` matches
+`verification_merged.csv`, which is the exact filename `lint_verification.R` requires. Following
+the documented procedure literally deleted all 9 verification rows at round close. They were
+restored verbatim by resuming each agent (every one still held its evidence string; byte sizes
+matched the originals), and the merge was redone deleting by explicit name. **Fix the step**:
+merge to a name outside the glob and rename, or delete by name. Two agents identified this
+independently.
+
+**3. `validate_items.R` cannot satisfy the quota rule on a live table.** Its only two data routes
+are `--resp-csv` against a local file and live `irw::irw_fetch()`, which exports the whole table.
+So on any live IRW table the "HARD GATE" necessarily spends export quota, contradicting the
+standing "never `irw_fetch` for a gate" constraint. Each agent resolved it alone and they did not
+agree: two skipped the gate and substituted server-side set checks (`hypersensitive_narcissism`
+1.19M rows, `machivallianism_test_tipi` 729k), two ran it live (`psychoneurotic_inventory` 698k,
+`vocabulary_iq` 913k), and `short_dark_triad` built a 135-row surrogate CSV from an aggregate
+`GROUP BY` and passed it via `--resp-csv` — sound for the two set comparisons, but a deviation
+that was reported as a bare PASS until asked. **Recommended fix: give `validate_items.R` a third
+route that takes its item and resp sets from `irw::irw_table_sets()`.** The script's own header
+says it only compares sets, so this loses nothing and makes the quota rule satisfiable.
+
+### The breaker fired on correct behaviour — needs a ruling
+
+Step 5 maps "wrote no CSV" to `failed` and the breaker counts `failed`, but SKILL.md and the
+2026-09-03 ruling both say an honest block is a CORRECT outcome and that blank-when-uncertain is
+the extractor's validated property. Eight clean extractions plus four well-documented source
+blocks is a good round by the skill's own standard, and it halted the loop.
+
+This is the second time: batch_005 tripped at 33% and `round_log` recorded it as "a coincidental
+cluster of WAF-blocked and missing-file sources, not a pipeline fault". The queue is worked in
+table order and the head of the queue is where the corpus's large public-dataset tables sit —
+bare-integer codes, image or closed sources — so clearing the flag without changing anything will
+likely trip it again within a round or two.
+
+**Proposal for Ben:** count only genuine faults toward the breaker (gate FAIL, crash, verify FAIL,
+lint ERROR) and track documented source blocks as a separate non-halting statistic. A threshold
+that fires on declining-to-guess trains future rounds away from the one property the 110-table
+study validated.
+
+### Queue
+
+1,213 pending -> 1,201 pending, 131 done, 15 failed, 54 excluded. The four blocked tables are
+recorded in `itemtables/pending_index_notes.csv` with `status=blocked`.
