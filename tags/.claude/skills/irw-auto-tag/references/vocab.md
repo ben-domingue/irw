@@ -198,6 +198,13 @@ language, list them all (`eng, vie`).
 
 ## Construct type (multi-select, comma-separated)
 
+**Boundary rules are proposed but not yet ruled on** — see
+`tags/decisions/1837_construct_type.md`. Until they are, this is a bare enum
+with no guidance on where the values divide, which is why the column sits at
+64.9% exact match and under-tags (80% precision, 70% recall). Read that file
+before tagging this column, and treat its five proposals as the current best
+reading rather than as settled rules.
+
 Order doesn't matter. `03_tags.R` sorts atoms into canonical order on export,
 so `Behavioral, Opinion/attitude` and `Opinion/attitude, Behavioral` become the
 same published string — don't spend effort hand-sorting, and don't treat a
