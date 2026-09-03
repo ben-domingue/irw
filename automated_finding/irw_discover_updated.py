@@ -56,7 +56,33 @@ class SourceBlocked(Exception):
     pass
 
 
+# Source connectors raise this when a query did NOT complete -- a proxy or
+# connection failure, a timeout, a 5xx, a malformed response. Distinct from
+# SourceBlocked in scope: a block is permanent for the run (stop asking), an
+# unavailability is per-query (the next term may well succeed), so discover()
+# keeps calling the source but records that THIS query never got an answer
+# from it.
+#
+# The reason this exists at all: every connector used to swallow these with a
+# bare `except Exception: print(...); return`, which ends the generator exactly
+# the way "no more results" does. Callers could not tell "searched, found
+# nothing" from "never actually searched", so irw_discover_monthly.py logged
+# `0 candidates` for a term whose sources were all unreachable and advanced its
+# --since watermark past a window nobody ever queried. That is a permanent,
+# invisible hole in coverage -- it cost the 2026-09-02 monthly sweep 88 of its
+# 125 terms when the outbound proxy went down mid-run (see BATCH_LOG.md), and
+# is the same failure shape as PR #1625. Anything that stops a connector short
+# is now raised, not printed: an incomplete search is never evidence of an
+# empty one.
+class SourceUnavailable(Exception):
+    pass
+
+
 _blocked_sources: set[str] = set()
+
+# {query: {short source name, ...}} -- sources that raised SourceUnavailable
+# (or were already blocked) while running that query, i.e. did not search it.
+_unsearched_by_query: dict[str, set[str]] = {}
 
 
 def blocked_sources() -> set[str]:
@@ -70,6 +96,17 @@ def blocked_sources() -> set[str]:
     window forever. See irw_discover_monthly.py's log rows for the consumer,
     and BATCH_LOG.md's 2026-08-17 entry for the run where this went wrong."""
     return {name.replace("from_", "", 1) for name in _blocked_sources}
+
+
+def unsearched_sources(query: str) -> set[str]:
+    """Short names of every source that failed to complete `query` in this
+    process -- transient transport failures plus any source already hard-
+    blocked when the query ran.
+
+    Same contract as blocked_sources(), but per-query: a caller writing down
+    what it searched for one term MUST subtract this, or an incremental
+    --since watermark will advance past a window that was never queried."""
+    return set(_unsearched_by_query.get(query, ()))
 
 # ---------------------------------------------------------------------------
 # RELEVANCE FILTER (tiered)
@@ -383,7 +420,7 @@ def from_dataverse(query: str, max_pages: int = 5, per: int = 50):
         except SourceBlocked:
             raise
         except Exception as e:
-            print(f"[dataverse] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[dataverse] {e}") from e
         if not items:
             return
         for it in items:
@@ -406,7 +443,7 @@ def from_zenodo(query: str, max_pages: int = 5, per: int = 25):
             r.raise_for_status()
             hits = r.json().get("hits", {}).get("hits", [])
         except Exception as e:
-            print(f"[zenodo] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[zenodo] {e}") from e
         if not hits:
             return
         for h in hits:
@@ -434,7 +471,7 @@ def from_osf(query: str, max_pages: int = 5, per: int = 50):
             r.raise_for_status()
             body = r.json()
         except Exception as e:
-            print(f"[osf] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[osf] {e}") from e
         for node in body.get("data", []):
             a = node.get("attributes", {})
             yield Hit("osf", a.get("title", ""),
@@ -457,7 +494,7 @@ def from_dryad(query: str, max_pages: int = 5, per: int = 50):
             r.raise_for_status()
             sets = r.json().get("_embedded", {}).get("stash:datasets", [])
         except Exception as e:
-            print(f"[dryad] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[dryad] {e}") from e
         if not sets:
             return
         for d in sets:
@@ -479,7 +516,7 @@ def from_figshare(query: str, max_pages: int = 5, per: int = 50):
             r.raise_for_status()
             arts = r.json()
         except Exception as e:
-            print(f"[figshare] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[figshare] {e}") from e
         if not arts:
             return
         for a in arts:
@@ -500,7 +537,7 @@ def from_gesis(query: str, max_pages: int = 5, per: int = 25):
             data = r.json()
             hits = data.get("hits", {}).get("hits", [])
         except Exception as e:
-            print(f"[gesis] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[gesis] {e}") from e
         if not hits:
             return
         for h in hits:
@@ -607,7 +644,7 @@ def from_datacite(query: str, max_pages: int = 5, per: int = 25):
             data = r.json()
             items = data.get("data", [])
         except Exception as e:
-            print(f"[datacite] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[datacite] {e}") from e
         if not items:
             return
         for item in items:
@@ -664,14 +701,14 @@ def from_mendeley(query: str, max_pages: int = 5, per: int = 25):
             data = r.json()
             items = data.get("data", [])
         except Exception as e:
-            # Deliberately does NOT raise SourceBlocked, unlike the connectors
-            # that talk to a repository directly. This one's transport IS
-            # DataCite, so a hard block here blocks from_datacite too -- and
-            # _DATACITE_FALLBACK_FOR["mendeley"] would then be pointing the
-            # backfill at the very host that just failed. Print and return, as
-            # from_datacite does.
-            print(f"[mendeley] {e}", file=sys.stderr)
-            return
+            # Deliberately raises SourceUnavailable, not SourceBlocked, unlike
+            # the connectors that talk to a repository directly. This one's
+            # transport IS DataCite, so hard-blocking here would block
+            # from_datacite too -- and _DATACITE_FALLBACK_FOR["mendeley"] would
+            # then be pointing the backfill at the very host that just failed.
+            # Per-query is the right scope: the failure is recorded against
+            # this term without taking DataCite out of the run.
+            raise SourceUnavailable(f"[mendeley] {e}") from e
         if not items:
             return
         for item in items:
@@ -708,7 +745,7 @@ def _dataverse_connector(name: str, base_url: str):
                 data = r.json().get("data", {})
                 items = data.get("items", [])
             except Exception as e:
-                print(f"[{name}] {e}", file=sys.stderr); return
+                raise SourceUnavailable(f"[{name}] {e}") from e
             if not items:
                 return
             for it in items:
@@ -741,7 +778,7 @@ def from_openaire(query: str, max_pages: int = 5, per: int = 25):
             results = data.get("response", {}).get("results", {}).get("result", [])
             total = int(data.get("response", {}).get("header", {}).get("total", {}).get("$", 0))
         except Exception as e:
-            print(f"[openaire] {e}", file=sys.stderr); return
+            raise SourceUnavailable(f"[openaire] {e}") from e
         if not results:
             return
         for res in results:
@@ -1017,8 +1054,13 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
         q_new = 0
         q_start = _time.time()
         print(f"[query {i}/{total}] {q}", flush=True)
+        unsearched = _unsearched_by_query.setdefault(q, set())
         for src in active:
+            short = src.__name__.replace("from_", "", 1)
             if src.__name__ in _blocked_sources:
+                # Blocked before this query even started: it did not search
+                # this term either, so it belongs in the per-query record.
+                unsearched.add(short)
                 continue
             src_new = 0
             try:
@@ -1047,14 +1089,27 @@ def discover(queries, exclude: set, relevance_on: bool, sources=None,
                         on_hit(hit)
             except SourceBlocked as e:
                 _blocked_sources.add(src.__name__)
+                unsearched.add(short)
                 print(f"  [{src.__name__:20}] BLOCKED, skipping for rest "
                       f"of run -- {e}", file=sys.stderr, flush=True)
+                continue
+            except SourceUnavailable as e:
+                # Did not complete this query. Keep the source in the run --
+                # the next term may succeed -- but never let this term be
+                # written down as searched by it.
+                unsearched.add(short)
+                print(f"  [{src.__name__:20}] UNAVAILABLE for this query, "
+                      f"NOT counted as searched -- {e}",
+                      file=sys.stderr, flush=True)
                 continue
             if src_new:
                 print(f"  [{src.__name__:20}] +{src_new}", flush=True)
         elapsed = _time.time() - t0
+        searched_n = len(active) - len(unsearched)
+        note = (f" | !! {searched_n}/{len(active)} sources actually searched, "
+                f"unsearched: {','.join(sorted(unsearched))}") if unsearched else ""
         print(f"  → {q_new} new this query | {len(results)} total | "
-              f"{elapsed:.0f}s elapsed", flush=True)
+              f"{elapsed:.0f}s elapsed{note}", flush=True)
     if n_unreachable:
         print(f"[discover] dropped {n_unreachable} hit(s) from repositories no "
               f"connector can fetch files from "
