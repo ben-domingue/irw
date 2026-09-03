@@ -21,3 +21,8 @@ __pycache__/
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
+
+# Daily version-manifest cron logs. The weekly pipeline logs beside them are
+# committed deliberately; these are one line on a normal day and would add ~365
+# files a year. Failures alert via a GitHub issue, which carries the log body.
+metadata/pipeline_logs/version_manifest_*.log
