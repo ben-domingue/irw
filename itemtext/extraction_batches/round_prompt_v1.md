@@ -110,6 +110,14 @@ Each subagent prompt must tell it to:
   (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
+- **On a block, state the retry test explicitly in notes_<table>.csv and in your report**: would an
+  unchanged retry, right now, plausibly produce a different result? Say YES (an unresolved access
+  failure -- 403, timeout, quota, source not located, no verdict reached) or NO (a determinate
+  verdict -- no wording published, licence bars reuse, images only, gated behind registration or
+  author contact, or a data defect that makes item text unattachable), and say what would have to
+  change for the answer to become different. The orchestrator uses this at Step 5 to decide
+  `failed` vs `blocked`, and those are counted differently by the circuit breaker. Do not guess:
+  if you cannot tell, say so and it will be treated as `failed`, which merely costs a retry.
 - Do SKILL.md Step 5b for every table whose mapping_basis is not `data_labels`, and record it in
   the per-table verification sidecar below. Do NOT write to itemtext/mapping_verification.csv
   directly — concurrent agents would clobber each other; the orchestrator merges the sidecars.
@@ -197,10 +205,46 @@ ratified 2026-09-02, after 60 such tables were found with no public note at all 
 
 ## Step 5 — Update queue state and check the circuit breaker
 
-- Table wrote a CSV AND audit_batch.R says PASS or WARN -> status="done". No CSV, or FAIL/ERROR ->
-  status="failed". Never leave a table in_progress.
-- If >30% of this round's tables ended up failed: write extraction_batches/circuit_breaker.flag
-  explaining what happened, self-cancel exactly as in Step 0, log it, and stop.
+- Table wrote a CSV AND audit_batch.R says PASS or WARN -> status="done".
+- Otherwise classify it. **Ruled 2026-09-03: a table that produced no CSV is NOT automatically a
+  failure.** Use the retry test, which is the whole distinction:
+
+  > *Would an unchanged retry, right now, plausibly produce a different result?*
+
+  - **YES -> status="failed".** A fault or an unresolved access failure: a gate FAIL or ERROR, a
+    crash, a verify FAIL or missing VERDICT, a lint ERROR, an HTTP 403/timeout/connection error,
+    an exhausted export quota, "couldn't find the source" with no verdict reached. These COUNT
+    toward the circuit breaker, because a cluster of them is what a systemic breakage looks like.
+  - **NO -> status="blocked".** A determinate verdict: the source publishes no item wording, the
+    licence bars reuse, the wording exists only as images, the pool is gated behind a human action
+    such as registration or author contact, or a data defect makes item text unattachable at all
+    (e.g. a transposed table whose item axis holds respondent IDs). An unchanged retry fails
+    identically; changing the outcome needs a HUMAN action or a data change. These do NOT count
+    toward the circuit breaker.
+
+  Never leave a table in_progress. When in doubt between the two, choose "failed" — it costs a
+  retry, whereas a wrong "blocked" quietly removes a table from the queue forever.
+
+- **Circuit breaker: if >30% of this round's tables ended up `failed` (NOT `blocked`)**: write
+  extraction_batches/circuit_breaker.flag explaining what happened, self-cancel exactly as in
+  Step 0, log it, and stop.
+
+- Always log BOTH numbers in the round entry — written / blocked / failed — plus the round's
+  yield. A high `blocked` rate is a fact about which tables the queue served up, not about
+  pipeline health, but it is worth watching: the queue is worked in table order and the head of
+  the queue holds the corpus's large closed-source datasets. Every `blocked` table also gets a
+  row in itemtables/pending_index_notes.csv saying what would have to change.
+
+  WHY THIS SPLIT EXISTS. The breaker is there to stop a BROKEN pipeline burning rounds
+  unattended. Before 2026-09-03 it counted every no-CSV table, so a table the extractor correctly
+  DECLINED was indistinguishable from one where the extractor broke. It fired twice on correct
+  behaviour -- batch_005 (33%, recorded then as "not a pipeline fault") and batch_016 (33.3%,
+  8 clean extractions plus 4 determinate source blocks). SKILL.md calls an honest "couldn't
+  automate this one" a correct outcome, and the 110-table blind study found declining-rather-than-
+  guessing to be the extractor's validated property; a threshold that halts on it trains future
+  rounds toward guessing. But blocks are not simply ignorable either: a network or quota outage
+  surfaces as a wave of "couldn't reach the source", which is why unresolved access failures stay
+  on the counting side.
 
 ## Step 5b — Verify the round's own claims before trusting them
 

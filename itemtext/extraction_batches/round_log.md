@@ -1645,3 +1645,44 @@ study validated.
 
 1,213 pending -> 1,201 pending, 131 done, 15 failed, 54 excluded. The four blocked tables are
 recorded in `itemtables/pending_index_notes.csv` with `status=blocked`.
+
+### Circuit breaker rule changed, and batch_016 reclassified — 2026-09-03 (ruled by Ben)
+
+The breaker counted every no-CSV table as `failed`, so a table the extractor correctly DECLINED
+was indistinguishable from one where the extractor BROKE. It fired twice on correct behaviour:
+batch_005 (33%, recorded at the time as "not a pipeline fault") and batch_016 (33.3%, eight clean
+extractions plus four determinate source blocks).
+
+**New rule — the retry test.** *Would an unchanged retry, right now, plausibly produce a different
+result?*
+
+- **YES -> `failed`, and it COUNTS.** Gate FAIL/ERROR, crash, verify FAIL or missing VERDICT, lint
+  ERROR, HTTP 403/timeout, exhausted quota, source never located. A cluster of these is what a
+  systemic breakage looks like, which is the thing the breaker exists to catch — so "ignore all
+  blocks" was explicitly rejected: a network or quota outage surfaces as twelve agents reporting
+  "couldn't reach the source".
+- **NO -> `blocked`, and it does NOT count.** The source publishes no wording, the licence bars
+  reuse, the wording is images only, the pool is gated behind a human action, or a data defect
+  makes item text unattachable. An unchanged retry fails identically; only a human action or a
+  data change moves it.
+
+`blocked` is a new `queue_state.csv` status. It is NOT `excluded` — excluded means never extract,
+blocked means not until something changes, so these are the pool to revisit when it does. When in
+doubt the rule is to choose `failed`: that costs one retry, whereas a wrong `blocked` quietly
+removes a table from the queue forever.
+
+Per-table agents must now answer the retry test explicitly in their notes and report, and say what
+would have to change. The orchestrator classifies at Step 5 from that answer.
+
+**batch_016 reclassified.** All four blocks fail the retry test: `neurips_2020` and `neurips_2022`
+(Eedi publishes no wording as text; the 2022 kit ships no question content at all), `icar_sapa`
+(pool gated behind registration — a human action, not a retry), `concretewords` (transposed table;
+needs a data change). So the round is **8 done, 4 blocked, 0 failed — 0% against the 30% threshold,
+does not trip.** `circuit_breaker.flag` deleted; it was raised by the rule that has now been
+replaced.
+
+Rounds must from now on log written / blocked / failed separately plus the yield. A high blocked
+rate is a fact about which tables the queue served up — table order puts the corpus's large
+closed-source datasets at the head — not about pipeline health.
+
+The cron job has NOT been re-created. Restarting the queue is a separate decision.
