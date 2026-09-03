@@ -4,6 +4,13 @@ Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
 `README.md`). **73 of the 101 flagged tables need a data change**; the other 28
 need none.
 
+**Status.** Block G is done and uploaded (2026-09-03), 14 tables including two
+block-H/unflagged neighbours the same scripts produce. Read its entry before
+starting another block: a third of it was misdiagnosed here, always in the same
+direction — a duplicate-looking flag that was really a collision, a selector
+bug or an NA-indexing accident — so treat a block's stated fix as a hypothesis
+to check against the source, not an instruction.
+
 Blocks are sized so that **one block is one script and one sitting**, because
 that is how the work actually divides — `PEMAIW_Qiu_2020.R` clears seven tables
 in one edit. Take a block, not a table. Ordered by `PRIORITIES.md`: corpus trust
@@ -110,24 +117,42 @@ per study — all 236 of study 1's ids collide with study 2's).
 *Done when:* `excess_occ` is 0. `excess_pair` will stay non-zero, correctly —
 the repeat is the design once the column is back.
 
-### Block G — plain dedupe · 12 tables · 3,790 rows
+### Block G — ~~plain dedupe~~ · 12 tables · 3,790 rows · **DONE, uploaded 2026-09-03**
 
 `RD_EppSCQRK_Kipkemoi_2024_scq` (1,000), `PROMISPME_Forrest_2021_{Family_Children,
 Family_Proxy,Physical_Children,LS_Children,MP_Children,Strength_Children}` (441),
-`FEDSP_Trzcinska_2023_{SMSD,MonKnow}`, `smacof_pvq40`, `concretewords`.
+`FEDSP_Trzcinska_2023_{SMSD,MonKnow}`, `smacof_pvq40`, `concretewords`,
+`Fh_Okcsr_Roos_2022_study1_Feeling_Heard` (2,328).
 
-Every excess row is byte-identical to one already present and no pair holds
-conflicting responses. Drop duplicates. The smallest, safest block — a good
-first one for someone new.
+**A third of this block was not a plain dedupe, and on one table the prescribed
+fix would have destroyed data.** It was described here as "the smallest, safest
+block — a good first one for someone new"; the safe-looking part was the flag
+count, not the diagnosis. What each turned out to be:
 
-Plus `Fh_Okcsr_Roos_2022_study1_Feeling_Heard` (2,328), which needs one extra
-step. Its `group` column is a **subscale** label, not a condition: 12 items
-belong to both the *Feeling Heard* and *Respect* subscales, so each of their
-responses was emitted twice under the two labels, and the two copies never
-disagree. Dedupe on `id`+`item`+`resp`, and record the dual subscale membership
-as item metadata (`itemcov_subscale`) rather than as duplicated rows.
+| table | what it actually was |
+|---|---|
+| `FEDSP_Trzcinska_2023_{SMSD,MonKnow}` | **an id collision.** `number` is labelled "Child's & parent's number" — a dyad — and one dyad has two caregiver rows with different `p_sex` and `p_age`. The parent scales are two respondents (namespace the caregiver); the child measures are one child recorded twice (dedupe). **Deduping SMSD, as this block said to, deletes a real caregiver.** |
+| `Fh_Okcsr_Roos_2022_study1_Feeling_Heard` | **a selector bug, not dual subscale membership.** `ends_with("11")`/`("12")` is a suffix test and swept the twelve Respect matrix items `Q{3,4,5}.{14,15,16}_{11,12}` into the Feeling Heard group — that is all 2,328 duplicated rows — along with `Q4.11`/`Q5.11`, "is your relationship equal?", which is not an item of the scale. Naming the four real items fixes it and **no `itemcov_subscale` is needed**: `group` is now a function of `item`. |
+| `smacof_pvq40` | **an R indexing trap.** `df[df$resp>0,]` — `NA > 0` is `NA`, and subsetting by an NA index *inserts* an all-NA row rather than dropping it. Six `id=NA, item=NA` rows reached the corpus. |
+| `RD_EppSCQRK_Kipkemoi_2024_scq` | 25 rows byte-identical across all 66 source columns. The DOI recorded in the script was also wrong: `F4UYZQ` holds only `C_DOS`; the data is `NJHSAC`. |
+| `concretewords`, `PROMISPME_Forrest_2021_*` | plain dedupe, as described. |
 
-*Done when:* `excess_pair` is 0.
+Two neighbours came along because the same script produces them:
+**`FEDSP_Trzcinska_2023_PRD`** is a block H table whose residual was to be taken
+"to the source" — the source answers it, nothing to chase — and
+**`FEDSP_Trzcinska_2023_PSPCSA`**, never flagged, carried the same dyad.
+
+`concretewords` and the six `PROMISPME_*` were repaired from the *published*
+table (`irw_validate.repair_dedupe`) rather than regenerated, because their raw
+source is gone: PROMISPME's OSF node `f7rp3` now holds one 714 KB `.sav` that
+cannot be the origin of a 208k-row table. **Their processing scripts are still
+wrong** — re-running either reintroduces the duplicates.
+
+*Left open, both surfaced by the Roos fix and neither part of this block:* its
+four Feeling Heard items are on a **1–7** scale where every other item in the
+table is **1–5**, so they are arguably a separate instrument and a separate
+table; and its `group` column should become `itemcov_subscale`, which is only
+safe now that group is a function of item.
 
 ### Block H — dedupe, then take the residual to the source · 13 tables
 
@@ -145,7 +170,7 @@ record the second, rather than blocking on it.
 | `5personalityfactors` | 264 | 996 |
 | `PROMISPME_Forrest_2021_*_Proxy` (4) | 101 | 114 |
 | `PEPABAS2C_Kubicka_2024` | 27 | 21 |
-| `FEDSP_Trzcinska_2023_PRD` | 2 | 3 |
+| ~~`FEDSP_Trzcinska_2023_PRD`~~ | — | **done** — resolved with block G; the caregiver collision explains all five, nothing to chase |
 
 `5personalityfactors` also wants `age` → `cov_age`; 70 of its excess rows are
 id collisions (one id, two ages), not duplicates.
