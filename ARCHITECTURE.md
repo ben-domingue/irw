@@ -211,6 +211,7 @@ When two documents disagree, this is the order of precedence:
 | How anything gets uploaded to Redivis | [`red_up/README.md`](red_up/README.md) |
 | Whether a table meets the standard | [`irw_validate`](irw_validate/README.md) — `datastandard.md` states the rules, `irw-validate` is the one thing that enforces them, and `red_up` will not upload a table it blocks |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
+| Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by `metadata/version_manifest_cron.sh`. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
@@ -226,6 +227,11 @@ Two entries deserve their reasoning stated, because both are counter-intuitive:
 **The run order points at a shell script, not at prose.** Three files describe
 the pipeline order and they do not agree. `run_pipeline.sh` is the one that runs,
 so it wins by construction — which is the point of rule 2 below.
+
+**The version manifest is a record, not a plan.** It says what *was* released,
+never what is about to be. `red_up` only ever writes an unreleased draft and
+publishing is a human action, so nothing an upload does appears in the manifest
+until the version is actually released and the next daily run sees it.
 
 **`datastandard.md` beats `CLAUDE.md` on output format.** `CLAUDE.md` says
 scripts write both `.csv` and `.RData`; `datastandard.md` overrides this to
