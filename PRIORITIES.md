@@ -33,19 +33,42 @@ copy of the uploader was in hand, while the other twelve copies stayed broken.
 The test for whether something belongs here: if you fix the instance and nothing
 changes about how the next one is caught, it was category 1 work, not category 2.
 
-**3. Reach and contribution — items 4, 5, 6.**
+**3. Reach — item 3 first, then 4 and 5.**
 
-Findability, shipping both packages properly, and making community contribution
-real. Currently receiving no time at all, which is the strongest argument for
-raising it: five of the eight open PRs have zero comments and zero reviews, and
-one was verbally approved on 2026-07-27 and never merged.
+Reworked 2026-09-03. **Item 6 is retired**: its intent was user-contributed
+vignettes, which never materialised. Its one live sub-action — give the
+dictionary the same write path as tags (#1732) — is promoted to item 6b and
+stands on its own. Its one real conclusion, that no Google Sheets service account
+should be provisioned, lives in `ARCHITECTURE.md` §3.
+
+Items 4 (findability) and 5 (the packages) are both **postponed behind item 3**
+(#1705), the version manifest. A per-table landing page that cannot name the
+version it describes is indexed against data that moves; and the package cache
+worth having (5.5) is keyed by table *and* version. So item 3 gates this whole
+category — and it is also the standing answer to the export cap:
+**manifest → cache → quota relief**.
+
+This category still receives no time, which remains the strongest argument for
+raising it.
 
 **4. Volume — coverage of tags and item text.**
 
-Item text is at 13.5% of tables and tags at ~55% per column. This is where effort
-actually goes — 484 file-touches in `itemtext/` in the week to 2026-09-02, against
-100 in `tags/` and 56 in `metadata/` — so the point of ranking it fourth is not to
-stop it but to stop it crowding out 1–3 by default.
+Item text is at ~14% of tables and tags at ~55% per column — quote
+`metadata/status.json` **per column**, never the row-coverage headline, which is
+carried by derived `age range` rows and reads ~75%. This is where effort actually
+goes — 484 file-touches in `itemtext/` in the week to 2026-09-02, against 100 in
+`tags/` and 56 in `metadata/` — so the point of ranking it fourth is not to stop
+it but to stop it crowding out 1–3 by default.
+
+**Volume means the untagged and the unextracted** (ruled 2026-09-03): tagging
+tables that have no tags (1,427 reachable) and extracting item text for tables
+that have none (1,164 queued). It does *not* mean improving tags or item text
+that already exist. Corrections are worth making insofar as they fall out of
+building a good automated tagger or extractor; a standing workstream of small
+fixes to published rows is the thing that has been crowding out the goal.
+
+This is an ordering *within* item 4 and does not lift volume above corpus trust.
+A wrong table still beats a missing tag.
 
 **5. Not now.** Say so rather than quietly deferring:
 
@@ -53,11 +76,20 @@ stop it but to stop it crowding out 1–3 by default.
   investment — 8 (a derived-parameter layer), 11 (an MCP server), 9 (tasks and a
   leaderboard) — and none is this year's work until 1–7 are further along.
 - New vignettes, per item 16's stop-doing list.
-- Any acquisition sprint. **Intake has already stopped on its own**: the newest of
-  the 245 `data queue` issues is 2026-08-11, and the oldest is from the repo's
-  opening day in March 2024. That backlog is stale, not growing, and clearing it
-  is not urgent. `CLAUDE.md` says it directly — "the goal is not to empty the
-  queue — it's to maximize data in the IRW."
+- Any acquisition *sprint*. **Correction, 2026-09-03**: this bullet used to say
+  "intake has already stopped on its own". That is true of the GitHub `data
+  queue` issues — the newest is 2026-08-11 — but **not** of the automated
+  connectors, which produced 58 PLOS candidates on 2026-09-01 and 60 PMC
+  candidates on 2026-09-02. The corpus grew by roughly 500 tables a fortnight
+  through the connectors in late August, which is what drove tag coverage down
+  six points while tagged tables rose.
+
+  **That growth is accepted and is not to be managed** (ruled 2026-09-03). The
+  connectors keep running; coverage percentages get diluted by new tables; report
+  absolute progress alongside the percentage rather than trying to hold the
+  denominator still. What stays out of scope is a deliberate *sprint* on
+  acquisition. `CLAUDE.md` says it directly — "the goal is not to empty the queue
+  — it's to maximize data in the IRW."
 
 ## What the ranking assumes
 
