@@ -1,0 +1,32 @@
+[
+ {
+  "table": "goldberg_2018_dop_ab5c_vignettes"
+ },
+ {
+  "table": "liu_2023_purchase_intention"
+ },
+ {
+  "table": "demos"
+ },
+ {
+  "table": "ptam_kretzschmar_2017_reasoning"
+ },
+ {
+  "table": "itemrandom_buchanan_2018_pil"
+ },
+ {
+  "table": "colombia_2023_politics_reasons"
+ },
+ {
+  "table": "dalichaouche_2026_covid_attitudes"
+ },
+ {
+  "table": "nakano_2020_osce_contact_precautions"
+ },
+ {
+  "table": "song_2025_sb"
+ },
+ {
+  "table": "goldberg_2018_pf16_p"
+ }
+]

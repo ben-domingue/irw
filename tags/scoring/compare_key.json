@@ -1,0 +1,382 @@
+[
+ {
+  "table": "nguyen_2026_autonomy_student_choice",
+  "shard": "w5",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "teicher_2015_mace_sexual",
+  "shard": "w3",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Affective/mental health"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "spain_2025_sanitation_regional",
+  "shard": "w3",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "spa",
+   "item format": "Mixed",
+   "sample": "General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "liu_2021_vrexp_brums",
+  "shard": "w2",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Affective/mental health"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "tian2026_digital_competence",
+  "shard": "w2",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_comfort",
+  "shard": "w4",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Affective/mental health, Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "gmc_kay_2025",
+  "shard": "w2",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Internet-based",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "stoyel_2021_athlete_internal",
+  "shard": "w4",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "ehealth_rioux_2025_pci",
+  "shard": "w2",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Affective/mental health"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "lee2024_relative_clause",
+  "shard": "w2",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "spain_2026_elections_garcia",
+  "shard": "w3",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "spa",
+   "item format": "Mixed",
+   "sample": "General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "gillman_2023_pss",
+  "shard": "w3",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "validatedtouchvideo_smit_2025_category",
+  "shard": "w3",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "bscs_fadplus_goto2021",
+  "shard": "w1",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "jpn",
+   "item format": "Likert Scale/selected response",
+   "sample": "Internet-based",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "spain_2024_ideology_welfare",
+  "shard": "w4",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "spa",
+   "item format": "Likert Scale/selected response",
+   "sample": "General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "c19prc_uk_mcbride_2021_rq",
+  "shard": "w4",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Affective/mental health, Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "torices_2025_isra_b_sit",
+  "shard": "w2",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "gilbert_meta_110",
+  "shard": "w2",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "sumner_2022_asi",
+  "shard": "w4",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "stachl_2020_belonging",
+  "shard": "w3",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "hoai_2026_student_engagement",
+  "shard": "w5",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "peters_2025_att_exp_eval",
+  "shard": "w3",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "psychtools_geras",
+  "shard": "w1",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "deu",
+   "item format": "Likert Scale/selected response",
+   "sample": "Educational, General/non-specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Behavioral, Cognitive/educational, Personality"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "tsai_2017_treeit_h10_closure",
+  "shard": "w4",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "chi",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Elderly (minimum age >50)"
+ },
+ {
+  "table": "nguyen_2026_autonomy_academic_pressure",
+  "shard": "w5",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "cognitive_load_klimova_2023_paas",
+  "shard": "w2",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "rus",
+   "item format": "Likert Scale/selected response",
+   "sample": "Educational",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Cognitive/educational"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "celik_2026_bpns",
+  "shard": "w5",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "goldberg_2018_dop_ab5c_vignettes",
+  "shard": "w4",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "liu_2023_purchase_intention",
+  "shard": "w3",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "demos",
+  "shard": "w1",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "chi",
+   "item format": "Likert Scale/selected response",
+   "sample": "Educational",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "ptam_kretzschmar_2017_reasoning",
+  "shard": "w1",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "lav",
+   "item format": "Likert Scale/selected response",
+   "sample": "Educational",
+   "measurement tool": "Test",
+   "construct type": "Cognitive/educational"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "itemrandom_buchanan_2018_pil",
+  "shard": "w4",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "colombia_2023_politics_reasons",
+  "shard": "w2",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "spa",
+   "item format": "Likert Scale/selected response",
+   "sample": "Representative",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "dalichaouche_2026_covid_attitudes",
+  "shard": "w4",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "nakano_2020_osce_contact_precautions",
+  "shard": "w2",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "song_2025_sb",
+  "shard": "w3",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "chi",
+   "item format": "Likert Scale/selected response",
+   "sample": "Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": null
+ },
+ {
+  "table": "goldberg_2018_pf16_p",
+  "shard": "w4",
+  "population": "untagged",
+  "age_range_derived": "Adult (18+)"
+ },
+ {
+  "table": "florida_twins_dweck",
+  "shard": "w1",
+  "population": "gold",
+  "gold": {
+   "primary language(s)": "eng",
+   "item format": "Likert Scale/selected response",
+   "sample": "Educational, Representative, Targeted/specific",
+   "measurement tool": "Survey/questionnaire",
+   "construct type": "Opinion/attitude"
+  },
+  "age_range_derived": "Mixed"
+ },
+ {
+  "table": "ye_2025_tq",
+  "shard": "w5",
+  "population": "untagged",
+  "age_range_derived": null
+ },
+ {
+  "table": "odachi_2022_hads",
+  "shard": "w3",
+  "population": "untagged",
+  "age_range_derived": null
+ }
+]
