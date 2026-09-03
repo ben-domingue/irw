@@ -30,9 +30,14 @@
 ##but they are combinations, not values). Anything outside these lists is a
 ##typo or a new value that needs a deliberate decision, so it stops the run.
 TAG_VOCAB <- list(
+    ##`Workplace` added 2026-09-03 (#1704). A SETTING atom: it names the
+    ##channel people were reached through, so it does not displace the frame
+    ##residual and is not listed in FRAME_SPECIFIC below. Adding a value is
+    ##additive -- every row already carrying a `sample` keeps it.
     "sample" = c(
         "Clinical", "Educational", "General/non-specific", "Internet-based",
-        "NA", "Non-human", "Program-based", "Representative", "Targeted/specific"
+        "NA", "Non-human", "Program-based", "Representative",
+        "Targeted/specific", "Workplace"
     ),
     "construct type" = c(
         "Affective/mental health", "Behavioral", "Cognitive/educational",
