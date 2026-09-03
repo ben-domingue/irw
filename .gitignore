@@ -21,3 +21,8 @@ __pycache__/
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
+
+##Per-agent fetch caches for concurrent tagging runs (#1704, P5). Same reason
+##tags/.claude/skills/irw-auto-tag/.cache is ignored: this is fetched source
+##text, much of it copyrighted, and it is a scratch artifact of one run.
+tags/.caches/
