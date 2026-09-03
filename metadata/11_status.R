@@ -169,8 +169,19 @@ row <- data.frame(
     n_tables        = n,
     tagged          = n_tags,
     tagged_pct      = pct(n_tags),
+    ##One field per tag column, not just the two that happened to be added
+    ##first. `tagged` counts tables with ANY row, and 775 age-only rows from
+    ##the #1760 derivation moved it from 55.3% to ~74% without anyone tagging
+    ##a construct or a sample -- so it cannot be read as progress on the tag
+    ##gap (#1704). These are what a batch is read against.
     age_range       = by_column[["age range"]]$n,
+    child_age       = by_column[["child age (for child-focused studies)"]]$n,
+    sample          = by_column[["sample"]]$n,
     construct_type  = by_column[["construct type"]]$n,
+    measurement_tool = by_column[["measurement tool"]]$n,
+    item_format     = by_column[["item format"]]$n,
+    primary_languages = by_column[["primary language(s)"]]$n,
+    construct_name  = by_column[["construct name"]]$n,
     itemtext        = n_text,
     itemtext_pct    = pct(n_text),
     orphan_tag_rows = status$orphan_tag_rows
