@@ -16,6 +16,28 @@ Stop, self-cancel, and log if ANY of these hold:
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
+SEPARATELY — the in-flight check, which is NOT a self-cancel (added 2026-09-03):
+
+Run: awk -F, 'NR>1 && $2=="in_progress"' extraction_batches/queue_state.csv
+
+If that prints ANY row, a round is already running (or died mid-round). **Stop
+immediately. Do NOT claim tables, do NOT create a batch directory, and do NOT
+self-cancel the cron job** — a live round will finish on its own and the next firing
+should proceed normally. Append one line to extraction_batches/round_log.md saying
+you stood down, which batch the in_progress rows belong to, and their timestamp.
+Then stop.
+
+The one exception: if those rows' timestamp is more than 2 hours old, the round that
+claimed them is almost certainly dead. Say so in that log line and stop anyway —
+reconciling them back to "pending" is a HUMAN decision, because a dead round may have
+left half-written files in its batch directory. Never flip in_progress back to pending
+on your own.
+
+Why this exists: on 2026-09-03 a second round fired while batch_016 was still in
+flight. None of the three stop conditions above covered it, and nothing in the
+protocol would have prevented two orchestrators from rewriting queue_state.csv and
+globbing each other's sidecars. It stood down only because a human was watching.
+
 To self-cancel: call CronList, find the job whose prompt contains "ITEMTEXT_BATCH_ROUND_V1", call
 CronDelete on its id, append one line to extraction_batches/round_log.md saying which stop
 condition fired and when, then stop. Do nothing else.

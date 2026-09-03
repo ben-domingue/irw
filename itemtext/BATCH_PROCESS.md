@@ -41,9 +41,20 @@ the same pattern the availability audit used. Two consequences worth knowing:
 - A cron job cannot cancel itself implicitly — the protocol has the agent call
   `CronList` → `CronDelete` on its own marker string when a stop condition hits.
 
-Cadence used: `7,22,37,52 * * * *` (every 15 min). A 12-table round takes well
-under 10 minutes wall-clock with 4-way parallelism, so 15 minutes leaves headroom
-without rounds overlapping.
+Cadence: `13 * * * *` (hourly, on an off-minute). **Corrected 2026-09-03 — the old
+`7,22,37,52` was wrong and actively harmful.** That 15-minute cadence was calibrated
+for the retired groups-of-3 dispatch, on the reasoning that "a 12-table round takes
+well under 10 minutes wall-clock with 4-way parallelism". One agent per table is
+slower per round, not faster: in batch_016 the twelve agents ran **3.6 to 16.4
+minutes** each and the round took roughly **40 minutes** end to end, because the
+round is only as fast as its slowest table and hard tables are exactly the ones that
+take longest. A second round fired while batch_016 was still `in_progress`.
+
+Cron cannot express a clean 45-minute interval, so this is hourly — comfortably
+above the observed 40-minute round, and off the `:00`/`:30` marks. **Re-derive it if
+the dispatch shape changes again**: the cadence must exceed the round's *worst-case*
+wall clock, not its average. The stop condition below is the real safety net; the
+cadence only keeps it from firing routinely.
 
 Because each firing is a **stateless context** with no memory of prior rounds,
 the prompt must be a complete, idempotent recipe — not a reference to "continue
@@ -75,7 +86,7 @@ and the processing script side by side.
 
 ## The round-trigger prompt
 
-Paste verbatim into `CronCreate` (`recurring: true`, cron `7,22,37,52 * * * *`).
+Paste verbatim into `CronCreate` (`recurring: true`, cron `13 * * * *`).
 Adjust the batch cap in Step 0 for the run you want.
 
 **Working directory.** The prompt below names `src/itemtext/`, which is right whenever
@@ -104,6 +115,28 @@ Stop, self-cancel, and log if ANY of these hold:
 - itemtables/batch_031 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
+
+SEPARATELY — the in-flight check, which is NOT a self-cancel (added 2026-09-03):
+
+Run: awk -F, 'NR>1 && $2=="in_progress"' extraction_batches/queue_state.csv
+
+If that prints ANY row, a round is already running (or died mid-round). **Stop
+immediately. Do NOT claim tables, do NOT create a batch directory, and do NOT
+self-cancel the cron job** — a live round will finish on its own and the next firing
+should proceed normally. Append one line to extraction_batches/round_log.md saying
+you stood down, which batch the in_progress rows belong to, and their timestamp.
+Then stop.
+
+The one exception: if those rows' timestamp is more than 2 hours old, the round that
+claimed them is almost certainly dead. Say so in that log line and stop anyway —
+reconciling them back to "pending" is a HUMAN decision, because a dead round may have
+left half-written files in its batch directory. Never flip in_progress back to pending
+on your own.
+
+Why this exists: on 2026-09-03 a second round fired while batch_016 was still in
+flight. None of the three stop conditions above covered it, and nothing in the
+protocol would have prevented two orchestrators from rewriting queue_state.csv and
+globbing each other's sidecars. It stood down only because a human was watching.
 
 To self-cancel: call CronList, find the job whose prompt contains "ITEMTEXT_BATCH_ROUND_V1", call
 CronDelete on its id, append one line to extraction_batches/round_log.md saying which stop
