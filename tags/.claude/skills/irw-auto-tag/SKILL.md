@@ -131,6 +131,14 @@ and stage a row with every field blank except `table`, `Rater`, and
 package docs, OSF pages without a DOI, etc.) — don't require a DOI to
 proceed.
 
+**The dictionary can be wrong, and it is wrong in a specific way.** A row can
+point at a real, on-topic source whose sample size matches exactly, while naming
+an instrument that source never mentions (#1864). When Step 3's text and this
+description disagree about *which instrument the table is*, do not pick a
+winner — see "When the dictionary and the source disagree" in `vocab.md`. The
+short version: leave `construct_name` and `construct type` blank, tag the
+population and format fields from the source, and say so in `Notes`.
+
 ## Step 3 — Fetch the source text
 
 ```bash

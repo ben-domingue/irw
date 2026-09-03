@@ -1,8 +1,10 @@
-# Proposed: a `Workplace` atom for `sample`'s SETTING facet
+# A `Workplace` atom for `sample`'s SETTING facet
 
-**Status: PROPOSED, not ruled. Nothing in `vocab.md` or `TAG_VOCAB` has been
-changed.** Put to Ben 2026-09-03. Written in the form #1760 established — the
-case as it was put, so the answer's basis stays legible later.
+**Status: ACCEPTED by Ben, 2026-09-03. Question 1 yes, question 2 no.** The atom
+is in `vocab.md` and `TAG_VOCAB`; the 48 `Targeted/specific` rows and the 97
+blanks are **left as they are**, under the 2026-09-03 ruling that correcting
+existing tags is out of scope. The case below is preserved as it was put, in the
+form #1760 established, so the answer's basis stays legible later.
 
 Raised by the two-path comparison (#1704). It is P6's first clause, split out
 because a vocabulary change is a different kind of decision from a
@@ -111,13 +113,15 @@ express instead of a blank or a wrong-facet answer.
   forty-table run. The corpus-level numbers above are inference from how other
   raters behaved, not from raters saying they were stuck.
 
-## The question
+## The question, and the answer
 
-1. Add `Workplace` to the SETTING facet with the boundary above?
-2. If yes — does anything happen to the 48 `Targeted/specific` and 97 blank
-   rows, or do they stay as they are under the "do not correct existing tags"
-   ruling?
+1. **Add `Workplace` to the SETTING facet with the boundary above? — Yes.**
+2. **Does anything happen to the 48 `Targeted/specific` and 97 blank rows? —
+   No.** They stay. The atom is forward-looking: it is for the ~249 untagged
+   tables, not a licence to revisit published ones.
 
-A "no" is a perfectly good answer, and the cost of it is known: roughly 249
-tables keep producing a blank on a published column, and it stays legible in
-`Status`/`Reason` as of #1859.
+The known consequence of (2), recorded so nobody rediscovers it as a bug: for a
+while the column will carry both conventions. New tagging says `Workplace` where
+48 published rows say `Targeted/specific` for the same situation. That is the
+column getting more correct and less uniform at once, and it was accepted
+deliberately.
