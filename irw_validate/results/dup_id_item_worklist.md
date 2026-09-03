@@ -1,7 +1,7 @@
 # `dup_id_item` worklist
 
 Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
-`README.md`). **72 of the 101 flagged tables need a data change**; the other 29
+`README.md`). **73 of the 101 flagged tables need a data change**; the other 28
 need none.
 
 Blocks are sized so that **one block is one script and one sitting**, because
@@ -86,11 +86,8 @@ Also rename `deception_game`'s `age` to `cov_age`.
 namespacing and still need the source), `EWAS_Sanford_2024` (`seq(1, nrow(df))`
 per study — all 236 of study 1's ids collide with study 2's).
 
-### Block F — the script dropped a column the source has · 4 tables · 231,749 rows
+### Block F — the script dropped a column the source has · 3 tables · 60,030 rows
 
-- `pact_project.R:361` — rbinds four cohort-year waves under a literal
-  `# COMBINE WAVES` comment and never carries a wave out. `treat` does not
-  rescue it: 581,824 of 1,018,383 rows have it NULL.
 - `IRTrees.R:17` — `fsdatT %>% select(-node, -sub)` on De Boeck & Partchev
   IRTrees data, whose design is one row per tree node. `ravens_deboeck2012` is
   exactly 2× its pair count; `stress_deboeck2012` is the same script.
@@ -101,7 +98,7 @@ per study — all 236 of study 1's ids collide with study 2's).
 *Done when:* `excess_occ` is 0. `excess_pair` will stay non-zero, correctly —
 the repeat is the design once the column is back.
 
-### Block G — plain dedupe · 11 tables · 1,462 rows
+### Block G — plain dedupe · 12 tables · 3,790 rows
 
 `RD_EppSCQRK_Kipkemoi_2024_scq` (1,000), `PROMISPME_Forrest_2021_{Family_Children,
 Family_Proxy,Physical_Children,LS_Children,MP_Children,Strength_Children}` (441),
@@ -111,15 +108,23 @@ Every excess row is byte-identical to one already present and no pair holds
 conflicting responses. Drop duplicates. The smallest, safest block — a good
 first one for someone new.
 
+Plus `Fh_Okcsr_Roos_2022_study1_Feeling_Heard` (2,328), which needs one extra
+step. Its `group` column is a **subscale** label, not a condition: 12 items
+belong to both the *Feeling Heard* and *Respect* subscales, so each of their
+responses was emitted twice under the two labels, and the two copies never
+disagree. Dedupe on `id`+`item`+`resp`, and record the dual subscale membership
+as item metadata (`itemcov_subscale`) rather than as duplicated rows.
+
 *Done when:* `excess_pair` is 0.
 
-### Block H — dedupe, then take the residual to the source · 12 tables
+### Block H — dedupe, then take the residual to the source · 13 tables
 
 Two halves; the first is mechanical, the second is research. Do the first and
 record the second, rather than blocking on it.
 
 | table | dedupe | then chase |
 |---|---|---|
+| `pact_project` | 171,719 | see below |
 | `number_pattern_game` | 255,155 | 8,456 |
 | `SAS_Deters_2022` | 87,571 | 18,259 |
 | `Veterans_Affairs_SSVF_Survey_2016-17` | 51,490 | 39,553 |
@@ -132,6 +137,15 @@ record the second, rather than blocking on it.
 
 `5personalityfactors` also wants `age` → `cov_age`; 70 of its excess rows are
 id collisions (one id, two ages), not duplicates.
+
+`pact_project` has no conflicting responses to chase — all 138,035 repeated
+pairs agree — but it has a second defect: `treat` is NULL on 581,824 of
+1,018,383 rows, and 88,999 of the excess rows differ from their twin *only* in
+whether `treat` is populated. Dedupe and populate `treat` consistently. Then
+check the source: `pact_project.R:361` rbinds five frames under a
+`# COMBINE WAVES` comment, and if those really are distinct waves the column
+should be carried through as well — but see Decision note below, it is not what
+causes this flag.
 
 ### Block I — `duolingo_*` · 7 tables · 279,003 rows · restore a trial index
 
@@ -168,6 +182,13 @@ id collisions above at upload time, before any of them reached the corpus.
       the exact-duplicate share, what survives grouping by every column, and
       whether only a person-level column separates the rows — belong in the
       check itself. `irw_validate/live_dup.py` computes all three.
+- [ ] **Zero disagreement across many repeated pairs means duplication.** If a
+      table has thousands of repeated `id`+`item` pairs and *none* of them
+      differ on `resp`, it is duplicated, not re-measured — people vary when
+      you measure them twice. This single number corrected two verdicts here
+      (`Fh_Okcsr_Roos_2022_study1_Feeling_Heard`, `pact_project`), in both
+      cases against a plausible-sounding design story. `live_dup.py` already
+      reports it as `n_conflict_pairs`; the check should act on it.
 - [ ] **`rt` must never be what makes rows unique.** That single rule turns
       Blocks I and J from judgment calls into a check.
 - [ ] **Point the sweep at live data.** `data/pub` is a stale archive — 44 of

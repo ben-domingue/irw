@@ -117,12 +117,12 @@ confirmed by an exact match on rows/ids/items against the archive copy:
 
 | verdict | tables | what to do |
 |---|---|---|
-| `document_column` | 28 | nothing to the data — an occasion column already explains the repeat |
+| `document_column` | 27 | nothing to the data — an occasion column already explains the repeat |
 | `id_collision` | 27 | the same `id` means **different people**; namespace `id`, do not dedupe |
-| `dedupe` | 18 | every excess row is byte-identical; drop duplicates |
+| `dedupe` | 20 | every excess row is a duplicate; drop duplicates |
 | `mixed_dedupe_then_source` | 12 | part exact duplicates, part genuine conflicts |
 | `restore_trial_index` | 10 | trial-level data whose trial index was never carried through |
-| `restore_wave` | 4 | the source **has** an occasion column and the script dropped it |
+| `restore_wave` | 3 | the source **has** an occasion column and the script dropped it |
 | `retired` | 1 | `AAQ-II` |
 | `conflicting_needs_source` | 1 | `realpic_souza2021` — 28 conflicts, nothing explains them |
 
@@ -149,11 +149,8 @@ This vindicates #1835's refusal to let `group`/`study`/`treatment` count as reso
 Had they been folded into "resolved", 27 tables of corrupted person identifiers would
 have been marked clean.
 
-### Four tables lost a column the source actually has
+### Three tables lost a column the source actually has
 
-- **`pact_project`** — `data/pact_project.R:361` rbinds four cohort-year waves under
-  the comment `# COMBINE WAVES` and never carries a wave identifier out. `treat` does
-  not rescue it: 581,824 of 1,018,383 rows have `treat` NULL.
 - **`ravens_deboeck2012`** — `data/IRTrees.R:17` does `fsdatT %>% select(-node, -sub)`.
   `fsdatT` is De Boeck & Partchev (2012) IRTrees data, where each response is
   decomposed into tree **nodes**, so one row per node is the design. The table is
@@ -186,3 +183,27 @@ unseparated because a learner meets the same lexeme repeatedly *within* a sessio
 
 Nothing was re-uploaded — that is Ben's step. The verdicts name the fix per table;
 they do not apply it.
+
+## A correction, and the number that forced it
+
+Two verdicts in the first pass were wrong, both the same way: a plausible design
+story was accepted where the data said duplication.
+
+**`Fh_Okcsr_Roos_2022_study1_Feeling_Heard`** was read as a within-subject
+condition manipulation, because all 194 ids appear under all 7 `group` values.
+But only 12 items actually repeat, always across the same two groups (*Feeling
+Heard* and *Respect*), and their responses never disagree. `group` is a
+**subscale** label; those 12 items sit in two subscales and each response was
+emitted once per subscale. It is a dedupe, plus `itemcov_subscale`.
+
+**`pact_project`** was read as four cohort-year waves whose wave column the
+script dropped — the comment at `pact_project.R:361` literally says
+`# COMBINE WAVES`. But its 138,035 repeated pairs, up to 4 copies each, show
+**zero** disagreement. Re-measuring people produces variation. It is a dedupe.
+
+The tell in both cases was `n_conflict_pairs == 0`, already sitting in the
+measurements. Of the 20 tables with no conflicting pairs at all, 18 were called
+`dedupe` immediately; the two that were not are exactly the two that had a
+column offering a story. **Zero disagreement across thousands of repeated pairs
+is near-proof of duplication**, and it should outrank any narrative a column
+name suggests — that rule is now in the worklist's gate section.
