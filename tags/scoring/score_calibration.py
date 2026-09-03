@@ -44,12 +44,29 @@ UNKNOWN_ATOMS = set()
 
 
 def facets(sample_value):
-    """Split a `sample` cell into (setting atoms, frame atoms)."""
+    """Split a `sample` cell into (setting atoms, frame atoms).
+
+    `Internet-based (Mturkers, etc)` contains a literal comma, so a naive split
+    on commas yields `Internet-based (Mturkers` and `etc)` -- neither of which
+    matches any atom, so BOTH are dropped and the row is counted as having no
+    setting at all. That understated setting fill by 19 rows in 150 here, and
+    it is the same comma that vocab.md records as having spawned three separate
+    workarounds elsewhere in the codebase. Rejoin before matching.
+    """
     atoms = [a.strip() for a in (sample_value or "").split(",") if a.strip()]
-    UNKNOWN_ATOMS.update(a for a in atoms
+    fixed, i = [], 0
+    while i < len(atoms):
+        if atoms[i] == "Internet-based (Mturkers" and i + 1 < len(atoms) \
+                and atoms[i + 1] == "etc)":
+            fixed.append("Internet-based (Mturkers, etc)")
+            i += 2
+        else:
+            fixed.append(atoms[i])
+            i += 1
+    UNKNOWN_ATOMS.update(a for a in fixed
                          if a not in FRAME_ATOMS and a not in SETTING_ATOMS)
-    return ([a for a in atoms if a in SETTING_ATOMS],
-            [a for a in atoms if a in FRAME_ATOMS])
+    return ([a for a in fixed if a in SETTING_ATOMS],
+            [a for a in fixed if a in FRAME_ATOMS])
 
 
 def load(paths):
