@@ -26,8 +26,16 @@ How incrementality works:
     lookback. See automated_finding PR #1625 / TODO.md.)
   - A term run for the first time at a given source set has no prior row,
     so it falls back to --default-lookback-days (default 90) before today.
-  - After a run, one row per term is appended to search_terms_log.csv with
-    today's date, so next month's invocation advances automatically.
+  - One row per term is appended to search_terms_log.csv the moment that
+    term finishes (not batched to the end of the run), with today's date,
+    so next month's invocation advances automatically and an interrupted
+    sweep keeps the terms it did complete. Rerun the rest with --terms.
+  - A row's sources= lists only the sources that actually completed a
+    search of that term -- a source that was hard-blocked, or that hit a
+    proxy/timeout/5xx on that particular query, is left out (and named in
+    not_searched=). An incomplete search is never written down as an empty
+    one, because last_run_date() would then advance the watermark past a
+    window nobody queried. See searched_for() in main().
 
 TERM_LIST below is a starting point, not a final answer -- edit it freely.
 Pull candidates from search_terms_log.csv (which terms/notes mention high
@@ -52,7 +60,7 @@ from dataclasses import asdict
 
 from irw_discover_updated import (
     discover, SOURCE_MAP, _load_auto_exclusions, resolve_out_path,
-    blocked_sources,
+    blocked_sources, unsearched_sources,
 )
 
 LOG_PATH = "search_terms_log.csv"
@@ -335,7 +343,17 @@ def main():
                      help="print each term's computed --since date and exit, no queries run")
     ap.add_argument("--out", default=None,
                      help=f"output CSV (default: {OUT_PREFIX}<mode>_<today>.csv)")
+    ap.add_argument("--note", default="",
+                     help="free text appended to every log row's notes -- say why a "
+                          "non-standard run happened (e.g. re-covering a window an "
+                          "earlier run lost), so the row is readable a month later")
+    ap.add_argument("--terms", metavar="TERM", nargs="+", default=None,
+                     help="run only these terms instead of the mode's whole list. "
+                          "For re-covering a window a previous run lost -- a term "
+                          "not in the mode's list is still accepted (it just gets "
+                          "the default lookback, having no prior run to read).")
     args = ap.parse_args()
+    note_suffix = f" -- {args.note.strip()}" if args.note.strip() else ""
 
     unknown = set(args.sources) - set(SOURCE_MAP)
     if unknown:
@@ -343,6 +361,13 @@ def main():
     active_sources = [SOURCE_MAP[s] for s in args.sources]
 
     terms = HIGH_YIELD_TERMS if args.mode == "weekly" else TERM_LIST
+    if args.terms:
+        off_list = [t for t in args.terms if t not in terms]
+        if off_list:
+            print(f"[terms] not in the {args.mode} list, running anyway: "
+                  f"{', '.join(off_list)}", file=sys.stderr)
+        terms = list(args.terms)
+        print(f"[terms] restricted to {len(terms)} of the {args.mode} list")
 
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     fallback_since = (datetime.now(timezone.utc) - timedelta(days=args.default_lookback_days)).strftime("%Y-%m-%d")
@@ -377,45 +402,72 @@ def main():
         writer.writerow(asdict(h))
         outf.flush()
 
+    # One log row appended per term, as soon as that term finishes -- not
+    # batched to the end. A ~100-term sweep runs for hours, and a container
+    # restart or a killed process partway through used to throw away the
+    # record of every term already done, so a rerun either redid them all or
+    # (worse) skipped them believing they were logged. Per-term rows make an
+    # interrupted sweep cost only the in-flight term: rerun the rest with
+    # --terms. Also why searched_for() is computed per term rather than once
+    # at the end.
+    def searched_for(term: str) -> list[str]:
+        """The sources that actually completed a search of `term`.
+
+        Two ways a source contributes nothing:
+          * hard-blocked for the whole run (WAF challenge etc.) -- blocked_sources()
+          * failed to complete this particular query (proxy down, timeout, 5xx,
+            malformed response) -- unsearched_sources(term)
+        Either way, claiming it in this term's sources= note would let
+        last_run_date() advance the --since watermark past a window nobody ever
+        searched: an invisible, permanent hole in coverage. Leaving it out means
+        the next run finds no covering row and falls back to the (always-safe,
+        only-ever-wider) default lookback.
+
+        The per-term half of this exists because of the 2026-09-02 full sweep:
+        the outbound proxy went down mid-run, every connector swallowed the
+        ProxyError as if it were "no more results", and 88 of 125 terms logged a
+        false "0 candidates; sources=<all 8>" -- advancing their watermark past
+        the 2026-06-04-to-now window for good, with 1,330 real candidates found
+        on the rerun. Nothing was blocked run-wide, so a whole-run check saw
+        nothing wrong. See BATCH_LOG.md.
+        """
+        skip = (blocked_sources() | unsearched_sources(term)) & set(args.sources)
+        return [s for s in args.sources if s not in skip]
+
+    starved = []
     for term, since in since_by_term.items():
         print(f"\n[term] {term!r} (since {since})", flush=True)
         discover([term], exclude, relevance_on=True, sources=active_sources,
                   on_hit=lambda h, term=term: on_hit(h, term), since=since)
+        searched = searched_for(term)
+        missing = sorted(set(args.sources) - set(searched))
+        if not searched:
+            starved.append(term)
+        miss_note = f"; not_searched={','.join(missing)}" if missing else ""
+        append_log_rows([{
+            "date": today,
+            "query": term,
+            "output_file": out_path,
+            "notes": f"monthly automated run; {hits_by_term[term]} candidates; "
+                     f"sources={','.join(searched)}; "
+                     f"since={since}{miss_note}{note_suffix}",
+        }])
 
     outf.close()
 
     total = sum(hits_by_term.values())
     print(f"\n{total} candidates found -> {out_path}")
+    print(f"Logged {len(since_by_term)} term rows to {LOG_PATH}")
 
-    # Only log the sources that were actually reachable. A source that hard-
-    # blocked (WAF challenge etc.) contributed nothing, so claiming it in the
-    # sources= note would let last_run_date() advance its --since past a window
-    # nobody ever searched -- an invisible, permanent hole in coverage. Leaving
-    # it out instead means the next run finds no covering row for it and falls
-    # back to the (always-safe, only-ever-wider) default lookback.
     blocked = blocked_sources() & set(args.sources)
-    searched = [s for s in args.sources if s not in blocked]
     if blocked:
         print(f"\n!! BLOCKED this run, NOT logged as searched: "
               f"{','.join(sorted(blocked))} -- their since-window is left "
               f"un-advanced so a later run re-covers it", file=sys.stderr, flush=True)
-    if not searched:
-        print("!! every requested source was blocked -- this run searched "
-              "nothing; the log rows record 0 sources so no watermark moves",
-              file=sys.stderr, flush=True)
-
-    blocked_note = f"; blocked={','.join(sorted(blocked))}" if blocked else ""
-    log_rows = [
-        {
-            "date": today,
-            "query": term,
-            "output_file": out_path,
-            "notes": f"monthly automated run; {n} candidates; sources={','.join(searched)}; since={since_by_term[term]}{blocked_note}",
-        }
-        for term, n in hits_by_term.items()
-    ]
-    append_log_rows(log_rows)
-    print(f"Logged {len(log_rows)} term rows to {LOG_PATH}")
+    if starved:
+        print(f"!! {len(starved)}/{len(terms)} term(s) had NO source complete a "
+              f"search; their rows record 0 sources so no watermark moves: "
+              f"{', '.join(starved)}", file=sys.stderr, flush=True)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,33 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-02 monthly repos sweep
+
+- [ ] **`automated/repos-monthly-2026-09-02` is waiting for review, and only
+  150 of its 1,998 candidates were triaged -- none `good`.** The scheduled
+  run hit a container restart, 88 of 125 terms came back with a false "0
+  candidates" when the outbound proxy went down, and `9a11fbb` reran those 88
+  honestly. The candidates (1,998, no `scholars_portal` -- 403 in that
+  environment) and a 150-row triage landed on the branch; `de97257` put 97
+  dedup keys on `main`. The triage's flag mix is worth a look before working
+  it: 67 `no_usable_file`, 53 `download_failed` (transient, deliberately not
+  ledgered, so a rerun retries them), 19 `human_assistance`, 5 `below_min_n`,
+  3 `not_item_response`, 3 `license_restricted`, **0 `good`**. Whether the
+  other ~1,850 candidates were prefiltered out or the triage was simply cut
+  short by the same outage is the first thing to establish.
+
+- [ ] **The watermark reached `main` hours before the candidates reached a
+  branch.** `9a11fbb` pushed the 88 `search_terms_log.csv` rows -- which
+  advance those terms' `--since` to 2026-09-02 -- at 23:49 UTC; the candidate
+  CSV was not committed anywhere until `7201016` at 00:21, and it lives in
+  `runs/`, which is gitignored precisely so scheduled runs stop committing per-
+  run CSVs. Had the container died in that half hour, all 88 terms would have
+  been permanently marked searched with 1,998 candidates recorded nowhere. It
+  did not, so no harm this time -- but this is the identical shape to the open
+  PLOS item below, now on a second routine, and the fix is the same: either
+  the ledger append moves to a post-merge step, or both commits go on the
+  branch together.
+
 ## From the 2026-09-01 PLOS weekly batch
 
 - [ ] **9 item text tables still need uploading** to `irw_text` — `red_up
