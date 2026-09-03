@@ -198,12 +198,40 @@ language, list them all (`eng, vie`).
 
 ## Construct type (multi-select, comma-separated)
 
-**Boundary rules are proposed but not yet ruled on** — see
-`tags/decisions/1837_construct_type.md`. Until they are, this is a bare enum
-with no guidance on where the values divide, which is why the column sits at
-64.9% exact match and under-tags (80% precision, 70% recall). Read that file
-before tagging this column, and treat its five proposals as the current best
-reading rather than as settled rules.
+**This column carries decision rules, not just an enum** (decided 2026-09-02,
+#1837). The reasoning, the evidence and the five questions as they were put are
+in `tags/decisions/1837_construct_type.md` — read that before changing any of
+them, and record a change there too.
+
+**1. The tag describes what THIS TABLE measures, never what the study was
+about.** A family of tables from one paper may end up uniform because its tables
+are alike; it must not be uniform because they share a source. `enem` and `imos`
+are legitimately all `Cognitive/educational` — every table is an exam. All 72
+`c19prc_*` tables carrying `Affective/mental health, Opinion/attitude` is not:
+one of them is `wordsum`, a vocabulary test.
+
+**2. Name every facet the instrument genuinely measures**, not the single best
+one. The test: would a researcher searching for the second value want this table
+in their results? Symptoms of one construct do not make a second — a depression
+scale that asks about sleep and appetite is `Affective/mental health` alone. A
+battery measuring mood *and* physical functioning is both.
+
+**3. `Behavioral` is what someone DID; `Personality` is what they are LIKE.**
+Frequency, occurrence and counts of acts are `Behavioral`. Stable dispositions
+are `Personality`, *including* dispositions toward a class of behaviour. "How
+often did you skip class last term" is `Behavioral`; "I tend to put things off"
+is `Personality`. Trait aggression, sensation seeking and procrastination are
+`Personality`.
+
+**4. `Other` means outside all seven values, not undecided between two.** If two
+compete, tag both (rule 2). The legitimate case is an instrument that measures a
+stimulus rather than a person — `sned_bendall_2024`, a database of nature-scene
+images. A general-knowledge test is `Cognitive/educational`.
+
+**5. `Physical health/functioning` covers bodily symptoms, functional capacity
+and disability, whether or not the instrument is used in a mental-health
+context.** A somatic symptom scale such as the PHQ-15 is `Physical
+health/functioning` *and* `Affective/mental health`, per rule 2.
 
 Order doesn't matter. `03_tags.R` sorts atoms into canonical order on export,
 so `Behavioral, Opinion/attitude` and `Opinion/attitude, Behavioral` become the

@@ -1,10 +1,11 @@
 # Decision rules: `construct type`
 
-**Status: proposed 2026-09-02, not yet ruled on.** Written in the form #1760
-established — the case as it was put, so each answer's basis stays legible
-later. Once ruled, the rules fold into
+**Status: all five decisions made by Ben on 2026-09-02.** Every proposal below
+was accepted as put. Written in the form #1760 established — the case as it was
+put, so each answer's basis stays legible later. The rules are folded into
 `tags/.claude/skills/irw-auto-tag/references/vocab.md`, which is what the tagger
-reads; this file stays as the record of *why*.
+reads; this file is the record of *why*, and it is where a change to any of them
+gets argued and recorded.
 
 Context: #1837 classified the tag columns by what kind of problem each is, and
 Ben ruled on 2026-09-02 that **`construct type` takes the next definitional
@@ -66,7 +67,7 @@ it is tagged as neither. The pair describes the *study* — a COVID-era psycholo
 survey — and was applied to all 72 of its tables regardless of what each one
 holds.
 
-**Proposed rule.** The tag describes **what this table measures**, never what the
+**Rule (accepted).** The tag describes **what this table measures**, never what the
 study was about. A family may end up uniform because its tables are alike; it
 must not be uniform because they share a paper.
 
@@ -85,7 +86,7 @@ Nothing in `vocab.md` says whether multi-tagging is encouraged or grudging, so
 exactly the kind of undefined question that made `sample`'s whole-cell match a
 dead number.
 
-**Proposed rule.** Name **every** facet the instrument genuinely measures, not
+**Rule (accepted).** Name **every** facet the instrument genuinely measures, not
 the single best one. A depression scale that asks about sleep and appetite is
 still `Affective/mental health` alone — those are symptoms of the construct, not
 a second construct. But a well-being battery that measures mood *and* physical
@@ -108,7 +109,7 @@ is for. But each is also *about* behaviour, which is presumably why they landed
 where they did. With no rule, both readings are defensible and the column
 becomes a coin flip.
 
-**Proposed rule.** `Behavioral` is for instruments that ask what someone **did**
+**Rule (accepted).** `Behavioral` is for instruments that ask what someone **did**
 — frequency, occurrence, a count of acts. `Personality` is for instruments that
 ask what someone is **like**, including dispositions toward a class of
 behaviour. "How often did you skip class last term" is `Behavioral`; "I tend to
@@ -124,7 +125,7 @@ name is **"General Knowledge 1"** and **"General Knowledge 2"** — a general
 knowledge test, which is `Cognitive/educational` without much argument. Another
 is `ajaykumar_2023_experience`, a prior-experience rating.
 
-**Proposed rule.** `Other` means the construct genuinely falls outside all seven
+**Rule (accepted).** `Other` means the construct genuinely falls outside all seven
 named values — not that the tagger was unsure between two of them. If two values
 are competing, pick both (question 2) rather than escaping to `Other`. An
 instrument measuring a stimulus property rather than a person (`sned_bendall_2024`,
@@ -139,7 +140,7 @@ health/functioning` is the second-rarest value, and it is plausible that
 symptom-report instruments are being absorbed into `Affective/mental health` by
 default.
 
-**Proposed rule.** `Physical health/functioning` covers bodily symptoms,
+**Rule (accepted).** `Physical health/functioning` covers bodily symptoms,
 functional capacity and disability, *whether or not* the instrument is used in a
 mental-health context. A somatic symptom scale is both values, per question 2.
 
@@ -155,9 +156,17 @@ No re-tagging is proposed either. If the rules are accepted, the sweepable
 consequence is question 1's uniform families (738 tables) and question 3's
 `Behavioral` set (209) — both worth measuring before deciding whether to touch.
 
-## What ruling this needs
+## What follows from the ruling
 
-Five yes/no answers, or amendments. The one that matters most is question 1:
-it is the only rule that can be checked mechanically afterwards, and the
-`c19prc` family is 72 tables of evidence that it is not currently being
-followed.
+Two sweeps are now checkable, and neither is authorised yet — both want
+measuring before anything published is touched:
+
+- **Question 1** — the 738 tables in uniform study families. A family whose
+  members measure visibly different things is now a defect rather than a style.
+  `c19prc` is 72 of them and contains at least one table (`wordsum`) that is
+  demonstrably mis-tagged.
+- **Question 3** — the 209 `Behavioral` tables, of which the disposition
+  instruments now belong under `Personality`.
+
+Question 5 will grow `Physical health/functioning` beyond its current 79, since
+somatic and functional instruments now take it alongside whatever else applies.
