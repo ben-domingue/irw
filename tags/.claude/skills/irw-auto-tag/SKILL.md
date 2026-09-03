@@ -45,6 +45,10 @@ see "Output: staging, not direct write" below.
    (even a `claude-auto` one) unless the user explicitly asks to re-tag.
    Check both the live sheet (`check_table_status.py`) and the local staging
    file (`stage_tag_row.py` already refuses local duplicates on its own).
+4. **Is this run being scored?** If so, stop and read "Step 1 is exactly what a
+   measurement run must NOT do" below before doing anything else. A scored run
+   follows this skill with one step removed, and getting that wrong silently
+   produces an accuracy number that is measuring nothing.
 
 ## Output: staging, not direct write
 
@@ -84,6 +88,33 @@ tagged:
 ```bash
 python3 scripts/check_table_status.py table_a table_b table_c
 ```
+
+### Step 1 is exactly what a measurement run must NOT do
+
+**If this run is being scored, skip this step entirely.** Everything Step 1
+touches — `check_table_status.py`, the live sheet, `metadata/tags.csv`,
+`tags/tags_auto.csv` — holds the answers a scoring run is being marked
+against. On a table that already has a row, consulting them is reading the
+answer key, and the resulting accuracy number means nothing.
+
+This is not hypothetical and it is not a rule anyone broke. **Every scoring run
+this project has done has suppressed Step 1** — #1721, #1722, #1786, #1796,
+#1802 — and until 2026-09-03 no document said so, which made the skill and the
+scoring harness look like two different processes rather than one process run
+two ways. They are not: the harness is this skill, run blind and then gated per
+column. See `tags/decisions/1704_two_tagging_paths.md`.
+
+So there are two modes, and the difference between them is this step alone:
+
+| | Step 1 | idempotency | what it is for |
+|---|---|---|---|
+| **production** | run it | required — never re-stage a tagged table | filling the gap |
+| **measurement** | **skip it** | irrelevant; nothing is staged | finding out how good the tagger is |
+
+A measurement run also stages nothing at all — no `stage_tag_row.py`, no edit to
+`tags_auto.csv` — so the idempotency Step 1 provides is not needed there. Steps
+2, 3 and 4 are identical in both modes, and that is the point: the mode changes
+what the tagger is allowed to *see*, never how it extracts.
 
 ## Step 2 — Resolve the source from the Data Dictionary
 

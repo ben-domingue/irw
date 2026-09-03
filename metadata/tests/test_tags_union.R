@@ -30,17 +30,23 @@ expect_error <- function(expr, pattern, what) {
 ##---------------------------------------------------------------- fixtures ---
 PAPER_TEXT <- "VERBATIM EXCERPT FROM A COPYRIGHTED PAPER - MUST NOT BE PUBLISHED"
 
-##A sheet export: same 13 columns, instruction row first, as gsheet2tbl returns.
+##The Sheet's own columns. Deliberately NOT AUTO_COLS: the auto files gained
+##Status and Reason in #1704 and the Sheet did not, so a fixture that tracked
+##AUTO_COLS here would be testing a sheet layout that does not exist.
+SHEET_COLS <- AUTO_COLS[1:13]
+
+##A sheet export: those 13 columns, instruction row first, as gsheet2tbl
+##returns.
 fake_sheet <- function(tables) {
     instruction <- c("should match what is on redivis",
-                     rep("template", length(AUTO_COLS) - 1))
+                     rep("template", length(SHEET_COLS) - 1))
     rows <- lapply(tables, function(tb) c(
         tb, "jdtrinh", paste0("Human construct for ", tb), PAPER_TEXT, "Yes",
         "Adult (18+y)", NA, "Educational", "Cognitive/educational",
         "Survey/questionnaire", "Likert Scale/selected response", "eng", "note"))
     m <- rbind(instruction, do.call(rbind, rows))
     d <- as.data.frame(m, stringsAsFactors = FALSE)
-    names(d) <- AUTO_COLS
+    names(d) <- SHEET_COLS
     tibble::as_tibble(d)
 }
 
@@ -48,7 +54,8 @@ write_auto <- function(path, tables, rater = AUTO_RATER, cols = AUTO_COLS) {
     rows <- lapply(tables, function(tb) c(
         tb, rater, paste0("Auto construct for ", tb), PAPER_TEXT, "No",
         "Child (<18y)", "Early (<6y)", "Clinical", "Developmental",
-        "Observational rating", "Free response", "spa", "auto note"))
+        "Observational rating", "Free response", "spa", "auto note",
+        "tagged", ""))
     d <- as.data.frame(do.call(rbind, rows), stringsAsFactors = FALSE)
     names(d) <- cols
     readr::write_csv(d, path)
@@ -123,7 +130,8 @@ guards <- function() {
     shuffled[3:4] <- shuffled[4:3]   ##swap Construct Name and Context Text
     reordered <- write_auto(tempfile(fileext = ".csv"), c("x_tbl"), cols = shuffled)
     expect_error(run_union(c("human_tbl"), reordered),
-                 "header does not match the expected 13-column layout",
+                 paste0("header does not match the expected ", length(AUTO_COLS),
+                        "-column layout"),
                  "a reordered auto header is refused before KEEP_COLS can misfire")
 
     ##Sentinel rows: SKILL.md Steps 2/5 tell the tagger to stage table + Rater +
