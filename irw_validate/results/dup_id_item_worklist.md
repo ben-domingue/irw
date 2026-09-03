@@ -5,7 +5,10 @@ Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
 need none.
 
 **Status.** Block G is done and uploaded (2026-09-03), 14 tables including two
-block-H/unflagged neighbours the same scripts produce. Read its entry before
+block-H/unflagged neighbours the same scripts produce. **Blocks A, B, C, D and
+E are repaired and staged** the same day -- 34 tables, 33 of which pass the
+format gate; `selfcompassionscale_shortform_fuochi_2025` is correctly held
+back, see block E. Read its entry before
 starting another block: a third of it was misdiagnosed here, always in the same
 direction — a duplicate-looking flag that was really a collision, a selector
 bug or an NA-indexing accident — so treat a block's stated fix as a hypothesis
@@ -41,7 +44,7 @@ module docstring). What to look for depends on the block, and each says so.
 
 ## 1. Corpus trust
 
-### Block A — `florida_twins_behavior.R` · 7 tables · 370,267 rows · dedupe
+### Block A — `florida_twins_behavior.R` · 7 tables · 370,267 rows · dedupe · **DONE, staged**
 
 `florida_twins_behavior_{cads,cadsyv,ecs,friends,panas,rcads,tas}`
 
@@ -63,7 +66,13 @@ arms reproduces every person twice.
 *Done when:* `excess_pair` is 0 **and the id count is unchanged** (1,378 for
 `cads`). A drop in the id count would mean the dedupe keyed on the wrong columns.
 
-### Block B — `PEMAIW_Qiu_2020.R` · 7 tables · 18,025 rows · id collision
+**Result:** every table halved exactly and no id count moved — 1,378 / 861 /
+1,387 / 858 / 1,387 / 1,387 / 861. The source file is double-entered, as
+twin-pair files are: each pair occupies two rows, once with each twin as
+`bg_id0`, so `bind_rows` over the two arms emits every person twice.
+`distinct()` after the bind, in `florida_twins_behavior.R`.
+
+### Block B — `PEMAIW_Qiu_2020.R` · 7 tables · 18,025 rows · id collision · **DONE, staged**
 
 `PEMAIW_Qiu_2020_{BWSS,DASS,FFMQ,MEQ,MLQ,PANAS,SWLS}`
 
@@ -78,7 +87,12 @@ InternalRecruit are **different people**. Namespace `id` (e.g. `paste(group, id)
 *Done when:* `excess_pair` is 0 and the id count rises to about the sum of the
 two samples (154 + ~930).
 
-### Block C — two-sample studies · 7 tables · 26,550 rows · id collision
+**Result:** exactly that — 154 InternalRecruit + 920-1,030 WebRecruit per table,
+`excess_pair` 0 in all seven. Fixed at the point the id is made
+(`paste0("WebRecruit_", row_number())`), which repairs all seven tables in one
+edit.
+
+### Block C — two-sample studies · 7 tables · 26,550 rows · id collision · **DONE, staged**
 
 - `OS_TBMWTFS_Schubert_2023_{DMW,IPIP,MAAS,SMW}` — English (215 ids) and German
   (176) share a namespace; 176 collide.
@@ -87,7 +101,13 @@ two samples (154 + ~930).
 
 Same fix and same *don't dedupe* as Block B.
 
-### Block D — small id collisions · 9 tables · 216 rows
+**Result:** Schubert 215 → 391 (English 215 + German 176), Geiger 286 → 507
+(Bulgaria 248 + North America 259) — both exactly the predicted counts, and
+`excess_pair` 0. `AOMT_BR_SF_EDPANAB_Geiger_2021.R` fixed; **no processing
+script exists in `data/` for `OS_TBMWTFS_Schubert_2023_*`**, so those four are
+a data-only repair.
+
+### Block D — small id collisions · 9 tables · 216 rows · **DONE, staged**
 
 `CV_OASIS_ODSIS_PPE_Novak_2020_{BFI,DSES,RSES}` (1 colliding id),
 `evpromisi_stone_2021_{cdiag,global}` (2), `pass20_klosowska_2025_{csq,dass,staix}_online`
@@ -98,12 +118,35 @@ ids carry two different ages, two different sexes **and** two different incomes.
 Namespacing or dropping the affected respondents both work; say which was done.
 Also rename `deception_game`'s `age` to `cov_age`.
 
-### Block E — single-script id collisions · 4 tables · 34,840 rows
+**Result: namespaced, nothing dropped.** `CV_OASIS_*` and `evpromisi_*` carry a
+`group`, so they took the same prefix as blocks B and C. `pass20_*` and
+`deception_game` carry no sample label, so the id gained a suffix from a dense
+rank over the person-level columns — **applied only to the ids that actually
+hold more than one person**, so every other id is untouched, and ranked on the
+demographic tuple rather than row order so the same person gets the same suffix
+in all three `pass20` tables. 415 → 418 in each, 635 → 636 for
+`deception_game`, whose `age` is now `cov_age`. No script exists in `data/` for
+`evpromisi_stone_2021_*`.
+
+### Block E — single-script id collisions · 4 tables · 34,840 rows · **DONE, staged**
 
 `sris_silvia2022` (15 studies), `fcupanas_cffsdas_reyna_2018` (4 samples),
 `selfcompassionscale_shortform_fuochi_2025` (`cov_sample`; 300 rows survive the
 namespacing and still need the source), `EWAS_Sanford_2024` (`seq(1, nrow(df))`
 per study — all 236 of study 1's ids collide with study 2's).
+
+**Result, and `sris_silvia2022` is no longer soft.** It was flagged here as
+resting "on a group-structure probe alone", never examined individually. It
+holds **221 ids for 1,192 people** across its 15 studies — the largest ratio in
+the whole sweep. `fcupanas` 805 → 1,636, `EWAS_Sanford_2024` 482 → 718 with all
+236 of study 1 colliding exactly as predicted.
+
+`selfcompassionscale_shortform_fuochi_2025` went 1,816 → 2,043 and **300 excess
+rows survive**, exactly as this entry predicted: within a single sample the
+source file still repeats an id, and those responses conflict, so it is not a
+dedupe. It is staged but **`red_up` refuses it** — for the residual and for a
+41-character name — which is the gate behaving correctly on a table that is
+still half broken. It needs the source.
 
 ### Block F — the script dropped a column the source has · 3 tables · 60,030 rows
 

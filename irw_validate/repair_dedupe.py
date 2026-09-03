@@ -14,8 +14,10 @@ OSF node whose files were replaced). It leaves the script wrong, so say so in
 the handover.
 
 **The dedupe happens in the SELECT.** What comes back is already the fixed
-table. Afterwards the row count must equal `n_rows - excess_pair` and no
-`id`+`item` pair may repeat; a table failing either is not written.
+table. Afterwards the row count must equal `n_rows - excess_pair`, no `id`+`item` pair
+may repeat, **and the id count must be unchanged** -- a drop there would mean
+the dedupe keyed on the wrong columns, which is how block A got reversed once
+already. A table failing any of the three is not written.
 
 Nothing here uploads, and `live_dup.py` can only prove the fix once Ben has.
 """
@@ -88,6 +90,14 @@ def main(argv=None) -> int:
                         f"excess_pair {excess} != excess_exact {exact}; not a plain "
                         "dedupe -- see the worklist for which block it belongs to")
                 ref = idx[t][0]
+                # The id count before, because block A was reversed once on
+                # exactly this question. A dedupe always leaves one copy of
+                # every row, so it cannot drop an id -- but "cannot" is not
+                # evidence, and a drop would mean the dedupe keyed on the
+                # wrong columns.
+                rec["ids_before"] = redivis.query(
+                    f"SELECT COUNT(DISTINCT CAST(`id` AS STRING)) n FROM `{ref}`"
+                ).to_arrow_table(progress=False).to_pylist()[0]["n"]
                 tb, rec["attempts"] = _fetch(redivis, f"SELECT DISTINCT * FROM `{ref}`")
                 rec["ref"] = ref
                 rec["n_rows"] = tb.num_rows
@@ -97,8 +107,10 @@ def main(argv=None) -> int:
                 pairs = tb.select(["id", "item"])
                 rec["excess_pair"] = pairs.num_rows - pairs.group_by(
                     ["id", "item"]).aggregate([]).num_rows
+                rec["ids_after"] = len(set(map(str, tb.column("id").to_pylist())))
                 rec["ok"] = (rec["n_rows"] == rec["expected_rows"]
-                             and rec["excess_pair"] == 0)
+                             and rec["excess_pair"] == 0
+                             and rec["ids_after"] == rec["ids_before"])
                 if rec["ok"]:
                     pacsv.write_csv(tb, out_dir / f"{t}.csv")
             except Exception as exc:
@@ -108,6 +120,7 @@ def main(argv=None) -> int:
             log.flush()
             print(f"[{i}/{len(tables)}] {t} rows={rec.get('n_rows')}/"
                   f"{rec.get('expected_rows')} excess_pair={rec.get('excess_pair')} "
+                  f"ids={rec.get('ids_before')}->{rec.get('ids_after')} "
                   f"ok={rec.get('ok')} {rec.get('error', '')[:70]}")
     return 1 if failures else 0
 
