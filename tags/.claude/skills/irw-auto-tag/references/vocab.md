@@ -260,6 +260,22 @@ differently-ordered existing row as a discrepancy.
 - `Mixed`
 - `Slider/continuous`
 
+**`Likert Scale/selected response` is not only for five-point agreement
+scales.** The value names two things, and the second half is the general case:
+*any* item where the respondent picks from options the instrument supplies. So
+it covers a binary yes/no or done/not-done checklist, a 0–2 or 0–3 severity
+scale, a multiple-choice test item, and a true/false item, none of which is a
+Likert scale in the strict sense.
+
+Recorded 2026-09-03 because three raters in the two-path comparison hit exactly
+these cases — a 15-item binary OSCE checklist, a 0–3 HADS, a 0–2 attitude scale
+— reached the same answer, and each flagged it as an unsanctioned guess. It was
+the right answer; the vocabulary just never said so.
+
+`Constructed Response` is the contrast: the respondent supplies the answer
+rather than choosing it. `Mixed` is for an instrument that genuinely does both,
+not for one whose scale has an unusual number of points.
+
 ## Item text available? (single-select)
 
 - `Yes`
