@@ -1713,3 +1713,28 @@ that is why the scripts are written -- `verify_batch.R` should pick them up too.
 Also note `resp` is stored as a STRING in at least some tables, so `NA` is a literal and
 `WHERE resp IS NOT NULL` does not filter it, and `MIN`/`MAX` on it return NA. Worth knowing before
 writing an aggregate query against a live table.
+
+### batch_016 staged — 2026-09-03 (Ben's call)
+
+**Staged into `itemtables/clean/` (5 tables, 584 rows):** `short_dark_triad` (135),
+`psychoneurotic_inventory` (232), `hypersensitive_narcissism` (110), `machivallianism_test_tipi`
+(70), `machivallianism_test_vcl` (32). All byte-identical to their batch copies. Awaiting the
+human `red_up` step; nothing has been uploaded.
+
+**Held in the batch folder (3):**
+
+- `mgkt` — clean on every gate, but `correct_response` holds a *reconstructed* answer key: the
+  codebook never states which alternatives are correct, so it was solved from the raw data
+  (weights exactly +1 on A0-A4, -1 on A5-A9, max residual 5e-14). That is project-generated content
+  in a content field, the same shape as `machine_translation`, and no `provenance_vocab.csv` value
+  or `check_provenance.R` check covers it. Held pending a disclosure ruling.
+- `vocabulary_iq` — item text VERIFIED, but 30 of its 75 items are degenerate response data
+  (`resp=0` only, 361,632 responses). If that defect is fixed by re-deriving the table, its
+  positional item codes could shift and the text would need remapping. Held so the work is not
+  done twice.
+- `content_literacy_intervention_g1` — Step 5b `PARTIAL`, 76.2% of rows blank, and the dictionary
+  cites the wrong deposit. The protocol names this combination a hold candidate.
+
+**Owed on the public issues page once uploaded:** `psychoneurotic_inventory` (instructions say 112
+questions, the form and data have 116) and, if it ships, `mgkt` (instructions state a -1.25 penalty
+per wrong answer; the stored score penalises 1).

@@ -1,0 +1,136 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"short_dark_triad","short_dark_triad_1",1,"Short Dark Triad (SD3)",NA,NA,"It's not wise to tell your secrets.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",1,"Short Dark Triad (SD3)",NA,NA,"It's not wise to tell your secrets.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",1,"Short Dark Triad (SD3)",NA,NA,"It's not wise to tell your secrets.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",1,"Short Dark Triad (SD3)",NA,NA,"It's not wise to tell your secrets.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",1,"Short Dark Triad (SD3)",NA,NA,"It's not wise to tell your secrets.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",2,"Short Dark Triad (SD3)",NA,NA,"I like to use clever manipulation to get my way.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",2,"Short Dark Triad (SD3)",NA,NA,"I like to use clever manipulation to get my way.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",2,"Short Dark Triad (SD3)",NA,NA,"I like to use clever manipulation to get my way.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",2,"Short Dark Triad (SD3)",NA,NA,"I like to use clever manipulation to get my way.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",2,"Short Dark Triad (SD3)",NA,NA,"I like to use clever manipulation to get my way.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",3,"Short Dark Triad (SD3)",NA,NA,"Whatever it takes, you must get the important people on your side.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",3,"Short Dark Triad (SD3)",NA,NA,"Whatever it takes, you must get the important people on your side.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",3,"Short Dark Triad (SD3)",NA,NA,"Whatever it takes, you must get the important people on your side.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",3,"Short Dark Triad (SD3)",NA,NA,"Whatever it takes, you must get the important people on your side.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",3,"Short Dark Triad (SD3)",NA,NA,"Whatever it takes, you must get the important people on your side.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",4,"Short Dark Triad (SD3)",NA,NA,"Avoid direct conflict with others because they may be useful in the future.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",4,"Short Dark Triad (SD3)",NA,NA,"Avoid direct conflict with others because they may be useful in the future.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",4,"Short Dark Triad (SD3)",NA,NA,"Avoid direct conflict with others because they may be useful in the future.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",4,"Short Dark Triad (SD3)",NA,NA,"Avoid direct conflict with others because they may be useful in the future.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",4,"Short Dark Triad (SD3)",NA,NA,"Avoid direct conflict with others because they may be useful in the future.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",5,"Short Dark Triad (SD3)",NA,NA,"It’s wise to keep track of information that you can use against people later.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",5,"Short Dark Triad (SD3)",NA,NA,"It’s wise to keep track of information that you can use against people later.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",5,"Short Dark Triad (SD3)",NA,NA,"It’s wise to keep track of information that you can use against people later.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",5,"Short Dark Triad (SD3)",NA,NA,"It’s wise to keep track of information that you can use against people later.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",5,"Short Dark Triad (SD3)",NA,NA,"It’s wise to keep track of information that you can use against people later.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",6,"Short Dark Triad (SD3)",NA,NA,"You should wait for the right time to get back at people.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",6,"Short Dark Triad (SD3)",NA,NA,"You should wait for the right time to get back at people.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",6,"Short Dark Triad (SD3)",NA,NA,"You should wait for the right time to get back at people.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",6,"Short Dark Triad (SD3)",NA,NA,"You should wait for the right time to get back at people.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",6,"Short Dark Triad (SD3)",NA,NA,"You should wait for the right time to get back at people.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",7,"Short Dark Triad (SD3)",NA,NA,"There are things you should hide from other people because they don’t need to know.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",7,"Short Dark Triad (SD3)",NA,NA,"There are things you should hide from other people because they don’t need to know.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",7,"Short Dark Triad (SD3)",NA,NA,"There are things you should hide from other people because they don’t need to know.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",7,"Short Dark Triad (SD3)",NA,NA,"There are things you should hide from other people because they don’t need to know.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",7,"Short Dark Triad (SD3)",NA,NA,"There are things you should hide from other people because they don’t need to know.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",8,"Short Dark Triad (SD3)",NA,NA,"Make sure your plans benefit you, not others.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",8,"Short Dark Triad (SD3)",NA,NA,"Make sure your plans benefit you, not others.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",8,"Short Dark Triad (SD3)",NA,NA,"Make sure your plans benefit you, not others.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",8,"Short Dark Triad (SD3)",NA,NA,"Make sure your plans benefit you, not others.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",8,"Short Dark Triad (SD3)",NA,NA,"Make sure your plans benefit you, not others.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",9,"Short Dark Triad (SD3)",NA,NA,"Most people can be manipulated.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",9,"Short Dark Triad (SD3)",NA,NA,"Most people can be manipulated.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",9,"Short Dark Triad (SD3)",NA,NA,"Most people can be manipulated.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",9,"Short Dark Triad (SD3)",NA,NA,"Most people can be manipulated.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",9,"Short Dark Triad (SD3)",NA,NA,"Most people can be manipulated.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",10,"Short Dark Triad (SD3)",NA,NA,"People see me as a natural leader.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",10,"Short Dark Triad (SD3)",NA,NA,"People see me as a natural leader.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",10,"Short Dark Triad (SD3)",NA,NA,"People see me as a natural leader.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",10,"Short Dark Triad (SD3)",NA,NA,"People see me as a natural leader.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",10,"Short Dark Triad (SD3)",NA,NA,"People see me as a natural leader.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",11,"Short Dark Triad (SD3)",NA,NA,"I hate being the center of attention.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",11,"Short Dark Triad (SD3)",NA,NA,"I hate being the center of attention.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",11,"Short Dark Triad (SD3)",NA,NA,"I hate being the center of attention.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",11,"Short Dark Triad (SD3)",NA,NA,"I hate being the center of attention.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",11,"Short Dark Triad (SD3)",NA,NA,"I hate being the center of attention.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",12,"Short Dark Triad (SD3)",NA,NA,"Many group activities tend to be dull without me.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",12,"Short Dark Triad (SD3)",NA,NA,"Many group activities tend to be dull without me.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",12,"Short Dark Triad (SD3)",NA,NA,"Many group activities tend to be dull without me.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",12,"Short Dark Triad (SD3)",NA,NA,"Many group activities tend to be dull without me.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",12,"Short Dark Triad (SD3)",NA,NA,"Many group activities tend to be dull without me.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",13,"Short Dark Triad (SD3)",NA,NA,"I know that I am special because everyone keeps telling me so.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",13,"Short Dark Triad (SD3)",NA,NA,"I know that I am special because everyone keeps telling me so.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",13,"Short Dark Triad (SD3)",NA,NA,"I know that I am special because everyone keeps telling me so.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",13,"Short Dark Triad (SD3)",NA,NA,"I know that I am special because everyone keeps telling me so.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",13,"Short Dark Triad (SD3)",NA,NA,"I know that I am special because everyone keeps telling me so.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",14,"Short Dark Triad (SD3)",NA,NA,"I like to get acquainted with important people.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",14,"Short Dark Triad (SD3)",NA,NA,"I like to get acquainted with important people.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",14,"Short Dark Triad (SD3)",NA,NA,"I like to get acquainted with important people.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",14,"Short Dark Triad (SD3)",NA,NA,"I like to get acquainted with important people.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",14,"Short Dark Triad (SD3)",NA,NA,"I like to get acquainted with important people.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",15,"Short Dark Triad (SD3)",NA,NA,"I feel embarrassed if someone compliments me.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",15,"Short Dark Triad (SD3)",NA,NA,"I feel embarrassed if someone compliments me.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",15,"Short Dark Triad (SD3)",NA,NA,"I feel embarrassed if someone compliments me.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",15,"Short Dark Triad (SD3)",NA,NA,"I feel embarrassed if someone compliments me.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",15,"Short Dark Triad (SD3)",NA,NA,"I feel embarrassed if someone compliments me.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",16,"Short Dark Triad (SD3)",NA,NA,"I have been compared to famous people.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",16,"Short Dark Triad (SD3)",NA,NA,"I have been compared to famous people.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",16,"Short Dark Triad (SD3)",NA,NA,"I have been compared to famous people.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",16,"Short Dark Triad (SD3)",NA,NA,"I have been compared to famous people.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",16,"Short Dark Triad (SD3)",NA,NA,"I have been compared to famous people.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",17,"Short Dark Triad (SD3)",NA,NA,"I am an average person.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",17,"Short Dark Triad (SD3)",NA,NA,"I am an average person.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",17,"Short Dark Triad (SD3)",NA,NA,"I am an average person.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",17,"Short Dark Triad (SD3)",NA,NA,"I am an average person.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",17,"Short Dark Triad (SD3)",NA,NA,"I am an average person.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",18,"Short Dark Triad (SD3)",NA,NA,"I insist on getting the respect I deserve.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",18,"Short Dark Triad (SD3)",NA,NA,"I insist on getting the respect I deserve.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",18,"Short Dark Triad (SD3)",NA,NA,"I insist on getting the respect I deserve.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",18,"Short Dark Triad (SD3)",NA,NA,"I insist on getting the respect I deserve.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",18,"Short Dark Triad (SD3)",NA,NA,"I insist on getting the respect I deserve.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",19,"Short Dark Triad (SD3)",NA,NA,"I like to get revenge on authorities.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",19,"Short Dark Triad (SD3)",NA,NA,"I like to get revenge on authorities.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",19,"Short Dark Triad (SD3)",NA,NA,"I like to get revenge on authorities.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",19,"Short Dark Triad (SD3)",NA,NA,"I like to get revenge on authorities.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",19,"Short Dark Triad (SD3)",NA,NA,"I like to get revenge on authorities.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",20,"Short Dark Triad (SD3)",NA,NA,"I avoid dangerous situations.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",20,"Short Dark Triad (SD3)",NA,NA,"I avoid dangerous situations.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",20,"Short Dark Triad (SD3)",NA,NA,"I avoid dangerous situations.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",20,"Short Dark Triad (SD3)",NA,NA,"I avoid dangerous situations.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",20,"Short Dark Triad (SD3)",NA,NA,"I avoid dangerous situations.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",21,"Short Dark Triad (SD3)",NA,NA,"Payback needs to be quick and nasty.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",21,"Short Dark Triad (SD3)",NA,NA,"Payback needs to be quick and nasty.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",21,"Short Dark Triad (SD3)",NA,NA,"Payback needs to be quick and nasty.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",21,"Short Dark Triad (SD3)",NA,NA,"Payback needs to be quick and nasty.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",21,"Short Dark Triad (SD3)",NA,NA,"Payback needs to be quick and nasty.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",22,"Short Dark Triad (SD3)",NA,NA,"People often say I’m out of control.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",22,"Short Dark Triad (SD3)",NA,NA,"People often say I’m out of control.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",22,"Short Dark Triad (SD3)",NA,NA,"People often say I’m out of control.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",22,"Short Dark Triad (SD3)",NA,NA,"People often say I’m out of control.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",22,"Short Dark Triad (SD3)",NA,NA,"People often say I’m out of control.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",23,"Short Dark Triad (SD3)",NA,NA,"It’s true that I can be mean to others.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",23,"Short Dark Triad (SD3)",NA,NA,"It’s true that I can be mean to others.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",23,"Short Dark Triad (SD3)",NA,NA,"It’s true that I can be mean to others.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",23,"Short Dark Triad (SD3)",NA,NA,"It’s true that I can be mean to others.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",23,"Short Dark Triad (SD3)",NA,NA,"It’s true that I can be mean to others.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",24,"Short Dark Triad (SD3)",NA,NA,"People who mess with me always regret it.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",24,"Short Dark Triad (SD3)",NA,NA,"People who mess with me always regret it.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",24,"Short Dark Triad (SD3)",NA,NA,"People who mess with me always regret it.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",24,"Short Dark Triad (SD3)",NA,NA,"People who mess with me always regret it.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",24,"Short Dark Triad (SD3)",NA,NA,"People who mess with me always regret it.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",25,"Short Dark Triad (SD3)",NA,NA,"I have never gotten into trouble with the law.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",25,"Short Dark Triad (SD3)",NA,NA,"I have never gotten into trouble with the law.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",25,"Short Dark Triad (SD3)",NA,NA,"I have never gotten into trouble with the law.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",25,"Short Dark Triad (SD3)",NA,NA,"I have never gotten into trouble with the law.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",25,"Short Dark Triad (SD3)",NA,NA,"I have never gotten into trouble with the law.",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",26,"Short Dark Triad (SD3)",NA,NA,"I enjoy having sex with people I hardly know",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",26,"Short Dark Triad (SD3)",NA,NA,"I enjoy having sex with people I hardly know",NA,NA,2
+"short_dark_triad","short_dark_triad_1",26,"Short Dark Triad (SD3)",NA,NA,"I enjoy having sex with people I hardly know",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",26,"Short Dark Triad (SD3)",NA,NA,"I enjoy having sex with people I hardly know",NA,NA,4
+"short_dark_triad","short_dark_triad_1",26,"Short Dark Triad (SD3)",NA,NA,"I enjoy having sex with people I hardly know",NA,"agree",5
+"short_dark_triad","short_dark_triad_1",27,"Short Dark Triad (SD3)",NA,NA,"I’ll say anything to get what I want.",NA,"disagree",1
+"short_dark_triad","short_dark_triad_1",27,"Short Dark Triad (SD3)",NA,NA,"I’ll say anything to get what I want.",NA,NA,2
+"short_dark_triad","short_dark_triad_1",27,"Short Dark Triad (SD3)",NA,NA,"I’ll say anything to get what I want.",NA,"neutral",3
+"short_dark_triad","short_dark_triad_1",27,"Short Dark Triad (SD3)",NA,NA,"I’ll say anything to get what I want.",NA,NA,4
+"short_dark_triad","short_dark_triad_1",27,"Short Dark Triad (SD3)",NA,NA,"I’ll say anything to get what I want.",NA,"agree",5
