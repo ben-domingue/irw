@@ -159,16 +159,19 @@ have been marked clean.
   wave (Spring19–Spring22, `PublicID` persists, 832 of 1,130 ids recur). Rename it
   and mark the table longitudinal; no data change.
 
-### `florida_twins_behavior_*` — dedupe, but regenerate
+### `florida_twins_behavior_*` — dedupe, and only dedupe
 
-Six of the seven are the largest `dedupe` cases, and they are worse than duplicates.
-`data/florida_twins_behavior.R` builds `df0` from `bg_id0`/`ends_with("0")` and `df1`
-from `bg_id1`/`ends_with("1")`, `bind_rows` them, then strips the trailing twin suffix
-from `item`. Every `id`+`item` pair then occurs exactly twice with an **identical**
-`resp` and zero conflicts — density 1.99 in `metadata.csv`, against 1.24 for the
-separately-processed `florida_twins_cads`. Twins cannot agree on 100% of items, so
-this is one twin's data emitted twice and the other twin's data probably absent.
-Dedupe restores the shape; only regenerating from source restores the sample.
+Seven tables, 370,267 excess rows, every `id`+`item` occurring exactly twice with
+an identical `resp`.
+
+This was first written up as *regenerate, do not dedupe*: twins cannot agree on
+100% of items, so the two copies could not be two people, so one twin's data had
+to be missing. The id counts refute it — `florida_twins_behavior_cads` holds
+1,378 distinct ids against `florida_twins_cads`'s 1,272 on the identical 57
+items. It has more people, not half as many, and every pair repeats exactly
+twice rather than unevenly. The uniform doubling is the double-entry layout
+standard in twin research, which `bind_rows(df0, df1)` reproduces. Nothing is
+missing; dedupe.
 
 ### `rt` is not an identifier
 
@@ -207,3 +210,11 @@ measurements. Of the 20 tables with no conflicting pairs at all, 18 were called
 column offering a story. **Zero disagreement across thousands of repeated pairs
 is near-proof of duplication**, and it should outrank any narrative a column
 name suggests — that rule is now in the worklist's gate section.
+
+A third verdict fell to the same habit. `florida_twins_behavior_*` was called
+*regenerate, do not dedupe* on an argument about what twins can plausibly agree
+on, when the id counts were sitting right there and said the sample was intact.
+The generalisable form: **when a duplication story implies data is missing,
+count the ids before believing it.** All three corrections were stories that fit
+the measurements without being tested against the alternative that fits them
+equally well.

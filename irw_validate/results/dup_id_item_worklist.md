@@ -26,23 +26,27 @@ module docstring). What to look for depends on the block, and each says so.
 
 ## 1. Corpus trust
 
-### Block A — `florida_twins_behavior.R` · 7 tables · 370,267 rows · **regenerate, do not dedupe**
+### Block A — `florida_twins_behavior.R` · 7 tables · 370,267 rows · dedupe
 
 `florida_twins_behavior_{cads,cadsyv,ecs,friends,panas,rcads,tas}`
 
-The script builds `df0` from `bg_id0`/`ends_with("0")` and `df1` from
-`bg_id1`/`ends_with("1")`, `bind_rows` them, then strips the trailing twin
-suffix from `item`. Every `id`+`item` then occurs exactly twice with an
-**identical** `resp`, zero conflicts — density 1.99 in `metadata.csv` against
-1.24 for the separately-processed `florida_twins_cads`.
+Every `id`+`item` occurs **exactly** twice — never three or four times — with an
+identical `resp` and zero conflicts anywhere (density 1.99 in `metadata.csv`,
+against 1.24 for the separately-processed `florida_twins_cads`). The uniform 2×
+is consistent with the **double-entry** layout standard in twin research, where
+each pair contributes two rows so each twin appears once as the target and once
+as the co-twin; the script's `bind_rows(df0, df1)` over the `bg_id0`/`bg_id1`
+arms reproduces every person twice.
 
-Twins cannot agree on 100% of items, so this is one twin's data emitted twice
-and **the other twin's data probably missing entirely**. Deduping would produce
-a clean-looking table with half the intended sample. Rebuild from
-`multiparentandchild0311 LDBase.csv` and confirm the id count doubles.
+> **Read this if you saw the earlier draft.** This block first said *regenerate,
+> do not dedupe*, on the reasoning that twins cannot agree on 100% of items so
+> one twin's data must be missing. That was wrong, and the id counts refute it:
+> `florida_twins_behavior_cads` holds **1,378** distinct ids against
+> `florida_twins_cads`'s **1,272** on the identical 57 items. It has *more*
+> people, not half as many. A plain dedupe is correct.
 
-*Done when:* `excess_pair` is 0 **and** the table has roughly twice the ids it
-has now. The first alone is not enough — deduping achieves it and is wrong.
+*Done when:* `excess_pair` is 0 **and the id count is unchanged** (1,378 for
+`cads`). A drop in the id count would mean the dedupe keyed on the wrong columns.
 
 ### Block B — `PEMAIW_Qiu_2020.R` · 7 tables · 18,025 rows · id collision
 
@@ -208,6 +212,12 @@ id collisions above at upload time, before any of them reached the corpus.
 - [ ] **`AAQ-II` is retired** — nothing in the corpus matches its 10,521 rows /
       1,497 ids / 7 items. Drop it from the sweep's input rather than
       re-flagging it every run.
+- [ ] **`florida_twins_cads` and `florida_twins_behavior_cads` are the same
+      instrument** — 57 items each, from two different scripts — yet they share
+      only 449 ids (of 1,272 and 1,378). Either they are different cohorts that
+      should be one table with a `cov_study` column, or the two scripts derive
+      `id` differently and the 449 "shared" people are an id collision across
+      tables. Worth resolving while Block A is open; it is not part of Block A.
 - [ ] **Four sweep names are stale renames.** A rename map would stop future
       sweeps reporting them as missing:
       `Veterans.Affairs.SSVF.Survey.2016-17` → `Veterans_Affairs_SSVF_Survey_2016-17`,
