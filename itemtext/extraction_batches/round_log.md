@@ -1686,3 +1686,30 @@ rate is a fact about which tables the queue served up — table order puts the c
 closed-source datasets at the head — not about pipeline health.
 
 The cron job has NOT been re-created. Restarting the queue is a separate decision.
+
+### batch_016 triage — orchestrator re-verification of the round's claims (2026-09-03)
+
+Step 5b requires the orchestrator to independently re-check any claim that overrides a source,
+reports a response-data defect, or is headed for a public artifact. All nine were checked. **None
+was overturned**; two came out stronger than reported.
+
+| claim | verdict | how it was checked |
+|---|---|---|
+| `hypersensitive_narcissism` dictionary wrong | CONFIRMED, **worse than reported** | `irw_info()`: *both* `Construct` and `Reference` cite Jorgenson (2016) Open Hemispheric Brain Dominance Scale. The agent reported only the Reference. |
+| `content_literacy_intervention_g1` cites the wrong deposit | CONFIRMED | per-item n is 4,826-4,843; the cited `RVJIMX` trial had N=674. Arithmetically impossible. Resp ranges also match the claimed block boundaries (items 1-20 on 1-3, items 100+ on 0-1). |
+| `mgkt` instructions say -1.25, table penalises 1 | CONFIRMED, **by a cleaner route** | the cached test page does say "-1.25 points for each wrong answer", but with 5 correct and 5 wrong alternatives a 1.25 penalty lands on quarter-integers. Observed `resp` is exactly the integers -5..5, in both live data and the shipped CSV. Integrality alone settles it; the agent's least-squares fit was not needed. |
+| `psychoneurotic_inventory` three source overrides | CONFIRMED | the codebook really does read `"sexual dreams ?"`, `"crushed m a crowd"`, `"St Vitus'dance"`; `page.html`/`p1.html` (the administered form) read exactly what shipped. The codebook is the defective transcription -- OCR artifacts -- so the override is right. |
+| `psychoneurotic_inventory` 112 vs 116 | CONFIRMED | `intro.html`: "The test has 112 yes/no questions". The form carries **116** `YES NO` items and the data has 116. |
+| `concretewords` transposed | CONFIRMED | `verify_concretewords.R`: 1831/1831 item values match `^R_[A-Za-z0-9]{15,17}$`, 0/1831 contain a space, first values are literal Qualtrics IDs (`R_036k0LpyK0SQ68p`). |
+| `neurips_2020` item-code collision | CONFIRMED | `verify_neurips_2020.R`: codes contiguous 1..27,613, not 28,561; codes 1-948 median n 2,515 vs 396 (6.35x), 1,890,744 excess responses. |
+| `neurips_2020` resp conflation | CONFIRMED | 22,468 of 27,613 items carry all five resp levels. |
+| `vocabulary_iq` scoring collapse | CONFIRMED, to the row | server-side `GROUP BY item, resp`: items 1-45 carry `{0,1}`; all 30 of items 46-75 carry only `0`, across **361,632** non-missing responses -- the agent's figure exactly. |
+
+Note for future rounds: `verify_batch.R` only runs the verify scripts of tables that shipped a
+CSV, so the three blocked tables' scripts were never executed by the gate chain. They were run by
+hand here and all reproduce. If blocked-table evidence is meant to be re-runnable -- and it is,
+that is why the scripts are written -- `verify_batch.R` should pick them up too.
+
+Also note `resp` is stored as a STRING in at least some tables, so `NA` is a literal and
+`WHERE resp IS NOT NULL` does not filter it, and `MIN`/`MAX` on it return NA. Worth knowing before
+writing an aggregate query against a live table.
