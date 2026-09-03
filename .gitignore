@@ -21,3 +21,4 @@ __pycache__/
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
+irw_validate/results/.shard_index.json

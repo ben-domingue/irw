@@ -1,10 +1,9 @@
 # Paper: https://link.springer.com/article/10.1007/s10803-024-06380-9
-# Data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/F4UYZQ
+# Data: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/NJHSAC
 
 library(haven)
 library(dplyr)
 library(tidyr)
-library(openxlsx)
 library(readr)
 
 remove_na <- function(df) {
@@ -18,6 +17,12 @@ Scq_df <- Scq_df %>%
   rename(id = studyno_anon)
 Scq_df  <- Scq_df |>
   select(starts_with("scq"), id)
+
+# The source file ships 25 rows that are byte-identical duplicates of another
+# row across all 66 of its columns -- the same studyno_anon twice, with nothing
+# distinguishing the two. Left in, they emitted every one of those 25
+# respondents' 40 items twice (1,000 excess id+item rows; irw#1842 block G).
+Scq_df <- distinct(Scq_df)
 
 Scq_df <- Scq_df |>
   mutate(across(where(is.character), ~ recode(., "N" = 0, "Y" = 1)))
