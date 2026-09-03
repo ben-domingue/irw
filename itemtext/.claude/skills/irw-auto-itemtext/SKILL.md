@@ -839,6 +839,22 @@ Separate from `text_source`, which describes the base text. **The allowed values
 `itemtext/provenance_vocab.csv`, not here**; `Rscript itemtext/check_provenance.R`
 validates every provenance file against it and exits non-zero on an unknown value.
 
+`key_source` — where `correct_response` came from, when a table has one. Allowed values
+live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
+`check_provenance.R` enforces both.
+
+- `source_published` — the source states which response is correct; `correct_response`
+  transcribes it.
+- `derived_from_responses` — no published key existed and it was solved from the response
+  data by this project. **Added 2026-09-03 after `mgkt`**, whose codebook prints each
+  question's ten alternatives but never says which five are correct; the key was recovered
+  by least squares (weights exactly +1/-1, reproducing every stored score to 5e-14). The
+  evidence being strong is not the point: this is IRW-generated content in a content field,
+  indistinguishable to a reader from a key the study published, so it is disclosed exactly
+  as a machine translation is. Say in the `note` HOW it was derived and how well it
+  reproduces, so a reader can judge it.
+- empty — no `correct_response`, or the instrument has no correct answer at all.
+
 `machine_translation` means this project generated the English rather than the study's
 authors. That obliges an entry on the public issues page — ratified 2026-09-02 — and
 `check_issues_page.R` now reports those tables as DUE until one exists.

@@ -1738,3 +1738,41 @@ human `red_up` step; nothing has been uploaded.
 **Owed on the public issues page once uploaded:** `psychoneurotic_inventory` (instructions say 112
 questions, the form and data have 116) and, if it ships, `mgkt` (instructions state a -1.25 penalty
 per wrong answer; the stored score penalises 1).
+
+### Derived answer keys are disclosed content — ruled 2026-09-03, and `mgkt` staged
+
+`mgkt` shipped a `correct_response` its source never published. The MGKT codebook prints each
+question's ten alternatives but never states which five are correct, so the key was solved from
+the response data by least squares: weights came back exactly +1 on A0-A4 and -1 on A5-A9,
+reproducing every stored score to a max residual of 5e-14.
+
+**Ruled: ship it, with disclosure.** The evidence being strong was never the issue. It is
+IRW-generated content sitting in a content field, indistinguishable to a reader from a key the
+study itself published — the same shape as the machine-translated English addressed on 2026-09-02,
+so it gets the same remedy rather than a special case.
+
+Implemented:
+
+- **`provenance_vocab.csv` gains a `key_source` field** — `source_published`,
+  `derived_from_responses`, or empty (no `correct_response`, or an instrument with no correct
+  answer).
+- **`check_provenance.R` now checks any number of vocabulary fields**, not just
+  `translation_source`, and reports the disclosure debt for each. It groups the output by reason,
+  so translations and derived keys are listed separately rather than merged into one count. A
+  field with no vocabulary rows is reported as an error rather than passing silently — otherwise a
+  typo in the vocabulary file would quietly disable the check for that column.
+- Its error message was field-agnostic-ified: it used to print "UNKNOWN translation_source values"
+  and list only `translation_source`'s allowed set, which for a `key_source` error sent the reader
+  looking for the wrong thing. It now names the offending field and prints the allowed set for
+  every checked field.
+- **`SKILL.md` Step 6c documents `key_source`** and points at the vocabulary file rather than
+  restating it.
+- `mgkt`'s provenance row carries `key_source=derived_from_responses` and a `public_note` that
+  opens by saying the key was not published with the dataset.
+
+Verified both ways: the gate accepts `derived_from_responses` and exits 0, and an injected
+`key_source=guessed` is caught, named, and exits 1. `mgkt` is now reported as owing an
+issues-page entry alongside the 64 outstanding machine-translation tables.
+
+**`mgkt` staged** into `itemtables/clean/` — 6 tables now staged, 897 rows. It owes two lines on
+the issues page when uploaded: the derived key, and the -1.25-vs-1 scoring penalty.
