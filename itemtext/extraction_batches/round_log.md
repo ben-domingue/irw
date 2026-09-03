@@ -1803,3 +1803,51 @@ risks doing the mapping twice) and `content_literacy_intervention_g1` waits on #
 round log's standing observation that "the extraction pass is, in practice, also an audit of the
 response data" is holding at a much higher rate here than in batches 001-011 — which is a property
 of working the head of the queue, where the corpus's large aggregated public datasets sit.
+
+### Both protocol defects fixed, and batch_016's public disclosures shipped — 2026-09-03
+
+**1. `validate_items.R` gains `--table-sets`.** The gate had only two data routes: `--resp-csv`
+against a local file, or live `irw::irw_fetch()`, which exports the whole table. So on any
+published table the "HARD GATE" necessarily spent export quota, and the standing "never
+`irw_fetch()` for a gate" rule was literally unsatisfiable. batch_016 is the evidence that this
+matters: five agents hit the conflict and resolved it five different ways — two skipped the gate
+(`hypersensitive_narcissism` 1.19M rows, `machivallianism_test_tipi` 729k), two exported
+(`psychoneurotic_inventory` 698k, `vocabulary_iq` 913k), and `short_dark_triad` hand-built a
+135-row surrogate CSV from an aggregate `GROUP BY` and passed it via `--resp-csv`, reporting a
+bare PASS until asked. That divergence, not any one agent's judgment, was the bug.
+
+The new route takes `unique(item)` and `unique(resp)` from `irw::irw_table_sets()` — the same
+server-side route `audit_batch.R` already uses — and builds a surrogate frame carrying only enough
+distinct values to reproduce the two sets. That is all this script ever compares, so nothing is
+lost, and the banner now says which route produced the verdict. `--table-sets` and `--resp-csv`
+are mutually exclusive.
+
+Tested three ways: it reproduces the live route's verdict on `vocabulary_iq` (75 items PASS, resp
+PASS) with no export; it still **FAILs** on a real mismatch, naming the missing items (dropped
+items 1 and 2 from the CSV and it caught both); and passing both flags errors instead of silently
+preferring one. Documented in SKILL.md Step 5 and in the per-table agent brief in both
+BATCH_PROCESS.md and round_prompt_v1.md.
+
+**2. Step 3's cleanup no longer destroys its own output.** The step said merge into
+`verification_merged.csv`, then delete the per-table files — and `rm -f verification_*.csv` matches
+the merged file, which is the exact name `lint_verification.R` requires. Following the documented
+procedure literally deleted all nine of batch_016's verification rows at round close. Both copies
+now say to delete BY NAME, and say why. Recovery was only possible because each agent still held
+its evidence string and could be resumed; nothing on disk could have rebuilt them.
+
+**3. batch_016's public disclosures shipped.** Two entries added to `itemtext_issues.qmd`
+(datapages/irw PR #116, merged): `mgkt`'s derived answer key plus its -1.25-vs-1 scoring mismatch,
+and `psychoneurotic_inventory`'s 112-vs-116 item count. The drafter generated seven entries; five
+were dropped as below the page's bar — they describe wording the source never published, which the
+standard explicitly says not to publish. `check_provenance.R` against the merged page reports 69
+IRW-generated tables, 0 undisclosed.
+
+An earlier reading of that check was wrong and is corrected here: it reported 64 undisclosed
+machine-translation tables, but the `irw_site` checkout was on a stale feature branch holding 89
+entries while `main` already carried those disclosures. The script's own branch warning — which
+withholds a verdict when the page's state is unknown — was right to refuse one.
+
+**The six uploaded tables are still in `irw_text`'s DRAFT, not released.** `red_up` writes a draft
+only, so `irw_list_itemtext_tables()` still reports 578. Verified before stamping that no table
+doubled: all six present, marked `added`, every row count matching its source CSV exactly
+(135/32/70/232/110/313 = 892 rows).

@@ -106,7 +106,8 @@ Each subagent prompt must tell it to:
 - Process its ONE assigned table via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the
-  source's terseness) -> validate_items.R as a HARD GATE (Step 5) -> Step 5b mapping verification
+  source's terseness) -> validate_items.R as a HARD GATE (Step 5), run it with **--table-sets** on
+  a published table so the gate uses server-side aggregates instead of exporting the whole table -> Step 5b mapping verification
   (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
@@ -162,6 +163,15 @@ Wait for all agents to finish.
 
 Merge notes_*.csv into notes.csv, provenance_*.csv into provenance.csv, and verification_*.csv
 into verification_merged.csv (header once, data rows concatenated), then delete the per-table files.
+
+**Delete them BY NAME, never with `rm -f verification_*.csv`.** That glob also matches
+`verification_merged.csv` -- the file this step just told you to create, and the exact filename
+`lint_verification.R` requires inside a batch directory. Running the documented cleanup literally
+destroys the merge output: it happened at batch_016's round close and took all nine verification
+rows with it. They were recoverable only because each agent still held its evidence string and
+could be resumed to rewrite its own file; nothing on disk could have rebuilt them, and an evidence
+string reconstructed from memory would be worse than a missing one. Delete the exact filenames you
+merged, or write the merge to a name outside the glob and rename it afterwards.
 Leave the verify_<table>.R scripts in place — they are the batch's re-runnable evidence and triage
 executes them.
 

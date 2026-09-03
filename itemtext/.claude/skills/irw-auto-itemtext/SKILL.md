@@ -537,6 +537,23 @@ what becomes `{table}__items.csv`.
 
 ## Step 5 — Validate before writing anything final
 
+**On a published table, run it with `--table-sets`.** Added 2026-09-03. Without it the gate
+calls `irw_fetch()`, which EXPORTS THE WHOLE TABLE to compute `unique(item)` and `unique(resp)`
+-- a few dozen values. The corpus is 181.8GB against a 200GB/30-day cap, and one round exhausted
+it outright on 2026-08-18, so "never `irw_fetch()` merely to satisfy a gate" is a standing rule.
+Until this flag existed that rule was unsatisfiable for a live table (`--resp-csv` only helps one
+that is not published yet), and in batch_016 five agents resolved the conflict five different
+ways -- two skipped the hard gate, two exported, one hand-built a surrogate CSV. Use the flag:
+this step only compares sets, so nothing is lost.
+
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/validate_items.R <table> <items_csv> --table-sets
+```
+
+`--table-sets` and `--resp-csv` are mutually exclusive and the script errors if both are given.
+Neither route carries per-item counts; `audit_batch.R` is what checks those.
+
+
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/validate_items.R <table> <candidate_items.csv>
 ```
