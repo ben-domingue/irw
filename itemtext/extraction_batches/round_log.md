@@ -1459,3 +1459,76 @@ Scope notes for whoever picks this up:
   re-extracting — some of these may already have text sitting in `clean/` or a staging dir that was
   simply never linked on the sheet.
 - Anything `enem*` stays out of scope (Ben handles those separately).
+
+## 2026-09-03 — index-workbook Sheet1 sweep (the 2026-08-24 TODO), and the queue restart
+
+### The sweep
+
+Sheet1 of the itemtext index workbook has **413 rows**; **100 are flagged** (90 carry a
+note, 51 have no item-text link, 41 both). Cross-checked against `queue_state.csv`,
+`availability_audit_full.csv`, `mapping_verification.csv`, the batch sidecars, and live
+`irw_list_tables()` / `irw_list_itemtext_tables()` before anything was re-extracted, as the
+TODO asked. Full per-row result: `extraction_batches/sheet1_sweep_2026-09-03.csv`.
+
+The 100 split three ways:
+
+| | n | what it means |
+|---|---|---|
+| already published | 27 | item text is live in `irw_text`. The flag is stale — the work was finished and never linked back on the sheet. |
+| not an IRW table | 11 | absent from `irw_list_tables()` (4,221 live). Nothing to attach text to. |
+| **live, no item text** | **62** | the real target. |
+
+Of the 62, **56 were absent from `queue_state.csv` entirely** and 51 were absent from the
+availability audit too — so the flagged rows were never a subset of the extraction queue,
+which is why running the queue was never going to reach them. 6 were already `pending`.
+
+**49 were appended to `queue_state.csv`** (pending → 1,164 → 1,213). They sort to the end of
+the file, so the cron works them after the existing backlog; nothing was reordered.
+
+**Nothing on Sheet1 was already staged-but-unlinked.** The TODO anticipated that class and
+it is empty: zero of the 100 had an `__items.csv` on disk or a row in
+`mapping_verification.csv`. The 27 resolved ones went all the way to publication; the sheet
+just never got updated.
+
+**5 of the 49 were queued under a corrected name.** The sheet spells them lowercase and the
+live tables are not: `fivpei_perrig_2023_attdiff` → `FIVPEI_Perrig_2023_AttDiff`,
+`kfcovid_li2020` → `kfcovid_Li2020`, `namprb_siwiak_2024_ssub` → `NAMPRB_Siwiak_2024_SSUB`,
+`fad_fadplus_goto2021` → `FAD_fadplus_goto2021`, `fedsp_trzcinska_2023_monknow` →
+`FEDSP_Trzcinska_2023_MonKnow`. Queued as spelled on the sheet, all five would have come
+back "does not exist in IRW" — which, post-Rpkg#121, is now taken at face value, so five
+live tables would have been recorded as missing.
+
+**7 held out deliberately**, recorded `blocked` in `itemtables/pending_index_notes.csv`: the
+six `dwyer_2025_genomics_*` and `rd_ppsl7as_ghasemy_2024_sl`, all flagged "Permission to use
+the scale need to be obtained". That is a licensing question, not an access or tooling one;
+a round would either block on them repeatedly or ship text the project has no right to
+redistribute. **They need a rights decision before they are queued.** The 11 non-IRW tables
+are recorded `note_only` so the next sweep starts from the answer.
+
+What the remaining flags actually are, now that they are classified: 15 "contains
+graph/images" (image-only sources — queued, expected to block honestly, but a settled block
+beats a two-year-old sticky note), 11 access failures worth a retry ("no access to referred
+paper" ×7, "not accessible", "can't find"), and ~15 item-count / resp-clash mismatches,
+which are response-data questions as much as item-text ones and may be issues-page material.
+
+### The restart
+
+The queue did not stop for a reason, it stopped for a mechanism, and there was a second
+mechanism underneath the one in the ruling. The cron died with its session on 2026-08-18 —
+but Step 0's stop condition was still `itemtables/batch_011 already exists`, and batches
+011-015 exist. **Re-creating the cron unchanged would have self-cancelled on its first
+fire**, and the pipeline would have read as dead a second time. Cap raised to `batch_031`
+(16 rounds of 12 from batch_016, ~192 tables — a human-reviewable amount of triage rather
+than an unbounded run).
+
+Confirmed before starting: no `circuit_breaker.flag`, `itemtables/clean/` absent, queue at
+1,164 pending. `irw` is 1.0.1 (Rpkg#121 landed) and `scripts/table_sets.R` was smoke-tested
+live — it returned the item and resp sets for `neurips_2020` (24,076,951 rows, 27,613 items)
+with no export, which is the route that has to hold for the quota not to break again.
+
+Rounds run from a **worktree** (`/home/ben/irw-wt/1709/itemtext`, branch
+`itemtext/1709-restart-queue`), not `src`, which is checked out on
+`tags/construct-type-rules`. `queue_state.csv` was byte-identical between the two at fork.
+`check_provenance.R`'s `../../irw_site/` argument resolves outside the worktree and was made
+absolute in the round prompt. The prompt itself is now a file,
+`extraction_batches/round_prompt_v1.md`, rather than a 15kB paste re-transcribed per restart.
