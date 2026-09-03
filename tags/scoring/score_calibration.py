@@ -31,7 +31,12 @@ HELD = ["construct_type", "sample_frame", "construct_name", "age_range", "child_
 # being silently counted as a setting atom.
 FRAME_ATOMS = {"Representative", "Targeted/specific", "General/non-specific"}
 SETTING_ATOMS = {"Educational", "Clinical", "Program-based", "Non-human",
-                 "Internet-based", "Internet-based (Mturkers, etc)"}
+                 "Internet-based", "Internet-based (Mturkers, etc)",
+                 # Added to vocab.md 2026-09-03 (#1704). A setting atom, so it
+                 # belongs to the facet that publishes -- omitting it here
+                 # understates setting fill rather than erroring, which is what
+                 # the unknown-atom warning below exists to catch.
+                 "Workplace"}
 UNKNOWN_ATOMS = set()
 
 # `Internet-based (Mturkers, etc)` is the sheet form; 03_tags.R renames it on
