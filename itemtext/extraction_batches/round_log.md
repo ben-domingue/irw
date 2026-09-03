@@ -1776,3 +1776,30 @@ issues-page entry alongside the 64 outstanding machine-translation tables.
 
 **`mgkt` staged** into `itemtables/clean/` — 6 tables now staged, 897 rows. It owes two lines on
 the issues page when uploaded: the derived key, and the -1.25-vs-1 scoring penalty.
+
+### batch_016 defects filed as issues — 2026-09-03
+
+All five carry the `data fix` label and the verified evidence, and each names the processing script
+at fault. Filed only after the orchestrator re-check, per Step 5b — an agent's finding is a lead
+until confirmed, and one of these (`mgkt`'s penalty) changed shape under re-checking.
+
+| # | table | defect |
+|---|---|---|
+| [#1875](https://github.com/ben-domingue/irw/issues/1875) | `neurips_2020` | item codes 1-948 pool two questions each (the task-1/2 and task-3/4 ID spaces are merged against the challenge guide's explicit instruction), and `resp` conflates `IsCorrect` with `AnswerValue` |
+| [#1876](https://github.com/ben-domingue/irw/issues/1876) | `concretewords` | `item` and `id` transposed; the item axis holds anonymous Qualtrics respondent IDs |
+| [#1877](https://github.com/ben-domingue/irw/issues/1877) | `vocabulary_iq` | 30 bundled survey items scored against the vocabulary key, collapsing 361,632 responses to `resp=0` |
+| [#1878](https://github.com/ben-domingue/irw/issues/1878) | `hypersensitive_narcissism` | dictionary `Construct` AND `Reference` cite the Open Hemispheric Brain Dominance Scale, an unrelated study |
+| [#1879](https://github.com/ben-domingue/irw/issues/1879) | `content_literacy_intervention_g1` | dictionary cites the N=674 first-grade trial; the data are the N=5,494 grade-1-and-2 replication |
+
+`neurips_2020`'s two defects were filed as ONE issue rather than two: they live in the same script
+and would be fixed in the same edit, so splitting them would have created duplicate work.
+
+Two of the held tables are now blocked on an issue rather than on a judgment call: `vocabulary_iq`
+waits on #1877 (a re-derivation could shift its positional item codes, so staging the text first
+risks doing the mapping twice) and `content_literacy_intervention_g1` waits on #1879 plus its own
+`PARTIAL`/76%-blank status.
+
+**Five of eight tables in this round produced a defect report against already-published data.** The
+round log's standing observation that "the extraction pass is, in practice, also an audit of the
+response data" is holding at a much higher rate here than in batches 001-011 — which is a property
+of working the head of the queue, where the corpus's large aggregated public datasets sit.
