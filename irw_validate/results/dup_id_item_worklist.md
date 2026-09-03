@@ -153,6 +153,10 @@ still half broken. It needs the source.
 - `IRTrees.R:17` — `fsdatT %>% select(-node, -sub)` on De Boeck & Partchev
   IRTrees data, whose design is one row per tree node. `ravens_deboeck2012` is
   exactly 2× its pair count; `stress_deboeck2012` is the same script.
+  *Confirmed:* `ravens_deboeck2012` is **every pair exactly 2x** and nothing
+  else — 5,811 pairs, no singletons — and `stress_deboeck2012` runs 3 to 9.
+  `KTEEM_Schoen_2019-2022` is 1 to 5, which is the wave count its `group`
+  column is recording.
 - `KTEEM_Schoen_2019-2022.R` — renames `DataCollectionWave` to `group`. It *is*
   a wave: Spring19–Spring22, `PublicID` persists, 832 of 1,130 ids recur.
   **No data change** — rename `group` → `wave`, set `longitudinal=TRUE`.
@@ -197,7 +201,37 @@ table is **1–5**, so they are arguably a separate instrument and a separate
 table; and its `group` column should become `itemcov_subscale`, which is only
 safe now that group is a function of item.
 
-### Block H — dedupe, then take the residual to the source · 13 tables
+### Block H — ~~dedupe, then take the residual to the source~~ · 13 tables · **RE-DIAGNOSED, do not follow the table below**
+
+> **Three of these are not duplication at all, and this block's instruction
+> would have destroyed data.** Read
+> `results/copies_per_pair_2026-09-03.csv` before touching any of them.
+>
+> The verdict `mixed_dedupe_then_source` was reached from `excess_exact > 0`:
+> some rows are byte-identical, so those rows are duplicates. That inference is
+> wrong in a repeated-measures design, where a person answering the same item
+> the same way on two occasions is byte-identical and entirely real. The
+> distribution of *copies per `id`+`item`* tells them apart, and it is an
+> aggregate, so it was always affordable to look:
+>
+> | table | copies per pair | what it is |
+> |---|---|---|
+> | `number_pattern_game` | **every pair exactly 30x** (9,088 of them) | 30 trials per person-item. The prescribed dedupe removes 255,155 real trials — 94% of the table. |
+> | `SAS_Deters_2022` | 1 … 14, tapering | repeated measurement, not duplication |
+> | `PTCI_Chinese_Zhan_2024` | 1, 2, 3, 4 | up to four occasions |
+> | `Veterans_Affairs_SSVF_Survey_2016-17` | 158,637 once, 91,043 twice | strictly two — reads as two waves, not 91,043 accidents |
+> | `Aspirations_Sonmez_2022` | 1,995 once, **7,280 twice** | ditto, and most pairs are doubled |
+>
+> Those five belong with blocks F/I/J — an occasion column that was dropped or
+> never carried — not here. The rest do have the small tail at 2 that
+> duplication looks like: `PROMISPME_*_Proxy` (53,928 pairs once, 56 twice),
+> `PEPABAS2C_Kubicka_2024` (4,750 and 48), `5personalityfactors` (624,260 and
+> 1,260), `pact_project`.
+>
+> **And the mechanical half cannot ship anyway.** `red_up` refuses a table that
+> still has unexplained `id`+`item` repeats, so "do the first and record the
+> second" produces a file no uploader will take. Block H is all-or-nothing: it
+> needs the source before any of it reaches the corpus.
 
 Two halves; the first is mechanical, the second is research. Do the first and
 record the second, rather than blocking on it.
@@ -228,6 +262,10 @@ should be carried through as well — but see Decision note below, it is not wha
 causes this flag.
 
 ### Block I — `duolingo_*` · 7 tables · 279,003 rows · restore a trial index
+
+*Confirmed by the copy histogram:* 89-96% of pairs occur once with a tail
+running to 11-22, which is the shape of a spaced-repetition trace and not of
+duplication. Block I's diagnosis stands.
 
 `duolingo_{en_es,es_en,fr_en}__{listen,reverse_tap,reverse_translate}` (7 of the 9).
 
@@ -268,6 +306,12 @@ zero — with an exposure index every row is uniquely keyed.
 
 ### Block J — trial-level, no trial index · 4 tables · 84,777 rows
 
+*Confirmed by the copy histogram, and emphatically:* `motion` is **every pair
+exactly 10x**, `non_parametric_mixture_modeling_exp1_Cleaned` runs to **994**
+copies, `rr98_accuracy` to 62. `realpic_souza2021` is the odd one out at
+4,116 pairs once and 28 twice — the small tail that really is a defect.
+`number_pattern_game` belongs in this block, not in H.
+
 `non_parametric_mixture_modeling_exp1_Cleaned`, `motion`, `rr98_accuracy` —
 same `rt`-as-identifier problem; restore `trialnum`/`order`.
 
@@ -286,6 +330,15 @@ id collisions above at upload time, before any of them reached the corpus.
       person-level column (`cov_age`, `cov_sex`, `group`, `study`, `treat`) is
       not a repeated measure — it is two people sharing an identifier.
       `pass20_klosowska_2025_*` is the ready-made test fixture.
+- [ ] **Report the distribution of copies per `id`+`item`, not just the total.**
+      `excess_pair` cannot distinguish `number_pattern_game`, where every pair
+      appears exactly 30 times because there are 30 trials, from
+      `5personalityfactors`, where 1,260 of 625,520 pairs appear twice because
+      something went wrong. Deduping the first destroys 94% of the table.
+      A single spike at n>1 is a design; a long tail from 1 is repeated
+      measurement; a dominant 1 with a small tail at 2 is duplication or a
+      collision. `irw_validate/live_copies.py` computes it, as an aggregate, so
+      it costs nothing — and it caught three wrong verdicts in block H.
 - [ ] **Split `dup_id_item` into its classes.** It reports one error for six
       different defects. The three measures that made this triage possible —
       the exact-duplicate share, what survives grouping by every column, and
