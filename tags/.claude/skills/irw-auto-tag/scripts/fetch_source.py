@@ -45,6 +45,7 @@ import re
 import sys
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 import requests
 
@@ -349,9 +350,13 @@ def dataverse_api(doi, url):
         host = m.group(1)
     elif not (doi or "").lower().startswith(DATAVERSE_DOI_PREFIXES):
         return None
-    if not doi:
-        m = re.search(r"persistentId=(doi:[^&\s]+)", url or "")
-        doi = m.group(1).removeprefix("doi:") if m else None
+    # The URL's own persistentId wins over whatever was passed in. A row with
+    # both a paper DOI and a Dataverse URL is the correct, fully-populated
+    # state, and the old `if not doi:` precedence sent the *journal article's*
+    # DOI to Dataverse, which has never heard of it -- 80 rows, #1892.
+    m = re.search(r"persistentId=(doi:[^&\s]+)", url or "")
+    if m:
+        doi = m.group(1).removeprefix("doi:")
     if not doi:
         return None
     api = f"https://{host}/api/datasets/:persistentId/?persistentId=doi:{doi}"
@@ -526,6 +531,60 @@ def osf_api(doi, url):
     return "\n".join(parts), api, related
 
 
+def zenodo_api(doi, url):
+    """(text, source, related_doi) from a Zenodo record, or None.
+
+    Zenodo serves a JavaScript shell that reads as title-plus-file-listing and
+    no description -- chrome the tagger cannot use. It was never routed (#1789
+    covered OSF, Dataverse, figshare and Mendeley only) and is the second
+    largest host in the dictionary: 128 rows over 41 distinct records. The
+    public REST API needs no token.
+    """
+    ident = None
+    m = re.search(r"zenodo\.org/records?/(\d+)", url or "")
+    if m:
+        ident = m.group(1)
+    else:
+        m = re.search(r"10\.5281/zenodo\.(\d+)", (doi or "") + " " + (url or ""),
+                      re.I)
+        ident = m.group(1) if m else None
+    if not ident:
+        return None
+    api = f"https://zenodo.org/api/records/{ident}"
+    try:
+        r = requests.get(api, headers=UA, timeout=30)
+        if r.status_code != 200:
+            return None
+        meta = r.json().get("metadata") or {}
+    except (requests.RequestException, ValueError, AttributeError):
+        return None
+    if not meta:
+        return None
+
+    # A deposit that names the article it backs is worth more than the deposit.
+    related = None
+    for entry in (meta.get("related_identifiers") or []):
+        if not isinstance(entry, dict):
+            continue
+        idn = str(entry.get("identifier") or "").strip()
+        idn = idn.replace("https://doi.org/", "")
+        if idn.startswith("10.") and "zenodo" not in idn.lower():
+            related = idn
+            break
+
+    keep = ("title", "description", "keywords", "subjects", "notes",
+            "publication_date", "resource_type", "license", "method")
+    parts = []
+    for k in keep:
+        v = meta.get(k)
+        if not v:
+            continue
+        if isinstance(v, (list, dict)):
+            v = json.dumps(v)[:1500]
+        parts.append(f"{k}: {v}")
+    return "\n".join(parts), api, related
+
+
 # NOT a route: DataCite (api.datacite.org/dois/<doi>) answers 200 for every one
 # of these DOIs and would look like a universal fallback, but its records are
 # too thin to tag from -- 73 and 109 characters of description for the two
@@ -546,8 +605,17 @@ def repository_api(doi, url):
         if doi.lower().startswith(pre):
             doi = doi[len(pre):]
             break
+    # A bare repository DOI parked in the URL column, with the DOI column
+    # empty, is a shape the dictionary produces normally. The routes look for a
+    # repository DOI in the `doi` argument or a repository hostname in the URL,
+    # and `https://doi.org/…` is neither -- 13 rows, #1892.
+    if not doi:
+        m = re.match(r"https?://(?:dx\.)?doi\.org/(10\.\S+)", (url or "").strip(),
+                     re.I)
+        if m:
+            doi = m.group(1).rstrip("/")
     doi = doi or None
-    for fn in (dataverse_api, figshare_api, mendeley_api, osf_api):
+    for fn in (dataverse_api, figshare_api, mendeley_api, osf_api, zenodo_api):
         try:
             got = fn(doi, url)
         except Exception:                                  # noqa: BLE001
@@ -647,9 +715,10 @@ def main():
     # deposit record, so adopt it and carry on down the ordinary path -- OpenAlex
     # locations, Europe PMC, then URLs -- exactly as if it had been passed in.
     repo = repository_api(args.doi, args.url)
-    repo_text = repo_source = None
+    repo_text = repo_source = repo_host = None
     if repo:
         repo_text, repo_source, related = repo
+        repo_host = urlparse(repo_source).netloc
         if related and related != args.doi:
             print(f"NOTE {repo_source} names a related publication: {related}",
                   file=sys.stderr)
@@ -687,6 +756,17 @@ def main():
         if got is None:
             continue
         text, final_url = got
+        # The same record, rendered. Zenodo's page is a JavaScript shell whose
+        # visible text is navigation plus a file listing -- 2.1kB of it for a
+        # record with no description at all -- so it clears the length floor and
+        # would be cached in place of the API copy. Where the API answered on
+        # the host we just scraped, the API copy is the record and the page is
+        # its chrome (#1892). Hosts that differ -- figshare, OSF -- are
+        # untouched.
+        if repo_text and repo_host and urlparse(final_url).netloc == repo_host:
+            rejected[-1] = (f"{url} -> repository_page_shell:"
+                            f"{repo_host}_answered_by_api")
+            continue
         write_cache(path, text)
         print(f"OK oa_status={oa_status} source={url} final_url={final_url} "
               f"content={reason} attempts={len(attempted)} -> {path}")
