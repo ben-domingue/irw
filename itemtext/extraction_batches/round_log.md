@@ -2589,3 +2589,9 @@ table, and every written table has exactly one.
 NC-rights entry to the issues page, and delete the uploaded `__items.csv` from `batch_021/` (sidecars
 and `verify_*.R` stay). Separately owed regardless of upload: correct the `conner_2017_vitality`
 description in `metadata/biblio.csv` and the stale row in `availability_audit_full.csv`.
+
+**CAP REACHED — 2026-09-04T08:23-07:00.** `itemtables/batch_021` now exists, so Step 0's first stop
+condition fires from here on and no further round should start. No self-cancel action was possible or
+needed: there is no scheduler — `extraction_batches/run_round.sh` is human-triggered and checks the
+same condition in bash before launching, so it will decline on its own. 1,141 rows remain `pending`
+(plus 52 permanently `excluded` enem* tables) for whenever a human decides to raise the cap.
