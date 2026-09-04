@@ -1,4 +1,4 @@
-## verify_ecps_common.R  --  batch_021, issue #1831
+## verify_ecps_common.R  --  batch_022, issue #1831
 ##
 ## Shared body for the eight ecps_sahm_2024 verify scripts. All eight are keyed
 ## to one source -- the administered COVIDiSTRESS Round II Qualtrics form, plus
@@ -18,7 +18,7 @@
 suppressMessages({library(jsonlite)})
 
 verify_ecps <- function(TBL, resp_csv = NA_character_) {
-    DIR <- "itemtables/batch_021"
+    DIR <- "itemtables/batch_022"
     CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
     JSN <- file.path(DIR, "rederived_ecps.json")
     fail <- character(0)

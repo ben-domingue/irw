@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ecps_source.py -- batch_021, issue #1831
+"""ecps_source.py -- batch_022, issue #1831
 
 The administered instrument for the eight ecps_sahm_2024_* tables, which are
 COVIDiSTRESS Global Survey Round II (see provenance.csv for the source

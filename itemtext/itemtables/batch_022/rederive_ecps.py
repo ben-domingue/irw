@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rederive_ecps.py -- batch_021, issue #1831
+"""rederive_ecps.py -- batch_022, issue #1831
 
 Rebuilds the shipped text for the eight ecps_sahm_2024_* tables from the
 administered COVIDiSTRESS Round II instrument and writes rederived_ecps.json,
@@ -27,8 +27,8 @@ than asserting them:
 
 Reads   .cache/ecps_sahm_2024/{survey.pdf or survey_pages.json, blocks.json,
                                covidistress_vol2.csv}
-Writes  itemtables/batch_021/rederived_ecps.json
-Run from itemtext/:  python3 itemtables/batch_021/rederive_ecps.py
+Writes  itemtables/batch_022/rederived_ecps.json
+Run from itemtext/:  python3 itemtables/batch_022/rederive_ecps.py
 """
 import csv, importlib.util, json, os, sys
 from collections import defaultdict

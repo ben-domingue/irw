@@ -1,4 +1,4 @@
-## verify_promis1wave1_cesd.R  --  batch_021, issue #1831
+## verify_promis1wave1_cesd.R  --  batch_022, issue #1831
 ##
 ## Re-derives the shipped text from the cached study codebook via
 ## rederive_cesd.py and diffs it, so this checks the mapping rather than the
@@ -9,12 +9,12 @@
 ## layout traps) and its own verify script.
 ##
 ## Run from itemtext/:
-##   Rscript itemtables/batch_021/verify_promis1wave1_cesd.R
-##   Rscript itemtables/batch_021/verify_promis1wave1_cesd.R --resp-csv <path>
+##   Rscript itemtables/batch_022/verify_promis1wave1_cesd.R
+##   Rscript itemtables/batch_022/verify_promis1wave1_cesd.R --resp-csv <path>
 suppressMessages({library(jsonlite)})
 
 TBL <- "promis1wave1_cesd"
-DIR <- "itemtables/batch_021"
+DIR <- "itemtables/batch_022"
 CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
 JSN <- file.path(DIR, "rederived_cesd.json")
 fail <- character(0)

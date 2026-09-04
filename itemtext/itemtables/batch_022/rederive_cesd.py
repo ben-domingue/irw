@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rederive_cesd.py -- batch_021, issue #1831
+"""rederive_cesd.py -- batch_022, issue #1831
 
 Re-parses the CES-D block of the PROMIS Wave 1 study codebook and writes
 rederived_cesd.json, so verify_promis1wave1_cesd.R diffs the shipped text
@@ -18,13 +18,13 @@ run into the option text. Two traps this handles explicitly:
     while the keys ascend by one, which stops at the boundary.
 
 Reads   .cache/promis1wave1/codebook.txt
-Writes  itemtables/batch_021/rederived_cesd.json
-Run from itemtext/:  python3 itemtables/batch_021/rederive_cesd.py
+Writes  itemtables/batch_022/rederived_cesd.json
+Run from itemtext/:  python3 itemtables/batch_022/rederive_cesd.py
 """
 import json, os, re, sys
 
 SRC   = ".cache/promis1wave1/codebook.txt"
-OUT   = "itemtables/batch_021/rederived_cesd.json"
+OUT   = "itemtables/batch_022/rederived_cesd.json"
 INSTR = ("Select the statement which best describes how often you felt or behaved this way "
          "during the past week.")
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rederive_haq.py -- batch_021, issue #1831
+"""rederive_haq.py -- batch_022, issue #1831
 
 Re-parses the HAQ block of the PROMIS Wave 1 study codebook and writes
 rederived_haq.json, so verify_promis1wave1_haq.R diffs the shipped text
@@ -17,13 +17,13 @@ HAQ needs its own re-derivation for three reasons:
     monotone run in either direction rather than an ascending one.
 
 Reads   .cache/promis1wave1/codebook.txt
-Writes  itemtables/batch_021/rederived_haq.json
-Run from itemtext/:  python3 itemtables/batch_021/rederive_haq.py
+Writes  itemtables/batch_022/rederived_haq.json
+Run from itemtext/:  python3 itemtables/batch_022/rederive_haq.py
 """
 import json, os, re, sys
 
 SRC = ".cache/promis1wave1/codebook.txt"
-OUT = "itemtables/batch_021/rederived_haq.json"
+OUT = "itemtables/batch_022/rederived_haq.json"
 CODES = ["HAQ%d%s" % (n, s) for n in range(1, 9) for s in ("a", "b", "c")] \
         + ["HAQ%d" % n for n in (9, 10, 11, 12)]
 META = re.compile(r'\s+(?:Physical Function|Emotional Distress|Social Role|Fatigue|Pain|Sleep'
