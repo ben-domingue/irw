@@ -2693,3 +2693,62 @@ the corpus cannot yet serve — and `quarto_publish.yaml` is `workflow_dispatch`
 has not rebuilt either. Three things are now waiting on a human: release the `irw_text` draft version,
 trigger the publish workflow, and clear `itemtables/clean/`, which is Ben's to empty, not the
 pipeline's.
+
+## batch_023 — 10 written / 2 blocked / 0 failed (83.3% yield)
+
+**Originally numbered batch_022, and renumbered.** The round was fired at 10:03 and **killed by Ben
+at 10:20**, mid-Step-3, on a well-founded worry that it might be duplicating xingyi-zhang's work in
+[#1935](https://github.com/ben-domingue/irw/pull/1935). It was not — that PR covers
+`promis1wave1_*` and `ecps_sahm_2024_*`, this round claimed the next 12 alphabetically
+(`conspiracy_asd__*` through `cormier_2024_*`), and the two sets are disjoint. But **both were
+numbered `batch_022`**, which would have fused two unrelated batches into one directory with
+conflicting `notes.csv`, `provenance.csv`, `verification_merged.csv` and `audit_report.csv`. This one
+renumbered to `batch_023` because #1935 was already open and complete while this was local and
+unfinished. Second collision of this kind; the COACH tables hit it from the other side.
+
+**The kill cost nothing.** Extraction and the Step 3 merge had completed; only Steps 4-6 were
+missing, so the round was closed out by hand rather than re-run.
+
+**Written:** `conspiracy_asd__{cognitive_flexibility,conspiracy_gcbs,schizotypy,thinking_styles}`,
+`cooper_2018_{funny_topics,offensive_topics}`,
+`cormier_2024_{cognitive_decline,personality,phq4,pss4}`.
+
+**Gates, all run at close-out:** `normalize_nulls` 0 of 10 needed changes; `audit_batch`
+**10/10 PASS with no anomalies**; `verify_batch` 3 PASS + 7 exempt (`data_labels`);
+`lint_verification` **0 ERROR** / 2 WARN; `irw-validate` ok on all ten; `check_provenance` clean.
+
+The 0 ERROR is worth noting: the Step 3 fix from batch_021 — write `NOT_NEEDED` rows into the
+batch's own `verification_merged.csv` as well as the permanent tracker — held. Two consecutive
+rounds had thrown 3 and 4 spurious lint ERRORs before it.
+
+**Blocked (2), both determinate and both on rights, not access.**
+`contreras_valdez_2022_bsq` and `_rses` are the Mexican Spanish BSQ-16 and RSES. The wording was
+**located in both cases** — Amaya Hernández A (2013), UNAM doctoral thesis TESIUNAM 0704071,
+Apéndices A and B — and cannot be shipped: the thesis front matter states *"DERECHOS RESERVADOS …
+PROHIBIDA SU REPRODUCCIÓN TOTAL O PARCIAL"* with use restricted to educational and informational
+purposes. That is a quoted, source-level non-commercial restriction plus an explicit bar on partial
+reproduction, and under the 2026-09-04 ruling the licence of the source actually copied from
+governs. Same shape as TIMSS 2003 and `chinvararak_2021_ecr`. Retry test NO for both.
+
+**A finding worth keeping even though its table is blocked.** `contreras_valdez_2022_rses`: the
+deposit's stated anchor direction is almost certainly **reversed** relative to the stored data. The
+Keys sheet and the paper both say 1 = *totalmente de acuerdo*, but the file's own `rses_pse` /
+`rses_nse` factor scores are raw sums of exactly the positively- and negatively-worded item sets and
+only reconcile the other way round (−0.395 and +0.287 against `edeq14_overall`, matching the paper's
+own convergent-validity result). Read with the printed anchors, a general-population sample would be
+agreeing they are useless (means 1.43–1.54) and disagreeing that they have good qualities (means
+3.28–3.58). An extraction that trusted the Keys sheet would have shipped the anchors backwards.
+Recorded in `pending_index_notes.csv` and re-runnable as `verify_contreras_valdez_2022_rses.R`.
+
+**Both lint WARNs adjudicated, both kept VERIFIED** — same pattern as batch_021, the lint fires on
+the phrase "does not establish" rather than on the status. `conspiracy_asd__thinking_styles` says in
+terms that all ten (mean, floor%, ceiling%) signatures are distinct with closest-pair distance
+0.8349, so every item is separated; its hedge is about unlabelled scale midpoints, not the item axis.
+`cooper_2018_funny_topics` is the stronger of the two: the Hungarian optimum over all 34!
+text-onto-code assignments lands on the shipped identity assignment with 0 items reassigned, where
+nearest-neighbour alone would have left 8 ambiguous. Its hedge is about `option_text` describing the
+0/1 check-all-that-apply coding rather than transcribed wording.
+
+**Circuit breaker:** 0 of 12 failed (0%), threshold 30%. Not tripped.
+
+Not yet triaged, not staged, not uploaded.
