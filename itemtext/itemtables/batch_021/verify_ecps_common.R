@@ -1,20 +1,20 @@
 ## verify_ecps_common.R  --  batch_021, issue #1831
 ##
-## Shared body for the five ecps_sahm_2024 verify scripts. All five are keyed
-## to one source (the COVIDiSTRESS Global Survey Round II questionnaire on OSF),
-## so the re-derivation and the checks are identical and only the table differs.
+## Shared body for the eight ecps_sahm_2024 verify scripts. All eight are keyed
+## to one source -- the administered COVIDiSTRESS Round II Qualtrics form, plus
+## the two registration workbooks for the parts its print view does not render
+## -- so the re-derivation and the checks are identical and only the table
+## differs.
 ##
 ## Checks, in order:
-##   1. item_text re-derived from the questionnaire workbook, per item
+##   1. item_text re-derived from the instrument, per item
 ##   2. section_prompt and instrument, per item
-##   3. option_text is empty throughout -- the two available questionnaire
-##      documents are registration-stage and their response designs do not
-##      describe the administered scales (see provenance.csv), so no option
-##      label is asserted
-##   4. cross-document wording agreement, where a scale appears in both workbooks
-##   5. the source tie: every shipped item code is a column of
-##      Final_COVIDiSTRESS_Vol2_cleaned.csv
-##   6. item and resp sets against live response data
+##   3. option_text per resp level, against that item's own response ladder,
+##      including the positions the form left without a verbal label
+##   4. where every string was verified: the administered form, or the workbooks
+##   5. the _0neutral decode, re-run from the cleaned data file
+##   6. the source tie: every item code is a column of that file
+##   7. item and resp sets against live response data
 suppressMessages({library(jsonlite)})
 
 verify_ecps <- function(TBL, resp_csv = NA_character_) {
@@ -32,7 +32,7 @@ verify_ecps <- function(TBL, resp_csv = NA_character_) {
     it$item <- as.character(it$item)
     codes <- unique(it$item)
 
-    cat("=== 1. item_text re-derived from the questionnaire ===\n")
+    cat("=== 1. item_text re-derived from the administered instrument ===\n")
     bad <- 0
     for (code in codes) {
         want <- src[[code]]$text
@@ -40,8 +40,8 @@ verify_ecps <- function(TBL, resp_csv = NA_character_) {
         if (is.null(want) || length(got) != 1 || !identical(got, want)) {
             bad <- bad + 1
             if (bad <= 3) cat(sprintf("  MISMATCH %s\n    source : %s\n    shipped: %s\n", code,
-                substr(paste(want, collapse = "|"), 1, 90),
-                substr(paste(got, collapse = "|"), 1, 90)))
+                substr(paste(want, collapse = "|"), 1, 88),
+                substr(paste(got, collapse = "|"), 1, 88)))
         }
     }
     cat(sprintf("  items compared: %d | mismatches: %d\n", length(codes), bad))
@@ -51,37 +51,77 @@ verify_ecps <- function(TBL, resp_csv = NA_character_) {
     sbad <- 0
     for (code in codes) {
         for (f in c("section_prompt", "instrument")) {
-            want <- src[[code]][[f]]
+            want <- src[[code]][[if (f == "instrument") "instrument" else "section_prompt"]]
             want <- if (is.null(want) || !nzchar(want)) NA_character_ else want
             got  <- unique(it[[f]][it$item == code])
-            if (length(got) != 1 || !identical(as.character(got), as.character(want))) sbad <- sbad + 1
+            if (length(got) != 1 || !identical(as.character(got), as.character(want)))
+                sbad <- sbad + 1
         }
     }
     cat(sprintf("  cells compared: %d | mismatches: %d\n", 2 * length(codes), sbad))
     if (sbad) fail <- c(fail, "section_prompt/instrument mismatch")
 
-    cat("\n=== 3. option_text deliberately empty ===\n")
-    nonempty <- sum(!is.na(it$option_text) & nzchar(it$option_text))
-    cat("  non-empty option_text cells:", nonempty, "of", nrow(it), "\n")
-    if (nonempty) fail <- c(fail, "option_text is populated but no option source was established")
+    cat("\n=== 3. option_text against each item's response ladder ===\n")
+    obad <- 0; labelled <- 0; blank <- 0
+    for (code in codes) {
+        lad  <- src[[code]]$ladder
+        rows <- it[it$item == code, ]
+        for (k in seq_len(nrow(rows))) {
+            key <- format(rows$resp[k], trim = TRUE)
+            if (!key %in% names(lad)) {
+                obad <- obad + 1
+                if (obad <= 3) cat(sprintf("  %s resp=%s has no position in the ladder\n",
+                                           code, key))
+                next
+            }
+            want <- lad[[key]]
+            got  <- rows$option_text[k]
+            # a NULL ladder entry is a position the form left unlabelled, which
+            # must ship empty rather than invented
+            ok <- if (is.null(want)) is.na(got) else identical(got, want)
+            if (is.null(want)) blank <- blank + 1 else labelled <- labelled + 1
+            if (!ok) {
+                obad <- obad + 1
+                if (obad <= 3) cat(sprintf("  MISMATCH %s resp=%s\n    ladder : %s\n    shipped: %s\n",
+                    code, key, if (is.null(want)) "(unlabelled position)" else want,
+                    if (is.na(got)) "(empty)" else got))
+            }
+        }
+    }
+    cat(sprintf("  option cells checked: %d | labelled: %d | unlabelled by the form: %d | mismatches: %d\n",
+                labelled + blank, labelled, blank, obad))
+    if (obad) fail <- c(fail, "option_text does not match the response ladder")
 
-    cat("\n=== 4. cross-document wording agreement ===\n")
-    for (k in names(red$cross_document_wording))
-        cat(sprintf("  %-28s %s\n", k, red$cross_document_wording[[k]]))
-    if (any(grepl("^differs", unlist(red$cross_document_wording))))
-        fail <- c(fail, "the two questionnaire documents disagree on wording")
+    cat("\n=== 4. where the strings were verified ===\n")
+    sv <- red$string_verification
+    cat(sprintf("  administered form: %s | registration workbooks: %s | neither: %s\n",
+                sv$in_survey_pdf, sv$in_workbooks, sv$unverified))
+    if (!identical(as.numeric(sv$unverified), 0)) fail <- c(fail, "unverified source strings")
 
-    cat("\n=== 5. source tie: item codes are columns of the COVIDiSTRESS Vol 2 file ===\n")
+    cat("\n=== 5. the _0neutral decode, re-run from the cleaned data file ===\n")
+    nd <- red$neutral_decode
+    if (is.null(nd$distinct_mappings)) {
+        cat("  ", nd$note, "\n", sep = "")
+    } else {
+        cat(sprintf("  items carrying both codings: %s | distinct mappings: %d\n",
+                    nd$items_with_both_codings, length(nd$distinct_mappings)))
+        for (sig in names(nd$distinct_mappings))
+            cat(sprintf("     n=%-3d %s\n", length(nd$distinct_mappings[[sig]]), sig))
+        if (length(nd$distinct_mappings) > 2)
+            fail <- c(fail, "the _0neutral decode is no longer consistent")
+    }
+
+    cat("\n=== 6. source tie: item codes are columns of the cleaned data file ===\n")
     cc <- red$source_column_check[[TBL]]
     if (is.null(cc)) {
-        cat("  source CSV not cached -- column check skipped\n")
+        cat("  cleaned data file not cached -- column check skipped\n")
     } else {
         cat(sprintf("  items: %s | codes that are not a column: %d\n",
                     cc$items, length(cc$not_a_column)))
-        if (length(cc$not_a_column)) fail <- c(fail, "item code absent from the source data file")
+        if (length(cc$not_a_column)) fail <- c(fail, "item code absent from the source file")
     }
 
-    cat("\n=== 6. item and resp sets vs live response data ===\n")
+    cat("\n=== 7. item and resp sets vs live response data ===\n")
     live <- if (!is.na(resp_csv) && nzchar(resp_csv)) {
         cat("  (using local response CSV:", resp_csv, ")\n")
         read.csv(resp_csv, stringsAsFactors = FALSE)

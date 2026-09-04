@@ -1,0 +1,11 @@
+## verify_ecps_sahm_2024_dtl.R  --  batch_021, issue #1831
+##
+## Re-derives the shipped text from the administered COVIDiSTRESS Round II
+## instrument via rederive_ecps.py and diffs it, so this checks the mapping
+## rather than the plumbing: an evidence string cannot be re-run, a rebuild can.
+##
+## Run from itemtext/:
+##   Rscript itemtables/batch_021/verify_ecps_sahm_2024_dtl.R
+##   Rscript itemtables/batch_021/verify_ecps_sahm_2024_dtl.R --resp-csv <path>
+source("itemtables/batch_021/verify_ecps_common.R")
+verify_ecps("ecps_sahm_2024_dtl", verify_args())

@@ -1,17 +1,53 @@
 {
- "cross_document_wording": {
-  "[antiexpert]": "absent_from_final",
-  "[conspirational_thinking]": "absent_from_final",
-  "[identity]": "identical",
-  "[information_acquisition]": "absent_from_final",
-  "[misperception]": "absent_from_final",
-  "[moral values]": "absent_from_final",
-  "compliance": "identical",
-  "socialinfluence_norms": "identical"
+ "neutral_decode": {
+  "distinct_mappings": {
+   "0->3 1->1 2->2 3->4 4->5": [
+    "vaccine_0neutral"
+   ],
+   "0->4 1->1 2->2 3->3 4->5 5->6 6->7": [
+    "emotions_1_0neutral",
+    "emotions_2_0neutral",
+    "emotions_3_0neutral",
+    "emotions_4_0neutral",
+    "emotions_5_0neutral",
+    "emotions_6_0neutral",
+    "emotions_7_0neutral",
+    "emotions_8_0neutral",
+    "identity_1_0neutral",
+    "identity_2_0neutral",
+    "identity_3_0neutral",
+    "identity_4_0neutral",
+    "moral.values_10_0neutral",
+    "moral.values_11_0neutral",
+    "moral.values_1_0neutral",
+    "moral.values_2_0neutral",
+    "moral.values_3_0neutral",
+    "moral.values_4_0neutral",
+    "moral.values_5_0neutral",
+    "moral.values_6_0neutral",
+    "moral.values_7_0neutral",
+    "moral.values_8_0neutral",
+    "moral.values_9_0neutral",
+    "perceived_support_1_0neutral",
+    "perceived_support_2_0neutral",
+    "perceived_support_3_0neutral",
+    "vaccine_attitudes_2_0neutral",
+    "vaccine_attitudes_3_0neutral",
+    "vaccine_attitudes_4_0neutral",
+    "vaccine_attitudes_5_0neutral",
+    "vaccine_attitudes_6_0neutral",
+    "vaccine_attitudes_9_0neutral"
+   ]
+  },
+  "items_with_both_codings": 33
  },
  "source_column_check": {
   "ecps_sahm_2024_distrust": {
    "items": 13,
+   "not_a_column": []
+  },
+  "ecps_sahm_2024_dtl": {
+   "items": 11,
    "not_a_column": []
   },
   "ecps_sahm_2024_ia": {
@@ -29,128 +65,499 @@
   "ecps_sahm_2024_sscd": {
    "items": 24,
    "not_a_column": []
+  },
+  "ecps_sahm_2024_stress": {
+   "items": 28,
+   "not_a_column": []
+  },
+  "ecps_sahm_2024_vaccine": {
+   "items": 7,
+   "not_a_column": []
   }
+ },
+ "string_verification": {
+  "in_survey_pdf": 190,
+  "in_workbooks": 16,
+  "unverified": 0
  },
  "tables": {
   "ecps_sahm_2024_distrust": {
    "antiexpert_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Anti-expert sentiment",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_3",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "I am more confident in my opinion than other people’s facts"
    },
    "antiexpert_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Anti-expert sentiment",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_3",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Most of the time I know just as much as experts"
    },
    "antiexpert_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Anti-expert sentiment",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_3",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Experts really don’t know that much"
    },
    "conspirational_think_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Conspiratorial thinking",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_2",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Much of our lives are being controlled by plots hatched in secret places"
    },
    "conspirational_think_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Conspiratorial thinking",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_2",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Even though we live in a democracy, a few people will always run things anyway"
    },
    "conspirational_think_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Conspiratorial thinking",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_2",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "The people who really ‘run’ the country are not known to the voter"
    },
    "conspirational_think_4": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Conspiratorial thinking",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_2",
-    "section_prompt": "",
+    "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Big events like wars, recessions, and the outcomes of elections are controlled by small groups of people who are working in secret against the rest of us"
    },
    "misperception1_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "A new loss of taste or smell is a symptom of COVID-19"
    },
    "misperception1_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "COVID-19 can be spread by people who do not show symptoms"
    },
    "misperception2_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "The COVID-19 virus is man-made"
    },
    "misperception2_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "COVID-19 is being spread by 5G cell phone technology"
    },
    "misperception3_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "Pharmaceutical companies created COVID-19 to profit from the vaccines"
    },
    "misperception3_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: COVID-19 misperceptions",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_distrust_1",
     "section_prompt": "We will now present a few statements about the COVID-19 virus and about you. Please read the statements and indicate to what extent you agree with them.",
     "text": "COVID-19 is a hoax perpetrated by people who want to take control"
    }
   },
+  "ecps_sahm_2024_dtl": {
+   "resilience_1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "I tend to bounce back quickly after hard times"
+   },
+   "resilience_2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "I have a hard time making it through stressful events"
+   },
+   "resilience_3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "It does not take me long to recover from a stressful event"
+   },
+   "resilience_4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "It is hard for me to snap back when something bad happens"
+   },
+   "resilience_5": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "I usually come through difficult times with little trouble"
+   },
+   "resilience_6": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Resilience",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_dtl_1",
+    "section_prompt": "Think about how you deal with things in life. Please indicate the extent to which you agree with each of the following statements.",
+    "text": "I tend to take a long time to get over set-backs in my life"
+   },
+   "uncertainty_1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Intolerance of uncertainty",
+    "ladder": {
+     "1": "Not at all characteristic of me",
+     "2": "A little characteristic of me",
+     "3": "Somewhat characteristic of me",
+     "4": "Very characteristic of me",
+     "5": "Entirely characteristic of me"
+    },
+    "section_id": "ecps_sahm_2024_dtl_2",
+    "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
+    "text": "I always want to know what the future has in store for me."
+   },
+   "uncertainty_2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Intolerance of uncertainty",
+    "ladder": {
+     "1": "Not at all characteristic of me",
+     "2": "A little characteristic of me",
+     "3": "Somewhat characteristic of me",
+     "4": "Very characteristic of me",
+     "5": "Entirely characteristic of me"
+    },
+    "section_id": "ecps_sahm_2024_dtl_2",
+    "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
+    "text": "I should be able to organize everything in advance."
+   },
+   "uncertainty_3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Intolerance of uncertainty",
+    "ladder": {
+     "1": "Not at all characteristic of me",
+     "2": "A little characteristic of me",
+     "3": "Somewhat characteristic of me",
+     "4": "Very characteristic of me",
+     "5": "Entirely characteristic of me"
+    },
+    "section_id": "ecps_sahm_2024_dtl_2",
+    "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
+    "text": "When it's time to act, uncertainty paralyses me."
+   },
+   "uncertainty_4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Intolerance of uncertainty",
+    "ladder": {
+     "1": "Not at all characteristic of me",
+     "2": "A little characteristic of me",
+     "3": "Somewhat characteristic of me",
+     "4": "Very characteristic of me",
+     "5": "Entirely characteristic of me"
+    },
+    "section_id": "ecps_sahm_2024_dtl_2",
+    "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
+    "text": "I can’t stand being taken by surprise."
+   },
+   "uncertainty_5": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Intolerance of uncertainty",
+    "ladder": {
+     "1": "Not at all characteristic of me",
+     "2": "A little characteristic of me",
+     "3": "Somewhat characteristic of me",
+     "4": "Very characteristic of me",
+     "5": "Entirely characteristic of me"
+    },
+    "section_id": "ecps_sahm_2024_dtl_2",
+    "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
+    "text": "Unforeseen events upset me greatly."
+   }
+  },
   "ecps_sahm_2024_ia": {
    "information_acquisit_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "News broadcasters (TV, radio, newspapers)"
    },
    "information_acquisit_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Government Coronavirus adverts or updates"
    },
    "information_acquisit_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Social media"
    },
    "information_acquisit_4": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Radio or podcasts (not news)"
    },
    "information_acquisit_5": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Discussions (in person or messengers) with friends, family or colleagues"
    },
    "information_acquisit_6": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Scientific journals or websites"
    },
    "information_acquisit_7": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Information acquisition",
+    "ladder": {
+     "1": "Not at all",
+     "10": "Frequently",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": null,
+     "8": null,
+     "9": null
+    },
     "section_id": "ecps_sahm_2024_ia_1",
     "section_prompt": "Over the last two weeks, how much have you used the following sources to get information about the coronavirus?",
     "text": "Other, please specify"
@@ -159,24 +566,60 @@
   "ecps_sahm_2024_identity": {
    "identity_1_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Group identification",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_identity_1",
     "section_prompt": "Most of us belong to groups of various levels. Think about people in your life, both close to you and people that you have never met. Focus on how close you feel to/identify with different groups of people. Please indicate to what extent you agree with the following statements.",
     "text": "I identify with my family"
    },
    "identity_2_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Group identification",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_identity_1",
     "section_prompt": "Most of us belong to groups of various levels. Think about people in your life, both close to you and people that you have never met. Focus on how close you feel to/identify with different groups of people. Please indicate to what extent you agree with the following statements.",
     "text": "I identify with people in my local community"
    },
    "identity_3_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Group identification",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_identity_1",
     "section_prompt": "Most of us belong to groups of various levels. Think about people in your life, both close to you and people that you have never met. Focus on how close you feel to/identify with different groups of people. Please indicate to what extent you agree with the following statements.",
     "text": "I identify with people of my country"
    },
    "identity_4_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Group identification",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_identity_1",
     "section_prompt": "Most of us belong to groups of various levels. Think about people in your life, both close to you and people that you have never met. Focus on how close you feel to/identify with different groups of people. Please indicate to what extent you agree with the following statements.",
     "text": "I identify with humanity"
@@ -185,66 +628,165 @@
   "ecps_sahm_2024_moral": {
    "moral.values_10_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "Men and women each have different roles to play in society."
    },
    "moral.values_11_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "I would call some acts wrong on the grounds that they are unnatural"
    },
    "moral.values_1_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "Compassion for those who are suffering is the most crucial virtue."
    },
    "moral.values_2_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "When the government makes laws, the number one principle should be ensuring that everyone is treated fairly."
    },
    "moral.values_3_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "I am proud of my country’s history."
    },
    "moral.values_4_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "Respect for authority is something all children need to learn."
    },
    "moral.values_5_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "People should not do things that are disgusting, even if no one is harmed."
    },
    "moral.values_6_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "It is better to do good than to do bad."
    },
    "moral.values_7_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "One of the worst things a person could do is hurt a defenseless animal."
    },
    "moral.values_8_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "Justice is the most important requirement for a society."
    },
    "moral.values_9_0neutral": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Moral values",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_moral_1",
     "section_prompt": "Please read the following sentences and indicate your agreement or disagreement",
     "text": "People should be loyal to their family members, even when they have done something wrong."
@@ -253,147 +795,834 @@
   "ecps_sahm_2024_sscd": {
    "compliance_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Wash your hands regularly"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Washed your hands regularly"
    },
    "compliance_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Wear a face covering in public when indoors (e.g. in a supermarket or cafe)"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Wore a face covering in public when indoors (e.g., in a supermarket or cafe)"
    },
    "compliance_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Wear a face covering in public when outdoors (e.g. in the street or park)"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Wore a face covering in public when outdoors (e.g., in the street or park)"
    },
    "compliance_4": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Stay at least the recommended distance (for example 2 meters/6 feet) from people who are not part of your household"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Stayed the recommended distance (for example 2 metres/6 feet) from people who are not part of your household"
    },
    "compliance_5": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Stay at home unless going out for essential reasons (e.g., buying essentials, doing essential work, or exercising)"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Stayed at home unless going out for essential reasons (e.g., buying essentials, doing essential work, or exercising)"
    },
    "compliance_6": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Self-isolate (quarantine) if you suspected that you had been in contact with the virus"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Self-isolated (quarantine) if you suspected that you had been in contact with the virus"
    },
    "compliance_7": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
     "text": "Met with people outside of your household for non-essential reasons"
    },
    "compliance_8": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines",
+    "ladder": {
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Neutral",
+     "5": "Slightly agree",
+     "6": "Agree",
+     "7": "Strongly agree"
+    },
     "section_id": "ecps_sahm_2024_sscd_1",
-    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent did you:",
-    "text": "Stay away from crowded places generally"
+    "section_prompt": "Many countries have issued guidelines for staying safe during the COVID-19 pandemic. Think about the last month, to what extent do you agree with the statements about what you did?",
+    "text": "Stayed away from crowded places generally"
    },
    "socialinfluence_nor1_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Washing their hands regularly"
    },
    "socialinfluence_nor1_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Wearing a face covering in public when indoors (e.g. in a store or cafe)"
    },
    "socialinfluence_nor1_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Wearing a face covering in public when outdoors (e.g. in the street or park)"
    },
    "socialinfluence_nor1_4": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Staying at least [2 metres (6 feet)] at all times from people who are not part of your household"
    },
    "socialinfluence_nor1_5": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Staying at home at all times unless going out for essential reasons (e.g., buying essentials, doing essential work, or exercising)"
    },
    "socialinfluence_nor1_6": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Self-isolating (quarantining) when they suspect to have been in contact with the virus"
    },
    "socialinfluence_nor1_7": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Met with people outside of your household for non-essential reasons"
    },
    "socialinfluence_nor1_8": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: injunctive norms",
+    "ladder": {
+     "1": "Not important at all",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Very important"
+    },
     "section_id": "ecps_sahm_2024_sscd_2",
-    "section_prompt": "Now we want you to focus on people around you. How do people that are important to you think about…",
+    "section_prompt": "Now we want you to think about people important to you. How do they rate the following behaviours…",
     "text": "Staying away from crowded places generally"
    },
    "socialinfluence_nor2_1": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Wash their hands regularly"
    },
    "socialinfluence_nor2_2": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Wear a face covering in public when indoors (e.g. in a store or cafe)"
    },
    "socialinfluence_nor2_3": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Wear a face covering in public when outdoors (e.g. in the street or park)"
    },
    "socialinfluence_nor2_4": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Stay at least [2 metres (6 feet)] at all times from people who are not part of their household"
    },
    "socialinfluence_nor2_5": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Stay at home at all times unless going out for essential reasons (e.g., buying essentials, doing essential work, or exercising)"
    },
    "socialinfluence_nor2_6": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Self-isolate (quarantine) when they suspect to have been in contact with the virus"
    },
    "socialinfluence_nor2_7": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Met with people outside of their household for non-essential reasons"
    },
    "socialinfluence_nor2_8": {
     "instrument": "COVIDiSTRESS Global Survey Round II: Social influence: descriptive norms",
+    "ladder": {
+     "1": "Nearly nobody",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": null,
+     "7": "Nearly everybody"
+    },
     "section_id": "ecps_sahm_2024_sscd_3",
-    "section_prompt": "How many people that are important to you…",
+    "section_prompt": "Once again think about people important to you. How many of them…",
     "text": "Stay away from crowded places generally"
+   }
+  },
+  "ecps_sahm_2024_stress": {
+   "perceived_stress_sca_1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "been upset because of something that happened unexpectedly?"
+   },
+   "perceived_stress_sca_10": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt difficulties were piling up so high that you could not overcome them?"
+   },
+   "perceived_stress_sca_2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt that you were unable to control the important things in your life?"
+   },
+   "perceived_stress_sca_3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt nervous and “stressed”?"
+   },
+   "perceived_stress_sca_4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt confident about your ability to handle your personal problems?"
+   },
+   "perceived_stress_sca_5": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt that things were going your way?"
+   },
+   "perceived_stress_sca_6": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "found that you could not cope with all the things that you had to do?"
+   },
+   "perceived_stress_sca_7": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "been able to control irritations in your life?"
+   },
+   "perceived_stress_sca_8": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "felt that you were on top of things?"
+   },
+   "perceived_stress_sca_9": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived Stress Scale",
+    "ladder": {
+     "0": "Never",
+     "1": "Almost never",
+     "2": "Sometimes",
+     "3": "Fairly often",
+     "4": "Very often"
+    },
+    "section_id": "ecps_sahm_2024_stress_1",
+    "section_prompt": "Think about the last month, how often have you...",
+    "text": "been angered because of things that were outside of your control?"
+   },
+   "primary_stressors_1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Primary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_2",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Personally catching the coronavirus"
+   },
+   "primary_stressors_2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Primary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_2",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "People close to me (children, friends, relatives) catching the coronavirus"
+   },
+   "primary_stressors_3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Primary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_2",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not being able to travel"
+   },
+   "primary_stressors_4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Primary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_2",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not being able to meet friends or family"
+   },
+   "secondary_stressors__1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not being able to find a job in the future"
+   },
+   "secondary_stressors__10": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Being unable to study from home"
+   },
+   "secondary_stressors__11": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Sharing a workspace with others"
+   },
+   "secondary_stressors__12": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "My children's education"
+   },
+   "secondary_stressors__13": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not having access to childcare"
+   },
+   "secondary_stressors__14": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Coping with the behaviour of other people (children or adults) I am living with"
+   },
+   "secondary_stressors__2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Inadequate financial support from the government"
+   },
+   "secondary_stressors__3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Receiving inadequate, unclear, or conflicting information in relation to the pandemic"
+   },
+   "secondary_stressors__4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not having enough support from close others (e.g., family, friends)"
+   },
+   "secondary_stressors__5": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "My relationship/marriage breaking down"
+   },
+   "secondary_stressors__6": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Losing my job"
+   },
+   "secondary_stressors__7": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Not receiving adequate support from my employer"
+   },
+   "secondary_stressors__8": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Being unable to work from home"
+   },
+   "secondary_stressors__9": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Secondary stressors",
+    "ladder": {
+     "0": "Not at all concerned",
+     "1": "Slightly concerned",
+     "2": "Somewhat concerned",
+     "3": "Moderately concerned",
+     "4": "Very concerned"
+    },
+    "section_id": "ecps_sahm_2024_stress_3",
+    "section_prompt": "In the last month, how much have you been concerned about the following:",
+    "text": "Sharing a workspace with others"
+   }
+  },
+  "ecps_sahm_2024_vaccine": {
+   "vaccine_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine willingness",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Not willing at all",
+     "2": null,
+     "3": null,
+     "4": "Very willing"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_1",
+    "section_prompt": "Now we want to ask you a few questions about your thoughts on the COVID-19 vaccine.",
+    "text": "How willing are you to get the vaccine if one becomes available to you? (If you have already been offered the vaccine, please think of how wiling you were before one became available to you)"
+   },
+   "vaccine_attitudes_2_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "Getting vaccines is a good way to protect children from disease"
+   },
+   "vaccine_attitudes_3_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "Generally, I do what my doctor recommends about vaccines"
+   },
+   "vaccine_attitudes_4_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "New vaccines are recommended only if they are safe"
+   },
+   "vaccine_attitudes_5_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "I am concerned about serious side effects of vaccines"
+   },
+   "vaccine_attitudes_6_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "Parents should have the right to refuse vaccines required for schools for any reason"
+   },
+   "vaccine_attitudes_9_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Vaccine attitudes",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_vaccine_2",
+    "section_prompt": "Please indicate for the following statements to what extent you agree with them.",
+    "text": "Vaccinations are one of the most significant achievements in improving public health"
    }
   }
  }

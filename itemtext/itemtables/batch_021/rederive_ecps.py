@@ -1,147 +1,140 @@
 #!/usr/bin/env python3
 """rederive_ecps.py -- batch_021, issue #1831
 
-Re-reads the COVIDiSTRESS Global Survey Round II questionnaire from the two
-OSF workbooks and rebuilds the item text for the five shipped
-ecps_sahm_2024_* tables, so verify_ecps_common.R diffs the shipped text
-against a rebuild of the source rather than against a prose claim.
+Rebuilds the shipped text for the eight ecps_sahm_2024_* tables from the
+administered COVIDiSTRESS Round II instrument and writes rederived_ecps.json,
+so verify_ecps_sahm_2024_*.R diffs against a rebuild of the source rather than
+against a prose claim.
 
-Two things it re-establishes rather than asserts:
+The instrument itself lives in ecps_source.py, which also documents why it is
+written out rather than parsed. This script re-establishes three things rather
+than asserting them:
 
-1. The wording cross-check. `Measured Variables.xlsx` (registration files of
-   osf.io/36tsd) and `MainStudy_CriticalMeasures.xlsx` (osf.io/vxuf4) are two
-   separate documents. Where a scale appears in both, their item wording is
-   compared line by line, which is a second route on the wording for the
-   scales that have one.
-2. The source. These tables' IRW dictionary rows attribute them to the Sahm
-   ERQ-S study, which is wrong -- see provenance.csv. The data file is
-   COVIDiSTRESS Vol 2, and the check that ties the tables to this
-   questionnaire is that every shipped item code is a column of
-   Final_COVIDiSTRESS_Vol2_cleaned.csv. That is re-run here when the cached
-   CSV is present.
+1. Every stem, item and ladder label still occurs in one of the two sources --
+   `Copy of survey.pdf` (the administered Qualtrics form) or the two
+   registration workbooks -- and reports which.
 
-Reads   .cache/ecps_sahm_2024/{measured_variables.xlsx,
-                               main_critical_measures.xlsx,
+2. The _0neutral decode. The cleaned data file carries each of these items
+   twice, as *_0neutral and *_midneutral, and IRW uses the _0neutral copy.
+   Cross-tabulating the pair recovers the scale exactly: the midpoint is pulled
+   out to 0 and the six named anchors stay at 1-6. Re-run here per item, so a
+   changed export cannot silently invalidate the labels.
+
+3. The source tie. Every shipped item code is a column of
+   Final_COVIDiSTRESS_Vol2_cleaned.csv, which is what connects these tables to
+   this questionnaire at all -- their dictionary rows named the wrong study
+   until 2026-09-04 (see provenance.csv).
+
+Reads   .cache/ecps_sahm_2024/{survey.pdf or survey_pages.json, blocks.json,
                                covidistress_vol2.csv}
 Writes  itemtables/batch_021/rederived_ecps.json
 Run from itemtext/:  python3 itemtables/batch_021/rederive_ecps.py
 """
-import csv, json, os, re, sys, warnings
-warnings.filterwarnings("ignore")
+import csv, importlib.util, json, os, sys
+from collections import defaultdict
 
-CACHE = ".cache/ecps_sahm_2024"
-OUT   = "itemtables/batch_021/rederived_ecps.json"
-STUDY = "COVIDiSTRESS Global Survey Round II"
+HERE = os.path.dirname(os.path.abspath(__file__))
+spec = importlib.util.spec_from_file_location("ecps_source",
+                                              os.path.join(HERE, "ecps_source.py"))
+src = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(src)
 
-def blocks_of(path):
-    import openpyxl
-    ws   = openpyxl.load_workbook(path, data_only=True).worksheets[0]
-    rows = list(ws.iter_rows(values_only=True))
-    hdr  = [str(c).strip() if c else "" for c in rows[0]]
-    i_id, i_q = hdr.index("ID"), hdr.index("Question")
-    idr = [(n, str(rows[n][i_id]).strip()) for n in range(1, len(rows))
-           if rows[n][i_id] and str(rows[n][i_id]).strip()]
-    out = {}
-    for k, (n, name) in enumerate(idr):
-        end = idr[k+1][0] if k+1 < len(idr) else len(rows)
-        lines = []
-        for m in range(n, end):
-            q = rows[m][i_q]
-            if q:
-                for p in str(q).split("\n"):
-                    if p.strip():
-                        lines.append(p.strip())
-        out[name] = lines
-    return out
+CACHE = src.CACHE
+OUT = os.path.join(HERE, "rederived_ecps.json")
 
-def clean(s):
-    s = s.replace("\xa0", " ")
-    s = re.sub(r'^\s*(?:-\s*|B\.\d+\.\d+\s+)', '', s)
-    return re.sub(r'\s+', ' ', s).strip()
 
-def norm(s):
-    s = clean(s).replace("’", "'")
-    return re.sub(r'\s+', ' ', re.sub(r'[^a-z0-9 ]+', ' ', s.lower())).strip()
+def _num(v):
+    """Numeric value, or None for the file's NA / blank cells."""
+    try:
+        return float(v)
+    except (TypeError, ValueError):
+        return None
 
-# (section label, block, leading stem lines to skip, stem line index, code builder)
-SPEC = {
- "ia": [("Information acquisition", "[information_acquisition]", 2, 1,
-         lambda k: "information_acquisit_%d" % (k+1))],
- "distrust": [
-   ("COVID-19 misperceptions", "[misperception]", 1, 0,
-    lambda k: "misperception%d_%d" % (k // 2 + 1, k % 2 + 1)),
-   ("Conspiratorial thinking", "[conspirational_thinking]", 0, None,
-    lambda k: "conspirational_think_%d" % (k+1)),
-   ("Anti-expert sentiment", "[antiexpert]", 0, None,
-    lambda k: "antiexpert_%d" % (k+1))],
- "identity": [("Group identification", "[identity]", 1, 0,
-               lambda k: "identity_%d_0neutral" % (k+1))],
- "moral": [("Moral values", "[moral values]", 2, 1,
-            lambda k: "moral.values_%d_0neutral" % (k+1))],
- "sscd": [
-   ("Compliance with COVID-19 guidelines", "compliance", 1, 0,
-    lambda k: "compliance_%d" % (k+1)),
-   ("Social influence: injunctive norms", "socialinfluence_norms", 1, 0,
-    lambda k: "socialinfluence_nor1_%d" % (k+1)),
-   ("Social influence: descriptive norms", "socialinfluence_norms", 1, 0,
-    lambda k: "socialinfluence_nor2_%d" % (k+1))],
-}
+
+def neutral_decode(csv_path):
+    """Cross-tabulate each *_0neutral item against its *_midneutral twin."""
+    if not os.path.exists(csv_path):
+        return {"note": "cleaned data file not cached; decode not re-run"}
+    with open(csv_path, encoding="utf-8", errors="ignore") as f:
+        rdr = csv.reader(f)
+        hdr = next(rdr)
+        idx = {h: i for i, h in enumerate(hdr)}
+        pairs = [(h, h.replace("_0neutral", "_midneutral")) for h in hdr
+                 if h.endswith("_0neutral")]
+        pairs = [(a, b) for a, b in pairs if b in idx]
+        seen = {a: defaultdict(set) for a, _ in pairs}
+        for row in rdr:
+            for a, b in pairs:
+                x, y = row[idx[a]].strip(), row[idx[b]].strip()
+                if _num(x) is not None and _num(y) is not None:
+                    seen[a][x].add(y)
+    sigs = defaultdict(list)
+    for a, _ in pairs:
+        sig = " ".join("%s->%s" % (k, "/".join(sorted(seen[a][k])))
+                       for k in sorted(seen[a], key=_num))
+        sigs[sig].append(a)
+    return {"items_with_both_codings": len(pairs),
+            "distinct_mappings": {k: sorted(v) for k, v in sigs.items()}}
+
 
 def main():
-    reg_p = os.path.join(CACHE, "measured_variables.xlsx")
-    if not os.path.exists(reg_p):
-        sys.exit("cached questionnaire absent (%s); the committed rederived_ecps.json stands.\n"
-                 "Refetch from osf.io/36tsd -- see provenance.csv source_ref." % reg_p)
-    reg = blocks_of(reg_p)
-    fin_p = os.path.join(CACHE, "main_critical_measures.xlsx")
-    fin = blocks_of(fin_p) if os.path.exists(fin_p) else {}
+    v = src.verify()
+    if v is None:
+        sys.exit("neither the survey PDF nor the workbooks are cached (%s);\n"
+                 "the committed rederived_ecps.json stands. Refetch from osf.io/36tsd\n"
+                 "-- see provenance.csv source_ref." % CACHE)
+    if v["unverified"]:
+        sys.exit("%d string(s) verify against neither source:\n%s"
+                 % (len(v["unverified"]),
+                    "\n".join("  %s / %s / %s / %s" % x for x in v["unverified"][:10])))
 
     tables = {}
-    for short, sections in SPEC.items():
-        tab, si, entries = "ecps_sahm_2024_" + short, 0, {}
-        for label, key, skip, stem_ix, code in sections:
-            si += 1
-            its = [clean(l) for l in reg[key][skip:]]
-            if key == "socialinfluence_norms":
-                if "injunctive" in label:
-                    its, stem = its[:8], clean(reg[key][0])
-                else:
-                    its, stem = its[9:17], clean(reg[key][9])
-            else:
-                stem = clean(reg[key][stem_ix]) if stem_ix is not None else ""
-            for k, txt in enumerate(its):
-                entries[code(k)] = {"section_id": "%s_%d" % (tab, si),
-                                    "instrument": "%s: %s" % (STUDY, label),
-                                    "section_prompt": stem, "text": txt}
+    for short, secs in src.TABLES.items():
+        tab = "ecps_sahm_2024_" + short
+        entries = {}
+        for si, s in enumerate(secs, start=1):
+            for code, text in zip(s["codes"], s["items"]):
+                entries[code] = {
+                    "section_id": "%s_%d" % (tab, si),
+                    "instrument": "%s: %s" % (src.STUDY, s["label"]),
+                    "section_prompt": s["stem"],
+                    "text": text,
+                    "ladder": {str(k): val for k, val in s["ladder"].items()},
+                }
         tables[tab] = entries
 
-    # cross-document wording agreement, per block
-    cross = {}
-    for key in sorted({s[1] for v in SPEC.values() for s in v}):
-        a = [norm(x) for x in reg.get(key, [])]
-        b = [norm(x) for x in fin.get(key, [])]
-        cross[key] = ("absent_from_final" if not b else
-                      "identical" if a == b else
-                      "differs (%d vs %d lines)" % (len(a), len(b)))
-
-    # every shipped code must be a column of the COVIDiSTRESS Vol 2 data file
-    csv_p, colcheck = os.path.join(CACHE, "covidistress_vol2.csv"), {}
-    if os.path.exists(csv_p):
-        with open(csv_p, encoding="utf-8", errors="ignore") as f:
+    csv_path = os.path.join(CACHE, "covidistress_vol2.csv")
+    colcheck = {}
+    if os.path.exists(csv_path):
+        with open(csv_path, encoding="utf-8", errors="ignore") as f:
             cols = set(next(csv.reader(f)))
         for tab, entries in tables.items():
-            missing = [c for c in entries if c not in cols]
-            colcheck[tab] = {"items": len(entries), "not_a_column": missing}
+            colcheck[tab] = {"items": len(entries),
+                             "not_a_column": [c for c in entries if c not in cols]}
     else:
-        colcheck = {"note": "covidistress_vol2.csv not cached; column check skipped"}
+        colcheck = {"note": "cleaned data file not cached; column check skipped"}
 
+    payload = {"tables": tables,
+               "string_verification": {"in_survey_pdf": v["pdf"],
+                                       "in_workbooks": v["workbook"],
+                                       "unverified": 0},
+               "neutral_decode": neutral_decode(csv_path),
+               "source_column_check": colcheck}
     with open(OUT, "w", encoding="utf-8") as f:
-        json.dump({"tables": tables, "cross_document_wording": cross,
-                   "source_column_check": colcheck}, f, ensure_ascii=False,
-                  indent=1, sort_keys=True)
-    print("wrote %s: %d tables, %d items; cross-document: %s" % (
-        OUT, len(tables), sum(len(v) for v in tables.values()),
-        ", ".join("%s=%s" % (k.strip("[]"), v) for k, v in cross.items())))
+        json.dump(payload, f, ensure_ascii=False, indent=1, sort_keys=True)
+
+    nd = payload["neutral_decode"]
+    print("wrote %s: %d tables, %d items" % (OUT, len(tables),
+                                             sum(len(x) for x in tables.values())))
+    print("  strings verified: %d in the survey PDF, %d in the workbooks, 0 in neither"
+          % (v["pdf"], v["workbook"]))
+    if "distinct_mappings" in nd:
+        print("  _0neutral decode: %d items carry both codings, %d distinct mapping(s)"
+              % (nd["items_with_both_codings"], len(nd["distinct_mappings"])))
+        for sig, items in sorted(nd["distinct_mappings"].items(),
+                                 key=lambda kv: -len(kv[1])):
+            print("     n=%-3d %s" % (len(items), sig))
+
 
 if __name__ == "__main__":
     main()
