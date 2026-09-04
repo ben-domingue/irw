@@ -27,6 +27,44 @@
 # reads a reparked tree gets the wrong protocol and a stale queue_state.csv.
 set -uo pipefail
 
+# Run from a snapshot, because this script edits itself.
+#
+# The round merges origin/main into the worktree (below) to pick up protocol
+# changes -- and this file lives in that worktree, so a merge carrying a change
+# to round_cron.sh rewrites the very file bash is executing.
+#
+# All three conditions for corruption hold here, and each was checked rather
+# than assumed:
+#
+#   1. git rewrites the file IN PLACE, keeping the inode (verified in a scratch
+#      repo: same inode before and after a merge that changed the content). Had
+#      it renamed a new file into position, bash's open fd would still point at
+#      the old inode and none of this would matter.
+#   2. Bash reads a script lazily, in blocks, seeking by byte offset -- so after
+#      an in-place change it resumes at the old offset in the NEW content.
+#      Reproduced: a >8KB script that rewrites itself in place dies with
+#      "unexpected EOF while looking for matching quote" partway down.
+#   3. This file is over that boundary -- 8643 bytes on main when this was
+#      written, against bash's 8KB read block -- so it takes more than one read.
+#
+# Observed live on 2026-09-04: the 05:13 round merged the standing-PR change to
+# this file and ran on regardless. It survived; that was luck about where the
+# edit landed relative to the read boundary, not design. The failure is silent,
+# depends on the size of the incoming diff, and would surface as a mangled round
+# rather than as anything naming this cause.
+#
+# So: copy ourselves somewhere git will never touch and exec that. The snapshot
+# is what runs; the merge below can rewrite the original freely, and the next
+# fire picks the new version up.
+if [[ "${ROUND_CRON_SNAPSHOT:-}" != "1" ]]; then
+  _snap="$(mktemp -t round_cron.XXXXXX)" || exit 1
+  cat "$0" > "$_snap" && chmod +x "$_snap" || { rm -f "$_snap"; exit 1; }
+  ROUND_CRON_SNAPSHOT=1 "$_snap" "$@"
+  _rc=$?
+  rm -f "$_snap"
+  exit "$_rc"
+fi
+
 export PATH="/home/ben/.local/bin:/usr/local/bin:/usr/bin:/bin:$PATH"
 
 WORKTREE="/home/ben/irw-queue-runner"
