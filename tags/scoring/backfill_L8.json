@@ -1,0 +1,150 @@
+[
+ {
+  "table": "algner2022_mimi_pool",
+  "shard": "w3"
+ },
+ {
+  "table": "avci_2024_bagmsz_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_kimlik_miss",
+  "shard": "w5"
+ },
+ {
+  "table": "baaziz_2023_sms2",
+  "shard": "w4"
+ },
+ {
+  "table": "brederecke_2020_phq4",
+  "shard": "w3"
+ },
+ {
+  "table": "chinvararak_2021_ecr",
+  "shard": "w3"
+ },
+ {
+  "table": "daiku_2021_lying_frequency",
+  "shard": "w3"
+ },
+ {
+  "table": "dopmeijer_2022_performance_pressure",
+  "shard": "w3"
+ },
+ {
+  "table": "estevez_2021_math_attitudes",
+  "shard": "w5"
+ },
+ {
+  "table": "figalova_2021_bdi",
+  "shard": "w5"
+ },
+ {
+  "table": "germann_2026_national_identity",
+  "shard": "w2"
+ },
+ {
+  "table": "gilbert_meta_29",
+  "shard": "w1"
+ },
+ {
+  "table": "hao_2025_self_efficacy",
+  "shard": "w2"
+ },
+ {
+  "table": "jeon_2019_cbi",
+  "shard": "w3"
+ },
+ {
+  "table": "kim_2025_hads",
+  "shard": "w3"
+ },
+ {
+  "table": "lai_2023_peer_relationship",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2024_social_support",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2017_qol",
+  "shard": "w3"
+ },
+ {
+  "table": "luo_2021_acculturation_index",
+  "shard": "w3"
+ },
+ {
+  "table": "merlo2025_eet",
+  "shard": "w2"
+ },
+ {
+  "table": "moon_2023_coping_problem",
+  "shard": "w4"
+ },
+ {
+  "table": "ngo_2025_green_purchase_behavior",
+  "shard": "w3"
+ },
+ {
+  "table": "ozkurt_2026_continuance_intention",
+  "shard": "w3"
+ },
+ {
+  "table": "pellerin2020_cpc_selfefficacy",
+  "shard": "w3"
+ },
+ {
+  "table": "pilch_2021_personality_ipip20",
+  "shard": "w4"
+ },
+ {
+  "table": "reinwarth_2023_loneliness3",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2019_ypic",
+  "shard": "w2"
+ },
+ {
+  "table": "sekowski_2025_pies",
+  "shard": "w4"
+ },
+ {
+  "table": "song_2023_slwai",
+  "shard": "w3"
+ },
+ {
+  "table": "tang_2024_caregiver_child_attachment",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_self_efficacy",
+  "shard": "w4"
+ },
+ {
+  "table": "tran_2023_gi_symptoms",
+  "shard": "w3"
+ },
+ {
+  "table": "wang2022_dass_anxiety",
+  "shard": "w2"
+ },
+ {
+  "table": "wen_2022_pyd",
+  "shard": "w4"
+ },
+ {
+  "table": "xu_2023_hi",
+  "shard": "w4"
+ },
+ {
+  "table": "yang_2026_pars3",
+  "shard": "w3"
+ },
+ {
+  "table": "zhou_2025_peer_relationship",
+  "shard": "w3"
+ }
+]

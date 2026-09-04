@@ -1,0 +1,150 @@
+[
+ {
+  "table": "aguirre_camacho_2021_shai",
+  "shard": "w3"
+ },
+ {
+  "table": "amarilla_2020_lawton_brody",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_ikyoz_yeterlk",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_statu_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "baka2023_olbi",
+  "shard": "w3"
+ },
+ {
+  "table": "chen2022b_selfesteem",
+  "shard": "w3"
+ },
+ {
+  "table": "contreras_valdez_2022_edeq",
+  "shard": "w3"
+ },
+ {
+  "table": "divia_2025_tiktok_fomo_shopping",
+  "shard": "w3"
+ },
+ {
+  "table": "estevez_2021_feepad",
+  "shard": "w5"
+ },
+ {
+  "table": "feng2026_competence",
+  "shard": "w2"
+ },
+ {
+  "table": "gan_2015_rrs",
+  "shard": "w3"
+ },
+ {
+  "table": "ghanbari_2016_helma_comm",
+  "shard": "w3"
+ },
+ {
+  "table": "gobbens_2018_sf12",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2023_e_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "jung_2018_media_use",
+  "shard": "w3"
+ },
+ {
+  "table": "koksal_2023_life_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2020_burnout",
+  "shard": "w4"
+ },
+ {
+  "table": "lindstrom2021_team_identification",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2022_fragreading_frq",
+  "shard": "w4"
+ },
+ {
+  "table": "mancone_2024_ravlt_intrusion",
+  "shard": "w4"
+ },
+ {
+  "table": "moe2025_erq",
+  "shard": "w3"
+ },
+ {
+  "table": "muslih_2024_rses",
+  "shard": "w3"
+ },
+ {
+  "table": "opladen2025_edeq",
+  "shard": "w2"
+ },
+ {
+  "table": "park_2021_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "peng_2024_grit",
+  "shard": "w4"
+ },
+ {
+  "table": "ptacek2023_dass21",
+  "shard": "w2"
+ },
+ {
+  "table": "ren2019_sdq",
+  "shard": "w2"
+ },
+ {
+  "table": "romadlon_2022_mfi20",
+  "shard": "w3"
+ },
+ {
+  "table": "silva_2018_tfeq",
+  "shard": "w3"
+ },
+ {
+  "table": "szabo_2025_pss4",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_goal_progress",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_legality_beliefs",
+  "shard": "w5"
+ },
+ {
+  "table": "vanteffelen_2020_aq_hostility",
+  "shard": "w4"
+ },
+ {
+  "table": "wang2022_igas",
+  "shard": "w2"
+ },
+ {
+  "table": "wolters2026_panas_pa",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_emotional_eating_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "yao_2020_gad",
+  "shard": "w5"
+ }
+]
