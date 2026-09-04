@@ -72,7 +72,12 @@ jobs:
         with:
           # There is no DESCRIPTION covering metadata/*.R, so the list is
           # explicit: it is the union of every library() call in the stages
-          # run_pipeline.sh executes, plus audit_tables.R.
+          # run_pipeline.sh executes, plus audit_tables.R -- which calls
+          # library(irw), the IRW client itself, not on CRAN (Rpkg#147).
+          #
+          # Keep comments OUT of the block scalar below: a `#` inside a YAML
+          # `|` block is literal text, not a comment, so pak receives it as a
+          # package name and the whole resolution fails.
           packages: |
             any::dplyr
             any::glue
@@ -86,8 +91,6 @@ jobs:
             any::readr
             any::tidyr
             github::redivis/redivis-r
-            # audit_tables.R calls library(irw) -- the IRW client itself, which
-            # is not on CRAN (see itemresponsewarehouse/Rpkg#147).
             github::itemresponsewarehouse/Rpkg
 
       - name: Workflow 1 -- generate and diff
