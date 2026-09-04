@@ -83,6 +83,40 @@ get_resp <- function(table, resp_csv = NA) {
     d
 }
 
+# The item and resp SETS for a live table, WITHOUT exporting it.
+#
+# Why this exists. `get_resp()`'s live route calls irw_fetch(), which exports
+# every row. validate_items.R only ever compares sets -- unique(item) and
+# unique(resp), a few dozen values -- so on a large published table the gate
+# spends a large export to compute almost nothing. The corpus is 181.8GB
+# against a 200GB/30-day cap, and on 2026-08-18 one round of twelve agents
+# exhausted it outright.
+#
+# That left the standing "never irw_fetch for a gate" rule unsatisfiable for
+# published tables: --resp-csv only helps a table that is not live yet. In
+# batch_016 five agents hit the conflict and resolved it five different ways --
+# two skipped the gate, two exported, and one hand-built a surrogate CSV from an
+# aggregate query and passed it via --resp-csv. That divergence is the bug this
+# closes: the gate now has a route that satisfies the rule, so nobody has to
+# improvise one.
+#
+# What it returns is a SURROGATE frame, not the data: enough distinct values for
+# unique() to reproduce the two sets exactly, and nothing else. Anything that
+# needs per-row or per-item counts must use a different route -- which is why
+# audit_batch.R does not use this.
+get_resp_sets <- function(table) {
+    s <- irw::irw_table_sets(table)
+    if (is.null(s) || !length(s$items)) .stop_no_live_data(table)
+    items <- as.character(s$items)
+    resp  <- s$resp
+    n <- max(length(items), max(1L, length(resp)))
+    data.frame(
+        item = c(items, rep(items[1], n - length(items))),
+        resp = if (length(resp)) c(resp, rep(resp[1], n - length(resp))) else NA_real_,
+        stringsAsFactors = FALSE
+    )
+}
+
 # The same summary shape audit_batch.R's live_sets() returns -- items, resp,
 # per-item row counts, per-item resp levels -- computed from a local CSV.
 # Row counts include rows with missing resp, and levels exclude them, matching

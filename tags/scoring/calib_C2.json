@@ -1,0 +1,102 @@
+[
+ {
+  "table": "abramson_2026_mobilization",
+  "shard": "w4"
+ },
+ {
+  "table": "burgess_2025_soas",
+  "shard": "w4"
+ },
+ {
+  "table": "chanal_2020_maths",
+  "shard": "w4"
+ },
+ {
+  "table": "cucchi_2018_kims",
+  "shard": "w4"
+ },
+ {
+  "table": "derubeis_2017_arsq",
+  "shard": "w4"
+ },
+ {
+  "table": "eldor_2022_relative_deprivation",
+  "shard": "w4"
+ },
+ {
+  "table": "fan_2025_mbi_exhaustion",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_bri_curio",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_speo",
+  "shard": "w4"
+ },
+ {
+  "table": "huo_2025_relationship_conflict",
+  "shard": "w4"
+ },
+ {
+  "table": "kermen_2022_anxiety",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2026_imi_teq",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2025_nlgz",
+  "shard": "w4"
+ },
+ {
+  "table": "malik_2018_individual_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "meloni_2015_child_disab_knowledge",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_mspss",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_ciberlite",
+  "shard": "w3"
+ },
+ {
+  "table": "puro_2025_prompta_writing",
+  "shard": "w3"
+ },
+ {
+  "table": "risticdedic_2025_dhq_importance",
+  "shard": "w4"
+ },
+ {
+  "table": "sandhu_2024_pmo_q24",
+  "shard": "w3"
+ },
+ {
+  "table": "sondell_2018_dementia_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2021_blockchain_loan_adoption",
+  "shard": "w3"
+ },
+ {
+  "table": "turpochaparro_2026_family_communication",
+  "shard": "w4"
+ },
+ {
+  "table": "weatherspoon_2015_family_physicians_freq",
+  "shard": "w3"
+ },
+ {
+  "table": "zamzuri_2021_rpap_attitude",
+  "shard": "w3"
+ }
+]

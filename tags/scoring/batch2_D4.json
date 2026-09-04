@@ -1,0 +1,102 @@
+[
+ {
+  "table": "antes_2020_pdm",
+  "shard": "w4"
+ },
+ {
+  "table": "butt_2022_actual_usage",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_cr",
+  "shard": "w5"
+ },
+ {
+  "table": "cugmas_2021_elderly_social_support",
+  "shard": "w3"
+ },
+ {
+  "table": "esiason_2024_ace",
+  "shard": "w3"
+ },
+ {
+  "table": "gabriel_2026_media_use",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_pas_adjectives",
+  "shard": "w4"
+ },
+ {
+  "table": "herrera_2018_attitudes_homeless",
+  "shard": "w3"
+ },
+ {
+  "table": "jaracz_2017_job_stress",
+  "shard": "w3"
+ },
+ {
+  "table": "khoa_2023_knowledge_acquisition",
+  "shard": "w5"
+ },
+ {
+  "table": "kuehner_2017_mw_rumination",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2026_coach_leadership",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2023_improve_adherence",
+  "shard": "w4"
+ },
+ {
+  "table": "manolika_2021_dirty_dozen",
+  "shard": "w4"
+ },
+ {
+  "table": "nam_2024_medint",
+  "shard": "w3"
+ },
+ {
+  "table": "pang_2023_perceived_usefulness",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_si_intention",
+  "shard": "w3"
+ },
+ {
+  "table": "qin_2025_tourism_experience",
+  "shard": "w2"
+ },
+ {
+  "table": "roettl_2018_brand_attitude",
+  "shard": "w4"
+ },
+ {
+  "table": "soderberg_2024_teacher_support",
+  "shard": "w5"
+ },
+ {
+  "table": "sun_2026_eap_usage",
+  "shard": "w3"
+ },
+ {
+  "table": "wekker_2018_mfsq",
+  "shard": "w4"
+ },
+ {
+  "table": "yuebo_2024_infoquality",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2025_megaproject_msr",
+  "shard": "w4"
+ },
+ {
+  "table": "zhao_2024_depression",
+  "shard": "w4"
+ }
+]

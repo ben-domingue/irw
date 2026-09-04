@@ -1,0 +1,102 @@
+[
+ {
+  "table": "abramson_2026_israel_attachment",
+  "shard": "w4"
+ },
+ {
+  "table": "batistafoguet_2021_mlq",
+  "shard": "w4"
+ },
+ {
+  "table": "cao_2026_cdss_professional_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "cordova2019_clinical_edu_environment",
+  "shard": "w2"
+ },
+ {
+  "table": "dpt_noncog__psychological_flexibility",
+  "shard": "w2"
+ },
+ {
+  "table": "falih_2026_mds16",
+  "shard": "w3"
+ },
+ {
+  "table": "geacaballero_2019_pes_nwi",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_talents",
+  "shard": "w4"
+ },
+ {
+  "table": "hua_2023_efl_academic_procrastination",
+  "shard": "w4"
+ },
+ {
+  "table": "jordan_2020_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "kolomiets_2026_career_match",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_marketing_learning",
+  "shard": "w4"
+ },
+ {
+  "table": "liem_2024_env_mgmt_acct",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2025_ydlq",
+  "shard": "w4"
+ },
+ {
+  "table": "meng_2017_referent_assignment",
+  "shard": "w3"
+ },
+ {
+  "table": "niazi_2020_mfq",
+  "shard": "w3"
+ },
+ {
+  "table": "perfectionismlit_2021_engagement",
+  "shard": "w2"
+ },
+ {
+  "table": "pietraszkiewicz_2017_leader_eval",
+  "shard": "w3"
+ },
+ {
+  "table": "rivero_2022_piccolo_father",
+  "shard": "w4"
+ },
+ {
+  "table": "shineha_2024_gef_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "strohacker_2024_bmzi_motive",
+  "shard": "w3"
+ },
+ {
+  "table": "trang_2023_vocabulary_beliefs",
+  "shard": "w4"
+ },
+ {
+  "table": "yandun2026_logical_thinking",
+  "shard": "w2"
+ },
+ {
+  "table": "zaehl2023_twq_coordination",
+  "shard": "w2"
+ },
+ {
+  "table": "zhang_2025_self_efficacy",
+  "shard": "w3"
+ }
+]

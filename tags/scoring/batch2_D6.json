@@ -1,0 +1,102 @@
+[
+ {
+  "table": "balmas2018_leader_attitudes",
+  "shard": "w2"
+ },
+ {
+  "table": "butt_2022_performance_impact",
+  "shard": "w4"
+ },
+ {
+  "table": "choi_2026_cmsce_2019_2",
+  "shard": "w4"
+ },
+ {
+  "table": "dasilva_2019_hexaco24",
+  "shard": "w3"
+ },
+ {
+  "table": "extremera_2016_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "garciabatista_2021_erq",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_spa_cultural_familiarity",
+  "shard": "w4"
+ },
+ {
+  "table": "holden_2026_bsri",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2024_growthm",
+  "shard": "w3"
+ },
+ {
+  "table": "koirala_2024_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_marketing_culture",
+  "shard": "w4"
+ },
+ {
+  "table": "liang2026_extrinsic_motivation",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2025_willingness_communicate",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_sciengage",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_sdt_academic_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "pecino_2018_justice_climate",
+  "shard": "w3"
+ },
+ {
+  "table": "pham_2026_thbt",
+  "shard": "w5"
+ },
+ {
+  "table": "ramadan_2026_attitudes",
+  "shard": "w5"
+ },
+ {
+  "table": "shi_2025_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "stoyel_2021_sociocult_pressure",
+  "shard": "w4"
+ },
+ {
+  "table": "teodorini_2020_modafinil_attitudes",
+  "shard": "w3"
+ },
+ {
+  "table": "xu2024_noncompliance",
+  "shard": "w2"
+ },
+ {
+  "table": "yuebo_2024_use",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2026_gai_ttf",
+  "shard": "w3"
+ },
+ {
+  "table": "zou_2025_critical_thinking",
+  "shard": "w4"
+ }
+]

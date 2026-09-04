@@ -1,0 +1,102 @@
+[
+ {
+  "table": "atik_2026_climate_anxiety",
+  "shard": "w4"
+ },
+ {
+  "table": "campos_2023_swls",
+  "shard": "w4"
+ },
+ {
+  "table": "chowdhury2026_ai_intentions",
+  "shard": "w3"
+ },
+ {
+  "table": "cucchi_2018_rmet",
+  "shard": "w4"
+ },
+ {
+  "table": "doherty_2023_burnout",
+  "shard": "w4"
+ },
+ {
+  "table": "enkavi_2019_stopsignal",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_phys_activity_child",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_ppq_beliefs",
+  "shard": "w4"
+ },
+ {
+  "table": "he_2019_flipped_classroom_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "janoffbulman_2016_moralmotives_s2",
+  "shard": "w4"
+ },
+ {
+  "table": "khattak_2026_confidence",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2022_mice_skills",
+  "shard": "w3"
+ },
+ {
+  "table": "lorenz_2016_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_clim_weather_future",
+  "shard": "w4"
+ },
+ {
+  "table": "milson_2026_social_media_use",
+  "shard": "w4"
+ },
+ {
+  "table": "page_2025_portrait10",
+  "shard": "w3"
+ },
+ {
+  "table": "powell_2018_memory",
+  "shard": "w4"
+ },
+ {
+  "table": "rashid_2022_mbi",
+  "shard": "w3"
+ },
+ {
+  "table": "roettl_2018_scepticism",
+  "shard": "w4"
+ },
+ {
+  "table": "schalet_2016_hrsa",
+  "shard": "w3"
+ },
+ {
+  "table": "stolz_2015_death_attitudes",
+  "shard": "w3"
+ },
+ {
+  "table": "taylorabdulai_2025_conspiracy",
+  "shard": "w4"
+ },
+ {
+  "table": "uffler_2017_seat_reasons",
+  "shard": "w3"
+ },
+ {
+  "table": "wurm_2016_mdi",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2025_green_supply_intent",
+  "shard": "w3"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alkouri_2025_icu_stressors",
+  "shard": "w3"
+ },
+ {
+  "table": "burkert_2019_whoqol_bref",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2021_enculturation",
+  "shard": "w3"
+ },
+ {
+  "table": "cucchi_2018_pts",
+  "shard": "w4"
+ },
+ {
+  "table": "derubeis_2017_bdi",
+  "shard": "w4"
+ },
+ {
+  "table": "enkavi_2019_navon",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_global_health_child",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_ipip",
+  "shard": "w4"
+ },
+ {
+  "table": "gordils_2021_behavioral_avoidance",
+  "shard": "w4"
+ },
+ {
+  "table": "janoffbulman_2016_moralmotives_s1",
+  "shard": "w4"
+ },
+ {
+  "table": "kermen_2022_self_regulation",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2026_team_cohesion",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2025_ydcy",
+  "shard": "w4"
+ },
+ {
+  "table": "matosaslopez_2024_questionnaire_quality",
+  "shard": "w4"
+ },
+ {
+  "table": "menaldi_2023_mbi",
+  "shard": "w3"
+ },
+ {
+  "table": "ojelabi_2019_sf36",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_si_current",
+  "shard": "w3"
+ },
+ {
+  "table": "qiang_2025_workplace_friendship",
+  "shard": "w3"
+ },
+ {
+  "table": "roelen_2020_k6",
+  "shard": "w3"
+ },
+ {
+  "table": "saputra_2023_system_quality",
+  "shard": "w3"
+ },
+ {
+  "table": "stachl_2020_belonging",
+  "shard": "w3"
+ },
+ {
+  "table": "sun_2026_tiktok_travel",
+  "shard": "w4"
+ },
+ {
+  "table": "tutrin_2020_meq30",
+  "shard": "w3"
+ },
+ {
+  "table": "wiedemann_2021_text_readability",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2025_academic_buoyancy_cfa",
+  "shard": "w3"
+ }
+]

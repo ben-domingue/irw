@@ -39,14 +39,21 @@ KEEP_COLS <- c(1, 6:12, 3)
 ##lose its first real table without any error.
 INSTRUCTION_SENTINEL <- "should match what is on redivis"
 
-##The exact 13-column layout stage_tag_row.py writes. Unlike the Sheet, these
-##files are ours, so we can demand the header match exactly rather than merely
-##counting columns -- that is what makes applying KEEP_COLS to them safe.
+##The exact layout stage_tag_row.py writes. Unlike the Sheet, these files are
+##ours, so we can demand the header match exactly rather than merely counting
+##columns -- that is what makes applying KEEP_COLS to them safe.
+##
+##`Status` and `Reason` were appended for #1704, and APPENDED is the whole
+##design: KEEP_COLS selects by position from the first 13 columns, so anything
+##past them cannot reach the published table however it is filled in. They
+##record whether the tagger reached a usable source and, when it did not, why.
+##Never insert a new column in the middle of this vector -- that silently
+##republishes different columns, Context Text among them.
 AUTO_COLS <- c(
     "table", "Rater", "Construct Name", "Context Text", "Item text available?",
     "Age Range", "Child Age (for child-focused studies)", "Sample",
     "Construct type", "Measurement tool", "Item format", "Primary Language(s)",
-    "Notes"
+    "Notes", "Status", "Reason"
 )
 
 ##Every row in an auto file must be machine-written. A human row here would be
@@ -95,9 +102,10 @@ read_auto_tags <- function(path, label) {
     if (!nrow(auto)) return(NULL)
 
     if (!identical(names(auto), AUTO_COLS)) {
-        stop(label, ": ", path, " header does not match the expected 13-column ",
-             "layout. KEEP_COLS selects by position, so a changed header here ",
-             "would publish the wrong columns -- including Context Text. Found: ",
+        stop(label, ": ", path, " header does not match the expected ",
+             length(AUTO_COLS), "-column layout. KEEP_COLS selects by position, ",
+             "so a changed header here would publish the wrong columns -- ",
+             "including Context Text. Found: ",
              paste(names(auto), collapse = ", "))
     }
 
