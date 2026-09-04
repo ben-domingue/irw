@@ -1,4 +1,4 @@
-## verify_common.R  --  batch_016, issue #1831
+## verify_common.R  --  batch_021, issue #1831
 ##
 ## Shared body for the seven promis1wave1 verify scripts. All seven tables are
 ## keyed to one source (the study's PROMIS Wave 1 codebook, Appendix A), so the
@@ -38,7 +38,7 @@ norm_txt <- function(s) {
 }
 
 verify_table <- function(TBL, resp_csv = NA_character_) {
-    DIR <- "itemtables/batch_016"
+    DIR <- "itemtables/batch_021"
     CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
     JSN <- file.path(DIR, "rederived.json")
     fail <- character(0)

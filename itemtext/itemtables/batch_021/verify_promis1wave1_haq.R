@@ -1,4 +1,4 @@
-## verify_promis1wave1_haq.R  --  batch_016, issue #1831
+## verify_promis1wave1_haq.R  --  batch_021, issue #1831
 ##
 ## Re-derives the shipped text from the cached study codebook via
 ## rederive_haq.py and diffs it, so this checks the mapping rather than the
@@ -8,12 +8,12 @@
 ## so it has its own re-derivation (see rederive_haq.py) and its own verify.
 ##
 ## Run from itemtext/:
-##   Rscript itemtables/batch_016/verify_promis1wave1_haq.R
-##   Rscript itemtables/batch_016/verify_promis1wave1_haq.R --resp-csv <path>
+##   Rscript itemtables/batch_021/verify_promis1wave1_haq.R
+##   Rscript itemtables/batch_021/verify_promis1wave1_haq.R --resp-csv <path>
 suppressMessages({library(jsonlite)})
 
 TBL <- "promis1wave1_haq"
-DIR <- "itemtables/batch_016"
+DIR <- "itemtables/batch_021"
 CSV <- file.path(DIR, paste0(TBL, "__items.csv"))
 JSN <- file.path(DIR, "rederived_haq.json")
 fail <- character(0)

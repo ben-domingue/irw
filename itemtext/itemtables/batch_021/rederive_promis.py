@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rederive_promis.py -- batch_016, issue #1831
+"""rederive_promis.py -- batch_021, issue #1831
 
 Re-parses the PROMIS Wave 1 study codebook (Appendix A) from scratch and
 writes rederived.json, so verify_promis1wave1_*.R diffs the shipped text
@@ -11,13 +11,13 @@ line-wrap truncated, so they are stored as `official_prefix` and checked as
 a prefix, not for equality -- a second route on the wording either way.
 
 Reads   .cache/promis1wave1/{codebook.txt,public_items.json}
-Writes  itemtables/batch_016/rederived.json
-Run from itemtext/:  python3 itemtables/batch_016/rederive_promis.py
+Writes  itemtables/batch_021/rederived.json
+Run from itemtext/:  python3 itemtables/batch_021/rederive_promis.py
 """
 import json, os, re, sys
 
 CACHE = ".cache/promis1wave1"
-OUT   = "itemtables/batch_016/rederived.json"
+OUT   = "itemtables/batch_021/rederived.json"
 
 SECTIONS = ["Emotional Distress - Anger", "Emotional Distress - Anxiety",
     "Emotional Distress - Depression", "Emotional Distress - Alcohol Abuse",

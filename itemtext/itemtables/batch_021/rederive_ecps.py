@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""rederive_ecps.py -- batch_016, issue #1831
+"""rederive_ecps.py -- batch_021, issue #1831
 
 Re-reads the COVIDiSTRESS Global Survey Round II questionnaire from the two
 OSF workbooks and rebuilds the item text for the five shipped
@@ -23,14 +23,14 @@ Two things it re-establishes rather than asserts:
 Reads   .cache/ecps_sahm_2024/{measured_variables.xlsx,
                                main_critical_measures.xlsx,
                                covidistress_vol2.csv}
-Writes  itemtables/batch_016/rederived_ecps.json
-Run from itemtext/:  python3 itemtables/batch_016/rederive_ecps.py
+Writes  itemtables/batch_021/rederived_ecps.json
+Run from itemtext/:  python3 itemtables/batch_021/rederive_ecps.py
 """
 import csv, json, os, re, sys, warnings
 warnings.filterwarnings("ignore")
 
 CACHE = ".cache/ecps_sahm_2024"
-OUT   = "itemtables/batch_016/rederived_ecps.json"
+OUT   = "itemtables/batch_021/rederived_ecps.json"
 STUDY = "COVIDiSTRESS Global Survey Round II"
 
 def blocks_of(path):
