@@ -2661,3 +2661,195 @@ this pass has found), #1930 (the two openICPSR blocks and what would actually cl
 
 **Issues page: drafted, NOT applied** — 21 entries covering both staged batches, going up when the
 tables ship.
+
+### batches 020 and 021 — uploaded 2026-09-04
+
+Ben ran `red_up` on the 21 staged tables. Verified before stamping, because a stamp that runs ahead
+of the upload is worse than none and the read token cannot see drafts: `python3 -m red_up.drafts
+--dataset irw_text --verbose` lists all 21 as `added` in the `irw_text` draft (34 pending in total —
+the other 13 are batch_019's and the carver pilots, still unreleased, 1.6d since v15.1 and inside the
+one-week window).
+
+**Stamped `uploaded=2026-09-04`** on the 21 shipped tables in `batch_020/provenance.csv`,
+`batch_021/provenance.csv` and `mapping_verification.csv`. The three blocked tables
+(`choy_2022_intent_career`, `cognitive_load_klimova_2023_pwi`, `_stomp`) were left alone.
+
+**Watch the unset value — the two trackers disagree.** `provenance.csv` leaves `uploaded` empty when
+a table has not shipped, but batch_020's rows in `mapping_verification.csv` use the literal string
+`no` (batch_019's use empty). A stamping pass that tests `if not uploaded.strip()` silently skips
+every `no` row and then reports success, because the same test says they are already stamped. That
+happened here and was caught only by counting rows changed against rows expected — 10 changed where
+21 were due. Treat `''` and `no` as unset.
+
+**Deleted the 21 uploaded `__items.csv`** from both batch directories. The sidecars stay, so each
+folder still documents every table the batch claimed: `notes.csv`, `provenance.csv`,
+`verification_merged.csv`, `audit_report.csv` and the re-runnable `verify_<table>.R` scripts —
+including for the blocked tables, whose scripts record the structure a future attempt needs.
+
+**Still not released.** `red_up` only ever writes the draft; publishing is a human action, and until
+the version is released nothing uploaded is visible to `irw_fetch()`, `irw_itemtext()` or the site.
+The 21 issues-page entries are already merged to `datapages/irw` main (PR #127) and describe tables
+the corpus cannot yet serve — and `quarto_publish.yaml` is `workflow_dispatch` only, so the live page
+has not rebuilt either. Three things are now waiting on a human: release the `irw_text` draft version,
+trigger the publish workflow, and clear `itemtables/clean/`, which is Ben's to empty, not the
+pipeline's.
+
+## batch_023 — 10 written / 2 blocked / 0 failed (83.3% yield)
+
+**Originally numbered batch_022, and renumbered.** The round was fired at 10:03 and **killed by Ben
+at 10:20**, mid-Step-3, on a well-founded worry that it might be duplicating xingyi-zhang's work in
+[#1935](https://github.com/ben-domingue/irw/pull/1935). It was not — that PR covers
+`promis1wave1_*` and `ecps_sahm_2024_*`, this round claimed the next 12 alphabetically
+(`conspiracy_asd__*` through `cormier_2024_*`), and the two sets are disjoint. But **both were
+numbered `batch_022`**, which would have fused two unrelated batches into one directory with
+conflicting `notes.csv`, `provenance.csv`, `verification_merged.csv` and `audit_report.csv`. This one
+renumbered to `batch_023` because #1935 was already open and complete while this was local and
+unfinished. Second collision of this kind; the COACH tables hit it from the other side.
+
+**The kill cost nothing.** Extraction and the Step 3 merge had completed; only Steps 4-6 were
+missing, so the round was closed out by hand rather than re-run.
+
+**Written:** `conspiracy_asd__{cognitive_flexibility,conspiracy_gcbs,schizotypy,thinking_styles}`,
+`cooper_2018_{funny_topics,offensive_topics}`,
+`cormier_2024_{cognitive_decline,personality,phq4,pss4}`.
+
+**Gates, all run at close-out:** `normalize_nulls` 0 of 10 needed changes; `audit_batch`
+**10/10 PASS with no anomalies**; `verify_batch` 3 PASS + 7 exempt (`data_labels`);
+`lint_verification` **0 ERROR** / 2 WARN; `irw-validate` ok on all ten; `check_provenance` clean.
+
+The 0 ERROR is worth noting: the Step 3 fix from batch_021 — write `NOT_NEEDED` rows into the
+batch's own `verification_merged.csv` as well as the permanent tracker — held. Two consecutive
+rounds had thrown 3 and 4 spurious lint ERRORs before it.
+
+**Blocked (2), both determinate and both on rights, not access.**
+`contreras_valdez_2022_bsq` and `_rses` are the Mexican Spanish BSQ-16 and RSES. The wording was
+**located in both cases** — Amaya Hernández A (2013), UNAM doctoral thesis TESIUNAM 0704071,
+Apéndices A and B — and cannot be shipped: the thesis front matter states *"DERECHOS RESERVADOS …
+PROHIBIDA SU REPRODUCCIÓN TOTAL O PARCIAL"* with use restricted to educational and informational
+purposes. That is a quoted, source-level non-commercial restriction plus an explicit bar on partial
+reproduction, and under the 2026-09-04 ruling the licence of the source actually copied from
+governs. Same shape as TIMSS 2003 and `chinvararak_2021_ecr`. Retry test NO for both.
+
+**A finding worth keeping even though its table is blocked.** `contreras_valdez_2022_rses`: the
+deposit's stated anchor direction is almost certainly **reversed** relative to the stored data. The
+Keys sheet and the paper both say 1 = *totalmente de acuerdo*, but the file's own `rses_pse` /
+`rses_nse` factor scores are raw sums of exactly the positively- and negatively-worded item sets and
+only reconcile the other way round (−0.395 and +0.287 against `edeq14_overall`, matching the paper's
+own convergent-validity result). Read with the printed anchors, a general-population sample would be
+agreeing they are useless (means 1.43–1.54) and disagreeing that they have good qualities (means
+3.28–3.58). An extraction that trusted the Keys sheet would have shipped the anchors backwards.
+Recorded in `pending_index_notes.csv` and re-runnable as `verify_contreras_valdez_2022_rses.R`.
+
+**Both lint WARNs adjudicated, both kept VERIFIED** — same pattern as batch_021, the lint fires on
+the phrase "does not establish" rather than on the status. `conspiracy_asd__thinking_styles` says in
+terms that all ten (mean, floor%, ceiling%) signatures are distinct with closest-pair distance
+0.8349, so every item is separated; its hedge is about unlabelled scale midpoints, not the item axis.
+`cooper_2018_funny_topics` is the stronger of the two: the Hungarian optimum over all 34!
+text-onto-code assignments lands on the shipped identity assignment with 0 items reassigned, where
+nearest-neighbour alone would have left 8 ambiguous. Its hedge is about `option_text` describing the
+0/1 check-all-that-apply coding rather than transcribed wording.
+
+**Circuit breaker:** 0 of 12 failed (0%), threshold 30%. Not tripped.
+
+Not yet triaged, not staged, not uploaded.
+
+### batch_022 triage (xingyi-zhang, #1935) — 20 of 20 staged, 0 held
+
+Not one of my rounds: extracted by @xingyi-zhang against #1831 and merged as #1935. Triaged here on
+Ben's ask. **This is the cleanest batch the pipeline has produced.**
+
+Gates re-run live at triage: `normalize_nulls` 0 of 20 needed changes; `audit_batch` 16 PASS / 4
+WARN, all four explained below; **`verify_batch` 20/20 PASS**; `lint_verification` *no problems
+found*; `irw-validate` no ERRORs **and no WARNs**; `check_provenance` clean. Verification mix is 9
+VERIFIED / 11 PARTIAL, and lint agrees each status matches its evidence.
+
+**The verification design is better than ours and worth copying.** Rather than testing the mapping
+statistically after the fact, `rederive_promis.py` and `rederive_ecps.py` rebuild the shipped text
+from the source — the PROMIS Wave 1 codebook, and the administered COVIDiSTRESS Qualtrics form plus
+two registration workbooks — and the verify scripts diff the CSV against that rebuild rather than
+against a prose claim. The re-derivation output is committed as JSON, so the scripts re-run
+elsewhere without the source cache.
+
+**One limit of re-running them here**, worth stating so nobody over-reads a green result: without
+`.cache/ecps_sahm_2024/` and the PROMIS cache — both gitignored and local to the extractor's machine
+— the scripts diff against the *committed* re-derivation, not a fresh rebuild from the PDF. Here
+that tests internal consistency; on the extractor's machine it tested source fidelity.
+
+**Four audit WARNs, none an itemtext defect.** All are applicability-driven missingness, which is
+what a branching survey produces:
+- `promis1wave1_physicalfunction` — PFC1-PFC5 are missing their top option 'Very easy'; n runs
+  1069-2145 against a 2535 median, and the deficit tracks item easiness (Spearman ≈ -0.8), which is
+  what dropping the easiest response looks like and what a category collapse does not.
+- `ecps_sahm_2024_distrust` — the form randomises the misperception blocks one-of-three.
+- `ecps_sahm_2024_stress` — the secondary-stressor block is conditional; per-index n follows the
+  branch that gates it (student ≈1,140, children ≈3,200, occupation ≈9,900).
+- `ecps_sahm_2024_sscd` — compliance shown to all (n≈15,300), the two norm blocks to a subset
+  (n≈3,800); and its '47.6% blank option_text' is 80 unlabelled midpoints on the two
+  `socialinfluence_nor*` ladders, which label only their endpoints.
+
+**Two gaps triage closed rather than reported:**
+
+1. **The batch shipped no `notes.csv`.** Per-table detail is in `provenance.csv`'s `note` column
+   instead (838-4,158 chars, median 2,765) so nothing was lost, but Step 5c's "append the reason to
+   that table's `notes.csv` row" had nowhere to go. Created one carrying the four WARN explanations.
+2. **The misattribution was disclosed in only 1 of 11 public notes.** Amended the other 9 affected
+   (all `ecps_sahm_2024_*` except `_emotion`, which genuinely is the ERQ short form). Without it a
+   reader of the issues page sees a dictionary that says Emotion Regulation Questionnaire and no
+   indication it is wrong — the same gap `COACH_Chen_2022_CSQ` and `conner_2017_vitality` had.
+
+**Issue filed: #1936**, the largest dictionary defect this pass has found. Ten of eleven
+`ecps_sahm_2024_*` tables are attributed to the wrong *study* — Sahm et al.'s German ERQ-S
+validation rather than COVIDiSTRESS Global Survey Round II, whose data file is hosted inside that
+OSF project. Re-verified three ways independently of the extraction: the ERQ has two subscales and
+there are eleven tables; every table carries `cov_covid_self` and `cov_residing_country`; and they
+hold 12,988-15,736 participants rather than a German validation sample. `biblio.csv` also keys these
+as `ECPS_Sahm_2024_*` against `metadata.csv`'s lowercase, so any case-sensitive join drops all
+eleven.
+
+**Staged all 20 into `clean/`.** Every non-`data_labels` table has its `mapping_verification.csv`
+row. The 11 `paper_order` + PARTIAL tables were the ones to look hardest at, and they hold up: the
+mapping rests on the administered form's order, the re-derivation checks every shipped string
+against that form, and PARTIAL is the honest status because order is what ties text to code.
+
+### batch_023 triage — 10 of 10 staged, 0 held
+
+Gates were run live at close-out earlier today and were clean throughout —
+`normalize_nulls` 0 of 10, `audit_batch` **10/10 PASS with no anomalies**, `verify_batch` 3 PASS +
+7 exempt, `lint_verification` 0 ERROR / 2 WARN, `irw-validate` ok, `check_provenance` clean — so
+triage did not re-run them a third time. What it added was the per-table go/no-go and the public
+notes.
+
+**All 10 are `mapping_basis=data_labels`**, the strongest basis: the source file's own labels tie
+code to text, with no positional inference for a statistic to check. Both lint WARNs were
+adjudicated at close-out and both stay VERIFIED — `conspiracy_asd__thinking_styles` (all 10
+mean/floor%/ceiling% signatures distinct, closest pair 0.8349) and `cooper_2018_funny_topics` (the
+Hungarian optimum over all 34! text-onto-code assignments lands on the shipped identity, 0 items
+reassigned, where nearest-neighbour alone leaves 8 ambiguous).
+
+**The drafter's REVIEW THESE TOO section earned its place again.** Six shipped tables carried no
+`public_note`, and five of the six turned out to have a caveat a data user would otherwise
+misread. Written by hand:
+
+- `conspiracy_asd__cognitive_flexibility` — **the deposit's coded workbook is corrupted** by a
+  global find/replace of 'no' to '2' ("I feel I have 2 power", "I just don't k2w what to do"), so
+  the wording was taken from the plain-text survey document instead. Anyone comparing this table
+  against those workbook labels finds differences and would have no way to know which is right.
+- `conspiracy_asd__thinking_styles` — REI-10; only the two extreme scale points are labelled, so
+  `option_text` is blank at responses 2-4 by design rather than missing. Same corruption caveat.
+- `cooper_2018_funny_topics` and `_offensive_topics` — select-all-that-apply checklists, so `resp`
+  is a checkbox state and 'Selected' / 'Not selected' describe that 0/1 coding rather than
+  transcribing anything the survey printed.
+- `cormier_2024_phq4` — the Qualtrics header concatenates a shared block stem with each item stem;
+  the stem ships once in `instructions`, so an item here is shorter than its source column header.
+
+`cormier_2024_cognitive_decline` is the one left without a note, correctly: it has no `notes.csv`
+entry either, i.e. a clean pass with nothing to disclose.
+
+**Staged all 10.** `clean/` now holds **30 files** — batch_022's 20 and batch_023's 10 — for one
+upload.
+
+**One judgment left to a human rather than taken here.** `cooper_2018_offensive_topics` ships item
+text that is a list of demographic and identity categories, because the study (Cooper 2018) was
+about which topics people find offensive. That is inherent to the research and the transcription is
+faithful, so nothing about it is a data defect and no note was written. Whether IRW wants any
+content signposting on tables of this kind is an editorial policy question, not an extraction one.
