@@ -75,6 +75,16 @@ HOWMANY7 = {1: "Nearly nobody", 2: None, 3: None, 4: None, 5: None, 6: None,
 WILLING_0N = {0: "Neutral", 1: "Not willing at all", 2: None, 3: None,
               4: "Very willing"}
 
+# The emotions block prints only its ends and midpoint, unlike the identity and
+# moral blocks which print all seven labels.
+EMO7_0N = {0: "Neutral", 1: "Strongly disagree", 2: None, 3: None, 4: None,
+           5: None, 6: "Strongly agree"}
+# Trust is a 0-100% slider in ten-point steps, which is the live 0-10 range.
+# The form prints "No trust" then 10% through 90%; the top position's label is
+# not in the PDF's text layer, so it ships empty rather than inferred as 100%.
+TRUST11 = {0: "No trust", 1: "10%", 2: "20%", 3: "30%", 4: "40%", 5: "50%",
+           6: "60%", 7: "70%", 8: "80%", 9: "90%", 10: None}
+
 # ------------------------------------------------------------------ blocks
 AGREE_STEM = ("We will now present a few statements about the COVID-19 virus and about you. "
               "Please read the statements and indicate to what extent you agree with them.")
@@ -276,6 +286,53 @@ TABLES = {
               "any reason",
               "Vaccinations are one of the most significant achievements in improving "
               "public health"])],
+ "emotion": [dict(
+    label="Emotion regulation (ERQ short form)", ladder=EMO7_0N,
+    stem="We would like to ask you some questions about your emotional life, in particular, "
+         "how you control (that is, regulate and manage) your emotions. The questions below "
+         "involve two distinct aspects of your emotional life. One is your emotional "
+         "experience, or what you feel like inside. The other is your emotional expression, "
+         "or how you show your emotions in the way you talk, gesture, or behave. Although "
+         "some of the following questions may seem similar to one another, they differ in "
+         "important ways.",
+    codes=["emotions_%d_0neutral" % k for k in range(1, 9)],
+    # Administered order, not the workbooks'. The two disagree about where the
+    # "negative emotions" item sits -- 4th here, 7th there -- and the data settle
+    # it: the ERQ's suppression/reappraisal split falls on 1,2,4,5 against
+    # 3,6,7,8 with a within-minus-between correlation gap of 0.268, the maximum
+    # of 2000 random 4/4 partitions, where the workbook order gives 0.003.
+    items=["I keep my emotions to myself.",
+           "When I am feeling positive emotions, I am careful not to express them.",
+           "When I’m faced with a stressful situation, I make myself think about it in a way "
+           "that helps me stay calm.",
+           "When I am feeling negative emotions, I make sure not to express them.",
+           "I control my emotions by not expressing them.",
+           "When I want to feel more positive emotion, I change the way I’m thinking about "
+           "the situation.",
+           "I control my emotions by changing the way I think about the situation I’m in.",
+           "When I want to feel less negative emotion, I change the way I'm thinking about "
+           "the situation."])],
+
+ "support": [dict(
+    label="Perceived social support", ladder=AGREE7_0N,
+    stem="In your current day to day life, to what degree do you agree with the following?",
+    codes=["perceived_support_%d_0neutral" % k for k in range(1, 4)],
+    items=["If I am down, I know to whom to go to for support",
+           "People would help me if I needed it",
+           "I can count on others to meet my needs if things go wrong"])],
+
+ "trust": [dict(
+    label="Trust in institutions", ladder=TRUST11,
+    stem="Please tell us how much you trust each of the institutions below. Please base your "
+         "answer on your general impression.",
+    codes=["trust_%d" % k for k in range(1, 8)],
+    items=["Parliament/government in the country you live?",
+           "Police in the country you live?",
+           "Civil service in the country you live?",
+           "Health system in the country you live?",
+           "The World Health Organisation (WHO)",
+           "Government's effort to handle Coronavirus (in the country you live)?",
+           "Scientific research community"])],
 }
 
 LIGATURES = {"ﬀ": "ff", "ﬁ": "fi", "ﬂ": "fl", "ﬃ": "ffi", "ﬄ": "ffl"}

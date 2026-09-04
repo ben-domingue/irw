@@ -50,6 +50,10 @@
    "items": 11,
    "not_a_column": []
   },
+  "ecps_sahm_2024_emotion": {
+   "items": 8,
+   "not_a_column": []
+  },
   "ecps_sahm_2024_ia": {
    "items": 7,
    "not_a_column": []
@@ -70,14 +74,22 @@
    "items": 28,
    "not_a_column": []
   },
+  "ecps_sahm_2024_support": {
+   "items": 3,
+   "not_a_column": []
+  },
+  "ecps_sahm_2024_trust": {
+   "items": 7,
+   "not_a_column": []
+  },
   "ecps_sahm_2024_vaccine": {
    "items": 7,
    "not_a_column": []
   }
  },
  "string_verification": {
-  "in_survey_pdf": 190,
-  "in_workbooks": 16,
+  "in_survey_pdf": 230,
+  "in_workbooks": 17,
   "unverified": 0
  },
  "tables": {
@@ -433,6 +445,128 @@
     "section_id": "ecps_sahm_2024_dtl_2",
     "section_prompt": "Please select the answer that best corresponds with characteristics of you.",
     "text": "Unforeseen events upset me greatly."
+   }
+  },
+  "ecps_sahm_2024_emotion": {
+   "emotions_1_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "I keep my emotions to myself."
+   },
+   "emotions_2_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "When I am feeling positive emotions, I am careful not to express them."
+   },
+   "emotions_3_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "When I’m faced with a stressful situation, I make myself think about it in a way that helps me stay calm."
+   },
+   "emotions_4_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "When I am feeling negative emotions, I make sure not to express them."
+   },
+   "emotions_5_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "I control my emotions by not expressing them."
+   },
+   "emotions_6_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "When I want to feel more positive emotion, I change the way I’m thinking about the situation."
+   },
+   "emotions_7_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "I control my emotions by changing the way I think about the situation I’m in."
+   },
+   "emotions_8_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form)",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": null,
+     "3": null,
+     "4": null,
+     "5": null,
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_emotion_1",
+    "section_prompt": "We would like to ask you some questions about your emotional life, in particular, how you control (that is, regulate and manage) your emotions. The questions below involve two distinct aspects of your emotional life. One is your emotional experience, or what you feel like inside. The other is your emotional expression, or how you show your emotions in the way you talk, gesture, or behave. Although some of the following questions may seem similar to one another, they differ in important ways.",
+    "text": "When I want to feel less negative emotion, I change the way I'm thinking about the situation."
    }
   },
   "ecps_sahm_2024_ia": {
@@ -1518,6 +1652,188 @@
     "section_id": "ecps_sahm_2024_stress_3",
     "section_prompt": "In the last month, how much have you been concerned about the following:",
     "text": "Sharing a workspace with others"
+   }
+  },
+  "ecps_sahm_2024_support": {
+   "perceived_support_1_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived social support",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_support_1",
+    "section_prompt": "In your current day to day life, to what degree do you agree with the following?",
+    "text": "If I am down, I know to whom to go to for support"
+   },
+   "perceived_support_2_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived social support",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_support_1",
+    "section_prompt": "In your current day to day life, to what degree do you agree with the following?",
+    "text": "People would help me if I needed it"
+   },
+   "perceived_support_3_0neutral": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Perceived social support",
+    "ladder": {
+     "0": "Neutral",
+     "1": "Strongly disagree",
+     "2": "Disagree",
+     "3": "Slightly disagree",
+     "4": "Slightly agree",
+     "5": "Agree",
+     "6": "Strongly agree"
+    },
+    "section_id": "ecps_sahm_2024_support_1",
+    "section_prompt": "In your current day to day life, to what degree do you agree with the following?",
+    "text": "I can count on others to meet my needs if things go wrong"
+   }
+  },
+  "ecps_sahm_2024_trust": {
+   "trust_1": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Parliament/government in the country you live?"
+   },
+   "trust_2": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Police in the country you live?"
+   },
+   "trust_3": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Civil service in the country you live?"
+   },
+   "trust_4": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Health system in the country you live?"
+   },
+   "trust_5": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "The World Health Organisation (WHO)"
+   },
+   "trust_6": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Government's effort to handle Coronavirus (in the country you live)?"
+   },
+   "trust_7": {
+    "instrument": "COVIDiSTRESS Global Survey Round II: Trust in institutions",
+    "ladder": {
+     "0": "No trust",
+     "1": "10%",
+     "10": null,
+     "2": "20%",
+     "3": "30%",
+     "4": "40%",
+     "5": "50%",
+     "6": "60%",
+     "7": "70%",
+     "8": "80%",
+     "9": "90%"
+    },
+    "section_id": "ecps_sahm_2024_trust_1",
+    "section_prompt": "Please tell us how much you trust each of the institutions below. Please base your answer on your general impression.",
+    "text": "Scientific research community"
    }
   },
   "ecps_sahm_2024_vaccine": {
