@@ -42,8 +42,69 @@ SCALES = {
     "kotsou_2016_life_satisfaction": (r"^LS_\d+$", 5, (1, 7)),
     "kotsou_2016_happiness": (r"^Bonh_\d+$", 4, (1, 7)),
 }
-COVARIATES = {"Age": "cov_age", "Sexe": "cov_sex", "Diplôme": "cov_education",
+COVARIATES = {"Sexe": "cov_sex", "Diplôme": "cov_education",
               "Pays": "cov_country"}
+
+#: The survey has no collection date; the figshare record was published
+#: 2016-03-27, so an age derived here is the respondent's age in 2016 and is
+#: good to about a year.
+SURVEY_YEAR = 2016
+
+
+def birth_year(v):
+    """Birth year from the free-text `Age` column, or None.
+
+    **`Age` is not an age.** It is a date of birth typed by hand in a dozen
+    formats -- 17011972, 23/09/1968, "31 03 1962", "02 octobre 1974",
+    11.04.1986, 1978, 21/04/97 -- and it also holds values that are not dates
+    at all ("CHENEE", "saint-avold", "8 mars", "09:4:53") and a handful of
+    *survey* dates (19 Juin 2012, 31.03.2013) where the respondent entered the
+    day they were filling the form in.
+
+    Mapping the column straight to `cov_age` on the strength of its name is
+    what put a `cov_age` of 236061972 into the corpus, with 82% of the column
+    null because only the values that happened to parse as numbers survived
+    (irw#1779). Reading the dates instead gives 1,517 of 1,554 respondents a
+    real age where 278 had one.
+
+    Two rules, both deliberately strict, because a wrong age is worse than a
+    missing one:
+
+    * a four-digit year counts only in [1900, 2005]. That refuses the 2012-2015
+      survey dates rather than reading them as births, and refuses typos like
+      1698 or 0960 rather than guessing.
+    * a two-digit year counts only inside a complete date. "03/03" is a day and
+      a month with no year at all, and taking its trailing 03 for 2003 invents
+      a 13-year-old.
+    """
+    if pd.isna(v):
+        return None
+    s = str(v).strip()
+    if s.endswith(".0"):
+        s = s[:-2]
+    if s.isdigit():
+        n = int(s)
+        if 1900 <= n <= 2005:
+            return n                                    # YYYY
+        if len(s) in (7, 8):                            # DMMYYYY / DDMMYYYY
+            y = int(s[-4:])
+            return y if 1900 <= y <= 2005 else None
+        if len(s) == 6:                                 # DDMMYY
+            y = int(s[-2:])
+            return 2000 + y if y <= 5 else 1900 + y
+        return None
+    m = re.findall(r"(?<!\d)(19\d{2}|200[0-5])(?!\d)", s)
+    if m:
+        return int(m[-1])
+    # a complete date whose year is two digits: 21/04/97, "13 juin 84"
+    # `(?<!\d)` on the capture matters: without it "19 Juin 2012" matches with
+    # a year of 12 and becomes a birth in 1912.
+    m = re.search(r"(?:\d{1,2}|[A-Za-zéû]+)\s*[/.\- ]\s*"
+                  r"(?:\d{1,2}|[A-Za-zéû]+)\s*[/.\- ]?\s*(?<!\d)(\d{2})\s*$", s)
+    if m:
+        y = int(m.group(1))
+        return 2000 + y if y <= 5 else 1900 + y
+    return None
 
 
 def fetch_raw(path=None):
@@ -82,7 +143,11 @@ def main(path=None):
         df[c] = df[c].astype(str).str.extract(r"^A([1-5])$")[0].astype("Int64")
 
     df = df.rename(columns=COVARIATES).reset_index(drop=True)
-    covs = [v for v in COVARIATES.values() if v in df.columns]
+    born = df["Age"].map(birth_year)
+    df["cov_age"] = (SURVEY_YEAR - born).astype("Int64")
+    assert df["cov_age"].dropna().between(13, 100).all(), \
+        f"cov_age out of range: {df['cov_age'].min()}-{df['cov_age'].max()}"
+    covs = [v for v in COVARIATES.values() if v in df.columns] + ["cov_age"]
     df["id"] = df.index + 1
 
     os.makedirs(OUT_DIR, exist_ok=True)
