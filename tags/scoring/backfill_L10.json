@@ -1,0 +1,146 @@
+[
+ {
+  "table": "alqerem_2024_diabetic_health_literacy",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_bskdaykontrol_odak",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_risk_algi",
+  "shard": "w5"
+ },
+ {
+  "table": "baekgaard_2023_stress",
+  "shard": "w5"
+ },
+ {
+  "table": "chen2022_cls",
+  "shard": "w2"
+ },
+ {
+  "table": "chinvararak_2021_ssq",
+  "shard": "w3"
+ },
+ {
+  "table": "dejesus_2017_lequesne",
+  "shard": "w3"
+ },
+ {
+  "table": "dopmeijer_2022_ubos",
+  "shard": "w3"
+ },
+ {
+  "table": "eyrenci_2025_mental_health_literacy",
+  "shard": "w4"
+ },
+ {
+  "table": "frikha_2023_pe_acrs",
+  "shard": "w2"
+ },
+ {
+  "table": "germann_2026_state_intervention",
+  "shard": "w2"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "huang_2023_b_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "jimenezherrera_2022_moral_sensitivity",
+  "shard": "w3"
+ },
+ {
+  "table": "kim_2025_psas",
+  "shard": "w3"
+ },
+ {
+  "table": "lai_2023_teacher_student_rel",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2024_tci",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2017_scale_o",
+  "shard": "w3"
+ },
+ {
+  "table": "luo_2021_ecr",
+  "shard": "w3"
+ },
+ {
+  "table": "merlo2025_eng_cognitive",
+  "shard": "w2"
+ },
+ {
+  "table": "moon_2023_pregnancy_stress",
+  "shard": "w4"
+ },
+ {
+  "table": "ngo_2025_green_subjective_norm",
+  "shard": "w3"
+ },
+ {
+  "table": "ozkurt_2026_paces_enjoyment",
+  "shard": "w3"
+ },
+ {
+  "table": "pellerin2020_mwbs_gratbeing",
+  "shard": "w3"
+ },
+ {
+  "table": "poza2026_hlseu",
+  "shard": "w3"
+ },
+ {
+  "table": "reinwarth_2023_psych_symptoms",
+  "shard": "w3"
+ },
+ {
+  "table": "rodriguezsantero_2024_sats36",
+  "shard": "w4"
+ },
+ {
+  "table": "silva_2018_bsq",
+  "shard": "w3"
+ },
+ {
+  "table": "szabo_2025_family_conflict",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_caregiver_child_conflict",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_ai_acceptance",
+  "shard": "w5"
+ },
+ {
+  "table": "trusz_2025_nfi",
+  "shard": "w3"
+ },
+ {
+  "table": "wang2022_dass_stress",
+  "shard": "w2"
+ },
+ {
+  "table": "wiedemann_2021_risk_perception",
+  "shard": "w4"
+ },
+ {
+  "table": "xu_2023_oic",
+  "shard": "w4"
+ },
+ {
+  "table": "yang_2026_stress_response",
+  "shard": "w3"
+ }
+]
