@@ -2853,3 +2853,28 @@ text that is a list of demographic and identity categories, because the study (C
 about which topics people find offensive. That is inherent to the research and the transcription is
 faithful, so nothing about it is a data defect and no note was written. Whether IRW wants any
 content signposting on tables of this kind is an editorial policy question, not an extraction one.
+
+### batches 022 and 023 — uploaded 2026-09-04
+
+30 tables uploaded by Ben and verified in the `irw_text` draft with `red_up.drafts --verbose` before
+anything was stamped. Stamped `uploaded=2026-09-04` in both batches' `provenance.csv` and in
+`mapping_verification.csv`; deleted the 30 uploaded `__items.csv`, sidecars kept. `clean/` was
+emptied by Ben. Issues-page entries applied as datapages/irw#128 (201 → 230).
+
+**A THIRD convention for "not uploaded", and the audit that missed it.** This morning's note said to
+treat `''` and `no` as unset. batch_022 uses neither: its `uploaded` column holds the literal
+**`NA`**, which is the project's canonical null token and therefore the likeliest form of all. The
+stamping pass skipped all 20 rows, and the audit — sharing the same `UNSET` predicate — reported
+them as already stamped. The rule that actually works is the inverse one:
+
+> **A row is stamped only if it holds a real date (`^\d{4}-\d{2}-\d{2}$`). Everything else is
+> unstamped, whatever it says.**
+
+That needs no list of null spellings and cannot be defeated by a fourth one appearing.
+
+**And the audit must not share a code path with the thing it audits.** Rewritten with the date rule,
+the stamp function reported 20 rows changed while the audit read 20 still unstamped — because the
+rewrite had dropped its `open(path,'wb').write(...)` line. It counted without persisting. Only an
+audit that re-read the files from disk caught it; one built on the same helper would have agreed
+with the bug twice.
+
