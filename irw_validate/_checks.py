@@ -21,6 +21,13 @@ from math import sqrt
 
 import pandas as pd
 
+#: Columns that say WHEN or UNDER WHAT a measurement was taken, per
+#: `datastandard.md`. `group`, `study` and `treat` are deliberately absent: they
+#: describe the person or the arm, so a person appearing twice under one is a
+#: question, not an answer (#1835).
+OCCASION = ("rt", "rater", "wave", "timepoint", "date", "trialnum", "trial",
+            "order", "session", "occasion", "period", "block", "subtest")
+
 
 @dataclass
 class Check:
@@ -129,8 +136,15 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # covariate naming: extra columns without a recognized name/prefix = NOTE.
     # (Broadened from validate_irw.R's narrow list to the full documented
     #  standard, so legitimate columns like item_family/treat aren't flagged.)
-    known = {"id", "item", "resp", "rt", "date", "wave", "timepoint",
-             "treat", "rater", "item_family"}
+    #
+    # OCCASION belongs in this set, and leaving it out made the validator
+    # contradict itself: `dup_id_item` accepts `trialnum` as the column that
+    # explains a repeat, and `cov_prefix` then told you to rename it `cov_`,
+    # which would both misdescribe it -- a covariate is invariant to the person,
+    # a trial index is the opposite -- and stop `dup_id_item` from seeing it,
+    # re-breaking the table the rename had just fixed. Seen on `motion` and
+    # `rr98_accuracy` (irw#1842 block J). One list, so the two cannot drift.
+    known = {"id", "item", "resp", "date", "treat", "item_family"} | set(OCCASION)
     known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_")
     unprefixed = [c for c in df.columns
                   if c not in known and not c.startswith(known_prefix)]

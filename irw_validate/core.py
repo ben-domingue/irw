@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 from . import extra
-from ._checks import irw_metadata, run_qc
+from ._checks import OCCASION, irw_metadata, run_qc
 from .model import Finding, Report, severity_for
 
 #: Above this, a full pandas load is not worth it inside the uploader's hot
@@ -155,8 +155,10 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
     # the arm, not the occasion, and a person appearing twice under them is a
     # real question rather than an explanation.
     if profile in ("upload", "legacy") and {"id", "item"}.issubset(df.columns):
-        occasion_cols = ("rater", "wave", "timepoint", "date", "trialnum", "trial",
-                         "order", "session", "occasion", "period", "block", "subtest")
+        # `rt` is in OCCASION for naming purposes but must never be what makes
+        # rows unique -- it is a measurement, and rounding it would silently
+        # merge rows (#1842 blocks I and J).
+        occasion_cols = tuple(c for c in OCCASION if c != "rt")
         if any(f.check == "dup_id_item" for f in report.findings):
             resolved_by = None
             for col in occasion_cols:
