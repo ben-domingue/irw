@@ -1,0 +1,11 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF1","SCOFF questionnaire",NA,NA,"Do you make yourself sick because you feel uncomfortably full?",NA,"YES",1
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF1","SCOFF questionnaire",NA,NA,"Do you make yourself sick because you feel uncomfortably full?",NA,"NO",0
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF2","SCOFF questionnaire",NA,NA,"Do you worry you have lost control over how much you eat",NA,"YES",1
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF2","SCOFF questionnaire",NA,NA,"Do you worry you have lost control over how much you eat",NA,"NO",0
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF3","SCOFF questionnaire",NA,NA,"Have you recently lost more than one stone in a 3 month period",NA,"YES",1
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF3","SCOFF questionnaire",NA,NA,"Have you recently lost more than one stone in a 3 month period",NA,"NO",0
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF4","SCOFF questionnaire",NA,NA,"Do you believe yourself to be fat when others say you are too thin",NA,"YES",1
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF4","SCOFF questionnaire",NA,NA,"Do you believe yourself to be fat when others say you are too thin",NA,"NO",0
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF5","SCOFF questionnaire",NA,NA,"Would you say that food dominates your life?",NA,"YES",1
+"cucchi_2018_scoff","cucchi_2018_scoff_1","SCOFF5","SCOFF questionnaire",NA,NA,"Would you say that food dominates your life?",NA,"NO",0

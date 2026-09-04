@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_022 already exists (round cap reached)
+- itemtables/batch_025 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -163,6 +163,13 @@ Each subagent prompt must tell it to:
   already did it and the result merely looks like evidence. Skip only for data_labels tables, where
   the source file itself ties code to text.
 - NOT touch itemtables/pilot/pending_index_notes.csv (a separate, older file).
+- **NOT run any batch-wide script.** `normalize_nulls.R`, `audit_batch.R`, `verify_batch.R` and
+  `lint_verification.R` all take the BATCH DIRECTORY as their argument, so a subagent running one
+  reaches across every sibling's files while those siblings are still writing them. They belong to
+  the orchestrator, at Step 4, after every agent has finished. In batch_025 three agents correctly
+  declined and a fourth ran `normalize_nulls.R` anyway; it was harmless only because that script is
+  idempotent and the orchestrator's own Step 4 run found nothing left to change. A subagent's scope
+  is its OWN table's files, full stop.
 
 Wait for all agents to finish.
 
@@ -325,7 +332,11 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_022, self-cancel now and log "cap reached".
+- Re-read the cap out of Step 0 of this prompt (the batch named as "already exists (round cap
+  reached)"). If the batch you just completed IS that batch, the cap is now reached: log "cap
+  reached" in the same round_log entry and stop. Otherwise end normally.
+  Read the number from Step 0 rather than trusting one written here -- this line used to name a
+  fixed batch and was still saying `batch_022` while rounds 023, 024 and 025 ran past it.
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

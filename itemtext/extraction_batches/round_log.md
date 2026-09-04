@@ -2919,3 +2919,186 @@ pending 1,112 → 1,110); the four shipped rows carry a withdrawal note in `prov
 the rule written into the standard; and the four issues-page entries rewritten to record the
 withdrawal rather than describe wording that no longer exists (datapages/irw#129). **Ben removes the
 tables from the `irw_text` draft** — that is the part that makes it true in the warehouse.
+
+## batch_024 — 2026-09-04
+
+**12 tables claimed · 12 written / 0 blocked / 0 failed · yield 100%.** Best round of the
+series so far, and the first with no block at all. 1,370 item-text rows.
+
+| table | rows | mapping_basis | audit | verification |
+|---|---|---|---|---|
+| corti_2023_academic_adaptation | 35 | data_labels | PASS | VERIFIED |
+| cox_2024_feedback_perceptions | 15 | data_labels | PASS | VERIFIED |
+| CPDMMC_Kunnari_2020_HCD | 84 | paper_explicit | PASS | VERIFIED |
+| CPDMMC_Kunnari_2020_PDP | 36 | paper_explicit | PASS | VERIFIED |
+| CQTMS_Hur_2023 | 800 | paper_order | WARN | PARTIAL |
+| cucchi_2018_kims | 90 | data_labels | PASS | NOT_NEEDED |
+| cucchi_2018_rfq | 56 | data_labels | PASS | NOT_NEEDED |
+| cucchi_2018_scoff | 10 | data_labels | PASS | VERIFIED |
+| cucchi_2018_tas20 | 100 | data_labels | PASS | PARTIAL |
+| cugmas_2021_elderly_social_support | 64 | data_labels | PASS | VERIFIED |
+| CV_OASIS_ODSIS_PPE_Novak_2020_BFI | 40 | reconstructed | PASS | PARTIAL |
+| CV_OASIS_ODSIS_PPE_Novak_2020_DSES | 40 | reconstructed | PASS | PARTIAL |
+
+**Gates.** normalize_nulls 0/12 needed changes. audit_batch 11 PASS / 1 WARN.
+verify_batch 10 PASS + 2 MISSING(exempt) — no FAIL, no missing VERDICT.
+lint_verification 12 rows, **0 ERROR**, 6 WARN. irw-validate: no ERROR.
+check_provenance clean (69 IRW-generated tables, 0 without an issues-page entry).
+
+**Why the yield was this high.** Nine of the twelve reached a level-1 source that ties code
+to text directly — six SPSS `.sav` deposits with self-prefixed variable labels, an OSF
+codebook keyed by column name, an `.xlsx` whose headers are the questions. The head of the
+queue happened to serve up depositing studies rather than the large closed-source datasets
+that produced the block clusters in batch_016 and batch_019. This is a fact about which
+tables came up, not a pipeline improvement — do not read it as a new baseline.
+
+**The one audit WARN is a source property, not a defect.** CQTMS_Hur_2023 ships blank
+`item_text` for 81 of its 160 items: Hur & Seo published wording only for the 79 items that
+survived screening, and the 81 dropped preliminary items appear in neither the article, its
+five supplements, nor the CC0 Dataverse deposit. Blank beats invented. Explained in notes.csv;
+it will recur on every re-run and is not actionable.
+
+**Orchestrator re-check (Step 5b).** The `CPDMMC_Kunnari_2020_HCD` agent recorded VERIFIED
+while its own evidence said the VT/V code pair "cannot be separated statistically" — the exact
+shape lint_verification flags. Re-checked rather than downgraded: the codes are content-coherent
+with the shipped dilemmas (VT = vaccine test, V = vitamin-deficiency kidney), and the ordering is
+predictable independently of the codebook, since VT kills one to save millions while V takes a
+kidney from a man who survives to save six. Observed means run VT 4.780 > V 3.493, as that
+predicts. Route 8 separates the pair the mean-identity check could not; VERIFIED stands and the
+evidence string now carries the re-check. The other five lint WARNs were adjudicated and left
+alone — each hedges about the `option_text` axis, transcription fidelity, or source identity,
+none of which bears on whether the route distinguishes every item from every other item.
+
+**TWO LICENCE DECISIONS FOR BEN — both shipped under the current rule, both withdrawable.**
+`itemtext_standard.md` says the WHOQOL no-redistribution ruling must not be extended to another
+instrument without asking, so both tables shipped by default and are flagged rather than blocked:
+
+1. **`cucchi_2018_tas20`.** The TAS-20 holders charge a US$40 copyright fee and have enforced it
+   (a 2021 *Molecular Autism* paper was retracted for using the scale without permission). But a
+   fee is not a non-commercial clause and not a redistribution bar, and IRW's copy came from a
+   CC BY 4.0 PeerJ deposit that published all 20 items itself — so the ECR-R source-licence rule
+   governs and `wording_rights` was left unset. If fee-licensed instruments should be treated like
+   WHOQOL, this withdraws `cucchi_2018_tas20`, the already-live `rmet_higgins_2022_tas`, and the
+   pending `ruiz_parra_2023_tas20`.
+2. **`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`.** Underwood requires registration, states the scale is
+   free for non-profit use, and the Fetzer compendium copy reads "Permission of author required to
+   distribute or copy" — a redistribution bar of the same shape as WHOQOL's. Shipped because the
+   wording was transcribed from Underwood's own CC BY 3.0 article, but every row carries
+   `wording_rights=NC`. This is the one table an `NC` query finds.
+
+**Other things worth knowing.**
+- Five `name_charset` WARNs from irw-validate (CPDMMC_*, CQTMS_*, CV_*) are properties of existing
+  capitalised corpus table names, not of these extractions. Upstream; nothing to fix here.
+- `CQTMS_Hur_2023`: Supplement 1's row for item I21 is byte-identical to I133's — a duplicated row
+  in the published supplement. It cost one item its distribution check; the other 78 pinned the
+  `itm<n>` = `I<n>` mapping regardless.
+- `cucchi_2018_tas20` and `cucchi_2018_kims` both use subscale-grouped SPSS numbering that is NOT
+  canonical instrument numbering. Recorded as public_notes so the codes are not misread.
+- `CV_OASIS_ODSIS_PPE_Novak_2020_BFI` and `_DSES` were both administered in Czech with no Czech
+  wording published anywhere in the deposit; both ship canonical English with `language=Czech` and
+  empty `_translated` columns — the documented backfill signal, and two more rows for that queue.
+- Three agents independently noted they declined to run the batch-wide `normalize_nulls.R` /
+  `audit_batch.R` because 11 siblings were live in the directory. One ran normalize_nulls anyway
+  and reported normalising a file that may have been a sibling's. Harmless here (idempotent, and
+  the orchestrator's own run found 0 of 12 needing changes), but the per-table subagent prompt
+  should say explicitly that batch-wide scripts belong to the orchestrator.
+- Merge-cleanup near-miss: the per-table sidecar list was deleted by name, as required. The last
+  entry had no trailing newline, so `while read` skipped it and one `verification_*.csv` survived;
+  removed by name afterwards. Whoever scripts this next should write the list newline-terminated.
+
+**CAP REACHED.** batch_024 is the cap raised in 4dcd2ee. The next firing will hit the
+"batch_024 already exists" stop condition in Step 0 and stand down. 1,098 tables remain
+pending; raise the cap to continue.
+
+---
+
+## batch_025 — 2026-09-04T12:17:38 → ~12:35
+
+**12 tables claimed. 8 written / 4 blocked / 0 failed.** Yield 8/12 = 67%. Circuit breaker NOT
+tripped: 0% failed against the 30% threshold. Every block is a determinate verdict with retry
+test = NO; none is an access failure, and no round-level rate limit or spend cap was hit.
+
+Written: `CV_OASIS_ODSIS_PPE_Novak_2020_RSES` (40), `dahlstrom_2022_scoare` (80),
+`daiku_2021_dirty_dozen` (60), `dalky_2020_sf36` (146), `dasilva_2019_hexaco24` (120),
+`dass_Thiyagarajan2022` (84), `dd_rotation` (20), `debacker_2018_decisionjustification` (24).
+
+Blocked: `daiku_2021_lie_scale` (wording never published — the paper gives one unkeyed English
+exemplar of a 3-item subset drawn from Yanai et al. 1987), `DART_Brysbaert_2020_1` and
+`DART_Brysbaert_2020_3_4_5` (both CC BY-NC-SA on the test material; two agents reached this
+independently), `debacker_2018_justice_appraisal` (wording fully published and CC BY, but nothing
+ties an item to a code below subscale level, and the data *refutes* the S2 presentation order).
+
+**Gates.** normalize_nulls 0 of 8 changed. audit_batch 7 PASS / 1 WARN. verify_batch 6 PASS,
+2 MISSING(exempt). lint_verification 0 ERROR / 2 WARN. irw-validate clean (2 `name_charset`
+WARNs on pre-existing capitalised corpus names). check_provenance clean — 347 rows, 69
+IRW-generated tables, 0 without a public issues-page entry.
+
+The Step 3 NOT_NEEDED rows for the two `data_labels` tables were written into BOTH
+`verification_merged.csv` and the permanent tracker, so lint came back with 0 ERROR — the
+batch_020/021 false alarm did not recur.
+
+**Audit WARN explained (Step 5c).** `dahlstrom_2022_scoare`: KB and KR carry 316 rows against a
+median of 182. Not conflation and not an itemtext defect — those two knowledge items were asked in
+both program years while every other item ran in one year only, which the processing script already
+documents. A property of the response data.
+
+**The two residual lint WARNs are expected.** Both DART rows are `NOT_NEEDED` with
+`mapping_basis=unknown`, which the lint flags because only `data_labels` is exempt. Both ship no
+CSV: there is no mapping to verify because the table was blocked on rights. Not a gate failure.
+
+**Orchestrator re-checks (Step 5b) — one agent finding corrected, one confirmed.**
+
+1. **CORRECTED — the `debacker` resp=0 claim.** The agent reported resp=0 as an unstripped
+   not-applicable code, evidenced by "four person-game rows have all 12 items = 0 with
+   playing_match = 3 (niet spelen)". Re-reading the PLOS S3 `.sav` directly: **two** rows have all
+   12 justice items = 0, and five have all 4 decisionjustification items = 0 (only 2 of those are
+   playing_match=3). The zeros are overwhelmingly *partial* — 19 of the 21 justice-block rows with
+   any zero have some-but-not-all zeros, 74 zero cells in all — and those rows split across
+   playing_match 1/2/3 as 9/4/8, tracking the overall 387/161/113 distribution. Carrying a zero is
+   therefore **not** associated with not having played, and the person-level explanation does not
+   survive. What does survive: resp=0 is outside the paper's stated 1–5 scale, is rare (5–8 per
+   item), and sits scattered singly inside otherwise-normal response vectors — a per-item skip code,
+   not a scale point. Still worth an issue against `data/debacker_2018_coaching_justice.py` (drops
+   only NaN), but filed as "out-of-range 0 of unknown meaning". Both debacker notes rows amended.
+2. **CONFIRMED exactly — the DART `ja`→`1` corruption.** `raw_data_study1.xlsx` has 138 headers, of
+   which four carry the global find/replace damage: `Is de volgende persoon een auteur- [1ne
+   Austen]`, `[1mes Patterson]`, `[1ne Jessup]`, plus the covariate `Aantal boeken gelezen in het
+   afgelopen 1ar-`. All three name codes are live in IRW verbatim. A real defect in a published
+   table, independent of the rights block.
+3. **Status downgraded on evidence.** `dasilva_2019_hexaco24` was filed VERIFIED while its own
+   evidence said the range signature pins only 3 of 24 positions. Changed to `NOT_NEEDED`, which is
+   the right label for `data_labels` and matches what the sibling `dalky_2020_sf36` did in this same
+   batch. Full evidence string retained.
+
+**Other things worth knowing.**
+- **The DART rights block is a policy question, not a research one.** IRW already publishes the
+  132 DART names — they *are* the live `item` codes, ingested from the same CC BY-NC-SA deposit. So
+  the block bars an itemtext table while the wording sits in the response table's join keys. Worth
+  a ruling.
+- **Wrong DOI in a PLOS reference list.** Daiku et al. 2021 cites Tamura et al. 2015 as
+  `10.2132/personality.26.1.2`, which resolves to the SD3-J paper. Correct: `10.2132/personality.24.26`.
+  The availability audit and any retry would follow the printed DOI into the wrong article.
+- `daiku_2021_dirty_dozen`'s wording came out of a **stencil image** (DTDD-J Appendix 2), invisible
+  to `pdftotext` and recovered with `pdfimages -f 11`. Hand-transcribed — worth a spot-check.
+- `dalky_2020_sf36` is the second SF-36 to ship (after `bukurov_2022_sf36`, batch_009) on the
+  source-licence rule: the wording came from the CC BY 4.0 PeerJ deposit's own SPSS labels, and no
+  NC or no-redistribution sentence is quotable for Optum/QualityMetric.
+- `CV_OASIS_ODSIS_PPE_Novak_2020_RSES` does **not** use Rosenberg's 1965 item order — the study's
+  own script reverse-scores 2/5/6/8/9 (the Morris Rosenberg Foundation form), and the live data
+  reproduces that split exactly, 1 of 252 possible subsets. Anyone assuming canonical numbering here
+  ships five items wrong.
+- `dd_rotation` is a figure-stimulus task with no administered prose, but unlike
+  `twod_rotation_mather2023` (held from upload for 100% blank `item_text`) every row carries a real
+  referent — the per-item rotation angle published in diffIRT's `rotation.Rd`.
+- Three tables ship with `language` set and empty `_translated` columns — the documented backfill
+  signal: RSES (Czech), `dalky_2020_sf36` (Arabic), `dass_Thiyagarajan2022` (Malay).
+- No Redivis export quota was spent on ground truth; agents used `irw_table_sets()` throughout, with
+  two deliberate single-table exports (`dahlstrom_2022_scoare` for `item_stats.R`, and its verify
+  script).
+- Merge cleanup was done in Python, deleting the exact 33 filenames just merged and writing the
+  merge output to a dotfile renamed afterwards — so the `verification_*.csv` glob trap could not
+  fire. Recommended over the shell loop that near-missed in batch_024.
+
+**CAP REACHED.** batch_025 is the cap raised in 484725d. The next firing will hit the
+"batch_025 already exists" stop condition in Step 0 and stand down. 1,086 tables remain
+pending; raise the cap to continue.

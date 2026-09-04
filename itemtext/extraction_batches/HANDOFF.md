@@ -79,13 +79,17 @@ Read the sequence rather than assuming the last state:
      go/no-go; at ~1,165 pending that is ~98 rounds. Any cadence faster than "when someone is
      ready to triage" grows an unreviewed branch, and the further it drifts from `main` the more
      likely the pre-round merge conflicts — which stops the queue outright.
-   - **Cost, measured.** batch_019 (a *short* round; four agents were 429'd): 670K output, 2.3M
-     cache write, 49.4M cache read across orchestrator + 12 subagents ≈ **$56** at Opus 5 list
-     rates. A clean round is $60–70; the queue is **$5.5–7k**. Hourly would be ~$1,340/day.
-     Nothing should spend that on a timer. Note this is currently subscription usage, not metered
-     API spend — an `ANTHROPIC_API_KEY` in CI would convert it into real per-fire dollars, and a
-     `CLAUDE_CODE_OAUTH_TOKEN` would keep the exact rate limits that killed 8/12 agents in
-     batch_018 and 4/12 in batch_019, unattended.
+   - **Spend, measured — in tokens.** Four complete rounds (2026-09-04, orchestrator + 12
+     subagents summed from the jsonl under `~/.claude/projects/`): **570–670K output, 2.0–2.5M
+     cache write, 42–54M cache read** per round. Cache reads dominate and the subagents are
+     85–94% of them, so the orchestrator transcript alone understates a round about tenfold. At
+     ~98 rounds the queue is **~4–5 billion cache-read tokens**; hourly would be ~1.2B a day.
+     Nothing should spend that on a timer. **Quoted in tokens deliberately:** this is
+     subscription usage, nothing in the transcripts records a charge, and the dollar figures this
+     line used to carry were tokens × list rates rather than an invoice. What a round really
+     consumes here is rate-limit headroom — an `ANTHROPIC_API_KEY` in CI would convert it into
+     metered per-fire spend, and a `CLAUDE_CODE_OAUTH_TOKEN` would keep the exact rate limits that
+     killed 8/12 agents in batch_018 and 4/12 in batch_019, unattended.
    - **A datacenter IP is the wrong place for this work.** The round's expensive step is fetching
      publisher, OSF, Dataverse, Europe PMC and CRAN sources. A Harvard Dataverse AWS WAF challenge
      already blocked three tables from *this* laptop. From Azure runner space it gets worse — and
