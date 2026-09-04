@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alan_2018_teacher_modern_teaching",
+  "shard": "w4"
+ },
+ {
+  "table": "babaei_2023_oral_kap",
+  "shard": "w4"
+ },
+ {
+  "table": "celik_2026_bpns",
+  "shard": "w5"
+ },
+ {
+  "table": "conner_2017_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "estevezlopez_2016_panas",
+  "shard": "w2"
+ },
+ {
+  "table": "gao2025_attachment_avoidance",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_eps_s11",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_prs_gray_wilson",
+  "shard": "w4"
+ },
+ {
+  "table": "gomez_2022_qcae",
+  "shard": "w3"
+ },
+ {
+  "table": "hoorani_2022_sp",
+  "shard": "w3"
+ },
+ {
+  "table": "khulwa_2025_engagement",
+  "shard": "w5"
+ },
+ {
+  "table": "kotsou_2016_scs",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2024_bdyz",
+  "shard": "w4"
+ },
+ {
+  "table": "malik_2018_social_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "mede_2025_clim_government",
+  "shard": "w4"
+ },
+ {
+  "table": "nam_2024_access",
+  "shard": "w3"
+ },
+ {
+  "table": "nordhoff_2021_motive",
+  "shard": "w4"
+ },
+ {
+  "table": "pavic_2022_healthcare_trust",
+  "shard": "w3"
+ },
+ {
+  "table": "powell_2018_affect",
+  "shard": "w4"
+ },
+ {
+  "table": "robbins_2019_has_belief",
+  "shard": "w3"
+ },
+ {
+  "table": "silva_2023_ecohis",
+  "shard": "w4"
+ },
+ {
+  "table": "sumner_2022_ftdss",
+  "shard": "w4"
+ },
+ {
+  "table": "uffler_2017_lecture_seating",
+  "shard": "w3"
+ },
+ {
+  "table": "wu2021_resilience",
+  "shard": "w2"
+ },
+ {
+  "table": "zeng_2026_gai_self_efficacy",
+  "shard": "w3"
+ }
+]

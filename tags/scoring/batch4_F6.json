@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alloubani_2021_stai_state",
+  "shard": "w4"
+ },
+ {
+  "table": "busch_2023_stigma",
+  "shard": "w4"
+ },
+ {
+  "table": "chen2026_sa",
+  "shard": "w2"
+ },
+ {
+  "table": "dominguez_2018_itl",
+  "shard": "w4"
+ },
+ {
+  "table": "forrest_2021_psych_stress_child",
+  "shard": "w4"
+ },
+ {
+  "table": "gao_2022_pss10",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_pas_ipip_scales",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_sdv_views",
+  "shard": "w4"
+ },
+ {
+  "table": "he_2019_flipped_classroom_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "jo_2023_cfs",
+  "shard": "w4"
+ },
+ {
+  "table": "kitayama_2022_hweat_retest",
+  "shard": "w4"
+ },
+ {
+  "table": "kushnir2017_bfi",
+  "shard": "w2"
+ },
+ {
+  "table": "lozano_2018_cognition",
+  "shard": "w5"
+ },
+ {
+  "table": "martinezsoto_2024_spiritual_leadership",
+  "shard": "w3"
+ },
+ {
+  "table": "meloni_2015_child_ia_frequency",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_misfit_academic_performance",
+  "shard": "w5"
+ },
+ {
+  "table": "odachi_2022_hads",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_nrm_desc_ident",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2024_eq5d",
+  "shard": "w4"
+ },
+ {
+  "table": "sandhu_2024_pmo_q26",
+  "shard": "w3"
+ },
+ {
+  "table": "soderberg_2024_family_support",
+  "shard": "w5"
+ },
+ {
+  "table": "sun_2026_eap_methods",
+  "shard": "w3"
+ },
+ {
+  "table": "weida_2020_financial_security",
+  "shard": "w3"
+ },
+ {
+  "table": "yang_2025_intercultural_contact",
+  "shard": "w3"
+ },
+ {
+  "table": "zhu_2024_pyd",
+  "shard": "w3"
+ }
+]
