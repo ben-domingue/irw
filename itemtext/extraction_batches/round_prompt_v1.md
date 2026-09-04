@@ -4,7 +4,7 @@ You are firing as a recurring cron round of the IRW item-text batch-extraction p
 stateless firing — you have no memory of prior rounds. Everything you need is either in this prompt
 or on disk. Follow this protocol exactly, once, then stop (do not loop internally).
 
-Working directory: /home/ben/irw-queue/itemtext/ — cd there first. Read
+Working directory: /home/ben/irw-queue-runner/itemtext/ — cd there first. Read
 itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 
 ## Step 0 — Stop conditions (check BEFORE any extraction work)
@@ -12,7 +12,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_018 already exists (round cap reached)
+- itemtables/batch_020 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -38,9 +38,14 @@ flight. None of the three stop conditions above covered it, and nothing in the
 protocol would have prevented two orchestrators from rewriting queue_state.csv and
 globbing each other's sidecars. It stood down only because a human was watching.
 
-To self-cancel: call CronList, find the job whose prompt contains "ITEMTEXT_BATCH_ROUND_V1", call
-CronDelete on its id, append one line to extraction_batches/round_log.md saying which stop
-condition fired and when, then stop. Do nothing else.
+To self-cancel: append one line to extraction_batches/round_log.md saying which stop condition
+fired and when, then stop. Do nothing else.
+
+You are launched by extraction_batches/round_cron.sh, which checks these same conditions in bash
+before it ever launches you -- so reaching this point at all means something changed between its
+check and yours. There is no cron job for you to delete: do NOT call CronList or CronDelete (they
+do not exist in a headless run), and do NOT edit the crontab. Stopping is sufficient; the wrapper
+will decline to start the next round for the same reason.
 
 ## Step 1 — Claim this round's tables
 
@@ -100,7 +105,7 @@ tables belong to another agent and must not be touched. Two agents independently
 convention from the same file is useful corroboration; two agents writing the same files is a race.
 Each subagent prompt must tell it to:
 
-- cd to /home/ben/irw-queue/itemtext/ and read
+- cd to /home/ben/irw-queue-runner/itemtext/ and read
   .claude/skills/irw-auto-itemtext/SKILL.md in full (plus references/itemtext_standard.md) before
   doing anything, and follow it precisely.
 - Process its ONE assigned table via SKILL.md Steps 2-6:
@@ -288,7 +293,7 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_018, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_020, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

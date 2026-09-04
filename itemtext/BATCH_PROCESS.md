@@ -112,7 +112,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_018 already exists (round cap reached)
+- itemtables/batch_020 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -211,6 +211,12 @@ Each subagent prompt must tell it to:
   (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
+- **Check the wording's rights before transcribing it** — see the "Rights" section of
+  references/itemtext_standard.md (ruled on #1891, 2026-09-04). If the rights holder's own terms
+  state a non-commercial restriction on the item text, write NO CSV, record the table `blocked`,
+  and quote the clause. It fires on a stated restriction only, never on an inference that a scale
+  is copyrighted or reproduced without an explicit grant. Note that a table's dictionary `License`
+  describes the RESPONSE data and can differ from the wording's licence entirely.
 - **On a block, state the retry test explicitly in notes_<table>.csv and in your report**: would an
   unchanged retry, right now, plausibly produce a different result? Say YES (an unresolved access
   failure -- 403, timeout, quota, source not located, no verdict reached) or NO (a determinate
@@ -388,7 +394,9 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_018, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_020, log "cap reached" in round_log.md and stop.
+  Under round_cron.sh there is no cron job to delete — the wrapper reads the cap out of
+  round_prompt_v1.md itself and declines to launch the next round.
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

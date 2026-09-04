@@ -33,6 +33,11 @@ tags/.caches/
 # files a year. Failures alert via a GitHub issue, which carries the log body.
 metadata/pipeline_logs/version_manifest_*.log
 
+# Hourly round logs from itemtext/extraction_batches/round_cron.sh. Ignored for the
+# same reason as the daily version-manifest logs above: too noisy to track. The
+# weekly pipeline's markdown logs ARE tracked, because there is one a week.
+itemtext/extraction_batches/cron_logs/
+
 ##Per-agent fetch caches for concurrent tagging runs (#1704, P5).
 tags/.caches/
 
