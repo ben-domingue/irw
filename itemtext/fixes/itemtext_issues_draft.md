@@ -133,7 +133,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_distrust
   issue: |-
-    Item text and the 7-point agreement ladder (Strongly disagree, Disagree, Slightly disagree, Neutral, Slightly agree, Agree, Strongly agree) are the administered English wording. The 6 misperception items are matched by the form's own B.x.y numbering; the 4 conspiratorial-thinking and 3 anti-expert items by listing order. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text and the 7-point agreement ladder (Strongly disagree, Disagree, Slightly disagree, Neutral, Slightly agree, Agree, Strongly agree) are the administered English wording. The 6 misperception items are matched by the form's own B.x.y numbering; the 4 conspiratorial-thinking and 3 anti-expert items by listing order. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_dtl` (batch_022)
@@ -144,7 +144,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_dtl
   issue: |-
-    Item text and both ladders are the administered English wording. The table pools two different scales: the 6 resilience items run 1-7 on an agreement ladder, and the 5 uncertainty items run 1-5 on a 'characteristic of me' ladder, so resp is not comparable across the two blocks -- read section_id and option_text rather than assuming one scale. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text and both ladders are the administered English wording. The table pools two different scales: the 6 resilience items run 1-7 on an agreement ladder, and the 5 uncertainty items run 1-5 on a 'characteristic of me' ladder, so resp is not comparable across the two blocks -- read section_id and option_text rather than assuming one scale. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_identity` (batch_022)
@@ -155,7 +155,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_identity
   issue: |-
-    Item text is the administered English wording. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is therefore the MIDDLE of the scale, not its bottom. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text is the administered English wording. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is therefore the MIDDLE of the scale, not its bottom. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_moral` (batch_022)
@@ -166,7 +166,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_moral
   issue: |-
-    Item text is the administered English wording. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is the MIDDLE of the scale, not its bottom. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text is the administered English wording. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is the MIDDLE of the scale, not its bottom. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_sscd` (batch_022)
@@ -177,7 +177,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_sscd
   issue: |-
-    Item text and ladders are the administered English wording; the compliance items are past tense as administered. item_family separates compliance (1) from injunctive norms (2) and descriptive norms (3), and the three blocks use different ladders, so resp is not comparable across them. The norm ladders label only their ends, so their intermediate positions carry no option_text. Item 7 of each block is reverse-worded ('Met with people outside of your household for non-essential reasons') and runs against the other seven. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text and ladders are the administered English wording; the compliance items are past tense as administered. item_family separates compliance (1) from injunctive norms (2) and descriptive norms (3), and the three blocks use different ladders, so resp is not comparable across them. The norm ladders label only their ends, so their intermediate positions carry no option_text. Item 7 of each block is reverse-worded ('Met with people outside of your household for non-essential reasons') and runs against the other seven. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_stress` (batch_022)
@@ -188,7 +188,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_stress
   issue: |-
-    Item text and ladders are the administered English wording. The table pools three blocks with two ladders: the Perceived Stress Scale on 0 = Never to 4 = Very often, and both stressor blocks on 0 = Not at all concerned to 4 = Very concerned. Two secondary-stressor items, indices 8 and 9, carry only 6 and 8 responses against about 9,700 for the rest of their block, which is a defect in the source's display logic rather than in the item text. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text and ladders are the administered English wording. The table pools three blocks with two ladders: the Perceived Stress Scale on 0 = Never to 4 = Very often, and both stressor blocks on 0 = Not at all concerned to 4 = Very concerned. Two secondary-stressor items, indices 8 and 9, carry only 6 and 8 responses against about 9,700 for the rest of their block, which is a defect in the source's display logic rather than in the item text. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_vaccine` (batch_022)
@@ -199,7 +199,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_vaccine
   issue: |-
-    Item text and ladders are the administered English wording, including the form's typo 'how wiling you were' in the willingness item. The table pools two scales: willingness on resp 0-4, where 0 is the Neutral midpoint, 1 = 'Not willing at all' and 4 = 'Very willing' with two unlabelled positions between; and 6 attitude items on resp 0-6, where 0 is the Neutral midpoint and 1-6 run Strongly disagree to Strongly agree. The attitude codes are numbered 2-6 and 9, so three of the instrument's attitude positions are absent from the data. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Item text and ladders are the administered English wording, including the form's typo 'how wiling you were' in the willingness item. The table pools two scales: willingness on resp 0-4, where 0 is the Neutral midpoint, 1 = 'Not willing at all' and 4 = 'Very willing' with two unlabelled positions between; and 6 attitude items on resp 0-6, where 0 is the Neutral midpoint and 1-6 run Strongly disagree to Strongly agree. The attitude codes are numbered 2-6 and 9, so three of the instrument's attitude positions are absent from the data. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_emotion` (batch_022)
@@ -221,7 +221,7 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_support
   issue: |-
-    Three perceived-social-support items. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is the MIDDLE of the scale, not its bottom. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Three perceived-social-support items. resp 0-6 is a 7-point agreement scale whose midpoint the cleaned data recodes to 0: 0 = Neutral, then 1 = Strongly disagree through 6 = Strongly agree. Note that 0 is the MIDDLE of the scale, not its bottom. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
 ## `ecps_sahm_2024_trust` (batch_022)
@@ -232,6 +232,6 @@ Source batches: itemtables/batch_022
 ```yaml
 - table: ecps_sahm_2024_trust
   issue: |-
-    Seven institutional-trust items. resp 0-10 is a percentage slider in ten-point steps: 0 = 'No trust', then 10% at resp 1 through 90% at resp 9. The form's label for the top position is not recoverable from the deposited PDF, so resp 10 carries no option_text, though the arithmetic of the scale makes it 100%. Note on attribution: the IRW dictionary describes this table as a subscale of Sahm et al.'s German Emotion Regulation Questionnaire validation. It is not — the responses are the COVIDiSTRESS Global Survey Round II, whose cleaned data file is hosted inside that study's OSF project, which is how the two were conflated.
+    Seven institutional-trust items. resp 0-10 is a percentage slider in ten-point steps: 0 = 'No trust', then 10% at resp 1 through 90% at resp 9. The form's label for the top position is not recoverable from the deposited PDF, so resp 10 carries no option_text, though the arithmetic of the scale makes it 100%. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
 
