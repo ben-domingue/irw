@@ -28,8 +28,8 @@ value for value (see below). Hence py->ph (Physical Anhedonia) and pb->bi
 
 Two tables ship, one per sample:
 
-  christensen_2018_wsssf_2171   2,171 respondents, with cov_sex and cov_ethnic
-  christensen_2018_wsssf_5831   5,831 respondents, no covariates
+  christensen_2018_wsssf_2171   2,171 respondents, cov_sex and cov_ethnic
+  christensen_2018_wsssf_5831   5,831 respondents, cov_sex and cov_ethnic
 
 **The 2,171 sample's covariates are attached by row position, and that is
 safe here but only because it is checked.** `WSS-SF_2171.csv` ships the 60
@@ -48,19 +48,39 @@ silently pairing respondents with other people's demographics.
 `subjnumb` is used as `id` and is verified unique (2,171 distinct, no nulls).
 `sex` and `ethnic` are numeric codes in the CSV; the codings are recovered
 from the value labels in the matching `.sav` (sex 1=male 2=female; ethnic
-1=caucasian 2=Afr-Am 3=Hispanic 4=Asian 5=Nat Am 6=other) and applied, so the
-shipped covariates are strings rather than bare integers. 6 respondents have
-no sex and 79 no ethnic; those stay null.
+1=caucasian 2=Afr-Am 3=Hispanic 4=Asian 5=Nat Am 6=other -- the two `.sav`
+files agree on both codings) and applied, so the shipped covariates are
+strings rather than bare integers. In the 2,171 sample 6 respondents have no
+sex and 79 no ethnic; those stay null. The 5,831 sample's demographics are
+complete, but note that its `cov_ethnic` takes only two of the six values --
+`share_6137n_WSS-SF.csv` codes every respondent 1 or 2 (4,529 caucasian,
+1,608 Afr-Am). That is the source's own distribution, not a dropped mapping.
 
-The 5,831 sample has no identifiers in its file either, so `id` is the row
-index. Note for anyone revisiting this: `WSS-SF_5831.csv` is a permutation of
-the 5,831 complete cases of `share_6137n_WSS-SF.csv` (same 60 items, identical
-multiset of response patterns, exact count match), and that companion file
-*does* carry sex and ethnic. Covariates are not recovered here because the
-permutation cannot be inverted -- 837 of the rows share a response pattern
-with at least one other row, so a content-based join is ambiguous for them.
-Rebuilding this table from `share_6137n_WSS-SF.csv` directly would sidestep
-that and gain both covariates; it would also change the row order.
+**The 5,831 table is built from `share_6137n_WSS-SF.csv`, not from the
+`WSS-SF_5831.csv` the paper's own analysis script reads.** The two hold the
+same respondents: `WSS-SF_5831.csv` is a permutation of the 5,831 complete
+cases of the 6,137-row file (same 60 items, exact count match, identical
+multiset of response patterns -- `_assert_same_sample` re-checks this on every
+build). Only the larger file carries `sex` and `ethnic`, so building from it
+is what gives this table covariates at all. The reason the substitution is
+necessary rather than merely convenient: the permutation cannot be inverted,
+because 837 of the 5,831 rows share a response pattern with at least one other
+row, so joining `WSS-SF_5831.csv` back to its demographics on content would be
+ambiguous for those rows. Reading the source file directly avoids the join
+entirely -- each respondent's items and demographics are on one row. The cost
+is that row order, and therefore the synthetic `id` each respondent gets,
+differs from `WSS-SF_5831.csv`; nothing downstream depends on that order.
+
+Neither file carries a subject number for this sample, so `id` is the row
+index over the complete cases. `share_6137n_WSS-SF.csv` also has `intervwd`
+("interview430", 1=interviewed 2=not) and `questd` ("questionnaire780"), flags
+for two follow-up subsamples; they are person-level and could be shipped as
+covariates, but are left out here as beyond what the tables are for.
+
+The 306 respondents dropped as incomplete are dropped to keep this table the
+5,831-person sample the paper analyzes. A long-format table tolerates missing
+responses, so all 6,137 could be shipped instead if the larger sample is ever
+wanted; that would be a different table, not a fix to this one.
 
 Subscale membership is an attribute of the item, not of the person, so it
 ships as `itemcov_subscale` (datastandard.md, "Item-level covariates").
@@ -73,13 +93,16 @@ WSS-SF development paper (Winterstein et al.) and the original Chapman scales.
 Input files, from https://osf.io/c6rqy/ (folder `Data`):
     WSS-SF_2171.csv           https://osf.io/download/xg3hs/
     share_2171n_WSS-SF.csv    https://osf.io/download/r2xdf/
+    share_6137n_WSS-SF.csv    https://osf.io/download/gn7dm/
+    WSS-SF_5831.csv           https://osf.io/download/xw47t/   (cross-check only)
     share_2171n_WSS-SF.sav    https://osf.io/download/27s93/   (value labels only)
-    WSS-SF_5831.csv           https://osf.io/download/xw47t/
+    share_6137n_WSS-SF.sav    https://osf.io/download/u4jt6/   (value labels only)
 Place them in `data/christensen_2018_wsssf_raw/` before running.
 """
 
 from __future__ import annotations
 
+from collections import Counter
 from pathlib import Path
 
 import pandas as pd
@@ -148,6 +171,24 @@ def _assert_row_alignment(items: pd.DataFrame, companion: pd.DataFrame) -> None:
             )
 
 
+def _assert_same_sample(complete: pd.DataFrame) -> None:
+    """Prove the complete cases of the 6,137 file are the 5,831 the paper used.
+
+    The two files list the same respondents in different orders, so they are
+    compared as multisets of 60-item response patterns rather than row by row.
+    Equality means the substitution changes only the row order and the
+    covariates that come with it, not which people are in the table.
+    """
+    published = pd.read_csv(ARCHIVE / "WSS-SF_5831.csv")[ITEM_ORDER].astype(int)
+    ours = complete[ITEM_ORDER].astype(int)
+    if Counter(map(tuple, ours.values)) != Counter(map(tuple, published.values)):
+        raise RuntimeError(
+            "the complete cases of share_6137n_WSS-SF.csv are no longer the "
+            "same respondents as WSS-SF_5831.csv; do not substitute one for "
+            "the other."
+        )
+
+
 def _report(path: Path, long: pd.DataFrame) -> None:
     cov = [c for c in long.columns if c.startswith("cov_")]
     extra = "".join(f", {c}={sorted(long[c].dropna().unique())}" for c in cov)
@@ -157,10 +198,24 @@ def _report(path: Path, long: pd.DataFrame) -> None:
 
 
 def build_5831() -> None:
-    df = pd.read_csv(ARCHIVE / "WSS-SF_5831.csv")
+    src = pd.read_csv(ARCHIVE / "share_6137n_WSS-SF.csv",
+                      encoding="utf-8-sig", na_values=[" ", ""])
+    src.columns = [c.lower() for c in src.columns]
+    df = src[src[ITEM_ORDER].notna().all(axis=1)].reset_index(drop=True)
+    if len(df) != 5831:
+        raise RuntimeError(
+            f"expected 5,831 complete cases to match WSS-SF_5831.csv, got {len(df)}")
+    _assert_same_sample(df)
+
     df["id"] = [f"s5831_{i:04d}" for i in range(1, len(df) + 1)]
-    long = _melt_items(df, ["id"])
-    long = long[["id", "item", "resp", "itemcov_subscale"]]
+    df["cov_sex"] = df["sex"].map(SEX)
+    df["cov_ethnic"] = df["ethnic"].map(ETHNIC)
+    assert df[["cov_sex", "cov_ethnic"]].notna().all().all(), \
+        "complete cases were expected to have complete demographics"
+
+    long = _melt_items(df, ["id", "cov_sex", "cov_ethnic"])
+    long = long[["id", "item", "resp", "cov_sex", "cov_ethnic",
+                 "itemcov_subscale"]]
     long = long.sort_values(["id", "item"], kind="stable").reset_index(drop=True)
     path = OUT / "christensen_2018_wsssf_5831.csv"
     long.to_csv(path, index=False)
