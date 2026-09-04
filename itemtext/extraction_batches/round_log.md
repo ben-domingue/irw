@@ -2661,3 +2661,35 @@ this pass has found), #1930 (the two openICPSR blocks and what would actually cl
 
 **Issues page: drafted, NOT applied** — 21 entries covering both staged batches, going up when the
 tables ship.
+
+### batches 020 and 021 — uploaded 2026-09-04
+
+Ben ran `red_up` on the 21 staged tables. Verified before stamping, because a stamp that runs ahead
+of the upload is worse than none and the read token cannot see drafts: `python3 -m red_up.drafts
+--dataset irw_text --verbose` lists all 21 as `added` in the `irw_text` draft (34 pending in total —
+the other 13 are batch_019's and the carver pilots, still unreleased, 1.6d since v15.1 and inside the
+one-week window).
+
+**Stamped `uploaded=2026-09-04`** on the 21 shipped tables in `batch_020/provenance.csv`,
+`batch_021/provenance.csv` and `mapping_verification.csv`. The three blocked tables
+(`choy_2022_intent_career`, `cognitive_load_klimova_2023_pwi`, `_stomp`) were left alone.
+
+**Watch the unset value — the two trackers disagree.** `provenance.csv` leaves `uploaded` empty when
+a table has not shipped, but batch_020's rows in `mapping_verification.csv` use the literal string
+`no` (batch_019's use empty). A stamping pass that tests `if not uploaded.strip()` silently skips
+every `no` row and then reports success, because the same test says they are already stamped. That
+happened here and was caught only by counting rows changed against rows expected — 10 changed where
+21 were due. Treat `''` and `no` as unset.
+
+**Deleted the 21 uploaded `__items.csv`** from both batch directories. The sidecars stay, so each
+folder still documents every table the batch claimed: `notes.csv`, `provenance.csv`,
+`verification_merged.csv`, `audit_report.csv` and the re-runnable `verify_<table>.R` scripts —
+including for the blocked tables, whose scripts record the structure a future attempt needs.
+
+**Still not released.** `red_up` only ever writes the draft; publishing is a human action, and until
+the version is released nothing uploaded is visible to `irw_fetch()`, `irw_itemtext()` or the site.
+The 21 issues-page entries are already merged to `datapages/irw` main (PR #127) and describe tables
+the corpus cannot yet serve — and `quarto_publish.yaml` is `workflow_dispatch` only, so the live page
+has not rebuilt either. Three things are now waiting on a human: release the `irw_text` draft version,
+trigger the publish workflow, and clear `itemtables/clean/`, which is Ben's to empty, not the
+pipeline's.
