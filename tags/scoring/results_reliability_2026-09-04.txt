@@ -1,0 +1,53 @@
+# Tagger reliability, 2026-09-04 (#1850). seed=1850, 60 tables, five blind agents, Sonnet.
+# Same pipeline, run again, end to end (fresh caches). Reliability, NOT validity:
+# these tables have no human gold, so nothing here says a value is right.
+
+60 tables re-tagged blind and compared against the first run
+
+column                  both answered    agreed   commit agree
+Primary Language(s)                49     93.9%          90.0%
+Item format                        49    100.0%          85.0%
+Measurement tool                   52    100.0%          86.7%
+Sample                             41     82.9%          83.3%
+
+where they disagreed, per column:
+
+  Primary Language(s) -- 3
+     dejesus_2017_lequesne
+        run 1: 'per'
+        run 2: 'por'
+     ganbat_2022_pollution_symptoms
+        run 1: 'mon'
+        run 2: 'mon, eng'
+     huang_2016_neo_neuroticism
+        run 1: 'eng'
+        run 2: 'eng, fre'
+
+  Sample -- 7
+     zeng_2026_gai_self_efficacy
+        run 1: 'Educational, Internet-based (Mturkers, etc)'
+        run 2: 'Educational, General/non-specific'
+     valdivia_2023_oms
+        run 1: 'Educational, Clinical, Workplace'
+        run 2: 'Workplace, Targeted/specific'
+     shi_2025_maas
+        run 1: 'Educational, Internet-based (Mturkers, etc)'
+        run 2: 'Educational, Program-based, General/non-specific'
+     villarrealzegarra2026_trif
+        run 1: 'Workplace, Program-based'
+        run 2: 'Workplace, Targeted/specific'
+     wurm_2016_mdi
+        run 1: 'Workplace, Internet-based (Mturkers, etc)'
+        run 2: 'Workplace, Representative'
+     nguyen_2026_sdt_perceived_performance
+        run 1: 'Educational, Internet-based (Mturkers, etc)'
+        run 2: 'Educational, General/non-specific'
+     liu_2018_gse
+        run 1: 'Internet-based (Mturkers, etc)'
+        run 2: 'Workplace, General/non-specific'
+
+asymmetry -- who committed when the other did not:
+  Primary Language(s)   run 1 only   5   run 2 only   1
+  Item format           run 1 only   1   run 2 only   8
+  Measurement tool      run 1 only   1   run 2 only   7
+  Sample                run 1 only   0   run 2 only  11
