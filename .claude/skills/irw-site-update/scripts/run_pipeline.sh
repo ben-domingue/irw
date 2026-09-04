@@ -160,6 +160,18 @@ for stage in "${stages[@]}"; do
   # prevent) -- confirmed happening in practice 2026-07-28: stage 05 failed
   # and stages 02/03's real changes to biblio.csv/tags.csv were never
   # diffed or reported.
+  # Canonicalise before diffing. diff_csv.py joins on the key and never cared
+  # about row order, but git does: the outputs are committed now, and the
+  # stages emit rows in whatever order Redivis and the Sheets returned them.
+  # Without this a run that changes nothing still rewrites most of a file --
+  # the first full workflow run produced a 30,668-line diff on biblio.csv in
+  # which not one existing row had a changed field.
+  for f in ${STAGE_OUTPUTS[$stage]:-}; do
+    [[ -z "$f" ]] && continue
+    python3 "$SCRIPT_DIR/canonicalize_csv.py" "$METADATA_DIR/$f" \
+      --key "${DIFF_KEY[$f]:-table}"
+  done
+
   echo ""
   echo "-- Stage $stage diff --"
   for f in ${STAGE_OUTPUTS[$stage]:-}; do
