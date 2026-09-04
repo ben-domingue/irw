@@ -468,6 +468,52 @@ them both scripts read live Redivis data, which a table in this pipeline does
 not have yet. A FAIL is disqualifying — fix it or ship the response table
 alone. Explain every WARN rather than ignoring it.
 
+### Record how the mapping was checked — REQUIRED (ruled 2026-09-03)
+
+The three gates above compare **sets**. If `item_text` for items 3 and 5 were swapped, the
+item set, the resp set, the row counts and the whole audit still pass, and the table ships a
+plausible, confidently-wrong mapping that nothing downstream will ever catch. That is what
+`irw-auto-itemtext`'s **Step 5b** exists for, and until 2026-09-03 this pipeline ran none of
+it: 30 tables shipped with no row in `itemtext/mapping_verification.csv`, the permanent
+"one row per table, ever" record of how each mapping was verified.
+
+**For every table you ship item text for**, append a row to
+`itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`):
+
+- **`mapping_basis=data_labels`** — a `NOT_NEEDED` row. The source file's own variable labels
+  tie code to text, so there is nothing for a statistical route to add. State in `evidence`
+  WHICH file and which label level did the tying, and how the item codes were derived (core
+  model section 3): `data_labels` describes where the words came from, **not** how the code
+  was assigned, so a positional or script-generated code still deserves a sentence.
+- **anything else** — do Step 5b properly and write `itemtables/`-style
+  `verify_<table>.R` beside the batch's output, from
+  `itemtext/.claude/skills/irw-auto-itemtext/references/verify_template.R`. It must fetch its
+  own data, print the numbers it compares, verify the MAPPING rather than the plumbing, and end
+  with exactly `VERDICT: PASS` or `VERDICT: FAIL`. Then run `lint_verification.R` over the
+  result. `NO_ROUTE` is a legitimate outcome — record it rather than leaving a table looking
+  checked. `VERIFIED` means the route distinguishes every item from every other item; pinning a
+  subscale or a polarity class is `PARTIAL`.
+
+**You are in the best position of anyone to do this**, which is the reason the requirement
+lands here rather than being left to a later sweep: you wrote `data/<table>.py`, so the item-code
+derivation is *known* to you rather than reconstructed. A later pass has to re-find the paper
+from a dictionary DOI and reverse-engineer a script that is frequently not even named after the
+table (`neurips_2020` is built by `data/neurlps_2020.R`; one script often writes a dozen tables).
+
+**Also run the two gates added on 2026-09-02**, both cheap, both added because of defects found
+in already-published tables:
+
+```bash
+irw-validate automated_finding/itemtext_output/*__items.csv
+Rscript itemtext/check_provenance.R <path-to-irw_site-main>/itemtext_issues.qmd
+```
+
+`irw-validate` catches `dup_item_resp` (a doubled upload; four live tables carried it, #1816) and
+`resp_ambiguous` (one `resp` value carrying two opposite scale directions, #1827).
+`check_provenance.R` enforces the provenance vocabulary and reports any table shipping
+IRW-generated content — a machine translation, or a `key_source=derived_from_responses` answer
+key — with no entry on the public issues page.
+
 ### Decide whether the table needs an issues-page entry
 
 The public issues page (`itemtext_issues.qmd` in the datapages/irw repo, checked

@@ -1851,3 +1851,62 @@ withholds a verdict when the page's state is unknown — was right to refuse one
 only, so `irw_list_itemtext_tables()` still reports 578. Verified before stamping that no table
 doubled: all six present, marked `added`, every row count matching its source CSV exactly
 (135/32/70/232/110/313 = 892 rows).
+
+### Step 3.5 verification gap closed — ruled and backfilled 2026-09-03
+
+**Ruled: yes, forward + backfill.** `automated_finding` Step 3.5 had shipped 30 tables with no row
+in `itemtext/mapping_verification.csv` — the permanent "one row per table, ever" record of how a
+mapping was checked. It ran the three gates that compare a table against its SOURCE and none of the
+four that check the mapping's own claim, the data standard, or the public disclosure record. Its
+SKILL.md did not mention the verification layer at all, so this was a wiring gap rather than an
+argued exemption.
+
+**Forward.** Step 3.5 now requires a `mapping_verification.csv` row for every table it ships —
+`NOT_NEEDED` for `data_labels`, real Step 5b evidence plus `verify_<table>.R` for anything else —
+and runs `irw-validate` and `check_provenance.R`. The requirement is stated where it is because
+Step 3.5 is *better placed than anyone* to satisfy it: it wrote `data/<table>.py`, so the item-code
+derivation is known rather than reconstructed. A later pass has to re-find the paper from a
+dictionary DOI and reverse-engineer a script that is frequently not named after the table
+(`neurips_2020` is built by `data/neurlps_2020.R`; one script often writes a dozen tables).
+
+**Backfill: all 30 now have a row.** Tracker 151 -> 181.
+
+- **25 `data_labels`** got `NOT_NEEDED` rows naming the file and label level that tied code to text.
+- **5 non-`data_labels`** got real evidence, one agent each. **Every one came back `PARTIAL`, and
+  every one found the recorded `mapping_basis` overstated.**
+
+**The finding: `paper_explicit` was wrong on all five.** The provenance note argued that because the
+script renames the deposit's columns onto the codes the paper prints, the mapping is "explicit
+rather than order-inferred". That is invalid — renaming onto explicit codes does not make the
+correspondence explicit. Five independent checks reached it separately:
+
+- The three `xue_2025_*` tables: the paper labels stems `(AS1)`..`(AS20)` but the deposit columns
+  are `Q9_1..Q9_20`, and the script renames positionally. The paper's codes are not the data's codes.
+- The two `wang_2024_*` tables: the appendices print items numbered 1-15 (or 1-13) continuously
+  under block headers, so the block PREFIX is a label match but the numeric SUFFIX is print order.
+  The string `LSE` occurs exactly once in the S2 appendix — in the header.
+
+Corrected to `paper_order` in both `itemtext_provenance.csv` and the tracker, with the reasoning
+recorded. Step 5b's "explicit code labels in the paper" exemption never applied, so verification was
+genuinely owed on all five.
+
+**No mapping defect was found.** Item wording is verbatim against source on every table, and the
+cross-construct risk — three `xue` tables sharing one S3 "Constructs and items" file, where a
+block-boundary slip would put one construct's wording on another's codes — was ruled out from both
+ends. `xue_2025_academic_stress`: live alpha 0.9169 / KMO 0.9324 against published 0.917/0.932, with
+off-by-one windows giving 0.9134 and 0.9105, neither of which rounds to 0.917.
+`xue_2025_coping_style`: subscale totals 34.851/6.070 and 18.216/4.755 against published
+34.852/6.070 and 18.216/4.755, largest deviation 0.001, neighbouring boundaries nowhere close.
+`xue_2025_academic_procrastination`: alpha 0.871 vs published 0.871 and Table 3 subgroup totals
+reproducing exactly.
+
+**What none of them could establish: within-block order.** Every route available is invariant to
+permuting items inside a subscale — 5,184 orderings survive on `wang_2024_self_efficacy_sources`.
+The papers publish only scale-level statistics, so no route closes it. `PARTIAL` is the honest
+status, and three agents explicitly reported failed routes as failures rather than as support.
+
+`lint_verification.R` over the whole tracker: **181 rows, 0 ERROR.**
+
+One correction to my own dispatch: I told all five agents `text_source=study_materials`. That is
+true of the two `wang_2024_*` rows only; the three `xue_2025_*` are `translated_substitute`. An
+agent caught it and worked from the file rather than the brief.
