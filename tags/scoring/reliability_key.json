@@ -1,0 +1,602 @@
+[
+ {
+  "table": "skalka2025_ai_literacy",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "pol",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "zeng_2026_gai_self_efficacy",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational, Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "sun_2026_tiktok_travel",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "zhang_2024_gift_intention",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "mede_2025_willvul",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "allen_2025_upps",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "eldor_2022_realistic_threat",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "nor",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "miedema_2023_ecs40",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "ben",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "kang_2015_facial_preference",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "kor",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Test",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "sandhu_2024_pmo_q18",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "nguyen_2026_autonomy_student_ownership",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "valdivia_2023_oms",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational, Clinical, Workplace"
+  }
+ },
+ {
+  "table": "peters_2025_ciberlite",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based"
+  }
+ },
+ {
+  "table": "pedroso_2021_ifsq_pressuring",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "por",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Clinical"
+  }
+ },
+ {
+  "table": "shi_2025_maas",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational, Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "villarrealzegarra2026_trif",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace, Program-based"
+  }
+ },
+ {
+  "table": "nguyen_2026_sdt_academic_motivation",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "alan_2018_teacher_extrinsic_motivation",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "tur",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "horiuchi_2024_rsmsm",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "jpn",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Observational rating",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "qin_2025_tourist_satisfaction",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "galindo_2023_beliefs",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "anh_2026_finbehavior",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "rivero_2022_piccolo_father",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Observational rating",
+   "Sample": "Clinical, Educational"
+  }
+ },
+ {
+  "table": "goldberg_2018_sdv_happy",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "hoai_2026_learning_experience",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "eng,vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "okamura_2018_eol_attitude",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "jpn",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "zubair_2021_psm",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "qiang_2025_red_tape",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "aiquipa_2026_dgs",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "lai_2023_social_adaptability",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "chen2025_peer_support",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "choi_2026_cmsce_2020_1",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "kor",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Test",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "khoa_2023_assurance",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "brederecke_2020_sis",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "ger",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "wurm_2016_mdi",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "ger",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace, Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "dejesus_2017_lequesne",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "per",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "lozano_2018_life_activities",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Clinical"
+  }
+ },
+ {
+  "table": "peters_2025_hw_intensity",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "yandun2026_attention",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Observational rating",
+   "Sample": "Educational, Program-based"
+  }
+ },
+ {
+  "table": "decamp_2022_online_discussion",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "nguyen_2026_sdt_perceived_performance",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational, Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "arora2025_blueq_pedagogical",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Program-based, Workplace"
+  }
+ },
+ {
+  "table": "han_2026_gad7",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Clinical"
+  }
+ },
+ {
+  "table": "soderberg_2024_academic_selfefficacy",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "peters_2025_nrm_desc_ident",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "peng_2024_language_boredom",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "penningroth_2019_pm_concerns",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Constructed Response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "liem_2024_attitude_env",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "vie",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "zubair_2021_political_support",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "avci_2024_guc_gir_yonel",
+  "shard": "w5",
+  "first": {
+   "Primary Language(s)": "tur",
+   "Item format": "",
+   "Measurement tool": "",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "liu_2018_gse",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Internet-based (Mturkers, etc)"
+  }
+ },
+ {
+  "table": "orovou_2021_lec5",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "gre",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Clinical"
+  }
+ },
+ {
+  "table": "allen_2025_bis",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "ganbat_2022_pollution_symptoms",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "mon",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Workplace"
+  }
+ },
+ {
+  "table": "yang_2023_perceived_value",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "huang_2016_neo_neuroticism",
+  "shard": "w3",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "galindo_2023_emotional_intelligence",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "spa",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ },
+ {
+  "table": "qin_2025_perceived_cultural_distance",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "chi",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "selm_2019_climate_knowledge",
+  "shard": "w4",
+  "first": {
+   "Primary Language(s)": "eng",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": ""
+  }
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__inem",
+  "shard": "w2",
+  "first": {
+   "Primary Language(s)": "por",
+   "Item format": "Likert Scale/selected response",
+   "Measurement tool": "Survey/questionnaire",
+   "Sample": "Educational"
+  }
+ }
+]
