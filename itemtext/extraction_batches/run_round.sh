@@ -210,12 +210,38 @@ mkdir -p "$LOG_DIR"
   # So say it out loud. A round that hit a limit is not a round whose blocked and
   # failed counts mean anything, and its batch directory must be read before
   # queue_state.csv is believed.
-  if grep -qiE '(rate.?limit|429|spend (cap|limit)|usage limit)' "$_agent_out"; then
+  # First cut at this grepped the transcript for "rate limit". It fired on
+  # batch_021, whose agent had written "no rate limit, content filter, or
+  # export-quota trip" -- the words appear in the round's own prose whether or not
+  # anything was killed, and a warning that cries wolf gets ignored, which is worse
+  # than no warning. So test the actual error condition instead: a table classified
+  # failed or blocked that nevertheless HAS a __items.csv on disk. That is the
+  # thing the batch_019 rescue was about, it needs no transcript parsing, and it
+  # cannot false-positive on the agent talking about rate limits.
+  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
+  if [[ -n "$batch_dir" ]]; then
+    mismatch=""
+    while IFS=, read -r tbl status batch _rest; do
+      [[ "$status" == "failed" || "$status" == "blocked" ]] || continue
+      [[ "$batch" == "$(basename "$batch_dir")" ]] || continue
+      [[ -f "$batch_dir/${tbl}__items.csv" ]] && mismatch+="  $tbl ($status)"$'\n'
+    done < <(tail -n +2 "$QUEUE")
+    if [[ -n "$mismatch" ]]; then
+      echo
+      echo "WARNING: table(s) classified failed/blocked that DID write a CSV:"
+      printf '%s' "$mismatch"
+      echo "A killed agent's report shows its FIRST message, not its last, so a"
+      echo "finished table can be reported as a failure. Run the Step 4 gates on"
+      echo "these and classify on the gates, not on the report."
+    fi
+  fi
+
+  # Secondary, low-precision: a genuine kill usually leaves an API error string the
+  # agent did not write itself. Kept narrow on purpose.
+  if grep -qE '(rate_limit_error|usage limit reached|Claude AI usage limit)' "$_agent_out"; then
     echo
-    echo "WARNING: the transcript mentions a rate limit / spend cap. Some agents"
-    echo "were probably killed. Before trusting this round's classifications, ls"
-    echo "the batch directory -- a killed agent may have written a complete table"
-    echo "and still been reported as failed. Do not mark those tables 'blocked'."
+    echo "NOTE: an API limit error appears in the transcript. Check the batch"
+    echo "directory before trusting this round's classifications."
   fi
   rm -f "$_agent_out"
 

@@ -194,6 +194,13 @@ Then merge verification_merged.csv into the permanent `itemtext/mapping_verifica
 NOT_NEEDED row for every written table that has no verification row because its mapping_basis is
 data_labels. Every written table must end up with exactly one tracker row.
 
+**Write those NOT_NEEDED rows into BOTH files -- the batch's own verification_merged.csv as well as
+the permanent tracker.** `lint_verification.R` reads the BATCH file, so a NOT_NEEDED row that exists
+only in the permanent tracker still surfaces at Step 4 as "ships a CSV but has no verification row",
+one ERROR per data_labels table. That has now happened in two consecutive rounds -- batch_020 (3
+ERRORs) and batch_021 (4) -- and both times it looked like a real gate failure and was not. Add the
+rows in both places and Step 4's lint comes back clean.
+
 ## Step 4 — Normalize and audit
 
 Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables/batch_<NNN>
