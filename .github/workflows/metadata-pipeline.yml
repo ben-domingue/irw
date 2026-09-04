@@ -1,0 +1,181 @@
+# Weekly run of the IRW metadata pipeline -- Workflows 1 and 2 of
+# .claude/skills/irw-site-update/SKILL.md.
+#
+# Regenerates the metadata CSVs from Redivis and the dictionary Google Sheets,
+# runs the cross-table audit, and opens a pull request with whatever changed.
+#
+# Workflow 3 (upload_meta.py) is deliberately NOT run here, exactly as it was
+# deliberately not run by the cron script this replaces. Nothing in this job
+# touches Redivis publish state. Merging its pull request commits metadata to
+# the repository, not to the warehouse; the upload stays a manual, explicit
+# step you take afterwards, against the CSVs a `git pull` puts back on disk.
+#
+# Why the outputs are committed at all:
+# the product of this job is the DIFF -- what changed since last week -- and a
+# diff needs last week's copy to compare against. Those CSVs used to live only
+# on Ben's laptop, gitignored, which is fine for a job that runs on that laptop
+# and impossible for one that does not: a fresh runner has no "before" and would
+# report everything as new, every week, forever. So git holds the previous copy,
+# and `git diff` is the comparison. See the block in .gitignore.
+#
+# Why this does NOT auto-merge, unlike the version-manifest workflow:
+# there, merging unattended is right because the job only records what has
+# already happened. Here the review IS the product. The pull request diff is the
+# thing to read on Monday -- it replaces a mailed log that was truncated at 60kB
+# -- and merging it is the human signal that the changes look right.
+name: metadata pipeline
+
+on:
+  schedule:
+    # Mondays 13:00 UTC, the slot the crontab entry used in local time.
+    - cron: "0 13 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: metadata-pipeline
+  cancel-in-progress: false
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          r-version: release
+          # Posit's package manager serves Linux binaries, so quanteda and the
+          # tidyverse install in a minute or two instead of compiling.
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          # There is no DESCRIPTION covering metadata/*.R, so the list is
+          # explicit: it is the union of every library() call in the stages
+          # run_pipeline.sh executes, plus audit_tables.R.
+          packages: |
+            any::dplyr
+            any::glue
+            any::gsheet
+            any::httr
+            any::jsonlite
+            any::progress
+            any::purrr
+            any::quanteda
+            any::quanteda.textstats
+            any::readr
+            any::tidyr
+            github::redivis/redivis-r
+
+      - name: Workflow 1 -- generate and diff
+        id: generate
+        env:
+          # run_pipeline.sh prefers an exported token over ~/.redivis_api_token,
+          # which does not exist here. Read-only is all the pipeline needs.
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+          # 02_biblio.R falls back to Claude to generate missing BibTeX. With no
+          # key set it calls readline(), which returns empty non-interactively
+          # and fails confusingly rather than cleanly.
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          set -o pipefail
+          # --no-09 because 09_hero_status.R writes hero_stats.json into the
+          # irw_site sibling repository, which is not checked out here. Hero
+          # stats belong with a site render, not with metadata review.
+          .claude/skills/irw-site-update/scripts/run_pipeline.sh --no-09 2>&1 \
+            | tee pipeline.log
+          echo "rc=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Workflow 2 -- cross-table audit
+        env:
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+        run: |
+          set -o pipefail
+          cd metadata
+          Rscript ../.claude/skills/irw-site-update/scripts/audit_tables.R 2>&1 \
+            | tee -a ../pipeline.log
+
+      - name: Keep the full log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pipeline-log
+          path: pipeline.log
+          retention-days: 90
+
+      - name: Open a pull request for what changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          # Only the tracked outputs. Everything else the run writes -- the
+          # *.diff.csv files above all -- stays ignored on purpose.
+          if git diff --quiet -- metadata/ ; then
+            echo "No metadata changes this week; nothing to review."
+            exit 0
+          fi
+          date="$(date -u +%F)"
+          branch="metadata/pipeline-$date-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add -- metadata/
+          git commit -m "Metadata pipeline: weekly run for $date" \
+                     -m "Automated run of .github/workflows/metadata-pipeline.yml. Workflow 3 (upload_meta.py) not run."
+          git push -u origin "$branch"
+          {
+            echo "Weekly metadata pipeline run for **$date**."
+            echo
+            echo "The diff on this pull request is the review surface: it is what changed"
+            echo "in the metadata since last week. **Nothing here is published.** Merging"
+            echo "commits metadata to the repository, not to the warehouse -- run"
+            echo "\`upload_meta.py\` by hand afterwards, against the CSVs a \`git pull\` puts"
+            echo "back on your disk."
+            echo
+            echo "Stage 09 (hero_stats.json) is not run here; it writes into \`irw_site\`."
+            echo "The full run log is attached to the workflow run as \`pipeline-log\`."
+            echo
+            echo "<details><summary>Run log (tail)</summary>"
+            echo
+            echo '```'
+            tail -c 40000 pipeline.log
+            echo '```'
+            echo
+            echo "</details>"
+          } > pr_body.md
+          gh pr create --base main --head "$branch" \
+            --title "Metadata pipeline: weekly run for $date" \
+            --body-file pr_body.md --assignee ben-domingue
+
+      - name: Report a failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          {
+            echo "@ben-domingue the weekly metadata pipeline failed. Nothing was"
+            echo "published -- this job never runs upload_meta.py -- and no pull"
+            echo "request was opened, so the committed metadata is untouched."
+            echo
+            echo "Run: $run_url"
+            echo
+            echo '```'
+            tail -c 40000 pipeline.log 2>/dev/null || echo "(no log produced)"
+            echo '```'
+          } > issue.md
+          gh issue create --title "IRW metadata pipeline -- $(date -u +%F) [FAILED]" \
+            --body-file issue.md --assignee ben-domingue

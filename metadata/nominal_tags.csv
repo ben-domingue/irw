@@ -1,0 +1,67 @@
+table,age range,child age (for child-focused studies),sample,construct type,measurement tool,item format,primary language(s),construct name
+asap20train,NA,NA,NA,NA,NA,NA,NA,NA
+blum_2018_imak_nominal,NA,NA,NA,NA,NA,NA,NA,NA
+borges_brazil_residency_2024_cbt,NA,NA,NA,NA,NA,NA,NA,NA
+borges_brazil_residency_2024_pbt,NA,NA,NA,NA,NA,NA,NA,NA
+cos101_2026_openended,NA,NA,NA,NA,NA,NA,NA,NA
+goldberg_2018_spa_computer_use,NA,NA,NA,NA,NA,NA,NA,NA
+himmelstein-berlin_numeracy-2025,NA,NA,NA,NA,NA,NA,NA,NA
+mthimkhulu_2023_pirls_reading_mc,NA,NA,NA,NA,NA,NA,NA,NA
+much_tte_2025_concentrationtask,NA,NA,NA,NA,NA,NA,NA,NA
+much_tte_2025_matrixreasoning,NA,NA,NA,NA,NA,NA,NA,NA
+persuade_learningagency,NA,NA,NA,NA,NA,NA,NA,NA
+preference_inventory,Adult (18+),NA,"Educational, Targeted/specific","Opinion/attitude, Personality",Survey/questionnaire,Likert Scale/selected response,eng,The Wagner Preference Inventory
+wilmer-mrmet-normative-data-set-2022,NA,NA,NA,NA,NA,NA,NA,NA
+wilmer-rmet-normative-data-set-2022,NA,NA,NA,NA,NA,NA,NA,NA
+enem_2013_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2013)
+enem_2013_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2013)
+enem_2013_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2013)
+enem_2013_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2013)
+enem_2014_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2014)
+enem_2014_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2014)
+enem_2014_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2014)
+enem_2014_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2014)
+enem_2015_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2015)
+enem_2015_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2015)
+enem_2015_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2015)
+enem_2015_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2015)
+enem_2016_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2016)
+enem_2016_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2016)
+enem_2016_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2016)
+enem_2016_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2016)
+enem_2017_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2017)
+enem_2017_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2017)
+enem_2017_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2017)
+enem_2017_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2017)
+enem_2018_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2018)
+enem_2018_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2018)
+enem_2018_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2018)
+enem_2018_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2018)
+enem_2019_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2019)
+enem_2019_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2019)
+enem_2019_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2019)
+enem_2019_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2019)
+enem_2020_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2020)
+enem_2020_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2020)
+enem_2020_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2020)
+enem_2020_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2020)
+enem_2021_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2021)
+enem_2021_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2021)
+enem_2021_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2021)
+enem_2021_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2021)
+enem_2022_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2022)
+enem_2022_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2022)
+enem_2022_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2022)
+enem_2022_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2022)
+enem_2023_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2023)
+enem_2023_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2023)
+enem_2023_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2023)
+enem_2023_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2023)
+enem_2024_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2024)
+enem_2024_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2024)
+enem_2024_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2024)
+enem_2024_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2024)
+enem_2025_1mil_lc,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Language Proficiency Assessment (2025)
+enem_2025_1mil_ch,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Human Sciences Proficiency Assessment (2025)
+enem_2025_1mil_cn,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Natural Sciences Proficiency Assessment (2025)
+enem_2025_1mil_mt,Child (<18y),Adolescent (12-18y),Representative,Cognitive/educational,Test,Likert Scale/selected response,por,ENEM Mathematics Proficiency Assessment (2025)

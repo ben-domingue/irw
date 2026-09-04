@@ -3,6 +3,30 @@
 metadata/items_alltext.Rdata
 metadata/**/*.csv
 metadata/**/*.txt
+
+# ...except the pipeline's own outputs. These are derived files, but git is
+# where the weekly diff lives: .github/workflows/metadata-pipeline.yml
+# regenerates them on a runner, and `git diff` against the committed copy IS
+# the review surface that used to be a mailed log. Committing them also puts
+# them back on Ben's disk (a pull) for the manual upload_meta.py step, and
+# gives the metadata a history, the way table_audit_report.md already has one.
+#
+# Listed one by one on purpose. A blanket un-ignore would also sweep in the
+# *.diff.csv files, which every run rewrites, plus the provenance, cache and
+# scratch CSVs beside them -- and every pull request would then be noise.
+!metadata/metadata.csv
+!metadata/biblio.csv
+!metadata/comps_biblio.csv
+!metadata/nominal_biblio.csv
+!metadata/simsyn_biblio.csv
+!metadata/tags.csv
+!metadata/nominal_tags.csv
+!metadata/comps_metadata.csv
+!metadata/nominal_metadata.csv
+!metadata/simsyn_metadata.csv
+!metadata/itemtext_metadata.csv
+!metadata/collections.csv
+!metadata/collection_members.csv
 .env
 .Rproj.user
 .DS_Store
