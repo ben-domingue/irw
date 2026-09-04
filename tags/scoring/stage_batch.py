@@ -29,6 +29,7 @@ the Sheet is what stops the tagger re-attempting a dead source forever.
 """
 
 import argparse
+import csv
 import json
 import subprocess
 import sys
@@ -117,8 +118,65 @@ def main():
         print("\ndry run. pass --commit to stage.")
         return
 
+    # What is already in tags_auto.csv, so a re-drawn table is resolved here
+    # rather than by hand. Three batches in a row have hit this: a table stays
+    # in the untagged frame until it publishes, so anything that abstained --
+    # or that the Sheet suppresses -- comes back around on the next draw.
+    existing = {}
+    if AUTO.exists():
+        with AUTO.open(newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                existing[row["table"].strip().lower()] = row
+
+    def is_tagged(pay):
+        return pay.get("status") != "abstained"
+
+    stale = [p for p in payloads
+             if p["table"].lower() in existing
+             and existing[p["table"].lower()]["Status"] == "abstained"
+             and is_tagged(p)]
+    dup_abstain = [p for p in payloads
+                   if p["table"].lower() in existing
+                   and existing[p["table"].lower()]["Status"] == "abstained"
+                   and not is_tagged(p)]
+    already = [p for p in payloads
+               if p["table"].lower() in existing
+               and existing[p["table"].lower()]["Status"] == "tagged"]
+
+    # A sentinel says "do not re-attempt this source". Once the source IS
+    # reachable that claim is false, and leaving it would suppress a table the
+    # fetcher can now read. Drop it and let the new row take its place.
+    if stale:
+        print(f"\n{len(stale)} stale sentinel(s) -- abstained before, reached now. Replacing:")
+        drop = {p["table"].lower() for p in stale}
+        with AUTO.open(newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+            cols = list(rows[0].keys())
+        kept = [r for r in rows
+                if not (r["table"].strip().lower() in drop and r["Status"] == "abstained")]
+        for p in stale:
+            print(f"   {p['table']}: {existing[p['table'].lower()]['Notes'][:52]!r}")
+        with AUTO.open("w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=cols)
+            w.writeheader(); w.writerows(kept)
+
+    if dup_abstain:
+        print(f"\n{len(dup_abstain)} table(s) abstained again for the same reason "
+              f"-- existing sentinel left alone:")
+        for p in dup_abstain:
+            print(f"   {p['table']}")
+    if already:
+        print(f"\n{len(already)} table(s) already carry a tagged auto row and are "
+              f"skipped. A table here that is still in the untagged frame is "
+              f"Sheet-held (#1708) -- its row exists and cannot publish:")
+        for p in already:
+            print(f"   {p['table']}")
+
+    skip = {p["table"].lower() for p in dup_abstain} | {p["table"].lower() for p in already}
     staged = failed = 0
     for pay in payloads:
+        if pay["table"].lower() in skip:
+            continue
         r = subprocess.run([sys.executable, str(STAGE)], input=json.dumps(pay),
                            capture_output=True, text=True)
         if r.returncode:
@@ -126,7 +184,7 @@ def main():
             print(f"  FAILED {pay['table']}: {r.stdout.strip()} {r.stderr.strip()}")
         else:
             staged += 1
-    print(f"\nstaged {staged}, failed {failed} -> {AUTO}")
+    print(f"\nstaged {staged}, skipped {len(skip)}, failed {failed} -> {AUTO}")
 
 
 if __name__ == "__main__":
