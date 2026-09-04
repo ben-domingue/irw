@@ -1910,3 +1910,111 @@ status, and three agents explicitly reported failed routes as failures rather th
 One correction to my own dispatch: I told all five agents `text_source=study_materials`. That is
 true of the two `wang_2024_*` rows only; the three `xue_2025_*` are `translated_substitute`. An
 agent caught it and worked from the file rather than the brief.
+
+## batch_017 — 2026-09-03 — 12 written, 0 blocked, 0 failed. First round from the stable worktree.
+
+**A clean sweep, and a sharp contrast with batch_016 (8/4).** The difference is the queue's own
+order: batch_016 drew the corpus's large aggregated public datasets — Eedi/NeurIPS, ICAR, a
+transposed word-norms table — while batch_017 drew established published instruments with reachable
+open-access deposits. Yield is a property of what the queue serves up, not of pipeline health, which
+is exactly why the circuit breaker was changed on 2026-09-03 to stop counting determinate blocks.
+
+### Gates (all run at round close, after every agent finished)
+
+| gate | result |
+|---|---|
+| `normalize_nulls.R` | 12/12 already clean, 0 changed |
+| `audit_batch.R` | **12 PASS, 0 WARN** |
+| `verify_batch.R` | **10 PASS, 2 exempt**, no FAIL |
+| `lint_verification.R` | **0 ERROR**, 3 WARN (adjudicated below) |
+| `irw-validate` | 12/12 ok |
+| `check_provenance.R` | 244 rows / 19 files, no vocabulary error, 0 undisclosed |
+
+`mapping_verification.csv`: 181 -> 193 rows (7 VERIFIED, 3 PARTIAL, 2 NOT_NEEDED). Queue 1,201 ->
+1,189 pending, 131 -> 143 done.
+
+### lint WARNs — adjudicated, statuses stand
+
+`anh_2026_ai_adoption`, `anh_2026_digitaltrust` and `rosenberg_selfesteem` were flagged
+VERIFIED-but-hedging. In each the mapping axis IS fully established — 40/40 item x resp cells with
+eight distinct 5-tuples; per-item VIFs reproducing the published values to 4e-4; ten distinct
+(n, mean) pairs matching to 1.7e-14. The hedges concern language provenance (whether the shipped
+English is what Vietnamese respondents read), anchors the source never labels, and instruction
+wording the deposit does not record — none of which is the item<->text mapping. Same adjudication,
+on the same reasoning, as batch_016's three.
+
+### Findings worth carrying forward
+
+**1. The `anh_2026_*` deposit sits on the scale midpoint across every construct.** Five agents
+independently computed per-item statistics from PLOS ONE 10.1371/journal.pone.0340002's S1 File:
+
+| construct | items | item means | SDs |
+|---|---|---|---|
+| AI adoption | 8 | 2.974-3.105 | ~1.0 |
+| Digital trust | 6 | 2.971-3.016 | ~1.0 |
+| Family financial socialisation | 7 | 2.974-3.026 | 0.990-1.030 |
+| Financial literacy | 8 | 2.971-3.013 | 0.973-1.024 |
+| Financial well-being | 7 | 2.961-3.026 | 0.971-1.016 |
+| Financial behaviour (already published) | 9 | 2.980-3.016 | — |
+
+That is ~45 items across six unrelated constructs, every mean within ~0.04 of 3.00 and every SD
+within ~0.06 of 1.0, on n=306. **This is an observation, not an accusation**: the paper's own
+published statistics reproduce exactly from the same file (alpha 0.891 and 0.904, VIFs to three
+decimals, AVE 0.630, loadings), so the data are internally consistent with what was published, and
+each table's mapping verified independently. But six independent constructs do not normally share
+that distributional shape, and it is a property of the DEPOSITED data rather than of IRW processing.
+Worth a look at the S1 file as a whole before more of this deposit ships.
+
+**2. The `anh` deposit was administered in Vietnamese, and that answers an open audit row.** All
+five agents reached the same conclusion from Methods 3.3 (translation + back-translation) and the
+same evidence (the sole supplement is a pure-ASCII CSV with zero non-ASCII bytes). All five shipped
+the documented fallback: English base fields, `language=Vietnamese`, empty `_translated` columns,
+`text_source=translated_substitute`, `public_note` owed at upload. **This closes the `NEEDS_REVIEW`
+row for the already-published sibling `anh_2026_finbehavior` in
+`language_backfill/audit_2026-09-01.csv`** — the answer is Vietnamese, fallback, and it applies to
+all six tables from the deposit. `anh_2026_finbehavior` shipped in batch_006 with no `language`
+column and should be backfilled.
+
+**3. A table can pool two administered languages, and the schema has no way to say so.** Both
+`campos_2023_*` tables pool Finnish (n=3,614) and Brazilian Portuguese (n=3,979) respondents, so no
+single administered string exists per row. Two agents independently invented the same workaround —
+`language="Finnish; Portuguese"` — and both flagged it as their own convention rather than a
+documented one. **This needs a ruling.** The honest fix may be splitting these tables by country,
+which is a data change, not an item-text change. Both administered wordings are recoverable if it is
+ever split: Portuguese in Campos 2020 Table 1 and Campos 2021 (PeerJ 8:e8814), Finnish in the
+authors' Acta Odontol Scand 2021 supplemental file.
+
+**4. A fourth dictionary defect.** `rosenberg_selfesteem`'s Description reads "Experinces in Close
+Relationships Scale" (typo in the original) and its Reference appends a Brennan/Clark/Shaver 1998
+ECR citation; the RSE half of the Reference is correct, the rest is copy-paste from another Open
+Psychometrics table. With `hypersensitive_narcissism` and `content_literacy_intervention_g1` from
+batch_016, that is three dictionary defects found in 24 tables — dictionary metadata looks like a
+systematic weak spot rather than a run of coincidences.
+
+**5. `carney_2023_substance_use` ships derived indicators, not administered items.** `resp=1` means
+any use in the past three months (ASSIST) for every substance EXCEPT `alcohol`, where it means an
+AUDIT score above 8 — hazardous or harmful use, not any drinking. A reader taking `alcohol`/`1` at
+face value would be wrong about all 414 respondents. Pinned by the paper's own 147/35.5% count.
+Genuine issues-page material.
+
+### Process notes
+
+**`normalize_nulls.R` is batch-scoped and the per-table brief tells every agent to run it.** One
+agent ran it across the whole batch directory and rewrote a sibling's in-flight CSV; two others
+explicitly declined, reasoning that it writes across a shared directory; a fourth found it has a
+**single-CSV mode** and used that. The change is idempotent so nothing was corrupted — batch-close
+`normalize_nulls.R` reported 0 of 12 files needing normalization — but the instruction is ambiguous
+and three agents resolved it three ways. **Fix: tell the per-table agent to run it on its own file
+only, or move it to the orchestrator's Step 4 exclusively.** Same shape as the `verification_*.csv`
+glob trap: a batch-scoped tool invoked from a per-table context.
+
+**Today's two fixes both held.** Every agent used `validate_items.R --table-sets`, so not one of the
+twelve faced the gate-versus-quota conflict that produced five different improvisations in
+batch_016, and no agent called `irw_fetch()` for a gate. Sidecar merging deleted BY NAME rather than
+by glob, so `verification_merged.csv` survived its own cleanup this time.
+
+**One brief steered an agent wrong and it checked anyway.** I warned the `anh_2026_finliteracy`
+agent that a financial-literacy measure is often a knowledge test and told it not to solve for a key
+silently. The items are all "I am aware..." / "I feel confident..." — a subjective self-assessment
+with no correct answers. It tested the premise instead of inheriting it, which is the behaviour that
+prevents an invented answer key.
