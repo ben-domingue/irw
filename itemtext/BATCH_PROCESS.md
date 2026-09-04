@@ -394,7 +394,9 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_020, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_020, log "cap reached" in round_log.md and stop.
+  Under round_cron.sh there is no cron job to delete — the wrapper reads the cap out of
+  round_prompt_v1.md itself and declines to launch the next round.
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.
