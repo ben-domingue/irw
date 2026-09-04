@@ -93,7 +93,7 @@ Adjust the batch cap in Step 0 for the run you want.
 `src` is checked out on `main`. When `src` is on another branch, run the round from a
 worktree instead and substitute that path throughout the prompt — a round must never
 write batch output onto an unrelated branch. The 2026-09-03 restart ran from
-`/home/ben/irw-wt/1709/itemtext/` (branch `itemtext/1709-restart-queue`) because `src`
+`/home/ben/irw-queue/itemtext/` (branch `itemtext/queue-runner`) because `src`
 was on `tags/construct-type-rules`. `queue_state.csv` was byte-identical between the two
 at fork, so no state was lost; it is the file to reconcile when the branch merges.
 
