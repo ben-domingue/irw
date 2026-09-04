@@ -152,12 +152,32 @@ jobs:
           {
             echo "Weekly metadata pipeline run for **$date**."
             echo
-            echo "The diff on this pull request is the review surface: it is what changed"
-            echo "in the metadata since last week. **Nothing here is published.** Merging"
-            echo "commits metadata to the repository, not to the warehouse -- run"
-            echo "\`upload_meta.py\` by hand afterwards, against the CSVs a \`git pull\` puts"
-            echo "back on your disk."
+            echo "## What changed"
             echo
+            python3 .claude/skills/irw-site-update/scripts/summarize_changes.py \
+              --ref HEAD --dir metadata
+            echo
+            echo "## How to review this"
+            echo
+            echo "1. **Rows removed.** Additions are normal growth; a *removal* means a"
+            echo "   table disappeared from Redivis, and that is the line worth stopping"
+            echo "   on. Every run so far has removed nothing."
+            echo "2. **Existing rows changed.** The real signal. A changed"
+            echo "   \`n_participants\`, \`density\` or \`responses_per_participant\` on a"
+            echo "   table that already existed means the underlying data moved --"
+            echo "   either a legitimate re-upload or something wrong upstream."
+            echo "3. **Diff size.** Expect hundreds of lines. Tens of thousands means row"
+            echo "   canonicalisation has regressed (see canonicalize_csv.py) -- do not"
+            echo "   try to read it, file it as a bug."
+            echo
+            echo "Known noise, safe to skim: \`collections.csv\` definitions rewrite"
+            echo "themselves most runs because they embed live coverage counts in their"
+            echo "prose. \`n_tables\` is the field there that means something."
+            echo
+            echo "## Merging publishes nothing"
+            echo
+            echo "This commits metadata to the repository, not to the warehouse. To push"
+            echo "to Redivis afterwards: \`git pull\`, then run \`upload_meta.py\` by hand."
             echo "Stage 09 (hero_stats.json) is not run here; it writes into \`irw_site\`."
             echo "The full run log is attached to the workflow run as \`pipeline-log\`."
             echo

@@ -1775,3 +1775,14 @@ irw_version	irw_released_at	dataset	redivis_tag	redivis_released_at	precision	re
 340	2026-09-04T13:15:01Z	irw_nominal	v1.7	2026-08-28T19:40:37Z	exact	
 340	2026-09-04T13:15:01Z	irw_competitions	v3.2	2026-08-02T11:51:44Z	exact	
 340	2026-09-04T13:15:01Z	irw_simsyn	v1.1	2026-03-16T12:50:18Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse	v47.0	2026-09-03T23:56:41Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse_2	v14.0	2026-09-04T13:14:49Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse_3	v4.0	2026-09-03T23:57:04Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse_4	v6.0	2026-09-04T13:15:01Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse_5	v1.3	2026-09-03T03:20:48Z	exact	
+341	2026-09-04T16:19:20Z	item_response_warehouse_6	v1.0	2026-08-27T00:40:06Z	exact	
+341	2026-09-04T16:19:20Z	irw_text	v15.1	2026-09-03T23:57:46Z	exact	
+341	2026-09-04T16:19:20Z	irw_meta	v21.0	2026-09-04T16:19:20Z	exact	
+341	2026-09-04T16:19:20Z	irw_nominal	v1.7	2026-08-28T19:40:37Z	exact	
+341	2026-09-04T16:19:20Z	irw_competitions	v3.2	2026-08-02T11:51:44Z	exact	
+341	2026-09-04T16:19:20Z	irw_simsyn	v1.1	2026-03-16T12:50:18Z	exact	
