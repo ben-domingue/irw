@@ -118,6 +118,10 @@ IRW_REQUIRED = ["id", "item", "resp"]
 
 PERSON_LEVEL_COLS = {"wave", "treat"}
 ITEM_LEVEL_PREFIXES = ("itemcov_", "qmatrix", "item_family", "rater")
+# One value per person-item observation, so a wide person x item file that
+# carries one of these has one value per *person* -- structurally ambiguous
+# once melted. Consulted at the wide-melt bail-out below.
+RESPONSE_LEVEL_COLS = {"rt", "date"}
 
 # Flat sample-size floor: fewer than this many distinct respondents and the
 # candidate is skipped outright, no human adjudication (there used to be a

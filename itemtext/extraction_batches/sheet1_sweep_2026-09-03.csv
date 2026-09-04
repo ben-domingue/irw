@@ -1,0 +1,101 @@
+table,note,items_link,queue,queue_batch,audit,tracker,on_disk,pending_note,step35,live,has_text
+gilbert_meta_1,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_12,same as meta_11,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_53,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_7,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_89,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_90,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_11,https://github.com/ben-domingue/irw/issues/1075,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_56,https://github.com/ben-domingue/irw/issues/1074,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_100,same as meta_11,Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_8,https://github.com/ben-domingue/irw/issues/1076,Y,ABSENT,,ABSENT,,,,,yes,yes
+threat_isler_2024_exp1_cognitive_crt,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp1_cognitive_panas,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp1_incentive_crt,long table name,Y,ABSENT,,ABSENT,,,,,yes,yes
+threat_isler_2024_exp1_incentive_panas,long table name,Y,ABSENT,,ABSENT,,,,,yes,yes
+threat_isler_2024_exp2_cognitive_crt,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp2_cognitive_panas,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp2_picture_crt,long table name,Y,ABSENT,,ABSENT,,,,,yes,yes
+threat_isler_2024_exp2_picture_panas,long table name,Y,ABSENT,,ABSENT,,,,,yes,yes
+threat_isler_2024_exp3_cognitive_panas,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp4_cognitive_crt,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+threat_isler_2024_exp4_cognitive_panas,long table name,Y,ABSENT,,ABSENT,,,,,NO,
+fivpei_perrig_2023_attdiff,"There should be 28 items according to both the study and the description of the dataset (in irw dictionary), I am not sure why in the data there is only 21?",Y,ABSENT,,ABSENT,,,,,case:FIVPEI_Perrig_2023_AttDiff,
+kfcovid_li2020,resp clash,Y,ABSENT,,ABSENT,,,,,case:kfcovid_Li2020,
+mhscdc_fried_2020_smartphone,xingyiz@stanford.edu there is a resp=8 category for the irw data that is not in the item text. which one is wrong?,Y,ABSENT,,ABSENT,,,,,yes,
+namprb_siwiak_2024_ssub,doesn't match the number of items provided in the paper,-,ABSENT,,ABSENT,,,,,case:NAMPRB_Siwiak_2024_SSUB,
+oxfordcovid_xue_2024_at,"i am not sure why the dataset exclude ' media_tv' , but included media_playing, media_social_media, media_messaging, media_video, media_playing_voice as they are all just fill in the blanks question?",Y,ABSENT,,ABSENT,,,,,yes,
+paampsmartsud_saba_2023_ders,"the paper described only 36-item, but the data contains 37",Y,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_23,graph,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_45,"this needs to be split up? 3 instruments are used - phq, gad, mbi",Y,ABSENT,,ABSENT,,,,,yes,
+florida_twins_par,"not all of the items are raw response, need to check",-,ABSENT,,ABSENT,,,,,yes,
+singh_2025_identity_pba,"the reference they provided has 12 item, though only 11 is included. not sure which one got omitted",-,ABSENT,,ABSENT,,,,,yes,
+shu_2025_translation_add,,-,ABSENT,,ABSENT,,,,,yes,
+socialstereotype_hughes_2025_judgement,It seems problematic that data has 6 items for affiliation but the codebook only has 5 items,Y,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_1_rma,"note: I'm not sure why the data contain two resp that is 1.5, but the scale is 1-5",Y,ABSENT,,ABSENT,,,,,yes,yes
+lys_2020_rape_3_asi,"note: there are 6 data points with resp of 6,7 from the same participant, this should be excluded, because the scale is 0-5",Y,ABSENT,,ABSENT,,,,,yes,yes
+lys_2020_rape_3_cons,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_diff,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_kpnts,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_rwa,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_sds,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_sj,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+lys_2020_rape_3_unjust,no access to referred paper,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_ec,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_gec,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_os,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_pb,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_pc,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+dwyer_2025_genomics_sjc,Permission to use the scale need to be obtained,-,ABSENT,,ABSENT,,,,,yes,
+pezzuti_2025_coolpeople_main_nfc,can't find,-,ABSENT,,ABSENT,,,,,yes,
+bmeess_innamorati_2019_ees75,,-,ABSENT,,ABSENT,,,,,NO,
+bmeess_innamorati_2019_bees,,-,ABSENT,,ABSENT,,,,,NO,
+bmeess_innamorati_2019_tdi,,-,ABSENT,,ABSENT,,,,,NO,
+bmeess_innamorati_2019_mc,,-,ABSENT,,ABSENT,,,,,NO,
+wang_onlineriskexp_2025_negativeatt,not accessible,-,ABSENT,,ABSENT,,,,,yes,
+wang_onlineriskexp_2025_interpersonalsecurity,not accessible,-,ABSENT,,ABSENT,,,,,yes,
+sv-maia2_randelovic_2021_erq,resp clash,Y,ABSENT,,ABSENT,,,,,case:SV-MAIA2_Randelovic_2021_ERQ,yes
+rd_ppsl7as_ghasemy_2024_sl,no access to scale,-,ABSENT,,ABSENT,,,,,case:RD_PpSL7as_Ghasemy_2024_SL,
+rd_ppcsedsof_afable_2023,"resp clash? not sure if it counts. scale us 0-2, irw use 1-3",Y,ABSENT,,ABSENT,,,,,case:RD_PPCSEDSOF_Afable_2023,yes
+fad_fadplus_goto2021,"this is interesting, the data compares two translation of the same scale, butt the author only provide the original english version.... (and the two translations are not accessible)",-,ABSENT,,ABSENT,,,,,case:FAD_fadplus_goto2021,
+fedsp_trzcinska_2023_monknow,,-,ABSENT,,ABSENT,,,,,case:FEDSP_Trzcinska_2023_MonKnow,
+sun_2025_morality_study1_fairnessHEXACO,error message when i try to process,Y,ABSENT,,ABSENT,,,,,yes,
+sun_2025_morality_study1_fairnessMCQ,error message when i try to process,Y,ABSENT,,ABSENT,,,,,yes,
+sun_2025_morality_study3_benevolence,"codebook has 6 items, irw only has 3",Y,ABSENT,,ABSENT,,,,,yes,yes
+estcrm_epia,"for this two table, the response is direct(not coded), maybe we should just remove the resp page?",Y,ABSENT,,ABSENT,,,,,yes,yes
+estcrm_selfeff,"for this two table, the response is direct(not coded), maybe we should just remove the resp page?",Y,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_26,resp clash,Y,ABSENT,,ABSENT,,,,,yes,yes
+preschool_sel_akt,resp clash (as with those below),Y,ABSENT,,ABSENT,,,,,yes,yes
+preschool_sel_dn,"predicted resp clash: codebook has resp 0,1,2 while irw has only 0,1",Y,ABSENT,,ABSENT,,,,,yes,yes
+preschool_sel_htks,"predicted resp clash: codebook has resp 0,1,2 while irw has only 0,1",Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_112,contains graph,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_113,contains graph,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_13,see slack discussion,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_14,,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_16,,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_17,see slack discussion,-,ABSENT,,UNAVAILABLE,,,,,yes,
+gilbert_meta_18,,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_19,,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_32,contains graph,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_39,contains graph,-,ABSENT,,AVAILABLE,,,excluded,,yes,
+gilbert_meta_40,"b1_q1001 - 1010 should be in gilbert meta_39, they both cognitive tests",Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_55,see slack discussion,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_68,contains images,-,ABSENT,,BLOCKED,,,,,yes,
+gilbert_meta_69,contains images,-,ABSENT,,UNAVAILABLE,,,,,yes,
+gilbert_meta_70,contains images,-,ABSENT,,BLOCKED,,,,,yes,
+gilbert_meta_71,contains images,-,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_72,contains images,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_73,contains images,-,ABSENT,,UNAVAILABLE,,,,,yes,
+gilbert_meta_76,some items missing texts from codebook,Y,ABSENT,,ABSENT,,,,,yes,yes
+chile_2023_social-welfare-survey_rr,this one looks off?,Y,ABSENT,,ABSENT,,,,,yes,
+chile_2023_social-welfare-survey_ss,this one looks off?,Y,ABSENT,,ABSENT,,,,,yes,
+chile_2023_social-welfare-survey_u,this one looks off?,Y,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_78,"IRW missing ppvt_181, ppvt_182, ppvt_184",Y,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_80,gilbert_meta_80,Y,ABSENT,,ABSENT,,,,,yes,
+gilbert_meta_84,"resp clash. irw use 1-7 scale, supplementary material provided by author used 1-5 scale",Y,ABSENT,,ABSENT,,,,,yes,yes
+gilbert_meta_27,contains graph,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_28,contains graph,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_29,contains graph,-,pending,,AVAILABLE,,,,,yes,
+gilbert_meta_30,contains graph,-,ABSENT,,UNAVAILABLE,,,,,yes,
+sun_2025_morality_study2_colleaguerespect,can't find in code book,-,ABSENT,,ABSENT,,,,,yes,
+sun_2025_morality_study2_colleaguetrust,can't find in code book,-,ABSENT,,ABSENT,,,,,yes,

@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 from . import extra
-from ._checks import irw_metadata, run_qc
+from ._checks import OCCASION, irw_metadata, run_qc
 from .model import Finding, Report, severity_for
 
 #: Above this, a full pandas load is not worth it inside the uploader's hot
@@ -15,11 +15,18 @@ from .model import Finding, Report, severity_for
 MAX_BYTES = 512 * 1024 ** 2
 
 
+#: Every extension a table can arrive as. Matched case-insensitively: the legacy
+#: files are `.Rdata`, and stripping only `.csv` made every one of the 922 fail
+#: the lowercase-name rule on the capital R of its own extension.
+TABLE_SUFFIXES = (".csv", ".tsv", ".txt", ".rdata", ".rda", ".rds")
+
+
 def _table_name(label: str) -> str:
     stem = Path(label).name
-    for suffix in (".csv", ".tsv"):
-        if stem.endswith(suffix):
-            stem = stem[: -len(suffix)]
+    low = stem.lower()
+    for suffix in TABLE_SUFFIXES:
+        if low.endswith(suffix):
+            return stem[: -len(suffix)]
     return stem
 
 
@@ -47,15 +54,60 @@ def _validate_item_text(df, label: str, profile: str) -> Report:
             f"missing required columns for item text: {', '.join(missing)}",
             table=table, group="core"))
         return report
-    for name, dup in (("dup_item_resp",
-                       df.duplicated(subset=[c for c in ("item", "resp")
-                                             if c in df.columns]).sum()),):
-        report.checks_run.append(name)
-        if dup:
+    keys = [c for c in ("item", "resp") if c in df.columns]
+    report.checks_run.append("dup_item_resp")
+    dup = int(df.duplicated(subset=keys).sum()) if keys else 0
+
+    # A scored table is a different object. Where `correct_response` is
+    # populated, `resp` is a scoring key (0 wrong / 1 right) rather than a point
+    # on a scale, so one resp value legitimately carries many option labels --
+    # spanishmegastudy has 1,270 multiple-choice items with three distractors
+    # each, all coded resp=0. Judging that by the Likert rule would flag 1,270
+    # correct items. For a scored table the only thing that still holds is that
+    # no *whole row* should repeat.
+    scored = False
+    if "correct_response" in df.columns:
+        col = df["correct_response"]
+        # notna() first: under pandas 3 an all-NaN column astype(str) keeps the
+        # values MISSING rather than rendering them "nan", so a string-only test
+        # matches nothing and reads an empty column as fully populated.
+        filled = col.notna() & ~col.astype(str).str.strip().isin(("", "NA", "nan", "None"))
+        scored = bool(filled.mean() > 0.5)
+    if scored:
+        exact = int(df.duplicated().sum())
+        if exact:
             report.findings.append(Finding(
-                name, "error",
-                f"{dup} duplicate item+resp rows -- an item text table carries one "
-                f"row per response option, so a repeat is a doubled upload (#1810)",
+                "dup_row", "error",
+                f"{exact} fully identical row(s) in a scored table. `resp` here is a "
+                f"scoring key, so one value carrying several option labels is "
+                f"expected -- but an exact repeat is still a duplicate.",
+                table=table, group="core"))
+    elif dup:
+        # Two different faults produce this, and the distinction matters to
+        # whoever has to fix it, so name which one this is. If the repeated rows
+        # carry the SAME option_text it is a doubled upload (#1810/#1816). If
+        # they carry DIFFERENT option_text, the table is asserting that one
+        # response value means two things -- afps_vangsness_2019 maps resp=1 to
+        # both "Strongly agree" and "Strongly disagree", which is two opposite
+        # scale directions written into one table and is worse than a duplicate.
+        conflicting = 0
+        if "option_text" in df.columns:
+            per_key = df.groupby(keys)["option_text"].nunique(dropna=False)
+            conflicting = int((per_key > 1).sum())
+        if conflicting:
+            report.findings.append(Finding(
+                "resp_ambiguous", "error",
+                f"{conflicting} response value(s) carry more than one option label -- "
+                f"the same `resp` is documented as meaning two different things, so "
+                f"nothing joining item text to responses can resolve it. Usually two "
+                f"opposite scale directions merged into one table.",
+                table=table, group="core"))
+        else:
+            report.findings.append(Finding(
+                "dup_item_resp", "error",
+                f"{dup} duplicate item+resp rows with identical option text -- an item "
+                f"text table carries one row per response option, so a repeat is a "
+                f"doubled upload (#1810)",
                 table=table, group="core"))
     for finding in extra.check_name(table):
         report.checks_run.append(finding.check)
@@ -86,6 +138,65 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
             else "heuristic"
         report.findings.append(
             Finding(check.name, severity, check.detail, table=table, group=group))
+
+    # `dup_id_item` asks whether a `wave`/`timepoint`/`date` column explains a
+    # repeated id+item. That list came from validate_irw.R and is stale: it
+    # predates `rater`, and it never covered trial-level designs. In the legacy
+    # sweep it flagged 101 tables, and of the 57 whose local copy matches what is
+    # published, 14 are explained outright by a column the check does not look
+    # at -- `rater` on eleven of them, plus `trialnum`, `order` and `period`.
+    #
+    # A rater is not a defect: two people rating the same person on the same item
+    # is the design. Same for a repeated trial. `datastandard.md` documents
+    # `rater` as a legitimate column, so a check that treats it as a duplicate is
+    # reporting the standard's own schema as an error.
+    #
+    # NOT included: `group`, `study`, `treatment`. Those describe the person or
+    # the arm, not the occasion, and a person appearing twice under them is a
+    # real question rather than an explanation.
+    if profile in ("upload", "legacy") and {"id", "item"}.issubset(df.columns):
+        # `rt` is in OCCASION for naming purposes but must never be what makes
+        # rows unique -- it is a measurement, and rounding it would silently
+        # merge rows (#1842 blocks I and J).
+        occasion_cols = tuple(c for c in OCCASION if c != "rt")
+        if any(f.check == "dup_id_item" for f in report.findings):
+            resolved_by = None
+            for col in occasion_cols:
+                if col in df.columns and not df.duplicated(subset=["id", "item", col]).any():
+                    resolved_by = col
+                    break
+            # A design can be keyed by more than one occasion column at once, and
+            # testing them only one at a time misses that. `rr98_accuracy` is
+            # trials within blocks: `trial` restarts at 1 in each block, so
+            # neither column identifies a row alone and both together identify
+            # it exactly. Same shape for a session x exercise index. So if no
+            # single column resolves the repeat, try every occasion column
+            # present together before calling it a defect.
+            if resolved_by is None:
+                present = [c for c in occasion_cols if c in df.columns]
+                if len(present) > 1 and not df.duplicated(
+                        subset=["id", "item"] + present).any():
+                    resolved_by = "+".join(present)
+            if resolved_by is not None:
+                report.findings = [f for f in report.findings
+                                   if f.check != "dup_id_item"]
+                report.checks_run.append(f"dup_id_item:resolved_by_{resolved_by}")
+
+    # `resp_numeric` as inherited from run_qc measures how many values parse as
+    # numbers over ALL rows, so a float column with missing values fails it --
+    # NaN does not parse. That conflates "not a number" with "not present", and
+    # `resp_na` already reports the second. In the legacy sweep it flagged
+    # 16_personalityfactors, whose resp is float64 and 99% non-null.
+    #
+    # Triage keeps the inherited behaviour (50 callers depend on it); the gate
+    # profiles re-judge it over non-null values only.
+    if profile in ("upload", "legacy") and "resp" in df.columns:
+        import pandas as pd
+        present = df["resp"].dropna()
+        if len(present):
+            parses = pd.to_numeric(present, errors="coerce").notna().mean()
+            if parses >= 0.99:
+                report.findings = [f for f in report.findings if f.check != "resp_numeric"]
 
     if profile in ("upload", "legacy"):
         for finding in (extra.check_name(table)
@@ -130,6 +241,22 @@ def validate_file(path, *, label: str | None = None, profile: str = "upload",
     import pandas as pd  # deferred: red_up must import this module without pandas
     if path.suffix.lower() in (".csv", ".tsv", ".txt"):
         df = pd.read_csv(path, sep=None, engine="python")
+    elif path.suffix.lower() in (".rdata", ".rda", ".rds"):
+        # The 922 legacy tables in ../data/pub/ (#1703 sub-item 1.5). Not
+        # routed through irw_triage_updated.load_table because that pulls in
+        # the whole discovery pipeline for a two-line read.
+        import pyreadr
+        objs = pyreadr.read_r(str(path))
+        if not objs:
+            raise ValueError(f"{path.name} holds no R object")
+        if len(objs) > 1:
+            # An IRW table file should hold exactly one data frame. More than
+            # one means the file is carrying something else besides the table,
+            # and picking silently would validate the wrong object.
+            raise ValueError(
+                f"{path.name} holds {len(objs)} R objects "
+                f"({', '.join(str(k) for k in objs)}); expected one table")
+        df = next(iter(objs.values()))
     else:
         import sys
         sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "automated_finding"))

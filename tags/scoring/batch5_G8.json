@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alkouri_2025_coping",
+  "shard": "w3"
+ },
+ {
+  "table": "baquerotomas_2026_pil",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot1_traits",
+  "shard": "w3"
+ },
+ {
+  "table": "chen_2024_cg",
+  "shard": "w5"
+ },
+ {
+  "table": "colomer_perez_2021_soc13",
+  "shard": "w3"
+ },
+ {
+  "table": "doustmohammadian_2017_fnlit",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_phys_activity_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_prs_movie_preferences",
+  "shard": "w4"
+ },
+ {
+  "table": "hernandezmantilla_2024_cmni",
+  "shard": "w5"
+ },
+ {
+  "table": "iqbal_2022_curriculum_skills",
+  "shard": "w4"
+ },
+ {
+  "table": "kern_2021_happiness",
+  "shard": "w2"
+ },
+ {
+  "table": "kushnir2017_ftnd",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2018_gse",
+  "shard": "w3"
+ },
+ {
+  "table": "ma2026_bsmas",
+  "shard": "w3"
+ },
+ {
+  "table": "medvedev_2018_oxh",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_sdt_perceived_performance",
+  "shard": "w5"
+ },
+ {
+  "table": "pang_2023_social_norms",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_pbc_cond_power",
+  "shard": "w3"
+ },
+ {
+  "table": "qiang_2025_ne_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2024_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "shin2024_creactability_adaptability",
+  "shard": "w2"
+ },
+ {
+  "table": "thanh_2025_attitude",
+  "shard": "w3"
+ },
+ {
+  "table": "weatherspoon_2015_pediatricians_freq",
+  "shard": "w3"
+ },
+ {
+  "table": "yu_2025_bedtime_procrastination",
+  "shard": "w3"
+ },
+ {
+  "table": "zhao_2024_nssi",
+  "shard": "w4"
+ }
+]

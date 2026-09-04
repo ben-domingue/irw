@@ -1,0 +1,118 @@
+[
+ {
+  "table": "akrawi_2025_sclc",
+  "shard": "w4"
+ },
+ {
+  "table": "atmadjaja_2026_pos",
+  "shard": "w3"
+ },
+ {
+  "table": "campos_2023_pidaq",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_ds",
+  "shard": "w5"
+ },
+ {
+  "table": "choi_2026_cmsce_2020_2",
+  "shard": "w4"
+ },
+ {
+  "table": "corti_2023_academic_adaptation",
+  "shard": "w5"
+ },
+ {
+  "table": "dominguez_2018_mbi",
+  "shard": "w4"
+ },
+ {
+  "table": "eldor_2022_school_resilience",
+  "shard": "w4"
+ },
+ {
+  "table": "floreskanter_2021_cerq",
+  "shard": "w4"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "goldberg_2018_spa_skill_proficiency",
+  "shard": "w4"
+ },
+ {
+  "table": "hua_2023_efl_academic_self_concept",
+  "shard": "w4"
+ },
+ {
+  "table": "jiang_2025_inclusive_efficacy",
+  "shard": "w3"
+ },
+ {
+  "table": "kilic_2024_nutrition_attitude",
+  "shard": "w4"
+ },
+ {
+  "table": "kraft_todd_2017_warmth",
+  "shard": "w3"
+ },
+ {
+  "table": "liem_2024_attitude_env",
+  "shard": "w4"
+ },
+ {
+  "table": "manolika_2021_mini_ipip",
+  "shard": "w4"
+ },
+ {
+  "table": "molino_2018_d5_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_misfit_learning_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "okeke2025_decision_confidence_post",
+  "shard": "w2"
+ },
+ {
+  "table": "personality_handwriting__financial_behavior",
+  "shard": "w2"
+ },
+ {
+  "table": "quarter_life_crisis__mwb",
+  "shard": "w2"
+ },
+ {
+  "table": "rowe_2016_mfi20",
+  "shard": "w3"
+ },
+ {
+  "table": "shi_2021_gentrification",
+  "shard": "w4"
+ },
+ {
+  "table": "tan_2026_stem_technology_integration",
+  "shard": "w3"
+ },
+ {
+  "table": "torices_2025_dflex",
+  "shard": "w2"
+ },
+ {
+  "table": "wang_2026_teaching_presence",
+  "shard": "w3"
+ },
+ {
+  "table": "yuebo_2024_pck",
+  "shard": "w4"
+ },
+ {
+  "table": "zhao_2025_restor_env_perception",
+  "shard": "w3"
+ }
+]

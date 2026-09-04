@@ -40,8 +40,23 @@ study2_df <- study2_df %>%
   mutate(id = row_number() )
 
 # ------ Process Study 1 Data ------
+# `ends_with("11")`/`ends_with("12")` was a suffix test, not an item list, and it
+# swept up two things it was not after (irw#1842 block G):
+#
+#   * the twelve Respect matrix items Q{3,4,5}.{14,15,16}_{11,12} -- "...nam de
+#     ander mij serieus", "...behandelde de ander mij met respect" -- which
+#     Respect_df below already selects via ends_with("_11")/("_12"). Every one
+#     of their responses was therefore emitted twice, once under each group
+#     label, which is all 2,328 of this table's duplicated id+item rows.
+#   * Q4.11 and Q5.11, "Is uw relatie met deze personen gelijkwaardig?" -- a
+#     question about the relationship, not an item of the feeling-heard scale,
+#     and not a duplicate of anything, so it was shipped under a label that
+#     misdescribes it.
+#
+# The scale itself is the four single-item "In dit gesprek voelde ik mij gehoord
+# door de ander(en)" measures, so name them.
 heard_df <- study1_df |>
-  select(ends_with("11"), ends_with("12"),id, -FL_13_DO_FL_11)
+  select(`Q3.11`, `Q3.12`, `Q4.12`, `Q5.12`, id)
 heard_df <- remove_na(heard_df)
 heard_df[] <- lapply(heard_df, function(x) if (is.labelled(x)) as.numeric(x) else x)
 heard_df <- pivot_longer(heard_df, cols=-c(id), names_to="item", values_to="resp")

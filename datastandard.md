@@ -65,6 +65,14 @@ Use the first author's last name, publication year, and a short construct label.
 
 **Table names must be 40 characters or fewer** (excluding `.csv`). If the natural name exceeds 40 characters, shorten the construct label — use standard abbreviations (e.g., `pos` for Perceived Organizational Support, `gad7` for GAD-7) or truncate. Never shorten the author name or year.
 
+*Exception, ruled 2026-09-03: names already published over the cap are
+grandfathered.* 130 live tables predate this rule, the longest at 65
+characters. The cap governs a table **entering** the corpus; a table already in
+it under a longer name may be re-uploaded to repair something else, and
+`red_up` demotes the error to a warning in that case only. Renaming one is a
+separate decision, because the name is joined on by the metadata, tags and
+biblio tables and may be held by anyone who has used the corpus.
+
 ---
 
 ## Output location

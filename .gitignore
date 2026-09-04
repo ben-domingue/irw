@@ -3,6 +3,30 @@
 metadata/items_alltext.Rdata
 metadata/**/*.csv
 metadata/**/*.txt
+
+# ...except the pipeline's own outputs. These are derived files, but git is
+# where the weekly diff lives: .github/workflows/metadata-pipeline.yml
+# regenerates them on a runner, and `git diff` against the committed copy IS
+# the review surface that used to be a mailed log. Committing them also puts
+# them back on Ben's disk (a pull) for the manual upload_meta.py step, and
+# gives the metadata a history, the way table_audit_report.md already has one.
+#
+# Listed one by one on purpose. A blanket un-ignore would also sweep in the
+# *.diff.csv files, which every run rewrites, plus the provenance, cache and
+# scratch CSVs beside them -- and every pull request would then be noise.
+!metadata/metadata.csv
+!metadata/biblio.csv
+!metadata/comps_biblio.csv
+!metadata/nominal_biblio.csv
+!metadata/simsyn_biblio.csv
+!metadata/tags.csv
+!metadata/nominal_tags.csv
+!metadata/comps_metadata.csv
+!metadata/nominal_metadata.csv
+!metadata/simsyn_metadata.csv
+!metadata/itemtext_metadata.csv
+!metadata/collections.csv
+!metadata/collection_members.csv
 .env
 .Rproj.user
 .DS_Store
@@ -21,3 +45,32 @@ __pycache__/
 
 # red_up packaging artefacts (pip install -e .)
 *.egg-info/
+irw_validate/results/.shard_index.json
+
+##Per-agent fetch caches for concurrent tagging runs (#1704, P5). Same reason
+##tags/.claude/skills/irw-auto-tag/.cache is ignored: this is fetched source
+##text, much of it copyrighted, and it is a scratch artifact of one run.
+tags/.caches/
+
+# Daily version-manifest cron logs. The weekly pipeline logs beside them are
+# committed deliberately; these are one line on a normal day and would add ~365
+# files a year. Failures alert via a GitHub issue, which carries the log body.
+metadata/pipeline_logs/version_manifest_*.log
+
+# Hourly round logs from itemtext/extraction_batches/round_cron.sh. Ignored for the
+# same reason as the daily version-manifest logs above: too noisy to track. The
+# weekly pipeline's markdown logs ARE tracked, because there is one a week.
+itemtext/extraction_batches/cron_logs/
+
+##Per-agent fetch caches for concurrent tagging runs (#1704, P5).
+tags/.caches/
+
+tags/.caches/
+
+tags/.caches/
+
+tags/.caches/
+
+tags/.caches/
+
+tags/.caches/

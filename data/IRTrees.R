@@ -14,7 +14,13 @@ stressT <- stressT |>
          item=crossitem)
 
 load("./fsdatT.rda")
-fsdatT <- fsdatT %>% select(-node, -sub)
+# `sub` is `item:node` -- the pseudo-item an IRTrees model actually treats as an
+# item, and the source hands it over ready-made. Dropping it collapsed each
+# person's node1 response and their node2-or-node3 response onto one item, which
+# is every one of this table's 5,811 doubled id+item pairs (irw#1842 block F).
+# They are not duplicates: node1 is the first branching decision and the second
+# row is whichever branch it led to, so the two disagree on 51% of pairs.
+fsdatT <- fsdatT %>% select(-node, -item) %>% rename(item = sub)
 fsdatT <- fsdatT %>% rename(resp=value, id=person)
 fsdatT$id <- sub("^p", "", fsdatT$id) # Convert ids into integers
 fsdatT$id <- as.integer(fsdatT$id)

@@ -97,7 +97,7 @@ def _append_log_rows(rows: list[dict], path: str = LOG_PATH) -> None:
     fieldnames = ["date", "query", "output_file", "notes"]
     file_exists = os.path.exists(path)
     with open(path, "a", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer = csv.DictWriter(f, fieldnames=fieldnames, lineterminator="\n")
         if not file_exists:
             writer.writeheader()
         writer.writerows(rows)
@@ -153,7 +153,7 @@ def main():
 
     out_path = resolve_out_path(args.out, f"{OUT_PREFIX}{args.mode}_{today}.csv")
     outf = open(out_path, "w", newline="", encoding="utf-8")
-    writer = csv.DictWriter(outf, fieldnames=FIELDNAMES, extrasaction="ignore")
+    writer = csv.DictWriter(outf, fieldnames=FIELDNAMES, extrasaction="ignore", lineterminator="\n")
     writer.writeheader()
 
     skip = seen | exclude

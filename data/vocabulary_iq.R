@@ -92,7 +92,14 @@ df <- df |>
                              (item == 'q43' & resp == 12) |
                              (item == 'q44' & resp == 10) |
                              (item == 'q45' & resp == 9) ~ 1),
-         resp2 = if_else(is.na(resp2), 0, resp2),
+         # The answer key above covers only the 45 vocabulary questions (q1-q45).
+         # s1-s30 are the optional post-test personality survey, answered on a
+         # 1-5 agreement scale -- they are not vocabulary questions and must not
+         # be scored against the key, so their raw response passes through
+         # unchanged (issue #1877). A resp scale may differ across items.
+         resp2 = case_when(!str_starts(item, 'q') ~ resp,
+                           is.na(resp2) ~ 0,
+                           .default = resp2),
          # items without responses remain NA
          resp2 = if_else(is.na(resp), NA, resp2)) |>
   # drop original response variable

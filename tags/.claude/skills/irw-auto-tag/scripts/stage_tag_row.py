@@ -25,7 +25,14 @@ Usage: pass one row as JSON on stdin, e.g.:
 
 JSON keys (all optional except "table"): table, construct_name, context_text,
 item_text_available, age_range, child_age, sample, construct_type,
-measurement_tool, item_format, primary_languages, notes
+measurement_tool, item_format, primary_languages, notes, status, reason
+
+`status` and `reason` record whether the tagger reached a usable source and,
+when it did not, why (#1704). They are staged, never published -- 03_tags.R
+selects by POSITION (KEEP_COLS) and they sit past the end of that selection.
+Before them, an abstention was recorded only as a row with everything blank,
+which is indistinguishable from a row nobody has written yet, and the scoring
+harness could not read this file at all.
 """
 import csv
 import json
@@ -40,7 +47,15 @@ COLUMNS = [
     "Age Range", "Child Age (for child-focused studies)", "Sample",
     "Construct type", "Measurement tool", "Item format", "Primary Language(s)",
     "Notes",
+    ##Appended, and appended is load-bearing: 03_tags.R's KEEP_COLS selects
+    ##columns 1, 6:12 and 3 by POSITION, so anything added past column 13 is
+    ##structurally unpublishable. Never insert one of these in the middle.
+    "Status", "Reason",
 ]
+
+##What `status` may say. "tagged" means at least one tag field was written;
+##"abstained" means no usable source, and `reason` says which kind.
+STATUS_VALUES = ("tagged", "abstained", "")
 
 KEY_MAP = {
     "table": "table",
@@ -55,6 +70,8 @@ KEY_MAP = {
     "item_format": "Item format",
     "primary_languages": "Primary Language(s)",
     "notes": "Notes",
+    "status": "Status",
+    "reason": "Reason",
 }
 
 
@@ -72,11 +89,36 @@ def main():
         row[col] = v if v is not None else ""
     row["Rater"] = "claude-auto"
 
+    if row["Status"] not in STATUS_VALUES:
+        sys.exit(f"status must be one of {STATUS_VALUES}, got {row['Status']!r}")
+    ##Infer rather than demand it, so every existing caller keeps working and
+    ##the file still gains the distinction between "abstained" and "not yet
+    ##looked at" that it was missing.
+    if not row["Status"]:
+        tags = [c for c in COLUMNS
+                if c not in ("table", "Rater", "Notes", "Status", "Reason")]
+        row["Status"] = "tagged" if any(str(row[c]).strip() for c in tags) \
+            else "abstained"
+    if row["Status"] == "abstained" and not row["Reason"]:
+        row["Reason"] = row["Notes"]
+
     existing = set()
     file_exists = STAGING_PATH.exists()
     if file_exists:
         with open(STAGING_PATH, newline="", encoding="utf-8") as f:
-            for r in csv.DictReader(f):
+            reader = csv.DictReader(f)
+            ##Appending a wider row under a narrower header writes every value
+            ##after the new columns under the wrong name, and nothing complains.
+            ##metadata/11_status.R hit exactly this on 2026-09-01. Refuse
+            ##instead: append-only is right for the DATA, the SCHEMA gets
+            ##migrated deliberately.
+            if reader.fieldnames != COLUMNS:
+                sys.exit(
+                    f"{STAGING_PATH} has a {len(reader.fieldnames or [])}-column "
+                    f"header and this script writes {len(COLUMNS)}. Migrate the "
+                    f"file first -- appending would silently shift every value.\n"
+                    f"  found:    {reader.fieldnames}\n  expected: {COLUMNS}")
+            for r in reader:
                 existing.add((r.get("table") or "").strip().lower())
 
     if row["table"].strip().lower() in existing and not force:

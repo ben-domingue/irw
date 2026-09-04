@@ -165,8 +165,8 @@ what is live.
 |---|---|---|---|
 | tier A bulk (#1806/#1808/#1813) | 78 | A | built, verified, **uploaded**; `backfill_provenance.csv` |
 | `spanishmegastudy` | 1 | A | deferred by size, #1809 |
-| wording recovered from the paper (`8f35d6e`) | 3 | B, B, C | built, uploaded, **and doubled on Redivis — see below**; `provenance.csv`, `published/` |
-| round 2, the disclosure pass (`6bd1171`) | 17 | B (16) + 1 outside the audit | staged only, **not gated**; `round2/` |
+| wording recovered from the paper (`8f35d6e`) | 3 | B, B, C | built, uploaded, doubled, **and since repaired**; `provenance.csv`, `published/` |
+| round 2, the disclosure pass (`6bd1171`) | 17 | B (16) + 1 outside the audit | gated; **16 uploaded 2026-09-02**, 1 held — see below; `round2/` |
 
 The three recovered-wording tables are the interesting ones: `baaziz_2023_sms2` and
 `arzamoncunill_2023_epq_clinical` are **tier B** and `brederecke_2020_sis` is **tier
@@ -174,7 +174,7 @@ C**, which is to say the audit could not see their administered wording and goin
 the paper found it anyway. That is the tier B/C remedy demonstrated on three cases,
 not a shortcut around the tier A bulk.
 
-### The three recovered-wording tables are doubled on Redivis right now
+### The three recovered-wording tables were doubled on Redivis — repaired 2026-09-02
 
 Verified against live data 2026-09-02:
 
@@ -196,10 +196,12 @@ branch that was never pushed, so nothing in the repair's scope knew they existed
 That is the concrete cost of the unpushed branch, and it is the strongest argument
 in the corpus for #1810.
 
-**Fix:** re-upload all three from `staging/`, which is restored here for exactly that
-purpose, with an uploader that deletes the draft table first — then re-run the
-COUNT(\*) check. `verify_backfill.py staging` passes them against `published/` first.
-Not done here: it is a write to published data and needs sign-off.
+**Fixed 2026-09-02.** All three were re-uploaded with the delete-then-recreate guard.
+Re-verified against live data by `COUNT(*)` on the same day: `baaziz_2023_sms2` 126,
+`brederecke_2020_sis` 55, `arzamoncunill_2023_epq_clinical` 151 — each back to its
+staged row count, each carrying `language` on every row. The table above records the
+defect as it was measured; this paragraph is the outcome. `staging/` is kept because
+it is the source the repair was made from.
 
 **`brederecke_2020_sis` contradicts its own audit row and the audit row is the stale
 one.** `audit_2026-09-01.csv` marks it `CANNOT BACKFILL` because `item_text` held
@@ -209,7 +211,7 @@ added column. The split was made, deliberately and with the reasoning recorded i
 describes the shipped German. The audit row is annotated rather than deleted, so the
 disagreement stays visible.
 
-## Round 2 — the disclosure pass (2026-09-01, staged, NOT gated against live data)
+## Round 2 — the disclosure pass (2026-09-01; 16 of 17 uploaded 2026-09-02)
 
 The other half of the tier B bucket: 17 published tables that ship English for a
 non-English administration where the wording genuinely could not be recovered from
@@ -231,18 +233,70 @@ ITBF_SRC=itemtext/language_backfill/round2/published \
 # 17 passed, 0 failed
 ```
 
-**Still ungated, and nothing here may be uploaded until it is done.**
-`validate_items.R` and `audit_batch.R` have **not** been run against live *response*
-data, which is the check that the `item`/`resp` keys still join. Provenance rows correcting `text_source` to
-`translated_substitute` for the nine tables currently labelled `canonical_instrument`
-or `study_materials` are still to write, and `abdullah_2024_bsq_sev24` has no
-issues-page entry.
+**Fully gated 2026-09-02, and the gate caught one table.** `audit_batch.R` ran
+against live *response* data — the check that the `item`/`resp` keys still join —
+and returned **16 PASS, 1 FAIL**. The report is `round2/staging/audit_report.csv`
+(committed in `95ce958`, swept in by a concurrent session rather than by this
+workstream, which is why this section read as ungated for a day after it wasn't).
 
-`round2/staging/` holds files named `<table>__items.csv`, which is the exact shape
-every uploader in this repo treats as publishable. No uploader walks this directory
-implicitly — all of them take a path argument — but do not point one at it until the
-gates above have run. See #1792 for why a staging directory that looks like a queue
-is a hazard in its own right.
+**`ALSECYPIAMH_WU_2022_SDQ` FAILED and was held.** Its staged file carried six items
+where the live response table has five; the extra one is `SDQ_Pro`, the prosocial
+subscale *total*, with 3 of the file's 18 rows. That defect was not introduced by
+round 2 — the published table already carried it, at 18 rows — so the gate surfaced
+a pre-existing error rather than a new one. See "The SDQ hold" below.
+
+The other 16 were uploaded 2026-09-02 and verified live the same day: row counts
+identical to `round2/published/`, `language` non-empty on every row, all four
+`_translated` columns present, no doubling. `round2/staging/` was cleared by
+ben-domingue on upload, as `itemtables/clean/` is; the files remain in git.
+
+**Still owed:** provenance rows correcting `text_source` to `translated_substitute`.
+The count in the earlier draft of this section was nine; measured against the batch
+`provenance.csv` files it is **eleven** of the 16 uploaded — five `canonical_instrument`
+(`ALSECYPIAMH_WU_2022_PHQ`, `abdullah_2024_bsq_sev24`, `bukurov_2022_sf36`,
+`buzgova_2023_gai`, `buzgova_2023_lsita`) and six `study_materials`
+(`almuqbil_2022_epds`, `altahla_2024_swls`, `altahla_2024_whoqol`,
+`avilesgonzalez2019_ces`, `brederecke_2020_phq4`, `chen_2022_sasc`), plus
+`ALSECYPIAMH_WU_2022_SDQ` if it ships. The remaining five already say
+`translated_substitute`. Quote the measurement, not the nine.
+Also owed: `abdullah_2024_bsq_sev24` has no issues-page entry.
+
+Note that these rows do not live here — each of the 17 is an already-published table,
+so its provenance row sits in the `itemtables/batch_NNN/provenance.csv` of the batch
+that first extracted it (004 and 012 both carry an `ALSECYPIAMH_WU_2022_PHQ` row; that
+duplicate is worth resolving while editing). There is no `round2/provenance.csv`.
+
+### The SDQ hold
+
+`ALSECYPIAMH_WU_2022_SDQ__items` was **removed from `irw_text` entirely** rather than
+re-uploaded, and `irw_text` is now at v15.0 with 578 tables (v14.0 had 579). So the
+table currently has *no* published item text, where before it had item text with three
+bad rows.
+
+**A corrected file is rebuilt and staged** at
+`round2/staging/ALSECYPIAMH_WU_2022_SDQ__items.csv`, awaiting upload. It is the round-2
+file with the three `SDQ_Pro` rows dropped — 15 rows over `SDQ_Pro1`..`SDQ_Pro5`, which
+is exactly the item set `audit_batch.R` reports as live and the same set
+`itemtables/batch_012/ALSECYPIAMH_WU_2022_SDQ__items.csv` ships. The round-2 file was
+the right base rather than the batch_012 one: batch_012 predates the schema and would
+drop the `language` and `_translated` columns, losing the disclosure this whole pass
+exists to add.
+
+Gates run 2026-09-02 on the rebuilt file: `normalize_nulls.R` normalized it (the
+committed round-2 copy still carried literal `NA` strings — the pass's normalize run
+was never committed back), `audit_batch.R` returns **PASS** — 5 live items, 5 candidate
+items, item and resp sets both matching, canonical nulls, 0% missing item or option text
+— recorded in `round2/staging/audit_report_sdq_recheck.csv` rather than in
+`audit_report.csv`, which stays the round's own 17-table record. `irw-validate` returns
+only the pre-existing `name_charset` WARN about the table's capitalised name, which is a
+property of the response table, not of this file.
+
+Worth noting what the bad rows actually were, because the extractor had already worked it
+out and shipped them anyway: `SDQ_Pro`'s `item_text` reads "Not an item: this code is the
+respondent's Prosocial Behaviour subscale score, the mean of SDQ_Pro1-SDQ_Pro5 rounded to
+the nearest integer (reproduces exactly for all 7,841 respondents)". It is a column in the
+study's deposit that the IRW processing script correctly does not ship, so it has no place
+in an item text table — see the join-key rule in `.claude/skills/irw-auto-itemtext/SKILL.md`.
 
 Two of the 17 turn on one unanswered question: **`altahla_2024` — Arabic or
 Chinese?** #1777 calls it an Arabic administration while all three `altahla_2024_*`
@@ -250,7 +304,9 @@ provenance rows describe Chinese adults completing a Chinese-language version. T
 staged files take the provenance's side — both say `Chinese` — so #1777's claim is
 the outlier, and the likeliest explanation is that it was confused with
 `almuqbil_2022_epds`, which is genuinely Arabic and sits three rows away in the same
-batch. Confirm from the deposit before these two upload.
+batch. **Uploaded 2026-09-02 saying `Chinese`**, i.e. on the provenance's side; the
+deposit confirmation was never made, so this remains an unconfirmed disagreement that
+is now published.
 
 Three tables that belong to this set could not be pulled, because they are not
 published item text at all: `algner2022_oss` and `APFCompact_Ptacek_2024_DASS-21`

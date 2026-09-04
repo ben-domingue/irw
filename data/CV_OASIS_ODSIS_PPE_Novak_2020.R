@@ -20,10 +20,16 @@ ex_data_df <- read_delim("ex.dataset.csv", delim = ";")
 pa_data_df <- read_delim("pa.dataset.csv", delim = ";")
 data_df <- read_sav("retest.data.oasis.odsis.sav")
 
+# The two samples' `code` values are drawn from separate sequences and the
+# frames are rbind'd under a `group` label below, so one code meant two people
+# (irw#1842 block D -- a single collision per table, but a collision). The
+# sample belongs in the id; `group` stays a column.
 ex_data_df <- ex_data_df%>%
-  rename(id = code )
+  rename(id = code ) %>%
+  mutate(id = paste0("Sample 1_", id))
 pa_data_df<- pa_data_df %>%
-  rename(id = code )
+  rename(id = code ) %>%
+  mutate(id = paste0("Sample 2_", id))
 data_df <- data_df %>%
   mutate(id = row_number() )
 

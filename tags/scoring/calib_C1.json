@@ -1,0 +1,102 @@
+[
+ {
+  "table": "abramson_2026_jewish_identity",
+  "shard": "w4"
+ },
+ {
+  "table": "beck_2021_iesr",
+  "shard": "w4"
+ },
+ {
+  "table": "chanal_2020_ecole",
+  "shard": "w4"
+ },
+ {
+  "table": "cooper_2018_funny_topics",
+  "shard": "w3"
+ },
+ {
+  "table": "demirbag_2025_goal_orientations",
+  "shard": "w4"
+ },
+ {
+  "table": "dwyer_2019_clinton_activist",
+  "shard": "w3"
+ },
+ {
+  "table": "fan_2025_mbi_depersonalization",
+  "shard": "w3"
+ },
+ {
+  "table": "gao_2022_stress_response",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_ipip",
+  "shard": "w4"
+ },
+ {
+  "table": "hui_2024_gbfs",
+  "shard": "w3"
+ },
+ {
+  "table": "jordan_2020_burnout",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_marketing_exploration",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2025_jjqx",
+  "shard": "w4"
+ },
+ {
+  "table": "ma2026_igds",
+  "shard": "w3"
+ },
+ {
+  "table": "medvedev_2018_ql",
+  "shard": "w4"
+ },
+ {
+  "table": "morales_2021_asmr15",
+  "shard": "w4"
+ },
+ {
+  "table": "peng_2024_language_boredom",
+  "shard": "w4"
+ },
+ {
+  "table": "prihastiwi_2026_adcap",
+  "shard": "w4"
+ },
+ {
+  "table": "reuter_2021_emotions",
+  "shard": "w4"
+ },
+ {
+  "table": "sandhu_2024_pmo_q23",
+  "shard": "w3"
+ },
+ {
+  "table": "sinsopa_2025_stopbang",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2016_risky_choice_graph",
+  "shard": "w4"
+ },
+ {
+  "table": "trevisan_2018_aq",
+  "shard": "w3"
+ },
+ {
+  "table": "weatherspoon_2015_family_physicians_effectiveness",
+  "shard": "w3"
+ },
+ {
+  "table": "yuebo_2024_tpack",
+  "shard": "w4"
+ }
+]

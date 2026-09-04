@@ -13,8 +13,28 @@ df[] <- lapply(df, function(col) { # Remove column labels for each column
   return(col)
 })
 
+# `number` is labelled "Child's & parent's number" in the .sav: it identifies a
+# child-caregiver dyad, not a respondent. One dyad that survives the filter
+# (id 1) carries two caregiver rows -- different p_sex and different p_age, so
+# two different people rather than a duplicated record -- and its child columns
+# are byte-identical across the two, the same child copied onto both rows.
+#
+# So the id means different things in the two families of tables below, and the
+# repeats need opposite treatment (irw#1842): the parent-report scales are two
+# respondents and must be told apart, the child measures are one measurement
+# recorded twice. Deduping the parent scales would delete a real caregiver;
+# namespacing the child measures would invent a second child.
+parent_df <- df |>
+  group_by(id) |>
+  mutate(id = if (n() > 1) paste0(id, "_", row_number()) else as.character(id)) |>
+  ungroup()
+# The child frames are deduped at the point of use, after the item columns are
+# selected -- distinct() there only collapses rows that agree on every item, so
+# a dyad whose two rows ever disagreed would survive rather than be silently
+# halved.
+
 # ------ Process PRD Dataset ------
-prd_df <- df |>
+prd_df <- parent_df |>
   select(id, starts_with("p_personal_rel_dep"), -ends_with("R"))
 prd_df <- pivot_longer(prd_df, cols=-id, names_to="item", values_to="resp")
 
@@ -23,7 +43,8 @@ write.csv(prd_df, "FEDSP_Trzcinska_2023_PRD.csv", row.names=FALSE)
 
 # ------ Process PSPCSA Dataset ------
 pspcsa_df <- df |>
-  select(id, starts_with("c_PSPCSA"), -c_PSPCSA)
+  select(id, starts_with("c_PSPCSA"), -c_PSPCSA) |>
+  distinct()
 pspcsa_test_df <- pspcsa_df |>
   select(-ends_with("r"))
 pspcsa_retest_df <- pspcsa_df |>
@@ -41,7 +62,7 @@ save(pspcsa_df, file="FEDSP_Trzcinska_2023_PSPCSA.Rdata")
 write.csv(pspcsa_df, "FEDSP_Trzcinska_2023_PSPCSA.csv", row.names=FALSE)
 
 # ------ Process SMSD Dataset ------
-smsd_df <- df |>
+smsd_df <- parent_df |>
   select(id, starts_with("p_SMSD"), -ends_with("R"), -ends_with("total"))
 smsd_df <- pivot_longer(smsd_df, cols=-id, names_to="item", values_to="resp")
 
@@ -50,7 +71,8 @@ write.csv(smsd_df, "FEDSP_Trzcinska_2023_SMSD.csv", row.names=FALSE)
 
 # ------ Process MonKnow Dataset ------
 monknow_df <- df |>
-  select(id, starts_with("c_MonKnow_"))
+  select(id, starts_with("c_MonKnow_")) |>
+  distinct()
 monknow_df <- pivot_longer(monknow_df, cols=-id, names_to="item", values_to="resp")
 
 save(monknow_df, file="FEDSP_Trzcinska_2023_MonKonw.Rdata")

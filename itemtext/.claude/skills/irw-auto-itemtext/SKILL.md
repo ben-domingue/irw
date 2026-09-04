@@ -537,6 +537,23 @@ what becomes `{table}__items.csv`.
 
 ## Step 5 — Validate before writing anything final
 
+**On a published table, run it with `--table-sets`.** Added 2026-09-03. Without it the gate
+calls `irw_fetch()`, which EXPORTS THE WHOLE TABLE to compute `unique(item)` and `unique(resp)`
+-- a few dozen values. The corpus is 181.8GB against a 200GB/30-day cap, and one round exhausted
+it outright on 2026-08-18, so "never `irw_fetch()` merely to satisfy a gate" is a standing rule.
+Until this flag existed that rule was unsatisfiable for a live table (`--resp-csv` only helps one
+that is not published yet), and in batch_016 five agents resolved the conflict five different
+ways -- two skipped the hard gate, two exported, one hand-built a surrogate CSV. Use the flag:
+this step only compares sets, so nothing is lost.
+
+```bash
+Rscript .claude/skills/irw-auto-itemtext/scripts/validate_items.R <table> <items_csv> --table-sets
+```
+
+`--table-sets` and `--resp-csv` are mutually exclusive and the script errors if both are given.
+Neither route carries per-item counts; `audit_batch.R` is what checks those.
+
+
 ```bash
 Rscript .claude/skills/irw-auto-itemtext/scripts/validate_items.R <table> <candidate_items.csv>
 ```
@@ -839,6 +856,22 @@ Separate from `text_source`, which describes the base text. **The allowed values
 `itemtext/provenance_vocab.csv`, not here**; `Rscript itemtext/check_provenance.R`
 validates every provenance file against it and exits non-zero on an unknown value.
 
+`key_source` — where `correct_response` came from, when a table has one. Allowed values
+live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
+`check_provenance.R` enforces both.
+
+- `source_published` — the source states which response is correct; `correct_response`
+  transcribes it.
+- `derived_from_responses` — no published key existed and it was solved from the response
+  data by this project. **Added 2026-09-03 after `mgkt`**, whose codebook prints each
+  question's ten alternatives but never says which five are correct; the key was recovered
+  by least squares (weights exactly +1/-1, reproducing every stored score to 5e-14). The
+  evidence being strong is not the point: this is IRW-generated content in a content field,
+  indistinguishable to a reader from a key the study published, so it is disclosed exactly
+  as a machine translation is. Say in the `note` HOW it was derived and how well it
+  reproduces, so a reader can judge it.
+- empty — no `correct_response`, or the instrument has no correct answer at all.
+
 `machine_translation` means this project generated the English rather than the study's
 authors. That obliges an entry on the public issues page — ratified 2026-09-02 — and
 `check_issues_page.R` now reports those tables as DUE until one exists.
@@ -924,6 +957,13 @@ Before a table leaves your hands, all of these are true and recorded:
    distinguished from every other), and a re-runnable `verify_<table>.R` sits beside the CSV.
 10. `normalize_nulls.R` then `audit_batch.R` run clean, or each WARN is explained;
    `verify_batch.R` and `lint_verification.R` are clean or each flag is explained.
+11. `irw-validate` passes over the batch's `*__items.csv` — it checks the table against the
+   data standard rather than against its source, and catches the two classes the other
+   gates cannot see: a doubled upload (`dup_item_resp`) and two scale directions in one
+   table (`resp_ambiguous`).
+12. `check_provenance.R` passes — every `translation_source` is in
+   `itemtext/provenance_vocab.csv`, and every `machine_translation` table has a line on the
+   public issues page. English this project generated is always disclosed.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
@@ -932,6 +972,12 @@ Rscript .claude/skills/irw-auto-itemtext/scripts/normalize_nulls.R    itemtables
 Rscript .claude/skills/irw-auto-itemtext/scripts/audit_batch.R        itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/verify_batch.R       itemtables/batch_<NNN>
 Rscript .claude/skills/irw-auto-itemtext/scripts/lint_verification.R  itemtables/batch_<NNN>
+
+# Added 2026-09-02. The four gates above check a table against its SOURCE -- do the
+# item and resp sets match, does the mapping reproduce. These two check it against
+# the STANDARD and against the corpus, which nothing in this batch flow did.
+irw-validate itemtables/batch_<NNN>/*__items.csv
+Rscript check_provenance.R ../../irw_site/itemtext_issues.qmd
 ```
 
 The last two are the mapping-side gates: `verify_batch.R` re-runs each table's own

@@ -1,0 +1,20 @@
+table,repeated_pairs,conflicting_pairs,conflict_share,shape,verified_against_source,verdict
+florida_twins_behavior_cads,78146,0,0.0,"duplication: every pair repeats exactly 2x and none of 78,146 ever disagrees",no - statistical only,safe
+florida_twins_behavior_cadsyv,48427,0,0.0,"duplication: every pair repeats exactly 2x and none of 48,427 ever disagrees",no - statistical only,safe
+florida_twins_behavior_ecs,53221,0,0.0,"duplication: every pair repeats exactly 2x and none of 53,221 ever disagrees",no - statistical only,safe
+florida_twins_behavior_friends,16193,0,0.0,"duplication: every pair repeats exactly 2x and none of 16,193 ever disagrees",no - statistical only,safe
+florida_twins_behavior_panas,44101,0,0.0,"duplication: every pair repeats exactly 2x and none of 44,101 ever disagrees",no - statistical only,safe
+florida_twins_behavior_rcads,104498,0,0.0,"duplication: every pair repeats exactly 2x and none of 104,498 ever disagrees",no - statistical only,safe
+florida_twins_behavior_tas,25681,0,0.0,"duplication: every pair repeats exactly 2x and none of 25,681 ever disagrees",no - statistical only,safe
+RD_EppSCQRK_Kipkemoi_2024_scq,1000,0,0.0,duplication or id collision: a tail at 2 only,yes - 25 rows byte-identical across all 66 raw columns,safe
+concretewords,1,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+smacof_pvq40,1,0,0.0,mixed: a tail beyond 2 with most pairs single,"yes - reproduced from the source .rda; rows were id=NA,item=NA from NA-indexing",safe
+FEDSP_Trzcinska_2023_MonKnow,2,0,0.0,duplication or id collision: a tail at 2 only,"yes - one dyad, two caregiver rows, in the source .sav",safe
+FEDSP_Trzcinska_2023_PSPCSA,1188,1182,0.99495,repeated measurement: most pairs repeat,"yes - same dyad; deduped within wave, id+item+wave unique after",safe
+Fh_Okcsr_Roos_2022_study1_Feeling_Heard,2328,0,0.0,duplication or id collision: a tail at 2 only,yes - selector bug confirmed from source column labels,safe
+PROMISPME_Forrest_2021_Family_Children,113,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+PROMISPME_Forrest_2021_Family_Proxy,113,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+PROMISPME_Forrest_2021_LS_Children,56,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+PROMISPME_Forrest_2021_MP_Children,55,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+PROMISPME_Forrest_2021_Physical_Children,79,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe
+PROMISPME_Forrest_2021_Strength_Children,25,0,0.0,duplication or id collision: a tail at 2 only,no - statistical only,safe

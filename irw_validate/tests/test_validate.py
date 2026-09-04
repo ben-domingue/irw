@@ -186,6 +186,20 @@ class ItemText(unittest.TestCase):
         report = validate_frame(self._items(n_rep=2), label="t_2024_scale__items.csv")
         self.assertIn("dup_item_resp", [f.check for f in report.errors])
 
+    def test_two_scale_directions_in_one_table_are_named_as_such(self):
+        # afps_vangsness_2019: resp=1 carries both "Strongly agree" and
+        # "Strongly disagree". Same repeated (item, resp), completely different
+        # fault, and calling it a doubled upload would send someone the wrong way.
+        df = self._items()
+        flipped = df.copy()
+        flipped["option_text"] = flipped["resp"].map(
+            {0: "option 3", 1: "option 2", 2: "option 1", 3: "option 0"})
+        both = pd.concat([df, flipped], ignore_index=True)
+        report = validate_frame(both, label="t_2024_scale__items.csv")
+        checks = [f.check for f in report.errors]
+        self.assertIn("resp_ambiguous", checks)
+        self.assertNotIn("dup_item_resp", checks)
+
     def test_missing_item_text_columns_block(self):
         df = pd.DataFrame({"id": [1], "item": ["a"], "resp": [1]})
         report = validate_frame(df, label="t_2024_scale__items.csv")
@@ -195,6 +209,94 @@ class ItemText(unittest.TestCase):
     def test_the_name_cap_still_applies_to_item_text(self):
         report = validate_frame(self._items(), label=("x" * 41) + "__items.csv")
         self.assertIn("name_length", [f.check for f in report.errors])
+
+
+class ScoredTables(unittest.TestCase):
+    """A scored table is a different object and needs a different rule."""
+
+    def _mc(self, n_items=20, dup=False):
+        rows = {k: [] for k in ("table", "item", "item_text", "correct_response",
+                                "option_text", "resp")}
+        for i in range(n_items):
+            for j, opt in enumerate(("right", "wrong a", "wrong b")):
+                rows["table"].append("mc_2024_quiz")
+                rows["item"].append(i)
+                rows["item_text"].append(f"question {i}")
+                rows["correct_response"].append("right")
+                rows["option_text"].append(opt)
+                rows["resp"].append(1 if j == 0 else 0)
+        df = pd.DataFrame(rows)
+        return pd.concat([df, df.iloc[[0]]], ignore_index=True) if dup else df
+
+    def test_distractors_sharing_a_resp_are_not_a_defect(self):
+        # spanishmegastudy: 1,270 items, three distractors each, all resp=0.
+        # Judged by the Likert rule this would flag every one of them.
+        report = validate_frame(self._mc(), label="mc_2024_quiz__items.csv")
+        self.assertTrue(report.ok, report.findings)
+
+    def test_an_exact_repeat_in_a_scored_table_still_counts(self):
+        report = validate_frame(self._mc(dup=True), label="mc_2024_quiz__items.csv")
+        self.assertIn("dup_row", [f.check for f in report.errors])
+
+    def test_an_empty_correct_response_does_not_read_as_scored(self):
+        # pandas 3 keeps an all-NaN column MISSING through astype(str), so a
+        # string-only emptiness test matches nothing and reads it as populated.
+        df = self._mc()
+        df["correct_response"] = pd.NA
+        df.loc[0, "option_text"] = "wrong a"     # now resp=1 has two labels
+        report = validate_frame(df, label="likert_2024__items.csv")
+        self.assertIn("resp_ambiguous", [f.check for f in report.errors])
+
+class RepeatedMeasures(unittest.TestCase):
+    """A rater or a trial explains a repeated id+item; a group does not."""
+
+    def _rated(self, col="rater"):
+        return pd.DataFrame({"id": [1, 1, 2, 2], "item": ["a", "a", "a", "a"],
+                             "resp": [1, 2, 3, 4], col: [1, 2, 1, 2]})
+
+    def test_a_rater_column_explains_the_repeat(self):
+        report = validate_frame(self._rated(), profile="upload")
+        self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+
+    def test_so_do_trial_and_period(self):
+        for col in ("trialnum", "order", "period", "session", "occasion"):
+            with self.subTest(col=col):
+                report = validate_frame(self._rated(col), profile="upload")
+                self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+
+    def test_a_group_column_does_not(self):
+        # group describes the person, not the occasion -- a person appearing
+        # twice under it is a real question, not an explanation
+        report = validate_frame(self._rated("group"), profile="upload")
+        self.assertIn("dup_id_item", [f.check for f in report.errors])
+
+    def test_a_bare_table_still_fails(self):
+        df = pd.DataFrame({"id": [1, 1], "item": ["a", "a"], "resp": [1, 2]})
+        self.assertIn("dup_id_item",
+                      [f.check for f in validate_frame(df, profile="upload").errors])
+
+    def test_triage_is_unchanged(self):
+        # the 50 callers see what they always saw
+        report = validate_frame(self._rated(), profile="triage")
+        self.assertIn("dup_id_item", [f.check for f in report.findings])
+
+
+class TableNames(unittest.TestCase):
+    def test_every_table_suffix_is_stripped(self):
+        from irw_validate.core import _table_name
+        for label, want in (("a_2024_x.csv", "a_2024_x"),
+                            ("a_2024_x.Rdata", "a_2024_x"),
+                            ("a_2024_x.rds", "a_2024_x"),
+                            ("dir/a_2024_x.tsv", "a_2024_x"),
+                            ("a_2024_x", "a_2024_x")):
+            self.assertEqual(_table_name(label), want)
+
+    def test_the_extension_does_not_fail_the_lowercase_rule(self):
+        # stripping only .csv made all 922 legacy tables fail name_charset on
+        # the capital R of ".Rdata"
+        df = pd.DataFrame({"id": [1, 2], "item": ["a", "b"], "resp": [1, 2]})
+        report = validate_frame(df, label="fine_2019_table.Rdata", profile="legacy")
+        self.assertNotIn("name_charset", [f.check for f in report.findings])
 
 
 class RPythonParity(unittest.TestCase):

@@ -1,0 +1,114 @@
+[
+ {
+  "table": "arora2025_blueq_asynchronous",
+  "shard": "w2"
+ },
+ {
+  "table": "boudreau_2022_police_reform",
+  "shard": "w2"
+ },
+ {
+  "table": "che_2026_upward_social_comparison",
+  "shard": "w2"
+ },
+ {
+  "table": "chen_2026_ch",
+  "shard": "w5"
+ },
+ {
+  "table": "cooper_2018_offensive_topics",
+  "shard": "w3"
+ },
+ {
+  "table": "direkvand_2022_mjsi",
+  "shard": "w4"
+ },
+ {
+  "table": "dpt_noncog__intolerance_of_uncertainty",
+  "shard": "w2"
+ },
+ {
+  "table": "esiason_2024_vlq_importance",
+  "shard": "w3"
+ },
+ {
+  "table": "galindo_2023_social_support",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_prs_peo",
+  "shard": "w4"
+ },
+ {
+  "table": "hoai_2026_teaching_presence",
+  "shard": "w5"
+ },
+ {
+  "table": "islam_2022_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "khoa_2023_assurance",
+  "shard": "w5"
+ },
+ {
+  "table": "kotsou_2016_plc",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2025_socmedia_usefulness",
+  "shard": "w4"
+ },
+ {
+  "table": "ly_2021_animal_empathy",
+  "shard": "w3"
+ },
+ {
+  "table": "milson_2026_self_esteem",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_barthel",
+  "shard": "w4"
+ },
+ {
+  "table": "nicoletti_omni_irw",
+  "shard": "w2"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__con",
+  "shard": "w2"
+ },
+ {
+  "table": "qiang_2025_abusive_supervision",
+  "shard": "w3"
+ },
+ {
+  "table": "rosetti_2023_cas",
+  "shard": "w2"
+ },
+ {
+  "table": "schalet_2016_bai",
+  "shard": "w3"
+ },
+ {
+  "table": "sumner_2022_asi",
+  "shard": "w4"
+ },
+ {
+  "table": "tiemensma_2018_iesr",
+  "shard": "w3"
+ },
+ {
+  "table": "wakui_2023_who5",
+  "shard": "w3"
+ },
+ {
+  "table": "yang_2026_igd_criteria",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2025_environ_awareness",
+  "shard": "w3"
+ }
+]

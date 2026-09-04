@@ -1,0 +1,17 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_19","Simon task (four-alternative arrow version)",NA,NA,"↓ presented below fixation",2,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_19","Simon task (four-alternative arrow version)",NA,NA,"↓ presented below fixation",2,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_20","Simon task (four-alternative arrow version)",NA,NA,"↑ presented below fixation",8,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_20","Simon task (four-alternative arrow version)",NA,NA,"↑ presented below fixation",8,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_21","Simon task (four-alternative arrow version)",NA,NA,"↑ presented above fixation",8,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_21","Simon task (four-alternative arrow version)",NA,NA,"↑ presented above fixation",8,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_22","Simon task (four-alternative arrow version)",NA,NA,"↓ presented above fixation",2,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_22","Simon task (four-alternative arrow version)",NA,NA,"↓ presented above fixation",2,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_23","Simon task (four-alternative arrow version)",NA,NA,"← presented left of fixation",4,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_23","Simon task (four-alternative arrow version)",NA,NA,"← presented left of fixation",4,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_24","Simon task (four-alternative arrow version)",NA,NA,"→ presented left of fixation",6,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_24","Simon task (four-alternative arrow version)",NA,NA,"→ presented left of fixation",6,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_25","Simon task (four-alternative arrow version)",NA,NA,"→ presented right of fixation",6,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_25","Simon task (four-alternative arrow version)",NA,NA,"→ presented right of fixation",6,"correct",1
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_26","Simon task (four-alternative arrow version)",NA,NA,"← presented right of fixation",4,"incorrect",0
+"cogcontrol_gyurkovics_2019_simon","cogcontrol_gyurkovics_2019_simon_1","targ_26","Simon task (four-alternative arrow version)",NA,NA,"← presented right of fixation",4,"correct",1

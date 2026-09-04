@@ -1,0 +1,142 @@
+# Daily refresh of metadata/version_manifest.tsv (roadmap item 3.0, #1705).
+#
+# This job records which released Redivis version of each of the eleven datasets
+# was live at each point in the corpus' history. The R and Python packages read
+# the committed file from raw.githubusercontent, so a refresh that never lands
+# is a refresh no user ever sees, and a version released today but recorded next
+# week is a version nobody can cite in between. Lag is the whole failure mode.
+#
+# Why this runs here and not on Ben's machine:
+# it used to be a crontab entry driving a shell script in the live `src`
+# checkout, and it refused to act unless that checkout happened to be sitting on
+# `main`. It never is -- work happens on feature branches -- so it ran zero
+# times between being installed and 2026-09-04, and said nothing about it. This
+# job needs no local state at all: it reads Redivis (read-only) and commits one
+# file, so nothing about it wants a laptop that is switched on and logged in.
+#
+# Why it opens a pull request instead of pushing to main:
+# `main` requires changes to go through a PR. Ben's own pushes bypass that
+# because `enforce_admins` is off; GITHUB_TOKEN gets no such bypass, so a direct
+# push would simply be rejected. The PR is auto-merged -- `main` requires zero
+# approving reviews -- which keeps the job unattended while leaving an audit
+# trail. Most days the manifest does not change and no PR is opened.
+#
+# This requires the repository setting "Allow GitHub Actions to create and
+# approve pull requests" (Settings -> Actions -> General -> Workflow
+# permissions). Without it `gh pr create` fails with "GitHub Actions is not
+# permitted to create or approve pull requests" *after* the branch has been
+# pushed, which is how it failed the first time this step ran.
+name: version manifest
+
+on:
+  schedule:
+    # 13:30 UTC. That is 06:30 Pacific in summer and 05:30 in winter; the job
+    # is idempotent and the exact minute does not matter, so it is not worth
+    # two entries to hold the local time fixed.
+    - cron: "30 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+concurrency:
+  group: version-manifest
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Refresh manifest
+        id: refresh
+        env:
+          # red_up.auth resolves an exported REDIVIS_API_TOKEN before it looks
+          # at any file, so the secret is all it needs. The helper it calls is
+          # named load_write_token, but this job only ever reads: store the
+          # READ-ONLY token here, not the data.edit one.
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+        run: |
+          set +e
+          python -m red_up.manifest 2>&1 | tee refresh.log
+          rc=${PIPESTATUS[0]}
+          if [ "$rc" -ne 0 ]; then
+            # An IRW version number is a citation, so red_up.manifest recomputes
+            # the whole history and stops if a committed number would come to
+            # mean something else. That should never happen; if it does, a
+            # version was deleted or unreleased on Redivis and a human has to
+            # look before the file moves. Never retry, never --rebuild.
+            if grep -q "refusing to write" refresh.log; then
+              echo "reason=renumber" >> "$GITHUB_OUTPUT"
+            else
+              echo "reason=failed" >> "$GITHUB_OUTPUT"
+            fi
+            exit "$rc"
+          fi
+          if git diff --quiet -- metadata/version_manifest.tsv; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new releases; manifest unchanged."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "rows=$(git diff --numstat -- metadata/version_manifest.tsv | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Open and merge pull request
+        if: steps.refresh.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ROWS: ${{ steps.refresh.outputs.rows }}
+        run: |
+          set -euo pipefail
+          date="$(date -u +%F)"
+          # The run id keeps two runs on the same day from colliding: a
+          # date-only name would already exist on the remote and the push would
+          # be rejected as non-fast-forward. That is not hypothetical -- the
+          # first run that reached this step failed after pushing its branch.
+          branch="manifest/refresh-$date-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add metadata/version_manifest.tsv
+          git commit -m "Version manifest: refresh for $date ($ROWS new row(s))" \
+                     -m "Automated daily run of .github/workflows/version-manifest.yml (#1705)."
+          git push -u origin "$branch"
+          url="$(gh pr create --base main --head "$branch" \
+            --title "Version manifest: refresh for $date ($ROWS new row(s))" \
+            --body "Automated daily refresh. $ROWS new row(s); the manifest is append-only and no committed IRW version number changed meaning, or red_up.manifest would have refused to write. Refs #1705.")"
+          echo "Opened $url"
+          # main requires zero approving reviews, so this merges immediately.
+          # If it ever cannot, the PR stays open and is the visible artifact.
+          gh pr merge "$url" --squash --delete-branch
+
+      - name: Report a refusal or failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REASON: ${{ steps.refresh.outputs.reason }}
+        run: |
+          run_url="$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          if [ "${REASON:-}" = "renumber" ]; then
+            title="IRW version manifest -- $(date -u +%F) [RENUMBER REFUSED]"
+            body="@ben-domingue the daily version-manifest refresh refused to write, because rebuilding the history would change an IRW version number that is already committed. That should not happen: a version number is a citation. Something changed on Redivis -- most likely a version was deleted or unreleased. Do not run with --rebuild until you know which."
+          else
+            title="IRW version manifest -- $(date -u +%F) [FAILED]"
+            body="@ben-domingue the daily version-manifest refresh failed."
+          fi
+          printf '%s\n\nRun: %s\n' "$body" "$run_url" > issue.md
+          gh issue create --title "$title" --body-file issue.md --assignee ben-domingue

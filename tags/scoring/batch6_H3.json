@@ -1,0 +1,114 @@
+[
+ {
+  "table": "abukhalaf_2025_housing_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "anh_2026_finliteracy",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot1_det_core",
+  "shard": "w3"
+ },
+ {
+  "table": "chowdhury2026_ai_literacy",
+  "shard": "w3"
+ },
+ {
+  "table": "conspiracy_asd__thinking_styles",
+  "shard": "w2"
+ },
+ {
+  "table": "donati_2021_cfq7",
+  "shard": "w3"
+ },
+ {
+  "table": "ellis_2016_calc_instrqual",
+  "shard": "w4"
+ },
+ {
+  "table": "forrest_2021_global_health_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "galindo_2023_emotional_intelligence",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_bri_bri",
+  "shard": "w4"
+ },
+ {
+  "table": "gordils_2021_interracial_trust",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2023_medseq",
+  "shard": "w4"
+ },
+ {
+  "table": "khattak_2026_cr",
+  "shard": "w4"
+ },
+ {
+  "table": "leon_guereno_2020_breq",
+  "shard": "w3"
+ },
+ {
+  "table": "liem_2024_perceived_benefit_ema",
+  "shard": "w4"
+ },
+ {
+  "table": "lunacortes_2019_isncc",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_scipop",
+  "shard": "w4"
+ },
+ {
+  "table": "nabizadehchianeh_2026_tempsa",
+  "shard": "w3"
+ },
+ {
+  "table": "niazi_2020_mfq_stereotype",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_work_precautions",
+  "shard": "w3"
+ },
+ {
+  "table": "rodriguezquiroga_2024_epistemic_trust",
+  "shard": "w3"
+ },
+ {
+  "table": "sandhu_2024_pmo_q32",
+  "shard": "w3"
+ },
+ {
+  "table": "soderberg_2024_esm_lecture",
+  "shard": "w5"
+ },
+ {
+  "table": "temesgen_2025_elephant_conserv_attitude",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2024_emotion4",
+  "shard": "w3"
+ },
+ {
+  "table": "xu2024_self_efficacy",
+  "shard": "w2"
+ },
+ {
+  "table": "zeng_2025_academic_buoyancy_efa",
+  "shard": "w3"
+ },
+ {
+  "table": "zubair_2021_social_impact",
+  "shard": "w4"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_oss",
+  "shard": "w3"
+ },
+ {
+  "table": "anh_2026_ai_adoption",
+  "shard": "w4"
+ },
+ {
+  "table": "boni_2018_mbi_ss",
+  "shard": "w3"
+ },
+ {
+  "table": "chatzoudes_2021_ethical_leadership",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2026_self_control",
+  "shard": "w4"
+ },
+ {
+  "table": "dahlstrom_2022_scoare",
+  "shard": "w3"
+ },
+ {
+  "table": "esiason_2024_cfq",
+  "shard": "w3"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "goldberg_2018_sdv_likelihood",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2016_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "jo_2023_crp",
+  "shard": "w4"
+ },
+ {
+  "table": "knight_2026_crt",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_socmedia_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2025_speaking_selfefficacy",
+  "shard": "w3"
+ },
+ {
+  "table": "makransky_2016_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "meloni_2015_parent_interests",
+  "shard": "w3"
+ },
+ {
+  "table": "okeke2025_ai_usefulness_pre",
+  "shard": "w2"
+ },
+ {
+  "table": "perales_2026_digital_financial_literacy",
+  "shard": "w4"
+ },
+ {
+  "table": "pickova2025_fast_fashion_beliefs",
+  "shard": "w2"
+ },
+ {
+  "table": "quinn_2023_roommate_cesd",
+  "shard": "w4"
+ },
+ {
+  "table": "rogers_2021_financial_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "stoyel_2021_edeq_shape_concern",
+  "shard": "w4"
+ },
+ {
+  "table": "torices_2025_bapq",
+  "shard": "w2"
+ },
+ {
+  "table": "xiong_2025_dass21",
+  "shard": "w3"
+ },
+ {
+  "table": "yuebo_2024_sysquality",
+  "shard": "w4"
+ }
+]

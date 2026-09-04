@@ -1,0 +1,150 @@
+[
+ {
+  "table": "aiquipa_2026_dgs",
+  "shard": "w4"
+ },
+ {
+  "table": "amarilla_2020_sf12",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_issahp_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_sureklgel_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "baka2023_uwes",
+  "shard": "w3"
+ },
+ {
+  "table": "chen2022b_socsupport",
+  "shard": "w3"
+ },
+ {
+  "table": "contreras_valdez_2022_rses",
+  "shard": "w3"
+ },
+ {
+  "table": "dolzdelcastellar_2021_eds",
+  "shard": "w3"
+ },
+ {
+  "table": "estevez_2021_feepr",
+  "shard": "w5"
+ },
+ {
+  "table": "feng2026_ec",
+  "shard": "w2"
+ },
+ {
+  "table": "gan_2015_ucla_loneliness",
+  "shard": "w3"
+ },
+ {
+  "table": "ghanbari_2016_helma_numeracy",
+  "shard": "w3"
+ },
+ {
+  "table": "gumus_2025_dietarian_identity",
+  "shard": "w3"
+ },
+ {
+  "table": "iwasa_2016_asi",
+  "shard": "w3"
+ },
+ {
+  "table": "kermen_2022_self_efficacy",
+  "shard": "w4"
+ },
+ {
+  "table": "koksal_2023_psycap",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2020_empathy",
+  "shard": "w4"
+ },
+ {
+  "table": "lindstrom2021_violent_intentions",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2025_learning_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "mancone_2024_ravlt_recall",
+  "shard": "w4"
+ },
+ {
+  "table": "moe2025_scs",
+  "shard": "w3"
+ },
+ {
+  "table": "nam_2024_khlat",
+  "shard": "w3"
+ },
+ {
+  "table": "opladen2025_fkg",
+  "shard": "w2"
+ },
+ {
+  "table": "park_2024_ageism",
+  "shard": "w3"
+ },
+ {
+  "table": "petrocchi_2020_neuroticism",
+  "shard": "w3"
+ },
+ {
+  "table": "ptacek2023_swls",
+  "shard": "w2"
+ },
+ {
+  "table": "ren2019_ypic",
+  "shard": "w2"
+ },
+ {
+  "table": "rzeszutek_2020_ghq28",
+  "shard": "w3"
+ },
+ {
+  "table": "silva_2018_whoqol",
+  "shard": "w3"
+ },
+ {
+  "table": "szabo_2025_wellbeing",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_outcome_expectations",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_manipulation_fear",
+  "shard": "w5"
+ },
+ {
+  "table": "vanteffelen_2020_foa",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2025_growth_mindset",
+  "shard": "w4"
+ },
+ {
+  "table": "wolters2026_symptom_concerns",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_emotional_eating_ders",
+  "shard": "w3"
+ },
+ {
+  "table": "yao_2020_ius",
+  "shard": "w5"
+ }
+]

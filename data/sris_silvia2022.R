@@ -3,7 +3,11 @@
 
 x<-read.csv("SRIS 1200 Cases.csv")
 study<-x$study
-id<-x$id
+# The source's `id` restarts within each of the 15 studies, so participant 1 of
+# AreaS1 and participant 1 of MDD arrived as one person: 221 ids where 1,192
+# people were measured, and 19,420 of the table's 23,840 rows excess
+# (irw#1842 block E). The study is what separates them.
+id<-paste0(study, "_", x$id)
 
 nms<-c("sr01", "sr02", "sr03", "sr04", "sr05", "sr06", "sr07", "sr08", 
 "sr09", "sr10", "sr11", "sr12", "ins01", "ins02", "ins03", "ins04", 

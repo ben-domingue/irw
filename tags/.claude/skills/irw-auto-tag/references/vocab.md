@@ -119,6 +119,7 @@ old form until there is a service account to change it (#1708).
 - `Targeted/specific`
 - `Representative`
 - `Non-human`
+- `Workplace` — added 2026-09-03 (#1704)
 
 **These eight values are two facets, not one (decided 2026-09-01, #1760).**
 
@@ -126,8 +127,32 @@ old form until there is a service account to change it (#1708).
 university or course), `Clinical` (through a health-care setting, or by
 diagnosis or treatment status), `Program-based` (through the specific
 intervention or cohort the study is about), `Internet-based` (an online panel or
-crowdwork platform), `Non-human` (mutually exclusive with everything). **These
+crowdwork platform), `Workplace` (through an employer, an occupation, or a
+professional body), `Non-human` (mutually exclusive with everything). **These
 combine freely** — `Clinical, Educational, Internet-based` is coherent.
+
+**`Workplace` (decided 2026-09-03, #1704).** Respondents were reached through
+their employer, their occupation, or a professional body: an organisation's
+staff, a licensed profession, a union or professional register, a company panel.
+
+It names the *channel*, not a restriction. Recruiting a hospital's nurses is
+`Workplace`; recruiting *nurses who have worked night shifts for five years* is
+`Workplace` plus a FRAME of `Targeted/specific`, and the #1796 amendment governs
+that half unchanged.
+
+**Staff, not clients.** Where the respondents are the institution's clients
+rather than the people who work there, the existing atom applies and `Workplace`
+does not: a study of teachers is `Workplace`, a study of their pupils is
+`Educational`, a study that samples both takes both. Same for a hospital's
+nurses (`Workplace`) against its patients (`Clinical`).
+
+Why it exists: the facet previously had no atom for a workplace, so raters
+either left a published column blank or reached for `Targeted/specific`, which
+answers the other facet. Of 169 already-tagged tables that look occupational, 97
+were blank and 48 said `Targeted/specific` — the shape of raters working around
+a missing category in two directions. **Those existing rows are not being
+corrected**; the atom is for new tagging. See
+`tags/decisions/1704_workplace_setting_atom.md`.
 
 *Frame — how broad was the sampling?*
 
@@ -196,7 +221,108 @@ respondents:
 Record what the respondents read. If an instrument went out in more than one
 language, list them all (`eng, vie`).
 
+### The exception: an instrument multilingual by construction (decided 2026-09-04, #1704)
+
+**Leave `primary language(s)` BLANK when the instrument was fielded in many
+languages simultaneously and the table cannot be attributed to one of them.**
+
+This is not the translated-instrument case. A scale translated into three
+languages and administered as three versions has three languages, and you list
+them. The case here is a single global study — `peters_2025_*` (22 languages,
+one COVID-19 risk tool) and `mede_2025_*` (37 languages, 68 countries, the TISP
+survey) — where every respondent saw exactly one language, the shipped table
+pools them all, and nothing in the table says which respondent read which.
+
+Two rules in this file pull opposite ways there. *List them all* is written for
+an instrument that exists in several languages. *Never guess* forbids
+attributing a language to respondents whose language you do not know. When the
+instrument is multilingual **by construction**, listing all 37 codes asserts
+something false about every individual respondent, and picking one is a guess.
+Blank is the only answer that is true.
+
+Measured before deciding: across six batches, agents wrote 90 predictions for
+these two families and **left 69 of them blank** without being told to. The 21
+that listed codes did so on tables indistinguishable from the ones left blank,
+which is what an unwritten rule looks like. Six had reached publication with
+20-35 codes each while their siblings carried nothing; those were blanked when
+this was ruled.
+
+The cost is known and accepted: roughly 37 tables keep an empty
+`primary language(s)`. That is the same trade the `soderberg_2024` rule already
+makes one step upstream — a repository stamping "Languages: English" describes
+the *record*, not the instrument; here the source describes the *instrument*,
+not the respondent.
+
+## When the dictionary and the source disagree (decided 2026-09-03, #1704)
+
+Sometimes the fetched source is plainly a real, on-topic work whose numbers
+match the dictionary — and it describes a **different instrument** from the one
+the table name and the dictionary description claim. `celik_2026_bpns` fetches a
+Mendeley record with the dictionary's exact n of 653, describing an attitude
+scale and the Big Five Inventory, in which the string "BPNS" appears zero times.
+
+**Split the row by what the disagreement actually touches.**
+
+| field | what to do | why |
+|---|---|---|
+| `construct_name`, `construct type` | **leave blank** | These name the instrument, which is exactly what is in dispute. There is no evidence for either candidate over the other |
+| `sample`, `age range`, `child age`, `item format`, `measurement tool`, `primary language(s)` | **tag them from the source** | These describe the population and the administration, and those hold whichever instrument the table turns out to be |
+
+Record the contradiction in `Notes`, naming what the source actually describes.
+
+This is a real split, not a compromise: a mislabelled dictionary row is worse
+for tagging than a missing one, because a missing row makes the tagger abstain
+while a wrong one makes it *confidently* tag an instrument the table may not
+contain — and nothing downstream can tell the difference. But the sample was
+still recruited however the source says it was.
+
+**Do not resolve it by preferring one side.** Neither the dictionary nor the
+source is authoritative here: the dictionary is a human-maintained sheet with
+known defects (#1864), and the source can be the right paper carrying a wrong
+description. If you can tell which is right — the source names the instrument
+somewhere, or describes a battery the table is plainly one scale of — then there
+is no contradiction and this rule does not apply.
+
+**Report it.** A contradiction is a dictionary defect and it is fixable; the
+whole `celik_2026_*` family turned out to share one. Two agents found the same
+defect independently in a forty-table run, which is what made it visible at all.
+
 ## Construct type (multi-select, comma-separated)
+
+**This column carries decision rules, not just an enum** (decided 2026-09-02,
+#1837). The reasoning, the evidence and the five questions as they were put are
+in `tags/decisions/1837_construct_type.md` — read that before changing any of
+them, and record a change there too.
+
+**1. The tag describes what THIS TABLE measures, never what the study was
+about.** A family of tables from one paper may end up uniform because its tables
+are alike; it must not be uniform because they share a source. `enem` and `imos`
+are legitimately all `Cognitive/educational` — every table is an exam. All 72
+`c19prc_*` tables carrying `Affective/mental health, Opinion/attitude` is not:
+one of them is `wordsum`, a vocabulary test.
+
+**2. Name every facet the instrument genuinely measures**, not the single best
+one. The test: would a researcher searching for the second value want this table
+in their results? Symptoms of one construct do not make a second — a depression
+scale that asks about sleep and appetite is `Affective/mental health` alone. A
+battery measuring mood *and* physical functioning is both.
+
+**3. `Behavioral` is what someone DID; `Personality` is what they are LIKE.**
+Frequency, occurrence and counts of acts are `Behavioral`. Stable dispositions
+are `Personality`, *including* dispositions toward a class of behaviour. "How
+often did you skip class last term" is `Behavioral`; "I tend to put things off"
+is `Personality`. Trait aggression, sensation seeking and procrastination are
+`Personality`.
+
+**4. `Other` means outside all seven values, not undecided between two.** If two
+compete, tag both (rule 2). The legitimate case is an instrument that measures a
+stimulus rather than a person — `sned_bendall_2024`, a database of nature-scene
+images. A general-knowledge test is `Cognitive/educational`.
+
+**5. `Physical health/functioning` covers bodily symptoms, functional capacity
+and disability, whether or not the instrument is used in a mental-health
+context.** A somatic symptom scale such as the PHQ-15 is `Physical
+health/functioning` *and* `Affective/mental health`, per rule 2.
 
 Order doesn't matter. `03_tags.R` sorts atoms into canonical order on export,
 so `Behavioral, Opinion/attitude` and `Opinion/attitude, Behavioral` become the
@@ -224,6 +350,22 @@ differently-ordered existing row as a discrepancy.
 - `Constructed Response`
 - `Mixed`
 - `Slider/continuous`
+
+**`Likert Scale/selected response` is not only for five-point agreement
+scales.** The value names two things, and the second half is the general case:
+*any* item where the respondent picks from options the instrument supplies. So
+it covers a binary yes/no or done/not-done checklist, a 0–2 or 0–3 severity
+scale, a multiple-choice test item, and a true/false item, none of which is a
+Likert scale in the strict sense.
+
+Recorded 2026-09-03 because three raters in the two-path comparison hit exactly
+these cases — a 15-item binary OSCE checklist, a 0–3 HADS, a 0–2 attitude scale
+— reached the same answer, and each flagged it as an unsanctioned guess. It was
+the right answer; the vocabulary just never said so.
+
+`Constructed Response` is the contrast: the respondent supplies the answer
+rather than choosing it. `Mixed` is for an instrument that genuinely does both,
+not for one whose scale has an unusual number of points.
 
 ## Item text available? (single-select)
 

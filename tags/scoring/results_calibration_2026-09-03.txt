@@ -1,0 +1,64 @@
+# w3/w4 calibration, 2026-09-03 (#1704). seed=1704, 150 tables, six blind agents, Sonnet.
+# CORRECTED: the first scoring split `Internet-based (Mturkers, etc)` on its
+# internal comma and dropped it, understating sample-setting fill in BOTH arms.
+# Setting fill is 84.0% (w3/w4) and 51.7% (w5 baseline), not 71.3% and 46.7%.
+
+
+=== baseline predictions_pilot_w5: 60 tables ===
+
+reachability -- did the tagger get a usable source at all
+shard       n   reached  abstained
+?          60    100.0%          0
+ALL        60    100.0%          0
+
+why the unreached were unreached
+  ?: =60
+
+per-column fill, of ALL sampled tables (not of those reached)
+column                      ?      ALL
+primary_languages       73.3%    73.3%
+item_format             83.3%    83.3%
+sample_setting          51.7%    51.7%
+measurement_tool       100.0%   100.0%
+  ------------------------------------   (held, not published)
+construct_type          81.7%    81.7%
+sample_frame            86.7%    86.7%
+construct_name          81.7%    81.7%
+age_range               26.7%    26.7%
+child_age                1.7%     1.7%
+
+by batch -- an outlier here is one agent, not one shard
+  predictions_pilot_w5  60 tables   reached 100.0%
+
+=== calibration: 150 tables ===
+
+reachability -- did the tagger get a usable source at all
+shard       n   reached  abstained
+w3         65    100.0%          0
+w4         85     97.6%          2
+ALL       150     98.7%          2
+
+why the unreached were unreached
+  w3: ok=61  repository_metadata=4
+  w4: fetch_failed=1  no_dictionary_entry=1  ok=58  repository_metadata=25
+
+per-column fill, of ALL sampled tables (not of those reached)
+column                     w3       w4      ALL
+primary_languages       93.8%    91.8%    92.7%
+item_format             93.8%    94.1%    94.0%
+sample_setting          95.4%    75.3%    84.0%
+measurement_tool       100.0%    97.6%    98.7%
+  ---------------------------------------------   (held, not published)
+construct_type          95.4%    94.1%    94.7%
+sample_frame            95.4%    81.2%    87.3%
+construct_name          89.2%    88.2%    88.7%
+age_range               50.8%    54.1%    52.7%
+child_age               10.8%    10.6%    10.7%
+
+by batch -- an outlier here is one agent, not one shard
+  preds_calib_C1  25 tables   reached 100.0%
+  preds_calib_C2  25 tables   reached  96.0%
+  preds_calib_C3  25 tables   reached  96.0%
+  preds_calib_C4  25 tables   reached 100.0%
+  preds_calib_C5  25 tables   reached 100.0%
+  preds_calib_C6  25 tables   reached 100.0%

@@ -1,0 +1,103 @@
+{
+ "H1": [
+  "sun_2026_eap_content",
+  "vaporova_2020_imitation",
+  "wu_2024_video_addiction",
+  "zaehl2023_twq_cohesion",
+  "zubair_2021_org_performance"
+ ],
+ "H2": [
+  "xie_2026_student_questionnaire",
+  "zaehl2023_twq_commitment",
+  "zubair_2021_political_support"
+ ],
+ "H3": [
+  "temesgen_2025_elephant_conserv_attitude",
+  "wang_2024_emotion4",
+  "xu2024_self_efficacy",
+  "zeng_2025_academic_buoyancy_efa",
+  "zubair_2021_social_impact"
+ ],
+ "H4": [
+  "santos_2018_cesd",
+  "stoyel_2021_edeq_binge_purge",
+  "theobald_2017_group_dynamics",
+  "wang_2024_emotion5",
+  "yandun2026_attention",
+  "zeng_2026_gai_exploration"
+ ],
+ "H5": [
+  "rosetti2023_climate_anxiety",
+  "saputra_2023_perceived_ease_of_use",
+  "stoyel_2021_edeq_weight_concern",
+  "tomioka_2022_srh_importance",
+  "wang_2025_automatic_thoughts",
+  "yandun2026_language",
+  "zeng_2026_gai_learning_effect"
+ ],
+ "H6": [
+  "jiang_2021_resilience",
+  "komura_2026_mdmt_ethical",
+  "li_2024_fa",
+  "liu_2023_purchase_behavior",
+  "makransky_2016_mcq_correct",
+  "meloni_2015_deq_ce_child",
+  "nam_2024_selfcare",
+  "okeke2025_response_time",
+  "powell_2018_trust",
+  "rosetti2023_gad7",
+  "saputra_2023_perceived_usefulness",
+  "stoyel_2021_sociocult_info",
+  "torices_2025_dflex",
+  "wang_2026_behavioral_intention",
+  "yang_2015_ethnic_essentialism",
+  "zeng_2026_gai_role_adapt"
+ ],
+ "H7": [],
+ "H8": [
+  "li_2025_marketing_exploitation",
+  "liu_2025_foreign_lang_enjoyment",
+  "matarboumosleh_2017_spai26",
+  "mendes_2019_snycq",
+  "nguyen_2026_autonomy_academic_motivation",
+  "pauli_2021_coercion_attitudes",
+  "qiang_2025_red_tape",
+  "rosyid_2025_ethical_leadership",
+  "shi2024_sas",
+  "sumner_2022_olife",
+  "trang_2023_vocabulary_strategies",
+  "wu2021_empathy",
+  "ye_2025_tq",
+  "zhang_2025_coercive_pressure"
+ ],
+ "H9": [],
+ "H10": [
+  "allen_2025_delaydiscount",
+  "biswas_2024_digital_center_quality",
+  "chen_2024_ts",
+  "conner_2017_hads_anxiety",
+  "deilkas_2019_patient_safety_climate",
+  "dussel_2022_hads14",
+  "extremera_2016_shs",
+  "forycka_2022_mswbi",
+  "gilbert_meta_70",
+  "goldberg_2018_spa_skills",
+  "herrera_2018_iri",
+  "jo_2023_sni",
+  "kraft_todd_2017_competence",
+  "li_2025_socmedia_enjoyment",
+  "lorenz_2016_hope",
+  "mboya_2020_gds15",
+  "morales_2021_erq",
+  "nguyen_2026_barthel",
+  "personality_entrepreneurship_brazil__abex",
+  "rahm_2017_swls",
+  "rowe_2016_symptoms",
+  "shin2024_creactability_quickness",
+  "sun_2024_task_tech_fit",
+  "valverdeberrocoso_2021_learning_design",
+  "wu_2024_proactive_personality",
+  "zaehl2023_hexaco",
+  "zhao_2025_nat_env_perception"
+ ]
+}

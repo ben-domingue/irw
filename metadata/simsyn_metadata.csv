@@ -1,0 +1,9 @@
+table,n_responses,n_categories,n_participants,n_items,responses_per_participant,responses_per_item,density,dataset
+estcrm,5000,0,1000,5,5,1000,1,irw_simsyn
+gilbert_meta_3,90338,2,5314,17,17,5314,1,irw_simsyn
+heller2013_probability,4140,2,345,12,12,345,1,irw_simsyn
+mirt_ggum,10000,3,1000,10,10,1000,1,irw_simsyn
+mirt_mixed,12000,3,2000,6,6,2000,1,irw_simsyn
+mirt_nonlin,12000,2,2000,6,6,2000,1,irw_simsyn
+mudfoldsim,10000,2,1000,10,10,1000,1,irw_simsyn
+tirt_sim_trt,7000,4,500,14,14,500,1,irw_simsyn

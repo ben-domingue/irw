@@ -1,0 +1,102 @@
+[
+ {
+  "table": "ali_2021_gad7",
+  "shard": "w4"
+ },
+ {
+  "table": "busch_2022_course_exacerbate",
+  "shard": "w4"
+ },
+ {
+  "table": "chen2026_sc",
+  "shard": "w2"
+ },
+ {
+  "table": "cucchi_2018_scoff",
+  "shard": "w4"
+ },
+ {
+  "table": "enkavi_2019_dpx_axcpt",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_family_belonging_child",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_bri_ofood",
+  "shard": "w4"
+ },
+ {
+  "table": "han_2026_gad7",
+  "shard": "w4"
+ },
+ {
+  "table": "huo_2025_project_uncertainty",
+  "shard": "w4"
+ },
+ {
+  "table": "kern_2021_learning",
+  "shard": "w2"
+ },
+ {
+  "table": "koo_2016_comm_technique_opinion",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_socmedia_revisit",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2023_brand_trust",
+  "shard": "w3"
+ },
+ {
+  "table": "ma2026_sabas",
+  "shard": "w3"
+ },
+ {
+  "table": "muir_2025_resilience_opinions",
+  "shard": "w3"
+ },
+ {
+  "table": "okeke2025_risk_mitigation",
+  "shard": "w2"
+ },
+ {
+  "table": "peters_2025_nrm_desc_behavior",
+  "shard": "w3"
+ },
+ {
+  "table": "qin_2025_behavioral_intention",
+  "shard": "w2"
+ },
+ {
+  "table": "roettl_2018_arousal",
+  "shard": "w4"
+ },
+ {
+  "table": "sinche_2017_skill_development",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2024_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2026_veteran_expectations",
+  "shard": "w4"
+ },
+ {
+  "table": "ye_2025_mm",
+  "shard": "w5"
+ },
+ {
+  "table": "zeng_2025_megaproject_ecm",
+  "shard": "w4"
+ },
+ {
+  "table": "zhao_2024_anxiety",
+  "shard": "w4"
+ }
+]

@@ -1,0 +1,150 @@
+[
+ {
+  "table": "alexandrowicz_2018_cesd",
+  "shard": "w4"
+ },
+ {
+  "table": "apaza_2026_meim_r",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_kazanc_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_urunpazgeloz_yeterlk",
+  "shard": "w5"
+ },
+ {
+  "table": "balparda_2021_korq_activity_limitation",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2019_cdrsc",
+  "shard": "w3"
+ },
+ {
+  "table": "cosenza_2015_cfc",
+  "shard": "w4"
+ },
+ {
+  "table": "dolzdelcastellar_2021_faces",
+  "shard": "w3"
+ },
+ {
+  "table": "estevez_2021_gest",
+  "shard": "w5"
+ },
+ {
+  "table": "feng2026_intrinsic_motivation",
+  "shard": "w2"
+ },
+ {
+  "table": "gerber_2022_eas_temperament",
+  "shard": "w3"
+ },
+ {
+  "table": "ghanbari_2016_helma_reading",
+  "shard": "w3"
+ },
+ {
+  "table": "hao_2025_emotional_regulation",
+  "shard": "w2"
+ },
+ {
+  "table": "iwasa_2016_dpssr",
+  "shard": "w3"
+ },
+ {
+  "table": "kim_2023_gad7",
+  "shard": "w3"
+ },
+ {
+  "table": "koksal_2023_work_depression",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2020_sleep_quality",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2017_benefit_finding",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2025_mlq",
+  "shard": "w3"
+ },
+ {
+  "table": "marquessanchez_2023_kidmed",
+  "shard": "w4"
+ },
+ {
+  "table": "moe2025_sis",
+  "shard": "w3"
+ },
+ {
+  "table": "nam_2024_selfeff",
+  "shard": "w3"
+ },
+ {
+  "table": "opladen2025_fks",
+  "shard": "w2"
+ },
+ {
+  "table": "park_2024_mbi",
+  "shard": "w3"
+ },
+ {
+  "table": "petrowski_2019_sclk9",
+  "shard": "w3"
+ },
+ {
+  "table": "queiros_2018_qcae",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2019_cpti",
+  "shard": "w2"
+ },
+ {
+  "table": "rzeszutek_2020_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "skalka2025_ai_literacy",
+  "shard": "w2"
+ },
+ {
+  "table": "szabo_2025_work_addiction",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_panas_negative",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_news_consumption",
+  "shard": "w5"
+ },
+ {
+  "table": "vanteffelen_2020_pid5_hostility",
+  "shard": "w4"
+ },
+ {
+  "table": "weber2026_name_knowledge",
+  "shard": "w2"
+ },
+ {
+  "table": "wolters2026_wi",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_emotional_eating_eesr",
+  "shard": "w3"
+ },
+ {
+  "table": "yu_2015_family_environment",
+  "shard": "w3"
+ }
+]

@@ -9,6 +9,11 @@ irw-validate out/x.csv --json                # for CI
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
 
+`irw-validate` is a console script declared in `pyproject.toml`. If the command is not
+found, the editable install predates it — re-run `pip install -e .` from `src/` (this
+machine needs `--break-system-packages`, PEP 668). Otherwise `python3 -m irw_validate.cli`
+works, but only from `src/`.
+
 ## Why this exists
 
 The checks were forked, and neither half could gate anything:

@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_uwes",
+  "shard": "w3"
+ },
+ {
+  "table": "arzamoncunill_2023_epq_admin",
+  "shard": "w4"
+ },
+ {
+  "table": "beck_2021_hads",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot1_attitudes",
+  "shard": "w3"
+ },
+ {
+  "table": "cinar_tanriverdi_2023_gad7",
+  "shard": "w3"
+ },
+ {
+  "table": "dussel_2022_pcl17",
+  "shard": "w4"
+ },
+ {
+  "table": "fredrickson_2015_mhcsf",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_cpi",
+  "shard": "w4"
+ },
+ {
+  "table": "hermans_2015_dm1_rods",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2024_ciacadec",
+  "shard": "w3"
+ },
+ {
+  "table": "kalczajanosi_2021_covid_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "kokoszka_2022_zjn",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2023_poor_adherence",
+  "shard": "w4"
+ },
+ {
+  "table": "mavromoustakos_2016_probability_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_misfit_learning_satisfaction",
+  "shard": "w5"
+ },
+ {
+  "table": "onah_2021_covid_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "personality_handwriting__graphology",
+  "shard": "w2"
+ },
+ {
+  "table": "roettl_2018_brand_recognition",
+  "shard": "w4"
+ },
+ {
+  "table": "schafer_2016_music_effects",
+  "shard": "w4"
+ },
+ {
+  "table": "shi2024_ysq_parent",
+  "shard": "w3"
+ },
+ {
+  "table": "sleboda_2021_risk_benefit",
+  "shard": "w3"
+ },
+ {
+  "table": "valverdeberrocoso_2021_tictip",
+  "shard": "w3"
+ },
+ {
+  "table": "wu2026_novel",
+  "shard": "w2"
+ },
+ {
+  "table": "ye_2025_q32_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "zautra_2015_caug",
+  "shard": "w3"
+ }
+]

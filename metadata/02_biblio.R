@@ -2,6 +2,8 @@
 ##################################################################################
 ##Construct biblio.csv
 library(gsheet)
+source("gsheet_retry.R")  ## retrying gsheet2tbl; see that file
+
 library(redivis)
 source("redivis_config.R")
 library(httr)

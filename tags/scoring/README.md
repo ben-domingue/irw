@@ -1,6 +1,27 @@
 # Auto-tagger scoring (issue #1721, sub-action 2.2)
 
 Scores the `irw-auto-tag` skill against the gold set, per column.
+
+**What that claim rests on, since it is easy to over-read** (established
+2026-09-03, #1704). The agents that produced every `preds_*.json` here
+demonstrably ran the skill's scripts and obeyed its vocabulary: 60 of 60 tables
+in the w5 pilot carry a `fetch_source.py` cache entry, and across all 402
+prediction rows every value in all six controlled columns sits inside
+`vocab.md`'s enums, with none outside. The skill's own files also cite these
+runs as measurements *of themselves* and were amended in response — the
+repository-API fix, the frame-facet amendment, `SKILL.md` twice.
+
+What is **not** established is that any agent was handed `SKILL.md` verbatim.
+No dispatch prompt for any historical run exists anywhere in git. So "scores the
+skill" is well-evidenced at the level of scripts and vocabulary, and unverified
+at the level of instructions. See `tags/decisions/1704_two_tagging_paths.md`.
+
+One thing follows for anyone running a new scoring batch: **a scored run skips
+the skill's Step 1 entirely.** Everything Step 1 consults holds the answers the
+run is being marked against. `SKILL.md` now says so; before 2026-09-03 it did
+not, and every scoring run had suppressed that step without any document
+recording it.
+
 Predictions were produced 2026-08-30. Reproduce with:
 
 ```bash

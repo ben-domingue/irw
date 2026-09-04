@@ -1,0 +1,102 @@
+[
+ {
+  "table": "ali_2021_spfi",
+  "shard": "w4"
+ },
+ {
+  "table": "arzamoncunill_2023_epq_clinical",
+  "shard": "w4"
+ },
+ {
+  "table": "cao_2026_cdss_perceived_autonomy",
+  "shard": "w4"
+ },
+ {
+  "table": "chen2026_mpa",
+  "shard": "w2"
+ },
+ {
+  "table": "choi_2026_cmsce_2021_1",
+  "shard": "w4"
+ },
+ {
+  "table": "de_vries_2022_hexaco_meta",
+  "shard": "w4"
+ },
+ {
+  "table": "fisher_2019_belonging",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_eps_life_events",
+  "shard": "w4"
+ },
+ {
+  "table": "hellstrom_2019_pss14",
+  "shard": "w3"
+ },
+ {
+  "table": "iandolo_2021_asq",
+  "shard": "w3"
+ },
+ {
+  "table": "kern_2021_connectedness",
+  "shard": "w2"
+ },
+ {
+  "table": "kumlander_2018_scs",
+  "shard": "w4"
+ },
+ {
+  "table": "liem_2024_green_competitive_adv",
+  "shard": "w4"
+ },
+ {
+  "table": "lorenz_2016_efficacy1",
+  "shard": "w3"
+ },
+ {
+  "table": "matosaslopez_2024_teacher_assessment",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_autonomy_academic_pressure",
+  "shard": "w5"
+ },
+ {
+  "table": "pakseresht_2021_gmfood_risk_ranking",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_gen_risk_strength",
+  "shard": "w3"
+ },
+ {
+  "table": "pranckeviciene_2022_gad7",
+  "shard": "w3"
+ },
+ {
+  "table": "reinecke_2018_online_vigilance",
+  "shard": "w3"
+ },
+ {
+  "table": "saputra_2023_info_quality",
+  "shard": "w3"
+ },
+ {
+  "table": "tasaygar_2025_bai",
+  "shard": "w4"
+ },
+ {
+  "table": "vonhippel_2023_fsfi",
+  "shard": "w4"
+ },
+ {
+  "table": "ye_2025_q25_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2024_viewer_dsp",
+  "shard": "w4"
+ }
+]

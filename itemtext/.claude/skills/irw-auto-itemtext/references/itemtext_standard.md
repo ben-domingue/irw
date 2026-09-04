@@ -18,6 +18,7 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
+| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
 | `instructions_translated`, `section_prompt_translated`, `item_text_translated`, `option_text_translated` | English translation of the correspondingly named field. Present only for instruments administered in a language other than English. |
 
@@ -110,3 +111,70 @@ live data (this has happened, e.g. `fivpei_perrig_2023_attdiff`: 28 items in the
 21 in the data), or the item/response text can't be fully recovered, do not force a match.
 Emit whatever partial structure is defensible and record the discrepancy — see SKILL.md's
 "Can't fully automate" handling.
+
+## Rights: when item wording may not be shipped
+
+Ruled 2026-09-04 by ben-domingue on irw#1891. Check this **before** transcribing, not
+after — the TIMSS extractions that produced this rule were finished, gated and verified
+before anyone asked whether they could be published.
+
+**The rule.** If the wording's rights holder states a non-commercial restriction on the
+item text, do not ship it. Write no `__items.csv`, record the table `blocked`, and quote
+the clause in `notes_<table>.csv`. This is a determinate block ("licence bars reuse"), not
+a retryable one — an unchanged retry cannot change it.
+
+This mirrors `datastandard.md`, which stops response-data intake on "any NC/ND
+restriction". Until this ruling that rule had no item-text counterpart, so wording was
+being extracted under terms that would have barred the response data outright.
+
+**It fires on a stated restriction, not on an inference.** The test is whether the rights
+holder's own terms — a licence page, a PDF front matter, a per-page watermark, a
+questionnaire's distribution notice — say the material is for non-commercial use. Quote
+the sentence. If you cannot quote one, the rule does not fire.
+
+It specifically does **not** fire because an instrument is a copyrighted scale, is
+reproduced without an explicit grant, or is merely free of charge rather than sold by a
+test publisher. Most academic scales are in that position and remain shippable; "silence
+is not permission" was considered and rejected as the rule, because it would block most of
+the queue. Record what you relied on in `provenance.csv` `note` so a weak basis stays
+auditable.
+
+**A public-domain statement does not override an NC clause.** TIMSS 2003's page says both
+"Although the items are in the public domain" and "for non-commercial, educational, and
+research purposes only". The restriction governs. All three TIMSS cycles are declined on
+this rule, 2003 included.
+
+**Whose terms govern: the source you copied from, not the instrument.** Ruled
+2026-09-04 on the ECR-R. Its author states the scales are "in the public domain",
+that no permission is needed "to use these scales in non-commercial research", and
+that "You may not use the scales for commercial purposes without permission" — the
+same public-domain-beside-an-NC-clause shape as TIMSS 2003. But IRW's copy of ECR
+wording came from a CC BY PLOS deposit's own SPSS variable labels, not from that
+page.
+
+The rule is that **the licence of the source IRW actually copied from governs**. An
+instrument author's non-commercial statement restricts administering the scale; it
+does not retroactively narrow what an openly licensed publication published. So
+wording taken from a CC BY paper ships, and wording taken from a CC BY-NC paper does
+not — `chinvararak_2021_ecr` stays blocked because the only publication of its
+18-item Thai selection is CC BY-NC, and that is a source-level restriction, not an
+instrument-level one.
+
+**But the instrument-level restriction is recorded, not ignored.** Where the rights
+holder states one, set `wording_rights=NC` on every row of that table and add an
+entry to the public issues page. The column is a filterable flag so a commercial
+reuser can exclude those tables with a query instead of reading prose; the prose
+belongs in `public_note` and on the issues page. Omit the column entirely for tables
+with no such restriction — do not emit an empty column to no purpose, the same rule
+the `_translated` columns follow.
+
+This keeps the decision reversible. If the stricter reading — that the instrument's
+terms travel with the wording wherever it appears — is ever adopted, `wording_rights`
+is the query that finds every affected table.
+
+**Watch for wording that is licensed separately from the response data.** The three
+`cdm_timss*` tables record `License: GPL-3.0` — the CDM R package's licence, covering the
+responses as that package redistributes them. It says nothing about IEA's wording, which
+is separate copyright under narrower terms. A table's dictionary licence is evidence about
+the response data only; go to the wording's own source for its terms. This recurs for any
+assessment redistributed through a package or similar wrapper.

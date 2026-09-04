@@ -2,3 +2,4 @@ table,reason
 abdullah_2024_bsq_sev24,"Below the bar: the BSQ's per-item multiple-choice categories were never published, so this is a gap in the source rather than a text-vs-table mismatch."
 alcoholstroop_jones2024,"Below the bar: no per-word correct_response key can exist because ink colour was randomised per trial; nothing in the shipped text contradicts the table."
 arora2025_blueq_pedagogical,"Below the bar: the only caveat is that the study's data file records numeric codes and never published anchors, so the anchors come from the published BLUE-Q. Recorded at round_log.md line 619."
+machivallianism_test_tipi,"Below the bar: its two caveats are a pipeline-internal gate note (validate_items.R skipped against the Redivis export cap, both set checks run server-side instead) and a deliberate transcription choice (instructions holds only the stem the deposit documents, not the TIPI's longer published preamble). Neither is a text-vs-table mismatch."

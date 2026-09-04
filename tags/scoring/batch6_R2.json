@@ -1,0 +1,86 @@
+[
+ {
+  "table": "vaporova_2020_imitation",
+  "shard": "w3"
+ },
+ {
+  "table": "xie_2026_student_questionnaire",
+  "shard": "w3"
+ },
+ {
+  "table": "wang_2024_emotion4",
+  "shard": "w3"
+ },
+ {
+  "table": "santos_2018_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "yandun2026_attention",
+  "shard": "w2"
+ },
+ {
+  "table": "stoyel_2021_edeq_weight_concern",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2026_gai_learning_effect",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2023_purchase_behavior",
+  "shard": "w3"
+ },
+ {
+  "table": "okeke2025_response_time",
+  "shard": "w2"
+ },
+ {
+  "table": "stoyel_2021_sociocult_info",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2026_gai_role_adapt",
+  "shard": "w3"
+ },
+ {
+  "table": "mendes_2019_snycq",
+  "shard": "w3"
+ },
+ {
+  "table": "rosyid_2025_ethical_leadership",
+  "shard": "w4"
+ },
+ {
+  "table": "wu2021_empathy",
+  "shard": "w2"
+ },
+ {
+  "table": "biswas_2024_digital_center_quality",
+  "shard": "w4"
+ },
+ {
+  "table": "dussel_2022_hads14",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_skills",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2025_socmedia_enjoyment",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_barthel",
+  "shard": "w4"
+ },
+ {
+  "table": "shin2024_creactability_quickness",
+  "shard": "w2"
+ },
+ {
+  "table": "zaehl2023_hexaco",
+  "shard": "w2"
+ }
+]

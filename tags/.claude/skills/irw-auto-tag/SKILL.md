@@ -45,6 +45,10 @@ see "Output: staging, not direct write" below.
    (even a `claude-auto` one) unless the user explicitly asks to re-tag.
    Check both the live sheet (`check_table_status.py`) and the local staging
    file (`stage_tag_row.py` already refuses local duplicates on its own).
+4. **Is this run being scored?** If so, stop and read "Step 1 is exactly what a
+   measurement run must NOT do" below before doing anything else. A scored run
+   follows this skill with one step removed, and getting that wrong silently
+   produces an accuracy number that is measuring nothing.
 
 ## Output: staging, not direct write
 
@@ -85,6 +89,33 @@ tagged:
 python3 scripts/check_table_status.py table_a table_b table_c
 ```
 
+### Step 1 is exactly what a measurement run must NOT do
+
+**If this run is being scored, skip this step entirely.** Everything Step 1
+touches — `check_table_status.py`, the live sheet, `metadata/tags.csv`,
+`tags/tags_auto.csv` — holds the answers a scoring run is being marked
+against. On a table that already has a row, consulting them is reading the
+answer key, and the resulting accuracy number means nothing.
+
+This is not hypothetical and it is not a rule anyone broke. **Every scoring run
+this project has done has suppressed Step 1** — #1721, #1722, #1786, #1796,
+#1802 — and until 2026-09-03 no document said so, which made the skill and the
+scoring harness look like two different processes rather than one process run
+two ways. They are not: the harness is this skill, run blind and then gated per
+column. See `tags/decisions/1704_two_tagging_paths.md`.
+
+So there are two modes, and the difference between them is this step alone:
+
+| | Step 1 | idempotency | what it is for |
+|---|---|---|---|
+| **production** | run it | required — never re-stage a tagged table | filling the gap |
+| **measurement** | **skip it** | irrelevant; nothing is staged | finding out how good the tagger is |
+
+A measurement run also stages nothing at all — no `stage_tag_row.py`, no edit to
+`tags_auto.csv` — so the idempotency Step 1 provides is not needed there. Steps
+2, 3 and 4 are identical in both modes, and that is the point: the mode changes
+what the tagger is allowed to *see*, never how it extracts.
+
 ## Step 2 — Resolve the source from the Data Dictionary
 
 ```bash
@@ -99,6 +130,14 @@ and stage a row with every field blank except `table`, `Rater`, and
 `description`/`reference` are useful context even without a `doi` (CRAN
 package docs, OSF pages without a DOI, etc.) — don't require a DOI to
 proceed.
+
+**The dictionary can be wrong, and it is wrong in a specific way.** A row can
+point at a real, on-topic source whose sample size matches exactly, while naming
+an instrument that source never mentions (#1864). When Step 3's text and this
+description disagree about *which instrument the table is*, do not pick a
+winner — see "When the dictionary and the source disagree" in `vocab.md`. The
+short version: leave `construct_name` and `construct type` blank, tag the
+population and format fields from the source, and say so in `Notes`.
 
 ## Step 3 — Fetch the source text
 
@@ -120,6 +159,26 @@ paywall on — not the fetch failing.** Those are different findings:
 | `OK ... content=repository_metadata:N_chars_visible` | **A catalogue record, not a paper** — the deposit's own title, description, keywords and file list, reached through the repository's API because its web page answers a bot challenge | Read it, but tag only what it actually says. It will usually support `construct_name` and sometimes `construct type`; it almost never states a sample or an age range, and vocab.md's rule against inferring those still binds |
 | `UNREACHABLE oa_status=closed` | No open copy exists | Stage `Notes = "cannot fully access due to paywall"` |
 | `UNREACHABLE oa_status=gold\|green\|hybrid\|bronze\|diamond` | An open copy **exists** and something else blocked us — a WAF, a captcha, a JS-only page, a dead link | **Not a paywall.** Stage `Notes = "no working link"`, and it is worth reporting: these are fixable |
+| `UNREACHABLE oa_status=not_checked` | **No DOI**, so OpenAlex was never asked, and the URL refused us — typically a government or institutional data portal answering 403 | **Not a paywall**, and you cannot show it is one: with no DOI there is no open-access status to appeal to. Stage `Notes = "no working link"` |
+| `OK ... content=low_prose_density:N_sentences_per_1k:M_chars_visible` | Long, blocker-free, and **probably furniture** — a CMS or JavaScript shell whose visible text is menus and metadata rather than the work | **Read it before trusting it.** Tag only what the text actually states; if it turns out to be chrome, treat it as `no working link` rather than tagging from the surrounding page |
+
+**What the `content=` string is actually saying.** It carries an *identity*
+verdict, and sometimes a *content* warning appended after a `+`. The identity
+half answers "is this the work we asked for":
+
+| `content=` | meaning |
+|---|---|
+| `doi_in_text` | the requested DOI appears in the fetched text — this is the right work |
+| `title_in_text` | the title matches instead. Same conclusion, weaker evidence |
+| `identity_unchecked` | **no DOI and no title to check against**, so nothing was verified. Normal for a `--url`-only fetch at a data portal, and the case to read most sceptically |
+| `N_chars_visible` | no identity check applied; N characters of visible prose |
+| `repository_metadata:N_chars_visible` | a catalogue record, held to a lower floor — see the row above |
+
+Anything after a `+` is a warning about the content itself, currently only
+`low_prose_density`. So `doi_in_text+low_prose_density:1.6_sentences_per_1k:…`
+means *this is provably the right work, and the page is still mostly furniture*
+— which happens on publisher landing pages that name the article and show none
+of it.
 
 **Data repositories are asked through their APIs** (#1786). Their web pages
 serve a challenge or a JavaScript shell — Dataverse returns HTTP 202 with a
@@ -191,6 +250,30 @@ live-sheet half.
 
 Open a pull request with the new rows in `tags/tags_auto.csv`. **Merging is the
 accept** — no pasting, and nothing to confirm afterwards.
+
+### Columns publish per column, against a measured bar
+
+**Staging a value is not deciding to publish it.** Every column this skill fills
+is held to a per-atom precision bar — currently 90% — measured against the human
+gold set by `tags/scoring/`, and a column that has not cleared it is written by
+the tagger, kept in the predictions for later measurement, and **blanked before
+the rows are staged**. Selection is an act performed at assembly, deliberately
+and once, not something each tagging run decides for itself.
+
+As of 2026-09-03 that means `primary language(s)`, `item format`, `measurement
+tool` and the SETTING facet of `sample` publish; `construct type` and
+`sample`'s FRAME facet do not. Those two are not broken — they are measured, and
+they are under the bar: on the 2026-09-03 comparison `construct type` scored
+50.0% per-atom precision and the frame facet 57.1%.
+
+Do not read the current list off this paragraph and assume it is live. **Quote
+`tags/scoring/` and the most recent results file**, the way `status.json` rather
+than prose is what you quote for coverage.
+
+The gate has earned itself once already: #1802 withheld 44 of 60 `primary
+language(s)` rows after four agents disclosed, unprompted, that they had
+inferred the language from the study's *country* — the move the `age range`
+rule forbids and which `vocab.md` had never addressed for language.
 
 Since #1723 the file is unioned into `tags.csv` by `03_tags.R`, with three rules
 worth knowing:

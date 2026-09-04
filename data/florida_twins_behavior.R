@@ -64,6 +64,22 @@ df1 <- df %>%
 
 df_ <- bind_rows(df0, df1)
 
+# The source file is double-entered, as twin-pair files usually are: every pair
+# occupies two rows, once with each twin as `bg_id0` and once as `bg_id1`. So
+# `bind_rows` over the two arms emits every person exactly twice, with an
+# identical resp and no pair anywhere disagreeing -- 370,267 excess id+item
+# rows across the seven tables below, and a density of 1.99 against 1.24 for
+# the separately-processed `florida_twins_cads` (irw#1842 block A).
+#
+# Done means the row count halves *and the id count does not move*
+# (1,378 for cads, 861 for cadsyv/tas, 1,387 for ecs/panas/rcads, 858 for
+# friends). An earlier reading of this block had it the other way round --
+# that twins cannot agree on 100% of items, so half the data must be missing --
+# and the id counts refute it: `florida_twins_behavior_cads` holds 1,378
+# distinct ids against `florida_twins_cads`'s 1,272 on the identical 57 items.
+# It has more people, not half as many.
+df_ <- distinct(df_)
+
 df_$item <- substring(df_$item, 1, nchar(df_$item) - 1)
 
 df_ <- df_[!(grepl("^n", df_$item) & !grepl("^nes", df_$item)),]

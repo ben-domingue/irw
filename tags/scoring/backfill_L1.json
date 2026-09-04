@@ -1,0 +1,150 @@
+[
+ {
+  "table": "aditama_2024_strs",
+  "shard": "w4"
+ },
+ {
+  "table": "amarilla_2020_barthel",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_gecmis_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_risk_gir_yonel",
+  "shard": "w5"
+ },
+ {
+  "table": "baka2023_bpnsf",
+  "shard": "w3"
+ },
+ {
+  "table": "chen2022_ses",
+  "shard": "w2"
+ },
+ {
+  "table": "chinvararak_2021_ylseq",
+  "shard": "w3"
+ },
+ {
+  "table": "dejesus_2017_sf36",
+  "shard": "w3"
+ },
+ {
+  "table": "emiral_2025_aips",
+  "shard": "w4"
+ },
+ {
+  "table": "feng2026_autonomy",
+  "shard": "w2"
+ },
+ {
+  "table": "frikha_2023_pe_ms",
+  "shard": "w2"
+ },
+ {
+  "table": "ghanbari_2016_helma_access",
+  "shard": "w3"
+ },
+ {
+  "table": "gobbens_2018_adl",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2023_c_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "johnhenderson_2020_disinfection_behavior",
+  "shard": "w3"
+ },
+ {
+  "table": "kim_2025_psqi",
+  "shard": "w3"
+ },
+ {
+  "table": "latifi_2026_insect_fear",
+  "shard": "w3"
+ },
+ {
+  "table": "lindstrom2021_conscientiousness",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2017_ssrs_support",
+  "shard": "w3"
+ },
+ {
+  "table": "luo_2021_host_ties",
+  "shard": "w3"
+ },
+ {
+  "table": "merlo2025_eng_comprehensive",
+  "shard": "w2"
+ },
+ {
+  "table": "moon_2023_selfesteem",
+  "shard": "w4"
+ },
+ {
+  "table": "okamura_2018_burnout",
+  "shard": "w4"
+ },
+ {
+  "table": "ozkurt_2026_sport_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "pellerin2020_mwbs_pd",
+  "shard": "w3"
+ },
+ {
+  "table": "ptacek2023_aaq2",
+  "shard": "w2"
+ },
+ {
+  "table": "ren2019_cpti",
+  "shard": "w2"
+ },
+ {
+  "table": "romadlon_2022_bdi",
+  "shard": "w3"
+ },
+ {
+  "table": "silva_2018_mbds",
+  "shard": "w3"
+ },
+ {
+  "table": "szabo_2025_molbi",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_caregiver_child_regulation",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_data_disclosure",
+  "shard": "w5"
+ },
+ {
+  "table": "tu_2022_achievement_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "wang2022_fomo",
+  "shard": "w2"
+ },
+ {
+  "table": "wolters2026_css",
+  "shard": "w2"
+ },
+ {
+  "table": "xu_2023_pca",
+  "shard": "w4"
+ },
+ {
+  "table": "yao_2020_bdi",
+  "shard": "w5"
+ }
+]

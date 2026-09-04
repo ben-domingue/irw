@@ -1,0 +1,102 @@
+[
+ {
+  "table": "anjum_2022_gad7",
+  "shard": "w3"
+ },
+ {
+  "table": "cavojova_2017_cfc",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2026_ir",
+  "shard": "w5"
+ },
+ {
+  "table": "enkavi_2019_simon",
+  "shard": "w3"
+ },
+ {
+  "table": "fukuda_2021_info_reliability",
+  "shard": "w3"
+ },
+ {
+  "table": "gilbert_meta_110",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_ppq_dream",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_tci",
+  "shard": "w4"
+ },
+ {
+  "table": "hoorani_2022_child_help",
+  "shard": "w3"
+ },
+ {
+  "table": "kern_2021_life_satisfaction",
+  "shard": "w2"
+ },
+ {
+  "table": "komura_2026_gqs_perceived_intelligence",
+  "shard": "w3"
+ },
+ {
+  "table": "lee_2025_nursing_exam",
+  "shard": "w3"
+ },
+ {
+  "table": "luu_2024_stai6",
+  "shard": "w3"
+ },
+ {
+  "table": "mccarlie_2022_ortho_literacy",
+  "shard": "w3"
+ },
+ {
+  "table": "moore_2016_bdi",
+  "shard": "w3"
+ },
+ {
+  "table": "ni_2025_strategic_orientation",
+  "shard": "w4"
+ },
+ {
+  "table": "ordak_2026_vaccine_misreasoning",
+  "shard": "w3"
+ },
+ {
+  "table": "pickova2025_attitude",
+  "shard": "w2"
+ },
+ {
+  "table": "ribeiro_2019_academic_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "shi_2025_dass21",
+  "shard": "w3"
+ },
+ {
+  "table": "stolz_2015_authoritarianism",
+  "shard": "w3"
+ },
+ {
+  "table": "thanh_2025_green_knowledge",
+  "shard": "w3"
+ },
+ {
+  "table": "witus_2022_narrator_perception",
+  "shard": "w4"
+ },
+ {
+  "table": "zamzuri_2021_rpap_risk_perception",
+  "shard": "w3"
+ },
+ {
+  "table": "zubair_2021_psm",
+  "shard": "w4"
+ }
+]

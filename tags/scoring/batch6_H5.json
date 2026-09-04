@@ -1,0 +1,110 @@
+[
+ {
+  "table": "alan_2018_student_gender_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "atmadjaja_2026_work_engagement",
+  "shard": "w3"
+ },
+ {
+  "table": "che_2026_social_wellbeing",
+  "shard": "w2"
+ },
+ {
+  "table": "choy_2022_intent_career",
+  "shard": "w3"
+ },
+ {
+  "table": "cucchi_2018_tas20",
+  "shard": "w4"
+ },
+ {
+  "table": "dong_2025_teacher_leadership",
+  "shard": "w4"
+ },
+ {
+  "table": "enkavi_2019_ant_flanker",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_meaning_purpose_child",
+  "shard": "w4"
+ },
+ {
+  "table": "gao2025_attachment_anxiety",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_eps_cesd",
+  "shard": "w4"
+ },
+ {
+  "table": "han_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "imps2025_hf",
+  "shard": "w2"
+ },
+ {
+  "table": "komura_2026_gqs_perceived_safety",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2021_cultural_intelligence",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2018_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "ma2021_sme_covid",
+  "shard": "w2"
+ },
+ {
+  "table": "megart_tonkovic_2021",
+  "shard": "w2"
+ },
+ {
+  "table": "najari_2024_bpqsf_stress",
+  "shard": "w3"
+ },
+ {
+  "table": "okeke2025_ai_usefulness_post",
+  "shard": "w2"
+ },
+ {
+  "table": "piterova-slovak-science-related-populism",
+  "shard": "w2"
+ },
+ {
+  "table": "rosetti2023_climate_anxiety",
+  "shard": "w2"
+ },
+ {
+  "table": "saputra_2023_perceived_ease_of_use",
+  "shard": "w3"
+ },
+ {
+  "table": "stoyel_2021_edeq_weight_concern",
+  "shard": "w4"
+ },
+ {
+  "table": "tomioka_2022_srh_importance",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2025_automatic_thoughts",
+  "shard": "w4"
+ },
+ {
+  "table": "yandun2026_language",
+  "shard": "w2"
+ },
+ {
+  "table": "zeng_2026_gai_learning_effect",
+  "shard": "w3"
+ }
+]

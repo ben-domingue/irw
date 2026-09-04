@@ -1,0 +1,102 @@
+[
+ {
+  "table": "allen_2025_bis",
+  "shard": "w4"
+ },
+ {
+  "table": "bukurov_2022_comq12",
+  "shard": "w4"
+ },
+ {
+  "table": "che_2026_regulatory_self_efficacy",
+  "shard": "w2"
+ },
+ {
+  "table": "de_vries_2022_hexaco_self",
+  "shard": "w4"
+ },
+ {
+  "table": "forrest_2021_family_involve_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "gao_2022_emotional_resilience",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_hpq_h",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_sdv_influ",
+  "shard": "w4"
+ },
+ {
+  "table": "hayek_2022_subj_norm",
+  "shard": "w3"
+ },
+ {
+  "table": "huang_2016_neo_conscientious",
+  "shard": "w3"
+ },
+ {
+  "table": "kinyanjui_2023_substance_use",
+  "shard": "w3"
+ },
+ {
+  "table": "kushnir2017_anrt",
+  "shard": "w2"
+ },
+ {
+  "table": "lorenz_2016_optimism1",
+  "shard": "w3"
+ },
+ {
+  "table": "marquezpalacios_2026_bdi2",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_willvul",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "odachi_2022_bfs",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_hw_frequency",
+  "shard": "w3"
+ },
+ {
+  "table": "rahman_2022_phq9",
+  "shard": "w3"
+ },
+ {
+  "table": "sandhu_2024_pmo_q13",
+  "shard": "w3"
+ },
+ {
+  "table": "skurvydas_2024_vigour",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2026_eap_difficulty",
+  "shard": "w3"
+ },
+ {
+  "table": "wang_2026_technology_anxiety",
+  "shard": "w3"
+ },
+ {
+  "table": "xu_2022_ples_aa",
+  "shard": "w4"
+ },
+ {
+  "table": "zhang_2025_normative_pressure",
+  "shard": "w3"
+ }
+]

@@ -1,0 +1,46 @@
+369 rows in the frame, 369 tagged, 369 compared
+
+NEW VALUES on the three columns these rows never carried
+  item format          334 of 369    90.5%
+  measurement tool     364 of 369    98.6%
+  sample               333 of 369    90.2%
+
+AGREEMENT on primary language(s): 359 both answered, 91.1% identical, 32 disagree
+
+  ISO 639-2 bibliographic-vs-terminological variants: 10
+     gerber_2022_eas_temperament                    'fra' -> 'fre'
+     monier_2026_sti                                'fra' -> 'fre'
+     pellerin2020_cpc_hope                          'fra' -> 'fre'
+     pellerin2020_cpc_optimism                      'fra' -> 'fre'
+     pellerin2020_cpc_selfefficacy                  'fra' -> 'fre'
+     pellerin2020_gq6                               'fra' -> 'fre'
+     pellerin2020_mwbs_gratbeing                    'fra' -> 'fre'
+     pellerin2020_mwbs_pd                           'fra' -> 'fre'
+     pellerin2020_serenity_acceptance               'fra' -> 'fre'
+     ptacek2023_swls                                'cze' -> 'ces'
+
+  substantive, NOT adjudicated here: 22
+     dejesus_2017_gpm                               'per' -> 'por'
+     dejesus_2017_sf36                              'per' -> 'por'
+     dejesus_2017_womac                             'per' -> 'por'
+     germann_2026_environment                       'ger' -> 'eng'
+     germann_2026_immigration                       'ger' -> 'eng'
+     germann_2026_national_identity                 'ger' -> 'eng'
+     germann_2026_redistribution                    'ger' -> 'eng'
+     germann_2026_state_intervention                'ger' -> 'eng'
+     johnhenderson_2020_disinfection_behavior       'hin' -> 'eng'
+     johnhenderson_2020_health_mindset              'hin' -> 'eng'
+     lee_2020_alcohol_use                           'chi' -> 'eng'
+     lee_2020_burnout                               'chi' -> 'eng'
+     lee_2020_empathy                               'chi' -> 'eng'
+     lee_2020_sleep_quality                         'chi' -> 'eng'
+     lee_2020_social_support                        'chi' -> 'eng'
+     luo_2021_acculturation_index                   'chi' -> 'eng'
+     luo_2021_conational_ties                       'chi' -> 'eng'
+     luo_2021_ecr                                   'chi' -> 'eng'
+     luo_2021_host_ties                             'chi' -> 'eng'
+     luo_2021_intl_ties                             'chi' -> 'eng'
+     moon_2023_coping_problem                       'kor' -> 'kor,vie,chi,fil,eng'
+     weber2026_name_knowledge                       'ger' -> 'ger, eng'
+
+  by family: {'pellerin': 7, 'germann': 5, 'lee': 5, 'luo': 5, 'dejesus': 3, 'johnhenderson': 2, 'gerber': 1, 'monier': 1}

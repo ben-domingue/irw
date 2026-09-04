@@ -1,0 +1,150 @@
+[
+ {
+  "table": "alfort_2023_finger_fx_prom",
+  "shard": "w4"
+ },
+ {
+  "table": "apaza_2026_sdo",
+  "shard": "w4"
+ },
+ {
+  "table": "avci_2024_kimlik_com",
+  "shard": "w5"
+ },
+ {
+  "table": "avci_2024_zorbasetoz_yeterlk",
+  "shard": "w5"
+ },
+ {
+  "table": "balparda_2021_korq_symptoms",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2022_sasc",
+  "shard": "w2"
+ },
+ {
+  "table": "daiku_2021_dirty_dozen",
+  "shard": "w3"
+ },
+ {
+  "table": "dolzdelcastellar_2021_stai",
+  "shard": "w3"
+ },
+ {
+  "table": "estevez_2021_homework_engagement",
+  "shard": "w5"
+ },
+ {
+  "table": "feng2026_perceived_ease_of_use",
+  "shard": "w2"
+ },
+ {
+  "table": "germann_2026_environment",
+  "shard": "w2"
+ },
+ {
+  "table": "ghanbari_2016_helma_understand",
+  "shard": "w3"
+ },
+ {
+  "table": "hao_2025_foreign_language_anxiety",
+  "shard": "w2"
+ },
+ {
+  "table": "iwasa_2016_padua_inventory",
+  "shard": "w3"
+ },
+ {
+  "table": "kim_2023_phq9",
+  "shard": "w3"
+ },
+ {
+  "table": "lai_2023_parent_relation_father",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2020_social_support",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2017_communication",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2025_positive_cognition",
+  "shard": "w3"
+ },
+ {
+  "table": "mascherini_2021_meddiet",
+  "shard": "w4"
+ },
+ {
+  "table": "monier_2026_sti",
+  "shard": "w4"
+ },
+ {
+  "table": "ngo_2025_green_attitude",
+  "shard": "w3"
+ },
+ {
+  "table": "osorio_2023_dos",
+  "shard": "w5"
+ },
+ {
+  "table": "pellerin2020_cpc_hope",
+  "shard": "w3"
+ },
+ {
+  "table": "pilch_2021_coping_behavior",
+  "shard": "w4"
+ },
+ {
+  "table": "reinwarth_2023_domain_importance",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2019_scpv",
+  "shard": "w2"
+ },
+ {
+  "table": "schoepp2022_test_anxiety",
+  "shard": "w2"
+ },
+ {
+  "table": "song_2023_mpats",
+  "shard": "w3"
+ },
+ {
+  "table": "szabo_2025_work_conflict",
+  "shard": "w4"
+ },
+ {
+  "table": "tang_2024_panas_positive",
+  "shard": "w4"
+ },
+ {
+  "table": "torok_2025_news_source_frequency",
+  "shard": "w5"
+ },
+ {
+  "table": "vanteffelen_2020_rpq",
+  "shard": "w4"
+ },
+ {
+  "table": "weeldenburg_2022_brpeq_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "wurm_2016_hbi",
+  "shard": "w3"
+ },
+ {
+  "table": "yang_2023_emotional_eating_uppsp",
+  "shard": "w3"
+ },
+ {
+  "table": "zhao_2025_digital_literacy",
+  "shard": "w4"
+ }
+]
