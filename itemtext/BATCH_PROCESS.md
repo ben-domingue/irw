@@ -445,7 +445,7 @@ is the same each time.
    every table the batch claimed. `clean/` is cleared by the user, not by you. **Never stamp
    ahead of confirmation**; a stamp that runs ahead of the actual upload is worse than none.
 
-Both CSVs are CRLF with every field quoted. Reserialising them with a default `csv.writer`
+Both CSVs are CRLF, but **the quoting is not uniform and this line used to claim it was**: `batch_019/provenance.csv` and `mapping_verification.csv` are MINIMAL-quoted, while `batch_018/provenance.csv` is QUOTE_ALL. Do not assume either. Round-trip the file with the convention you intend to use and check the result is **byte-identical** before writing; if it is not, append or edit the target lines in place. Reserialising them with a default `csv.writer`
 rewrites the whole file — check that a `QUOTE_ALL` + `\r\n` round-trip is byte-identical
 before writing, or edit the target lines in place.
 
