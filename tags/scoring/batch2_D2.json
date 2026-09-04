@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alan_2018_teacher_growth_mindset",
+  "shard": "w4"
+ },
+ {
+  "table": "buczel_2022_inoculation_belief",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot2_attitudes",
+  "shard": "w3"
+ },
+ {
+  "table": "cucchi_2018_rfq",
+  "shard": "w4"
+ },
+ {
+  "table": "eldor_2022_symbolic_threat",
+  "shard": "w4"
+ },
+ {
+  "table": "fitriana_2022_hapwork_field",
+  "shard": "w3"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "grandahl_2017_hpv_beliefs",
+  "shard": "w4"
+ },
+ {
+  "table": "hua_2023_efl_study_engagement",
+  "shard": "w4"
+ },
+ {
+  "table": "karajko2025_ai_risk",
+  "shard": "w2"
+ },
+ {
+  "table": "komura_2026_mdmt_capable",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_policy_environment",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2018_lot_r",
+  "shard": "w3"
+ },
+ {
+  "table": "lozano_2018_self_care",
+  "shard": "w5"
+ },
+ {
+  "table": "muir_2025_resilience_behaviours",
+  "shard": "w3"
+ },
+ {
+  "table": "nicoletti_correct_irw",
+  "shard": "w2"
+ },
+ {
+  "table": "peters_2025_att_instr_strength",
+  "shard": "w3"
+ },
+ {
+  "table": "qiang_2025_surface_acting",
+  "shard": "w3"
+ },
+ {
+  "table": "robbins_2019_risk_quality_belief",
+  "shard": "w3"
+ },
+ {
+  "table": "simard_2018_epm_behavior",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2024_price_value",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2025_green_space_wellbeing",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_green_brand_image",
+  "shard": "w4"
+ },
+ {
+  "table": "zamzuri_2021_rpap_practice",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2026_tourist_wellbeing",
+  "shard": "w4"
+ }
+]
