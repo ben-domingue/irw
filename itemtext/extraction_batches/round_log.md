@@ -2197,3 +2197,127 @@ It was not: `wc -l` counts PHYSICAL lines, and these CSVs carry embedded newline
 file has exactly 52 records, 13 items, resp 1-4, no duplicates. **Count records with a CSV parser, never
 `wc -l`** — the failure mode is a false doubling alarm, and on a different day it could as easily mask a
 real one.
+
+## batch_019 — 2026-09-04
+
+**12 tables claimed. Written 7 / blocked 4 / failed 1. Yield 58% (7/12).**
+Circuit breaker **not tripped**: 1/12 = 8.3% failed, well under the 30% threshold.
+
+**Written (7), all gates green:** `chatton2024_honos13`, `chen_2021_acculturation`,
+`chen_2021_enculturation`, `chen2022b_selfesteem`, `chen2022b_socsupport`, `chen2022_cls`,
+`chen2022_ses`. `audit_batch.R` reports **7 PASS with no anomalies — zero WARNs**, so Step 5c
+had nothing to explain. `verify_batch.R`: 3 PASS + 4 MISSING(exempt, `data_labels`).
+`irw-validate`: ok on all 7, nothing to report. `check_provenance.R`: 267 rows over 21 files,
+69 IRW-generated tables, 0 without a public issues-page entry. `lint_verification.R` initially
+raised 3 ERRORs — all three were the `data_labels` tables awaiting their Step 3 `NOT_NEEDED`
+rows; after adding those, clean at 11 rows. 11 rows merged into `mapping_verification.csv`
+(205 → 216), one per claimed table.
+
+**Blocked (4), all determinate (retry test NO), none counting toward the breaker:**
+`chanal_2020_francais` (text recoverable, mapping not — and the published subscale order is
+positively *refuted* by the data; same block the batch_018 agent reached independently on the
+sibling `chanal_2020_anglais`), `che_2026_regulatory_self_efficacy` (CC BY, but no companion
+paper exists and the RESE's ordered wording is not openly published),
+`chen2025_self_esteem` (deposit publishes no wording and no instrument name; items statistically
+exchangeable), `chinvararak_2021_ecr` (rights: two independent NC clauses).
+
+**Failed (1):** `CHEXI_Lin_2019` — killed by an API rate limit (monthly spend cap) before it read
+anything. No files on disk. Retry test YES; a re-dispatch after the limit resets is all it needs.
+
+### The rate limit nearly cost two completed tables
+Three agents were reported `failed` by the harness with a 429 monthly-spend-cap error, their
+result text showing only "I'll start by reading the skill documentation." **Two of the three had
+in fact finished their entire job** and were killed on the final message: `chatton2024_honos13`
+had written a complete 65-row items CSV plus all four sidecars, and `chanal_2020_francais` had
+written a full determinate block record including its `verify_*.R`. Only `CHEXI_Lin_2019` was
+genuinely killed early, and the tell was that it had left no files at all.
+**Lesson for future rounds: a harness "failed" status reports how the agent's process ended, not
+how much work it completed. The notification's `<result>` excerpt is the FIRST assistant text, not
+the last — it is not evidence of how far the agent got. Always `ls` the batch directory before
+classifying a killed agent.** Trusting the status here would have discarded a clean table and a
+fully-argued block, and marked both for a pointless retry.
+
+### Step 5b orchestrator re-checks (3 agent claims, all independently re-derived)
+- **`chatton2024_honos13` entry/exit duplication — CONFIRMED EXACTLY.** In the source deposit
+  (n=609) `HonosE1` and `HonosS1` are identical for **all 609** participants (differ = 0), while
+  every other entry/exit pair differs for between **103** (item 6) and **379** (item 3). Item 1's
+  admission and discharge waves therefore carry the same values by construction. A **response-data**
+  defect, not an item-text one — the itemtext gates are green and the wording is unaffected.
+  Worth its own GitHub issue.
+- **`chen2025_self_esteem` flat battery — CONFIRMED and sharpened.** Across all 53 item columns of
+  the four sibling scales, **52 have means in 3.101–3.195** (spread 0.094) and SDs in 0.943–1.034;
+  the sole exception is `BI1` at mean 3.772 / SD 1.299. **All 1378 inter-item correlations are
+  positive** (0.017–0.649, mean 0.245) — not one negative, across a battery spanning body image,
+  motivation, peer support and self-esteem. Spans `chen2025_body_image` / `_activity_motivation` /
+  `_peer_support` / `_self_esteem` as a group.
+- **`chen2022b_selfesteem` polarity — CONFIRMED in direction, constants differ.** As stored,
+  alpha = **0.691** with **36/45** inter-item correlations positive; re-reversing the five
+  negatively worded items gives alpha = **0.510** with only **21/45** positive. (The agent reported
+  0.731 vs 0.563 — same conclusion, different NA handling.) The deposit is already
+  direction-aligned, so the paper's uniform anchors do not apply per item and blank `option_text`
+  is right. The item block was also re-checked and is correct: the 10 shipped codes are exactly
+  source columns 31–40, properly excluding the adjacent MSPSS item at column 30.
+  **New, missed by the agent:** the raw deposit carries a single out-of-range value **22** on
+  "I feel I have no strengths"; all nine other RSES columns are clean 1–4 and that column's only
+  outlier is this one cell, so it is an isolated data-entry error (a typo for 2), not a sentinel.
+  It does not reach the shipped item text — the live table's resp set is exactly {1,2,3,4} and the
+  gates pass — but it is recorded as a raw-source observation.
+
+### Escalation raised by the `chinvararak_2021_ecr` agent, endorsed
+The ECR rights reasoning is **not table-specific**: it applies to every IRW table whose wording is
+the ECR / ECR-R / ECR-R-18 / ECR-S. Better ruled once at corpus level than rediscovered per table.
+
+### Also notable
+- **Every table this round used the server-side query route.** No agent performed a full
+  `irw_fetch` export; ground truth came from `irw_table_sets()` / `table_sets.R` throughout.
+- Sibling isolation held. Four same-source pairs ran concurrently (`chen_2021_*`, `chen2022b_*`,
+  `chen2022_*`, plus `chinvararak_2021_ecr` whose out-of-batch sibling `_phq15` was explicitly
+  fenced off) with no cross-writes and no scratch collisions, the per-table `.cache/<table>/`
+  namespacing having done its job.
+- The `chen2022_ses` and `chen2022_cls` agents independently found the same structural signature in
+  the same deposit: the 8 A-numbers absent from A1–A24 are exactly Asher (1984)'s 8 LSDQ filler
+  positions (1/735471 by chance). Corroboration from two directions, not one agent's inference.
+- Sidecar merge used exact-filename deletion, per the batch_016 incident; `verification_merged.csv`
+  survived.
+
+### Triage — 2026-09-04
+
+Done in the runner worktree the same morning the round ran, which is a first: every
+previous batch was triaged days later. Ben cancelled the 06:13 round before this
+(deliberate pause via `circuit_breaker.flag`, not a tripped breaker) — the unattended
+hourly cadence is being replaced, partly because an API monthly spend cap makes firing
+into an empty budget wasteful.
+
+**Gates re-run live, all clean.** `normalize_nulls.R` 0 of 7 needing changes;
+`audit_batch.R` 7 PASS / 0 WARN against current live data; `verify_batch.R` 3 PASS +
+4 MISSING(exempt), the four exempt being exactly the four `data_labels` tables;
+`lint_verification.R` 11 rows, no problems. Nothing the round claimed failed to
+reproduce.
+
+**Staged (6, 509 rows / 99 items)** into `itemtables/clean/`: `chatton2024_honos13`,
+`chen_2021_acculturation`, `chen_2021_enculturation`, `chen2022b_selfesteem`,
+`chen2022b_socsupport`, `chen2022_cls`.
+
+**Held (1): `chen2022_ses`** — Ben's call, see its `notes.csv` row. Not a gate failure:
+all four gates passed. The mapping is `reconstructed` and PARTIAL, laying the canonical
+RSES onto A25..A34 in published order with no source naming an individual item — the
+`gilbert_meta_35` shape. The `chen2022_cls` filler-gap signature pins the A-numbering to
+instrument positions, but nothing establishes that the source used canonical RSES order,
+and A34's lone negative item-rest (-0.16, in an already positively-keyed block) is
+evidence the other way. Unblocking needs a source that NAMES items — the Ji and Yu (1999)
+Chinese adaptation with numbered items, or the authors' codebook.
+
+**Worth noting for future triage:** `draft_issues_qmd.R`, run independently of the
+verify scripts, reached the same conclusion about `chen2022_ses` from the provenance
+alone — "MAPPING IS RECONSTRUCTED, not sourced ... Nothing distinguishes A27 from A28",
+and it reads A34 as "one item left unreversed when the others were scored". Two
+independent routes to the same hold.
+
+**Issues page not yet applied.** Draft for all 7 is in
+`fixes/itemtext_issues_draft_batch019.md`. It is blocked on the upload by design — a
+table gets no entry until it ships — and `chen2022_ses`'s entry must be dropped unless
+that table ships. Applying it edits `../../irw_site/itemtext_issues.qmd`, a different
+repo, so it wants its own branch there.
+
+**Not stamped.** `uploaded=` stays blank in `provenance.csv` and `mapping_verification.csv`
+until Ben confirms the upload actually happened.
