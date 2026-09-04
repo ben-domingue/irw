@@ -84,10 +84,24 @@ def main():
 
     payloads, unknown_all, tally = [], [], Counter()
     multilingual = []
+
+    def has_content(r):
+        """Did this row actually get tagged? Judge the FIELDS, not the label.
+
+        The `status` string is agent-written and drifts: a run whose brief did
+        not spell out the vocabulary produced "reached" for 293 of 369 rows,
+        and trusting it read every one of them as an abstention. Content is the
+        thing that cannot drift -- a row with a measurement tool in it was
+        tagged whatever it calls itself.
+        """
+        return any((r.get(f) or "").strip() for f in
+                   ["age_range", "child_age", "sample", "construct_type",
+                    "measurement_tool", "item_format", "primary_languages",
+                    "construct_name"])
     for r in rows:
         setting, unknown = setting_only(r.get("sample"))
         unknown_all += [(r["table"], u) for u in unknown]
-        if r.get("status") != "tagged":
+        if not has_content(r):
             payloads.append({"table": r["table"], "notes": r.get("notes") or "",
                              "status": "abstained",
                              "reason": r.get("reason") or r.get("notes") or ""})
@@ -156,6 +170,7 @@ def main():
 
     def is_tagged(pay):
         return pay.get("status") != "abstained"
+
 
     stale = [p for p in payloads
              if p["table"].lower() in existing

@@ -52,6 +52,58 @@ TAG_RENAMES <- c(
     "Internet-based (Mturkers, etc)" = "Internet-based"
 )
 
+##ISO 639-2 defines TWO codes for twenty languages -- a bibliographic set and a
+##terminological one -- and both are legal. vocab.md has asked for the
+##bibliographic set since it was written ("bibliographic is the more common
+##convention in the existing data"), but nothing enforced it, so the published
+##corpus carries both spellings for six languages at once:
+##
+##  ces  10 / cze  27      dut  37 / nld 16
+##  chi 231 / zho  13      fas   3 / per 17
+##  deu  35 / ger 119      fra  33 / fre 11
+##
+##That is not a tagger error and not a judgement call. It is one language with
+##two names, and it silently breaks exact-match filtering: `primary language(s)
+##= 'ger'` misses 35 German tables, `= 'chi'` misses 13 Chinese ones. Found
+##2026-09-04 when the #1850 backfill re-tagged 369 rows and ten of its 32
+##language disagreements turned out to be this and nothing else.
+##
+##Normalised on export for the same reasons the rename above is: the Sheet is
+##not writable from code (#1708), this is idempotent, and it repairs rows typed
+##years ago as well as rows typed tomorrow. All twenty pairs are listed, not
+##just the six seen so far, because the cost of the other fourteen is nothing
+##and the cost of missing one is another silent split.
+LANGUAGE_RENAMES <- c(
+    sqi = "alb", hye = "arm", eus = "baq", bod = "tib", mya = "bur",
+    ces = "cze", zho = "chi", cym = "wel", deu = "ger", nld = "dut",
+    ell = "gre", fas = "per", fra = "fre", kat = "geo", isl = "ice",
+    mkd = "mac", mri = "mao", msa = "may", ron = "rum", slk = "slo",
+    ##`jap` is not an ISO 639-2 code at all; Japanese is `jpn` in both sets.
+    ##vocab.md records it as one of the spellings already in the sheet.
+    jap = "jpn"
+)
+
+##Applies LANGUAGE_RENAMES to one `primary language(s)` cell. Splits on commas,
+##maps each code, and rejoins -- so `fra, eng` becomes `fre, eng` and a cell
+##that is already bibliographic is returned unchanged. Anything that is not a
+##three-letter code (the sheet contains stray notes like "need help") is passed
+##through untouched rather than mangled: this function fixes spellings, it does
+##not police the column.
+normalize_language_codes <- function(x) {
+    vapply(x, function(cell) {
+        if (is.na(cell) || !nzchar(trimws(cell))) return(cell)
+        parts <- trimws(strsplit(cell, ",", fixed = TRUE)[[1]])
+        ##`[[` on a named vector ERRORS on a missing name rather than
+        ##returning NULL, so test membership first. Anything not in the map --
+        ##`eng`, or one of the stray notes the sheet contains -- passes through.
+        mapped <- vapply(parts, function(p) {
+            k <- tolower(p)
+            if (k %in% names(LANGUAGE_RENAMES)) LANGUAGE_RENAMES[[k]] else p
+        }, character(1))
+        paste(mapped[nzchar(mapped)], collapse = ", ")
+    }, character(1), USE.NAMES = FALSE)
+}
+
 ##Repairs for atoms that are already corrupt in the exported data: the four
 ##bare rows split on the value's internal comma, yielding "Internet-based
 ##(Mturkers" plus a stray "etc)". Applied after splitting.
@@ -143,6 +195,13 @@ normalize_multiselect <- function(x, column, vocab = TAG_VOCAB) {
 normalize_tag_columns <- function(tag, vocab = TAG_VOCAB) {
     for (column in intersect(names(vocab), names(tag))) {
         tag[[column]] <- normalize_multiselect(tag[[column]], column, vocab)
+    }
+    ##`primary language(s)` is deliberately NOT in TAG_VOCAB -- it is free text
+    ##with 91 distinct values and no enum to enforce. It still needs its two
+    ##ISO 639-2 spellings collapsed to one; see LANGUAGE_RENAMES above.
+    if ("primary language(s)" %in% names(tag)) {
+        tag[["primary language(s)"]] <-
+            normalize_language_codes(tag[["primary language(s)"]])
     }
     tag
 }

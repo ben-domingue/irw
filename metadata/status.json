@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-04T05:21:11-0700",
+  "generated": "2026-09-04T06:32:31-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
@@ -20,20 +20,20 @@
         "pct_of_all_tables": 17.1
       },
       "sample": {
-        "n": 3421,
-        "pct": 82.8
+        "n": 3716,
+        "pct": 89.9
       },
       "construct type": {
         "n": 2254,
         "pct": 54.5
       },
       "measurement tool": {
-        "n": 3727,
-        "pct": 90.2
+        "n": 4089,
+        "pct": 98.9
       },
       "item format": {
-        "n": 3647,
-        "pct": 88.2
+        "n": 3980,
+        "pct": 96.3
       },
       "primary language(s)": {
         "n": 3896,
