@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alasmari_2025_ai_trust_confidence",
+  "shard": "w4"
+ },
+ {
+  "table": "bakker_2020_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "chatzoudes_2021_job_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "conner_2017_vitality",
+  "shard": "w3"
+ },
+ {
+  "table": "falih_2026_dass21",
+  "shard": "w3"
+ },
+ {
+  "table": "gao2025_family_support",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_eps_spirituality",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_prs_pey",
+  "shard": "w4"
+ },
+ {
+  "table": "gordils_2021_intergroup_anxiety",
+  "shard": "w4"
+ },
+ {
+  "table": "horiuchi_2024_rsmsm",
+  "shard": "w3"
+ },
+ {
+  "table": "kilic_2024_mental_toughness",
+  "shard": "w4"
+ },
+ {
+  "table": "kraft_todd_2017_care_measure",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2023_attitude",
+  "shard": "w3"
+ },
+ {
+  "table": "malinowska_2021_saq_nurses",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_goals_priority",
+  "shard": "w4"
+ },
+ {
+  "table": "nam_2024_attitude",
+  "shard": "w3"
+ },
+ {
+  "table": "nordhoff_2021_safety",
+  "shard": "w4"
+ },
+ {
+  "table": "pedroso_2021_ifsq_laissezfaire",
+  "shard": "w4"
+ },
+ {
+  "table": "qin_2025_perceived_cultural_distance",
+  "shard": "w2"
+ },
+ {
+  "table": "roelen_2020_dietary_diversity",
+  "shard": "w3"
+ },
+ {
+  "table": "sirventruiz_2025_pdat",
+  "shard": "w4"
+ },
+ {
+  "table": "sumner_2022_lshs",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2025_cognitive_fusion",
+  "shard": "w4"
+ },
+ {
+  "table": "wu2026_typical",
+  "shard": "w2"
+ },
+ {
+  "table": "zhang_2020_trait_creativity_mood",
+  "shard": "w3"
+ }
+]

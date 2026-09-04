@@ -1,0 +1,102 @@
+[
+ {
+  "table": "agarwal_2023_dreem",
+  "shard": "w4"
+ },
+ {
+  "table": "arabaci_2025_skill_diversity",
+  "shard": "w4"
+ },
+ {
+  "table": "celik_2026_academic_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "choy_2022_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "esiason_2024_vlq_consistency",
+  "shard": "w3"
+ },
+ {
+  "table": "ganbat_2022_pollution_disease_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_eps_adjectives",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_ppq_via_strengths",
+  "shard": "w4"
+ },
+ {
+  "table": "gomez_2020_mpq",
+  "shard": "w3"
+ },
+ {
+  "table": "hoorani_2022_epreas",
+  "shard": "w3"
+ },
+ {
+  "table": "khoa_2023_teaching_materials",
+  "shard": "w5"
+ },
+ {
+  "table": "kotsou_2016_bdi",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2021_org_cultural_diversity",
+  "shard": "w3"
+ },
+ {
+  "table": "makowska_2023_pdts",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_clim_emotions",
+  "shard": "w4"
+ },
+ {
+  "table": "nakano_2020_osce_contact_precautions",
+  "shard": "w2"
+ },
+ {
+  "table": "nicoletti_correct_irw",
+  "shard": "w2"
+ },
+ {
+  "table": "pang_2023_perceived_ease_use",
+  "shard": "w4"
+ },
+ {
+  "table": "pickova2025_behavioral_intent",
+  "shard": "w2"
+ },
+ {
+  "table": "rivero_2022_piccolo_mother",
+  "shard": "w4"
+ },
+ {
+  "table": "shin2024_creactability_creativity",
+  "shard": "w2"
+ },
+ {
+  "table": "stoyel_2021_athlete_internal",
+  "shard": "w4"
+ },
+ {
+  "table": "turner_2022_sr_belief_change",
+  "shard": "w3"
+ },
+ {
+  "table": "woodall_2020_bfi44",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2026_gai_inst_support",
+  "shard": "w3"
+ }
+]

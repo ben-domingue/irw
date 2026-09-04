@@ -1,0 +1,102 @@
+[
+ {
+  "table": "anh_2026_finwellbeing",
+  "shard": "w4"
+ },
+ {
+  "table": "carney_2023_substance_use",
+  "shard": "w3"
+ },
+ {
+  "table": "chen_2024_smu",
+  "shard": "w5"
+ },
+ {
+  "table": "eldor_2022_realistic_threat",
+  "shard": "w4"
+ },
+ {
+  "table": "fukuda_2021_health_literacy",
+  "shard": "w3"
+ },
+ {
+  "table": "gholami_2017_periodontal_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_pda360",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_changeability",
+  "shard": "w4"
+ },
+ {
+  "table": "herrera_2018_beliefs_about_empathy",
+  "shard": "w3"
+ },
+ {
+  "table": "jo_2023_sno",
+  "shard": "w4"
+ },
+ {
+  "table": "klatt_2016_speed_estimation",
+  "shard": "w4"
+ },
+ {
+  "table": "lee_2015_cbcl",
+  "shard": "w4"
+ },
+ {
+  "table": "lu_2017_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "matarboumosleh_2017_gad2",
+  "shard": "w3"
+ },
+ {
+  "table": "milavic_2019_psisysf",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_sdt_relatedness",
+  "shard": "w5"
+ },
+ {
+  "table": "okeke2025_decision_confidence_pre",
+  "shard": "w2"
+ },
+ {
+  "table": "pham_2026_gp",
+  "shard": "w5"
+ },
+ {
+  "table": "ren_2024_loneliness",
+  "shard": "w4"
+ },
+ {
+  "table": "senosy_2025_anxiety_trait",
+  "shard": "w2"
+ },
+ {
+  "table": "sokolovskii_2021_tfeq",
+  "shard": "w4"
+ },
+ {
+  "table": "tanck_2021_bcq",
+  "shard": "w3"
+ },
+ {
+  "table": "wijesinghe_2025_sustained_agile_usage",
+  "shard": "w3"
+ },
+ {
+  "table": "yuebo_2024_tck",
+  "shard": "w4"
+ },
+ {
+  "table": "zhu_2026_llm_meteorology_performance",
+  "shard": "w4"
+ }
+]

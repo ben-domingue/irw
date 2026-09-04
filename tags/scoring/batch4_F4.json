@@ -1,0 +1,102 @@
+[
+ {
+  "table": "ali_2021_iesr",
+  "shard": "w4"
+ },
+ {
+  "table": "bittencourt_2021_dfs2",
+  "shard": "w3"
+ },
+ {
+  "table": "chatzoudes_2021_turnover_intention",
+  "shard": "w4"
+ },
+ {
+  "table": "conspiracy_asd__thinking_styles",
+  "shard": "w2"
+ },
+ {
+  "table": "fisher_2019_structure",
+  "shard": "w3"
+ },
+ {
+  "table": "gao2025_sse",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_hpi",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_sdv_happy",
+  "shard": "w4"
+ },
+ {
+  "table": "grant_2018_ersq",
+  "shard": "w3"
+ },
+ {
+  "table": "hua_2023_efl_course_experience",
+  "shard": "w4"
+ },
+ {
+  "table": "kim2020_ams",
+  "shard": "w2"
+ },
+ {
+  "table": "kuczyk_2024_facemask_fba",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2023_perceived_control",
+  "shard": "w3"
+ },
+ {
+  "table": "manolika_2021_reading_preferences",
+  "shard": "w4"
+ },
+ {
+  "table": "mede_2025_outspokenness",
+  "shard": "w4"
+ },
+ {
+  "table": "nam_2024_function",
+  "shard": "w3"
+ },
+ {
+  "table": "nteveros_2021_mbi",
+  "shard": "w3"
+ },
+ {
+  "table": "perfectionismlit_2021_prepost",
+  "shard": "w2"
+ },
+ {
+  "table": "quarter_life_crisis__cd",
+  "shard": "w2"
+ },
+ {
+  "table": "rzeszutek_2020_wwii_patgrandmother",
+  "shard": "w3"
+ },
+ {
+  "table": "skarzauskiene_2026_science_engagement",
+  "shard": "w5"
+ },
+ {
+  "table": "sun_2024_usage",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2025_impulse_control",
+  "shard": "w4"
+ },
+ {
+  "table": "wu_2025_drone_delivery",
+  "shard": "w4"
+ },
+ {
+  "table": "zhang_2024_attractiveness",
+  "shard": "w4"
+ }
+]

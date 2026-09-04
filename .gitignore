@@ -35,3 +35,5 @@ metadata/pipeline_logs/version_manifest_*.log
 
 ##Per-agent fetch caches for concurrent tagging runs (#1704, P5).
 tags/.caches/
+
+tags/.caches/
