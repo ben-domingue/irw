@@ -13,7 +13,7 @@ closing `)---")` and re-check that the YAML parses. Order does not matter; the
 page sorts by table name. A table whose `uploaded` stamp is still blank gets no
 entry until it ships, and `check_issues_page.R` will re-report it once it does.
 
-Source batches: itemtables/batch_022
+Source batches: itemtables/batch_022, itemtables/batch_023
 
 ## `promis1wave1_anger` (batch_022)
 
@@ -234,4 +234,121 @@ Source batches: itemtables/batch_022
   issue: |-
     Seven institutional-trust items. resp 0-10 is a percentage slider in ten-point steps: 0 = 'No trust', then 10% at resp 1 through 90% at resp 9. The form's label for the top position is not recoverable from the deposited PDF, so resp 10 carries no option_text, though the arithmetic of the scale makes it 100%. Note on the table name: the `ecps_sahm_2024_` prefix points at Sahm et al.'s German Emotion Regulation Questionnaire validation, which is not what this table is. These responses are the COVIDiSTRESS Global Survey Round II; its cleaned data file is hosted inside that study's OSF project, which is how the two came to be conflated. The name is kept because renaming a published table breaks every existing reference to it.
 ```
+
+## `conspiracy_asd__cognitive_flexibility` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=https://doi.org/10.6084/m9.figshare.30903575.v2 (CC BY 4.0); "Plain text version of survey.docx" + Qualtrics header rows of "Questionnaire 1 (Conspiracy Beliefs)_July 16 2024_08.34.xlsx" -->
+<!-- full note: 20-item Cognitive Flexibility Inventory. The deposit's Qualtrics export labels each column in header row 1 (e.g. 'Cognitive flexibility - I am good at ''sizing up'' situations') and header row 0 carries the codes ._1..._20; data/conspiracy_belief_schizotypy_asd.py assigns cfi_1..cfi_20 by rank over exactly those 20 columns (raw indices 32-51 bounded by the THINKING STYLES TOTAL and COGNITIVE FLEXIBILITY TOTALS columns) so rank == label number. Item wording transcribed from the deposit's plain-text survey docx rather than those labels because the processed xlsx's label row has a global find/replace artifact that turned every 'no' into '2' ('k2w'=know, '2t'=not, 'a2ther'=another); the deposit's RAW DATA xlsx carries the same labels uncorrupted and matches the docx word for word. Only deviation from literal transcription: the U+FB01 'fi' ligature in the docx (difﬁcult, ﬁnd) was expanded to 'fi'. Response anchors 1=Strongly disagree .. 7=Strongly agree taken from the docx's own scale table printed under the Cognitive Flexibility heading. Per-item n in the raw file is 433 for all 20 columns, matching irw_table_sets() per-item n exactly. -->
+
+```yaml
+- table: conspiracy_asd__cognitive_flexibility
+  issue: |-
+    Item wording here comes from the deposit's plain-text survey document, not from the coded Qualtrics workbook that accompanies it. That workbook's label row is corrupted by a global find/replace of 'no' to '2' -- it reads 'I feel I have 2 power' and 'I just don't k2w what to do' -- so anyone comparing this table against those labels will find differences. The plain-text document agrees word for word with the uncorrupted labels in the deposit's raw data file.
+```
+
+## `conspiracy_asd__conspiracy_gcbs` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=https://doi.org/10.6084/m9.figshare.30903575.v2 (raw Excel header row; survey .docx Table 6) -->
+<!-- full note: Item codes gcbs_1..gcbs_15 are assigned positionally by data/conspiracy_belief_schizotypy_asd.py (SCALES entry range(64,79), prefix 'gcbs', enumerate start=1) over the raw Figshare Excel. That positional range was diffed against the file's own header row: columns 64-78 (0-based) are exactly the 15 cells labelled 'Conspiracy Beliefs - <item>', bracketed by 'ASD TRAITS TOTALS' at 63 and 'CONSPIRACY BELIEFS TOTALS' at 79, so gcbs_N is the Nth GCBS column and its text is the label at that position. Words shipped from that same header row with the file's 'no'->'2' corruption reversed; instructions and the endpoint anchors from the study's survey .docx (Table 6), which reproduces the same 15 items in the same order. -->
+
+```yaml
+- table: conspiracy_asd__conspiracy_gcbs
+  issue: |-
+    The source Excel's question-text header carries a mechanical corruption in which the letters 'no' were replaced by the digit '2' (e.g. 'in2cent', 'tech2logy'); the item text published here reverses that substitution.
+```
+
+## `conspiracy_asd__schizotypy` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=Figshare 10.6084/m9.figshare.30903575.v2 (CC BY 4.0): item text and instructions from "Plain text version of survey.docx"; item code mapping from the header rows of "RAW DATA Questionnaire 1 (Conspiracy Beliefs)_June 4, 2024" and "Questionnaire 1 (Conspiracy Beliefs)_July 16, 2024" (columns ._1 .. ._37, "Schizotypy - <item text>") -->
+<!-- full note: Mapping is data-file labels: data/conspiracy_belief_schizotypy_asd.py assigns schizotypy_1..37 positionally over coded-workbook columns 80-116, whose own header numbering runs ._1 .. ._37 with the item text inline, so rank and label number coincide 1:1. Diffed all 37 shipped item_text strings against the source header at that position: identical apart from comma/period punctuation. Words shipped from the survey docx rather than the coded header because the coded header row carries a find-and-replace defect (every "no" rendered "2"); the RAW Qualtrics export header is uncorrupted and matches the docx. "Schizotypy - " section prefix stripped from the header strings when diffing. Response anchors from the 5-point table printed under the schizotypy instructions in the docx. Instructions transcribed verbatim including their "from 1 to 4", which contradicts that table and the 1-5 data. -->
+
+```yaml
+- table: conspiracy_asd__schizotypy
+  issue: |-
+    The item codes are a 37-item sequence, not MSS-B item numbers: the study administered all 38 MSS-B items but its deposited data omit "I believe that dreams have magical properties" (survey item 11), so schizotypy_11 onward are offset by one from the published MSS-B numbering. The transcribed instructions also say to answer "from 1 to 4" while the anchor table beneath them and the data are 1-5.
+```
+
+## `conspiracy_asd__thinking_styles` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=Figshare 10.6084/m9.figshare.30903575.v2 (CC BY 4.0): "Plain text version of survey.docx" (Thinking Styles item wording, instruction line, and the 1-5 anchor legend table) and the coded workbook's row 1 (column-level 'Thinking Styles - ...' labels, used for column identity only) -->
+<!-- full note: Item codes ts_1..ts_10 are assigned POSITIONALLY by data/conspiracy_belief_schizotypy_asd.py (ts_N <- raw workbook 0-based column 21+N-1), so the positional claim was checked rather than assumed: each source column's mean, floor% and ceiling% reproduce the live IRW per-item values exactly (largest mean deviation 4.6e-07, attributable to rounding the hard-coded source means to 6 d.p.; floor/ceiling identical to 1e-04 pp). Words taken from the deposit's survey.docx, not from the workbook header row, because the latter carries a find/replace corruption ('k2w' for 'know'). Leading item numbering stripped. Response anchors come from the survey's own instruction line and its 1-5 anchor legend table; midpoints 2-4 are unlabelled in the source and shipped blank. Rights: the source IRW copied from is CC BY 4.0 and no non-commercial statement by the REI's rights holder could be quoted, so no wording_rights flag is set. -->
+
+```yaml
+- table: conspiracy_asd__thinking_styles
+  issue: |-
+    The instrument is the 10-item Rational-Experiential Inventory short form, administered under the survey's own heading 'Thinking Styles'. Only the two extreme scale points are labelled on the instrument ('completely false' and 'completely true'), so `option_text` is blank for responses 2, 3 and 4 -- those points are genuinely unlabelled rather than missing. Wording is taken from the deposit's plain-text survey document, because the coded workbook's labels carry a find/replace artifact ('k2w' for 'know').
+```
+
+## `cooper_2018_funny_topics` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0201258 -- S3 File (survey instrument, .docx) for the wording; S5 File (S3 File data, .xlsx) for the column headers; S1 File (S1 Table) for the verification statistics -->
+<!-- full note: The IRW item codes ARE the S5 File .xlsx column headers verbatim (data/cooper_2018_humor.py melts the 34 funny.* columns with no renaming), and each header names its joke subject, so code->subject needs no inference. The wording shipped in item_text is the survey's own literal list from the S3 File ('jokes about African Americans', 'food puns', ...), trailing whitespace stripped, matched to the codes by subject name. instructions concatenates the two consecutive survey paragraphs that frame this checklist (the shared funny/offensive preamble and the funny-specific select-all stem), verbatim. option_text is NOT verbatim source text: this is a check-all-that-apply battery and the source publishes no response labels, so 1='Selected' / 0='Not selected' describes the 0/1 coding implied by 'Please select all that you might find funny.' Mapping additionally checked against S1 Table (see verification sidecar); the sibling table cooper_2018_offensive_topics is the same 34 subjects under the offensive stem. -->
+
+```yaml
+- table: cooper_2018_funny_topics
+  issue: |-
+    This battery is a select-all-that-apply checklist, so `resp` is a checkbox state rather than a chosen response option, and the `option_text` values 'Selected' and 'Not selected' describe that 0/1 coding rather than transcribing anything the survey printed -- the source publishes no response labels for this battery, only the stem 'Please select all that you might find funny.' Item text and instructions are verbatim from the study's own survey file.
+```
+
+## `cooper_2018_offensive_topics` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0201258, S3 File (survey instrument, .docx) and S5 File (S3 Data, .xlsx response file); CC BY 4.0 -->
+<!-- full note: Item codes are the S5 xlsx's own column headers (data/cooper_2018_humor.py melts them unchanged), and each header names its own topic (offensive.muslims, offensive.food puns), so code-to-text is fixed at the source with no inference; all 34 headers map one-to-one onto the 34 topics listed under the offensive checklist in S3 File. item_text is the S3 File topic wording verbatim (e.g. 'jokes about people with disabilities' for offensive.disabilities, 'jokes about farts or poop' for offensive.farts, 'food puns' for offensive.food puns), including the offensive/political/identity-based topics as published. instructions concatenates the two consecutive spans the respondent read before this checklist (the shared funny/offensive framing paragraph and the offensive-checklist question stem); the paragraph break between them was flattened to a space, no words changed. This is a check-all-that-apply list, so the survey prints no labels for the 0/1 coding: option_text 'Selected'/'Not selected' describes the checkbox state and is not source wording. -->
+
+```yaml
+- table: cooper_2018_offensive_topics
+  issue: |-
+    This battery is a select-all-that-apply checklist, so `resp` is a checkbox state rather than a chosen response option, and the `option_text` values 'Selected' and 'Not selected' describe that 0/1 coding rather than transcribing survey wording -- the source prints no response labels for it. Item text is verbatim from the study's own survey file.
+```
+
+## `cormier_2024_personality` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=https://doi.org/10.1371/journal.pone.0304428.s002 (S2 Qualtrics export, row 1 question labels); PLOS ONE 19(6):e0304428, CC BY 4.0 -->
+<!-- full note: IRW item codes ARE the Qualtrics column names (data/cormier_2024_hearing_battery.py melts Q20_1..Q20_16 unrenamed), and each column's question label in the export's header row carries its own item text -- no positional or order inference on the item axis. Deviations from literal transcription: the matrix prompt shared by all 16 rows was moved to `instructions` and the per-row remainder kept as `item_text`; newlines inside the label collapsed to single spaces. Option labels are the raw stored values themselves; their 1-5 coding comes from RESP_MAP in the processing script and was checked by route 9 (all 80 item x level counts match). Q20_8 is an attention check, left with a blank correct_response rather than shipping a key the schema would present as a scoring key. Wording rights: copied from a CC BY 4.0 PLOS deposit, and no NC clause for the BFI-2-XS could be quoted (the rights holder's page at colby.edu is Cloudflare-blocked), so no wording_rights flag is set. -->
+
+```yaml
+- table: cormier_2024_personality
+  issue: |-
+    Item Q20_8 is not a personality item: it is an attention check whose text instructs respondents to select 'Agree Strongly', and every respondent did (all 898 responses are 5). Exclude it before scoring the BFI-2-XS.
+```
+
+## `cormier_2024_phq4` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0304428 S2 File (https://doi.org/10.1371/journal.pone.0304428.s002), Qualtrics export; row 1 carries the verbatim question text per column -->
+<!-- full note: Item codes Q22_1-Q22_4 ARE the source column names (data/cormier_2024_hearing_battery.py melts them unchanged), and the Qualtrics export's question-text header row gives each column's wording directly -- no inference on the item axis. Shipped item_text is the portion after the Qualtrics ' - ' separator; the shared block stem before it is recorded once in instructions. Instrument confirmed as a true 4-item PHQ-4 (GAD-2 items Q22_1/Q22_2 + PHQ-2 items Q22_3/Q22_4), matching the file's own SC10='PHQ-4', SC11='Anxiety', SC12='Depression' subscores; not a PHQ-9. option_text/resp taken from the raw label->integer map in data/cormier_2024_hearing_battery.py (MAP_Q22: Not at all=0 .. Nearly every day=3), the standard PHQ 0-3 coding; all four labels occur for all four items in the raw file and per-item n=898 x 4 items = 3592 = live n_rows. Rights: source is CC BY (PLOS); the PHQ family carries no non-commercial clause, so no wording_rights flag. -->
+
+```yaml
+- table: cormier_2024_phq4
+  issue: |-
+    The source Qualtrics export concatenates a shared block stem with each item stem in one header, joined by ' - '. That shared stem is shipped once in `instructions` and `item_text` holds only the per-item sentence, so an item here is shorter than the corresponding column header in the source file.
+```
+
+## `cormier_2024_pss4` (batch_023)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=Cormier K, Brennan C, Sharma A (2024) PLOS ONE 19(6):e0304428, doi:10.1371/journal.pone.0304428 (CC BY 4.0); S2 File raw Qualtrics export doi:10.1371/journal.pone.0304428.s002 (cached .cache/cormier_2024_pss4/s002.csv); processing script data/cormier_2024_hearing_battery.py -->
+<!-- full note: mapping_basis=data_labels: row 1 of the Qualtrics export s002.csv carries the full question text for each of Q21_1..Q21_4, and the IRW codes ARE those source column names (data/cormier_2024_hearing_battery.py melts them unchanged), so the code->text tie is at the source with no inference; Step 5b exemption applies and no verification sidecar is owed. Corroboration recorded anyway: per-item raw label counts sum to 898 for all four items, equal to irw_table_sets() per-item n=898. text_source=study_materials -- item_text is the literal Qualtrics wording, with the shared stem prefix split off into `instructions` (identical across all four items) and only the post-' - ' clause kept as item_text; nothing was normalised to canonical PSS phrasing. option_text/resp come from the study's own labels via the script's MAP_Q21 (Never=0 ... Very often=4), applied without reversal, so Q21_2 and Q21_3 (the PSS reverse-keyed items) are stored raw. section_prompt blank, single trivial section_id, correct_response blank (no correct answer). RIGHTS: source is CC BY 4.0 PLOS; Cohen's PSS page states no non-commercial restriction (permission requests via ePROVIDE, 'completely free of charge'), so no quotable NC clause and no wording_rights column. -->
+
+```yaml
+- table: cormier_2024_pss4
+  issue: |-
+    Responses are stored raw rather than reverse-scored, so for the two PSS reverse-keyed items (Q21_2 'confident about your ability to handle your personal problems' and Q21_3 'things were going your way') a higher value means less perceived stress.
+```
+
+---
+
+## REVIEW THESE TOO -- no draft generated
+
+These tables shipped but earned no draft callout: their provenance carries no
+`public_note` and its structured fields look clean. That is NOT the same as
+having no caveat -- this script cannot see anything recorded only in
+`notes.csv`, and three batch_009 tables were missed exactly that way. Read each
+note below and decide; if it warrants a callout, write one by hand.
+
+- **`cormier_2024_cognitive_decline`** (batch_023)
+    - (no notes.csv entry either)
+
+---
+
+Skipped 2 tables with a provenance row but no shipped CSV (blocked at
+extraction): `contreras_valdez_2022_bsq`, `contreras_valdez_2022_rses`
 

@@ -2810,3 +2810,46 @@ eleven.
 row. The 11 `paper_order` + PARTIAL tables were the ones to look hardest at, and they hold up: the
 mapping rests on the administered form's order, the re-derivation checks every shipped string
 against that form, and PARTIAL is the honest status because order is what ties text to code.
+
+### batch_023 triage — 10 of 10 staged, 0 held
+
+Gates were run live at close-out earlier today and were clean throughout —
+`normalize_nulls` 0 of 10, `audit_batch` **10/10 PASS with no anomalies**, `verify_batch` 3 PASS +
+7 exempt, `lint_verification` 0 ERROR / 2 WARN, `irw-validate` ok, `check_provenance` clean — so
+triage did not re-run them a third time. What it added was the per-table go/no-go and the public
+notes.
+
+**All 10 are `mapping_basis=data_labels`**, the strongest basis: the source file's own labels tie
+code to text, with no positional inference for a statistic to check. Both lint WARNs were
+adjudicated at close-out and both stay VERIFIED — `conspiracy_asd__thinking_styles` (all 10
+mean/floor%/ceiling% signatures distinct, closest pair 0.8349) and `cooper_2018_funny_topics` (the
+Hungarian optimum over all 34! text-onto-code assignments lands on the shipped identity, 0 items
+reassigned, where nearest-neighbour alone leaves 8 ambiguous).
+
+**The drafter's REVIEW THESE TOO section earned its place again.** Six shipped tables carried no
+`public_note`, and five of the six turned out to have a caveat a data user would otherwise
+misread. Written by hand:
+
+- `conspiracy_asd__cognitive_flexibility` — **the deposit's coded workbook is corrupted** by a
+  global find/replace of 'no' to '2' ("I feel I have 2 power", "I just don't k2w what to do"), so
+  the wording was taken from the plain-text survey document instead. Anyone comparing this table
+  against those workbook labels finds differences and would have no way to know which is right.
+- `conspiracy_asd__thinking_styles` — REI-10; only the two extreme scale points are labelled, so
+  `option_text` is blank at responses 2-4 by design rather than missing. Same corruption caveat.
+- `cooper_2018_funny_topics` and `_offensive_topics` — select-all-that-apply checklists, so `resp`
+  is a checkbox state and 'Selected' / 'Not selected' describe that 0/1 coding rather than
+  transcribing anything the survey printed.
+- `cormier_2024_phq4` — the Qualtrics header concatenates a shared block stem with each item stem;
+  the stem ships once in `instructions`, so an item here is shorter than its source column header.
+
+`cormier_2024_cognitive_decline` is the one left without a note, correctly: it has no `notes.csv`
+entry either, i.e. a clean pass with nothing to disclose.
+
+**Staged all 10.** `clean/` now holds **30 files** — batch_022's 20 and batch_023's 10 — for one
+upload.
+
+**One judgment left to a human rather than taken here.** `cooper_2018_offensive_topics` ships item
+text that is a list of demographic and identity categories, because the study (Cooper 2018) was
+about which topics people find offensive. That is inherent to the research and the transcription is
+faithful, so nothing about it is a data defect and no note was written. Whether IRW wants any
+content signposting on tables of this kind is an editorial policy question, not an extraction one.
