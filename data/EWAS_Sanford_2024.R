@@ -6,7 +6,12 @@ library(tidyr)
 # study 1
 
 df <- read_sav("2024 Sanford EWAS Study 1.sav")
-df$id <- seq(1, nrow(df))
+# `seq(1, nrow())` restarts at 1 in each study and the two are bind_rows'd
+# together, so all 236 of study 1's ids landed on study 2's -- 1,416 excess
+# id+item rows, and 482 ids where 718 people were measured (irw#1842 block E).
+# The study is what separates them, so it belongs in the id; it stays a column
+# too.
+df$id <- paste0("1_", seq(1, nrow(df)))
 df <- remove_labels(df)
 
 df <- df %>%
@@ -27,7 +32,7 @@ df$study <- 1
 #study 2
 
 df2 <- read_sav("2024 Sanford EWAS Study 2.sav")
-df2$id <- seq(1, nrow(df2))
+df2$id <- paste0("2_", seq(1, nrow(df2)))
 df2 <- remove_labels(df2)
 
 df2 <- df2 %>%
@@ -48,7 +53,7 @@ df_comb <- bind_rows(df, df2)
 # study 2 - flourish
 
 dffl <- read_sav("2024 Sanford EWAS Study 2.sav")
-dffl$id <- seq(1, nrow(dffl))
+dffl$id <- paste0("2_", seq(1, nrow(dffl)))
 dffl <- remove_labels(dffl)
 
 dffl <- dffl %>%

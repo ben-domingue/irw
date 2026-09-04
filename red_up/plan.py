@@ -72,12 +72,40 @@ def index_tables(owner: str, dataset_names: list[str]) -> dict[str, list[str]]:
     return index
 
 
+#: `datastandard.md` caps a table name at 40 characters, and `irw_validate`
+#: raises that as an error. 130 live tables predate the rule -- the longest is
+#: 65 characters -- so enforcing it on the upload path means a table that is
+#: already named too long can never be repaired for anything else. Three
+#: cov_age fixes were blocked that way (#1779).
+#:
+#: Ruled by Ben, 2026-09-03: **keep the rule, grandfather the names.** A name
+#: over the cap is still an error for a table entering the corpus; for one
+#: already in it under that name, it becomes a warning, because a rename is a
+#: different piece of work with its own consequences for the metadata joins and
+#: for anyone holding the old name.
+GRANDFATHERED = "name_length"
+
+
+def _grandfather_name_length(report: FileReport) -> None:
+    """Demote a name-length error on a table that is already published."""
+    kept, moved = [], []
+    for err in report.errors:
+        (moved if err.startswith(f"{GRANDFATHERED}:") else kept).append(err)
+    if moved:
+        report.errors[:] = kept
+        report.warnings.extend(
+            f"{m} -- allowed because this name is already published; "
+            "the cap governs new tables, not repairs to old ones" for m in moved)
+
+
 def build(reports: list[FileReport], target: Target,
           index: dict[str, list[str]]) -> list[Item]:
     """Classify every file against the target and the cross-dataset index."""
     items = []
     for report in reports:
         found = index.get(report.table, [])
+        if found:
+            _grandfather_name_length(report)
         reason = eligible(report.path, target)
         if reason:
             items.append(Item(report=report, status=EXCLUDED, dataset=None,

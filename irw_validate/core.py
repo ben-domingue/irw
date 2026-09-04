@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 from . import extra
-from ._checks import irw_metadata, run_qc
+from ._checks import OCCASION, irw_metadata, run_qc
 from .model import Finding, Report, severity_for
 
 #: Above this, a full pandas load is not worth it inside the uploader's hot
@@ -155,14 +155,32 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
     # the arm, not the occasion, and a person appearing twice under them is a
     # real question rather than an explanation.
     if profile in ("upload", "legacy") and {"id", "item"}.issubset(df.columns):
+        # `rt` is in OCCASION for naming purposes but must never be what makes
+        # rows unique -- it is a measurement, and rounding it would silently
+        # merge rows (#1842 blocks I and J).
+        occasion_cols = tuple(c for c in OCCASION if c != "rt")
         if any(f.check == "dup_id_item" for f in report.findings):
-            for col in ("rater", "wave", "timepoint", "date", "trialnum", "trial",
-                        "order", "session", "occasion", "period", "block", "subtest"):
+            resolved_by = None
+            for col in occasion_cols:
                 if col in df.columns and not df.duplicated(subset=["id", "item", col]).any():
-                    report.findings = [f for f in report.findings
-                                       if f.check != "dup_id_item"]
-                    report.checks_run.append(f"dup_id_item:resolved_by_{col}")
+                    resolved_by = col
                     break
+            # A design can be keyed by more than one occasion column at once, and
+            # testing them only one at a time misses that. `rr98_accuracy` is
+            # trials within blocks: `trial` restarts at 1 in each block, so
+            # neither column identifies a row alone and both together identify
+            # it exactly. Same shape for a session x exercise index. So if no
+            # single column resolves the repeat, try every occasion column
+            # present together before calling it a defect.
+            if resolved_by is None:
+                present = [c for c in occasion_cols if c in df.columns]
+                if len(present) > 1 and not df.duplicated(
+                        subset=["id", "item"] + present).any():
+                    resolved_by = "+".join(present)
+            if resolved_by is not None:
+                report.findings = [f for f in report.findings
+                                   if f.check != "dup_id_item"]
+                report.checks_run.append(f"dup_id_item:resolved_by_{resolved_by}")
 
     # `resp_numeric` as inherited from run_qc measures how many values parse as
     # numbers over ALL rows, so a float column with missing values fails it --

@@ -18,10 +18,17 @@ remove_na <- function(df) {
 NA_data_df <- read_csv("dataCleaned_NA.csv")
 BG_data_df <- read_csv("dataCleaned_BG.csv")
 
+# `ID` is numbered from 1 inside each country's file, and the two are stacked
+# under a `Group` label, so the Bulgarian and North American samples shared a
+# namespace: 286 distinct ids where 507 people were measured, and 3,094-6,188
+# excess id+item rows per table (irw#1842 block C). Namespacing here fixes all
+# three tables; `Group` stays a column.
 NA_data_df <- NA_data_df %>%
-  rename(id = ID)
+  rename(id = ID) %>%
+  mutate(id = paste0(Group, "_", id))
 BG_data_df <- BG_data_df %>%
-  rename(id = ID)
+  rename(id = ID) %>%
+  mutate(id = paste0(Group, "_", id))
 
 # ------- Process Risky-Choice Framing, Gain Frame Data ------
 RCG_NA_df <- NA_data_df |>

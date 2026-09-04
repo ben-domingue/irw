@@ -12,18 +12,28 @@ remove_na <- function(df) {
   return(df)
 }
 
+# Each of the four sample files numbers its respondents from 1, and they are
+# stacked below under a `group` label, so respondent 1 of University_Students1
+# and respondent 1 of Athletes became one person -- 805 ids where 1,636 people
+# were measured, 10,980 excess id+item rows (irw#1842 block E). Namespacing at
+# the point the id is read fixes every downstream table at once; `group` stays
+# a column.
 study1_df <- read_xls("PANAS_Database_Study1.xls")
 study1_df <- study1_df |>
-  rename(id=ID)
+  rename(id=ID) |>
+  mutate(id = paste0("University_Students1_", id))
 study2_df <- read_xls("PANAS_Database_Study2.xls")
 study2_df <- study2_df |>
-  rename(id=numero)
+  rename(id=numero) |>
+  mutate(id = paste0("University_Students2_", id))
 study3_df <- read_xls("PANAS_Database_Study3.xls")
 study3_df <- study3_df |>
-  rename(id=numero)
+  rename(id=numero) |>
+  mutate(id = paste0("General Adult_", id))
 study4_df <- read_xls("PANAS_Database_Study4.xls")
 study4_df <- study4_df |>
-  rename(id = ID)
+  rename(id = ID) |>
+  mutate(id = paste0("Athletes_", id))
 
 PANAS1_df <- study1_df %>%
   select(starts_with("PANAS"), id, Sex, Age, -ends_with("m"))

@@ -73,15 +73,36 @@ def shard_index(redivis, cache: pathlib.Path) -> dict:
     """table name -> qualified Redivis reference, over all six core shards.
 
     Six list_tables() calls for ~4,100 tables, cached to disk because the answer
-    changes only when a table is added.
+    changes only when a table is added -- or when a version is released.
+
+    **`version="current"` is not optional.** `dataset(name).list_tables()` with
+    no version returned the *previous* release: after four shards were released
+    on 2026-09-03 it still handed back `v46_0` refs, so a run meant to prove a
+    fix measured the data from before the fix and reported every table
+    unchanged. A verification tool that silently reads stale data is worse than
+    none.
+
+    The cache records the version tag it was built from and is discarded when
+    the live tags move, so the same trap cannot be sprung by the cache either.
     """
+    tags = {}
+    for ds in SHARDS:
+        try:
+            props = redivis.organization("datapages").dataset(
+                ds, version="current").get().properties
+            tags[ds] = props.get("version", {}).get("tag")
+        except Exception:
+            tags[ds] = None
     if cache.exists():
-        return json.loads(cache.read_text())
+        cached = json.loads(cache.read_text())
+        if isinstance(cached, dict) and cached.get("_versions") == tags:
+            return cached["index"]
     idx: dict[str, list[str]] = {}
     for ds in SHARDS:
-        for t in redivis.organization("datapages").dataset(ds).list_tables():
+        for t in redivis.organization("datapages").dataset(
+                ds, version="current").list_tables():
             idx.setdefault(t.name, []).append(t.properties["qualifiedReference"])
-    cache.write_text(json.dumps(idx))
+    cache.write_text(json.dumps({"_versions": tags, "index": idx}))
     return idx
 
 

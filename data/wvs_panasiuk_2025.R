@@ -4,13 +4,39 @@ library(tidyverse)
 library(haven)
 
 df <- read_csv("WVS_TimeSeries_4_0.csv")
+
+# WVS codes every kind of non-response negatively -- -1 don't know, -2 no
+# answer, -3 not applicable, -4 not asked, -5 missing -- in *every* variable,
+# not only the items. This was applied to `resp` nine times below and to
+# nothing else, so `cov_age` shipped respondents aged -5 and `cov_gender`
+# shipped a sex of -1 (irw#1779). One function, applied everywhere.
+wvs_na <- function(x) ifelse(x %in% c(-1, -2, -3, -4, -5), NA, x)
+
 df <- df %>%
   mutate(
     # Set NA date
     date = ifelse(S012 %in% c(-3, -4, -5), NA, S012),
     # Convert to Unix timestamps
     date = as.numeric(as.POSIXct(as.character(date), format = "%Y%m%d", tz = "UTC")),
+    cov_gender = wvs_na(X001),
+    cov_age    = wvs_na(X003),
+    cov_country = COUNTRY_ALPHA,
+    # `S006` is the respondent's number *within their own survey*, so respondent
+    # 1 in Argentina 1984 and respondent 1 in Japan 2019 shared an id. That
+    # collapsed roughly 412,000 people onto 98,531 identifiers, which is the
+    # single largest id collision in the corpus (irw#1842's class 1a) and the
+    # reason most of these tables' id+item pairs repeat. Country and wave are
+    # what separate them.
+    id = paste(COUNTRY_ALPHA, S002VS, S006, sep = "_")
   )
+# Not a comment but a check: if country+wave+respondent still collides, the
+# assumption above is wrong and no table should be written on it.
+if (any(duplicated(df$id))) {
+  stop(sum(duplicated(df$id)), " ids still collide after country+wave. ",
+       "The likely cause is a country running two surveys inside one wave: ",
+       "add the survey year (S020) to the paste above, or use the file's own ",
+       "unified respondent number (S007) if this version carries one.")
+}
 
 # -------- Perceptions of life (206 items, beginning with 'A') --------
 percep_life <- names(df)[startsWith(names(df), "A")]
@@ -40,11 +66,12 @@ item_family_A <- tibble(item = percep_life) %>%
   ))
 
 df_items_A <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(percep_life))
 
 df_long_A <- df_items_A %>%
@@ -55,15 +82,20 @@ df_long_A <- df_items_A %>%
   ) %>%
   left_join(item_family_A, by = "item")
 
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_A <- df_long_A %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 # Drop items with categorical values
 items_drop_A <- c("A044", "A045", "A169")
 df_long_A <- df_long_A %>%
   filter(!item %in% items_drop_A)
 
-write_csv(df_long_A, "wvs_panasiuk_perception_of_life.csv")
+write_csv(df_long_A, "wvs_panasiuk_perception_of_life.csv", na = "")
 
 #----------------- Environment (25 items, beginning with B) -------------------
 env <- names(df)[startsWith(names(df), "B")]
@@ -76,11 +108,12 @@ item_family_B <- tibble(item = env) %>%
     TRUE ~ NA_character_
   ))
 df_items_B <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(env))
 
 df_long_B <- df_items_B %>%
@@ -90,16 +123,21 @@ df_long_B <- df_items_B %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_B, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_B <- df_long_B %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_B <- c("B008", "B009", "B016", "B017")
 df_long_B <- df_long_B %>%
   filter(!item %in% items_drop_B)
 
-write_csv(df_long_B, "wvs_panasiuk_environment.csv")
+write_csv(df_long_B, "wvs_panasiuk_environment.csv", na = "")
 
 #--------------------- Work (48 items, beginning with C) -----------------------
 work <- setdiff(
@@ -118,11 +156,12 @@ item_family_C <- tibble(item = work) %>%
     TRUE ~ NA_character_
   ))
 df_items_C <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(work))
 
 df_long_C <- df_items_C %>%
@@ -132,16 +171,21 @@ df_long_C <- df_items_C %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_C, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_C <- df_long_C %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_C <- c("C009", "C010")
 df_long_C <- df_long_C %>%
   filter(!item %in% items_drop_C)
 
-write_csv(df_long_C, "wvs_panasiuk_work.csv")
+write_csv(df_long_C, "wvs_panasiuk_work.csv", na = "")
 #-------------------- Family (68 items, beginning with D) ----------------------
 fam <- names(df)[startsWith(names(df), "D")]
 item_family_D <- tibble(item = fam) %>%
@@ -159,11 +203,12 @@ item_family_D <- tibble(item = fam) %>%
     TRUE ~ NA_character_
   ))
 df_items_D <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(fam))
 
 df_long_D <- df_items_D %>%
@@ -173,16 +218,21 @@ df_long_D <- df_items_D %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_D, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_D <- df_long_D %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_D <- c("D025")
 df_long_D <- df_long_D %>%
   filter(!item %in% items_drop_D)
 
-write_csv(df_long_D, "wvs_panasiuk_family.csv")
+write_csv(df_long_D, "wvs_panasiuk_family.csv", na = "")
 #----------- Politics and Society (295 items, beginning with E) ----------------
 library(data.table)
 politics_society <- names(df)[startsWith(names(df), "E")]
@@ -224,11 +274,12 @@ item_family_E <- tibble(item = politics_society) %>%
   ))
 setDT(item_family_E)
 df_items_E <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(politics_society))
 setDT(df_items_E)
 
@@ -258,9 +309,14 @@ df_long_E <- merge(
   all.x = TRUE,
   sort = FALSE
 )
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_E <- df_long_E %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_E <- c("E001", "E002", "E003", "E004", "E005", "E006", "E032", "E062", "E118", "E119",
@@ -269,7 +325,7 @@ items_drop_E <- c("E001", "E002", "E003", "E004", "E005", "E006", "E032", "E062"
                   "E280", "E281")
 df_long_E <- df_long_E[!item %in% items_drop_E]
 
-data.table::fwrite(df_long_E, "wvs_panasiuk_politics_society.csv")
+data.table::fwrite(df_long_E, "wvs_panasiuk_politics_society.csv", na = "")
 
 #--------------- Religion and Morale (127 items, beginning with F) -------------
 religion_morality <- names(df)[startsWith(names(df), "F")]
@@ -295,11 +351,12 @@ item_family_F <- tibble(item = religion_morality) %>%
     TRUE ~ NA_character_
   ))
 df_items_F <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(religion_morality))
 
 df_long_F <- df_items_F %>%
@@ -309,16 +366,21 @@ df_long_F <- df_items_F %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_F, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_F <- df_long_F %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_F <- c("F022", "F025", "F025_WVS", "F027", "F188", "F189", "F192", "F200", "F201")
 df_long_F <- df_long_F %>%
   filter(!item %in% items_drop_F)
 
-write_csv(df_long_F, "wvs_panasiuk_religion_morality.csv")
+write_csv(df_long_F, "wvs_panasiuk_religion_morality.csv", na = "")
 #-------------- National Identity (116 items, beginning with G) ----------------
 national_identity <- names(df)[startsWith(names(df), "G")]
 item_family_G <- tibble(item = national_identity) %>%
@@ -334,11 +396,12 @@ item_family_G <- tibble(item = national_identity) %>%
     TRUE ~ NA_character_
   ))
 df_items_G <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(national_identity))
 
 df_long_G <- df_items_G %>%
@@ -348,9 +411,14 @@ df_long_G <- df_items_G %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_G, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_G <- df_long_G %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_G <- c("G001", "G001CS", "G002", "G002CS", "G003CS", "G005", "G015", "G015B", "G016", "G017",
@@ -358,7 +426,7 @@ items_drop_G <- c("G001", "G001CS", "G002", "G002CS", "G003CS", "G005", "G015", 
 df_long_G <- df_long_G %>%
   filter(!item %in% items_drop_G)
 
-write_csv(df_long_G, "wvs_panasiuk_national_identity.csv")
+write_csv(df_long_G, "wvs_panasiuk_national_identity.csv", na = "")
 #-------------- Security (30 items, beginning with H) -------------------------
 security <- names(df)[startsWith(names(df), "H")]
 item_family_H <- tibble(item = security) %>%
@@ -372,11 +440,12 @@ item_family_H <- tibble(item = security) %>%
     TRUE ~ NA_character_
   ))
 df_items_H <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(security))
 
 df_long_H <- df_items_H %>%
@@ -386,16 +455,21 @@ df_long_H <- df_items_H %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_H, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_H <- df_long_H %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
 # Drop items with categorical values
 items_drop_H <- c("H008_07", "H008_08")
 df_long_H <- df_long_H %>%
   filter(!item %in% items_drop_H)
 
-write_csv(df_long_H, "wvs_panasiuk_security.csv")
+write_csv(df_long_H, "wvs_panasiuk_security.csv", na = "")
 #-------------------- Science (2 items, beginning with I) ----------------------
 science <- names(df)[startsWith(names(df), "I")]
 item_family_I <- tibble(item = science) %>%
@@ -403,11 +477,12 @@ item_family_I <- tibble(item = science) %>%
     TRUE ~ NA_character_
   ))
 df_items_I <- df %>%
-  select(id = S006,
+  select(id,
          wave = S002VS,
          date,
-         cov_gender = X001,
-         cov_age = X003,
+         cov_country,
+         cov_gender,
+         cov_age,
          all_of(science))
 
 df_long_I <- df_items_I %>%
@@ -417,8 +492,13 @@ df_long_I <- df_items_I %>%
     values_to = "resp"
   ) %>%
   left_join(item_family_I, by = "item")
-# Set NAs of resp
+# Set NAs of resp, then drop them: IRW long format is one row per
+# person-item *observation*, and a person who was never asked an item
+# has not observed it. The trend file is deeply unbalanced -- items
+# come and go across waves and countries -- so leaving them in made
+# 77% of these nine tables the literal string "NA" (irw#1856).
 df_long_I <- df_long_I %>%
-  mutate(resp = ifelse(resp %in% c(-1, -2, -3, -4, -5), NA, resp))
+  mutate(resp = wvs_na(resp)) %>%
+  filter(!is.na(resp))
 
-write_csv(df_long_I, "wvs_panasiuk_science.csv")
+write_csv(df_long_I, "wvs_panasiuk_science.csv", na = "")

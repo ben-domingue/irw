@@ -11,14 +11,20 @@ remove_na <- function(df) {
   return(df)
 }
 
+# `row_number()` restarts at 1 in each recruitment file, and the two are rbind'd
+# together below, so respondent 1 of WebRecruit and respondent 1 of
+# InternalRecruit arrived in the corpus as one person holding two of everything
+# -- 18,025 excess id+item rows across the seven tables (irw#1842 block B).
+# Namespacing the id where it is created fixes all seven at once, and `group`
+# stays as a column because it is a real covariate.
 data_web_df <- read_csv("data_anonymizedWebRecruit.csv")
 data_web_df <- data_web_df %>%
-  mutate(id = row_number())
+  mutate(id = paste0("WebRecruit_", row_number()))
 data_web_df <- data_web_df[-c(1, 2), ]
 
 data_IR_df <- read_csv("data_anonymizedInternalRecruit.csv")
 data_IR_df <- data_IR_df %>%
-  mutate(id = row_number())
+  mutate(id = paste0("InternalRecruit_", row_number()))
 data_IR_df  <- data_IR_df [-c(1, 2), ]
 
 DASS_web_df <- data_web_df |>
