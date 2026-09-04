@@ -22,7 +22,7 @@ from pathlib import Path
 
 from . import plan as planning
 from .auth import authenticate
-from .checks import check_all, check_schema
+from .checks import check_all, check_schema, validate_for_target
 from .discover import Discovery, discover, table_name
 from .push import open_draft, push_one
 from .targets import ConfigError, Target, guess_target, load_registry
@@ -152,6 +152,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--allow-unregistered", action="store_true",
                         help="permit --dataset to name a dataset that is not in "
                              "redivis_config.R (scratch/test datasets only)")
+    parser.add_argument("--no-validate", action="store_true",
+                        help="skip the IRW format validator (the one check that "
+                             "needs pandas). checks.py has pointed at this flag "
+                             "since 2026-09-02; it did not exist until 2026-09-03")
     parser.add_argument("--strict", action="store_true",
                         help="treat warnings as errors and upload nothing")
     args = parser.parse_args(argv)
@@ -210,6 +214,7 @@ def main(argv: list[str] | None = None) -> int:
 
     for report in reports:
         check_schema(report, target)
+        validate_for_target(report, target, enabled=not args.no_validate)
 
     authenticate()
 
@@ -239,9 +244,22 @@ def main(argv: list[str] | None = None) -> int:
     if not live:
         die(f"nothing here belongs in {target.name} -- every file was excluded "
             f"or skipped for the reason shown above.")
+    # A file with errors is a SKIP; a file the target does not take is EXCLUDED.
+    # Only the first is a failure -- excluding `provenance.csv` from irw_meta is
+    # the design working. The all-skipped case already exits non-zero via die()
+    # above; this covers the PARTIAL one, where twelve tables upload, the
+    # thirteenth silently does not, and the run still reports success.
+    skipped = [i for i in items if i.status == planning.SKIP]
+    if skipped:
+        print(f"\n{len(skipped)} file(s) skipped for errors and will NOT be "
+              f"uploaded:", file=sys.stderr)
+        for item in skipped:
+            for err in item.report.errors:
+                print(f"  {item.table}: {err}", file=sys.stderr)
+
     if args.dry_run:
         print(f"\n--dry-run: {len(live)} table(s) would be uploaded. Nothing was written.")
-        return 0
+        return 1 if skipped else 0
 
     if ask(f"\nUpload {len(live)} table(s)? [y/N] ", "yn", "y" if args.yes else "n",
            args.yes) != "y":
@@ -272,7 +290,7 @@ def main(argv: list[str] | None = None) -> int:
     if failed:
         return 1
     print("\nThese are DRAFT versions. Review the diff on Redivis and publish by hand.")
-    return 0
+    return 1 if skipped else 0
 
 
 if __name__ == "__main__":
