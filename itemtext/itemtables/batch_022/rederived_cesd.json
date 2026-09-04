@@ -1,0 +1,212 @@
+{
+ "items": {
+  "CESD1": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I was bothered by things that usually don't bother me."
+  },
+  "CESD10": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt fearful."
+  },
+  "CESD11": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "My sleep was restless."
+  },
+  "CESD12": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I was happy."
+  },
+  "CESD13": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I talked less than usual."
+  },
+  "CESD14": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt lonely."
+  },
+  "CESD15": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "People were unfriendly."
+  },
+  "CESD16": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I enjoyed life."
+  },
+  "CESD17": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I had crying spells."
+  },
+  "CESD18": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt sad."
+  },
+  "CESD19": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt that people disliked me."
+  },
+  "CESD2": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I did not feel like eating; my appetite was poor."
+  },
+  "CESD20": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I could not get \"going.\""
+  },
+  "CESD3": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt that I could not shake off the blues even with help from my family or friends."
+  },
+  "CESD4": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt that I was just as good as other people."
+  },
+  "CESD5": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I had trouble keeping my mind on what I was doing."
+  },
+  "CESD6": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt depressed."
+  },
+  "CESD7": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt that everything I did was an effort."
+  },
+  "CESD8": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I felt hopeful about the future."
+  },
+  "CESD9": {
+   "instructions": "Select the statement which best describes how often you felt or behaved this way during the past week.",
+   "opts": {
+    "0": "Rarely or none of the time (Less than 1 day)",
+    "1": "Some or a little of the time (1-2 days)",
+    "2": "Occasionally or a moderate amount of time (3-4 days)",
+    "3": "Most or all of the time (5-7 days)"
+   },
+   "stem": "I thought my life had been a failure."
+  }
+ },
+ "items_not_sharing_it": [],
+ "items_sharing_it": 20,
+ "shared_option_set": {
+  "0": "Rarely or none of the time (Less than 1 day)",
+  "1": "Some or a little of the time (1-2 days)",
+  "2": "Occasionally or a moderate amount of time (3-4 days)",
+  "3": "Most or all of the time (5-7 days)"
+ }
+}
