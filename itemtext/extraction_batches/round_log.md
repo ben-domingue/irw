@@ -2752,3 +2752,61 @@ nearest-neighbour alone would have left 8 ambiguous. Its hedge is about `option_
 **Circuit breaker:** 0 of 12 failed (0%), threshold 30%. Not tripped.
 
 Not yet triaged, not staged, not uploaded.
+
+### batch_022 triage (xingyi-zhang, #1935) — 20 of 20 staged, 0 held
+
+Not one of my rounds: extracted by @xingyi-zhang against #1831 and merged as #1935. Triaged here on
+Ben's ask. **This is the cleanest batch the pipeline has produced.**
+
+Gates re-run live at triage: `normalize_nulls` 0 of 20 needed changes; `audit_batch` 16 PASS / 4
+WARN, all four explained below; **`verify_batch` 20/20 PASS**; `lint_verification` *no problems
+found*; `irw-validate` no ERRORs **and no WARNs**; `check_provenance` clean. Verification mix is 9
+VERIFIED / 11 PARTIAL, and lint agrees each status matches its evidence.
+
+**The verification design is better than ours and worth copying.** Rather than testing the mapping
+statistically after the fact, `rederive_promis.py` and `rederive_ecps.py` rebuild the shipped text
+from the source — the PROMIS Wave 1 codebook, and the administered COVIDiSTRESS Qualtrics form plus
+two registration workbooks — and the verify scripts diff the CSV against that rebuild rather than
+against a prose claim. The re-derivation output is committed as JSON, so the scripts re-run
+elsewhere without the source cache.
+
+**One limit of re-running them here**, worth stating so nobody over-reads a green result: without
+`.cache/ecps_sahm_2024/` and the PROMIS cache — both gitignored and local to the extractor's machine
+— the scripts diff against the *committed* re-derivation, not a fresh rebuild from the PDF. Here
+that tests internal consistency; on the extractor's machine it tested source fidelity.
+
+**Four audit WARNs, none an itemtext defect.** All are applicability-driven missingness, which is
+what a branching survey produces:
+- `promis1wave1_physicalfunction` — PFC1-PFC5 are missing their top option 'Very easy'; n runs
+  1069-2145 against a 2535 median, and the deficit tracks item easiness (Spearman ≈ -0.8), which is
+  what dropping the easiest response looks like and what a category collapse does not.
+- `ecps_sahm_2024_distrust` — the form randomises the misperception blocks one-of-three.
+- `ecps_sahm_2024_stress` — the secondary-stressor block is conditional; per-index n follows the
+  branch that gates it (student ≈1,140, children ≈3,200, occupation ≈9,900).
+- `ecps_sahm_2024_sscd` — compliance shown to all (n≈15,300), the two norm blocks to a subset
+  (n≈3,800); and its '47.6% blank option_text' is 80 unlabelled midpoints on the two
+  `socialinfluence_nor*` ladders, which label only their endpoints.
+
+**Two gaps triage closed rather than reported:**
+
+1. **The batch shipped no `notes.csv`.** Per-table detail is in `provenance.csv`'s `note` column
+   instead (838-4,158 chars, median 2,765) so nothing was lost, but Step 5c's "append the reason to
+   that table's `notes.csv` row" had nowhere to go. Created one carrying the four WARN explanations.
+2. **The misattribution was disclosed in only 1 of 11 public notes.** Amended the other 9 affected
+   (all `ecps_sahm_2024_*` except `_emotion`, which genuinely is the ERQ short form). Without it a
+   reader of the issues page sees a dictionary that says Emotion Regulation Questionnaire and no
+   indication it is wrong — the same gap `COACH_Chen_2022_CSQ` and `conner_2017_vitality` had.
+
+**Issue filed: #1936**, the largest dictionary defect this pass has found. Ten of eleven
+`ecps_sahm_2024_*` tables are attributed to the wrong *study* — Sahm et al.'s German ERQ-S
+validation rather than COVIDiSTRESS Global Survey Round II, whose data file is hosted inside that
+OSF project. Re-verified three ways independently of the extraction: the ERQ has two subscales and
+there are eleven tables; every table carries `cov_covid_self` and `cov_residing_country`; and they
+hold 12,988-15,736 participants rather than a German validation sample. `biblio.csv` also keys these
+as `ECPS_Sahm_2024_*` against `metadata.csv`'s lowercase, so any case-sensitive join drops all
+eleven.
+
+**Staged all 20 into `clean/`.** Every non-`data_labels` table has its `mapping_verification.csv`
+row. The 11 `paper_order` + PARTIAL tables were the ones to look hardest at, and they hold up: the
+mapping rests on the administered form's order, the re-derivation checks every shipped string
+against that form, and PARTIAL is the honest status because order is what ties text to code.
