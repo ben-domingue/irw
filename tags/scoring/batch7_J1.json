@@ -1,0 +1,118 @@
+[
+ {
+  "table": "abramson_2026_israel_policy",
+  "shard": "w4"
+ },
+ {
+  "table": "atmadjaja_2026_intention_to_stay",
+  "shard": "w3"
+ },
+ {
+  "table": "cacciatore_2021_isel",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_cotah",
+  "shard": "w5"
+ },
+ {
+  "table": "chen_2026_pr",
+  "shard": "w5"
+ },
+ {
+  "table": "cormier_2024_personality",
+  "shard": "w3"
+ },
+ {
+  "table": "doherty_2023_dass21",
+  "shard": "w4"
+ },
+ {
+  "table": "eldor_2022_collective_anger",
+  "shard": "w4"
+ },
+ {
+  "table": "fatima_2025_mslq",
+  "shard": "w3"
+ },
+ {
+  "table": "gao_2022_scsq",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_spa_beliefs_about_intelligence",
+  "shard": "w4"
+ },
+ {
+  "table": "hori_2019_radiation_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "jiang_2024_ptspr",
+  "shard": "w3"
+ },
+ {
+  "table": "khulwa_2025_motivation_2",
+  "shard": "w5"
+ },
+ {
+  "table": "kraft_todd_2017_panas",
+  "shard": "w3"
+ },
+ {
+  "table": "liang_2026_intrinsic_motivation",
+  "shard": "w2"
+ },
+ {
+  "table": "malinowska_2021_saq_physicians",
+  "shard": "w3"
+ },
+ {
+  "table": "mohammed_2021_job_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "odachi_2022_fear_covid19",
+  "shard": "w3"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__inem",
+  "shard": "w2"
+ },
+ {
+  "table": "quarter_life_crisis__cd",
+  "shard": "w2"
+ },
+ {
+  "table": "rosyid_2025_academic_citizenship",
+  "shard": "w4"
+ },
+ {
+  "table": "senosy_2025_anxiety_state",
+  "shard": "w2"
+ },
+ {
+  "table": "szameitat_2015_occupation_multitask",
+  "shard": "w4"
+ },
+ {
+  "table": "tomioka_2022_srh_support_types",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2026_perceived_usefulness",
+  "shard": "w3"
+ },
+ {
+  "table": "yu_2025_physical_activity",
+  "shard": "w3"
+ },
+ {
+  "table": "zhao_2025_psych_recovery_eval",
+  "shard": "w3"
+ }
+]
