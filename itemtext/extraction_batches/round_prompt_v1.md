@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_020 already exists (round cap reached)
+- itemtables/batch_021 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -166,6 +166,14 @@ Each subagent prompt must tell it to:
 
 Wait for all agents to finish.
 
+**NEVER background a command, and never end your turn waiting to be notified.** You are a `claude -p`
+run: there is no next turn. Ending your turn ends the session, and everything after the point you
+stopped simply does not happen. On 2026-09-04 the batch_020 round launched the Step 4 gates in the
+background and said "the background command will notify me when the audit finishes -- no need to
+poll. Waiting." It then exited **0** with Steps 4, 5 and 6 never run, nothing committed, and all 12
+rows left `in_progress`. The extraction was fine; the round was not. Run every command in the
+foreground and wait for it, however long it takes -- the gates take minutes, and that is expected.
+
 ## Step 3 — Merge sidecars
 
 Merge notes_*.csv into notes.csv, provenance_*.csv into provenance.csv, and verification_*.csv
@@ -185,6 +193,13 @@ executes them.
 Then merge verification_merged.csv into the permanent `itemtext/mapping_verification.csv`, and add a
 NOT_NEEDED row for every written table that has no verification row because its mapping_basis is
 data_labels. Every written table must end up with exactly one tracker row.
+
+**Write those NOT_NEEDED rows into BOTH files -- the batch's own verification_merged.csv as well as
+the permanent tracker.** `lint_verification.R` reads the BATCH file, so a NOT_NEEDED row that exists
+only in the permanent tracker still surfaces at Step 4 as "ships a CSV but has no verification row",
+one ERROR per data_labels table. That has now happened in two consecutive rounds -- batch_020 (3
+ERRORs) and batch_021 (4) -- and both times it looked like a real gate failure and was not. Add the
+rows in both places and Step 4's lint comes back clean.
 
 ## Step 4 — Normalize and audit
 
@@ -310,7 +325,7 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_020, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_021, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

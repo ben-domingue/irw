@@ -2321,3 +2321,343 @@ repo, so it wants its own branch there.
 
 **Not stamped.** `uploaded=` stays blank in `provenance.csv` and `mapping_verification.csv`
 until Ben confirms the upload actually happened.
+
+---
+
+## 2026-09-04 — the deliberate pause ended; rounds are now run by hand
+
+`circuit_breaker.flag` was set at 05:38 as a DELIBERATE PAUSE (not a trip) to stop the
+06:13 cron round while the scheduling question was reopened. That question is settled
+(#1913, HANDOFF decision (c)): **there is no scheduler.** `extraction_batches/run_round.sh`
+is started by a human, one round per triage session.
+
+Three things had to happen before the queue could resume, and all three are done:
+
+1. The `13 * * * *` crontab line is removed (Ben, 2026-09-04).
+2. The runner worktree `/home/ben/irw-queue-runner` was found parked on
+   `itemtext/handoff-scheduling-state`, not `itemtext/queue-rounds` — the branch guard
+   would have refused every round. It is back on `itemtext/queue-rounds`, fast-forwarded
+   to `main` at f6556f7.
+3. `origin/itemtext/queue-rounds` was deleted when #1904 was merged with `--delete-branch`.
+   It has been recreated, which restores both the runner's push check and the standing PR.
+   **Do not delete it again on merge.**
+
+The flag is deleted. Nothing fires on its own; the next round happens when someone runs
+`run_round.sh`. The cap is `batch_020`, so that is one round, then it stops.
+
+## batch_020 — 11 written / 1 blocked / 0 failed (92% yield)
+
+Fired 07:19 by hand (`run_round.sh`, the first round under the no-scheduler regime). **The round
+agent abandoned the protocol at Step 4 and the closing steps were completed by a human at 08:0x —
+read "How this round ended" below before trusting anything about its provenance.**
+
+**Written, all gates green:** `chinvararak_2021_phq15`, `choy_2022_extraneous_events`,
+`chuemchit_2024_nonpartner_violence`, `chuemchit_2024_partner_violence`, `cinar_tanriverdi_2023_gad7`,
+`COACH_Chen_2022_ADL`, `COACH_Chen_2022_CSQ`, `COACH_Chen_2022_IADL`, `COACH_Chen_2022_MOS_SSS_C`,
+`COACH_Chen_2022_WHOQOL_BREF`, `cogcontrol_gyurkovics_2019_flanker`.
+
+Gates, all run after the fact: `normalize_nulls.R` 0 of 11 needed normalising; `audit_batch.R`
+**9 PASS / 2 WARN**, both explained below; `verify_batch.R` 8 PASS + 3 MISSING(exempt, all
+`data_labels`); `lint_verification.R` 0 ERROR / 3 WARN; `irw-validate` no ERRORs (five
+`name_charset` WARNs, all on pre-existing capitalised COACH table names, not on anything this round
+produced); `check_provenance.R` clean, 69 IRW-generated tables all disclosed.
+
+**Blocked (1), determinate:** `choy_2022_intent_career` — CC BY and the codes are the source column
+names, but the paper publishes one sample item with no item number and CFA loadings without wording;
+2 of 3 items have no published referent. Retry test NO. Recorded in `pending_index_notes.csv`.
+
+**Failed: none.** 0/12 = 0%, breaker not approached.
+
+### The two audit WARNs, both explained, neither an itemtext defect
+
+- `COACH_Chen_2022_IADL` — 6 items carry live resp values above their own option ceiling. This is a
+  **response-data defect, not a mapping error**, and the round's own note had already quantified it:
+  65 of 54,653 responses (0.12%) sit above their item's defined maximum, all at the 6- and 12-month
+  waves. Checked independently at close-out with `item_stats.R`: at **wave 1** every item's max
+  equals its canonical Lawton ceiling exactly (q5 max 2, q8 max 2, q1/q3/q6/q7 max 3, q2/q4 max 4);
+  the out-of-range values appear only in waves 2 and 3 at 0.0–0.4% per item. The unequal option
+  counts are correct Lawton IADL, and the option_text mapping stands. **Worth its own `data fix`
+  issue** — the stray values are in the published table.
+- `cogcontrol_gyurkovics_2019_flanker` — the four high-count codes (`targ_19`, `targ_25`, `targ_30`,
+  `targ_32`) are exactly the four **congruent** displays (↓↓↓↓↓, ↑↑↑↑↑, →→→→→, ←←←←←). Every
+  participant saw all four; the paper's random direction-pairing design gives each participant only
+  4 of the 12 incongruent codes, so a congruent code carries ~3x the trials. Design property, not
+  item-code conflation.
+
+### The three lint WARNs are correct as VERIFIED
+
+`lint_verification.R` flags `chinvararak_2021_phq15`, `chuemchit_2024_nonpartner_violence` and
+`chuemchit_2024_partner_violence` as "VERIFIED but its evidence hedges". Read against the rule —
+VERIFIED means the route distinguishes every item from every other item — all three are right: each
+evidence string says in terms that the mapping is fully pinned (15/15 distinct source labels; five
+published prevalences mutually distinct at 30x the residual; 494/494 row-by-row reconstruction with
+every off-diagonal breaking). Their "does not establish" clauses are about **wording provenance**
+(translated substitutes, unpublished composite keys), not about the item↔code mapping under test.
+The lint fires on the phrase, which Step 5b actually *requires* the evidence to contain. No change.
+
+### How this round ended — a new failure mode
+
+The agent finished extraction and Step 3 cleanly, then **launched the Step 4 gates as a background
+command and ended its turn to wait for a notification**. A `claude -p` run has no next turn: ending
+the turn ended the session. The log records it verbatim — "The background command will notify me
+when the audit finishes — no need to poll. Waiting." — and the process exited **0** at 07:35 with
+Steps 4, 5 and 6 never run, nothing committed, and all 12 rows left `in_progress`.
+
+Two things worked exactly as designed and one did not:
+
+- The **guards worked.** 12 `in_progress` rows plus a dirty tree meant the next round would have
+  refused twice over, which is the whole point of them.
+- The **standing PR worked** — first successful run of that path since #1904 deleted the branch. It
+  pushed and opened #1922.
+- **Exit code 0 is now worthless as a completion signal, for the second distinct reason.** It was
+  already known that a 429 kill exits 0; now an abandoned protocol does too. The fix is a
+  post-condition check rather than an exit code: after the agent returns, a round has completed only
+  if zero rows are left `in_progress` and the batch has an `audit_report.csv`. Added to
+  `run_round.sh`, along with a Step 2 instruction never to background a command or wait on a
+  notification.
+
+Close-out was done by hand rather than by re-running: every gate passes, the 12 notes all carry
+their retry tests, and `mapping_verification.csv` already held all 12 tracker rows — the work was
+sound and complete, only unrecorded. The three `NOT_NEEDED` rows for the `data_labels` COACH tables
+were missing from the batch-local `verification_merged.csv` (they were in the permanent tracker) and
+were added; that was the only substantive gap, and it cleared the 3 lint ERRORs.
+
+**Note for whoever edits these files next:** `notes.csv` has **mixed line endings** — the flanker row
+is CRLF while the rest are LF — and no quoting convention round-trips it. Edit lines in place,
+byte-wise, and preserve each line's own terminator. A `csv.writer` rewrite silently reformats the
+whole file.
+
+### batch_020 triage — 11 of 11 staged, 0 held
+
+Gates were re-run live at close-out (above), so triage did not re-run them a third time; what it
+added was the per-table go/no-go, a read of the two source overrides, and the issues.
+
+**Staged into `itemtables/clean/`: all 11.** Every non-`data_labels` table has its
+`mapping_verification.csv` row, which SKILL.md Step 6c requires before promotion — six of them
+(`MOS_SSS_C`, `choy_2022_extraneous_events`, both `chuemchit_2024_*`, `cinar_tanriverdi_2023_gad7`,
+`cogcontrol_gyurkovics_2019_flanker`).
+
+**The two source overrides were read, not taken on trust.** Both verify scripts test the decision
+that was actually made rather than the plumbing, which is what triage is for:
+
+- `verify_COACH_Chen_2022_MOS_SSS_C.R` states the codebook grouping and the shipped grouping as two
+  named permutations and lets the data choose, with a 2000-draw permutation null. It also says in
+  terms what it does not establish (within-subscale order), which is why the status is PARTIAL and
+  not VERIFIED. Good script.
+- `verify_COACH_Chen_2022_WHOQOL_BREF.R` tests the one axis that carried a decision (q26's option
+  direction) with a falsifiable predicate, and deliberately reads the study's own Dataverse raw file
+  instead of `irw_fetch()` to avoid the export quota. Also good.
+
+**Two judgment calls, both settled by precedent rather than by inventing a rule:**
+
+- `cogcontrol_gyurkovics_2019_flanker` ships `item_text` that IRW *reconstructed* — the arrow display
+  ("↓↓←↓↓") decoded from trial data, since the OSF deposit ships no stimulus images. That is not a new
+  category: `reconstructed` + `study_materials` covers 8 tables in the corpus and four of them are
+  already uploaded (`depression_anxiety_stress`, `riasec`, `hypersensitive_narcissism`,
+  `short_dark_triad`). Staged, with the reconstruction disclosed in the public note.
+- `COACH_Chen_2022_WHOQOL_BREF` raised a WHOQOL **rights** question. Applying #1891 as ruled — it
+  fires on a quotable restriction, never on an inference — no NC clause could be retrieved, and the
+  wording came from a CC0 deposit, so the rule does not fire and the table is staged. Holding it
+  alone would have been incoherent anyway: **the same instrument's wording is already published for
+  three other IRW tables** (`altahla_2024_whoqol`, `altahla_2024_whoqol_bref` 2026-08-17,
+  `burkert_2019_whoqol_bref` 2026-08-18). Filed corpus-wide as #1927 instead; it covers 7 tables.
+
+**Issues filed:** #1924 (`IADL`, 65 out-of-range responses — data defect, not a mapping error),
+#1925 (`CSQ`, dictionary names Larsen's CSQ-8 but the items are Baker's CSQ-9 short form — the fifth
+dictionary defect the extraction pass has found), #1927 (WHOQOL rights, corpus-wide decision).
+Commented on #1831 with the COACH cluster result, since that issue had specifically asked for the
+WHOQOL direction to be checked against its own data — it was, and the codebook lost.
+
+**Issues page: drafted, NOT applied.** `fixes/itemtext_issues_draft.md` has all 11 entries. They go
+into `irw_site/itemtext_issues.qmd` when the tables actually ship — the drafter's rule is that a
+table with a blank `uploaded` stamp gets no entry until then, and `check_issues_page.R` re-reports it
+once it does. Putting them up now would describe issues in tables nobody can see. No REVIEW THESE TOO
+section this time: all 11 shipped tables carry a `public_note`, so the drafter had no blind spot.
+
+**Structural spot-checks passed:** `chinvararak_2021_phq15` ships genuine administered Thai in
+`option_text` with English in `option_text_translated`, and `item_text_translated` is the canonical
+`NA` token throughout — the documented signal that the base fields are a substitute.
+`cinar_tanriverdi_2023_gad7` carries real Turkish beside real English. The `chuemchit_2024_*` pair
+carries English with `_translated` = `NA`, the #1777 fallback shape. `choy_2022_extraneous_events`
+and the flanker have no `language` column at all, which is correct for them.
+
+**Next:** upload is Ben's step. On his confirmation — stamp `uploaded=<date>` in `provenance.csv` and
+`mapping_verification.csv`, apply the 11 draft entries to the issues page, and delete the uploaded
+`__items.csv` from `batch_020/` (sidecars stay). `clean/` is cleared by Ben, not by the pipeline.
+
+---
+
+## batch_021 — 2026-09-04
+
+**12 tables claimed. Written 10 / blocked 2 / failed 0. Yield 83.3%.** Circuit breaker not tripped
+(0% failed against the 30% threshold). **This round completes the round cap: `batch_021` exists, so
+Step 0's first stop condition now fires and no further round should start** — the runner will decline
+on its own, and 1,141 rows remain `pending` for whenever the cap is lifted.
+
+**One agent per table, 12 in parallel.** No infrastructure failure, no rate limit, no content filter,
+no export-quota trip. Every agent reported, so no agent needed the batch_019 "reported-failed but the
+files are on disk" rescue.
+
+**Export discipline held.** Every agent used `irw_table_sets()` / `table_sets.R` for ground truth and
+ran `validate_items.R --table-sets`. Exactly one `irw_fetch` export was taken all round, by the `pwi`
+agent on a 1,360-row table, to establish respondent-level CONTROL/EXP disjointness — which
+server-side aggregates genuinely cannot show. That is the export-as-a-decision rule working as
+intended.
+
+**Gates.** `normalize_nulls` 0 of 10 needed normalizing (agents wrote clean `NA` tokens).
+`audit_batch` **10/10 PASS with no anomalies — no WARNs at all**, so Step 5c had nothing to explain,
+a first for a full round. `verify_batch` 6 PASS / 4 MISSING(exempt), no FAIL and no missing VERDICT.
+`irw-validate` ok on all 10 (2 checks each; no `dup_item_resp`, no `resp_ambiguous` — notable for
+`conner_2017_bfi` and `conner_2017_cesd`, which deliberately ship two anchor directions in one table
+and correctly do not trip the per-item-direction-is-legitimate carve-out). `check_provenance` clean:
+291 provenance rows over 23 files, 69 IRW-generated tables, 0 with no issues-page entry.
+
+**`lint_verification`: 4 ERROR → 0 ERROR, 1 WARN (adjudicated, kept).** The ERRORs were mine, not the
+agents': I had added the four `NOT_NEEDED` rows for the `data_labels` tables to the permanent
+`mapping_verification.csv` but not to the batch's own `verification_merged.csv`, which is what lint
+reads. Fixed. The surviving WARN is on `conspiracy_asd__asd_aq10` ("VERIFIED but its evidence
+hedges"), and I kept VERIFIED: the hedge is scoped to route B (option direction), while route A
+carries the item axis and does separate every item from every other — source columns 53-62 reproduce
+the live per-item means to 0.00e+00 with all 10 means distinct at 2 d.p. Reasoning recorded in
+`notes.csv` rather than left for the next reviewer.
+
+**Near-miss worth recording — the `rm` trap has a second mouth.** The protocol's warning is about
+`rm -f verification_*.csv` eating `verification_merged.csv`; I avoided that by merging to `_m_*.csv`
+names and deleting the 32 source files by name from a list. But the list was written with
+`"\n".join(...)` — no trailing newline — and `while read -r f` silently drops an unterminated final
+line, so `verification_conspiracy_asd__asd_aq10.csv` survived. Harmless here (its row was already in
+the merge, and I removed it explicitly after checking), but the same slip in a delete-then-rename
+sequence is exactly how a file gets orphaned. Terminate the list, or count what you deleted.
+
+**Step 5b orchestrator re-check — one claim verified, one stale artifact found.** The agent claims
+that override a source or report a data defect (`bfi` 16 reverse-keyed items, `cesd` 4 flipped
+anchors, `soc13`'s unique {1,2,3,7,10} subset reproducing `SOCTOTAL` 921/921, `mlq`'s override of its
+own pre-registration's stated scale direction) all carry `verify_*.R` scripts that re-ran and PASSED
+under `verify_batch`, so they are independently re-executed by construction. The one load-bearing
+claim with no verify script — `conner_2017_vitality`, `data_labels`-exempt — I checked by hand and
+**CONFIRMED**: `metadata/biblio.csv` reads verbatim "Subjective Vitality Scale (4 items, 0-100
+continuous), baseline/follow-up, N=171", which is internally inconsistent — it names the SVS (Ryan &
+Frederick 1997: 6- or 7-item, 1-7 Likert) while describing SF-36 Vitality's structure.
+`metadata/metadata.csv` independently gives n_items=4, n_categories=6, n_participants=171: four items
+over six discrete levels (0/20/40/60/80/100 per SF-36 guidance), which the SVS cannot produce, and
+which also makes "0-100 continuous" wrong — it is 6-category ordinal. A third, independent hit:
+`tags/tags_auto.csv` line 930 flagged the identical contradiction in an earlier unrelated pass.
+**Stale counter-claim to fix:** `itemtext/availability_audit_full.csv` line 851 still asserts this
+table is "the well-known Subjective Vitality Scale" — that row is wrong and should be corrected with
+the biblio Description. Dictionary/metadata defect, not an itemtext defect; the shipped table is
+correct.
+
+**Step 3b instrument mismatches found (3).** (1) `conner_2017_vitality` — above; the dictionary
+correction is owed. (2) `conner_2017_curiosity` — the paper's Measures section describes only a
+*single* daily smartphone curiosity item, so the 10-item table reads as a mismatch until you find the
+CEI-II (Kashdan et al. 2009) living only in the deposited SPSS file as `cei1..cei10`; easy to
+misread, worth flagging to anyone auditing this study. (3) `cognitive_load_klimova_2023_stomp` — the
+deposit's own DataCite metadata lists the study's scales as "PWI, BZGS, MAS-R, MLQ" and never mentions
+STOMP, so the "Short Test of Musical Preferences" reading rests on the column prefix alone and could
+not be confirmed. Contributed to that table's block.
+
+**Other findings worth keeping.** `cognitive_load_klimova_2023_mlq` holds 9 of the MLQ's 10 items
+(item 10 absent from the response data, not padded) and its shipped scale direction **contradicts the
+study's own AsPredicted #134579 pre-registration**, which states "1 (Absolutely True) to 7 (Absolutely
+Untrue)"; the data say the opposite (Presence 4.42/4.44, Search 4.89/4.68, reverse item 9 at
+3.41/3.15, matching Steger's student norms only under the canonical direction). Canonical direction
+shipped, override documented — the pre-registration is wrong, and this is the second round running in
+which a study's own metadata lost to its own data. `conspiracy_asd__asd_aq10` ships
+`wording_rights=NC` on every row: the wording came from a CC BY 4.0 Figshare deposit so under irw#1891
+it ships, but the ARC rights page carries a quotable non-commercial clause; an issues-page entry is
+owed when it goes live. Its coded workbook header row is also corrupted by a find/replace artifact
+(`2tice`/`do 2t`/`k2w` for notice/do not/know) — the survey docx was used instead.
+
+**The two blocks are one deposit, and one human action clears both.**
+`cognitive_load_klimova_2023_pwi` and `_stomp` are both blocked on openICPSR E194063V2, which is
+Cloudflare-403 to every automated route and requires an account before any download, with the only
+publication (Field Methods 38(1):46-61) closed access and zero OA locations. Both are `blocked`, not
+`failed`: the wall is a registration gate plus a paywall, and both agents additionally reached a
+determinate finding independent of access — the item codes are contentless letters (`a..h`, `a..i`)
+that no canonical instrument can be keyed to without fabrication. The third sibling, `_mlq`, shipped.
+**A single authenticated openICPSR download of `Final_data.csv`'s headers/labels would likely resolve
+both blocks at once** — that is the highest-value human action this round surfaced. Full retry tests
+and the structural facts already established (between-subjects arms, letter-identity across arms, the
+suspected off-scale `resp=6` "don't know" code) are in `pending_index_notes.csv`.
+
+**Provenance shape:** 7 `data_labels`, 3 `reconstructed`, 2 `unknown` (the two blocks).
+Verification: 2 VERIFIED, 4 PARTIAL, 2 NO_ROUTE, 4 NOT_NEEDED — 12 tracker rows, one per claimed
+table, and every written table has exactly one.
+
+**Next:** upload is Ben's step, and nothing here has been uploaded. On his confirmation — stamp
+`uploaded=<date>` in `provenance.csv` and `mapping_verification.csv`, add the `conspiracy_asd__asd_aq10`
+NC-rights entry to the issues page, and delete the uploaded `__items.csv` from `batch_021/` (sidecars
+and `verify_*.R` stay). Separately owed regardless of upload: correct the `conner_2017_vitality`
+description in `metadata/biblio.csv` and the stale row in `availability_audit_full.csv`.
+
+**CAP REACHED — 2026-09-04T08:23-07:00.** `itemtables/batch_021` now exists, so Step 0's first stop
+condition fires from here on and no further round should start. No self-cancel action was possible or
+needed: there is no scheduler — `extraction_batches/run_round.sh` is human-triggered and checks the
+same condition in bash before launching, so it will decline on its own. 1,141 rows remain `pending`
+(plus 52 permanently `excluded` enem* tables) for whenever a human decides to raise the cap.
+
+### batch_021 triage — 10 of 10 staged, 0 held
+
+Gates re-run live at triage (not the round's own report). **Everything clean:** `normalize_nulls`
+0 of 10 needed changes; `audit_batch` **10/10 PASS with no WARNs at all**, so Step 5c had nothing to
+explain; `verify_batch` 6 PASS / 4 exempt; `lint_verification` 0 ERROR / 1 WARN; `irw-validate` ok on
+all ten with no WARNs either (unlike batch_020, none of these table names are capitalised);
+`check_provenance` clean.
+
+**Staged into `clean/`: all 10.** Every non-`data_labels` table has its tracker row — `simon`, `mlq`
+and `soc13` are `reconstructed`, and all three carry one. Note `clean/` now holds **21 files from two
+batches**, batch_020's 11 and batch_021's 10, because batch_020 has not been uploaded yet. One upload
+covers both; the hazard to avoid is uploading twice, since Redivis appends and the only check that
+catches a doubled table is `COUNT(*)` against the source.
+
+**The rights call on `conspiracy_asd__asd_aq10` is correct and worth restating.** The AQ-10 wording
+was copied from a **CC BY 4.0** Figshare deposit, and `itemtext_standard.md` § Rights is explicit that
+the licence of the source IRW copied from governs, not the instrument's own terms. The Autism
+Research Centre's clause ("used for research purposes and not for commercial use") is an
+instrument-level restriction, so it is **recorded rather than obeyed**: `wording_rights=NC` on every
+row — and only on that table, per the omit-the-column-otherwise rule — plus an issues-page entry when
+it ships. This is the ECR-R shape, not the TIMSS shape.
+
+**The three verify scripts for the reconstructed tables are all substantive:**
+
+- `verify_cognitive_load_klimova_2023_mlq.R` — the round overrode the study's **own pre-registration**
+  (AsPredicted #134579 states 1 = "Absolutely True" … 7 = "Absolutely Untrue"); the data say the
+  canonical direction. Two falsifiable predictions, tested on the two disjoint subsamples (Control
+  n=83, Exp n=87). Presence 4.42/4.44 and Search 4.89/4.68 above the midpoint with reverse item 9 at
+  3.41/3.15 matches Steger's student norms and mirrors them under the pre-registration's reading.
+  Second round running where a study's own metadata lost to its own data.
+- `verify_colomer_perez_2021_soc13.R` — the strongest test in the batch: reversing exactly items
+  1,2,3,7,10 must reproduce the authors' own `SOCTOTAL` for every respondent, and no other subset of
+  the 8192 possible should. Uses `irw_table_sets` for the code check rather than exporting.
+- `verify_cogcontrol_gyurkovics_2019_simon.R` — decodes the display from two independent columns,
+  same shape as the flanker in batch_020.
+
+All three say plainly that they do not fix within-class order, which is why two are PARTIAL.
+
+**The one lint WARN was already adjudicated by the round, correctly.** `conspiracy_asd__asd_aq10` is
+kept VERIFIED: the hedge sentence is scoped to route B (option direction), while route A carries the
+item axis and does separate every item from every other — source columns reproduce the live per-item
+means exactly and all ten means are distinct at 2 d.p. The WARN catches the phrase, not the status.
+
+**Triage caught one blind spot.** `conner_2017_curiosity` shipped with no `public_note`, and the
+drafter's REVIEW THESE TOO section flagged it. Its `notes.csv` records that item wording is
+transcribed verbatim from the study's SPSS file including a grammatical slip — item 1 reads "I
+actively seeks as much information as I can in a new situation" where the published CEI-II reads "I
+actively seek … in new situations". A user comparing against the published instrument would read that
+as an IRW transcription error. Public note written by hand; the batch now has 21 draft entries and no
+REVIEW section.
+
+**Corrected an overstatement in the round's own summary.** It reported that "one authenticated
+download of `Final_data.csv`'s headers would likely resolve both" blocked tables. Its own per-table
+notes say otherwise: the openICPSR deposit contains **exactly two data files and no codebook,
+README or questionnaire**, and the IRW item codes already ARE those column headers. So the download
+returns strings we have. The real routes are author contact for the questionnaire, or SAGE access to
+*Field Methods* 38(1):46–61 **and** that article reproducing the scales keyed to the letters. Filed
+accurately as #1930.
+
+**Issues filed:** #1929 (`conner_2017_vitality` is SF-36 Vitality, not the Subjective Vitality Scale
+— biblio Description and `availability_audit_full.csv:851` both wrong; the sixth dictionary defect
+this pass has found), #1930 (the two openICPSR blocks and what would actually clear them).
+
+**Issues page: drafted, NOT applied** — 21 entries covering both staged batches, going up when the
+tables ship.

@@ -1,0 +1,57 @@
+"table","section_id","item","instrument","language","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q1","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using transportation",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q1","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using transportation",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q1","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using transportation",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q1","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using transportation",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q2","Activities of Daily Living (ADL)","Chinese",NA,NA,"Transferring",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q2","Activities of Daily Living (ADL)","Chinese",NA,NA,"Transferring",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q2","Activities of Daily Living (ADL)","Chinese",NA,NA,"Transferring",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q2","Activities of Daily Living (ADL)","Chinese",NA,NA,"Transferring",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q3","Activities of Daily Living (ADL)","Chinese",NA,NA,"Preparing meals",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q3","Activities of Daily Living (ADL)","Chinese",NA,NA,"Preparing meals",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q3","Activities of Daily Living (ADL)","Chinese",NA,NA,"Preparing meals",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q3","Activities of Daily Living (ADL)","Chinese",NA,NA,"Preparing meals",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q4","Activities of Daily Living (ADL)","Chinese",NA,NA,"Maintaining the home",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q4","Activities of Daily Living (ADL)","Chinese",NA,NA,"Maintaining the home",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q4","Activities of Daily Living (ADL)","Chinese",NA,NA,"Maintaining the home",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q4","Activities of Daily Living (ADL)","Chinese",NA,NA,"Maintaining the home",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q5","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing medications",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q5","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing medications",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q5","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing medications",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q5","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing medications",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q6","Activities of Daily Living (ADL)","Chinese",NA,NA,"Eating",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q6","Activities of Daily Living (ADL)","Chinese",NA,NA,"Eating",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q6","Activities of Daily Living (ADL)","Chinese",NA,NA,"Eating",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q6","Activities of Daily Living (ADL)","Chinese",NA,NA,"Eating",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q7","Activities of Daily Living (ADL)","Chinese",NA,NA,"Dressing",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q7","Activities of Daily Living (ADL)","Chinese",NA,NA,"Dressing",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q7","Activities of Daily Living (ADL)","Chinese",NA,NA,"Dressing",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q7","Activities of Daily Living (ADL)","Chinese",NA,NA,"Dressing",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q8","Activities of Daily Living (ADL)","Chinese",NA,NA,"Toileting",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q8","Activities of Daily Living (ADL)","Chinese",NA,NA,"Toileting",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q8","Activities of Daily Living (ADL)","Chinese",NA,NA,"Toileting",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q8","Activities of Daily Living (ADL)","Chinese",NA,NA,"Toileting",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q9","Activities of Daily Living (ADL)","Chinese",NA,NA,"Washing",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q9","Activities of Daily Living (ADL)","Chinese",NA,NA,"Washing",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q9","Activities of Daily Living (ADL)","Chinese",NA,NA,"Washing",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q9","Activities of Daily Living (ADL)","Chinese",NA,NA,"Washing",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q10","Activities of Daily Living (ADL)","Chinese",NA,NA,"Bathing",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q10","Activities of Daily Living (ADL)","Chinese",NA,NA,"Bathing",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q10","Activities of Daily Living (ADL)","Chinese",NA,NA,"Bathing",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q10","Activities of Daily Living (ADL)","Chinese",NA,NA,"Bathing",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q11","Activities of Daily Living (ADL)","Chinese",NA,NA,"Shopping",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q11","Activities of Daily Living (ADL)","Chinese",NA,NA,"Shopping",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q11","Activities of Daily Living (ADL)","Chinese",NA,NA,"Shopping",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q11","Activities of Daily Living (ADL)","Chinese",NA,NA,"Shopping",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q12","Activities of Daily Living (ADL)","Chinese",NA,NA,"Continence",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q12","Activities of Daily Living (ADL)","Chinese",NA,NA,"Continence",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q12","Activities of Daily Living (ADL)","Chinese",NA,NA,"Continence",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q12","Activities of Daily Living (ADL)","Chinese",NA,NA,"Continence",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q13","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using the telephone",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q13","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using the telephone",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q13","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using the telephone",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q13","Activities of Daily Living (ADL)","Chinese",NA,NA,"Using the telephone",NA,"can't finish",4
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q14","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing finances",NA,"on one's own",1
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q14","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing finances",NA,"have some trouble to do",2
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q14","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing finances",NA,"need help to do",3
+"COACH_Chen_2022_ADL","COACH_Chen_2022_ADL_1","ra_adl_q14","Activities of Daily Living (ADL)","Chinese",NA,NA,"Managing finances",NA,"can't finish",4

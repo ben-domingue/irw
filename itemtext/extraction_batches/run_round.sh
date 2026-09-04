@@ -210,16 +210,65 @@ mkdir -p "$LOG_DIR"
   # So say it out loud. A round that hit a limit is not a round whose blocked and
   # failed counts mean anything, and its batch directory must be read before
   # queue_state.csv is believed.
-  if grep -qiE '(rate.?limit|429|spend (cap|limit)|usage limit)' "$_agent_out"; then
+  # First cut at this grepped the transcript for "rate limit". It fired on
+  # batch_021, whose agent had written "no rate limit, content filter, or
+  # export-quota trip" -- the words appear in the round's own prose whether or not
+  # anything was killed, and a warning that cries wolf gets ignored, which is worse
+  # than no warning. So test the actual error condition instead: a table classified
+  # failed or blocked that nevertheless HAS a __items.csv on disk. That is the
+  # thing the batch_019 rescue was about, it needs no transcript parsing, and it
+  # cannot false-positive on the agent talking about rate limits.
+  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
+  if [[ -n "$batch_dir" ]]; then
+    mismatch=""
+    while IFS=, read -r tbl status batch _rest; do
+      [[ "$status" == "failed" || "$status" == "blocked" ]] || continue
+      [[ "$batch" == "$(basename "$batch_dir")" ]] || continue
+      [[ -f "$batch_dir/${tbl}__items.csv" ]] && mismatch+="  $tbl ($status)"$'\n'
+    done < <(tail -n +2 "$QUEUE")
+    if [[ -n "$mismatch" ]]; then
+      echo
+      echo "WARNING: table(s) classified failed/blocked that DID write a CSV:"
+      printf '%s' "$mismatch"
+      echo "A killed agent's report shows its FIRST message, not its last, so a"
+      echo "finished table can be reported as a failure. Run the Step 4 gates on"
+      echo "these and classify on the gates, not on the report."
+    fi
+  fi
+
+  # Secondary, low-precision: a genuine kill usually leaves an API error string the
+  # agent did not write itself. Kept narrow on purpose.
+  if grep -qE '(rate_limit_error|usage limit reached|Claude AI usage limit)' "$_agent_out"; then
     echo
-    echo "WARNING: the transcript mentions a rate limit / spend cap. Some agents"
-    echo "were probably killed. Before trusting this round's classifications, ls"
-    echo "the batch directory -- a killed agent may have written a complete table"
-    echo "and still been reported as failed. Do not mark those tables 'blocked'."
+    echo "NOTE: an API limit error appears in the transcript. Check the batch"
+    echo "directory before trusting this round's classifications."
   fi
   rm -f "$_agent_out"
 
   [[ "$rc" -ne 0 ]] && exit "$rc"
+
+  # Exit 0 does not mean the round finished. It has now failed to mean that for two
+  # distinct reasons: a 429 kill exits 0 (above), and on 2026-09-04 the batch_020
+  # round backgrounded its Step 4 gates, ended its turn to wait for a notification
+  # that a headless run can never receive, and exited 0 with Steps 4-6 never run and
+  # all 12 rows left in_progress.
+  #
+  # So check the post-condition instead of the status. A completed round leaves zero
+  # in_progress rows and an audit_report.csv in the batch it just built. This does not
+  # try to repair anything -- reconciling a half-finished round is a human decision,
+  # and the work is usually salvageable rather than lost.
+  left="$(awk -F, 'NR>1 && $2=="in_progress"' "$QUEUE" | wc -l)"
+  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
+  if [[ "$left" -gt 0 || ! -f "$batch_dir/audit_report.csv" ]]; then
+    echo
+    echo "ERROR: the agent exited 0 but the round did NOT complete."
+    [[ "$left" -gt 0 ]] && echo "  - $left row(s) still in_progress"
+    [[ -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
+    echo
+    echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
+    echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    exit 1
+  fi
 
   # The round commits its own work (BATCH_PROCESS "Repo hygiene"). Push it, so
   # a round's output is never stranded on a local branch -- an unpushed branch
