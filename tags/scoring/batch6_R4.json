@@ -1,0 +1,82 @@
+[
+ {
+  "table": "zaehl2023_twq_cohesion",
+  "shard": "w2"
+ },
+ {
+  "table": "zubair_2021_political_support",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2025_academic_buoyancy_efa",
+  "shard": "w3"
+ },
+ {
+  "table": "theobald_2017_group_dynamics",
+  "shard": "w4"
+ },
+ {
+  "table": "rosetti2023_climate_anxiety",
+  "shard": "w2"
+ },
+ {
+  "table": "wang_2025_automatic_thoughts",
+  "shard": "w4"
+ },
+ {
+  "table": "komura_2026_mdmt_ethical",
+  "shard": "w3"
+ },
+ {
+  "table": "meloni_2015_deq_ce_child",
+  "shard": "w3"
+ },
+ {
+  "table": "rosetti2023_gad7",
+  "shard": "w2"
+ },
+ {
+  "table": "wang_2026_behavioral_intention",
+  "shard": "w3"
+ },
+ {
+  "table": "liu_2025_foreign_lang_enjoyment",
+  "shard": "w3"
+ },
+ {
+  "table": "pauli_2021_coercion_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "sumner_2022_olife",
+  "shard": "w4"
+ },
+ {
+  "table": "zhang_2025_coercive_pressure",
+  "shard": "w3"
+ },
+ {
+  "table": "conner_2017_hads_anxiety",
+  "shard": "w3"
+ },
+ {
+  "table": "forycka_2022_mswbi",
+  "shard": "w4"
+ },
+ {
+  "table": "jo_2023_sni",
+  "shard": "w4"
+ },
+ {
+  "table": "mboya_2020_gds15",
+  "shard": "w4"
+ },
+ {
+  "table": "rahm_2017_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "valverdeberrocoso_2021_learning_design",
+  "shard": "w3"
+ }
+]
