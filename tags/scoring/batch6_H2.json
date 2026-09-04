@@ -1,0 +1,114 @@
+[
+ {
+  "table": "abukhalaf_2025_disaster_prep",
+  "shard": "w4"
+ },
+ {
+  "table": "anh_2026_finbehavior",
+  "shard": "w4"
+ },
+ {
+  "table": "butt_2022_user_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2026_in",
+  "shard": "w5"
+ },
+ {
+  "table": "conspiracy_asd__conspiracy_gcbs",
+  "shard": "w2"
+ },
+ {
+  "table": "di_riso_2025_mask_emotion",
+  "shard": "w3"
+ },
+ {
+  "table": "eldor_2022_violent_extremism",
+  "shard": "w4"
+ },
+ {
+  "table": "fitriana_2022_hapwork_efa",
+  "shard": "w3"
+ },
+ {
+  "table": "galindo_2023_beliefs",
+  "shard": "w2"
+ },
+ {
+  "table": "girma_2021_oslo3",
+  "shard": "w4"
+ },
+ {
+  "table": "gordils_2021_interracial_comp",
+  "shard": "w4"
+ },
+ {
+  "table": "hochsteiner_2026_sustainability_relevance",
+  "shard": "w4"
+ },
+ {
+  "table": "kang_2024_ai_adoption",
+  "shard": "w3"
+ },
+ {
+  "table": "lee2024_relative_clause",
+  "shard": "w2"
+ },
+ {
+  "table": "liem_2024_cleaner_production",
+  "shard": "w4"
+ },
+ {
+  "table": "lu_2017_phq9",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_sciinfo",
+  "shard": "w4"
+ },
+ {
+  "table": "muller_2016_dog_inhibition",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_pic",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_hw_intensity",
+  "shard": "w3"
+ },
+ {
+  "table": "risticdedic_2025_dhq_expectation",
+  "shard": "w4"
+ },
+ {
+  "table": "salleh_2023_aim_iam_fim",
+  "shard": "w3"
+ },
+ {
+  "table": "shu_2024_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "szameitat_2015_multitask_examples",
+  "shard": "w4"
+ },
+ {
+  "table": "villarrealzegarra2026_trif",
+  "shard": "w3"
+ },
+ {
+  "table": "xie_2026_student_questionnaire",
+  "shard": "w3"
+ },
+ {
+  "table": "zaehl2023_twq_commitment",
+  "shard": "w2"
+ },
+ {
+  "table": "zubair_2021_political_support",
+  "shard": "w4"
+ }
+]

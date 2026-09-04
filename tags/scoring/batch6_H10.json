@@ -1,0 +1,110 @@
+[
+ {
+  "table": "allen_2025_delaydiscount",
+  "shard": "w4"
+ },
+ {
+  "table": "biswas_2024_digital_center_quality",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_ts",
+  "shard": "w5"
+ },
+ {
+  "table": "conner_2017_hads_anxiety",
+  "shard": "w3"
+ },
+ {
+  "table": "deilkas_2019_patient_safety_climate",
+  "shard": "w3"
+ },
+ {
+  "table": "dussel_2022_hads14",
+  "shard": "w4"
+ },
+ {
+  "table": "extremera_2016_shs",
+  "shard": "w3"
+ },
+ {
+  "table": "forycka_2022_mswbi",
+  "shard": "w4"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "goldberg_2018_spa_skills",
+  "shard": "w4"
+ },
+ {
+  "table": "herrera_2018_iri",
+  "shard": "w3"
+ },
+ {
+  "table": "jo_2023_sni",
+  "shard": "w4"
+ },
+ {
+  "table": "kraft_todd_2017_competence",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_socmedia_enjoyment",
+  "shard": "w4"
+ },
+ {
+  "table": "lorenz_2016_hope",
+  "shard": "w3"
+ },
+ {
+  "table": "mboya_2020_gds15",
+  "shard": "w4"
+ },
+ {
+  "table": "morales_2021_erq",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_barthel",
+  "shard": "w4"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__abex",
+  "shard": "w2"
+ },
+ {
+  "table": "rahm_2017_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "rowe_2016_symptoms",
+  "shard": "w3"
+ },
+ {
+  "table": "shin2024_creactability_quickness",
+  "shard": "w2"
+ },
+ {
+  "table": "sun_2024_task_tech_fit",
+  "shard": "w4"
+ },
+ {
+  "table": "valverdeberrocoso_2021_learning_design",
+  "shard": "w3"
+ },
+ {
+  "table": "wu_2024_proactive_personality",
+  "shard": "w3"
+ },
+ {
+  "table": "zaehl2023_hexaco",
+  "shard": "w2"
+ },
+ {
+  "table": "zhao_2025_nat_env_perception",
+  "shard": "w3"
+ }
+]

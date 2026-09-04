@@ -1,0 +1,110 @@
+[
+ {
+  "table": "ajlan_2025_stemcell_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "arabaci_2025_burnout",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot2_det_core",
+  "shard": "w3"
+ },
+ {
+  "table": "choy_2022_affect",
+  "shard": "w3"
+ },
+ {
+  "table": "cormier_2024_phq4",
+  "shard": "w3"
+ },
+ {
+  "table": "dong_2024_ccaiq",
+  "shard": "w2"
+ },
+ {
+  "table": "emidy2024_fevs",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_life_satisfaction_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "gan_2024_alexithymia",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_bri_feel",
+  "shard": "w4"
+ },
+ {
+  "table": "han_2015_peer_assisted_learning",
+  "shard": "w4"
+ },
+ {
+  "table": "huo_2025_political_skill",
+  "shard": "w4"
+ },
+ {
+  "table": "knight_2026_crt",
+  "shard": "w3"
+ },
+ {
+  "table": "lestari_2026_inhibitory_control",
+  "shard": "w5"
+ },
+ {
+  "table": "liu_2018_shyness",
+  "shard": "w3"
+ },
+ {
+  "table": "lunacortes_2019_social_value",
+  "shard": "w3"
+ },
+ {
+  "table": "medvedev_2018_sl",
+  "shard": "w4"
+ },
+ {
+  "table": "nabwera_2021_bdi",
+  "shard": "w3"
+ },
+ {
+  "table": "nteveros_2021_who5",
+  "shard": "w3"
+ },
+ {
+  "table": "pham_2026_bsgt",
+  "shard": "w5"
+ },
+ {
+  "table": "roelen_2020_rses",
+  "shard": "w3"
+ },
+ {
+  "table": "santos_2018_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "stoyel_2021_edeq_binge_purge",
+  "shard": "w4"
+ },
+ {
+  "table": "theobald_2017_group_dynamics",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2024_emotion5",
+  "shard": "w3"
+ },
+ {
+  "table": "yandun2026_attention",
+  "shard": "w2"
+ },
+ {
+  "table": "zeng_2026_gai_exploration",
+  "shard": "w3"
+ }
+]
