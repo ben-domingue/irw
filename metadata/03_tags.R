@@ -15,6 +15,8 @@
 
 library(gsheet)
 
+source("gsheet_retry.R")  ## retrying gsheet2tbl; see that file
+
 ##Multi-select normalisation for `sample` and `construct type`, applied after
 ##the sheet export and before write_csv. See tag_normalize.R and issue #1720.
 ##The Google Sheet itself is deliberately not modified.
