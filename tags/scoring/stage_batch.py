@@ -43,6 +43,10 @@ AUTO = HERE.parent / "tags_auto.csv"
 PUBLISH = ["primary_languages", "item_format", "measurement_tool"]  # plus sample setting
 WITHHOLD = ["construct_type", "age_range", "child_age", "construct_name"]
 
+#: Above this many codes, `primary language(s)` is read as an instrument
+#: fielded in many languages rather than a table administered in a few.
+MAX_LANGUAGE_CODES = 4
+
 FRAME_ATOMS = {"Representative", "Targeted/specific", "General/non-specific"}
 SETTING_ATOMS = {"Educational", "Clinical", "Program-based", "Non-human",
                  "Workplace", "Internet-based", "Internet-based (Mturkers, etc)"}
@@ -79,6 +83,7 @@ def main():
         rows += json.loads(Path(p).read_text())
 
     payloads, unknown_all, tally = [], [], Counter()
+    multilingual = []
     for r in rows:
         setting, unknown = setting_only(r.get("sample"))
         unknown_all += [(r["table"], u) for u in unknown]
@@ -92,6 +97,19 @@ def main():
                "notes": r.get("notes") or ""}
         for f in PUBLISH:
             pay[f] = (r.get(f) or "").strip()
+        # An instrument fielded in many languages at once cannot be attributed
+        # to one of them, and listing all of them asserts something false about
+        # every respondent (#1704, ruled 2026-09-04). vocab.md tells the agents
+        # this; the guard is here because assembly is where publication is
+        # decided, and a long code list is the observable signature. The count
+        # is a proxy for the rule, so every one it catches is named rather than
+        # silently dropped -- a genuinely quadrilingual instrument would show up
+        # here and should be let through by raising the threshold, not by
+        # removing the report.
+        codes = [c for c in pay["primary_languages"].split(",") if c.strip()]
+        if len(codes) > MAX_LANGUAGE_CODES:
+            multilingual.append((r["table"], len(codes)))
+            pay["primary_languages"] = ""
         for f in PUBLISH + ["sample"]:
             if pay.get(f):
                 tally[f] += 1
@@ -107,6 +125,14 @@ def main():
     print(f"  tagged but nothing publishable  {tally['nothing_publishable']:>4}"
           "   (staged blank; the withheld columns carried their content)")
     print("\nwithheld from every row: " + ", ".join(WITHHOLD) + ", sample FRAME facet")
+
+    if multilingual:
+        print(f"\n{len(multilingual)} table(s) had `primary language(s)` blanked -- "
+              f"more than {MAX_LANGUAGE_CODES} codes, so the instrument is "
+              f"multilingual by construction and this table cannot be attributed "
+              f"to one language (#1704):")
+        for t, n in multilingual:
+            print(f"   {t}  ({n} codes)")
 
     if unknown_all:
         print(f"\nREFUSING: {len(unknown_all)} `sample` atom(s) outside vocab.md.")
