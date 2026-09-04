@@ -13,6 +13,7 @@ narrative is in `round_log.md` under batch_016, batch_017 and batch_018.
 | worktree | `/home/ben/irw-queue-runner` — **use this, not `src`** (the old `/home/ben/irw-queue` is retired: 36 commits behind, stale cap) |
 | branch | `itemtext/queue-rounds` (pushed; the wrapper merges `origin/main` in before each round) |
 | runner | `itemtext/extraction_batches/round_cron.sh`, hourly at `:13` from the user crontab |
+| review | a **standing PR** from `itemtext/queue-rounds` → `main`, opened by the runner and left open; rounds accumulate into it |
 | staged for upload | `itemtext/itemtables/clean/` |
 | protocol the cron reads | `itemtext/extraction_batches/round_prompt_v1.md` |
 
@@ -68,6 +69,18 @@ Runs in **`/home/ben/irw-queue-runner`** on `itemtext/queue-rounds`, which the w
 `origin/main` into before each round so protocol changes are picked up. **The old
 `/home/ben/irw-queue` worktree is retired** — it is 36 commits behind main on a branch whose remote
 is gone, and still carries the `batch_018` cap, so a round there would self-cancel on its first fire.
+
+**The worktree keeps itself current.** `git fetch` + `git merge origin/main` run *before* the
+Step 0 guards, so the worktree picks up protocol changes on every hourly fire — including fires
+where no round runs, e.g. once the cap is reached. The only conditions that skip the update are the
+two that should: wrong branch, or a dirty tree.
+
+**The other direction is the standing PR.** Rounds commit to `itemtext/queue-rounds` and the runner
+opens one PR to `main` and leaves it open, accumulating rounds rather than opening one per round.
+Without it the branch only grows: the work goes unreviewed, and the further it drifts from main the
+likelier the pre-round merge is to conflict — which stops the queue outright, since a failed merge
+skips the round. Merging that PR commits extractions to the **repo, not the warehouse**; staging and
+upload stay manual.
 
 **One step is left, and it is yours** — installing the crontab line was blocked by the permission
 classifier:

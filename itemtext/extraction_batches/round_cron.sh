@@ -160,6 +160,41 @@ alert() {
   else
     echo "Nothing new to push."
   fi
+
+  # A STANDING pull request, opened once and left open. Rounds accumulate into
+  # it; it is not one PR per round.
+  #
+  # Without this the branch just grows: rounds pile up unreviewed, and the
+  # further it drifts from main the likelier the wrapper's pre-round merge is to
+  # hit a conflict -- which stops the queue entirely, since a failed merge skips
+  # the round. It is also the review surface the work actually needs: roughly 8
+  # of the 12 tables in a round want a human go/no-go before anything is staged
+  # for upload, and a PR is where that happens.
+  #
+  # Failure here is deliberately NOT fatal. The round's work is already
+  # committed and pushed by this point, and losing a PR link is not worth
+  # alerting over or re-running a round for.
+  open_pr="$(gh pr list --repo "$GH_REPO" --head "$BRANCH" --state open \
+    --json number --jq '.[0].number' 2>/dev/null)"
+  if [[ -n "$open_pr" ]]; then
+    echo "Standing PR #$open_pr already open; this round's commits are on it."
+  else
+    gh pr create --repo "$GH_REPO" --base main --head "$BRANCH" \
+      --title "itemtext: extraction rounds from the queue runner" \
+      --body "Standing PR for \`$BRANCH\`, opened automatically by \
+\`itemtext/extraction_batches/round_cron.sh\`. Rounds accumulate here rather than \
+opening a PR each; it stays open between merges.
+
+**Nothing here is published.** A round writes \`__items.csv\` into a batch directory and \
+stops -- triage, staging into \`itemtables/clean/\` and upload are all separate manual \
+steps. Merging this PR commits the extractions to the repo, not to the warehouse.
+
+Review per \`itemtext/BATCH_PROCESS.md\` § 'Triage and staging'. Round-by-round detail is \
+in \`extraction_batches/round_log.md\` and the per-round logs under \
+\`extraction_batches/cron_logs/\` (untracked, local to the runner worktree)." \
+      2>&1 | tail -2
+    echo "Opened the standing PR."
+  fi
   exit 0
 ) > "$LOG_FILE" 2>&1
 
