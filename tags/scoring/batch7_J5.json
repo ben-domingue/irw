@@ -1,0 +1,114 @@
+[
+ {
+  "table": "algner2022_wis",
+  "shard": "w3"
+ },
+ {
+  "table": "balmas2018_leader_personality",
+  "shard": "w2"
+ },
+ {
+  "table": "chanal_2020_educphy",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_sc",
+  "shard": "w5"
+ },
+ {
+  "table": "conner_2017_curiosity",
+  "shard": "w3"
+ },
+ {
+  "table": "dalichaouche_2026_covid_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "dou2025_area",
+  "shard": "w3"
+ },
+ {
+  "table": "emidy2024_fevs",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_strength_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_dop_avocational_interests",
+  "shard": "w4"
+ },
+ {
+  "table": "han_2026_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "ibrahim_2015_bfi",
+  "shard": "w3"
+ },
+ {
+  "table": "jutte_2024_personality",
+  "shard": "w3"
+ },
+ {
+  "table": "kokoszka_2022_who5",
+  "shard": "w3"
+ },
+ {
+  "table": "lee_2020_vr_usability",
+  "shard": "w3"
+ },
+ {
+  "table": "livacicrojas_2023_lvq",
+  "shard": "w4"
+ },
+ {
+  "table": "mekheimer_2026_id",
+  "shard": "w3"
+ },
+ {
+  "table": "naja_2024_challenges",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_sdt_mental_health",
+  "shard": "w5"
+ },
+ {
+  "table": "orovou_2021_lec5",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_pbc_cond_presence",
+  "shard": "w3"
+ },
+ {
+  "table": "ramadan_2026_applied_practice",
+  "shard": "w5"
+ },
+ {
+  "table": "saha_2026_cesd",
+  "shard": "w5"
+ },
+ {
+  "table": "soderberg_2024_general_selfefficacy",
+  "shard": "w5"
+ },
+ {
+  "table": "tasaygar_2025_sdasi",
+  "shard": "w4"
+ },
+ {
+  "table": "ventura_2025_quadrant_b",
+  "shard": "w5"
+ },
+ {
+  "table": "xiao_2026_entrepreneurial_intention",
+  "shard": "w4"
+ },
+ {
+  "table": "zaehl2023_twq_cohesion",
+  "shard": "w2"
+ }
+]

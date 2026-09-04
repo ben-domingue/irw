@@ -1,0 +1,114 @@
+[
+ {
+  "table": "atmadjaja_2026_cultural_intelligence",
+  "shard": "w3"
+ },
+ {
+  "table": "butt_2022_cognitive_absorption",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_cc",
+  "shard": "w5"
+ },
+ {
+  "table": "chen_2026_ee",
+  "shard": "w5"
+ },
+ {
+  "table": "cormier_2024_cognitive_decline",
+  "shard": "w3"
+ },
+ {
+  "table": "doherty_2023_bfi10",
+  "shard": "w4"
+ },
+ {
+  "table": "eldor_2022_anomie",
+  "shard": "w4"
+ },
+ {
+  "table": "extremera_2016_sbq",
+  "shard": "w3"
+ },
+ {
+  "table": "ganbat_2022_pollution_leave_type",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_sdv_adjectives",
+  "shard": "w4"
+ },
+ {
+  "table": "hoorani_2022_ps",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2024_cisuppenv",
+  "shard": "w3"
+ },
+ {
+  "table": "khoa_2023_knowledge_dissemination",
+  "shard": "w5"
+ },
+ {
+  "table": "kowal_2021_kidney_donor_body_image",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2026_team_cohesion",
+  "shard": "w4"
+ },
+ {
+  "table": "makai_2023_entrepreneurial_transdanubia",
+  "shard": "w3"
+ },
+ {
+  "table": "mistry_2022_hardship",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_gad7",
+  "shard": "w4"
+ },
+ {
+  "table": "nurjanah_2019_hls47",
+  "shard": "w4"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__ex",
+  "shard": "w2"
+ },
+ {
+  "table": "qiang_2025_job_performance",
+  "shard": "w3"
+ },
+ {
+  "table": "rosetti_2023_gad7",
+  "shard": "w2"
+ },
+ {
+  "table": "schalet_2016_hrsd",
+  "shard": "w3"
+ },
+ {
+  "table": "sun_2024_usage",
+  "shard": "w4"
+ },
+ {
+  "table": "tomioka_2022_srh_sufficiency",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2024_emotion1",
+  "shard": "w3"
+ },
+ {
+  "table": "yu_2025_mobile_addiction",
+  "shard": "w3"
+ },
+ {
+  "table": "zhao_2025_place_attachment",
+  "shard": "w3"
+ }
+]
