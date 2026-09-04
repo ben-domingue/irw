@@ -56,7 +56,7 @@ questionnaire's English. Two agents independently established that the back-tran
 administered form** despite being titled "used in the first pilot study". Its mapping is sound and
 its gates are green. Switching the wording base to the S4 Code Book is a re-extraction of one table.
 
-**c. Scheduling of itemtext rounds — REOPENED 2026-09-04, this is the live question.**
+**c. Scheduling of itemtext rounds — crontab is RULED OUT; the runner is paused pending a replacement.**
 
 Sequence matters here, so read it in order rather than assuming the last state:
 
@@ -76,17 +76,29 @@ Sequence matters here, so read it in order rather than assuming the last state:
 **Current state: paused, not dismantled.**
 - `extraction_batches/circuit_breaker.flag` is set as a DELIBERATE PAUSE, not a tripped breaker.
   The file says so itself. Delete it to resume.
-- The crontab line `13 * * * * .../round_cron.sh` is **still installed**. Removing it is the
-  durable stop; the flag is the immediate one. Note an agent cannot edit the crontab — the
-  permission classifier blocks it, so that step is always Ben's.
+- The crontab line `13 * * * * .../round_cron.sh` is **still installed and should be removed** —
+  it is one of two IRW crontab entries still to migrate (the other is the weekly metadata
+  pipeline, `0 6 * * 1`). The flag is the immediate stop; removing the line is the durable one.
+  An agent cannot do it: the permission classifier blocks crontab edits, so that step is Ben's.
+  `crontab -e`, delete the line.
 - The cap is `batch_020`, so even unpaused it would run one more round and stop.
 
-**A precedent landed the same day and is worth weighing.** #1705 moved the version-manifest
-refresh **off local cron into GitHub Actions** (#1905, #1907; first Actions run `d0a42d7`). That
-is a better shape than a laptop crontab — it survives the machine being off, runs in a clean
-environment, logs per run, and needs no `--dangerously-skip-permissions` locally. The open
-question for adopting it here is whether an extraction round's needs (Redivis credentials, the R
-and Python toolchain, ~19 min runtime, 12 parallel subagents) fit that runner.
+**Crontab is out, as a standing preference across projects.** Ben ruled on 2026-09-04: "i have
+had no luck with crontab across a variety of different projects now." It was earned — the
+version-manifest job was installed as a crontab entry on 2026-09-03 and ran **zero** times,
+refusing silently because the live checkout was never on `main`. The failure mode is not
+misfiring, it is failing *quietly* on a laptop that has to be on and in the right state, with
+nothing reporting on it. **Do not propose a crontab here.**
+
+The direction is **GitHub Actions**, which is what #1705 chose for the version manifest (#1905,
+#1907; first Actions run `d0a42d7`) — a scheduled workflow plus `workflow_dispatch`, opening an
+auto-merged PR because `GITHUB_TOKEN` does not inherit Ben's `enforce_admins: false` bypass on
+`main`. Local systemd timers are weaker: `Linger=no`, so they only fire while he is logged in.
+
+**This job is not a straight lift, which is why it is still open.** The manifest job only reads a
+remote API and commits a file. A round needs Redivis credentials, the R and Python toolchain,
+~19 minutes, and 12 parallel `claude` subagents. Whether that fits an Actions runner — and what
+it costs there — is the thing to work out.
 
 **What the round cannot do, under any scheduler:** publish. It writes `__items.csv` into a batch
 directory and stops. Triage, staging into `clean/` and upload are all manual. That property is
