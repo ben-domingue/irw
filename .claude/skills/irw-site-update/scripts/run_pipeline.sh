@@ -114,11 +114,24 @@ for a in "$@"; do
 done
 if [[ ${#stages[@]} -eq 0 ]]; then stages=("${DEFAULT_ORDER[@]}"); fi
 if [[ "${SKIP_09:-0}" == "1" ]]; then
-  stages=("${stages[@]/09}")
+  # Drop the element, do not blank it. `${stages[@]/09}` substitutes the text
+  # and leaves an EMPTY element behind, and an empty key is a fatal error when
+  # it reaches an associative array: "STAGE_OUTPUTS: bad array subscript",
+  # which under `set -e` kills the run before a single stage has executed. The
+  # run loop below guards for an empty stage; the snapshot loop above it did
+  # not, so --no-09 failed every time it was used. First hit 2026-09-04, the
+  # first time anything passed this flag.
+  kept=()
+  for s in "${stages[@]}"; do
+    [[ "$s" == "09" ]] && continue
+    kept+=("$s")
+  done
+  stages=("${kept[@]}")
 fi
 
 echo "== Snapshotting current CSVs before running anything =="
 for stage in "${stages[@]}"; do
+  [[ -z "$stage" ]] && continue   # parity with the run loop below
   for f in ${STAGE_OUTPUTS[$stage]:-}; do
     [[ -z "$f" ]] && continue
     if [[ -f "$METADATA_DIR/$f" ]]; then
