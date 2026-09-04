@@ -20,6 +20,12 @@
 # push would simply be rejected. The PR is auto-merged -- `main` requires zero
 # approving reviews -- which keeps the job unattended while leaving an audit
 # trail. Most days the manifest does not change and no PR is opened.
+#
+# This requires the repository setting "Allow GitHub Actions to create and
+# approve pull requests" (Settings -> Actions -> General -> Workflow
+# permissions). Without it `gh pr create` fails with "GitHub Actions is not
+# permitted to create or approve pull requests" *after* the branch has been
+# pushed, which is how it failed the first time this step ran.
 name: version manifest
 
 on:
@@ -98,7 +104,11 @@ jobs:
         run: |
           set -euo pipefail
           date="$(date -u +%F)"
-          branch="manifest/refresh-$date"
+          # The run id keeps two runs on the same day from colliding: a
+          # date-only name would already exist on the remote and the push would
+          # be rejected as non-fast-forward. That is not hypothetical -- the
+          # first run that reached this step failed after pushing its branch.
+          branch="manifest/refresh-$date-$GITHUB_RUN_ID"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git checkout -b "$branch"
