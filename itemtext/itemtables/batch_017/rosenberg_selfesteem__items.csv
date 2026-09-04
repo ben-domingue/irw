@@ -1,0 +1,41 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"rosenberg_selfesteem","rosenberg_selfesteem_1",1,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I am a person of worth, at least on an equal plane with others.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",1,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I am a person of worth, at least on an equal plane with others.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",1,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I am a person of worth, at least on an equal plane with others.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",1,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I am a person of worth, at least on an equal plane with others.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",2,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I have a number of good qualities.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",2,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I have a number of good qualities.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",2,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I have a number of good qualities.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",2,"Rosenberg Self-Esteem Scale",NA,NA,"I feel that I have a number of good qualities.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",3,"Rosenberg Self-Esteem Scale",NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",3,"Rosenberg Self-Esteem Scale",NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",3,"Rosenberg Self-Esteem Scale",NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",3,"Rosenberg Self-Esteem Scale",NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",4,"Rosenberg Self-Esteem Scale",NA,NA,"I am able to do things as well as most other people.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",4,"Rosenberg Self-Esteem Scale",NA,NA,"I am able to do things as well as most other people.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",4,"Rosenberg Self-Esteem Scale",NA,NA,"I am able to do things as well as most other people.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",4,"Rosenberg Self-Esteem Scale",NA,NA,"I am able to do things as well as most other people.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",5,"Rosenberg Self-Esteem Scale",NA,NA,"I feel I do not have much to be proud of.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",5,"Rosenberg Self-Esteem Scale",NA,NA,"I feel I do not have much to be proud of.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",5,"Rosenberg Self-Esteem Scale",NA,NA,"I feel I do not have much to be proud of.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",5,"Rosenberg Self-Esteem Scale",NA,NA,"I feel I do not have much to be proud of.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",6,"Rosenberg Self-Esteem Scale",NA,NA,"I take a positive attitude toward myself.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",6,"Rosenberg Self-Esteem Scale",NA,NA,"I take a positive attitude toward myself.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",6,"Rosenberg Self-Esteem Scale",NA,NA,"I take a positive attitude toward myself.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",6,"Rosenberg Self-Esteem Scale",NA,NA,"I take a positive attitude toward myself.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",7,"Rosenberg Self-Esteem Scale",NA,NA,"On the whole, I am satisfied with myself.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",7,"Rosenberg Self-Esteem Scale",NA,NA,"On the whole, I am satisfied with myself.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",7,"Rosenberg Self-Esteem Scale",NA,NA,"On the whole, I am satisfied with myself.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",7,"Rosenberg Self-Esteem Scale",NA,NA,"On the whole, I am satisfied with myself.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",8,"Rosenberg Self-Esteem Scale",NA,NA,"I wish I could have more respect for myself.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",8,"Rosenberg Self-Esteem Scale",NA,NA,"I wish I could have more respect for myself.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",8,"Rosenberg Self-Esteem Scale",NA,NA,"I wish I could have more respect for myself.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",8,"Rosenberg Self-Esteem Scale",NA,NA,"I wish I could have more respect for myself.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",9,"Rosenberg Self-Esteem Scale",NA,NA,"I certainly feel useless at times.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",9,"Rosenberg Self-Esteem Scale",NA,NA,"I certainly feel useless at times.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",9,"Rosenberg Self-Esteem Scale",NA,NA,"I certainly feel useless at times.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",9,"Rosenberg Self-Esteem Scale",NA,NA,"I certainly feel useless at times.",NA,"strongly agree",4
+"rosenberg_selfesteem","rosenberg_selfesteem_1",10,"Rosenberg Self-Esteem Scale",NA,NA,"At times I think I am no good at all.",NA,"strongly disagree",1
+"rosenberg_selfesteem","rosenberg_selfesteem_1",10,"Rosenberg Self-Esteem Scale",NA,NA,"At times I think I am no good at all.",NA,"disagree",2
+"rosenberg_selfesteem","rosenberg_selfesteem_1",10,"Rosenberg Self-Esteem Scale",NA,NA,"At times I think I am no good at all.",NA,"agree",3
+"rosenberg_selfesteem","rosenberg_selfesteem_1",10,"Rosenberg Self-Esteem Scale",NA,NA,"At times I think I am no good at all.",NA,"strongly agree",4

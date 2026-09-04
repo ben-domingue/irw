@@ -4,7 +4,7 @@ You are firing as a recurring cron round of the IRW item-text batch-extraction p
 stateless firing — you have no memory of prior rounds. Everything you need is either in this prompt
 or on disk. Follow this protocol exactly, once, then stop (do not loop internally).
 
-Working directory: /home/ben/irw-wt/1709/itemtext/ — cd there first. Read
+Working directory: /home/ben/irw-queue/itemtext/ — cd there first. Read
 itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 
 ## Step 0 — Stop conditions (check BEFORE any extraction work)
@@ -12,7 +12,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_031 already exists (round cap reached)
+- itemtables/batch_018 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -100,7 +100,7 @@ tables belong to another agent and must not be touched. Two agents independently
 convention from the same file is useful corroboration; two agents writing the same files is a race.
 Each subagent prompt must tell it to:
 
-- cd to /home/ben/irw-wt/1709/itemtext/ and read
+- cd to /home/ben/irw-queue/itemtext/ and read
   .claude/skills/irw-auto-itemtext/SKILL.md in full (plus references/itemtext_standard.md) before
   doing anything, and follow it precisely.
 - Process its ONE assigned table via SKILL.md Steps 2-6:
@@ -288,7 +288,7 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_031, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_018, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.
@@ -297,5 +297,5 @@ NOTE ON PATHS (2026-09-03 restart): this round runs from a WORKTREE, not src.
 `irw_site` is NOT a sibling of the worktree -- use the absolute path above for
 check_provenance.R. Do not `cd` into /home/ben/Dropbox/projects/irw/src and do not
 switch branches there; it is checked out on an unrelated branch. Commit round output
-on branch itemtext/1709-restart-queue, naming paths explicitly per BATCH_PROCESS.md's
+on branch itemtext/queue-runner, naming paths explicitly per BATCH_PROCESS.md's
 repo-hygiene section, and push after each round.
