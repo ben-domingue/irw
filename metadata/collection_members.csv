@@ -61,6 +61,7 @@ jovanovic_2026_conscientiousness_dass_d,anxiety,rule:cname:anxiet|\bgad.?7\b|\bs
 MEFSIRODGAS_Nileksela_2023_freq,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 MEFSIRODGAS_Nileksela_2023_severity,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mental_health_wang_2024_phq,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
+mexico_2023_mobility_anxiety,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 mhscdc_fried_2020_dass,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 narcissism_schneider_2025_study2_idasii,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 neurodegenerative_huizinga_2019_dass,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
@@ -333,6 +334,7 @@ liu_2021_vrexp_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b
 MEFSIRODGAS_Nileksela_2023_freq,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 MEFSIRODGAS_Nileksela_2023_severity,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mental_health_wang_2024_gad,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+mexico_2023_mobility_mood,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mhscdc_fried_2020_dass,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mpsycho_rogers_depression,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
 mpsycho_youthdep,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -702,6 +704,10 @@ derubeis_2017_arsq,longitudinal,rule:meta:longitudinal
 derubeis_2017_bdi,longitudinal,rule:meta:longitudinal
 development_delay_anunciacao_asqse,longitudinal,rule:meta:longitudinal
 development_delay_anunciacao_concerns,longitudinal,rule:meta:longitudinal
+dicarlo_2026_attentioncontrol_acd,longitudinal,rule:meta:longitudinal
+dicarlo_2026_attentioncontrol_acs,longitudinal,rule:meta:longitudinal
+dicarlo_2026_attentioncontrol_arces,longitudinal,rule:meta:longitudinal
+dicarlo_2026_attentioncontrol_maaslo,longitudinal,rule:meta:longitudinal
 double_marking_steele_2022,longitudinal,rule:meta:longitudinal
 dscore_bayley_weber_2019,longitudinal,rule:meta:longitudinal
 dscore_dutch_weber_2019,longitudinal,rule:meta:longitudinal
@@ -1118,6 +1124,26 @@ quopl2_forster_2021_quop,longitudinal,rule:meta:longitudinal
 rahm_2017_spane,longitudinal,rule:meta:longitudinal
 rapm_poulton_2022_timed,longitudinal,rule:meta:longitudinal
 rapm_poulton_2022_untimed,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_antisaccade,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_color,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_digitcomp,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_flanker,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_ifr,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_letter,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_lettercomp,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_ls,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_ns,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_orientation,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_ospan,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_paper_folding,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_raven,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_recognition,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_rspan,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_sart,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_simon,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_stroop,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_symspan,longitudinal,rule:meta:longitudinal
+robison_2026_retesting_tot,longitudinal,rule:meta:longitudinal
 rowe_2016_symptoms,longitudinal,rule:meta:longitudinal
 rvobgvmaas_lsf_lehing_2024,longitudinal,rule:meta:longitudinal
 santos_2018_cesd,longitudinal,rule:meta:longitudinal
@@ -1871,10 +1897,30 @@ rapm_poulton_2022_untimed,response_time,rule:var:rt
 rmet_higgins_2022_rmet,response_time,rule:var:rt
 roar_gijbels2024,response_time,rule:var:rt
 roar_lexical,response_time,rule:var:rt
+robison_2026_retesting_antisaccade,response_time,rule:var:rt
+robison_2026_retesting_color,response_time,rule:var:rt
+robison_2026_retesting_digitcomp,response_time,rule:var:rt
+robison_2026_retesting_flanker,response_time,rule:var:rt
+robison_2026_retesting_ifr,response_time,rule:var:rt
+robison_2026_retesting_letter,response_time,rule:var:rt
+robison_2026_retesting_lettercomp,response_time,rule:var:rt
+robison_2026_retesting_ls,response_time,rule:var:rt
+robison_2026_retesting_ns,response_time,rule:var:rt
+robison_2026_retesting_orientation,response_time,rule:var:rt
+robison_2026_retesting_raven,response_time,rule:var:rt
+robison_2026_retesting_recognition,response_time,rule:var:rt
+robison_2026_retesting_sart,response_time,rule:var:rt
+robison_2026_retesting_simon,response_time,rule:var:rt
+robison_2026_retesting_stroop,response_time,rule:var:rt
+robison_2026_retesting_tot,response_time,rule:var:rt
 rr98_accuracy,response_time,rule:var:rt
 sned_bendall_2024,response_time,rule:var:rt
 spalex_aguasvivas_2020,response_time,rule:var:rt
 spanishmegastudy,response_time,rule:var:rt
+su_2024_gad7,response_time,rule:var:rt
+su_2024_isi,response_time,rule:var:rt
+su_2024_phq9,response_time,rule:var:rt
+su_2024_pss14,response_time,rule:var:rt
 teacherjudgements_lohmann_2026_essayratings,response_time,rule:var:rt
 test_taking_much_2025_mr,response_time,rule:var:rt
 trivia_fastrich_2017,response_time,rule:var:rt
@@ -1948,6 +1994,7 @@ SF12_MLCIRTwithin,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|qu
 song_2025_lwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 song_2025_pwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 song_2025_wwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+spain_2017_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 SPQVS_Barnby_2017_WHO,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 swmd_mokken,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 transyouth_leshin_2026_parents_anx,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
