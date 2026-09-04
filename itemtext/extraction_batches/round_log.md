@@ -2484,3 +2484,108 @@ and the flanker have no `language` column at all, which is correct for them.
 **Next:** upload is Ben's step. On his confirmation — stamp `uploaded=<date>` in `provenance.csv` and
 `mapping_verification.csv`, apply the 11 draft entries to the issues page, and delete the uploaded
 `__items.csv` from `batch_020/` (sidecars stay). `clean/` is cleared by Ben, not by the pipeline.
+
+---
+
+## batch_021 — 2026-09-04
+
+**12 tables claimed. Written 10 / blocked 2 / failed 0. Yield 83.3%.** Circuit breaker not tripped
+(0% failed against the 30% threshold). **This round completes the round cap: `batch_021` exists, so
+Step 0's first stop condition now fires and no further round should start** — the runner will decline
+on its own, and 1,141 rows remain `pending` for whenever the cap is lifted.
+
+**One agent per table, 12 in parallel.** No infrastructure failure, no rate limit, no content filter,
+no export-quota trip. Every agent reported, so no agent needed the batch_019 "reported-failed but the
+files are on disk" rescue.
+
+**Export discipline held.** Every agent used `irw_table_sets()` / `table_sets.R` for ground truth and
+ran `validate_items.R --table-sets`. Exactly one `irw_fetch` export was taken all round, by the `pwi`
+agent on a 1,360-row table, to establish respondent-level CONTROL/EXP disjointness — which
+server-side aggregates genuinely cannot show. That is the export-as-a-decision rule working as
+intended.
+
+**Gates.** `normalize_nulls` 0 of 10 needed normalizing (agents wrote clean `NA` tokens).
+`audit_batch` **10/10 PASS with no anomalies — no WARNs at all**, so Step 5c had nothing to explain,
+a first for a full round. `verify_batch` 6 PASS / 4 MISSING(exempt), no FAIL and no missing VERDICT.
+`irw-validate` ok on all 10 (2 checks each; no `dup_item_resp`, no `resp_ambiguous` — notable for
+`conner_2017_bfi` and `conner_2017_cesd`, which deliberately ship two anchor directions in one table
+and correctly do not trip the per-item-direction-is-legitimate carve-out). `check_provenance` clean:
+291 provenance rows over 23 files, 69 IRW-generated tables, 0 with no issues-page entry.
+
+**`lint_verification`: 4 ERROR → 0 ERROR, 1 WARN (adjudicated, kept).** The ERRORs were mine, not the
+agents': I had added the four `NOT_NEEDED` rows for the `data_labels` tables to the permanent
+`mapping_verification.csv` but not to the batch's own `verification_merged.csv`, which is what lint
+reads. Fixed. The surviving WARN is on `conspiracy_asd__asd_aq10` ("VERIFIED but its evidence
+hedges"), and I kept VERIFIED: the hedge is scoped to route B (option direction), while route A
+carries the item axis and does separate every item from every other — source columns 53-62 reproduce
+the live per-item means to 0.00e+00 with all 10 means distinct at 2 d.p. Reasoning recorded in
+`notes.csv` rather than left for the next reviewer.
+
+**Near-miss worth recording — the `rm` trap has a second mouth.** The protocol's warning is about
+`rm -f verification_*.csv` eating `verification_merged.csv`; I avoided that by merging to `_m_*.csv`
+names and deleting the 32 source files by name from a list. But the list was written with
+`"\n".join(...)` — no trailing newline — and `while read -r f` silently drops an unterminated final
+line, so `verification_conspiracy_asd__asd_aq10.csv` survived. Harmless here (its row was already in
+the merge, and I removed it explicitly after checking), but the same slip in a delete-then-rename
+sequence is exactly how a file gets orphaned. Terminate the list, or count what you deleted.
+
+**Step 5b orchestrator re-check — one claim verified, one stale artifact found.** The agent claims
+that override a source or report a data defect (`bfi` 16 reverse-keyed items, `cesd` 4 flipped
+anchors, `soc13`'s unique {1,2,3,7,10} subset reproducing `SOCTOTAL` 921/921, `mlq`'s override of its
+own pre-registration's stated scale direction) all carry `verify_*.R` scripts that re-ran and PASSED
+under `verify_batch`, so they are independently re-executed by construction. The one load-bearing
+claim with no verify script — `conner_2017_vitality`, `data_labels`-exempt — I checked by hand and
+**CONFIRMED**: `metadata/biblio.csv` reads verbatim "Subjective Vitality Scale (4 items, 0-100
+continuous), baseline/follow-up, N=171", which is internally inconsistent — it names the SVS (Ryan &
+Frederick 1997: 6- or 7-item, 1-7 Likert) while describing SF-36 Vitality's structure.
+`metadata/metadata.csv` independently gives n_items=4, n_categories=6, n_participants=171: four items
+over six discrete levels (0/20/40/60/80/100 per SF-36 guidance), which the SVS cannot produce, and
+which also makes "0-100 continuous" wrong — it is 6-category ordinal. A third, independent hit:
+`tags/tags_auto.csv` line 930 flagged the identical contradiction in an earlier unrelated pass.
+**Stale counter-claim to fix:** `itemtext/availability_audit_full.csv` line 851 still asserts this
+table is "the well-known Subjective Vitality Scale" — that row is wrong and should be corrected with
+the biblio Description. Dictionary/metadata defect, not an itemtext defect; the shipped table is
+correct.
+
+**Step 3b instrument mismatches found (3).** (1) `conner_2017_vitality` — above; the dictionary
+correction is owed. (2) `conner_2017_curiosity` — the paper's Measures section describes only a
+*single* daily smartphone curiosity item, so the 10-item table reads as a mismatch until you find the
+CEI-II (Kashdan et al. 2009) living only in the deposited SPSS file as `cei1..cei10`; easy to
+misread, worth flagging to anyone auditing this study. (3) `cognitive_load_klimova_2023_stomp` — the
+deposit's own DataCite metadata lists the study's scales as "PWI, BZGS, MAS-R, MLQ" and never mentions
+STOMP, so the "Short Test of Musical Preferences" reading rests on the column prefix alone and could
+not be confirmed. Contributed to that table's block.
+
+**Other findings worth keeping.** `cognitive_load_klimova_2023_mlq` holds 9 of the MLQ's 10 items
+(item 10 absent from the response data, not padded) and its shipped scale direction **contradicts the
+study's own AsPredicted #134579 pre-registration**, which states "1 (Absolutely True) to 7 (Absolutely
+Untrue)"; the data say the opposite (Presence 4.42/4.44, Search 4.89/4.68, reverse item 9 at
+3.41/3.15, matching Steger's student norms only under the canonical direction). Canonical direction
+shipped, override documented — the pre-registration is wrong, and this is the second round running in
+which a study's own metadata lost to its own data. `conspiracy_asd__asd_aq10` ships
+`wording_rights=NC` on every row: the wording came from a CC BY 4.0 Figshare deposit so under irw#1891
+it ships, but the ARC rights page carries a quotable non-commercial clause; an issues-page entry is
+owed when it goes live. Its coded workbook header row is also corrupted by a find/replace artifact
+(`2tice`/`do 2t`/`k2w` for notice/do not/know) — the survey docx was used instead.
+
+**The two blocks are one deposit, and one human action clears both.**
+`cognitive_load_klimova_2023_pwi` and `_stomp` are both blocked on openICPSR E194063V2, which is
+Cloudflare-403 to every automated route and requires an account before any download, with the only
+publication (Field Methods 38(1):46-61) closed access and zero OA locations. Both are `blocked`, not
+`failed`: the wall is a registration gate plus a paywall, and both agents additionally reached a
+determinate finding independent of access — the item codes are contentless letters (`a..h`, `a..i`)
+that no canonical instrument can be keyed to without fabrication. The third sibling, `_mlq`, shipped.
+**A single authenticated openICPSR download of `Final_data.csv`'s headers/labels would likely resolve
+both blocks at once** — that is the highest-value human action this round surfaced. Full retry tests
+and the structural facts already established (between-subjects arms, letter-identity across arms, the
+suspected off-scale `resp=6` "don't know" code) are in `pending_index_notes.csv`.
+
+**Provenance shape:** 7 `data_labels`, 3 `reconstructed`, 2 `unknown` (the two blocks).
+Verification: 2 VERIFIED, 4 PARTIAL, 2 NO_ROUTE, 4 NOT_NEEDED — 12 tracker rows, one per claimed
+table, and every written table has exactly one.
+
+**Next:** upload is Ben's step, and nothing here has been uploaded. On his confirmation — stamp
+`uploaded=<date>` in `provenance.csv` and `mapping_verification.csv`, add the `conspiracy_asd__asd_aq10`
+NC-rights entry to the issues page, and delete the uploaded `__items.csv` from `batch_021/` (sidecars
+and `verify_*.R` stay). Separately owed regardless of upload: correct the `conner_2017_vitality`
+description in `metadata/biblio.csv` and the stale row in `availability_audit_full.csv`.
