@@ -220,6 +220,42 @@ class Planning(unittest.TestCase):
             resolve_elsewhere(items, self.shard, assume=True)
             self.assertEqual(items[0].dataset, "item_response_warehouse_3")
 
+    def test_a_published_over_length_name_is_grandfathered(self):
+        """datastandard.md's 40-char cap, and the exception ruled 2026-09-03.
+
+        130 live tables predate the rule, so enforcing it on the upload path
+        meant a table already named too long could never be repaired for
+        anything else -- three cov_age fixes were blocked that way (#1779).
+        """
+        long_name = "narcissism_schneider_2025_study1_koeberl_hsns"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._reports(tmp, [long_name])
+            self.assertTrue(any(e.startswith("name_length:") for e in reports[0].errors))
+            items = planning.build(reports, self.shard,
+                                   {long_name: ["item_response_warehouse_3"]})
+            self.assertEqual(items[0].status, planning.ELSEWHERE)
+            self.assertEqual(reports[0].errors, [])
+            self.assertTrue(any("already published" in w
+                                for w in reports[0].warnings))
+
+    def test_a_new_over_length_name_is_still_blocked(self):
+        long_name = "narcissism_schneider_2025_study1_koeberl_hsns"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._reports(tmp, [long_name])
+            items = planning.build(reports, self.shard, {})
+            self.assertEqual(items[0].status, planning.SKIP)
+            self.assertTrue(any(e.startswith("name_length:") for e in reports[0].errors))
+
+    def test_grandfathering_does_not_reach_any_other_error(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._reports(tmp, ["published"])
+            reports[0].errors.append("dup_id_item: 300 duplicate id+item rows")
+            items = planning.build(reports, self.shard,
+                                   {"published": ["item_response_warehouse"]})
+            self.assertEqual(items[0].status, planning.SKIP)
+            self.assertIn("dup_id_item: 300 duplicate id+item rows",
+                          reports[0].errors)
+
     def test_ineligible_files_are_excluded_never_uploaded(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = write(Path(tmp), "x__items.csv", ITEMS)
