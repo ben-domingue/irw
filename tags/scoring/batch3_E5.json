@@ -1,0 +1,102 @@
+[
+ {
+  "table": "an_2020_efl_self_regulated",
+  "shard": "w3"
+ },
+ {
+  "table": "baquerotomas_2026_ders",
+  "shard": "w4"
+ },
+ {
+  "table": "bialowolski_2024_financial_literacy",
+  "shard": "w4"
+ },
+ {
+  "table": "chanal_2020_francais",
+  "shard": "w4"
+ },
+ {
+  "table": "cormier_2024_pss4",
+  "shard": "w3"
+ },
+ {
+  "table": "fadhliah_2022_disaster_media_trust",
+  "shard": "w3"
+ },
+ {
+  "table": "ganbat_2022_pollution_symptoms",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_pda525",
+  "shard": "w4"
+ },
+ {
+  "table": "ilic2019_cddq",
+  "shard": "w2"
+ },
+ {
+  "table": "jiang_2024_ptsinv",
+  "shard": "w3"
+ },
+ {
+  "table": "karajko2025_ai_trust",
+  "shard": "w2"
+ },
+ {
+  "table": "komura_2026_mdmt_sincere",
+  "shard": "w3"
+ },
+ {
+  "table": "lozano_2018_mobility",
+  "shard": "w5"
+ },
+ {
+  "table": "mekheimer_2026_cai",
+  "shard": "w3"
+ },
+ {
+  "table": "nteveros_2021_psqi_disturbance",
+  "shard": "w3"
+ },
+ {
+  "table": "pang_2023_perceived_cost",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_nrm_inj_approval",
+  "shard": "w3"
+ },
+ {
+  "table": "rosharudin_2023_ders18",
+  "shard": "w3"
+ },
+ {
+  "table": "schmidt_2017_fas",
+  "shard": "w4"
+ },
+ {
+  "table": "sinche_2017_skill_importance",
+  "shard": "w4"
+ },
+ {
+  "table": "stoyel_2021_tv_internalization",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2026_attitude",
+  "shard": "w3"
+ },
+ {
+  "table": "xu2024_unethical_behav",
+  "shard": "w2"
+ },
+ {
+  "table": "yin_2022_values_importance",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2026_healthy_attitude",
+  "shard": "w4"
+ }
+]

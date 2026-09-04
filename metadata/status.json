@@ -1,11 +1,11 @@
 {
-  "generated": "2026-09-03T17:30:44-0700",
+  "generated": "2026-09-03T18:32:08-0700",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
   "n_tables": 4134,
   "coverage": {
     "tags": {
-      "n": 3314,
-      "pct": 80.2
+      "n": 3420,
+      "pct": 82.7
     },
     "tags_by_column": {
       "age range": {
@@ -20,24 +20,24 @@
         "pct_of_all_tables": 17.1
       },
       "sample": {
-        "n": 2504,
-        "pct": 60.6
+        "n": 2620,
+        "pct": 63.4
       },
       "construct type": {
         "n": 2254,
         "pct": 54.5
       },
       "measurement tool": {
-        "n": 2613,
-        "pct": 63.2
+        "n": 2755,
+        "pct": 66.6
       },
       "item format": {
-        "n": 2589,
-        "pct": 62.6
+        "n": 2727,
+        "pct": 66
       },
       "primary language(s)": {
-        "n": 2874,
-        "pct": 69.5
+        "n": 3007,
+        "pct": 72.7
       },
       "construct name": {
         "n": 2265,
@@ -54,28 +54,28 @@
   "tags_by_shard": {
     "item_response_warehouse": {
       "n_tables": 988,
-      "tagged": 987,
-      "pct": 99.9
+      "tagged": 988,
+      "pct": 100
     },
     "item_response_warehouse_2": {
       "n_tables": 975,
-      "tagged": 870,
-      "pct": 89.2
+      "tagged": 880,
+      "pct": 90.3
     },
     "item_response_warehouse_3": {
       "n_tables": 983,
-      "tagged": 660,
-      "pct": 67.1
+      "tagged": 708,
+      "pct": 72
     },
     "item_response_warehouse_4": {
       "n_tables": 981,
-      "tagged": 661,
-      "pct": 67.4
+      "tagged": 704,
+      "pct": 71.8
     },
     "item_response_warehouse_5": {
       "n_tables": 206,
-      "tagged": 136,
-      "pct": 66
+      "tagged": 140,
+      "pct": 68
     },
     "item_response_warehouse_6": {
       "n_tables": 1,
