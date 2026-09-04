@@ -237,6 +237,26 @@ def sentence_density(prose):
     return 1000.0 * n / len(prose)
 
 
+def merge_reasons(identity, content):
+    """Combine the identity verdict with the content verdict.
+
+    These answer different questions -- `is_the_right_work` says WHICH work this
+    is, `classify` says whether the page is readable prose -- and both can be
+    worth saying at once. The caller used to get only the identity string,
+    because `reason` was reassigned before it was returned, which silently threw
+    away the low-density warning added for #1704: it is computed, it is correct,
+    and it never once reached the output. Found on 2026-09-03 when a tagging
+    agent asked what `content=doi_in_text` meant and there was no answer,
+    because that label had displaced everything else.
+
+    Only the warning is carried through. An ordinary `N_chars_visible` adds
+    nothing to `doi_in_text` and would just make the line noisier.
+    """
+    if content.startswith("low_prose_density"):
+        return f"{identity}+{content}"
+    return identity
+
+
 def classify(text):
     """Is this the source, or something standing in front of it?
 
@@ -561,13 +581,13 @@ def try_url(url, doi=None, title=None):
     if r.status_code != 200:
         return None, f"http_{r.status_code}"
     text = extract(r)
-    ok, reason = classify(text)
+    ok, content = classify(text)
     if not ok:
-        return None, reason
-    ok, reason = is_the_right_work(text, doi, title)
+        return None, content
+    ok, identity = is_the_right_work(text, doi, title)
     if not ok:
-        return None, reason
-    return (text, r.url), reason
+        return None, identity
+    return (text, r.url), merge_reasons(identity, content)
 
 
 def main():
@@ -644,9 +664,11 @@ def main():
         got = europepmc_fulltext(args.doi)
         if got:
             text, source = got
-            ok, reason = classify(text)
+            ok, content = classify(text)
+            reason = content
             if ok:
-                ok, reason = is_the_right_work(text, args.doi, title)
+                ok, identity = is_the_right_work(text, args.doi, title)
+                reason = merge_reasons(identity, content) if ok else identity
             if ok:
                 write_cache(path, text)
                 print(f"OK oa_status={oa_status} source={source} "

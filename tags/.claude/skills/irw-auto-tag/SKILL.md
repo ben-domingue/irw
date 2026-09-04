@@ -162,6 +162,24 @@ paywall on — not the fetch failing.** Those are different findings:
 | `UNREACHABLE oa_status=not_checked` | **No DOI**, so OpenAlex was never asked, and the URL refused us — typically a government or institutional data portal answering 403 | **Not a paywall**, and you cannot show it is one: with no DOI there is no open-access status to appeal to. Stage `Notes = "no working link"` |
 | `OK ... content=low_prose_density:N_sentences_per_1k:M_chars_visible` | Long, blocker-free, and **probably furniture** — a CMS or JavaScript shell whose visible text is menus and metadata rather than the work | **Read it before trusting it.** Tag only what the text actually states; if it turns out to be chrome, treat it as `no working link` rather than tagging from the surrounding page |
 
+**What the `content=` string is actually saying.** It carries an *identity*
+verdict, and sometimes a *content* warning appended after a `+`. The identity
+half answers "is this the work we asked for":
+
+| `content=` | meaning |
+|---|---|
+| `doi_in_text` | the requested DOI appears in the fetched text — this is the right work |
+| `title_in_text` | the title matches instead. Same conclusion, weaker evidence |
+| `identity_unchecked` | **no DOI and no title to check against**, so nothing was verified. Normal for a `--url`-only fetch at a data portal, and the case to read most sceptically |
+| `N_chars_visible` | no identity check applied; N characters of visible prose |
+| `repository_metadata:N_chars_visible` | a catalogue record, held to a lower floor — see the row above |
+
+Anything after a `+` is a warning about the content itself, currently only
+`low_prose_density`. So `doi_in_text+low_prose_density:1.6_sentences_per_1k:…`
+means *this is provably the right work, and the page is still mostly furniture*
+— which happens on publisher landing pages that name the article and show none
+of it.
+
 **Data repositories are asked through their APIs** (#1786). Their web pages
 serve a challenge or a JavaScript shell — Dataverse returns HTTP 202 with a
 zero-byte body regardless of user agent, and every OSF project page is the same
