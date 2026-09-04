@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_tis",
+  "shard": "w3"
+ },
+ {
+  "table": "arabaci_2025_turnover_intention",
+  "shard": "w4"
+ },
+ {
+  "table": "cacciatore_2021_crisis_care_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "chen2025_activity_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "choi_2026_cmsce_2019_1",
+  "shard": "w4"
+ },
+ {
+  "table": "dalky_2020_sf36",
+  "shard": "w4"
+ },
+ {
+  "table": "fan_2025_mbi_accomplishment",
+  "shard": "w3"
+ },
+ {
+  "table": "girma_2021_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "hahn_2025_sqc",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2023_utaut_mobile_shopping",
+  "shard": "w4"
+ },
+ {
+  "table": "karajko2025_ai_governance",
+  "shard": "w2"
+ },
+ {
+  "table": "komura_2026_gqs_anthropomorphism",
+  "shard": "w3"
+ },
+ {
+  "table": "liang_2026_extrinsic_motivation",
+  "shard": "w2"
+ },
+ {
+  "table": "lopezgomez_2025_mbi_cynicism",
+  "shard": "w2"
+ },
+ {
+  "table": "malik_2018_organizational_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "mthimkhulu_2023_pirls_reading",
+  "shard": "w4"
+ },
+ {
+  "table": "okoro_2022_interest_inventory",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_att_exp_eval",
+  "shard": "w3"
+ },
+ {
+  "table": "pickova2025_perception",
+  "shard": "w2"
+ },
+ {
+  "table": "ramadan_2026_perceived_competence",
+  "shard": "w5"
+ },
+ {
+  "table": "rzeszutek_2020_wwii_patgrandfather",
+  "shard": "w3"
+ },
+ {
+  "table": "sumner_2022_spq",
+  "shard": "w4"
+ },
+ {
+  "table": "turner_2022_cognitive_mediation",
+  "shard": "w3"
+ },
+ {
+  "table": "yandun2026_memory",
+  "shard": "w2"
+ },
+ {
+  "table": "zhang_2024_parasocial",
+  "shard": "w4"
+ }
+]

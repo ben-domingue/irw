@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alkhaldi_2023_whoqol_autism",
+  "shard": "w4"
+ },
+ {
+  "table": "baquerotomas_2026_emas",
+  "shard": "w4"
+ },
+ {
+  "table": "carver_2017_puggs_pilot1_genom_know",
+  "shard": "w3"
+ },
+ {
+  "table": "chen_2019_csq",
+  "shard": "w3"
+ },
+ {
+  "table": "choy_2022_extraneous_events",
+  "shard": "w3"
+ },
+ {
+  "table": "demirbag_2025_epistemological_beliefs",
+  "shard": "w4"
+ },
+ {
+  "table": "forrest_2021_life_satisfaction_child",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_jpir",
+  "shard": "w4"
+ },
+ {
+  "table": "hellstrom_2019_sci",
+  "shard": "w3"
+ },
+ {
+  "table": "ibrahim_2015_sf36",
+  "shard": "w3"
+ },
+ {
+  "table": "kern_2021_engagement",
+  "shard": "w2"
+ },
+ {
+  "table": "kurach2026_financial_literacy",
+  "shard": "w2"
+ },
+ {
+  "table": "liem_2024_perceived_benefit_cp",
+  "shard": "w4"
+ },
+ {
+  "table": "lozano_2018_participation",
+  "shard": "w5"
+ },
+ {
+  "table": "mede_2025_trust_scientists",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "pang_2023_perceived_risk",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_nrm_inj_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "qiang_2025_job_dissatisfaction",
+  "shard": "w3"
+ },
+ {
+  "table": "ren_2024_adl",
+  "shard": "w4"
+ },
+ {
+  "table": "shi_2025_rrs",
+  "shard": "w3"
+ },
+ {
+  "table": "temesgen_2025_elephant_park_attitude",
+  "shard": "w4"
+ },
+ {
+  "table": "weatherspoon_2015_pediatricians_effectiveness",
+  "shard": "w3"
+ },
+ {
+  "table": "yoshimura_2026_psych_safety",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2026_ecological_values",
+  "shard": "w4"
+ }
+]

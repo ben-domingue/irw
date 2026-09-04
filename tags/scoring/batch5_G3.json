@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_sia",
+  "shard": "w3"
+ },
+ {
+  "table": "anh_2026_digitaltrust",
+  "shard": "w4"
+ },
+ {
+  "table": "bukurov_2022_sf36",
+  "shard": "w4"
+ },
+ {
+  "table": "chatzoudes_2021_trust",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2026_social_anxiety",
+  "shard": "w4"
+ },
+ {
+  "table": "dalichaouche_2026_covid_practices",
+  "shard": "w4"
+ },
+ {
+  "table": "evans_2023_vaccine_hesitancy",
+  "shard": "w3"
+ },
+ {
+  "table": "gillman_2023_appraisals",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_sdv_schwartz_values",
+  "shard": "w4"
+ },
+ {
+  "table": "huang_2016_neo_neuroticism",
+  "shard": "w3"
+ },
+ {
+  "table": "kalczajanosi_2021_covid_fear",
+  "shard": "w4"
+ },
+ {
+  "table": "kokoszka_2022_soc",
+  "shard": "w3"
+ },
+ {
+  "table": "liang2026_intrinsic_motivation",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2025_xljk",
+  "shard": "w4"
+ },
+ {
+  "table": "makransky_2016_self_efficacy",
+  "shard": "w3"
+ },
+ {
+  "table": "milson_2026_body_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "okeke2025_cognitive_agility_post",
+  "shard": "w2"
+ },
+ {
+  "table": "perales_2026_financial_resilience",
+  "shard": "w4"
+ },
+ {
+  "table": "pickova2025_moral_justifications",
+  "shard": "w2"
+ },
+ {
+  "table": "rahm_2017_spane",
+  "shard": "w3"
+ },
+ {
+  "table": "rowe_2016_bai",
+  "shard": "w3"
+ },
+ {
+  "table": "strohacker_2024_arms_readiness",
+  "shard": "w3"
+ },
+ {
+  "table": "torices_2025_isra_b_sit",
+  "shard": "w2"
+ },
+ {
+  "table": "xu2024_turnover_intent",
+  "shard": "w2"
+ },
+ {
+  "table": "zaehl2023_twq_communication",
+  "shard": "w2"
+ }
+]

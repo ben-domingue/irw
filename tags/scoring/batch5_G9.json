@@ -1,0 +1,102 @@
+[
+ {
+  "table": "allen_2025_upps",
+  "shard": "w4"
+ },
+ {
+  "table": "baquerotomas_2026_spsi",
+  "shard": "w4"
+ },
+ {
+  "table": "celik_2026_distance_ed_attitudes_16",
+  "shard": "w5"
+ },
+ {
+  "table": "chen_2024_kd",
+  "shard": "w5"
+ },
+ {
+  "table": "condon_2024_sapa_personality",
+  "shard": "w3"
+ },
+ {
+  "table": "dulger2024_wordcompletion",
+  "shard": "w3"
+ },
+ {
+  "table": "fraijo_2022_mslq",
+  "shard": "w5"
+ },
+ {
+  "table": "goldberg_2018_prs_reading_preferences",
+  "shard": "w4"
+ },
+ {
+  "table": "herrera_2018_se_d_items",
+  "shard": "w3"
+ },
+ {
+  "table": "jaen_2024_odor_id",
+  "shard": "w4"
+ },
+ {
+  "table": "khattak_2026_attitude",
+  "shard": "w4"
+ },
+ {
+  "table": "kushnir2017_tsrq",
+  "shard": "w2"
+ },
+ {
+  "table": "liu_2018_panas",
+  "shard": "w3"
+ },
+ {
+  "table": "machado_2020_cat_separation",
+  "shard": "w3"
+ },
+ {
+  "table": "mekheimer_2026_flp",
+  "shard": "w3"
+ },
+ {
+  "table": "ni_2025_knowledge_transfer",
+  "shard": "w4"
+ },
+ {
+  "table": "pavic_2022_science_literacy",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_pbc_skill_import",
+  "shard": "w3"
+ },
+ {
+  "table": "qin_2025_tourist_satisfaction",
+  "shard": "w2"
+ },
+ {
+  "table": "ren_2024_psqi",
+  "shard": "w4"
+ },
+ {
+  "table": "skarzauskiene_2026_science_behaviors",
+  "shard": "w5"
+ },
+ {
+  "table": "thanh_2025_environ_concern",
+  "shard": "w3"
+ },
+ {
+  "table": "wu2021_burnout",
+  "shard": "w2"
+ },
+ {
+  "table": "yuebo_2024_netbenefit",
+  "shard": "w4"
+ },
+ {
+  "table": "zhou_2024_smart_home_intention",
+  "shard": "w2"
+ }
+]
