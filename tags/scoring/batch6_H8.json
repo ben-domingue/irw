@@ -1,0 +1,110 @@
+[
+ {
+  "table": "alasmari_2025_ai_trust_compare",
+  "shard": "w4"
+ },
+ {
+  "table": "baumgaertner_2018_vaccine_trust",
+  "shard": "w3"
+ },
+ {
+  "table": "chen_2021_acculturation",
+  "shard": "w3"
+ },
+ {
+  "table": "cinar_tanriverdi_2023_pmss",
+  "shard": "w3"
+ },
+ {
+  "table": "dalichaouche_2026_covid_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "duboz_2021_swls",
+  "shard": "w3"
+ },
+ {
+  "table": "esiason_2024_aaqii",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_psych_stress_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "gilbert_meta_109",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_prs_tv_preferences",
+  "shard": "w4"
+ },
+ {
+  "table": "hen-herbst_2025_family_qol",
+  "shard": "w4"
+ },
+ {
+  "table": "jiang_2025_teaching_motivation",
+  "shard": "w3"
+ },
+ {
+  "table": "kotsou_2016_happiness",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2025_marketing_exploitation",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2025_foreign_lang_enjoyment",
+  "shard": "w3"
+ },
+ {
+  "table": "matarboumosleh_2017_spai26",
+  "shard": "w3"
+ },
+ {
+  "table": "mendes_2019_snycq",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_autonomy_academic_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "pauli_2021_coercion_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "qiang_2025_red_tape",
+  "shard": "w3"
+ },
+ {
+  "table": "rosyid_2025_ethical_leadership",
+  "shard": "w4"
+ },
+ {
+  "table": "shi2024_sas",
+  "shard": "w3"
+ },
+ {
+  "table": "sumner_2022_olife",
+  "shard": "w4"
+ },
+ {
+  "table": "trang_2023_vocabulary_strategies",
+  "shard": "w4"
+ },
+ {
+  "table": "wu2021_empathy",
+  "shard": "w2"
+ },
+ {
+  "table": "ye_2025_tq",
+  "shard": "w5"
+ },
+ {
+  "table": "zhang_2025_coercive_pressure",
+  "shard": "w3"
+ }
+]

@@ -1,0 +1,110 @@
+[
+ {
+  "table": "alan_2018_teacher_warmth",
+  "shard": "w4"
+ },
+ {
+  "table": "bakumenko_2023_adyghe_values",
+  "shard": "w2"
+ },
+ {
+  "table": "chen2025_peer_support",
+  "shard": "w3"
+ },
+ {
+  "table": "chuemchit_2024_partner_violence",
+  "shard": "w3"
+ },
+ {
+  "table": "dai_2025_music_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "dpt_noncog__social_intelligence",
+  "shard": "w2"
+ },
+ {
+  "table": "enkavi_2019_taskswitch",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_positive_affect_proxy",
+  "shard": "w4"
+ },
+ {
+  "table": "gerber_2022_selfesteem",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_ppq_music",
+  "shard": "w4"
+ },
+ {
+  "table": "hellstrom_2019_isi",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2025_empathy",
+  "shard": "w3"
+ },
+ {
+  "table": "komura_2026_mdmt_reliable",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_corporate_performance",
+  "shard": "w4"
+ },
+ {
+  "table": "liu_2023_training_freq",
+  "shard": "w4"
+ },
+ {
+  "table": "matarboumosleh_2017_phq2",
+  "shard": "w3"
+ },
+ {
+  "table": "meloni_2015_deq_oe_parent",
+  "shard": "w3"
+ },
+ {
+  "table": "nelson_2019_ipqrde",
+  "shard": "w3"
+ },
+ {
+  "table": "orovou_2021_pcl5",
+  "shard": "w4"
+ },
+ {
+  "table": "qiang_2025_coping",
+  "shard": "w3"
+ },
+ {
+  "table": "rosharudin_2023_dass21",
+  "shard": "w3"
+ },
+ {
+  "table": "shen_2020_sas20",
+  "shard": "w3"
+ },
+ {
+  "table": "sugiura_2015_disaster_characteristics",
+  "shard": "w4"
+ },
+ {
+  "table": "torices_2025_isra_b",
+  "shard": "w2"
+ },
+ {
+  "table": "wu2021_career_expectation",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2025_aiccs",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2024_gift_intention",
+  "shard": "w4"
+ }
+]

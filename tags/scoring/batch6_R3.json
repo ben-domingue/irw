@@ -1,0 +1,86 @@
+[
+ {
+  "table": "wu_2024_video_addiction",
+  "shard": "w3"
+ },
+ {
+  "table": "zaehl2023_twq_commitment",
+  "shard": "w2"
+ },
+ {
+  "table": "xu2024_self_efficacy",
+  "shard": "w2"
+ },
+ {
+  "table": "stoyel_2021_edeq_binge_purge",
+  "shard": "w4"
+ },
+ {
+  "table": "zeng_2026_gai_exploration",
+  "shard": "w3"
+ },
+ {
+  "table": "tomioka_2022_srh_importance",
+  "shard": "w4"
+ },
+ {
+  "table": "jiang_2021_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "makransky_2016_mcq_correct",
+  "shard": "w3"
+ },
+ {
+  "table": "powell_2018_trust",
+  "shard": "w4"
+ },
+ {
+  "table": "torices_2025_dflex",
+  "shard": "w2"
+ },
+ {
+  "table": "li_2025_marketing_exploitation",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_autonomy_academic_motivation",
+  "shard": "w5"
+ },
+ {
+  "table": "shi2024_sas",
+  "shard": "w3"
+ },
+ {
+  "table": "ye_2025_tq",
+  "shard": "w5"
+ },
+ {
+  "table": "chen_2024_ts",
+  "shard": "w5"
+ },
+ {
+  "table": "extremera_2016_shs",
+  "shard": "w3"
+ },
+ {
+  "table": "herrera_2018_iri",
+  "shard": "w3"
+ },
+ {
+  "table": "lorenz_2016_hope",
+  "shard": "w3"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__abex",
+  "shard": "w2"
+ },
+ {
+  "table": "sun_2024_task_tech_fit",
+  "shard": "w4"
+ },
+ {
+  "table": "zhao_2025_nat_env_perception",
+  "shard": "w3"
+ }
+]

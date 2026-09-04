@@ -1,0 +1,114 @@
+[
+ {
+  "table": "abouhashish_2025_chatgpt_attitudes",
+  "shard": "w4"
+ },
+ {
+  "table": "altahla_2024_whoqol",
+  "shard": "w4"
+ },
+ {
+  "table": "busch_2022_course_alleviate",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2026_ie",
+  "shard": "w5"
+ },
+ {
+  "table": "conspiracy_asd__asd_aq10",
+  "shard": "w2"
+ },
+ {
+  "table": "demirbag_2025_emotions",
+  "shard": "w4"
+ },
+ {
+  "table": "dwyer_2019_clinton_cesd",
+  "shard": "w3"
+ },
+ {
+  "table": "fisher_2019_preparedness",
+  "shard": "w3"
+ },
+ {
+  "table": "fukuda_2021_withholding_behavior",
+  "shard": "w3"
+ },
+ {
+  "table": "gillman_2023_pss",
+  "shard": "w3"
+ },
+ {
+  "table": "gordils_2021_discrimination",
+  "shard": "w4"
+ },
+ {
+  "table": "hoai_2026_social_presence",
+  "shard": "w5"
+ },
+ {
+  "table": "kang_2015_facial_preference",
+  "shard": "w3"
+ },
+ {
+  "table": "kuczyk_2024_facemask_fbe",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2025_socmedia_ewom",
+  "shard": "w4"
+ },
+ {
+  "table": "lorenz_2016_optimism2",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_goals_tackle",
+  "shard": "w4"
+ },
+ {
+  "table": "muharam_2022_srq29",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "personality_entrepreneurship_brazil__neu",
+  "shard": "w2"
+ },
+ {
+  "table": "reyes_2022_eheals",
+  "shard": "w4"
+ },
+ {
+  "table": "ruiz_parra_2023_iip32",
+  "shard": "w3"
+ },
+ {
+  "table": "shineha_2024_gef_accept_factors",
+  "shard": "w4"
+ },
+ {
+  "table": "sun_2026_eap_content",
+  "shard": "w3"
+ },
+ {
+  "table": "vaporova_2020_imitation",
+  "shard": "w3"
+ },
+ {
+  "table": "wu_2024_video_addiction",
+  "shard": "w3"
+ },
+ {
+  "table": "zaehl2023_twq_cohesion",
+  "shard": "w2"
+ },
+ {
+  "table": "zubair_2021_org_performance",
+  "shard": "w4"
+ }
+]

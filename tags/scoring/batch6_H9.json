@@ -1,0 +1,110 @@
+[
+ {
+  "table": "alexander_2017_dsi",
+  "shard": "w4"
+ },
+ {
+  "table": "beck_2021_cdrisc10",
+  "shard": "w4"
+ },
+ {
+  "table": "chen_2024_ae",
+  "shard": "w5"
+ },
+ {
+  "table": "conner_2017_bfi",
+  "shard": "w3"
+ },
+ {
+  "table": "de_vries_2022_hexaco_other",
+  "shard": "w4"
+ },
+ {
+  "table": "duong_2025_tbl_experience",
+  "shard": "w3"
+ },
+ {
+  "table": "esiason_2024_bdi",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_strength_child",
+  "shard": "w4"
+ },
+ {
+  "table": "gilbert_meta_111",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_spa_medical_history",
+  "shard": "w4"
+ },
+ {
+  "table": "hen-herbst_2025_family_routine_import",
+  "shard": "w4"
+ },
+ {
+  "table": "jo_2023_pbc",
+  "shard": "w4"
+ },
+ {
+  "table": "kotsou_2016_panas",
+  "shard": "w4"
+ },
+ {
+  "table": "li_2025_marketing_operation",
+  "shard": "w4"
+ },
+ {
+  "table": "lorenz_2016_efficacy2",
+  "shard": "w3"
+ },
+ {
+  "table": "mavromoustakos_2016_fasq",
+  "shard": "w3"
+ },
+ {
+  "table": "miedema_2023_ecs40",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_autonomy_student_voice",
+  "shard": "w5"
+ },
+ {
+  "table": "penningroth_2019_pm_concerns",
+  "shard": "w3"
+ },
+ {
+  "table": "qin_2025_cultural_identity",
+  "shard": "w2"
+ },
+ {
+  "table": "rosyid_2025_prosocial_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "shi_2025_brums",
+  "shard": "w3"
+ },
+ {
+  "table": "sun_2024_performance_expectancy",
+  "shard": "w4"
+ },
+ {
+  "table": "trevisan_2018_mscs",
+  "shard": "w3"
+ },
+ {
+  "table": "wu2026_liking",
+  "shard": "w2"
+ },
+ {
+  "table": "ye_2025_xc",
+  "shard": "w5"
+ },
+ {
+  "table": "zhao_2025_leisure_involvement",
+  "shard": "w3"
+ }
+]
