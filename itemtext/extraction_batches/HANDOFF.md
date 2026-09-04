@@ -12,8 +12,8 @@ narrative is in `round_log.md` under batch_016, batch_017 and batch_018.
 |---|---|
 | worktree | `/home/ben/irw-queue-runner` — **use this, not `src`** (the old `/home/ben/irw-queue` is retired: 36 commits behind, stale cap) |
 | branch | `itemtext/queue-rounds` (pushed; the wrapper merges `origin/main` in before each round) |
-| runner | `itemtext/extraction_batches/round_cron.sh`, hourly at `:13` from the user crontab |
-| review | a **standing PR** from `itemtext/queue-rounds` → `main`, opened by the runner and left open; rounds accumulate into it |
+| runner | `itemtext/extraction_batches/run_round.sh` — **run it by hand, one round per triage session.** Nothing schedules it |
+| review | a **standing PR** from `itemtext/queue-rounds` → `main`, opened by the runner and left open; rounds accumulate into it. **Merge it without deleting the branch** |
 | staged for upload | `itemtext/itemtables/clean/` |
 | protocol the cron reads | `itemtext/extraction_batches/round_prompt_v1.md` |
 
@@ -56,43 +56,85 @@ questionnaire's English. Two agents independently established that the back-tran
 administered form** despite being titled "used in the first pilot study". Its mapping is sound and
 its gates are green. Switching the wording base to the S4 Code Book is a re-extraction of one table.
 
-**c. ~~Restarting the queue needs a durability decision.~~ RULED 2026-09-04: crontab + `claude -p`.**
-Built as `extraction_batches/round_cron.sh`, shaped after the two crons this repo already runs
-(`metadata/version_manifest_cron.sh`, `weekly_pipeline_cron.sh`) — dated log, guards before any
-work, a GitHub issue on failure so GitHub mails you. It is the **first unattended agent in this
-repo**; those two run deterministic scripts. What bounds it is that a round *cannot publish* —
-it writes `__items.csv` into a batch dir and stops, with triage, staging and upload all separate
-manual steps, the same rule `weekly_pipeline_cron.sh` follows by never running `upload_meta.py`.
-Worst case is spend, a mutated `queue_state.csv`, and files in a batch dir.
+**c. ~~Scheduling of itemtext rounds.~~ SETTLED 2026-09-04: there is no scheduler. Rounds are run
+by hand, one per triage session.**
 
-Runs in **`/home/ben/irw-queue-runner`** on `itemtext/queue-rounds`, which the wrapper merges
-`origin/main` into before each round so protocol changes are picked up. **The old
-`/home/ben/irw-queue` worktree is retired** — it is 36 commits behind main on a branch whose remote
-is gone, and still carries the `batch_018` cap, so a round there would self-cancel on its first fire.
+Read the sequence rather than assuming the last state:
 
-**The worktree keeps itself current.** `git fetch` + `git merge origin/main` run *before* the
-Step 0 guards, so the worktree picks up protocol changes on every hourly fire — including fires
-where no round runs, e.g. once the cap is reached. The only conditions that skip the update are the
-two that should: wrong branch, or a dirty tree.
+1. Ruled the morning of 2026-09-04: crontab + `claude -p`, built as `round_cron.sh`. It is the
+   **first unattended agent in this repo**; the others run deterministic scripts.
+2. **It ran, once, and it worked.** batch_019: 19 minutes, exit 0, 7 tables written with
+   `audit_batch` 7 PASS / 0 WARN, 4 determinate blocks, 1 failure. Every guard behaved. All 7
+   survived a live re-run of the gates at triage; 6 shipped.
+3. Ben cancelled it the same day and asked for a different system. **Crontab is out as a standing
+   preference across projects** — "i have had no luck with crontab across a variety of different
+   projects now." Earned: the version-manifest crontab entry ran **zero** times and said nothing,
+   refusing silently because the live checkout was never on `main`. The failure mode is not
+   misfiring, it is failing *quietly*. **Do not propose a crontab here.**
+4. GitHub Actions — the answer for the version manifest (#1705, #1905, #1907) — was worked out
+   properly for this job and **rejected**. It is not a straight lift, and the reasons are not
+   about plumbing:
 
-**The other direction is the standing PR.** Rounds commit to `itemtext/queue-rounds` and the runner
-opens one PR to `main` and leaves it open, accumulating rounds rather than opening one per round.
-Without it the branch only grows: the work goes unreviewed, and the further it drifts from main the
-likelier the pre-round merge is to conflict — which stops the queue outright, since a failed merge
-skips the round. Merging that PR commits extractions to the **repo, not the warehouse**; staging and
-upload stay manual.
+   - **The bottleneck is triage, not the trigger.** ~8 of 12 tables per round need a human
+     go/no-go; at ~1,165 pending that is ~98 rounds. Any cadence faster than "when someone is
+     ready to triage" grows an unreviewed branch, and the further it drifts from `main` the more
+     likely the pre-round merge conflicts — which stops the queue outright.
+   - **Cost, measured.** batch_019 (a *short* round; four agents were 429'd): 670K output, 2.3M
+     cache write, 49.4M cache read across orchestrator + 12 subagents ≈ **$56** at Opus 5 list
+     rates. A clean round is $60–70; the queue is **$5.5–7k**. Hourly would be ~$1,340/day.
+     Nothing should spend that on a timer. Note this is currently subscription usage, not metered
+     API spend — an `ANTHROPIC_API_KEY` in CI would convert it into real per-fire dollars, and a
+     `CLAUDE_CODE_OAUTH_TOKEN` would keep the exact rate limits that killed 8/12 agents in
+     batch_018 and 4/12 in batch_019, unattended.
+   - **A datacenter IP is the wrong place for this work.** The round's expensive step is fetching
+     publisher, OSF, Dataverse, Europe PMC and CRAN sources. A Harvard Dataverse AWS WAF challenge
+     already blocked three tables from *this* laptop. From Azure runner space it gets worse — and
+     the damage is silent: it lands as `blocked`, and a wrong `blocked` quietly removes a table
+     from the queue forever.
+   - **Stuck rounds get more common, not less.** A cloud runner is cancelled, timed out and
+     evicted more readily than the laptop; every death leaves 12 rows `in_progress`, which blocks
+     every later round until a human reconciles. A concurrency group and `if: always()` cleanup
+     bound it but cannot prevent it.
+   - **`--dangerously-skip-permissions` does not transfer.** That posture was decided for a
+     machine Ben controls and watches. In Actions it would run in a **public** repo, with
+     `REDIVIS_API_TOKEN` and `GITHUB_TOKEN` in the environment and **public logs**, around an
+     agent whose whole job is reading untrusted third-party files. `GITHUB_TOKEN` with
+     `pull-requests: write` on a repo where `main` requires zero approving reviews is the same
+     auto-merge capability the manifest job uses — so "the round cannot publish" would no longer
+     bound the blast radius the way it does locally.
 
-**One step is left, and it is yours** — installing the crontab line was blocked by the permission
-classifier:
+   Actions *would* have deleted real problems, and that is worth recording: a fresh checkout makes
+   the self-snapshot `exec`, the dirty-worktree guard and the wrong-branch guard all unnecessary.
+   It also throws away `.cache/<table>/` (gitignored; the cached sources that make triage minutes
+   rather than hours). **If the GitHub ergonomics are ever wanted, the answer is a self-hosted
+   runner on Ben's laptop** — residential IP, local credentials, local cache — not `ubuntu-latest`.
 
-```
-( crontab -l; echo "13 * * * * /home/ben/irw-queue-runner/itemtext/extraction_batches/round_cron.sh" ) | crontab -
-```
+**Current state.**
+- `extraction_batches/run_round.sh` (renamed from `round_cron.sh`) is the entry point. Run it
+  when you sit down to triage. It still keeps every guard, still cannot publish, still reads the
+  cap out of Step 0 of `round_prompt_v1.md`, and no longer opens a GitHub issue on failure —
+  it exits nonzero and tells you, because you are the one who started it.
+- **The crontab line `13 * * * * .../round_cron.sh` is still installed and must be removed.**
+  An agent cannot do it — the permission classifier blocks crontab edits — so this step is Ben's:
+  `crontab -e`, delete the line. It now points at a path that no longer exists, so it would fail
+  hourly and silently until it is gone.
+- `circuit_breaker.flag` is still set as a DELIBERATE PAUSE, not a trip. Once the crontab line is
+  gone the flag has no job to do; delete it then.
+- The cap is `batch_020`, so the next run does one round and stops. Raise it in Step 0 of
+  `round_prompt_v1.md` for more.
+- The runner worktree was found parked on `itemtext/handoff-scheduling-state` on 2026-09-04, not
+  on `itemtext/queue-rounds`. The branch guard would refuse to run a round until that is put back.
 
-To stop it: `crontab -e` and delete that line, or `touch
-/home/ben/irw-queue-runner/itemtext/extraction_batches/circuit_breaker.flag`, which makes every
-round skip without removing anything. With the cap at `batch_020` the first install runs **two
-rounds and then skips indefinitely** — that bound is deliberate for a first unattended run.
+**What the round cannot do, under any trigger:** publish. It writes `__items.csv` into a batch
+directory and stops. Triage, staging into `clean/` and upload are all manual. That property is
+what bounds the risk of `--dangerously-skip-permissions`, and it is not negotiable.
+
+**The self-edit bug, fixed — do not reintroduce it.** `run_round.sh` merges `origin/main` into the
+worktree it lives in, so a merge carrying a change to the script rewrites the file bash is
+executing. git rewrites in place keeping the inode, and bash reads scripts lazily in 8KB blocks by
+byte offset, so this really does corrupt — reproduced as `unexpected EOF while looking for matching
+quote`. It bit once, harmlessly, on 2026-09-04. The fix is the snapshot re-exec at the top of the
+script. Any replacement that both self-updates and runs from the updated file needs the same guard.
 
 **d. Seven permission-blocked tables** (six `dwyer_2025_genomics_*`, `rd_ppsl7as_ghasemy_2024_sl`),
 recorded `blocked` in `pending_index_notes.csv`. A rights question, not an access one.
@@ -145,11 +187,12 @@ Five `data fix` issues were filed from batch_016: #1875–#1879.
 
 ## 5. To restart the queue
 
-1. ~~Decide (c) above.~~ Ruled — see (c).
+1. ~~Settle (c)~~ **SETTLED: run `extraction_batches/run_round.sh` by hand.** Two things must
+   happen first: Ben removes the crontab line (`crontab -e`), and the runner worktree goes back
+   onto `itemtext/queue-rounds`. Then delete `circuit_breaker.flag`.
 2. ~~Raise the cap~~ **done 2026-09-04: the cap is now `batch_020` in Step 0 of both
    `BATCH_PROCESS.md` and `round_prompt_v1.md`, which allows two more rounds (019, 020).** Re-raise
    it before any run beyond that. The off-by-one: the cap self-cancels after *completing* that batch.
 3. ~~Confirm~~ **checked 2026-09-04: no `circuit_breaker.flag`, 0 `in_progress` rows, no `clean/`.**
-4. Install the crontab line in (c) above — `round_cron.sh` reads `round_prompt_v1.md` itself.
-   Hourly at `:13`; the old 15-minute cadence was calibrated for a retired groups-of-3 dispatch
-   and caused an overlap.
+4. Run `extraction_batches/run_round.sh`. It reads `round_prompt_v1.md` itself. One round, then
+   triage what it produced before running another.
