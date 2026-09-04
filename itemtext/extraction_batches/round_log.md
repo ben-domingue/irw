@@ -2279,3 +2279,45 @@ the ECR / ECR-R / ECR-R-18 / ECR-S. Better ruled once at corpus level than redis
   positions (1/735471 by chance). Corroboration from two directions, not one agent's inference.
 - Sidecar merge used exact-filename deletion, per the batch_016 incident; `verification_merged.csv`
   survived.
+
+### Triage — 2026-09-04
+
+Done in the runner worktree the same morning the round ran, which is a first: every
+previous batch was triaged days later. Ben cancelled the 06:13 round before this
+(deliberate pause via `circuit_breaker.flag`, not a tripped breaker) — the unattended
+hourly cadence is being replaced, partly because an API monthly spend cap makes firing
+into an empty budget wasteful.
+
+**Gates re-run live, all clean.** `normalize_nulls.R` 0 of 7 needing changes;
+`audit_batch.R` 7 PASS / 0 WARN against current live data; `verify_batch.R` 3 PASS +
+4 MISSING(exempt), the four exempt being exactly the four `data_labels` tables;
+`lint_verification.R` 11 rows, no problems. Nothing the round claimed failed to
+reproduce.
+
+**Staged (6, 509 rows / 99 items)** into `itemtables/clean/`: `chatton2024_honos13`,
+`chen_2021_acculturation`, `chen_2021_enculturation`, `chen2022b_selfesteem`,
+`chen2022b_socsupport`, `chen2022_cls`.
+
+**Held (1): `chen2022_ses`** — Ben's call, see its `notes.csv` row. Not a gate failure:
+all four gates passed. The mapping is `reconstructed` and PARTIAL, laying the canonical
+RSES onto A25..A34 in published order with no source naming an individual item — the
+`gilbert_meta_35` shape. The `chen2022_cls` filler-gap signature pins the A-numbering to
+instrument positions, but nothing establishes that the source used canonical RSES order,
+and A34's lone negative item-rest (-0.16, in an already positively-keyed block) is
+evidence the other way. Unblocking needs a source that NAMES items — the Ji and Yu (1999)
+Chinese adaptation with numbered items, or the authors' codebook.
+
+**Worth noting for future triage:** `draft_issues_qmd.R`, run independently of the
+verify scripts, reached the same conclusion about `chen2022_ses` from the provenance
+alone — "MAPPING IS RECONSTRUCTED, not sourced ... Nothing distinguishes A27 from A28",
+and it reads A34 as "one item left unreversed when the others were scored". Two
+independent routes to the same hold.
+
+**Issues page not yet applied.** Draft for all 7 is in
+`fixes/itemtext_issues_draft_batch019.md`. It is blocked on the upload by design — a
+table gets no entry until it ships — and `chen2022_ses`'s entry must be dropped unless
+that table ships. Applying it edits `../../irw_site/itemtext_issues.qmd`, a different
+repo, so it wants its own branch there.
+
+**Not stamped.** `uploaded=` stays blank in `provenance.csv` and `mapping_verification.csv`
+until Ben confirms the upload actually happened.
