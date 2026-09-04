@@ -221,6 +221,38 @@ respondents:
 Record what the respondents read. If an instrument went out in more than one
 language, list them all (`eng, vie`).
 
+### The exception: an instrument multilingual by construction (decided 2026-09-04, #1704)
+
+**Leave `primary language(s)` BLANK when the instrument was fielded in many
+languages simultaneously and the table cannot be attributed to one of them.**
+
+This is not the translated-instrument case. A scale translated into three
+languages and administered as three versions has three languages, and you list
+them. The case here is a single global study — `peters_2025_*` (22 languages,
+one COVID-19 risk tool) and `mede_2025_*` (37 languages, 68 countries, the TISP
+survey) — where every respondent saw exactly one language, the shipped table
+pools them all, and nothing in the table says which respondent read which.
+
+Two rules in this file pull opposite ways there. *List them all* is written for
+an instrument that exists in several languages. *Never guess* forbids
+attributing a language to respondents whose language you do not know. When the
+instrument is multilingual **by construction**, listing all 37 codes asserts
+something false about every individual respondent, and picking one is a guess.
+Blank is the only answer that is true.
+
+Measured before deciding: across six batches, agents wrote 90 predictions for
+these two families and **left 69 of them blank** without being told to. The 21
+that listed codes did so on tables indistinguishable from the ones left blank,
+which is what an unwritten rule looks like. Six had reached publication with
+20-35 codes each while their siblings carried nothing; those were blanked when
+this was ruled.
+
+The cost is known and accepted: roughly 37 tables keep an empty
+`primary language(s)`. That is the same trade the `soderberg_2024` rule already
+makes one step upstream — a repository stamping "Languages: English" describes
+the *record*, not the instrument; here the source describes the *instrument*,
+not the respondent.
+
 ## When the dictionary and the source disagree (decided 2026-09-03, #1704)
 
 Sometimes the fetched source is plainly a real, on-topic work whose numbers
