@@ -21,7 +21,8 @@ why this worktree exists. The old `/home/ben/irw-wt/1709` worktree is retired.
 
 ## Queue state at handoff
 
-**1,177 pending · 154 done · 11 failed · 5 blocked · 54 excluded.**
+**1,177 pending · 151 done · 11 failed · 8 blocked · 54 excluded.** (The three `cdm_timss*`
+tables moved from done to blocked on the #1891 ruling, 2026-09-04.)
 
 Two rounds ran today: **batch_017** (12 written, 0 blocked) and **batch_018** (11 written, 1
 blocked). Both capped deliberately as a trial; the cron self-cancelled at `batch_018` and
@@ -34,15 +35,18 @@ not runtime — it is triage, at ~8 tables per round needing a human-supervised 
 
 ## 1. Decisions waiting on you
 
-**a. [#1891](https://github.com/ben-domingue/irw/issues/1891) — TIMSS rights. The one you said you'd
-address today.** Two questions in one issue:
-  - Does IEA's 2007 clause ("Commercial exploitation, distribution, redistribution … prohibited
-    unless written permission") bar IRW's non-commercial redistribution? The per-item watermark and
-    the preceding sentence say no; the sentence read literally says maybe. **2003 and 2011 read
-    differently** ("in the public domain"), so a ruling on 2007 does not transfer to them.
-  - All three `cdm_timss*` tables record `License: GPL-3.0` — the CDM R package's licence, covering
-    the RESPONSE data — while their item text is IEA-licensed. **A table with two rights regimes,
-    and one dictionary field.** This will recur for any assessment data wrapped in a package.
+**a. ~~[#1891](https://github.com/ben-domingue/irw/issues/1891) — TIMSS rights.~~ RULED 2026-09-04.**
+IRW does not ship item wording carrying a **stated** non-commercial restriction — `datastandard.md`'s
+NC rule now applies to item text as well as response data. All three `cdm_timss*` extractions are
+**declined and removed**, 2003 included: its page says "in the public domain" *and* "non-commercial
+… only", and the restriction governs. Checking the live IEA pages also showed **2011 carries the same
+clause as 2007** with no public-domain statement, so the earlier "a ruling on 2007 does not transfer"
+note does not hold. The rule fires on a quotable restriction only — never on an inference that a
+scale is copyrighted or reproduced without an explicit grant, which was considered and rejected as
+too broad. Written into `references/itemtext_standard.md` § Rights and BATCH_PROCESS Step 2.
+Two follow-ons: a bounded audit of published tables sourced from publisher-administered
+instruments, and the mixed-licence question (a table's dictionary `License` describes the response
+data, not the wording) recorded there rather than made a schema change.
 
 **b. `carver_2017_puggs_pilot1_attitudes` — ship pre-revision wording or not?** It carries the S3
 questionnaire's English. Two agents independently established that the back-translation review
@@ -108,10 +112,9 @@ Five `data fix` issues were filed from batch_016: #1875–#1879.
 ## 5. To restart the queue
 
 1. Decide (c) above.
-2. Raise the cap in Step 0 of **both** `BATCH_PROCESS.md` and `round_prompt_v1.md` — it is currently
-   `batch_018`, already reached, so a new job would self-cancel on its first fire. **This is the trap
-   that made the pipeline look dead on 2026-09-03.** Note the off-by-one: the cap self-cancels after
-   *completing* that batch, so `batch_020` gives two more rounds (019, 020).
-3. Confirm: no `circuit_breaker.flag`, no `in_progress` rows, `clean/` empty.
+2. ~~Raise the cap~~ **done 2026-09-04: the cap is now `batch_020` in Step 0 of both
+   `BATCH_PROCESS.md` and `round_prompt_v1.md`, which allows two more rounds (019, 020).** Re-raise
+   it before any run beyond that. The off-by-one: the cap self-cancels after *completing* that batch.
+3. ~~Confirm~~ **checked 2026-09-04: no `circuit_breaker.flag`, 0 `in_progress` rows, no `clean/`.**
 4. Create the cron with the prompt in `round_prompt_v1.md`, cadence `13 * * * *` (hourly — the old
    15-minute cadence was calibrated for a retired groups-of-3 dispatch and caused an overlap).

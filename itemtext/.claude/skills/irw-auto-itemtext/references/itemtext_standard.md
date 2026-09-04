@@ -110,3 +110,42 @@ live data (this has happened, e.g. `fivpei_perrig_2023_attdiff`: 28 items in the
 21 in the data), or the item/response text can't be fully recovered, do not force a match.
 Emit whatever partial structure is defensible and record the discrepancy — see SKILL.md's
 "Can't fully automate" handling.
+
+## Rights: when item wording may not be shipped
+
+Ruled 2026-09-04 by ben-domingue on irw#1891. Check this **before** transcribing, not
+after — the TIMSS extractions that produced this rule were finished, gated and verified
+before anyone asked whether they could be published.
+
+**The rule.** If the wording's rights holder states a non-commercial restriction on the
+item text, do not ship it. Write no `__items.csv`, record the table `blocked`, and quote
+the clause in `notes_<table>.csv`. This is a determinate block ("licence bars reuse"), not
+a retryable one — an unchanged retry cannot change it.
+
+This mirrors `datastandard.md`, which stops response-data intake on "any NC/ND
+restriction". Until this ruling that rule had no item-text counterpart, so wording was
+being extracted under terms that would have barred the response data outright.
+
+**It fires on a stated restriction, not on an inference.** The test is whether the rights
+holder's own terms — a licence page, a PDF front matter, a per-page watermark, a
+questionnaire's distribution notice — say the material is for non-commercial use. Quote
+the sentence. If you cannot quote one, the rule does not fire.
+
+It specifically does **not** fire because an instrument is a copyrighted scale, is
+reproduced without an explicit grant, or is merely free of charge rather than sold by a
+test publisher. Most academic scales are in that position and remain shippable; "silence
+is not permission" was considered and rejected as the rule, because it would block most of
+the queue. Record what you relied on in `provenance.csv` `note` so a weak basis stays
+auditable.
+
+**A public-domain statement does not override an NC clause.** TIMSS 2003's page says both
+"Although the items are in the public domain" and "for non-commercial, educational, and
+research purposes only". The restriction governs. All three TIMSS cycles are declined on
+this rule, 2003 included.
+
+**Watch for wording that is licensed separately from the response data.** The three
+`cdm_timss*` tables record `License: GPL-3.0` — the CDM R package's licence, covering the
+responses as that package redistributes them. It says nothing about IEA's wording, which
+is separate copyright under narrower terms. A table's dictionary licence is evidence about
+the response data only; go to the wording's own source for its terms. This recurs for any
+assessment redistributed through a package or similar wrapper.
