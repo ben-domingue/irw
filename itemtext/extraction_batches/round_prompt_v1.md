@@ -1,7 +1,9 @@
-# ITEMTEXT_BATCH_ROUND_V1 (self-identification marker for CronList/CronDelete — do not remove this line)
+# ITEMTEXT_BATCH_ROUND_V1
 
-You are firing as a recurring cron round of the IRW item-text batch-extraction pipeline. This is a
-stateless firing — you have no memory of prior rounds. Everything you need is either in this prompt
+You are one round of the IRW item-text batch-extraction pipeline, started deliberately by a human
+who is about to triage what you produce (decision (c) of HANDOFF.md, settled 2026-09-04 — there is
+no scheduler; `extraction_batches/run_round.sh` is run by hand, one round per triage session). This
+is a stateless firing — you have no memory of prior rounds. Everything you need is either in this prompt
 or on disk. Follow this protocol exactly, once, then stop (do not loop internally).
 
 Working directory: /home/ben/irw-queue-runner/itemtext/ — cd there first. Read
@@ -41,11 +43,11 @@ globbing each other's sidecars. It stood down only because a human was watching.
 To self-cancel: append one line to extraction_batches/round_log.md saying which stop condition
 fired and when, then stop. Do nothing else.
 
-You are launched by extraction_batches/round_cron.sh, which checks these same conditions in bash
+You are launched by extraction_batches/run_round.sh, which checks these same conditions in bash
 before it ever launches you -- so reaching this point at all means something changed between its
-check and yours. There is no cron job for you to delete: do NOT call CronList or CronDelete (they
-do not exist in a headless run), and do NOT edit the crontab. Stopping is sufficient; the wrapper
-will decline to start the next round for the same reason.
+check and yours. There is nothing scheduled to cancel: do NOT call CronList or CronDelete (they do
+not exist in a headless run), and do NOT edit the crontab. Stopping is sufficient; a human starts
+the next round, and the wrapper will decline to start one for the same reason.
 
 ## Step 1 — Claim this round's tables
 
@@ -240,6 +242,21 @@ ratified 2026-09-02, after 60 such tables were found with no public note at all 
   Never leave a table in_progress. When in doubt between the two, choose "failed" — it costs a
   retry, whereas a wrong "blocked" quietly removes a table from the queue forever.
 
+- **Before you classify ANY agent the harness reported as failed, `ls` its batch directory.**
+  The report you see is an agent's FIRST assistant message, not its last, so an agent killed on
+  its closing message looks identical to one that died before reading anything. In batch_019
+  three agents were reported failed with a 429; two had finished, and `chatton2024_honos13` had a
+  complete 65-row `__items.csv` and all four sidecars already on disk. Taking the report at face
+  value would have thrown away a clean table and a fully-argued block.
+
+  So: for every agent whose report reads as a failure, check for
+  `itemtables/batch_<NNN>/<table>__items.csv` and its sidecars before deciding anything. If the
+  files are there, run the Step 4 gates on the table and classify it on the gates, not on the
+  report. If a rate limit or spend cap killed agents mid-round, say so explicitly in the round log
+  -- a round that hit a limit is not a round whose blocked/failed counts mean anything, and it
+  should NOT set the circuit breaker on that basis (nothing was determined about those tables).
+  Orphaned `__items.csv` files with no provenance are quarantined, not promoted.
+
 - **Circuit breaker: if >30% of this round's tables ended up `failed` (NOT `blocked`)**: write
   extraction_batches/circuit_breaker.flag explaining what happened, self-cancel exactly as in
   Step 0, log it, and stop.
@@ -302,5 +319,6 @@ NOTE ON PATHS (2026-09-03 restart): this round runs from a WORKTREE, not src.
 `irw_site` is NOT a sibling of the worktree -- use the absolute path above for
 check_provenance.R. Do not `cd` into /home/ben/Dropbox/projects/irw/src and do not
 switch branches there; it is checked out on an unrelated branch. Commit round output
-on branch itemtext/queue-runner, naming paths explicitly per BATCH_PROCESS.md's
+on branch itemtext/queue-rounds -- NOT itemtext/queue-runner, which is retired and which
+this line named wrongly until 2026-09-04 -- naming paths explicitly per BATCH_PROCESS.md's
 repo-hygiene section, and push after each round.

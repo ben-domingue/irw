@@ -1,30 +1,59 @@
 #!/usr/bin/env bash
-# Cron entry point for one round of the IRW item-text batch extraction (#1709).
+# One round of the IRW item-text batch extraction (#1709). YOU run this; nothing
+# schedules it.
 #
-# Shaped after metadata/version_manifest_cron.sh and weekly_pipeline_cron.sh --
-# dated log, guards before any work, a GitHub issue on failure so GitHub mails
-# Ben. It differs from both in one respect that is worth stating plainly: those
-# two run deterministic scripts, and this one launches an AGENT. It is the first
-# unattended agent in this repo (decision (c) of extraction_batches/HANDOFF.md,
-# ruled 2026-09-04).
+# Decision (c) of extraction_batches/HANDOFF.md, settled 2026-09-04: rounds are
+# fired deliberately, one per triage session, and there is no scheduler at all.
+# The reasoning is worth keeping, because "add a scheduler later" is the obvious
+# wrong turn:
 #
-# What bounds it:
+#   - The bottleneck is triage, not the trigger. Roughly 8 of the 12 tables in a
+#     round need a human go/no-go (BATCH_PROCESS, "Triage and staging"), and at
+#     ~1,165 pending that is ~98 rounds. Any cadence faster than "when someone is
+#     ready to triage a batch" just grows an unreviewed branch -- which is also
+#     what makes this script's pre-round merge of origin/main start conflicting,
+#     and a failed merge stops the queue entirely.
+#   - A round costs real money. Measured on batch_019 (2026-09-04, and a SHORT
+#     round -- four of its agents were killed by 429s): 670K output tokens, 2.3M
+#     cache writes and 49.4M cache reads across the orchestrator and 12
+#     subagents, about $56 at Opus 5 list rates. A clean round is nearer $60-70,
+#     and draining the queue is $5.5-7k. Nothing should be able to spend that on
+#     a timer.
+#   - GitHub Actions was considered and rejected (the version-manifest job moved
+#     there; this one should not). Three reasons: the work is fetching publisher
+#     and repository sources, and a datacenter IP gets bot-walled far more than
+#     this laptop does -- and a WAF block lands in queue_state.csv as `blocked`,
+#     which quietly removes a table from the queue for good; a cloud runner is
+#     cancelled and evicted more readily, and every death leaves 12 rows
+#     in_progress that block all later rounds; and --dangerously-skip-permissions
+#     in a PUBLIC repo, with secrets in the environment and public logs, around
+#     an agent whose whole job is reading untrusted third-party files, is a
+#     different risk from the same flag on a machine Ben is sitting at.
+#
+# --dangerously-skip-permissions is what lets the round run without a babysitter
+# for its 20-40 minutes. It is bounded by two things, and if either stops being
+# true this line is the one to revisit:
 #   - The round CANNOT PUBLISH. It writes __items.csv into a batch directory and
 #     stops. Triage, staging into itemtables/clean/ and upload are separate
-#     manual steps. The worst case here is spend, a mutated queue_state.csv and
-#     files in a batch dir -- nothing a warehouse user can see. This is the same
-#     rule weekly_pipeline_cron.sh follows by never running upload_meta.py.
-#   - The batch cap in Step 0 of round_prompt_v1.md. Raise it deliberately;
-#     when it is reached this script stops firing rounds and says so.
-#   - extraction_batches/circuit_breaker.flag, which a bad round sets.
+#     manual steps. The worst case is spend, a mutated queue_state.csv and files
+#     in a batch dir -- nothing a warehouse user can see.
+#   - The batch cap in Step 0 of round_prompt_v1.md, read out of the prompt
+#     below rather than duplicated here.
 #
-# The guards below duplicate the prompt's own Step 0 on purpose: checking them
-# in bash costs nothing, and it means a capped or breakered queue never pays for
-# an agent launch at all.
+# The guards below duplicate the prompt's own Step 0 on purpose: checking them in
+# bash costs nothing, and it means a capped or breakered queue never pays for an
+# agent launch at all. extraction_batches/circuit_breaker.flag still stops a
+# round; a bad round still sets it.
 #
-# It runs in its OWN worktree, never Ben's src checkout, which moved branch
-# three times during the 2026-09-03 session -- twice mid-round. A round that
-# reads a reparked tree gets the wrong protocol and a stale queue_state.csv.
+# It runs in its OWN worktree, never Ben's src checkout, which moved branch three
+# times during the 2026-09-03 session -- twice mid-round. A round that reads a
+# reparked tree gets the wrong protocol and a stale queue_state.csv. The branch
+# guard below is not paranoia: on 2026-09-04 the runner worktree itself was found
+# parked on an unrelated branch.
+#
+# Output goes to a dated log under cron_logs/ and to your terminal. A failure
+# exits nonzero and says so -- there is no GitHub issue any more, because you are
+# the one who started it and are watching.
 set -uo pipefail
 
 # Run from a snapshot, because this script edits itself.
@@ -56,10 +85,10 @@ set -uo pipefail
 # So: copy ourselves somewhere git will never touch and exec that. The snapshot
 # is what runs; the merge below can rewrite the original freely, and the next
 # fire picks the new version up.
-if [[ "${ROUND_CRON_SNAPSHOT:-}" != "1" ]]; then
-  _snap="$(mktemp -t round_cron.XXXXXX)" || exit 1
+if [[ "${ROUND_SNAPSHOT:-}" != "1" ]]; then
+  _snap="$(mktemp -t run_round.XXXXXX)" || exit 1
   cat "$0" > "$_snap" && chmod +x "$_snap" || { rm -f "$_snap"; exit 1; }
-  ROUND_CRON_SNAPSHOT=1 "$_snap" "$@"
+  ROUND_SNAPSHOT=1 "$_snap" "$@"
   _rc=$?
   rm -f "$_snap"
   exit "$_rc"
@@ -77,32 +106,11 @@ DATE="$(date +%F)"
 STAMP="$(date +%F_%H%M)"
 LOG_FILE="$LOG_DIR/round_${STAMP}.log"
 GH_REPO="ben-domingue/irw"
-GH_MENTION="@ben-domingue"
 
 mkdir -p "$LOG_DIR"
 
-alert() {
-  # $1 = title suffix, $2 = body preamble. The log is on disk either way; the
-  # issue exists so GitHub sends mail.
-  local body
-  body="$(mktemp)"
-  {
-    echo "$GH_MENTION $2"
-    echo
-    echo "Log: \`$LOG_FILE\`"
-    echo
-    echo '```'
-    tail -c 50000 "$LOG_FILE"
-    echo '```'
-  } > "$body"
-  gh issue create --repo "$GH_REPO" \
-    --title "IRW itemtext round -- $STAMP [$1]" \
-    --body-file "$body" --assignee ben-domingue >> "$LOG_FILE" 2>&1
-  rm -f "$body"
-}
-
 # A subshell, not a brace group: the steps use `exit` to stop early, and in a
-# brace group that would exit the whole script and skip the alerting.
+# brace group that would exit the whole script and skip the reporting below.
 (
   echo "# IRW itemtext extraction round -- $STAMP"
   echo
@@ -176,20 +184,55 @@ alert() {
   echo "Launching round agent at $(date -Is)."
   echo
 
-  # --skip-permissions is what makes this unattended. It is bounded by the fact
-  # that the round cannot publish, and by the cap above. If that stops being
-  # true, this line is the one to revisit.
+  # --dangerously-skip-permissions is what lets the round run for its 20-40
+  # minutes without a babysitter. It is bounded by the fact that the round cannot
+  # publish, and by the cap above. If that stops being true, this line is the one
+  # to revisit. See the header for why this posture is defensible here and would
+  # not be on a cloud runner.
+  #
+  # Keep a copy of the transcript so the rate-limit check below can read it; the
+  # copy is deleted at the end of the round.
+  _agent_out="$(mktemp -t round_agent.XXXXXX)"
   claude -p "$(cat "$PROMPT")" \
-    --dangerously-skip-permissions 2>&1
-  rc=$?
+    --dangerously-skip-permissions 2>&1 | tee "$_agent_out"
+  rc="${PIPESTATUS[0]}"
   echo
   echo "Round agent exited $rc at $(date -Is)."
+
+  # A 429 does NOT fail the round. When subagents are killed by a rate limit or a
+  # spend cap the orchestrator finishes and exits 0, so nothing above notices and
+  # the round self-reports as a normal completion with a poor yield. That has
+  # already cost real work: in batch_018 eight of twelve agents were killed this
+  # way, and in batch_019 three were -- two of which had actually FINISHED, with
+  # a complete 65-row items CSV on disk, and were reported as plain failures
+  # because the harness shows an agent's first message, not its last.
+  #
+  # So say it out loud. A round that hit a limit is not a round whose blocked and
+  # failed counts mean anything, and its batch directory must be read before
+  # queue_state.csv is believed.
+  if grep -qiE '(rate.?limit|429|spend (cap|limit)|usage limit)' "$_agent_out"; then
+    echo
+    echo "WARNING: the transcript mentions a rate limit / spend cap. Some agents"
+    echo "were probably killed. Before trusting this round's classifications, ls"
+    echo "the batch directory -- a killed agent may have written a complete table"
+    echo "and still been reported as failed. Do not mark those tables 'blocked'."
+  fi
+  rm -f "$_agent_out"
+
   [[ "$rc" -ne 0 ]] && exit "$rc"
 
   # The round commits its own work (BATCH_PROCESS "Repo hygiene"). Push it, so
   # a round's output is never stranded on a local branch -- an unpushed branch
   # has cost this project published tables before.
-  if [[ -n "$(git log --oneline "origin/$BRANCH..HEAD" 2>/dev/null)" ]]; then
+  #
+  # The remote branch may not exist: merging the standing PR with --delete-branch
+  # removes it, which is what happened to #1904. When it is gone the range
+  # `origin/$BRANCH..HEAD` is not a revision at all -- git exits 128 and prints
+  # nothing, so the old `-n "$(...)"` test read as "nothing to push" and the
+  # round's commits stayed local. That is precisely the stranded-branch failure
+  # the paragraph above is about, so check the ref exists before using the range.
+  if ! git rev-parse --verify --quiet "origin/$BRANCH" >/dev/null \
+     || [[ -n "$(git log --oneline "origin/$BRANCH..HEAD")" ]]; then
     git push -u origin "$BRANCH" 2>&1 || {
       echo "ERROR: push failed. The round's commits are local only."
       exit 1
@@ -209,9 +252,15 @@ alert() {
   # of the 12 tables in a round want a human go/no-go before anything is staged
   # for upload, and a PR is where that happens.
   #
+  # MERGE THIS PR WITHOUT DELETING THE BRANCH. "Standing" depends on it: #1904
+  # was merged with --delete-branch, which removed origin/itemtext/queue-rounds,
+  # broke the push check above and meant the next round would open a fresh PR
+  # rather than accumulate into one. GitHub's "delete branch" button after a
+  # merge does the same thing.
+  #
   # Failure here is deliberately NOT fatal. The round's work is already
   # committed and pushed by this point, and losing a PR link is not worth
-  # alerting over or re-running a round for.
+  # failing or re-running a round for.
   open_pr="$(gh pr list --repo "$GH_REPO" --head "$BRANCH" --state open \
     --json number --jq '.[0].number' 2>/dev/null)"
   if [[ -n "$open_pr" ]]; then
@@ -220,7 +269,7 @@ alert() {
     gh pr create --repo "$GH_REPO" --base main --head "$BRANCH" \
       --title "itemtext: extraction rounds from the queue runner" \
       --body "Standing PR for \`$BRANCH\`, opened automatically by \
-\`itemtext/extraction_batches/round_cron.sh\`. Rounds accumulate here rather than \
+\`itemtext/extraction_batches/run_round.sh\`. Rounds accumulate here rather than \
 opening a PR each; it stays open between merges.
 
 **Nothing here is published.** A round writes \`__items.csv\` into a batch directory and \
@@ -229,18 +278,25 @@ steps. Merging this PR commits the extractions to the repo, not to the warehouse
 
 Review per \`itemtext/BATCH_PROCESS.md\` § 'Triage and staging'. Round-by-round detail is \
 in \`extraction_batches/round_log.md\` and the per-round logs under \
-\`extraction_batches/cron_logs/\` (untracked, local to the runner worktree)." \
+\`extraction_batches/cron_logs/\` (untracked, local to the runner worktree).
+
+**Do not delete the branch when merging.** Rounds accumulate into this one PR; deleting \
+\`$BRANCH\` on merge breaks the runner's push check and starts a new PR per round." \
       2>&1 | tail -2
     echo "Opened the standing PR."
   fi
   exit 0
-) > "$LOG_FILE" 2>&1
+) 2>&1 | tee "$LOG_FILE"
 
-rc=$?
+# tee is the last command in the pipe, so take the subshell's status, not tee's.
+rc="${PIPESTATUS[0]}"
 if [[ "$rc" -ne 0 ]]; then
-  alert "FAILED" "an unattended item-text extraction round failed. Nothing was \
-published -- rounds cannot publish -- but the queue may have rows left \
-in_progress, which blocks every later round until a human reconciles them."
+  echo
+  echo "ROUND FAILED (exit $rc). Log: $LOG_FILE"
+  echo "Nothing was published -- rounds cannot publish -- but the queue may have"
+  echo "rows left in_progress, which blocks every later round until you reconcile"
+  echo "them. Check the batch directory before touching queue_state.csv: a killed"
+  echo "agent often finished its table first."
 fi
 
-exit 0
+exit "$rc"
