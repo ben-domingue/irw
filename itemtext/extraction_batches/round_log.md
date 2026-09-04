@@ -2344,3 +2344,85 @@ Three things had to happen before the queue could resume, and all three are done
 
 The flag is deleted. Nothing fires on its own; the next round happens when someone runs
 `run_round.sh`. The cap is `batch_020`, so that is one round, then it stops.
+
+## batch_020 — 11 written / 1 blocked / 0 failed (92% yield)
+
+Fired 07:19 by hand (`run_round.sh`, the first round under the no-scheduler regime). **The round
+agent abandoned the protocol at Step 4 and the closing steps were completed by a human at 08:0x —
+read "How this round ended" below before trusting anything about its provenance.**
+
+**Written, all gates green:** `chinvararak_2021_phq15`, `choy_2022_extraneous_events`,
+`chuemchit_2024_nonpartner_violence`, `chuemchit_2024_partner_violence`, `cinar_tanriverdi_2023_gad7`,
+`COACH_Chen_2022_ADL`, `COACH_Chen_2022_CSQ`, `COACH_Chen_2022_IADL`, `COACH_Chen_2022_MOS_SSS_C`,
+`COACH_Chen_2022_WHOQOL_BREF`, `cogcontrol_gyurkovics_2019_flanker`.
+
+Gates, all run after the fact: `normalize_nulls.R` 0 of 11 needed normalising; `audit_batch.R`
+**9 PASS / 2 WARN**, both explained below; `verify_batch.R` 8 PASS + 3 MISSING(exempt, all
+`data_labels`); `lint_verification.R` 0 ERROR / 3 WARN; `irw-validate` no ERRORs (five
+`name_charset` WARNs, all on pre-existing capitalised COACH table names, not on anything this round
+produced); `check_provenance.R` clean, 69 IRW-generated tables all disclosed.
+
+**Blocked (1), determinate:** `choy_2022_intent_career` — CC BY and the codes are the source column
+names, but the paper publishes one sample item with no item number and CFA loadings without wording;
+2 of 3 items have no published referent. Retry test NO. Recorded in `pending_index_notes.csv`.
+
+**Failed: none.** 0/12 = 0%, breaker not approached.
+
+### The two audit WARNs, both explained, neither an itemtext defect
+
+- `COACH_Chen_2022_IADL` — 6 items carry live resp values above their own option ceiling. This is a
+  **response-data defect, not a mapping error**, and the round's own note had already quantified it:
+  65 of 54,653 responses (0.12%) sit above their item's defined maximum, all at the 6- and 12-month
+  waves. Checked independently at close-out with `item_stats.R`: at **wave 1** every item's max
+  equals its canonical Lawton ceiling exactly (q5 max 2, q8 max 2, q1/q3/q6/q7 max 3, q2/q4 max 4);
+  the out-of-range values appear only in waves 2 and 3 at 0.0–0.4% per item. The unequal option
+  counts are correct Lawton IADL, and the option_text mapping stands. **Worth its own `data fix`
+  issue** — the stray values are in the published table.
+- `cogcontrol_gyurkovics_2019_flanker` — the four high-count codes (`targ_19`, `targ_25`, `targ_30`,
+  `targ_32`) are exactly the four **congruent** displays (↓↓↓↓↓, ↑↑↑↑↑, →→→→→, ←←←←←). Every
+  participant saw all four; the paper's random direction-pairing design gives each participant only
+  4 of the 12 incongruent codes, so a congruent code carries ~3x the trials. Design property, not
+  item-code conflation.
+
+### The three lint WARNs are correct as VERIFIED
+
+`lint_verification.R` flags `chinvararak_2021_phq15`, `chuemchit_2024_nonpartner_violence` and
+`chuemchit_2024_partner_violence` as "VERIFIED but its evidence hedges". Read against the rule —
+VERIFIED means the route distinguishes every item from every other item — all three are right: each
+evidence string says in terms that the mapping is fully pinned (15/15 distinct source labels; five
+published prevalences mutually distinct at 30x the residual; 494/494 row-by-row reconstruction with
+every off-diagonal breaking). Their "does not establish" clauses are about **wording provenance**
+(translated substitutes, unpublished composite keys), not about the item↔code mapping under test.
+The lint fires on the phrase, which Step 5b actually *requires* the evidence to contain. No change.
+
+### How this round ended — a new failure mode
+
+The agent finished extraction and Step 3 cleanly, then **launched the Step 4 gates as a background
+command and ended its turn to wait for a notification**. A `claude -p` run has no next turn: ending
+the turn ended the session. The log records it verbatim — "The background command will notify me
+when the audit finishes — no need to poll. Waiting." — and the process exited **0** at 07:35 with
+Steps 4, 5 and 6 never run, nothing committed, and all 12 rows left `in_progress`.
+
+Two things worked exactly as designed and one did not:
+
+- The **guards worked.** 12 `in_progress` rows plus a dirty tree meant the next round would have
+  refused twice over, which is the whole point of them.
+- The **standing PR worked** — first successful run of that path since #1904 deleted the branch. It
+  pushed and opened #1922.
+- **Exit code 0 is now worthless as a completion signal, for the second distinct reason.** It was
+  already known that a 429 kill exits 0; now an abandoned protocol does too. The fix is a
+  post-condition check rather than an exit code: after the agent returns, a round has completed only
+  if zero rows are left `in_progress` and the batch has an `audit_report.csv`. Added to
+  `run_round.sh`, along with a Step 2 instruction never to background a command or wait on a
+  notification.
+
+Close-out was done by hand rather than by re-running: every gate passes, the 12 notes all carry
+their retry tests, and `mapping_verification.csv` already held all 12 tracker rows — the work was
+sound and complete, only unrecorded. The three `NOT_NEEDED` rows for the `data_labels` COACH tables
+were missing from the batch-local `verification_merged.csv` (they were in the permanent tracker) and
+were added; that was the only substantive gap, and it cleared the 3 lint ERRORs.
+
+**Note for whoever edits these files next:** `notes.csv` has **mixed line endings** — the flanker row
+is CRLF while the rest are LF — and no quoting convention round-trips it. Edit lines in place,
+byte-wise, and preserve each line's own terminator. A `csv.writer` rewrite silently reformats the
+whole file.
