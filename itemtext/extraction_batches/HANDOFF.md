@@ -10,8 +10,9 @@ narrative is in `round_log.md` under batch_016, batch_017 and batch_018.
 
 | | |
 |---|---|
-| worktree | `/home/ben/irw-queue` — **use this, not `src`** |
-| branch | `itemtext/queue-runner` (pushed; ahead of `main`) |
+| worktree | `/home/ben/irw-queue-runner` — **use this, not `src`** (the old `/home/ben/irw-queue` is retired: 36 commits behind, stale cap) |
+| branch | `itemtext/queue-rounds` (pushed; the wrapper merges `origin/main` in before each round) |
+| runner | `itemtext/extraction_batches/round_cron.sh`, hourly at `:13` from the user crontab |
 | staged for upload | `itemtext/itemtables/clean/` |
 | protocol the cron reads | `itemtext/extraction_batches/round_prompt_v1.md` |
 
@@ -54,11 +55,31 @@ questionnaire's English. Two agents independently established that the back-tran
 administered form** despite being titled "used in the first pilot study". Its mapping is sound and
 its gates are green. Switching the wording base to the S4 Code Book is a re-extraction of one table.
 
-**c. Restarting the queue needs a durability decision.** Today's cron was session-scoped and died
-with the session — the same mechanism that stopped the queue on 2026-08-18 and again on 2026-09-03.
-A systemd user timer driving `claude -p` survives sessions but means an unattended agent with
-`--dangerously-skip-permissions` dispatching 12 subagents an hour. The cap (`batch_NNN` in Step 0)
-is what bounds it. **Not yet decided.**
+**c. ~~Restarting the queue needs a durability decision.~~ RULED 2026-09-04: crontab + `claude -p`.**
+Built as `extraction_batches/round_cron.sh`, shaped after the two crons this repo already runs
+(`metadata/version_manifest_cron.sh`, `weekly_pipeline_cron.sh`) — dated log, guards before any
+work, a GitHub issue on failure so GitHub mails you. It is the **first unattended agent in this
+repo**; those two run deterministic scripts. What bounds it is that a round *cannot publish* —
+it writes `__items.csv` into a batch dir and stops, with triage, staging and upload all separate
+manual steps, the same rule `weekly_pipeline_cron.sh` follows by never running `upload_meta.py`.
+Worst case is spend, a mutated `queue_state.csv`, and files in a batch dir.
+
+Runs in **`/home/ben/irw-queue-runner`** on `itemtext/queue-rounds`, which the wrapper merges
+`origin/main` into before each round so protocol changes are picked up. **The old
+`/home/ben/irw-queue` worktree is retired** — it is 36 commits behind main on a branch whose remote
+is gone, and still carries the `batch_018` cap, so a round there would self-cancel on its first fire.
+
+**One step is left, and it is yours** — installing the crontab line was blocked by the permission
+classifier:
+
+```
+( crontab -l; echo "13 * * * * /home/ben/irw-queue-runner/itemtext/extraction_batches/round_cron.sh" ) | crontab -
+```
+
+To stop it: `crontab -e` and delete that line, or `touch
+/home/ben/irw-queue-runner/itemtext/extraction_batches/circuit_breaker.flag`, which makes every
+round skip without removing anything. With the cap at `batch_020` the first install runs **two
+rounds and then skips indefinitely** — that bound is deliberate for a first unattended run.
 
 **d. Seven permission-blocked tables** (six `dwyer_2025_genomics_*`, `rd_ppsl7as_ghasemy_2024_sl`),
 recorded `blocked` in `pending_index_notes.csv`. A rights question, not an access one.
@@ -111,10 +132,11 @@ Five `data fix` issues were filed from batch_016: #1875–#1879.
 
 ## 5. To restart the queue
 
-1. Decide (c) above.
+1. ~~Decide (c) above.~~ Ruled — see (c).
 2. ~~Raise the cap~~ **done 2026-09-04: the cap is now `batch_020` in Step 0 of both
    `BATCH_PROCESS.md` and `round_prompt_v1.md`, which allows two more rounds (019, 020).** Re-raise
    it before any run beyond that. The off-by-one: the cap self-cancels after *completing* that batch.
 3. ~~Confirm~~ **checked 2026-09-04: no `circuit_breaker.flag`, 0 `in_progress` rows, no `clean/`.**
-4. Create the cron with the prompt in `round_prompt_v1.md`, cadence `13 * * * *` (hourly — the old
-   15-minute cadence was calibrated for a retired groups-of-3 dispatch and caused an overlap).
+4. Install the crontab line in (c) above — `round_cron.sh` reads `round_prompt_v1.md` itself.
+   Hourly at `:13`; the old 15-minute cadence was calibrated for a retired groups-of-3 dispatch
+   and caused an overlap.
