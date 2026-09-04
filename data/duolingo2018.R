@@ -56,8 +56,26 @@ print(L)
 library(dplyr)
 df <- purrr::map_dfr(L, as_tibble)
 
+# `resp.id` is the exposure index this table was missing, and it was already
+# being read, named and documented above -- "the first 8 digits are a B64-encoded
+# ID representing the session, the next 2 digits denote the index of this
+# exercise within the session, and the last 2 digits denote the index of the
+# token (word) in this exercise" -- and then dropped by this select.
+#
+# Without it nothing said which of a learner's repeated meetings with a lexeme a
+# row was, so `rt` was doing the work: it separated 84% of the duplicated
+# id+item groups and `session` only 9.4%, because a learner meets the same
+# lexeme several times *within* one session, in different exercises. A response
+# time is a measurement, not an identifier, and rounding it would silently merge
+# rows (irw#1842 block I).
+#
+# The exercise index is what closes that 9.4% to 100%. Keeping the token index
+# too makes the key exact where one exercise repeats a token.
+df$trialnum <- as.integer(substr(df$resp.id, 9, 10))
+df$order <- as.integer(substr(df$resp.id, 11, 12))
+
 df_ <- df %>%
-  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token)
+  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token, trialnum, order)
 
 df_$stem<-df_$item
 
@@ -69,7 +87,7 @@ df_$id<-df_$user
 
 
 df_ <- df_ %>%
-  select(id, item, resp, session, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
+  select(id, item, resp, session, trialnum, order, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
 
 df_reverse_translate <- df_ %>% filter(format == "reverse_translate")
 
@@ -144,8 +162,26 @@ print(L)
 library(dplyr)
 df <- purrr::map_dfr(L, as_tibble)
 
+# `resp.id` is the exposure index this table was missing, and it was already
+# being read, named and documented above -- "the first 8 digits are a B64-encoded
+# ID representing the session, the next 2 digits denote the index of this
+# exercise within the session, and the last 2 digits denote the index of the
+# token (word) in this exercise" -- and then dropped by this select.
+#
+# Without it nothing said which of a learner's repeated meetings with a lexeme a
+# row was, so `rt` was doing the work: it separated 84% of the duplicated
+# id+item groups and `session` only 9.4%, because a learner meets the same
+# lexeme several times *within* one session, in different exercises. A response
+# time is a measurement, not an identifier, and rounding it would silently merge
+# rows (irw#1842 block I).
+#
+# The exercise index is what closes that 9.4% to 100%. Keeping the token index
+# too makes the key exact where one exercise repeats a token.
+df$trialnum <- as.integer(substr(df$resp.id, 9, 10))
+df$order <- as.integer(substr(df$resp.id, 11, 12))
+
 df_ <- df %>%
-  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token)
+  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token, trialnum, order)
 
 df_$stem<-df_$item
 
@@ -157,7 +193,7 @@ df_$id<-df_$user
 
 
 df_ <- df_ %>%
-  select(id, item, resp, session, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
+  select(id, item, resp, session, trialnum, order, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
 
 df_reverse_translate <- df_ %>% filter(format == "reverse_translate")
 
@@ -232,8 +268,26 @@ print(L)
 library(dplyr)
 df <- purrr::map_dfr(L, as_tibble)
 
+# `resp.id` is the exposure index this table was missing, and it was already
+# being read, named and documented above -- "the first 8 digits are a B64-encoded
+# ID representing the session, the next 2 digits denote the index of this
+# exercise within the session, and the last 2 digits denote the index of the
+# token (word) in this exercise" -- and then dropped by this select.
+#
+# Without it nothing said which of a learner's repeated meetings with a lexeme a
+# row was, so `rt` was doing the work: it separated 84% of the duplicated
+# id+item groups and `session` only 9.4%, because a learner meets the same
+# lexeme several times *within* one session, in different exercises. A response
+# time is a measurement, not an identifier, and rounding it would silently merge
+# rows (irw#1842 block I).
+#
+# The exercise index is what closes that 9.4% to 100%. Keeping the token index
+# too makes the key exact where one exercise repeats a token.
+df$trialnum <- as.integer(substr(df$resp.id, 9, 10))
+df$order <- as.integer(substr(df$resp.id, 11, 12))
+
 df_ <- df %>%
-  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token)
+  select(user, item, resp, session, format, time, part.speech, morphology, dependency.label, dependency.head, token, trialnum, order)
 
 df_$stem<-df_$item
 
@@ -245,7 +299,7 @@ df_$id<-df_$user
 
 
 df_ <- df_ %>%
-  select(id, item, resp, session, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
+  select(id, item, resp, session, trialnum, order, format, rt, part.speech, morphology, dependency.label, dependency.head, stem)
 
 df_reverse_translate <- df_ %>% filter(format == "reverse_translate")
 

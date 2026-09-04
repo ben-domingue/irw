@@ -4,11 +4,14 @@ Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
 `README.md`). **73 of the 101 flagged tables need a data change**; the other 28
 need none.
 
-**Status.** Block G is done and uploaded (2026-09-03), 14 tables including two
-block-H/unflagged neighbours the same scripts produce. **Blocks A, B, C, D and
-E are repaired and staged** the same day -- 34 tables, 33 of which pass the
-format gate; `selfcompassionscale_shortform_fuochi_2025` is correctly held
-back, see block E. Read its entry before
+**Status, 2026-09-03.** Blocks A, B, C, D, E and G are **done, uploaded and
+verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
+`excess_occ` 0 where the repeat is the design). Two of block F and two of block
+J are repaired and staged. Block H is **re-diagnosed and should not be worked
+from its table below**. What remains needs a source file somebody has to fetch
+by hand: `duolingo_*` (a Dataverse guestbook), `stress_deboeck2012`,
+`realpic_souza2021`, `non_parametric_mixture_modeling_exp1_Cleaned`, and the
+five tables moved out of block H. Read its entry before
 starting another block: a third of it was misdiagnosed here, always in the same
 direction — a duplicate-looking flag that was really a collision, a selector
 bug or an NA-indexing accident — so treat a block's stated fix as a hypothesis
@@ -148,7 +151,7 @@ dedupe. It is staged but **`red_up` refuses it** — for the residual and for a
 41-character name — which is the gate behaving correctly on a table that is
 still half broken. It needs the source.
 
-### Block F — the script dropped a column the source has · 3 tables · 60,030 rows
+### Block F — the script dropped a column the source has · 3 tables · 60,030 rows · **2 of 3 DONE, staged**
 
 - `IRTrees.R:17` — `fsdatT %>% select(-node, -sub)` on De Boeck & Partchev
   IRTrees data, whose design is one row per tree node. `ravens_deboeck2012` is
@@ -160,6 +163,18 @@ still half broken. It needs the source.
 - `KTEEM_Schoen_2019-2022.R` — renames `DataCollectionWave` to `group`. It *is*
   a wave: Spring19–Spring22, `PublicID` persists, 832 of 1,130 ids recur.
   **No data change** — rename `group` → `wave`, set `longitudinal=TRUE`.
+  **Done:** verified that `id`+`item`+`group` is already unique, so the rename
+  alone takes 49,357 unexplained repeats to zero.
+
+**Done for `ravens_deboeck2012` too, and the column was sitting in the source.**
+`fsdatT` ships `sub` = `item:node`, the pseudo-item an IRTrees model treats as
+an item, and line 17 deleted it alongside `node`. `item` is now `i01:node1`;
+35 items become 105 and the row count does not move.
+
+**`stress_deboeck2012` is not the same problem.** It already has an `occasion`
+column, and 792 excess rows survive it: in the source, 36 of its 185 people
+hold two or more complete sets of responses (id 48 appears twice over, differing
+on some values). That needs the study, not a column.
 
 *Done when:* `excess_occ` is 0. `excess_pair` will stay non-zero, correctly —
 the repeat is the design once the column is back.
@@ -261,7 +276,21 @@ check the source: `pact_project.R:361` rbinds five frames under a
 should be carried through as well — but see Decision note below, it is not what
 causes this flag.
 
-### Block I — `duolingo_*` · 7 tables · 279,003 rows · restore a trial index
+### Block I — `duolingo_*` · 7 tables · 279,003 rows · restore a trial index · **script fixed, blocked on the data**
+
+**The index was never missing from the source -- the script reads it, names it,
+documents its layout in a comment, and then drops it.** `resp.id` is "a unique
+12-digit ID for each token instance: the first 8 digits are a B64-encoded ID
+representing the session, the next 2 digits denote the index of this exercise
+within the session, and the last 2 digits denote the index of the token (word)
+in this exercise". That middle pair is exactly the exposure index, and it is
+why `session` alone separated only 9.4% of the duplicated groups: a learner
+meets the same lexeme several times *inside* one session, in different
+exercises. `duolingo2018.R` now derives `trialnum` and `order` from digits 9-10
+and 11-12.
+
+Re-running it needs the SLAM dataset, which sits behind a Dataverse guestbook a
+person has to complete (doi:10.7910/DVN/8SWHNO, 98 MB in three files).
 
 *Confirmed by the copy histogram:* 89-96% of pairs occur once with a tail
 running to 11-22, which is the shape of a spaced-repetition trace and not of
@@ -304,7 +333,7 @@ residue (767 rows here) separately.
 *Done when:* `excess_pair` is 0. Unlike Blocks A/F this one really should reach
 zero — with an exposure index every row is uniquely keyed.
 
-### Block J — trial-level, no trial index · 4 tables · 84,777 rows
+### Block J — trial-level, no trial index · 4 tables · 84,777 rows · **2 of 4 DONE, staged**
 
 *Confirmed by the copy histogram, and emphatically:* `motion` is **every pair
 exactly 10x**, `non_parametric_mixture_modeling_exp1_Cleaned` runs to **994**
@@ -315,8 +344,26 @@ copies, `rr98_accuracy` to 62. `realpic_souza2021` is the odd one out at
 `non_parametric_mixture_modeling_exp1_Cleaned`, `motion`, `rr98_accuracy` —
 same `rt`-as-identifier problem; restore `trialnum`/`order`.
 
+**Done:** `motion` (the source's `trial`; every id+item pair appears exactly
+10x and it says which of the ten) and `rr98_accuracy` (`block` **and** `trial`
+-- `trial` restarts inside each block, so neither identifies a row alone).
+Both from public sources: the paper's GitHub CSV and the `rtdists` CRAN package.
+
+`rr98_accuracy` also forced a fix to the gate: `irw_validate` tried each
+occasion column singly and no single one resolves a trials-within-blocks
+design. It now falls back to testing every occasion column present together.
+
 Plus `realpic_souza2021`: 28 excess rows, all conflicting, nothing explains
-them. Needs the source. Small enough to fold in here.
+them. Needs the source. Small enough to fold in here. *Note while you are
+there:* its `id` is a picture file name and its `resp` is a **mean** rating, so
+the 28 are the smaller of its problems.
+
+**`non_parametric_mixture_modeling_exp1_Cleaned` -- do not restore its trial
+index first.** `Non_parametric_mixture_modeling_exp1.R` rebuilds `id` as
+`rep(names(table(id)), times = table(id))` and assigns it onto rows that have
+just been sorted by `item`, so the id a row carries has no connection to the
+subject it came from. Settle that before anything else about the table means
+much. The script records no source URL.
 
 ---
 
