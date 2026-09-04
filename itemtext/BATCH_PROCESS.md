@@ -8,7 +8,7 @@ covers per-table extraction) — this file covers the batching/scheduling layer.
 
 | Path | What it is |
 |---|---|
-| `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`/`excluded`. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** `excluded` means do not extract, ever — see the standing exclusions below. |
+| `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`/`blocked`/`excluded`. `failed` and `blocked` are BOTH "no CSV" but mean different things and are counted differently by the circuit breaker (Step 5, ruled 2026-09-03): `failed` is a fault or an unresolved access failure that an unchanged retry might get past, and it counts; `blocked` is a determinate verdict that an unchanged retry cannot change, and it does not count. `blocked` is not permanent the way `excluded` is -- it says a HUMAN action or a data change is needed first, so these are the pool to revisit when one happens. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** `excluded` means do not extract, ever — see the standing exclusions below. |
 | `extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
 | `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
@@ -41,9 +41,20 @@ the same pattern the availability audit used. Two consequences worth knowing:
 - A cron job cannot cancel itself implicitly — the protocol has the agent call
   `CronList` → `CronDelete` on its own marker string when a stop condition hits.
 
-Cadence used: `7,22,37,52 * * * *` (every 15 min). A 12-table round takes well
-under 10 minutes wall-clock with 4-way parallelism, so 15 minutes leaves headroom
-without rounds overlapping.
+Cadence: `13 * * * *` (hourly, on an off-minute). **Corrected 2026-09-03 — the old
+`7,22,37,52` was wrong and actively harmful.** That 15-minute cadence was calibrated
+for the retired groups-of-3 dispatch, on the reasoning that "a 12-table round takes
+well under 10 minutes wall-clock with 4-way parallelism". One agent per table is
+slower per round, not faster: in batch_016 the twelve agents ran **3.6 to 16.4
+minutes** each and the round took roughly **40 minutes** end to end, because the
+round is only as fast as its slowest table and hard tables are exactly the ones that
+take longest. A second round fired while batch_016 was still `in_progress`.
+
+Cron cannot express a clean 45-minute interval, so this is hourly — comfortably
+above the observed 40-minute round, and off the `:00`/`:30` marks. **Re-derive it if
+the dispatch shape changes again**: the cadence must exceed the round's *worst-case*
+wall clock, not its average. The stop condition below is the real safety net; the
+cadence only keeps it from firing routinely.
 
 Because each firing is a **stateless context** with no memory of prior rounds,
 the prompt must be a complete, idempotent recipe — not a reference to "continue
@@ -75,8 +86,16 @@ and the processing script side by side.
 
 ## The round-trigger prompt
 
-Paste verbatim into `CronCreate` (`recurring: true`, cron `7,22,37,52 * * * *`).
+Paste verbatim into `CronCreate` (`recurring: true`, cron `13 * * * *`).
 Adjust the batch cap in Step 0 for the run you want.
+
+**Working directory.** The prompt below names `src/itemtext/`, which is right whenever
+`src` is checked out on `main`. When `src` is on another branch, run the round from a
+worktree instead and substitute that path throughout the prompt — a round must never
+write batch output onto an unrelated branch. The 2026-09-03 restart ran from
+`/home/ben/irw-wt/1709/itemtext/` (branch `itemtext/1709-restart-queue`) because `src`
+was on `tags/construct-type-rules`. `queue_state.csv` was byte-identical between the two
+at fork, so no state was lost; it is the file to reconcile when the branch merges.
 
 ```
 # ITEMTEXT_BATCH_ROUND_V1 (self-identification marker for CronList/CronDelete — do not remove this line)
@@ -93,9 +112,31 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_011 already exists (round cap reached)
+- itemtables/batch_031 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
+
+SEPARATELY — the in-flight check, which is NOT a self-cancel (added 2026-09-03):
+
+Run: awk -F, 'NR>1 && $2=="in_progress"' extraction_batches/queue_state.csv
+
+If that prints ANY row, a round is already running (or died mid-round). **Stop
+immediately. Do NOT claim tables, do NOT create a batch directory, and do NOT
+self-cancel the cron job** — a live round will finish on its own and the next firing
+should proceed normally. Append one line to extraction_batches/round_log.md saying
+you stood down, which batch the in_progress rows belong to, and their timestamp.
+Then stop.
+
+The one exception: if those rows' timestamp is more than 2 hours old, the round that
+claimed them is almost certainly dead. Say so in that log line and stop anyway —
+reconciling them back to "pending" is a HUMAN decision, because a dead round may have
+left half-written files in its batch directory. Never flip in_progress back to pending
+on your own.
+
+Why this exists: on 2026-09-03 a second round fired while batch_016 was still in
+flight. None of the three stop conditions above covered it, and nothing in the
+protocol would have prevented two orchestrators from rewriting queue_state.csv and
+globbing each other's sidecars. It stood down only because a human was watching.
 
 To self-cancel: call CronList, find the job whose prompt contains "ITEMTEXT_BATCH_ROUND_V1", call
 CronDelete on its id, append one line to extraction_batches/round_log.md saying which stop
@@ -165,10 +206,19 @@ Each subagent prompt must tell it to:
 - Process its ONE assigned table via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the
-  source's terseness) -> validate_items.R as a HARD GATE (Step 5) -> Step 5b mapping verification
+  source's terseness) -> validate_items.R as a HARD GATE (Step 5), run it with **--table-sets** on
+  a published table so the gate uses server-side aggregates instead of exporting the whole table -> Step 5b mapping verification
   (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
+- **On a block, state the retry test explicitly in notes_<table>.csv and in your report**: would an
+  unchanged retry, right now, plausibly produce a different result? Say YES (an unresolved access
+  failure -- 403, timeout, quota, source not located, no verdict reached) or NO (a determinate
+  verdict -- no wording published, licence bars reuse, images only, gated behind registration or
+  author contact, or a data defect that makes item text unattachable), and say what would have to
+  change for the answer to become different. The orchestrator uses this at Step 5 to decide
+  `failed` vs `blocked`, and those are counted differently by the circuit breaker. Do not guess:
+  if you cannot tell, say so and it will be treated as `failed`, which merely costs a retry.
 - Do SKILL.md Step 5b for every table whose mapping_basis is not `data_labels`, and record it in
   the per-table verification sidecar below. Do NOT write to itemtext/mapping_verification.csv
   directly — concurrent agents would clobber each other; the orchestrator merges the sidecars.
@@ -213,6 +263,15 @@ Wait for all agents to finish.
 
 Merge notes_*.csv into notes.csv, provenance_*.csv into provenance.csv, and verification_*.csv
 into verification_merged.csv (header once, data rows concatenated), then delete the per-table files.
+
+**Delete them BY NAME, never with `rm -f verification_*.csv`.** That glob also matches
+`verification_merged.csv` -- the file this step just told you to create, and the exact filename
+`lint_verification.R` requires inside a batch directory. Running the documented cleanup literally
+destroys the merge output: it happened at batch_016's round close and took all nine verification
+rows with it. They were recoverable only because each agent still held its evidence string and
+could be resumed to rewrite its own file; nothing on disk could have rebuilt them, and an evidence
+string reconstructed from memory would be worse than a missing one. Delete the exact filenames you
+merged, or write the merge to a name outside the glob and rename it afterwards.
 Leave the verify_<table>.R scripts in place — they are the batch's re-runnable evidence and triage
 executes them.
 
@@ -256,10 +315,46 @@ ratified 2026-09-02, after 60 such tables were found with no public note at all 
 
 ## Step 5 — Update queue state and check the circuit breaker
 
-- Table wrote a CSV AND audit_batch.R says PASS or WARN -> status="done". No CSV, or FAIL/ERROR ->
-  status="failed". Never leave a table in_progress.
-- If >30% of this round's tables ended up failed: write extraction_batches/circuit_breaker.flag
-  explaining what happened, self-cancel exactly as in Step 0, log it, and stop.
+- Table wrote a CSV AND audit_batch.R says PASS or WARN -> status="done".
+- Otherwise classify it. **Ruled 2026-09-03: a table that produced no CSV is NOT automatically a
+  failure.** Use the retry test, which is the whole distinction:
+
+  > *Would an unchanged retry, right now, plausibly produce a different result?*
+
+  - **YES -> status="failed".** A fault or an unresolved access failure: a gate FAIL or ERROR, a
+    crash, a verify FAIL or missing VERDICT, a lint ERROR, an HTTP 403/timeout/connection error,
+    an exhausted export quota, "couldn't find the source" with no verdict reached. These COUNT
+    toward the circuit breaker, because a cluster of them is what a systemic breakage looks like.
+  - **NO -> status="blocked".** A determinate verdict: the source publishes no item wording, the
+    licence bars reuse, the wording exists only as images, the pool is gated behind a human action
+    such as registration or author contact, or a data defect makes item text unattachable at all
+    (e.g. a transposed table whose item axis holds respondent IDs). An unchanged retry fails
+    identically; changing the outcome needs a HUMAN action or a data change. These do NOT count
+    toward the circuit breaker.
+
+  Never leave a table in_progress. When in doubt between the two, choose "failed" — it costs a
+  retry, whereas a wrong "blocked" quietly removes a table from the queue forever.
+
+- **Circuit breaker: if >30% of this round's tables ended up `failed` (NOT `blocked`)**: write
+  extraction_batches/circuit_breaker.flag explaining what happened, self-cancel exactly as in
+  Step 0, log it, and stop.
+
+- Always log BOTH numbers in the round entry — written / blocked / failed — plus the round's
+  yield. A high `blocked` rate is a fact about which tables the queue served up, not about
+  pipeline health, but it is worth watching: the queue is worked in table order and the head of
+  the queue holds the corpus's large closed-source datasets. Every `blocked` table also gets a
+  row in itemtables/pending_index_notes.csv saying what would have to change.
+
+  WHY THIS SPLIT EXISTS. The breaker is there to stop a BROKEN pipeline burning rounds
+  unattended. Before 2026-09-03 it counted every no-CSV table, so a table the extractor correctly
+  DECLINED was indistinguishable from one where the extractor broke. It fired twice on correct
+  behaviour -- batch_005 (33%, recorded then as "not a pipeline fault") and batch_016 (33.3%,
+  8 clean extractions plus 4 determinate source blocks). SKILL.md calls an honest "couldn't
+  automate this one" a correct outcome, and the 110-table blind study found declining-rather-than-
+  guessing to be the extractor's validated property; a threshold that halts on it trains future
+  rounds toward guessing. But blocks are not simply ignorable either: a network or quota outage
+  surfaces as a wave of "couldn't reach the source", which is why unresolved access failures stay
+  on the counting side.
 
 ## Step 5b — Verify the round's own claims before trusting them
 
@@ -293,7 +388,7 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_011, self-cancel now and log "cap reached".
+- If this round completed itemtables/batch_031, self-cancel now and log "cap reached".
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

@@ -1,5 +1,12 @@
 # Usage: Rscript validate_items.R <table> <path/to/table__items.csv>
-#            [--resp-csv <path/to/response.csv>]
+#            [--resp-csv <path/to/response.csv>] [--table-sets]
+#
+# --table-sets takes the item and resp sets from irw::irw_table_sets(), which
+# answers with server-side aggregates and does NOT export the table. Prefer it
+# for any large published table: this script only ever compares SETS, so the
+# route loses nothing, and the standing rule is never to irw_fetch() merely to
+# satisfy a gate (181.8GB corpus, 200GB/30-day cap). The two flags are mutually
+# exclusive -- --resp-csv is for a table that is not live yet.
 #
 # --resp-csv checks against a local IRW response CSV instead of live Redivis
 # data. Use it for a table that is not published yet -- the automated_finding
@@ -26,8 +33,16 @@ if (!is.na(i)) {
     args <- args[-c(i, i + 1)]
 }
 
+use_sets <- "--table-sets" %in% args
+args <- args[args != "--table-sets"]
+if (use_sets && !is.na(resp_csv)) {
+    stop("--table-sets and --resp-csv are mutually exclusive: one reads the live\n",
+         "  table's sets server-side, the other a local CSV. Pick the one that matches\n",
+         "  whether this table is published yet.", call. = FALSE)
+}
+
 if (length(args) < 2) {
-    stop("Usage: Rscript validate_items.R <table> <items_csv> [--resp-csv <response_csv>]")
+    stop("Usage: Rscript validate_items.R <table> <items_csv> [--resp-csv <response_csv>] [--table-sets]")
 }
 table <- args[1]
 items_path <- args[2]
@@ -41,10 +56,17 @@ script_dir <- {
 source(file.path(script_dir, "fetch_resp.R"))
 
 items <- read.csv(items_path, stringsAsFactors = FALSE)
-df <- get_resp(table, resp_csv)
+df <- if (use_sets) get_resp_sets(table) else get_resp(table, resp_csv)
 cat("Response data source: ",
-    if (is.na(resp_csv)) "live (irw::irw_fetch)" else paste0("local CSV ", resp_csv),
-    "\n\n", sep = "")
+    if (use_sets) "live sets via irw::irw_table_sets() -- server-side, no export"
+    else if (is.na(resp_csv)) "live (irw::irw_fetch) -- EXPORTS THE WHOLE TABLE; --table-sets avoids this"
+    else paste0("local CSV ", resp_csv),
+    "\n", sep = "")
+if (use_sets) {
+    cat("  NOTE: this route supplies the item and resp SETS only, which is all the\n",
+        "  checks below compare. It carries no per-row or per-item counts.\n", sep = "")
+}
+cat("\n")
 
 cat("=== Column check ===\n")
 required <- c("table", "section_id", "item", "instrument", "instructions",
