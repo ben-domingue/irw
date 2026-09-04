@@ -2853,3 +2853,69 @@ text that is a list of demographic and identity categories, because the study (C
 about which topics people find offensive. That is inherent to the research and the transcription is
 faithful, so nothing about it is a data defect and no note was written. Whether IRW wants any
 content signposting on tables of this kind is an editorial policy question, not an extraction one.
+
+### batches 022 and 023 — uploaded 2026-09-04
+
+30 tables uploaded by Ben and verified in the `irw_text` draft with `red_up.drafts --verbose` before
+anything was stamped. Stamped `uploaded=2026-09-04` in both batches' `provenance.csv` and in
+`mapping_verification.csv`; deleted the 30 uploaded `__items.csv`, sidecars kept. `clean/` was
+emptied by Ben. Issues-page entries applied as datapages/irw#128 (201 → 230).
+
+**A THIRD convention for "not uploaded", and the audit that missed it.** This morning's note said to
+treat `''` and `no` as unset. batch_022 uses neither: its `uploaded` column holds the literal
+**`NA`**, which is the project's canonical null token and therefore the likeliest form of all. The
+stamping pass skipped all 20 rows, and the audit — sharing the same `UNSET` predicate — reported
+them as already stamped. The rule that actually works is the inverse one:
+
+> **A row is stamped only if it holds a real date (`^\d{4}-\d{2}-\d{2}$`). Everything else is
+> unstamped, whatever it says.**
+
+That needs no list of null spellings and cannot be defeated by a fourth one appearing.
+
+**And the audit must not share a code path with the thing it audits.** Rewritten with the date rule,
+the stamp function reported 20 rows changed while the audit read 20 still unstamped — because the
+rewrite had dropped its `open(path,'wb').write(...)` line. It counted without persisting. Only an
+audit that re-read the files from disk caught it; one built on the same helper would have agreed
+with the bug twice.
+
+
+### WHOQOL item text withdrawn — 2026-09-04
+
+Ben ruled that **IRW does not offer WHOQOL item text**, closing #1927. Six tables are now `blocked`;
+four of them had already shipped and are being withdrawn.
+
+**The clause that decided it is not the one #1927 went looking for.** That issue asked whether the
+WHOQOL carries a *non-commercial* restriction, and the answer is essentially no — commercially
+funded use attracts a royalty (NZ$500 for a single study), which is a fee, not a prohibition. The
+terms found today state something narrower and more directly fatal:
+
+> "You agree that you will not reproduce copies of the WHOQOL instruments except for the limited
+> purpose of generating sufficient copies for use in investigations stated hereunder and shall in no
+> event distribute them to third parties by sale, rental, lease, lending or any other means."
+> — AUT / NZ WHOQOL, *Terms and Conditions of Use of the WHOQOL Tools*
+
+Shipping item text **is** distributing the instrument to third parties. An NC clause restricts who
+may use it; this restricts the act IRW performs.
+
+**It took a text proxy to read it, which is the reusable lesson.** `cpcr.aut.ac.nz` returns 403 to a
+direct fetch and Manchester's user-information PDF fails on a TLS certificate mismatch
+(`research.bmh.manchester.ac.uk` presents a certificate for `apps.mhs.manchester.ac.uk`), so the
+batch_020 extraction concluded no clause could be quoted and shipped the table under the
+source-licence rule. That conclusion was reasonable on the evidence it had and still wrong.
+**Absence of a retrievable clause is not absence of a clause** — when a rights page is unreachable
+rather than silent, say so as a distinct finding instead of treating it as permission.
+
+**This is a deliberate exception to the source-licence rule, recorded as such** in
+`itemtext_standard.md` § Rights. IRW's WHOQOL copies came from openly licensed deposits — CC0 in the
+COACH case — so under the ECR-R ruling they would ship. The ruling honours the rights holder's
+no-redistribution term anyway. It is scoped to the WHOQOL and does **not** generalise itself: whether
+any quotable no-redistribution clause should override the source licence is left as an open question
+for a later, deliberate ruling, because settling it the other way would reverse ECR-R for a whole
+class of instruments.
+
+**Done here:** all six tables `blocked` in `queue_state.csv` (done 206 → 202, blocked 17 → 23,
+pending 1,112 → 1,110); the four shipped rows carry a withdrawal note in `provenance.csv` with their
+`uploaded` date kept as history rather than falsified; six rows added to `pending_index_notes.csv`;
+the rule written into the standard; and the four issues-page entries rewritten to record the
+withdrawal rather than describe wording that no longer exists (datapages/irw#129). **Ben removes the
+tables from the `irw_text` draft** — that is the part that makes it true in the warehouse.

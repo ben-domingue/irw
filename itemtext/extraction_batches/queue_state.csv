@@ -48,8 +48,8 @@ alsyouf_2024_facilitating_conditions,failed,batch_004,2026-08-16T11:35:28
 alsyouf_2024_performance_expectancy,failed,batch_004,2026-08-16T11:35:28
 alsyouf_2024_social_influence,failed,batch_004,2026-08-16T11:35:28
 altahla_2024_swls,done,batch_005,2026-08-16T11:52:27
-altahla_2024_whoqol,done,batch_005,2026-08-16T11:52:27
-altahla_2024_whoqol_bref,done,batch_005,2026-08-16T11:52:27
+altahla_2024_whoqol,blocked,batch_005,2026-09-04T12:00:00-07:00
+altahla_2024_whoqol_bref,blocked,batch_005,2026-09-04T12:00:00-07:00
 alves_2017_hamd17,done,batch_005,2026-08-16T11:52:27
 amarilla_2020_barthel,done,batch_005,2026-08-16T11:52:27
 amarilla_2020_eq5d,done,batch_005,2026-08-16T11:52:27
@@ -105,7 +105,7 @@ broadband_inventories,done,batch_009,2026-08-17T19:25:25
 buczel_2022_inoculation_belief,done,batch_009,2026-08-17T19:25:25
 bukurov_2022_sf36,done,batch_009,2026-08-17T19:25:25
 burgess_2025_soas,done,batch_009,2026-08-17T19:25:25
-burkert_2019_whoqol_bref,done,batch_009,2026-08-17T19:25:25
+burkert_2019_whoqol_bref,blocked,batch_009,2026-09-04T12:00:00-07:00
 busch_2022_course_alleviate,done,batch_009,2026-08-17T19:25:25
 busch_2023_stigma,done,batch_010,2026-08-17T21:04:54
 butt_2022_actual_usage,done,batch_010,2026-08-17T21:04:54
@@ -241,7 +241,7 @@ COACH_Chen_2022_ADL,done,batch_020,2026-09-04T07:20:00-07:00
 COACH_Chen_2022_CSQ,done,batch_020,2026-09-04T07:20:00-07:00
 COACH_Chen_2022_IADL,done,batch_020,2026-09-04T07:20:00-07:00
 COACH_Chen_2022_MOS_SSS_C,done,batch_020,2026-09-04T07:20:00-07:00
-COACH_Chen_2022_WHOQOL_BREF,done,batch_020,2026-09-04T07:20:00-07:00
+COACH_Chen_2022_WHOQOL_BREF,blocked,batch_020,2026-09-04T12:00:00-07:00
 cogcontrol_gyurkovics_2019_flanker,done,batch_020,2026-09-04T07:20:00-07:00
 cogcontrol_gyurkovics_2019_sart,done,batch_021,2026-09-04T08:20:52-07:00
 cogcontrol_gyurkovics_2019_simon,done,batch_021,2026-09-04T08:20:52-07:00
@@ -383,7 +383,7 @@ fukuda_2021_withholding_behavior,pending,,
 gabriel_2026_knowledge_confidence,pending,,
 gabriel_2026_media_use,pending,,
 gad_BrummerHoffman_2021,pending,,
-galgam_2025_whoqol_bref,pending,,
+galgam_2025_whoqol_bref,blocked,rights_1927,2026-09-04T12:00:00-07:00
 gan_2015_cesd,pending,,
 gan_2015_ucla_loneliness,pending,,
 ganbat_2022_pollution_disease_risk,pending,,
@@ -994,7 +994,7 @@ silva_2018_bsq,pending,,
 silva_2018_mbds,pending,,
 silva_2018_phcs,pending,,
 silva_2018_tfeq,pending,,
-silva_2018_whoqol,pending,,
+silva_2018_whoqol,blocked,rights_1927,2026-09-04T12:00:00-07:00
 silva_2023_ecohis,pending,,
 simsalRbim_Human_LargeValence_2017,pending,,
 simsalRbim_Human_LowValence_2017,pending,,

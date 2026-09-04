@@ -160,6 +160,35 @@ not — `chinvararak_2021_ecr` stays blocked because the only publication of its
 18-item Thai selection is CC BY-NC, and that is a source-level restriction, not an
 instrument-level one.
 
+**A stated bar on REDISTRIBUTION is different from a non-commercial clause, and it blocks.**
+Ruled 2026-09-04 on the WHOQOL. The rule above turns on whether a *non-commercial* restriction is
+stated, and the WHOQOL centres' terms do not lead with one — commercial funding merely attracts a
+royalty (NZ$500 for a single study), which is a fee, not a prohibition. What they do state is an
+explicit bar on reproduction and redistribution:
+
+> "You agree that you will not reproduce copies of the WHOQOL instruments except for the limited
+> purpose of generating sufficient copies for use in investigations stated hereunder and shall in no
+> event distribute them to third parties by sale, rental, lease, lending or any other means."
+> — AUT / NZ WHOQOL, *Terms and Conditions of Use of the WHOQOL Tools*
+
+Shipping item text IS distributing the instrument to third parties, so that clause bites directly on
+what IRW does, in a way an NC clause does not. **IRW does not offer WHOQOL item text.** All six
+WHOQOL tables in `queue_state.csv` are `blocked`, and the four that had already shipped were
+withdrawn.
+
+**This is a deliberate exception to the source-licence rule above, not an application of it.** IRW's
+WHOQOL wording came from openly licensed deposits — CC0 in the COACH case — so under the ECR-R
+ruling it would ship. Ben ruled otherwise: a rights holder's explicit no-redistribution term is
+honoured even where the copy came from an open source.
+
+**What this does NOT do is generalise itself.** It is a ruling about the WHOQOL, reached by reading
+that instrument's actual terms. It leaves an open question that a later ruling should settle
+deliberately rather than by drift: whether *any* quotable no-redistribution clause should override
+the source licence, which would reverse the ECR-R decision for a whole class of instruments. Do not
+extend this to another instrument without asking — and note that finding the terms took a text proxy,
+because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
+a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
+
 **But the instrument-level restriction is recorded, not ignored.** Where the rights
 holder states one, set `wording_rights=NC` on every row of that table and add an
 entry to the public issues page. The column is a filterable flag so a commercial
