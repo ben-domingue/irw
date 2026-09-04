@@ -2426,3 +2426,61 @@ were added; that was the only substantive gap, and it cleared the 3 lint ERRORs.
 is CRLF while the rest are LF — and no quoting convention round-trips it. Edit lines in place,
 byte-wise, and preserve each line's own terminator. A `csv.writer` rewrite silently reformats the
 whole file.
+
+### batch_020 triage — 11 of 11 staged, 0 held
+
+Gates were re-run live at close-out (above), so triage did not re-run them a third time; what it
+added was the per-table go/no-go, a read of the two source overrides, and the issues.
+
+**Staged into `itemtables/clean/`: all 11.** Every non-`data_labels` table has its
+`mapping_verification.csv` row, which SKILL.md Step 6c requires before promotion — six of them
+(`MOS_SSS_C`, `choy_2022_extraneous_events`, both `chuemchit_2024_*`, `cinar_tanriverdi_2023_gad7`,
+`cogcontrol_gyurkovics_2019_flanker`).
+
+**The two source overrides were read, not taken on trust.** Both verify scripts test the decision
+that was actually made rather than the plumbing, which is what triage is for:
+
+- `verify_COACH_Chen_2022_MOS_SSS_C.R` states the codebook grouping and the shipped grouping as two
+  named permutations and lets the data choose, with a 2000-draw permutation null. It also says in
+  terms what it does not establish (within-subscale order), which is why the status is PARTIAL and
+  not VERIFIED. Good script.
+- `verify_COACH_Chen_2022_WHOQOL_BREF.R` tests the one axis that carried a decision (q26's option
+  direction) with a falsifiable predicate, and deliberately reads the study's own Dataverse raw file
+  instead of `irw_fetch()` to avoid the export quota. Also good.
+
+**Two judgment calls, both settled by precedent rather than by inventing a rule:**
+
+- `cogcontrol_gyurkovics_2019_flanker` ships `item_text` that IRW *reconstructed* — the arrow display
+  ("↓↓←↓↓") decoded from trial data, since the OSF deposit ships no stimulus images. That is not a new
+  category: `reconstructed` + `study_materials` covers 8 tables in the corpus and four of them are
+  already uploaded (`depression_anxiety_stress`, `riasec`, `hypersensitive_narcissism`,
+  `short_dark_triad`). Staged, with the reconstruction disclosed in the public note.
+- `COACH_Chen_2022_WHOQOL_BREF` raised a WHOQOL **rights** question. Applying #1891 as ruled — it
+  fires on a quotable restriction, never on an inference — no NC clause could be retrieved, and the
+  wording came from a CC0 deposit, so the rule does not fire and the table is staged. Holding it
+  alone would have been incoherent anyway: **the same instrument's wording is already published for
+  three other IRW tables** (`altahla_2024_whoqol`, `altahla_2024_whoqol_bref` 2026-08-17,
+  `burkert_2019_whoqol_bref` 2026-08-18). Filed corpus-wide as #1927 instead; it covers 7 tables.
+
+**Issues filed:** #1924 (`IADL`, 65 out-of-range responses — data defect, not a mapping error),
+#1925 (`CSQ`, dictionary names Larsen's CSQ-8 but the items are Baker's CSQ-9 short form — the fifth
+dictionary defect the extraction pass has found), #1927 (WHOQOL rights, corpus-wide decision).
+Commented on #1831 with the COACH cluster result, since that issue had specifically asked for the
+WHOQOL direction to be checked against its own data — it was, and the codebook lost.
+
+**Issues page: drafted, NOT applied.** `fixes/itemtext_issues_draft.md` has all 11 entries. They go
+into `irw_site/itemtext_issues.qmd` when the tables actually ship — the drafter's rule is that a
+table with a blank `uploaded` stamp gets no entry until then, and `check_issues_page.R` re-reports it
+once it does. Putting them up now would describe issues in tables nobody can see. No REVIEW THESE TOO
+section this time: all 11 shipped tables carry a `public_note`, so the drafter had no blind spot.
+
+**Structural spot-checks passed:** `chinvararak_2021_phq15` ships genuine administered Thai in
+`option_text` with English in `option_text_translated`, and `item_text_translated` is the canonical
+`NA` token throughout — the documented signal that the base fields are a substitute.
+`cinar_tanriverdi_2023_gad7` carries real Turkish beside real English. The `chuemchit_2024_*` pair
+carries English with `_translated` = `NA`, the #1777 fallback shape. `choy_2022_extraneous_events`
+and the flanker have no `language` column at all, which is correct for them.
+
+**Next:** upload is Ben's step. On his confirmation — stamp `uploaded=<date>` in `provenance.csv` and
+`mapping_verification.csv`, apply the 11 draft entries to the issues page, and delete the uploaded
+`__items.csv` from `batch_020/` (sidecars stay). `clean/` is cleared by Ben, not by the pipeline.
