@@ -45,7 +45,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: COACH_Chen_2022_IADL
   issue: |-
-    Item and option wording is the English text of the study's own codebook; the trial was administered in Chinese and the administered wording is not published in the deposit or the paper. The eight IADL items have different numbers of response options (three to five), and 65 of 54,653 responses at the 6- and 12-month waves fall above their item's defined maximum and so carry no option text.
+    Item and option wording is the English text of the study's own codebook; the trial was administered in Chinese and the administered wording is not published in the deposit or the paper. The eight IADL items deliberately have different numbers of response options (three to five), which is how the Lawton IADL is written, so the shipped option text is keyed correctly item by item. Separately, 65 of the table's 54,653 responses (0.12%) hold a value above their own item's maximum and therefore carry no option text; these occur only at the 6- and 12-month waves, and at baseline every item's largest observed value equals its expected ceiling.
 ```
 
 ## `COACH_Chen_2022_MOS_SSS_C` (batch_020)
@@ -56,7 +56,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: COACH_Chen_2022_MOS_SSS_C
   issue: |-
-    The item text for this table is NOT keyed by the study's own codebook. That codebook lists the 19 MOS Social Support Survey items grouped by subscale and numbers them Q2-Q20 in that grouped order, but the responses match the questionnaire's own numbering (Sherbourne & Stewart 1991): the four tangible-support items are q2, q5, q12 and q15 -- they load 0.70-0.81 on their own factor and are the four highest-mean items in all three waves (3.96/3.93/3.91/3.76 vs 2.62-3.04) -- whereas the codebook would place them at q10-q13. The canonical numbering is shipped. The order of items within a subscale is not independently confirmed. The wording shown is the English original; the survey was administered in Chinese and no Chinese text appears anywhere in the deposit.
+    The 19 MOS Social Support Survey items are shipped against the questionnaire's own numbering (Sherbourne & Stewart 1991) rather than the study codebook's. That codebook lists the items grouped by subscale and numbers them Q2-Q20 in that grouped order, but the responses match the canonical numbering: the four tangible-support items are q2, q5, q12 and q15, which load 0.70-0.81 on their own factor and are the four highest-mean items in all three waves (3.96/3.93/3.91/3.76 against 2.62-3.04), where the codebook would place them at q10-q13. The order of items within a subscale is not independently confirmed. The wording shown is the English original; the survey was administered in Chinese and no Chinese text appears anywhere in the deposit.
 ```
 
 ## `COACH_Chen_2022_WHOQOL_BREF` (batch_020)
@@ -78,7 +78,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: chinvararak_2021_phq15
   issue: |-
-    Item text and instructions for chinvararak_2021_phq15 are the PHQ-15's canonical English wording, not the Thai the 180 respondents actually read -- the PLOS deposit and supplements contain only 2-4 word Thai keyword tags as SPSS variable labels, never the Thai stems, so language=Thai sits beside empty item_text_translated to mark it for a later backfill; the response options are genuine administered Thai (ไม่รบกวน / รบกวนเล็กน้อย / รบกวนมาก = 0/1/2) taken from the deposit's own value labels
+    Item text and instructions are the PHQ-15's canonical English wording, not the Thai the 180 respondents actually read: the PLOS deposit and supplements contain only 2-4 word Thai keyword tags as SPSS variable labels, never the Thai stems, so `language` is set to Thai beside an empty `item_text_translated` to mark the table for a later backfill. The response options are genuine administered Thai (ไม่รบกวน / รบกวนเล็กน้อย / รบกวนมาก = 0/1/2), taken from the deposit's own value labels.
 ```
 
 ## `choy_2022_extraneous_events` (batch_020)
@@ -100,7 +100,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: chuemchit_2024_nonpartner_violence
   issue: |-
-    Each of the five items is an author-derived binary indicator summarising several separate questionnaire questions, not one question: the item text shipped here is the authors' own definition of that violence type (from the paper's Methods), and the study publishes no key saying which of the 14 non-partner questions (S1 File Q126-Q191) feed each indicator. The interviews were conducted in Khmer, Lao and Myanmar; only the English questionnaire version is deposited, so the shipped wording is not the string respondents heard.
+    Each of the five items is an author-derived binary indicator summarising several separate questionnaire questions, not one question: the `item_text` shipped here is the authors' own definition of that violence type (from the paper's Methods), and the study publishes no key saying which of the 14 non-partner questions (S1 File Q126-Q191) feed each indicator. The interviews were conducted in Khmer, Lao and Myanmar; only the English questionnaire version is deposited, so the shipped wording is not the string respondents heard.
 ```
 
 ## `chuemchit_2024_partner_violence` (batch_020)
@@ -111,7 +111,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: chuemchit_2024_partner_violence
   issue: |-
-    The five items are derived binary indicators, each collapsing 2-4 questionnaire questions of one violence type crossed with a 'in the last 12 months' follow-up, so item_text quotes the constituent questions rather than a single stem; the survey was administered orally in Lao, Burmese and Khmer and only the English master questionnaire was published, so the shipped wording is an English substitute for what respondents heard
+    The five items are derived binary indicators, each collapsing 2-4 questionnaire questions of one violence type crossed with a 'in the last 12 months' follow-up, so `item_text` quotes the constituent questions rather than a single stem. The survey was administered orally in Lao, Burmese and Khmer and only the English master questionnaire was published, so the shipped wording is an English substitute for what respondents heard.
 ```
 
 ## `cinar_tanriverdi_2023_gad7` (batch_020)
@@ -122,7 +122,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: cinar_tanriverdi_2023_gad7
   issue: |-
-    The English in the _translated columns is Pfizer's official GAD-7 wording for the same numbered items, not a word-for-word translation of the Turkish adaptation shipped in item_text -- the two diverge (e.g. Turkish item 1 is a direct question and item 6 adds a restlessness clause), and no administered instruction line is shipped because none of the study's sources print one
+    `item_text` ships the Turkish wording of the GAD-7 adaptation the study used (Konkan et al. 2013). The English in the `_translated` columns is Pfizer's official GAD-7 wording for the same numbered items, not a word-for-word translation of that Turkish -- the two diverge, for example Turkish item 1 is phrased as a direct question and item 6 adds a restlessness clause. No administered instruction line is shipped because none of the study's sources print one.
 ```
 
 ## `cogcontrol_gyurkovics_2019_flanker` (batch_020)
@@ -144,7 +144,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: cogcontrol_gyurkovics_2019_sart
   issue: |-
-    The item text for this table is the stimulus digit itself, which is all a SART trial presents; no verbatim participant instructions are published by the study, so the instructions field is empty, and option_text holds the deposit's accuracy codes (0 incorrect / 1 correct) rather than response options participants read.
+    The item text for this table is the stimulus digit itself, which is all a SART trial presents; no verbatim participant instructions are published by the study, so the `instructions` field is empty, and `option_text` holds the deposit's accuracy codes (0 incorrect / 1 correct) rather than response options participants read.
 ```
 
 ## `cogcontrol_gyurkovics_2019_simon` (batch_021)
@@ -166,7 +166,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: cognitive_load_klimova_2023_mlq
   issue: |-
-    Item wording is the canonical English Meaning in Life Questionnaire (Steger et al. 2006); the study administered it in Russian and no Russian text is reachable (the openICPSR deposit is registration-gated and the article is closed access). The table carries 9 of the MLQ's 10 items -- item 10 is not in the response data. The MLQControl* items were shown on a fully-labeled 7-point scale and the MLQExp* items on an end-labeled one, so points 2-6 of the MLQExp items carry no option text; which block was which is inferred from the deposit's control/experimental naming convention rather than from documentation.
+    Item wording is the canonical English Meaning in Life Questionnaire (Steger et al. 2006); the study administered it in Russian and no Russian text is reachable (the openICPSR deposit is registration-gated and the article is closed access). The table carries 9 of the MLQ's 10 items -- item 10 is not in the response data. The MLQControl* items were shown on a fully-labeled 7-point scale and the MLQExp* items on an end-labeled one, so points 2-6 of the MLQExp items carry no `option_text`; which block was which is inferred from the deposit's control/experimental naming convention rather than from documentation.
 ```
 
 ## `colomer_perez_2021_soc13` (batch_021)
@@ -177,7 +177,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: colomer_perez_2021_soc13
   issue: |-
-    Item text is the canonical English SOC-13 (Antonovsky Orientation to Life Questionnaire) wording; the study administered a Spanish version whose wording is not reproduced in the paper or its data deposit, and the deposited .sav carries no labels tying its INVSOC1-SOC13 codes to individual items, so the mapping rests on the code numbering plus a scoring check that pins each item's polarity but not its position within a polarity class. Responses are stored raw (not reverse-scored), so for items 1, 2, 3, 7 and 10 a high value means LOWER sense of coherence. Only the two extreme scale points are labelled on the instrument; points 2-6 are intentionally blank.
+    Item text is the canonical English SOC-13 (Antonovsky Orientation to Life Questionnaire) wording; the study administered a Spanish version whose wording is not reproduced in the paper or its data deposit, and the deposited .sav carries no labels tying its INVSOC1-SOC13 codes to individual items, so the mapping rests on the code numbering plus a scoring check that pins each item's polarity but not its position within a polarity class. Responses are stored raw, not reverse-scored, so for items 1, 2, 3, 7 and 10 a high value means a lower sense of coherence. Only the two extreme scale points are labelled on the instrument; points 2-6 are intentionally blank.
 ```
 
 ## `conner_2017_bfi` (batch_021)
@@ -188,7 +188,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: conner_2017_bfi
   issue: |-
-    Sixteen of the 44 items (BFI 2, 6, 8, 9, 12, 18, 21, 23, 24, 27, 31, 34, 35, 37, 41, 43) are stored already reverse-scored, so their response anchors are shipped in the opposite direction to the other 28: for those items resp=1 is 'Strongly Agree' and resp=5 is 'Strongly disagree'.
+    Sixteen of the 44 items (BFI 2, 6, 8, 9, 12, 18, 21, 23, 24, 27, 31, 34, 35, 37, 41, 43) are stored already reverse-scored, so their response anchors are shipped in the opposite direction to the other 28: for those items `resp`=1 is 'Strongly Agree' and `resp`=5 is 'Strongly disagree'.
 ```
 
 ## `conner_2017_cesd` (batch_021)
@@ -199,7 +199,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: conner_2017_cesd
   issue: |-
-    Items 4, 8, 12 and 16 are stored already reverse scored, so their response anchors are shipped in reverse order (resp 0 = 'Most or all of the time') relative to how the positively-worded stem reads; this matches the numbers in the response data.
+    Items 4, 8, 12 and 16 are stored already reverse scored, so their response anchors are shipped in reverse order (`resp` 0 = 'Most or all of the time') relative to how the positively-worded stem reads; this matches the numbers in the response data.
 ```
 
 ## `conner_2017_curiosity` (batch_021)
@@ -210,7 +210,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: conner_2017_curiosity
   issue: |-
-    Item wording is transcribed verbatim from the study's own SPSS file, so it preserves that file's wording rather than the published Curiosity and Exploration Inventory-II: item 1 reads "I actively seeks as much information as I can in a new situation" where the published CEI-II reads "I actively seek ... in new situations", and items 1 and 8 carry a trailing full stop the other eight lack. The source file also labels the block "Curiousity and Engagement Inventory II"; the instrument field ships the correct name (Kashdan et al. 2009), which the paper's own reference 47 confirms.
+    Item wording is transcribed verbatim from the study's own SPSS file, so it preserves that file's wording rather than the published Curiosity and Exploration Inventory-II: item 1 reads "I actively seeks as much information as I can in a new situation" where the published CEI-II reads "I actively seek ... in new situations", and items 1 and 8 carry a trailing full stop the other eight lack. The source file also labels the block "Curiousity and Engagement Inventory II"; the `instrument` field ships the correct name (Kashdan et al. 2009), which the paper's own reference 47 confirms.
 ```
 
 ## `conner_2017_flourishing` (batch_021)
@@ -221,7 +221,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: conner_2017_flourishing
   issue: |-
-    Item wording and instructions are the canonical Flourishing Scale (Diener et al. 2010); the study's data file carries only terse internal item labels, which is what fixes the item mapping. Response anchors are labelled only at 1, 4 and 7, matching the study's file - the intermediate points are genuinely blank rather than missing.
+    Item wording and instructions are the canonical Flourishing Scale (Diener et al. 2010); the study's data file carries only terse internal item labels, which is what fixes the item mapping. Response anchors are labelled only at 1, 4 and 7, matching the study's file -- the intermediate points are genuinely blank rather than missing.
 ```
 
 ## `conner_2017_vitality` (batch_021)
@@ -243,7 +243,7 @@ Source batches: itemtables/batch_020, itemtables/batch_021
 ```yaml
 - table: conspiracy_asd__asd_aq10
   issue: |-
-    The AQ-10 wording is redistributed here from a CC BY 4.0 deposit, but the instrument's rights holder (the Autism Research Centre, Cambridge) asks that its tests be used "for research purposes and not for commercial use" with acknowledgement of ARC as the source; every row is flagged wording_rights=NC.
+    The AQ-10 wording is redistributed here from a CC BY 4.0 deposit, but the instrument's rights holder (the Autism Research Centre, Cambridge) asks that its tests be used "for research purposes and not for commercial use" with acknowledgement of ARC as the source; every row is flagged `wording_rights`=NC.
 ```
 
 ---
