@@ -1,0 +1,102 @@
+[
+ {
+  "table": "alan_2018_teacher_extrinsic_motivation",
+  "shard": "w4"
+ },
+ {
+  "table": "altman_2020_capq",
+  "shard": "w4"
+ },
+ {
+  "table": "binette_2022_extinction",
+  "shard": "w4"
+ },
+ {
+  "table": "chatton2024_honos13",
+  "shard": "w2"
+ },
+ {
+  "table": "chen_2026_rf",
+  "shard": "w5"
+ },
+ {
+  "table": "daderman_2023_naq_r",
+  "shard": "w4"
+ },
+ {
+  "table": "enkavi_2019_taskswitch",
+  "shard": "w3"
+ },
+ {
+  "table": "gesbert_2021_tdeq",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_sdv_desirability",
+  "shard": "w4"
+ },
+ {
+  "table": "horiuchi_2024_attachment",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2024_ptsexp",
+  "shard": "w3"
+ },
+ {
+  "table": "kitayama_2022_hweat",
+  "shard": "w4"
+ },
+ {
+  "table": "lestari_2026_working_memory",
+  "shard": "w5"
+ },
+ {
+  "table": "liu_2025_perceived_competence",
+  "shard": "w4"
+ },
+ {
+  "table": "makowska_2023_pss4",
+  "shard": "w3"
+ },
+ {
+  "table": "meloni_2015_child_ia_satisfaction",
+  "shard": "w3"
+ },
+ {
+  "table": "nordhoff_2021_trust",
+  "shard": "w4"
+ },
+ {
+  "table": "pedroso_2021_ifsq_restriction",
+  "shard": "w4"
+ },
+ {
+  "table": "petrowski_2020_attachment",
+  "shard": "w4"
+ },
+ {
+  "table": "quinello_2026_ai_maturity_technology",
+  "shard": "w3"
+ },
+ {
+  "table": "rodriguezandres_2016_mnemocity_usability",
+  "shard": "w3"
+ },
+ {
+  "table": "soderberg_2024_esm_affect",
+  "shard": "w5"
+ },
+ {
+  "table": "tian2026_digital_competence",
+  "shard": "w2"
+ },
+ {
+  "table": "wu_2024_achievement_emotions",
+  "shard": "w4"
+ },
+ {
+  "table": "yuebo_2024_srvquality",
+  "shard": "w4"
+ }
+]

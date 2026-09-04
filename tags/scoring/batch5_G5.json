@@ -1,0 +1,102 @@
+[
+ {
+  "table": "ali_2021_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "arora2025_blueq_synchronous",
+  "shard": "w2"
+ },
+ {
+  "table": "cacciatore_2021_ongoing_satisfaction",
+  "shard": "w4"
+ },
+ {
+  "table": "chen2025_body_image",
+  "shard": "w3"
+ },
+ {
+  "table": "choi_2026_cmsce_2020_1",
+  "shard": "w4"
+ },
+ {
+  "table": "de_vries_2022_eudaimonic_wellb",
+  "shard": "w4"
+ },
+ {
+  "table": "fang_2022_achievement_emotions",
+  "shard": "w2"
+ },
+ {
+  "table": "goldberg_2018_ciss",
+  "shard": "w4"
+ },
+ {
+  "table": "hayek_2022_self_efficacy",
+  "shard": "w3"
+ },
+ {
+  "table": "hui_2024_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "karpudewan_2022_stp_cca",
+  "shard": "w3"
+ },
+ {
+  "table": "koo_2016_comm_technique_use",
+  "shard": "w3"
+ },
+ {
+  "table": "liem_2024_customer_pressure",
+  "shard": "w4"
+ },
+ {
+  "table": "lopezgomez_2025_mbi_efficacy",
+  "shard": "w2"
+ },
+ {
+  "table": "manolika_2021_movie_preferences",
+  "shard": "w4"
+ },
+ {
+  "table": "nelson2019_ipqrd",
+  "shard": "w3"
+ },
+ {
+  "table": "otaki_2022_dental_adaptability",
+  "shard": "w3"
+ },
+ {
+  "table": "peters_2025_gen_risk_eval",
+  "shard": "w3"
+ },
+ {
+  "table": "powell_2018_qcae",
+  "shard": "w4"
+ },
+ {
+  "table": "ravenscroft_2017_transition",
+  "shard": "w4"
+ },
+ {
+  "table": "santos_2018_gse",
+  "shard": "w3"
+ },
+ {
+  "table": "sun_2024_innovation",
+  "shard": "w4"
+ },
+ {
+  "table": "valverdeberrocoso_2021_sqd",
+  "shard": "w3"
+ },
+ {
+  "table": "ye_2025_q15_scale",
+  "shard": "w3"
+ },
+ {
+  "table": "zhang_2024_streamer_dsp",
+  "shard": "w4"
+ }
+]
