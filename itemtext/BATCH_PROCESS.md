@@ -212,11 +212,17 @@ Each subagent prompt must tell it to:
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
 - **Check the wording's rights before transcribing it** — see the "Rights" section of
-  references/itemtext_standard.md (ruled on #1891, 2026-09-04). If the rights holder's own terms
-  state a non-commercial restriction on the item text, write NO CSV, record the table `blocked`,
-  and quote the clause. It fires on a stated restriction only, never on an inference that a scale
-  is copyrighted or reproduced without an explicit grant. Note that a table's dictionary `License`
-  describes the RESPONSE data and can differ from the wording's licence entirely.
+  references/itemtext_standard.md (ruled on #1891 and the ECR-R, 2026-09-04). Two separate tests,
+  and they have different consequences:
+  - **The SOURCE you copy from.** If its terms state a non-commercial restriction, write NO CSV,
+    record the table `blocked`, and quote the clause. It fires on a stated restriction only, never
+    on an inference that a scale is copyrighted or reproduced without an explicit grant.
+  - **The INSTRUMENT's rights holder.** If they state a non-commercial restriction but your source
+    is openly licensed, the source governs — ship it, set `wording_rights=NC` on every row, and
+    flag it for an issues-page entry. Do NOT block on this.
+
+  Note that a table's dictionary `License` describes the RESPONSE data and can differ from the
+  wording's licence entirely.
 - **On a block, state the retry test explicitly in notes_<table>.csv and in your report**: would an
   unchanged retry, right now, plausibly produce a different result? Say YES (an unresolved access
   failure -- 403, timeout, quota, source not located, no verdict reached) or NO (a determinate
