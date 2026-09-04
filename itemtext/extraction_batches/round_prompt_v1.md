@@ -166,6 +166,14 @@ Each subagent prompt must tell it to:
 
 Wait for all agents to finish.
 
+**NEVER background a command, and never end your turn waiting to be notified.** You are a `claude -p`
+run: there is no next turn. Ending your turn ends the session, and everything after the point you
+stopped simply does not happen. On 2026-09-04 the batch_020 round launched the Step 4 gates in the
+background and said "the background command will notify me when the audit finishes -- no need to
+poll. Waiting." It then exited **0** with Steps 4, 5 and 6 never run, nothing committed, and all 12
+rows left `in_progress`. The extraction was fine; the round was not. Run every command in the
+foreground and wait for it, however long it takes -- the gates take minutes, and that is expected.
+
 ## Step 3 — Merge sidecars
 
 Merge notes_*.csv into notes.csv, provenance_*.csv into provenance.csv, and verification_*.csv

@@ -221,6 +221,29 @@ mkdir -p "$LOG_DIR"
 
   [[ "$rc" -ne 0 ]] && exit "$rc"
 
+  # Exit 0 does not mean the round finished. It has now failed to mean that for two
+  # distinct reasons: a 429 kill exits 0 (above), and on 2026-09-04 the batch_020
+  # round backgrounded its Step 4 gates, ended its turn to wait for a notification
+  # that a headless run can never receive, and exited 0 with Steps 4-6 never run and
+  # all 12 rows left in_progress.
+  #
+  # So check the post-condition instead of the status. A completed round leaves zero
+  # in_progress rows and an audit_report.csv in the batch it just built. This does not
+  # try to repair anything -- reconciling a half-finished round is a human decision,
+  # and the work is usually salvageable rather than lost.
+  left="$(awk -F, 'NR>1 && $2=="in_progress"' "$QUEUE" | wc -l)"
+  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
+  if [[ "$left" -gt 0 || ! -f "$batch_dir/audit_report.csv" ]]; then
+    echo
+    echo "ERROR: the agent exited 0 but the round did NOT complete."
+    [[ "$left" -gt 0 ]] && echo "  - $left row(s) still in_progress"
+    [[ -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
+    echo
+    echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
+    echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    exit 1
+  fi
+
   # The round commits its own work (BATCH_PROCESS "Repo hygiene"). Push it, so
   # a round's output is never stranded on a local branch -- an unpushed branch
   # has cost this project published tables before.
