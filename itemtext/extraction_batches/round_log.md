@@ -2595,3 +2595,69 @@ condition fires from here on and no further round should start. No self-cancel a
 needed: there is no scheduler — `extraction_batches/run_round.sh` is human-triggered and checks the
 same condition in bash before launching, so it will decline on its own. 1,141 rows remain `pending`
 (plus 52 permanently `excluded` enem* tables) for whenever a human decides to raise the cap.
+
+### batch_021 triage — 10 of 10 staged, 0 held
+
+Gates re-run live at triage (not the round's own report). **Everything clean:** `normalize_nulls`
+0 of 10 needed changes; `audit_batch` **10/10 PASS with no WARNs at all**, so Step 5c had nothing to
+explain; `verify_batch` 6 PASS / 4 exempt; `lint_verification` 0 ERROR / 1 WARN; `irw-validate` ok on
+all ten with no WARNs either (unlike batch_020, none of these table names are capitalised);
+`check_provenance` clean.
+
+**Staged into `clean/`: all 10.** Every non-`data_labels` table has its tracker row — `simon`, `mlq`
+and `soc13` are `reconstructed`, and all three carry one. Note `clean/` now holds **21 files from two
+batches**, batch_020's 11 and batch_021's 10, because batch_020 has not been uploaded yet. One upload
+covers both; the hazard to avoid is uploading twice, since Redivis appends and the only check that
+catches a doubled table is `COUNT(*)` against the source.
+
+**The rights call on `conspiracy_asd__asd_aq10` is correct and worth restating.** The AQ-10 wording
+was copied from a **CC BY 4.0** Figshare deposit, and `itemtext_standard.md` § Rights is explicit that
+the licence of the source IRW copied from governs, not the instrument's own terms. The Autism
+Research Centre's clause ("used for research purposes and not for commercial use") is an
+instrument-level restriction, so it is **recorded rather than obeyed**: `wording_rights=NC` on every
+row — and only on that table, per the omit-the-column-otherwise rule — plus an issues-page entry when
+it ships. This is the ECR-R shape, not the TIMSS shape.
+
+**The three verify scripts for the reconstructed tables are all substantive:**
+
+- `verify_cognitive_load_klimova_2023_mlq.R` — the round overrode the study's **own pre-registration**
+  (AsPredicted #134579 states 1 = "Absolutely True" … 7 = "Absolutely Untrue"); the data say the
+  canonical direction. Two falsifiable predictions, tested on the two disjoint subsamples (Control
+  n=83, Exp n=87). Presence 4.42/4.44 and Search 4.89/4.68 above the midpoint with reverse item 9 at
+  3.41/3.15 matches Steger's student norms and mirrors them under the pre-registration's reading.
+  Second round running where a study's own metadata lost to its own data.
+- `verify_colomer_perez_2021_soc13.R` — the strongest test in the batch: reversing exactly items
+  1,2,3,7,10 must reproduce the authors' own `SOCTOTAL` for every respondent, and no other subset of
+  the 8192 possible should. Uses `irw_table_sets` for the code check rather than exporting.
+- `verify_cogcontrol_gyurkovics_2019_simon.R` — decodes the display from two independent columns,
+  same shape as the flanker in batch_020.
+
+All three say plainly that they do not fix within-class order, which is why two are PARTIAL.
+
+**The one lint WARN was already adjudicated by the round, correctly.** `conspiracy_asd__asd_aq10` is
+kept VERIFIED: the hedge sentence is scoped to route B (option direction), while route A carries the
+item axis and does separate every item from every other — source columns reproduce the live per-item
+means exactly and all ten means are distinct at 2 d.p. The WARN catches the phrase, not the status.
+
+**Triage caught one blind spot.** `conner_2017_curiosity` shipped with no `public_note`, and the
+drafter's REVIEW THESE TOO section flagged it. Its `notes.csv` records that item wording is
+transcribed verbatim from the study's SPSS file including a grammatical slip — item 1 reads "I
+actively seeks as much information as I can in a new situation" where the published CEI-II reads "I
+actively seek … in new situations". A user comparing against the published instrument would read that
+as an IRW transcription error. Public note written by hand; the batch now has 21 draft entries and no
+REVIEW section.
+
+**Corrected an overstatement in the round's own summary.** It reported that "one authenticated
+download of `Final_data.csv`'s headers would likely resolve both" blocked tables. Its own per-table
+notes say otherwise: the openICPSR deposit contains **exactly two data files and no codebook,
+README or questionnaire**, and the IRW item codes already ARE those column headers. So the download
+returns strings we have. The real routes are author contact for the questionnaire, or SAGE access to
+*Field Methods* 38(1):46–61 **and** that article reproducing the scales keyed to the letters. Filed
+accurately as #1930.
+
+**Issues filed:** #1929 (`conner_2017_vitality` is SF-36 Vitality, not the Subjective Vitality Scale
+— biblio Description and `availability_audit_full.csv:851` both wrong; the sixth dictionary defect
+this pass has found), #1930 (the two openICPSR blocks and what would actually clear them).
+
+**Issues page: drafted, NOT applied** — 21 entries covering both staged batches, going up when the
+tables ship.

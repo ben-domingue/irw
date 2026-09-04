@@ -13,7 +13,7 @@ closing `)---")` and re-check that the YAML parses. Order does not matter; the
 page sorts by table name. A table whose `uploaded` stamp is still blank gets no
 entry until it ships, and `check_issues_page.R` will re-report it once it does.
 
-Source batches: itemtables/batch_020
+Source batches: itemtables/batch_020, itemtables/batch_021
 
 ## `COACH_Chen_2022_ADL` (batch_020)
 
@@ -136,8 +136,118 @@ Source batches: itemtables/batch_020
     Item text for this table was reconstructed by IRW, not transcribed: the OSF deposit identifies each stimulus only by a numeric image id and ships no stimulus images, so the arrow display and correct keypad key shown for each item were decoded from the trial-level data (two independent columns agreeing across all 118 participants); the arrows are a rendering of images the deposit does not include, and no verbatim participant instructions are published.
 ```
 
+## `cogcontrol_gyurkovics_2019_sart` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=OSF https://osf.io/7vbtr/ (sart_merge.csv, readme.txt); Gyurkovics, Stafford & Levita (2020) JEP:General 149(6):1017-1031, doi:10.1037/xge0000698, accepted manuscript at https://eprints.whiterose.ac.uk/id/eprint/152525/ -->
+<!-- full note: mapping_basis=data_labels: the deposit's readme.txt defines targ as "the actual digit the participant saw on screen" and the IRW script uses item='digit_'+targ unchanged, so the code IS the source value -- no inference, and the code is additionally self-describing (SKILL Step 5b exemption 1), so no mapping_verification row/verify script is owed. Corroboration: live per-item n = 3276 for all 9 items via irw_table_sets(), equal to the raw file's 117 x 28; raw targ==3 == code==2 (No Go) with accuracy 0.7497 vs 0.9850-0.9884 for the Go digits. text_source=study_materials: item_text is the digit itself (the entire stimulus per the paper's Method); option_text is the readme's accuracy value labels 0=incorrect/1=correct, which is what this table's resp encodes, not participant-facing options. key_source=source_published: correct_response transcribes the paper's rule (SPACE for digits 1,2,4-9; withhold for 3). instructions left blank -- the verbatim instruction screen is not published, only the authors' description of the rule. English administration, so no language/_translated columns. No NC or other wording restriction quotable from the OSF node (no license stated) or the manuscript, so no wording_rights column. -->
+
+```yaml
+- table: cogcontrol_gyurkovics_2019_sart
+  issue: |-
+    The item text for this table is the stimulus digit itself, which is all a SART trial presents; no verbatim participant instructions are published by the study, so the instructions field is empty, and option_text holds the deposit's accuracy codes (0 incorrect / 1 correct) rather than response options participants read.
+```
+
+## `cogcontrol_gyurkovics_2019_simon` (batch_021)
+
+<!-- mapping_basis=reconstructed text_source=study_materials source=OSF https://osf.io/7vbtr/ (simon_merge.csv, readme.txt); Gyurkovics, Stafford & Levita (2020) JEP:General 149(6):1017-1031, doi:10.1037/xge0000698, accepted manuscript at https://eprints.whiterose.ac.uk/id/eprint/152525/ -->
+<!-- full note: mapping_basis=reconstructed: targ_NN decoded to a specific arrow display from the deposit's own trial data (correct-trial key code for direction, invariant cong plus the paper's congruency rule for location), unanimous over 118 participants and 34,338 trials. text_source=study_materials: the single-arrow Simon display is described in the paper's Method (one arrow, four directions, presented above/below/left/right of fixation, keypad 2/4/6/8 = down/left/right/up) and the per-item directions come from the study's own data file; the glyph-plus-location string is IRW's rendering. key_source=derived_from_responses (correct_response = the keypad key for the decoded arrow direction; reproduces the correct key on 100% of correct trials for all 8 items). option_text = the readme's accuracy value labels (0 incorrect / 1 correct), which is what this table's resp encodes; not participant-facing options. instructions left blank, not published. Sibling table cogcontrol_gyurkovics_2019_flanker (batch_020) independently verified the same 98/100/102/104 key-code mapping from the flanker's own display structure. No NC or other rights restriction stated on the OSF node or in the manuscript. -->
+
+```yaml
+- table: cogcontrol_gyurkovics_2019_simon
+  issue: |-
+    Item text for this table was reconstructed by IRW, not transcribed: the OSF deposit identifies each Simon stimulus only by a numeric image id and ships no stimulus images, so the arrow direction, its screen location and the correct keypad key shown for each item were decoded from the trial-level data (correct-trial key code, 100% pure across 34,338 trials, plus the congruency column and the deposit's own feature-repetition code); the arrows are a rendering of images the deposit does not include, and no verbatim participant instructions are published.
+```
+
+## `cognitive_load_klimova_2023_mlq` (batch_021)
+
+<!-- mapping_basis=reconstructed text_source=translated_substitute source=Klimova, Deviatko, Lebedev & Semenova (2023), 'Cognitive Load: Fully-labeled or end-labeled scales', openICPSR 194063 v2, doi:10.3886/E194063V2 (data; project page registration-gated); AsPredicted pre-registration #134579 (https://aspredicted.org/V87_SN8) for the instrument, item count and 7-point scale; Field Methods 10.1177/1525822X251344709 (closed access, not consulted); item wording from Steger, Frazier, Oishi & Kaler (2006), J Couns Psychol 53(1):80-93 -->
+<!-- full note: IRW item codes ARE the deposit's own column names (data/cognitive_load_klimova_2023.py melts MLQControl*/MLQExp* by name), so there is no positional or renaming step -- but the letters a..i tie to no item text anywhere, and neither the deposit (inaccessible) nor the pre-registration lists the items, so the code->text mapping is RECONSTRUCTED from the response data and checked in verify_cognitive_load_klimova_2023_mlq.R (subscale block structure + reverse-item polarity, replicated on both disjoint condition subsamples; PARTIAL -- within-subscale order rests on the alphabetical convention). MLQ item 10 is absent from the table. The 1-7 direction was set from the data against Steger's student norms, overriding the pre-registration's stated '1 (Absolutely True) to 7 (Absolutely Untrue)'. Response anchors are the canonical MLQ's; option_text for MLQExp points 2-6 is blank because that condition's scale was end-labeled. instructions left blank -- no accessible source states them. No rights clause was found on any source consulted, so wording_rights does not fire. -->
+
+```yaml
+- table: cognitive_load_klimova_2023_mlq
+  issue: |-
+    Item wording is the canonical English Meaning in Life Questionnaire (Steger et al. 2006); the study administered it in Russian and no Russian text is reachable (the openICPSR deposit is registration-gated and the article is closed access). The table carries 9 of the MLQ's 10 items -- item 10 is not in the response data. The MLQControl* items were shown on a fully-labeled 7-point scale and the MLQExp* items on an end-labeled one, so points 2-6 of the MLQExp items carry no option text; which block was which is inferred from the deposit's control/experimental naming convention rather than from documentation.
+```
+
+## `colomer_perez_2021_soc13` (batch_021)
+
+<!-- mapping_basis=reconstructed text_source=translated_substitute source=PLOS ONE 10.1371/journal.pone.0260827 (Colomer-Perez et al. 2021, CC BY 4.0) S1 Dataset .sav (cached .cache/colomer_perez_2021_soc13/s001.sav; checked -- zero variable labels and no value labels except SEX, so no data_labels route); item stems and the two labelled anchors transcribed from the published Orientation to Life Questionnaire SOC-13 form as already transcribed for IRW in buzgova_2023_soc (irw_text), cross-checked item by item against Rodriguez-Prat et al., Health Qual Life Outcomes 2022;20:2 (PMC8751372, CC BY) Tables 1 and 3, which print all 13 SOC-13 items numbered 1-13 -->
+<!-- full note: Item codes ARE the source .sav column names -- data/colomer_perez_2021_self_care.py melts SOC_COLS unchanged, so there is no positional step; the only inference is 'does SOC<n>/INVSOC<n> mean SOC-13 item n'. That was checked against the data: reversing exactly INVSOC1, INVSOC2, INVSOC3, INVSOC7 and SOC10 reproduces the authors' own SOCTOTAL for all 921 respondents, and it is the ONLY one of the 8192 possible reversal subsets that does (next best 255/921) -- matching the canonical SOC-13 negatively worded set {1,2,3,7,10} stated in PMC8751372. See verify_colomer_perez_2021_soc13.R. It pins polarity class, not order within class, hence PARTIAL. Two deviations from literal transcription, both deliberate: (1) TEXT SOURCE -- the paper reproduces no SOC-13 wording (its only supporting file is the .sav) and the .sav has no labels, so the words are the canonical instrument's, not this study's. (2) LANGUAGE -- administration was Spanish (Valencian Community CNA students); no Spanish wording exists in the deposit or the paper, so English ships in the base fields with language=Spanish and the _translated columns empty, per the fallback rule. Data are stored RAW (not pre-reversed), proven by the SOCTOTAL reconstruction, so the anchors ship in the printed OLQ form's direction -- i.e. the opposite direction to buzgova_2023_soc, whose values are pre-reversed. instructions left blank: neither source publishes the administered instructions. RIGHTS: no NC clause is quotable anywhere -- the PLOS source is CC BY 4.0, the corroborating HQLO paper is CC BY, and STARS (stars-society.org) gates the SOC scales behind free membership and states copyright by A. Antonovsky without stating any non-commercial restriction, so the itemtext_standard rights rule does not fire and wording_rights is omitted. -->
+
+```yaml
+- table: colomer_perez_2021_soc13
+  issue: |-
+    Item text is the canonical English SOC-13 (Antonovsky Orientation to Life Questionnaire) wording; the study administered a Spanish version whose wording is not reproduced in the paper or its data deposit, and the deposited .sav carries no labels tying its INVSOC1-SOC13 codes to individual items, so the mapping rests on the code numbering plus a scoring check that pins each item's polarity but not its position within a polarity class. Responses are stored raw (not reverse-scored), so for items 1, 2, 3, 7 and 10 a high value means LOWER sense of coherence. Only the two extreme scale points are labelled on the instrument; points 2-6 are intentionally blank.
+```
+
+## `conner_2017_bfi` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=canonical_instrument source=PLOS ONE 10.1371/journal.pone.0171206 S1 File (SPSS .sav) variable+value labels; BFI-44 (John, Donahue & Kentle 1991) -->
+<!-- full note: Code IS the source column name: data/conner_2017_fruit.py melts bfi1..bfi44 straight out of the PLOS S1 .sav with no rename, and every one of those columns carries a variable label giving its BFI item. No positional or reconstructed step anywhere. Wording taken as canonical BFI-44 because five .sav labels are typo'd; deviation itemised in notes. Rights: the source IRW copied from is the CC BY PLOS ONE deposit's own variable labels. The BFI rights holder's page (colby.edu personality-lab / ocf.berkeley.edu johnlab) is Cloudflare-403 / 404 from here so no non-commercial sentence could be quoted; per the itemtext rights rule the NC rule does not fire on an unquotable inference, so wording_rights is omitted. Option anchors for the 16 reverse-keyed items were flipped relative to the .sav value labels to match the stored direction; verified, see verify_conner_2017_bfi.R. -->
+
+```yaml
+- table: conner_2017_bfi
+  issue: |-
+    Sixteen of the 44 items (BFI 2, 6, 8, 9, 12, 18, 21, 23, 24, 27, 31, 34, 35, 37, 41, 43) are stored already reverse-scored, so their response anchors are shipped in the opposite direction to the other 28: for those items resp=1 is 'Strongly Agree' and resp=5 is 'Strongly disagree'.
+```
+
+## `conner_2017_cesd` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=https://doi.org/10.1371/journal.pone.0171206 (S1 File, .sav variable/value labels) -->
+<!-- full note: Source: PLOS ONE 10.1371/journal.pone.0171206 S1 File (SPSS .sav, CC BY). The .sav's variable labels carry full item wording for cesd1..cesd20; data/conner_2017_fruit.py renames cesd<i> -> item<i>, a number-preserving rename, so there is no positional inference on the item axis. Deviations: constant prefix 'CES-D Depression Scale - ' and trailing '(already reverse scored)' stripped from each label; anchors for item4/8/12/16 reversed relative to the .sav's value labels to match the already-reversed stored values (evidence in verify_conner_2017_cesd.R). instructions blank - no verbatim instructions published in either the .sav or the paper. -->
+
+```yaml
+- table: conner_2017_cesd
+  issue: |-
+    Items 4, 8, 12 and 16 are stored already reverse scored, so their response anchors are shipped in reverse order (resp 0 = 'Most or all of the time') relative to how the positively-worded stem reads; this matches the numbers in the response data.
+```
+
+## `conner_2017_curiosity` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0171206 S1 File (.s001 SPSS), variable labels cei1-cei10 and value label set labels20 -->
+<!-- full note: Number-preserving rename only: data/conner_2017_fruit.py maps cei{i}/rcei{i} -> item{i}, so the IRW code carries the source column number and there is no positional inference. Value labels 1=Very slightly or not at all .. 5=Extremely are the canonical CEI-II anchors and the stored direction is confirmed raw: sum(cei1..cei10) equals the file's own CEI total score for all 171 respondents with max abs difference 0.0, and CEI-II has no reverse-keyed items. Label prefix 'Curiousity and Engagement Inventory II - ' stripped from each item; item wording otherwise verbatim including the source's 'I actively seeks' in item 1. -->
+
+```yaml
+- table: conner_2017_curiosity
+  issue: |-
+    Item wording is transcribed verbatim from the study's own SPSS file, so it preserves that file's wording rather than the published Curiosity and Exploration Inventory-II: item 1 reads "I actively seeks as much information as I can in a new situation" where the published CEI-II reads "I actively seek ... in new situations", and items 1 and 8 carry a trailing full stop the other eight lack. The source file also labels the block "Curiousity and Engagement Inventory II"; the instrument field ships the correct name (Kashdan et al. 2009), which the paper's own reference 47 confirms.
+```
+
+## `conner_2017_flourishing` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=canonical_instrument source=PLOS ONE 10.1371/journal.pone.0171206 S1 File (SPSS .sav supplement), variable labels fs1-fs8 / rfs1-rfs8 and value label set 'labels15'; IRW script data/conner_2017_fruit.py -->
+<!-- full note: Mapping from the .sav's own variable labels (fs<i> -> 'Flourishing Scale - <terse content>'), which run in canonical FS order; the IRW rename fs<i>/rfs<i> -> item<i> is number-preserving in data/conner_2017_fruit.py. Wording is the canonical FS (Diener et al. 2010) because the labels are terse internal descriptions and neither the paper nor the .sav publishes the administered sentences -- the label/wording split is deliberate and per SKILL core model section 2. Instructions are likewise canonical FS, not study-published. option_text carries only the three anchors the .sav labels (1/4/7); 2, 3, 5, 6 left blank, not padded. Dictionary licence CC BY 4.0; no non-commercial statement found on the FS, so no wording_rights flag. -->
+
+```yaml
+- table: conner_2017_flourishing
+  issue: |-
+    Item wording and instructions are the canonical Flourishing Scale (Diener et al. 2010); the study's data file carries only terse internal item labels, which is what fixes the item mapping. Response anchors are labelled only at 1, 4 and 7, matching the study's file - the intermediate points are genuinely blank rather than missing.
+```
+
+## `conner_2017_vitality` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=10.1371/journal.pone.0171206 (Methods, "Vitality"); S1 Dataset .sav variable labels vital1-4 -->
+<!-- full note: Stems and the six anchors transcribed verbatim from the paper's Methods ("Vitality"), which reproduces all four items and the 0-100 in 20-point coding. Codes tied by the S1 Dataset .sav's own variable labels for vital1-4, which match the paper's presentation order; data/conner_2017_fruit.py renames vital{i}->item{i}, number-preserving. Deviations disclosed: option_text for items 3-4 inverted because the .sav states they are already reverse-scored (verified by all-positive inter-item r=0.36-0.81); the .sav's labels17 anchor ordering (which transposes "Some" and "A little" and is indexed on a 0-5 scale the data never takes) was overridden by the paper's explicit ascending list. -->
+
+```yaml
+- table: conner_2017_vitality
+  issue: |-
+    The IRW dictionary describes this table as the Subjective Vitality Scale; the items are in fact the modified 4-item energy/fatigue (Vitality) subscale of the RAND SF-36, and items 3 and 4 ("worn out", "tired") are stored already reverse-scored, so a response of 100 on those items means "None of the time".
+```
+
+## `conspiracy_asd__asd_aq10` (batch_021)
+
+<!-- mapping_basis=data_labels text_source=study_materials source=Figshare 10.6084/m9.figshare.30903575.v2 (CC BY 4.0): "Plain text version of survey.docx" (item wording, instructions, and the 1-4 anchor table) and "Questionnaire 1 (Conspiracy Beliefs)_July 16, 2024_08.34.xlsx" row 1 (column-level item labels); scoring direction cross-checked against that workbook column 63 (the study's own AQ-10 total) -->
+<!-- full note: Item codes are assigned POSITIONALLY by data/conspiracy_belief_schizotypy_asd.py (aq10_1..aq10_10 <- workbook columns 53..62), so the positional claim was checked rather than assumed: every source column's mean reproduces the live IRW per-item mean to 0.00e+00, and all ten means are distinct at 2 d.p. Wording taken from the survey docx, not from the workbook header row, because the latter carries a find/replace corruption ('2tice' for 'notice'). Trailing whitespace and the leading '1 '..'10 ' numbering were stripped from the docx lines. Rights: source licence (CC BY 4.0) governs and permits shipping; the ARC's instrument-level non-commercial statement is recorded as wording_rights=NC per the 2026-09-04 irw#1891 ruling. -->
+
+```yaml
+- table: conspiracy_asd__asd_aq10
+  issue: |-
+    The AQ-10 wording is redistributed here from a CC BY 4.0 deposit, but the instrument's rights holder (the Autism Research Centre, Cambridge) asks that its tests be used "for research purposes and not for commercial use" with acknowledgement of ARC as the source; every row is flagged wording_rights=NC.
+```
+
 ---
 
-Skipped 1 table with a provenance row but no shipped CSV (blocked at
-extraction): `choy_2022_intent_career`
+Skipped 3 tables with a provenance row but no shipped CSV (blocked at
+extraction): `choy_2022_intent_career`, `cognitive_load_klimova_2023_pwi`, `cognitive_load_klimova_2023_stomp`
 
