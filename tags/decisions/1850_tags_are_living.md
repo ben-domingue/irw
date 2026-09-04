@@ -46,20 +46,41 @@ Brazilian validation study — the source says Brazil five times and Iran none.
 Found only because the #1850 reliability run tagged the same table twice and the
 two runs disagreed.
 
-**2. Re-running the early batches under the final ruleset.** The reliability run
-showed the disagreement between runs is asymmetric: the second run committed a
-value where the first left a blank on `sample` 11 times out of 60, `item format`
-8, `measurement tool` 7 — against 1, 1 and 0 the other way.
+**2. Re-tagging the 367 language-only rows.** Not, as first proposed, the early
+batches — see the correction below.
 
-That is not agent variance, it is **rule accumulation**. Batch 1 was tagged
-before the `Workplace` atom, the dictionary/source contradiction rule, the
-broadened `Likert Scale/selected response` definition and the multilingual
-exception existed. Batch 7 had all of them. **The published corpus is therefore
-not the product of one consistent ruleset**, and a re-run recovers roughly
-10-15% more values on three columns.
+`tags/tags_auto.csv` holds 367 rows carrying `primary language(s)` **and nothing
+else**: the #1837 rollout staged that one column and never gave those tables
+`item format`, `measurement tool` or `sample`. They were invisible to this
+whole effort, because #1704 defined its target as *"no tag row"* plus
+*"derived-age row only"*, and a row with one substantive value is neither. The
+classifier counted them as tagged.
 
-Under the old ruling that re-run was forbidden. Under this one it is the obvious
-next thing.
+So there is a third under-tagged population the target definition missed, and it
+is larger than the 11 tables left in the original one. Re-tagging it would add
+roughly a thousand values across three published columns.
+
+### A correction, recorded rather than quietly fixed
+
+This file first said the reliability asymmetry was "not agent variance, it is
+rule accumulation", and that a re-run of the early batches would recover 10-15%
+more values. **The corpus does not support that.** Blank rates per batch, of
+the four published columns:
+
+| batch | tables | blank lang | blank fmt | blank tool | blank sample |
+|---|---|---|---|---|---|
+| 1 (fewest rules) | 149 | 9 | 7 | 0 | 22 |
+| 7 (all rules) | 268 | 29 | 8 | 4 | 48 |
+
+The batches tagged under *more* rules have *more* blanks, not fewer — partly
+because the multilingual rule deliberately adds blanks, and partly because later
+draws took harder shards. Whatever produced the run-to-run asymmetry on those 60
+tables, corpus-level blank rates are not evidence for it, and the sample was
+drawn only from tables that already carried a publishable value.
+
+The honest statement is that **the asymmetry is real in the sample and its cause
+is not established.** It should be reported that way in #1850 rather than
+explained away.
 
 ## Why this is the right call, recorded so it is not relitigated
 
