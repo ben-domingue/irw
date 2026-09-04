@@ -2321,3 +2321,26 @@ repo, so it wants its own branch there.
 
 **Not stamped.** `uploaded=` stays blank in `provenance.csv` and `mapping_verification.csv`
 until Ben confirms the upload actually happened.
+
+---
+
+## 2026-09-04 — the deliberate pause ended; rounds are now run by hand
+
+`circuit_breaker.flag` was set at 05:38 as a DELIBERATE PAUSE (not a trip) to stop the
+06:13 cron round while the scheduling question was reopened. That question is settled
+(#1913, HANDOFF decision (c)): **there is no scheduler.** `extraction_batches/run_round.sh`
+is started by a human, one round per triage session.
+
+Three things had to happen before the queue could resume, and all three are done:
+
+1. The `13 * * * *` crontab line is removed (Ben, 2026-09-04).
+2. The runner worktree `/home/ben/irw-queue-runner` was found parked on
+   `itemtext/handoff-scheduling-state`, not `itemtext/queue-rounds` — the branch guard
+   would have refused every round. It is back on `itemtext/queue-rounds`, fast-forwarded
+   to `main` at f6556f7.
+3. `origin/itemtext/queue-rounds` was deleted when #1904 was merged with `--delete-branch`.
+   It has been recreated, which restores both the runner's push check and the standing PR.
+   **Do not delete it again on merge.**
+
+The flag is deleted. Nothing fires on its own; the next round happens when someone runs
+`run_round.sh`. The cap is `batch_020`, so that is one round, then it stops.
