@@ -15,7 +15,7 @@ import unittest
 from pathlib import Path
 
 from red_up import plan as planning
-from red_up.checks import check_all, check_schema, scan
+from red_up.checks import check_all, check_schema, scan, validate_for_target
 from red_up.discover import discover, table_name
 from red_up.targets import (
     ConfigError,
@@ -323,7 +323,18 @@ def test_drafts_reports_no_draft(monkeypatch):
 # --- the format-validator gate (#1703 sub-item 1.4) --------------------------
 
 class ValidatorGate(unittest.TestCase):
-    """red_up refuses a table the format validator blocks."""
+    """red_up refuses a table the format validator blocks.
+
+    The validator runs against a TARGET, not against a file in the abstract:
+    it enforces id/item/resp, which is a statement about where the file is
+    going. These tests therefore go through `validate_for_target` with a
+    response target, the way cli.py does, rather than through `check_all`,
+    which runs before a target has been chosen. See MetadataIsExemptFrom
+    Validation below for why that distinction is load-bearing.
+    """
+
+    RESPONSE = Target(name="item_response_warehouse_5", label="response data",
+                      kind="core")
 
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
@@ -334,9 +345,14 @@ class ValidatorGate(unittest.TestCase):
         path.write_text(body)
         return path
 
+    def _check(self, path, table, target=None):
+        report, = check_all([(path, table)])
+        validate_for_target(report, target or self.RESPONSE)
+        return report
+
     def test_a_broken_table_is_blocked(self):
         path = self._csv("broken_2024_scale.csv", "id,item,resp\n1,a,x\n2,b,y\n3,c,z\n")
-        report, = check_all([(path, "broken_2024_scale")])
+        report = self._check(path, "broken_2024_scale")
         self.assertFalse(report.ok)
         self.assertTrue(any("resp_numeric" in e for e in report.errors), report.errors)
 
@@ -344,16 +360,40 @@ class ValidatorGate(unittest.TestCase):
         rows = "\n".join(f"{i},q{j},{(i + j) % 5 + 1}"
                          for i in range(1, 40) for j in range(1, 5))
         path = self._csv("ok_2024_scale.csv", "id,item,resp\n" + rows + "\n")
-        report, = check_all([(path, "ok_2024_scale")])
+        report = self._check(path, "ok_2024_scale")
         self.assertTrue(report.ok, report.errors)
 
     def test_a_cov_age_sentinel_warns_without_blocking(self):
         rows = "\n".join(f"{i},q{j},{(i + j) % 5 + 1},{999 if i == 1 else 40}"
                          for i in range(1, 40) for j in range(1, 5))
         path = self._csv("sentinel_2024_scale.csv", "id,item,resp,cov_age\n" + rows + "\n")
-        report, = check_all([(path, "sentinel_2024_scale")])
+        report = self._check(path, "sentinel_2024_scale")
         self.assertTrue(report.ok, "an already-live defect must not block (#1779)")
         self.assertTrue(any("cov_range" in w for w in report.warnings), report.warnings)
+
+    def test_metadata_is_exempt_from_the_format_validator(self):
+        """The regression that made every irw_meta upload a no-op (#1703).
+
+        `irw_validate` enforces id/item/resp. Metadata tables have none of
+        them and are exempt by design -- REQUIRED_COLUMNS["meta"] is empty.
+        Between 2026-09-02 and 2026-09-03 the validator ran from `check_all`,
+        before a target existed, so it failed all thirteen of them and red_up
+        reported "nothing here belongs in irw_meta" while uploading zero rows.
+        """
+        meta = Target(name="irw_meta", label="metadata tables", kind="aux",
+                      source="meta")
+        path = self._csv("tags.csv",
+                         "table,age range,sample\nfoo_2024,Adult (18+),Educational\n")
+        report = self._check(path, "tags", target=meta)
+        self.assertTrue(report.ok, report.errors)
+        self.assertEqual([], report.errors)
+
+    def test_a_target_with_required_columns_is_still_validated(self):
+        """The exemption must not become a hole: response data still gets it."""
+        path = self._csv("broken_2024_scale.csv",
+                         "id,item,resp\n1,a,x\n2,b,y\n3,c,z\n")
+        report = self._check(path, "broken_2024_scale")
+        self.assertFalse(report.ok, "response data must still be validated")
 
     def test_a_missing_validator_blocks_rather_than_passes(self):
         import red_up.checks as checks_mod

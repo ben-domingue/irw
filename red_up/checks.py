@@ -122,21 +122,43 @@ def run_validator(path: Path) -> tuple[list[str], list[str]]:
             [f"{f.check}: {f.message}" for f in report.warnings])
 
 
+def validate_for_target(report: FileReport, target: Target,
+                        enabled: bool = True) -> None:
+    """Run the full IRW format validator, where the target expects that format.
+
+    This has to happen HERE, next to check_schema, and not in check_all --
+    which is the bug that made every `irw_meta` upload a no-op between
+    2026-09-02 and 2026-09-03. `irw_validate` enforces `id`/`item`/`resp`, so
+    it is a check about the destination's schema, and check_all runs before a
+    destination has been chosen. Metadata tables have no such columns and are
+    exempt by design; run from check_all, the validator failed all thirteen of
+    them and red_up reported "nothing here belongs in irw_meta".
+
+    One rule, one place: a target with no required columns is a target whose
+    tables have no common schema, so there is nothing for a format validator to
+    say about them. That is the same condition check_schema returns early on.
+    """
+    if not enabled or not required_columns(target):
+        return
+    if report.errors:
+        return                # a file that is not a table yet is not worth validating
+    errors, warnings = run_validator(report.path)
+    report.errors.extend(errors)
+    report.warnings.extend(warnings)
+
+
 def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
     """Scan every file, and flag names that collide within the batch itself.
+
+    Deliberately target-blind: it runs before the destination is chosen, so
+    every check here must hold for any destination. Anything that depends on
+    where the file is going belongs in check_schema or validate_for_target.
 
     Two files with the same stem in different subdirectories would upload one
     after the other into the same table name, and the second would silently
     win. That is a batch-assembly mistake, so it is an error, not a warning.
     """
     reports = [scan(path, table) for path, table in pairs]
-
-    for report in reports:
-        if report.errors:
-            continue          # a file that is not a table yet is not worth validating
-        errors, warnings = run_validator(report.path)
-        report.errors.extend(errors)
-        report.warnings.extend(warnings)
 
     seen: dict[str, list[FileReport]] = {}
     for report in reports:
