@@ -1,5 +1,12 @@
 # verify_concretewords.R -- Step 5b evidence for `concretewords` (batch_016).
 #
+# HISTORICAL. This script records the state that issue #1876 reported, and its
+# assertions describe the BROKEN orientation deliberately. data/concretewords.R was
+# corrected on 2026-09-04 (item = Expression, id = Participant); once the corrected
+# table is uploaded this script will report ok=FALSE, which is the expected outcome
+# and confirms the fix rather than indicating a regression. Kept unchanged as the
+# batch_016 record of what was found.
+#
 # STATUS: NO_ROUTE, no items CSV shipped. This script therefore does NOT verify an
 # item<->item_text mapping (there is none to verify). It makes the *reason* for
 # NO_ROUTE re-runnable: the claim that the IRW `item` axis holds RATERS, not the
