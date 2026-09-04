@@ -2018,3 +2018,139 @@ agent that a financial-literacy measure is often a knowledge test and told it no
 silently. The items are all "I am aware..." / "I feel confident..." — a subjective self-assessment
 with no correct answers. It tested the premise instead of inheriting it, which is the behaviour that
 prevents an invented answer key.
+
+## batch_018 — 2026-09-03 — 11 written, 1 blocked, 0 failed. CAP REACHED, job self-cancelled.
+
+Second and final round of the two-round trial. Gates: audit **6 PASS / 5 WARN** (all five explained in
+notes.csv per Step 5c), verify_batch **10 PASS + 1 exempt**, lint **0 ERROR / 5 WARN** (adjudicated —
+statuses stand), irw-validate **11/11 ok**, check_provenance clean. `mapping_verification.csv`
+193 -> 205. Queue 1,189 -> 1,177 pending, 143 -> 154 done.
+
+### The round was interrupted by an account-wide spend limit, and the wreckage was the danger
+
+**8 of 12 agents were killed mid-run by HTTP 429** (monthly spend limit; session reset 19:50 PT).
+Four had completed; a fifth was complete by exemption. **Three died AFTER writing an `__items.csv`
+but BEFORE writing provenance or verification.** At merge time an ungated, unrecorded items CSV is
+indistinguishable from a finished one — so they were moved to
+`extraction_batches/quarantine_batch018_ratelimit/` with a README, not left in the batch. One of them
+was `cdm_timss03`, a table expected to BLOCK; its agent's last words were "Now I'll build the CSV",
+so the file may even be a partial write.
+
+**The seven unfinished tables were NOT marked `failed`.** Nothing was determined about them: this was
+our own budget, not a verdict about any source. Marking them failed would have tripped the circuit
+breaker at 67% AND written a false statement about seven sources into the queue. They stayed claimed
+to batch_018 and were re-dispatched after the reset.
+
+**The retry briefs were much stronger than the originals**, because the four survivors had mapped the
+terrain — which supplement is which pilot, the block ranges, that the pilots genuinely differ, the
+Portuguese finding, and the renumbering trap. The `genom_know` retry was told explicitly NOT to
+re-extract: its predecessor's complete output had survived, so its job was to verify that work. It
+did, kept the content, and repaired one real defect.
+
+### The pilot-1 renumbering trap — found by a sibling, relayed mid-flight
+
+`carver_2017_puggs_pilot1_attitudes` finished early and found that **the S4 Code Book and the S3
+questionnaire number Sections 2-3 DIFFERENTLY**. Its own block (32-51) is numbered identically in
+both, so it was unaffected — but `det_core` (Q1-Q13) and `genom_know` (Q14-Q31) sit inside the
+disagreeing range, where the wrong choice ships wrong wording on every item while passing every
+set-based gate silently. The orchestrator relayed the warning to both agents mid-run.
+
+Both proved the data follow **Code Book** numbering, independently and decisively:
+
+- `det_core`: the permutation would mis-word **10 of 13** items. Three checks — polarity inverts at
+  the two positions the documents key oppositely (Q2 +0.063 vs -0.135; Q4 +0.126 vs -0.142); the
+  near-consensus lifestyle/diabetes marker sits at Q3 (mean 3.78, 161/205 strongly agree) where the
+  Code Book puts it, versus Q7 (mean 2.16, 55 don't-knows) under S3; and the technical amino-acid
+  statement draws 39 don't-knows at Q9 versus 2 at Q11, which S3 numbering reverses.
+- `genom_know`: exactly five stems contain "epigenetic", and since don't-know is dropped, per-item n
+  is a non-response measure. The five lowest-n items are **exactly** the Code Book's epigenetic set
+  (86, 104, 105, 110, 114, then a gap to 128); the S3 set would be 149, 110, 177, 185, 152. **1 in
+  8,568 by chance.**
+
+**S1/S2 Text AGREE for pilot 2** — confirmed independently by three agents. The trap is pilot-1 only.
+
+### S3 is the PRE-REVISION English, which affects a table already marked complete
+
+The paper's back-translation review PRECEDED the pilots and forced wording changes in both languages,
+naming "diet" -> "eating habits". The Code Book reads "Eating habits and physical exercise"; S3 still
+reads "Diet and exercise". So S3, despite being titled "used in the first pilot study", is one
+revision behind the administered form. **`pilot1_attitudes` ships S3 wording.** Its numbering is
+unaffected (32-51 agree), so the mapping is sound, but the wording is stale — it keeps the
+ungrammatical "used for modify or enhance" that the Code Book fixes. **A human should decide whether
+to switch that table's wording base to the Code Book.** Two agents reached this independently.
+
+### Both TIMSS tables shipped, against expectation — and the reason is a methodological lesson
+
+`cdm_timss03` (23 items) and `cdm_timss07` (25 items) were both expected to block on TIMSS secure
+items. Both shipped, because the codes are IEA's own item IDs carried through `data/cdm.R` unchanged,
+and **every released-item page prints that ID in its header** — an explicit label match, not booklet
+position. `cdm_timss11` shipped partial: 73 of 174 items, the other 101 being secure by design.
+
+**The trap all three hit: the released-item PDFs are RASTERISED.** `pdftotext` returns only header
+metadata and the copyright watermark, so a text-only pass reads as "wording not extractable" and
+blocks incorrectly. Every stem was transcribed from rendered page images. Three agents found this
+independently. Any future round touching image-distributed assessments should know it.
+
+`cdm_timss03` also found that 6 items secure in 2003 were released in the **2007** cycle under IEA's
+release-cycling policy, and used the 2007 pages for them. That runs against a warning the orchestrator
+gave (do not accept other cycles' material) and the agent was right to reason past it: TIMSS trend
+items are the SAME item reused under the SAME ID, so a 2007 page headed `Item ID M022234B` documents
+the identical item. Substituting a different cycle's items would be the error; this is not that. The
+orchestrator's blanket instruction was too strict.
+
+Corroboration was strong: `cdm_timss07` reproduced the booklet design 25/25 (block M04 n=344, M05
+n=698) at zero export; `cdm_timss11` matched IEA's published Austria percent-correct across all 73
+released items at **r = 0.9991**, mean |diff| 0.82 pp.
+
+### Cross-sibling reconciliations applied by the orchestrator
+
+Three agents independently flagged that the batch disagreed with itself. Fixed at round close:
+
+1. **`pilot2_attitudes` and `pilot2_traits` shipped no `language` column** and `text_source=study_materials`,
+   while their six siblings from the same study shipped the Portuguese fallback. Four agents established
+   Brazilian Portuguese administration and confirmed zero Portuguese-accented characters across every
+   supplement. Both tables now carry `language=Portuguese` with the four `_translated` columns present
+   and empty — the standard's documented signal. Left alone, the corpus query
+   `language != '' AND item_text_translated == ''` would have silently missed them.
+2. **`pilot2_attitudes` cited the wrong supplement labels** ("S1 File", "S6 Text", "S3 File"). Per the
+   paper's own SI list the pilot-2 Code Book is **S2 Text (.s008)**; S6 Table is the pilot-2 raw data.
+   Right files, wrong names — and the orchestrator propagated the error into two retry briefs before
+   two agents independently caught it.
+3. **`cdm_timss03` recorded `mapping_basis=data_labels`** where its two TIMSS siblings recorded
+   `paper_explicit` for the identical situation. `data_labels` means the source DATA FILE ties code to
+   text; here the data file supplies only the CODE and the tie to WORDING comes from the PDF printing
+   that ID. Corrected to `paper_explicit`.
+
+### Still open for a human
+
+- **`cdm_timss07` licence.** IEA's 2007 notice reads "Commercial exploitation, distribution,
+  redistribution, reproduction ... are prohibited unless written permission has been provided by IEA."
+  If "Commercial" distributes across the list — supported by the per-item watermark and the preceding
+  non-commercial-use sentence — IRW is clear. If it attaches only to "exploitation", ALL redistribution
+  needs written permission. The agent shipped on the first reading and flagged it. **Note the 2003
+  notice is materially clearer**: "Although the items are in the public domain, please print an
+  acknowledgement of the source." The cycles differ, so a ruling on 2007 does not transfer to 2003.
+- **TIMSS `resp` encoding differs between siblings**: `cdm_timss03` puts `resp=1` on the keyed option
+  row and 0 on distractors; `cdm_timss07` records the two score levels. Same kind of table, two
+  conventions, and the agent flagged its choice as a choice.
+- **`cdm_timss03` has no administered language established**, while 07 and 11 are Austria/German. Not
+  guessed — flagged.
+- **Image-read transcription** on all three TIMSS tables warrants a spot-check before upload, and
+  bracketed figure descriptions in them are IRW's own words, not IEA's.
+- **`instrument` string differs between carver siblings** — one uses the paper's actual expansion
+  ("Public Understanding and Attitudes towards Genetics and Genomics"), another a phrasing the paper
+  never uses ("Public Understanding of Genetics and Genomics Survey").
+- **`chanal_2020_anglais` Description is wrong**: the table reads as self-concept but ships the
+  academic MOTIVATION questionnaire; the self-concept block CS1..CS6 is dropped by the script. Four
+  sibling tables share the problem.
+- **An unreproduced published figure**: the paper's only pilot-2 per-item number, "78.8% correct" for
+  the single-gene item, does not reproduce (Q2 is 82.1% under the convention that reproduces the
+  pilot-1 figures exactly). Not evidence against the mapping; possibly worth an author query.
+
+### Trial verdict
+
+Two rounds, 24 tables: **23 written, 1 blocked, 0 failed.** Both of the day's tooling fixes held —
+every agent used `--table-sets`, no agent called `irw_fetch()` for a gate (one used a 583-row fetch
+inside a verify script for per-item number-correct, which `irw_table_sets()` does not expose, and said
+so), and sidecar merging deleted by name. The `normalize_nulls.R` single-CSV instruction added after
+batch_017 was followed by every agent in batch_018.
