@@ -1,0 +1,102 @@
+[
+ {
+  "table": "ali_2021_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "atik_2026_psych_resilience",
+  "shard": "w4"
+ },
+ {
+  "table": "benitezsillero_2021_bullying",
+  "shard": "w4"
+ },
+ {
+  "table": "celik_2026_bfi",
+  "shard": "w5"
+ },
+ {
+  "table": "colomer_perez_2021_asa",
+  "shard": "w3"
+ },
+ {
+  "table": "eldor_2022_political_resilience",
+  "shard": "w4"
+ },
+ {
+  "table": "gabriel_2026_knowledge_correct",
+  "shard": "w4"
+ },
+ {
+  "table": "goldberg_2018_dop_ab5c_vignettes",
+  "shard": "w4"
+ },
+ {
+  "table": "hoorani_2022_nps",
+  "shard": "w3"
+ },
+ {
+  "table": "jiang_2024_ptsacc",
+  "shard": "w3"
+ },
+ {
+  "table": "kalczajanosi_2021_vaccine_skepticism",
+  "shard": "w4"
+ },
+ {
+  "table": "kolcu_2025_mmas",
+  "shard": "w3"
+ },
+ {
+  "table": "lorenz_2016_psycap",
+  "shard": "w3"
+ },
+ {
+  "table": "mede_2025_normperc",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_mspss",
+  "shard": "w4"
+ },
+ {
+  "table": "pang_2023_media_influence",
+  "shard": "w4"
+ },
+ {
+  "table": "peters_2025_att_instr_eval",
+  "shard": "w3"
+ },
+ {
+  "table": "rosetti2023_climate_knowledge",
+  "shard": "w2"
+ },
+ {
+  "table": "schafer_2016_music_goals",
+  "shard": "w4"
+ },
+ {
+  "table": "shu_2024_gad7",
+  "shard": "w4"
+ },
+ {
+  "table": "srivani_2022_education4",
+  "shard": "w4"
+ },
+ {
+  "table": "wang_2024_emotion2",
+  "shard": "w3"
+ },
+ {
+  "table": "wu_2024_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "yin_2022_gad7",
+  "shard": "w3"
+ },
+ {
+  "table": "zautra_2015_tmms24",
+  "shard": "w3"
+ }
+]

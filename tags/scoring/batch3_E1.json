@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_mimi16",
+  "shard": "w3"
+ },
+ {
+  "table": "arabaci_2025_task_diversity",
+  "shard": "w4"
+ },
+ {
+  "table": "baquerotomas_2026_phq9",
+  "shard": "w4"
+ },
+ {
+  "table": "campos_2023_oes",
+  "shard": "w4"
+ },
+ {
+  "table": "choi_2026_cmsce_2021_2",
+  "shard": "w4"
+ },
+ {
+  "table": "dpt_noncog__intolerance_of_uncertainty",
+  "shard": "w2"
+ },
+ {
+  "table": "forrest_2021_phys_stress_child",
+  "shard": "w4"
+ },
+ {
+  "table": "gerber_2022_self_esteem",
+  "shard": "w3"
+ },
+ {
+  "table": "goldberg_2018_spa_bfi_forced_choice",
+  "shard": "w4"
+ },
+ {
+  "table": "islam_2022_gdt",
+  "shard": "w4"
+ },
+ {
+  "table": "jordan_2020_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "kiraly_2024_perinatal_mh_symptoms",
+  "shard": "w4"
+ },
+ {
+  "table": "leon_guereno_2020_resilience",
+  "shard": "w3"
+ },
+ {
+  "table": "marcussonclavertz_2019_velten",
+  "shard": "w3"
+ },
+ {
+  "table": "nguyen_2026_barthel",
+  "shard": "w4"
+ },
+ {
+  "table": "okeke2025_cognitive_agility_pre",
+  "shard": "w2"
+ },
+ {
+  "table": "pedroso_2021_ifsq_responsiveness",
+  "shard": "w4"
+ },
+ {
+  "table": "ritzel_2020_farmer_burden",
+  "shard": "w4"
+ },
+ {
+  "table": "sandhu_2024_pmo_q18",
+  "shard": "w3"
+ },
+ {
+  "table": "selm_2019_climate_knowledge",
+  "shard": "w4"
+ },
+ {
+  "table": "skarzauskiene_2026_attitudes_science",
+  "shard": "w5"
+ },
+ {
+  "table": "twis_2024_adverse_experience_types",
+  "shard": "w3"
+ },
+ {
+  "table": "westhoff2023_stopd",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_consumption_intent",
+  "shard": "w4"
+ },
+ {
+  "table": "ysladomendez_2023_mbi",
+  "shard": "w4"
+ }
+]

@@ -1,0 +1,102 @@
+[
+ {
+  "table": "algner2022_psgbi",
+  "shard": "w3"
+ },
+ {
+  "table": "arora2025_blueq_pedagogical",
+  "shard": "w2"
+ },
+ {
+  "table": "bartoli_2022_badge_notifications",
+  "shard": "w3"
+ },
+ {
+  "table": "cao_2026_cdss_cognitive_load",
+  "shard": "w4"
+ },
+ {
+  "table": "chuemchit_2024_nonpartner_violence",
+  "shard": "w3"
+ },
+ {
+  "table": "duboz_2021_pss10",
+  "shard": "w3"
+ },
+ {
+  "table": "forrest_2021_positive_affect_child",
+  "shard": "w4"
+ },
+ {
+  "table": "gilbert_meta_70",
+  "shard": "w1"
+ },
+ {
+  "table": "hellstrom_2019_psqi",
+  "shard": "w3"
+ },
+ {
+  "table": "jaracz_2017_temperament",
+  "shard": "w3"
+ },
+ {
+  "table": "jutte_2024_loneliness",
+  "shard": "w3"
+ },
+ {
+  "table": "kokoszka_2022_hamd",
+  "shard": "w3"
+ },
+ {
+  "table": "li_2024_spa",
+  "shard": "w4"
+ },
+ {
+  "table": "matosaslopez_2022_bars_teaching",
+  "shard": "w4"
+ },
+ {
+  "table": "nguyen_2026_isi",
+  "shard": "w4"
+ },
+ {
+  "table": "okeke2025_decision_accuracy",
+  "shard": "w2"
+ },
+ {
+  "table": "penningroth_2019_pm_goals",
+  "shard": "w3"
+ },
+ {
+  "table": "rodriguezmuniz_2016_washback_survey",
+  "shard": "w3"
+ },
+ {
+  "table": "sandhu_2024_pmo_q22",
+  "shard": "w3"
+ },
+ {
+  "table": "shi2024_ysq_adolescent",
+  "shard": "w3"
+ },
+ {
+  "table": "skarzauskiene_2026_fake_news_frequency",
+  "shard": "w5"
+ },
+ {
+  "table": "valdivia_2023_oms",
+  "shard": "w4"
+ },
+ {
+  "table": "wu2021_panas",
+  "shard": "w2"
+ },
+ {
+  "table": "yang_2023_perceived_value",
+  "shard": "w4"
+ },
+ {
+  "table": "zaehl2023_twq_support",
+  "shard": "w2"
+ }
+]
