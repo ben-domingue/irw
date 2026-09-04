@@ -2919,3 +2919,93 @@ pending 1,112 → 1,110); the four shipped rows carry a withdrawal note in `prov
 the rule written into the standard; and the four issues-page entries rewritten to record the
 withdrawal rather than describe wording that no longer exists (datapages/irw#129). **Ben removes the
 tables from the `irw_text` draft** — that is the part that makes it true in the warehouse.
+
+## batch_024 — 2026-09-04
+
+**12 tables claimed · 12 written / 0 blocked / 0 failed · yield 100%.** Best round of the
+series so far, and the first with no block at all. 1,370 item-text rows.
+
+| table | rows | mapping_basis | audit | verification |
+|---|---|---|---|---|
+| corti_2023_academic_adaptation | 35 | data_labels | PASS | VERIFIED |
+| cox_2024_feedback_perceptions | 15 | data_labels | PASS | VERIFIED |
+| CPDMMC_Kunnari_2020_HCD | 84 | paper_explicit | PASS | VERIFIED |
+| CPDMMC_Kunnari_2020_PDP | 36 | paper_explicit | PASS | VERIFIED |
+| CQTMS_Hur_2023 | 800 | paper_order | WARN | PARTIAL |
+| cucchi_2018_kims | 90 | data_labels | PASS | NOT_NEEDED |
+| cucchi_2018_rfq | 56 | data_labels | PASS | NOT_NEEDED |
+| cucchi_2018_scoff | 10 | data_labels | PASS | VERIFIED |
+| cucchi_2018_tas20 | 100 | data_labels | PASS | PARTIAL |
+| cugmas_2021_elderly_social_support | 64 | data_labels | PASS | VERIFIED |
+| CV_OASIS_ODSIS_PPE_Novak_2020_BFI | 40 | reconstructed | PASS | PARTIAL |
+| CV_OASIS_ODSIS_PPE_Novak_2020_DSES | 40 | reconstructed | PASS | PARTIAL |
+
+**Gates.** normalize_nulls 0/12 needed changes. audit_batch 11 PASS / 1 WARN.
+verify_batch 10 PASS + 2 MISSING(exempt) — no FAIL, no missing VERDICT.
+lint_verification 12 rows, **0 ERROR**, 6 WARN. irw-validate: no ERROR.
+check_provenance clean (69 IRW-generated tables, 0 without an issues-page entry).
+
+**Why the yield was this high.** Nine of the twelve reached a level-1 source that ties code
+to text directly — six SPSS `.sav` deposits with self-prefixed variable labels, an OSF
+codebook keyed by column name, an `.xlsx` whose headers are the questions. The head of the
+queue happened to serve up depositing studies rather than the large closed-source datasets
+that produced the block clusters in batch_016 and batch_019. This is a fact about which
+tables came up, not a pipeline improvement — do not read it as a new baseline.
+
+**The one audit WARN is a source property, not a defect.** CQTMS_Hur_2023 ships blank
+`item_text` for 81 of its 160 items: Hur & Seo published wording only for the 79 items that
+survived screening, and the 81 dropped preliminary items appear in neither the article, its
+five supplements, nor the CC0 Dataverse deposit. Blank beats invented. Explained in notes.csv;
+it will recur on every re-run and is not actionable.
+
+**Orchestrator re-check (Step 5b).** The `CPDMMC_Kunnari_2020_HCD` agent recorded VERIFIED
+while its own evidence said the VT/V code pair "cannot be separated statistically" — the exact
+shape lint_verification flags. Re-checked rather than downgraded: the codes are content-coherent
+with the shipped dilemmas (VT = vaccine test, V = vitamin-deficiency kidney), and the ordering is
+predictable independently of the codebook, since VT kills one to save millions while V takes a
+kidney from a man who survives to save six. Observed means run VT 4.780 > V 3.493, as that
+predicts. Route 8 separates the pair the mean-identity check could not; VERIFIED stands and the
+evidence string now carries the re-check. The other five lint WARNs were adjudicated and left
+alone — each hedges about the `option_text` axis, transcription fidelity, or source identity,
+none of which bears on whether the route distinguishes every item from every other item.
+
+**TWO LICENCE DECISIONS FOR BEN — both shipped under the current rule, both withdrawable.**
+`itemtext_standard.md` says the WHOQOL no-redistribution ruling must not be extended to another
+instrument without asking, so both tables shipped by default and are flagged rather than blocked:
+
+1. **`cucchi_2018_tas20`.** The TAS-20 holders charge a US$40 copyright fee and have enforced it
+   (a 2021 *Molecular Autism* paper was retracted for using the scale without permission). But a
+   fee is not a non-commercial clause and not a redistribution bar, and IRW's copy came from a
+   CC BY 4.0 PeerJ deposit that published all 20 items itself — so the ECR-R source-licence rule
+   governs and `wording_rights` was left unset. If fee-licensed instruments should be treated like
+   WHOQOL, this withdraws `cucchi_2018_tas20`, the already-live `rmet_higgins_2022_tas`, and the
+   pending `ruiz_parra_2023_tas20`.
+2. **`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`.** Underwood requires registration, states the scale is
+   free for non-profit use, and the Fetzer compendium copy reads "Permission of author required to
+   distribute or copy" — a redistribution bar of the same shape as WHOQOL's. Shipped because the
+   wording was transcribed from Underwood's own CC BY 3.0 article, but every row carries
+   `wording_rights=NC`. This is the one table an `NC` query finds.
+
+**Other things worth knowing.**
+- Five `name_charset` WARNs from irw-validate (CPDMMC_*, CQTMS_*, CV_*) are properties of existing
+  capitalised corpus table names, not of these extractions. Upstream; nothing to fix here.
+- `CQTMS_Hur_2023`: Supplement 1's row for item I21 is byte-identical to I133's — a duplicated row
+  in the published supplement. It cost one item its distribution check; the other 78 pinned the
+  `itm<n>` = `I<n>` mapping regardless.
+- `cucchi_2018_tas20` and `cucchi_2018_kims` both use subscale-grouped SPSS numbering that is NOT
+  canonical instrument numbering. Recorded as public_notes so the codes are not misread.
+- `CV_OASIS_ODSIS_PPE_Novak_2020_BFI` and `_DSES` were both administered in Czech with no Czech
+  wording published anywhere in the deposit; both ship canonical English with `language=Czech` and
+  empty `_translated` columns — the documented backfill signal, and two more rows for that queue.
+- Three agents independently noted they declined to run the batch-wide `normalize_nulls.R` /
+  `audit_batch.R` because 11 siblings were live in the directory. One ran normalize_nulls anyway
+  and reported normalising a file that may have been a sibling's. Harmless here (idempotent, and
+  the orchestrator's own run found 0 of 12 needing changes), but the per-table subagent prompt
+  should say explicitly that batch-wide scripts belong to the orchestrator.
+- Merge-cleanup near-miss: the per-table sidecar list was deleted by name, as required. The last
+  entry had no trailing newline, so `while read` skipped it and one `verification_*.csv` survived;
+  removed by name afterwards. Whoever scripts this next should write the list newline-terminated.
+
+**CAP REACHED.** batch_024 is the cap raised in 4dcd2ee. The next firing will hit the
+"batch_024 already exists" stop condition in Step 0 and stand down. 1,098 tables remain
+pending; raise the cap to continue.
