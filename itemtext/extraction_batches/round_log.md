@@ -2154,3 +2154,46 @@ every agent used `--table-sets`, no agent called `irw_fetch()` for a gate (one u
 inside a verify script for per-item number-correct, which `irw_table_sets()` does not expose, and said
 so), and sidecar merging deleted by name. The `normalize_nulls.R` single-CSV instruction added after
 batch_017 was followed by every agent in batch_018.
+
+### batch_018 TRIAGE — 2026-09-03. 7 staged, 4 held.
+
+**Staged into `itemtables/clean/` (7 tables, 439 records):** `carver_2017_puggs_pilot1_det_core` (52),
+`_pilot1_genom_know` (72), `_pilot1_traits` (100), `_pilot2_attitudes` (80), `_pilot2_det_core` (18),
+`_pilot2_genom_know` (32), `_pilot2_traits` (85). All byte-identical to their batch copies, item counts
+matching each agent's report, zero duplicate `(item, resp)` pairs. Awaiting the human `red_up` step.
+
+**The orchestrator's Step 5b re-check.** The load-bearing claim across the pilot-1 tables is that the
+data follow the S4 Code Book numbering rather than the S3 questionnaire's. If that is wrong, every item
+in two tables is mis-worded and every set-based gate still passes. Both proofs were reproduced
+independently, from the shipped CSVs plus live server-side aggregates, not from the agents' scripts:
+
+- **`pilot1_genom_know`**: the five stems containing "epigenetic" are `Q19, Q21, Q23, Q24, Q27`, and the
+  five lowest-n items are Q19 (86), Q24 (104), Q23 (105), Q27 (110), Q21 (114) — ranks 1-5, with a clear
+  gap to rank 6 (Q22, 128). Exact match. Since "don't know" is dropped by the processing script, n is a
+  non-response measure and jargon items draw the most don't-knows.
+- **`pilot1_det_core`**: Q3 is "Eating habits and physical exercise can play an important role in
+  preventing and controlling diabetes", mean **3.8**, the highest of the 13 — where the Code Book places
+  the near-consensus marker. Q7 is "Traits and diseases caused by a single gene are not very common",
+  which is S3's item 2, matching the permutation the agent described. Q3's wording is also the
+  POST-revision "Eating habits" rather than S3's "Diet", independently corroborating that the Code Book
+  carries the administered form.
+
+**Held (4), none for a defect in the extraction:**
+
+- `cdm_timss07`, `cdm_timss03`, `cdm_timss11` — [#1891](https://github.com/ben-domingue/irw/issues/1891).
+  2007's IEA notice is ambiguous about whether non-commercial redistribution is permitted; 2003 and 2011
+  read as public domain on their own terms but are covered by the same issue's second question, which is
+  that all three record `License: GPL-3.0` (the CDM R package's licence, covering the RESPONSE data)
+  while their item text is IEA-licensed. That is a table with two rights regimes and the dictionary field
+  describes only one. All three also want a transcription spot-check, being image reads.
+- `carver_2017_puggs_pilot1_attitudes` — ships S3 questionnaire wording, which two agents established is
+  the PRE-revision English. Its mapping is sound and its gates are green; the hold is purely about
+  whether to ship wording one revision behind what respondents read. Needs a ruling, not a fix.
+
+**A measurement error worth recording.** The first staging pass reported `pilot1_det_core` at 104 rows
+against the agent's stated 52, which looked exactly like the doubling failure `red_up` guards against.
+It was not: `wc -l` counts PHYSICAL lines, and these CSVs carry embedded newlines inside quoted
+`item_text`/`instructions` fields, so it over-counted by the number of wrapped lines. Parsed as CSV the
+file has exactly 52 records, 13 items, resp 1-4, no duplicates. **Count records with a CSV parser, never
+`wc -l`** — the failure mode is a false doubling alarm, and on a different day it could as easily mask a
+real one.
