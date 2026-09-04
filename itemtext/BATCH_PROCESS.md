@@ -57,11 +57,18 @@ nonzero and says what to check.
   branch — which is also what makes the pre-round merge of `origin/main` start
   conflicting, and a failed merge stops the queue entirely. One round per triage
   session is the honest rate.
-- **A round costs real money.** Measured on batch_019 (2026-09-04, and a *short*
-  round — four of its agents were killed by 429s): 670K output tokens, 2.3M cache
-  writes, 49.4M cache reads across the orchestrator and 12 subagents. About **$56**
-  at Opus 5 list rates; a clean round is nearer $60–70, and draining the queue is
-  **$5.5–7k**. Nothing should be able to spend that on a timer.
+- **A round is a large token spend — quoted in tokens, not dollars.** This is
+  subscription usage; nothing in the transcripts records a charge, and the dollar
+  figures this bullet used to carry were tokens multiplied by list rates, not an
+  invoice. Measured across four complete rounds (2026-09-04, orchestrator + 12
+  subagents summed from the jsonl under `~/.claude/projects/`): **570–670K output,
+  2.0–2.5M cache write, 42–54M cache read** per round. The cache reads dominate,
+  and the **subagents are 85–94% of them** (and 35–40% of the output) — reading the
+  orchestrator transcript alone understates a round about tenfold. At ~98 rounds
+  the remaining queue is **~4–5 billion cache-read tokens**; an hourly cadence would
+  be ~1.2B a day. Nothing should be able to spend that on a timer. The resource a
+  fired round actually consumes is rate-limit headroom — which is what killed 8 of
+  12 agents in batch_018 and 4 of 12 in batch_019.
 - **Crontab is ruled out** as a standing preference across projects (2026-09-04).
   Its failure mode is not misfiring but failing *silently* on a laptop that has to
   be on and in the right state, with nothing reporting on it — the version-manifest

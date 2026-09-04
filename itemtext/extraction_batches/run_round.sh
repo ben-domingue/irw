@@ -13,12 +13,21 @@
 #     ready to triage a batch" just grows an unreviewed branch -- which is also
 #     what makes this script's pre-round merge of origin/main start conflicting,
 #     and a failed merge stops the queue entirely.
-#   - A round costs real money. Measured on batch_019 (2026-09-04, and a SHORT
-#     round -- four of its agents were killed by 429s): 670K output tokens, 2.3M
-#     cache writes and 49.4M cache reads across the orchestrator and 12
-#     subagents, about $56 at Opus 5 list rates. A clean round is nearer $60-70,
-#     and draining the queue is $5.5-7k. Nothing should be able to spend that on
-#     a timer.
+#   - A round is a large token spend. Quoted in TOKENS, not dollars: this is
+#     subscription usage, nothing in the transcripts records a charge, and a
+#     dollar figure here was only ever tokens multiplied by list rates. Measured
+#     across four complete rounds (2026-09-04, orchestrator + 12 subagents summed
+#     from the jsonl under ~/.claude/projects/-home-ben-irw-queue-runner/):
+#       output      570-670K
+#       cache write 2.0-2.5M
+#       cache read   42-54M     <- the dominant term
+#     The SUBAGENTS are 85-94% of the cache reads and 35-40% of the output, so
+#     reading the orchestrator transcript alone understates a round about
+#     tenfold. At ~98 rounds the remaining queue is ~4-5 BILLION cache-read and
+#     ~60M output tokens; an hourly cadence would be ~1.2B cache-read tokens a
+#     day. Nothing should be able to spend that on a timer. What a fired round
+#     actually consumes is rate-limit headroom -- which is what killed 8 of 12
+#     agents in batch_018 and 4 of 12 in batch_019.
 #   - GitHub Actions was considered and rejected (the version-manifest job moved
 #     there; this one should not). Three reasons: the work is fetching publisher
 #     and repository sources, and a datacenter IP gets bot-walled far more than
