@@ -4817,3 +4817,155 @@ every sidecar and all six `verify_*.R` stay.
 Issues page: the four language caveats applied and opened as **datapages/irw#139** (288 entries,
 YAML re-parsed, no duplicates). `frikha_2023_pe_ms` earned no entry — its only finding is the
 biblio acronym expansion, which is below the page's bar.
+
+## batch_035 — 2026-09-05
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 (100%).**
+Circuit breaker: 0% failed, not tripped.
+
+Tables: `gad_BrummerHoffman_2021` (140 rows), `gan_2015_cesd` (80),
+`gan_2015_ucla_loneliness` (32), `ganbat_2022_pollution_disease_risk` (10),
+`ganbat_2022_pollution_leave_type` (10), `ganbat_2022_pollution_symptoms` (16).
+
+Two sibling clusters this round (`gan_2015_*` ×2 off one PLoS ONE deposit,
+`ganbat_2022_pollution_*` ×3 off one PLOS ONE S4 workbook); each agent was told
+which siblings belonged to others, and no cross-writes occurred.
+
+Gates: normalize_nulls 3/6 rewritten; audit_batch **5 PASS / 1 WARN**;
+verify_batch **2 PASS, 4 MISSING(exempt)**; lint_verification clean on the first
+run (the NOT_NEEDED-in-both-files rule held — no repeat of the batch_020/021
+phantom ERRORs); `irw-validate` clean apart from one pre-existing `name_charset`
+WARN on `gad_BrummerHoffman_2021` (capitalised table name, inherited from the
+corpus, not introduced here); `check_provenance.R` no errors.
+
+Mapping bases: 4 `data_labels` (gad + the three ganbat), 2 `reconstructed`
+(both gan_2015 tables — the deposit's `.sav` carries **zero** variable and value
+labels across all 53 columns, so the SPSS file gave no level-1 route despite
+being an SPSS file). Both reconstructed tables verified PARTIAL, honestly: each
+pins the reverse-keyed set but neither separates the individual stems within a
+polarity class.
+
+**Step 5b orchestrator re-checks — three agent claims independently confirmed,
+none overturned:**
+- `gan_2015_cesd`'s dropped-response claim reproduces exactly: 23 cells coded
+  `4` on a 0–3 scale in the source `.sav` (CES2 ×1, CES4 ×3, CES8 ×5, CES11 ×1,
+  CES12 ×7, CES16 ×6), and live per-item n runs 64–71 with every deficit equal
+  to that item's count of dropped 4s. **Beyond the agent's claim:** 21 of the 23
+  fall on CES4/8/12/16, exactly the four reverse-worded items — suggesting those
+  four were administered or coded 1–4 rather than 0–3. A response-data property,
+  not an itemtext defect; candidate for its own issue.
+- `ganbat_2022_pollution_symptoms`' two source defects both hold. The 8 Q1
+  columns cover 18 constituent options; +1 for the absent "Chest pain" = the 19
+  the questionnaire prints. And the S4 codebook's `K4` row really is mislabelled
+  with the symptom stem — S1's item К4 is "In which season of the year do you
+  get the sickest?" (Winter/Spring/Autumn/Summer). Affects no shipped content.
+- `ganbat_2022_pollution_disease_risk`'s Q2.1–Q2.5 labels re-downloaded and
+  verbatim as shipped, source typo "Cerebravascular" preserved deliberately.
+
+**Dictionary problem found (not itemtext):** `ganbat_2022_pollution_disease_risk`'s
+dictionary Description says "diseases *believed to be caused* by air pollution",
+but the administered Q2 stem asks which diseases were **experienced** during
+high-pollution periods. The belief question is a separate, unshipped variable
+(codebook `K5`). Recorded in notes.csv — a Description correction. Not filed in
+pending_index_notes.csv, which is for blocked tables; nothing blocked this round.
+
+**Orchestrator corrections to sidecars:** filled `translation_source` on four
+rows the agents left blank — `official_instrument_english` for the two gan_2015
+tables (base fields carry the publisher's own English: Radloff's CES-D
+originals, Hays' ULS-8 form) and `study_supplied` for the two ganbat tables that
+demonstrably ship the study's own facing-page English in every `_translated`
+cell. Blank means "administered in English, nothing to translate", which was
+wrong for all four; leaving them would have added to the corpus's existing
+17-blank/44-absent `translation_source` gap.
+
+The single audit WARN (`leave_type`, blank item_text 20% / blank option_text
+100%) is explained in notes.csv and is **not** an itemtext defect: Q7.5 is a
+codebook-only "others" residual the questionnaire never prints, and Q7 is a
+check-all battery with no published labels for its 0/1 states.
+
+Cap: batch_040. Not reached — 994 pending remain; next round is batch_036.
+
+### batch_035 triaged — 2026-09-05
+
+Six tables, 100% yield. Gates re-run live: `normalize_nulls` 0 of 6 changed, `audit_batch`
+**5 PASS / 1 WARN**, `verify_batch` PASS=2 with 4 `data_labels` exemptions, `lint_verification`
+clean, `irw-validate` clean apart from an inherited `name_charset` WARN.
+
+**All six staged.** Nothing here needs a policy call, which is the difference from batch_034.
+
+**The WARN is a source property, correctly shipped.** `ganbat_2022_pollution_leave_type`:
+the 20% blank `item_text` is item Q7.5 alone, a codebook-only "others" residual that the S1
+questionnaire never prints in either language (91 of 1,329 respondents endorse it, so it is a
+real coded category) — shipping a blank beats inventing Mongolian wording. The 100% blank
+`option_text`, shared with the other two ganbat tables, is the check-all-that-apply coding:
+the form prints no labels for 0/1 selected/not-selected, and an unlabeled scale point is never
+padded with its own number. Both disclosed in `public_note`.
+
+**The `name_charset` WARN is inherited, not introduced.** `gad_BrummerHoffman_2021` is
+capitalised in the live corpus, so it drops out of case-sensitive joins — one of the 307
+([[irw-metadata-tags-case-join]]). Nothing this batch can fix.
+
+**Rights: every table checked against a source that was actually reachable, and two were
+re-fetched at triage.** This is the gap batch_034 had, and it is closed here.
+
+* `gad_BrummerHoffman_2021` (GAD-7) — re-fetched `phqscreeners.com/terms` live (HTTP 200) and
+  the quoted sentence is verbatim: *"Content found at the PHQ Screeners site is expressly
+  exempted from Pfizer's general copyright restrictions; content found on the PHQ Screeners
+  site is free for download and use."* Affirmative permission, not silence.
+* `gan_2015_ucla_loneliness` (ULS-8) — re-fetched the co-author's UCLA-hosted form
+  (`labs.dgsom.ucla.edu/hays/.../ULS-8.pdf`, HTTP 200, a real 1-page PDF), which carries no
+  rights notice at all. It also **independently confirms the two things the table asserts**:
+  all eight shipped item texts match the form verbatim, and the form's own scoring line names
+  items 3 and 6 as the reverse-scored pair — exactly the two the table ships with inverted
+  anchors, on the burkert_2019_whoqol_bref precedent.
+* `gan_2015_cesd` (CES-D) — Radloff 1977, no fee and no redistribution clause; reproduced in
+  full by multiple CC BY articles. IRW already ships CES-D wording (`promis1wave1_cesd` stayed
+  live through the PROMIS withdrawal precisely because it is the CES-D, not a PROMIS
+  instrument), so there is a standing precedent.
+* The three `ganbat_2022_*` are the study team's own survey in a CC BY 4.0 PLOS article.
+
+**`reconstructed` is the weakest basis in the batch and both PARTIAL grades are honest.**
+`verify_gan_2015_cesd.R` states its own limit in the file: the keying-polarity route pins the
+reverse-worded quadruple {CES4, CES8, CES12, CES16} **as a set** and does not distinguish CES4
+from CES8, nor order the sixteen negatively worded items among themselves. That is what PARTIAL
+should mean, and the .sav forces it — all 53 columns label to `None` and `variable_value_labels`
+is empty, so no source route to the wording exists.
+
+**One response-data finding, not filed.** 23 cells in the CES-D source are coded `4` on a 0-3
+scale and the processing script's `0<=resp<=3` filter drops them, giving per-item n of 64-71
+rather than 71. **21 of the 23 fall on CES4/8/12/16 — exactly the four reverse-worded items**,
+which points at those four having been administered or coded 1-4 while the rest were 0-3. That
+is a property of the response table, not of the item text, and a candidate for its own `data fix`
+issue alongside the fukuda Q39 one.
+
+**Dictionary mismatch, below the issues-page bar:** `ganbat_2022_pollution_disease_risk`'s
+Description says diseases *believed to be caused* by air pollution; the administered stem asks
+what was **experienced**. The belief question is a separate unshipped variable (codebook `K5`).
+A Description fix.
+
+Issues page: 6 drafts generated, **no REVIEW THESE TOO section** — every shipped table earned a
+draft, so nothing is caveated only in `notes.csv` this round. Not applied; entries follow the
+upload stamp.
+
+**`clean/` now holds 13 files, 7 of them already uploaded** (batch_034's five and the two
+`carver_2017_puggs_*`). Re-uploading them is safe — `red_up` replaces rather than appends, which
+this session confirmed when the two carvers went up a second time and counted 52 and 32 exactly —
+but the directory is Ben's to empty and this is why it keeps growing.
+
+### batch_035 uploaded and stamped — 2026-09-05
+
+Ben uploaded and row-count verified; re-verified here independently rather than on the report —
+`count(*)` per draft table against the local CSV-parsed count, **6 of 6 exact, no doubling**.
+`irw_text_2`'s draft now holds 14 tables. Stamped `uploaded=2026-09-05` on 6 rows in
+`batch_035/provenance.csv` and 6 in the root `mapping_verification.csv` (393 rows); each edit
+round-tripped byte-identically before writing, and an independent re-read confirmed 6 of 6 with
+nothing else reformatted. `fukuda_2021_health_literacy` remains unstamped and held.
+
+`clean/` is now **empty** — the six were removed after shipping, as Ben asked for the previous
+batch. Note this departs from BATCH_PROCESS's "clean/ is the user's to empty"; if that is not
+wanted as a standing habit it should be said, because it will otherwise keep happening.
+
+Issues page: the six entries are **datapages/irw#142**. #139 (the four batch_034 entries) was
+**already merged** by the time this ran, so the follow-up commit could not go on that branch —
+a fresh branch off the updated main was cut instead, and its diff is exactly +18 lines with no
+duplication of the merged four. Live page: 288 entries before, 294 after.
