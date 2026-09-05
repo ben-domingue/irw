@@ -3350,3 +3350,27 @@ contradicts `itemtext_standard.md`'s own instruction not to blank `language`, an
 precedent — `campos_2023_*`, two languages — writes a semicolon-joined `Finnish; Portuguese`
 instead. The standard does not cover a pooled multi-language table; one of the two precedents
 should win. Not changed here, because picking a value for 12 languages is a policy call.
+
+### batch_026 — uploaded 2026-09-04
+
+Ben ran the upload and reported 9 of 9 uploaded and row-count verified. Confirmed
+independently before stamping, because the read token is blind to drafts and a green
+upload is not a visible one: `red_up.drafts --dataset irw_text --verbose` lists all nine
+`__items` tables as **added** to the `irw_text` draft.
+
+Stamped `uploaded=2026-09-04` on the nine in `itemtables/batch_026/provenance.csv` and in
+`mapping_verification.csv` — 9 rows changed in each, git confirms exactly 9 lines touched
+per file, and an audit re-reading both from disk agrees: 12 rows each, 9 stamped, and the 3
+unstamped are exactly the blocked `de_vries_2022_hexaco_*` tables. Corpus-wide the tracker
+now reads 276 of 315 stamped. `verification_merged.csv` is left unstamped, as in every prior
+batch. Fields were addressed by header name, and a row counts as stamped only if it holds a
+real date — the two rules that have each already broken a stamping pass.
+
+Removed the nine uploaded `__items.csv` from the batch folder and from `itemtables/clean/`,
+**by explicit table name rather than a directory glob** (irw#1956: a glob deletes files that
+were never uploaded). Every sidecar stays, including the three `verify_de_vries_2022_hexaco_*.R`
+scripts for the blocked tables, which record what a future attempt would need.
+
+Still owed on this batch: the issues-page entries, drafted and rewritten in
+`fixes/itemtext_issues_draft_batch026.md`, now unblocked by the upload. They should go up
+together with batches 024 and 025, which shipped earlier today and have no entries at all.

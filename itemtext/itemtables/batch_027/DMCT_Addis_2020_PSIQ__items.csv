@@ -1,0 +1,386 @@
+table,section_id,item,instrument,language,instructions,section_prompt,item_text,correct_response,option_text,resp
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ1,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a friend you know well,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ2,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a cat climbing a tree,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsiQ3,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a sunset,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ4,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,the front door of your house,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_vision,PsyQ5,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the appearance of …,a bonfire,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ6,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,an ambulance siren,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ7,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,hands clapping in applause,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ8,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the mewing of a cat,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ9,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of a car horn,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_sound,PsyQ10,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the sound of …,the sound of children playing,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ11,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a stuffy room,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ12,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,a rose,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ13,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,fresh paint,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ14,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,newly cut grass,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_smell,PsyQ15,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the smell of …,burning wood,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ16,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,mustard,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ17,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,toothpaste,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ18,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,lemon,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ19,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,sea water,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_taste,PsyQ20,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the taste of …,black pepper,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ21,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,warm sand,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ22,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,a soft towel,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ23,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,the point of a pin,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ24,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,icy water,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_touch,PsyQ25,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine touching …,fur,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ26,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,relaxing in a warm bath,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ27,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,having a sore throat,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ28,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,threading a needle,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ29,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,jumping into a swimming pool,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_bodily,PsyQ30,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine the bodily sensation of …,walking briskly in the cold,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ31,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,excited,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ32,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,relieved,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ33,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,furious,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ34,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,in love,,"clear and alive, like in real life",10
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,no mental image,0
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,1
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,2
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,3
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,4
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,5
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,6
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,7
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,8
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,,9
+DMCT_Addis_2020_PSIQ,DMCT_Addis_2020_PSIQ_feeling,PsyQ35,Plymouth Sensory Imagery Questionnaire (Psi-Q),German,,Imagine feeling …,scared,,"clear and alive, like in real life",10
