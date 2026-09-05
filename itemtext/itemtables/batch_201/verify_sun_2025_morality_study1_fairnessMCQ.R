@@ -1,14 +1,22 @@
 ## verify_sun_2025_morality_study1_fairnessMCQ.R  --  batch_201, issue #1945
 ##
-## Route 6, keying polarity. Wording comes from the deposit's own label file keyed
-## mv.<INSTRUMENT>.<FACET><n>, while the response columns are it.<INSTRUMENT>.<FACET><n>
-## -- same instrument, facet and number, differing only in the rater-frame prefix.
-## That substitution is the one inference in this table, and the reverse-worded item
-## tests it: if the wording landed on the wrong items, the sign pattern breaks.
+## CORROBORATION ONLY. The mapping_verification row for this table reads
+## NOT_NEEDED, because the study's own Codebook.xlsx sheet "Study 1" states the
+## pairing outright: one row per it.* variable carrying its item text, subscale
+## and response scale, and the live code is that variable name with dots stripped
+## and lowercased. There is no inference left to verify.
 ##
-## Pins the polarity CLASS of all four items and identifies the reverse-worded
-## singleton outright. It does NOT separate the three same-signed items from each
-## other, which is why the mapping_verification row reads PARTIAL.
+## This script is kept because the check below is still a useful sanity read on
+## the SHIPPED WORDING rather than on the mapping: the reverse-worded item(s)
+## must show the opposite sign from the rest, and they do. If a future edit ever
+## put the wording on the wrong codes, this would catch it.
+##
+## Superseded framing, recorded so the change is legible: an earlier version of
+## this table drew wording from the deposit's normdat-labels.csv (`mv.` prefix)
+## and treated mv.X.Fn -> it.X.Fn as "the one inference in this table", which
+## this script then tested. That substitution was wrong -- `mv.` is the
+## trait-norming study's stem-less label set, not Study 1's administered wording
+## -- and it is no longer being made.
 ##
 ## Run from itemtext/:  Rscript itemtables/batch_201/verify_sun_2025_morality_study1_fairnessMCQ.R
 suppressMessages({options(irw.itemtext_disclaimer = FALSE); library(irw)})
