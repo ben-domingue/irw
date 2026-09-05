@@ -256,12 +256,53 @@ model knowledge of the instrument — the bar is on publishing the items, not on
 they were obtained.
 
 This is *narrower* than "the instrument is copyrighted". A commercial scale reproduced
-in full in an open-access paper's appendix is still extractable from that appendix; the
-item-text disclaimer covers a user's downstream reuse. What it does not cover is IRW
-republishing an instrument whose publisher has affirmatively refused it.
+in full in an open-access paper's appendix is generally still extractable from that
+appendix; the item-text disclaimer covers a user's downstream reuse. What it does not
+cover is IRW republishing an instrument whose publisher has affirmatively refused it —
+or, per the two rulings in the next section, one whose rights holder charges an enforced
+fee or states a no-redistribution clause. Those two override the appendix, and the
+TAS-20 is exactly that case: its wording was printed in full by a CC BY 4.0 PeerJ
+article, and IRW withdrew it anyway.
 
 Currently excluded under this rule: `himmelstein-shipley_vocabulary-2025`,
 `himmelstein-shipley_abstraction-2025`.
+
+## Rights on the wording: two triggers, and both are quote tests
+
+Settled by Ben on 2026-09-04. These are about the *instrument's* rights holder, and they
+apply on top of, not instead of, the standing exclusion above.
+
+**Start from the distinction that makes the check worth doing: the deposit licence is not
+the instrument licence.** A CC BY 4.0 or CC0 deposit governs the *response data*. It says
+nothing about who owns the *item wording*, which for a published scale belongs to its
+authors or publisher. This is common, not exotic — of the 60 tables claimed in irw#1945,
+nine were named instruments sitting under permissive deposits (DERS, SWLS, HEXACO-PI-R,
+Need for Cognition, RWA, a social-desirability scale, the SCBCS, FAD+, EstCRM
+self-efficacy).
+
+**Block ONLY on something you can quote from the rights holder:**
+
+1. **An enforced licence fee.** Ruled on the TAS-20 ($40/study, enforced — a 2021
+   *Molecular Autism* retraction). Generalises to any fee-licensed instrument. Withdrew
+   `cucchi_2018_tas20` and `rmet_higgins_2022_tas`; blocked `ruiz_parra_2023_tas20`.
+2. **An explicit no-redistribution clause.** Ruled on the DSES
+   (`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`, "Permission of author required to distribute or
+   copy"). This settles the question the WHOQOL ruling left open: yes, a quotable clause
+   overrides the source deposit's licence, for any instrument.
+
+**Silence is permission.** An instrument being merely copyrighted, commercially sold, well
+known, or reproduced somewhere without an explicit grant is **not** a block. If you cannot
+find and quote a restriction, extract it normally. Do not block on suspicion, and do not
+open a negotiation with a rights holder — see the Shipley rule above.
+
+These two end in `blocked`, not `excluded`, because a licence can change and a fee can be
+paid; the Shipley exclusion is permanent. Put the quoted sentence and its URL in
+`notes.csv` and in `provenance.csv`. **A rights block with no quote in it is not a rights
+block.** Do not rely on the `wording_rights` column to record this — it takes only `NC`,
+cannot express either trigger, and is currently set on zero tables (irw#1955).
+
+Everything shipped before 2026-09-04 predates both rulings and has never been checked
+against them; that re-audit is irw#1954, still owed.
 
 ## Before doing anything
 
