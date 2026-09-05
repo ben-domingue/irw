@@ -5061,3 +5061,63 @@ holds (`extraction_batches/circuit_breaker.flag` written this round, Redivis que
 Nothing scheduled to cancel — rounds are human-started via `run_round.sh`, which checks the same
 condition in bash and will decline to start the next one until a human clears the flag. Cap
 (batch_040) not reached; the breaker, not the cap, is what stops here.*
+
+### batch_036 — partial triage, blocked on the Redivis query outage — 2026-09-05
+
+The round died late and salvageably: five complete `__items.csv` with full sidecars, one
+determinate block, and **no `in_progress` rows left behind**. The circuit breaker is set and
+should stay set — I re-probed at triage and **the outage is ongoing**: a bare `SELECT 1` did not
+return in 180s, while the metadata path answered in 0.4s and the API root in 0.29s. Same
+signature the round recorded, now past three hours.
+
+**What could be run without the query API, all clean:** `normalize_nulls` 0 of 5 changed,
+`irw-validate` ok on all five, `lint_verification` 0 ERROR / 2 WARN. **`audit_batch` and
+`verify_batch` cannot run at all** — both go through the dead route — so **nothing is staged
+and nothing can be**, and the five `failed` rows stay `failed` until the gates say otherwise.
+They need re-gating, not re-extraction.
+
+**Both lint WARNs are false alarms and should not be downgraded.** They fire on the phrase
+"WHAT THIS DOES NOT ESTABLISH" in evidence that is in fact stronger than most PARTIALs:
+`_pes_nwi` matches all 120 count cells (30 items x 4 levels) with all 30 signatures distinct,
+which is a uniqueness proof — no pair could be swapped; `_pes_nwi_short` pins 23 of 31 items
+uniquely against published Figure 1 percentages to <=0.06pp and separates the remaining 8 tied
+pairs by the .sav's own `item N` labels. Punishing an honest limitations paragraph is the wrong
+incentive; VERIFIED stands.
+
+**Sibling cross-check — run because the pair share a source, and it found three things.**
+Comparing the two tables' shipped item sets directly, with the `X` prefix stripped:
+
+1. **`education` is missing from the long table and present in the short one** — an independent
+   confirmation of the round's `LIKERT_ITEMS` defect claim, from the shipped files alone, without
+   touching the `.sav` or the corpus. 30 vs 31 items.
+2. **Two items carry different codes across the pair for identical text**: `mistakeopport` vs
+   `mistakesopportun`, and `plancuidadosescrito` vs `writtenplans` (one Spanish-mnemonic, one
+   English). Not wrong, but a joint on these two tables by item code silently loses them.
+3. **Five shared items differ by a NO-BREAK SPACE (U+00A0) in the short table where the long has
+   a normal space** — `asignationpatients`, `intmanagement`, `levelpowerheadnurse`,
+   `oportcomisions`, `oportdecisions`. Byte-different, visually identical, and a PDF
+   copy-paste artifact. `normalize_nulls.R` does not touch whitespace. Worth normalising before
+   these ship, but it edits item text, so it is flagged rather than done.
+
+**Rights: one verdict corrected, one escalated.**
+
+* **`garciabatista_2021_erq` — right answer, wrong reasoning, now on firm ground.** The round
+  concluded "silence is permission" after `spl.stanford.edu/measures` and two other URLs returned
+  404 — the same mistake batch_034 made, reading unreachable pages as silence. The 404 page's own
+  navigation links to the real one: **`spl.stanford.edu/resources`** (HTTP 200), which states
+  outright *"The measures provided here may be used for academic research purposes with
+  appropriate citation"* and hosts the ERQ in ~37 languages. That is **affirmative permission,
+  not silence** — a stronger basis than the round claimed, with a scope limit (academic research)
+  and a condition (citation) rather than a bar.
+* **`geacaballero_2019_pes_nwi` and `_short` — held, and this is Ben's call.** The PES-NWI is
+  copyrighted by Eileen Lake, and the deposit's own supplement says *"(Permission was obtained to
+  use the questionnaire)"* — which is the depositor's permission, not IRW's, the exact distinction
+  [[irw-itemtext-instrument-rights]] exists for. I could not find the rights holder's terms at all:
+  Penn's CHOPR PES-NWI page 404s and the centre homepage carries no licensing statement, so this is
+  again absence-of-evidence rather than a quotable absence of restriction. Same shape as the
+  HLS-EU-Q47 question still open on batch_034, and it should get the same answer, whatever that is.
+
+Also standing from the round, unverified by me because both need the query route:
+`GBJW_fadplus_goto2021` is not the FAD-Plus (dictionary Description defect), and
+`geacaballero_2019_pes_nwi_short` is not a short PES-NWI — its `resp` records whether a nurse
+flagged each item as *essential*.
