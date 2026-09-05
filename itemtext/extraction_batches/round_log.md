@@ -4951,3 +4951,21 @@ upload stamp.
 `carver_2017_puggs_*`). Re-uploading them is safe — `red_up` replaces rather than appends, which
 this session confirmed when the two carvers went up a second time and counted 52 and 32 exactly —
 but the directory is Ben's to empty and this is why it keeps growing.
+
+### batch_035 uploaded and stamped — 2026-09-05
+
+Ben uploaded and row-count verified; re-verified here independently rather than on the report —
+`count(*)` per draft table against the local CSV-parsed count, **6 of 6 exact, no doubling**.
+`irw_text_2`'s draft now holds 14 tables. Stamped `uploaded=2026-09-05` on 6 rows in
+`batch_035/provenance.csv` and 6 in the root `mapping_verification.csv` (393 rows); each edit
+round-tripped byte-identically before writing, and an independent re-read confirmed 6 of 6 with
+nothing else reformatted. `fukuda_2021_health_literacy` remains unstamped and held.
+
+`clean/` is now **empty** — the six were removed after shipping, as Ben asked for the previous
+batch. Note this departs from BATCH_PROCESS's "clean/ is the user's to empty"; if that is not
+wanted as a standing habit it should be said, because it will otherwise keep happening.
+
+Issues page: the six entries are **datapages/irw#142**. #139 (the four batch_034 entries) was
+**already merged** by the time this ran, so the follow-up commit could not go on that branch —
+a fresh branch off the updated main was cut instead, and its diff is exactly +18 lines with no
+duplication of the merged four. Live page: 288 entries before, 294 after.
