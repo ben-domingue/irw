@@ -4480,3 +4480,47 @@ tracker row (382 rows, no duplicates).
 
 Queue after this round: **1,006 pending / 276 done / 53 blocked / 12 failed / 54 excluded.**
 Circuit breaker not tripped (0% failed). Cap is `batch_034`; not reached, so the next round proceeds.
+
+### batch_033 triage — 6 of 6 staged, 0 held — 2026-09-05
+
+First round at **6 agents** rather than 12, and the first under the picture-stimulus ruling.
+Both changes did what they were meant to: no memory pressure, and the three reopened Enkavi
+tables shipped with `item_text` blank by design.
+
+**Gates re-run live.** `audit_batch` 3 PASS / 3 WARN; `verify_batch` **PASS=6**;
+`lint_verification` **no problems found** — the first batch since 024 with a clean lint, which
+is the narrowed hedge check (irw#1966) doing its job rather than a change in the evidence.
+
+**All three audit WARNs are consequences of the ruling, not defects.** Each is "100% of rows
+have blank `item_text`", which is now the *expected* result for a picture-stimulus table, plus
+two row-count anomalies that are task design: `gonogo` runs go and no-go deliberately
+unbalanced (107,415 / 104,580 / 11,620 / 11,935, summing to the live 235,550), and
+`stopsignal`'s high/low frequency conditions run different stop:go ratios by construction
+(403,800 live, matching the rebuild).
+
+**Worth flagging for later:** `audit_batch.R` will now emit "100% of rows have blank item_text"
+for every picture-stimulus table IRW ever ships. That is the same shape as the lint hedge WARN
+— a check that fires correctly on a case policy has since blessed, and so stops being read.
+Not changed here; it is a gate change nobody asked for, and it should be a deliberate decision
+rather than a side effect of this ruling.
+
+**The ruling's own prediction held.** The standard said `stopsignal` would have no shippable
+`correct_response` because its shape-to-key mapping shuffles per session, and that `simon`
+would. Both came out that way without the round being told.
+
+**A correction to something I told Ben earlier today.** I said irw#1969 — `itemcov_delay`
+populated from the stop-signal frequency column — appeared to have been closed. It is **open**,
+and `data/enkavi_2019_conflict_tasks.py:148` still reads
+`{"itemcov_delay": "condition", ...}`. This round re-found the same defect from a different
+direction, on `enkavi_2019_stopsignal` rather than the conflict tasks, and traced it to
+`experiment.js:670-690`, where `ss_freq = randomDraw(['high','low'])` is assigned to
+`trial_data.condition`. Corroboration for #1969, not a new issue.
+
+**A second biblio misattribution, the same shape as irw#1972.**
+`frikha_2023_pe_acrs`'s Description names an e-learning acceptance scale; the items are a PE
+basic-needs scale, corroborated independently of the wording by the source workbook's stored
+subscale sums reproducing 308/308, 306/308 and 308/308. Its sibling `frikha_2023_pe_ms` is
+suspect on the same grounds and was **not** checked — it was not in this round.
+
+**Staged: all 6.** `clean/` holds `enkavi_2019_gonogo`, `_simon`, `_stopsignal`,
+`fatima_2025_mslq`, `fredrickson_2015_mhcsf`, `frikha_2023_pe_acrs`.
