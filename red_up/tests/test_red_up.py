@@ -14,6 +14,7 @@ from unittest import mock
 import unittest
 from pathlib import Path
 
+from red_up import cli
 from red_up import plan as planning
 from red_up.checks import check_all, check_schema, scan, validate_for_target
 from red_up.discover import discover, table_name
@@ -25,6 +26,8 @@ from red_up.targets import (
     guess_target,
     load_registry,
     newest_shard,
+    newest_text_shard,
+    text_shards,
 )
 
 RESPONSE = "id,item,resp\n1,a,1\n2,a,0\n"
@@ -47,10 +50,29 @@ class Registry(unittest.TestCase):
         self.assertEqual(
             names[:6],
             [f"item_response_warehouse{s}" for s in ("", "_2", "_3", "_4", "_5", "_6")])
+        # Item text comes first among the non-core targets and is a shard list;
+        # the other four are the plain aux datasets.
+        self.assertEqual([t.name for t in text_shards(targets)], ["irw_text"])
         self.assertEqual(
             sorted(names[6:]),
             ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn", "irw_text"])
         self.assertEqual(newest_shard(targets).name, "item_response_warehouse_6")
+        self.assertEqual(newest_text_shard(targets).name, "irw_text")
+
+    def test_item_text_declared_twice_is_refused(self):
+        # The three "single source of truth" files drifted once (#1733).
+        # Declaring item text in both places here is the same failure in one
+        # file, so it must raise rather than silently pick one.
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "redivis_config.R"
+            path.write_text(
+                'IRW_OWNER <- "datapages"\n'
+                'IRW_CORE_DATASETS <- c("a")\n'
+                'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                'IRW_AUX_DATASETS <- c(text = "irw_text")\n')
+            with self.assertRaises(ConfigError) as caught:
+                load_registry(path)
+            self.assertIn("twice", str(caught.exception))
 
     def test_pairs_is_competitions(self):
         # There is no irw_pairs dataset and never has been; "pairs" is the
@@ -73,9 +95,121 @@ class Registry(unittest.TestCase):
             path.write_text(
                 'IRW_OWNER <- "datapages"\n'
                 'IRW_CORE_DATASETS <- c(\n  "a",\n  # "retired_shard",\n  "b"\n)\n'
-                'IRW_AUX_DATASETS <- c(text = "irw_text")\n')
+                'IRW_TEXT_DATASETS <- c("irw_text")\n'
+                'IRW_AUX_DATASETS <- c(meta = "irw_meta")\n')
             _, targets = load_registry(path)
-            self.assertEqual([t.name for t in targets], ["a", "b", "irw_text"])
+            self.assertEqual([t.name for t in targets],
+                             ["a", "b", "irw_text", "irw_meta"])
+
+
+class TwoTextShards(unittest.TestCase):
+    """The path that matters once `irw_text` hits Redivis' 1000-table cap.
+
+    None of this is reachable through the live config yet -- IRW_TEXT_DATASETS
+    has one entry. These tests exist so the second shard is a config edit on the
+    day it is needed rather than a code change made under pressure.
+    """
+
+    CONFIG = (
+        'IRW_OWNER <- "datapages"\n'
+        'IRW_CORE_DATASETS <- c("w1", "w2")\n'
+        'IRW_TEXT_DATASETS <- c("irw_text", "irw_text_2")\n'
+        'IRW_AUX_DATASETS <- c(meta = "irw_meta")\n'
+    )
+
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+        path = Path(self.tmp.name) / "redivis_config.R"
+        path.write_text(self.CONFIG)
+        _, self.targets = load_registry(path)
+
+    def test_both_shards_are_registered_oldest_first(self):
+        self.assertEqual([t.name for t in text_shards(self.targets)],
+                         ["irw_text", "irw_text_2"])
+
+    def test_new_item_text_defaults_to_the_newest_shard(self):
+        # Writing to the older shard would be invisible: clients resolve
+        # newest-first, so a copy in irw_text_2 would shadow it.
+        self.assertEqual(newest_text_shard(self.targets).name, "irw_text_2")
+        self.assertEqual(
+            guess_target([Path("x__items.csv")], self.targets).name, "irw_text_2")
+
+    def test_response_data_is_unaffected_by_text_shards(self):
+        self.assertEqual(newest_shard(self.targets).name, "w2")
+        self.assertEqual(guess_target([Path("a.csv")], self.targets).name, "w2")
+
+    def test_every_shard_accepts_item_text_and_only_item_text(self):
+        for shard in text_shards(self.targets):
+            self.assertIsNone(eligible(Path("x__items.csv"), shard))
+            self.assertIsNotNone(eligible(Path("plain.csv"), shard))
+
+    def test_a_table_already_in_the_older_shard_is_flagged_elsewhere(self):
+        # The whole point: re-uploading into irw_text_2 would not replace the
+        # copy in irw_text, it would shadow it. `found_in[-1]` is what
+        # resolve_elsewhere() offers as the default "update it where it lives".
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "x__items.csv", ITEMS)
+            reports = check_all([(path, table_name(path))])
+        target = newest_text_shard(self.targets)
+        index = {"x__items": ["irw_text"]}
+        items = planning.build(reports, target, index)
+        self.assertEqual(items[0].status, planning.ELSEWHERE)
+        self.assertEqual(items[0].found_in[-1], "irw_text")
+
+    def test_a_table_already_in_the_newest_shard_is_an_update(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = write(Path(tmp), "x__items.csv", ITEMS)
+            reports = check_all([(path, table_name(path))])
+        items = planning.build(reports, newest_text_shard(self.targets),
+                               {"x__items": ["irw_text", "irw_text_2"]})
+        self.assertEqual(items[0].status, planning.UPDATE)
+        self.assertEqual(items[0].dataset, "irw_text_2")
+
+
+class ElsewhereRouting(unittest.TestCase):
+    """A cross-family name match must never become a cross-family upload.
+
+    `found_in` spans core and item-text shards, so the newest dataset holding a
+    name is not always one that may receive the file. Defaulting to it would
+    write item text into a warehouse shard -- silently, under --yes.
+    """
+
+    def setUp(self):
+        _, self.targets = load_registry()
+        self.tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.tmp.cleanup)
+
+    def _item(self, name, body, found_in):
+        path = write(Path(self.tmp.name), name, body)
+        reports = check_all([(path, table_name(path))])
+        item = planning.Item(report=reports[0], status=planning.ELSEWHERE,
+                             dataset=None, found_in=found_in)
+        return item
+
+    def test_item_text_is_not_routed_into_a_warehouse_shard(self):
+        # The warehouse shard is the *newer* match, so the old "newest wins"
+        # rule would have picked it and written item text into a warehouse.
+        item = self._item("x__items.csv", ITEMS,
+                          ["irw_text", "item_response_warehouse_3"])
+        target = next(t for t in self.targets if t.is_itemtext)
+        cli.resolve_elsewhere([item], target, self.targets, assume=True)
+        self.assertEqual(item.dataset, "irw_text")
+
+    def test_no_eligible_home_skips_instead_of_guessing(self):
+        # The name exists only in a warehouse shard, which cannot hold __items.
+        item = self._item("y__items.csv", ITEMS, ["item_response_warehouse_3"])
+        target = next(t for t in self.targets if t.is_itemtext)
+        cli.resolve_elsewhere([item], target, self.targets, assume=True)
+        self.assertEqual(item.status, planning.SKIP)
+        self.assertIsNone(item.dataset)
+        self.assertIn("resolve by hand", item.note)
+
+    def test_response_data_is_not_routed_into_a_text_shard(self):
+        item = self._item("z.csv", RESPONSE, ["irw_text"])
+        target = newest_shard(self.targets)
+        cli.resolve_elsewhere([item], target, self.targets, assume=True)
+        self.assertEqual(item.status, planning.SKIP)
 
 
 class Discovery(unittest.TestCase):
@@ -229,7 +363,7 @@ class Planning(unittest.TestCase):
             reports = self._reports(tmp, ["older"])
             index = {"older": ["item_response_warehouse", "item_response_warehouse_3"]}
             items = planning.build(reports, self.shard, index)
-            resolve_elsewhere(items, self.shard, assume=True)
+            resolve_elsewhere(items, self.shard, self.targets, assume=True)
             self.assertEqual(items[0].dataset, "item_response_warehouse_3")
 
     def test_a_published_over_length_name_is_grandfathered(self):

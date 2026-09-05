@@ -25,7 +25,8 @@ from .auth import authenticate
 from .checks import check_all, check_schema, validate_for_target
 from .discover import Discovery, discover, table_name
 from .push import open_draft, push_one
-from .targets import ConfigError, Target, guess_target, load_registry
+from .targets import (ConfigError, Target, eligible, guess_target,
+                      load_registry)
 
 #: irw_meta holds a fixed set of pipeline outputs, not arbitrary tables. The
 #: map lives in the irw-site-update skill's upload_meta.py; uploading anything
@@ -77,8 +78,28 @@ def choose_target(targets: list[Target], default: Target, assume: bool) -> Targe
         print("  not a valid choice")
 
 
+def _home_for(item: planning.Item, targets: list[Target]) -> str | None:
+    """The newest dataset already holding this table that may actually take it.
+
+    `found_in` spans both shard families, so the newest match is not always a
+    legal destination: an `__items` table that has strayed into a warehouse
+    shard would otherwise be "updated" right back into the warehouse, and a
+    response table found in a text shard likewise. `eligible()` is the same gate
+    the chosen target is held to, so ask it about the home as well.
+
+    Returns None when nothing that already holds the name may receive it, which
+    is a situation to stop on rather than guess at.
+    """
+    by_name = {t.name: t for t in targets}
+    for name in reversed(item.found_in):
+        known = by_name.get(name)
+        if known is not None and eligible(item.path, known) is None:
+            return name
+    return None
+
+
 def resolve_elsewhere(items: list[planning.Item], target: Target,
-                      assume: bool) -> None:
+                      targets: list[Target], assume: bool) -> None:
     """Ask, per file, what to do about a table that already exists elsewhere.
 
     The default is 'update it where it already lives'. Uploading into the
@@ -89,7 +110,14 @@ def resolve_elsewhere(items: list[planning.Item], target: Target,
         if item.status != planning.ELSEWHERE:
             continue
         where = ", ".join(item.found_in)
-        home = item.found_in[-1]     # newest dataset already holding it
+        home = _home_for(item, targets)
+        if home is None:
+            # Every dataset holding this name would reject the file. Never
+            # silently pick one; say so and skip.
+            item.dataset, item.status = None, planning.SKIP
+            item.note = (f"name already used in {where}, none of which may hold "
+                         f"this file -- resolve by hand")
+            continue
         if assume or not sys.stdin.isatty():
             item.dataset = home
             continue
@@ -218,9 +246,16 @@ def main(argv: list[str] | None = None) -> int:
 
     authenticate()
 
-    # Scan every core shard plus the target, so a table that already lives
-    # somewhere else is caught before it is duplicated rather than after.
-    scan = [t.name for t in targets if t.kind == "core"]
+    # Scan every shard -- core and item text -- plus the target, so a table that
+    # already lives somewhere else is caught before it is duplicated rather than
+    # after. Both families shadow newest-first, so both must be looked at.
+    #
+    # Deliberately both families rather than only the target's: `itemtables/clean/`
+    # exists because __items tables have strayed into warehouse shards before,
+    # and a run that does not look cannot report it. The cost is one extra
+    # parallel list_tables call on a response-data run. What must NOT follow from
+    # a cross-family match is a cross-family *upload* -- see `_home_for`.
+    scan = [t.name for t in targets if t.kind == "core" or t.is_itemtext]
     if target.name not in scan:
         scan.append(target.name)
     print(f"checking {len(scan)} datasets for existing tables ...")
@@ -234,7 +269,7 @@ def main(argv: list[str] | None = None) -> int:
             if item.table not in META_TABLES:
                 item.status, item.dataset = planning.EXCLUDED, None
                 item.note = f"not one of {target.name}'s {len(META_TABLES)} tables"
-    resolve_elsewhere(items, target, args.yes)
+    resolve_elsewhere(items, target, targets, args.yes)
     show(items, target, owner, found.skipped)
 
     if args.strict and any(i.report.warnings for i in items if i.dataset):
