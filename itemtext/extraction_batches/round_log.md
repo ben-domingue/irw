@@ -3374,3 +3374,114 @@ scripts for the blocked tables, which record what a future attempt would need.
 Still owed on this batch: the issues-page entries, drafted and rewritten in
 `fixes/itemtext_issues_draft_batch026.md`, now unblocked by the upload. They should go up
 together with batches 024 and 025, which shipped earlier today and have no entries at all.
+
+---
+
+## batch_027 — 2026-09-04 (CAP REACHED)
+
+**12 tables claimed. Yield 10 written / 2 blocked / 0 failed (83%).** Circuit breaker not
+tripped: it counts `failed`, and there were none. Both blocks are determinate rights verdicts
+with retry test NO. No rate limit or spend cap was hit, so these counts mean what they say.
+
+Tables: `di_riso_2025_mask_emotion`, `DMCT_Addis_2020_PSIQ`, `dominguez_2018_jcs`,
+`donati_2021_cfq7`, `dong_2025_teacher_leadership`, `dopmeijer_2022_loneliness`,
+`dou2025_area`, `doustmohammadian_2017_fnlit`, `dpt_noncog__emotional_intelligence`,
+`dpt_noncog__interpersonal_reactivity` (written); `dominguez_2018_uwes`, `dpt_noncog__grit`
+(blocked).
+
+**Gates.** `normalize_nulls.R` fixed 2 of 10 files. `audit_batch.R` 8 PASS / 2 WARN, both WARNs
+explained in `notes.csv` per Step 5c. `verify_batch.R` 7 PASS + 3 MISSING(exempt) — no FAIL and
+no missing VERDICT. `lint_verification.R` **0 ERROR**, 3 WARN. `irw-validate` clean on 9 of 10;
+the tenth is a `name_charset` WARN on `DMCT_Addis_2020_PSIQ`, a property of the existing IRW
+table name, not of this extraction. `check_provenance.R` clean on vocabulary.
+
+The three lint WARNs ("VERIFIED but its evidence hedges") were reviewed and left as VERIFIED:
+in each the hedge is about what the route does *not* cover — the option anchors, or the words of
+a translation — not about item separation, and each route does distinguish every item from every
+other item by cell-for-cell response-frequency identity with mutually distinct profiles.
+
+**Step 5b — three agent findings re-checked by the orchestrator against the live data. All three
+confirmed; one needed a correction.**
+
+1. **`donati_2021_cfq7`: `cov_population` is inverted.** Confirmed. The group labelled `clinical`
+   holds 258 distinct ids and `non_clinical` holds 107, against the paper's 258 non-clinical /
+   105 clinical — and the "clinical" group scores *lower* on cognitive fusion at all 7 items
+   (CFQ2 3.0 vs 4.4), which is backwards. `data/donati_2021_cfq7.py` maps `Population 1.0 ->
+   clinical, 2.0 -> non_clinical` the wrong way round. Needs a script fix and a re-upload of the
+   response table; the item-text join is unaffected. **Worth its own issue.** The agent said the
+   second group was n=107 against the paper's 105 — that 2-person discrepancy is real and
+   reproduces, and should be looked at alongside the fix.
+2. **`dominguez_2018_jcs`: `item_17` is not an item.** Confirmed. On the live table `item_17`
+   equals `FLOOR(mean(item_18..item_21))` for **200 of 202** ids, r = 0.93, mean |diff| = 0.35.
+   The S1 column headed "Item 17" is the block Subtotal `=AVERAGE(Z:AD)`. It ships with blank
+   `item_text`/`option_text` rather than a false wording — which is exactly the audit WARN.
+   **Recommend dropping `item_17` from the response table.**
+3. **`doustmohammadian_2017_fnlit`: the 16 option-less items.** Confirmed as source coverage, not
+   a defect. The 16 items with no `option_text` are *exactly* the 16 with no
+   `item_text_translated` (16/16 overlap) — the validation-form items dropped before publication,
+   which appear in neither questionnaire PDF, so their anchors were never published anywhere.
+
+Also verified: the `DMCT_Addis_2020_*` naming problem is real — `table_context.R` gives
+Reference = **Suggate, S.P. (2024)**, doi 10.3758/s13428-024-02496-z, and there is no "Addis 2020"
+anywhere in the record. Affects all three siblings (`_PSIQ`, `_MCT`, `_SUIS`). Renaming a live
+table is a human call.
+
+**Rights — the dominant theme of this round, and it cuts both ways in the same paper.** Both
+blocks are NC/redistribution verdicts where the *text was in hand* and the *mapping was already
+proven*, so an unblock is cheap if the rule is read differently:
+
+- `dominguez_2018_uwes` — the Spanish UWES-17 exists only in Schaufeli & Bakker's own manual,
+  which carries the NC clause (irw#1891). The CC BY deposit publishes zero wording, so the ECR-R
+  source-licence carve-out has nothing to attach to.
+- `dpt_noncog__grit` — Grit-S. angeladuckworth.com/measures carries an NC clause **and** an
+  explicit "cannot be published or used for … wide public distribution" bar, which under the
+  2026-09-04 DSES ruling overrides the CC0 deposit that does print the items.
+
+Against which `dominguez_2018_jcs`, from the *same paper* as the blocked UWES table, **shipped**
+with `wording_rights=NC`: its wording came from a CC BY 4.0 article rather than from Bakker's
+restricted download, which is the ECR-R shape. Likewise `dpt_noncog__interpersonal_reactivity`
+shipped with `wording_rights=NC` (Davis's IRI permissions page has an NC clause but no
+redistribution bar and no fee). The line that decided all four is *whether the only source of the
+administered wording is itself restricted* — not whether the instrument is NC.
+
+**Three escalations for Ben, none actioned here:**
+- **Two already-uploaded tables have never been audited against irw#1891.** `algner2022_uwes`
+  (batch_003) took its wording from the German UWES-9 PDF on wilmarschaufeli.nl — the same
+  NC-clause source, so it likely does *not* survive. `baka2023_uwes` (batch_007) took Polish
+  wording from the study's own CC BY figshare `.sav` labels — ECR-R shape, likely *does*.
+- The Grit ruling is **instrument-level**, so the pending `grit_BrummerHoffman_2021` is blocked by
+  the same clause, as is any future Grit-S/Grit-O table.
+- `dominguez_2018_mbi`, from the same paper again, is MBI-HSS — Mind Garden fee-licensed, a strong
+  candidate for the TAS-20 fee rule.
+
+**Two availability-audit verdicts are now wrong** (`availability_audit_full.csv`, checked on
+disk, not actioned): `dpt_noncog__grit` is recorded AVAILABLE on the reasoning that Grit-S is a
+"freely published public-domain instrument" — that verdict predates the rights rules. And
+`di_riso_2025_contact_behavior` is recorded UNAVAILABLE on the reasoning that its 3 items are
+"not reproduced in text, tables, or the data-only supplement" — but the `di_riso_2025_mask_emotion`
+agent, working the same paper, reports all three named verbatim in the same Table 2 image, with
+means 3.27/3.77/4.00. That table is probably extractable and the audit row should be corrected.
+
+**Owed at upload:** `dou2025_area` ships IRW-generated English (`machine_translation`) and needs a
+public issues-page line. `check_provenance.R` flags it, correctly, as the only table in that state
+besides `derubeis_2017_arsq`, which predates this round. This is due at upload, not now.
+
+**Minor.** Di Riso et al. (2025)'s Supporting Information cites three deposit DOIs
+(`10.5061/dryad.fbg79cp3g`, `10.5281/zenodo.14056914`, `10.5281/zenodo.14056916`) that all fail to
+resolve; the PLOS `.s005` ZIP still carries the data, which is what IRW used, so nothing is lost.
+No Step 3b instrument mismatch was found on any of the 12 tables.
+
+**Cap — the prompt and the repo disagree, and the repo is newer.** Step 0 of the round prompt this
+round ran under names `batch_027` as the stop condition, so by the prompt the cap is now reached.
+But `e51f1ef itemtext: raise the round cap to batch_030 (#1709)` is on this branch, so
+`run_round.sh` will start `batch_028` on the next hand-launch and be right to. Nothing to
+self-cancel either way — there is no scheduler — but the next round's prompt should carry
+`batch_030` in Step 0, or it will stand down for a cap that no longer applies. The queue holds
+1,061 pending rows.
+
+**Housekeeping: a concurrent session committed this round's in-flight files.** `2e30c03 itemtext:
+batch_026 uploaded — stamp, clear, log` swept partially-written `batch_027` sidecars and
+`__items.csv` files into a batch_026 commit — the known whole-tree staging behaviour of parallel
+sessions on this repo. No content was lost (the round-close commit supersedes it), but batch_027's
+history is split across two commits and `git log -- itemtables/batch_027` names the wrong one
+first.
