@@ -1,6 +1,6 @@
 # Daily refresh of metadata/version_manifest.tsv (roadmap item 3.0, #1705).
 #
-# This job records which released Redivis version of each of the eleven datasets
+# This job records which released Redivis version of each registered dataset
 # was live at each point in the corpus' history. The R and Python packages read
 # the committed file from raw.githubusercontent, so a refresh that never lands
 # is a refresh no user ever sees, and a version released today but recorded next

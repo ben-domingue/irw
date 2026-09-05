@@ -32,28 +32,40 @@ GitHub.
 All data lives on Redivis under the account **`datapages`**. Everything else in
 this repository reads that from one place:
 
-> `IRW_OWNER`, `IRW_CORE_DATASETS` and `IRW_AUX_DATASETS` in
-> [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative for
-> the owner and the dataset names.
+> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS` and `IRW_AUX_DATASETS`
+> in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
+> for the owner and the dataset names.
+
+> **Redivis caps any single dataset at 1000 tables.** That cap is the reason
+> sharding exists, and it applies to *every* dataset, not just the response data.
 
 **Core shards** hold the response data. A *shard* here is simply one of several
 Redivis datasets with identical structure, named `item_response_warehouse`,
-`item_response_warehouse_2`, and so on — a new one is added whenever the warehouse
-outgrows the last. Which shard a given table is in is not predictable
+`item_response_warehouse_2`, and so on — a new one is added when the last hits
+the cap. Which shard a given table is in is not predictable
 from its name, so the client packages search them **newest-first** and return the
 first match — meaning a name present in more than one shard resolves to its most
 recent copy.
 
-**Auxiliary datasets** hold everything that is not response data: `irw_meta` (all
-metadata, biblio, tags and collections tables), `irw_text` (item text), plus one
-each for the `simsyn`, `competitions` and `nominal` sources.
+**Item text shards the same way**, for the same reason: `irw_text`, `irw_text_2`,
+… in `IRW_TEXT_DATASETS`, searched newest-first, first match wins. A table stays
+reachable from whichever shard already holds it, so tables are never moved
+between shards — moving one *creates* the shadowing problem rather than solving
+it. `Rpkg/inst/developer/warehouses.md` carries the checklist for adding a shard
+of either kind.
+
+**Auxiliary datasets** hold everything else: `irw_meta` (all
+metadata, biblio, tags and collections tables), plus one
+each for the `simsyn`, `competitions` and `nominal` sources. These are single
+datasets rather than shard lists only because none is near the cap.
 
 How many of each exist today is *not* recorded here, deliberately — that number
 grows, and a count written into prose is wrong the day it changes. `redivis_config.R`
 is the answer:
 
 ```r
-source("metadata/redivis_config.R"); IRW_CORE_DATASETS; IRW_AUX_DATASETS
+source("metadata/redivis_config.R")
+IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_AUX_DATASETS
 ```
 
 Until August 2026 all of this lived under the personal Redivis account
@@ -66,7 +78,10 @@ older scripts still work.
 > source of truth. They are reconcilable — this repo carries plain dataset
 > *names*, the two packages additionally carry version *hashes* — but a new shard
 > must be added in all three, and nothing currently checks that they agree. They
-> have already drifted once (#1733).
+> have already drifted once (#1733). Each file now carries *two* shard lists,
+> core and item text (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`,
+> `.irw_datasource_specs$core`/`.irw_itemtext_specs`,
+> `MAIN_REFS`/`ITEMTEXT_REFS`), so adding a shard means six edits, not three.
 
 ## 3. Google Sheets
 
@@ -192,10 +207,12 @@ draft is touched, and the draft version's own `createdAt` resets on each upload.
 `red_up` replaced thirteen near-identical copies of one script, each hardcoding
 a different dataset, so the destination used to be decided by which file you
 happened to run. It reads the dataset list from `metadata/redivis_config.R`,
-defaults by filename (`*__items.csv` → `irw_text`, otherwise the newest shard),
-checks every shard for an existing table of the same name before writing —
-because a copy in a newer shard *shadows* the older one rather than replacing
-it — and verifies each table with a `count(*)` afterwards.
+defaults by filename (`*__items.csv` → the newest item-text shard, otherwise the
+newest core shard), checks every shard of both kinds for an existing table of the
+same name before writing — because a copy in a newer shard *shadows* the older one
+rather than replacing it — and verifies each table with a `count(*)` afterwards.
+When a name is already in use somewhere that could not legally hold the file, it
+stops rather than routing across families.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.

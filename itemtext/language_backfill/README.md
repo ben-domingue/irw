@@ -143,9 +143,14 @@ created 78 duplicate tables. Caught by ben-domingue before upload.
 **Check before any upload**, against the raw Redivis names rather than the R
 package's:
 
+Item text is a shard list, so check every shard rather than naming one -- a
+table that lives in an older shard is still an existing table.
+
 ```r
-nm <- vapply(redivis::user("datapages")$dataset("irw_text:07b6")$list_tables(),
-             function(t) t$name, character(1))
+source("../../metadata/redivis_config.R")   # IRW_OWNER, IRW_TEXT_DATASETS
+nm <- unlist(lapply(IRW_TEXT_DATASETS, function(ds)
+  vapply(redivis::user(IRW_OWNER)$dataset(ds)$list_tables(),
+         function(t) t$name, character(1))))
 fs <- sub("\\.csv$", "", list.files("staged", pattern = "__items\\.csv$"))
 sum(!fs %in% nm)   # must be 0 - anything else creates new tables
 ```
