@@ -1,0 +1,2 @@
+table,note
+fisher_2019_structure,"Clean pass with one caveat: the paper publishes the two item stems verbatim but never states the 1-7 response anchors, and the only supplement is S1 Data (the XLSX) -- the Measures section's promised 'survey materials ... in Supplemental Materials' were not deposited. option_text is therefore blank for all 14 rows and no claim is made about scale direction; no instructions text was published either. This is a gap the source never filled, not a text-vs-table mismatch."

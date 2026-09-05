@@ -4173,3 +4173,36 @@ table, it belongs to the outstanding rights re-audit (irw#1954), and irw#1955 ha
 future open anyway.
 
 **Staged: all 6 written.** `clean/` now holds 24 tables from batches 029, 030 and 031.
+
+### batch_032 — ROUND KILLED, out of memory — 2026-09-04 21:10 → ~21:2x
+
+**The queue is stopped and needs a human.** The batch_032 round was killed by the OS while
+its 12 agents were running — the machine ran out of memory, not a rate limit and not an agent
+failure. It left **12 rows `in_progress`**, which the runner's own guard treats as "a round is
+running or died mid-round", so **every subsequent round will stand down until these rows are
+reconciled**. Reconciling them is deliberately a human decision, per Step 0 and BATCH_PROCESS:
+a dead round can leave half-written files, and this one did.
+
+**Machine state.** Memory recovered on its own once the agents died — 19 GiB available at
+inspection, no orphaned `run_round.sh` or agent processes. The spike was 12 concurrent agents
+on top of Chrome, Slack and Dropbox. Nothing needs cleaning up at the OS level, but a round
+fired while this desktop is loaded can evidently lose the race, which is a new failure mode
+for this runner: previous kills were rate limits, which exit 0 and look like completion.
+**This one exits non-zero and leaves the queue blocked, which is the safer failure.**
+
+**Per-table inventory, so the reconciliation is a decision and not an investigation.**
+
+| state | tables | what is on disk |
+|---|---|---|
+| complete-ish (2) | `fisher_2019_belonging`, `fisher_2019_structure` | `__items.csv` + provenance + notes + verification + `verify_*.R` |
+| orphan CSV (2) | `falih_2026_mds16`, `fisher_2019_preparedness` | `__items.csv` and a `verify_*.R`, but **no provenance and no notes** |
+| script only (1) | `FIVPEI_Perrig_2023_PENS` | a `verify_*.R` and nothing else |
+| nothing written (7) | `fatima_2025_mslq`, `fredrickson_2015_mhcsf`, `frikha_2023_pe_acrs`, `frikha_2023_pe_ms`, `fukuda_2021_health_literacy`, `fukuda_2021_info_reliability`, `fukuda_2021_withholding_behavior` | nothing |
+
+The seven that wrote nothing are clean to return to `pending`. The two complete-ish ones could
+be closed out by hand rather than re-extracted. The two orphan CSVs are the ones that need a
+judgement: an `__items.csv` with no provenance row is exactly what the tracker was built to
+catch, and per BATCH_PROCESS orphaned CSVs are quarantined, not promoted.
+
+**Nothing was reconciled here.** `queue_state.csv` is committed as the dead round left it, so
+the record shows what actually happened rather than a tidied version of it.
