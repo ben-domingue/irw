@@ -4524,3 +4524,21 @@ suspect on the same grounds and was **not** checked — it was not in this round
 
 **Staged: all 6.** `clean/` holds `enkavi_2019_gonogo`, `_simon`, `_stopsignal`,
 `fatima_2025_mslq`, `fredrickson_2015_mhcsf`, `frikha_2023_pe_acrs`.
+
+### batch_033 — uploaded 2026-09-05
+
+Ben ran the upload and reported 6 of 6 uploaded and row-count verified; `red_up.drafts` lists
+all six as **added** before stamping. Stamped `uploaded=2026-09-05` in
+`itemtables/batch_033/provenance.csv` and `mapping_verification.csv`, 6 rows each, exactly 6
+lines changed per file, and an independent re-read agrees: **all 6 rows stamped, none
+unstamped** — the first batch of the session with nothing blocked and nothing held. Cleared the
+six `__items.csv` from the batch folder and `clean/`.
+
+**The three picture-stimulus tables are the first IRW item tables that carry no `item_text` at
+all** — `enkavi_2019_gonogo`, `_simon`, `_stopsignal`, shipped blank by design under the
+2026-09-05 ruling. What they do carry is the instructions, the section structure and the
+accuracy labels, which is what the source actually publishes.
+
+**Session total: 69 tables of item text uploaded** across batches 026-033, less the seven
+`promis1wave1_*` withdrawn on the PROMIS ruling. Batch_032's four and batch_033's six are
+draft-only; everything earlier is live in v16.0.
