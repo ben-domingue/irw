@@ -3102,3 +3102,631 @@ CSV: there is no mapping to verify because the table was blocked on rights. Not 
 **CAP REACHED.** batch_025 is the cap raised in 484725d. The next firing will hit the
 "batch_025 already exists" stop condition in Step 0 and stand down. 1,086 tables remain
 pending; raise the cap to continue.
+
+### TAS-20 item text withdrawn — fee-licensed instruments — 2026-09-04
+
+Ben ruled that **an enforced licence fee disqualifies an instrument's wording**, extending the
+WHOQOL ruling from no-redistribution clauses to fee-licensed instruments. The TAS-20's holders
+charge a per-study fee and have enforced it (a 2021 *Molecular Autism* retraction).
+
+**This goes further than the WHOQOL ruling, deliberately.** WHOQOL turned on a clause forbidding the
+act of distribution. This does not: `cucchi_2018_tas20`'s wording came from a **CC BY 4.0** PeerJ
+article that reproduced all 20 items itself, so IRW is declining to redistribute text an open
+licensor already published. That argument was put before the decision and the ruling stands. Unlike
+the WHOQOL ruling, this one **does** generalise — it is a rule about fee-licensed instruments.
+
+**Done:** `cucchi_2018_tas20` deleted from the `irw_text` next draft (100 rows, verified absent
+afterwards) and `ruiz_parra_2023_tas20` blocked before extraction — both `blocked` in
+`queue_state.csv` (done 222 → 221, blocked 27 → 29, pending 1,086 → 1,085), both with a
+`pending_index_notes.csv` row saying what would have to change. Ben removed the already-live
+`rmet_higgins_2022_tas` from the draft himself; it remains in the released version until the next
+release drops it. `cucchi_2018_tas20`'s provenance keeps its `uploaded=2026-09-04` as history and
+carries the withdrawal in `public_note`; its `__items.csv` is deleted but
+`verify_cucchi_2018_tas20.R` stays, so the mapping is still reproducible if the ruling is ever
+reversed. Rule written into `itemtext_standard.md` § Rights.
+
+**Still outstanding:** the issues-page entries for all three tables (datapages/irw), and
+`wording_rights` is not set on these rows — the WHOQOL precedent sets `wording_rights=NC`, which is
+the wrong flag for a fee rather than a non-commercial clause, so that column needs a decision.
+
+### DSES item text withdrawn — no-redistribution clauses override the source licence — 2026-09-04
+
+Ben ruled that **a quotable no-redistribution clause outranks the licence of the deposit the wording
+came from**, withdrawing `CV_OASIS_ODSIS_PPE_Novak_2020_DSES`. The DSES requires registration with
+Underwood and the Fetzer copy states "Permission of author required to distribute or copy"; IRW's
+wording came from Underwood's own CC BY 3.0 article, which was ruled not to rescue it.
+
+This settles the question the WHOQOL ruling explicitly left open, in the strict direction, and it is
+the second ruling the same day narrowing ECR-R — the first being the fee-licence rule on the TAS-20.
+Taken together, **a source deposit's open licence is no longer sufficient on its own.**
+
+**Done:** deleted from the `irw_text` next draft (40 rows, verified absent), `blocked` in
+`queue_state.csv` (done 221 → 220, blocked 29 → 30), `pending_index_notes.csv` row recording that
+the author's permission is the one thing that would make it shippable on its own terms, provenance
+keeping `uploaded=2026-09-04` as history with the withdrawal in `public_note`, `__items.csv`
+deleted, `verify_*.R` retained. Rule written into `itemtext_standard.md` § Rights.
+
+**Outstanding, and worth naming plainly:** no re-audit of already-shipped tables has been run
+against either of the day's two rulings. Tables shipped before 2026-09-04 under "the source licence
+governs" have never been checked for a rights-holder restriction, and some will not survive. This
+table was the only one in the corpus carrying `wording_rights=NC`, so that column cannot be used to
+find the others — the sweep has to read provenance and sources.
+
+### DART: itemtext block stands, response data untouched — 2026-09-04
+
+Ben ruled on the tension batch_025 surfaced. **The block stays and the response data is left alone**,
+accepting an inconsistency rather than resolving it: the DART's items are author names, and IRW
+already publishes all 132 of them as the live `item` codes in the response table, ingested from the
+same CC BY-NC-SA deposit that caused the block. So the NC-restricted wording is public either way,
+and the block prevents only an `__items` table.
+
+Two alternatives were put and declined — ruling that a bare item identifier is not "item text"
+(which would have made the two positions consistent on the record) and reviewing the DART response
+tables themselves. Recording that here so this is not later mistaken for an oversight: it is a known
+gap, left open deliberately.
+
+**Still outstanding and independent of rights:** the `ja`→`1` find/replace corruption in
+`raw_data_study1.xlsx` is live in IRW — `1ne Austen`, `1mes Patterson`, `1ne Jessup`, and a mangled
+`...afgelopen 1ar-` covariate. No issue has been filed for it yet.
+
+### Data defects from batches 024/025 filed — 2026-09-04
+
+Three defects confirmed against primary sources during these rounds are now public issues:
+
+- **irw#1950** — `DART_Brysbaert_2020_*`: a `ja`→`1` find/replace in the deposited
+  `raw_data_study1.xlsx` put `1ne Austen`, `1mes Patterson` and `1ne Jessup` into IRW as live item
+  codes, plus a mangled `...afgelopen 1ar-` covariate. `1ne Jessup` is one of the test's foils, so
+  its exact string is what a reuser matches on. Damage is in the deposit, carried through unchanged.
+- **irw#1951** — `cordova2019_clinical_edu_environment`: `biblio.csv` says "DREEM-based"; the
+  instrument is PHEEM per the companion paper's own Methods and its 40-item Table 1. IRW holds real
+  DREEM tables (`agarwal_2023_dreem`), so the mislabel makes this look like their sibling.
+- **irw#1952** — `debacker_2018_*`: `resp=0` sits outside the paper's stated 1–5 scale.
+  Filed as "out-of-range 0 of unknown meaning" and the issue states explicitly that the earlier
+  "did not play" reading was **disproved** on re-reading the `.sav`, so it is not revived.
+
+Worth noting what produced all three: none came from a gate. They came from reading a source against
+its processing script, which is what the extraction step does anyway — the gates compare a table to
+itself and cannot see any of these.
+
+### Outstanding work filed as issues — 2026-09-04 (end of session)
+
+Everything left open at the end of the day is now tracked, so nothing depends on this log being read:
+
+- **irw#1954** — re-audit already-shipped item text against the day's two rights rulings. The
+  important part: `wording_rights` cannot find the affected tables (it is set on zero tables now),
+  so the sweep has to read provenance and re-check each instrument's rights holder. `canonical_instrument`
+  tables are the highest-risk group.
+- **irw#1955** — `wording_rights` cannot express a fee, and is currently set on no tables at all.
+  Extend the vocabulary or drop the column; a one-value flag nothing carries is the worst option.
+- **irw#1956** — clear the 45 uploaded `__items.csv` from batch folders. Must NOT be a directory
+  glob: the two byte-identical `ALSECYPIAMH_WU_2022_PHQ` files were never uploaded, and deleting
+  them loses the only copies.
+- **datapages/irw#132** — issues-page entries for the three withdrawn tables. `rmet_higgins_2022_tas`
+  is the one that matters: live now, and it disappears at the next release.
+
+Also filed earlier today: irw#1950 (DART `ja`→`1`), irw#1951 (DREEM/PHEEM), irw#1952 (debacker `resp=0`).
+
+**State at close.** queue_state: 220 done / 30 blocked / 12 failed / 54 excluded / 1,085 pending.
+The `irw_text` next draft holds 111 tables, every one row-count verified against its source. Round
+cap is `batch_025`, so the runner stands down until someone raises it. `delete_branch_on_merge` is
+now **false** on `ben-domingue/irw`, which should stop the branch-deletion failure that hit twice
+(#1904, #1944).
+
+## batch_026 — 2026-09-04
+
+**12 tables · 9 written / 3 blocked / 0 failed · yield 75%.** One agent per table, all 12 dispatched in
+parallel; all 12 returned a report and none was killed by a rate limit or spend cap. Circuit breaker NOT
+tripped (0% failed — the three no-CSV tables are determinate rights verdicts, retry test NO).
+
+Tables: decamp_2022_online_discussion, deilkas_2019_patient_safety_climate, dejesus_2017_lequesne,
+dejesus_2017_sf36, derubeis_2017_arsq, de_vries_2022_bat_burnout_core, de_vries_2022_bat_secondary,
+de_vries_2022_hexaco_meta, de_vries_2022_hexaco_other, de_vries_2022_hexaco_self,
+dinic_2025_shortdarktriad, direkvand_2022_mjsi.
+
+**Gates.** normalize_nulls 3 of 9 normalized. audit_batch **9/9 PASS, zero WARN** (so Step 5c had nothing
+to explain — notable given direkvand ships blank option_text on all 125 rows by design). verify_batch
+6 PASS + 3 MISSING(exempt, data_labels). lint_verification 12 rows, **0 ERROR**, 2 WARN. irw-validate ok
+on all 9. check_provenance: vocabulary clean.
+
+**The round's story is a licence wall, not a pipeline problem.** Three of the five de_vries_2022 tables are
+the Dutch HEXACO-PI-R (self / observer / meta-perception, 96 items each) and all three blocked on the same
+non-commercial clause. The other two de_vries tables (BAT burnout core + secondary) passed cleanly — the BAT
+is explicitly non-proprietary — so the split inside one source file is instrument rights, not access.
+
+**Step 5b orchestrator re-checks (both changed or firmed up an artifact):**
+- *HEXACO clause — CONFIRMED.* Three agents quoted it independently; re-fetched hexaco.org/hexaco-inventory
+  directly and it is verbatim: "You can download any of these forms free of charge, but only for the purpose
+  of non-profit academic research." The page also confirms the 200-item form is gated behind author contact
+  and bars publicly searchable administration. The three blocks stand on a verified quote.
+- *deilkas duplicate label — CONFIRMED but the claim was overstated, and the public note was corrected.*
+  The agent reported Q34 and Q59 as carrying "byte-identical variable labels". They do not: the .sav has
+  '31. Fatigue impairs my performance during emergency situations…' and '56. <same sentence>'. The numbering
+  prefix is stripped on the way in, so what is byte-identical is the **shipped item_text** (verified on the
+  written CSV). The substantive finding — a duplicated fatigue item in the deposit, Q34 the likely error,
+  Q60 the routine-care twin — holds. public_note rewritten to say exactly that.
+- direkvand's claim that the paper's published alphas of 0.96 (2 items) and 0.98 (4 items) are unreproducible
+  is confirmed by its own verify script running live: observed 0.161 and 0.354, while communications (0.733 vs
+  0.73) and whole-tool (0.705 vs 0.71) reproduce to within 0.005. Paper-side error, not a mapping error.
+
+**ESCALATION — the NC ruling reaches already-live tables.** irw#1891 (2026-09-04) postdates several HEXACO-PI-R
+uploads. `sv-maia2_randelovic_2021_hexaco60` and `sv-maia2_randelovic_2021_hexaco100` are **live** and shipped
+HEXACO-PI-R wording that has never been audited against this rule; `zaehl2023_hexaco` and `lindstrom2021_*` are
+queued behind the same clause; and `availability_audit_full.csv` classes the whole family AVAILABLE on the
+reasoning that hexaco.org publishes the items freely — reasoning that does not survive the rule. Worth handling
+as a class rather than table by table. `dasilva_2019_hexaco24` is unaffected (Brief HEXACO Inventory, CC BY).
+
+**Upload-time obligation.** check_provenance flags `derubeis_2017_arsq` as the corpus's one IRW-generated-content
+table with no issues-page entry (German ARSQ, English supplied by this project). It needs a line on
+itemtext_issues.qmd at upload. Reported-but-not-enforced here: the irw_site checkout is on branch 'agent-brief',
+not main.
+
+**Two lint WARNs, both cosmetic and both explained in notes.csv.** hexaco_meta and hexaco_self recorded
+status=NOT_NEEDED with mapping_basis=unknown; the linter only exempts data_labels. Both ship no CSV, so no
+mapping reaches the corpus — the agents meant "nothing shipped, nothing to verify", where the third sibling
+(hexaco_other) recorded the same situation as NO_ROUTE. Left as written rather than rewriting an agent's own
+evidence string. Worth a linter tweak: a no-CSV table deserves its own status rather than borrowing one.
+
+**Other findings worth a look.** dinic_2025_shortdarktriad: the paper's Table 3 and the deposited .sav variable
+labels disagree on the wording at 4 of 27 items (the .sav quotes statements that are not SD3 items at all);
+Table 3 was shipped and the labels treated as the erroneous side. dejesus_2017_sf36: the questionnaire prints
+1=Sim/2=Não but the deposited data stores 0/1 — fixed against the data, disclosed. dejesus_2017_lequesne: the
+study's own English annex is not a literal translation of its own Portuguese annex in three places.
+
+**Quota.** No full-table export except one deliberate small fetch (hexaco_self, 41,664 rows); every other agent
+used irw_table_sets()/table_sets.R server-side aggregates.
+
+Cap check: Step 0's cap is batch_027, so the cap is NOT reached — the next firing picks up batch_027.
+
+### batch_026 triage — 9 of 9 staged, 0 held — 2026-09-04
+
+Triaged unattended, at Ben's instruction to keep the queue moving while he was away.
+
+**All four gates re-run live rather than read off the round's report**, per BATCH_PROCESS
+step 1, and they reproduce it: `normalize_nulls` 0 of 9 files would change (the round had
+already normalized 3); `audit_batch` **9/9 PASS, zero WARN** against current live data;
+`verify_batch` 6 PASS + 3 MISSING(exempt, `data_labels`); `lint_verification` 0 ERROR.
+The blank-`option_text` percentages the audit reports — 4.8% dejesus_2017_lequesne, 66.7%
+derubeis_2017_arsq, 60% dinic_2025_shortdarktriad, 100% direkvand_2022_mjsi — are each
+explained by a `notes.csv` entry and are by design.
+
+**Three of the round's substantive claims were re-checked independently, not read.**
+
+- *HEXACO non-commercial clause — CONFIRMED a third time.* Re-fetched
+  hexaco.org/hexaco-inventory independently of both the agent and the orchestrator. The
+  clause is verbatim as quoted ("free of charge, but only for the purpose of non-profit
+  academic research"), and the 200-item form is contact-gated. All three
+  `de_vries_2022_hexaco_*` blocks stand. This was worth a third look because a wrong
+  `blocked` is permanent — it removes the table from the queue for good.
+- *deilkas Q34/Q59 — CONFIRMED on the shipped file.* The written CSV's `item_text` for
+  Q34 and Q59 is byte-identical, and that pair is the **only** duplicated wording among the
+  62 items. Q60 is the routine-care twin, as the corrected public note says.
+- *dinic reverse-coded anchors — CONFIRMED on the shipped file.* sd3_11/15/17/20/25 ship
+  resp 1 = 'Agree strongly', and the other 22 items ship resp 1 = 'Disagree strongly'.
+
+**Two changes made at triage.**
+
+1. `verify_direkvand_2022_mjsi.R` header corrected. It named **two** of the published
+   subscale alphas as unreproducible; in fact **four** of five are (professional 0.85 vs
+   0.580, responsibility 0.96 vs 0.161, physical-mental 0.98 vs 0.354, social 0.88 vs
+   0.464), and the verdict silently rested on communications, the whole tool, and the
+   item-block correlations. The script's PASS is still right and the status is still
+   PARTIAL — the dimension assignment is what those three support — but the comment
+   overstated how much of the stated test was met. The residual is a source-side problem,
+   as the round said: alpha 0.96 on a 2-item block implies inter-item r near 0.92 against
+   the ~0.09 the deposited data give.
+2. `de_vries_2022_hexaco_meta` and `_self` moved `NOT_NEEDED` → `NO_ROUTE` in both
+   `verification_merged.csv` and `mapping_verification.csv`. All three blocked HEXACO rows
+   describe the same situation and the third sibling (`_other`) already read `NO_ROUTE`;
+   `NOT_NEEDED` is what `lint_verification.R` tests as the `data_labels` exemption, so those
+   two rows were the batch's only WARNs and both were false. Evidence strings untouched.
+   Batch lint is now 0 ERROR / 0 WARN. The round's own better suggestion — give a no-CSV
+   table its own status instead of borrowing one — is left to the standard; the same false
+   WARN sits on `DART_Brysbaert_2020_1` and `_3_4_5` from an earlier round, so it recurs.
+   Corpus-wide lint is 315 rows, 0 ERROR, 35 WARN, all pre-existing.
+
+**Staged: all 9.** `itemtables/clean/` now holds exactly those 9 `__items.csv` and nothing
+else. **Held: none** — no table's fate depends on an open decision, since the three tables
+that did (the HEXACO family) were blocked at extraction rather than shipped.
+
+**Issues page: drafted and rewritten, deliberately NOT applied.** 8 entries for the 9 shipped
+tables, in `fixes/itemtext_issues_draft_batch026.md`, rewritten from each table's full `note`
+rather than pasted from `draft_issues_qmd.R`. `decamp_2022_online_discussion` earns none and
+that is correct — `data_labels`, no `notes.csv` entry, nothing to disclose. They are held
+because the page's own rule is that a table earns an entry once it ships and batch_026 is 0 of
+12 stamped `uploaded`, and because the local `irw_site` checkout is on branch `agent-brief`.
+The rewrite mattered most for `derubeis_2017_arsq`: the drafter's version, templated from
+`public_note`, never mentions that the English in the `_translated` columns was generated by
+this project — which is the single fact check_provenance flags that table for.
+
+**Found while drafting: the page is two batches behind.** `batch_024` (12 of 12 stamped
+`uploaded`) and `batch_025` (8 of 12) have shipped and have **no** entries on
+`itemtext_issues.qmd` — the last application was `1491d4c`, batches 022 and 023. Verified by
+table name against the live file. 024, 025 and 026 should be drafted in one pass.
+
+**Not decided here, left for Ben.** `dinic_2025_shortdarktriad` omits `language` and the
+`_translated` columns because it pools 14 samples in 12 languages, following the
+`ecps_sahm_2024_*` precedent (irw#1831). That is a consistent, documented choice, but it
+contradicts `itemtext_standard.md`'s own instruction not to blank `language`, and the other
+precedent — `campos_2023_*`, two languages — writes a semicolon-joined `Finnish; Portuguese`
+instead. The standard does not cover a pooled multi-language table; one of the two precedents
+should win. Not changed here, because picking a value for 12 languages is a policy call.
+
+### batch_026 — uploaded 2026-09-04
+
+Ben ran the upload and reported 9 of 9 uploaded and row-count verified. Confirmed
+independently before stamping, because the read token is blind to drafts and a green
+upload is not a visible one: `red_up.drafts --dataset irw_text --verbose` lists all nine
+`__items` tables as **added** to the `irw_text` draft.
+
+Stamped `uploaded=2026-09-04` on the nine in `itemtables/batch_026/provenance.csv` and in
+`mapping_verification.csv` — 9 rows changed in each, git confirms exactly 9 lines touched
+per file, and an audit re-reading both from disk agrees: 12 rows each, 9 stamped, and the 3
+unstamped are exactly the blocked `de_vries_2022_hexaco_*` tables. Corpus-wide the tracker
+now reads 276 of 315 stamped. `verification_merged.csv` is left unstamped, as in every prior
+batch. Fields were addressed by header name, and a row counts as stamped only if it holds a
+real date — the two rules that have each already broken a stamping pass.
+
+Removed the nine uploaded `__items.csv` from the batch folder and from `itemtables/clean/`,
+**by explicit table name rather than a directory glob** (irw#1956: a glob deletes files that
+were never uploaded). Every sidecar stays, including the three `verify_de_vries_2022_hexaco_*.R`
+scripts for the blocked tables, which record what a future attempt would need.
+
+Still owed on this batch: the issues-page entries, drafted and rewritten in
+`fixes/itemtext_issues_draft_batch026.md`, now unblocked by the upload. They should go up
+together with batches 024 and 025, which shipped earlier today and have no entries at all.
+
+---
+
+## batch_027 — 2026-09-04 (CAP REACHED)
+
+**12 tables claimed. Yield 10 written / 2 blocked / 0 failed (83%).** Circuit breaker not
+tripped: it counts `failed`, and there were none. Both blocks are determinate rights verdicts
+with retry test NO. No rate limit or spend cap was hit, so these counts mean what they say.
+
+Tables: `di_riso_2025_mask_emotion`, `DMCT_Addis_2020_PSIQ`, `dominguez_2018_jcs`,
+`donati_2021_cfq7`, `dong_2025_teacher_leadership`, `dopmeijer_2022_loneliness`,
+`dou2025_area`, `doustmohammadian_2017_fnlit`, `dpt_noncog__emotional_intelligence`,
+`dpt_noncog__interpersonal_reactivity` (written); `dominguez_2018_uwes`, `dpt_noncog__grit`
+(blocked).
+
+**Gates.** `normalize_nulls.R` fixed 2 of 10 files. `audit_batch.R` 8 PASS / 2 WARN, both WARNs
+explained in `notes.csv` per Step 5c. `verify_batch.R` 7 PASS + 3 MISSING(exempt) — no FAIL and
+no missing VERDICT. `lint_verification.R` **0 ERROR**, 3 WARN. `irw-validate` clean on 9 of 10;
+the tenth is a `name_charset` WARN on `DMCT_Addis_2020_PSIQ`, a property of the existing IRW
+table name, not of this extraction. `check_provenance.R` clean on vocabulary.
+
+The three lint WARNs ("VERIFIED but its evidence hedges") were reviewed and left as VERIFIED:
+in each the hedge is about what the route does *not* cover — the option anchors, or the words of
+a translation — not about item separation, and each route does distinguish every item from every
+other item by cell-for-cell response-frequency identity with mutually distinct profiles.
+
+**Step 5b — three agent findings re-checked by the orchestrator against the live data. All three
+confirmed; one needed a correction.**
+
+1. **`donati_2021_cfq7`: `cov_population` is inverted.** Confirmed. The group labelled `clinical`
+   holds 258 distinct ids and `non_clinical` holds 107, against the paper's 258 non-clinical /
+   105 clinical — and the "clinical" group scores *lower* on cognitive fusion at all 7 items
+   (CFQ2 3.0 vs 4.4), which is backwards. `data/donati_2021_cfq7.py` maps `Population 1.0 ->
+   clinical, 2.0 -> non_clinical` the wrong way round. Needs a script fix and a re-upload of the
+   response table; the item-text join is unaffected. **Worth its own issue.** The agent said the
+   second group was n=107 against the paper's 105 — that 2-person discrepancy is real and
+   reproduces, and should be looked at alongside the fix.
+2. **`dominguez_2018_jcs`: `item_17` is not an item.** Confirmed. On the live table `item_17`
+   equals `FLOOR(mean(item_18..item_21))` for **200 of 202** ids, r = 0.93, mean |diff| = 0.35.
+   The S1 column headed "Item 17" is the block Subtotal `=AVERAGE(Z:AD)`. It ships with blank
+   `item_text`/`option_text` rather than a false wording — which is exactly the audit WARN.
+   **Recommend dropping `item_17` from the response table.**
+3. **`doustmohammadian_2017_fnlit`: the 16 option-less items.** Confirmed as source coverage, not
+   a defect. The 16 items with no `option_text` are *exactly* the 16 with no
+   `item_text_translated` (16/16 overlap) — the validation-form items dropped before publication,
+   which appear in neither questionnaire PDF, so their anchors were never published anywhere.
+
+Also verified: the `DMCT_Addis_2020_*` naming problem is real — `table_context.R` gives
+Reference = **Suggate, S.P. (2024)**, doi 10.3758/s13428-024-02496-z, and there is no "Addis 2020"
+anywhere in the record. Affects all three siblings (`_PSIQ`, `_MCT`, `_SUIS`). Renaming a live
+table is a human call.
+
+**Rights — the dominant theme of this round, and it cuts both ways in the same paper.** Both
+blocks are NC/redistribution verdicts where the *text was in hand* and the *mapping was already
+proven*, so an unblock is cheap if the rule is read differently:
+
+- `dominguez_2018_uwes` — the Spanish UWES-17 exists only in Schaufeli & Bakker's own manual,
+  which carries the NC clause (irw#1891). The CC BY deposit publishes zero wording, so the ECR-R
+  source-licence carve-out has nothing to attach to.
+- `dpt_noncog__grit` — Grit-S. angeladuckworth.com/measures carries an NC clause **and** an
+  explicit "cannot be published or used for … wide public distribution" bar, which under the
+  2026-09-04 DSES ruling overrides the CC0 deposit that does print the items.
+
+Against which `dominguez_2018_jcs`, from the *same paper* as the blocked UWES table, **shipped**
+with `wording_rights=NC`: its wording came from a CC BY 4.0 article rather than from Bakker's
+restricted download, which is the ECR-R shape. Likewise `dpt_noncog__interpersonal_reactivity`
+shipped with `wording_rights=NC` (Davis's IRI permissions page has an NC clause but no
+redistribution bar and no fee). The line that decided all four is *whether the only source of the
+administered wording is itself restricted* — not whether the instrument is NC.
+
+**Three escalations for Ben, none actioned here:**
+- **Two already-uploaded tables have never been audited against irw#1891.** `algner2022_uwes`
+  (batch_003) took its wording from the German UWES-9 PDF on wilmarschaufeli.nl — the same
+  NC-clause source, so it likely does *not* survive. `baka2023_uwes` (batch_007) took Polish
+  wording from the study's own CC BY figshare `.sav` labels — ECR-R shape, likely *does*.
+- The Grit ruling is **instrument-level**, so the pending `grit_BrummerHoffman_2021` is blocked by
+  the same clause, as is any future Grit-S/Grit-O table.
+- `dominguez_2018_mbi`, from the same paper again, is MBI-HSS — Mind Garden fee-licensed, a strong
+  candidate for the TAS-20 fee rule.
+
+**Two availability-audit verdicts are now wrong** (`availability_audit_full.csv`, checked on
+disk, not actioned): `dpt_noncog__grit` is recorded AVAILABLE on the reasoning that Grit-S is a
+"freely published public-domain instrument" — that verdict predates the rights rules. And
+`di_riso_2025_contact_behavior` is recorded UNAVAILABLE on the reasoning that its 3 items are
+"not reproduced in text, tables, or the data-only supplement" — but the `di_riso_2025_mask_emotion`
+agent, working the same paper, reports all three named verbatim in the same Table 2 image, with
+means 3.27/3.77/4.00. That table is probably extractable and the audit row should be corrected.
+
+**Owed at upload:** `dou2025_area` ships IRW-generated English (`machine_translation`) and needs a
+public issues-page line. `check_provenance.R` flags it, correctly, as the only table in that state
+besides `derubeis_2017_arsq`, which predates this round. This is due at upload, not now.
+
+**Minor.** Di Riso et al. (2025)'s Supporting Information cites three deposit DOIs
+(`10.5061/dryad.fbg79cp3g`, `10.5281/zenodo.14056914`, `10.5281/zenodo.14056916`) that all fail to
+resolve; the PLOS `.s005` ZIP still carries the data, which is what IRW used, so nothing is lost.
+No Step 3b instrument mismatch was found on any of the 12 tables.
+
+**Cap — the prompt and the repo disagree, and the repo is newer.** Step 0 of the round prompt this
+round ran under names `batch_027` as the stop condition, so by the prompt the cap is now reached.
+But `e51f1ef itemtext: raise the round cap to batch_030 (#1709)` is on this branch, so
+`run_round.sh` will start `batch_028` on the next hand-launch and be right to. Nothing to
+self-cancel either way — there is no scheduler — but the next round's prompt should carry
+`batch_030` in Step 0, or it will stand down for a cap that no longer applies. The queue holds
+1,061 pending rows.
+
+**Housekeeping: a concurrent session committed this round's in-flight files.** `2e30c03 itemtext:
+batch_026 uploaded — stamp, clear, log` swept partially-written `batch_027` sidecars and
+`__items.csv` files into a batch_026 commit — the known whole-tree staging behaviour of parallel
+sessions on this repo. No content was lost (the round-close commit supersedes it), but batch_027's
+history is split across two commits and `git log -- itemtables/batch_027` names the wrong one
+first.
+
+### batch_027 triage — 10 of 10 staged, 0 held — 2026-09-04
+
+Triaged unattended, in parallel with the batch_028 round.
+
+**Gates re-run live.** `audit_batch` 8 PASS / 2 WARN, `verify_batch` 7 PASS + 3
+MISSING(exempt, `data_labels`), `lint_verification` 0 ERROR / 3 WARN. Both audit WARNs
+were already explained by the round's notes: `dominguez_2018_jcs`'s blank rows are the
+`item_17` Subtotal column, and `doustmohammadian_2017_fnlit`'s 16 option-less items are
+exactly its 16 untranslated ones.
+
+**A transient gate ERROR that is not a defect.** The re-audit returned
+`[ERROR] di_riso_2025_mask_emotion: could not read live data: An error occurred while
+querying IRW: missing value where TRUE/FALSE needed`, where the round's own audit had it
+PASS. It does **not** reproduce — audited alone immediately afterwards it PASSes. Recorded
+in `notes.csv` because the message reads like an R bug in the gate rather than a network
+blip, and the next person to see it should not go hunting for a defect that is not there.
+
+**Three lint WARNs adjudicated, all kept VERIFIED.** `dopmeijer_2022_loneliness`,
+`doustmohammadian_2017_fnlit` and `dpt_noncog__interpersonal_reactivity` are each flagged
+"VERIFIED but its evidence hedges (does not establish)". The hedge is real but concerns
+something Step 5b does not claim: in all three the evidence says the numeric route pins the
+code-to-item **mapping** completely and does not establish the **words**, which is the
+translation question. The routes themselves are decisive — 0 of 34,551 observations
+discrepant with the reversed reading off by 41,586; all 49 published alpha-if-item-deleted
+values reproduced to 0.0005; 74 of 74 item×resp cells matching with mutually distinct
+frequency profiles. Same false positive as `CPDMMC_Kunnari_2020_HCD` in batch_024: the
+linter keyword-matches "does not establish" without regard to what the sentence is about.
+That is now four instances, so the linter's hedge test is worth narrowing.
+
+**Staged: all 10. Held: none.** `dominguez_2018_jcs` was the one candidate for a hold — its
+`item_17` is not an item but the block Subtotal column, equal to `FLOOR(mean(item_18..21))`
+for 200 of 202 ids — and it is staged anyway. The item table is correct with respect to the
+live response table as it stands today; holding it would park nine good tables' worth of
+schedule behind one row whose fix is a response-table change. If that change lands, the item
+table is re-uploaded.
+
+**File format, per batch, undocumented.** batch_027's CSVs are MINIMAL-quoted with **LF**
+endings; batch_026's are MINIMAL with **CRLF**. Neither BATCH_PROCESS's claim (CRLF, every
+field quoted) nor any single convention holds across batches. Round-trip the file and check
+byte-identity before writing, every time.
+
+**Two response-data defects the round found, filed rather than fixed here** —
+`donati_2021_cfq7`'s inverted `cov_population` and `dominguez_2018_jcs`'s `item_17`.
+Both need a change to a processing script and a response-table re-upload, which is not
+something a triage pass should do.
+
+---
+
+## batch_028 — 2026-09-04
+
+**12 tables claimed. Written 10 / blocked 2 / failed 0.** Yield 10/12 = 83.3%. Circuit
+breaker not tripped: 0% failed (the breaker counts `failed`, not `blocked`).
+
+`dpt_noncog__intolerance_of_uncertainty`, `duboz_2021_pss10`, `dudasova_2021_cpc12`,
+`dudasova_2021_cpc12_study3`, `dudasova_2021_gratitude`, `dudasova_2021_swls`,
+`dulger2024_wordcompletion`, `dussel_2022_pcl17`,
+`dvivdtws_ppmial_marcatto_2023_cwb`, `dvivdtws_ppmial_marcatto_2023_dtw` written.
+`duboz_2021_swls` and `dudasova_2021_engagement` blocked — both determinate (retry test NO),
+both with rows in `itemtables/pending_index_notes.csv`.
+
+**All six gates clean.** `normalize_nulls.R` fixed 1 of 10 files. `audit_batch.R`: 10 PASS,
+**no WARNs at all**, so Step 5c had nothing to explain. `verify_batch.R`: PASS=10, no
+FAIL and no missing VERDICT. `lint_verification.R`: 12 rows, **0 ERROR**, 2 WARN.
+`irw-validate`: all 10 ok. `check_provenance.R`: no vocabulary errors.
+
+**No NOT_NEEDED rows were needed** — both `data_labels` tables wrote real verification rows
+of their own, so all 12 tables already had exactly one row each. The batch-020/021 lint
+false alarm did not recur.
+
+### The thing that needs Ben: two agents in ONE batch reached OPPOSITE rights verdicts on the SWLS
+
+`duboz_2021_swls` was **blocked** on the SWLS's licence; `dudasova_2021_swls` **shipped**
+SWLS wording. Same instrument, same rights holder, same batch. They read different pages of
+that rights holder, and the orchestrator re-fetched both:
+
+- `eddiener.com/scales` (maintained successor site, © 2025) — "These scales are copyrighted
+  by Ed Diener and his co-authors." / "The use of these scales is permitted for
+  non-commercial purposes only." **Confirmed verbatim.** This is the irw#1891 NC clause.
+- `labs.psychology.illinois.edu/~ediener/scales.html` — "The scale is in the public domain
+  and therefore you are free to use it without permission or charge by all professionals
+  (researchers and practitioners) as long as you give credit to the authors of the scale."
+
+**Correction to both agents' accounts of the older page**, and it matters: each described it
+as saying the scale is *copyrighted but free to use*. It does not. It says **public domain**,
+and on that page the word "copyrighted" is scoped to SPANE and the Flourishing Scale, **not**
+the SWLS. So this is not "one page has an NC clause and the other is silent" — it is a direct
+contradiction on the SWLS specifically, and the older statement is a stronger basis for
+shipping than either agent claimed.
+
+Scope of the ruling: ~14 SWLS tables sit in the queue; `altahla_2024_swls` (batch_005) and
+`campos_2023_swls` (batch_017) have already shipped; the same eddiener.com clause also covers
+the Flourishing Scale and SPANE. **Do not upload `dudasova_2021_swls` while
+`duboz_2021_swls` stands blocked** — ship both or block both.
+
+### Duplicate live tables — confirmed independently, decide before uploading
+
+`dvivdtws_ppmial_marcatto_2023_cwb` and `dvivdtws_ppmial_marcatto_2023_dtw` are the **same
+data under two names**. The agent flagged it; the orchestrator confirmed it without taking
+the agent's word: both report `rows=12,166`, the identical 22-item set `dtw1..dtw22` and the
+identical resp set 1–5, and `item_stats.R` returns byte-identical per-item blocks on every
+item (dtw1 n=552 M=2.86 SD=1.09 floor 11.4% ceil 6.2%; dtw11 n=551 1.44/0.79 69.3/0.7;
+dtw16 n=553 1.26/0.63 81.7/0.5; dtw21 n=553 1.14/0.55 92.0/0.4).
+
+The `_cwb` one is the **misnamed** member: its dictionary Description says "Counterproductive
+Work Behavior items(CWB)" but the data are the 22-item Dark Tetrad at Work scale — the OSF
+deposit `osf.io/8mj73` keeps the blocks separate and CWB has 45 items, Italian half only.
+Both CSVs are staged; **upload at most one.** If `_cwb` is deleted as a duplicate, drop its
+CSV and keep `_dtw`.
+
+### Step 5b orchestrator re-checks — three agent findings verified, one corrected
+
+- **`dudasova_2021_gratitude`, both data findings reproduce exactly.** The authors' own
+  `Grat` total sums `Grat6` un-reversed: corr(total, raw sum) = **1.000000**, means identical
+  (28.163 vs 28.163); reversing `Grat6` gives corr 0.8956 / mean 31.702. Polarity evidence
+  also reproduces (mean off-diagonal r: +0.382 / +0.386 / +0.334 / +0.327 / +0.259 /
+  **−0.451**; r(Grat1,Grat2) = 0.808). Source-file defect, harmless to the IRW table, which
+  ships per-item responses and not the total.
+- **`dpt_noncog__intolerance_of_uncertainty`'s public_note holds against live data.** The
+  live item set really does contain both `iu_21a` and `iu_21b`, carrying the deposit's single
+  `IU_Scale_21` label across two distinct items.
+- **The SWLS rights account was corrected** (above) — an agent finding taken as a lead and
+  changed by the check, which is exactly what Step 5b is for.
+- Agent prediction that did **not** come true: `dudasova_2021_gratitude` expected
+  `irw-validate` to flag `resp_ambiguous` for its deliberate two-direction `option_text`.
+  It did not. Per-item direction differences are legitimately not flagged, as with
+  `aip_vangsness_2019`. No defect.
+
+### Both lint WARNs adjudicated — kept VERIFIED, and the same false positive as batch_027
+
+`dpt_noncog__intolerance_of_uncertainty` and `dulger2024_wordcompletion` are flagged
+"VERIFIED but its evidence hedges". In both the hedge is about an axis Step 5b does not
+claim: the IUS table's hedge is about the 2–4 anchor labels, not the item axis (route 9
+matched all 16 response-count vectors cell-for-cell, all 16 mutually distinct); the
+word-completion table's hedge is about scenario wording that is **not shipped**, plus
+`acc_d_nt` vs `ac_id_nt`, a pair carrying the *same* `correct_response` so no swap is
+possible (all 60 claimed target words are the unique maximum, every other word scoring
+exactly 0.000). This is now the **fifth and sixth** instance of the linter keyword-matching
+"does not establish" without regard to what the sentence is about — batch_024 had one,
+batch_027 had three. The hedge test is overdue for narrowing.
+
+### Other findings worth carrying forward
+
+- **`dudasova_2021_cpc12_study3` is misleadingly named.** `_study3` refers to the article's
+  **S3 supporting-information file**, not the paper's Study 3. The data are the second German
+  sample (N=202) from *Study 2*, on the original German CPC-12 — not Study 3's Czech CPC-12R,
+  which swaps in three different resilience items. The dictionary Description is already
+  correct; only the table name misleads.
+- **`dudasova_2021_cpc12` nearly shipped a 9-of-12 permutation.** The paper's own appendix
+  prints the *revised* CPC-12R, which re-orders the facets relative to the CPC-12 that Study 1
+  actually administered. Transcribing the appendix in appendix order would have permuted 9 of
+  12 items and every existing set-based gate would still have passed. Verified out by
+  reproducing the paper's twelve distinct CFA loadings item by item.
+- **`dudasova_2021_engagement`'s instrument identity is a dictionary conjecture.** The
+  Description "Work engagement scale (UWES-9-style, 9 items)" is not a source claim — the
+  paper never mentions engagement at all, and the team's other paper on this cohort describes
+  the 17-item UWES. Worth a dictionary fix independent of the rights question.
+- **`dulger2024_wordcompletion` pools two tasks, not one** (40 scenario-completion fragments
+  + 20 memory-recognition fragments = the 60 live items), and 36 of its 60 target words are
+  IRW-derived from the modal correct completion rather than stated by the authors — the
+  `public_note` discloses this per the 2026-09-03 derived-answer-key ruling.
+- **`duboz_2021_pss10` introduces `wording_rights=NC` for the PSS**, which the two live
+  PSS-10 tables (`bakker_2020_pss10`, `beck_2021_pss10`, both uploaded 2026-08-18) do not
+  carry. Backfilling that column on live tables is an upload-side decision, flagged not done.
+- **Provenance header drift, again**: 10 of 12 agents wrote the 7-column header and the two
+  `marcatto` agents wrote the 8-column one with `translation_source`. The merge normalised to
+  8 columns, matching batch_027. The subagent prompt still specifies 7 — worth fixing there.
+- **Issues-page debt is upload-side.** None of this batch's tables have an
+  `itemtext_issues.qmd` line yet; `check_provenance.R` does not flag them because they are
+  not uploaded. Five will need one at upload (`duboz_2021_pss10`, `dudasova_2021_swls`,
+  `dudasova_2021_gratitude`, `dussel_2022_pcl17`, `dulger2024_wordcompletion`). Separately,
+  its two standing complaints (`derubeis_2017_arsq`, `dou2025_area`) are pre-existing debt
+  from earlier batches, untouched by this round.
+
+**No systemic access issues.** No quota exhaustion, no rate limit, no killed agents; every
+agent reported a determinate outcome and all 12 sidecar sets were written. Queue: 1,049
+pending remain. Cap is batch_030 — **not reached**, two rounds left.
+
+### batch_027 — uploaded 2026-09-04
+
+Ben ran the upload and reported 10 of 10 uploaded and row-count verified, including
+`dominguez_2018_jcs` (staged with its Subtotal `item_17`, see #1965). Confirmed before
+stamping: `red_up.drafts --dataset irw_text --verbose` lists all ten as **added**.
+
+Stamped `uploaded=2026-09-04` in `itemtables/batch_027/provenance.csv` and
+`mapping_verification.csv` — 10 rows each, git confirms exactly 10 lines touched per file,
+and an independent re-read agrees: 12 rows each, 10 stamped, the 2 unstamped being exactly
+the blocked `dominguez_2018_uwes` and `dpt_noncog__grit`. Removed the ten uploaded
+`__items.csv` from the batch folder and `clean/`, by name.
+
+**`mapping_verification.csv` is now MIXED line endings and a `csv.writer` pass would have
+silently reformatted the whole file.** It was uniformly CRLF when batch_026 was stamped a
+few hours earlier; the batch_027 round left it at 12 CRLF lines and 328 LF, so no single
+convention round-trips it any more. The stamp was therefore done as a byte-level edit — each
+record starts at a line start and its first four fields (`table`, `batch`, `mapping_basis`,
+`uploaded`) are simple, so the prefix is unambiguous — and the file came out 100 bytes
+larger, exactly 10 × the date, with the CRLF/LF counts unchanged. `batch_027/provenance.csv`
+does still round-trip (MINIMAL + LF) and was stamped the ordinary way.
+
+Whoever writes to `mapping_verification.csv` next should check this first. The file is
+rewritten by rounds, so its convention can change under you between one batch and the next.
+
+### batch_028 triage — 8 of 10 staged, 2 held — 2026-09-04
+
+**Gates re-run live.** `audit_batch` 10/10 PASS with no anomalies; `verify_batch` PASS=10
+with no exempt rows, every table carrying its own verify script; `lint_verification` 0
+ERROR / 2 WARN. Both WARNs are the translation-caveat false positive on the hedge check,
+now diagnosed and filed as **irw#1966**: `(does not|do not|did not) (establish|settle|pin)`
+matches without regard to its object, so an evidence string that correctly says a numeric
+route cannot check a *translation* is read as hedging about the *mapping*. **31 of the
+corpus's 40 WARNs are that one pattern.** Statuses left VERIFIED — the mapping evidence is
+decisive in both (all 80 item×resp cells matched for the IUS table; `correct_response`
+pinned per item for `dulger2024_wordcompletion`).
+
+**Ben's SWLS ruling — the source you copied from governs, applied one level in.** Put to him
+with both pages quoted; written up in `itemtext_standard.md` under "Two pages, two terms, one
+rights holder". Wording from a study's own open deposit ships; wording from
+`SWLS_English.doc` on the Illinois page ships, because that page distributes the document and
+states no non-commercial restriction; wording from eddiener.com does not, because that page
+states one. So `dudasova_2021_swls` **ships and is staged**, and `duboz_2021_swls`'s block is
+**retryable, not determinate** — the same words are reachable under permitting terms.
+
+**A correction to the round's own report, which mattered to the ruling.** The orchestrator
+said both agents had misquoted the Illinois page and that it declares the SWLS *public
+domain*. It does not — the phrase does not appear on that page at all, checked directly at
+triage. The agents' quotes were accurate and the re-check was not. That is what took the case
+out of the TIMSS 2003 precedent (one page stating a public-domain claim beside an NC clause,
+where the restriction governs) and into the ECR-R source-licence rule.
+
+**`duboz_2021_swls` is owed a queue flip, blocked → pending, and it has NOT been made yet.**
+The batch_029 round is live and a round rewrites `queue_state.csv`; editing it concurrently
+would either lose the change or corrupt the file. Do it once 029 finishes.
+
+**Held: the marcatto duplicate pair.** `dvivdtws_ppmial_marcatto_2023_cwb` and `_dtw` hold the
+same 12,166 rows, the same 22 items and byte-identical per-item statistics, and `_cwb` is the
+misnamed one — its Description says Counterproductive Work Behavior while the data are the
+Dark Tetrad at Work scale, whose real CWB block is a separate 45 items. Filed as **irw#1967**.
+Per the #1653 ruling the item text is held and re-pointed at whichever table survives rather
+than uploaded against a table that may be deleted. Both CSVs stay in the batch folder; neither
+is in `clean/`; nothing needs re-extracting either way, since the two files differ only in the
+`table` column.
+
+**Staged: 8.** `clean/` holds `dpt_noncog__intolerance_of_uncertainty`, `duboz_2021_pss10`,
+`dudasova_2021_cpc12`, `dudasova_2021_cpc12_study3`, `dudasova_2021_gratitude`,
+`dudasova_2021_swls`, `dulger2024_wordcompletion`, `dussel_2022_pcl17`.

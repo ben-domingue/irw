@@ -189,6 +189,59 @@ extend this to another instrument without asking — and note that finding the t
 because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
 a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
 
+### No-redistribution clauses override the source licence — ruled 2026-09-04
+
+**A quotable clause barring redistribution of the instrument governs, even when IRW's wording came
+from an openly licensed deposit.** Ruled by Ben on `CV_OASIS_ODSIS_PPE_Novak_2020_DSES`: the Daily
+Spiritual Experience Scale requires registration with its author, and the Fetzer Institute copy
+states *"Permission of author required to distribute or copy"*. IRW's wording came from Underwood's
+own **CC BY 3.0** article; the clause was ruled to govern anyway.
+
+This is the open question the WHOQOL ruling above declined to settle by drift, now settled in the
+strict direction. Together with the fee-licence ruling it means **the source deposit's licence is no
+longer sufficient on its own** — a rights holder's own restriction on the instrument outranks it,
+whether that restriction is a redistribution bar or an enforced fee.
+
+**It still fires only on something you can quote.** Silence remains permission, exactly as under the
+NC rule: an instrument that is merely copyrighted, or reproduced without an explicit grant, is not
+blocked. What changed is that finding the clause on the rights holder's copy is now enough — you no
+longer get to rely on the deposit you happened to take the words from.
+
+**Consequence not yet worked through:** this narrows the ECR-R decision for a whole class of
+instruments, and already-shipped tables have never been audited against it. No re-audit has been
+run; a table shipped before 2026-09-04 under "the source licence governs" may not survive this rule.
+That sweep is outstanding work, not a settled position.
+
+### Fee-licensed instruments — ruled 2026-09-04
+
+**An enforced licence fee disqualifies an instrument's wording, even where IRW's copy came from an
+openly licensed deposit.** Ben ruled this on the TAS-20 (Toronto Alexithymia Scale), whose rights
+holders charge a per-study fee and have enforced it — a 2021 *Molecular Autism* paper was retracted
+over it.
+
+This is the deliberate extension the WHOQOL ruling above said should be settled rather than reached
+by drift, and it goes further than that one in a way worth being explicit about. The WHOQOL turns on
+a clause forbidding the *act* of distribution. This does not: `cucchi_2018_tas20`'s wording came
+from Cucchi, Hampton & Moulton-Perkins (2018), a **CC BY 4.0** PeerJ article that reproduced all 20
+items itself, and IRW is declining to redistribute text an open licensor already published. The
+argument against was put and the ruling stands: the fee is enforced against exactly this kind of
+reuse, and an open deposit does not extinguish it.
+
+**What fires it.** The rights holder levies a fee for use of the instrument, and there is evidence
+it is enforced. A scale being copyrighted, sold as part of a manual, or merely free-of-charge does
+not fire it — that boundary is unchanged from the NC rule above.
+
+**Scope.** Blocked on this rule so far: `cucchi_2018_tas20` (extracted, uploaded, then deleted from
+the draft), the already-live `rmet_higgins_2022_tas` (removed from the draft, so it disappears at
+the next release), and `ruiz_parra_2023_tas20` (blocked before extraction). Any future TAS-20 table
+is blocked by the same rule.
+
+**This one DOES generalise, unlike the WHOQOL ruling** — it is a rule about fee-licensed
+instruments, not about the TAS-20. Apply it to any instrument meeting the test above, and record the
+fee and the evidence of enforcement in `provenance.csv` `note` so the basis stays auditable. A
+withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
+do not blank the date to make the table look as though it never shipped.
+
 **But the instrument-level restriction is recorded, not ignored.** Where the rights
 holder states one, set `wording_rights=NC` on every row of that table and add an
 entry to the public issues page. The column is a filterable flag so a commercial
@@ -207,3 +260,59 @@ responses as that package redistributes them. It says nothing about IEA's wordin
 is separate copyright under narrower terms. A table's dictionary licence is evidence about
 the response data only; go to the wording's own source for its terms. This recurs for any
 assessment redistributed through a package or similar wrapper.
+
+### Two pages, two terms, one rights holder — the SWLS, ruled 2026-09-04
+
+**When a rights holder publishes the same instrument under two different statements of terms, the
+terms of the page you actually took the wording from govern.** Ben ruled this on the Satisfaction
+With Life Scale, after batch_028 blocked `duboz_2021_swls` and shipped `dudasova_2021_swls` — same
+instrument, same batch, opposite verdicts.
+
+The two pages, both fetched directly on 2026-09-04:
+
+> "These scales are copyrighted by Ed Diener and his co-authors. Although copyrighted, all of these
+> scales may be used by researchers as long as proper credit is given… **The use of these scales is
+> permitted for non-commercial purposes only.**"
+> — eddiener.com/scales, applying collectively to the SWLS, SPANE and the Flourishing Scale
+
+> "The scale is copyrighted but **you are free to use it without permission or charge by all
+> professionals (researchers and practitioners) as long as you give credit to the authors** of the
+> scale: Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin…"
+> — labs.psychology.illinois.edu/~ediener/SWLS.html, which is also where `SWLS_English.doc` — the
+> file our extractions actually open — is hosted
+
+**Correct the record on one thing before using this.** The batch_028 orchestrator reported that both
+agents had misquoted the Illinois page and that it declares the SWLS *in the public domain*. It does
+not; the phrase does not appear on that page at all, checked directly. The agents' quotes were right
+and the re-check was wrong. So this is **not** the TIMSS 2003 shape — one page stating a
+public-domain claim and an NC restriction together, where the restriction governs. It is two separate
+pages stating different terms, and the TIMSS rule does not reach it.
+
+**The rule.** This is the ECR-R decision applied one level in: the licence of the source IRW actually
+copied from governs, and that stays true when both candidate sources belong to the same rights
+holder. So for the SWLS:
+
+- wording published in the **study's own openly licensed deposit** ships (this is what makes
+  `altahla_2024_swls` safe — it was rebuilt on 2026-08-17 to take `item_text` from the study's own
+  source-file headers, `mapping_basis=data_labels`, not from any Diener page);
+- wording taken from **`SWLS_English.doc` on the Illinois page** ships — that page distributes the
+  document and states no non-commercial restriction;
+- wording taken from **eddiener.com** does not — that page states one.
+
+**Record which page you opened.** The whole ruling turns on it, so `source_ref` must name the
+specific page, not "Diener's site". A table blocked for taking the words from eddiener.com is not
+determinately blocked: the same words are available from the Illinois page under terms that permit
+shipping, so it is a *retryable* verdict and belongs back in the queue as `pending`, not `blocked`.
+`duboz_2021_swls` was reopened on exactly that basis.
+
+**The weakness Ben accepted, stated plainly so nobody rediscovers it as a defect.** This lets an
+extractor take the more permissive of two pages from the same holder, which is close to
+forum-shopping. It was ruled the better error than the alternative, which would block ~11 SWLS tables
+and eventually reach a live one on terms the holder's own distribution page contradicts. If a rights
+holder ever withdraws or supersedes the permissive page, this ruling should be revisited rather than
+relied on.
+
+**Scope.** 14 SWLS-named tables: `altahla_2024_swls` and `campos_2023_swls` already shipped,
+`dudasova_2021_swls` ships under this ruling, `duboz_2021_swls` is reopened, and 10 remain pending.
+Each pending table takes the same three-way test above — the answer depends on which source published
+the wording, not on the instrument.

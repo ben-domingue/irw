@@ -184,9 +184,10 @@ mkdir -p "$LOG_DIR"
   fi
   if [[ -d "$ITEMTEXT/itemtables/$cap" ]]; then
     echo "SKIP: round cap reached ($cap exists). Raise it in Step 0 of"
-    echo "round_prompt_v1.md, which is the only copy of the prompt, to run more"
-    echo "rounds. Note the off-by-one: the cap allows rounds UP TO AND"
-    echo "INCLUDING that batch."
+    echo "round_prompt_v1.md -- the ONLY copy; BATCH_PROCESS.md no longer"
+    echo "duplicates it, so this is one edit. Commit it before running: this"
+    echo "script refuses a dirty worktree. Note the off-by-one: the cap allows"
+    echo "rounds UP TO AND INCLUDING that batch."
     exit 0
   fi
 
