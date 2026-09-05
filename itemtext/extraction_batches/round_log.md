@@ -3211,3 +3211,68 @@ The `irw_text` next draft holds 111 tables, every one row-count verified against
 cap is `batch_025`, so the runner stands down until someone raises it. `delete_branch_on_merge` is
 now **false** on `ben-domingue/irw`, which should stop the branch-deletion failure that hit twice
 (#1904, #1944).
+
+## batch_026 — 2026-09-04
+
+**12 tables · 9 written / 3 blocked / 0 failed · yield 75%.** One agent per table, all 12 dispatched in
+parallel; all 12 returned a report and none was killed by a rate limit or spend cap. Circuit breaker NOT
+tripped (0% failed — the three no-CSV tables are determinate rights verdicts, retry test NO).
+
+Tables: decamp_2022_online_discussion, deilkas_2019_patient_safety_climate, dejesus_2017_lequesne,
+dejesus_2017_sf36, derubeis_2017_arsq, de_vries_2022_bat_burnout_core, de_vries_2022_bat_secondary,
+de_vries_2022_hexaco_meta, de_vries_2022_hexaco_other, de_vries_2022_hexaco_self,
+dinic_2025_shortdarktriad, direkvand_2022_mjsi.
+
+**Gates.** normalize_nulls 3 of 9 normalized. audit_batch **9/9 PASS, zero WARN** (so Step 5c had nothing
+to explain — notable given direkvand ships blank option_text on all 125 rows by design). verify_batch
+6 PASS + 3 MISSING(exempt, data_labels). lint_verification 12 rows, **0 ERROR**, 2 WARN. irw-validate ok
+on all 9. check_provenance: vocabulary clean.
+
+**The round's story is a licence wall, not a pipeline problem.** Three of the five de_vries_2022 tables are
+the Dutch HEXACO-PI-R (self / observer / meta-perception, 96 items each) and all three blocked on the same
+non-commercial clause. The other two de_vries tables (BAT burnout core + secondary) passed cleanly — the BAT
+is explicitly non-proprietary — so the split inside one source file is instrument rights, not access.
+
+**Step 5b orchestrator re-checks (both changed or firmed up an artifact):**
+- *HEXACO clause — CONFIRMED.* Three agents quoted it independently; re-fetched hexaco.org/hexaco-inventory
+  directly and it is verbatim: "You can download any of these forms free of charge, but only for the purpose
+  of non-profit academic research." The page also confirms the 200-item form is gated behind author contact
+  and bars publicly searchable administration. The three blocks stand on a verified quote.
+- *deilkas duplicate label — CONFIRMED but the claim was overstated, and the public note was corrected.*
+  The agent reported Q34 and Q59 as carrying "byte-identical variable labels". They do not: the .sav has
+  '31. Fatigue impairs my performance during emergency situations…' and '56. <same sentence>'. The numbering
+  prefix is stripped on the way in, so what is byte-identical is the **shipped item_text** (verified on the
+  written CSV). The substantive finding — a duplicated fatigue item in the deposit, Q34 the likely error,
+  Q60 the routine-care twin — holds. public_note rewritten to say exactly that.
+- direkvand's claim that the paper's published alphas of 0.96 (2 items) and 0.98 (4 items) are unreproducible
+  is confirmed by its own verify script running live: observed 0.161 and 0.354, while communications (0.733 vs
+  0.73) and whole-tool (0.705 vs 0.71) reproduce to within 0.005. Paper-side error, not a mapping error.
+
+**ESCALATION — the NC ruling reaches already-live tables.** irw#1891 (2026-09-04) postdates several HEXACO-PI-R
+uploads. `sv-maia2_randelovic_2021_hexaco60` and `sv-maia2_randelovic_2021_hexaco100` are **live** and shipped
+HEXACO-PI-R wording that has never been audited against this rule; `zaehl2023_hexaco` and `lindstrom2021_*` are
+queued behind the same clause; and `availability_audit_full.csv` classes the whole family AVAILABLE on the
+reasoning that hexaco.org publishes the items freely — reasoning that does not survive the rule. Worth handling
+as a class rather than table by table. `dasilva_2019_hexaco24` is unaffected (Brief HEXACO Inventory, CC BY).
+
+**Upload-time obligation.** check_provenance flags `derubeis_2017_arsq` as the corpus's one IRW-generated-content
+table with no issues-page entry (German ARSQ, English supplied by this project). It needs a line on
+itemtext_issues.qmd at upload. Reported-but-not-enforced here: the irw_site checkout is on branch 'agent-brief',
+not main.
+
+**Two lint WARNs, both cosmetic and both explained in notes.csv.** hexaco_meta and hexaco_self recorded
+status=NOT_NEEDED with mapping_basis=unknown; the linter only exempts data_labels. Both ship no CSV, so no
+mapping reaches the corpus — the agents meant "nothing shipped, nothing to verify", where the third sibling
+(hexaco_other) recorded the same situation as NO_ROUTE. Left as written rather than rewriting an agent's own
+evidence string. Worth a linter tweak: a no-CSV table deserves its own status rather than borrowing one.
+
+**Other findings worth a look.** dinic_2025_shortdarktriad: the paper's Table 3 and the deposited .sav variable
+labels disagree on the wording at 4 of 27 items (the .sav quotes statements that are not SD3 items at all);
+Table 3 was shipped and the labels treated as the erroneous side. dejesus_2017_sf36: the questionnaire prints
+1=Sim/2=Não but the deposited data stores 0/1 — fixed against the data, disclosed. dejesus_2017_lequesne: the
+study's own English annex is not a literal translation of its own Portuguese annex in three places.
+
+**Quota.** No full-table export except one deliberate small fetch (hexaco_self, 41,664 rows); every other agent
+used irw_table_sets()/table_sets.R server-side aggregates.
+
+Cap check: Step 0's cap is batch_027, so the cap is NOT reached — the next firing picks up batch_027.
