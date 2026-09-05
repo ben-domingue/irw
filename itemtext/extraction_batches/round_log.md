@@ -4542,3 +4542,32 @@ accuracy labels, which is what the source actually publishes.
 **Session total: 69 tables of item text uploaded** across batches 026-033, less the seven
 `promis1wave1_*` withdrawn on the PROMIS ruling. Batch_032's four and batch_033's six are
 draft-only; everything earlier is live in v16.0.
+
+### The marcatto duplicate resolved — `_dtw` kept, `_cwb` deleted — 2026-09-05
+
+irw#1967 settled. The two tables held the same 12,166 rows, the same 22-item set and identical
+`cov_gender`/`cov_age`/`cov_language` with nothing missing, so the **#1653 tie-breaker — keep
+whichever carries more information — did not discriminate**, and the call fell to the name.
+
+`_dtw` is the accurate one: the data are the 22-item Dark Tetrad at Work scale, codes
+`dtw1`–`dtw22`, and its biblio Description says so. `_cwb` names an instrument the table does not
+contain — the study's real CWB block is a separate 45 items, present in neither table — and
+keeping it would have left the sibling family (`_ocb`, `_ocs`, `_snaq`, each named for what it
+holds) with one member that is not, and taken the name a future CWB extraction would need.
+
+Checked against Redivis rather than the dictionary before Ben acted: `_cwb` sat in **shard 1,
+`item_response_warehouse`**, and in no other shard. He deleted it from the warehouse and the
+dictionary; confirmed gone from the released version, with no open draft on that shard.
+
+**Item-text side, done here.** `_dtw`'s `__items.csv` is staged for upload unchanged — nothing
+was re-extracted, the two CSVs differed only in the `table` column, which is exactly what the
+#1653 rule anticipated when it said to hold item text and re-point it at whichever table
+survives. `_cwb`'s CSV and verify script are removed; its `queue_state` row is **`excluded`**
+rather than blocked, because the table no longer exists and is permanently off-limits; its
+`mapping_verification` row is deleted outright, since a row claiming a verified mapping should
+not outlive the thing it verified; and its provenance `note` records the whole decision with
+`public_note` cleared.
+
+**This is the first duplicate-table question the pipeline has carried through to a resolution.**
+The #1653 pair is still open on the itemtext side — `APFCompact_Ptacek_2024_DASS-21` is `done`
+while its keeper `ptacek2023_dass21` is `pending`, so that item text was never re-pointed.
