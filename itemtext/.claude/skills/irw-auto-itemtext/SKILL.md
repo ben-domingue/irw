@@ -198,7 +198,8 @@ The output claims to be what the study administered. Three rules:
   `references/itemtext_standard.md`), so a table carrying them is uploadable without any
   further sign-off. `validate_items.R` checks that required columns are *present* and
   tolerates extras, so the gate is unaffected. The uploader hands the CSV to Redivis, which
-  infers fields from the file — the first such upload is what widens `irw_text` to hold them.
+  infers fields from the file — the first such upload is what widens the item-text
+  dataset to hold them.
   Whether the already-uploaded tables get backfilled is still open (irw#1777) —
   `ALSECYPIAMH_WU_2022_SDQ` and `altahla_2024_whoqol` ship English for non-English
   administrations, and `burkert_2019_whoqol_bref` ships German with no translation. The rule
@@ -256,12 +257,53 @@ model knowledge of the instrument — the bar is on publishing the items, not on
 they were obtained.
 
 This is *narrower* than "the instrument is copyrighted". A commercial scale reproduced
-in full in an open-access paper's appendix is still extractable from that appendix; the
-item-text disclaimer covers a user's downstream reuse. What it does not cover is IRW
-republishing an instrument whose publisher has affirmatively refused it.
+in full in an open-access paper's appendix is generally still extractable from that
+appendix; the item-text disclaimer covers a user's downstream reuse. What it does not
+cover is IRW republishing an instrument whose publisher has affirmatively refused it —
+or, per the two rulings in the next section, one whose rights holder charges an enforced
+fee or states a no-redistribution clause. Those two override the appendix, and the
+TAS-20 is exactly that case: its wording was printed in full by a CC BY 4.0 PeerJ
+article, and IRW withdrew it anyway.
 
 Currently excluded under this rule: `himmelstein-shipley_vocabulary-2025`,
 `himmelstein-shipley_abstraction-2025`.
+
+## Rights on the wording: two triggers, and both are quote tests
+
+Settled by Ben on 2026-09-04. These are about the *instrument's* rights holder, and they
+apply on top of, not instead of, the standing exclusion above.
+
+**Start from the distinction that makes the check worth doing: the deposit licence is not
+the instrument licence.** A CC BY 4.0 or CC0 deposit governs the *response data*. It says
+nothing about who owns the *item wording*, which for a published scale belongs to its
+authors or publisher. This is common, not exotic — of the 60 tables claimed in irw#1945,
+nine were named instruments sitting under permissive deposits (DERS, SWLS, HEXACO-PI-R,
+Need for Cognition, RWA, a social-desirability scale, the SCBCS, FAD+, EstCRM
+self-efficacy).
+
+**Block ONLY on something you can quote from the rights holder:**
+
+1. **An enforced licence fee.** Ruled on the TAS-20 ($40/study, enforced — a 2021
+   *Molecular Autism* retraction). Generalises to any fee-licensed instrument. Withdrew
+   `cucchi_2018_tas20` and `rmet_higgins_2022_tas`; blocked `ruiz_parra_2023_tas20`.
+2. **An explicit no-redistribution clause.** Ruled on the DSES
+   (`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`, "Permission of author required to distribute or
+   copy"). This settles the question the WHOQOL ruling left open: yes, a quotable clause
+   overrides the source deposit's licence, for any instrument.
+
+**Silence is permission.** An instrument being merely copyrighted, commercially sold, well
+known, or reproduced somewhere without an explicit grant is **not** a block. If you cannot
+find and quote a restriction, extract it normally. Do not block on suspicion, and do not
+open a negotiation with a rights holder — see the Shipley rule above.
+
+These two end in `blocked`, not `excluded`, because a licence can change and a fee can be
+paid; the Shipley exclusion is permanent. Put the quoted sentence and its URL in
+`notes.csv` and in `provenance.csv`. **A rights block with no quote in it is not a rights
+block.** Do not rely on the `wording_rights` column to record this — it takes only `NC`,
+cannot express either trigger, and is currently set on zero tables (irw#1955).
+
+Everything shipped before 2026-09-04 predates both rulings and has never been checked
+against them; that re-audit is irw#1954, still owed.
 
 ## Before doing anything
 
@@ -785,7 +827,8 @@ write.csv(items, file = "itemtables/<table>__items.csv", row.names = FALSE)
 Written into `itemtext/itemtables/` (not the `itemtext/` root) — this is where the
 upload step expects to find files (`red_up itemtables`). Don't upload automatically;
 that's a separate, explicit step (see "Uploading", below) since it pushes to the shared
-`datapages/irw_text:next` Redivis dataset.
+item-text dataset on Redivis (`datapages/irw_text:next` today; see the note on shards
+under "Uploading").
 
 ### Step 6b — Logging discrepancies (no Sheets-write tool available)
 
@@ -1008,9 +1051,10 @@ convention across the 422 published tables (the `NA` token, as `write.csv` emits
 anomalies, coverage gaps, and `option_text` padded with its own `resp` value.
 
 **Note for uploads:** the uploader walks a directory recursively. `red_up` excludes
-every file that is not `*__items.csv` when the target is `irw_text` and lists what it
-excluded, so `notes.csv`, `provenance.csv` and `audit_report.csv` are safe — but read
-that exclusion list rather than assuming, and check the target line says `irw_text`.
+every file that is not `*__items.csv` when the target is an item-text shard and lists
+what it excluded, so `notes.csv`, `provenance.csv` and `audit_report.csv` are safe — but
+read that exclusion list rather than assuming, and check the target line names an
+item-text dataset (`irw_text`, or a later `irw_text_N` — see "Uploading").
 
 ## Idempotency & caching
 
@@ -1134,8 +1178,11 @@ on to the next candidate rather than forcing a fabricated match.
 red_up itemtables
 ```
 
-`red_up` sees `*__items.csv` and defaults to `datapages/irw_text:next`; it shows the
-target and the full file list, marks each table NEW or UPDATE, and asks before writing
+`red_up` sees `*__items.csv` and defaults to the **newest item-text shard** —
+`datapages/irw_text:next` today. Redivis caps a dataset at 1000 tables, so item text
+shards the way response data does (`irw_text`, `irw_text_2`, …); read the target line
+rather than expecting a particular name, and do not "correct" it to `irw_text` if it
+names a later shard. It shows the target and the full file list, marks each table NEW or UPDATE, and asks before writing
 anything. It uploads only to the draft version, and verifies each table's row count with
 a `count(*)` afterwards. Only run this when the user explicitly asks to upload — it's a
 shared-system write, same caution as any other Redivis upload in this repo. See

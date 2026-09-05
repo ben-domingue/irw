@@ -17,9 +17,14 @@ from pathlib import Path
 #: Filenames matching this go to the item-text dataset, never to a shard.
 ITEMS_SUFFIX = "__items.csv"
 
-#: How each aux dataset is labelled in the menu. Keys are the `source` names
-#: `redivis_config.R` uses. Note "pairs" is `irw_competitions`: there is no
-#: `irw_pairs` dataset and never has been.
+#: How each non-core dataset is labelled in the menu. Keys are the `source`
+#: names `redivis_config.R` uses. Note "pairs" is `irw_competitions`: there is
+#: no `irw_pairs` dataset and never has been.
+#:
+#: "text" is the odd one out: item text is a *shard list*
+#: (`IRW_TEXT_DATASETS`), not an entry in `IRW_AUX_DATASETS`, for the same
+#: reason the core warehouses are a list -- Redivis caps a dataset at 1000
+#: tables. Its label still lives here so the menu reads uniformly.
 AUX_LABELS = {
     "text": "item text (__items.csv)",
     "meta": "metadata tables",
@@ -112,11 +117,35 @@ def load_registry(config_path: Path | None = None) -> tuple[str, list[Target]]:
         name=targets[-1].name, label="response data (newest shard)", kind="core"
     )
 
+    # Item-text shards, appended before the other aux datasets so the menu
+    # still reads text / meta / nominal / pairs / sim.
+    text_shards = [
+        Target(name=value, label=AUX_LABELS["text"], kind="aux", source="text")
+        for _, value in _parse_char_vector(text, "IRW_TEXT_DATASETS")
+    ]
+    if not text_shards:
+        raise ConfigError("IRW_TEXT_DATASETS is empty")
+    if len(text_shards) > 1:
+        text_shards[-1] = Target(
+            name=text_shards[-1].name,
+            label=f"{AUX_LABELS['text']} -- newest shard",
+            kind="aux", source="text",
+        )
+    targets.extend(text_shards)
+
     aux = dict(
         (key, value)
         for key, value in _parse_char_vector(text, "IRW_AUX_DATASETS")
         if key
     )
+    if "text" in aux:
+        # Declared in two places, which is how the three "single source of
+        # truth" files drifted before (#1733). Refuse rather than pick one.
+        raise ConfigError(
+            "redivis_config.R declares item text twice: `text` is a key in "
+            "IRW_AUX_DATASETS and IRW_TEXT_DATASETS also exists. Item text is a "
+            "shard list -- remove the `text =` entry from IRW_AUX_DATASETS."
+        )
     unknown = set(aux) - set(AUX_LABELS)
     if unknown:
         raise ConfigError(
@@ -124,7 +153,7 @@ def load_registry(config_path: Path | None = None) -> tuple[str, list[Target]]:
             f"{sorted(unknown)}. Add them to AUX_LABELS in targets.py."
         )
     for source, label in AUX_LABELS.items():
-        if source in aux:
+        if source != "text" and source in aux:
             targets.append(
                 Target(name=aux[source], label=label, kind="aux", source=source)
             )
@@ -139,8 +168,25 @@ def newest_shard(targets: list[Target]) -> Target:
     return core[-1]
 
 
+def text_shards(targets: list[Target]) -> list[Target]:
+    """Every item-text shard, oldest to newest."""
+    return [t for t in targets if t.is_itemtext]
+
+
+def newest_text_shard(targets: list[Target]) -> Target | None:
+    """The shard new item text goes to by default."""
+    shards = text_shards(targets)
+    return shards[-1] if shards else None
+
+
 def itemtext_target(targets: list[Target]) -> Target | None:
-    return next((t for t in targets if t.is_itemtext), None)
+    """The item-text destination: the newest shard.
+
+    Uploading into an *older* text shard would be the shadowing bug in reverse
+    -- clients resolve newest-first, so a table written to shard 1 while shard 2
+    holds a copy stays invisible.
+    """
+    return newest_text_shard(targets)
 
 
 #: Columns a table must have to belong in a given destination.

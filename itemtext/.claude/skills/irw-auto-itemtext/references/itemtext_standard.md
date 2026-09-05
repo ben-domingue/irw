@@ -18,7 +18,7 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
-| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. |
+| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. **Known gap (irw#1955): the value space is `NC` only, so it cannot express an enforced fee or a no-redistribution clause — the two 2026-09-04 triggers — and as of 2026-09-04 it is set on zero live tables. Do not rely on it to find rights-affected tables; record the quoted term in `provenance.csv` and `public_note` as well.** |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
 | `instructions_translated`, `section_prompt_translated`, `item_text_translated`, `option_text_translated` | English translation of the correspondingly named field. Present only for instruments administered in a language other than English. |
 
@@ -181,13 +181,31 @@ WHOQOL wording came from openly licensed deposits — CC0 in the COACH case — 
 ruling it would ship. Ben ruled otherwise: a rights holder's explicit no-redistribution term is
 honoured even where the copy came from an open source.
 
-**What this does NOT do is generalise itself.** It is a ruling about the WHOQOL, reached by reading
-that instrument's actual terms. It leaves an open question that a later ruling should settle
-deliberately rather than by drift: whether *any* quotable no-redistribution clause should override
-the source licence, which would reverse the ECR-R decision for a whole class of instruments. Do not
-extend this to another instrument without asking — and note that finding the terms took a text proxy,
-because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
-a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
+**This has since been generalised — the open question was settled on 2026-09-04.** As written, the
+WHOQOL ruling was a decision about one instrument, and it deliberately left open whether *any*
+quotable no-redistribution clause should override the source licence. Ben answered that on
+2026-09-04, ruling on the DSES (`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`, "Permission of author required
+to distribute or copy"): **yes, it generalises.** A quotable no-redistribution clause from the rights
+holder outranks the deposit's licence, whatever that licence is. You no longer need to ask before
+applying this to another instrument.
+
+Note that finding the WHOQOL terms took a text proxy, because `cpcr.aut.ac.nz` returns 403 to a
+direct fetch and Manchester's user-information PDF fails on a TLS certificate mismatch. **Absence of
+a retrievable clause is not absence of a clause** — that caution still stands, and is why the rule
+below is stated as a quote test rather than an inference.
+
+**The second 2026-09-04 ruling: an enforced licence fee also disqualifies.** Ruled on the TAS-20
+($40 per study, enforced — there is a 2021 *Molecular Autism* retraction over it). This generalises
+too, to any fee-licensed instrument. It withdrew `cucchi_2018_tas20` and `rmet_higgins_2022_tas` and
+blocked `ruiz_parra_2023_tas20`. It applies even where the source published the items under an open
+licence: `cucchi_2018_tas20`'s wording came from a CC BY 4.0 PeerJ article that printed all 20 items.
+
+**Both triggers are quote tests, and silence is permission.** Block only on something you can quote
+from the rights holder — an enforced fee, or an explicit no-redistribution clause. An instrument
+being merely copyrighted, commercially sold, well known, or reproduced somewhere without an explicit
+grant is **not** a block. If you cannot find and quote a restriction, extract normally; do not block
+on suspicion, and do not open a negotiation with a rights holder. Record the quoted sentence and its
+URL — a rights block with no quote in it is not a rights block.
 
 ### No-redistribution clauses override the source licence — ruled 2026-09-04
 

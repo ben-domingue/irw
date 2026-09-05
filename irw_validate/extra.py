@@ -12,6 +12,7 @@ question being asked.
 """
 from __future__ import annotations
 
+import os
 import re
 
 import pandas as pd
@@ -74,13 +75,35 @@ def check_shape(df: pd.DataFrame, table: str = "") -> list:
     return out
 
 
+def _cov_range_severity() -> str:
+    """`error` by default since 2026-09-05; `IRW_COV_RANGE_SEVERITY` overrides.
+
+    The override exists because promoting a gate is a judgement about a corpus
+    that keeps changing, and the person who needs to reverse it may not be the
+    person who can ship a release.
+    """
+    value = os.environ.get("IRW_COV_RANGE_SEVERITY", "error").strip().lower()
+    return value if value in ("error", "warn", "info") else "error"
+
+
 def check_cov_range(df: pd.DataFrame, table: str = "") -> list:
     """`cov_age` must actually hold ages (#1779).
 
-    Severity is deliberately `warn`, not `error`. 81 tables are already live
-    with this defect; blocking would fail them all on their next re-upload
-    before anyone has decided what the repair is. Promote it once #1779 is
-    closed.
+    **Promoted from `warn` to `error` on 2026-09-05** ("let's test error for
+    now" -- Ben, irw#1856). The objection to erroring was that it would fail
+    all 81 known tables on their next re-upload before anyone had decided the
+    repair. That objection expired: 72 of the 81 are repaired, and the only
+    live tables it now refuses are the nine `wvs_panasiuk_*`, which are blocked
+    on a source file and are not going to be re-uploaded by accident.
+
+    The argument for erroring is that warning has already been tried. This check
+    has warned since it was written, and 81 tables served a `cov_age` of 1999
+    for as long as they were published; a warning in a scrolling upload log is
+    not a notification. `irw_filter()` reads every value here as an age.
+
+    This is a **test**, so it is reversible in one place: set
+    `IRW_COV_RANGE_SEVERITY=warn` in the environment to put it back without a
+    deploy, and see `_severity()` below.
     """
     out = []
     if "cov_age" not in df.columns:
@@ -98,7 +121,7 @@ def check_cov_range(df: pd.DataFrame, table: str = "") -> list:
         else:
             why = "out of range for a human age in years"
         out.append(Finding(
-            "cov_range", "warn",
+            "cov_range", _cov_range_severity(),
             f"cov_age spans {lo:g}-{hi:g}, outside "
             f"[{AGE_RANGE[0]}, {AGE_RANGE[1]}] -- looks like {why}. "
             "irw_filter() treats every value here as an age (#1779).",

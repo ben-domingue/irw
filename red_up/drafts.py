@@ -72,10 +72,19 @@ def inspect(owner: str, target, now: dt.datetime):
     )
 
     # Only count it as a backlog if the draft actually differs from the release.
+    # Compare the table's content `hash`, not its row count: every repair in
+    # irw#1856 -- NULLing an out-of-range value, restoring a dropped occasion
+    # column, renaming one -- keeps the row count identical by design, so a
+    # numRows comparison called a 33-table backlog "nothing pending" and ten
+    # verified fixes sat unreleased for two days. Fall back to numRows only if
+    # a table has no hash.
+    def _fingerprint(t):
+        return t.properties.get("hash") or ("rows", t.properties.get("numRows"))
+
     try:
-        d_tables = {t.name: t.properties.get("numRows")
+        d_tables = {t.name: _fingerprint(t)
                     for t in redivis.user(owner).dataset(target.name, version="next").list_tables()}
-        r_tables = {t.name: t.properties.get("numRows")
+        r_tables = {t.name: _fingerprint(t)
                     for t in redivis.user(owner).dataset(target.name, version="current").list_tables()} \
             if last is not None else {}
     except Exception as exc:
