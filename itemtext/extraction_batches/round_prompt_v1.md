@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_030 already exists (round cap reached)
+- itemtables/batch_034 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -53,7 +53,7 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 12 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -63,7 +63,14 @@ the next round, and the wrapper will decline to start one for the same reason.
 ## Step 2 — Dispatch extraction (parallel subagents)
 
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
-they run in parallel. Twelve agents sits under the concurrency cap, so this costs no wall clock.
+they run in parallel.
+
+**SIX agents per round, halved from twelve on 2026-09-05 by Ben.** Twelve sat under the API
+concurrency cap, but not under this laptop's memory: the batch_033 round was killed by the OS
+partway through dispatch, and the batch_032 round before it was killed the same way after writing
+four of its twelve tables, costing seven tables of extraction work. The binding constraint is RAM
+on the machine the runner shares with a desktop session, not the concurrency cap. Do not raise
+this back without a reason that addresses memory.
 
 This replaces the earlier groups-of-3, which lost three tables to every single failure:
 batch_010's group 3 was killed by a content-filter error before it read anything, and all three

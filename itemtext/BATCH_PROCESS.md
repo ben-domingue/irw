@@ -51,8 +51,9 @@ nonzero and says what to check.
 
 **Why there is no scheduler, and why "add one later" is the wrong turn:**
 
-- **The bottleneck is triage, not the trigger.** Roughly 8 of the 12 tables in a
-  round need a human go/no-go, and at ~1,165 pending that is ~98 rounds. Any
+- **The bottleneck is triage, not the trigger.** Roughly two thirds of the tables
+  in a round need a human go/no-go, and at ~1,009 pending and 6 tables a round
+  (halved from 12 on 2026-09-05) that is ~168 rounds. Any
   cadence faster than "when someone is ready to triage" just grows an unreviewed
   branch — which is also what makes the pre-round merge of `origin/main` start
   conflicting, and a failed merge stops the queue entirely. One round per triage
@@ -78,8 +79,8 @@ nonzero and says what to check.
   fetching publisher and repository sources, and a datacenter IP gets bot-walled
   far more than this laptop does — and a WAF block lands in `queue_state.csv` as
   `blocked`, which quietly removes a table from the queue for good; a cloud runner
-  is cancelled and evicted more readily, and every death leaves 12 rows
-  `in_progress` that block all later rounds until a human reconciles them; and
+  is cancelled and evicted more readily, and every death leaves a round's worth of
+  rows `in_progress` that block all later rounds until a human reconciles them; and
   `--dangerously-skip-permissions` in a PUBLIC repo, with secrets in the
   environment and public logs, around an agent whose whole job is reading
   untrusted third-party files, is a different risk from the same flag on a machine

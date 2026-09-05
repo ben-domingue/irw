@@ -7,9 +7,10 @@
 # The reasoning is worth keeping, because "add a scheduler later" is the obvious
 # wrong turn:
 #
-#   - The bottleneck is triage, not the trigger. Roughly 8 of the 12 tables in a
+#   - The bottleneck is triage, not the trigger. Roughly two thirds of the tables in a
 #     round need a human go/no-go (BATCH_PROCESS, "Triage and staging"), and at
-#     ~1,165 pending that is ~98 rounds. Any cadence faster than "when someone is
+#     ~1,009 pending and 6 tables a round (halved from 12 on 2026-09-05, for memory
+#     on this laptop) that is ~168 rounds. Any cadence faster than "when someone is
 #     ready to triage a batch" just grows an unreviewed branch -- which is also
 #     what makes this script's pre-round merge of origin/main start conflicting,
 #     and a failed merge stops the queue entirely.
@@ -23,7 +24,9 @@
 #       cache read   42-54M     <- the dominant term
 #     The SUBAGENTS are 85-94% of the cache reads and 35-40% of the output, so
 #     reading the orchestrator transcript alone understates a round about
-#     tenfold. At ~98 rounds the remaining queue is ~4-5 BILLION cache-read and
+#     tenfold. Those figures are per 12-table round; at 6 tables a round the
+#     per-round cost roughly halves and the round count roughly doubles. The
+#     remaining queue is still ~4-5 BILLION cache-read and
 #     ~60M output tokens; an hourly cadence would be ~1.2B cache-read tokens a
 #     day. Nothing should be able to spend that on a timer. What a fired round
 #     actually consumes is rate-limit headroom -- which is what killed 8 of 12
@@ -341,7 +344,7 @@ mkdir -p "$LOG_DIR"
   # further it drifts from main the likelier the wrapper's pre-round merge is to
   # hit a conflict -- which stops the queue entirely, since a failed merge skips
   # the round. It is also the review surface the work actually needs: roughly 8
-  # of the 12 tables in a round want a human go/no-go before anything is staged
+  # of the tables in a round want a human go/no-go before anything is staged
   # for upload, and a PR is where that happens.
   #
   # MERGE THIS PR WITHOUT DELETING THE BRANCH. "Standing" depends on it: #1904

@@ -316,3 +316,56 @@ relied on.
 `dudasova_2021_swls` ships under this ruling, `duboz_2021_swls` is reopened, and 10 remain pending.
 Each pending table takes the same three-way test above — the answer depends on which source published
 the wording, not on the instrument.
+
+### PROMIS and the HealthMeasures family — ruled 2026-09-05
+
+**IRW does not ship PROMIS item wording.** Ruled by Ben after batch_031, where three agents
+blocked their PROMIS tables and a fourth shipped one on the batch_022 precedent. The clause,
+from the rights holder's own Terms of Use (Approved Version 1.12-2017, section "Single Use,
+Reproducibility, and Distribution"), fetched independently three times — the PDF's md5 is
+`fe672ca0c092d6b324a8098ac049c7e3` and two agents plus the triage pass all retrieved it
+byte-identically:
+
+> "User shall not reproduce HealthMeasures Instruments except as needed to conduct the
+> authorized single use … User shall not distribute, publish, sell, license, or provide
+> HealthMeasures products, by any means whatsoever, to third parties not involved with the
+> authorized single use as stated above, without the prior written agreement of the Provider."
+
+That is a quotable redistribution bar, so the DSES ruling applies unchanged: **it governs even
+though IRW's copies came from CC0 deposits.** The same section also reads "publicly available
+for use without licensing or royalty fees for individual research", the free-but-restricted
+shape already ruled on for TIMSS and HEXACO — free of charge is not free of terms.
+
+**Adaptations are covered too.** Ruled the same day on the three `evpromisi_stone_2021_dd*`
+tables, whose wording is the *study's own* modified daily-diary rewrite of PROMIS bank items
+(24-hour recall, Never…Always anchors, labelled in the codebook "Modified daily diary version of
+EDDEPnn") rather than standard PROMIS short-form wording. A derivative of a barred instrument
+stays barred. This avoids having to draw a line about how much rewriting stops being the
+original, and it is the reason `_ddeddep` was withdrawn to `itemtext/quarantine/batch_031/`
+after an agent had shipped it.
+
+**What is NOT covered — check the instrument, not the deposit's name.** `promis1wave1_cesd` and
+`promis1wave1_haq` sit in the same PROMIS Wave 1 deposit but are the CES-D and the HAQ, which
+the codebook keeps in its *legacy-items* tables rather than its PROMIS bank sections. They carry
+their own separate rights and are untouched. Likewise `evpromisi_stone_2021_cdiag` is the study's
+own 12-item chronic-diagnosis checklist despite the `evpromisi_` prefix (see irw#1972). A table
+is in scope because of the instrument it holds, never because of what the study or the file is
+called.
+
+**Scope applied 2026-09-05.** Four tables blocked in batch_031 (`evpromisi_stone_2021_ddedanx`,
+`_ddeddep`, `_ddpainin`, `_global`). Seven withdrawn from the corpus:
+`promis1wave1_{anger,anxiety,depression,fatigue,pain,physicalfunction,social}`, deleted from the
+`irw_text` draft so they leave at the next release. **They were LIVE in v16.0 when this was
+decided, not sitting unreleased** — a fact that was got wrong first time round and had to be
+corrected before the decision was final. `red_up.drafts --verbose` labels every upload `added`;
+that reflects what the draft session added and is **not** a diff against the released version.
+To tell whether something is public, compare `version="current"` against `version="next"`
+directly. Until the next release the withdrawn wording still exists in v16.0, so the deletion is
+recoverable up to that point and not after it.
+
+**Withdrawal entries are not published.** Ruled by Ben 2026-09-05, at the same time: the issues
+page carries no entries recording withdrawn item text. The seven WHOQOL/DSES/TAS-20 entries that
+existed were removed, and no PROMIS entries were written. His reasoning: the fact of a withdrawal
+is not useful to a data user and tacitly advertises that IRW published material it should not
+have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
+trail; do not add them to `itemtext_issues.qmd`.
