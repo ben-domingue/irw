@@ -4884,3 +4884,70 @@ codebook-only "others" residual the questionnaire never prints, and Q7 is a
 check-all battery with no published labels for its 0/1 states.
 
 Cap: batch_040. Not reached — 994 pending remain; next round is batch_036.
+
+### batch_035 triaged — 2026-09-05
+
+Six tables, 100% yield. Gates re-run live: `normalize_nulls` 0 of 6 changed, `audit_batch`
+**5 PASS / 1 WARN**, `verify_batch` PASS=2 with 4 `data_labels` exemptions, `lint_verification`
+clean, `irw-validate` clean apart from an inherited `name_charset` WARN.
+
+**All six staged.** Nothing here needs a policy call, which is the difference from batch_034.
+
+**The WARN is a source property, correctly shipped.** `ganbat_2022_pollution_leave_type`:
+the 20% blank `item_text` is item Q7.5 alone, a codebook-only "others" residual that the S1
+questionnaire never prints in either language (91 of 1,329 respondents endorse it, so it is a
+real coded category) — shipping a blank beats inventing Mongolian wording. The 100% blank
+`option_text`, shared with the other two ganbat tables, is the check-all-that-apply coding:
+the form prints no labels for 0/1 selected/not-selected, and an unlabeled scale point is never
+padded with its own number. Both disclosed in `public_note`.
+
+**The `name_charset` WARN is inherited, not introduced.** `gad_BrummerHoffman_2021` is
+capitalised in the live corpus, so it drops out of case-sensitive joins — one of the 307
+([[irw-metadata-tags-case-join]]). Nothing this batch can fix.
+
+**Rights: every table checked against a source that was actually reachable, and two were
+re-fetched at triage.** This is the gap batch_034 had, and it is closed here.
+
+* `gad_BrummerHoffman_2021` (GAD-7) — re-fetched `phqscreeners.com/terms` live (HTTP 200) and
+  the quoted sentence is verbatim: *"Content found at the PHQ Screeners site is expressly
+  exempted from Pfizer's general copyright restrictions; content found on the PHQ Screeners
+  site is free for download and use."* Affirmative permission, not silence.
+* `gan_2015_ucla_loneliness` (ULS-8) — re-fetched the co-author's UCLA-hosted form
+  (`labs.dgsom.ucla.edu/hays/.../ULS-8.pdf`, HTTP 200, a real 1-page PDF), which carries no
+  rights notice at all. It also **independently confirms the two things the table asserts**:
+  all eight shipped item texts match the form verbatim, and the form's own scoring line names
+  items 3 and 6 as the reverse-scored pair — exactly the two the table ships with inverted
+  anchors, on the burkert_2019_whoqol_bref precedent.
+* `gan_2015_cesd` (CES-D) — Radloff 1977, no fee and no redistribution clause; reproduced in
+  full by multiple CC BY articles. IRW already ships CES-D wording (`promis1wave1_cesd` stayed
+  live through the PROMIS withdrawal precisely because it is the CES-D, not a PROMIS
+  instrument), so there is a standing precedent.
+* The three `ganbat_2022_*` are the study team's own survey in a CC BY 4.0 PLOS article.
+
+**`reconstructed` is the weakest basis in the batch and both PARTIAL grades are honest.**
+`verify_gan_2015_cesd.R` states its own limit in the file: the keying-polarity route pins the
+reverse-worded quadruple {CES4, CES8, CES12, CES16} **as a set** and does not distinguish CES4
+from CES8, nor order the sixteen negatively worded items among themselves. That is what PARTIAL
+should mean, and the .sav forces it — all 53 columns label to `None` and `variable_value_labels`
+is empty, so no source route to the wording exists.
+
+**One response-data finding, not filed.** 23 cells in the CES-D source are coded `4` on a 0-3
+scale and the processing script's `0<=resp<=3` filter drops them, giving per-item n of 64-71
+rather than 71. **21 of the 23 fall on CES4/8/12/16 — exactly the four reverse-worded items**,
+which points at those four having been administered or coded 1-4 while the rest were 0-3. That
+is a property of the response table, not of the item text, and a candidate for its own `data fix`
+issue alongside the fukuda Q39 one.
+
+**Dictionary mismatch, below the issues-page bar:** `ganbat_2022_pollution_disease_risk`'s
+Description says diseases *believed to be caused* by air pollution; the administered stem asks
+what was **experienced**. The belief question is a separate unshipped variable (codebook `K5`).
+A Description fix.
+
+Issues page: 6 drafts generated, **no REVIEW THESE TOO section** — every shipped table earned a
+draft, so nothing is caveated only in `notes.csv` this round. Not applied; entries follow the
+upload stamp.
+
+**`clean/` now holds 13 files, 7 of them already uploaded** (batch_034's five and the two
+`carver_2017_puggs_*`). Re-uploading them is safe — `red_up` replaces rather than appends, which
+this session confirmed when the two carvers went up a second time and counted 52 and 32 exactly —
+but the directory is Ben's to empty and this is why it keeps growing.
