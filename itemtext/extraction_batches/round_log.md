@@ -3831,3 +3831,45 @@ the file:
 Neither is optional and both are owed the moment 029 finishes. Note the failure mode if they
 are forgotten: an unstamped row in `mapping_verification.csv` reads as "never uploaded", which
 is what the stamp exists to distinguish from a table that went missing.
+
+### batch_029 triage — 8 of 8 staged, 0 held — 2026-09-04
+
+**Gates re-run live.** `audit_batch` 8/8 PASS with no anomalies; `verify_batch` PASS=2 + 6
+MISSING(exempt, `data_labels`); `lint_verification` 0 ERROR / 1 WARN — `enkavi_2019_navon`,
+the same translation-caveat false positive now filed as irw#1966, kept VERIFIED. Its mapping
+evidence is decisive: all 12 per-item counts reproduce the live table exactly and are mutually
+distinct, so no permutation of two item codes survives, and the raw `correct_response` key is
+unanimous within each item and matches the shipped attended level.
+
+**Verified the round's own pre-ship correction.** It dropped a `language=Nepali` claim from
+`EEN_Lacey_2024_Children`, which had asserted Nepali on all 41 rows while putting the source's
+English in the administered-wording slot, with no source stating the language. Checked at
+triage: neither that table nor its Parent sibling now carries a `language` column or any
+`_translated` columns. Correct — under the standard, `language` is a fact about the study, and
+here nothing establishes it.
+
+**Two findings filed rather than fixed.**
+
+- **irw#1969** — `data/enkavi_2019_conflict_tasks.py:148` populates `itemcov_delay` from the
+  deposit's `condition` column, which is the stop-signal *frequency* manipulation (40.0% stop
+  trials under `high` against 20.0% under `low`), while `SS_delay` is a separate column with 18
+  distinct values. The covariate is both misnamed and missing, and it is the shared script, so
+  the whole `enkavi_2019_*` family is affected. No item text depends on it.
+- **irw#1970** — the round noticed `check_provenance.R` did not catch the Nepali claim, because
+  `translated_substitute` with an empty `translation_source` is not counted as IRW-generated
+  content. Measured at triage: **58 tables carry `text_source=translated_substitute` and all 58
+  have `translation_source` empty**, so the check has no signal for that shape at all. Most are
+  probably fine; the defect is that nothing distinguishes a study's own English from English
+  this project wrote, and the gate passes either way.
+
+**A scope question for Ben, not a defect.** Four tables blocked — the wordless-stimulus tasks
+from the Enkavi 2019 battery — while `ant_flanker` and `navon` shipped from the same battery,
+because their stimuli are letter and arrow displays the task's own source code writes out in
+text. The blocked four are coloured boxes and abstract PNGs, where any `item_text` would be
+invented. Two agents drew that line independently and it is defensible, but the real question
+is whether IRW-authored stimulus descriptions for cognitive-task conditions are in scope at
+all, and that answer covers the whole `enkavi_2019_*` family at once. Everything recoverable —
+instructions, colour bindings, correct keys — is banked in `pending_index_notes.csv`, so an
+unblock is cheap if Ben rules them in.
+
+**Staged: all 8.**
