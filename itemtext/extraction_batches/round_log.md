@@ -4206,3 +4206,37 @@ catch, and per BATCH_PROCESS orphaned CSVs are quarantined, not promoted.
 
 **Nothing was reconciled here.** `queue_state.csv` is committed as the dead round left it, so
 the record shows what actually happened rather than a tidied version of it.
+
+### batches 029, 030 and 031 — uploaded 2026-09-05
+
+Ben ran one upload of the 24 staged tables and reported 24 of 24 uploaded and row-count
+verified. Confirmed before stamping: `red_up.drafts --dataset irw_text --verbose` lists all
+24 as **added**.
+
+**Note the date.** These stamp `uploaded=2026-09-05`, a day after the batches were extracted,
+because the upload happened after midnight. That is correct and not a bookkeeping slip; anyone
+reading provenance later should not expect the stamp to match the batch's own date.
+
+Stamped 24 rows across `batch_029/provenance.csv` (8), `batch_030/provenance.csv` (10),
+`batch_031/provenance.csv` (6) and `mapping_verification.csv` (24) — git confirms exactly 24
+lines changed in each file, and an independent re-read agrees. The 12 rows left unstamped are
+exactly the blocked tables, and they account for themselves:
+
+- batch_029 — `enkavi_2019_{dpx_axcpt,gonogo,simon,stopsignal}`, the wordless-stimulus tasks
+  awaiting Ben's scope call
+- batch_030 — `esiason_2024_vlq_{consistency,importance}`, the Wilson (2002) no-redistribution
+  footer
+- batch_031 — the four `evpromisi_stone_2021_*` PROMIS tables awaiting Ben's ruling, plus
+  `experimental_iq` and `face_memory_test`, image-only items
+
+Removed the 24 uploaded `__items.csv` from their batch folders and from `clean/`, by name.
+`clean/` is empty. The `dvivdtws_ppmial_marcatto_2023_{cwb,dtw}` pair stays held in batch_028
+and the quarantined `evpromisi_stone_2021_ddeddep` stays in `itemtext/quarantine/batch_031/`.
+
+`mapping_verification.csv` reads as uniform CRLF again (375 of 375 lines), where it was mixed
+at the batch_028 stamp — a later round rewrote it. The byte-level stamp preserves whatever is
+there, which is why it keeps working across the change. Check the convention every time.
+
+**Corpus position after this upload:** 59 tables of item text uploaded across batches 026–031
+in this session, all resident in the `irw_text` **draft** and none of it visible until the
+version is released.
