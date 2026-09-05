@@ -3730,3 +3730,81 @@ is in `clean/`; nothing needs re-extracting either way, since the two files diff
 **Staged: 8.** `clean/` holds `dpt_noncog__intolerance_of_uncertainty`, `duboz_2021_pss10`,
 `dudasova_2021_cpc12`, `dudasova_2021_cpc12_study3`, `dudasova_2021_gratitude`,
 `dudasova_2021_swls`, `dulger2024_wordcompletion`, `dussel_2022_pcl17`.
+
+## batch_029 — 2026-09-04
+
+12 tables claimed, one agent per table. **8 written / 4 blocked / 0 failed** — yield 66.7%.
+Circuit breaker: **not tripped** (0% failed; all four no-CSV outcomes are determinate blocks,
+retry test NO). No rate limit or spend cap was hit; every agent returned a real verdict.
+
+**Written (8):** `dwyer_2019_clinton_cesd` (80 rows), `EEN_Lacey_2024_Children` (41),
+`EEN_Lacey_2024_Parent` (77), `ellis_2016_calc_instrprac` (48), `ellis_2016_calc_instrqual` (48),
+`emobank_buechel_2017` (30), `enkavi_2019_ant_flanker` (96), `enkavi_2019_navon` (24).
+
+**Gates all clean.** `audit_batch.R` 8/8 PASS **with zero WARNs** (so Step 5c has nothing to
+explain this round). `verify_batch.R` PASS=2, MISSING(exempt)=6. `lint_verification.R` 0 ERROR.
+`irw-validate` 0 ERROR. `check_provenance.R` clean for this batch. All 12 tables have exactly one
+tracker row in `mapping_verification.csv`; the 6 data_labels NOT_NEEDED rows were written into
+**both** `verification_merged.csv` and the permanent tracker, so the lint came back with no
+"ships a CSV but has no verification row" ERRORs.
+
+### Orchestrator corrections (Step 5b)
+
+1. **`EEN_Lacey_2024_Children` — language claim removed.** The extraction shipped
+   `language=Nepali` on all 41 rows with the source's **English** Stata labels in `item_text` and
+   every `*_translated` cell NA — i.e. IRW-supplied English sitting in the administered-wording
+   slot. I re-checked the deposit, the IZA WP (dp17166) and the AEA PAP (AEARCTR-0007778)
+   directly: **none states the administered language**, and the agent's own note conceded the
+   inference. Dropped `language` and the four `*_translated` columns. This removes an assertion no
+   source makes and matches the sibling `EEN_Lacey_2024_Parent` — worked from the same replication
+   package by a different agent, which omitted the claim. Two agents on one study reaching
+   opposite language decisions is the cluster-consistency check earning its keep.
+   **Gap worth closing:** `check_provenance.R` did *not* flag this, because
+   `text_source=translated_substitute` with `translation_source` empty is not counted as
+   IRW-generated content.
+2. **`enkavi_2019_dpx_axcpt`, `enkavi_2019_stopsignal`** — verification status `NOT_NEEDED`
+   corrected to `NO_ROUTE` (only `data_labels` is exempt from Step 5b; these are `unknown`).
+3. **`enkavi_2019_navon`** — lint WARN "VERIFIED but its evidence hedges" reviewed, status
+   **kept VERIFIED**. The hedge is about the transcribed instructions and the resp 0/1 accuracy
+   labels, neither of which is the item mapping; the route itself distinguishes every item from
+   every other (12/12 distinct per-item n, reproduce exactly, max diff 0).
+
+### Verified upstream finding — response data, not item text
+
+The stopsignal agent reported that the shared processing script mislabels a covariate. **I
+re-checked it against the raw deposit and it is correct.** `data/enkavi_2019_conflict_tasks.py:148`
+maps `{"itemcov_delay": "condition"}`, but `condition` is stop-signal **frequency**, not delay:
+in the raw `stop_signal.csv.gz` test stage, `condition=high` gives 62,640/156,600 stop trials
+(40.0%) and `condition=low` gives 31,320/156,600 (20.0%), while `SS_delay` is a separate column
+carrying 18 distinct values under **both** conditions. `itemcov_ss_frequency` would be correct.
+This lives in the **shared** script for the whole `enkavi_2019_*` conflict family, so it affects
+those response tables, not just this one. Worth its own GitHub issue.
+
+### The blocked four — one decision, not four
+
+`enkavi_2019_dpx_axcpt`, `enkavi_2019_gonogo`, `enkavi_2019_simon`, `enkavi_2019_stopsignal`.
+Rights are **not** the issue (authors' explicit CC BY confirmation is in the processing script
+header) and every source was read in full. The wording does not exist: `item` is a stimulus
+condition and `resp` is trial accuracy, so neither join axis has text. Each has a
+`pending_index_notes.csv` row recording what was recovered (instructions, colour bindings, correct
+keys) so a later pass need not re-derive it.
+
+**Note the cluster split, which needs ratifying:** `ant_flanker` and `navon` *shipped* from the
+same battery, because their stimuli are letter/arrow displays the task's own source code writes
+out in text (arrow notation; `<global>_of_<local>.png` naming) — a transcription of the source's
+own representation. The four blocked tables have wordless stimuli (coloured boxes and squares,
+abstract PNGs) where any `item_text` would be invented. That line is defensible, and both the
+simon and gonogo agents flagged it independently, but it is **one policy call from Ben covering
+the whole family**: are IRW-authored stimulus descriptions for cognitive-task conditions in scope?
+
+Also surfaced: `availability_audit_full.csv` marks `enkavi_2019_simon` AVAILABLE because "the
+stimulus/design is fully reconstructable from the well-known paradigm description" — that is
+reconstruction from general knowledge, which `itemtext_standard.md` explicitly rules out.
+
+### Other notes
+
+- `irw-validate` WARN `name_charset` on both `EEN_Lacey_2024_*` tables (capitalised table name)
+  is inherited from the live IRW table name; not fixable from the itemtext side.
+- `check_provenance.R` reports `derubeis_2017_arsq` and `dou2025_area` as IRW-generated content
+  with no issues-page entry. **Both are pre-existing, not from this batch** — still outstanding.
+- Cap not reached (cap is batch_030); next round proceeds normally.
