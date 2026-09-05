@@ -294,9 +294,11 @@ class _Version:
 
 
 class _Table:
-    def __init__(self, name, rows):
+    def __init__(self, name, rows, hash_=None):
         self.name = name
         self.properties = {"numRows": rows}
+        if hash_ is not None:
+            self.properties["hash"] = hash_
 
 
 def _ms(days_ago, now):
@@ -314,7 +316,12 @@ def _fake_redivis(monkeypatch, versions, draft_tables, released_tables):
 
         def list_tables(self):
             src = draft_tables if self._v == "next" else released_tables
-            return [_Table(n, r) for n, r in src.items()]
+            out = []
+            for n, r in src.items():
+                # a value may be a bare row count, or (rows, hash)
+                rows, h = r if isinstance(r, tuple) else (r, None)
+                out.append(_Table(n, rows, h))
+            return out
 
     class _User:
         def dataset(self, name, version=None):
@@ -359,6 +366,32 @@ def test_drafts_ignores_a_draft_identical_to_the_release(monkeypatch):
     )
     r = _drafts.inspect("datapages", _target(), now)
     assert r["pending"] == 0, "an untouched draft is not a backlog, however old the release"
+
+
+def test_drafts_sees_a_repair_that_keeps_the_row_count(monkeypatch):
+    """The irw#1856 case: every repair preserves rows, so numRows sees nothing."""
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _fake_redivis(
+        monkeypatch,
+        versions=[_Version("v47.0", True, _ms(2, now)), _Version("next", False, _ms(0.1, now))],
+        draft_tables={"ravens_deboeck2012": (11622, "aaa"), "untouched": (100, "same")},
+        released_tables={"ravens_deboeck2012": (11622, "bbb"), "untouched": (100, "same")},
+    )
+    r = _drafts.inspect("datapages", _target(), now)
+    assert r["changed"] == ["ravens_deboeck2012"]
+    assert r["pending"] == 1
+
+
+def test_drafts_falls_back_to_rows_without_a_hash(monkeypatch):
+    now = _dt.datetime.now(_dt.timezone.utc)
+    _fake_redivis(
+        monkeypatch,
+        versions=[_Version("v1.0", True, _ms(3, now)), _Version("next", False, _ms(0.1, now))],
+        draft_tables={"a__items": 10, "b__items": 20},
+        released_tables={"a__items": 10, "b__items": 99},
+    )
+    r = _drafts.inspect("datapages", _target(), now)
+    assert r["changed"] == ["b__items"]
 
 
 def test_drafts_reports_no_draft(monkeypatch):
