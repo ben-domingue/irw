@@ -177,6 +177,15 @@ Limitations-grounding answer.>
 
 ## Reproducibility
 
+<!-- Reports which IRW version this page's data was computed against. The number
+     is resolved from date_run by vignettes/vignette_versions_compute.R, which
+     writes vignettes/vignette_versions.tsv -- so after adding this vignette,
+     add its stem to that script and re-run it, or the include emits nothing.
+     Pages that fetch from Redivis at render time go in the script's LIVE list
+     instead and report the current version. -->
+
+{{< include ../components/_data-version.qmd >}}
+
 Results were computed on `r format(date_run, "%B %d, %Y")`. To regenerate:
 
 ```r
