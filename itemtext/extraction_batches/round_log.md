@@ -4376,3 +4376,35 @@ were removed from `itemtext_issues.qmd`, taking it from 259 entries to 252, and 
 were written. Withdrawals now live in `provenance.csv` and this log only. Noted at the time, and
 overruled: `rmet_higgins_2022_tas` is live and disappears at the next release, so with its entry
 gone that disappearance is unexplained to anyone who used it.
+
+### Picture-stimulus tasks ruled — 2026-09-05
+
+Ben ruled the Enkavi scope question, and it turned out to be about a corpus inconsistency rather
+than about four tables. IRW had already answered "what does a picture-stimulus task ship?" three
+different ways: `twod_rotation_mather2023` shipped 304 picture items with `item_text` **blank by
+design**; `enkavi_2019_{stroop,navon,ant_flanker}` and `dd_rotation` shipped **IRW-authored
+stimulus descriptions**; `gilbert_meta_39` shipped **nothing**.
+
+**The rule is now the blank one.** Ship the table, leave `item_text` empty, and let it carry what
+the source really publishes — instructions, section structure, and the accuracy labels. The
+stimulus identity already lives in the item code. Ask whether the source publishes wording, not
+whether the task is verbal.
+
+**The four live tables carrying authored descriptions stand.** They are correct, disclosed and in
+v16.0, and re-uploading live tables to *remove* usable information is not worth it. So the corpus
+is knowingly mixed, which is recorded in the standard along with the instruction not to cite them
+as precedent.
+
+**Reopened: `enkavi_2019_simon`, `_gonogo`, `_stopsignal`** — `blocked` → `pending`, index notes
+marked `resolved` with the original block text preserved inline, the `duboz_2021_swls` pattern.
+Their recovered material is already banked, so nothing needs re-deriving: for `gonogo` that
+includes the binding that `style.css` fixes `#stim1=orange` and `#stim2=DodgerBlue`, with only the
+go/no-go role counterbalanced. Whoever extracts `stopsignal` should know it has no shippable
+`correct_response` — the shape-to-key mapping is shuffled per session.
+
+**`enkavi_2019_dpx_axcpt` stays blocked, on a different ground.** Its probe labels are randomised
+**per participant**, so `AX_probe3` is a different image for different people. The item code does
+not denote a stable stimulus, and blank `item_text` would not fix that, because the problem is the
+code rather than the text. That is a fact about the dataset, not a policy about pictures.
+
+Queue after both rulings: **1,012 pending / 270 done / 53 blocked / 12 failed / 54 excluded.**
