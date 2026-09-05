@@ -4542,3 +4542,63 @@ accuracy labels, which is what the source actually publishes.
 **Session total: 69 tables of item text uploaded** across batches 026-033, less the seven
 `promis1wave1_*` withdrawn on the PROMIS ruling. Batch_032's four and batch_033's six are
 draft-only; everything earlier is live in v16.0.
+
+### The marcatto duplicate resolved — `_dtw` kept, `_cwb` deleted — 2026-09-05
+
+irw#1967 settled. The two tables held the same 12,166 rows, the same 22-item set and identical
+`cov_gender`/`cov_age`/`cov_language` with nothing missing, so the **#1653 tie-breaker — keep
+whichever carries more information — did not discriminate**, and the call fell to the name.
+
+`_dtw` is the accurate one: the data are the 22-item Dark Tetrad at Work scale, codes
+`dtw1`–`dtw22`, and its biblio Description says so. `_cwb` names an instrument the table does not
+contain — the study's real CWB block is a separate 45 items, present in neither table — and
+keeping it would have left the sibling family (`_ocb`, `_ocs`, `_snaq`, each named for what it
+holds) with one member that is not, and taken the name a future CWB extraction would need.
+
+Checked against Redivis rather than the dictionary before Ben acted: `_cwb` sat in **shard 1,
+`item_response_warehouse`**, and in no other shard. He deleted it from the warehouse and the
+dictionary; confirmed gone from the released version, with no open draft on that shard.
+
+**Item-text side, done here.** `_dtw`'s `__items.csv` is staged for upload unchanged — nothing
+was re-extracted, the two CSVs differed only in the `table` column, which is exactly what the
+#1653 rule anticipated when it said to hold item text and re-point it at whichever table
+survives. `_cwb`'s CSV and verify script are removed; its `queue_state` row is **`excluded`**
+rather than blocked, because the table no longer exists and is permanently off-limits; its
+`mapping_verification` row is deleted outright, since a row claiming a verified mapping should
+not outlive the thing it verified; and its provenance `note` records the whole decision with
+`public_note` cleared.
+
+**This is the first duplicate-table question the pipeline has carried through to a resolution.**
+The #1653 pair is still open on the itemtext side — `APFCompact_Ptacek_2024_DASS-21` is `done`
+while its keeper `ptacek2023_dass21` is `pending`, so that item text was never re-pointed.
+
+### `dvivdtws_ppmial_marcatto_2023_dtw` uploaded — 2026-09-05, and to a NEW SHARD
+
+Ben uploaded this one to **`irw_text_2`**, a new item-text shard, not to `irw_text`. Verified
+directly against Redivis rather than with `red_up.drafts`, which only knows the shards named in
+`metadata/redivis_config.R` and would have reported the table missing: `irw_text_2` is at v1.0
+with exactly one table, `dvivdtws_ppmial_marcatto_2023_dtw__items`, and `irw_text` v17.0 (745
+tables) does not contain it. Stamped `uploaded=2026-09-05` in `batch_028/provenance.csv` and
+`mapping_verification.csv`, one row each, and cleared the CSV from the batch folder and `clean/`.
+
+**batch_028 is now fully closed**: 9 of 12 stamped, and the 3 unstamped account for themselves —
+`duboz_2021_swls` was reopened and shipped in batch_030, `dudasova_2021_engagement` is blocked,
+and `dvivdtws_ppmial_marcatto_2023_cwb` is the deleted duplicate. No `__items.csv` remain in the
+folder.
+
+**Three things assume a single item-text dataset, and a second one now exists.** A separate agent
+is handling this — recorded here only so the assumption is not rediscovered mid-round:
+
+1. `Rpkg/R/redivis-config.R:60` — `.irw_itemtext_spec <- list(user = "datapages", dataset =
+   "irw_text:07b6")`. A single hard-coded dataset, with a pinned reference id of the kind that
+   rotates on a release cut. Anything in `irw_text_2` is not reachable through `irw_itemtext()`
+   until this changes.
+2. `metadata/redivis_config.R:38` — `text = "irw_text"`, a scalar, where the same file already
+   holds the core warehouse shards as a vector.
+3. `red_up` — `targets.py` parses that config, so `irw_text_2` is not a resolvable target and
+   `red_up.drafts --dataset irw_text` cannot see it. **The verify-before-stamping step in
+   BATCH_PROCESS does not work for anything landing in shard 2** until it does.
+
+Noted separately, same drift in the other direction: `item_response_warehouse_2`, `_3` and `_4`
+return `NotFoundError` under the `datapages` owner while `_5` and `_6` resolve, though the config
+lists all six as current.
