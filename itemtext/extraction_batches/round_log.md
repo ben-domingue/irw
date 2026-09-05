@@ -4284,3 +4284,31 @@ round wrote itself. `check_provenance` reads 424 rows across 34 files with no vo
 
 **Staged: the 4.** The 7 requeued rows are back to `pending` with their batch and timestamp
 cleared, in the shape every other pending row has.
+
+### batch_032 — uploaded 2026-09-05
+
+Ben ran the upload of the four salvaged tables and reported 4 of 4 uploaded and row-count
+verified; `red_up.drafts` lists all four as **added** before stamping. Stamped
+`uploaded=2026-09-05` in `itemtables/batch_032/provenance.csv` and `mapping_verification.csv`,
+4 rows each, exactly 4 lines changed per file. The single unstamped row is
+`FIVPEI_Perrig_2023_PENS`, which is blocked and shipped nothing. Cleared the four CSVs from the
+batch folder and `clean/`.
+
+So the killed round cost seven tables' worth of extraction work, not twelve — and the five that
+had produced anything all reached the warehouse or a determinate verdict.
+
+### Issues page — datapages/irw#134 merged, and what it does and does not cover
+
+Merged 2026-09-05: 29 entries for batches 024, 025 and 026, taking the page from 230 to 259, and
+closing datapages/irw#132 (the three withdrawn tables, `rmet_higgins_2022_tas` included).
+
+**Batches 027 through 032 are now the backlog** — 47 tables uploaded across them with no entries
+on the page. They are all stamped, so they are all due; the drafter will template them from
+`public_note`, and per the standing lesson the drafts must be rewritten from each table's full
+`note` and its REVIEW THESE TOO section read, not pasted. Known callouts already waiting in that
+set: `dpt_noncog__interpersonal_reactivity` carries `wording_rights=NC`, `esiason_2024_aaqii`
+must disclose that IRW's own script truncated the 1-7 AAQ-II and dropped 9.5% of responses
+(irw#1971), and `falih_2026_mds16` owes the within-block ordering caveat.
+
+Note also that merging that PR did **not** rebuild the live page: `quarto_publish.yaml` in
+`datapages/irw` is `workflow_dispatch` only.
