@@ -9,9 +9,10 @@ verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
 `excess_occ` 0 where the repeat is the design). Two of block F and two of block
 J are repaired and staged. Block H is **re-diagnosed and should not be worked
 from its table below**. What remains needs a source file somebody has to fetch
-by hand: `duolingo_*` (a Dataverse guestbook), `stress_deboeck2012`,
-`realpic_souza2021`, `non_parametric_mixture_modeling_exp1_Cleaned`, and the
-five tables moved out of block H. Read its entry before
+by hand: `stress_deboeck2012`, `realpic_souza2021`,
+`non_parametric_mixture_modeling_exp1_Cleaned`, and the five tables moved out of
+block H. **Block I (`duolingo_*`, 7 tables) will not be fixed** — ruled out of
+scope by Ben on 2026-09-05; see its entry. Read its entry before
 starting another block: a third of it was misdiagnosed here, always in the same
 direction — a duplicate-looking flag that was really a collision, a selector
 bug or an NA-indexing accident — so treat a block's stated fix as a hypothesis
@@ -276,7 +277,20 @@ check the source: `pact_project.R:361` rbinds five frames under a
 should be carried through as well — but see Decision note below, it is not what
 causes this flag.
 
-### Block I — `duolingo_*` · 7 tables · 279,003 rows · restore a trial index · **script fixed, blocked on the data**
+### Block I — `duolingo_*` · 7 tables · 279,003 rows · **WILL NOT FIX, ruled 2026-09-05**
+
+> **Ben ruled these out of scope on 2026-09-05:** the source files are more
+> trouble than the tables are worth. Do not fetch the SLAM dataset and do not
+> re-run `duolingo2018.R`. The diagnosis below stands and the script is already
+> fixed, so if the data ever arrives for another reason the work is one command
+> — but nobody should go looking for it.
+>
+> These seven stay in the corpus carrying the defect. It is class 1c, the mild
+> one: the repeats are **real** and the data is not false, it is unusable as a
+> longitudinal trace. Nothing about them should ever be deduped.
+
+*Diagnosis as of 2026-09-03, retained for the record:*
+
 
 **The index was never missing from the source -- the script reads it, names it,
 documents its layout in a comment, and then drops it.** `resp.id` is "a unique
