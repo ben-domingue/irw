@@ -4790,3 +4790,30 @@ public repo, both left for Ben):
 **The cap was raised to `batch_040` mid-round** (commit `525d188`), so the round's own closing line
 — "cap reached, stopping" — is stale: it re-read Step 0 from the copy loaded at process start.
 Six rounds of headroom remain, not zero.
+
+### batch_034 uploaded and stamped — 2026-09-05
+
+Ben uploaded `clean/`. **The tables went to `irw_text_2`, not `irw_text`** — the shard created
+2026-09-05 under the 1000-table cap — so the first `red_up.drafts --dataset irw_text` check
+reported "1 pending" and none of them; the right dataset shows all 7 as `added`.
+
+Counts verified before stamping: `count(*)` against each draft table against the local
+CSV-parsed row count, **7 of 7 exact, 0 mismatches, no doubling**. Two traps on the way, both
+already on record and both worth restating because each renders as a plain "not found":
+the **read token cannot see a draft**, and **`qualifiedReference` normalises `__items` to a
+single underscore** (`...irw_text_2:ae47:next.frikha_2023_pe_ms_items:8hc6`). A hand-built
+`dataset.table__items:next` reference 404s on a table that is plainly there — take the
+reference from the API, never construct it ([[irw-redivis-reference-ids-rotate]]).
+
+Stamped `uploaded=2026-09-05` on 5 rows in `batch_034/provenance.csv` and 5 in the root
+`mapping_verification.csv`; each edit round-tripped byte-identically before writing, and an
+independent re-read from disk confirmed 5 of 5 in both files with no reformatting elsewhere.
+The two `carver_2017_puggs_*` were **already stamped** — they shipped earlier and had simply
+been left in `clean/`, which is Ben's to empty. The 5 `__items.csv` are deleted from the batch;
+every sidecar and all six `verify_*.R` stay.
+
+`fukuda_2021_health_literacy` is unstamped and its CSV remains in `batch_034/` — still held.
+
+Issues page: the four language caveats applied and opened as **datapages/irw#139** (288 entries,
+YAML re-parsed, no duplicates). `frikha_2023_pe_ms` earned no entry — its only finding is the
+biblio acronym expansion, which is below the page's bar.
