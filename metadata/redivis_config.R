@@ -41,7 +41,8 @@ IRW_CORE_DATASETS <- c(
 ## See ARCHITECTURE.md section 2, and Rpkg/inst/developer/warehouses.md for the
 ## checklist to follow when adding one.
 IRW_TEXT_DATASETS <- c(
-  "irw_text"
+  "irw_text",
+  "irw_text_2"
 )
 
 ## Auxiliary (non-core) datasets, by the `source` name the irw package uses.
