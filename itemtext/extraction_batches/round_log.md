@@ -3662,3 +3662,27 @@ batch_027 had three. The hedge test is overdue for narrowing.
 **No systemic access issues.** No quota exhaustion, no rate limit, no killed agents; every
 agent reported a determinate outcome and all 12 sidecar sets were written. Queue: 1,049
 pending remain. Cap is batch_030 — **not reached**, two rounds left.
+
+### batch_027 — uploaded 2026-09-04
+
+Ben ran the upload and reported 10 of 10 uploaded and row-count verified, including
+`dominguez_2018_jcs` (staged with its Subtotal `item_17`, see #1965). Confirmed before
+stamping: `red_up.drafts --dataset irw_text --verbose` lists all ten as **added**.
+
+Stamped `uploaded=2026-09-04` in `itemtables/batch_027/provenance.csv` and
+`mapping_verification.csv` — 10 rows each, git confirms exactly 10 lines touched per file,
+and an independent re-read agrees: 12 rows each, 10 stamped, the 2 unstamped being exactly
+the blocked `dominguez_2018_uwes` and `dpt_noncog__grit`. Removed the ten uploaded
+`__items.csv` from the batch folder and `clean/`, by name.
+
+**`mapping_verification.csv` is now MIXED line endings and a `csv.writer` pass would have
+silently reformatted the whole file.** It was uniformly CRLF when batch_026 was stamped a
+few hours earlier; the batch_027 round left it at 12 CRLF lines and 328 LF, so no single
+convention round-trips it any more. The stamp was therefore done as a byte-level edit — each
+record starts at a line start and its first four fields (`table`, `batch`, `mapping_basis`,
+`uploaded`) are simple, so the prefix is unambiguous — and the file came out 100 bytes
+larger, exactly 10 × the date, with the CRLF/LF counts unchanged. `batch_027/provenance.csv`
+does still round-trip (MINIMAL + LF) and was stamped the ordinary way.
+
+Whoever writes to `mapping_verification.csv` next should check this first. The file is
+rewritten by rounds, so its convention can change under you between one batch and the next.
