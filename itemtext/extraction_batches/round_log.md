@@ -4969,3 +4969,89 @@ Issues page: the six entries are **datapages/irw#142**. #139 (the four batch_034
 **already merged** by the time this ran, so the follow-up commit could not go on that branch —
 a fresh branch off the updated main was cut instead, and its diff is exactly +18 lines with no
 duplication of the merged four. Live page: 288 entries before, 294 after.
+
+## batch_036 — 2026-09-05
+
+**6 tables claimed | 5 written / 1 blocked / 5 failed | yield 5/6 extracted, 0/6 fully gated**
+**CIRCUIT BREAKER SET — Redivis query API outage, not an extraction fault.**
+
+Tables: gao2025_attachment_anxiety, gao2025_spiritual_wellbeing, garciabatista_2021_erq,
+GBJW_fadplus_goto2021, geacaballero_2019_pes_nwi, geacaballero_2019_pes_nwi_short.
+
+**Extraction went well.** Five of six produced complete `__items.csv` plus all four sidecars:
+attachment_anxiety 21 rows, spiritual_wellbeing 60, erq 50, pes_nwi 120, pes_nwi_short 62.
+One determinate block (below). Every gate that does not need the Redivis query route passed:
+`irw-validate` clean on all five, `lint_verification.R` 6 rows / 0 ERROR / 2 WARN,
+`check_provenance.R` exit 0. Each agent's own `validate_items.R --table-sets` PASSED earlier
+in the round, while the query route was still up.
+
+**SYSTEMIC ACCESS ISSUE — the round's headline.** Partway through, the Redivis QUERY API began
+hanging account-wide and never recovered (~2h15m). `audit_batch.R` was killed twice after 49 and
+24 minutes having produced no `audit_report.csv` and burned only 4-7s of CPU — blocked on I/O,
+sockets in CLOSE-WAIT to 34.144.255.54:443. A bare
+`query("SELECT 1")$to_data_frame()` on datapages/item_response_warehouse did not return in 280s,
+probed five times through 15:21. Meanwhile the METADATA path was healthy: `irw_list_tables()`
+returned in 22s and the API root answered 200 in 0.21s. So metadata works, query execution hangs.
+Not the export cap — no export was attempted. `audit_batch.R` and `verify_batch.R` therefore
+never ran, which is the only reason the five written tables are `failed` rather than `done`.
+**They need RE-GATING, not re-extraction** — see circuit_breaker.flag for the exact commands.
+
+Breaker set deliberately, not waived: the Step 5 rate-limit carve-out covers agents killed with
+nothing determined, whereas here every agent finished and the outage IS the finding. Step 5 also
+states outright that unresolved access failures stay on the counting side. A next round would
+fail at extraction, not merely gating — `table_context.R` and the Step 5 hard gate use the same
+query route.
+
+**Blocked (1) — GBJW_fadplus_goto2021**, retry test NO, unaffected by the outage. Blocked on
+availability, not licence, in two layers: the administered Japanese wording is nowhere in the
+record (OSF deposit has bare column codes; the Frontiers article prints only the endpoint anchors;
+Shirai 2010 is an undigitised Toyo University bulletin), and the English fallback fails too
+(Lipkus 1991's appendix is paywalled, and no open source reproduces all seven items *with their
+numbering*). Row added to `pending_index_notes.csv`.
+
+**Step 3b instrument mismatches — two, both confirmed by the orchestrator offline:**
+1. `GBJW_fadplus_goto2021` is **not** the FAD-Plus. `data/fadplus_goto2021.R` splits one raw file
+   by column prefix into five tables (FAD, LOC, Rosenberg, BSCS, GBJW), so "fadplus" is the STUDY.
+   The script's own comment documents the GBJW as "seven items in a six-point Likert format
+   (Shirai, 2010)", and metadata.csv corroborates 7 items / 6 categories / 802 participants —
+   the agent's figures exactly. Dictionary Description also has a typo: "Globa belief in a just
+   world scale".
+2. `geacaballero_2019_pes_nwi_short` is **not** a short PES-NWI. Its 31 yes/no variables record
+   whether each nurse flagged an item as an *essential element*, so `resp` is perceived importance,
+   not a workplace rating. The dictionary Description ("31-item proposed short yes/no version of
+   the Practice Environment Scale...") misdescribes it; metadata.csv shows 31 items with 2
+   response categories over 263 participants, consistent with the selection task. Carried as a
+   `public_note`. Also: the table is not shorter than the "full" one — it has 31 items to the
+   full table's 30, because of the defect below.
+
+**DATA DEFECT worth its own issue — `data/geacaballero_2019_pes_nwi.py` drops an item.**
+Reported independently by both geacaballero agents and then CONFIRMED offline by the orchestrator:
+`LIKERT_ITEMS` is a hard-coded list of exactly 30 names with `education` (item 18, "Se desarrollan
+programas de formación continuada para las enfermeras") absent, while the sibling yes/no block is
+derived dynamically via `startswith("X")` and so picks up all 31. metadata.csv confirms the
+asymmetry: 30 items / 269 participants for `geacaballero_2019_pes_nwi` against 31 / 263 for
+`..._short`. The source `.sav` has all 31 Likert items with all 269 respondents answering, so the
+missing item is recoverable from the same file.
+
+**Two lint WARNs, both assessed and explained in notes.csv** (neither left for the next reviewer):
+`geacaballero_2019_pes_nwi` keeps VERIFIED — route 9 matched all 120 cells with 0 mismatches and
+all 30 count signatures are distinct, so every item is separated. `..._short` keeps VERIFIED on a
+narrower basis, stated plainly: Figure 1's percentages pin only 23 of 31 uniquely (four
+percentages tie, and for binary items route 9 adds no independent information), with the remaining
+8 resting on the `.sav`'s explicit "item 1".."item 31" labels — Step 5b's explicit-code-labels
+exemption, legitimate but an exemption rather than a statistical route.
+
+**Provenance schema:** added the `translation_source` column to this batch's `provenance.csv`
+(`study_supplied` for the three `translated_substitute` tables, `mixed` for the geacaballero pair,
+blank for the blocked one), which `check_provenance.R` had been asking for; its "column absent"
+count fell 47 → 44. The remaining gaps are older batches. Note for triage: the geacaballero pair
+ships IRW-authored English for 21 items each in `item_text_translated`, which may warrant an
+issues-page entry — not added unilaterally, since the public site is a human-facing artifact.
+
+**Process note:** two agents (both geacaballero) went silent with their `__items.csv` and
+`verify_*.R` written but the three metadata sidecars missing. Per Step 5 the batch directory was
+`ls`-ed before classifying and both were resumed to write only their missing sidecars from what
+they had actually determined — no re-extraction, no reconstructed evidence. Both then reported
+their `validate_items.R --table-sets` gate had PASSED. Also worth recording: a wait-loop using
+`pgrep -f audit_batch.R` matches the orchestrator's OWN `claude -p` process, because this prompt
+text contains the script name — it can never report the audit as finished. Wait on the R PID.
