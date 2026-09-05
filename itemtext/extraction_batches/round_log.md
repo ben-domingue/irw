@@ -4722,3 +4722,71 @@ audit_batch did not flag it and was right not to; it is a property of the respon
 batch_034 is the batch named as the round cap in Step 0 of the round prompt. **Cap reached
 — stopping.** 1000 tables remain `pending`, 0 `in_progress`. A human decides whether to
 raise the cap before any further round runs.
+
+### batch_034 triaged — 2026-09-05
+
+Six tables, 100% yield, and the gates were re-run live at triage rather than trusted from the
+round's own report: `normalize_nulls` 0 of 6 changed, `audit_batch` **6/6 PASS with no WARNs**,
+`verify_batch` **PASS=6**, `lint_verification` no problems, `irw-validate` ok on all six. Nothing
+that passed at extraction time surfaced anything new against current live data.
+
+**Staged (5):** `frikha_2023_pe_ms`, `fukuda_2021_info_reliability`,
+`fukuda_2021_withholding_behavior`, `gabriel_2026_knowledge_confidence`,
+`gabriel_2026_media_use` — copied into `itemtables/clean/`, which now holds 7 files
+(the two `carver_2017_puggs_*` from batch_018 were already waiting).
+
+**Held (1): `fukuda_2021_health_literacy` — a rights call for Ben, not a defect.** The table is
+clean on every gate; what is held is a policy question. The round's RIGHTS verdict rests on the
+2026-09-04 quote test finding no redistribution bar, and two of the three sources it cites for
+that could not actually be read: `m-pohl.net/tools` **404s** (it is not in that site's sitemap at
+all — the round recorded its 403 as evidence of silence, but a page that does not exist is not
+silence), and `ahla-asia.org/hls-eu-q47` returns a themed **404 shell**, not a statement. Both are
+the [[irw-fetch-blocker-pages]] shape: 55kB of Drupal for a 403.
+
+Reading the page that does exist — **`m-pohl.net/HLS19Instruments`** — turns up a quotable bar,
+but over **HLS19**, the successor instrument, not the HLS-EU-Q47 this table ships: *"Any licensing
+by third parties is prohibited"*, *"the instruments can only be shared with others by a joint
+agreement between the ICC and the applicant"*, *"owned by the HLS19 Consortium"*, use *"non-commercial
+and in public interest"*, by contractual agreement. That is the PROMIS shape exactly — and PROMIS
+was ruled out one day earlier, on 2026-09-05.
+
+It does not automatically reach this table. What IRW copied is Sørensen et al. 2013, BMC Public
+Health 13:948, Additional file 1 — the HLS-EU Consortium's own annex, published **CC BY 2.0**,
+bearing only a bare `© HLS-EU Consortium` line. The PROMIS ruling propagates a bar *downstream*
+(a derivative of a barred instrument stays barred); here the barred instrument is the *successor*
+of the one we ship, and a later restriction on a newer instrument does not retroactively unpublish
+a CC BY 2.0 annex. So the round's verdict may well be right. But it is the same question Ben
+answered yesterday about a named instrument whose rights holder runs an application process, and
+BATCH_PROCESS puts a policy call of that kind with him. Held rather than staged, and asked.
+
+**Issues page: drafted, not applied.** Five drafts generated. Per the drafter's own rule a table
+earns an entry when it ships, and none of the six is uploaded, so nothing was pasted. The draft is
+in the scratchpad and will be applied at stamping time.
+
+**A backlog the drafter's rule has been quietly accruing: 35 tables are uploaded, carry a
+`public_note`, and have no entry on the live issues page** — reaching back to batch_017
+(`campos_2023_pidaq`, `rosenberg_selfesteem`), through batch_020's WHOQOL table, and including
+**all six of batch_033**, uploaded earlier today. The page lists 284 tables. This is the exact gap
+the issues page exists to close: a caveat recorded in provenance that a data user never sees.
+Fixing it is a PR to `datapages/irw`, which is outward-facing and was not opened unbidden.
+
+**Two internal defects the round confirmed, neither filed as an issue** (both outward-facing on a
+public repo, both left for Ben):
+
+1. **`data/fukuda_2021_healthliteracy.py` drops HLS-EU-Q47 question 39, and its own comment says
+   the opposite.** Line 11 claims Q39 is "missing from the source file"; S1 Data holds all 47
+   columns, but Q39's header carries a Japanese prefix and ideographic spaces, so line 82's
+   `startswith('Health literacy')` filter skips it. Line 83 then renumbers the survivors, so
+   `hl_item39..46` are source Q40..Q47. Verified column by column. **The item text is correct — it
+   follows the true numbering; the *response* table is the defective artifact**, silently 46 items
+   where the instrument has 47. The selector should match `'Health literacy item'` anywhere in the
+   header, not at position 0. Candidate for a `data fix` issue and reprocessing.
+2. **`metadata/biblio.csv` line 6462 invents an acronym expansion.** It reads "Perceived Motivation
+   Scale (PE-MS)"; PE-MS is the *Physical Education* Motivation Scale, per the study's own S2 File
+   title. Construct, item range, N and response format are all correct, so this is a wording fix,
+   not a mismatch — milder than the sibling `frikha_2023_pe_acrs` defect found in batch_033, where
+   the Description named an entirely different construct. Below the public issues-page bar.
+
+**The cap was raised to `batch_040` mid-round** (commit `525d188`), so the round's own closing line
+— "cap reached, stopping" — is stale: it re-read Step 0 from the copy loaded at process start.
+Six rounds of headroom remain, not zero.
