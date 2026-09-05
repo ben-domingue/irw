@@ -4337,3 +4337,42 @@ The round-size arithmetic stated as current fact was corrected in `BATCH_PROCESS
 1,165-table queue. At 6 a round and 1,009 pending it is **~168 rounds**, with per-round token
 cost roughly halved and the round count roughly doubled. Historical accounts of batches 010,
 018, 019 and 020 keep their original numbers, since those describe what happened.
+
+### PROMIS ruled and withdrawn — 2026-09-05
+
+Ben ruled three questions after batch_031. **(1)** The HealthMeasures redistribution clause bars
+IRW from shipping verbatim PROMIS bank wording; the DSES rule applies unchanged, CC0 deposit or
+not. **(2)** The bar reaches the study's own *modified* daily-diary adaptations too — a
+derivative of a barred instrument stays barred, which avoids drawing a line about how much
+rewriting is enough. **(3)** The seven already-shipped tables come out.
+
+**A correction that changed the third answer, and had to be made before it was final.** Ben was
+first told the seven `promis1wave1_*` tables were sitting in an unreleased draft, so removing
+them would be a quiet deletion no user had seen. **That was wrong: `irw_text` v16.0 is released
+and all seven were live in it.** So was almost everything else from this session — 51 of the 55
+tables uploaded across batches 026–032 are in v16.0; only batch_032's four are draft-only.
+
+The mistake was reading `red_up.drafts --verbose`'s `added` label as "added relative to the
+released version". It is not that — it reports what the draft session added, and says nothing
+about whether the table is public. **To tell whether something is live, compare `version="current"`
+against `version="next"` directly.** That is now written into the standard.
+
+**Done, in this order, safest first.** The issues-page edit (reversible) before the Redivis
+deletion (not). Seven tables deleted from the `irw_text` draft — 746 tables before, 739 after,
+and the removed set asserted equal to the seven targets, so nothing else moved.
+`promis1wave1_cesd` and `promis1wave1_haq` were explicitly checked present before and after:
+they are the CES-D and the HAQ, legacy instruments in the same deposit, and are **not** in scope.
+Until the next release the withdrawn wording still exists in v16.0, so this is recoverable up to
+that point and not after it.
+
+`queue_state.csv`: the seven go `done` → `blocked`. `batch_022/provenance.csv`: the withdrawal is
+recorded in each `note`, `public_note` is **cleared**, and the `uploaded` stamp is kept as
+history so the record still shows these tables shipped.
+
+**Withdrawal entries are no longer published at all.** Ben ruled the same day that the fact of a
+withdrawal is not useful to a data user and tacitly advertises that IRW published material it
+should not have. The seven existing entries — four WHOQOL, the DSES, and both TAS-20 tables —
+were removed from `itemtext_issues.qmd`, taking it from 259 entries to 252, and no PROMIS entries
+were written. Withdrawals now live in `provenance.csv` and this log only. Noted at the time, and
+overruled: `rmet_higgins_2022_tas` is live and disappears at the next release, so with its entry
+gone that disappearance is unexplained to anyone who used it.
