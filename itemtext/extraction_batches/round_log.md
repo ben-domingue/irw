@@ -3128,3 +3128,26 @@ reversed. Rule written into `itemtext_standard.md` § Rights.
 **Still outstanding:** the issues-page entries for all three tables (datapages/irw), and
 `wording_rights` is not set on these rows — the WHOQOL precedent sets `wording_rights=NC`, which is
 the wrong flag for a fee rather than a non-commercial clause, so that column needs a decision.
+
+### DSES item text withdrawn — no-redistribution clauses override the source licence — 2026-09-04
+
+Ben ruled that **a quotable no-redistribution clause outranks the licence of the deposit the wording
+came from**, withdrawing `CV_OASIS_ODSIS_PPE_Novak_2020_DSES`. The DSES requires registration with
+Underwood and the Fetzer copy states "Permission of author required to distribute or copy"; IRW's
+wording came from Underwood's own CC BY 3.0 article, which was ruled not to rescue it.
+
+This settles the question the WHOQOL ruling explicitly left open, in the strict direction, and it is
+the second ruling the same day narrowing ECR-R — the first being the fee-licence rule on the TAS-20.
+Taken together, **a source deposit's open licence is no longer sufficient on its own.**
+
+**Done:** deleted from the `irw_text` next draft (40 rows, verified absent), `blocked` in
+`queue_state.csv` (done 221 → 220, blocked 29 → 30), `pending_index_notes.csv` row recording that
+the author's permission is the one thing that would make it shippable on its own terms, provenance
+keeping `uploaded=2026-09-04` as history with the withdrawal in `public_note`, `__items.csv`
+deleted, `verify_*.R` retained. Rule written into `itemtext_standard.md` § Rights.
+
+**Outstanding, and worth naming plainly:** no re-audit of already-shipped tables has been run
+against either of the day's two rulings. Tables shipped before 2026-09-04 under "the source licence
+governs" have never been checked for a rights-holder restriction, and some will not survive. This
+table was the only one in the corpus carrying `wording_rights=NC`, so that column cannot be used to
+find the others — the sweep has to read provenance and sources.

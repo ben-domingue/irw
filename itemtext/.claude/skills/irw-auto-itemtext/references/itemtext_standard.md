@@ -189,6 +189,29 @@ extend this to another instrument without asking — and note that finding the t
 because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
 a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
 
+### No-redistribution clauses override the source licence — ruled 2026-09-04
+
+**A quotable clause barring redistribution of the instrument governs, even when IRW's wording came
+from an openly licensed deposit.** Ruled by Ben on `CV_OASIS_ODSIS_PPE_Novak_2020_DSES`: the Daily
+Spiritual Experience Scale requires registration with its author, and the Fetzer Institute copy
+states *"Permission of author required to distribute or copy"*. IRW's wording came from Underwood's
+own **CC BY 3.0** article; the clause was ruled to govern anyway.
+
+This is the open question the WHOQOL ruling above declined to settle by drift, now settled in the
+strict direction. Together with the fee-licence ruling it means **the source deposit's licence is no
+longer sufficient on its own** — a rights holder's own restriction on the instrument outranks it,
+whether that restriction is a redistribution bar or an enforced fee.
+
+**It still fires only on something you can quote.** Silence remains permission, exactly as under the
+NC rule: an instrument that is merely copyrighted, or reproduced without an explicit grant, is not
+blocked. What changed is that finding the clause on the rights holder's copy is now enough — you no
+longer get to rely on the deposit you happened to take the words from.
+
+**Consequence not yet worked through:** this narrows the ECR-R decision for a whole class of
+instruments, and already-shipped tables have never been audited against it. No re-audit has been
+run; a table shipped before 2026-09-04 under "the source licence governs" may not survive this rule.
+That sweep is outstanding work, not a settled position.
+
 ### Fee-licensed instruments — ruled 2026-09-04
 
 **An enforced licence fee disqualifies an instrument's wording, even where IRW's copy came from an
