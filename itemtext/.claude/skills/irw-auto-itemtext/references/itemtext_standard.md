@@ -369,3 +369,42 @@ existed were removed, and no PROMIS entries were written. His reasoning: the fac
 is not useful to a data user and tacitly advertises that IRW published material it should not
 have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
 trail; do not add them to `itemtext_issues.qmd`.
+
+### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
+
+**A task whose stimuli are images with no text still gets an item table; `item_text` is left blank
+by design.** Ruled by Ben on the Enkavi 2019 Self-Regulation Ontology battery. The table then
+carries what the source really does publish — `instructions`, section structure, and the
+accuracy labels in `option_text` — while the stimulus identity stays where it already is, in the
+item code. Nothing is invented, and nothing IRW wrote is placed in a field defined as the wording
+respondents read.
+
+**This settles a corpus that had answered the same question three ways.** `twod_rotation_mather2023`
+(batch_011) shipped 304 picture items with `item_text` blank by design and is the precedent this
+ruling adopts. `enkavi_2019_stroop`, `_navon`, `_ant_flanker` and `dd_rotation` shipped IRW-authored
+stimulus descriptions — navon's own note says "item_text for this table is IRW's description of the
+Navon stimulus, not wording anyone read". `gilbert_meta_39` was left unshipped as figural.
+
+**The already-shipped descriptions stand.** Ruled at the same time: the three live `enkavi_2019_*`
+tables are correct, disclosed, and in v16.0, and re-uploading live tables to *remove* usable
+information is not worth it. So the corpus is knowingly mixed — four tables carry authored
+descriptors, everything from here does not. Do not "fix" them, and do not cite them as precedent.
+
+**Reopened under this ruling:** `enkavi_2019_simon`, `enkavi_2019_gonogo` and
+`enkavi_2019_stopsignal` go back to `pending`. Each was blocked only because no wording exists,
+which is no longer a reason to block. Their recovered material is already banked in
+`itemtables/pending_index_notes.csv` so nothing needs re-deriving — including, for `gonogo`, the
+binding that `style.css` fixes `#stim1=orange` and `#stim2=DodgerBlue` with only the go/no-go role
+counterbalanced. Note for whoever extracts `stopsignal`: it has no shippable `correct_response`,
+because the shape-to-key mapping is shuffled per session.
+
+**`enkavi_2019_dpx_axcpt` stays blocked, and for a different reason.** Its probe labels are
+randomised **per participant** — `experiment.js` shuffles `probe1..6` for each worker, confirmed
+in the raw data — so `AX_probe3` denotes a different image for different people. The item code
+does not name a stable stimulus, which is a statement about that dataset rather than about
+pictures. Blank `item_text` would not fix it, because the problem is the code, not the text.
+
+**The general test this leaves.** Ask whether the source publishes wording, not whether the task
+is verbal. If it does, ship it. If it does not, ship the table with `item_text` blank. Block only
+when something else is wrong — the rights bar it, or, as here, the item codes do not denote a
+stable thing.
