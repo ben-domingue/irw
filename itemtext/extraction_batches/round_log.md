@@ -3151,3 +3151,20 @@ against either of the day's two rulings. Tables shipped before 2026-09-04 under 
 governs" have never been checked for a rights-holder restriction, and some will not survive. This
 table was the only one in the corpus carrying `wording_rights=NC`, so that column cannot be used to
 find the others — the sweep has to read provenance and sources.
+
+### DART: itemtext block stands, response data untouched — 2026-09-04
+
+Ben ruled on the tension batch_025 surfaced. **The block stays and the response data is left alone**,
+accepting an inconsistency rather than resolving it: the DART's items are author names, and IRW
+already publishes all 132 of them as the live `item` codes in the response table, ingested from the
+same CC BY-NC-SA deposit that caused the block. So the NC-restricted wording is public either way,
+and the block prevents only an `__items` table.
+
+Two alternatives were put and declined — ruling that a bare item identifier is not "item text"
+(which would have made the two positions consistent on the record) and reviewing the DART response
+tables themselves. Recording that here so this is not later mistaken for an oversight: it is a known
+gap, left open deliberately.
+
+**Still outstanding and independent of rights:** the `ja`→`1` find/replace corruption in
+`raw_data_study1.xlsx` is live in IRW — `1ne Austen`, `1mes Patterson`, `1ne Jessup`, and a mangled
+`...afgelopen 1ar-` covariate. No issue has been filed for it yet.
