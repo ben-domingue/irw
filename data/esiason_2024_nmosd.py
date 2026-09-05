@@ -4,8 +4,8 @@
 # Supporting Information: Patients https://doi.org/10.1371/journal.pone.0300777.s001
 #                         Caregivers https://doi.org/10.1371/journal.pone.0300777.s002
 #
-# REDCap export (title row + real header on row 2) covering NMOSD patients
-# (S1, N=21) and their caregivers (S2, N=37), each given the identical
+# REDCap export (title row + real header on row 2) covering NMOSD caregivers
+# (S1, N=21) and patients (S2, N=37), each given the identical
 # instrument battery: AAQ-II (Acceptance and Action Questionnaire, 7
 # items), a 13-item Cognitive Fusion Questionnaire item pool, BAI (Beck
 # Anxiety Inventory, 21 items), BDI (Beck Depression Inventory, 21 items
@@ -34,11 +34,32 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
+# WHICH FILE IS WHICH SAMPLE (corrected 2026-09-05, irw#1971).
+#
+# This mapping was the other way round, and cov_group therefore labelled every
+# respondent as the opposite of what they are. Three independent signals agree,
+# and none of them is the file name:
+#
+#   * The paper reports "Patients endorsed a mean BDI-II score of 14 (SD = 9.5)"
+#     and "Caregivers endorsed a mean BDI-II score of 7.2 (SD = 5.9)". Scoring the
+#     deposit's BDI block gives s001 = 6.67 and s002 = 15.57.
+#   * It reports 22 caregivers against roughly 31 patients. s001 has 21 rows,
+#     s002 has 37.
+#   * Direction: the chronically ill sample scoring markedly higher on depression
+#     than their caregivers is the expected ordering, and it is s002 that does.
+#
+# The files themselves cannot settle it -- both carry byte-identical column sets,
+# with no role, diagnosis or relationship field to read.
+#
+# The ID OFFSETS DELIBERATELY STAY WITH THE FILES, not with the labels: s001 keeps
+# offset 0 and s002 keeps 1000, so the corrected tables carry exactly the id values
+# the published ones already do. Only cov_group changes. Swapping the offsets too
+# would have renumbered every respondent for no reason.
 SI_URLS = {
-    "patient": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0300777.s001",
-    "caregiver": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0300777.s002",
+    "caregiver": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0300777.s001",
+    "patient": "https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0300777.s002",
 }
-ID_OFFSET = {"patient": 0, "caregiver": 1000}
+ID_OFFSET = {"caregiver": 0, "patient": 1000}
 
 VLQ_IMPORTANCE = ["fam1", "marr1", "par1", "fri1", "wor1", "edu1", "rec1", "spi1", "cit1", "phys1"]
 VLQ_CONSISTENCY = ["fam2", "marr2", "par2", "fri2", "wor2", "edu2", "rec2", "spi2", "cit2", "phsy2"]
@@ -76,11 +97,17 @@ def write_scale(dfs, item_cols, out_name, valid_range):
 
 
 def convert():
-    patient = load("patient")
+    # s001 first, s002 second -- the file order the published tables were built in,
+    # kept so the corrected output differs only where it is meant to.
     caregiver = load("caregiver")
-    dfs = [patient, caregiver]
+    patient = load("patient")
+    dfs = [caregiver, patient]
 
-    write_scale(dfs, [f"aaq{i}" for i in range(1, 8)], "esiason_2024_aaqii", valid_range=(1, 5))
+    # The AAQ-II is a 1-7 instrument. valid_range was (1, 5) here, which silently
+    # dropped every 6 and 7 -- 37 of 389 responses, 9.5%, all from the patient
+    # sample -- and presented a 7-point scale as a 5-point one. The sibling calls
+    # below already carry the instrument's own range; this one did not (irw#1971).
+    write_scale(dfs, [f"aaq{i}" for i in range(1, 8)], "esiason_2024_aaqii", valid_range=(1, 7))
     write_scale(dfs, [f"cfq{i}" for i in range(1, 14)], "esiason_2024_cfq", valid_range=(1, 7))
     write_scale(dfs, [f"bai{i}" for i in range(1, 22)], "esiason_2024_bai", valid_range=(1, 4))
     write_scale(dfs, [f"bdi{i}" for i in range(1, 22)], "esiason_2024_bdi", valid_range=(1, 7))
