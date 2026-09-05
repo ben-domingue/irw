@@ -4240,3 +4240,47 @@ there, which is why it keeps working across the change. Check the convention eve
 **Corpus position after this upload:** 59 tables of item text uploaded across batches 026–031
 in this session, all resident in the `irw_text` **draft** and none of it visible until the
 version is released.
+
+### batch_032 reconciled by hand — 4 done, 1 blocked, 7 requeued — 2026-09-05
+
+Ben ruled: salvage the five tables that produced work, requeue the seven that produced none.
+**The queue is unblocked — zero `in_progress` rows remain.**
+
+**Nothing was re-extracted.** Every field in the three reconstructed provenance rows is read off
+the verify scripts and the shipped CSVs that survived the kill; nothing was re-derived from the
+sources, and no wording was touched.
+
+**The verify scripts are what made the salvage bigger than the file inventory suggested.** Two
+tables looked like orphaned CSVs and were not: each carries a full `verify_*.R` naming its source
+and mapping basis. A third, `FIVPEI_Perrig_2023_PENS`, looked like an incomplete extraction and is
+actually a *finished block* — its script records that the study's deposit publishes every
+instrument it administered except the PENS, whose 21 items appear only as bracketed placeholders,
+and that the 21 live IRW codes are byte-identical to the redacted `PENS_*` columns. Determinate,
+so `blocked` rather than `failed`, and it does not count toward the circuit breaker.
+
+**Gates run at reconciliation, not assumed.** `normalize_nulls` fixed 2 of the 4 files — the step
+the round died before reaching. `audit_batch` passes all four on item and resp sets.
+`verify_batch` **PASS=4**, each script re-run live rather than trusted:
+
+- `fisher_2019_belonging`, `fisher_2019_structure` — VERIFIED, sidecars already complete
+- `fisher_2019_preparedness` — VERIFIED on two independent discriminators: the source columns
+  carry different non-missing counts (460 and 454) matching the live per-item n, and the paper's
+  Fig 2 asymmetry reproduces, with perceived success carried by `prepared1` (0.311, p=0.00 against
+  0.048, p=0.37) and feeling accepted by `prepared2` (0.2, p=0.001 against 0.1, p=0.105)
+- `falih_2026_mds16` — PARTIAL. The Q1/Q16 music pair are mutual maxima, the published two-factor
+  blocks separate, and Q15, the only positively-valenced item, has the highest mean of the sixteen
+  — but nothing distinguishes the order of items *within* a block
+
+**One gap the round left had to be closed rather than assumed.** `falih_2026_mds16` takes its
+wording from the instrument's own distribution PDF, which is exactly where a fee or NC clause
+would sit, and the round was killed before recording any rights check. The PDF was fetched at
+reconciliation and its full text extracted: **no copyright notice, no permission statement, no
+licence, no restriction — zero matches for copyright/permission/licen/reproduc/distribut across
+the document.** Silence is permission under the standard, so no rule fires and `wording_rights`
+is omitted. Had that come back differently, the table would have been blocked instead of staged.
+
+`lint_verification` reports 0 ERROR and 1 WARN, the irw#1966 false positive again, on a row the
+round wrote itself. `check_provenance` reads 424 rows across 34 files with no vocabulary errors.
+
+**Staged: the 4.** The 7 requeued rows are back to `pending` with their batch and timestamp
+cleared, in the shape every other pending row has.
