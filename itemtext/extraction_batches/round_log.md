@@ -3187,3 +3187,27 @@ Three defects confirmed against primary sources during these rounds are now publ
 Worth noting what produced all three: none came from a gate. They came from reading a source against
 its processing script, which is what the extraction step does anyway — the gates compare a table to
 itself and cannot see any of these.
+
+### Outstanding work filed as issues — 2026-09-04 (end of session)
+
+Everything left open at the end of the day is now tracked, so nothing depends on this log being read:
+
+- **irw#1954** — re-audit already-shipped item text against the day's two rights rulings. The
+  important part: `wording_rights` cannot find the affected tables (it is set on zero tables now),
+  so the sweep has to read provenance and re-check each instrument's rights holder. `canonical_instrument`
+  tables are the highest-risk group.
+- **irw#1955** — `wording_rights` cannot express a fee, and is currently set on no tables at all.
+  Extend the vocabulary or drop the column; a one-value flag nothing carries is the worst option.
+- **irw#1956** — clear the 45 uploaded `__items.csv` from batch folders. Must NOT be a directory
+  glob: the two byte-identical `ALSECYPIAMH_WU_2022_PHQ` files were never uploaded, and deleting
+  them loses the only copies.
+- **datapages/irw#132** — issues-page entries for the three withdrawn tables. `rmet_higgins_2022_tas`
+  is the one that matters: live now, and it disappears at the next release.
+
+Also filed earlier today: irw#1950 (DART `ja`→`1`), irw#1951 (DREEM/PHEEM), irw#1952 (debacker `resp=0`).
+
+**State at close.** queue_state: 220 done / 30 blocked / 12 failed / 54 excluded / 1,085 pending.
+The `irw_text` next draft holds 111 tables, every one row-count verified against its source. Round
+cap is `batch_025`, so the runner stands down until someone raises it. `delete_branch_on_merge` is
+now **false** on `ben-domingue/irw`, which should stop the branch-deletion failure that hit twice
+(#1904, #1944).
