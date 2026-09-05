@@ -19,13 +19,18 @@ confusing thing about this project's layout, so it is stated first:
 |---|---|---|
 | `src` | `ben-domingue/irw` | Per-dataset processing scripts, the metadata pipeline, automated dataset finding |
 | `irw_site` | `datapages/irw` | The Quarto site published at [itemresponsewarehouse.org](https://itemresponsewarehouse.org) |
-| `Rpkg` | `itemresponsewarehouse/Rpkg` | The `irw` **R** package (v1.0.1) |
-| `Python-pkg` | `itemresponsewarehouse/Python-pkg` | The `irw` **Python** package (v0.0.2) |
+| `Rpkg` | `itemresponsewarehouse/Rpkg` | The `irw` **R** package |
+| `Python-pkg` | `itemresponsewarehouse/Python-pkg` | The `irw` **Python** package |
 
 `src` is on a personal account, the site on `datapages`, and the two client
 packages on the `itemresponsewarehouse` org. There is no technical reason for
 this; it is history. Neither package is on CRAN or PyPI — both install from
 GitHub.
+
+Package versions are deliberately not written here: they moved four times in a
+week and both numbers in this table were wrong within days of being typed. Read
+them from `Rpkg/DESCRIPTION` and `Python-pkg/pyproject.toml`, which cannot go
+stale.
 
 ## 2. Redivis
 
