@@ -3974,3 +3974,53 @@ agents whose `verify_*.R` scripts must fetch their own data.
 
 **Verification mix:** 5 VERIFIED, 4 PARTIAL, 1 VERIFIED via the data_labels exemption (run
 anyway), 2 NO_ROUTE for the blocked pair. Every written table has exactly one tracker row.
+
+### batch_030 triage — 10 of 10 staged, 0 held — 2026-09-04
+
+**Gates re-run live and they reproduce the round.** `audit_batch` 9 PASS / 1 WARN;
+`verify_batch` PASS=10 with no exempt rows; `lint_verification` 0 ERROR / 5 WARN.
+
+The audit WARN is `enkavi_2019_stroop`'s row-count anomaly on the three congruent
+conditions, and the round's explanation checks out exactly: 3 congruent cells at n=10,768
+and 6 incongruent at n=5,384 give 32,304 trials on each side — the standard 50/50 Stroop
+congruency split across an unequal number of cells — with all 9 items on 523 distinct ids.
+Task design, not conflation.
+
+All 5 lint WARNs are the text-fidelity false positive (irw#1966), each already adjudicated
+per table by the round. **That check has now fired in five consecutive batches**, which is
+the case for narrowing it, not for continuing to hand-wave it.
+
+**`duboz_2021_swls` shipped.** The SWLS ruling worked end to end: blocked in batch_028 on the
+eddiener.com clause, reopened to `pending` at triage, picked up by this round, and extracted
+from the Illinois document under terms that permit shipping. The round replaced its stale
+tracker row rather than duplicating it, and marked its index note `resolved` with the original
+block text preserved inline.
+
+**The round independently reproduced the transient-audit-failure shape logged under batch_027.**
+Its first audit run returned 2 ERRORs (`environment_ltm`, `evpromisi_stone_2021_cdiag`) reading
+`could not read live data:` with an *empty* message; both re-ran clean immediately. Two
+independent sightings now, in different batches, under concurrent agents. Classifying on a
+first run would have marked clean tables `failed` — always re-run before believing that error.
+
+**Three defects filed, none of them item-text defects.**
+
+- **irw#1971** — `data/esiason_2024_nmosd.py:83` passes `valid_range=(1,5)` for the 1–7 AAQ-II,
+  dropping 37 of 389 raw responses (19 sixes, 18 sevens, 9.5%); the sibling `cfq` call one line
+  down correctly uses `(1,7)`. Same script transposes `cov_group` across **all seven**
+  `esiason_2024_*` tables — the paper's "twenty-one out of 22 caregiver participants" matches
+  S1's 21 rows, and BDI-II totals give S1≈6.3 against a published caregiver 7.2 while S2≈16.2
+  against a published patient 14.
+- **irw#1972** — `evpromisi_stone_2021_cdiag` is not PROMIS fatigue but the study's own 12-item
+  chronic-diagnosis checklist; corroborated independently of the codebook by the live table
+  having 3 response levels where PROMIS fatigue short forms are 5-point. `collection_members.csv`
+  also files it under `promis` on a name-matching rule that is wrong for its content.
+- The two blocks are **one rights question**, not two: both VLQ halves rest on the same Wilson
+  (2002) form footer, *"You may not distribute it without the express written consent of the
+  author."* That is a quotable no-redistribution clause, so it blocks under the DSES ruling, and
+  the same footer governs any future VLQ table. Ground truth is banked, so an unblock costs no
+  rework if Ben reads it differently.
+
+**`esiason_2024_aaqii` is staged deliberately despite irw#1971.** Its `option_text` stops at 5
+because the live data does, and the item set and resp set must match exactly; its public note
+names IRW's own script as the cause. When the script is fixed and the response table re-uploaded,
+this item table needs re-uploading with the upper two anchors restored.
