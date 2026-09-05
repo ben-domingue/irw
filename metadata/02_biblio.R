@@ -12,6 +12,8 @@ library(dplyr)
 library(progress)
 library(jsonlite)
 library(purrr)
+source("bibtex_overrides.R")
+bibtex_overrides <- read_bibtex_overrides("bibtex_overrides.csv")
 
 add_json_field <- function(key, value) {
   if (!is.na(value)) {
@@ -26,6 +28,8 @@ fetch_bibtex_from_doi <- function(filename, doi) {
     if (is.na(doi) || doi == "") {
     return(NA_character_)  # Return NA if DOI is missing
   }
+  curated <- bibtex_override_for_doi(doi, bibtex_overrides)
+  if (!is.na(curated)) return(curated)
   url <- paste0("https://doi.org/", doi)
   response <- tryCatch({
     GET(url, add_headers(Accept = "application/x-bibtex"))
@@ -183,6 +187,8 @@ getrows<-function(l) {
     head(biblio)
     ## reuse previously generated BibTeX before deciding what is "new"
     biblio <- seed_from_local(biblio, file.out)
+    ## Correct known upstream citation defects even when a cached value exists.
+    biblio <- apply_bibtex_overrides(biblio, bibtex_overrides)
     ##
     irw_notpub <- irw_dict[irw_dict$`Public Reshare?`!="Public",]
     ## Find rows in dictionary whose Filename is not in biblio

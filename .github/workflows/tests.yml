@@ -59,6 +59,10 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
           Rscript misc/tests/smoke_validate_irw.R
 
+      - name: Curated BibTeX corrections
+        working-directory: metadata
+        run: Rscript tests/test_bibtex_overrides.R
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by

@@ -27,6 +27,8 @@ metadata/**/*.txt
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv
 !metadata/collection_members.csv
+# Curated citation inputs, reviewed against their recorded primary sources.
+!metadata/bibtex_overrides.csv
 .env
 .Rproj.user
 .DS_Store
