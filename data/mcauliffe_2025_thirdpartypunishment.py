@@ -58,11 +58,17 @@ That is a bug in the analysis, not in the data; all 12 trials are kept.
 from __future__ import annotations
 
 import math
+import os
 import re
+import sys
 import urllib.request
 from pathlib import Path
 
 import pandas as pd
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "..", "automated_finding"))
+from irw_triage_updated import run_qc          # noqa: E402
 
 BASE = Path(__file__).resolve().parent
 RAW = BASE / "mcauliffe_2025_thirdpartypunishment_raw"
@@ -183,6 +189,13 @@ def build() -> pd.DataFrame:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     long = build()
+
+    assert long["resp"].isin([0, 1]).all()
+    assert not long.duplicated(["id", "item", "wave"]).any()
+    checks = run_qc(long)
+    bad = [c for c in checks if c.status == "fail"]
+    assert not bad, [(c.name, c.detail) for c in bad]
+
     path = OUT / f"{TABLE}.csv"
     long.to_csv(path, index=False)
     print("wrote", path)
