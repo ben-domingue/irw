@@ -4602,3 +4602,218 @@ is handling this — recorded here only so the assumption is not rediscovered mi
 Noted separately, same drift in the other direction: `item_response_warehouse_2`, `_3` and `_4`
 return `NotFoundError` under the `datapages` owner while `_5` and `_6` resolve, though the config
 lists all six as current.
+
+### `esiason_2024_aaqii` item text corrected after the irw#1971 fix — 2026-09-05
+
+The response-data fix landed (#1982) and `item_response_warehouse_3` was re-released, so the
+item text this table shipped is now wrong in two ways and both are fixed here.
+
+**The truncation is gone.** The live table is 389 rows on resp **1-7**, so the two anchors that
+could not be shipped before — `6 = 'almost always true'`, `7 = 'always true'` — complete the
+instrument's published set. The 1-5 labels are reproduced verbatim from the previously published
+item text, so only the top two rows per item are new: 35 rows to 49. `audit_batch` re-run against
+the released data: **PASS**.
+
+**The public note said the wrong thing about our own defect.** It read "IRW's processing script
+filtered this table to 1-5 and dropped 37 caregiver responses of 6 or 7" — no longer true, and
+those were **patients'** responses, not caregivers'. That second error came straight from the
+transposed `cov_group` the same issue fixed, which is a small illustration of why the two defects
+had to be corrected together. The note is now just the `wording_rights=NC` disclosure.
+
+**`uploaded` is cleared on this row**, so the tracker reads it as owed rather than shipped, and it
+is staged for re-upload. This is the first item table in the corpus to be re-uploaded because the
+response data underneath it changed — the case BATCH_PROCESS anticipated when it said a corrected
+response table forces the item table with it.
+
+**The three restored respondents are live for the first time**: 1009, 1011 and 1012, who answered
+6 or 7 on all seven items and were therefore erased entirely by the old filter. `cov_group` now
+reads 138 caregiver / 251 patient rows.
+
+### `esiason_2024_aaqii` item text re-uploaded — 2026-09-05
+
+Ben uploaded it. `red_up.drafts` reports it as **`changed`**, not `added` — the first row in this
+session to read that way, and the correct signal for a table being replaced rather than created.
+Re-stamped `uploaded=2026-09-05` in `batch_030/provenance.csv`; the `mapping_verification` row
+already carried that date and needed nothing, since the verified mapping did not change — only the
+option text extended. CSV cleared from the batch folder and `clean/`.
+
+**This closes irw#1971 end to end**, across five separate artefacts: the processing script
+(#1982), the seven response tables, the `item_response_warehouse_3` release, this item table, and
+the public issues-page entry (datapages/irw#138). The item text could not be corrected until the
+response data was released, because the item and resp sets must match exactly — the same
+constraint that forced the truncated version in the first place.
+
+Worth keeping: **a response-data defect propagated into three artefacts and two wrong public
+statements.** The truncation produced item text stopping at resp 5; the transposed `cov_group`
+made both the provenance note and the published issues-page entry call the dropped values
+"caregiver responses" when they were patients'. Neither error was visible from inside the item
+text — the gates all passed, because the item table matched the live table faithfully. It matched
+a table that was wrong.
+
+## batch_034 — 2026-09-05
+
+6 tables claimed, **6 written / 0 blocked / 0 failed — yield 100%**. Six agents
+(the post-2026-09-05 halved dispatch), one per table; all six returned, none was
+killed, and no rate limit or spend cap was hit. First full-yield round in a while,
+and the reason is legible: every table came from a CC BY deposit that ships an
+XLSX carrying its own column labels.
+
+Gates, all on the whole batch: normalize_nulls 1 of 6 fixed
+(gabriel_2026_knowledge_confidence, 55 lines) · audit_batch **6/6 PASS, zero WARNs**
+(so Step 5c had nothing to explain) · verify_batch **PASS=6** · lint_verification
+6 rows, no problems · irw-validate ok on all six · check_provenance exit 0, vocabulary
+clean, **0 tables owing an issues-page entry**.
+
+Verification: 6 rows, 5 VERIFIED + 1 PARTIAL. All six agents ran Step 5b even where
+`mapping_basis=data_labels` exempted them, so no NOT_NEEDED rows were needed — every
+written table has exactly one tracker row. The PARTIAL is fukuda_2021_health_literacy,
+honestly graded: route 9 pins IRW code ↔ S1 *column* at 0 of 184 cells mismatched, but
+column-number ↔ canonical-question-number rests on the header's own numbering, which
+cannot separate two items inside one domain if the study renumbered.
+
+**Disclosure backlog: this round added nothing to it.** Five of the six tables are
+`text_source=translated_substitute` (Japanese and German studies that publish only
+English wording), the shape check_provenance flags as irw#1970 — 62 tables carrying
+English in the base fields with no record of whose English it is. Each agent left
+`translation_source` blank; the orchestrator filled all five at merge from what the
+agents documented: `official_instrument_english` for fukuda_2021_health_literacy (its
+English is the HLS-EU Consortium's own annex, not this study's rendering) and
+`study_supplied` for the other four (the authors' own paper/deposit English). The
+reported gap went 62 → 61 rather than 62 → 67.
+
+Two provenance sidecars arrived with the 8-column header (incl. `translation_source`)
+and four with the 7-column one; merged to the 8-column form, which is what batch_033
+and check_provenance.R expect.
+
+### Step 5b — four claims re-checked by the orchestrator, all four confirmed
+
+1. **fukuda_2021_health_literacy: a real processing defect, and it corrects the
+   processing script's own comment.** `data/fukuda_2021_healthliteracy.py` line 11 says
+   item 39 is "missing from the source file". It is not — S1 holds all 47 Health-literacy
+   columns. Column 39 is the only one whose header does not *start* with the ASCII prefix
+   (Japanese prefix + ideographic spaces before "Health literacy item 39"), so line 82's
+   `startswith('Health literacy')` drops it, and line 83's renumber-by-embedded-number
+   leaves hl_item1..38 = Q1..Q38 but **hl_item39..46 = Q40..Q47**. Confirmed column by
+   column: hl_item38←Q38 (183/537/215/43), hl_item39←Q40 (120/515/270/61), hl_item46←Q47
+   (77/318/398/134). The shipped item text follows the true source numbering and is
+   correct; the *response table* is what is wrong — it silently omits Q39. Candidate for
+   reprocessing (match 'Health literacy item' anywhere in the header, not at position 0).
+   Worth a GitHub issue; **not filed by this round**, left for human triage.
+2. **Same table, reversed scale direction**, confirmed straight from HL_MAP (lines 37-42:
+   very easy=1 … very difficult=4), so higher resp = more difficulty = *lower* health
+   literacy, opposite the canonical HLS-EU-Q47 key and the paper's own Methods. Letting
+   option_text follow the data rather than the paper is the right call; it is in public_note.
+3. **fukuda_2021_info_reliability: agent's numbers exact.** Recomputed from S1: info_source3
+   (newspaper) mean 3.51 / SD 0.74 / range 2-5 — the only item with no "untrusted" response,
+   which independently matches the table_sets `resp_min=2` ground truth — against the paper's
+   published 3.33 / SD 0.95. Deposit and live table agree, so this is a deposit-vs-paper
+   discrepancy internal to the source, **not** an IRW mapping error. No itemtext action.
+4. **frikha_2023_pe_ms: metadata defect, milder than its sibling's.** biblio.csv line 6462
+   gets construct, item range (q13-q21), N and response format right; only the acronym
+   expansion is invented ("Perceived Motivation Scale"). Per the study's own S2 File,
+   PE-MS = **Physical Education Motivation Scale**. Contrast frikha_2023_pe_acrs (batch_033),
+   whose Description named an entirely different construct. Below the issues-page bar.
+
+Also confirmed: hl_item6's counts are 431/510/**0**/37 — nobody chose "fairly difficult".
+audit_batch did not flag it and was right not to; it is a property of the response data.
+
+### Cap reached
+
+batch_034 is the batch named as the round cap in Step 0 of the round prompt. **Cap reached
+— stopping.** 1000 tables remain `pending`, 0 `in_progress`. A human decides whether to
+raise the cap before any further round runs.
+
+### batch_034 triaged — 2026-09-05
+
+Six tables, 100% yield, and the gates were re-run live at triage rather than trusted from the
+round's own report: `normalize_nulls` 0 of 6 changed, `audit_batch` **6/6 PASS with no WARNs**,
+`verify_batch` **PASS=6**, `lint_verification` no problems, `irw-validate` ok on all six. Nothing
+that passed at extraction time surfaced anything new against current live data.
+
+**Staged (5):** `frikha_2023_pe_ms`, `fukuda_2021_info_reliability`,
+`fukuda_2021_withholding_behavior`, `gabriel_2026_knowledge_confidence`,
+`gabriel_2026_media_use` — copied into `itemtables/clean/`, which now holds 7 files
+(the two `carver_2017_puggs_*` from batch_018 were already waiting).
+
+**Held (1): `fukuda_2021_health_literacy` — a rights call for Ben, not a defect.** The table is
+clean on every gate; what is held is a policy question. The round's RIGHTS verdict rests on the
+2026-09-04 quote test finding no redistribution bar, and two of the three sources it cites for
+that could not actually be read: `m-pohl.net/tools` **404s** (it is not in that site's sitemap at
+all — the round recorded its 403 as evidence of silence, but a page that does not exist is not
+silence), and `ahla-asia.org/hls-eu-q47` returns a themed **404 shell**, not a statement. Both are
+the [[irw-fetch-blocker-pages]] shape: 55kB of Drupal for a 403.
+
+Reading the page that does exist — **`m-pohl.net/HLS19Instruments`** — turns up a quotable bar,
+but over **HLS19**, the successor instrument, not the HLS-EU-Q47 this table ships: *"Any licensing
+by third parties is prohibited"*, *"the instruments can only be shared with others by a joint
+agreement between the ICC and the applicant"*, *"owned by the HLS19 Consortium"*, use *"non-commercial
+and in public interest"*, by contractual agreement. That is the PROMIS shape exactly — and PROMIS
+was ruled out one day earlier, on 2026-09-05.
+
+It does not automatically reach this table. What IRW copied is Sørensen et al. 2013, BMC Public
+Health 13:948, Additional file 1 — the HLS-EU Consortium's own annex, published **CC BY 2.0**,
+bearing only a bare `© HLS-EU Consortium` line. The PROMIS ruling propagates a bar *downstream*
+(a derivative of a barred instrument stays barred); here the barred instrument is the *successor*
+of the one we ship, and a later restriction on a newer instrument does not retroactively unpublish
+a CC BY 2.0 annex. So the round's verdict may well be right. But it is the same question Ben
+answered yesterday about a named instrument whose rights holder runs an application process, and
+BATCH_PROCESS puts a policy call of that kind with him. Held rather than staged, and asked.
+
+**Issues page: drafted, not applied.** Five drafts generated. Per the drafter's own rule a table
+earns an entry when it ships, and none of the six is uploaded, so nothing was pasted. The draft is
+in the scratchpad and will be applied at stamping time.
+
+**A backlog the drafter's rule has been quietly accruing: 35 tables are uploaded, carry a
+`public_note`, and have no entry on the live issues page** — reaching back to batch_017
+(`campos_2023_pidaq`, `rosenberg_selfesteem`), through batch_020's WHOQOL table, and including
+**all six of batch_033**, uploaded earlier today. The page lists 284 tables. This is the exact gap
+the issues page exists to close: a caveat recorded in provenance that a data user never sees.
+Fixing it is a PR to `datapages/irw`, which is outward-facing and was not opened unbidden.
+
+**Two internal defects the round confirmed, neither filed as an issue** (both outward-facing on a
+public repo, both left for Ben):
+
+1. **`data/fukuda_2021_healthliteracy.py` drops HLS-EU-Q47 question 39, and its own comment says
+   the opposite.** Line 11 claims Q39 is "missing from the source file"; S1 Data holds all 47
+   columns, but Q39's header carries a Japanese prefix and ideographic spaces, so line 82's
+   `startswith('Health literacy')` filter skips it. Line 83 then renumbers the survivors, so
+   `hl_item39..46` are source Q40..Q47. Verified column by column. **The item text is correct — it
+   follows the true numbering; the *response* table is the defective artifact**, silently 46 items
+   where the instrument has 47. The selector should match `'Health literacy item'` anywhere in the
+   header, not at position 0. Candidate for a `data fix` issue and reprocessing.
+2. **`metadata/biblio.csv` line 6462 invents an acronym expansion.** It reads "Perceived Motivation
+   Scale (PE-MS)"; PE-MS is the *Physical Education* Motivation Scale, per the study's own S2 File
+   title. Construct, item range, N and response format are all correct, so this is a wording fix,
+   not a mismatch — milder than the sibling `frikha_2023_pe_acrs` defect found in batch_033, where
+   the Description named an entirely different construct. Below the public issues-page bar.
+
+**The cap was raised to `batch_040` mid-round** (commit `525d188`), so the round's own closing line
+— "cap reached, stopping" — is stale: it re-read Step 0 from the copy loaded at process start.
+Six rounds of headroom remain, not zero.
+
+### batch_034 uploaded and stamped — 2026-09-05
+
+Ben uploaded `clean/`. **The tables went to `irw_text_2`, not `irw_text`** — the shard created
+2026-09-05 under the 1000-table cap — so the first `red_up.drafts --dataset irw_text` check
+reported "1 pending" and none of them; the right dataset shows all 7 as `added`.
+
+Counts verified before stamping: `count(*)` against each draft table against the local
+CSV-parsed row count, **7 of 7 exact, 0 mismatches, no doubling**. Two traps on the way, both
+already on record and both worth restating because each renders as a plain "not found":
+the **read token cannot see a draft**, and **`qualifiedReference` normalises `__items` to a
+single underscore** (`...irw_text_2:ae47:next.frikha_2023_pe_ms_items:8hc6`). A hand-built
+`dataset.table__items:next` reference 404s on a table that is plainly there — take the
+reference from the API, never construct it ([[irw-redivis-reference-ids-rotate]]).
+
+Stamped `uploaded=2026-09-05` on 5 rows in `batch_034/provenance.csv` and 5 in the root
+`mapping_verification.csv`; each edit round-tripped byte-identically before writing, and an
+independent re-read from disk confirmed 5 of 5 in both files with no reformatting elsewhere.
+The two `carver_2017_puggs_*` were **already stamped** — they shipped earlier and had simply
+been left in `clean/`, which is Ben's to empty. The 5 `__items.csv` are deleted from the batch;
+every sidecar and all six `verify_*.R` stay.
+
+`fukuda_2021_health_literacy` is unstamped and its CSV remains in `batch_034/` — still held.
+
+Issues page: the four language caveats applied and opened as **datapages/irw#139** (288 entries,
+YAML re-parsed, no duplicates). `frikha_2023_pe_ms` earned no entry — its only finding is the
+biblio acronym expansion, which is below the page's bar.
