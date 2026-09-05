@@ -3686,3 +3686,47 @@ does still round-trip (MINIMAL + LF) and was stamped the ordinary way.
 
 Whoever writes to `mapping_verification.csv` next should check this first. The file is
 rewritten by rounds, so its convention can change under you between one batch and the next.
+
+### batch_028 triage — 8 of 10 staged, 2 held — 2026-09-04
+
+**Gates re-run live.** `audit_batch` 10/10 PASS with no anomalies; `verify_batch` PASS=10
+with no exempt rows, every table carrying its own verify script; `lint_verification` 0
+ERROR / 2 WARN. Both WARNs are the translation-caveat false positive on the hedge check,
+now diagnosed and filed as **irw#1966**: `(does not|do not|did not) (establish|settle|pin)`
+matches without regard to its object, so an evidence string that correctly says a numeric
+route cannot check a *translation* is read as hedging about the *mapping*. **31 of the
+corpus's 40 WARNs are that one pattern.** Statuses left VERIFIED — the mapping evidence is
+decisive in both (all 80 item×resp cells matched for the IUS table; `correct_response`
+pinned per item for `dulger2024_wordcompletion`).
+
+**Ben's SWLS ruling — the source you copied from governs, applied one level in.** Put to him
+with both pages quoted; written up in `itemtext_standard.md` under "Two pages, two terms, one
+rights holder". Wording from a study's own open deposit ships; wording from
+`SWLS_English.doc` on the Illinois page ships, because that page distributes the document and
+states no non-commercial restriction; wording from eddiener.com does not, because that page
+states one. So `dudasova_2021_swls` **ships and is staged**, and `duboz_2021_swls`'s block is
+**retryable, not determinate** — the same words are reachable under permitting terms.
+
+**A correction to the round's own report, which mattered to the ruling.** The orchestrator
+said both agents had misquoted the Illinois page and that it declares the SWLS *public
+domain*. It does not — the phrase does not appear on that page at all, checked directly at
+triage. The agents' quotes were accurate and the re-check was not. That is what took the case
+out of the TIMSS 2003 precedent (one page stating a public-domain claim beside an NC clause,
+where the restriction governs) and into the ECR-R source-licence rule.
+
+**`duboz_2021_swls` is owed a queue flip, blocked → pending, and it has NOT been made yet.**
+The batch_029 round is live and a round rewrites `queue_state.csv`; editing it concurrently
+would either lose the change or corrupt the file. Do it once 029 finishes.
+
+**Held: the marcatto duplicate pair.** `dvivdtws_ppmial_marcatto_2023_cwb` and `_dtw` hold the
+same 12,166 rows, the same 22 items and byte-identical per-item statistics, and `_cwb` is the
+misnamed one — its Description says Counterproductive Work Behavior while the data are the
+Dark Tetrad at Work scale, whose real CWB block is a separate 45 items. Filed as **irw#1967**.
+Per the #1653 ruling the item text is held and re-pointed at whichever table survives rather
+than uploaded against a table that may be deleted. Both CSVs stay in the batch folder; neither
+is in `clean/`; nothing needs re-extracting either way, since the two files differ only in the
+`table` column.
+
+**Staged: 8.** `clean/` holds `dpt_noncog__intolerance_of_uncertainty`, `duboz_2021_pss10`,
+`dudasova_2021_cpc12`, `dudasova_2021_cpc12_study3`, `dudasova_2021_gratitude`,
+`dudasova_2021_swls`, `dulger2024_wordcompletion`, `dussel_2022_pcl17`.
