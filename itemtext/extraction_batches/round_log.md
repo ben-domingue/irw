@@ -3873,3 +3873,104 @@ instructions, colour bindings, correct keys — is banked in `pending_index_note
 unblock is cheap if Ben rules them in.
 
 **Staged: all 8.**
+
+---
+
+## batch_030 — 2026-09-04
+
+**12 tables claimed · 10 written / 2 blocked / 0 failed · yield 83.3%.** Circuit breaker not
+tripped (0% failed against a 30% threshold). Cap is `batch_034`; not reached.
+
+Written: `duboz_2021_swls`, `enkavi_2019_stroop`, `environment_ltm`, `esiason_2024_aaqii`,
+`esiason_2024_ace`, `esiason_2024_cfq`, `estevezlopez_2016_panas`, `evans_2023_vaccination_norms`,
+`evans_2023_vaccine_hesitancy`, `evpromisi_stone_2021_cdiag`.
+
+**Gates.** `audit_batch.R` 9 PASS / 1 WARN, `verify_batch.R` 10/10 PASS, `lint_verification.R`
+0 ERROR / 5 WARN, `irw-validate` ok on all 10, `check_provenance.R` clean for this batch.
+
+The audit's *first* run returned 2 ERRORs — `environment_ltm` and `evpromisi_stone_2021_cdiag`,
+both "could not read live data: " with an empty message. Both re-ran clean immediately
+afterwards: `irw_table_sets()` and the per-item `GROUP BY` both succeed for both tables when
+issued on their own. Transient Redivis query failures under the load of twelve concurrent
+agents, not content defects, and **not** the export quota. Worth knowing that this is the shape
+that failure takes — an empty `conditionMessage`, arriving as a hard ERROR, indistinguishable at
+a glance from a real gate failure. Classifying on the first run would have marked two clean
+tables `failed`.
+
+**The one audit WARN is task design, not a defect.** `enkavi_2019_stroop`, "row-count anomaly
+... median=5384: blue_blue, green_green, red_red". Re-checked server-side: the 3 congruent
+conditions have n=10768 each, the 6 incongruent n=5384 each — exactly 2× — so congruent trials
+total 32,304 against incongruent 32,304, the standard 50/50 Stroop congruency split spread over
+an unequal number of cells. All 9 items have exactly 523 distinct ids. Explained in `notes.csv`.
+
+**The 5 lint WARNs were adjudicated, not waved through.** All five are "VERIFIED but its
+evidence hedges". In every case the hedge is about *text fidelity* — a single-source stem, a
+package descriptor standing in for a survey question — and not about mapping discrimination,
+which is what VERIFIED means. Each route does separate every item from every other; the
+reasoning is written into `notes.csv` per table so the next reviewer does not re-derive it. One
+lint WARN *was* substantive and was fixed: `esiason_2024_vlq_importance` had recorded
+`NOT_NEEDED` with `mapping_basis=unknown`, where only `data_labels` is exempt. Changed to
+`NO_ROUTE`, matching what its identical sibling recorded, in both the batch file and the tracker.
+
+### Both blocks are one rights question, and it is worth a single ruling
+
+`esiason_2024_vlq_importance` and `esiason_2024_vlq_consistency` are the two halves of the
+Valued Living Questionnaire. Two agents, working independently, reached the same block on the
+same clause — the Wilson (2002) form footer, printed on both its pages: *"You may reproduce and
+use this form at will for the purpose of treatment and research. You may not distribute it
+without the express written consent of the author."* That is a quotable redistribution bar and
+fires the 2026-09-04 no-redistribution ruling, which overrides the CC BY source deposit. The
+deposit itself publishes no VLQ wording at all, so there is no second route.
+
+**Retry test: NO for both** — determinate, every source was retrieved successfully. These do not
+count toward the breaker. The class is larger than these two tables: the same footer governs any
+future VLQ table, so this wants one decision rather than per-table calls. Ground truth is banked
+in `pending_index_notes.csv` (codes are the source column names verbatim, one-to-one with VLQ
+domains 1–10), so an unblock costs no rework.
+
+### Three defects found in *other* people's artifacts — all re-verified by the orchestrator
+
+Per Step 5b these were re-checked independently before being written down; all three confirmed,
+and none of them affects the item text shipped this round.
+
+- **`data/esiason_2024_nmosd.py` truncates the AAQ-II.** Line 83 passes `valid_range=(1,5)` for a
+  1–7 instrument (siblings correctly use `(1,7)`). Verified against the PLOS supplements: S2
+  contains 19 sixes and 18 sevens, S1 none; 389 non-missing raw responses minus those 37 equals
+  the 352 rows now live. **9.5% of the data is silently dropped and the scale truncated.** Item
+  text was consequently shipped for resp 1–5 only. Wants a script fix and a reupload.
+
+- **`cov_group` is transposed across all seven `esiason_2024_*` tables** — the five here plus
+  `_bai` and `_bdi`. The script maps S1→`patient`, S2→`caregiver`; three lines say the reverse.
+  (1) The paper: *"Descriptive statistics for all psychological variables among caregivers are
+  summarized in Table 3. See S1 Data."* (2) S1 has 21 rows, matching *"Twenty-one out of 22
+  caregiver participants completed a demographics survey."* (3) BDI-II totals give S1≈6.3 against
+  a published caregiver 7.2, and S2≈16.2 against a published patient 14 — the current assignment
+  puts patients at 6.3 against a published 14. Two agents flagged it independently. No item text
+  depends on it; it mislabels a covariate on seven live tables.
+
+- **`biblio.csv` describes `evpromisi_stone_2021_cdiag` as "PROMIS fatigue".** It is the study's
+  own 12-item chronic-diagnosis checklist (1=No never / 2=No but in the past / 3=Yes currently).
+  Corroborated independently of the codebook: the live table has 3 response levels where PROMIS
+  fatigue short forms are 5-point. The *deposit* is "Ecological Validity of PROMIS Instruments" —
+  the PROMIS content sits in the sibling tables. Note also that `collection_members.csv` files
+  this table under the `promis` collection via `rule:cname:promis`, a name-matching rule that is
+  wrong for its content. Both want correcting.
+
+One further finding was checked and **downgraded**: an agent reported two misprinted means in the
+Evans 2023 article's Supplemental Table 2b. It is real and self-corroborating (the table's own
+crude-difference row reads −0.08 = 3.50 − 3.58), but it is a defect in the *publication*, not a
+text-vs-table mismatch, so it stays in the verification evidence and off the issues page.
+
+**`duboz_2021_swls` reopened and shipped.** Blocked in batch_028; the SWLS ruling of 2026-09-04
+settles it — wording from `SWLS_English.doc` on the Illinois page ships, the eddiener.com NC
+clause does not reach it. Confirmed the agent sourced the Illinois page and never opened
+eddiener.com. Its stale batch_028 `NO_ROUTE` row in `mapping_verification.csv` was **replaced**,
+not duplicated, and its `pending_index_notes.csv` row is now `resolved` with the original block
+note preserved inline.
+
+**Export discipline held.** No round-wide full-table exports; ground truth came from
+`irw_table_sets()` and server-side `GROUP BY`. Two deliberate `irw_fetch` calls were spent by
+agents whose `verify_*.R` scripts must fetch their own data.
+
+**Verification mix:** 5 VERIFIED, 4 PARTIAL, 1 VERIFIED via the data_labels exemption (run
+anyway), 2 NO_ROUTE for the blocked pair. Every written table has exactly one tracker row.
