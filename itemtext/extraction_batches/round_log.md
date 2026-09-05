@@ -3808,3 +3808,26 @@ reconstruction from general knowledge, which `itemtext_standard.md` explicitly r
 - `check_provenance.R` reports `derubeis_2017_arsq` and `dou2025_area` as IRW-generated content
   with no issues-page entry. **Both are pre-existing, not from this batch** — still outstanding.
 - Cap not reached (cap is batch_030); next round proceeds normally.
+
+### batch_028 — uploaded 2026-09-04 (partially stamped; see the deferred half)
+
+Ben ran the upload of the 8 staged tables and reported 8 of 8 uploaded and row-count
+verified. Confirmed before stamping: `red_up.drafts --dataset irw_text --verbose` lists all
+eight as **added**.
+
+Stamped `uploaded=2026-09-04` in `itemtables/batch_028/provenance.csv` — 8 rows, and an
+independent re-read agrees: 12 rows, 8 stamped, and the 4 unstamped are exactly the two
+blocked tables (`duboz_2021_swls`, `dudasova_2021_engagement`) and the two held ones
+(`dvivdtws_ppmial_marcatto_2023_cwb`, `_dtw`). Removed the eight uploaded `__items.csv` from
+the batch folder and `clean/`; the two held CSVs correctly remain in the batch folder.
+
+**Two writes are deliberately DEFERRED because the batch_029 round is still live**, and a
+round rewrites both of these files — a concurrent edit either loses the change or corrupts
+the file:
+
+1. `mapping_verification.csv` — the 8 `uploaded=2026-09-04` stamps.
+2. `queue_state.csv` — `duboz_2021_swls` from `blocked` to `pending`, per Ben's SWLS ruling.
+
+Neither is optional and both are owed the moment 029 finishes. Note the failure mode if they
+are forgotten: an unstamped row in `mapping_verification.csv` reads as "never uploaded", which
+is what the stamp exists to distinguish from a table that went missing.
