@@ -4817,3 +4817,70 @@ every sidecar and all six `verify_*.R` stay.
 Issues page: the four language caveats applied and opened as **datapages/irw#139** (288 entries,
 YAML re-parsed, no duplicates). `frikha_2023_pe_ms` earned no entry — its only finding is the
 biblio acronym expansion, which is below the page's bar.
+
+## batch_035 — 2026-09-05
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 (100%).**
+Circuit breaker: 0% failed, not tripped.
+
+Tables: `gad_BrummerHoffman_2021` (140 rows), `gan_2015_cesd` (80),
+`gan_2015_ucla_loneliness` (32), `ganbat_2022_pollution_disease_risk` (10),
+`ganbat_2022_pollution_leave_type` (10), `ganbat_2022_pollution_symptoms` (16).
+
+Two sibling clusters this round (`gan_2015_*` ×2 off one PLoS ONE deposit,
+`ganbat_2022_pollution_*` ×3 off one PLOS ONE S4 workbook); each agent was told
+which siblings belonged to others, and no cross-writes occurred.
+
+Gates: normalize_nulls 3/6 rewritten; audit_batch **5 PASS / 1 WARN**;
+verify_batch **2 PASS, 4 MISSING(exempt)**; lint_verification clean on the first
+run (the NOT_NEEDED-in-both-files rule held — no repeat of the batch_020/021
+phantom ERRORs); `irw-validate` clean apart from one pre-existing `name_charset`
+WARN on `gad_BrummerHoffman_2021` (capitalised table name, inherited from the
+corpus, not introduced here); `check_provenance.R` no errors.
+
+Mapping bases: 4 `data_labels` (gad + the three ganbat), 2 `reconstructed`
+(both gan_2015 tables — the deposit's `.sav` carries **zero** variable and value
+labels across all 53 columns, so the SPSS file gave no level-1 route despite
+being an SPSS file). Both reconstructed tables verified PARTIAL, honestly: each
+pins the reverse-keyed set but neither separates the individual stems within a
+polarity class.
+
+**Step 5b orchestrator re-checks — three agent claims independently confirmed,
+none overturned:**
+- `gan_2015_cesd`'s dropped-response claim reproduces exactly: 23 cells coded
+  `4` on a 0–3 scale in the source `.sav` (CES2 ×1, CES4 ×3, CES8 ×5, CES11 ×1,
+  CES12 ×7, CES16 ×6), and live per-item n runs 64–71 with every deficit equal
+  to that item's count of dropped 4s. **Beyond the agent's claim:** 21 of the 23
+  fall on CES4/8/12/16, exactly the four reverse-worded items — suggesting those
+  four were administered or coded 1–4 rather than 0–3. A response-data property,
+  not an itemtext defect; candidate for its own issue.
+- `ganbat_2022_pollution_symptoms`' two source defects both hold. The 8 Q1
+  columns cover 18 constituent options; +1 for the absent "Chest pain" = the 19
+  the questionnaire prints. And the S4 codebook's `K4` row really is mislabelled
+  with the symptom stem — S1's item К4 is "In which season of the year do you
+  get the sickest?" (Winter/Spring/Autumn/Summer). Affects no shipped content.
+- `ganbat_2022_pollution_disease_risk`'s Q2.1–Q2.5 labels re-downloaded and
+  verbatim as shipped, source typo "Cerebravascular" preserved deliberately.
+
+**Dictionary problem found (not itemtext):** `ganbat_2022_pollution_disease_risk`'s
+dictionary Description says "diseases *believed to be caused* by air pollution",
+but the administered Q2 stem asks which diseases were **experienced** during
+high-pollution periods. The belief question is a separate, unshipped variable
+(codebook `K5`). Recorded in notes.csv — a Description correction. Not filed in
+pending_index_notes.csv, which is for blocked tables; nothing blocked this round.
+
+**Orchestrator corrections to sidecars:** filled `translation_source` on four
+rows the agents left blank — `official_instrument_english` for the two gan_2015
+tables (base fields carry the publisher's own English: Radloff's CES-D
+originals, Hays' ULS-8 form) and `study_supplied` for the two ganbat tables that
+demonstrably ship the study's own facing-page English in every `_translated`
+cell. Blank means "administered in English, nothing to translate", which was
+wrong for all four; leaving them would have added to the corpus's existing
+17-blank/44-absent `translation_source` gap.
+
+The single audit WARN (`leave_type`, blank item_text 20% / blank option_text
+100%) is explained in notes.csv and is **not** an itemtext defect: Q7.5 is a
+codebook-only "others" residual the questionnaire never prints, and Q7 is a
+check-all battery with no published labels for its 0/1 states.
+
+Cap: batch_040. Not reached — 994 pending remain; next round is batch_036.
