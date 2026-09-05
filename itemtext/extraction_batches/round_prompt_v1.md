@@ -118,11 +118,40 @@ Each subagent prompt must tell it to:
   (REQUIRED, see below) -> on pass write itemtables/batch_<NNN>/<table>__items.csv (Step 6). On a
   block, write NO CSV and log why. One retry max on transient failures. A partial/honest "couldn't
   automate this one" is a correct outcome per SKILL.md, not a failure.
+- **Check rights on the item wording before transcribing it, and record what you found.**
+  The deposit licence is NOT the instrument licence. A CC BY 4.0 or CC0 deposit governs the
+  *response data* and says nothing about who owns the *item text*, which for a published scale
+  belongs to its authors or publisher. Roughly one table in seven is a named instrument under a
+  permissive deposit (in the 60 tables of itemtext#1945: DERS, SWLS, HEXACO-PI-R, Need for
+  Cognition, RWA, a social-desirability scale, the SCBCS, FAD+, EstCRM self-efficacy).
+
+  **The test is narrow, and it is a quote test.** Block ONLY on something you can quote from the
+  rights holder. Ben settled two triggers on 2026-09-04:
+
+  1. **An enforced licence fee.** Ruled on the TAS-20 ($40/study, enforced -- there is a 2021
+     *Molecular Autism* retraction over it). Generalises to any fee-licensed instrument.
+  2. **An explicit no-redistribution clause.** Ruled on the DSES ("Permission of author required
+     to distribute or copy"). This holds even when the source study itself published the items.
+
+  **Silence is permission.** An instrument being merely copyrighted, well known, or reproduced
+  somewhere without an explicit grant is NOT a block. If you cannot find and quote a restriction,
+  extract it normally. Do not block on a suspicion, and do not open a negotiation with a rights
+  holder.
+
+  These two triggers EXTEND -- they do not replace -- SKILL.md's standing exclusion for
+  commercially published instruments the source itself was barred from sharing (the Shipley case,
+  which needs the publisher's bar AND the source visibly withholding). That one ends in
+  `excluded`; these two end in `blocked`, because a licence can change and a fee can be paid.
+
+  Put the quoted sentence and its URL in notes_<table>.csv. A rights block with no quote in it is
+  not a rights block.
+
 - **On a block, state the retry test explicitly in notes_<table>.csv and in your report**: would an
   unchanged retry, right now, plausibly produce a different result? Say YES (an unresolved access
   failure -- 403, timeout, quota, source not located, no verdict reached) or NO (a determinate
-  verdict -- no wording published, licence bars reuse, images only, gated behind registration or
-  author contact, or a data defect that makes item text unattachable), and say what would have to
+  verdict -- no wording published, a QUOTED fee or no-redistribution clause bars reuse, images
+  only, gated behind registration or author contact, or a data defect that makes item text
+  unattachable), and say what would have to
   change for the answer to become different. The orchestrator uses this at Step 5 to decide
   `failed` vs `blocked`, and those are counted differently by the circuit breaker. Do not guess:
   if you cannot tell, say so and it will be treated as `failed`, which merely costs a retry.
@@ -254,8 +283,10 @@ ratified 2026-09-02, after 60 such tables were found with no public note at all 
     crash, a verify FAIL or missing VERDICT, a lint ERROR, an HTTP 403/timeout/connection error,
     an exhausted export quota, "couldn't find the source" with no verdict reached. These COUNT
     toward the circuit breaker, because a cluster of them is what a systemic breakage looks like.
-  - **NO -> status="blocked".** A determinate verdict: the source publishes no item wording, the
-    licence bars reuse, the wording exists only as images, the pool is gated behind a human action
+  - **NO -> status="blocked".** A determinate verdict: the source publishes no item wording, a
+    quotable fee or no-redistribution clause bars reuse (see the rights check in Step 2 -- a
+    rights block with no quote in it is not one), the wording exists only as images, the pool is
+    gated behind a human action
     such as registration or author contact, or a data defect makes item text unattachable at all
     (e.g. a transposed table whose item axis holds respondent IDs). An unchanged retry fails
     identically; changing the outcome needs a HUMAN action or a data change. These do NOT count
