@@ -74,3 +74,6 @@ tags/.caches/
 tags/.caches/
 
 tags/.caches/
+
+# Raw source downloads fetched by data/ scripts; never committed.
+data/*_raw/
