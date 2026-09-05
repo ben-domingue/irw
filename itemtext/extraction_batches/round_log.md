@@ -4602,3 +4602,29 @@ is handling this — recorded here only so the assumption is not rediscovered mi
 Noted separately, same drift in the other direction: `item_response_warehouse_2`, `_3` and `_4`
 return `NotFoundError` under the `datapages` owner while `_5` and `_6` resolve, though the config
 lists all six as current.
+
+### `esiason_2024_aaqii` item text corrected after the irw#1971 fix — 2026-09-05
+
+The response-data fix landed (#1982) and `item_response_warehouse_3` was re-released, so the
+item text this table shipped is now wrong in two ways and both are fixed here.
+
+**The truncation is gone.** The live table is 389 rows on resp **1-7**, so the two anchors that
+could not be shipped before — `6 = 'almost always true'`, `7 = 'always true'` — complete the
+instrument's published set. The 1-5 labels are reproduced verbatim from the previously published
+item text, so only the top two rows per item are new: 35 rows to 49. `audit_batch` re-run against
+the released data: **PASS**.
+
+**The public note said the wrong thing about our own defect.** It read "IRW's processing script
+filtered this table to 1-5 and dropped 37 caregiver responses of 6 or 7" — no longer true, and
+those were **patients'** responses, not caregivers'. That second error came straight from the
+transposed `cov_group` the same issue fixed, which is a small illustration of why the two defects
+had to be corrected together. The note is now just the `wording_rights=NC` disclosure.
+
+**`uploaded` is cleared on this row**, so the tracker reads it as owed rather than shipped, and it
+is staged for re-upload. This is the first item table in the corpus to be re-uploaded because the
+response data underneath it changed — the case BATCH_PROCESS anticipated when it said a corrected
+response table forces the item table with it.
+
+**The three restored respondents are live for the first time**: 1009, 1011 and 1012, who answered
+6 or 7 on all seven items and were therefore erased entirely by the old filter. `cov_group` now
+reads 138 caregiver / 251 patient rows.
