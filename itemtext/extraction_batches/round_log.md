@@ -3168,3 +3168,22 @@ gap, left open deliberately.
 **Still outstanding and independent of rights:** the `ja`→`1` find/replace corruption in
 `raw_data_study1.xlsx` is live in IRW — `1ne Austen`, `1mes Patterson`, `1ne Jessup`, and a mangled
 `...afgelopen 1ar-` covariate. No issue has been filed for it yet.
+
+### Data defects from batches 024/025 filed — 2026-09-04
+
+Three defects confirmed against primary sources during these rounds are now public issues:
+
+- **irw#1950** — `DART_Brysbaert_2020_*`: a `ja`→`1` find/replace in the deposited
+  `raw_data_study1.xlsx` put `1ne Austen`, `1mes Patterson` and `1ne Jessup` into IRW as live item
+  codes, plus a mangled `...afgelopen 1ar-` covariate. `1ne Jessup` is one of the test's foils, so
+  its exact string is what a reuser matches on. Damage is in the deposit, carried through unchanged.
+- **irw#1951** — `cordova2019_clinical_edu_environment`: `biblio.csv` says "DREEM-based"; the
+  instrument is PHEEM per the companion paper's own Methods and its 40-item Table 1. IRW holds real
+  DREEM tables (`agarwal_2023_dreem`), so the mislabel makes this look like their sibling.
+- **irw#1952** — `debacker_2018_*`: `resp=0` sits outside the paper's stated 1–5 scale.
+  Filed as "out-of-range 0 of unknown meaning" and the issue states explicitly that the earlier
+  "did not play" reading was **disproved** on re-reading the `.sav`, so it is not revived.
+
+Worth noting what produced all three: none came from a gate. They came from reading a source against
+its processing script, which is what the extraction step does anyway — the gates compare a table to
+itself and cannot see any of these.
