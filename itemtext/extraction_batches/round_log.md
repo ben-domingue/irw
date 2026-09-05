@@ -5055,3 +5055,9 @@ they had actually determined — no re-extraction, no reconstructed evidence. Bo
 their `validate_items.R --table-sets` gate had PASSED. Also worth recording: a wait-loop using
 `pgrep -f audit_batch.R` matches the orchestrator's OWN `claude -p` process, because this prompt
 text contains the script name — it can never report the audit as finished. Wait on the R PID.
+
+*Self-cancelled at round close, 2026-09-05 ~15:30 local: the circuit-breaker stop condition now
+holds (`extraction_batches/circuit_breaker.flag` written this round, Redivis query-API outage).
+Nothing scheduled to cancel — rounds are human-started via `run_round.sh`, which checks the same
+condition in bash and will decline to start the next one until a human clears the flag. Cap
+(batch_040) not reached; the breaker, not the cap, is what stops here.*
