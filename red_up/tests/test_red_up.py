@@ -47,17 +47,30 @@ class Registry(unittest.TestCase):
         owner, targets = load_registry()
         self.assertEqual(owner, "datapages")
         names = [t.name for t in targets]
-        self.assertEqual(
-            names[:6],
-            [f"item_response_warehouse{s}" for s in ("", "_2", "_3", "_4", "_5", "_6")])
-        # Item text comes first among the non-core targets and is a shard list;
-        # the other four are the plain aux datasets.
-        self.assertEqual([t.name for t in text_shards(targets)], ["irw_text"])
-        self.assertEqual(
-            sorted(names[6:]),
-            ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn", "irw_text"])
-        self.assertEqual(newest_shard(targets).name, "item_response_warehouse_6")
-        self.assertEqual(newest_text_shard(targets).name, "irw_text")
+        core = [t.name for t in targets if t.kind == "core"]
+        text = [t.name for t in text_shards(targets)]
+        aux = [t.name for t in targets
+               if t.kind == "aux" and not t.is_itemtext]
+
+        # Both families are shard lists that grow, so assert their shape rather
+        # than a frozen tail -- pinning the newest name here means every future
+        # shard breaks this test for no reason.
+        self.assertEqual(core[0], "item_response_warehouse")
+        self.assertEqual(core[1:],
+                         [f"item_response_warehouse_{i}" for i in range(2, len(core) + 1)])
+        self.assertEqual(text[0], "irw_text")
+        self.assertEqual(text[1:],
+                         [f"irw_text_{i}" for i in range(2, len(text) + 1)])
+
+        # The four plain aux datasets are a fixed set; item text is not among
+        # them, because it is declared as IRW_TEXT_DATASETS.
+        self.assertEqual(sorted(aux),
+                         ["irw_competitions", "irw_meta", "irw_nominal", "irw_simsyn"])
+
+        # Core first, then text shards, then the rest -- the menu order.
+        self.assertEqual(names, core + text + aux)
+        self.assertEqual(newest_shard(targets).name, core[-1])
+        self.assertEqual(newest_text_shard(targets).name, text[-1])
 
     def test_item_text_declared_twice_is_refused(self):
         # The three "single source of truth" files drifted once (#1733).
@@ -240,7 +253,8 @@ class TargetGuessing(unittest.TestCase):
         # real output, so a majority rule would send those to a shard.
         files = [Path("provenance.csv"), Path("notes.csv"), Path("audit.csv"),
                  Path("x__items.csv")]
-        self.assertEqual(guess_target(files, self.targets).name, "irw_text")
+        self.assertEqual(guess_target(files, self.targets).name,
+                         newest_text_shard(self.targets).name)
 
     def test_plain_csvs_go_to_the_newest_shard(self):
         self.assertEqual(guess_target([Path("a.csv")], self.targets).name,
