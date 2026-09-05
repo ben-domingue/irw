@@ -17,9 +17,22 @@
 # and provenance note: the paper's own S5 Persian questionnaire orders the professional
 # and physical-mental blocks differently from its Table 4, and the two cannot both be right.
 #
-# The published alphas for responsibility (0.96, 2 items) and physical-mental (0.98,
-# 4 items) are not reproducible from the deposited minimal dataset at all -- reported
-# here as evidence, not used in the verdict.
+# WHAT THE VERDICT ACTUALLY RESTS ON (corrected at triage, 2026-09-04). Four of the
+# five published subscale alphas do NOT reproduce from the deposited minimal dataset:
+# professional 0.85 vs 0.580, responsibility 0.96 vs 0.161, physical-mental 0.98 vs
+# 0.354, social 0.88 vs 0.464. Only communications (0.73 vs 0.733) and the whole tool
+# (0.71 vs 0.705) come back. An earlier version of this comment named only two of the
+# four, which understated how much of the stated test is not met.
+#
+# So the verdict is carried by three things, not by the alpha table as a whole: the
+# communications alpha, the whole-tool alpha, and every item correlating positively
+# with the mean of its own prefix block (weakest pr7 = 0.19). Those support the
+# DIMENSION assignment; they do not reproduce the paper's per-subscale internal
+# consistency, and the gap is large enough that the paper's own subscale alphas look
+# unreliable -- 0.96 on a 2-item block implies an inter-item r near 0.92, against the
+# ~0.09 the deposited data give. That is a fact about the source, not about this
+# extraction: no option text is shipped for this table and the item wording comes from
+# Table 4 / the S4 File, neither of which depends on the alphas.
 
 suppressMessages(library(irw))
 TABLE <- "direkvand_2022_mjsi"
