@@ -4408,3 +4408,75 @@ not denote a stable stimulus, and blank `item_text` would not fix that, because 
 code rather than the text. That is a fact about the dataset, not a policy about pictures.
 
 Queue after both rulings: **1,012 pending / 270 done / 53 blocked / 12 failed / 54 excluded.**
+
+---
+
+## batch_033 — 2026-09-05
+
+**6 tables claimed, 6 shipped. Written 6 / blocked 0 / failed 0. Yield 100%.** Six agents (the
+new post-2026-09-05 count, halved from twelve after the OOM kills); all six returned, none hit a
+rate limit or spend cap.
+
+`enkavi_2019_gonogo` (8 rows), `enkavi_2019_simon` (16), `enkavi_2019_stopsignal` (32),
+`fatima_2025_mslq` (567), `fredrickson_2015_mhcsf` (84), `frikha_2023_pe_acrs` (60).
+Every table returned RETRY TEST: NO — six determinate passes, nothing pending on access.
+
+**The three reopened `enkavi_2019_*` tables all shipped**, which is what the 2026-09-05
+picture-stimulus ruling was for. All three carry blank `item_text` by design over wordless
+stimuli, following `twod_rotation_mather2023`; the ruling's own prediction held that
+`stopsignal` has no shippable `correct_response` (per-session key shuffle) while `simon` does
+(congruency fixes the arrow from the item code). None of them copied the live siblings'
+IRW-authored stimulus descriptions.
+
+**Gates.** `normalize_nulls.R` fixed 1 of 6 (`frikha`, 60 lines). `audit_batch.R` 3 PASS / 3 WARN,
+0 FAIL. `verify_batch.R` **PASS=6**, no FAIL and no missing VERDICT. `lint_verification.R` 0 ERROR
+(2 WARN, resolved below). `irw-validate` ok on all six. `check_provenance.R` reports nothing
+against this batch — its output is the standing backlog (`translation_source` gaps on 61 older
+tables; `dou2025_area`, `extremera_2016_shs` undisclosed), and note it could not enforce the
+disclosure check because that checkout sits on `agent-brief-python-parity`, not main.
+
+**Two VERIFIED claims downgraded to PARTIAL at round close** — the lint's hedging WARNs were
+right in both cases, and the status now matches the evidence's own sentence.
+`enkavi_2019_gonogo`: no route separates `go_stim1` from `go_stim2`. The agent's argument that
+the swap is harmless (every shipped field is identical within each pair) is accepted and is why
+this is not a defect — but it is an argument about consequences, not a route.
+`fatima_2025_mslq`: the subscale-block route pins subscale membership, not within-subscale order,
+across 73 items. Neither downgrade disputes the shipped mapping.
+
+**Two agent findings re-checked independently (Step 5b), both CONFIRMED.** Both are response-table
+/ metadata defects, not item-text problems, and both are written into `notes.csv`:
+
+1. `enkavi_2019_stopsignal` — the item code's `high`/`low` component is stop-signal **frequency**,
+   not delay, but `data/enkavi_2019_conflict_tasks.py:148` maps it to `itemcov_delay`. Re-checked
+   against the task source: `experiment.js:670` draws `ss_freq = randomDraw(['high','low'])`,
+   `:690` assigns it to `condition`, and `:678-683` make high = 40% stop trials
+   (`['stop','stop','go','go','go']`) vs low = 20% (`['stop','go','go','go','go']`). The real
+   delay is a separate staircase (`SSD`, init 250, ±50, stored in its own column at `:568`).
+   `itemcov_ss_frequency` is the correct name. **Affects the sibling `enkavi_2019_*` tables too —
+   worth its own issue.**
+2. `frikha_2023_pe_acrs` — `metadata/biblio.csv:6454` describes it as "Perceived E-learning
+   Acceptance and Course Rating Scale (PE-ACRS)". It is not an e-learning scale: the shipped
+   wording is a physical-education basic-needs scale under the stem "When I am in PE...", with
+   relatedness q1/4/7/10, competence q2/5/8/11, autonomy q3/6/9/12 — an allocation corroborated
+   independently of the wording by the source workbook's own stored subscale sums, which
+   `verify_batch.R` reproduced 308/308, 306/308, 308/308. The Dataverse title agrees ("motivation
+   PNS"). Should read PE autonomy relatedness competence scale (PE-ARCS), Sulz, Temple & Gibbons
+   (2016). The sibling `frikha_2023_pe_ms` (biblio:6462) is suspect on the same grounds but was
+   **not** in this round and was **not** checked.
+
+**Step 5c — both row-count-anomaly WARNs are properties of the response data, not defects.**
+`gonogo`: per-item n 107415 / 104580 / 11620 / 11935, which sums to exactly the 235550 that
+`irw_table_sets()` reports live and reproduces the audit's own median of 58257.5 — a 211995:23555
+split, the standard 9:1 go/no-go ratio. `stopsignal`: the eight flagged `low_*` items are rare-vs-
+common by the same frequency design just described; `irw_table_sets()` n_rows 403800 matches the
+agent's rebuild exactly. Both checks used server-side aggregates — **no full export was taken
+anywhere in this round.** The three blank-`item_text` WARNs are the ruling working as intended.
+
+**Sidecar merge:** deleted by explicit name, not by glob — `verification_merged.csv` survived.
+All six tables carried their own verification row, so no NOT_NEEDED rows were needed. The three
+`enkavi_2019_*` tables had stale `batch_029` NO_ROUTE rows in `mapping_verification.csv` from when
+they were blocked; those were **replaced**, not appended, so every table still has exactly one
+tracker row (382 rows, no duplicates).
+
+Queue after this round: **1,006 pending / 276 done / 53 blocked / 12 failed / 54 excluded.**
+Circuit breaker not tripped (0% failed). Cap is `batch_034`; not reached, so the next round proceeds.
