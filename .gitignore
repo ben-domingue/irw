@@ -27,6 +27,11 @@ metadata/**/*.txt
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv
 !metadata/collection_members.csv
+
+# The rights gate on item wording, not a pipeline output. It is hand-maintained
+# from the rulings in itemtext_standard.md and must be reviewable in a diff --
+# a table missing from it is a table whose barred wording can reach a paraphrase.
+!metadata/itemtext_rights_exclusions.csv
 .env
 .Rproj.user
 .DS_Store

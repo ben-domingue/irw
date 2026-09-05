@@ -1,0 +1,59 @@
+table,instrument_pattern,ruling,source
+,PROMIS|HealthMeasures,PROMIS ruling 2026-09-05: IRW does not ship PROMIS item wording; adaptations are covered too and a derivative of a barred instrument stays barred,itemtext_standard.md#promis-healthmeasures
+,WHOQOL,WHOQOL ruling 2026-09-04: distribution clause bars shipping the instrument to third parties; IRW does not offer WHOQOL item text,itemtext_standard.md#whoqol
+,Toronto Alexithymia|TAS-20|TAS20,Fee-licence ruling 2026-09-04: enforced per-study fee disqualifies the wording even from an openly licensed deposit,itemtext_standard.md#fee-licensed-instruments
+,Daily Spiritual Experience|DSES,No-redistribution ruling 2026-09-04: 'Permission of author required to distribute or copy' overrides the CC BY source,itemtext_standard.md#no-redistribution-clauses
+promis1wave1_anger,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_anxiety,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_depression,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_fatigue,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_pain,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_physicalfunction,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+promis1wave1_social,,Withdrawn 2026-09-05 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+evpromisi_stone_2021_ddedanx,,Blocked batch_031 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+evpromisi_stone_2021_ddeddep,,Blocked batch_031 (PROMIS); quarantined,itemtext_standard.md#scope-applied-2026-09-05
+evpromisi_stone_2021_ddpainin,,Blocked batch_031 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+evpromisi_stone_2021_global,,Blocked batch_031 (PROMIS),itemtext_standard.md#scope-applied-2026-09-05
+cucchi_2018_tas20,,Withdrawn 2026-09-04 (TAS-20 fee licence),itemtext_standard.md#fee-licensed-instruments
+rmet_higgins_2022_tas,,Withdrawn 2026-09-04 (TAS-20 fee licence),itemtext_standard.md#fee-licensed-instruments
+ruiz_parra_2023_tas20,,Blocked (TAS-20 fee licence),itemtext_standard.md#fee-licensed-instruments
+CV_OASIS_ODSIS_PPE_Novak_2020_DSES,,Blocked 2026-09-04 (DSES no-redistribution),itemtext_standard.md#no-redistribution-clauses
+COACH_Chen_2022_WHOQOL_BREF,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+DART_Brysbaert_2020_1,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+DART_Brysbaert_2020_3_4_5,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+FIVPEI_Perrig_2023_PENS,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+altahla_2024_whoqol,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+altahla_2024_whoqol_bref,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+burkert_2019_whoqol_bref,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+cdm_timss03,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+cdm_timss07,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+cdm_timss11,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+chanal_2020_anglais,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+chanal_2020_francais,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+che_2026_regulatory_self_efficacy,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+chen2025_self_esteem,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+chinvararak_2021_ecr,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+choy_2022_intent_career,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+cognitive_load_klimova_2023_pwi,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+cognitive_load_klimova_2023_stomp,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+concretewords,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+contreras_valdez_2022_bsq,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+contreras_valdez_2022_rses,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+daiku_2021_lie_scale,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+de_vries_2022_hexaco_meta,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+de_vries_2022_hexaco_other,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+de_vries_2022_hexaco_self,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+debacker_2018_justice_appraisal,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+dominguez_2018_uwes,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+dpt_noncog__grit,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+dudasova_2021_engagement,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+enkavi_2019_dpx_axcpt,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+esiason_2024_vlq_consistency,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+esiason_2024_vlq_importance,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+experimental_iq,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+face_memory_test,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+galgam_2025_whoqol_bref,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+icar_sapa,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+neurips_2020,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+neurips_2022,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
+silva_2018_whoqol,,Blocked in extraction queue (rights or determinate block); fail-closed,extraction_batches/queue_state.csv
