@@ -4,5 +4,6 @@
 "pezzuti_2025_coolpeople_main_nfc","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
 "shu_2025_translation_add","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "singh_2025_identity_pba","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""
+"socialstereotype_hughes_2025_judgement","WARN",12,12,TRUE,TRUE,FALSE,TRUE,45.5,63.6,"45.5% of rows have blank item_text | 63.6% of rows have blank option_text"
 "sun_2025_morality_study1_fairnessHEXACO","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "sun_2025_morality_study1_fairnessMCQ","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
