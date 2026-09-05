@@ -275,7 +275,7 @@ CQTMS_Hur_2023,done,batch_024,2026-09-04T11:45:24-07:00
 cucchi_2018_kims,done,batch_024,2026-09-04T11:45:24-07:00
 cucchi_2018_rfq,done,batch_024,2026-09-04T11:45:24-07:00
 cucchi_2018_scoff,done,batch_024,2026-09-04T11:45:24-07:00
-cucchi_2018_tas20,done,batch_024,2026-09-04T11:45:24-07:00
+cucchi_2018_tas20,blocked,batch_024,2026-09-04T11:45:24-07:00
 cugmas_2021_elderly_social_support,done,batch_024,2026-09-04T11:45:24-07:00
 CV_OASIS_ODSIS_PPE_Novak_2020_BFI,done,batch_024,2026-09-04T11:45:24-07:00
 CV_OASIS_ODSIS_PPE_Novak_2020_DSES,done,batch_024,2026-09-04T11:45:24-07:00
@@ -945,7 +945,7 @@ ruiz_parra_2023_iri_pt,pending,,
 ruiz_parra_2023_maas,pending,,
 ruiz_parra_2023_pid5bf,pending,,
 ruiz_parra_2023_rfq8,pending,,
-ruiz_parra_2023_tas20,pending,,
+ruiz_parra_2023_tas20,blocked,,
 RvKDCS_Romiacg_Miroshnik_2020_BFI,pending,,
 RvKDCS_Romiacg_Miroshnik_2020_CBI,pending,,
 RvKDCS_Romiacg_Miroshnik_2020_KDOCS,pending,,

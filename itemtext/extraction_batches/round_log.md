@@ -3102,3 +3102,29 @@ CSV: there is no mapping to verify because the table was blocked on rights. Not 
 **CAP REACHED.** batch_025 is the cap raised in 484725d. The next firing will hit the
 "batch_025 already exists" stop condition in Step 0 and stand down. 1,086 tables remain
 pending; raise the cap to continue.
+
+### TAS-20 item text withdrawn — fee-licensed instruments — 2026-09-04
+
+Ben ruled that **an enforced licence fee disqualifies an instrument's wording**, extending the
+WHOQOL ruling from no-redistribution clauses to fee-licensed instruments. The TAS-20's holders
+charge a per-study fee and have enforced it (a 2021 *Molecular Autism* retraction).
+
+**This goes further than the WHOQOL ruling, deliberately.** WHOQOL turned on a clause forbidding the
+act of distribution. This does not: `cucchi_2018_tas20`'s wording came from a **CC BY 4.0** PeerJ
+article that reproduced all 20 items itself, so IRW is declining to redistribute text an open
+licensor already published. That argument was put before the decision and the ruling stands. Unlike
+the WHOQOL ruling, this one **does** generalise — it is a rule about fee-licensed instruments.
+
+**Done:** `cucchi_2018_tas20` deleted from the `irw_text` next draft (100 rows, verified absent
+afterwards) and `ruiz_parra_2023_tas20` blocked before extraction — both `blocked` in
+`queue_state.csv` (done 222 → 221, blocked 27 → 29, pending 1,086 → 1,085), both with a
+`pending_index_notes.csv` row saying what would have to change. Ben removed the already-live
+`rmet_higgins_2022_tas` from the draft himself; it remains in the released version until the next
+release drops it. `cucchi_2018_tas20`'s provenance keeps its `uploaded=2026-09-04` as history and
+carries the withdrawal in `public_note`; its `__items.csv` is deleted but
+`verify_cucchi_2018_tas20.R` stays, so the mapping is still reproducible if the ruling is ever
+reversed. Rule written into `itemtext_standard.md` § Rights.
+
+**Still outstanding:** the issues-page entries for all three tables (datapages/irw), and
+`wording_rights` is not set on these rows — the WHOQOL precedent sets `wording_rights=NC`, which is
+the wrong flag for a fee rather than a non-commercial clause, so that column needs a decision.

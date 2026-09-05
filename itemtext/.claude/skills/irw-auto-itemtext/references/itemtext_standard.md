@@ -189,6 +189,36 @@ extend this to another instrument without asking — and note that finding the t
 because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
 a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
 
+### Fee-licensed instruments — ruled 2026-09-04
+
+**An enforced licence fee disqualifies an instrument's wording, even where IRW's copy came from an
+openly licensed deposit.** Ben ruled this on the TAS-20 (Toronto Alexithymia Scale), whose rights
+holders charge a per-study fee and have enforced it — a 2021 *Molecular Autism* paper was retracted
+over it.
+
+This is the deliberate extension the WHOQOL ruling above said should be settled rather than reached
+by drift, and it goes further than that one in a way worth being explicit about. The WHOQOL turns on
+a clause forbidding the *act* of distribution. This does not: `cucchi_2018_tas20`'s wording came
+from Cucchi, Hampton & Moulton-Perkins (2018), a **CC BY 4.0** PeerJ article that reproduced all 20
+items itself, and IRW is declining to redistribute text an open licensor already published. The
+argument against was put and the ruling stands: the fee is enforced against exactly this kind of
+reuse, and an open deposit does not extinguish it.
+
+**What fires it.** The rights holder levies a fee for use of the instrument, and there is evidence
+it is enforced. A scale being copyrighted, sold as part of a manual, or merely free-of-charge does
+not fire it — that boundary is unchanged from the NC rule above.
+
+**Scope.** Blocked on this rule so far: `cucchi_2018_tas20` (extracted, uploaded, then deleted from
+the draft), the already-live `rmet_higgins_2022_tas` (removed from the draft, so it disappears at
+the next release), and `ruiz_parra_2023_tas20` (blocked before extraction). Any future TAS-20 table
+is blocked by the same rule.
+
+**This one DOES generalise, unlike the WHOQOL ruling** — it is a rule about fee-licensed
+instruments, not about the TAS-20. Apply it to any instrument meeting the test above, and record the
+fee and the evidence of enforcement in `provenance.csv` `note` so the basis stays auditable. A
+withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
+do not blank the date to make the table look as though it never shipped.
+
 **But the instrument-level restriction is recorded, not ignored.** Where the rights
 holder states one, set `wording_rights=NC` on every row of that table and add an
 entry to the public issues page. The column is a filterable flag so a commercial
