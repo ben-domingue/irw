@@ -3485,3 +3485,49 @@ batch_026 uploaded — stamp, clear, log` swept partially-written `batch_027` si
 sessions on this repo. No content was lost (the round-close commit supersedes it), but batch_027's
 history is split across two commits and `git log -- itemtables/batch_027` names the wrong one
 first.
+
+### batch_027 triage — 10 of 10 staged, 0 held — 2026-09-04
+
+Triaged unattended, in parallel with the batch_028 round.
+
+**Gates re-run live.** `audit_batch` 8 PASS / 2 WARN, `verify_batch` 7 PASS + 3
+MISSING(exempt, `data_labels`), `lint_verification` 0 ERROR / 3 WARN. Both audit WARNs
+were already explained by the round's notes: `dominguez_2018_jcs`'s blank rows are the
+`item_17` Subtotal column, and `doustmohammadian_2017_fnlit`'s 16 option-less items are
+exactly its 16 untranslated ones.
+
+**A transient gate ERROR that is not a defect.** The re-audit returned
+`[ERROR] di_riso_2025_mask_emotion: could not read live data: An error occurred while
+querying IRW: missing value where TRUE/FALSE needed`, where the round's own audit had it
+PASS. It does **not** reproduce — audited alone immediately afterwards it PASSes. Recorded
+in `notes.csv` because the message reads like an R bug in the gate rather than a network
+blip, and the next person to see it should not go hunting for a defect that is not there.
+
+**Three lint WARNs adjudicated, all kept VERIFIED.** `dopmeijer_2022_loneliness`,
+`doustmohammadian_2017_fnlit` and `dpt_noncog__interpersonal_reactivity` are each flagged
+"VERIFIED but its evidence hedges (does not establish)". The hedge is real but concerns
+something Step 5b does not claim: in all three the evidence says the numeric route pins the
+code-to-item **mapping** completely and does not establish the **words**, which is the
+translation question. The routes themselves are decisive — 0 of 34,551 observations
+discrepant with the reversed reading off by 41,586; all 49 published alpha-if-item-deleted
+values reproduced to 0.0005; 74 of 74 item×resp cells matching with mutually distinct
+frequency profiles. Same false positive as `CPDMMC_Kunnari_2020_HCD` in batch_024: the
+linter keyword-matches "does not establish" without regard to what the sentence is about.
+That is now four instances, so the linter's hedge test is worth narrowing.
+
+**Staged: all 10. Held: none.** `dominguez_2018_jcs` was the one candidate for a hold — its
+`item_17` is not an item but the block Subtotal column, equal to `FLOOR(mean(item_18..21))`
+for 200 of 202 ids — and it is staged anyway. The item table is correct with respect to the
+live response table as it stands today; holding it would park nine good tables' worth of
+schedule behind one row whose fix is a response-table change. If that change lands, the item
+table is re-uploaded.
+
+**File format, per batch, undocumented.** batch_027's CSVs are MINIMAL-quoted with **LF**
+endings; batch_026's are MINIMAL with **CRLF**. Neither BATCH_PROCESS's claim (CRLF, every
+field quoted) nor any single convention holds across batches. Round-trip the file and check
+byte-identity before writing, every time.
+
+**Two response-data defects the round found, filed rather than fixed here** —
+`donati_2021_cfq7`'s inverted `cov_population` and `dominguez_2018_jcs`'s `item_17`.
+Both need a change to a processing script and a response-table re-upload, which is not
+something a triage pass should do.
