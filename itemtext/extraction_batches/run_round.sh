@@ -183,13 +183,29 @@ mkdir -p "$LOG_DIR"
     exit 1
   fi
   if [[ -d "$ITEMTEXT/itemtables/$cap" ]]; then
-    echo "SKIP: round cap reached ($cap exists). Raise it in Step 0 of BOTH"
-    echo "BATCH_PROCESS.md and round_prompt_v1.md to run more rounds. Note the"
-    echo "off-by-one: the cap allows rounds UP TO AND INCLUDING that batch."
+    echo "SKIP: round cap reached ($cap exists). Raise it in Step 0 of"
+    echo "round_prompt_v1.md, which is the only copy of the prompt, to run more"
+    echo "rounds. Note the off-by-one: the cap allows rounds UP TO AND"
+    echo "INCLUDING that batch."
     exit 0
   fi
 
   echo "Guards clear: $pending pending, cap $cap not yet reached."
+
+  # Record which batch directories exist BEFORE the agent runs, so the checks
+  # after it can identify the batch this round actually created by difference.
+  #
+  # They used to infer it with `ls -d itemtables/batch_* | sort -V | tail -1`,
+  # which silently means "some other batch" the moment a directory that sorts
+  # after the runner's own lands in the tree. Hand-built ranges do exactly that
+  # -- itemtext#1945 claims batch_201-205 -- and so does any named batch, e.g.
+  # batch_enem_2023. Neither post-round check crashes when that happens; both
+  # just stop protecting, which is worse. The failed/blocked-wrote-a-CSV warning
+  # filters on `$batch == basename($batch_dir)` and matches nothing, and the
+  # round-completed check tests for an audit_report.csv that the other batch
+  # supplies. Difference is immune to naming and sort order alike.
+  _batches_before="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort)"
+
   echo "Launching round agent at $(date -Is)."
   echo
 
@@ -207,6 +223,19 @@ mkdir -p "$LOG_DIR"
   rc="${PIPESTATUS[0]}"
   echo
   echo "Round agent exited $rc at $(date -Is)."
+
+  # The batch this round created: present now, absent before. If the round made
+  # none (it stood down, or died before Step 3) this is empty, and every check
+  # below is written to treat empty as "no batch to vouch for" rather than
+  # falling back to a guess.
+  batch_dir="$(comm -13 <(printf '%s\n' "$_batches_before") \
+                        <(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort) \
+               | tail -1)"
+  if [[ -n "$batch_dir" ]]; then
+    echo "This round built: $(basename "$batch_dir")"
+  else
+    echo "This round built no new batch directory."
+  fi
 
   # A 429 does NOT fail the round. When subagents are killed by a rate limit or a
   # spend cap the orchestrator finishes and exits 0, so nothing above notices and
@@ -227,7 +256,6 @@ mkdir -p "$LOG_DIR"
   # failed or blocked that nevertheless HAS a __items.csv on disk. That is the
   # thing the batch_019 rescue was about, it needs no transcript parsing, and it
   # cannot false-positive on the agent talking about rate limits.
-  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
   if [[ -n "$batch_dir" ]]; then
     mismatch=""
     while IFS=, read -r tbl status batch _rest; do
@@ -267,15 +295,20 @@ mkdir -p "$LOG_DIR"
   # try to repair anything -- reconciling a half-finished round is a human decision,
   # and the work is usually salvageable rather than lost.
   left="$(awk -F, 'NR>1 && $2=="in_progress"' "$QUEUE" | wc -l)"
-  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
-  if [[ "$left" -gt 0 || ! -f "$batch_dir/audit_report.csv" ]]; then
+  if [[ "$left" -gt 0 || -z "$batch_dir" || ! -f "$batch_dir/audit_report.csv" ]]; then
     echo
     echo "ERROR: the agent exited 0 but the round did NOT complete."
     [[ "$left" -gt 0 ]] && echo "  - $left row(s) still in_progress"
-    [[ -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
+    [[ -n "$batch_dir" ]] || echo "  - no new batch directory was created (Step 3 never finished)"
+    [[ -z "$batch_dir" || -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
     echo
-    echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
-    echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    if [[ -n "$batch_dir" ]]; then
+      echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
+      echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    else
+      echo "Do not re-run. No batch directory to inspect; reconcile queue_state.csv"
+      echo "by hand per BATCH_PROCESS.md before another round claims tables."
+    fi
     exit 1
   fi
 
