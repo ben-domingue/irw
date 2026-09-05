@@ -4628,3 +4628,24 @@ response table forces the item table with it.
 **The three restored respondents are live for the first time**: 1009, 1011 and 1012, who answered
 6 or 7 on all seven items and were therefore erased entirely by the old filter. `cov_group` now
 reads 138 caregiver / 251 patient rows.
+
+### `esiason_2024_aaqii` item text re-uploaded — 2026-09-05
+
+Ben uploaded it. `red_up.drafts` reports it as **`changed`**, not `added` — the first row in this
+session to read that way, and the correct signal for a table being replaced rather than created.
+Re-stamped `uploaded=2026-09-05` in `batch_030/provenance.csv`; the `mapping_verification` row
+already carried that date and needed nothing, since the verified mapping did not change — only the
+option text extended. CSV cleared from the batch folder and `clean/`.
+
+**This closes irw#1971 end to end**, across five separate artefacts: the processing script
+(#1982), the seven response tables, the `item_response_warehouse_3` release, this item table, and
+the public issues-page entry (datapages/irw#138). The item text could not be corrected until the
+response data was released, because the item and resp sets must match exactly — the same
+constraint that forced the truncated version in the first place.
+
+Worth keeping: **a response-data defect propagated into three artefacts and two wrong public
+statements.** The truncation produced item text stopping at resp 5; the transposed `cov_group`
+made both the provenance note and the published issues-page entry call the dropped values
+"caregiver responses" when they were patients'. Neither error was visible from inside the item
+text — the gates all passed, because the item table matched the live table faithfully. It matched
+a table that was wrong.
