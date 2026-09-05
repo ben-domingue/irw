@@ -3531,3 +3531,134 @@ byte-identity before writing, every time.
 `donati_2021_cfq7`'s inverted `cov_population` and `dominguez_2018_jcs`'s `item_17`.
 Both need a change to a processing script and a response-table re-upload, which is not
 something a triage pass should do.
+
+---
+
+## batch_028 — 2026-09-04
+
+**12 tables claimed. Written 10 / blocked 2 / failed 0.** Yield 10/12 = 83.3%. Circuit
+breaker not tripped: 0% failed (the breaker counts `failed`, not `blocked`).
+
+`dpt_noncog__intolerance_of_uncertainty`, `duboz_2021_pss10`, `dudasova_2021_cpc12`,
+`dudasova_2021_cpc12_study3`, `dudasova_2021_gratitude`, `dudasova_2021_swls`,
+`dulger2024_wordcompletion`, `dussel_2022_pcl17`,
+`dvivdtws_ppmial_marcatto_2023_cwb`, `dvivdtws_ppmial_marcatto_2023_dtw` written.
+`duboz_2021_swls` and `dudasova_2021_engagement` blocked — both determinate (retry test NO),
+both with rows in `itemtables/pending_index_notes.csv`.
+
+**All six gates clean.** `normalize_nulls.R` fixed 1 of 10 files. `audit_batch.R`: 10 PASS,
+**no WARNs at all**, so Step 5c had nothing to explain. `verify_batch.R`: PASS=10, no
+FAIL and no missing VERDICT. `lint_verification.R`: 12 rows, **0 ERROR**, 2 WARN.
+`irw-validate`: all 10 ok. `check_provenance.R`: no vocabulary errors.
+
+**No NOT_NEEDED rows were needed** — both `data_labels` tables wrote real verification rows
+of their own, so all 12 tables already had exactly one row each. The batch-020/021 lint
+false alarm did not recur.
+
+### The thing that needs Ben: two agents in ONE batch reached OPPOSITE rights verdicts on the SWLS
+
+`duboz_2021_swls` was **blocked** on the SWLS's licence; `dudasova_2021_swls` **shipped**
+SWLS wording. Same instrument, same rights holder, same batch. They read different pages of
+that rights holder, and the orchestrator re-fetched both:
+
+- `eddiener.com/scales` (maintained successor site, © 2025) — "These scales are copyrighted
+  by Ed Diener and his co-authors." / "The use of these scales is permitted for
+  non-commercial purposes only." **Confirmed verbatim.** This is the irw#1891 NC clause.
+- `labs.psychology.illinois.edu/~ediener/scales.html` — "The scale is in the public domain
+  and therefore you are free to use it without permission or charge by all professionals
+  (researchers and practitioners) as long as you give credit to the authors of the scale."
+
+**Correction to both agents' accounts of the older page**, and it matters: each described it
+as saying the scale is *copyrighted but free to use*. It does not. It says **public domain**,
+and on that page the word "copyrighted" is scoped to SPANE and the Flourishing Scale, **not**
+the SWLS. So this is not "one page has an NC clause and the other is silent" — it is a direct
+contradiction on the SWLS specifically, and the older statement is a stronger basis for
+shipping than either agent claimed.
+
+Scope of the ruling: ~14 SWLS tables sit in the queue; `altahla_2024_swls` (batch_005) and
+`campos_2023_swls` (batch_017) have already shipped; the same eddiener.com clause also covers
+the Flourishing Scale and SPANE. **Do not upload `dudasova_2021_swls` while
+`duboz_2021_swls` stands blocked** — ship both or block both.
+
+### Duplicate live tables — confirmed independently, decide before uploading
+
+`dvivdtws_ppmial_marcatto_2023_cwb` and `dvivdtws_ppmial_marcatto_2023_dtw` are the **same
+data under two names**. The agent flagged it; the orchestrator confirmed it without taking
+the agent's word: both report `rows=12,166`, the identical 22-item set `dtw1..dtw22` and the
+identical resp set 1–5, and `item_stats.R` returns byte-identical per-item blocks on every
+item (dtw1 n=552 M=2.86 SD=1.09 floor 11.4% ceil 6.2%; dtw11 n=551 1.44/0.79 69.3/0.7;
+dtw16 n=553 1.26/0.63 81.7/0.5; dtw21 n=553 1.14/0.55 92.0/0.4).
+
+The `_cwb` one is the **misnamed** member: its dictionary Description says "Counterproductive
+Work Behavior items(CWB)" but the data are the 22-item Dark Tetrad at Work scale — the OSF
+deposit `osf.io/8mj73` keeps the blocks separate and CWB has 45 items, Italian half only.
+Both CSVs are staged; **upload at most one.** If `_cwb` is deleted as a duplicate, drop its
+CSV and keep `_dtw`.
+
+### Step 5b orchestrator re-checks — three agent findings verified, one corrected
+
+- **`dudasova_2021_gratitude`, both data findings reproduce exactly.** The authors' own
+  `Grat` total sums `Grat6` un-reversed: corr(total, raw sum) = **1.000000**, means identical
+  (28.163 vs 28.163); reversing `Grat6` gives corr 0.8956 / mean 31.702. Polarity evidence
+  also reproduces (mean off-diagonal r: +0.382 / +0.386 / +0.334 / +0.327 / +0.259 /
+  **−0.451**; r(Grat1,Grat2) = 0.808). Source-file defect, harmless to the IRW table, which
+  ships per-item responses and not the total.
+- **`dpt_noncog__intolerance_of_uncertainty`'s public_note holds against live data.** The
+  live item set really does contain both `iu_21a` and `iu_21b`, carrying the deposit's single
+  `IU_Scale_21` label across two distinct items.
+- **The SWLS rights account was corrected** (above) — an agent finding taken as a lead and
+  changed by the check, which is exactly what Step 5b is for.
+- Agent prediction that did **not** come true: `dudasova_2021_gratitude` expected
+  `irw-validate` to flag `resp_ambiguous` for its deliberate two-direction `option_text`.
+  It did not. Per-item direction differences are legitimately not flagged, as with
+  `aip_vangsness_2019`. No defect.
+
+### Both lint WARNs adjudicated — kept VERIFIED, and the same false positive as batch_027
+
+`dpt_noncog__intolerance_of_uncertainty` and `dulger2024_wordcompletion` are flagged
+"VERIFIED but its evidence hedges". In both the hedge is about an axis Step 5b does not
+claim: the IUS table's hedge is about the 2–4 anchor labels, not the item axis (route 9
+matched all 16 response-count vectors cell-for-cell, all 16 mutually distinct); the
+word-completion table's hedge is about scenario wording that is **not shipped**, plus
+`acc_d_nt` vs `ac_id_nt`, a pair carrying the *same* `correct_response` so no swap is
+possible (all 60 claimed target words are the unique maximum, every other word scoring
+exactly 0.000). This is now the **fifth and sixth** instance of the linter keyword-matching
+"does not establish" without regard to what the sentence is about — batch_024 had one,
+batch_027 had three. The hedge test is overdue for narrowing.
+
+### Other findings worth carrying forward
+
+- **`dudasova_2021_cpc12_study3` is misleadingly named.** `_study3` refers to the article's
+  **S3 supporting-information file**, not the paper's Study 3. The data are the second German
+  sample (N=202) from *Study 2*, on the original German CPC-12 — not Study 3's Czech CPC-12R,
+  which swaps in three different resilience items. The dictionary Description is already
+  correct; only the table name misleads.
+- **`dudasova_2021_cpc12` nearly shipped a 9-of-12 permutation.** The paper's own appendix
+  prints the *revised* CPC-12R, which re-orders the facets relative to the CPC-12 that Study 1
+  actually administered. Transcribing the appendix in appendix order would have permuted 9 of
+  12 items and every existing set-based gate would still have passed. Verified out by
+  reproducing the paper's twelve distinct CFA loadings item by item.
+- **`dudasova_2021_engagement`'s instrument identity is a dictionary conjecture.** The
+  Description "Work engagement scale (UWES-9-style, 9 items)" is not a source claim — the
+  paper never mentions engagement at all, and the team's other paper on this cohort describes
+  the 17-item UWES. Worth a dictionary fix independent of the rights question.
+- **`dulger2024_wordcompletion` pools two tasks, not one** (40 scenario-completion fragments
+  + 20 memory-recognition fragments = the 60 live items), and 36 of its 60 target words are
+  IRW-derived from the modal correct completion rather than stated by the authors — the
+  `public_note` discloses this per the 2026-09-03 derived-answer-key ruling.
+- **`duboz_2021_pss10` introduces `wording_rights=NC` for the PSS**, which the two live
+  PSS-10 tables (`bakker_2020_pss10`, `beck_2021_pss10`, both uploaded 2026-08-18) do not
+  carry. Backfilling that column on live tables is an upload-side decision, flagged not done.
+- **Provenance header drift, again**: 10 of 12 agents wrote the 7-column header and the two
+  `marcatto` agents wrote the 8-column one with `translation_source`. The merge normalised to
+  8 columns, matching batch_027. The subagent prompt still specifies 7 — worth fixing there.
+- **Issues-page debt is upload-side.** None of this batch's tables have an
+  `itemtext_issues.qmd` line yet; `check_provenance.R` does not flag them because they are
+  not uploaded. Five will need one at upload (`duboz_2021_pss10`, `dudasova_2021_swls`,
+  `dudasova_2021_gratitude`, `dussel_2022_pcl17`, `dulger2024_wordcompletion`). Separately,
+  its two standing complaints (`derubeis_2017_arsq`, `dou2025_area`) are pre-existing debt
+  from earlier batches, untouched by this round.
+
+**No systemic access issues.** No quota exhaustion, no rate limit, no killed agents; every
+agent reported a determinate outcome and all 12 sidecar sets were written. Queue: 1,049
+pending remain. Cap is batch_030 — **not reached**, two rounds left.
