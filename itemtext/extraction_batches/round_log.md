@@ -4024,3 +4024,102 @@ first run would have marked clean tables `failed` — always re-run before belie
 because the live data does, and the item set and resp set must match exactly; its public note
 names IRW's own script as the cause. When the script is fixed and the response table re-uploaded,
 this item table needs re-uploading with the upper two anchors restored.
+
+## batch_031 — 2026-09-04
+
+12 tables claimed, 12 resolved. **written 6 / blocked 6 / failed 0.** Yield 50%.
+Circuit breaker: NOT tripped (0% failed, threshold >30% failed; blocked does not count).
+No rate limit or spend cap hit; all 12 agents returned reports.
+
+**Written (done):** EWAS_Sanford_2024_Flourish, extremera_2016_ei, extremera_2016_sbq,
+extremera_2016_shs, extremera_2016_swls, falih_2026_dass21.
+
+**Blocked (all retry test NO — determinate):** evpromisi_stone_2021_{ddedanx, ddeddep,
+ddpainin, global} (PROMIS redistribution bar), experimental_iq (image-only items),
+face_memory_test (image-only face half + HEXACO NC clause on the only source publishing
+the wording).
+
+### The round's one real decision: PROMIS
+
+Three agents independently blocked their evpromisi tables on the HealthMeasures Terms of
+Use no-redistribution clause; a fourth (`_ddeddep`) shipped a CSV from the same CC0 deposit,
+having weighed the same question and dismissed it on the precedent of the batch_022
+`promis1wave1_*` uploads.
+
+The orchestrator verified the clause directly rather than taking three concurring reports at
+face value: the two agents' fetched PDFs are byte-identical (md5
+`fe672ca0c092d6b324a8098ac049c7e3`), and the text carries both "shall not reproduce
+HealthMeasures Instruments except as needed to conduct the authorized single use" and
+"shall not distribute, publish, sell, license, or provide HealthMeasures products, by any
+means whatsoever, to third parties". `itemtext_standard.md`'s 2026-09-04 ruling is general,
+not instrument-specific: a quotable redistribution bar governs even where IRW's wording came
+from an openly licensed deposit.
+
+So `_ddeddep` was **withdrawn by the orchestrator**, not by its agent — its `__items.csv`
+moved to `itemtext/quarantine/batch_031/` with a README, its provenance reset to
+`unknown`/`unknown` with the override recorded, and the round's four PROMIS tables now
+resolve consistently. The extraction was good work (route 9, 40/40 cells) and restores
+unchanged if the ruling goes the other way.
+
+**FOR BEN — one decision, not four.** Is PROMIS wording an exception to the 2026-09-04
+redistribution rule? It reaches beyond this batch: the seven `promis1wave1_*` tables shipped
+in batch_022 and stamped `uploaded=2026-09-04` carry PROMIS item-bank wording (including the
+EDANX bank) with no rights analysis in their provenance, and the standard itself records that
+sweep as outstanding — "a table shipped before 2026-09-04 under 'the source licence governs'
+may not survive this rule". Either PROMIS is barred (withdraw those seven, keep these four
+blocked) or it is an exception (restore `_ddeddep` from quarantine and requeue the other
+three). `evpromisi_stone_2021_cdiag` (batch_030) is unaffected either way — investigators'
+own comorbidity checklist, not PROMIS wording.
+
+### Gates
+
+- `normalize_nulls.R`: 0 of 6 normalized (agents already in convention).
+- `audit_batch.R`: PASS 5, WARN 1, no FAIL.
+- `verify_batch.R`: PASS 5, MISSING(exempt) 1 (EWAS is `data_labels`).
+- `lint_verification.R`: 12 rows, **0 ERROR**, 2 WARN — both on the blocked PROMIS tables
+  (`_ddeddep`, `_ddpainin`), flagging VERIFIED-with-a-hedge. The hedge is about the *wording*
+  resting on a codebook document, not about the mapping axis the route verifies, and neither
+  table ships anything, so the status was left alone. The NOT_NEEDED row for EWAS was written
+  into BOTH `verification_merged.csv` and the permanent tracker, which is why the lint is clean.
+- `irw-validate`: 5 ok, 1 WARN — `name_charset` on `EWAS_Sanford_2024_Flourish` (mixed-case
+  LIVE table name; not an itemtext defect and not fixable here).
+- `check_provenance.R`: no vocabulary errors. Three IRW-generated-content tables still owe a
+  public issues-page line: `extremera_2016_shs` (this batch, owed at upload) plus the
+  pre-existing `derubeis_2017_arsq` and `dou2025_area`.
+
+### Step 5b — orchestrator re-checks of agent claims
+
+- **PROMIS clause: CONFIRMED**, see above. Changed the round's outcome.
+- **`extremera_2016_sbq` data defect: CONFIRMED exactly** against the source `.sav`. sbq3 =
+  {0:2, 1:833, 2:79, 3:19, 4:17, 5:11}, so 2 of 961 responses carry a code outside the item's
+  five printed options — this is the audit WARN, and it is a defect in the response data, not
+  in the item text. Also confirmed: the deposit's `SuicideBehaviours_Scores` equals the raw
+  four-item sum on 960/960 complete rows and reaches **19**, above the SBQ-R's published 3–18
+  range; `resp` is the raw printed option index, not SBQ-R scoring. Worth a data-side issue.
+
+### Other findings worth a human's eye
+
+- **Flourishing Scale rights inconsistency.** `EWAS_Sanford_2024_Flourish` ships with
+  `wording_rights=NC` (eddiener.com names the FS under a non-commercial clause);
+  `conner_2017_flourishing` shipped the same instrument in batch_030 **without** the flag. One
+  of the two is wrong. The flag is the safer state, so nothing was changed retroactively.
+- **`extremera_2016_ei` — two rival published numberings.** The same authors publish the
+  WLEIS-S interleaved (administration form) and blocked (Psicothema Table 1). Route 5 over
+  1117 cases chose interleaved decisively (within/between r gap +0.125 and 33/48 top-3
+  correlates in-subscale, vs +0.007 and 9/48 for blocked). Taking the paper table at face
+  value would have mislabelled all 16 items. `translation_source=mixed` (authors' English
+  glosses for stems, IRW's for the five intermediate anchors) — owes an issues-page line.
+- **`evpromisi_stone_2021_ddpainin` metadata defect:** dictionary Description says "PROMIS
+  Pain Intensity"; the items are PROMIS Pain **Interference**.
+- **`face_memory_test` schema problem:** one 175-code space stacks two instruments with two
+  different response scales (1–2 face recognition, 1–5 HEXACO agreement) in one `resp`
+  column — the `resp_ambiguous` shape, on a live table.
+- **Blocked rate is about the queue, not the pipeline.** The queue is worked in table order
+  and this stretch served four tables from one PROMIS deposit plus two openpsychometrics
+  image-based tests. Six determinate source/rights verdicts is correct behaviour, not
+  breakage.
+
+Provenance merged in the 8-column form (`translation_source` present); `extremera_2016_ei`
+recorded as `mixed`. Sidecars deleted by exact filename, never by glob.
+
+Cap is batch_034 — not reached, three rounds remain.
