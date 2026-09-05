@@ -4312,3 +4312,28 @@ must disclose that IRW's own script truncated the 1-7 AAQ-II and dropped 9.5% of
 
 Note also that merging that PR did **not** rebuild the live page: `quarto_publish.yaml` in
 `datapages/irw` is `workflow_dispatch` only.
+
+### batch_033 — round stopped by hand, all 12 rows requeued — 2026-09-05
+
+Ben stopped the round about four minutes in, then halved the agent count. Nothing was lost:
+the round had claimed its 12 tables and dispatched, but `itemtables/batch_033/` held **zero
+files** when it was stopped, so there was nothing to salvage and nothing to weigh. All 12 rows
+went back to `pending` with batch and timestamp cleared, on Ben's go-ahead. Zero `in_progress`
+rows remain and the queue is 1,009 pending, exactly where it stood before the round started.
+
+The empty `batch_033/` directory was removed, so the next round is batch_033 rather than
+batch_034 — which is also the cap, and would have left no room after it.
+
+**Rounds are now 6 agents, not 12** (Ben, 2026-09-05, after two consecutive OOM kills). The
+reason is written into Step 2 of `round_prompt_v1.md` beside the number, because the note that
+was there justified twelve on the wrong constraint: "Twelve agents sits under the concurrency
+cap, so this costs no wall clock." True of the API, irrelevant to the machine. **The binding
+limit is RAM on the laptop the runner shares with a desktop session.** batch_032 died after
+writing four of twelve tables and cost seven tables of extraction work; batch_033 died partway
+through dispatch and cost nothing only because it was stopped before it wrote.
+
+The round-size arithmetic stated as current fact was corrected in `BATCH_PROCESS.md` and
+`run_round.sh` — both said "8 of the 12 tables in a round" and "~98 rounds" against a
+1,165-table queue. At 6 a round and 1,009 pending it is **~168 rounds**, with per-round token
+cost roughly halved and the round count roughly doubled. Historical accounts of batches 010,
+018, 019 and 020 keep their original numbers, since those describe what happened.
