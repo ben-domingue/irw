@@ -578,13 +578,20 @@ class ValidatorGate(unittest.TestCase):
         report = self._check(path, "ok_2024_scale")
         self.assertTrue(report.ok, report.errors)
 
-    def test_a_cov_age_sentinel_warns_without_blocking(self):
+    def test_a_cov_age_sentinel_blocks_the_upload(self):
+        """Was warn-only until 2026-09-05; promoted to error by irw#1856.
+
+        The old policy was that an already-live defect must not block. It held
+        while nobody had decided the repair; 72 of the 81 are now repaired, so
+        the gate refuses the defect at the door instead of adding a line to a
+        log that 81 tables' worth of bad ages already scrolled past.
+        """
         rows = "\n".join(f"{i},q{j},{(i + j) % 5 + 1},{999 if i == 1 else 40}"
                          for i in range(1, 40) for j in range(1, 5))
         path = self._csv("sentinel_2024_scale.csv", "id,item,resp,cov_age\n" + rows + "\n")
         report = self._check(path, "sentinel_2024_scale")
-        self.assertTrue(report.ok, "an already-live defect must not block (#1779)")
-        self.assertTrue(any("cov_range" in w for w in report.warnings), report.warnings)
+        self.assertFalse(report.ok, "an out-of-range cov_age must refuse the upload")
+        self.assertTrue(any("cov_range" in e for e in report.errors), report.errors)
 
     def test_metadata_is_exempt_from_the_format_validator(self):
         """The regression that made every irw_meta upload a no-op (#1703).
