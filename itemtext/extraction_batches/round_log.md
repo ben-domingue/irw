@@ -4123,3 +4123,53 @@ Provenance merged in the 8-column form (`translation_source` present); `extremer
 recorded as `mixed`. Sidecars deleted by exact filename, never by glob.
 
 Cap is batch_034 — not reached, three rounds remain.
+
+### batch_031 triage — 6 of 6 staged; the PROMIS question held for Ben — 2026-09-04
+
+**Gates re-run live.** `audit_batch` 5 PASS / 1 WARN; `lint_verification` 0 ERROR / 2 WARN,
+both on blocked PROMIS rows that shipped nothing and both the irw#1966 false positive. The
+audit WARN reaches the round's own finding independently: `extremera_2016_sbq`'s `sbq3` carries
+a live `resp=0` with no `option_text` row — a response code outside the item's own printed
+options. With the deposit's own score reaching 19 against the SBQ-R's published 3–18 range,
+that is a response-data defect, filed as **irw#1973**.
+
+**The HealthMeasures clause verified a third time, because this ruling reaches the draft.**
+Three agents blocked on it, a fourth shipped against it, and the orchestrator verified it and
+withdrew the shipped file to quarantine. At triage the Terms of Use PDF was fetched
+independently — **md5 `fe672ca0c092d6b324a8098ac049c7e3`, matching the agents' copies** — and
+the text extracted rather than summarised:
+
+> "User shall not reproduce HealthMeasures Instruments except as needed to conduct the
+> authorized single use … User shall not distribute, publish, sell, license, or provide
+> HealthMeasures products, by any means whatsoever, to third parties not involved with the
+> authorized single use as stated above, without the prior written agreement of the Provider."
+> — *Terms of Use, Approved Version 1.12-2017*, "Single Use, Reproducibility, and Distribution"
+
+That is a quotable redistribution bar, which the DSES ruling already says governs even where
+IRW's copy came from an openly licensed deposit — and the Stone deposit is CC0, exactly the
+DSES shape. The same section reads "publicly available for use without licensing or royalty
+fees for individual research", the free-but-restricted pattern of TIMSS and HEXACO.
+
+**Scope, checked table by table.** Four blocked this round (`evpromisi_stone_2021_ddedanx`,
+`_ddeddep`, `_ddpainin`, `_global`), with `_ddeddep` in `itemtext/quarantine/batch_031/` with
+its extraction intact. Seven already in the `irw_text` **draft** and stamped `uploaded=2026-09-04`
+from batch_022: `promis1wave1_{anger,anxiety,depression,fatigue,pain,physicalfunction,social}`,
+carrying PROMIS bank wording from the CC0 Wave 1 codebook with no rights analysis recorded.
+They are unreleased, so withdrawal is a deletion before release rather than a public withdrawal.
+**`promis1wave1_cesd` and `promis1wave1_haq` are NOT affected** — their provenance places them
+in the codebook's legacy-items tables rather than the PROMIS bank sections, so CES-D and HAQ
+carry their own separate rights.
+
+**The SWLS ruling propagated correctly.** `extremera_2016_swls` records that its wording came
+from `SWLS_English.doc` on the Illinois page and that eddiener.com "was NOT opened as a source"
+— exactly the record the ruling asks for, written by a round that had only the standard to go on.
+
+**Flourishing Scale flag inconsistency, left as found.** `EWAS_Sanford_2024_Flourish` ships
+`wording_rights=NC`; `conner_2017_flourishing` (batch_021, uploaded 2026-09-04) shipped the same
+Diener instrument without it. Under the field's own definition — the instrument's rights holder
+states an NC restriction even though IRW copied from an open source — **EWAS is right and conner
+is the one missing a flag.** Not fixed here: it is a disclosure flag on an already-uploaded
+table, it belongs to the outstanding rights re-audit (irw#1954), and irw#1955 has the column's
+future open anyway.
+
+**Staged: all 6 written.** `clean/` now holds 24 tables from batches 029, 030 and 031.
