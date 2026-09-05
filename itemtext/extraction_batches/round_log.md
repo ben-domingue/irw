@@ -4649,3 +4649,76 @@ made both the provenance note and the published issues-page entry call the dropp
 "caregiver responses" when they were patients'. Neither error was visible from inside the item
 text — the gates all passed, because the item table matched the live table faithfully. It matched
 a table that was wrong.
+
+## batch_034 — 2026-09-05
+
+6 tables claimed, **6 written / 0 blocked / 0 failed — yield 100%**. Six agents
+(the post-2026-09-05 halved dispatch), one per table; all six returned, none was
+killed, and no rate limit or spend cap was hit. First full-yield round in a while,
+and the reason is legible: every table came from a CC BY deposit that ships an
+XLSX carrying its own column labels.
+
+Gates, all on the whole batch: normalize_nulls 1 of 6 fixed
+(gabriel_2026_knowledge_confidence, 55 lines) · audit_batch **6/6 PASS, zero WARNs**
+(so Step 5c had nothing to explain) · verify_batch **PASS=6** · lint_verification
+6 rows, no problems · irw-validate ok on all six · check_provenance exit 0, vocabulary
+clean, **0 tables owing an issues-page entry**.
+
+Verification: 6 rows, 5 VERIFIED + 1 PARTIAL. All six agents ran Step 5b even where
+`mapping_basis=data_labels` exempted them, so no NOT_NEEDED rows were needed — every
+written table has exactly one tracker row. The PARTIAL is fukuda_2021_health_literacy,
+honestly graded: route 9 pins IRW code ↔ S1 *column* at 0 of 184 cells mismatched, but
+column-number ↔ canonical-question-number rests on the header's own numbering, which
+cannot separate two items inside one domain if the study renumbered.
+
+**Disclosure backlog: this round added nothing to it.** Five of the six tables are
+`text_source=translated_substitute` (Japanese and German studies that publish only
+English wording), the shape check_provenance flags as irw#1970 — 62 tables carrying
+English in the base fields with no record of whose English it is. Each agent left
+`translation_source` blank; the orchestrator filled all five at merge from what the
+agents documented: `official_instrument_english` for fukuda_2021_health_literacy (its
+English is the HLS-EU Consortium's own annex, not this study's rendering) and
+`study_supplied` for the other four (the authors' own paper/deposit English). The
+reported gap went 62 → 61 rather than 62 → 67.
+
+Two provenance sidecars arrived with the 8-column header (incl. `translation_source`)
+and four with the 7-column one; merged to the 8-column form, which is what batch_033
+and check_provenance.R expect.
+
+### Step 5b — four claims re-checked by the orchestrator, all four confirmed
+
+1. **fukuda_2021_health_literacy: a real processing defect, and it corrects the
+   processing script's own comment.** `data/fukuda_2021_healthliteracy.py` line 11 says
+   item 39 is "missing from the source file". It is not — S1 holds all 47 Health-literacy
+   columns. Column 39 is the only one whose header does not *start* with the ASCII prefix
+   (Japanese prefix + ideographic spaces before "Health literacy item 39"), so line 82's
+   `startswith('Health literacy')` drops it, and line 83's renumber-by-embedded-number
+   leaves hl_item1..38 = Q1..Q38 but **hl_item39..46 = Q40..Q47**. Confirmed column by
+   column: hl_item38←Q38 (183/537/215/43), hl_item39←Q40 (120/515/270/61), hl_item46←Q47
+   (77/318/398/134). The shipped item text follows the true source numbering and is
+   correct; the *response table* is what is wrong — it silently omits Q39. Candidate for
+   reprocessing (match 'Health literacy item' anywhere in the header, not at position 0).
+   Worth a GitHub issue; **not filed by this round**, left for human triage.
+2. **Same table, reversed scale direction**, confirmed straight from HL_MAP (lines 37-42:
+   very easy=1 … very difficult=4), so higher resp = more difficulty = *lower* health
+   literacy, opposite the canonical HLS-EU-Q47 key and the paper's own Methods. Letting
+   option_text follow the data rather than the paper is the right call; it is in public_note.
+3. **fukuda_2021_info_reliability: agent's numbers exact.** Recomputed from S1: info_source3
+   (newspaper) mean 3.51 / SD 0.74 / range 2-5 — the only item with no "untrusted" response,
+   which independently matches the table_sets `resp_min=2` ground truth — against the paper's
+   published 3.33 / SD 0.95. Deposit and live table agree, so this is a deposit-vs-paper
+   discrepancy internal to the source, **not** an IRW mapping error. No itemtext action.
+4. **frikha_2023_pe_ms: metadata defect, milder than its sibling's.** biblio.csv line 6462
+   gets construct, item range (q13-q21), N and response format right; only the acronym
+   expansion is invented ("Perceived Motivation Scale"). Per the study's own S2 File,
+   PE-MS = **Physical Education Motivation Scale**. Contrast frikha_2023_pe_acrs (batch_033),
+   whose Description named an entirely different construct. Below the issues-page bar.
+
+Also confirmed: hl_item6's counts are 431/510/**0**/37 — nobody chose "fairly difficult".
+audit_batch did not flag it and was right not to; it is a property of the response data.
+
+### Cap reached
+
+batch_034 is the batch named as the round cap in Step 0 of the round prompt. **Cap reached
+— stopping.** 1000 tables remain `pending`, 0 `in_progress`. A human decides whether to
+raise the cap before any further round runs.
