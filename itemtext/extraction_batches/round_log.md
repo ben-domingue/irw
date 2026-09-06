@@ -5269,3 +5269,178 @@ entry leads with the two things that change an analysis rather than merely docum
 provenance: the scale runs backwards relative to the published key, and the 46-of-47 item gap
 means codes above `hl_item38` do not equal canonical HLS-EU-Q47 numbers, so a join on item
 number silently misaligns eight items. Page: 294 entries before, 295 after.
+
+### Redivis download route is back — batch_036 gated, circuit breaker cleared — 2026-09-06
+
+The flag's own clearing test passes: `to_data_frame(max_results=5)` on the first live table
+returned 5 rows in **3.2s** (it hung past 110s yesterday). Metadata was never the sick path, so
+the download-route diagnosis in the flag was the right one to test against.
+
+Ran the two gates the outage had blocked, against live data:
+- `audit_batch.R itemtables/batch_036` — **3 PASS**, no anomalies.
+- `verify_batch.R itemtables/batch_036` — `gao2025_attachment_anxiety` PASS,
+  `gao2025_spiritual_wellbeing` PASS, `garciabatista_2021_erq` MISSING(exempt) (no mapping
+  route to verify: its labels are the study's own English variable labels taken identically
+  from the .sav, and its three caveats are already recorded in notes.csv).
+
+Flipped those three rows `failed` -> `done` in queue_state.csv; the row set is otherwise
+byte-identical. The three `blocked` rows in batch_036 are determinate source verdicts and were
+left alone. Queue now: 291 done / 56 blocked / 12 failed / 55 excluded / 987 pending.
+
+`circuit_breaker.flag` deleted. **Still owed from the outage**: the `count(*)` verification of
+`fukuda_2021_health_literacy` in the `irw_text_2` draft, which was stamped on `numRows` alone
+because the query route was down.
+
+## batch_037 — 2026-09-06
+
+6 tables claimed, **6 written / 0 blocked / 0 failed** — yield 6/6 (100%). No
+circuit-breaker exposure (0 failed). Six agents, one table each; all six returned.
+
+Tables: `genpsych_russell_2024_gemma`, `_gpt3_5`, `_gpt4o`, `_llama3`, `_mixtral`,
+`gerber_2022_altruism`.
+
+**Gates.** normalize_nulls fixed 2 of 6 (gemma, llama3). audit_batch: 6 PASS, zero
+WARNs — so nothing for Step 5c to explain. verify_batch: 3 PASS, 3 MISSING(exempt)
+(the data_labels tables). lint_verification: 6 rows, no problems. irw-validate: all
+6 ok. check_provenance: no failures.
+
+**The genpsych five are one source and a good one.** All five come from OSF project
+`zcytb` (Russell-Lasalandra, Christensen & Golino 2024, AI-GENIE, CC0), each from its
+own model's `<model>_deID.xlsx`. These are Qualtrics exports whose question-text row
+is keyed by the very column names the IRW table uses — `data/genpsych_russell_2024.r`
+does `select(starts_with("item"))` with no rename — so all five are `data_labels`
+with zero mapping inference. Item counts differ per model: gemma 28, llama3 30,
+gpt3_5 31, mixtral 32, gpt4o 35.
+
+**Worth flagging for anyone who touches these later:** each LLM generated its *own*
+item pool, and all five store them under the same `items_1..items_N` codes. The item
+text is entirely different per table and must never be copied between them. Every
+agent independently derived this and said so unprompted. The items are also not a
+published Big Five inventory — they are model-generated wording (carrying the models'
+own grammatical slips, transcribed verbatim), administered to ~1,000 Prolific humans.
+The `instrument` field on these is a descriptive label written by IRW, not a title
+quoted from a source; that is disclosed in each provenance row.
+
+**Step 5b re-checks (orchestrator, all confirmed).**
+- mixtral's direction-pinning claim: exactly 2 of 32 items have `resp_min=2` /
+  4 levels, and they are `items_6` and `items_14` — the two source columns that never
+  take "Strongly Disagree". Confirms Strongly Disagree=1, not 5, from the data itself.
+- Row/item totals reproduce server-side for all five: gemma 28,028 / gpt3_5 31,031 /
+  llama3 30,030 / mixtral 31,936 / gpt4o 34,965, per-item n matching the agents' figures.
+- gerber's public claim that Duerden et al. 2012 Table 1 prints only **13** adapted
+  items: fetched the PDF (jyd.pitt.edu article/download/155/141) and **confirmed** —
+  "I have made change for a stranger." carries `---` in the Adapted column, against the
+  same paper's 14-item reliability count. So `alt2` really has no published adapted
+  string and its IRW reconstruction is warranted, disclosed in `public_note`.
+  verify_gerber re-ran live and reproduced alt8 0.368 vs alt7 0.492 and the
+  floor/ceiling sets. VERDICT: PASS.
+
+**gerber_2022_altruism ships PARTIAL, deliberately.** French administration with no
+published French wording (S1 Data is a single unlabelled RawData sheet), so English
+ships under `translated_substitute`. The mid-range block {alt3, alt4, alt10, alt11}
+sits within 0.27 of a mean and is not separated by any route; position 8 and the
+floor/ceiling items are pinned. Two paywalls were hit and neither is fatal:
+tandfonline 10.1080/10888691.2025.2511192 (403, not OA) is a DIF study that would
+likely print all 14 items verbatim and would settle alt2 — worth a human's
+institutional access, but it is a caveat on one item, not a block on the table.
+
+**Left for the triage session.** (1) `gerber_2022_altruism` carries IRW-generated
+wording for `alt2`; `check_provenance` does not flag it (it is not
+`machine_translation`), but the standing disclosure ruling arguably reaches it, and the
+issues page lives in the separate `irw_site` repo, out of this round's scope.
+(2) `translation_source` was filled for gerber as `official_instrument_english` —
+13 of its 14 items are the adaptation's own published English — dropping the
+corpus-wide blank count 18 -> 17. (3) Pre-existing and not from this round:
+`extremera_2016_shs` still ships IRW-generated English with no issues-page entry.
+
+Cap not reached (batch_040 is the cap; this was 037).
+
+### batch_038 round killed by the OS ~7s in — 6 rows left `in_progress`, nothing extracted — 2026-09-06
+
+Fired straight after batch_037. The round agent was killed for host memory pressure at
+roughly 15:26:40, about seven seconds after Step 1 wrote its claim (claim timestamp
+15:26:33). Same failure mode as the batch_032 and batch_033 rounds.
+
+**State it left, verified rather than assumed:**
+- `itemtables/batch_038/` exists and is **empty** — zero files, so there are no half-written
+  extractions and no sidecars to reconcile against.
+- Six rows sit `in_progress`: `gerber_2022_eas_temperament`, `gesbert_2021_tdeq`, and the four
+  `ghanbari_2016_helma_*`.
+- No round processes survive (`pgrep` clean), so nothing is still writing.
+- batch_037's own commit `e66c7c3` was already pushed before the kill and is unaffected. The
+  round's pre-round `origin/main` merge (`4d94c9e`) was pushed afterwards so the branch does
+  not drift.
+
+**Not reconciled — that is deliberate.** Step 0 reserves flipping `in_progress` back to
+`pending` for a human, and this session did not do it. The stated reason for the rule (a dead
+round may have left half-written files) is demonstrably absent here, but the call is still Ben's.
+
+**Until those six rows are reconciled, no further round can start** — Step 0's in-flight check
+stands the next round down, correctly.
+
+**Contributing context worth checking before the next round:** at the time of the kill this
+laptop was also running a `red_up` PISA upload and a local http server from two other Claude
+sessions, and swap was at 1.9G of 2.0G. Available memory had recovered to 20G immediately
+after. Rounds were already halved from 12 tables to 6 for memory on 2026-09-05; the constraint
+here looks like concurrency with other sessions rather than the round size.
+
+**Reconciled the same session, on Ben's explicit go-ahead.** The six rows are back to `pending`
+via `git restore` of the uncommitted claim — the diff was exactly those six lines and the
+committed state was the pre-claim `pending`, so this is a restore, not a hand-edit. The empty
+`itemtables/batch_038/` was removed so a retry reuses 038 rather than skipping to 039 and
+burning a slot against the batch_040 cap. Queue is runnable again; no round was re-fired.
+
+Note for anyone reading the counts across this day: 13 rows went `done` -> `blocked` dated
+2026-09-06 and they arrived **from `origin/main`** in the pre-round merge, not from any round —
+the wording_rights / instrument-rights withdrawals. Queue now 284 done / 69 blocked / 12 failed /
+55 excluded / 981 pending.
+
+### batch_037 triaged — 5 staged, `gerber_2022_altruism` held on a policy call — 2026-09-06
+
+Triaged on the branch; the standing PR (#2011) is deliberately **not** merged yet, since merging
+is step 6 and comes after staging.
+
+**Gates re-run live, not taken from the round's report.** `normalize_nulls` 0 of 6 needed
+changes; `audit_batch` 6 PASS; `verify_batch` 3 PASS + 3 correctly exempt; `lint_verification`
+6 rows, no problems.
+
+**The claim worth re-checking independently was the sibling-collision trap**, and it holds up
+both ways. The collision is real — any two of the five `genpsych_russell_2024_*` tables share
+28–32 `items_N` codes — and it was **not** triggered: across all ten pairs, zero shared codes
+carry identical `item_text`, and zero `item_text` strings appear in more than one sibling at all.
+So no wording was copied between models.
+
+**Live re-checks all reproduce.** Item counts server-side are 28 / 31 / 35 / 30 / 32, matching
+the five files exactly. mixtral's direction claim is exact: precisely 2 of 32 items have
+`min(resp)=2` and they are `items_6` and `items_14`, which pins Strongly Disagree=1 from the data
+rather than from the processing script.
+
+**Staged into `itemtables/clean/`: the five `genpsych_russell_2024_*` tables**, byte-identical to
+their batch copies, and nothing but `*__items.csv` is in that directory.
+
+**Held: `gerber_2022_altruism`** — not a failed check but an open policy question for Ben
+(BATCH_PROCESS step 3: ask, don't hold silently). Its `alt2` item text is IRW-written rather than
+quoted. Worth noting the disclosure is already in place: `public_note` states plainly that alt2
+was reconstructed by IRW, so the standing disclosure ruling is satisfied at table level; the only
+question left is whether the reconstruction itself should ship.
+
+**Issues-page drafts prepared, none applied.** `draft_issues_qmd.R` generated one entry
+(gerber). Its REVIEW section then surfaced the actual triage finding: the caveat that these items
+are **model-generated de novo and not a canonical Big Five inventory** is recorded only in
+`notes.csv` for gemma and llama3, and **nowhere at all** for gpt3_5 and gpt4o — yet it is equally
+true of all five, and the drafter cannot see it because none of the five carries a `public_note`.
+That is the batch_009 blind spot repeating. Five entries were therefore written **by hand** into
+`fixes/itemtext_issues_draft.md`, covering both the de-novo caveat and the shared-code hazard;
+all six YAML entries parse. They are not applied — an entry is owed only once a table ships, and
+the live page is in the separate `irw_site` repo.
+
+**Ben's ruling on `gerber_2022_altruism`, same session: ship all 14 as-is.** Staged into
+`itemtables/clean/`, byte-identical to the batch copy. The reasoning offered and accepted: the
+`alt2` reconstruction is tightly constrained rather than free — all 13 published siblings apply
+one mechanical transformation of Rushton's originals ("I have made change for a stranger" ->
+"I would make change for someone I did not know"), and the reconstruction is already disclosed
+in `public_note` and in the drafted issues-page entry.
+
+**batch_037 triage is complete: 6 tables, 6 staged, 0 held.** `clean/` holds exactly six
+`*__items.csv` and nothing else. Upload is Ben's step; the `uploaded=` stamps and the six
+issues-page entries are owed only after he confirms it.
