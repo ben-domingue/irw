@@ -126,15 +126,33 @@ refer to `ben-domingue/irw`.
 So "read-only" never means the data is stuck. Repairing even thousands of rows is
 a find-and-replace or a column paste, not a code change.
 
-The two sheets differ in how automated rows reach them, and this asymmetry is
-historical rather than designed:
+Both sheets now take automated rows the same way — a git-tracked CSV unioned at
+export — but they differ in *granularity*, and that difference is deliberate:
 
-- **Tags** — automated rows land in a git-tracked CSV. On export, `03_tags.R`
+- **Tags** — automated rows land in `tags/tags_auto.csv`. On export, `03_tags.R`
   concatenates it with the sheet's rows and drops any automated row for a table a
-  human has already tagged, so a human entry always wins (#1723).
-- **Dictionary** — automated rows are produced by a per-batch script in
-  `automated_finding/` and pasted in by hand. Proposed for the same treatment in
-  #1732, queued behind the tags work.
+  human has already tagged, so a human entry always wins (#1723). This supersedes
+  at **row** level, which strands 19–76 tables per column whose sheet row leaves
+  that column blank (#1863, open).
+- **Dictionary** — automated rows land in
+  `automated_finding/dictionary_auto.csv`, written by `stage_dict_row.py`. On
+  export, `metadata/dict_union.R` merges it into the sheet at **column** level: a
+  human cell wins the cell it occupies, an automated cell fills a cell the human
+  left blank (#1732). Column-wise from the start because a sparse-but-present
+  dictionary row is the common case, where for tags it is the exception.
+  `metadata/biblio_provenance.csv` records which cells came from the automated
+  file, and unlike the tags sidecar it is committed.
+
+> **One column exists only in the automated file: `DOI (for data)`.** The sheet
+> does not have it and is not going to. 979 rows put a *deposit* DOI (Dataverse,
+> Mendeley, figshare, Zenodo, Dryad, OSF, ICPSR) in `DOI (for paper)`, which is a
+> different object -- its year is a deposit year and it resolves to the
+> depositor, not the authors. `DICT_AUTO_ONLY_COLS` in `metadata/dict_union.R`
+> carries the split; `union_dict()` creates the column in the merged frame
+> (#1690). This is also the **only** case where an automated cell beats a filled
+> human one: where the automated `DOI (for data)` equals the sheet's
+> `DOI (for paper)`, the paper cell is cleared *in the export*, never in the
+> sheet, and every cleared cell is named in the provenance file.
 
 > **Do not delete the rename in `metadata/tag_normalize.R`.** Its comment says to
 > fix the sheet itself once the Sheets-write question is resolved, which reads as

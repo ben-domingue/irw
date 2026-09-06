@@ -299,8 +299,9 @@ open a negotiation with a rights holder — see the Shipley rule above.
 These two end in `blocked`, not `excluded`, because a licence can change and a fee can be
 paid; the Shipley exclusion is permanent. Put the quoted sentence and its URL in
 `notes.csv` and in `provenance.csv`. **A rights block with no quote in it is not a rights
-block.** Do not rely on the `wording_rights` column to record this — it takes only `NC`,
-cannot express either trigger, and is currently set on zero tables (irw#1955).
+block.** There is no `wording_rights` column any more — it was retired on 2026-09-06
+(irw#1955) along with the eight tables that carried it, because a stated restriction now
+blocks rather than being flagged. Record the quote in `notes.csv` and `provenance.csv`.
 
 Everything shipped before 2026-09-04 predates both rulings and has never been checked
 against them; that re-audit is irw#1954, still owed.

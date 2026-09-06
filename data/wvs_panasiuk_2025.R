@@ -1,3 +1,31 @@
+# ============================================================================
+# WITHDRAWN 2026-09-05 -- DO NOT RUN, DO NOT UPLOAD (irw#1871)
+#
+# The nine `wvs_panasiuk_*` tables this script produced were removed from the
+# IRW corpus on 2026-09-05 and are gone from `item_response_warehouse_2` as of
+# v15.0. This is a rights decision, not a data-quality one.
+#
+# The WVS trend file is released under conditions of use that require the data
+# be used for non-profit purposes and that "the data files themselves are not
+# redistributed". These tables are respondent-level microdata -- one row per
+# person-item response, with each respondent's age, sex, country and wave --
+# so whether republishing them counts as redistribution is a real question
+# rather than a technicality. Ben's call was to carry no risk on it at all.
+#
+# Everything below is kept as the record of how the tables were built and what
+# was wrong with them (id collision, negative missing codes in the covariates,
+# the "NA"-as-string blow-up), because that diagnosis is cited from #1842 and
+# #1779. It is NOT kept as something to run: the fixes were never verified
+# end to end, the source file was never obtained, and re-running this would
+# put the tables back.
+#
+# If the rights question is ever settled in favour of republishing, delete this
+# block deliberately -- do not comment it out to "just test something".
+# ============================================================================
+stop("wvs_panasiuk_* was withdrawn from IRW on 2026-09-05 on rights grounds ",
+     "(irw#1871). This script is kept as a record and must not be run. ",
+     "Read the header before removing this stop().")
+
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) 
 rm(list = ls ())
 library(tidyverse)

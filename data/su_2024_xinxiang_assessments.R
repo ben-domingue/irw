@@ -1,3 +1,15 @@
+# Su et al. (2024), Temporal dynamics in psychological assessments:
+# a novel dataset with scales and response times. Scientific Data 11, 1046.
+# Paper: https://doi.org/10.1038/s41597-024-03888-8
+# Data: https://doi.org/10.5281/zenodo.10423537
+# Source: https://zenodo.org/records/10423537
+# License: CC BY 4.0 (data deposit), https://creativecommons.org/licenses/by/4.0/
+# Inputs: demographic.csv, phq9.csv, gad7.csv, isi.csv, pss.csv in raw/.
+# RT units: seconds, recorded to two decimal places (paper, Methods,
+# "Data generation process"). Preserve time1..N without a /1000 conversion.
+# PSS-14: retain the 1-5 item codes stored in the deposited pss.csv.
+# This restores reproducibility of existing IRW tables; no new data are added.
+
 library(tidyverse)
 library(janitor)
 library(readr)
@@ -294,3 +306,100 @@ convert_scale_to_irw <- function(
   
   return(long_data)
 }
+# GAD-7 item map
+gad7_item_map <- tibble(
+  item = paste0("GAD_", 1:7),
+  resp_col = paste0("question", 1:7),
+  rt_col = paste0("time", 1:7)
+)
+
+gad7_item_map
+# 转换并导出 GAD-7
+gad7_long <- convert_scale_to_irw(
+  input_file = "gad7.csv",
+  item_map = gad7_item_map,
+  output_file = "su_2024_gad7.csv"
+)
+# ISI item map
+isi_item_map <- tibble(
+  item = paste0("ISI_", 1:7),
+  resp_col = paste0("question", 1:7),
+  rt_col = paste0("time", 1:7)
+)
+
+isi_item_map
+
+# 转换并导出 ISI
+isi_long <- convert_scale_to_irw(
+  input_file = "isi.csv",
+  item_map = isi_item_map,
+  output_file = "su_2024_isi.csv"
+)
+# PSS-14 item map
+pss_item_map <- tibble(
+  item = paste0("PSS_", 1:14),
+  resp_col = paste0("question", 1:14),
+  rt_col = paste0("time", 1:14)
+)
+
+pss_item_map
+
+# 转换并导出 PSS-14
+pss_long <- convert_scale_to_irw(
+  input_file = "pss.csv",
+  item_map = pss_item_map,
+  output_file = "su_2024_pss14.csv"
+)
+# =========================================================
+# 四个量表的总质量检查
+# =========================================================
+
+all_scales <- bind_rows(
+  phq9_long |> mutate(dataset = "PHQ-9"),
+  gad7_long |> mutate(dataset = "GAD-7"),
+  isi_long  |> mutate(dataset = "ISI"),
+  pss_long  |> mutate(dataset = "PSS-14")
+)
+
+overall_qc <- all_scales |>
+  group_by(dataset) |>
+  summarise(
+    rows = n(),
+    ids = n_distinct(id),
+    items = n_distinct(item),
+    min_resp = min(resp, na.rm = TRUE),
+    max_resp = max(resp, na.rm = TRUE),
+    missing_resp = sum(is.na(resp)),
+    missing_rt = sum(is.na(rt)),
+    zero_rt = sum(rt == 0, na.rm = TRUE),
+    negative_rt = sum(rt < 0, na.rm = TRUE),
+    min_rt = min(rt, na.rm = TRUE),
+    median_rt = median(rt, na.rm = TRUE),
+    mean_rt = mean(rt, na.rm = TRUE),
+    max_rt = max(rt, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+overall_qc
+# 检查输出文件
+output_files <- c(
+  "su_2024_phq9.csv",
+  "su_2024_gad7.csv",
+  "su_2024_isi.csv",
+  "su_2024_pss14.csv"
+)
+
+file_check <- tibble(
+  file = output_files,
+  exists = file.exists(file.path(output_dir, output_files)),
+  size_bytes = file.info(file.path(output_dir, output_files))$size
+)
+
+file_check
+# QC summaries are not IRW response tables; keep them out of output/*.csv.
+qc_dir <- file.path(output_dir, "qc")
+dir.create(qc_dir, showWarnings = FALSE)
+write_csv(
+  overall_qc,
+  file.path(qc_dir, "su_2024_quality_check.csv")
+)

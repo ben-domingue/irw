@@ -683,8 +683,12 @@ When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,
 DOI (for paper), Original License, Custom License, Public Reshare?,
 Derived License, Custom License, Notes, Contributor, Date`. Note `Custom
-License` appears twice (both blank), `Derived License` mirrors `Original
-License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
+License` appears twice and **neither copy is blank** -- position 8 holds the
+source's own terms (20 rows) and position 11 the terms IRW redistributes under
+(4 rows), all on Public tables, verified 2026-09-06. This file claimed they were
+both blank until #1732; do not delete either. `stage_dict_row.py` addresses them
+as `custom_license_source` and `custom_license_derived`. `Derived License`
+mirrors `Original License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
 `Contributor` is `"automated"`, and `Public Reshare?` is `"Public"` (not
 `"Yes"`).
 
@@ -915,77 +919,41 @@ options the ordered/unordered distinction is vacuous -- a dichotomy is
 trivially ordinal and standard dichotomous IRT applies. An option-coded
 column is a nominal-standard candidate only at **three or more** categories.
 
-**Hand biblio rows over as a fully-quoted `.csv` for `File > Import`, NOT as a
-`.tsv` for pasting.** (Superseded the previous advice on 2026-08-27 -- that
-said the opposite; see below for why both halves were half-right.)
+**Stage biblio rows with `stage_dict_row.py`. Do not paste, import, or write a
+`make_biblio_*.py`.** Since #1732 the dictionary has the same write path as tags:
+automated rows go to `automated_finding/dictionary_auto.csv`, a git-tracked file,
+and `metadata/02_biblio.R` unions it into the sheet export on every run. One row
+per invocation, JSON on stdin:
 
-The old rule said `.tsv`, because Google Sheets' *paste* splits text on commas
-without honouring CSV quoting, so every comma inside a `Description` or
-`Reference` becomes a column break. That part is still true of the paste path.
-But `.tsv` fails the paste path too, for a different reason: the dictionary
-format mandates three always-blank columns -- H and K (`Custom License` x2) and
-L (`Notes`) -- which in a TSV become consecutive tabs. Sheets' text-to-columns
-collapses repeated delimiters into one; OpenOffice does not. So a TSV opens
-correctly in OpenOffice and misaligns in Sheets, shifting `Contributor` and
-`Date` three columns left. Re-copying the cells out of OpenOffice does not
-help -- the clipboard still carries text that Sheets re-splits.
+    echo '{"table": "foo_2026", "description": "...", "doi": "10.xxxx/yyy",
+           "url": "https://...", "reference": "...",
+           "original_license": "CC BY 4.0", "derived_license": "CC BY 4.0",
+           "public_reshare": "Public"}' | python3 stage_dict_row.py
 
-The fix is to change the *delivery path*, not the delimiter. Sheets' **import**
-honours both RFC4180 quoting and empty fields, where its paste honours
-neither. So:
+The merge is **column-wise**: a human cell in the sheet wins the cell it
+occupies, and an automated cell fills a cell the human left blank. So staging a
+row for a table the humans have already described is not an error and not a
+conflict -- their values simply win, and yours fill the gaps.
 
-- Write the file with `csv.QUOTE_ALL`, LF terminators, pure ASCII.
-- Tell ben-domingue: **File > Import > Upload > Import location: "Append to
-  current sheet" > Separator type: comma.**
-- Confirmed working 2026-08-27 on a 121-row batch: all 121 rows landed
-  contiguous at 14 columns with zero field mismatches across 1,694 cells.
-  An `.xlsx` also works and avoids delimiters entirely, but the quoted CSV is
-  what was actually verified end-to-end.
+What this ends, and why the procedure it replaces ran to seventy lines: the
+paste path could not carry a comma inside a `Description` (Sheets' paste ignores
+RFC4180 quoting), could not carry the mandated-blank columns as a TSV
+(text-to-columns collapses repeated delimiters, shifting `Contributor` and
+`Date` three columns left), auto-converted `Date` unreliably, and once failed on
+a well-formed 55-row batch for a cause never found (`BATCH_LOG.md`,
+2026-08-26). All of it is now the script's problem: it writes RFC4180 with LF
+terminators. It deliberately does **not** escape a leading `=`, `+`, `-` or `@`
+-- that was a paste-path mitigation, and since nothing is pasted any more,
+prefixing an apostrophe corrupts rather than protects: three `Notes` cells in
+the sheet legitimately begin "-1 sentinel values ..." or "-9 sentinel ...".
+It also refuses a blank `Public Reshare?`, which used to mean the row
+silently never reached biblio at all, and a `Public` row with no
+`Derived License`.
 
-**Verify a paste/import by exporting the target tab, not by re-checking the
-file.** The dictionary tab is gid `1337607315`
-(`https://docs.google.com/spreadsheets/d/<id>/export?format=csv&gid=1337607315`
--- the default export returns a cover tab instead). Diff it field-by-field
-against the source rows. On 2026-08-27 that localised a problem to one column
-in 8 rows and simultaneously proved alignment, completeness and no-duplicates
-for everything else; two rounds of re-checking the file itself had found
-nothing, because the file was fine.
-
-**Emit the `Date` column pre-formatted as `M/D/YYYY`, never ISO.** The sheet's
-own convention is `M/D/YYYY` (3,474 rows vs 206 in ISO). Handing Sheets
-`2026-08-27` and letting it auto-convert is unreliable -- on 2026-08-27 it
-converted 113 of 121 rows and left 8 as literal left-aligned text.
-
-**`csv.writer` defaults to CRLF.** Its `lineterminator` is `\r\n`, and opening
-the handle with `newline=""` preserves it. Pass `lineterminator="\n"`
-explicitly and verify with `file X.csv` (should not say "CRLF line
-terminators").
-
-**Keep fields boring anyway.** A 55-row biblio once failed to paste
-repeatedly while being verifiably well-formed, and the cause was never found
-(see `BATCH_LOG.md`, 2026-08-26). Since the failing component is the paste
-path and it cannot be inspected, the cheap insurance is to keep every field
-to plain prose: no tab, newline, carriage return or double quote, no leading
-`=`, `+`, `-`, `@` or `'` (Sheets reads those as formula or literal-text
-prefixes). Quotes in a `Reference` are decorative -- APA does not quote
-article titles -- so strip them. **Do not claim to know what Sheets does to a
-pasted quote**; that was asserted here once on a coincidence and did not hold
-up when tested.
-
-**Check that per field, never per line.** `'\t' in line` is vacuously true for
-every line of a TSV, so a file-level substring test for the delimiter catches
-nothing. Iterate fields:
-
-    for r in rows:
-        for v in r:
-            assert not (set('"\t\r\n') & set(v))
-
-**When a paste goes wrong, read the target sheet before theorising.** Fetch
-its CSV export: it shows the real header (so a layout mismatch is ruled in or
-out immediately) and exactly which rows landed and how they aligned. That one
-step killed two plausible-looking theories at once and showed nothing had
-half-landed. Verifying the *file* again is the wrong instinct once the file
-has already been checked -- the fault is downstream of it.
+The review surface is `git diff` on `dictionary_auto.csv` and
+`metadata/biblio.diff.csv` in the weekly pipeline PR -- not a re-export of the
+sheet. `metadata/biblio_provenance.csv` records which cells the automated file
+supplied, so a bad batch can be found and reverted.
 
 **On Dataverse, download `format=original`, not the `.tab` conversion.** One
 batch hit three distinct defects from the conversion alone: SPSS user-missing
