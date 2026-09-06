@@ -5383,3 +5383,14 @@ laptop was also running a `red_up` PISA upload and a local http server from two 
 sessions, and swap was at 1.9G of 2.0G. Available memory had recovered to 20G immediately
 after. Rounds were already halved from 12 tables to 6 for memory on 2026-09-05; the constraint
 here looks like concurrency with other sessions rather than the round size.
+
+**Reconciled the same session, on Ben's explicit go-ahead.** The six rows are back to `pending`
+via `git restore` of the uncommitted claim — the diff was exactly those six lines and the
+committed state was the pre-claim `pending`, so this is a restore, not a hand-edit. The empty
+`itemtables/batch_038/` was removed so a retry reuses 038 rather than skipping to 039 and
+burning a slot against the batch_040 cap. Queue is runnable again; no round was re-fired.
+
+Note for anyone reading the counts across this day: 13 rows went `done` -> `blocked` dated
+2026-09-06 and they arrived **from `origin/main`** in the pre-round merge, not from any round —
+the wording_rights / instrument-rights withdrawals. Queue now 284 done / 69 blocked / 12 failed /
+55 excluded / 981 pending.
