@@ -3,6 +3,7 @@
 ##Construct biblio.csv
 library(gsheet)
 source("gsheet_retry.R")  ## retrying gsheet2tbl; see that file
+source("dict_union.R")    ## the automated-row union; see that file (#1732)
 
 library(redivis)
 source("redivis_config.R")
@@ -175,6 +176,20 @@ generate_bibtex <- function(df) {
 
 getrows<-function(l) {
     for (i in 1:length(l)) assign(names(l)[i],l[[i]])
+    ## Union the automated dictionary rows before anything reads irw_dict, so
+    ## every consumer below sees one merged dictionary (#1732 / roadmap 6b).
+    ## Column-wise: a human cell wins the cell it occupies, an automated cell
+    ## fills a cell the human left blank. See dict_union.R for why this differs
+    ## from 03_tags.R, which supersedes whole rows and strands 19-76 tables per
+    ## column (#1863). Sources with no automated file configured are unaffected.
+    if (!is.null(l$file.auto)) {
+        auto <- read_dict_auto(l$file.auto, name)
+        auto <- drop_dead_dict_rows(auto, l$file.live, name,
+                                    pending.file = l$file.pending)
+        u <- union_dict(irw_dict, auto, name)
+        irw_dict <- u$dict
+        write_dict_provenance(u$provenance, l$file.prov)
+    }
     ## Read the current biblio file
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
@@ -210,30 +225,53 @@ getrows<-function(l) {
     ##no csv
     biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
     ## Save the updated biblio to a CSV file
+    ## Custom licence terms, for EVERY row rather than only the new ones.
+    ##
+    ## 238 Public tables publish `Derived_License = "Custom"` -- the bare word,
+    ## with no terms a user can reach. metadata/hotfixes/fix-licenses.R added
+    ## them to biblio.csv once (Rpkg#93) and the next run of this script erased
+    ## them, because the column vector below rebuilds biblio.csv from a fixed
+    ## list. Doing it here is what that hotfix could not make stick, which is
+    ## why it is retired. The join itself lives in dict_union.R so it can be
+    ## replayed offline against the real biblio.csv.
+    biblio <- apply_custom_license_terms(biblio, irw_dict, name)
+
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
-                     "Derived_License", "Description", "BibTex")]
+                     "Derived_License", "Custom_License_Terms", "Description", "BibTex")]
     readr::write_csv(biblio, file.out)
 }
 
 
 dbs<-list(
-    core=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
+    ##`file.auto` is what makes a source part of #1732: only core has an
+    ##automated writer today. The other three are sheet-only, exactly as
+    ##03_tags.R leaves comp/sim tag-less, and adding a file here is the whole
+    ##opt-in.
+    core=list(name="core",
+              irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
               dataset="irw_meta",
               table="biblio",
-              file.out="biblio.csv"),
-    comps=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
+              file.out="biblio.csv",
+              file.auto="../automated_finding/dictionary_auto.csv",
+              file.live="metadata.csv",
+              file.prov="biblio_provenance.csv",
+              file.pending="biblio_pending.csv"),
+    comps=list(name="comps",
+              irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,
               dataset="irw_meta",
               table="comps_biblio",
               file.out="comps_biblio.csv"),
-    nom=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
+    nom=list(name="nom",
+              irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/12tM4vADKcUm5LGOGRwQ5_HKkdYa3mZUaKbFUqgs2U_w/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="nominal_biblio",
              file.out="nominal_biblio.csv"),
-    sim=list(irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
+    sim=list(name="sim",
+              irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1_2SR1_miAqUy0HWFQqo5vrBVrIN4V1FU6RfavBc7WdA/edit?gid=1337607315#gid=1337607315'),
              user=IRW_OWNER,
              dataset="irw_meta",
              table="simsyn_biblio",

@@ -50,14 +50,35 @@ jobs:
       - name: irw_validate
         run: python -m unittest discover -s irw_validate/tests -t . -v
 
+      # The dictionary staging writer (#1732). Its load-bearing test is that a
+      # value beginning "-", "=", "+" or "@" is written unchanged: the first
+      # version escaped those for the Sheets paste path, which this replaces,
+      # and the apostrophe corrupted three real Notes cells.
+      - name: stage_dict_row
+        run: python -m unittest discover -s automated_finding/tests -t . -v
+
       # The R validator is the copy external contributors source from a raw
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still
       # match CORE_CHECKS; this checks it is still valid R.
       - name: validate_irw.R still parses
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
+          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
           Rscript misc/tests/smoke_validate_irw.R
+
+      # The dictionary union (#1732). Runs offline -- dict_union.R touches no
+      # network -- so the merge rule is checked on every PR rather than only
+      # when someone remembers to run it. Its load-bearing assertion is that a
+      # human's non-empty cell is never overwritten.
+      #
+      # metadata/tests/test_tags_union.R is NOT here, and should be: it holds
+      # the only assertion that verbatim paper excerpts cannot reach a public
+      # CSV. It sources 03_tags.R, which needs the `gsheet` package, and there
+      # is no apt package for it -- adding it means installing from CRAN in CI.
+      # Tracked as part of #1863.
+      - name: dictionary union
+        working-directory: metadata
+        run: Rscript tests/test_dict_union.R
 
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
