@@ -5269,3 +5269,24 @@ entry leads with the two things that change an analysis rather than merely docum
 provenance: the scale runs backwards relative to the published key, and the 46-of-47 item gap
 means codes above `hl_item38` do not equal canonical HLS-EU-Q47 numbers, so a join on item
 number silently misaligns eight items. Page: 294 entries before, 295 after.
+
+### Redivis download route is back — batch_036 gated, circuit breaker cleared — 2026-09-06
+
+The flag's own clearing test passes: `to_data_frame(max_results=5)` on the first live table
+returned 5 rows in **3.2s** (it hung past 110s yesterday). Metadata was never the sick path, so
+the download-route diagnosis in the flag was the right one to test against.
+
+Ran the two gates the outage had blocked, against live data:
+- `audit_batch.R itemtables/batch_036` — **3 PASS**, no anomalies.
+- `verify_batch.R itemtables/batch_036` — `gao2025_attachment_anxiety` PASS,
+  `gao2025_spiritual_wellbeing` PASS, `garciabatista_2021_erq` MISSING(exempt) (no mapping
+  route to verify: its labels are the study's own English variable labels taken identically
+  from the .sav, and its three caveats are already recorded in notes.csv).
+
+Flipped those three rows `failed` -> `done` in queue_state.csv; the row set is otherwise
+byte-identical. The three `blocked` rows in batch_036 are determinate source verdicts and were
+left alone. Queue now: 291 done / 56 blocked / 12 failed / 55 excluded / 987 pending.
+
+`circuit_breaker.flag` deleted. **Still owed from the outage**: the `count(*)` verification of
+`fukuda_2021_health_literacy` in the `irw_text_2` draft, which was stamped on `numRows` alone
+because the query route was down.
