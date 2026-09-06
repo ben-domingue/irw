@@ -90,14 +90,24 @@ stage <- function(path, json, refusable = FALSE) {
 ##The writer's DOI normalisation, called as a filter so the rule has one
 ##definition (automated_finding/doi_hygiene.py) rather than an R copy that
 ##drifts. Line count in equals line count out.
-normalize_dois <- function(x) {
+doi_hygiene <- function(x, mode) {
     x <- ifelse(is.na(x), "", as.character(x))
     if (!length(x)) return(x)
-    out <- system2("python3", c("../automated_finding/doi_hygiene.py", "--filter"),
+    out <- system2("python3", c("../automated_finding/doi_hygiene.py", mode),
                    input = x, stdout = TRUE)
-    if (length(out) != length(x)) stop("doi_hygiene --filter returned ", length(out),
-                                       " lines for ", length(x), " values")
+    if (length(out) != length(x)) stop("doi_hygiene ", mode, " returned ",
+                                       length(out), " lines for ", length(x),
+                                       " values")
     out
+}
+
+##What stage_dict_row.py would write into `DOI (for paper)`, given what the
+##human pasted. Two steps, both the writer's, both deliberate divergences from
+##history: the wrappers are stripped, and a data-repository DOI is moved out of
+##the column entirely into `DOI (for data)` (#1690).
+expected_paper_doi <- function(x) {
+    norm <- doi_hygiene(x, "--filter")
+    ifelse(doi_hygiene(x, "--classify") == "data_doi", "", norm)
 }
 
 cat("reading the live dictionary sheet ...\n")
@@ -288,7 +298,10 @@ if (MODE == "tier-c-replay") {
           "the union reproduces the sheet's row count, less any refusal")
 
     ##Every cell of every replayed row must match what the paste produced.
-    cols <- setdiff(DICT_AUTO_COLS, "Contributor")   ##Contributor is forced, not carried
+    ##Contributor is forced, not carried. The auto-only columns have no sheet
+    ##counterpart to compare against -- `batch` comes from the raw export, which
+    ##does not have them -- so they are checked by test_dict_union.R instead.
+    cols <- setdiff(DICT_AUTO_COLS, c("Contributor", DICT_AUTO_ONLY_COLS))
     akey <- dict_key(after[[map[["table"]]]])
     bkey <- dict_key(batch[[map[["table"]]]])
     idx  <- match(bkey, akey)
@@ -299,7 +312,7 @@ if (MODE == "tier-c-replay") {
         ###1690 it unwraps resolver URLs, drops `data doi: ` prefixes and drops
         ##journal supplement suffixes -- a deliberate divergence from history,
         ##so the expectation moves with it rather than the check failing.
-        if (cl == "DOI (for paper)") was <- normalize_dois(was)
+        if (cl == "DOI (for paper)") was <- expected_paper_doi(was)
         now <- as.character(after[[map[[cl]]]])[idx]
         bad <- !(dict_blank(was) & dict_blank(now)) & !identical_chr(was, now)
         if (any(bad)) diffs[[cl]] <- data.frame(table = batch[[map[["table"]]]][bad],

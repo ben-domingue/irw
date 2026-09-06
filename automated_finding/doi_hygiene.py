@@ -14,10 +14,9 @@ Two jobs, deliberately kept apart:
     needs no judgement and no network. Called by stage_dict_row.py so new
     automated rows cannot reintroduce these forms.
 
-  * `classify()` -- the JUDGEMENT half. It only says what a value *is*. Whether
-    a deposit DOI should be replaced by the article's DOI or moved to a column
-    of its own is the open schema question on #1690, and nothing here decides
-    it; a data DOI is reported, never rewritten.
+  * `classify()` -- the JUDGEMENT half. It only says what a value *is*. Nothing
+    here rewrites a cell: a deposit DOI is reported, and moving it to the
+    `DOI (for data)` column added by #1690 is backfill_data_dois.py's job.
 
 Run it to produce the correction list for the Data Dictionary sheet:
 
@@ -26,9 +25,11 @@ Run it to produce the correction list for the Data Dictionary sheet:
     python3 doi_hygiene.py --out fixes.csv
 
 `--filter` is the same normalisation as a stdin/stdout filter, one value per
-line, so callers in other languages do not reimplement it:
+line, and `--classify` is classify() the same way, so callers in other languages
+do not reimplement either:
 
     cut -d, -f6 dict.csv | python3 doi_hygiene.py --filter
+    cut -d, -f6 dict.csv | python3 doi_hygiene.py --classify
 
 No code in this repository writes to a Google Sheet (#1708, ARCHITECTURE.md
 section 3), so the output is a two-column paste for a human, not an edit.
@@ -161,17 +162,19 @@ def load_rows(source):
     return list(csv.DictReader(io.StringIO(text, newline="")))
 
 
-def filter_stdin():
-    """One value per line in, the normalised value per line out. Line count is
-    preserved, so a caller can paste the result back as a column."""
+def filter_stdin(fn):
+    """One value per line in, one result per line out. Line count is preserved,
+    so a caller can paste the result back as a column."""
     for line in sys.stdin.read().splitlines():
-        sys.stdout.write(normalize(line)[0] + "\n")
+        sys.stdout.write(fn(line) + "\n")
     return 0
 
 
 def main(argv):
     if "--filter" in argv:
-        return filter_stdin()
+        return filter_stdin(lambda v: normalize(v)[0])
+    if "--classify" in argv:
+        return filter_stdin(lambda v: classify(normalize(v)[0]))
     out_path = None
     if "--out" in argv:
         i = argv.index("--out")
@@ -226,8 +229,9 @@ def main(argv):
             w.writeheader()
             w.writerows(corrections)
         print(f"\nwrote {out_path}")
-    print("\ndata_doi is REPORTED, never rewritten: whether those rows get the "
-          "article's DOI\nor a column of their own is the open question on #1690.")
+    print("\ndata_doi rows belong in `DOI (for data)`, which lives in "
+          "dictionary_auto.csv\nand not in the sheet (#1690, Ben 2026-09-06). "
+          "backfill_data_dois.py writes them;\nnothing here rewrites a cell.")
     return 0
 
 
