@@ -36,6 +36,15 @@ metadata/**/*.txt
 ##Rows held back because their table is not published yet (#1732). Committed for
 ##the same reason: it is the only place "waiting on a publish" is written down.
 !metadata/biblio_pending.csv
+##Which published biblio cells the dictionary corrected on this run (#2001).
+##Committed because it is the first run's review surface -- 336 cells across 223
+##tables is a list a person can read, where the same change in biblio.csv is a
+##223-row diff. It is not per-run noise: the Redivis biblio table is the
+##baseline every week, so this file only moves when the sheet does.
+!metadata/biblio_refresh_log.csv
+!metadata/comps_biblio_refresh_log.csv
+!metadata/nominal_biblio_refresh_log.csv
+!metadata/simsyn_biblio_refresh_log.csv
 .env
 .Rproj.user
 .DS_Store

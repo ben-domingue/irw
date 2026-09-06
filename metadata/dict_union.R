@@ -489,3 +489,126 @@ apply_custom_license_terms <- function(biblio, dict, label = "core") {
             " row(s) carry custom licence terms")
     biblio
 }
+
+##---------------------------------------------------------------------------
+##Refresh published biblio rows from the dictionary (issue #2001).
+##
+##getrows() builds `new_data_rows` as the dictionary rows ABSENT from the live
+##Redivis biblio table (or lacking BibTeX) and binds them on. A dictionary row
+##that already has a biblio row is never re-read, so a correction typed into the
+##sheet for an already-published table reaches nobody. Measured 2026-09-05: 226
+##of 4,261 rows disagree on at least one of the five columns below -- 62 pure
+##fills, 163 genuine conflicts.
+##
+##The rule:
+##
+##  FILL BLANKS, PREFER THE DICTIONARY ON CONFLICT, AND NEVER BLANK A BIBLIO
+##  VALUE FROM AN EMPTY DICTIONARY CELL.
+##
+##That last clause is not hypothetical -- `cdm_timss03` holds a paper DOI in
+##biblio that the dictionary lacks -- and without it this repeats the pattern
+##that removed provenance for four live su_2024_* tables.
+##
+##BibTeX is deliberately NOT refreshed: seed_from_local() caches it because
+##regenerating costs a DOI fetch plus a Claude call per row, and the model does
+##not return byte-identical BibTeX twice.
+##
+##Note on a truncated sheet: this cannot damage biblio. A short read yields
+##FEWER matches, and a blank dictionary cell is skipped rather than written, so
+##the failure mode is "no change", not "wrong change". That is why there is no
+##minimum-rows oracle here, unlike drop_dead_dict_rows().
+
+##biblio's column name -> the dictionary's, most-preferred spelling first. The
+##four dictionary sheets have drifted on the licence column: core spells it
+##`Derived License`, comps/nom/sim `Derived_License` (confirmed 2026-08-02).
+BIBLIO_REFRESH_COLS <- list(
+    Description     = "Description",
+    Reference_x     = "Reference",
+    DOI__for_paper_ = "DOI (for paper)",
+    URL__for_data_  = "URL (for data)",
+    Derived_License = c("Derived License", "Derived_License")
+)
+
+##Comparison normalisation, per column. Two values that differ only here are
+##treated as equal, so the first run rewrites 226 rows rather than 4,261.
+##
+##  DOI      -- dict_norm_doi(), the repo's one definition, pinned to
+##              doi_hygiene.py by a parity test. A resolver prefix is not a
+##              different DOI.
+##  licence  -- "CC BY 4.0" / "cc by 4.0" is a spelling difference, not a
+##              relicensing.
+##  the rest -- whitespace only. Case IS significant in a Description; an
+##              instrument name that changed case changed.
+biblio_norm <- function(x, col) {
+    if (identical(col, "DOI__for_paper_")) return(dict_norm_doi(x))
+    x <- gsub("\\s+", " ", trimws(as.character(x)))
+    if (identical(col, "Derived_License")) x <- tolower(x)
+    x
+}
+
+##Strip the .csv some dictionary rows still carry, so the key matches biblio's
+##(getrows() strips it from biblio before writing).
+biblio_key <- function(x) sub("\\.csv$", "", dict_key(x))
+
+##The dictionary column backing one biblio column, or NULL when the sheet has
+##none. Returning NULL rather than failing: comps/nom/sim are independently
+##maintained and a sheet that has never had a column is not an error.
+dict_source_column <- function(dict, candidates) {
+    for (cl in candidates) if (cl %in% names(dict)) return(as.character(dict[[cl]]))
+    NULL
+}
+
+refresh_biblio_from_dict <- function(biblio, dict, label = "core", log.file = NULL) {
+    key <- biblio_key(dict$table)
+    keep <- !dict_blank(key) & !duplicated(key)
+    if (sum(!keep) > 0) {
+        message(label, ": ", sum(!keep), " duplicate/nameless dictionary row(s) ",
+                "ignored for the refresh (first occurrence wins)")
+    }
+    dict <- dict[keep, , drop = FALSE]
+    key  <- key[keep]
+
+    idx <- match(biblio_key(biblio$table), key)
+
+    changes <- list()
+    for (bcol in names(BIBLIO_REFRESH_COLS)) {
+        if (!bcol %in% names(biblio)) next
+        dvals <- dict_source_column(dict, BIBLIO_REFRESH_COLS[[bcol]])
+        if (is.null(dvals)) next
+
+        new <- dvals[idx]                      ##NA where the dictionary has no row
+        old <- as.character(biblio[[bcol]])
+        ##A blank dictionary cell never wins -- including for a table the
+        ##dictionary does not mention at all, which is the same case here.
+        move <- !dict_blank(new) &
+                (dict_blank(old) | biblio_norm(old, bcol) != biblio_norm(new, bcol))
+        move[is.na(move)] <- FALSE
+        if (!any(move)) next
+
+        changes[[bcol]] <- data.frame(
+            table  = biblio$table[move],
+            column = bcol,
+            kind   = ifelse(dict_blank(old[move]), "fill", "conflict"),
+            was    = old[move],
+            now    = new[move],
+            stringsAsFactors = FALSE)
+        biblio[[bcol]][move] <- new[move]
+    }
+
+    log <- if (length(changes)) do.call(rbind, changes) else
+        data.frame(table = character(0), column = character(0), kind = character(0),
+                   was = character(0), now = character(0), stringsAsFactors = FALSE)
+    log <- log[order(log$table, log$column), , drop = FALSE]
+    message(label, ": refreshed ", nrow(log), " cell(s) across ",
+            length(unique(log$table)), " table(s) from the dictionary (",
+            sum(log$kind == "fill"), " fill, ", sum(log$kind == "conflict"),
+            " conflict)")
+    ##Always written, even when empty -- "nothing drifted" is a useful statement,
+    ##and it makes the first run reviewable as a list rather than only as a
+    ##226-row diff of biblio.csv.
+    if (!is.null(log.file)) {
+        readr::write_csv(log, log.file)
+        message("  wrote ", nrow(log), " refresh row(s) to ", log.file)
+    }
+    list(biblio = biblio, log = log)
+}
