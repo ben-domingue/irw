@@ -5541,3 +5541,93 @@ span (the BMI-formula sentence) had no published English and was translated by t
 `gesbert_2021_tdeq`) was a deliberate, negligible read.
 
 Cap is `batch_040`; this is 038, so the cap is not reached. 975 pending remain.
+
+## batch_039 — 2026-09-06
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 (100%).**
+
+Tables: `ghanbari_2016_helma_reading`, `ghanbari_2016_helma_understand`,
+`ghanbari_2016_helma_use`, `gholami_2017_periodontal_knowledge`,
+`gilbert_meta_16`, `gilbert_meta_27`. All six marked `done`.
+
+Gates: `normalize_nulls.R` fixed 1 file (understand, 45 lines).
+`audit_batch.R` 4 PASS / 2 WARN. `verify_batch.R` 3 PASS + 3 MISSING(exempt,
+data_labels). `lint_verification.R` clean, 6 rows, no problems — the
+NOT_NEEDED-rows-in-both-files fix held for a third consecutive round.
+`irw-validate` clean on all six. `check_provenance.R` reported no batch_039
+problem (its findings are the standing backlog: 19 blank + 44 absent
+`translation_source`, and `extremera_2016_shs` still lacking an issues-page
+entry). No circuit breaker; nothing hit a rate limit or spend cap.
+
+**Verification:** VERIFIED ×2 (reading, use), PARTIAL ×1 (understand),
+NOT_NEEDED ×3 (data_labels). Six tracker rows, one per written table.
+
+### Notable
+
+**The HELMA deposit is the pre-final 47-item field-test form, not the published
+44-item scale** — reached independently by all three ghanbari agents, and it
+reshapes two subscales. `reading6` is questionnaire item 15, which the paper's
+own factor analysis assigns to *understanding*, so the reading table is a 5-item
+reading subscale plus one understanding item, and the understanding table holds
+9 of that subscale's 10 published items. I re-checked this at Step 5b before
+letting it ship as a public_note: reading6→item15 at d=0.102 vs nearest rival
+0.448 (4.4×, bootstrap 99.2%), item 15 loading 0.50 on understanding vs 0.31 on
+reading, and Cronbach alpha settling it order-invariantly — reading1-5 = 0.857
+(published .86) and understand1-9+reading6 = 0.892 (published .89), where the
+rival groupings give 0.855/0.887 against subscales of the wrong published size.
+Confirmed. `use5` is likewise a dropped pilot item whose wording appears nowhere
+in the article or its four supplements, so it ships blank — this is the source's
+gap, not ours, and is the whole of that table's audit WARN. Consistent with what
+batch_038 found for `access10`/`access11`.
+
+**`understand1` vs `understand2` could not be separated** (items 16 vs 17):
+near-tied assignment distances, 0.026 excess cost to deny either, and a
+300-replicate bootstrap makes item 16's modal partner the *other* code. Recorded
+PARTIAL and stated in the public_note, correctly — the seven other pairs hold at
+47–99% modal.
+
+**Access trick worth reusing across the queue.** Every file in Harvard Dataverse
+`doi:10.7910/DVN/19PPE7` sits behind a required guestbook (ID 269 → HTTP 400)
+with the web UI behind the AWS WAF bot challenge (HTTP 202, empty body) — the
+same block previously logged for `gilbert_meta_40` and other Dataverse tables.
+The thumbnail endpoint is not guestbook-gated:
+`/api/access/datafile/<id>?imageThumb=100&format=original` returns the **original
+bytes** (verified byte-exact: 199,070 B for `baseline_testingtool.pdf`). That
+recovered both testing-tool PDFs, both codebook XLSXs and `genvar.do`, and turned
+a table that would have blocked into a data_labels pass. **This likely unblocks
+the other WAF/guestbook-blocked Dataverse tables sitting in the queue** and is
+worth a deliberate sweep.
+
+### Two items for triage
+
+1. **`gilbert_meta_27` — a data defect upstream of IRW, candidate for its own
+   issue.** `maser_lang_lttrs`, `_word1` and `_word2` were counts in the source
+   form (0–10 letters, 0–5 words) and reach IRW as 0/1 through a dichotomisation
+   made in Gilbert's IL-HTE dataset whose threshold is documented nowhere in the
+   deposit or in `genvar.do`. The agent declined to label those options; I
+   corroborated the defect at Step 5b with a number it did not use — if the cut
+   were the ASER pass-to-advance criterion, the count advancing to `word1` would
+   equal the count scoring 1 on `lttrs`, and it does not: at endline `lttrs` has
+   n=8552, mean 0.12 (≈1,026 scoring 1) while 3,087 mothers were administered
+   `word1`, 3× as many. So the applied threshold is demonstrably *not* the
+   instrument's skip logic. Resolving it needs Gilbert's construction code.
+
+2. **A disclosure gap `check_provenance.R` does not currently catch.**
+   `gilbert_meta_27` ships IRW-produced English for the reading paragraph and the
+   story under `translation_source=mixed`. The check's public-issues-page rule
+   keys on `machine_translation`, so the table passed clean and was never routed
+   to `itemtext_issues.qmd` — but the 2026-09-02 ruling is that IRW-generated
+   content carries a public line. It needs one at upload, and the check's
+   coverage of `mixed` is worth widening.
+
+Also disclosed rather than silently resolved: `gilbert_meta_16`'s replication
+package gives **two different wordings for 37 of its 71 items** (final
+India-adapted item map vs shorter, 80-char-truncated Stata labels — "biscuits"
+vs "sandwiches", "Krishna" vs "Chris"). The item-map wording ships; the
+code↔item mapping is identical in both, so only the exact administered sentence
+is uncertain. `gholami_2017_periodontal_knowledge` ships `False`/`True` option
+text because live `resp` is the study's own 0/1 scoring of a four-option MCQ,
+with the alternatives named in the public_note.
+
+Cap not reached (cap is batch_040); the next firing picks up batch_040, which
+will be the last round under the current cap.
