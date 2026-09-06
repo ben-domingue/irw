@@ -59,14 +59,45 @@ check <- function(cond, what) {
     else { cat("  FAIL -", what, "\n"); failures <<- failures + 1L }
 }
 
-##Stage one row through the real writer, into a scratch file.
-stage <- function(path, json) {
-    out <- system2(c("python3"), c(STAGER),
-                   env = paste0("IRW_DICT_AUTO_PATH=", path),
-                   input = json, stdout = TRUE, stderr = TRUE)
+##Stage one row through the real writer, into a scratch file. Returns NULL on
+##success, or the writer's message when it refused the row.
+##
+##`refusable` exists for tier-c-replay. The writer is allowed to REFUSE a row
+##the humans pasted -- since #1690 it rejects a `DOI (for paper)` holding free
+##text or several DOIs -- and a replay of real history will meet those rows.
+##Treating a refusal as a crash would make the harness fail on exactly the
+##defects it should be reporting, so the replay collects them instead.
+stage <- function(path, json, refusable = FALSE) {
+    ##A refusal is a non-zero exit, which system2() also reports as an R
+    ##warning. Expected in the replay, so it is not shown twice.
+    out <- withCallingHandlers(
+        system2(c("python3"), c(STAGER),
+                env = paste0("IRW_DICT_AUTO_PATH=", path),
+                input = json, stdout = TRUE, stderr = TRUE),
+        warning = function(w) if (refusable) invokeRestart("muffleWarning"))
     status <- attr(out, "status")
-    if (!is.null(status) && status != 0L) stop(paste(out, collapse = "\n"))
-    invisible(out)
+    if (!is.null(status) && status != 0L) {
+        msg <- paste(out, collapse = "\n")
+        ##Only a deliberate refusal is collectable. A traceback means the
+        ##writer broke, which is a real failure and must still stop the run --
+        ##`esc()` not escaping a newline in Notes has hidden here before.
+        if (refusable && !grepl("Traceback", msg, fixed = TRUE)) return(msg)
+        stop(msg)
+    }
+    invisible(NULL)
+}
+
+##The writer's DOI normalisation, called as a filter so the rule has one
+##definition (automated_finding/doi_hygiene.py) rather than an R copy that
+##drifts. Line count in equals line count out.
+normalize_dois <- function(x) {
+    x <- ifelse(is.na(x), "", as.character(x))
+    if (!length(x)) return(x)
+    out <- system2("python3", c("../automated_finding/doi_hygiene.py", "--filter"),
+                   input = x, stdout = TRUE)
+    if (length(out) != length(x)) stop("doi_hygiene --filter returned ", length(out),
+                                       " lines for ", length(x), " values")
+    out
 }
 
 cat("reading the live dictionary sheet ...\n")
@@ -211,7 +242,18 @@ if (MODE == "tier-c-replay") {
                       derived_license = "Derived License",
                       custom_license_derived = "Custom License (derived)",
                       notes = "Notes", date = "Date")
-    esc <- function(x) gsub('"', '\\\\"', gsub("\\\\", "\\\\\\\\", x), fixed = FALSE)
+    ##JSON string escaping. The control characters matter: a Description or
+    ##Notes cell holding a real newline is not rare, and without this the
+    ##payload is invalid JSON and the writer dies on a traceback rather than
+    ##replaying the batch (met on the 6/8/2026 batch).
+    esc <- function(x) {
+        x <- gsub("\\\\", "\\\\\\\\", x)
+        x <- gsub('"', '\\\\"', x)
+        x <- gsub("\n", "\\\\n", x)
+        x <- gsub("\r", "\\\\r", x)
+        gsub("\t", "\\\\t", x)
+    }
+    refused <- character(0)
     for (i in seq_len(nrow(batch))) {
         bits <- paste0('"table": "', esc(as.character(batch[[map[["table"]]]][i])), '"')
         for (k in names(payload_keys)) {
@@ -219,18 +261,31 @@ if (MODE == "tier-c-replay") {
             if (dict_blank(v)) next
             bits <- c(bits, paste0('"', k, '": "', esc(v), '"'))
         }
-        stage(scratch, paste0("{", paste(bits, collapse = ", "), "}"))
+        msg <- stage(scratch, paste0("{", paste(bits, collapse = ", "), "}"),
+                     refusable = TRUE)
+        if (!is.null(msg)) {
+            tab <- as.character(batch[[map[["table"]]]][i])
+            refused <- c(refused, paste0(tab, ": ", msg))
+        }
     }
+    if (length(refused)) {
+        cat("  the writer refused", length(refused), "row(s) the humans pasted",
+            "-- these are the defect, not a regression:\n")
+        for (r in refused) cat("     ", r, "\n")
+        batch <- batch[!as.character(batch[[map[["table"]]]]) %in%
+                       sub(":.*$", "", refused), , drop = FALSE]
+    }
+
     auto <- read_dict_auto(scratch, "core")
     check(!is.null(auto) && nrow(auto) == nrow(batch),
-          paste0("all ", nrow(batch), " rows survive the real writer and reader"))
+          paste0("all ", nrow(batch), " accepted rows survive the real writer and reader"))
 
     ##The sheet as it was BEFORE the paste.
     before <- dict[!sel, , drop = FALSE]
     res <- suppressMessages(union_dict(before, auto, "core"))
     after <- res$dict
-    check(nrow(after) == nrow(dict),
-          "the union reproduces the sheet's row count exactly")
+    check(nrow(after) == nrow(dict) - length(refused),
+          "the union reproduces the sheet's row count, less any refusal")
 
     ##Every cell of every replayed row must match what the paste produced.
     cols <- setdiff(DICT_AUTO_COLS, "Contributor")   ##Contributor is forced, not carried
@@ -240,6 +295,11 @@ if (MODE == "tier-c-replay") {
     diffs <- list()
     for (cl in cols) {
         was <- as.character(batch[[map[[cl]]]])
+        ##The DOI the writer would produce, not the one the human pasted. Since
+        ###1690 it unwraps resolver URLs, drops `data doi: ` prefixes and drops
+        ##journal supplement suffixes -- a deliberate divergence from history,
+        ##so the expectation moves with it rather than the check failing.
+        if (cl == "DOI (for paper)") was <- normalize_dois(was)
         now <- as.character(after[[map[[cl]]]])[idx]
         bad <- !(dict_blank(was) & dict_blank(now)) & !identical_chr(was, now)
         if (any(bad)) diffs[[cl]] <- data.frame(table = batch[[map[["table"]]]][bad],

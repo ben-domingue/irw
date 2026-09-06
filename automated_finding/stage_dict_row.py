@@ -38,6 +38,8 @@ import os
 import sys
 from pathlib import Path
 
+from doi_hygiene import classify, normalize
+
 ##IRW_DICT_AUTO_PATH exists so metadata/tests/manual_dict_test.R can exercise
 ##this writer for real -- same quoting, same refusals -- against a scratch file
 ##instead of the tracked one. Production never sets it.
@@ -108,6 +110,31 @@ def main():
 
     if not row["table"]:
         sys.exit("payload needs a non-empty 'table'")
+
+    ##`DOI (for paper)` acquired 83 cells wrapped in a resolver URL, prefixed
+    ##`data doi: `, or carrying a journal supplement suffix before anyone
+    ##looked (#1690). Those forms are mechanically removable and mean the same
+    ##thing afterwards, so they are removed here rather than reported. What is
+    ##NOT touched is a data-repository DOI: replacing it needs the linked
+    ##publication, which is the open schema question on #1690, so the row is
+    ##written as given and the cell is left for that decision.
+    if row["DOI (for paper)"]:
+        doi, rules = normalize(row["DOI (for paper)"])
+        if rules:
+            print(f"note: DOI normalised ({', '.join(rules)}): "
+                  f"{row['DOI (for paper)']!r} -> {doi!r}", file=sys.stderr)
+        row["DOI (for paper)"] = doi
+        kind = classify(doi)
+        ##Free text ("not yet published", a landing-page URL) is not a DOI and
+        ##never becomes one downstream -- it just fails to resolve, quietly, in
+        ##whatever tries next. Refuse it at the door; leave the cell blank and
+        ##put the sentence in `notes` instead.
+        if kind == "free_text":
+            sys.exit(f"'doi' is not a DOI: {doi!r}. Leave it blank and put the "
+                     f"explanation in 'notes'.")
+        if kind == "multiple":
+            sys.exit(f"'doi' holds more than one DOI: {doi!r}. One row, one "
+                     f"paper DOI; the others belong in 'notes'.")
     ##Derived, never accepted from the payload: every downstream join is on the
     ##lowercased name, and letting a caller supply a mismatched one would make a
     ##row that silently matches nothing.

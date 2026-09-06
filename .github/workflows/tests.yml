@@ -50,10 +50,13 @@ jobs:
       - name: irw_validate
         run: python -m unittest discover -s irw_validate/tests -t . -v
 
-      # The dictionary staging writer (#1732). Its load-bearing test is that a
-      # value beginning "-", "=", "+" or "@" is written unchanged: the first
-      # version escaped those for the Sheets paste path, which this replaces,
-      # and the apostrophe corrupted three real Notes cells.
+      # The dictionary staging writer (#1732) and the DOI normaliser it calls
+      # (#1690). The writer's load-bearing test is that a value beginning "-",
+      # "=", "+" or "@" is written unchanged: the first version escaped those
+      # for the Sheets paste path, which this replaces, and the apostrophe
+      # corrupted three real Notes cells. The normaliser's is that stripping a
+      # `https://doi.org/` wrapper never changes WHICH object the DOI names --
+      # a data DOI stays a data DOI, and is reported rather than rewritten.
       - name: stage_dict_row
         run: python -m unittest discover -s automated_finding/tests -t . -v
 

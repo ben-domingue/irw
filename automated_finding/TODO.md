@@ -468,14 +468,25 @@ do not treat the CSV's `proposed_name` column as a work list.
   read and supplied a surname from nothing. Worth doing regardless of whether the
   gate above is scheduled.
 
-- [ ] **Open a separate issue for `DOI (for paper)` column hygiene.** This is a
-  distinct defect from naming and does not belong on #1686. Across the 1,945
-  automated rows: **465 hold a dataset DOI** (figshare, Mendeley, Dataverse, OSF,
-  Zenodo, Dryad) in a column meant for the paper DOI, which is what drives roughly
-  55 spurious year mismatches -- the deposit year is not the paper year. Alongside:
-  33 full URLs, 22 cells prefixed `data doi: `, 10 PLOS `.sNNN` supplement
-  suffixes, 4 reading `not yet published`, and 2 cramming several DOIs plus
-  free-text notes into one cell.
+- [x] **Open a separate issue for `DOI (for paper)` column hygiene.** Opened as
+  **#1690**. The mechanical half is done: `doi_hygiene.py` normalises the wrappers
+  (resolver URLs, `data doi: ` prefixes, journal `.sNNN` supplement suffixes) and
+  `stage_dict_row.py` applies it on write, so no new automated row can carry those
+  forms. `dictionary_doi_corrections.csv` is the paste list for the 83 cells
+  already in the sheet.
+
+- [ ] **#1690's open half: the 979 rows holding a data DOI.** Counted over the
+  whole dictionary rather than the automated rows alone (`doi_hygiene.py`, run it
+  for the current figures) and excluding preprint DOIs, which are the paper and
+  are not a defect. Blocked on one schema decision that is not the machine's to
+  make: either resolve each deposit's linked publication and put the article DOI
+  here, or add a distinct `DOI (for data)` column and stop overloading one field.
+  Many of these deposits have no associated paper at all, which is the argument
+  for the second. Until it is decided `doi_hygiene.py` reports these and never
+  rewrites them.
+  Also open, needing a lookup rather than a rule: 21 free-text cells
+  (`not yet published`, `No DOI`, an OSF landing page) and 2 holding several DOIs
+  (`condon_2024_sapa_personality` has seven, `imps2025_hf` two).
 
 - [ ] **Six tables could not be name-checked at all** -- no DOI in the sheet and
   the DOI implied by their URL is not registered with Crossref or DataCite, so
