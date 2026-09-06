@@ -1,4 +1,5 @@
 table,table.lower,Description,URL (for data),Reference,DOI (for paper),DOI (for data),Original License,Custom License (source),Public Reshare?,Derived License,Custom License (derived),Notes,Contributor,Date
+bicb-j_ishiguro_2025,bicb-j_ishiguro_2025,,,,,,,,Public,CC BY-NC-ND,,"Included by written permission from the corresponding author (Chiaki Ishiguro), not under a public licence: Original License = Permission via Email. The author asked that the redistribution carry the article licence, CC BY-NC-ND 4.0, because participants were consented for research and educational purposes; that is the Derived License, and it binds downstream users of the IRW table, not IRW. The OSF deposit (osf.io/ravcq) carries no licence of its own. Permission on file at licenseinfo/emails/bicb-j_ishiguro_2025.md. Reasoning and the ND question: irw#2002.",automated,
 cure_data,cure_data,,,,,10.33009/ldbase.1667941609.e3ab,,,Public,CC BY 4.0,,,automated,9/6/2026
 icar_sapa,icar_sapa,,,,,10.7910/DVN/AD9RVY,,,Public,CC BY 4.0,,,automated,9/6/2026
 mtf,mtf,,,,,10.3886/ICPSR38503.v1,,,Private,Missing (NA),,,automated,9/6/2026
