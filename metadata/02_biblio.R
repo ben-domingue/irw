@@ -184,7 +184,8 @@ getrows<-function(l) {
     ## column (#1863). Sources with no automated file configured are unaffected.
     if (!is.null(l$file.auto)) {
         auto <- read_dict_auto(l$file.auto, name)
-        auto <- drop_dead_dict_rows(auto, l$file.live, name)
+        auto <- drop_dead_dict_rows(auto, l$file.live, name,
+                                    pending.file = l$file.pending)
         u <- union_dict(irw_dict, auto, name)
         irw_dict <- u$dict
         write_dict_provenance(u$provenance, l$file.prov)
@@ -230,22 +231,10 @@ getrows<-function(l) {
     ## with no terms a user can reach. metadata/hotfixes/fix-licenses.R added
     ## them to biblio.csv once (Rpkg#93) and the next run of this script erased
     ## them, because the column vector below rebuilds biblio.csv from a fixed
-    ## list. Joining here does permanently what that hotfix could not make
-    ## stick, which is why it is retired in this commit.
-    ##
-    ## Joined across all rows on purpose: the tables carrying custom terms are
-    ## long-published, so they are never in `new_data_rows` and a carry-through
-    ## on new rows alone would deliver the terms to nobody. This is the one
-    ## dictionary column re-read for existing rows -- the general staleness of
-    ## the other columns is a separate question (see the 226-row drift).
-    terms <- data.frame(.key = dict_key(irw_dict$table),
-                        Custom_License_Terms = dict_terms_column(irw_dict),
-                        stringsAsFactors = FALSE)
-    terms <- terms[!duplicated(terms$.key) & !dict_blank(terms$Custom_License_Terms), ]
-    biblio$Custom_License_Terms <- terms$Custom_License_Terms[match(dict_key(biblio$table),
-                                                                   terms$.key)]
-    print(paste0(name, ": ", sum(!is.na(biblio$Custom_License_Terms)),
-                 " row(s) carry custom licence terms"))
+    ## list. Doing it here is what that hotfix could not make stick, which is
+    ## why it is retired. The join itself lives in dict_union.R so it can be
+    ## replayed offline against the real biblio.csv.
+    biblio <- apply_custom_license_terms(biblio, irw_dict, name)
 
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
@@ -267,7 +256,8 @@ dbs<-list(
               file.out="biblio.csv",
               file.auto="../automated_finding/dictionary_auto.csv",
               file.live="metadata.csv",
-              file.prov="biblio_provenance.csv"),
+              file.prov="biblio_provenance.csv",
+              file.pending="biblio_pending.csv"),
     comps=list(name="comps",
               irw_dict=gsheet2tbl('https://docs.google.com/spreadsheets/d/1WZZYyVC2cmw8CUJM69qP0F_ZlQjQfdkCZbdsG-8mUrs/edit?gid=1337607315#gid=1337607315'),
               user=IRW_OWNER,

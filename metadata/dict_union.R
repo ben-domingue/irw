@@ -176,12 +176,28 @@ read_dict_auto <- function(path, label) {
 ##Returns `auto` unchanged, loudly, if the oracle is missing or implausibly
 ##small: a truncated metadata.csv must never be able to silently empty a staged
 ##batch.
-drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000) {
-    if (is.null(auto) || is.null(live.file)) return(auto)
+##`pending.file`, when given, records the rows held back. They are HELD, not
+##discarded: the row stays in dictionary_auto.csv and lands on the first run
+##after the table is published.
+##
+##That window is the normal case, not an edge case. A batch's order is: clean
+##the dataset, upload the table to a Redivis DRAFT, add the dictionary row,
+##publish. 01_metadata.R lists tables from the RELEASED dataset version, so
+##between the upload and the publish click every one of that batch's rows names
+##a table metadata.csv has never heard of. Without this file the only trace is a
+##message in a long pipeline log -- which is the silent-failure shape this whole
+##change exists to end.
+drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000,
+                                pending.file = NULL) {
+    if (is.null(auto) || is.null(live.file)) {
+        write_dict_pending(NULL, pending.file)
+        return(auto)
+    }
     if (!file.exists(live.file)) {
         warning(label, ": ", live.file, " not found; unioning ", nrow(auto),
                 " automated row(s) without a liveness check. Run 01_metadata.R ",
                 "first.", call. = FALSE)
+        write_dict_pending(NULL, pending.file)
         return(auto)
     }
     live <- readr::read_csv(live.file, show_col_types = FALSE, progress = FALSE)
@@ -189,17 +205,37 @@ drop_dead_dict_rows <- function(auto, live.file, label, min_oracle_rows = 1000) 
         warning(label, ": ", live.file, " has ", nrow(live), " row(s); too few ",
                 "to trust as a liveness oracle. Unioning without the check.",
                 call. = FALSE)
+        write_dict_pending(NULL, pending.file)
         return(auto)
     }
     key  <- dict_key(auto[["table.lower"]])
     key[dict_blank(key)] <- dict_key(auto[["table"]])[dict_blank(key)]
     keep <- key %in% dict_key(live$table)
     if (any(!keep)) {
-        message(label, ": dropped ", sum(!keep), " automated row(s) naming a ",
-                "table absent from ", live.file, ": ",
+        message(label, ": holding ", sum(!keep), " automated row(s) naming a ",
+                "table absent from ", live.file,
+                " (publish the table and they land next run): ",
                 paste(auto[["table"]][!keep], collapse = ", "))
     }
+    write_dict_pending(auto[!keep, , drop = FALSE], pending.file)
     auto[keep, , drop = FALSE]
+}
+
+##Always written, even when empty: an empty file says "nothing is waiting",
+##which is a different and more useful statement than a missing file.
+write_dict_pending <- function(pending, pending.file) {
+    if (is.null(pending.file)) return(invisible(NULL))
+    if (is.null(pending) || !nrow(pending)) {
+        pending <- as.data.frame(
+            setNames(replicate(length(DICT_AUTO_COLS), character(0), simplify = FALSE),
+                     DICT_AUTO_COLS),
+            check.names = FALSE)
+    }
+    readr::write_csv(pending, pending.file)
+    if (nrow(pending)) {
+        message("  wrote ", nrow(pending), " pending row(s) to ", pending.file)
+    }
+    invisible(NULL)
 }
 
 ##Merge the automated rows into the sheet export, column-wise.
@@ -315,4 +351,26 @@ dict_terms_column <- function(dict) {
     if (length(cust) >= 2L) return(as.character(dict[[nm[cust[2]]]]))
     if (length(cust) == 1L) return(as.character(dict[[nm[cust[1]]]]))
     rep(NA_character_, nrow(dict))
+}
+
+##Attach the custom licence terms to every biblio row.
+##
+##Extracted from 02_biblio.R so it can be replayed offline against the real
+##biblio.csv without a Redivis read or a BibTeX call -- see
+##tests/manual_dict_test.sh, which is how this gets exercised on production data
+##before a batch goes anywhere near the sheet.
+##
+##Joined across ALL rows on purpose. The tables carrying custom terms are
+##long-published, so they never appear in `new_data_rows`, and a carry-through
+##on new rows alone would deliver the terms to nobody.
+apply_custom_license_terms <- function(biblio, dict, label = "core") {
+    terms <- data.frame(.key = dict_key(dict$table),
+                        Custom_License_Terms = dict_terms_column(dict),
+                        stringsAsFactors = FALSE)
+    terms <- terms[!duplicated(terms$.key) & !dict_blank(terms$Custom_License_Terms), ]
+    biblio$Custom_License_Terms <- terms$Custom_License_Terms[match(dict_key(biblio$table),
+                                                                   terms$.key)]
+    message(label, ": ", sum(!is.na(biblio$Custom_License_Terms)),
+            " row(s) carry custom licence terms")
+    biblio
 }

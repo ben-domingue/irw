@@ -34,10 +34,15 @@ Usage: pass one row as JSON on stdin, e.g.:
 """
 import csv
 import json
+import os
 import sys
 from pathlib import Path
 
-STAGING_PATH = Path(__file__).resolve().parent / "dictionary_auto.csv"
+##IRW_DICT_AUTO_PATH exists so metadata/tests/manual_dict_test.R can exercise
+##this writer for real -- same quoting, same refusals -- against a scratch file
+##instead of the tracked one. Production never sets it.
+STAGING_PATH = Path(os.environ.get("IRW_DICT_AUTO_PATH")
+                    or Path(__file__).resolve().parent / "dictionary_auto.csv")
 
 ##Must stay identical to DICT_AUTO_COLS in metadata/dict_union.R, which refuses
 ##to merge a file whose header does not match exactly.

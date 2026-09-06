@@ -33,6 +33,9 @@ metadata/**/*.txt
 ##wrote. It changes only when an automated row lands, so it is not the per-run
 ##noise the note above is guarding against.
 !metadata/biblio_provenance.csv
+##Rows held back because their table is not published yet (#1732). Committed for
+##the same reason: it is the only place "waiting on a publish" is written down.
+!metadata/biblio_pending.csv
 .env
 .Rproj.user
 .DS_Store

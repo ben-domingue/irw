@@ -242,6 +242,51 @@ local({
           "a truncated oracle warns and drops nothing (cannot empty a batch)")
 })
 
+cat("pending rows (held, not discarded)\n")
+
+local({
+    live <- tempfile(fileext = ".csv"); pend <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, pend)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:1500), "a_2020")), live)
+    a <- fake_auto(auto_row("a_2020"), auto_row("draft_2026"))
+    kept <- drop_dead_dict_rows(a, live, "core", pending.file = pend)
+    held <- readr::read_csv(pend, col_types = readr::cols(.default = readr::col_character()))
+    check(nrow(kept) == 1L, "a row for an unpublished table is held back")
+    check(nrow(held) == 1L && held$table[1] == "draft_2026",
+          "the held row is written to the pending file, not discarded")
+    check(identical(names(held), DICT_AUTO_COLS),
+          "the pending file keeps the full layout, so it can be re-read")
+})
+
+local({
+    ##An empty pending file is a statement -- "nothing is waiting on a publish"
+    ##-- and a missing one is not. The batch window depends on telling them apart.
+    live <- tempfile(fileext = ".csv"); pend <- tempfile(fileext = ".csv")
+    on.exit(unlink(c(live, pend)), add = TRUE)
+    readr::write_csv(data.frame(table = c(sprintf("t%04d", 1:1500), "a_2020")), live)
+    drop_dead_dict_rows(fake_auto(auto_row("a_2020")), live, "core", pending.file = pend)
+    check(file.exists(pend) &&
+          nrow(readr::read_csv(pend, show_col_types = FALSE)) == 0L,
+          "with nothing held, the pending file is written empty rather than left stale")
+})
+
+cat("apply_custom_license_terms\n")
+
+local({
+    d <- fake_sheet(sheet_row("a_2020", custom_derived = "TERMS HERE"),
+                    sheet_row("b_2020"))
+    b <- data.frame(table = c("A_2020", "b_2020", "c_2020"),
+                    stringsAsFactors = FALSE)
+    out <- suppressMessages(apply_custom_license_terms(b, d))
+    check(out$Custom_License_Terms[1] == "TERMS HERE",
+          "terms attach case-insensitively to a long-published row")
+    check(is.na(out$Custom_License_Terms[2]),
+          "a row with no terms gets NA, not an empty string")
+    check(is.na(out$Custom_License_Terms[3]),
+          "a biblio row absent from the dictionary is left alone")
+    check(nrow(out) == 3L, "the join adds no rows and drops none")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
