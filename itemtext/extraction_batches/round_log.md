@@ -5186,3 +5186,34 @@ confirms nothing else moved.
 now become DUE for issues-page entries instead of being invisible. The stricter
 `^\d{4}-\d{2}-\d{2}$` test used for stamping audits still reads them as undated, which is also
 correct. A human reading the file learns the honest thing: it shipped, we do not know when.
+
+### Two rights rulings — 2026-09-05
+
+**PES-NWI: skipped.** Ben's call on `geacaballero_2019_pes_nwi` and `_short`. The instrument is
+Eileen Lake's copyright and the study authors held permission to *use* it; a CC BY article does
+not extend its licence to third-party copyrighted material reproduced with permission, and the
+rights holder's own terms could not be reached at all (Penn CHOPR's PES-NWI page 404s). IRW would
+also have been shipping machine-translated English for 21 of the items — a derivative of a
+copyrighted instrument. Both CSVs moved to `quarantine/batch_036/` on the batch_031 PROMIS
+precedent, ready to restore if permission is ever obtained; every sidecar and both `verify_*.R`
+stay in the batch, which is what records the work. Queue status `failed` -> **`blocked`**: this is
+a determinate verdict, not a retryable fault. The cheap unblock is an email to Lake, which would
+put it on the same `Permission via Email` footing as 107 existing tables.
+
+This also retires the NBSP finding — the five no-break spaces were in the `_short` table, which
+is no longer shipping.
+
+**HLS-EU-Q47: cleared to ship.** `fukuda_2021_health_literacy`'s hold is released and it is staged
+into `clean/`. What IRW copies is the HLS-EU Consortium's **own** annex, published CC BY 2.0 in
+Sørensen et al. 2013 — an irrevocable grant on exactly the text being shipped. The bar found at
+`m-pohl.net/HLS19Instruments` governs **HLS19**, the successor instrument, and cannot narrow a
+2013 licence retroactively. That is the substantive difference from PROMIS, where the barred
+instrument was the one being shipped.
+
+It needs no re-gating: `audit_batch` PASS, `verify_batch` PASS, `lint_verification` clean and
+`irw-validate` ok were all run against live data at batch_034 triage earlier today.
+
+**batch_036 stands at 3 extracted / 3 blocked.** The three survivors — `gao2025_attachment_anxiety`,
+`gao2025_spiritual_wellbeing`, `garciabatista_2021_erq` — remain `failed` and ungated, because the
+Redivis query API is **still down** (re-probed, no return in 200s). They need re-gating, not
+re-extraction, and the circuit breaker stays set.
