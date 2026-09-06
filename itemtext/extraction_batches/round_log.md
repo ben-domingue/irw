@@ -5121,3 +5121,44 @@ Also standing from the round, unverified by me because both need the query route
 `GBJW_fadplus_goto2021` is not the FAD-Plus (dictionary Description defect), and
 `geacaballero_2019_pes_nwi_short` is not a short PES-NWI — its `resp` records whether a nurse
 flagged each item as *essential*.
+
+### The three "strays" are not unshipped — they are live, and one was deliberately held — 2026-09-05
+
+Chased down the three `__items.csv` sitting in batch folders with no `uploaded` stamp. **All
+three are live in `irw_text` v17.0 — the current RELEASED version, publicly visible.** The local
+record says otherwise for every one of them:
+
+| table | what the record says | what is live |
+|---|---|---|
+| `twod_rotation_mather2023` | **HELD 2026-08-24**, "a row with no item text was judged not worth shipping"; CSV and sidecars kept in batch_011 | 608 rows in v17.0 |
+| `ALSECYPIAMH_WU_2022_PHQ` | "never uploaded" — the stated reason irw#1956 must not use a directory glob | 8 rows in v17.0 |
+| `himmelstein-admc_raw-2025` | `pending` in `queue_state.csv`, no batch assigned; its CSV *is* gone from batch_014 | 193 rows in v17.0 |
+
+Local row counts match the live `numRows` exactly in all three cases (8, 608, and the local copy
+of himmelstein is gone), and the two byte-identical `ALSECYPIAMH` copies agree, so this is our
+content, not something else. **`numRows` is indicative, not conclusive** — a `count(*)` check is
+the one that catches doubling and it cannot run until the query outage clears.
+
+**The one that matters is `twod_rotation_mather2023`.** It was withheld on a deliberate editorial
+judgment — 304 picture items whose `item_text` is blank by design — and it is public anyway, 608
+rows of it. Whatever mechanism put it there did not consult the hold. The `himmelstein` row is the
+same story from the other side: still `pending`, never triaged, but live.
+
+**The likely mechanism is a directory-glob upload**, the same shape that swept 8 `itemtables/pilot/`
+files into the draft on 2026-09-04. irw#1956 was filed warning that clearing uploaded CSVs must not
+be a glob — the irony is that a glob upload appears to be how these got out.
+
+**This also corrects the issues-page backlog figure I reported earlier.** That count required a
+stamped `uploaded` date, so all three of these were invisible to it: live, carrying a real
+`public_note`, and on no issues-page entry. The predicate should be "live in a released version",
+not "stamped". Re-run against the corpus with the metadata path (which works during the outage):
+**of 746 live item-text tables, exactly 3 are live-but-unstamped — these three.** So the stray
+problem is bounded and small, and the bookkeeping is otherwise sound.
+
+Separately, and expected rather than alarming: **450 of the 746 live tables have no provenance row
+at all.** Those predate the batch pipeline, which began at batch_001 against a ~1,400-row queue.
+Provenance coverage of the live corpus is 296 of 746.
+
+Nothing was changed. Stamping these three would need a date, and inventing one is worse than the
+gap — the honest options are the release that first carried them, or a marker saying the upload
+date is unrecorded. That is Ben's call, and it should come after a `count(*)` confirms the content.
