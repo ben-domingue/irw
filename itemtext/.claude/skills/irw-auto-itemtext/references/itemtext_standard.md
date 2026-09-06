@@ -428,8 +428,15 @@ give the wrong answer here.**
 
 **What is NOT covered — check the instrument, not the name.** `dasilva_2019_hexaco24` is the Brief
 HEXACO Inventory, published CC BY, and is untouched. The other 26 live `sun_2025_morality_*`
-item-text tables are the study's own moral-character-rating template, not HEXACO-PI-R — which is
-why the one HEXACO block in that deposit is the table the deposit itself named `fairnessHEXACO`.
+item-text tables are believed to be the study's own moral-character-rating template rather than
+HEXACO-PI-R — the deposit named its one HEXACO block `fairnessHEXACO`, and
+`itemtext/itemtables/pilot/audit_confirmed.csv` records the rest as "the same moral-character-rating
+item template". **That is documentary, not a reading of the wording:** the live fetch to check it
+failed on the Redivis outage of 2026-09-05 and has not been re-run. The residual risk is Study 3,
+whose `extraversion`, `openness` and `neuroticism` tables carry factor names from a personality
+inventory rather than a moral-character scale — though `neuroticism` is a Big Five label and not
+HEXACO's `Emotionality`, which is weak evidence against HEXACO. **Re-run the check when Redivis is
+back**; if any of those 26 turn out to hold HEXACO-PI-R wording, they fall under this ruling too.
 And the *response* tables are not in scope at all: this clause governs the instrument wording, not
 data a study collected with it, so every HEXACO response table stays in IRW.
 
