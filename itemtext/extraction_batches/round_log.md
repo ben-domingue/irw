@@ -5217,3 +5217,29 @@ It needs no re-gating: `audit_batch` PASS, `verify_batch` PASS, `lint_verificati
 `gao2025_spiritual_wellbeing`, `garciabatista_2021_erq` — remain `failed` and ungated, because the
 Redivis query API is **still down** (re-probed, no return in 200s). They need re-gating, not
 re-extraction, and the circuit breaker stays set.
+
+### batch_037 round NOT started — the Redivis outage is a download outage, not a query outage — 2026-09-05
+
+Asked to run rounds until they stop working. They were already stopped: `circuit_breaker.flag`
+from the batch_036 round is still up, and the clearing test in it does not pass. Re-probing
+before any round changed the diagnosis in a way worth carrying.
+
+**Yesterday's reading — "the query API hangs" — is wrong, or has narrowed.** Query *execution*
+is healthy: a `SELECT 1` job is created in 0.0s and `q$get()` reports status `completed` in 1.6s.
+What never returns is the **result download**: `to_data_frame()` on that completed one-row job
+ran past 200s, and a `max_results = 5` read of a 3,525-row table ran past 110s. Both the R client
+(redivis 0.12.12) and the Python client (0.20.11 / pyarrow 25.0.0) hang identically, so it is
+server-side rather than a client version. Metadata is untouched — API root 200 in 0.22s,
+`list_tables()` returns 987 tables in 4.8s.
+
+This matters for two reasons. First, **the old clearing probe now gives a false green**: `SELECT 1`
+returns `completed` while the corpus is still unreadable. The flag now carries a download-based
+test instead. Second, it explains the batch_036 failure shape exactly — every agent completed and
+every source-side judgment was made, because those need the web, not Redivis; only the steps that
+read IRW data died.
+
+**No round was started.** `table_context.R` is `irw::irw_fetch()`, a whole-table download, so a
+round fails at Step 2 extraction rather than at gating, and spends ~50M cache-read tokens finding
+that out. The batch_036 re-gating is blocked on the same route. Nothing else in the queue is
+runnable without data reads, so the honest state is: **waiting on Redivis**, one cheap probe away
+from resuming, with batch_036's five extracted tables intact on disk and needing only re-gating.
