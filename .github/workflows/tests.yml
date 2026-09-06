@@ -50,6 +50,13 @@ jobs:
       - name: irw_validate
         run: python -m unittest discover -s irw_validate/tests -t . -v
 
+      # The dictionary staging writer (#1732). Its load-bearing test is that a
+      # value beginning "-", "=", "+" or "@" is written unchanged: the first
+      # version escaped those for the Sheets paste path, which this replaces,
+      # and the apostrophe corrupted three real Notes cells.
+      - name: stage_dict_row
+        run: python -m unittest discover -s automated_finding/tests -t . -v
+
       # The R validator is the copy external contributors source from a raw
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still

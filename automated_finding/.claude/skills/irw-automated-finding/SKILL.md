@@ -942,8 +942,11 @@ RFC4180 quoting), could not carry the mandated-blank columns as a TSV
 `Date` three columns left), auto-converted `Date` unreliably, and once failed on
 a well-formed 55-row batch for a cause never found (`BATCH_LOG.md`,
 2026-08-26). All of it is now the script's problem: it writes RFC4180 with LF
-terminators and escapes the leading `=`, `+`, `-`, `@` that Sheets reads as a
-formula. It also refuses a blank `Public Reshare?`, which used to mean the row
+terminators. It deliberately does **not** escape a leading `=`, `+`, `-` or `@`
+-- that was a paste-path mitigation, and since nothing is pasted any more,
+prefixing an apostrophe corrupts rather than protects: three `Notes` cells in
+the sheet legitimately begin "-1 sentinel values ..." or "-9 sentinel ...".
+It also refuses a blank `Public Reshare?`, which used to mean the row
 silently never reached biblio at all, and a `Public` row with no
 `Derived License`.
 

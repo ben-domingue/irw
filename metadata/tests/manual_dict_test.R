@@ -15,24 +15,43 @@
 ##through the real writer with IRW_DICT_AUTO_PATH pointed at a scratch file, so
 ##the quoting and the refusals are the production ones.
 ##
-##  tier-a  the merge rule against the live sheet
-##  tier-b  the whole export path replayed on the real biblio.csv, offline
+##  tier-a         the merge rule against the live sheet
+##  tier-b         the whole export path replayed on the real biblio.csv
+##  tier-c-replay  a real past batch re-run through the new path, asserting it
+##                 would have produced byte-identical rows to the human paste
 ##
-##Tier C (a real discovery batch, real uploads) is not scriptable and is written
-##up in the pull request.
+##tier-c-replay is the cheap half of Tier C. It takes a batch of rows a human
+##actually pasted into the sheet, removes them from a COPY of the sheet, stages
+##them through stage_dict_row.py, unions them back, and asserts the result is
+##byte-identical to what is live. That is the whole question -- would the new
+##path have produced the same dictionary? -- answered against real history,
+##offline, with no dataset to process and nothing to upload.
+##
+##It cannot test BibTeX generation on a genuinely new row. Only a real batch
+##does that, and it is written up in the pull request.
 
 suppressMessages(library(readr))
 source("dict_union.R")
 
 MODE <- commandArgs(trailingOnly = TRUE)[1]
-if (is.na(MODE) || !MODE %in% c("tier-a", "tier-b")) {
-    stop("usage: Rscript tests/manual_dict_test.R [tier-a|tier-b]")
+if (is.na(MODE) || !MODE %in% c("tier-a", "tier-b", "tier-c-replay")) {
+    stop("usage: Rscript tests/manual_dict_test.R [tier-a|tier-b|tier-c-replay]")
 }
+##tier-c-replay takes the batch date as a second argument, e.g. "8/27/2026".
+##Defaults to the largest automated batch in the sheet.
+BATCH_DATE <- commandArgs(trailingOnly = TRUE)[2]
 
 DICT_URL <- paste0("https://docs.google.com/spreadsheets/d/",
                    "1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s",
                    "/export?format=csv&gid=1337607315")
 STAGER <- "../automated_finding/stage_dict_row.py"
+
+##Element-wise equality that treats every flavour of blank as equal, so a
+##round trip through "" / NA / "NA" is not reported as a change.
+identical_chr <- function(a, b) {
+    a[dict_blank(a)] <- ""; b[dict_blank(b)] <- ""
+    a == b
+}
 
 failures <- 0L
 check <- function(cond, what) {
@@ -160,6 +179,86 @@ if (MODE == "tier-b") {
 
     cat("\n  A real batch sits in that held state between the table upload and\n",
         " the publish click. biblio_pending.csv is how you see it.\n", sep = "")
+}
+
+##--------------------------------------------------- tier C (replay) --------
+if (MODE == "tier-c-replay") {
+    cat("\nTIER C (replay) -- a real batch re-run through the new path\n\n")
+
+    contrib <- trimws(as.character(dict[["Contributor"]]))
+    dates   <- trimws(as.character(dict[["Date"]]))
+    if (is.na(BATCH_DATE)) {
+        tab <- sort(table(dates[contrib == DICT_AUTO_CONTRIBUTOR]), decreasing = TRUE)
+        BATCH_DATE <- names(tab)[1]
+    }
+    sel <- contrib == DICT_AUTO_CONTRIBUTOR & dates == BATCH_DATE
+    sel[is.na(sel)] <- FALSE
+    cat("  batch:", BATCH_DATE, "--", sum(sel), "rows pasted by hand\n")
+    if (sum(sel) == 0L) stop("no automated rows dated ", BATCH_DATE)
+
+    batch <- dict[sel, , drop = FALSE]
+    map   <- resolve_dict_cols(dict, "core")
+
+    ##Stage each row through the real writer, from the row's own values. This is
+    ##the batch as it would have been staged had stage_dict_row.py existed.
+    scratch <- tempfile(fileext = ".csv")
+    on.exit(unlink(scratch), add = TRUE)
+    payload_keys <- c(description = "Description", url = "URL (for data)",
+                      reference = "Reference", doi = "DOI (for paper)",
+                      original_license = "Original License",
+                      custom_license_source = "Custom License (source)",
+                      public_reshare = "Public Reshare?",
+                      derived_license = "Derived License",
+                      custom_license_derived = "Custom License (derived)",
+                      notes = "Notes", date = "Date")
+    esc <- function(x) gsub('"', '\\\\"', gsub("\\\\", "\\\\\\\\", x), fixed = FALSE)
+    for (i in seq_len(nrow(batch))) {
+        bits <- paste0('"table": "', esc(as.character(batch[[map[["table"]]]][i])), '"')
+        for (k in names(payload_keys)) {
+            v <- as.character(batch[[map[[payload_keys[[k]]]]]][i])
+            if (dict_blank(v)) next
+            bits <- c(bits, paste0('"', k, '": "', esc(v), '"'))
+        }
+        stage(scratch, paste0("{", paste(bits, collapse = ", "), "}"))
+    }
+    auto <- read_dict_auto(scratch, "core")
+    check(!is.null(auto) && nrow(auto) == nrow(batch),
+          paste0("all ", nrow(batch), " rows survive the real writer and reader"))
+
+    ##The sheet as it was BEFORE the paste.
+    before <- dict[!sel, , drop = FALSE]
+    res <- suppressMessages(union_dict(before, auto, "core"))
+    after <- res$dict
+    check(nrow(after) == nrow(dict),
+          "the union reproduces the sheet's row count exactly")
+
+    ##Every cell of every replayed row must match what the paste produced.
+    cols <- setdiff(DICT_AUTO_COLS, "Contributor")   ##Contributor is forced, not carried
+    akey <- dict_key(after[[map[["table"]]]])
+    bkey <- dict_key(batch[[map[["table"]]]])
+    idx  <- match(bkey, akey)
+    diffs <- list()
+    for (cl in cols) {
+        was <- as.character(batch[[map[[cl]]]])
+        now <- as.character(after[[map[[cl]]]])[idx]
+        bad <- !(dict_blank(was) & dict_blank(now)) & !identical_chr(was, now)
+        if (any(bad)) diffs[[cl]] <- data.frame(table = batch[[map[["table"]]]][bad],
+                                                was = was[bad], now = now[bad],
+                                                stringsAsFactors = FALSE)
+    }
+    check(length(diffs) == 0L,
+          paste0("all ", nrow(batch), " rows come back byte-identical across ",
+                 length(cols), " columns"))
+    if (length(diffs)) {
+        for (cl in names(diffs)) {
+            cat("\n     column:", cl, "--", nrow(diffs[[cl]]), "row(s) differ\n")
+            print(utils::head(diffs[[cl]], 3))
+        }
+    }
+
+    prov <- res$provenance
+    check(nrow(prov) == nrow(batch),
+          "provenance names every replayed row")
 }
 
 cat("\n")

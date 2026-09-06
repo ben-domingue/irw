@@ -76,20 +76,23 @@ KEY_MAP = {
     "date": "Date",
 }
 
-##Sheets treats a leading one of these as a formula. A value starting with "="
-##is not hypothetical here: licence and reference fields carry URLs and the
-##occasional "-" placeholder.
-FORMULA_PREFIXES = ("=", "+", "-", "@")
-
-
 def clean(value):
-    """One cell, safe to import into Sheets and to read back with csv."""
+    """One cell, normalised but never rewritten.
+
+    Deliberately does NOT escape a leading "=", "+", "-" or "@". That was a
+    paste-path mitigation -- Sheets reads those as a formula -- and this file
+    is never pasted into Sheets: 02_biblio.R reads it directly. Prefixing an
+    apostrophe here corrupts the value instead of protecting it. Caught by
+    tests/manual_dict_test.R replaying the 7/13/2026 batch, where two Notes
+    cells legitimately begin "-1 sentinel values ..." and came back as
+    "\'-1 sentinel values ...".
+
+    If someone ever does want to import this file into Sheets by hand, escape
+    it at that point. Do not reintroduce it here.
+    """
     if value is None:
         return ""
-    text = str(value).replace("\r\n", "\n").replace("\r", "\n").strip()
-    if text.startswith(FORMULA_PREFIXES):
-        text = "'" + text
-    return text
+    return str(value).replace("\r\n", "\n").replace("\r", "\n").strip()
 
 
 def main():
