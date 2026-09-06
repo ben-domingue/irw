@@ -5162,3 +5162,27 @@ Provenance coverage of the live corpus is 296 of 746.
 Nothing was changed. Stamping these three would need a date, and inventing one is worse than the
 gap — the honest options are the release that first carried them, or a marker saying the upload
 date is unrecorded. That is Ben's call, and it should come after a `count(*)` confirms the content.
+
+### The three strays: kept, and marked `uploaded=unrecorded` — 2026-09-05
+
+Ben's rulings. **`twod_rotation_mather2023` stays public** — "so long as it is not incorrect I
+don't mind if it is public." The hold from 2026-08-24 is therefore **released**; it was an
+editorial judgment (a row with no item text was judged not worth shipping), not a correctness
+one, and correctness holds up: route B matched all 58 published per-item N **exactly**, live
+proportion correct tracks the paper's means at r=0.9999, and the 70 items with n>10000 are
+exactly S7's 58 plus the 12 the study's own code drops. The extraction-time `audit_batch` WARN is
+the two things already known and disclosed — 100% blank `item_text` (the 304 items are pictures)
+and the pilot-vs-final-pool row-count split, which is itself corroborating rather than anomalous.
+
+All three are stamped **`uploaded=unrecorded`** rather than a date, per Ben: the real upload date
+is not recoverable and inventing one would be worse than the gap. Written into
+`batch_004`, `batch_011`, `batch_012` and `batch_014` provenance plus 3 rows of the root
+`mapping_verification.csv`; each line round-tripped byte-identically and an independent re-read
+confirms nothing else moved.
+
+**Note the predicate split this creates, deliberately.** `check_issues_page.R` and
+`draft_issues_qmd.R` both test `nzchar(trimws(uploaded)) && != "NA"`, so `unrecorded` reads as
+**shipped** to them — which is correct, because these three are live in v17.0, and it means they
+now become DUE for issues-page entries instead of being invisible. The stricter
+`^\d{4}-\d{2}-\d{2}$` test used for stamping audits still reads them as undated, which is also
+correct. A human reading the file learns the honest thing: it shipped, we do not know when.
