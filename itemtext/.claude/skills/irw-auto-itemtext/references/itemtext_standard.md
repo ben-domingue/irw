@@ -388,6 +388,59 @@ is not useful to a data user and tacitly advertises that IRW published material 
 have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
 trail; do not add them to `itemtext_issues.qmd`.
 
+### HEXACO-PI-R — ruled 2026-09-05, and IRW ships none of it
+
+**IRW does not ship HEXACO-PI-R item wording.** Ben's ruling, in full: *"let's err on the side of
+*not* having things. so do not host."* It was given on #1945 in answer to two escalations at once
+— the hexaco.org clause and a CC BY-NC 3.0 deposit — so it is a ruling about the shape, not about
+one table.
+
+The clause, from hexaco.org/hexaco-inventory, is the free-but-restricted shape already named for
+TIMSS and PROMIS:
+
+> "You can download any of these forms free of charge, but only for the purpose of non-profit
+> academic research. ... Please contact the authors if you would like to use the inventory for
+> non-academic purposes."
+
+**This overturns a specific earlier reading, and the reading is worth recording because it was
+reasonable.** batch_201 shipped `sun_2025_morality_study1_fairnessHEXACO` after testing the clause
+against the 2026-09-04 rulings and finding it carried *neither* a quotable fee *nor* a
+no-redistribution bar — the two things those rulings made decisive — and flagged the residual
+"must either be password-protected or not searchable through search engines" term for Ben rather
+than deciding it. That test was applied correctly. The ruling is that passing it is not sufficient:
+where a rights holder has attached *any* stated use restriction to the only published source of the
+wording, IRW does not host it. **Do not re-derive this from the fee/redistribution tests; they will
+give the wrong answer here.**
+
+**Scope applied 2026-09-05.**
+
+- `sun_2025_morality_study1_fairnessHEXACO` — extracted in batch_201, removed before merge. Never
+  uploaded, so not a withdrawal.
+- `gilbert_meta_32` — CC BY-NC 3.0, never extracted. `pending` -> `excluded`.
+- `de_vries_2022_hexaco_{self,other,meta}` — blocked at batch_026 on this exact clause, with notes
+  naming a ruling from Ben as the one thing that would change them. `blocked` -> `excluded`: a
+  settled decision, not a gap for a future round to retry.
+- `face_memory_test` — stays `blocked`. The ruling settles the HEXACO half (items 76-175); the
+  image/asset block on the face half (1-75) is independent and unresolved.
+- **`sv-maia2_randelovic_2021_hexaco60` and `_hexaco100` — LIVE, and to be withdrawn.** This is the
+  answer to the class escalation logged in the round log on 2026-09-04. See below: the deletion had
+  not been carried out when this was written.
+
+**What is NOT covered — check the instrument, not the name.** `dasilva_2019_hexaco24` is the Brief
+HEXACO Inventory, published CC BY, and is untouched. The other 26 live `sun_2025_morality_*`
+item-text tables are the study's own moral-character-rating template, not HEXACO-PI-R — which is
+why the one HEXACO block in that deposit is the table the deposit itself named `fairnessHEXACO`.
+And the *response* tables are not in scope at all: this clause governs the instrument wording, not
+data a study collected with it, so every HEXACO response table stays in IRW.
+
+**OUTSTANDING at the time of writing: the two live tables are still published.** The takedown was
+scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
+asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
+`APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
+describe what is live, and removing them early would make the tracked baseline lie. Both are in
+`irw_text` v17.0, which is released, so the wording survives in v17.0 until the next release and the
+deletion is recoverable up to that point and not after it.
+
 ### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
 
 **A task whose stimuli are images with no text still gets an item table; `item_text` is left blank
