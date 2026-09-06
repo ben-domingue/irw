@@ -5354,3 +5354,32 @@ corpus-wide blank count 18 -> 17. (3) Pre-existing and not from this round:
 `extremera_2016_shs` still ships IRW-generated English with no issues-page entry.
 
 Cap not reached (batch_040 is the cap; this was 037).
+
+### batch_038 round killed by the OS ~7s in — 6 rows left `in_progress`, nothing extracted — 2026-09-06
+
+Fired straight after batch_037. The round agent was killed for host memory pressure at
+roughly 15:26:40, about seven seconds after Step 1 wrote its claim (claim timestamp
+15:26:33). Same failure mode as the batch_032 and batch_033 rounds.
+
+**State it left, verified rather than assumed:**
+- `itemtables/batch_038/` exists and is **empty** — zero files, so there are no half-written
+  extractions and no sidecars to reconcile against.
+- Six rows sit `in_progress`: `gerber_2022_eas_temperament`, `gesbert_2021_tdeq`, and the four
+  `ghanbari_2016_helma_*`.
+- No round processes survive (`pgrep` clean), so nothing is still writing.
+- batch_037's own commit `e66c7c3` was already pushed before the kill and is unaffected. The
+  round's pre-round `origin/main` merge (`4d94c9e`) was pushed afterwards so the branch does
+  not drift.
+
+**Not reconciled — that is deliberate.** Step 0 reserves flipping `in_progress` back to
+`pending` for a human, and this session did not do it. The stated reason for the rule (a dead
+round may have left half-written files) is demonstrably absent here, but the call is still Ben's.
+
+**Until those six rows are reconciled, no further round can start** — Step 0's in-flight check
+stands the next round down, correctly.
+
+**Contributing context worth checking before the next round:** at the time of the kill this
+laptop was also running a `red_up` PISA upload and a local http server from two other Claude
+sessions, and swap was at 1.9G of 2.0G. Available memory had recovered to 20G immediately
+after. Rounds were already halved from 12 tables to 6 for memory on 2026-09-05; the constraint
+here looks like concurrency with other sessions rather than the round size.
