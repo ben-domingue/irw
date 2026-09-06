@@ -428,15 +428,25 @@ give the wrong answer here.**
 
 **What is NOT covered — check the instrument, not the name.** `dasilva_2019_hexaco24` is the Brief
 HEXACO Inventory, published CC BY, and is untouched. The other 26 live `sun_2025_morality_*`
-item-text tables are believed to be the study's own moral-character-rating template rather than
-HEXACO-PI-R — the deposit named its one HEXACO block `fairnessHEXACO`, and
-`itemtext/itemtables/pilot/audit_confirmed.csv` records the rest as "the same moral-character-rating
-item template". **That is documentary, not a reading of the wording:** the live fetch to check it
-failed on the Redivis outage of 2026-09-05 and has not been re-run. The residual risk is Study 3,
-whose `extraversion`, `openness` and `neuroticism` tables carry factor names from a personality
-inventory rather than a moral-character scale — though `neuroticism` is a Big Five label and not
-HEXACO's `Emotionality`, which is weak evidence against HEXACO. **Re-run the check when Redivis is
-back**; if any of those 26 turn out to hold HEXACO-PI-R wording, they fall under this ruling too.
+item-text tables were checked on 2026-09-06, once Redivis reads came back, and **none of them are
+HEXACO-PI-R** — the HEXACO scoping above is confirmed. Study 1 and the moral-character subscales
+are the study's own template (`itmcq*`, e.g. "[target's name] consistently tells the truth.").
+
+**But the check turned up a different instrument, and it is the same shape as HEXACO.** Study 3's
+`extraversion`, `openness` and `neuroticism` tables carry item codes `itbfi2*` and verbatim
+**BFI-2** wording ("Is outgoing, sociable.", "Worries a lot.", "Is fascinated by art, music, or
+literature."). Soto & John hold the BFI-2 copyright; it is free for non-commercial research, with
+commercial use requiring written permission. That is the hexaco.org shape almost exactly — free of
+charge, restricted by stated purpose — so **the 2026-09-05 ruling appears to reach it. Escalated to
+Ben, not decided here.**
+
+Two things make this worth reading before the #1897 audit runs. First, `metadata/itemtext_metadata.csv`
+describes these tables as "Ratings of extraversion for nominated targets" — the `instrument` field
+names the *construct*, not the instrument, so **an instrument-name scan will not find them**; only
+reading the wording does. Second, a corpus scan for BFI/Big-Five instrument labels returns just ~10
+live tables and most are IPIP "Big-Five Factor Markers", which are public domain and unaffected —
+so the label-based blast radius looks small precisely because the label is not where the answer is.
+
 And the *response* tables are not in scope at all: this clause governs the instrument wording, not
 data a study collected with it, so every HEXACO response table stays in IRW.
 
@@ -444,9 +454,12 @@ data a study collected with it, so every HEXACO response table stays in IRW.
 scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
 asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
 `APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
-describe what is live, and removing them early would make the tracked baseline lie. Both are in
-`irw_text` v17.0, which is released, so the wording survives in v17.0 until the next release and the
-deletion is recoverable up to that point and not after it.
+describe what is live, and removing them early would make the tracked baseline lie. **Version state, rechecked 2026-09-06:** `irw_text` is now at **v19.0** — two release cuts happened
+after this was staged, and both tables are still live in it (732 tables). No draft is open, so
+`dataset(name, version="next")` raises "Not found: datapages.irw_text:next"; that is a released
+dataset with no draft, not an outage. The script now opens one via `create_next_version`, exactly as
+`red_up.push.open_draft` does. Deleting from the draft only takes effect when that draft is
+released.
 
 ### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
 
