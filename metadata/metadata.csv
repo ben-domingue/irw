@@ -4055,15 +4055,6 @@ wu_2024_video_addiction,7840,5,560,14,14,560,1,id| item| resp,item_response_ware
 wu_2025_drone_delivery,18924,5,498,38,38,498,1,id| item| resp| itemcov_construct| cov_sex| cov_age| cov_education| cov_residence| cov_occupation| cov_online_shopping_frequency,item_response_warehouse_4,FALSE
 wurm_2016_hbi,235880,7,5897,40,40,5897,1,id| item| resp| cov_sex| cov_age| cov_employment,item_response_warehouse_3,FALSE
 wurm_2016_mdi,58970,6,5897,10,10,5897,1,id| item| resp| cov_sex| cov_age| cov_employment,item_response_warehouse_3,FALSE
-wvs_panasiuk_environment,9468249,5,98531,21,96.0941125128132,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_family,30208223,11,98531,67,306.585978017071,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_national_identity,44185162,11,98531,98,448.439191726462,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_perception_of_life,91526407,11,98531,203,928.909754290528,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_politics_society,30403526,11,98531,265,308.568125767525,114730.286792453,1.16440802176425,item| id| wave| date| cov_gender| cov_age| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_religion_morality,53202542,11,98531,118,539.957394119617,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_science,901738,10,98531,2,9.15182023931555,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_security,12624332,5,98531,28,128.125483350418,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
-wvs_panasiuk_work,20739974,11,98531,46,210.491865504258,450869,4.57591011965777,id| wave| date| cov_gender| cov_age| item| resp| item_family,item_response_warehouse_2,TRUE
 xiao_2026_entrepreneurial_intention,55560,5,1389,40,40,1389,1,id| item| resp| cov_gender| cov_academic_year| cov_education_level| cov_major_group| cov_family_location| cov_only_child| cov_household_income,item_response_warehouse_4,FALSE
 xie_2026_student_questionnaire,1170,3,78,15,15,78,1,id| item| resp,item_response_warehouse_3,FALSE
 xiong_2025_dass21,20454,4,974,21,21,974,1,id| item| resp| cov_age| cov_gender| cov_sample,item_response_warehouse_3,FALSE

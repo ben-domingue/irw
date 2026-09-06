@@ -19,41 +19,58 @@ confusing thing about this project's layout, so it is stated first:
 |---|---|---|
 | `src` | `ben-domingue/irw` | Per-dataset processing scripts, the metadata pipeline, automated dataset finding |
 | `irw_site` | `datapages/irw` | The Quarto site published at [itemresponsewarehouse.org](https://itemresponsewarehouse.org) |
-| `Rpkg` | `itemresponsewarehouse/Rpkg` | The `irw` **R** package (v1.0.1) |
-| `Python-pkg` | `itemresponsewarehouse/Python-pkg` | The `irw` **Python** package (v0.0.2) |
+| `Rpkg` | `itemresponsewarehouse/Rpkg` | The `irw` **R** package |
+| `Python-pkg` | `itemresponsewarehouse/Python-pkg` | The `irw` **Python** package |
 
 `src` is on a personal account, the site on `datapages`, and the two client
 packages on the `itemresponsewarehouse` org. There is no technical reason for
 this; it is history. Neither package is on CRAN or PyPI — both install from
 GitHub.
 
+Package versions are deliberately not written here: they moved four times in a
+week and both numbers in this table were wrong within days of being typed. Read
+them from `Rpkg/DESCRIPTION` and `Python-pkg/pyproject.toml`, which cannot go
+stale.
+
 ## 2. Redivis
 
 All data lives on Redivis under the account **`datapages`**. Everything else in
 this repository reads that from one place:
 
-> `IRW_OWNER`, `IRW_CORE_DATASETS` and `IRW_AUX_DATASETS` in
-> [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative for
-> the owner and the dataset names.
+> `IRW_OWNER`, `IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS` and `IRW_AUX_DATASETS`
+> in [`metadata/redivis_config.R`](metadata/redivis_config.R) are authoritative
+> for the owner and the dataset names.
+
+> **Redivis caps any single dataset at 1000 tables.** That cap is the reason
+> sharding exists, and it applies to *every* dataset, not just the response data.
 
 **Core shards** hold the response data. A *shard* here is simply one of several
 Redivis datasets with identical structure, named `item_response_warehouse`,
-`item_response_warehouse_2`, and so on — a new one is added whenever the warehouse
-outgrows the last. Which shard a given table is in is not predictable
+`item_response_warehouse_2`, and so on — a new one is added when the last hits
+the cap. Which shard a given table is in is not predictable
 from its name, so the client packages search them **newest-first** and return the
 first match — meaning a name present in more than one shard resolves to its most
 recent copy.
 
-**Auxiliary datasets** hold everything that is not response data: `irw_meta` (all
-metadata, biblio, tags and collections tables), `irw_text` (item text), plus one
-each for the `simsyn`, `competitions` and `nominal` sources.
+**Item text shards the same way**, for the same reason: `irw_text`, `irw_text_2`,
+… in `IRW_TEXT_DATASETS`, searched newest-first, first match wins. A table stays
+reachable from whichever shard already holds it, so tables are never moved
+between shards — moving one *creates* the shadowing problem rather than solving
+it. `Rpkg/inst/developer/warehouses.md` carries the checklist for adding a shard
+of either kind.
+
+**Auxiliary datasets** hold everything else: `irw_meta` (all
+metadata, biblio, tags and collections tables), plus one
+each for the `simsyn`, `competitions` and `nominal` sources. These are single
+datasets rather than shard lists only because none is near the cap.
 
 How many of each exist today is *not* recorded here, deliberately — that number
 grows, and a count written into prose is wrong the day it changes. `redivis_config.R`
 is the answer:
 
 ```r
-source("metadata/redivis_config.R"); IRW_CORE_DATASETS; IRW_AUX_DATASETS
+source("metadata/redivis_config.R")
+IRW_CORE_DATASETS; IRW_TEXT_DATASETS; IRW_AUX_DATASETS
 ```
 
 Until August 2026 all of this lived under the personal Redivis account
@@ -66,7 +83,10 @@ older scripts still work.
 > source of truth. They are reconcilable — this repo carries plain dataset
 > *names*, the two packages additionally carry version *hashes* — but a new shard
 > must be added in all three, and nothing currently checks that they agree. They
-> have already drifted once (#1733).
+> have already drifted once (#1733). Each file now carries *two* shard lists,
+> core and item text (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`,
+> `.irw_datasource_specs$core`/`.irw_itemtext_specs`,
+> `MAIN_REFS`/`ITEMTEXT_REFS`), so adding a shard means six edits, not three.
 
 ## 3. Google Sheets
 
@@ -192,10 +212,12 @@ draft is touched, and the draft version's own `createdAt` resets on each upload.
 `red_up` replaced thirteen near-identical copies of one script, each hardcoding
 a different dataset, so the destination used to be decided by which file you
 happened to run. It reads the dataset list from `metadata/redivis_config.R`,
-defaults by filename (`*__items.csv` → `irw_text`, otherwise the newest shard),
-checks every shard for an existing table of the same name before writing —
-because a copy in a newer shard *shadows* the older one rather than replacing
-it — and verifies each table with a `count(*)` afterwards.
+defaults by filename (`*__items.csv` → the newest item-text shard, otherwise the
+newest core shard), checks every shard of both kinds for an existing table of the
+same name before writing — because a copy in a newer shard *shadows* the older one
+rather than replacing it — and verifies each table with a `count(*)` afterwards.
+When a name is already in use somewhere that could not legally hold the file, it
+stops rather than routing across families.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
@@ -211,7 +233,7 @@ When two documents disagree, this is the order of precedence:
 | How anything gets uploaded to Redivis | [`red_up/README.md`](red_up/README.md) |
 | Whether a table meets the standard | [`irw_validate`](irw_validate/README.md) — `datastandard.md` states the rules, `irw-validate` is the one thing that enforces them, and `red_up` will not upload a table it blocks |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
-| Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by `metadata/version_manifest_cron.sh`. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
+| Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by the `version-manifest` GitHub Action (13:30 UTC), which opens and merges its own PR when the file changes and files an issue when it cannot. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |

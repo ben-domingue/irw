@@ -4,8 +4,8 @@ An IRW-based paper cannot currently be replicated, because the data underneath
 it moves. Redivis versions each dataset independently -- `irw_meta` is at v19.x
 while `irw_simsyn` has had two releases ever -- so there is no corpus-wide
 number to cite. This module writes one down: a git-tracked file recording, for
-every point in the corpus' history, the released version of all eleven
-datasets. That is a lockfile, the same shape as `renv.lock`, and it is what
+every point in the corpus' history, the released version of every dataset
+registered in `redivis_config.R`. That is a lockfile, the same shape as `renv.lock`, and it is what
 `irw_version()` in the R and Python packages resolves against. See #1705.
 
     python3 -m red_up.manifest                 # refresh: append anything new
@@ -17,8 +17,8 @@ datasets. That is a lockfile, the same shape as `renv.lock`, and it is what
 Exit codes: 0 ok - 1 the file is stale or a rebuild would renumber - 2 bad input.
 
 **Why a full snapshot rather than a log of releases.** Every IRW version
-carries a row per dataset, so the file repeats itself and grows by eleven lines
-a release. The alternative -- one line per release, with clients deriving the
+carries a row per dataset, so the file repeats itself and grows by one line per
+dataset a release. The alternative -- one line per release, with clients deriving the
 snapshot by carrying values forward -- is a quarter the size and was rejected:
 the question a person actually asks is "what was everything pinned to at v333",
 and it should be answerable by looking, not by reimplementing a carry-forward in

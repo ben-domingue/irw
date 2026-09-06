@@ -34,9 +34,37 @@ HEDGE <- paste0(
     "not (the )?order within|",
     "rests on (an|the) assumption|is an assumption|",
     "could not be (confirmed|verified|established)|",
-    "(does not|do not|did not) (establish|settle|pin)|",
+    "(does not|do not|did not) (establish|settle|pin)|",   # see WORDING_OBJECT below
     "(remain|remains|are|is) unconfirmed|",
     "only pins|pins only|verifies .* not ")
+
+# Step 5b verifies the code-to-item MAPPING. A good evidence string routinely ends by
+# saying the numeric route cannot speak to the WORDING -- "what this does NOT establish
+# is the words", "no numeric route can check a translation" -- which is true, in scope
+# for the note and out of scope for the status. Matching it produced a WARN that was
+# hand-adjudicated and dismissed in five consecutive batches (024, 026, 027, 028, 029,
+# 030) and accounted for 31 of the corpus's 40 WARNs, which is how a check stops being
+# read. See ben-domingue/irw#1966.
+#
+# So a "does not establish" hit is discarded when what follows names the wording rather
+# than the mapping. Deliberately a short window: the object of the verb sits within a
+# clause of it, and a wider window would start swallowing genuine hedges that merely
+# happen to mention text later in the paragraph.
+WORDING_OBJECT <- "(word|wording|words|translat|text|language|phrasing|anchor|option)"
+WORDING_WINDOW <- 80L
+
+drop_wording_hedges <- function(ev, hits) {
+    if (!length(hits)) return(hits)
+    keep <- vapply(hits, function(h) {
+        starts <- gregexpr(h, ev, fixed = TRUE)[[1]]
+        # keep the hit if ANY of its occurrences is about something other than wording
+        any(vapply(starts, function(st) {
+            tail <- substr(ev, st, st + nchar(h) + WORDING_WINDOW)
+            !grepl(WORDING_OBJECT, tail, ignore.case = TRUE)
+        }, logical(1)))
+    }, logical(1))
+    hits[keep]
+}
 
 # Batches requested but skipped for want of a verification file. A skip used to
 # be a bare message(), which meant an unverified batch passed this gate by being
@@ -78,6 +106,7 @@ for (i in seq_len(nrow(v))) {
 
     if (st == "VERIFIED") {
         hits <- regmatches(ev, gregexpr(HEDGE, ev, ignore.case = TRUE))[[1]]
+        hits <- drop_wording_hedges(ev, hits)
         if (length(hits))
             add("WARN", r$table, sprintf("VERIFIED but its evidence hedges (%s) -- should this be PARTIAL?",
                                           paste(unique(tolower(hits)), collapse = ", ")))

@@ -181,140 +181,163 @@ df$check <- str_sub(df$item, 1, 5)
 
 df_ctopp <- df %>%
   filter(grepl("ctopp",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_mf <- df %>%
   filter(grepl("wj_mf",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_kbit <- df %>%
   filter(grepl("kbit",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 
 df_wj_lw_grade <- df %>%
   filter(grepl("wj_lw",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_lw_wave <- df %>%
   filter(grepl("wj_lw",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pc_grade <- df %>%
   filter(grepl("wj_pc",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pc_wave <- df %>%
   filter(grepl("wj_pc",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pv_grade <- df %>%
   filter(grepl("wj_pv",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_pv_wave <- df %>%
   filter(grepl("wj_pv",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ak_grade <- df %>%
   filter(grepl("wj_ak",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ak_wave <- df %>%
   filter(grepl("wj_ak",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_sa <- df %>%
   filter(grepl("wj_sa",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wa_grade <- df %>%
   filter(grepl("wj_wa",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wa_wave <- df %>%
   filter(grepl("wj_wa",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_wf <- df %>%
   filter(grepl("wj_wf",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_ap <- df %>%
   filter(grepl("wj_ap",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_qc <- df %>%
   filter(grepl("wj_qc",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_told_grade <- df %>%
   filter(grepl("told",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_told_wave <- df %>%
   filter(grepl("told",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_spell_grade <- df %>%
   filter(grepl("wj_sp",df$check), grepl("g",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_wj_spell_wave <- df %>%
   filter(grepl("wj_sp",df$check), grepl("w",wave))%>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_tosrec <- df %>%
   filter(grepl("tosre",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
 df_topel <- df %>%
   filter(grepl("topel",df$check)) %>%
-  select(id, item, wave_temp, resp, treat, cov_project) %>%
+  select(id, item, resp, wave_temp, treat, cov_project) %>%
   rename("wave" = "wave_temp")
 
-write.csv(df_ctopp, "project_kids_ctopp.csv", row.names=FALSE)
-write.csv(df_wj_mf, "project_kids_wj_mf.csv", row.names=FALSE)
-write.csv(df_kbit, "project_kids_kbit.csv", row.names=FALSE)
-write.csv(df_wj_lw_grade, "project_kids_wj_lwid_grade.csv", row.names=FALSE)
-write.csv(df_wj_lw_wave, "project_kids_wj_lwid_wave.csv", row.names=FALSE)
-write.csv(df_wj_pc_grade, "project_kids_wj_pc_grade.csv", row.names=FALSE)
-write.csv(df_wj_pc_wave, "project_kids_wj_pc_wave.csv", row.names=FALSE)
-write.csv(df_wj_pv_grade, "project_kids_wj_pv_grade.csv", row.names=FALSE)
-write.csv(df_wj_pv_wave, "project_kids_wj_pv_wave.csv", row.names=FALSE)
-write.csv(df_wj_ak_grade, "project_kids_wj_ak_grade.csv", row.names=FALSE)
-write.csv(df_wj_ak_wave, "project_kids_wj_ak_wave.csv", row.names=FALSE)
-write.csv(df_wj_sa, "project_kids_wj_sa.csv", row.names=FALSE)
-write.csv(df_wj_wa_grade, "project_kids_wj_wa_grade.csv", row.names=FALSE)
-write.csv(df_wj_wa_wave, "project_kids_wj_wa_wave.csv", row.names=FALSE)
-write.csv(df_wj_wf, "project_kids_wj_wf.csv", row.names=FALSE)
-write.csv(df_wj_ap, "project_kids_wj_ap.csv", row.names=FALSE)
-write.csv(df_wj_qc, "project_kids_wj_qc.csv", row.names=FALSE)
-write.csv(df_told_grade, "project_kids_told_grade.csv", row.names=FALSE)
-write.csv(df_told_wave, "project_kids_told_wave.csv", row.names=FALSE)
-write.csv(df_wj_spell_grade, "project_kids_wj_spell_grade.csv", row.names=FALSE)
-write.csv(df_wj_spell_wave, "project_kids_wj_spell_wave.csv", row.names=FALSE)
-write.csv(df_tosrec, "project_kids_tosrec.csv", row.names=FALSE)
-write.csv(df_topel, "project_kids_topel.csv", row.names=FALSE)
+# Output goes to the standard location, and the three arguments below are not
+# cosmetic -- each repairs a defect that reached the published tables (#416,
+# all three measured on the live corpus 2026-09-04):
+#
+#   na = ""       the default `na = "NA"` wrote the literal string "NA" wherever
+#                 `treat` or `wave` was missing. Redivis then typed those
+#                 columns as *strings* with "NA" as a third level: 16 of the 23
+#                 tables carried 25,242 such `treat` values, and sibling tables
+#                 disagreed on the type of the same column.
+#   as.integer    `wave` was a character column, so it published quoted and was
+#                 typed string in some tables and integer in others.
+#   drop-empty    kbit has no wave (see the `mutate(wave = NA)` above), so it
+#                 shipped 80,865 rows of a column whose every value was "NA".
+#
+# Run from `data/`; override with IRW_OUT if you keep outputs elsewhere.
+OUT <- Sys.getenv("IRW_OUT", file.path("..", "automated_finding", "irw_output"))
+dir.create(OUT, recursive = TRUE, showWarnings = FALSE)
+irw_write <- function(df, name) {
+  if ("wave" %in% names(df)) df$wave <- as.integer(df$wave)
+  df <- df[, colSums(!is.na(df)) > 0, drop = FALSE]
+  write.csv(df, file.path(OUT, name), row.names = FALSE, na = "")
+}
+
+irw_write(df_ctopp, "project_kids_ctopp.csv")
+irw_write(df_wj_mf, "project_kids_wj_mf.csv")
+irw_write(df_kbit, "project_kids_kbit.csv")
+irw_write(df_wj_lw_grade, "project_kids_wj_lwid_grade.csv")
+irw_write(df_wj_lw_wave, "project_kids_wj_lwid_wave.csv")
+irw_write(df_wj_pc_grade, "project_kids_wj_pc_grade.csv")
+irw_write(df_wj_pc_wave, "project_kids_wj_pc_wave.csv")
+irw_write(df_wj_pv_grade, "project_kids_wj_pv_grade.csv")
+irw_write(df_wj_pv_wave, "project_kids_wj_pv_wave.csv")
+irw_write(df_wj_ak_grade, "project_kids_wj_ak_grade.csv")
+irw_write(df_wj_ak_wave, "project_kids_wj_ak_wave.csv")
+irw_write(df_wj_sa, "project_kids_wj_sa.csv")
+irw_write(df_wj_wa_grade, "project_kids_wj_wa_grade.csv")
+irw_write(df_wj_wa_wave, "project_kids_wj_wa_wave.csv")
+irw_write(df_wj_wf, "project_kids_wj_wf.csv")
+irw_write(df_wj_ap, "project_kids_wj_ap.csv")
+irw_write(df_wj_qc, "project_kids_wj_qc.csv")
+irw_write(df_told_grade, "project_kids_told_grade.csv")
+irw_write(df_told_wave, "project_kids_told_wave.csv")
+irw_write(df_wj_spell_grade, "project_kids_wj_spell_grade.csv")
+irw_write(df_wj_spell_wave, "project_kids_wj_spell_wave.csv")
+irw_write(df_tosrec, "project_kids_tosrec.csv")
+irw_write(df_topel, "project_kids_topel.csv")

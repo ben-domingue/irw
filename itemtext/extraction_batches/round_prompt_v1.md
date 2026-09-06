@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_022 already exists (round cap reached)
+- itemtables/batch_040 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -53,7 +53,7 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 12 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -63,7 +63,14 @@ the next round, and the wrapper will decline to start one for the same reason.
 ## Step 2 — Dispatch extraction (parallel subagents)
 
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
-they run in parallel. Twelve agents sits under the concurrency cap, so this costs no wall clock.
+they run in parallel.
+
+**SIX agents per round, halved from twelve on 2026-09-05 by Ben.** Twelve sat under the API
+concurrency cap, but not under this laptop's memory: the batch_033 round was killed by the OS
+partway through dispatch, and the batch_032 round before it was killed the same way after writing
+four of its twelve tables, costing seven tables of extraction work. The binding constraint is RAM
+on the machine the runner shares with a desktop session, not the concurrency cap. Do not raise
+this back without a reason that addresses memory.
 
 This replaces the earlier groups-of-3, which lost three tables to every single failure:
 batch_010's group 3 was killed by a content-filter error before it read anything, and all three
@@ -163,6 +170,13 @@ Each subagent prompt must tell it to:
   already did it and the result merely looks like evidence. Skip only for data_labels tables, where
   the source file itself ties code to text.
 - NOT touch itemtables/pilot/pending_index_notes.csv (a separate, older file).
+- **NOT run any batch-wide script.** `normalize_nulls.R`, `audit_batch.R`, `verify_batch.R` and
+  `lint_verification.R` all take the BATCH DIRECTORY as their argument, so a subagent running one
+  reaches across every sibling's files while those siblings are still writing them. They belong to
+  the orchestrator, at Step 4, after every agent has finished. In batch_025 three agents correctly
+  declined and a fourth ran `normalize_nulls.R` anyway; it was harmless only because that script is
+  idempotent and the orchestrator's own Step 4 run found nothing left to change. A subagent's scope
+  is its OWN table's files, full stop.
 
 Wait for all agents to finish.
 
@@ -325,7 +339,11 @@ response data — several WARNs this session pointed at data defects worth their
 - Append an entry to extraction_batches/round_log.md: batch id, timestamp, table count,
   pass/fail counts, and anything notable (systemic access issues, Step 3b instrument mismatches,
   dictionary/metadata problems found).
-- If this round completed itemtables/batch_022, self-cancel now and log "cap reached".
+- Re-read the cap out of Step 0 of this prompt (the batch named as "already exists (round cap
+  reached)"). If the batch you just completed IS that batch, the cap is now reached: log "cap
+  reached" in the same round_log entry and stop. Otherwise end normally.
+  Read the number from Step 0 rather than trusting one written here -- this line used to name a
+  fixed batch and was still saying `batch_022` while rounds 023, 024 and 025 ran past it.
 - Otherwise end normally; the next firing picks up the next batch.
 
 Never run red_up — uploading is a separate, explicit, human-triggered step.

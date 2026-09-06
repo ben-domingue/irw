@@ -1,9 +1,99 @@
+# ============================================================================
+# WITHDRAWN 2026-09-05 -- DO NOT RUN, DO NOT UPLOAD (irw#1871)
+#
+# The nine `wvs_panasiuk_*` tables this script produced were removed from the
+# IRW corpus on 2026-09-05 and are gone from `item_response_warehouse_2` as of
+# v15.0. This is a rights decision, not a data-quality one.
+#
+# The WVS trend file is released under conditions of use that require the data
+# be used for non-profit purposes and that "the data files themselves are not
+# redistributed". These tables are respondent-level microdata -- one row per
+# person-item response, with each respondent's age, sex, country and wave --
+# so whether republishing them counts as redistribution is a real question
+# rather than a technicality. Ben's call was to carry no risk on it at all.
+#
+# Everything below is kept as the record of how the tables were built and what
+# was wrong with them (id collision, negative missing codes in the covariates,
+# the "NA"-as-string blow-up), because that diagnosis is cited from #1842 and
+# #1779. It is NOT kept as something to run: the fixes were never verified
+# end to end, the source file was never obtained, and re-running this would
+# put the tables back.
+#
+# If the rights question is ever settled in favour of republishing, delete this
+# block deliberately -- do not comment it out to "just test something".
+# ============================================================================
+stop("wvs_panasiuk_* was withdrawn from IRW on 2026-09-05 on rights grounds ",
+     "(irw#1871). This script is kept as a record and must not be run. ",
+     "Read the header before removing this stop().")
+
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path)) 
 rm(list = ls ())
 library(tidyverse)
 library(haven)
 
-df <- read_csv("WVS_TimeSeries_4_0.csv")
+# The trend file is behind a conditions-of-use acceptance at
+# https://www.worldvaluessurvey.org/WVSEVStrend.jsp that a person has to click
+# through -- there is no scriptable download. This script was written against
+# `WVS_TimeSeries_4_0.csv`, but the site now publishes **v4.1 only**, and in
+# SPSS / Stata / R / SAS -- there is no CSV any more. So rather than name one
+# file, take whichever the downloader actually got. Drop it anywhere in this
+# directory and re-run (irw#1871).
+wvs_read <- function(dir = ".") {
+  pat <- "(?i)^WVS_?(Trend|TimeSeries)_.*\\.(rds|rdata|csv|dta|sav)$"
+  hits <- list.files(dir, pattern = pat, full.names = TRUE)
+  if (length(hits) == 0) {
+    stop("No WVS trend file found in ", normalizePath(dir), ".\n",
+         "Accept the conditions of use at ",
+         "https://www.worldvaluessurvey.org/WVSEVStrend.jsp and download ",
+         "'WVS_Trend_1981_2022_v4.1 R (rds extension)' (or the Stata/SPSS/CSV ",
+         "build -- any of them is read here), then put it in this directory.")
+  }
+  if (length(hits) > 1) {
+    stop("More than one WVS trend file here, so which one is ambiguous:\n  ",
+         paste(basename(hits), collapse = "\n  "))
+  }
+  f <- hits[[1]]
+  message("Reading ", basename(f))
+  ext <- tolower(tools::file_ext(f))
+  out <- switch(
+    ext,
+    rds   = readRDS(f),
+    rdata = {
+      e <- new.env()
+      nm <- load(f, envir = e)
+      if (length(nm) != 1) stop(basename(f), " holds ", length(nm),
+                                " objects; expected one data frame")
+      get(nm, envir = e)
+    },
+    csv = readr::read_csv(f, show_col_types = FALSE),
+    dta = haven::read_dta(f),
+    sav = haven::read_sav(f),
+    stop("Do not know how to read a .", ext, " file")
+  )
+  # SPSS/Stata/rds builds carry haven labels. `wvs_na()` below compares against
+  # the bare codes -1..-5, and a labelled vector does not compare the way a
+  # numeric one does, so strip the labels rather than debug it downstream.
+  out <- haven::zap_labels(haven::zap_missing(as.data.frame(out)))
+  tibble::as_tibble(out)
+}
+
+df <- wvs_read()
+
+# v4.0 is what this script was written against and v4.1 is what is downloadable.
+# The item columns are picked up by prefix so a renamed item is harmless, but
+# these six carry the structure -- respondent, wave, date, country, sex, age --
+# and a silent rename in any of them would produce a table that looks fine and
+# is wrong. Fail here instead.
+wvs_required <- c("S006", "S002VS", "S012", "COUNTRY_ALPHA", "X001", "X003")
+wvs_absent <- setdiff(wvs_required, names(df))
+if (length(wvs_absent) > 0) {
+  stop("The trend file is missing ", length(wvs_absent),
+       " structural column(s): ", paste(wvs_absent, collapse = ", "), ".\n",
+       "This script was written against v4.0; if v4.1 renamed them, map the ",
+       "new names here rather than downstream. Columns present that look ",
+       "related: ",
+       paste(grep("^(S0|X0|COUNTRY)", names(df), value = TRUE), collapse = ", "))
+}
 
 # WVS codes every kind of non-response negatively -- -1 don't know, -2 no
 # answer, -3 not applicable, -4 not asked, -5 missing -- in *every* variable,

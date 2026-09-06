@@ -7,18 +7,30 @@
 # The reasoning is worth keeping, because "add a scheduler later" is the obvious
 # wrong turn:
 #
-#   - The bottleneck is triage, not the trigger. Roughly 8 of the 12 tables in a
+#   - The bottleneck is triage, not the trigger. Roughly two thirds of the tables in a
 #     round need a human go/no-go (BATCH_PROCESS, "Triage and staging"), and at
-#     ~1,165 pending that is ~98 rounds. Any cadence faster than "when someone is
+#     ~1,009 pending and 6 tables a round (halved from 12 on 2026-09-05, for memory
+#     on this laptop) that is ~168 rounds. Any cadence faster than "when someone is
 #     ready to triage a batch" just grows an unreviewed branch -- which is also
 #     what makes this script's pre-round merge of origin/main start conflicting,
 #     and a failed merge stops the queue entirely.
-#   - A round costs real money. Measured on batch_019 (2026-09-04, and a SHORT
-#     round -- four of its agents were killed by 429s): 670K output tokens, 2.3M
-#     cache writes and 49.4M cache reads across the orchestrator and 12
-#     subagents, about $56 at Opus 5 list rates. A clean round is nearer $60-70,
-#     and draining the queue is $5.5-7k. Nothing should be able to spend that on
-#     a timer.
+#   - A round is a large token spend. Quoted in TOKENS, not dollars: this is
+#     subscription usage, nothing in the transcripts records a charge, and a
+#     dollar figure here was only ever tokens multiplied by list rates. Measured
+#     across four complete rounds (2026-09-04, orchestrator + 12 subagents summed
+#     from the jsonl under ~/.claude/projects/-home-ben-irw-queue-runner/):
+#       output      570-670K
+#       cache write 2.0-2.5M
+#       cache read   42-54M     <- the dominant term
+#     The SUBAGENTS are 85-94% of the cache reads and 35-40% of the output, so
+#     reading the orchestrator transcript alone understates a round about
+#     tenfold. Those figures are per 12-table round; at 6 tables a round the
+#     per-round cost roughly halves and the round count roughly doubles. The
+#     remaining queue is still ~4-5 BILLION cache-read and
+#     ~60M output tokens; an hourly cadence would be ~1.2B cache-read tokens a
+#     day. Nothing should be able to spend that on a timer. What a fired round
+#     actually consumes is rate-limit headroom -- which is what killed 8 of 12
+#     agents in batch_018 and 4 of 12 in batch_019.
 #   - GitHub Actions was considered and rejected (the version-manifest job moved
 #     there; this one should not). Three reasons: the work is fetching publisher
 #     and repository sources, and a datacenter IP gets bot-walled far more than
@@ -174,13 +186,30 @@ mkdir -p "$LOG_DIR"
     exit 1
   fi
   if [[ -d "$ITEMTEXT/itemtables/$cap" ]]; then
-    echo "SKIP: round cap reached ($cap exists). Raise it in Step 0 of BOTH"
-    echo "BATCH_PROCESS.md and round_prompt_v1.md to run more rounds. Note the"
-    echo "off-by-one: the cap allows rounds UP TO AND INCLUDING that batch."
+    echo "SKIP: round cap reached ($cap exists). Raise it in Step 0 of"
+    echo "round_prompt_v1.md -- the ONLY copy; BATCH_PROCESS.md no longer"
+    echo "duplicates it, so this is one edit. Commit it before running: this"
+    echo "script refuses a dirty worktree. Note the off-by-one: the cap allows"
+    echo "rounds UP TO AND INCLUDING that batch."
     exit 0
   fi
 
   echo "Guards clear: $pending pending, cap $cap not yet reached."
+
+  # Record which batch directories exist BEFORE the agent runs, so the checks
+  # after it can identify the batch this round actually created by difference.
+  #
+  # They used to infer it with `ls -d itemtables/batch_* | sort -V | tail -1`,
+  # which silently means "some other batch" the moment a directory that sorts
+  # after the runner's own lands in the tree. Hand-built ranges do exactly that
+  # -- itemtext#1945 claims batch_201-205 -- and so does any named batch, e.g.
+  # batch_enem_2023. Neither post-round check crashes when that happens; both
+  # just stop protecting, which is worse. The failed/blocked-wrote-a-CSV warning
+  # filters on `$batch == basename($batch_dir)` and matches nothing, and the
+  # round-completed check tests for an audit_report.csv that the other batch
+  # supplies. Difference is immune to naming and sort order alike.
+  _batches_before="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort)"
+
   echo "Launching round agent at $(date -Is)."
   echo
 
@@ -198,6 +227,19 @@ mkdir -p "$LOG_DIR"
   rc="${PIPESTATUS[0]}"
   echo
   echo "Round agent exited $rc at $(date -Is)."
+
+  # The batch this round created: present now, absent before. If the round made
+  # none (it stood down, or died before Step 3) this is empty, and every check
+  # below is written to treat empty as "no batch to vouch for" rather than
+  # falling back to a guess.
+  batch_dir="$(comm -13 <(printf '%s\n' "$_batches_before") \
+                        <(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort) \
+               | tail -1)"
+  if [[ -n "$batch_dir" ]]; then
+    echo "This round built: $(basename "$batch_dir")"
+  else
+    echo "This round built no new batch directory."
+  fi
 
   # A 429 does NOT fail the round. When subagents are killed by a rate limit or a
   # spend cap the orchestrator finishes and exits 0, so nothing above notices and
@@ -218,7 +260,6 @@ mkdir -p "$LOG_DIR"
   # failed or blocked that nevertheless HAS a __items.csv on disk. That is the
   # thing the batch_019 rescue was about, it needs no transcript parsing, and it
   # cannot false-positive on the agent talking about rate limits.
-  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
   if [[ -n "$batch_dir" ]]; then
     mismatch=""
     while IFS=, read -r tbl status batch _rest; do
@@ -258,15 +299,20 @@ mkdir -p "$LOG_DIR"
   # try to repair anything -- reconciling a half-finished round is a human decision,
   # and the work is usually salvageable rather than lost.
   left="$(awk -F, 'NR>1 && $2=="in_progress"' "$QUEUE" | wc -l)"
-  batch_dir="$(ls -d "$ITEMTEXT"/itemtables/batch_* 2>/dev/null | sort -V | tail -1)"
-  if [[ "$left" -gt 0 || ! -f "$batch_dir/audit_report.csv" ]]; then
+  if [[ "$left" -gt 0 || -z "$batch_dir" || ! -f "$batch_dir/audit_report.csv" ]]; then
     echo
     echo "ERROR: the agent exited 0 but the round did NOT complete."
     [[ "$left" -gt 0 ]] && echo "  - $left row(s) still in_progress"
-    [[ -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
+    [[ -n "$batch_dir" ]] || echo "  - no new batch directory was created (Step 3 never finished)"
+    [[ -z "$batch_dir" || -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
     echo
-    echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
-    echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    if [[ -n "$batch_dir" ]]; then
+      echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
+      echo "run the Step 4 gates, and close the round out by hand per BATCH_PROCESS.md."
+    else
+      echo "Do not re-run. No batch directory to inspect; reconcile queue_state.csv"
+      echo "by hand per BATCH_PROCESS.md before another round claims tables."
+    fi
     exit 1
   fi
 
@@ -298,7 +344,7 @@ mkdir -p "$LOG_DIR"
   # further it drifts from main the likelier the wrapper's pre-round merge is to
   # hit a conflict -- which stops the queue entirely, since a failed merge skips
   # the round. It is also the review surface the work actually needs: roughly 8
-  # of the 12 tables in a round want a human go/no-go before anything is staged
+  # of the tables in a round want a human go/no-go before anything is staged
   # for upload, and a PR is where that happens.
   #
   # MERGE THIS PR WITHOUT DELETING THE BRANCH. "Standing" depends on it: #1904

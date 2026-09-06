@@ -18,7 +18,7 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
-| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. |
+| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. **Known gap (irw#1955): the value space is `NC` only, so it cannot express an enforced fee or a no-redistribution clause — the two 2026-09-04 triggers — and as of 2026-09-04 it is set on zero live tables. Do not rely on it to find rights-affected tables; record the quoted term in `provenance.csv` and `public_note` as well.** |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
 | `instructions_translated`, `section_prompt_translated`, `item_text_translated`, `option_text_translated` | English translation of the correspondingly named field. Present only for instruments administered in a language other than English. |
 
@@ -181,13 +181,84 @@ WHOQOL wording came from openly licensed deposits — CC0 in the COACH case — 
 ruling it would ship. Ben ruled otherwise: a rights holder's explicit no-redistribution term is
 honoured even where the copy came from an open source.
 
-**What this does NOT do is generalise itself.** It is a ruling about the WHOQOL, reached by reading
-that instrument's actual terms. It leaves an open question that a later ruling should settle
-deliberately rather than by drift: whether *any* quotable no-redistribution clause should override
-the source licence, which would reverse the ECR-R decision for a whole class of instruments. Do not
-extend this to another instrument without asking — and note that finding the terms took a text proxy,
-because `cpcr.aut.ac.nz` returns 403 to a direct fetch and Manchester's user-information PDF fails on
-a TLS certificate mismatch. Absence of a retrievable clause is not absence of a clause.
+**This has since been generalised — the open question was settled on 2026-09-04.** As written, the
+WHOQOL ruling was a decision about one instrument, and it deliberately left open whether *any*
+quotable no-redistribution clause should override the source licence. Ben answered that on
+2026-09-04, ruling on the DSES (`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`, "Permission of author required
+to distribute or copy"): **yes, it generalises.** A quotable no-redistribution clause from the rights
+holder outranks the deposit's licence, whatever that licence is. You no longer need to ask before
+applying this to another instrument.
+
+Note that finding the WHOQOL terms took a text proxy, because `cpcr.aut.ac.nz` returns 403 to a
+direct fetch and Manchester's user-information PDF fails on a TLS certificate mismatch. **Absence of
+a retrievable clause is not absence of a clause** — that caution still stands, and is why the rule
+below is stated as a quote test rather than an inference.
+
+**The second 2026-09-04 ruling: an enforced licence fee also disqualifies.** Ruled on the TAS-20
+($40 per study, enforced — there is a 2021 *Molecular Autism* retraction over it). This generalises
+too, to any fee-licensed instrument. It withdrew `cucchi_2018_tas20` and `rmet_higgins_2022_tas` and
+blocked `ruiz_parra_2023_tas20`. It applies even where the source published the items under an open
+licence: `cucchi_2018_tas20`'s wording came from a CC BY 4.0 PeerJ article that printed all 20 items.
+
+**Both triggers are quote tests, and silence is permission.** Block only on something you can quote
+from the rights holder — an enforced fee, or an explicit no-redistribution clause. An instrument
+being merely copyrighted, commercially sold, well known, or reproduced somewhere without an explicit
+grant is **not** a block. If you cannot find and quote a restriction, extract normally; do not block
+on suspicion, and do not open a negotiation with a rights holder. Record the quoted sentence and its
+URL — a rights block with no quote in it is not a rights block.
+
+### No-redistribution clauses override the source licence — ruled 2026-09-04
+
+**A quotable clause barring redistribution of the instrument governs, even when IRW's wording came
+from an openly licensed deposit.** Ruled by Ben on `CV_OASIS_ODSIS_PPE_Novak_2020_DSES`: the Daily
+Spiritual Experience Scale requires registration with its author, and the Fetzer Institute copy
+states *"Permission of author required to distribute or copy"*. IRW's wording came from Underwood's
+own **CC BY 3.0** article; the clause was ruled to govern anyway.
+
+This is the open question the WHOQOL ruling above declined to settle by drift, now settled in the
+strict direction. Together with the fee-licence ruling it means **the source deposit's licence is no
+longer sufficient on its own** — a rights holder's own restriction on the instrument outranks it,
+whether that restriction is a redistribution bar or an enforced fee.
+
+**It still fires only on something you can quote.** Silence remains permission, exactly as under the
+NC rule: an instrument that is merely copyrighted, or reproduced without an explicit grant, is not
+blocked. What changed is that finding the clause on the rights holder's copy is now enough — you no
+longer get to rely on the deposit you happened to take the words from.
+
+**Consequence not yet worked through:** this narrows the ECR-R decision for a whole class of
+instruments, and already-shipped tables have never been audited against it. No re-audit has been
+run; a table shipped before 2026-09-04 under "the source licence governs" may not survive this rule.
+That sweep is outstanding work, not a settled position.
+
+### Fee-licensed instruments — ruled 2026-09-04
+
+**An enforced licence fee disqualifies an instrument's wording, even where IRW's copy came from an
+openly licensed deposit.** Ben ruled this on the TAS-20 (Toronto Alexithymia Scale), whose rights
+holders charge a per-study fee and have enforced it — a 2021 *Molecular Autism* paper was retracted
+over it.
+
+This is the deliberate extension the WHOQOL ruling above said should be settled rather than reached
+by drift, and it goes further than that one in a way worth being explicit about. The WHOQOL turns on
+a clause forbidding the *act* of distribution. This does not: `cucchi_2018_tas20`'s wording came
+from Cucchi, Hampton & Moulton-Perkins (2018), a **CC BY 4.0** PeerJ article that reproduced all 20
+items itself, and IRW is declining to redistribute text an open licensor already published. The
+argument against was put and the ruling stands: the fee is enforced against exactly this kind of
+reuse, and an open deposit does not extinguish it.
+
+**What fires it.** The rights holder levies a fee for use of the instrument, and there is evidence
+it is enforced. A scale being copyrighted, sold as part of a manual, or merely free-of-charge does
+not fire it — that boundary is unchanged from the NC rule above.
+
+**Scope.** Blocked on this rule so far: `cucchi_2018_tas20` (extracted, uploaded, then deleted from
+the draft), the already-live `rmet_higgins_2022_tas` (removed from the draft, so it disappears at
+the next release), and `ruiz_parra_2023_tas20` (blocked before extraction). Any future TAS-20 table
+is blocked by the same rule.
+
+**This one DOES generalise, unlike the WHOQOL ruling** — it is a rule about fee-licensed
+instruments, not about the TAS-20. Apply it to any instrument meeting the test above, and record the
+fee and the evidence of enforcement in `provenance.csv` `note` so the basis stays auditable. A
+withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
+do not blank the date to make the table look as though it never shipped.
 
 **But the instrument-level restriction is recorded, not ignored.** Where the rights
 holder states one, set `wording_rights=NC` on every row of that table and add an
@@ -207,3 +278,151 @@ responses as that package redistributes them. It says nothing about IEA's wordin
 is separate copyright under narrower terms. A table's dictionary licence is evidence about
 the response data only; go to the wording's own source for its terms. This recurs for any
 assessment redistributed through a package or similar wrapper.
+
+### Two pages, two terms, one rights holder — the SWLS, ruled 2026-09-04
+
+**When a rights holder publishes the same instrument under two different statements of terms, the
+terms of the page you actually took the wording from govern.** Ben ruled this on the Satisfaction
+With Life Scale, after batch_028 blocked `duboz_2021_swls` and shipped `dudasova_2021_swls` — same
+instrument, same batch, opposite verdicts.
+
+The two pages, both fetched directly on 2026-09-04:
+
+> "These scales are copyrighted by Ed Diener and his co-authors. Although copyrighted, all of these
+> scales may be used by researchers as long as proper credit is given… **The use of these scales is
+> permitted for non-commercial purposes only.**"
+> — eddiener.com/scales, applying collectively to the SWLS, SPANE and the Flourishing Scale
+
+> "The scale is copyrighted but **you are free to use it without permission or charge by all
+> professionals (researchers and practitioners) as long as you give credit to the authors** of the
+> scale: Ed Diener, Robert A. Emmons, Randy J. Larsen and Sharon Griffin…"
+> — labs.psychology.illinois.edu/~ediener/SWLS.html, which is also where `SWLS_English.doc` — the
+> file our extractions actually open — is hosted
+
+**Correct the record on one thing before using this.** The batch_028 orchestrator reported that both
+agents had misquoted the Illinois page and that it declares the SWLS *in the public domain*. It does
+not; the phrase does not appear on that page at all, checked directly. The agents' quotes were right
+and the re-check was wrong. So this is **not** the TIMSS 2003 shape — one page stating a
+public-domain claim and an NC restriction together, where the restriction governs. It is two separate
+pages stating different terms, and the TIMSS rule does not reach it.
+
+**The rule.** This is the ECR-R decision applied one level in: the licence of the source IRW actually
+copied from governs, and that stays true when both candidate sources belong to the same rights
+holder. So for the SWLS:
+
+- wording published in the **study's own openly licensed deposit** ships (this is what makes
+  `altahla_2024_swls` safe — it was rebuilt on 2026-08-17 to take `item_text` from the study's own
+  source-file headers, `mapping_basis=data_labels`, not from any Diener page);
+- wording taken from **`SWLS_English.doc` on the Illinois page** ships — that page distributes the
+  document and states no non-commercial restriction;
+- wording taken from **eddiener.com** does not — that page states one.
+
+**Record which page you opened.** The whole ruling turns on it, so `source_ref` must name the
+specific page, not "Diener's site". A table blocked for taking the words from eddiener.com is not
+determinately blocked: the same words are available from the Illinois page under terms that permit
+shipping, so it is a *retryable* verdict and belongs back in the queue as `pending`, not `blocked`.
+`duboz_2021_swls` was reopened on exactly that basis.
+
+**The weakness Ben accepted, stated plainly so nobody rediscovers it as a defect.** This lets an
+extractor take the more permissive of two pages from the same holder, which is close to
+forum-shopping. It was ruled the better error than the alternative, which would block ~11 SWLS tables
+and eventually reach a live one on terms the holder's own distribution page contradicts. If a rights
+holder ever withdraws or supersedes the permissive page, this ruling should be revisited rather than
+relied on.
+
+**Scope.** 14 SWLS-named tables: `altahla_2024_swls` and `campos_2023_swls` already shipped,
+`dudasova_2021_swls` ships under this ruling, `duboz_2021_swls` is reopened, and 10 remain pending.
+Each pending table takes the same three-way test above — the answer depends on which source published
+the wording, not on the instrument.
+
+### PROMIS and the HealthMeasures family — ruled 2026-09-05
+
+**IRW does not ship PROMIS item wording.** Ruled by Ben after batch_031, where three agents
+blocked their PROMIS tables and a fourth shipped one on the batch_022 precedent. The clause,
+from the rights holder's own Terms of Use (Approved Version 1.12-2017, section "Single Use,
+Reproducibility, and Distribution"), fetched independently three times — the PDF's md5 is
+`fe672ca0c092d6b324a8098ac049c7e3` and two agents plus the triage pass all retrieved it
+byte-identically:
+
+> "User shall not reproduce HealthMeasures Instruments except as needed to conduct the
+> authorized single use … User shall not distribute, publish, sell, license, or provide
+> HealthMeasures products, by any means whatsoever, to third parties not involved with the
+> authorized single use as stated above, without the prior written agreement of the Provider."
+
+That is a quotable redistribution bar, so the DSES ruling applies unchanged: **it governs even
+though IRW's copies came from CC0 deposits.** The same section also reads "publicly available
+for use without licensing or royalty fees for individual research", the free-but-restricted
+shape already ruled on for TIMSS and HEXACO — free of charge is not free of terms.
+
+**Adaptations are covered too.** Ruled the same day on the three `evpromisi_stone_2021_dd*`
+tables, whose wording is the *study's own* modified daily-diary rewrite of PROMIS bank items
+(24-hour recall, Never…Always anchors, labelled in the codebook "Modified daily diary version of
+EDDEPnn") rather than standard PROMIS short-form wording. A derivative of a barred instrument
+stays barred. This avoids having to draw a line about how much rewriting stops being the
+original, and it is the reason `_ddeddep` was withdrawn to `itemtext/quarantine/batch_031/`
+after an agent had shipped it.
+
+**What is NOT covered — check the instrument, not the deposit's name.** `promis1wave1_cesd` and
+`promis1wave1_haq` sit in the same PROMIS Wave 1 deposit but are the CES-D and the HAQ, which
+the codebook keeps in its *legacy-items* tables rather than its PROMIS bank sections. They carry
+their own separate rights and are untouched. Likewise `evpromisi_stone_2021_cdiag` is the study's
+own 12-item chronic-diagnosis checklist despite the `evpromisi_` prefix (see irw#1972). A table
+is in scope because of the instrument it holds, never because of what the study or the file is
+called.
+
+**Scope applied 2026-09-05.** Four tables blocked in batch_031 (`evpromisi_stone_2021_ddedanx`,
+`_ddeddep`, `_ddpainin`, `_global`). Seven withdrawn from the corpus:
+`promis1wave1_{anger,anxiety,depression,fatigue,pain,physicalfunction,social}`, deleted from the
+`irw_text` draft so they leave at the next release. **They were LIVE in v16.0 when this was
+decided, not sitting unreleased** — a fact that was got wrong first time round and had to be
+corrected before the decision was final. `red_up.drafts --verbose` labels every upload `added`;
+that reflects what the draft session added and is **not** a diff against the released version.
+To tell whether something is public, compare `version="current"` against `version="next"`
+directly. Until the next release the withdrawn wording still exists in v16.0, so the deletion is
+recoverable up to that point and not after it.
+
+**Withdrawal entries are not published.** Ruled by Ben 2026-09-05, at the same time: the issues
+page carries no entries recording withdrawn item text. The seven WHOQOL/DSES/TAS-20 entries that
+existed were removed, and no PROMIS entries were written. His reasoning: the fact of a withdrawal
+is not useful to a data user and tacitly advertises that IRW published material it should not
+have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
+trail; do not add them to `itemtext_issues.qmd`.
+
+### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
+
+**A task whose stimuli are images with no text still gets an item table; `item_text` is left blank
+by design.** Ruled by Ben on the Enkavi 2019 Self-Regulation Ontology battery. The table then
+carries what the source really does publish — `instructions`, section structure, and the
+accuracy labels in `option_text` — while the stimulus identity stays where it already is, in the
+item code. Nothing is invented, and nothing IRW wrote is placed in a field defined as the wording
+respondents read.
+
+**This settles a corpus that had answered the same question three ways.** `twod_rotation_mather2023`
+(batch_011) shipped 304 picture items with `item_text` blank by design and is the precedent this
+ruling adopts. `enkavi_2019_stroop`, `_navon`, `_ant_flanker` and `dd_rotation` shipped IRW-authored
+stimulus descriptions — navon's own note says "item_text for this table is IRW's description of the
+Navon stimulus, not wording anyone read". `gilbert_meta_39` was left unshipped as figural.
+
+**The already-shipped descriptions stand.** Ruled at the same time: the three live `enkavi_2019_*`
+tables are correct, disclosed, and in v16.0, and re-uploading live tables to *remove* usable
+information is not worth it. So the corpus is knowingly mixed — four tables carry authored
+descriptors, everything from here does not. Do not "fix" them, and do not cite them as precedent.
+
+**Reopened under this ruling:** `enkavi_2019_simon`, `enkavi_2019_gonogo` and
+`enkavi_2019_stopsignal` go back to `pending`. Each was blocked only because no wording exists,
+which is no longer a reason to block. Their recovered material is already banked in
+`itemtables/pending_index_notes.csv` so nothing needs re-deriving — including, for `gonogo`, the
+binding that `style.css` fixes `#stim1=orange` and `#stim2=DodgerBlue` with only the go/no-go role
+counterbalanced. Note for whoever extracts `stopsignal`: it has no shippable `correct_response`,
+because the shape-to-key mapping is shuffled per session.
+
+**`enkavi_2019_dpx_axcpt` stays blocked, and for a different reason.** Its probe labels are
+randomised **per participant** — `experiment.js` shuffles `probe1..6` for each worker, confirmed
+in the raw data — so `AX_probe3` denotes a different image for different people. The item code
+does not name a stable stimulus, which is a statement about that dataset rather than about
+pictures. Blank `item_text` would not fix it, because the problem is the code, not the text.
+
+**The general test this leaves.** Ask whether the source publishes wording, not whether the task
+is verbal. If it does, ship it. If it does not, ship the table with `item_text` blank. Block only
+when something else is wrong — the rights bar it, or, as here, the item codes do not denote a
+stable thing.

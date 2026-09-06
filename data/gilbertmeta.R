@@ -45,6 +45,21 @@ irw_clean <- function(data, num){
       rename(resp = score)
   }
   
+  # Dataset 31's `cov_age` is baseline age in **months**, not years, and a
+  # recorded 0 means missing -- both confirmed by Josh Gilbert on 2026-09-05
+  # (irw#1856). Untouched it shipped a median age of 108 and a maximum of 219
+  # on an ASER primary-school sample, and `irw_filter()` read every one of
+  # those as a year. `datastandard.md` requires `cov_age` in years.
+  #
+  # Handled here rather than at source so a re-run cannot reintroduce it. If the
+  # upstream `datasets_list.Rdata` is ever changed to years, delete this block
+  # -- the guard below will fail loudly rather than halve the ages twice.
+  if(num == 31 && "cov_age" %in% names(out)){
+    stopifnot(max(out$cov_age, na.rm = TRUE) > 120)   # still months?
+    out <- out |>
+      mutate(cov_age = ifelse(cov_age == 0, NA_real_, cov_age / 12))
+  }
+
   # get the output file
   out <- out |> 
     remove_all_labels() |> 

@@ -16,7 +16,7 @@ extraction) — this file covers the batching layer. The round's own prompt is
 | `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
 | `mapping_verification.csv` | Permanent, cross-batch record of how each table's item↔text mapping was verified (`route`, `status`, `evidence`). One row per table, ever. Fed by each batch's `verification_merged.csv`. |
 | `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Columns `table,note,status`; `status` is one of `pending`/`blocked`/`excluded`/`note_only`/`resolved` (see SKILL.md Step 6b). Append across batches; never reset. |
-| `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — an uploader walks recursively, and this directory exists because stray `.csv` files were once uploaded as tables. `red_up` now excludes non-`__items` files when the target is `irw_text` and names what it excluded, but keep the directory clean anyway. Ben clears it after uploading. |
+| `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — an uploader walks recursively, and this directory exists because stray `.csv` files were once uploaded as tables. `red_up` now excludes non-`__items` files when the target is an item-text shard and names what it excluded, but keep the directory clean anyway. Ben clears it after uploading. |
 
 Everything except `queue_state.csv` is rederived from disk each round, so a round
 that dies partway (API limit, crash) is safely resumable — the next firing sees
@@ -51,17 +51,25 @@ nonzero and says what to check.
 
 **Why there is no scheduler, and why "add one later" is the wrong turn:**
 
-- **The bottleneck is triage, not the trigger.** Roughly 8 of the 12 tables in a
-  round need a human go/no-go, and at ~1,165 pending that is ~98 rounds. Any
+- **The bottleneck is triage, not the trigger.** Roughly two thirds of the tables
+  in a round need a human go/no-go, and at ~1,009 pending and 6 tables a round
+  (halved from 12 on 2026-09-05) that is ~168 rounds. Any
   cadence faster than "when someone is ready to triage" just grows an unreviewed
   branch — which is also what makes the pre-round merge of `origin/main` start
   conflicting, and a failed merge stops the queue entirely. One round per triage
   session is the honest rate.
-- **A round costs real money.** Measured on batch_019 (2026-09-04, and a *short*
-  round — four of its agents were killed by 429s): 670K output tokens, 2.3M cache
-  writes, 49.4M cache reads across the orchestrator and 12 subagents. About **$56**
-  at Opus 5 list rates; a clean round is nearer $60–70, and draining the queue is
-  **$5.5–7k**. Nothing should be able to spend that on a timer.
+- **A round is a large token spend — quoted in tokens, not dollars.** This is
+  subscription usage; nothing in the transcripts records a charge, and the dollar
+  figures this bullet used to carry were tokens multiplied by list rates, not an
+  invoice. Measured across four complete rounds (2026-09-04, orchestrator + 12
+  subagents summed from the jsonl under `~/.claude/projects/`): **570–670K output,
+  2.0–2.5M cache write, 42–54M cache read** per round. The cache reads dominate,
+  and the **subagents are 85–94% of them** (and 35–40% of the output) — reading the
+  orchestrator transcript alone understates a round about tenfold. At ~98 rounds
+  the remaining queue is **~4–5 billion cache-read tokens**; an hourly cadence would
+  be ~1.2B a day. Nothing should be able to spend that on a timer. The resource a
+  fired round actually consumes is rate-limit headroom — which is what killed 8 of
+  12 agents in batch_018 and 4 of 12 in batch_019.
 - **Crontab is ruled out** as a standing preference across projects (2026-09-04).
   Its failure mode is not misfiring but failing *silently* on a laptop that has to
   be on and in the right state, with nothing reporting on it — the version-manifest
@@ -71,8 +79,8 @@ nonzero and says what to check.
   fetching publisher and repository sources, and a datacenter IP gets bot-walled
   far more than this laptop does — and a WAF block lands in `queue_state.csv` as
   `blocked`, which quietly removes a table from the queue for good; a cloud runner
-  is cancelled and evicted more readily, and every death leaves 12 rows
-  `in_progress` that block all later rounds until a human reconciles them; and
+  is cancelled and evicted more readily, and every death leaves a round's worth of
+  rows `in_progress` that block all later rounds until a human reconciles them; and
   `--dangerously-skip-permissions` in a PUBLIC repo, with secrets in the
   environment and public logs, around an agent whose whole job is reading
   untrusted third-party files, is a different risk from the same flag on a machine

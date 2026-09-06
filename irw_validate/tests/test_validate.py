@@ -138,6 +138,27 @@ class ExtraChecks(unittest.TestCase):
         cov = [f for f in report.findings if f.check == "cov_range"]
         self.assertIn("date or days-since-epoch", cov[0].message)
 
+    def test_cov_age_out_of_range_blocks_the_upload(self):
+        """Promoted from warn to error 2026-09-05 (irw#1856)."""
+        df = F(id=list(range(1, 5)), item=["a"] * 4, resp=[1, 2, 3, 4],
+               cov_age=[34, 41, 999, 28])
+        report = validate_frame(df, profile="upload")
+        self.assertIn("cov_range", [f.check for f in report.errors])
+        self.assertFalse(report.ok, "an out-of-range cov_age must refuse the upload")
+
+    def test_cov_range_severity_can_be_dialled_back(self):
+        """The promotion is a test, so it reverses without a deploy."""
+        import os
+        os.environ["IRW_COV_RANGE_SEVERITY"] = "warn"
+        try:
+            df = F(id=list(range(1, 5)), item=["a"] * 4, resp=[1, 2, 3, 4],
+                   cov_age=[34, 41, 999, 28])
+            report = validate_frame(df, profile="upload")
+            self.assertIn("cov_range", [f.check for f in report.warnings])
+            self.assertTrue(report.ok)
+        finally:
+            del os.environ["IRW_COV_RANGE_SEVERITY"]
+
     def test_plausible_ages_pass(self):
         df = F(id=[1, 2, 3], item=["a"] * 3, resp=[1, 2, 3], cov_age=[18, 45, 92])
         report = validate_frame(df, profile="upload")

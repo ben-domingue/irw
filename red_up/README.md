@@ -28,9 +28,13 @@ sub-items 1.1 and 1.2.
 anything else. The old scripts `chdir`'d into their own directory first, so
 `python3 upload.py .` never meant your shell's directory.
 
-**Picks a default dataset.** Any `*__items.csv` present ⇒ `irw_text`;
-otherwise the newest shard. The menu shows every dataset in
+**Picks a default dataset.** Any `*__items.csv` present ⇒ the newest item-text
+shard; otherwise the newest core shard. The menu shows every dataset in
 `metadata/redivis_config.R` — Enter takes the default.
+
+Both response data and item text are **shard lists**, because Redivis caps a
+dataset at 1000 tables (`ARCHITECTURE.md` §2). A second item-text shard is a
+one-line edit to `IRW_TEXT_DATASETS`; nothing in this package changes.
 
 **Excludes what does not belong.** Once a dataset is chosen, files of the wrong
 kind are listed and skipped rather than uploaded. This is the guard against the
@@ -45,6 +49,12 @@ return the first match. So uploading an existing table into a *newer* shard
 does not replace it — it **shadows** it, leaving two divergent copies with no
 error and no suspicious row count. Any such file is flagged `ELSEWHERE` and
 defaults to updating the dataset it already lives in.
+
+Every shard of *both* kinds is scanned, so a stray `__items` table that has
+landed in a warehouse is still reported. A cross-family match never becomes a
+cross-family upload, though: the offered home must itself be able to hold the
+file, and when none can, the file is skipped for a human rather than routed
+somewhere plausible-looking.
 
 **Replaces properly.** Redivis uploads *append*. `replace_on_conflict` only
 replaces an upload of the same name; rows inherited from the previously
@@ -63,7 +73,7 @@ a human click after reviewing the diff (`ARCHITECTURE.md` §4).
 
 | Thing | Source |
 |---|---|
-| Owner and dataset names | `metadata/redivis_config.R`, *parsed*, not restated |
+| Owner and dataset names | `metadata/redivis_config.R`, *parsed*, not restated (`IRW_CORE_DATASETS`, `IRW_TEXT_DATASETS`, `IRW_AUX_DATASETS`) |
 | Write token | `irw_secrets.load_write_token()` → `~/.config/irw/redivis-write.env` |
 | Required columns | `datastandard.md` |
 

@@ -8,6 +8,22 @@ This document tells an agent exactly what to produce when converting a raw datas
 
 **Verify the license first.** The license must be explicitly open — CC0, CC BY, or CC BY-SA — as stated on the source page. A missing license, an unresolvable UUID, a "contact author" notice, or any NC/ND restriction means **stop**: do not write a processing script. Only proceed once you have confirmed a named open license.
 
+*Exception, ruled 2026-09-04: an **NC** dataset that is genuinely exceptional may
+still be worth taking, but that is ben-domingue's call and never yours. Do not
+process one on your own judgment, and do not skip one silently either — say what
+it is and what it is worth, and ask. Where he approves, the restriction
+propagates rather than disappears: `Derived_License` records the NC licence, so
+anyone contemplating commercial reuse can identify and exclude the table. The
+default remains no.*
+
+*This exception does not extend to **ND**, nor to a dataset with no license at
+all. The project's licensing guidance is explicit that for both of those,
+modification itself is not permitted — and reshaping a source into IRW's long
+format is a modification. Those stay a hard stop with no judgment call. For an
+unlicensed dataset the route is written permission from the owner, recorded as
+`Permission via Email`; without it, link to the data rather than reshare it.*
+
+
 **Check for duplicates.** Search the IRW dictionary before processing to make sure the dataset is not already in the warehouse.
 
 **Check the sample size.** The floor is 100 unique `id` values, flat — a table with fewer respondents is skipped outright, with no judgment call in between. Count unique `id`s before writing a script, not after.
