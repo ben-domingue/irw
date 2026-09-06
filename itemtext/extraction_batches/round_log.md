@@ -5444,3 +5444,31 @@ in `public_note` and in the drafted issues-page entry.
 **batch_037 triage is complete: 6 tables, 6 staged, 0 held.** `clean/` holds exactly six
 `*__items.csv` and nothing else. Upload is Ben's step; the `uploaded=` stamps and the six
 issues-page entries are owed only after he confirms it.
+
+### batch_037 uploaded and stamped — 6 tables, all verified by COUNT(*) — 2026-09-06
+
+Ben ran the upload; `red_up` reported all six as NEW. Verified against the `irw_text_2` draft
+with **COUNT(\*)**, not `numRows` — the field that reported "no change" for tables that had
+silently doubled (#1677/#1683):
+
+    gemma 140 | gpt3_5 155 | gpt4o 175 | llama3 150 | mixtral 160 | gerber 70
+
+Every count matches its source file exactly, gemma carries 28 distinct items, and the draft went
+15 -> **21 tables**. No doubling.
+
+**Two things checked because the `red_up` output looked uneven, both benign.** gerber reported
+15 columns against the genpsych five's 10: that is just the translated-table schema (`language`
+plus the four `*_translated` columns), and `fukuda_2021_health_literacy__items`, already live,
+has the same 15. And gerber's `_translated` columns are not empty but hold the literal string
+`NA` — which is also what live fukuda holds on all 184 rows, so it is the shipped convention and
+not a defect. The `notes.csv` wording "left empty" is loose about this; the data are right.
+
+**Stamped `uploaded=2026-09-06`** on all six rows in `batch_037/provenance.csv` and in the root
+`mapping_verification.csv`. Every prior value was genuinely empty rather than `no`, so the
+stamping pass could not have silently skipped a row. Both files round-trip byte-identically under
+MINIMAL quoting with CRLF (verified before writing), and the diff is exactly 6 changed rows each
+with no reformatting elsewhere. The six `__items.csv` were deleted from the batch folder;
+sidecars stay. `clean/` left for Ben.
+
+**Still owed: the six issues-page entries** in `fixes/itemtext_issues_draft.md` are now due, since
+the tables have shipped. They go to `itemtext_issues.qmd` in the separate `irw_site` repo.
