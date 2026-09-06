@@ -4969,3 +4969,303 @@ Issues page: the six entries are **datapages/irw#142**. #139 (the four batch_034
 **already merged** by the time this ran, so the follow-up commit could not go on that branch —
 a fresh branch off the updated main was cut instead, and its diff is exactly +18 lines with no
 duplication of the merged four. Live page: 288 entries before, 294 after.
+
+## batch_036 — 2026-09-05
+
+**6 tables claimed | 5 written / 1 blocked / 5 failed | yield 5/6 extracted, 0/6 fully gated**
+**CIRCUIT BREAKER SET — Redivis query API outage, not an extraction fault.**
+
+Tables: gao2025_attachment_anxiety, gao2025_spiritual_wellbeing, garciabatista_2021_erq,
+GBJW_fadplus_goto2021, geacaballero_2019_pes_nwi, geacaballero_2019_pes_nwi_short.
+
+**Extraction went well.** Five of six produced complete `__items.csv` plus all four sidecars:
+attachment_anxiety 21 rows, spiritual_wellbeing 60, erq 50, pes_nwi 120, pes_nwi_short 62.
+One determinate block (below). Every gate that does not need the Redivis query route passed:
+`irw-validate` clean on all five, `lint_verification.R` 6 rows / 0 ERROR / 2 WARN,
+`check_provenance.R` exit 0. Each agent's own `validate_items.R --table-sets` PASSED earlier
+in the round, while the query route was still up.
+
+**SYSTEMIC ACCESS ISSUE — the round's headline.** Partway through, the Redivis QUERY API began
+hanging account-wide and never recovered (~2h15m). `audit_batch.R` was killed twice after 49 and
+24 minutes having produced no `audit_report.csv` and burned only 4-7s of CPU — blocked on I/O,
+sockets in CLOSE-WAIT to 34.144.255.54:443. A bare
+`query("SELECT 1")$to_data_frame()` on datapages/item_response_warehouse did not return in 280s,
+probed five times through 15:21. Meanwhile the METADATA path was healthy: `irw_list_tables()`
+returned in 22s and the API root answered 200 in 0.21s. So metadata works, query execution hangs.
+Not the export cap — no export was attempted. `audit_batch.R` and `verify_batch.R` therefore
+never ran, which is the only reason the five written tables are `failed` rather than `done`.
+**They need RE-GATING, not re-extraction** — see circuit_breaker.flag for the exact commands.
+
+Breaker set deliberately, not waived: the Step 5 rate-limit carve-out covers agents killed with
+nothing determined, whereas here every agent finished and the outage IS the finding. Step 5 also
+states outright that unresolved access failures stay on the counting side. A next round would
+fail at extraction, not merely gating — `table_context.R` and the Step 5 hard gate use the same
+query route.
+
+**Blocked (1) — GBJW_fadplus_goto2021**, retry test NO, unaffected by the outage. Blocked on
+availability, not licence, in two layers: the administered Japanese wording is nowhere in the
+record (OSF deposit has bare column codes; the Frontiers article prints only the endpoint anchors;
+Shirai 2010 is an undigitised Toyo University bulletin), and the English fallback fails too
+(Lipkus 1991's appendix is paywalled, and no open source reproduces all seven items *with their
+numbering*). Row added to `pending_index_notes.csv`.
+
+**Step 3b instrument mismatches — two, both confirmed by the orchestrator offline:**
+1. `GBJW_fadplus_goto2021` is **not** the FAD-Plus. `data/fadplus_goto2021.R` splits one raw file
+   by column prefix into five tables (FAD, LOC, Rosenberg, BSCS, GBJW), so "fadplus" is the STUDY.
+   The script's own comment documents the GBJW as "seven items in a six-point Likert format
+   (Shirai, 2010)", and metadata.csv corroborates 7 items / 6 categories / 802 participants —
+   the agent's figures exactly. Dictionary Description also has a typo: "Globa belief in a just
+   world scale".
+2. `geacaballero_2019_pes_nwi_short` is **not** a short PES-NWI. Its 31 yes/no variables record
+   whether each nurse flagged an item as an *essential element*, so `resp` is perceived importance,
+   not a workplace rating. The dictionary Description ("31-item proposed short yes/no version of
+   the Practice Environment Scale...") misdescribes it; metadata.csv shows 31 items with 2
+   response categories over 263 participants, consistent with the selection task. Carried as a
+   `public_note`. Also: the table is not shorter than the "full" one — it has 31 items to the
+   full table's 30, because of the defect below.
+
+**DATA DEFECT worth its own issue — `data/geacaballero_2019_pes_nwi.py` drops an item.**
+Reported independently by both geacaballero agents and then CONFIRMED offline by the orchestrator:
+`LIKERT_ITEMS` is a hard-coded list of exactly 30 names with `education` (item 18, "Se desarrollan
+programas de formación continuada para las enfermeras") absent, while the sibling yes/no block is
+derived dynamically via `startswith("X")` and so picks up all 31. metadata.csv confirms the
+asymmetry: 30 items / 269 participants for `geacaballero_2019_pes_nwi` against 31 / 263 for
+`..._short`. The source `.sav` has all 31 Likert items with all 269 respondents answering, so the
+missing item is recoverable from the same file.
+
+**Two lint WARNs, both assessed and explained in notes.csv** (neither left for the next reviewer):
+`geacaballero_2019_pes_nwi` keeps VERIFIED — route 9 matched all 120 cells with 0 mismatches and
+all 30 count signatures are distinct, so every item is separated. `..._short` keeps VERIFIED on a
+narrower basis, stated plainly: Figure 1's percentages pin only 23 of 31 uniquely (four
+percentages tie, and for binary items route 9 adds no independent information), with the remaining
+8 resting on the `.sav`'s explicit "item 1".."item 31" labels — Step 5b's explicit-code-labels
+exemption, legitimate but an exemption rather than a statistical route.
+
+**Provenance schema:** added the `translation_source` column to this batch's `provenance.csv`
+(`study_supplied` for the three `translated_substitute` tables, `mixed` for the geacaballero pair,
+blank for the blocked one), which `check_provenance.R` had been asking for; its "column absent"
+count fell 47 → 44. The remaining gaps are older batches. Note for triage: the geacaballero pair
+ships IRW-authored English for 21 items each in `item_text_translated`, which may warrant an
+issues-page entry — not added unilaterally, since the public site is a human-facing artifact.
+
+**Process note:** two agents (both geacaballero) went silent with their `__items.csv` and
+`verify_*.R` written but the three metadata sidecars missing. Per Step 5 the batch directory was
+`ls`-ed before classifying and both were resumed to write only their missing sidecars from what
+they had actually determined — no re-extraction, no reconstructed evidence. Both then reported
+their `validate_items.R --table-sets` gate had PASSED. Also worth recording: a wait-loop using
+`pgrep -f audit_batch.R` matches the orchestrator's OWN `claude -p` process, because this prompt
+text contains the script name — it can never report the audit as finished. Wait on the R PID.
+
+*Self-cancelled at round close, 2026-09-05 ~15:30 local: the circuit-breaker stop condition now
+holds (`extraction_batches/circuit_breaker.flag` written this round, Redivis query-API outage).
+Nothing scheduled to cancel — rounds are human-started via `run_round.sh`, which checks the same
+condition in bash and will decline to start the next one until a human clears the flag. Cap
+(batch_040) not reached; the breaker, not the cap, is what stops here.*
+
+### batch_036 — partial triage, blocked on the Redivis query outage — 2026-09-05
+
+The round died late and salvageably: five complete `__items.csv` with full sidecars, one
+determinate block, and **no `in_progress` rows left behind**. The circuit breaker is set and
+should stay set — I re-probed at triage and **the outage is ongoing**: a bare `SELECT 1` did not
+return in 180s, while the metadata path answered in 0.4s and the API root in 0.29s. Same
+signature the round recorded, now past three hours.
+
+**What could be run without the query API, all clean:** `normalize_nulls` 0 of 5 changed,
+`irw-validate` ok on all five, `lint_verification` 0 ERROR / 2 WARN. **`audit_batch` and
+`verify_batch` cannot run at all** — both go through the dead route — so **nothing is staged
+and nothing can be**, and the five `failed` rows stay `failed` until the gates say otherwise.
+They need re-gating, not re-extraction.
+
+**Both lint WARNs are false alarms and should not be downgraded.** They fire on the phrase
+"WHAT THIS DOES NOT ESTABLISH" in evidence that is in fact stronger than most PARTIALs:
+`_pes_nwi` matches all 120 count cells (30 items x 4 levels) with all 30 signatures distinct,
+which is a uniqueness proof — no pair could be swapped; `_pes_nwi_short` pins 23 of 31 items
+uniquely against published Figure 1 percentages to <=0.06pp and separates the remaining 8 tied
+pairs by the .sav's own `item N` labels. Punishing an honest limitations paragraph is the wrong
+incentive; VERIFIED stands.
+
+**Sibling cross-check — run because the pair share a source, and it found three things.**
+Comparing the two tables' shipped item sets directly, with the `X` prefix stripped:
+
+1. **`education` is missing from the long table and present in the short one** — an independent
+   confirmation of the round's `LIKERT_ITEMS` defect claim, from the shipped files alone, without
+   touching the `.sav` or the corpus. 30 vs 31 items.
+2. **Two items carry different codes across the pair for identical text**: `mistakeopport` vs
+   `mistakesopportun`, and `plancuidadosescrito` vs `writtenplans` (one Spanish-mnemonic, one
+   English). Not wrong, but a joint on these two tables by item code silently loses them.
+3. **Five shared items differ by a NO-BREAK SPACE (U+00A0) in the short table where the long has
+   a normal space** — `asignationpatients`, `intmanagement`, `levelpowerheadnurse`,
+   `oportcomisions`, `oportdecisions`. Byte-different, visually identical, and a PDF
+   copy-paste artifact. `normalize_nulls.R` does not touch whitespace. Worth normalising before
+   these ship, but it edits item text, so it is flagged rather than done.
+
+**Rights: one verdict corrected, one escalated.**
+
+* **`garciabatista_2021_erq` — right answer, wrong reasoning, now on firm ground.** The round
+  concluded "silence is permission" after `spl.stanford.edu/measures` and two other URLs returned
+  404 — the same mistake batch_034 made, reading unreachable pages as silence. The 404 page's own
+  navigation links to the real one: **`spl.stanford.edu/resources`** (HTTP 200), which states
+  outright *"The measures provided here may be used for academic research purposes with
+  appropriate citation"* and hosts the ERQ in ~37 languages. That is **affirmative permission,
+  not silence** — a stronger basis than the round claimed, with a scope limit (academic research)
+  and a condition (citation) rather than a bar.
+* **`geacaballero_2019_pes_nwi` and `_short` — held, and this is Ben's call.** The PES-NWI is
+  copyrighted by Eileen Lake, and the deposit's own supplement says *"(Permission was obtained to
+  use the questionnaire)"* — which is the depositor's permission, not IRW's, the exact distinction
+  [[irw-itemtext-instrument-rights]] exists for. I could not find the rights holder's terms at all:
+  Penn's CHOPR PES-NWI page 404s and the centre homepage carries no licensing statement, so this is
+  again absence-of-evidence rather than a quotable absence of restriction. Same shape as the
+  HLS-EU-Q47 question still open on batch_034, and it should get the same answer, whatever that is.
+
+Also standing from the round, unverified by me because both need the query route:
+`GBJW_fadplus_goto2021` is not the FAD-Plus (dictionary Description defect), and
+`geacaballero_2019_pes_nwi_short` is not a short PES-NWI — its `resp` records whether a nurse
+flagged each item as *essential*.
+
+### The three "strays" are not unshipped — they are live, and one was deliberately held — 2026-09-05
+
+Chased down the three `__items.csv` sitting in batch folders with no `uploaded` stamp. **All
+three are live in `irw_text` v17.0 — the current RELEASED version, publicly visible.** The local
+record says otherwise for every one of them:
+
+| table | what the record says | what is live |
+|---|---|---|
+| `twod_rotation_mather2023` | **HELD 2026-08-24**, "a row with no item text was judged not worth shipping"; CSV and sidecars kept in batch_011 | 608 rows in v17.0 |
+| `ALSECYPIAMH_WU_2022_PHQ` | "never uploaded" — the stated reason irw#1956 must not use a directory glob | 8 rows in v17.0 |
+| `himmelstein-admc_raw-2025` | `pending` in `queue_state.csv`, no batch assigned; its CSV *is* gone from batch_014 | 193 rows in v17.0 |
+
+Local row counts match the live `numRows` exactly in all three cases (8, 608, and the local copy
+of himmelstein is gone), and the two byte-identical `ALSECYPIAMH` copies agree, so this is our
+content, not something else. **`numRows` is indicative, not conclusive** — a `count(*)` check is
+the one that catches doubling and it cannot run until the query outage clears.
+
+**The one that matters is `twod_rotation_mather2023`.** It was withheld on a deliberate editorial
+judgment — 304 picture items whose `item_text` is blank by design — and it is public anyway, 608
+rows of it. Whatever mechanism put it there did not consult the hold. The `himmelstein` row is the
+same story from the other side: still `pending`, never triaged, but live.
+
+**The likely mechanism is a directory-glob upload**, the same shape that swept 8 `itemtables/pilot/`
+files into the draft on 2026-09-04. irw#1956 was filed warning that clearing uploaded CSVs must not
+be a glob — the irony is that a glob upload appears to be how these got out.
+
+**This also corrects the issues-page backlog figure I reported earlier.** That count required a
+stamped `uploaded` date, so all three of these were invisible to it: live, carrying a real
+`public_note`, and on no issues-page entry. The predicate should be "live in a released version",
+not "stamped". Re-run against the corpus with the metadata path (which works during the outage):
+**of 746 live item-text tables, exactly 3 are live-but-unstamped — these three.** So the stray
+problem is bounded and small, and the bookkeeping is otherwise sound.
+
+Separately, and expected rather than alarming: **450 of the 746 live tables have no provenance row
+at all.** Those predate the batch pipeline, which began at batch_001 against a ~1,400-row queue.
+Provenance coverage of the live corpus is 296 of 746.
+
+Nothing was changed. Stamping these three would need a date, and inventing one is worse than the
+gap — the honest options are the release that first carried them, or a marker saying the upload
+date is unrecorded. That is Ben's call, and it should come after a `count(*)` confirms the content.
+
+### The three strays: kept, and marked `uploaded=unrecorded` — 2026-09-05
+
+Ben's rulings. **`twod_rotation_mather2023` stays public** — "so long as it is not incorrect I
+don't mind if it is public." The hold from 2026-08-24 is therefore **released**; it was an
+editorial judgment (a row with no item text was judged not worth shipping), not a correctness
+one, and correctness holds up: route B matched all 58 published per-item N **exactly**, live
+proportion correct tracks the paper's means at r=0.9999, and the 70 items with n>10000 are
+exactly S7's 58 plus the 12 the study's own code drops. The extraction-time `audit_batch` WARN is
+the two things already known and disclosed — 100% blank `item_text` (the 304 items are pictures)
+and the pilot-vs-final-pool row-count split, which is itself corroborating rather than anomalous.
+
+All three are stamped **`uploaded=unrecorded`** rather than a date, per Ben: the real upload date
+is not recoverable and inventing one would be worse than the gap. Written into
+`batch_004`, `batch_011`, `batch_012` and `batch_014` provenance plus 3 rows of the root
+`mapping_verification.csv`; each line round-tripped byte-identically and an independent re-read
+confirms nothing else moved.
+
+**Note the predicate split this creates, deliberately.** `check_issues_page.R` and
+`draft_issues_qmd.R` both test `nzchar(trimws(uploaded)) && != "NA"`, so `unrecorded` reads as
+**shipped** to them — which is correct, because these three are live in v17.0, and it means they
+now become DUE for issues-page entries instead of being invisible. The stricter
+`^\d{4}-\d{2}-\d{2}$` test used for stamping audits still reads them as undated, which is also
+correct. A human reading the file learns the honest thing: it shipped, we do not know when.
+
+### Two rights rulings — 2026-09-05
+
+**PES-NWI: skipped.** Ben's call on `geacaballero_2019_pes_nwi` and `_short`. The instrument is
+Eileen Lake's copyright and the study authors held permission to *use* it; a CC BY article does
+not extend its licence to third-party copyrighted material reproduced with permission, and the
+rights holder's own terms could not be reached at all (Penn CHOPR's PES-NWI page 404s). IRW would
+also have been shipping machine-translated English for 21 of the items — a derivative of a
+copyrighted instrument. Both CSVs moved to `quarantine/batch_036/` on the batch_031 PROMIS
+precedent, ready to restore if permission is ever obtained; every sidecar and both `verify_*.R`
+stay in the batch, which is what records the work. Queue status `failed` -> **`blocked`**: this is
+a determinate verdict, not a retryable fault. The cheap unblock is an email to Lake, which would
+put it on the same `Permission via Email` footing as 107 existing tables.
+
+This also retires the NBSP finding — the five no-break spaces were in the `_short` table, which
+is no longer shipping.
+
+**HLS-EU-Q47: cleared to ship.** `fukuda_2021_health_literacy`'s hold is released and it is staged
+into `clean/`. What IRW copies is the HLS-EU Consortium's **own** annex, published CC BY 2.0 in
+Sørensen et al. 2013 — an irrevocable grant on exactly the text being shipped. The bar found at
+`m-pohl.net/HLS19Instruments` governs **HLS19**, the successor instrument, and cannot narrow a
+2013 licence retroactively. That is the substantive difference from PROMIS, where the barred
+instrument was the one being shipped.
+
+It needs no re-gating: `audit_batch` PASS, `verify_batch` PASS, `lint_verification` clean and
+`irw-validate` ok were all run against live data at batch_034 triage earlier today.
+
+**batch_036 stands at 3 extracted / 3 blocked.** The three survivors — `gao2025_attachment_anxiety`,
+`gao2025_spiritual_wellbeing`, `garciabatista_2021_erq` — remain `failed` and ungated, because the
+Redivis query API is **still down** (re-probed, no return in 200s). They need re-gating, not
+re-extraction, and the circuit breaker stays set.
+
+### batch_037 round NOT started — the Redivis outage is a download outage, not a query outage — 2026-09-05
+
+Asked to run rounds until they stop working. They were already stopped: `circuit_breaker.flag`
+from the batch_036 round is still up, and the clearing test in it does not pass. Re-probing
+before any round changed the diagnosis in a way worth carrying.
+
+**Yesterday's reading — "the query API hangs" — is wrong, or has narrowed.** Query *execution*
+is healthy: a `SELECT 1` job is created in 0.0s and `q$get()` reports status `completed` in 1.6s.
+What never returns is the **result download**: `to_data_frame()` on that completed one-row job
+ran past 200s, and a `max_results = 5` read of a 3,525-row table ran past 110s. Both the R client
+(redivis 0.12.12) and the Python client (0.20.11 / pyarrow 25.0.0) hang identically, so it is
+server-side rather than a client version. Metadata is untouched — API root 200 in 0.22s,
+`list_tables()` returns 987 tables in 4.8s.
+
+This matters for two reasons. First, **the old clearing probe now gives a false green**: `SELECT 1`
+returns `completed` while the corpus is still unreadable. The flag now carries a download-based
+test instead. Second, it explains the batch_036 failure shape exactly — every agent completed and
+every source-side judgment was made, because those need the web, not Redivis; only the steps that
+read IRW data died.
+
+**No round was started.** `table_context.R` is `irw::irw_fetch()`, a whole-table download, so a
+round fails at Step 2 extraction rather than at gating, and spends ~50M cache-read tokens finding
+that out. The batch_036 re-gating is blocked on the same route. Nothing else in the queue is
+runnable without data reads, so the honest state is: **waiting on Redivis**, one cheap probe away
+from resuming, with batch_036's five extracted tables intact on disk and needing only re-gating.
+
+### `fukuda_2021_health_literacy` uploaded — 2026-09-06
+
+Ben uploaded it, closing the batch_034 rights hold end to end. Present in the `irw_text_2` draft,
+which now holds **15 tables**; `numRows` 184 matches the local file's 184 CSV-parsed rows exactly
+(46 items x 4 levels, every item carrying all four).
+
+**One check is owed rather than done: `count(*)`.** The Redivis query API has now been down for
+about a day — a bare `SELECT 1` still does not return in 200s — so the verification here rests on
+`numRows`, which is precisely the field that reported "no change" for tables that had doubled
+(#1677/#1683). The stamp reflects Ben's confirmed upload, not a completed count. **Re-run the
+count against this table when the query API returns**, together with batch_036's gating.
+
+Stamped `uploaded=2026-09-06` in `batch_034/provenance.csv` and the root `mapping_verification.csv`;
+both round-tripped byte-identically and an independent re-read confirms nothing else moved. CSV
+deleted from the batch; sidecars and all six `verify_*.R` stay. Ben emptied `clean/` himself.
+
+**batch_034 is now fully closed**: six tables, six shipped. Its issues-page entry is owed and is
+NOT covered by datapages#142 — that PR predates this ruling.
+
+**Issues-page entry for `fukuda_2021_health_literacy`: datapages#144.** Not covered by #139 or
+#142, both of which predate the rights ruling — #142 says outright that the table was held. The
+entry leads with the two things that change an analysis rather than merely documenting
+provenance: the scale runs backwards relative to the published key, and the 46-of-47 item gap
+means codes above `hl_item38` do not equal canonical HLS-EU-Q47 numbers, so a join on item
+number silently misaligns eight items. Page: 294 entries before, 295 after.
