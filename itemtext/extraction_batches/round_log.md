@@ -5243,3 +5243,22 @@ round fails at Step 2 extraction rather than at gating, and spends ~50M cache-re
 that out. The batch_036 re-gating is blocked on the same route. Nothing else in the queue is
 runnable without data reads, so the honest state is: **waiting on Redivis**, one cheap probe away
 from resuming, with batch_036's five extracted tables intact on disk and needing only re-gating.
+
+### `fukuda_2021_health_literacy` uploaded — 2026-09-06
+
+Ben uploaded it, closing the batch_034 rights hold end to end. Present in the `irw_text_2` draft,
+which now holds **15 tables**; `numRows` 184 matches the local file's 184 CSV-parsed rows exactly
+(46 items x 4 levels, every item carrying all four).
+
+**One check is owed rather than done: `count(*)`.** The Redivis query API has now been down for
+about a day — a bare `SELECT 1` still does not return in 200s — so the verification here rests on
+`numRows`, which is precisely the field that reported "no change" for tables that had doubled
+(#1677/#1683). The stamp reflects Ben's confirmed upload, not a completed count. **Re-run the
+count against this table when the query API returns**, together with batch_036's gating.
+
+Stamped `uploaded=2026-09-06` in `batch_034/provenance.csv` and the root `mapping_verification.csv`;
+both round-tripped byte-identically and an independent re-read confirms nothing else moved. CSV
+deleted from the batch; sidecars and all six `verify_*.R` stay. Ben emptied `clean/` himself.
+
+**batch_034 is now fully closed**: six tables, six shipped. Its issues-page entry is owed and is
+NOT covered by datapages#142 — that PR predates this ruling.
