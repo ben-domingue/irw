@@ -5394,3 +5394,42 @@ Note for anyone reading the counts across this day: 13 rows went `done` -> `bloc
 2026-09-06 and they arrived **from `origin/main`** in the pre-round merge, not from any round —
 the wording_rights / instrument-rights withdrawals. Queue now 284 done / 69 blocked / 12 failed /
 55 excluded / 981 pending.
+
+### batch_037 triaged — 5 staged, `gerber_2022_altruism` held on a policy call — 2026-09-06
+
+Triaged on the branch; the standing PR (#2011) is deliberately **not** merged yet, since merging
+is step 6 and comes after staging.
+
+**Gates re-run live, not taken from the round's report.** `normalize_nulls` 0 of 6 needed
+changes; `audit_batch` 6 PASS; `verify_batch` 3 PASS + 3 correctly exempt; `lint_verification`
+6 rows, no problems.
+
+**The claim worth re-checking independently was the sibling-collision trap**, and it holds up
+both ways. The collision is real — any two of the five `genpsych_russell_2024_*` tables share
+28–32 `items_N` codes — and it was **not** triggered: across all ten pairs, zero shared codes
+carry identical `item_text`, and zero `item_text` strings appear in more than one sibling at all.
+So no wording was copied between models.
+
+**Live re-checks all reproduce.** Item counts server-side are 28 / 31 / 35 / 30 / 32, matching
+the five files exactly. mixtral's direction claim is exact: precisely 2 of 32 items have
+`min(resp)=2` and they are `items_6` and `items_14`, which pins Strongly Disagree=1 from the data
+rather than from the processing script.
+
+**Staged into `itemtables/clean/`: the five `genpsych_russell_2024_*` tables**, byte-identical to
+their batch copies, and nothing but `*__items.csv` is in that directory.
+
+**Held: `gerber_2022_altruism`** — not a failed check but an open policy question for Ben
+(BATCH_PROCESS step 3: ask, don't hold silently). Its `alt2` item text is IRW-written rather than
+quoted. Worth noting the disclosure is already in place: `public_note` states plainly that alt2
+was reconstructed by IRW, so the standing disclosure ruling is satisfied at table level; the only
+question left is whether the reconstruction itself should ship.
+
+**Issues-page drafts prepared, none applied.** `draft_issues_qmd.R` generated one entry
+(gerber). Its REVIEW section then surfaced the actual triage finding: the caveat that these items
+are **model-generated de novo and not a canonical Big Five inventory** is recorded only in
+`notes.csv` for gemma and llama3, and **nowhere at all** for gpt3_5 and gpt4o — yet it is equally
+true of all five, and the drafter cannot see it because none of the five carries a `public_note`.
+That is the batch_009 blind spot repeating. Five entries were therefore written **by hand** into
+`fixes/itemtext_issues_draft.md`, covering both the de-novo caveat and the shared-code hazard;
+all six YAML entries parse. They are not applied — an entry is owed only once a table ships, and
+the live page is in the separate `irw_site` repo.
