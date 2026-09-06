@@ -218,6 +218,54 @@ if (MODE == "tier-b") {
     check(nrow(held) == 1L && held$table[1] == "not_yet_published_2026",
           "it is written to biblio_pending.csv instead of vanishing")
 
+    ##---------------------------------------------------------------- #2001 ---
+    ##The refresh, on the real 4,000-odd rows. Fixtures cannot show this: the
+    ##question is how many published rows the sheet actually contradicts, and
+    ##whether any of the writes are ones we did not intend.
+    rlog <- tempfile(fileext = ".csv")
+    on.exit(unlink(rlog), add = TRUE)
+    ref <- suppressMessages(refresh_biblio_from_dict(biblio, dict, "core", log.file = rlog))
+    log <- ref$log
+    cat("\n  refresh: ", nrow(log), " cell(s) across ", length(unique(log$table)),
+        " table(s) -- ", sum(log$kind == "fill"), " fill, ",
+        sum(log$kind == "conflict"), " conflict\n", sep = "")
+    for (cl in unique(log$column)) {
+        cat("    ", cl, ": ", sum(log$column == cl), "\n", sep = "")
+    }
+
+    check(nrow(ref$biblio) == nrow(biblio), "the refresh adds no rows and drops none")
+    check(identical(biblio$table, ref$biblio$table), "and does not reorder them")
+    check(identical(biblio$BibTex, ref$biblio$BibTex), "BibTex is untouched")
+
+    ##The clause that matters. Not hypothetical: cdm_timss03 holds a paper DOI
+    ##that the dictionary lacks, and the orphan-biblio deletion (#1993) is what
+    ##this looks like when it goes wrong.
+    blanked <- character(0)
+    for (cl in names(BIBLIO_REFRESH_COLS)) {
+        if (!cl %in% names(biblio)) next
+        lost <- !dict_blank(biblio[[cl]]) & dict_blank(ref$biblio[[cl]])
+        if (any(lost)) blanked <- c(blanked, paste0(cl, " x", sum(lost)))
+    }
+    check(length(blanked) == 0L, "no published value is blanked by the refresh")
+    if (length(blanked)) cat("     blanked:", paste(blanked, collapse = ", "), "\n")
+
+    ##Every logged change must be a real change under the comparison rule --
+    ##i.e. the run is idempotent, and a second one would be a no-op.
+    again <- suppressMessages(refresh_biblio_from_dict(ref$biblio, dict, "core"))
+    check(nrow(again$log) == 0L, "a second refresh changes nothing (idempotent)")
+
+    cat("\n  The log is at ", rlog, " for this run; in production it is\n",
+        "  biblio_refresh_log.csv, beside the CSV it explains.\n", sep = "")
+    if (nrow(log)) {
+        cat("\n  first 10 changes:\n")
+        show <- head(log, 10)
+        for (i in seq_len(nrow(show))) {
+            cat("    ", show$table[i], " [", show$column[i], ", ", show$kind[i], "]\n",
+                "      was: ", substr(show$was[i], 1, 90), "\n",
+                "      now: ", substr(show$now[i], 1, 90), "\n", sep = "")
+        }
+    }
+
     cat("\n  A real batch sits in that held state between the table upload and\n",
         " the publish click. biblio_pending.csv is how you see it.\n", sep = "")
 }

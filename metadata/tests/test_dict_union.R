@@ -419,6 +419,174 @@ local({
     check(nrow(out) == 3L, "the join adds no rows and drops none")
 })
 
+cat("refresh_biblio_from_dict -- #2001\n")
+
+##A biblio frame in the shape getrows() has by the time the refresh runs: the
+##Redivis column names, .csv already stripped from `table`.
+fake_biblio <- function(...) {
+    rows <- list(...)
+    d <- as.data.frame(do.call(rbind, rows), stringsAsFactors = FALSE)
+    names(d) <- c("table", "DOI__for_paper_", "Reference_x", "URL__for_data_",
+                  "Derived_License", "Description", "BibTex")
+    d
+}
+biblio_row <- function(table, doi = "", reference = "", url = "", derived = "",
+                       description = "", bibtex = "@misc{x}") {
+    c(table, doi, reference, url, derived, description, bibtex)
+}
+refresh <- function(b, d) suppressMessages(refresh_biblio_from_dict(b, d))
+
+THE_TEST_THAT_MATTERS <- function() {
+    ##An empty dictionary cell must never blank a published biblio value. This
+    ##is `cdm_timss03` today -- biblio holds a paper DOI the dictionary lacks --
+    ##and it is the orphan-deletion pattern that removed provenance for four
+    ##live su_2024_* tables.
+    b <- fake_biblio(biblio_row("a_2020", doi = "10.1007/s10763-018-9916-9",
+                                description = "published text"))
+    for (empty in list(NA_character_, "", "NA")) {
+        d <- fake_sheet(sheet_row("a_2020"))
+        d$`DOI (for paper)`[1] <- empty
+        d$Description[1]       <- empty
+        out <- refresh(b, d)$biblio
+        check(out$DOI__for_paper_[1] == "10.1007/s10763-018-9916-9" &&
+              out$Description[1] == "published text",
+              paste0("a dictionary cell holding ",
+                     if (is.na(empty)) "NA" else paste0("'", empty, "'"),
+                     " never blanks a published value"))
+    }
+}
+THE_TEST_THAT_MATTERS()
+
+local({
+    ##The 163 conflicts: the dictionary is the corrected side.
+    b <- fake_biblio(biblio_row("rmet_higgins_2022_tas",
+                                description = "the paper's title, in the wrong field"))
+    d <- fake_sheet(sheet_row("rmet_higgins_2022_tas",
+                              description = "Toronto Alexithymia Scale"))
+    res <- refresh(b, d)
+    check(res$biblio$Description[1] == "Toronto Alexithymia Scale",
+          "the dictionary wins a conflict on an already-published row")
+    check(nrow(res$log) == 1L && res$log$kind[1] == "conflict",
+          "the change is logged as a conflict")
+    check(res$log$was[1] == "the paper's title, in the wrong field" &&
+          res$log$now[1] == "Toronto Alexithymia Scale",
+          "the log carries both sides, so the first run is reviewable as a list")
+})
+
+local({
+    ##The 62 fills.
+    b <- fake_biblio(biblio_row("a_2020"))
+    d <- fake_sheet(sheet_row("a_2020", description = "Big Five Inventory"))
+    res <- refresh(b, d)
+    check(res$biblio$Description[1] == "Big Five Inventory",
+          "a blank biblio cell is filled from the dictionary")
+    check(res$log$kind[1] == "fill", "the change is logged as a fill")
+})
+
+local({
+    ##Churn control. A run that rewrote every row for a resolver prefix or a
+    ##case difference would bury the 226 real changes in a 4,261-row diff.
+    b <- fake_biblio(biblio_row("a_2020", doi = "https://doi.org/10.1/x",
+                                derived = "CC BY 4.0",
+                                description = "Spatial  reasoning "))
+    d <- fake_sheet(sheet_row("a_2020", doi = "doi: 10.1/x", derived = "cc by 4.0",
+                              description = "Spatial reasoning"))
+    res <- refresh(b, d)
+    check(nrow(res$log) == 0L,
+          "a DOI resolver prefix, a licence spelling and whitespace are not changes")
+    check(res$biblio$DOI__for_paper_[1] == "https://doi.org/10.1/x",
+          "an unchanged cell keeps the published bytes")
+})
+
+local({
+    ##Case IS significant in a description: an instrument name that changed case
+    ##changed. (DOIs and licences are the two exceptions above.)
+    b <- fake_biblio(biblio_row("a_2020", description = "dreem"))
+    d <- fake_sheet(sheet_row("a_2020", description = "DREEM"))
+    check(nrow(refresh(b, d)$log) == 1L, "a case change in a Description is a change")
+})
+
+local({
+    b <- fake_biblio(biblio_row("A_2020", description = "old"))
+    d <- fake_sheet(sheet_row("a_2020", description = "new"))
+    check(refresh(b, d)$biblio$Description[1] == "new",
+          "the key match is case-insensitive (307 tables depend on this)")
+})
+
+local({
+    ##getrows() strips .csv from biblio before writing; some dictionary rows
+    ##still carry it.
+    b <- fake_biblio(biblio_row("a_2020", description = "old"))
+    d <- fake_sheet(sheet_row("a_2020"))
+    d$table[1] <- "a_2020.csv"; d$table.lower[1] <- "a_2020.csv"
+    d$Description[1] <- "new"
+    check(refresh(b, d)$biblio$Description[1] == "new",
+          "a dictionary row still carrying .csv matches the stripped biblio row")
+})
+
+local({
+    ##A truncated sheet must be able to say "no change", never "wrong change".
+    b <- fake_biblio(biblio_row("a_2020", description = "published"),
+                     biblio_row("b_2020", description = "published"))
+    d <- fake_sheet(sheet_row("b_2020", description = "published"))
+    res <- refresh(b, d)
+    check(res$biblio$Description[1] == "published" && nrow(res$log) == 0L,
+          "a biblio row the dictionary does not mention is left alone")
+    check(nrow(res$biblio) == 2L, "the refresh adds no rows and drops none")
+})
+
+local({
+    ##BibTeX is cached on purpose -- regenerating costs a DOI fetch plus a
+    ##Claude call, and the model does not return byte-identical BibTeX twice.
+    b <- fake_biblio(biblio_row("a_2020", bibtex = "@misc{cached}"))
+    d <- fake_sheet(sheet_row("a_2020", description = "x"))
+    check(refresh(b, d)$biblio$BibTex[1] == "@misc{cached}",
+          "the refresh never touches BibTex")
+})
+
+local({
+    ##comps/nom/sim spell the licence column with an underscore.
+    b <- fake_biblio(biblio_row("a_2020", derived = "CC0 1.0"))
+    d <- fake_sheet(sheet_row("a_2020"))
+    names(d)[names(d) == "Derived License"] <- "Derived_License"
+    d$Derived_License[1] <- "CC BY 4.0"
+    check(refresh(b, d)$biblio$Derived_License[1] == "CC BY 4.0",
+          "both dictionary spellings of the licence column are read")
+})
+
+local({
+    ##A sheet with no such column at all is a sheet, not an error.
+    b <- fake_biblio(biblio_row("a_2020", url = "http://example.org"))
+    d <- fake_sheet(sheet_row("a_2020"))
+    d[["URL (for data)"]] <- NULL
+    check(refresh(b, d)$biblio$URL__for_data_[1] == "http://example.org",
+          "a dictionary with no URL column leaves the biblio URL alone")
+})
+
+local({
+    ##The dictionary has known duplicate rows (dictionary_duplicates_2026-08-24).
+    b <- fake_biblio(biblio_row("a_2020", description = "old"))
+    d <- fake_sheet(sheet_row("a_2020", description = "first"),
+                    sheet_row("a_2020", description = "second"))
+    res <- refresh(b, d)
+    check(res$biblio$Description[1] == "first" && nrow(res$biblio) == 1L,
+          "a duplicated dictionary row does not duplicate or double-write biblio")
+})
+
+local({
+    ##The log is written even when nothing drifted: "nothing changed" is a
+    ##different and more useful statement than a missing file.
+    tmplog <- tempfile(fileext = ".csv")
+    on.exit(unlink(tmplog), add = TRUE)
+    b <- fake_biblio(biblio_row("a_2020", description = "same"))
+    d <- fake_sheet(sheet_row("a_2020", description = "same"))
+    suppressMessages(refresh_biblio_from_dict(b, d, "core", log.file = tmplog))
+    check(file.exists(tmplog), "an empty refresh still writes its log")
+    check(identical(names(readr::read_csv(tmplog, show_col_types = FALSE)),
+                    c("table", "column", "kind", "was", "now")),
+          "the empty log keeps the full header")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }

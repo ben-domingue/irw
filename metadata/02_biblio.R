@@ -190,6 +190,10 @@ getrows<-function(l) {
         irw_dict <- u$dict
         write_dict_provenance(u$provenance, l$file.prov)
     }
+    ## The refresh log sits beside the CSV it explains: biblio.csv ->
+    ## biblio_refresh_log.csv. Derived rather than configured so all four
+    ## sources get one without four more list entries.
+    file.refresh <- if (is.null(l$file.refresh)) sub("\\.csv$", "_refresh_log.csv", file.out) else l$file.refresh
     ## Read the current biblio file
     user <- redivis$user(user)
     dataset <- user$dataset(dataset)
@@ -238,6 +242,17 @@ getrows<-function(l) {
     biblio<-biblio[!test,]
     ##no csv
     biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+    ## Refresh the five dictionary-owned columns on EVERY row, not just the new
+    ## ones (#2001). new_data_rows above is, by construction, the rows biblio
+    ## does not have; without this a correction typed into the sheet for an
+    ## already-published table reaches nobody. Fills blanks, prefers the
+    ## dictionary on conflict, and never blanks a biblio value from an empty
+    ## dictionary cell. See refresh_biblio_from_dict() in dict_union.R.
+    refreshed <- refresh_biblio_from_dict(biblio, irw_dict, name, log.file = file.refresh)
+    biblio <- refreshed$biblio
+    ## Runs before apply_data_doi(): the refresh never blanks a paper DOI, and
+    ## the deposit-DOI retirement below is the one thing entitled to.
+
     ## Save the updated biblio to a CSV file
     ## Custom licence terms, for EVERY row rather than only the new ones.
     ##
