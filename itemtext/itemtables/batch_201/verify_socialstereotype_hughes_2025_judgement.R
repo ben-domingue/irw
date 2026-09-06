@@ -114,5 +114,37 @@ if (file.exists(SCORED)) {
 } else {
     cat("\n=== Route 4 skipped: ", SCORED, " not present ===\n", sep = "")
 }
+# --- Route 5: can the five T&S wordings be keyed to affil1-affil5? -------
+# Tackman & Srivastava (2016), psycnet.apa.org/fulltext/2015-37763-001.pdf, gives
+# the five items in order: (a) "I like this person", (b) "I would enjoy talking
+# to this person", (c) "I would enjoy spending time with this person",
+# (d) "This person is the type of person I could get along with",
+# (e) "This person is the type of person I could become close friends with".
+#
+# Route 4 already proves affil1-affil5 ARE these five (the deposit composite
+# averages exactly them). The open question is the per-code ORDER. This route
+# tries to settle it and FAILS -- recorded because a failed route is evidence.
+cat("\n=== Route 5: keying the five wordings to codes (INCONCLUSIVE) ===\n")
+cat("  endorsement ease, by mean:\n")
+for (nm in paste0("affil", 1:5))
+    cat(sprintf("    %-7s M=%.3f\n", nm, mean(W[, nm], na.rm = TRUE)))
+cat("  Consistent with (a) easiest and (e) hardest: affil1 is the highest mean\n")
+cat("  and affil5 the lowest, which fits (a) 'I like this person' against\n")
+cat("  (e) 'could become close friends with'. That pins the ENDS only.\n\n")
+cat("  Shared-stem test for (c) vs (d) at affil3/affil4: items (d) and (e) share\n")
+cat("  the stem 'This person is the type of person I could ...', so (d) should\n")
+cat("  correlate more with (e)=affil5 than (c) does.\n")
+cat(sprintf("    r(affil3, affil5) = %.3f\n", cor(W[, "affil3"], W[, "affil5"], use = "complete.obs")))
+cat(sprintf("    r(affil4, affil5) = %.3f\n", cor(W[, "affil4"], W[, "affil5"], use = "complete.obs")))
+cat("  This points AGAINST article order (it would make affil3 = (d)), but the\n")
+cat("  test is confounded: affil3's mean sits closer to affil5's than affil4's\n")
+cat("  does, and items closer in difficulty correlate more highly whatever the\n")
+cat("  wording. Differential correlations with perceived warmth, agreeableness,\n")
+cat("  extraversion and competence separate affil3 from affil4 by <= 0.02.\n")
+cat("  CONCLUSION: the order is NOT established. All six affil codes keep empty\n")
+cat("  item_text; the five wordings are recorded in provenance instead. Closing\n")
+cat("  this needs the administered Qualtrics form, which the deposit does not\n")
+cat("  contain -- a human action, not another statistical route.\n")
+
 cat("\nFINAL VERDICT:", if (r1 && r2 && r3 && isTRUE(r4)) "PASS" else
     if (r1 && r2 && r3 && is.na(r4)) "PASS (route 4 unavailable)" else "FAIL", "\n")
