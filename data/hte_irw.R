@@ -9,7 +9,7 @@ df <- df |>
          s_correct,
          item_id) |>
   rename(id = s_id,
-         treatment = s_itt_2122,
+         treat = s_itt_2122,
          resp = s_correct)
 
 # create item IDs for each survey item

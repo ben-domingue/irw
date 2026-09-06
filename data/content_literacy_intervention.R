@@ -10,7 +10,7 @@ df <- df |>
          s_itt_consented) |>
   rename(item = s_q_num,
          resp = s_correct,
-         treatment = s_itt_consented)
+         treat = s_itt_consented)
 
 ids <- as.data.frame(unique(df$s_id))
 ids <- ids |>
@@ -19,7 +19,7 @@ ids <- ids |>
 df <- df |>
   left_join(ids, by=c('s_id' = "unique(df$s_id)"))  |>
   # drop character item variable
-  select(id, treatment, item, resp) |>
+  select(id, treat, item, resp) |>
   # use item_id column as the item column
   arrange(id, item)
 
