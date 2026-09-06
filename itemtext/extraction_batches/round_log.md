@@ -5262,3 +5262,10 @@ deleted from the batch; sidecars and all six `verify_*.R` stay. Ben emptied `cle
 
 **batch_034 is now fully closed**: six tables, six shipped. Its issues-page entry is owed and is
 NOT covered by datapages#142 — that PR predates this ruling.
+
+**Issues-page entry for `fukuda_2021_health_literacy`: datapages#144.** Not covered by #139 or
+#142, both of which predate the rights ruling — #142 says outright that the table was held. The
+entry leads with the two things that change an analysis rather than merely documenting
+provenance: the scale runs backwards relative to the published key, and the 46-of-47 item gap
+means codes above `hl_item38` do not equal canonical HLS-EU-Q47 numbers, so a join on item
+number silently misaligns eight items. Page: 294 entries before, 295 after.
