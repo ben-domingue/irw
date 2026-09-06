@@ -5290,3 +5290,67 @@ left alone. Queue now: 291 done / 56 blocked / 12 failed / 55 excluded / 987 pen
 `circuit_breaker.flag` deleted. **Still owed from the outage**: the `count(*)` verification of
 `fukuda_2021_health_literacy` in the `irw_text_2` draft, which was stamped on `numRows` alone
 because the query route was down.
+
+## batch_037 — 2026-09-06
+
+6 tables claimed, **6 written / 0 blocked / 0 failed** — yield 6/6 (100%). No
+circuit-breaker exposure (0 failed). Six agents, one table each; all six returned.
+
+Tables: `genpsych_russell_2024_gemma`, `_gpt3_5`, `_gpt4o`, `_llama3`, `_mixtral`,
+`gerber_2022_altruism`.
+
+**Gates.** normalize_nulls fixed 2 of 6 (gemma, llama3). audit_batch: 6 PASS, zero
+WARNs — so nothing for Step 5c to explain. verify_batch: 3 PASS, 3 MISSING(exempt)
+(the data_labels tables). lint_verification: 6 rows, no problems. irw-validate: all
+6 ok. check_provenance: no failures.
+
+**The genpsych five are one source and a good one.** All five come from OSF project
+`zcytb` (Russell-Lasalandra, Christensen & Golino 2024, AI-GENIE, CC0), each from its
+own model's `<model>_deID.xlsx`. These are Qualtrics exports whose question-text row
+is keyed by the very column names the IRW table uses — `data/genpsych_russell_2024.r`
+does `select(starts_with("item"))` with no rename — so all five are `data_labels`
+with zero mapping inference. Item counts differ per model: gemma 28, llama3 30,
+gpt3_5 31, mixtral 32, gpt4o 35.
+
+**Worth flagging for anyone who touches these later:** each LLM generated its *own*
+item pool, and all five store them under the same `items_1..items_N` codes. The item
+text is entirely different per table and must never be copied between them. Every
+agent independently derived this and said so unprompted. The items are also not a
+published Big Five inventory — they are model-generated wording (carrying the models'
+own grammatical slips, transcribed verbatim), administered to ~1,000 Prolific humans.
+The `instrument` field on these is a descriptive label written by IRW, not a title
+quoted from a source; that is disclosed in each provenance row.
+
+**Step 5b re-checks (orchestrator, all confirmed).**
+- mixtral's direction-pinning claim: exactly 2 of 32 items have `resp_min=2` /
+  4 levels, and they are `items_6` and `items_14` — the two source columns that never
+  take "Strongly Disagree". Confirms Strongly Disagree=1, not 5, from the data itself.
+- Row/item totals reproduce server-side for all five: gemma 28,028 / gpt3_5 31,031 /
+  llama3 30,030 / mixtral 31,936 / gpt4o 34,965, per-item n matching the agents' figures.
+- gerber's public claim that Duerden et al. 2012 Table 1 prints only **13** adapted
+  items: fetched the PDF (jyd.pitt.edu article/download/155/141) and **confirmed** —
+  "I have made change for a stranger." carries `---` in the Adapted column, against the
+  same paper's 14-item reliability count. So `alt2` really has no published adapted
+  string and its IRW reconstruction is warranted, disclosed in `public_note`.
+  verify_gerber re-ran live and reproduced alt8 0.368 vs alt7 0.492 and the
+  floor/ceiling sets. VERDICT: PASS.
+
+**gerber_2022_altruism ships PARTIAL, deliberately.** French administration with no
+published French wording (S1 Data is a single unlabelled RawData sheet), so English
+ships under `translated_substitute`. The mid-range block {alt3, alt4, alt10, alt11}
+sits within 0.27 of a mean and is not separated by any route; position 8 and the
+floor/ceiling items are pinned. Two paywalls were hit and neither is fatal:
+tandfonline 10.1080/10888691.2025.2511192 (403, not OA) is a DIF study that would
+likely print all 14 items verbatim and would settle alt2 — worth a human's
+institutional access, but it is a caveat on one item, not a block on the table.
+
+**Left for the triage session.** (1) `gerber_2022_altruism` carries IRW-generated
+wording for `alt2`; `check_provenance` does not flag it (it is not
+`machine_translation`), but the standing disclosure ruling arguably reaches it, and the
+issues page lives in the separate `irw_site` repo, out of this round's scope.
+(2) `translation_source` was filled for gerber as `official_instrument_english` —
+13 of its 14 items are the adaptation's own published English — dropping the
+corpus-wide blank count 18 -> 17. (3) Pre-existing and not from this round:
+`extremera_2016_shs` still ships IRW-generated English with no issues-page entry.
+
+Cap not reached (batch_040 is the cap; this was 037).
