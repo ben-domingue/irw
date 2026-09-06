@@ -38,6 +38,8 @@ import os
 import sys
 from pathlib import Path
 
+from doi_hygiene import classify, normalize
+
 ##IRW_DICT_AUTO_PATH exists so metadata/tests/manual_dict_test.R can exercise
 ##this writer for real -- same quoting, same refusals -- against a scratch file
 ##instead of the tracked one. Production never sets it.
@@ -52,11 +54,14 @@ STAGING_PATH = Path(os.environ.get("IRW_DICT_AUTO_PATH")
 ##what made a name-keyed union ambiguous; resolve_dict_cols() in dict_union.R
 ##maps these two onto whichever names the sheet is currently using. Do not
 ##"simplify" them back to one name.
+##`DOI (for data)` has no counterpart in the sheet: it is the #1690 split, and
+##it lives only here and in the merged export. See DICT_AUTO_ONLY_COLS in
+##metadata/dict_union.R.
 COLUMNS = [
     "table", "table.lower", "Description", "URL (for data)", "Reference",
-    "DOI (for paper)", "Original License", "Custom License (source)",
-    "Public Reshare?", "Derived License", "Custom License (derived)",
-    "Notes", "Contributor", "Date",
+    "DOI (for paper)", "DOI (for data)", "Original License",
+    "Custom License (source)", "Public Reshare?", "Derived License",
+    "Custom License (derived)", "Notes", "Contributor", "Date",
 ]
 
 CONTRIBUTOR = "automated"
@@ -67,6 +72,7 @@ KEY_MAP = {
     "url": "URL (for data)",
     "reference": "Reference",
     "doi": "DOI (for paper)",
+    "doi_data": "DOI (for data)",
     "original_license": "Original License",
     "custom_license_source": "Custom License (source)",
     "public_reshare": "Public Reshare?",
@@ -108,6 +114,44 @@ def main():
 
     if not row["table"]:
         sys.exit("payload needs a non-empty 'table'")
+
+    ##`DOI (for paper)` acquired 83 cells wrapped in a resolver URL, prefixed
+    ##`data doi: `, or carrying a journal supplement suffix before anyone
+    ##looked (#1690). Those forms are mechanically removable and mean the same
+    ##thing afterwards, so they are removed here rather than reported. What is
+    ##NOT touched is a data-repository DOI: replacing it needs the linked
+    ##publication, which is the open schema question on #1690, so the row is
+    ##written as given and the cell is left for that decision.
+    if row["DOI (for data)"]:
+        row["DOI (for data)"] = normalize(row["DOI (for data)"])[0]
+    if row["DOI (for paper)"]:
+        doi, rules = normalize(row["DOI (for paper)"])
+        if rules:
+            print(f"note: DOI normalised ({', '.join(rules)}): "
+                  f"{row['DOI (for paper)']!r} -> {doi!r}", file=sys.stderr)
+        row["DOI (for paper)"] = doi
+        kind = classify(doi)
+        ##A deposit DOI is not a paper DOI, and putting one here is the defect
+        ###1690 exists for. It is not ambiguous -- a Dataverse or figshare
+        ##prefix says what the object is -- so route it rather than refuse it,
+        ##and say so. A caller that knows better passes `doi_data` directly.
+        if kind == "data_doi" and not row["DOI (for data)"]:
+            print(f"note: {doi} is a data-repository DOI; filed under "
+                  f"'DOI (for data)', not 'DOI (for paper)' (#1690)",
+                  file=sys.stderr)
+            row["DOI (for data)"] = doi
+            row["DOI (for paper)"] = ""
+            doi, kind = "", "empty"
+        ##Free text ("not yet published", a landing-page URL) is not a DOI and
+        ##never becomes one downstream -- it just fails to resolve, quietly, in
+        ##whatever tries next. Refuse it at the door; leave the cell blank and
+        ##put the sentence in `notes` instead.
+        if kind == "free_text":
+            sys.exit(f"'doi' is not a DOI: {doi!r}. Leave it blank and put the "
+                     f"explanation in 'notes'.")
+        if kind == "multiple":
+            sys.exit(f"'doi' holds more than one DOI: {doi!r}. One row, one "
+                     f"paper DOI; the others belong in 'notes'.")
     ##Derived, never accepted from the payload: every downstream join is on the
     ##lowercased name, and letting a caller supply a mismatched one would make a
     ##row that silently matches nothing.

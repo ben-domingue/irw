@@ -143,6 +143,17 @@ export — but they differ in *granularity*, and that difference is deliberate:
   `metadata/biblio_provenance.csv` records which cells came from the automated
   file, and unlike the tags sidecar it is committed.
 
+> **One column exists only in the automated file: `DOI (for data)`.** The sheet
+> does not have it and is not going to. 979 rows put a *deposit* DOI (Dataverse,
+> Mendeley, figshare, Zenodo, Dryad, OSF, ICPSR) in `DOI (for paper)`, which is a
+> different object -- its year is a deposit year and it resolves to the
+> depositor, not the authors. `DICT_AUTO_ONLY_COLS` in `metadata/dict_union.R`
+> carries the split; `union_dict()` creates the column in the merged frame
+> (#1690). This is also the **only** case where an automated cell beats a filled
+> human one: where the automated `DOI (for data)` equals the sheet's
+> `DOI (for paper)`, the paper cell is cleared *in the export*, never in the
+> sheet, and every cleared cell is named in the provenance file.
+
 > **Do not delete the rename in `metadata/tag_normalize.R`.** Its comment says to
 > fix the sheet itself once the Sheets-write question is resolved, which reads as
 > temporary. It is not. The rename is idempotent, and it also repairs rows entered

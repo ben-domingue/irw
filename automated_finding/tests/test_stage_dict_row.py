@@ -109,5 +109,47 @@ class StageDictRowTest(unittest.TestCase):
         self.assertIn("header", r.stderr)
 
 
+class DataDoiRoutingTest(StageDictRowTest):
+    """#1690: a deposit DOI must not land in `DOI (for paper)`."""
+
+    def test_data_doi_is_routed_to_its_own_column(self):
+        r = self.stage(self.ok_payload(
+            table="feng2026_x", doi="https://doi.org/10.7910/DVN/ZDNSFJ"))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        row = self.rows()[0]
+        self.assertEqual(row["DOI (for data)"], "10.7910/DVN/ZDNSFJ")
+        self.assertEqual(row["DOI (for paper)"], "")
+
+    def test_an_article_doi_stays_put(self):
+        r = self.stage(self.ok_payload(
+            table="a_2020", doi="10.1371/journal.pone.0146050"))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        row = self.rows()[0]
+        self.assertEqual(row["DOI (for paper)"], "10.1371/journal.pone.0146050")
+        self.assertEqual(row["DOI (for data)"], "")
+
+    def test_a_caller_that_knows_better_is_not_overridden(self):
+        ##Both supplied: the paper DOI is a paper DOI, so nothing is routed.
+        r = self.stage(self.ok_payload(
+            table="b_2021", doi="10.1371/journal.pone.0146050",
+            doi_data="https://doi.org/10.7910/DVN/ZDNSFJ"))
+        self.assertEqual(r.returncode, 0, r.stderr)
+        row = self.rows()[0]
+        self.assertEqual(row["DOI (for paper)"], "10.1371/journal.pone.0146050")
+        self.assertEqual(row["DOI (for data)"], "10.7910/DVN/ZDNSFJ")
+
+    def test_free_text_is_refused(self):
+        r = self.stage(self.ok_payload(
+            table="c_2022", doi="not yet published"))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("not a DOI", r.stderr + r.stdout)
+
+    def test_several_dois_in_one_cell_are_refused(self):
+        r = self.stage(self.ok_payload(
+            table="d_2023", doi="10.7910/DVN/PNGUT5; 10.7910/DVN/7A9YMV"))
+        self.assertNotEqual(r.returncode, 0)
+        self.assertIn("more than one DOI", r.stderr + r.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

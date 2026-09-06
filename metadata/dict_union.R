@@ -25,10 +25,22 @@
 ##the sheet currently calls them.
 DICT_AUTO_COLS <- c(
     "table", "table.lower", "Description", "URL (for data)", "Reference",
-    "DOI (for paper)", "Original License", "Custom License (source)",
-    "Public Reshare?", "Derived License", "Custom License (derived)",
-    "Notes", "Contributor", "Date"
+    "DOI (for paper)", "DOI (for data)", "Original License",
+    "Custom License (source)", "Public Reshare?", "Derived License",
+    "Custom License (derived)", "Notes", "Contributor", "Date"
 )
+
+##Columns that exist HERE and not in the sheet.
+##
+##`DOI (for data)` is the #1690 schema change, and it deliberately never becomes
+##a sheet column. 979 dictionary rows put a *deposit* DOI (Dataverse, Mendeley,
+##figshare, Zenodo, Dryad, OSF, ICPSR) in `DOI (for paper)`, which is a different
+##object from the paper: its year is a deposit year, and resolving it gets the
+##depositor rather than the authors. Splitting the two needed either a sheet
+##column plus a 979-cell paste, or this. Ben chose this on 2026-09-06 --
+##the automated file carries the new column, `union_dict()` creates it in the
+##merged frame, and nobody edits the sheet.
+DICT_AUTO_ONLY_COLS <- c("DOI (for data)")
 
 ##Every row in an automated file must be machine-written, for the same reason
 ##03_tags.R forces Rater: a human row placed here would be outranked by the
@@ -73,6 +85,12 @@ resolve_dict_cols <- function(dict, label = "dictionary") {
     plain <- setdiff(DICT_AUTO_COLS, c("Custom License (source)", "Custom License (derived)"))
     for (cl in plain) {
         hit <- which(nm == cl)
+        ##An auto-only column is absent from the sheet by design, so NA is the
+        ##right answer rather than an error. union_dict() calls
+        ##ensure_dict_auto_cols() first, so by the time IT resolves, the column
+        ##is there; other callers (tests/manual_dict_test.R reads the raw sheet)
+        ##get NA and must not use it.
+        if (length(hit) == 0L && cl %in% DICT_AUTO_ONLY_COLS) next
         if (length(hit) != 1L) {
             stop(label, ": expected exactly one column named '", cl, "', found ",
                  length(hit), ". The dictionary layout has changed -- re-check ",
@@ -238,6 +256,30 @@ write_dict_pending <- function(pending, pending.file) {
     invisible(NULL)
 }
 
+##Add any auto-only column the sheet does not carry, as all-blank, so the merge
+##and everything after it can treat the frame as having the full layout.
+##Appended at the end rather than inserted: 02_biblio.R selects by name, but the
+##two `Custom License` columns are resolved by ORDER, and inserting a column
+##between them would silently swap source terms for derived ones.
+ensure_dict_auto_cols <- function(dict) {
+    for (cl in DICT_AUTO_ONLY_COLS) {
+        if (!cl %in% names(dict)) dict[[cl]] <- NA_character_
+    }
+    dict
+}
+
+##Normalise a DOI for COMPARISON only. Mirrors normalize() in
+##automated_finding/doi_hygiene.py, which is the definition; the two are pinned
+##together by a parity test in tests/test_dict_union.R rather than by this file
+##shelling out to python on every pipeline run.
+dict_norm_doi <- function(x) {
+    x <- trimws(ifelse(is.na(x), "", as.character(x)))
+    x <- trimws(sub("(?i)^\\s*(data\\s+doi|doi)\\s*:\\s*", "", x, perl = TRUE))
+    x <- trimws(sub("(?i)^https?://(dx\\.)?doi\\.org/", "", x, perl = TRUE))
+    x <- trimws(sub("\\.s[0-9]{3}$", "", x))
+    trimws(sub("\\.$", "", x))
+}
+
 ##Merge the automated rows into the sheet export, column-wise.
 ##
 ##Returns a list: `dict` (the merged frame, in the sheet's own column order and
@@ -245,8 +287,10 @@ write_dict_pending <- function(pending, pending.file) {
 ##(one row per table an automated cell reached, naming which cells).
 union_dict <- function(dict, auto, label = "dictionary") {
     if (is.null(auto) || !nrow(auto)) {
-        return(list(dict = dict, provenance = dict_provenance_frame()))
+        return(list(dict = ensure_dict_auto_cols(dict),
+                    provenance = dict_provenance_frame()))
     }
+    dict <- ensure_dict_auto_cols(dict)
     map <- resolve_dict_cols(dict, label)
 
     ##Columns eligible to be filled: everything but the key and the human's own
@@ -263,11 +307,35 @@ union_dict <- function(dict, auto, label = "dictionary") {
 
     filled <- character(0)   ##"table\tcolumn;column"
     nfill  <- 0L
+    ncleared <- 0L
 
     ##(a) tables the sheet already has: fill only the cells the human left blank.
     for (i in which(hit)) {
         row <- idx[i]
         got <- character(0)
+
+        ##THE ONE EXCEPTION to "a human cell wins the cell it occupies", and it
+        ##is narrow on purpose (#1690, Ben 2026-09-06). When the automated file
+        ##says a table's `DOI (for data)` is exactly the value the sheet holds in
+        ##`DOI (for paper)`, the sheet is citing a data deposit as the paper. The
+        ##paper cell is cleared IN THE EXPORT so the site and the packages stop
+        ##publishing it; the sheet itself is untouched, and every cleared cell is
+        ##named in biblio_provenance.csv.
+        ##
+        ##Equality, not "the sheet's value looks like a deposit DOI": this may
+        ##only ever remove a value the automated file has demonstrably preserved
+        ##in the other column. Anything wider could silently drop the only
+        ##citation a row has.
+        ddoi <- auto[["DOI (for data)"]][i]
+        pcol <- map[["DOI (for paper)"]]
+        if (!dict_blank(ddoi) &&
+            !dict_blank(dict[[pcol]][row]) &&
+            identical(dict_norm_doi(dict[[pcol]][row]), dict_norm_doi(ddoi))) {
+            dict[[pcol]][row] <- NA_character_
+            got <- c(got, "-DOI (for paper)")
+            ncleared <- ncleared + 1L
+        }
+
         for (cl in fillable) {
             dcol <- map[[cl]]
             if (!dict_blank(dict[[dcol]][row])) next        ##human wins this cell
@@ -304,6 +372,12 @@ union_dict <- function(dict, auto, label = "dictionary") {
             length(add), " new table(s), ", nfill,
             " existing row(s) topped up, ",
             sum(hit) - nfill, " already complete")
+    if (ncleared) {
+        message(label, ": cleared `DOI (for paper)` on ", ncleared,
+                " row(s) where it held the deposit DOI now carried by ",
+                "`DOI (for data)` (#1690). The sheet is unchanged; see the ",
+                "provenance file for the list.")
+    }
 
     list(dict = dict, provenance = dict_provenance_frame(filled))
 }
@@ -351,6 +425,47 @@ dict_terms_column <- function(dict) {
     if (length(cust) >= 2L) return(as.character(dict[[nm[cust[2]]]]))
     if (length(cust) == 1L) return(as.character(dict[[nm[cust[1]]]]))
     rep(NA_character_, nrow(dict))
+}
+
+##Attach `DOI__for_data_` to every biblio row, and retire the deposit DOI from
+##`DOI__for_paper_` where the dictionary has split the two (#1690).
+##
+##Across ALL rows, for the same reason apply_custom_license_terms() is: 02
+##builds biblio.csv incrementally and only `new_data_rows` reads the dictionary,
+##so a change to a long-published row reaches nobody otherwise. Every one of the
+##979 rows this is for was published months ago.
+##
+##The clear is conditional on three things agreeing, not one: the dictionary
+##must now hold the deposit DOI in `DOI (for data)`, it must have no paper DOI
+##for that row, and the value biblio is carrying must BE that deposit DOI. A row
+##whose paper DOI is something else keeps it.
+apply_data_doi <- function(biblio, dict, label = "core") {
+    if (!"DOI (for data)" %in% names(dict)) {
+        biblio$DOI__for_data_ <- NA_character_
+        return(biblio)
+    }
+    src <- data.frame(.key  = dict_key(dict$table),
+                      ddoi  = as.character(dict[["DOI (for data)"]]),
+                      pdoi  = as.character(dict[["DOI (for paper)"]]),
+                      stringsAsFactors = FALSE)
+    src <- src[!duplicated(src$.key), ]
+    i <- match(dict_key(biblio$table), src$.key)
+
+    biblio$DOI__for_data_ <- ifelse(is.na(i) | dict_blank(src$ddoi[i]),
+                                    NA_character_, src$ddoi[i])
+
+    clear <- !is.na(i) &
+             !dict_blank(src$ddoi[i]) &
+             dict_blank(src$pdoi[i]) &
+             !dict_blank(biblio$DOI__for_paper_) &
+             dict_norm_doi(biblio$DOI__for_paper_) == dict_norm_doi(src$ddoi[i])
+    clear[is.na(clear)] <- FALSE
+    biblio$DOI__for_paper_[clear] <- NA_character_
+
+    message(label, ": ", sum(!is.na(biblio$DOI__for_data_)),
+            " row(s) carry a data DOI; cleared `DOI__for_paper_` on ",
+            sum(clear), " row(s) that were citing the deposit as the paper")
+    biblio
 }
 
 ##Attach the custom licence terms to every biblio row.

@@ -212,11 +212,25 @@ getrows<-function(l) {
     if ("Derived License" %in% names(new_data_rows) && !("Derived_License" %in% names(new_data_rows))) {
         new_data_rows <- dplyr::rename(new_data_rows, Derived_License=`Derived License`)
     }
+    ## `DOI (for data)` reaches this frame from dict_union.R, not the sheet
+    ## (#1690). A source with no automated file never gains the column, so it is
+    ## created blank rather than assumed.
+    if (!("DOI (for data)" %in% names(new_data_rows))) {
+        new_data_rows[["DOI (for data)"]] <- NA_character_
+    }
     new_data_rows <- new_data_rows |>
-    select(table, Reference, `DOI (for paper)`, Description, `URL (for data)`, Derived_License) |>
-    rename(DOI__for_paper_=`DOI (for paper)`, Reference_x=Reference, URL__for_data_=`URL (for data)`)
+    select(table, Reference, `DOI (for paper)`, `DOI (for data)`, Description, `URL (for data)`, Derived_License) |>
+    rename(DOI__for_paper_=`DOI (for paper)`, DOI__for_data_=`DOI (for data)`,
+           Reference_x=Reference, URL__for_data_=`URL (for data)`)
+    ## Cite the paper where there is one, the deposit otherwise. Without the
+    ## fallback every row #1690 splits would lose the BibTeX it has today and
+    ## drop through to generate_bibtex(), which is a regression dressed as a fix
+    ## -- the deposit's citation is the right one for a dataset with no paper.
     new_data_rows <- new_data_rows %>%
-        mutate(BibTex = map2_chr(table, DOI__for_paper_, fetch_bibtex_from_doi))
+        mutate(BibTex = map2_chr(table,
+                                 ifelse(dict_blank(DOI__for_paper_),
+                                        DOI__for_data_, DOI__for_paper_),
+                                 fetch_bibtex_from_doi))
     new_data_rows <- generate_bibtex(new_data_rows)
     biblio <- bind_rows(biblio, new_data_rows)
     ##remove nonpublic elements
@@ -235,9 +249,12 @@ getrows<-function(l) {
     ## why it is retired. The join itself lives in dict_union.R so it can be
     ## replayed offline against the real biblio.csv.
     biblio <- apply_custom_license_terms(biblio, irw_dict, name)
+    ## Same carry-through, for the paper/deposit DOI split (#1690).
+    biblio <- apply_data_doi(biblio, irw_dict, name)
 
     biblio<-biblio[,
-                   c("table","DOI__for_paper_", "Reference_x",  "URL__for_data_", 
+                   c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
+                     "URL__for_data_",
                      "Derived_License", "Custom_License_Terms", "Description", "BibTex")]
     readr::write_csv(biblio, file.out)
 }

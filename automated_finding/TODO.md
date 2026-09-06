@@ -468,14 +468,49 @@ do not treat the CSV's `proposed_name` column as a work list.
   read and supplied a surname from nothing. Worth doing regardless of whether the
   gate above is scheduled.
 
-- [ ] **Open a separate issue for `DOI (for paper)` column hygiene.** This is a
-  distinct defect from naming and does not belong on #1686. Across the 1,945
-  automated rows: **465 hold a dataset DOI** (figshare, Mendeley, Dataverse, OSF,
-  Zenodo, Dryad) in a column meant for the paper DOI, which is what drives roughly
-  55 spurious year mismatches -- the deposit year is not the paper year. Alongside:
-  33 full URLs, 22 cells prefixed `data doi: `, 10 PLOS `.sNNN` supplement
-  suffixes, 4 reading `not yet published`, and 2 cramming several DOIs plus
-  free-text notes into one cell.
+- [x] **Open a separate issue for `DOI (for paper)` column hygiene.** Opened as
+  **#1690**. The mechanical half is done: `doi_hygiene.py` normalises the wrappers
+  (resolver URLs, `data doi: ` prefixes, journal `.sNNN` supplement suffixes) and
+  `stage_dict_row.py` applies it on write, so no new automated row can carry those
+  forms. `dictionary_doi_corrections.csv` is the paste list for the 83 cells
+  already in the sheet.
+
+- [x] **#1690's open half: the 979 rows holding a data DOI.** Counted over the
+  whole dictionary rather than the automated rows alone (`doi_hygiene.py`, run it
+  for the current figures) and excluding preprint DOIs, which are the paper and
+  are not a defect. **Ben chose a distinct `DOI (for data)` column on 2026-09-06,
+  and chose to add it without touching the sheet.** So it is an auto-only column:
+  it lives in `dictionary_auto.csv` and in the merged export, `union_dict()`
+  creates it, and where it equals the sheet's `DOI (for paper)` the paper cell is
+  cleared in the export only. `backfill_data_dois.py` wrote the 979 rows; 971
+  land now, 8 are held for tables absent from metadata.csv.
+
+- [ ] **BLOCKING, before the next `irw_meta` publish: `irw_merge` groups tables
+  by `DOI__for_paper_`.** `Rpkg/R/merge.R:59` splits biblio on that column, and
+  826 rows across 147 groups currently group by a DEPOSIT DOI. Clearing those
+  cells is correct for citation and wrong for merging: those tables stop being
+  discoverable as siblings. The fix is a fallback -- group on the paper DOI
+  where there is one, the data DOI otherwise -- in `Rpkg/R/merge.R` and the
+  Python package's equivalent, both of which can read `DOI__for_data_` as soon
+  as biblio.csv carries it. Nothing uploads automatically, so the ordering is
+  controllable: land the package change first, publish second.
+
+- [ ] **The 8 held backfill rows.** They name tables the dictionary has and
+  metadata.csv does not, so they are held rather than dropped and land on the
+  first run after the table is published. One is not a table at all: the sheet
+  has a row whose `table` value is a whole citation string, `Canham L, Salamh P
+  et al. (2018). Evaluation of non-cognitive traits of doctor of physical therapy
+  learners in the United States. Harvard Dataverse.` -- a sheet defect needing a
+  human, not a pipeline bug. The others are `mtf`, `fryback_2009_health_pwbs`,
+  `fryback_2009_health_pwbp`, `fryback_2009_health_discrm`,
+  `fryback_2009_health_sf`, `diaz-narvaez_2024_dental_students` and
+  `anthropomorphism_health_Voropaeva_2026`.
+
+- [ ] **#1690's remaining tail, which needs a lookup rather than a rule.** 21
+  free-text cells (`not yet published`, `No DOI`, an OSF landing page) and 2
+  holding several DOIs (`condon_2024_sapa_personality` has seven, `imps2025_hf`
+  two, written on two lines). `stage_dict_row.py` refuses all of these on write
+  now, so the set cannot grow; clearing it means finding the paper for each.
 
 - [ ] **Six tables could not be name-checked at all** -- no DOI in the sheet and
   the DOI implied by their URL is not registered with Crossref or DataCite, so
