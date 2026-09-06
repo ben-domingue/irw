@@ -298,9 +298,9 @@ dejesus_2017_sf36,done,batch_026,2026-09-04T18:59:38
 derubeis_2017_arsq,done,batch_026,2026-09-04T18:59:38
 de_vries_2022_bat_burnout_core,done,batch_026,2026-09-04T18:59:38
 de_vries_2022_bat_secondary,done,batch_026,2026-09-04T18:59:38
-de_vries_2022_hexaco_meta,blocked,batch_026,2026-09-04T18:59:38
-de_vries_2022_hexaco_other,blocked,batch_026,2026-09-04T18:59:38
-de_vries_2022_hexaco_self,blocked,batch_026,2026-09-04T18:59:38
+de_vries_2022_hexaco_meta,excluded,batch_026,2026-09-04T18:59:38
+de_vries_2022_hexaco_other,excluded,batch_026,2026-09-04T18:59:38
+de_vries_2022_hexaco_self,excluded,batch_026,2026-09-04T18:59:38
 dinic_2025_shortdarktriad,done,batch_026,2026-09-04T18:59:38
 direkvand_2022_mjsi,done,batch_026,2026-09-04T18:59:38
 di_riso_2025_mask_emotion,done,batch_027,2026-09-04T19:12:37
@@ -1369,7 +1369,7 @@ gilbert_meta_18,pending,,
 gilbert_meta_19,pending,,
 gilbert_meta_23,pending,,
 gilbert_meta_30,pending,,
-gilbert_meta_32,pending,,
+gilbert_meta_32,excluded,,
 gilbert_meta_39,excluded,,
 gilbert_meta_45,pending,,
 gilbert_meta_68,pending,,
@@ -1394,7 +1394,7 @@ pezzuti_2025_coolpeople_main_nfc,done,batch_201,2026-09-05T13:16:43-07:00
 shu_2025_translation_add,done,batch_201,2026-09-05T13:16:43-07:00
 singh_2025_identity_pba,done,batch_201,2026-09-05T13:16:43-07:00
 socialstereotype_hughes_2025_judgement,done,batch_201,2026-09-05T13:16:43-07:00
-sun_2025_morality_study1_fairnessHEXACO,done,batch_201,2026-09-05T13:16:43-07:00
+sun_2025_morality_study1_fairnessHEXACO,excluded,,
 sun_2025_morality_study1_fairnessMCQ,done,batch_201,2026-09-05T13:16:43-07:00
 sun_2025_morality_study2_colleaguerespect,blocked,batch_201,2026-09-05T13:16:43-07:00
 sun_2025_morality_study2_colleaguetrust,blocked,batch_201,2026-09-05T13:16:43-07:00
