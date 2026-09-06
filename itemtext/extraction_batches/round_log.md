@@ -5433,3 +5433,14 @@ That is the batch_009 blind spot repeating. Five entries were therefore written 
 `fixes/itemtext_issues_draft.md`, covering both the de-novo caveat and the shared-code hazard;
 all six YAML entries parse. They are not applied — an entry is owed only once a table ships, and
 the live page is in the separate `irw_site` repo.
+
+**Ben's ruling on `gerber_2022_altruism`, same session: ship all 14 as-is.** Staged into
+`itemtables/clean/`, byte-identical to the batch copy. The reasoning offered and accepted: the
+`alt2` reconstruction is tightly constrained rather than free — all 13 published siblings apply
+one mechanical transformation of Rushton's originals ("I have made change for a stranger" ->
+"I would make change for someone I did not know"), and the reconstruction is already disclosed
+in `public_note` and in the drafted issues-page entry.
+
+**batch_037 triage is complete: 6 tables, 6 staged, 0 held.** `clean/` holds exactly six
+`*__items.csv` and nothing else. Upload is Ben's step; the `uploaded=` stamps and the six
+issues-page entries are owed only after he confirms it.
