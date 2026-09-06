@@ -450,7 +450,13 @@ so the label-based blast radius looks small precisely because the label is not w
 And the *response* tables are not in scope at all: this clause governs the instrument wording, not
 data a study collected with it, so every HEXACO response table stays in IRW.
 
-**OUTSTANDING at the time of writing: the two live tables are still published.** The takedown was
+**DONE 2026-09-06: deleted from the draft by Ben.** `irw_text` draft went 732 -> 730, both targets
+absent, `dasilva_2019_hexaco24__items` verified still present. The two rows are out of
+`metadata/itemtext_metadata.csv`. **The wording is still in released v19.0 and leaves only when that
+draft is released** -- until then the tracked baseline describes the draft rather than what is live,
+which is the one-release gap this deliberately accepts. Historical note follows.
+
+**Was outstanding when this was written: the two live tables are still published.** The takedown was
 scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
 asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
 `APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
