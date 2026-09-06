@@ -5631,3 +5631,50 @@ with the alternatives named in the public_note.
 
 Cap not reached (cap is batch_040); the next firing picks up batch_040, which
 will be the last round under the current cap.
+
+### batches 038 and 039 both 100%; batch_040 OOM-killed twice and NOT run — 2026-09-06
+
+Fired unattended at Ben's request after the batch_037 upload.
+
+**batch_038 — 6 written / 0 blocked / 0 failed.** `gerber_2022_eas_temperament`,
+`gesbert_2021_tdeq`, and four `ghanbari_2016_helma_*`. Gates: audit 5 PASS + 1 WARN, verify 6
+PASS, lint 0 ERROR. Its Step 5b re-check **overturned one of its own results**: 
+`ghanbari_2016_helma_access` shipped claiming VERIFIED on an EFA nearest-column route, but a
+300-replicate bootstrap recovered the claimed column for q5 in 14.4% of replicates against the
+runner-up's 34.7% — downgraded to PARTIAL. The subscale split survives (alpha is order-invariant,
+0.614/0.705 against published 0.61/0.71); the within-block order does not.
+
+**batch_039 — 6 written / 0 blocked / 0 failed.** The three remaining `ghanbari_2016_helma_*`,
+`gholami_2017_periodontal_knowledge`, `gilbert_meta_16`, `gilbert_meta_27`. Gates: audit 4 PASS +
+2 WARN (both explained), verify 3 PASS + 3 exempt, lint clean. `_reading` and `_understand`
+landed in the same round as batch_038 advised, without anyone reordering the queue — they were
+already adjacent.
+
+**batch_040 was attempted TWICE and never ran.** Both attempts were killed for host memory
+pressure at agent launch, not mid-round. The first attempt got as far as claiming its six rows at
+16:49:51 and wrote `cron_logs/round_2026-09-06_1649.log`; the second never wrote a log at all.
+Verified before touching anything: `batch_040/` held **zero files**, no round agent or runner
+process survived, and the only dirty file was the claim itself. Reconciled by `git restore` of
+the uncommitted claim — the diff was exactly those six rows — and the empty `batch_040/` was
+removed so the Step 0 cap is not consumed by a round that never happened. **batch_040 is still
+owed.**
+
+That is three OOM kills in one session (batch_038's first attempt, and batch_040 twice), all at
+launch. Round size is not the lever — see the note above. Firing stopped here rather than
+retrying a third time.
+
+**Queue: 296 done / 69 blocked / 12 failed / 55 excluded / 969 pending.** batches 038 and 039 are
+extracted and gated but **not triaged, not staged, not uploaded** — that is Ben's next session.
+
+**A gap that fired in BOTH rounds, and is systematic rather than a one-off.**
+`check_provenance.R` keys its public-issues-page rule on `translation_source=machine_translation`
+only, so rows carrying `mixed` — IRW-produced English alongside sourced text — pass it clean and
+are never routed to `itemtext_issues.qmd`, contrary to the 2026-09-02 ruling.
+`ghanbari_2016_helma_numeracy` (038) and `gilbert_meta_27` (039) both hit it. Widening that check
+is a small fix and is owed before either batch uploads.
+
+**An access route worth a deliberate sweep.** Harvard Dataverse `doi:10.7910/DVN/19PPE7` is
+behind a required guestbook plus the AWS WAF challenge — the same block logged for
+`gilbert_meta_40`. The thumbnail endpoint is not guestbook-gated, and
+`?imageThumb=100&format=original` returns the original bytes, verified byte-exact. That turned a
+would-be block into a data_labels pass, and may reopen other blocked Dataverse tables.
