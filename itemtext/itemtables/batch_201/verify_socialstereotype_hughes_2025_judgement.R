@@ -90,4 +90,29 @@ cat(sprintf("route 3 (affil6 is not in the 5-item scale): %s\n", if (r3) "PASS" 
 cat("\nNOT established: the wording of affil1-affil5 individually. The codebook\n")
 cat("gives two unkeyed examples for a five-item scale, so those five and affil6\n")
 cat("ship with empty item_text. Recorded PARTIAL for that reason.\n")
-cat("\nVERDICT:", if (r1 && r2 && r3) "PASS" else "FAIL", "\n")
+# --- Route 4: the deposit's OWN affiliation composite -------------------
+# Stronger than route 3 and it supersedes it as the primary evidence. The
+# deposit's 'SES stereotypes_scored data.csv' ships affil1..affil6 AND a scored
+# `affil` composite column, so the authors' own scoring can be reproduced
+# directly instead of argued from reliability.
+SCORED <- ".cache/socialstereotype_hughes_2025/scored_data.csv"
+r4 <- NA
+if (file.exists(SCORED)) {
+    sc <- read.csv(SCORED, stringsAsFactors = FALSE)
+    mm <- sapply(sc[A], as.numeric); cp <- as.numeric(sc$affil)
+    keep <- !is.na(cp) & rowSums(is.na(mm)) == 0
+    cat("\n=== Route 4: reproduce the deposit's own `affil` composite ===\n")
+    cat(sprintf("  rows with the composite and all six items: %d\n", sum(keep)))
+    cat(sprintf("  mean of ALL SIX matches: %d of %d\n",
+                sum(abs(rowMeans(mm[keep, ]) - cp[keep]) < 1e-8), sum(keep)))
+    hits <- sapply(1:6, function(j)
+        sum(abs(rowMeans(mm[keep, -j, drop = FALSE]) - cp[keep]) < 1e-8))
+    for (j in 1:6) cat(sprintf("  drop %-7s -> %4d of %d\n", A[j], hits[j], sum(keep)))
+    r4 <- hits[6] == sum(keep) && max(hits[-6]) < sum(keep)
+    cat("  ", if (r4) "PASS -- dropping affil6 reproduces it exactly and uniquely" else "FAIL",
+        "\n", sep = "")
+} else {
+    cat("\n=== Route 4 skipped: ", SCORED, " not present ===\n", sep = "")
+}
+cat("\nFINAL VERDICT:", if (r1 && r2 && r3 && isTRUE(r4)) "PASS" else
+    if (r1 && r2 && r3 && is.na(r4)) "PASS (route 4 unavailable)" else "FAIL", "\n")
