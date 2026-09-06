@@ -417,14 +417,25 @@ is a fee gate on commercial use, not a non-commercial bar — the mislabelling i
 with. It is moot now that the table is withdrawn, but it is the concrete case for why a
 one-value flag was never going to hold.
 
-**Scope applied 2026-09-06.** All eight deleted from the `irw_text` draft by
-`tools/withdraw_wording_rights.py`, so they leave at the next release; until then the wording
-is still in v18.0 and the deletion is recoverable. Each keeps its `uploaded` date and its
-`verify_<table>.R`, carries the withdrawal in `provenance.csv` `public_note`, is `blocked` in
-`queue_state.csv`, and has a `pending_index_notes.csv` row. Per the 2026-09-05 rule that
-withdrawal entries are not published, their issues-page entries were removed rather than
-rewritten, and the public schema page dropped both the `wording_rights` bullet and the section
-that stated the ECR-R position as current policy.
+**The flag was never applied consistently, and that is the second half of the ruling.** Five
+further live tables held the *same instruments* with no flag at all — `algner2022_uwes` (UWES-9,
+its wording taken from Schaufeli's own site), `bakker_2020_pss10` and `beck_2021_pss10` (PSS-10),
+`close_relationships` (ECR) and `conner_2017_flourishing` (Flourishing Scale). Four of them
+shipped in batches 003–011, before the rulings existed, with no rights note in `provenance.csv`
+at all. `conner_2017_flourishing` is the awkward one: it was checked *after* the ECR-R ruling on
+2026-09-04 and shipped unflagged anyway, and the round log recorded the inconsistency at the time
+rather than fixing it. Ben ruled all five out with the eight. **The lesson is that the flag's
+presence recorded which agent happened to look, not which instrument was restricted** — which is
+the strongest argument against ever rebuilding it.
+
+**Scope applied 2026-09-06.** All thirteen deleted from the `irw_text` draft by
+`tools/withdraw_wording_rights.py` (745 → 732 draft tables, keep-set asserted intact), so they
+leave at the next release; until then the wording is still in v18.0 and the deletion is
+recoverable. Each keeps its `uploaded` date and its `verify_<table>.R`, carries the withdrawal in
+`provenance.csv` `public_note`, is `blocked` in `queue_state.csv`, and has a
+`pending_index_notes.csv` row. Per the 2026-09-05 rule that withdrawal entries are not published,
+their issues-page entries were removed rather than rewritten, and the public schema page dropped
+both the `wording_rights` bullet and the section that stated the ECR-R position as current policy.
 
 ### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
 

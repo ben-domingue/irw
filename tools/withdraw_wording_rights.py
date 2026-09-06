@@ -1,9 +1,11 @@
-"""Withdraw the eight item-text tables carrying `wording_rights` (irw#1955).
+"""Withdraw the thirteen item-text tables barred by the wording_rights retirement (irw#1955).
 
-Each took its wording from an openly licensed deposit, but each instrument's
-rights holder states a use restriction on their own page. Under the 2026-09-05
-ruling (any stated use restriction blocks -- irw#1945) they do not ship. Ben
-ruled on 2026-09-06 that all eight are withdrawn.
+Eight carried the `wording_rights=NC` flag. Five more hold the SAME instruments
+without it -- they shipped before the 2026-09-04 rulings existed, or (in
+conner_2017_flourishing's case) were checked after and missed. Each instrument's
+rights holder states a use restriction on their own page, which blocks under the
+2026-09-05 ruling (irw#1945) regardless of where IRW's copy came from. Ben ruled
+on 2026-09-06 that all thirteen are withdrawn.
 
 Deletes them from the `irw_text` DRAFT, so they leave at the next release.
 Dry-run by default; re-run with APPLY=1.
@@ -23,6 +25,12 @@ TARGETS = {
     "esiason_2024_aaqii__items",                   # AAQ-II, ACBS/Bond: commercial users seek permission
     "EWAS_Sanford_2024_Flourish__items",           # Flourishing Scale, Diener: non-commercial only
     "extremera_2016_shs__items",                   # SHS, Lyubomirsky: permission for non-commercial use
+    # Same instruments, no flag -- shipped before the rulings, or checked and missed.
+    "algner2022_uwes__items",                      # UWES-9, Schaufeli; wording taken from his own site
+    "bakker_2020_pss10__items",                    # PSS-10, Cohen
+    "beck_2021_pss10__items",                      # PSS-10, Cohen
+    "close_relationships__items",                  # ECR, Fraley/Brennan
+    "conner_2017_flourishing__items",              # Flourishing Scale, Diener
 }
 # Sibling tables from the same studies that carry no restriction and MUST survive.
 KEEP = {
@@ -34,7 +42,6 @@ KEEP = {
     "extremera_2016_swls__items",
     "extremera_2016_ei__items",
     "extremera_2016_sbq__items",
-    "conner_2017_flourishing__items",
 }
 
 # Verify against what is PUBLISHED -- that is what has to leave. There is no
