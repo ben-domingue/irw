@@ -21,6 +21,13 @@ across all three code repos. Two queries do most of the work:
 - **milestone `Queue: one-offs`** — self-contained fixes, one session or less
   each, no decision needed, no dependency on anything else. Pull from the top.
 
+For *what to start next* rather than what exists, read **Project 4** filtered to
+`Status: Todo`: its `Depends on` column carries the ordering, and the structural
+issues with no roadmap number (#2001, #1955, #1342, #1942, #1856) are on it
+alongside the seventeen items. The ordering deliberately lives there rather than
+in a document — a work order written as prose is stale the week after it is
+written, which is `ARCHITECTURE.md`'s rule 2.
+
 `metadata/build_issue_triage.py` holds the assignment and
 `metadata/apply_issue_labels.py` applies it, so the next pass edits a list instead
 of re-reading 400 issues. Both are idempotent; the CSV between them is a derived
