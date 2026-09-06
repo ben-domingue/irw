@@ -1,3 +1,15 @@
+# Su et al. (2024), Temporal dynamics in psychological assessments:
+# a novel dataset with scales and response times. Scientific Data 11, 1046.
+# Paper: https://doi.org/10.1038/s41597-024-03888-8
+# Data: https://doi.org/10.5281/zenodo.10423537
+# Source: https://zenodo.org/records/10423537
+# License: CC BY 4.0 (data deposit), https://creativecommons.org/licenses/by/4.0/
+# Inputs: demographic.csv, phq9.csv, gad7.csv, isi.csv, pss.csv in raw/.
+# RT units: seconds, recorded to two decimal places (paper, Methods,
+# "Data generation process"). Preserve time1..N without a /1000 conversion.
+# PSS-14: retain the 1-5 item codes stored in the deposited pss.csv.
+# This restores reproducibility of existing IRW tables; no new data are added.
+
 library(tidyverse)
 library(janitor)
 library(readr)
@@ -384,7 +396,10 @@ file_check <- tibble(
 )
 
 file_check
+# QC summaries are not IRW response tables; keep them out of output/*.csv.
+qc_dir <- file.path(output_dir, "qc")
+dir.create(qc_dir, showWarnings = FALSE)
 write_csv(
   overall_qc,
-  file.path(output_dir, "su_2024_quality_check.csv")
+  file.path(qc_dir, "su_2024_quality_check.csv")
 )
