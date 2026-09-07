@@ -2,7 +2,8 @@
 # Usage: Rscript check_issues_page.R [<site_qmd_path>]
 #
 # Run from itemtext/. Reconciles every batch's provenance.csv against the live
-# public issues page and reports which tables owe it an entry.
+# public issues page, in both directions: which tables owe the page an entry,
+# and which entries on the page describe item text that is not there (#1985).
 #
 # A note is DUE once the table is live, not when the batch is triaged: the page
 # describes the data a reader can actually fetch, so an entry written before
@@ -13,9 +14,13 @@
 # one that triaged its batch, and nothing re-checked afterwards.
 #
 # A note you deliberately dropped as below the issues-page bar goes in
-# fixes/issues_page_dropped.csv (table,reason) so it stops being reported.
+# fixes/issues_page_dropped.csv (table,reason) so it stops being reported. An
+# ORPHAN entry whose fate is still being decided goes in
+# fixes/issues_page_orphans_ack.csv (table,reason) -- which stops it GATING, not
+# stops it being reported: acknowledged orphans are printed with their reason
+# every run.
 #
-# Exit status 1 if anything is DUE, so it can gate an upload wrap-up.
+# Exit status 1 if anything is DUE or ORPHAN, so it can gate an upload wrap-up.
 
 args <- commandArgs(trailingOnly = TRUE)
 qmd <- if (length(args)) args[1] else "../../irw_site/itemtext_issues.qmd"
@@ -69,6 +74,18 @@ cat(sprintf("issues page: %s (%d entries)\n", qmd,
                                 stdout = TRUE, stderr = FALSE))
 if (length(.br) && !is.na(.br[1]) && nzchar(.br[1]) && .br[1] != "main")
   cat(sprintf("  NOTE: that checkout is on branch '%s', not main -- it may be stale.\n", .br[1]))
+
+# The page's own entries, parsed rather than searched for. Everything above
+# reconciles OUTWARD -- provenance to page -- and so is blind to any entry that
+# reached the page by another route, because `rows` is filtered to the tables
+# carrying a public_note. That blindness has cost twice (#1985): seven PROMIS
+# entries outlived the wording's withdrawal on 2026-09-05 and kept describing
+# text that no longer existed, and two carver_2017_puggs uploads were lost while
+# every internal record said shipped -- the stale entry was the only signal.
+# Names are lower-cased on upload, so compare case-insensitively.
+.lines <- strsplit(page, "\n")[[1]]
+page_entries <- unique(tolower(trimws(gsub('^["\']|["\']$', "",
+  trimws(sub("^- table:", "", .lines[grepl("^- table:", .lines)]))))))
 
 # Every provenance record, not only the batches. The language backfill's 78
 # tables live outside itemtables/, and while this glob was batch-only they were
@@ -192,6 +209,70 @@ if (nrow(early)) {
   cat(sprintf("  %-42s %s\n", early$table, early$batch), sep = "")
 }
 
+# ORPHAN -- the reverse check. Every entry on the page whose item text is not
+# published, minus the ones CHECK/STAGED already named above (those carry a
+# public_note and a batch, so they are better reported there). What is left is
+# precisely the set the outward reconciliation cannot see.
+#
+# Liveness is the live_tables.csv snapshot, not a Redivis call. #1985 proposed
+# calling irw::irw_list_itemtext_tables() here; #1828 had since made this script
+# credential-free and offline on purpose, so it gates a wrap-up on a machine
+# with no token. The snapshot is that same union across shards, and it is loud
+# when stale -- so the offline route is kept, and the skip below is loud too.
+ack <- character(0)
+ack_reason <- character(0)
+ack_file <- "fixes/issues_page_orphans_ack.csv"
+if (file.exists(ack_file)) {
+  .a <- read.csv(ack_file, stringsAsFactors = FALSE)
+  ack <- tolower(trimws(.a$table))
+  ack_reason <- setNames(if ("reason" %in% names(.a)) .a$reason
+                         else rep("(no reason recorded)", length(ack)), ack)
+}
+
+if (is.null(snap)) {
+  cat("\nORPHAN: NOT CHECKED -- no live_tables.csv, so there is nothing to compare\n",
+      "  the page against. This check did not run. Refresh the snapshot with:\n",
+      "    python3 refresh_live_tables.py\n", sep = "")
+  orphan <- character(0)
+} else {
+  .accounted <- tolower(c(early$table, staged$table))
+  .missing <- setdiff(setdiff(page_entries, tolower(snap)), .accounted)
+  # An entry for a table sitting in the draft is early, not wrong: it goes live
+  # at the next release. Same distinction STAGED draws above.
+  .in_draft <- intersect(.missing, tolower(snap_draft))
+  orphan <- setdiff(.missing, .in_draft)
+
+  if (length(.in_draft)) {
+    cat(sprintf("\nSTAGED (page-only) -- %d entr%s for tables in the draft; live at the\n",
+                length(.in_draft), if (length(.in_draft) == 1) "y" else "ies"))
+    cat("next release, so the page is ahead of the reader, not wrong.\n")
+    cat(sprintf("  %s\n", sort(.in_draft)), sep = "")
+  }
+
+  .acked <- intersect(orphan, ack)
+  orphan <- setdiff(orphan, ack)
+
+  if (length(.acked)) {
+    cat("\nORPHAN (acknowledged) -- still on the page, still no item text. Recorded\n",
+        "in ", ack_file, ", so not gating; printed so it cannot go quiet.\n", sep = "")
+    for (t in sort(.acked))
+      cat(sprintf("  %s\n      %s\n", t,
+                  paste(strwrap(ack_reason[[t]], 68), collapse = "\n      ")))
+  }
+
+  if (length(orphan)) {
+    cat("\nORPHAN -- on the page, no item text published under that name. The page\n",
+        "is describing wording a reader cannot fetch: either the upload never\n",
+        "landed, or the text was withdrawn and its entry should have gone too.\n",
+        sep = "")
+    cat(sprintf("  %s\n", sort(orphan)), sep = "")
+    cat("Remove the entry, or restage the upload. If the decision is still\n",
+        "open, record it in ", ack_file, "\n",
+        "with a reason, rather than leaving the gate red until it is ignored.\n",
+        sep = "")
+  }
+}
+
 # The two ways the CSV and Redivis disagree. Neither blocks the exit status:
 # they are bookkeeping, not an unwritten disclosure, and a withdrawal is a
 # legitimate reason for the second. Reported every run so they cannot silently
@@ -239,5 +320,5 @@ if (!is.null(snap)) {
   }
 }
 
-if (!nrow(due)) cat("\nNothing due.\n")
-quit(status = if (nrow(due)) 1L else 0L)
+if (!nrow(due) && !length(orphan)) cat("\nNothing due, no orphan entries.\n")
+quit(status = if (nrow(due) || length(orphan)) 1L else 0L)
