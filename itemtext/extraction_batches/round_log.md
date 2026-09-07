@@ -6420,3 +6420,38 @@ holder — `gillman_2023_pss` was completed 2026-09-06, the same day as the irw#
 Candidates for the irw#1954 re-audit; a human should decide whether the ruling reaches them.
 
 Cap (batch_050) not reached; next round picks up batch_045.
+
+### PSS item text withdrawn: gillman_2023_pss and cormier_2024_pss4 — 2026-09-07
+
+**A rights miss this session made, caught by a later round rather than by any gate.**
+
+`gillman_2023_pss` is unambiguously the **PSS-10**: ten items, `PS_4_R/5_R/7_R/8_R` matching Cohen's
+reversed items 4/5/7/8, `text_source=canonical_instrument`, and a `source_ref` pointing at
+**Cohen/CMU's own `pss_10_item.doc`**. On 2026-09-06 Ben withdrew three PSS-10 tables — bakker,
+beck, duboz — on that rights holder's stated use restriction. Those three took their wording from
+the *studies'* own materials, so this table's sourcing is CLOSER to the rights holder, not further.
+
+It was extracted at 21:21 on 2026-09-06, the same day as those withdrawals, with **no rights check
+recorded in batch_040's round at all**. It then passed triage, upload, COUNT(*) verification,
+stamping and disclosure without anyone noticing — including this session. What caught it was the
+batch_044 `pss14` agent flagging the inconsistency in its own blocked-table note.
+
+**Nothing was published.** Verified before acting: `gillman_2023_pss__items` was in the unreleased
+`irw_text_2` draft only, absent from released v1.1.
+
+Ben ruled on 2026-09-07 to withdraw it, and to extend the PSS ruling to the whole family regardless
+of scale length or wording source — so `cormier_2024_pss4` goes too. **That one differs in a way
+worth recording: its wording WAS published**, and released versions are immutable, so its
+withdrawal takes effect from the next release rather than retroactively.
+
+Actions taken: both draft tables deleted (`irw_text_2` 58 -> 57; `irw_text` 731 -> 730);
+withdrawal `public_note`s written into `batch_040/provenance.csv` and `batch_023/provenance.csv`,
+retaining their `uploaded` stamps as a record, matching how bakker/beck/duboz were handled;
+issues-page entries removed in datapages/irw#156 (327 -> 325, deletions only), since a withdrawn
+table carries no entry.
+
+**The lesson is a gap, not a slip.** Nothing in the gates checks rights. `audit_batch`,
+`verify_batch`, `lint_verification` and `check_provenance` all passed this table. Rights are
+assessed only by the extracting agent, per table, and if that agent does not look, nothing
+downstream asks. A corpus-wide sweep for instruments with known restrictions — rather than relying
+on which agent happened to check — is the actual fix, and belongs with irw#1954.
