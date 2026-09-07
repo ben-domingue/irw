@@ -77,16 +77,27 @@ Until August 2026 all of this lived under the personal Redivis account
 `bdomingu`. Redivis resolves references to a previous owner automatically, so
 older scripts still work.
 
-> **Known hazard.** The dataset identifiers are duplicated in three files:
-> `metadata/redivis_config.R` here, `R/redivis-config.R` in `Rpkg`, and
+> **Duplicated, and checked.** The dataset identifiers are declared in three
+> files: `metadata/redivis_config.R` here, `R/redivis-config.R` in `Rpkg`, and
 > `src/irw/config.py` in `Python-pkg`. All three describe themselves as a single
 > source of truth. They are reconcilable — this repo carries plain dataset
 > *names*, the two packages additionally carry version *hashes* — but a new shard
-> must be added in all three, and nothing currently checks that they agree. They
-> have already drifted once (#1733). Each file now carries *two* shard lists,
-> core and item text (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`,
+> must be added in all three, and each file carries *two* shard lists, core and
+> item text (`IRW_CORE_DATASETS`/`IRW_TEXT_DATASETS`,
 > `.irw_datasource_specs$core`/`.irw_itemtext_specs`,
 > `MAIN_REFS`/`ITEMTEXT_REFS`), so adding a shard means six edits, not three.
+>
+> They drifted once already, undetected for months: `Python-pkg` had no
+> reference to `irw_nominal`, so that source was reachable from R and not from
+> Python (#1733). The duplication is not going away — three languages, three
+> runtimes, no shared build — so what changed is that
+> [`metadata/check_config_parity.py`](metadata/check_config_parity.py) now
+> compares the three on every pull request, and it, not this paragraph, is what
+> tells you they disagree. Per rule 2 below: run it rather than trust this.
+
+```bash
+python metadata/check_config_parity.py   # with Rpkg and Python-pkg as siblings
+```
 
 ## 3. Google Sheets
 

@@ -895,10 +895,22 @@ Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other 
   `_translated` columns (core model section 4).
 - `unknown`.
 
-`translation_source` — where the English in the `_translated` columns came from.
-Separate from `text_source`, which describes the base text. **The allowed values are in
+`translation_source` — where the English came from. **The allowed values are in
 `itemtext/provenance_vocab.csv`, not here**; `Rscript itemtext/check_provenance.R`
 validates every provenance file against it and exits non-zero on an unknown value.
+
+It is **required on every `text_source=translated_substitute` row** (enforced 2026-09-06,
+irw#1970) — a blank there fails the check, and so does a provenance file that lacks the
+column while carrying such a row. The reason is the whole point of the field: normally it
+describes the `_translated` columns, but under the fallback the English sits in the BASE
+fields, so it is the only thing separating a table whose English is the study's own
+rendering (nothing owed) from one this project wrote (a line on the public issues page is
+owed, under the 2026-09-02 ruling). Answer it from what you actually did: the instrument
+publisher's English is `official_instrument_english`, a rendering out of this study's
+paper, deposit or variable labels is `study_supplied`, another paper's printed English for
+the same instrument is `third_party_english`, item text and option text from different
+kinds of source is `mixed` (say which in the note), and English you produced is
+`machine_translation` no matter how it was produced.
 
 `key_source` — where `correct_response` came from, when a table has one. Allowed values
 live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
@@ -1006,8 +1018,12 @@ Before a table leaves your hands, all of these are true and recorded:
    gates cannot see: a doubled upload (`dup_item_resp`) and two scale directions in one
    table (`resp_ambiguous`).
 12. `check_provenance.R` passes — every `translation_source` is in
-   `itemtext/provenance_vocab.csv`, and every `machine_translation` table has a line on the
-   public issues page. English this project generated is always disclosed.
+   `itemtext/provenance_vocab.csv`, every `translated_substitute` row HAS one, and every
+   `machine_translation` table has a line on the public issues page. English this project
+   generated is always disclosed — until it is **withdrawn**, at which point the entry goes
+   away with the wording (a `public_note` opening `IRW does not offer item text for` exempts
+   the row, 2026-09-07). Data caveats are the exception: if the entry also records something
+   about the response table, rewrite it rather than deleting it.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 

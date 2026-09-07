@@ -6,6 +6,10 @@ skill doesn't need to re-fetch the page every run. This is the
 schema of the **merged** `{table}__items.csv` — the output of joining the four
 per-table tabs (instrument, sections, items, responses) on `table` / `section_id` / `item`.
 
+**Field order is not significant.** The table below defines which fields exist, not the
+order they must appear in: Redivis matches columns by name, and nothing validates order.
+Batches that emit these columns in different orders are both correct.
+
 | Field | Definition |
 |---|---|
 | `table` | Identifier used to link to the IRW response data. |
@@ -39,7 +43,9 @@ empty.
 **The fallback, and what `language` holds in it.** When the administered original
 cannot be recovered and only an English version exists, the English goes in the base
 fields, the `_translated` fields stay empty, and `text_source=translated_substitute`
-records the fallback.
+records the fallback. Because that English is now the shipped wording rather than a
+gloss beside it, the provenance row must also carry a `translation_source` saying where
+it came from; `check_provenance.R` fails a blank one (irw#1970).
 
 `language` is populated **whenever the administration was non-English, regardless of
 what the base fields contain** — it is defined as a fact about the study, not a claim

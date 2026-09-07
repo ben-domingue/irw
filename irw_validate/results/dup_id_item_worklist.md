@@ -277,6 +277,30 @@ safe now that group is a function of item.
 > published seven 99s as responses. The script now recodes explicitly, which is
 > correct against either file. 4,846 -> 4,841 rows.
 
+> **`SAS_Deters_2022` and `PTCI_Chinese_Zhan_2024` too, 2026-09-06 — also id
+> collisions.** Both sources are public OSF nodes (`ztycp`, `tj8rh`).
+>
+> - **`SAS_Deters_2022`** — `SAmb_R.csv` pools twenty semesters of a subject
+>   pool and the participant number restarts in each: 1,526 numbers over 7,096
+>   rows, one used 14 times. Keyed on `id` alone, 456 numbers carry two genders,
+>   1,095 two ages, 1,003 two ethnicities; keyed on `id`+`semester`, **0 / 1 /
+>   2**. The published table merged up to fourteen students into one respondent.
+>   ids 1,526 -> 7,096.
+> - **`PTCI_Chinese_Zhan_2024`** — 2,375 respondents under 1,206 `ID` values.
+>   `sex` differs within an ID for 461 numbers and `age` for 687; `T_ptci`
+>   equals its own row's item sum on all 2,375 rows, so every row is a complete
+>   respondent record; and no whole row is byte-identical to another. Namespaced
+>   by `C2` (the senior/high/adult strata). ids 1,206 -> 2,436. Row count
+>   unchanged at 80,388.
+>
+> Block H prescribed deduping both. That would have deleted roughly 1,169 people
+> from `PTCI` and merged fourteen-to-one in `SAS`.
+>
+> **Two more published NULL/`"NA"` resp values found while there**, the same
+> class as `PEPABAS2C`'s five: `SAS_Deters_2022` publishes **189 rows whose
+> `resp` is the literal string `"NA"`**, which is what types its `resp` column as
+> a string. Both scripts now drop missing responses rather than writing them.
+
 Two halves; the first is mechanical, the second is research. Do the first and
 record the second, rather than blocking on it.
 
