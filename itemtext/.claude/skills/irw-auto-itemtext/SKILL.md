@@ -1020,7 +1020,10 @@ Before a table leaves your hands, all of these are true and recorded:
 12. `check_provenance.R` passes — every `translation_source` is in
    `itemtext/provenance_vocab.csv`, every `translated_substitute` row HAS one, and every
    `machine_translation` table has a line on the public issues page. English this project
-   generated is always disclosed.
+   generated is always disclosed — until it is **withdrawn**, at which point the entry goes
+   away with the wording (a `public_note` opening `IRW does not offer item text for` exempts
+   the row, 2026-09-07). Data caveats are the exception: if the entry also records something
+   about the response table, rewrite it rather than deleting it.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
