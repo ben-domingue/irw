@@ -7227,3 +7227,75 @@ is clean, so the batch_049 `ieswriting_molloy_2022` WARN shape did not recur.
   `huang_2023_d_scale`) and 6 `translation_source=mixed` tables to review. Standing debt.
 
 Cap is `batch_060`; this is 053, so the cap is **not** reached. 885 pending rows remain.
+
+## batch_054 — 2026-09-07
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed — yield 100%.** Six agents, one per
+table. No circuit-breaker concern (0% failed).
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| iwasa_2016_dpssr | 80 | paper_explicit | PARTIAL |
+| jablonska_2020_instagram_addiction | 70 | data_labels | PARTIAL |
+| jablonska_2020_rses | 70 | data_labels | VERIFIED |
+| jablonska_2020_downward_comparison | 42 | data_labels | NOT_NEEDED |
+| jablonska_2020_swls | 35 | data_labels | VERIFIED |
+| jablonska_2020_profile_grooming | 21 | data_labels | NOT_NEEDED |
+
+**Gates.** normalize_nulls fixed 2 of 6. audit_batch **6/6 PASS, zero anomalies** — no WARNs
+to explain at Step 5c. verify_batch: 4 PASS, 2 MISSING(exempt) (the data_labels pair that
+correctly wrote no verify script). lint_verification: 6 rows, **0 ERROR**, 1 WARN.
+irw-validate: clean on all 6. check_provenance.R: no failure.
+
+**Why this round went 6/6.** Five of the six tables are one PLOS ONE deposit
+(Jablonska & Zajdel 2020, 10.1371/journal.pone.0229354, CC BY 4.0) whose S2 Dataset column
+headers ARE the IRW item codes and whose S3/S4 Appendix prints the questionnaire in **both
+Polish and English**. So the administered Polish ships in `item_text` and the study's own
+English in `_translated` — `translation_source=study_supplied` throughout, no
+`translated_substitute`, nothing IRW-generated. The head of the queue serving a
+bilingual open deposit is a fact about this deposit, not a change in pipeline health.
+
+**The batch_053 lead paid off.** iwasa_2016_dpssr reused the cached S2 (Japanese) and S3
+(English) questionnaires that batch_053's ASI block had already located. The ASI fee-licence
+block is ASI-specific and does **not** reach the DPSS-R: van Overveld is on record via
+Bottesi et al. (PMC5427091) confirming the questionnaire is "without any copyright
+restrictions". Extracted normally.
+
+**Step 3b caught a wrong instrument.** `jablonska_2020_instagram_addiction` is **not** a
+Bergen scale. Orchestrator re-checked the article text directly: "Bergen" appears **0 times**;
+the paper adopted "the 13-item Facebook Intensity Scale [54]" = Orosz, Toth-Kiraly & Bothe
+(2016) **Multidimensional Facebook Intensity Scale**. The processing script splits that
+13-item adaptation by content: items 1-10 here, 11-13 to `profile_grooming`. The `instrument`
+field now names the MFIS adaptation; the table NAME is not the instrument name.
+
+**Step 5b orchestrator re-checks — all four agent claims confirmed, none corrected.**
+1. MFIS-not-Bergen, above.
+2. Every public_note wording discrepancy is real, checked against the shipped codes:
+   `instagram_addiction` code 5 "a good way to **get** bored" vs translated "good for
+   **overcoming** boredom" (opposite meanings); `profile_grooming` code 11 "polished" vs
+   appendix "rather detailed"; `swls` code 50 "close to ideal" vs canonical "In most ways my
+   life is close to my ideal"; `rses` codes are looser paraphrases throughout. **The deposit
+   carries two or three distinct English renderings of the same item — codes are join keys,
+   not wording.** That is the batch's headline caveat and it is disclosed on every table.
+3. RSES "stored raw, not reverse-scored" reproduces: positive block r in [0.36,0.68],
+   negative block [0.33,0.67], all 25 cross pairs negative (-0.48..-0.05), means 28=5.46 vs
+   34=2.57. Also confirmed verbatim in the paper: HADS and RSES were 4-point originally and
+   "all items were modified by implementing a 7-point Likert scale" — matching live resp 1-7.
+4. **Response direction, a subtlety worth recording:** the article prints the scale "from
+   strongly agree to strongly disagree" (descending) while shipped resp 1 = strongly disagree
+   (ascending). No conflict — `data/jablonska_2020_instagram.py`'s LIKERT_MAP keys off the
+   stored TEXT label, not position, and route 9 count-matching reproduced it cell for cell
+   (35/35 swls, 70/70 instagram_addiction). The Polish anchor-to-resp tie is still an ordinal
+   inference from the appendix's printed order, which is exactly why instagram_addiction is
+   PARTIAL and not VERIFIED.
+
+**lint WARN (not a defect).** `jablonska_2020_rses` VERIFIED with evidence reading "but not
+the order". The hedge scopes route 6 (keying polarity) only, which by construction splits 10
+items into two blocks of 5. VERIFIED rests on the self-describing-codes exemption, where each
+code carries its own wording and distinguishes every item. Left VERIFIED, explained in notes.
+
+**Pre-existing, not this round's:** check_provenance still lists 3 IRW-generated tables with
+no issues-page entry (hua_2023_efl_course_experience, hua_2023_efl_study_engagement,
+huang_2023_d_scale). No batch_054 table is implicated — all six are study-supplied.
+
+Cap is batch_060; not reached. 879 pending remain.
