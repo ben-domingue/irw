@@ -266,6 +266,13 @@ getrows<-function(l) {
     biblio <- apply_custom_license_terms(biblio, irw_dict, name)
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
+    ## Correct the Descriptions that name an instrument the table does not
+    ## contain (#1898, #1925, #1929, #1951, #1972). MUST run after the refresh
+    ## above, which re-asserts the sheet's value on every row -- an override
+    ## placed before it would be overwritten on every run. Applies to the export
+    ## only; the sheet is untouched, and each entry disarms itself the moment
+    ## someone corrects the sheet by hand. See DESCRIPTION_OVERRIDES.
+    biblio <- apply_description_overrides(biblio, name)
 
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",

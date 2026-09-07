@@ -612,3 +612,151 @@ refresh_biblio_from_dict <- function(biblio, dict, label = "core", log.file = NU
     }
     list(biblio = biblio, log = log)
 }
+
+##---------------------------------------------------------------------------
+##Description corrections (#1898, #1925, #1929, #1951, #1972).
+##
+##THE PROBLEM THIS SOLVES. union_dict() above fills only the cells a human left
+##blank -- "a human cell wins the cell it occupies". That is right for a sparse
+##row being topped up, and it means a dictionary Description that is *wrong* has
+##no route to a fix at all: dictionary_auto.csv cannot reach an occupied cell,
+##and refresh_biblio_from_dict() re-asserts the sheet's value onto every biblio
+##row on every run. Five tables were shipping the name of an instrument they do
+##not contain.
+##
+##Ben will not hand-edit the sheet to land a fix (#1690, 2026-09-06), so this is
+##the same shape as the `DOI (for paper)` clear in union_dict() and as
+##tag_normalize.R: the correction is applied to the EXPORT and the sheet is left
+##alone. This table is the audit trail -- each entry carries the issue that
+##established it and the evidence in one line, which is more reviewable than a
+##provenance CSV row.
+##
+##THE GUARD. `superseded` must match the sheet's current Description exactly
+##(whitespace-normalised). This is deliberately narrower than "the Description
+##looks wrong":
+##
+##  * it can only ever replace a value we have demonstrably read and judged, and
+##  * it DISARMS ITSELF. The moment someone corrects the sheet cell by hand, the
+##    strings stop matching, the override stops firing, and the human's text
+##    wins -- which is the rule this is an exception to, restored automatically.
+##
+##A non-matching entry is a warning, not a silent no-op and not a stopped run:
+##stale entries must be visible (they mean "delete me"), but a weekly pipeline
+##should not fail because someone improved a sentence in the sheet.
+DESCRIPTION_OVERRIDES <- list(
+    list(
+        table      = "cdm_timss07",
+        issue      = "#1898",
+        superseded = "Subsample of TIMSS items from Australia with Q matrix",
+        corrected  = paste("Subsample of TIMSS 2007 grade 4 mathematics items from Austria",
+                           "(booklets 4 and 5) with Q matrix"),
+        ##CDM's own docs for data.timss07.G4.lee: "a sample of 698 Austrian
+        ##students ... booklets 4 and 5". The live table is 25 items over n=698,
+        ##which is the 14 block-M04 plus 11 block-M05 items exactly. Not
+        ##cosmetic: the booklets were the German translation, so "Australia"
+        ##also implies the wrong administered language. cdm_timss11 already says
+        ##Austria and needs nothing.
+        why = "CDM documents the Austrian sample; 25 items over n=698 matches booklets 4+5"
+    ),
+    list(
+        table      = "COACH_Chen_2022_CSQ",
+        issue      = "#1925",
+        superseded = "Client Satisfaction Questionnaire 8-item",
+        corrected  = paste("Consultation Satisfaction Questionnaire short form (CSQ-9),",
+                           "items 1-8, 5-point agree-disagree"),
+        ##Larsen's CSQ-8 is a 4-point service-satisfaction scale. The live table
+        ##is 8 items over 5 categories and the deposit's codebook gives
+        ##doctor-consultation statements matching Baker's CSQ-9 items 1-8 word
+        ##for word, item 9 not administered. The study's own codebook also
+        ##mislabels the block, so the sheet is repeating an upstream error.
+        why = "8 items x 5 categories; Larsen's CSQ-8 has no 5-point form"
+    ),
+    list(
+        table      = "conner_2017_vitality",
+        issue      = "#1929",
+        superseded = "Subjective Vitality Scale (4 items, 0-100 continuous), baseline/follow-up, N=171.",
+        corrected  = paste("SF-36 Vitality (energy/fatigue) subscale, 4 items scored 0-100",
+                           "in steps of 20 (6 ordinal levels), baseline/follow-up, N=171.",
+                           "The 'worn out' and 'tired' items are stored already reverse-scored."),
+        ##The superseded text is internally inconsistent on its own terms: the
+        ##SVS is a 6- or 7-item 1-7 Likert scale, so "4 items" cannot be it. The
+        ##study's S1 Dataset labels these vital1-4 as SF-36 Vitality. metadata
+        ##independently gives 4 items over 6 discrete levels, which is SF-36
+        ##scoring (0/20/40/60/80/100) and also makes "0-100 continuous" wrong.
+        ##wolf_2017_study1_vitality (6 items) is the corpus's genuine SVS.
+        why = "4 items x 6 ordinal levels = SF-36 scoring; the SVS is 6-7 items on 1-7"
+    ),
+    list(
+        table      = "cordova2019_clinical_edu_environment",
+        issue      = "#1951",
+        superseded = "Perception of clinical educational environment by physiotherapy interns (DREEM-based, Chile)",
+        corrected  = paste("Perception of clinical educational environment by physiotherapy",
+                           "interns (PHEEM, 40 items, Chile)"),
+        ##Different instruments by different authors: DREEM is 50 items
+        ##(undergraduate learning environment), PHEEM is 40 (postgraduate /
+        ##clinical). The companion paper's Methods says PHEEM and reproduces the
+        ##40 items; the live table is item_01..item_40. The corpus's real DREEM,
+        ##agarwal_2023_dreem, has 50 -- so the mislabel made this look like a
+        ##sibling of a table measuring something else.
+        why = "40 items = PHEEM; the corpus's genuine DREEM (agarwal_2023_dreem) has 50"
+    ),
+    list(
+        table      = "evpromisi_stone_2021_cdiag",
+        issue      = "#1972",
+        superseded = "PROMIS fatigue",
+        corrected  = paste("Study's own 12-item chronic-diagnosis checklist (3 response levels).",
+                           "Not a PROMIS instrument, despite the evpromisi_ prefix."),
+        ##Corroborated independently of the codebook, which is the thing under
+        ##suspicion: every PROMIS fatigue short form is scored on 5 points and
+        ##this table has 3 response levels. Its four evpromisi_ siblings ARE
+        ##PROMIS (anxiety 7 items, depression 8, pain intensity 6, global 10 over
+        ##11 levels) and are correctly described, so this is one row not a
+        ##family. Fixing it also fixes the bad `promis` collection membership,
+        ##which comes from rule:cname:promis -- the construct name derived from
+        ##this Description -- and so self-corrects on the next 10_collections.R.
+        why = "3 response levels; every PROMIS fatigue short form is 5-point"
+    )
+)
+
+##Whitespace-normalised comparison. The sheet stores stray double spaces and
+##trailing blanks that carry no meaning, and an override should not miss because
+##of one.
+desc_norm <- function(x) {
+    x <- trimws(as.character(ifelse(is.na(x), "", x)))
+    gsub("[[:space:]]+", " ", x)
+}
+
+##Apply the corrections to biblio's Description, by exact match on `superseded`.
+##
+##Runs on EVERY row rather than only new ones, and must run AFTER
+##refresh_biblio_from_dict() -- that is what re-asserts the sheet's value, so an
+##override placed before it would be overwritten on every run.
+apply_description_overrides <- function(biblio, label = "core",
+                                        overrides = DESCRIPTION_OVERRIDES) {
+    if (!length(overrides) || !"Description" %in% names(biblio)) return(biblio)
+    applied <- character(0)
+    stale   <- character(0)
+    for (ov in overrides) {
+        row <- which(dict_key(biblio$table) == dict_key(ov$table))
+        if (!length(row)) next                    ##not in this source's biblio
+        row <- row[1]
+        if (identical(desc_norm(biblio$Description[row]), desc_norm(ov$superseded))) {
+            biblio$Description[row] <- ov$corrected
+            applied <- c(applied, ov$table)
+        } else if (identical(desc_norm(biblio$Description[row]), desc_norm(ov$corrected))) {
+            ##Already correct in the sheet: the human got there first. The entry
+            ##has done its job and should be deleted, but this is not a problem.
+            stale <- c(stale, paste0(ov$table, " (sheet now matches the correction)"))
+        } else {
+            stale <- c(stale, paste0(ov$table, " (", ov$issue, ": sheet says something else)"))
+        }
+    }
+    message(label, ": applied ", length(applied), " of ", length(overrides),
+            " Description override(s)")
+    if (length(stale)) {
+        warning(label, ": ", length(stale), " Description override(s) did not match and were ",
+                "skipped -- delete the entry in DESCRIPTION_OVERRIDES if the sheet is now ",
+                "right: ", paste(stale, collapse = "; "), call. = FALSE)
+    }
+    biblio
+}
