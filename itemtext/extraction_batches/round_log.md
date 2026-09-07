@@ -6343,3 +6343,30 @@ item wording is the paper's — and `han_2015_peer_assisted_learning` was **writ
 the drafter emits nothing for a table with no `public_note` and its caveat (Korean cohort, only an
 English questionnaire in the deposit, no `language` column shipped) lives only in `notes.csv`. That
 is the batch_009 blind spot; the REVIEW section caught it.
+
+### batch_036's three tables were STRANDED — found and shipped — 2026-09-07
+
+**A gap this session created and this session missed until now.** The three batch_036 survivors
+(`gao2025_attachment_anxiety`, `gao2025_spiritual_wellbeing`, `garciabatista_2021_erq`) were gated
+clean on 2026-09-07 once the Redivis download outage lifted, and their queue rows were flipped
+`failed` -> `done`. **They were never staged and never uploaded.** They sat as `done` in
+`queue_state.csv` while being absent from `irw_text`, `irw_text_2` and both drafts — confirmed by
+querying all four.
+
+They surfaced only incidentally: main's #2050 cleared the uploaded `__items.csv` from every batch
+folder, and these three were left behind, which made them visible as the only unexplained CSVs on
+disk. Without that, they would have stayed "done" and invisible indefinitely.
+
+This is precisely the **"three kinds of done"** hazard the queue tracker documents — extracted,
+uploaded, and visible in a release are three separate states, and `queue_state.csv` records only
+the first. Flipping a row to `done` after gating is not the end of that table's journey, and
+nothing in the pipeline notices the difference.
+
+Fixed end to end: gates re-run live before shipping (audit 3 PASS; verify 2 PASS + 1 exempt),
+uploaded, verified by COUNT(*) and COUNT(DISTINCT item) — 21/3, 60/12, 50/10 — draft 55 -> **58
+tables**, stamped in `batch_036/provenance.csv` and `mapping_verification.csv`, CSVs removed,
+entries opened as datapages/irw#155.
+
+**Worth a guard.** Nothing currently reconciles "rows marked `done`" against "tables present in a
+dataset or draft". A periodic check of exactly that would have caught this in seconds, and would
+catch the same class of miss for any future batch closed out by hand.
