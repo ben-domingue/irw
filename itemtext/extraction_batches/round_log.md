@@ -6187,3 +6187,44 @@ to it — one identical count across several different scales — was sound; the
 not. **The lesson worth keeping: when several IRW tables share an oddity exactly, read our own
 processing script before concluding the source is damaged.** A deliberate, documented IRW-side
 decision and upstream corruption look identical from the response data alone.
+
+### batch_041 stamped; batch_042 run and triaged — 5 staged, 1 blocked — 2026-09-07
+
+**batch_041 uploaded and stamped.** All five verified by COUNT(*) and COUNT(DISTINCT item) —
+44/11, 28/7, 124/31, 77/11, 63/9 — draft 39 -> 44 tables. Entries applied as datapages/irw#149
+(308 -> 313), promptly after upload rather than parked, which is the standing fix for the drafter
+clobbering pending entries.
+
+**`mapping_verification.csv` no longer round-trips whole-file, and the stamping guard caught it.**
+The file is now MIXED: MINIMAL quoting for its first ~448 kB, then a different convention in the
+rows batch_042's round appended. A whole-file rewrite would have silently reformatted every one of
+those new rows. Stamped **line by line in place** instead, each target line proved to round-trip on
+its own before being touched; the diff is exactly 5 lines and +50 bytes, which is 5 x the stamp
+length. **Whole-file rewrites of this file should now be considered unsafe** — edit target lines.
+
+**batch_042 — 5 written / 1 blocked / 0 failed.** Gates re-run live: normalize 0 of 5, audit
+2 PASS + 3 WARN, verify 5 PASS, lint 0 ERROR / 1 WARN.
+
+**Re-derived the `gpt4mcq_young_2025` decision**, which is the one that matters here: the OSF
+deposit publishes TWO different 20-item sets under the same AIQ1-AIQ20 codes, so this choice
+decides which wording ships. Recomputed P(resp==1) per item from live data against the paper's
+published CTT P-values: **all 20 agree, maximum deviation 0.0005**, which is 3-decimal rounding.
+The rival Supplementary-Materials-2 wording would put the keyed answer at a mean of 0.103. The
+shipped `.sav` labels are the right set.
+
+**Lint WARN on that table upheld, not downgraded.** Its hedge — that tied P-values cannot separate
+items from one another — is answered inside its own evidence: the stem, the options and the
+responses all ride on the same `.sav` column, the IRW code IS that column name, and
+`data/gpt4mcq_young_2025.r` never renames, so no permutation is possible. The numeric check rules
+out the rival wording set; it is not what assigns codes to text. Same shape as the batch_038
+`_comm` case.
+
+**Staged all 5.** Expected counts: gordils_2021_intergroup_anxiety 28/4,
+gordils_2021_interracial_comp 35/5, gordils_2021_interracial_trust 28/4, gpt4mcq_young_2025 80/20,
+grandahl_2017_hpv_beliefs 75/15. The round's 9-column provenance sidecar was folded correctly —
+`batch_042/provenance.csv` carries the canonical 8 columns.
+
+**HELD FOR BEN — `grit_BrummerHoffman_2021`.** Blocked on the same Duckworth Grit-S clause as
+`dpt_noncog__grit`, exactly as batch_027 predicted. The question is whether that clause governs an
+open deposit's own printing of the items; if it does not, both tables unblock together. A rights
+call, not a round's.
