@@ -140,3 +140,18 @@ extraction): `herrera_2018_iri`, `holden_2026_bsri`
 Re-stated because this file was regenerated. The table is **held**, not shipped: it was not
 uploaded, pending Ben's ruling on the Sleep Condition Indicator's CC BY-NC licence. Filter its
 entry out of any application to `itemtext_issues.qmd` until the table actually ships.
+
+---
+
+## HAND-WRITTEN at triage — `hoorani_2022_sp` (batch_046)
+
+No `public_note`, so the drafter emitted nothing. This is the **third** table in three rounds with
+the same shape — unstated administration language, English-only deposit, no `language` column
+shipped — after `han_2015_peer_assisted_learning` (batch_043) and `hayek_2022_subj_norm`
+(batch_044). Treated consistently with those two.
+
+```yaml
+- table: hoorani_2022_sp
+  issue: |-
+    The four self-pride items are shipped in English, taken from the study's own Stata deposit, but neither the paper nor the deposit states what language they were administered in: this is the Young Lives older cohort in Andhra Pradesh, India, and the paper's only remark on language concerns a different measure ("conducted in the native language or the language that the adolescent chose"). A non-English administration cannot be ruled out, so the table deliberately carries no language or *_translated columns rather than assert an original nobody published. Two further things a reader should know: no instruction or block-prompt text exists in either source, so those fields are NA rather than invented; and SP1-SP4 were administered in one round only (Young Lives Round 3, 2009 -- IRW wave 2), which is why every item has 535 responses and wave 1 has none.
+```
