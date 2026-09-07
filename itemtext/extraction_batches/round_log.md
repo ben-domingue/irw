@@ -6680,3 +6680,87 @@ mapping is the bar. Three of the four Japanese-administered tables ship English 
 exists anywhere in either deposit.
 
 Cap not reached (cap is batch_050); next firing picks up batch_047. 927 pending remain.
+
+---
+
+## batch_047 — 2026-09-07T20:20:37Z
+
+6 tables claimed, 6 agents (one per table). **written 5 / blocked 1 / failed 0.** Yield 5/6 = 83%.
+No rate limit, no spend cap, no agent killed — every agent returned its own report.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| hua_2023_efl_course_experience | written (80 rows) | data_labels | NOT_NEEDED |
+| hua_2023_efl_study_engagement | written (98 rows) | data_labels | NOT_NEEDED |
+| huang_2016_cesd | written (80 rows) | reconstructed | PARTIAL |
+| huang_2023_d_scale | written (63 rows) | reconstructed | PARTIAL |
+| hui_2024_gbfs | written (140 rows) | paper_explicit | VERIFIED |
+| hui_2024_pss10 | **blocked** (rights) | unknown | NO_ROUTE |
+
+**Gates.** normalize_nulls: 1 of 5 normalized. audit_batch: PASS 4, WARN 1, no FAIL.
+verify_batch: PASS 3, MISSING(exempt) 2 — the two data_labels tables owe no script.
+lint_verification: 6 rows, no problems. irw-validate: all 5 files ok, nothing to report.
+check_provenance: no failure; 3 tables of this batch listed as owing an issues-page line
+(hua_2023_efl_course_experience, hua_2023_efl_study_engagement, huang_2023_d_scale — all
+machine_translation), which is owed **on upload**, not now. `hui_2024_gbfs` appears under the
+`translation_source=mixed` REVIEW list and **does** owe a line: its instruction line and five
+anchor labels have no published English and were written by this project (item_text_translated
+itself is Cassidy et al. 2014's published wording, so only part of the English is IRW's).
+NOT_NEEDED rows were written into both verification_merged.csv and the permanent tracker, so the
+lint came back clean first time.
+
+**The block.** `hui_2024_pss10` is the PSS-10. Retry test **NO** — determinate, not an access
+failure: paper, S1, S2 and the CMU FAQ all fetched cleanly. The agent re-fetched and re-hashed the
+rights holder's FAQ rather than carrying the quote over (md5 f2eeb376bfab9aa86ae8ae5c7719ec9c,
+2026-09-07), which is the right instinct. Sixth PSS-family table to go this way, consistent with
+the 2026-09-07 family-wide extension. Does NOT count toward the circuit breaker. Its mapping work
+is banked in the provenance row so a reversal is a re-run, not a restart.
+
+**Step 5b orchestrator re-checks — all four claims confirmed, one report typo found.**
+- `hua_2023_efl_study_engagement`, the round's one source-overriding claim and the one headed for
+  a public note: the agent shipped the `.sav`'s value labels against the article's prose. Re-read
+  `s001.sav` directly. The article says a 7-point scale "ranging from 'strongly disagree' to
+  'strongly agree'"; all 14 shipped items in fact carry an identical **frequency** label set
+  1 从来没有 / 2 几乎没有 / 3 很少 / 4 有时 / 5 经常 / 6 十分频繁 / 7 总是 (Never…Always), the UWES
+  convention. Confirmed. The file has 17 `EFL_LE_*` columns; the 3 not shipped
+  (`EFL_LE_Vigor`, `_Dedication`, `_Absorption`) carry no value labels at all and are subscale
+  composites, correctly excluded — so "all 14 identical" is exact.
+- `huang_2016_cesd` bilingual-administration claim, also headed for a public note: `Language` is
+  79 English / 5 Oral Tested English / 27 French / 3 Oral Tested French = **30 of 114 in French**,
+  exactly as reported. Storage-direction claim also confirmed: plain sum of the 20 stored items
+  matches the authors' own `CESD` total for **111 of 113** complete cases (9.82 vs 9.77), while
+  reversing 4/8/12/16 first matches only **7 of 113** (16.48) — so those four are stored already
+  reverse scored. Independently confirmed that `CESD_1..CESD_20` carry **no** variable or value
+  labels, which is what makes `reconstructed` the honest basis rather than `data_labels`.
+- `hui_2024_gbfs` per-item fingerprint: re-executed by verify_batch, VERDICT PASS — 0 of 28
+  mismatches against the paper's published skewness and kurtosis, 0 duplicate (skew,kurt) pairs.
+  The zero-duplicates figure is what makes VERIFIED rather than PARTIAL correct here.
+- `hua_2023_efl_course_experience`: means run 3.472–3.944, n=942 on all 16 — no item is
+  negatively worded, so the paper's claim that "2 questions were designed for reverse scoring" is
+  not reflected in the shipped 16 and nothing was reverse-coded. The asymmetric scale is real: the
+  midpoint is 3 稍微不同意 "slightly disagree", not a neutral. One typo in that agent's *report*
+  only — it wrote anchor 1 as 强不同意; the `.sav` and the shipped CSV both correctly say 非常不同意.
+  Nothing on disk to fix.
+
+**Step 5c — the one WARN explained** (appended to notes.csv). `huang_2023_d_scale`: 88.9% blank
+`item_text`, 71.4% blank `option_text`. Neither an itemtext defect nor a data defect — it is the
+instrument's format. d1–d8 are semantic-differential adjective pairs, which have no stem, so 8 of 9
+items carry no `item_text` (8/9 = 88.9% of rows) and only d9, the life-satisfaction item, does.
+`option_text` is populated only at resp 1 and resp 7 because a semantic differential labels only its
+endpoints; resp 2–6 were left blank rather than padded with their own numbers (5 of 7 = 71.4%).
+Orchestrator re-derived both percentages from the shipped CSV and they match to the decimal.
+
+**Notable for triage.**
+- `huang_2023_d_scale` is a **dictionary Description fix owed**: listed as "D-block scale
+  (unlabeled construct)", it is in fact the Index of Well-Being (Campbell, Converse & Rodgers 1976)
+  — the `.sav` labels every d1–d9 column 主观幸福感 and the paper names it in sec. 2.2.2. The agent
+  reports the sibling blocks in the same deposit are named just as generically, so this is probably
+  a cluster rather than one row.
+- `hua_2023_efl_study_engagement` carries a genuine text-vs-table mismatch for the issues page:
+  published anchors and administered anchors disagree (see above).
+- Both `reconstructed` tables landed PARTIAL for the same honest reason — the route pins a polarity
+  class or a set, not the order within it. `huang_2023_d_scale`'s is unusually good evidence: the
+  standard Chinese rendering states A, C, F, G are flipped in the administered questionnaire, and
+  the live correlations reproduce that partition exactly, 1 of 70 possible 4-of-8 splits.
+
+Cap not reached (cap is batch_050); next firing picks up batch_048. 921 pending remain.
