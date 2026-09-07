@@ -1,0 +1,15 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"girma_2021_oslo3","girma_2021_oslo3_1","CLOSENUM","Oslo Social Support Scale (OSSS-3)",NA,NA,"How many people are so close to you that you can count on them if you have great personal problems?",NA,"none",1
+"girma_2021_oslo3","girma_2021_oslo3_1","CLOSENUM","Oslo Social Support Scale (OSSS-3)",NA,NA,"How many people are so close to you that you can count on them if you have great personal problems?",NA,"1-2",2
+"girma_2021_oslo3","girma_2021_oslo3_1","CLOSENUM","Oslo Social Support Scale (OSSS-3)",NA,NA,"How many people are so close to you that you can count on them if you have great personal problems?",NA,"3-5",3
+"girma_2021_oslo3","girma_2021_oslo3_1","CLOSENUM","Oslo Social Support Scale (OSSS-3)",NA,NA,"How many people are so close to you that you can count on them if you have great personal problems?",NA,"5+",4
+"girma_2021_oslo3","girma_2021_oslo3_1","CONCERNP","Oslo Social Support Scale (OSSS-3)",NA,NA,"How much interest and concern do people show in what you do?",NA,"none",1
+"girma_2021_oslo3","girma_2021_oslo3_1","CONCERNP","Oslo Social Support Scale (OSSS-3)",NA,NA,"How much interest and concern do people show in what you do?",NA,"little",2
+"girma_2021_oslo3","girma_2021_oslo3_1","CONCERNP","Oslo Social Support Scale (OSSS-3)",NA,NA,"How much interest and concern do people show in what you do?",NA,"uncertain",3
+"girma_2021_oslo3","girma_2021_oslo3_1","CONCERNP","Oslo Social Support Scale (OSSS-3)",NA,NA,"How much interest and concern do people show in what you do?",NA,"some",4
+"girma_2021_oslo3","girma_2021_oslo3_1","CONCERNP","Oslo Social Support Scale (OSSS-3)",NA,NA,"How much interest and concern do people show in what you do?",NA,"a lot",5
+"girma_2021_oslo3","girma_2021_oslo3_1","HELPPRAT","Oslo Social Support Scale (OSSS-3)",NA,NA,"How easy is it to get practical help from neighbors if you should need it?",NA,"very difficult",1
+"girma_2021_oslo3","girma_2021_oslo3_1","HELPPRAT","Oslo Social Support Scale (OSSS-3)",NA,NA,"How easy is it to get practical help from neighbors if you should need it?",NA,"difficult",2
+"girma_2021_oslo3","girma_2021_oslo3_1","HELPPRAT","Oslo Social Support Scale (OSSS-3)",NA,NA,"How easy is it to get practical help from neighbors if you should need it?",NA,"possible",3
+"girma_2021_oslo3","girma_2021_oslo3_1","HELPPRAT","Oslo Social Support Scale (OSSS-3)",NA,NA,"How easy is it to get practical help from neighbors if you should need it?",NA,"easy",4
+"girma_2021_oslo3","girma_2021_oslo3_1","HELPPRAT","Oslo Social Support Scale (OSSS-3)",NA,NA,"How easy is it to get practical help from neighbors if you should need it?",NA,"very easy",5

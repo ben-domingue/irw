@@ -5738,3 +5738,177 @@ its English is taken from an unrelated third study's table (IJERPH 2022;19(3):13
 no value in `provenance_vocab.csv` — `official_instrument_english` means the instrument
 publisher's own. That vocabulary gap wants one decision across all 19, not a piecemeal patch.
 Nothing here blocks upload; `check_provenance.R` reports it as a gap it cannot resolve.
+
+### batches 038 and 039 uploaded and stamped — 12 tables, COUNT(*) verified — 2026-09-06
+
+Ben uploaded all twelve to the `irw_text_2` draft; `red_up` reported 12 NEW and self-verified row
+counts. Independently re-verified here with **COUNT(\*) plus COUNT(DISTINCT item)**, not `numRows`:
+all twelve match their source files on both, and the draft went 21 -> **33 tables**. No doubling.
+
+    gerber_2022_eas_temperament 100/20   gesbert_2021_tdeq 150/25
+    helma_access 55/11   helma_appraise 25/5   helma_comm 40/8   helma_numeracy 6/3
+    helma_reading 30/6   helma_understand 45/9   helma_use 25/5
+    gholami_2017_periodontal_knowledge 6/3   gilbert_meta_16 142/71   gilbert_meta_27 36/18
+
+**The uneven column counts in the upload report are all explained, none is a defect.** 15 columns
+is the full translated schema; `gilbert_meta_16` has 10 because it was administered in English and
+has nothing to translate; `gesbert_2021_tdeq` has 12 because the paper publishes no instructions
+and no French anchors, so those `_translated` columns do not exist rather than sitting blank; and
+`ghanbari_2016_helma_numeracy` has 14 because its three items are 0/1-scored with no `option_text`
+by design.
+
+**Stamped `uploaded=2026-09-06`** on all 12 rows across `batch_038/provenance.csv`,
+`batch_039/provenance.csv` and the root `mapping_verification.csv` (6 + 6 + 12). Every prior value
+was genuinely empty rather than `no`. Each file was proved to round-trip byte-identically under
+its own quoting convention **before** being rewritten — the script refuses to write otherwise —
+and the diffs are exactly the changed rows with nothing reformatted. The twelve `__items.csv` were
+deleted from the batch folders; sidecars stay. `clean/` left for Ben.
+
+**Now due: all 18 issues-page entries** (batch_037's six and these twelve), in
+`fixes/itemtext_issues_draft.md`. Every table they describe has now shipped, so nothing is waiting
+on an upload any more. Two are mandatory rather than discretionary —
+`ghanbari_2016_helma_numeracy` and `gilbert_meta_27` ship IRW-authored English.
+
+---
+
+## batch_040 — 2026-09-06 21:21–21:45 PT — **6 tables, 6 written / 0 blocked / 0 failed (100% yield)**
+
+**CAP REACHED.** `batch_040` is the batch Step 0 of the round prompt names as the stop condition,
+so this is the last round; the wrapper will decline to start another. 963 rows remain `pending` in
+`queue_state.csv` — the queue is nowhere near exhausted, the cap is what ends it.
+
+Six agents, one table each (the 2026-09-05 halving from twelve). No agent was killed, no
+rate-limit or memory failure, no self-cancel. Two agents hit transient Redivis 429s that cleared on
+retry within the same run. Nothing in this round is a `blocked`/`failed` count worth interpreting —
+every table produced a CSV.
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| gilbert_meta_29 | 30 | data_labels | NOT_NEEDED |
+| gilbert_meta_55 | 30 | data_labels | VERIFIED (route 1 + published marks) |
+| gillman_2023_pss | 50 | paper_explicit | PARTIAL (routes 6+3) |
+| girma_2021_oslo3 | 14 | reconstructed | VERIFIED (self-describing codes + route 2) |
+| girma_2021_phq9 | 36 | reconstructed | VERIFIED (self-describing codes + route 7) |
+| gizaw_2023_phq9 | 36 | data_labels | NOT_NEEDED |
+
+**Gates.** `normalize_nulls` fixed 1 of 6 (`girma_2021_phq9`, 37 lines). `audit_batch` 5 PASS / 1
+WARN. `verify_batch` 4 PASS + 2 exempt, no FAIL and no missing VERDICT. `lint_verification` 6 rows,
+**0 ERROR**, 1 WARN. `irw-validate` clean on all six — no `dup_item_resp`, no `resp_ambiguous`.
+The Step 3 fix held: NOT_NEEDED rows went into *both* `verification_merged.csv` and the permanent
+tracker, so the data_labels ERRORs that fired in batch_020 and batch_021 did not recur.
+
+**`check_provenance.R` exits 1 on a pre-existing backlog, not on this batch.** The sole hard failure
+is `extremera_2016_shs` (IRW-generated English, no issues-page entry) — an older table. Three
+batch_040 rows shipped `translated_substitute` with `translation_source` blank; the orchestrator
+filled them from each agent's documented source: `official_instrument_english` for both PHQ-9
+tables (canonical publisher form) and `study_supplied` for `gilbert_meta_55` (the authors' own
+English, appendix Table A4). After that, batch_040 appears only in the check's explicitly
+"REVIEW, NOT A FAILURE" list.
+
+**Step 5b — four agent claims re-checked independently against live data, all four confirmed.**
+Two of them go into public notes, which is why they were checked rather than taken on trust.
+- `gizaw_2023_phq9`: PHQ9 is indeed the **only** item never observed at resp=3 (0–2; the other
+  eight reach 3, with 3–21 occurrences each). Endorsement order matches the paper's prose —
+  PHQ4 highest (0.548), PHQ9 lowest (0.061). Exact.
+- `gillman_2023_pss`: **confirmed, and it is a defect in the source paper.** On 404 complete cases,
+  alpha with no reversal = **0.67**, reproducing the paper's reported .67; properly keyed alpha =
+  **0.86**. All 24 cross-polarity correlations negative (−0.093…−0.371), no sign exceptions.
+  Gillman et al. computed their reliability without reverse-scoring items 4/5/7/8. The IRW table
+  is correct; the paper's statistic is not.
+- `gilbert_meta_55`: live per-item proportions reproduce the agent's reported values with
+  **max |difference| = 0.0000** across all 15, and the e1_item3/e1_item8 tie at 0.67 is real —
+  so Table B3's marks column genuinely is load-bearing for that pair.
+- `gilbert_meta_29`: the three count-items really are strictly 0/1 in IRW, and the skip-ladder /
+  wave-1-only-`stry` structure holds exactly as described.
+
+**Step 5c — the single audit WARN (`gilbert_meta_29`) is a data property, not an itemtext defect,**
+and all three of its parts are explained in `notes.csv`. The row-count anomaly is the ASER **skip
+ladder** working as designed (wave 1: lttrs 14576 > word1 10254 > word2 5660 > para 4074 > stry
+2192, against 14576 for every picture item), and `caser_lang_stry` exists only at wave=1 because the
+baseline child form has no story item. The blank `option_text` on lttrs/word1/word2 is the real
+finding: those are **counts** in the source (0–10 letters, 0–5 words) that reach IRW as 0/1 via an
+**undocumented dichotomisation upstream in Gilbert's IL-HTE dataset**. No honest option label exists
+for either level, so both ship blank rather than padded. Same defect as the sibling
+`gilbert_meta_27`; fixing it needs Gilbert's construction code, not another source. **Worth its own
+issue.**
+
+**Verified upheld against a lint WARN.** `lint_verification` flagged `gilbert_meta_55` as
+"VERIFIED but its evidence hedges". Upheld as VERIFIED: the hedge is about which grade-level variant
+(Level 1/2/3) a child received — unknowable because the table has no grade column — not about item
+identity, and every item is distinguished from every other by the (proportion, marks) pair. A false
+positive on the phrase "does NOT establish", recorded in `notes.csv` rather than downgraded.
+
+**Carried to triage.**
+1. **`gilbert_meta_29` owes an issues-page line.** `translation_source=mixed` and part of the
+   shipped English (bracketed renderings of the paragraph and story) was written by this project,
+   so the 2026-09-02 ruling applies. The sibling `gilbert_meta_27` already has an entry; this one
+   does not. The page lives in the `irw_site` repo, so it was left for the human step.
+2. **Two recall-frame / instrument caveats already disclosed in public notes**: `gillman_2023_pss`
+   ships canonical "In the last month…" while the study administered a most-stressful-event frame
+   over three months (the study never prints its modified wording); `girma_2021_phq9`'s paper says
+   PHQ-9A while citing Kroenke 2001, and standard PHQ-9 wording ships.
+3. **Metadata, cosmetic, pre-existing**: `gizaw_2023_phq9` is named for Gizaw but the paper's first
+   author is Workneh — `biblio.csv`'s `Reference` says "Gizaw et al. (2023)" while its embedded
+   BibTeX correctly says Workneh. Not introduced here.
+4. **`gilbert_meta_55` unincorporated context**: its `sheet1_sweep_2026-09-03.csv` row reads
+   "see slack discussion", which the agent could not access.
+
+Export discipline held — ground truth via `irw_table_sets()`/`--table-sets` throughout; the only
+exports were small, deliberate ones for mapping verification (the largest, `gilbert_meta_29`, for
+the orchestrator's own re-check).
+
+### Round cap raised batch_040 -> batch_050 — 2026-09-06
+
+batch_040 completed 6/6 and reached the cap, which ends the runner rather than exhausting the
+queue: 963 rows are still `pending`. Ben asked for the cap to be raised and chose **batch_050**,
+allowing ten further rounds (~60 tables).
+
+One edit, to Step 0 of `round_prompt_v1.md`, which is still the ONLY copy — `run_round.sh` greps
+the number back out of the prompt rather than duplicating it
+(`itemtables/\Kbatch_\d+(?= already exists \(round cap reached\))`), so the wording of that line is
+load-bearing and must not be reflowed. Verified after editing that the runner's own regex still
+returns `batch_050`. The cap is inclusive: rounds run up to and including the named batch.
+
+Committed before any round is fired, because the runner refuses a dirty worktree.
+
+### batch_040 triaged — all 6 staged, 0 held — 2026-09-06
+
+Gates re-run live: `normalize_nulls` 0 of 6, audit 5 PASS + 1 WARN, verify 4 PASS + 2 exempt,
+lint 0 ERROR / 1 WARN. The audit WARN (`gilbert_meta_29`) is the ASER skip ladder plus the three
+count items dichotomised upstream — a property of the response data, identical in shape to
+`gilbert_meta_27` in batch_039, and not an itemtext defect.
+
+**The claim re-checked independently was the `gillman_2023_pss` reverse-scoring finding**, because
+it asserts a defect in a published paper and would otherwise ship on the round's word alone.
+Recomputed here from live data: alpha with **no** reversal = **0.6731**, against Gillman et al.'s
+published .67; properly keyed = **0.8637**; all 24 cross-polarity correlations negative, the least
+so at -0.093 (n=404 complete cases, resp 0-4). The paper computed reliability without
+reverse-scoring PS_4/5/7/8. **The IRW table is correct and the paper is not**, which is exactly
+what the shipped `public_note` says.
+
+**One lint WARN upheld rather than downgraded.** `gilbert_meta_55` is VERIFIED while its evidence
+hedges, but the hedge is about which of three grade-level variants a given child received — the
+table has no grade column and therefore ships all three wordings. Item identity itself is pinned
+uniquely: published per-item proportions match to 2 dp for all 15 (max deviation 0.0000), and the
+item3/item8 tie at 0.67 is broken by the published marks (5 vs 4), recovered from IVR_Data.dta.
+The hedge disclaims something the table does not claim, so VERIFIED stands.
+
+**Staged all 6 into `itemtables/clean/`**, byte-identical to their batch copies, nothing else
+present. The 12 uploaded batch_038/039 files were cleared first — all confirmed stamped before
+deletion — on the same call Ben made for batch_037's six.
+
+Expected counts for the post-upload COUNT(*) check:
+
+    gilbert_meta_29 30/15   gilbert_meta_55 30/15   gillman_2023_pss 50/10
+    girma_2021_oslo3 14/3   girma_2021_phq9 36/9    gizaw_2023_phq9 36/9
+
+**Six issues-page entries drafted; `gilbert_meta_29`'s is mandatory** — part of its shipped English
+(the paragraph and story passages) is IRW's. That is the third `mixed`-class table in three rounds,
+after `ghanbari_2016_helma_numeracy` and `gilbert_meta_27`; the widened `check_provenance.R` caught
+all three, and it correctly reports `gilbert_meta_29` as the only outstanding one now. Regenerating
+the draft file was safe this time because the previous 18 entries are merged (datapages/irw#147);
+had they still been pending, the drafter would have clobbered them again.
+
+**No new `translation_source` blanks.** The round filled three from documented sources
+(`girma_2021_phq9` and `gizaw_2023_phq9` official_instrument_english, `gilbert_meta_55`
+study_supplied), so the 19-table backlog did not grow.
