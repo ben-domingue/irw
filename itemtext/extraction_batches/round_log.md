@@ -6294,3 +6294,27 @@ scale items", which finding 1 shows is inaccurate — six GAD items plus one unr
 question.
 
 Cap not reached (cap is `batch_050`); next round picks up `batch_044`.
+
+### batch_042 uploaded (first upload run by the assistant), stamped and disclosed — 2026-09-07
+
+Ben delegated the `red_up` step and the `clean/` clearing this session; publishing a draft version
+stays a human action, and a ROUND still cannot write to Redivis, so the property that makes
+unattended rounds safe is unchanged.
+
+**Pre-flight run before the upload, all four checks:** `clean/` held exactly the staged batch (file
+set diffed, not eyeballed); every file byte-identical to its batch copy; no row already stamped
+`uploaded`; and — the check that actually prevents doubling — **none of the five tables already
+present in the draft**, since `red_up` appends silently and `numRows` will not reveal it.
+
+Uploaded 5/5, then verified by COUNT(*) and COUNT(DISTINCT item): 28/4, 35/5, 28/4, 80/20, 75/15,
+all matching. Draft 44 -> **49 tables**. `clean/` cleared.
+
+**Stamping needed a second fallback, and both guards were right to fire.** The whole-file
+round-trip check refused `mapping_verification.csv` (mixed conventions). The per-line MINIMAL check
+then refused as well — because batch_042's rows were appended in **QUOTE_ALL** while the older rows
+are **MINIMAL**. The stamper now detects each line's own convention and re-serialises in that.
+Result: 5 lines, +50 bytes, nothing else touched. **This file now contains at least two quoting
+conventions; any wholesale rewrite will silently reformat hundreds of rows.**
+`grit_BrummerHoffman_2021` is deliberately left unstamped — blocked, ships nothing.
+
+Entries applied as datapages/irw#150 (313 -> 318), immediately after upload per the standing fix.
