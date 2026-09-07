@@ -8,6 +8,25 @@ regular_prova_codes  <- c(195, 198, 199, 202, 204, 205, 206, 208, 209, 210, 217,
 # INEP response codes: A-E, "." blank, "*" double mark
 ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")
 
+# "." and "*" are NON-RESPONSES, not wrong answers (#1942).
+#
+# This script validated the raw codes against ALPHABET and then scored both of
+# them 0, so a candidate who did not sit a section came out with a full block of
+# zeros. In a 3,000-candidate draw from the 2013 and 2014 tables, 44-45% of
+# candidates scored exactly zero with every item present -- on 45 answered
+# five-option items that has probability ~4e-5 each, so the block is coding, not
+# ability. Left in, it inflated SD(theta) to 2.2-2.9 and pinned every item's
+# guessing parameter to the no-guessing boundary.
+#
+# `.` is unambiguously a blank. `*` is a double mark -- a response that could
+# not be read -- which is not evidence of a wrong answer either, so both are
+# treated as missing and the row is dropped. Stated here rather than assumed:
+# if a later analysis wants double marks scored, they are recoverable from the
+# microdata, and this is the line to change.
+NONRESPONSE <- c(".", "*")
+
+source("enem_checks.R")   # post-scoring sanity checks (#1942, finding 3)
+
 # some years ship PARTICIPANTES + RESULTADOS instead of one MICRODADOS file
 find_ci <- function(dir, pattern) {
   hits <- list.files(dir, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
@@ -118,7 +137,10 @@ process_area <- function(area) {
       left_join(items |> select(subj, booklet, position, item, key),
                 by = c("subj","booklet","position"))
   }
-  out <- df |> mutate(resp = if_else(raw == key, 1, 0)) |>
+  out <- df |>
+    mutate(resp = case_when(raw %in% NONRESPONSE ~ NA_real_,
+                            raw == key           ~ 1,
+                            TRUE                 ~ 0)) |>
     filter(item %in% std_set(area)) |>
     select(id, item, resp, resp_raw = raw, position, booklet)
 
@@ -130,6 +152,15 @@ process_area <- function(area) {
                  paste(sprintf("%s(n=%d)", bad, tb[bad]), collapse = " ")))
   cat(sprintf("  %s raw: %s\n", area,
               paste(sprintf("%s=%.4f", names(tb), tb / sum(tb)), collapse = " ")))
+
+  # Dropped only AFTER the raw-code check above, which needs to see them: a
+  # non-response is not a response, and `resp_raw` is not published.
+  n_missing <- sum(is.na(out$resp))
+  cat(sprintf("  %s: dropped %d non-response(s) (%.2f%%) coded %s\n", area,
+              n_missing, 100 * n_missing / nrow(out),
+              paste(NONRESPONSE, collapse = "/")))
+  out <- out[!is.na(out$resp), ]
+  out$resp <- as.integer(out$resp)
   out
 }
 
@@ -138,6 +169,7 @@ for (area in names(AREAS)) {
   df <- process_area(area)
   dups <- sum(duplicated(df[, c("id", "item")]))
   if (dups > 0) stop(sprintf("enem_%d_1mil_%s: %d duplicate id+item rows -- booklet/position join produced ambiguous matches; investigate before trusting output", year, suf, dups))
+  enem_check_scored(df, sprintf("enem_%d_1mil_%s", year, suf))
   save(df, file = sprintf("enem_%d_1mil_%s.Rdata", year, suf))
   write.csv(df, sprintf("enem_%d_1mil_%s.csv", year, suf), row.names = FALSE)
 }

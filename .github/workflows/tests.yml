@@ -83,6 +83,14 @@ jobs:
         working-directory: metadata
         run: Rscript tests/test_dict_union.R
 
+      # The ENEM post-scoring checks (#1942). Base R only -- no microdata, no
+      # network -- so the thresholds that decide whether a 45-million-row table
+      # is publishable are exercised on every PR rather than only when someone
+      # has 13 years of INEP files on disk.
+      - name: enem scoring checks
+        working-directory: data
+        run: Rscript tests/test_enem_checks.R
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by
