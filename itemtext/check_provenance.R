@@ -75,6 +75,7 @@ CHECKED <- list(
 )
 
 bad <- list()
+claims <- list()          # table -> data.frame(file, mapping_basis, text_source)
 sub_blank <- character(0)
 sub_nocol <- character(0)
 needs_note <- character(0)
@@ -117,6 +118,21 @@ for (f in files) {
         pn <- ifelse(is.na(x$public_note), "", trimws(x$public_note))
         withdrawn <- c(withdrawn,
                        x$table[startsWith(pn, "IRW does not offer item text for")])
+    }
+
+    ## One table can legitimately appear in two provenance files -- a language
+    ## backfill records a second event, and a redone batch supersedes an
+    ## earlier one. What is not fine is two rows making DIFFERENT claims about
+    ## the same shipped text with nothing saying which one holds: #1828 found
+    ## ALSECYPIAMH_WU_2022_PHQ recorded as `paper_order` in batch_004 and
+    ## `paper_explicit` in batch_012, neither marked superseded.
+    if ("table" %in% names(x)) {
+        get <- function(col) if (col %in% names(x))
+            ifelse(is.na(x[[col]]), "", trimws(x[[col]])) else rep("", nrow(x))
+        claims[[length(claims) + 1L]] <- data.frame(
+            table = x$table, file = f,
+            mapping_basis = get("mapping_basis"), text_source = get("text_source"),
+            note = get("note"), stringsAsFactors = FALSE)
     }
 
     if ("text_source" %in% names(x)) {
@@ -165,6 +181,35 @@ if (length(sub_blank) || length(sub_nocol))
         "\ncame from -- the study's own rendering or this project's -- has to be on the",
         "\nrecord. Fill translation_source on the rows named below (irw#1970).\n",
         sep = "")
+
+## One table, two records that disagree. Reported, never enforced: which record
+## holds is a judgement about the evidence, not something a script can settle.
+cl <- do.call(rbind, claims)
+if (!is.null(cl)) {
+    dup <- unique(cl$table[duplicated(cl$table)])
+    ## Only rows that both make a claim. A language-backfill record carries
+    ## neither column -- it documents the translation, not the mapping -- and an
+    ## absent claim does not contradict a present one.
+    split_rec <- Filter(function(t) {
+        r <- cl[cl$table == t & nzchar(cl$mapping_basis) & nzchar(cl$text_source), ]
+        ## A row whose note says SUPERSEDED has already answered this: the
+        ## disagreement is recorded, not unresolved.
+        if (any(grepl("SUPERSEDED", r$note, fixed = TRUE))) return(FALSE)
+        nrow(unique(r[, c("mapping_basis", "text_source")])) > 1L
+    }, dup)
+    if (length(split_rec)) {
+        cat(sprintf("\nSPLIT RECORD: %d table(s) have provenance rows that disagree -- REVIEW, NOT A FAILURE\n",
+                    length(split_rec)))
+        for (t in sort(split_rec)) {
+            r <- cl[cl$table == t, ]
+            cat("  ", t, "\n", sep = "")
+            cat(sprintf("    %-46s %s / %s\n", r$file, r$mapping_basis, r$text_source),
+                sep = "")
+        }
+        cat("  Say in the superseded row's note which record holds, so a reader\n",
+            "  landing on either one is not left to guess (#1828).\n", sep = "")
+    }
+}
 
 ## Kept for the message below, which names the original vocabulary.
 allowed <- vocab$value[vocab$field == "translation_source"]

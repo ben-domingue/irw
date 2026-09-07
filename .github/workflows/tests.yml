@@ -60,6 +60,12 @@ jobs:
       - name: stage_dict_row
         run: python -m unittest discover -s automated_finding/tests -t . -v
 
+      # The item-text liveness snapshot (#1828). Offline by construction: the
+      # Redivis call lives in fetch(), and what is checked here is the file
+      # contract between the Python writer and the R checker that reads it.
+      - name: itemtext live_tables
+        run: python -m unittest discover -s itemtext/tests -t . -v
+
       # The R validator is the copy external contributors source from a raw
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still

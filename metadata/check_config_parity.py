@@ -346,7 +346,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             "  irw          metadata/redivis_config.R\n"
             "  Rpkg         R/redivis-config.R\n"
             "  Python-pkg   src/irw/config.py\n"
-            "See Rpkg/inst/developer/warehouses.md for the full checklist.",
+            "\n"
+            "Land the two package pull requests BEFORE the irw one: this reads\n"
+            "Rpkg and Python-pkg at their default branch, so an irw change that\n"
+            "arrives first is a real disagreement and stays red until they land.\n"
+            "\n"
+            'Runbook: Rpkg/inst/developer/warehouses.md, "Adding a warehouse\n'
+            'everywhere else". Overview: ARCHITECTURE.md section 2.',
             file=sys.stderr,
         )
         return 1
