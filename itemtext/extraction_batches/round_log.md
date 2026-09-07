@@ -6987,3 +6987,76 @@ flagged for review. None are batch_050 tables; exit status is 0.
 **CAP REACHED.** Step 0 names `batch_050` as the round cap and this round completed it. No further
 rounds should run until a human raises the cap. Queue state after this round: 353 done, 903
 pending, 0 in_progress.
+
+---
+
+## batch_051 — 2026-09-07T16:02:37-07:00
+
+**6 tables claimed, 6 written, 0 blocked, 0 failed. Yield 6/6 = 100%.** Six agents, one per table:
+`imos_1997`, `imos_1999`, `imos_2001`, `imos_2004`, `imos_2005`, `imos_2006`. 48 rows each
+(6 problems x 8 marks 0-7), 288 rows total. Circuit breaker NOT tripped (0% failed).
+
+**Gates, all clean.** `normalize_nulls.R` 0 of 6 changed; `audit_batch.R` 6/6 PASS with **no
+anomalies at all** (so Step 5c had nothing to explain — no WARNs this round); `verify_batch.R`
+PASS=6; `lint_verification.R` 6 rows, no problems; `irw-validate` ok on all six (no
+`dup_item_resp`, no `resp_ambiguous`); `check_provenance.R` exit 0. All six are
+`mapping_basis=paper_explicit`, `text_source=canonical_instrument`, Step 5b status **VERIFIED**,
+route 9 (response-frequency match against the rights holder's own score table) + route 2. Six new
+rows in `mapping_verification.csv` (now 485); no `data_labels` tables, so no NOT_NEEDED rows owed.
+
+**The verification route continues to be unusually strong for this family.** imo-official.org
+publishes both the numbered problem paper and the per-contestant marks for the same competition
+(embedded JSON `"scores":[P1..P6]`). Every table matched all 48 cells of its item x mark(0-7)
+matrix with 0 disagreements, means equal to 3dp, and **0 of 15 problem pairs sharing a
+distribution** — so every item is distinguished from every other, which is what makes VERIFIED
+rather than PARTIAL correct here. Live unique-id counts pinned the edition independently: 460
+(1997), 450 (1999), 473 (2001), 486 (2004), 513 (2005), 498 (2006). What the route does not
+establish, stated in all six evidence strings: it ties each code to a score *column*; the
+column-to-statement tie is the paper's own printed numbering, a documentary fact.
+
+**Weaker reliance on the day convention than batch_050.** The 1997, 1999, 2001, 2004, 2005 and
+2006 papers all number problems 4-6 by their own printed numbers, so unlike 1991/1996 none of these
+tables leans on the "Day II prints 1-3" convention at all.
+
+**ORCHESTRATOR FINDING (Step 5b) — section_id convention diverges within this batch.** The 2001,
+2004 and 2005 papers are each a single sheet with no Day I/Day II headers and no dates (re-checked
+directly: `pdftotext` of the 2004 and 2005 PDFs contains no "day" or "hours" string). imos_2001 and
+imos_2004 used a single `section_id` per the imos_1994 precedent; **imos_2005 kept
+`imos_2005_day1`/`_day2`** for family consistency, with blank `section_prompt`, disclosing the
+choice. Both are defensible and no gate is affected, but the same source condition produced two
+conventions. Left as-is and flagged in `notes.csv` — harmonising is a human call at triage.
+
+**Agent claims re-checked, all CONFIRMED** (Step 5b, against the official PDFs rather than on
+report): 2004 prints "45rd IMO 2004" and "outside the rectagle"; 2005 prints "46rd IMO 2005" and
+"lie of the sides"; 1999 problem 4 prints "n not exceeded 2p"; the 1999 day header prints
+"Bucharest" with no country. All transcribed as printed and disclosed.
+
+**CONFIRMED metadata defects (pre-existing, NOT itemtext, not fixed here, no issue filed).** Both
+re-checked directly, not taken on report:
+- `metadata/tags.csv` tags all **34** `imos_*` rows `item format` = "Likert Scale/selected
+  response". They are examiner-marked constructed responses — a written proof scored 0-7 by the
+  jury with nothing to select — which is also why `option_text` is blank on all 288 rows here. The
+  same 34 rows carry `primary language(s)` = "eng", which the item text contradicts: the IMO is sat
+  in each contestant's own language.
+- `metadata/biblio.csv` has `DOI__for_paper_`, `DOI__for_data_` and `Reference_x` all "NA" for all
+  34 `imos_*` rows.
+Worth a GitHub issue at triage.
+
+**Other properties.** `option_text` blank on all 288 rows by design; no mark padded with its own
+number. `instructions` populated only where printed — imos_2001 ("Each problem is worth seven
+points.") and imos_2006 ("Time allowed: 4 hours 30 minutes. Each problem is worth 7 points.", which
+independently corroborates the 0-7 range) — blank elsewhere. Rights unchanged: imo-official.org
+carries a bare "(c) International Mathematical Olympiad" footer with nothing quotable, so
+silence-is-permission applies. Several source PDFs defeat `pdftotext` (2001 is Mathematica-typeset
+with no ToUnicode map and silently drops every mathematical symbol; 1997/1999/2005 flatten stacked
+fractions and superscripts) — those agents transcribed from page renders instead, so a re-extraction
+from plain text will differ and that is not a discrepancy.
+
+**Pre-existing, not from this round:** `check_provenance.R` still reports 3 IRW-generated-content
+tables with no public issues-page entry (`hua_2023_efl_course_experience`,
+`hua_2023_efl_study_engagement`, `huang_2023_d_scale`) and 6 `translation_source=mixed` tables for
+review. None are batch_051 tables; exit 0.
+
+**Cap NOT reached.** Step 0 names `batch_060` as the round cap; this round completed `batch_051`.
+Queue state after this round: 359 done, 897 pending, 78 blocked, 12 failed, 55 excluded,
+**0 in_progress**.
