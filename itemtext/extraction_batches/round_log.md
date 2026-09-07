@@ -5678,3 +5678,63 @@ behind a required guestbook plus the AWS WAF challenge — the same block logged
 `gilbert_meta_40`. The thumbnail endpoint is not guestbook-gated, and
 `?imageThumb=100&format=original` returns the original bytes, verified byte-exact. That turned a
 would-be block into a data_labels pass, and may reopen other blocked Dataverse tables.
+
+### batches 038 and 039 triaged — all 12 staged, 0 held — 2026-09-06
+
+Gates re-run live for both, not taken from the round reports. `normalize_nulls` 0 of 6 in each.
+batch_038: audit 5 PASS + 1 WARN, verify 6 PASS, lint 0 ERROR / 1 WARN. batch_039: audit 4 PASS +
+2 WARN, verify 3 PASS + 3 exempt, lint clean. Every WARN is explained in `notes.csv` and none is
+an itemtext defect: blank `item_text` on access10/access11 and use5 (items dropped between the
+47-item field-test form and the published 44-item HELMA, wording published nowhere), and
+gilbert_meta_27's row-count and blank-`option_text` WARNs (an ASER skip ladder, and three items
+dichotomised upstream with no documented threshold).
+
+**The claim worth re-deriving independently was the HELMA 47 -> 44 reconstruction**, because all
+seven `ghanbari_2016_helma_*` tables across both batches rest on it. Recomputed Cronbach alpha
+directly from the cached S3 `.sav` (n=582) rather than trusting either round: every one of the
+eight published Table 3 values reproduces to <=0.005 —
+
+    self-efficacy access1-4 .614/.61   access access5-9 .705/.71   reading1-5 .857/.86
+    understanding understand1-9+reading6 .892/.89   appraisal .815/.81   use1-4 .647/.65
+    communication com1-8 .827/.83      all 44 retained .932/.93
+
+Alpha is order-invariant, so this confirms block MEMBERSHIP — including the `reading6` move from
+the reading block to understanding, which is the load-bearing and most surprising part.
+
+**One WARN resolved rather than passed through.** `lint_verification` flagged
+`ghanbari_2016_helma_comm` as VERIFIED while its evidence hedges. Reading the evidence, the hedge
+is precisely that the loading route cannot establish that the `.sav`'s `com` block IS the
+communication block. The alpha recomputation above closes exactly that gap (com1-8 .827 vs .83),
+so VERIFIED is retained rather than downgraded, and a note recording why was appended to
+`batch_038/notes.csv`. Contrast the sibling `_access`, correctly downgraded to PARTIAL: its
+failure was within-block ORDER, which alpha cannot rescue.
+
+**A trap found the hard way: `draft_issues_qmd.R` OVERWRITES `fixes/itemtext_issues_draft.md`,
+it does not append.** batch_037's six entries were still unapplied when the 038/039 draft was
+generated, so they were clobbered — five of them hand-written at triage and not regenerable.
+Recovered from commit 208add8 and merged back; the file now carries all **18** owed entries and
+the YAML parses as 18 unique tables. Anyone drafting on top of unapplied entries must do the same.
+
+**Staged all 12 into `itemtables/clean/`**, byte-identical to their batch copies, nothing but
+`*__items.csv` present. Ben had already emptied `clean/` of the uploaded batch_037 six.
+
+Expected row/item counts for the post-upload COUNT(*) check:
+
+    gerber_2022_eas_temperament 100/20   gesbert_2021_tdeq 150/25
+    helma_access 55/11   helma_appraise 25/5   helma_comm 40/8   helma_numeracy 6/3
+    helma_reading 30/6   helma_understand 45/9   helma_use 25/5
+    gholami_2017_periodontal_knowledge 6/3   gilbert_meta_16 142/71   gilbert_meta_27 36/18
+
+**Two issues-page entries are mandatory at upload, not optional.** `ghanbari_2016_helma_numeracy`
+and `gilbert_meta_27` both carry `translation_source=mixed` with IRW-authored English (a BMI
+formula sentence; the paragraph and story passages). Both are now caught by the widened
+`check_provenance.R` (7efc8c9) instead of passing silently.
+
+**Logged, not fixed, on Ben's call: the `translation_source` blank backlog.**
+`gerber_2022_eas_temperament` (038) and `gholami_2017_periodontal_knowledge` (039) ship English in
+the base fields without recording whose English it is, joining 17 earlier tables with the same
+gap. gholami's is determinable from its own note (the study's own English). gerber_2022's is not:
+its English is taken from an unrelated third study's table (IJERPH 2022;19(3):1387), which matches
+no value in `provenance_vocab.csv` — `official_instrument_english` means the instrument
+publisher's own. That vocabulary gap wants one decision across all 19, not a piecemeal patch.
+Nothing here blocks upload; `check_provenance.R` reports it as a gap it cannot resolve.
