@@ -6916,3 +6916,74 @@ the shared deposit. Distinct scratch namespaces and sibling-ownership warnings h
 
 Cap not reached (Step 0 names `batch_050`); the next firing proceeds normally and will be the last
 under the current cap.
+
+---
+
+## batch_050 — 2026-09-07
+
+**Tables (6):** `imos_1989`, `imos_1990`, `imos_1991`, `imos_1993`, `imos_1994`, `imos_1996`.
+All six from the same source family (official IMO problem archive + Kaggle `luckyt/imo-scores`),
+one agent per table, siblings declared off-limits to each other.
+
+**Outcome: written 6 / blocked 0 / failed 0. Yield 6/6 = 100%.** No agent was reported failed;
+no rate limit or spend cap was hit. Circuit breaker not tripped (0% failed).
+
+**Gates.** `normalize_nulls.R` normalized `imos_1989` (48 lines) and left the other five
+untouched. `audit_batch.R`: **PASS 6, no anomalies** — so there are no audit WARNs to explain
+under Step 5c (recorded as such in `notes.csv`). `verify_batch.R`: **PASS 6**, every
+`verify_<table>.R` re-ran and ended `VERDICT: PASS`. `irw-validate`: clean on all six.
+`check_provenance.R`: exit 0.
+
+**lint_verification: 0 ERROR, 2 WARN** — `imos_1991` and `imos_1993` are VERIFIED while their
+evidence names something it does not establish. Both kept VERIFIED, with the reasoning written
+into `notes.csv`. Route 9 clears the VERIFIED bar on its own terms: for every table, all 48 cells
+of the item x mark(0-7) matrix reproduce imo-official.org's own published per-problem score
+columns with 0 disagreements, per-item means match to 3 dp, and **0 of 15 problem pairs share a
+mark distribution**, so no two items could be swapped undetectably. The hedge is about the
+score-column -> printed-statement tie, a documentary fact about the official paper's own
+numbering that no data route can test — the same caveat `imos_1987`/`imos_1988` shipped with in
+batch_049. Worth a human ruling on whether that phrasing should force PARTIAL corpus-wide; if it
+should, five of this round's six rows change and batch_049's two do too.
+
+**Cross-check on contestant counts.** Each agent independently pinned its year by unique-id
+count against the official contestant roster — 1989: 291, 1990: 308, 1991: 312, 1993: 413,
+1994: 385, 1996: 424 — which rules out a year-shifted mapping, the one error the score-column
+match alone would not catch.
+
+**Step 5b orchestrator re-checks.** Two agent findings were re-verified directly rather than
+taken on report, and both hold:
+1. `metadata/tags.csv` tags `item format = Likert Scale/selected response` for **all 34**
+   `imos_*` rows (grepped and counted). These are examiner-marked constructed responses scored
+   0-7. Third round running that this has been reported; still unfixed, needs a `tags.csv` change
+   outside this flow.
+2. `metadata/biblio.csv` has `DOI__for_paper_`, `DOI__for_data_` and `Reference_x` all `NA` for
+   the `imos_*` rows, citing only the Kaggle mirror URL. The authoritative source is
+   imo-official.org and should be added.
+A third agent claim was checked and **partly corrected**: `imos_1996` predicted a per-item
+coverage WARN because no contestant scored 6 on problem5. The zero is real (`verify_batch`
+printed P5 as 311/74/18/7/4/4/0/6) but `audit_batch.R` did not in fact flag it — the WARN was
+predicted, not observed.
+
+**Source variation within one family.** The 1994 official paper prints no Day I / Day II headers,
+so that agent used a single trivial `section_id` with blank `section_prompt` rather than inventing
+the conventional 1-3 / 4-6 split; 1989, 1991, 1993 and 1996 all had dated day headers and used two
+real sections. The 1991 and 1996 papers reprint the Day II problems as "1, 2, 3", so problems 4-6
+are tied to their codes by day convention plus the P4-P6 score match, not by a printed number —
+each agent said so in its own evidence string rather than papering over it.
+
+**Rights.** imo-official.org carries only a bare "(c) International Mathematical Olympiad" footer:
+no fee, NC clause or redistribution bar quotable, so silence-is-permission applies, consistent
+with the `imos_1987`/`imos_1988` finding. `option_text` is blank throughout by design (a jury mark
+on a written proof has no verbal anchors) and no mark was padded with its own number. Every table
+carries a `public_note` that the IMO is sat in each contestant's own language, so the shipped
+English is the organisers' official version rather than a single administered wording;
+`language`/`_translated` were deliberately omitted.
+
+**Pre-existing, not from this round:** `check_provenance.R` still reports 3 IRW-generated-content
+tables with no public issues-page entry (`hua_2023_efl_course_experience`,
+`hua_2023_efl_study_engagement`, `huang_2023_d_scale`) and 6 `translation_source=mixed` tables
+flagged for review. None are batch_050 tables; exit status is 0.
+
+**CAP REACHED.** Step 0 names `batch_050` as the round cap and this round completed it. No further
+rounds should run until a human raises the cap. Queue state after this round: 353 done, 903
+pending, 0 in_progress.
