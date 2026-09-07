@@ -138,6 +138,15 @@ def scripts_for(table: str, sources: list[tuple[Path, str]]) -> tuple[list[Path]
     if exact:
         return exact, "literal"
 
+    # A script whose underscore-stripped stem is a prefix of the table's own
+    # stripped name: `gilbertmeta.R` builds `gilbert_meta_16`. Checked before
+    # the prefix chain because `gilbert_meta` alone matches 14 sibling scripts.
+    flat = table.replace("_", "").lower()
+    stem_hits = [p for p, _ in sources
+                 if len(p.stem) >= 6 and flat.startswith(p.stem.replace("_", "").lower())]
+    if stem_hits and len(stem_hits) <= MAX_PREFIX_HITS:
+        return stem_hits, "script name"
+
     widest = ""
     for i, token in enumerate(_prefixes(table)):
         hits = [p for p, text in sources if token in text]
@@ -148,6 +157,14 @@ def scripts_for(table: str, sources: list[tuple[Path, str]]) -> tuple[list[Path]
             return hits, ("literal" if i == 0 else f"prefix '{token}'")
         if hits and not widest:
             widest = f"'{token}' matches {len(hits)} scripts, too broad to screen"
+
+    # Last resort: the table's most distinctive token. A study name survives
+    # even when the prefix does not -- `gad_BrummerHoffman_2021` is built by
+    # `BF_BrummerHoffman_2021.R`, which shares no prefix with it at all.
+    for token in sorted((t for t in table.split("_") if len(t) >= 8), key=len, reverse=True):
+        hits = [p for p, text in sources if token in text or token in p.stem]
+        if hits and len(hits) <= MAX_PREFIX_HITS:
+            return hits, f"token '{token}'"
     return [], widest
 
 
