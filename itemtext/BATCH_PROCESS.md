@@ -33,8 +33,12 @@ original extraction, uploaded 2026-08-16) and `batch_012` (the #1643 hold releas
 provenance updated only), byte-identical in both.
 
 The consequence for uploading: **run `red_up` against `itemtables/clean/`, never
-across `itemtables/*/`.** A run over the batch directories walks extraction history
-and hits these duplicates, which `red_up` correctly refuses — a Redivis upload
+across `itemtables/*/`.** Since #2055 `red_up` refuses the wrong argument outright:
+a directory holding a `provenance.csv` is batch history, and it stops before reading
+a single table. Do not reach for `--allow-history-dirs` to get past that here — the
+answer is always to stage into `clean/` first. The older, weaker backstop still
+applies when something slips through with the override: a run over the batch
+directories hits these duplicates, which `red_up` correctly refuses — a Redivis upload
 appends, so uploading two identical files doubles the table. The refusal names
 whether the colliding files have the same bytes; identical means you are pointed at
 the wrong directory, differing means two versions are genuinely in flight.
