@@ -587,6 +587,70 @@ local({
           "the empty log keeps the full header")
 })
 
+
+##------------------------------------------------- description overrides ---
+##DESCRIPTION_OVERRIDES is the one place a WRONG human cell can be corrected,
+##so the load-bearing property is the guard, not the replacement: it must fire
+##only on an exact match with the superseded text, and it must disarm itself
+##the moment a human fixes the sheet.
+local({
+    ov <- list(list(table = "a_2020", issue = "#1",
+                    superseded = "the wrong instrument",
+                    corrected  = "the right instrument", why = "test"))
+    ap <- function(b) suppressMessages(suppressWarnings(
+        apply_description_overrides(b, "core", ov)))
+
+    b <- ap(fake_biblio(biblio_row("a_2020", description = "the wrong instrument")))
+    check(identical(b$Description[1], "the right instrument"),
+          "an exact match on the superseded text is corrected")
+
+    ##The guard. Anything other than the recorded text is left alone -- this is
+    ##what keeps the override from being "the Description looks wrong to me".
+    b <- ap(fake_biblio(biblio_row("a_2020", description = "something else entirely")))
+    check(identical(b$Description[1], "something else entirely"),
+          "a Description that is not the recorded text is never touched")
+
+    ##Self-disarming: once the sheet says the corrected text, the entry is spent
+    ##and the human's cell wins again with no code change.
+    b <- ap(fake_biblio(biblio_row("a_2020", description = "the right instrument")))
+    check(identical(b$Description[1], "the right instrument"),
+          "an already-corrected sheet cell is left as the human wrote it")
+
+    ##Whitespace in the sheet carries no meaning and must not defeat a match.
+    b <- ap(fake_biblio(biblio_row("a_2020", description = "  the wrong   instrument ")))
+    check(identical(b$Description[1], "the right instrument"),
+          "the match is whitespace-normalised")
+
+    ##A stale entry must be audible. Silence would let a correction that no
+    ##longer applies sit in the file forever.
+    w <- tryCatch({
+        apply_description_overrides(
+            fake_biblio(biblio_row("a_2020", description = "moved on")), "core", ov)
+        NULL
+    }, warning = function(w) conditionMessage(w))
+    check(!is.null(w) && grepl("did not match", w, fixed = TRUE),
+          "a non-matching override warns rather than failing silently")
+
+    ##A table absent from this source's biblio is not an error: the same
+    ##override list is applied to core/comps/nom/sim, and only core has these.
+    b <- ap(fake_biblio(biblio_row("other_2020", description = "untouched")))
+    check(identical(b$Description[1], "untouched"),
+          "an override for a table this source lacks is a no-op")
+})
+
+local({
+    ##Every shipped entry must be well-formed, or it fails silently at export
+    ##time on a table nobody is looking at.
+    bad <- Filter(function(o)
+        !all(nzchar(c(o$table, o$issue, o$superseded, o$corrected, o$why))) ||
+        identical(desc_norm(o$superseded), desc_norm(o$corrected)),
+        DESCRIPTION_OVERRIDES)
+    check(length(bad) == 0L,
+          "every DESCRIPTION_OVERRIDES entry is complete and actually changes the text")
+    check(!anyDuplicated(vapply(DESCRIPTION_OVERRIDES, function(o) o$table, character(1))),
+          "no table carries two Description overrides")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
