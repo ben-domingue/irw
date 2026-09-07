@@ -6228,3 +6228,69 @@ grandahl_2017_hpv_beliefs 75/15. The round's 9-column provenance sidecar was fol
 `dpt_noncog__grit`, exactly as batch_027 predicted. The question is whether that clause governs an
 open deposit's own printing of the items; if it does not, both tables unblock together. A rights
 call, not a round's.
+
+---
+
+## batch_043 — 2026-09-07
+
+**6 tables claimed, 6 written, 0 blocked, 0 failed. Yield 6/6 (100%).** Circuit breaker not
+approached. Gates: `normalize_nulls` fixed 1 file (`han_2026_phq9`, 37 lines); `audit_batch` 5 PASS /
+1 WARN; `verify_batch` PASS=6; `lint_verification` clean (6 rows, no problems); `irw-validate` ok on
+all six, nothing to report; `check_provenance` passes, with one REVIEW line (below). No rate limit,
+no quota event — every agent used the `--table-sets` route and no round-level export was taken.
+
+Tables: `gumus_2025_dietarian_identity` (231 rows), `habibi_2021_meim` (48), 
+`han_2015_peer_assisted_learning` (60), `han_2026_gad7` (27), `han_2026_isi` (35), 
+`han_2026_phq9` (36). Verification: 3 VERIFIED (han_2015, han_2026_gad7, han_2026_phq9), 
+3 PARTIAL (gumus, habibi, han_2026_isi). No `data_labels` tables, so no NOT_NEEDED rows were owed;
+all six carry a real verification row in both the batch file and the permanent tracker (now 441).
+
+**Three of the six tables are the same PeerJ deposit** (Han et al. 2026, 10.7717/peerj.20868,
+PMC13048223 — GAD-7, ISI, PHQ-9 on 2,086 elderly respondents in Jiangsu). The three agents read the
+shared supplement independently and their accounts corroborate rather than conflict: the PHQ-9 agent
+independently observed that S2's anxiety block is one column short of GAD-7 with a non-GAD 16th
+column, which is exactly what the GAD-7 agent concluded from the other direction.
+
+**Step 5b — four claims re-checked by the orchestrator, all four CONFIRMED, none corrected.**
+
+1. `han_2026_gad7` mixes two scales. `item_stats.R` on live data: GAD01–GAD06 min 0 / max 3 with
+   ceiling 0.0–0.3%, GAD07 min 0 / **max 2** with ceiling **13.8%**. GAD07 is a No/Cannot judge/Yes
+   item, not a frequency item, and the paper still sums it into `GAD_Score`. Also confirmed that
+   GAD02/GAD03 means are 0.23/0.20 — the paper's Table 2 *means* match its columns while its
+   *labels* for items 2 and 3 are the wrong way round. Means alone cannot separate that pair, so the
+   agent's S2 row-pairing (100% vs best rival 0.79) remains the load-bearing route.
+2. `han_2026_isi` non-uniform coding. Confirmed: ISI01 0–4 (mean 0.69), ISI07 0–4 (0.54),
+   ISI02/04/05/06 all 1–5 (1.57–1.84). The ~1-point mean gap is exactly the off-by-one, applied to
+   those two items only. ISI03's 0–5 range is 3 out-of-range zeroes, present in the raw file too.
+3. `gumus_2025_dietarian_identity` DIQ19. Recomputed from the CC BY deposit independently of the
+   agent's files: stored-reversed set is exactly DIQ9–DIQ19 + DIQ31–DIQ33 (14 items). Prosocial block
+   DIQ19–DIQ24 scores 3.97 / 1.39 / α .682 as stored and **3.85 / 2.03 / α .957** with DIQ19 alone
+   un-reversed, against the paper's printed **3.85 / 2.02 / .95** — three statistics to two decimals.
+   The stored reversal of DIQ19 is a depositor error. Separately the Moral Motivation gap is
+   paper-side, not ours: DIQ28–30 observed mean 3.85 vs printed 3.38 while SD (2.02 v 2.01) and α
+   (.849 v .85) match.
+4. `habibi_2021_meim` five-column form vs four-point data. Confirmed: live resp set is exactly
+   {1,2,3,4} over 5,084 observations, no 5 anywhere.
+
+**The one WARN, explained in notes.csv (Step 5c).** `han_2026_isi`: "60% of rows have blank
+option_text" is the source's own anchoring — only the two endpoints of each 5-point scale are
+labelled, so 3 of 5 levels per item are legitimately blank rather than padded. "ISI03(0) has no
+option_text row" is a **response-data** defect, not a text gap: 3 of 2,086 respondents carry an
+out-of-range 0 on a 1–5 item, and the same 3 cases are in the raw deposit. Neither is an itemtext
+defect.
+
+**Owed before upload — `habibi_2021_meim` needs an issues-page line.** `check_provenance.R` lists it
+under `translation_source=mixed, no issues-page entry` (REVIEW, not a failure). Under the 2026-09-02
+ruling it **does** owe a disclosure: the English *instructions* are this project's own translation
+(the paper prints none), even though the English item wording is the paper's Table 2 and the Persian
+is the study's S3 form. Recorded in its notes row as a triage action.
+
+**Four `note_only` rows added to `itemtables/pending_index_notes.csv`** — `han_2026_gad7`,
+`han_2026_isi`, `gumus_2025_dietarian_identity`, `habibi_2021_meim`. All four are written tables
+carrying a source-data finding, not blocks.
+
+**Dictionary problem worth a separate issue:** `han_2026_gad7`'s Description reads "GAD-7 anxiety
+scale items", which finding 1 shows is inaccurate — six GAD items plus one unrelated 3-level
+question.
+
+Cap not reached (cap is `batch_050`); next round picks up `batch_044`.
