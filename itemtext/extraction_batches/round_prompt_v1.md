@@ -152,9 +152,11 @@ Each subagent prompt must tell it to:
 - Write itemtables/batch_<NNN>/notes_<table>.csv (header table,note) if its table didn't get a
   clean pass, including a pass carrying a real caveat.
 - Write itemtables/batch_<NNN>/provenance_<table>.csv (header
-  table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for its table,
-  clean or not. Vocabularies are defined in SKILL.md Step 6c. Record mapping_basis=unknown honestly
-  rather than guessing.
+  table,mapping_basis,text_source,translation_source,source_ref,note,public_note,uploaded) with a
+  row for its table, clean or not. Vocabularies are defined in SKILL.md Step 6c. Record
+  mapping_basis=unknown honestly rather than guessing. translation_source is REQUIRED whenever
+  text_source=translated_substitute — there the English you shipped is the base text, so say where
+  it came from; check_provenance.R fails a blank one (irw#1970).
 - Write itemtables/batch_<NNN>/verification_<table>.csv (header
   table,batch,mapping_basis,uploaded,route,status,evidence) for every table whose mapping_basis is
   NOT data_labels, per SKILL.md Step 5b. status is VERIFIED/PARTIAL/NO_ROUTE, and `evidence` must

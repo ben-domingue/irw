@@ -116,47 +116,44 @@ for (f in files) {
             sub_blank <- c(sub_blank, x$table[ts == "translated_substitute" & !nzchar(tr)])
         } else {
             ## The column postdates most of the corpus (added 2026-09-02), so these
-            ## rows have no field to leave blank. Counted apart: a backfill has to
-            ## add the column here, not just a value.
+            ## rows have no field to leave blank. Counted apart because the remedy
+            ## differs: here a fix has to add the column, not just a value.
             sub_nocol <- c(sub_nocol, sub)
         }
     }
 }
 
-## A blind spot the disclosure check above cannot see, reported separately.
+## The other shape of IRW-generated English, enforced since 2026-09-06 (irw#1970).
 ##
-## The check fires on `translation_source == machine_translation`, which is the
-## right test for a table shipping administered wording plus an IRW translation.
-## It does not reach the other shape: `text_source = translated_substitute`, where
-## the administered original could not be recovered and ENGLISH SITS IN THE BASE
-## FIELDS. There the English may be the study's own rendering (nothing to disclose)
-## or something this project wrote (a disclosure is owed), and `translation_source`
-## is the only field that would tell them apart.
+## The disclosure check above fires on `translation_source == machine_translation`,
+## which is the right test for a table shipping administered wording plus an IRW
+## translation. It does not reach `text_source = translated_substitute`, where the
+## administered original could not be recovered and ENGLISH SITS IN THE BASE FIELDS.
+## There the English may be the study's own rendering (nothing to disclose) or
+## something this project wrote (a disclosure is owed), and `translation_source` is
+## the only field that would tell them apart.
 ##
-## Measured 2026-09-05: 62 tables carry translated_substitute and not one of them
-## records where its English came from. They split two ways, and the split matters
-## because the remedies differ: 17 sit in provenance files that HAVE the column and
-## leave it blank, while 45 predate the column entirely (it was added 2026-09-02),
-## so a backfill there has to add the field, not just fill it. Reported as counts
-## rather than as errors -- most are almost certainly the study's own English; what
-## is wrong is that nothing distinguishes them. See ben-domingue/irw#1970.
-report_gap <- function(v, headline, remedy) {
-    if (!length(v)) return(invisible(NULL))
-    cat(sprintf("\n%s: %d table(s)\n", headline, length(v)))
-    cat("  ", remedy, "\n", sep = "")
-    cat(sprintf("  %s\n", paste(utils::head(sort(v), 8), collapse = ", ")))
-    if (length(v) > 8) cat(sprintf("  ... and %d more\n", length(v) - 8))
-}
-if (length(sub_blank) || length(sub_nocol)) {
-    cat("\ntranslated_substitute puts ENGLISH IN THE BASE FIELDS. Whether that English is",
-        "\nthe study's own or IRW's is what translation_source would record, and these",
-        "\ntables do not record it. Not an error -- a gap this check cannot resolve.\n",
+## Until 2026-09-06 this was reported as a count and passed: 63 tables carried
+## translated_substitute and not one recorded where its English came from, so the
+## check had no signal for this shape at all -- it could not miss cases, it could
+## not see them. All 63 were backfilled from their own provenance notes (26
+## official_instrument_english, 33 study_supplied, 3 mixed, 1 third_party_english;
+## no machine_translation among them), and a blank is an error from here on. That
+## is the fix the issue asked for: put the fact on the record at extraction time,
+## where the extractor knows the answer, rather than leaving a silent pass behind.
+if (length(sub_blank))
+    bad[["translated_substitute rows with no translation_source"]] <-
+        sprintf("  %-44s %-24s %s", sort(sub_blank), "translation_source",
+                sQuote(""))
+if (length(sub_nocol))
+    bad[["translated_substitute rows in a file with no translation_source column"]] <-
+        sprintf("  %-44s %-24s %s", sort(sub_nocol), "translation_source",
+                "(column absent -- add it)")
+if (length(sub_blank) || length(sub_nocol))
+    cat("\ntranslated_substitute puts ENGLISH IN THE BASE FIELDS, so where that English",
+        "\ncame from -- the study's own rendering or this project's -- has to be on the",
+        "\nrecord. Fill translation_source on the rows named below (irw#1970).\n",
         sep = "")
-    report_gap(sub_blank, "  column present, left blank",
-               "fill translation_source on these rows")
-    report_gap(sub_nocol, "  column absent from the provenance file",
-               "add the translation_source column, then fill it")
-}
 
 ## Kept for the message below, which names the original vocabulary.
 allowed <- vocab$value[vocab$field == "translation_source"]
@@ -176,6 +173,11 @@ if (length(bad)) {
         cat("Allowed ", spec$field, " (from provenance_vocab.csv): ",
             paste(sQuote(a[nzchar(a)]), collapse = ", "),
             if (any(!nzchar(a))) " and empty" else "", "\n", sep = "")
+        ## ...except on a translated_substitute row, where empty is the one thing
+        ## it cannot be: that is the row whose English is unaccounted for.
+        if (spec$field == "translation_source" && (length(sub_blank) || length(sub_nocol)))
+            cat("  (empty is NOT allowed on a text_source=translated_substitute row",
+                "-- irw#1970)\n")
     }
 }
 
