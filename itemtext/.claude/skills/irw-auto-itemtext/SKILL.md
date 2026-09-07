@@ -1226,10 +1226,14 @@ per-table timestamp — write `unrecorded` rather than a date you know is wrong.
 The checker runs without the snapshot, falling back to `uploaded` and saying so,
 so it still works with no credentials and no network.
 
-Run from `itemtext/`. It reads every `itemtables/batch_*/provenance.csv`, keeps the rows
-with a non-empty `public_note`, and reports which of the now-live ones are missing from
-`../../irw_site/itemtext_issues.qmd`. Exit status is 1 while anything is DUE, so it can
-gate the wrap-up. Three categories come back:
+Run from `itemtext/`. It reconciles in **both directions**. Outward, it reads every
+`itemtables/batch_*/provenance.csv`, keeps the rows with a non-empty `public_note`, and
+reports which of the now-live ones are missing from `../../irw_site/itemtext_issues.qmd`.
+Inward, it parses the page's own `- table:` entries and reports the ones whose item text
+is not published — the direction the `public_note` filter cannot see, which is how seven
+PROMIS entries outlived the wording's withdrawal and two lost carver uploads went
+unnoticed for two days (#1985). Exit status is 1 while anything is DUE or ORPHAN, so it
+can gate the wrap-up. The categories:
 
 - **DUE** — live and absent. Apply the issues-page bar (Step 6c), then either add the
   entry or record the drop in `fixes/issues_page_dropped.csv`.
@@ -1240,6 +1244,14 @@ gate the wrap-up. Three categories come back:
 - **CHECK** — on the page, not live, and not in the draft either. The page is describing
   a table nobody can fetch: either it was never uploaded, or it was withdrawn and its
   entry should go with it.
+- **STAGED (page-only)** — same, for an entry with no provenance row behind it.
+- **ORPHAN** — on the page, and no item text published under that name at all. The page
+  is describing wording a reader cannot fetch. Remove the entry, or restage the upload —
+  an orphan entry is sometimes the *only* signal an upload was lost, since the internal
+  records all say shipped. If the decision is genuinely still open, record it in
+  `fixes/issues_page_orphans_ack.csv` (table,reason): that stops it gating, not stops it
+  being reported — acknowledged orphans are printed with their reason every run.
+  Skipped **loudly** when `live_tables.csv` is absent; it never quietly passes.
 - **STAMP OWED** — live in Redivis with no `uploaded` value in any provenance row. Fill
   in the date, or `unrecorded`.
 - **GONE** — provenance says uploaded, not live. Recorded withdrawals are counted and
@@ -1249,8 +1261,8 @@ gate the wrap-up. Three categories come back:
   `tools/withdraw_wording_rights.py` writes) or the `note` opens `WITHDRAWN` (what the
   PROMIS round wrote).
 
-The last two do not affect the exit status: they are bookkeeping, not an unwritten
-disclosure. They are printed every run so they cannot accumulate silently, which is how
+STAMP OWED and GONE do not affect the exit status: they are bookkeeping, not an
+unwritten disclosure. They are printed every run so they cannot accumulate silently, which is how
 #1828's sixteen built up.
 
 This is the step that closes the loop. Without it a note written at triage time is simply
