@@ -6616,3 +6616,67 @@ the R listing or `irw_fetch`, never that enumeration.
 Also recorded, not actioned: `hewei_2022_msva_purchase`'s published PLOS supplement carries 752
 respondent IP addresses with city-level geolocation. **Not an IRW exposure** — the processing
 script drops the column and the corpus has no such field — but the deposit itself is the concern.
+
+## batch_046 — 2026-09-07
+
+6 tables claimed, **6 written / 0 blocked / 0 failed — yield 6/6 (100%)**. Circuit breaker not
+triggered (0% failed). No rate limit or spend cap hit; all six agents returned normally.
+
+| table | rows | mapping_basis | Step 5b |
+|---|---|---|---|
+| hoorani_2022_child_help | 10 | data_labels | NOT_NEEDED (exempt) |
+| hoorani_2022_sp | 20 | data_labels | VERIFIED |
+| hori_2019_radiation_risk | 42 | paper_explicit | PARTIAL |
+| horiuchi_2024_attachment | 59 | reconstructed | PARTIAL |
+| horiuchi_2024_dissociation | 60 | paper_explicit | PARTIAL |
+| horiuchi_2024_rsmsm | 60 | paper_order | PARTIAL |
+
+Two source clusters: `hoorani_2022_*` (PLOS ONE 10.1371/journal.pone.0271374, Young Lives India,
+S2 Stata deposit) and `horiuchi_2024_*` (PLOS ONE 10.1371/journal.pone.0298214, Japanese
+maltreatment scales). Both CC BY 4.0. No sibling collisions; each agent used the shared deposit
+read-only.
+
+**Gates.** normalize_nulls: 3 of 6 normalized. audit_batch: 4 PASS / 2 WARN, both WARNs explained
+in notes.csv per Step 5c and both correct-but-expected (see below). verify_batch: 5 PASS +
+1 MISSING(exempt, data_labels). lint_verification: 6 rows, no problems. `irw-validate`: all six ok.
+check_provenance: clean exit; one REVIEW line resolved (below).
+
+**Audit WARNs — both expected, neither an itemtext defect.**
+- `hori_2019_radiation_risk`: blank option_text on Q1/Q6/Q8. Those were open numeric write-ins
+  (S1 Fig); the live table stores the authors' post-hoc dichotomisation, and Tables 1–2 label only
+  the affirmative code, so the complement labels are unpublished and were correctly not invented.
+  This is a property of the response data — the table is a recoded analysis file, not raw responses.
+- `horiuchi_2024_attachment`: 33.9% blank item_text. Deliberate partial extraction; 7 of 20 columns
+  were dropped before the paper published any per-item statistic, loading or ordering information,
+  so nothing ties the 7 leftover wordings to columns. Blank is the honest outcome.
+
+**check_provenance REVIEW resolved.** `horiuchi_2024_dissociation` carries
+`translation_source=mixed` with no issues-page entry. Determination: none owed. item_text is the
+study's own English; option_text is Putnam's published CDC v3 anchors — an external published
+instrument, not IRW-generated English. Orchestrator confirmed those three anchor strings appear
+nowhere in the article text. The 2026-09-02 disclosure ruling covers English this project
+generated; none was generated here.
+
+**Step 5b orchestrator re-checks (both source-overriding claims confirmed).**
+- `hoorani_2022_child_help`: the agent replaced the `.dta`'s terse variable labels with the paper's
+  fuller Table 1 question wording. Re-read `s016.dta` directly — the five labels ("Someone to help
+  with problems with studies", "…worried about something at home", "…being teased by another
+  child", "…advice about religious matter", "…getting to school or work") match the shipped
+  questions one-to-one in CHELP01–CHELP05 order with no crossing. The swap expands wording; it does
+  not re-map any code. Confirmed.
+- `horiuchi_2024_attachment`: the agent's whole reconstruction rests on the claim that the paper's
+  Survey 1 item list is not a reliable column-order transcript. Re-parsed `s003.docx` independently:
+  its ADAS-R items 4 and 12 are **verbatim identical** ("The child does not seem to understand the
+  meaning of remorse or giving a sincere apology."), so the printed list cannot be a 1:1 map onto 20
+  distinct columns. Confirmed. One naming slip in the agent's report: it calls this supplement "S2
+  Table" in places; the file is headed "S3 Table: Questionnaire items used in Survey 1". Structure
+  is as described (17 ADAS-R + 3 additional = 20).
+
+**Notable for triage.** `horiuchi_2024_attachment` is the round's one table shipping incomplete
+coverage by design — 13 of 20 items carry text, verified PARTIAL, 11 of 78 single swaps among the
+13 not excluded by the means route. Worth a human look at whether 65% coverage on a reconstructed
+mapping is the bar. Three of the four Japanese-administered tables ship English under
+`text_source=translated_substitute` with `_translated` columns empty, because zero CJK item wording
+exists anywhere in either deposit.
+
+Cap not reached (cap is batch_050); next firing picks up batch_047. 927 pending remain.
