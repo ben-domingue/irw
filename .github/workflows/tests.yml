@@ -83,6 +83,47 @@ jobs:
         working-directory: metadata
         run: Rscript tests/test_dict_union.R
 
+      # Redivis config parity (#1733). The dataset list is declared once per
+      # language -- here, in Rpkg, and in Python-pkg -- and nothing compared
+      # the three. They had already drifted: Python-pkg carried no reference to
+      # irw_nominal, so that source was reachable from R and not from Python
+      # for months, and it was found by hand rather than by anything mechanical.
+      #
+      # The issue proposed hanging this off the weekly pipeline, because that
+      # was the only job with all the checkouts on disk. Both package repos are
+      # public, so any runner can have them -- which makes this a per-PR check
+      # that fails in the pull request that introduces the drift, rather than in
+      # the following Monday's metadata PR, which is about something else.
+      #
+      # Both are checked out at their default branch on purpose. A config change
+      # is only really landed once it is on main in all three repos, and that is
+      # the state this is asserting.
+      - name: Check out Rpkg
+        uses: actions/checkout@v4
+        with:
+          repository: itemresponsewarehouse/Rpkg
+          path: _deps/Rpkg
+
+      - name: Check out Python-pkg
+        uses: actions/checkout@v4
+        with:
+          repository: itemresponsewarehouse/Python-pkg
+          path: _deps/Python-pkg
+
+      # The unit tests first: they cover the parsers against synthetic files,
+      # including the floor that makes a config this can no longer read ERROR
+      # instead of comparing three empty sets and reporting green. Run as a
+      # script rather than through unittest discovery because metadata/ is not
+      # an importable package, unlike red_up/ and irw_validate/ above.
+      - name: config parity tests
+        run: python metadata/tests/test_config_parity.py -v
+
+      - name: Redivis config parity
+        run: |
+          python metadata/check_config_parity.py \
+            --rpkg  _deps/Rpkg/R/redivis-config.R \
+            --pypkg _deps/Python-pkg/src/irw/config.py
+
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the
   # diff. This checks the script's contract; the data is checked by
