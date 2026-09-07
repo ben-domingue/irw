@@ -6559,5 +6559,15 @@ column. The IRW processing script drops it, so nothing PII-bearing is in the cor
 sitting in the public supplement.
 
 No instrument mismatches (Step 3b clean on all six), no dictionary/metadata problems, no access
-failures, no rate limits, no export-quota pressure (the query route via `irw_table_sets()` carried
-the round; no full-table export was taken). Cap is `batch_050` — not reached, 5 rounds remain.
+failures, no rate limits, and no export-quota errors — the query route via `irw_table_sets()`
+carried the verification work, though whether any agent also took a full-table export was not
+audited. Cap is `batch_050` — not reached, 5 rounds remain.
+
+**Step 5b confirmations.** Three agent claims were re-checked by the orchestrator rather than taken
+on report, and all three held: the BSRI response-table item codes (live: 13,900 rows / 20
+adjectives / resp 1–7), and — via the re-runnable verify scripts run against live data — the
+hellstrom 40/40-vs-32/40 direction test and hirwa's 27/27 raw-agreement counts. The hewei PII
+observation was also confirmed against the cached supplement: column `Unnamed: 2` holds **752**
+IP-address values with Chinese-language geolocation annotations (e.g. `222.96.202.117(国外-韩国)`).
+The same check re-confirmed that the workbook's headers *are* the item statements, which is the
+basis for that table's `data_labels`.
