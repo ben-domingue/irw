@@ -6571,3 +6571,48 @@ observation was also confirmed against the cached supplement: column `Unnamed: 2
 IP-address values with Chinese-language geolocation annotations (e.g. `222.96.202.117(国外-韩国)`).
 The same check re-confirmed that the workbook's headers *are* the item statements, which is the
 basis for that table's `data_labels`.
+
+### batch_045 — 4 written / 2 blocked; 3 shipped, 1 HELD on a rights question — 2026-09-07
+
+Gates: normalize 0 of 4, verify 3 PASS + 1 exempt, lint clean. **`audit_batch` errored on the
+first live run** — `hewei_2022_msva_purchase`, "could not read live data ... missing value where
+TRUE/FALSE needed" — and came back **4/4 PASS with no anomalies on retry**, matching the round.
+Transient, but worth recording: a single audit run can produce a false negative, and the table
+itself fetches cleanly (10,528 rows, 14 items, no NA responses).
+
+**HELD: `hellstrom_2019_sci` — escalated, not decided.** The rights check added after this
+morning's PSS miss is what caught it. Four of this batch's tables carried **no rights sentence at
+all** in `notes.csv` — the same shape as `gillman_2023_pss`. Three are the authors' own instruments
+and are clear. The fourth is not: it is the **Sleep Condition Indicator**, a named third-party
+instrument, and its originating publication (Espie et al. 2014, BMJ Open 4:e004183) is licensed
+**CC BY-NC** — a stated non-commercial restriction.
+
+That matters because **this very batch blocked `herrera_2018_iri` on an identical clause** ("freely
+available for all non-commercial uses"), and because the standing rule is that NC escalates to Ben.
+The wording here came from the paper's Table 2, i.e. `study_materials` — which is exactly the
+footing on which `bakker_2020_pss10` and `beck_2021_pss10` were withdrawn anyway.
+
+**Evidence quality, stated plainly:** the CC BY-NC attribution comes from a search summary and from
+BMJ Open's standard licence of that period. I could not retrieve a verbatim licence line —
+bmjopen.bmj.com returns HTTP 403 and the Oxford ORA PDF would not yield extractable text. So this
+is a well-founded suspicion, not a quoted clause, and it is Ben's call rather than a round's.
+
+Shipped the other three: uploaded, verified 70/14, 32/16, 27/9, draft 61 -> **64 tables**, stamped
+3 + 3. The SCI's `__items.csv` stays in the batch folder, unstamped, and its drafted issues-page
+entry is explicitly marked DO NOT APPLY — a held table gets no entry, exactly like a blocked one.
+
+**A rights exposure that outruns this pipeline entirely.** `holden_2026_bsri` was blocked because
+the BSRI is CPP/Mind Garden copyright with a per-administration fee — but its **response table
+already publishes the instrument verbatim**. Confirmed directly: 13,900 rows, 20 items, and the
+item CODES are the BSRI trait adjectives themselves — `Affectionate`, `Aggressive`, ...,
+`Willing to take risks`. Declining to ship item text changes nothing while the codes carry the
+wording. `irw_list_tables()` (4,237 tables) shows it is the only BSRI table in the corpus.
+**This is a decision above this pipeline and probably its own issue.**
+
+Note on method: the Python client's `list_tables()` under-reports badly — it returned 1,953 tables
+where `irw::irw_list_tables()` returns 4,237. Any "not present in the corpus" conclusion must use
+the R listing or `irw_fetch`, never that enumeration.
+
+Also recorded, not actioned: `hewei_2022_msva_purchase`'s published PLOS supplement carries 752
+respondent IP addresses with city-level geolocation. **Not an IRW exposure** — the processing
+script drops the column and the corpus has no such field — but the deposit itself is the concern.
