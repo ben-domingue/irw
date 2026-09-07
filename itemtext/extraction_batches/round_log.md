@@ -7060,3 +7060,89 @@ review. None are batch_051 tables; exit 0.
 **Cap NOT reached.** Step 0 names `batch_060` as the round cap; this round completed `batch_051`.
 Queue state after this round: 359 done, 897 pending, 78 blocked, 12 failed, 55 excluded,
 **0 in_progress**.
+
+## batch_052 — 2026-09-07
+
+**6 tables claimed, 6 written, 0 blocked, 0 failed. Yield 6/6 = 100%.** Tables: `imos_2008`,
+`imos_2009`, `imos_2010`, `imos_2012`, `imos_2013`, `imos_2014` — 288 rows in all, 48 per table
+(6 problems x marks 0-7). Circuit breaker NOT tripped (0% failed).
+
+**All gates clean.** `normalize_nulls.R` 0 of 6 normalized; `audit_batch.R` **PASS 6, zero WARNs**;
+`verify_batch.R` **PASS 6**; `lint_verification.R` 0 ERROR, 1 WARN (below); `irw-validate` ok on all
+six, nothing to report; `check_provenance.R` exit 0. No NOT_NEEDED rows were owed — all six are
+`mapping_basis=paper_explicit`, so every written table has a real verification row, and the
+data_labels/lint mismatch that bit batch_020 and batch_021 does not arise here.
+
+**Mapping: VERIFIED 6/6**, route 9 (response-frequency matching against the source of record) +
+route 2 (structural signature). Uniformly decisive for this family: all 48 cells of each year's
+item x mark(0-7) matrix reproduce imo-official.org's own P1-P6 columns with **0 disagreements**,
+per-item means identical to 3dp, and all 15 problem pairs have distinct mark distributions — so
+every item is separated from every other, which is what VERIFIED requires. Contestant counts pin
+the edition independently and rule out the adjacent years: 2008 n=535, 2009 n=565, 2010 n=516,
+2012 n=547, 2013 n=527, 2014 n=560. Several years carry a free extra fingerprint in their empty
+cells (2012: P3 no mark of 6, P6 no mark of 5; 2013: P3 and P5 no mark of 4; 2014: P3 no 5, P6 no
+4) — the same cells are empty on both sides, and they explain the live items showing 7 rather than
+8 resp levels. 2009 is the exception: **every one of its 48 cells is non-empty**, so the
+unused-mark fingerprint prior rounds leaned on was unavailable and pairwise distinctness carried
+the argument alone.
+
+**Code derivation re-confirmed for all six years** (mapping_basis=paper_explicit, not positional):
+`data/imos_2018.r` does `select(starts_with("Problem"))` then `pivot_longer(names_to = "item")`, so
+the IRW item code IS the source CSV's own column name. Every paper prints "Problem 1".."Problem 6"
+outright, so no day-numbering convention had to be assumed anywhere in this round — unlike
+imos_1996.
+
+**One lint WARN, checked and deliberately left as VERIFIED.** `imos_2010`: "VERIFIED but its
+evidence hedges (does not establish)". The hedge is about the code-to-*statement* tie, which rests
+on the paper's printed problem headings — a documentary fact no script can test — and not about
+item distinctness, where the route is complete. Downgrading to PARTIAL would understate the
+evidence. All six rows carry the same caveat; only imos_2010 phrased it in a way the linter
+matched. Explained in `notes.csv`.
+
+**Agent claims re-checked directly, both CONFIRMED** (Step 5b — not taken on report):
+- `imos_2013` problem 1's denominator is a bare `n`, not `2^n`. Rendered page 1 of the official
+  2013 English paper at 150dpi and read it: it prints `1 + (2^k - 1)/n`. The problem is frequently
+  quoted elsewhere with `2^n`, so this is worth the note the agent wrote — the shipped text is
+  right and a reader "correcting" it would be wrong. `pdftotext` flattens the stacked fraction to
+  `2k - 1` on one line and `n` on the next, which is how the ambiguity arises.
+- `metadata/tags.csv` really does tag **all 34** `imos_*` rows `item format` =
+  "Likert Scale/selected response" and `primary language(s)` = "eng". Both are wrong and both were
+  reported in batches 049-051 as well: `resp` is an examiner mark 0-7 on a written proof (nothing
+  is selected, which is also why `option_text` is blank on all 288 rows here), and the IMO is sat
+  in each contestant's own language. **Still owed a GitHub issue at triage** — this is now the
+  fourth consecutive round to report it.
+
+**Transient infrastructure failure worth recording.** The FIRST `audit_batch.R` run returned
+`[ERROR] could not read live data:` with an *empty* error message for all six tables at once. An
+identical re-run minutes later returned PASS for all six; in between, `irw::irw_table_sets()` and
+the same GROUP BY query both succeeded standalone. Redivis-side and retryable — a future round
+seeing the empty-message form of this error should re-run before concluding anything about a
+table. Noted in `notes.csv`.
+
+**`pdftotext` is unreliable across this entire family and every agent worked around it**, so a
+re-extraction from plain text WILL differ and that is not a discrepancy: 2008 detaches Problem 3's
+radical and floats its `n^2`, and extracts `!=` as `6=`; 2009 renders the angle sign as the digit
+`6` and the degree sign as U+25E6; 2010 drops Problem 1's floor brackets outright and flattens
+Problem 2's stacked half; 2012 splits Problem 6's fractions across rows; 2013 flattens Problem 1's
+fraction (above); 2014 drops every fi/ff/ffi ligature (`in^nite`, `di^erent`) and flattens Problem
+5's fractions. All six transcribed from 150-200dpi page renders instead and disclosed it in
+provenance and notes.
+
+**Other properties.** `instructions` populated where a rubric is actually printed — 2008, 2012 and
+2014 all print "Time: 4 hours and 30 minutes / Each problem is worth 7 points" in a day-page
+footer, which independently corroborates the 0-7 resp range; blank elsewhere. `option_text` and
+`correct_response` blank on all 288 rows by design; no mark padded with its own number.
+`language`/`_translated` deliberately omitted on all six with a `public_note` recording the
+English-vs-administered-language caveat — naming one language would be false. Rights unchanged
+from batches 047-051: `imo-official.org/problems.aspx` was re-checked on 2026-09-07 and contains no
+copyright/licence/commercial/redistribution/permission text beyond a bare
+"(c) International Mathematical Olympiad" footer, so silence-is-permission applies.
+
+**Pre-existing, not from this round:** `check_provenance.R` still reports the same 3
+IRW-generated-content tables with no public issues-page entry (`hua_2023_efl_course_experience`,
+`hua_2023_efl_study_engagement`, `huang_2023_d_scale`) and the same 6 `translation_source=mixed`
+tables for review. None are batch_052 tables; exit 0.
+
+**Cap NOT reached.** Step 0 names `batch_060` as the round cap; this round completed `batch_052`.
+Queue state after this round: 365 done, 891 pending, 78 blocked, 12 failed, 55 excluded,
+**0 in_progress**.
