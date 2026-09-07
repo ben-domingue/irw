@@ -13,71 +13,68 @@ closing `)---")` and re-check that the YAML parses. Order does not matter; the
 page sorts by table name. A table whose `uploaded` stamp is still blank gets no
 entry until it ships, and `check_issues_page.R` will re-report it once it does.
 
-Source batches: itemtables/batch_044
+Source batches: itemtables/batch_045
 
-## `hayek_2022_attitude` (batch_044)
+## `hellstrom_2019_sci` (batch_045)
 
-<!-- mapping_basis=paper_order text_source=study_materials source=Hayek et al. 2022, PLOS ONE 17(3):e0265595, Table 2 and Methods (Socio-cognitive factors, t2); S1 Dataset journal.pone.0265595.s001 (.sav) value labels -->
-<!-- full note: Item wording from Table 2 of the PLOS ONE paper (per-item list, one row per attitude item); Methods section gives the same four items in slash-compressed form. att1..att4 are positional renames of the S1 Dataset columns Att_PRO1, Att_PRO2, Att_CON1, Att_CON2 (data/hayek_2022_attitude.py, explicit ordered SCALES list). Alignment confirmed against live data, not assumed: Table 2's four published Spearman correlations with achievement (0.102, -0.015, 0.066, 0.020) reproduce exactly on the live IRW responses joined to Gen_av.3 from the .sav (0.102, -0.015, 0.066, 0.020; n=345 each). Response anchors come from the .sav value labels of the sibling S_N_*/S_eff_*/Intent items (-2 Strongly disagree .. +2 Strongly agree); the Att_* columns themselves carry no value labels. att3/att4 shipped reverse-anchored per the Methods ('reverse coded ... so that higher scores reflect a more positive attitude') and because Tot_Att = plain mean of the four stored columns (345/345 exact) and att4's raw-reading marginal (80% agreeing that good grades cause friends' disapproval) is implausible. Verbatim transcription: att4 keeps Table 2's stray 'means'. No language stated anywhere in the paper or deposit; all materials are English, so language/_translated columns omitted. PLOS ONE CC BY 4.0; items are the study's own I-Change-model questions, no rights restriction found or quotable. -->
-
-```yaml
-- table: hayek_2022_attitude
-  issue: |-
-    The two negatively worded items (att3, att4) are shipped with reversed response anchors (resp = 2 means 'Strongly disagree'), following the paper's statement that they were reverse coded; the data file carries no value labels for these items, and att3's negative correlations with the two positively worded items leave that direction less than certain for att3.
-```
-
-## `hayek_2022_self_efficacy` (batch_044)
-
-<!-- mapping_basis=paper_order text_source=study_materials source=PLOS ONE 10.1371/journal.pone.0265595 -- S1 File questionnaire (s002, self-efficacy block items 1.9-1.13) for wording; S1 Dataset .sav (s001) value labels for the -2..2 anchors; article Measurements section corroborates the same five items in the same order -->
-<!-- full note: data/hayek_2022_attitude.py renames S_eff_1..S_eff_5 to se1..se5 by enumerate() over an explicitly ordered, number-preserving column list, so the code carries the source column's number. The .sav's variable labels for those columns are bare ('self-efficacy_1'..'self-efficacy_5') and carry no wording, so the words come from the S1 File questionnaire and the text-to-number tie rests on that questionnaire's printed block order (1.9-1.13) -- hence paper_order, not data_labels. The se_n <-> S_eff_n tie itself is verified cell-for-cell against the .sav (see verify script). The paper's prose drops 'very' from item 1; the questionnaire wording was shipped. Questionnaire's printed 1-5 key was recoded to -2..2 in the .sav; option_text follows the .sav value labels. -->
+<!-- mapping_basis=data_labels text_source=study_materials source=Hellstrom A et al. (2019) PLOS ONE 14(3):e0213533, Table 2 (item wording, English + Swedish, and item x category endorsement frequencies); S1 File dataset .sav (10.1371/journal.pone.0213533.s001) variable and value labels; data/hellstrom_2019_sleep_battery.py -->
+<!-- full note: Item codes SCI_1..SCI_8 ARE the S1 .sav column names -- data/hellstrom_2019_sleep_battery.py melts SCI_MAPS keyed by those exact names, no rename and no positional assignment -- and the .sav's variable labels tie each code to its content ('Fall asleep', 'Awake during the night', 'How many nights', 'Sleep quality', 'Affected mood,energy or relationships', 'Affected concentration,productivity or staying awak' [truncated], 'Troubles in general', 'For how long have you had sleep difficulties'), matching the paper's numbered items 1..8 one for one. The WORDS come from Hellstrom et al. 2019 PLOS ONE Table 2, which prints each item in UK English and Swedish; the Swedish is shipped in the base fields (administered language) and the English in the _translated fields, per the paper's own footnote 1 'The English items and response options have the original wording' -- hence translation_source=official_instrument_english. Transcription deviations, all deliberate: the paper's square brackets around each Swedish string were stripped, and the stray 'Swe:' prefix on item 1's Swedish line was dropped; everything else including ellipses, en dashes and the curly apostrophe in 'I don't have a problem /<1 mo' is verbatim. Section prompts differ by block so they sit in section_prompt (sec _1 items 1-4, sec _2 items 5-7); item 8 is its own section with no shared prompt and the paper prints no whole-instrument instructions, so instructions is blank. option_text is mapped to the LIVE resp coding, which reverses the .sav for 7 of 8 items (see the note column of notes_hellstrom_2019_sci.csv); verified cell-for-cell, 40/40, against Table 2's endorsement frequencies, with the reversed reading mismatching 32/40. option_text base holds the study's English anchors because the Swedish anchors are not in the paper or the .sav; option_text_translated is therefore blank. Rights: PLOS ONE article CC BY 4.0; the SCI itself (Espie et al., BMJ Open 2014) is published CC BY-NC 3.0 -- no fee and no no-redistribution clause found or quotable, so no block. -->
 
 ```yaml
-- table: hayek_2022_self_efficacy
+- table: hellstrom_2019_sci
   issue: |-
-    The item-to-text alignment is inferred from the order items appear in the source, not from an explicit code-to-text mapping
+    For seven of the eight items (all but SCI_4) the response coding in the IRW table runs in the opposite direction to the published SCI scoring -- a higher resp means worse sleep -- while SCI_4 runs Very poor = 0 to Very good = 4; the shipped option_text follows the table's own coding, so summing resp does not give an SCI total score. The items are shipped in the administered Swedish with the original English alongside, but the response options are given in English only, because the study published no Swedish anchors.
 ```
 
-## `hellstrom_2019_isi` (batch_044)
+## `hewei_2022_msva_purchase` (batch_045)
 
-<!-- mapping_basis=data_labels text_source=translated_substitute source=https://doi.org/10.1371/journal.pone.0213533.s001 (S1 File, SPSS .sav); paper 10.1371/journal.pone.0213533 -->
-<!-- full note: Item text = the S1 File .sav's own variable labels, verbatim (7/7 items). option_text = that same file's value labels, verbatim (35/35 rows, 5 levels x 7 items). Code->text tie is at the source: data/hellstrom_2019_sleep_battery.py melts by source column name, so live item == .sav column name for all 7, and its ISI_MAPS reproduce the .sav value labels exactly on all 7 items, so resp == the .sav's numeric code. Both mapping axes are data_labels; Step 5b is not owed and no verify script is shipped. Administered in Swedish (online survey at three Swedish universities); no Swedish wording exists anywhere in the deposit (the .sav labels are all English) or in the PLOS article/supporting information, so the study's own English labels sit in the base fields with the _translated columns empty -- the documented fallback. Labels are terse domain names rather than full ISI stems and were deliberately NOT upgraded to canonical Morin wording; instructions left blank because no administered preamble is published. Rights: no fee clause and no no-redistribution clause quotable for the ISI; the shipped words are the study's own labels under CC BY 4.0. -->
+<!-- mapping_basis=data_labels text_source=translated_substitute source=Hewei T, Youngsook L (2022) PLOS ONE 17(10):e0273968, doi:10.1371/journal.pone.0273968 (CC BY 4.0) -- Measurement section (5-point Likert anchors, construct sources) and S1 Data (doi:10.1371/journal.pone.0273968.s001, XLSX; header row 1 carries the item wording); processing script data/hewei_2022_msva_purchase.py -->
+<!-- full note: mapping_basis=data_labels and no inference at all: the item codes ARE the S1 Data workbook's own column headers, which are themselves the full item statements, and data/hewei_2022_msva_purchase.py melts item_cols under their own names (no rename, no positional assignment), so live item == source header for all 14. Self-describing codes, so Step 5b is not owed and no verify script ships. Only deviation from literal transcription: the trailing space on header 14 ('I would recommend MSVA to others to buy clothing. ') is kept in item (it is the join key, verbatim) and trimmed in item_text. LANGUAGE: the paper states the survey was conducted in China and published on the Questionnaire Star platform, so administration was Chinese; the deposit holds no Chinese wording (s001.xlsx has a single sheet whose only CJK strings are the completion-time unit and IP-geolocation city names) and the article publishes only English, so the study's own English ships in the base fields with language=Chinese and no _translated columns -- the documented fallback. OPTIONS: the paper states 'A 5-point Likert scale was used for all measurement items, with 1 expressing strong disagreement and 5 expressing strong agreement'; the three intermediate points are unlabelled in the source and are left blank rather than padded. instructions/section_prompt blank -- no verbatim participant-facing text is published. Step 3b: 14 items on 1-5 spanning media interactivity, perceived value, immersion experience and purchase intention, i.e. the study's whole questionnaire, consistent with the table name and Description. RIGHTS: study-built scale adapted from prior literature, not a commercially published instrument; no fee clause and no redistribution clause could be quoted for any rights holder, and the deposit is CC BY 4.0. -->
 
 ```yaml
-- table: hellstrom_2019_isi
+- table: hewei_2022_msva_purchase
   issue: |-
-    The ISI was administered in Swedish, but no Swedish wording is published in the deposit or the paper, so the item and option text shown here is the study's own English labelling; the item text is the deposit's short domain labels (e.g. "Quality of life") rather than the full published ISI question stems.
+    The questionnaire was administered in China (Questionnaire Star platform) and so almost certainly in Chinese, but neither the paper nor its single supplement publishes any Chinese wording, so the item text shown is the study's own English. Only the two endpoints of the 5-point scale are labelled in the source (1 = strong disagreement, 5 = strong agreement); points 2-4 are left blank.
 ```
 
----
+## `hicks_2020_bioveda` (batch_045)
 
-## REVIEW THESE TOO -- no draft generated
+<!-- mapping_basis=paper_explicit text_source=study_materials source=Hicks, Dewey, Brandvain & Schuchardt (2020) PLOS ONE 15(7):e0236098, S1 File (https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0236098.s001); S2 Table (.s002); S3 data file (.s003) -->
+<!-- full note: item_text transcribed verbatim from S1 File (journal.pone.0236098.s001, 'BioVEDA assessment questions with key'), which prints each question under its own heading Q1..Q16. Those codes are the same codes the IRW table uses: they are literally the column headers of the S3 data file (journal.pone.0236098.s003), which data/hicks_2020_bioveda.py melts by name (ITEM_COLS = [f'Q{i}' for i in range(1,17)]) with no rename or positional assignment, so the item code IS the source column name. Whitespace normalised (tabs, non-breaking and zero-width spaces collapsed to single spaces); no other edit. Answer options and figures not shipped -- see notes. instructions left NA because the S1's instructions are addressed to instructors, not respondents. English administration (US undergraduate biology courses), so language/_translated columns omitted. Rights: PLOS ONE, CC BY 4.0, and the authors themselves published all 16 items with the key in the open supplement. The S1 states only 'Users of the BioVEDA assessment are encouraged to administer the assessment in a way that minimizes students' access to the questions ... to avoid the correct answers becoming easily searchable' and 'We ask that users who intend to publish data from administration of the BioVEDA assessment cite this paper' -- an encouragement about administration and a citation request, not a quotable no-redistribution clause or a fee, so under the 2026-09-04 quote test the rights rules do not fire. -->
 
-These tables shipped but earned no draft callout: their provenance carries no
-`public_note` and its structured fields look clean. That is NOT the same as
-having no caveat -- this script cannot see anything recorded only in
-`notes.csv`, and three batch_009 tables were missed exactly that way. Read each
-note below and decide; if it warrants a callout, write one by hand.
+```yaml
+- table: hicks_2020_bioveda
+  issue: |-
+    The BioVEDA items are multiple choice, but the IRW resp column is a 0/1 correctness score rather than the option chosen, so option_text records Incorrect/Correct rather than the four answer alternatives (which the study does publish, with its key, in its S1 File). Ten of the sixteen items also depend on a figure, equation or data table that item_text cannot carry.
+```
 
-- **`hayek_2022_subj_norm`** (batch_044)
-    - Clean pass. Item text is the paper's Measures section, which prints the three social-norm items as one slash-joined sentence ("My father/my mother/my teacher expects me to get good academic grades"); it was expanded into three separate sentences, which is the only deviation from literal transcription. Code-to-referent mapping comes from the S1 .sav's own variable labels (S_N_1 'Social Norm 1: father', S_N_2 '...mother', S_N_3 '...teacher') and data/hayek_2022_attitude.py renames that explicit column list S_N_1..3 -> sn1..3 number-preservingly. Response anchors are the .sav's own value labels for S_N_1..3 (-2 Strongly disagree .. 2 Strongly agree), matching the live resp set exactly. The paper does not state the language the questionnaire was administered in (Lebanese secondary schools); the deposit and all supplements are English-only, so no `language`/_translated columns are emitted. No instructions text is published; instructions and section_prompt left blank rather than invented.
+## `hirwa_2024_antibiotic_attitudes` (batch_045)
+
+<!-- mapping_basis=data_labels text_source=translated_substitute source=S6 Table (Attitude related answers), https://doi.org/10.1371/journal.pone.0300742.s006 -- header row 4 of Sheet1 carries the full question text; S1 Table (Questionnaire tool), https://doi.org/10.1371/journal.pone.0300742.s001; paper Hirwa EM, Mujawamariya G, Shimelash N, Shyaka A (2024) PLOS ONE 19(4):e0300742, Methods and Table 5. Deposit CC BY 4.0. -->
+<!-- full note: item_text is the S6 Table header row verbatim, which is also the column set data/hirwa_2024_antibiotic_attitudes.py renames positionally to item_01..item_09; the same nine questions appear in the same order in the S1 questionnaire tool under the heading 'Attitudes related questions'. Two deviations from the header string, both spreadsheet artifacts: trailing spaces stripped from items 5 and 9. Sentence-initial lower case ('antibiotics resistance is...') is the source's own and is kept. No instructions or section prompt are published in either supplement, so both fields are blank rather than invented. option_text: the paper's Methods say the attitude questions used a five-point Likert scale (strongly agree, agree, neutral, disagree, strongly disagree) and describe a 2/1/0 correct/neutral/incorrect scoring rubric, but the deposited S6 values are NOT rubric-scored -- per-item counts prove resp is uniformly 2=Agree, 1=Neutral, 0=Disagree for every item, including the two reverse-worded ones (item_02 stores 247 at resp=2 against Table 5's 247 Agree; item_07 stores 351 at resp=0 against Table 5's 351 Disagree). So the three-level collapse of the administered five-point scale is what ships. correct_response left blank: the paper never publishes the per-item rubric. Administered in Kinyarwanda ('The tool was translated into Kinyarwanda by the team'); no Kinyarwanda wording appears anywhere in the deposit (S1 questionnaire tool and S6 header are English only), so this is the fallback -- the study's own English source-language instrument ships in the base fields with the _translated columns empty. -->
+
+```yaml
+- table: hirwa_2024_antibiotic_attitudes
+  issue: |-
+    Respondents answered in Kinyarwanda; the item text shipped here is the study's own English questionnaire, as the Kinyarwanda wording is not published in the deposit. The five-point Likert scale described in the paper (strongly agree to strongly disagree) is collapsed to three levels in the deposited data, so resp 0/1/2 read as Disagree/Neutral/Agree for every item -- including the two reverse-worded items, which are stored as raw agreement rather than on the paper's correct/neutral/incorrect scoring rubric.
+```
 
 ---
 
 Skipped 2 tables with a provenance row but no shipped CSV (blocked at
-extraction): `hellstrom_2019_psqi`, `hellstrom_2019_pss14`
+extraction): `herrera_2018_iri`, `holden_2026_bsri`
 
 
 ---
 
-## HAND-WRITTEN at triage — `hayek_2022_subj_norm` (batch_044)
+## DO NOT APPLY YET — `hellstrom_2019_sci` (batch_045)
 
-No `public_note`, so the drafter emitted nothing; the caveat lives only in `notes.csv`. It is
-worth a line because the shipped wording is **not** a literal transcription — the source prints one
-sentence and the table ships three — and because the table carries no `language` column despite a
-Lebanese administration.
+`draft_issues_qmd.R` generated an entry for this table because it has a `public_note` and looks
+shipped. **It is not shipped.** It was held at triage on 2026-09-07 pending Ben's ruling on the
+Sleep Condition Indicator's rights, and it was not uploaded — so no entry is due, exactly as for a
+blocked table. Its entry is left in this file so that it is ready to apply the moment the table
+ships, but **it must be filtered out of any application to `itemtext_issues.qmd` until then.**
 
-```yaml
-- table: hayek_2022_subj_norm
-  issue: |-
-    The three items are printed in the paper's Measures section as a single slash-joined sentence ("My father/my mother/my teacher expects me to get good academic grades"), and are shipped here expanded into three separate sentences -- the one deviation from literal transcription in this table. Which code refers to which referent is not a guess: the deposited .sav labels S_N_1/2/3 as father/mother/teacher and the processing script renames that explicit column list number-preservingly. The response anchors are the .sav's own value labels (-2 Strongly disagree .. 2 Strongly agree) and match the live responses exactly. The study ran in Lebanese secondary schools but never states the administration language, and the deposit is English-only, so no language or *_translated columns are shipped rather than assert an original nobody published; instructions are blank for the same reason.
-```
+Applying it while the table is absent from the corpus would tell readers IRW ships SCI item text
+when it does not — the mirror image of the `gillman_2023_pss` problem, where an entry described
+wording that had to be withdrawn.
