@@ -1242,8 +1242,12 @@ gate the wrap-up. Three categories come back:
   entry should go with it.
 - **STAMP OWED** — live in Redivis with no `uploaded` value in any provenance row. Fill
   in the date, or `unrecorded`.
-- **GONE** — provenance says uploaded, not live. Expected after a withdrawal; anything
-  else means an upload did not survive.
+- **GONE** — provenance says uploaded, not live. Recorded withdrawals are counted and
+  not listed; what is listed is the remainder, which means an upload did not survive, a
+  rename, or a withdrawal nobody wrote down. A withdrawal counts as recorded if the
+  `public_note` opens "IRW does not offer item text for" (what
+  `tools/withdraw_wording_rights.py` writes) or the `note` opens `WITHDRAWN` (what the
+  PROMIS round wrote).
 
 The last two do not affect the exit status: they are bookkeeping, not an unwritten
 disclosure. They are printed every run so they cannot accumulate silently, which is how

@@ -97,6 +97,7 @@ rows <- do.call(rbind, lapply(provs, function(f) {
   }
   data.frame(batch = basename(dirname(f)), table = x$table,
              public_note = x$public_note, uploaded = x$uploaded,
+             note = if ("note" %in% names(x)) x$note else NA_character_,
              stringsAsFactors = FALSE)
 }))
 
@@ -210,12 +211,31 @@ if (!is.null(snap)) {
   all_rows$in_draft <- all_rows$table %in% snap_draft
   gone <- setdiff(unique(all_rows$table[all_rows$claims_live & !all_rows$in_draft]),
                   snap)
+  # A withdrawal is the expected reason a stamped table is not live, and it is
+  # already recorded -- in one of two places, because the two withdrawal rounds
+  # wrote it differently. tools/withdraw_wording_rights.py rewrites the
+  # public_note to open "IRW does not offer item text for", which is the signal
+  # check_provenance.R reads (#2034); the PROMIS round instead wrote WITHDRAWN
+  # at the head of the private note and left public_note empty. Both are read
+  # here: a withdrawal recorded in the wrong field is still a withdrawal, and
+  # treating it as a lost upload would send someone hunting for nothing.
+  said <- function(v, prefix) !is.na(v) & startsWith(trimws(v), prefix)
+  withdrawn <- unique(all_rows$table[
+      said(all_rows$public_note, "IRW does not offer item text for") |
+      said(all_rows$note, "WITHDRAWN")])
+  lost <- setdiff(gone, withdrawn)
   if (length(gone)) {
-    cat("\nGONE -- provenance says uploaded, not live in the published shards.\n",
-        "Expected for a withdrawal; otherwise the upload did not survive.\n", sep = "")
-    for (t in sort(gone))
-      cat(sprintf("  %-42s %s\n", t,
-                  paste(unique(all_rows$batch[all_rows$table == t]), collapse = ", ")))
+    cat(sprintf("\nGONE -- stamped as uploaded, not live: %d table(s), %d of them recorded withdrawals.\n",
+                length(gone), length(gone) - length(lost)))
+    if (length(lost)) {
+      cat("  Not recorded as withdrawn -- an upload that did not survive, a\n",
+          "  rename, or a withdrawal nobody wrote down:\n", sep = "")
+      for (t in sort(lost))
+        cat(sprintf("    %-40s %s\n", t,
+                    paste(unique(all_rows$batch[all_rows$table == t]), collapse = ", ")))
+    } else {
+      cat("  All of them are recorded withdrawals; nothing unexplained.\n")
+    }
   }
 }
 
