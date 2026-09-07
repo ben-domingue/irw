@@ -6318,3 +6318,28 @@ conventions; any wholesale rewrite will silently reformat hundreds of rows.**
 `grit_BrummerHoffman_2021` is deliberately left unstamped — blocked, ships nothing.
 
 Entries applied as datapages/irw#150 (313 -> 318), immediately after upload per the standing fix.
+
+### batch_043 run, triaged, uploaded, stamped and disclosed — 6/6 — 2026-09-07
+
+Best gate result of the session: normalize 0 of 6, audit 5 PASS + 1 WARN, verify **6 PASS**, lint
+clean. The single WARN (`han_2026_isi`) is the source anchoring only its scale endpoints plus three
+out-of-range `ISI03` responses that are in the raw deposit too — both explained in `notes.csv`.
+
+**Re-derived the `han_2026_gad7` claim independently**, because it asserts a dictionary defect and
+would become an issue. It holds, and more sharply than reported: GAD01-06 run 0-3 with 0.1-0.3% of
+respondents at the ceiling, while **GAD07 runs 0-2 with 13.8% at its ceiling** (287 of 2086), and
+its distribution is **non-monotonic** — 1621 / 178 / 287. That is the signature of a
+No / Cannot-judge / Yes question, not a 4-point severity rating, and the paper still sums it into
+`GAD_Score`. The dictionary Description "GAD-7 anxiety scale items" is wrong as written and this
+warrants its own issue.
+
+**Uploaded 6/6 after the four-check pre-flight**; verified 231/33, 48/12, 60/12, 27/7, 35/7, 36/9,
+all matching. Draft 49 -> **55 tables**. `clean/` cleared. Stamped 6 + 6; `batch_043/provenance.csv`
+still round-trips whole-file, `mapping_verification.csv` again needed the per-line path.
+
+**Entries applied as datapages/irw#154** (318 -> 324). Two of the six deserve note:
+`habibi_2021_meim` is mandatory — its English instructions are IRW's translation even though the
+item wording is the paper's — and `han_2015_peer_assisted_learning` was **written by hand**, because
+the drafter emits nothing for a table with no `public_note` and its caveat (Korean cohort, only an
+English questionnaire in the deposit, no `language` column shipped) lives only in `notes.csv`. That
+is the batch_009 blind spot; the REVIEW section caught it.
