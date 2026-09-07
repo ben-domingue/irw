@@ -6,6 +6,10 @@ skill doesn't need to re-fetch the page every run. This is the
 schema of the **merged** `{table}__items.csv` — the output of joining the four
 per-table tabs (instrument, sections, items, responses) on `table` / `section_id` / `item`.
 
+**Field order is not significant.** The table below defines which fields exist, not the
+order they must appear in: Redivis matches columns by name, and nothing validates order.
+Batches that emit these columns in different orders are both correct.
+
 | Field | Definition |
 |---|---|
 | `table` | Identifier used to link to the IRW response data. |
