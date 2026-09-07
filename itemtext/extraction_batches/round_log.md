@@ -6853,3 +6853,66 @@ only a credit line, which is carried in `instrument`).
 
 No rate limit or spend cap was hit; the blocked/failed counts mean what they say. Cap is batch_050 —
 not reached, next round proceeds.
+
+## batch_049 — 2026-09-07
+
+6 tables claimed. **Written 5 / blocked 1 / failed 0.** Yield 5/6 = 83%. Circuit breaker NOT
+tripped (0% failed, threshold 30%).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `IJLS_Eersel_2024_DenialAcceptance` | written, 16 rows | data_labels | NOT_NEEDED |
+| `IJLS_Eersel_2024_IJLSreaction` | written, 45 rows | data_labels | NOT_NEEDED |
+| `IJLS_Eersel_2024_Work` | written, 51 rows | data_labels | NOT_NEEDED |
+| `imos_1987` | written, 48 rows | paper_explicit | VERIFIED (route 9 + 2) |
+| `imos_1988` | written, 48 rows | paper_explicit | VERIFIED (route 9) |
+| `ieswriting_molloy_2022` | **blocked** (licence), retry test NO | unknown | n/a |
+
+**Gates.** normalize_nulls fixed 48 lines in `imos_1988`. audit_batch **5/5 PASS, zero WARN** — so
+Step 5c had no audit WARN to explain. verify_batch 2 PASS + 3 MISSING(exempt). lint_verification
+**0 ERROR**, 2 WARN (both ruled on in notes.csv; neither is a defect). irw-validate: no ERROR, 3
+`name_charset` WARNs, all a property of the mixed-case live IJLS table names rather than of these
+files. Writing the three data_labels NOT_NEEDED rows into BOTH the batch file and the permanent
+tracker again avoided the spurious lint ERRORs seen in batch_020/021.
+
+`check_provenance.R` exits 1, but on **pre-existing corpus-wide debt, not this round**:
+`hua_2023_efl_course_experience`, `hua_2023_efl_study_engagement` (batch_047) and
+`huang_2023_d_scale` ship IRW-generated English with no issues-page entry. All six batch_049
+provenance rows use in-vocab values, and both `translated_substitute` rows carry a non-blank
+`translation_source` (irw#1970 satisfied).
+
+**Step 5b — four agent claims independently re-checked, all four confirmed, two broader than
+reported:**
+1. `ieswriting_molloy_2022` source is CC BY-NC-SA 4.0 while `metadata/biblio.csv` records
+   `CC BY 4.0`. Confirmed against the live `master` branch (my first fetch 404'd only because I
+   guessed the branch name `main`); the GitHub API reports the licence as `NOASSERTION`/Other.
+   **This is the round's most consequential finding and is not an itemtext issue:**
+   `datastandard.md` stops response-data intake on any NC/ND restriction, so the RESPONSE table's
+   eligibility for the corpus needs a human decision, not just a licence-field correction.
+2. The availability audit never checked the IJLS deposit's `.sav`. Confirmed — file id 378450
+   appears in none of the nine `IJLS_Eersel_2024_*` audit rows, which cite `IJLS_readme.txt` or the
+   paper. The `.sav` carries variable labels for 97 variables and value labels for 81, so the still-
+   queued siblings `ICECAP`, `Optimism` and `IUS` — currently justified from *secondary* sources
+   (PsyToolkit, a validation paper, Europe PMC hits) — could ship at `data_labels` grade from the
+   administered columns instead. Worth a targeted re-sweep.
+3. `imos_1987` tags defect. Confirmed **and family-wide**: all 34 `imos_*` rows in
+   `metadata/tags.csv` read `item format = Likert Scale/selected response`, but `resp` is a 0-7
+   examiner mark on a written proof — a constructed response, not Likert.
+4. IJLS dictionary DOI. Confirmed: biblio's `10.1186/s40359-024-00851-2` 404s;
+   `10.1186/s40359-024-01626-8` resolves to that row's own cited title (BMC Psychology 12:118).
+   Only 1 of the 8 IJLS biblio rows carries a DOI at all; the other 7 are NA.
+
+**Source-quality finding for future rounds.** Both IJLS agents independently found that
+`IJLS_readme.txt` is wrong in the UWES block — its `UWES_2`/`UWES_3` lines repeat the WorkCen item
+texts, and `UWES_3` additionally carries a reversed 7..1 key the `.sav` does not. Anyone extracting
+from the readme alone ships two wrong items and one wrong scale direction. **Use the `.sav`, not
+the readme**, for every remaining IJLS sibling. The paper also states a 6-point work-engagement
+scale while the `.sav` and the live data use 7 levels; the `.sav` was shipped and this is disclosed.
+
+**Parallel-agent design note.** The two `imos_*` agents converged independently on the same
+verification route (per-contestant score counts from imo-official.org, which costs no Redivis
+quota) and the same caveats, without touching each other's files; likewise the three IJLS agents on
+the shared deposit. Distinct scratch namespaces and sibling-ownership warnings held — no collisions.
+
+Cap not reached (Step 0 names `batch_050`); the next firing proceeds normally and will be the last
+under the current cap.
