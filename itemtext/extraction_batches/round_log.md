@@ -6764,3 +6764,45 @@ Orchestrator re-derived both percentages from the shipped CSV and they match to 
   the live correlations reproduce that partition exactly, 1 of 70 possible 4-of-8 splits.
 
 Cap not reached (cap is batch_050); next firing picks up batch_048. 921 pending remain.
+
+### batch_047 — 5 written / 1 blocked; 4 shipped, 1 HELD on UWES rights — 2026-09-07
+
+Gates: normalize 0 of 5, audit 4 PASS + 1 WARN, verify 3 PASS + 2 exempt, lint clean.
+
+**The WARN is by design and correct.** `huang_2023_d_scale` shows 88.9% blank `item_text` because
+eight of its nine items are **bipolar semantic-differential pairs** — the words belong in
+`option_text` at scale points 1 and 7, and only `d9` (the overall life-satisfaction item) has a
+stem. Not a defect.
+
+**HELD: `hua_2023_efl_study_engagement` — a second rights escalation, on an in-corpus precedent.**
+The table is the "EFL Study Engagement Scale", described in its own instrument field as an adapted
+**Utrecht Work Engagement Scale**. `algner2022_uwes` was **withdrawn on 2026-09-06** on exactly that
+instrument, because the UWES is distributed on terms requiring permission for commercial use.
+
+The shipped wording is unmistakably UWES-derived rather than merely inspired by it: the items carry
+the exact UWES **Vigor / Dedication / Absorption** factor structure, and the Chinese items are the
+UWES items with the work domain swapped for English study — "当我学英语时，即使不顺利我也毫不气馁"
+is "At my work, I always persevere, even when things do not go well"; "学英语时，我感到时间过得很快"
+is "Time flies when I am working"; "早上一起床，我就乐意去上英语课" is "When I get up in the
+morning, I feel like going to work".
+
+Whether a restriction on an instrument reaches a translated, domain-substituted adaptation of it is
+a ruling, not a round's call — and it cuts both ways, since `gerber_2022_altruism` shipped an
+adaptation's wording with Ben's approval (but that instrument carried no restriction). Held,
+unstamped, entry not applied.
+
+**Its sibling `hua_2023_efl_course_experience` was shipped**, and the distinction is evidential
+rather than convenient: it adapts the Course Experience Questionnaire, for which no stated
+restriction could be found, where the UWES has one *and* an in-corpus withdrawal.
+
+**Rights checked on the rest.** `huang_2016_cesd` ships `canonical_instrument` CES-D wording — the
+CES-D is public domain (NIMH/Radloff), confirmed. `huang_2023_d_scale` and `hui_2024_gbfs` carry
+`machine_translation` and `mixed` respectively, so `check_provenance` will hold their issues-page
+entries to account rather than relying on anyone remembering.
+
+Uploaded 4/4, verified 80/16, 80/20, 63/9, 140/28. Draft 70 -> **74 tables**. Stamped 4 + 4.
+
+**A dictionary lead, not actioned:** `huang_2023_d_scale` is described in the dictionary as
+"D-block scale (unlabeled construct)" but is Campbell's **Index of Well-Being**, and the sibling
+blocks in that deposit appear to be named just as generically — likely a cluster of Description
+fixes rather than one row.
