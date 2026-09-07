@@ -6165,3 +6165,25 @@ round. No `NOT_NEEDED` rows were needed — both `data_labels` tables wrote real
 
 **Not at the cap** (`batch_050`). Next firing picks up `gumus_2025_dietarian_identity` onward;
 957 pending before this round, 951 after.
+
+### CORRECTION to the batch_041 n=847 finding — no issue is owed — 2026-09-07
+
+The batch_041 triage entry above concludes that `AVOID2` and `DISCRIM2` sharing exactly n=847
+is "response-data damage ... a candidate for its own `data fix` issue." **That conclusion is
+wrong and should not be acted on.** batch_042's round flagged it, and it is confirmed here by
+reading the script rather than the data: `data/gordils_2021_interracial.py` line 97 declares
+`STUDY2_CORRUPT_ITEMS = ["COMP2", "DISCRIM2", "ANX2", "AVOID2"]` and nulls those four columns for
+every Study-2 row before melting.
+
+The reason is in the QC-fix note at lines 50-60, dated 2026-08-10 and credited to ben-domingue:
+in the Study 2 (S4 Data) file those four columns are not raw responses at all — for all 1,774
+Study-2 rows each is bit-for-bit identical to its own scale's pre-computed composite mean column
+(`AVOID2 == AVOID`), a dragged-formula spreadsheet artifact. They are dropped rather than shipped,
+exactly as datastandard.md's imputed-values rule requires. Study 1's own copies of those items are
+intact and kept.
+
+So n=847 is simply the Study-1 sample, and the data are right. The observation that drew attention
+to it — one identical count across several different scales — was sound; the inference from it was
+not. **The lesson worth keeping: when several IRW tables share an oddity exactly, read our own
+processing script before concluding the source is damaged.** A deliberate, documented IRW-side
+decision and upstream corruption look identical from the response data alone.
