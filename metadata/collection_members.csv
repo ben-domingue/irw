@@ -330,6 +330,7 @@ cogcontrol_gyurkovics_2019_flanker,response_time,rule:var:rt
 cogcontrol_gyurkovics_2019_mwprobe,response_time,rule:var:rt
 cogcontrol_gyurkovics_2019_sart,response_time,rule:var:rt
 cogcontrol_gyurkovics_2019_simon,response_time,rule:var:rt
+cognitive_children_2026,longitudinal,rule:meta:longitudinal
 cognitive_load_klimova_2023_know,continuous_response,curated:scout
 cognitive_load_klimova_2023_pwi,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 colombia_2023_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
@@ -1278,6 +1279,7 @@ matzke-experiment1-2022,response_time,rule:var:rt
 matzke-experiment2-2022,response_time,rule:var:rt
 matzke-experiment3-gamified-2022,response_time,rule:var:rt
 matzke-experiment3-standard,response_time,rule:var:rt
+mcauliffe_2025_thirdpartypunishment,longitudinal,rule:meta:longitudinal
 mcmi_mokken,q_matrix,rule:var_prefix:qmatrix
 MEFSIRODGAS_Nileksela_2023_freq,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 MEFSIRODGAS_Nileksela_2023_freq,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
@@ -1405,6 +1407,7 @@ nature_relatedness,response_time,rule:var:rt
 neurips_2022,longitudinal,rule:meta:longitudinal
 neurodegenerative_huizinga_2019_dass,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 neurodegenerative_huizinga_2019_dass,depression,rule:cname:depress|\bphq\b|ces.?d\b|\bbdi\b|\bdass\b
+nguyen_2026_gad7,anxiety,rule:cname:anxiet|\bgad.?7\b|\bstai\b
 nomt_hooper_2024_study2,response_time,rule:var:rt
 non_parametric_mixture_modeling_exp1_Cleaned,response_time,rule:var:rt
 nonverbal_immediacy,response_time,rule:var:rt
@@ -1780,6 +1783,7 @@ sondell_2018_dementia_motivation,longitudinal,rule:meta:longitudinal
 song_2025_lwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 song_2025_pwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 song_2025_wwb,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+spain_2016_pain_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 spain_2017_politics_wellbeing,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
 spalex_aguasvivas_2020,longitudinal,rule:meta:longitudinal
 spalex_aguasvivas_2020,reading_vocab,rule:cname:read(ing)?\b|vocab|lexical|spelling
@@ -1839,6 +1843,7 @@ SV-MAIA2_Randelovic_2021_SHS,intensive_longitudinal,rule:var:date+wave
 SV-MAIA2_Randelovic_2021_SHS,longitudinal,rule:meta:longitudinal
 swmd_mokken,rater_mediated,rule:var:rater
 swmd_mokken,wellbeing,rule:cname:well.?being|life satisfaction|\bswls\b|quality of life|whoqol
+talaifar_2025_study1_bfi,big_five,rule:cname:big.?five|five.?factor|\bipip\b|neo.?(pi|ffi)|\bbfi\b|hexaco
 tanck_2021_bcq,longitudinal,rule:meta:longitudinal
 tanck_2021_edeq,longitudinal,rule:meta:longitudinal
 teacherjudgements_lohmann_2026_essayratings,rater_mediated,rule:var:rater
