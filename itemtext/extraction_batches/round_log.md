@@ -7146,3 +7146,84 @@ tables for review. None are batch_052 tables; exit 0.
 **Cap NOT reached.** Step 0 names `batch_060` as the round cap; this round completed `batch_052`.
 Queue state after this round: 365 done, 891 pending, 78 blocked, 12 failed, 55 excluded,
 **0 in_progress**.
+
+## batch_053 — 2026-09-07
+
+6 tables claimed, 6 agents (one per table). **5 written / 1 blocked / 0 failed** — yield 83%.
+Circuit breaker not tripped (0% failed, threshold >30% failed).
+
+Written: `imos_2015`, `imos_2017`, `imps2025_hf`, `ipip_openpsychometrics_as`,
+`ipip_openpsychometrics_do`.
+Blocked: `iwasa_2016_asi`.
+
+**Gates** — normalize_nulls 0 of 5 changed on the final pass; audit_batch 4 PASS / 1 WARN;
+verify_batch 3 PASS + 2 MISSING(exempt); lint_verification 5 rows, no problems;
+irw-validate clean on all 5 (no `dup_item_resp`, no `resp_ambiguous`); check_provenance
+raised nothing against this round's rows.
+
+**The one WARN is expected and explained in notes.csv** (Step 5c): `imps2025_hf` has 100%
+blank `item_text` because Hearts and Flowers presents picture stimuli (red heart / red
+flower, left or right) with no wording to transcribe — the 2026-09-05 picture-stimulus
+ruling. Not an itemtext defect and not a response-data defect. The response rule that does
+vary by stimulus lives in `section_prompt`, not in invented item text.
+
+**Blocked: `iwasa_2016_asi`, retry test NO (determinate), on two independent grounds.**
+The Anxiety Sensitivity Index is fee-licensed by IDS Publishing Corporation — copyright
+registered with the U.S. Copyright Office, $260/unit three-year download licence, forms
+served behind an access code and restricted to licensed clinicians. The 2026-09-04 TAS-20
+rule applies *despite* the host paper (Iwasa et al. 2016, PLOS ONE, CC BY 4.0): the CC
+licence covers the article, not the instrument. Independently, the wording is not in scope
+anyway — all four SI files were inspected and none carries ASI items (S1 is the data
+workbook with bare `asi01`–`asi16` codes and no value labels; S2/S3 are the DPSS-R-J
+questionnaire; S4 is an analysis script), and the ASI-J exists only in off-source Japanese
+conference proceedings. Row added to `itemtables/pending_index_notes.csv`. No verification
+sidecar, correctly — a blocked table has no live item text to verify; `lint_verification`
+is clean, so the batch_049 `ieswriting_molloy_2022` WARN shape did not recur.
+
+### Orchestrator Step 5b checks — one agent claim was corrected
+
+- **Sibling divergence on `ipip_openpsychometrics_as` vs `_do`, reconciled.** Both tables come
+  from the same deposit (`AS+SC+AD+DO.zip`) and the same `codebook.txt`, and the two agents
+  independently produced *different* `item_text` conventions: `_as` shipped the codebook's bare
+  stems ("Express myself easily.") with the prefix sentence carried in `instructions`, while
+  `_do` applied the prefix ("I try to outdo others."). The orchestrator re-read the codebook,
+  which states outright on its own line above the item listing: `All were prefixed with "I ".`
+  The prefixed form is therefore the ADMINISTERED wording and the bare stem is only the
+  codebook's listing convention, so `_as` was rewritten to the prefixed form (first word
+  lowercased) to match its sibling, and given the same `public_note`. The `_as` provenance and
+  notes rows record the change explicitly rather than silently. This is exactly the failure mode
+  the "tell each agent which siblings belong to another agent" rule is meant to surface: the
+  independent derivation was useful corroboration on everything else and disagreement on one
+  field, which is what caught it. Both files re-passed every gate after the edit.
+- **Corroborated, not corrected:** both agents transcribed the anchors identically *including*
+  the source's own typo `Neither agree not disagree` (sic, "not" for "nor") at resp=3. Verified
+  against `codebook.txt` line 11 — it is verbatim source, correctly left uncorrected.
+- **`metadata/tags.csv` defect re-confirmed by direct inspection**, not taken on report: every
+  `imos_*` row carries item format `Likert Scale/selected response`, which is wrong for a 0–7
+  jury mark on a written mathematical proof (constructed response). Reported in rounds 049–053
+  and still owed a fix outside this pipeline.
+- **Mapping evidence re-executed, not read.** `verify_batch.R` re-ran each `verify_*.R` from
+  scratch: `imos_2015` and `imos_2017` reproduce all 48 item×mark cells against
+  imo-official.org's official P1–P6 columns with 0 disagreements and per-item means identical to
+  3dp; `imps2025_hf` shows 0 of 114,823 rows disagreeing with their own `stim_shape`/`stim_side`
+  and 0 of 114,823 violating the shipped accuracy rule. All three print VERDICT: PASS.
+
+### Notable
+- **No Redivis exports were spent this round.** All six agents used `irw_table_sets()` /
+  `table_sets.R` for ground truth and ran `validate_items.R --table-sets`. `imps2025_hf`'s
+  verification is a good example of the query route doing real work: one server-side GROUP BY
+  returned 8 rows and settled a 114,823-row mapping cell-for-cell.
+- Both IMO papers required 150dpi page renders because `pdftotext` mangles them — `imos_2015`'s
+  text layer is a broken custom glyph encoding returning dingbats for the whole document, and
+  `imos_2017` drops superscripts (`10^9` → `109`). Both disclosed in provenance so a text-only
+  re-extraction is not misread as a discrepancy.
+- `imps2025_hf` carries a substantive `public_note` (the administered instruction script was
+  never published; canonical Wright & Diamond 2014 CC BY wording ships instead) — an
+  issues-page entry is owed once the table is uploaded. Note the agent correctly routed *around*
+  the CC BY-NC Finch et al. 2019 description under the ECR-R ruling, using it only to confirm
+  the administration matches.
+- Pre-existing, not from this round: `check_provenance.R` still reports 3 IRW-generated tables
+  with no issues-page entry (`hua_2023_efl_course_experience`, `hua_2023_efl_study_engagement`,
+  `huang_2023_d_scale`) and 6 `translation_source=mixed` tables to review. Standing debt.
+
+Cap is `batch_060`; this is 053, so the cap is **not** reached. 885 pending rows remain.
