@@ -5912,3 +5912,142 @@ had they still been pending, the drafter would have clobbered them again.
 **No new `translation_source` blanks.** The round filled three from documented sources
 (`girma_2021_phq9` and `gizaw_2023_phq9` official_instrument_english, `gilbert_meta_55`
 study_supplied), so the 19-table backlog did not grow.
+
+---
+
+## batch_041 — 2026-09-06T21:57-07:00
+
+Six tables claimed: `gobbens_2018_adl`, `gobbens_2018_iadl`, `gobbens_2018_sf12`,
+`gomez_2022_qcae`, `gordils_2021_behavioral_avoidance`, `gordils_2021_discrimination`.
+
+**Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.** Circuit breaker not tripped (0% failed).
+All six agents returned; no rate limit, no spend cap, no quota trouble. No `irw_fetch` in the
+extraction phase — every agent used `table_sets.R` server-side aggregates, as did the Step 5
+gate via `--table-sets`.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| gobbens_2018_adl | done, 44 rows (11×4) | data_labels | NOT_NEEDED |
+| gobbens_2018_iadl | done, 28 rows (7×4) | data_labels | NOT_NEEDED |
+| gobbens_2018_sf12 | **blocked (rights)** | — | — |
+| gomez_2022_qcae | done, 124 rows (31×4) | paper_explicit | PARTIAL |
+| gordils_2021_behavioral_avoidance | done, 77 rows (11×7) | paper_order | PARTIAL |
+| gordils_2021_discrimination | done, 63 rows (9×7) | paper_order | PARTIAL |
+
+**Gates all clean.** `normalize_nulls.R` 0 of 5 normalized; `audit_batch.R` PASS 3 / WARN 2;
+`verify_batch.R` PASS 3, MISSING(exempt) 2; `lint_verification.R` 5 rows, no problems (the
+NOT_NEEDED rows went into *both* the batch `verification_merged.csv` and the permanent tracker,
+so the data_labels ERRORs that dogged batch_020/021 did not recur); `irw-validate` ok on all
+five; `check_provenance.R` clean for this batch — 0 IRW-generated tables owing an issues-page
+entry, no new `translation_source` blanks. The four standing `mixed` review rows are unchanged
+and none is from batch_041.
+
+**Both WARNs explained in `notes.csv` (Step 5c), neither an itemtext defect.** Each is a
+row-count anomaly plus a blank-`option_text` rate. The blank rates are correct behaviour: the
+Gordils appendix anchors only the endpoints (AVOID, 5 of 7 blank = 71.4%) or only points 1/4/7
+(DISCRIM, 4 of 7 = 57.1%), and unlabeled points are left blank rather than padded.
+
+**Step 5b orchestrator re-checks — one confirmed, one partly corrected.**
+
+- *Row-count anomalies, confirmed by independent fetch.* `AVOID2` n=847 against next-lowest 2534
+  and median 2541; `DISCRIM2` n=847 against next-lowest 2528 and median 2542. Both are upstream
+  response-data properties (the Study-2 column was overwritten by the study's own scale composite —
+  the S2 SPSS syntax line `Compute AVOID2 = AVOID.`), not itemtext defects, and both stay below the
+  issues-page bar since the source created the gap.
+- *`gomez_2022_qcae` anchor direction, confirmed.* The agent's public_note claims the study's `.sav`
+  value labels contradict the paper's Methods and that the labels win. Independently recomputed on
+  the canonical Reniers et al. (2011) composition (Cognitive = PT 10 + OS 9 = 19 items; Affective =
+  EC 4 + ProxR 4 + PerR 4 = 12): as stored, Cognitive M=58.90 SD=9.39, Affective M=34.47 SD=5.72,
+  against Powell (2018, n=844) norms 57.14/8.28 and 33.75/5.51. The flipped reading gives 36.10 and
+  25.53 — nowhere near. The shipped `option_text` direction is right.
+- *…but two numbers in that agent's evidence string do not reproduce.* Its item-rest correlations
+  (+0.542/+0.568/+0.219/+0.609 for QCAE1r/2r/17r/29r) come out +0.490/+0.344/+0.210/+0.142
+  within-subscale and listwise. All four stay **positive**, which is the whole of the reverse-scoring
+  claim, but the magnitudes should not be quoted as exact. Separately, the evidence prose puts
+  QCAE2r and QCAE29r in the same block; under canonical Reniers they are in different subscales.
+  Both are film/emotional-detachment items ("I am usually objective when I watch a film or play…"
+  / "I usually stay emotionally detached when watching a film"), the data does not separate them,
+  and that is precisely why the status is PARTIAL — so PARTIAL stands and is better justified than
+  written, while the subscale attribution in the prose is not to be relied on. Recorded in `notes.csv`.
+
+**The block: `gobbens_2018_sf12`, rights, retry test NO.** SF-12 Health Survey v1 (identified by the
+four Yes/No role items), rights held by QualityMetric / Medical Outcomes Trust (now Optum/IQVIA).
+The bare copyright footer is not itself a block; the block rests on QualityMetric's own published
+sample licence, which names the wording as licensed property ("the rights to use the survey(s),
+including survey items and responses…") and gates reproduction on a fee — the TAS-20 fee ruling
+squarely. The deposit's CC BY 4.0 governs the response data, not the instrument. Extraction was
+complete and inference-free before the rights check stopped it (the `.sav` labels all 12 `SF12_*`
+columns and the script melts by name, so it would have been `data_labels`). Row added to
+`itemtables/pending_index_notes.csv`.
+
+Two caveats on that block, both the agent's own and both worth a human eye:
+
+1. The licence quoted is a **2004 Wayback capture** of a document marked "sample only for
+   informational purposes" — corroborated by the still-current paid gate (IQVIA application;
+   RehabMeasures records paid licensing at $150), but not a current agreement. Someone may want to
+   re-quote a live SF-12 licence before treating this as settled for the whole SF-family.
+2. **Precedent flag:** `dalky_2020_sf36` (batch_025) shipped SF-36 wording on 2026-09-04. The agent
+   judged that a different call — RAND separately distributes the SF-36 free as the RAND 36-Item
+   Health Survey, and no comparable free 12-item form exists — and did not touch it. Worth folding
+   into the irw#1954 re-audit rather than deciding here.
+
+**Step 3b clean on all six.** GARS ADL (11 items) and GARS IADL (7 items) both confirmed against
+the paper's Measures section; SF-12 v1 identified by response format; QCAE 31 items confirmed;
+the Gordils tables are the authors' *adapted* instruments (Lackey 2012 avoidance; Everyday
+Discrimination Scale re-framed third-person and ZIP-code-level, with two items reordered against
+canonical Williams) and the adapted appendix wording ships, not the canonical wording.
+
+Notable for later rounds: the three `gobbens_2018_*` tables share one `.sav`, and the four
+`gordils_2021_*` tables share one deposit — `gordils_2021_intergroup_anxiety` and
+`gordils_2021_interracial_comp` are still queued and will hit the same PLOS S1 Appendix and the
+same "codes are the spreadsheet's own headers but nothing labels them" situation, i.e. expect
+`paper_order` and a PARTIAL again. Both Gobbens tables shipped under the Dutch-administration
+fallback (`translated_substitute` / `study_supplied`), which is why neither owes an issues-page
+entry: the English is the authors', not IRW's.
+
+Queue after this round: 957 pending, 307 done, 70 blocked, 12 failed, 55 excluded.
+Cap is `batch_050`; not reached.
+
+### batch_040 uploaded and stamped; batch_041 run and triaged — 2026-09-06/07
+
+**batch_040 uploaded.** Ben ran `red_up`; all six verified here by COUNT(*) and
+COUNT(DISTINCT item) against the `irw_text_2` draft — 30/15, 30/15, 50/10, 14/3, 36/9, 36/9, every
+one matching its source file. Draft 33 -> 39 tables. Stamped `uploaded=2026-09-06` in
+`batch_040/provenance.csv` and `mapping_verification.csv` (6 + 6), each file proved to round-trip
+byte-identically before writing; CSVs deleted, sidecars kept. **The stamping was deliberately
+deferred until batch_041's round had committed** — `mapping_verification.csv` is one of the paths
+a round stages, so editing it mid-round invites the commit-sweep BATCH_PROCESS warns about.
+
+**Its six issues-page entries are applied: datapages/irw#148**, 302 -> 308, purely additive.
+
+**batch_041 — 5 written / 1 blocked / 0 failed.** Gates re-run live: normalize 0 of 5, audit
+3 PASS + 2 WARN, verify 3 PASS + 2 exempt, lint clean.
+
+**Re-derived the QCAE direction claim**, because the round's own Step 5b had already caught the
+agent's item-rest correlations being wrong and its subscale assignment for QCAE2r/QCAE29r being
+non-canonical — so the claim it upheld deserved its own check. It holds decisively: the live total
+score as stored averages **93.37**, exactly the claimed Cognitive 58.90 + Affective 34.47, and sits
+near Powell 2018's norm total of 90.9; the flipped reading gives **61.63**, adrift by 29 points. The
+`.sav` value labels beat the paper's Methods and the shipped anchors are right.
+
+**Sharpened the audit WARN rather than just accepting it.** `AVOID2` and `DISCRIM2` do not merely
+have low n — they have **exactly n=847 each**, against ~2541 for every one of their 18 siblings
+across two different scales. One identical count in two instruments points to a single upstream
+wave or version fault hitting item 2 of each, not two independent coincidences. Response-data
+damage, not an itemtext defect, and a candidate for its own `data fix` issue.
+
+**Staged all 5 into `clean/`** (the blocked `gobbens_2018_sf12` ships nothing). Expected counts:
+gobbens_2018_adl 44/11, gobbens_2018_iadl 28/7, gomez_2022_qcae 124/31,
+gordils_2021_behavioral_avoidance 77/11, gordils_2021_discrimination 63/9.
+
+**HELD FOR BEN — a rights question a round must not settle.** `gobbens_2018_sf12` was blocked on a
+fee gate whose evidence is a **2004 Wayback capture** of a QualityMetric sample licence marked
+"sample only for informational purposes" — corroborated by IQVIA's current application process, but
+not a live agreement. It sits in tension with `dalky_2020_sf36` (batch_025), which shipped on
+2026-09-04 on the footing that RAND distributes the SF-36 free and has no 12-item equivalent. That
+is for the irw#1954 re-audit to settle, not a round and not this session. Nothing was touched.
+
+**`draft_issues_qmd.R` clobbered a pending draft for the SECOND time**, now batch_040's six. They
+were recovered from commit ad592cf and have since been applied to the page, so nothing is lost —
+but the workflow lesson is now firm: **apply a batch's entries as soon as its tables are uploaded**,
+rather than letting them sit in the draft file where the next round's drafter will overwrite them.
