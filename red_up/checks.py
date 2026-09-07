@@ -148,6 +148,32 @@ def validate_for_target(report: FileReport, target: Target,
     report.warnings.extend(warnings)
 
 
+#: A directory holding this file is a record of an extraction, not a place
+#: uploads are staged from. Item text is where this bit us (see
+#: itemtext/BATCH_PROCESS.md: batches are history, `clean/` is staging), but
+#: the rule is stated about the marker file rather than about that path, so
+#: red_up stays general-purpose and any tree with the same convention is
+#: covered.
+HISTORY_MARKER = "provenance.csv"
+
+
+def history_dirs(csvs: list[Path]) -> list[Path]:
+    """Directories among `csvs` that are batch history rather than staging.
+
+    The collision check in `check_all` is NOT a backstop for this. It only
+    fires when two batches happen to hold the same table name; a walk over a
+    tree whose names are all distinct uploads the entire extraction history
+    without a word -- and because a Redivis upload appends, re-uploading an
+    already-shipped table doubles it rather than doing nothing (#2055).
+
+    Reported per directory rather than as a boolean: a run over `itemtables/`
+    picks up thirty-odd of them at once, and the useful message names the tree,
+    not the first file in it.
+    """
+    dirs = {p.parent for p in csvs if p.name != HISTORY_MARKER}
+    return sorted(d for d in dirs if (d / HISTORY_MARKER).is_file())
+
+
 def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
     """Scan every file, and flag names that collide within the batch itself.
 

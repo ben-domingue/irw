@@ -22,7 +22,8 @@ from pathlib import Path
 
 from . import plan as planning
 from .auth import authenticate
-from .checks import check_all, check_schema, validate_for_target
+from .checks import (HISTORY_MARKER, check_all, check_schema, history_dirs,
+                     validate_for_target)
 from .discover import Discovery, discover, table_name
 from .push import open_draft, push_one
 from .targets import (ConfigError, Target, eligible, guess_target,
@@ -184,6 +185,10 @@ def main(argv: list[str] | None = None) -> int:
                         help="skip the IRW format validator (the one check that "
                              "needs pandas). checks.py has pointed at this flag "
                              "since 2026-09-02; it did not exist until 2026-09-03")
+    parser.add_argument("--allow-history-dirs", action="store_true",
+                        help=f"upload from directories containing a "
+                             f"{HISTORY_MARKER}, which normally marks a record "
+                             f"of a past batch rather than a staging area")
     parser.add_argument("--strict", action="store_true",
                         help="treat warnings as errors and upload nothing")
     args = parser.parse_args(argv)
@@ -208,6 +213,25 @@ def main(argv: list[str] | None = None) -> int:
         where = ", ".join(str(p) for p in paths)
         die(f"no .csv files under {where}"
             + (f" ({len(found.skipped)} non-CSV files ignored)" if found.skipped else ""))
+
+    # Before anything else about the files themselves: is this tree one that
+    # uploads are staged from at all? #2055 -- a run pointed at
+    # `itemtext/itemtables/*/` instead of `itemtables/clean/` would have
+    # uploaded thirty-six batches of extraction history, most of it already
+    # shipped, and every one of those a doubled table.
+    if not args.allow_history_dirs:
+        history = history_dirs(found.csvs)
+        if history:
+            listed = "\n  ".join(str(d) for d in history[:10])
+            more = (f"\n  ... and {len(history) - 10} more"
+                    if len(history) > 10 else "")
+            die(f"{len(history)} of the directories here contain a "
+                f"{HISTORY_MARKER}, which marks a record of a past batch "
+                f"rather than a staging area:\n  {listed}{more}\n"
+                f"Upload from the staging directory instead (item text stages "
+                f"in itemtext/itemtables/clean/ -- see BATCH_PROCESS.md). "
+                f"Use --allow-history-dirs if this really is where the tables "
+                f"to upload live.")
 
     reports = check_all([(p, table_name(p)) for p in found.csvs])
 
