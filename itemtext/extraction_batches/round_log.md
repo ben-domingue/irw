@@ -6455,3 +6455,35 @@ table carries no entry.
 assessed only by the extracting agent, per table, and if that agent does not look, nothing
 downstream asks. A corpus-wide sweep for instruments with known restrictions — rather than relying
 on which agent happened to check — is the actual fix, and belongs with irw#1954.
+
+### batch_044 triaged, uploaded, stamped and disclosed — 4 written / 2 blocked — 2026-09-07
+
+Gates all clean: normalize 0 of 4, **audit 4/4 PASS with no anomalies**, verify 2 PASS + 2 exempt,
+lint no problems.
+
+**A rights check was added to this triage, in response to the PSS miss earlier today.** Both ISI
+tables now in the corpus were examined rather than assumed: `hellstrom_2019_isi` (this batch) and
+`han_2026_isi` (batch_043, already uploaded). Both were rights-checked by their own agents and both
+reach the same conclusion — the ISI is distributed by Mapi Research Trust for its copyright holder,
+but **no fee clause and no no-redistribution clause could be quoted**, and in each case the shipped
+words are that study's own English variable/value labels from a CC BY 4.0 deposit rather than a
+transcription of the Morin ISI form. That is genuinely distinguishable from the PSS case, where the
+wording came from the rights holder's own distribution file AND a restriction was quotable. No
+action taken. **Recorded as a sweep candidate for irw#1954**: the ISI is a commonly licensed
+instrument and two tables now rest on "no quotable clause found".
+
+**Re-derived the `hayek_2022_attitude` reversal doubt rather than resolving it.** `att3` has mean
+**-0.61** against +0.69 / +1.05 / +1.18 for the other three, and correlates **negatively** with all
+three (-0.158, -0.214, -0.070) — where an item correctly stored already-reversed predicts positive.
+The paper states the reversal and the study's own total reproduces as a plain mean of the stored
+columns, so it ships; but the `public_note` already says att3's direction is less than certain, and
+that doubt was preserved rather than tidied away.
+
+**Uploaded 4/4 after the four-check pre-flight**; verified 20/4, 25/5, 15/3, 35/7. Draft 57 ->
+**61 tables**. Stamped 4 + 4, both files still round-tripping whole-file. `clean/` cleared.
+
+**Entries as datapages/irw#157** (325 -> 329). `hayek_2022_subj_norm` was **hand-written**: the
+drafter emits nothing without a `public_note`, and this table's wording is not a literal
+transcription — the paper prints its three items as one slash-joined sentence and the table ships
+three. Waited for #156 to merge before opening this, since two open issues-page PRs always collide
+at the closing marker.
