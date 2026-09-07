@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"gordils_2021_intergroup_anxiety","WARN",4,4,TRUE,TRUE,FALSE,TRUE,0,57.1,"row-count anomaly (possible item-code conflation or missingness skew), median=2539.5: ANX2 | 57.1% of rows have blank option_text"
+"gordils_2021_interracial_comp","WARN",5,5,TRUE,TRUE,FALSE,TRUE,0,57.1,"row-count anomaly (possible item-code conflation or missingness skew), median=2540: COMP2 | 57.1% of rows have blank option_text"
+"gordils_2021_interracial_trust","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,57.1,"57.1% of rows have blank option_text"
+"gpt4mcq_young_2025","PASS",20,20,TRUE,TRUE,FALSE,TRUE,0,0,""
+"grandahl_2017_hpv_beliefs","WARN",15,15,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=378: Q23b_Protec_condyloma, Q23e_Fear_of_needles, Q23l_Other_cancer, Q23n_New_partner_condom, Q23o_Attend_screening"
