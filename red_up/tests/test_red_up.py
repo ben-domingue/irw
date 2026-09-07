@@ -325,15 +325,38 @@ class Checks(unittest.TestCase):
             path = write(Path(tmp), "Foo.csv", RESPONSE)
             self.assertTrue(any("lowercase" in w for w in scan(path, "Foo").warnings))
 
+    def _collision(self, tmp, content_a, content_b):
+        root = Path(tmp)
+        (root / "x").mkdir()
+        (root / "y").mkdir()
+        a = write(root / "x", "dup.csv", content_a)
+        b = write(root / "y", "dup.csv", content_b)
+        return check_all([(a, "dup"), (b, "dup")])
+
     def test_two_files_claiming_one_table_name_is_an_error(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / "x").mkdir()
-            (root / "y").mkdir()
-            a = write(root / "x", "dup.csv", RESPONSE)
-            b = write(root / "y", "dup.csv", RESPONSE)
-            reports = check_all([(a, "dup"), (b, "dup")])
+            reports = self._collision(tmp, RESPONSE, RESPONSE)
             self.assertTrue(all(not r.ok for r in reports))
+
+    def test_identical_collision_is_still_an_error_but_says_so(self):
+        """A Redivis upload appends, so two identical files double the table.
+
+        The message has to distinguish this case: identical content means batch
+        history, and the fix is to upload from the staging directory, never to
+        delete a copy (irw#1962).
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._collision(tmp, RESPONSE, RESPONSE)
+            self.assertTrue(all(not r.ok for r in reports))
+            for report in reports:
+                self.assertTrue(any("byte-identical" in e for e in report.errors))
+
+    def test_differing_collision_says_the_versions_differ(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._collision(tmp, RESPONSE, RESPONSE + "9,9,9\n")
+            self.assertTrue(all(not r.ok for r in reports))
+            for report in reports:
+                self.assertTrue(any("DIFFERING" in e for e in report.errors))
 
 
 class Planning(unittest.TestCase):

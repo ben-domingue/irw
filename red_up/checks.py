@@ -13,6 +13,7 @@ header.
 from __future__ import annotations
 
 import csv
+import hashlib
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -155,8 +156,23 @@ def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
     where the file is going belongs in check_schema or validate_for_target.
 
     Two files with the same stem in different subdirectories would upload one
-    after the other into the same table name, and the second would silently
-    win. That is a batch-assembly mistake, so it is an error, not a warning.
+    after the other into the same table name. Because a Redivis upload APPENDS,
+    that is not "the second one wins" -- it is a doubled table. So it stays an
+    error even when the files are byte-identical, and especially then.
+
+    The message says whether the colliding files have the same content, because
+    that is the first thing anyone asks and the answer decides what to do:
+
+      - IDENTICAL content is usually not a batch-assembly mistake at all. A
+        re-issued batch keeps an unchanged copy of the CSV alongside its new
+        provenance row (see itemtext/BATCH_PROCESS.md), so the same table
+        legitimately appears in two batch directories. The fix is to point the
+        uploader at the staging directory instead of walking batch history --
+        NOT to delete either copy. irw#1962 spent its whole life on the other
+        reading, and deleting the "stale" copy there would have destroyed the
+        record of a hold release.
+      - DIFFERING content is the real batch-assembly mistake: two versions of a
+        table are in flight and someone has to say which one is right.
     """
     reports = [scan(path, table) for path, table in pairs]
 
@@ -166,8 +182,40 @@ def check_all(pairs: list[tuple[Path, str]]) -> list[FileReport]:
     for table, group in seen.items():
         if len(group) > 1:
             others = ", ".join(str(r.path) for r in group)
+            if _all_identical(r.path for r in group):
+                detail = (
+                    "byte-identical content, so this is probably batch history "
+                    "rather than two competing versions -- upload from the "
+                    "staging directory rather than deleting a copy"
+                )
+            else:
+                detail = "DIFFERING content -- decide which version is right"
             for report in group:
                 report.errors.append(
-                    f"table name '{table}' is claimed by {len(group)} files: {others}"
+                    f"table name '{table}' is claimed by {len(group)} files "
+                    f"({detail}): {others}"
                 )
     return reports
+
+
+def _all_identical(paths) -> bool:
+    """True when every path has the same bytes.
+
+    Hashes rather than compares pairwise: a collision group can be larger than
+    two, and these files run to hundreds of MB, so read each one once and in
+    chunks. An unreadable file returns False -- "cannot prove identical" is the
+    safe answer, and it keeps the caller on the louder message.
+    """
+    digests = set()
+    for path in paths:
+        digest = hashlib.sha256()
+        try:
+            with open(path, "rb") as handle:
+                for chunk in iter(lambda: handle.read(1 << 20), b""):
+                    digest.update(chunk)
+        except OSError:
+            return False
+        digests.add(digest.hexdigest())
+        if len(digests) > 1:
+            return False
+    return True
