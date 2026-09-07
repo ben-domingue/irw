@@ -861,9 +861,9 @@ structured record, that difference survives only as prose in `notes.csv`, if at 
 Append a row to `itemtables/batch_<NNN>/provenance.csv` (columns:
 `table,mapping_basis,text_source,source_ref,note,public_note,uploaded`; create with a
 header if it doesn't exist) for **every** table, not just problematic ones. `uploaded`
-is a date, filled in only once a table has actually been pushed to Redivis — it's what
-distinguishes a table that was promoted out of the batch folder from one that went
-missing.
+is the date the table was pushed to Redivis, or `unrecorded` when that date is not
+recoverable. It is the record of *when*; **whether** a table is live is not stored here
+at all — it is read from `live_tables.csv` (see the wrap-up step below and #1828).
 
 `mapping_basis` — how each `item` code was tied to its `item_text`:
 - `data_labels` — the source data file's own variable labels / column headers tie code
@@ -1207,11 +1207,24 @@ shared-system write, same caution as any other Redivis upload in this repo. See
 
 ### After every upload — reconcile the public issues page
 
-Stamp the `uploaded` date into each table's `provenance.csv` row, then run:
+Stamp the `uploaded` date into each table's `provenance.csv` row, refresh the
+liveness snapshot, then run the reconciler:
 
 ```bash
+python3 refresh_live_tables.py     # needs Redivis credentials; ~2 API calls
 Rscript ../.claude/skills/irw-auto-itemtext/scripts/check_issues_page.R
 ```
+
+`uploaded` records **when**, and only that. Whether a table is live is read from
+`live_tables.csv` — a committed snapshot of the published (and draft) shards,
+because a hand-kept liveness column has been wrong in both directions:
+`himmelstein-admc_raw-2025` read as PENDING while it was live, and 16 rows named
+a live table with the column blank (#1828). If the date is genuinely not
+recoverable — Redivis cannot supply it, since opening a draft resets every
+per-table timestamp — write `unrecorded` rather than a date you know is wrong.
+
+The checker runs without the snapshot, falling back to `uploaded` and saying so,
+so it still works with no credentials and no network.
 
 Run from `itemtext/`. It reads every `itemtables/batch_*/provenance.csv`, keeps the rows
 with a non-empty `public_note`, and reports which of the now-live ones are missing from
@@ -1222,8 +1235,19 @@ gate the wrap-up. Three categories come back:
   entry or record the drop in `fixes/issues_page_dropped.csv`.
 - **PENDING** — note written, table not uploaded. Correctly absent; it will turn DUE on
   the upload that stamps it.
-- **CHECK** — on the page but not marked uploaded. Usually a missing `uploaded` stamp; if
-  it isn't, the page is describing a table nobody can fetch.
+- **STAGED** — on the page and in the draft. Correct at the next release; until then
+  the page is ahead of what a reader can fetch.
+- **CHECK** — on the page, not live, and not in the draft either. The page is describing
+  a table nobody can fetch: either it was never uploaded, or it was withdrawn and its
+  entry should go with it.
+- **STAMP OWED** — live in Redivis with no `uploaded` value in any provenance row. Fill
+  in the date, or `unrecorded`.
+- **GONE** — provenance says uploaded, not live. Expected after a withdrawal; anything
+  else means an upload did not survive.
+
+The last two do not affect the exit status: they are bookkeeping, not an unwritten
+disclosure. They are printed every run so they cannot accumulate silently, which is how
+#1828's sixteen built up.
 
 This is the step that closes the loop. Without it a note written at triage time is simply
 lost once the upload happens in a later, separate commit — which is how it went wrong for
