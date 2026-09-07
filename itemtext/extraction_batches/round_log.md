@@ -6228,3 +6228,145 @@ grandahl_2017_hpv_beliefs 75/15. The round's 9-column provenance sidecar was fol
 `dpt_noncog__grit`, exactly as batch_027 predicted. The question is whether that clause governs an
 open deposit's own printing of the items; if it does not, both tables unblock together. A rights
 call, not a round's.
+
+---
+
+## batch_043 — 2026-09-07
+
+**6 tables claimed, 6 written, 0 blocked, 0 failed. Yield 6/6 (100%).** Circuit breaker not
+approached. Gates: `normalize_nulls` fixed 1 file (`han_2026_phq9`, 37 lines); `audit_batch` 5 PASS /
+1 WARN; `verify_batch` PASS=6; `lint_verification` clean (6 rows, no problems); `irw-validate` ok on
+all six, nothing to report; `check_provenance` passes, with one REVIEW line (below). No rate limit,
+no quota event — every agent used the `--table-sets` route and no round-level export was taken.
+
+Tables: `gumus_2025_dietarian_identity` (231 rows), `habibi_2021_meim` (48), 
+`han_2015_peer_assisted_learning` (60), `han_2026_gad7` (27), `han_2026_isi` (35), 
+`han_2026_phq9` (36). Verification: 3 VERIFIED (han_2015, han_2026_gad7, han_2026_phq9), 
+3 PARTIAL (gumus, habibi, han_2026_isi). No `data_labels` tables, so no NOT_NEEDED rows were owed;
+all six carry a real verification row in both the batch file and the permanent tracker (now 441).
+
+**Three of the six tables are the same PeerJ deposit** (Han et al. 2026, 10.7717/peerj.20868,
+PMC13048223 — GAD-7, ISI, PHQ-9 on 2,086 elderly respondents in Jiangsu). The three agents read the
+shared supplement independently and their accounts corroborate rather than conflict: the PHQ-9 agent
+independently observed that S2's anxiety block is one column short of GAD-7 with a non-GAD 16th
+column, which is exactly what the GAD-7 agent concluded from the other direction.
+
+**Step 5b — four claims re-checked by the orchestrator, all four CONFIRMED, none corrected.**
+
+1. `han_2026_gad7` mixes two scales. `item_stats.R` on live data: GAD01–GAD06 min 0 / max 3 with
+   ceiling 0.0–0.3%, GAD07 min 0 / **max 2** with ceiling **13.8%**. GAD07 is a No/Cannot judge/Yes
+   item, not a frequency item, and the paper still sums it into `GAD_Score`. Also confirmed that
+   GAD02/GAD03 means are 0.23/0.20 — the paper's Table 2 *means* match its columns while its
+   *labels* for items 2 and 3 are the wrong way round. Means alone cannot separate that pair, so the
+   agent's S2 row-pairing (100% vs best rival 0.79) remains the load-bearing route.
+2. `han_2026_isi` non-uniform coding. Confirmed: ISI01 0–4 (mean 0.69), ISI07 0–4 (0.54),
+   ISI02/04/05/06 all 1–5 (1.57–1.84). The ~1-point mean gap is exactly the off-by-one, applied to
+   those two items only. ISI03's 0–5 range is 3 out-of-range zeroes, present in the raw file too.
+3. `gumus_2025_dietarian_identity` DIQ19. Recomputed from the CC BY deposit independently of the
+   agent's files: stored-reversed set is exactly DIQ9–DIQ19 + DIQ31–DIQ33 (14 items). Prosocial block
+   DIQ19–DIQ24 scores 3.97 / 1.39 / α .682 as stored and **3.85 / 2.03 / α .957** with DIQ19 alone
+   un-reversed, against the paper's printed **3.85 / 2.02 / .95** — three statistics to two decimals.
+   The stored reversal of DIQ19 is a depositor error. Separately the Moral Motivation gap is
+   paper-side, not ours: DIQ28–30 observed mean 3.85 vs printed 3.38 while SD (2.02 v 2.01) and α
+   (.849 v .85) match.
+4. `habibi_2021_meim` five-column form vs four-point data. Confirmed: live resp set is exactly
+   {1,2,3,4} over 5,084 observations, no 5 anywhere.
+
+**The one WARN, explained in notes.csv (Step 5c).** `han_2026_isi`: "60% of rows have blank
+option_text" is the source's own anchoring — only the two endpoints of each 5-point scale are
+labelled, so 3 of 5 levels per item are legitimately blank rather than padded. "ISI03(0) has no
+option_text row" is a **response-data** defect, not a text gap: 3 of 2,086 respondents carry an
+out-of-range 0 on a 1–5 item, and the same 3 cases are in the raw deposit. Neither is an itemtext
+defect.
+
+**Owed before upload — `habibi_2021_meim` needs an issues-page line.** `check_provenance.R` lists it
+under `translation_source=mixed, no issues-page entry` (REVIEW, not a failure). Under the 2026-09-02
+ruling it **does** owe a disclosure: the English *instructions* are this project's own translation
+(the paper prints none), even though the English item wording is the paper's Table 2 and the Persian
+is the study's S3 form. Recorded in its notes row as a triage action.
+
+**Four `note_only` rows added to `itemtables/pending_index_notes.csv`** — `han_2026_gad7`,
+`han_2026_isi`, `gumus_2025_dietarian_identity`, `habibi_2021_meim`. All four are written tables
+carrying a source-data finding, not blocks.
+
+**Dictionary problem worth a separate issue:** `han_2026_gad7`'s Description reads "GAD-7 anxiety
+scale items", which finding 1 shows is inaccurate — six GAD items plus one unrelated 3-level
+question.
+
+Cap not reached (cap is `batch_050`); next round picks up `batch_044`.
+
+### batch_042 uploaded (first upload run by the assistant), stamped and disclosed — 2026-09-07
+
+Ben delegated the `red_up` step and the `clean/` clearing this session; publishing a draft version
+stays a human action, and a ROUND still cannot write to Redivis, so the property that makes
+unattended rounds safe is unchanged.
+
+**Pre-flight run before the upload, all four checks:** `clean/` held exactly the staged batch (file
+set diffed, not eyeballed); every file byte-identical to its batch copy; no row already stamped
+`uploaded`; and — the check that actually prevents doubling — **none of the five tables already
+present in the draft**, since `red_up` appends silently and `numRows` will not reveal it.
+
+Uploaded 5/5, then verified by COUNT(*) and COUNT(DISTINCT item): 28/4, 35/5, 28/4, 80/20, 75/15,
+all matching. Draft 44 -> **49 tables**. `clean/` cleared.
+
+**Stamping needed a second fallback, and both guards were right to fire.** The whole-file
+round-trip check refused `mapping_verification.csv` (mixed conventions). The per-line MINIMAL check
+then refused as well — because batch_042's rows were appended in **QUOTE_ALL** while the older rows
+are **MINIMAL**. The stamper now detects each line's own convention and re-serialises in that.
+Result: 5 lines, +50 bytes, nothing else touched. **This file now contains at least two quoting
+conventions; any wholesale rewrite will silently reformat hundreds of rows.**
+`grit_BrummerHoffman_2021` is deliberately left unstamped — blocked, ships nothing.
+
+Entries applied as datapages/irw#150 (313 -> 318), immediately after upload per the standing fix.
+
+### batch_043 run, triaged, uploaded, stamped and disclosed — 6/6 — 2026-09-07
+
+Best gate result of the session: normalize 0 of 6, audit 5 PASS + 1 WARN, verify **6 PASS**, lint
+clean. The single WARN (`han_2026_isi`) is the source anchoring only its scale endpoints plus three
+out-of-range `ISI03` responses that are in the raw deposit too — both explained in `notes.csv`.
+
+**Re-derived the `han_2026_gad7` claim independently**, because it asserts a dictionary defect and
+would become an issue. It holds, and more sharply than reported: GAD01-06 run 0-3 with 0.1-0.3% of
+respondents at the ceiling, while **GAD07 runs 0-2 with 13.8% at its ceiling** (287 of 2086), and
+its distribution is **non-monotonic** — 1621 / 178 / 287. That is the signature of a
+No / Cannot-judge / Yes question, not a 4-point severity rating, and the paper still sums it into
+`GAD_Score`. The dictionary Description "GAD-7 anxiety scale items" is wrong as written and this
+warrants its own issue.
+
+**Uploaded 6/6 after the four-check pre-flight**; verified 231/33, 48/12, 60/12, 27/7, 35/7, 36/9,
+all matching. Draft 49 -> **55 tables**. `clean/` cleared. Stamped 6 + 6; `batch_043/provenance.csv`
+still round-trips whole-file, `mapping_verification.csv` again needed the per-line path.
+
+**Entries applied as datapages/irw#154** (318 -> 324). Two of the six deserve note:
+`habibi_2021_meim` is mandatory — its English instructions are IRW's translation even though the
+item wording is the paper's — and `han_2015_peer_assisted_learning` was **written by hand**, because
+the drafter emits nothing for a table with no `public_note` and its caveat (Korean cohort, only an
+English questionnaire in the deposit, no `language` column shipped) lives only in `notes.csv`. That
+is the batch_009 blind spot; the REVIEW section caught it.
+
+### batch_036's three tables were STRANDED — found and shipped — 2026-09-07
+
+**A gap this session created and this session missed until now.** The three batch_036 survivors
+(`gao2025_attachment_anxiety`, `gao2025_spiritual_wellbeing`, `garciabatista_2021_erq`) were gated
+clean on 2026-09-07 once the Redivis download outage lifted, and their queue rows were flipped
+`failed` -> `done`. **They were never staged and never uploaded.** They sat as `done` in
+`queue_state.csv` while being absent from `irw_text`, `irw_text_2` and both drafts — confirmed by
+querying all four.
+
+They surfaced only incidentally: main's #2050 cleared the uploaded `__items.csv` from every batch
+folder, and these three were left behind, which made them visible as the only unexplained CSVs on
+disk. Without that, they would have stayed "done" and invisible indefinitely.
+
+This is precisely the **"three kinds of done"** hazard the queue tracker documents — extracted,
+uploaded, and visible in a release are three separate states, and `queue_state.csv` records only
+the first. Flipping a row to `done` after gating is not the end of that table's journey, and
+nothing in the pipeline notices the difference.
+
+Fixed end to end: gates re-run live before shipping (audit 3 PASS; verify 2 PASS + 1 exempt),
+uploaded, verified by COUNT(*) and COUNT(DISTINCT item) — 21/3, 60/12, 50/10 — draft 55 -> **58
+tables**, stamped in `batch_036/provenance.csv` and `mapping_verification.csv`, CSVs removed,
+entries opened as datapages/irw#155.
+
+**Worth a guard.** Nothing currently reconciles "rows marked `done`" against "tables present in a
+dataset or draft". A periodic check of exactly that would have caught this in seconds, and would
+catch the same class of miss for any future batch closed out by hand.
