@@ -6007,3 +6007,47 @@ entry: the English is the authors', not IRW's.
 
 Queue after this round: 957 pending, 307 done, 70 blocked, 12 failed, 55 excluded.
 Cap is `batch_050`; not reached.
+
+### batch_040 uploaded and stamped; batch_041 run and triaged — 2026-09-06/07
+
+**batch_040 uploaded.** Ben ran `red_up`; all six verified here by COUNT(*) and
+COUNT(DISTINCT item) against the `irw_text_2` draft — 30/15, 30/15, 50/10, 14/3, 36/9, 36/9, every
+one matching its source file. Draft 33 -> 39 tables. Stamped `uploaded=2026-09-06` in
+`batch_040/provenance.csv` and `mapping_verification.csv` (6 + 6), each file proved to round-trip
+byte-identically before writing; CSVs deleted, sidecars kept. **The stamping was deliberately
+deferred until batch_041's round had committed** — `mapping_verification.csv` is one of the paths
+a round stages, so editing it mid-round invites the commit-sweep BATCH_PROCESS warns about.
+
+**Its six issues-page entries are applied: datapages/irw#148**, 302 -> 308, purely additive.
+
+**batch_041 — 5 written / 1 blocked / 0 failed.** Gates re-run live: normalize 0 of 5, audit
+3 PASS + 2 WARN, verify 3 PASS + 2 exempt, lint clean.
+
+**Re-derived the QCAE direction claim**, because the round's own Step 5b had already caught the
+agent's item-rest correlations being wrong and its subscale assignment for QCAE2r/QCAE29r being
+non-canonical — so the claim it upheld deserved its own check. It holds decisively: the live total
+score as stored averages **93.37**, exactly the claimed Cognitive 58.90 + Affective 34.47, and sits
+near Powell 2018's norm total of 90.9; the flipped reading gives **61.63**, adrift by 29 points. The
+`.sav` value labels beat the paper's Methods and the shipped anchors are right.
+
+**Sharpened the audit WARN rather than just accepting it.** `AVOID2` and `DISCRIM2` do not merely
+have low n — they have **exactly n=847 each**, against ~2541 for every one of their 18 siblings
+across two different scales. One identical count in two instruments points to a single upstream
+wave or version fault hitting item 2 of each, not two independent coincidences. Response-data
+damage, not an itemtext defect, and a candidate for its own `data fix` issue.
+
+**Staged all 5 into `clean/`** (the blocked `gobbens_2018_sf12` ships nothing). Expected counts:
+gobbens_2018_adl 44/11, gobbens_2018_iadl 28/7, gomez_2022_qcae 124/31,
+gordils_2021_behavioral_avoidance 77/11, gordils_2021_discrimination 63/9.
+
+**HELD FOR BEN — a rights question a round must not settle.** `gobbens_2018_sf12` was blocked on a
+fee gate whose evidence is a **2004 Wayback capture** of a QualityMetric sample licence marked
+"sample only for informational purposes" — corroborated by IQVIA's current application process, but
+not a live agreement. It sits in tension with `dalky_2020_sf36` (batch_025), which shipped on
+2026-09-04 on the footing that RAND distributes the SF-36 free and has no 12-item equivalent. That
+is for the irw#1954 re-audit to settle, not a round and not this session. Nothing was touched.
+
+**`draft_issues_qmd.R` clobbered a pending draft for the SECOND time**, now batch_040's six. They
+were recovered from commit ad592cf and have since been applied to the page, so nothing is lost —
+but the workflow lesson is now firm: **apply a batch's entries as soon as its tables are uploaded**,
+rather than letting them sit in the draft file where the next round's drafter will overwrite them.
