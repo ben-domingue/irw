@@ -6487,3 +6487,132 @@ drafter emits nothing without a `public_note`, and this table's wording is not a
 transcription — the paper prints its three items as one slash-joined sentence and the table ships
 three. Waited for #156 to merge before opening this, since two open issues-page PRs always collide
 at the closing marker.
+
+---
+
+## batch_045 — 2026-09-07
+
+**6 tables claimed, 4 written / 2 blocked / 0 failed.** Yield 4/6 (67%). Circuit breaker not
+tripped (0% failed, threshold 30%; both no-CSV tables are determinate rights blocks, retry test
+NO, which do not count).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `hellstrom_2019_sci` | done | 40 (8×5) | data_labels | VERIFIED |
+| `hewei_2022_msva_purchase` | done | 70 (14×5) | data_labels | NOT_NEEDED (self-describing codes) |
+| `hicks_2020_bioveda` | done | 32 (16×2) | paper_explicit | VERIFIED |
+| `hirwa_2024_antibiotic_attitudes` | done | 27 (9×3) | data_labels | VERIFIED |
+| `herrera_2018_iri` | blocked | — | unknown | NO_ROUTE |
+| `holden_2026_bsri` | blocked | — | unknown | — |
+
+**Gates all clean.** `normalize_nulls` fixed 2 of 4; `audit_batch` **4/4 PASS with no anomalies**
+(so no WARNs to explain under Step 5c); `verify_batch` 3 PASS + 1 MISSING(exempt, hewei is
+data_labels); `lint_verification` 5 rows no problems; `irw-validate` ok on all four;
+`check_provenance` 502 rows / 47 files, 71 IRW-generated tables all with issues-page entries, 0
+failures. The only `check_provenance` output needing anyone's attention is the standing
+`translation_source=mixed` REVIEW list (`campos_2023_swls`, `geacaballero_2019_pes_nwi`,
+`geacaballero_2019_pes_nwi_short`) — pre-existing, none from this batch.
+
+**Both blocks are the deposit-licence-vs-instrument-licence split, and both were caught BEFORE any
+wording was transcribed.**
+
+- `herrera_2018_iri` — the IRI is "freely available for all non-commercial uses" with commercial
+  requests directed to the author (Davis's official Eckerd page, fetched today). A stated use
+  restriction, blocking under irw#1945 and irw#1955. Direct precedent, same instrument and same
+  clause: `dpt_noncog__interpersonal_reactivity` shipped in batch_027 and was withdrawn on
+  2026-09-06 on exactly this quote. Step 3b confirmed identity first (21 items PT1-7/EC1-7/PD1-7,
+  n=556 each, resp 1–5), so this is a rights block and not a misidentification.
+- `holden_2026_bsri` — deposit is CC0 and even ships a questionnaire PDF, but the BSRI is CPP/Mind
+  Garden copyright and fires *both* 2026-09-04 quote-test triggers: an explicit open-web bar and an
+  enforced per-administration fee ($2.75/unit, min 50). The PDF was deliberately not opened.
+
+**Escalation from the holden block — a rights question about the RESPONSE table, not item text.**
+`holden_2026_bsri`'s `item` codes are the 20 copyrighted BSRI trait adjectives verbatim, so the
+wording the item-text pipeline just declined to publish is already on the open web via the response
+data. Orchestrator re-checked this directly rather than taking the agent's word (Step 5b): the live
+table is 13,900 rows, 20 items running `Affectionate` … `Willing to take risks`, resp 1–7.
+Confirmed. Someone should decide whether the same ruling reaches the response table and whether
+other BSRI tables in the corpus share this shape — worth its own issue. Both blocks have rows in
+`itemtables/pending_index_notes.csv` (now 106).
+
+**Two data defects found, both reproduced independently by the re-runnable verify scripts rather
+than taken on report (Step 5b):**
+
+1. `hellstrom_2019_sci` — **the IRW `resp` integers are not canonical SCI scoring.** The processing
+   script read the `.sav` with `pd.read_spss` (value labels applied) then re-coded the label
+   *strings* with its own maps, which reverses SCI_1,2,3,5,6,7,8 while leaving SCI_4 canonical. So
+   within one table higher `resp` = worse sleep for seven items and *better* for SCI_4, and a raw
+   sum of `resp` is not an SCI total. Settled by Table 2's full item×category frequencies: the
+   shipped direction matches **40/40 cells**, the `.sav`'s canonical coding mismatches **32/40**.
+   Disclosed as a `public_note`.
+2. `hirwa_2024_antibiotic_attitudes` — **the paper's stated scoring rubric does not describe the
+   deposited data.** Methods claim "correct = 2, neutral = 1, incorrect = 0"; the deposit actually
+   stores raw agreement uniformly (2 = Agree) for *every* item including the two reverse-worded
+   ones. Table 5's counts reproduce the live data in all **27 cells** (`item_02`: 247 at resp=2 vs
+   247 Agree; `item_07`: 351 at resp=0 vs 351 Disagree). Taking the Methods sentence at face value
+   would have shipped inverted option text for those two items. Disclosed. Separately, the
+   5-point administered scale is collapsed to 3 in the deposit.
+
+**Incidental, outside this pipeline's scope:** the published PLOS S1 workbook for
+`hewei_2022_msva_purchase` carries respondent IP addresses with city-level geolocation in an unnamed
+column. The IRW processing script drops it, so nothing PII-bearing is in the corpus — but it is
+sitting in the public supplement.
+
+No instrument mismatches (Step 3b clean on all six), no dictionary/metadata problems, no access
+failures, no rate limits, and no export-quota errors — the query route via `irw_table_sets()`
+carried the verification work, though whether any agent also took a full-table export was not
+audited. Cap is `batch_050` — not reached, 5 rounds remain.
+
+**Step 5b confirmations.** Three agent claims were re-checked by the orchestrator rather than taken
+on report, and all three held: the BSRI response-table item codes (live: 13,900 rows / 20
+adjectives / resp 1–7), and — via the re-runnable verify scripts run against live data — the
+hellstrom 40/40-vs-32/40 direction test and hirwa's 27/27 raw-agreement counts. The hewei PII
+observation was also confirmed against the cached supplement: column `Unnamed: 2` holds **752**
+IP-address values with Chinese-language geolocation annotations (e.g. `222.96.202.117(国外-韩国)`).
+The same check re-confirmed that the workbook's headers *are* the item statements, which is the
+basis for that table's `data_labels`.
+
+### batch_045 — 4 written / 2 blocked; 3 shipped, 1 HELD on a rights question — 2026-09-07
+
+Gates: normalize 0 of 4, verify 3 PASS + 1 exempt, lint clean. **`audit_batch` errored on the
+first live run** — `hewei_2022_msva_purchase`, "could not read live data ... missing value where
+TRUE/FALSE needed" — and came back **4/4 PASS with no anomalies on retry**, matching the round.
+Transient, but worth recording: a single audit run can produce a false negative, and the table
+itself fetches cleanly (10,528 rows, 14 items, no NA responses).
+
+**HELD: `hellstrom_2019_sci` — escalated, not decided.** The rights check added after this
+morning's PSS miss is what caught it. Four of this batch's tables carried **no rights sentence at
+all** in `notes.csv` — the same shape as `gillman_2023_pss`. Three are the authors' own instruments
+and are clear. The fourth is not: it is the **Sleep Condition Indicator**, a named third-party
+instrument, and its originating publication (Espie et al. 2014, BMJ Open 4:e004183) is licensed
+**CC BY-NC** — a stated non-commercial restriction.
+
+That matters because **this very batch blocked `herrera_2018_iri` on an identical clause** ("freely
+available for all non-commercial uses"), and because the standing rule is that NC escalates to Ben.
+The wording here came from the paper's Table 2, i.e. `study_materials` — which is exactly the
+footing on which `bakker_2020_pss10` and `beck_2021_pss10` were withdrawn anyway.
+
+**Evidence quality, stated plainly:** the CC BY-NC attribution comes from a search summary and from
+BMJ Open's standard licence of that period. I could not retrieve a verbatim licence line —
+bmjopen.bmj.com returns HTTP 403 and the Oxford ORA PDF would not yield extractable text. So this
+is a well-founded suspicion, not a quoted clause, and it is Ben's call rather than a round's.
+
+Shipped the other three: uploaded, verified 70/14, 32/16, 27/9, draft 61 -> **64 tables**, stamped
+3 + 3. The SCI's `__items.csv` stays in the batch folder, unstamped, and its drafted issues-page
+entry is explicitly marked DO NOT APPLY — a held table gets no entry, exactly like a blocked one.
+
+**A rights exposure that outruns this pipeline entirely.** `holden_2026_bsri` was blocked because
+the BSRI is CPP/Mind Garden copyright with a per-administration fee — but its **response table
+already publishes the instrument verbatim**. Confirmed directly: 13,900 rows, 20 items, and the
+item CODES are the BSRI trait adjectives themselves — `Affectionate`, `Aggressive`, ...,
+`Willing to take risks`. Declining to ship item text changes nothing while the codes carry the
+wording. `irw_list_tables()` (4,237 tables) shows it is the only BSRI table in the corpus.
+**This is a decision above this pipeline and probably its own issue.**
+
+Note on method: the Python client's `list_tables()` under-reports badly — it returned 1,953 tables
+where `irw::irw_list_tables()` returns 4,237. Any "not present in the corpus" conclusion must use
+the R listing or `irw_fetch`, never that enumeration.
+
+Also recorded, not actioned: `hewei_2022_msva_purchase`'s published PLOS supplement carries 752
+respondent IP addresses with city-level geolocation. **Not an IRW exposure** — the processing
+script drops the column and the corpus has no such field — but the deposit itself is the concern.
