@@ -6051,3 +6051,180 @@ is for the irw#1954 re-audit to settle, not a round and not this session. Nothin
 were recovered from commit ad592cf and have since been applied to the page, so nothing is lost —
 but the workflow lesson is now firm: **apply a batch's entries as soon as its tables are uploaded**,
 rather than letting them sit in the draft file where the next round's drafter will overwrite them.
+
+---
+
+## batch_042 — 2026-09-06T22:23-07:00
+
+**6 tables claimed / 5 written / 1 blocked / 0 failed.** Yield 5/6 = 83%. Circuit breaker not
+tripped (0% failed; the single no-CSV table is a determinate rights verdict, retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| gordils_2021_intergroup_anxiety | done | 28 (4×7) | paper_order | PARTIAL |
+| gordils_2021_interracial_comp | done | 35 (5×7) | paper_order | PARTIAL |
+| gordils_2021_interracial_trust | done | 28 (4×7) | paper_order | PARTIAL |
+| gpt4mcq_young_2025 | done | 80 (20×4) | data_labels | VERIFIED |
+| grandahl_2017_hpv_beliefs | done | 75 (15×5) | data_labels | VERIFIED |
+| grit_BrummerHoffman_2021 | **blocked** | — | unknown | NO_ROUTE |
+
+**Gates.** `normalize_nulls.R` fixed 3 of 5. `audit_batch.R` PASS=2 WARN=3, every WARN explained in
+`notes.csv` per Step 5c and every one a property of the response data or of the source's own partial
+anchoring, not an itemtext defect. `verify_batch.R` PASS=5, no FAIL, no missing VERDICT.
+`lint_verification.R` 6 rows, **0 ERROR**, 1 WARN (adjudicated below). `irw-validate` clean on all
+five — 2 checks each, nothing to report. `check_provenance.R` clean: 484 rows across 44 files, 71
+IRW-generated tables all with issues-page entries, 0 owed. Its 3 `mixed` review rows are
+pre-existing (`campos_2023_swls`, `geacaballero_2019_pes_nwi{,_short}`), none from this batch.
+
+**Three of six tables came from one source** — the S1 Appendix of Gordils et al. (2021) PLoS ONE
+16(1):e0245671, which also fed `_discrimination` and `_behavioral_avoidance` in batch_041. Each
+agent was told which siblings belonged to another agent; no file collisions, and the three
+independently derived the same conventions (single trivial `section_id`, blank unlabelled anchors,
+instrument naming) that batch_041 established.
+
+**The three gordils tables are all PARTIAL for the same structural reason, and it is worth naming.**
+The codes (ANX1–4, COMP1–5, TRUST1–4) *are* the source spreadsheets' own column names — the
+processing script melts them with no rename and no positional step — but the appendix prints its
+items **unnumbered**, so sentence→code rests on presentation order and nothing in the deposit tests
+it: both XLSX files carry bare headers and all three SPSS syntax files label only `filter_$`. The
+agents did not stop there. `_trust` pinned the *response* axis decisively via route 3 — the S3
+syntax defines `MISTRUST = MEAN(8-TRUST1..4)`, and recomputing the paper's Study 1 test on that
+composite reproduces it exactly (t(845)=3.318 vs published 3.32, CI [0.14,0.53] vs [0.14,0.53],
+d=0.228 vs 0.23), with the flipped-anchor counterfactual giving the opposite sign. `_anxiety` found
+a simplex: of the three orderings of four items up to reversal, only the shipped 1-2-3-4 has
+monotone correlation decay by lag (0.9138 > 0.8964 > 0.8554), replicating in Study 2 independently.
+`_comp` pinned each code to a specific spreadsheet column by an exact per-item n fingerprint
+(2547/847/2534/2540/2545). None of these separates every item from every other, so all three are
+correctly PARTIAL rather than VERIFIED. `_trust`'s agent deserves credit for **attempting route 8
+and rejecting it as post-hoc** — the means do group {1,3} above {2,4} consistently with the
+appendix's wording split, but a random pairing matches that 1 time in 3, so it was not counted.
+
+**Step 5b independent re-check (orchestrator, not taken from agent reports).** Two agents reported
+that ANX2 and COMP2 carry ~847 rows against ~2540 for their siblings. Re-checked server-side via
+`table_sets.R`: confirmed to the row — ANX 2549/847/2536/2543, COMP 2547/847/2534/2540/2545. The
+*mechanism* was also confirmed at first hand rather than from the SPSS syntax alone:
+`data/gordils_2021_interracial.py` declares `STUDY2_CORRUPT_ITEMS = ['COMP2','DISCRIM2','ANX2',
+'AVOID2']`, sets them to `pd.NA` for the Study-2 rows, and carries an explanatory comment at lines
+51–59. **This closes the batch_041 lead**: that round flagged the identical n=847 on
+`_discrimination` and `_behavioral_avoidance` as "response-data damage… a candidate for its own
+`data fix` issue". It is not damage and no issue is warranted — it is a deliberate, already-
+documented decision in the processing script, and the "single upstream fault" reading was the
+right suspicion but the wrong conclusion. n=847 is simply the Study-1 sample.
+
+**`gpt4mcq_young_2025` — a deposit-internal conflict, resolved against the data.** OSF zq4eg
+publishes **two different 20-item ChatGPT-4 sets under the same codes AIQ1–AIQ20**: the `.sav`
+variable/value labels, and a word-for-word non-overlapping AI block in Supplementary Materials 2.
+The agent shipped the `.sav` labels and settled it numerically — under them P(resp==1) reproduces
+the paper's own published CTT P-values item for item to within 0.0005 (mean 0.876), where the SM2
+wording would put the keyed position at a mean of 0.103. The SM2 file's Misc block and page-timing
+structure match the `.sav` exactly, so it is the same survey with a superseded item block, not a
+different study. Recorded as a `public_note` — a concrete text-vs-table mismatch a reader would hit.
+
+**One lint WARN, adjudicated and left as-is.** `lint_verification.R` asked whether
+`gpt4mcq_young_2025` should be PARTIAL because its evidence contains "does not establish". It should
+not: that sentence scopes what the CTT-P-value *route* cannot do on its own (the published P-values
+tie across items — 0.926 four times, 0.937 three times), and the next sentence resolves it —
+`mapping_basis=data_labels`, stem label, option labels and responses all on the same `.sav` column
+whose name IS the IRW code, so no permutation is constructible. The numeric check is ruling out the
+rival SM2 wording set, not assigning codes to text. Keyword matcher firing on a scoping clause.
+Reasoning written into `notes.csv` so the next reviewer does not re-derive it.
+
+**`grandahl_2017_hpv_beliefs` — response direction inverted relative to its own source file, and
+checked rather than assumed.** The `.sav` codes 1='Totally agree'…5='Totally disagree', 6='Do not
+know', while `RESP_MAP` in the processing script maps the label strings to the **opposite** integers
+and drops "Do not know". So shipped `option_text` follows IRW's direction, not the file's. All 15
+items × 5 levels = 75 counts match cell for cell and all 15 count-vectors are distinct, so every
+item is separated and no level permutation reproduces the match — VERIFIED despite the `data_labels`
+exemption. Also flagged: the paper's **Table 1 is an image**, and it prints 10 of the 15 items in
+different wording than the `.sav` labels (a fourth variant appears in the Statistical analysis
+section). The `.sav` labels were used — they cover all 15 and tie code to text at source. Another
+instance of the image-only-journal-table problem.
+
+**The block: `grit_BrummerHoffman_2021`, rights, retry test NO.** Step 3b resolved the instrument
+question the prompt raised — it is the 8-item **Grit-S**, not the 12-item Grit-O, administered in
+Brazilian Portuguese; table name and dictionary description are both correct. The text was in hand
+(the CC BY 4.0 OSF deposit p8j2v prints all 8 in Portuguese and English), so this is a rights block,
+not an access failure: angeladuckworth.com/measures bars publication and wide distribution, firing
+the 2026-09-04 no-redistribution ruling. **This is the table batch_027's `dpt_noncog__grit` note
+explicitly predicted as the next hit** — precedent confirmed on disk, same instrument, same clause,
+same ruling. The agent verified the mapping anyway so the record shows it is not a data problem
+(all 8×5 cell counts match the deposited `.Rds`, all 8 distributions mutually distinct). Its
+incidental finding is recorded in `pending_index_notes.csv` for whoever unblocks it: the deposit's
+English PDF numbers options in the **opposite** direction to the stored coding, because `car::recode`
+leaves the four reverse-worded items already reverse-scored. Do not use the PDF numbering.
+
+**Export discipline held.** Ground truth came from `table_sets.R` throughout; the handful of
+`irw_fetch` calls were small deliberate decisions for mapping verification (8,475 / 14,624 rows),
+not full-corpus passes.
+
+**Merge note.** The `gpt4mcq` agent emitted a 9-column provenance sidecar with an extra `key_source`
+field against the canonical 8. Rather than drop the value, it was folded into that row's `note` as
+`key_source=source_published.` and the row merged on the canonical header. Worth watching: a
+silent column-union merge would have corrupted the file, and a strict merge would have failed the
+round. No `NOT_NEEDED` rows were needed — both `data_labels` tables wrote real verification rows.
+
+**Not at the cap** (`batch_050`). Next firing picks up `gumus_2025_dietarian_identity` onward;
+957 pending before this round, 951 after.
+
+### CORRECTION to the batch_041 n=847 finding — no issue is owed — 2026-09-07
+
+The batch_041 triage entry above concludes that `AVOID2` and `DISCRIM2` sharing exactly n=847
+is "response-data damage ... a candidate for its own `data fix` issue." **That conclusion is
+wrong and should not be acted on.** batch_042's round flagged it, and it is confirmed here by
+reading the script rather than the data: `data/gordils_2021_interracial.py` line 97 declares
+`STUDY2_CORRUPT_ITEMS = ["COMP2", "DISCRIM2", "ANX2", "AVOID2"]` and nulls those four columns for
+every Study-2 row before melting.
+
+The reason is in the QC-fix note at lines 50-60, dated 2026-08-10 and credited to ben-domingue:
+in the Study 2 (S4 Data) file those four columns are not raw responses at all — for all 1,774
+Study-2 rows each is bit-for-bit identical to its own scale's pre-computed composite mean column
+(`AVOID2 == AVOID`), a dragged-formula spreadsheet artifact. They are dropped rather than shipped,
+exactly as datastandard.md's imputed-values rule requires. Study 1's own copies of those items are
+intact and kept.
+
+So n=847 is simply the Study-1 sample, and the data are right. The observation that drew attention
+to it — one identical count across several different scales — was sound; the inference from it was
+not. **The lesson worth keeping: when several IRW tables share an oddity exactly, read our own
+processing script before concluding the source is damaged.** A deliberate, documented IRW-side
+decision and upstream corruption look identical from the response data alone.
+
+### batch_041 stamped; batch_042 run and triaged — 5 staged, 1 blocked — 2026-09-07
+
+**batch_041 uploaded and stamped.** All five verified by COUNT(*) and COUNT(DISTINCT item) —
+44/11, 28/7, 124/31, 77/11, 63/9 — draft 39 -> 44 tables. Entries applied as datapages/irw#149
+(308 -> 313), promptly after upload rather than parked, which is the standing fix for the drafter
+clobbering pending entries.
+
+**`mapping_verification.csv` no longer round-trips whole-file, and the stamping guard caught it.**
+The file is now MIXED: MINIMAL quoting for its first ~448 kB, then a different convention in the
+rows batch_042's round appended. A whole-file rewrite would have silently reformatted every one of
+those new rows. Stamped **line by line in place** instead, each target line proved to round-trip on
+its own before being touched; the diff is exactly 5 lines and +50 bytes, which is 5 x the stamp
+length. **Whole-file rewrites of this file should now be considered unsafe** — edit target lines.
+
+**batch_042 — 5 written / 1 blocked / 0 failed.** Gates re-run live: normalize 0 of 5, audit
+2 PASS + 3 WARN, verify 5 PASS, lint 0 ERROR / 1 WARN.
+
+**Re-derived the `gpt4mcq_young_2025` decision**, which is the one that matters here: the OSF
+deposit publishes TWO different 20-item sets under the same AIQ1-AIQ20 codes, so this choice
+decides which wording ships. Recomputed P(resp==1) per item from live data against the paper's
+published CTT P-values: **all 20 agree, maximum deviation 0.0005**, which is 3-decimal rounding.
+The rival Supplementary-Materials-2 wording would put the keyed answer at a mean of 0.103. The
+shipped `.sav` labels are the right set.
+
+**Lint WARN on that table upheld, not downgraded.** Its hedge — that tied P-values cannot separate
+items from one another — is answered inside its own evidence: the stem, the options and the
+responses all ride on the same `.sav` column, the IRW code IS that column name, and
+`data/gpt4mcq_young_2025.r` never renames, so no permutation is possible. The numeric check rules
+out the rival wording set; it is not what assigns codes to text. Same shape as the batch_038
+`_comm` case.
+
+**Staged all 5.** Expected counts: gordils_2021_intergroup_anxiety 28/4,
+gordils_2021_interracial_comp 35/5, gordils_2021_interracial_trust 28/4, gpt4mcq_young_2025 80/20,
+grandahl_2017_hpv_beliefs 75/15. The round's 9-column provenance sidecar was folded correctly —
+`batch_042/provenance.csv` carries the canonical 8 columns.
+
+**HELD FOR BEN — `grit_BrummerHoffman_2021`.** Blocked on the same Duckworth Grit-S clause as
+`dpt_noncog__grit`, exactly as batch_027 predicted. The question is whether that clause governs an
+open deposit's own printing of the items; if it does not, both tables unblock together. A rights
+call, not a round's.
