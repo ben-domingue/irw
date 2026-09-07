@@ -268,6 +268,9 @@ getrows<-function(l) {
     ## biblio carries only one licence and one reference (#1694). Fills a
     ## blank Custom_License_Terms only, so the sheet still wins the cell.
     biblio <- apply_license_attribution(biblio, name)
+    ## Blank-only fill for the OSF deposits that set no licence; the sheet
+    ## always wins, so a real licence recorded later supersedes it.
+    biblio <- apply_osf_permission(biblio, name)
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
     ## Correct the Descriptions that name an instrument the table does not
