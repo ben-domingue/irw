@@ -136,7 +136,8 @@ is checkable outright — reproducing per-item n for every item and per-item mea
 `irw_fetch()` proves the mapping rather than supporting it, which no statistical route in Step 5b
 can do. Two earlier rounds wrote this table off as "an arbitrary, order-dependent integer
 assignment" without attempting the re-run. `data_labels` in provenance does NOT imply inference-free; it describes where
-the words came from, not how the code was assigned.
+the words came from, not how the code was assigned. It grants no exemption on its own —
+Step 5b exempts a *derivation*, not a `mapping_basis`.
 
 ### 4. Transcribe literally, and disclose every deviation
 
@@ -790,12 +791,41 @@ Two traps:
   dropped imputed cells, or vice versa. Order and relative spacing are the signal, not
   the third decimal.
 
-`data_labels` tables are exempt: when the source file's own variable labels tie code to
-text, the mapping is authoritative at the source and there is nothing for statistics to
-add. **Every other `mapping_basis` requires this step.** Record the outcome as a row in
+**The exemption is earned by the code derivation, not by `mapping_basis`.** Writing
+`data_labels` in provenance does not exempt anything: it says where the *words* came from,
+not how the *code* was assigned, and those fail independently (core model §3). Ask which of
+the three derivation patterns the processing script uses, and exempt only the first two:
+
+| the script does | exempt? | what to record |
+|---|---|---|
+| `item` IS the source column name | yes | name the label level you read — variable labels, value labels, header row *n* |
+| number-preserving rename (`LOC1` → `LOC_01`) | yes | name the label, and the rename |
+| **positional assignment** (`enumerate`, `range(a,b)`, `df.columns[i:j]`, `row_number()`, `f"item_{i+1}"`) | **no** | diff the shipped `item_text` against the source header at each position, and record the count |
+
+For the third, the code keeps no trace of the source name and a shifted range is
+undetectable from the output alone, so there is nothing at the source to be authoritative
+— `cfi_7` and `item_5` appear in no source file. The header diff is mechanical and settles
+the table outright; run it rather than asserting an exemption the source cannot grant.
+This is core model §3 restated at the point of decision — the two used to disagree, and
+Step 5b was the one that was wrong.
+
+**Every other `mapping_basis` requires a route from the list above.** Record the outcome as a row in
 `itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`)
 with `status` one of `VERIFIED` / `PARTIAL` / `NO_ROUTE` / `NOT_NEEDED`, and `evidence`
 stating the actual numbers compared.
+
+**`evidence` names what you read; it never restates the rule.** "The source file's own
+variable labels tie code to text, so the mapping is authoritative at the source" is the
+exemption's definition, not evidence for it, and a row carrying only that has recorded
+nothing. Say which file, which level, and how many items reconciled — "header row 1 of the
+Qualtrics export, 20/20 verbatim"; "the .sav's variable labels, 19/19"; "row 2 of the
+workbook reads `Schutte_1`.., copied to lowercase". If the batch's `provenance.csv` note
+already says this, quote it rather than writing something weaker: provenance is the fuller
+record, and the ledger should not disagree with it.
+
+**Check `queue_state.csv` before writing any row.** A `blocked` or `failed` table has no
+live item text, so it cannot carry a verification outcome of any kind; rows have been
+written exempting text that never shipped.
 
 **`VERIFIED` has a strict meaning: the route distinguishes every item from every other
 item.** If it pins a polarity class, a subscale, a block, a direction, or some of the
