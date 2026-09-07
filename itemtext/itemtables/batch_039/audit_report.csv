@@ -1,0 +1,7 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"ghanbari_2016_helma_reading","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"ghanbari_2016_helma_understand","PASS",9,9,TRUE,TRUE,FALSE,TRUE,0,0,""
+"ghanbari_2016_helma_use","WARN",5,5,TRUE,TRUE,FALSE,TRUE,20,0,"20% of rows have blank item_text"
+"gholami_2017_periodontal_knowledge","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
+"gilbert_meta_16","PASS",71,71,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"gilbert_meta_27","WARN",18,18,TRUE,TRUE,FALSE,TRUE,0,16.7,"row-count anomaly (possible item-code conflation or missingness skew), median=17409: maser_lang_para, maser_lang_stry, maser_lang_vilname, maser_lang_word1, maser_lang_word2 | 16.7% of rows have blank option_text | 3 of 18 items have NO option_text rows while others do (maser_lang_lttrs, maser_lang_word1, maser_lang_word2)"

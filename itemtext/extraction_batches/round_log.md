@@ -5444,3 +5444,297 @@ in `public_note` and in the drafted issues-page entry.
 **batch_037 triage is complete: 6 tables, 6 staged, 0 held.** `clean/` holds exactly six
 `*__items.csv` and nothing else. Upload is Ben's step; the `uploaded=` stamps and the six
 issues-page entries are owed only after he confirms it.
+
+### batch_037 uploaded and stamped — 6 tables, all verified by COUNT(*) — 2026-09-06
+
+Ben ran the upload; `red_up` reported all six as NEW. Verified against the `irw_text_2` draft
+with **COUNT(\*)**, not `numRows` — the field that reported "no change" for tables that had
+silently doubled (#1677/#1683):
+
+    gemma 140 | gpt3_5 155 | gpt4o 175 | llama3 150 | mixtral 160 | gerber 70
+
+Every count matches its source file exactly, gemma carries 28 distinct items, and the draft went
+15 -> **21 tables**. No doubling.
+
+**Two things checked because the `red_up` output looked uneven, both benign.** gerber reported
+15 columns against the genpsych five's 10: that is just the translated-table schema (`language`
+plus the four `*_translated` columns), and `fukuda_2021_health_literacy__items`, already live,
+has the same 15. And gerber's `_translated` columns are not empty but hold the literal string
+`NA` — which is also what live fukuda holds on all 184 rows, so it is the shipped convention and
+not a defect. The `notes.csv` wording "left empty" is loose about this; the data are right.
+
+**Stamped `uploaded=2026-09-06`** on all six rows in `batch_037/provenance.csv` and in the root
+`mapping_verification.csv`. Every prior value was genuinely empty rather than `no`, so the
+stamping pass could not have silently skipped a row. Both files round-trip byte-identically under
+MINIMAL quoting with CRLF (verified before writing), and the diff is exactly 6 changed rows each
+with no reformatting elsewhere. The six `__items.csv` were deleted from the batch folder;
+sidecars stay. `clean/` left for Ben.
+
+**Still owed: the six issues-page entries** in `fixes/itemtext_issues_draft.md` are now due, since
+the tables have shipped. They go to `itemtext_issues.qmd` in the separate `irw_site` repo.
+
+## batch_038 — 2026-09-06T15:57-07:00
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 = 100%.** Circuit breaker not
+approached (0% failed). Six agents, one per table, per the 2026-09-05 halving; no OOM kill, no
+rate limit, all six returned their own reports.
+
+`gerber_2022_eas_temperament`, `gesbert_2021_tdeq`, and four of the seven `ghanbari_2016_helma_*`
+(`_access`, `_appraise`, `_comm`, `_numeracy`). The remaining three siblings (`_reading`,
+`_understand`, `_use`) stayed pending and were named as off-limits in every prompt.
+
+**Gates.** normalize_nulls: 1 of 6 fixed (`_appraise`, 26 lines). audit_batch: 5 PASS, 1 WARN.
+verify_batch: PASS=6. lint_verification: 0 ERROR. irw-validate: all six ok, nothing to report —
+note `gerber_2022_eas_temperament` deliberately ships two response directions in one table (six
+items the processing script recodes `6 - raw`) and `resp_ambiguous` correctly did NOT fire, since
+per-item direction differences are legitimate. check_provenance exits 1, but on pre-existing
+backlog only: none of this round's six tables appear in any of its lists (the 62 translation_source
+gaps and `extremera_2016_shs`'s missing issues-page entry all predate this batch).
+
+**Step 5c — the one audit WARN, explained.** `_access` 18.2% blank `item_text` = exactly
+`access10`/`access11`, two field-test items dropped before the published 44-item form whose wording
+exists in no source. Expected, correct, not a defect in either the itemtext or the response data.
+
+**Step 5b re-check changed a result.** `_access` shipped claiming VERIFIED on an EFA
+nearest-column route. A 300-replicate bootstrap of that same route (orchestrator-run, not the
+agent's) does not reproduce it item-by-item: q5 recovers its claimed column in 14.4% of replicates
+while the runner-up `access7` takes 34.7% — the shipped answer loses to its own runner-up, at
+exactly the pair the agent had already flagged as its thinnest margin (0.257 vs 0.272).
+**Downgraded to PARTIAL** in both `verification_merged.csv` and `mapping_verification.csv`. What
+survives is the split, not the order: recomputed Cronbach alpha is order-invariant and confirms
+`access1-4` = self-efficacy (0.614 vs published 0.61) and `access5-9` = access (0.705 vs 0.71).
+Triage should read those 9 wordings as correctly assigned to two blocks but possibly permuted
+inside them. `_comm` drew the same lint WARN and was tested the same way and **held**: identity is
+modal for all 8 items and beats its runner-up every time (46.2–91.1%), so VERIFIED stands, with the
+margins now recorded in `notes.csv` rather than left as an assertion.
+
+**The shared HELMA source, independently confirmed.** Four agents converged on the same
+reconstruction and the orchestrator re-derived it from the `.sav` directly: the S3 file is the
+**47-item field-test form**, the S1/S2 questionnaires are the **44-item published HELMA**. All
+seven recomputed alphas match the paper's Table 3 to ≤0.008 (0.614/0.61, 0.705/0.71, 0.857/0.86,
+0.892/0.89, 0.815/0.81, 0.647/0.65, 0.827/0.83). The three dropped items are `access10`,
+`access11`, `use5`; `reading6` was reassigned to the understanding subscale.
+
+**For the three ghanbari tables still queued — do `_reading` and `_understand` in the SAME round.**
+They are coupled: `_reading` holds 6 codes for 5 published reading items and `_understand` holds 9
+for a 10-item subscale, because `reading6` is an understanding item. Splitting them across rounds
+means two agents resolving one alignment from opposite sides. `_use` is independent but ships
+`use5` with blank `item_text`. Also worth a dictionary note: `ghanbari_2016_helma_access` is
+misnamed — its 11 codes span two published subscales plus two dropped items, so it is not the
+access subscale.
+
+**One agent report was wrong and is corrected here so the later siblings don't inherit it.** The
+`_numeracy` agent reported the `.sav` carries no variable *or* value labels. It carries no VARIABLE
+labels on any of the 47 item columns (correct, and why no HELMA table can ever be `data_labels`)
+but it DOES carry value labels on all 47. Nothing shipped is affected. The stale-label finding is
+separately CONFIRMED: `num1-3` are labelled {1=correct, 2=incorrect, 9=don't know} while the data
+is strictly 0/1 (means 0.875/0.680/0.766, n=582, no 2s or 9s) — those labels must not be shipped as
+`option_text`, and this table's `option_text` is correctly blank.
+
+**Owed at upload:** `ghanbari_2016_helma_numeracy` carries `translation_source=mixed` because one
+span (the BMI-formula sentence) had no published English and was translated by this project. Its
+`public_note` records it; the ratified rule needs a line on the issues page when it ships.
+`check_provenance.R` did not flag it — the check appears to key on `machine_translation` only, so
+`mixed` rows carrying IRW-generated content pass silently. Worth a look at that check.
+
+**Export discipline:** agents used `table_sets.R` for the gates. One small `irw_fetch` (1,596 rows,
+`gesbert_2021_tdeq`) was a deliberate, negligible read.
+
+Cap is `batch_040`; this is 038, so the cap is not reached. 975 pending remain.
+
+## batch_039 — 2026-09-06
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 (100%).**
+
+Tables: `ghanbari_2016_helma_reading`, `ghanbari_2016_helma_understand`,
+`ghanbari_2016_helma_use`, `gholami_2017_periodontal_knowledge`,
+`gilbert_meta_16`, `gilbert_meta_27`. All six marked `done`.
+
+Gates: `normalize_nulls.R` fixed 1 file (understand, 45 lines).
+`audit_batch.R` 4 PASS / 2 WARN. `verify_batch.R` 3 PASS + 3 MISSING(exempt,
+data_labels). `lint_verification.R` clean, 6 rows, no problems — the
+NOT_NEEDED-rows-in-both-files fix held for a third consecutive round.
+`irw-validate` clean on all six. `check_provenance.R` reported no batch_039
+problem (its findings are the standing backlog: 19 blank + 44 absent
+`translation_source`, and `extremera_2016_shs` still lacking an issues-page
+entry). No circuit breaker; nothing hit a rate limit or spend cap.
+
+**Verification:** VERIFIED ×2 (reading, use), PARTIAL ×1 (understand),
+NOT_NEEDED ×3 (data_labels). Six tracker rows, one per written table.
+
+### Notable
+
+**The HELMA deposit is the pre-final 47-item field-test form, not the published
+44-item scale** — reached independently by all three ghanbari agents, and it
+reshapes two subscales. `reading6` is questionnaire item 15, which the paper's
+own factor analysis assigns to *understanding*, so the reading table is a 5-item
+reading subscale plus one understanding item, and the understanding table holds
+9 of that subscale's 10 published items. I re-checked this at Step 5b before
+letting it ship as a public_note: reading6→item15 at d=0.102 vs nearest rival
+0.448 (4.4×, bootstrap 99.2%), item 15 loading 0.50 on understanding vs 0.31 on
+reading, and Cronbach alpha settling it order-invariantly — reading1-5 = 0.857
+(published .86) and understand1-9+reading6 = 0.892 (published .89), where the
+rival groupings give 0.855/0.887 against subscales of the wrong published size.
+Confirmed. `use5` is likewise a dropped pilot item whose wording appears nowhere
+in the article or its four supplements, so it ships blank — this is the source's
+gap, not ours, and is the whole of that table's audit WARN. Consistent with what
+batch_038 found for `access10`/`access11`.
+
+**`understand1` vs `understand2` could not be separated** (items 16 vs 17):
+near-tied assignment distances, 0.026 excess cost to deny either, and a
+300-replicate bootstrap makes item 16's modal partner the *other* code. Recorded
+PARTIAL and stated in the public_note, correctly — the seven other pairs hold at
+47–99% modal.
+
+**Access trick worth reusing across the queue.** Every file in Harvard Dataverse
+`doi:10.7910/DVN/19PPE7` sits behind a required guestbook (ID 269 → HTTP 400)
+with the web UI behind the AWS WAF bot challenge (HTTP 202, empty body) — the
+same block previously logged for `gilbert_meta_40` and other Dataverse tables.
+The thumbnail endpoint is not guestbook-gated:
+`/api/access/datafile/<id>?imageThumb=100&format=original` returns the **original
+bytes** (verified byte-exact: 199,070 B for `baseline_testingtool.pdf`). That
+recovered both testing-tool PDFs, both codebook XLSXs and `genvar.do`, and turned
+a table that would have blocked into a data_labels pass. **This likely unblocks
+the other WAF/guestbook-blocked Dataverse tables sitting in the queue** and is
+worth a deliberate sweep.
+
+### Two items for triage
+
+1. **`gilbert_meta_27` — a data defect upstream of IRW, candidate for its own
+   issue.** `maser_lang_lttrs`, `_word1` and `_word2` were counts in the source
+   form (0–10 letters, 0–5 words) and reach IRW as 0/1 through a dichotomisation
+   made in Gilbert's IL-HTE dataset whose threshold is documented nowhere in the
+   deposit or in `genvar.do`. The agent declined to label those options; I
+   corroborated the defect at Step 5b with a number it did not use — if the cut
+   were the ASER pass-to-advance criterion, the count advancing to `word1` would
+   equal the count scoring 1 on `lttrs`, and it does not: at endline `lttrs` has
+   n=8552, mean 0.12 (≈1,026 scoring 1) while 3,087 mothers were administered
+   `word1`, 3× as many. So the applied threshold is demonstrably *not* the
+   instrument's skip logic. Resolving it needs Gilbert's construction code.
+
+2. **A disclosure gap `check_provenance.R` does not currently catch.**
+   `gilbert_meta_27` ships IRW-produced English for the reading paragraph and the
+   story under `translation_source=mixed`. The check's public-issues-page rule
+   keys on `machine_translation`, so the table passed clean and was never routed
+   to `itemtext_issues.qmd` — but the 2026-09-02 ruling is that IRW-generated
+   content carries a public line. It needs one at upload, and the check's
+   coverage of `mixed` is worth widening.
+
+Also disclosed rather than silently resolved: `gilbert_meta_16`'s replication
+package gives **two different wordings for 37 of its 71 items** (final
+India-adapted item map vs shorter, 80-char-truncated Stata labels — "biscuits"
+vs "sandwiches", "Krishna" vs "Chris"). The item-map wording ships; the
+code↔item mapping is identical in both, so only the exact administered sentence
+is uncertain. `gholami_2017_periodontal_knowledge` ships `False`/`True` option
+text because live `resp` is the study's own 0/1 scoring of a four-option MCQ,
+with the alternatives named in the public_note.
+
+Cap not reached (cap is batch_040); the next firing picks up batch_040, which
+will be the last round under the current cap.
+
+### batches 038 and 039 both 100%; batch_040 OOM-killed twice and NOT run — 2026-09-06
+
+Fired unattended at Ben's request after the batch_037 upload.
+
+**batch_038 — 6 written / 0 blocked / 0 failed.** `gerber_2022_eas_temperament`,
+`gesbert_2021_tdeq`, and four `ghanbari_2016_helma_*`. Gates: audit 5 PASS + 1 WARN, verify 6
+PASS, lint 0 ERROR. Its Step 5b re-check **overturned one of its own results**: 
+`ghanbari_2016_helma_access` shipped claiming VERIFIED on an EFA nearest-column route, but a
+300-replicate bootstrap recovered the claimed column for q5 in 14.4% of replicates against the
+runner-up's 34.7% — downgraded to PARTIAL. The subscale split survives (alpha is order-invariant,
+0.614/0.705 against published 0.61/0.71); the within-block order does not.
+
+**batch_039 — 6 written / 0 blocked / 0 failed.** The three remaining `ghanbari_2016_helma_*`,
+`gholami_2017_periodontal_knowledge`, `gilbert_meta_16`, `gilbert_meta_27`. Gates: audit 4 PASS +
+2 WARN (both explained), verify 3 PASS + 3 exempt, lint clean. `_reading` and `_understand`
+landed in the same round as batch_038 advised, without anyone reordering the queue — they were
+already adjacent.
+
+**batch_040 was attempted TWICE and never ran.** Both attempts were killed for host memory
+pressure at agent launch, not mid-round. The first attempt got as far as claiming its six rows at
+16:49:51 and wrote `cron_logs/round_2026-09-06_1649.log`; the second never wrote a log at all.
+Verified before touching anything: `batch_040/` held **zero files**, no round agent or runner
+process survived, and the only dirty file was the claim itself. Reconciled by `git restore` of
+the uncommitted claim — the diff was exactly those six rows — and the empty `batch_040/` was
+removed so the Step 0 cap is not consumed by a round that never happened. **batch_040 is still
+owed.**
+
+That is three OOM kills in one session (batch_038's first attempt, and batch_040 twice), all at
+launch. Round size is not the lever — see the note above. Firing stopped here rather than
+retrying a third time.
+
+**Queue: 296 done / 69 blocked / 12 failed / 55 excluded / 969 pending.** batches 038 and 039 are
+extracted and gated but **not triaged, not staged, not uploaded** — that is Ben's next session.
+
+**A gap that fired in BOTH rounds, and is systematic rather than a one-off.**
+`check_provenance.R` keys its public-issues-page rule on `translation_source=machine_translation`
+only, so rows carrying `mixed` — IRW-produced English alongside sourced text — pass it clean and
+are never routed to `itemtext_issues.qmd`, contrary to the 2026-09-02 ruling.
+`ghanbari_2016_helma_numeracy` (038) and `gilbert_meta_27` (039) both hit it. Widening that check
+is a small fix and is owed before either batch uploads.
+
+**An access route worth a deliberate sweep.** Harvard Dataverse `doi:10.7910/DVN/19PPE7` is
+behind a required guestbook plus the AWS WAF challenge — the same block logged for
+`gilbert_meta_40`. The thumbnail endpoint is not guestbook-gated, and
+`?imageThumb=100&format=original` returns the original bytes, verified byte-exact. That turned a
+would-be block into a data_labels pass, and may reopen other blocked Dataverse tables.
+
+### batches 038 and 039 triaged — all 12 staged, 0 held — 2026-09-06
+
+Gates re-run live for both, not taken from the round reports. `normalize_nulls` 0 of 6 in each.
+batch_038: audit 5 PASS + 1 WARN, verify 6 PASS, lint 0 ERROR / 1 WARN. batch_039: audit 4 PASS +
+2 WARN, verify 3 PASS + 3 exempt, lint clean. Every WARN is explained in `notes.csv` and none is
+an itemtext defect: blank `item_text` on access10/access11 and use5 (items dropped between the
+47-item field-test form and the published 44-item HELMA, wording published nowhere), and
+gilbert_meta_27's row-count and blank-`option_text` WARNs (an ASER skip ladder, and three items
+dichotomised upstream with no documented threshold).
+
+**The claim worth re-deriving independently was the HELMA 47 -> 44 reconstruction**, because all
+seven `ghanbari_2016_helma_*` tables across both batches rest on it. Recomputed Cronbach alpha
+directly from the cached S3 `.sav` (n=582) rather than trusting either round: every one of the
+eight published Table 3 values reproduces to <=0.005 —
+
+    self-efficacy access1-4 .614/.61   access access5-9 .705/.71   reading1-5 .857/.86
+    understanding understand1-9+reading6 .892/.89   appraisal .815/.81   use1-4 .647/.65
+    communication com1-8 .827/.83      all 44 retained .932/.93
+
+Alpha is order-invariant, so this confirms block MEMBERSHIP — including the `reading6` move from
+the reading block to understanding, which is the load-bearing and most surprising part.
+
+**One WARN resolved rather than passed through.** `lint_verification` flagged
+`ghanbari_2016_helma_comm` as VERIFIED while its evidence hedges. Reading the evidence, the hedge
+is precisely that the loading route cannot establish that the `.sav`'s `com` block IS the
+communication block. The alpha recomputation above closes exactly that gap (com1-8 .827 vs .83),
+so VERIFIED is retained rather than downgraded, and a note recording why was appended to
+`batch_038/notes.csv`. Contrast the sibling `_access`, correctly downgraded to PARTIAL: its
+failure was within-block ORDER, which alpha cannot rescue.
+
+**A trap found the hard way: `draft_issues_qmd.R` OVERWRITES `fixes/itemtext_issues_draft.md`,
+it does not append.** batch_037's six entries were still unapplied when the 038/039 draft was
+generated, so they were clobbered — five of them hand-written at triage and not regenerable.
+Recovered from commit 208add8 and merged back; the file now carries all **18** owed entries and
+the YAML parses as 18 unique tables. Anyone drafting on top of unapplied entries must do the same.
+
+**Staged all 12 into `itemtables/clean/`**, byte-identical to their batch copies, nothing but
+`*__items.csv` present. Ben had already emptied `clean/` of the uploaded batch_037 six.
+
+Expected row/item counts for the post-upload COUNT(*) check:
+
+    gerber_2022_eas_temperament 100/20   gesbert_2021_tdeq 150/25
+    helma_access 55/11   helma_appraise 25/5   helma_comm 40/8   helma_numeracy 6/3
+    helma_reading 30/6   helma_understand 45/9   helma_use 25/5
+    gholami_2017_periodontal_knowledge 6/3   gilbert_meta_16 142/71   gilbert_meta_27 36/18
+
+**Two issues-page entries are mandatory at upload, not optional.** `ghanbari_2016_helma_numeracy`
+and `gilbert_meta_27` both carry `translation_source=mixed` with IRW-authored English (a BMI
+formula sentence; the paragraph and story passages). Both are now caught by the widened
+`check_provenance.R` (7efc8c9) instead of passing silently.
+
+**Logged, not fixed, on Ben's call: the `translation_source` blank backlog.**
+`gerber_2022_eas_temperament` (038) and `gholami_2017_periodontal_knowledge` (039) ship English in
+the base fields without recording whose English it is, joining 17 earlier tables with the same
+gap. gholami's is determinable from its own note (the study's own English). gerber_2022's is not:
+its English is taken from an unrelated third study's table (IJERPH 2022;19(3):1387), which matches
+no value in `provenance_vocab.csv` — `official_instrument_english` means the instrument
+publisher's own. That vocabulary gap wants one decision across all 19, not a piecemeal patch.
+Nothing here blocks upload; `check_provenance.R` reports it as a gap it cannot resolve.
