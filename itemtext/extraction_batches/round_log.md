@@ -6370,3 +6370,53 @@ entries opened as datapages/irw#155.
 **Worth a guard.** Nothing currently reconciles "rows marked `done`" against "tables present in a
 dataset or draft". A periodic check of exactly that would have caught this in seconds, and would
 catch the same class of miss for any future batch closed out by hand.
+
+## batch_044 — 2026-09-07
+
+6 tables claimed, 6 agents (one per table). **written 4 / blocked 2 / failed 0** — yield 67%.
+No agent was reported failed; no rate limit or spend cap was hit. Circuit breaker NOT tripped
+(0% failed, threshold 30%).
+
+**Written:** `hayek_2022_attitude`, `hayek_2022_self_efficacy`, `hayek_2022_subj_norm`,
+`hellstrom_2019_isi`.
+
+**Blocked (determinate, retry test NO on both — not counted by the breaker):**
+- `hellstrom_2019_psqi` — PSQI, owned by the University of Pittsburgh: "may be reprinted without
+  charge only for non-commercial research and educational purposes", plus an operating fee-based
+  commercial licence with revenue sharing to the author. The 2026-09-05 widening + 2026-09-06
+  `wording_rights` retirement blocks it outright; the PLOS deposit's CC BY covers the response
+  data, not the instrument. Extraction was complete and inference-free (`data_labels`, 13 of 14
+  columns labelled in the `.sav`) before the rights check stopped it — banked in provenance.csv so
+  a reversal is a re-run, not a re-derivation.
+- `hellstrom_2019_pss14` — PSS, applying the 2026-09-06 irw#1955 ruling that withdrew the three
+  live PSS-10 tables on the rights holder's own clause. Not an availability gap: the Swedish
+  PSS-14, matching this study's administration language and 0-4 resp set exactly, was located and
+  cached.
+
+Both blocks are the head-of-queue pattern the protocol predicts, not pipeline health: two
+well-known copyrighted clinical instruments in one four-instrument study.
+
+**Gates:** normalize_nulls fixed 2 of 4 files; audit_batch 4/4 **PASS with no anomalies** (so no
+WARNs to explain under Step 5c); verify_batch PASS 2 / MISSING(exempt) 2; lint_verification 5 rows,
+no problems; `irw-validate` ok on all 4; `check_provenance.R` clean (the 3 `mixed` REVIEW rows are
+pre-existing and unrelated to this batch). Verification: 2 PARTIAL, 2 NOT_NEEDED (`data_labels`),
+1 NO_ROUTE (blocked table) — NOT_NEEDED rows written into both the batch file and the permanent
+tracker, so lint came back clean first time.
+
+**Step 5b re-check (orchestrator, independent).** Re-verified the `hayek_2022_attitude` anchor
+reversal, since it ships in a public note. CONFIRMED: `Tot_Att` equals the plain mean of the four
+stored columns for 345/345 (a CON-sign-flipped mean matches only 93/345), the Measures section
+states the reversal explicitly, and the marginals support it for *both* negative items, not just
+att4 — stored `Att_CON2` is 80.0% above 0 and `Att_CON1` 14.4%, each plausible only under the
+reversed reading. QUALIFICATION worth keeping: the correlation structure does not corroborate it
+(Spearman vs the two positive items is -0.125/-0.244 for `Att_CON1`, +0.009/+0.035 for `Att_CON2`,
+where a correctly-applied reversal predicts positive). Weak evidence — pro/con blocks routinely
+correlate negatively — but it is why the shipped public_note's residual doubt on att3 is correct and
+should not be dropped at triage.
+
+**Lead, not a verdict (flagged by the pss14 agent, NOT re-audited here and no issue filed):**
+`cormier_2024_pss4` and `gillman_2023_pss` are live and unblocked despite sharing the PSS's rights
+holder — `gillman_2023_pss` was completed 2026-09-06, the same day as the irw#1955 withdrawals.
+Candidates for the irw#1954 re-audit; a human should decide whether the ruling reaches them.
+
+Cap (batch_050) not reached; next round picks up batch_045.
