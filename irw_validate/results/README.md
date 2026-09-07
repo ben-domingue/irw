@@ -300,17 +300,46 @@ by a processing script, a probe of the group structure, or both, but only
 
 ---
 
-## `resp_string_na_2026-09-07.csv` — the literal "NA" as a published response (#2029)
+## The literal "NA" as a published response (#2029) — two files, on purpose
 
-The file #2029 promised and never landed. Produced by
-`metadata/hotfixes/report_string_resp_na.R`, which predates the issue: it was
-written on 2026-08-24 for the open `n_responses` question in
-`metadata/pipeline_logs/NEXT_RUN_NOTES.md`, and writes to
-`metadata/hotfixes/string_resp_na_report.csv` — a path `.gitignore` swallows
-(`metadata/**/*.csv`). **That is why this evidence keeps evaporating**, and why
-the copy lives here instead. Regenerating it is
+There are **two** sweeps of this in here, measured a day apart by two different
+instruments. Read this before using either.
+
+| file | instrument | landed | tables | columns |
+|---|---|---|---|---|
+| `resp_string_na_2026-09-06.csv` | the Python sweep written for #2029 | #2030 | 299 | `table, shard, n_rows, n_resp_na, share` |
+| `resp_string_na_2026-09-07.csv` | `metadata/hotfixes/report_string_resp_na.R` | #2048 | 300 | adds `resp_type`, `n_resp_not_null`, `n_resp_blank`, `n_resp_excl_na` |
+
+**They agree**, which is the point of keeping both: independent code paths, a day
+apart, landing within 0.1% of each other (9,951,293 vs 9,941,057 `"NA"` rows).
+That agreement is worth more than either file alone, because the headline number
+is large enough to be worth doubting.
+
+**Use 09-07 for the `n_responses` question and 09-06 for the share-by-table
+view.** Only 09-07 separates blank/whitespace values from the `"NA"` token and
+carries `n_resp_excl_na`, which is what answers the open question in
+`metadata/pipeline_logs/NEXT_RUN_NOTES.md`; only it records `resp_type`, so it is
+also the record of which tables are string-typed at all rather than which carry
+the token.
+
+### A correction, since it was stated wrongly in #2048
+
+The 09-07 section originally called this "the file #2029 promised and never
+landed". **That was wrong** — #2030 landed the 09-06 file at 04:45 on 2026-09-07,
+hours before #2048 was written. The claim came from reading a working tree
+checked out on an unrelated branch instead of `main`. The file was there.
+
+What *is* true, and is the reason the R sweep's output kept vanishing: it writes
+to `metadata/hotfixes/string_resp_na_report.csv`, a path `.gitignore` swallows
+(`metadata/**/*.csv`). Regenerating it is
 `Rscript hotfixes/report_string_resp_na.R` from `metadata/` (resumable, queries
-only, no export quota); copy the result here.
+only, no export quota); copy the result here, not into `metadata/`.
+
+### `resp_string_na_2026-09-07.csv`
+
+Produced by `metadata/hotfixes/report_string_resp_na.R`, which predates the
+issue — written 2026-08-24 for the `n_responses` question in
+`NEXT_RUN_NOTES.md`.
 
 One row per string-typed `resp` table: row count, responses counted today, the
 `"NA"` count, blanks, what `n_responses` would become, and the percentage.
