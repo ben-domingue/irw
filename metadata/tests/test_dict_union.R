@@ -651,6 +651,55 @@ local({
           "no table carries two Description overrides")
 })
 
+
+##--------------------------------------------------- OSF permission fill ---
+##A licence is the one field where a wrong value is worse than a blank, so the
+##load-bearing property is that this can only ever fill, never overwrite.
+local({
+    mk <- function(url, lic) {
+        d <- fake_biblio(biblio_row("a_2020"))
+        d$URL__for_data_ <- url; d$Derived_License <- lic; d
+    }
+    ap <- function(d) suppressMessages(apply_osf_permission(d, "core", c("qtqpb")))
+
+    check(identical(ap(mk("https://osf.io/qtqpb/", NA_character_))$Derived_License[1],
+                    "Permission via Email"),
+          "a listed OSF project with a blank licence is filled")
+
+    ##The one that matters. #2058 asks a depositor to set a public licence; when
+    ##one is recorded in the sheet it must beat this, or we would publish
+    ##"Permission via Email" over a real CC BY.
+    check(identical(ap(mk("https://osf.io/qtqpb/", "CC BY 4.0"))$Derived_License[1],
+                    "CC BY 4.0"),
+          "a recorded licence is never overwritten by the permission fill")
+
+    for (empty in list(NA_character_, "", "NA")) {
+        check(identical(ap(mk("https://osf.io/qtqpb/", empty))$Derived_License[1],
+                        "Permission via Email"),
+              paste0("the sheet's blank spelling ", dQuote(as.character(empty)),
+                     " counts as blank"))
+    }
+
+    check(identical(ap(mk("https://osf.io/zzzzz/", NA_character_))$Derived_License[1],
+                    NA_character_),
+          "an OSF project not on the list is left blank")
+    check(identical(ap(mk("https://example.org/qtqpb/", NA_character_))$Derived_License[1],
+                    NA_character_),
+          "a non-OSF url carrying the same string is not matched")
+
+    ##Ids are alphanumeric, so a prefix match would sweep in a longer id.
+    check(identical(ap(mk("https://osf.io/qtqpbXY/", NA_character_))$Derived_License[1],
+                    NA_character_),
+          "a longer id starting with a listed id is not matched")
+})
+
+local({
+    check(!anyDuplicated(OSF_PERMISSION_PROJECTS),
+          "no OSF project is listed twice")
+    check(all(grepl("^[a-z0-9]{5}$", OSF_PERMISSION_PROJECTS)),
+          "every listed OSF project id is well formed")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }

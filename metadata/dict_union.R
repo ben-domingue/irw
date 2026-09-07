@@ -815,3 +815,71 @@ apply_license_attribution <- function(biblio, label = "core",
     message(label, ": attached second-source attribution to ", n, " row(s)")
     biblio
 }
+
+##---------------------------------------------------------------------------
+##Licence of record for the OSF deposits that state none.
+##
+##115 published tables across 23 OSF projects carry a blank `Derived_License`.
+##OSF makes setting a licence optional and defaults to none, so a blank here
+##means the DEPOSIT is silent rather than that nobody checked -- confirmed
+##directly for osf.io/3xvys, which the OSF API reports as `license: NONE SET`.
+##
+##RULING (Ben, 2026-09-07): these reached IRW under emailed permission from the
+##depositors; record them as such. That is HIS ruling written down, not
+##something this repo established -- no correspondence is cited or held here.
+##The value belongs in the Data Dictionary sheet, and this is a stopgap so that
+##users stop seeing a blank licence in the meantime.
+##
+##KEYED ON THE OSF PROJECT, not the 115 table names. A table added later from
+##the same deposit arrived under the same permission, so it should inherit it;
+##115 names would also go stale the moment one is renamed.
+##
+##BLANK-ONLY. A licence recorded in the sheet always wins, so this can never
+##overwrite a real one -- which matters for osf.io/3xvys specifically, where
+###2058 asks the depositor to set a public licence. If that lands, the sheet
+##supersedes this automatically and the entry can be deleted.
+OSF_PERMISSION_PROJECTS <- c(
+    "qtqpb",  # 19  eammi_grahe_2018_*
+    "75crd",  # 15  parentalempathy_gonzalez_2021_*
+    "4fdw9",  # 10  darkfactorfrench_pischel_2026_*
+    "rjbx2",  #  9  hachenberger_2025_*
+    "3w6ap",  #  7  kazarovytska_2026_*
+    "t3a9r",  #  7  transyouth_leshin_2026_*
+    "zevcs",  #  7  personalitychange_kramer_2025_*
+    "3xvys",  #  6  parenting_anunciacao_2025_*  -- see #2058
+    "6nm2s",  #  6  thirdpartypunishmentunfairsharing_mcauliffe_*
+    "rf9k8",  #  5  talaifar_2025_*
+    "69nwe",  #  4  smpi_lorenzoluaces_2020_*
+    "g8dvj",  #  4  morgan_2026_music_personality_*
+    "c6rqy",  #  2  christensen_2018_*
+    "gvx7s",  #  2  itemrandom_buchanan
+    "kqxd5",  #  2  west_2021_aggnet_*
+    "snmqt",  #  2  mclaughlin_samuel_2025_*
+    "umdg3",  #  2  haehner_2026_personality_subsaharan_*
+    "9cm75",  #  1  steinberg_2023_mentalizing_momentary
+    "frwq4",  #  1  kay_2025_antonyms
+    "mbywd",  #  1  west_2022_psychnet_pclsv
+    "thdf5",  #  1  vollbracht_et_al_2026_ambulatory_assessment
+    "twgcu",  #  1  schoen_2019_to_2022_mkt
+    "zajk6"   #  1  kalimahnorms_alzahrani
+)
+OSF_PERMISSION_VALUE <- "Permission via Email"
+
+apply_osf_permission <- function(biblio, label = "core",
+                                 projects = OSF_PERMISSION_PROJECTS,
+                                 value = OSF_PERMISSION_VALUE) {
+    if (!length(projects) ||
+        !all(c("URL__for_data_", "Derived_License") %in% names(biblio))) {
+        return(biblio)
+    }
+    ##`\\b` would not anchor here: OSF ids are alphanumeric, so "qtqpb" could
+    ##match a longer id starting with it. Require the id to end the path
+    ##segment instead.
+    pat <- paste0("osf\\.io/(", paste(projects, collapse = "|"), ")(/|$|[?#])")
+    hit <- grepl(pat, biblio$URL__for_data_) & dict_blank(biblio$Derived_License)
+    hit[is.na(hit)] <- FALSE
+    biblio$Derived_License[hit] <- value
+    message(label, ": set `", value, "` on ", sum(hit),
+            " OSF row(s) that had no licence")
+    biblio
+}
