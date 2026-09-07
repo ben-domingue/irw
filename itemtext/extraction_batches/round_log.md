@@ -5856,3 +5856,17 @@ positive on the phrase "does NOT establish", recorded in `notes.csv` rather than
 Export discipline held — ground truth via `irw_table_sets()`/`--table-sets` throughout; the only
 exports were small, deliberate ones for mapping verification (the largest, `gilbert_meta_29`, for
 the orchestrator's own re-check).
+
+### Round cap raised batch_040 -> batch_050 — 2026-09-06
+
+batch_040 completed 6/6 and reached the cap, which ends the runner rather than exhausting the
+queue: 963 rows are still `pending`. Ben asked for the cap to be raised and chose **batch_050**,
+allowing ten further rounds (~60 tables).
+
+One edit, to Step 0 of `round_prompt_v1.md`, which is still the ONLY copy — `run_round.sh` greps
+the number back out of the prompt rather than duplicating it
+(`itemtables/\Kbatch_\d+(?= already exists \(round cap reached\))`), so the wording of that line is
+load-bearing and must not be reflowed. Verified after editing that the runner's own regex still
+returns `batch_050`. The cap is inclusive: rounds run up to and including the named batch.
+
+Committed before any round is fired, because the runner refuses a dirty worktree.
