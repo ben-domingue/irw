@@ -5870,3 +5870,45 @@ load-bearing and must not be reflowed. Verified after editing that the runner's 
 returns `batch_050`. The cap is inclusive: rounds run up to and including the named batch.
 
 Committed before any round is fired, because the runner refuses a dirty worktree.
+
+### batch_040 triaged — all 6 staged, 0 held — 2026-09-06
+
+Gates re-run live: `normalize_nulls` 0 of 6, audit 5 PASS + 1 WARN, verify 4 PASS + 2 exempt,
+lint 0 ERROR / 1 WARN. The audit WARN (`gilbert_meta_29`) is the ASER skip ladder plus the three
+count items dichotomised upstream — a property of the response data, identical in shape to
+`gilbert_meta_27` in batch_039, and not an itemtext defect.
+
+**The claim re-checked independently was the `gillman_2023_pss` reverse-scoring finding**, because
+it asserts a defect in a published paper and would otherwise ship on the round's word alone.
+Recomputed here from live data: alpha with **no** reversal = **0.6731**, against Gillman et al.'s
+published .67; properly keyed = **0.8637**; all 24 cross-polarity correlations negative, the least
+so at -0.093 (n=404 complete cases, resp 0-4). The paper computed reliability without
+reverse-scoring PS_4/5/7/8. **The IRW table is correct and the paper is not**, which is exactly
+what the shipped `public_note` says.
+
+**One lint WARN upheld rather than downgraded.** `gilbert_meta_55` is VERIFIED while its evidence
+hedges, but the hedge is about which of three grade-level variants a given child received — the
+table has no grade column and therefore ships all three wordings. Item identity itself is pinned
+uniquely: published per-item proportions match to 2 dp for all 15 (max deviation 0.0000), and the
+item3/item8 tie at 0.67 is broken by the published marks (5 vs 4), recovered from IVR_Data.dta.
+The hedge disclaims something the table does not claim, so VERIFIED stands.
+
+**Staged all 6 into `itemtables/clean/`**, byte-identical to their batch copies, nothing else
+present. The 12 uploaded batch_038/039 files were cleared first — all confirmed stamped before
+deletion — on the same call Ben made for batch_037's six.
+
+Expected counts for the post-upload COUNT(*) check:
+
+    gilbert_meta_29 30/15   gilbert_meta_55 30/15   gillman_2023_pss 50/10
+    girma_2021_oslo3 14/3   girma_2021_phq9 36/9    gizaw_2023_phq9 36/9
+
+**Six issues-page entries drafted; `gilbert_meta_29`'s is mandatory** — part of its shipped English
+(the paragraph and story passages) is IRW's. That is the third `mixed`-class table in three rounds,
+after `ghanbari_2016_helma_numeracy` and `gilbert_meta_27`; the widened `check_provenance.R` caught
+all three, and it correctly reports `gilbert_meta_29` as the only outstanding one now. Regenerating
+the draft file was safe this time because the previous 18 entries are merged (datapages/irw#147);
+had they still been pending, the drafter would have clobbered them again.
+
+**No new `translation_source` blanks.** The round filled three from documented sources
+(`girma_2021_phq9` and `gizaw_2023_phq9` official_instrument_english, `gilbert_meta_55`
+study_supplied), so the 19-table backlog did not grow.
