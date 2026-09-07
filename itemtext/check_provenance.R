@@ -54,8 +54,21 @@ if (!length(files)) stop("no provenance.csv found under ", here)
 ## a content field, indistinguishable to a reader from a key the study itself
 ## published, which is precisely the situation the 2026-09-02 machine_translation
 ## ruling addressed. Same shape, same remedy.
+##
+## `review` is a SEPARATE and weaker claim than `discloses`, added 2026-09-06.
+## `mixed` means "different fields came from different sources -- say which in
+## the note", so unlike `machine_translation` it does NOT by itself say whether
+## any of those sources was this project. Some mixed rows carry IRW-authored
+## English and owe a page entry; some are two published sources combined and owe
+## nothing. The field cannot tell them apart, and guessing either way is wrong:
+## asserting a disclosure is owed would fail the gate on clean tables, and
+## staying silent is what let `ghanbari_2016_helma_numeracy` (batch_038) and
+## `gilbert_meta_27` (batch_039) reach a shipping decision unflagged in two
+## consecutive rounds. So mixed rows are REPORTED for a human to read the note,
+## and never decide the exit status.
 CHECKED <- list(
     list(field = "translation_source", discloses = "machine_translation",
+         review = "mixed",
          why = "Each ships English this project generated"),
     list(field = "key_source",         discloses = "derived_from_responses",
          why = "Each ships an answer key this project derived rather than transcribed")
@@ -66,6 +79,7 @@ sub_blank <- character(0)
 sub_nocol <- character(0)
 needs_note <- character(0)
 note_reason <- character(0)
+needs_review <- character(0)
 n_rows <- 0L
 
 for (f in files) {
@@ -90,6 +104,8 @@ for (f in files) {
         hit <- x$table[vals == spec$discloses]
         needs_note <- c(needs_note, hit)
         note_reason <- c(note_reason, rep(spec$why, length(hit)))
+        if (!is.null(spec$review))
+            needs_review <- c(needs_review, x$table[vals %in% spec$review])
     }
 
     if ("text_source" %in% names(x)) {
@@ -215,6 +231,26 @@ if (file.exists(page) && length(needs_note)) {
     }
 } else {
     undisclosed <- character(0)
+}
+
+## Reported, never enforced -- see the `review` note on CHECKED above. A mixed
+## row that already has a page entry needs no second look, so only the ones
+## missing from the page are listed; that keeps this quiet once a batch is
+## disclosed instead of nagging on every run.
+if (file.exists(page) && length(needs_review)) {
+    txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
+    unreviewed <- unique(needs_review[!vapply(needs_review, grepl, logical(1),
+                                              x = txt, fixed = TRUE)])
+    if (length(unreviewed)) {
+        cat(sprintf("\ntranslation_source=mixed, no issues-page entry: %d table(s) -- REVIEW, NOT A FAILURE\n",
+                    length(unreviewed)))
+        cat("    ", paste(unreviewed, collapse = ", "), "\n", sep = "")
+        cat("  `mixed` does not say WHICH field came from where. Read each note: if any\n",
+            "  part of the shipped text was written by this project, it owes a line on the\n",
+            "  issues page under the 2026-09-02 ruling, exactly as machine_translation does.\n",
+            "  If every part came from a published source, nothing is owed -- that is why\n",
+            "  this does not affect the exit status.\n", sep = "")
+    }
 }
 
 ## The vocabulary always decides the exit status: it is checked against files in
