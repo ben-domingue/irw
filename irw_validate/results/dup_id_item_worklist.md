@@ -4,6 +4,16 @@ Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
 `README.md`). **73 of the 101 flagged tables need a data change**; the other 28
 need none.
 
+> **Where this work is tracked, as of 2026-09-07.** #1842 is **closed** --
+> superseded by **#1856**, which is the entry point for everything still open
+> here and carries the current counts. Do not open #1842 looking for state.
+>
+> #1856's re-measurement against the released v48.0 on 2026-09-05 supersedes the
+> 2026-09-03 line below: **50 tables live, 7 will not be fixed (`duolingo_*`),
+> 16 still open** -- and each of the 16 is blocked on a source file or a
+> decision, not on effort. The block table below is history plus the
+> corrections recorded against it, not a work order.
+
 **Status, 2026-09-03.** Blocks A, B, C, D, E and G are **done, uploaded and
 verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
 `excess_occ` 0 where the repeat is the design). Two of block F and two of block
