@@ -80,6 +80,7 @@ sub_nocol <- character(0)
 needs_note <- character(0)
 note_reason <- character(0)
 needs_review <- character(0)
+withdrawn <- character(0)
 n_rows <- 0L
 
 for (f in files) {
@@ -106,6 +107,16 @@ for (f in files) {
         note_reason <- c(note_reason, rep(spec$why, length(hit)))
         if (!is.null(spec$review))
             needs_review <- c(needs_review, x$table[vals %in% spec$review])
+    }
+
+    ## A withdrawn table ships no item text at all, so it has nothing to disclose.
+    ## The signal is the public_note's opening sentence, which every withdrawal
+    ## written by tools/withdraw_wording_rights.py shares; there is no `withdrawn`
+    ## column to read, and the `uploaded` stamp deliberately stays put as history.
+    if ("public_note" %in% names(x)) {
+        pn <- ifelse(is.na(x$public_note), "", trimws(x$public_note))
+        withdrawn <- c(withdrawn,
+                       x$table[startsWith(pn, "IRW does not offer item text for")])
     }
 
     if ("text_source" %in% names(x)) {
@@ -213,12 +224,40 @@ if (file.exists(page)) {
     cat(sprintf("\nissues page not found at %s -- skipping the disclosure check\n", page))
 }
 
+## A WITHDRAWAL ENDS THE DISCLOSURE, ratified by three commits before it was
+## written down here. `datapages/irw` a1b08bb ("withdrawal entries removed"),
+## d2274e1 and 33e1268 between them deleted 17 issues-page entries for tables
+## whose wording had been pulled under the #1945/#1955 rulings -- the page
+## describes what IRW ships, and a withdrawn table ships nothing to caveat. The
+## five entries carrying response-DATA facts (unreversed items, shifted anchors,
+## dominguez_2018_jcs item_17) were rewritten instead of deleted, which is the
+## line: the disclosure follows the wording, the data caveats stay.
+##
+## Until 2026-09-07 this check did not know that, so it went on demanding a page
+## line for `extremera_2016_shs` -- withdrawn 2026-09-06, its entry deleted the
+## same day -- and the gate was red on main for a defect whose only fix was to
+## revert one of those commits. Withdrawn tables are now excluded and counted
+## separately, so the exemption is visible rather than silent (irw#1970).
+##
+## The trust boundary: this takes the public_note at its word. A row that claims a
+## withdrawal while its wording is still live on Redivis would be exempted wrongly,
+## and nothing offline can see that -- red_up's draft/published listing is what would.
+disclosure_drop <- !(needs_note %in% withdrawn)
+needs_note_all  <- needs_note
+needs_note      <- needs_note[disclosure_drop]
+note_reason     <- note_reason[disclosure_drop]
+needs_review    <- setdiff(needs_review, withdrawn)
+n_withdrawn     <- length(unique(needs_note_all[!disclosure_drop]))
+
 if (file.exists(page) && length(needs_note)) {
     txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
     undisclosed <- needs_note[!vapply(needs_note, grepl, logical(1),
                                       x = txt, fixed = TRUE)]
     cat(sprintf("\nIRW-generated content: %d table(s), of which %d have no entry on the public issues page\n",
                 length(needs_note), length(undisclosed)))
+    if (n_withdrawn)
+        cat(sprintf("  (%d further table(s) declared IRW-generated content that has since been\n  withdrawn -- no wording ships, so no entry is owed. %d withdrawn in all.)\n",
+                    n_withdrawn, length(unique(withdrawn))))
     if (length(undisclosed)) {
         for (why in unique(note_reason)) {
             u <- undisclosed[undisclosed %in% needs_note[note_reason == why]]
