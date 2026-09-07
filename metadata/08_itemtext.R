@@ -1,6 +1,6 @@
 ## Incremental update: processes only tables not yet in itemtext_metadata,
 ## then appends to the existing table and writes an updated CSV.
-## For a full recompute (e.g. new columns), use 08_itemtext_recompute.R.
+## For a full recompute (e.g. new columns), use hotfixes/08_itemtext_recompute.R.
 ## Requires: quanteda, quanteda.textstats
 
 library(redivis)
