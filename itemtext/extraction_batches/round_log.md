@@ -6806,3 +6806,50 @@ Uploaded 4/4, verified 80/16, 80/20, 63/9, 140/28. Draft 70 -> **74 tables**. St
 "D-block scale (unlabeled construct)" but is Campbell's **Index of Well-Being**, and the sibling
 blocks in that deposit appear to be named just as generically — likely a cluster of Description
 fixes rather than one row.
+
+## batch_048 — 2026-09-07
+
+6 tables claimed, 6 agents (one per table), all six returned. **Written 5 / blocked 1 / failed 0.**
+Yield 5/6 = 83%. Circuit breaker not tripped (0% failed, threshold 30%).
+
+- **done:** `hui_2024_who5`, `humor_styles`, `iandolo_2021_asq`, `ibrahim_2015_bfi`, `ibrahim_2015_sf36`
+- **blocked:** `idemudia_2025_s301` — the paper never mentions the `S301` block at all and the deposit
+  is bare SoSci codes with no labels at any level, so no wording exists in any form (not even
+  option-only). Retry test NO. Step 3b did pin the construct from the deposit's own composites
+  (mean(S301_01..06) vs `Institutional_support`, r = 1.000), but the instrument is never named.
+  Row added to `itemtables/pending_index_notes.csv`.
+
+**Gates.** `normalize_nulls.R` fixed 2 of 5 files. `audit_batch.R`: 5/5 PASS, no anomalies — so no
+WARNs to explain under Step 5c. `verify_batch.R`: 4 PASS + 1 MISSING(exempt) (`iandolo_2021_asq` is
+`data_labels`). `lint_verification.R`: 5 rows, no problems. `irw-validate`: all 5 ok.
+`check_provenance.R`: no failure. Its two advisory lines are both pre-existing and not from this
+round — the 3 IRW-generated tables owing an issues-page line are `hua_2023_*`/`huang_2023_d_scale`
+from earlier batches, and `iandolo_2021_asq` appears on the `translation_source=mixed` REVIEW list
+where nothing is owed (its English `item_text_translated` is Feeney's published original and the
+`option_text_translated` endpoints are the paper's own verbatim text — no part was written by this
+project).
+
+**Step 5b orchestrator re-check — a data defect, confirmed.** The `iandolo_2021_asq` agent reported
+that items ASQ_20/21/33 carry opposite stored polarity across subsamples. Re-checked independently
+against the deposit workbook and confirmed with fresh numbers: the workbook's own headers mark
+exactly those three and no others as reverse (`ASQ-20-R- DC`, `ASQ-21-R DC`, `ASQ-33-R C`, the
+canonical Feeney reverse set), and each item's mean correlation with its own subscale's non-reverse
+siblings flips sign at the Spain boundary — ASQ_20 −0.322 (Spain, n=139) vs +0.242 (Italy, n=85) and
++0.235 (Japan, n=130); ASQ_21 −0.305 vs +0.106 / +0.321; ASQ_33 −0.227 vs +0.264 / +0.219. Every
+Spain value negative, every Italy/Japan value positive. So Spain stores these three raw and
+Italy/Japan store them already reverse-scored, and no single 1–6 anchor mapping is correct
+table-wide. This is a **response-data** defect, not an itemtext one, and is a candidate for its own
+irw data-fix issue — **not filed by this round**; left for the human triage session.
+
+**Other notable.** Three of the five written tables ship canonical/official English for a
+non-English or partly-non-English administration, each disclosed in `public_note`: `hui_2024_who5`
+(administered in Chinese, no Chinese wording recoverable — `translated_substitute` /
+`official_instrument_english`), and both `ibrahim_2015_*` tables (patients approached in "Malay or
+English", paper never states which version, no Malay wording in the deposit). The `ibrahim_2015_bfi`
+agent also read the Berkeley lab's non-commercial clause correctly as scoped to the **BFI-2**, a
+different instrument — the BFI-44 carries no such terms. The flagged `ibrahim_2015_sf36` rights risk
+resolved permissive rather than blocking (RAND publishes its SF-36 as a public document requiring
+only a credit line, which is carried in `instrument`).
+
+No rate limit or spend cap was hit; the blocked/failed counts mean what they say. Cap is batch_050 —
+not reached, next round proceeds.
