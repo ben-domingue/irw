@@ -264,6 +264,10 @@ getrows<-function(l) {
     ## why it is retired. The join itself lives in dict_union.R so it can be
     ## replayed offline against the real biblio.csv.
     biblio <- apply_custom_license_terms(biblio, irw_dict, name)
+    ## Tables built from more than one deposit need both attributions;
+    ## biblio carries only one licence and one reference (#1694). Fills a
+    ## blank Custom_License_Terms only, so the sheet still wins the cell.
+    biblio <- apply_license_attribution(biblio, name)
     ## Same carry-through, for the paper/deposit DOI split (#1690).
     biblio <- apply_data_doi(biblio, irw_dict, name)
     ## Correct the Descriptions that name an instrument the table does not

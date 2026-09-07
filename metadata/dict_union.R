@@ -760,3 +760,58 @@ apply_description_overrides <- function(biblio, label = "core",
     }
     biblio
 }
+
+##---------------------------------------------------------------------------
+##Second-source attribution (#1694).
+##
+##A table can be built from more than one deposit, and biblio carries exactly
+##one licence and one reference. `project_kids_*` is the case that surfaced it:
+##all 23 tables take every `resp` from the item-level deposit (CC BY 4.0,
+##10.33009/ldbase.1620837890.bcf8), and take two covariates -- `treat` and
+##`cov_project` -- from PK_FullData.csv in a SECOND LDbase deposit released
+##under ODC-By (10.33009/ldbase.1620844399.85a0). See data/project_kids_items.R.
+##
+##Ruling (Ben, 2026-09-07): record both, change neither. ODC-By and CC BY 4.0
+##are both attribution-only -- neither is share-alike, NC or ND -- so there is
+##no licence conflict to resolve and `Derived_License` stays CC BY 4.0, which is
+##what governs the response data. What was wrong is that the record named one
+##source when the tables draw on two, so a reuser attributing from biblio alone
+##would under-attribute.
+##
+##This fills `Custom_License_Terms`, which 02_biblio.R already carries for every
+##row, rather than overriding anything: the cell is blank on all 23. It is kept
+##separate from DESCRIPTION_OVERRIDES because it is not a correction -- nothing
+##here supersedes a value a human wrote -- and so it needs no exact-match guard.
+##A non-blank cell is left alone, on the same "a human cell wins" rule.
+LICENSE_ATTRIBUTION <- list(
+    list(
+        tables = "^project_kids_",
+        issue  = "#1694",
+        terms  = paste(
+            "Response data: Project KIDS Item level Data (LDbase,",
+            "doi:10.33009/ldbase.1620837890.bcf8), CC BY 4.0.",
+            "The `treat` and `cov_project` columns are derived from",
+            "PK_FullData.csv in Project KIDS Total Scores data (LDbase,",
+            "doi:10.33009/ldbase.1620844399.85a0), which is released under",
+            "ODC-By 1.0 and must be attributed separately.")
+    )
+)
+
+##Attach second-source attribution where a table has more than one deposit.
+##Runs after apply_custom_license_terms(), which sets the column from the sheet.
+apply_license_attribution <- function(biblio, label = "core",
+                                      spec = LICENSE_ATTRIBUTION) {
+    if (!length(spec)) return(biblio)
+    if (!"Custom_License_Terms" %in% names(biblio)) {
+        biblio$Custom_License_Terms <- NA_character_
+    }
+    n <- 0L
+    for (s in spec) {
+        hit <- grepl(s$tables, biblio$table) & dict_blank(biblio$Custom_License_Terms)
+        hit[is.na(hit)] <- FALSE
+        biblio$Custom_License_Terms[hit] <- s$terms
+        n <- n + sum(hit)
+    }
+    message(label, ": attached second-source attribution to ", n, " row(s)")
+    biblio
+}
