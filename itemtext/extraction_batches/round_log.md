@@ -5738,3 +5738,33 @@ its English is taken from an unrelated third study's table (IJERPH 2022;19(3):13
 no value in `provenance_vocab.csv` — `official_instrument_english` means the instrument
 publisher's own. That vocabulary gap wants one decision across all 19, not a piecemeal patch.
 Nothing here blocks upload; `check_provenance.R` reports it as a gap it cannot resolve.
+
+### batches 038 and 039 uploaded and stamped — 12 tables, COUNT(*) verified — 2026-09-06
+
+Ben uploaded all twelve to the `irw_text_2` draft; `red_up` reported 12 NEW and self-verified row
+counts. Independently re-verified here with **COUNT(\*) plus COUNT(DISTINCT item)**, not `numRows`:
+all twelve match their source files on both, and the draft went 21 -> **33 tables**. No doubling.
+
+    gerber_2022_eas_temperament 100/20   gesbert_2021_tdeq 150/25
+    helma_access 55/11   helma_appraise 25/5   helma_comm 40/8   helma_numeracy 6/3
+    helma_reading 30/6   helma_understand 45/9   helma_use 25/5
+    gholami_2017_periodontal_knowledge 6/3   gilbert_meta_16 142/71   gilbert_meta_27 36/18
+
+**The uneven column counts in the upload report are all explained, none is a defect.** 15 columns
+is the full translated schema; `gilbert_meta_16` has 10 because it was administered in English and
+has nothing to translate; `gesbert_2021_tdeq` has 12 because the paper publishes no instructions
+and no French anchors, so those `_translated` columns do not exist rather than sitting blank; and
+`ghanbari_2016_helma_numeracy` has 14 because its three items are 0/1-scored with no `option_text`
+by design.
+
+**Stamped `uploaded=2026-09-06`** on all 12 rows across `batch_038/provenance.csv`,
+`batch_039/provenance.csv` and the root `mapping_verification.csv` (6 + 6 + 12). Every prior value
+was genuinely empty rather than `no`. Each file was proved to round-trip byte-identically under
+its own quoting convention **before** being rewritten — the script refuses to write otherwise —
+and the diffs are exactly the changed rows with nothing reformatted. The twelve `__items.csv` were
+deleted from the batch folders; sidecars stay. `clean/` left for Ben.
+
+**Now due: all 18 issues-page entries** (batch_037's six and these twelve), in
+`fixes/itemtext_issues_draft.md`. Every table they describe has now shipped, so nothing is waiting
+on an upload any more. Two are mandatory rather than discretionary —
+`ghanbari_2016_helma_numeracy` and `gilbert_meta_27` ship IRW-authored English.
