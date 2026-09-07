@@ -226,15 +226,36 @@ TERM_LIST = [
     "employability skills",
 ]
 
-# Small, proven-yield subset for a weekly pass -- same shortlist used by
-# irw_discover_plos_monthly.py / irw_discover_pmc_monthly.py's
-# HIGH_YIELD_TERMS (kept identical across connectors on purpose, since the
-# yield signal is about the construct, not the source). Edit freely as
-# per-source yield data comes in; they don't need to stay in sync going
-# forward.
+# Small, proven-yield subset for a weekly pass. This started as a verbatim
+# copy of irw_discover_plos_monthly.py / irw_discover_pmc_monthly.py's
+# HIGH_YIELD_TERMS -- those files' comments already anticipate divergence
+# ("they don't need to stay in sync going forward"), and this is that
+# divergence, taken on 2026-09-07.
+#
+# Why it has to diverge: the PLOS/PMC connectors match a term against
+# article *full text*, where a bare construct word is nearly always used in
+# its psychological sense. This connector matches against dataset *titles*
+# on DataCite/Dataverse/OSF, where the same word is a naked keyword and
+# collides with unrelated fields. Two terms carried the whole cost:
+#
+#   "grit"       -> 5 of the 2026-09-07 run's 23 candidates, all false: the
+#                   GRIT-ADB hydrography database (x2), a GRIT GNSS network
+#                   station, and a German library-science article by an
+#                   author named Grit Bumann. No grit-titled candidate has
+#                   ever reached a good flag. Dropped: the psychological
+#                   sense is reliably reached by "growth mindset" and
+#                   "academic motivation", which are already here, and the
+#                   full ~125-term monthly TERM_LIST still carries it.
+#   "resilience" -> 3 of 3 false that week (built-environment overheating,
+#                   firm innovation in China, Miami-Dade climate
+#                   investment), and historically it pulls coral reefs,
+#                   wildfire recovery, irrigation, supply chains and
+#                   agricultural yield. Narrowed rather than dropped, since
+#                   the psychological construct is genuinely high-yield.
+#
+# The remaining 13 terms are unambiguous enough as titles to keep bare.
 HIGH_YIELD_TERMS = [
     "self-esteem",
-    "grit",
     "self-efficacy",
     "depression",
     "anxiety",
@@ -245,7 +266,7 @@ HIGH_YIELD_TERMS = [
     "loneliness",
     "academic motivation",
     "work engagement",
-    "resilience",
+    "psychological resilience",
     "procrastination",
     "growth mindset",
 ]
