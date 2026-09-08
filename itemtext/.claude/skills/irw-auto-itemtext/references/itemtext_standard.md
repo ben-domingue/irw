@@ -387,6 +387,84 @@ is not useful to a data user and tacitly advertises that IRW published material 
 have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
 trail; do not add them to `itemtext_issues.qmd`.
 
+### HEXACO-PI-R — ruled 2026-09-05, and IRW ships none of it
+
+**IRW does not ship HEXACO-PI-R item wording.** Ben's ruling, in full: *"let's err on the side of
+*not* having things. so do not host."* It was given on #1945 in answer to two escalations at once
+— the hexaco.org clause and a CC BY-NC 3.0 deposit — so it is a ruling about the shape, not about
+one table.
+
+The clause, from hexaco.org/hexaco-inventory, is the free-but-restricted shape already named for
+TIMSS and PROMIS:
+
+> "You can download any of these forms free of charge, but only for the purpose of non-profit
+> academic research. ... Please contact the authors if you would like to use the inventory for
+> non-academic purposes."
+
+**This overturns a specific earlier reading, and the reading is worth recording because it was
+reasonable.** batch_201 shipped `sun_2025_morality_study1_fairnessHEXACO` after testing the clause
+against the 2026-09-04 rulings and finding it carried *neither* a quotable fee *nor* a
+no-redistribution bar — the two things those rulings made decisive — and flagged the residual
+"must either be password-protected or not searchable through search engines" term for Ben rather
+than deciding it. That test was applied correctly. The ruling is that passing it is not sufficient:
+where a rights holder has attached *any* stated use restriction to the only published source of the
+wording, IRW does not host it. **Do not re-derive this from the fee/redistribution tests; they will
+give the wrong answer here.**
+
+**Scope applied 2026-09-05.**
+
+- `sun_2025_morality_study1_fairnessHEXACO` — extracted in batch_201, removed before merge. Never
+  uploaded, so not a withdrawal.
+- `gilbert_meta_32` — CC BY-NC 3.0, never extracted. `pending` -> `excluded`.
+- `de_vries_2022_hexaco_{self,other,meta}` — blocked at batch_026 on this exact clause, with notes
+  naming a ruling from Ben as the one thing that would change them. `blocked` -> `excluded`: a
+  settled decision, not a gap for a future round to retry.
+- `face_memory_test` — stays `blocked`. The ruling settles the HEXACO half (items 76-175); the
+  image/asset block on the face half (1-75) is independent and unresolved.
+- **`sv-maia2_randelovic_2021_hexaco60` and `_hexaco100` — LIVE, and to be withdrawn.** This is the
+  answer to the class escalation logged in the round log on 2026-09-04. See below: the deletion had
+  not been carried out when this was written.
+
+**What is NOT covered — check the instrument, not the name.** `dasilva_2019_hexaco24` is the Brief
+HEXACO Inventory, published CC BY, and is untouched. The other 26 live `sun_2025_morality_*`
+item-text tables were checked on 2026-09-06, once Redivis reads came back, and **none of them are
+HEXACO-PI-R** — the HEXACO scoping above is confirmed. Study 1 and the moral-character subscales
+are the study's own template (`itmcq*`, e.g. "[target's name] consistently tells the truth.").
+
+**But the check turned up a different instrument, and it is the same shape as HEXACO.** Study 3's
+`extraversion`, `openness` and `neuroticism` tables carry item codes `itbfi2*` and verbatim
+**BFI-2** wording ("Is outgoing, sociable.", "Worries a lot.", "Is fascinated by art, music, or
+literature."). Soto & John hold the BFI-2 copyright; it is free for non-commercial research, with
+commercial use requiring written permission. That is the hexaco.org shape almost exactly — free of
+charge, restricted by stated purpose — so **the 2026-09-05 ruling appears to reach it. Escalated to
+Ben, not decided here.**
+
+Two things make this worth reading before the #1897 audit runs. First, `metadata/itemtext_metadata.csv`
+describes these tables as "Ratings of extraversion for nominated targets" — the `instrument` field
+names the *construct*, not the instrument, so **an instrument-name scan will not find them**; only
+reading the wording does. Second, a corpus scan for BFI/Big-Five instrument labels returns just ~10
+live tables and most are IPIP "Big-Five Factor Markers", which are public domain and unaffected —
+so the label-based blast radius looks small precisely because the label is not where the answer is.
+
+And the *response* tables are not in scope at all: this clause governs the instrument wording, not
+data a study collected with it, so every HEXACO response table stays in IRW.
+
+**DONE 2026-09-06: deleted from the draft by Ben.** `irw_text` draft went 732 -> 730, both targets
+absent, `dasilva_2019_hexaco24__items` verified still present. The two rows are out of
+`metadata/itemtext_metadata.csv`. **The wording is still in released v19.0 and leaves only when that
+draft is released** -- until then the tracked baseline describes the draft rather than what is live,
+which is the one-release gap this deliberately accepts. Historical note follows.
+
+**Was outstanding when this was written: the two live tables are still published.** The takedown was
+scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
+asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
+`APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
+describe what is live, and removing them early would make the tracked baseline lie. **Version state, rechecked 2026-09-06:** `irw_text` is now at **v19.0** — two release cuts happened
+after this was staged, and both tables are still live in it (732 tables). No draft is open, so
+`dataset(name, version="next")` raises "Not found: datapages.irw_text:next"; that is a released
+dataset with no draft, not an outage. The script now opens one via `create_next_version`, exactly as
+`red_up.push.open_draft` does. Deleting from the draft only takes effect when that draft is
+released.
 ### `wording_rights` is retired — ruled 2026-09-06
 
 **The column is gone from the schema, and the eight tables that carried it are withdrawn.**

@@ -22,6 +22,33 @@
 # stays last. It needs no credentials and no Redivis access at all, so it is
 # the one stage that is fully reviewable offline.
 #
+# 11_status.R (issue #1940, added 2026-09-08) runs BETWEEN 10 and 09. It was
+# written for #1765/2.5c and then never wired in at all -- it was absent from
+# STAGE_SCRIPT, so `run_pipeline.sh 11` answered `warn: unknown stage` and the
+# only way to refresh status.json was to remember to run the script by hand.
+# Nobody did: by 2026-09-08 status.json on main reported n_tables 4134 in a
+# commit whose metadata.csv held 4,238 rows, so every percentage in it was
+# computed on a denominator 104 tables short. That is precisely the failure the
+# file exists to prevent, which is the argument for running it HERE rather than
+# on a clock of its own: computed in the same run that writes its inputs, it
+# cannot disagree with the metadata.csv it ships beside.
+#
+# It must follow 01, 03 and 08 (it reads metadata.csv, tags.csv and
+# itemtext_metadata.csv off disk) and it needs no credentials and no Redivis
+# access -- the second stage after 10 that is fully reviewable offline.
+#
+# The reason its outputs are committed while the rest of metadata/**/*.csv is
+# gitignored is in 11_status.R's own header: status_history.tsv is append-only
+# and the TREND is the deliverable. Note that it appends one row per run, so a
+# workflow_dispatch on the same day as the scheduled run adds a second row for
+# that date -- deliberate, and why the file is a history rather than a table
+# keyed on date.
+#
+# 12_stragglers.R is still NOT wired in. It is not an oversight repeated: unlike
+# 11 it must call Redivis (its question is which live tables are absent from
+# metadata.csv, so metadata.csv cannot be the catalog), and nothing yet consumes
+# its output. See #1940.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -37,10 +64,11 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 09)
+#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 10 11 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
+#   scripts/run_pipeline.sh 11              # just the corpus status numbers
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
@@ -81,7 +109,7 @@ fi
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
-                          [09]=09_hero_status.R )
+                          [11]=11_status.R [09]=09_hero_status.R )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
@@ -92,9 +120,10 @@ declare -A STAGE_OUTPUTS=(
   [07]="simsyn_metadata.csv"
   [08]="itemtext_metadata.csv"
   [10]="collections.csv collection_members.csv"
+  [11]=""   # writes status.json + status_history.tsv -- reported separately below
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 10 09)
+DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 09)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -179,6 +208,12 @@ for stage in "${stages[@]}"; do
     python3 "$SCRIPT_DIR/diff_csv.py" "$SNAPSHOT_DIR/$f" "$METADATA_DIR/$f" \
       --key "${DIFF_KEY[$f]:-table}"
   done
+  if [[ "$stage" == "11" ]]; then
+    echo "status.json rewritten and one row appended to status_history.tsv --"
+    echo "neither is a keyed CSV, so read them directly. The number to check is"
+    echo "\`n_tables\`: it must equal the row count of the metadata.csv committed"
+    echo "in the same change, which is the whole reason this stage runs here."
+  fi
   if [[ "$stage" == "09" ]]; then
     echo "hero_stats.json written -- not a keyed CSV, review the file directly"
     echo "(default path: $REPO_ROOT/../irw_site/data/hero_stats.json, or check 09's stdout above)."

@@ -2487,17 +2487,6 @@ campos_2023_pidaq,10.1371/journal.pone.0287235,NA,"Campos L, Campos J, Marôco J
 "
 campos_2023_swls,10.1371/journal.pone.0287235,NA,"Campos L, Campos J, Marôco J, Peltomäki T (2023) Aesthetic dental treatment, orofacial appearance, and life satisfaction of Finnish and Brazilian adults. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0287235.s004,CC BY 4.0,NA,"5-item Satisfaction with Life Scale (SWLS, 1-7 scale), from a survey of N=7593 Finnish and Brazilian adults on dental aesthetics and life satisfaction."," @article{Campos_2023, title={Aesthetic dental treatment, orofacial appearance, and life satisfaction of Finnish and Brazilian adults}, volume={18}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0287235}, DOI={10.1371/journal.pone.0287235}, number={6}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Campos, Lucas Arrais and Campos, Juliana Alvares Duarte Bonini and Marôco, João and Peltomäki, Timo}, editor={Mafla, Ana Cristina}, year={2023}, month=June, pages={e0287235} }
 "
-"Canham L, Salamh P et al. (2018). Evaluation of non-cognitive traits of doctor of physical therapy learners in the United States. Harvard Dataverse.",10.6084/m9.figshare.30903575.v2,NA,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Thinking Styles subscale (10 items, 1-5; N=433).","@misc{https://doi.org/10.6084/m9.figshare.30903575.v2,
-  doi = {10.6084/M9.FIGSHARE.30903575.V2},
-  url = {https://figshare.com/articles/dataset/Conspiracy_Belief_and_the_association_with_autistic_traits_schizotypy_cognitive_processes_and_demographics/30903575/2},
-  author = {Webster-Harris, Chloe},
-  keywords = {Social psychology, Psychology of religion, Cognitive and computational psychology not elsewhere classified, Other psychology not elsewhere classified},
-  title = {Conspiracy Belief and the association with autistic traits, schizotypy, cognitive processes, and demographics},
-  publisher = {figshare},
-  year = {2025},
-  copyright = {Creative Commons Attribution 4.0 International}
-}
-"
 cao_2026_cdss_cognitive_load,NA,10.6084/m9.figshare.33204345,"Cao, M., Luo, J., & Zhang, Q. (2026). The Double-Edged Effect of Interaction in Clinical Decision Support Systems: Cognitive Load, Perceived Autonomy, and Physicians' Intention to Use [Data set]. figshare. https://doi.org/10.6084/m9.figshare.33204345.v2",https://doi.org/10.6084/m9.figshare.33204345.v2,CC BY 4.0,NA,"Cognitive load, 6 items, 1-7, Chinese clinicians using a CDSS. 222 respondents x 6 items = 1332 responses.","@misc{https://doi.org/10.6084/m9.figshare.33204345,
   doi = {10.6084/M9.FIGSHARE.33204345},
   url = {https://figshare.com/articles/dataset/The_Double-Edged_Effect_of_Interaction_in_Clinical_Decision_Support_Systems_Cognitive_Load_Perceived_Autonomy_and_Physicians_Intention_to_Use/33204345},
