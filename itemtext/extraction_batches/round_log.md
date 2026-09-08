@@ -8430,3 +8430,46 @@ wording was "confirmed via direct PDF text extraction". It was not — extractio
 headings and one stray fragment — and ED603422 is the superseded 2016 form besides. The round
 left the historical audit file unedited and noted the correction instead, which is the right
 instinct; amending it is Ben's call.
+
+### batch_068 — killed mid-round by host memory, salvaged by hand — 2026-09-08
+
+The round was killed ~10 minutes in (claim 07:15:49, last write 07:25:58), not at launch: the
+host ran out of memory and the harness stopped it. **This is the salvageable shape, and it was
+salvaged rather than re-run** — a re-run would have cost another round's tokens to redo work that
+was already on disk and correct.
+
+**What the round had finished:** four complete tables (`kushnir2017_ftnd`, `laksmita_2020_mspss`,
+`latifi_2026_insect_fear`, `lee_2024_swls`) each with items, notes, provenance, verification and a
+`verify_*.R`; one deliberate rights block (`kushnir2017_tsrq` — the Treatment Self-Regulation
+Questionnaire is SDT permission-gated; the deposit is CC0 but the block is on the instrument, the
+originator ruling again); and one table barely started (`lee_2024_panas`, a `verify_*.R` and
+nothing else).
+
+**What it had NOT reached, which is the part worth recording** — the post-conditions looked
+plausible but three steps were missing, and only running the gates revealed them:
+
+1. **`normalize_nulls` had never run.** All four files needed it (17/85/161/36 lines each), and
+   until it ran `audit_batch` returned **4 WARN, not 4 PASS**. Trusting the files as found would
+   have uploaded unnormalised nulls.
+2. **The per-table sidecars were never merged.** Merged by hand into `notes.csv` (5),
+   `provenance.csv` (5) and `verification_merged.csv` (4), building the file list explicitly
+   rather than by glob — the `verification_*.csv` glob matches `verification_merged.csv` and
+   destroyed nine tables' work at batch_016.
+3. **`verification_merged.csv` was never merged into `mapping_verification.csv`.** This is why the
+   stamping pass initially reported 0 rows there: the tables had no rows to stamp. Appended in the
+   file's own CRLF + MINIMAL convention, asserting the existing 639,538 bytes were untouched.
+
+After normalisation: `audit_batch` 4 PASS, `verify_batch` PASS=4, `lint_verification` 0 ERROR /
+1 WARN, `irw-validate` ok on all four. All four uploaded, `red_up` 4/4 row-count verified,
+pre-flight clean, stamped `uploaded=2026-09-08`.
+
+**Reconciliation was surgical, not wholesale.** 4 rows to `done`, `kushnir2017_tsrq` to `blocked`,
+and only `lee_2024_panas` back to `pending`. Because the claim was uncommitted, restoring that one
+row reproduced its committed state byte-for-byte — the diff against HEAD is 5 rows, not 6.
+`verify_lee_2024_panas.R` is kept: it is a head start for whichever future round claims that
+table, not an orphan to delete.
+
+**The kill itself.** One kill, mid-round, on a laptop with other work running — not the
+launch-time OOM pattern of batch_038/040, and not a reason to stop on its own. The standing rule
+is that TWO consecutive kills means stop firing; the next round is the test of whether this was
+one-off.
