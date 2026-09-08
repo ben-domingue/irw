@@ -8852,3 +8852,33 @@ paper's Methods sentence, not a published instruction** — included because the
 bare nouns ("Net Profit", "Cash Flow") with no referent otherwise. Disclosed in provenance.
 
 Cap is `batch_080`; batch_072 is not it, so the queue continues. 784 pending remain.
+
+### batch_072 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+**The circuit breaker did not re-trip**, which is the evidence that clearing it after batch_071 was
+right: the next round ran 3/3 with no failures. The content-filter kill was specific to
+`li_2024_sad`, not a pipeline fault.
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no anomalies, `verify_batch`
+PASS=3, `lint_verification` clean. All three uploaded, `red_up` 3/3 row-count verified, pre-flight
+clean, stamped and audited field-by-field.
+
+**Disclosure applied: datapages/irw#163** (360 entries). The article states its 7-point scale runs
+1 "strongly disagree" to 7 "strongly agree", but all 45 item columns in the S1 `.sav` carry value
+labels reading "Extremely inconsistent" to "Completely consistent" — same direction, different
+words. The `.sav` labels ship, being the study's own level-1 source, so what a user reads differs
+from what the article describes. The round's Step 5b confirmed the `.sav` is byte-identical across
+three caches and that both label typos ("Very consisten", "Eompletely consistent") are genuinely in
+the file rather than transcription errors.
+
+**The find that matters for the seven queued siblings: the whole `li_2025_*` family is image-only.**
+Every item sentence lives in a PLOS table image and a grep over the article text returns zero hits,
+so **a text-only availability sweep would wrongly mark all eight UNAVAILABLE**. Two asset-id quirks
+to carry: Table 3 is served under `.t001`, and for `market_environment` the
+`article/table?id=…t001` endpoint 404s so the PNG must be read directly. This is the same class of
+error as the KTEEM row in `availability_audit_full.csv` — an availability verdict resting on text
+extraction that the source does not support.
+
+**One benign detail recorded so it is not re-derived as a defect later:** `corporate_performance`'s
+resp minimum of 2 comes from a single item, `Perfo419`. Isolated to one item, but 2 is an in-range
+point on a legitimate 1-7 scale, so it is an ordinary response and not a data-entry error.
