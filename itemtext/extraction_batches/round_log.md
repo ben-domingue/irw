@@ -8038,3 +8038,73 @@ all from earlier rounds; none of batch_064's four appear in any flagged list.
 verify script reading `komura_2026_gqs_perceived_safety` read-only as a criterion).
 
 Cap is batch_070 — not reached; the next round takes batch_065. 819 pending.
+
+## batch_065 — 2026-09-08
+
+6 tables claimed, **6 written / 0 blocked / 0 failed** (yield 100%). All six are
+`komura_2026_*` from one source: Komura & Yamada (2026) PLOS ONE
+10.1371/journal.pone.0340449, CC BY 4.0 — two Godspeed (GQS) subscales and four
+MDMT subscales, all from the same S2 File questionnaire transcript and S3 File
+workbook. Six agents, one table each; sibling collision warnings issued and
+respected (no cross-writes).
+
+Gates: normalize_nulls 1 of 6 fixed (`mdmt_ethical`, 32 lines). audit_batch
+**6/6 PASS, no anomalies** (so no Step 5c WARN explanations owed).
+verify_batch **PASS=6**. lint_verification 6 rows, no problems.
+irw-validate clean on all six. check_provenance flags only pre-existing rows
+from earlier batches — none of this round's tables (all six are
+`translation_source=study_supplied`, i.e. the authors' own English, so no
+issues-page line is owed).
+
+Provenance: all six `mapping_basis=paper_explicit`,
+`text_source=translated_substitute`, `translation_source=study_supplied`,
+`language=Japanese`. The study was administered in Japanese to 148 Yahoo!
+Crowdsourcing respondents, but the deposit publishes **zero** Japanese
+instrument wording (0 CJK characters across S1/S2/S4/S5; S3 headers are bare
+codes with no label row), so the documented fallback applies: the authors' own
+English in the base fields, `_translated` empty. No `data_labels` tables in this
+round, hence no NOT_NEEDED rows.
+
+Verification: **all six PARTIAL**, which is the honest status here. Route 3
+(published subscale means/SDs by condition, paper Tables 2 and 3) reproduces to
+≤0.005 for every table and pins subscale membership, raw/unreversed storage and
+scale direction; a per-item resp-frequency bridge from the S3 workbook to the
+live table matches cell for cell. What none of it establishes is order *within*
+a block of near-synonymous adjectives — `mdmt_sincere` (Sincere / Genuine /
+Straightforward / Real-trustworthy) is the clearest case, resting on the S2
+File's own numbering. Two tables did pin individual items further:
+`gqs_perceived_intelligence` item 2 by a duplicated-anchor correlation (0.741,
+next 0.624) and item 4 by partial r (0.387 vs ≤0.221); `mdmt_capable` item 4 by
+cITC (0.747 vs 0.888–0.904). Still PARTIAL, correctly.
+
+**Step 5b orchestrator re-checks — three agent claims independently confirmed,
+none corrected:**
+
+1. **`cov_aitype` carries an `unknown` level in all nine `komura_2026_*` IRW
+   tables.** S3 sheet `questionnaires` counts vertical=52, horizontal=50,
+   random=40, unknown=6 (identical in `sessions_metrics`); 40+6=46 = paper
+   Table 1's Random (Control) n. `data/komura_2026_godspeed.py` maps
+   `aitype → cov_aitype` verbatim, so the 6 control-arm respondents ship
+   labelled `unknown`. Corroborated by the four MDMT verify scripts, which
+   reproduce Table 2 only when `unknown` is pooled into `random`. **This is a
+   response-data issue, not an itemtext defect, and it affects three tables
+   beyond this batch.** Flagged for human triage; no issue filed by this round.
+2. **GQS Perceived Intelligence departs from canonical Godspeed.** S2 lines
+   189–194 give item 2 as `Unresponsive ←→ Responsive` — canonical position 2 is
+   Foolish–Sensible — and S2 line 179 prints the identical anchor as Animacy
+   item 4. Transcribed literally, disclosed in the `public_note`. (Not in this
+   batch: the same S2 block prints Likeability items 1 and 3 as the same anchor,
+   `Unpleasant ←→ Pleasant`.)
+3. **`mdmt_sincere`'s resp set {1..7} vs the siblings' {0..7} is real, not a
+   truncated option list.** Across its four S3 columns, resp=0 occurs 0 times in
+   592 responses; capable/ethical/reliable carry 7/7/10 zeros. Shipping 7 option
+   rows per item is correct.
+
+Also recorded (source-side, not acted on): the article miscites the MDMT to
+reference [13], listed as *Lee JD, See KA* (trust in automation, 2004) rather
+than Ullman & Malle. Rights checked — the MDMT v1 CONDITIONS OF USE impose no
+fee, NC or redistribution bar, and the shipped wording is in any case the
+study's own English from a CC BY 4.0 deposit.
+
+Circuit breaker not tripped (0% failed). Queue: 813 pending remain.
+Cap is batch_070 — not reached; next round proceeds.
