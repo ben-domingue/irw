@@ -8293,3 +8293,39 @@ the itemtext ships correctly against the codes as they exist. Worth a repo-side 
 processing script.
 
 Cap (batch_070) not reached; next round proceeds normally.
+
+### batch_066 triaged and uploaded — 5 shipped, 1 blocked — 2026-09-08
+
+Gates re-run live rather than taken from the round's report: `normalize_nulls` 0 of 5,
+`audit_batch` 5 PASS with zero WARNs, `verify_batch` PASS=5 (every `verify_*.R` re-run),
+`lint_verification` clean. All five uploaded to the `irw_text_2` draft, `red_up` 5/5
+row-count verified, four-check pre-flight clean including zero collisions against the 92
+tables then pending in the draft. Stamped `uploaded=2026-09-08` in `batch_066/provenance.csv`
+and `mapping_verification.csv` (10 rows), audited field-by-field against `git show HEAD:`.
+
+`red_up` raised two `name_charset` warnings — `K-PCQ_Huh_2022` and `KoreanNursing_Park_2017`
+are not lowercase, so they drop out of case-sensitive metadata joins. That is a property of the
+live table names, not of the item text: the file has to be `<table>__items` to join at all, so
+it cannot be fixed here. Same class as the standing 307-table issue.
+
+**Disclosure lines applied before upload**, as the round asked: datapages/irw#161 carries all
+five entries. Two were owed under the 2026-09-02 IRW-generated-content ruling —
+`KoreanNursing_Park_2017` (answer key derived from response distributions, not transcribed) and
+`K-PCQ_Huh_2022` (instructions and all seven anchors translated by this project, so its `mixed`
+translation_source is not benign). It is a second PR only because #159 was merged mid-session;
+the entries were added to the same branch, not a competing one.
+
+**Blocked: `kraft_todd_2017_care_measure`** — the CARE Measure is copyright Stewart Mercer and
+permission-gated (non-commercial, prior permission outside the UK, no wording changes), which
+overrides the PLOS CC BY deposit under the originator ruling. Not an access failure; the mapping
+is banked in `notes.csv`, so a reversal is a re-run rather than a restart.
+
+**Still owed, not filed:** `data/KoreanNursing_Park_2017.R` silently drops one of the study's 741
+respondents and produces `make.names` artifacts as item codes (`read.table(header=TRUE)` on a
+headerless `.tab` consumes examinee 1). The item text ships correctly against the codes as they
+exist, so this is a processing-script defect, not an itemtext one. It joins the item-4 backlog of
+response-data defects with no issue.
+
+**Also cleaned up here:** batch_065's six `__items.csv`, which the `origin/main` merge had
+restored — main still carried them from PR #2078 while this branch had deleted them post-upload.
+They are uploaded and stamped, so the files are removed again.
