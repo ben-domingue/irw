@@ -265,6 +265,29 @@ fee and the evidence of enforcement in `provenance.csv` `note` so the basis stay
 withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
 do not blank the date to make the table look as though it never shipped.
 
+**Most of the corpus has no `provenance.csv` row, and the mechanics above assume one.** Added
+2026-09-08 after six PSS withdrawals where none of the six had a provenance row at all — they
+predate the batch pipeline, so there was no `uploaded` date to keep and no `public_note` to
+rewrite. The rule above is written for a table the batch pipeline produced; it is silent on the
+larger set it did not. For a **non-pipeline** table, the withdrawal record is:
+
+1. delete the table from the `irw_text*` draft (unchanged — this is what actually withdraws it);
+2. record the withdrawal in **`itemtext/instrument_rights_register.csv`** against the instrument,
+   and in the round log against the table, since those are the only two places it can live;
+3. do **not** manufacture a provenance row purely to hold the withdrawal — a row asserting an
+   extraction that never happened is worse than no row.
+
+The consequence to be honest about: for these tables the withdrawal is not discoverable from the
+table's own records, only from the register and the log. That is a real weakness of the current
+shape, not a step to skip.
+
+**A partial withdrawal is not a table deletion, and the distinction is destructive if missed.**
+Where a table pools several instruments — `ecps_sahm_2024_stress` carries a blocked scale
+alongside two unblocked stressor blocks — the withdrawal removes *those items' rows*, not the
+table. A whole-table delete would take the unblocked blocks with it. Record which rows went, and
+put the table in any withdrawal script's keep-set so a rerun cannot escalate a partial into a
+deletion.
+
 **There is no longer a `wording_rights` flag, and no "record it and ship anyway" option.**
 Between 2026-09-04 and 2026-09-05 the rule moved: a stated restriction on the instrument now
 blocks outright (see the `wording_rights` retirement below). A table either ships with no

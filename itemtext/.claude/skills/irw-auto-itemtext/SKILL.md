@@ -344,13 +344,26 @@ These end in `blocked`, not `excluded`, because a licence can change and a fee c
 Shipley exclusion is permanent. There is no `wording_rights` column — retired 2026-09-06
 (irw#1955), because a stated restriction now blocks rather than being flagged.
 
-**Check the register before deciding, and check it by content.** Instruments already ruled
-blocking are tracked with their quoted clauses; an instrument on that list is settled and needs
-no new escalation. When checking whether a block reaches other tables, **match on wording, not
-on names** — a name match has been a lead and never a verdict: three sweeps in one session each
-turned up a false positive (`alkouri_2025_icu_stressors` is named "Perceived Stress Scale" but is
-Sheu et al. 1997; two `sun_2025_morality_*_meaning` tables matched "meaning in life" but are
-PERMA-Profiler items).
+**Check the register before deciding: `itemtext/instrument_rights_register.csv`.** One row per
+instrument — `instrument, family, verdict, rule, clause, source_url, source_sha256, fetched,
+match_item_text, match_item_code, notes`. `verdict` is `block` / `ship` / `ship_with_note` /
+`escalate`; `ship_with_note` is the LOT-R shape, where the table ships but the provenance note must
+quote the caution and say why it does not block. An instrument already carrying a verdict is
+settled and needs no new escalation — record that you applied it, do not re-derive it.
+
+**The register's `match_*` columns find candidates. They do not decide anything.** Two failure
+modes, both of which produced wrong numbers in one afternoon:
+
+- **A name match is a lead, never a verdict.** Three sweeps in one session each turned up a false
+  positive: `alkouri_2025_icu_stressors` is named "Perceived Stress Scale" but is Sheu et al.
+  (1997); two `sun_2025_morality_*_meaning` tables matched "meaning in life" but are PERMA-Profiler
+  items; `jutte_2024_loneliness` matched a De Jong Gierveld sweep but is the revised UCLA scale.
+- **A substring miss is NOT an all-clear.** Administrations reword. A PSS sweep scored three tables
+  at 9 of 10 because their item 9 reads "things *that happened* that were outside of your control",
+  and scored `kfcovid_pss_li2020` at 1 of 4 because its items are *negated* rewordings ("felt you
+  **lack** confidence", "things were **not** going your way") with an embedded newline. **All of
+  them were complete reproductions.** A count from pattern matching is a **lower bound**; deciding
+  "fragment or whole instrument" requires reading the items.
 
 **A block may not achieve anything.** If the processing script used source column headers as
 item codes, the instrument's wording is already in the *response* table, where withholding
