@@ -9961,3 +9961,62 @@ deposit. Note for future name-greps: `liu_2023_adherence_tools` *mentions* MMAS-
 ship MMAS-8 item wording, so the Morisky licence is not engaged.
 
 Cap is `batch_095`; not reached. 754 pending, next firing takes `batch_083`.
+
+## batch_083 — 2026-09-08
+
+3 tables claimed, 3 agents (one per table, daytime setting).
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | mapping_basis | 5b status | outcome |
+|---|---|---|---|
+| liu_2023_perceived_control | paper_order | NO_ROUTE | done |
+| liu_2023_poor_adherence | data_labels | NOT_NEEDED | done |
+| liu_2023_purchase_intention | paper_order | PARTIAL | done |
+
+Two source deposits, both open:
+- **PeerJ 11:e16384** (CC BY 4.0, PMC10693237) — `liu_2023_poor_adherence`, the
+  fourth table off this deposit after batch_082's three. Same level-1 route: the
+  `.sav`'s own variable labels tie code to text and
+  `data/liu_2023_medication_adherence.py` renames number-preservingly, so no
+  positional inference exists. Administered Chinese shipped in the base fields,
+  the authors' own English (S3) in `_translated`. 6 items × 2 selection levels
+  (multi-select checkbox, 0=未选择 / 1=已选择).
+- **PLOS ONE 10.1371/journal.pone.0295133** (CC BY 4.0) — `liu_2023_perceived_control`
+  (PBC1-3) and `liu_2023_purchase_intention` (PI1-3), two subscales of the same
+  19-item TPB battery in S1 File "Annexure 1". Agents were told about each other's
+  tables and the four other siblings still in the queue; no collisions.
+
+**The order problem on the PLOS pair is real and is why neither is VERIFIED.**
+The annexure prints the 19 sentences under six construct headings and attaches
+**no item code to any sentence**, while the S1 Data XLSX carries bare `PBC1`/`PI1`
+headers with no variable or value labels. Block membership is solid — the annexure's
+block sizes (4/3/3/3/3/3) are exactly the workbook's column order, and that partition
+reproduces all six of the paper's Table 2 alphas to <0.001 (BT .875, ATT .798, SN .810,
+PBC .852, PI .809, PB .863). What is not established is which sentence is item 1 vs 2
+vs 3 *inside* a block. For PI the three items are statistically near-identical
+(means 3.72/3.74/3.71, SDs 0.95/0.94/0.94) → PARTIAL. For PBC route 1 is actively
+**dead**, not merely weak: published CFA loadings rank PBC2 > PBC1 > PBC3
+(.796/.743/.726) while the congeneric reconstruction from live data ranks
+PBC2 > PBC3 > PBC1 (.831/.820/.786), so the loadings cannot arbitrate → NO_ROUTE,
+all 3! = 6 assignments still consistent. Both ship on annexure listing order with a
+`public_note` saying exactly that.
+
+**Orchestrator re-checks (Step 5b).** Confirmed independently rather than taken on
+report: (a) pulled S1 File's `word/document.xml` directly — the annexure genuinely
+carries no item codes, and the shipped PBC/PI sentences are verbatim, including
+PBC2's missing verb ("There are many channels, and easy to agricultural products…"),
+which is the source's own broken English and was correctly not repaired; (b) pulled
+PeerJ S3 question 14 — its six English options match the shipped `_translated` values
+1:1 in order; (c) re-ran `verify_liu_2023_perceived_control.R`, whose numbers
+(alpha .8523 vs published .852; the two rank orders) reproduce as reported.
+
+Gates: normalize_nulls fixed 1 file (purchase_intention, 15 lines);
+audit_batch **3/3 PASS, no anomalies** (so no Step 5c WARNs to explain);
+verify_batch 2 PASS + 1 MISSING(exempt, data_labels); lint_verification clean
+(3 rows, NOT_NEEDED row written into both the batch file and the tracker);
+irw-validate ok on all three; check_provenance clean — 0 IRW-generated tables
+owed a public entry, since both PLOS tables ship the authors' own English
+(`translated_substitute` / `study_supplied`), not anything this project generated.
+
+Circuit breaker not tripped (0 failed). Queue after this round: 751 pending,
+487 done, 93 blocked, 57 excluded, 13 failed. Cap is batch_095 — not reached.
