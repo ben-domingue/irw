@@ -9165,3 +9165,63 @@ It is the same deposit and the same anchor set. Whoever claims it should start f
 **Also resolved:** the RI/RV drift flagged at batch_074 is naming drift only — the `.sav` has no
 `RI*` column, counts agree 3/3/3, and the loading rank order matches the paper's
 (RV1 .760 < RV3 .867 < RV2 .885 against RI1 .861 < RI3 .907 < RI2 .914).
+
+## batch_076 — 2026-09-08
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** — yield 3/3 (100%). Circuit breaker not
+tripped (0% failed, threshold 30%). Three agents, one per table, per the 2026-09-08 daytime setting.
+
+| table | basis | Step 5b | outcome |
+|---|---|---|---|
+| `li_2025_socmedia_usefulness` | data_labels | NOT_NEEDED | done — 20 rows, 4 items x 5 levels |
+| `li_2026_imi_teq` | data_labels | NOT_NEEDED | done — 238 rows, 34 items x 7 levels |
+| `liang_2026_extrinsic_motivation` | paper_order | PARTIAL | done — 20 rows, 5 items x 4 levels |
+
+Gates: normalize_nulls fixed 1 file (imi_teq, 239 lines); audit_batch **3 PASS, no anomalies** (so
+no Step 5c WARN explanations were owed); verify_batch 1 PASS + 2 MISSING(exempt); lint_verification
+3 rows no problems — the NOT_NEEDED rows were written into BOTH the batch file and the permanent
+tracker, so the batch_020/021 false-ERROR trap did not recur. `irw-validate` ok on all three.
+`check_provenance.R` exits 1, but on `hua_2023_efl_study_engagement`, a pre-existing table not in
+this batch; nothing in batch_076 contributes to the failure.
+
+**Step 5b orchestrator re-check — one agent claim corrected.** The `li_2026_imi_teq` agent reported
+that all eight reverse-worded items are stored already reverse-scored, citing correlations with the
+mean of each item's own-subscale forward items. Recomputed on the deposit's 362x34 matrix: the
+FINDING IS CONFIRMED — every one of the eight is positive, and raw storage would put them all
+negative — but six of the eight cited coefficients were inflated. Cited
++0.72/+0.86/+0.83/+0.80/+0.65/+0.69 for items 07/15/16/17/18/19; actual
++0.63/+0.57/+0.51/+0.46/+0.31/+0.36. Items 26 and 30 matched exactly (+0.37/+0.27). The 0.65/0.69
+pair looks like the reverse-to-reverse correlation r(item_18,item_19)=+0.65 rather than
+reverse-to-forward. Decisive per-item check: item_18 vs items 20/21/22 = +0.27/+0.30/+0.28 and
+item_19 = +0.28/+0.35/+0.35, all positive against a forward-forward baseline of +0.69-0.76.
+notes.csv and the public_note were corrected (published range now +0.27 to +0.63, not +0.27 to
++0.86). An intermediate finding that the pressure/tension block (items 18-22) runs net-negative
+against the rest of the instrument was chased down and is NOT a defect — that is correct
+psychometrics for a properly reverse-stored pressure subscale.
+
+**DUPLICATE INGEST — dictionary/metadata issue, needs a human.** The `liang_2026_extrinsic_motivation`
+agent reported that `liang2026_extrinsic_motivation` (no underscore) is the same data ingested twice,
+and independently that `liang_2026_intrinsic_motivation` / `liang2026_intrinsic_motivation` show the
+same signature. Corroborated by the orchestrator via `irw_table_sets` (server-side, no export): each
+pair has identical n_rows=225, identical resp sets {2,3,4,5} and 5 items, differing only in item-code
+convention (`EM1..EM5` vs `em_1..em_5`, `IM1..IM5` vs `im_1..im_5`). The agent additionally reports an
+`identical()` id x item response matrix and matching per-item n. Four queue rows, two datasets. No
+files were written for the three unclaimed tables. Worth a dedup issue before those rows come up.
+
+**Other findings.** (a) `li_2026_imi_teq` Step 3b mismatch, handled: the deposit calls it "the 22-item
+Task Evaluation Questionnaire" but the table has 34 items — 1-22 the IMI-TEQ re-ordered into subscale
+blocks, 23-32 a ten-item learning-fulfillment scale that is not IMI, 33-34 two system-usability items.
+The dictionary Description is wrong twice: TEQ is *Task Evaluation*, not "Technology Enhanced", and
+the table is not only the TEQ. (b) `li_2026_imi_teq` ships blank option_text deliberately — no source
+states the anchors, and the canonical IMI anchors were correctly NOT substituted. (c) The paper behind
+`liang_2026_extrinsic_motivation` does not reproduce its own published EFA on its own deposited data
+(observed first-factor EM loadings 0.90/0.82/0.73/0.47/0.37 vs published 0.71/0.75/0.69/0.77/0.74, no
+IM/EM split); recorded in provenance as a side finding, not on the public issues page. (d)
+`li_2025_socmedia_usefulness`: the article's Measures paragraph quotes its PU example as "quality of
+sports **travel**" while the S1 File reads "sports **tourism**"; the S1 File table is what ships. Unlike
+the RI/RV drift in the same paper, PU is *corroborated* by the paper's own S1 Table, not contradicted.
+(e) `translation_source=mixed` was applied to `li_2025_socmedia_usefulness` as the batch_075 orchestrator
+predicted; the four mixed li_2025_socmedia_* tables plus the uploaded `li_2025_socmedia_ewom` still owe
+a review of whether they need an issues-page line, since IRW wrote the three intermediate anchors.
+
+Cap not reached (cap is batch_080). No export was spent — all ground truth via `table_sets`/`irw_table_sets`.
