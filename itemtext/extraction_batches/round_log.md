@@ -8227,3 +8227,69 @@ are uploaded either way; the status field is a claim about evidence, not about t
 downgrading another round's stated verdict is a judgement call rather than a check. Flagged for
 Ben.
 
+
+## batch_066 — 2026-09-08
+
+6 tables claimed, 6 agents (one per table). **written 5 / blocked 1 / failed 0** — yield 5/6 = 83%.
+Circuit breaker NOT tripped (0% failed; the single no-CSV table is a determinate rights block, retry
+test NO).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| konerding_2019_patientsatisfaction | done, 49 rows | paper_order | VERIFIED |
+| KoreanNursing_Park_2017 | done, 100 rows | reconstructed | VERIFIED |
+| K-PCQ_Huh_2022 | done, 84 rows | paper_explicit | PARTIAL |
+| kraft_todd_2017_competence | done, 25 rows | paper_order | PARTIAL |
+| kraft_todd_2017_panas | done, 100 rows | paper_order | VERIFIED |
+| kraft_todd_2017_care_measure | **blocked** (rights) | unknown | n/a |
+
+**Gates.** normalize_nulls: 3 of 5 normalized. audit_batch: **PASS 5, zero WARNs** (so Step 5c had
+nothing to explain from that gate). verify_batch: **PASS 5**, every verify_*.R re-run end to end.
+lint_verification: 5 rows, no problems — the NOT_NEEDED-row trap did not apply, since no table in
+this round is data_labels. irw-validate: no ERRORs; two `name_charset` WARNs
+(`KoreanNursing_Park_2017`, `K-PCQ_Huh_2022`) which are properties of the LIVE table names, not
+itemtext defects — the itemtext file must be named `<table>__items` to join, so the case cannot be
+fixed here. check_provenance: exit 0.
+
+**Blocked: kraft_todd_2017_care_measure.** Not an access failure — article, S2 .docx (which prints
+all 10 stems), S3 .xlsx and the rights page all fetched cleanly. The CARE Measure is (c) Stewart
+Mercer; caremeasure.stir.ac.uk states use is "free... for non-commercial purposes", that use
+"outside of the UK, for research or education, or any other purpose" needs his prior permission,
+and that "there can be no changes made to the wording, without permission". Free-but-permission-
+gated, per irw#1945/#1955 overriding the PLOS CC BY deposit licence. The mapping is fully banked in
+notes.csv, so a reversal is a re-run not a restart. Row added to pending_index_notes.csv.
+
+**Three of this round's tables share one source** (kraft_todd_2017 PLOS ONE 12(5):e0177758, S2/S3
+Files). The sibling `kraft_todd_2017_warmth` is still pending and was deliberately not touched.
+Corroboration across the three agents was consistent: each independently identified the S3 workbook's
+four side-by-side blocks (CARE1-10 / COMP1-5 / WARM1-4 / PANASPOS-NEG1-10) and the distinct resp
+ranges that separate them. No file collisions.
+
+**Step 5b orchestrator re-checks — both confirmed, neither changed.**
+- KoreanNursing_Park_2017: `irw_table_sets(per_item=TRUE)` gives n_rows=37000 = 740x50 with n=740 on
+  every item, confirming exactly one of the study's 741 respondents was consumed as a header row by
+  `read.table(header=TRUE)` on a headerless .tab; live codes really are `X0, X0.1, X0.10, ...`, i.e.
+  make.names artifacts carrying no item content. Shipped CSV encodes the reversed direction
+  consistently — option_text 'Correct' at resp=0, 'Incorrect' at resp=1, all 50 items.
+- K-PCQ_Huh_2022: the round's most consequential public claim is that the paper's Table 1 numbering
+  contradicts the administered Supplement 1 form (a reader mapping Table 1 onto this table gets 10 of
+  12 items wrong). Confirmed on the shipped text: Crav11 is the physiological marker item ("my heart
+  would beat faster"), where Supplement 1 numbers it, not Crav3 where Table 1 would put it.
+
+**Two disclosure obligations outstanding before upload** (reported, not enforced — the irw_site
+checkout is on branch `itemtext/disclosure-backlog-2026-09-08`, not main, so check_provenance could
+not adjudicate the issues page):
+- `KoreanNursing_Park_2017` — `key_source=derived_from_responses`; no answer key is published, so the
+  key was derived from Supplement 7's upper/lower-27% distributions. Owes a line under the 2026-09-03
+  ruling.
+- `K-PCQ_Huh_2022` — `translation_source=mixed`; the 12 item translations are the study's own, but the
+  instruction sentence and all seven anchor labels were translated by THIS PROJECT. So it is not one
+  of the benign `mixed` cases and does owe a line under the 2026-09-02 ruling.
+
+**Data defect worth an issue:** KoreanNursing_Park_2017 is missing one of its 741 respondents outright
+(740 live) because of the headerless-read bug in `data/KoreanNursing_Park_2017.R`, and its 50 item
+codes are meaningless R artifacts. That is a defect in the response table, not in the item text —
+the itemtext ships correctly against the codes as they exist. Worth a repo-side issue against the
+processing script.
+
+Cap (batch_070) not reached; next round proceeds normally.
