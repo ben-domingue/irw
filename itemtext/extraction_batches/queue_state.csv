@@ -598,7 +598,7 @@ li_2021_cultural_intelligence,done,batch_070,2026-09-08T08:36:51
 li_2021_knowledge_sharing,done,batch_070,2026-09-08T08:36:51
 li_2021_sustainable_innov_behav,done,batch_071,2026-09-08T15:56:22+00:00
 li_2024_bdyz,done,batch_071,2026-09-08T15:56:22+00:00
-li_2024_sad,failed,batch_071,2026-09-08T15:56:22+00:00
+li_2024_sad,blocked,batch_071,2026-09-08T16:00:00-07:00
 li_2025_corporate_performance,done,batch_072,2026-09-08T09:35:22
 li_2025_market_environment,done,batch_072,2026-09-08T09:35:22
 li_2025_marketing_culture,done,batch_072,2026-09-08T09:35:22
@@ -650,9 +650,9 @@ lorenz_2016_efficacy1,done,batch_087,2026-09-08T15:08:05
 lorenz_2016_hope,done,batch_088,2026-09-08T15:35:00-07:00
 lorenz_2016_optimism2,done,batch_088,2026-09-08T15:35:00-07:00
 lu_2017_gad7,done,batch_088,2026-09-08T15:35:00-07:00
-lu_2017_phq9,pending,,
-lu_2017_pss10,pending,,
-lunacortes_2019_satisfaction,pending,,
+lu_2017_phq9,in_progress,batch_089,2026-09-08T15:51:46-07:00
+lu_2017_pss10,in_progress,batch_089,2026-09-08T15:51:46-07:00
+lunacortes_2019_satisfaction,in_progress,batch_089,2026-09-08T15:51:46-07:00
 lunacortes_2019_social_value,pending,,
 luo_2021_conational_ties,pending,,
 luo_2021_ecr,pending,,
