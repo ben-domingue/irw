@@ -10744,3 +10744,58 @@ regimes — German for the three CPC-12 items, English fallback for the other th
 per-table field errs conservative. Same shape as the earlier case; two instances now.
 
 Cap is `batch_095`; not reached. 736 pending, next firing takes `batch_089`.
+
+---
+
+## §A of the 080–087 handoff settled — two LIVE tables withdrawn (2026-09-08)
+
+Ben ruled both withdrawals. Neither was a batch; both were found by the originator memo's blind-spot
+search (grep the `instrument` column of `metadata/itemtext_metadata.csv`, never table names), and
+both were live in `irw_version` 358 (released 2026-09-08 13:30Z).
+
+**`cognitive_load_klimova_2023_mlq` — MLQ, Steger.** Nine canonical English MLQ items verbatim; its
+own public note already said so. michaelfsteger.com, re-fetched 2026-09-08: *"Commercial use requires
+prior written permission"*, and the tools *"may not be sold, redistributed, or marketed as part of a
+paid product, service, or value-added offering without advance authorization"*, with the University
+of Minnesota as copyright holder. A stated use restriction, so it blocks under irw#1945 (2026-09-05)
+— the same shape as `sv-maia2_randelovic_2021_hexaco60`. The table shipped from batch_021 on
+2026-09-04, *before* that rule existed; Ben ruled the rule reaches it anyway.
+
+**`dopmeijer_2022_loneliness` — De Jong Gierveld 11-item.** The handoff recorded this as IRW
+"serving the same wording from a live one" while blocking `loneliness_mudfold` at batch_087. **That
+was wrong on the facts, and the correction is the reason the ruling is not automatic.** All eleven
+shipped strings were diffed against the canonical English in the Manual of the Loneliness Scale
+(osf.io/u6gck, cached `itemtext/.cache/loneliness_mudfold/manual2026.txt` lines 108–122): **0 of 11
+match.** The live text is the deposit's own English variable labels — "I miss a good friend" against
+the manual's "I miss having a really close friend", "I'm experiencing a void around me" against "I
+experience a general sense of emptiness", "I often feel abondoned" against "I often feel rejected" —
+i.e. Dopmeijer's back-rendering of the Dutch administration, typos and all, not a transcription of
+the instrument. So there was no inconsistency with the batch_087 block: `loneliness_mudfold` would
+have shipped the canonical wording, this table did not.
+
+That made the question a new one rather than a precedent application: **does a study's own English
+rendering count as the instrument?** The DJG terms carry *"No derivatives — if you remix, transform
+or build upon the material, you may not distribute the modified material"*, and Ben ruled on
+2026-09-08 that ND reaches exactly this case — an alternative English rendering of the Dutch original
+is the modified material the clause names, so a paraphrase is not a way around the terms. NC/ND
+therefore does reach IRW item text; `loneliness_mudfold` stays blocked, and §B's conditional
+("it becomes a decision only if Ben rules that NC/ND does not reach IRW item text") is closed shut.
+
+**Mechanics, per the PSS precedent `5004d7e` and WHO-5 `2a45976`.** Both tables were located in the
+`irw_text` shard, not `irw_text_2` (`tools/withdraw_mlq_djg.py`, dry-run first). Draft tables
+deleted: 727 → 725, exactly the two targets, asserted. `uploaded` stamps kept at 2026-09-04,
+`queue_state.csv` left at `done`, `public_note` rewritten to the withdrawal statement in
+`batch_021/provenance.csv` and `batch_027/provenance.csv`. **Both wordings WERE published**, so each
+withdrawal takes effect at the next release — check the live version, not the note.
+
+**One fact was preserved rather than overwritten.** `dopmeijer_2022_loneliness`'s old public note
+carried a *response-data* finding that outlives the item-text withdrawal: IRW stores the responses in
+the opposite direction to the source (resp 1 = "No! Totally disagree!" … 5 = "Yes! Totally agree!",
+where the SPSS file and the paper both code 1 = "Yes! Totally agree"), confirmed cell for cell
+against per-item response counts. That sentence is carried into the withdrawal note, flagged as
+separate from it, so deleting the item text does not delete the finding.
+
+**Still owed, and not done here.** Both tables have live entries on `itemtext_issues.qmd` (lines 765
+and 933). The 2026-09-05 rule is that withdrawal entries are not published, so both must be
+*removed* — but `datapages/irw#165` is open against that page and two open PRs on it always collide,
+so the removals belong on #165's branch, not a new one.
