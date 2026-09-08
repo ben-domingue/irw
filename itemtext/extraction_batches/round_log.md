@@ -9385,3 +9385,47 @@ Gates: `normalize_nulls` 0/3 changed · `audit_batch` 3/3 **PASS, zero WARN** ·
 Smaller caveats carried into `notes.csv` for triage: PLOS serves liem's Table 2 **only as an image**, so its 15 sentences were transcribed by eye and are worth a human spot-check; liem's administration language is Vietnamese by inference (never stated) with English shipped as `translated_substitute`; and HH6 differs by one word between the two lindstrom level-1 sources (codebook `viktigt` vs `.sav` `viktig`, codebook form shipped).
 
 Cap is `batch_080`; 078 completed, so the cap is **not** reached and the next round proceeds normally.
+
+### batch_078 triaged — 2 shipped, 1 HELD on the HEXACO ruling — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with zero WARNs, `verify_batch`
+1 PASS + 2 correct exempt, `lint_verification` clean. `liem_2024_attitude_env` and
+`lindstrom2021_conscientiousness` uploaded (`red_up` 2/2 row-count verified), stamped and audited.
+
+**HELD: `lindstrom2021_honesty_humility`.** The agent shipped it on the ECR-R source-licence
+reading — the Swedish HEXACO wording is published by the study's own CC BY 4.0 figshare deposit,
+and hexaco.org's clause is non-commercial with no redistribution bar. That reasoning was sound when
+those were the operative rules. **It is superseded by two rulings, and applying them is not a new
+decision:**
+
+1. **#1945, 2026-09-05** — *"err on the side of not having things. so do not host."* Any **stated
+   use restriction** on the instrument now blocks; the fee/redistribution tests are explicitly no
+   longer sufficient, and re-deriving from them "gives the wrong answer on this shape".
+   `de_vries_2022_hexaco_*` went blocked→excluded under it, and batch_026 had already escalated
+   `lindstrom2021_*` behind that same clause.
+2. **The originator ruling, 2026-09-08** — the originator's terms govern over the licence of the
+   paper the wording was copied from; *"a CC BY journal appendix reproducing a restricted
+   instrument does not launder it."* This meets the agent's argument head-on, because the argument
+   is precisely that the deposit's CC BY cures it.
+
+The nearest precedent is the same day's `sv-maia2_randelovic_2021_shs` withdrawal: **a translation
+is a derivative of the restricted instrument**, so a Swedish HEXACO is not a way around an English
+restriction. Held, not withdrawn, since nothing was ever uploaded. If Ben reads the deposit's own
+CC BY as decisive after all, the file and its sidecars are in the batch directory and shipping it is
+a re-run of one upload.
+
+**`lindstrom2021_conscientiousness` shipped, but it is misnamed — irw#2107.** Its items are the
+study's 7-item **Collective Narcissism** scale adapted to Hammarby IF (`CN3`–`CN9`); the deposit
+codebook heads the block `Collective narcissism;Scale (7 items);CN3`. The study administered no
+conscientiousness scale at all, and `data/lindstrom2021_soccer.py` appears to have read the `CN`
+prefix as Conscientiousness, with the table name and Description inheriting it. **Uploading was
+still right**: the extraction was done against what the data actually is, so the shipped wording is
+correct — only the name and Description are wrong. A rename must move the `__items` table in step,
+since the join is on the bare table name.
+
+**A corpus-level lead, logged not acted on.** In `liem_2024_attitude_env`, 25 of 234 respondents
+give a strictly 4-periodic pattern across ATE1..ATE15, and all 105 inter-item correlations are
+positive (0.348–0.863, alpha 0.950) **despite the NEP scale's pro/anti alternation** — so either the
+anti-NEP items were reverse-scored before deposit or respondents did not differentiate them. That
+touches all seven `liem_2024_*` tables. Also carried: PLOS serves liem's Table 2 only as an image,
+so those 15 sentences were transcribed by eye and deserve a spot-check.
