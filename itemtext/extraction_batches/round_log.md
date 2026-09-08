@@ -9742,3 +9742,55 @@ paper or the deposit, and the shipped English is the authors' own S1 header row 
 anchors. Disclosed in `public_note`. Only the end anchors are labelled; 2-4 left blank, not padded.
 
 Cap is batch_095 — not reached, next round proceeds.
+
+---
+
+## 2026-09-08 — #2107: `lindstrom2021_conscientiousness` renamed to `lindstrom2021_collective_narcissism`
+
+Not a round. Ben's call, taken after the evidence below.
+
+**Confirmed against the primary source, not the issue.** Pulled the deposit's own
+`CodeBook_soccersupporterdata.csv` (figshare 14980251). It lists exactly four scales:
+Honesty-Humility (HEXACO-PI short form, 10 items), Hammarby identification (3), **Collective
+narcissism (7)**, violent behavioural intention (7). The CN block is headed
+`Collective narcissism;Scale (7 items);CN3` and its items are club statements —
+*"Hammarby måste få den respekt vi förtjänar"*. **The deposit contains no conscientiousness
+scale.** `data/lindstrom2021_soccer.py` had `SCALES["conscientiousness"] = CN3..CN9`, and since
+the scale key IS the table name, the misreading of the `CN` prefix became the published name.
+
+**Why this was renamed when `pezzuti_2025_coolpeople_main_nfc` was not** (155c786, the nearest
+precedent — a table holding CVSCALE items under an NFC name, corrected in provenance and shipped
+under the wrong name). There the study's own materials only ever labelled the block NFC, so IRW's
+name mirrored its source. Here the source says Collective narcissism and **the error was ours**.
+
+**The timing mattered.** `lindstrom2021_conscientiousness__items` existed only in the `irw_text_2`
+**next draft** — never published. So the item-text half cost nothing: the renamed copy was
+uploaded and the old one is deleted from the draft, and no wording was ever public under the wrong
+name. After that draft is released the same change would have been a withdrawal.
+
+**Proof the rename changed only the name.** The regenerated
+`lindstrom2021_collective_narcissism.csv` was compared cell for cell against the live
+`lindstrom2021_conscientiousness`: 1,561 rows, all seven columns, every cell equal. A rename keeps
+the row count, so a count check alone would not have shown this.
+
+Uploads: `lindstrom2021_collective_narcissism` → `item_response_warehouse_2:next`, and
+`lindstrom2021_collective_narcissism__items` → `irw_text_2:next`, both row-count verified by
+red_up. On the item-text table only `table` and `section_id` carried the old name; `instrument`
+already read "Collective Narcissism Scale (7 items adapted to Hammarby Football Club; Golec de
+Zavala et al., 2009)", because the extraction was done against what the data actually is. Its
+`public_note` disclosing the mismatch is cleared — the name is no longer wrong.
+
+### A rights question this opened, NOT resolved here
+
+`availability_audit_full.csv` marks this table AVAILABLE with the reasoning *"Conscientiousness is
+a standard HEXACO-PI-R subscale and the full HEXACO item pool is freely published/downloadable"*.
+That ruling is about **an instrument this table does not contain**, so the shipped wording has
+never been rights-checked against the scale it actually is — the Collective Narcissism Scale
+(Golec de Zavala et al., 2009). The wording itself comes from the study's CC BY 4.0 deposit, but
+the 2026-09-08 originator ruling is explicit that a permissive deposit does not launder a
+restricted instrument. **Nothing is published**, so there is no exposure today; the table sits in
+the draft pending that check.
+
+This is the second wrong row found in `availability_audit_full.csv` (KTEEM was the first), and
+unlike KTEEM this one is not a citation error but a ruling made against the wrong instrument
+entirely. The file was left unedited, per the convention set for KTEEM.
