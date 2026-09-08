@@ -226,6 +226,65 @@ git diff --cached --name-only          # confirm ONLY what you meant is staged
 
 Prefer naming paths over `git add -A`, and check `--cached` before every commit.
 
+## Settled rules — do not re-litigate these per batch
+
+Each was decided once, by Ben, after a round had raised it repeatedly. They are here rather
+than in an issue because they are answers a triager needs while working, not open questions.
+
+### A table with no item text (2026-09-08)
+
+`irw_text` DOES ship tables whose `item_text` is blank throughout, when the instrument is a
+picture or stimulus task and the wording that exists is the instruction. `twod_rotation_mather2023`
+is live in exactly that shape: 608 items, `item_text` NA on every row, carrying `instrument`,
+`instructions`, `correct_response` and `option_text`. Do not withhold a table merely for blank
+`item_text` — check what it *does* carry.
+
+The bar is that something item-level survives. `klatt_2016_speed_estimation` is HELD on this
+rule, not exempted from it: it has no `correct_response` and no `option_text` either, so beyond
+one `instrument` string and one `instructions` string repeated over all 948 rows, it carries
+nothing a reader could not get from the response table. That is below the bar; `twod_rotation`,
+which distinguishes a correct from an incorrect option, is above it.
+
+(An earlier round recorded `twod_rotation_mather2023` as "withheld 2026-08-24" and held `klatt`
+for matching it. That was wrong on the facts — `twod_rotation` shipped. Its provenance row reads
+`uploaded=unrecorded`, which means shipped on an unknown date, NOT held. Check `live_tables.csv`
+before citing a table as precedent for withholding.)
+
+### The four `_translated` columns (2026-09-08)
+
+The variation is ACCEPTED. A table with nothing to translate may carry the four `_translated`
+columns full of NA or omit them entirely, and `irw_text` tables therefore vary in width. Both
+forms are correct; a reader asking for a column by name gets NA in one and nothing in the other,
+and no consumer depends on the width. Do not normalise this batch by batch — that edits files
+which have passed every gate without producing corpus-wide consistency — and do not raise it
+again as a finding.
+
+### VERIFIED vs PARTIAL: the item-axis rule (2026-09-08)
+
+**VERIFIED means one route pins every item to its code.** A hedge about what some *other* route,
+or some upstream source, could not confirm does not weaken that and must not pull the status down.
+Two shapes that stay VERIFIED:
+
+- the hedge scopes a **secondary route that is not load-bearing** — `jiang_2021_resilience` notes
+  route 1 could not separate C4–C8 (published means within 0.04), and in the same sentence that
+  those items are pinned by Table 4's printed code labels;
+- the hedge scopes an **upstream fact no route could ever settle** — whether the authors' own
+  appendix table is correctly labelled (`jo_2023_arp`), or whether a codebook's Q-numbering
+  matches the published scale's order (`kalichman1995_scs`).
+
+What is still PARTIAL is unchanged: a route that pins a class, a block, a subscale, a direction,
+or a subset of positions but not every item — `bang_2023_self_esteem`'s shape, which is why this
+lint exists.
+
+`lint_verification.R` enforces this, but conditionally: it clears a hedge only when the evidence
+*asserts, positively*, that every item is separated, and it prints the cleared row as INFO naming
+the phrase it relied on. An agent cannot buy VERIFIED with a stock sentence.
+
+**`option_text` is a separate signal.** A table can be VERIFIED on its item axis and still ship
+blank or unverified response-option wording — `jo_2023_arp` does, because the study publishes no
+anchors. That is a real gap in what IRW ships and gets its own WARN; it is not an argument for
+PARTIAL.
+
 ## Open items
 
 Live status is in `extraction_batches/round_log.md`; outstanding *decisions* are GitHub issues on
