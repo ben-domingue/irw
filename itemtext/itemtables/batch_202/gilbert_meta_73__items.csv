@@ -1,0 +1,73 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add3d_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add4d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(4 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_add4d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Addition(4 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_count1a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Count and encircle the correct number",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_count1a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Count and encircle the correct number",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_count1b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Count and encircle the correct number",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_count1b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Count and encircle the correct number",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_div_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Division",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_grt_no","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Circle the greatest number",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_grt_no","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Circle the greatest number",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_hvy_obj","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Circle the heaviest object",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_hvy_obj","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Circle the heaviest object",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_miss_no_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Fill the missing number",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_miss_no_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Fill the missing number",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_miss_no_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Fill the missing number",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_miss_no_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Fill the missing number",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_e","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_mul_e","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Multiplication",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_nm_name_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Encircle the given number in words",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_nm_name_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Encircle the given number in words",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_nm_name_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the given number in words",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_nm_name_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the given number in words",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_num","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the given number in numerals",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_num","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the given number in numerals",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_e","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_sol_e","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Solve the sums",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt3d_d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction(2-3 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt4d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction (4 digit)",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_subt4d","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Subtraction (4 digit)",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_time","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the time shown in the clock",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_time","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Write the time shown in the clock",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_a","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_b","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,1
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,0
+"gilbert_meta_73","gilbert_meta_73_1","mathwrit_std35_WP_c","Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation)",NA,NA,"Word Problem",NA,NA,1
