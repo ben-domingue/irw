@@ -7608,3 +7608,69 @@ always, which this round now does.
 not Redivis.
 
 Cap is `batch_060`; not reached. Next round takes `batch_059`.
+
+---
+
+## batch_059 — 2026-09-07
+
+**6 tables claimed. Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `johannisson_2016_ipip_neo` | done, 600 rows (120 items x 5) | data_labels | VERIFIED |
+| `johnhenderson_2020_health_mindset` | done, 18 rows | data_labels | NOT_NEEDED |
+| `jordan_2020_burnout` | done, 50 rows | data_labels | NOT_NEEDED |
+| `jordan_2020_mindfulness` | done, 60 rows | data_labels | NOT_NEEDED |
+| `jordan_2020_resilience` | done, 30 rows | data_labels | NOT_NEEDED |
+| `jordan_2020_pss10` | **blocked** (instrument rights) | unknown | NO_ROUTE |
+
+**Gates all clean.** `normalize_nulls.R` fixed 3 of 5 files. `audit_batch.R`: 5/5 PASS,
+**no anomalies — no WARNs to explain this round.** `verify_batch.R`: 1 PASS, 4
+MISSING(exempt). `lint_verification.R`: 6 rows, no problems. `irw-validate`: 5/5 ok.
+
+**`check_provenance.R` exits 1, but no batch_059 table is implicated.** The 7 tables
+owing an issues-page line (`hua_2023_*`, `huang_2023_d_scale`, `jeon_2019_cbi`,
+`jiang_2024_*`) are all pre-existing debt from earlier rounds. Carried, not introduced.
+
+**Four `jordan_2020_*` tables came from one Qualtrics export** (PLOS ONE
+10.1371/journal.pone.0240667 S1). Four agents read the shared file and derived the same
+convention independently — useful corroboration, and no file collision.
+
+**Step 5b caught a wrong agent claim.** The `jordan_2020_pss10` agent reported that
+`Q13_8/9/10`'s n=370 (vs 539) was "genuine item nonresponse present in the raw export,
+not a processing artifact". Re-checked against the cached S1 CSV: **false.** Those three
+columns hold 539 nonblank responses each; they mix PSS anchors with agree/disagree
+anchors, and the processing script keeps only the PSS labels — Q13_8 = 23+73+160+90+24 =
+370, Q13_9 = 370, Q13_10 = 370. Corrected in `provenance.csv`, `notes.csv` and the
+`pending_index_notes.csv` row before any of it became durable.
+
+**That correction exposes a battery-wide data property**, worth an issue: in each block,
+~169 of the 539 respondents were administered a *different* anchor set on the tail items,
+and the processing script drops those responses. Live per-item n confirmed server-side:
+burnout `Q12_8/9/10` = 424/411/457, resilience `Q14_4/5/6` = 370, pss10 `Q13_8/9/10` =
+370, mindfulness 539 throughout (unaffected). The burnout and resilience agents both
+identified this correctly and disclosed it in `public_note`. Sharpest case is
+`jordan_2020_burnout`: "Sometimes" belongs to *both* anchor sets, so it is retained, and
+54/41/87 of the kept `resp=2` rows for those items come from the other-anchored
+administration — rank position is the same either way, so the coding is not wrong, but
+the shipped `option_text` describes the majority administration only.
+
+**Other notes.** `jordan_2020_mindfulness` is FFMQ short-form by wording; the paper names
+only BRS/CBI/PSS, so the instrument is identified from the text and that inference is
+disclosed. `johannisson_2016_ipip_neo` is data_labels but with a *positional* code
+derivation, so it earned no exemption and was verified anyway (24,000/24,000 cells
+reproduce; 0/120 items survive a +/-1 shift; anchors confirmed against the deposit's own
+facet percentiles, 30 facets r +0.894..+0.978). Its `option_text` is the standard IPIP
+anchoring rather than text this study published — disclosed in a `public_note`.
+
+**PSS-10 block is determinate (retry test NO)** — same CMU/Cohen FAQ clause, md5
+`f2eeb376bfab9aa86ae8ae5c7719ec9c`, byte-identical to the copy batch_047 hashed. Seventh
+PSS-family table blocked or withdrawn on it. Mapping banked, so a reversal is a re-run.
+
+**Circuit breaker not tripped:** 0 failed of 6 (0%). No rate limit or spend cap hit.
+
+**Export discipline:** `--table-sets` for every gate; the orchestrator's Step 5b check used
+`irw_table_sets(per_item=TRUE)` plus the locally cached PLOS deposit — no Redivis export.
+One agent did a full `irw_fetch` on `johannisson_2016_ipip_neo` (24,000 cells, small).
+
+Cap is `batch_060`; not reached. Next round takes `batch_060`, which is the cap.
