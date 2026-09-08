@@ -10799,3 +10799,68 @@ separate from it, so deleting the item text does not delete the finding.
 and 933). The 2026-09-05 rule is that withdrawal entries are not published, so both must be
 *removed* — but `datapages/irw#165` is open against that page and two open PRs on it always collide,
 so the removals belong on #165's branch, not a new one.
+
+## batch_089 — 2026-09-08 15:51–16:05 PT — 3 tables — 2 written / 1 blocked / 0 failed (yield 67%)
+
+Three agents, one per table, per the 2026-09-08 daytime setting. No stop condition fired at Step 0
+(highest existing was batch_088, 736 pending, no breaker, no in_progress rows). Queue head: the
+`lu_2017_*` battery and the start of the `lunacortes_2019_*` block.
+
+| table | outcome | rows | mapping_basis | Step 5b |
+|---|---|---|---|---|
+| `lu_2017_phq9` | **done** | 36 (9 items × 4) | paper_order | route 7 + cross-instrument correlation + route 3 → **PARTIAL** |
+| `lunacortes_2019_satisfaction` | **done** | 21 (3 items × 7) | paper_order | route 1 + route 8 → **PARTIAL** |
+| `lu_2017_pss10` | **blocked** (rights) | — | unknown | NO_ROUTE (mapping banked) |
+
+**Gates, all clean.** `normalize_nulls.R` fixed 22 lines in the lunacortes CSV; `audit_batch.R`
+2/2 PASS with no anomalies (so no WARNs to explain at Step 5c); `verify_batch.R` PASS on both,
+each ending VERDICT: PASS; `lint_verification.R` 3 rows, no problems; `irw-validate` ok on both
+files, nothing to report. Zero Redivis exports this round — every ground-truth call went through
+`irw_table_sets()`.
+
+**`check_provenance.R` exits 1, and it is NOT this round.** The two tables it names are
+`liu_2025_positive_cognition` (batch_086) and `hua_2023_efl_study_engagement` (batch_047, HELD so
+nothing is owed); both batch_089 provenance rows carry a populated `translation_source` and neither
+is flagged. Pre-existing, unchanged by this round.
+
+**`lu_2017_pss10` — tenth PSS-family table blocked or withdrawn on the CMU clause.** The agent
+re-fetched the rights holder's FAQ rather than citing the precedent: md5
+`f2eeb376bfab9aa86ae8ae5c7719ec9c`, byte-identical to the copy hashed by batches 047/059/062/063,
+still reserving profit-making use to paid permission and requiring specific permission to include
+the scale in a copyrighted larger scale. The PLOS CC BY 4.0 deposit governs the response data only.
+**Retry test NO** — determinate rights verdict, not an access failure (article, both `.xlsx`
+deposits and the FAQ all fetched cleanly), so it does not count toward the circuit breaker. The
+mapping is banked and re-runnable in `verify_lu_2017_pss10.R` (VERDICT: PASS); a rights reversal
+would ship it as paper_order / translated_substitute with PARTIAL verification.
+
+**Step 5b — three agent claims re-checked by the orchestrator, all three confirmed** (server-side,
+no export):
+- `satis_3` really does use only resp 2–7 — `resp_min=2`, 6 levels, against 1–7 and 7 levels for
+  `satis_1`/`satis_2`. Table-level resp set is still 1–7, so the gate passes correctly and option
+  rows ship for all seven levels.
+- `PSS_5` really is the lone item at n=1424 against 1425 for the other nine — the single `-1` the
+  processing script nulls, and the fingerprint no permutation of the mapping reproduces.
+- The 1296-vs-1096 respondent gap reconciles: 1425 rows per item = 1296 wave-1 + the 129-respondent
+  S1 retest. Consistent with the same finding established independently for `lu_2017_gad7` in
+  batch_088, and it is in the `public_note` of both.
+
+**Notable, carried for triage.**
+- *PLOS Table 1 is an image only* for `lunacortes_2019_satisfaction`. The `.t001` HTML/text routes
+  carry no item text; wording came off the PNG via the `figure/image?size=large` endpoint. Flagged
+  in the notes and `public_note` as a fallible image read that deserves a character-level
+  spot-check at triage. (Same class as the deferred image-only journal-table sweep.)
+- *Paper-side scoring inconsistency in Lu 2017* (a response-data observation, not an item-text
+  defect): the paper's **retest** SCPSS-10 figure of 18.6 ± 4.7 equals the *unreversed* sum of the
+  S1 retest file (18.62 ± 4.64), while its main-sample figure 13.7 ± 5.6 is correctly
+  reverse-scored (13.64 ± 5.47). The two published PSS figures appear to be scored differently from
+  each other. Worth an issue if anyone analyses that table.
+- *Dictionary correction available, not acted on*: the Descriptions for `lunacortes_2019_isnbi` and
+  `lunacortes_2019_isncc` say the full scale names are "not spelled out in the article text" —
+  Table 1's image does spell them out ("Intensity of the use of virtual social network as a source
+  of information" / "…to create new content").
+- *Sibling trap for a future round*: the remaining five `lunacortes_2019_*` tables come off the same
+  two images, but the paper **dropped** PSV3 and ISNCC4 from its CFA after Lagrange tests, so
+  Table 2 lists only PSV1/PSV2 and VSNCC1–3 while the data ships 3 and 4 columns. A missing
+  indicator there is by design, not by error.
+
+Circuit breaker not tripped: 0 failed of 3 (0%). Cap is batch_095; not reached, next round proceeds.

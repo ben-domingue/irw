@@ -650,9 +650,9 @@ lorenz_2016_efficacy1,done,batch_087,2026-09-08T15:08:05
 lorenz_2016_hope,done,batch_088,2026-09-08T15:35:00-07:00
 lorenz_2016_optimism2,done,batch_088,2026-09-08T15:35:00-07:00
 lu_2017_gad7,done,batch_088,2026-09-08T15:35:00-07:00
-lu_2017_phq9,in_progress,batch_089,2026-09-08T15:51:46-07:00
-lu_2017_pss10,in_progress,batch_089,2026-09-08T15:51:46-07:00
-lunacortes_2019_satisfaction,in_progress,batch_089,2026-09-08T15:51:46-07:00
+lu_2017_phq9,done,batch_089,2026-09-08T15:51:46-07:00
+lu_2017_pss10,blocked,batch_089,2026-09-08T15:51:46-07:00
+lunacortes_2019_satisfaction,done,batch_089,2026-09-08T15:51:46-07:00
 lunacortes_2019_social_value,pending,,
 luo_2021_conational_ties,pending,,
 luo_2021_ecr,pending,,
