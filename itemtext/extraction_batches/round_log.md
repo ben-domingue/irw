@@ -8730,3 +8730,48 @@ earlier batch with no issues-page entry — neither batch_071 table is implicate
 owns it.
 
 Cap (batch_080) not reached.
+
+### batch_071 triaged and uploaded — 2 shipped, 1 failed; circuit breaker cleared — 2026-09-08
+
+Gates re-run live on the two shipped tables: `normalize_nulls` 0 of 2, `audit_batch` 2 PASS with
+no anomalies, `verify_batch` PASS=2, `lint_verification` clean. Both uploaded, `red_up` 2/2
+row-count verified, pre-flight clean, stamped and audited field-by-field.
+
+**Circuit breaker cleared, and the reasoning matters more than the act.** The round tripped it
+correctly and correctly declined to override itself: 1 of 3 tables `failed` is 33.3%, over Step 5's
+30% rule. But the failure is `li_2024_sad`, whose dispatch AND its one permitted retry were both
+killed by `API Error: Output blocked by content filtering policy` (req_011CerFvCN4hjMnVWZNJZGxN,
+req_011CerGVw9UFmEs7EHNR8VRp) **before either agent wrote a byte**. Nothing was determined about the
+table: no source reached, no verdict formed, no files written.
+
+Three things say infrastructure rather than pipeline breakage, which is what the breaker exists to
+catch:
+
+1. **The other two agents in the same round passed all six gates.** A round that were actually
+   broken would not produce two clean tables.
+2. **Step 2's own batch_010 precedent** calls a content-filter trip "spurious, not about the data" —
+   those three tables all passed on individual retry.
+3. **Nothing was written**, so there is no half-formed output to be suspicious of.
+
+Step 5's carve-out names rate limits and spend caps, not content filtering, which is why the round
+applied the numeric rule literally instead of quietly overriding it. That was the right call by the
+round; the override is a human one and is recorded here rather than made silently.
+
+**`li_2024_sad` stays `failed`, deliberately.** Only `pending` rows are claimable, so it will not be
+picked up automatically — it needs a deliberate re-dispatch. Per the flag's own warning: two
+consecutive content-filter kills on the same table, while its siblings ran fine, points at something
+specific to this table rather than an outage. It is the Social Avoidance and Distress scale, and both
+the prompt and the instrument's wording concern social anxiety and distress. **If it trips a third
+time, extract it by hand rather than spending a third retry.**
+
+**A dictionary error needing a human hand, NOT fixed here.** `li_2024_bdyz` is described in the
+dictionary as a "4-item body-image scale subset". It is actually the ERQ **expressive-suppression**
+subscale; the study's body-image measure is the separate 15-item SPA block. The round re-derived this
+itself rather than trusting its agent: ES total mean 14.66 / SD 5.61 / N 1,151 against published
+14.66 / 5.61 / 1,151, alpha 0.8336 vs 0.834, and r(ES, SPA) = 0.219 matching Table 2 exactly.
+Replacement text is in `batch_071/notes.csv`. Left for Ben because the dictionary has an
+auto-only-column + export-time-override write path and must not be hand-edited.
+
+**An unverified lead for whoever re-runs `li_2024_sad`**, from the `bdyz` agent: the supplement's
+stated reverse-key set reproduces the published SD but not the mean, and flips the sign of the
+Table 2 correlation. Nothing public depends on it.
