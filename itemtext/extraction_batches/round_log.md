@@ -7451,3 +7451,77 @@ same way. No file was touched for them.
 orthography before upload.
 
 Cap is `batch_060`; not reached. Next round takes `batch_057`.
+
+---
+
+## batch_057 — 2026-09-07
+
+**6 tables claimed; 3 written / 3 blocked / 0 failed. Yield 50%.** All four gates clean
+on the first pass: `normalize_nulls` 0 of 3 changed, `audit_batch` **3 PASS with no
+anomalies** (so nothing owed under Step 5c), `verify_batch` 1 PASS + 2 MISSING(exempt),
+`lint_verification` 5 rows no problems, `irw-validate` ok on all three. Circuit breaker
+not in play: **0 failed**, and no rate limit or spend cap was hit — every agent returned
+its own report.
+
+**Written**
+- `jiang_2024_instituinteg` — 5 items × 7 levels = 35 rows, Chinese administered wording
+  + English twins, `data_labels` / `study_materials` / `machine_translation`.
+- `jiang_2024_ptsacc` — 3 items × 6 levels = 18 rows, same source and basis.
+- `jimenezherrera_2022_moral_sensitivity` — 9 items × 6 levels = 54 rows, Spanish
+  administered + the paper's own English, `paper_explicit`, **VERIFIED**.
+
+**The sibling lead from batch_056 paid off.** Last round's `jiang_2024_growthm` agent
+found the availability audit's claim that this PLOS deposit's `.sav` "has no item text"
+was false. Both `jiang_2024_*` tables this round came straight out of those same SPSS
+variable labels — 53 rows of item text that the audit had written off. The remaining
+`jiang_2024_*` tables marked UNAVAILABLE on that basis are still extractable the same
+way; that lead is not yet exhausted.
+
+**Blocked — all three determinate, none a pipeline fault.** Rows added to
+`itemtables/pending_index_notes.csv`. Every source was retrieved successfully in all
+three cases (article HTML, S1 workbooks, table images, the EEI PDF); what is missing is
+material the sources never published.
+- `jiang_2025_empathy`, `jiang_2025_inclusive_efficacy`, `jiang_2025_sacie` all come from
+  ONE deposit (PLOS ONE 10.1371/journal.pone.0321066, CC BY 4.0) whose sole supplement is
+  a bare-code XLSX with no variable labels, no value labels and no codebook sheet, while
+  the article reproduces no wording. **The common structural killer is within-dimension
+  renumbering**: canonical SACIE-R and canonical TEIP both interleave their subscales
+  across the numbered instrument, so `sentiments1-5` / `ITE1-6` style codes are a
+  renumbering nobody publishes — 1,728,000 consistent assignments for sacie, 720 per
+  facet for inclusive_efficacy. Subscale is recoverable; item identity is not.
+- `jiang_2025_sacie` carries a second, independent ground: CC BY-NC on the only source of
+  the canonical items.
+
+**Orchestrator re-checks (Step 5b) — three claims verified, one of my own corrected.**
+- *Confirmed.* Paper §2.2.4 says institutional integrity "has three questions on the
+  scale" while the `.sav` carries **five** labelled `InstituInteg` columns (all n=1792,
+  all 7 levels). Read verbatim from the cached paper text. Correctly disclosed in
+  `public_note` rather than force-fitted; all five shipped.
+- *Confirmed.* `PTSAcc2` really does use only 5 levels (3–7) while `PTSAcc1`/`PTSAcc3`
+  run 2–7 with 6 — the structural signature the verification row leans on. Also
+  re-read all 8 `.sav` labels directly: every shipped `item_text` is byte-identical to
+  its variable label, and `PTSAcc1`'s label really does repeat the block prefix before
+  an em dash, as the agent said.
+- *Confirmed.* Re-fetched the EEI licence page and matched the CC BY-NC sentence
+  verbatim. The `sacie` licence block stands.
+- *Corrected — mine, not an agent's.* I hedged the `empathy` note by second-guessing the
+  agent's resp figures. Re-running `table_sets.R` shows the agent was exactly right:
+  1,680 rows, resp set {2..7}, six items 3–7 and `empathy7` 2–7. Note rewritten to state
+  it plainly.
+
+**Owed on upload (not a gate failure).** `check_provenance.R` passes on vocabulary. Both
+new `jiang_2024_*` tables ship IRW-generated English and owe an `itemtext_issues.qmd`
+line when uploaded; both have a `public_note` and are `uploaded=""`. The carried-forward
+backlog is unchanged and still overdue — `hua_2023_efl_course_experience` and
+`huang_2023_d_scale` are LIVE (uploaded 2026-09-07) with no issues-page entry, plus
+`hua_2023_efl_study_engagement`, `jeon_2019_cbi`, `jiang_2024_growthm` unuploaded, and
+the 6 `translation_source=mixed` tables to review.
+
+**Human spot-check worth doing:** `jimenezherrera_2022_moral_sensitivity`'s Spanish was
+read off a Table 1 **image** (the paper publishes it no other way), so character accuracy
+is unverified — the verification row says so explicitly. Its numeric mapping is not in
+doubt: paper Table 3's mean-if-deleted and variance-if-deleted reproduce for all 9 items
+(max |diff| 0.005 / 0.001, tolerance 0.02 / 0.01) and the closest rival mapping misses by
+10.6×.
+
+Cap is `batch_060`; not reached. Next round takes `batch_058`.
