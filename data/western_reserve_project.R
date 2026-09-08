@@ -3,6 +3,15 @@
 ##############################
 
 
+##############################
+##NOTE: 2026-09-08 from #2029. `item` here is a row number over
+##`unique(df$item)`, so it depends on which columns survive the drop_vars
+##loops. Fixing the ctp_wave4 loop below removes 202 columns, which means a
+##fresh run of this script does NOT reproduce the item ids in the published
+##table. The published table was repaired by deleting those 202 items from the
+##existing long file instead, precisely so every other item id stayed put.
+##############################
+
 library(tidyverse)
 library(readxl)
 library(janitor)
@@ -275,14 +284,19 @@ names(ctp_wave4) <- tolower(names(ctp_wave4))
 
 drop_vars <- c()
 
+## 2026-09-08 (#2029): this loop alone said `length(ctp_wave4)` -- the column
+## count of the whole frame, a constant -- where every other wave says
+## `length(unique_vals)`. `unique_len` therefore never equalled 1 or 2 and
+## NEITHER guard ever fired, so this one file kept its uninformative columns:
+## 81 items entirely NA and 121 with a single value plus NA, out of wave 4's
+## 1,004. The inner test was wrong too -- `ctp_wave4[1]` is the first COLUMN,
+## not `unique_vals[1]`. Both are restored to the shape the other waves use.
 for (i in 1:ncol(ctp_wave4)) {
   unique_vals <- unique(ctp_wave4[[i]])
-  unique_len <- length(ctp_wave4)
+  unique_len <- length(unique_vals)
   
-  if (unique_len == 1) {
-    if (is.na(unique(ctp_wave4[1]))) {
+  if (unique_len == 1 & is.na(unique(unique_vals[1]))) {
     drop_vars <- append(drop_vars, names(ctp_wave4)[i])
-    }
   }
   
   if (unique_len == 2 & (is.na(unique_vals[1]) | is.na(unique_vals[2]))) {

@@ -189,14 +189,22 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
     # 16_personalityfactors, whose resp is float64 and 99% non-null.
     #
     # Triage keeps the inherited behaviour (50 callers depend on it); the gate
-    # profiles re-judge it over non-null values only.
+    # profiles re-judge it over non-null values only. Every present value must
+    # parse: the inherited 99% tolerance hid rare literal "NA" responses (#2029).
     if profile in ("upload", "legacy") and "resp" in df.columns:
         import pandas as pd
         present = df["resp"].dropna()
-        if len(present):
-            parses = pd.to_numeric(present, errors="coerce").notna().mean()
-            if parses >= 0.99:
-                report.findings = [f for f in report.findings if f.check != "resp_numeric"]
+        invalid = present[pd.to_numeric(present, errors="coerce").isna()]
+        report.findings = [f for f in report.findings if f.check != "resp_numeric"]
+        if len(invalid):
+            examples = ", ".join(repr(v)[:100] for v in invalid.drop_duplicates().head(5))
+            report.findings.append(Finding(
+                "resp_numeric", "error",
+                f"{len(invalid)} non-numeric resp value(s) among {len(present)} "
+                f"non-missing responses; examples: {examples}. Literal text "
+                "tokens (including 'NA') are not empty cells. Verify their "
+                "meaning in the source before recoding or removing rows.",
+                table=table, group="core"))
 
     if profile in ("upload", "legacy"):
         for finding in (extra.check_name(table)
@@ -242,6 +250,25 @@ def validate_file(path, *, label: str | None = None, profile: str = "upload",
     import pandas as pd  # deferred: red_up must import this module without pandas
     if path.suffix.lower() in (".csv", ".tsv", ".txt"):
         df = pd.read_csv(path, sep=None, engine="python")
+        if profile in ("upload", "legacy") and not is_item_text(label):
+            if "resp" in df:
+                # Re-read only resp without NA-token recognition. The Python
+                # parser applies NA filtering even AFTER converters, so a
+                # converter alone cannot preserve "NA" (#2029). A second,
+                # single-column pass keeps every other column's established
+                # parsing semantics, without retaining a second full frame.
+                raw = pd.read_csv(path, sep=None, engine="python",
+                                  usecols=["resp"], dtype={"resp": object},
+                                  keep_default_na=False)["resp"]
+                # Only empty fields are missing. Preserve whitespace and
+                # literal NA/NULL/etc. as evidence; CSV quotes do not alter it.
+                df["resp"] = raw.mask(raw == "")
+                # Infer numeric storage for clean CSVs; never coerce invalid
+                # tokens into nulls just to make the numeric check pass.
+                try:
+                    df["resp"] = pd.to_numeric(df["resp"], errors="raise")
+                except (ValueError, TypeError):
+                    pass  # validate_frame reports the preserved offending text
     elif path.suffix.lower() in (".rdata", ".rda", ".rds"):
         # The 922 legacy tables in ../data/pub/ (#1703 sub-item 1.5). Not
         # routed through irw_triage_updated.load_table because that pulls in
