@@ -10196,3 +10196,66 @@ tables differ again: their source column names are the original Chinese, so they
 base fields rather than taking the English fallback.
 
 Cap is `batch_095`; not reached. 748 pending, next firing takes `batch_085`.
+
+## batch_085 — 2026-09-08
+
+3 tables claimed, **3 written / 0 blocked / 0 failed — yield 3/3 (100%)**. All three
+from one PLOS ONE deposit family; three agents, one per table (daytime 3-agent setting).
+
+| table | mapping_basis | verification | gates |
+|---|---|---|---|
+| liu_2025_learning_motivation | data_labels | VERIFIED | PASS |
+| liu_2025_mlq | data_labels | VERIFIED | PASS |
+| liu_2025_nlgz | paper_explicit | VERIFIED | PASS |
+
+Gates: normalize_nulls fixed 1 file (mlq, 64 lines); audit_batch **3 PASS, no WARNs**
+(so nothing owed under Step 5c); verify_batch PASS=3; lint_verification 0 ERROR / 1 WARN
+(liu_2025_nlgz, option_text blank — the README publishes no anchor wording, expected);
+irw-validate ok on all three, no dup_item_resp and no resp_ambiguous; check_provenance
+clean (liu_2025_mlq's `mixed` translation_source owes no issues-page line — both parts
+come from published sources, and it is not yet uploaded).
+
+### Step 5b — orchestrator re-checks of agent claims (all three CONFIRMED)
+
+- **liu_2025_mlq, "the paper's prose subscale numbering is wrong" (overrides the source).**
+  Confirmed by re-running the verify script: PLOS ONE 10.1371/journal.pone.0330447 §3.2.1
+  says Presence = items 6–9 / Search = 1–5, but its own Table 2 composites reproduce only
+  under Search {1,3,5,6} = 5.40870/1.20832 and Presence {2,4,7,8,9} = 5.23826/1.24617
+  against published 5.4087/1.20832 and 5.2383/1.24617. Nothing force-fitted to the prose.
+- **liu_2025_mlq, item_2 stored already reverse-scored (a defect claim about resp data).**
+  Confirmed: r=+0.630 with the other four Presence items vs +0.178 with Seeking; alpha
+  0.855 as stored (exactly the published 0.855) vs 0.726 flipped; Presence composite would
+  move to 4.771 vs a published 5.2383. Anchors ship flipped for that item only, per the
+  burkert_2019_whoqol_bref precedent. irw-validate correctly does NOT flag this — per-item
+  direction differences are legitimate.
+- **liu_2025_nlgz, instrument-name correction (about to be written into a note).**
+  Confirmed verbatim from the Dryad README: "NLGZ is perceived competence data, from 1 to 4"
+  and "NLGZ: We measured perceived competence with four items."
+
+### Notable
+
+- **RECORD DEFECT, needs a human fix: `itemtext/availability_audit_full.csv` mislabels
+  `liu_2025_nlgz` as the Chinese Physical Activity Rating Scale-3 (PARS-3).** It is
+  perceived competence (4 items, 879 respondents, 1–5). The physical-activity block is the
+  sibling prefix `YDCY`. Left uncorrected in that file deliberately — it is a historical
+  audit artifact, and rewriting it is a human call. Second-order discrepancy on a table not
+  touched this round: the README calls YDCY the Godin Leisure Time Exercise Questionnaire
+  while the article calls it PARS-3.
+- **Chinese-administered instruments, two different shapes.** learning_motivation and mlq
+  ship the administered Chinese in `item_text` (the deposit's XLSX column headers ARE the
+  item sentences) with English in `_translated`. nlgz could not: its `.sav` carries zero
+  variable and zero value labels across all 74 columns and the README is English throughout,
+  so it takes the 2026-09-01 fallback (text_source=translated_substitute,
+  translation_source=study_supplied, language=Chinese).
+- **No Chinese response anchors are recoverable for any of the three.** All three ship
+  English endpoints or blanks on the option axis; intermediate points left blank, never
+  padded with their own numbers.
+- **Permutation trap, again.** liu_2025_learning_motivation's S2 Appendix prints the 16
+  items in a different order from the administered order, so the English was matched by
+  content, not position — the same trap already seen in the liu_2023 siblings. Corroborated
+  at block level: intrinsic α=0.883 vs reported CR 0.89, extrinsic α=0.710 vs CR 0.72.
+- Step 3b clean on all three; no dictionary/metadata problems beyond the audit row above.
+  No rate limit, spend cap, or export-quota event — the whole round ran on server-side
+  aggregates and supplement files, `irw_fetch` was avoided where possible.
+
+Cap (batch_095) not reached; queue has 745 pending.
