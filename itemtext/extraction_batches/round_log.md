@@ -7299,3 +7299,73 @@ no issues-page entry (hua_2023_efl_course_experience, hua_2023_efl_study_engagem
 huang_2023_d_scale). No batch_054 table is implicated — all six are study-supplied.
 
 Cap is batch_060; not reached. 879 pending remain.
+
+## batch_055 — 2026-09-07
+
+6 tables claimed, **6 written / 0 blocked / 0 failed — 100% yield.** No circuit-breaker
+concern. Cap (batch_060) not reached.
+
+| table | outcome | mapping_basis |
+|---|---|---|
+| jablonska_2020_upward_comparison | pass (caveat) | data_labels |
+| jaen_2024_odor_id | pass (caveat) | data_labels |
+| janoffbulman_2016_moralmotives_s1 | pass (caveat) | data_labels |
+| janoffbulman_2016_moralmotives_s2 | pass (caveat) | data_labels |
+| jeilani_2024_academic_stress | pass (caveat) | data_labels |
+| jeilani_2024_psychological_wellbeing | pass (caveat) | data_labels |
+
+All six are `data_labels` — an unusually strong round, because every source shipped a
+labelled file (two PLOS `.sav` deposits, a CC0 figshare `.sav`, a PLOS supplement XLSX)
+and in every case the IRW `item` code IS the source column name, so no positional
+inference was made anywhere. All six therefore carry NOT_NEEDED verification rows and no
+`verify_*.R`; `verify_batch.R` reports MISSING(exempt)=6, which is correct.
+
+**Gates.** `normalize_nulls.R` fixed 2 of 6 files. `audit_batch.R`: 5 PASS, 1 WARN.
+`verify_batch.R`: 6 exempt. `lint_verification.R`: 6 rows, no problems.
+`irw-validate`: all 6 ok. `check_provenance.R`: 562 rows / 57 files, no errors.
+
+**The one WARN** (Step 5c) — `jeilani_2024_academic_stress`, "14.3% of rows have blank
+item_text": expected, not a defect. It is exactly AS2's 5 rows of 35. AS2 is in the
+`.xlsx` (663 responses) but absent from the `.sav` entirely — the study dropped it before
+its CFA — and the paper prints no wording, so nothing is recoverable. Blank is correct.
+
+**Step 5b re-checks — three agent claims independently verified, all three CONFIRMED:**
+
+1. *`jeilani_2024_psychological_wellbeing`, a public_note about OTHER live tables.*
+   Re-read the cached `.sav`/`.xlsx` directly: element-wise identical over all 663 rows,
+   `sav PWB1 = xlsx SSF1` (an MSPSS *family* item), `PWB4 = EM3`, `PWB5 = PG1`,
+   `PWB6 = SA1`. So `jeilani_2024_emotional`, `_personal_growth`, `_purpose_in_life`,
+   `_proactivity` and `_social_anxiety` are **Ryff well-being subscales published under
+   unrelated construct names** — the processing script's `PREFIX_TO_NAME` read the
+   deposit's EM/PG/PL/PRO/SA prefixes as separate constructs. `_social_anxiety` and
+   `_proactivity` are the most misleading. **Deserves its own issue against the
+   processing script**; not fixable from the itemtext side.
+
+2. *`jaen_2024_odor_id`, a data-defect claim.* All nine numbers reproduce. Live table
+   (n=845) vs the S1 "Monell Data" sheet (n=1163): play doh **48.4 vs 72.0**, lemon
+   92.3 vs 81.3, smoke 71.5 vs 81.3, flower 86.3 vs 94.1; other five within 2.6 points.
+   The two sheets use different ID systems and cannot be linked. A deposit-level
+   disagreement, not an extraction error — a reader comparing the paper's Fig 2 to the
+   IRW table will find they disagree. Correctly kept off the public issues page (it is a
+   figure-vs-data issue, not a text-vs-table mismatch).
+
+3. *`janoffbulman` OPRO_3 source override.* The s2 agent overrode its own `.sav`
+   ("for one's own **game**") with the Appendix's "**gain**". Confirmed by a source it
+   never consulted: the S1 File `.sav` independently labels it "gain". The typo is local
+   to the S2 deposit; both tables ship "gain".
+
+**Cross-table finding worth recording (NOT an error).** `OPRE_4` and `OPRE_5` carry
+swapped wording between s1 and s2. Checked both `.sav` files directly — the two deposits
+genuinely number those two items the other way round, and each agent faithfully
+transcribed its own file. The other 28 items are identical. Flagged in both notes rows so
+a future reviewer diffing the two tables does not read it as a mapping bug.
+
+**Both janoffbulman agents independently reported** that the article Appendix lists the
+MMM items in a within-subscale order that differs from the `.sav` column order — an
+Appendix-order mapping would have mis-assigned up to 12 of 30 items. Two agents reaching
+this from the same paper without contact is good corroboration for the label-based route.
+
+**Pre-existing, not from this round:** `check_provenance.R` still reports 3 tables shipping
+IRW-generated English with no issues-page entry (`hua_2023_efl_course_experience`,
+`hua_2023_efl_study_engagement`, `huang_2023_d_scale`) and 6 `translation_source=mixed`
+tables to review. Carried forward.
