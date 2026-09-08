@@ -9071,3 +9071,59 @@ disclosure, not weak separation, so VERIFIED is the honest status.
 re-run; my own independent re-run at triage also passed. The committed `audit_report.csv` is the
 clean one. Worth noting only because a transient upstream 400 is indistinguishable from a real
 failure in a single run — re-run before believing one.
+
+## batch_075 — 2026-09-08T10:20 → 10:28
+
+3 tables claimed, **3 written / 0 blocked / 0 failed**. Yield 3/3 (100%). Circuit breaker
+not tripped (0% failed). Queue: 775 pending after this round.
+
+Tables (all from PLOS ONE 10.1371/journal.pone.0321999, Li X 2025, sports tourism / social
+media, CC BY 4.0 — the same source as batch_074's `li_2025_socmedia_ewom`):
+
+| table | items | rows | mapping_basis | audit |
+|---|---|---|---|---|
+| li_2025_socmedia_infoquality | 3 (IQ1–IQ3) | 15 | data_labels | PASS |
+| li_2025_socmedia_revisit | 3 (RV1–RV3) | 15 | data_labels | PASS |
+| li_2025_socmedia_satisfaction | 4 (SAT1–SAT4) | 20 | data_labels | PASS |
+
+All three are `data_labels`: the S2 File `.sav` (md5 29461be97f9f11752769a98989a39d19) carries
+populated SPSS variable labels on every item column, and the processing script melts the columns
+by name, so the IRW item code IS the `.sav` column name. Step 5b NOT_NEEDED for all three,
+recorded in both `verification_merged.csv` and `mapping_verification.csv`. `verify_batch.R`
+reports MISSING(exempt)×3, which is the correct outcome for data_labels, not a failure.
+
+Gates: normalize_nulls 0/3 changed; audit_batch **3 PASS, zero WARNs**; verify_batch
+MISSING(exempt)×3; lint_verification clean (no ERRORs — the NOT_NEEDED rows were written into
+BOTH files); irw-validate ok on all three; check_provenance exit 0.
+
+### Notable — translation_source harmonized, agents disagreed on identical strings
+
+Two agents labelled `translation_source=study_supplied` and one labelled it `mixed`, for
+**byte-identical** option strings from identical `.sav` label sets. Orchestrator checked the
+sources rather than taking either at face value: the cached article contains exactly one
+"strongly agree", one "strongly disagree" and **zero** standalone "Neutral", and the S1 File
+contains no English anchors at all. So the authors printed only the two *endpoints*, and the
+three intermediate anchors shipped as Disagree/Neutral/Agree are IRW's renderings of
+不赞同/中立/赞同. `item_text_translated` remains fully study-supplied (S1 File Appendix A).
+
+All three harmonized to `mixed`, which is literally what the vocab denotes ("different fields
+came from different sources"), with `public_note` populated on all three to disclose it.
+
+**Two follow-ups for a human, neither done by this round:**
+1. Under the 2026-09-02 ruling these three owe a line on `itemtext_issues.qmd`. Not added here —
+   that file is in the separate public `irw_site` repo and `check_provenance.R` classes it as
+   REVIEW, not a failure.
+2. The already-uploaded sibling `li_2025_socmedia_ewom` (batch_074) ships these same five strings
+   under `study_supplied` and wants the same correction. `li_2025_socmedia_usefulness` (still
+   pending, head of queue) will raise it again.
+
+### Other
+
+- **RI/RV drift resolved.** The paper's prose writes the revisit-intention construct as "RI"
+  while the data columns are `RV1–RV3`; the `.sav` has no `RI*` column at all. Naming drift
+  only, same 3-item scale: counts agree 3/3/3, and the agent's one-factor loading rank order on
+  the local `.sav` (RV1 .760 < RV3 .867 < RV2 .885) matches the paper's PLS outer loadings
+  (RI1 .861 < RI3 .907 < RI2 .914). Step 3b clean on all three tables.
+- Pre-existing, not from this round: `check_provenance.R` still reports
+  `hua_2023_efl_study_engagement` as IRW-generated content with no issues-page entry.
+- Cap (batch_080) not reached; 5 rounds remain.
