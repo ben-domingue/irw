@@ -8038,3 +8038,113 @@ all from earlier rounds; none of batch_064's four appear in any flagged list.
 verify script reading `komura_2026_gqs_perceived_safety` read-only as a criterion).
 
 Cap is batch_070 — not reached; the next round takes batch_065. 819 pending.
+
+## batch_065 — 2026-09-08
+
+6 tables claimed, **6 written / 0 blocked / 0 failed** (yield 100%). All six are
+`komura_2026_*` from one source: Komura & Yamada (2026) PLOS ONE
+10.1371/journal.pone.0340449, CC BY 4.0 — two Godspeed (GQS) subscales and four
+MDMT subscales, all from the same S2 File questionnaire transcript and S3 File
+workbook. Six agents, one table each; sibling collision warnings issued and
+respected (no cross-writes).
+
+Gates: normalize_nulls 1 of 6 fixed (`mdmt_ethical`, 32 lines). audit_batch
+**6/6 PASS, no anomalies** (so no Step 5c WARN explanations owed).
+verify_batch **PASS=6**. lint_verification 6 rows, no problems.
+irw-validate clean on all six. check_provenance flags only pre-existing rows
+from earlier batches — none of this round's tables (all six are
+`translation_source=study_supplied`, i.e. the authors' own English, so no
+issues-page line is owed).
+
+Provenance: all six `mapping_basis=paper_explicit`,
+`text_source=translated_substitute`, `translation_source=study_supplied`,
+`language=Japanese`. The study was administered in Japanese to 148 Yahoo!
+Crowdsourcing respondents, but the deposit publishes **zero** Japanese
+instrument wording (0 CJK characters across S1/S2/S4/S5; S3 headers are bare
+codes with no label row), so the documented fallback applies: the authors' own
+English in the base fields, `_translated` empty. No `data_labels` tables in this
+round, hence no NOT_NEEDED rows.
+
+Verification: **all six PARTIAL**, which is the honest status here. Route 3
+(published subscale means/SDs by condition, paper Tables 2 and 3) reproduces to
+≤0.005 for every table and pins subscale membership, raw/unreversed storage and
+scale direction; a per-item resp-frequency bridge from the S3 workbook to the
+live table matches cell for cell. What none of it establishes is order *within*
+a block of near-synonymous adjectives — `mdmt_sincere` (Sincere / Genuine /
+Straightforward / Real-trustworthy) is the clearest case, resting on the S2
+File's own numbering. Two tables did pin individual items further:
+`gqs_perceived_intelligence` item 2 by a duplicated-anchor correlation (0.741,
+next 0.624) and item 4 by partial r (0.387 vs ≤0.221); `mdmt_capable` item 4 by
+cITC (0.747 vs 0.888–0.904). Still PARTIAL, correctly.
+
+**Step 5b orchestrator re-checks — three agent claims independently confirmed,
+none corrected:**
+
+1. **`cov_aitype` carries an `unknown` level in all nine `komura_2026_*` IRW
+   tables.** S3 sheet `questionnaires` counts vertical=52, horizontal=50,
+   random=40, unknown=6 (identical in `sessions_metrics`); 40+6=46 = paper
+   Table 1's Random (Control) n. `data/komura_2026_godspeed.py` maps
+   `aitype → cov_aitype` verbatim, so the 6 control-arm respondents ship
+   labelled `unknown`. Corroborated by the four MDMT verify scripts, which
+   reproduce Table 2 only when `unknown` is pooled into `random`. **This is a
+   response-data issue, not an itemtext defect, and it affects three tables
+   beyond this batch.** Flagged for human triage; no issue filed by this round.
+2. **GQS Perceived Intelligence departs from canonical Godspeed.** S2 lines
+   189–194 give item 2 as `Unresponsive ←→ Responsive` — canonical position 2 is
+   Foolish–Sensible — and S2 line 179 prints the identical anchor as Animacy
+   item 4. Transcribed literally, disclosed in the `public_note`. (Not in this
+   batch: the same S2 block prints Likeability items 1 and 3 as the same anchor,
+   `Unpleasant ←→ Pleasant`.)
+3. **`mdmt_sincere`'s resp set {1..7} vs the siblings' {0..7} is real, not a
+   truncated option list.** Across its four S3 columns, resp=0 occurs 0 times in
+   592 responses; capable/ethical/reliable carry 7/7/10 zeros. Shipping 7 option
+   rows per item is correct.
+
+Also recorded (source-side, not acted on): the article miscites the MDMT to
+reference [13], listed as *Lee JD, See KA* (trust in automation, 2004) rather
+than Ullman & Malle. Rights checked — the MDMT v1 CONDITIONS OF USE impose no
+fee, NC or redistribution bar, and the shipped wording is in any case the
+study's own English from a CC BY 4.0 deposit.
+
+Circuit breaker not tripped (0% failed). Queue: 813 pending remain.
+Cap is batch_070 — not reached; next round proceeds.
+
+### WHO-5 withdrawn from both shards; the originator's terms govern — 2026-09-08
+
+**Ben's ruling, 2026-09-08:** where the originator of an instrument restricts it such that a
+downstream author should not have released the wording, IRW respects the originator's more
+restrictive licence rather than the licence of the paper the wording was copied from. This
+settles the question batch_064 raised and supersedes the "source you copied from governs"
+reading. It generalises beyond WHO-5.
+
+**What was pulled.**
+
+| table | shard | state | effect |
+|---|---|---|---|
+| `hui_2024_who5__items` | irw_text_2 | draft only, never released | gone outright |
+| `fcv19s_hossain_2022_depression__items` | irw_text | **published** in v19.0 | removed from the draft; withdrawal takes effect at the next release of that shard |
+
+`irw_text:next` is now 729 tables against 732 released; `irw_text_2:next` is 118.
+
+**`fcv19s_hossain_2022_depression` is the find worth carrying.** It is named for a fear-of-COVID
+study and was serving the WHO-5 verbatim — all five canonical items ("I have felt cheerful and in
+good spirits", "I woke up feeling fresh and rested", ...) and all six official anchors, 30 rows,
+live in the released corpus. Nothing flagged it, and the batch_064 block that raised the WHO-5
+question would not have found it either: **rights blocks are decided per incoming table, but no
+sweep looks for the same instrument already published under an unrelated table name.** It was
+found by searching `metadata/itemtext_metadata.csv`'s `instrument` field rather than table names.
+It has no provenance row (it predates the batch pipeline) and no issues-page entry, so the
+withdrawal is recorded here rather than in a batch file.
+
+**Still open: the same sweep turned up other blocked instruments in published item text.** Leads,
+not verdicts — only WHO-5 was verified item-by-item before Redivis row reads began failing, and
+the `instrument` field sometimes describes the *study* rather than the instrument (`promis1wave1_cesd`
+is a CES-D, correctly kept). Worth checking under the new ruling: `sv-maia2_randelovic_2021_shs`
+(Subjective Happiness — the same instrument blocked at batch_061 as `kern_2021_happiness`),
+`baka2023_uwes`, and the four live PSS-named tables (`alkouri_2025_icu_stressors`,
+`eammi_grahe_2018_stress`, `ecps_sahm_2024_stress`, plus `cormier_2024_pss4` already withdrawn).
+SF-36's four are probably fine — batch_048 found RAND's terms permissive.
+
+**Blocks that stand unchanged:** `kokoszka_2022_who5` (batch_064), and `nteveros_2021_who5` /
+`wakui_2023_who5` remain pending and must not be extracted. Per convention, withdrawn tables keep
+`status=done` in `queue_state.csv`, as `gillman_2023_pss` and `cormier_2024_pss4` did.
