@@ -82,6 +82,8 @@ needs_note <- character(0)
 note_reason <- character(0)
 needs_review <- character(0)
 withdrawn <- character(0)
+stamped   <- character(0)
+unstamped <- character(0)
 n_rows <- 0L
 
 for (f in files) {
@@ -118,6 +120,31 @@ for (f in files) {
         pn <- ifelse(is.na(x$public_note), "", trimws(x$public_note))
         withdrawn <- c(withdrawn,
                        x$table[startsWith(pn, "IRW does not offer item text for")])
+    }
+
+    ## A HELD table -- extracted, gated, and deliberately never uploaded -- ships
+    ## no wording either, so it owes an issues-page line for exactly the same
+    ## reason a withdrawal does not: the page describes what IRW ships. Before
+    ## this, `hua_2023_efl_study_engagement` (batch_047, a rights hold that will
+    ## never ship) failed the check in EVERY round report, and the only way to
+    ## clear it was to disclose wording that is not public.
+    ##
+    ## The signal is a blank `uploaded` stamp, and it has to be read across ALL
+    ## provenance files, not per row: one table can appear twice (batch_004 and
+    ## batch_012 both carry ALSECYPIAMH_WU_2022_PHQ, the second unstamped after
+    ## its hold was released). Held therefore means unstamped EVERYWHERE. The
+    ## literal string `unrecorded` counts as stamped -- it means uploaded on an
+    ## unknown date, which is what twod_rotation_mather2023 (live in irw_text)
+    ## and himmelstein-admc_raw-2025 carry.
+    ##
+    ## The trust boundary is the same as the withdrawal one, and tighter here:
+    ## a blank stamp on a table that WAS uploaded would exempt it wrongly, so
+    ## the exempted tables are named in the report rather than dropped silently.
+    ## Shipping a held table stamps it, and it re-enters the check that round.
+    if (all(c("table", "uploaded") %in% names(x))) {
+        up <- ifelse(is.na(x$uploaded), "", trimws(x$uploaded))
+        stamped   <- c(stamped,   x$table[nzchar(up)])
+        unstamped <- c(unstamped, x$table[!nzchar(up)])
     }
 
     ## One table can legitimately appear in two provenance files -- a language
@@ -287,14 +314,18 @@ if (file.exists(page)) {
 ## The trust boundary: this takes the public_note at its word. A row that claims a
 ## withdrawal while its wording is still live on Redivis would be exempted wrongly,
 ## and nothing offline can see that -- red_up's draft/published listing is what would.
-disclosure_drop <- !(needs_note %in% withdrawn)
+held            <- setdiff(unique(unstamped), unique(stamped))
+exempt          <- union(withdrawn, held)
+disclosure_drop <- !(needs_note %in% exempt)
 needs_note_all  <- needs_note
 needs_note      <- needs_note[disclosure_drop]
 note_reason     <- note_reason[disclosure_drop]
-needs_review    <- setdiff(needs_review, withdrawn)
-n_withdrawn     <- length(unique(needs_note_all[!disclosure_drop]))
+needs_review    <- setdiff(needs_review, exempt)
+dropped         <- unique(needs_note_all[!disclosure_drop])
+n_withdrawn     <- length(intersect(dropped, withdrawn))
+held_dropped    <- setdiff(dropped, withdrawn)
 
-if (file.exists(page) && length(needs_note)) {
+if (file.exists(page) && (length(needs_note) || length(held_dropped))) {
     txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
     undisclosed <- needs_note[!vapply(needs_note, grepl, logical(1),
                                       x = txt, fixed = TRUE)]
@@ -303,6 +334,10 @@ if (file.exists(page) && length(needs_note)) {
     if (n_withdrawn)
         cat(sprintf("  (%d further table(s) declared IRW-generated content that has since been\n  withdrawn -- no wording ships, so no entry is owed. %d withdrawn in all.)\n",
                     n_withdrawn, length(unique(withdrawn))))
+    if (length(held_dropped))
+        cat(sprintf("  (%d further table(s) declared IRW-generated content but are HELD --\n  extracted and gated, never uploaded, so no wording ships and no entry is\n  owed. %d held in all. Shipping one stamps it and it re-enters this check.)\n    %s\n",
+                    length(held_dropped), length(held),
+                    paste(sort(held_dropped), collapse = ", ")))
     if (length(undisclosed)) {
         for (why in unique(note_reason)) {
             u <- undisclosed[undisclosed %in% needs_note[note_reason == why]]
