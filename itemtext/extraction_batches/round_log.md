@@ -9429,3 +9429,66 @@ positive (0.348–0.863, alpha 0.950) **despite the NEP scale's pro/anti alterna
 anti-NEP items were reverse-scored before deposit or respondents did not differentiate them. That
 touches all seven `liem_2024_*` tables. Also carried: PLOS serves liem's Table 2 only as an image,
 so those 15 sentences were transcribed by eye and deserve a spot-check.
+
+---
+
+## batch_079 — 2026-09-08
+
+**3 tables claimed, 3 written / 0 blocked / 0 failed — yield 3/3 (100%).** Circuit breaker not
+tripped (0% failed). Three agents, one per table, per the 2026-09-08 daytime setting. No rate
+limits, no export-quota trouble, no OS kills.
+
+| table | rows | mapping_basis | audit | verification |
+|---|---|---|---|---|
+| `liu_2017_ssrs_support` | 49 (10 items) | reconstructed | WARN (explained) | PARTIAL |
+| `liu_2018_gse` | 40 (10 items) | data_labels | PASS | NOT_NEEDED |
+| `liu_2018_lot_r` | 50 (10 items) | reconstructed | PASS | PARTIAL |
+
+Gates: `normalize_nulls.R` 0 of 3 changed; `audit_batch.R` 2 PASS / 1 WARN; `verify_batch.R` 2 PASS
++ 1 MISSING(exempt); `lint_verification.R` clean (3 rows, no problems) — the NOT_NEEDED row was
+written into **both** `verification_merged.csv` and the permanent tracker, so the batch_020/021
+phantom-ERROR pattern did not recur. `irw-validate` clean on all three.
+
+**Two of the three tables are the same source file** (PLOS ONE 13(4):e0194559, the Shanghai shyness
+battery; `liu_2018_panas`, `liu_2018_shyness` and further siblings are still queued). Sibling
+partitioning held — no cross-writes.
+
+**Step 5b re-check, orchestrator: the `data_labels` exemption on `liu_2018_gse` is real.** This is
+the round's strongest claim, since it exempts a table from mapping verification entirely, so it was
+re-derived from the deposit rather than taken on report. `journal.pone.0194559.s002` has no variable
+labels, but `xl/comments1.xml` carries an Excel cell comment on each header cell; `AT1`–`BC1` hold
+one GSE sentence each, the header cells themselves read `self_efficacy01`–`self_efficacy10`, and
+`data/liu_2018_shyness_battery.py` melts that by-name list — so the IRW item code *is* the commented
+column. All 10 comment strings match the shipped `item_text` exactly (10/10, byte-for-byte). Note
+for anyone repeating this: a naive regex over `sheet1.xml` returns shared-string *indices* for row 1
+and looks like a mismatch; parse with `openpyxl`.
+
+**`liu_2018_lot_r`'s reverse-coding claim reproduces.** Items 3/7/9 ship with reversed `option_text`
+because the deposit stores them already reverse-coded — alpha of the scored six as stored **0.645**
+against the paper's published **.65**, versus **0.093** un-reversed. Parcel identities pin the scored
+set exactly: `LOT_R_1 = mean(Optimism1, Optimism9)`, `LOT_R_2 = mean(3,4)`, `LOT_R_3 = mean(7,10)`,
+max deviation 0 over 208 respondents, and 0 of 375 competing subsets reproduces any parcel.
+PARTIAL is the right status: nothing separates 1/4/10 from each other, 3/7/9 from each other, or the
+four fillers. `irw-validate` shows no `resp_ambiguous` — the per-item direction difference is
+legitimate and correctly not flagged.
+
+**`liu_2017_ssrs_support`'s WARN is instrument structure, not a defect** (Step 5c, written into
+`notes.csv`). SSRS items 5–7 are not Likert: S5 is a 5-source support matrix summed (observed
+10–20), S6 and S7 are counts of support sources (observed 1–5 and 3–7). No level carries a published
+label, so `option_text` is blank there rather than padded with the level number — 21 blank of 49 =
+42.9%, exactly the WARN. **My first draft of that note gave S6/S7 as "1–9 / 1–10" from the agent's
+summary; the per-item check gave 1–5 and 3–7 and the note was corrected before commit.** Same class
+of error as the `anh_2026_finbehavior` "exactly 3.000" note — the agent's finding was a lead, the
+numbers had to come from the data.
+
+**Outstanding, for triage not for this round: `liu_2017_ssrs_support` owes a public issues-page
+line.** `check_provenance.R` exits 1 naming it (with the pre-existing `hua_2023_efl_study_engagement`)
+as IRW-generated content with no entry — its `translation_source=machine_translation`, since the
+`.sav` carries zero labels and the paper reproduces nothing, so the English in `_translated` is this
+project's. Nothing was uploaded and `uploaded` is blank, so the entry is not yet due; it is due at
+upload, and it lives in the separate `irw_site` repo, which this round did not touch.
+`liu_2018_lot_r` also appears on the softer `translation_source=mixed` list (12 tables, REVIEW not
+FAILURE) — its wording was transcribed from published sources (PMC10510265 Table 1, PMC6224782
+Appendix A) plus the article's own quoted item, so on the 2026-09-02 ruling nothing is owed there.
+
+Cap not reached (`batch_080` is the stop condition and does not exist). Next firing proceeds.
