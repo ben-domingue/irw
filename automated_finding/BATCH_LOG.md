@@ -13836,3 +13836,67 @@ at the top level as well as inside `runs/`. Five scheduled routines between
 2026-08-25 and 2026-09-07 had worked around the `runs/` rule by copying
 output up to `automated_finding/` or force-adding it; the ten strays that
 reached main are untracked.
+
+## 2026-09-08 — PLOS weekly run: "REQUIRED" was unreachable from the runner
+
+Scheduled weekly PLOS run (`irw_discover_plos_monthly.py --mode weekly`,
+`--per-term-cap=4`). Bookkeeping went straight to main as `a4b1cff`
+(`search_terms_log.csv` + 56 DOIs into `plos_seen_dois.csv`); the candidates
+CSV went to a branch as `#2109`.
+
+56 candidates triaged, all 15 terms visited, 14 at the per-term cap:
+40 `no_usable_file`, 13 `human_assistance`, 1 `below_min_n`, 1 `timeout`,
+1 `not_item_response`. **0 `good`.**
+
+### Step 2b was skipped nineteen hours after it was made required
+
+`#2076` retitled Step 2b REQUIRED and added `irw_batch_updated.py
+--retriage` to chain it, precisely so scheduled runs would stop skipping it.
+It merged at 01:12Z. This run started at 19:50Z and skipped Step 2b anyway,
+reporting "0 good" and stopping there.
+
+The routine was not ignoring the rule. `irw_discover_plos_monthly.py` and
+`irw_discover_pmc_monthly.py` triage in-process off `irw_triage_updated` and
+never call `irw_batch_updated` — so `--retriage` did not exist on either of
+the two paths that had ever needed compelling. The fix landed on the
+interactive path and missed both unattended ones. Fixed in `#2111`: the
+chaining logic moves to `irw_retriage_ha.chain_step2b` and both article
+connectors call it with `run=True` unconditionally, since an unattended run
+has nobody to read a reminder on stderr.
+
+This is the second consecutive week a run reported success while the step
+that produces its actual yield did not happen — and the first where the
+enforcement mechanism itself was on the wrong path. A rule that only reaches
+attended runs is not a rule for the runs that skip things.
+
+### Run retroactively: 12 of the 13 are machine-actionable
+
+`chain_step2b` over this run's CSV:
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 9 |
+| `worth_retrying` | 3 |
+| `human_review` | 1 |
+
+All 13 are `cc-by`. The 9 `recoverable_format` are one shape — `QC failed on
+resp_scale_mixed` plus a `multi_scale` warning, i.e. one deposit carrying
+several instruments, which the standard already answers with one table per
+scale. Largest by size: `pone.0310078` (873 × 161), `pone.0133254`
+(810 × 194), `pone.0182745` (706 × 107), `pone.0350219` (490 × 90),
+`pone.0246676` (867 × 56). The single genuine `human_review` is
+`pone.0311284`, where no column met the id heuristic.
+
+So "0 good" was never the story: the 2026-09-01 PLOS weekly bucket looked
+the same and became 21 tables / 280,971 responses. The 12 actionable DOIs
+are unworked as of this entry.
+
+### The per-run CSV came back
+
+`f7cbdda` force-added
+`automated_finding/plos_monthly_candidates_weekly_2026-09-08.csv`, which
+`.gitignore:59` (`plos_monthly_candidates_*.csv`) covers — the exact
+workaround `#2075` removed the day before, and the sixth scheduled routine
+to use it. `#2109` closed unmerged; this entry plus `a4b1cff` is the durable
+record, which is what the rule asks for. The routine also wrote no BATCH_LOG
+entry at all, which is the other half of what replaces the CSV.

@@ -247,8 +247,12 @@ Step 2b.
 
 ## Step 2b — Retriage `human_assistance` (REQUIRED, not optional)
 
-Normally you get this for free by passing `--retriage` to Step 2. Run it by
-hand only for a triage CSV that was produced without it:
+Normally you get this for free: `irw_batch_updated.py --retriage` chains it,
+and the two scheduled article connectors
+(`irw_discover_plos_monthly.py`, `irw_discover_pmc_monthly.py`), which
+triage in-process and never touch `irw_batch_updated.py`, run it
+unconditionally at the end of every run. Run it by hand only for a triage
+CSV that was produced without either:
 
 ```bash
 python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage_ha.csv
@@ -257,7 +261,10 @@ python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage
 **A triage run is not finished until this has happened.** It was worded as
 "recommended" until 2026-09-07, and the scheduled routines duly skipped it
 week after week, committing triage CSVs with no `refined_flag` column at
-all. That is not a cosmetic gap: until the bucket is sub-classified, the
+all. `#2076` fixed that on the `irw_batch_updated.py` path only, which is
+not the path the scheduled PLOS/PMC connectors take — so the 2026-09-08
+PLOS weekly run skipped the step again, nineteen hours after "REQUIRED"
+merged. Both connectors call it directly now. That is not a cosmetic gap: until the bucket is sub-classified, the
 `not_item_response` rows can't be dropped, the `human_review` rows can't be
 archived to `human_review/`, and the remainder can't be told apart from
 either — so the whole `human_assistance` bucket silently becomes nobody's

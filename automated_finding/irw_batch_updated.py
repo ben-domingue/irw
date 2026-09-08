@@ -790,34 +790,13 @@ def main():
     # after run, committing triage CSVs with no refined_flag column and
     # leaving the whole bucket unclassified (2026-09-07 is one of several).
     # A hint that is ignored every week is not a hint that needs rewording,
-    # it needs to stop being optional: --retriage does the step in-process,
-    # and without it the reminder is now loud, names the exact command with
-    # this run's real paths, and says what is left undone.
-    n_ha = int(counts.get("human_assistance", 0))
-    if not n_ha:
-        return
-    retriage_out = os.path.splitext(args.out)[0] + ".retriage_ha.csv"
-    script = os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                          "irw_retriage_ha.py")
-    cmd = [sys.executable, script, "--input", args.out, "--output", retriage_out]
-    if not args.retriage:
-        print(f"\n!! {n_ha} human_assistance row(s) are NOT yet sub-classified.",
-              file=sys.stderr)
-        print("   Step 2b is required before anyone reads this triage: without "
-              "it\n   there is no refined_flag column, so the not_item_response "
-              "rows\n   can't be dropped and the human_review rows can't be "
-              "archived.", file=sys.stderr)
-        print(f"   Run:  {' '.join(cmd)}", file=sys.stderr, flush=True)
-        return
-    print(f"\n[step 2b] retriaging {n_ha} human_assistance row(s) -> "
-          f"{retriage_out}", flush=True)
-    rc = subprocess.call(cmd)
-    if rc != 0:
-        print(f"\n!! Step 2b FAILED (exit {rc}). The triage at {args.out} is "
-              f"complete but its\n   human_assistance rows are still "
-              f"unclassified -- rerun the command above\n   before treating "
-              f"this run as done.", file=sys.stderr, flush=True)
-        sys.exit(rc)
+    # it needs to stop being optional.
+    #
+    # The implementation lives in irw_retriage_ha.chain_step2b so the three
+    # scheduled connectors, which never call this script, get the same step
+    # rather than a second copy that drifts (see that docstring).
+    from irw_retriage_ha import chain_step2b
+    chain_step2b(args.out, run=args.retriage)
 
 
 if __name__ == "__main__":
