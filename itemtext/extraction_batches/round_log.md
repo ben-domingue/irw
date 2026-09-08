@@ -10071,3 +10071,70 @@ is self-describing in the shipped `option_text` (`未选择` / `已选择`), the
 Rights: nothing to escalate. Both deposits are CC BY and both instruments are the studies' own.
 
 Cap is `batch_095`; not reached. 751 pending, next firing takes `batch_084`.
+
+## batch_084 — 2026-09-08
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** — yield 3/3 (100%). No circuit-breaker
+concern. Three agents (the daytime setting), one per table; no OOM kill, no rate limit.
+
+| table | mapping_basis | text_source | verification |
+|---|---|---|---|
+| liu_2023_training_freq | data_labels | study_materials | NOT_NEEDED (number-preserving rename of .sav columns) |
+| liu_2025_classroom_interaction | data_labels | translated_substitute | VERIFIED (response-frequency matching, 11×11 grid, 0 off-diagonal) |
+| liu_2025_foreign_lang_enjoyment | data_labels | translated_substitute | VERIFIED (cell-for-cell, 623/623, match rate 1.0000) |
+
+**Gates, all clean.** normalize_nulls fixed 2 of 3 files; audit_batch 3/3 PASS with **no WARNs**
+(so nothing owed under Step 5c); verify_batch 2 PASS + 1 MISSING(exempt, data_labels);
+lint_verification 3 rows, no problems; `irw-validate` ok on all three (2 checks each);
+`check_provenance.R` exit 0 — its remaining output (4 `mixed` review rows, 1 HELD table) is
+pre-existing and not from this batch. NOT_NEEDED row written into BOTH the batch's
+verification_merged.csv and the permanent tracker, so lint came back clean first time.
+
+**Step 5b orchestrator re-checks — all three agent claims independently confirmed:**
+
+1. **FLE sub-scale ordering (confirmed, and sharpened).** The agent reported that the article's
+   prose §2.2.4 contradicts its own S1 Appendix and data-column order. Confirmed from the cached
+   sources, and the paper's *own exemplars* are what settle it: the prose says "teacher
+   appreciation (items 1–3, e.g. 'The teacher is friendly.'), personal enjoyment (items 4–6, e.g.
+   'I've learned interesting things.'), social enjoyment (items 7–9, e.g. 'We form a tight
+   group.')", yet in the S1 Data header 'The teacher is friendly.' is item **5** and "I've learnt
+   interesting things." is item **2** — each exemplar sits in the other block. Refinement the
+   agent's note did not have: the **social block is NOT affected** ('We form a tight group.' is
+   deposit item 7, as the prose says); only teacher and personal are transposed. Shipped codes
+   follow the appendix/data and are correct. This is an ARTICLE PROSE defect, not a data or
+   itemtext defect. Recorded in notes.csv.
+2. **Classroom-interaction wording variants (confirmed).** S1 Appendix vs S1 Data header differ
+   on exactly two of eleven items — header "4. The interaction between the instructor and me is
+   high..." / "2. There is much interaction between other students and me..." vs the shipped
+   appendix forms, both of which add a leading "I think". The other nine are identical. The
+   agent's "items 4 and 9" numbering is right when counted across the whole 11-item CI block
+   (ci_li_4 and ci_ll_2).
+3. **training_freq S3 permutation (confirmed).** S3's English prints Academic literature /
+   Online academic conferences / Onsite lectures, while the .sav and administered Chinese have
+   线下 (offline) at position 2 and 线上 (online) at position 3. The agent matched English to
+   Chinese by CONTENT rather than position, which is the correct resolution; same permutation
+   already seen in sibling liu_2023_adherence_barrier.
+
+**Deposit intelligence for later rounds — the `liu_2025_*` cluster is NOT one deposit.** Both
+liu_2025 agents converged on this independently, which is why it is worth trusting:
+- **10.1371/journal.pone.0328226** (Liu Z, Sun, Zhang, Wang & Yang 2025, CC BY 4.0, N=623),
+  script `data/liu_2025_classroom_wtc.py`. One 44-item questionnaire whose **S1 Data (.s002 XLSX)
+  header row IS the item wording**, plus S1 Appendix (.s001 DOCX) listing all 44 in order.
+  Covers `classroom_interaction`, `willingness_communicate`, `speaking_selfefficacy`,
+  `foreign_lang_enjoyment`. The two still queued should be quick — the wording is in that one
+  cached header row. All are English-only deposits of a Chinese-administered survey, so they take
+  the 2026-09-01 fallback (text_source=translated_substitute, `_translated` empty).
+- **10.1371/journal.pone.0330447** (N=345), script `data/liu_2025_meaning_learning.py`. Covers
+  `mlq`, `positive_cognition`, `learning_motivation`. Different shape from the above: its S1
+  spreadsheet **column names are the original Chinese question text**, so those three are a
+  Chinese-text-available case — base fields Chinese, `_translated` English.
+- **10.1371/journal.pone.0314338** (Liu Yubo, Yan & Li 2025, N=879) — a third paper, reported as
+  covering `nlgz`, `ydcy` and others; `nlgz`/`ydcy` are pinyin column prefixes from *that*
+  deposit, not the WTC one. Not yet verified by an orchestrator re-check.
+
+Both liu_2025 tables recorded mapping_basis=`data_labels` but **declined the Step 5b exemption**,
+because the processing scripts derive codes by positional column slice rather than a
+number-preserving rename — so each ran a real verification anyway and both came back VERIFIED.
+That is the right call and worth repeating on the siblings.
+
+Cap (batch_095) not reached; queue has 748 pending.
