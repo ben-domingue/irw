@@ -33,6 +33,14 @@ os.environ["REDIVIS_API_TOKEN"] = irw_secrets.load_write_token("withdraw_pss_swe
 import redivis
 
 TARGETS = {
+    # Round 2, 2026-09-08: found by itemtext/sweep_instrument_rights.py, NOT by the
+    # name-based candidate list -- it carries the complete canonical PSS-10 under
+    # codes pss1..pss10 and no one had looked at it. This is the register earning
+    # its keep on its first run.
+    "singh_2025_identity_pss__items",
+}
+# Round 1, withdrawn earlier the same day; absent from the draft, do NOT re-delete.
+ROUND1 = {
     "lhsbrasil_couto_2023_pss__items",
     "oxfordcovid_xue_2024_pss__items",
     "kfcovid_pss_li2020__items",
@@ -45,7 +53,7 @@ TARGETS = {
 #   ecps_sahm_2024_stress__items    -- PARTIAL withdrawal, draft numRows 87 against 137
 #                                      published; the 18 COVID-stressor items are unrestricted
 #                                      and must survive, so it must NOT be deleted whole.
-ALREADY = {"eammi_grahe_2018_stress__items", "ecps_sahm_2024_stress__items"}
+ALREADY = ROUND1 | {"eammi_grahe_2018_stress__items", "ecps_sahm_2024_stress__items"}
 # Verified NOT the PSS; a name-based sweep would have taken it.
 KEEP = {"alkouri_2025_icu_stressors__items", "ecps_sahm_2024_stress__items"}
 
