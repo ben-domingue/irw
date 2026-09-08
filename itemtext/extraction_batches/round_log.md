@@ -9492,3 +9492,33 @@ FAILURE) — its wording was transcribed from published sources (PMC10510265 Tab
 Appendix A) plus the article's own quoted item, so on the 2026-09-02 ruling nothing is owed there.
 
 Cap not reached (`batch_080` is the stop condition and does not exist). Next firing proceeds.
+
+### batch_079 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 2 PASS / 1 WARN, `verify_batch` 2 PASS +
+1 correct exempt, `lint_verification` clean. All three uploaded, `red_up` 3/3 row-count verified,
+pre-flight clean, stamped and audited. Disclosure opened as **datapages/irw#164** (375 entries) —
+a new PR because #163 was merged mid-session.
+
+**The audit WARN is instrument structure, not a defect.** `liu_2017_ssrs_support` items 5–7 are
+composite/count items with no published level labels, so `option_text` is blank rather than padded
+— the never-pad rule again, the same shape as `kuehner_2017_mw_rumination` in batch_067.
+
+**`liu_2017_ssrs_support` owed a disclosure line and has one.** Its `.sav` carries no labels and the
+paper reproduces no items, so the shipped English is IRW's own machine translation.
+`liu_2018_lot_r` appears on the softer `mixed` list but its wording came from published sources, so
+nothing is owed there.
+
+**Two orchestrator re-checks worth keeping, because one of them re-derived an exemption rather than
+trusting it.** `liu_2018_gse`'s `data_labels` exemption removes the table from verification
+entirely, so the round re-derived it from the deposit: the `.xlsx` has no variable labels, but
+`xl/comments1.xml` carries a cell comment per header — `AT1`–`BC1` give one GSE sentence each, the
+headers read `self_efficacy01`–`10`, and the processing script melts that list by name. 10/10
+comment strings match the shipped `item_text` exactly. Checking the thing that lets you skip a check
+is the right instinct. And `liu_2018_lot_r`'s reverse-coding reproduces: alpha of the scored six is
+0.645 as stored against the paper's .65, and 0.093 un-reversed.
+
+**The round corrected its own draft before committing.** Its first WARN explanation gave SSRS items
+6/7 as ranging 1–9 and 1–10, taken from an agent summary; the per-item check gives 1–5 and 3–7
+(S5 is 10–20). The note carries the real numbers. Same pattern as batch_076's inflated correlations
+— a sound conclusion carried on numbers that had not been recomputed.
