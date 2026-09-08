@@ -242,6 +242,18 @@ getrows<-function(l) {
     biblio<-biblio[!test,]
     ##no csv
     biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+    ## Rows whose table is gone from BOTH Redivis and the dictionary.
+    ## The filter above is the only removal path this script has ever had, and
+    ## it needs the dictionary row to still exist and say "not public" -- so a
+    ## table retired by DELETING its dictionary row keeps its biblio row for
+    ## ever. Runs here, next to that filter, so the refresh and the overrides
+    ## below never work on a row that is on its way out. See
+    ## drop_orphan_biblio_rows() in dict_union.R for the two-condition rule and
+    ## the guards that stop a truncated oracle from emptying the file.
+    biblio <- drop_orphan_biblio_rows(
+        biblio, irw_dict, l$file.live, name,
+        out.file = file.path(dirname(file.out),
+                             paste0("retired_", basename(file.out))))
     ## Refresh the five dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
     ## does not have; without this a correction typed into the sheet for an

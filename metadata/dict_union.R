@@ -883,3 +883,123 @@ apply_osf_permission <- function(biblio, label = "core",
             " OSF row(s) that had no licence")
     biblio
 }
+
+##---------------------------------------------------------------------------
+##Biblio rows for tables that are gone.
+##
+##THE MECHANISM. getrows() has exactly one removal path: it drops rows whose
+##table appears in `irw_notpub`, the dictionary rows marked `Public Reshare? !=
+##"Public"`. So a biblio row can only ever be removed by a dictionary row that
+##is still there and now says "not public". DELETING the dictionary row instead
+##-- which is what retiring, withdrawing or renaming a table actually looks like
+##in the sheet -- removes the only thing that could have removed the biblio row.
+##It survives forever, and seed_from_local() then re-carries it on every run.
+##
+##irw#1871 shows both halves in one withdrawal. Nine wvs_panasiuk_* tables were
+##pulled on rights grounds; seven were marked `Private` in the sheet and left
+##biblio correctly, while `wvs_panasiuk_science` and `wvs_panasiuk_security`
+##were deleted from the sheet outright and are still published today, still
+##carrying a live OSF data url and a blank licence. Same withdrawal, same day,
+##opposite outcome -- decided by which edit the contributor happened to make.
+##
+##Measured 2026-09-08 against the live catalog and the live sheet: 17 rows.
+##Six families, three causes -- retired duplicate (#1967 marcatto _cwb), rights
+##withdrawal (#1871, the two above), and rename, where the old name was never
+##retired (the six thirdpartypunishmentunfairsharing_mcauliffe_2025_<country>
+##rows superseded by one pooled `mcauliffe_2025_thirdpartypunishment`,
+##`altahla_2024_whoqol_bref` -> `altahla_2024_whoqol`, the six
+##hachenberger_2025_* _main/_pilot names, and alomari_2025_student_questionnaire).
+##
+##THE RULE, and why it takes two conditions rather than one:
+##
+##  DROP A ROW ONLY IF ITS TABLE IS ABSENT FROM THE LIVE CATALOG *AND* NO
+##  DICTIONARY ROW NAMES IT.
+##
+##Liveness alone is not enough. 60 further rows name a table that is not on
+##Redivis but does have a Public dictionary entry: those are uploads that have
+##not happened yet, not tables that are gone. Dropping them would delete work in
+##progress, and getrows() would rebuild each one next week from the same
+##dictionary row -- at a DOI fetch and a Claude call apiece, which is the churn
+##seed_from_local() exists to stop. Requiring the dictionary to be silent as
+##well makes it impossible for this to remove a row anyone still intends.
+##
+##The dictionary side deliberately ignores `Public Reshare?`: a non-Public row
+##is already handled by the irw_notpub filter, and reading the column here would
+##make this fire on rows that path has always owned.
+##
+##GUARDS. This is the function in the file that can delete published provenance,
+##so it refuses to run on a source it cannot corroborate. Both oracles must be
+##present and plausibly sized -- a failed sheet fetch or a truncated
+##metadata.csv must never be able to empty biblio.csv. The precedent is real:
+##rows were once dropped for four LIVE su_2024_* tables and the dictionary
+##entries had to be restored by hand.
+##
+##Whatever is dropped is kept in `retired_biblio.csv`, ACCUMULATED rather than
+##overwritten. Unlike retired_tags.csv, whose source rows come back from the
+##sheet on every run, a retired biblio row is gone from both the Redivis table
+##and file.out once this has run twice -- so a fresh write each run would report
+##the same rows once and then silently empty the record of them.
+drop_orphan_biblio_rows <- function(biblio, dict, live.file, label = "core",
+                                    out.file = NULL, min_oracle_rows = 1000,
+                                    min_dict_rows = 1000) {
+    if (is.null(live.file)) return(biblio)          ##comps/nom/sim: no catalog
+    if (!file.exists(live.file)) {
+        warning(label, ": ", live.file, " not found; keeping all ", nrow(biblio),
+                " biblio row(s) without a liveness check. Run 01_metadata.R ",
+                "first.", call. = FALSE)
+        return(biblio)
+    }
+    live <- readr::read_csv(live.file, show_col_types = FALSE, progress = FALSE)
+    if (!"table" %in% names(live) || nrow(live) < min_oracle_rows) {
+        warning(label, ": ", live.file, " has ", nrow(live), " row(s); too few ",
+                "to trust as a liveness oracle (expected at least ",
+                min_oracle_rows, "). Skipping the orphan check rather than risk ",
+                "dropping live provenance.", call. = FALSE)
+        return(biblio)
+    }
+    if (is.null(dict) || !("table" %in% names(dict)) || nrow(dict) < min_dict_rows) {
+        warning(label, ": the dictionary has ",
+                if (is.null(dict)) 0L else nrow(dict), " row(s); too few to ",
+                "trust (expected at least ", min_dict_rows, "). Skipping the ",
+                "orphan check.", call. = FALSE)
+        return(biblio)
+    }
+
+    key    <- dict_key(biblio$table)
+    orphan <- !(key %in% dict_key(live$table)) & !(key %in% dict_key(dict$table))
+    orphan[is.na(orphan)] <- FALSE
+    if (!any(orphan)) {
+        message(label, ": no biblio row names a table that is both absent from ",
+                live.file, " and absent from the dictionary")
+        return(biblio)
+    }
+
+    gone <- biblio[orphan, , drop = FALSE]
+    message(label, ": dropping ", nrow(gone), " biblio row(s) whose table is ",
+            "gone from Redivis and from the dictionary: ",
+            paste(gone$table, collapse = ", "))
+    if (!is.null(out.file)) {
+        gone$retired_at <- format(Sys.time(), tz = "UTC")
+        ##All-character on both sides: this file is a record, not a frame to
+        ##compute on, and letting readr re-type `retired_at` as a datetime
+        ##makes bind_rows() refuse to combine it with the string written above.
+        chr <- function(d) { d[] <- lapply(d, as.character); d }
+        gone <- chr(gone)
+        prev <- if (file.exists(out.file)) {
+            tryCatch(chr(readr::read_csv(
+                         out.file, show_col_types = FALSE, progress = FALSE,
+                         col_types = readr::cols(.default = readr::col_character()))),
+                     error = function(e) NULL)
+        } else NULL
+        if (!is.null(prev) && nrow(prev) && "table" %in% names(prev)) {
+            ##Keep the FIRST sighting: that is when the table actually went.
+            gone <- gone[!(dict_key(gone$table) %in% dict_key(prev$table)), ,
+                         drop = FALSE]
+            gone <- dplyr::bind_rows(prev, gone)
+        }
+        gone <- gone[order(dict_key(gone$table)), , drop = FALSE]
+        readr::write_csv(gone, out.file)
+        message("  ", nrow(gone), " retired biblio row(s) recorded in ", out.file)
+    }
+    biblio[!orphan, , drop = FALSE]
+}

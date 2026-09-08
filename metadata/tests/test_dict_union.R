@@ -700,6 +700,92 @@ local({
           "every listed OSF project id is well formed")
 })
 
+##------------------------------------------------ orphan biblio rows ---
+##The rule is two conditions, and both halves matter. Absent-from-Redivis alone
+##would delete the 60 rows that are waiting for an upload; absent-from-the-
+##dictionary alone would delete every live table the sheet has never listed.
+##The guards are what stop a bad read from emptying biblio.csv, so they are
+##asserted as loudly as the rule.
+local({
+    tmp <- tempfile(fileext = ".csv")
+    ##A plausible oracle: the guards want >= 1000 rows, so give them 1000.
+    live_names <- c("live_table", paste0("filler_", seq_len(999)))
+    write.csv(data.frame(table = live_names), tmp, row.names = FALSE)
+    on.exit(unlink(tmp), add = TRUE)
+
+    big_dict <- function(...) {
+        rows <- c(list(...), lapply(seq_len(1000), function(i)
+            sheet_row(paste0("dictfiller_", i))))
+        do.call(fake_sheet, rows)
+    }
+    bib <- function(...) data.frame(table = c(...), Description = "x",
+                                    stringsAsFactors = FALSE)
+
+    ##`orphan` is in neither oracle. `live_table` is on Redivis. `pending` has a
+    ##dictionary row and no table -- the bucket-A case.
+    d <- big_dict(sheet_row("pending"), sheet_row("live_table"))
+    out <- drop_orphan_biblio_rows(bib("live_table", "pending", "orphan"),
+                                   d, tmp, "test")
+    check(identical(sort(out$table), c("live_table", "pending")),
+          "an orphan is dropped and nothing else is")
+    check(nrow(out) == 2L, "a pending upload is NOT dropped")
+
+    ##A table that is live but was never written into the sheet: bucket B. The
+    ##dictionary being silent is not on its own a reason to drop anything.
+    out <- drop_orphan_biblio_rows(bib("live_table"), big_dict(), tmp, "test")
+    check(nrow(out) == 1L,
+          "a live table with no dictionary row is kept")
+
+    ##Matching is on dict_key(), as everywhere else in this file.
+    d <- big_dict(sheet_row("Pending"))
+    out <- drop_orphan_biblio_rows(bib(" PENDING "), d, tmp, "test")
+    check(nrow(out) == 1L, "the dictionary match is case- and space-insensitive")
+    out <- drop_orphan_biblio_rows(bib("LIVE_TABLE"), big_dict(), tmp, "test")
+    check(nrow(out) == 1L, "the liveness match is case-insensitive")
+
+    ##---- the guards. Each must return the input UNCHANGED.
+    short <- tempfile(fileext = ".csv")
+    write.csv(data.frame(table = c("a", "b")), short, row.names = FALSE)
+    on.exit(unlink(short), add = TRUE)
+    b <- bib("orphan")
+    check(suppressWarnings(nrow(drop_orphan_biblio_rows(b, big_dict(), short,
+                                                        "test"))) == 1L,
+          "a truncated metadata.csv drops nothing")
+    check(suppressWarnings(nrow(drop_orphan_biblio_rows(
+              b, big_dict(), file.path(tempdir(), "nope.csv"), "test"))) == 1L,
+          "a missing metadata.csv drops nothing")
+    check(nrow(drop_orphan_biblio_rows(b, big_dict(), NULL, "test")) == 1L,
+          "a source with no live catalog (comps/nom/sim) drops nothing")
+    check(suppressWarnings(nrow(drop_orphan_biblio_rows(
+              b, fake_sheet(sheet_row("pending")), tmp, "test"))) == 1L,
+          "a truncated dictionary read drops nothing")
+    check(suppressWarnings(nrow(drop_orphan_biblio_rows(b, NULL, tmp,
+                                                        "test"))) == 1L,
+          "a NULL dictionary drops nothing")
+
+    ##---- the record. Nothing is deleted without being written down, and the
+    ##record accumulates: the second run must not lose what the first found.
+    rec <- tempfile(fileext = ".csv")
+    on.exit(unlink(rec), add = TRUE)
+    drop_orphan_biblio_rows(bib("orphan_one"), big_dict(), tmp, "test",
+                            out.file = rec)
+    r1 <- readr::read_csv(rec, show_col_types = FALSE, progress = FALSE)
+    check(identical(r1$table, "orphan_one"), "a dropped row is recorded")
+    check("retired_at" %in% names(r1), "the record is stamped")
+    drop_orphan_biblio_rows(bib("orphan_two"), big_dict(), tmp, "test",
+                            out.file = rec)
+    r2 <- readr::read_csv(rec, show_col_types = FALSE, progress = FALSE)
+    check(identical(sort(r2$table), c("orphan_one", "orphan_two")),
+          "the record accumulates across runs rather than being overwritten")
+    drop_orphan_biblio_rows(bib("orphan_one"), big_dict(), tmp, "test",
+                            out.file = rec)
+    r3 <- readr::read_csv(rec, show_col_types = FALSE, progress = FALSE)
+    check(nrow(r3) == 2L, "a row seen twice is recorded once")
+    check(identical(r3$retired_at[r3$table == "orphan_one"],
+                    r1$retired_at[1]),
+          "the recorded date is the first sighting, not the latest")
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
