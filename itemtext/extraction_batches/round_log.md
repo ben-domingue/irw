@@ -8662,3 +8662,71 @@ in Chinese", but the paper states nothing about administration language or trans
 agent's private notes conceded the inference while the public note did not. The note was rewritten
 to mark it as an inference and name its basis. `language=Chinese` and `translated_substitute`
 stand; the deposit publishes only English.
+
+## batch_071 — 2026-09-08T15:56Z
+
+**3 tables claimed** (`li_2021_sustainable_innov_behav`, `li_2024_bdyz`, `li_2024_sad`).
+**Written 2 / blocked 0 / failed 1. Yield 67%.**
+
+**CIRCUIT BREAKER TRIPPED** at 33.3% failed (>30%). See
+`extraction_batches/circuit_breaker.flag` — the sole failure is an API content-filter
+error, not a pipeline fault, and the flag argues the case both ways for a human to
+settle. Round self-cancelled after logging; no further rounds until the flag is cleared.
+
+### li_2024_sad — failed (infrastructure)
+Both the initial dispatch and the single permitted retry were killed by
+`API Error: Output blocked by content filtering policy` (req_011CerFvCN4hjMnVWZNJZGxN,
+req_011CerGVw9UFmEs7EHNR8VRp) before either agent wrote anything. Per Step 5 the batch
+directory was `ls`-ed before classifying: no `__items.csv`, no sidecars, nothing to
+salvage. Retry test = YES (unresolved infrastructure failure, no verdict reached)
+→ `failed`, which is why it counts toward the breaker. Notable: the two sibling agents
+in the same round ran to completion, so this looks table-specific rather than a general
+outage — the instrument is the Social Avoidance and Distress scale. A third trip on
+re-dispatch probably means human extraction.
+
+### li_2021_sustainable_innov_behav — done
+42 rows (6 items x 7 levels). Li, Wu & Xiong (2021) PLOS ONE 16(5):e0250878, CC BY 4.0,
+S1 Appendix. mapping_basis `paper_explicit`; ground truth taken from `table_sets.R`
+server-side, full export deliberately skipped. Verification PARTIAL (routes 1+8):
+refitting the paper's one-factor CFA reproduces the published loadings/R^2 to 0.0004,
+and a sweep of all 360 ordered 4-of-6 assignments puts the shipped one uniquely first
+(SSD 0.000000 vs 0.000878 next); the dropped pair {SIB4, SIB5} is the tightest pair on
+both raw (r=0.738) and residual (0.120 vs 0.073) correlation. Not VERIFIED because
+nothing in the data orders SIB4 vs SIB5 or separates SIB1 vs SIB3. Language fallback:
+administered in Chinese, only English in the deposit, `option_text` blank on all 42 rows
+(seven unlabelled boxes — nothing padded with its own number).
+
+### li_2024_bdyz — done
+28 rows (4 items x 7 levels). mapping_basis `reconstructed`; verification PARTIAL.
+
+**DICTIONARY DESCRIPTION IS WRONG — needs a human fix.** It reads "4-item body-image
+scale subset". `BDYZ` (pinyin *biaoda yizhi*) is the paper's **Expressive Suppression
+Scale**, the four-item ERQ suppression subscale (Gross & John 2003); the study's
+body-image measure is the separate 15-item SPA block. This was re-checked by the
+orchestrator per Step 5b rather than taken on report, and `verify_batch.R` reproduced it
+here: ES total mean 14.66 / SD 5.61 / N 1,151 against published 14.66 / 5.61 / 1,151,
+alpha 0.8336 vs published 0.834, r(ES, SPA) = 0.219 exactly matching Table 2. Suggested
+replacement text is in `notes.csv`. Caveat: the deposit numbers the suppression columns
+1/2/6/9 where the ERQ numbers them 2/4/6/9, so `bdyz_1` is assigned ERQ item 4 by
+elimination (item-total r = 0.628 rules out the reappraisal item); disclosed in the
+`public_note`.
+
+### Open lead for whoever re-runs li_2024_sad
+The `bdyz` agent flagged, and honestly labelled as an observation rather than a claim
+about its own table: the supplement's stated SAD reverse-key set
+(1,3,4,6,7,9,12,15,17,19,22,25,27,28) reproduces the published SD (7.47) but not the
+mean (14.32 computed vs 13.68 published), and gives r(ES, SAD) = -0.195 against the
++0.163 in Table 2. Not independently re-checked here — `li_2024_sad` shipped nothing, so
+the lead ships nothing public and a future agent will re-derive it.
+
+### Gates
+normalize_nulls (1 of 2 files normalized) / audit_batch **PASS 2, no anomalies, no
+WARNs** / verify_batch **VERDICT: PASS x2** / lint_verification **2 rows, no problems**
+/ irw-validate **ok, nothing to report** / check_provenance exit=1 on
+`hua_2023_efl_study_engagement`, a **pre-existing** machine-translation table from an
+earlier batch with no issues-page entry — neither batch_071 table is implicated
+(both are `translated_substitute` with published English: `study_supplied` and
+`official_instrument_english`). Still owed a line on the public issues page by whoever
+owns it.
+
+Cap (batch_080) not reached.
