@@ -700,6 +700,88 @@ local({
           "every listed OSF project id is well formed")
 })
 
+cat("drop_unshaped_dict_rows -- #2079\n")
+
+##The real defect, verbatim: this string sat in the `table` column of
+##biblio.csv, dictionary_auto.csv and biblio_pending.csv on main.
+CITATION_2079 <- paste("Canham L, Salamh P et al. (2018). Evaluation of",
+                       "non-cognitive traits of doctor of physical therapy",
+                       "learners in the United States. Harvard Dataverse.")
+
+local({
+    check(all(dict_name_ok(c("a_2020", "PISA2018_MATH", "foo.csv", "x-y_1",
+                             "gilbert_meta_5"))),
+          "every shape a real IRW table name takes is accepted")
+    check(!any(dict_name_ok(c(CITATION_2079, "two words", "a b",
+                             "(2018). something"))),
+          "a citation or any cell with a space is rejected")
+    check(all(dict_name_ok(c(NA, "", "NA"))),
+          "a blank key is not 'unshaped' -- that is a different defect")
+    ##A one-character name would also be a paste artefact, and the pattern's
+    ##{1,80} tail is what says so; assert it rather than leave it to the regex.
+    check(!dict_name_ok("a") && !dict_name_ok(strrep("a", 82)),
+          "a single character and an over-long string are both rejected")
+})
+
+local({
+    d <- fake_sheet(sheet_row("a_2020"), sheet_row(CITATION_2079),
+                    sheet_row("b_2021"))
+    kept <- suppressMessages(drop_unshaped_dict_rows(d, "core"))
+    check(nrow(kept) == 2L && identical(kept$table, c("a_2020", "b_2021")),
+          "the citation row is dropped from the sheet export, the rest survive")
+})
+
+local({
+    a <- fake_auto(auto_row("a_2020"), auto_row(CITATION_2079))
+    check(nrow(suppressMessages(drop_unshaped_dict_rows(a, "core"))) == 1L,
+          "and from the automated file")
+})
+
+local({
+    ##The second door. biblio is read back from Redivis on every run, so the row
+    ##already on main outlives a dictionary-only fix.
+    b <- data.frame(table = c("a_2020", CITATION_2079), BibTex = c("x", "y"),
+                    stringsAsFactors = FALSE)
+    kept <- suppressMessages(drop_unshaped_dict_rows(b, "core", "biblio"))
+    check(nrow(kept) == 1L && kept$table[1] == "a_2020",
+          "and from biblio, which is where the live row actually sits")
+})
+
+local({
+    ##Reports, never fails: the sheet is a human surface and one wrong cell must
+    ##not stop a whole metadata run.
+    d <- fake_sheet(sheet_row(CITATION_2079))
+    msg <- capture.output(kept <- drop_unshaped_dict_rows(d, "core"), type = "message")
+    check(nrow(kept) == 0L, "an all-bad frame empties rather than erroring")
+    check(any(grepl("#2079", msg, fixed = TRUE)) &&
+          any(grepl("Canham", msg, fixed = TRUE)),
+          "the rejected cell is named in the log, not merely counted")
+})
+
+local({
+    d <- fake_sheet(sheet_row("a_2020"))
+    check(identical(suppressMessages(drop_unshaped_dict_rows(d, "core")), d),
+          "a clean frame is returned untouched")
+    check(is.null(drop_unshaped_dict_rows(NULL, "core")),
+          "a source with no frame is a no-op")
+})
+
+local({
+    ##PARITY. NAME_OK_RE in automated_finding/stage_dict_row.py must be the same
+    ##pattern; the stager fails on it where this reports, and two patterns that
+    ##drift would mean a row the stager accepts and the export silently drops.
+    stager <- "../automated_finding/stage_dict_row.py"
+    if (!file.exists(stager)) {
+        cat("  skip - stage_dict_row.py not found\n")
+    } else {
+        src <- readLines(stager, warn = FALSE)
+        line <- grep("^NAME_OK_RE = re.compile", src, value = TRUE)
+        pat <- sub('^NAME_OK_RE = re.compile\\(r"(.*)"\\)$', "\\1", line)
+        check(length(line) == 1L && identical(pat, DICT_NAME_RE),
+              "stage_dict_row.py uses the same pattern as DICT_NAME_RE")
+    }
+})
+
 ##------------------------------------------------------------------ result ---
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }

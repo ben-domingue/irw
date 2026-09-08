@@ -883,3 +883,55 @@ apply_osf_permission <- function(biblio, label = "core",
             " OSF row(s) that had no licence")
     biblio
 }
+
+##---------------------------------------------------------------------------
+##The shape of a table name (#2079).
+##
+##Nothing in the dictionary path ever asserted that `table` holds a table NAME.
+##dict_key() is tolower(trimws()), which is happy to key a row on a sentence, so
+##a citation string typed into the wrong column travelled from the sheet to
+##dictionary_auto.csv to biblio.csv on main and asserted a licence and a DOI for
+##a table that does not exist. One cell, one phantom biblio row, no error
+##anywhere along the way.
+##
+##The pattern is the repo's existing convention for a machine-readable name (cf.
+##`_TERM_OK_RE` in automated_finding/irw_lint_covariates.py), widened to the
+##cases table names actually use: 307 names in this corpus are not all-lowercase,
+##and names carry `.`, `-` and a trailing `.csv` in some dictionary rows. Checked
+##against all 4,238 rows of metadata.csv and all 4,273 of biblio.csv on
+##2026-09-08: zero false positives, one true positive.
+DICT_NAME_RE <- "^[A-Za-z0-9][A-Za-z0-9._-]{1,80}$"
+
+##Blank is NOT unshaped: a blank key is a different defect with its own handling
+##(refresh_biblio_from_dict() already reports duplicate/nameless rows), and
+##folding the two would make this message lie about what is wrong with the cell.
+dict_name_ok <- function(x) {
+    x <- trimws(as.character(x))
+    dict_blank(x) | grepl(DICT_NAME_RE, x)
+}
+
+##Drop rows whose `table` cell is not a name, and SAY SO. Reports rather than
+##fails on purpose: the sheet is the human surface, and a whole metadata run
+##must not stop because someone typed in the wrong column. Per #1732 this must
+##not write to the sheet either -- reject at export, name the cell in the log,
+##and leave a human to clean it.
+##
+##Applied to both the dictionary and biblio, because they are two doors on the
+##same room: the dictionary gate stops the row being created, and the biblio gate
+##removes the one already sitting on main. The second is not redundant -- biblio
+##is read back from Redivis at the top of every run, so a row that got in once
+##survives every later run unless something takes it out.
+drop_unshaped_dict_rows <- function(df, label, what = "dictionary") {
+    if (is.null(df) || !nrow(df) || !"table" %in% names(df)) return(df)
+    keep <- dict_name_ok(df[["table"]])
+    keep[is.na(keep)] <- TRUE
+    if (any(!keep)) {
+        message(label, ": dropping ", sum(!keep), " ", what, " row(s) whose ",
+                "`table` cell is not a table name (#2079) -- fix the cell at ",
+                "the source; nothing here edits the sheet:")
+        for (v in df[["table"]][!keep]) {
+            message("    ", substr(gsub("\\s+", " ", v), 1L, 120L))
+        }
+    }
+    df[keep, , drop = FALSE]
+}
