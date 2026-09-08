@@ -8775,3 +8775,80 @@ auto-only-column + export-time-override write path and must not be hand-edited.
 **An unverified lead for whoever re-runs `li_2024_sad`**, from the `bdyz` agent: the supplement's
 stated reverse-key set reproduces the published SD but not the mean, and flips the sign of the
 Table 2 correlation. Nothing public depends on it.
+
+## batch_072 — 2026-09-08T09:20
+
+**3 tables claimed, 3 written, 0 blocked, 0 failed. Yield 3/3 (100%).** Circuit breaker not tripped
+(0% failed). All from one source: Li et al. (2025), PLOS ONE 20(6):e0326329, CC BY 4.0.
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| `li_2025_corporate_performance` | 60 (10 items x 6 levels) | paper_order | PARTIAL (route 1) |
+| `li_2025_market_environment` | 25 (5 x 5) | paper_order | PARTIAL (route 1) |
+| `li_2025_marketing_culture` | 25 (5 x 5) | paper_order | VERIFIED (route 1) |
+
+**Gates all clean.** `audit_batch.R` PASS on all 3 with **no anomalies** — no WARNs, so Step 5c had
+nothing to explain. `verify_batch.R` PASS=3. `lint_verification.R` 3 rows, no problems.
+`irw-validate` ok on all 3. `check_provenance.R` raises nothing attributable to this batch (its two
+standing items — `hua_2023_efl_study_engagement` and the six `translation_source=mixed` tables — are
+pre-existing and untouched here). `normalize_nulls.R` fixed 2 of 3 files (26 lines each).
+
+**The whole `li_2025_*` family is image-only. This is the round's most reusable finding.** Every item
+sentence lives in a PLOS table IMAGE; `grep` over the scraped article text returns zero hits for any
+item sentence. **A text-only availability sweep would wrongly mark all eight `li_2025_*` tables
+UNAVAILABLE.** Two asset-id quirks cost time and are worth recording: the article's Table 3 is served
+under `.t001` (numbering is off-by-two from the caption, since Table 3 precedes Table 2 in the body),
+and for `market_environment` the `article/table?id=...t001` endpoint 404s outright — the PNG had to
+be read directly. The seven remaining siblings (`marketing_exploitation`, `marketing_exploration`,
+`marketing_learning`, `marketing_operation`, `policy_environment`, plus the two written here) share
+the same source file and the same trap.
+
+**Step 5b — the orchestrator re-checked every claim that overrides a source or is bound for a public
+note. All confirmed, with numbers:**
+- The S1 `.sav` is byte-identical across all three agents' caches (md5 `619348e4…`), so three
+  independent fetches got the same file.
+- **All 51 variable labels are `None`** — confirmed. The `.sav` genuinely cannot supply item wording;
+  that is why `mapping_basis` is `paper_order` and not `data_labels`.
+- **The anchor discrepancy is real** and quoted verbatim from the article: "All items were measured
+  using a 7-point Likert scale ranging from 1 ("strongly disagree") to 7 ("strongly agree")", while
+  all 45 item columns share one value-label set reading Extremely inconsistent / Very inconsistent /
+  Inconsistent / General / Consistent / Very consisten / Eompletely consistent. Same direction,
+  different words. The agents shipped the `.sav` labels (level-1 source, attached to the data) and
+  disclosed it. **This clears the issues-page bar as a concrete text-vs-table mismatch — but no
+  edit to `itemtext_issues.qmd` was made here; it is left for triage,** since the site lives in a
+  separate repo.
+- **Both `.sav` typos confirmed present in the file**: `Very consisten` (level 6) and `Eompletely
+  consistent` (level 7). Corrections shipped and disclosed.
+- **Chinese administration confirmed from the article**: "A rigorous translation and back-translation
+  process was conducted", sample is China Time-Honored Brand enterprises via Wenjuanxing, 352 valid
+  of 542 received. **Zero CJK characters in the `.sav`** (verified by scanning the raw bytes), and it
+  is the only substantive supplement — so the 2026-09-01 fallback applies correctly:
+  `text_source=translated_substitute`, `translation_source=study_supplied`, `language=Chinese`,
+  `_translated` columns empty.
+- **Live resp sets confirmed via `table_sets.R`** (server-side aggregates, no export spent):
+  `corporate_performance` 2–7, `market_environment` 3–7, `marketing_culture` 3–7. Item counts 10/5/5
+  and n=352 per item, all matching. Levels never chosen carry no option rows, correctly.
+
+**One benign per-item observation, recorded so nobody re-derives it as a defect.** In
+`corporate_performance` the table-level resp minimum of 2 comes from a **single item, `Perfo419`**;
+the other nine run 3–7. Per the standing per-item-diagnostic rule that would be worth a look, but 2
+is an in-range point on a legitimate 1–7 scale, so this is an ordinary response, not a data-entry
+error. Similarly `ME1` alone runs 4–7 where its four siblings run 3–7.
+
+**Why `marketing_culture` is VERIFIED and the other two only PARTIAL** — the distinction is about
+whether the route separates *every* item from every other:
+- `marketing_culture`: all five published loadings are distinct; shipped order reproduces at max
+  deviation 0.0004 vs 0.0054 for the best of 119 rivals. Every item pinned.
+- `market_environment`: 44 of 45 loadings across the full column reproduce to 3 dp in `.sav` column
+  order, but **ME2 vs ME3 is not separated by any number** — their published loadings differ by
+  0.001 and the swap costs 0.000002. ME1/ME4/ME5 pinned decisively.
+- `corporate_performance`: loadings span only 0.774–0.813 and **repeat exactly** (0.780 at positions
+  2 and 9; 0.807 at 5 and 10), so 17 of 45 pairwise swaps sit within 0.010 and the Hungarian optimum
+  is a tie-swapping permutation at 0.013 vs the shipped 0.014. 0 of 20,000 random permutations beat
+  the shipped order, which is why it ships — but it is not item-level separation.
+
+Note that `corporate_performance`'s `instructions` field is **IRW's second-person rendering of the
+paper's Methods sentence, not a published instruction** — included because the ten item labels are
+bare nouns ("Net Profit", "Cash Flow") with no referent otherwise. Disclosed in provenance.
+
+Cap is `batch_080`; batch_072 is not it, so the queue continues. 784 pending remain.
