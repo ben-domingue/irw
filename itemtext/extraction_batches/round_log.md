@@ -11007,3 +11007,64 @@ still `pending` in the queue.
 
 Cap (batch_095) NOT reached — five rounds remain. 733 pending at the start of this
 round, 730 after.
+
+### batch_090 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+PASS=3, `lint_verification` 0 ERROR / 1 WARN, `irw-validate` ok. All three uploaded (`red_up` 3/3
+row-count verified), pre-flight clean, stamped and audited. Three entries added to PR
+datapages/irw#165 (400 entries).
+
+**The round's central finding is real and I confirmed it at the source.** Both `luo_2021_*` tables
+carry their item wording in SPSS **column names** rather than variable labels. SPSS strips spaces
+and caps names at 64 characters, and in `s003.sav` all four co-national columns are **exactly 64
+characters and cut mid-word**: `...reallylistentoyo`, `...takeyourmindoffyourprobl`,
+`...helpyouinpracticalwayslikedoi`, `...answeryouquestionsorgiveyouad`. With the code prefixes
+stripped that leaves **48 and 61 characters** of actual sentence — exactly the range the round
+reported. So for `luo_2021_conational_ties` the *tails* of all four shipped questions, plus every
+space and mark of punctuation, were completed from a **different paper's** printing of the same MDSS
+questions (Wei 2025). That is a genuine provenance fact about shipped text and it is now on the
+issues page in those terms. Fidelity is otherwise good: the shipped item_04 preserves the source's
+own typo, "answer **you** questions".
+
+**The mapping is untouched by any of that**, which is the distinction the round drew correctly:
+route 9 matches each item's live response distribution to its source column cell for cell and the
+vectors are mutually distinct, so exactly 1 of 24 orderings fits.
+
+**Kept `luo_2021_conational_ties` at VERIFIED against the lint WARN.** The hedge in its evidence is
+about sentence *completeness*, not about the item↔code mapping the status describes; downgrading
+would misreport a pinned mapping as uncertain. This is the standing PARTIAL/VERIFIED question the
+older handoff reserved for Ben, so it is recorded, not re-litigated.
+
+**Gave `luo_2021_ecr` an issues-page entry that the round judged below the bar.** Its wording also
+survives only as SPSS variable names, so IRW restored the spacing and punctuation and completed one
+64-character-truncated item from the paper's own quote. The round's reasoning — a transcription
+deviation rather than a text-vs-table mismatch — is defensible, but `lunacortes_2019_satisfaction`
+got a line in batch_089 for the comparable route disclosure (transcribed by eye from an image), and
+a reader comparing against the published ECR-S should be told why the punctuation differs. Route
+disclosures are cheap; consistency between them is worth more than the marginal judgement.
+
+**A free verification: `lunacortes_2019_social_value` came off the same PLOS Table 1 PNG I read for
+batch_089.** All three shipped strings match the image character for character — "This tourism
+experience helps me to feel acceptable" / "…improves the way I am perceived" / "…makes a good
+impression on other people". The image also carries the remaining sibling scales' wording.
+
+**The stamp trap recurred with the opposite polarity, and the audit caught it twice.** batch_089's
+provenance was mixed *within* the file; batch_090's is uniformly QUOTE_ALL with CRLF — and its three
+`mapping_verification.csv` rows are **QUOTE_ALL too**, where every earlier batch this session wrote
+MINIMAL rows into that same file. So `mapping_verification.csv` genuinely mixes conventions
+row-by-row, exactly as BATCH_PROCESS.md says. Two stamper attempts asserted out before writing
+anything (a generic walker mishandled `\r` before the record terminator; the MINIMAL regex found no
+match), and both files were then stamped per-convention: **+30 bytes each, exactly ten characters
+per record**, quoting and line endings unchanged. **The lesson is to stop writing a stamper that
+assumes a convention and start detecting it per record** — three different shapes in two batches.
+
+Rights: nothing to escalate. PERVAL (Sweeney & Soutar 2001) and the MDSS have no stated restriction;
+the ECR family is distributed freely for research by its rights holders, and in any case the wording
+here came from the study's own CC BY deposit.
+
+Carried, not acted on: the dictionary Descriptions for `lunacortes_2019_isnbi` and `_isncc` claim
+their scale names are "not spelled out in the article text", but Table 1's image does spell them out.
+Both tables are still queued.
+
+Cap is `batch_095`; not reached. 730 pending, next firing takes `batch_091`.
