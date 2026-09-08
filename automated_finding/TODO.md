@@ -733,10 +733,15 @@ do not treat the CSV's `proposed_name` column as a work list.
   above. The weekly repos/PLOS/PMC routines re-search the same 15 `HIGH_YIELD_TERMS`
   behind a seen-DOI ledger, so they are mined out by construction; and the monthly
   sweeps want a higher `--limit` (or explicit `--per-term-cap 3-5`) now that
-  `TERM_LIST` is 125 terms. **Blocked on routine IDs**: the `RemoteTrigger` `list`
-  action returns only the newest page and this tool exposes no cursor for it, so the
-  standing routines (created ~2026-08-13/14) are unreachable from here. Get their IDs
-  from https://claude.ai/code/routines and hand them over, or edit them there.
+  `TERM_LIST` is 125 terms. **Blocked on routine IDs, and re-confirmed 2026-09-08 (#1940)**:
+  the `RemoteTrigger` `list` action returns the newest 20 with `has_more: true`, and
+  passing the `next_cursor` it hands back returns *the identical page* — the cursor
+  is accepted and ignored, so this is not a matter of asking correctly. The oldest
+  routine visible was created 2026-08-25 and the standing ones date from ~2026-08-13/14,
+  so they fall outside the window and cannot be listed, confirmed or denied from a
+  session. Get their IDs from https://claude.ai/code/routines and hand them over, or
+  edit them there. The two enabled routines that ARE visible are recorded in
+  `ARCHITECTURE.md` section 6.
 - [ ] **The monthly routines' `--limit 150` is now spread across 125 terms.**
   `per_term_cap = max(1, limit // len(terms))`, so each term gets exactly 1
   candidate — it was already 1 at 100 terms, so this is not a regression, but
