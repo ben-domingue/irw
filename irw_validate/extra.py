@@ -149,3 +149,93 @@ def check_resp_dtype(df: pd.DataFrame, table: str = "") -> list:
             "would upload as a string column. Coerce before writing.",
             table=table, group="core")]
     return []
+
+
+#: Separator characters that different source workbooks use interchangeably for
+#: the same item, and the digit runs that must NOT be merged across.
+_SEPARATORS = re.compile(r"[\s_\-.]+")
+_NON_ALNUM = re.compile(r"[^0-9A-Za-z]+")
+_DIGIT_RUN = re.compile(r"\d+")
+
+
+def _separator_key(item: str) -> str:
+    """Treat any run of separators as one, ignore case.
+
+    Substitutes rather than deletes, so "item_1_2" and "item_12" stay distinct:
+    collapsing those would be a false positive on every table that numbers its
+    items.
+    """
+    return _SEPARATORS.sub("\x00", item.strip()).casefold()
+
+
+def _squashed_key(item: str) -> str | None:
+    """Drop every non-alphanumeric character. `None` where that is unsafe.
+
+    Needed because a workbook does not only swap one separator for another, it
+    deletes them: `DART_Brysbaert_2020_3_4_5` spells "J.K. Rowling" as "JK
+    Rowling", which no separator-substituting key can match.
+
+    Guarded by the digit runs, which is what keeps "item_1_2" from merging into
+    "item_12": codes whose digit sequences differ are never compared this way.
+    A code carrying no digits at all -- the personal-name case this comes from
+    -- is always safe.
+    """
+    return _NON_ALNUM.sub("", item).casefold() + "|" + ",".join(_DIGIT_RUN.findall(item))
+
+
+def check_item_variants(df: pd.DataFrame, table: str = "") -> list:
+    """Two item codes that are renderings of one item (#2052).
+
+    Nothing else in the suite can see this. `dup_id_item` cannot, because the
+    whole defect is that the two codes are *different* -- no id+item key ever
+    repeats. The whole-row duplicate sweep cannot either. Yet the effect is that
+    one real item is estimated twice, from disjoint samples, as two unrelated
+    items.
+
+    `DART_Brysbaert_2020_3_4_5` is the case this comes from: studies 3 and 4
+    read author names from a workbook column ("Agatha Christie", "J.K.
+    Rowling"), study 5 pivoted them out of column headers ("Agatha_Christie",
+    "JK Rowling"), and nothing reconciled the two before the studies were
+    pooled. 106 of its 158 authors were doubled -- 264 codes in the published
+    table. That was introduced by our own ingest rather than carried in from the
+    deposit, which is why it belongs in the uploader rather than in triage.
+
+    Warn rather than error: like `dup_id_item` and `cov_range` before it, this
+    describes tables that are already published, and a blocking gate would stop
+    unrelated work on the strength of a defect nobody has triaged yet.
+    """
+    if "item" not in df.columns or df.empty:
+        return []
+    items = [str(v) for v in pd.Series(df["item"]).dropna().unique()]
+    if not items:
+        return []
+
+    groups: dict = {}
+    for keyfn in (_separator_key, _squashed_key):
+        buckets: dict = {}
+        for item in items:
+            buckets.setdefault(keyfn(item), []).append(item)
+        for members in buckets.values():
+            if len(members) > 1:
+                groups[tuple(sorted(members))] = sorted(members)
+
+    # A pair caught by both keys is one finding, not two.
+    merged: list = []
+    for members in sorted(groups.values()):
+        if not any(set(members) <= set(m) for m in merged):
+            merged = [m for m in merged if not set(m) < set(members)]
+            merged.append(members)
+    if not merged:
+        return []
+
+    doubled = sum(len(m) - 1 for m in merged)
+    examples = "; ".join(" || ".join(m) for m in merged[:3])
+    return [Finding(
+        "item_variants", "warn",
+        f"{len(merged)} item(s) appear under more than one code differing only "
+        f"in punctuation, spacing or case, so {len(items)} codes describe "
+        f"{len(items) - doubled} items: {examples}"
+        f"{' ...' if len(merged) > 3 else ''}. An IRT model fits each rendering "
+        "as a separate item (#2052). Normalise the codes in the processing "
+        "script.",
+        table=table, group="core")]
