@@ -7674,3 +7674,95 @@ PSS-family table blocked or withdrawn on it. Mapping banked, so a reversal is a 
 One agent did a full `irw_fetch` on `johannisson_2016_ipip_neo` (24,000 cells, small).
 
 Cap is `batch_060`; not reached. Next round takes `batch_060`, which is the cap.
+
+## batch_060 — 2026-09-07
+
+**6 tables claimed, 6 written, 0 blocked, 0 failed. Yield 6/6 (100%).**
+`jung_2018_media_use`, `jutte_2024_loneliness`, `jutte_2024_personality`,
+`kalichman1995_scs`, `karpudewan_2022_stp_cca`, `karpudewan_2022_stp_efa`.
+
+**Gates.** `normalize_nulls.R` fixed 3 of 6. `audit_batch.R` 5 PASS / 1 WARN.
+`verify_batch.R` 5 PASS + 1 MISSING(exempt, data_labels). `lint_verification.R`
+0 ERROR / 1 WARN. `irw-validate` clean on all six. `check_provenance.R` exits 1,
+but on a **pre-existing** backlog only — 7 IRW-generated tables from earlier
+rounds (`hua_2023_*`, `huang_2023_d_scale`, `jeon_2019_cbi`, `jiang_2024_*`) with
+no issues-page line, plus 6 `translation_source=mixed` tables flagged for review.
+**No batch_060 table is implicated in either list**; all three of this round's
+`translated_substitute` rows carry `translation_source=study_supplied`. The
+7-table issues-page backlog is a standing item for a human, not a round failure.
+
+**The round's real finding — `karpudewan_2022_stp_cca` codes are a renumbering.**
+The paper's wording is keyed to the original 33-item numbering; EFA dropped KN1,
+KN9, STP6, STP9 and the CCA workbook renumbered contiguously, so live `KN1..KN7`
+= original `KN2..KN8` and live `STP1..STP8` = original `STP1,2,3,4,5,7,8,10`.
+Taking the appendix codes at face value would have shipped **15 of 29 items with
+the wrong text**. Proven, not assumed: paper Table 1 (computed on this exact
+n=397 sample) reports loadings for KN8 and STP10, codes absent from the CCA
+workbook. Orchestrator confirmed it structurally as well — the live item sets are
+genuinely different vocabularies (CCA: KN1-7/STP1-8/PD1-10/PE1-4; EFA:
+KN1-9/STP1-10/CH1-10/PSE1-4), differing by exactly those four items. The sibling
+EFA agent reached the same conclusion independently, from S4's renumbered codes,
+having been told only that the other table existed — the cross-warning in the
+dispatch prompt paid for itself here.
+
+**Both karpudewan tables: declared 1-5 scale, only 1-4 in the data.** Re-checked
+by the orchestrator via `irw_table_sets` — the resp set is exactly {1,2,3,4}
+across all 11,513 CCA and 9,899 EFA responses, no 5 anywhere. The form as
+administered was almost certainly four-point, so `option_text` ships blank rather
+than mis-anchored, with the paper's sentence transcribed into `instructions`.
+The agent's note said "over 9,900" for the EFA count; the components sum to
+9,899, and the note was corrected — the kind of near-miss Step 5b exists to catch.
+
+**Both `jutte_2024_*` tables: paper states 1-7, data are stored 0-6.** Confirmed
+independently (resp set {0..6}). The offset direction is pinned by the deposit's
+own published descriptives: raw+1 reproduces the paper's Table 3 loneliness
+composite (2.689 vs 2.69 pre-lockdown, 2.569 vs 2.56 during), while the reversed
+reading gives 6.31/6.43. Personality corroborates via correlation sign against
+loneliness (Neuroticism +0.388 largest, Extraversion -0.089), all of which invert
+under reversed anchoring. Notable source defect for both: the S3 `.sav` carries
+**zero** variable labels and zero value-label sets across all 41 columns, so no
+data_labels route existed and the paper was the highest available source.
+`jutte_2024_personality`'s wording is in Table 1, which is an **image only** —
+reachable via the PLOS `article/figure/image?...t001` route, another instance of
+the image-only-table problem.
+
+**Three tables ship English for a non-English administration** — `jutte_2024_*`
+(German, Harris Interactive panel) and `jung_2018_media_use` (Korean/Chinese/
+Japanese, three administered languages the one-wording-per-item schema cannot
+carry). All three use the study's own English, `_translated` empty,
+`translation_source=study_supplied`, with a `public_note`.
+
+**Audit WARN (Step 5c), `karpudewan_2022_stp_efa`:** 12.1% blank `item_text` is 4
+of 33 items x 4 levels — the dropped items, whose wording the source never
+published; 75% blank `option_text` is 3 of 4 levels, the source labelling only
+the bottom anchor. Neither is an itemtext defect. Explanation appended to
+`notes.csv`.
+
+**Lint WARN, `kalichman1995_scs`:** kept VERIFIED deliberately. The "does not
+establish" clause is about whether the openpsychometrics codebook's Q1..Q10
+numbering matches the published SCS's canonical order — irrelevant, since the
+codebook *is* the text source. The route separates every item from every other
+(worst self-distance 0.66 pct pts vs smallest rival margin 2.34), which is the
+VERIFIED bar. Adjudication recorded in `notes.csv`. Also notable: the deposit now
+serves 3,376 respondents where the live table has 3,215 — a snapshot difference,
+not a mapping problem, since distributions match column-for-column.
+
+**Verification:** 3 VERIFIED, 2 PARTIAL, 1 NOT_NEEDED (`jung_2018_media_use`,
+data_labels; NOT_NEEDED row written to **both** `verification_merged.csv` and the
+permanent tracker, so lint came back clean). Both PARTIALs are the karpudewan
+pair: the PE/PSE block's four published loadings (.732-.814) are too close to
+order-separate (permutation p ~ 0.20), and the CCA STP block's published
+magnitudes are not reproducible at all.
+
+**Circuit breaker not tripped:** 0 failed of 6 (0%). No rate limit or spend cap
+hit; all six agents completed and reported.
+
+**Export discipline:** `--table-sets` on every gate, `irw_table_sets()` for the
+orchestrator's Step 5b re-checks — no full-table export except one small
+`irw_fetch` (11.5k rows) inside `verify_karpudewan_2022_stp_cca.R`.
+
+**Sidecar merge:** one agent emitted a stray empty `key_source` column in its
+provenance sidecar; merged onto the canonical 8-column header after asserting the
+extra field was empty. Per-table sidecars deleted by exact name, never by glob.
+
+Cap is `batch_070` (Step 0); not reached. Next round takes `batch_061`.
