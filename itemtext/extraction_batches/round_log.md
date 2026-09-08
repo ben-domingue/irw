@@ -8396,3 +8396,37 @@ table-level resp set is 1–5 and the `.sav` value labels define all five.
 
 No systemic access issues; no rate limit or spend cap hit; no Step 3b instrument
 mismatch. Cap (batch_070) not reached.
+
+### batch_067 triaged and uploaded — 5 shipped, 1 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 5, `audit_batch` 4 PASS / 1 WARN, `verify_batch`
+3 PASS + 2 exempt, `lint_verification` 0 ERROR / 1 WARN. All five uploaded to the `irw_text_2`
+draft, `red_up` 5/5 row-count verified, four-check pre-flight clean (zero collisions against the
+97 tables then pending). Stamped and audited field-by-field: 10 rows differ, only in `uploaded`.
+
+**The audit WARN is a source property, confirmed by reading the file rather than the note.**
+`kuehner_2017_mw_rumination` has 2 items and 14 rows; the MW probe carries anchors on its two
+endpoints only ("I was completely on task" / "…off task") and the RUM probe carries none at all,
+because Kuehner et al. print anchors only for MW and report RUM as an unlabelled 1–7 rating.
+The never-pad rule leaves the other 12 rows blank rather than filling them with their own
+numbers, which is exactly what produces both the "85.7% blank option_text" and "RUM has NO
+option_text rows" warnings. Correct as shipped.
+
+**Nothing owed on the issues page for this batch** — `check_provenance.R` is clean for it; all
+four `translated_substitute` rows are the authors' own English, not IRW-generated.
+
+**Blocked: `KTEEM_Schoen_2019-2022`** — permission-gated (FSU/Schoen Research redact items
+deliberately to preserve validity, the irw#1945 shape), and independently no source publishes
+wording for the 2019–2022 forms. Two reasons, either sufficient.
+
+**Left standing, deliberately.** The round declined to downgrade `kushnir2017_bfi` from VERIFIED
+to PARTIAL on lint's advice, on the ground that the hedge covers only `option_text` (one item has
+tied level counts) while the item↔text mapping re-derives 44/44 with zero mismatches. That
+reading is sound and the table is uploaded either way; it joins the three older
+VERIFIED-vs-PARTIAL questions for Ben rather than being settled by an agent.
+
+**Not fixed, recorded only:** `availability_audit_full.csv` marks KTEEM AVAILABLE, claiming its
+wording was "confirmed via direct PDF text extraction". It was not — extraction yields code
+headings and one stray fragment — and ED603422 is the superseded 2016 form besides. The round
+left the historical audit file unedited and noted the correction instead, which is the right
+instinct; amending it is Ben's call.
