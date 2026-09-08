@@ -13900,3 +13900,144 @@ workaround `#2075` removed the day before, and the sixth scheduled routine
 to use it. `#2109` closed unmerged; this entry plus `a4b1cff` is the durable
 record, which is what the rule asks for. The routine also wrote no BATCH_LOG
 entry at all, which is the other half of what replaces the CSV.
+
+## 2026-09-08b — The 2026-09-08 PLOS bucket worked: 35 tables, 298,644 responses
+
+Follow-up to the entry above. That run reported **0 `good`** and stopped;
+Step 2b, run retroactively, put 12 of its 13 `human_assistance` rows in
+machine-actionable buckets. This is what came of working them. Every one of
+the 35 tables below comes from a row the run itself labelled "0 good".
+
+### Dispositions (13 of 13 resolved; `human_review/` gets no file)
+
+| DOI | first author | verdict |
+|---|---|---|
+| `pone.0133254` | Miron-Shatz 2015 | processed, 9 tables |
+| `pone.0182745` | Tims 2017 | processed, 7 tables |
+| `pone.0310078` | Feng 2024 | processed, 4 tables |
+| `pone.0350219` | Shen 2026 | processed, 4 tables |
+| `pone.0315916` | Xiao 2024 | processed, 4 tables |
+| `pone.0245078` | Žnidaršič 2021 | processed, 5 tables |
+| `pone.0279984` | Tatala 2023 | processed, 2 tables |
+| `pone.0143120` | Gillespie 2015 | dropped — the 15 columns are PPI-R subscale scores, trait/state anxiety totals, their z-scores and three interaction terms. No item-level data in the deposit. |
+| `pone.0251859` | Shen 2021 | dropped — all 34 columns are T1/T2 scale totals (BDI, ASLEC frequency/quantity, tenacity, strength, optimism, resilience, and three social-support subscales). Composites, not responses. |
+| `pone.0250469` | Szczepaniak 2021 | dropped — a country-year macroeconomic panel (Gini, S80/20, education shares) for eight CEE economies, 15 rows per country. Not person-by-item data at all; the connector's `n_participants=119` was counting country-years. |
+| `pone.0246676` | Yang 2021 | license-blocked — S1 Data is a Word document pointing at OSF node `ajfhw`, which the API reports public with license "No license". Row appended to `license_blocked_candidates.csv`. |
+| `pone.0311284` | Tuicomepee 2024 | license-blocked — S1 Data is a 121-byte pointer to OSF node `3ywqk`, which is **private** (API returns 401) and reachable only through the anonymous view-only review link printed in the article. No license to inherit, and a peer-review link is not a public release. Row appended to `license_blocked_candidates.csv`. This was the batch's one genuine `human_review` row, and retriage was right about it. |
+| `pone.0236940` | Sánchez 2020 | **held**, see below |
+
+So `human_review/` gets no file for this batch, for the second PLOS weekly in
+a row: the one genuinely ambiguous row turned out to be a rights problem, not
+an ambiguity, and rights problems have their own standing file.
+
+### The one hold: Sánchez 2020 (`pone.0236940`)
+
+Structurally the best-looking candidate in the batch — 1,662 unique student
+ids, 17 multiple-choice exam items (`PS1.52`, `PS1.2`, ...) from a Blood
+module, two cohorts, and a matching block of 17 `QPS*` columns that are a
+constant per column (`EXCELENTE` / `BUENA` / `POBRE`) and so are an item
+attribute, a clean `itemcov_`.
+
+It is held on one unanswered question: the `PS*` responses are coded 0/1/2
+and nothing says what the three codes mean. The article describes item
+quality by discrimination index and mentions "incorrectly or blank answers",
+which makes `0 = blank / omitted, 1 = incorrect, 2 = correct` the most likely
+reading — and if that is right, `0` is a non-response sitting inside the
+valid range, exactly the sentinel case `datastandard.md` warns about, and it
+must be filtered rather than scored. The alternative (`0` incorrect, `1`
+partial, `2` correct) would make dropping the zeros wrong. The deposit's only
+other supplementary file is the rebuttal letter, so there is no codebook to
+settle it. Guessing here decides the meaning of 1,174 responses, so it waits
+for an author email. `TODO.md` entry added.
+
+### Tables written (35, to `irw_output/`, 298,644 responses)
+
+| paper | tables | ids | responses |
+|---|---|---|---|
+| Miron-Shatz 2015 (`pone.0133254`) | swls, mood_yesterday, day_type_affect, self_description, sources_of_joy, sources_of_pain, paired_comparison, child_wishes, happiness_beliefs | 810 | 95,700 |
+| Tims 2017 (`pone.0182745`) | cse, career_competencies, autonomy, supervisor_support, job_crafting, hindering_demands, uwes | 706 | 50,126 |
+| Feng 2024 (`pone.0310078`) | work_values, professional_development, work_engagement, org_support | 873 | 77,697 |
+| Shen 2026 (`pone.0350219`) | self_control, cdrisc, social_adaptability, smartphone_addiction | 490 | 44,100 |
+| Xiao 2024 (`pone.0315916`) | hierarchical_plateau, work_engagement, trait_mindfulness, taking_charge | 307 | 9,794 |
+| Žnidaršič 2021 (`pone.0245078`) | leader_support, coworker_support, org_practices, wf_balance, uwes | 247 | 13,827 |
+| Tatala 2023 (`pone.0279984`) | ucla_loneliness, religious_experience | 200 | 7,400 |
+
+`irw-validate --profile upload` is clean on all 35: no blocking findings.
+Warnings and why they stand:
+
+- `multi_scale*` on `tims_2017_career_competencies`, `tims_2017_job_crafting`
+  and `tims_2017_uwes`. In all three the item codes carry the *dimensions of
+  one instrument*, not separate constructs — UWES-9's vigor/dedication/
+  absorption, the Job Crafting Scale's three expansive dimensions, the career
+  competencies questionnaire's six. Splitting a 9-item UWES into three
+  3-item tables would misrepresent how it is scored. The check is doing its
+  job; the naming is what trips it. Note that the same instrument ships
+  un-flagged three more times in this batch (`xiao_2024_work_engagement`,
+  `feng_2024_work_engagement`, `znidarsic_2021_uwes`) purely because those
+  deposits number their items `WE1-9` / `WI1-17` / positional rather than by
+  dimension. Same decision, different column names.
+- `imputed_values*` on six tables. Each is one skewed item, and the two
+  extremes make the point: `mironshatz_2015_paired_comparison`'s `pair2` is
+  **binary**, so 66% on one value is unremarkable, and `pain1` ("Spiritual
+  and religious life" as a source of pain) sits at 72% on one value because
+  most people say it isn't one. Genuine distributions, not fill-ins.
+
+### Two things this batch says about the pipeline
+
+**"0 good" is not a yield number.** Two consecutive PLOS weeklies have now
+reported 0 `good` and produced, on inspection, 21 tables (2026-09-01) and 35
+tables (this one). The `good` flag means the script finished the mapping
+unaided; `human_assistance` means it didn't. Neither is a statement about the
+data. A weekly summary that leads with "0 good" and omits the
+`human_assistance` count is reporting on the script, not the corpus.
+
+**The blocks that defeated the mapper were all the same two shapes.** Every
+`recoverable_format` row was one deposit carrying several instruments with no
+separator — resolved by the standard's existing "one file per scale" rule,
+not by anything new. The two that needed real work were header shape
+(Miron-Shatz's four stacked header rows: banner / item wording / question
+name / variable code, with the data keyed to row 3) and Žnidaršič's total
+absence of item codes, where every column header is the item's full English
+stem and the block boundaries had to come from the article's Instruments
+section. Both are cheap to recognise once seen.
+
+### Item text: nothing shipped, and the reason is rights in five of seven
+
+Recorded per-script rather than left to a later pass to re-derive:
+
+- **Tatala 2023** — the wording is fully in hand: variable labels are present
+  and complete for all 54 columns and carry verbatim English stems ("I lack
+  companionship."); value labels are absent for every item column. Held
+  because UCLA1-20 are the Revised UCLA Loneliness Scale (Russell 1996), a
+  third-party copyrighted instrument — the CC BY licence covers these
+  authors' data, not Russell's items. RES1-17 are the Religious Experience
+  Scale, on which this paper's first author is an author; whether that makes
+  them ours to republish is ben-domingue's call, so both blocks are held
+  together rather than split on a judgment call.
+- **Žnidaršič 2021** — same shape: the stems *are* the column headers, in
+  English, no label layer to check. All five blocks are third-party
+  instruments (Shinn et al., the Family-Friendly Company measure set, Brough
+  et al., UWES-9).
+- **Miron-Shatz 2015** — the closest call. Row 1 of the deposit carries full
+  English wording for every item and this batch assigned the item codes, so
+  the join key would be known rather than reconstructed. Held on two grounds:
+  the study ran at four sites in three languages (Columbus, France, Denmark,
+  Austin — the deposit has separate `d2`/`d2f` education codings, so the
+  instrument was localised) and row 1 is English only, so shipping it as the
+  administered text would assert something false for two of four sites; and
+  the deposit carries no response-option wording at all, so `option_text`
+  would be NA throughout. Language is a schema rule owned by
+  `itemtext_standard.md`, not something to improvise inside a data script.
+  A later pass starts from row 1 of the "data" sheet keyed to the row-3
+  variable codes, which is the mapping already in the script.
+- **Feng 2024** — both levels checked: variable labels exist for 29 of 161
+  columns and all 29 are SPSS artefacts ("REGR factor score 1 for analysis
+  1"); no item column has one. Value labels are present and complete for the
+  item columns but hold the response options (完全不符合 … 完全符合), not the
+  stems.
+- **Tims 2017** — variable labels exist for 50 of 107 columns but are block
+  headers, not stems: CSE1 is labelled "Core self-evaluations", AUT1
+  "Autonomy items". Value labels only on the demographics.
+- **Xiao 2024, Shen 2026** — .xlsx deposits with positional codes and no
+  label layer of any kind. Stems are in the source instruments' own
+  publications.

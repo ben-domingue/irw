@@ -3,6 +3,34 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-08 PLOS weekly batch
+
+- [ ] **Sánchez 2020 (`10.1371/journal.pone.0236940`) is held on one
+  question: what do the `PS*` codes 0/1/2 mean?** Structurally the strongest
+  candidate in the batch -- 1,662 unique student ids, 17 Blood-module
+  multiple-choice items, two cohorts, and a `QPS*` block that is constant per
+  column (`EXCELENTE`/`BUENA`/`POBRE`) and so is a clean `itemcov_`. The
+  article talks about "incorrectly or blank answers", which makes
+  `0 = blank, 1 = incorrect, 2 = correct` the likely reading -- and if that is
+  right, `0` is a non-response inside the valid range and must be filtered,
+  not scored. The alternative (`0` incorrect / `1` partial / `2` correct)
+  makes dropping the zeros wrong. It decides the meaning of 1,174 responses.
+  The deposit's only other supplementary file is the rebuttal letter, so
+  there is no codebook: this needs an author email
+  (`processing_notes/Licensing.txt` has the template shape). See BATCH_LOG.md
+  2026-09-08b.
+
+- [ ] **Tatala 2023 item text: whose call is the Religious Experience
+  Scale?** `tatala_2023_ucla_loneliness` and
+  `tatala_2023_religious_experience` shipped as response tables; the wording
+  is fully in hand (verbatim English stems in the SPSS variable labels) but
+  was held. UCLA1-20 is settled -- Russell's R-UCLA is third-party and stays
+  held. RES1-17 is not: this paper's first author is an author of the
+  Religious Experience Scale, so the originator-licence rule may well let the
+  17 stems ship under the article's CC BY. That is ben-domingue's call, not
+  a script's. If yes, it is a cheap win -- the item codes already match the
+  response tables exactly.
+
 ## From the 2026-09-02 monthly repos sweep
 
 - [ ] **`automated/repos-monthly-2026-09-02` is waiting for review, and only
