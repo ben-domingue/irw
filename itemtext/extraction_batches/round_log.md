@@ -7766,3 +7766,63 @@ provenance sidecar; merged onto the canonical 8-column header after asserting th
 extra field was empty. Per-table sidecars deleted by exact name, never by glob.
 
 Cap is `batch_070` (Step 0); not reached. Next round takes `batch_061`.
+
+## batch_061 — 2026-09-07
+
+6 tables claimed; **5 written / 1 blocked / 0 failed** (yield 5/6 = 83%). Circuit breaker NOT
+tripped (0% failed, threshold 30%). Queue: 837 pending remaining.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| kern_2021_life_satisfaction | done | 28 | paper_explicit | VERIFIED |
+| khattak_2026_attitude | done | 8 | paper_explicit | VERIFIED |
+| khattak_2026_cr | done | 8 | paper_explicit | VERIFIED |
+| kim2020_ams | done | 85 | paper_order | PARTIAL |
+| kim_2023_gad7 | done | 28 | paper_order | PARTIAL |
+| kern_2021_happiness | **blocked** | — | (paper_explicit, unshipped) | n/a |
+
+**Gates.** normalize_nulls fixed 2 of 5 files (khattak_2026_cr, kim2020_ams). audit_batch: 4 PASS,
+1 WARN. verify_batch: PASS=5, no FAIL and no missing VERDICT. lint_verification: 5 rows, clean —
+no NOT_NEEDED rows were owed, since no table in this round had mapping_basis=data_labels.
+irw-validate: all 5 ok. check_provenance: the 7 IRW-generated tables it names with no issues-page
+entry are all pre-existing (hua/huang/jeon/jiang), none from this round.
+
+**The block (kern_2021_happiness) is a rights block, not an access failure — retry test NO.**
+sonjalyubomirsky.com states under "Subjective Happiness Scale": "Permission is granted for all
+non-commercial use, including scholarly/academic." A stated instrument-level use restriction, so
+irw#1945 applies; direct precedent is extremera_2016_shs, withdrawn under irw#1955 and blocked at
+batch_031. The orchestrator re-verified the quote against the agent's cached copy of the page rather
+than taking the report's word for it. Notably the extraction itself was fully solved before the
+block — Gan et al.'s Supplementary Material 1 labels each item with the live code SHS1–SHS3 — so
+nothing here indicates a pipeline problem. Its sibling kern_2021_life_satisfaction (SWLS, same
+deposit, same supplement) ships normally: the SWLS wording was copied from the CC BY 4.0 supplement
+and carries no such clause.
+
+**Step 5b — orchestrator re-checks of agent claims, both confirmed with numbers.**
+- `khattak_2026_attitude`: the agent OVERRODE the source questionnaire, whose header annotates the
+  attitude block "Strongly Disagree (1) | Strongly Agree (2)". Independently re-fetched: per-item
+  `resp==1` counts are 342 / 362 / 296 / 118, matching the paper's Table 2 *Agree* counts exactly
+  and fitting nothing under the reverse. The override is correct, the annotation in the supplement
+  is wrong, and because all four counts are mutually distinct the route separates every item from
+  every other — VERIFIED is justified. Disclosed in the table's public_note.
+- `khattak_2026_cr`: published Yes counts 178 / 232 / 30 / 244 reproduce exactly against live
+  `resp==1`. Confirmed.
+
+**Step 5c — the one audit WARN, explained and appended to notes.csv.** `kim2020_ams` row-count
+anomaly (Q05/Q08/Q09 vs median 1335). Checked directly: 20,084 rows over 1,335 unique ids, with
+six items short of full — Q05=782, Q06=959, Q08=879, Q09=809, Q11=970, Q17=1000. Zero NA `resp`
+values and all 17 items carry all 5 levels, so this is item non-response in the Dataverse .xlsx
+dropped as absent rows at conversion. **A property of the response data, not an itemtext defect**
+— item set matches 17/17, no blank item_text, no conflated codes. Not filed as an issue: skew
+concentrated in the sensitive/skippable items (sleep, irritability, exhaustion, muscular strength,
+past-peak, sexual desire) is ordinary for a clinical andrology survey.
+
+**Notable.** Three of five shipped tables reached `paper_explicit` off supplementary questionnaire
+files rather than data labels — no table this round had usable variable labels in its .sav/.xlsx
+(khattak's .sav has value labels only; kim_2023's has neither; kim2020's .xlsx and kern's workbook
+are bare headers). The Europe PMC supplementaryFiles zip route plus python-docx did the work in
+four of six cases. Two tables ship non-source-language text and both disclose it: `kim2020_ams`
+carries the official Korean AMS form with the AMS's own English in `_translated`, and
+`kim_2023_gad7` falls back to phqscreeners.com English for a Korean administration
+(`translated_substitute`), also flagging that the paper describes a two-month recall window while
+the shipped instruction is the instrument's "Over the last 2 weeks". Cap (batch_070) not reached.
