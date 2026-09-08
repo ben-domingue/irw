@@ -10373,3 +10373,55 @@ Step 5b: no agent overrode a source or reported a data defect this round — eve
 reproduce-check, and verify_batch.R re-executed all three verify scripts printing the numbers.
 
 Cap (batch_095) not reached.
+
+### batch_086 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+PASS=3, `lint_verification` clean, `irw-validate` ok. All three uploaded to
+`datapages.irw_text_2:next` (`red_up` 3/3 row-count verified), pre-flight clean, stamped and
+audited. Three entries added to PR datapages/irw#165 (392 entries).
+
+**`check_provenance.R` now exits 1 by design, and will until #165 merges.** `liu_2025_positive_cognition`
+ships IRW-generated English (`translation_source=machine_translation`) and therefore owes a line
+under the 2026-09-02 ruling; that line exists, on the unmerged disclosure branch, so the gate reads
+it as undisclosed against `main`. This is the same state the session inherited for
+`liu_2017_ssrs_support` before #164 merged. **Not a defect and not something to chase — it clears on
+merge.** #165 now carries 17 entries across batches 080–086 and is the one outstanding piece of
+housekeeping a human needs to land.
+
+**The positional-slicer check from batch_084 was owed on these two siblings and it passes: 24/24
+exact.** `liu_2025_willingness_communicate` (`[11:21]`) and `liu_2025_speaking_selfefficacy`
+(`[21:26]`, `[26:29]`, `[29:31]`, `[31:35]`) come off the same hard-coded index ranges in
+`data/liu_2025_classroom_wtc.py`, whose generated item codes carry no trace of the source column.
+Every shipped `item_text` equals its sliced workbook header exactly, and the sub-block boundaries
+are semantically coherent — wtc all "I am willing to…", `sse_ling` about fluency/grammar/
+pronunciation, `sse_selfreg` about goals and self-evaluation, `sse_deliv` about confidence and
+stress, `sse_perf` about assignments and grades.
+
+**And here the article's prose *agrees*, which is the useful contrast with batch_084's FLE.** §2.2.3
+states the SSE scale is 14 items from Wang and Sun with "items 1–5 … linguistic self-efficacy;
+items 6–8 … self-regulatory efficacy; items 9–10 … delivery self-efficacy; items 11–14 …
+performance self-efficacy" — exactly the shipped slice. So the same paper cluster contains one scale
+whose prose contradicts its data and another whose prose corroborates it; the lesson is that prose
+is evidence to be checked, not a source to be trusted or dismissed wholesale.
+
+**Rights: an upstream originator check that the round did not run, with a clean result.** The four
+`sse_perf` items are near-verbatim MSLQ (Pintrich, Smith, Garcia & McKeachie 1991) — "I can
+understand the most difficult material presented in…", "I can do an excellent job on the assignments
+and tests…", "Considering the difficulty of the course, the teacher, and my skills…", "I can receive
+an excellent grade…" — so Wang & Sun's scale is itself an adaptation, and the 2026-09-08 originator
+ruling reaches adaptations. **The MSLQ is in the public domain**: U-Michigan NCRIPTAL asks for
+citation only and states no permission is needed. No restriction at either level, so the row's
+verdict stands and the check is recorded in its provenance note rather than left to be re-derived.
+The WTC scale (Peng & Woodrow 2010, *Language Learning*) is the PANAS shape — a journal-article
+scale with no rights-holder distribution page stating terms — and the APNIS has no locatable clause;
+being paywalled is not a stated use restriction.
+
+**One correction to my own reading, recorded because I said it out loud before checking.** I
+reported that `liu_2025_speaking_selfefficacy` carried no rights paragraph at all. It does, and it
+applies the *current* test ("no fee, no-redistribution clause or other stated use restriction was
+found"), not the retired fee/redistribution one. My grep for `RIGHTS` had required three following
+sentences and silently missed a two-sentence paragraph. The guard in my edit script caught it before
+anything was written. Only the upstream MSLQ finding was appended.
+
+Cap is `batch_095`; not reached. 742 pending, next firing takes `batch_087`.
