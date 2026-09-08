@@ -9259,3 +9259,69 @@ been paid for.
 dictionary Description advertises (wrong twice over, handled correctly as a Step 3b mismatch); and
 the paper behind `liang_2026_extrinsic_motivation` does not reproduce its own published EFA on its
 own deposited data.
+
+## batch_077 — 2026-09-08
+
+3 tables claimed (3 agents, one per table, the daytime setting): `liang2026_extrinsic_motivation`,
+`liang_2026_intrinsic_motivation`, `liang2026_intrinsic_motivation`. All three are from one source —
+Liang X & Wang Z (2026), PLOS ONE 21(3):e0345759, CC BY 4.0 — so each agent was told explicitly which
+siblings belonged to another agent. No file collisions.
+
+**written 3 / blocked 0 / failed 0. Yield 3/3 = 100%.** Circuit breaker not tripped (0% failed).
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, no anomalies (so no Step 5c WARNs to
+explain); verify_batch PASS=3; lint_verification 3 rows, no problems; `irw-validate` ok on all three;
+`check_provenance.R` exit 0. All three mapping_basis=`paper_order`, text_source=`translated_substitute`,
+translation_source=`study_supplied` — the study was administered in Chinese and no Chinese item or
+option wording exists anywhere in the article or the .s001–.s004 supplements (all three agents scanned
+independently and found CJK only in Office font/style names, a sheet name, and the second author's
+name). Verification: two VERIFIED, one PARTIAL. The two intrinsic tables verify decisively on route 1 —
+the paper's Table 8 publishes per-item mean *and* SD, and the pair is one-to-one because means tie at
+4.20 for items 2/4 and SDs tie at 0.830 for items 3/5. The extrinsic table is PARTIAL: route 1 is
+unusable there (the S1 Table EFA does not reproduce on the deposited data) and route 5 separates the
+{em_1,em_2,em_3} block from items 9 and 10 without fixing the order inside that triple.
+
+Table 1 of this paper is an **image** table, unreachable as text; two agents independently retrieved it
+via the PLOS figure/image endpoint and corroborated it against S1 Table (.s004 DOCX, python-docx).
+Worth remembering as a route.
+
+### Duplicate ingest — CONFIRMED, four tables are two pairs (needs human dedup)
+
+`liang2026_*` and `liang_2026_*` are **the same data under two names**, for both the intrinsic and the
+extrinsic block. Verified by the orchestrator directly rather than taken from the agents: identical id
+sets, identical covariate columns (`cov_age`, `cov_gender`, `cov_professional_background`), and after
+normalising the item codes the 45×5 response matrices are equal with **0 disagreeing cells** in both
+pairs. They differ only in item-code spelling (`em_1..em_5` vs `EM1..EM5`, `im_1..im_5` vs `IM1..IM5`).
+`liang_2026_extrinsic_motivation` shipped its item text in batch_076, so all four now have item text.
+Only `data/liang_2026_exercise_motivation.py` exists; the `liang2026_*` pair has no processing script.
+
+### Step 5b caught a wrong finding — the dictionary URL claim was backwards
+
+Two agents reported that the `liang2026_*` dictionary URL `figshare.com/articles/dataset/31837640`
+"returns an empty 202 and resolves to nothing" while `plos.figshare.com/.../26047004` was "the real
+deposit". **That is reversed.** The figshare API resolves 31837640 to title "Exercise motivation
+questionnaire dataset.", DOI `10.1371/journal.pone.0345759.s002` — the paper's own S2 Data — authors
+Xilin Liang and Zenan Wang, CC BY 4.0; while 26047004 returns `EntityNotFound`, and a figshare title
+search returns 31837640 and no 26047004. The bare `202` with an empty body is figshare's JS shell: the
+known-good URL returns the identical 202/0 bytes under curl, so that response distinguishes nothing.
+
+Net dictionary picture, both halves checked — **each pair needs the other's good field**:
+
+| rows | Reference | URL (for data) |
+|---|---|---|
+| `liang2026_*` | WRONG — "Liang, W. et al. (2026). Data for exercise motivation study" | **correct** — 31837640 |
+| `liang_2026_*` | **correct** — "Liang, X.; Wang, Z. (2026). App-supported versus conventional…" | DEAD — 26047004 |
+
+Corrections were appended in place to the two affected `notes.csv` rows and to the affected
+`provenance.csv` `source_ref`/`note`, so the false claim cannot be read as filed. The item text itself
+is unaffected — it came from the article and the .s001–.s004 supplements, which are the same files
+either way.
+
+### Lead for triage, not acted on
+
+An agent observed that batch_076's `liang_2026_extrinsic_motivation` is recorded PARTIAL with "route 1
+could not be used", but Table 8 does publish per-item mean/SD for the extrinsic block
+(4.51/0.626, 4.31/0.821, 4.29/0.815, 4.11/0.959, 4.22/1.042 — also mutually distinct), so that table
+could probably be lifted to VERIFIED by the same route. Nothing in batch_076 was touched.
+
+Cap (batch_080) not reached; 769 pending.
