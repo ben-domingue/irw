@@ -68,6 +68,11 @@ import pandas as pd
 import pyreadstat
 import requests
 
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "automated_finding"))
+from irw_triage_updated import run_qc  # noqa: E402
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 
@@ -128,6 +133,9 @@ def convert() -> None:
         long = long.dropna(subset=["resp"])
         long = long[(long["resp"] >= lo) & (long["resp"] <= hi)]
         long = long[["id", "item", "resp"] + cov_cols].reset_index(drop=True)
+        checks = run_qc(long)
+        failed = [c for c in checks if c.status == "fail"]
+        assert not failed, (out_name, [(c.name, c.detail) for c in failed])
         long.to_csv(OUT_DIR / f"{out_name}.csv", index=False)
         print(f"{out_name}.csv: rows={len(long)} ids={long['id'].nunique()} "
               f"items={long['item'].nunique()} "
