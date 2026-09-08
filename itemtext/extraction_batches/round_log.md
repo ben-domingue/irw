@@ -9127,3 +9127,41 @@ came from different sources"), with `public_note` populated on all three to disc
 - Pre-existing, not from this round: `check_provenance.R` still reports
   `hua_2023_efl_study_engagement` as IRW-generated content with no issues-page entry.
 - Cap (batch_080) not reached; 5 rounds remain.
+
+### batch_075 triaged and uploaded — 3 shipped; and a batch_074 assessment CORRECTED — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with zero WARNs, `verify_batch`
+3 correct exempt (all `data_labels`), `lint_verification` clean. All three uploaded, `red_up` 3/3
+row-count verified, pre-flight clean, stamped and audited field-by-field.
+
+**The round caught a real error in batch_074's triage — mine — and it is the useful part of this
+entry.** At batch_074 I accepted that `li_2025_socmedia_ewom` owed no issues-page line, on the
+drafter's REVIEW note that its English was "the study's own from Appendix A, not a translation
+produced by IRW". That is true of the ITEM WORDING and false of the RESPONSE ANCHORS, and the note
+did not distinguish them.
+
+Verified here against the cached article rather than taken on report: `article.txt` contains
+exactly **one** "strongly agree", **one** "strongly disagree" and **zero** standalone "Neutral"
+(the lone `Disagree`/`Agree` hits are substrings of the two endpoints), and `s1file.txt` publishes
+**no English anchors at all**. So the authors printed only the two endpoints, and "Disagree",
+"Neutral" and "Agree" in `option_text_translated` are IRW's renderings of 不赞同 / 中立 / 赞同.
+
+Consequences, all applied:
+
+- `batch_074/provenance.csv` — `li_2025_socmedia_ewom` corrected `study_supplied` -> `mixed`, with
+  a `public_note` stating exactly which strings are IRW's. One line changed, round-trip proved
+  before rewriting.
+- datapages/irw#163 now carries **four** new entries: the three batch_075 tables plus `ewom`.
+- **No re-upload is needed.** The table's contents are byte-identical either way — only the
+  classification and the disclosure were wrong, not the data.
+
+**The round also harmonised its own three agents**, who split 2-1 on `study_supplied` vs `mixed`
+for byte-identical strings from identical `.sav` label sets. It checked the sources instead of
+taking a majority vote, and set all three to `mixed`.
+
+**Carry forward: `li_2025_socmedia_usefulness` is still pending and will raise this a third time.**
+It is the same deposit and the same anchor set. Whoever claims it should start from `mixed`.
+
+**Also resolved:** the RI/RV drift flagged at batch_074 is naming drift only — the `.sav` has no
+`RI*` column, counts agree 3/3/3, and the loading rank order matches the paper's
+(RV1 .760 < RV3 .867 < RV2 .885 against RI1 .861 < RI3 .907 < RI2 .914).
