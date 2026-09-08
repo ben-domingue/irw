@@ -408,3 +408,116 @@ batteries (`dscore_*`, `quopl2_*`) where the question is whether the row should
 exist at all; the 178 under 1% are a drop-and-re-upload. Neither is a blanket
 delete. `parenting_anunciacao_2025_material_rewards` is a third thing again —
 untranslated Portuguese response labels, real text rather than a missing code.
+
+---
+
+# Is the `"NA"` token scattered, or concentrated? — 2026-09-08
+
+`na_concentration_2026-09-08.csv`. A follow-up to `resp_string_na_2026-09-07.csv`,
+which established *how many* rows carry the literal `"NA"` token (#2029) but not
+*what shape* they take inside a table.
+
+The question it answers comes from #2093. `DART_Brysbaert_2020_3_4_5` was 0.43%
+`"NA"` overall, but those `"NA"`s were not missing responses — the deposit has a
+real answer for every one. They were two items, 62 respondents each, **100%
+`"NA"`**, whose scoring lookup failed silently in our own script. That is a
+different problem from a respondent who skipped, and a more urgent one: the
+corpus asserts "no answer" about people who gave one.
+
+Respondents do not produce a whole item, or a whole person, that is exactly
+100% missing. Concentration is therefore a cheap signature for our own
+processing having destroyed data. This sweep measures it.
+
+```
+REDIVIS_API_TOKEN=$(cat ~/.redivis_api_token) \
+    python3 irw_validate/sweeps/na_concentration.py \
+    irw_validate/results/na_concentration_2026-09-08.csv
+```
+
+One aggregate query per table over the 297 tables carrying the token; nothing is
+exported, and no row is read. Resumable. The run's `"NA"` total came to
+**9,941,057**, matching `report_string_resp_na.R` exactly — an independent
+cross-check of both instruments.
+
+## What it found
+
+| the 9,941,057 `"NA"` rows | rows | share |
+|---|---:|---:|
+| inside an item that is 100% `"NA"` | 129,923 | 1.31% |
+| inside an id that is 100% `"NA"` | 3,044,954 | 30.63% |
+| scattered | 6,766,180 | 68.06% |
+
+*(the first two can overlap, so "scattered" is an upper bound)*
+
+**187 of the 297 tables show no concentration at all.** Ordinary missingness.
+
+**Only 4 tables have even one item that is 100% `"NA"`:**
+
+| table | overall `NA` | items 100% `NA` | share of its `NA` | verdict |
+|---|---:|---:|---:|---|
+| `DART_Brysbaert_2020_3_4_5` | 0.43% | 2 / 264 | 100% | defect — #2093 |
+| `Veterans_Affairs_SSVF_Survey_2018-20` | 32.3% | 3 / 56 | 16.6% | defect, minor — see below |
+| `western_reserve_project` | 26.2% | 81 / 2,812 | 6.0% | defect — see below |
+| `quopl2_forster_2021_elfe` | 93.2% | 14 / 274 | 5.5% | **not** a defect — see below |
+
+The 30.6% in whole-person `"NA"` is dominated by `dscore_*` and `quopl2_*` —
+adaptive and age-gated batteries where a child aged out of an instrument
+entirely (`quopl2_forster_2021_dmat`: 98.8% of its `"NA"` sits in people with
+zero responses). That is the design working, recorded badly, not data we lost.
+
+## The three item-side tables, resolved
+
+**`western_reserve_project` — a real defect, and larger than the `"NA"`.**
+All 81 all-`"NA"` items are in **wave 4, and only wave 4**; every other wave has
+zero. `data/western_reserve_project.R` builds each wave with the same
+drop-uninformative-columns loop, and the `ctp_wave4` copy of it has a typo:
+
+```r
+unique_len <- length(ctp_wave4)      # number of COLUMNS in the frame
+                                     # every other wave: length(unique_vals)
+```
+
+`length()` of a data frame is its column count, so `unique_len` is a constant
+and **neither** guard ever fires for that one file. Both branches are lost, so
+wave 4 keeps all-`NA` columns *and* single-value columns:
+
+| wave | items | 0 distinct responses | 1 distinct response |
+|---|---:|---:|---:|
+| 4 | 1,004 | **81** | **141** |
+| every other wave | 1,808 | 0 | 4 |
+
+So **222 of wave 4's 1,004 items carry no information for any model at any
+altitude** — the `"NA"` sweep only saw the 81. The inner `is.na(unique(ctp_wave4[1]))`
+on the same line is wrong too (it tests the first *column*, not `unique_vals[1]`).
+
+**`Veterans_Affairs_SSVF_Survey_2018-20` — a real defect, minor.** Items 54, 55
+and 56 are the last three of 56 and are 100% `"NA"` across all 26,347 rows,
+against ~14% for items 49–53. A clean cliff at the end of the file: three
+trailing empty columns that should never have been published. No response was
+destroyed — unlike DART, there is nothing to recover.
+
+**`quopl2_forster_2021_elfe` — not a defect.** ELFE is a *speeded* reading test,
+and the `"NA"` rate climbs smoothly with item number rather than jumping:
+
+```
+WortKorrekt6    83.8%      WortKorrekt65   99.9%
+WortKorrekt60   99.9%      WortKorrekt69   99.9%
+WortKorrekt61   99.6%      WortKorrekt70  100.0%   <- and every item after
+```
+
+Nobody reached the last six items. That is the test's ceiling, correctly
+recorded. Leave it alone.
+
+## What this does and does not settle
+
+A 100%-`"NA"` item is a **sufficient** signature of a failed lookup, not a
+necessary one. DART's join happened to fail totally; one failing on a subset
+would scatter and be indistinguishable here from real missingness. So 1.31%
+bounds the *obvious* cases only. Finding partial failures would mean comparing
+each table against its source deposit — a much larger job, and not one this
+evidence justifies.
+
+Also note the ordering trap: the bulk cleanup destroys this evidence. Drop the
+`"NA"` rows first and a 100%-`"NA"` item vanishes from the table entirely,
+taking with it any trace that a real response ever existed. This sweep has to
+precede any repair.
