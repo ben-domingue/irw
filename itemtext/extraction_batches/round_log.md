@@ -8564,3 +8564,69 @@ own precomputed mean reproduces from the live items at max|diff| = 0 only as a 3
 and its stated anchors contradict its own deposit's value labels. The deposit's labels are
 themselves incoherent (1 "Strongly disagree" … 3 "Sometimes" … 5 "Totally agree"), which is what
 makes the override toward the printed instrument's anchors supported rather than asserted.
+
+## batch_070 — 2026-09-08
+
+3 tables (daytime 3-agent setting, one agent per table). **written 3 / blocked 0 / failed 0 — yield 100%.**
+
+| table | rows | mapping_basis | verification | status |
+|---|---|---|---|---|
+| lessR_Mach4 | 120 (20x6) | data_labels | NOT_NEEDED (exempt) | done |
+| li_2021_cultural_intelligence | 84 (12x7) | paper_explicit | routes 5+8, PARTIAL | done |
+| li_2021_knowledge_sharing | 28 (4x7) | paper_explicit | route 1, PARTIAL | done |
+
+Gates: normalize_nulls 0 of 3 normalized (all already clean); audit_batch 3/3 PASS with no
+anomalies, so **no WARNs to explain at Step 5c**; verify_batch PASS=2 + MISSING(exempt)=1
+(lessR_Mach4 is data_labels, correctly carries no verify script); lint_verification clean
+(3 rows, no problems) — the NOT_NEEDED row was written into **both** verification_merged.csv
+and mapping_verification.csv up front, so the spurious "ships a CSV but has no verification
+row" ERROR that hit batch_020 and batch_021 did not recur.
+
+`check_provenance.R` **exits 1, and it is not this batch's doing.** The failure is the standing
+backlog of 8 IRW-generated tables with no issues-page entry (hua_2023_efl_study_engagement,
+jeon_2019_cbi, jiang_2024_growthm, jiang_2024_instituinteg, jiang_2024_ptsacc,
+kitayama_2022_hweat, lee_2025_nursing_exam, plus the derived answer key
+KoreanNursing_Park_2017). Grepping the checker's output for this round's three tables returns
+zero hits — both `li_2021_*` tables are `translated_substitute` / `study_supplied`, i.e. the
+English is the *study's own*, not this project's, so no issues-page line is owed.
+`irw-validate` is clean on both li_2021 files; lessR_Mach4 draws one WARN, `name_charset`
+(the published table name is not lowercase) — a property of the already-published response
+table, not of this extraction, and recorded as such in notes.csv.
+
+**Step 5b, orchestrator re-check — all three agents' numeric claims reproduce exactly.**
+`item_stats.R` on the live tables confirms lessR_Mach4 n=351 with means 1.28/1.75/2.90/3.34/
+2.23/3.07/2.77/2.10/4.23/3.99/1.64/1.80/1.38/1.95/2.12 for m01–m15 (matching CRAN
+`colMeans()` item for item, and m09 "humble and honest" at 4.23 with 57.0% at ceiling, which
+is what shows the stored values are raw rather than pre-reversed); li_2021_knowledge_sharing
+n=336 with means 4.83/5.07/5.14/4.93. The cultural-intelligence agent's sharpest claim —
+that the five factual-knowledge CQS items are *exactly* the five lowest means — holds on
+independent computation: 4.09, 4.11, 4.16, 4.27, 4.37 (CQ7, CQ6, CQ3, CQ4, CQ5) against
+4.68–5.21 for the other seven, with no interleaving.
+
+**One agent claim corrected before it shipped publicly.** The `li_2021_knowledge_sharing`
+public_note asserted flatly that "the survey was fielded in Chinese". Fetching the paper
+(PLOS ONE 16(5):e0250878) confirms the sample — Chinese employees, 31 enterprises, 9
+industries, 450 issued / 395 returned / 336 valid, "Questionnaire Star" — and confirms 12 CQ
+and 4 KS items, but it **states nothing about the language of administration or any
+translation**; the agent's own notes.csv conceded this while the public note did not. The
+note now says the instrument was in all likelihood administered in Chinese and names the
+inference's basis (Chinese sample plus the .s002 workbook's OLE Locale ID 2052 / WPS
+metadata). `language=Chinese` and `text_source=translated_substitute` stand — the deposit
+genuinely publishes only English — but the public artifact no longer overstates the evidence.
+
+**Both li_2021 tables come from one deposit and were extracted independently, which is worth
+having.** The two agents converged separately on the same S1 Appendix block structure
+(CQ1-12 / KS1-4 / OCD1-9 / SIB1-6 against a 41-column header = ID + 9 covariates + 31 items),
+the same `language=Chinese` fallback, the same blank `option_text` (the appendix prints seven
+*unlabelled* boxes — nothing was padded with its own number), and the same PARTIAL scoping.
+Neither wrote into the other's files, and neither touched the third sibling
+`li_2021_sustainable_innov_behav`, which is still pending in the queue.
+
+Both PARTIAL verdicts are honestly scoped rather than defensive: CQ's routes pin 12/12 items
+to their own facet block but cannot order items *within* a facet (CQ1–CQ2 r=0.81; CQ3/CQ6/CQ7
+means within 0.07), and KS's CFA reproduces the paper's Table 2 (a PNG — the numbers are in
+no machine-readable form) to max |loading diff| 0.0004 and max |SE diff| 0.0005 while the
+rival sweep leaves the KS2↔KS4 swap at 0.0074, inside tolerance and therefore not excluded.
+
+Queue after this round: 790 pending / 451 done / 93 blocked / 55 excluded / 12 failed.
+Circuit breaker not tripped (0% failed). Cap is batch_080 — not reached, 10 rounds remain.
