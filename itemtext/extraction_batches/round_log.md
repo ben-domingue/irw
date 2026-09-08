@@ -10864,3 +10864,67 @@ no export):
   indicator there is by design, not by error.
 
 Circuit breaker not tripped: 0 failed of 3 (0%). Cap is batch_095; not reached, next round proceeds.
+
+### batch_089 triaged — 2 shipped, 1 blocked on the PSS — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch`
+PASS=2, `lint_verification` clean, `irw-validate` ok. Both uploaded (`red_up` 2/2 row-count
+verified), stamped and audited; the blocked table stayed unstamped and has its
+`pending_index_notes.csv` row. Two entries added to PR datapages/irw#165 (397 entries).
+
+**`lu_2017_pss10` blocked correctly, and the agent re-fetched the CMU clause rather than citing
+precedent** — the FAQ it hashed is md5 byte-identical to the copies taken in batches 047/059/062/063.
+Tenth PSS-family block. Nothing was written, so nothing needed holding.
+
+**The stamp hit a real trap and the audit caught it before anything was written.** This batch's
+`provenance.csv` is **mixed within a single file**: the header and the `lu_2017_phq9` record are
+QUOTE_ALL terminated with a bare `\n`, the `lu_2017_pss10` record is unquoted/minimal, and the file
+ends CRLF — 2 CRLF against 4 `\n` in three records. The byte-split-on-CRLF stamper used for every
+earlier batch is simply invalid here and asserted out mid-run (`b'ot published",\r'` does not end
+with a comma). Re-done as per-record surgery: `,""` → `,"2026-09-08"` on the QUOTE_ALL record and a
+bare `,` → `,2026-09-08` on the minimal one. **+20 bytes, exactly ten characters per record**, each
+record's own convention preserved, the blocked row byte-identical, and the CRLF/bare-`\n` mix
+unchanged at (2, 4). This is what BATCH_PROCESS.md means by "under each line's own quoting
+convention", and it is the first batch this session where a whole-file convention did not exist.
+
+**Did the image transcription check the round asked for, rather than carrying it forward.**
+`lunacortes_2019_satisfaction`'s wording comes from PLOS Table 1, which is published only as a PNG
+with no text endpoint. Read the cached `t001.png` directly: all three shipped strings match the
+image character for character — "Overall, I am satisfied with the experience" / "This experience met
+my vacation needs very well" / "Normally, this kind of experience makes me feel satisfied". The
+issues-page entry now says plainly that the route was transcription from an image, which a reader
+should be told rather than left to infer. The same image also carries the five sibling scales'
+wording, so the `lunacortes_2019_*` siblings are cheap when they come up.
+
+**Rights, both fine, one recorded here because I got the reading wrong twice.** `lu_2017_phq9` has
+the same express grant as batch_088's GAD-7 (*"No permission required to reproduce, translate,
+display or distribute"*), verified at phqscreeners.com. `lunacortes_2019_satisfaction`'s scale
+(McCollough, Berry & Yadav 2000) has no stated restriction — silence, which #1945 does not reach.
+**Process note: I twice reported a provenance row as having "no rights paragraph" when it had one**,
+because my grep matched only uppercase `RIGHTS` and these rows write `Rights:`. First on
+`liu_2025_speaking_selfefficacy` (batch_086), again here. Grep case-insensitively; the rounds are
+more consistent about recording rights than my checking was about finding it.
+
+**A corpus sweep that this round's PSS-10 prompted, handed to the withdrawal session rather than
+acted on.** Ben has ruled the PSS blocks and five tables were withdrawn on it (5004d7e and the
+2026-09-06 set), but nobody swept. Checking every PSS-named table item-by-item found **8 live tables
+carrying canonical Cohen PSS wording**: `lhsbrasil_couto_2023_pss`, `oxfordcovid_xue_2024_pss`,
+`kfcovid_pss_li2020`, `paampsmartsud_saba_2023_pss`, `mhscdc_fried_2020_ps`, `eammi_grahe_2018_stress`,
+`ecps_sahm_2024_stress` and `gilbert_meta_59` — the last reproducing the full canonical instruction
+paragraph as well as the items. **One false positive:** `alkouri_2025_icu_stressors` says "Perceived
+Stress Scale (PSS)" but is Sheu et al. (1997), a nursing-placement stressor scale ("Cannot get along
+with other peers in the group"). Also note `metadata/itemtext_metadata.csv` still lists the
+already-withdrawn bakker/beck/cormier, because withdrawal takes effect only at the next release — so
+its 12 PSS rows are 8 unwithdrawn, 3 pending release, 1 false positive.
+
+**The durable question is not about the PSS.** A ruling was made and applied five times, and eight
+more instances sat undiscovered until a name-adjacent table happened into a round. That is presumably
+true of every blocked instrument. Worth deciding whether a block should trigger a standing corpus
+sweep instead of table-by-table discovery.
+
+**Handoff §B is closed** (the "itemtext problems sequel" session): all three holds/blocks stand and
+none needed Ben, each being settled by a ruling already made — `liu_2025_mlq` and `loneliness_mudfold`
+by the same day's MLQ/DJG rulings, `liu_2018_shyness` by #1945 on Cheek's non-profit clause, with the
+zero-exposure claim independently re-verified.
+
+Cap is `batch_095`; not reached. 733 pending, next firing takes `batch_090`.
