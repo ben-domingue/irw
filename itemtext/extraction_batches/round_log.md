@@ -8148,3 +8148,44 @@ SF-36's four are probably fine — batch_048 found RAND's terms permissive.
 **Blocks that stand unchanged:** `kokoszka_2022_who5` (batch_064), and `nteveros_2021_who5` /
 `wakui_2023_who5` remain pending and must not be extracted. Per convention, withdrawn tables keep
 `status=done` in `queue_state.csv`, as `gillman_2023_pss` and `cormier_2024_pss4` did.
+
+### Three more instrument withdrawals under the 2026-09-08 originator ruling — 2026-09-08
+
+Follow-on from the WHO-5 case. All three were found by searching the `instrument` column of
+`metadata/itemtext_metadata.csv` rather than table names, and each was verified item-by-item
+against the live table before anything was touched.
+
+| table | instrument | action | rows |
+|---|---|---|---|
+| `sv-maia2_randelovic_2021_shs` | Subjective Happiness Scale (Serbian) | withdrawn whole | 28 |
+| `eammi_grahe_2018_stress` | Cohen PSS-10 (verbatim, all 10 items) | withdrawn whole | 50 |
+| `ecps_sahm_2024_stress` | PSS-10 **inside** a larger table | **partial** — 50 PSS rows removed, 87 kept | 137 → 87 |
+
+All three were published, so each withdrawal takes effect at the next release of `irw_text`.
+That shard's draft now stands at 727 against 732 released — five removals staged in total.
+
+**`sv-maia2_randelovic_2021_shs`** is the same instrument blocked at batch_061
+(`kern_2021_happiness`) and batch_031 (`extremera_2016_shs`) on Lyubomirsky's non-commercial
+term. Its four items are the canonical SHS in Serbian translation; a translation is a
+derivative of the restricted instrument, not an escape from it.
+
+**`eammi_grahe_2018_stress`** carries Cohen's PSS-10 verbatim under item codes `stress_1..10`
+— the same restriction that withdrew bakker/beck/duboz (2026-09-06) and gillman/cormier
+(2026-09-07). The table name gives no hint of the instrument.
+
+**`ecps_sahm_2024_stress` is the first PARTIAL withdrawal, on Ben's ruling of 2026-09-08:**
+remove only the items that should not be there and note it in an issue. The table mixed the
+PSS-10 (`perceived_stress_sca_1..10`, 50 rows) with 18 items of the study's own COVID stressor
+lists (`primary_stressors_*`, `secondary_stressors__*`, 87 rows), which no one restricts. The
+whole-table withdrawal used elsewhere would have destroyed unrestricted content.
+
+Mechanics for a partial, since they differ from a plain withdrawal and will recur: the live
+table was pulled with `table.download(format='csv')` — **not** `to_pandas_dataframe()`, which
+fails on this machine with `OSError: Expected to be able to read N bytes for message body` on
+tables above roughly 15 kB. That is the known pyarrow bug (Python-pkg#5), fixed in redivis
+0.20.14 while this machine still runs 0.20.11; `download()` and the query route both avoid it.
+The PSS rows were filtered out, the draft table deleted, and the 87-row file re-uploaded with
+`red_up --dataset irw_text` — **the explicit `--dataset` matters**: red_up routes `__items.csv`
+to the newest shard by default, which would have created a second copy in `irw_text_2` that
+shadows the `irw_text` original rather than replacing it. red_up reported UPDATE / "replaces
+the existing table" and verified 87 rows; the released copy still reads 137 until the release.
