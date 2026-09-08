@@ -10138,3 +10138,61 @@ number-preserving rename — so each ran a real verification anyway and both cam
 That is the right call and worth repeating on the siblings.
 
 Cap (batch_095) not reached; queue has 748 pending.
+
+### batch_084 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+2 PASS + 1 correct exempt, `lint_verification` clean, `irw-validate` ok, `check_provenance` exit 0.
+All three uploaded to `datapages.irw_text_2:next` (`red_up` 3/3 row-count verified), pre-flight
+clean, stamped and audited. Three entries added to the open PR datapages/irw#165 (387 entries).
+
+**The two `liu_2025_*` tables are the case where `data_labels` needed the most scrutiny, and the
+round was right to decline the Step 5b exemption.** `data/liu_2025_classroom_wtc.py` takes
+`item_cols_all = cols[4:]` and then slices **hard-coded index ranges** — `[0:7]`, `[7:11]`,
+`[35:38]`, `[38:41]`, `[41:44]` — generating item codes (`fle_teacher_1`, …) that carry **no trace
+of the source column**. So unlike every other `data_labels` table this session, a wrong slice
+boundary would silently relabel whole blocks and nothing downstream would see it.
+
+**Checked the boundaries against content, which settles it.** The workbook header row *is* the item
+wording, numbered within each scale, and positions 35–43 read: 1 "I enjoy it.", 2 "I've learnt
+interesting things.", 3 "In class, I feel proud of my accomplishments.", 4 "The teacher is
+encouraging.", 5 "The teacher is friendly.", 6 "The teacher is supportive.", 7 "We form a tight
+group.", 8 "We have common 'legends', such as running jokes.", 9 "We laugh a lot." Personal 1–3,
+teacher 4–6, social 7–9 — exactly the script's slice.
+
+**The FLE finding is real and I confirmed it on the prose itself, then sharpened it.** Article
+§2.2.4 says: *"teacher appreciation sub-scale (items 1–3, e.g., 'The teacher is friendly.'),
+personal enjoyment sub-scale (items 4–6, e.g., 'I've learned interesting things.'), and social
+enjoyment sub-scale (items 7–9, e.g., 'We form a tight group.')"*. **The prose's own exemplars
+refute the prose**: "The teacher is friendly." is deposit item 5, not 1–3; "I've learned interesting
+things." is deposit item 2, not 4–6; and "We form a tight group." really is item 7. So teacher and
+personal are transposed and social is untouched — **a two-block transposition, not a reversal**, and
+the drafted issues-page sentence which called it "the reverse of" was corrected before it shipped.
+It is an article-prose defect; the data, the S1 Appendix and the shipped codes all agree.
+
+**Where the shipped text deviates from the workbook header, it follows the S1 Appendix, and I
+checked all three cases resolve there.** `ci_li_4` and `ci_ll_2` ship the Appendix's fuller
+sentences ("I think the interaction…", "I think there is much interaction…") against abbreviated
+column labels, and `fle_personal_2` ships the Appendix's curly apostrophe in "I've". All three
+strings are present verbatim in `s001`. The header is a spreadsheet label; the Appendix is the
+questionnaire, and preferring it is right.
+
+`liu_2023_training_freq` is the fifth and last table off the PeerJ medication-adherence deposit —
+`.sav` labels, number-preserving rename, 6/6 shipped `item_text` equal to the variable label
+exactly. Its S3-English permutation (items 2 and 3 swapped relative to the administered order) is
+the same defect already seen in `liu_2023_adherence_barrier`, and was again resolved by content
+rather than position. **The PeerJ deposit is now fully worked: five tables across batches 082–084,
+no holds, one recurring source defect.**
+
+Rights: nothing to escalate. All three instruments are the studies' own or published adaptations in
+CC BY deposits; the FLE is Botes et al.'s short-form scale as reproduced in the study's own CC BY
+appendix.
+
+**Carried forward for whoever takes the `liu_2025_*` siblings:** the cluster is *three separate PLOS
+papers*, not one deposit. The two remaining WTC siblings share the already-cached workbook, whose
+header row is the wording — but they come off the **same positional slicer**, so their slice
+boundaries need the same content check done here, not the exemption. The three `meaning_learning`
+tables differ again: their source column names are the original Chinese, so they ship Chinese in the
+base fields rather than taking the English fallback.
+
+Cap is `batch_095`; not reached. 748 pending, next firing takes `batch_085`.
