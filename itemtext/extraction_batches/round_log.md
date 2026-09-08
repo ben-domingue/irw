@@ -10687,3 +10687,60 @@ Noted, not acted on: the deposit's careless-responding rate is high — 10 strai
 strictly 4-periodic patterns, 62 with a run of ≥8 identical consecutive answers, 77 of 234 flagged
 by at least one heuristic. That is the deposit's property, and these are heuristics rather than a
 validated screen, but it is worth knowing before modelling this table.
+
+### batch_088 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+PASS=3, `lint_verification` clean, `irw-validate` ok. All three uploaded (`red_up` 3/3 row-count
+verified), pre-flight clean, stamped and audited. Three entries added to PR datapages/irw#165
+(397 entries).
+
+**This is the first round of the session whose rights paragraphs applied the *current* rule
+unprompted, and all three verdicts hold on checking at source.**
+
+- **`lu_2017_gad7` — express grant.** phqscreeners.com, re-fetched 2026-09-08: *"All PHQ, GAD-7
+  screeners and translations are downloadable from this website and no permission is required to
+  reproduce, translate, display or distribute them."* The PDF footer carries the same grant. This is
+  the RCBS/MLQ shape inverted, and it is worth having a live example of both.
+- **`lorenz_2016_optimism2` — LOT-R, read from the cached copy of Carver's own page.** The rights
+  holders publish the full instrument themselves, with no fee, no non-commercial clause and no
+  redistribution bar. The page's only caveat is *"Please note that this is a research instrument,
+  not intended for clinical applications"*, and the only copyright line is the University of Miami
+  site-wide footer, not an instrument statement. **A note about scientific applicability is not a
+  term governing reproduction**, and IRW is not making a clinical application — but see the
+  handoff, because "does a scope caution count as a stated use restriction under #1945" is a
+  rule question that will recur.
+- **`lorenz_2016_hope` — silence.** No fee, NC clause or redistribution bar is findable for Snyder's
+  State Hope Scale; the only "copyright" page that surfaced is for the different, dispositional Adult
+  Hope Scale and 404s. #1945 blocks on a *stated* restriction, so an absent statement is not one.
+
+**The round's four substantive claims were re-checked and all stand.** Most consequential:
+`optimism2`'s three pessimism items are stored **already reverse-coded**, so `resp=6` there means
+disagreement — alpha 0.736 as stored against the published .74, versus **−0.015** if recoded as the
+LOT-R manual directs. That is a public-facing claim about response direction and it is in the
+issues-page entry.
+
+**`lu_2017_gad7` is bigger than its paper and is NOT a doubled upload.** 1296 unique ids against the
+1096 the paper analyses, with 902 repeated `id`+`item` pairs. Those are a wave-2 follow-up for 129
+respondents — and the arithmetic is exact: 129 × 7 items, less one missing `GAD_3` cell, is 902.
+306 of the repeated pairs disagree across waves, which is real longitudinal change. **The drafter's
+entry said only that the table holds more respondents than the paper analysed, which would read as a
+defect; the shipped entry says what the extra rows are.** This is the `dup_item_resp` shape that
+`irw-validate` exists to catch, and here it is legitimate — the standard's own note that duplicate
+id-item rows can be real data.
+
+**Not acted on, and referred to the standing PARTIAL/VERIFIED question rather than fixed.** The round
+found that Fig 1 of the Lorenz paper reproduces exactly (loadings .557/.790/.700 and residuals
+.690/.376/.510 against published .56/.79/.70 and .69/.38/.51, max difference 0.00), which separates
+GSE4 from GSE6 outright — where the **already-committed** evidence string for
+`lorenz_2016_efficacy1` (batch_087, uploaded) rests that pair on a weaker item-total contrast. The
+row stays PARTIAL either way, so nothing is mis-stated publicly and no wording is affected; the
+evidence merely understates what the source establishes. The older handoff deliberately reserved
+"is this evidence string strong enough" as a rule-level question for Ben rather than letting each
+triager rewrite another round's committed verdict, so it is recorded there instead of edited here.
+
+**A second table wants a per-row `text_source`.** `lorenz_2016_hope` genuinely has two provenance
+regimes — German for the three CPC-12 items, English fallback for the other three — and the single
+per-table field errs conservative. Same shape as the earlier case; two instances now.
+
+Cap is `batch_095`; not reached. 736 pending, next firing takes `batch_089`.
