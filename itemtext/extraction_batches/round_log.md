@@ -9045,3 +9045,29 @@ Step 3b collision caught and cleared: `PE` means *Policy Environment* in pone.03
   still owes an issues-page line, and 6 `translation_source=mixed` tables want review. All three
   batch_074 rows are `translation_source=study_supplied`.
 - Cap (`batch_080`) not reached.
+
+### batch_074 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS, `verify_batch` 2 PASS + 1 correct
+exempt, `lint_verification` 0 ERROR / 1 WARN. All three uploaded, `red_up` 3/3 row-count verified,
+pre-flight clean, stamped and audited field-by-field. **This completes the eight-table
+pone.0326329 family** begun in batch_072.
+
+**Only TWO of the three earned an issues-page entry** (datapages/irw#163, now 365). The drafter
+produced no draft for `li_2025_socmedia_ewom` and listed it in its REVIEW section — which was read
+rather than skipped, since that is exactly how three batch_009 tables were missed. It is a
+different paper (pone.0321999) whose `.sav` DOES carry Chinese variable labels on all 24 item
+columns, so it shipped `data_labels` with administered Chinese in `item_text` and **the study's own
+English** from Appendix A in `item_text_translated`. Because that English is the study's and not
+IRW's, the 2026-09-02 ruling asks for nothing. Same author as the other two, opposite label
+situation — worth not generalising across a family by author.
+
+**The lint WARN kept as VERIFIED, agreeing with the round.** `li_2025_marketing_operation`'s
+evidence hedges about the Chinese wording and the `option_text`↔`resp` axis, but the CFA route does
+separate all five items (0.0004 shipped against 0.0032 for the best rival). The hedge is a scope
+disclosure, not weak separation, so VERIFIED is the honest status.
+
+**`audit_batch.R` threw a transient Redivis 400 on the round's first run** and passed unchanged on
+re-run; my own independent re-run at triage also passed. The committed `audit_report.csv` is the
+clean one. Worth noting only because a transient upstream 400 is indistinguishable from a real
+failure in a single run — re-run before believing one.
