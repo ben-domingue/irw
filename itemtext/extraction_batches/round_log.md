@@ -10425,3 +10425,79 @@ sentences and silently missed a two-sentence paragraph. The guard in my edit scr
 anything was written. Only the upstream MSLQ finding was appended.
 
 Cap is `batch_095`; not reached. 742 pending, next firing takes `batch_087`.
+
+---
+
+## batch_087 — 2026-09-08
+
+**3 tables claimed, 2 written / 1 blocked / 0 failed. Yield 2/3 = 67%.** Circuit breaker not
+tripped (0% failed; the one no-CSV table is a determinate rights block, which does not count). All
+six gates clean: `normalize_nulls` 0 of 2 normalized, `audit_batch` PASS 2/2 with no anomalies (so
+nothing for Step 5c to explain), `verify_batch` PASS 2/2, `lint_verification` 2 rows no problems,
+`irw-validate` ok on both, `check_provenance` exit-clean. Three agents, one per table, per the
+2026-09-08 daytime setting.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `liu_2025_ydcy` | written, 17 rows | reconstructed | PARTIAL |
+| `lorenz_2016_efficacy1` | written, 60 rows | reconstructed | PARTIAL |
+| `loneliness_mudfold` | **blocked** (rights) | — | — |
+
+**Step 5b: all three load-bearing agent claims re-checked by the orchestrator, all three confirmed
+exactly.** Worth recording because two of them override a source and one is a defect report.
+
+1. *The `liu_2025_ydcy` deposit README is wrong about its own instrument.* Confirmed from the .sav
+   directly: `YDCY == YDCY2*YDCY3*YDCY4` for **879/879** respondents, max|diff| 0 — the PARS-3
+   product form the PLOS article states — while the README's Godin (GLTEQ) weighting `9/5/3`
+   reproduces **5/879**, max|diff| 60. YDCY3 is the only item carrying zeros (**58**, range 0-4);
+   YDCY2 and YDCY4 are 1-5 with none. The 58 YDCY3 zeros are *exactly* the 58 respondents whose
+   composite is 0 (set equality confirmed). YDCY5 r = **+0.273** with the composite, distribution
+   88/525/266, fixing 1=Never/Rarely … 3=Often against the README's self-contradictory question-5
+   ordering. The .sav carries **0** variable labels and **0** value-label sets across all 74
+   columns, so the translated_substitute fallback was correctly forced. PARS-3 wording shipped, not
+   the README's sentences.
+2. *`lorenz_2016_efficacy1` is the GSE, not the OSE.* Reproduced the paper's Table 1 from S1
+   Dataset: `efficacy1` (k=10) M=**4.224**, α=**0.883** against the published General Self-Efficacy
+   4.22/.88; `efficacy2` (k=8) M=**4.291**, α=**0.855** against Occupational Self-Efficacy 4.29/.85.
+   Step 3b resolved correctly. No sibling `lorenz_2016_*` table was touched — `hope` and
+   `optimism2` remain pending for a later round.
+3. *The `loneliness_mudfold` licence quotes are verbatim.* Both re-read from the cached manuals:
+   manual2026.txt lines 48-49 carry "Not commercial …" and "No derivatives …"; manual1999.txt
+   line 33 carries "available for scientific research programs, under the following conditions:".
+
+**RESPONSE-DATA DEFECT — not fixable from the itemtext side, flagged for the response-data owner
+and, in my view, worth its own GitHub issue (not filed; that is a human call).**
+`data/liu_2025_teacher_support.py` drops YDCY3's 58 zero responses as a "data-entry error
+signature" on the reasoning that the zeros are isolated to one item. They are not errors: 0 is
+PARS-3's valid lowest duration score ("under 10 minutes"), and because duration is scored as
+(level−1) it is *by construction* the only item that can be 0. Live `liu_2025_ydcy` therefore has
+YDCY3 n=821 against 879 for its siblings, and that item's lowest surviving level means "11 to 20
+minutes", not the bottom of the scale. The shipped item text discloses this in `public_note`; no
+option row is shipped for resp 0, since that value is not in the live table. This is the
+per-item-resp-range diagnostic doing exactly what it exists for.
+
+**Why both written tables are PARTIAL rather than VERIFIED — in both cases the residual is a
+property of what the sources publish, not an access failure.** `liu_2025_ydcy`: the composite is a
+*product*, hence symmetric in YDCY2 and YDCY4, so no test on this data separates intensity from
+frequency; that pairing rests on canonical PARS-3 order, and a YDCY2/YDCY4 swap would leave every
+number in `verify_liu_2025_ydcy.R` unchanged. `lorenz_2016_efficacy1`: the CFA route pins
+`{efficacy1.4, .6, .10}` = `{GSE4, GSE6, GSE10}` as a **set** and does so decisively (scaled
+χ²(50)=**77.727**, TLI .950, CFI .962, RMSEA .042, matching the published Table 2 exactly; nearest
+rival triple of the 5 candidates 78.232), and the item-mean profile against the Schwarzer &
+Jerusalem 1999 Itemkennwerte gives r=**0.8733** / Spearman 0.9390, beating 99.970% of 200,000
+permutations — but items with tied 1999 means are not separated (3↔8 changes r by 0.0000, 5↔10 by
+0.0008, 1↔2 by −0.0221, i.e. that swap fits marginally *better*).
+
+**The block is an instrument-level ruling, and it is the expensive kind — fully solvable, then
+stopped on rights.** `loneliness_mudfold` is the De Jong Gierveld 11-item Loneliness Scale
+(`mudfold::Loneliness`, items A-K, n=3987). `mudfold/man/Loneliness.Rd` documents every column
+against its statement verbatim and the `.RData` carries embedded value labels, so it would have
+shipped as `data_labels` with zero inference. It is blocked by the rights holders' own manual
+(NC + ND, quoted above); per the 2026-09-04 DSES ruling the GPL-2 CRAN deposit licence does not
+override the rights holder, and the OSF project carries `node_license: None`, so there is no
+competing permissive page in the SWLS two-pages sense. **Escalation for a human:** other corpus
+tables carrying DJG wording are in the same position — `dopmeijer_2022_loneliness` and
+`jutte_2024_loneliness` were flagged as candidates but *not* checked, and may use UCLA wording
+instead.
+
+Cap is `batch_095`; not reached. 739 pending, next firing takes `batch_088`.

@@ -1,0 +1,3 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"liu_2025_ydcy","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"lorenz_2016_efficacy1","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,66.7,"66.7% of rows have blank option_text"
