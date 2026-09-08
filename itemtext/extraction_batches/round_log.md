@@ -11141,3 +11141,59 @@ constraint was the machine, not the setting.
 
 Cap `batch_095` was not reached and 730 tables remain pending; the stop is the memory rule, not the
 cap. **Next firing takes `batch_092`, once the machine is quieter.**
+
+---
+
+## PSS corpus sweep — six more withdrawals, and the sweep is now a standing thing (2026-09-08)
+
+Ben ruled: **withdraw all of them, and build a register** so a blocked instrument is swept once
+rather than rediscovered a round at a time. The PSS ruling has existed since 2026-09-06 and had been
+applied five times (bakker/beck/duboz, then gillman/cormier at `5004d7e`); nothing ever swept the
+corpus behind it, so live tables kept surfacing one at a time.
+
+**Six withdrawn** from the `irw_text` draft (`tools/withdraw_pss_sweep.py`, dry-run first;
+725 → 719, exactly the six asserted, keep-set intact):
+
+| table | items | canonical PSS |
+|---|---|---|
+| `mhscdc_fried_2020_ps` | 10 | 10 |
+| `lhsbrasil_couto_2023_pss` | 10 | 10 |
+| `paampsmartsud_saba_2023_pss` | 10 | 10 |
+| `gilbert_meta_59` | 10 | 10, plus the full canonical instruction paragraph |
+| `oxfordcovid_xue_2024_pss` | 4 | 4 |
+| `kfcovid_pss_li2020` | 4 | 4, as negated rewordings |
+
+All six were published, so each takes effect at the next release. None had a provenance row — they
+predate the batch pipeline — so the record of the withdrawal is this entry and the register, not a
+`public_note`. **That gap is itself worth noting: the withdrawal mechanics recorded in the standard
+assume a batch-pipeline table, and most of the corpus is not one.**
+
+**Two were already handled and must not be re-done.** `eammi_grahe_2018_stress` was withdrawn whole
+at `8975953` and is absent from the draft. `ecps_sahm_2024_stress` had the **partial** withdrawal —
+draft `numRows` 87 against 132 published, verified — and must never be deleted whole, because its 18
+COVID-stressor items are unrestricted. Both are named in the script's `ALREADY` and `KEEP` sets so a
+rerun cannot destroy them.
+
+**`alkouri_2025_icu_stressors` is NOT the PSS and was kept.** Its `instrument` field says "Perceived
+Stress Scale (PSS)"; the items are Sheu et al. (1997), a nursing-student clinical-placement stressor
+scale — zero canonical matches across 29 distinct items. One false positive in nine. That is now
+three name-based searches out of three (MLQ, DJG, PSS) where a name match was a lead and not a
+verdict, which is why the register matches on content.
+
+### Two measurement traps found while verifying this, both of which produced wrong numbers
+
+**A fully-qualified table name in a Redivis query ignores the dataset object's `version` scope.**
+Querying `` `datapages.irw_text.<t>__items` `` through
+`dataset('irw_text', version='next').query(...)` returns the **published** rows, silently. It made
+`ecps_sahm_2024_stress` read as 137 rows with all ten PSS items still present in the draft, i.e. as
+though the partial withdrawal had failed, when the draft was correctly at 87. `table.get()
+.properties['numRows']` per version is what actually distinguishes them. Any draft verification
+written as a qualified-name query has been measuring the wrong version.
+
+**A substring matcher under-counts canonical wording, so its output is a lower bound.** The first
+pass scored `lhsbrasil`, `paampsmartsud` and `gilbert_meta_59` at 9 of 10 because PSS item 9 reads
+"things **that happened** that were outside of your control" in those administrations; and
+`kfcovid_pss_li2020` at 1 of 4 because its items are negated rewordings ("felt you **lack**
+confidence", "things were **not** going your way") and one carried an embedded newline. All four are
+in fact complete. **The count that decides "fragment or whole instrument" cannot come from a
+substring test alone** — the items have to be read.
