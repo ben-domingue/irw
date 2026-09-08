@@ -10329,3 +10329,47 @@ physical activity to the sibling prefix `YDCY`. Left untouched as a historical r
 round's own judgement.
 
 Cap is `batch_095`; not reached. 745 pending, next firing takes `batch_086`.
+
+## batch_086 — 2026-09-08T21:26Z
+
+3 tables claimed, 3 agents (one per table, daytime setting).
+**written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not tripped.
+
+- `liu_2025_positive_cognition` — done. PLOS ONE 20(9):e0330447 (Liu S-h et al. 2025, CC BY 4.0),
+  same deposit as batch_085's `liu_2025_mlq`. 12 items x 5 = 60 rows. APNIS Attention to Positive
+  Information subscale, Chinese revision (Feng et al. 2015). mapping_basis=data_labels (S1 workbook
+  headers ARE the administered Chinese sentences) but the code derivation in
+  `data/liu_2025_meaning_learning.py` is positional, so a header diff was run rather than an
+  exemption claimed. VERIFIED: 12/12 strings identical to the deposit header AND to the live table's
+  own item_text column (server-side GROUP BY); live means = deposit means to 6.2e-15; stored-raw
+  confirmed by alpha 0.9279 vs published 0.928 and item-total r 0.533-0.793 all positive.
+  **Owes an issues-page entry when uploaded** — `item_text_translated` is IRW-produced English
+  (translation_source=machine_translation); no published English exists for the Chinese revision's
+  12 items (APNIS original paywalled, Chin Mental Health J 2015 not open). check_provenance.R
+  already lists it as HELD/no-entry-owed-yet; shipping it stamps it.
+- `liu_2025_speaking_selfefficacy` — done. PLOS ONE 20(7):e0328226 (Liu Z et al. 2025, CC BY 4.0),
+  the batch_084 deposit. 14 items x 5 = 70 rows, S1 Appendix items 22-35. VERIFIED: 14/14 header
+  match at workbook cols 26-39, cell-for-cell 623/623 at match rate 1.0000 on every item, max
+  pairwise agreement 0.735 so no two items are interchangeable. Paper's own subscale split
+  (5 linguistic / 3 self-regulatory / 2 delivery / 4 performance) corroborates the script's slices.
+- `liu_2025_willingness_communicate` — done. Same e0328226 deposit, WTC scale (Peng & Woodrow 2010),
+  S1 Appendix items 12-21. 10 items x 5 = 50 rows. Step 3b clean: 10 items x 623 on 1-5 matches the
+  WTC block and no other block of the 44-item battery (CI 11, SSE 14, FLE 9). VERIFIED: 10/10 header
+  match, 623/623 cell-for-cell at 1.0000, max pairwise agreement 0.613. Unlike the CI table, S1
+  Appendix and S1 Data wordings agree for all 10 items.
+
+Common caveat on all three e0328226/e0330447 tables: administered in Chinese. For the two e0328226
+tables the supplements contain zero CJK (checked across every XML part), so the authors' English
+ships in the base fields with `_translated` empty — text_source=translated_substitute,
+translation_source=study_supplied. For positive_cognition the deposit DOES carry the Chinese, so the
+Chinese ships as base text and the English is the IRW translation. Only the 1/5 endpoints are
+labelled on the e0328226 scales; resp 2-4 blank, not padded.
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch PASS=3, no WARNs; verify_batch PASS=3;
+lint_verification 3 rows, no problems; irw-validate ok on all three; check_provenance exit-clean
+(the 4 `mixed` rows listed are pre-existing REVIEW items, not this round's).
+
+Step 5b: no agent overrode a source or reported a data defect this round — every claim was a
+reproduce-check, and verify_batch.R re-executed all three verify scripts printing the numbers.
+
+Cap (batch_095) not reached.
