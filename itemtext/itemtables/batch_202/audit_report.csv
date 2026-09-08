@@ -5,3 +5,4 @@
 "lys_2020_rape_3_rwa","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "lys_2020_rape_3_sj","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
 "lys_2020_rape_3_unjust","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"mhscdc_fried_2020_smartphone","PASS",14,14,TRUE,TRUE,FALSE,TRUE,0,0,""
