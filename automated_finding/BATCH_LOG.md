@@ -13772,3 +13772,67 @@ Not shipped, and where the text actually is:
   deferred rather than guessed.
 
 Nine rows appended to `itemtext_provenance.csv`, `uploaded` blank.
+
+## 2026-09-07 — Repos weekly run: 0 good, and two of the fifteen terms were the reason
+
+Scheduled weekly repos run (`4d599e6` bookkeeping straight onto main,
+`cc90e65` candidates+triage on a branch as `#2072`). 23 candidates from the
+15 `HIGH_YIELD_TERMS` subset across OSF/Dataverse/DataCite, 12 new after
+seen-key dedup, **0 good**: 8 `no_usable_file`, 3 `human_assistance`,
+1 `license_restricted`. It did not run Step 2b, as no cloud run does.
+
+`#2072` was **closed without merging** and its branch deleted. The
+bookkeeping half was already on main, and `cc90e65`'s only unique content
+was two per-run CSVs written to the top level of `automated_finding/` —
+which is how a run gets them past the `runs/` gitignore. Nothing durable
+was lost; this entry plus the 15 `search_terms_log.csv` rows and 12
+`repo_triage_seen_keys.csv` keys are the record.
+
+### The `human_assistance` bucket cost nothing this week, by luck
+
+Retriaged locally after the fact: 1 `recoverable_format` (DVN/ENEPCH),
+2 `human_review` (DVN/PDCXQH, DVN/KO1I8W). All three are false-positive
+`resilience` hits — built-environment overheating, Miami-Dade climate
+investment, and firm innovation in China. None is item-response data, so
+the skipped Step 2b happened to cost nothing. That is not a reason to keep
+skipping it: the bucket being empty of real candidates was a property of
+this week's noise, not of the step.
+
+### Two terms produced a third of the run's candidates and none of its value
+
+`HIGH_YIELD_TERMS` was a verbatim copy across the repo, PLOS and PMC
+connectors. That was wrong in a way nobody had reason to notice: PLOS/PMC
+match a term against article **full text**, where a bare construct word is
+nearly always psychological, while this connector matches dataset
+**titles**, where the same word is a naked keyword.
+
+- `grit` → 5 of 23 candidates, all false: the GRIT-ADB hydrography database
+  (×2), a GRIT GNSS network station, and a German library-science article
+  by an author named Grit Bümann. No grit-titled candidate has ever reached
+  a `good` flag.
+- `resilience` → 3 of 3 false, and historically it pulls coral reefs,
+  wildfire recovery, irrigation, supply chains and agricultural yield.
+
+Fixed in `#2075`: `grit` dropped, `resilience` narrowed to `psychological
+resilience`. Both remain in the ~125-term `TERM_LIST`, so the monthly full
+sweep still covers them — only the weekly cadence changed.
+
+### Two silent failures the run reported as success
+
+1. **OSF missed 5 of 15 terms** (`self-efficacy`, `depression`, `perceived
+   stress`, `work engagement`, `growth mindset`) and nothing said so. The
+   watermark handling was correct — each term logged an honest
+   `not_searched=osf` and did not advance — but a source failing on a
+   *subset* of terms had no warning path at all, unlike a run-wide block or
+   a fully starved term. The only trace was a substring in
+   `search_terms_log.csv`. `#2076` adds per-source coverage reporting.
+2. **Step 2b skipped again.** The step was titled "recommended" and the
+   triage script ended with a passive one-line suggestion, so the routines
+   skipped it exactly as written. `#2076` adds `irw_batch_updated.py
+   --retriage` to chain it in-process and retitles the step REQUIRED.
+
+Also in `#2075`: per-run candidate/triage/retriage CSVs are now gitignored
+at the top level as well as inside `runs/`. Five scheduled routines between
+2026-08-25 and 2026-09-07 had worked around the `runs/` rule by copying
+output up to `automated_finding/` or force-adding it; the ten strays that
+reached main are untracked.

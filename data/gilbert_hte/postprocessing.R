@@ -12,7 +12,7 @@ f<-function(x) {
     resp<-x$score
     treat<-x$treat
     item<-x$item
-    data.frame(id=id,item=item,resp=resp,treatment=treat,pretest=pretest)
+    data.frame(id=id,item=item,resp=resp,treat=treat,pretest=pretest)
 }
 L<-lapply(L,f)
 

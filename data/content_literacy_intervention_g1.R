@@ -45,13 +45,13 @@ df <- df |>
   select(id, s_itt_consented, item_id, resp) |>
   # use item_id column as the item column
   rename(item = item_id,
-         treatment = s_itt_consented) |>
+         treat = s_itt_consented) |>
   arrange(id, item) |>
   drop_na()
 
 # remove label from resp
 df$resp <- remove_labels(df$resp)
-df$treatment <- remove_labels(df$treatment)
+df$treat <- remove_labels(df$treat)
 
 
 # print response values

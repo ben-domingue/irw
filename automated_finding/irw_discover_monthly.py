@@ -226,15 +226,36 @@ TERM_LIST = [
     "employability skills",
 ]
 
-# Small, proven-yield subset for a weekly pass -- same shortlist used by
-# irw_discover_plos_monthly.py / irw_discover_pmc_monthly.py's
-# HIGH_YIELD_TERMS (kept identical across connectors on purpose, since the
-# yield signal is about the construct, not the source). Edit freely as
-# per-source yield data comes in; they don't need to stay in sync going
-# forward.
+# Small, proven-yield subset for a weekly pass. This started as a verbatim
+# copy of irw_discover_plos_monthly.py / irw_discover_pmc_monthly.py's
+# HIGH_YIELD_TERMS -- those files' comments already anticipate divergence
+# ("they don't need to stay in sync going forward"), and this is that
+# divergence, taken on 2026-09-07.
+#
+# Why it has to diverge: the PLOS/PMC connectors match a term against
+# article *full text*, where a bare construct word is nearly always used in
+# its psychological sense. This connector matches against dataset *titles*
+# on DataCite/Dataverse/OSF, where the same word is a naked keyword and
+# collides with unrelated fields. Two terms carried the whole cost:
+#
+#   "grit"       -> 5 of the 2026-09-07 run's 23 candidates, all false: the
+#                   GRIT-ADB hydrography database (x2), a GRIT GNSS network
+#                   station, and a German library-science article by an
+#                   author named Grit Bumann. No grit-titled candidate has
+#                   ever reached a good flag. Dropped: the psychological
+#                   sense is reliably reached by "growth mindset" and
+#                   "academic motivation", which are already here, and the
+#                   full ~125-term monthly TERM_LIST still carries it.
+#   "resilience" -> 3 of 3 false that week (built-environment overheating,
+#                   firm innovation in China, Miami-Dade climate
+#                   investment), and historically it pulls coral reefs,
+#                   wildfire recovery, irrigation, supply chains and
+#                   agricultural yield. Narrowed rather than dropped, since
+#                   the psychological construct is genuinely high-yield.
+#
+# The remaining 13 terms are unambiguous enough as titles to keep bare.
 HIGH_YIELD_TERMS = [
     "self-esteem",
-    "grit",
     "self-efficacy",
     "depression",
     "anxiety",
@@ -245,7 +266,7 @@ HIGH_YIELD_TERMS = [
     "loneliness",
     "academic motivation",
     "work engagement",
-    "resilience",
+    "psychological resilience",
     "procrastination",
     "growth mindset",
 ]
@@ -435,6 +456,7 @@ def main():
         return [s for s in args.sources if s not in skip]
 
     starved = []
+    missing_by_source: dict[str, list[str]] = {}
     for term, since in since_by_term.items():
         print(f"\n[term] {term!r} (since {since})", flush=True)
         discover([term], exclude, relevance_on=True, sources=active_sources,
@@ -443,6 +465,8 @@ def main():
         missing = sorted(set(args.sources) - set(searched))
         if not searched:
             starved.append(term)
+        for src in missing:
+            missing_by_source.setdefault(src, []).append(term)
         miss_note = f"; not_searched={','.join(missing)}" if missing else ""
         append_log_rows([{
             "date": today,
@@ -468,6 +492,39 @@ def main():
         print(f"!! {len(starved)}/{len(terms)} term(s) had NO source complete a "
               f"search; their rows record 0 sources so no watermark moves: "
               f"{', '.join(starved)}", file=sys.stderr, flush=True)
+
+    # Per-source coverage. The two warnings above catch a source that failed
+    # for the WHOLE run (blocked) and a term that no source reached (starved).
+    # Neither catches the middle case: one source failing on some terms and
+    # succeeding on others. That is silent by construction -- each affected
+    # term logs an honest `not_searched=<src>` and its watermark correctly
+    # stays put, so nothing is corrupted, but nobody is told either, and the
+    # only trace is a substring buried in search_terms_log.csv.
+    #
+    # It is not hypothetical: the 2026-09-07 weekly repos run lost osf on 5 of
+    # 15 terms (self-efficacy, depression, perceived stress, work engagement,
+    # growth mindset) and reported success. A source quietly covering two
+    # thirds of a sweep, week after week, is exactly the kind of decay that
+    # only shows up much later as "discovery yield is down" with no cause
+    # attached. Print the coverage every run so a degraded source has to
+    # announce itself.
+    if missing_by_source:
+        print(f"\n!! INCOMPLETE SOURCE COVERAGE ({len(terms)} term(s) this run):",
+              file=sys.stderr, flush=True)
+        for src, terms_missed in sorted(missing_by_source.items(),
+                                        key=lambda kv: (-len(kv[1]), kv[0])):
+            shown = ', '.join(terms_missed[:8])
+            more = f", +{len(terms_missed) - 8} more" if len(terms_missed) > 8 else ""
+            print(f"   {src}: searched {len(terms) - len(terms_missed)}/{len(terms)} "
+                  f"term(s); MISSED {shown}{more}", file=sys.stderr, flush=True)
+        print("   Those terms' watermarks did not advance, so a later run "
+              "re-covers them -- but a source missing most of a run is a bug "
+              "to chase, not a transient to ignore. Re-run the missed terms "
+              "with --terms once the source is healthy.",
+              file=sys.stderr, flush=True)
+    elif args.sources:
+        print(f"Source coverage: all {len(args.sources)} source(s) completed "
+              f"all {len(terms)} term(s).", flush=True)
 
 
 if __name__ == "__main__":

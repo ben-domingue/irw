@@ -4,6 +4,16 @@ Work items from `dup_id_item_verdicts_2026-09-02.csv` (evidence and method:
 `README.md`). **73 of the 101 flagged tables need a data change**; the other 28
 need none.
 
+> **Where this work is tracked, as of 2026-09-07.** #1842 is **closed** --
+> superseded by **#1856**, which is the entry point for everything still open
+> here and carries the current counts. Do not open #1842 looking for state.
+>
+> #1856's re-measurement against the released v48.0 on 2026-09-05 supersedes the
+> 2026-09-03 line below: **50 tables live, 7 will not be fixed (`duolingo_*`),
+> 16 still open** -- and each of the 16 is blocked on a source file or a
+> decision, not on effort. The block table below is history plus the
+> corrections recorded against it, not a work order.
+
 **Status, 2026-09-03.** Blocks A, B, C, D, E and G are **done, uploaded and
 verified against the released versions** -- 47 tables, every `excess_pair` 0 (or
 `excess_occ` 0 where the repeat is the design). Two of block F and two of block
@@ -248,6 +258,58 @@ safe now that group is a function of item.
 > still has unexplained `id`+`item` repeats, so "do the first and record the
 > second" produces a file no uploader will take. Block H is all-or-nothing: it
 > needs the source before any of it reaches the corpus.
+
+> **Two more re-diagnosed, 2026-09-06, and both are ID COLLISIONS.** The
+> sources were public all along -- OSF `psgk8` and Harvard Dataverse `LGXP5A`
+> both download without an account.
+>
+> - **`Aspirations_Sonmez_2022`** — `Aspirations_CFA.sav` is Study 1 (265) and
+>   Study 2 (208) stacked, with `StudyNo` separating them and `ParticipantNo`
+>   restarting at 1 in each. 208 x 35 items = **7,280** pairs twice and
+>   57 x 35 = **1,995** once, which is exactly the copies-per-pair shape recorded
+>   above. Not two waves: across the 208 colliding numbers `Age` agrees on 22
+>   and `Gender` on 106, and only 31.9% of responses match. Fixed by namespacing
+>   `id` with the sample and keeping `cov_study`; row count unchanged at 16,555,
+>   ids 265 -> 473.
+> - **`PEPABAS2C_Kubicka_2024`** — two CODEs are held by two different children
+>   each (`2_2BIMA`, `2_2BISE`; 12 kg and 20 cm apart). That is the whole flag:
+>   2 codes x 24 items = 48 rows. Fixed with an occurrence suffix, since there
+>   is no sample label to namespace with.
+>
+> Both were listed here as "dedupe, then chase". Deduping either would have
+> deleted real people — 208 of them in `Aspirations`. That is the same error
+> the block-H note above already names, found twice more.
+>
+> **A separate defect found in `PEPABAS2C` while there:** the live table
+> publishes **5 rows with a NULL `resp`**, and the source's missing code, 99,
+> was never recoded. Dataverse ingested the `.sav` to `.tab`, which materialises
+> user-missing as the literal 99, so a rebuild from the archive would have
+> published seven 99s as responses. The script now recodes explicitly, which is
+> correct against either file. 4,846 -> 4,841 rows.
+
+> **`SAS_Deters_2022` and `PTCI_Chinese_Zhan_2024` too, 2026-09-06 — also id
+> collisions.** Both sources are public OSF nodes (`ztycp`, `tj8rh`).
+>
+> - **`SAS_Deters_2022`** — `SAmb_R.csv` pools twenty semesters of a subject
+>   pool and the participant number restarts in each: 1,526 numbers over 7,096
+>   rows, one used 14 times. Keyed on `id` alone, 456 numbers carry two genders,
+>   1,095 two ages, 1,003 two ethnicities; keyed on `id`+`semester`, **0 / 1 /
+>   2**. The published table merged up to fourteen students into one respondent.
+>   ids 1,526 -> 7,096.
+> - **`PTCI_Chinese_Zhan_2024`** — 2,375 respondents under 1,206 `ID` values.
+>   `sex` differs within an ID for 461 numbers and `age` for 687; `T_ptci`
+>   equals its own row's item sum on all 2,375 rows, so every row is a complete
+>   respondent record; and no whole row is byte-identical to another. Namespaced
+>   by `C2` (the senior/high/adult strata). ids 1,206 -> 2,436. Row count
+>   unchanged at 80,388.
+>
+> Block H prescribed deduping both. That would have deleted roughly 1,169 people
+> from `PTCI` and merged fourteen-to-one in `SAS`.
+>
+> **Two more published NULL/`"NA"` resp values found while there**, the same
+> class as `PEPABAS2C`'s five: `SAS_Deters_2022` publishes **189 rows whose
+> `resp` is the literal string `"NA"`**, which is what types its `resp` column as
+> a string. Both scripts now drop missing responses rather than writing them.
 
 Two halves; the first is mechanical, the second is research. Do the first and
 record the second, rather than blocking on it.

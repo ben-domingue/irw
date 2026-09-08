@@ -35,8 +35,8 @@ python irw_discover_updated.py "PHQ-9" "reading assessment" --out runs/candidate
 python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv
 
 # 3. Full run — safe to interrupt and resume
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage --resume
 
 # 4. Open runs/irw_triage.csv, sort by flag ('good' first), review candidates.
 #    `good`/`worth_retrying` rows go straight to Step 2 (write a processing
@@ -125,7 +125,8 @@ After a full triage run the `human_assistance` bucket is usually large (hundreds
 of rows). Most of it is recoverable without re-downloading anything:
 
 ```bash
-python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage_ha.csv
+# (normally unnecessary -- Step 2's --retriage chains this automatically)
 ```
 
 This reads the 400-char `reasons` strings already in the triage CSV and

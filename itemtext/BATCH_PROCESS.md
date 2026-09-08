@@ -13,7 +13,7 @@ extraction) — this file covers the batching layer. The round's own prompt is
 | `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`/`blocked`/`excluded`. `failed` and `blocked` are BOTH "no CSV" but mean different things and are counted differently by the circuit breaker (Step 5, ruled 2026-09-03): `failed` is a fault or an unresolved access failure that an unchanged retry might get past, and it counts; `blocked` is a determinate verdict that an unchanged retry cannot change, and it does not count. `blocked` is not permanent the way `excluded` is -- it says a HUMAN action or a data change is needed first, so these are the pool to revisit when one happens. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** `excluded` means do not extract, ever — see the standing exclusions below. |
 | `extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
 | `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
-| `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
+| `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. **Batch history, not a staging area** — see the note below on why the same table appears in two of these. |
 | `mapping_verification.csv` | Permanent, cross-batch record of how each table's item↔text mapping was verified (`route`, `status`, `evidence`). One row per table, ever. Fed by each batch's `verification_merged.csv`. |
 | `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Columns `table,note,status`; `status` is one of `pending`/`blocked`/`excluded`/`note_only`/`resolved` (see SKILL.md Step 6b). Append across batches; never reset. |
 | `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — an uploader walks recursively, and this directory exists because stray `.csv` files were once uploaded as tables. `red_up` now excludes non-`__items` files when the target is an item-text shard and names what it excluded, but keep the directory clean anyway. Ben clears it after uploading. |
@@ -22,6 +22,29 @@ Everything except `queue_state.csv` is rederived from disk each round, so a roun
 that dies partway (API limit, crash) is safely resumable — the next firing sees
 what's missing and continues. Tables left `in_progress` by a dead round need
 manual reconciliation back to `pending`.
+
+### The same table can appear in two batch directories
+
+That is expected and is **not** a bug to clean up. When a held table is released
+(a paywall resolved, an author's confirmation arriving), the releasing batch keeps
+an unchanged copy of the CSV next to its new `provenance.csv` row, so that batch
+reads on its own. `ALSECYPIAMH_WU_2022_PHQ__items.csv` is in both `batch_004` (the
+original extraction, uploaded 2026-08-16) and `batch_012` (the #1643 hold release,
+provenance updated only), byte-identical in both.
+
+The consequence for uploading: **run `red_up` against `itemtables/clean/`, never
+across `itemtables/*/`.** Since #2055 `red_up` refuses the wrong argument outright:
+a directory holding a `provenance.csv` is batch history, and it stops before reading
+a single table. Do not reach for `--allow-history-dirs` to get past that here — the
+answer is always to stage into `clean/` first. The older, weaker backstop still
+applies when something slips through with the override: a run over the batch
+directories hits these duplicates, which `red_up` correctly refuses — a Redivis upload
+appends, so uploading two identical files doubles the table. The refusal names
+whether the colliding files have the same bytes; identical means you are pointed at
+the wrong directory, differing means two versions are genuinely in flight.
+
+Deleting one copy to silence it is the wrong fix. irw#1962 proposed exactly that,
+and the copy it called stale was the record of the hold release.
 
 ## Standing exclusions — do NOT extract these
 

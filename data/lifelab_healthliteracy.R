@@ -36,7 +36,7 @@ for (i in 2:ncol(x)) {
 }
 
 df<-list()
-for (i in 1:length(items)) df[[i]]<-data.frame(id=id,treatment=treatment,item=names(items)[i],resp=items[[i]])
+for (i in 1:length(items)) df[[i]]<-data.frame(id=id,treat=treatment,item=names(items)[i],resp=items[[i]])
 df<-data.frame(do.call("rbind",df))
 
 save(df,file="lifelab_healthliteracy.Rdata")

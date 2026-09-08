@@ -42,7 +42,9 @@ import re
 import csv
 import json
 import time
+import sys
 import argparse
+import subprocess
 from collections import defaultdict
 from urllib.parse import urlparse
 
@@ -750,6 +752,11 @@ def main():
                     help=f"don't consult/update {SEEN_KEYS_PATH} (the cross-run dedup "
                          "store shared with the scheduled repos routine) -- use to "
                          "deliberately re-triage a candidate, e.g. after a script fix")
+    ap.add_argument("--retriage", action="store_true",
+                    help="on finishing, run irw_retriage_ha.py over this run's "
+                         "human_assistance rows (Step 2b) and write "
+                         "<out>.retriage_ha.csv. Scheduled/unattended runs should "
+                         "always pass this -- see the note in main()")
     args = ap.parse_args()
 
     args.candidates_csv = resolve_in_path(args.candidates_csv)
@@ -775,8 +782,42 @@ def main():
     print("Work the 'good' rows first; they're sorted to the top.")
     # The queue sheet and irw_process_queue.py were retired (2026-06-24 /
     # 2026-08-12); pointing people at them was sending them to a dead end.
-    print("Refine the human_assistance rows with irw_retriage_ha.py, then")
-    print("write a per-dataset script in data/ for good / worth_retrying.")
+    print("Write a per-dataset script in data/ for good / worth_retrying.")
+
+    # Step 2b, chained rather than suggested. This used to be a one-line
+    # print telling the reader to "refine the human_assistance rows with
+    # irw_retriage_ha.py" -- and the scheduled routines simply didn't, run
+    # after run, committing triage CSVs with no refined_flag column and
+    # leaving the whole bucket unclassified (2026-09-07 is one of several).
+    # A hint that is ignored every week is not a hint that needs rewording,
+    # it needs to stop being optional: --retriage does the step in-process,
+    # and without it the reminder is now loud, names the exact command with
+    # this run's real paths, and says what is left undone.
+    n_ha = int(counts.get("human_assistance", 0))
+    if not n_ha:
+        return
+    retriage_out = os.path.splitext(args.out)[0] + ".retriage_ha.csv"
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "irw_retriage_ha.py")
+    cmd = [sys.executable, script, "--input", args.out, "--output", retriage_out]
+    if not args.retriage:
+        print(f"\n!! {n_ha} human_assistance row(s) are NOT yet sub-classified.",
+              file=sys.stderr)
+        print("   Step 2b is required before anyone reads this triage: without "
+              "it\n   there is no refined_flag column, so the not_item_response "
+              "rows\n   can't be dropped and the human_review rows can't be "
+              "archived.", file=sys.stderr)
+        print(f"   Run:  {' '.join(cmd)}", file=sys.stderr, flush=True)
+        return
+    print(f"\n[step 2b] retriaging {n_ha} human_assistance row(s) -> "
+          f"{retriage_out}", flush=True)
+    rc = subprocess.call(cmd)
+    if rc != 0:
+        print(f"\n!! Step 2b FAILED (exit {rc}). The triage at {args.out} is "
+              f"complete but its\n   human_assistance rows are still "
+              f"unclassified -- rerun the command above\n   before treating "
+              f"this run as done.", file=sys.stderr, flush=True)
+        sys.exit(rc)
 
 
 if __name__ == "__main__":

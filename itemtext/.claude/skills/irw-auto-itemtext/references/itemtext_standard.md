@@ -6,6 +6,10 @@ skill doesn't need to re-fetch the page every run. This is the
 schema of the **merged** `{table}__items.csv` — the output of joining the four
 per-table tabs (instrument, sections, items, responses) on `table` / `section_id` / `item`.
 
+**Field order is not significant.** The table below defines which fields exist, not the
+order they must appear in: Redivis matches columns by name, and nothing validates order.
+Batches that emit these columns in different orders are both correct.
+
 | Field | Definition |
 |---|---|
 | `table` | Identifier used to link to the IRW response data. |
@@ -18,7 +22,6 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
-| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. **Known gap (irw#1955): the value space is `NC` only, so it cannot express an enforced fee or a no-redistribution clause — the two 2026-09-04 triggers — and as of 2026-09-04 it is set on zero live tables. Do not rely on it to find rights-affected tables; record the quoted term in `provenance.csv` and `public_note` as well.** |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
 | `instructions_translated`, `section_prompt_translated`, `item_text_translated`, `option_text_translated` | English translation of the correspondingly named field. Present only for instruments administered in a language other than English. |
 
@@ -40,7 +43,9 @@ empty.
 **The fallback, and what `language` holds in it.** When the administered original
 cannot be recovered and only an English version exists, the English goes in the base
 fields, the `_translated` fields stay empty, and `text_source=translated_substitute`
-records the fallback.
+records the fallback. Because that English is now the shipped wording rather than a
+gloss beside it, the provenance row must also carry a `translation_source` saying where
+it came from; `check_provenance.R` fails a blank one (irw#1970).
 
 `language` is populated **whenever the administration was non-English, regardless of
 what the base fields contain** — it is defined as a fact about the study, not a claim
@@ -260,17 +265,11 @@ fee and the evidence of enforcement in `provenance.csv` `note` so the basis stay
 withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
 do not blank the date to make the table look as though it never shipped.
 
-**But the instrument-level restriction is recorded, not ignored.** Where the rights
-holder states one, set `wording_rights=NC` on every row of that table and add an
-entry to the public issues page. The column is a filterable flag so a commercial
-reuser can exclude those tables with a query instead of reading prose; the prose
-belongs in `public_note` and on the issues page. Omit the column entirely for tables
-with no such restriction — do not emit an empty column to no purpose, the same rule
-the `_translated` columns follow.
-
-This keeps the decision reversible. If the stricter reading — that the instrument's
-terms travel with the wording wherever it appears — is ever adopted, `wording_rights`
-is the query that finds every affected table.
+**There is no longer a `wording_rights` flag, and no "record it and ship anyway" option.**
+Between 2026-09-04 and 2026-09-05 the rule moved: a stated restriction on the instrument now
+blocks outright (see the `wording_rights` retirement below). A table either ships with no
+instrument-level restriction stated, or it does not ship. Do not emit a `wording_rights`
+column; do not add an issues-page entry for a withdrawal.
 
 **Watch for wording that is licensed separately from the response data.** The three
 `cdm_timss*` tables record `License: GPL-3.0` — the CDM R package's licence, covering the
@@ -466,6 +465,61 @@ after this was staged, and both tables are still live in it (732 tables). No dra
 dataset with no draft, not an outage. The script now opens one via `create_next_version`, exactly as
 `red_up.push.open_draft` does. Deleting from the draft only takes effect when that draft is
 released.
+### `wording_rights` is retired — ruled 2026-09-06
+
+**The column is gone from the schema, and the eight tables that carried it are withdrawn.**
+Ruled by Ben on irw#1955.
+
+`wording_rights=NC` came from the ECR-R ruling (2026-09-04): where the wording was copied from
+an openly licensed deposit but the instrument's rights holder stated a non-commercial
+restriction, the table shipped and the restriction was recorded as a filterable flag. Two later
+rulings took that carve-out apart. The DSES ruling established that the rights holder outranks
+the deposit's licence; the HEXACO ruling (2026-09-05, irw#1945) widened the trigger from
+{enforced fee, no-redistribution bar} to **any stated use restriction**. Between them, the
+state the flag described — restricted, but shipped — no longer exists.
+
+Two facts settled it, both measured 2026-09-06 against `irw_text` v18.0:
+
+* The issue was filed on the premise that the flag was set on **zero** tables. It was set on
+  **eight**, out of 760 live item-text tables — `alsuhibani_2022_ecrs_s3` (ECR-12),
+  `conspiracy_asd__asd_aq10` (AQ-10), `dominguez_2018_jcs` (Job Crafting / UWES),
+  `dpt_noncog__interpersonal_reactivity` (IRI), `duboz_2021_pss10` (PSS-10),
+  `esiason_2024_aaqii` (AAQ-II), `EWAS_Sanford_2024_Flourish` (Flourishing Scale) and
+  `extremera_2016_shs` (SHS). DSES was the first to carry it, not the only one; six of the
+  eight were uploaded after the count that produced "zero".
+* Every one of the eight is the shape the 2026-09-05 ruling blocks. The flag was not a filter
+  for them, it was a withdrawal list.
+
+**So the answer to "extend the vocabulary or drop the column" is drop it.** Extending it to
+`fee` / `no_redistribution` would have built machinery for a state the rules no longer permit,
+and would have put a flag on tables that should not be published at all. It is also why the
+column was never the right tool for the irw#1954 re-audit: that sweep reads `provenance.csv`
+per instrument, and `text_source=canonical_instrument` is its highest-risk group.
+
+**One live inconsistency this leaves.** `duboz_2021_pss10` was flagged `NC` for a clause that
+is a fee gate on commercial use, not a non-commercial bar — the mislabelling irw#1955 opened
+with. It is moot now that the table is withdrawn, but it is the concrete case for why a
+one-value flag was never going to hold.
+
+**The flag was never applied consistently, and that is the second half of the ruling.** Five
+further live tables held the *same instruments* with no flag at all — `algner2022_uwes` (UWES-9,
+its wording taken from Schaufeli's own site), `bakker_2020_pss10` and `beck_2021_pss10` (PSS-10),
+`close_relationships` (ECR) and `conner_2017_flourishing` (Flourishing Scale). Four of them
+shipped in batches 003–011, before the rulings existed, with no rights note in `provenance.csv`
+at all. `conner_2017_flourishing` is the awkward one: it was checked *after* the ECR-R ruling on
+2026-09-04 and shipped unflagged anyway, and the round log recorded the inconsistency at the time
+rather than fixing it. Ben ruled all five out with the eight. **The lesson is that the flag's
+presence recorded which agent happened to look, not which instrument was restricted** — which is
+the strongest argument against ever rebuilding it.
+
+**Scope applied 2026-09-06.** All thirteen deleted from the `irw_text` draft by
+`tools/withdraw_wording_rights.py` (745 → 732 draft tables, keep-set asserted intact), so they
+leave at the next release; until then the wording is still in v18.0 and the deletion is
+recoverable. Each keeps its `uploaded` date and its `verify_<table>.R`, carries the withdrawal in
+`provenance.csv` `public_note`, is `blocked` in `queue_state.csv`, and has a
+`pending_index_notes.csv` row. Per the 2026-09-05 rule that withdrawal entries are not published,
+their issues-page entries were removed rather than rewritten, and the public schema page dropped
+both the `wording_rights` bullet and the section that stated the ECR-R position as current policy.
 
 ### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
 
