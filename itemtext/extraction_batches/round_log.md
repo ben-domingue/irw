@@ -9849,3 +9849,58 @@ authors' own (Liu, Seevers & Lin, 2022) in a CC BY PLOS deposit. No originator p
 party instrument is involved.
 
 Cap is `batch_095`; not reached. 757 pending, next firing takes `batch_082`.
+
+## batch_082 — 2026-09-08
+
+3 tables claimed, 3 agents (one per table, the daytime setting).
+**written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+All three are the same PeerJ deposit: Liu et al. (2023), *PeerJ* 11:e16384
+(doi:10.7717/peerj.16384, PMC10693237, CC BY 4.0), reached through the Europe PMC
+`supplementaryFiles` zip. It is an unusually complete deposit — `s001.sav` carries SPSS
+variable *and* value labels, `s002.docx` is the administered Chinese questionnaire,
+`s003.docx` (Table S1) is the authors' own English questionnaire, and `s004.docx` (Table S2)
+prints an explicit item→score key. So all three tables are `mapping_basis=data_labels` with
+`text_source=study_materials` and `translation_source=study_supplied`, and all three ship
+administered Chinese in the base fields with the authors' English in the `_translated`
+twins (`language=Chinese`). No machine translation, nothing owed on the issues page.
+
+- `liu_2023_adherence_barrier` — 14 rows (7 items × {0,1})
+- `liu_2023_adherence_tools` — 15 rows (3 items × 1–5)
+- `liu_2023_improve_adherence` — 35 rows (7 items × 1–5)
+
+Gates: `normalize_nulls.R` fixed all 3; `audit_batch.R` **3 PASS, no anomalies** (so no WARNs
+to explain under Step 5c); `verify_batch.R` 3× MISSING(exempt), correct for data_labels;
+`lint_verification.R` clean on 3 NOT_NEEDED rows written into both `verification_merged.csv`
+and the permanent tracker; `irw-validate` ok on all 3; `check_provenance.R` clean (the 4
+`translation_source=mixed` REVIEW rows are pre-existing and belong to other tables).
+
+**Step 5b — the round's own claims, re-checked by the orchestrator. Both source-overrides
+confirmed, with numbers:**
+
+1. *The S3 File permutation.* The barrier agent reported that the study's own English
+   questionnaire prints the seven barrier options in a different order than the `.sav` and the
+   Chinese questionnaire, and realigned the English rather than shipping it in printed order.
+   Confirmed directly: `.sav` order is 医生对药物依从性认识不足 / 缺乏其他配合者 / 病人数量多，临床工作繁重 /
+   高血压非本次患者就诊主要原因 / 医患关系紧张 / 医患沟通不佳 / 其他, while S3 File Q23 prints
+   Lack of cooperation, Heavy clinical work, Visits not for hypertension, Strained
+   doctor-patient relation, Poor doctor-patient communication, **Lack of knowledge**, Others —
+   i.e. English printed order = Chinese items **2,3,4,5,6,1,7**. The shipped CSV pairs item 1
+   with "Lack of knowledge" and item 2 with "Lack of cooperation", which is the corrected
+   alignment. **An agent transcribing S3 in printed order would have shipped a permuted
+   mapping that no set-comparison gate could catch** — worth carrying to the two unclaimed
+   siblings (`liu_2023_perceived_control`, `liu_2023_poor_adherence`), which draw on the same
+   S3 File.
+2. *The truncated variable label.* The improve_adherence agent shipped questionnaire wording
+   over the `.sav` label for item 3. Confirmed: the `.sav` label is 回答患者关于高血压相关知识 and
+   the shipped text extends it to 回答患者关于高血压相关知识包括发病机制、危害、用药方案、药物潜在副作用等 —
+   an extension of the same string, not a different item, so alignment is unaffected. The
+   other six labels match verbatim, and the value-label set 1=从不…5=总是 matches the shipped
+   options exactly.
+
+Also spot-checked the tools table's two disclosed deviations and both are as reported: the
+`.sav` label really does read "MMS-8" (the study's typo for MMAS-8) and was transcribed as
+written, and option level 1 ships the questionnaire's fuller 完全不清楚 against the `.sav`'s
+abbreviated 不清楚. Levels 2–5 are identical in both sources.
+
+Cap is `batch_095`; not reached. 754 pending, next firing takes `batch_083`.
