@@ -7525,3 +7525,86 @@ doubt: paper Table 3's mean-if-deleted and variance-if-deleted reproduce for all
 10.6×.
 
 Cap is `batch_060`; not reached. Next round takes `batch_058`.
+
+---
+
+## batch_058 — 2026-09-07
+
+**6 tables claimed, 6 written / 0 blocked / 0 failed. Yield 6/6 (100%).**
+
+All six are the six-construct COVID/social-networking scale set from a single source:
+Jo H & Baek E (2023), *PLOS ONE* 18(4):e0283997 (CC BY). Item wording for all 17 items
+lives in **S1 Appendix (`…s001`, a .docx) Table A1 "List of Constructs and Items"**,
+readable with `python-docx` — note Word splits runs mid-code ("P"+"BC1"), so parse table
+cells, not `<w:t>` runs, and Table A1's third column is *headed* "Mean" but actually holds
+the item text. Response data is `…s003` (= the CSV inside the `…s002` zip).
+
+| table | rows | items | mapping_basis | verification |
+|---|---|---|---|---|
+| jo_2023_arp | 21 | 3 | paper_explicit | VERIFIED — exemption + route 9 |
+| jo_2023_cfs | 21 | 3 | reconstructed | VERIFIED — route 1 (Table 2 means) |
+| jo_2023_crp | 14 | 2 | paper_order | VERIFIED — route 1 (Table 2 means) |
+| jo_2023_pbc | 21 | 3 | paper_explicit | VERIFIED — exemption + code derivation |
+| jo_2023_sni | 21 | 3 | paper_explicit | VERIFIED — exemption + route 9 |
+| jo_2023_sno | 21 | 3 | paper_explicit | VERIFIED — exemption + route 9 |
+
+**Gates:** `audit_batch.R` 6/6 PASS with no anomalies; `verify_batch.R` 6/6 PASS;
+`lint_verification.R` 0 ERROR / 1 WARN; `irw-validate` clean on all six;
+`check_provenance.R` reports nothing against any `jo_2023` table.
+
+**The item-code offset (the one real inferential step this round).** The appendix
+renumbers items consecutively within construct, so two scales' codes are offset from the
+data: data `CRP3, CRP4` are appendix `CRP1, CRP2`, and data `CFS1, CFS3, CFS4` are
+appendix `CFS1, CFS2, CFS3`. ARP/SNI/SNO/PBC match 1:1. Four agents independently found
+and reported this. Both offset tables were pinned by route 1 against Table 2's per-item
+means — CRP live 5.5391/5.1739 vs published 5.539/5.174 (a swap misses by 0.365); CFS
+live means reproduce published 4.661/5.191/4.901 to 3 dp with a minimum gap of 0.240.
+Table 2 is **image-only** (the `article/table?id=…t002` endpoint 404s; use
+`…/article/figure/image?size=large&id=10.1371/journal.pone.0283997.t002`). Its
+**St. Dev. column is not the raw item SD** and must not be used — it prints 1.611 for
+both ARP1 and ARP2, and CFS 1.304/1.331/1.318 against observed 1.873/1.752/1.891.
+
+**Orchestrator correction (Step 5b) — `jo_2023_sno` language claim reverted.** The `sno`
+agent alone shipped `text_source=translated_substitute`, `translation_source=study_supplied`,
+`language="Korean; Vietnamese"` and a `public_note`, on an inference from Korean free text
+in the deposit; its five siblings shipped the same English as `study_materials` with no
+`language` column. Checked directly: the article states **no** administered language
+anywhere (no mention of translation, back-translation, or a Korean/Vietnamese version),
+and Hangul occurs in the deposit in exactly **one** column — the free-text `Software`
+field, 74 cells — which records software names and says nothing about the questionnaire's
+language. The agent's own figure ("12 of 68 Korean respondents") also does not match the
+count. Reverted to match the siblings: the declared `language` would have asserted a fact
+the authors never stated *and* labelled English base-field text as Korean/Vietnamese. The
+`_translated` columns it dropped were all `NA`, so **no wording was lost**. Provenance,
+notes and verification rows all record the reversal.
+
+**Repo defect found (minor, not a data defect).** `data/jo_2023_social_networking.py:9`
+comments that responses are "7-point Likert, 1=strongly disagree to 7=strongly agree,
+**confirmed in S1 Appendix**". Four agents flagged this independently and I confirmed it:
+the S1 Appendix contains no anchor text at all — "strongly", "Likert" and "7-point" appear
+**zero** times, and "agree" appears once, inside SNO3's own item wording. The paper says
+only that indicators used a "7-point Likert scale". The anchors are a plausible convention,
+not a documented one. All six tables therefore ship `option_text` **blank** on every level
+rather than padded, which is the source of the six identical `100% blank option_text`
+audit notes (all PASS, none a WARN). Worth correcting that comment in the processing
+script; no `resp` value depends on it.
+
+**Lint WARN (explained in `notes.csv`).** `jo_2023_arp` — "VERIFIED but its evidence
+hedges". Reviewed and VERIFIED is correct: the hedge is the mandated "what this does NOT
+establish" sentence, disclaiming an error inside the authors' own Table A1 and the blank
+`option_text` — neither bears on whether the route discriminates items, which it does
+(three pairwise-distinct count vectors matching the raw columns cell for cell). All six
+rows hedge; only this phrasing tripped the heuristic.
+
+**Orchestrator incident (no data lost).** A buggy line in the Step 5 queue-state update
+truncated `extraction_batches/queue_state.csv` to 0 bytes — `open(p,"w")` ran before the
+`TypeError`. HEAD held the exact pre-claim state, so `git checkout --` restored it in full
+and the six rows were re-marked via a temp file + `os.replace`. Verified after: 1,401 rows,
+0 `in_progress`, 855 pending, 396 done. Worth writing queue_state through a temp file
+always, which this round now does.
+
+**Export discipline:** no full-table `irw_fetch` on the IRW side for the gates —
+`--table-sets` throughout; the raw-count verification routes fetch the **PLOS deposit**,
+not Redivis.
+
+Cap is `batch_060`; not reached. Next round takes `batch_059`.
