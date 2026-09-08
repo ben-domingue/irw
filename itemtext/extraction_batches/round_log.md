@@ -9225,3 +9225,37 @@ predicted; the four mixed li_2025_socmedia_* tables plus the uploaded `li_2025_s
 a review of whether they need an issues-page line, since IRW wrote the three intermediate anchors.
 
 Cap not reached (cap is batch_080). No export was spent — all ground truth via `table_sets`/`irw_table_sets`.
+
+### batch_076 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no anomalies, `verify_batch`
+1 PASS + 2 correct exempt, `lint_verification` clean. All three uploaded, `red_up` 3/3 row-count
+verified, pre-flight clean, stamped and audited. Disclosure added to datapages/irw#163 (372).
+
+**The batch_075 carry-forward worked.** `li_2025_socmedia_usefulness` — the third table from
+pone.0321999 to ship IRW's own renderings of the middle three anchors — was classified `mixed`
+with a `public_note` **at extraction**, rather than being caught and corrected afterwards as `ewom`
+was. That is the whole value of writing a carry-forward into the round log: the same finding cost a
+post-hoc correction the first time and nothing the third.
+
+**The round corrected its own agent's numbers, which is worth noting because the finding survived
+and the evidence did not.** The `li_2026_imi_teq` agent correctly established that all eight
+reverse-worded items are stored ALREADY reverse-scored — every one correlates positively, where raw
+storage would put them all negative. But six of its eight cited correlations were inflated
+(item_15 cited +0.86 against an actual +0.57; items 18/19 cited +0.65/+0.69 against +0.31/+0.36,
+apparently reverse-to-reverse rather than reverse-to-forward). `notes.csv` and the `public_note`
+carry the recomputed range, +0.27 to +0.63. A right conclusion resting on wrong numbers is exactly
+what a Step 5b re-check is for — the conclusion would have survived review, the numbers would not.
+
+**A duplicate ingest that needs a human decision, deliberately not acted on.**
+`liang_2026_extrinsic_motivation` and `liang2026_extrinsic_motivation` are the same data under two
+item-code conventions (`EM1..EM5` against `em_1..em_5`), identical `n_rows=225` and identical resp
+sets; the intrinsic pair shows the same signature. **That is four queue rows for two datasets.** The
+round wrote no files for the three unclaimed tables. Deduping is a dictionary/metadata call and is
+much cheaper made before they reach the head of the queue than after three more extractions have
+been paid for.
+
+**Two source-side findings logged, neither ours:** `li_2026_imi_teq` has 34 items, not the 22 its
+dictionary Description advertises (wrong twice over, handled correctly as a Step 3b mismatch); and
+the paper behind `liang_2026_extrinsic_motivation` does not reproduce its own published EFA on its
+own deposited data.
