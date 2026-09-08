@@ -7652,3 +7652,4 @@ date,query,output_file,notes
 2026-09-07,resilience,runs/monthly_candidates_weekly_2026-09-07.csv,"monthly automated run; 3 candidates; sources=osf,dataverse,datacite; since=2026-08-31"
 2026-09-07,procrastination,runs/monthly_candidates_weekly_2026-09-07.csv,"monthly automated run; 4 candidates; sources=osf,dataverse,datacite; since=2026-08-31"
 2026-09-07,growth mindset,runs/monthly_candidates_weekly_2026-09-07.csv,"monthly automated run; 2 candidates; sources=dataverse,datacite; since=2026-09-02; not_searched=osf"
+2026-09-08,[weekly] 15 terms x journals=plosone,runs/plos_monthly_candidates_weekly_2026-09-08.csv,plos monthly-script automated run; mode=weekly; 56 candidates triaged; 15/15 terms visited (14 hit per-term cap 4)
