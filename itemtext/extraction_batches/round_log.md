@@ -8993,3 +8993,55 @@ by a human reader; no gate can catch a plausible mis-read of an image.
 
 **`Eplor12` is resolved as rounding, not a mapping error** (0.72930 against a printed 0.730) —
 batch_072 had flagged it to carry forward. Nothing further owed.
+
+## batch_074 — 2026-09-08T10:02 → 10:20
+
+3 tables claimed, 3 written, 0 blocked, 0 failed. **Yield 3/3 (100%).** Circuit breaker
+not tripped (0% failed). 778 pending remain.
+
+| table | mapping_basis | verification | gates |
+|---|---|---|---|
+| `li_2025_marketing_operation` | paper_order | VERIFIED (route 1, CFA SFL) | PASS |
+| `li_2025_policy_environment` | paper_order | VERIFIED (route 1, CFA SFL) | PASS |
+| `li_2025_socmedia_ewom` | data_labels | NOT_NEEDED (explicit code labels) | PASS |
+
+Two source papers, both PLOS ONE CC BY 4.0. `marketing_operation` and `policy_environment`
+continue the pone.0326329 family from batches 072/073 (item text read off the Table 3 IMAGE at
+the `.t001` asset id; the S1 `.sav` has all 51 variable labels None, so `data_labels` is
+impossible for that paper and `paper_order` + a CFA loading route is the established pattern).
+`socmedia_ewom` is a *different* paper, pone.0321999 — and its S2 `.sav` **does** carry variable
+labels on all 24 item columns, in Chinese, plus value labels, so it shipped as `data_labels` with
+the administered Chinese wording in `item_text` and the study's own English (S1 File "Appendix A",
+read via `soffice`) in `item_text_translated`. Worth remembering: sibling papers by the same author
+do not have the same label situation — check each `.sav`, don't inherit the assumption.
+
+Step 3b collision caught and cleared: `PE` means *Policy Environment* in pone.0326329 and
+*Perceived Enjoyment* in pone.0321999. Both are in this queue family.
+
+**Orchestrator re-checks (Step 5b), both confirmed exactly.**
+1. The agent's PE data-defect finding reproduces on both the `.sav` and the live table. Raw n=352
+   for all five PE columns; after the processing script's integer/in-range filter, kept counts are
+   PE1 352, PE2 312, PE3 313, PE4 312, PE5 312 — and a server-side aggregate on the live IRW table
+   returns those same five values (1,601 rows, resp set 3–7, 5 levels each). Per-column multipliers
+   are identifiable and match the claim: PE2 ×1.05, PE3 ×1.071, PE4 ×1.01, PE5 ×1.0815, PE1
+   untouched. The PE1-vs-rest row-count gap is that filter, **not** an item-text coverage gap.
+   The agent anticipated an `audit_batch.R` row-count WARN; none materialised (3× PASS).
+2. `marketing_operation`'s resp set 3–7 is real, not truncation: all five MOper columns in the raw
+   `.sav` have n=352, zero missing, distinct values exactly {3,4,5,6,7}. Nobody used 1 or 2.
+
+**Notable / for the next round.**
+- `audit_batch.R` ERRORed once on `li_2025_socmedia_ewom` with a Redivis 400 *"Cannot list
+  variables for incomplete queries. Query status is: failed."* Transient — an unchanged re-run 20s
+  later returned PASS for all three. Run-1 report copied to `/tmp/audit_074_run1.csv` first so the
+  committed `audit_report.csv` is the clean one. Not counted as a failure; nothing was determined
+  about the table by the error.
+- `lint_verification.R`: 0 ERROR, 1 WARN — `marketing_operation` "VERIFIED but its evidence
+  hedges". Reviewed and **kept as VERIFIED**: the hedge is about scope (the Chinese wording, and
+  the option_text↔resp axis) not about item separation, and the route separates all five items
+  (shipped 0.0004 vs best rival 0.0032, 8×; all other 118 orderings ≥0.0174). Explained in
+  `notes.csv`. The same hedge is in `policy_environment`'s evidence for the same reason.
+- `irw-validate`: ok, nothing to report, all three.
+- `check_provenance.R`: pre-existing debt only, none of it from this batch — `hua_2023_efl_study_engagement`
+  still owes an issues-page line, and 6 `translation_source=mixed` tables want review. All three
+  batch_074 rows are `translation_source=study_supplied`.
+- Cap (`batch_080`) not reached.
