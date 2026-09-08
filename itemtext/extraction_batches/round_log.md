@@ -8108,3 +8108,43 @@ study's own English from a CC BY 4.0 deposit.
 
 Circuit breaker not tripped (0% failed). Queue: 813 pending remain.
 Cap is batch_070 — not reached; next round proceeds.
+
+### WHO-5 withdrawn from both shards; the originator's terms govern — 2026-09-08
+
+**Ben's ruling, 2026-09-08:** where the originator of an instrument restricts it such that a
+downstream author should not have released the wording, IRW respects the originator's more
+restrictive licence rather than the licence of the paper the wording was copied from. This
+settles the question batch_064 raised and supersedes the "source you copied from governs"
+reading. It generalises beyond WHO-5.
+
+**What was pulled.**
+
+| table | shard | state | effect |
+|---|---|---|---|
+| `hui_2024_who5__items` | irw_text_2 | draft only, never released | gone outright |
+| `fcv19s_hossain_2022_depression__items` | irw_text | **published** in v19.0 | removed from the draft; withdrawal takes effect at the next release of that shard |
+
+`irw_text:next` is now 729 tables against 732 released; `irw_text_2:next` is 118.
+
+**`fcv19s_hossain_2022_depression` is the find worth carrying.** It is named for a fear-of-COVID
+study and was serving the WHO-5 verbatim — all five canonical items ("I have felt cheerful and in
+good spirits", "I woke up feeling fresh and rested", ...) and all six official anchors, 30 rows,
+live in the released corpus. Nothing flagged it, and the batch_064 block that raised the WHO-5
+question would not have found it either: **rights blocks are decided per incoming table, but no
+sweep looks for the same instrument already published under an unrelated table name.** It was
+found by searching `metadata/itemtext_metadata.csv`'s `instrument` field rather than table names.
+It has no provenance row (it predates the batch pipeline) and no issues-page entry, so the
+withdrawal is recorded here rather than in a batch file.
+
+**Still open: the same sweep turned up other blocked instruments in published item text.** Leads,
+not verdicts — only WHO-5 was verified item-by-item before Redivis row reads began failing, and
+the `instrument` field sometimes describes the *study* rather than the instrument (`promis1wave1_cesd`
+is a CES-D, correctly kept). Worth checking under the new ruling: `sv-maia2_randelovic_2021_shs`
+(Subjective Happiness — the same instrument blocked at batch_061 as `kern_2021_happiness`),
+`baka2023_uwes`, and the four live PSS-named tables (`alkouri_2025_icu_stressors`,
+`eammi_grahe_2018_stress`, `ecps_sahm_2024_stress`, plus `cormier_2024_pss4` already withdrawn).
+SF-36's four are probably fine — batch_048 found RAND's terms permissive.
+
+**Blocks that stand unchanged:** `kokoszka_2022_who5` (batch_064), and `nteveros_2021_who5` /
+`wakui_2023_who5` remain pending and must not be extracted. Per convention, withdrawn tables keep
+`status=done` in `queue_state.csv`, as `gillman_2023_pss` and `cormier_2024_pss4` did.
