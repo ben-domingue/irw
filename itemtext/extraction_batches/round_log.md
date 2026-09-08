@@ -7974,3 +7974,67 @@ the shipped mapping. Note wording corrected to say so.
   the same S1 Table wording covers it, and it is a straightforward future extraction.
 
 Cap is batch_070; not reached. Next round proceeds normally.
+
+## batch_064 — 2026-09-07 (6 tables: 4 written / 2 blocked / 0 failed)
+
+Yield 4/6 (67%). Failure rate 0% — circuit breaker not triggered (both no-CSV
+tables are determinate rights blocks, retry test NO).
+
+**Written (all gates clean):** `kokoszka_2022_hamd`, `komura_2026_gqs_animacy`,
+`komura_2026_gqs_anthropomorphism`, `komura_2026_gqs_likeability`.
+normalize_nulls 0/4 changed; audit_batch 4 PASS, **zero WARNs** (so Step 5c had
+nothing to explain); verify_batch 4/4 VERDICT: PASS; lint_verification 4 rows, no
+problems; `irw-validate` ok on all four. All four are PARTIAL on Step 5b, each
+stating in its evidence exactly which items the route does *not* separate.
+
+**Blocked (2), both instrument rights, neither an access failure:**
+- `kokoszka_2022_paid` — PAID-20 © Joslin Diabetes Center, stated non-commercial
+  restriction (irw#1891 shape, cf. kern_2021_happiness batch_063). The CC BY 4.0
+  PLOS deposit publishes no PAID wording, so the "source you copied from governs"
+  carve-out cannot apply; no permissive verbatim reproduction found.
+- `kokoszka_2022_who5` — WHO-5 copyright assigned to WHO in 2024 and published
+  CC BY-NC-SA 3.0 IGO. Both quotes independently re-verified by the orchestrator
+  against the cached PDF (md5 a5ea1902060b8dbdedc75e994777ee15) per Step 5b.
+
+**NEEDS BEN'S DECISION — corpus-wide, raised by the who5 block.** `hui_2024_who5`
+shipped in batch_048 and shows **uploaded=2026-09-07** in mapping_verification.csv,
+carrying WHO-5 official English under a rights check that read only the former
+rights holder's page and predates the 2024 WHO assignment. Orchestrator confirmed
+it is live. `nteveros_2021_who5` and `wakui_2023_who5` remain pending in the queue.
+Either the NC bar applies to the WHO-5 (and a live table needs revisiting), or it
+does not (and this round's block should be reversed) — but the two current answers
+cannot both stand.
+
+**Source-quality finding, orchestrator-verified against the shipped CSVs (Step 5b).**
+The Komura & Yamada (2026) S2 File's GQS blocks are a *variant*, not canonical
+Godspeed, and were transcribed literally rather than repaired — confirmed by reading
+the shipped files, not just the agents' reports:
+- `komura_2026_gqs_likeability` items 1 and 3 carry **identical** text
+  ("Unpleasant ←→ Pleasant"); canonical has Dislike–Like and Unfriendly–Friendly.
+  Nothing can ever separate those two items, which is why that table is PARTIAL.
+  Item 5 is "Scary ←→ Not scary", in no Godspeed subscale.
+- `komura_2026_gqs_anthropomorphism` items 4 ("Still ←→ Lively") and 5
+  ("Mechanical ←→ Organic") are animacy-flavoured anchors, not canonical
+  anthropomorphism ones; "Mechanical–Organic" is canonical Godspeed *Animacy*.
+  The verify script's partial correlation (+0.249 for item 4 against the animacy
+  activity mean vs +0.048/+0.010/+0.101/−0.052) is consistent with that reading.
+- The animacy block near-duplicates it: "Stagnant ←→ Lively" there vs
+  "Still ←→ Lively" under anthropomorphism. Most likely a Japanese→English
+  translation collision (administration was Japanese; no Japanese wording exists
+  anywhere in the deposit), but that is inference, so all three tables disclose it
+  in `public_note` rather than silently canonicalising.
+
+**Language.** All four written tables are `text_source=translated_substitute` —
+three Japanese with `translation_source=study_supplied`, the HAM-D Polish with
+`official_instrument_english`. No `_translated` content was available to ship.
+
+**check_provenance.R exits 1, and it is NOT this batch.** The failure is the
+standing backlog of 8 IRW-generated tables with no issues-page entry
+(hua_2023 ×2, huang_2023_d_scale, jeon_2019_cbi, jiang_2024 ×3, kitayama_2022_hweat),
+all from earlier rounds; none of batch_064's four appear in any flagged list.
+
+**Redivis exports.** Three of four agents worked from `irw_table_sets()` only;
+`komura_2026_gqs_likeability` reports two full exports (table_context.R plus its
+verify script reading `komura_2026_gqs_perceived_safety` read-only as a criterion).
+
+Cap is batch_070 — not reached; the next round takes batch_065. 819 pending.
