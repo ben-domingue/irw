@@ -9585,3 +9585,76 @@ flagged for review (not a failure) are 5 `translation_source=mixed` tables with 
 which, `liu_2018_lot_r`, is likewise from batch_079 and does contain wording this project chose.
 
 Cap not reached (cap is batch_095); next firing picks up batch_081. 760 pending remain.
+
+### batch_080 triaged — 2 shipped, 1 HELD on the RCBS clause — 2026-09-08
+
+Gates re-run live rather than read off the round's report: `normalize_nulls` 0 of 3, `audit_batch`
+3/3 PASS with zero WARNs, `verify_batch` 1 PASS + 2 correct exempt, `lint_verification` clean
+(3 rows), `irw-validate` nothing to report. `liu_2018_panas` and `liu_2018_swls` uploaded to
+`datapages.irw_text_2:next` (`red_up` 2/2 row-count verified), four-check pre-flight clean, stamped
+and independently audited. Disclosure opened as **datapages/irw#165** (377 entries, YAML re-parsed).
+
+**`check_provenance.R` exited 0 — the first clean exit this pipeline has had.** Two things cleared
+at once: #164 merged, giving `liu_2017_ssrs_support` its entry, and the held-table exemption
+committed in `2831b24` retired the permanent `hua_2023_efl_study_engagement` false failure that had
+been named in every round report since batch_047. The exemption is doing exactly its job — it now
+names `hua_2023` as HELD rather than failing on it, and the same mechanism silently covered
+`liu_2018_shyness` below without anyone having to special-case it.
+
+**HELD: `liu_2018_shyness`.** The agent shipped it on the ECR-R source-licence reading — the RCBS
+wording is published by the study's own CC BY 4.0 PLOS deposit, and it found no quotable fee or
+no-redistribution clause. That was a correct application of the rules it was given, and it is
+superseded by the same two rulings that took `lindstrom2021_honesty_humility` one round earlier, so
+applying them here is not a new decision:
+
+1. **#1945, 2026-09-05** — any **stated use restriction** on the instrument blocks; the fee and
+   redistribution tests are explicitly no longer sufficient. The RCBS is copyrighted 1983 by
+   Jonathan M. Cheek and its source document reads *"The scale may be used in non-profit educational
+   research without further explicit permission"*, directing commercial or other use to the author
+   for current licensing. That is the hexaco.org shape almost word for word.
+2. **The originator ruling, 2026-09-08** — a CC BY deposit reproducing a restricted instrument does
+   not launder it. This meets the agent's argument head on, since the argument is precisely that the
+   deposit's licence cures it.
+
+**What makes it decisive rather than arguable here:** the round's own cross-check established that
+the deposit's 13 cell comments reproduce Cheek's RCBS *verbatim and in canonical order*, with the
+four reverse items at the canonical positions. So this is the restricted wording itself, not a
+study-specific rewrite that merely measures the same construct. Held, not withdrawn — nothing was
+ever uploaded, the CSV and sidecars stay in the batch directory, and shipping it later is one
+upload. **No withdrawal exposure:** `metadata/itemtext_metadata.csv` (757 published item-text
+tables) has zero hits for shyness or Cheek, and the queue holds no other RCBS table.
+
+**Independently re-derived the `data_labels` exemption rather than trusting it**, per the standing
+instinct that the thing letting you skip a check is the thing to check. Parsed
+`journal.pone.0194559.s002` directly: 83 header cells, 82 carry an Excel comment, and after
+stripping the `lenovo:` author prefix the comments match the shipped `item_text` **exactly** —
+5/5 for SWLS (H1..L1), 13/13 for shyness (M1..Y1), 20/20 for PANAS (Z1..AS1), zero mismatches. The
+code derivation holds too: `data/liu_2018_shyness_battery.py` renames only `Serial_number` and the
+six covariates, then melts each scale's by-name column list with `var_name="item"`, so the IRW item
+code *is* the commented workbook column — every shipped item code was found as a header cell value.
+
+**The no-Chinese-wording claim reproduces exactly, and it is the one the disclosure rests on.**
+363 CJK characters in the .xlsx XML, all of them font names or Excel UI strings: 328 in
+`comments1.xml` (`宋体` in comment rich-text runs), 14 in `styles.xml`, 14 in `theme1.xml`, 7 in
+`app.xml` (`主题`, `常规`, `工作表命名范围`). **Zero comment strings and zero cell values contain
+CJK.** So the English is the study's own deposit wording, not IRW-generated, and the two shipped
+tables owe a language caveat on the issues page but not an IRW-generated-content disclosure. The
+option anchors also match the article's Measures section verbatim for all three scales, checked
+against the scraped article text.
+
+**Where the round's rights reasoning was right and I did not override it.** `liu_2018_swls` ships:
+the 2026-09-04 SWLS ruling names this exact case — wording taken from the study's own openly
+licensed deposit, not from eddiener.com — and Diener himself distributes the scale without
+restriction on the Illinois page, so there is no single restrictive originator statement for the
+2026-09-08 ruling to bite on. That is the distinction from the RCBS, where the holder's only
+statement carries the restriction. `liu_2018_panas` ships: no rights holder statement restricts the
+PANAS instrument, the APA notice on the JPSP article is an article notice, and 10 PANAS tables are
+already live in the corpus.
+
+**For Ben — one question, not a blocker.** The 2026-09-08 originator ruling and the 2026-09-04 SWLS
+ruling now coexist in `itemtext_standard.md` without either naming the other, and the SWLS ruling's
+"take the more permissive of two pages from the same holder" carve-out is the kind of thing #1945
+was written against. It did not change this round's outcome, but 6 SWLS tables are already published
+and ~10 more are queued, so it is worth settling before one of those rounds settles it by default.
+
+Cap is `batch_095`; not reached. 760 pending, next firing takes `batch_081`.
