@@ -9658,3 +9658,46 @@ was written against. It did not change this round's outcome, but 6 SWLS tables a
 and ~10 more are queued, so it is worth settling before one of those rounds settles it by default.
 
 Cap is `batch_095`; not reached. 760 pending, next firing takes `batch_081`.
+
+---
+
+## 2026-09-08 — #2106 retirement: `liang2026_*` deleted, `liang_2026_*` kept
+
+Not a round. Both claims in the issue were re-checked from scratch before Ben acted, and both
+held — but one of them had been argued from the wrong evidence twice, so it is worth recording
+what actually settles it.
+
+**The pairs are the same data.** Fetched all four tables live and compared cell for cell:
+`id`, `resp`, `cov_gender`, `cov_age` and `cov_professional_background` agree on all 225 rows in
+both pairs. The ONLY difference is item code style — `im_1..im_5` / `em_1..em_5` in the retired
+pair, `IM1..IM5` / `EM1..EM5` in the keeper. The issue's "0 disagreeing cells across the 45x5
+matrices" was right and also incomplete: the wide form cannot see item labels, and the long form
+disagrees in exactly one column, 225 cells. Nothing was lost by retiring.
+
+**The URLs, via the figshare API, not a page fetch.** `figshare.com/articles/dataset/31837640`
+returns 200 — "Exercise motivation questionnaire dataset", DOI `10.1371/journal.pone.0345759.s002`,
+authors Xilin Liang and Zenan Wang. `plos.figshare.com/.../26047004` returns 404 `EntityNotFound`.
+The reason this was got backwards the first time is that figshare answers a page fetch for BOTH
+with an empty HTTP 202, so a fetch-and-eyeball comparison cannot separate a live record from a
+dead one. Only the API can. Same shape as the blocker-page problem.
+
+Each pair held the other's good field: the retired pair had the working URL and a wrong reference
+("Liang, W. et al."), the keeper had the right reference and a dead URL. So the URL had to move
+onto the keeper BEFORE the deletion, or the surviving pair would have been left pointing at a 404.
+
+**Shard check before Ben acted**, as `9af0f9f` did for the marcatto duplicate: all four tables were
+in `item_response_warehouse_2` and no other, and neither pair had item text in `irw_text` or
+`irw_text_2`. Ben deleted the two tables from that shard and from the dictionary, and corrected
+`URL (for data)` on both surviving rows; deletions verified in the `next` draft (966 -> 964, the
+right two gone, the keepers intact) and the sheet re-read to confirm the URL.
+
+**Repo side**, mirroring `9af0f9f`: the two `__items.csv` and their verify scripts removed;
+`queue_state` set to `excluded` rather than blocked, since the tables no longer exist;
+`mapping_verification` rows deleted outright so a verified-mapping claim does not outlive what it
+verified; the provenance `note` rewritten to record the decision and `public_note` cleared. The
+keeper's own item text (`liang_2026_intrinsic_motivation`, uploaded 2026-09-08) is untouched.
+
+**One gap in the precedent, noted not fixed.** `9af0f9f` deleted the `_cwb` row from the central
+`mapping_verification.csv` but left it in `itemtables/batch_028/verification_merged.csv`, where it
+still sits today — so that claim did outlive its table after all. Both files were cleaned here.
+Worth a sweep if any other retirement ever used that recipe.

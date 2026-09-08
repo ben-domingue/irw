@@ -614,9 +614,9 @@ li_2025_socmedia_satisfaction,done,batch_075,2026-09-08T10:28:01
 li_2025_socmedia_usefulness,done,batch_076,2026-09-08T10:47:49
 li_2026_imi_teq,done,batch_076,2026-09-08T10:47:49
 liang_2026_extrinsic_motivation,done,batch_076,2026-09-08T10:47:49
-liang2026_extrinsic_motivation,done,batch_077,2026-09-08T10:52:54
+liang2026_extrinsic_motivation,excluded,batch_077,2026-09-08T12:50:23-07:00
 liang_2026_intrinsic_motivation,done,batch_077,2026-09-08T10:52:54
-liang2026_intrinsic_motivation,done,batch_077,2026-09-08T10:52:54
+liang2026_intrinsic_motivation,excluded,batch_077,2026-09-08T12:50:23-07:00
 liem_2024_attitude_env,done,batch_078,2026-09-08T11:15:08
 lindstrom2021_conscientiousness,done,batch_078,2026-09-08T11:15:08
 lindstrom2021_honesty_humility,done,batch_078,2026-09-08T11:15:08
@@ -626,9 +626,9 @@ liu_2018_lot_r,done,batch_079,2026-09-08T11:47:40
 liu_2018_panas,done,batch_080,2026-09-08T12:18:26
 liu_2018_shyness,done,batch_080,2026-09-08T12:18:26
 liu_2018_swls,done,batch_080,2026-09-08T12:18:26
-liu_2022_fragreading_cdq,pending,,
-liu_2022_fragreading_frq,pending,,
-liu_2022_mice_skills,pending,,
+liu_2022_fragreading_cdq,in_progress,batch_081,2026-09-08T12:48:09
+liu_2022_fragreading_frq,in_progress,batch_081,2026-09-08T12:48:09
+liu_2022_mice_skills,in_progress,batch_081,2026-09-08T12:48:09
 liu_2023_adherence_barrier,pending,,
 liu_2023_adherence_tools,pending,,
 liu_2023_improve_adherence,pending,,
