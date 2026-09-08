@@ -8189,3 +8189,41 @@ The PSS rows were filtered out, the draft table deleted, and the 87-row file re-
 to the newest shard by default, which would have created a second copy in `irw_text_2` that
 shadows the `irw_text` original rather than replacing it. red_up reported UPDATE / "replaces
 the existing table" and verified 87 rows; the released copy still reads 137 until the release.
+
+### Triage + upload of the 056–065 backlog — 2026-09-08
+
+**Ten rounds had been extracted and committed but never triaged or uploaded.** Batches 048–055
+shipped normally; 056 onward accumulated. The gap was invisible from the round log, because a
+round writes its own entry on completion and nothing records that triage is still owed — every
+one of 056–065 had a `## batch_NNN` entry and no `### batch_NNN — shipped/held` entry. It
+surfaced only from the upload pre-flight on batch_065, whose `uploaded` column was empty, as was
+batch_064's.
+
+**Gates re-run live on all ten batches**, not taken from the rounds' reports: `normalize_nulls`
+found nothing to fix in any batch (0 of 49 files); `audit_batch` reproduced each batch's committed
+report exactly — 45 PASS and 4 WARN, the same four the rounds recorded (`karpudewan_2022_stp_efa`,
+`kim2020_ams`, `kiraly_2024_perinatal_mh_freq`, `klatt_2016_speed_estimation`), so nothing drifted
+in the live response data since extraction; `verify_batch` PASS on every non-exempt table;
+`lint_verification` clean on six batches with advisories on three (below).
+
+**48 of 49 uploaded** to the `irw_text_2` draft, 2,578 rows, `red_up` reporting 48/48 row-count
+verified. Four-check pre-flight all clean, including (d): zero of the 48 were already among the
+103 tables pending in the draft, so no doubling. Stamped `uploaded=2026-09-08` across ten
+`provenance.csv` files and `mapping_verification.csv` (96 rows), line by line under each line's own
+quoting convention, with a round-trip proof per line; audited afterwards by re-parsing against
+`git show HEAD:` — exactly 96 rows differ and only in the `uploaded` field.
+
+**HELD, not shipped: `klatt_2016_speed_estimation`** (batch_063). 948 rows with `item_text` AND
+`option_text` blank at 100%; the item codes are VR trial stimuli (`@44898_nis_45_insel`) and
+`instructions` carries the only text. Its round marked it WARN and staged it anyway. This is the
+`twod_rotation_mather2023` shape that was deliberately withheld on 2026-08-24 for the same reason,
+so it is held pending Ben's call on whether a table with no item text belongs in `irw_text`.
+Its `verify_klatt_2016_speed_estimation.R` and provenance row stay in the batch.
+
+**Three lint advisories left unresolved, deliberately** — `lint_verification` asks whether
+`jiang_2021_resilience` (batch_056), `jo_2023_arp` (batch_058) and `kalichman1995_scs` (batch_060)
+should be `PARTIAL` rather than `VERIFIED`, since each one's own evidence text hedges. The tables
+are uploaded either way; the status field is a claim about evidence, not about the wording, and
+downgrading another round's stated verdict is a judgement call rather than a check. Flagged for
+Ben.
+
