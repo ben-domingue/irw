@@ -10553,3 +10553,94 @@ source of the scale is made in the write-up of your study."* That is an express 
 attribution — the opposite of the RCBS/MLQ shape — with no fee, NC or redistribution clause. Ships.
 
 Cap is `batch_095`; not reached. 739 pending, next firing takes `batch_088`.
+
+---
+
+## batch_088 — 2026-09-08T15:35-07:00
+
+3 tables claimed, **3 written / 0 blocked / 0 failed — yield 3/3 (100%)**. Circuit breaker not
+tripped (0% failed). Gates: `normalize_nulls` 0 of 3 normalized, `audit_batch` **PASS 3, no
+anomalies and no WARNs** (so nothing for Step 5c to explain), `verify_batch` PASS=3, and
+`lint_verification` 3 rows no problems. `irw-validate` clean on all three. All three carry a
+verification row; none is `data_labels`, so no NOT_NEEDED rows were owed in either file.
+
+| table | mapping_basis | text_source | verification |
+|---|---|---|---|
+| `lorenz_2016_hope` | reconstructed | translated_substitute | PARTIAL |
+| `lorenz_2016_optimism2` | reconstructed | canonical_instrument | PARTIAL |
+| `lu_2017_gad7` | paper_order | translated_substitute | PARTIAL |
+
+All three PARTIAL for the same honest reason — each route pins most items but not every pair:
+`hope2`/`hope6` (both agency, means 4.3645 vs 4.3302), `optimism2.1`/`.4`, and
+`GAD_1/2/3/4/7` are each left undistinguished, and every sidecar says so in its own evidence
+string rather than rounding up to VERIFIED.
+
+Two of the three tables came from the **same deposit as batch_087's `lorenz_2016_efficacy1`**
+(Lorenz et al. 2016, PLOS ONE 11(4):e0152892, CC BY 4.0) — the head start was passed to both
+agents, and each was told the other's table was live in parallel. No sibling file was touched.
+
+### Step 5b — orchestrator re-checks of the round's own claims
+
+Every load-bearing claim was re-run independently. **All four confirmed, none corrected.**
+
+1. **`lorenz_2016_optimism2` ships inverted option_text for three items — confirmed.** The agent
+   claimed `optimism2.3/.7/.9` are stored *already reverse-coded*. Re-executed: alpha of the six
+   scored columns **as stored = 0.736** against the paper's published .74, and **−0.015** after
+   recoding as the LOT-R manual directs; mean r(pessimism, optimism) as stored **+0.266**. So
+   `resp=6` on those three means the respondent *disagreed*. Also confirmed the Step 3b
+   identification: `optimism1` = AFF (obs M 4.827 / alpha .819 vs published 4.83/.82),
+   `optimism2` = LOT-R (obs 4.406/.736 vs 4.41/.74). The dictionary Description's hedge
+   ("LOT-R-length") can now name the LOT-R outright — a dictionary edit, not a data fix.
+
+2. **`lu_2017_gad7`: the IRW table is larger than the published analytic sample — confirmed, and
+   the row count resolves cleanly.** Server-side aggregates (no export): 9974 rows, **1296 unique
+   ids**, 7 items, resp 0–3, against the paper's analysed 1096. The 902 id+item pairs appearing
+   twice are **not duplication** — the table has a `wave` column, and per wave: wave 1 = 9072 rows
+   / 1296 ids / 9072 distinct id+item (complete 1296x7), wave 2 = 902 rows / 129 ids
+   (129x7 − 1, the single missing `GAD_3` cell the agent reported). 306 of the 902 repeated pairs
+   disagree between waves (34%), which is real longitudinal change, not a doubled upload. Clean
+   design; no `dup_id_item` defect here.
+
+3. **`lorenz_2016_hope` ships a per-row language split — confirmed by inspection.** `hope1/4/5`
+   carry the administered German (the only three items the S1 Appendix printed, being the ones
+   that entered the CPC-12) with English in `item_text_translated`; `hope2/3/6` take the
+   2026-09-01 fallback with English in the base field and `_translated` empty. `language=German`
+   on all six rows. **Flagged for triage:** `text_source` is a per-table field recording
+   `translated_substitute`, which is true of three rows and understates the other three. It errs
+   conservative (it claims *less* fidelity than half the table has) and it keeps the three
+   fallback rows findable by the backfill query, so nothing was changed — but the standard has no
+   per-row provenance field, and this is the second shape that wants one.
+
+4. **A confirmed correction to an ALREADY-SHIPPED table's evidence — `lorenz_2016_efficacy1`
+   (batch_087). Not acted on; Ben's call.** The `hope` agent noticed that Fig 1 of the same paper
+   prints the self-efficacy loadings box by box, which would separate GSE4 from GSE6 outright. I
+   refitted Table 2's 4+g CFA and printed that block: **`efficacy1.4` = 0.557, `efficacy1.6` =
+   0.790, `efficacy1.10` = 0.700** with residuals **0.690 / 0.376 / 0.510**, against Fig 1's
+   published **.56 / .79 / .70** and **.69 / .38 / .51** — max |obs − pub| = **0.00** on both
+   loadings and residuals, with GSE4 and GSE6 separated by **0.23** in loading. batch_087's
+   `mapping_verification.csv` evidence string instead rests that pair on "the weaker item-total
+   contrast (1999 .40 vs .50, observed 0.598 vs 0.669)". The row's status stays **PARTIAL** either
+   way (other pairs remain tied), so nothing is mis-stated to a user — but the evidence string
+   **understates what the sources actually establish**. I deliberately did not rewrite a committed
+   prior round's evidence; recorded here instead.
+
+### Rights
+
+All three cleared on their own terms, checked separately from each deposit's licence.
+**GAD-7**: an express grant, verified at the primary source — `GAD-7_English.pdf` (phqscreeners.com)
+footer, *"No permission required to reproduce, translate, display or distribute."* **LOT-R**:
+Carver's own page publishes the full scale with no fee, NC clause or redistribution bar; its only
+stated restriction is scope of application ("a research instrument, not intended for clinical
+applications"), which governs use, not reproduction, and the German version carries only a bare
+copyright line, which the 2026-09-04 quote tests expressly do not treat as a block. **State Hope
+Scale**: nothing to quote — the one "copyright" page that surfaced belongs to the different,
+dispositional Adult Hope Scale and 404s.
+
+### Pre-existing gate debt (NOT from this batch)
+
+`check_provenance.R` exits 1, but on an **older** round's row: `liu_2025_positive_cognition`
+(**batch_086**) ships IRW-generated English with no entry on the public issues page. All three
+batch_088 tables use `translation_source=official_instrument_english`, so none of them owes a line.
+Carried forward for triage, not a batch_088 failure.
+
+Cap is `batch_095`; not reached. 736 pending, next firing takes `batch_089`.
