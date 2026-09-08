@@ -98,6 +98,17 @@ the environment, not to skip the check.
    anything in it, and don't report a run as "committed" on the strength of
    a file being written there.
 
+   **A per-run CSV is not supposed to be committed anywhere.** If you find
+   `git add` refusing one because `runs/` is ignored, that is the rule
+   working, not an obstacle: do not copy the file up to
+   `automated_finding/` to get it committable, and do not `-f` it. Five
+   scheduled routines did exactly that between 2026-08-25 and 2026-09-07
+   before the top-level names were ignored too. What a run should commit is
+   the standing record only — the `search_terms_log.csv` and seen-key
+   appends, plus the `BATCH_LOG.md` write-up. Put the flag breakdown and
+   anything a human needs to act on in the PR description and BATCH_LOG,
+   not in a committed CSV.
+
    What stays at the top level of `automated_finding/` is the standing,
    cumulative record — never write these into `runs/`:
    `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`,
