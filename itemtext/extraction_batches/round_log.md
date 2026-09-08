@@ -8951,3 +8951,45 @@ form should be chosen and applied to batches 072 and 073 together at upload.
 human spot-check, as with the batch_072 siblings.
 
 Cap is `batch_080`; not reached.
+
+### batch_073 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no WARNs, `verify_batch`
+PASS=3, `lint_verification` clean. All three uploaded, `red_up` 3/3 row-count verified, pre-flight
+clean, stamped and audited field-by-field. Disclosure added to datapages/irw#163 (363 entries).
+
+**All three reached VERIFIED where batch_072's siblings could only reach PARTIAL**, from the same
+deposit and the same method — because these blocks' published loadings are not near-tied: they beat
+the best rival ordering by 31x, 6.9x and 4.3x. The `learning` agent made the argument in its
+strongest form, measuring a reproduction noise floor across all 45 printed loadings and showing the
+block's thinnest gap sits 2.9x above it, which excludes the closest swap rather than merely
+disfavouring it. Worth copying: a noise floor turns "the alternative is less likely" into "the
+alternative is ruled out".
+
+**Passing batch_072's findings forward in the dispatch prompts is what made this round cheap** —
+image-only wording at `.t001`, no variable labels but usable value labels, and the known anchor
+disagreement were all known before the agents started. Two siblings remain
+(`li_2025_marketing_operation`, `li_2025_policy_environment`).
+
+**The `_translated` column inconsistency: shipped as written, NOT normalised, and here is why.**
+The three tables disagree on whether the four `_translated` columns are declared —
+`learning` declares them all-NA, the other two omit them — and batch_072 was inconsistent on the
+same point. The round could not establish the live convention locally and asked for one form to be
+picked at upload. Two pieces of evidence say don't:
+
+1. `language_backfill/round2/published/*` — the only local pulls of live tables — carry **zero**
+   `_translated` columns even for translated tables, so they predate the schema and settle nothing.
+2. **The live corpus already varies**: `red_up` reported today's uploads at 10, 13 and 15 columns.
+   There is no single convention to conform to, so imposing one on two batches would not create
+   corpus-wide consistency — it would just edit files that have already passed every gate.
+
+Every gate passes either way and nothing downstream reads the difference. Picking a form is a
+corpus-wide schema decision for Ben, not a per-batch fix, and it should be made once and applied by
+a sweep rather than piecemeal at each upload.
+
+**Standing caveat from the round, unresolved by design:** `item_text` on all three is OCR-by-eye
+from a PNG, because this deposit publishes its items only as table images. It deserves a spot-check
+by a human reader; no gate can catch a plausible mis-read of an image.
+
+**`Eplor12` is resolved as rounding, not a mapping error** (0.72930 against a printed 0.730) —
+batch_072 had flagged it to carry forward. Nothing further owed.
