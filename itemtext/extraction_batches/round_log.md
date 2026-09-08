@@ -8529,3 +8529,38 @@ One deliberate full export (lee_2024_panas, 10,540 rows) — no server-side rout
 correlation matrix. Others used `--table-sets`.
 
 Cap: batch_070 not reached; next round proceeds. 793 pending.
+
+### batch_069 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+**First round at the new 3-agent size** (cut from 6 earlier today for daytime memory). It ran
+19 minutes, 3/3, no kill — the setting works. It also picked up `lee_2024_panas`, the table
+reconciled back to `pending` after batch_068's mid-round kill, which confirms that recovery end
+to end: a table returned to the queue was re-claimed and extracted normally by the next round.
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no anomalies,
+`verify_batch` PASS=3, `lint_verification` clean. All three uploaded, `red_up` 3/3 row-count
+verified, pre-flight clean (zero collisions), stamped and audited field-by-field — 6 rows differ,
+only in `uploaded`.
+
+**Disclosure applied before upload**, as the round asked: datapages/irw#161 now carries all three
+entries. `lee_2025_nursing_exam` ships IRW-produced English and owed a line under the 2026-09-02
+ruling; the other two meet the drafter's bar. `lee_2024_panas` lands in `check_provenance`'s
+`mixed` REVIEW bucket but owes nothing — its `_translated` columns are empty and the English came
+from published sources.
+
+**The find worth carrying: `lee_2024_panas` uses the Korean PANAS of Park & Lee (2016), whose
+adjective order differs from canonical Watson et al. at 14 of 20 positions.** A default extraction
+against the canonical order would have shipped 14 items under the wrong labels, and **nothing
+downstream would have caught it** — `validate_items.R` and `audit_batch.R` compare item SETS, not
+mappings, so a permutation of correct labels passes every gate. That is the same blind spot the
+`fcv19s_hossain` WHO-5 case exposed for rights, in a different dimension. The round's own Step 5b
+re-derivation holds: identity ‖P−L‖² = 1.8949 and an exhaustive sweep of all 190 single
+transpositions found exactly one at or below identity (13↔20, scared/afraid), which is precisely
+what its PARTIAL scoping claims.
+
+**Two source-document defects recorded, neither ours:** the León-Guereño paper states every BREQ
+regulation style has 4 items when identified has 3 — falsified independently, since the deposit's
+own precomputed mean reproduces from the live items at max|diff| = 0 only as a 3-item average —
+and its stated anchors contradict its own deposit's value labels. The deposit's labels are
+themselves incoherent (1 "Strongly disagree" … 3 "Sometimes" … 5 "Totally agree"), which is what
+makes the override toward the printed instrument's anchors supported rather than asserted.
