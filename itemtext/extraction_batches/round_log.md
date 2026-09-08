@@ -9904,3 +9904,60 @@ written, and option level 1 ships the questionnaire's fuller 完全不清楚 aga
 abbreviated 不清楚. Levels 2–5 are identical in both sources.
 
 Cap is `batch_095`; not reached. 754 pending, next firing takes `batch_083`.
+
+### batch_082 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+3 correct exempt, `lint_verification` clean, `irw-validate` ok, `check_provenance` exit 0. All three
+uploaded to `datapages.irw_text_2:next` (`red_up` 3/3 row-count verified), pre-flight clean, stamped
+and audited. Two entries added to the open PR datapages/irw#165 (382 entries).
+
+**All three are `data_labels`, and this deposit is the good case: the item text IRW ships is the
+administered Chinese, with the authors' own English alongside.** Nothing owed on translation
+grounds anywhere in the batch.
+
+**The exemption needed re-deriving here more than usual, because the code derivation is NOT the
+usual pattern-1 identity.** `data/liu_2023_medication_adherence.py` does
+`sub.columns = ["id"] + [f"{prefix}_{i+1}" ...]` — a *rename*, not a melt of the source column name.
+It is still name-determined (the k-th entry of `cols` is the column literally named `<prefix>k`), so
+code↔column is exact, but "the IRW item code IS the source column name" is false for this table and
+a reader skimming for that phrase would mis-summarise it. Checked end to end instead: 16 of 17
+shipped `item_text` strings equal the `.sav` variable label for their mapped column exactly.
+
+**Both agent overrides confirmed against the source files.**
+
+1. `liu_2023_improve_adherence` item 3 — the `.sav` label is `回答患者关于高血压相关知识` and the
+   shipped text is the longer `...包括发病机制、危害、用药方案、药物潜在副作用等`. That longer string
+   is present **verbatim** in the administered Chinese questionnaire (s002.docx), in the Q19 table
+   row carrying the five response circles. The shipped text extends the same item; it does not
+   substitute a different one.
+2. `liu_2023_adherence_barrier` — the study's own English questionnaire (s003.docx) really does
+   print the options in a different order than the `.sav`. Measured by string position in the
+   document, the block runs cooperation(2), clinical work(3), visits(4), strained(5),
+   communication(6), knowledge(1), with `Others`(7) appearing elsewhere. **`Lack of knowledge` is
+   printed last in that block but is item 1 in the data.**
+
+**And I checked the thing that permutation actually endangers, which no gate covers: whether the
+English is paired to the right Chinese item.** All seven pairs are content-correct and each is
+distinctive — `医生对药物依从性认识不足` → "Lack of knowledge", `缺乏其他配合者（如药师）` → "Lack of
+cooperation", `病人数量多，临床工作繁重` → "Heavy clinical work", `高血压非本次患者就诊主要原因` →
+"Visits not for hypertension", `医患关系紧张` → "Strained doctor-patient relation", `医患沟通不佳` →
+"Poor doctor-patient communication", `其他` → "Others". The two closest in meaning (5 and 6) still
+map cleanly. So the reordering decision was right *and* correctly executed, and `barrier` owes no
+public entry — nothing incorrect ships. The warning is for whoever extracts the two unclaimed
+siblings, `liu_2023_perceived_control` and `liu_2023_poor_adherence`, from the same file.
+
+**A near-miss worth recording, because the answer was "not a defect" and I nearly treated it as
+one.** `red_up`'s dry run showed `barrier` at **14 columns** against its siblings' 15 — it has no
+`section_prompt_translated`. There is no 15-column invariant: existing batch files run 10, 14 and 15
+columns (`twod_rotation_mather2023` 10, `hua_2023_efl_study_engagement` 14), and the standard says
+the field table "defines which fields exist, not the order", with the `_translated` fields present
+only where they apply. `barrier`'s `section_prompt` is all-`NA`, so the omitted column would have
+translated nothing. Shipped as-is.
+
+Rights: nothing to escalate. The instrument is the study's own questionnaire in a CC BY PeerJ
+deposit. Note for future name-greps: `liu_2023_adherence_tools` *mentions* MMAS-8 inside an option
+("Scales such as MMAS-8", and the Chinese carries the study's own `MMS-8` typo) — it does **not**
+ship MMAS-8 item wording, so the Morisky licence is not engaged.
+
+Cap is `batch_095`; not reached. 754 pending, next firing takes `batch_083`.
