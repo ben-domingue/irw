@@ -10501,3 +10501,55 @@ tables carrying DJG wording are in the same position — `dopmeijer_2022_lonelin
 instead.
 
 Cap is `batch_095`; not reached. 739 pending, next firing takes `batch_088`.
+
+### batch_087 triaged — 2 shipped, 1 blocked on rights — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch`
+PASS=2, `lint_verification` clean, `irw-validate` ok. Both uploaded (`red_up` 2/2 row-count
+verified), pre-flight clean, stamped and audited; the blocked table stayed unstamped and has its
+`pending_index_notes.csv` row. Two entries added to PR datapages/irw#165 (394 entries).
+
+**The `liu_2025_ydcy` response-data defect reproduces exactly, and it overturns a decision made on
+Ben's own catch — so it was checked against the deposit rather than accepted.** Filed as **irw#2117**.
+
+| check against `pone.0314338.s001` (n=879) | result |
+|---|---|
+| `YDCY2 * YDCY3 * YDCY4 == YDCY` (the file's own composite) | **879/879** |
+| Godin's `9a + 5b + 3c == YDCY` | 5/879 |
+| range of `YDCY3` | **0–4**, the only item in the block with a 0 |
+| respondents with `YDCY3 == 0`, and of those composite `== 0` | 58, and **58/58** |
+
+The instrument is PARS-3, which scores duration as (level − 1); a zero is possible on the duration
+item **and only there**, which is precisely the "isolated to a single item" pattern the 2026-08-12 QC
+note read as a data-entry-error signature. So the 58 zeros are real responses and `YDCY3` ships
+n=821 against 879, with its floor misrepresented rather than merely truncated — and the loss is not
+missing-at-random, since the dropped respondents are exactly the least active ones. **I filed the
+issue rather than leaving it to a round log**: a verified defect in published response data needs a
+tracker row, and the repo's own convention is a `data fix` issue.
+
+**`loneliness_mudfold` blocked on rights, correctly, and the quotes were re-verified against the
+cached manuals.** `manual2026.txt` lines 48–49 read verbatim: *"Not commercial – You may not use the
+material for commercial purposes."* and *"No derivatives – If you remix, transform or build upon the
+material, you may not distribute the modified material."* Under the standing rules ND is a hard stop,
+so this needs no escalation to block. The extraction was otherwise fully solvable — `mudfold`'s
+`Loneliness.Rd` documents every column verbatim and it would have shipped `data_labels`.
+
+**FOR BEN — the second live withdrawal candidate of the session, and again not acted on.** The round
+flagged two corpus tables as possibly carrying De Jong Gierveld wording but did not check them; I
+did. `dopmeijer_2022_loneliness` is **live in `irw_version` 358** shipping the DJG 11-item scale in
+English ("I miss a good friend", "I'm experiencing a void around me", …), instrument field "De Jong
+Gierveld Loneliness Scale (11-item)". Same instrument, same NC/ND clause, so it is in exactly the
+position `loneliness_mudfold` was blocked for. Withdrawing published data is Ben's call.
+`jutte_2024_loneliness` is **not** in scope — the round guessed right, it is the revised UCLA scale
+(Russell, Peplau & Cutrona), as is `mhscdc_fried_2020_loneliness`; `gan_2015_ucla_loneliness` is the
+ULS-8 and `chen2022_cls` is Asher's Children's Loneliness Scale. One real hit out of five candidates.
+
+**`lorenz_2016_efficacy1`'s rights work was right and I verified its quote at source**, because it is
+the shape #1945 is strictest about: seven of its ten items were taken from *the rights holders' own
+page*. Schwarzer's GSE FAQ, read from the cached PDF, states *"You do not need our explicit
+permission to utilize the scale in your research studies. We hereby grant you permission to use and
+reproduce the General Self-Efficacy Scale for your study, given that appropriate recognition of the
+source of the scale is made in the write-up of your study."* That is an express grant conditioned on
+attribution — the opposite of the RCBS/MLQ shape — with no fee, NC or redistribution clause. Ships.
+
+Cap is `batch_095`; not reached. 739 pending, next firing takes `batch_088`.
