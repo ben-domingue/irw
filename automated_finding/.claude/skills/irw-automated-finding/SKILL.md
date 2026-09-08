@@ -190,9 +190,14 @@ python irw_discover_updated.py "search term 1" "search term 2" --out runs/candid
 
 ```bash
 python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv   # sanity check first
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv     # full run
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume   # if interrupted
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage   # full run
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage --resume   # if interrupted
 ```
+
+**Pass `--retriage` on any scheduled or unattended run.** It chains Step 2b
+in-process over this run's `human_assistance` rows, writing
+`<out>.retriage_ha.csv`. Without it the step was reliably skipped — see
+Step 2b.
 
 - **Expect this to be slow.** Each candidate is a real network download plus
   a parse; a ~500-row candidate file has taken on the order of 2 hours
@@ -240,11 +245,24 @@ python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resu
   re-evaluate any future non-human candidate on content merits per the
   actual standard, not an invented species restriction.)
 
-## Step 2b — Retriage `human_assistance` (recommended before reviewing by hand)
+## Step 2b — Retriage `human_assistance` (REQUIRED, not optional)
+
+Normally you get this for free by passing `--retriage` to Step 2. Run it by
+hand only for a triage CSV that was produced without it:
 
 ```bash
-python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage_ha.csv
 ```
+
+**A triage run is not finished until this has happened.** It was worded as
+"recommended" until 2026-09-07, and the scheduled routines duly skipped it
+week after week, committing triage CSVs with no `refined_flag` column at
+all. That is not a cosmetic gap: until the bucket is sub-classified, the
+`not_item_response` rows can't be dropped, the `human_review` rows can't be
+archived to `human_review/`, and the remainder can't be told apart from
+either — so the whole `human_assistance` bucket silently becomes nobody's
+job. If you are reporting on a run, "Step 2b: skipped" is a defect to state
+plainly, not a detail to omit.
 
 Sub-classifies each `human_assistance` row into `not_item_response` /
 `aggregate_continuous` / `wrong_file_selected` / `recoverable_format` /
