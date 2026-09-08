@@ -265,6 +265,29 @@ fee and the evidence of enforcement in `provenance.csv` `note` so the basis stay
 withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
 do not blank the date to make the table look as though it never shipped.
 
+**Most of the corpus has no `provenance.csv` row, and the mechanics above assume one.** Added
+2026-09-08 after six PSS withdrawals where none of the six had a provenance row at all — they
+predate the batch pipeline, so there was no `uploaded` date to keep and no `public_note` to
+rewrite. The rule above is written for a table the batch pipeline produced; it is silent on the
+larger set it did not. For a **non-pipeline** table, the withdrawal record is:
+
+1. delete the table from the `irw_text*` draft (unchanged — this is what actually withdraws it);
+2. record the withdrawal in **`itemtext/instrument_rights_register.csv`** against the instrument,
+   and in the round log against the table, since those are the only two places it can live;
+3. do **not** manufacture a provenance row purely to hold the withdrawal — a row asserting an
+   extraction that never happened is worse than no row.
+
+The consequence to be honest about: for these tables the withdrawal is not discoverable from the
+table's own records, only from the register and the log. That is a real weakness of the current
+shape, not a step to skip.
+
+**A partial withdrawal is not a table deletion, and the distinction is destructive if missed.**
+Where a table pools several instruments — `ecps_sahm_2024_stress` carries a blocked scale
+alongside two unblocked stressor blocks — the withdrawal removes *those items' rows*, not the
+table. A whole-table delete would take the unblocked blocks with it. Record which rows went, and
+put the table in any withdrawal script's keep-set so a rerun cannot escalate a partial into a
+deletion.
+
 **There is no longer a `wording_rights` flag, and no "record it and ship anyway" option.**
 Between 2026-09-04 and 2026-09-05 the rule moved: a stated restriction on the instrument now
 blocks outright (see the `wording_rights` retirement below). A table either ships with no
@@ -559,3 +582,40 @@ pictures. Blank `item_text` would not fix it, because the problem is the code, n
 is verbal. If it does, ship it. If it does not, ship the table with `item_text` blank. Block only
 when something else is wrong — the rights bar it, or, as here, the item codes do not denote a
 stable thing.
+
+**An authorization scoped to a POPULATION attaches to the instrument it was granted for, not to
+the wording IRW ships in its place.** Ruled 2026-09-08 by ben-domingue on irw#2121.
+
+Chinese-adaptation studies routinely carry a sentence of this shape, and this paper (Li et al.
+2024, PeerJ 10.7717/peerj.17910) carries it three times over, once per scale — in `s003.docx`:
+
+> "We used the Chinese version of the SAD, which has been **authorized by the original author for
+> use in the Chinese population**."
+
+Two instruments are in play whenever a study administers a translated adaptation and IRW ships
+the original-language wording as a stand-in: the **adaptation** the participants answered, and
+the **original** whose words appear in `item_text`. The scoped authorization is a grant to the
+adaptation's authors covering *administration*. It is not the originator's terms for the original,
+and it says nothing about redistributing the original's wording.
+
+So the test is the same one the source-licence rule already sets: **go to the terms of the thing
+you actually copied.** `li_2024_bdyz` ships Gross & John's (2003) English ERQ wording, which Gross
+distributes freely from his own lab page, so it ships — even though the study describes the
+Chinese ERSS it administered as authorized only for Chinese populations. Do not read a study's
+paraphrase of one instrument's licence as a restriction on a different instrument.
+
+This is NOT a licence to substitute freely. Two limits, both live in the same paper:
+
+1. **A revision is not a translation.** `li_2024_sad` stays blocked (#2121) because the study says
+   its scale was *"revised by Peng et al."* — so the 1969 English is a different instrument, not
+   the same words in another language, and no item-level correspondence can be shown. Where the
+   adaptation is a straight translation and the mapping is checkable (the ERQ's item 9 is quoted
+   in the paper in English), the substitute is defensible; where it is a revision, it is not.
+2. **The originator's own terms still have to be checked, and the audit is not that check.**
+   `availability_audit_full.csv` called the SAD "the classic public-domain Watson & Friend (1969)
+   28-item true/false instrument". A 1969 JCCP article is not public domain, and that row is one
+   of three now found wrong in that file. A substitution's rights rest on the original's terms,
+   quoted — not on an audit row asserting them.
+
+Whichever way it goes, say in `provenance.csv` `note` which instrument's terms were relied on and
+quote them, so the two-instrument reasoning stays auditable.
