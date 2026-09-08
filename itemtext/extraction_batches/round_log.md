@@ -9522,3 +9522,66 @@ is the right instinct. And `liu_2018_lot_r`'s reverse-coding reproduces: alpha o
 6/7 as ranging 1–9 and 1–10, taken from an agent summary; the per-item check gives 1–5 and 3–7
 (S5 is 10–20). The note carries the real numbers. Same pattern as batch_076's inflated correlations
 — a sound conclusion carried on numbers that had not been recomputed.
+
+## batch_080 — 2026-09-08
+
+3 tables, 3 agents (daytime setting). **3 written / 0 blocked / 0 failed — yield 3/3 (100%).**
+Tables: `liu_2018_panas`, `liu_2018_shyness`, `liu_2018_swls`.
+
+All three are the remaining scales of the same six-scale battery that batch_079 drew
+`liu_2018_gse` and `liu_2018_lot_r` from: Liu C, Cheng Y, Hsu ASC, Chen C, Liu J, Yu G (2018),
+PLOS ONE 13(4):e0194559, CC BY 4.0, S1 Table `journal.pone.0194559.s002` (.xlsx). Agents were
+given batch_079's finding as a head start and it held: the workbook carries 82 Excel cell
+comments on its row-1 header cells (`xl/comments1.xml`), one item sentence per data column, so
+all three tables are `mapping_basis=data_labels`. Code derivation is core-model pattern 1
+throughout — `data/liu_2018_shyness_battery.py` melts an explicit by-name column list per scale
+with `var_name='item'`, so the IRW item code IS the commented column name, no positional step.
+Passing the prior round's source finding forward turned what would have been three separate
+source hunts into three confirmations; worth doing whenever a round's tables share a deposit.
+
+Row counts: panas 100 (20 items x 5), shyness 65 (13 x 5), swls 35 (5 x 7).
+
+GATES: `normalize_nulls` 0 of 3 changed. `audit_batch` **3/3 PASS, zero WARN** (so Step 5c is a
+no-op this round — nothing to explain). `verify_batch` PASS 1 / MISSING(exempt) 2.
+`lint_verification` 3 rows, no problems. `irw-validate` ok on all three, nothing to report.
+`check_provenance` no failure.
+
+STEP 5b, ORCHESTRATOR RE-CHECK — all three load-bearing claims confirmed, numbers recorded:
+- The `data_labels` claim is the whole basis of two of the three tables, so it was re-derived
+  from the .xlsx rather than taken from the agents' reports. All three cached copies are the
+  same file (md5 `bec7fdc77774a6ea8402ce505d199207`). Comment-to-header anchoring is exactly as
+  reported: H1..L1 = `life_satisfication01`..`life_satisficatio05` carrying the five SWLS
+  sentences, Z1..AS1 = `PANAS1`..`PANAS20` carrying the twenty PANAS adjectives in canonical
+  Watson/Clark/Tellegen order (Z1 `interested` .. AS1 `afraid`). 20/20 and 5/5 commented.
+- The shipped CSVs carry that mapping unaltered — spot-checked PANAS1/7/13/20 and SWLS 01/03/05
+  against the comment strings, all exact, with the comment author prefix `lenovo:` correctly
+  stripped and the source's own quirks kept verbatim (SWLS item 3 reads "I am satisfied with
+  life." where the article's *sample item* quote says "with my life"; item 4 has no closing
+  full stop). Ship-the-deposit was the right call and both are disclosed in notes.
+- `liu_2018_shyness` overrides the paper's stated anchor direction for four items, which is a
+  public-facing claim, so it was re-run rather than believed: `verify_batch.R` reproduces it
+  independently. Shyness03/06/09/12 are stored ALREADY reverse-coded — alpha 0.9075 as stored
+  (published .91) vs 0.4922 un-reversed; all 13 corrected item-total r positive as stored
+  (min +0.375) with exactly those four going negative un-reversed (-0.247/-0.423/-0.572/-0.433);
+  and the authors' three SEM parcels reproduce from the LIVE items at max|dev| 0.00e+00 over 208
+  respondents, tying live codes to the commented deposit columns end to end. Those four ship
+  reversed anchors, and all four are negatively worded ("I do not find it hard to talk to
+  strangers"), so the direction is right on content as well as on the numbers. Per-item
+  direction differences are legitimate and `irw-validate` correctly did not raise
+  `resp_ambiguous`.
+
+CAVEAT COMMON TO ALL THREE (administered language, disclosed in each public_note): the sample is
+208 working adults in Shanghai and administration was Chinese, but neither the article nor the
+supporting information publishes any Chinese wording at all — every CJK character in the .xlsx
+XML is the font name 宋体 inside style/comment rich-text runs, and the article text has none. So
+the English deposit wording goes in the base fields, `_translated` stays empty, and all three are
+`text_source=translated_substitute` / `translation_source=study_supplied`. This is the study's own
+English, not English IRW generated, which is why `check_provenance` owes them no issues-page line.
+
+NOTED FOR TRIAGE, NOT A BATCH_080 PROBLEM: `check_provenance` reports one uploaded table shipping
+IRW-generated English with no entry on the public issues page — `liu_2017_ssrs_support`, stamped
+uploaded in batch_079. Under the 2026-09-02 ruling it owes a line on `itemtext_issues.qmd`. Also
+flagged for review (not a failure) are 5 `translation_source=mixed` tables with no entry, one of
+which, `liu_2018_lot_r`, is likewise from batch_079 and does contain wording this project chose.
+
+Cap not reached (cap is batch_095); next firing picks up batch_081. 760 pending remain.
