@@ -10020,3 +10020,54 @@ owed a public entry, since both PLOS tables ship the authors' own English
 
 Circuit breaker not tripped (0 failed). Queue after this round: 751 pending,
 487 done, 93 blocked, 57 excluded, 13 failed. Cap is batch_095 — not reached.
+
+### batch_083 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+2 PASS + 1 correct exempt, `lint_verification` clean, `irw-validate` ok, `check_provenance` exit 0.
+All three uploaded to `datapages.irw_text_2:next` (`red_up` 3/3 row-count verified), pre-flight
+clean, stamped and audited. Two entries added to the open PR datapages/irw#165 (384 entries).
+
+**The judgement this round turns on is whether the two PLOS tables should ship at all**, since
+`liu_2023_perceived_control` is `paper_order` with `NO_ROUTE` — within a three-item construct,
+which sentence is PBC1 rests on the annexure's listing order and nothing else. **This is routine,
+not a new call, and the tracker is what says so:** `mapping_verification.csv` holds 89 `paper_order`
+rows of which 87 have shipped, and 17 of the 56 `NO_ROUTE` rows have shipped, including
+`algner2022_oss` — `paper_order` + `NO_ROUTE` + uploaded 2026-09-04. SKILL.md calls NO_ROUTE a
+legitimate outcome to record rather than a failure. Both tables carry a `public_note` naming the
+limit precisely, and both got issues-page entries.
+
+**Verified the annexure claim directly, because everything rests on it:** the S1 File annexure
+(`pone.0295133.s002`) contains **no item-code token at all** — zero matches for
+`(PBC|PI|ATT|SN|BT|PB)\s*[0-9]` across the whole document — so `paper_order` is forced rather than
+chosen, and all six shipped sentences appear verbatim in it. PBC2's missing verb ("There are many
+channels, and easy to agricultural products of…") is the source's own broken English and is
+correctly shipped unrepaired.
+
+**One correction to how the round framed its own evidence.** The report says the published CFA
+loadings *contradict* the assumed order — "loadings rank PBC2 > PBC1 > PBC3 while the congeneric
+reconstruction ranks PBC2 > PBC3 > PBC1". Both of those rankings are keyed to **item codes**, not to
+wording, so the comparison could never have pinned or contradicted which sentence goes with which
+code; it is a check on whether the live data reproduces the paper's loadings for the same codes.
+The verification sidecar states this correctly ("the loadings cannot pin anything"); only the
+summary overstates it. And the rank difference is not itself alarming: the published PBC1/PBC3
+loadings differ by 0.017 (.743 vs .726), which is inside the sampling noise of an exactly-identified
+three-indicator congeneric reconstruction at n=544. Recorded so nobody reads "contradicted" later
+and opens an issue against the data.
+
+**Where the round was right and I confirmed it:** block membership is solid and it is the part a
+reader can rely on — the annexure's six blocks (BT 4, ATT 3, SN 3, PBC 3, PI 3, PB 3) match the
+workbook's column sequence and reproduce all six published alphas to <0.001, with PBC 0.852 and PI
+0.809 re-run live by `verify_batch`. Route 8 (semantic coherence) mildly *supports* the assumed PBC
+order rather than opposing it — item means 3.961 / 3.741 / 3.640 fall in listing order — and the
+round was right to decline to count unpublished judgement as evidence.
+
+`liu_2023_poor_adherence` is the fourth table off the PeerJ medication-adherence deposit and needed
+no new work beyond batch_082's: same `.sav` variable-label route, same number-preserving rename in
+`data/liu_2023_medication_adherence.py`. It owes no issues-page entry — its multi-select 0/1 coding
+is self-describing in the shipped `option_text` (`未选择` / `已选择`), the same call made for
+`liu_2023_adherence_barrier` last round.
+
+Rights: nothing to escalate. Both deposits are CC BY and both instruments are the studies' own.
+
+Cap is `batch_095`; not reached. 751 pending, next firing takes `batch_084`.
