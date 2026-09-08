@@ -75,8 +75,9 @@ nonzero and says what to check.
 **Why there is no scheduler, and why "add one later" is the wrong turn:**
 
 - **The bottleneck is triage, not the trigger.** Roughly two thirds of the tables
-  in a round need a human go/no-go, and at ~1,009 pending and 6 tables a round
-  (halved from 12 on 2026-09-05) that is ~168 rounds. Any
+  in a round need a human go/no-go, and at ~796 pending and 3 tables a round
+  (12 -> 6 on 2026-09-05, 6 -> 3 on 2026-09-08, both for memory on this laptop;
+  3 is the daytime setting, for when Ben is using the machine) that is ~265 rounds. Any
   cadence faster than "when someone is ready to triage" just grows an unreviewed
   branch — which is also what makes the pre-round merge of `origin/main` start
   conflicting, and a failed merge stops the queue entirely. One round per triage
