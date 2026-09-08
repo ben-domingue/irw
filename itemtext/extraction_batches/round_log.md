@@ -8630,3 +8630,35 @@ rival sweep leaves the KS2↔KS4 swap at 0.0074, inside tolerance and therefore 
 
 Queue after this round: 790 pending / 451 done / 93 blocked / 55 excluded / 12 failed.
 Circuit breaker not tripped (0% failed). Cap is batch_080 — not reached, 10 rounds remain.
+
+### batch_070 triaged and uploaded — 3 shipped, 0 blocked — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no anomalies,
+`verify_batch` 2 PASS + 1 correct exempt, `lint_verification` clean. All three uploaded,
+`red_up` 3/3 row-count verified, pre-flight clean, stamped and audited field-by-field.
+
+**Nothing owed on the issues page for this batch, and the disclosure backlog is now empty.**
+`check_provenance.R` against the merged page (357 entries, datapages/irw#159 and #161 both in
+main) reports exactly ONE table without an entry: `hua_2023_efl_study_engagement` — which is the
+UWES rights HOLD. It ships no wording, so it owes nothing. That is the checker's known gap, not a
+real debt: it exempts *withdrawn* tables from the disclosure requirement but not *held* ones, so
+it will keep reporting a false failure until that is fixed. Everything the 2026-09-02 ruling
+actually requires is now published.
+
+`red_up` raised the usual `name_charset` WARN on `lessR_Mach4` — a property of the live table
+name, not this extraction.
+
+**Two things from the round worth keeping.** `lessR_Mach4` resolved to CRAN `lessR`'s
+`dataMach4_lbl.rda`, whose rownames are the source column names and whose `label` column is the
+verbatim Mach IV wording — a level-1 tie with no inference, and a reminder that a package's own
+data objects are sometimes the cleanest source available. And the two `li_2021_*` tables were
+extracted by independent agents from one deposit and converged separately on the same appendix
+block structure, blank `option_text` and language fallback — which is the per-table isolation
+working as designed.
+
+**The round corrected one of its own agents before shipping**, which is the Step 5b check earning
+its place: the `li_2021_knowledge_sharing` public note asserted flatly that the survey "was fielded
+in Chinese", but the paper states nothing about administration language or translation — the
+agent's private notes conceded the inference while the public note did not. The note was rewritten
+to mark it as an inference and name its basis. `language=Chinese` and `translated_substitute`
+stand; the deposit publishes only English.
