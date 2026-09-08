@@ -92,11 +92,66 @@ for (artist in names(df5)[-1]) {
 }
 df5 <-  pivot_longer(df5, cols=-c(id), names_to='item', values_to='resp')
 
+# -------- Item-code convention --------
+# Studies 3 and 4 take `item` from a `Name` COLUMN in their workbooks, which
+# spells authors the way the deposit does ("Agatha Christie", "Jean M. Auel").
+# Study 5 has no such column: its authors are column HEADERS, pivoted into
+# `item` below, and that workbook renders the same names lossily -- spaces
+# become underscores ("Agatha_Christie"), middle-initial periods are dropped
+# ("Jean M Auel"), and double spaces collapse. Nothing reconciled the two before
+# bind_rows(), so the pooled table carried both renderings and 106 of its 158
+# authors appeared twice, once per convention, from disjoint samples (#2052).
+# The issue reported 90; that count saw only the underscored pairs. Six more
+# differ by a dropped middle-initial period or a collapsed double space, and ten
+# by initials run together ("J.K. Rowling" / "JK Rowling") -- 106 in all.
+#
+# No id+item key ever repeated, so no duplicate check could see it. The effect
+# was that an IRT model fitted to the pooled table estimated those 106 people
+# twice, as unrelated items -- for 106 of 158 authors the pooling this table
+# exists for silently did not happen.
+#
+# The repair maps each study-5 code onto the studies-3/4 spelling of the same
+# name, rather than picking a rendering of our own: that column is the deposit's
+# own and is what two of the three studies already shipped. Matching is on a
+# LETTERS-AND-DIGITS-ONLY key: the study-5 workbook does not merely swap one
+# separator for another, it deletes them ("J.K. Rowling" is spelled "JK
+# Rowling"), so a key that treated the period as a separator still missed ten
+# authors. Dropping every non-alphanumeric character and casefolding catches all
+# 106. That is safe here because these codes are personal names: the near-misses
+# the DART deliberately contains stay distinct under it ("Susan Smith" vs the
+# real "Susan Smit"), and the assertions below fail loudly if that stops holding.
+# Whitespace runs are collapsed in the output because a double space is not
+# information.
+#
+# A study-5 author with NO counterpart in studies 3 and 4 is one of the 25
+# replacements the paper's Study 5 section introduces (Haruki Murakami, Jeff
+# Kinney, ...). Those keep their own name, de-underscored.
+#
+# This runs AFTER study 5's answer-key lookup, which is keyed on the raw
+# underscored headers; normalising earlier would break all 132 of its joins.
+squash_ws     <- function(x) trimws(gsub("[[:space:]]+", " ", x))
+variant_key   <- function(x) tolower(gsub("[^[:alnum:]]", "", x))
+
+canon_names   <- squash_ws(unique(c(df3$item, df4$item)))
+canon_by_key  <- setNames(canon_names, variant_key(canon_names))
+
+canonicalise_item <- function(x) {
+  x   <- squash_ws(gsub("_", " ", x, fixed = TRUE))
+  hit <- canon_by_key[variant_key(x)]
+  ifelse(is.na(hit), x, hit)
+}
+
 stacked_df <- bind_rows(
   df3 %>% mutate(group = "Study 3"),
   df4 %>% mutate(group = "Study 4"),
   df5 %>% mutate(group = "Study 5")
-)
+) %>% mutate(item = canonicalise_item(item))
+
+# The pooling is only real if the renderings actually collapse onto each other,
+# and merging codes must not silently create a repeated id+item key. Assert both
+# rather than trust them.
+stopifnot(!any(duplicated(variant_key(unique(stacked_df$item)))))
+stopifnot(!any(duplicated(stacked_df[, c("id", "item")])))
 
 save(stacked_df, file="DART_Brysbaert_2020_3&4&5.Rdata")
 write.csv(stacked_df, "DART_Brysbaert_2020_3&4&5.csv", row.names=FALSE)

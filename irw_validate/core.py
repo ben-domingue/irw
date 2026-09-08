@@ -202,7 +202,8 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
         for finding in (extra.check_name(table)
                         + extra.check_shape(df, table)
                         + extra.check_cov_range(df, table)
-                        + extra.check_resp_dtype(df, table)):
+                        + extra.check_resp_dtype(df, table)
+                        + extra.check_item_variants(df, table)):
             report.checks_run.append(finding.check)
             report.findings.append(finding)
 
