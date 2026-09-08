@@ -7909,3 +7909,68 @@ of a legitimately trimodal distribution. Not filed as an issue.
   identity *from* PHQ9_8, which would be circular). Honest PARTIAL, correctly reasoned.
 
 Cap (batch_070) not reached.
+
+## batch_063 — 2026-09-07
+
+6 tables claimed, 6 agents dispatched (one per table). **Written 5 / blocked 1 / failed 0.**
+Yield 5/6 = 83%. Circuit breaker not tripped (0% failed; the single no-CSV table is a
+determinate rights block, retry test NO, which does not count).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| kiraly_2024_perinatal_mh_symptoms | done (caveat) | data_labels | VERIFIED |
+| kitayama_2022_hweat | done (caveat) | paper_explicit | VERIFIED |
+| klatt_2016_speed_estimation | done (caveat) | data_labels | VERIFIED |
+| knight_2026_crt | done (caveat) | paper_explicit | PARTIAL |
+| koirala_2024_brief_cope | done (caveat) | data_labels | NOT_NEEDED |
+| koirala_2024_pss10 | **blocked** | unknown | NO_ROUTE |
+
+Gates: normalize_nulls 1 of 5 normalized (kitayama, 91 lines); audit_batch 4 PASS / 1 WARN;
+verify_batch 4 PASS + 1 MISSING(exempt, data_labels); lint_verification 6 rows, no problems;
+irw-validate clean on all 5. check_provenance exits 1 — see below.
+
+**Blocked table.** `koirala_2024_pss10` falls under the standing PSS-family rights block
+(irw#1945, irw#1955, extended to the whole family 2026-09-07). The agent re-fetched the CMU
+stress lab's PSS FAQ and got md5 `f2eeb376bfab9aa86ae8ae5c7719ec9c`, byte-identical to the copy
+hashed in batches 047/059/062 — the ruling's basis has not moved. Costly block: the S1 `.sav`
+carries all ten stems as variable labels against the exact column names the IRW codes use, so a
+reversal would ship `data_labels` with zero inference. The mapping is banked and re-runnable in
+`verify_koirala_2024_pss10.R` (VERDICT: PASS, server-side, no export quota spent). Row added to
+`pending_index_notes.csv`.
+
+**Audit WARN (Step 5c).** `klatt_2016_speed_estimation`: 100% blank `item_text` and `option_text`.
+Both expected, neither an itemtext defect — blank `item_text` is the 2026-09-05 picture-stimulus
+ruling applied to VR car stimuli with no published wording; blank `option_text` is a property of
+the response data, since `resp` is a continuous signed km/h estimation error with no labelled
+options. Explanation appended to `notes.csv`.
+
+**check_provenance exits 1 — not treated as a table failure.** It lists 8 tables shipping
+IRW-generated English with no entry on the public issues page; 1 is this round's
+`kitayama_2022_hweat` (Japanese HWE-AT-J, `machine_translation`), the other 7 are a pre-existing
+backlog from earlier rounds. Under the 2026-09-02 ruling kitayama owes a line on
+`itemtext_issues.qmd`, which lives in the separate `irw_site` repo and was not edited here. That
+is an unfiled disclosure, not a defect in the table — the table's own gates all pass — so it is
+marked done and flagged for triage. **The disclosure backlog is now 8 tables and wants a human
+pass.**
+
+**Step 5b orchestrator re-check.** The round's one source-overriding claim was re-run
+independently: kitayama's agent asserted the paper's "Q16" is a typo for Q15. It reproduces
+exactly — Q15 = 7.4% at the minimum (data-only), Q16 = 2.5% (paper-only), 8 of the paper's 9
+named items agree. Because both mapping links are direct 18/18 label matches, the floor
+statistics are corroboration only and the discrepancy is a defect in the article's prose, not in
+the shipped mapping. Note wording corrected to say so.
+
+**Other notables.**
+- `knight_2026_crt` is PARTIAL by choice, correctly: the deposit holds no raw CRT columns, so the
+  hop from Qualtrics export tag to the long file's `CRTn` strings is not directly observable, and
+  the RT load partition (49.79 s min high-load vs 35.31 s max one-liner, gap 14.48 s) separates
+  two groups without ordering within them.
+- Step 3b clean on the shared `koirala_2024` source: the S1 `.sav` holds both `PSS1..PSS10` (0–4)
+  and `BCS1..BCS28` (1–4); each agent extracted only its own instrument.
+- `koirala_2024_brief_cope` ships the deposit's own spelling errors verbatim ("concerntrating",
+  "alot") rather than Carver's canonical wording — a provenance fact, below the issues-page bar.
+- **Corpus correction found:** `kitayama_2022_hweat_retest` is marked UNAVAILABLE in
+  `availability_audit_full.csv` on the grounds that no source could be identified. That is wrong —
+  the same S1 Table wording covers it, and it is a straightforward future extraction.
+
+Cap is batch_070; not reached. Next round proceeds normally.
