@@ -198,13 +198,22 @@ red_up  ------------------------->   irw_meta, as a DRAFT version
 
 Two things about this are easy to get wrong:
 
-**The weekly run is a system crontab entry, not a GitHub Action.**
-`metadata/weekly_pipeline_cron.sh` runs Mondays at 06:00 on a maintainer's
-machine, regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks table
-names across the metadata, tags and biblio outputs against the live Redivis
-datasets), and opens a GitHub issue with the log.
+**Everything scheduled is a GitHub Action.** There is no crontab anywhere, on
+any machine. `.github/workflows/metadata-pipeline.yml` runs Mondays 13:00 UTC:
+it regenerates the metadata CSVs, runs `audit_tables.R` (which cross-checks
+table names across the metadata, tags and biblio outputs against the live
+Redivis datasets), and opens a **pull request** with the diff. It does not open
+an issue and does not auto-merge — there, the review is the product.
 
-**Nothing uploads automatically.** The cron job deliberately never uploads.
+`metadata/weekly_pipeline_cron.sh`, the local entry point this replaced, was
+deleted in #1940: nothing invoked it, its header described the run in the
+present tense, and adding it to a crontab would produce a second, unreviewed
+run against the same sheets. `git log -- metadata/weekly_pipeline_cron.sh` if
+you need it.
+
+See **section 6** for the full list of what runs on a schedule and where.
+
+**Nothing uploads automatically.** No scheduled job ever uploads.
 Every upload goes through one tool, [`red_up`](red_up/README.md), and it only
 ever creates a *draft* Redivis version — Redivis keeps an unpublished working
 copy that nobody outside the project can see until someone clicks publish. That
@@ -287,6 +296,77 @@ until the version is actually released and the next daily run sees it.
 **`datastandard.md` beats `CLAUDE.md` on output format.** `CLAUDE.md` says
 scripts write both `.csv` and `.RData`; `datastandard.md` overrides this to
 CSV-only for the `automated_finding` pipeline, and says so explicitly.
+
+## 6. What runs on a schedule
+
+Inventoried and settled in #1940 (2026-09-08). Everything on a clock runs on one
+of two runners — **GitHub Actions** and **Claude cloud routines**. Nothing runs
+from a crontab: `crontab -l` was empty and no systemd timer referenced the
+project when this was written (checked on the maintainer's machine, which is the
+only one that ever had an entry).
+
+Work that is deliberately *hand-run* rather than scheduled is listed at the end
+of this section — that is a third way things happen, but it is not a runner.
+
+### GitHub Actions, `ben-domingue/irw`
+
+| Workflow | When (UTC) | What it does | Merges? |
+|---|---|---|---|
+| `metadata-pipeline.yml` | Mon 13:00 | the 13 metadata CSVs; stages 01 02 03 05 06 07 08 10 11 12 | opens a PR, **never** auto-merges — the review is the product |
+| `version-manifest.yml` | daily 13:30 | records newly *released* Redivis versions | opens a PR and **squash-merges it**, because it only records what already happened |
+| `drift-report.yml` | daily 14:00 | reports what downstream is behind | writes no code; rewrites issue #2085 in place |
+| `tests.yml` | on PR | the test suite, plus `check_config_parity.py` | — |
+
+The daily times are deliberately staggered: the drift report reads the manifest
+the 13:30 job refreshed.
+
+### GitHub Actions, `datapages/irw` (the Quarto site)
+
+| Workflow | When (UTC) | What it does |
+|---|---|---|
+| `quarto_publish.yaml` | `workflow_dispatch`, **and** daily 14:30 | renders and publishes to `gh-pages`; the scheduled run first checks whether `main` has moved since the last publish and skips if not |
+
+The scheduled run watches *that repository only*. Pages query Redivis live at
+render time, so a new `irw_meta` release changes what the site would say without
+changing anything in the repo — that direction is reported by `drift-report.yml`,
+never rendered automatically, because a render that races a publish republishes
+the old numbers into every page (2026-08-24).
+
+### Claude cloud routines
+
+Read from the routines API on 2026-09-08. Of the 20 most recently created
+routines, **exactly two are enabled**; the other 18 are fired one-shot PR
+check-ins.
+
+| Routine | id | When (UTC) |
+|---|---|---|
+| IRW morning status render | `trig_01JAY3UEYPP4EQLt93erbFE9` | `27 11 * * *` (04:27 PT) |
+| IRW daily search nudge | `trig_014YcLgR2Sa2D8P2yAkvQFTx` | `0 15 * * *` (08:00 PT) |
+
+> **This table is not the whole account, and cannot be made so from here.** The
+> API's `list` returns the newest 20 with `has_more: true`, and passing its
+> `next_cursor` back returns *the identical page* — verified 2026-09-08, so the
+> cursor is accepted and ignored. The oldest routine visible was created
+> 2026-08-25; the standing weekly/monthly discovery sweeps (repos / PLOS / PMC)
+> were created ~2026-08-13/14 and therefore fall outside the window. **Their
+> existence and schedule cannot be confirmed or denied from a session** — read
+> them at https://claude.ai/code/routines. That is what still blocks "thin the
+> standing weekly discovery routines" in `automated_finding/TODO.md`.
+
+Two one-shot PR watchers (`trig_01UfLcQ11WAtgNEgyR6Yp5WF`,
+`trig_0184pheJDQbsY8tBE1uPkY7S`) re-armed hourly from 2026-08-24 before anyone
+noticed, and were disabled. That is the argument for recording an id here the
+day a routine is created: a routine nobody can name is a routine nobody can
+stop, and the API will stop showing it after twenty more exist. Routines cannot
+be deleted from a session — https://claude.ai/code/routines.
+
+### What is deliberately NOT scheduled
+
+- **`upload_meta.py`, and the Publish click.** Section 4: that click is always a
+  human action. `drift-report.yml` reports when the warehouse has fallen behind
+  the repository; it never publishes.
+- **Merging the weekly pipeline PR.** The diff is the thing to read on Monday.
+- **Item-text extraction rounds**, and the discovery sweeps above.
 
 ## Two rules
 

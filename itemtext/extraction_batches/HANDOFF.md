@@ -118,12 +118,12 @@ Read the sequence rather than assuming the last state:
   when you sit down to triage. It still keeps every guard, still cannot publish, still reads the
   cap out of Step 0 of `round_prompt_v1.md`, and no longer opens a GitHub issue on failure —
   it exits nonzero and tells you, because you are the one who started it.
-- **The crontab line `13 * * * * .../round_cron.sh` is still installed and must be removed.**
-  An agent cannot do it — the permission classifier blocks crontab edits — so this step is Ben's:
-  `crontab -e`, delete the line. It now points at a path that no longer exists, so it would fail
-  hourly and silently until it is gone.
-- `circuit_breaker.flag` is still set as a DELIBERATE PAUSE, not a trip. Once the crontab line is
-  gone the flag has no job to do; delete it then.
+- ~~**The crontab line `13 * * * * .../round_cron.sh` is still installed and must be removed.**~~
+  **Done.** Verified 2026-09-08 (#1940): `crontab -l` is empty, no systemd timer references the
+  project, and `round_cron.sh` is gone from the tree. Nothing schedules an extraction round; rounds
+  are hand-run, which is the design (see the ruling above and `ARCHITECTURE.md` section 6).
+- `circuit_breaker.flag` was a DELIBERATE PAUSE against that crontab line, not a trip. With the
+  line gone it has no job to do.
 - The cap is `batch_020`, so the next run does one round and stops. Raise it in Step 0 of
   `round_prompt_v1.md` for more.
 - The runner worktree was found parked on `itemtext/handoff-scheduling-state` on 2026-09-04, not

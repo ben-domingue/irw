@@ -17,6 +17,29 @@ This is a substitute for remembering. It answers one question -- "is anything
 downstream behind?" -- and writes the answer into ONE GitHub issue that it edits
 in place, so it is a page you glance at rather than a stream you learn to ignore.
 
+THE BODY IS A DASHBOARD; A COMMENT IS THE ALERT
+-----------------------------------------------
+Editing an issue body sends no notification. That is the price of one issue
+instead of a stream, and it means the body alone is something you must remember
+to look at -- the very habit this exists to replace. So a COMMENT (which does
+notify) is posted, but only when the set of STALE checks changes:
+
+    day 1  nothing stale                 silent
+    day 2  warehouse goes stale          COMMENT
+    day 3  still just the warehouse      silent
+    day 4  the site goes stale too       COMMENT
+    day 5  warehouse fixed, site stale    COMMENT
+    day 6  all clear                     COMMENT ("cleared")
+    day 7  still clear                   silent
+
+Nine simulated days produce four comments, not nine. A gap that stays open does
+not comment daily, and the thread never ends on a stale warning that has since
+been fixed.
+
+The state making "changes" meaningful lives in the thread itself, in a hidden
+marker on the last alert, rather than in a committed file: the comment and the
+memory of it cannot then drift apart, and deleting a comment cleanly resets it.
+
 WHAT IT DELIBERATELY DOES NOT DO
 --------------------------------
 It never blocks, gates or fails anything. Exit status is 0 unless the report
@@ -74,6 +97,18 @@ SITE_HERO_URL = "https://raw.githubusercontent.com/datapages/irw/main/data/hero_
 #: on an ordinary issue.
 ISSUE_LABEL = "drift-report"
 ISSUE_TITLE = "Downstream drift report"
+
+#: Editing an issue body sends NO notification -- that is the price of one issue
+#: instead of a stream. So the body is the dashboard and a COMMENT is the alert:
+#: a comment does notify, and one is posted only when the set of stale checks
+#: CHANGES. A gap that stays stale for a week is one comment, not seven; a new
+#: thing going stale is a new comment; recovery posts a short all-clear so the
+#: last word in the thread is never a stale warning that has since been fixed.
+#:
+#: The state that makes "changes" meaningful lives in the thread itself, in this
+#: marker, rather than in a file: the comment and the memory of it cannot then
+#: get out of step, and a human deleting a comment cleanly resets it.
+STALE_MARKER = "<!-- drift-report-stale:{keys} -->"
 
 #: status_page/README.md's classes, in days.
 AGING_AT = 3
@@ -394,8 +429,71 @@ def render(checks: list[Check], now: dt.datetime) -> str:
     return "\n".join(out)
 
 
-def post(body: str, repo: str) -> str:
-    """Create or update the one tracking issue. Returns a human-readable result.
+def stale_keys(checks: list[Check]) -> list[str]:
+    """The checks currently past the one-week line, as stable sorted keys."""
+    return sorted(c.key for c in checks if c.status == STALE)
+
+
+def last_notified(repo: str, number: int) -> list[str] | None:
+    """The stale set named by our most recent alert comment, or None if never.
+
+    Reads the marker, not the prose, so rewording an alert cannot silently
+    re-trigger it. Returns [] for an explicit all-clear, which is different from
+    None (nothing ever posted) and must stay different: a first run that is
+    already green should not announce a recovery that nobody saw break.
+    """
+    try:
+        comments = json.loads(run(["gh", "api",
+                                   f"repos/{repo}/issues/{number}/comments?per_page=100",
+                                   "--jq", "[.[] | {body}]"]))
+    except Exception:
+        return None
+    for c in reversed(comments):
+        body = c.get("body") or ""
+        i = body.find("<!-- drift-report-stale:")
+        if i == -1:
+            continue
+        keys = body[i:].split(":", 1)[1].split("-->")[0].strip()
+        return sorted(k for k in keys.split(",") if k)
+    return None
+
+
+def notify(checks: list[Check], repo: str, number: int) -> str | None:
+    """Comment iff the stale set changed. Returns what it did, or None."""
+    now_stale = stale_keys(checks)
+    was = last_notified(repo, number)
+    if was is not None and was == now_stale:
+        return None                      # same story as last time: stay quiet
+    if was is None and not now_stale:
+        return None                      # first run, nothing wrong: say nothing
+
+    marker = STALE_MARKER.format(keys=",".join(now_stale))
+    if now_stale:
+        named = {c.key: c for c in checks}
+        lines = [f"**{len(now_stale)} check(s) past the {STALE_AT}-day line.**", ""]
+        lines += [f"- **{named[k].title}** — {named[k].headline}" for k in now_stale]
+        lines += ["", "The report body above has the detail. This comment exists "
+                  "because editing that body notifies nobody; it is posted only when "
+                  "this set changes, so a gap that stays open does not comment daily.",
+                  "", marker]
+    else:
+        lines = ["**Cleared.** Everything downstream is back inside the "
+                 f"{STALE_AT}-day window.", "", marker]
+
+    tmp = Path(".drift_report_comment.md")
+    tmp.write_text("\n".join(lines))
+    try:
+        run(["gh", "issue", "comment", str(number), "--repo", repo, "--body-file", str(tmp)])
+    finally:
+        tmp.unlink(missing_ok=True)
+    return f"commented: {','.join(now_stale) or 'cleared'}"
+
+
+def post(body: str, repo: str) -> tuple[str, int | None]:
+    """Create or update the one tracking issue.
+
+    Returns (what it did, the issue number) -- the number so the caller can
+    decide whether to comment on it.
 
     There is no edit-in-place precedent in this repository -- every other job
     files a NEW issue per run (version-manifest.yml, metadata-pipeline.yml) --
@@ -424,14 +522,15 @@ def post(body: str, repo: str) -> str:
         if not found:
             url = run(["gh", "issue", "create", "--repo", repo, "--title", ISSUE_TITLE,
                        "--label", ISSUE_LABEL, "--body-file", str(tmp)]).strip()
-            return f"created {url}"
+            num = int(url.rstrip("/").rsplit("/", 1)[-1]) if url.rstrip("/").rsplit("/", 1)[-1].isdigit() else None
+            return f"created {url}", num
         if len(found) > 1:
             nums = ", ".join(f"#{i['number']}" for i in found)
             return (f"refusing to post: {len(found)} open issues carry the "
-                    f"`{ISSUE_LABEL}` label ({nums}). Close all but one.")
+                    f"`{ISSUE_LABEL}` label ({nums}). Close all but one.", None)
         num = found[0]["number"]
         run(["gh", "issue", "edit", str(num), "--repo", repo, "--body-file", str(tmp)])
-        return f"updated {repo}#{num}"
+        return f"updated {repo}#{num}", num
     finally:
         tmp.unlink(missing_ok=True)
 
@@ -466,7 +565,14 @@ def main(argv: list[str] | None = None) -> int:
         body = render(checks, now)
         print(body)
         if args.post:
-            print(f"\n-- {post(body, args.repo)}", file=sys.stderr)
+            result, number = post(body, args.repo)
+            print(f"\n-- {result}", file=sys.stderr)
+            # The body is the dashboard; a comment is the alert, because editing
+            # a body notifies nobody. Only fires when the stale set changes.
+            if number is not None:
+                said = notify(checks, args.repo, number)
+                if said:
+                    print(f"-- {said}", file=sys.stderr)
 
     if args.check and any(c.status == STALE for c in checks):
         return 1
