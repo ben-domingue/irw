@@ -11197,3 +11197,42 @@ pass scored `lhsbrasil`, `paampsmartsud` and `gilbert_meta_59` at 9 of 10 becaus
 confidence", "things were **not** going your way") and one carried an embedded newline. All four are
 in fact complete. **The count that decides "fragment or whole instrument" cannot come from a
 substring test alone** — the items have to be read.
+
+---
+
+## 2026-09-08 — `lindstrom2021_collective_narcissism`: rights checked, clear to release
+
+The #2107 rename left this table's wording resting on an `availability_audit_full.csv` row that
+cleared it because *"Conscientiousness is a standard HEXACO-PI-R subscale and the full HEXACO item
+pool is freely published/downloadable"* — a rights ruling about an instrument the table does not
+contain. That basis is void, so the check was redone against the real instrument.
+
+**The instrument is confirmed item by item.** `CN3`–`CN9` are items 3–9 of the Collective
+Narcissism Scale (Golec de Zavala, Cichocka, Eidelson & Jayawickreme, 2009, *JPSP* 97(6):1074–1096).
+`CN4` *"Hammarby måste få den respekt vi förtjänar"* is item 4, *"I insist upon my group getting the
+respect that is due to it"*; `CN7R` is the scale's own reverse-scored item 7. The odd start at CN3
+is explained: items 1–2 were not administered.
+
+**No stated restriction is quotable from the originator**, which is the test the 2026-09-04 rule
+sets. The 2009 article carries only an APA article notice — which governs the article, not the
+instrument, the same distinction already applied to `pezzuti_2025_coolpeople_main_nfc`. There is no
+licence page, permission-required statement, distribution notice or watermark, and third-party
+measure repositories reproduce the items with no terms attached. The rule "fires on a stated
+restriction, not on an inference", and explicitly does not fire because a scale is copyrighted or
+is reproduced without an explicit grant.
+
+**One counter-argument was weighed and rejected, and it is the only real one.** Golec de Zavala's
+own 2023 book (Goldsmiths OA, 9781003296577) is **CC-BY-NC-ND 4.0**. That is Taylor & Francis's
+licence on a book published 13 years after the scale, not an instrument-distribution notice — the
+same reasoning by which an APA article notice does not restrict the instrument it prints. Recorded
+rather than buried, because under #1945's "err on the side of not having things" someone could read
+it the other way, and it is the one fact that would support doing so.
+
+**Also worth noting: IRW does not ship the English original here at all.** The wording is
+Lindström's Swedish Hammarby-referent adaptation, taken from her own CC BY 4.0 figshare deposit's
+`.sav` variable labels. So both the source-licence test and the originator test point the same way,
+and the `sv-maia2` precedent (a translation is a derivative of a *restricted* instrument) has
+nothing to bite on, because the original carries no quotable restriction.
+
+**Verdict: clear to release.** Recorded in the table's `provenance.csv` note so the basis is
+auditable, per the 2026-09-08 two-instrument ruling.
