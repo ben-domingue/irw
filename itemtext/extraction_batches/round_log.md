@@ -10928,3 +10928,82 @@ by the same day's MLQ/DJG rulings, `liu_2018_shyness` by #1945 on Cheek's non-pr
 zero-exposure claim independently re-verified.
 
 Cap is `batch_095`; not reached. 733 pending, next firing takes `batch_090`.
+
+## batch_090 — 2026-09-08T16:10:55 (round closed 2026-09-08)
+
+3 tables claimed, 3 dispatched (one agent per table, three-agent daytime setting).
+**written 3 / blocked 0 / failed 0 — yield 3/3 = 100%.** Circuit breaker not
+approached (0 failed against a >30% threshold).
+
+| table | basis | text_source | verification | gates |
+|---|---|---|---|---|
+| lunacortes_2019_social_value | paper_order | translated_substitute (study_supplied) | PARTIAL, routes 1+8 | PASS |
+| luo_2021_conational_ties | paper_explicit | study_materials | VERIFIED, route 9 | PASS |
+| luo_2021_ecr | data_labels | study_materials | VERIFIED, route 9 | PASS |
+
+Gates: normalize_nulls 1 of 3 normalized (luo_2021_conational_ties, 17 lines);
+audit_batch 3/3 PASS with **no WARNs at all**, so Step 5c had nothing to explain;
+verify_batch PASS=3; lint_verification 3 rows, 0 ERROR, 1 WARN (adjudicated below);
+irw-validate ok on all three, nothing to report; check_provenance no failure
+(the two outstanding items it reports — liu_2025_positive_cognition owing an
+issues-page line, and the six `mixed` review rows — are pre-existing debt from
+earlier rounds, untouched by this batch).
+
+**Two source clusters, no collisions.** lunacortes_2019_social_value came from the
+same PLOS article and the same image-only Table 1 as batch_089's
+lunacortes_2019_satisfaction, and its agent was handed that round's provenance as a
+head start; luo_2021_conational_ties and luo_2021_ecr came from a single PLOS S3
+`.sav` and were split across two agents with explicit do-not-touch instructions.
+Both `luo` agents read the shared deposit and neither wrote the other's files.
+
+**Step 5b — orchestrator re-checked every claim before it becomes public; all three
+reproduce exactly, nothing had to be corrected.** (a) lunacortes: recomputed from
+irw_fetch over 444 complete cases — alpha{social_val1+social_val2}=0.8219 against
+0.3447 / 0.4576 for the other pairs and 0.6835 for all three, corrected item-total
+0.5912 / 0.6643 / 0.2792, means 4.5563 / 4.6982 / 5.3829. The paper having DROPPED
+PSV3 from its CFA is what makes the published two-item alpha of 0.822 a usable
+fingerprint, and it pins social_val3; social_val1 vs social_val2 stays unpinned
+(published loadings 0.83/0.84 share an identical robust t), hence PARTIAL.
+(b) luo_2021_conational_ties: the four live distributions are 25/57/75/72,
+23/67/76/63, 24/71/61/73, 21/69/63/76, mutually distinct TRUE. The agent's
+supporting claim that item MEANS could not have separated the items was checked at
+full precision rather than taken on faith — item_01 and item_04 have identical resp
+sums (652 and 652, n=229 each), so both means are 2.84716157205240 exactly. That is
+the anh_2026-style claim that has been wrong before; here it is right.
+
+**LINT WARN adjudicated, not suppressed.** lint_verification flagged
+luo_2021_conational_ties as "VERIFIED but its evidence hedges". Kept at VERIFIED:
+the hedge is on a different axis from the status. Route 9 pins which MDSS question
+each item code is to 1 of 24 permutations — every item distinguished from every
+other, which is what VERIFIED asserts. What is unestablished is the truncated TAIL
+of each sentence, disclosed in the public_note. Reasoning recorded in notes.csv.
+
+**Notable — SPSS's 64-character variable-name cap as a text source.** Both luo
+tables carry their item wording in `.sav` COLUMN NAMES rather than variable labels,
+so the words are the study's but the spacing and punctuation are not: SPSS strips
+spaces, commas and hyphens. All four co-national names hit the 64-char cap and cut
+mid-word, so only 48–61 characters of each shipped sentence are the study's own text
+and the tails were completed from the same MDSS questions printed in Wei (2025),
+Front Psychol 16:1607241 — disclosed in the public_note. luo_2021_ecr has the same
+shape (one column truncated at "…asIcareabou", completed from the paper's own
+verbatim quote) but no public_note, correctly: restored punctuation is a disclosed
+transcription deviation, not a text-vs-table mismatch, and so sits below the
+issues-page bar.
+
+**Step 3b clean on all three.** luo_2021_ecr is the 12-item ECR **Short Form**
+(Wei, Russell, Mallinckrodt & Vogel 2007) on a 1–7 scale — not the 36-item ECR or
+the ECR-R — confirmed against the paper's Methods and against the other instruments
+in the same deposit (4-item/5-point tie batteries, a 10-item/5-point acculturation
+index), none of which fit. No rights block: no fee licence or no-redistribution
+clause is quotable for the ECR-S or for PERVAL, and the wording ships from CC BY 4.0
+deposits, so silence-is-permission applies. No PSS-family instrument appeared this
+round.
+
+**Dictionary/metadata follow-up carried over from batch_089** (still open, not acted
+on here): the dictionary Descriptions for `lunacortes_2019_isnbi` and
+`lunacortes_2019_isncc` say the full scale names are "not spelled out in the article
+text", but the article's Table 1 image does spell them out. Those two tables are
+still `pending` in the queue.
+
+Cap (batch_095) NOT reached — five rounds remain. 733 pending at the start of this
+round, 730 after.
