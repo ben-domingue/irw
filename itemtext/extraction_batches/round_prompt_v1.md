@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_050 already exists (round cap reached)
+- itemtables/batch_070 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -59,6 +59,10 @@ the next round, and the wrapper will decline to start one for the same reason.
   handling separately). Never re-mark an excluded row as pending.
 - Immediately rewrite queue_state.csv marking exactly those tables status="in_progress",
   batch="batch_<NNN>", timestamp=<now ISO 8601>, BEFORE dispatching, so nothing is double-claimed.
+  **Write this file through a temp file and os.replace(), never open(path,"w") directly.**
+  A batch_058 update opened it for writing and then raised, truncating the whole queue to 0
+  bytes; it was recoverable only because the claim was not yet committed. The same bug after
+  a commit loses the queue outright.
 
 ## Step 2 — Dispatch extraction (parallel subagents)
 
