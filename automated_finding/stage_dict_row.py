@@ -35,6 +35,7 @@ Usage: pass one row as JSON on stdin, e.g.:
 import csv
 import json
 import os
+import re
 import sys
 from pathlib import Path
 
@@ -57,6 +58,11 @@ STAGING_PATH = Path(os.environ.get("IRW_DICT_AUTO_PATH")
 ##`DOI (for data)` has no counterpart in the sheet: it is the #1690 split, and
 ##it lives only here and in the merged export. See DICT_AUTO_ONLY_COLS in
 ##metadata/dict_union.R.
+##Kept identical to DICT_NAME_RE in metadata/dict_union.R -- see the comment
+##there for why the pattern is this wide (307 non-lowercase names, and some rows
+##still carry a trailing ".csv").
+NAME_OK_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{1,80}$")
+
 COLUMNS = [
     "table", "table.lower", "Description", "URL (for data)", "Reference",
     "DOI (for paper)", "DOI (for data)", "Original License",
@@ -114,6 +120,18 @@ def main():
 
     if not row["table"]:
         sys.exit("payload needs a non-empty 'table'")
+    ##A `table` cell that is not a table name is a wrong-column paste, and
+    ##nothing downstream notices: dict_key() in dict_union.R is tolower(trimws())
+    ##and will happily key a row on a sentence. One such cell reached biblio.csv
+    ##on main and asserted a licence and a DOI for a table that does not exist
+    ##(#2079). This writer is interactive, so a bad name here is always a
+    ##mistake -- fail loudly rather than report. Mirrored by DICT_NAME_RE in
+    ##metadata/dict_union.R, which reports instead, because the sheet is a human
+    ##surface and a pipeline run must not stop on it.
+    if not NAME_OK_RE.match(row["table"]):
+        sys.exit(f"'table' is not a table name: {row['table']!r}. Expected "
+                 f"{NAME_OK_RE.pattern} -- a citation or description belongs in "
+                 f"'reference' or 'description', not here.")
 
     ##`DOI (for paper)` acquired 83 cells wrapped in a resolver URL, prefixed
     ##`data doi: `, or carrying a journal supplement suffix before anyone

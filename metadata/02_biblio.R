@@ -182,8 +182,13 @@ getrows<-function(l) {
     ## fills a cell the human left blank. See dict_union.R for why this differs
     ## from 03_tags.R, which supersedes whole rows and strands 19-76 tables per
     ## column (#1863). Sources with no automated file configured are unaffected.
+    ## Before anything reads it: a `table` cell that is not a table name is a
+    ## wrong-column paste, and every consumer below keys on it (#2079). Reject
+    ## it here, in both the sheet export and the automated file, and report.
+    irw_dict <- drop_unshaped_dict_rows(irw_dict, name, "dictionary")
     if (!is.null(l$file.auto)) {
         auto <- read_dict_auto(l$file.auto, name)
+        auto <- drop_unshaped_dict_rows(auto, name, "automated dictionary")
         auto <- drop_dead_dict_rows(auto, l$file.live, name,
                                     pending.file = l$file.pending)
         u <- union_dict(irw_dict, auto, name)
@@ -242,6 +247,10 @@ getrows<-function(l) {
     biblio<-biblio[!test,]
     ##no csv
     biblio$table<-gsub(".csv","",fixed=TRUE,biblio$table)
+    ## The other door. biblio is read back from Redivis at the top of every run,
+    ## so a non-name row that got in before this gate existed outlives the fix
+    ## unless it is taken out here (#2079).
+    biblio <- drop_unshaped_dict_rows(biblio, name, "biblio")
     ## Refresh the five dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
     ## does not have; without this a correction typed into the sheet for an
