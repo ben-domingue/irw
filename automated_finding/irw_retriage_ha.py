@@ -295,6 +295,62 @@ FLAG_ORDER = [
 ]
 
 
+def chain_step2b(triage_csv, *, run=True, stream=None):
+    """Run Step 2b over `triage_csv`'s human_assistance rows, or say it wasn't.
+
+    Step 2b was retitled REQUIRED on 2026-09-07 (#2076), which also gave
+    irw_batch_updated.py a --retriage flag to chain it in-process. That fix
+    reached exactly one of the four triage entry points: the three scheduled
+    connectors (irw_discover_plos_monthly.py, irw_discover_pmc_monthly.py,
+    irw_discover_monthly.py) import irw_triage_updated directly and never
+    touch irw_batch_updated, so the step stayed unreachable for precisely the
+    unattended runs it was written for -- the 2026-09-08 PLOS weekly run
+    committed 13 unclassified human_assistance rows nineteen hours after
+    #2076 merged. Sharing one implementation is what keeps the next entry
+    point from missing it too.
+
+    Returns the retriage output path, or None if there was nothing to do.
+    """
+    import os, subprocess, sys
+    stream = stream or sys.stderr
+    try:
+        df = pd.read_csv(triage_csv)
+    except Exception as exc:                    # a triage CSV we can't read is
+        print(f"\n!! Step 2b skipped: cannot read {triage_csv} ({exc})",
+              file=stream, flush=True)          # the caller's problem, not ours
+        return None
+    if "flag" not in df.columns:
+        return None
+    n_ha = int((df["flag"] == "human_assistance").sum())
+    if not n_ha:
+        return None
+
+    out = os.path.splitext(str(triage_csv))[0] + ".retriage_ha.csv"
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "irw_retriage_ha.py")
+    cmd = [sys.executable, script, "--input", str(triage_csv), "--output", out]
+    if not run:
+        print(f"\n!! {n_ha} human_assistance row(s) are NOT yet sub-classified.",
+              file=stream)
+        print("   Step 2b is required before anyone reads this triage: without "
+              "it\n   there is no refined_flag column, so the not_item_response "
+              "rows\n   can't be dropped and the human_review rows can't be "
+              "archived.", file=stream)
+        print(f"   Run:  {' '.join(cmd)}", file=stream, flush=True)
+        return None
+
+    print(f"\n[step 2b] retriaging {n_ha} human_assistance row(s) -> {out}",
+          flush=True)
+    rc = subprocess.call(cmd)
+    if rc != 0:
+        print(f"\n!! Step 2b FAILED (exit {rc}). The triage at {triage_csv} is "
+              f"complete but its\n   human_assistance rows are still "
+              f"unclassified -- rerun the command above\n   before treating "
+              f"this run as done.", file=stream, flush=True)
+        raise SystemExit(rc)
+    return out
+
+
 def main():
     import argparse, os, sys
     ap = argparse.ArgumentParser(description=__doc__)
