@@ -10911,21 +10911,41 @@ acted on.** Ben has ruled the PSS blocks and five tables were withdrawn on it (5
 carrying canonical Cohen PSS wording**: `lhsbrasil_couto_2023_pss`, `oxfordcovid_xue_2024_pss`,
 `kfcovid_pss_li2020`, `paampsmartsud_saba_2023_pss`, `mhscdc_fried_2020_ps`, `eammi_grahe_2018_stress`,
 `ecps_sahm_2024_stress` and `gilbert_meta_59` — the last reproducing the full canonical instruction
-paragraph as well as the items. **One false positive:** `alkouri_2025_icu_stressors` says "Perceived
+paragraph as well as the items. **CORRECTED 2026-09-08 — my per-table counts below were a lower bound.** I reported item hits from a
+spot check of three items per table; an exhaustive substring match of all ten canonical Cohen items
+against distinct `item_text` in the live shard gives: `mhscdc_fried_2020_ps`, `eammi_grahe_2018_stress`
+and `ecps_sahm_2024_stress` carry **all 10**; `lhsbrasil_couto_2023_pss`, `paampsmartsud_saba_2023_pss`
+and `gilbert_meta_59` carry **9 of 10**; `oxfordcovid_xue_2024_pss` is 4 of its 4 items; and
+`kfcovid_pss_li2020` is 1. **Six of the eight are near-complete reproductions of the PSS-10, not
+scattered items.** The design lesson for the register below: a count from a name match or a spot check
+is a lower bound, and the sweep has to be exhaustive per item. **Ben has since ruled: withdraw all
+eight.**
+
+**One false positive:** `alkouri_2025_icu_stressors` says "Perceived
 Stress Scale (PSS)" but is Sheu et al. (1997), a nursing-placement stressor scale ("Cannot get along
 with other peers in the group"). Also note `metadata/itemtext_metadata.csv` still lists the
 already-withdrawn bakker/beck/cormier, because withdrawal takes effect only at the next release — so
 its 12 PSS rows are 8 unwithdrawn, 3 pending release, 1 false positive.
 
-**The durable question is not about the PSS.** A ruling was made and applied five times, and eight
-more instances sat undiscovered until a name-adjacent table happened into a round. That is presumably
-true of every blocked instrument. Worth deciding whether a block should trigger a standing corpus
-sweep instead of table-by-table discovery.
+**The durable question is not about the PSS, and Ben has now answered it: build the register.** A
+ruling was made and applied five times, and eight more instances sat undiscovered until a
+name-adjacent table happened into a round. **Ruled 2026-09-08:** a tracked file of instruments ruled
+blocking, each carrying its quoted clause, swept against item text corpus-wide. No such data exists
+today — #1945 left rulings as prose in `itemtext_standard.md` plus two withdrawal scripts with
+hard-coded table lists, which is exactly why the PSS kept resurfacing one round at a time.
 
-**Handoff §B is closed** (the "itemtext problems sequel" session): all three holds/blocks stand and
-none needed Ben, each being settled by a ruling already made — `liu_2025_mlq` and `loneliness_mudfold`
-by the same day's MLQ/DJG rulings, `liu_2018_shyness` by #1945 on Cheek's non-profit clause, with the
-zero-exposure claim independently re-verified.
+**Handoff §B is closed** — write-up from the "itemtext problems sequel" session, folded in here as
+agreed rather than appended separately:
+
+> **§B resolved — all three holds/blocks confirmed, none needed a new ruling.** `liu_2025_mlq` and
+> `loneliness_mudfold` fall directly to the 2026-09-08 A1/A2 rulings. `liu_2018_shyness` was checked
+> on its own facts: Cheek's "may be used in non-profit educational research without further explicit
+> permission", with other use directed to the author, conditions permission and is a stated use
+> restriction under #1945 — the hexaco.org shape. All three have `uploaded` empty, so nothing ships
+> and nothing needs withdrawing; each stays one upload away if a ruling ever reverses. Zero corpus
+> exposure confirmed independently for the RCBS (no shyness/Cheek/RCBS hit in
+> `metadata/itemtext_metadata.csv` or the queue); MLQ exposure was `cognitive_load_klimova_2023_mlq`,
+> now withdrawn.
 
 Cap is `batch_095`; not reached. 733 pending, next firing takes `batch_090`.
 
@@ -11068,3 +11088,56 @@ their scale names are "not spelled out in the article text", but Table 1's image
 Both tables are still queued.
 
 Cap is `batch_095`; not reached. 730 pending, next firing takes `batch_091`.
+
+### batch_091 — killed TWICE, salvaged: 1 shipped, 1 blocked, 1 returned to pending — 2026-09-08
+
+**Two kills in a row, so under the standing rule the loop STOPS here.** Not a retry, not a third
+attempt. `batch_092` was not fired and the queue is left clean for a human.
+
+**First kill was pre-dispatch and cost nothing** — 3 rows claimed, empty batch directory, restored
+with `git checkout` on `queue_state.csv`. **The second kill landed mid-round and was salvageable**,
+which is why this entry exists at all rather than a reconcile note.
+
+| table | state on disk when killed | reconciled to |
+|---|---|---|
+| `ma2021_sme_covid` | `__items.csv` (196 rows) + provenance + verification + verify script | **done, shipped** |
+| `luu_2024_stai6` | notes + provenance sidecars, `pending_index_notes` row, no CSV | **blocked** |
+| `ly_2021_animal_empathy` | a `verify_*.R` and nothing else | **pending**, byte-for-byte |
+
+Salvage followed the batch_016 rule: sidecars merged **by explicit filename, never a glob**, by byte
+concatenation rather than a csv round-trip so each row kept its own quoting. `normalize_nulls` had
+not run and was run (0 of 1 changed); `verification_merged.csv` had not reached
+`mapping_verification.csv` and was appended (1 row added, 0 existing rows touched). Gates then ran
+clean: `audit_batch` 1/1 PASS, `verify_batch` PASS, `lint_verification` clean, `irw-validate` ok.
+`ma2021_sme_covid` uploaded, `red_up` 1/1 row-count verified, stamped and audited. **The `ly` verify
+script was an orphan** — no items CSV, no provenance, nothing to attach it to — so it was moved out
+of the batch directory rather than left to be mistaken for evidence or deleted outright.
+
+`ma2021_sme_covid` owes no issues-page entry: `data_labels` + `study_materials`, administered Chinese
+in `item_text` with study-supplied English in all 28 `item_text_translated`, endpoints-only option
+labels. The kill meant no `notes.csv` row was written for it, so that was spot-checked directly
+rather than assumed.
+
+**`luu_2024_stai6` is the cleanest rights block of the session and it exposes a live problem the
+block does not fix.** Mind Garden's own licence page (md5 recorded, fetched 2026-09-08) both prices
+the STAI at **$2.75 per administration** — *"Compensate Mind Garden, Inc. for each administration"* —
+and states *"The instrument may not be made available via the open web."* Both 2026-09-04 triggers
+fire and #1945 obviously; the CC BY deposit does not override it.
+
+**But the six item stems are already published verbatim as the response table's own item codes.**
+Verified live: `luu_2024_stai6`'s `item` values are "I am tense", "I feel calm", "I feel upset",
+"I am worried", "I feel content", "I am relaxed" — the canonical Marteau & Bekker STAI-6, in a table
+whose rights holder says it may not be on the open web. **Withholding the item text achieves nothing
+here.** This is the second instance of the shape flagged for `holden_2026_bsri` (#2101, where the
+item codes are the 20 BSRI adjectives), so it is a class rather than a one-off: **a rights block on
+item text is defeated whenever the item codes carry the wording.** Filed separately; every prior
+rights withdrawal removed wording from `irw_text` and left response data alone, and that remedy does
+not reach either table.
+
+**On the kills themselves.** The machine got materially busier during the session: available memory
+fell 15.4G → 11.6G, Ben's Emacs/ESS R session grew 4.9G → 5.5G, and Zoom started. Round size stayed
+at 3 — it is Ben's daytime setting and not a thing to change unattended, and the evidence says the
+constraint was the machine, not the setting.
+
+Cap `batch_095` was not reached and 730 tables remain pending; the stop is the memory rule, not the
+cap. **Next firing takes `batch_092`, once the machine is quieter.**
