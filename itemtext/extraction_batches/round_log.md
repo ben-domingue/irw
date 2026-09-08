@@ -8473,3 +8473,59 @@ table, not an orphan to delete.
 launch-time OOM pattern of batch_038/040, and not a reason to stop on its own. The standing rule
 is that TWO consecutive kills means stop firing; the next round is the test of whether this was
 one-off.
+
+## batch_069 — 2026-09-08
+
+3 tables (daytime 3-agent setting, one agent per table). **written 3 / blocked 0 / failed 0 — yield 100%.**
+
+| table | rows | mapping_basis | verification | status |
+|---|---|---|---|---|
+| lee_2024_panas | 100 (20x5) | reconstructed | routes 5+1, PARTIAL | done |
+| lee_2025_nursing_exam | 100 (50x2) | paper_explicit | explicit numeric labels + route 1, VERIFIED | done |
+| leon_guereno_2020_breq | 115 (23x5) | paper_explicit | route 3, PARTIAL | done |
+
+Gates: normalize_nulls fixed 1 file (lee_2025_nursing_exam, 100 lines); audit_batch 3/3 PASS
+with no anomalies (no WARNs to explain at Step 5c); verify_batch PASS=3; lint_verification
+clean (3 rows, no problems — no data_labels tables this round, so no NOT_NEEDED rows were
+owed in either file); irw-validate ok on all three; check_provenance no failure.
+
+**Notable — item order is not canonical PANAS.** `lee_2024_panas` uses the Korean PANAS of
+Park & Lee (2016), whose adjective order differs from Watson et al. (1988) at 14 of 20
+positions. A default canonical-order extraction would have shipped 14 items mislabelled.
+Live data settles it: under K-PANAS order, mean within-valence r = 0.400 vs between −0.007
+(gap 0.407, 20/20 items with their own block); under canonical order, 0.200 / 0.170 (gap
+0.030). This is the strongest argument yet for Step 3b's instrument-mismatch check on any
+translated standard instrument — the English name of the scale does not fix its item order.
+
+**Step 5b orchestrator re-checks — both agent findings CONFIRMED**, per the "a finding is a
+lead" rule:
+- Re-derived the PANAS correlation match independently. Identity ‖P−L‖² = 1.8949; an
+  exhaustive sweep of all 190 single transpositions found exactly one at or below identity,
+  13↔20 (scared/afraid, 1.8645). 18/20 published items take the identity as argmax; the two
+  that do not (C8 0.881 vs PANAS9 0.930; C14 0.666 vs PANAS12 0.674) yield no improving swap.
+  The agent's PARTIAL scoping is exactly right.
+- Read `leon_guereno_2020_breq`'s s001.sav directly to check the anchor override. Of 49
+  columns exactly one carries a variable label — the SPSS-generated `filter_$` — so no ITEM
+  carries one and data_labels was genuinely unavailable (the agent's "all 49 are None" is off
+  by that non-item column only). The value labels are internally incoherent: BREQ1 reads 1
+  "Strongly disagree" … 3 **"Sometimes"** … 5 "Totally agree". That hybrid midpoint is itself
+  evidence the labels are a loose retrofit over the BREQ's real "sometimes true for me"
+  anchoring, so the override toward the printed instrument is supported, not merely asserted.
+
+**Two source-document defects worth recording.** (1) León-Guereño et al. (2020) states "each
+regulation style has 4 items"; identified regulation has 3 (BREQ3/9/17). Independently
+falsified, not just read off the paper — the deposit's precomputed identified-regulation mean
+reproduces from the live items at max|diff| = 0.00e+00 only as a 3-item average. (2) The same
+paper's stated BREQ anchors contradict its own deposit's value labels (see above).
+
+`lee_2025_nursing_exam` ships IRW-produced English in the `_translated` columns
+(`translation_source=machine_translation`) and an issues-page line is owed **at upload**;
+check_provenance already lists it among the 8 outstanding. `lee_2024_panas` is
+`translation_source=mixed` and lands in that script's REVIEW bucket, but nothing is owed: its
+`_translated` columns are empty and the English base text was copied from published sources
+(the deposit publishes zero Hangul), same call as `estevezlopez_2016_panas`.
+
+One deliberate full export (lee_2024_panas, 10,540 rows) — no server-side route exists for a
+correlation matrix. Others used `--table-sets`.
+
+Cap: batch_070 not reached; next round proceeds. 793 pending.
