@@ -9794,3 +9794,58 @@ the draft pending that check.
 This is the second wrong row found in `availability_audit_full.csv` (KTEEM was the first), and
 unlike KTEEM this one is not a citation error but a ruling made against the wrong instrument
 entirely. The file was left unedited, per the convention set for KTEEM.
+
+### batch_081 triaged — 3 shipped, 0 held — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs, `verify_batch`
+2 PASS + 1 correct exempt, `lint_verification` clean, `irw-validate` nothing to report,
+`check_provenance` exit 0. All three uploaded to `datapages.irw_text_2:next` (`red_up` 3/3
+row-count verified), four-check pre-flight clean, stamped and independently audited. Disclosure
+went onto the **existing** open PR datapages/irw#165 rather than a second one — two open PRs on
+that page always collide — taking it to 380 entries.
+
+**Both fragreading tables ship the actual Chinese wording respondents read**, which is a better
+outcome than the batch_080 tables and is why `text_source=study_materials` is right for them. `frq`
+even carries the study's own Chinese instruction line. No language caveat is owed for either; the
+entries they got are about mapping and composition instead.
+
+**The `data_labels` claim on `liu_2022_mice_skills` checked out, but only after my own first check
+was wrong.** The cached `s001.xlsx` opens as a zip containing nothing but theme parts, which reads
+as a truncated download — and on that basis I nearly recorded the source_ref as unevidenced, since
+the 16 skill strings are hard-coded in the agent's `build.R` rather than parsed from the file.
+The file is actually a legacy OLE2 `.xls` from WPS (PLOS serves it as `application/vnd.ms-excel`);
+`zipfile` had found an embedded OOXML theme fragment inside the compound document and listed that.
+Read properly with `xlrd`, header row 1 is `No` followed by exactly the 16 skill labels in English
+(cols 1–16) then four covariates, and **0 of its 96×21 cells contain CJK**, as does the article
+text. So `data_labels`, the source_ref and the disclosure all reproduce. Worth remembering: a
+container that opens as a zip is not thereby the format its extension claims, and `file(1)` settles
+it in one call.
+
+**Corrected the round's account of the cdq correlation gap — the same class of error as batch_079's
+SSRS ranges, a sound conclusion carried on numbers that had not been recomputed.** The round
+explained the published −0.78 vs observed −0.584 depth correlation by saying the paper's Table 2
+figures are "latent composite scores, not item means". That does not survive its own evidence:
+breadth vs attentional fragmentation reproduces *essentially exactly* from item means (+0.463
+observed against +0.46 published), which a latent-composite table would not do. Correcting for
+unreliability goes the other way — it fixes depth (−0.730 against −0.78) and breaks breadth (+0.579
+against +0.46; alphas 0.749 / 0.750 / 0.855) — so no single account explains both.
+
+What Table 2 actually does is fail on its **descriptives**, uniformly: every published SD is 2.0–3.8×
+smaller than observed while the means agree to within 0.3 — breadth 3.37/0.29 vs 3.53/0.70, depth
+3.01/0.35 vs 2.72/0.73, attentional fragmentation 3.09/0.18 vs 3.30/0.69. An SD of 0.18 for the
+arithmetic mean of ten 1–5 items with alpha 0.78 is not attainable under any scoring, and Table 2's
+own note says "M, arithmetic mean". **That is a property of the paper, not of this table.**
+
+**The mapping is untouched by any of it, which is the point worth keeping.** I tested the
+alternatives before rewriting the note: adding 9.10/9.11 unreversed gives −0.477, reversing all of
+9.6–9.11 gives −0.550, and 9.10/9.11 alone give +0.095 — none beats the shipped definition's −0.584.
+The polarity block and the sign still pin the anchor direction, nothing distinguishes items within a
+class, and PARTIAL remains correct. `notes.csv` was rewritten to say this and the old explanation is
+named as superseded rather than silently dropped.
+
+Rights: nothing to escalate. All three instruments are the studies' own — the fragmented-reading
+questionnaire is published in the CC BY PeerJ supplement, and the MICE employability battery is the
+authors' own (Liu, Seevers & Lin, 2022) in a CC BY PLOS deposit. No originator page and no third-
+party instrument is involved.
+
+Cap is `batch_095`; not reached. 757 pending, next firing takes `batch_082`.
