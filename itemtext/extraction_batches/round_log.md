@@ -7826,3 +7826,86 @@ carries the official Korean AMS form with the AMS's own English in `_translated`
 `kim_2023_gad7` falls back to phqscreeners.com English for a Korean administration
 (`translated_substitute`), also flagging that the paper describes a two-month recall window while
 the shipped instruction is the instrument's "Over the last 2 weeks". Cap (batch_070) not reached.
+
+---
+
+## batch_062 — 2026-09-07
+
+**6 tables claimed, 6 resolved: 4 written / 2 blocked / 0 failed.** Yield 4/6 = 67%. Circuit
+breaker NOT tripped (0% failed, threshold 30%) — and correctly so: both no-CSV tables are
+determinate rights verdicts, not pipeline faults, and both scored the retry test **NO**.
+
+Tables: `kim_2023_phq9` (done), `kim_2023_pss10` (blocked), `kim_2025_isi` (done),
+`kim_2025_psas` (done), `kim_2025_psqi` (blocked), `kiraly_2024_perinatal_mh_freq` (done).
+
+**Gates — all clean.** `normalize_nulls.R` 0 of 4 normalized; `audit_batch.R` PASS=3 WARN=1;
+`verify_batch.R` PASS=4, every verify script ending `VERDICT: PASS`; `lint_verification.R` 5 rows,
+no problems; `irw-validate` ok on all four (2 checks each, nothing to report);
+`check_provenance.R` no failure over 604 rows in 64 files.
+
+**Both blocks are the same shape: a CC BY response deposit wrapping a rights-held instrument.**
+This is now the dominant block mode in this stretch of the queue and it is worth naming — the
+*data* licence is open and verifiable, and it says nothing about whether the *instrument wording*
+may be redistributed.
+- `kim_2023_pss10` — PSS-10, CMU Laboratory for the Study of Stress, Immunity and Disease. Agent
+  re-fetched and re-hashed the rights holder's own FAQ, md5 `f2eeb376bfab9aa86ae8ae5c7719ec9c`,
+  byte-identical to the copy batches 047 and 059 hashed. Applies irw#1945, irw#1955 and the
+  2026-09-07 PSS-family extension.
+- `kim_2025_psqi` — PSQI, University of Pittsburgh: free reprint for non-commercial research only,
+  no modification without written permission, and an operating paid request process for commercial
+  use. The TIMSS-2003 shape in `itemtext_standard.md`; direct precedent `hellstrom_2019_psqi`
+  (batch_044, earlier today). The PSQI agent correctly noted its ruling does NOT reach its two
+  `kim_2025_*` siblings — ISI and PSAS are separate instruments with separate rights, and both
+  shipped.
+
+Both blocked tables have rows in `itemtables/pending_index_notes.csv` stating what would have to
+change.
+
+**Step 5b — orchestrator re-checked the round's own claims; all three confirmed.**
+1. `kiraly_2024_perinatal_mh_freq` per-item n, re-derived independently via `item_stats.R`:
+   15,15,81,96,96,14,80,96,81,95,94,15,81,96,96,81 — matches the agent's claimed vector exactly.
+2. `kim_2023_pss10`'s banked mapping anomaly, re-run from its own verify script: code→column
+   identity exact (|mean_src − mean_live| = 0.0e+00 on all 10 items), storage raw (source `PSS_T`
+   equals the unreversed sum for 202/202 vs 31/202 reversed), and the polarity blocks are indeed
+   {1,2,3,9,10} / {4,5,6,7,8} against the canonical split {4,5,7,8}. **Confirmed: `PSS_6` sits with
+   the positively-worded block, so the trailing digit is not safely the canonical PSS-10 item
+   number.** Banked on the pending-index row — if the PSS ruling is ever reversed, canonical
+   wording must not be pasted on by number until this is settled.
+3. `kim_2025_psas`'s claim that all 16 published Table 3 means/SDs/item-total correlations
+   reproduce was re-run by the orchestrator's own `verify_batch.R` pass: PASS.
+
+**Step 5c — the one audit WARN, explained and appended to notes.csv.**
+`kiraly_2024_perinatal_mh_freq` row-count anomaly (median 81). **A property of the response data,
+not an itemtext defect, and specifically not the item-code conflation the WARN text guesses at.**
+The study ran two Qualtrics forms and the IRW table pools them, so the per-item n above falls into
+three clean strata: 4 obstetrician-only items at n=14–15, 5 pediatrician/NP-only at n=80–81, and 7
+asked on both at n=94–96. The four items the WARN names are just the ones furthest from the median
+of a legitimately trimodal distribution. Not filed as an issue.
+
+**Notable.**
+- `check_provenance.R` flags `kim_2025_isi` under its `translation_source=mixed` REVIEW list (not a
+  failure). Reviewed: nothing is owed on the issues page. Both components came from published
+  sources — option anchors are the deposit's own English value labels, stems are Lenderking et al.
+  2024 (CC BY 4.0) Table 4. No part was written by this project. The 7 tables it reports as
+  IRW-generated-with-no-issues-page-entry (`hua_*`, `huang_2023_d_scale`, `jeon_2019_cbi`,
+  `jiang_*`) are pre-existing and untouched by this round.
+- `kim_2025_isi` carries a real data caveat worth a reviewer's eye: live `resp` runs **1–5, not the
+  ISI's published 0–4** — the deposit coded every anchor from 1, so a raw sum is inflated by 7
+  against the 0–28 total and its clinical cutoffs. Its item 4 anchors are also a non-standard
+  "completely unaware … fully aware" rendering whose 2nd/3rd options look out of order in the
+  deposit; transcribed as-is rather than silently reordered.
+- Three Korean administrations shipped English under `translated_substitute` with zero Hangul
+  anywhere on-source (both agents checked article XML and every workbook sheet):
+  `kim_2023_phq9`, `kim_2025_isi`, `kim_2025_psas`. `kim_2023_phq9` additionally flags that the
+  paper describes a two-month recall window while the shipped instrument instruction is "Over the
+  last 2 weeks".
+- `kim_2025_isi` deliberately declined Cho et al. 2014, the Korean ISI validation, as CC BY-**NC**,
+  per the ECR-R ruling — the correct call, and worth noting the agent reached for the source
+  language first and rejected it on licence rather than on absence.
+- Verification: 3 VERIFIED (`kim_2025_isi`, `kim_2025_psas`, `kiraly_2024_perinatal_mh_freq`),
+  1 PARTIAL (`kim_2023_phq9` — marker items pin PHQ9_9 and PHQ9_4 and the two-factor blocks
+  separate, but PHQ9_3 vs PHQ9_5 and the four cognitive items are not separated and PHQ9_1 is
+  unpinned; the agent explicitly avoided the PHQ9_8↔gad5 link because batch_061 inferred gad5's
+  identity *from* PHQ9_8, which would be circular). Honest PARTIAL, correctly reasoned.
+
+Cap (batch_070) not reached.
