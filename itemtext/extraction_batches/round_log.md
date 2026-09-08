@@ -9325,3 +9325,41 @@ could not be used", but Table 8 does publish per-item mean/SD for the extrinsic 
 could probably be lifted to VERIFIED by the same route. Nothing in batch_076 was touched.
 
 Cap (batch_080) not reached; 769 pending.
+
+### batch_077 triaged — 1 shipped, 2 HELD as duplicates — 2026-09-08
+
+Gates re-run live on all three: `normalize_nulls` 0 of 3, `audit_batch` 3 PASS with no anomalies,
+`verify_batch` PASS=3, `lint_verification` clean. **Only `liang_2026_intrinsic_motivation` was
+uploaded** (`red_up` 1/1 row-count verified, stamped, audited). The two `liang2026_*` files stay in
+the batch directory with their sidecars.
+
+**Ben's ruling, 2026-09-08: keep `liang_2026_*`, retire `liang2026_*`** — see irw#2106. All four
+tables are two duplicate pairs, which the round confirmed by computation rather than by name: after
+normalising item codes, the 45x5 response matrices have **0 disagreeing cells** in both pairs, with
+identical id sets and covariates. They differ only in code spelling (`EM1..EM5` vs `em_1..em_5`).
+
+**A reversal worth recording, because it caught two agents and then me.** The retirement case
+originally rested partly on `liang_2026_*` having the better data URL. That was backwards, and the
+round's Step 5b caught it before it was filed:
+
+| URL | cited by | API result |
+|---|---|---|
+| `figshare.com/articles/dataset/31837640` | `liang2026_*` | **HTTP 200** — the paper's own S2 Data, doi `...pone.0345759.s002`, authors Xilin Liang / Zenan Wang |
+| `plos.figshare.com/.../26047004` | `liang_2026_*` | **HTTP 404 EntityNotFound** |
+
+**The trap: figshare returns an empty HTTP 202 for a page fetch, and the KNOWN-GOOD url returns
+exactly the same thing.** A fetch-and-eyeball comparison cannot separate a live record from a dead
+one; only the API can. Same shape as [[irw-fetch-blocker-pages]], and it will recur in
+`automated_finding` licence checks. Two agents concluded the opposite, the orchestrator corrected
+them in place, and the triager then reproduced the same error independently before checking the API.
+
+So **each pair holds the other's good field**: `liang2026_*` has the correct URL and a wrong
+reference string ("Liang, W. et al."); `liang_2026_*` has the correct reference and a dead URL. The
+decision stands on the two surviving reasons — `liang_2026_*` is the only pair with a processing
+script, so the only one with reproducible provenance, and its citation names the right authors.
+**But `liang_2026_*`'s `URL__for_data_` must be corrected to `31837640` as part of the retirement**,
+or the surviving pair is left pointing at a 404.
+
+**A lead not acted on:** batch_076's `liang_2026_extrinsic_motivation` is recorded PARTIAL because
+route 1 was thought unusable, but Table 8 does publish per-item mean/SD for the extrinsic block and
+they are mutually distinct — it could likely be lifted to VERIFIED. Nothing in batch_076 was touched.
