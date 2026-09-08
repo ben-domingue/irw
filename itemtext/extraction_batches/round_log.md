@@ -8882,3 +8882,72 @@ extraction that the source does not support.
 **One benign detail recorded so it is not re-derived as a defect later:** `corporate_performance`'s
 resp minimum of 2 comes from a single item, `Perfo419`. Isolated to one item, but 2 is an in-range
 point on a legitimate 1-7 scale, so it is an ordinary response and not a data-entry error.
+
+---
+
+## batch_073 — 2026-09-08
+
+**3 tables claimed, 3 written, 0 blocked, 0 failed. Yield 3/3 (100%).** Circuit breaker not tripped
+(0% failed). Queue after: 781 pending, 459 done, 93 blocked, 13 failed, 55 excluded.
+
+| table | mapping_basis | verification | audit |
+|---|---|---|---|
+| `li_2025_marketing_exploitation` | paper_order | **VERIFIED** (route 1) | PASS |
+| `li_2025_marketing_exploration` | paper_order | **VERIFIED** (route 1) | PASS |
+| `li_2025_marketing_learning` | paper_order | **VERIFIED** (route 1) | PASS |
+
+All six gates clean: `normalize_nulls` (1 of 3 files rewritten — `learning`, 26 lines, quoting/NA
+canonicalisation only), `audit_batch` **3 PASS with no anomalies and no WARNs** (so Step 5c had
+nothing to explain), `verify_batch` **PASS=3**, `lint_verification` 3 rows no problems,
+`irw-validate` ok on all three, `check_provenance` clean for this batch (its two standing
+complaints — `hua_2023_efl_study_engagement` and the six `translation_source=mixed` tables — are
+pre-existing and unrelated).
+
+**Three more of the eight-table `li_2025_*` PLOS family (e0326329, CC BY 4.0), continuing
+batch_072.** Everything batch_072 recorded about this deposit held on re-check, and passing it
+forward in the dispatch prompts is what made a 3/3 round cheap: the item wording is image-only
+(`.t001`), the `.sav` carries no variable labels but does carry value labels, and the
+prose-vs-`.sav` anchor disagreement is real. Remaining siblings for later rounds:
+`li_2025_marketing_operation`, `li_2025_policy_environment`.
+
+**All three verified to the stronger standard, not PARTIAL.** batch_072's blocks had repeated or
+near-tied published loadings, so two of them could only reach PARTIAL. These three do not: the
+shipped ordering beats the best rival by 31x (exploitation, 0.0005 vs 0.0145), 6.9x (exploration,
+0.00068 vs 0.00468) and 4.3x (learning, 0.0005 vs 0.0021). The `learning` agent did the most
+careful version of the argument — it measured a reproduction noise floor across all 45 printed
+loadings (all <=0.00068) and showed the block's thinnest published gap (0.002, MLear28 vs MLear29)
+sits 2.9x above it, so the closest swap is *excluded* rather than merely disfavoured.
+
+**`Eplor12` resolved.** batch_072 flagged it as the single item of 45 whose refit missed the printed
+loading at 3dp (0.729 vs 0.730). It is rounding, not a mapping error: the refit gives 0.72930, a
+0.0007 miss inside the rounding half-width plus estimation noise, and the swap it would imply fits
+6.9x worse. Nothing to carry forward.
+
+**Step 5b — every claim that overrides a source or goes public was re-checked against the `.sav`
+directly, and all of them confirmed exactly.** Variable labels 51/51 `None`. Both typos are real and
+are the *only* two in the file's entire label vocabulary — `Very consisten` (6) and `Eompletely
+consistent` (7); corrected, disclosed, and no uncorrected form ships. The anchor disagreement is
+verbatim in the article ("All items were measured using a 7-point Likert scale ranging from 1
+'strongly disagree' to 7 'strongly agree'") against the `.sav`'s "Extremely inconsistent" ...
+"Completely consistent"; the `.sav` labels ship per batch_072 precedent, same direction, disclosed
+in `public_note`. Zero CJK. Live resp sets confirmed per block: exploitation 3-7, learning 3-7,
+exploration **2-7 where level 2 occurs exactly once, on `Eplor12` alone** — the agent's claim was
+precise and correct. All three blocks attach an identical label set to all five columns, which is
+why `exploration` ships option rows for 2-7 on every item.
+
+**Open, cosmetic, flagged for triage — the `_translated` columns.** The three tables disagree:
+`learning` declares all four as NA, the other two omit them. All are `translated_substitute` +
+`language=Chinese`, and every gate passes either way. `itemtext_standard.md` (lines 43-57) read
+literally favours the declared form — omission is prescribed only for an *English* administration,
+the fallback says the fields "stay empty", and the backfill query is
+`language != '' AND item_text_translated == ''` (irw#1807). batch_072 was internally inconsistent on
+the identical point (`corporate_performance` "emitted empty" vs `marketing_culture` "omitted"), so
+this predates this round. **Deliberately left as written rather than normalised:** no shipped
+`__items.csv` survives on disk to establish the live corpus convention, and guessing wrong would
+introduce a corpus-wide divergence rather than fix one. Recorded on all three `notes.csv` rows. One
+form should be chosen and applied to batches 072 and 073 together at upload.
+
+**Standing caveat, unchanged:** `item_text` on all three is OCR-by-eye from a PNG and deserves a
+human spot-check, as with the batch_072 siblings.
+
+Cap is `batch_080`; not reached.
