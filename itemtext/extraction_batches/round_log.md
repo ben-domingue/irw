@@ -10644,3 +10644,46 @@ batch_088 tables use `translation_source=official_instrument_english`, so none o
 Carried forward for triage, not a batch_088 failure.
 
 Cap is `batch_095`; not reached. 736 pending, next firing takes `batch_089`.
+
+---
+
+## 2026-09-08 — §7 verification debt: the `liem_2024_*` NEP reverse-coding question, settled
+
+The open question was *"either the anti-NEP items were reverse-scored before deposit or
+respondents did not differentiate them."* **It is the first**, and the source paper never says so.
+Filed as irw#2118; disclosure added to `liem_2024_attitude_env`'s `public_note` here.
+
+`liem_2024_attitude_env` is Dunlap et al.'s (2000) revised NEP, whose odd items are pro-ecological
+and even items anti-ecological — and the shipped item text follows that alternation exactly
+(`ATE12` *"Humans were designed to dominate the remainder of nature"*). Yet every item behaves the
+same in the data: 105/105 inter-item correlations positive (+0.348 to +0.863), no item-total
+correlation below **+0.67**, means all 3.48–3.71, alpha 0.949. Raw agreement with mutually
+contradictory statements cannot look like that.
+
+**Careless responding was the competing explanation and it was tested, not assumed.** Flagging
+straightlining, runs of ≥8 identical answers, and strictly 2- or 4-periodic patterns removes 77 of
+234 respondents. Among the remaining 157 the anti-ecological items still correlate **+0.648** with
+the total and the pro/anti halves correlate **+0.852**. That is where the sign would flip if the
+values were raw. It does not.
+
+**The paper confirms it without admitting it.** Its Table 2 reports alpha 0.949 — exactly what the
+IRW copy gives — with positive outer loadings on all fifteen items including every anti-NEP one
+(ATE2 0.788, ATE4 0.791, ATE12 0.791). A one-factor solution with uniformly positive loadings
+across contradictory statements is only obtainable from reverse-scored data. The word "reverse"
+appears nowhere in the article. `data/liem_2024_env_stewardship.py` does no recoding, so the
+reversal is the deposit's.
+
+**Remedy: disclose, do not recode** — IRW's rule is that response direction is not harmonised.
+The window was open: `liem_2024_attitude_env__items` is still in the `irw_text_2` draft and has
+never been published, so the note ships with the wording rather than correcting it later. Its
+existing `public_note` covered the language and image-transcription caveats and said nothing about
+direction. **An issues-page entry is owed before that release.**
+
+**The other six `liem_2024_*` tables are clean**, which is what the debt item asked to check:
+unidimensional agreement scales with no reverse-keyed items, zero negative inter-item correlations
+and minimum item-total correlations between +0.50 and +0.78. Nothing owed on those.
+
+Noted, not acted on: the deposit's careless-responding rate is high — 10 straightliners, 25
+strictly 4-periodic patterns, 62 with a run of ≥8 identical consecutive answers, 77 of 234 flagged
+by at least one heuristic. That is the deposit's property, and these are heuristics rather than a
+validated screen, but it is worth knowing before modelling this table.
