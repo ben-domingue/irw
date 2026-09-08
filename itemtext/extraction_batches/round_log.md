@@ -7369,3 +7369,85 @@ this from the same paper without contact is good corroboration for the label-bas
 IRW-generated English with no issues-page entry (`hua_2023_efl_course_experience`,
 `hua_2023_efl_study_engagement`, `huang_2023_d_scale`) and 6 `translation_source=mixed`
 tables to review. Carried forward.
+
+---
+
+## batch_056 — 2026-09-07
+
+**6 tables claimed, 5 written / 1 blocked / 0 failed. Yield 5/6 = 83%.**
+Circuit breaker NOT tripped (0 failed; the single no-CSV table is a determinate
+block, retry test NO).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `jeilani_2024_self_efficacy` | pass w/ caveat | reconstructed | PARTIAL (labels + resp-frequency) |
+| `jeilani_2024_social_support` | **blocked** | unknown | n/a |
+| `jeon_2019_cbi` | pass w/ caveat | data_labels | VERIFIED (labels + subscale totals) |
+| `jeon_2019_cesd10` | pass w/ caveat | data_labels | NOT_NEEDED |
+| `jiang_2021_resilience` | clean pass | paper_explicit | VERIFIED (paper code labels + per-item means) |
+| `jiang_2024_growthm` | pass w/ caveat | data_labels | NOT_NEEDED |
+
+**Gates.** `normalize_nulls.R` fixed 2 files. `audit_batch.R` 5/5 **PASS, zero WARNs**
+(so Step 5c had nothing to explain). `verify_batch.R` 3 PASS + 2 MISSING(exempt).
+`lint_verification.R` 0 ERROR, 1 WARN. `irw-validate` clean on all five.
+No full-table export was spent this round — every agent used `table_sets.R`.
+
+The lint WARN (`jiang_2021_resilience` VERIFIED with a "does not establish" clause) was
+reviewed and the status left as VERIFIED: the hedge applies to the *secondary* route
+(published per-item means, which cannot separate C4–C8 at 4.15–4.19), while the primary
+route is the Step 5b exemption — Table 4 prints every item beside its own live code
+`C1..C17`, distinguishing all 17. Recorded in `notes.csv`.
+
+**Step 5b orchestrator re-checks — five agent claims re-derived independently, all five
+CONFIRMED**, numbers in `notes.csv`:
+
+1. *`jeon_2019_cbi` BT_W_4 stored reverse-scored* (overrides that variable's own value
+   labels and drives the inverted `option_text` shipped for it). Recoding all 19 columns
+   by their label strings as the processing script does, over N=464: PB 38.59/18.52,
+   WRB 33.94/17.81, CRB 34.88/18.36 — every published figure to the decimal. Reversing
+   BT_W_4 first gives WRB 36.12/16.43, unreported. Item-rest r +0.189 as stored, −0.189
+   reversed; paper reports +0.16/+0.19.
+2. *`jeon_2019_cesd10` direction.* Raw total 6.06/4.39; with cesd5+cesd8 reversed
+   7.80/3.82 — the published pair exactly. The paper reversed those two for its total
+   only; the live table stores raw ascending frequency, so the anchors apply as printed
+   to all ten items.
+3. *`jeilani_2024_self_efficacy` dropped items — a LIVE DATA DEFECT, not an itemtext
+   defect.* The `.xlsx` holds seven SEF columns; `SEF6_001` and `SEF9_001` each have
+   n=663 using all five levels, i.e. ordinary administered items, not aggregates. The
+   processing script's `_0\d{2}` drop rule silently removes two real items from the
+   response table. Worth its own GitHub issue.
+4. *`jeilani_2024_social_support` block is determinate.* SS1/SS4 appear nowhere in the
+   `.sav`; its 24 labelled variables are Gender, Age, University, Year, AS1/3/4/5/6/10,
+   PWB1–6, SO1–4, SEF1/6/8/9. The two items the live table serves are exactly the ones
+   the deposit never captions.
+5. *`jiang_2024_growthm` instrument mismatch* (bound for a public note, so checked before
+   filing). Paper §2.2.5 verbatim: Mesler et al. (2021), "It includes four items,
+   including 'My intelligence is something that I can't change very much'". The `.sav`
+   carries **five** labelled GrowthM columns, all positively-worded growth statements,
+   and that fixed-mindset sentence is in none of them. Nothing force-fitted. All five
+   shipped stems equal their label verbatim once the block number `10、` is stripped.
+
+**Owed on upload (not a gate failure).** `check_provenance.R` exits 1. Two of this
+round's tables ship IRW-generated English and owe an `itemtext_issues.qmd` line when
+uploaded — `jeon_2019_cbi` and `jiang_2024_growthm`; both have a `public_note` in
+`provenance.csv`. Both are still `uploaded=""`.
+
+**Pre-existing and now overdue, carried forward.** The same check names three older
+tables, and two of them are ALREADY UPLOADED (`hua_2023_efl_course_experience` and
+`huang_2023_d_scale`, both `uploaded=2026-09-07`, batch_047) while still having no
+issues-page entry — i.e. live IRW-generated English with no public disclosure, which the
+2026-09-02 ruling requires. `hua_2023_efl_study_engagement` is not yet uploaded. Plus the
+6 `translation_source=mixed` tables to review.
+
+**Sibling lead worth acting on.** The `jiang_2024_growthm` agent found that the earlier
+availability audit's claim that this PLOS deposit's SPSS file "has no item text" is
+FALSE — the `.sav` labels every item block (`ThrEngageL`, `PTSAcc`, `InstituInteg`,
+`CIStudSI`, …). The queued siblings `jiang_2024_instituinteg` and `jiang_2024_ptsacc`,
+and the other `jiang_2024_*` tables marked UNAVAILABLE on that basis, are extractable the
+same way. No file was touched for them.
+
+**Also flagged:** `jeon_2019_cbi`'s Korean was transcribed by eye from a scanned GIF
+(no machine-readable Korean exists in the deposit) — worth a human spot-check on
+orthography before upload.
+
+Cap is `batch_060`; not reached. Next round takes `batch_057`.
