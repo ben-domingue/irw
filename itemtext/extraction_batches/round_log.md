@@ -9363,3 +9363,25 @@ or the surviving pair is left pointing at a 404.
 **A lead not acted on:** batch_076's `liang_2026_extrinsic_motivation` is recorded PARTIAL because
 route 1 was thought unusable, but Table 8 does publish per-item mean/SD for the extrinsic block and
 they are mutually distinct — it could likely be lifted to VERIFIED. Nothing in batch_076 was touched.
+
+## batch_078 — 2026-09-08
+
+3 tables claimed, 3 agents (one per table, daytime setting). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not tripped; queue left with no `in_progress` rows.
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| `liem_2024_attitude_env` | 75 (15×5) | paper_explicit | VERIFIED (route 9), `verify_*.R` PASS |
+| `lindstrom2021_conscientiousness` | 49 (7×7) | data_labels | NOT_NEEDED (self-describing codes) |
+| `lindstrom2021_honesty_humility` | 70 (10×7) | data_labels | NOT_NEEDED (self-describing codes) |
+
+Gates: `normalize_nulls` 0/3 changed · `audit_batch` 3/3 **PASS, zero WARN** · `verify_batch` 1 PASS + 2 MISSING(exempt) · `lint_verification` 3 rows, no problems · `irw-validate` ok on all three · `check_provenance` clean for this batch (its one outstanding flag, `hua_2023_efl_study_engagement`, and the 11 `translation_source=mixed` review rows are pre-existing and unrelated). No full-table Redivis export was spent — all three agents used `table_sets.R` server-side aggregates only.
+
+**INSTRUMENT MISMATCH (Step 3b) — `lindstrom2021_conscientiousness` is misnamed, and this needs a GitHub issue.** Its items are not conscientiousness; CN3–CN9 are the study's 7-item **Collective Narcissism** scale adapted to Hammarby Football Club (Golec de Zavala et al., 2009). Both `lindstrom2021_*` agents reached this independently, and the orchestrator confirmed it directly against the deposit codebook (Step 5b): row 23 of `CodeBook_soccersupporterdata.csv` heads the block `Collective narcissism;Scale (7 items);CN3`, and the items read "Hammarby måste få den respekt vi fortjänar", "Folk förstår inte Hammarbys storhet". The study administered **no** conscientiousness scale — its HEXACO block is Honesty-Humility only. `data/lindstrom2021_soccer.py` maps the key `conscientiousness` to CN3–CN9, evidently reading the `CN` prefix as Conscientiousness, and the table name plus the dictionary Description inherit the error. Item text was extracted against what the data actually is, so the shipped `instrument` field names the Collective Narcissism Scale. **Recommend renaming the response table (e.g. `lindstrom2021_collective_narcissism`) and correcting the Description.**
+
+**RIGHTS DECISION NEEDING BEN'S EYE — `lindstrom2021_honesty_humility` shipped despite the HEXACO family block.** batch_026 escalated `lindstrom2021_*` as a class behind the clause that blocks `de_vries_2022_hexaco_*`. The agent shipped anyway under the ECR-R source-licence ruling: the Swedish wording is published by the study's own CC BY 4.0 figshare deposit (`.sav` variable labels + codebook), which is precisely what the de_vries note says that case lacked ("no CC BY publication of the wording to fall back on"), and hexaco.org's clause (re-fetched 2026-09-08, verbatim "free of charge, but only for the purpose of non-profit academic research") is non-commercial only with no redistribution bar, so the DSES/WHOQOL override does not fire. The reasoning is sound but the call is Ben's: **if the HEXACO family is blocked as a class regardless of source licence, withdraw this table at triage.**
+
+**Data observation, `liem_2024_*` (response data, not item text) — orchestrator re-checked and the agent's numbers reproduce exactly.** In S1 Data, 25 of 234 respondents give a strictly 4-periodic response pattern across ATE1..ATE15 (`r[i] == r[i mod 4]`), and the same 4-cycle runs across all seven scales in those rows. All 105 ATE inter-item correlations are positive (0.348–0.863, standardized α = 0.950) despite the revised NEP's canonical pro/anti alternation — either the anti-NEP items were reverse-scored before deposit or respondents did not differentiate them. This touches all seven `liem_2024_*` tables and may deserve a corpus-level look.
+
+Smaller caveats carried into `notes.csv` for triage: PLOS serves liem's Table 2 **only as an image**, so its 15 sentences were transcribed by eye and are worth a human spot-check; liem's administration language is Vietnamese by inference (never stated) with English shipped as `translated_substitute`; and HH6 differs by one word between the two lindstrom level-1 sources (codebook `viktigt` vs `.sav` `viktig`, codebook form shipped).
+
+Cap is `batch_080`; 078 completed, so the cap is **not** reached and the next round proceeds normally.
