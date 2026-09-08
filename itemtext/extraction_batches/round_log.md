@@ -9701,3 +9701,44 @@ keeper's own item text (`liang_2026_intrinsic_motivation`, uploaded 2026-09-08) 
 `mapping_verification.csv` but left it in `itemtables/batch_028/verification_merged.csv`, where it
 still sits today — so that claim did outlive its table after all. Both files were cleaned here.
 Worth a sweep if any other retirement ever used that recipe.
+
+## batch_081 — 2026-09-08
+
+**3 tables claimed, 3 written, 0 blocked, 0 failed. Yield 3/3 (100%).**
+`liu_2022_fragreading_cdq` (55 rows), `liu_2022_fragreading_frq` (110), `liu_2022_mice_skills` (80).
+Three agents, one per table — the daytime setting Ben cut to on 2026-09-08. No kills, no rate
+limits, no memory trouble; the round ran ~6 minutes wall clock.
+
+**Gates all clean.** audit_batch 3/3 PASS with no anomalies (so no WARNs to explain at Step 5c);
+verify_batch PASS/PASS plus one MISSING(exempt) for the data_labels table; lint_verification 3 rows
+no problems; irw-validate ok on all three; check_provenance clean at 677 rows / 83 files with 0
+IRW-generated tables missing an issues-page entry. `normalize_nulls` rewrote blanks in the two
+fragreading files (the agents wrote R's `NA` token), which is the expected fix, not a defect.
+
+**Two tables, one source paper — no collision.** Both fragreading tables come from PeerJ
+10.7717/peerj.13861 (CC BY 4.0), and each agent was told by name which sibling belonged to the
+other. They converged independently on the same `N<question>_<sub-item>` reading of the deposit's
+columns — the useful kind of corroboration — while writing disjoint files.
+
+**Step 5b re-check changed nothing this round, but was not free.** Both verify scripts were re-run
+by the orchestrator and reproduced their claimed numbers exactly: cdq's within-reverse-block mean
+r +0.429 against +0.031 to the unstarred depth items, and the depth-vs-attentional correlation
+-0.584 reversed against +0.584 raw; frq's 22/22 response-count vectors matching the deposit .xls
+with all 22 pairwise distinct. The `data_labels` claim for mice_skills was checked directly rather
+than accepted: `data/liu_2022_mice_skills.py` renames only `id` and the covariates and melts the
+remaining headers by name, and `item == item_text` for 16/16 shipped items.
+
+**Worth carrying forward:** cdq is PARTIAL, correctly. The published between-scale correlation is
+-0.78 and the observed is -0.584 — same sign, different magnitude, because the paper's Table 2
+figures are latent composite scores rather than item means (its published breadth M=3.37/SD=0.29
+against an observed item-mean 3.53/0.70 shows the same gap). The sign flip is what carries the
+evidence, and it pins polarity class, subscale block and anchor direction but not item order within
+a class. Also recorded: cdq stores its reverse items 9.6-9.9 RAW, and frq ships text for all 22
+items even though the supplement marks 8.6/8.10 as CFA-deleted — the live table carries all 22.
+
+**mice_skills ships English for a Chinese administration** (`translated_substitute` /
+`study_supplied`): the questionnaire was administered in Chinese, no Chinese wording exists in the
+paper or the deposit, and the shipped English is the authors' own S1 header row plus their stated
+anchors. Disclosed in `public_note`. Only the end anchors are labelled; 2-4 left blank, not padded.
+
+Cap is batch_095 — not reached, next round proceeds.
