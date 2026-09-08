@@ -10259,3 +10259,73 @@ come from published sources, and it is not yet uploaded).
   aggregates and supplement files, `irw_fetch` was avoided where possible.
 
 Cap (batch_095) not reached; queue has 745 pending.
+
+### batch_085 — killed once, retried, then triaged: 2 shipped, 1 HELD on the MLQ — 2026-09-08
+
+**The first firing was killed ~36 seconds in, before dispatch wrote anything.** It had claimed its
+three rows and created an empty `itemtables/batch_085/`; no `__items.csv`, no sidecars, nothing to
+salvage. Reconciled by `git checkout` on `queue_state.csv` — which is the cheapest way to satisfy
+the byte-for-byte requirement, since the only diff was the claim itself — plus `rmdir` on the empty
+directory. Retried once, per the standing "two kills in a row means stop" rule, and the retry ran
+clean in 13 minutes.
+
+**On the cause, because "check what else is running" deserves a real answer this time.** The machine
+was *not* short at rest: 15G available, `si`/`so` both 0. What tripped the harness's background-task
+killer was **free** memory at ~419MB against ~16G of page cache — and that cache was largely filled
+by this session's own triage reads (`.sav`, `.xlsx`, live `irw_fetch` pulls). Also present and worth
+naming so nobody kills it: **PID 343584, an R session holding 4.9G**, parented alongside an Emacs
+buffer on `data/file4upload.R` — Ben's own interactive ESS session. It is *not* the change: it
+started 12:22, and batches 080–084 all ran around it. The lesson is that heavy triage in the same
+session as a round raises the kill risk, not that the round size is wrong.
+
+Gates re-run live on the retry: `normalize_nulls` 0 of 3, `audit_batch` 3/3 PASS with zero WARNs,
+`verify_batch` PASS=3, `lint_verification` 0 ERROR / 1 expected WARN (blank `option_text` on nlgz —
+no source publishes anchors), `irw-validate` ok, `check_provenance` exit 0. Two tables uploaded
+(`red_up` 2/2 row-count verified), stamped and audited; two entries added to PR datapages/irw#165
+(389 entries).
+
+**HELD: `liu_2025_mlq`. The agent's rights paragraph was not merely superseded — it was wrong on
+the facts.** It recorded that the MLQ is "distributed free by Steger's own site with no fee, no
+redistribution bar and no non-commercial clause locatable". michaelfsteger.com's own MLQ page states,
+re-fetched 2026-09-08: *"Commercial use requires prior written permission. Commercial use includes
+any activity in which revenue is generated directly from the use, distribution, or promotion of
+these instruments."* and *"The tools may not be sold, redistributed, or marketed as part of a paid
+product, service, or value-added offering without advance authorization."* The distribution packet
+adds that users should contact Steger before non-commercial use, and names the University of
+Minnesota as copyright holder. So a non-commercial clause **and** a redistribution clause are both
+quotable: this fails #1945, and it would have failed the older fee/redistribution test the agent
+believed it was applying. Shipping the administered Chinese is no way around it — a translation is a
+derivative of the restricted instrument. Nothing was uploaded, so it is held, not withdrawn.
+
+**FOR BEN — corpus exposure, which is a withdrawal decision on published data and therefore not
+mine.** Running the WHO-5 blind-spot search over `metadata/itemtext_metadata.csv` turned up
+`cognitive_load_klimova_2023_mlq`, **live in `irw_version` 358**, carrying nine canonical English MLQ
+items verbatim ("I understand my life's meaning.", "My life has no clear purpose.", …). Its own
+public note already says the wording is "the canonical English Meaning in Life Questionnaire (Steger
+et al. 2006)". It shipped from batch_021 on 2026-09-04, before the 2026-09-05 and 2026-09-08 rulings
+existed. Withdrawing a published table is outward-facing and Ben's call; it is flagged here and
+nothing was touched.
+
+**The other two hits in that search were false positives, and checking them item-by-item is what the
+memo says to do.** `sun_2025_morality_study1_meaning` and `_study2_meaning` are **not** MLQ: their
+items are "To what extent do you lead a purposeful and meaningful life?" / "…valuable and
+worthwhile?" / "…a sense of direction in your life?" under codes prefixed `tsperma*` — the
+PERMA-Profiler's Meaning subscale (Butler & Kern), not Steger's instrument. An instrument-name hit
+is a lead, never a verdict.
+
+**The round's three substantive claims were all confirmed and none had to be walked back** — the
+best record of the session. The mlq paper's §3.2.1 prose assigns the subscales wrongly and its own
+Table 2 composites reproduce only under Search {1,3,5,6} / Presence {2,4,7,8,9}; mlq `item_2` is
+stored already reverse-scored (r=+0.630 with the other Presence items, alpha 0.855 as stored,
+exactly the published figure, against 0.726 flipped); and the nlgz instrument-name correction is
+verbatim in the Dryad README. That work is preserved in the batch directory against the day the
+hold is released.
+
+**Two things carried forward.** (1) The permutation trap recurred for the third batch running —
+`learning_motivation`'s S2 Appendix prints its 16 items out of administered order. Expect it on the
+remaining `liu_*` entries. (2) `itemtext/availability_audit_full.csv` describes `liu_2025_nlgz` as
+the PARS-3 physical-activity scale; it is not, it is perceived competence, and the README assigns
+physical activity to the sibling prefix `YDCY`. Left untouched as a historical record, per the
+round's own judgement.
+
+Cap is `batch_095`; not reached. 745 pending, next firing takes `batch_086`.
