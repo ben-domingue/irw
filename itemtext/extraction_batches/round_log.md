@@ -8329,3 +8329,70 @@ response-data defects with no issue.
 **Also cleaned up here:** batch_065's six `__items.csv`, which the `origin/main` merge had
 restored — main still carried them from PR #2078 while this branch had deleted them post-upload.
 They are uploaded and stamped, so the files are removed again.
+
+## batch_067 — 2026-09-08
+
+6 tables claimed, 6 dispatched (one agent per table, all six in parallel).
+**Written 5 / blocked 1 / failed 0 — yield 5/6 = 83%.** Circuit breaker NOT tripped
+(0% failed; the one no-CSV table is a determinate `blocked`, which does not count).
+
+**Written:** `kraft_todd_2017_warmth` (20 rows), `kuczyk_2024_facemask_fba` (210),
+`kuczyk_2024_facemask_fbe` (135), `kuehner_2017_mw_rumination` (14),
+`kushnir2017_bfi` (220).
+
+**Blocked:** `KTEEM_Schoen_2019-2022` — retry test NO. Two independent grounds: the
+K-TEEM is permission-gated (Schoen Research / FSU "All rights reserved", inquiries to
+Robert Schoen, and assessment reports explicitly "redacted to maintain security of the
+items" — the irw#1945 HEXACO shape), and separately no source publishes wording for the
+2019–2022 forms at all. Row added to `itemtables/pending_index_notes.csv`.
+
+**Gates — all clean.** normalize_nulls fixed 2 of 5 files. audit_batch 4 PASS / 1 WARN.
+verify_batch 3 PASS, 2 MISSING(exempt) (both `data_labels`). lint_verification 5 rows,
+**0 ERROR**, 1 WARN. `irw-validate` ok on all five. `check_provenance.R` clean for this
+batch — all four `translated_substitute` rows carry `translation_source=study_supplied`
+(the authors' own English), so none of this round's tables is IRW-generated content and
+none owes an issues-page line.
+
+Adding the two `NOT_NEEDED` rows to **both** `verification_merged.csv` and the permanent
+tracker again produced a clean lint, as it did not in batch_020/021.
+
+**Step 5c — the one audit WARN is explained and is not a defect.**
+`kuehner_2017_mw_rumination`: 85.7% blank `option_text`, and RUM has no `option_text`
+rows while MW does. That is the source, not us — the paper labels only MW's two
+endpoints and publishes no anchors at all for RUM, and the never-pad rule leaves the
+rest blank. The response data are complete (both items n=1964 over the full resp set
+1–7).
+
+**Step 5b — four claims independently re-checked by the orchestrator, four confirmed.**
+- `kraft_todd_2017_warmth`: the "Does not apply" drop counts 85/13/33/12 are exact —
+  live per-item n is 1292/1364/1344/1365 and each plus its drop equals exactly 1377 for
+  all four items. Independently corroborates WARM1 as most-often-inapplicable, one of
+  the three legs pinning WARM1="Tolerant".
+- `kraft_todd_2017_warmth`: the S3 spreadsheet really does store columns out of numeric
+  order — header reads COMP1–5, WARM1, WARM2, **WARM4, WARM3**. The residual
+  WARM3/WARM4 ("Sincere" vs "Good natured") ambiguity is real, and PARTIAL is the right
+  status.
+- `kushnir2017_bfi`: the doubled-paren item code `((BFI_38) Makes plans and follows
+  through with them` is genuinely live; retained because `item` is the join key.
+- `KTEEM_Schoen_2019-2022`: Appendix A of ED603422 is page images — `pdftotext` yields
+  the code headings and one stray sentence fragment, no stems — *and* it is the 2016
+  form. The block stands on both grounds.
+
+**Lint WARN reviewed, status deliberately left VERIFIED.** `kushnir2017_bfi`'s evidence
+hedges, but only about `option_text` (1 of 44 items has tied level counts route 9 cannot
+separate). The item↔item_text mapping — what VERIFIED is defined over — is established
+for all 44 by Step 5b exemption 1: 44/44 self-describing source headers re-derive with
+0 mismatches.
+
+**Corpus issue found, worth a fix outside this round:** `availability_audit_full.csv`
+marks `KTEEM_Schoen_2019-2022` AVAILABLE on the claim that Appendix A wording was
+"confirmed via direct PDF text extraction". That is wrong twice over (images only, and
+the superseded 2016 form). Left unedited here and recorded in the pending-index note.
+
+**Noted for triage, flagged by no gate:** in `kuczyk_2024_facemask_fbe`, FBE_21 is
+observed at only 3 of 5 response levels and FBE_22 at 4, so the option rows shipped for
+their unused top levels describe options nobody selected. Correct as shipped — the
+table-level resp set is 1–5 and the `.sav` value labels define all five.
+
+No systemic access issues; no rate limit or spend cap hit; no Step 3b instrument
+mismatch. Cap (batch_070) not reached.
