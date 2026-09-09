@@ -12758,3 +12758,23 @@ items. An agent recommends a `verdict=ship` register row for the SES/SESQ family
 — **not written**, left for a human, since siblings were in flight.
 
 Cap not reached (`batch_140`); 653 pending remain.
+
+## batch_107 — 2026-09-09 16:52
+
+4 tables, 4 agents (four per round, Ben's 2026-09-09 setting). **written 4 / blocked 0 / failed 0 — yield 4/4 (100%).** No kill, no retry, no rate limit; all four agents ran to completion in ~7-8 min.
+
+- `mhscdc_fried_2020_ema` — 90 rows (18 items x 5). OSF osf.io/mvdpe (CC BY), `Codebook_EMA.xlsx` + `Measures_EMA.pdf`. mapping_basis=paper_explicit, VERIFIED (90/90 cells of the per-item x per-level count table reproduce; all 18 count vectors pairwise distinct).
+- `mhscdc_fried_2020_se` — 40 rows (10 items x 4). Same deposit, baseline GSE (Schwarzer & Jerusalem 1995). paper_explicit, VERIFIED.
+- `mindfulness_assessment` — 195 rows (39 items x 5). Opaque name resolved to the **KIMS** (Baer/Smith/Allen 2004) as run by the Open-Source Psychometrics Project; codebook keys Q1..Q39 to wording. data_labels, VERIFIED (39/39 items reproduce n, mean and all five level counts exactly; count vectors duplicate-free).
+- `mistry_2022_hardship` — 16 rows (8 items x 2). PLOS ONE 10.1371/journal.pone.0277247 S1 `.dta` labels + QAICPOA Table 1. data_labels, NOT_NEEDED.
+
+Gates: normalize_nulls fixed 2 files; audit_batch **4/4 PASS, no anomalies** (so nothing for Step 5c); verify_batch 3 PASS + 1 MISSING(exempt, data_labels); lint_verification 0 ERROR; `irw-validate` clean on all four; `check_provenance.R` exit 0 (its flagged rows are pre-existing tables, none from this batch).
+
+**Step 5b — orchestrator re-checks, two of which changed the record:**
+
+1. **CORRECTED a note.** `mistry_2022_hardship` claimed three items' truncated Stata labels "match QAICPOA character-for-character up to the 80-char cap". The substitution is sound — the surviving wording is an exact prefix of QAICPOA Q12/Q13/Q14 in all three cases — but the match is **50/45/50 characters, not 80**: the 80-char cap applies to the RAW label, which includes Stata's `RECODE of qNN_x (` wrapper. Fixed in both notes.csv and provenance.csv. Also confirmed 5 of 8 labels sit at exactly 80 chars, and that `memory` / `difficulty_earning` genuinely ship cut off mid-word ("...during last mont", "...obtaining the e") with nothing invented — disclosed in public_note.
+2. **CONFIRMED a public_note.** `mhscdc_fried_2020_ema`'s two-ladder warning is exact: Q1-Q10 are "Not at all".."Extremely", Q11-Q18 are "0 min"..."> 2 hours", a clean 10/8 split, both scored 1-5, so `resp` alone does not signal the switch.
+3. **CONFIRMED a metadata defect, independently.** `mhscdc_fried_2020_se`'s dictionary Description reads "EMA Self-Efficacy Scale", but these are baseline items (codes `Pre46`..`Pre55`). Corroborated from metadata's own shape rather than the agent's reasoning: the table is 800 rows / 80 persons / 10 items = exactly one observation per person-item, a single administration, whereas the sibling `_ema` is 78,696 rows over 79 persons with repeated measures. Suggested Description: "Baseline General Self-Efficacy Scale". **Not fixed here — a metadata change is out of this round's scope.**
+4. **Reviewed the lint WARN, kept VERIFIED.** `mhscdc_fried_2020_se` is flagged because its evidence contains "does not establish". Retained as VERIFIED: the hedge limits only the corroborating distributional route (which alone separates just Pre46/Pre54), while the per-item tie rests on the codebook labelling each Q number separately — a Step 5b exemption route that does distinguish every item. Phrase match, not a defect; reasoning recorded in notes.csv so it is not re-derived next time.
+
+Cap (batch_140) not reached.
