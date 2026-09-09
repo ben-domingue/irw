@@ -11513,3 +11513,49 @@ Recorded, not acted on: two source defects that touch no shipped table — the P
 its own Table 6 twice.
 
 Cap is `batch_110`; not reached. 719 pending, next firing takes `batch_094`.
+
+## batch_094 — 2026-09-08
+
+6 tables claimed, six agents, one per table (the 2026-09-08 six-agent setting).
+**Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.** Circuit breaker not tripped (0% failed).
+
+- **done:** `makransky_2016_mcq_correct` (10 items × 0/1, 20 rows),
+  `makransky_2016_self_efficacy` (8 × 5, 40), `malik_2018_individual_motivation` (22 × 5, 110),
+  `malik_2018_organizational_motivation` (36 × 5, 180), `malik_2018_social_motivation` (14 × 5, 70).
+- **blocked:** `makransky_2016_motivation` — instrument rights, not access. The 5 items are the
+  IMI Interest/Enjoyment subscale; the CSDT Limited Use License reserves NC + no-redistribution +
+  no-online-publication, the DSES/WHOQOL shape. Extraction was fully solved first (S1 .sav variable
+  labels carry all five stems), so a reversal is a transcription, not a restart. Retry test NO.
+  New `instrument_rights_register.csv` row: *Intrinsic Motivation Inventory (IMI)*, family SDT/CSDT,
+  verdict `block`; register re-parses at 25 rows.
+
+Both source papers are PLOS ONE CC BY 4.0 with SPSS S1 Data whose variable+value labels carry the
+wording, so five of six tables are `mapping_basis=data_labels`.
+
+**Gates.** normalize_nulls fixed 2 files. audit_batch: first run threw one ERROR on
+`malik_2018_social_motivation` — a Redivis readStream connection failure, transient, not a data
+problem; a clean re-run gave **5 PASS, 0 WARN, 0 ERROR**. verify_batch: 1 PASS + 4 MISSING(exempt).
+lint_verification: 0 ERROR, 1 WARN. irw-validate: all 5 ok. check_provenance: no failures, and none
+of its outstanding review items are from this batch.
+
+**Step 5b re-checks (all three confirmed against source, none overturned):**
+1. `makransky_2016_mcq_correct` MCQ7 answer-key mismatch — CONFIRMED both halves. The deposited data
+   score option 3 "a carbon source" correct (60/60 pre, 56/56 post, zero exceptions), while S1
+   Table's docx marks option 2 "the differential agent" bold+italic as the key. Published key ships
+   in `correct_response`; the disagreement is a `public_note` and is genuine issues-page material.
+2. `malik_2018_social_motivation` SC3/CS4 — CONFIRMED. Live `social_3` = 52/65/76/121/42 matches
+   `CS4` exactly and not `SC3` (64/44/48/146/54). The processing script's comment "SC3 is stored as
+   CS4" is wrong — the .sav holds both as separate columns — so the script silently drops SC3 and
+   the IRW table has 14 of the paper's 15 items. **Downstream defect confirmed:** `metadata/biblio.csv`
+   Description still says "15-item Social/co-worker…". Response-data + dictionary defect, not itemtext.
+3. lint's WARN on that table's VERIFIED status — reviewed, left VERIFIED. The hedge is about the
+   .sav's value-label orientation, not item discrimination; the route matches 14/14 with 14 mutually
+   distinct count vectors, which is what VERIFIED requires.
+
+**Open for Ben — scope of the new CSDT block.** The CSDT Limited Use License covers the whole
+selfdeterminationtheory.org library, so the register row as written also reaches BPNS/BPNSFS,
+Aspirations Index, SRQ, PLOC and GCOS. `baka2023_bpnsf` is a BPNSFS table already extracted
+(batch_007) and already **uploaded 2026-08-18**. This round did not touch it and takes no view on
+whether the CSDT terms actually reach the separately-distributed BPNSFS — that is a human ruling.
+
+Cap is batch_110; not reached.
