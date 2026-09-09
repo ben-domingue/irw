@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_095 already exists (round cap reached)
+- itemtables/batch_110 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -53,7 +53,7 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -69,7 +69,23 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**THREE agents per round, cut from six on 2026-09-08 by Ben.** The original twelve sat under the API
+**SIX agents per round — raised from three on 2026-09-08 by Ben, "as i won't be working as much".**
+This is the idle-machine setting the cut below anticipated, not a reversal of its reasoning. It goes
+back to three the moment the laptop is in active use again; that is Ben's call, not a round's.
+
+Why it is safe now, in the terms the cut demanded: the binding constraint was measured, and it
+changed. Across batches 080-092 the machine ran with an interactive Emacs/ESS R session holding
+4.9-5.5G, and `batch_091` was killed twice in a row at three agents with available memory down to
+11.6G and free memory near 400MB. That R session then ended and available rose to 17.4G with 6.6G
+free — the best of the session — and `batch_092` ran clean at three. **Six is authorised against
+that 17G baseline, not against the 11G one.** If a round is killed at six, do not retry at six:
+drop to three, which is the setting known to survive the worse case.
+
+The rest of this section is the history that produced the three-agent setting. It is kept because
+its reasoning is still the reasoning — the constraint is the dispatch SPIKE, and N agents means N
+`claude` processes plus their R and Python children appearing within seconds.
+
+**Previously THREE agents per round, cut from six on 2026-09-08 by Ben.** The original twelve sat under the API
 concurrency cap, but not under this laptop's memory: the batch_033 round was killed by the OS
 partway through dispatch, and the batch_032 round before it was killed the same way after writing
 four of its twelve tables, costing seven tables of extraction work. The binding constraint is RAM
