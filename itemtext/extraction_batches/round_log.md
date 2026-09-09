@@ -12316,3 +12316,34 @@ generally: `ia_satisfaction` cannot split REL_2/_3, HBODY_2/_4/_5, SOCIAL_2/_5 o
 2.89, where a swap would be undetectable — nor 1/2/3 or 5/7.
 
 Cap is `batch_110`; not reached. 666 pending, next firing takes `batch_102`.
+
+### batch_102 — killed MID-ROUND at two agents: 1 shipped, 1 quarantined — LOOP STOPPED — 2026-09-08
+
+**Two agents was killed too, mid-round, with 20.4G available. That is the condition this prompt says
+means the agent count is not the variable — so the loop stops here rather than being walked down to
+one.** The record for the evening is now: six ran 3 clean rounds then failed twice; three failed on
+its only attempt; two ran 3 clean rounds then failed. **Every size tried has both worked and failed,
+and every failure happened with 19-20G free.** Whatever the harness is thresholding on, it is not
+this machine's memory and it is not the size of one dispatch.
+
+**Salvaged, not discarded.** `meloni_2015_deq_ce_parent` was complete — `__items.csv`, notes,
+provenance, verification sidecar and verify script all written — so it was merged (explicit filenames,
+never a glob), gated (`audit_batch` PASS, `verify_batch` PASS, `lint_verification` clean,
+`irw-validate` ok), uploaded, stamped and audited. Its entry is on datapages/irw#172 (429 entries).
+
+**`meloni_2015_deq_oe_child` had a 324-row `__items.csv` but NO provenance row, so it was
+quarantined rather than promoted** — `itemtext/quarantine/batch_102/` — and returned to `pending`.
+That is the protocol's own rule and it is worth restating because the file looked complete: 36 items,
+no blank `item_text`, properly terminated. **A well-formed CSV with no provenance is still an orphan**,
+because nothing records where its wording came from or whether the mapping was ever checked.
+
+**Two salvage steps the killed round never reached, both of which fail silently if missed:**
+the verification row had not been merged into `mapping_verification.csv` (appended and stamped by
+hand; the tracker would otherwise have had a shipped table with no row, which `lint_verification`
+only catches inside a batch), and `clear_uploaded_itemtables.py` aborted on `git rm` because
+`batch_102` is untracked, leaving the uploaded CSV in place — removed by hand. **A salvage is not
+finished when the gates pass.**
+
+**Where this leaves the queue:** clean. 0 `in_progress`, tree clean, nothing half-written, 665
+pending, cap `batch_110` not reached. The next firing takes `batch_103` and is a human's call, not a
+retry.
