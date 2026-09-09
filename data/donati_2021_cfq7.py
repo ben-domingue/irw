@@ -28,12 +28,51 @@ UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}
 
 ITEM_COLS = [f"CFQ{i}" for i in range(1, 8)]
 
+# Population 1 is the NON-clinical sample and Population 2 the clinical one.
+# This file shipped them the other way round and the inversion reached published
+# data (#1964). The SPSS file labels neither, so the mapping is asserted below
+# against three things the paper states, rather than assumed:
+#
+#   n              258 non-clinical / 107 clinical (Participants; Fig 1; Table 3)
+#   CFQ-7 total    non-clinical M = 25.50, SD = 8.55; clinical M = 32.38,
+#                  SD = 7.23 -- "the latter showing significantly higher" CF,
+#                  which is the whole point of the instrument
+#   battery        CAQ_TOT, SWLS and BDI are complete for Population 1 and
+#                  entirely absent for Population 2, because Table 2's
+#                  correlations were computed "in the non-clinical sample"
+#
+# https://doi.org/10.1371/journal.pone.0246434
+POPULATION_LABELS = {1.0: "non_clinical", 2.0: "clinical"}
+
+# The paper's own numbers, to two decimals. A source revision that renumbered
+# Population, or a future edit to POPULATION_LABELS, has to fail here.
+EXPECTED = {
+    "non_clinical": {"n": 258, "mean": 25.50, "sd": 8.55},
+    "clinical":     {"n": 107, "mean": 32.38, "sd": 7.23},
+}
+NON_CLINICAL_ONLY = ["CAQ_TOT", "SWLS", "BDI"]
+
+
+def check_population_labels(df: pd.DataFrame) -> None:
+    """Refuse to write a file whose cov_population does not match the paper."""
+    total = df[ITEM_COLS].sum(axis=1)
+    for label, want in EXPECTED.items():
+        grp = df["cov_population"] == label
+        got = {"n": int(grp.sum()),
+               "mean": round(float(total[grp].mean()), 2),
+               "sd": round(float(total[grp].std()), 2)}
+        assert got == want, f"cov_population={label}: expected {want}, got {got}"
+    non_clin = df["cov_population"] == "non_clinical"
+    for col in NON_CLINICAL_ONLY:
+        assert df.loc[non_clin, col].notna().all(), f"{col} incomplete in non_clinical"
+        assert df.loc[~non_clin, col].isna().all(), f"{col} present in clinical"
+
 
 def fetch_data() -> pd.DataFrame:
     r = requests.get(SI_URL, headers=UA, timeout=60)
     r.raise_for_status()
     df = pd.read_spss(io.BytesIO(r.content))
-    df["cov_population"] = df["Population"].map({1.0: "clinical", 2.0: "non_clinical"})
+    df["cov_population"] = df["Population"].map(POPULATION_LABELS)
     df["id"] = (df["Population"].astype(int).astype(str) + "-" +
                 df["ID"].astype(int).astype(str))
     dup_n = df.groupby("id").cumcount()
@@ -44,6 +83,7 @@ def fetch_data() -> pd.DataFrame:
 def convert():
     df = fetch_data()
     assert df["id"].nunique() == len(df)
+    check_population_labels(df)
 
     long = df.melt(id_vars=["id", "cov_population"], value_vars=ITEM_COLS,
                     var_name="item", value_name="resp")

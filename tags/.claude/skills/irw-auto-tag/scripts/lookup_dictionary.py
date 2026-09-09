@@ -11,7 +11,13 @@ Usage:
     python lookup_dictionary.py --file tables.txt
 
 Prints one JSON object per line (JSONL):
-    {"table", "matched", "description", "url", "reference", "doi", "no_data"}
+    {"table", "matched", "description", "url", "reference", "doi", "data_doi",
+     "no_data"}
+
+`doi` is the PAPER's DOI and is empty when the dictionary's one DOI column
+holds a data-repository DOI instead -- that value comes back as `data_doi`
+(#1690). Do not resolve a `data_doi` expecting an article: it resolves to the
+deposit, whose creators are the depositor and whose year is the deposit year.
 
 `no_data` is true when there was no dictionary match at all, or every one of
 description/url/reference/doi came back empty. When `no_data` is true the
@@ -22,6 +28,8 @@ to fetch or extract anything further for it.
 import argparse
 import csv
 import json
+import sys
+from pathlib import Path
 
 import requests
 
@@ -44,6 +52,28 @@ def load_dictionary():
     return by_table
 
 
+##The DOI rule lives in one place (#1690); this reaches it by path because the
+##skill's scripts are not on a shared import path.
+sys.path.insert(0, str(Path(__file__).resolve().parents[5] / "automated_finding"))
+from doi_hygiene import classify, normalize  # noqa: E402
+
+
+def split_doi(value):
+    """(paper DOI, data DOI) from the sheet's one overloaded column (#1690).
+
+    979 dictionary rows hold a data-repository DOI here. The tagger reads the
+    SHEET, not biblio.csv, so the export-time split in metadata/dict_union.R
+    does not reach it -- and handing a Dataverse DOI back as `doi` is the exact
+    failure #1764 documented: the fetch succeeds, the content verifies as a
+    genuine record, and the table is tagged from the wrong document. Reported
+    under its own key so a caller has to decide to use it.
+    """
+    doi = normalize(value)[0]
+    if classify(doi) == "data_doi":
+        return "", doi
+    return doi, ""
+
+
 def lookup(table, by_table):
     row = by_table.get(table.strip().lower())
     if row is None:
@@ -52,10 +82,11 @@ def lookup(table, by_table):
     description = (row.get("Description") or "").strip()
     url = (row.get("URL (for data)") or "").strip()
     reference = (row.get("Reference") or "").strip()
-    doi = (row.get("DOI (for paper)") or "").strip()
-    no_data = not any([description, url, reference, doi])
+    doi, data_doi = split_doi(row.get("DOI (for paper)"))
+    no_data = not any([description, url, reference, doi, data_doi])
     return {"table": table, "matched": True, "description": description,
-             "url": url, "reference": reference, "doi": doi, "no_data": no_data}
+             "url": url, "reference": reference, "doi": doi,
+             "data_doi": data_doi, "no_data": no_data}
 
 
 def main():

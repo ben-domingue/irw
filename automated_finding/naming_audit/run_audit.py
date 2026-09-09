@@ -13,7 +13,10 @@ requests / 4-6 min; with a warm doi_cache/ only new rows hit the network.
 """
 import argparse, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 from naming_check import *
+from doi_hygiene import classify
 
 def verdict_row(tbl, doi_raw, ref, date):
     """Verdict one dictionary row. Pure apart from fetch()'s cached HTTP."""
@@ -68,6 +71,18 @@ def verdict_row(tbl, doi_raw, ref, date):
     elif year_ok is False:             out['verdict'] = 'year_mismatch'
     else:                              out['verdict'] = 'ok'
     out['year_ok'] = year_ok
+
+    # A data-repository DOI cannot support EITHER screen, so an adverse verdict
+    # from one is not evidence about the table's name (#1690). Its creators are
+    # the depositor -- for Dataverse frequently a different person from the
+    # paper's authors, which is why `cavojova_2017_cfc` and `cosenza_2015_cfc`
+    # both read as fabricated and both are correctly named -- and its year is a
+    # deposit year, which produced 47 of this audit's 65 year_mismatch flags.
+    #
+    # Reported rather than dropped: the row still needs a real paper DOI, and
+    # `ok` would say it had been checked.
+    if out['verdict'] != 'ok' and classify(doi) == 'data_doi':
+        out['verdict'] = 'data_doi_unverifiable'
     return out
 
 def main():

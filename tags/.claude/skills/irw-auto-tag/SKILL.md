@@ -121,8 +121,12 @@ what the tagger is allowed to *see*, never how it extracts.
 ```bash
 python3 scripts/lookup_dictionary.py table_a table_b
 ```
-For each table this returns `description`, `url`, `reference`, `doi`, and a
-`no_data` flag. **If `no_data` is true** (no dictionary match, or every one
+For each table this returns `description`, `url`, `reference`, `doi`,
+`data_doi`, and a `no_data` flag. **`doi` is the paper's DOI only.** Where the
+dictionary's one DOI column holds a data-repository DOI instead -- 979 rows do
+-- `doi` comes back empty and the value is in `data_doi` (#1690). Never resolve
+a `data_doi` expecting the article: it resolves to the deposit, and tagging from
+the wrong document is the #1764 failure mode, which is silent. **If `no_data` is true** (no dictionary match, or every one
 of those four fields is empty), stop for that table — go straight to Step 5
 and stage a row with every field blank except `table`, `Rater`, and
 `Notes = "no working link"`. Don't fetch anything or guess at content.
