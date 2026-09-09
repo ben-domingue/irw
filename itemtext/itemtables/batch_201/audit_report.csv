@@ -1,0 +1,8 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"oxfordcovid_xue_2024_at","WARN",44,44,TRUE,TRUE,FALSE,TRUE,0,21.1,"row-count anomaly (possible item-code conflation or missingness skew), median=4232: media_playing, media_why_play_work, media_why_playing_avoid, media_why_playing_fun, media_why_playing_news, media_why_playing_nothing, media_why_playing_social, media_why_tv_work, media_why_voice_avoid, media_why_voice_fun, ... | 21.1% of rows have blank option_text | 8 of 44 items have NO option_text rows while others do (activity_exercise_inside, activity_exercise_outside, activity_exercise_outside2, media_messaging, media_playing, media_playing_voice, ...)"
+"paampsmartsud_saba_2023_ders","WARN",37,37,TRUE,TRUE,FALSE,TRUE,2.7,2.7,"2.7% of rows have blank item_text | 2.7% of rows have blank option_text | 1 of 37 items have NO option_text rows while others do (DERS_37_POST)"
+"pezzuti_2025_coolpeople_main_nfc","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"shu_2025_translation_add","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"singh_2025_identity_pba","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""
+"socialstereotype_hughes_2025_judgement","WARN",12,12,TRUE,TRUE,FALSE,TRUE,45.5,63.6,"45.5% of rows have blank item_text | 63.6% of rows have blank option_text"
+"sun_2025_morality_study1_fairnessMCQ","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
