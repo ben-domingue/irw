@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"gilbert_meta_45","WARN",37,37,TRUE,TRUE,FALSE,TRUE,72,0,"72% of rows have blank item_text"
+"gilbert_meta_68","ERROR",NA,NA,NA,NA,NA,NA,NA,NA,"could not read response CSV: no response CSV at /Users/xingyizhang/.claude/jobs/06a49530/tmp/resp45/gilbert_meta_68.csv -- every table in the batch needs one when --resp-dir is used"
+"gilbert_meta_69","ERROR",NA,NA,NA,NA,NA,NA,NA,NA,"could not read response CSV: no response CSV at /Users/xingyizhang/.claude/jobs/06a49530/tmp/resp45/gilbert_meta_69.csv -- every table in the batch needs one when --resp-dir is used"
+"gilbert_meta_70","ERROR",NA,NA,NA,NA,NA,NA,NA,NA,"could not read response CSV: no response CSV at /Users/xingyizhang/.claude/jobs/06a49530/tmp/resp45/gilbert_meta_70.csv -- every table in the batch needs one when --resp-dir is used"
+"gilbert_meta_71","ERROR",NA,NA,NA,NA,NA,NA,NA,NA,"could not read response CSV: no response CSV at /Users/xingyizhang/.claude/jobs/06a49530/tmp/resp45/gilbert_meta_71.csv -- every table in the batch needs one when --resp-dir is used"
