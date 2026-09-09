@@ -1,6 +1,6 @@
 "table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
 "gilbert_meta_73","WARN",36,36,TRUE,TRUE,FALSE,TRUE,0,100,"row-count anomaly (possible item-code conflation or missingness skew), median=11827: mathwrit_std35_hvy_obj, mathwrit_std35_sol_a, mathwrit_std35_sol_b, mathwrit_std35_sol_c, mathwrit_std35_sol_d, mathwrit_std35_sol_e | 100% of rows have blank option_text"
-"kfcovid_Li2020","PASS",12,12,TRUE,NA,TRUE,TRUE,0,0,"using raw_resp (no scoring key recoverable) -- resp-set check skipped by design"
+"kfcovid_Li2020","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "lys_2020_rape_3_diff","PASS",13,13,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
 "lys_2020_rape_3_kpnts","PASS",16,16,TRUE,TRUE,FALSE,TRUE,0,0,""
 "lys_2020_rape_3_rwa","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
