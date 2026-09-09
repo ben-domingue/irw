@@ -11948,3 +11948,41 @@ instrument, not a clause about this one. The PANAS row records the basis three t
 earlier today plus this one, and warns to pin the variant before applying it.
 
 Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
+
+### batch_098 triaged — 2 shipped — and the round-size question answered — 2026-09-08
+
+Fired at **two agents after a 7-minute cooldown**, on Ben's suggestion, following three consecutive
+failures. It ran clean. Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero
+WARNs, `verify_batch` PASS=2, `lint_verification` clean, `irw-validate` ok. Both uploaded (`red_up`
+2/2 row-count verified), stamped and audited. Two entries added to the open datapages/irw#169
+(422 entries).
+
+**On round size, and this is the part worth keeping: two changed together, so this round does not
+prove that two is the safe number.** The 19:10-19:20 cluster killed rounds at **six and at three**,
+which already showed the agent count was not the binding variable; and during the cooldown, with
+nothing running, available memory *rose* on its own from 19.7G to 20.6G. So the evidence points at
+**cadence** — something accumulating across rapid successive background launches and clearing on its
+own — rather than at the size of any one dispatch. The extraction round reached the same conclusion
+independently and said so in its own report, which is worth noting because it had no access to my
+reasoning.
+
+**What would actually separate the two variables:** fire the next round promptly at two. If it dies,
+the count is not the variable and the thing to examine is the harness's own threshold, not this
+prompt. That is written into `round_prompt_v1.md` so the next reader does not walk the count down to
+one on a wrong model. **Do not read this round as licence to keep firing back-to-back.**
+
+**The tables themselves are the honest-uncertainty kind.** `medvedev_2018_oxh` (OHQ, 29 items) and
+`medvedev_2018_pan` (PANAS, 20) come from the same PeerJ deposit whose `medvedev_2018_ql` was blocked
+last round on the WHOQOL ruling. The deposit **labels nothing** — bare `OXH1..OXH29` and
+`PAN1..PAN20`, no cell comments, no SPSS labels — so both ship canonical instrument wording assigned
+by item number, and both are correctly **PARTIAL**: the routes pin each item's class (reverse-keyed
+set, valence) but not its position within that class. The issues-page entries say that rather than
+implying the wording came from this study's materials.
+
+**A register distinction worth preserving.** The round added OHQ and PANAS as `ship` with a
+deliberately **blank** `clause` field, and recorded why: neither is an express grant like PHQ/GAD —
+both are the *absence* of any locatable clause. Silence and a grant both end in `ship`, and a
+register that flattened them would let a later round read silence as verified permission. Register
+now 32 rows.
+
+Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
