@@ -645,6 +645,26 @@ refresh_biblio_from_dict <- function(biblio, dict, label = "core", log.file = NU
 ##should not fail because someone improved a sentence in the sheet.
 DESCRIPTION_OVERRIDES <- list(
     list(
+        table      = "li_2024_bdyz",
+        issue      = "#2113",
+        superseded = "4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa",
+        corrected  = paste("4-item Expressive Suppression subscale of the ERQ (Gross & John,",
+                           "2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9),",
+                           "same sample as li_2024_fa"),
+        ##Not an inference from the code name: the paper says it outright --
+        ##"The Expressive Suppression Scale is one of the subscales of the
+        ##Emotion Regulation Strategies Scale ... This subscale has four items
+        ##(e.g., item 9, 'I don't express sadness and anger when I feel it')".
+        ##Re-derived from the live table against the paper's Table 1: mean
+        ##14.6603 vs published 14.66, SD 5.6147 vs 5.61, N 1,151 vs 1,151, alpha
+        ##0.8336 on 4 items over a 1-7 range. The study's body-image measure is
+        ##the separate 15-item Social Physique Anxiety block, already shipped as
+        ##li_2024_spa -- so the superseded text pointed at a different scale in
+        ##the same study. availability_audit_full.csv already had this right,
+        ##which is how two IRW records came to disagree.
+        why = "the paper names it the ERQ expressive-suppression subscale; mean/SD/N/alpha reproduce exactly"
+    ),
+    list(
         table      = "cdm_timss07",
         issue      = "#1898",
         superseded = "Subsample of TIMSS items from Australia with Q matrix",
