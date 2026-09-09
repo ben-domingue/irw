@@ -12425,3 +12425,66 @@ number is forbidden.
 
 Yield 2/2. 663 pending. Cap is `batch_110`; **not reached** — the next firing takes `batch_104` and
 is again a human's call, not an automatic retry.
+
+---
+
+## §2 of the open-decisions list settled — four rights rulings, three live withdrawals (2026-09-09)
+
+Ben ruled all four. Three of them settle a held table and nothing else; the fourth reached live data.
+
+**ZTPI — `mavromoustakos_2016_ztpi`, block CONFIRMED.** Zimbardo's own page — the same page that
+distributes the inventory, so unlike the SWLS there is no more-permissive sibling — says researchers
+may use it *"free with my permission and agreement to share results."* Permission-required, a reserved
+right. Stays held, nothing uploaded, no other ZTPI table in the corpus or queue.
+
+**IISL Spiritual Leadership Survey — `martinezsoto_2024_spiritual_leadership`, RULED BLOCK.** This
+resolved the register's only `escalate` row, and it turned on a reading the round and the first
+summary both got wrong. Both leaned on "requiring permission to *cite* reserves nothing anyone
+holds". Ben's question — *what about the 'permission from author' part?* — exposed the weak step. The
+clause is *"the works derived from this site may be cited with proper notation and permission from the
+author"*: its object is **works derived from this site**, and an item-text reproduction of the 26-item
+survey is exactly such a work. The reserve-a-right test asks whether a right is reserved, not whether
+the holder used the correct verb — and since permission to cite cannot be required at all, the
+sentence is either void as written or loosely aimed at reproduction. **A holder's loose drafting is
+not read in IRW's favour.** IISL also sells the survey with a coding key, so the clause is not
+plausibly about bibliographies. Recorded in the register as the **weakest block** it carries: the
+clause never names the questionnaire, reproduction or distribution. PLOS publishes all 26 items in
+Spanish and English under CC BY, so this ships on one upload if it is ever revisited.
+
+**IGDS9-SF — `ma2026_igds`, RULED BLOCK; where a holder's own pages conflict, the stricter governs.**
+Pontes' instrument page carries a CC BY-NC-ND line plus a permission requirement for developing the
+scale in another language — which is precisely this Chinese administration — while the same site's
+`/tests/` index says permission is not needed for any test. **This is not the SWLS two-pages rule and
+must not be filed as it:** nothing was extracted, so there is no "page the wording came from" for that
+rule to apply to. The new rule is narrower and about the holder, not the extractor.
+
+### CSDT — full scope, and the inconsistency here was real
+
+**Ben ruled the CSDT Limited Use License reaches the whole library, not only wording downloaded from
+selfdeterminationtheory.org.** Deci and Ryan are the originators and the 2026-09-08 originator ruling
+reaches translations and adaptations, so where a given study took its items from does not change the
+answer. He was offered the option of establishing per-table provenance first and declined it, which is
+what makes this a rule rather than three verdicts.
+
+The open-decisions list named one table. Searching the `instrument` column found **three, all live**:
+
+| table | instrument | rows | wording |
+|---|---|---|---|
+| `fivpei_perrig_2023_imi` | Intrinsic Motivation Inventory | 49 | English |
+| `baka2023_bpnsf` | BPNSFS at Work | 168 | Polish, as administered |
+| `aspirations_sonmez_2022` | Aspiration Index | 245 | Turkish, as administered |
+
+**`fivpei_perrig_2023_imi` is why this could not be left.** Its items are the same canonical IMI
+Interest/Enjoyment stems that `makransky_2016_motivation` was blocked for, with the target activity
+substituted — "The game was fun to play" against "This activity was fun to do", "I thought playing the
+game was a boring activity" against "I thought this was a boring activity". So IRW was **blocking an
+incoming table while serving a live one carrying the same instrument.** That is the shape checked for
+on De Jong Gierveld and found not to be real; here it was real, and it was found by searching the
+`instrument` column rather than table names — the fourth time in two days that search has paid.
+
+All three withdrawn from the `irw_text` draft (`tools/withdraw_csdt.py`, dry-run first; 718 → 715,
+exactly the three asserted). All were published in v20.0, so the withdrawals take effect at the next
+release. Only `baka2023_bpnsf` had a provenance row (batch_007) to carry a withdrawal note; the other
+two predate the batch pipeline, so their record is this entry and the register — the same gap noted
+for the PSS sweep. `makransky_2016_motivation` stays blocked, and the register row now covers future
+BPNS, SRQ, PLOC and GCOS tables.
