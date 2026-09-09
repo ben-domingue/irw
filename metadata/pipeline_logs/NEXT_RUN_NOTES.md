@@ -1,8 +1,9 @@
 # Notes for the next scheduled pipeline run
 
-Cron: `0 6 * * 1 metadata/weekly_pipeline_cron.sh` -- **next run Monday
-2026-08-31, 06:00**. Delete or trim entries here once they've been checked
-off; this file is for the human reviewing the run, cron does not read it.
+Runs as **`.github/workflows/metadata-pipeline.yml`, Mondays 13:00 UTC** -- a
+GitHub Action, not a crontab on anyone's machine, and it opens a pull request
+rather than an issue. Nothing reads this file: it is for the human reviewing
+that PR. Delete or trim entries once they have been checked off.
 
 ## What happened on 2026-08-24 (all resolved -- background only)
 

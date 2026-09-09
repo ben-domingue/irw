@@ -5,8 +5,7 @@
 # Jo, Baek (2023). Impacts of social isolation and risk perception on social
 # networking intensity among university students during covid-19. PLOS ONE.
 #
-# S1 File (CSV) contains raw item-level responses (7-point Likert,
-# 1=strongly disagree to 7=strongly agree, confirmed in S1 Appendix) to six
+# S1 File (CSV) contains raw item-level responses (7-point Likert) to six
 # instruments used in a COVID-19 social-networking survey of Korean and
 # Vietnamese university students (N=345):
 #   SNI1-3  Social Networking Intensity
@@ -17,6 +16,16 @@
 #           kept as-is per original item labels)
 #   CFS1,3,4 Cabin Fever Syndrome (source column numbering skips CFS2; kept
 #           as-is per original item labels)
+#
+# ANCHOR LABELS ARE NOT PUBLISHED. The paper states only that "All indicators
+# were measured by a '7-point Likert scale'", and S1 Appendix prints item wording
+# with no anchor text at all -- checked its full document.xml, where 'agree',
+# 'Likert' and 'point' occur only inside SNO3's own item wording. An earlier
+# version of this comment said 1=strongly disagree to 7=strongly agree was
+# "confirmed in S1 Appendix"; that is not confirmed there or anywhere else. It is
+# a plausible convention, not a documented fact, which is why the itemtext tables
+# ship option_text blank for all 7 levels rather than padded. No resp value
+# depends on this.
 # Excluded: "Total" (constant=89 for every row, not a real response),
 # "Software" / "Time" / "Natinality" metadata columns (kept relevant ones
 # as covariates), "Gender(Male_1)" -> cov_gender.

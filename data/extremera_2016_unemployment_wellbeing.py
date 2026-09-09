@@ -46,6 +46,45 @@ SCALES = {
 }
 EI_COLS = [f"ei{i}" for i in range(1, 16)] + ["ie16"]
 
+# The PRINTED response options of each instrument, as an inclusive (min, max)
+# per item; "*" applies to every item in the scale. A response outside its own
+# item's printed options is not a response, and is dropped.
+#
+# SHS, SWLS and the 16 EI items are plain 1-7 Likerts.
+#
+# The SBQ-R (Osman et al. 2001) is not: its four items print different numbers
+# of options, and this deposit stores the printed OPTION NUMBER rather than the
+# instrument's collapsed scoring code.
+#
+#   sbq1  1-6   1; 2; 3a; 3b; 4a; 4b
+#   sbq2  1-5   never / rarely / sometimes / often / very often
+#   sbq3  1-5   1 (no); 2a; 2b; 3a; 3b
+#   sbq4  0-6   never .. very likely
+#
+# Every observed value matches those sets exactly, with one exception: `sbq3`
+# carries 0 twice in 961 responses, and item 3 prints no option 0 (#1973). Same
+# shape as the two SWLS zeros this file already dropped -- an isolated blank
+# stored as 0 rather than missing. The deposit's own SuicideBehaviours_Scores
+# column sums them straight through (rows 768 and 1080 score 3 and 5), so the
+# authors did not decode 0 either.
+#
+# Note for anyone scoring this table: totals here run to 19, not the SBQ-R's
+# published 3-18, because these are printed option numbers -- sbq1's six
+# options collapse to 4 scoring levels and sbq3's five to 3. That is the
+# encoding, not a defect, and it is unrelated to the two zeros.
+VALID_RANGE = {
+    "extremera_2016_shs":  {"*": (1, 7)},
+    "extremera_2016_swls": {"*": (1, 7)},
+    "extremera_2016_ei":   {"*": (1, 7)},
+    "extremera_2016_sbq":  {"sbq1": (1, 6), "sbq2": (1, 5),
+                             "sbq3": (1, 5), "sbq4": (0, 6)},
+}
+
+# A range spec is meant to remove a handful of stray codes. If it ever removes
+# more than this, the spec is wrong about the encoding rather than the data
+# being that bad, and silently deleting the scale would be the worst outcome.
+MAX_DROPPED_FRACTION = 0.01
+
 
 def fetch_data() -> pd.DataFrame:
     r = requests.get(SI_URL, headers=UA, timeout=60)
@@ -56,12 +95,31 @@ def fetch_data() -> pd.DataFrame:
     return df
 
 
+def drop_out_of_range(long, out_name):
+    """Remove responses outside their own item's printed options."""
+    spec = VALID_RANGE[out_name]
+    lo = long["item"].map(lambda i: spec.get(i, spec.get("*"))[0])
+    hi = long["item"].map(lambda i: spec.get(i, spec.get("*"))[1])
+    keep = long["resp"].between(lo, hi)
+    if not keep.all():
+        gone = long.loc[~keep].groupby(["item", "resp"]).size()
+        print(f"  {out_name}: dropped {int((~keep).sum())} out-of-range response(s): "
+              + ", ".join(f"{i}={r} x{n}" for (i, r), n in gone.items()))
+        frac = (~keep).sum() / len(long)
+        assert frac <= MAX_DROPPED_FRACTION, (
+            f"{out_name}: {frac:.1%} of responses are outside their item's "
+            f"printed options -- check VALID_RANGE against the instrument "
+            f"before assuming the data is at fault")
+    return long.loc[keep].reset_index(drop=True)
+
+
 def melt_scale(df, cov_cols, item_cols, out_name):
     long = df.melt(id_vars=["id"] + cov_cols, value_vars=item_cols,
                     var_name="item", value_name="resp")
     long["resp"] = pd.to_numeric(long["resp"], errors="coerce")
     long = long.dropna(subset=["resp"]).reset_index(drop=True)
     long["resp"] = long["resp"].astype(int)
+    long = drop_out_of_range(long, out_name)
     long = long[["id", "item", "resp"] + cov_cols]
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -78,16 +136,6 @@ def convert():
     for out_name, item_cols in SCALES.items():
         melt_scale(df, cov_cols, item_cols, out_name)
     melt_scale(df, cov_cols, [f"ei{i}" for i in range(1, 17)], "extremera_2016_ei")
-
-    # SWLS is a standard 1-7 scale; resp==0 occurs twice total (swls3,
-    # swls5), isolated against ~5600 legitimate 1-7 responses -- a
-    # data-entry error, dropped post-hoc rather than re-melting.
-    swls_path = OUT_DIR / "extremera_2016_swls.csv"
-    swls = pd.read_csv(swls_path)
-    swls = swls[swls["resp"] != 0].reset_index(drop=True)
-    swls.to_csv(swls_path, index=False)
-    print(f"extremera_2016_swls.csv (post-fix): ids={swls['id'].nunique()} "
-          f"items={swls['item'].nunique()} resp={swls['resp'].min()}-{swls['resp'].max()}")
 
 
 if __name__ == "__main__":

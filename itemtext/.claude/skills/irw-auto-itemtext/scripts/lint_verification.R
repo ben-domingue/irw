@@ -53,6 +53,52 @@ HEDGE <- paste0(
 WORDING_OBJECT <- "(word|wording|words|translat|text|language|phrasing|anchor|option)"
 WORDING_WINDOW <- 80L
 
+# THE ITEM-AXIS RULE (Ben, 2026-09-08). VERIFIED means one route pins every item
+# to its code. A hedge about what some OTHER route, or some upstream source, could
+# not confirm does not weaken that -- so it must not pull the status down.
+#
+# This came out of six rows (jiang_2021_resilience, jo_2023_arp, kalichman1995_scs,
+# kushnir2017_bfi, latifi_2026_insect_fear, li_2025_marketing_operation) that all
+# WARNed on the same phrase, "does not establish", while none of them hedged about
+# the item axis at all. They split two ways, and neither shape is PARTIAL:
+#   - the hedge scopes a SECONDARY route that is not load-bearing. jiang_2021 says
+#     route 1 could not separate C4-C8 (published means within 0.04) -- and in the
+#     same sentence, that those items are pinned by Table 4's printed code labels.
+#     latifi_2026 says it outright: the within-block separation "rests entirely on
+#     the Q-code label match above, which is why the status is VERIFIED".
+#   - the hedge scopes an upstream fact NO route could ever settle: whether the
+#     authors' own appendix table is correctly labelled (jo_2023_arp), whether a
+#     codebook's Q-numbering matches the published scale's order (kalichman1995).
+#
+# So the discard is conditional on the row SAYING, positively, that every item is
+# separated -- it is not enough for the hedge to look harmless. The phrases below
+# are each taken from one of the six; a row that cannot assert one of them still
+# WARNs, which is what keeps bang_2023_self_esteem's shape (routes pin a polarity
+# BLOCK but not the order within it, the failure this lint was written for) caught.
+#
+# Kept visible rather than silenced: a cleared row prints as INFO naming the phrase
+# it relied on, so an agent cannot quietly buy VERIFIED with a stock sentence.
+SEPARATION <- paste0(
+    "every item is (separated|distinguished) from every other|",
+    "distinguishes every item|",
+    "identity bijection|",
+    "discriminates the items|",
+    "excluded per item|",
+    "string for string|",
+    "code[- ]label match|",
+    "tied at the source|",
+    "(0|no) mismatches")
+
+# A SEPARATE SIGNAL, not part of the status question (Ben, 2026-09-08). jo_2023_arp
+# is VERIFIED on its item axis and ships option_text blank because the study
+# publishes no anchors. That is a real gap in what IRW ships, and folding it into
+# "should this be PARTIAL?" buried it -- the status is about the item axis, so it
+# gets its own flag. Deliberately narrow: it fires on option_text being BLANK or
+# UNVERIFIED, not on a route merely declining to test it (li_2025_marketing_operation
+# does not test the axis but rests it on the .sav's own value labels, which is a
+# mapping at the source, not a gap).
+OPTION_GAP <- "option_text[^.]{0,80}(ships blank|is blank|unverified|not verified)"
+
 drop_wording_hedges <- function(ev, hits) {
     if (!length(hits)) return(hits)
     keep <- vapply(hits, function(h) {
@@ -107,12 +153,24 @@ for (i in seq_len(nrow(v))) {
     if (st == "VERIFIED") {
         hits <- regmatches(ev, gregexpr(HEDGE, ev, ignore.case = TRUE))[[1]]
         hits <- drop_wording_hedges(ev, hits)
+        sep  <- unique(tolower(regmatches(ev, gregexpr(SEPARATION, ev, ignore.case = TRUE))[[1]]))
+        if (length(hits) && length(sep)) {
+            add("INFO", r$table,
+                sprintf("evidence hedges (%s) but asserts a full item-axis tie (%s) -- VERIFIED stands per the 2026-09-08 item-axis rule",
+                        paste(unique(tolower(hits)), collapse = ", "),
+                        paste(sep, collapse = ", ")))
+            hits <- character(0)
+        }
         if (length(hits))
             add("WARN", r$table, sprintf("VERIFIED but its evidence hedges (%s) -- should this be PARTIAL?",
                                           paste(unique(tolower(hits)), collapse = ", ")))
         if (!grepl("[0-9]", ev))
             add("WARN", r$table, "VERIFIED but the evidence contains no numbers; Step 5b requires the actual values compared")
     }
+
+    if (st %in% c("VERIFIED", "PARTIAL") && grepl(OPTION_GAP, ev, ignore.case = TRUE))
+        add("WARN", r$table,
+            "evidence says option_text ships blank or unverified -- the item axis may be sound, but the response-option wording is a gap in what IRW ships")
 
     if (st == "NOT_NEEDED" && !identical(trimws(r$mapping_basis), "data_labels"))
         add("WARN", r$table, sprintf("NOT_NEEDED but mapping_basis is '%s'; only data_labels is exempt from Step 5b",
@@ -138,6 +196,6 @@ if (!length(flags)) {
     quit(save = "no")
 }
 sev <- vapply(flags, `[[`, "", "sev")
-cat(sprintf("lint_verification: %d rows, %d ERROR, %d WARN\n\n", nrow(v),
-            sum(sev == "ERROR"), sum(sev == "WARN")))
+cat(sprintf("lint_verification: %d rows, %d ERROR, %d WARN, %d INFO\n\n", nrow(v),
+            sum(sev == "ERROR"), sum(sev == "WARN"), sum(sev == "INFO")))
 for (f in flags[order(sev)]) cat(sprintf("[%s] %s\n    %s\n", f$sev, f$table, f$msg))

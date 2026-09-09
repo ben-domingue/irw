@@ -136,7 +136,8 @@ is checkable outright — reproducing per-item n for every item and per-item mea
 `irw_fetch()` proves the mapping rather than supporting it, which no statistical route in Step 5b
 can do. Two earlier rounds wrote this table off as "an arbitrary, order-dependent integer
 assignment" without attempting the re-run. `data_labels` in provenance does NOT imply inference-free; it describes where
-the words came from, not how the code was assigned.
+the words came from, not how the code was assigned. It grants no exemption on its own —
+Step 5b exempts a *derivation*, not a `mapping_basis`.
 
 ### 4. Transcribe literally, and disclose every deviation
 
@@ -260,49 +261,115 @@ This is *narrower* than "the instrument is copyrighted". A commercial scale repr
 in full in an open-access paper's appendix is generally still extractable from that
 appendix; the item-text disclaimer covers a user's downstream reuse. What it does not
 cover is IRW republishing an instrument whose publisher has affirmatively refused it —
-or, per the two rulings in the next section, one whose rights holder charges an enforced
-fee or states a no-redistribution clause. Those two override the appendix, and the
-TAS-20 is exactly that case: its wording was printed in full by a CC BY 4.0 PeerJ
+or, per the next section, one whose rights holder has reserved a right of any kind — a fee,
+permission, non-commercial, no-derivatives or no-redistribution. Such a clause overrides the
+appendix, and the TAS-20 is exactly that case: its wording was printed in full by a CC BY 4.0 PeerJ
 article, and IRW withdrew it anyway.
 
 Currently excluded under this rule: `himmelstein-shipley_vocabulary-2025`,
 `himmelstein-shipley_abstraction-2025`.
 
-## Rights on the wording: two triggers, and both are quote tests
+## Rights on the wording: does the clause reserve a right, or disclaim fitness?
 
-Settled by Ben on 2026-09-04. These are about the *instrument's* rights holder, and they
-apply on top of, not instead of, the standing exclusion above.
+**Read this section before you reason about rights from anything else in this file.** The
+two-trigger test that used to live here — block only on an enforced fee or an explicit
+no-redistribution clause, silence is permission — was **superseded on 2026-09-05 by irw#1945**,
+and it kept producing wrong answers for three days after that because this file still stated
+it. Three consecutive rounds in September 2026 (batches 080, 085, 087) wrote rights paragraphs
+applying the retired test; one of them recorded "no fee, no redistribution bar and no
+non-commercial clause locatable" for an instrument whose own page carries both. The agents were
+reasoning correctly from stale instructions. Do not re-derive the old test from anywhere.
 
-**Start from the distinction that makes the check worth doing: the deposit licence is not
-the instrument licence.** A CC BY 4.0 or CC0 deposit governs the *response data*. It says
-nothing about who owns the *item wording*, which for a published scale belongs to its
-authors or publisher. This is common, not exotic — of the 60 tables claimed in irw#1945,
-nine were named instruments sitting under permissive deposits (DERS, SWLS, HEXACO-PI-R,
-Need for Cognition, RWA, a social-desirability scale, the SCBCS, FAD+, EstCRM
-self-efficacy).
+**Start where the old section did, because this part was always right: the deposit licence is
+not the instrument licence.** A CC BY 4.0 or CC0 deposit governs the *response data*. It says
+nothing about who owns the *item wording*, which for a published scale belongs to its authors or
+publisher. Of the 60 tables claimed in irw#1945, nine were named instruments sitting under
+permissive deposits.
 
-**Block ONLY on something you can quote from the rights holder:**
+### The test
 
-1. **An enforced licence fee.** Ruled on the TAS-20 ($40/study, enforced — a 2021
-   *Molecular Autism* retraction). Generalises to any fee-licensed instrument. Withdrew
-   `cucchi_2018_tas20` and `rmet_higgins_2022_tas`; blocked `ruiz_parra_2023_tas20`.
-2. **An explicit no-redistribution clause.** Ruled on the DSES
-   (`CV_OASIS_ODSIS_PPE_Novak_2020_DSES`, "Permission of author required to distribute or
-   copy"). This settles the question the WHOQOL ruling left open: yes, a quotable clause
-   overrides the source deposit's licence, for any instrument.
+**Ask what the clause does. Does it RESERVE A RIGHT, or DISCLAIM FITNESS?**
 
-**Silence is permission.** An instrument being merely copyrighted, commercially sold, well
-known, or reproduced somewhere without an explicit grant is **not** a block. If you cannot
-find and quote a restriction, extract it normally. Do not block on suspicion, and do not
-open a negotiation with a rights holder — see the Shipley rule above.
+**Reserves a right → BLOCK.** Any of: a licence fee, permission-required, non-commercial,
+no-derivatives, no-redistribution, "contact the author for other uses". It does not matter
+whether IRW's own use would comply. **IRW redistributes**: hosting hands the wording to
+downstream users whose use IRW cannot condition, including the use the holder reserved. So
+"our own use is non-profit academic research, which the clause allows" is *not* a defence —
+that reasoning would have shipped the HEXACO forms, which is the exact case irw#1945 exists to
+block.
 
-These two end in `blocked`, not `excluded`, because a licence can change and a fee can be
-paid; the Shipley exclusion is permanent. Put the quoted sentence and its URL in
-`notes.csv` and in `provenance.csv`. **A rights block with no quote in it is not a rights
-block.** Do not rely on the `wording_rights` column to record this — it takes only `NC`,
-cannot express either trigger, and is currently set on zero tables (irw#1955).
+**Disclaims fitness → DOES NOT BLOCK, but must be quoted.** A statement about what the
+instrument is *good for* reserves nothing and creates no counterparty: "this is a research
+instrument, not intended for clinical applications" (LOT-R), "it is not known whether it is
+suitable for determining whether an individual is lonely" (De Jong Gierveld). **Ruled by Ben on
+2026-09-08 (the LOT-R case): not a block, but quote the caution in the note and say why it does
+not block.** Judging it and dropping it silently is not enough — the reader needs to see the
+clause and the reasoning, per table.
 
-Everything shipped before 2026-09-04 predates both rulings and has never been checked
+**Silence is still permission.** An instrument merely being copyrighted, commercially sold or
+well known is not a block. If you cannot find and quote a restriction, extract normally. Do not
+block on suspicion, and do not open a negotiation with a rights holder — see the Shipley rule
+above. A bare copyright notice on a journal article is a notice about that article, not a term
+governing the instrument (the PANAS case).
+
+**The hard case, stated honestly:** the De Jong Gierveld manual puts its fitness cautions in the
+*same* list as its NC and ND bullets, all introduced by "They may do so under the following
+conditions". A holder mislabelling a caveat as a condition does not convert it into a property
+right — but where the drafting genuinely leaves it ambiguous, escalate rather than decide, under
+"err on the side of not having things".
+
+### Whose page governs
+
+**The originator's, not the licence of whatever reproduced the wording.** Ruled 2026-09-08:
+*"a CC BY journal appendix reproducing a restricted instrument does not launder it."* So:
+
+- Find the instrument's own rights holder and read *their* statement. A permissive deposit does
+  not settle it.
+- **A translation or adaptation is a derivative of the restricted instrument.** Shipping the
+  administered Chinese of a blocked English scale is not a way around the block. Ruled again on
+  2026-09-08 for the DJG: a study's own alternative English rendering is the "modified material"
+  that an ND clause names.
+- **Check upstream.** If the study adapted someone else's scale, the originator may be a level
+  further back — `liu_2025_speaking_selfefficacy`'s items are Wang & Sun's, which are themselves
+  near-verbatim MSLQ, and the MSLQ is public domain. Ask whose page the wording *originated* on.
+
+### Mechanics
+
+**A rights block with no quote in it is not a rights block.** Put the quoted sentence, its URL,
+and ideally a hash of the page you fetched into `notes.csv` and `provenance.csv`. The hash is
+what lets a later reader confirm the ruling without re-fetching, and what makes it auditable
+when the holder's page changes.
+
+These end in `blocked`, not `excluded`, because a licence can change and a fee can be paid; the
+Shipley exclusion is permanent. There is no `wording_rights` column — retired 2026-09-06
+(irw#1955), because a stated restriction now blocks rather than being flagged.
+
+**Check the register before deciding: `itemtext/instrument_rights_register.csv`.** One row per
+instrument — `instrument, family, verdict, rule, clause, source_url, source_sha256, fetched,
+match_item_text, match_item_code, notes`. `verdict` is `block` / `ship` / `ship_with_note` /
+`escalate`; `ship_with_note` is the LOT-R shape, where the table ships but the provenance note must
+quote the caution and say why it does not block. An instrument already carrying a verdict is
+settled and needs no new escalation — record that you applied it, do not re-derive it.
+
+**The register's `match_*` columns find candidates. They do not decide anything.** Two failure
+modes, both of which produced wrong numbers in one afternoon:
+
+- **A name match is a lead, never a verdict.** Three sweeps in one session each turned up a false
+  positive: `alkouri_2025_icu_stressors` is named "Perceived Stress Scale" but is Sheu et al.
+  (1997); two `sun_2025_morality_*_meaning` tables matched "meaning in life" but are PERMA-Profiler
+  items; `jutte_2024_loneliness` matched a De Jong Gierveld sweep but is the revised UCLA scale.
+- **A substring miss is NOT an all-clear.** Administrations reword. A PSS sweep scored three tables
+  at 9 of 10 because their item 9 reads "things *that happened* that were outside of your control",
+  and scored `kfcovid_pss_li2020` at 1 of 4 because its items are *negated* rewordings ("felt you
+  **lack** confidence", "things were **not** going your way") with an embedded newline. **All of
+  them were complete reproductions.** A count from pattern matching is a **lower bound**; deciding
+  "fragment or whole instrument" requires reading the items.
+
+**A block may not achieve anything.** If the processing script used source column headers as
+item codes, the instrument's wording is already in the *response* table, where withholding
+item text does not reach it (irw#2101, irw#2123). Block anyway, and say so in the note.
+
+Everything shipped before 2026-09-04 predates all of these rulings and has never been checked
 against them; that re-audit is irw#1954, still owed.
 
 ## Before doing anything
@@ -789,12 +856,41 @@ Two traps:
   dropped imputed cells, or vice versa. Order and relative spacing are the signal, not
   the third decimal.
 
-`data_labels` tables are exempt: when the source file's own variable labels tie code to
-text, the mapping is authoritative at the source and there is nothing for statistics to
-add. **Every other `mapping_basis` requires this step.** Record the outcome as a row in
+**The exemption is earned by the code derivation, not by `mapping_basis`.** Writing
+`data_labels` in provenance does not exempt anything: it says where the *words* came from,
+not how the *code* was assigned, and those fail independently (core model §3). Ask which of
+the three derivation patterns the processing script uses, and exempt only the first two:
+
+| the script does | exempt? | what to record |
+|---|---|---|
+| `item` IS the source column name | yes | name the label level you read — variable labels, value labels, header row *n* |
+| number-preserving rename (`LOC1` → `LOC_01`) | yes | name the label, and the rename |
+| **positional assignment** (`enumerate`, `range(a,b)`, `df.columns[i:j]`, `row_number()`, `f"item_{i+1}"`) | **no** | diff the shipped `item_text` against the source header at each position, and record the count |
+
+For the third, the code keeps no trace of the source name and a shifted range is
+undetectable from the output alone, so there is nothing at the source to be authoritative
+— `cfi_7` and `item_5` appear in no source file. The header diff is mechanical and settles
+the table outright; run it rather than asserting an exemption the source cannot grant.
+This is core model §3 restated at the point of decision — the two used to disagree, and
+Step 5b was the one that was wrong.
+
+**Every other `mapping_basis` requires a route from the list above.** Record the outcome as a row in
 `itemtext/mapping_verification.csv` (`table,batch,mapping_basis,uploaded,route,status,evidence`)
 with `status` one of `VERIFIED` / `PARTIAL` / `NO_ROUTE` / `NOT_NEEDED`, and `evidence`
 stating the actual numbers compared.
+
+**`evidence` names what you read; it never restates the rule.** "The source file's own
+variable labels tie code to text, so the mapping is authoritative at the source" is the
+exemption's definition, not evidence for it, and a row carrying only that has recorded
+nothing. Say which file, which level, and how many items reconciled — "header row 1 of the
+Qualtrics export, 20/20 verbatim"; "the .sav's variable labels, 19/19"; "row 2 of the
+workbook reads `Schutte_1`.., copied to lowercase". If the batch's `provenance.csv` note
+already says this, quote it rather than writing something weaker: provenance is the fuller
+record, and the ledger should not disagree with it.
+
+**Check `queue_state.csv` before writing any row.** A `blocked` or `failed` table has no
+live item text, so it cannot carry a verification outcome of any kind; rows have been
+written exempting text that never shipped.
 
 **`VERIFIED` has a strict meaning: the route distinguishes every item from every other
 item.** If it pins a polarity class, a subscale, a block, a direction, or some of the
@@ -860,9 +956,9 @@ structured record, that difference survives only as prose in `notes.csv`, if at 
 Append a row to `itemtables/batch_<NNN>/provenance.csv` (columns:
 `table,mapping_basis,text_source,source_ref,note,public_note,uploaded`; create with a
 header if it doesn't exist) for **every** table, not just problematic ones. `uploaded`
-is a date, filled in only once a table has actually been pushed to Redivis — it's what
-distinguishes a table that was promoted out of the batch folder from one that went
-missing.
+is the date the table was pushed to Redivis, or `unrecorded` when that date is not
+recoverable. It is the record of *when*; **whether** a table is live is not stored here
+at all — it is read from `live_tables.csv` (see the wrap-up step below and #1828).
 
 `mapping_basis` — how each `item` code was tied to its `item_text`:
 - `data_labels` — the source data file's own variable labels / column headers tie code
@@ -894,10 +990,22 @@ Table 4 was matched), while `paper_order` + `VERIFIED` is solid. Anything other 
   `_translated` columns (core model section 4).
 - `unknown`.
 
-`translation_source` — where the English in the `_translated` columns came from.
-Separate from `text_source`, which describes the base text. **The allowed values are in
+`translation_source` — where the English came from. **The allowed values are in
 `itemtext/provenance_vocab.csv`, not here**; `Rscript itemtext/check_provenance.R`
 validates every provenance file against it and exits non-zero on an unknown value.
+
+It is **required on every `text_source=translated_substitute` row** (enforced 2026-09-06,
+irw#1970) — a blank there fails the check, and so does a provenance file that lacks the
+column while carrying such a row. The reason is the whole point of the field: normally it
+describes the `_translated` columns, but under the fallback the English sits in the BASE
+fields, so it is the only thing separating a table whose English is the study's own
+rendering (nothing owed) from one this project wrote (a line on the public issues page is
+owed, under the 2026-09-02 ruling). Answer it from what you actually did: the instrument
+publisher's English is `official_instrument_english`, a rendering out of this study's
+paper, deposit or variable labels is `study_supplied`, another paper's printed English for
+the same instrument is `third_party_english`, item text and option text from different
+kinds of source is `mixed` (say which in the note), and English you produced is
+`machine_translation` no matter how it was produced.
 
 `key_source` — where `correct_response` came from, when a table has one. Allowed values
 live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
@@ -1005,8 +1113,12 @@ Before a table leaves your hands, all of these are true and recorded:
    gates cannot see: a doubled upload (`dup_item_resp`) and two scale directions in one
    table (`resp_ambiguous`).
 12. `check_provenance.R` passes — every `translation_source` is in
-   `itemtext/provenance_vocab.csv`, and every `machine_translation` table has a line on the
-   public issues page. English this project generated is always disclosed.
+   `itemtext/provenance_vocab.csv`, every `translated_substitute` row HAS one, and every
+   `machine_translation` table has a line on the public issues page. English this project
+   generated is always disclosed — until it is **withdrawn**, at which point the entry goes
+   away with the wording (a `public_note` opening `IRW does not offer item text for` exempts
+   the row, 2026-09-07). Data caveats are the exception: if the entry also records something
+   about the response table, rewrite it rather than deleting it.
 
 ### Step 6d — Normalize and audit before the batch is considered done
 
@@ -1190,23 +1302,63 @@ shared-system write, same caution as any other Redivis upload in this repo. See
 
 ### After every upload — reconcile the public issues page
 
-Stamp the `uploaded` date into each table's `provenance.csv` row, then run:
+Stamp the `uploaded` date into each table's `provenance.csv` row, refresh the
+liveness snapshot, then run the reconciler:
 
 ```bash
+python3 refresh_live_tables.py     # needs Redivis credentials; ~2 API calls
 Rscript ../.claude/skills/irw-auto-itemtext/scripts/check_issues_page.R
 ```
 
-Run from `itemtext/`. It reads every `itemtables/batch_*/provenance.csv`, keeps the rows
-with a non-empty `public_note`, and reports which of the now-live ones are missing from
-`../../irw_site/itemtext_issues.qmd`. Exit status is 1 while anything is DUE, so it can
-gate the wrap-up. Three categories come back:
+`uploaded` records **when**, and only that. Whether a table is live is read from
+`live_tables.csv` — a committed snapshot of the published (and draft) shards,
+because a hand-kept liveness column has been wrong in both directions:
+`himmelstein-admc_raw-2025` read as PENDING while it was live, and 16 rows named
+a live table with the column blank (#1828). If the date is genuinely not
+recoverable — Redivis cannot supply it, since opening a draft resets every
+per-table timestamp — write `unrecorded` rather than a date you know is wrong.
+
+The checker runs without the snapshot, falling back to `uploaded` and saying so,
+so it still works with no credentials and no network.
+
+Run from `itemtext/`. It reconciles in **both directions**. Outward, it reads every
+`itemtables/batch_*/provenance.csv`, keeps the rows with a non-empty `public_note`, and
+reports which of the now-live ones are missing from `../../irw_site/itemtext_issues.qmd`.
+Inward, it parses the page's own `- table:` entries and reports the ones whose item text
+is not published — the direction the `public_note` filter cannot see, which is how seven
+PROMIS entries outlived the wording's withdrawal and two lost carver uploads went
+unnoticed for two days (#1985). Exit status is 1 while anything is DUE or ORPHAN, so it
+can gate the wrap-up. The categories:
 
 - **DUE** — live and absent. Apply the issues-page bar (Step 6c), then either add the
   entry or record the drop in `fixes/issues_page_dropped.csv`.
 - **PENDING** — note written, table not uploaded. Correctly absent; it will turn DUE on
   the upload that stamps it.
-- **CHECK** — on the page but not marked uploaded. Usually a missing `uploaded` stamp; if
-  it isn't, the page is describing a table nobody can fetch.
+- **STAGED** — on the page and in the draft. Correct at the next release; until then
+  the page is ahead of what a reader can fetch.
+- **CHECK** — on the page, not live, and not in the draft either. The page is describing
+  a table nobody can fetch: either it was never uploaded, or it was withdrawn and its
+  entry should go with it.
+- **STAGED (page-only)** — same, for an entry with no provenance row behind it.
+- **ORPHAN** — on the page, and no item text published under that name at all. The page
+  is describing wording a reader cannot fetch. Remove the entry, or restage the upload —
+  an orphan entry is sometimes the *only* signal an upload was lost, since the internal
+  records all say shipped. If the decision is genuinely still open, record it in
+  `fixes/issues_page_orphans_ack.csv` (table,reason): that stops it gating, not stops it
+  being reported — acknowledged orphans are printed with their reason every run.
+  Skipped **loudly** when `live_tables.csv` is absent; it never quietly passes.
+- **STAMP OWED** — live in Redivis with no `uploaded` value in any provenance row. Fill
+  in the date, or `unrecorded`.
+- **GONE** — provenance says uploaded, not live. Recorded withdrawals are counted and
+  not listed; what is listed is the remainder, which means an upload did not survive, a
+  rename, or a withdrawal nobody wrote down. A withdrawal counts as recorded if the
+  `public_note` opens "IRW does not offer item text for" (what
+  `tools/withdraw_wording_rights.py` writes) or the `note` opens `WITHDRAWN` (what the
+  PROMIS round wrote).
+
+STAMP OWED and GONE do not affect the exit status: they are bookkeeping, not an
+unwritten disclosure. They are printed every run so they cannot accumulate silently, which is how
+#1828's sixteen built up.
 
 This is the step that closes the loop. Without it a note written at triage time is simply
 lost once the upload happens in a later, separate commit — which is how it went wrong for

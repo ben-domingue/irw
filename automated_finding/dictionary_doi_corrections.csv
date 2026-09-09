@@ -1,0 +1,84 @@
+table,current,corrected,rules,contributor
+pisa2015_math,https://doi.org/10.1787/9789264281820-en,10.1787/9789264281820-en,unwrap-doi-url,RK
+pisa2015_read,https://doi.org/10.1787/9789264281820-en,10.1787/9789264281820-en,unwrap-doi-url,RK
+pisa2015_science,https://doi.org/10.1787/9789264281820-en,10.1787/9789264281820-en,unwrap-doi-url,RK
+polca_cheating,https://doi.org/10.4135/9781412984720.n6,10.4135/9781412984720.n6,unwrap-doi-url,BD
+dscore_asq_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_barrera_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_battelle_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_bayley_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_denver_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_dutch_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_griffiths_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_macarthur_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_mds_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_pegboard_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_sbi_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+dscore_vineland_weber_2019,https://doi.org/10.1136/bmjgh-2019-001724,10.1136/bmjgh-2019-001724,unwrap-doi-url,Huanxiao
+friedman_2018_risks_government,https://doi.org/10.7910/DVN/ZSJA25,10.7910/DVN/ZSJA25,unwrap-doi-url,Samuel Enrique Camacho
+friedman_2018_risks_discrimination,https://doi.org/10.7910/DVN/ZSJA25,10.7910/DVN/ZSJA25,unwrap-doi-url,Samuel Enrique Camacho
+trog_brinchmann_2019,https://doi.org/10.1111/desc.12709,10.1111/desc.12709,unwrap-doi-url,Stacy Cremer
+dass21_depression_anxiety_stress,https://doi.org/10.7910/DVN/TAISB2,10.7910/DVN/TAISB2,unwrap-doi-url,automated
+dass21_medical_graduates_bangladesh,https://doi.org/10.7910/DVN/NZ7VFL,10.7910/DVN/NZ7VFL,unwrap-doi-url,automated
+burnout_assessment_tool_teachers,https://doi.org/10.7910/DVN/NFREES,10.7910/DVN/NFREES,unwrap-doi-url,automated
+weber2026_name_knowledge,https://doi.org/10.7910/DVN/3CKJV1,10.7910/DVN/3CKJV1,unwrap-doi-url,automated
+feng2026_perceived_usefulness,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_perceived_ease_of_use,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_autonomy,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_competence,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_ec,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_intrinsic_motivation,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+feng2026_behavioral_intention,https://doi.org/10.7910/DVN/ZDNSFJ,10.7910/DVN/ZDNSFJ,unwrap-doi-url,automated
+cordova2019_clinical_edu_environment,https://doi.org/10.7910/DVN/SHWNK1,10.7910/DVN/SHWNK1,unwrap-doi-url,automated
+chatton2024_honos13,https://doi.org/10.6084/m9.figshare.26631202.v1,10.6084/m9.figshare.26631202.v1,unwrap-doi-url,automated
+lee2024_relative_clause,https://doi.org/10.7910/DVN/K0SRS8,10.7910/DVN/K0SRS8,unwrap-doi-url,automated
+wu2026_typical,https://doi.org/10.1371/journal.pone.0342855,10.1371/journal.pone.0342855,unwrap-doi-url,automated
+wu2026_novel,https://doi.org/10.1371/journal.pone.0342855,10.1371/journal.pone.0342855,unwrap-doi-url,automated
+wu2026_liking,https://doi.org/10.1371/journal.pone.0342855,10.1371/journal.pone.0342855,unwrap-doi-url,automated
+arora2025_blueq_pedagogical,https://doi.org/10.7910/DVN/ZZPUWB,10.7910/DVN/ZZPUWB,unwrap-doi-url,automated
+arora2025_blueq_synchronous,https://doi.org/10.7910/DVN/ZZPUWB,10.7910/DVN/ZZPUWB,unwrap-doi-url,automated
+arora2025_blueq_asynchronous,https://doi.org/10.7910/DVN/ZZPUWB,10.7910/DVN/ZZPUWB,unwrap-doi-url,automated
+yandun2026_attention,https://doi.org/10.6084/m9.figshare.32114668.v1,10.6084/m9.figshare.32114668.v1,unwrap-doi-url,automated
+yandun2026_memory,https://doi.org/10.6084/m9.figshare.32114668.v1,10.6084/m9.figshare.32114668.v1,unwrap-doi-url,automated
+yandun2026_language,https://doi.org/10.6084/m9.figshare.32114668.v1,10.6084/m9.figshare.32114668.v1,unwrap-doi-url,automated
+yandun2026_logical_thinking,https://doi.org/10.6084/m9.figshare.32114668.v1,10.6084/m9.figshare.32114668.v1,unwrap-doi-url,automated
+chen2022_cls,10.3389/fpsyg.2022.1014794.s001,10.3389/fpsyg.2022.1014794,drop-supplement-suffix,automated
+chen2022_ses,10.3389/fpsyg.2022.1014794.s001,10.3389/fpsyg.2022.1014794,drop-supplement-suffix,automated
+chen2022_sasc,10.3389/fpsyg.2022.1014794.s001,10.3389/fpsyg.2022.1014794,drop-supplement-suffix,automated
+wu2021_empathy,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+wu2021_resilience,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+wu2021_burnout,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+wu2021_swls,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+wu2021_career_expectation,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+wu2021_panas,10.3389/fpsyg.2021.708342.s001,10.3389/fpsyg.2021.708342,drop-supplement-suffix,automated
+hao_2025_emotional_regulation,data doi: 10.6084/m9.figshare.30397234.v1,10.6084/m9.figshare.30397234.v1,drop-doi-prefix,automated
+hao_2025_metacognitive_regulation,data doi: 10.6084/m9.figshare.30397234.v1,10.6084/m9.figshare.30397234.v1,drop-doi-prefix,automated
+hao_2025_social_regulation,data doi: 10.6084/m9.figshare.30397234.v1,10.6084/m9.figshare.30397234.v1,drop-doi-prefix,automated
+hao_2025_self_efficacy,data doi: 10.6084/m9.figshare.30397234.v1,10.6084/m9.figshare.30397234.v1,drop-doi-prefix,automated
+hao_2025_foreign_language_anxiety,data doi: 10.6084/m9.figshare.30397234.v1,10.6084/m9.figshare.30397234.v1,drop-doi-prefix,automated
+fang_2022_achievement_emotions,data doi: 10.17608/k6.auckland.19546393.v1,10.17608/k6.auckland.19546393.v1,drop-doi-prefix,automated
+jeilani_2024_academic_stress,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_psychological_wellbeing,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_self_efficacy,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_social_support,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_social_support_family,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_social_outcomes,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_social_anxiety,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_emotional,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_personal_growth,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_proactivity,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+jeilani_2024_purpose_in_life,data doi: 10.6084/m9.figshare.26820745.v4,10.6084/m9.figshare.26820745.v4,drop-doi-prefix,automated
+galindo_2023_social_support,data doi: 10.7910/dvn/edevgy,10.7910/dvn/edevgy,drop-doi-prefix,automated
+galindo_2023_emotional_intelligence,data doi: 10.7910/dvn/edevgy,10.7910/dvn/edevgy,drop-doi-prefix,automated
+galindo_2023_loneliness,data doi: 10.7910/dvn/edevgy,10.7910/dvn/edevgy,drop-doi-prefix,automated
+galindo_2023_beliefs,data doi: 10.7910/dvn/edevgy,10.7910/dvn/edevgy,drop-doi-prefix,automated
+bakumenko_2023_adyghe_values,"data doi: 10.7910/dvn/nirwkz; Russian/Adyghe language; non-standard columns: item_text, item_text_translated","10.7910/dvn/nirwkz; Russian/Adyghe language; non-standard columns: item_text, item_text_translated",drop-doi-prefix,automated
+chen_2022_sasc,https://doi.org/10.57760/sciencedb.o00115.00089,10.57760/sciencedb.o00115.00089,unwrap-doi-url,sinew
+chen_2022_cesd,https://doi.org/10.57760/sciencedb.o00115.00089,10.57760/sciencedb.o00115.00089,unwrap-doi-url,sinew
+chen_2022_gad,https://doi.org/10.57760/sciencedb.o00115.00089,10.57760/sciencedb.o00115.00089,unwrap-doi-url,sinew
+frikha_2023_pe_acrs,10.1371/journal.pone.0297822.,10.1371/journal.pone.0297822,drop-trailing-period,automated
+frikha_2023_pe_ms,10.1371/journal.pone.0297822.,10.1371/journal.pone.0297822,drop-trailing-period,automated
+anthropomorphism_health_Voropaeva_2026,https://doi.org/10.6084/m9.figshare.32287584,10.6084/m9.figshare.32287584,unwrap-doi-url,Tyler Matteson
+kalichman1995_scs,https://doi.org/10.1207/s15327752jpa6503_16,10.1207/s15327752jpa6503_16,unwrap-doi-url,bd
+falih_2026_mds16,https://doi.org/10.7910/DVN/8YLSMK,10.7910/DVN/8YLSMK,unwrap-doi-url,automated
+falih_2026_dass21,https://doi.org/10.7910/DVN/8YLSMK,10.7910/DVN/8YLSMK,unwrap-doi-url,automated

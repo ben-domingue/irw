@@ -57,6 +57,30 @@ table on day one.
 distinct value carries no information for any model, at any altitude. It grows
 one documented case at a time.
 
+### Literal missing-value tokens (#2029)
+
+For `upload` and `legacy`, every non-missing `resp` must parse as a number.
+There is no 1% allowance for invalid values. File validation preserves literal
+text such as `NA`, `N/A`, `NULL` and whitespace so it can report an error with
+the count and up to five examples. A genuinely empty CSV field (including
+`""`) remains missing: partial missingness is a `resp_na` warning; an entirely
+missing response column still blocks. No source file or input frame is edited.
+
+CSV/TSV/TXT validation makes a second pass reading only `resp` with pandas'
+default NA-token conversion disabled. Other columns keep their existing
+parsing behavior, and clean numeric response columns still infer numeric types.
+Item-text tables use their separate schema and retain their existing reader.
+The `core` and `triage` profiles retain their earlier parsing and numeric
+threshold; callers using `run_qc` should use `validate_file(..., profile="upload")`
+on the written file when they need this publication check.
+
+For an in-memory frame, genuine nulls remain missing and literal text is
+checked, but a token already erased by an upstream reader cannot be recovered.
+The existing 512 MiB file-size cap still applies; files over it receive only
+name checks. This change does not repair historical tables, resolve the meaning
+of their missingness, or alter published response counts. Review source coding
+before changing rows; the finding deliberately does not prescribe deletion.
+
 ## The override
 
 ```

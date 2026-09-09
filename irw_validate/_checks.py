@@ -266,7 +266,13 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # `sdv` spanned 1-5, 1-7, 1-8 and 1-9 at once, and `submiss` -- a
     # missing-response count, 94.8% zero -- was the only column in the HPQ
     # outside its 1-5 scale.
-    if {"item", "resp"}.issubset(df.columns):
+    # A mix of numbers and invalid text has no comparable response-scale range.
+    # Skip this heuristic so the numeric finding can be returned (#2029).
+    # This also avoids int/string comparisons for in-memory inputs, whether
+    # the incompatible values occur within one item or across several items.
+    mixed_numeric_text = (resp_num.notna().any()
+                          and (df["resp"].notna() & resp_num.isna()).any())
+    if {"item", "resp"}.issubset(df.columns) and not mixed_numeric_text:
         rng = df.dropna(subset=["resp"]).groupby("item")["resp"].agg(["min", "max"])
         if len(rng) >= 3:
             profile = collections.Counter(zip(rng["min"], rng["max"]))

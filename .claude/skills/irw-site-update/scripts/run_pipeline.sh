@@ -22,6 +22,50 @@
 # stays last. It needs no credentials and no Redivis access at all, so it is
 # the one stage that is fully reviewable offline.
 #
+# 11_status.R (issue #1940, added 2026-09-08) runs BETWEEN 10 and 09. It was
+# written for #1765/2.5c and then never wired in at all -- it was absent from
+# STAGE_SCRIPT, so `run_pipeline.sh 11` answered `warn: unknown stage` and the
+# only way to refresh status.json was to remember to run the script by hand.
+# Nobody did: by 2026-09-08 status.json on main reported n_tables 4134 in a
+# commit whose metadata.csv held 4,238 rows, so every percentage in it was
+# computed on a denominator 104 tables short. That is precisely the failure the
+# file exists to prevent, which is the argument for running it HERE rather than
+# on a clock of its own: computed in the same run that writes its inputs, it
+# cannot disagree with the metadata.csv it ships beside.
+#
+# It must follow 01, 03 and 08 (it reads metadata.csv, tags.csv and
+# itemtext_metadata.csv off disk) and it needs no credentials and no Redivis
+# access -- the second stage after 10 that is fully reviewable offline.
+#
+# The reason its outputs are committed while the rest of metadata/**/*.csv is
+# gitignored is in 11_status.R's own header: status_history.tsv is append-only
+# and the TREND is the deliverable. Note that it appends one row per run, so a
+# workflow_dispatch on the same day as the scheduled run adds a second row for
+# that date -- deliberate, and why the file is a history rather than a table
+# keyed on date.
+#
+# 12_stragglers.R (issue #1940, added 2026-09-08) runs after 11 and before 09.
+# It names tables that are live on Redivis and have had no metadata.csv row for
+# several runs. A table missing for one run is NORMAL -- 01 carries a
+# refresh.per.run throttle, and #1704 established that a snapshot count of
+# missing metadata measures throttle position, not pipeline health. So it alerts
+# on a NAMED table that has PERSISTED, never on a count, which is why it needs
+# cross-run memory: straggler_watch.tsv (table, first_seen, last_seen, cycles),
+# git-tracked for the same .tsv reason 11_status.R documents.
+#
+# Two things make it unlike 11:
+#
+#   * it MUST call Redivis (irw::irw_list_tables) -- the question is which live
+#     tables are absent from metadata.csv, so metadata.csv cannot be its own
+#     catalog. `--live-from FILE` is the offline escape hatch.
+#   * it EXITS 1 when a table is stuck. Under `set -e` that would abort the run
+#     and take 09 with it, turning a report into an outage. Hence ADVISORY_STAGE
+#     above: the exit is caught, recorded and surfaced, never fatal.
+#
+# Its --min-live guard (default 1000) refuses to touch the watch file when the
+# live fetch comes back short, so a truncated Redivis read cannot erase the
+# history that makes "persisted" meaningful. Leave it on.
+#
 # 08_itemtext.R (readability-stats metadata for item text) joined the
 # default order 2026-08-02. Split of responsibility, confirmed with Ben:
 # this skill produces metadata FOR item text that's already been procured;
@@ -37,10 +81,12 @@
 # variant, see above) are out of scope per Ben (2026-07-27) -- ignored.
 #
 # Usage:
-#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 09)
+#   scripts/run_pipeline.sh                 # full default sequence (01 02 03 05 06 07 08 10 11 12 09)
 #   scripts/run_pipeline.sh 01 03           # only metadata.csv + tags.csv
 #   scripts/run_pipeline.sh 08              # just the itemtext metadata stage
 #   scripts/run_pipeline.sh 10              # just the collections tables
+#   scripts/run_pipeline.sh 11              # just the corpus status numbers
+#   scripts/run_pipeline.sh 12              # just the straggler watch
 #   scripts/run_pipeline.sh --no-09         # everything except the hero JSON
 #
 # Requires: Redivis credentials configured externally (per root CLAUDE.md;
@@ -81,7 +127,16 @@ fi
 declare -A STAGE_SCRIPT=( [01]=01_metadata.R [02]=02_biblio.R [03]=03_tags.R
                           [05]=05_comps.R [06]=06_nominal.R [07]=07_simsyn.R
                           [08]=08_itemtext.R [10]=10_collections.R
+                          [11]=11_status.R [12]=12_stragglers.R
                           [09]=09_hero_status.R )
+
+# Stages whose non-zero exit is a FINDING, not a failure. 12 exits 1 when a
+# table has been stuck for several runs -- that is the report doing its job, and
+# under `set -e` it would otherwise abort the run and take 09 down with it. The
+# run loop tolerates the exit and records it; the workflow turns it into a line
+# in the pull request body. Nothing else may be added here without the same
+# argument: a stage that can fail silently is worse than one that stops the run.
+declare -A ADVISORY_STAGE=( [12]=1 )
 # CSVs each stage is expected to touch (space-separated), for snapshot/diff.
 declare -A STAGE_OUTPUTS=(
   [01]="metadata.csv"
@@ -92,9 +147,11 @@ declare -A STAGE_OUTPUTS=(
   [07]="simsyn_metadata.csv"
   [08]="itemtext_metadata.csv"
   [10]="collections.csv collection_members.csv"
+  [11]=""   # writes status.json + status_history.tsv -- reported separately below
+  [12]=""   # writes straggler_watch.tsv -- reported separately below
   [09]=""   # writes JSON, not a keyed CSV -- reported separately below
 )
-DEFAULT_ORDER=(01 02 03 05 06 07 08 10 09)
+DEFAULT_ORDER=(01 02 03 05 06 07 08 10 11 12 09)
 
 # Join key for the diff, per output file. Everything is keyed on `table` except
 # the two collections outputs (issue #1633): the registry is one row per
@@ -141,6 +198,7 @@ for stage in "${stages[@]}"; do
 done
 
 cd "$METADATA_DIR"
+ADVISORY_HIT=()
 for stage in "${stages[@]}"; do
   [[ -z "$stage" ]] && continue
   script="${STAGE_SCRIPT[$stage]:-}"
@@ -150,7 +208,23 @@ for stage in "${stages[@]}"; do
   fi
   echo ""
   echo "== Stage $stage: Rscript $script =="
-  Rscript "$script"
+  if [[ -n "${ADVISORY_STAGE[$stage]:-}" ]]; then
+    # Markers, not just an exit code: the workflow lifts what is between them
+    # into the pull request body, so the named tables travel with the review
+    # rather than being buried in a 40kB log tail.
+    echo "--- ADVISORY $stage BEGIN ---"
+    set +e
+    Rscript "$script"
+    stage_rc=$?
+    set -e
+    echo "--- ADVISORY $stage END ---"
+    if [[ $stage_rc -ne 0 ]]; then
+      echo "advisory: stage $stage exited $stage_rc -- a finding, not a failed run."
+      ADVISORY_HIT+=("$stage")
+    fi
+  else
+    Rscript "$script"
+  fi
 
   # Diff THIS stage's outputs immediately, not batched at the end -- if a
   # later stage fails, set -e aborts the script, and a batched-at-the-end
@@ -179,6 +253,19 @@ for stage in "${stages[@]}"; do
     python3 "$SCRIPT_DIR/diff_csv.py" "$SNAPSHOT_DIR/$f" "$METADATA_DIR/$f" \
       --key "${DIFF_KEY[$f]:-table}"
   done
+  if [[ "$stage" == "12" ]]; then
+    echo "straggler_watch.tsv rewritten -- table, first_seen, last_seen, cycles."
+    echo "A row here is a table live on Redivis with no metadata.csv row. That is"
+    echo "NORMAL while 01's refresh throttle works through the backlog; what is not"
+    echo "normal is the same table still there several runs later, which is the only"
+    echo "thing this stage reports."
+  fi
+  if [[ "$stage" == "11" ]]; then
+    echo "status.json rewritten and one row appended to status_history.tsv --"
+    echo "neither is a keyed CSV, so read them directly. The number to check is"
+    echo "\`n_tables\`: it must equal the row count of the metadata.csv committed"
+    echo "in the same change, which is the whole reason this stage runs here."
+  fi
   if [[ "$stage" == "09" ]]; then
     echo "hero_stats.json written -- not a keyed CSV, review the file directly"
     echo "(default path: $REPO_ROOT/../irw_site/data/hero_stats.json, or check 09's stdout above)."
@@ -186,5 +273,9 @@ for stage in "${stages[@]}"; do
 done
 
 echo ""
+if [[ ${#ADVISORY_HIT[@]} -gt 0 ]]; then
+  echo "Advisory stage(s) reported a finding: ${ADVISORY_HIT[*]} -- see above."
+  echo ""
+fi
 echo "Done. Nothing here uploads to Redivis or touches irw_site -- review the"
 echo ".diff.csv files above, then merge into Redivis / commit by hand."

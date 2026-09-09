@@ -50,14 +50,85 @@ jobs:
       - name: irw_validate
         run: python -m unittest discover -s irw_validate/tests -t . -v
 
+      # The dictionary staging writer (#1732) and the DOI normaliser it calls
+      # (#1690). The writer's load-bearing test is that a value beginning "-",
+      # "=", "+" or "@" is written unchanged: the first version escaped those
+      # for the Sheets paste path, which this replaces, and the apostrophe
+      # corrupted three real Notes cells. The normaliser's is that stripping a
+      # `https://doi.org/` wrapper never changes WHICH object the DOI names --
+      # a data DOI stays a data DOI, and is reported rather than rewritten.
+      - name: stage_dict_row
+        run: python -m unittest discover -s automated_finding/tests -t . -v
+
+      # The item-text liveness snapshot (#1828). Offline by construction: the
+      # Redivis call lives in fetch(), and what is checked here is the file
+      # contract between the Python writer and the R checker that reads it.
+      - name: itemtext live_tables
+        run: python -m unittest discover -s itemtext/tests -t . -v
+
       # The R validator is the copy external contributors source from a raw
       # GitHub URL, so it has to keep parsing even though nothing here imports
       # it. irw_validate's parity test checks that its `# @check` markers still
       # match CORE_CHECKS; this checks it is still valid R.
       - name: validate_irw.R still parses
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
+          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
           Rscript misc/tests/smoke_validate_irw.R
+
+      # The dictionary union (#1732). Runs offline -- dict_union.R touches no
+      # network -- so the merge rule is checked on every PR rather than only
+      # when someone remembers to run it. Its load-bearing assertion is that a
+      # human's non-empty cell is never overwritten.
+      #
+      # metadata/tests/test_tags_union.R is NOT here, and should be: it holds
+      # the only assertion that verbatim paper excerpts cannot reach a public
+      # CSV. It sources 03_tags.R, which needs the `gsheet` package, and there
+      # is no apt package for it -- adding it means installing from CRAN in CI.
+      # Tracked as part of #1863.
+      - name: dictionary union
+        working-directory: metadata
+        run: Rscript tests/test_dict_union.R
+
+      # Redivis config parity (#1733). The dataset list is declared once per
+      # language -- here, in Rpkg, and in Python-pkg -- and nothing compared
+      # the three. They had already drifted: Python-pkg carried no reference to
+      # irw_nominal, so that source was reachable from R and not from Python
+      # for months, and it was found by hand rather than by anything mechanical.
+      #
+      # The issue proposed hanging this off the weekly pipeline, because that
+      # was the only job with all the checkouts on disk. Both package repos are
+      # public, so any runner can have them -- which makes this a per-PR check
+      # that fails in the pull request that introduces the drift, rather than in
+      # the following Monday's metadata PR, which is about something else.
+      #
+      # Both are checked out at their default branch on purpose. A config change
+      # is only really landed once it is on main in all three repos, and that is
+      # the state this is asserting.
+      - name: Check out Rpkg
+        uses: actions/checkout@v4
+        with:
+          repository: itemresponsewarehouse/Rpkg
+          path: _deps/Rpkg
+
+      - name: Check out Python-pkg
+        uses: actions/checkout@v4
+        with:
+          repository: itemresponsewarehouse/Python-pkg
+          path: _deps/Python-pkg
+
+      # The unit tests first: they cover the parsers against synthetic files,
+      # including the floor that makes a config this can no longer read ERROR
+      # instead of comparing three empty sets and reporting green. Run as a
+      # script rather than through unittest discovery because metadata/ is not
+      # an importable package, unlike red_up/ and irw_validate/ above.
+      - name: config parity tests
+        run: python metadata/tests/test_config_parity.py -v
+
+      - name: Redivis config parity
+        run: |
+          python metadata/check_config_parity.py \
+            --rpkg  _deps/Rpkg/R/redivis-config.R \
+            --pypkg _deps/Python-pkg/src/irw/config.py
 
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the

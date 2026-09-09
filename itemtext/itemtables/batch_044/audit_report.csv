@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"hayek_2022_attitude","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"hayek_2022_self_efficacy","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"hayek_2022_subj_norm","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
+"hellstrom_2019_isi","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""

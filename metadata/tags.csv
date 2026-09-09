@@ -948,7 +948,6 @@ duong_2025_tbl_confidence,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale
 duong_2025_tbl_experience,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 dussel_2022_hads14,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,fre,NA
 dussel_2022_pcl17,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,fre,NA
-dvivdtws_ppmial_marcatto_2023_cwb,Adult (18+),NA,General/non-specific,"Behavioral, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,ita,Counterproductive Work Behavior Items (CWB)
 dvivdtws_ppmial_marcatto_2023_dtw,Adult (18+),NA,General/non-specific,"Opinion/attitude, Personality",Survey/questionnaire,Likert Scale/selected response,ita,Dark Tetrad at Work (DTW)
 dvivdtws_ppmial_marcatto_2023_ocb,Adult (18+),NA,General/non-specific,"Behavioral, Opinion/attitude",Survey/questionnaire,Likert Scale/selected response,ita,Organizational Citizenship Behavior (OCB) Items
 dvivdtws_ppmial_marcatto_2023_ocs,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,ita,Dark Tetrad at Work (DTW) scale
@@ -2234,6 +2233,7 @@ mavromoustakos_2016_ztpi,Adult (18+),NA,Internet-based,NA,Survey/questionnaire,L
 mbft_anunciacao_2024,Mixed,"Early (<6y), Adolescent (12-18y)",Internet-based,Personality,Survey/questionnaire,Likert Scale/selected response,por,Personality Factor Inventory
 mboya_2020_gds15,Elderly (minimum age >50),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swa,NA
 mbps_vangsness_2019,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,eng,Metacognitive Beliefs About Procrastination
+mcauliffe_2025_thirdpartypunishment,Child (<18y),Child (6-12y),"Educational, Targeted/specific",Developmental,Observational rating,Mixed,eng,Third-Party Punishment of Unfair Sharing (Canada)
 mccarlie_2022_ortho_literacy,NA,NA,Clinical,NA,Test,Likert Scale/selected response,eng,NA
 mclaughlin_samuel_2025_auditory_session_1,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Slider/continuous,eng,Assessing Sandwich Builder as a measure of auditory short-term memory
 mclaughlin_samuel_2025_auditory_session_2,Adult (18+),NA,Internet-based,Cognitive/educational,Test,Constructed Response,eng,Assessing Sandwich Builder as a measure of auditory short-term memory and Auditory speech perception test (speech transcription accuracy)
@@ -2517,7 +2517,7 @@ nature_relatedness,Adult (18+),NA,Internet-based,Opinion/attitude,Survey/questio
 nelson2019_ipqrd,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 nelson_2019_ipqrde,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 nerdy_personality,Adult (18+),NA,Internet-based,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Nerdy Personality Attributes Scale
-neurips_2020,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,eng,NeurIPS 2020 Education Challenge
+neurips_2020,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,NeurIPS 2020 Education Challenge
 neurips_2022,NA,NA,NA,NA,NA,NA,NA,NA
 neurodegenerative_huizinga_2019_brief,Adult (18+),NA,"Internet-based, Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,dut,Behavior Rating Inventory of Executive Function - Adult (BRIEF-A)
 neurodegenerative_huizinga_2019_cvc,Adult (18+),NA,"Internet-based, Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,The Cerebral Visual Complaints questionnaire (CVC-q)
@@ -2540,11 +2540,16 @@ nguyen_2026_autonomy_school_autonomy_support,NA,NA,Educational,NA,Survey/questio
 nguyen_2026_autonomy_student_choice,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_autonomy_student_ownership,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_autonomy_student_voice,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
+nguyen_2026_barthel,Mixed,Adolescent (12-18y),Clinical,Physical health/functioning,NA,Likert Scale/selected response,vie,Activities of daily living / functional independence (Barthel Index)
+nguyen_2026_gad7,Mixed,Adolescent (12-18y),Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,vie,Generalized anxiety symptoms (GAD-7)
+nguyen_2026_isi,Mixed,Adolescent (12-18y),Clinical,Affective/mental health,Survey/questionnaire,Likert Scale/selected response,vie,Insomnia symptoms and interference (Insomnia Severity Index)
 nguyen_2026_misfit_academic_performance,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_misfit_learning_misfit,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
 nguyen_2026_misfit_learning_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_misfit_learning_satisfaction,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_misfit_technostress,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
+nguyen_2026_mspss,Mixed,Adolescent (12-18y),Clinical,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,vie,Perceived social support (MSPSS)
+nguyen_2026_pic,Mixed,Adolescent (12-18y),Clinical,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,vie,Perceived preoperative information and counseling
 nguyen_2026_sdt_academic_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 nguyen_2026_sdt_autonomy,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
 nguyen_2026_sdt_competence,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
@@ -2615,7 +2620,7 @@ os_tbmwtfs_schubert_2023_smw,Adult (18+),NA,"Educational, General/non-specific",
 osce_hejri_2017,Adult (18+),NA,Educational,Behavioral,Observational rating,Likert Scale/selected response,eng,Objective Structured Clinical Examination
 osorio_2023_dos,Mixed,Adolescent (12-18y),NA,NA,Survey/questionnaire,Likert Scale/selected response,spa,NA
 otaki_2022_dental_adaptability,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
-oxfordcovid_xue_2024_at,Mixed,Adolescent (12-18y),"Educational, Internet-based",Behavioral,Survey/questionnaire,Mixed,eng,Oxford Activities and Technology Use Scale
+oxfordcovid_xue_2024_at,Mixed,Adolescent (12-18y),"Educational, Internet-based",Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Oxford Activities and Technology Use Scale
 oxfordcovid_xue_2024_bfi,Mixed,Adolescent (12-18y),"Educational, Internet-based",Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five Inventory
 oxfordcovid_xue_2024_brs,Mixed,Adolescent (12-18y),"Educational, Internet-based",Affective/mental health,Survey/questionnaire,Likert Scale/selected response,eng,Brief Resilience Scale (BRS)
 oxfordcovid_xue_2024_edeq,Mixed,Adolescent (12-18y),"Educational, Internet-based",Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Eating Disorder Examination Questionnaire -Short (EDE-QS)
@@ -3366,6 +3371,21 @@ spain_2013_services_offices,Adult (18+),NA,General/non-specific,Opinion/attitude
 spain_2013_services_othercontact,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Mixed,spa,"Contact with Public Administration by Mail, Telephone and Internet"
 spain_2013_services_purpose,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Mixed,spa,Purpose of In-Person Visit to a Public Office
 spain_2013_services_services,Adult (18+),NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Mixed,spa,Satisfaction with Specific Public Services
+spain_2016_cooperation_awareness,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Awareness of development policy
+spain_2016_cooperation_duty,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Support for development cooperation duty
+spain_2016_cooperation_funding,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Perceived subnational aid funding
+spain_2016_cooperation_interest,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Interest in international affairs
+spain_2016_pain_beliefs,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Pain beliefs
+spain_2016_pain_coping,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Pain coping
+spain_2016_pain_difficulty,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Pain interference
+spain_2016_pain_effectiveness,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Treatment effectiveness
+spain_2016_pain_fitness,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Physical condition
+spain_2016_pain_frequency,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Pain frequency
+spain_2016_pain_health,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Self-rated health
+spain_2016_pain_personality,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Personality traits
+spain_2016_pain_social,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Social support adequacy
+spain_2016_pain_support,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Perceived social support in pain
+spain_2016_pain_wellbeing,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Slider/continuous,spa,Subjective wellbeing
 spain_2017_politics_agreement,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Tax evasion attitudes
 spain_2017_politics_attitudes,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Fiscal efficacy
 spain_2017_politics_burden,Mixed,NA,General/non-specific,Opinion/attitude,Survey/questionnaire,Likert Scale/selected response,spa,Tax burden perception
@@ -3665,6 +3685,11 @@ szabo_2025_work_addiction,Adult (18+),NA,Workplace,NA,Survey/questionnaire,Liker
 szabo_2025_work_conflict,Adult (18+),NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,hun,NA
 szameitat_2015_multitask_examples,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,"eng, ger, dut, tur",NA
 szameitat_2015_occupation_multitask,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
+talaifar_2025_study1_bfi,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Big Five personality (BFI-44)
+talaifar_2025_study1_lifestyle_survey,Adult (18+),NA,Educational,Behavioral,Survey/questionnaire,Likert Scale/selected response,eng,Everyday-activity frequency (Lifestyle Survey)
+talaifar_2025_study1_tivi,Adult (18+),NA,Educational,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Human values (Ten-Item Values Inventory)
+talaifar_2025_study2_plp,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,Perceived lifestyle polarization (liberal vs. conservative behavior ratings)
+talaifar_2025_study2_thermometer,Adult (18+),NA,Educational,Opinion/attitude,Survey/questionnaire,Slider/continuous,eng,Affective polarization (feeling thermometer toward liberals and conservatives)
 tan_2026_stem_technology_integration,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,NA,NA
 tanck_2021_bcq,NA,NA,Internet-based,NA,Survey/questionnaire,Likert Scale/selected response,ger,NA
 tanck_2021_edeq,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,ger,NA

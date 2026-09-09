@@ -7,6 +7,18 @@ df <- df |>
   pivot_longer(cols = -responseid,
                names_to = 'item',
                values_to = 'resp')
+## 2026-09-08 (#2029): the last three columns of the source spreadsheet are
+## empty, so items 54-56 shipped as 26,347 rows of NA each -- against ~14% NA
+## for items 49-53. Nothing was destroyed here; they should simply never have
+## been published. Drop any item with no response at all before the ids are
+## assigned. They are the final three columns, so items 1-53 keep their
+## existing numbering and the published table stays comparable.
+informative <- df |>
+  group_by(item) |>
+  summarise(n_resp = sum(!is.na(resp)), .groups = 'drop') |>
+  filter(n_resp > 0) |>
+  pull(item)
+df <- df |> filter(item %in% informative)
 items <- as.data.frame(unique(df$item))
 items <- items |>
   mutate(item_id = row_number())

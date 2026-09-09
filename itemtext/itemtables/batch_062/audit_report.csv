@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"kim_2023_phq9","PASS",9,9,TRUE,TRUE,FALSE,TRUE,0,0,""
+"kim_2025_isi","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"kim_2025_psas","PASS",16,16,TRUE,TRUE,FALSE,TRUE,0,0,""
+"kiraly_2024_perinatal_mh_freq","WARN",16,16,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=81: ask_about_my_patients_social_support_and_planning_to_get_forms_of_support_after_birth, ask_about_the_infants_well_being_during_postpartum_office_visits, ask_about_the_mothers_well_being_and_mental_health_during_postpartum_office_visits, more_alert_to_patients_mental_health_and_emotional_state_if_they_had_miscarriages_or_complications_in_the_past"

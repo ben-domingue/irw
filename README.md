@@ -37,7 +37,7 @@ irw_fetch("agn_kay_2025")
 
 **Python:**
 ```bash
-python -m pip install "git+https://github.com/itemresponsewarehouse/Python-pkg.git"
+python -m pip install irw
 ```
 ```python
 import irw

@@ -42,7 +42,9 @@ import re
 import csv
 import json
 import time
+import sys
 import argparse
+import subprocess
 from collections import defaultdict
 from urllib.parse import urlparse
 
@@ -750,6 +752,11 @@ def main():
                     help=f"don't consult/update {SEEN_KEYS_PATH} (the cross-run dedup "
                          "store shared with the scheduled repos routine) -- use to "
                          "deliberately re-triage a candidate, e.g. after a script fix")
+    ap.add_argument("--retriage", action="store_true",
+                    help="on finishing, run irw_retriage_ha.py over this run's "
+                         "human_assistance rows (Step 2b) and write "
+                         "<out>.retriage_ha.csv. Scheduled/unattended runs should "
+                         "always pass this -- see the note in main()")
     args = ap.parse_args()
 
     args.candidates_csv = resolve_in_path(args.candidates_csv)
@@ -775,8 +782,21 @@ def main():
     print("Work the 'good' rows first; they're sorted to the top.")
     # The queue sheet and irw_process_queue.py were retired (2026-06-24 /
     # 2026-08-12); pointing people at them was sending them to a dead end.
-    print("Refine the human_assistance rows with irw_retriage_ha.py, then")
-    print("write a per-dataset script in data/ for good / worth_retrying.")
+    print("Write a per-dataset script in data/ for good / worth_retrying.")
+
+    # Step 2b, chained rather than suggested. This used to be a one-line
+    # print telling the reader to "refine the human_assistance rows with
+    # irw_retriage_ha.py" -- and the scheduled routines simply didn't, run
+    # after run, committing triage CSVs with no refined_flag column and
+    # leaving the whole bucket unclassified (2026-09-07 is one of several).
+    # A hint that is ignored every week is not a hint that needs rewording,
+    # it needs to stop being optional.
+    #
+    # The implementation lives in irw_retriage_ha.chain_step2b so the three
+    # scheduled connectors, which never call this script, get the same step
+    # rather than a second copy that drifts (see that docstring).
+    from irw_retriage_ha import chain_step2b
+    chain_step2b(args.out, run=args.retriage)
 
 
 if __name__ == "__main__":

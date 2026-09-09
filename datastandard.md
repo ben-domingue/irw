@@ -41,6 +41,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `id` | yes | Identifier for the focal unit being measured — typically a person, but sometimes another entity (e.g., a word in a lexical task). Integer or string. Must be unique per focal unit (not per row). |
 | `item` | yes | Item identifier. String. Use original column names when they are meaningful; use `item_1`, `item_2`, … when they are not. Item names should be chosen to allow straightforward downstream matching with item text — prefer names that correspond directly to identifiers used in the source instrument or codebook (e.g., `BDI_1`, `PHQ_3`) over generic positional labels whenever such identifiers exist. |
 | `resp` | yes | Response value. Must be numeric. Higher values represent a consistent directional change **within** each item, but direction may vary **across** items — do not recode reverse-scored items unless you have specific reason to. Remove imputed values. Continuous responses are acceptable (e.g. a 0–100 slider, "how well does this describe you?") — keep `resp` as a float and don't coerce to integer. Don't confuse this with an *aggregate* score summed/averaged across items; that's a composite, not a response, and doesn't belong in `resp` (see "Subscale aggregate columns" below). |
+| `resp_raw` | no | The response as originally recorded, where `resp` holds a scored or recoded version of it — the letter a candidate marked (`A`–`E`), an option label, a categorical string. Use it only when `resp` genuinely loses information; don't mirror a numeric `resp` into it. **Spell it `resp_raw`, not `raw_resp`.** Both spellings are live in the corpus and this is the one to emit — see "The raw response and the nominal tranche" below for why the spelling is load-bearing rather than cosmetic. |
 | `cov_*` | no | Covariates that are invariant to the focal unit (e.g., a person's gender or age). Always prefix with `cov_`. |
 | `itemcov_*` | no | Covariates invariant to measurement probes (item-level attributes). Always prefix with `itemcov_`. |
 | `wave` | no | Longitudinal wave indicator. Larger values indicate later collection. Use when the same focal unit appears at multiple time points. |
@@ -51,7 +52,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `rater` | no | Observer identifier in scenarios where items are rated by an external observer rather than self-reported. |
 | `item_family` | no | Groups items that may violate local independence — testlets, clones, or clusters of similar items. |
 
-Column order in the output file: `id`, `item`, `resp`, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
+Column order in the output file: `id`, `item`, `resp`, `resp_raw` if present, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
 
 **Common mistake:** When melting with `id_vars=["id"] + cov_cols`, pandas places covariates immediately after `id` in the output — before `item` and `resp`. Always reorder explicitly after melting:
 ```python
@@ -327,6 +328,44 @@ data = raw.iloc[2:].reset_index(drop=True)  # skip rows 0 and 1
 
 ### Item-level covariates (`itemcov_*`)
 When the source data includes attributes of the items themselves (e.g., item difficulty category, domain, modality) rather than attributes of the person, prefix those columns with `itemcov_` rather than `cov_`. They should still be consistent within each item across all rows for that item.
+
+### The raw response (`resp_raw`) and the nominal tranche
+
+`resp_raw` is not a private convenience column. It is the warehouse-side name for
+exactly the content the **nominal tranche** publishes as `text`, and the scripts in
+`data/nominal/` are a rename and nothing more:
+
+```r
+df$text <- df$resp_raw
+df$resp_raw <- NULL
+```
+
+The nominal tranche (Redivis source `irw_nominal`) is where the *unscored* response is
+the object of interest rather than a footnote to it — which option was chosen, not
+whether it was right. `resp` is retained alongside `text` as the score, so a nominal
+table is the same observation seen from the other side.
+
+That is why the spelling matters mechanically and not just for tidiness. Each nominal
+wrapper hardcodes one spelling, so a warehouse table that emits the other is simply
+unreadable by it until someone edits the wrapper. Today the split runs straight through
+`data/nominal/`: `enem.R`, `borges_brazil.R` and `himmelstein.R` read `resp_raw`, while
+`much_tte_2025.R` and `wilmer.R` read `raw_resp`. Emitting `resp_raw` means a table can
+be lifted into the nominal tranche without a bespoke wrapper.
+
+Two consequences for a converter:
+
+- **If the raw response is worth keeping at all, name it `resp_raw`.** A table that gets
+  this right is nominal-ready; one that spells it `raw_resp` is not.
+- **Don't put the raw response in `resp`.** `resp` must stay numeric (see above). A
+  lettered or labelled response belongs in `resp_raw` with the score in `resp`, not
+  forced into `resp` as a factor level.
+
+Known exceptions, being converted rather than blessed: seven published tables carry
+`raw_resp` — `fullscaleiq_memory`, `fullscaleiq_mentalrotation`, `fullscaleiq_vocab`,
+`much_tte_2025_concentrationtask`, `much_tte_2025_matrixreasoning`,
+`wilmer-mrmet-normative-data-set-2022`, `wilmer-rmet-normative-data-set-2022`. Downstream
+readers that must cope with both (e.g. the item-text validator) accept either spelling;
+that tolerance is there for these seven, not as licence to add an eighth.
 
 ### Q-matrix / cognitive diagnostic data
 If the dataset includes item-by-attribute classifications for cognitive diagnostic modeling, encode them as separate columns named `qmatrix1`, `qmatrix2`, … (one column per attribute). These are item-level columns, not response-level.

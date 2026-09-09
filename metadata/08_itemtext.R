@@ -1,6 +1,6 @@
 ## Incremental update: processes only tables not yet in itemtext_metadata,
 ## then appends to the existing table and writes an updated CSV.
-## For a full recompute (e.g. new columns), use 08_itemtext_recompute.R.
+## For a full recompute (e.g. new columns), use hotfixes/08_itemtext_recompute.R.
 ## Requires: quanteda, quanteda.textstats
 
 library(redivis)
@@ -55,6 +55,10 @@ for (ii in seq_along(tables.new)) {
     cat(sprintf("[%d/%d] %s\n", ii, length(tables.new), tab))
     items <- irw::irw_itemtext(tab)
     z <- if ("item_text_translated" %in% names(items)) items$item_text_translated else items$item_text
+    # item_text arrives typed by its content: a table whose text is all bare
+    # digits (SART stimuli, say) comes back integer, and strsplit rejects a
+    # non-character argument. nchar() coerces silently; strsplit does not.
+    z         <- as.character(z)
     nw        <- lengths(strsplit(z, " "))
     nc        <- nchar(z)
     nc.option <- if ("option_text" %in% names(items)) nchar(items$option_text) else rep(NA_real_, length(z))

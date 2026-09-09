@@ -36,6 +36,16 @@ Both response data and item text are **shard lists**, because Redivis caps a
 dataset at 1000 tables (`ARCHITECTURE.md` §2). A second item-text shard is a
 one-line edit to `IRW_TEXT_DATASETS`; nothing in this package changes.
 
+**Refuses a history tree.** A directory holding a `provenance.csv` is a record
+of a past batch, not a place uploads are staged from, and red_up stops rather
+than walking one (#2055). This is a guard on the *argument*, which the checks
+below are not: they see the files, so they only speak up when two batches
+happen to claim one table name. Point at thirty-six batches with distinct
+names and every already-shipped table uploads again — and because uploads
+append, each one **doubles**. The rule is written about the marker file, not
+about `itemtext/itemtables/`, so red_up stays general-purpose;
+`--allow-history-dirs` is there for a tree that really does stage that way.
+
 **Excludes what does not belong.** Once a dataset is chosen, files of the wrong
 kind are listed and skipped rather than uploaded. This is the guard against the
 failure `itemtext/itemtables/clean/` exists to undo: item-text batch

@@ -377,7 +377,7 @@ df <- df |>
   select(id, cond, item_id, resp) |>
   # use item_id column as the item column
   rename(item = item_id,
-         treatment = cond) |>
+         treat = cond) |>
   arrange(id, item)
 
 # print response values

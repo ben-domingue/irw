@@ -6,6 +6,10 @@ skill doesn't need to re-fetch the page every run. This is the
 schema of the **merged** `{table}__items.csv` — the output of joining the four
 per-table tabs (instrument, sections, items, responses) on `table` / `section_id` / `item`.
 
+**Field order is not significant.** The table below defines which fields exist, not the
+order they must appear in: Redivis matches columns by name, and nothing validates order.
+Batches that emit these columns in different orders are both correct.
+
 | Field | Definition |
 |---|---|
 | `table` | Identifier used to link to the IRW response data. |
@@ -18,7 +22,6 @@ per-table tabs (instrument, sections, items, responses) on `table` / `section_id
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
 | `correct_response` | Scoring key for a given `item`. Blank when there is no correct answer; multiple correct answers are semicolon-separated (e.g. `A;C`). |
 | `option_text` | Literal text for a specific response option available for an item. May legitimately be missing for behavior-scored items. |
-| `wording_rights` | `NC` when the instrument's rights holder states a non-commercial restriction on the wording, even though IRW copied it from an openly licensed source. Omitted entirely when there is no such restriction. **Known gap (irw#1955): the value space is `NC` only, so it cannot express an enforced fee or a no-redistribution clause — the two 2026-09-04 triggers — and as of 2026-09-04 it is set on zero live tables. Do not rely on it to find rights-affected tables; record the quoted term in `provenance.csv` and `public_note` as well.** |
 | `resp` | Response value assigned to a specific `option_text` — must match the numeric/ordinal values already present in the live response-level IRW dataset (`irw::irw_fetch(table)$resp`). |
 | `instructions_translated`, `section_prompt_translated`, `item_text_translated`, `option_text_translated` | English translation of the correspondingly named field. Present only for instruments administered in a language other than English. |
 
@@ -40,7 +43,9 @@ empty.
 **The fallback, and what `language` holds in it.** When the administered original
 cannot be recovered and only an English version exists, the English goes in the base
 fields, the `_translated` fields stay empty, and `text_source=translated_substitute`
-records the fallback.
+records the fallback. Because that English is now the shipped wording rather than a
+gloss beside it, the provenance row must also carry a `translation_source` saying where
+it came from; `check_provenance.R` fails a blank one (irw#1970).
 
 `language` is populated **whenever the administration was non-English, regardless of
 what the base fields contain** — it is defined as a fact about the study, not a claim
@@ -260,17 +265,34 @@ fee and the evidence of enforcement in `provenance.csv` `note` so the basis stay
 withdrawn table keeps its `uploaded` date as history and carries the withdrawal in `public_note`;
 do not blank the date to make the table look as though it never shipped.
 
-**But the instrument-level restriction is recorded, not ignored.** Where the rights
-holder states one, set `wording_rights=NC` on every row of that table and add an
-entry to the public issues page. The column is a filterable flag so a commercial
-reuser can exclude those tables with a query instead of reading prose; the prose
-belongs in `public_note` and on the issues page. Omit the column entirely for tables
-with no such restriction — do not emit an empty column to no purpose, the same rule
-the `_translated` columns follow.
+**Most of the corpus has no `provenance.csv` row, and the mechanics above assume one.** Added
+2026-09-08 after six PSS withdrawals where none of the six had a provenance row at all — they
+predate the batch pipeline, so there was no `uploaded` date to keep and no `public_note` to
+rewrite. The rule above is written for a table the batch pipeline produced; it is silent on the
+larger set it did not. For a **non-pipeline** table, the withdrawal record is:
 
-This keeps the decision reversible. If the stricter reading — that the instrument's
-terms travel with the wording wherever it appears — is ever adopted, `wording_rights`
-is the query that finds every affected table.
+1. delete the table from the `irw_text*` draft (unchanged — this is what actually withdraws it);
+2. record the withdrawal in **`itemtext/instrument_rights_register.csv`** against the instrument,
+   and in the round log against the table, since those are the only two places it can live;
+3. do **not** manufacture a provenance row purely to hold the withdrawal — a row asserting an
+   extraction that never happened is worse than no row.
+
+The consequence to be honest about: for these tables the withdrawal is not discoverable from the
+table's own records, only from the register and the log. That is a real weakness of the current
+shape, not a step to skip.
+
+**A partial withdrawal is not a table deletion, and the distinction is destructive if missed.**
+Where a table pools several instruments — `ecps_sahm_2024_stress` carries a blocked scale
+alongside two unblocked stressor blocks — the withdrawal removes *those items' rows*, not the
+table. A whole-table delete would take the unblocked blocks with it. Record which rows went, and
+put the table in any withdrawal script's keep-set so a rerun cannot escalate a partial into a
+deletion.
+
+**There is no longer a `wording_rights` flag, and no "record it and ship anyway" option.**
+Between 2026-09-04 and 2026-09-05 the rule moved: a stated restriction on the instrument now
+blocks outright (see the `wording_rights` retirement below). A table either ships with no
+instrument-level restriction stated, or it does not ship. Do not emit a `wording_rights`
+column; do not add an issues-page entry for a withdrawal.
 
 **Watch for wording that is licensed separately from the response data.** The three
 `cdm_timss*` tables record `License: GPL-3.0` — the CDM R package's licence, covering the
@@ -388,6 +410,140 @@ is not useful to a data user and tacitly advertises that IRW published material 
 have. Record withdrawals in `provenance.csv` and the round log, which are the internal audit
 trail; do not add them to `itemtext_issues.qmd`.
 
+### HEXACO-PI-R — ruled 2026-09-05, and IRW ships none of it
+
+**IRW does not ship HEXACO-PI-R item wording.** Ben's ruling, in full: *"let's err on the side of
+*not* having things. so do not host."* It was given on #1945 in answer to two escalations at once
+— the hexaco.org clause and a CC BY-NC 3.0 deposit — so it is a ruling about the shape, not about
+one table.
+
+The clause, from hexaco.org/hexaco-inventory, is the free-but-restricted shape already named for
+TIMSS and PROMIS:
+
+> "You can download any of these forms free of charge, but only for the purpose of non-profit
+> academic research. ... Please contact the authors if you would like to use the inventory for
+> non-academic purposes."
+
+**This overturns a specific earlier reading, and the reading is worth recording because it was
+reasonable.** batch_201 shipped `sun_2025_morality_study1_fairnessHEXACO` after testing the clause
+against the 2026-09-04 rulings and finding it carried *neither* a quotable fee *nor* a
+no-redistribution bar — the two things those rulings made decisive — and flagged the residual
+"must either be password-protected or not searchable through search engines" term for Ben rather
+than deciding it. That test was applied correctly. The ruling is that passing it is not sufficient:
+where a rights holder has attached *any* stated use restriction to the only published source of the
+wording, IRW does not host it. **Do not re-derive this from the fee/redistribution tests; they will
+give the wrong answer here.**
+
+**Scope applied 2026-09-05.**
+
+- `sun_2025_morality_study1_fairnessHEXACO` — extracted in batch_201, removed before merge. Never
+  uploaded, so not a withdrawal.
+- `gilbert_meta_32` — CC BY-NC 3.0, never extracted. `pending` -> `excluded`.
+- `de_vries_2022_hexaco_{self,other,meta}` — blocked at batch_026 on this exact clause, with notes
+  naming a ruling from Ben as the one thing that would change them. `blocked` -> `excluded`: a
+  settled decision, not a gap for a future round to retry.
+- `face_memory_test` — stays `blocked`. The ruling settles the HEXACO half (items 76-175); the
+  image/asset block on the face half (1-75) is independent and unresolved.
+- **`sv-maia2_randelovic_2021_hexaco60` and `_hexaco100` — LIVE, and to be withdrawn.** This is the
+  answer to the class escalation logged in the round log on 2026-09-04. See below: the deletion had
+  not been carried out when this was written.
+
+**What is NOT covered — check the instrument, not the name.** `dasilva_2019_hexaco24` is the Brief
+HEXACO Inventory, published CC BY, and is untouched. The other 26 live `sun_2025_morality_*`
+item-text tables were checked on 2026-09-06, once Redivis reads came back, and **none of them are
+HEXACO-PI-R** — the HEXACO scoping above is confirmed. Study 1 and the moral-character subscales
+are the study's own template (`itmcq*`, e.g. "[target's name] consistently tells the truth.").
+
+**But the check turned up a different instrument, and it is the same shape as HEXACO.** Study 3's
+`extraversion`, `openness` and `neuroticism` tables carry item codes `itbfi2*` and verbatim
+**BFI-2** wording ("Is outgoing, sociable.", "Worries a lot.", "Is fascinated by art, music, or
+literature."). Soto & John hold the BFI-2 copyright; it is free for non-commercial research, with
+commercial use requiring written permission. That is the hexaco.org shape almost exactly — free of
+charge, restricted by stated purpose — so **the 2026-09-05 ruling appears to reach it. Escalated to
+Ben, not decided here.**
+
+Two things make this worth reading before the #1897 audit runs. First, `metadata/itemtext_metadata.csv`
+describes these tables as "Ratings of extraversion for nominated targets" — the `instrument` field
+names the *construct*, not the instrument, so **an instrument-name scan will not find them**; only
+reading the wording does. Second, a corpus scan for BFI/Big-Five instrument labels returns just ~10
+live tables and most are IPIP "Big-Five Factor Markers", which are public domain and unaffected —
+so the label-based blast radius looks small precisely because the label is not where the answer is.
+
+And the *response* tables are not in scope at all: this clause governs the instrument wording, not
+data a study collected with it, so every HEXACO response table stays in IRW.
+
+**DONE 2026-09-06: deleted from the draft by Ben.** `irw_text` draft went 732 -> 730, both targets
+absent, `dasilva_2019_hexaco24__items` verified still present. The two rows are out of
+`metadata/itemtext_metadata.csv`. **The wording is still in released v19.0 and leaves only when that
+draft is released** -- until then the tracked baseline describes the draft rather than what is live,
+which is the one-release gap this deliberately accepts. Historical note follows.
+
+**Was outstanding when this was written: the two live tables are still published.** The takedown was
+scripted and dry-run — 745 draft tables in `irw_text`, both targets present, `dasilva_2019_hexaco24__items`
+asserted to survive — but Redivis was down, so Ben held it. `tools/withdraw_hexaco.py` runs it with
+`APPLY=1`. Until it runs, `metadata/itemtext_metadata.csv` still carries both rows, correctly: they
+describe what is live, and removing them early would make the tracked baseline lie. **Version state, rechecked 2026-09-06:** `irw_text` is now at **v19.0** — two release cuts happened
+after this was staged, and both tables are still live in it (732 tables). No draft is open, so
+`dataset(name, version="next")` raises "Not found: datapages.irw_text:next"; that is a released
+dataset with no draft, not an outage. The script now opens one via `create_next_version`, exactly as
+`red_up.push.open_draft` does. Deleting from the draft only takes effect when that draft is
+released.
+### `wording_rights` is retired — ruled 2026-09-06
+
+**The column is gone from the schema, and the eight tables that carried it are withdrawn.**
+Ruled by Ben on irw#1955.
+
+`wording_rights=NC` came from the ECR-R ruling (2026-09-04): where the wording was copied from
+an openly licensed deposit but the instrument's rights holder stated a non-commercial
+restriction, the table shipped and the restriction was recorded as a filterable flag. Two later
+rulings took that carve-out apart. The DSES ruling established that the rights holder outranks
+the deposit's licence; the HEXACO ruling (2026-09-05, irw#1945) widened the trigger from
+{enforced fee, no-redistribution bar} to **any stated use restriction**. Between them, the
+state the flag described — restricted, but shipped — no longer exists.
+
+Two facts settled it, both measured 2026-09-06 against `irw_text` v18.0:
+
+* The issue was filed on the premise that the flag was set on **zero** tables. It was set on
+  **eight**, out of 760 live item-text tables — `alsuhibani_2022_ecrs_s3` (ECR-12),
+  `conspiracy_asd__asd_aq10` (AQ-10), `dominguez_2018_jcs` (Job Crafting / UWES),
+  `dpt_noncog__interpersonal_reactivity` (IRI), `duboz_2021_pss10` (PSS-10),
+  `esiason_2024_aaqii` (AAQ-II), `EWAS_Sanford_2024_Flourish` (Flourishing Scale) and
+  `extremera_2016_shs` (SHS). DSES was the first to carry it, not the only one; six of the
+  eight were uploaded after the count that produced "zero".
+* Every one of the eight is the shape the 2026-09-05 ruling blocks. The flag was not a filter
+  for them, it was a withdrawal list.
+
+**So the answer to "extend the vocabulary or drop the column" is drop it.** Extending it to
+`fee` / `no_redistribution` would have built machinery for a state the rules no longer permit,
+and would have put a flag on tables that should not be published at all. It is also why the
+column was never the right tool for the irw#1954 re-audit: that sweep reads `provenance.csv`
+per instrument, and `text_source=canonical_instrument` is its highest-risk group.
+
+**One live inconsistency this leaves.** `duboz_2021_pss10` was flagged `NC` for a clause that
+is a fee gate on commercial use, not a non-commercial bar — the mislabelling irw#1955 opened
+with. It is moot now that the table is withdrawn, but it is the concrete case for why a
+one-value flag was never going to hold.
+
+**The flag was never applied consistently, and that is the second half of the ruling.** Five
+further live tables held the *same instruments* with no flag at all — `algner2022_uwes` (UWES-9,
+its wording taken from Schaufeli's own site), `bakker_2020_pss10` and `beck_2021_pss10` (PSS-10),
+`close_relationships` (ECR) and `conner_2017_flourishing` (Flourishing Scale). Four of them
+shipped in batches 003–011, before the rulings existed, with no rights note in `provenance.csv`
+at all. `conner_2017_flourishing` is the awkward one: it was checked *after* the ECR-R ruling on
+2026-09-04 and shipped unflagged anyway, and the round log recorded the inconsistency at the time
+rather than fixing it. Ben ruled all five out with the eight. **The lesson is that the flag's
+presence recorded which agent happened to look, not which instrument was restricted** — which is
+the strongest argument against ever rebuilding it.
+
+**Scope applied 2026-09-06.** All thirteen deleted from the `irw_text` draft by
+`tools/withdraw_wording_rights.py` (745 → 732 draft tables, keep-set asserted intact), so they
+leave at the next release; until then the wording is still in v18.0 and the deletion is
+recoverable. Each keeps its `uploaded` date and its `verify_<table>.R`, carries the withdrawal in
+`provenance.csv` `public_note`, is `blocked` in `queue_state.csv`, and has a
+`pending_index_notes.csv` row. Per the 2026-09-05 rule that withdrawal entries are not published,
+their issues-page entries were removed rather than rewritten, and the public schema page dropped
+both the `wording_rights` bullet and the section that stated the ECR-R position as current policy.
+
 ### Picture-stimulus tasks: ship the table, leave `item_text` blank — ruled 2026-09-05
 
 **A task whose stimuli are images with no text still gets an item table; `item_text` is left blank
@@ -426,3 +582,40 @@ pictures. Blank `item_text` would not fix it, because the problem is the code, n
 is verbal. If it does, ship it. If it does not, ship the table with `item_text` blank. Block only
 when something else is wrong — the rights bar it, or, as here, the item codes do not denote a
 stable thing.
+
+**An authorization scoped to a POPULATION attaches to the instrument it was granted for, not to
+the wording IRW ships in its place.** Ruled 2026-09-08 by ben-domingue on irw#2121.
+
+Chinese-adaptation studies routinely carry a sentence of this shape, and this paper (Li et al.
+2024, PeerJ 10.7717/peerj.17910) carries it three times over, once per scale — in `s003.docx`:
+
+> "We used the Chinese version of the SAD, which has been **authorized by the original author for
+> use in the Chinese population**."
+
+Two instruments are in play whenever a study administers a translated adaptation and IRW ships
+the original-language wording as a stand-in: the **adaptation** the participants answered, and
+the **original** whose words appear in `item_text`. The scoped authorization is a grant to the
+adaptation's authors covering *administration*. It is not the originator's terms for the original,
+and it says nothing about redistributing the original's wording.
+
+So the test is the same one the source-licence rule already sets: **go to the terms of the thing
+you actually copied.** `li_2024_bdyz` ships Gross & John's (2003) English ERQ wording, which Gross
+distributes freely from his own lab page, so it ships — even though the study describes the
+Chinese ERSS it administered as authorized only for Chinese populations. Do not read a study's
+paraphrase of one instrument's licence as a restriction on a different instrument.
+
+This is NOT a licence to substitute freely. Two limits, both live in the same paper:
+
+1. **A revision is not a translation.** `li_2024_sad` stays blocked (#2121) because the study says
+   its scale was *"revised by Peng et al."* — so the 1969 English is a different instrument, not
+   the same words in another language, and no item-level correspondence can be shown. Where the
+   adaptation is a straight translation and the mapping is checkable (the ERQ's item 9 is quoted
+   in the paper in English), the substitute is defensible; where it is a revision, it is not.
+2. **The originator's own terms still have to be checked, and the audit is not that check.**
+   `availability_audit_full.csv` called the SAD "the classic public-domain Watson & Friend (1969)
+   28-item true/false instrument". A 1969 JCCP article is not public domain, and that row is one
+   of three now found wrong in that file. A substitution's rights rest on the original's terms,
+   quoted — not on an audit row asserting them.
+
+Whichever way it goes, say in `provenance.csv` `note` which instrument's terms were relied on and
+quote them, so the two-instrument reasoning stays auditable.

@@ -1,6 +1,6 @@
 # irw-site-update TODO
 
-## biblio.csv: 182 rows still have Derived_License=NA (bug fixed + backfilled 2026-08-02, 2 remaining sub-issues)
+## biblio.csv: 182 rows still have Derived_License=NA (bug fixed + backfilled 2026-08-02; bucket 1 resolved 2026-09-06, 1 remaining sub-issue)
 
 `02_biblio.R`'s `getrows()` built new biblio rows via a `select()` that never
 included the dictionary's `Derived License` column at all (line ~132-134) --
@@ -17,14 +17,36 @@ against the dictionary sheet's `table`/`Derived License` columns (a plain
 re-run of `02_biblio.R` would NOT have fixed these -- its match logic only
 reprocesses rows that are new-to-biblio or missing `BibTex`, so an
 already-populated `Derived_License=NA` row never qualifies). 1,690 of 1,872
-NA rows filled. 182 remain, in two different buckets:
+NA rows filled. 182 remained as of 2026-08-02, in two different buckets:
 
-1. **6 rows with no dictionary entry at all**: `su_2024_isi`, `su_2024_phq9`,
-   `su_2024_pss14`, `racialsocialnormsbrazilianstudents_portella_2022`,
-   `wvs_panasiuk_security`, `wvs_panasiuk_science`. Same orphan-biblio shape
-   as the `liang_2026`/`ren2019` case resolved earlier this session (biblio
-   row exists with no backing dictionary row) -- not yet investigated for
-   these 6 specifically.
+1. ~~**6 rows with no dictionary entry at all**~~ -- **all 6 resolved
+   2026-09-06.** They were `su_2024_isi`, `su_2024_phq9`, `su_2024_pss14`,
+   `racialsocialnormsbrazilianstudents_portella_2022`,
+   `wvs_panasiuk_security`, `wvs_panasiuk_science`; same orphan-biblio shape
+   as the `liang_2026`/`ren2019` case (biblio row with no backing dictionary
+   row). Outcomes differ by row, and the difference matters:
+
+   - `su_2024_isi`/`phq9`/`pss14`, plus `su_2024_gad7` which this list
+     missed: the tables are **live**, so the orphan should have been resolved
+     by adding the dictionary row, not by dropping the biblio row. A pipeline
+     run did the latter -- `metadata/pipeline_logs/NEXT_RUN_NOTES.md` records
+     10 "stale biblio-only rows" dropped -- leaving four published tables with
+     no source, licence or tags while still looking healthy in `metadata.csv`,
+     which is computed from the tables and so can never supply provenance.
+     PR #1993 established the provenance (paper DOI
+     `10.1038/s41597-024-03888-8`, data DOI `10.5281/zenodo.10423537`,
+     CC BY 4.0) and the four core-dictionary rows were added 2026-09-06.
+     `biblio.csv` and `tags/` refill from those rows on the next
+     `metadata-pipeline` run; nothing further is owed by hand.
+   - `racialsocialnormsbrazilianstudents_portella_2022`: has a dictionary row
+     now, but no `metadata.csv` row -- a dictionary entry with no live table,
+     the harmless inverse mismatch.
+   - `wvs_panasiuk_security`/`science`: withdrawn on rights grounds, #1991.
+
+   **The lesson worth keeping**: before dropping a biblio-only row as stale,
+   check whether the table is live. If it is, the missing dictionary row is
+   the bug -- deleting the biblio row destroys the only provenance the table
+   had, and no coverage check that reads `metadata.csv` will notice.
 2. **176 rows where the dictionary row exists but its own `Derived License`
    cell is blank too** (e.g. the `heekerens2025_*`, `parenting_anunciacao_2025_*`
    families) -- a gap in the dictionary sheet itself, not fixable from
