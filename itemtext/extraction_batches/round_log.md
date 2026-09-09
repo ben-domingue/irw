@@ -11368,3 +11368,92 @@ Step 5 says to classify a NO VERDICT as `failed`, which here would have been wro
 NO VERDICT from a batch runner is worth re-running before it becomes a status.**
 
 Cap is `batch_095`; not reached. 727 pending, next firing takes `batch_093`.
+
+---
+
+## batch_093 — 2026-09-08
+
+**6 tables, 6 agents, one per table. Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.**
+First round at the six-agent setting Ben raised to on 2026-09-08. Baseline before dispatch was
+**17G available, 3G free** — the post-R-session figure the raise was authorised against, not the
+11.6G that got `batch_091` killed twice. No kill, no retry, no memory pressure. Six is fine at this
+baseline; it remains Ben's call to drop back to three when the laptop is in use.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `ma2026_sabas` | shipped, 36 rows | paper_explicit | **VERIFIED** (published GRM parameters) |
+| `machado_2020_cat_separation` | shipped, 14 rows | data_labels | NOT_NEEDED |
+| `majeed_2024_luxury_purchase` | shipped, 155 rows | data_labels | NOT_NEEDED |
+| `makai_2023_entrepreneurial_transdanubia` | shipped, 190 rows | data_labels | NOT_NEEDED |
+| `makowska_2023_pdts` | shipped, 30 rows | data_labels | **PARTIAL** (see below) |
+| `makowska_2023_pss4` | **blocked** — PSS rights | (data_labels) | n/a |
+
+**Gates all clean.** `normalize_nulls` 0 of 5 changed; `audit_batch` **5/5 PASS with no anomalies**
+(so Step 5c had nothing to explain — no WARNs at all); `verify_batch` PASS=2, MISSING(exempt)=3;
+`lint_verification` **5 rows, no problems**; `irw-validate` ok on all five; `check_provenance` flagged
+only pre-existing tables, none from this batch. Writing the three `data_labels` NOT_NEEDED rows into
+the batch's own `verification_merged.csv` *as well as* the permanent tracker again produced a clean
+lint — the batch_020/021 false-ERROR trap stayed shut.
+
+**Three of five shipped tables are `data_labels` because the item code IS the item wording.** In
+`majeed_2024_luxury_purchase` and `makai_2023_entrepreneurial_transdanubia` the processing script
+melts the source `.xlsx` header row straight into `item`, so there is no positional step to get
+wrong and no mapping to verify. Both agents correctly preserved source typos and spacing verbatim
+(`vide variety`, `An entrepreneurial cfareer is attractive to me `) because `item` is the join key —
+the prime commandment. Cheap, high-confidence tables; worth noticing that the queue's head is now
+serving several of them.
+
+### Step 5b: three agent claims re-checked, all three confirmed
+
+1. **`makowska_2023_pdts` — the paper and its own data file disagree, and the agent was right to
+   follow the `.sav`.** Re-read Table 2 from the article image directly and recomputed the deposit
+   means. The paper numbers "irritated" as Item 2 (M=2.90/2.93/2.84/2.90/2.35/2.34 down the column);
+   the deposits label `PDTS2` = *no control* and `PDTS3` = *irritated*, with the code prefix inside
+   each label matching its column name, 12/12 across both `.sav`s. Study 1 column-order means are
+   2.8909 / **2.9273** / **2.8402** / 2.8813 / 2.3500 / 2.3394 — i.e. Table 2's M *and* SD track
+   column position exactly, so the two sources agree on position and disagree only on which text
+   sits at 2 vs 3. One of them has rows 2/3 crossed. Following the `.sav` (level-1 source; the
+   processing script melts on column names) is the right call, and **PARTIAL is the right status** —
+   the corroborating correlation margin is only ~0.05 in each sample (.783/.733, .660/.611), which
+   is consistent but does not separate the two items outright. Polish↔English pairing *within* each
+   item was matched by content and is safe either way; only the code assignment is at risk. Items
+   1, 4, 5, 6 are unambiguous.
+2. **SABAS rights.** Re-fetched the Salford page independently; its only condition is
+   *"Copyright restrictions: Ensure you cite the author(s)."* My sha256 is byte-identical to the
+   agent's (`e9b8e249…`). Attribution obliges citation and reserves nothing.
+3. **PSS rights.** The agent applied the register rather than re-deriving it, but re-fetched the CMU
+   FAQ; md5 `f2eeb376…` is byte-identical to the hash already in the register.
+
+**Register: added a `verdict=ship` row for SABAS** (family `SABAS`, `match_item_code` `^sabas`),
+which the agent deliberately deferred rather than race five siblings for the file. Same page, same
+clause and same reasoning as the BSMAS row added in batch_092.
+
+**The one block is a rights decision, not an access failure. Retry test: NO.** `makowska_2023_pss4`
+is the standard PSS-4 subset (PSS-10 items 2, 4, 5, 10) with *"at work"* appended — a derivative of
+a barred instrument, and the 14th application of the settled PSS block (irw#1955). Extraction was
+*fully solved* before the block bit: the S3 `.sav` labels tie all four codes to text directly. The
+block does reach it, as with `luu_2024_stai6` and unlike the irw#2101 shape: live codes are bare
+`PSS1..PSS4` and carry no wording, so withholding item text genuinely withholds the instrument.
+Row added to `pending_index_notes.csv`.
+
+**Shared-source pair handled cleanly.** `makowska_2023_pdts` and `makowska_2023_pss4` come from one
+`.sav`, worked by two agents in parallel. Both independently reported the same thing — the PDTS and
+PSS blocks are cleanly distinct columns, correctly assigned, not swapped — and neither wrote into
+the other's files. Corroboration without a race, which is the reason for telling each agent who owns
+the siblings.
+
+**Two source defects found, neither affecting a shipped table.** The PDTS paper's Table 4
+(labelled Study 2, N=558) reproduces neither deposit — its general indicator 2.71 is *Study 1's*
+`PDTS_WSK` mean (2.7053), confirmed here. And the `ma2026_sabas` preprint's prose contradicts its own
+Table 6 twice (a discrimination ordering given as descending that is ascending; a "highest
+difficulty" item named as 2 that is 1 in the table). Recorded so a later reader does not mistake
+either for a checkable claim about the IRW table.
+
+**Note for whoever ships `makowska_2023_pdts`:** its `translation_source=mixed` covers
+`option_text_translated`, which is English *this project* wrote. Under the 2026-09-02 ruling it owes
+a line on the public issues page at upload time. It is HELD now, so nothing is owed yet, and
+`check_provenance.R` will surface it the moment it is stamped.
+
+**Stale line corrected:** the batch_092 entry closes "Cap is `batch_095`". The cap was raised to
+`batch_110` in ab4413a, which is what Step 0 now says and what this round read. Cap not reached.
+719 pending; next firing takes `batch_094`.
