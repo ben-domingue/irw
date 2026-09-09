@@ -12691,3 +12691,70 @@ independently re-fetched from source rather than taken on report:
    if it was, `language=German` is the wrong call. Disclosed in `notes.csv`.
 
 Cap not reached (batch_140).
+
+## batch_106 — 2026-09-09 16:17–16:40
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — yield 4/4 (100%)**. Four agents per round
+(the 2026-09-09 setting, walking the probe back up from two). No kill, no rate limit, no
+reconcile; all four agents ran ~9 minutes and returned complete sidecars. That is a third
+consecutive clean round at a raised agent count.
+
+**Tables**
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| `merlo2025_eng_cognitive` | 84 (12 items × 7) | data_labels | VERIFIED — dictionary 12/12 + route 1 + route 3 |
+| `merlo2025_eng_emotional` | 63 (9 × 7) | data_labels | VERIFIED — dictionary 9/9 + routes 1, 6, 8 |
+| `metacogmonitoring_double2025` | 402 (67 × 6) | paper_order | VERIFIED — route 1, published factor loadings |
+| `MGSISGCLQ_Hollyhead_2018` | 60 (25 items) | data_labels | VERIFIED — source column headers + response-frequency |
+
+**Gates.** normalize_nulls 0 of 4 normalized; audit_batch 3 PASS / 1 WARN; verify_batch PASS=4;
+lint_verification 0 ERROR / 0 WARN / 2 INFO; `irw-validate` clean on 3, one WARN on the 4th;
+check_provenance no new failures. All four verification rows arrived with the batch — all four
+agents verified even the three data_labels tables, so no NOT_NEEDED rows were owed in either file.
+
+- The single audit WARN (`metacogmonitoring_double2025`: 4.5% blank `item_text`, 66.7% blank
+  `option_text`) is explained in notes.csv per Step 5c and is **not** an itemtext defect: 3 of 67
+  items are the two attention checks and the repeated item, whose administered wording Double
+  (2025) never prints, and the blank `option_text` is resp 2–5 of a scale whose paper labels only
+  the endpoints (never padded with their own numbers).
+- The `irw-validate` WARN on `MGSISGCLQ_Hollyhead_2018` is `name_charset` — the LIVE table name is
+  capitalised. A pre-existing property of the corpus table, nothing this round can fix.
+- Notably, `MGSISGCLQ_Hollyhead_2018` stacks two instruments with different response scales
+  (GCLQ binary 0/1, MGSIS-5 agreement 1–4) and did **not** trip `resp_ambiguous` — correct, since
+  the two blocks are distinct items rather than one scale merged in two directions.
+
+**Step 5b orchestrator re-checks — two agent claims re-verified independently, BOTH CONFIRMED.**
+
+1. `merlo2025_eng_emotional`: the agent reported `ENG_EMO_09` ("studying is boring") is stored
+   **already reverse-scored**, and shipped its `option_text` reversed on that basis. Re-checked on
+   the live table (n=1065): it correlates **positively** with all eight positive items
+   (r = 0.21–0.39, no negative anywhere), and α **as stored = 0.89** vs **0.82 flipped**, against a
+   published affective α of .87. Confirmed — a property of the depositors' pre-recoding, not an IRW
+   defect, and disclosed in the public_note. The same pre-recoding appears in the deposit's
+   behavioural block (`ENG_COMP_02/04/09`) — **relevant to the remaining `merlo2025_eng_*` siblings
+   still in the queue.**
+2. `merlo2025_eng_cognitive`: the agent reported a defect in the PAPER — Table 1's `ENG_C`
+   composite reproduces only after dropping **three** items (04, 05, 11), while the article's own
+   trimming sentence names only C5 and C11. Recomputed: all 12 → M=4.356/SD=1.239/skew=−0.426; the
+   paper's stated pair only → 4.263/1.282/−0.353; dropping 04, 05, 11 → **4.229/1.316/−0.317**,
+   matching the published 4.229/1.316/−0.317 exactly. Confirmed: the article omits C4 from its own
+   list. All 12 items are present and complete in IRW; this is a reporting gap in the paper.
+
+**Step 3b — systemic dictionary error across this deposit (third occurrence).** Both `merlo2025`
+tables carry a Description saying "Italian **university** students"; the respondents are 1065
+Italian **secondary school** students (mean age 15.95). `merlo2025_eet` had the same error in
+batch_105 (plus a wrong instrument). This is now 3 of 3 tables from figshare 30195541 — **the
+remaining `merlo2025_eng_*` tables should be assumed wrong too and the dictionary rows fixed
+together**, rather than one correction per round.
+
+**Other notes.** `MGSISGCLQ` resolved to two stacked instruments (Gynaecologic Cancer Lymphedema
+Questionnaire + Male Genital Self-Image Scale), shipped with per-row `instrument` and split
+`section_id`; its item codes ARE the Microsoft Forms question wording, so the mapping is
+inference-free. `metacogmonitoring_double2025` turned out to be a 64-item scale-development pool,
+not the trial-level task the name suggests; its 67-vs-64 gap is the study's own three dropped
+columns. One `note_only` row added to `itemtables/pending_index_notes.csv` for its three blank-text
+items. An agent recommends a `verdict=ship` register row for the SES/SESQ family (Mameli & Passini)
+— **not written**, left for a human, since siblings were in flight.
+
+Cap not reached (`batch_140`); 653 pending remain.
