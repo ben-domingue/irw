@@ -12076,3 +12076,44 @@ ok on both; `check_provenance` 745 rows across 102 files, 0 IRW-generated tables
 entry.
 
 Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
+
+### batch_099 triaged — 2 shipped — and the cadence theory is weakened — 2026-09-08
+
+Fired **promptly** at two agents, which is the test batch_098 asked for, and it ran clean. Gates
+re-run live: `normalize_nulls` 0 of 2, `audit_batch` 1 PASS / 1 WARN (diagnosed, below),
+`verify_batch` 1 PASS + 1 correct exempt, `lint_verification` clean, `irw-validate` ok. Both uploaded
+(`red_up` 2/2 row-count verified), stamped and audited. Two entries added to datapages/irw#169
+(424 entries).
+
+**Round size, updated honestly: my cadence explanation is weakened and the count looks more relevant
+than I concluded.** A prompt firing at two succeeded with available memory at 19G — indistinguishable
+from the conditions during the kills. So the pause was not the necessary ingredient. What the record
+now supports is: **two works, six failed twice, three failed once.** The caveat that keeps this from
+being a clean finding is that **three was only ever tried once, inside the bad window**, so it has
+not had a fair trial. Raising it is Ben's call and the fair experiment is a prompt firing at three.
+The binding variable is still unidentified; what is settled is that two is a working setting.
+
+**Wrote the `megart_tonkovic_2021` issues-page entry BEFORE uploading, not after.** That table ships
+IRW-produced English for its Croatian instructions, so `check_provenance.R` treats it as HELD only
+until it ships and the entry is owed the instant it does. Uploading first would have opened a window
+in which the gate is correct to fail. (Against `main` the gate now names it, because the entry sits
+on the unmerged #169 — the same by-design state as `liu_2025_positive_cognition` before #165 merged.)
+
+**The audit WARN was diagnosed, not waved through, and it ruled out two real defect classes.**
+`megart_tonkovic_2021` is 5,208 items × 2 = **10,416 rows, the largest table this queue has shipped**,
+and the audit flagged a row-count anomaly as "possible item-code conflation". Both rival explanations
+were tested server-side, with no export against 126MB + 136MB source files: (a) conflation is ruled
+out — `COUNT(DISTINCT itemcov_type)` is 1 for all 5,208 items, despite the script binding two
+experiment files on a bare string key, which is exactly the shape that *would* conflate; (b) the
+1,121 repeated `(id,item)` pairs are genuine repeated presentations rather than the #1842 doubled-row
+class — 1,119 have all-distinct `rt` and 43 disagree on accuracy. **A doubled upload cannot disagree
+with itself**, so that is decisive.
+
+**Still owed, and still Ben's: the SWLS.** `medvedev_2018_sl` shipped on the register's settled
+`ship` verdict, and the agent re-fetched both pages today to confirm they still say what the register
+records — but that row is marked UNSTABLE for the reason in §C of the handoff: Diener's Illinois page
+grants free use with credit while the same holder's eddiener.com page is non-commercial only. If it
+resolves the other way, this table and roughly six live siblings withdraw together. The register
+carrying an explicit UNSTABLE flag is what stopped this being decided by default here.
+
+Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
