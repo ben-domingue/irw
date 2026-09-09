@@ -12178,3 +12178,46 @@ near-ties the agent declared unresolvable. No claim in either public note had to
 which is not the usual outcome for this step and is worth recording as such.
 
 Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.
+
+### batch_100 triaged — 2 shipped — and a latent cap defect fixed — 2026-09-08
+
+Second consecutive clean round at two agents, fired promptly. Gates re-run live: `normalize_nulls`
+0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch` PASS=2, `lint_verification` clean,
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+added to datapages/irw#169 (426 entries).
+
+**The important part of this round is not the tables — it is a defect the round caught in Step 1's
+numbering rule, which had silently disabled the cap.**
+
+`batch_201` and `batch_202` arrived on this branch by merges from `main`; they belong to the separate
+irw#1945 rights line, not to this queue. Step 1 said *"next batch number = highest existing
+`batch_NNN` + 1"*, so the highest existing directory was **202** and the next round would have
+numbered itself **203**. The Step 0 cap is expressed as *"`batch_110` already exists"* — so a run
+counting 203, 204, 205 creates directories the cap never looks for, and **the cap never fires**. The
+loop would have run past the point a human meant it to stop, unattended, with nothing visibly wrong.
+
+The round noticed and took `batch_100` by hand, which was the right call in the moment. I have fixed
+the rule so the next round does not have to: it now reads *highest existing `batch_0NN` or `batch_1NN`
++ 1, ignoring the `batch_2NN` series entirely*, with the reason written next to it. Verified: under
+the new rule the highest is 100 and the next firing takes 101, and the cap regex still resolves to
+`batch_110`.
+
+**Worth generalising:** this is the second time today that merging another line's work into this
+branch has broken something subtle here — first `pending_index_notes.csv` conflicts (three of them,
+needing two different resolutions), now the batch numbering. The two series share a directory
+namespace and a queue file while being run by different people for different purposes, and neither
+was designed for the other's presence.
+
+**Both tables are the honest-fallback shape.** 76 Italian schoolchildren in Perugia, no Italian
+wording anywhere in the article or its four supplements, so both ship the authors' own English from
+the S2 File codebook — `translated_substitute` / `study_supplied`, not IRW-generated, so neither owes
+a line under the 2026-09-02 ruling. They got entries anyway, because "this is not what the children
+heard" is worth telling a reader regardless of who wrote the English. Both PARTIAL, and each evidence
+string names the specific items its route cannot separate (HK4/HK6/HK7, HK9/HK13,
+IA2_HBODY_2/_4/_5) rather than hedging generally.
+
+**Round size:** two has now run clean twice, once after a cooldown and once fired promptly. Six
+failed twice; three failed once, inside the bad window, and still has not had a fair trial. The
+binding variable remains unidentified.
+
+Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.

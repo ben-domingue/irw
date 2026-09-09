@@ -51,7 +51,16 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 ## Step 1 — Claim this round's tables
 
-- Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
+- Next batch number = **highest existing `itemtables/batch_0NN` or `batch_1NN` + 1**, zero-padded to
+  three digits. **Ignore the `batch_2NN` series entirely**: `batch_201` and `batch_202` belong to the
+  separate irw#1945 rights line, not to this queue, and they arrived on this branch by a merge from
+  `main` on 2026-09-08.
+
+  **This is a correctness rule, not tidiness.** A naive "highest + 1" reads 202 and returns 203, and
+  the cap in Step 0 is expressed as "`batch_110` already exists" — so a run numbering itself 203, 204,
+  205 would create a directory the cap never checks for, and **the cap would silently never fire**.
+  The round would keep going unattended past the point a human meant it to stop. batch_100 caught this
+  and took 100 by hand; the rule is written down so the next round does not have to.
   mkdir -p itemtables/batch_<NNN>
 - Take the first 2 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
