@@ -12555,3 +12555,83 @@ so the filter deleted a data row.** Third instance today of a filter quietly rem
 
 Six queued tables are blocked by the register row and must not be extracted: `park_2021_swls`,
 `ptacek2023_swls`, `rahm_2017_swls`, `rzeszutek_2020_swls`, `wu2021_swls`, `qi_2025_swls`.
+
+## batch_104 — 2026-09-09T15:23 → 15:52 (2 tables, 2 agents)
+
+**Written 2 / blocked 0 / failed 0 — yield 100%.** Circuit breaker not tripped (0 failed).
+Tables: `meloni_2015_parent_divers_ed` (60 items, 300 rows), `meloni_2015_parent_interests`
+(25 items, 125 rows). Both → `done`. Queue: 661 pending remaining.
+
+Numbering: next batch taken as **104** = highest of the `batch_0NN`/`batch_1NN` series (103) + 1.
+The `batch_2NN` series (201, 202, irw#1945 rights line) was ignored per Step 1 — a naive
+"highest + 1" would have returned 203 and put the round past the cap's reach.
+
+**Round size: two agents, per the 2026-09-08 ruling after three was killed.** Both ran to
+completion, in parallel, in the foreground — 12 min and 6 min. No kill, no rate limit, no
+memory event. That is one clean data point for two; it does not by itself distinguish "two is
+under the threshold" from "the cadence that was biting last night has relaxed", since this
+round fired ~20h after that failure cluster rather than minutes after another round.
+
+**Source.** Both tables come from one deposit — Meloni, Federici & Dennis (2015), PLOS ONE
+10(6):e0128876, CC BY 4.0 — the same one that supplied batches 100–103's seven `meloni_2015_*`
+tables. Each agent was told explicitly which sibling belonged to the other and which batches
+were already done; no file collision, scratch namespaced under `.cache/<table>/`.
+Item wording from the S2 File (legacy binary `.doc`, `soffice --convert-to txt`); item codes are
+the S1 File's SPSS-export column names, melted by name over parent rows (Protocol 101–199) by
+`data/meloni_2015_disability.py` — derivation pattern 1, no positional step.
+
+**Gates, all clean.** normalize_nulls 0 of 2 changed · audit_batch **2 PASS, no anomalies**
+(so Step 5c had no WARNs to explain) · verify_batch **PASS ×2** · lint_verification
+**2 rows, no problems** · `irw-validate` ok on both, nothing to report.
+`check_provenance.R` exits 1, but on a **pre-existing** row, not this batch:
+`aspirations_sonmez_2022` ships IRW-generated English with no issues-page entry, plus 3
+`translation_source=mixed` tables flagged REVIEW-not-failure (`hui_2024_gbfs`, `iandolo_2021_asq`,
+`kim_2025_isi`). Neither batch_104 table is `machine_translation`; both are
+`translated_substitute` / `study_supplied`, so neither owes a public line and neither is
+implicated in that exit status. Worth clearing separately.
+
+**No NOT_NEEDED rows were owed** — both tables are `mapping_basis=paper_order`, so both carry a
+real verification row in the batch file and in the permanent tracker (674 rows).
+
+**Step 5b — orchestrator re-check of the round's own claims. Every checkable claim confirmed
+against the deposit; nothing corrected.** Details in `notes.csv`. The load-bearing ones:
+- The two published planned comparisons underpinning `parent_divers_ed`'s mapping are quoted
+  verbatim in the article — `t(75) = -7.139` and `t(75) = -11` — exactly the pair the agent
+  reproduced to within 0.0005 by summing its shipped model blocks, against 0.0757 for the best
+  of 34,649 rival 4/4/4 partitions.
+- The five `section_prompt` values are the source's own words twice over (S2 line 7 and the
+  Fig 1A caption), and are image *descriptions* — the stimuli were captionless photographs,
+  disclosed in `public_note`.
+- `parent_divers_ed`'s mapping is **stronger than `paper_order` implies**: the item-code
+  mnemonics are content-determinative and are *not* in the codebook's list order (1_GOD=(i) but
+  4_DISEASE=(xi)), and all twelve match a distinct S2 statement one-to-one. PARTIAL is
+  conservative, not a doubt about the pairing.
+- `parent_interests`: S2's 25 statements are the shipped text in the shipped order, blocks
+  3/5/5/4/8 matching the live per-suffix counts. One clarification, not a defect — S2 says the
+  activities were administered non-consecutively by set, so the codebook's roman list is a
+  *conceptual* grouping, not the administration order; the within-block order rests on that list
+  order matching the S1 column order, which is what the agent claimed. Source typo noted: S2
+  numbers its last statement "(xv)" rather than "(xxv)".
+- Both `public_note`s' Italian-administration claim holds, and "empty `_translated` columns"
+  is literally true — all four hold the corpus NA token in every row, and normalize_nulls left
+  both files unchanged.
+
+**Both mappings PARTIAL, correctly.** `parent_divers_ed`: the article publishes no per-item
+statistic, so within-block assignment rests on content mnemonics plus stimulus gradients.
+`parent_interests`: CHIA1_CULTURAL (museum, 3.12) vs CHIA2_CULTURAL (newspaper, 3.15) and
+CHIA5_SOCIAL (telethon, 3.05) vs CHIA7_SOCIAL (used clothes, 3.00) are mutually
+indistinguishable by any distributional route.
+
+**For triage — one judgement call worth a human eye.** `parent_interests` ships response
+labels that are *partly* IRW's: S2 says only "Scale: Important/Not Important from 1 to 5" and
+labels no scale point, so "Not Important" at 1 and "Important" at 5 is a placement this project
+chose (the words are the source's; the assignment to endpoints is not). It is disclosed in
+`public_note` and supported by the data (read books 4.46 vs watch sport on TV 1.96), and
+`check_provenance.R` does not flag it — the 2026-09-02 ruling is about IRW-*generated* wording.
+Flagging it because it sits near that line, not because a gate objected.
+
+**No export used anywhere in this round** — both agents took ground truth via
+`irw::irw_table_sets()` server-side aggregates, and both verify scripts fetch the deposit rather
+than the table.
+
+Cap (`batch_110`) not reached; next firing picks up `batch_105`.
