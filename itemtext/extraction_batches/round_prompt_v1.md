@@ -78,8 +78,22 @@ changed. Across batches 080-092 the machine ran with an interactive Emacs/ESS R 
 4.9-5.5G, and `batch_091` was killed twice in a row at three agents with available memory down to
 11.6G and free memory near 400MB. That R session then ended and available rose to 17.4G with 6.6G
 free — the best of the session — and `batch_092` ran clean at three. **Six is authorised against
-that 17G baseline, not against the 11G one.** If a round is killed at six, do not retry at six:
-drop to three, which is the setting known to survive the worse case.
+that 17G baseline, not against the 11G one.**
+
+**Refined after the first kill at six (`batch_095`, 2026-09-08), because the original version of this
+rule said "if a round is killed at six, drop to three" and the evidence says that is too blunt.**
+What matters is WHERE the kill lands, not that one happened:
+
+- **Killed BEFORE dispatch writes anything** — an empty batch directory and a claim in
+  `queue_state.csv` — costs about a minute: `git checkout` the queue file, `rmdir` the directory,
+  retry. `batch_095` was killed this way with 18.5G still available at rest, which confirms the
+  constraint is the SPIKE of six simultaneous `claude` processes and not the baseline. At six the
+  record is 2 clean rounds and 1 free failure, so expected throughput is still well above three.
+  **Retry at six.**
+- **Killed MID-ROUND, with tables written** — this is the expensive one, because a salvage is
+  hand work and any unwritten table is re-extracted from scratch. **Drop to three and stay there**
+  until a human raises it again.
+- **Two kills in a row, of any kind** — stop firing entirely. That rule is unchanged.
 
 The rest of this section is the history that produced the three-agent setting. It is kept because
 its reasoning is still the reasoning — the constraint is the dispatch SPIKE, and N agents means N
