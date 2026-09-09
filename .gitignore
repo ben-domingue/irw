@@ -65,6 +65,13 @@ __pycache__/
 *.egg-info/
 irw_validate/results/.shard_index.json
 
+# irw_validate build artefacts. Its package directory IS its project
+# directory, so `python -m build` drops these inside the package itself --
+# where, uningored, they land in the next diff as a second copy of every
+# module.
+irw_validate/build/
+irw_validate/dist/
+
 ##Per-agent fetch caches for concurrent tagging runs (#1704, P5). Same reason
 ##tags/.claude/skills/irw-auto-tag/.cache is ignored: this is fetched source
 ##text, much of it copyrighted, and it is a scratch artifact of one run.

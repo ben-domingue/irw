@@ -43,6 +43,12 @@ jobs:
           # with --no-deps left one pre-existing test unable to import cli.
           python -m pip install pandas
           python -m pip install -e .
+          # irw_validate is its own distribution now, not a rider on
+          # irw-red-up. Installing it here is also what checks its pyproject
+          # still builds -- the pipeline itself does not need the install,
+          # because red_up and irw_triage_updated both put the repo root on
+          # sys.path before importing it.
+          python -m pip install -e irw_validate
 
       - name: red_up
         run: python -m unittest discover -s red_up/tests -t . -v

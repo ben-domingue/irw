@@ -21,6 +21,20 @@ MAX_BYTES = 512 * 1024 ** 2
 TABLE_SUFFIXES = (".csv", ".tsv", ".txt", ".rdata", ".rda", ".rds")
 
 
+def _pipeline_root():
+    """The `irw` checkout this package sits inside, or None if there is none.
+
+    `irw_validate` is installable on its own (`pip install irw-validate`), and
+    a contributor who does that has the validator but not the pipeline around
+    it. Two loaders below need that pipeline; everything else -- every CSV, and
+    `validate_frame` on a frame the caller already has -- needs pandas and
+    nothing more. Checking rather than assuming turns an ImportError raised
+    from three frames down into a sentence saying what to do.
+    """
+    root = Path(__file__).resolve().parent.parent
+    return root if (root / "automated_finding" / "irw_triage_updated.py").is_file() else None
+
+
 def _table_name(label: str) -> str:
     stem = Path(label).name
     low = stem.lower()
@@ -273,7 +287,14 @@ def validate_file(path, *, label: str | None = None, profile: str = "upload",
         # The 922 legacy tables in ../data/pub/ (#1703 sub-item 1.5). Not
         # routed through irw_triage_updated.load_table because that pulls in
         # the whole discovery pipeline for a two-line read.
-        import pyreadr
+        try:
+            import pyreadr
+        except ImportError:
+            raise ValueError(
+                f"{path.name}: reading R data files needs pyreadr, which is "
+                "optional -- install it with `pip install 'irw-validate[rdata]'`, "
+                "or convert the table to CSV, which needs nothing extra."
+            ) from None
         objs = pyreadr.read_r(str(path))
         if not objs:
             raise ValueError(f"{path.name} holds no R object")
@@ -286,8 +307,18 @@ def validate_file(path, *, label: str | None = None, profile: str = "upload",
                 f"({', '.join(str(k) for k in objs)}); expected one table")
         df = next(iter(objs.values()))
     else:
+        # Anything else goes through the pipeline's own reader, which exists
+        # only in a checkout of ben-domingue/irw.
+        root = _pipeline_root()
+        if root is None:
+            raise ValueError(
+                f"{path.name}: '{path.suffix}' files are read by the IRW "
+                "pipeline's loader, which is not part of this package -- it "
+                "lives in a checkout of ben-domingue/irw. Convert the table to "
+                "CSV, or run irw-validate from inside a checkout."
+            )
         import sys
-        sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "automated_finding"))
+        sys.path.insert(0, str(root / "automated_finding"))
         from irw_triage_updated import load_table
         df = load_table(str(path))
     return validate_frame(df, label=label, profile=profile, context=context)
