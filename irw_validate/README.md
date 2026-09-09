@@ -9,10 +9,33 @@ irw-validate out/x.csv --json                # for CI
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
 
-`irw-validate` is a console script declared in `pyproject.toml`. If the command is not
-found, the editable install predates it — re-run `pip install -e .` from `src/` (this
-machine needs `--break-system-packages`, PEP 668). Otherwise `python3 -m irw_validate.cli`
-works, but only from `src/`.
+## Installing
+
+```
+pip install irw-validate                    # once published
+pip install -e /path/to/irw/src/irw_validate   # from a checkout
+```
+
+pandas and the standard library, nothing else — no Redivis, no credentials, no
+network. That is deliberate: this is the thing an outside contributor runs
+against their own file before depositing it, and they should not have to clone
+the pipeline or hold a token to do it.
+
+Two optional extras exist for cases that are not that:
+
+| Extra | Adds | Needed for |
+|---|---|---|
+| `[rdata]` | pyreadr | validating `.Rdata`/`.rda`/`.rds` directly. Converting to CSV first needs nothing. |
+| `[live]` | redivis | the `live_*` and `repair_*` modules, which read published tables. Pipeline tools; `validate_file` never touches the network. |
+
+Until 2026-09-09 this package shipped inside `irw-red-up`, the uploader
+distribution, so the only way to get the validator was to install the writer.
+That was an accident of packaging: `../pyproject.toml` keeps `red_up` out of
+Python-pkg because a write-scoped uploader would change what that package is,
+and none of that reasoning applies to a checker that opens a CSV.
+
+`irw-validate` is a console script. In a checkout without the install,
+`python3 -m irw_validate.cli` works from `src/`.
 
 ## Why this exists
 
