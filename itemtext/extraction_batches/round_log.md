@@ -11746,3 +11746,83 @@ run against `git show main:itemtext_issues.qmd` written to a scratch file. It ex
 entries. That is a better habit than switching branches in a shared checkout and is worth repeating.
 
 Cap is `batch_110`; not reached. 707 pending, next firing takes `batch_096`.
+
+---
+
+## batch_096 — 2026-09-08 18:48–19:05
+
+**6 tables claimed, 4 written / 2 blocked / 0 failed.** Yield 4/6 = 67%. Circuit breaker does not
+fire (0% failed; both no-CSV tables are determinate rights blocks, retry test NO). Second clean
+six-agent round in a row — no kill, no salvage, nothing rate-limited.
+
+| table | outcome | basis |
+|---|---|---|
+| `mascherini_2021_meddiet` | done | `data_labels`, PARTIAL (routes 1+3) |
+| `matarboumosleh_2017_gad2` | done | `data_labels`, PARTIAL (route 9 + code exemption) |
+| `matarboumosleh_2017_phq2` | done | `data_labels`, PARTIAL (route 3 + code exemption) |
+| `matarboumosleh_2017_spai26` | done | `data_labels`, **VERIFIED** (route 1, 26/26 distinct) |
+| `martinezsoto_2024_spiritual_leadership` | blocked | SLT / IISL permission clause — **escalated** |
+| `mavromoustakos_2016_ztpi` | blocked | ZTPI / Zimbardo permission clause — **escalated** |
+
+**Gates all clean:** `normalize_nulls` fixed 1 of 4 (spai26, 105 lines); `audit_batch` 3 PASS 1 WARN;
+`verify_batch` PASS=4; `lint_verification` no problems (all four written tables carry a real
+verification row, so no `NOT_NEEDED` rows were owed); `irw-validate` ok on all four;
+`check_provenance.R` clean at 411 entries — `mascherini`'s `translation_source=study_supplied` is a
+published English rendering by the study's own authors, so it owes no issues-page line.
+
+**Three tables, one source file, no race.** The three `matarboumosleh_2017_*` tables all come from one
+single-sheet `.xls` (S1 Dataset of PLOS ONE 12(8):e0182239). Telling each agent which siblings were
+off-limits worked exactly as intended: they read the same file, wrote only their own, and their
+independent findings corroborated rather than collided — both the `gad2` and `phq2` agents derived
+the same unreversed-sum direction check from the deposit's own composite columns, and both landed on
+PARTIAL for the anchor axis for the same stated reason. The `spai26` agent found the paper's Table 2
+is a **PNG**, invisible to text search, and fetched it through the PLOS figure-image endpoint; it
+prints all 26 items with per-item endorsement n and %, which is why that table is the round's only
+VERIFIED — all 26 (count, percent) pairs are distinct, so the route separates every item from every
+other. Worth remembering: **a PLOS article that looks like it prints no items may print them all in
+a table image.**
+
+**Step 5b — three agent claims re-checked, all three confirmed, two sharpened.**
+
+1. *The audit WARN is a false positive, and the fix would have been the bug.* `audit_batch` flagged
+   `mascherini` for `option_text` equal to the resp value on `legumes`/`fish` at resp=1. The cached
+   S2 File reads verbatim `Never, 1, 1-2, 3-4, 5-6, > 6` — `1` is a **printed frequency band**
+   ("one serving a week"), sitting between "Never" and "1-2". Blanking it per the WARN's advice
+   would have deleted published wording. Explained in `notes.csv` per Step 5c.
+2. *The IISL clause is real, and stronger than the agent thought.* The agent flagged its own block as
+   arguable — possibly "careless drafting on a publications index". Re-checking: the sentence is
+   **visible body text** on both `/articles/` and `/resources/` (not merely a meta tag, which is where
+   a grep first finds it), page sha256 `c796828a…` matching what the agent recorded — and IISL's own
+   `/terms-of-use/` URL **404s**. There is no other terms page, so this is the site's only stated
+   terms, which removes the "it's just index boilerplate" reading. `/resources/` is additionally
+   behind a Register/Sign-in gate.
+3. *The ZTPI clause is real and verbatim*, confirmed in the cached page: "Researchers can use it free
+   with my permission and agreement to share results."
+
+**Two rulings owed by Ben, both of which settle more than one table.**
+- **ZTPI** — "free with my permission and agreement to share results", plus contact-first control on
+  translations. This is the free-but-restricted shape already blocked for HEXACO/TIMSS/PROMIS, and
+  the clause sits on the *same page* that distributes `ZTPI.pdf`, so the SWLS two-pages ruling gives
+  no more-permissive sibling to prefer. The ZTPI recurs in the corpus; one ruling settles all of them.
+- **SLT / IISL** — "the works derived from this site may be cited with proper notation and permission
+  from the author." Genuinely arguable in the other direction: requiring permission to *cite* is not
+  a right anyone holds, and "works derived from this site" may not reach the questionnaire at all.
+  If it doesn't, `martinezsoto_2024_spiritual_leadership` ships immediately — the extraction is fully
+  solved and banked (PLOS S2 File = administered Spanish, S1 File = the authors' English, both
+  numbered 1–26, number-preserving rename in the processing script), so a reversal is a
+  transcription, not a restart.
+
+Both blocks are **effective**: item codes are opaque (`ZTPIQ37`, `p18`), so no wording leaks through
+the response tables — unlike the irw#2101/#2123 case.
+
+**Register rows the agents flagged as owed, added here** (29 rows now): ZTPI `block`, SLT `escalate`,
+MedDietScore `ship`. All three agents correctly declined to write the shared register while siblings
+were in flight — that convention is now working reliably three rounds running.
+
+**A dictionary finding worth acting on separately.** `martinezsoto_2024_spiritual_leadership`'s items
+18–26 are the **spiritual well-being** blocks (Meaning/Calling, Membership; Fry & Nisiewicz 2013), not
+leadership items, so the dictionary Description ("26-item Spiritual Leadership-style scale")
+understates the battery. This also closes the open question in that processing script's own header,
+which recorded that items 22–26 "could not be confirmed": they are Membership items 1–5.
+
+Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
