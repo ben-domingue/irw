@@ -12221,3 +12221,64 @@ failed twice; three failed once, inside the bad window, and still has not had a 
 binding variable remains unidentified.
 
 Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.
+
+## batch_101 — 2026-09-08 20:29–20:45 PDT
+
+**2 tables, 2 agents** (the reduced count set after the 2026-09-08 evening kill cluster).
+Written 2 / blocked 0 / failed 0 — **yield 100%**. Circuit breaker not approached.
+
+Tables: `meloni_2015_child_ia_satisfaction`, `meloni_2015_deq_ce_child`. Both from the
+Meloni/Federici/Dennis 2015 PLOS ONE deposit (doi:10.1371/journal.pone.0128876, CC BY 4.0)
+whose first two tables shipped in batch_100 — the sibling warning was issued explicitly and
+neither agent touched the other's files or the five still-queued `meloni_2015_*` tables.
+
+**Round size.** Two agents ran clean, ~6.5 minutes each, no kill, no memory event. That is
+one data point, not a diagnosis: the failures being probed track *cadence* across repeated
+background launches, and a single clean round at two does not distinguish "two is safe" from
+"the cooldown worked". Per the prompt, if a later round at two fails after a cooldown the
+agent count is not the variable and it goes to a human rather than down to one.
+
+**Gates** (all six, foreground): normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no
+anomalies** (so no WARNs to explain under Step 5c); verify_batch 2 PASS; lint_verification
+2 rows, no problems; `irw-validate` ok on both; `check_provenance.R` 757 rows / 105 files,
+0 IRW-generated tables missing a public entry. Both tables are `mapping_basis=paper_order`,
+so no NOT_NEEDED rows were owed in either file.
+
+**Verification: both PARTIAL, honestly.** `ia_satisfaction` — routes 8+2, 6/6 preference
+predictions hold plus 7/7 on the paired `IA*_TIME` frequency columns (which is what rescues
+an otherwise flat REL block, means 3.09–3.31 at SE ≈0.15); does not separate REL_2/_3,
+HBODY_2/_4/_5, SOCIAL_2/_5, GEN_2/_5. `deq_ce_child` — route 8 on the statement × target
+interaction, 7/7 including DEQ10's largest MD−CD gap (1.22; MD 3.03, CD 1.81) and the paper's
+own Discussion contrast DEQ6 3.21 vs DEQ2 1.49; does not separate statements 8/9 (the same
+two clauses reversed, 2.92/2.89 MD — swapping them would be undetectable), 1/2/3 (all at the
+floor), or 5/7.
+
+**Step 5b orchestrator re-check — one agent claim corrected, two confirmed.**
+- CORRECTED. The `ia_satisfaction` agent reported that of "74 children with a complete block,
+  only 4-5 per block used all five distinct values, and block totals run 6 to 24". Recomputed
+  from the cached S1 deposit (sheet Dataset_S1, Protocol 200–281): **all 76 children are
+  complete on all four blocks; 5/5/6/5 used all five distinct values; totals run 3–24**
+  (REL 5–21, HBODY 3–24, SOCIAL 7–21, GEN 6–24). The finding stands — ties are pervasive and
+  `resp` is a 1–5 liking rating, not the strict ranking the paper describes — but the figures
+  were wrong and are now corrected in `notes.csv` with the re-check recorded inline. The claim
+  never reached `public_note`, so nothing public needed amending.
+- CONFIRMED. The `deq_ce_child` child/parent split is by ROW, not column: the 44 `DEQ_*_CE_*`
+  columns are shared, and the deposit holds 76 child rows (Protocol 200–281) and 76 parent
+  rows (100–199), with per-item n of 76 and 75–76 respectively. Raw values include a `0.0`
+  absent from the live resp set {1, 1.5, 2, 2.5, 3, 3.5, 4}, which accounts for the live
+  per-item n of 73–76 the agent reported.
+- CONFIRMED. The wording basis for choosing the child protocol: S2 prints "the world makes him
+  think it is difficult" only under *Child's Protocol* and "the world makes him things
+  difficult" under *Parent's Protocol*, and the shipped CSV carries the child forms (28 rows
+  each = 4 targets × 7 resp levels).
+
+**Notable, carried in the tables' own notes for triage.** (a) `ia_satisfaction` ships the
+task's full verbatim instructions, which therefore also name the Never/once-a-year/once-a-week
+frequency card belonging to the *sibling* table — flagged in its `public_note`. (b)
+`deq_ce_child` ships the codebook's MASCULINE statement set for the two female-target blocks
+(Maria/SD, Elena/ND), because S2 publishes only the masculine wording; inventing a
+gender-swapped rendering was declined. (c) Both tables are `translated_substitute` /
+`study_supplied`: administration was Italian, and no Italian wording exists anywhere in the
+article or supplements — re-verified this round rather than inherited from batch_100.
+
+Cap (`batch_110`) not reached; 666 tables remain pending, 0 in_progress.
