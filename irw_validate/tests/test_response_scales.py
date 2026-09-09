@@ -6,11 +6,15 @@ formats remain one table regardless of which format is more common.
 """
 from __future__ import annotations
 
+import contextlib
+import io
 import json
+import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -27,7 +31,7 @@ WIDTH_CHECKS = {
 }
 EVIDENCE_CHECKS = {
     "permitted_values_unusable", "resp_outside_permitted",
-    "item_constructs_unusable",
+    "item_constructs_unusable", "resp_scale_constructs",
 }
 
 
@@ -101,11 +105,62 @@ class WidthEvidence(unittest.TestCase):
         self.assertEqual(raw_findings(run_qc(response_table(supports))),
                          {"item_scale_outlier": "warn"})
 
-    def test_rare_nested_item_stays_a_nested_warning_not_an_outlier(self):
+    def test_rare_nested_item_is_an_outlier_warning_not_a_failed_construct(self):
         supports = {f"i{i:02d}": (1, 2, 3, 4, 5) for i in range(9)}
         supports["one_wider"] = (0, 1, 2, 3, 4, 5)
         self.assertEqual(raw_findings(run_qc(response_table(supports))),
-                         {"resp_scale_nested_support": "warn"})
+                         {"item_scale_outlier": "warn"})
+
+    def test_hpq_shaped_count_column_is_named_before_nested_classification(self):
+        # Synthetic regression for the reported shape, not a source-data replay.
+        supports = {**{f"hpq_{i:02d}": range(1, 6) for i in range(12)},
+                    "submiss": range(41)}
+        for reverse in (False, True):
+            ordered = dict(reversed(list(supports.items()))) if reverse else supports
+            df = response_table(ordered)
+            if reverse:
+                df = df.iloc[::-1].reset_index(drop=True)
+            for profile in ("triage", "upload", "legacy"):
+                with self.subTest(reverse=reverse, profile=profile):
+                    report = validate_frame(df, label="hpq_2026", profile=profile)
+                    self.assertTrue(report.ok, report.findings)
+                    self.assertEqual(report_findings(report), {"item_scale_outlier": "warn"})
+                    finding = next(f for f in report.findings if f.check == "item_scale_outlier")
+                    self.assertIn("'submiss' (0-40)", finding.message)
+
+    def test_rare_legitimate_item_format_still_only_warns(self):
+        for n_mc, n_cr in ((12, 1), (1, 12)):
+            supports = mixed_math(n_mc, n_cr)
+            df = response_table(supports)
+            for profile in ("triage", "upload", "legacy"):
+                with self.subTest(mc=n_mc, cr=n_cr, profile=profile):
+                    report = validate_frame(df, label="math_2026", profile=profile)
+                    self.assertTrue(report.ok, report.findings)
+                    self.assertEqual(report_findings(report), {"item_scale_outlier": "warn"})
+                    documented = validate_frame(df, profile=profile, context={
+                        "permitted_values": supports,
+                        "item_constructs": {item: "math" for item in supports},
+                    })
+                    self.assertTrue(documented.ok, documented.findings)
+                    self.assertEqual(report_findings(documented), {})
+
+    def test_isolated_share_boundary_is_strictly_below_fifteen_percent(self):
+        for count, expected in ((2, "item_scale_outlier"), (3, "resp_scale_nested_support")):
+            supports = {f"i{i:02d}": range(1, 8) if i < count else range(1, 6)
+                        for i in range(20)}
+            with self.subTest(off_count=count):
+                self.assertEqual(raw_findings(run_qc(response_table(supports))),
+                                 {expected: "warn"})
+
+    def test_sdv_shaped_nested_ranges_remain_warning_without_construct_evidence(self):
+        # Accepted tradeoff: widths alone cannot establish multiple constructs.
+        supports = {f"i{end}_{i}": range(1, end + 1)
+                    for end in (5, 7, 8, 9) for i in range(3)}
+        for profile in ("triage", "upload", "legacy"):
+            with self.subTest(profile=profile):
+                report = validate_frame(response_table(supports), label="sdv_2026", profile=profile)
+                self.assertTrue(report.ok, report.findings)
+                self.assertEqual(report_findings(report), {"resp_scale_nested_support": "warn"})
 
     def test_prefixes_and_disjoint_respondents_are_not_construct_proof(self):
         # Each item has its own booklet sample, but all assess mathematics.
@@ -333,8 +388,8 @@ class DocumentedConstructs(unittest.TestCase):
         self.assertEqual(raw_findings(run_qc(self.df)),
                          {"resp_scale_nested_support": "warn"})
         checks = run_qc(self.df, item_constructs=self.constructs)
-        self.assertEqual(raw_findings(checks).get("resp_scale_mixed"), "fail")
-        detail = next(c.detail for c in checks if c.name == "resp_scale_mixed")
+        self.assertEqual(raw_findings(checks).get("resp_scale_constructs"), "fail")
+        detail = next(c.detail for c in checks if c.name == "resp_scale_constructs")
         self.assertIn("anxiety", detail)
         self.assertIn("social_support", detail)
 
@@ -343,13 +398,13 @@ class DocumentedConstructs(unittest.TestCase):
             with self.subTest(permitted=type(permitted).__name__):
                 got = raw_findings(run_qc(self.df, permitted_values=permitted,
                                          item_constructs=self.constructs))
-                self.assertEqual(got, {"resp_scale_mixed": "fail"})
+                self.assertEqual(got, {"resp_scale_constructs": "fail"})
 
     def test_documented_construct_boundary_is_checked_on_two_item_tables(self):
         df = response_table({"first_item": (0, 1), "second_item": (0, 1, 2, 3)})
         checks = run_qc(df, item_constructs={"first_item": "anxiety",
                                             "second_item": "social_support"})
-        self.assertEqual(raw_findings(checks), {"resp_scale_mixed": "fail"})
+        self.assertEqual(raw_findings(checks), {"resp_scale_constructs": "fail"})
 
     def test_equal_group_envelopes_do_not_claim_aligned_width_evidence(self):
         supports = {"a0": (0, 1), "a1": (0, 1, 2, 3), "a2": (0, 1),
@@ -374,7 +429,7 @@ class DocumentedConstructs(unittest.TestCase):
                 got = raw_findings(run_qc(self.df, item_constructs=bad))
                 self.assertEqual(got.get("item_constructs_unusable"), "warn")
                 self.assertEqual(got.get("resp_scale_nested_support"), "warn")
-                self.assertNotEqual(got.get("resp_scale_mixed"), "fail")
+                self.assertNotEqual(got.get("resp_scale_constructs"), "fail")
 
     def test_invalid_construct_mapping_cannot_hide_a_known_response_violation(self):
         got = raw_findings(run_qc(self.df, item_constructs={"a0": "anxiety"},
@@ -384,13 +439,50 @@ class DocumentedConstructs(unittest.TestCase):
 
 
 class PublicEvidenceContract(unittest.TestCase):
+    def test_old_width_waiver_cannot_waive_a_documented_construct_error(self):
+        from irw_validate.cli import main
+
+        supports = mixed_math(4, 4)
+        df = response_table(supports)
+        context = {"item_constructs": {item: item[:2] for item in supports}}
+        for waiver, expected_code in (("resp_scale_mixed", 1), ("resp_scale_constructs", 0)):
+            with self.subTest(waiver=waiver), tempfile.TemporaryDirectory() as directory:
+                report = validate_frame(df, label="mixed_2026.csv", profile="upload", context=context)
+                self.assertEqual([f.check for f in report.errors], ["resp_scale_constructs"])
+                ledger = Path(directory) / "overrides.csv"
+                output = io.StringIO()
+                # CLI has no codebook argument. Exercise its real waiver path
+                # on a real API report without inventing a new context interface.
+                with patch("irw_validate.cli.validate_file", return_value=report), \
+                        patch.dict(os.environ, {"IRW_VALIDATE_LEDGER": str(ledger)}), \
+                        contextlib.redirect_stdout(output):
+                    code = main(["mixed_2026.csv", "--json", "--override-check", waiver,
+                                 "--override", "Test-only scoped waiver; no source data altered"])
+                self.assertEqual(code, expected_code)
+                result = json.loads(output.getvalue())[0]
+                if expected_code:
+                    self.assertIn("resp_scale_constructs", [f["check"] for f in result["findings"]])
+                    self.assertEqual(result["overridden"], [])
+                    self.assertFalse(ledger.exists())
+                else:
+                    self.assertEqual([f["check"] for f in result["overridden"]], ["resp_scale_constructs"])
+                    self.assertIn("resp_scale_constructs", ledger.read_text())
+
+    def test_invalid_text_skips_width_inference_but_not_documented_numeric_violation(self):
+        df = response_table(mixed_math(4, 4)).astype({"resp": object})
+        df.loc[0, "resp"] = "NA"
+        report = validate_frame(df, profile="upload", context={"permitted_values": {0, 1}})
+        self.assertTrue({"resp_numeric", "resp_outside_permitted"}.issubset(
+            {f.check for f in report.errors}))
+        self.assertFalse(WIDTH_CHECKS.intersection(f.check for f in report.findings))
+
     def test_documented_failures_block_triage_upload_and_legacy_but_not_core(self):
         supports = {**{f"a{i}": (0, 1) for i in range(4)},
                     **{f"b{i}": (0, 1, 2, 3) for i in range(4)}}
         df = response_table(supports)
         contexts = [({"permitted_values": {0, 1}}, "resp_outside_permitted"),
                     ({"item_constructs": {item: item[0] for item in supports}},
-                     "resp_scale_mixed")]
+                     "resp_scale_constructs")]
         for context, expected_check in contexts:
             for profile in ("triage", "upload", "legacy"):
                 with self.subTest(check=expected_check, profile=profile):

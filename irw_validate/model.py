@@ -33,7 +33,7 @@ CORE_CHECKS = frozenset({
 #: explicit external documentation (#1697): an observed code outside its
 #: permitted set, or documented constructs with different observed ranges.
 #: Their width-only counterparts are raw WARN and are never promoted here.
-GATE_ERRORS = frozenset({"resp_variation*", "resp_outside_permitted", "resp_scale_mixed"})
+GATE_ERRORS = frozenset({"resp_variation*", "resp_outside_permitted", "resp_scale_constructs"})
 
 PROFILES = ("core", "triage", "upload", "legacy")
 

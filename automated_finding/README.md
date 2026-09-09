@@ -35,8 +35,8 @@ python irw_discover_updated.py "PHQ-9" "reading assessment" --out runs/candidate
 python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv
 
 # 3. Full run — safe to interrupt and resume
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage --resume
 
 # 4. Open runs/irw_triage.csv, sort by flag ('good' first), review candidates.
 #    `good`/`worth_retrying` rows go straight to Step 2 (write a processing
@@ -125,7 +125,8 @@ After a full triage run the `human_assistance` bucket is usually large (hundreds
 of rows). Most of it is recoverable without re-downloading anything:
 
 ```bash
-python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage_ha.csv
+# (normally unnecessary -- Step 2's --retriage chains this automatically)
 ```
 
 This reads the 400-char `reasons` strings already in the triage CSV and
@@ -299,9 +300,10 @@ a processing script, check the dataset's DOI against the
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
-| `resp_scale_mixed` | Crossing observed ranges produce a warning; only complete explicit construct evidence with distinct group ranges produces a failure | Verify the documented constructs before splitting. Different item formats within one construct can be legitimate |
-| `resp_scale_nested_support` | Different observed min/max ranges form a nested chain (`warn`) | Check category coverage; unused extremes do not establish different scales |
-| `item_scale_outlier` | Crossing observed ranges with fewer than 15% of items outside the modal min/max pair (`warn`) | Inspect the source before removing or recoding any item |
+| `resp_scale_mixed` | Non-nested observed ranges with at least 15% of items differing from the modal min/max pair (`warn`) | Different item formats within one construct can be legitimate; width alone does not justify splitting |
+| `resp_scale_constructs` | Complete explicit construct evidence with distinct observed group ranges (`fail`) | Verify the documented constructs before splitting; old width-check waivers do not apply to this separate check |
+| `resp_scale_nested_support` | Different observed min/max ranges form a nested chain after isolated outliers are checked (`warn`) | Check category coverage; unused extremes do not establish different scales |
+| `item_scale_outlier` | Fewer than 15% of items differ from the modal min/max pair, including nested ranges (`warn`; names the items) | Inspect the source before removing or recoding any item |
 | `resp_outside_permitted` | An observed response violates a documented permitted set (`fail`) | Resolve the coding discrepancy against the source; do not redefine permitted values from the observations |
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |

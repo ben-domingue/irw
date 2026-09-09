@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"gobbens_2018_adl","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""
+"gobbens_2018_iadl","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"gomez_2022_qcae","PASS",31,31,TRUE,TRUE,FALSE,TRUE,0,0,""
+"gordils_2021_behavioral_avoidance","WARN",11,11,TRUE,TRUE,FALSE,TRUE,0,71.4,"row-count anomaly (possible item-code conflation or missingness skew), median=2541: AVOID2 | 71.4% of rows have blank option_text"
+"gordils_2021_discrimination","WARN",9,9,TRUE,TRUE,FALSE,TRUE,0,57.1,"row-count anomaly (possible item-code conflation or missingness skew), median=2542: DISCRIM2 | 57.1% of rows have blank option_text"

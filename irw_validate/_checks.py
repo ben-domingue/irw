@@ -236,7 +236,7 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
         if len(bounds) > 1 and len(set(zip(bounds["lo"], bounds["hi"]))) > 1:
             detail = "; ".join(f"{name!r}: {row.lo:g}-{row.hi:g}"
                                for name, row in bounds.head(4).iterrows())
-            checks.append(Check("resp_scale_mixed", "fail",
+            checks.append(Check("resp_scale_constructs", "fail",
                 "Different observed response ranges align with explicitly supplied "
                 f"documented constructs ({detail}). Review the source-supported "
                 "construct boundaries and separate distinct constructs as required; "
@@ -246,7 +246,12 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
     # A complete codebook validates each item's scores, including different
     # legitimate sets on weighted or mixed-format tests. It says nothing about
     # the construct identity of undocumented items or upstream preprocessing.
-    if len(ranges) < 3 or (complete and not violations):
+    # Keep the upstream #2029 guard: mixed numeric/text responses do not
+    # support a width heuristic. Documented numeric violations above remain
+    # reportable; the numeric check reports the invalid tokens separately.
+    mixed_numeric_text = (resp_num.notna().any()
+                          and (df["resp"].notna() & resp_num.isna()).any())
+    if mixed_numeric_text or len(ranges) < 3 or (complete and not violations):
         return checks
     profiles = collections.Counter(zip(ranges["min"], ranges["max"]))
     if len(profiles) < 2:
@@ -259,12 +264,18 @@ def _response_scale_checks(df, resp_num, permitted_values, item_constructs):
     off = ranges[(ranges["min"] != modal[0]) | (ranges["max"] != modal[1])]
     ordered = sorted(profiles, key=lambda bounds: (bounds[0], -bounds[1]))
     nested = all(a[1] >= b[1] for a, b in zip(ordered, ordered[1:]))
-    if nested:
+    # An isolated wider column can contain the modal interval (e.g. HPQ's
+    # missing-response count). Keep that targeted diagnostic before nesting;
+    # rarity alone still cannot establish that the column is invalid.
+    if len(off) / len(ranges) < 0.15:
+        name = "item_scale_outlier"
+        examples = ", ".join(f"{item!r} ({row['min']:g}-{row['max']:g})"
+                             for item, row in off.head(4).iterrows())
+        reason = (f"{len(off)} item(s) differ from the modal observed range "
+                  f"{modal[0]:g}-{modal[1]:g}: {examples}")
+    elif nested:
         name = "resp_scale_nested_support"
         reason = "Item observed min/max ranges are nested"
-    elif len(off) / len(ranges) < 0.15:
-        name = "item_scale_outlier"
-        reason = f"{len(off)} item(s) have non-nested ranges differing from the modal range"
     else:
         name = "resp_scale_mixed"
         reason = "Items have non-nested observed response ranges"

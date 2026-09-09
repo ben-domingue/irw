@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_040 already exists (round cap reached)
+- itemtables/batch_095 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -53,24 +53,43 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
 - Immediately rewrite queue_state.csv marking exactly those tables status="in_progress",
   batch="batch_<NNN>", timestamp=<now ISO 8601>, BEFORE dispatching, so nothing is double-claimed.
+  **Write this file through a temp file and os.replace(), never open(path,"w") directly.**
+  A batch_058 update opened it for writing and then raised, truncating the whole queue to 0
+  bytes; it was recoverable only because the claim was not yet committed. The same bug after
+  a commit loses the queue outright.
 
 ## Step 2 — Dispatch extraction (parallel subagents)
 
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**SIX agents per round, halved from twelve on 2026-09-05 by Ben.** Twelve sat under the API
+**THREE agents per round, cut from six on 2026-09-08 by Ben.** The original twelve sat under the API
 concurrency cap, but not under this laptop's memory: the batch_033 round was killed by the OS
 partway through dispatch, and the batch_032 round before it was killed the same way after writing
 four of its twelve tables, costing seven tables of extraction work. The binding constraint is RAM
 on the machine the runner shares with a desktop session, not the concurrency cap. Do not raise
 this back without a reason that addresses memory.
+
+Cut again 2026-09-08, for the same reason and with measurements this time. batch_068 was
+killed ~10 minutes in (four of six tables written, salvaged by hand rather than re-run). The
+machine was NOT short of memory at rest — 19G available, 11G in use — so the kill was the
+dispatch SPIKE, not the baseline: Step 2 sends every agent in one message, so N agents means N
+`claude` processes plus their R and Python children appearing within seconds. Measured baseline
+at the time: Chrome 7.3G across 34 processes, four interactive Claude sessions 1.7G, four
+irw-mcp servers 0.9G, and a 2G swapfile already 85% full of idle desktop apps (dropbox, slack,
+gnome) leaving 350MB of spill. Three agents roughly halves the spike again. Ben's instruction is
+that this is the DAYTIME setting, while he is using the machine for other work; it can go back
+up when the laptop is otherwise idle.
+
+Note what this does NOT revert to. The abandoned design below was three TABLES PER AGENT; this
+is three tables per round, still ONE AGENT PER TABLE, so the blast radius of a failure stays
+exactly one table.
 
 This replaces the earlier groups-of-3, which lost three tables to every single failure:
 batch_010's group 3 was killed by a content-filter error before it read anything, and all three
@@ -152,9 +171,11 @@ Each subagent prompt must tell it to:
 - Write itemtables/batch_<NNN>/notes_<table>.csv (header table,note) if its table didn't get a
   clean pass, including a pass carrying a real caveat.
 - Write itemtables/batch_<NNN>/provenance_<table>.csv (header
-  table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for its table,
-  clean or not. Vocabularies are defined in SKILL.md Step 6c. Record mapping_basis=unknown honestly
-  rather than guessing.
+  table,mapping_basis,text_source,translation_source,source_ref,note,public_note,uploaded) with a
+  row for its table, clean or not. Vocabularies are defined in SKILL.md Step 6c. Record
+  mapping_basis=unknown honestly rather than guessing. translation_source is REQUIRED whenever
+  text_source=translated_substitute — there the English you shipped is the base text, so say where
+  it came from; check_provenance.R fails a blank one (irw#1970).
 - Write itemtables/batch_<NNN>/verification_<table>.csv (header
   table,batch,mapping_basis,uploaded,route,status,evidence) for every table whose mapping_basis is
   NOT data_labels, per SKILL.md Step 5b. status is VERIFIED/PARTIAL/NO_ROUTE, and `evidence` must

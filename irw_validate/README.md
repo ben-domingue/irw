@@ -54,9 +54,10 @@ direction; a response-scale `fail` requires explicit documentation, as below.
 | `legacy` | the 922 `.Rdata` sweep (1.5, not built) | `upload` minus rules that postdate the tables |
 
 `GATE_ERRORS` contains `resp_variation*`, `resp_outside_permitted` and
-`resp_scale_mixed`. The latter two block only when the shared check emits a
-documentation-backed `fail`; the same `resp_scale_mixed` name can also carry a
-width-only `warn`, which remains nonblocking unless strict mode is selected.
+`resp_scale_constructs`. The latter two are documentation-backed failures.
+The width-only `resp_scale_mixed` warning has a separate name and remains
+nonblocking unless strict mode is selected. A waiver for that old width-check
+name cannot waive a documented `resp_scale_constructs` failure.
 
 ## Response-scale evidence
 
@@ -96,12 +97,13 @@ file_report = validate_file("out/reasoning.csv", context=context)
 
 | Evidence | Raw check result | Meaning |
 |---|---|---|
-| At least three observed items have different min/max ranges, all forming a chain of nested intervals | `resp_scale_nested_support`: `warn` | Unequal observed coverage; this does not establish different scales |
-| At least three observed items have crossing ranges | `resp_scale_mixed`: `warn` when at least 15% differ from the modal min/max pair; otherwise `item_scale_outlier`: `warn` | Inspect the source and distributions; neither direction nor the majority range makes this a failure |
+| At least three observed items have different min/max ranges, fewer than 15% differ from the modal pair (checked before nesting) | `item_scale_outlier`: `warn` | Names the isolated items and ranges for source review; does not establish that a column is invalid |
+| At least three observed items have different min/max ranges, at least 15% differ from the modal pair, and all ranges form a chain of nested intervals | `resp_scale_nested_support`: `warn` | Unequal observed coverage; this does not establish different scales |
+| At least three observed items have non-nested ranges and at least 15% differ from the modal min/max pair | `resp_scale_mixed`: `warn` | Inspect the source and distributions; neither direction nor the majority range makes this a failure |
 | Complete usable permitted values, with every observed response allowed | No width-only finding | Unequal documented sets are legitimate, including weighted Barthel items or multiple-choice/constructed-response items |
 | A response outside a usable documented permitted set | `resp_outside_permitted`: `fail` | A documented coding violation; valid entries of a partial item mapping are still checked |
 | Missing or unusable entries in supplied permitted-value metadata | `permitted_values_unusable`: `warn` | Coverage is incomplete; do not treat the supplied metadata as full validation |
-| Complete explicit construct mapping identifies at least two constructs with different observed group min/max ranges | `resp_scale_mixed`: `fail` | Documented construct separation plus distinct observed ranges; independent of permitted sets and the three-item heuristic threshold |
+| Complete explicit construct mapping identifies at least two constructs with different observed group min/max ranges | `resp_scale_constructs`: `fail` | Documented construct separation plus distinct observed ranges; independent of permitted sets and the three-item heuristic threshold |
 | Unusable supplied construct mapping | `item_constructs_unusable`: `warn` | No strong construct conclusion can be drawn from this mapping |
 
 The two documented failures become `error` under `triage`, `upload` and
@@ -109,7 +111,35 @@ The two documented failures become `error` under `triage`, `upload` and
 suppress only width warnings, not a documented construct finding. A warning is
 not permission to drop an item or split a scale: `multi_scale*` remains a
 prefix-based warning requiring source verification before a split. Strict mode
-can make warnings block; default upload does not.
+can make warnings block; default upload does not. An HPQ-shaped isolated count
+column is named by `item_scale_outlier` even when its range contains the modal
+range. A rare legitimate item format also only warns. SDV-shaped ranges of
+1–5, 1–7, 1–8 and 1–9 remain nested-support warnings without construct evidence;
+this is an explicit limit of inference from response widths.
+
+### Literal missing-value tokens (#2029)
+
+For `upload` and `legacy`, every non-missing `resp` must parse as a number.
+There is no 1% allowance for invalid values. File validation preserves literal
+text such as `NA`, `N/A`, `NULL` and whitespace so it can report an error with
+the count and up to five examples. A genuinely empty CSV field (including
+`""`) remains missing: partial missingness is a `resp_na` warning; an entirely
+missing response column still blocks. No source file or input frame is edited.
+
+CSV/TSV/TXT validation makes a second pass reading only `resp` with pandas'
+default NA-token conversion disabled. Other columns keep their existing
+parsing behavior, and clean numeric response columns still infer numeric types.
+Item-text tables use their separate schema and retain their existing reader.
+The `core` and `triage` profiles retain their earlier parsing and numeric
+threshold; callers using `run_qc` should use `validate_file(..., profile="upload")`
+on the written file when they need this publication check.
+
+For an in-memory frame, genuine nulls remain missing and literal text is
+checked, but a token already erased by an upstream reader cannot be recovered.
+The existing 512 MiB file-size cap still applies; files over it receive only
+name checks. This change does not repair historical tables, resolve the meaning
+of their missingness, or alter published response counts. Review source coding
+before changing rows; the finding deliberately does not prescribe deletion.
 
 ## The override
 

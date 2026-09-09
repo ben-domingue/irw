@@ -27,6 +27,24 @@ metadata/**/*.txt
 !metadata/itemtext_metadata.csv
 !metadata/collections.csv
 !metadata/collection_members.csv
+##The dictionary union's audit trail (#1732). Tracked, unlike 03_tags.R's
+##tags_provenance.csv, which this file excludes and the weekly runner therefore
+##regenerates and throws away -- leaving no record of which cells a machine
+##wrote. It changes only when an automated row lands, so it is not the per-run
+##noise the note above is guarding against.
+!metadata/biblio_provenance.csv
+##Rows held back because their table is not published yet (#1732). Committed for
+##the same reason: it is the only place "waiting on a publish" is written down.
+!metadata/biblio_pending.csv
+##Which published biblio cells the dictionary corrected on this run (#2001).
+##Committed because it is the first run's review surface -- 336 cells across 223
+##tables is a list a person can read, where the same change in biblio.csv is a
+##223-row diff. It is not per-run noise: the Redivis biblio table is the
+##baseline every week, so this file only moves when the sheet does.
+!metadata/biblio_refresh_log.csv
+!metadata/comps_biblio_refresh_log.csv
+!metadata/nominal_biblio_refresh_log.csv
+!metadata/simsyn_biblio_refresh_log.csv
 .env
 .Rproj.user
 .DS_Store
@@ -77,3 +95,11 @@ tags/.caches/
 
 # Raw source downloads fetched by data/ scripts; never committed.
 data/*_raw/
+
+# Transient upload staging for the item-text pipeline. red_up reads from here and
+# the files are rewritten every batch, so there is nothing to keep -- but on
+# 2026-09-08 another session's broad `git add` swept all 48 staged files into an
+# unrelated commit (they were already tracked once before, in f107878). Ignoring
+# the directory is what stops that recurring; the batch directories under
+# itemtext/itemtables/batch_* remain the tracked record of what was extracted.
+itemtext/itemtables/clean/

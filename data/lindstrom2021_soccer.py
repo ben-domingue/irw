@@ -16,11 +16,20 @@ TITLE = ("Data and code for - Personality and Team Identification Predict "
          "Violent Intentions Among Soccer Supporters")
 UA    = {"User-Agent": "irw-batch/1.0 (research)"}
 
+##The CN block is COLLECTIVE NARCISSISM, not conscientiousness (irw#2107). The
+##deposit's own CodeBook_soccersupporterdata.csv heads it
+##"Collective narcissism;Scale (7 items);CN3", and the items are about the club
+##-- "Hammarby maste fa den respekt vi fortjanar". An earlier version of this
+##file read the CN prefix as Conscientiousness and named the table
+##lindstrom2021_conscientiousness; the study administered no conscientiousness
+##scale at all. The codebook lists exactly four: Honesty-Humility (10 items),
+##Hammarby identification (3), Collective narcissism (7), violent intentions (7).
+##The scale key IS the table name -- see `fname` below -- so do not rename it back.
 SCALES = {
     "honesty_humility": [f"HH{i}R" if i in (1,2,3,4,7,9) else f"HH{i}"
                          for i in range(1, 11)],
     "team_identification": ["H1", "H2", "H3"],
-    "conscientiousness":   ["CN3", "CN4", "CN5", "CN6", "CN7R", "CN8", "CN9"],
+    "collective_narcissism": ["CN3", "CN4", "CN5", "CN6", "CN7R", "CN8", "CN9"],
     "violent_intentions":  ["VI1", "VI2", "VI3", "VI4R", "VI5R", "VI6", "VI7R"],
 }
 
