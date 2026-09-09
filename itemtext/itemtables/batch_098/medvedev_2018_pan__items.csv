@@ -1,0 +1,101 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_1","Positive and Negative Affect Schedule (PANAS)",NA,NA,"interested",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_1","Positive and Negative Affect Schedule (PANAS)",NA,NA,"interested",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_1","Positive and Negative Affect Schedule (PANAS)",NA,NA,"interested",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_1","Positive and Negative Affect Schedule (PANAS)",NA,NA,"interested",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_1","Positive and Negative Affect Schedule (PANAS)",NA,NA,"interested",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_2","Positive and Negative Affect Schedule (PANAS)",NA,NA,"distressed",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_2","Positive and Negative Affect Schedule (PANAS)",NA,NA,"distressed",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_2","Positive and Negative Affect Schedule (PANAS)",NA,NA,"distressed",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_2","Positive and Negative Affect Schedule (PANAS)",NA,NA,"distressed",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_2","Positive and Negative Affect Schedule (PANAS)",NA,NA,"distressed",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_3","Positive and Negative Affect Schedule (PANAS)",NA,NA,"excited",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_3","Positive and Negative Affect Schedule (PANAS)",NA,NA,"excited",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_3","Positive and Negative Affect Schedule (PANAS)",NA,NA,"excited",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_3","Positive and Negative Affect Schedule (PANAS)",NA,NA,"excited",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_3","Positive and Negative Affect Schedule (PANAS)",NA,NA,"excited",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_4","Positive and Negative Affect Schedule (PANAS)",NA,NA,"upset",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_4","Positive and Negative Affect Schedule (PANAS)",NA,NA,"upset",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_4","Positive and Negative Affect Schedule (PANAS)",NA,NA,"upset",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_4","Positive and Negative Affect Schedule (PANAS)",NA,NA,"upset",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_4","Positive and Negative Affect Schedule (PANAS)",NA,NA,"upset",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_5","Positive and Negative Affect Schedule (PANAS)",NA,NA,"strong",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_5","Positive and Negative Affect Schedule (PANAS)",NA,NA,"strong",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_5","Positive and Negative Affect Schedule (PANAS)",NA,NA,"strong",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_5","Positive and Negative Affect Schedule (PANAS)",NA,NA,"strong",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_5","Positive and Negative Affect Schedule (PANAS)",NA,NA,"strong",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_6","Positive and Negative Affect Schedule (PANAS)",NA,NA,"guilty",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_6","Positive and Negative Affect Schedule (PANAS)",NA,NA,"guilty",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_6","Positive and Negative Affect Schedule (PANAS)",NA,NA,"guilty",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_6","Positive and Negative Affect Schedule (PANAS)",NA,NA,"guilty",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_6","Positive and Negative Affect Schedule (PANAS)",NA,NA,"guilty",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_7","Positive and Negative Affect Schedule (PANAS)",NA,NA,"scared",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_7","Positive and Negative Affect Schedule (PANAS)",NA,NA,"scared",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_7","Positive and Negative Affect Schedule (PANAS)",NA,NA,"scared",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_7","Positive and Negative Affect Schedule (PANAS)",NA,NA,"scared",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_7","Positive and Negative Affect Schedule (PANAS)",NA,NA,"scared",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_8","Positive and Negative Affect Schedule (PANAS)",NA,NA,"hostile",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_8","Positive and Negative Affect Schedule (PANAS)",NA,NA,"hostile",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_8","Positive and Negative Affect Schedule (PANAS)",NA,NA,"hostile",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_8","Positive and Negative Affect Schedule (PANAS)",NA,NA,"hostile",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_8","Positive and Negative Affect Schedule (PANAS)",NA,NA,"hostile",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_9","Positive and Negative Affect Schedule (PANAS)",NA,NA,"enthusiastic",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_9","Positive and Negative Affect Schedule (PANAS)",NA,NA,"enthusiastic",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_9","Positive and Negative Affect Schedule (PANAS)",NA,NA,"enthusiastic",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_9","Positive and Negative Affect Schedule (PANAS)",NA,NA,"enthusiastic",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_9","Positive and Negative Affect Schedule (PANAS)",NA,NA,"enthusiastic",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_10","Positive and Negative Affect Schedule (PANAS)",NA,NA,"proud",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_10","Positive and Negative Affect Schedule (PANAS)",NA,NA,"proud",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_10","Positive and Negative Affect Schedule (PANAS)",NA,NA,"proud",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_10","Positive and Negative Affect Schedule (PANAS)",NA,NA,"proud",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_10","Positive and Negative Affect Schedule (PANAS)",NA,NA,"proud",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_11","Positive and Negative Affect Schedule (PANAS)",NA,NA,"irritable",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_11","Positive and Negative Affect Schedule (PANAS)",NA,NA,"irritable",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_11","Positive and Negative Affect Schedule (PANAS)",NA,NA,"irritable",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_11","Positive and Negative Affect Schedule (PANAS)",NA,NA,"irritable",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_11","Positive and Negative Affect Schedule (PANAS)",NA,NA,"irritable",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_12","Positive and Negative Affect Schedule (PANAS)",NA,NA,"alert",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_12","Positive and Negative Affect Schedule (PANAS)",NA,NA,"alert",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_12","Positive and Negative Affect Schedule (PANAS)",NA,NA,"alert",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_12","Positive and Negative Affect Schedule (PANAS)",NA,NA,"alert",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_12","Positive and Negative Affect Schedule (PANAS)",NA,NA,"alert",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_13","Positive and Negative Affect Schedule (PANAS)",NA,NA,"ashamed",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_13","Positive and Negative Affect Schedule (PANAS)",NA,NA,"ashamed",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_13","Positive and Negative Affect Schedule (PANAS)",NA,NA,"ashamed",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_13","Positive and Negative Affect Schedule (PANAS)",NA,NA,"ashamed",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_13","Positive and Negative Affect Schedule (PANAS)",NA,NA,"ashamed",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_14","Positive and Negative Affect Schedule (PANAS)",NA,NA,"inspired",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_14","Positive and Negative Affect Schedule (PANAS)",NA,NA,"inspired",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_14","Positive and Negative Affect Schedule (PANAS)",NA,NA,"inspired",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_14","Positive and Negative Affect Schedule (PANAS)",NA,NA,"inspired",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_14","Positive and Negative Affect Schedule (PANAS)",NA,NA,"inspired",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_15","Positive and Negative Affect Schedule (PANAS)",NA,NA,"nervous",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_15","Positive and Negative Affect Schedule (PANAS)",NA,NA,"nervous",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_15","Positive and Negative Affect Schedule (PANAS)",NA,NA,"nervous",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_15","Positive and Negative Affect Schedule (PANAS)",NA,NA,"nervous",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_15","Positive and Negative Affect Schedule (PANAS)",NA,NA,"nervous",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_16","Positive and Negative Affect Schedule (PANAS)",NA,NA,"determined",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_16","Positive and Negative Affect Schedule (PANAS)",NA,NA,"determined",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_16","Positive and Negative Affect Schedule (PANAS)",NA,NA,"determined",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_16","Positive and Negative Affect Schedule (PANAS)",NA,NA,"determined",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_16","Positive and Negative Affect Schedule (PANAS)",NA,NA,"determined",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_17","Positive and Negative Affect Schedule (PANAS)",NA,NA,"attentive",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_17","Positive and Negative Affect Schedule (PANAS)",NA,NA,"attentive",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_17","Positive and Negative Affect Schedule (PANAS)",NA,NA,"attentive",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_17","Positive and Negative Affect Schedule (PANAS)",NA,NA,"attentive",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_17","Positive and Negative Affect Schedule (PANAS)",NA,NA,"attentive",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_18","Positive and Negative Affect Schedule (PANAS)",NA,NA,"jittery",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_18","Positive and Negative Affect Schedule (PANAS)",NA,NA,"jittery",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_18","Positive and Negative Affect Schedule (PANAS)",NA,NA,"jittery",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_18","Positive and Negative Affect Schedule (PANAS)",NA,NA,"jittery",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_18","Positive and Negative Affect Schedule (PANAS)",NA,NA,"jittery",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_19","Positive and Negative Affect Schedule (PANAS)",NA,NA,"active",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_19","Positive and Negative Affect Schedule (PANAS)",NA,NA,"active",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_19","Positive and Negative Affect Schedule (PANAS)",NA,NA,"active",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_19","Positive and Negative Affect Schedule (PANAS)",NA,NA,"active",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_19","Positive and Negative Affect Schedule (PANAS)",NA,NA,"active",NA,"extremely",5
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_20","Positive and Negative Affect Schedule (PANAS)",NA,NA,"afraid",NA,"very slightly or not at all",1
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_20","Positive and Negative Affect Schedule (PANAS)",NA,NA,"afraid",NA,"a little",2
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_20","Positive and Negative Affect Schedule (PANAS)",NA,NA,"afraid",NA,"moderately",3
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_20","Positive and Negative Affect Schedule (PANAS)",NA,NA,"afraid",NA,"quite a bit",4
+"medvedev_2018_pan","medvedev_2018_pan_1","pan_20","Positive and Negative Affect Schedule (PANAS)",NA,NA,"afraid",NA,"extremely",5

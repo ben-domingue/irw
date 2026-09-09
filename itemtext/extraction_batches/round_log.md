@@ -11883,3 +11883,68 @@ leadership items, so the dictionary Description understates the battery — and 
 processing script's own open note that items 22-26 "could not be confirmed" (they are Membership 1-5).
 
 Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
+
+## batch_098 — 2026-09-08 19:41–19:55
+
+**2 tables, 2 written, 0 blocked, 0 failed. Yield 2/2 (100%).** `medvedev_2018_oxh`,
+`medvedev_2018_pan` — both from Medvedev & Landhuis 2018, PeerJ 6:e4903 (PMC5985772), the same
+deposit whose `medvedev_2018_ql` was blocked in batch_097 on the WHOQOL ruling.
+
+**Two agents, and two worked.** Fired ~20 minutes after the 19:10–19:20 kill cluster, which took
+rounds at six and at three. Nothing was killed: both agents ran to completion, all six gates came
+back clean, and the machine sat at 19G available / 4G free throughout — the same reading it showed
+during the failures. So this round is evidence that the cooldown helped, and it is NOT evidence that
+two is the safe number, because the failures happened at every size tried. **The cadence hypothesis
+survives; the agent-count hypothesis is still unsupported.** If a round fired promptly after this one
+fails, the variable is time-since-last-launch and the next thing to check is the harness's own
+threshold, not this prompt.
+
+**Gates, all clean.** normalize_nulls fixed `oxh` (349 lines — null-token normalization only, no
+content change) and left `pan` untouched; audit_batch 2/2 PASS with **no WARNs and no anomalies**, so
+Step 5c had nothing to explain; verify_batch 2/2 PASS; lint_verification 2 rows, no problems;
+`irw-validate` ok on both; check_provenance passes (its 6 `translation_source=mixed` review items are
+pre-existing and touch no table in this batch — neither of ours is translated).
+
+**Both tables ship canonical wording, and both are honestly PARTIAL.** The deposit
+(`peerj-06-4903-s001.xlsx`) labels nothing — bare `OXH1..OXH29` and `PAN1..PAN20`, no cell comments,
+no SPSS labels, and the article prints no OHQ items and only three PANAS adjectives as examples. So
+`text_source=canonical_instrument` and `mapping_basis=reconstructed` for both; there is no
+`data_labels` route available on this source at all.
+
+- **`oxh` is the Oxford Happiness QUESTIONNAIRE, not the Inventory** — a Step 3b catch that matters,
+  because the OHI is a 29-*group* forced-choice instrument scored 0–3 while the live data is 29 items
+  on 1–6. Verified in three ways: keying polarity (the 12 items the data show reverse-keyed are
+  exactly the OHQ canonical reverse set AND exactly the `OXHnR` duplicate columns in the study's own
+  workbook, 29/29 correct, 0 exceptions), published totals (reversed mean/SD/α **4.176 / 0.628 /
+  0.899** against Table 2's 4.18 / 0.637 / 0.903, while the no-reversal rival gives 3.685 / 0.306 /
+  0.463 — which pins the anchor direction too), and a marker item.
+- **`pan` is the original 20-item PANAS**, not PANAS-X (60) or I-PANAS-SF (10). The study's own
+  `PANPOS`/`PANNEG`/`PANNEGR` composites reproduce exactly as raw sums of the canonical blocks —
+  173/173, 172/172, 172/172 in the workbook, and 172/172 recomputed from the LIVE `pan_N` codes. That
+  fixes a partition that is 1 of C(20,10)=184,756.
+- Both are PARTIAL for the same honest reason: **neither route separates an item from its own class.**
+  A permutation inside one OHQ keying direction, or a swap of `pan_1`/`pan_3` inside the positive
+  block, passes every check unchanged. Both public notes say so.
+
+**Step 5b orchestrator check — every source-side claim confirmed verbatim, none corrected.** Pulled
+the PeerJ full text independently. Table 2 reads "Oxford Happiness Questionnaire 180 29 4.18 0.637
+0.903" exactly as quoted; the marker sentence is real and appears twice ("the item 2 in OHQ, which
+correlates with other items at about 0.12", and again in the Discussion at "0.12, below commonly
+acceptable level of 0.3"); the Instruments section states "29 items using six-point Likert scale
+format" for the OHQ and, for the PANAS, "10 adjectives … five-point Likert scale from 'not at all or
+very slightly' = 1 to 'extremely' = 5". One extra corroboration the agents did not claim: Table 2's
+own n for PANAS positive is **173** and for negative **172**, matching the 173/173 and 172/172
+composite row counts exactly. Unlike the `anh_2026` and `baka2023` precedents this section exists
+for, nothing here needed correcting.
+
+**Register filled from 30 to 32 rows, both `ship`, both with a BLANK clause on purpose.** Added
+**OHQ** and **PANAS**. Neither is an express grant like PHQ/GAD — both are the *absence* of any
+locatable clause, recorded as such so a future round does not mistake silence for a verified
+permission. The OHQ row carries two name-adjacent traps worth having written down: the register's
+existing SHS row is Lyubomirsky's 4-item Subjective Happiness Scale and its `happiness` code pattern
+must not be read onto `oxh_*`, and the Oxford Happiness *Inventory* sits in the Mapi/ePROVIDE
+catalogue behind a JS-rendered page that returned no text — an unresolved lead about a *different*
+instrument, not a clause about this one. The PANAS row records the basis three tables shipped on
+earlier today plus this one, and warns to pin the variant before applying it.
+
+Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
