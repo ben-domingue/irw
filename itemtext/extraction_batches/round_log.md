@@ -11559,3 +11559,64 @@ Aspirations Index, SRQ, PLOC and GCOS. `baka2023_bpnsf` is a BPNSFS table alread
 whether the CSDT terms actually reach the separately-distributed BPNSFS — that is a human ruling.
 
 Cap is batch_110; not reached.
+
+### batch_094 triaged — 5 shipped, 1 blocked — 2026-09-08
+
+Second round at six agents; again 5 written / 1 blocked / 0 failed, no kill. Gates re-run live:
+`normalize_nulls` 0 of 5, `audit_batch` 5/5 PASS with zero WARNs, `verify_batch` 1 PASS + 4 correct
+exempt, `lint_verification` 0 ERROR / 1 WARN (the standing VERIFIED-vs-PARTIAL question),
+`irw-validate` ok. All five uploaded (`red_up` 5/5 row-count verified), stamped and audited.
+
+**`check_provenance.R` exits 0 again — datapages/irw#165 merged**, carrying 21 entries across
+batches 080-093, so the by-design failure recorded at batch_086 is cleared. batch_094's five entries
+opened as **datapages/irw#167** on a fresh branch (411 entries).
+
+**The MCQ7 answer-key mismatch reproduces exactly, and the science settles which source is wrong.**
+Verified against the deposit rather than the round's summary: `PRE_MCQ7` option 3 "a carbon source"
+was chosen by exactly 60 and `Pre_MCQ7_correct` carries exactly 60 ones; post is 56 and 56; option 2
+"the differential agent" was chosen by 44 and 49 and matches nothing. So the deposited data
+systematically score option 3. **But in mannitol salt agar the salt is the selective agent and
+mannitol is the differential agent**, so S1 Table's key is scientifically right and this is a scoring
+error in the study's own data — which is a more useful statement than "the two sources disagree".
+The table keeps the published key in `correct_response` and the study's scoring in `resp`, and the
+issues-page entry states the consequence plainly: for this item alone, `resp=1` means the respondent
+chose the *other* option. Shipping the study's scoring in `correct_response` was rejected because it
+would have IRW asserting a scientifically false key.
+
+**A response-data defect confirmed and filed as irw#2127.** `data/malik_2018_physician_motivation.py`
+carries the comment *"SC3 is stored as CS4 in the raw file (typo in source)"* and builds
+`["SC1","SC2","CS4"] + SC5..SC15`. The deposit holds **both** columns, with different labels and
+different data: `SC3` "I am satisfied with my personal life issues" (64/44/52/146/54) and `CS4`
+"I am satisfied with the team work around me during work" (52/65/80/121/42), n=360 each. The full
+set is `SC1, SC2, SC3, CS4, SC5..SC15`, so `CS4` looks like a typo for **`SC4`**, not `SC3`. The
+table therefore ships **14 items where the source has 15**, with every code from the third onward
+shifted, and `metadata/biblio.csv` still calls it a 15-item subscale.
+
+**The item text is not the defect and was shipped anyway**, which is the distinction worth keeping:
+each code is labelled with the column genuinely behind it, so the extraction is faithful to the data
+as it stands. Fixing the data will renumber the codes and the `__items` table must be rebuilt in
+step — recorded in both the issue and the issues-page entry.
+
+**Two entries the drafter did not generate, written by hand off the REVIEW section.**
+`makransky_2016_self_efficacy` (the article describes the anchors as "Strongly disagree/agree" while
+both level-1 sources say "Completely disagree/agree" — the article is the outlier) and
+`malik_2018_organizational_motivation` (one item has no value labels in the `.sav`, so the anchors
+shared by its 35 siblings were applied to it — an inference, not a transcription; plus two source
+typos shipped verbatim). Both have clean structured provenance and caveats living only in
+`notes.csv`, which is exactly the failure mode the REVIEW section exists to catch.
+
+**The stamper generalisation held on first use.** After three distinct shapes in five batches, this
+round's stamper detects each row's convention at the ROW START and tries all four spellings of
+unstamped (`""`, `"no"`, `"NA"`, `"unrecorded"`). Both files stamped first time, +50 bytes each,
+exactly ten characters per record.
+
+**FOR BEN — a live table may fall under this round's new rights block.** `makransky_2016_motivation`
+was blocked on the IMI Interest/Enjoyment subscale: the CSDT Limited Use License reserves NC,
+no-redistribution and no-online-publication. The round noted, correctly, that the licence covers the
+**whole selfdeterminationtheory.org library** — so the register row as written also reaches
+BPNS/BPNSFS, the Aspirations Index, SRQ, PLOC and GCOS. **`baka2023_bpnsf` is a BPNSFS table already
+uploaded on 2026-08-18.** Neither the round nor I touched it, and neither of us takes a view on
+whether CSDT's terms actually reach the separately-distributed BPNSFS — that is an instrument-scope
+ruling, and it is Ben's.
+
+Cap is `batch_110`; not reached. 713 pending, next firing takes `batch_095`.
