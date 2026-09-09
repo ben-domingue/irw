@@ -11826,3 +11826,60 @@ understates the battery. This also closes the open question in that processing s
 which recorded that items 22–26 "could not be confirmed": they are Membership items 1–5.
 
 Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
+
+### batch_096 triaged — 4 shipped, 2 blocked on rights — 2026-09-08
+
+Third clean six-agent round, no kill. Gates re-run live: `normalize_nulls` 0 of 4, `audit_batch`
+3 PASS / 1 WARN, `verify_batch` PASS=4, `lint_verification` clean, `irw-validate` ok. All four
+uploaded (`red_up` 4/4 row-count verified), stamped and audited. Four entries added to the open
+datapages/irw#169 (420 entries).
+
+**The audit WARN is a false positive and acting on it would have deleted published wording** — the
+round caught this and I confirmed it. `audit_batch` flags `mascherini_2021_meddiet` for
+"option_text is just the resp value for 2 row(s) (resp: 1) -- unlabeled scale points should be blank,
+not padded with the number". But this is a food-frequency questionnaire whose options are printed
+*bands*, and for `legumes` and `fish` the ladder reads **`Never, 1, 1-2, 3-4, 5-6, > 6`**. The "1"
+is the first band — one serving — sitting in an otherwise complete series. Blanking it per the WARN
+would leave a hole in a published ladder. **A rule that says "a bare number is never a label" is
+wrong for count and frequency items**, and this is the second WARN class this session that is
+correct-but-expected rather than a defect.
+
+**Two rights blocks, both determinate, both needing Ben, and each settling more than one table.**
+
+- **ZTPI** (`mavromoustakos_2016_ztpi`). Zimbardo's page: *"Researchers can use it free with my
+  permission and agreement to share results"*, plus contact-first control over translations. The
+  free-but-conditioned shape already blocked for HEXACO, TIMSS and PROMIS — permission is
+  *conditioned*, which reserves a right. The clause sits on the very page distributing `ZTPI.pdf`,
+  so unlike the SWLS there is no more-permissive sibling page to appeal to. The ZTPI recurs in the
+  corpus, so a ruling here is worth more than one table.
+- **SLT** (`martinezsoto_2024_spiritual_leadership`). IISL: *"the works derived from this site may be
+  cited with proper notation and permission from the author."* Genuinely arguable the other way,
+  because permission to *cite* is not a right anyone holds — citation needs no licence. If Ben rules
+  it does not reach the questionnaire, this ships immediately: PLOS publishes all 26 items in both
+  administered Spanish and the authors' English, so it is a transcription and not a restart. The
+  round found the block *stronger* than its own agent argued — the clause is visible body text on two
+  pages and IISL's `/terms-of-use/` 404s, so it is the site's only stated terms rather than index
+  boilerplate.
+
+**Filled a register gap that three rounds had re-derived by hand.** `instrument_rights_register.csv`
+had **no PHQ/GAD row**, despite the express grant being verified at source for GAD-7 (batch_088),
+PHQ-9 (batch_094) and now GAD-2/PHQ-2. Added as `ship` with the clause verbatim — *"All PHQ, GAD-7
+screeners and translations are downloadable from this website and no permission is required to
+reproduce, translate, display or distribute them."* This is the clearest GRANT in the corpus and the
+exact inverse of the RCBS/MLQ/STAI shape, so it is worth recording rather than re-deriving a fourth
+time. Register now 30 rows: 21 block, 7 ship, 1 ship_with_note, 1 escalate.
+
+**Two disclosure fixes at triage.** `matarboumosleh_2017_gad2` and `_phq2` drew the drafter's generic
+template again ("item text comes from the published original instrument"), replaced with the specific
+truth: the data file's column headers are terse abbreviations that pin *which* item is which but are
+not administered wording, so both item text and anchors are the official form's. And
+`matarboumosleh_2017_spai26` earned no draft but needed an entry more than most — **"SPAI" here is
+the 26-item Smartphone Addiction Inventory, not the Social Phobia and Anxiety Inventory**, a
+different 45-item instrument sharing the abbreviation. A reader assuming the wrong one gets an
+entirely wrong construct. That is the Step 3b check paying off at the disclosure layer.
+
+Recorded, not acted on: `martinezsoto`'s items 18-26 are spiritual *well-being* blocks rather than
+leadership items, so the dictionary Description understates the battery — and that also closes the
+processing script's own open note that items 22-26 "could not be confirmed" (they are Membership 1-5).
+
+Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
