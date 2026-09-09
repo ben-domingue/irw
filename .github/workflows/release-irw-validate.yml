@@ -1,0 +1,114 @@
+# Publishes `irw_validate` to PyPI as https://pypi.org/project/irw-validate/.
+#
+# This repository holds many things; only `irw_validate/` is a distributable
+# package, so the tag is namespaced -- `irw-validate-vX.Y.Z`, not `vX.Y.Z` --
+# and this workflow ignores every other tag. Nothing else here is released, and
+# a bare `v*` tag would claim otherwise.
+#
+# The tag IS the trigger, deliberately. Rpkg's release-prepare.yaml opens a
+# release PR and goes GREEN without opening it, because "GitHub Actions is not
+# permitted to create or approve pull requests" is downgraded to a warning
+# (Rpkg#136), so a successful run there is not evidence a release is in flight.
+# Here it is. This mirrors Python-pkg's release.yml, which was written for the
+# same reason.
+#
+# Release procedure: bump `version` in irw_validate/pyproject.toml in a PR,
+# merge it, then `git tag irw-validate-v1.0.1 && git push origin irw-validate-v1.0.1`.
+#
+# Authentication is PyPI Trusted Publishing (OIDC): no API token in this
+# repository, no `password:` below. Before the first release someone must add a
+# pending publisher on pypi.org for project `irw-validate`, owner
+# `ben-domingue`, repository `irw`, workflow `release-irw-validate.yml`,
+# environment `pypi`. Renaming this file or that environment breaks publishing
+# until the publisher is updated.
+#
+# workflow_dispatch runs everything except the upload. Use it to check that the
+# build and the version guard pass before burning a version number -- PyPI never
+# allows a version to be re-uploaded, even after deletion.
+
+name: release irw-validate
+
+on:
+  push:
+    tags: ["irw-validate-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: irw_validate
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      # Before building, not after: a mismatch means the artifact would carry a
+      # version that disagrees with the tag people cite.
+      - name: Check tag and pyproject version agree
+        working-directory: .
+        run: python .github/scripts/check_irw_validate_version.py "${{ github.ref_type == 'tag' && github.ref_name || '' }}"
+
+      - run: python -m pip install --upgrade pip
+      - run: pip install build twine
+      - run: python -m build --outdir dist .
+
+      # Catches a README PyPI would reject, and an artifact whose metadata did
+      # not resolve (setuptools older than the pyproject floor names the package
+      # UNKNOWN rather than failing).
+      - run: python -m twine check dist/*
+
+      # The package must import and run with nothing but its declared
+      # dependencies, from outside the repository -- that is the whole point of
+      # splitting it out of irw-red-up. Installing the wheel into a bare venv
+      # and validating a file from /tmp proves it; doing it in the checkout
+      # would not, because the repo would be sitting there satisfying imports.
+      - name: The wheel works with no repository around it
+        working-directory: .
+        run: |
+          set -euo pipefail
+          python -m venv /tmp/vv
+          /tmp/vv/bin/pip install --quiet irw_validate/dist/*.whl
+          printf 'id,item,resp\n1,q1,1\n1,q1,0\n' > /tmp/dup.csv
+          cd /tmp
+          # Exit 1 on a blocking finding is the contract the gate depends on.
+          if /tmp/vv/bin/irw-validate /tmp/dup.csv; then
+            echo "expected a nonzero exit for a duplicate id+item row"; exit 1
+          fi
+          # The split exists so the validator does not drag the uploader in.
+          if /tmp/vv/bin/python -c "import redivis" 2>/dev/null; then
+            echo "redivis reached the venv: irw-validate has picked up a Redivis dependency"
+            exit 1
+          fi
+          /tmp/vv/bin/python -c "
+          import irw_validate
+          report = irw_validate.validate_file('/tmp/dup.csv')
+          assert not report.ok, 'duplicate id+item should block'
+          assert irw_validate.exit_code([report]) == 1
+          print('ok:', [f.check for f in report.errors])
+          "
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: irw_validate/dist/
+
+  publish:
+    needs: build
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # The entire OIDC integration. Nothing else is needed and no secret is read.
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
