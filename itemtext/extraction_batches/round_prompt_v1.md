@@ -53,7 +53,7 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 2 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -69,7 +69,28 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**THREE agents per round — dropped back from six on 2026-09-08, under this section's own rule.**
+**TWO agents per round — 2026-09-08, after THREE was killed too.** Ben's call
+("wait a few minutes and then perhaps try again with fewer agents"), taken after the drop from six
+failed to fix anything.
+
+**Read this before reasoning about the round size, because the obvious model of the constraint is
+wrong.** The evening went six agents (3 clean rounds, then 2 kills) -> three agents (killed
+immediately, pre-dispatch) -> two. If the binding constraint were the size of the dispatch spike,
+dropping to three would have helped. It did not. What the failures actually track is **cadence**:
+rounds fired at 17:23, 17:48, 18:19 and 18:48 all ran clean, and then 19:10, 19:11, 19:13 and 19:20
+failed in a tight cluster, at every size tried. Every one of those kills happened with **19-20G
+available, 3.5G+ free, and no swap movement** — so "low memory" is what the harness reports, not what
+the machine is experiencing.
+
+So the honest state of knowledge: something accumulates across repeated background launches and is
+not relieved by lowering the agent count. **Two is a probe, not a diagnosis.** If two also fails
+after a cooldown, the agent count is not the variable and there is no point walking it down to one —
+stop and hand it to a human, because the next thing to check is the harness's own threshold, not this
+prompt.
+
+**Historical, and still true about the SPIKE even if the spike is not what is biting now:**
+six delivered 3 clean rounds out of 6 firings, at a cost of two free reconciles and one mid-round
+salvage.
 Ben raised it to six that evening ("as i won't be working as much") and six ran three clean rounds.
 It then failed three firings in a row: `batch_097` was killed pre-dispatch, killed again on retry,
 and the second kill landed **mid-round** with three files written — which is the case this section
