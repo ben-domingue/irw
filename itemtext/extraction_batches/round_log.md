@@ -11236,3 +11236,90 @@ nothing to bite on, because the original carries no quotable restriction.
 
 **Verdict: clear to release.** Recorded in the table's `provenance.csv` note so the basis is
 auditable, per the 2026-09-08 two-instrument ruling.
+
+---
+
+## batch_092 — 2026-09-08
+
+**3 tables: 2 written / 1 blocked / 0 failed.** Yield 2/3 (67%). Circuit breaker not tripped
+(0% failed). No rate-limit or spend-cap kill; all three agents ran to completion.
+
+| table | outcome | mapping_basis | Step 5b |
+|---|---|---|---|
+| `ly_2021_animal_empathy` | **done** — 1,540 rows (140 items × 11 levels) | `paper_explicit` | VERIFIED |
+| `ma2026_bsmas` | **done** — 30 rows (6 items × 5 options) | `paper_explicit` | VERIFIED |
+| `ma2026_igds` | **blocked** — instrument rights, no CSV | `unknown` | NOT_NEEDED |
+
+**Gates.** `normalize_nulls` 0 of 2 changed; `audit_batch` **2 PASS, no anomalies** (so nothing for
+Step 5c to explain); `verify_batch` **PASS=2**; `lint_verification` 0 ERROR / 1 WARN;
+`irw-validate` ok on both files; `check_provenance` raised nothing attributable to this batch
+(its `liu_2025_positive_cognition` and six `mixed` rows are pre-existing).
+
+**Two gate results that look like failures and are not.**
+
+1. `verify_batch.R`'s *first* run reported `ly_2021_animal_empathy` as **NO VERDICT**. Running the
+   script directly gave `VERDICT: PASS` (exit 0), and two further `verify_batch.R` runs both
+   reported `PASS=2`. Transient, not a reproducibility failure — but worth watching, because a
+   spurious NO VERDICT is exactly the signal Step 5 says to classify as `failed`. Anyone who sees
+   one should re-run before believing it.
+2. `lint_verification` WARNs that `ma2026_igds` is `NOT_NEEDED` with `mapping_basis=unknown`. That
+   is the correct shape for a table blocked *before* extraction: no mapping was ever made, so there
+   is no mapping to verify. Expected for a rights block, not a defect.
+
+**Step 5b orchestrator re-checks — both rights claims were re-verified independently, and both held.**
+These were the round's two claims that override a source or become a public artifact.
+
+- **IGDS9-SF (blocks `ma2026_igds`).** Re-fetched both Pontes pages myself. Confirmed verbatim:
+  the IGDS9-SF page carries *"© 2026 Dr. Halley Pontes. This work is licensed under CC BY NC ND
+  4.0"* **and** *"if you wish to further develop and validate the IGDS9-SF in another language,
+  please do get in touch with me via email"* — NC + ND + permission-required, i.e. a clause that
+  reserves rights rather than disclaiming fitness. **The contradiction is also real:** the same
+  site's `/tests/` index says *"you do not need to contact me to ask for permission to use any of
+  the tests"*, and carries the same site-wide footer. That grants *use*, not redistribution or
+  derivatives, and does not withdraw the notice — but the footer is a Hugo Blox theme default, so
+  its scope is genuinely open. Blocked pending Ben's ruling, erring on the side of not having
+  things. **Ben may overrule**, on the ground that a theme-default footer does not scope to the
+  instrument.
+- **BSMAS (ships `ma2026_bsmas`).** Re-fetched the Salford PsyTech entry: copyright restrictions
+  read *"Ensure you cite the author(s)."* and nothing else — no fee, permission requirement, NC,
+  ND or redistribution bar. Nothing is reserved, so silence is permission. The extracting agent
+  reported that `instrument_rights_register.csv` "does not exist in this worktree"; **it does**
+  (21 instrument rows before this round) — the agent's check simply missed it. I ran the check: no BSMAS row
+  and no IGDS9-SF row existed, so neither table was covered either way.
+
+**Both determinations are now written into `instrument_rights_register.csv`** (21 → 23 instrument rows), so
+the next round meeting either instrument does not redo this work: BSMAS `ship` (`^bsmas|^bfas`),
+IGDS9-SF `block` (`^igds`) marked NOT SETTLED / awaiting Ben, with clause, URL and sha256 on both.
+
+**What the block actually costs here: very little.** Administration was Chinese (1,108 primary
+school students); the figshare deposit (CC BY 4.0) is one unlabelled `rawdata_.csv` and the
+Research Square preprint has **zero CJK characters** and reproduces no stems. Only canonical
+English as a `translated_substitute` was ever shippable — precisely the material the notice covers.
+And unlike irw#2101/#2123, the codes `igds1..igds9` carry no wording, so **no IGDS9-SF text leaks
+through the response table**. Not a second-surface case.
+
+**`ma2026_bsmas` has unusually strong mapping evidence.** The preprint's Table 5 publishes a full
+per-item GRM solution — α plus four β thresholds, 30 numbers. Refitting on the live IRW data
+reproduces all 30, largest deviation **0.005**. The fit is item-specific rather than global: each
+live item's five-number signature is nearest its own published row (self-distance 0.003–0.008 vs
+next-best 0.200–0.754), so every item is distinguished from every other. Option direction is pinned
+on a second axis — the preprint says item 2 had the lowest difficulty for *"very rarely"* and item
+3 the highest for *"very often"*; in the refit min(β1) is item 2 and max(β4) is item 3.
+
+**`ly_2021_animal_empathy` — a naming trap worth recording.** Items are 20 farm-animal video clips
+× 7 emotion ratings, `item = VIDEO_ID + "_" + <emotion column>`, both halves verbatim from the S3
+File. In the video codes **`PD` is tail docking and `PT` is teeth clipping** — the opposite of the
+obvious mnemonic, settled from the S1 File. Regrouping S3 reproduces all 140 live items with max
+|mean diff| = 0.000e+00, and S1's painful/control labelling separates completely (lowest procedure
+3.13 vs highest control 0.67). Instruction wording was described but never reproduced by the paper,
+so `instructions` is blank; only the published anchors 0 *"not intense at all"* and 10 *"very
+intense"* ship as `option_text`, with 1–9 left blank rather than padded.
+
+**Two caveats disclosed on `ma2026_bsmas`, both in the public note.** The shipped English is the
+canonical BSMAS, not the administered Chinese, and the BSMAS circulates in two English renderings
+(interrogative and declarative) — the interrogative is shipped because it carries the past-year
+timeframe the preprint states, but which one the Chinese was translated from is recorded nowhere.
+Canonical item 6's *"your job/studies"* also reflects the original scale rather than what these
+primary-school respondents read.
+
+Cap is `batch_095`; batch_092 is not it, so rounds continue.
