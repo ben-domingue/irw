@@ -11986,3 +11986,93 @@ register that flattened them would let a later round read silence as verified pe
 now 32 rows.
 
 Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
+
+### batch_099 — 2 tables, 2 shipped, 0 blocked, 0 failed — 2026-09-08
+
+Fired at **two agents**, promptly rather than after a long cooldown, which is the test the previous
+entry asked for. It ran clean: both agents completed, all six Step 4 gates pass, nothing was killed.
+
+**What that does and does not settle about round size.** batch_098 ran two agents after a 7-minute
+cooldown, so size and cadence moved together and neither was isolated. This round holds the cooldown
+short and keeps the size at two, and it survived — which is evidence *against* the pure-cadence story
+in its strongest form, but it is one observation, and the 19:10-19:20 cluster killed rounds at six
+and at three. The honest reading remains: two is a working setting, the binding variable is still not
+identified, and **raising it is Ben's call**. Do not read two clean rounds as licence to go back to
+six. Available memory at dispatch was 19G with 4G free — indistinguishable from the state during the
+kills, which is the whole reason "low memory" is not a usable explanation here.
+
+**Yield 2/2.** Both tables shipped, both with real caveats recorded rather than smoothed over.
+
+`medvedev_2018_sl` — the Satisfaction With Life Scale (SWLS), 5 items x 7 options, 35 rows. This is
+the fourth and last instrument from the Medvedev 2018 PeerJ deposit: `_oxh` and `_pan` shipped in
+batch_098, `_ql` is blocked on the WHOQOL redistribution bar. The deposit labels nothing — bare
+`SL1..SL5`, no cell comments, no SPSS labels — and the article prints no SWLS item, so the wording is
+canonical instrument text assigned by item number, `mapping_basis=reconstructed`, and Step 5b is
+correctly **PARTIAL**. Route 3 reproduces the paper's Table 2 exactly (published n 178, M 4.57, SD
+1.196, alpha 0.871; live 178, 4.571, 1.196, 0.871) and the reversed-anchor rival would give 3.429,
+while the deposit's own `SLTOTAL` equals the raw sum for 178/178 respondents against 8/178 reversed —
+so the anchor direction and raw storage are pinned. What is *not* pinned is order within
+{sl_1,sl_2,sl_3} or within {sl_4,sl_5}: swapping sl_1 and sl_2 leaves mean, SD, alpha and SLTOTAL
+bit-identical. Only sl_5 is singled out, by the counterfactual item's signature (mean 3.98 vs
+4.36-5.00, SD 1.81, 10.7% floor vs 1.1-2.2%). PARTIAL is the right status and the issues-page text
+says so rather than implying the wording came from this study's materials.
+
+**A rights escalation this round did not resolve and is passing on unchanged.** The agent shipped on
+the register's settled `ship` verdict for the SWLS (2026-09-04, "two pages, two terms") rather than
+re-deriving it, and re-fetched both pages live today to confirm they still say what the register
+records. But that register row is marked UNSTABLE with "Escalate before extending", because the same
+rights holder's eddiener.com page is non-commercial-only while the Illinois page grants free use with
+credit. The register's own DIENER-NC row carves the SWLS out, and SWLS tables shipped on that basis
+as recently as batch_080. **The escalation is still owed by whoever owns that ruling.** If it goes
+the other way, this table and roughly six live siblings withdraw together — that is the exposure, and
+it is now written in the provenance note rather than living only in the register.
+
+`megart_tonkovic_2021` — MegaRT, a Croatian lexical-decision megastudy (CROSSDA doi:10.23669/PEVB54,
+CC BY 4.0). 5,208 items x 2 resp levels = 10,416 rows, the largest table this queue has shipped.
+`mapping_basis=data_labels` and legitimately **exempt from Step 5b**: the processing script sets
+`item = string` on the deposit's own stimulus column, so the item code IS the letter string and there
+is no code-to-text step that could be wrong. `verify_batch.R` reports MISSING(exempt), which is
+correct; a NOT_NEEDED row was written into both `verification_merged.csv` and the permanent tracker,
+so lint came back clean with no manufactured ERROR.
+
+**Step 5b orchestrator re-check — the agent's data-side claim confirmed verbatim.** It reported that
+the response direction is settled by the data alone: 3054 of 5208 items have `resp` identically 1 and
+0 items have it identically 0, which is only possible if 1 = correct. Re-run server-side against the
+live table: 3054 and 0 exactly, over 176,964 rows with resp set {0,1}. Unlike the `anh_2026` and
+`baka2023` precedents this step exists for, nothing needed correcting.
+
+**Step 5c — the one WARN is explained, and explaining it ruled out two real defects.** `audit_batch.R`
+warned "row-count anomaly (possible item-code conflation or missingness skew), median=32" on the
+megastudy. Per-item n runs 24-95, heavily clustered (1993 items at n=43, 803 at 25, 793 at 30) with 18
+strings far above. Both rival explanations were tested with server-side aggregates — no export, on a
+table whose two source files are 126MB and 136MB:
+
+- **Item-code conflation** was a live hypothesis, not a formality, because `item` is the bare letter
+  string and the processing script `bind_rows()` two separate experiment files — a string used in
+  both lists would silently merge. It does not happen: `COUNT(DISTINCT itemcov_type)` is 1 for all
+  5208 of 5208 items (2594 pseudoword, 2614 word, 88,482 rows each).
+- **Doubled rows**, the #1842 `dup_id_item` class. 1,121 (id,item) pairs *do* repeat — 1,096 twice,
+  22 three times, 3 four times, 1,149 surplus rows, 0.65% of the table. They are genuine repeated
+  presentations, not duplicates: for 1,119 of the 1,121 the `rt` values are all distinct, and 43
+  pairs disagree on accuracy outright. Only 2 pairs share both rt and resp. Per the duplication
+  diagnostic — zero disagreement means duplication — this is the opposite pattern.
+- ids are already study-prefixed (`B_01`..) across 92 participants, so the `bind_rows()` introduced
+  no id collision either.
+
+No issue filed and no action owed. Recording the negative result matters as much as a positive one
+would have: the next reader of that WARN should not re-derive this from scratch.
+
+**One disclosure owed on upload.** `megart_tonkovic_2021` ships Croatian instructions with an
+IRW-produced English translation (`translation_source=machine_translation`), and the instructions
+themselves come from the study's informed-consent form, not the on-screen E-Prime text — that lives
+in an encrypted `.es3` blob readable only inside E-Prime 3, which is a determinate dead end, not a
+retry. `check_provenance.R` currently counts it as HELD (extracted, gated, never uploaded, so no
+wording ships and no entry is owed); **shipping it stamps it and it immediately owes a line on the
+public issues page.** Do not upload without adding that entry.
+
+Gates: `normalize_nulls` 0 of 2 changed; `audit_batch` PASS=1 WARN=1 (WARN explained above);
+`verify_batch` PASS=1, MISSING(exempt)=1; `lint_verification` 2 rows, no problems; `irw-validate`
+ok on both; `check_provenance` 745 rows across 102 files, 0 IRW-generated tables missing a public
+entry.
+
+Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
