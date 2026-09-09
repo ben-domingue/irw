@@ -12117,3 +12117,64 @@ resolves the other way, this table and roughly six live siblings withdraw togeth
 carrying an explicit UNSTABLE flag is what stopped this being decided by default here.
 
 Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
+
+## batch_100 — 2026-09-08T20:15 to 20:32 PDT
+
+**2 tables claimed, 2 written, 0 blocked, 0 failed. Yield 100%.** Both from one source:
+`meloni_2015_child_disab_knowledge` (16 items × 7 resp levels, 112 rows) and
+`meloni_2015_child_ia_frequency` (20 items × 5, 100 rows), both out of Meloni, Federici &
+Dennis (2015), PLOS ONE 10(6):e0128876, CC BY 4.0. Every gate clean on the first pass:
+`normalize_nulls` 0 of 2 changed, `audit_batch` PASS/PASS with **no anomalies and therefore no
+WARNs to explain**, `verify_batch` PASS/PASS, `lint_verification` no problems, `irw-validate` ok
+on both, `check_provenance` exit 0.
+
+**Batch numbering.** `itemtables/batch_201` and `batch_202` exist — they belong to the separate
+#1945/#2128 series that was merged in, not to this queue's run of 0xx rounds — so "highest
+existing + 1" would have jumped this round to 203 and left a 100-gap in the series the cap is
+written against. Took `batch_100`, which is what the previous round entry says the next firing
+takes, and which collides with nothing on disk. The 20x rows sit in the same `queue_state.csv`
+under `batch=batch_202`; they were not touched.
+
+**Two agents worked, cleanly, on the first firing after the cadence cluster.** This is the probe
+the previous entry asked for and it came back positive: two simultaneous `claude` processes, no
+kill, ~6 minutes per agent. It does not identify the binding variable — the record is still
+**two works (now twice), six failed twice, three failed once inside the bad window** — but it does
+mean the setting the previous round settled on is holding rather than having been luck. The fair
+experiment for three is still unrun.
+
+**Both tables ship IRW-adjacent English for an Italian administration, and both say so.** The
+interviews were run in participants' homes in Perugia with 76 Italian primary-school children,
+but neither the article nor S1/S2/S3/S4 contains any Italian wording — the S2 codebook is wholly
+English and the S1 file is an SPSS-exported `.xls` whose only strings are the ASCII column codes.
+So this is `text_source=translated_substitute` with `translation_source=study_supplied`: the
+English is the *authors'* own, not this project's, which is why `check_provenance.R` does not
+class either table as IRW-generated content and neither owes an issues-page line. Both carry a
+`public_note` saying the shipped wording is not what the children heard. That the administration
+was Italian is an inference from the setting; the paper never states a language.
+
+**The S2 codebook is a legacy binary `.doc` and holds the whole instrument.** Recovered with
+`soffice --convert-to txt` — worth recording because the `.s002` supplement looks unreadable and
+is in fact the only place the item wording exists. The S1 data file carries **no** variable or
+value labels, checked by opening it, so there was no `data_labels` route for either table and
+both are `mapping_basis=paper_order` with a Step 5b route recorded.
+
+**Both verifications are PARTIAL, and the PARTIAL is doing real work in both cases.** The item
+*codes* fix the content blocks in both tables (`_F`/`_T` and BELIEF/KNOW/SOCPART; REL/HBODY/
+SOCIAL/GEN), because the processing script only renames columns and never reorders them. What is
+inferred is position *within* a block, from an unnumbered codebook list.
+- `child_disab_knowledge`, routes 6+8: false-keyed block mean 1.923 vs true-keyed 2.858. Does not
+  separate HK4/HK6/HK7 (1.780/1.676/1.757) or HK9/HK13 (2.555/2.539).
+- `child_ia_frequency`, route 8: 7/7 a-priori content predictions hold, p ≈ 1e-4 under a random
+  within-block permutation. Does not separate IA2_HBODY_2/_4/_5 (2.23/2.24/2.23).
+Each row names its own blind spot in the evidence string, which is why both are PARTIAL rather
+than VERIFIED.
+
+**Step 5b, orchestrator re-check: the agents' numbers are right.** Ran `item_stats.R` on
+`meloni_2015_child_disab_knowledge` independently of the agent. HK2 1.30 with 83.8% at the floor
+(the most rejected of all 16), HK3 2.74 as the highest-agreement false item against 2.16 for the
+next, HK16 3.07 > HK15 2.63, and the F/T block means reproduce at ~1.92 vs ~2.86 — every figure
+the agent reported, confirmed against the live data. `item_stats.R` independently flags the same
+near-ties the agent declared unresolvable. No claim in either public note had to be corrected,
+which is not the usual outcome for this step and is worth recording as such.
+
+Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.
