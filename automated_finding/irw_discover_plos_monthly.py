@@ -205,6 +205,12 @@ def main():
     print(f"{terms_visited}/{len(terms)} terms visited this run "
           f"({terms_capped} hit the per-term cap of {per_term_cap})")
 
+    # Step 2b, in-process. This connector triages off irw_triage_updated and
+    # never reaches irw_batch_updated's --retriage flag, so #2076's "REQUIRED"
+    # step had no way to run on a scheduled article sweep -- see chain_step2b.
+    from irw_retriage_ha import chain_step2b
+    chain_step2b(out_path, run=True)
+
     _append_log_rows([{
         "date": today,
         "query": f"[{args.mode}] {len(terms)} terms x journals={','.join(journals)}",

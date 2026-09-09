@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"makransky_2016_mcq_correct","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
+"makransky_2016_self_efficacy","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
+"malik_2018_individual_motivation","PASS",22,22,TRUE,TRUE,FALSE,TRUE,0,0,""
+"malik_2018_organizational_motivation","PASS",36,36,TRUE,TRUE,FALSE,TRUE,0,0,""
+"malik_2018_social_motivation","PASS",14,14,TRUE,TRUE,FALSE,TRUE,0,0,""

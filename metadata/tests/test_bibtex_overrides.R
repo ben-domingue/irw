@@ -36,6 +36,25 @@ empty <- biblio[FALSE, ]
 stopifnot(identical(apply_bibtex_overrides(empty, overrides), empty),
           identical(apply_bibtex_overrides(biblio[2L, ], overrides), biblio[2L, ]))
 
+## Cached rows after #1690 retain their deposit citation, but the DOI lives in
+## DOI__for_data_. Use the same blank-paper fallback as fresh DOI retrieval.
+split <- data.frame(
+    table = c("missing_paper", "empty_paper", "whitespace_paper", "literal_na_paper",
+              "paper_priority", "matching_paper", "both_missing"),
+    DOI__for_paper_ = c(NA, "", "  ", " NA ", "10.1000/unrelated", doi, NA),
+    DOI__for_data_ = c(rep(doi, 5), "10.1000/other_deposit", NA),
+    BibTex = c(rep("author = {ich Nguyen, Bich}", 4),
+               " preserve paper citation exactly \n", "old citation", "unchanged"),
+    stringsAsFactors = FALSE)
+split_fixed <- apply_bibtex_overrides(split, overrides)
+stopifnot(identical(split_fixed$BibTex[c(1L:4L, 6L)], rep(expected, 5)),
+          identical(split_fixed[c(5L, 7L), ], split[c(5L, 7L), ]),
+          identical(split_fixed[setdiff(names(split_fixed), "BibTex")],
+                    split[setdiff(names(split), "BibTex")]),
+          identical(nrow(split_fixed), nrow(split)),
+          identical(apply_bibtex_overrides(split_fixed, overrides), split_fixed),
+          identical(apply_bibtex_overrides(split[FALSE, ], overrides), split[FALSE, ]))
+
 ## Exercise the actual production fetch function without sourcing its pipeline.
 ## An overridden DOI must bypass HTTP; another DOI must retain normal retrieval.
 expressions <- parse("02_biblio.R")

@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_040 already exists (round cap reached)
+- itemtables/batch_110 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -51,26 +51,119 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 ## Step 1 — Claim this round's tables
 
-- Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
+- Next batch number = **highest existing `itemtables/batch_0NN` or `batch_1NN` + 1**, zero-padded to
+  three digits. **Ignore the `batch_2NN` series entirely**: `batch_201` and `batch_202` belong to the
+  separate irw#1945 rights line, not to this queue, and they arrived on this branch by a merge from
+  `main` on 2026-09-08.
+
+  **This is a correctness rule, not tidiness.** A naive "highest + 1" reads 202 and returns 203, and
+  the cap in Step 0 is expressed as "`batch_110` already exists" — so a run numbering itself 203, 204,
+  205 would create a directory the cap never checks for, and **the cap would silently never fire**.
+  The round would keep going unattended past the point a human meant it to stop. batch_100 caught this
+  and took 100 by hand; the rule is written down so the next round does not have to.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 2 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
 - Immediately rewrite queue_state.csv marking exactly those tables status="in_progress",
   batch="batch_<NNN>", timestamp=<now ISO 8601>, BEFORE dispatching, so nothing is double-claimed.
+  **Write this file through a temp file and os.replace(), never open(path,"w") directly.**
+  A batch_058 update opened it for writing and then raised, truncating the whole queue to 0
+  bytes; it was recoverable only because the claim was not yet committed. The same bug after
+  a commit loses the queue outright.
 
 ## Step 2 — Dispatch extraction (parallel subagents)
 
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**SIX agents per round, halved from twelve on 2026-09-05 by Ben.** Twelve sat under the API
+**TWO agents per round — 2026-09-08, after THREE was killed too.** Ben's call
+("wait a few minutes and then perhaps try again with fewer agents"), taken after the drop from six
+failed to fix anything.
+
+**Read this before reasoning about the round size, because the obvious model of the constraint is
+wrong.** The evening went six agents (3 clean rounds, then 2 kills) -> three agents (killed
+immediately, pre-dispatch) -> two. If the binding constraint were the size of the dispatch spike,
+dropping to three would have helped. It did not. What the failures actually track is **cadence**:
+rounds fired at 17:23, 17:48, 18:19 and 18:48 all ran clean, and then 19:10, 19:11, 19:13 and 19:20
+failed in a tight cluster, at every size tried. Every one of those kills happened with **19-20G
+available, 3.5G+ free, and no swap movement** — so "low memory" is what the harness reports, not what
+the machine is experiencing.
+
+So the honest state of knowledge: something accumulates across repeated background launches and is
+not relieved by lowering the agent count. **Two is a probe, not a diagnosis.** If two also fails
+after a cooldown, the agent count is not the variable and there is no point walking it down to one —
+stop and hand it to a human, because the next thing to check is the harness's own threshold, not this
+prompt.
+
+**Historical, and still true about the SPIKE even if the spike is not what is biting now:**
+six delivered 3 clean rounds out of 6 firings, at a cost of two free reconciles and one mid-round
+salvage.
+Ben raised it to six that evening ("as i won't be working as much") and six ran three clean rounds.
+It then failed three firings in a row: `batch_097` was killed pre-dispatch, killed again on retry,
+and the second kill landed **mid-round** with three files written — which is the case this section
+says to drop on. The salvage cost real work: one determinate rights block was recoverable, one verify
+script was orphaned, and four tables went back to `pending` having been claimed twice.
+
+**The constraint is not memory scarcity.** Every one of those kills happened with **19G+ available**
+and no swap pressure. It is the dispatch SPIKE: Step 2 sends every agent in one message, so six
+`claude` processes plus their R and Python children appear within seconds, and that transient is what
+the harness kills on. More free memory does not help; fewer simultaneous launches does.
+
+Six is therefore not a safe unattended setting on this machine even when it is idle. Raising it again
+is Ben's call, and the honest summary to give him is: **six delivered 3 clean rounds out of 6
+firings, at a cost of two free reconciles and one mid-round salvage.**
+This is the idle-machine setting the cut below anticipated, not a reversal of its reasoning. It goes
+back to three the moment the laptop is in active use again; that is Ben's call, not a round's.
+
+Why it is safe now, in the terms the cut demanded: the binding constraint was measured, and it
+changed. Across batches 080-092 the machine ran with an interactive Emacs/ESS R session holding
+4.9-5.5G, and `batch_091` was killed twice in a row at three agents with available memory down to
+11.6G and free memory near 400MB. That R session then ended and available rose to 17.4G with 6.6G
+free — the best of the session — and `batch_092` ran clean at three. **Six is authorised against
+that 17G baseline, not against the 11G one.**
+
+**Refined after the first kill at six (`batch_095`, 2026-09-08), because the original version of this
+rule said "if a round is killed at six, drop to three" and the evidence says that is too blunt.**
+What matters is WHERE the kill lands, not that one happened:
+
+- **Killed BEFORE dispatch writes anything** — an empty batch directory and a claim in
+  `queue_state.csv` — costs about a minute: `git checkout` the queue file, `rmdir` the directory,
+  retry. `batch_095` was killed this way with 18.5G still available at rest, which confirms the
+  constraint is the SPIKE of six simultaneous `claude` processes and not the baseline. At six the
+  record is 2 clean rounds and 1 free failure, so expected throughput is still well above three.
+  **Retry at six.**
+- **Killed MID-ROUND, with tables written** — this is the expensive one, because a salvage is
+  hand work and any unwritten table is re-extracted from scratch. **Drop to three and stay there**
+  until a human raises it again.
+- **Two kills in a row, of any kind** — stop firing entirely. That rule is unchanged.
+
+The rest of this section is the history that produced the three-agent setting. It is kept because
+its reasoning is still the reasoning — the constraint is the dispatch SPIKE, and N agents means N
+`claude` processes plus their R and Python children appearing within seconds.
+
+**Previously THREE agents per round, cut from six on 2026-09-08 by Ben.** The original twelve sat under the API
 concurrency cap, but not under this laptop's memory: the batch_033 round was killed by the OS
 partway through dispatch, and the batch_032 round before it was killed the same way after writing
 four of its twelve tables, costing seven tables of extraction work. The binding constraint is RAM
 on the machine the runner shares with a desktop session, not the concurrency cap. Do not raise
 this back without a reason that addresses memory.
+
+Cut again 2026-09-08, for the same reason and with measurements this time. batch_068 was
+killed ~10 minutes in (four of six tables written, salvaged by hand rather than re-run). The
+machine was NOT short of memory at rest — 19G available, 11G in use — so the kill was the
+dispatch SPIKE, not the baseline: Step 2 sends every agent in one message, so N agents means N
+`claude` processes plus their R and Python children appearing within seconds. Measured baseline
+at the time: Chrome 7.3G across 34 processes, four interactive Claude sessions 1.7G, four
+irw-mcp servers 0.9G, and a 2G swapfile already 85% full of idle desktop apps (dropbox, slack,
+gnome) leaving 350MB of spill. Three agents roughly halves the spike again. Ben's instruction is
+that this is the DAYTIME setting, while he is using the machine for other work; it can go back
+up when the laptop is otherwise idle.
+
+Note what this does NOT revert to. The abandoned design below was three TABLES PER AGENT; this
+is three tables per round, still ONE AGENT PER TABLE, so the blast radius of a failure stays
+exactly one table.
 
 This replaces the earlier groups-of-3, which lost three tables to every single failure:
 batch_010's group 3 was killed by a content-filter error before it read anything, and all three
@@ -152,9 +245,11 @@ Each subagent prompt must tell it to:
 - Write itemtables/batch_<NNN>/notes_<table>.csv (header table,note) if its table didn't get a
   clean pass, including a pass carrying a real caveat.
 - Write itemtables/batch_<NNN>/provenance_<table>.csv (header
-  table,mapping_basis,text_source,source_ref,note,public_note,uploaded) with a row for its table,
-  clean or not. Vocabularies are defined in SKILL.md Step 6c. Record mapping_basis=unknown honestly
-  rather than guessing.
+  table,mapping_basis,text_source,translation_source,source_ref,note,public_note,uploaded) with a
+  row for its table, clean or not. Vocabularies are defined in SKILL.md Step 6c. Record
+  mapping_basis=unknown honestly rather than guessing. translation_source is REQUIRED whenever
+  text_source=translated_substitute — there the English you shipped is the base text, so say where
+  it came from; check_provenance.R fails a blank one (irw#1970).
 - Write itemtables/batch_<NNN>/verification_<table>.csv (header
   table,batch,mapping_basis,uploaded,route,status,evidence) for every table whose mapping_basis is
   NOT data_labels, per SKILL.md Step 5b. status is VERIFIED/PARTIAL/NO_ROUTE, and `evidence` must

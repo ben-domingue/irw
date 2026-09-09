@@ -9,10 +9,33 @@ irw-validate out/x.csv --json                # for CI
 
 Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `red_up`.
 
-`irw-validate` is a console script declared in `pyproject.toml`. If the command is not
-found, the editable install predates it — re-run `pip install -e .` from `src/` (this
-machine needs `--break-system-packages`, PEP 668). Otherwise `python3 -m irw_validate.cli`
-works, but only from `src/`.
+## Installing
+
+```
+pip install irw-validate                    # once published
+pip install -e /path/to/irw/src/irw_validate   # from a checkout
+```
+
+pandas and the standard library, nothing else — no Redivis, no credentials, no
+network. That is deliberate: this is the thing an outside contributor runs
+against their own file before depositing it, and they should not have to clone
+the pipeline or hold a token to do it.
+
+Two optional extras exist for cases that are not that:
+
+| Extra | Adds | Needed for |
+|---|---|---|
+| `[rdata]` | pyreadr | validating `.Rdata`/`.rda`/`.rds` directly. Converting to CSV first needs nothing. |
+| `[live]` | redivis | the `live_*` and `repair_*` modules, which read published tables. Pipeline tools; `validate_file` never touches the network. |
+
+Until 2026-09-09 this package shipped inside `irw-red-up`, the uploader
+distribution, so the only way to get the validator was to install the writer.
+That was an accident of packaging: `../pyproject.toml` keeps `red_up` out of
+Python-pkg because a write-scoped uploader would change what that package is,
+and none of that reasoning applies to a checker that opens a CSV.
+
+`irw-validate` is a console script. In a checkout without the install,
+`python3 -m irw_validate.cli` works from `src/`.
 
 ## Why this exists
 
@@ -56,6 +79,30 @@ table on day one.
 `GATE_ERRORS` is currently exactly `{resp_variation*}` — a `resp` with one
 distinct value carries no information for any model, at any altitude. It grows
 one documented case at a time.
+
+### Literal missing-value tokens (#2029)
+
+For `upload` and `legacy`, every non-missing `resp` must parse as a number.
+There is no 1% allowance for invalid values. File validation preserves literal
+text such as `NA`, `N/A`, `NULL` and whitespace so it can report an error with
+the count and up to five examples. A genuinely empty CSV field (including
+`""`) remains missing: partial missingness is a `resp_na` warning; an entirely
+missing response column still blocks. No source file or input frame is edited.
+
+CSV/TSV/TXT validation makes a second pass reading only `resp` with pandas'
+default NA-token conversion disabled. Other columns keep their existing
+parsing behavior, and clean numeric response columns still infer numeric types.
+Item-text tables use their separate schema and retain their existing reader.
+The `core` and `triage` profiles retain their earlier parsing and numeric
+threshold; callers using `run_qc` should use `validate_file(..., profile="upload")`
+on the written file when they need this publication check.
+
+For an in-memory frame, genuine nulls remain missing and literal text is
+checked, but a token already erased by an upstream reader cannot be recovered.
+The existing 512 MiB file-size cap still applies; files over it receive only
+name checks. This change does not repair historical tables, resolve the meaning
+of their missingness, or alter published response counts. Review source coding
+before changing rows; the finding deliberately does not prescribe deletion.
 
 ## The override
 

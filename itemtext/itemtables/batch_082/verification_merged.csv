@@ -1,0 +1,4 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+liu_2023_adherence_barrier,batch_082,data_labels,,,NOT_NEEDED,"mapping_basis=data_labels: item text is the source .sav's own SPSS variable labels and data/liu_2023_medication_adherence.py renames those columns number-preservingly, so no positional inference exists to verify."
+liu_2023_adherence_tools,batch_082,data_labels,,,NOT_NEEDED,"mapping_basis=data_labels: item text is the source .sav's own SPSS variable labels and data/liu_2023_medication_adherence.py renames those columns number-preservingly, so no positional inference exists to verify."
+liu_2023_improve_adherence,batch_082,data_labels,,,NOT_NEEDED,"mapping_basis=data_labels: item text is the source .sav's own SPSS variable labels and data/liu_2023_medication_adherence.py renames those columns number-preservingly, so no positional inference exists to verify."

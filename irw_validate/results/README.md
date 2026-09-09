@@ -297,3 +297,227 @@ by a processing script, a probe of the group structure, or both, but only
 `PEMAIW`, `EWAS`, `AOMT`, `OS_Schubert`, `CV_Novak`, `pass20`, `evpromisi` and
 `selfcompassionscale` were examined individually; `sris_silvia2022` and
 `fcupanas_cffsdas_reyna_2018` rest on the group-structure probe alone.
+
+---
+
+## The literal "NA" as a published response (#2029) — two files, on purpose
+
+There are **two** sweeps of this in here, measured a day apart by two different
+instruments. Read this before using either.
+
+| file | instrument | landed | tables | columns |
+|---|---|---|---|---|
+| `resp_string_na_2026-09-06.csv` | the Python sweep written for #2029 | #2030 | 299 | `table, shard, n_rows, n_resp_na, share` |
+| `resp_string_na_2026-09-07.csv` | `metadata/hotfixes/report_string_resp_na.R` | #2048 | 300 | adds `resp_type`, `n_resp_not_null`, `n_resp_blank`, `n_resp_excl_na` |
+
+**They agree**, which is the point of keeping both: independent code paths, a day
+apart, landing within 0.1% of each other (9,951,293 vs 9,941,057 `"NA"` rows).
+That agreement is worth more than either file alone, because the headline number
+is large enough to be worth doubting.
+
+**Use 09-07 for the `n_responses` question and 09-06 for the share-by-table
+view.** Only 09-07 separates blank/whitespace values from the `"NA"` token and
+carries `n_resp_excl_na`, which is what answers the open question in
+`metadata/pipeline_logs/NEXT_RUN_NOTES.md`; only it records `resp_type`, so it is
+also the record of which tables are string-typed at all rather than which carry
+the token.
+
+### A correction, since it was stated wrongly in #2048
+
+The 09-07 section originally called this "the file #2029 promised and never
+landed". **That was wrong** — #2030 landed the 09-06 file at 04:45 on 2026-09-07,
+hours before #2048 was written. The claim came from reading a working tree
+checked out on an unrelated branch instead of `main`. The file was there.
+
+What *is* true, and is the reason the R sweep's output kept vanishing: it writes
+to `metadata/hotfixes/string_resp_na_report.csv`, a path `.gitignore` swallows
+(`metadata/**/*.csv`). Regenerating it is
+`Rscript hotfixes/report_string_resp_na.R` from `metadata/` (resumable, queries
+only, no export quota); copy the result here, not into `metadata/`.
+
+### `resp_string_na_2026-09-07.csv`
+
+Produced by `metadata/hotfixes/report_string_resp_na.R`, which predates the
+issue — written 2026-08-24 for the `n_responses` question in
+`NEXT_RUN_NOTES.md`.
+
+One row per string-typed `resp` table: row count, responses counted today, the
+`"NA"` count, blanks, what `n_responses` would become, and the percentage.
+
+**Swept 2026-09-07 across all 4,238 response tables in the six shards.**
+
+| | |
+|---|---|
+| tables with a string-typed `resp` | **300** |
+| ...carrying at least one `"NA"` | **297** |
+| rows where `resp` is the literal `"NA"` | **9,941,057** |
+| rows where `resp` is blank/whitespace | 10,236 |
+| responses `n_responses` counts today | 216,715,839 |
+| responses that are actually responses | **206,764,546** |
+
+Independently reproduces #2029's Python sweep to within 0.1% (it reported
+9,951,293 over 299 tables, measured a day earlier).
+
+### The finding the issue does not have: it is confined to the legacy shards
+
+| shard | affected tables |
+|---|---:|
+| `item_response_warehouse` | 224 |
+| `item_response_warehouse_2` | 76 |
+| `item_response_warehouse_3` … `_6` | **0** |
+
+All 300 sit in the two oldest shards. The 1,285 tables in shards 3–6 carry none.
+Whatever the cause, tables uploaded through the current pipeline are not
+acquiring it, so this is a cleanup of a closed population rather than an ongoing
+leak — which is the difference between a campaign and a gate.
+
+### Do not close this by adding a gate: `irw_validate` already has one
+
+`resp_numeric` (`_checks.py:114`, severity ERROR) is exactly the check #2029
+asks for, and **it would not have caught one of these 300**.
+
+`core.py:243` reads with `pd.read_csv(path, sep=None, engine="python")`, and
+pandas maps the literal `NA` to `NaN` by default. The validator therefore sees a
+clean `float64` column where the file holds a string, every non-null value
+parses, and `core.py:193-199` then explicitly drops the `resp_numeric` finding.
+The two characters `write.csv(na = "NA")` emits — and that Redivis types as a
+string column — are the two characters pandas deletes on the way in.
+
+Demonstrated on a five-row file: as read today, `float64`, 100% parse, no
+finding; with `keep_default_na=False`, `str`, 60% parse, `resp_numeric` fails.
+
+The fix is to the *read*, not a new check, and it is not a one-liner:
+`keep_default_na=False` also turns genuinely empty cells into strings, so the
+gate has to separate the token from real missingness. That is the same
+distinction the per-table triage turns on — a `dscore_*` table is ~90% `"NA"` by
+design, while `geography` is 2.8% and string-typed across all 10M of its rows
+because of it.
+
+### Shape of the affected 297
+
+| `"NA"` share of counted responses | tables |
+|---|---:|
+| over 50% | 18 |
+| 25–50% | 11 |
+| 10–25% | 32 |
+| 1–10% | 58 |
+| under 1% | 178 |
+
+The tails are different problems. The 18 over 50% are missingness-by-design
+batteries (`dscore_*`, `quopl2_*`) where the question is whether the row should
+exist at all; the 178 under 1% are a drop-and-re-upload. Neither is a blanket
+delete. `parenting_anunciacao_2025_material_rewards` is a third thing again —
+untranslated Portuguese response labels, real text rather than a missing code.
+
+---
+
+# Is the `"NA"` token scattered, or concentrated? — 2026-09-08
+
+`na_concentration_2026-09-08.csv`. A follow-up to `resp_string_na_2026-09-07.csv`,
+which established *how many* rows carry the literal `"NA"` token (#2029) but not
+*what shape* they take inside a table.
+
+The question it answers comes from #2093. `DART_Brysbaert_2020_3_4_5` was 0.43%
+`"NA"` overall, but those `"NA"`s were not missing responses — the deposit has a
+real answer for every one. They were two items, 62 respondents each, **100%
+`"NA"`**, whose scoring lookup failed silently in our own script. That is a
+different problem from a respondent who skipped, and a more urgent one: the
+corpus asserts "no answer" about people who gave one.
+
+Respondents do not produce a whole item, or a whole person, that is exactly
+100% missing. Concentration is therefore a cheap signature for our own
+processing having destroyed data. This sweep measures it.
+
+```
+REDIVIS_API_TOKEN=$(cat ~/.redivis_api_token) \
+    python3 irw_validate/sweeps/na_concentration.py \
+    irw_validate/results/na_concentration_2026-09-08.csv
+```
+
+One aggregate query per table over the 297 tables carrying the token; nothing is
+exported, and no row is read. Resumable. The run's `"NA"` total came to
+**9,941,057**, matching `report_string_resp_na.R` exactly — an independent
+cross-check of both instruments.
+
+## What it found
+
+| the 9,941,057 `"NA"` rows | rows | share |
+|---|---:|---:|
+| inside an item that is 100% `"NA"` | 129,923 | 1.31% |
+| inside an id that is 100% `"NA"` | 3,044,954 | 30.63% |
+| scattered | 6,766,180 | 68.06% |
+
+*(the first two can overlap, so "scattered" is an upper bound)*
+
+**187 of the 297 tables show no concentration at all.** Ordinary missingness.
+
+**Only 4 tables have even one item that is 100% `"NA"`:**
+
+| table | overall `NA` | items 100% `NA` | share of its `NA` | verdict |
+|---|---:|---:|---:|---|
+| `DART_Brysbaert_2020_3_4_5` | 0.43% | 2 / 264 | 100% | defect — #2093 |
+| `Veterans_Affairs_SSVF_Survey_2018-20` | 32.3% | 3 / 56 | 16.6% | defect, minor — see below |
+| `western_reserve_project` | 26.2% | 81 / 2,812 | 6.0% | defect — see below |
+| `quopl2_forster_2021_elfe` | 93.2% | 14 / 274 | 5.5% | **not** a defect — see below |
+
+The 30.6% in whole-person `"NA"` is dominated by `dscore_*` and `quopl2_*` —
+adaptive and age-gated batteries where a child aged out of an instrument
+entirely (`quopl2_forster_2021_dmat`: 98.8% of its `"NA"` sits in people with
+zero responses). That is the design working, recorded badly, not data we lost.
+
+## The three item-side tables, resolved
+
+**`western_reserve_project` — a real defect, and larger than the `"NA"`.**
+All 81 all-`"NA"` items are in **wave 4, and only wave 4**; every other wave has
+zero. `data/western_reserve_project.R` builds each wave with the same
+drop-uninformative-columns loop, and the `ctp_wave4` copy of it has a typo:
+
+```r
+unique_len <- length(ctp_wave4)      # number of COLUMNS in the frame
+                                     # every other wave: length(unique_vals)
+```
+
+`length()` of a data frame is its column count, so `unique_len` is a constant
+and **neither** guard ever fires for that one file. Both branches are lost, so
+wave 4 keeps all-`NA` columns *and* single-value columns:
+
+| wave | items | 0 distinct responses | 1 distinct response |
+|---|---:|---:|---:|
+| 4 | 1,004 | **81** | **141** |
+| every other wave | 1,808 | 0 | 4 |
+
+So **222 of wave 4's 1,004 items carry no information for any model at any
+altitude** — the `"NA"` sweep only saw the 81. The inner `is.na(unique(ctp_wave4[1]))`
+on the same line is wrong too (it tests the first *column*, not `unique_vals[1]`).
+
+**`Veterans_Affairs_SSVF_Survey_2018-20` — a real defect, minor.** Items 54, 55
+and 56 are the last three of 56 and are 100% `"NA"` across all 26,347 rows,
+against ~14% for items 49–53. A clean cliff at the end of the file: three
+trailing empty columns that should never have been published. No response was
+destroyed — unlike DART, there is nothing to recover.
+
+**`quopl2_forster_2021_elfe` — not a defect.** ELFE is a *speeded* reading test,
+and the `"NA"` rate climbs smoothly with item number rather than jumping:
+
+```
+WortKorrekt6    83.8%      WortKorrekt65   99.9%
+WortKorrekt60   99.9%      WortKorrekt69   99.9%
+WortKorrekt61   99.6%      WortKorrekt70  100.0%   <- and every item after
+```
+
+Nobody reached the last six items. That is the test's ceiling, correctly
+recorded. Leave it alone.
+
+## What this does and does not settle
+
+A 100%-`"NA"` item is a **sufficient** signature of a failed lookup, not a
+necessary one. DART's join happened to fail totally; one failing on a subset
+would scatter and be indistinguishable here from real missingness. So 1.31%
+bounds the *obvious* cases only. Finding partial failures would mean comparing
+each table against its source deposit — a much larger job, and not one this
+evidence justifies.
+
+Also note the ordering trap: the bulk cleanup destroys this evidence. Drop the
+`"NA"` rows first and a 100%-`"NA"` item vanishes from the table entirely,
+taking with it any trace that a real response ever existed. This sweep has to
+precede any repair.

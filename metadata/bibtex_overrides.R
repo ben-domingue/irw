@@ -36,7 +36,17 @@ bibtex_override_for_doi <- function(doi, overrides) {
 
 apply_bibtex_overrides <- function(biblio, overrides) {
     if (!nrow(biblio)) return(biblio)
-    hit <- match(normalize_bibtex_doi(biblio$DOI__for_paper_), overrides$doi)
+    ## Match the citation chosen for fresh rows in 02_biblio.R: a paper DOI
+    ## takes precedence; otherwise cite the deposit. The #1690 split can leave
+    ## a cached citation with only DOI__for_data_, so paper-only matching would
+    ## miss exactly the cached resolver defect this override is meant to fix.
+    doi <- as.character(biblio$DOI__for_paper_)
+    ## Same blank semantics as dict_blank(), while keeping this helper base R.
+    blank <- is.na(doi) | trimws(doi) == "" | toupper(trimws(doi)) == "NA"
+    if ("DOI__for_data_" %in% names(biblio)) {
+        doi[blank] <- as.character(biblio$DOI__for_data_)[blank]
+    }
+    hit <- match(normalize_bibtex_doi(doi), overrides$doi)
     keep <- !is.na(hit)
     biblio$BibTex[keep] <- overrides$BibTex[hit[keep]]
     biblio

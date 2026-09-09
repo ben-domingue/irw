@@ -1,10 +1,10 @@
 # Nguyen gynecologic surgery: provenance and metadata
 
 Refs #1754. These five existing response tables come from one published
-Dataverse workbook. This change reconstructs their missing conversion script,
-prepares the missing dictionary/tag rows, and corrects the DOI resolver's
-malformed author name. The dictionary and tag CSVs here are proposed inputs for
-review and manual import; committing them does not update the public catalogue.
+Dataverse workbook. This change reconstructs their missing conversion script
+and corrects the DOI resolver's malformed author name. The dictionary and tag
+CSVs retain the original review/import proposals; all five rows have since
+been added to the authoritative Sheets. See the dated status below.
 
 ## Verified source
 
@@ -86,8 +86,8 @@ historical column name; the existing dictionary and
 `metadata/tests/test_dictionary_dois.R` also accept dataset DOIs there. These
 rows explicitly cite a **data set**, with no claim of a verified article DOI.
 
-`tags_proposed.csv` uses the live tag sheet's 13 columns. `Rater` is blank until
-a human has reviewed the proposals. The clinical setting and restriction to
+`tags_proposed.csv` uses the tag sheet's 13 columns. `Rater` is blank in this
+original proposal; the reviewed live rows now name `sinew`. The clinical setting and restriction to
 gynecologic surgical patients support `Clinical, Targeted/specific`. The
 `vie` language tag is an inference from the Hanoi patient cohort, as allowed
 by the tag rules; actual administration language is not established. English
@@ -109,34 +109,31 @@ Disambiguation belongs in the source DOI, study description and the descriptive
 `nguyen_2026_gyn_surgery.py` script name. Any later rename requires a separate
 coordinated decision across response tables, citations, tags and clients.
 
-## Remaining publication steps
+## Publication status, checked 9 September 2026
 
-The 6 September 2026 snapshots of the live dictionary (4,375 rows) and tags
-sheet contain none of these five names. The public catalogue's bibliographic
-index also omits all five; a shard-routing entry alone is not a discoverable
-dataset listing.
+The [core dictionary](https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315)
+and [formal Tags sheet](https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123)
+each contain these five names exactly once. The tag Rater is `sinew` on all
+five rows. The reviewed human classifications take precedence over the
+original proposals here; no repeat import is needed.
 
-The [Barthel pilot page](https://itemresponsewarehouse.org/tables/nguyen_2026_barthel/)
-shows the correct response counts, but its machine-readable record supplies
-only a generic IRW citation and a license placeholder. The other four do not
-have individual pilot pages; their HTTP 404 responses are not evidence that
-the response tables are missing from Redivis.
+All five are present in committed `metadata/biblio.csv`, `metadata/tags.csv`
+and `metadata/metadata.csv` at main commit
+`588eaf3dfa8ae236049e6c17de55c91ed738c3a2`. The public catalogue at
+[data.html](https://itemresponsewarehouse.org/data.html) now includes their
+source DOI, CC0 licence, descriptions and tags. The
+[Barthel machine-readable record](https://itemresponsewarehouse.org/tables/nguyen_2026_barthel/croissant.jsonld)
+also has the source citation and CC0 licence.
 
-1. Review and import the **five data rows only** from `dictionary_rows.csv`
-   into the [core dictionary](https://docs.google.com/spreadsheets/d/1nhPyvuAm3JO8c9oa1swPvQZghAvmnf4xlYgbvsFH99s/edit?gid=1337607315#gid=1337607315).
-   Recheck exact names first to avoid duplicates; retain both Custom License
-   columns.
-2. Review `tags_proposed.csv`, fill `Rater`, and import its five data rows into
-   [IRW Tags](https://docs.google.com/spreadsheets/d/1V3ef0sa7HKtJJd2cgqRAkEdfbpGWDD1JIyQa6HwVK7g/edit?gid=126134123#gid=126134123).
-   The human-sheet rows take precedence over the existing automated abstentions.
-3. With this citation correction in the working checkout, regenerate the
-   affected metadata through the authoritative wrapper, e.g.
-   `.claude/skills/irw-site-update/scripts/run_pipeline.sh 02 03`. Review the
-   complete diff, including unrelated rows the stages may encounter.
-4. Use the normal `red_up` metadata path to prepare a Redivis draft for human
-   review/publication. Verify the released bibliography and tags and the next
-   site rendering; retain all five original table identifiers.
+One correction remains to propagate: all five generated `BibTex` fields in
+the committed bibliography and public catalogue still contain
+`author = {ich Nguyen, Bich}`, although their human-readable references are
+correct. After this PR merges, use the normal metadata regeneration and
+review/publication workflow to apply the exact-DOI override, then verify that
+the released bibliography and site contain the corrected BibTeX. No response
+data upload or table rename is needed. The current Redivis metadata release
+and any unpublished draft were not independently queried in this status check.
 
-The public metadata repair remains pending these steps. This PR references
-#1754 rather than automatically closing it. See `ARCHITECTURE.md` for the
-manual Sheet-import and separate publication workflow.
+This PR references #1754 rather than automatically closing it: the remaining
+citation correction should be checked after publication. See
+`ARCHITECTURE.md` for the authoritative metadata workflow.
