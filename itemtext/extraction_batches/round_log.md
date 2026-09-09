@@ -11236,3 +11236,1322 @@ nothing to bite on, because the original carries no quotable restriction.
 
 **Verdict: clear to release.** Recorded in the table's `provenance.csv` note so the basis is
 auditable, per the 2026-09-08 two-instrument ruling.
+
+---
+
+## batch_092 — 2026-09-08
+
+**3 tables: 2 written / 1 blocked / 0 failed.** Yield 2/3 (67%). Circuit breaker not tripped
+(0% failed). No rate-limit or spend-cap kill; all three agents ran to completion.
+
+| table | outcome | mapping_basis | Step 5b |
+|---|---|---|---|
+| `ly_2021_animal_empathy` | **done** — 1,540 rows (140 items × 11 levels) | `paper_explicit` | VERIFIED |
+| `ma2026_bsmas` | **done** — 30 rows (6 items × 5 options) | `paper_explicit` | VERIFIED |
+| `ma2026_igds` | **blocked** — instrument rights, no CSV | `unknown` | NOT_NEEDED |
+
+**Gates.** `normalize_nulls` 0 of 2 changed; `audit_batch` **2 PASS, no anomalies** (so nothing for
+Step 5c to explain); `verify_batch` **PASS=2**; `lint_verification` 0 ERROR / 1 WARN;
+`irw-validate` ok on both files; `check_provenance` raised nothing attributable to this batch
+(its `liu_2025_positive_cognition` and six `mixed` rows are pre-existing).
+
+**Two gate results that look like failures and are not.**
+
+1. `verify_batch.R`'s *first* run reported `ly_2021_animal_empathy` as **NO VERDICT**. Running the
+   script directly gave `VERDICT: PASS` (exit 0), and two further `verify_batch.R` runs both
+   reported `PASS=2`. Transient, not a reproducibility failure — but worth watching, because a
+   spurious NO VERDICT is exactly the signal Step 5 says to classify as `failed`. Anyone who sees
+   one should re-run before believing it.
+2. `lint_verification` WARNs that `ma2026_igds` is `NOT_NEEDED` with `mapping_basis=unknown`. That
+   is the correct shape for a table blocked *before* extraction: no mapping was ever made, so there
+   is no mapping to verify. Expected for a rights block, not a defect.
+
+**Step 5b orchestrator re-checks — both rights claims were re-verified independently, and both held.**
+These were the round's two claims that override a source or become a public artifact.
+
+- **IGDS9-SF (blocks `ma2026_igds`).** Re-fetched both Pontes pages myself. Confirmed verbatim:
+  the IGDS9-SF page carries *"© 2026 Dr. Halley Pontes. This work is licensed under CC BY NC ND
+  4.0"* **and** *"if you wish to further develop and validate the IGDS9-SF in another language,
+  please do get in touch with me via email"* — NC + ND + permission-required, i.e. a clause that
+  reserves rights rather than disclaiming fitness. **The contradiction is also real:** the same
+  site's `/tests/` index says *"you do not need to contact me to ask for permission to use any of
+  the tests"*, and carries the same site-wide footer. That grants *use*, not redistribution or
+  derivatives, and does not withdraw the notice — but the footer is a Hugo Blox theme default, so
+  its scope is genuinely open. Blocked pending Ben's ruling, erring on the side of not having
+  things. **Ben may overrule**, on the ground that a theme-default footer does not scope to the
+  instrument.
+- **BSMAS (ships `ma2026_bsmas`).** Re-fetched the Salford PsyTech entry: copyright restrictions
+  read *"Ensure you cite the author(s)."* and nothing else — no fee, permission requirement, NC,
+  ND or redistribution bar. Nothing is reserved, so silence is permission. The extracting agent
+  reported that `instrument_rights_register.csv` "does not exist in this worktree"; **it does**
+  (21 instrument rows before this round) — the agent's check simply missed it. I ran the check: no BSMAS row
+  and no IGDS9-SF row existed, so neither table was covered either way.
+
+**Both determinations are now written into `instrument_rights_register.csv`** (21 → 23 instrument rows), so
+the next round meeting either instrument does not redo this work: BSMAS `ship` (`^bsmas|^bfas`),
+IGDS9-SF `block` (`^igds`) marked NOT SETTLED / awaiting Ben, with clause, URL and sha256 on both.
+
+**What the block actually costs here: very little.** Administration was Chinese (1,108 primary
+school students); the figshare deposit (CC BY 4.0) is one unlabelled `rawdata_.csv` and the
+Research Square preprint has **zero CJK characters** and reproduces no stems. Only canonical
+English as a `translated_substitute` was ever shippable — precisely the material the notice covers.
+And unlike irw#2101/#2123, the codes `igds1..igds9` carry no wording, so **no IGDS9-SF text leaks
+through the response table**. Not a second-surface case.
+
+**`ma2026_bsmas` has unusually strong mapping evidence.** The preprint's Table 5 publishes a full
+per-item GRM solution — α plus four β thresholds, 30 numbers. Refitting on the live IRW data
+reproduces all 30, largest deviation **0.005**. The fit is item-specific rather than global: each
+live item's five-number signature is nearest its own published row (self-distance 0.003–0.008 vs
+next-best 0.200–0.754), so every item is distinguished from every other. Option direction is pinned
+on a second axis — the preprint says item 2 had the lowest difficulty for *"very rarely"* and item
+3 the highest for *"very often"*; in the refit min(β1) is item 2 and max(β4) is item 3.
+
+**`ly_2021_animal_empathy` — a naming trap worth recording.** Items are 20 farm-animal video clips
+× 7 emotion ratings, `item = VIDEO_ID + "_" + <emotion column>`, both halves verbatim from the S3
+File. In the video codes **`PD` is tail docking and `PT` is teeth clipping** — the opposite of the
+obvious mnemonic, settled from the S1 File. Regrouping S3 reproduces all 140 live items with max
+|mean diff| = 0.000e+00, and S1's painful/control labelling separates completely (lowest procedure
+3.13 vs highest control 0.67). Instruction wording was described but never reproduced by the paper,
+so `instructions` is blank; only the published anchors 0 *"not intense at all"* and 10 *"very
+intense"* ship as `option_text`, with 1–9 left blank rather than padded.
+
+**Two caveats disclosed on `ma2026_bsmas`, both in the public note.** The shipped English is the
+canonical BSMAS, not the administered Chinese, and the BSMAS circulates in two English renderings
+(interrogative and declarative) — the interrogative is shipped because it carries the past-year
+timeframe the preprint states, but which one the Chinese was translated from is recorded nowhere.
+Canonical item 6's *"your job/studies"* also reflects the original scale rather than what these
+primary-school respondents read.
+
+Cap is `batch_095`; batch_092 is not it, so rounds continue.
+
+### batch_092 triaged — 2 shipped, 1 blocked pending Ben — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch`
+PASS=2, `lint_verification` 0 ERROR / 1 WARN (on the blocked row, which wrote no CSV),
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+added to PR datapages/irw#165 (401 entries).
+
+**First round triaged with the register, and I used it the way the ECR failure says to** — checked
+`instrument_rights_register.csv` before reading any source page. BSMAS carries a `ship` row
+("attribution is not a reservation"), IGDS9-SF a `block` row marked NOT SETTLED. The extracting agent
+had reported that the register "does not exist in this worktree", which was true when it started and
+false by the time it finished; the round orchestrator ran the check the agent couldn't and wrote both
+determinations back. That is the mechanism working in its first round.
+
+**BSMAS confirmed independently rather than taken from the row.** The only condition locatable
+anywhere is Salford PsyTech's "Ensure you cite the author(s)". Attribution obliges citation and
+reserves nothing — no fee, permission, non-commercial, no-derivatives or redistribution clause — so
+it ships under the reserve-a-right test. The Bergen originator page for the scale 404s, so this is a
+silence case, and silence is still permission.
+
+**`ma2026_igds` blocked, and it is a genuine contradiction rather than a clear clause.** Pontes'
+instrument page carries *"© 2026 Dr. Halley Pontes. This work is licensed under CC BY NC ND 4.0"*
+plus a permission-required clause for developing it in another language — which is exactly this
+table, a Chinese administration. But the same site's `/tests/` index says *"you do not need to
+contact me to ask for permission to use any of the tests"*, and the CC line is a **site-wide Hugo
+Blox theme footer**, so whether it scopes to the instrument is genuinely open. Blocked pending Ben,
+erring toward not having things. Cost is low either way: only canonical English was ever shippable,
+and `igds1..igds9` carry no wording, so nothing leaks through the response table — unlike
+`luu_2024_stai6`.
+
+**Checked the claim most likely to mislabel content, and it holds.** The round warned that in the
+video codes `PD` is *tail docking* and `PT` is *teeth clipping* — the opposite of the obvious
+mnemonic. The source S1 document labels them outright: "PD Piglet Tail Docking" and "PT Piglet Teeth
+Clipping", and the shipped `section_prompt` for each matches. So the assignment is read, not
+inferred. Worth knowing for the siblings, because a table whose `item_text` is only an emotion name
+puts *all* of its content in `section_prompt`, where a code swap would be invisible to every gate.
+
+**A transient gate failure worth recording, because the protocol would have mishandled it.**
+`verify_batch.R`'s first run reported `ly_2021_animal_empathy` as NO VERDICT; direct execution gave
+`VERDICT: PASS`, and two further batch runs both gave `PASS=2`, as did my own re-run at triage.
+Step 5 says to classify a NO VERDICT as `failed`, which here would have been wrong. **A single
+NO VERDICT from a batch runner is worth re-running before it becomes a status.**
+
+Cap is `batch_095`; not reached. 727 pending, next firing takes `batch_093`.
+
+---
+
+## batch_093 — 2026-09-08
+
+**6 tables, 6 agents, one per table. Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.**
+First round at the six-agent setting Ben raised to on 2026-09-08. Baseline before dispatch was
+**17G available, 3G free** — the post-R-session figure the raise was authorised against, not the
+11.6G that got `batch_091` killed twice. No kill, no retry, no memory pressure. Six is fine at this
+baseline; it remains Ben's call to drop back to three when the laptop is in use.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `ma2026_sabas` | shipped, 36 rows | paper_explicit | **VERIFIED** (published GRM parameters) |
+| `machado_2020_cat_separation` | shipped, 14 rows | data_labels | NOT_NEEDED |
+| `majeed_2024_luxury_purchase` | shipped, 155 rows | data_labels | NOT_NEEDED |
+| `makai_2023_entrepreneurial_transdanubia` | shipped, 190 rows | data_labels | NOT_NEEDED |
+| `makowska_2023_pdts` | shipped, 30 rows | data_labels | **PARTIAL** (see below) |
+| `makowska_2023_pss4` | **blocked** — PSS rights | (data_labels) | n/a |
+
+**Gates all clean.** `normalize_nulls` 0 of 5 changed; `audit_batch` **5/5 PASS with no anomalies**
+(so Step 5c had nothing to explain — no WARNs at all); `verify_batch` PASS=2, MISSING(exempt)=3;
+`lint_verification` **5 rows, no problems**; `irw-validate` ok on all five; `check_provenance` flagged
+only pre-existing tables, none from this batch. Writing the three `data_labels` NOT_NEEDED rows into
+the batch's own `verification_merged.csv` *as well as* the permanent tracker again produced a clean
+lint — the batch_020/021 false-ERROR trap stayed shut.
+
+**Three of five shipped tables are `data_labels` because the item code IS the item wording.** In
+`majeed_2024_luxury_purchase` and `makai_2023_entrepreneurial_transdanubia` the processing script
+melts the source `.xlsx` header row straight into `item`, so there is no positional step to get
+wrong and no mapping to verify. Both agents correctly preserved source typos and spacing verbatim
+(`vide variety`, `An entrepreneurial cfareer is attractive to me `) because `item` is the join key —
+the prime commandment. Cheap, high-confidence tables; worth noticing that the queue's head is now
+serving several of them.
+
+### Step 5b: three agent claims re-checked, all three confirmed
+
+1. **`makowska_2023_pdts` — the paper and its own data file disagree, and the agent was right to
+   follow the `.sav`.** Re-read Table 2 from the article image directly and recomputed the deposit
+   means. The paper numbers "irritated" as Item 2 (M=2.90/2.93/2.84/2.90/2.35/2.34 down the column);
+   the deposits label `PDTS2` = *no control* and `PDTS3` = *irritated*, with the code prefix inside
+   each label matching its column name, 12/12 across both `.sav`s. Study 1 column-order means are
+   2.8909 / **2.9273** / **2.8402** / 2.8813 / 2.3500 / 2.3394 — i.e. Table 2's M *and* SD track
+   column position exactly, so the two sources agree on position and disagree only on which text
+   sits at 2 vs 3. One of them has rows 2/3 crossed. Following the `.sav` (level-1 source; the
+   processing script melts on column names) is the right call, and **PARTIAL is the right status** —
+   the corroborating correlation margin is only ~0.05 in each sample (.783/.733, .660/.611), which
+   is consistent but does not separate the two items outright. Polish↔English pairing *within* each
+   item was matched by content and is safe either way; only the code assignment is at risk. Items
+   1, 4, 5, 6 are unambiguous.
+2. **SABAS rights.** Re-fetched the Salford page independently; its only condition is
+   *"Copyright restrictions: Ensure you cite the author(s)."* My sha256 is byte-identical to the
+   agent's (`e9b8e249…`). Attribution obliges citation and reserves nothing.
+3. **PSS rights.** The agent applied the register rather than re-deriving it, but re-fetched the CMU
+   FAQ; md5 `f2eeb376…` is byte-identical to the hash already in the register.
+
+**Register: added a `verdict=ship` row for SABAS** (family `SABAS`, `match_item_code` `^sabas`),
+which the agent deliberately deferred rather than race five siblings for the file. Same page, same
+clause and same reasoning as the BSMAS row added in batch_092.
+
+**The one block is a rights decision, not an access failure. Retry test: NO.** `makowska_2023_pss4`
+is the standard PSS-4 subset (PSS-10 items 2, 4, 5, 10) with *"at work"* appended — a derivative of
+a barred instrument, and the 14th application of the settled PSS block (irw#1955). Extraction was
+*fully solved* before the block bit: the S3 `.sav` labels tie all four codes to text directly. The
+block does reach it, as with `luu_2024_stai6` and unlike the irw#2101 shape: live codes are bare
+`PSS1..PSS4` and carry no wording, so withholding item text genuinely withholds the instrument.
+Row added to `pending_index_notes.csv`.
+
+**Shared-source pair handled cleanly.** `makowska_2023_pdts` and `makowska_2023_pss4` come from one
+`.sav`, worked by two agents in parallel. Both independently reported the same thing — the PDTS and
+PSS blocks are cleanly distinct columns, correctly assigned, not swapped — and neither wrote into
+the other's files. Corroboration without a race, which is the reason for telling each agent who owns
+the siblings.
+
+**Two source defects found, neither affecting a shipped table.** The PDTS paper's Table 4
+(labelled Study 2, N=558) reproduces neither deposit — its general indicator 2.71 is *Study 1's*
+`PDTS_WSK` mean (2.7053), confirmed here. And the `ma2026_sabas` preprint's prose contradicts its own
+Table 6 twice (a discrimination ordering given as descending that is ascending; a "highest
+difficulty" item named as 2 that is 1 in the table). Recorded so a later reader does not mistake
+either for a checkable claim about the IRW table.
+
+**Note for whoever ships `makowska_2023_pdts`:** its `translation_source=mixed` covers
+`option_text_translated`, which is English *this project* wrote. Under the 2026-09-02 ruling it owes
+a line on the public issues page at upload time. It is HELD now, so nothing is owed yet, and
+`check_provenance.R` will surface it the moment it is stamped.
+
+**Stale line corrected:** the batch_092 entry closes "Cap is `batch_095`". The cap was raised to
+`batch_110` in ab4413a, which is what Step 0 now says and what this round read. Cap not reached.
+719 pending; next firing takes `batch_094`.
+
+### batch_093 triaged — 5 shipped, 1 blocked — FIRST ROUND AT SIX AGENTS — 2026-09-08
+
+**Ben doubled the round size to six ("as i won't be working as much") and the first round at that
+size ran clean: 5 written, 1 blocked, 0 failed, no kill, no retry.** Baseline before dispatch was
+17G available — the figure the raise was authorised against, not the 11.6G that killed `batch_091`
+twice. `round_prompt_v1.md` changed in **two** places, and the second is the one that binds: Step 2
+carries the visible agent count, but Step 1's "take the first N pending rows" is the actual claim,
+and changing only the former would have claimed three tables and dispatched six agents. The cap also
+went `batch_095` → `batch_110`, since at six a round the old cap was three rounds away; the
+load-bearing `grep -P` in `run_round.sh` was re-run against the edited line and still resolves.
+
+Gates re-run live: `normalize_nulls` 0 of 5, `audit_batch` 5/5 PASS with zero WARNs, `verify_batch`
+2 PASS + 3 correct exempt, `lint_verification` clean, `irw-validate` ok. All five uploaded (`red_up`
+5/5 row-count verified), stamped and audited. Four entries added to PR datapages/irw#165 (405).
+
+**The load-bearing claim was `makowska_2023_pdts`, and it reproduces decisively.** The paper's
+Table 2 numbers "irritated" as item 2; the deposited `.sav` labels `PDTS2` as *no control*. Checked
+the deposit directly and the labels are **self-numbering** — `PDTS2. How often have you felt that you
+had no control…`, `PDTS3. …felt irritated…` — with the shipped text matching each exactly. A variable
+label that carries its own item number is about as direct a tie as this pipeline ever gets, so
+following the `.sav` is right and the paper is the outlier. PARTIAL is still the honest status,
+because the corroborating correlation margin is only ~0.05, and the issues-page entry warns readers
+comparing against the paper's numbering that PDTS2/PDTS3 may be interchanged.
+
+**Two disclosure corrections at triage.** `machado_2020_cat_separation` drew the drafter's *generic
+template* sentence ("administered in another language and only an English version could be
+recovered"), which is vague where the truth is specific — Portuguese administration, the authors' own
+English is the only published wording, and the translated columns are empty because no second version
+exists rather than because one is missing. And `makowska_2023_pdts` needed a paragraph the draft
+omitted: its `translation_source=mixed` is mixed precisely because **IRW wrote the English for the
+Polish response anchors**, the study's own renderings being inconsistent across its files. That is
+IRW-generated content and owes a line under the 2026-09-02 ruling. The round flagged it before
+`check_provenance.R` would have.
+
+**The `no`-vs-empty trap bit the stamper, and the guard caught it.** Three of the five
+`mapping_verification.csv` rows carry `uploaded="no"` rather than `""` — `no`, `NA`, empty and
+`unrecorded` all mean unstamped, which the pre-flight check knows but my stamper did not. It
+asserted out before writing. A second bug surfaced in the same attempt: I detected each row's
+quoting by testing whether `"<table>"` appeared *anywhere in the file*, and
+`machado_2020_cat_separation` appears quoted **inside another row's evidence prose**. Convention has
+to be detected at the ROW START, and "unstamped" has to mean all four spellings. **Third stamper
+shape in five batches** — the durable lesson stands: detect per record, never assume a file-wide
+convention.
+
+**Rights: all six records apply the current test**, which is the first round where that was true
+without a triage override — SKILL.md's rewrite was committed between batch_092 and this round. The
+PSS-4 block cites the register verdict rather than re-deriving a clause, which is exactly what the
+register is for. SABAS got a `ship` row added by the round orchestrator; `machado`, `majeed` and
+`makai` are the studies' own instruments and need none.
+
+Recorded, not acted on: two source defects that touch no shipped table — the PDTS paper's Table 4
+(labelled Study 2) reports Study 1's general indicator, and the SABAS preprint's prose contradicts
+its own Table 6 twice.
+
+Cap is `batch_110`; not reached. 719 pending, next firing takes `batch_094`.
+
+## batch_094 — 2026-09-08
+
+6 tables claimed, six agents, one per table (the 2026-09-08 six-agent setting).
+**Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.** Circuit breaker not tripped (0% failed).
+
+- **done:** `makransky_2016_mcq_correct` (10 items × 0/1, 20 rows),
+  `makransky_2016_self_efficacy` (8 × 5, 40), `malik_2018_individual_motivation` (22 × 5, 110),
+  `malik_2018_organizational_motivation` (36 × 5, 180), `malik_2018_social_motivation` (14 × 5, 70).
+- **blocked:** `makransky_2016_motivation` — instrument rights, not access. The 5 items are the
+  IMI Interest/Enjoyment subscale; the CSDT Limited Use License reserves NC + no-redistribution +
+  no-online-publication, the DSES/WHOQOL shape. Extraction was fully solved first (S1 .sav variable
+  labels carry all five stems), so a reversal is a transcription, not a restart. Retry test NO.
+  New `instrument_rights_register.csv` row: *Intrinsic Motivation Inventory (IMI)*, family SDT/CSDT,
+  verdict `block`; register re-parses at 25 rows.
+
+Both source papers are PLOS ONE CC BY 4.0 with SPSS S1 Data whose variable+value labels carry the
+wording, so five of six tables are `mapping_basis=data_labels`.
+
+**Gates.** normalize_nulls fixed 2 files. audit_batch: first run threw one ERROR on
+`malik_2018_social_motivation` — a Redivis readStream connection failure, transient, not a data
+problem; a clean re-run gave **5 PASS, 0 WARN, 0 ERROR**. verify_batch: 1 PASS + 4 MISSING(exempt).
+lint_verification: 0 ERROR, 1 WARN. irw-validate: all 5 ok. check_provenance: no failures, and none
+of its outstanding review items are from this batch.
+
+**Step 5b re-checks (all three confirmed against source, none overturned):**
+1. `makransky_2016_mcq_correct` MCQ7 answer-key mismatch — CONFIRMED both halves. The deposited data
+   score option 3 "a carbon source" correct (60/60 pre, 56/56 post, zero exceptions), while S1
+   Table's docx marks option 2 "the differential agent" bold+italic as the key. Published key ships
+   in `correct_response`; the disagreement is a `public_note` and is genuine issues-page material.
+2. `malik_2018_social_motivation` SC3/CS4 — CONFIRMED. Live `social_3` = 52/65/76/121/42 matches
+   `CS4` exactly and not `SC3` (64/44/48/146/54). The processing script's comment "SC3 is stored as
+   CS4" is wrong — the .sav holds both as separate columns — so the script silently drops SC3 and
+   the IRW table has 14 of the paper's 15 items. **Downstream defect confirmed:** `metadata/biblio.csv`
+   Description still says "15-item Social/co-worker…". Response-data + dictionary defect, not itemtext.
+3. lint's WARN on that table's VERIFIED status — reviewed, left VERIFIED. The hedge is about the
+   .sav's value-label orientation, not item discrimination; the route matches 14/14 with 14 mutually
+   distinct count vectors, which is what VERIFIED requires.
+
+**Open for Ben — scope of the new CSDT block.** The CSDT Limited Use License covers the whole
+selfdeterminationtheory.org library, so the register row as written also reaches BPNS/BPNSFS,
+Aspirations Index, SRQ, PLOC and GCOS. `baka2023_bpnsf` is a BPNSFS table already extracted
+(batch_007) and already **uploaded 2026-08-18**. This round did not touch it and takes no view on
+whether the CSDT terms actually reach the separately-distributed BPNSFS — that is a human ruling.
+
+Cap is batch_110; not reached.
+
+### batch_094 triaged — 5 shipped, 1 blocked — 2026-09-08
+
+Second round at six agents; again 5 written / 1 blocked / 0 failed, no kill. Gates re-run live:
+`normalize_nulls` 0 of 5, `audit_batch` 5/5 PASS with zero WARNs, `verify_batch` 1 PASS + 4 correct
+exempt, `lint_verification` 0 ERROR / 1 WARN (the standing VERIFIED-vs-PARTIAL question),
+`irw-validate` ok. All five uploaded (`red_up` 5/5 row-count verified), stamped and audited.
+
+**`check_provenance.R` exits 0 again — datapages/irw#165 merged**, carrying 21 entries across
+batches 080-093, so the by-design failure recorded at batch_086 is cleared. batch_094's five entries
+opened as **datapages/irw#167** on a fresh branch (411 entries).
+
+**The MCQ7 answer-key mismatch reproduces exactly, and the science settles which source is wrong.**
+Verified against the deposit rather than the round's summary: `PRE_MCQ7` option 3 "a carbon source"
+was chosen by exactly 60 and `Pre_MCQ7_correct` carries exactly 60 ones; post is 56 and 56; option 2
+"the differential agent" was chosen by 44 and 49 and matches nothing. So the deposited data
+systematically score option 3. **But in mannitol salt agar the salt is the selective agent and
+mannitol is the differential agent**, so S1 Table's key is scientifically right and this is a scoring
+error in the study's own data — which is a more useful statement than "the two sources disagree".
+The table keeps the published key in `correct_response` and the study's scoring in `resp`, and the
+issues-page entry states the consequence plainly: for this item alone, `resp=1` means the respondent
+chose the *other* option. Shipping the study's scoring in `correct_response` was rejected because it
+would have IRW asserting a scientifically false key.
+
+**A response-data defect confirmed and filed as irw#2127.** `data/malik_2018_physician_motivation.py`
+carries the comment *"SC3 is stored as CS4 in the raw file (typo in source)"* and builds
+`["SC1","SC2","CS4"] + SC5..SC15`. The deposit holds **both** columns, with different labels and
+different data: `SC3` "I am satisfied with my personal life issues" (64/44/52/146/54) and `CS4`
+"I am satisfied with the team work around me during work" (52/65/80/121/42), n=360 each. The full
+set is `SC1, SC2, SC3, CS4, SC5..SC15`, so `CS4` looks like a typo for **`SC4`**, not `SC3`. The
+table therefore ships **14 items where the source has 15**, with every code from the third onward
+shifted, and `metadata/biblio.csv` still calls it a 15-item subscale.
+
+**The item text is not the defect and was shipped anyway**, which is the distinction worth keeping:
+each code is labelled with the column genuinely behind it, so the extraction is faithful to the data
+as it stands. Fixing the data will renumber the codes and the `__items` table must be rebuilt in
+step — recorded in both the issue and the issues-page entry.
+
+**Two entries the drafter did not generate, written by hand off the REVIEW section.**
+`makransky_2016_self_efficacy` (the article describes the anchors as "Strongly disagree/agree" while
+both level-1 sources say "Completely disagree/agree" — the article is the outlier) and
+`malik_2018_organizational_motivation` (one item has no value labels in the `.sav`, so the anchors
+shared by its 35 siblings were applied to it — an inference, not a transcription; plus two source
+typos shipped verbatim). Both have clean structured provenance and caveats living only in
+`notes.csv`, which is exactly the failure mode the REVIEW section exists to catch.
+
+**The stamper generalisation held on first use.** After three distinct shapes in five batches, this
+round's stamper detects each row's convention at the ROW START and tries all four spellings of
+unstamped (`""`, `"no"`, `"NA"`, `"unrecorded"`). Both files stamped first time, +50 bytes each,
+exactly ten characters per record.
+
+**FOR BEN — a live table may fall under this round's new rights block.** `makransky_2016_motivation`
+was blocked on the IMI Interest/Enjoyment subscale: the CSDT Limited Use License reserves NC,
+no-redistribution and no-online-publication. The round noted, correctly, that the licence covers the
+**whole selfdeterminationtheory.org library** — so the register row as written also reaches
+BPNS/BPNSFS, the Aspirations Index, SRQ, PLOC and GCOS. **`baka2023_bpnsf` is a BPNSFS table already
+uploaded on 2026-08-18.** Neither the round nor I touched it, and neither of us takes a view on
+whether CSDT's terms actually reach the separately-distributed BPNSFS — that is an instrument-scope
+ruling, and it is Ben's.
+
+Cap is `batch_110`; not reached. 713 pending, next firing takes `batch_095`.
+
+## batch_095 — 2026-09-08
+
+**6 tables at six agents. Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.**
+Circuit breaker NOT tripped (0% failed, threshold 30%).
+
+Tables: `malinowska_2021_saq_nurses`, `malinowska_2021_saq_physicians`,
+`mancone_2024_ravlt_intrusion`, `mancone_2024_ravlt_recall`,
+`marcussonclavertz_2019_velten`, `marquessanchez_2023_kidmed`.
+
+**Six agents, second attempt — clean.** The 2026-09-08 kill that produced no
+`batch_095` directory landed BEFORE dispatch wrote anything, which under the
+refined rule is a free failure and a retry at six. This round is that retry and
+it completed with no kill: all six agents finished, the two sibling pairs
+(`malinowska_*`, `mancone_*`) stayed in their lanes, and nothing was salvaged by
+hand. Six is now 3 clean rounds and 1 free failure.
+
+**Gates.** normalize_nulls 0 of 5 normalized · audit_batch 4 PASS / 1 WARN ·
+verify_batch 4 PASS + 1 MISSING(exempt, data_labels) · lint_verification 5 rows
+no problems · irw-validate ok on all 5 · check_provenance clean.
+The single WARN (`mancone_2024_ravlt_recall`, 100% blank item_text and
+option_text) is explained in notes.csv and is NOT an itemtext defect — see below.
+
+**Blocked (1), determinate, retry test NO.** `mancone_2024_ravlt_intrusion`:
+items `INTRU_1..5` are the RAVLT's five learning trials, resp is a raw count of
+intrusion errors. No per-item wording exists — the stimulus is the same 15
+spoken words every trial — and the source is exhausted rather than
+inaccessible: the CC BY PeerJ article prints no word list or instructions, and
+the Europe PMC supplementaryFiles zip holds exactly one data file whose variable
+labels are all bare column names. Row added to `pending_index_notes.csv`.
+Not a rights block. The agent correctly declined to ship a shell table carrying
+only the instrument name (the #1770 referent test).
+
+**Step 5b orchestrator re-checks — all three claims CONFIRMED, numbers exact.**
+Every claim headed for a `public_note` was re-verified independently against
+live data, and each agent's reported figure reproduced:
+- `resp = 6` on both SAQ tables is **"Nie dotyczy" (not applicable), not a sixth
+  agreement level, and should be treated as missing.** `bezp_35` (pharmacist
+  collaboration) carries 193/1133 = 17.03% at resp=6 in nurses against 3.60%
+  for the next item, and 122/729 = 16.74% in physicians against 20 for the next.
+  Both agents reached this independently from the same form; both reproduced.
+- `ALIDES` in `marquessanchez_2023_kidmed` is **stored inverted** relative to
+  KIDMED item 12 ("skips breakfast"): 79.57% sit at resp=1, the third-highest
+  endorsement of 16 items behind ALIAO (98.30%) and ALILAC (84.68%). Not
+  credible for that item; the flipped option_text shipped is correct.
+
+**Notable.**
+- The two `malinowska_*` tables ship **verbatim Polish** rather than an English
+  substitute: the administered SAQ-SF PL questionnaire is published as S1 File of
+  the same group's adaptation paper (PLOS 10.1371/journal.pone.0246340, CC BY),
+  a companion-paper route worth remembering. Both agents found it independently.
+- **Items 24–28 of the SAQ are rated twice** (`bezp_*` = hospital director,
+  `kier_*a` = ward manager). The physicians agent pinned this numerically: the
+  paper's published PM subscale (59.47) only reproduces when both sets are
+  pooled (59.25); either alone gives 45.97 or 73.08. WHICH referent is which
+  rests on the form's `kier. oddziału` label plus column order — inferred, and
+  disclosed as such.
+- **The SAQ is not in `instrument_rights_register.csv` and a `ship` row is
+  owed.** Both agents independently quoted UTHealth CHQS ("You have our
+  permission to use the short form of the Safety Attitudes Questionnaire") with
+  no fee/NC/ND/no-redistribution clause. Left for the triage session — the round
+  protocol does not authorize editing that shared register, and both agents
+  correctly declined for the same reason.
+- `marcussonclavertz_2019_velten` (80 Velten statements, data_labels from the
+  deposit `.sav`) logged a paper-internal inconsistency: Methods list "I'm
+  completely alone" as excluded, yet it is administered as `v16` in the deposit.
+  The `.sav` label is what shipped.
+- Both SAQ tables carry `translation_source=mixed` with a `public_note`; they
+  will owe issues-page entries on upload. check_provenance currently reports the
+  site checkout is on branch `fix/renv-irw-version-string`, so its disclosure
+  check is reported but NOT enforced.
+- Minor: the `malinowska_2021_saq_nurses` agent found files already present in
+  its `.cache/` namespace before it started, and re-fetched and hash-verified
+  everything it relied on. Worth watching, but no evidence of cross-contamination.
+
+Cap (batch_110) not reached.
+
+### batch_095 — killed once pre-dispatch, retried, triaged: 5 shipped, 1 blocked — 2026-09-08
+
+**The refined kill rule got its first test and was right.** The first firing was killed at six agents
+before dispatch wrote anything — six rows claimed, empty batch directory, 18.5G still available at
+rest, which confirms the constraint is the SPIKE of six simultaneous `claude` processes rather than
+the baseline. Recovery cost a `git checkout` and an `rmdir`. Under the rule as originally written
+("killed at six → drop to three") the round size would have been halved to avoid a one-minute cost;
+the rule was refined instead to turn on WHERE the kill lands, the retry ran at six, and all six
+agents finished. **Six now stands at 3 clean rounds and 1 free failure.**
+
+Gates re-run live: `normalize_nulls` 0 of 5, `audit_batch` 4 PASS / 1 WARN, `verify_batch` 4 PASS +
+1 correct exempt, `lint_verification` clean, `irw-validate` ok. All five uploaded (`red_up` 5/5
+row-count verified), stamped and audited. Five entries opened as **datapages/irw#169** (416 entries)
+on a third branch, since #167 merged during the round as #165 had before it.
+
+**The audit WARN is explained and correct.** `mancone_2024_ravlt_recall` is 100% blank `item_text`
+and `option_text`: its five items are five successive immediate-recall trials of *one* 15-word list,
+so no per-item wording exists, and neither the paper nor the `.sav` publishes the list. Step 5c note
+present.
+
+**The KIDMED inversion claim reproduces, and I confirmed it by a stronger route than the round's.**
+The round argued from an implausible endorsement rate — 79.5% at `resp=1` for an item worded "skips
+breakfast". That is suggestive, not decisive. Regressing the study's own KIDMED total (`ALI`) on its
+16 item columns instead recovers the scoring directly: weight **−1 for exactly three items**
+(`ALIH`, `ALIBI`, `ALIGC` — KIDMED's negatively-scored ones) and **+0.988 for `ALIDES`**. Since
+"skips breakfast" is itself a negatively-scored KIDMED item, a +1 contribution proves the stored 1
+is the *healthy* answer. So `resp=1` means the respondent does NOT skip breakfast, exactly as
+claimed, and the public note is right. **Worth keeping as a method**: when a study ships its own
+composite, regressing it on the item columns recovers each item's sign and weight, which settles
+inversion questions that endorsement rates only hint at.
+
+**Added the SAQ `ship` row to `instrument_rights_register.csv` that the round flagged as owed** (26
+rows now). Both agents independently quoted UTHealth CHQS's *"You have our permission to use the
+short form of the Safety Attitudes Questionnaire"* and both correctly declined to write the row
+while siblings were in flight — a shared file is exactly what a six-way round should not race on.
+The row carries the clause, the URL and the page sha256 the agents recorded, so it is auditable.
+
+**A process note on my own checking.** I reported `marcussonclavertz_2019_velten` as having no
+rights record; it has one, in `notes.csv` rather than `provenance.csv`. That is the third time this
+session I have looked in too few places before saying a record was missing — first a case-sensitive
+grep, then a two-sentence paragraph, now the wrong file. **Check both files, case-insensitively,
+before reporting an absence.**
+
+**Left alone deliberately:** the `irw_site` checkout is on `fix/renv-irw-version-string` — another
+session's branch, clean tree. Rather than switch it out from under them, `check_provenance.R` was
+run against `git show main:itemtext_issues.qmd` written to a scratch file. It exits **0** at 406
+entries. That is a better habit than switching branches in a shared checkout and is worth repeating.
+
+Cap is `batch_110`; not reached. 707 pending, next firing takes `batch_096`.
+
+---
+
+## batch_096 — 2026-09-08 18:48–19:05
+
+**6 tables claimed, 4 written / 2 blocked / 0 failed.** Yield 4/6 = 67%. Circuit breaker does not
+fire (0% failed; both no-CSV tables are determinate rights blocks, retry test NO). Second clean
+six-agent round in a row — no kill, no salvage, nothing rate-limited.
+
+| table | outcome | basis |
+|---|---|---|
+| `mascherini_2021_meddiet` | done | `data_labels`, PARTIAL (routes 1+3) |
+| `matarboumosleh_2017_gad2` | done | `data_labels`, PARTIAL (route 9 + code exemption) |
+| `matarboumosleh_2017_phq2` | done | `data_labels`, PARTIAL (route 3 + code exemption) |
+| `matarboumosleh_2017_spai26` | done | `data_labels`, **VERIFIED** (route 1, 26/26 distinct) |
+| `martinezsoto_2024_spiritual_leadership` | blocked | SLT / IISL permission clause — **escalated** |
+| `mavromoustakos_2016_ztpi` | blocked | ZTPI / Zimbardo permission clause — **escalated** |
+
+**Gates all clean:** `normalize_nulls` fixed 1 of 4 (spai26, 105 lines); `audit_batch` 3 PASS 1 WARN;
+`verify_batch` PASS=4; `lint_verification` no problems (all four written tables carry a real
+verification row, so no `NOT_NEEDED` rows were owed); `irw-validate` ok on all four;
+`check_provenance.R` clean at 411 entries — `mascherini`'s `translation_source=study_supplied` is a
+published English rendering by the study's own authors, so it owes no issues-page line.
+
+**Three tables, one source file, no race.** The three `matarboumosleh_2017_*` tables all come from one
+single-sheet `.xls` (S1 Dataset of PLOS ONE 12(8):e0182239). Telling each agent which siblings were
+off-limits worked exactly as intended: they read the same file, wrote only their own, and their
+independent findings corroborated rather than collided — both the `gad2` and `phq2` agents derived
+the same unreversed-sum direction check from the deposit's own composite columns, and both landed on
+PARTIAL for the anchor axis for the same stated reason. The `spai26` agent found the paper's Table 2
+is a **PNG**, invisible to text search, and fetched it through the PLOS figure-image endpoint; it
+prints all 26 items with per-item endorsement n and %, which is why that table is the round's only
+VERIFIED — all 26 (count, percent) pairs are distinct, so the route separates every item from every
+other. Worth remembering: **a PLOS article that looks like it prints no items may print them all in
+a table image.**
+
+**Step 5b — three agent claims re-checked, all three confirmed, two sharpened.**
+
+1. *The audit WARN is a false positive, and the fix would have been the bug.* `audit_batch` flagged
+   `mascherini` for `option_text` equal to the resp value on `legumes`/`fish` at resp=1. The cached
+   S2 File reads verbatim `Never, 1, 1-2, 3-4, 5-6, > 6` — `1` is a **printed frequency band**
+   ("one serving a week"), sitting between "Never" and "1-2". Blanking it per the WARN's advice
+   would have deleted published wording. Explained in `notes.csv` per Step 5c.
+2. *The IISL clause is real, and stronger than the agent thought.* The agent flagged its own block as
+   arguable — possibly "careless drafting on a publications index". Re-checking: the sentence is
+   **visible body text** on both `/articles/` and `/resources/` (not merely a meta tag, which is where
+   a grep first finds it), page sha256 `c796828a…` matching what the agent recorded — and IISL's own
+   `/terms-of-use/` URL **404s**. There is no other terms page, so this is the site's only stated
+   terms, which removes the "it's just index boilerplate" reading. `/resources/` is additionally
+   behind a Register/Sign-in gate.
+3. *The ZTPI clause is real and verbatim*, confirmed in the cached page: "Researchers can use it free
+   with my permission and agreement to share results."
+
+**Two rulings owed by Ben, both of which settle more than one table.**
+- **ZTPI** — "free with my permission and agreement to share results", plus contact-first control on
+  translations. This is the free-but-restricted shape already blocked for HEXACO/TIMSS/PROMIS, and
+  the clause sits on the *same page* that distributes `ZTPI.pdf`, so the SWLS two-pages ruling gives
+  no more-permissive sibling to prefer. The ZTPI recurs in the corpus; one ruling settles all of them.
+- **SLT / IISL** — "the works derived from this site may be cited with proper notation and permission
+  from the author." Genuinely arguable in the other direction: requiring permission to *cite* is not
+  a right anyone holds, and "works derived from this site" may not reach the questionnaire at all.
+  If it doesn't, `martinezsoto_2024_spiritual_leadership` ships immediately — the extraction is fully
+  solved and banked (PLOS S2 File = administered Spanish, S1 File = the authors' English, both
+  numbered 1–26, number-preserving rename in the processing script), so a reversal is a
+  transcription, not a restart.
+
+Both blocks are **effective**: item codes are opaque (`ZTPIQ37`, `p18`), so no wording leaks through
+the response tables — unlike the irw#2101/#2123 case.
+
+**Register rows the agents flagged as owed, added here** (29 rows now): ZTPI `block`, SLT `escalate`,
+MedDietScore `ship`. All three agents correctly declined to write the shared register while siblings
+were in flight — that convention is now working reliably three rounds running.
+
+**A dictionary finding worth acting on separately.** `martinezsoto_2024_spiritual_leadership`'s items
+18–26 are the **spiritual well-being** blocks (Meaning/Calling, Membership; Fry & Nisiewicz 2013), not
+leadership items, so the dictionary Description ("26-item Spiritual Leadership-style scale")
+understates the battery. This also closes the open question in that processing script's own header,
+which recorded that items 22–26 "could not be confirmed": they are Membership items 1–5.
+
+Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
+
+### batch_096 triaged — 4 shipped, 2 blocked on rights — 2026-09-08
+
+Third clean six-agent round, no kill. Gates re-run live: `normalize_nulls` 0 of 4, `audit_batch`
+3 PASS / 1 WARN, `verify_batch` PASS=4, `lint_verification` clean, `irw-validate` ok. All four
+uploaded (`red_up` 4/4 row-count verified), stamped and audited. Four entries added to the open
+datapages/irw#169 (420 entries).
+
+**The audit WARN is a false positive and acting on it would have deleted published wording** — the
+round caught this and I confirmed it. `audit_batch` flags `mascherini_2021_meddiet` for
+"option_text is just the resp value for 2 row(s) (resp: 1) -- unlabeled scale points should be blank,
+not padded with the number". But this is a food-frequency questionnaire whose options are printed
+*bands*, and for `legumes` and `fish` the ladder reads **`Never, 1, 1-2, 3-4, 5-6, > 6`**. The "1"
+is the first band — one serving — sitting in an otherwise complete series. Blanking it per the WARN
+would leave a hole in a published ladder. **A rule that says "a bare number is never a label" is
+wrong for count and frequency items**, and this is the second WARN class this session that is
+correct-but-expected rather than a defect.
+
+**Two rights blocks, both determinate, both needing Ben, and each settling more than one table.**
+
+- **ZTPI** (`mavromoustakos_2016_ztpi`). Zimbardo's page: *"Researchers can use it free with my
+  permission and agreement to share results"*, plus contact-first control over translations. The
+  free-but-conditioned shape already blocked for HEXACO, TIMSS and PROMIS — permission is
+  *conditioned*, which reserves a right. The clause sits on the very page distributing `ZTPI.pdf`,
+  so unlike the SWLS there is no more-permissive sibling page to appeal to. The ZTPI recurs in the
+  corpus, so a ruling here is worth more than one table.
+- **SLT** (`martinezsoto_2024_spiritual_leadership`). IISL: *"the works derived from this site may be
+  cited with proper notation and permission from the author."* Genuinely arguable the other way,
+  because permission to *cite* is not a right anyone holds — citation needs no licence. If Ben rules
+  it does not reach the questionnaire, this ships immediately: PLOS publishes all 26 items in both
+  administered Spanish and the authors' English, so it is a transcription and not a restart. The
+  round found the block *stronger* than its own agent argued — the clause is visible body text on two
+  pages and IISL's `/terms-of-use/` 404s, so it is the site's only stated terms rather than index
+  boilerplate.
+
+**Filled a register gap that three rounds had re-derived by hand.** `instrument_rights_register.csv`
+had **no PHQ/GAD row**, despite the express grant being verified at source for GAD-7 (batch_088),
+PHQ-9 (batch_094) and now GAD-2/PHQ-2. Added as `ship` with the clause verbatim — *"All PHQ, GAD-7
+screeners and translations are downloadable from this website and no permission is required to
+reproduce, translate, display or distribute them."* This is the clearest GRANT in the corpus and the
+exact inverse of the RCBS/MLQ/STAI shape, so it is worth recording rather than re-deriving a fourth
+time. Register now 30 rows: 21 block, 7 ship, 1 ship_with_note, 1 escalate.
+
+**Two disclosure fixes at triage.** `matarboumosleh_2017_gad2` and `_phq2` drew the drafter's generic
+template again ("item text comes from the published original instrument"), replaced with the specific
+truth: the data file's column headers are terse abbreviations that pin *which* item is which but are
+not administered wording, so both item text and anchors are the official form's. And
+`matarboumosleh_2017_spai26` earned no draft but needed an entry more than most — **"SPAI" here is
+the 26-item Smartphone Addiction Inventory, not the Social Phobia and Anxiety Inventory**, a
+different 45-item instrument sharing the abbreviation. A reader assuming the wrong one gets an
+entirely wrong construct. That is the Step 3b check paying off at the disclosure layer.
+
+Recorded, not acted on: `martinezsoto`'s items 18-26 are spiritual *well-being* blocks rather than
+leadership items, so the dictionary Description understates the battery — and that also closes the
+processing script's own open note that items 22-26 "could not be confirmed" (they are Membership 1-5).
+
+Cap is `batch_110`; not reached. 701 pending, next firing takes `batch_097`.
+
+## batch_098 — 2026-09-08 19:41–19:55
+
+**2 tables, 2 written, 0 blocked, 0 failed. Yield 2/2 (100%).** `medvedev_2018_oxh`,
+`medvedev_2018_pan` — both from Medvedev & Landhuis 2018, PeerJ 6:e4903 (PMC5985772), the same
+deposit whose `medvedev_2018_ql` was blocked in batch_097 on the WHOQOL ruling.
+
+**Two agents, and two worked.** Fired ~20 minutes after the 19:10–19:20 kill cluster, which took
+rounds at six and at three. Nothing was killed: both agents ran to completion, all six gates came
+back clean, and the machine sat at 19G available / 4G free throughout — the same reading it showed
+during the failures. So this round is evidence that the cooldown helped, and it is NOT evidence that
+two is the safe number, because the failures happened at every size tried. **The cadence hypothesis
+survives; the agent-count hypothesis is still unsupported.** If a round fired promptly after this one
+fails, the variable is time-since-last-launch and the next thing to check is the harness's own
+threshold, not this prompt.
+
+**Gates, all clean.** normalize_nulls fixed `oxh` (349 lines — null-token normalization only, no
+content change) and left `pan` untouched; audit_batch 2/2 PASS with **no WARNs and no anomalies**, so
+Step 5c had nothing to explain; verify_batch 2/2 PASS; lint_verification 2 rows, no problems;
+`irw-validate` ok on both; check_provenance passes (its 6 `translation_source=mixed` review items are
+pre-existing and touch no table in this batch — neither of ours is translated).
+
+**Both tables ship canonical wording, and both are honestly PARTIAL.** The deposit
+(`peerj-06-4903-s001.xlsx`) labels nothing — bare `OXH1..OXH29` and `PAN1..PAN20`, no cell comments,
+no SPSS labels, and the article prints no OHQ items and only three PANAS adjectives as examples. So
+`text_source=canonical_instrument` and `mapping_basis=reconstructed` for both; there is no
+`data_labels` route available on this source at all.
+
+- **`oxh` is the Oxford Happiness QUESTIONNAIRE, not the Inventory** — a Step 3b catch that matters,
+  because the OHI is a 29-*group* forced-choice instrument scored 0–3 while the live data is 29 items
+  on 1–6. Verified in three ways: keying polarity (the 12 items the data show reverse-keyed are
+  exactly the OHQ canonical reverse set AND exactly the `OXHnR` duplicate columns in the study's own
+  workbook, 29/29 correct, 0 exceptions), published totals (reversed mean/SD/α **4.176 / 0.628 /
+  0.899** against Table 2's 4.18 / 0.637 / 0.903, while the no-reversal rival gives 3.685 / 0.306 /
+  0.463 — which pins the anchor direction too), and a marker item.
+- **`pan` is the original 20-item PANAS**, not PANAS-X (60) or I-PANAS-SF (10). The study's own
+  `PANPOS`/`PANNEG`/`PANNEGR` composites reproduce exactly as raw sums of the canonical blocks —
+  173/173, 172/172, 172/172 in the workbook, and 172/172 recomputed from the LIVE `pan_N` codes. That
+  fixes a partition that is 1 of C(20,10)=184,756.
+- Both are PARTIAL for the same honest reason: **neither route separates an item from its own class.**
+  A permutation inside one OHQ keying direction, or a swap of `pan_1`/`pan_3` inside the positive
+  block, passes every check unchanged. Both public notes say so.
+
+**Step 5b orchestrator check — every source-side claim confirmed verbatim, none corrected.** Pulled
+the PeerJ full text independently. Table 2 reads "Oxford Happiness Questionnaire 180 29 4.18 0.637
+0.903" exactly as quoted; the marker sentence is real and appears twice ("the item 2 in OHQ, which
+correlates with other items at about 0.12", and again in the Discussion at "0.12, below commonly
+acceptable level of 0.3"); the Instruments section states "29 items using six-point Likert scale
+format" for the OHQ and, for the PANAS, "10 adjectives … five-point Likert scale from 'not at all or
+very slightly' = 1 to 'extremely' = 5". One extra corroboration the agents did not claim: Table 2's
+own n for PANAS positive is **173** and for negative **172**, matching the 173/173 and 172/172
+composite row counts exactly. Unlike the `anh_2026` and `baka2023` precedents this section exists
+for, nothing here needed correcting.
+
+**Register filled from 30 to 32 rows, both `ship`, both with a BLANK clause on purpose.** Added
+**OHQ** and **PANAS**. Neither is an express grant like PHQ/GAD — both are the *absence* of any
+locatable clause, recorded as such so a future round does not mistake silence for a verified
+permission. The OHQ row carries two name-adjacent traps worth having written down: the register's
+existing SHS row is Lyubomirsky's 4-item Subjective Happiness Scale and its `happiness` code pattern
+must not be read onto `oxh_*`, and the Oxford Happiness *Inventory* sits in the Mapi/ePROVIDE
+catalogue behind a JS-rendered page that returned no text — an unresolved lead about a *different*
+instrument, not a clause about this one. The PANAS row records the basis three tables shipped on
+earlier today plus this one, and warns to pin the variant before applying it.
+
+Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
+
+### batch_098 triaged — 2 shipped — and the round-size question answered — 2026-09-08
+
+Fired at **two agents after a 7-minute cooldown**, on Ben's suggestion, following three consecutive
+failures. It ran clean. Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero
+WARNs, `verify_batch` PASS=2, `lint_verification` clean, `irw-validate` ok. Both uploaded (`red_up`
+2/2 row-count verified), stamped and audited. Two entries added to the open datapages/irw#169
+(422 entries).
+
+**On round size, and this is the part worth keeping: two changed together, so this round does not
+prove that two is the safe number.** The 19:10-19:20 cluster killed rounds at **six and at three**,
+which already showed the agent count was not the binding variable; and during the cooldown, with
+nothing running, available memory *rose* on its own from 19.7G to 20.6G. So the evidence points at
+**cadence** — something accumulating across rapid successive background launches and clearing on its
+own — rather than at the size of any one dispatch. The extraction round reached the same conclusion
+independently and said so in its own report, which is worth noting because it had no access to my
+reasoning.
+
+**What would actually separate the two variables:** fire the next round promptly at two. If it dies,
+the count is not the variable and the thing to examine is the harness's own threshold, not this
+prompt. That is written into `round_prompt_v1.md` so the next reader does not walk the count down to
+one on a wrong model. **Do not read this round as licence to keep firing back-to-back.**
+
+**The tables themselves are the honest-uncertainty kind.** `medvedev_2018_oxh` (OHQ, 29 items) and
+`medvedev_2018_pan` (PANAS, 20) come from the same PeerJ deposit whose `medvedev_2018_ql` was blocked
+last round on the WHOQOL ruling. The deposit **labels nothing** — bare `OXH1..OXH29` and
+`PAN1..PAN20`, no cell comments, no SPSS labels — so both ship canonical instrument wording assigned
+by item number, and both are correctly **PARTIAL**: the routes pin each item's class (reverse-keyed
+set, valence) but not its position within that class. The issues-page entries say that rather than
+implying the wording came from this study's materials.
+
+**A register distinction worth preserving.** The round added OHQ and PANAS as `ship` with a
+deliberately **blank** `clause` field, and recorded why: neither is an express grant like PHQ/GAD —
+both are the *absence* of any locatable clause. Silence and a grant both end in `ship`, and a
+register that flattened them would let a later round read silence as verified permission. Register
+now 32 rows.
+
+Cap is `batch_110`; not reached. 684 pending, next firing takes `batch_099`.
+
+### batch_099 — 2 tables, 2 shipped, 0 blocked, 0 failed — 2026-09-08
+
+Fired at **two agents**, promptly rather than after a long cooldown, which is the test the previous
+entry asked for. It ran clean: both agents completed, all six Step 4 gates pass, nothing was killed.
+
+**What that does and does not settle about round size.** batch_098 ran two agents after a 7-minute
+cooldown, so size and cadence moved together and neither was isolated. This round holds the cooldown
+short and keeps the size at two, and it survived — which is evidence *against* the pure-cadence story
+in its strongest form, but it is one observation, and the 19:10-19:20 cluster killed rounds at six
+and at three. The honest reading remains: two is a working setting, the binding variable is still not
+identified, and **raising it is Ben's call**. Do not read two clean rounds as licence to go back to
+six. Available memory at dispatch was 19G with 4G free — indistinguishable from the state during the
+kills, which is the whole reason "low memory" is not a usable explanation here.
+
+**Yield 2/2.** Both tables shipped, both with real caveats recorded rather than smoothed over.
+
+`medvedev_2018_sl` — the Satisfaction With Life Scale (SWLS), 5 items x 7 options, 35 rows. This is
+the fourth and last instrument from the Medvedev 2018 PeerJ deposit: `_oxh` and `_pan` shipped in
+batch_098, `_ql` is blocked on the WHOQOL redistribution bar. The deposit labels nothing — bare
+`SL1..SL5`, no cell comments, no SPSS labels — and the article prints no SWLS item, so the wording is
+canonical instrument text assigned by item number, `mapping_basis=reconstructed`, and Step 5b is
+correctly **PARTIAL**. Route 3 reproduces the paper's Table 2 exactly (published n 178, M 4.57, SD
+1.196, alpha 0.871; live 178, 4.571, 1.196, 0.871) and the reversed-anchor rival would give 3.429,
+while the deposit's own `SLTOTAL` equals the raw sum for 178/178 respondents against 8/178 reversed —
+so the anchor direction and raw storage are pinned. What is *not* pinned is order within
+{sl_1,sl_2,sl_3} or within {sl_4,sl_5}: swapping sl_1 and sl_2 leaves mean, SD, alpha and SLTOTAL
+bit-identical. Only sl_5 is singled out, by the counterfactual item's signature (mean 3.98 vs
+4.36-5.00, SD 1.81, 10.7% floor vs 1.1-2.2%). PARTIAL is the right status and the issues-page text
+says so rather than implying the wording came from this study's materials.
+
+**A rights escalation this round did not resolve and is passing on unchanged.** The agent shipped on
+the register's settled `ship` verdict for the SWLS (2026-09-04, "two pages, two terms") rather than
+re-deriving it, and re-fetched both pages live today to confirm they still say what the register
+records. But that register row is marked UNSTABLE with "Escalate before extending", because the same
+rights holder's eddiener.com page is non-commercial-only while the Illinois page grants free use with
+credit. The register's own DIENER-NC row carves the SWLS out, and SWLS tables shipped on that basis
+as recently as batch_080. **The escalation is still owed by whoever owns that ruling.** If it goes
+the other way, this table and roughly six live siblings withdraw together — that is the exposure, and
+it is now written in the provenance note rather than living only in the register.
+
+`megart_tonkovic_2021` — MegaRT, a Croatian lexical-decision megastudy (CROSSDA doi:10.23669/PEVB54,
+CC BY 4.0). 5,208 items x 2 resp levels = 10,416 rows, the largest table this queue has shipped.
+`mapping_basis=data_labels` and legitimately **exempt from Step 5b**: the processing script sets
+`item = string` on the deposit's own stimulus column, so the item code IS the letter string and there
+is no code-to-text step that could be wrong. `verify_batch.R` reports MISSING(exempt), which is
+correct; a NOT_NEEDED row was written into both `verification_merged.csv` and the permanent tracker,
+so lint came back clean with no manufactured ERROR.
+
+**Step 5b orchestrator re-check — the agent's data-side claim confirmed verbatim.** It reported that
+the response direction is settled by the data alone: 3054 of 5208 items have `resp` identically 1 and
+0 items have it identically 0, which is only possible if 1 = correct. Re-run server-side against the
+live table: 3054 and 0 exactly, over 176,964 rows with resp set {0,1}. Unlike the `anh_2026` and
+`baka2023` precedents this step exists for, nothing needed correcting.
+
+**Step 5c — the one WARN is explained, and explaining it ruled out two real defects.** `audit_batch.R`
+warned "row-count anomaly (possible item-code conflation or missingness skew), median=32" on the
+megastudy. Per-item n runs 24-95, heavily clustered (1993 items at n=43, 803 at 25, 793 at 30) with 18
+strings far above. Both rival explanations were tested with server-side aggregates — no export, on a
+table whose two source files are 126MB and 136MB:
+
+- **Item-code conflation** was a live hypothesis, not a formality, because `item` is the bare letter
+  string and the processing script `bind_rows()` two separate experiment files — a string used in
+  both lists would silently merge. It does not happen: `COUNT(DISTINCT itemcov_type)` is 1 for all
+  5208 of 5208 items (2594 pseudoword, 2614 word, 88,482 rows each).
+- **Doubled rows**, the #1842 `dup_id_item` class. 1,121 (id,item) pairs *do* repeat — 1,096 twice,
+  22 three times, 3 four times, 1,149 surplus rows, 0.65% of the table. They are genuine repeated
+  presentations, not duplicates: for 1,119 of the 1,121 the `rt` values are all distinct, and 43
+  pairs disagree on accuracy outright. Only 2 pairs share both rt and resp. Per the duplication
+  diagnostic — zero disagreement means duplication — this is the opposite pattern.
+- ids are already study-prefixed (`B_01`..) across 92 participants, so the `bind_rows()` introduced
+  no id collision either.
+
+No issue filed and no action owed. Recording the negative result matters as much as a positive one
+would have: the next reader of that WARN should not re-derive this from scratch.
+
+**One disclosure owed on upload.** `megart_tonkovic_2021` ships Croatian instructions with an
+IRW-produced English translation (`translation_source=machine_translation`), and the instructions
+themselves come from the study's informed-consent form, not the on-screen E-Prime text — that lives
+in an encrypted `.es3` blob readable only inside E-Prime 3, which is a determinate dead end, not a
+retry. `check_provenance.R` currently counts it as HELD (extracted, gated, never uploaded, so no
+wording ships and no entry is owed); **shipping it stamps it and it immediately owes a line on the
+public issues page.** Do not upload without adding that entry.
+
+Gates: `normalize_nulls` 0 of 2 changed; `audit_batch` PASS=1 WARN=1 (WARN explained above);
+`verify_batch` PASS=1, MISSING(exempt)=1; `lint_verification` 2 rows, no problems; `irw-validate`
+ok on both; `check_provenance` 745 rows across 102 files, 0 IRW-generated tables missing a public
+entry.
+
+Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
+
+### batch_099 triaged — 2 shipped — and the cadence theory is weakened — 2026-09-08
+
+Fired **promptly** at two agents, which is the test batch_098 asked for, and it ran clean. Gates
+re-run live: `normalize_nulls` 0 of 2, `audit_batch` 1 PASS / 1 WARN (diagnosed, below),
+`verify_batch` 1 PASS + 1 correct exempt, `lint_verification` clean, `irw-validate` ok. Both uploaded
+(`red_up` 2/2 row-count verified), stamped and audited. Two entries added to datapages/irw#169
+(424 entries).
+
+**Round size, updated honestly: my cadence explanation is weakened and the count looks more relevant
+than I concluded.** A prompt firing at two succeeded with available memory at 19G — indistinguishable
+from the conditions during the kills. So the pause was not the necessary ingredient. What the record
+now supports is: **two works, six failed twice, three failed once.** The caveat that keeps this from
+being a clean finding is that **three was only ever tried once, inside the bad window**, so it has
+not had a fair trial. Raising it is Ben's call and the fair experiment is a prompt firing at three.
+The binding variable is still unidentified; what is settled is that two is a working setting.
+
+**Wrote the `megart_tonkovic_2021` issues-page entry BEFORE uploading, not after.** That table ships
+IRW-produced English for its Croatian instructions, so `check_provenance.R` treats it as HELD only
+until it ships and the entry is owed the instant it does. Uploading first would have opened a window
+in which the gate is correct to fail. (Against `main` the gate now names it, because the entry sits
+on the unmerged #169 — the same by-design state as `liu_2025_positive_cognition` before #165 merged.)
+
+**The audit WARN was diagnosed, not waved through, and it ruled out two real defect classes.**
+`megart_tonkovic_2021` is 5,208 items × 2 = **10,416 rows, the largest table this queue has shipped**,
+and the audit flagged a row-count anomaly as "possible item-code conflation". Both rival explanations
+were tested server-side, with no export against 126MB + 136MB source files: (a) conflation is ruled
+out — `COUNT(DISTINCT itemcov_type)` is 1 for all 5,208 items, despite the script binding two
+experiment files on a bare string key, which is exactly the shape that *would* conflate; (b) the
+1,121 repeated `(id,item)` pairs are genuine repeated presentations rather than the #1842 doubled-row
+class — 1,119 have all-distinct `rt` and 43 disagree on accuracy. **A doubled upload cannot disagree
+with itself**, so that is decisive.
+
+**Still owed, and still Ben's: the SWLS.** `medvedev_2018_sl` shipped on the register's settled
+`ship` verdict, and the agent re-fetched both pages today to confirm they still say what the register
+records — but that row is marked UNSTABLE for the reason in §C of the handoff: Diener's Illinois page
+grants free use with credit while the same holder's eddiener.com page is non-commercial only. If it
+resolves the other way, this table and roughly six live siblings withdraw together. The register
+carrying an explicit UNSTABLE flag is what stopped this being decided by default here.
+
+Cap is `batch_110`; not reached. 682 pending, next firing takes `batch_100`.
+
+## batch_100 — 2026-09-08T20:15 to 20:32 PDT
+
+**2 tables claimed, 2 written, 0 blocked, 0 failed. Yield 100%.** Both from one source:
+`meloni_2015_child_disab_knowledge` (16 items × 7 resp levels, 112 rows) and
+`meloni_2015_child_ia_frequency` (20 items × 5, 100 rows), both out of Meloni, Federici &
+Dennis (2015), PLOS ONE 10(6):e0128876, CC BY 4.0. Every gate clean on the first pass:
+`normalize_nulls` 0 of 2 changed, `audit_batch` PASS/PASS with **no anomalies and therefore no
+WARNs to explain**, `verify_batch` PASS/PASS, `lint_verification` no problems, `irw-validate` ok
+on both, `check_provenance` exit 0.
+
+**Batch numbering.** `itemtables/batch_201` and `batch_202` exist — they belong to the separate
+#1945/#2128 series that was merged in, not to this queue's run of 0xx rounds — so "highest
+existing + 1" would have jumped this round to 203 and left a 100-gap in the series the cap is
+written against. Took `batch_100`, which is what the previous round entry says the next firing
+takes, and which collides with nothing on disk. The 20x rows sit in the same `queue_state.csv`
+under `batch=batch_202`; they were not touched.
+
+**Two agents worked, cleanly, on the first firing after the cadence cluster.** This is the probe
+the previous entry asked for and it came back positive: two simultaneous `claude` processes, no
+kill, ~6 minutes per agent. It does not identify the binding variable — the record is still
+**two works (now twice), six failed twice, three failed once inside the bad window** — but it does
+mean the setting the previous round settled on is holding rather than having been luck. The fair
+experiment for three is still unrun.
+
+**Both tables ship IRW-adjacent English for an Italian administration, and both say so.** The
+interviews were run in participants' homes in Perugia with 76 Italian primary-school children,
+but neither the article nor S1/S2/S3/S4 contains any Italian wording — the S2 codebook is wholly
+English and the S1 file is an SPSS-exported `.xls` whose only strings are the ASCII column codes.
+So this is `text_source=translated_substitute` with `translation_source=study_supplied`: the
+English is the *authors'* own, not this project's, which is why `check_provenance.R` does not
+class either table as IRW-generated content and neither owes an issues-page line. Both carry a
+`public_note` saying the shipped wording is not what the children heard. That the administration
+was Italian is an inference from the setting; the paper never states a language.
+
+**The S2 codebook is a legacy binary `.doc` and holds the whole instrument.** Recovered with
+`soffice --convert-to txt` — worth recording because the `.s002` supplement looks unreadable and
+is in fact the only place the item wording exists. The S1 data file carries **no** variable or
+value labels, checked by opening it, so there was no `data_labels` route for either table and
+both are `mapping_basis=paper_order` with a Step 5b route recorded.
+
+**Both verifications are PARTIAL, and the PARTIAL is doing real work in both cases.** The item
+*codes* fix the content blocks in both tables (`_F`/`_T` and BELIEF/KNOW/SOCPART; REL/HBODY/
+SOCIAL/GEN), because the processing script only renames columns and never reorders them. What is
+inferred is position *within* a block, from an unnumbered codebook list.
+- `child_disab_knowledge`, routes 6+8: false-keyed block mean 1.923 vs true-keyed 2.858. Does not
+  separate HK4/HK6/HK7 (1.780/1.676/1.757) or HK9/HK13 (2.555/2.539).
+- `child_ia_frequency`, route 8: 7/7 a-priori content predictions hold, p ≈ 1e-4 under a random
+  within-block permutation. Does not separate IA2_HBODY_2/_4/_5 (2.23/2.24/2.23).
+Each row names its own blind spot in the evidence string, which is why both are PARTIAL rather
+than VERIFIED.
+
+**Step 5b, orchestrator re-check: the agents' numbers are right.** Ran `item_stats.R` on
+`meloni_2015_child_disab_knowledge` independently of the agent. HK2 1.30 with 83.8% at the floor
+(the most rejected of all 16), HK3 2.74 as the highest-agreement false item against 2.16 for the
+next, HK16 3.07 > HK15 2.63, and the F/T block means reproduce at ~1.92 vs ~2.86 — every figure
+the agent reported, confirmed against the live data. `item_stats.R` independently flags the same
+near-ties the agent declared unresolvable. No claim in either public note had to be corrected,
+which is not the usual outcome for this step and is worth recording as such.
+
+Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.
+
+### batch_100 triaged — 2 shipped — and a latent cap defect fixed — 2026-09-08
+
+Second consecutive clean round at two agents, fired promptly. Gates re-run live: `normalize_nulls`
+0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch` PASS=2, `lint_verification` clean,
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+added to datapages/irw#169 (426 entries).
+
+**The important part of this round is not the tables — it is a defect the round caught in Step 1's
+numbering rule, which had silently disabled the cap.**
+
+`batch_201` and `batch_202` arrived on this branch by merges from `main`; they belong to the separate
+irw#1945 rights line, not to this queue. Step 1 said *"next batch number = highest existing
+`batch_NNN` + 1"*, so the highest existing directory was **202** and the next round would have
+numbered itself **203**. The Step 0 cap is expressed as *"`batch_110` already exists"* — so a run
+counting 203, 204, 205 creates directories the cap never looks for, and **the cap never fires**. The
+loop would have run past the point a human meant it to stop, unattended, with nothing visibly wrong.
+
+The round noticed and took `batch_100` by hand, which was the right call in the moment. I have fixed
+the rule so the next round does not have to: it now reads *highest existing `batch_0NN` or `batch_1NN`
++ 1, ignoring the `batch_2NN` series entirely*, with the reason written next to it. Verified: under
+the new rule the highest is 100 and the next firing takes 101, and the cap regex still resolves to
+`batch_110`.
+
+**Worth generalising:** this is the second time today that merging another line's work into this
+branch has broken something subtle here — first `pending_index_notes.csv` conflicts (three of them,
+needing two different resolutions), now the batch numbering. The two series share a directory
+namespace and a queue file while being run by different people for different purposes, and neither
+was designed for the other's presence.
+
+**Both tables are the honest-fallback shape.** 76 Italian schoolchildren in Perugia, no Italian
+wording anywhere in the article or its four supplements, so both ship the authors' own English from
+the S2 File codebook — `translated_substitute` / `study_supplied`, not IRW-generated, so neither owes
+a line under the 2026-09-02 ruling. They got entries anyway, because "this is not what the children
+heard" is worth telling a reader regardless of who wrote the English. Both PARTIAL, and each evidence
+string names the specific items its route cannot separate (HK4/HK6/HK7, HK9/HK13,
+IA2_HBODY_2/_4/_5) rather than hedging generally.
+
+**Round size:** two has now run clean twice, once after a cooldown and once fired promptly. Six
+failed twice; three failed once, inside the bad window, and still has not had a fair trial. The
+binding variable remains unidentified.
+
+Cap is `batch_110`; not reached. 668 pending, next firing takes `batch_101`.
+
+## batch_101 — 2026-09-08 20:29–20:45 PDT
+
+**2 tables, 2 agents** (the reduced count set after the 2026-09-08 evening kill cluster).
+Written 2 / blocked 0 / failed 0 — **yield 100%**. Circuit breaker not approached.
+
+Tables: `meloni_2015_child_ia_satisfaction`, `meloni_2015_deq_ce_child`. Both from the
+Meloni/Federici/Dennis 2015 PLOS ONE deposit (doi:10.1371/journal.pone.0128876, CC BY 4.0)
+whose first two tables shipped in batch_100 — the sibling warning was issued explicitly and
+neither agent touched the other's files or the five still-queued `meloni_2015_*` tables.
+
+**Round size.** Two agents ran clean, ~6.5 minutes each, no kill, no memory event. That is
+one data point, not a diagnosis: the failures being probed track *cadence* across repeated
+background launches, and a single clean round at two does not distinguish "two is safe" from
+"the cooldown worked". Per the prompt, if a later round at two fails after a cooldown the
+agent count is not the variable and it goes to a human rather than down to one.
+
+**Gates** (all six, foreground): normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no
+anomalies** (so no WARNs to explain under Step 5c); verify_batch 2 PASS; lint_verification
+2 rows, no problems; `irw-validate` ok on both; `check_provenance.R` 757 rows / 105 files,
+0 IRW-generated tables missing a public entry. Both tables are `mapping_basis=paper_order`,
+so no NOT_NEEDED rows were owed in either file.
+
+**Verification: both PARTIAL, honestly.** `ia_satisfaction` — routes 8+2, 6/6 preference
+predictions hold plus 7/7 on the paired `IA*_TIME` frequency columns (which is what rescues
+an otherwise flat REL block, means 3.09–3.31 at SE ≈0.15); does not separate REL_2/_3,
+HBODY_2/_4/_5, SOCIAL_2/_5, GEN_2/_5. `deq_ce_child` — route 8 on the statement × target
+interaction, 7/7 including DEQ10's largest MD−CD gap (1.22; MD 3.03, CD 1.81) and the paper's
+own Discussion contrast DEQ6 3.21 vs DEQ2 1.49; does not separate statements 8/9 (the same
+two clauses reversed, 2.92/2.89 MD — swapping them would be undetectable), 1/2/3 (all at the
+floor), or 5/7.
+
+**Step 5b orchestrator re-check — one agent claim corrected, two confirmed.**
+- CORRECTED. The `ia_satisfaction` agent reported that of "74 children with a complete block,
+  only 4-5 per block used all five distinct values, and block totals run 6 to 24". Recomputed
+  from the cached S1 deposit (sheet Dataset_S1, Protocol 200–281): **all 76 children are
+  complete on all four blocks; 5/5/6/5 used all five distinct values; totals run 3–24**
+  (REL 5–21, HBODY 3–24, SOCIAL 7–21, GEN 6–24). The finding stands — ties are pervasive and
+  `resp` is a 1–5 liking rating, not the strict ranking the paper describes — but the figures
+  were wrong and are now corrected in `notes.csv` with the re-check recorded inline. The claim
+  never reached `public_note`, so nothing public needed amending.
+- CONFIRMED. The `deq_ce_child` child/parent split is by ROW, not column: the 44 `DEQ_*_CE_*`
+  columns are shared, and the deposit holds 76 child rows (Protocol 200–281) and 76 parent
+  rows (100–199), with per-item n of 76 and 75–76 respectively. Raw values include a `0.0`
+  absent from the live resp set {1, 1.5, 2, 2.5, 3, 3.5, 4}, which accounts for the live
+  per-item n of 73–76 the agent reported.
+- CONFIRMED. The wording basis for choosing the child protocol: S2 prints "the world makes him
+  think it is difficult" only under *Child's Protocol* and "the world makes him things
+  difficult" under *Parent's Protocol*, and the shipped CSV carries the child forms (28 rows
+  each = 4 targets × 7 resp levels).
+
+**Notable, carried in the tables' own notes for triage.** (a) `ia_satisfaction` ships the
+task's full verbatim instructions, which therefore also name the Never/once-a-year/once-a-week
+frequency card belonging to the *sibling* table — flagged in its `public_note`. (b)
+`deq_ce_child` ships the codebook's MASCULINE statement set for the two female-target blocks
+(Maria/SD, Elena/ND), because S2 publishes only the masculine wording; inventing a
+gender-swapped rendering was declined. (c) Both tables are `translated_substitute` /
+`study_supplied`: administration was Italian, and no Italian wording exists anywhere in the
+article or supplements — re-verified this round rather than inherited from batch_100.
+
+Cap (`batch_110`) not reached; 666 tables remain pending, 0 in_progress.
+
+### batch_101 triaged — 2 shipped — 2026-09-08
+
+Third consecutive clean round at two agents. Gates re-run live: `normalize_nulls` 0 of 2,
+`audit_batch` 2/2 PASS with zero WARNs, `verify_batch` PASS=2, `lint_verification` clean,
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+opened as **datapages/irw#172** on a new branch, since #169 merged during the round.
+
+**The round corrected one of its own agents' numbers, and the correction reproduces exactly.** The
+satisfaction agent reported "74 children with a complete block, only 4-5 per block used all five
+distinct values, totals 6 to 24". Recomputed from the cached S1 deposit: **76 complete**, blocks
+using all five distinct values **5 / 5 / 6 / 5** (REL / HBODY / SOCIAL / GEN), block totals **3-24**.
+Every figure the round substituted is right and every figure the agent gave was wrong. It had not
+reached `public_note`, so nothing public needed amending.
+
+**The finding those numbers support survives, and is the interesting part:** only 5 or 6 of 76
+children used all five distinct values within any block, so `resp` is a 1-5 *liking rating* with
+pervasive ties, not the strict ranking the paper describes. That is a statement about the response
+data, arrived at from the item-text side.
+
+**A visible artifact worth disclosing rather than fixing.** `meloni_2015_deq_ce_child` ships the
+codebook's **masculine** statement wording for its two female stimulus targets (Maria, Elena),
+because S2 publishes only the masculine set. The agent declined to invent a gender-swapped rendering.
+That is the right call under the never-substitute rule, but a reader comparing Maria's items against
+the boys' will see identical masculine wording, so the issues-page entry says why. The alternative —
+silently generating feminine forms — would have been IRW writing instrument wording and owed a
+disclosure of its own.
+
+Both PARTIAL, and each evidence string names the items its route cannot separate rather than hedging
+generally: `ia_satisfaction` cannot split REL_2/_3, HBODY_2/_4/_5, SOCIAL_2/_5 or GEN_2/_5;
+`deq_ce_child` cannot split statements 8/9 — literally the same two clauses reversed, at 2.92 against
+2.89, where a swap would be undetectable — nor 1/2/3 or 5/7.
+
+Cap is `batch_110`; not reached. 666 pending, next firing takes `batch_102`.
+
+### batch_102 — killed MID-ROUND at two agents: 1 shipped, 1 quarantined — LOOP STOPPED — 2026-09-08
+
+**Two agents was killed too, mid-round, with 20.4G available. That is the condition this prompt says
+means the agent count is not the variable — so the loop stops here rather than being walked down to
+one.** The record for the evening is now: six ran 3 clean rounds then failed twice; three failed on
+its only attempt; two ran 3 clean rounds then failed. **Every size tried has both worked and failed,
+and every failure happened with 19-20G free.** Whatever the harness is thresholding on, it is not
+this machine's memory and it is not the size of one dispatch.
+
+**Salvaged, not discarded.** `meloni_2015_deq_ce_parent` was complete — `__items.csv`, notes,
+provenance, verification sidecar and verify script all written — so it was merged (explicit filenames,
+never a glob), gated (`audit_batch` PASS, `verify_batch` PASS, `lint_verification` clean,
+`irw-validate` ok), uploaded, stamped and audited. Its entry is on datapages/irw#172 (429 entries).
+
+**`meloni_2015_deq_oe_child` had a 324-row `__items.csv` but NO provenance row, so it was
+quarantined rather than promoted** — `itemtext/quarantine/batch_102/` — and returned to `pending`.
+That is the protocol's own rule and it is worth restating because the file looked complete: 36 items,
+no blank `item_text`, properly terminated. **A well-formed CSV with no provenance is still an orphan**,
+because nothing records where its wording came from or whether the mapping was ever checked.
+
+**Two salvage steps the killed round never reached, both of which fail silently if missed:**
+the verification row had not been merged into `mapping_verification.csv` (appended and stamped by
+hand; the tracker would otherwise have had a shipped table with no row, which `lint_verification`
+only catches inside a batch), and `clear_uploaded_itemtables.py` aborted on `git rm` because
+`batch_102` is untracked, leaving the uploaded CSV in place — removed by hand. **A salvage is not
+finished when the gates pass.**
+
+**Where this leaves the queue:** clean. 0 `in_progress`, tree clean, nothing half-written, 665
+pending, cap `batch_110` not reached. The next firing takes `batch_103` and is a human's call, not a
+retry.
+
+### batch_103 — 2 tables, 2 shipped, 0 blocked, 0 failed — two agents ran clean — 2026-09-09
+
+**The loop was stopped after batch_102 with "the next firing is a human's call"; this round is that
+call.** Two agents, dispatched together at 06:55 with 17G available. **Both survived and both
+delivered a complete file set** — items CSV, notes, provenance, verification sidecar and verify
+script. No kill, no salvage, no reconcile. That does not settle what the harness was thresholding on
+last night: every size tried has both worked and failed, and the only variable that visibly changed
+here is the ~11-hour gap since the 19:20 cluster, which is consistent with the "cadence, not size"
+reading the prompt already records. **One clean round at two agents is evidence, not a diagnosis.**
+
+**Both tables are the Meloni 2015 open-ended pair**, sharing the same 36 S1 columns and split by row
+(Protocol 1xx parents, 2xx children), so the protocol version is the only thing distinguishing their
+text. Each agent was told explicitly which sibling belonged to the other; no file collision occurred.
+
+- `meloni_2015_deq_oe_child` — 324 rows, mapping_basis `paper_order`, PARTIAL.
+- `meloni_2015_deq_oe_parent` — 216 rows, mapping_basis `paper_explicit`, PARTIAL.
+
+Gates: `normalize_nulls` 0 of 2 changed, `audit_batch` **2 PASS with no anomalies**, `verify_batch`
+**2 PASS**, `lint_verification` clean, `irw-validate` ok on both, `check_provenance` ok. Neither
+table owes an issues-page entry: the text is the authors' own English (`translated_substitute` /
+`study_supplied`), not content this project generated. **Nothing was uploaded** — that is Ben's step.
+
+**The quarantined batch_102 file was NOT promoted.** `itemtext/quarantine/batch_102/` held a 324-row
+`deq_oe_child__items.csv` from the killed round with no provenance row. The agent was told it could
+be consulted as a lead only; it re-read the S1 header, re-converted and re-read the S2 section, and
+fetched Fig 1 fresh, then rebuilt the CSV programmatically from the codebook text. Its verification
+adds route 3, which the quarantined script did not have — that script rested on the article's
+qualitative "almost all of the children preferred the individual model" where **Fig 1 supplies six
+exact numbers**. The re-extraction is strictly better than the file it replaces, which is the case
+for quarantining rather than promoting an orphan.
+
+**Step 5b caught one wrong number, and it is worth stating precisely because the script was right and
+the prose was not.** The child agent's route-8 evidence read "Socio-Relational is highest at CD, the
+autistic stimulus". Recomputed from the live table: SRel means are MD 0.105, SD 0.079, CD 0.197,
+**ND 0.250** — the *able-bodied* stimulus is highest. The claim holds only within the three disability
+stimuli. The verify script is unaffected: its check `P4` compares CD against MD and SD alone and is
+correct as coded, so its PASS was honest — **the defect existed only in the permanent evidence
+string**, which is exactly the artifact no gate reads. Corrected in both `verification_merged.csv` and
+`mapping_verification.csv`, and recorded in `notes.csv`. The mapping conclusion is unchanged and the
+status was already PARTIAL.
+
+**Every other number in that agent's evidence reproduces exactly** — Eth+Est+Rel 11 coded mentions
+against Med 650; Env totals CD 0 / MD 6 / SD 6; Med modal at all four stimuli (2.88 / 2.78 / 2.00 /
+0.89); Oth ND 0.461 against 0.079 / 0.000 / 0.013; Idont ND 0.184 against CD 0.171. The parent's
+route-3 figures reproduce too (1.9079 / 1.3947 / 0.1447 against Fig 1's 1.9 / 1.39 / 0.14, max error
+0.0079), and there CD *is* genuinely the SRel maximum (0.461 vs ND 0.303) — the child's error does
+not extend to the sibling.
+
+**The "no Italian in the deposit" claim was re-checked independently and confirmed**, since it is the
+whole basis for `translated_substitute`: the converted S2 codebook's only non-ASCII characters are
+typographic punctuation plus one `<=` and a trademark sign — zero accented characters, zero Italian
+function words — and the S1 `.xls` (152 x 244) has no object-typed column at all and an all-ASCII
+header. The administration was Italian; the deposit publishes only English.
+
+**One thing for triage, flagged rather than fixed.** The two siblings ship the same 36 item codes but
+different `item_text` GRANULARITY: the parent carries the bare category heading ("Ethical Model"),
+the child carries the S2 codebook's full verbatim coding criterion ("Ethical Model: We classified any
+expression in which the individual was considered morally or ethically responsible..."). Both are the
+source's own text and neither is wrong, but the pair reads inconsistently side by side and the child's
+is strictly more informative. **Levelling the parent up is a one-file change using strings already
+transcribed in the child file** — left as Ben's call rather than made unilaterally, because it means
+overwriting a shipped table's text with a sibling agent's transcription.
+
+Beyond that the pair is correctly differentiated and not a duplicate: all 36 `item_text` values differ,
+the instructions differ entirely (parent written self-administration vs child oral interview script),
+and stimulus (iii) differs by one word — parent "Paolo is autistic and **he** does not understand what
+others say", child "...and does not understand...". The other three prompts are identical by design.
+
+Both tables are genuinely unusual and the `public_note` says so: an "item" here is not a question.
+Respondents gave one free-text answer per stimulus and two blind coders counted how many expressions
+fell into each of nine disability-model categories, so `resp` is a count (children 0-8, parents 0-5),
+`section_prompt` holds the question actually asked, `item_text` names the coding category, and
+**`option_text` is blank on every row** — a count has no anchors, and padding a level with its own
+number is forbidden.
+
+Yield 2/2. 663 pending. Cap is `batch_110`; **not reached** — the next firing takes `batch_104` and
+is again a human's call, not an automatic retry.
+
+---
+
+## §2 of the open-decisions list settled — four rights rulings, three live withdrawals (2026-09-09)
+
+Ben ruled all four. Three of them settle a held table and nothing else; the fourth reached live data.
+
+**ZTPI — `mavromoustakos_2016_ztpi`, block CONFIRMED.** Zimbardo's own page — the same page that
+distributes the inventory, so unlike the SWLS there is no more-permissive sibling — says researchers
+may use it *"free with my permission and agreement to share results."* Permission-required, a reserved
+right. Stays held, nothing uploaded, no other ZTPI table in the corpus or queue.
+
+**IISL Spiritual Leadership Survey — `martinezsoto_2024_spiritual_leadership`, RULED BLOCK.** This
+resolved the register's only `escalate` row, and it turned on a reading the round and the first
+summary both got wrong. Both leaned on "requiring permission to *cite* reserves nothing anyone
+holds". Ben's question — *what about the 'permission from author' part?* — exposed the weak step. The
+clause is *"the works derived from this site may be cited with proper notation and permission from the
+author"*: its object is **works derived from this site**, and an item-text reproduction of the 26-item
+survey is exactly such a work. The reserve-a-right test asks whether a right is reserved, not whether
+the holder used the correct verb — and since permission to cite cannot be required at all, the
+sentence is either void as written or loosely aimed at reproduction. **A holder's loose drafting is
+not read in IRW's favour.** IISL also sells the survey with a coding key, so the clause is not
+plausibly about bibliographies. Recorded in the register as the **weakest block** it carries: the
+clause never names the questionnaire, reproduction or distribution. PLOS publishes all 26 items in
+Spanish and English under CC BY, so this ships on one upload if it is ever revisited.
+
+**IGDS9-SF — `ma2026_igds`, RULED BLOCK; where a holder's own pages conflict, the stricter governs.**
+Pontes' instrument page carries a CC BY-NC-ND line plus a permission requirement for developing the
+scale in another language — which is precisely this Chinese administration — while the same site's
+`/tests/` index says permission is not needed for any test. **This is not the SWLS two-pages rule and
+must not be filed as it:** nothing was extracted, so there is no "page the wording came from" for that
+rule to apply to. The new rule is narrower and about the holder, not the extractor.
+
+### CSDT — full scope, and the inconsistency here was real
+
+**Ben ruled the CSDT Limited Use License reaches the whole library, not only wording downloaded from
+selfdeterminationtheory.org.** Deci and Ryan are the originators and the 2026-09-08 originator ruling
+reaches translations and adaptations, so where a given study took its items from does not change the
+answer. He was offered the option of establishing per-table provenance first and declined it, which is
+what makes this a rule rather than three verdicts.
+
+The open-decisions list named one table. Searching the `instrument` column found **three, all live**:
+
+| table | instrument | rows | wording |
+|---|---|---|---|
+| `fivpei_perrig_2023_imi` | Intrinsic Motivation Inventory | 49 | English |
+| `baka2023_bpnsf` | BPNSFS at Work | 168 | Polish, as administered |
+| `aspirations_sonmez_2022` | Aspiration Index | 245 | Turkish, as administered |
+
+**`fivpei_perrig_2023_imi` is why this could not be left.** Its items are the same canonical IMI
+Interest/Enjoyment stems that `makransky_2016_motivation` was blocked for, with the target activity
+substituted — "The game was fun to play" against "This activity was fun to do", "I thought playing the
+game was a boring activity" against "I thought this was a boring activity". So IRW was **blocking an
+incoming table while serving a live one carrying the same instrument.** That is the shape checked for
+on De Jong Gierveld and found not to be real; here it was real, and it was found by searching the
+`instrument` column rather than table names — the fourth time in two days that search has paid.
+
+All three withdrawn from the `irw_text` draft (`tools/withdraw_csdt.py`, dry-run first; 718 → 715,
+exactly the three asserted). All were published in v20.0, so the withdrawals take effect at the next
+release. Only `baka2023_bpnsf` had a provenance row (batch_007) to carry a withdrawal note; the other
+two predate the batch pipeline, so their record is this entry and the register — the same gap noted
+for the PSS sweep. `makransky_2016_motivation` stays blocked, and the register row now covers future
+BPNS, SRQ, PLOC and GCOS tables.
+
+---
+
+## §3 settled — the SWLS blocks, conservatively (2026-09-09)
+
+**Ben ruled: be conservative rather than resolve which of Diener's own pages governs.** The SWLS is
+blocked, eleven live tables are withdrawn, and six queued tables are blocked by the register row.
+
+### Why it was not resolvable on the merits
+
+Diener publishes the SWLS under **three different statements of terms**, all fetched 2026-09-09:
+
+| page | says |
+|---|---|
+| `labs.psychology.illinois.edu/~ediener/SWLS.html` | "copyrighted but you are free to use it without permission or charge" |
+| `labs.psychology.illinois.edu/~ediener/scales.html` | "the scale is **in the public domain**"; "permission is granted here" |
+| `eddiener.com/scales` | "permitted for **non-commercial purposes only**" |
+
+Same holder, same scale, three formulations. The investigation kept finding more ground rather than
+less, which is what the ruling responds to.
+
+**The conservative call also makes the corpus consistent rather than creating a new position.** The
+Flourishing Scale and SPANE were already blocked on the *same* eddiener.com sentence (2026-09-06).
+The SWLS was the outlier, not the casualty. Note the `scales.html` fetch also shows that page
+granting Flourishing and SPANE permissively — so those blocks rest on the same unresolved conflict
+and are now consistent with the SWLS rather than in tension with it.
+
+### What the investigation established, and should not be re-derived
+
+- **The 2026-09-08 originator ruling never contradicted the 2026-09-04 SWLS ruling.** The originator
+  ruling governs originator-vs-*reproducer* ("a CC BY appendix does not launder"). Both SWLS pages
+  are the originator. This was a gap neither ruling covered — originator vs. himself — not a conflict.
+- **Provenance splits the tables, and would have mattered had the merits been reached.** Seven took
+  `SWLS_English.doc` from the Illinois page, citing both pages: for those, source and grant are the
+  same act and no page-shopping is involved. Six took the wording from a CC BY deposit or journal
+  (`campos_2023_swls` from Diener's own 1985 article; `liu_2018_swls`, `kern_2021_life_satisfaction`,
+  `altahla_2024_swls`, `alsecypiamh_wu_2022_swls`, `eammi_grahe_2018_swb`) and never accepted either
+  offer, so they could not claim the better one.
+- **A holder publishing under two sets of terms has granted both** — taking the permissive grant is
+  accepting an offer that was made, not forum-shopping. That disposes of the weakness accepted on
+  2026-09-04, but it only helps a taker who actually took from the permissive page.
+
+### Scope, and how it was found
+
+**A name search found 6; sweeping `item_text` found 11.** `eammi_grahe_2018_swb`,
+`kern_2021_life_satisfaction` and `medvedev_2018_sl` carry the SWLS without saying so in the name.
+
+Ten were withdrawn whole (`tools/withdraw_swls.py`; `irw_text` 715 → 709, `irw_text_2` 285 → 281,
+exactly the targets, keep-set asserted). **`eammi_grahe_2018_swb` was a PARTIAL withdrawal, 42 → 7
+rows**, because it pools the SWLS with `swb_6` "I have high self-esteem", which nothing restricts —
+the second partial after `ecps_sahm_2024_stress`. Downloaded with `table.download(format='csv')`, not
+`to_pandas_dataframe()` (Python-pkg#5), filtered, and re-uploaded with an explicit
+`red_up --dataset irw_text`; red_up reported UPDATE/replaces and verified 7 rows. Its retained rows
+carry `instrument` = "Subjective Well-Being", not an SWLS label, so nothing stale was left behind.
+
+### The matcher under-counted again, and nearly caused two mistakes
+
+Three tables first read as MIXED and were not — their "non-SWLS" items were SWLS items with wording
+variants: **"In most ways, my life is close to my ideal"** (added comma), **"I am satisfied with
+life"** (no "my"), **"In the most ways my life is close to my ideal"** (added "the"). Had those been
+believed, three tables would have been given needless partial treatment. Separately, an early read
+showed two tables missing SWLS item 1; they were not — the query output was piped through
+`grep -v "it/s"` to strip a progress bar, and **the bar shares a line with the first row of output,
+so the filter deleted a data row.** Third instance today of a filter quietly removing evidence.
+
+Six queued tables are blocked by the register row and must not be extracted: `park_2021_swls`,
+`ptacek2023_swls`, `rahm_2017_swls`, `rzeszutek_2020_swls`, `wu2021_swls`, `qi_2025_swls`.

@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"mascherini_2021_meddiet","WARN",11,11,TRUE,TRUE,FALSE,TRUE,0,0,"option_text is just the resp value for 2 row(s) (resp: 1) -- unlabeled scale points should be blank, not padded with the number"
+"matarboumosleh_2017_gad2","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""
+"matarboumosleh_2017_phq2","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""
+"matarboumosleh_2017_spai26","PASS",26,26,TRUE,TRUE,FALSE,TRUE,0,0,""
