@@ -11457,3 +11457,59 @@ a line on the public issues page at upload time. It is HELD now, so nothing is o
 **Stale line corrected:** the batch_092 entry closes "Cap is `batch_095`". The cap was raised to
 `batch_110` in ab4413a, which is what Step 0 now says and what this round read. Cap not reached.
 719 pending; next firing takes `batch_094`.
+
+### batch_093 triaged — 5 shipped, 1 blocked — FIRST ROUND AT SIX AGENTS — 2026-09-08
+
+**Ben doubled the round size to six ("as i won't be working as much") and the first round at that
+size ran clean: 5 written, 1 blocked, 0 failed, no kill, no retry.** Baseline before dispatch was
+17G available — the figure the raise was authorised against, not the 11.6G that killed `batch_091`
+twice. `round_prompt_v1.md` changed in **two** places, and the second is the one that binds: Step 2
+carries the visible agent count, but Step 1's "take the first N pending rows" is the actual claim,
+and changing only the former would have claimed three tables and dispatched six agents. The cap also
+went `batch_095` → `batch_110`, since at six a round the old cap was three rounds away; the
+load-bearing `grep -P` in `run_round.sh` was re-run against the edited line and still resolves.
+
+Gates re-run live: `normalize_nulls` 0 of 5, `audit_batch` 5/5 PASS with zero WARNs, `verify_batch`
+2 PASS + 3 correct exempt, `lint_verification` clean, `irw-validate` ok. All five uploaded (`red_up`
+5/5 row-count verified), stamped and audited. Four entries added to PR datapages/irw#165 (405).
+
+**The load-bearing claim was `makowska_2023_pdts`, and it reproduces decisively.** The paper's
+Table 2 numbers "irritated" as item 2; the deposited `.sav` labels `PDTS2` as *no control*. Checked
+the deposit directly and the labels are **self-numbering** — `PDTS2. How often have you felt that you
+had no control…`, `PDTS3. …felt irritated…` — with the shipped text matching each exactly. A variable
+label that carries its own item number is about as direct a tie as this pipeline ever gets, so
+following the `.sav` is right and the paper is the outlier. PARTIAL is still the honest status,
+because the corroborating correlation margin is only ~0.05, and the issues-page entry warns readers
+comparing against the paper's numbering that PDTS2/PDTS3 may be interchanged.
+
+**Two disclosure corrections at triage.** `machado_2020_cat_separation` drew the drafter's *generic
+template* sentence ("administered in another language and only an English version could be
+recovered"), which is vague where the truth is specific — Portuguese administration, the authors' own
+English is the only published wording, and the translated columns are empty because no second version
+exists rather than because one is missing. And `makowska_2023_pdts` needed a paragraph the draft
+omitted: its `translation_source=mixed` is mixed precisely because **IRW wrote the English for the
+Polish response anchors**, the study's own renderings being inconsistent across its files. That is
+IRW-generated content and owes a line under the 2026-09-02 ruling. The round flagged it before
+`check_provenance.R` would have.
+
+**The `no`-vs-empty trap bit the stamper, and the guard caught it.** Three of the five
+`mapping_verification.csv` rows carry `uploaded="no"` rather than `""` — `no`, `NA`, empty and
+`unrecorded` all mean unstamped, which the pre-flight check knows but my stamper did not. It
+asserted out before writing. A second bug surfaced in the same attempt: I detected each row's
+quoting by testing whether `"<table>"` appeared *anywhere in the file*, and
+`machado_2020_cat_separation` appears quoted **inside another row's evidence prose**. Convention has
+to be detected at the ROW START, and "unstamped" has to mean all four spellings. **Third stamper
+shape in five batches** — the durable lesson stands: detect per record, never assume a file-wide
+convention.
+
+**Rights: all six records apply the current test**, which is the first round where that was true
+without a triage override — SKILL.md's rewrite was committed between batch_092 and this round. The
+PSS-4 block cites the register verdict rather than re-deriving a clause, which is exactly what the
+register is for. SABAS got a `ship` row added by the round orchestrator; `machado`, `majeed` and
+`makai` are the studies' own instruments and need none.
+
+Recorded, not acted on: two source defects that touch no shipped table — the PDTS paper's Table 4
+(labelled Study 2) reports Study 1's general indicator, and the SABAS preprint's prose contradicts
+its own Table 6 twice.
+
+Cap is `batch_110`; not reached. 719 pending, next firing takes `batch_094`.
