@@ -11620,3 +11620,79 @@ whether CSDT's terms actually reach the separately-distributed BPNSFS — that i
 ruling, and it is Ben's.
 
 Cap is `batch_110`; not reached. 713 pending, next firing takes `batch_095`.
+
+## batch_095 — 2026-09-08
+
+**6 tables at six agents. Written 5 / blocked 1 / failed 0. Yield 5/6 = 83%.**
+Circuit breaker NOT tripped (0% failed, threshold 30%).
+
+Tables: `malinowska_2021_saq_nurses`, `malinowska_2021_saq_physicians`,
+`mancone_2024_ravlt_intrusion`, `mancone_2024_ravlt_recall`,
+`marcussonclavertz_2019_velten`, `marquessanchez_2023_kidmed`.
+
+**Six agents, second attempt — clean.** The 2026-09-08 kill that produced no
+`batch_095` directory landed BEFORE dispatch wrote anything, which under the
+refined rule is a free failure and a retry at six. This round is that retry and
+it completed with no kill: all six agents finished, the two sibling pairs
+(`malinowska_*`, `mancone_*`) stayed in their lanes, and nothing was salvaged by
+hand. Six is now 3 clean rounds and 1 free failure.
+
+**Gates.** normalize_nulls 0 of 5 normalized · audit_batch 4 PASS / 1 WARN ·
+verify_batch 4 PASS + 1 MISSING(exempt, data_labels) · lint_verification 5 rows
+no problems · irw-validate ok on all 5 · check_provenance clean.
+The single WARN (`mancone_2024_ravlt_recall`, 100% blank item_text and
+option_text) is explained in notes.csv and is NOT an itemtext defect — see below.
+
+**Blocked (1), determinate, retry test NO.** `mancone_2024_ravlt_intrusion`:
+items `INTRU_1..5` are the RAVLT's five learning trials, resp is a raw count of
+intrusion errors. No per-item wording exists — the stimulus is the same 15
+spoken words every trial — and the source is exhausted rather than
+inaccessible: the CC BY PeerJ article prints no word list or instructions, and
+the Europe PMC supplementaryFiles zip holds exactly one data file whose variable
+labels are all bare column names. Row added to `pending_index_notes.csv`.
+Not a rights block. The agent correctly declined to ship a shell table carrying
+only the instrument name (the #1770 referent test).
+
+**Step 5b orchestrator re-checks — all three claims CONFIRMED, numbers exact.**
+Every claim headed for a `public_note` was re-verified independently against
+live data, and each agent's reported figure reproduced:
+- `resp = 6` on both SAQ tables is **"Nie dotyczy" (not applicable), not a sixth
+  agreement level, and should be treated as missing.** `bezp_35` (pharmacist
+  collaboration) carries 193/1133 = 17.03% at resp=6 in nurses against 3.60%
+  for the next item, and 122/729 = 16.74% in physicians against 20 for the next.
+  Both agents reached this independently from the same form; both reproduced.
+- `ALIDES` in `marquessanchez_2023_kidmed` is **stored inverted** relative to
+  KIDMED item 12 ("skips breakfast"): 79.57% sit at resp=1, the third-highest
+  endorsement of 16 items behind ALIAO (98.30%) and ALILAC (84.68%). Not
+  credible for that item; the flipped option_text shipped is correct.
+
+**Notable.**
+- The two `malinowska_*` tables ship **verbatim Polish** rather than an English
+  substitute: the administered SAQ-SF PL questionnaire is published as S1 File of
+  the same group's adaptation paper (PLOS 10.1371/journal.pone.0246340, CC BY),
+  a companion-paper route worth remembering. Both agents found it independently.
+- **Items 24–28 of the SAQ are rated twice** (`bezp_*` = hospital director,
+  `kier_*a` = ward manager). The physicians agent pinned this numerically: the
+  paper's published PM subscale (59.47) only reproduces when both sets are
+  pooled (59.25); either alone gives 45.97 or 73.08. WHICH referent is which
+  rests on the form's `kier. oddziału` label plus column order — inferred, and
+  disclosed as such.
+- **The SAQ is not in `instrument_rights_register.csv` and a `ship` row is
+  owed.** Both agents independently quoted UTHealth CHQS ("You have our
+  permission to use the short form of the Safety Attitudes Questionnaire") with
+  no fee/NC/ND/no-redistribution clause. Left for the triage session — the round
+  protocol does not authorize editing that shared register, and both agents
+  correctly declined for the same reason.
+- `marcussonclavertz_2019_velten` (80 Velten statements, data_labels from the
+  deposit `.sav`) logged a paper-internal inconsistency: Methods list "I'm
+  completely alone" as excluded, yet it is administered as `v16` in the deposit.
+  The `.sav` label is what shipped.
+- Both SAQ tables carry `translation_source=mixed` with a `public_note`; they
+  will owe issues-page entries on upload. check_provenance currently reports the
+  site checkout is on branch `fix/renv-irw-version-string`, so its disclosure
+  check is reported but NOT enforced.
+- Minor: the `malinowska_2021_saq_nurses` agent found files already present in
+  its `.cache/` namespace before it started, and re-fetched and hash-verified
+  everything it relied on. Worth watching, but no evidence of cross-contamination.
+
+Cap (batch_110) not reached.
