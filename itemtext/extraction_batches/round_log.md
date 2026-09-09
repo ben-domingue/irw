@@ -11696,3 +11696,53 @@ live data, and each agent's reported figure reproduced:
   everything it relied on. Worth watching, but no evidence of cross-contamination.
 
 Cap (batch_110) not reached.
+
+### batch_095 — killed once pre-dispatch, retried, triaged: 5 shipped, 1 blocked — 2026-09-08
+
+**The refined kill rule got its first test and was right.** The first firing was killed at six agents
+before dispatch wrote anything — six rows claimed, empty batch directory, 18.5G still available at
+rest, which confirms the constraint is the SPIKE of six simultaneous `claude` processes rather than
+the baseline. Recovery cost a `git checkout` and an `rmdir`. Under the rule as originally written
+("killed at six → drop to three") the round size would have been halved to avoid a one-minute cost;
+the rule was refined instead to turn on WHERE the kill lands, the retry ran at six, and all six
+agents finished. **Six now stands at 3 clean rounds and 1 free failure.**
+
+Gates re-run live: `normalize_nulls` 0 of 5, `audit_batch` 4 PASS / 1 WARN, `verify_batch` 4 PASS +
+1 correct exempt, `lint_verification` clean, `irw-validate` ok. All five uploaded (`red_up` 5/5
+row-count verified), stamped and audited. Five entries opened as **datapages/irw#169** (416 entries)
+on a third branch, since #167 merged during the round as #165 had before it.
+
+**The audit WARN is explained and correct.** `mancone_2024_ravlt_recall` is 100% blank `item_text`
+and `option_text`: its five items are five successive immediate-recall trials of *one* 15-word list,
+so no per-item wording exists, and neither the paper nor the `.sav` publishes the list. Step 5c note
+present.
+
+**The KIDMED inversion claim reproduces, and I confirmed it by a stronger route than the round's.**
+The round argued from an implausible endorsement rate — 79.5% at `resp=1` for an item worded "skips
+breakfast". That is suggestive, not decisive. Regressing the study's own KIDMED total (`ALI`) on its
+16 item columns instead recovers the scoring directly: weight **−1 for exactly three items**
+(`ALIH`, `ALIBI`, `ALIGC` — KIDMED's negatively-scored ones) and **+0.988 for `ALIDES`**. Since
+"skips breakfast" is itself a negatively-scored KIDMED item, a +1 contribution proves the stored 1
+is the *healthy* answer. So `resp=1` means the respondent does NOT skip breakfast, exactly as
+claimed, and the public note is right. **Worth keeping as a method**: when a study ships its own
+composite, regressing it on the item columns recovers each item's sign and weight, which settles
+inversion questions that endorsement rates only hint at.
+
+**Added the SAQ `ship` row to `instrument_rights_register.csv` that the round flagged as owed** (26
+rows now). Both agents independently quoted UTHealth CHQS's *"You have our permission to use the
+short form of the Safety Attitudes Questionnaire"* and both correctly declined to write the row
+while siblings were in flight — a shared file is exactly what a six-way round should not race on.
+The row carries the clause, the URL and the page sha256 the agents recorded, so it is auditable.
+
+**A process note on my own checking.** I reported `marcussonclavertz_2019_velten` as having no
+rights record; it has one, in `notes.csv` rather than `provenance.csv`. That is the third time this
+session I have looked in too few places before saying a record was missing — first a case-sensitive
+grep, then a two-sentence paragraph, now the wrong file. **Check both files, case-insensitively,
+before reporting an absence.**
+
+**Left alone deliberately:** the `irw_site` checkout is on `fix/renv-irw-version-string` — another
+session's branch, clean tree. Rather than switch it out from under them, `check_provenance.R` was
+run against `git show main:itemtext_issues.qmd` written to a scratch file. It exits **0** at 406
+entries. That is a better habit than switching branches in a shared checkout and is worth repeating.
+
+Cap is `batch_110`; not reached. 707 pending, next firing takes `batch_096`.
