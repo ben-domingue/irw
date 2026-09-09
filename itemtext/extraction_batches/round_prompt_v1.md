@@ -53,7 +53,7 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 - Next batch number = highest existing itemtables/batch_NNN + 1, zero-padded to 3 digits.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 6 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -69,7 +69,21 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**SIX agents per round — raised from three on 2026-09-08 by Ben, "as i won't be working as much".**
+**THREE agents per round — dropped back from six on 2026-09-08, under this section's own rule.**
+Ben raised it to six that evening ("as i won't be working as much") and six ran three clean rounds.
+It then failed three firings in a row: `batch_097` was killed pre-dispatch, killed again on retry,
+and the second kill landed **mid-round** with three files written — which is the case this section
+says to drop on. The salvage cost real work: one determinate rights block was recoverable, one verify
+script was orphaned, and four tables went back to `pending` having been claimed twice.
+
+**The constraint is not memory scarcity.** Every one of those kills happened with **19G+ available**
+and no swap pressure. It is the dispatch SPIKE: Step 2 sends every agent in one message, so six
+`claude` processes plus their R and Python children appear within seconds, and that transient is what
+the harness kills on. More free memory does not help; fewer simultaneous launches does.
+
+Six is therefore not a safe unattended setting on this machine even when it is idle. Raising it again
+is Ben's call, and the honest summary to give him is: **six delivered 3 clean rounds out of 6
+firings, at a cost of two free reconciles and one mid-round salvage.**
 This is the idle-machine setting the cut below anticipated, not a reversal of its reasoning. It goes
 back to three the moment the laptop is in active use again; that is Ben's call, not a round's.
 
