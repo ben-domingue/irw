@@ -12635,3 +12635,59 @@ Flagging it because it sits near that line, not because a gate objected.
 than the table.
 
 Cap (`batch_110`) not reached; next firing picks up `batch_105`.
+
+## batch_105 — 2026-09-09 23:02Z
+
+4 tables, 4 agents (one per table; four-agent setting per Ben's 2026-09-09 call).
+**Written 4 / blocked 0 / failed 0 — yield 4/4 (100%).** No kills, no retries, no
+rate limiting; all four agents ran to completion in 5–8 min.
+
+- `menaldi_2023_brief_cope` — done. 112 rows (28 items × 4 options), Indonesian,
+  `data_labels`. PLOS S1 workbook pairs each coded column with a left-neighbour
+  label column whose header is the administered wording.
+- `mendes_2019_snycq` — done. 1,660 rows, 12 items × per-item VAS levels (170
+  continuous 0–100 levels), `data_labels` from the deposit's BIDS `SNYCQ.json`.
+- `meng_2017_referent_assignment` — done. 10 rows (5 items × 2), Chinese,
+  `paper_explicit`, VERIFIED route 1.
+- `merlo2025_eet` — done. 174 rows (29 items × 6), Italian, `data_labels`,
+  VERIFIED routes 1+7+8.
+
+Gates: normalize_nulls fixed 2 files; audit_batch **4/4 PASS, no anomalies** (so
+no WARNs to explain under Step 5c); verify_batch 2 PASS + 2 MISSING(exempt);
+lint_verification 4 rows no problems; `irw-validate` ok on all four;
+`check_provenance.R` exit 0 (its 1 undisclosed-English table,
+`aspirations_sonmez_2022`, is pre-existing and not from this round).
+
+**Step 5b orchestrator re-checks — all four agent claims reproduced exactly**,
+independently re-fetched from source rather than taken on report:
+- merlo Step 3b mismatch CONFIRMED from the deposit dictionary
+  (ndownloader files/58188718): all 29 `EET_nn` carry the stem "Con che frequenza
+  di solito consumi ... a cena o prima di andare a dormire:" + a food; `TECH_*` is
+  a separate 84-line block. Deposit data: N=1065, AGE mean 15.95 SD 1.46 range
+  14–19; EET_17 counts 1034/5/10/3/2/11; EET_29 mean 3.067606, EET_01 1.628169 —
+  identical to the agent's figures to 6 dp.
+- menaldi crosstabs CONFIRMED from a fresh PLOS `.s001` download: strictly
+  diagonal, SD_1 20/207/117/44 and H_2 153/190/38/7, fixing Tidak pernah=1 …
+  Sangat sering=4.
+- mendes CONFIRMED from a fresh Dataverse fetch of `SNYCQ.json`: 86 entries,
+  English wording in `Description`, **0 German characters**, the `surrpundings`
+  typo and the "future events.." double period all present as described.
+
+**Two items for triage (neither blocks the round):**
+1. **Dictionary correction owed — `merlo2025_eet`.** The IRW Description
+   ("Educational Engagement with Technology scale — EET (29 items); Italian
+   university students") is wrong in both halves: it is the study's **evening
+   eating behaviour** questionnaire (28 tryptophan-rich foods + 1 attention
+   check), administered to **secondary school** students (mean age 15.95). The
+   error traces to a comment in `data/merlo2025_engagement.py` that itself says
+   "EET = Educational Engagement with Technology". Suggested replacement
+   Description is in `notes.csv`. **`EET_17` is not a food** — it is an embedded
+   attention check ("Seleziona la risposta Mai"), 1034/1065 compliant, and should
+   be dropped from any diet score pooling the other 28 items.
+2. **Open judgement call — `mendes_2019_snycq` `language`.** English wording ships
+   with `language=German`, inferred from the 194 native German-speaking MPI-CBS
+   Leipzig participants. No German exists anywhere in the deposit or article, and
+   the source does not settle whether the Short-NYC-Q was administered in English;
+   if it was, `language=German` is the wrong call. Disclosed in `notes.csv`.
+
+Cap not reached (batch_140).
