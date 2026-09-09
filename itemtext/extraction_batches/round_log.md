@@ -11323,3 +11323,48 @@ Canonical item 6's *"your job/studies"* also reflects the original scale rather 
 primary-school respondents read.
 
 Cap is `batch_095`; batch_092 is not it, so rounds continue.
+
+### batch_092 triaged — 2 shipped, 1 blocked pending Ben — 2026-09-08
+
+Gates re-run live: `normalize_nulls` 0 of 2, `audit_batch` 2/2 PASS with zero WARNs, `verify_batch`
+PASS=2, `lint_verification` 0 ERROR / 1 WARN (on the blocked row, which wrote no CSV),
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+added to PR datapages/irw#165 (401 entries).
+
+**First round triaged with the register, and I used it the way the ECR failure says to** — checked
+`instrument_rights_register.csv` before reading any source page. BSMAS carries a `ship` row
+("attribution is not a reservation"), IGDS9-SF a `block` row marked NOT SETTLED. The extracting agent
+had reported that the register "does not exist in this worktree", which was true when it started and
+false by the time it finished; the round orchestrator ran the check the agent couldn't and wrote both
+determinations back. That is the mechanism working in its first round.
+
+**BSMAS confirmed independently rather than taken from the row.** The only condition locatable
+anywhere is Salford PsyTech's "Ensure you cite the author(s)". Attribution obliges citation and
+reserves nothing — no fee, permission, non-commercial, no-derivatives or redistribution clause — so
+it ships under the reserve-a-right test. The Bergen originator page for the scale 404s, so this is a
+silence case, and silence is still permission.
+
+**`ma2026_igds` blocked, and it is a genuine contradiction rather than a clear clause.** Pontes'
+instrument page carries *"© 2026 Dr. Halley Pontes. This work is licensed under CC BY NC ND 4.0"*
+plus a permission-required clause for developing it in another language — which is exactly this
+table, a Chinese administration. But the same site's `/tests/` index says *"you do not need to
+contact me to ask for permission to use any of the tests"*, and the CC line is a **site-wide Hugo
+Blox theme footer**, so whether it scopes to the instrument is genuinely open. Blocked pending Ben,
+erring toward not having things. Cost is low either way: only canonical English was ever shippable,
+and `igds1..igds9` carry no wording, so nothing leaks through the response table — unlike
+`luu_2024_stai6`.
+
+**Checked the claim most likely to mislabel content, and it holds.** The round warned that in the
+video codes `PD` is *tail docking* and `PT` is *teeth clipping* — the opposite of the obvious
+mnemonic. The source S1 document labels them outright: "PD Piglet Tail Docking" and "PT Piglet Teeth
+Clipping", and the shipped `section_prompt` for each matches. So the assignment is read, not
+inferred. Worth knowing for the siblings, because a table whose `item_text` is only an emotion name
+puts *all* of its content in `section_prompt`, where a code swap would be invisible to every gate.
+
+**A transient gate failure worth recording, because the protocol would have mishandled it.**
+`verify_batch.R`'s first run reported `ly_2021_animal_empathy` as NO VERDICT; direct execution gave
+`VERDICT: PASS`, and two further batch runs both gave `PASS=2`, as did my own re-run at triage.
+Step 5 says to classify a NO VERDICT as `failed`, which here would have been wrong. **A single
+NO VERDICT from a batch runner is worth re-running before it becomes a status.**
+
+Cap is `batch_095`; not reached. 727 pending, next firing takes `batch_093`.
