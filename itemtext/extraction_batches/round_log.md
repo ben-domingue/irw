@@ -12347,3 +12347,81 @@ finished when the gates pass.**
 **Where this leaves the queue:** clean. 0 `in_progress`, tree clean, nothing half-written, 665
 pending, cap `batch_110` not reached. The next firing takes `batch_103` and is a human's call, not a
 retry.
+
+### batch_103 — 2 tables, 2 shipped, 0 blocked, 0 failed — two agents ran clean — 2026-09-09
+
+**The loop was stopped after batch_102 with "the next firing is a human's call"; this round is that
+call.** Two agents, dispatched together at 06:55 with 17G available. **Both survived and both
+delivered a complete file set** — items CSV, notes, provenance, verification sidecar and verify
+script. No kill, no salvage, no reconcile. That does not settle what the harness was thresholding on
+last night: every size tried has both worked and failed, and the only variable that visibly changed
+here is the ~11-hour gap since the 19:20 cluster, which is consistent with the "cadence, not size"
+reading the prompt already records. **One clean round at two agents is evidence, not a diagnosis.**
+
+**Both tables are the Meloni 2015 open-ended pair**, sharing the same 36 S1 columns and split by row
+(Protocol 1xx parents, 2xx children), so the protocol version is the only thing distinguishing their
+text. Each agent was told explicitly which sibling belonged to the other; no file collision occurred.
+
+- `meloni_2015_deq_oe_child` — 324 rows, mapping_basis `paper_order`, PARTIAL.
+- `meloni_2015_deq_oe_parent` — 216 rows, mapping_basis `paper_explicit`, PARTIAL.
+
+Gates: `normalize_nulls` 0 of 2 changed, `audit_batch` **2 PASS with no anomalies**, `verify_batch`
+**2 PASS**, `lint_verification` clean, `irw-validate` ok on both, `check_provenance` ok. Neither
+table owes an issues-page entry: the text is the authors' own English (`translated_substitute` /
+`study_supplied`), not content this project generated. **Nothing was uploaded** — that is Ben's step.
+
+**The quarantined batch_102 file was NOT promoted.** `itemtext/quarantine/batch_102/` held a 324-row
+`deq_oe_child__items.csv` from the killed round with no provenance row. The agent was told it could
+be consulted as a lead only; it re-read the S1 header, re-converted and re-read the S2 section, and
+fetched Fig 1 fresh, then rebuilt the CSV programmatically from the codebook text. Its verification
+adds route 3, which the quarantined script did not have — that script rested on the article's
+qualitative "almost all of the children preferred the individual model" where **Fig 1 supplies six
+exact numbers**. The re-extraction is strictly better than the file it replaces, which is the case
+for quarantining rather than promoting an orphan.
+
+**Step 5b caught one wrong number, and it is worth stating precisely because the script was right and
+the prose was not.** The child agent's route-8 evidence read "Socio-Relational is highest at CD, the
+autistic stimulus". Recomputed from the live table: SRel means are MD 0.105, SD 0.079, CD 0.197,
+**ND 0.250** — the *able-bodied* stimulus is highest. The claim holds only within the three disability
+stimuli. The verify script is unaffected: its check `P4` compares CD against MD and SD alone and is
+correct as coded, so its PASS was honest — **the defect existed only in the permanent evidence
+string**, which is exactly the artifact no gate reads. Corrected in both `verification_merged.csv` and
+`mapping_verification.csv`, and recorded in `notes.csv`. The mapping conclusion is unchanged and the
+status was already PARTIAL.
+
+**Every other number in that agent's evidence reproduces exactly** — Eth+Est+Rel 11 coded mentions
+against Med 650; Env totals CD 0 / MD 6 / SD 6; Med modal at all four stimuli (2.88 / 2.78 / 2.00 /
+0.89); Oth ND 0.461 against 0.079 / 0.000 / 0.013; Idont ND 0.184 against CD 0.171. The parent's
+route-3 figures reproduce too (1.9079 / 1.3947 / 0.1447 against Fig 1's 1.9 / 1.39 / 0.14, max error
+0.0079), and there CD *is* genuinely the SRel maximum (0.461 vs ND 0.303) — the child's error does
+not extend to the sibling.
+
+**The "no Italian in the deposit" claim was re-checked independently and confirmed**, since it is the
+whole basis for `translated_substitute`: the converted S2 codebook's only non-ASCII characters are
+typographic punctuation plus one `<=` and a trademark sign — zero accented characters, zero Italian
+function words — and the S1 `.xls` (152 x 244) has no object-typed column at all and an all-ASCII
+header. The administration was Italian; the deposit publishes only English.
+
+**One thing for triage, flagged rather than fixed.** The two siblings ship the same 36 item codes but
+different `item_text` GRANULARITY: the parent carries the bare category heading ("Ethical Model"),
+the child carries the S2 codebook's full verbatim coding criterion ("Ethical Model: We classified any
+expression in which the individual was considered morally or ethically responsible..."). Both are the
+source's own text and neither is wrong, but the pair reads inconsistently side by side and the child's
+is strictly more informative. **Levelling the parent up is a one-file change using strings already
+transcribed in the child file** — left as Ben's call rather than made unilaterally, because it means
+overwriting a shipped table's text with a sibling agent's transcription.
+
+Beyond that the pair is correctly differentiated and not a duplicate: all 36 `item_text` values differ,
+the instructions differ entirely (parent written self-administration vs child oral interview script),
+and stimulus (iii) differs by one word — parent "Paolo is autistic and **he** does not understand what
+others say", child "...and does not understand...". The other three prompts are identical by design.
+
+Both tables are genuinely unusual and the `public_note` says so: an "item" here is not a question.
+Respondents gave one free-text answer per stimulus and two blind coders counted how many expressions
+fell into each of nine disability-model categories, so `resp` is a count (children 0-8, parents 0-5),
+`section_prompt` holds the question actually asked, `item_text` names the coding category, and
+**`option_text` is blank on every row** — a count has no anchors, and padding a level with its own
+number is forbidden.
+
+Yield 2/2. 663 pending. Cap is `batch_110`; **not reached** — the next firing takes `batch_104` and
+is again a human's call, not an automatic retry.
