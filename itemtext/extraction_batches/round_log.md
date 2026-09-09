@@ -12282,3 +12282,37 @@ gender-swapped rendering was declined. (c) Both tables are `translated_substitut
 article or supplements — re-verified this round rather than inherited from batch_100.
 
 Cap (`batch_110`) not reached; 666 tables remain pending, 0 in_progress.
+
+### batch_101 triaged — 2 shipped — 2026-09-08
+
+Third consecutive clean round at two agents. Gates re-run live: `normalize_nulls` 0 of 2,
+`audit_batch` 2/2 PASS with zero WARNs, `verify_batch` PASS=2, `lint_verification` clean,
+`irw-validate` ok. Both uploaded (`red_up` 2/2 row-count verified), stamped and audited. Two entries
+opened as **datapages/irw#172** on a new branch, since #169 merged during the round.
+
+**The round corrected one of its own agents' numbers, and the correction reproduces exactly.** The
+satisfaction agent reported "74 children with a complete block, only 4-5 per block used all five
+distinct values, totals 6 to 24". Recomputed from the cached S1 deposit: **76 complete**, blocks
+using all five distinct values **5 / 5 / 6 / 5** (REL / HBODY / SOCIAL / GEN), block totals **3-24**.
+Every figure the round substituted is right and every figure the agent gave was wrong. It had not
+reached `public_note`, so nothing public needed amending.
+
+**The finding those numbers support survives, and is the interesting part:** only 5 or 6 of 76
+children used all five distinct values within any block, so `resp` is a 1-5 *liking rating* with
+pervasive ties, not the strict ranking the paper describes. That is a statement about the response
+data, arrived at from the item-text side.
+
+**A visible artifact worth disclosing rather than fixing.** `meloni_2015_deq_ce_child` ships the
+codebook's **masculine** statement wording for its two female stimulus targets (Maria, Elena),
+because S2 publishes only the masculine set. The agent declined to invent a gender-swapped rendering.
+That is the right call under the never-substitute rule, but a reader comparing Maria's items against
+the boys' will see identical masculine wording, so the issues-page entry says why. The alternative —
+silently generating feminine forms — would have been IRW writing instrument wording and owed a
+disclosure of its own.
+
+Both PARTIAL, and each evidence string names the items its route cannot separate rather than hedging
+generally: `ia_satisfaction` cannot split REL_2/_3, HBODY_2/_4/_5, SOCIAL_2/_5 or GEN_2/_5;
+`deq_ce_child` cannot split statements 8/9 — literally the same two clauses reversed, at 2.92 against
+2.89, where a swap would be undetectable — nor 1/2/3 or 5/7.
+
+Cap is `batch_110`; not reached. 666 pending, next firing takes `batch_102`.
