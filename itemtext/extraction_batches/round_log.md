@@ -12488,3 +12488,70 @@ release. Only `baka2023_bpnsf` had a provenance row (batch_007) to carry a withd
 two predate the batch pipeline, so their record is this entry and the register — the same gap noted
 for the PSS sweep. `makransky_2016_motivation` stays blocked, and the register row now covers future
 BPNS, SRQ, PLOC and GCOS tables.
+
+---
+
+## §3 settled — the SWLS blocks, conservatively (2026-09-09)
+
+**Ben ruled: be conservative rather than resolve which of Diener's own pages governs.** The SWLS is
+blocked, eleven live tables are withdrawn, and six queued tables are blocked by the register row.
+
+### Why it was not resolvable on the merits
+
+Diener publishes the SWLS under **three different statements of terms**, all fetched 2026-09-09:
+
+| page | says |
+|---|---|
+| `labs.psychology.illinois.edu/~ediener/SWLS.html` | "copyrighted but you are free to use it without permission or charge" |
+| `labs.psychology.illinois.edu/~ediener/scales.html` | "the scale is **in the public domain**"; "permission is granted here" |
+| `eddiener.com/scales` | "permitted for **non-commercial purposes only**" |
+
+Same holder, same scale, three formulations. The investigation kept finding more ground rather than
+less, which is what the ruling responds to.
+
+**The conservative call also makes the corpus consistent rather than creating a new position.** The
+Flourishing Scale and SPANE were already blocked on the *same* eddiener.com sentence (2026-09-06).
+The SWLS was the outlier, not the casualty. Note the `scales.html` fetch also shows that page
+granting Flourishing and SPANE permissively — so those blocks rest on the same unresolved conflict
+and are now consistent with the SWLS rather than in tension with it.
+
+### What the investigation established, and should not be re-derived
+
+- **The 2026-09-08 originator ruling never contradicted the 2026-09-04 SWLS ruling.** The originator
+  ruling governs originator-vs-*reproducer* ("a CC BY appendix does not launder"). Both SWLS pages
+  are the originator. This was a gap neither ruling covered — originator vs. himself — not a conflict.
+- **Provenance splits the tables, and would have mattered had the merits been reached.** Seven took
+  `SWLS_English.doc` from the Illinois page, citing both pages: for those, source and grant are the
+  same act and no page-shopping is involved. Six took the wording from a CC BY deposit or journal
+  (`campos_2023_swls` from Diener's own 1985 article; `liu_2018_swls`, `kern_2021_life_satisfaction`,
+  `altahla_2024_swls`, `alsecypiamh_wu_2022_swls`, `eammi_grahe_2018_swb`) and never accepted either
+  offer, so they could not claim the better one.
+- **A holder publishing under two sets of terms has granted both** — taking the permissive grant is
+  accepting an offer that was made, not forum-shopping. That disposes of the weakness accepted on
+  2026-09-04, but it only helps a taker who actually took from the permissive page.
+
+### Scope, and how it was found
+
+**A name search found 6; sweeping `item_text` found 11.** `eammi_grahe_2018_swb`,
+`kern_2021_life_satisfaction` and `medvedev_2018_sl` carry the SWLS without saying so in the name.
+
+Ten were withdrawn whole (`tools/withdraw_swls.py`; `irw_text` 715 → 709, `irw_text_2` 285 → 281,
+exactly the targets, keep-set asserted). **`eammi_grahe_2018_swb` was a PARTIAL withdrawal, 42 → 7
+rows**, because it pools the SWLS with `swb_6` "I have high self-esteem", which nothing restricts —
+the second partial after `ecps_sahm_2024_stress`. Downloaded with `table.download(format='csv')`, not
+`to_pandas_dataframe()` (Python-pkg#5), filtered, and re-uploaded with an explicit
+`red_up --dataset irw_text`; red_up reported UPDATE/replaces and verified 7 rows. Its retained rows
+carry `instrument` = "Subjective Well-Being", not an SWLS label, so nothing stale was left behind.
+
+### The matcher under-counted again, and nearly caused two mistakes
+
+Three tables first read as MIXED and were not — their "non-SWLS" items were SWLS items with wording
+variants: **"In most ways, my life is close to my ideal"** (added comma), **"I am satisfied with
+life"** (no "my"), **"In the most ways my life is close to my ideal"** (added "the"). Had those been
+believed, three tables would have been given needless partial treatment. Separately, an early read
+showed two tables missing SWLS item 1; they were not — the query output was piped through
+`grep -v "it/s"` to strip a progress bar, and **the bar shares a line with the first row of output,
+so the filter deleted a data row.** Third instance today of a filter quietly removing evidence.
+
+Six queued tables are blocked by the register row and must not be extracted: `park_2021_swls`,
+`ptacek2023_swls`, `rahm_2017_swls`, `rzeszutek_2020_swls`, `wu2021_swls`, `qi_2025_swls`.
