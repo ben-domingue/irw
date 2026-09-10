@@ -15689,3 +15689,69 @@ Scratch was namespaced per table (`.cache/<table>/`), and the two candidate CSVs
 
 Ran at four agents per round. No kills, no rate limits, no retries; all four returned within ~5 minutes
 of dispatch. Cap (`batch_165`) not reached — 456 tables still pending.
+
+## batch_153 — 2026-09-10 10:04–10:20
+
+4 tables, 4 agents (one per table). **Written 3 / blocked 1 / failed 0.** Yield 75%.
+Circuit breaker not tripped (0% failed, threshold 30%).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `rahman_2022_phq9` | done | 36 | data_labels | NOT_NEEDED |
+| `ravenscroft_2017_transition` | done | 125 | paper_order | VERIFIED |
+| `regalado_2023_tourism_value` | done | 95 | data_labels | NOT_NEEDED |
+| `rahm_2017_swls` | blocked | — | unknown | NO_ROUTE |
+
+**Gates.** normalize_nulls fixed 1 of 3 files (ravenscroft, 126 lines). audit_batch:
+1 PASS, 2 WARN, both explained in notes.csv per Step 5c and both properties of the
+response data rather than itemtext defects. verify_batch: 1 PASS, 2 MISSING(exempt)
+— both data_labels. lint_verification: 4 rows, clean. `irw-validate`: all 3 ok.
+
+**check_provenance.R exits 1, but not on this batch.** The three tables it names as
+shipping IRW-generated English with no issues-page entry — `PMT_Trzcinska_2023_PMT`,
+`poza2026_hlseu`, `aspirations_sonmez_2022` — are all pre-existing and none belong to
+batch_153. Nothing in this round declares `machine_translation`: regalado's English is
+`study_supplied` (the authors' own S2 File twin), ravenscroft and rahman ship no
+translation at all. Pre-existing backlog, unchanged by this round.
+
+**Blocked: `rahm_2017_swls`** — standing SWLS register verdict (2026-09-09, Ben's
+conservative ruling where a holder's own terms conflict) applied, not re-derived.
+Retry test **NO**: determinate, every rights page returned HTTP 200. The block is
+effective on the irw#2101 test — codes `SWLS_1..SWLS_5` carry no wording. Step 3b
+identity confirmed against the six-instrument battery: 5 items × a 7-point agreement
+scale separates the SWLS from SPANE-12, PANAS-20, SHS-4 and HSWBS-6 by item count
+and anchor set. Row added to `itemtables/pending_index_notes.csv`.
+
+**Step 5b — orchestrator re-checked all three substantive agent claims; all three held.**
+1. *regalado P4_14/P4_15 source defect* (going into a public note): reproduced exactly —
+   S1 File labels the two columns byte-identically, S2 File labels them distinctly, the
+   columns agree on **74.7%** of 384 rows with different distributions (P4_14 1..5 =
+   2/5/24/135/218, P4_15 = 4/8/40/126/206), and S1/S2 data are byte-identical
+   (`pandas.equals` True). Shipping `item_text` blank for P4_14 rather than guessed is
+   correct; this is the source's defect, not ours.
+2. *ravenscroft reversed scale direction* (overrides the printed questionnaire): the
+   re-runnable `verify_ravenscroft_2017_transition.R` prints the evidence and ends
+   `VERDICT: PASS` — 25/25 stems verbatim at the derived slot, all option lists verbatim
+   **and reversed**, direction settled from data by two external indicators (Transition
+   Involvement 4.43 vs 3.28 for attended-meetings Y/N), and the Q7 skip reproduced
+   exactly (n=176 for Yes, 0 for each other level). A naive transcription in printed
+   order would have shipped all 25 items backwards.
+3. *rahman item-8 truncation*: confirmed — `PHQ_6/7/8` variable labels are each exactly
+   80 chars (Stata's cap), `PHQ_8` cut at "Or the opposi". The shipped file carries S1
+   Table's shorter wording; the canonical second clause was correctly not reconstructed.
+
+**Audit WARNs (Step 5c), both explained in notes.csv:**
+- `ravenscroft_2017_transition` row-count anomaly (n=176 vs median 276 on "Support plan
+  developed by professionals") — **response-data property, not a defect**: S1 Q7 prints
+  an explicit skip to Q10, so Q9 reached only the 176 Yes respondents. No issue filed.
+- `regalado_2023_tourism_value` 5.3% blank `item_text` — exactly the 5 rows of P4_14
+  above. **Source-deposit defect**, deliberate per SKILL.md. No issue filed.
+
+**Register hygiene.** The SWLS row's empty `source_sha256` is now filled with all three
+full hashes, `fetched=2026-09-10`. The orchestrator re-fetched and re-hashed all three
+pages independently: values reproduce the agent's exactly, and the conflicting clauses
+still read verbatim as quoted — `eddiener.com/scales` names the SWLS by name alongside
+"The use of these scales is permitted for non-commercial purposes only", while
+`~ediener/SWLS.html` says "free to use it without permission or charge". The block stands.
+
+Cap (`batch_165`) not reached. 452 pending remain.
