@@ -14655,3 +14655,90 @@ questionnaire changes either answer.
 
 Four agents, per the 2026-09-09 setting; ran clean, no kills, all four
 reported. Cap is batch_165; not reached.
+
+## batch_139 — 2026-09-10
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — yield 4/4 (100%)**.
+Circuit breaker not tripped (0% failed). Four agents, one per table, per the
+2026-09-09 setting; ran clean, no kills, all four reported. Cap is batch_165;
+not reached. Note the numbering rule was applied: `batch_201`/`batch_202`
+(irw#1945 rights line) were ignored, so this round is 139, not 203.
+
+All four tables are `pierro_2018_*` — the same PLOS ONE paper
+(10.1371/journal.pone.0193357, CC BY 4.0) worked in batches 137–138. Each
+agent was told which siblings belonged to another agent; no collisions.
+
+### Gates — all clean, first pass
+
+`normalize_nulls.R` 0 of 4 changed · `audit_batch.R` **PASS 4, zero WARNs**
+(so Step 5c has nothing to explain) · `verify_batch.R` **PASS=4** ·
+`lint_verification.R` 4 rows, no problems · `irw-validate` ok on all four ·
+`check_provenance.R` clean for this batch (its one outstanding
+IRW-generated-content gap, `aspirations_sonmez_2022`, is pre-existing and
+unrelated).
+
+### What shipped
+
+| table | rows | mapping_basis | Step 5b |
+|---|---|---|---|
+| `pierro_2018_selfforgive_s2` | 16 (4×4) | paper_order | PARTIAL (routes 6+3+8) |
+| `pierro_2018_selfforgive_s3` | 16 (4×4) | paper_order | PARTIAL (routes 3+6) |
+| `pierro_2018_tf_future_s4`   | 24 (4×6) | reconstructed | PARTIAL (route 3) |
+| `pierro_2018_tf_past_s4`     | 28 (4×7) | paper_order | **NO_ROUTE** |
+
+All four are `text_source=translated_substitute`, `language=Italian`: every
+one of the four S-File `.sav` deposits carries **zero variable labels** on
+every item column, and the article's Supporting Information is just those four
+`.sav`s — so the administered Italian is unrecoverable and English sits in the
+base fields with no `_translated` columns. This is the same fallback batches
+137–138 took on this paper, now confirmed four more times independently.
+
+### Orchestrator re-check (Step 5b) — confirmed
+
+`selfforgive_s2` **overrides the paper's printed anchor direction** for
+`SforgiveR1`/`SforgiveR3` (ships resp 1 = Completely), so I re-ran its verify
+script rather than take the report. Reproduced: alpha as stored **0.718** vs
+published .72, and **−0.595** un-reversed; composite **M 2.845 / SD 0.658** vs
+published 2.84/.66; all three ANOVA cell means to within .02
+(2.553/3.152/2.831 vs 2.55/3.15/2.83), with the un-reversed reading inverting
+the paper's locomotion > control > assessment ordering. The flip is justified.
+Note this is the *same* convention as sibling `_s1` (batch_138) and the
+*opposite* of `locomotion_s3` — this paper mixes storage conventions **within
+itself**, so every remaining sibling must re-derive it and inherit nothing.
+
+### Two things for the triage session
+
+1. **The two TFS tables share one unresolved item-level mapping and should be
+   triaged as a pair, not separately.** `tf_past_s4` and `tf_future_s4` are two
+   subscales of one 12-item administration, and both face *identical* evidence:
+   the published subscale statistics reproduce exactly (past alpha 0.912 vs
+   .91; future M 5.540/SD 1.052/alpha .920 vs 5.54/1.05/.92), which pins the
+   subscale and proves raw unreversed storage — but a subscale composite is
+   permutation-invariant, so **neither distinguishes any one of its four codes
+   from the other three**. They are same-subscale, same-range, same-polarity
+   near-synonyms with no per-item statistics published.
+   The two agents nonetheless graded this **differently** — `future` PARTIAL,
+   `past` NO_ROUTE. I have deliberately **not** harmonised them: each evidence
+   string states plainly what it does and does not establish, and that is the
+   part that matters. But by this prompt's own definition ("pinning a subscale
+   is PARTIAL"), PARTIAL is the closer reading for both; by the stricter
+   item↔text-axis reading, NO_ROUTE is. Triage should pick one and apply it to
+   both.
+   **Neither mapping is refuted** — this is *unverified*, not *contradicted*,
+   which is what separates it from the `posaffect_s3` quarantine in batch_138.
+   Both ship with a `public_note` disclosing that an individual sentence's
+   attachment to an individual code is provisional. Only the authors
+   (gennaro.pica@uniroma1.it) supplying the Study 4 questionnaire resolves it.
+2. **Two rights-register rows filed** that agents flagged as owed and correctly
+   declined to write themselves (shared file): **TFS** and **SSFS**, both
+   `ship` on silence-is-permission. I re-searched both independently before
+   filing. Neither has any rights-holder or distribution page; the only
+   reproduction language anywhere is ProQuest's "Further reproduction
+   prohibited without permission" stamped on the SSFS *article* PDF, which is
+   the PANAS case — a notice about the article, not a term on the instrument.
+   The `selfforgive_*` tables have a **second, independent ground** regardless:
+   what they ship is Pierro et al.'s own English rendering of their Italian
+   4-item adaptation, printed in a CC BY 4.0 article, not verbatim SSFS text.
+   Both rows are silence, not an express grant — a clause surfacing later
+   reopens them. `pierro_2018_hfs_s4` stays blocked on the HFS row; a
+   "forgiveness" table name is a lead, not an identification.

@@ -836,10 +836,10 @@ pierro_2018_locomotion_s3,done,batch_138,2026-09-10T02:54:16
 pierro_2018_negaffect_s3,blocked,batch_138,2026-09-10T02:54:16
 pierro_2018_posaffect_s3,blocked,batch_138,2026-09-10T02:54:16
 pierro_2018_selfforgive_s1,done,batch_138,2026-09-10T02:54:16
-pierro_2018_selfforgive_s2,pending,,
-pierro_2018_selfforgive_s3,pending,,
-pierro_2018_tf_future_s4,pending,,
-pierro_2018_tf_past_s4,pending,,
+pierro_2018_selfforgive_s2,done,batch_139,2026-09-10T10:13:30Z
+pierro_2018_selfforgive_s3,done,batch_139,2026-09-10T10:13:30Z
+pierro_2018_tf_future_s4,done,batch_139,2026-09-10T10:13:30Z
+pierro_2018_tf_past_s4,done,batch_139,2026-09-10T10:13:30Z
 pilch_2021_coping_behavior,pending,,
 pilch_2021_fear_covid19,pending,,
 pilch_2021_personality_ipip20,pending,,
