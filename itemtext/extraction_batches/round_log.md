@@ -14329,3 +14329,100 @@ launder a restricted instrument. Registered as "SCL-90-R and short forms", flagg
 BSI/Mini-SCL as plausibly in scope pending their own checks. Row added to pending_index_notes.csv.
 
 **Queue:** 0 rows left in_progress; 541 pending. Cap is batch_165 — not reached, round ends normally.
+
+---
+
+## batch_135 — 2026-09-10 ~01:50–02:10
+
+**4 tables, 4 agents, one per table. Written 3 / blocked 1 / failed 0. Yield 75%.**
+Circuit breaker NOT tripped (0% failed; blocks do not count).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `phq_BrummerHoffman_2021` | done | 180 (45 items × 4 options) | data_labels | NOT_NEEDED (exempt) |
+| `pickova2025_attitude` | done | 49 (7 × 7) | data_labels | VERIFIED, route 9 |
+| `pickova2025_behavioral_intent` | done | 28 (4 × 7) | data_labels | VERIFIED, route 9 |
+| `petrowski_2020_attachment` | **blocked** (retry test NO) | — | unknown | NOT_NEEDED |
+
+**Gates:** normalize_nulls 2 of 3 normalized · audit_batch **3/3 PASS, no WARNs** (so Step 5c had
+nothing to explain) · verify_batch 2 PASS + 1 MISSING(exempt) · lint_verification 4 rows, **0 ERROR**,
+3 WARN · irw-validate 0 ERROR · check_provenance passed. The three lint WARNs are benign: one flags
+the blocked table's `mapping_basis=unknown` on a NOT_NEEDED row (it shipped nothing, so there is no
+mapping to verify), and two flag blank `option_text` on the Picková tables — a gap the source never
+published, not a text-vs-table mismatch, so per the issues-page bar neither owes a public note.
+
+**irw-validate WARN worth a human's eye, not introduced by this batch:** `name_charset` on
+`phq_BrummerHoffman_2021` — the capitalised parent table name is a pre-existing corpus name. Every
+client lowercases when joining, so it can silently drop out of case-sensitive joins. Renaming would
+have to move the live table and the `__items` stem together.
+
+### Step 5b — both consequential claims independently re-checked, both CONFIRMED
+
+The blocked table's agent made two claims that would otherwise have gone into a note unverified.
+
+**1. The rights register's ECR clause is not on its cited URL. CONFIRMED.** Re-fetched
+`labs.psychology.illinois.edu/~rcfraley/measures/measures.html` (19,529 bytes, sha256
+`a8c2cafb8defdd1a…`, matching the agent's). The string **"commercial" does not appear on that page at
+all**; the only permission clause is *"Because the chapters are copyrighted by Guilford Press, they
+should not be reproduced without permission"* — a notice about the 1998 Guilford chapters that print
+the ECR items, not a term stated about the instrument. `ecrritems.htm`/`relstructures.htm` carry no
+fee/commercial/permission clause either. **Neither the agent nor the orchestrator flipped the verdict**
+— it governs five tables (`alsuhibani_2022_ecrs_s3`, `close_relationships`, `chinvararak_2021_ecr`,
+`luo_2021_ecr`, plus this one) and re-ruling a settled register row is a human decision. Flagged here
+and in `pending_index_notes.csv`: **that row should be re-sourced or corrected.** Note the block may
+well still be right on other grounds — the ECR items are printed in a Guilford-copyrighted chapter,
+which is itself a reproduction restriction; what is wrong is the *citation*, not necessarily the verdict.
+
+**2. The table stores raw scores while the paper reverse-scored items 7, 9, 11, 12. CONFIRMED, and
+the loop closed on the paper side too.** Recomputed from the S1 `.sav` independently (n=2338 complete
+cases, −1/−2 dropped) and pulled Table 4 from the Europe PMC full text (PMC7117745) rather than
+trusting the agent's transcription of it. Eight items match raw to 2dp (Item 1 2.36/1.63, Item 3
+1.80/1.25, Item 6 4.37/2.01, Item 10 3.63/2.05); four match **only** under 8−x: qr107 4.24→3.76 vs
+3.75, qr109 4.86→3.14 vs 3.14, qr111 5.09→2.91 vs 2.91, qr112 4.79→3.21 vs 3.21, SDs equal throughout.
+One refinement to the agent's wording: it said nine items match to 2dp; strictly it is eight, because
+Item 2 (paper 2.59/1.71 vs raw 2.58/1.70) and Item 7's reversal (3.75 vs 3.76) are off by 0.01 — a
+rounding/case-set difference that does not touch the substance. The reverse-scoring fact is real and
+is carried in the blocked table's `public_note`, since analysts need it regardless of item text.
+
+### Notable, per table
+
+**`petrowski_2020_attachment` blocked, retry test NO (determinate rights).** German **ECR-S12** — the
+paper's Methods name it as Wei et al. (2007)'s 12-item ECR Short Form, a subset of the 36-item ECR
+(Brennan, Clark & Shaver 1998), in the ECR-G translation. Applied the settled `verdict=block` for
+family ECR (irw#1955) rather than re-deriving it; short forms and translations are covered on the
+batch_134 SCL-K-9 precedent. Block is **effective**: the `.sav` columns are bare `qr101..qr112` with no
+variable labels and Table 4's rows read bare "Item 1".."Item 12", so no wording leaks through the
+response table — unlike irw#2101/#2123.
+
+**`phq_BrummerHoffman_2021` — inference-free mapping, and a translation caveat.** Augmented PHQ-9,
+Brazilian Portuguese, OSF p8j2v CC BY 4.0; 45 items = 9 PHQ-9 symptoms × 5 framings. Direct sibling of
+`gad_BrummerHoffman_2021` (batch_035, 7×5) and shipped in the same shape. `data/BF_BrummerHoffman_2021.R`
+does no renaming, so the IRW code *is* the deposited column name, which the authors' own `.Rmd` ties to
+a raw Google-Forms header line by line (45/45, splitting cleanly into 5 stems × 9 rows with no
+leftovers). Two arms pooled into one table (Study 1 grid vs Study 2 single sentence); Study 1 form
+shipped, disclosed in `public_note`. **The deposit's English PDF was deliberately not used for
+`option_text`** — it prints canonical PHQ-9 anchors that were not what the Portuguese administered —
+and the `_translated` fields depart from it twice (an oversleeping clause absent from the administered
+insomnia item; reversed clause order on the suicide item). `translation_source=mixed`. It is **not**
+yet in check_provenance's mixed-review list only because it is unshipped; **when it ships it will owe
+an issues-page line** under the 2026-09-02 ruling, since part of the English is IRW-written.
+
+**Picková siblings — one source file serves six tables.** figshare 30576341 (CC BY 4.0), file 59422829,
+a raw Google Forms export whose header row spells out every item verbatim. Both agents were fenced to
+their own table and independently derived the same convention, which is corroboration. Column blocks
+(0-based): attitude 5–11, perception 12–18, feelings 19–23, **intent 24–27**, fast-fashion beliefs
+28–32, "Rate the following statements" 33–45, considerations 46–49, moral justifications 50–56,
+demographics 57–61. 155 rows, ~133 complete per construct. **The deposit publishes no anchor labels for
+any 1–7 block**, so `option_text` is blank throughout and scale direction is unverified — every
+remaining sibling will face the same call, and nothing was padded with its own number. Route 9
+(response-frequency matching) is decisive and cheap for all of them: 49/49 and 28/28 cells matched
+exactly, and 0 of the 23 non-identity permutations reproduced the intent counts.
+**Source artifact for whoever takes `pickova2025_moral_justifications`:** its block header reads
+*"Please indicate how much you **6** with the following statements"* — an apparent find-and-replace
+corruption of "agree" in the deposited file. Transcribe as-is or flag it; do not silently repair.
+
+**Export discipline:** no full-table exports beyond the necessary fetches; ground truth came from
+`irw_table_sets()`.
+
+**Queue:** 0 rows left in_progress; 537 pending, 662 done, 127 blocked, 12 failed, 63 excluded.
+Cap is batch_165 — not reached, round ends normally.

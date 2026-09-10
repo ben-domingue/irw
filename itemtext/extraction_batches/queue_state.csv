@@ -820,10 +820,10 @@ peters_2025_nrm_inj_approval,done,batch_134,2026-09-10T08:32:36Z
 peters_2025_pbc_cond_power,done,batch_134,2026-09-10T08:32:36Z
 peters_2025_pbc_cond_presence,done,batch_134,2026-09-10T08:32:36Z
 petrowski_2019_sclk9,blocked,batch_134,2026-09-10T08:32:36Z
-petrowski_2020_attachment,pending,,
-phq_BrummerHoffman_2021,pending,,
-pickova2025_attitude,pending,,
-pickova2025_behavioral_intent,pending,,
+petrowski_2020_attachment,blocked,batch_135,2026-09-10T02:05:21
+phq_BrummerHoffman_2021,done,batch_135,2026-09-10T02:05:21
+pickova2025_attitude,done,batch_135,2026-09-10T02:05:21
+pickova2025_behavioral_intent,done,batch_135,2026-09-10T02:05:21
 pickova2025_fast_fashion_beliefs,pending,,
 pickova2025_feelings,pending,,
 pickova2025_moral_justifications,pending,,
