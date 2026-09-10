@@ -16100,3 +16100,33 @@ batch_157 table ships IRW-generated content, and the `rfq` row's `translation_so
 official_instrument_english` passes the vocab check.
 
 Cap is batch_165; batch_157 completed, not the cap. Ending normally.
+
+## SDQ wording withdrawn — 2026-09-10
+
+batch_156 blocked `ren_2019_sdq` and `ren2019_sdq` on the sdqinfo.org clause, and both of
+its agents independently flagged that IRW was already publishing the wording it had just
+refused to ship. Ben ruled the same day: withdraw.
+
+**Withdrawn from the `irw_text` draft** (709 → 707 tables), whole-table in both cases —
+every item in each is SDQ, so there was no unblocked block to preserve:
+
+  - `addy_2021_sdq_ghana__items` — 10 items
+  - `ALSECYPIAMH_WU_2022_SDQ__items` — 5 items, the prosocial subscale
+
+The clause reserves three separate rights: no distribution of electronic versions without
+prior authorization, no derivatives, non-profit use only. Under the 2026-09-06 rule that any
+stated restriction blocks outright, it outranks either deposit's CC BY 4.0 and reaches
+translations explicitly.
+
+**Neither table has a `provenance.csv` row** — both predate the batch pipeline — so per
+itemtext_standard.md the record lives in `instrument_rights_register.csv` and here, and no
+provenance row was manufactured to hold it. The honest consequence: this withdrawal is not
+discoverable from the tables' own records.
+
+Their issues-page entries were removed in datapages/irw#180 — otherwise the public page would
+keep describing wording that no longer ships. The withdrawal itself gets no entry.
+
+**Not withdrawn: `heekerens2025_sdq`.** It is the Somatoform Dissociation Questionnaire
+(SDQ-20), a different instrument. A name sweep would have taken it.
+
+Script: `tools/withdraw_sdq.py`. Takes effect at the next release.
