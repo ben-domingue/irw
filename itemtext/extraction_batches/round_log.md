@@ -14952,3 +14952,66 @@ publishes 1 of the 3 adapted stems, so 2 items x 4 levels = 8 of 12 rows blank b
   routed around it via Europe PMC and neither lost a table to it.
 - Four agents, zero kills, all four shipped. Consistent with the batch_104–119 run.
 
+
+## batch_143 — 2026-09-10 04:40–04:55
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — full yield (100%)**. Four agents, all
+clean, no kills, no retries. Circuit breaker not tripped.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `PPSRS_Caliciuri_2024` | written, 22 rows (11 items × 0/1) | data_labels | NOT_NEEDED |
+| `pranckeviciene_2022_gad7` | written, 28 rows (7 × 0–3) | data_labels | NOT_NEEDED |
+| `pranckeviciene_2022_phq9` | written, 36 rows (9 × 0–3) | data_labels | NOT_NEEDED |
+| `previc_bohn2023` | written, 758 rows (379 × 0/1) | data_labels | VERIFIED |
+
+Gates: `normalize_nulls.R` fixed 1 file (PPSRS, 23 lines). `audit_batch.R` **4/4 PASS, no
+anomalies** — no WARNs to explain at Step 5c. `verify_batch.R` PASS on previc, 3 MISSING(exempt).
+`lint_verification.R` clean, 4 rows, no problems. `irw-validate` clean on 3; one WARN on
+`PPSRS_Caliciuri_2024` for `name_charset` (capitalised corpus table name — a property of the
+pre-existing table name, not of the item text, and out of scope here). `check_provenance.R`
+raised nothing new for this batch.
+
+**Three tables were all-`data_labels` in the strong sense** — the IRW `item` code IS the source
+column name, with no rename and no positional step, so the mapping is authoritative rather than
+inferred and Step 5b is genuinely exempt rather than merely unattempted. Two came from one
+deposit: the PLOS S1 `.sav` behind Pranckevičienė et al. 2022 carries Lithuanian variable labels
+for both the `GAD7_*` and `PHQ9_*` blocks. The two agents sharing that file did not collide.
+
+**Language.** Three of four are non-English administrations (Italian SRS, Lithuanian GAD-7 and
+PHQ-9, German PREVIC), all shipped administered-wording-in-base-fields with English in
+`_translated`, per the 2026-09-01 rule.
+
+**Notable — `previc_bohn2023`, confirmed by orchestrator re-check (Step 5b), not taken on the
+agent's word.** The committed `data/previc_bohn2023.R` renames `trial → item`, but that is not
+what shipped. Fetching the source `previc_data.csv` directly: 451,010 rows, 1,190 `subjID`, 379
+distinct `word`, 379 distinct `trial` — and **372 of the 379 words appear at more than one trial
+number**, so `trial` is the randomised presentation index, not an item key. The live table is 379
+items × 1,190 rows per item, which matches `word`. Item text is attached to `word`, which is what
+the live data actually holds. Repo-side documentation defect in `data/`, not an itemtext defect;
+recorded in `notes.csv`.
+
+Also on previc: the live table is the PREVIC's **initial 379-word calibration pool, not the
+89-item published PREVIC**. Its verification is the round's only non-exempt one and is VERIFIED on
+two independent numeric routes against server-side `AVG(resp)` (no export): German AoA norms vs
+P(resp=1) over all 379 words, Spearman −0.885 against a 2,000-permutation null whose max |r| is
+0.216; and the paper's published Rasch difficulties for the 89 final-pool items vs P(resp=1),
+Spearman −1.0000. Both negative signs are what pin `resp 1 = JA`. The agent correctly recorded
+what the routes do NOT establish (the `instructions` wording, taken from the live 2025 web-app
+rather than from the response data).
+
+**Rights.** PHQ/GAD applied from the register (`verdict=ship`, express grant, re-confirmed on the
+Lithuanian form's own footer). PREVIC is the authors' own instrument under a CC BY 4.0 deposit.
+The SRS carries no reserved term on the instrument itself — the Wiley notice is a notice about the
+article, not a term on the scale (the PANAS case). No rights blocks this round.
+
+**Owed on upload:** `previc_bohn2023` has a `public_note` (IRW-written English for instructions
+and the YES/NO labels; the 379-pool-vs-89-item distinction) and `pranckeviciene_2022_gad7` has one
+(its anchors and instructions come from the official Lithuanian form, not the deposit). Both are
+`translation_source` disclosures owed at ship time, not now.
+
+**One flag for a human:** `table_context.R` reported `ppsrs_caliciuri_2024` marked `1` on the index
+workbook's `xz_todo` tab. Sheet1 links were empty and no local `__items.csv` existed, so the agent
+read it as flagged-for-later and proceeded — worth confirming with XZ that it was not in flight.
+
+Queue after this round: 505 pending, 0 in_progress. Cap is `batch_165`; not reached.
