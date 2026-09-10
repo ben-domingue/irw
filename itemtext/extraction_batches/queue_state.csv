@@ -871,10 +871,10 @@ PROMISPME_Forrest_2021_Physical_Proxy,blocked,rights_2026-09-10,2026-09-10T06:20
 PROMISPME_Forrest_2021_PosAff_Proxy,blocked,rights_2026-09-10,2026-09-10T06:20:00
 PROMISPME_Forrest_2021_Psych_Children,blocked,rights_2026-09-10,2026-09-10T06:20:00
 PROMISPME_Forrest_2021_Psych_Proxy,blocked,rights_2026-09-10,2026-09-10T06:20:00
-protestant_workethic,pending,,
-ptacek2023_aaq2,pending,,
-ptacek2023_compact,pending,,
-ptacek2023_dass21,pending,,
+protestant_workethic,done,batch_145,2026-09-10T06:24:22
+ptacek2023_aaq2,blocked,batch_145,2026-09-10T06:24:22
+ptacek2023_compact,blocked,batch_145,2026-09-10T06:24:22
+ptacek2023_dass21,done,batch_145,2026-09-10T06:24:22
 ptacek2023_swls,pending,,
 ptcichina_zhan_2024,pending,,
 QCDQES_Oliveira_2022,pending,,

@@ -15104,3 +15104,74 @@ for batch_144. That is a **false alarm on an all-blocked round**: `audit_batch` 
 report when the batch contains no `__items.csv`, which is the correct outcome when every
 table is blocked. The round itself completed, pushed, and left zero `in_progress` rows.
 The check should treat "no `__items.csv` and no `failed` rows" as a valid completion.
+
+## batch_145 — 2026-09-10 06:07–06:25
+
+4 tables, 4 agents (one per table, all dispatched in one message). **Written 2 / blocked 2 / failed 0.**
+Yield 50%. Circuit breaker NOT tripped (0 failed; both no-CSV tables are determinate rights
+verdicts with retry test = NO). No kills, no rate limits, no retries; four agents held up again.
+
+**Written**
+- `protestant_workethic` — 197 rows, 45 items. Source is the deposit's own `codebook.txt` inside
+  openpsychometrics `_rawdata/PWE_data.zip`. mapping_basis=reconstructed, VERIFIED: the processing
+  script invents bare integers 1–45 via `row_number()` over `unique(item)`, so the agent re-ran
+  `data/protestant_workethic.R` over the original deposit rather than inferring — 45/45 items agree,
+  per-item n matches live 45/45, max |mean difference| = 0e+00 at full double precision, and the
+  (n, mean) signature is item-distinguishing (45 distinct signatures / 45 items).
+- `ptacek2023_dass21` — 84 rows, 21 items. Czech administration (Vilimovský & Kučera translation,
+  named outright in the paper's Measures section), publisher's official English DASS21 in the
+  `_translated` columns as a parallel form. DASS is public domain per the Psychology Foundation of
+  Australia FAQ, and the same page waives translator permission. mapping_basis=paper_order,
+  verification PARTIAL (route 3): the paper's Table 4 subscale moments reproduce 12/12 to 2 dp,
+  largest deviation 0.004 against a median worst-block deviation of 2.45 over 2000 random 7/7/7
+  partitions — that pins the D/A/S partition and the raw 0–3 direction but does NOT separate items
+  within a subscale, hence PARTIAL not VERIFIED.
+
+**Blocked** (both instrument rights; neither counts toward the breaker)
+- `ptacek2023_aaq2` — settled register verdict APPLIED, not re-derived (AAQ-II, family AAQ,
+  verdict=block, rule 2026-09-06 irw#1955). Clause re-fetched and still published. Orchestrator
+  confirmed the register row exists.
+- `ptacek2023_compact` — CompACT "free to use for clinical and research purposes", a purpose-scoped
+  grant, same shape as the HFS clause ruled block on 2026-09-10. **ESCALATION OWED: CompACT has no
+  row in `instrument_rights_register.csv` and one is needed.** This is the genuinely ambiguous case
+  — no fee, no permission requirement, no explicit NC/ND term — resolved in the direction Ben set
+  ("err on the side of not having things"). The agent correctly declined to write the shared
+  register itself. Cheap-retry material banked in `pending_index_notes.csv` if the ruling flips.
+
+**Gates** — normalize_nulls: 1 of 2 fixed. audit_batch: PASS 2, no anomalies (so no Step 5c WARNs
+to explain). verify_batch: PASS 2. lint_verification: 3 rows, no problems. irw-validate: both files
+clean. `check_provenance.R` exits 1, but on three PRE-EXISTING tables unrelated to this batch
+(PMT_Trzcinska_2023_PMT, poza2026_hlseu, aspirations_sonmez_2022 each ship IRW-generated English
+with no issues-page line); nothing in batch_145 is implicated.
+
+**Step 5b — one claim confirmed, one corrected.**
+- CONFIRMED, `protestant_workethic`'s Step 3b instrument mismatch. Re-checked by per-item aggregate
+  query (no full export): per-item max is exactly 5 for items 1–19, exactly 7 for 20–29 and exactly
+  1 for 30–45, 45/45 agreeing with the claimed PWE / TIPI / 16-word vocabulary-checklist split, no
+  item straddling a boundary. **The dictionary Description for this table covers only 19 of its 45
+  items and should be corrected.**
+- CORRECTED, `ptacek2023_dass21`'s duplicate alert. The agent reported that
+  `APFCompact_Ptacek_2024_DASS-21` duplicates it live in IRW. That pair is not live —
+  `irw_table_sets()` returns "does not exist in IRW" and `irw_list_tables()` shows no APFCompact
+  DASS or CompACT table at all, though `data/APFCompact_Ptacek_2024_DASS21.do` still exists and
+  batch_006 shipped *and uploaded* (2026-09-04) `APFCompact_Ptacek_2024_DASS-21__items`, now an
+  **orphan itemtext table with no response table behind it**. The duplication is real but survives
+  in a different pair, confirmed by query: `ptacek2023_aaq2` (2093 rows, 7 items AAQ1..AAQ7,
+  resp 0–6) vs `APFCompact_Ptacek_2024_AAQ_II` (2093 rows, 7 items aaq1..aaq7, resp 0–6), and
+  `ptacek2023_swls` (1495 rows, 5 items SWL1..SWL5) vs `APFCompact_Ptacek_2024_SWLS` (1495 rows,
+  5 items swl1..swl5) — identical row counts, item counts and resp sets, differing only in
+  item-code case. This looks like a **partially-completed dedup**: the DASS and CompACT halves were
+  removed, the AAQ-II and SWLS halves were not. For the corpus-trust pass; not acted on here.
+  Note `ptacek2023_swls` is still `pending` in this queue, so a future round will meet its twin.
+
+**Rights disclosure carried forward, not blocking.** `protestant_workethic` comes from
+openpsychometrics `_rawdata`, whose index states no licence (silence-is-permission, and Mirels &
+Garrett 1971 have no locatable restriction) — but the site's *interactive test* pages carry a
+site-wide CC BY-NC-SA 4.0 footer. The agent read that as a licence on those pages rather than a
+rights-holder statement about the items. That is the ambiguous shape the ECR-R/chinvararak ruling
+turns on, and **20 already-shipped IRW tables across batches 001–114 draw item text from this same
+`_rawdata` source under the same footer**, so if a reviewer reads the footer as governing, this
+table and those 20 fall together. There is no openpsychometrics/PWE/TIPI row in
+`instrument_rights_register.csv`; a ruling would settle 21 tables at once.
+
+Cap (batch_165) not reached; 486 pending remain.
