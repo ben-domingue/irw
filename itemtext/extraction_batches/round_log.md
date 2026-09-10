@@ -13057,3 +13057,66 @@ gate script.** Worth a GitHub issue.
 
 Four agents per round (Ben's 2026-09-09 setting) ran clean: no kills, no rate limits, no
 mid-round salvage. Round took ~19 minutes wall clock.
+
+## batch_112 — 2026-09-09 18:08–18:25
+
+4 tables, 4 agents (one per table), all four returned. **written 3 / blocked 1 / failed 0** — yield 3/4 (75%).
+Circuit breaker not tripped: 0% failed (the one no-CSV table is a determinate rights verdict, retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| muir_2025_resilience_behaviours | done (audit WARN, explained) | 24 (8×3) | data_labels | VERIFIED — keyword injectivity 8/8, zero cross-matches; resp coding 0/24 mismatched vs 16/24 reversed |
+| muir_2025_resilience_opinions | done | 35 (7×5) | data_labels | VERIFIED — route 1 vs paper Table 1, max ΔM 0.016, max ΔSD 0.017 |
+| muller_2016_dog_inhibition | done | 9 (3×3) | data_labels | NOT_NEEDED (Step 5b exempt; S3 variable-description sheet ties code→text) |
+| muharam_2022_srq29 | **blocked** (rights) | — | unknown | n/a (no live text) |
+
+Gates: normalize_nulls 0/3 changed · audit_batch PASS 2 / WARN 1 · verify_batch PASS 2 + 1 MISSING(exempt)
+· lint_verification 3 rows, no problems · irw-validate ok on all 3 · check_provenance clean for this batch
+(its 1 IRW-generated-content gap and 3 `mixed` review rows are pre-existing tables, none from batch_112).
+
+**Notable.**
+
+1. **`muharam_2022_srq29` blocked on WHO SRQ rights, not on access — and the extraction was fully solved
+   before the rights check, so a reversal is a transcription, not a restart.** S1 Appendix prints a 29-row
+   table keyed `SRQ 1`..`SRQ 29`, number-preserving onto the live codes. WHO/MNH/PSF/94.8 (IRIS 10665/61113)
+   reserves all rights and allows reproduction "but not for sale or for use in conjunction with commercial
+   purposes" — an NC term from the originator, so a block under irw#1945 as restated 2026-09-08, same shape
+   as the existing WHO-5 row. The PLOS CC BY 4.0 covers the response data, not the wording.
+   **Two follow-ups left for human triage, deliberately not actioned:** (a) no WHO SRQ row exists in
+   `instrument_rights_register.csv` (row 26's "SRQ" is the SDT Self-Regulation Questionnaire, a false lead) —
+   suggested `verdict=block`, `match_item_code=^SRQ[-_ ]?[0-9]`; (b) **live sibling exposure** —
+   `gilbert_meta_49` is a LIVE curated SRQ-20 itemtext table and `mental_health_malawi` is classified
+   AVAILABLE on "SRQ-20 is public domain" reasoning, with `availability_audit_full.csv:1288` calling the
+   instrument "WHO public-domain" on reasoning that pre-dates the rulings. Ben's call, not a round's.
+   I did not edit the shared register from a round.
+
+2. **Instrument mismatch (Step 3b), `muller_2016_dog_inhibition` — a real dictionary defect.** The IRW
+   Description says "Inhibitory-control (cylinder) task, pet dogs, 3 trials". There is no cylinder task in
+   Müller et al. (2016) and the word appears nowhere in it. `Inhibition1/2/3` are three DISTINCT tasks
+   (wait-for-treat / middle cup / leash) per the S3 File's own variable sheet, not three trials of one.
+   Analytic consequence: the items are not exchangeable replications, so a single-trait model over them
+   assumes more than the design supports. Dictionary Description should be corrected.
+
+3. **Source appendix defect, both muir tables.** S3 Appendix III prints EIGHT statements under Q5 against
+   SEVEN opinion columns, with defective lettering (a,b,c,d,e,f,g,**f**); statements 6 and 7 are near-duplicates
+   ("future crises" vs "future challenges"). Paper Table 1 settles it at seven components, "crises" variant.
+   Q6 a–h maps 1:1 onto columns 12–19 cleanly. The two agents reached this independently from the same source
+   without touching each other's files — useful corroboration, and the intended behaviour of the sibling warning.
+   Appendix III is an **image-only PDF** (3 scanned JPEGs, `pdftotext` yields 31 bytes); both tables' wording was
+   transcribed from rendered page images and is flagged in provenance as warranting a human spot-check.
+
+4. **Step 5b orchestrator re-checks — all agent claims confirmed, none overturned.** Ran `item_stats.R` on the
+   three written tables rather than trusting the reports: `12_behaviours_collaboration_within_units` n=13 against
+   69,70,70,70,70,69,70 (agent's figure exact); Müller per-item n=39/40/36=115, and 123−115=8 matching the
+   paper's 8 dogs that completed only two of three tasks. One claim looked wrong and was not: the opinions agent
+   said `7_opinion_timely_actions` uses only 3 of 5 levels while its live range is 1–5 — the distinct values are
+   {1,4,5}, so three levels is correct.
+
+5. Response-data facts worth carrying (source-side, not extraction): `12_behaviours_collaboration_within_units`
+   is 57/70 empty in the S5 deposit; two combined multi-select cells ("Frequently, Always") are dropped by the
+   processing script as a checkbox artifact; no respondent chose Never(1) or Rarely(2) on any behaviours item.
+
+Round pacing: this round ran **four agents** (2026-09-09, Ben's call, walking the probe back up from two).
+No kill, no OOM, no retry — all four agents completed first time, 253–361s each. That is the first clean
+data point at four, and it is evidence against the dispatch-spike model being binding at this size today.
+Cap is batch_140; 112 completed, so the next firing proceeds normally.
