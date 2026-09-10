@@ -14426,3 +14426,66 @@ corruption of "agree" in the deposited file. Transcribe as-is or flag it; do not
 
 **Queue:** 0 rows left in_progress; 537 pending, 662 done, 127 blocked, 12 failed, 63 excluded.
 Cap is batch_165 — not reached, round ends normally.
+
+## batch_136 — 2026-09-10 02:15
+
+4 tables claimed, **4 agents** (one per table), all four `pickova2025_*` siblings
+off the same figshare deposit.
+
+**written 4 / blocked 0 / failed 0 — yield 100%.**
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| pickova2025_fast_fashion_beliefs | 35 (5 items x 7) | data_labels | VERIFIED, route 9 |
+| pickova2025_feelings | 35 (5 items x 7) | data_labels | VERIFIED, route 9 |
+| pickova2025_moral_justifications | 49 (7 items x 7) | data_labels | VERIFIED, route 9 |
+| pickova2025_perception | 49 (7 items x 7) | data_labels | VERIFIED, route 9 |
+
+Source for all four: figshare 10.6084/m9.figshare.30576341 (CC BY 4.0), file
+59422829 — the raw Google Forms export, whose column headers carry the item
+wording directly. Continues the run started in batch_135 (`pickova2025_attitude`,
+`pickova2025_behavioral_intent`). The four-way sibling split worked: each agent
+read the shared deposit and wrote only its own filenames, no collisions.
+
+Gates: normalize_nulls 0 of 4 changed; audit_batch **4 PASS, no anomalies**
+(so no Step 5c WARNs to explain); verify_batch **PASS=4**; lint_verification
+0 ERROR / 4 WARN; irw-validate clean on all four.
+
+The 4 lint WARNs are all the same known caveat and are already explained in
+notes.csv: **the deposit publishes no anchor labels for the 1-7 scale**, so
+`option_text` ships blank on every row (nothing padded with its own number) and
+the scale direction is unverified. Each agent checked the export headers, the
+figshare description, the analysis workbooks and the deposited Tableau
+screenshot before concluding this. It is a source gap, not an itemtext defect —
+same caveat the two batch_135 siblings carry.
+
+Notable:
+- **Mapping was positional, not exempt.** No `data/pickova2025_*` processing
+  script exists, so no agent claimed the data_labels exemption. All four
+  verified the code→column tie by exact raw-vs-live response-frequency match
+  (route 9), and each ruled out every non-identity permutation of its codes
+  (1 of 120 for the 5-item tables, 0 of 5039 for the 7-item ones). That is
+  VERIFIED in the strict sense: every item distinguished from every other.
+- **Source artifact shipped verbatim (moral_justifications).** The grid stem
+  reads "Please indicate how much you **6** with the following statements…" —
+  a digit where "agree" belongs, evidently a find-and-replace accident in the
+  form. Shipped unrepaired with a public_note, since the header is what the
+  form displayed and the deposit holds no second copy to check a correction
+  against. **Step 5b re-check: confirmed independently** — the orchestrator
+  read the raw header row and the `6` is present in all seven of columns
+  51–57, so the note as written is accurate.
+- `feel_4`/`feel_5` n=132 and `ffb_4` n=133 against 135: single blanks in the
+  raw file, reproduced exactly live. Source gaps, not processing artifacts —
+  and independently re-confirmed by verify_batch re-running each script
+  against freshly fetched data.
+- `check_provenance.R` exits 1, but **not on this batch**: it flags
+  `aspirations_sonmez_2022` as IRW-generated content with no issues-page
+  entry, plus 12 `translation_source=mixed` review rows. All pre-existing;
+  none of batch_136's four tables are implicated (all are
+  `text_source=study_materials`, no translation).
+- Export cost: four deliberate `irw_fetch` calls on small tables (663–930 rows,
+  tens of KB each). Route 9 needs per-item x per-level counts, which
+  `irw_table_sets()` cannot supply; the gates themselves used `--table-sets`.
+
+Circuit breaker: 0 failed of 4 (0%), not tripped. Cap (batch_165) not reached;
+533 pending remain.
