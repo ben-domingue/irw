@@ -13866,3 +13866,50 @@ perceived_risk, and the rest): the scale direction is settled — ship
 1 = Definitely agree .. 5 = Definitely disagree, with the same public_note.
 
 Cap (`batch_165`) not reached.
+
+## batch_126 — 2026-09-09 23:06–23:2x
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — full yield (4/4)**. Four agents,
+one per table; all four tables are `pang_2023_*` siblings off one source, so each agent was
+given explicit sibling boundaries. No kills, no retries, no rate limits.
+
+Tables: `pang_2023_perceived_enjoyment`, `pang_2023_perceived_risk`,
+`pang_2023_perceived_usefulness`, `pang_2023_social_norms` — 25 rows each (5 items × 5 options).
+
+Source: Pang, Ye & Zhang (2023) PLoS ONE 18(5):e0285815, CC BY 4.0. Item wording from the S2
+File questionnaire (the form as administered), corroborated by the S1 workbook's column headers.
+
+Gates: normalize_nulls 1 of 4 fixed (perceived_usefulness, 25 lines — empty strings for absent
+values). audit_batch **PASS=4, no anomalies** (so no Step 5c WARN explanations owed).
+verify_batch **PASS=4**. lint_verification 0 ERROR, 1 WARN (perceived_usefulness — evidence
+says option_text unverified; that is the round-wide option-axis gap below, not a defect).
+irw-validate clean on all four. check_provenance: no failure attributable to this batch.
+
+**Verification: all four PARTIAL, deliberately.** Codes are assigned POSITIONALLY by
+`data/pang_2023_nev_adoption.py` (slices of `item_cols`), so no `data_labels` exemption was
+claimed even though the S1 headers are the item text; every agent ran the header diff instead.
+Item axis is decisive — all 40 item columns in S1 have mutually distinct 5-level count vectors,
+and each live item matched exactly one of the 40, at the position its slice predicts. Option
+axis is not established to that standard, hence PARTIAL.
+
+**Notable — a contradiction inside the published source, carried into public notes.** The
+paper's Methods says the 5-point scale ran 1 = strongly disagree … 5 = strongly agree, but the
+S2 questionnaire lists "Definitely agree" first and the deposit codes by display position. All
+four tables ship the questionnaire's direction (1 = Definitely agree … 5 = Definitely disagree,
+i.e. reverse-Likert), matching the four siblings shipped in batch_125 — the eight `pang_2023_*`
+tables are consistent with each other.
+
+**Step 5b orchestrator re-check of that override (it is going on the public issues page, so it
+was not taken on the agents' word).** Re-read S1 independently: gender 172/137 = 55.7% male vs
+published 55.7%; age codes 1+2 = 273/309 = 88.3% vs published 88.5%; education codes 3+4 =
+279/309 = 90.3% vs published 90.3%; and 40 of 40 item columns have distinct count vectors. The
+counter-evidence the agents disclosed is also real: profession reads 156/12/46/33/38/24, NOT
+display order. So the direction inference is 3-for-4 on the demographics, which is why the rows
+are PARTIAL rather than VERIFIED. Claim reproduces; recorded rather than overridden.
+
+Also disclosed on all four: administered in Chinese, but the deposit publishes no Chinese
+wording anywhere — S2, despite being titled "Original and translation of the questionnaire",
+contains no CJK outside a font name. Shipped as `text_source=translated_substitute`,
+`translation_source=study_supplied`, `language=Chinese`, empty `_translated`.
+
+Cap (`batch_165`) not reached.
