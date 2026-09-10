@@ -15489,3 +15489,72 @@ reproduced to ≤0.0041. Its S1 Table also publishes coded wording for **all 17 
 for the four still-queued sibling `qin_2025_*` tables — the next round should land easily.
 
 Cap (`batch_165`) not reached. 468 pending remain.
+
+## batch_150 — 2026-09-10 07:41–07:5x
+
+4 tables claimed, 4 agents (one per table, parallel). **written 3 / blocked 1 / failed 0 — yield 75%.**
+Circuit breaker not approached (0% failed; the breaker counts `failed`, not `blocked`).
+
+**Shipped (all PASS, all VERIFIED):**
+- `qin_2025_perceived_cultural_distance` — 18 rows (3 items × 6 levels)
+- `qin_2025_tourism_experience` — 30 rows (5 items × 6 levels)
+- `qin_2025_tourist_satisfaction` — 18 rows (3 items × 6 levels)
+
+All three are one source: Qin & Zhang (2025), PLOS ONE 10.1371/journal.pone.0336220, CC BY 4.0.
+S1 Table "Measurement scales" (.docx, sha256 `423f0ea1…`) prints the codes beside the sentences, so
+`mapping_basis=paper_explicit` (the deposit CSV headers are bare codes, hence not `data_labels`), and
+`data/qin_2025_cultural_tourism.py` selects literal column lists and melts — no rename, no positional
+step. The three-agents-on-one-source split worked as intended: each agent derived the same S1 Table
+convention independently (useful corroboration) and no agent touched a sibling's files.
+
+Each verified on two independent links: a per-respondent identity join to the study's own S1 Data on
+`id=='No.'` (547/547 respondents; each live code agrees with its same-named source column on 100.0%
+and with its siblings on only 54–69%), plus reproduction of the paper's Table 7 cross-loading matrix
+(largest residual 0.0034–0.0045, against 8.8×–12.6× worse for every wrong permutation — 120 scored
+for the 5-item RCTE block). `verify_batch.R` re-ran all three: PASS=3.
+
+Shared caveats, recorded in `notes.csv` and `public_note`: administered in **Chinese**, but there is
+zero CJK anywhere in the article or its two supplements (the .docx's only two CJK code points are the
+font name 宋体 in styling XML), so the 2026-09-01 fallback applies — authors' English in the base
+fields, `language=Chinese`, no `_translated` columns, `text_source=translated_substitute`,
+`translation_source=study_supplied`. The 1–6 anchors are **never stated by the source**, so
+`option_text` ships blank at all six levels rather than padded with the level numbers (this is the
+single lint WARN, correctly raised: the item axis is sound, the option wording is a genuine gap).
+Source typos shipped verbatim rather than silently corrected (RCTE4/RCTE5's duplicated "gain a gain
+a"; SA3's missing final full stop).
+
+**Blocked (determinate, retry test NO): `qol_islam_2025`** — the 26-item **WHOQOL-BREF**. The settled
+2026-09-04 no-redistribution ruling was applied, not re-derived; no ship-shaped verdict written
+anywhere. Row added to `itemtables/pending_index_notes.csv`.
+
+**Notable — a rights-register gap closed.** The WHOQOL is the *founding* no-redistribution ruling and
+had **no row at all** in `instrument_rights_register.csv` (0 of 54). A `block` row was added this
+round (rounds may write a block verdict, never a ship one), carrying the AUT/NZ clause, a blank
+`source_sha256` — precedented, cpcr.aut.ac.nz 403s and Manchester's PDF fails on a TLS mismatch — and
+a `match_item_code` regex covering `^qol_[0-9]+$`.
+
+**Why this table evaded every prior sweep, which is the transferable lesson:** the table name has no
+`whoqol` substring, so the `rights_1927` name sweep missed it, and `availability_audit_full.csv`
+still classes it AVAILABLE citing the WHO field-trial manual — that audit row is wrong. Identify the
+WHOQOL by shape as well as by name.
+
+**Step 5b orchestrator re-check (the agent's claim was right, and my arithmetic objection was the
+thing that was wrong).** The agent reported item `QoL_21` — sexual activity, the instrument's own
+signature — at n=909 against 1147 for the other 25. That looked inconsistent with the table's 29,822
+rows, which is *exactly* 26 × 1147. Re-checked server-side with `irw_table_sets(per_item=TRUE)`, no
+export: the claim holds — QoL_21 n=909, all others 1147 — and the 238-row gap is NA-`resp` rows
+retained in the table (238 = 1147 − 909). Confirmed rather than corrected, with the numbers recorded.
+Also surfaced in the same query and worth noting as a property of the response data, not an itemtext
+defect: **`QoL_5` uses only 4 of the 5 levels** (resp 1–4), though the paper states 1–5 throughout.
+
+**Gates:** normalize_nulls 0 of 3 changed · audit_batch **PASS=3, no anomalies** (so no Step 5c
+explanations owed) · verify_batch **PASS=3** · lint_verification 4 rows, **0 ERROR**, 1 WARN, 1 INFO ·
+`irw-validate` ok on all three · `check_provenance.R` clean for this batch (the 3 tables it names with
+no issues-page entry are pre-existing and none are ours; our three are `study_supplied`, i.e. the
+authors' own English, not IRW-generated).
+
+No NOT_NEEDED tracker rows were owed — no table in this batch is `data_labels`, so all four already
+carried a verification row. Sidecars merged and deleted **by exact name**, never by glob.
+
+Ran at four agents per round. No kills, no rate limits, no retries; all four agents returned within
+~5.5 minutes of dispatch. Cap (`batch_165`) not reached — 464 tables still pending.
