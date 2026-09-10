@@ -14042,6 +14042,102 @@ Recorded per-script rather than left to a later pass to re-derive:
   label layer of any kind. Stems are in the source instruments' own
   publications.
 
+## 2026-09-09 — PLOS monthly run: 0 good, 21 human_assistance, 6 worth_retrying after Step 2b
+
+Scheduled monthly PLOS run (`irw_discover_plos_monthly.py --mode full
+--limit 150`, all 125 terms in the shared construct list x plosone).
+Bookkeeping went straight to main as `588eaf3` (1 `search_terms_log.csv`
+row + 123 DOIs into `plos_seen_dois.csv`).
+
+123 candidates triaged, 125/125 terms visited (123 hit the per-term cap of
+1): 95 `no_usable_file`, 21 `human_assistance`, 4 `below_min_n`,
+2 `not_item_response`, 1 `pii_suspected`. **0 `good`.**
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 21 `human_assistance` rows:
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 11 |
+| `worth_retrying` | 6 |
+| `aggregate_continuous` | 2 |
+| `human_review` | 2 |
+| `not_item_response` | 0 |
+
+**No raw candidates CSV was committed this run.** The 2026-09-08 entry
+above documents this exact routine force-adding
+`plos_monthly_candidates_weekly_2026-09-08.csv` past `.gitignore:59` as
+"the exact workaround `#2075` removed... the sixth scheduled routine to
+use it" (PR closed unmerged). This run is the seventh time that
+instruction would have recurred — it came from this run's own task
+prompt, unchanged since before `#2075`/`#2111` — so the write-up below
+stands in for the CSV instead, per README's "Where files live" table
+(`runs/` is "disposable once the batch is written up in BATCH_LOG.md").
+`runs/plos_monthly_candidates_full_2026-09-09.csv` and its
+`.retriage_ha.csv` sibling are on disk in this session's container only
+and will not survive it; every DOI below is reachable again from its URL,
+and all 123 are now in `plos_seen_dois.csv` so a future run won't
+re-surface them by accident — re-triage a specific one by DOI if it needs
+another look.
+
+### 6 `worth_retrying` (id-column mapping was the only flag, or a
+longitudinal dup_id_item shape)
+
+- **Construct validity of a global scale for Workplace Social Capital
+  based on COPSOQ III** (1316p / 8i) — a named, validated instrument
+  (COPSOQ III); low-confidence id-column mapping was the only issue.
+  `pone.0221893`
+- **An atlas of personality, emotion and behaviour** (1290p / 4i) —
+  dup_id_item fail but n_participants=1290 at a 1.2x ratio, consistent
+  with a longitudinal/repeated-measures design. `pone.0227877`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — dup_id_item fail, 1.0x
+  ratio, same longitudinal-shape read. `pone.0200609`
+- **Sports instructors' job insecurity and turnover intention in South
+  Korea** (267p / 57i) — id-column mapping only. `pone.0347639`
+- **Heterosexist microaggressions, student academic experience and
+  perception of campus climate** (471p / 13i) — id-column mapping only.
+  `pone.0231580`
+- **Influencing mechanisms of live streaming influencer characteristics
+  on purchase intention** (400p / 24i) — id-column mapping only.
+  `pone.0322294`
+
+### 11 `recoverable_format` — all the same shape: one deposit, several
+instruments bundled in one file (`resp_scale_mixed`, several with a
+`multi_scale` warning); the standard already answers this with one table
+per scale. Largest by participant count: Overconfidence/financial-literacy
+Japan panel (`pone.0315622`, 191,762p / 26i), risk-perception/protection
+motivation (`pone.0191994`, 3040p / 64i), Working Memory/Reasoning/Task
+Switching training (`pone.0142169`, 5382p / 3i), early language abilities
+and math skills in Chinese children (`pone.0181074`, 2012p / 16i),
+CEO narcissism and ambidextrous innovation (`pone.0280758`, 1662p / 15i).
+Remainder: smoking self-efficacy in Qatari men (`pone.0263306`), emotional
+regulation in shooters (`pone.0318872`), COVID-era quality of life
+(`pone.0276841`), teacher resilience/work engagement (`pone.0222518`),
+learning motivation and organizational performance (`pone.0304729`),
+exercise-video energy expenditure in children (`pone.0333283`).
+
+### 2 `human_review` (genuinely ambiguous, no clear id column)
+
+- **The role of early language abilities on math skills among Chinese
+  children** (2012p / 16i) — same DOI/table also carries the
+  `recoverable_format` multi-scale issue above; both need a look together.
+  `pone.0181074`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — same row as the
+  `worth_retrying` longitudinal read above; the id-column question and the
+  dup_id_item shape are separate open questions on the same table.
+  `pone.0200609`
+
+### 2 `aggregate_continuous`
+
+Not itemized here — see `runs/plos_monthly_candidates_full_2026-09-09.retriage_ha.csv`
+for this session's duration only; both need a look at whether the flagged
+columns are composite/subscale scores (drop) or genuine continuous
+per-item responses (keep) before any decision.
+
+None of the 123 candidates this run were flagged `good` outright.
+
 ## 2026-09-09b — PMC weekly run: 0 good, and the license gate took a third of it before any data was read
 
 Scheduled weekly Europe PMC run (`irw_discover_pmc_monthly.py --mode
