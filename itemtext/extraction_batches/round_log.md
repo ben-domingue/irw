@@ -14742,3 +14742,61 @@ itself**, so every remaining sibling must re-derive it and inherit nothing.
    Both rows are silence, not an express grant — a clause surfacing later
    reopens them. `pierro_2018_hfs_s4` stays blocked on the HFS row; a
    "forgiveness" table name is a lead, not an identification.
+
+## batch_140 — 2026-09-10T03:17 (4 tables, 4 agents)
+
+Tables: pilch_2021_coping_behavior, pilch_2021_fear_covid19, pilch_2021_personality_ipip20,
+pilch_2021_protection_motivation — all four from ONE source, Pilch, Wardawy & Probierz (2021)
+PLOS ONE 16(10):e0258606, CC BY 4.0, plus its S1 Database `.sav`.
+
+**written 4 / blocked 0 / failed 0 — yield 4/4 (100%).** Second consecutive full-yield round
+(batch_139 was also 4/4). Circuit breaker not triggered (0% failed).
+
+Gates: normalize_nulls 0 of 4 normalized; audit_batch **4 PASS, no anomalies** (so Step 5c owes
+nothing — no WARNs to explain); verify_batch PASS=4; lint_verification 4 rows, no problems;
+irw-validate ok on all four. check_provenance exits 1 on `aspirations_sonmez_2022` (batch_007) —
+**pre-existing, not a batch_140 regression**; none of this round's four tables are named by it.
+
+Verification (all four non-`data_labels`, so all four carry a real row — no NOT_NEEDED owed):
+- fear_covid19 **VERIFIED**, route 1. Polish wording from the sibling paper Pilch, Kurasz &
+  Turska-Kawa (2021) PeerJ 9:e11263 (CC BY 4.0), whose Table 1 prints all 7 FCV-19S items in
+  administered Polish with English in parentheses. All 35 published numbers reproduce under
+  identity (total |diff| 0.2740) and an exhaustive search of all 5040 permutations makes identity
+  the unique minimum (runner-up 0.5169).
+- coping_behavior / personality_ipip20 / protection_motivation **PARTIAL**, all route 3. In each
+  case the published subscale statistics pin every code to its construct but cannot separate items
+  *within* a construct, because no source numbers them: 16 CBS items in 3 blocks, 10 IPIP
+  same-trait/same-polarity pairs, 5 PMQ construct pairs. Correctly PARTIAL, not VERIFIED.
+
+Step 5b orchestrator rechecks — both agent findings **CONFIRMED**, one sharpened:
+- coping_behavior: BEH9 (hand washing/disinfecting) mean **4.214**, **12.34%** at resp=1, lowest of
+  the ten preventive items (next 4.514, highest 5.877). Agent said 4.21 / 12.3% — exact. Property
+  of the response data, not an itemtext defect, but counterintuitive for Poland in May–Jun 2020 and
+  worth a human spot-check since no route tests within-subscale order.
+- personality_ipip20: the reported Table 2 slip is real and **narrower than a whole-row error**.
+  Composite means E 2.761 / A 3.550 / C 3.222 / I 3.806 vs published 2.76/3.55/3.23/3.81 — four of
+  five exact. N observed 3.186 vs published 2.82, and 6−3.186 = **2.814** (exact reflection);
+  r(N,Intellect) −0.116 vs +0.12. But r(N,E) −0.300 vs −0.30, r(N,A) +0.024 vs +0.02, r(N,C)
+  −0.189 vs −0.19 all reproduce with N **unflipped**. So Table 2's N row *mixes* the two scoring
+  directions rather than being uniformly reversed. Bears on the paper, not the mapping — the
+  mapping evidence rests on the alphas, four exact means, all five SDs and 9 of 10 correlations.
+
+Notable, non-blocking:
+- **Three of four ship English for a Polish administration.** Only fear_covid19 has published
+  Polish wording. The CBS and the PMQ are the authors' own instruments printed only in English in
+  their own CC BY article, so the fallback applies (English in base fields, language=Polish,
+  text_source=translated_substitute, translation_source=study_supplied).
+- **PMQ Table 1 exists only as an image** — the `article/table?id=...t001` endpoint 404s while the
+  figure/image endpoint serves it. Transcription is OCR-grade; flagged for spot-check. This is the
+  same image-only-journal-table surface noted for the availability audit.
+- No `.sav` gave a `data_labels` route: its variable labels are terse construct indices
+  ("Preventive behavior 7", "Wishful thinking3", bare "Fear1"), which pin construct and number but
+  carry no wording. Item CODES are nonetheless risk-free throughout — `data/pilch_2021_coping_covid.py`
+  melts the raw `.sav` column names unrenamed, so no positional assignment exists anywhere.
+- **Added an IPIP `ship` row to `instrument_rights_register.csv`** (row 50), flagged as owed by the
+  ipip20 agent: IPIP items are public domain upstream (ipip.ori.org) and the Polish IPIP-BFM-20 form
+  is CC BY 2013. `match_item_text` deliberately left blank — IPIP items recur verbatim across many
+  unrelated instruments and a text regex would over-match. The Topolewska 2014 article is CC BY-NC-ND
+  and is recorded as NOT a permissible wording source.
+
+Cap (batch_165) not reached; 517 pending remain.
