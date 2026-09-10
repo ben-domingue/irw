@@ -17,10 +17,23 @@ Item text: not shipped. The spreadsheet's item columns are bare integers
 514 Chinese college students. Four instruments in one questionnaire, all on the
 same 1-5 agreement scale:
 
-zhou_2025_peer_relationship        PR1-PR20    20 items  1-5
-zhou_2025_social_support           SS1-SS17    17 items  1-5
-zhou_2025_exercise_self_efficacy   ESE1-ESE8    8 items  1-5
-zhou_2025_pa_intention             PAI1-PAI8    8 items  1-5
+zhou_2025_peer_relationship_inventory  PR1-PR20    20 items  1-5
+zhou_2025_social_support               SS1-SS17    17 items  1-5
+zhou_2025_exercise_self_efficacy       ESE1-ESE8    8 items  1-5
+zhou_2025_pa_intention                 PAI1-PAI8    8 items  1-5
+
+Naming (irw#2149)
+-----------------
+The peer relationship table was first published as `zhou_2025_peer_relationship`,
+a name `data/zhou_2025_ehealth_literacy.py` had already given to a different
+paper's table (Zhou N et al., pone.0330637: 14,892 students, 16 items). Both were
+live in different warehouses, and the name resolved to one while the metadata
+described the other. This paper's table was renamed after the instrument, which
+the abstract calls the Peer Relationship Inventory. This script is named after
+its PA intention table rather than the peer relationship one, because the
+processing-notes lookup matches script names by prefix: a script called
+`zhou_2025_peer_relationship_inventory.py` would be served as the notes for
+the other paper's `zhou_2025_peer_relationship`.
 
 Reading the layout
 ------------------
@@ -86,7 +99,8 @@ COV_COLS = list(COVS.values())
 # table -> (source column numbers, item code prefix, name of the composite
 #           column that follows the block and must equal its row mean)
 TABLES = [
-    ("zhou_2025_peer_relationship", range(5, 25), "PR", "peer relationship"),
+    ("zhou_2025_peer_relationship_inventory", range(5, 25), "PR",
+     "peer relationship"),
     ("zhou_2025_social_support", range(25, 42), "SS", "social support"),
     ("zhou_2025_exercise_self_efficacy", range(42, 50), "ESE",
      "Exercise self-efficacy"),
