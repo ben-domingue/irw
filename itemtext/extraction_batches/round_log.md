@@ -14800,3 +14800,96 @@ Notable, non-blocking:
   and is recorded as NOT a permissible wording source.
 
 Cap (batch_165) not reached; 517 pending remain.
+
+## batch_141 — 2026-09-10 03:37–04:10
+
+4 tables claimed, 4 agents (one per table). **Written 3 / blocked 0 / failed 1 — yield 75%.**
+Circuit breaker not tripped (25% failed, threshold >30%).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `polca_election` | done | 48 | data_labels | VERIFIED |
+| `PMT_Trzcinska_2023_PMT` | done | 128 | reconstructed | PARTIAL |
+| `piterova-slovak-science-related-populism` | done | 592 | paper_explicit | PARTIAL |
+| `pinheiro_2023_trwcas` | **failed** | — | unknown | NO_ROUTE |
+
+Gates: `normalize_nulls.R` fixed 2 of 3 files. `audit_batch.R` PASS 1 / WARN 2 (both explained in
+`notes.csv` per Step 5c, both non-defects). `verify_batch.R` PASS=3. `lint_verification.R` clean
+(4 rows, no problems). `irw-validate` exit 0 — two `name_charset` WARNs only, on the pre-existing
+capitalised/hyphenated live table names, not on anything this batch introduced.
+`check_provenance.R` exits 1 on a **pre-existing** table (`aspirations_sonmez_2022`, ships
+IRW-generated English with no issues-page line); none of this round's four tables is implicated —
+`PMT_Trzcinska_2023_PMT` is correctly counted as HELD (extracted, gated, never uploaded), and it
+owes an issues-page line at upload time, not now.
+
+**Why `pinheiro_2023_trwcas` is `failed` and not `blocked`.** The retry test answers YES: both
+blockers are unresolved access failures, and the orchestrator re-checked them directly rather than
+taking the agent's word — `periodicos.ufjf.br` returns **HTTP 401** to a plain curl (it carries the
+university adaptation's own paper, *Psicologia em Pesquisa* v.20 e44013), and `repositorio.ufc.br`
+(author's thesis, EACTD manual) **times out with no response at all** after 45s. If either host
+answers, the mapping is decidable and all 23 rows can be written from wording already cached under
+`.cache/pinheiro_2023_trwcas/`.
+
+The decline itself is well-founded and reproduces. The agent recovered the TRWCAS/EACTDR wording
+from two CC BY sources, then showed the live data contradicts the assumption that this deposit's
+`ct_N` is pool item N. Orchestrator re-ran `verify_pinheiro_2023_trwcas.R` (its contract is
+deliberately inverted — it PASSES when the contradiction reproduces): within-factor mean r 0.211 vs
+between-factor 0.216 (separation −0.005, no block structure), near-synonym pairs weaker than
+unrelated ones, and item means rank-correlating only rho=0.204 with the developers' own sample over
+19 shared items. Most likely the deposit uses the university adaptation's own numbering — its
+column order is not even monotone (`…ct_25, ct_23, ct_29, ct_27…`). Shipping the recovered wording
+would have shipped a confidently-wrong mapping. Sibling `pinheiro_2023_srq` (SRQ-20) is unaffected
+and remains separately extractable.
+
+### Step 5b — orchestrator re-checks of the round's own claims
+
+All three claims that reported a defect in the response data were re-checked server-side via
+`irw_table_sets()` (no export), and all three **confirmed exactly**:
+
+- **`PMT_Trzcinska_2023_PMT` — retest encoded as item codes, not a wave.** Confirmed to the row:
+  7392 rows over 64 items, every `ONE*` code n=**204**, every `TWO*` code n=**27**, and
+  32×204 + 32×27 = 7392. `TWO*` is the same 32 forced-choice picture pairs re-administered two
+  weeks later to the 27-child test–retest subsample. This is a **response-side defect worth its own
+  issue**: the occasion belongs in a `wave` column, not in a second set of item codes. It is also
+  what produced the `audit_batch.R` row-count WARN (median item n 115.5 sits between the two blocks).
+- **`piterova-…-populism` — `Ppl2` is `Homo2`.** Confirmed: the live item set contains `Ppl1` but
+  no `Ppl2`, and `Homo1`–`Homo4` are all present. The SciPop "ordinary people" factor and the
+  Schulz homogeneity subscale share one item administered once, so `Homo2` legitimately belongs to
+  two scales. Live resp set confirmed as {0–10, 98}; **98 is a source sentinel** carried through by
+  the processing script — a response-data property, not an item-text one.
+- **`polca_election` — `data_labels` route.** The agent ran a real verification route even though
+  `data_labels` is exempt, and `verify_batch.R` reproduced it: per-item live n matched per-column
+  non-NA n in `poLCA::election` **12/12 exactly**, with all 12 counts distinct, so any permutation
+  of trait or G/B suffix would break it.
+
+Notable, non-blocking:
+- **`piterova` coverage is deliberate, not a gap.** The live table pools the whole 2023 survey
+  battery (96 items); the deposit publishes wording only for the 33 items the SciPop paper reports,
+  so 63 items ship blank `item_text` to keep the item sets matching. `option_text` is blank
+  throughout because the administered **Slovak response anchors are published nowhere** — nothing
+  was padded; the author's English endpoint labels sit in `option_text_translated`, following
+  batch_140's `pilch_2021_fear_covid19`.
+- **A recoverable follow-up on `piterova`**: a companion deposit for the *same* 643-respondent
+  dataset (osf.io/3w98r) prints English wording for the 7 relative-deprivation items, but
+  unnumbered and code-less, so ordering `RelDep1`–`RelDep7` would be a pure guess. Logged in
+  `notes.csv`, not shipped. Also: `Distrust3` is stored **raw** (reverse-keyed) — the published
+  2.89/0.81 only reproduces after `6 − Distrust3`.
+- **`PMT` `resp` is picture POSITION, not materialism** (1 = the picture named first in the
+  sentence). Established rather than assumed: predicting the deposit's own scored `rONE*`/`rTWO*`
+  columns from position reproduces 64/64 columns, and the check is non-vacuous (16 codes name the
+  material picture first, 16 second). Two gender-matched forms exist and the item code does not
+  record which a child saw, so both are shipped verbatim, marked `[girls' form]` / `[boys' form]`.
+- `PMT` is PARTIAL rather than VERIFIED for an honest reason: the `ONE*` block is pinned item by
+  item by its self-describing pair abbreviations, but the `TWO*` codes carry no abbreviation and
+  rest on the shared numeric suffix plus an aggregate signal (r=0.743 between ONE_k/TWO_k
+  endorsement rates vs 2000 random re-pairings, mean −0.002, p<0.0005). Two same-direction `TWO*`
+  items could in principle be swapped.
+- **`polca_election` is the ANES 2000 candidate-trait battery** shipped with CRAN `poLCA`. `Rd_db()`
+  plus the data object's own factor labels ("1 Extremely well" … "4 Not well at all") made the
+  mapping authoritative. `electionstudies.org` is Cloudflare bot-walled (403); the ANES pre-election
+  questionnaire was recovered via web.archive.org. The battery's 7th trait (K2g/K3g, "out of touch
+  with ordinary people") is omitted by poLCA — 12 items is correct, not a coverage gap.
+- Four agents again ran with no kills and no failed dispatches, consistent with the batch_104–119
+  record; the agent count remains the wrong variable to blame.
+
+Cap (batch_165) not reached; 513 pending remain.

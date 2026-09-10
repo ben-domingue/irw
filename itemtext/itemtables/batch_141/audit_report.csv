@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"piterova-slovak-science-related-populism","WARN",96,96,TRUE,TRUE,FALSE,TRUE,61.8,100,"61.8% of rows have blank item_text | 100% of rows have blank option_text"
+"PMT_Trzcinska_2023_PMT","WARN",64,64,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=115.5: ONE10szKOL_PIEN, ONE11szPREZ_RYS, ONE13szPLAC_ZAB, ONE14szCZYT_PIEN, ONE15szPREZ_KOL, ONE16szRYS_UBR, ONE18szPIEN_PLAC, ONE19szPREZ_CZYT, ONE1szZAB_RYS, ONE20szKOL_UBR, ..."
+"polca_election","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,0,""
