@@ -16388,3 +16388,73 @@ agents recorded that honestly rather than sourcing it.
   radius is corpus-wide (several live DASS tables), so it belongs to a human.
 
 Cap is batch_165; 161 is not the cap. Ending normally.
+
+## batch_162 — 2026-09-10 13:55–14:1x
+
+4 tables, 4 agents (one per table), all four returned. **Written 2 / blocked 2 / failed 0**, yield 50%.
+Circuit breaker NOT tripped: 0 failed. Both no-CSV tables are determinate rights verdicts with
+retry test = NO, which per the 2026-09-03 rule do not count toward the breaker.
+
+| table | outcome | why |
+|---|---|---|
+| `rosharudin_2023_ders18` | **done** | Malay DERS-18, 18 items × 5 levels = 90 rows; audit PASS |
+| `rr98_accuracy` | **done** | rtdists rr98, 33 stimulus levels × 2 = 66 rows; audit WARN (explained) |
+| `ruiz_parra_2023_iri_pt` | **blocked** | IRI register block applied (irw#1955); retry test NO |
+| `ruiz_parra_2023_maas` | **blocked** | CSDT full-scope block applied (2026-09-09); retry test NO |
+
+**Gates.** normalize_nulls fixed 91 lines in the DERS file; audit_batch PASS=1 WARN=1;
+verify_batch PASS=2 (both VERDICT: PASS); lint_verification 0 ERROR / 1 WARN;
+`irw-validate` ok on both CSVs (2 checks each, nothing to report); `check_provenance.R` clean for
+this batch (its 5 outstanding issues-page tables and 21 `mixed` rows are all pre-existing, none
+from batch_162). No NOT_NEEDED rows were owed — both written tables carry a real verification row.
+
+**Four agents held.** Second round at four since Ben's 2026-09-09 call. No kills, no retries, no
+salvage; the four `claude` processes and their R/Python children coexisted with an interactive
+session throughout. Nothing here argues for walking the count back down.
+
+**Step 5b re-check — CONFIRMED the agent, and the confirmation mattered.** `rosharudin_2023_ders18`
+ships a public_note saying the three Awareness items are stored RAW, opposite in direction to the
+other 15. Re-derived independently rather than taken on report: corrected item-total r in the live
+IRW values is @1_A +0.33, @4_A_A +0.33, @6_A +0.49 against +0.60 to +0.72 for all 15 other items,
+with no negative item anywhere (689 ids, 12,402 rows). The paper says outright that "all awareness
+items scores were reversed" before analysis and its Table 3 then reports Awareness item-total r of
+−0.23 to −0.42 against 0.53 to 0.70 for the rest. Mirror images at matching magnitudes — which
+confirms the direction claim by a route independent of the floor/ceiling swap the agent used.
+Checked specifically because it would have been a shipped defect: since the values are raw, the
+shipped `option_text` (1=Almost Never … 5=Almost Always) labels the stored `resp` correctly on all
+18 items. Also worth recording for downstream users — the paper's own finding is that the Malay
+Awareness subscale misbehaves, aggregate α rising 0.88 → 0.93 when the three items are dropped.
+
+**Audit WARN (Step 5c), `rr98_accuracy`:** "row-count anomaly, median=378". Expected; not an
+itemtext defect and not a data defect. The item IS the stimulus strength level, and Ratcliff &
+Rouder sampled the 33 levels non-uniformly — trials concentrate near the ambiguous midpoint
+(i 15, n=690) and thin out at the saturated extremes (i 32, n=37). `verify_rr98_accuracy.R`
+reproduces every per-item n from the CRAN source with max |n diff| = 0, so nothing is missing or
+conflated. Explanation appended to notes.csv.
+
+**Lint WARN, `rosharudin_2023_ders18`:** "VERIFIED but its evidence hedges — should this be
+PARTIAL?" Left as VERIFIED, deliberately. The standard for VERIFIED is that the route separates
+every item from every other, and the 18×18 nearest-neighbour assignment on floor/ceiling/sd returns
+the claimed code as unique best match 18 of 18 (smallest runner-up gap 0.411 against best-match
+costs of 0.038/0.064, ~7×). The hedging sentences are about `option_text`, which no route can
+verify, and about the item-number → Malay-sentence link, which Table 5 prints directly rather than
+leaving to inference. Neither concerns item separability.
+
+**Both blocks are rights, both applied rather than re-derived, and both are effective** — the live
+item codes (`IRI_PT_<n>`, `MAAS_1..14`) are bare source headers carrying no wording, so withholding
+item text really does withhold the instrument. Neither is the irw#2101 case where the response
+table already leaks the items.
+
+**Carried forward for a human, not acted on:**
+1. `ruiz_parra_2023_maas` — the deposit has 14 contiguous MAAS columns against a 15-item scale, and
+   which canonical item is missing is stated nowhere. Circumstantially item 15, but on a filing
+   convention, not evidence. Must be settled (probably by writing to the authors) before any
+   future unblock assigns text.
+2. `availability_audit_full.csv` line 913 marks `ruiz_parra_2023_maas` AVAILABLE because MAAS
+   wording is "freely and widely published" — the same class of error the register already flags
+   for the PPOS. Worth a sweep for other library instruments audited on that reasoning.
+3. Register scope note: the IRI block reaches `ruiz_parra_2023_iri_pt` only. The remaining queued
+   siblings `ruiz_parra_2023_pid5bf` (APA-published) and `ruiz_parra_2023_rfq8` must each be
+   checked against the register on their own instrument, not by family.
+
+Queue after this round: 416 pending. Cap is `batch_165` — not reached, next firing proceeds.
