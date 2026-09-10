@@ -13376,3 +13376,77 @@ Other notables:
   remains pending.
 
 Cap (batch_140) not reached; 613 pending remain.
+
+## batch_117 — 2026-09-09 19:46–20:05
+
+4 tables claimed, **4 written / 0 blocked / 0 failed** (yield 4/4 = 100%). Four
+agents, one per table, per the 2026-09-09 raise to four. No kill, no retry, no
+rate limit; all four agents finished in 5–10 minutes. Gates: `audit_batch.R`
+4/4 **PASS** with no anomalies (so nothing for Step 5c to explain),
+`verify_batch.R` PASS=4, `lint_verification.R` 4 rows no problems,
+`irw-validate` ok on all four, `normalize_nulls.R` fixed 2 files.
+`check_provenance.R` exits 1 on `aspirations_sonmez_2022`, which is
+**pre-existing and not in this batch** — no batch_117 table appears in any of
+its flag lists.
+
+Verification: 4 PARTIAL/NO_ROUTE rows, 0 data_labels, so no NOT_NEEDED rows were
+owed in either file and the lint came back clean without them.
+
+- `neurodegenerative_huizinga_2019_vfq` — the sibling left pending by batch_116,
+  now done. NEI VFQ-25, self-administered form; `translated_substitute` +
+  `official_instrument_english` (administered in Dutch, no Dutch form published
+  in the deposit or the PLOS appendices). **PARTIAL**: all 12 of the deposit's
+  own `VFQ_*` subscale scores reproduce exactly from the canonical NEI item sets
+  (16045/16045 cells, 0 mismatches), which uniquely identifies VFQ.1, 2, 10 and
+  12 and pins every other item to its subscale, but not within-subscale order.
+- Four of the five `ngo_2025_green_*` TPB constructs share ONE source, the S2
+  File questionnaire of PLOS ONE 10.1371/journal.pone.0323879. Three were run in
+  parallel and independently converged on the same reading of it, including the
+  same call to leave `option_text` blank (no anchors are published anywhere) and
+  the same refusal to assert a `language` (Vietnamese Gen Z sample, English-only
+  instrument deposited, unexplained `E_L` covariate). `ngo_2025_green_pbc` is
+  **NO_ROUTE** by explicit elimination — routes 1–9 each ruled out and the
+  reasoning recorded — while attitude and purchase_behavior are PARTIAL.
+- **Step 3b / source discrepancy**: the paper's Measures prose calls green
+  purchasing "a three-item measure from Joshi and Rahman", but S2, the S1 data
+  and Table 2 all show FOUR items. Two agents found this independently. Four was
+  shipped; disclosed in that table's public_note.
+
+Step 5b (orchestrator re-checks, all three confirmed against primary sources):
+
+- **The ngo alternating-means anomaly is real, and sharper than reported.** All
+  20 means recomputed from the S1 deposit match the agent's to 3 d.p.: every
+  odd-numbered item sits in 2.61–2.76 and every even-numbered one in 3.61–3.76,
+  across all five constructs, no overlap. New finding: it is a pure LOCATION
+  shift, not two blocks. Pooled odd distribution 1:148 2:831 3:1019 4:357 5:15
+  vs even 1:6 2:132 3:821 4:1046 5:365 — same shape, displaced ~1 scale point —
+  while the correlations do NOT split by parity (odd–odd median r .236,
+  even–even .213, odd–even .257; within-construct r(1,2) .589–.643 is the same
+  size as r(1,3) .623–.651). A systematic ~1-point offset on alternating
+  columns, which no item content explains and the paper never mentions. This is
+  a **corpus-trust question about the deposit, not an itemtext defect** —
+  public_note left empty deliberately, and it does not belong on the itemtext
+  issues page. Affects all five tables, including the two still pending.
+- **The VFQ recode claim is confirmed by reading the processing script**, not
+  taken on report: `data/neurodegenerative_huizinga_2019.R` recodes RAND 0–100
+  item scores to 0–4 (VFQ.2 to 0–5) with a `TRUE ~ resp` fall-through leaving
+  the unscored skip items VFQ.15/15a/15b on raw codes. So higher `resp` = better
+  functioning and the option order is the REVERSE of the printed numbering for
+  the difficulty items — getting this wrong would have shipped them backwards.
+- **The VFQ.15c anomaly is confirmed exactly**: raw VFQ.15c is 0:7, 25:1, 50:2,
+  75:32, 100:1047 (n=1089), so 7 respondents do sit one level below the printed
+  four-option floor. option_text correctly left null there rather than guessed.
+- One label corrected: the trailing-question-mark options were described as
+  "interviewer read-aloud artefacts", which reads as though the interviewer form
+  was shipped. It was not — the shipped instructions are the self-administered
+  wording. The punctuation is a legacy artefact inside the self-administered
+  form, and transcribing it literally is right.
+- **`instrument_rights_register.csv`: added NEI VFQ-25, verdict `ship`.** The
+  extracting agent deliberately declined to write this row to avoid colliding
+  with parallel siblings; the orchestrator re-read the permission block from the
+  questionnaire PDF and confirmed conditions 1–5 verbatim — condition 4 is an
+  attribution requirement, condition 5 waives further permission, and no fee,
+  NC, ND or redistribution term appears anywhere.
+
+Four agents ran clean on the first firing, which is one data point for the raise
+and not yet a pattern. Cap (batch_140) not reached; 609 pending remain.
