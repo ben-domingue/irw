@@ -16130,3 +16130,64 @@ keep describing wording that no longer ships. The withdrawal itself gets no entr
 (SDQ-20), a different instrument. A name sweep would have taken it.
 
 Script: `tools/withdraw_sdq.py`. Takes effect at the next release.
+
+## batch_158 — 2026-09-10
+
+4 tables claimed, 4 agents (one per table), all four returned. **Written 3 / blocked 1 / failed 0.**
+Yield 3/4 = 75%. Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `rinaldi_2021_mas` | done (61 items × 1–7, 427 rows) | `paper_order` | PARTIAL — routes 1+6+5 |
+| `rodriguezandres_2016_mnemocity_usability` | done (9 items × 1–5, 45 rows) | `paper_explicit` | VERIFIED — route 1 |
+| `rodriguezquiroga_2024_epistemic_trust` | done (15 items × 1–7, 105 rows) | `paper_explicit` | VERIFIED — route 1 |
+| `roar_gijbels2024` | **blocked** (rights) | `unknown` | NO_ROUTE |
+
+Gates: `normalize_nulls` fixed 2 of 3 files. `audit_batch` PASS 2 / WARN 1. `verify_batch` PASS=3.
+`lint_verification` 4 rows, no problems. `irw-validate` ok on all 3. `check_provenance` exit 1 —
+**pre-existing, not this batch**: the five tables owing an issues-page line
+(`PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`, `QCDQES_Oliveira_2022`, `qi_2025_panas`,
+`aspirations_sonmez_2022`) are all from earlier rounds; none of batch_158's four tables appears in
+any failure list (they are HELD, so no wording ships yet).
+
+**The one block.** `roar_gijbels2024` is blocked on WORDING RIGHTS, not access — retry test NO.
+The ROAR-PA stimuli exist only in `yeatmanlab/roar-pa-manuscript`, under Stanford's own
+"ACADEMIC SOFTWARE LICENSE FOR ROAR" (Docket S21-342): clause 2 covers "accompanying information,
+materials or manuals", clause 5 limits use to "internal academic, non-commercial purposes" and bars
+transfer without "prior written permission", clause 8 bars distribution without "express written
+permission". The CC BY *Scientific Reports* article publishes no item list. A `block` row went into
+`instrument_rights_register.csv` (family `ROAR-STANFORD`, rows 58→59); no `ship` row was written.
+Note `verify_batch` was not run on this table (no CSV); its `verify_*.R` verifies the BLOCK, not a
+mapping, and says so.
+
+**Step 5b orchestrator re-checks — all three claims confirmed.**
+1. Re-fetched `LICENSE.txt` independently: 3539 bytes, sha256 `18c777856ff1…` matching the agent's
+   quoted hash, and all five reserved-right fragments present. Block is determinate.
+2. `rinaldi_2021_mas` / `Mas_57`: confirmed. First check looked for an empty string and found none —
+   the field is the `NA` null sentinel across all 7 of its rows. 1/61 = 1.64%, exactly the audit
+   WARN. The agent was right and the check was miscalibrated.
+3. `rodriguezquiroga_2024_epistemic_trust`: **dictionary metadata defect confirmed.** The Description
+   says "Epistemic Trust, Mistrust, and Credulity **Inventory (ETMCI)**"; grep finds `ETMCI` and no
+   `ETMCQ`. The instrument and source paper both call it the **Questionnaire (ETMCQ)**. Worth a
+   one-word metadata correction — not made here, since metadata is outside a round's scope.
+
+**Audit WARN explained (Step 5c), appended to `notes.csv`.** `rinaldi_2021_mas`: the 1.6% blank
+`item_text` is a SOURCE/DEPOSIT defect (the `.sav` carries an undocumented 61st `Mas_*` column the
+paper never tabulates) — not an itemtext defect and not a response-data defect, since Mas_57's
+responses are ordinary (top correlate r=0.71). The 71.4% blank `option_text` is a property of what
+the source published: only the two endpoints of the 1–7 scale are labelled, so resp 2–6 are left
+blank rather than padded, per the standard. 5 of 7 levels = 71.4%.
+
+**Other things worth a human's eye.**
+- `rodriguezandres_2016`: wording exists ONLY as table images (PLOS Tables 2/3) — transcription is
+  OCR-by-reading and deserves a spot-check. Source also contradicts itself: Table 2 gives SA1 an
+  agreement scale, Table 3 gives the same question "Very boring…Very fun". Shipped as printed.
+- `roar_gijbels2024`, separate from item text and left untouched: the same Stanford licence governs
+  the RESPONSE DATA IRW already publishes. `biblio.csv` records `License=Custom` pointing at this
+  same file, but clauses 5/8 bar redistribution of the whole deposit, not just the task materials.
+  Ben's call.
+- Both `roar_gijbels2024` (blocked) and `rinaldi_2021_mas` (note_only) got
+  `itemtables/pending_index_notes.csv` rows.
+
+Four agents again ran clean — no kills, no failed extractions, nothing to walk back.
+Cap is `batch_165`; 158 is not the cap, so the queue continues. 432 pending remain.
