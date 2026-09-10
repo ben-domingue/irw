@@ -15755,3 +15755,98 @@ still read verbatim as quoted — `eddiener.com/scales` names the SWLS by name a
 `~ediener/SWLS.html` says "free to use it without permission or charge". The block stands.
 
 Cap (`batch_165`) not reached. 452 pending remain.
+
+## batch_154 — 2026-09-10 10:19–10:40
+
+4 tables, 4 agents (one per table). **written 4 / blocked 0 / failed 0 — yield 100%.**
+Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| reinecke_2018_online_vigilance | done | data_labels | NOT_NEEDED |
+| reinwarth_2023_domain_importance | done | data_labels | NOT_NEEDED |
+| reinwarth_2023_domain_satisfaction | done | data_labels | NOT_NEEDED |
+| reinwarth_2023_loneliness3 | done | data_labels | NOT_NEEDED |
+
+All four mappings are derivation pattern 1 (the processing script melts `value_vars=[...]`
+with `var_name="item"`, so the IRW item code IS the source `.sav` column name), hence Step 5b
+exempt. `verify_batch.R` reports MISSING(exempt)=4, `lint_verification.R` clean at 4 rows.
+
+Gates: `normalize_nulls.R` fixed 1 of 4 (domain_importance, 81 lines). `audit_batch.R` 4/4 PASS,
+**no WARNs** — nothing for Step 5c to explain. `irw-validate` clean on all four.
+`check_provenance.R` exits 1, but on **pre-existing** debt only — the three IRW-generated tables
+with no issues-page entry are PMT_Trzcinska_2023_PMT, poza2026_hlseu, aspirations_sonmez_2022,
+none from this round. No batch_154 table ships IRW-generated English.
+
+Three of the four tables (`reinwarth_2023_*`) come from one deposit; siblings were told explicitly
+which files were another agent's, and scratch was namespaced per table. No collisions.
+`reinwarth_2023_phq4` sits next in the queue off the same two files and should be cheap.
+
+### Step 5b orchestrator re-check (all agent claims independently confirmed)
+
+Re-read the S2 `.sav` directly rather than trusting the reports:
+
+- **Mappings corroborated 19/19.** Shipped `item_text` matches the `.sav` variable-label tails
+  exactly: `q11_1..q11_8` (8/8, "Wichtigkeit <domain>" → domain), `q12_1..q12_8` (8/8,
+  "Zufriedenheit <domain>" → domain), `q16_1..q16_3` (3/3, elliptical continuations match the
+  full-sentence labels word for word). `option_text` matches the value-label sets exactly for all
+  three, including the disclosed `"Extrem  wichtig"` double-space normalisation.
+- **loneliness3 coding claim CONFIRMED, numbers exact.** `q16_1u..3u == q16_x - 1` for every
+  non-missing case, n = 2462 / 2446 / 2444 — the agent's n to the row. Live coding is raw 1–5.
+  Item means 2.306 / 2.038 / 1.718 vs the agent's 2.31 / 2.04 / 1.72. The `public_note` about the
+  paper's 0–4 scoring vs the table's stored 1–5 is accurate as written.
+- **domain_importance's third-party dependency CONFIRMED NECESSARY.** Parsed S1 File
+  (`s001.docx`) directly: **zero** occurrences of "wichtig" or "Wichtigkeit" anywhere in its
+  paragraphs or tables — the study's own materials document only the *satisfaction* half of the
+  FLZ^M grid. So sourcing the importance stem/instructions and English from Schwinn et al. 2026
+  (BMC Psychology, doi:10.1186/s40359-026-05021-3, CC BY) was required, not a shortcut. Note the
+  dependency is narrower than the report implied: the eight domain labels and all five German
+  anchors are corroborated locally against the `.sav`, so only the preamble, grid stem and English
+  rest on the external file.
+- **reinecke unlabelled-midpoint claim CONFIRMED.** S1 `.sav` value labels for `salience_1` are
+  `{1: 'does not apply at all', 2: '2', 3: '3', 4: '4', 5: 'fully applies'}` — 2/3/4 are the scale
+  point padded with its own digit, and the table correctly ships blank `option_text` there rather
+  than the digit. The `SA1:`/`RE1:`/`MO1:` codebook prefixes are stripped as disclosed.
+
+### Escalations for Ben — three rights questions, no register rows written
+
+Per the 2026-09-10 ruling a round may write a `block` row but never a `ship` row, so all three
+shipped on "silence is permission" and are recorded here instead:
+
+1. **Online Vigilance Scale** (reinecke_2018) — the strongest case: it is the *authors' own*
+   instrument, first published in this very CC BY 4.0 PLOS ONE article. A positive grant by the
+   rights holders, not silence. Worth a register row if you want one.
+2. **FLZ^M** (both reinwarth domain tables) — Henrich & Herschbach 2000, author-distributed from
+   TU München, obtained *by request* rather than downloaded. No fee/permission/NC/ND clause was
+   quotable; the EJPA article's one distribution sentence conditions *data sharing by
+   administering researchers*, not redistribution of wording. Caveat worth knowing:
+   `assessment-info.de` (vid=54), the only third-party terms page located, was ECONNREFUSED on two
+   attempts — **no rights-holder terms page was ever actually read.** This is the case the
+   2026-09-05 "any stated use restriction" ruling would reach if a quotable statement turns up,
+   and it governs `reinwarth_2023_phq4` next.
+3. **UCLA-3 / LS-S** (loneliness3) — no reserved right locatable; IRW has already shipped two
+   UCLA-family tables (`gan_2015_ucla_loneliness` batch_035, `jutte_2024_loneliness` batch_060),
+   and the register's De Jong Gierveld row explicitly records revised-UCLA tables as *not* covered
+   by that block.
+
+### Other findings worth a look
+
+- **Instrument misidentification in the source paper.** Reinwarth et al.'s S1 File labels the
+  instrument "Fragebogen zur Lebenszufriedenheit (FLZ)". It is the **FLZ^M** (*Fragen zur
+  Lebenszufriedenheit-Module*, Henrich & Herschbach 2000) — 8 domains rated twice, importance
+  (`q11`) and satisfaction (`q12`), with the weighted composite in `q13`. It is **not**
+  Fahrenberg et al.'s 10-domain × 7-item FLZ sold by Testzentrale. The shipped `instrument` field
+  names both to prevent the confusion propagating.
+- **reinecke_2018 language fallback.** All four studies ran in German; no German wording exists
+  anywhere in scope (all four `.sav` files read, 145 labels, zero German function words; the five
+  SI items are all datasets, there is no questionnaire supplement). Ships the authors' own English
+  with `language=German`, `text_source=translated_substitute`,
+  `translation_source=study_supplied`, disclosed in a `public_note`. Table scope is Study 1 only
+  (N=229), not the pooled four studies.
+- **reinwarth_2023_psych_symptoms** (the `q18` block) is recorded UNAVAILABLE in
+  `availability_audit_full.csv` — S1 File documents every other battery but not that one.
+- Translation caveat carried publicly on domain_importance: Schwinn et al.'s printed English for
+  `resp=2` is "rather not important" where the administered German "Etwas wichtig" means
+  "somewhat important". Shipped as printed rather than silently corrected.
+
+Cap is batch_165; batch_154 completed, not the cap. Ending normally.
