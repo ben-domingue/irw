@@ -13913,3 +13913,62 @@ contains no CJK outside a font name. Shipped as `text_source=translated_substitu
 `translation_source=study_supplied`, `language=Chinese`, empty `_translated`.
 
 Cap (`batch_165`) not reached.
+
+## batch_127 — 2026-09-09 23:22–23:42
+
+4 tables, 4 agents (one per table), all dispatched in one message. **Written 2 / blocked 2 / failed 0.**
+Yield 50%; **circuit breaker not tripped — 0% failed** (both no-CSV outcomes are determinate rights
+blocks with retry test NO, which do not count).
+
+- `papp_silva-martins2023` — **done**, 310 rows (62 items × 5 levels), administered Portuguese +
+  `_translated` English. mapping_basis `paper_explicit`, **VERIFIED**. Not the PAPP item bank the name
+  implies: it is the PPAPP (O'Connor et al. 2014) in its European Portuguese adaptation QPPAF, from the
+  study team's own OSF deposit (CC BY 4.0). The 62 codes are 31 items at two assessment points
+  (`i1..i31` wave 0, `IIi1..IIi31` wave 1). Route 1 is decisive — Additional file 2 Table S2 publishes
+  M and SD for all 31 items at N=503 and the live wave-0 data reproduce every pair to the printed 2 dp
+  (largest deviation M 0.0048, SD 0.0050), and all 31 (M,SD) pairs are distinct, so the match is
+  one-to-one. English is `translation_source=mixed` and partly IRW-written (option labels), disclosed
+  in a `public_note`.
+- `park_2024_ageism` — **done**, 72 rows (18 items × 4 options). mapping_basis `paper_explicit`,
+  **PARTIAL**. Korean-administered, English in the base fields (`translated_substitute`,
+  `translation_source=study_supplied`); no Hangul anywhere in the article or either supplement, so no
+  `_translated` columns. Routes 6+8: the questionnaire's four pro-elderly items (4,6,11,12) are exactly
+  the four codes with negative item-rest correlations (−0.226…−0.153 vs +0.174…+0.520 for the other
+  fourteen, p = 1/3060 under permutation), plus three ordinal positions. PARTIAL because it does not
+  order items within either polarity block.
+- `park_2021_pss10` — **blocked**, instrument rights. Register row 'Perceived Stress Scale
+  (PSS-4/10/14)' (verdict=block, irw#1955) applied, not re-derived; `pssfaqs.doc` re-fetched and
+  byte-identical to the recorded md5. Retry test **NO**.
+- `park_2021_swls` — **blocked**, instrument rights. Register row 'Satisfaction With Life Scale (SWLS)'
+  (Ben, 2026-09-09) names this table explicitly; applied at Step 3 before any transcription.
+  Retry test **NO**.
+
+**Step 3b findings.** Two paper-vs-deposit discrepancies, both real, neither an itemtext defect:
+(1) `park_2024_ageism` — Methods claims the 29-item Fraboni Scale of Ageism (α .90) but the
+administered form and the deposit both hold **18** items (live α .82, confirmed 18 codes a1–a18 by
+`irw_table_sets`). None of Table 2's ageism statistics reproduce under any of the 16 candidate
+reversals, and the burnout block is off by a constant ≈0.16 too — the paper's analysis file differs
+from its deposit. `instrument` names the 18-item Korean form, not the FSA. Responses ship raw
+(a4/a6/a11/a12 not reverse-scored), noted publicly. (2) `papp_silva-martins2023` — dictionary
+Description is garbled and the name implies the wrong instrument; **dictionary fix owed**, written to
+`pending_index_notes.csv` (status `review`).
+
+**Step 5b orchestrator re-checks** — both agent claims independently confirmed via `irw_table_sets`
+(server-side, no export burned): `park_2024_ageism` is 18 items a1–a18, resp 1–4, n=331 with a18 at
+330, exactly as reported; `papp_silva-martins2023` splits into i* at n=484–502 and IIi* at n=125
+exactly, confirming the two-wave account.
+
+**Gates.** normalize_nulls 0 of 2 normalized; audit_batch PASS 1 / WARN 1; verify_batch PASS=2;
+lint_verification 3 rows, no problems; `irw-validate` clean apart from a pre-existing `name_charset`
+WARN on the table name `papp_silva-martins2023` (capitals/hyphen, not this batch's doing);
+`check_provenance.R` clean for this batch. The single audit WARN — `papp_silva-martins2023`
+row-count anomaly, median 304.5 — is explained in `notes.csv`: it is the bimodal two-wave design
+(wave 0 n≈500, wave 1 n=125, the median falling in the empty gap), a property of the response data,
+not item-code conflation.
+
+**Infrastructure.** Four agents ran clean with zero kills, consistent with batches 104–126.
+One transient noted for future agents: `soffice` cannot be launched from `Rscript` here — R exports an
+`LD_LIBRARY_PATH` that breaks `soffice.bin` (`libreglo.so: cannot open shared object file`); the
+workaround is `env -u LD_LIBRARY_PATH`.
+
+Cap (`batch_165`) **not** reached; 571 rows remain pending.
