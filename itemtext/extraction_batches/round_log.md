@@ -13494,3 +13494,45 @@ their own numbers. That is a property of the sources, not a defect.
 No systemic access issues, no Step 3b instrument mismatches, no dictionary/metadata
 problems. Four agents (Ben's 2026-09-09 setting) — round ran clean, no kills, no retries.
 Cap is batch_140; not reached.
+
+## batch_119 — 2026-09-09 20:19–20:31
+
+4 tables claimed, **4 written / 0 blocked / 0 failed** — yield 4/4 (100%). Circuit breaker
+not triggered (0 failed). Four agents (Ben's 2026-09-09 setting); no kills, no retries,
+no rate limits.
+
+| table | items | mapping_basis | Step 5b |
+|---|---|---|---|
+| niazi_2020_mfq | 32 | data_labels | VERIFIED (voluntary) |
+| niazi_2020_mfq_stereotype | 32 | data_labels | NOT_NEEDED |
+| nomt_hooper_2024_study1 | 216 | paper_explicit | VERIFIED (routes 3+8) |
+| nordhoff_2021_safety | 6 | data_labels | NOT_NEEDED |
+
+Gates: normalize_nulls fixed 3 files; audit_batch **4 PASS, no WARN** (so nothing to
+explain under Step 5c); verify_batch 2 PASS + 2 MISSING(exempt); lint_verification clean
+(4 rows); `irw-validate` ok on all four; check_provenance reports only pre-existing items
+from other batches (aspirations_sonmez_2022; the three `mixed` REVIEW rows) — nothing from
+this batch.
+
+Both niazi tables come from one PLOS ONE .sav (self-rating vs `STP_` stereotype condition);
+the two agents were told about each other and neither touched the other's files.
+`nordhoff_2021_trust` was deliberately left in the queue.
+
+**Step 5b orchestrator re-checks — both confirmed, numbers recorded:**
+- `nordhoff_2021_safety` scale direction. The agent's per-item means reproduce exactly via
+  `item_stats.R`: 4.41 / 4.31 / 1.69 / 2.07 / 2.23 / 4.03 for SAFETY1–6, with safe/relaxed
+  at 47.7%/43.8% ceiling and anxious at 48.6% floor. A flipped 1=strongly-agree reading is
+  impossible. Claim stands as written.
+- `nomt_hooper_2024_study1` public_note (bilingual administration not recoverable from the
+  IRW table) — confirmed, and it is stronger than the note claims: `data/nomt_hooper_2024.R`
+  pivots Study 1 on `id` alone, so that table carries **no covariates at all**, whereas
+  Study 2 in the same script carries ten. Nothing distinguishes the 63 English from the 56
+  Spanish participants.
+- The nomt block-order finding (columns 1xx/2xx/3xx are Greebles/Sheinbugs/Ziggerins, NOT
+  presentation order) re-ran under `verify_batch.R` and reproduced: deviations from the
+  paper's Table 1 of 0.000/0.000/0.003 under the shipped labelling vs 0.123 under
+  presentation order, plus a changepoint at exactly k=18 in all three blocks. This is a real
+  trap for anyone assuming column order equals task order.
+
+No systemic access issues, no Step 3b instrument mismatches, no dictionary/metadata
+problems. Cap is batch_140; not reached.
