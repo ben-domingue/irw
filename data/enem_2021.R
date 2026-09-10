@@ -8,6 +8,20 @@ regular_prova_codes  <- c(879, 880, 881, 882, 885, 886, 887, 889, 890, 891, 892,
 # INEP response codes: A-E, "." blank, "*" double mark
 ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")
 
+# the five that are actual answers; anything else in TX_GABARITO is not scorable
+ANSWER_KEYS <- c("A", "B", "C", "D", "E")
+
+# INEP's own per-area presence flag: 0 = absent, 1 = present, 2 = eliminated
+PRESENCE_COLS <- paste0("TP_PRESENCA_", c("CN", "CH", "LC", "MT"))
+
+# post-scoring sanity checks (#1942 finding 3). Resolved relative to THIS file
+# because the year scripts run with the microdata work dir as cwd, not data/.
+.enem_dir <- {
+  a <- grep("^--file=", commandArgs(FALSE), value = TRUE)
+  if (length(a)) dirname(sub("^--file=", "", a[1])) else "."
+}
+source(file.path(.enem_dir, "enem_checks.R"))
+
 # some years ship PARTICIPANTES + RESULTADOS instead of one MICRODADOS file
 find_ci <- function(dir, pattern) {
   hits <- list.files(dir, pattern = pattern, ignore.case = TRUE, full.names = TRUE)
@@ -20,17 +34,44 @@ resul  <- find_ci(data_dir, sprintf("^RESULTADOS_%s\\.csv$", year))
 if (file.exists(single)) {
   microdata <- vroom(single, delim = ";",
                      col_select = list(id = NU_INSCRICAO, tp_lingua = TP_LINGUA,
-                                       starts_with("CO_PROVA"), starts_with("TX_RESPOSTAS")),
-                     show_col_types = FALSE) |> drop_na()
+                                       starts_with("CO_PROVA"), starts_with("TP_PRESENCA"),
+                                       starts_with("TX_RESPOSTAS")),
+                     show_col_types = FALSE)
 } else if (file.exists(partic) && file.exists(resul)) {
   p <- vroom(partic, delim = ";", col_select = list(id = NU_INSCRICAO), show_col_types = FALSE)
   r <- vroom(resul, delim = ";",
              col_select = list(tp_lingua = TP_LINGUA, starts_with("CO_PROVA"),
-                               starts_with("TX_RESPOSTAS")),
+                               starts_with("TP_PRESENCA"), starts_with("TX_RESPOSTAS")),
              show_col_types = FALSE)
   stopifnot(nrow(p) == nrow(r))
-  microdata <- bind_cols(p, r) |> drop_na()
+  microdata <- bind_cols(p, r)
 } else stop(sprintf("No microdata found in %s", data_dir))
+
+# ---- absence filter (#1942) -------------------------------------------------
+# INEP encodes absence in TX_RESPOSTAS differently by year: all dots in 2013 and
+# 2014, an empty string from 2015 on. vroom reads "" as NA, so the drop_na() that
+# used to sit on the load silently removed absentees from 2015 on and kept them in
+# 2013/2014 -- where every "." was then scored 0. 31.1% of 2013 CH candidates came
+# out with a full block of zeros, which is coding, not ability.
+#
+# Filter on INEP's own flag instead, so every year behaves alike. Only presence 1
+# is kept, in all four areas: candidates INEP records as absent (0) or eliminated
+# (2) never enter the 1M sample. Verified per year in enem/fix1942_run that this
+# is exactly the set drop_na() already kept for 2015-2025, so those tables are
+# unchanged; 2013 and 2014 are the years that move.
+#
+# "." and "*" are still scored 0 for candidates who DID sit. That is INEP's own
+# scoring, and once absentees are gone it is only 0.2-0.5% of cells. resp_raw
+# ships alongside resp, so an analysis that wants them missing can do that itself.
+stopifnot(all(PRESENCE_COLS %in% names(microdata)))
+n_all <- nrow(microdata)
+keep <- rep(TRUE, n_all)
+for (.p in PRESENCE_COLS) keep <- keep & !is.na(microdata[[.p]]) & microdata[[.p]] == 1
+microdata <- microdata[keep, setdiff(names(microdata), PRESENCE_COLS), drop = FALSE]
+cat(sprintf("[%s] present in all four areas: %d of %d (%.4f)\n",
+            year, nrow(microdata), n_all, nrow(microdata) / n_all))
+microdata <- microdata |> drop_na()
+cat(sprintf("[%s] after drop_na(): %d\n", year, nrow(microdata)))
 
 # regular examinees, then 1M subsample
 regular_ids <- microdata$id[microdata$CO_PROVA_CH %in% regular_prova_codes]
@@ -45,6 +86,20 @@ items <- vroom(find_ci(data_dir, sprintf("^ITENS_PROVA_%s\\.csv$", year)), delim
                col_select = list(subj = SG_AREA, item = CO_ITEM, position = CO_POSICAO,
                                  booklet = CO_PROVA, key = TX_GABARITO, item_lingua = TP_LINGUA),
                show_col_types = FALSE)
+# ---- annulled items (#1942) -------------------------------------------------
+# INEP records TX_GABARITO "X" for an item it annulled after the exam. No response
+# letter can equal "X", so the item scores 0 for every candidate: a zero-variance
+# column that is useless for IRT and, downstream, indistinguishable from a keying
+# failure. Ten such items sit in the standard sets across 2018-2025. Drop them
+# before the item set is built, so they never reach a published table.
+.ann <- items |> filter(!key %in% ANSWER_KEYS) |> distinct(subj, item, key)
+if (nrow(.ann) > 0) {
+  cat(sprintf("[%s] dropping %d annulled item(s) (TX_GABARITO not A-E): %s\n",
+              year, nrow(.ann),
+              paste(sprintf("%s:%s(key=%s)", .ann$subj, .ann$item, .ann$key), collapse = ", ")))
+  items <- items |> filter(key %in% ANSWER_KEYS)
+}
+
 standard_items <- items |> filter(booklet %in% standard_prova_codes) |> distinct(subj, item)
 std_set <- function(area) standard_items$item[standard_items$subj == area]
 
@@ -138,6 +193,7 @@ for (area in names(AREAS)) {
   df <- process_area(area)
   dups <- sum(duplicated(df[, c("id", "item")]))
   if (dups > 0) stop(sprintf("enem_%d_1mil_%s: %d duplicate id+item rows -- booklet/position join produced ambiguous matches; investigate before trusting output", year, suf, dups))
+  enem_check_scored(df, sprintf("enem_%d_1mil_%s", year, suf))
   save(df, file = sprintf("enem_%d_1mil_%s.Rdata", year, suf))
   write.csv(df, sprintf("enem_%d_1mil_%s.csv", year, suf), row.names = FALSE)
 }
