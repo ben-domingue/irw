@@ -13783,3 +13783,27 @@ live resp set first.
 
 Queue after this round: 585 pending, 623 done, 118 blocked, 12 failed, 63 excluded; nothing left
 `in_progress`. Cap is `batch_165`; not reached. Ending normally.
+
+## batch_124 — 2026-09-09 22:33–22:47
+
+4 tables, 4 agents (one per table), all dispatched in one message. **Written 2 / blocked 2 / failed 0. Yield 50%.** Circuit breaker NOT tripped (0 failed).
+
+- `ozkurt_2026_ego_orientation` — **done**. 50 rows (10 items × 5 levels). `mapping_basis=paper_explicit`, Step 5b **VERIFIED**.
+- `pakseresht_2021_gmfood_risk_ranking` — **done**. 16 rows (4 items × 4 ranks). `mapping_basis=data_labels`, Step 5b **VERIFIED** anyway (the numeric route is stronger than the exemption).
+- `ozkurt_2026_paces_enjoyment` — **blocked**, instrument rights. Retry test **NO**.
+- `ozkurt_2026_sport_motivation` — **blocked**, instrument rights. Retry test **NO**.
+
+Both blocks are determinate rights verdicts on located wording, not access failures — every source was reached in both cases. Neither block leaks: item codes are bare `PACES1..8` / `SMS1..16` and the `.sav` variable labels carry only subscale names.
+
+**Gates — all clean.** normalize_nulls 0 of 2 normalized; audit_batch 2/2 PASS, **no WARNs** (so nothing owed under Step 5c); verify_batch PASS=2; lint_verification 4 rows, no problems; `irw-validate` ok on both, nothing to report; `check_provenance.R` clean for this round (its 1 outstanding IRW-generated-content flag is `aspirations_sonmez_2022`, pre-existing and unrelated).
+
+**Step 5b — orchestrator re-checked the round's three consequential claims, all three CONFIRMED:**
+1. *SMS-II is inside the CSDT library.* Confirmed: the existing `instrument_rights_register.csv` CSDT row names the SMS-II explicitly in its own notes ("the CSDT questionnaire library lists BPNSFS, BPNSS, PNTS, PNSSS and SMS-II"). The agent applied that row rather than re-deriving it — correct.
+2. *`data/pakseresht_2021_gmfood_ranking.py` carries an inverted comment.* Confirmed at line 19: it says ranks are "1-4 (1=highest concern)". The administered scale is **1 = Least relevant, 4 = Most relevant**, and the data settle it — live `n(resp==4)` = 254/144/75/62 against the paper's published main-concern counts 252/141/74/61 (max deviation 3), while the reversed reading `n(resp==1)` = 47/43/173/272 is off by up to 211. Exactly 1 of 24 item-code permutations fits. **Comment only — the shipped response data are unaffected** — but anyone reading that header inverts the scale. Worth a one-line fix in the main repo; not touched here (out of scope for a round).
+3. *`ozkurt_2026_ego_orientation` is misdescribed in the dictionary.* Confirmed by reading the shipped item text: the table is the **whole 10-item Goal Orientation in Exercise Measure**, and EGOQ1/3/4/6/9 are *task* orientation ("I feel good when I do my best…", "…make progress…", "…achieve the exercise goals I have set for myself", "…make improvements…", "…performance that reflects my personal improvement"), matching the GOEM's published key (Task = 1,3,4,6,9; Ego = 2,5,7,8,10). Only half the table is ego orientation, so the table name and the "Ego Orientation Questionnaire" Description are both misleading. **Dictionary/metadata fix owed**; suggested Description is in `notes.csv`.
+
+**Rights register.** Added one row, filed by the orchestrator: **PACES-8 / Turkish FAKO adaptation, verdict `block`** (`match_item_code ^PACES[0-9]+$`), on the non-commercial-only clause printed beneath the FAKO paper's full Ek-2 item appendix (sha256 `768390fd…75b0f`, re-fetched and re-greped by `verify_ozkurt_2026_paces_enjoyment.R`, VERDICT: PASS). The agent had derived it but correctly declined to write to the shared register while siblings were live. **Still owed:** a GOEM (Markland/Bangor) row. The ego_orientation agent found the questionnaire freely downloadable from the rights holder with only a site-wide copyright footer — the PANAS case — and shipped on that basis; the orchestrator did **not** file a `ship` row it had not independently verified, since a wrong `ship` is the dangerous direction.
+
+**Note on the queue's shape:** three of this round's four tables are `ozkurt_2026_*` siblings off one PLOS deposit, and two of the three were blocked by instrument rights while the third shipped cleanly. Same source file, same access, entirely different outcomes — the blocks here are a fact about which instruments that battery used, not about pipeline health.
+
+Cap (`batch_165`) not reached; 581 tables remain pending.
