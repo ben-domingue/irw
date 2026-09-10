@@ -148,71 +148,73 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
   <p class="standfirst">Three dimensions, measured rather than recalled: how tagging is
   going, how item text is going, and what the Year&nbsp;3 plan has actually absorbed.</p>
   <p class="asof">
-    <span>rendered 5 September 2026</span>
-    <span>4,134 live tables</span>
+    <span>rendered 10 September 2026</span>
+    <span>4,238 documented tables</span>
     <span>every section stamped with the age of the data under it</span>
   </p>
 </header>
 
 <section>
   <div class="dim"><span class="dim-n">01</span><h2>Tagging</h2></div>
-  <p class="verdict">The gap has closed as a labour problem. Any tag row reads
-  <strong>99.8%</strong>, and the four judged columns that sat in the seventies yesterday now
-  run <strong>89.9% to 98.9%</strong>. What is left below 55% is the two columns being held
-  back on purpose. The remaining question is no longer who does the work — it is what is
-  actually published.</p>
+  <p class="verdict">Item 2 closed on 4 September. The gap reopened on the 8th — not
+  through anyone's fault. The documented corpus grew from 4,134 tables to
+  <strong>4,238</strong>, the arrivals landed untagged, and every column slipped. Any tag row
+  now reads <strong>98.5%</strong>, and the four judged columns that had climbed into the
+  nineties read <strong>88.9% to 97.6%</strong>. This is the dynamic
+  <a href="https://github.com/ben-domingue/irw/issues/1702">#1702</a> named — the gap widens
+  by construction — arriving four days after the item that closed it.</p>
   <p class="fresh"><span class="src">metadata/status.json</span>
-    <span class="sep">·</span> generated 4 Sep 06:32
-    <span class="age live">1 day old</span>
-    <span class="why">regenerated only when <code>11_status.R</code> is run locally</span></p>
+    <span class="sep">·</span> generated 8 Sep 06:06
+    <span class="age live">2 days old</span>
+    <span class="why">now stage 11 of the weekly pipeline, so it refreshes with its own inputs</span></p>
 
   <div class="band">
-    <p class="band-t">Coverage by tag column · 4,134 tables</p>
+    <p class="band-t">Coverage by tag column · 4,238 tables</p>
     <div class="meters">
       <div class="meter"><span class="lab">Any tag row</span>
-        <span class="track"><span class="fill" style="width:99.8%"></span></span>
-        <span class="val">99.8%</span></div>
+        <span class="track"><span class="fill" style="width:98.5%"></span></span>
+        <span class="val">98.5%</span></div>
       <div class="meter"><span class="lab">Age range <em>(derived)</em></span>
-        <span class="track"><span class="fill derived" style="width:73.3%"></span></span>
-        <span class="val">73.3%</span></div>
+        <span class="track"><span class="fill derived" style="width:72.7%"></span></span>
+        <span class="val">72.7%</span></div>
       <div class="meter"><span class="lab">Measurement tool</span>
-        <span class="track"><span class="fill" style="width:98.9%"></span></span>
-        <span class="val">98.9%</span></div>
+        <span class="track"><span class="fill" style="width:97.6%"></span></span>
+        <span class="val">97.6%</span></div>
       <div class="meter"><span class="lab">Item format</span>
-        <span class="track"><span class="fill" style="width:96.3%"></span></span>
-        <span class="val">96.3%</span></div>
+        <span class="track"><span class="fill" style="width:95.1%"></span></span>
+        <span class="val">95.1%</span></div>
       <div class="meter"><span class="lab">Construct name</span>
-        <span class="track"><span class="fill" style="width:54.8%"></span></span>
-        <span class="val">54.8%</span></div>
+        <span class="track"><span class="fill" style="width:54.6%"></span></span>
+        <span class="val">54.6%</span></div>
       <div class="meter"><span class="lab">Sample</span>
-        <span class="track"><span class="fill" style="width:89.9%"></span></span>
-        <span class="val">89.9%</span></div>
+        <span class="track"><span class="fill" style="width:88.9%"></span></span>
+        <span class="val">88.9%</span></div>
       <div class="meter"><span class="lab">Construct type</span>
-        <span class="track"><span class="fill" style="width:54.5%"></span></span>
-        <span class="val">54.5%</span></div>
+        <span class="track"><span class="fill" style="width:54.4%"></span></span>
+        <span class="val">54.4%</span></div>
       <div class="meter"><span class="lab">Primary language(s)</span>
-        <span class="track"><span class="fill" style="width:94.2%"></span></span>
-        <span class="val">94.2%</span></div>
+        <span class="track"><span class="fill" style="width:93.1%"></span></span>
+        <span class="val">93.1%</span></div>
       <div class="meter"><span class="lab">Child age</span>
-        <span class="track"><span class="fill" style="width:17.1%"></span></span>
-        <span class="val">17.1%</span></div>
+        <span class="track"><span class="fill" style="width:16.8%"></span></span>
+        <span class="val">16.8%</span></div>
     </div>
     <div class="scale"><span class="ticks"><span>0%</span><span>25%</span><span>50%</span><span>75%</span><span>100%</span></span></div>
     <p class="note">Hatched bar is computed from each table's own <code>cov_age</code>
-    rather than judged by anyone. It added 775 tables at a stroke, and until this week
-    most of those rows carried nothing else. Child age is shown against all
-    4,134 tables; against the 903 tables it actually applies to it is 78.4%.
-    <strong>These are the repo's figures, not Redivis'.</strong> Tags v20.0 is what is live
-    — measurement tool 90.2%, item format 88.2%, sample 82.8% — and the higher numbers above
-    sit in a verified v21 draft awaiting a human publish (<a
+    rather than judged by anyone. It added 775 tables at a stroke. Child age is shown against
+    all 4,238 tables; against the 956 tables it actually applies to it is 74.7%.
+    <strong>Every figure here is the repo's, from <code>status.json</code>, over a corpus 104
+    tables larger than the one tags v21.0 was cut against on 4 September</strong> — so the
+    published release and this chart no longer describe the same population, and the drop is
+    the difference between them rather than anything being withdrawn (<a
     href="https://github.com/ben-domingue/irw/issues/1704">#1704</a>).</p>
   </div>
 
   <h3>What moved</h3>
   <p class="col">Two more batches — 273 tables and then the last 284 — closed out the
   population this dimension was defined against: <strong>1,427 reachable untagged tables
-  down to 11</strong>, across seven batches and 1,580 staged tables in total. The 11 are not
-  a backlog; nine are sentinels with no reachable source or no dictionary entry. Two further
+  down to 11 on 4 September</strong>, across seven batches and 1,580 staged tables in total.
+  Nine of those 11 were sentinels with no reachable source or no dictionary entry. Two further
   passes landed behind them: a backfill of 369 rows that carried a language and nothing else,
   and an ISO 639-2 respelling of roughly 550 rows. Through all seven batches
   <strong>construct type never moved once</strong> — every agent wrote it and every assembly
@@ -220,55 +222,68 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
   gate working, visibly, on the one column that most wanted to be waved through.</p>
 
   <div class="stats">
-    <div class="stat"><span class="n">100%</span><span class="k">shard 1 tagged</span></div>
-    <div class="stat"><span class="n">99.8%</span><span class="k">shard 2</span></div>
-    <div class="stat"><span class="n">99.8%</span><span class="k">shard 3</span></div>
-    <div class="stat"><span class="n">99.5%</span><span class="k">shard 4</span></div>
-    <div class="stat"><span class="n">100%</span><span class="k">shard 5</span></div>
-    <div class="stat"><span class="n">100%</span><span class="k">shard 6 · 1 table</span></div>
+    <div class="stat"><span class="n">100%</span><span class="k">shard 1 tagged · 987 tables</span></div>
+    <div class="stat"><span class="n">99.8%</span><span class="k">shard 2 · 966</span></div>
+    <div class="stat"><span class="n">99.8%</span><span class="k">shard 3 · 983</span></div>
+    <div class="stat"><span class="n">100%</span><span class="k">shard 4 · 981</span></div>
+    <div class="stat"><span class="n">82.8%</span><span class="k">shard 5 · 309</span></div>
+    <div class="stat"><span class="n">58.3%</span><span class="k">shard 6 · 12</span></div>
   </div>
 
   <div class="tension">
     <p class="t">The tension</p>
-    <p>Yesterday's open question was whether the gate held. It did — and the answer arrived
-    with a measurement, not an assurance: <strong>91–94% reliability from two independent
-    re-tag runs</strong>, on 60 tables and then 369. The tension has moved somewhere less
-    comfortable. <strong>Three of the eight headline figures above exist only in a draft
-    nobody has published yet</strong>, and the version that <em>is</em> live carries a defect
-    the draft fixes: v20.0 ships both ISO spellings for six languages, so a user filtering
-    <code>primary language(s) = 'ger'</code> silently misses 35 German tables. Construct type
-    and construct name remain definitional and will not yield to another batch. And the
-    quality report that would put a number on all of it — <a
-    href="https://github.com/ben-domingue/irw/issues/1850">#1850</a> — has its material
-    gathered and is still unwritten.</p>
+    <p>Yesterday this page could say the tag gap was closed. It was — against the population
+    it was defined against. Today <code>status.json</code> counts <strong>62 tables with no
+    tag row, and 58 of them sit in shards 5 and 6</strong>, the two newest and the two that
+    grew. Every other shard is at or above 99.8%. Nothing regressed and nothing was withdrawn:
+    new tables arrived, and they arrived untagged. The closure was real, and it answered the
+    question it was asked. The question it did not answer is whether tagging is a project that
+    finishes or <strong>a rate that has to keep pace with intake</strong> — and 62 tables in
+    four days is the first measurement of that rate. Only the reliability finding is
+    untouched by any of this: 91–94% from two independent re-tag runs, on 60 tables and then
+    369, is a property of the method rather than of the corpus. So is the part that was never
+    labour — <strong>construct type and construct name are definitional</strong>, at 54.4% and
+    54.6%, and no batch will move them.</p>
   </div>
 </section>
 
 <section>
   <div class="dim"><span class="dim-n">02</span><h2>Item text</h2></div>
-  <p class="verdict">Coverage is <strong>14%</strong> and barely moving. What changed this
-  cycle is that the 14% became <strong>honest</strong> — the corpus now says which English
-  it wrote itself, and four tables that were quietly serving every item twice were found and
-  three of them fixed.</p>
-  <p class="fresh"><span class="src">Redivis irw_text v14.0</span>
-    <span class="sep">·</span> live count 2 Sep
-    <span class="age aging">3 days old</span>
+  <p class="verdict">Coverage is <strong>24.8%</strong>, and for the first time since
+  2 September that is a live count rather than a carried-forward one. The read found two
+  things. Item text has reached <strong>1,052 tables</strong> — 297 more than the repo's own
+  figure of 755, which was the best available yesterday. And it <strong>no longer lives in one
+  Redivis dataset</strong>: it passed the 1000-table cap on 5 September and was split into
+  <code>irw_text</code> and <code>irw_text_2</code>.</p>
+  <p class="fresh"><span class="src">Redivis irw_text v20.0 + irw_text_2 v2.0</span>
+    <span class="sep">·</span> live count 10 Sep
+    <span class="age live">today</span>
     <span class="why">needs a Redivis token — not refreshable from the repo alone</span></p>
 
   <div class="stats">
-    <div class="stat"><span class="n">579</span><span class="k">tables with item text, of 4,134</span></div>
-    <div class="stat"><span class="n">81</span><span class="k">given their administered language</span></div>
+    <div class="stat"><span class="n">1,052</span><span class="k">tables with item text, of 4,238 <em>(was 755)</em></span></div>
+    <div class="stat"><span class="n">24.8%</span><span class="k">coverage <em>(was 17.8%)</em></span></div>
+    <div class="stat"><span class="n">337</span><span class="k">of those in <code>irw_text_2</code>, invisible to a one-dataset count</span></div>
+    <div class="stat"><span class="n">367</span><span class="k">declaring an administered language <em>(was 81)</em></span></div>
     <div class="stat"><span class="n">68</span><span class="k">shipping IRW-generated English</span></div>
-    <div class="stat"><span class="n">0</span><span class="k">of those undisclosed <em>(was 60)</em></span></div>
     <div class="stat"><span class="n">4</span><span class="k">doubled tables found</span></div>
   </div>
 
   <h3>What moved</h3>
   <ul class="col">
-    <li>The administered-language schema shipped: text fields now hold what respondents
-      actually read, with English in parallel <code>_translated</code> columns.</li>
-    <li><strong>81 tables backfilled</strong> — 78 in bulk, plus three where the wording was
-      recovered from the paper for tables the audit could not classify.</li>
+    <li><strong>Item text was sharded on 5 September.</strong> New tables only ever go to the
+      newest dataset, so anything counting <code>irw_text</code> alone is 337 tables short
+      today and drifts further with every batch — and it fails silently, by returning a
+      smaller number rather than an error. The authoritative list is
+      <code>IRW_TEXT_DATASETS</code> in <code>redivis_config.R</code>; both packages, the
+      uploader and the daily drift report read it, and this page's render contract now does
+      too.</li>
+    <li><strong>476 tables gained item text in eight days</strong> — more than the whole
+      corpus carried on 2 September, when this page last had a live read.</li>
+    <li><strong>367 tables now declare an administered language</strong>, against 81 a week
+      ago, and the split shows that is not mostly backfill: 59% of the tables in
+      <code>irw_text_2</code> carry the column against 23% of the older ones, so new uploads
+      are shipping the schema natively rather than being repaired later.</li>
     <li><strong>60 tables were shipping English this project generated with no public
       note.</strong> Every one now carries a line on the issues page saying so. They were
       invisible because the reconciler globbed only the batch directories.</li>
@@ -278,29 +293,35 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
 
   <div class="tension">
     <p class="t">The tension</p>
-    <p>A day ago this dimension had drawn level with tagging. It has not stayed level:
-    <strong>147 commits to <code>itemtext/</code> in the last seven days against 52 to
-    <code>tags/</code></strong>, where yesterday the split was 40 to 32. Tagging finished its
-    population and stopped; item text did not, and is now running roughly three to one. None
-    of that effort shows in the figures above, which were last counted on 2 September and
-    predate every batch since — the real number is higher than 579, and by how much this page
-    cannot say, because the count needs a Redivis token it does not have. That is the honest
-    limit of this section: it goes stale between measurements, and the stamp above says how
-    stale.</p>
+    <p>This section has now been wrong in both directions in three days, and neither time
+    because a number was miscounted. On the 9th it adopted the repo's 755 over a Redivis
+    figure of 579 that was a week stale — correct under the reconciliation rule, and still
+    297 short. Today's live read says 1,052. <strong>The instrument, not the corpus, is what
+    keeps moving.</strong> Underneath that, item text is still outrunning tagging:
+    <strong>187 commits to <code>itemtext/</code> in the last seven days against 43 to
+    <code>tags/</code></strong>, about four and a third to one. The sharding is the sharper
+    lesson. A count that reads one dataset does not break; it returns a smaller number, and a
+    smaller number here reads as item text having lost tables overnight. The two scheduled
+    jobs that touch Redivis daily were already safe, because they enumerate the registry
+    rather than name a dataset. This page was the one that named one.</p>
   </div>
 
   <p class="note">Still open: 181 tier-B tables need their administered language confirmed,
   17 are staged but ungated, and two tables need a decision rather than labour — a scale
-  direction and an instrument naming.</p>
+  direction and an instrument naming. Three item-text tables match no row in
+  <code>metadata.csv</code> even case-insensitively, which is either three renamed tables or
+  three orphans; nobody has looked.</p>
 </section>
 
 <section>
   <div class="dim"><span class="dim-n">03</span><h2>The Year 3 plan</h2></div>
-  <p class="verdict">Three items are finished end to end, and a fourth has left the list
-  a different way: <strong>item 6 was retired on 3 September</strong>, not completed. Of the
-  first seven that leaves one item untouched — and it is the one item 3 already unblocked.</p>
+  <p class="verdict">Three of the first seven items are finished end to end, a fourth was
+  retired rather than completed, and the piece rescued from that retirement — item 6b, the
+  dictionary write path — closed on 6 September. Item 5 broke ground on the 7th, so nothing
+  in the first seven is sitting still. <strong>Nothing on the list has moved for two
+  days</strong>; what moved is underneath it, in the corpus item 2 was closed against.</p>
   <p class="fresh"><span class="src">GitHub API</span>
-    <span class="sep">·</span> read 5 Sep
+    <span class="sep">·</span> read 10 Sep
     <span class="age live">today</span>
     <span class="why">issues, PRs and commit counts refresh on every render</span></p>
 
@@ -313,7 +334,7 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
           <td>All five sub-items. One uploader replacing thirteen copies; one validator with an exit code; the repo's first CI.</td></tr>
         <tr><td class="it">2</td><td class="nm">Close the tag gap</td>
           <td><span class="chip c-ok">complete</span></td>
-          <td>Closed 4 Sep. Seven batches, 1,580 tables staged; the target population went 1,427 to 11. What is still short is withheld by design, not unfinished.</td></tr>
+          <td>Closed 4 Sep. Seven batches, 1,580 tables staged; the target population went 1,427 to 11. Intake has since put <strong>62 tables back on the untagged list</strong> — see dimension 01. The item is closed correctly; the rate behind it is not settled.</td></tr>
         <tr><td class="it">3</td><td class="nm">Citable and reproducible at a version</td>
           <td><span class="chip c-ok">complete</span></td>
           <td>Closed 3 Sep. A version manifest resolves every dataset at any point in the corpus' history — 332 released versions. A DOI per release continues as #1870.</td></tr>
@@ -321,45 +342,53 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
           <td><span class="chip c-warn">active</span></td>
           <td>25 per-table landing pages merged 4 Sep, with <code>schema.org</code> markup and the site's first <code>sitemap.xml</code>. Croissant split out as #1889.</td></tr>
         <tr><td class="it">5</td><td class="nm">Ship both packages properly</td>
-          <td><span class="chip c-gap">untouched</span></td>
-          <td>Unblocked by item 3, not started. CRAN still turns on one <code>Imports</code> line pointing at a GitHub-only package.</td></tr>
+          <td><span class="chip c-warn">active</span></td>
+          <td>Broke ground 7 Sep, on the half nobody was blocked on. The Python package has a
+            release channel and its first git tags: <code>pip install irw</code> v0.1.3, published
+            by OIDC with a check that fails the run unless tag, <code>pyproject.toml</code> and
+            <code>VERSION</code> agree — <em>before</em> the build. CRAN is still blocked, and still
+            not the project's to fix: <code>Additional_repositories:</code> needs a CRAN-like URL for
+            <code>redivis</code> that does not exist. The on-disk cache — the sub-action item 3
+            actually unblocked, and the one that relieves the export quota — has not started.</td></tr>
         <tr><td class="it">6</td><td class="nm">Make community contribution real</td>
           <td><span class="chip c-off">retired 3 Sep</span></td>
           <td>Struck from the plan, not deferred. What it was really about — user-contributed vignettes — has not materialised and is not a priority, and the item bundled four unrelated things under one word, so it never had a success criterion. Its one conclusion, that no Google Sheets service account gets provisioned, is recorded in <code>ARCHITECTURE.md</code> §3 and needs no issue to hold it.</td></tr>
         <tr><td class="it">6b</td><td class="nm">Give the dictionary the same write path as tags</td>
-          <td><span class="chip c-warn">open, buildable</span></td>
-          <td>The one live sub-action promoted out of item 6, tracked on its own as #1732. Two writers on one sheet with no precedence rule — the problem the tags union already solved. Its gate (#1723) has shipped and run several cycles.</td></tr>
+          <td><span class="chip c-ok">complete</span></td>
+          <td>Closed 6 Sep by #2000 — the one live sub-action promoted out of item 6, tracked on its own as #1732. Two writers on one sheet with no precedence rule is now one: automated rows stage to a tracked CSV that <code>02_biblio.R</code> unions in on every run, <em>column-wise</em>, so a human cell wins the cell it occupies and an automated cell only fills a blank. That is the fix for the bug the tags prototype shipped with, where a human row with an empty cell stranded the automated value.</td></tr>
         <tr><td class="it">7</td><td class="nm">Scale item text</td>
           <td><span class="chip c-warn">active</span></td>
-          <td>The busiest thing in the repo this week. Dimension 02.</td></tr>
+          <td>Still the busiest thing in the repo — 187 of the last seven days' commits, down from 211. It has outgrown one Redivis dataset: 1,052 tables across two shards. Dimension 02.</td></tr>
         <tr><td class="it">8–15</td><td class="nm">Blue sky</td>
           <td><span class="chip c-gap">not this year yet</span></td>
           <td>Correctly parked until 1–7 are further along.</td></tr>
         <tr><td class="it">16</td><td class="nm">Stop-doing list</td>
           <td><span class="chip c-ok">happening</span></td>
-          <td>Acquisition intake stopped on its own — the newest of 245 queued datasets is three weeks old.</td></tr>
+          <td>Acquisition intake stopped on its own — the newest of 245 queued datasets is three weeks old. The <em>issue</em> queue, that is; the automated connectors are what put 104 tables into dimension 01's denominator.</td></tr>
       </tbody>
     </table>
   </div>
 
   <div class="tension">
     <p class="t">The one to look at</p>
-    <p>Yesterday this page called item 6 the item going backwards, on the evidence of an
-    unreviewed pull-request queue. That reading was wrong twice over. The plan had already
-    retired item 6 two days earlier, and the backlog was never what item 6 measured — it is
-    not a roadmap item at all, it is the repo's review habit. The measurement stands on its
-    own: <strong>seven pull requests are open and not one of the seven has a review</strong>,
-    the oldest now 17 days old, two of them drafts, and one of this week's arrivals was opened
-    by the repo's own extraction runner rather than a person. That is the shape of it — the
-    project has got faster at producing work to review and no faster at reviewing it. Every
-    item that moved on this list moved because somebody built a gate. This asks for a habit
-    instead, and retiring item 6 did not make it someone's job.</p>
+    <p>The pull-request backlog is not a roadmap item — it is the repo's review habit, and
+    this morning it gave back both mornings of progress: <strong>ten pull requests are open,
+    after eight yesterday and ten the morning before</strong>. Read the reason before
+    crediting either direction. <strong>Not one of the ten has a review</strong> — that figure
+    has never moved, at seven of seven, nine of nine, twelve of twelve, ten of ten, eight of
+    eight and now ten of ten. The oldest,
+    <a href="https://github.com/ben-domingue/irw/pull/1671">#1671</a>, has been open
+    <strong>22 days</strong>. What actually changed is the merge side: <strong>5 merged on
+    9 September, against 26 on the 8th and 43 on the 7th</strong>. The queue shrank on the 8th
+    because merging was fast, and grew back on the 9th because merging nearly stopped — never
+    because anyone started reviewing. Every item that moved on this list moved because
+    somebody built a gate. This still asks for a habit instead, and retiring item 6 did not
+    make it someone's job.</p>
   </div>
 
-  <p class="note">One loose end from the retirement: <a
-  href="https://github.com/ben-domingue/irw/issues/1708">#1708</a> is still open and still
-  titled <code>[6]</code>, so the board and the issue disagree with the plan. Closing it is a
-  one-line decision, not work.</p>
+  <p class="note">The loose end from the retirement is tied off: <a
+  href="https://github.com/ben-domingue/irw/issues/1708">#1708</a>, the issue still titled
+  <code>[6]</code>, was closed on 5 September, so the board, the issue and the plan now agree.</p>
 </section>
 
 <section>
@@ -380,9 +409,12 @@ footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--hair);
 </section>
 
 <footer>
-  Figures from <code>metadata/status.json</code> (2026-09-04 06:32), live Redivis queries against
-  <code>irw_text</code> v14.0 (2026-09-02), and the GitHub API (2026-09-05). Coverage percentages
-  are of 4,134 live tables. Commit counts cover the seven days to 5 September 2026.
+  Figures from <code>metadata/status.json</code> (2026-09-08 06:06), live Redivis queries against
+  <code>irw_text</code> v20.0 and <code>irw_text_2</code> v2.0 (2026-09-10), and the GitHub API
+  (2026-09-10). Coverage percentages are of the 4,238 tables <code>metadata.csv</code> documents,
+  which trails the live corpus by up to a week by construction; item-text tables are joined to it
+  case-insensitively, because roughly 300 table names are not lowercase. Commit counts cover the
+  seven days to 10 September 2026, measured against full repository history.
   Re-rendered each morning; each section carries the age of its own source, because
   they do not all refresh at the same rate.
 </footer>
