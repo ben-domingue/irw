@@ -879,10 +879,10 @@ ptacek2023_swls,blocked,batch_146,2026-09-10T06:26:15
 ptcichina_zhan_2024,done,batch_146,2026-09-10T06:41:59
 QCDQES_Oliveira_2022,done,batch_146,2026-09-10T06:41:59
 qi_2025_dark_triad,done,batch_146,2026-09-10T06:41:59
-qi_2025_individualism_collectivism,pending,,
-qi_2025_panas,pending,,
-qi_2025_self_concept_clarity,pending,,
-qi_2025_self_esteem,pending,,
+qi_2025_individualism_collectivism,blocked,batch_147,2026-09-10T06:43:46
+qi_2025_panas,done,batch_147,2026-09-10T06:43:46
+qi_2025_self_concept_clarity,done,batch_147,2026-09-10T06:43:46
+qi_2025_self_esteem,done,batch_147,2026-09-10T06:43:46
 qiang_2025_abusive_supervision,pending,,
 qiang_2025_coping,pending,,
 qiang_2025_job_dissatisfaction,pending,,

@@ -15262,3 +15262,80 @@ several stems. The administered `.sav` wording is what ships; the PDF was used o
 instructions.
 
 Cap (batch_165) not reached; 480 pending remain.
+
+---
+
+## batch_147 — 2026-09-10 06:43–07:0x
+
+**4 tables, 4 agents (one per table), all from the same deposit** — Qi et al. 2025, *Scientific
+Data* 12:1755, OSF `3H95F`, `Scales.xlsx`. **Written 3 / blocked 1 / failed 0. Yield 75%.**
+No agent was killed; no rate limit or spend cap hit. Four agents remains a clean setting.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `qi_2025_panas` | shipped | 90 (18×5) | paper_order | PARTIAL |
+| `qi_2025_self_concept_clarity` | shipped | 60 (12×5) | paper_order | PARTIAL |
+| `qi_2025_self_esteem` | shipped | 40 (10×4) | paper_order | PARTIAL |
+| `qi_2025_individualism_collectivism` | **blocked** (rights) | — | unknown | n/a |
+
+**Gates all clean.** `normalize_nulls` 0 of 3 changed · `audit_batch` **3 PASS, no anomalies**
+(so nothing owed under Step 5c) · `verify_batch` **PASS=3** · `lint_verification` 3 rows, no
+problems · `irw-validate` ok on all three. `check_provenance.R` exits 1, but on **pre-existing**
+tables only — `PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`, `aspirations_sonmez_2022`, none from
+this round. `qi_2025_panas` is correctly in the HELD bucket (extracted and gated, never uploaded),
+so its issues-page line is due **on upload**, not now.
+
+**The blocked table, and the audit row it corrects.** `qi_2025_individualism_collectivism` is the
+**32-item** INDCOL of Singelis, Triandis, Bhawuk & Gelfand (1995) — `IC_1..IC_32`, n=134, resp 1–7,
+established server-side via `table_sets.R` with no full export. `availability_audit_full.csv`
+records it as "Triandis & Gelfand (1998) HVIC", which is the **16-item short form** and is wrong;
+that audit row needs fixing. Blocked because the only curated distribution of the 32-item form
+withholds the items: the Fetzer compilation's INDCOL entry reproduces none and its "Scale:" section
+reads, in full, *"Contact author for permission to use items."* Permission-required reserves a
+right → block (irw#1945), and DSES already settled that a Fetzer notice of this shape governs over
+an open deposit licence (here CC BY 4.0). **Retry test: NO** — determinate. Honest limit recorded in
+the register: this is a curator asserting the authors' requirement, not an originator-owned page
+(none distributes the 32-item form; the 1995 article is SAGE-paywalled). Second, independent ground:
+the administered Chinese is unrecoverable in scope anyway. Subscale membership and the single
+reverse item (`IC_30`, 8−x) were banked into `pending_index_notes.csv` so a future retry needn't
+redo that work.
+
+**Step 3b caught a wrong instrument that would have shipped 20 wrong adjectives.** `qi_2025_panas`
+is **not** Watson/Clark/Tellegen's PANAS-20. It is the 18-item Chinese revision of Qiu, Zheng & Wang
+(2008) — two 9-item blocks that reassemble affect terms from several circumplex models rather than
+subsetting Watson's 20; six of the 18 have no Watson counterpart. Wording came from the IPCAS
+toolbox's live administration, corroborated item-for-item against `xinlixue.cn`. Ships
+`machine_translation` (English `_translated` is IRW's own), `public_note` written.
+
+**Orchestrator re-verification (Step 5b) — three claims checked, all three confirmed:**
+1. **The Fetzer clause.** Re-fetched: sha256 `d4e59df2…` matches the agent's exactly, the INDCOL
+   entry's "Scale:" section reads precisely the quoted sentence, and the next instrument follows
+   immediately — no items reproduced. Block stands.
+2. **The RSES public-domain grant** (a wrong `ship` costs more than a wrong `block`). Confirmed
+   verbatim from the Internet Archive snapshot, including the clause expressly reaching
+   *"translations or adaptations as you see fit"* — which is what the Chinese administration relies
+   on. `socy.umd.edu` returns HTTP 000 from this environment, as batch_113 also found.
+3. **The PANAS instrument override.** Confirmed independently: the shipped file carries exactly 18
+   items, `PA_1..PA_9` / `NA_1..NA_9`. Not a 20-item subset.
+
+**All three shipped tables are PARTIAL, for the same honest reason** — each route pins the polarity
+class or subscale block but not order *within* a class. The PANAS agent went furthest and reported a
+**negative** result rather than omitting it: a semantic-facet permutation over all 9! = 362,880
+relabellings of the NA block ranks the shipped order 175,681st (48.4th percentile — chance). SCC
+alpha .824 vs published .82 (200 rival 10-of-12 reversal sets span .185–.718, none within .02);
+RSES .8853 vs published .89 (rival ordering −2.7572); PANAS .906/.876 vs published .91/.88.
+
+**Two of the three shipped tables substitute English for a Chinese administration**, both because
+the deposit carries no wording at any level — `Scales.xlsx` headers are bare `SCC_1..`/`Esteem_1..`
+and the paper's supplement is task stimuli only. Both use the published instrument original →
+`official_instrument_english`, so no issues-page line is owed for them.
+
+**Four rights-register rows added** (agents correctly declined to edit the shared file mid-round;
+all four written by the orchestrator, the two load-bearing ones after independent re-verification):
+INDCOL-32 `block`, RSES `ship`, SCCS `ship_with_note` (silence, not an express grant — the DMIDI
+"research and educational use only" term is an *aggregator's* term on its own hosting, and the
+originator's terms govern), and the Qiu/Zheng/Wang PANAS revision `ship` as a **distinct row** from
+Watson's — the existing PANAS row is keyed `^pan[_ ]?[0-9]|panas`, which does not match `PA_*`/`NA_*`.
+Checked: each of the four code patterns matches its own row and nothing else.
+
+Cap (batch_165) not reached; 476 pending remain.
