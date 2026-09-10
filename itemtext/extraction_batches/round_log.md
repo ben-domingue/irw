@@ -13595,3 +13595,64 @@ means (Q31 M=4.41/SD=0.85 published vs 4.65/0.80 in the shared sheet). The depos
 analysed sample — recorded so nobody re-diagnoses it as an extraction error.
 
 Cap is batch_165; not reached. Next firing picks up batch_121.
+
+## batch_121 — 2026-09-09 21:38–22:0x
+
+4 tables, 4 agents (one per table, the 2026-09-09 four-agent setting).
+**Written 3 / blocked 1 / failed 0 — yield 75%.** Circuit breaker not tripped (0% failed).
+No kills, no rate limits, no retries beyond one transient `irw_fetch` on `number_pattern_game`
+that succeeded on the second call.
+
+Gates: normalize_nulls 0 of 3 changed · audit_batch **3 PASS, no anomalies** (so nothing owed
+under Step 5c) · verify_batch **PASS=3** · lint_verification 0 ERROR, 0 WARN, 1 INFO ·
+`irw-validate` ok on all three · `check_provenance.R` clean (its one outstanding
+IRW-generated-content gap, `aspirations_sonmez_2022`, predates this round).
+
+**Written**
+- `number_pattern_game` — 510 rows, 255 items × 2. Bigelow & Piantadosi (2016) JOPD, deposit CC0.
+  mapping_basis=reconstructed, **VERIFIED**: item codes are bare integers from `row_number()` over
+  `unique(df$set)`, so the derivation was re-run over the raw Dataverse CSV rather than inferred —
+  255/255 items agree on n, mean(resp), n distinct id, min/max/sum id, largest |diff| 0, and all 255
+  fingerprints are mutually distinct. Instructions came from images in the paper's Figure 1.
+- `odachi_2022_fear_covid19` — 35 rows, 7 items × 5. Japanese administered wording base, English in
+  `_translated`. mapping_basis=paper_explicit, **PARTIAL**. Nice access trick: the Japanese wording
+  lives in an embedded EMF image in the Wakashima 2020 PLOS S1 File, parsed via its
+  `EMR_EXTTEXTOUTW` records instead of OCR, giving character-exact strings.
+- `ojelabi_2019_sf36` — 149 rows, 36 items, resp 1–6. mapping_basis=reconstructed,
+  text_source=canonical_instrument, **PARTIAL** (block membership pinned for all 36 and 11 items
+  pinned individually; within-block order for the 25 non-SF-6D items is not established).
+
+**Blocked (determinate, retry test NO — does not count toward the breaker)**
+- `offlinefriend_dospert` — DOSPERT's rights holder reserves a non-commercial right on her own
+  distribution page. Row added to `itemtables/pending_index_notes.csv`.
+
+**Step 5b — orchestrator re-checks. All four agent claims confirmed; none had to be corrected.**
+1. `number_pattern_game`'s claim that the pipeline drops the `target` column: confirmed against
+   `data/number_pattern_game.R` line 7 (`select(set, id, rating, rt)`) — one IRW item is a stimulus
+   set spanning 30 different questions, so `[TARGET]` is the correct placeholder rather than a defect.
+2. `odachi`'s per-item means summing to the paper's reported FCV-19S total: recomputed independently
+   from the live table — 20.0192 across 7 items, n=417 each, resp 1–5. Holds.
+3. DOSPERT block: re-fetched Weber's page directly and confirmed **verbatim** —
+   "Any commercial use is strictly prohibited." Same shape as the SHS block (irw#1955).
+4. SF-36 ship: re-fetched RAND's terms page (rand.org 403s direct; read via web.archive.org) and
+   scanned it — **0** occurrences of commercial / non-commercial / fee / royalty / prohibit / license,
+   and both "written permission" hits are the *permissive* clauses 1 and 5. Agent's quote is complete
+   and accurate; nothing is reserved.
+
+**Two `instrument_rights_register.csv` rows added by the orchestrator** (both agents correctly
+declined to touch the shared register mid-round):
+- SF-36 v1 → `ship`. Same RAND clause template already ratified for the NEI VFQ-25 in batch_117.
+- DOSPERT 30-item → `block`.
+
+**FOR BEN — two judgement calls recorded rather than settled silently:**
+- **SF-36 is the first TWO-RIGHTS-HOLDER case.** Optum/QualityMetric license the SF-36**v2** for a
+  fee and hold the trademark; RAND publishes **v1** free with nothing reserved. Ojelabi et al. state
+  they administered version 1, and the shipped wording was taken from RAND's page, so the source-page
+  rule (ECR-R / SWLS, 2026-09-04) points to ship. Every prior ruling was two pages of *one* holder,
+  so this extends the rule rather than applying it. The register row governs **v1 only**.
+- **DOSPERT is a possible SWLS two-pages case.** The same rights holder's other official site
+  (dospert.org) carries the identical paragraph with the restrictive sentence *absent*. The round
+  blocked because that is one paragraph minus one sentence rather than independent terms, and the
+  site's sub-pages 404. If Ben rules the other way, the table extracts immediately.
+
+Cap is `batch_165`; 121 completed, not reached. Queue: 593 pending.
