@@ -14080,3 +14080,22 @@ The lint WARN (`pavic_2022_science_literacy` VERIFIED-but-hedges) was reviewed a
 - `pavic_2022_science_literacy` `option_text` records the study's **dichotomised scoring** ("Not correct or don't know" / "Correct"), not the three administered options (true/untrue/don't know) — the deposit keeps only the dichotomised variable. Disclosed in `public_note`; nothing invented.
 - Rights: no blocks. VCBS and IFSQ are both absent from `instrument_rights_register.csv` with no locatable distribution clause — silence-is-permission, recorded as non-exhaustive. The agent correctly declined to treat Elsevier's CC BY-NC-ND **article** licence on Shapiro et al. (2016) as an instrument-distribution notice (same call as batch_078/batch_106).
 - Cap (`batch_165`) not reached; queue has 561 pending after this round.
+
+## batch_130 — 2026-09-10 00:15–00:35
+
+4 tables claimed, 4 agents (one per table), **4 written / 0 blocked / 0 failed — full yield (100%)**.
+
+- `pedroso_2021_ifsq_responsiveness` — done. 60 rows (12 items × 5). paper_explicit; S1 Questionnaire prints RP1–RP12 against the administered Brazilian Portuguese, English from the study's own BT2 back-translation (BT1 rejected: mistranslates RP6). Verification **VERIFIED** (route 1): Table 4's per-item floor/ceiling counts reproduce 24/24 exactly at the paper's listwise n, all 12 (lo,hi) pairs distinct.
+- `pedroso_2021_ifsq_restriction` — done. 55 rows (11 items × 5), same source/licence. Verification **VERIFIED** (route 1): 22/22 counts reproduce, all 11 pairs distinct. Substantive finding: `RS5recoded`/`RS6recoded` are stored **reverse-scored** — their Table 4 counts mirror the live columns while the other nine do not — so shipped option_text runs 1='always'…5='never' for exactly those two. Corroborated by Table 2 composites (4.20/1.01 vs 4.19/1.02; 4.64/0.61 vs 4.64/0.61), reproducible only in the recoded direction.
+- `pellerin2020_cpc_hope` — done. 21 rows (3 items × 7). CPC-12 hope facet (Lorenz et al. 2016, CC BY). paper_order; **VERIFIED** via two agreeing routes — the intercorrelation ordering r(1,2)<r(1,3)<r(2,3) replicates both CPC-12 development samples (live .456/.581/.639), and the external-criterion ordering holds in 7 of 8 wave×criterion comparisons.
+- `pellerin2020_cpc_optimism` — done. 21 rows (3 items × 7). paper_order; **PARTIAL**, honestly: route 8 pins Opt_1 (r with Age −0.185 vs −0.079/−0.038, z=−3.27) but Opt_2 vs Opt_3 rests on the parent-scale contrast alone (age route does not separate them, p=.15) and no source publishes per-item stats for this sample.
+
+Both Pellerin tables were administered in **French**; neither the OSF deposit (bare headers, no labels — both files checked) nor the article publishes the French wording, so they ship `text_source=translated_substitute` / `translation_source=official_instrument_english` with `language=French` and empty `_translated`. No machine translation produced. Recovering the administered French would need an off-source French CPC-12 validation, i.e. a later backfill pass, not a retry.
+
+Gates: normalize_nulls 2 of 4 files normalized; audit_batch **4 PASS, no anomalies** (so no Step 5c WARN explanations owed); verify_batch **PASS=4**; lint_verification 4 rows, 0 ERROR / 0 WARN / 1 INFO (the hope row's hedge, which the 2026-09-08 item-axis rule allows to stand as VERIFIED); `irw-validate` ok on all four; `check_provenance.R` clean for this batch (its one outstanding flag, `aspirations_sonmez_2022`, is pre-existing and unrelated).
+
+Step 5b re-check by the orchestrator: re-ran both pedroso verify scripts directly rather than trusting the reports. The reverse-scoring override reproduces (22/22, mirroring confirmed), and the responsiveness agent's missingness claim reproduces exactly — RP6/RP7/RP12 are the only items in the source file with any missing value (1/4/1 of 465), the same three shipped with the belief-only `disagree..agree` anchors. Both agents correctly flagged what their evidence does NOT establish (the Portuguese anchor wording, which the study never published).
+
+Rights: no blocks. IFSQ absent from the rights register with no locatable restrictive clause; CPC-12 is printed in full by its own authors in a CC BY 4.0 appendix as an open alternative to the licensed PCQ.
+
+Four agents held up again — no kills, no retries, 4/4 shipped. Cap (`batch_165`) not reached; 557 pending remain.
