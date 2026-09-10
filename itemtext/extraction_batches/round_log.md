@@ -16191,3 +16191,86 @@ blank rather than padded, per the standard. 5 of 7 levels = 71.4%.
 
 Four agents again ran clean — no kills, no failed extractions, nothing to walk back.
 Cap is `batch_165`; 158 is not the cap, so the queue continues. 432 pending remain.
+
+---
+
+## batch_159 — 2026-09-10
+
+**4 tables claimed, 4 written / 0 blocked / 0 failed. Yield 4/4 = 100%.** Four agents, all clean:
+no kills, no retries, no salvage. Numbered 159 by the "highest `batch_0NN`/`batch_1NN` + 1" rule —
+the `batch_2NN` series (irw#1945 rights line) was ignored, as the protocol requires.
+
+| table | rows | items | mapping_basis | verification |
+|---|---|---|---|---|
+| `roelen_2020_dietary_diversity` | 34 | 17 | data_labels | NOT_NEEDED |
+| `roelen_2020_k6` | 30 | 6 | data_labels | VERIFIED (route 9) |
+| `roelen_2020_rses` | 40 | 10 | data_labels | VERIFIED (routes 9 + 7) |
+| `roettl_2018_arousal` | 21 | 3 | data_labels | NOT_NEEDED |
+
+**Gates.** `normalize_nulls` 0 of 4 changed; `audit_batch` 4/4 PASS with no anomalies (so Step 5c
+has nothing to explain — no WARNs this round); `verify_batch` 2 PASS + 2 MISSING(exempt);
+`lint_verification` 4 rows, **0 ERROR**, 0 WARN, 2 INFO (both INFO are the 2026-09-08 item-axis
+rule accepting a hedged-but-full VERIFIED); `irw-validate` clean on all four.
+`check_provenance.R` exits 1, but **on pre-existing repo state only** — the 5 undisclosed
+IRW-generated tables and the 21 `mixed` review rows are all from earlier rounds. None of this
+round's four appears in any of its lists; all four are `translation_source=study_supplied`.
+
+**Three tables from ONE deposit.** All three `roelen_2020_*` tables are separate blocks of the same
+Fonkoze CLM Haiti baseline `.dta` (PLOS ONE 10.1371/journal.pone.0243457, CC BY 4.0), worked by
+three agents in parallel with explicit sibling boundaries. No file collisions; the three agents'
+independent readings of the shared file agreed.
+
+**Step 5b — orchestrator re-checks. All three claims reproduced; none had to be corrected.**
+- k6 resp direction: re-ran `verify_roelen_2020_k6.R` independently — 30/30 cells match, 0 duplicate
+  count vectors (every item separable), 24/30 cells mismatch under the flipped coding. The agent's
+  numbers are exact.
+- Stata 80-char truncation: confirmed by measuring the shipped strings. `q_306` and `q_311` are
+  **exactly 80 characters** and end mid-word (`...Irish potatoes, brea`, `...coconut, lemon,`);
+  the next-longest are 79, so the cap is real and only those two hit it. The k6 tails restored from
+  Table 3 are 98 and 83 chars, i.e. genuinely beyond what the `.dta` could hold.
+- `roettl_2018_arousal` unlabeled scale points: resp 2–6 carry unquoted `NA`, which is this repo's
+  established null convention (matches batches 155–158), **not** a scale point padded with its own
+  number. Endpoints only, as the source printed them.
+
+**Two RIGHTS escalations for Ben — both ship-shaped, both deliberately left undecided.** Per the
+rule that a round may write a `block` row but never a `ship` row, `instrument_rights_register.csv`
+was NOT touched for either; quotes are banked in `notes.csv`.
+- **K6 (`roelen_2020_k6`).** Harvard HCP: *"Use of the K6 and K10 is free and does not require any
+  formal permission or approval"* — citation requested, no fee/NC/ND/redistribution clause. Live
+  page is Incapsula-walled; read via Wayback capture of `hcp.med.harvard.edu/ncs/k6_scales.php`,
+  sha256 `beb88d73e0e59bce142043a5c870806695bf8fe7d3181e9cb755d9899f68b8fb`.
+- **Dietary diversity (FAO).** FAO's *Guidelines for measuring household and individual dietary
+  diversity* reserves all rights. The agent's reasoning that it does not reach these words: the
+  shipped labels are the Fonkoze team's own localized wording from a CC BY 4.0 deposit, differ from
+  FAO's Annex 2 for every group, and the list is 17 groups incl. Breastmilk vs FAO's 16. One line
+  (`q_312`, organ meat) coincides verbatim. Ben's call.
+
+**Other things worth a human's eye.**
+- `roelen_2020_*`: all three instruments were administered **orally in Haitian Creole** (67% of the
+  1,381 women could not read or write), and no Creole wording exists anywhere in the deposit or
+  supplements. All three ship English base fields with `language=Haitian Creole` and
+  `text_source=translated_substitute` / `translation_source=study_supplied`, per the 2026-09-01
+  fallback. Retry test NO on the Creole gap — determinate; only the authors' field questionnaire
+  would change it.
+- **Two resp-direction traps in one deposit, both disclosed in `public_note`.** RSES: the `.dta`
+  stores 1=Strongly agree…4=Strongly disagree, the *opposite* of the live table, which the
+  processing script flips via label strings — reading the raw numeric codes would ship the anchors
+  backwards. K6: IRW runs 0=None…4=All (higher = more distress), the reverse of the direction the
+  paper's own total uses (its mean of 19.0 sums 1=all 30 days…5=none).
+- `roelen_2020_rses` stores **raw** responses: the five reverse-keyed items (q_408, q_411, q_412,
+  q_414, q_415) are NOT reversed. Consistent with the paper's own α = 0.52 and its finding of no
+  coherent factor structure; analysts must reverse them.
+- `roelen_2020_k6` `q_406`'s `.dta` label is missing its verb (*"did you worthless?"*); Table 3's
+  *"did you feel worthless?"* ships, disclosed.
+- `roettl_2018_arousal`: the S2 Appendix is a gold-standard source — administered German and the
+  authors' own English side by side, so `_translated` carries study-supplied English and **no
+  machine translation and no issues-page line are owed**. Semantic differential, 7-point −3…+3,
+  poles only. Minor caveat logged: the `.sav` glosses `F2_3`'s right pole "calm", the appendix
+  "soothed"; the appendix (the administered questionnaire) ships. Judged below the issues-page bar.
+- Sibling intelligence for later rounds: all five `roettl_2018_*` tables come from one `.sav`/
+  appendix pair. `F1` (game attitude) and `F13/F16/F19/F22` (brand attitude) are the same
+  semantic-differential shape; brand-attitude items additionally carry full SPSS variable labels.
+
+No table was left `in_progress`; no `pending_index_notes.csv` rows were owed (nothing blocked).
+No full-table exports were made — `table_sets.R` / server-side aggregates throughout.
+Cap is `batch_165`; 159 is not the cap, so the queue continues. 428 pending remain.
