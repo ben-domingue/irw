@@ -15339,3 +15339,52 @@ Watson's — the existing PANAS row is keyed `^pan[_ ]?[0-9]|panas`, which does 
 Checked: each of the four code patterns matches its own row and nothing else.
 
 Cap (batch_165) not reached; 476 pending remain.
+
+## batch_148 — 2026-09-10 07:11-07:25
+
+4 tables, all from Qiang et al. (2025), PLOS ONE 10.1371/journal.pone.0327359 (CC BY 4.0),
+S1 File xlsx: `qiang_2025_abusive_supervision`, `qiang_2025_coping`,
+`qiang_2025_job_dissatisfaction`, `qiang_2025_job_performance`.
+
+**Written 4 / blocked 0 / failed 0 — yield 4/4 (100%).** Four agents, no kills, no retries.
+
+Gates: normalize_nulls 0 of 4 changed; audit_batch **4 PASS, no anomalies** (so no WARNs to
+explain at Step 5c); verify_batch 1 PASS + 3 MISSING(exempt); lint_verification 4 rows, no
+problems; irw-validate ok on all four; check_provenance exit 0 (the 3 tables it lists as
+owing an issues-page line are pre-existing, none from this batch).
+
+All four are `mapping_basis=data_labels`, and that is earned rather than asserted: the S1
+File's **column headers are the item wording** (`"25、I do not enjoy my job; I just invest
+time to get paid."`), and `data/qiang_2025_red_tape.py` renames them to `diss1`..`diss5`
+etc. through literal string dicts (`JOB_PERF`, `DISSATISFACTION`, `COPING`, `ABUSIVE_SUP`)
+with no positional step.
+
+**Step 5b orchestrator re-check — both agent claims confirmed:**
+1. Parsed the four dicts out of the processing script and diffed them against the shipped
+   CSVs: for all 17 items across all 4 tables, `item_text` is exactly the source header
+   minus its leading `NN、` numbering. 17/17 exact, 0 mismatches. This is the mapping claim
+   itself, independently reproduced.
+2. The `job_dissatisfaction` agent's reported two-cluster structure reproduces to 3dp from
+   the raw S1 file (n=396): diss1/3/5 intercorrelate 0.672/0.720/0.733, diss2/4 correlate
+   0.564, cross-cluster −0.117 to +0.043, and diss-total vs jp-total is +0.839. Recorded
+   because that last number is a fact about the **response data**, not the item text: two
+   substantively unrelated blocks in this deposit correlating +0.84 is worth a look on its
+   own terms. Nothing in the itemtext mapping depends on it.
+
+Common caveats, disclosed in provenance/notes/public_note on all four:
+- Administered in **Chinese** (forward–back translation), but no Chinese wording for items
+  17–42 exists anywhere in the deposit — the S1 headers are English apart from item 35, a
+  workplace-friendship item outside this round. So `text_source=translated_substitute`,
+  `translation_source=study_supplied`, `language=Chinese`, `_translated` empty.
+- The paper's Measures section names only five scales (red tape, negative emotions,
+  surface/deep acting, customer orientation). Questionnaire items 17–42 are an **unanalysed
+  block** — none of these four instruments is named, cited or given an alpha — so
+  `instrument` is descriptive in every case, not an attribution. Step 3b content checks pass.
+- Only the 1 and 5 endpoints are anchored ("strongly disagree"/"strongly agree");
+  `option_text` left **blank** at resp 2–4, not padded.
+- Rights: no register match, no identifiable external rights holder, CC BY 4.0 deposit;
+  silence-is-permission. The abusive-supervision items parallel four Tepper (2000) items but
+  are reworded, not verbatim.
+
+Four agents per round held up again — 4/4 clean, no kills.
+Cap is batch_165; not reached.
