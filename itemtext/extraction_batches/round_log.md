@@ -13807,3 +13807,62 @@ Both blocks are determinate rights verdicts on located wording, not access failu
 **Note on the queue's shape:** three of this round's four tables are `ozkurt_2026_*` siblings off one PLOS deposit, and two of the three were blocked by instrument rights while the third shipped cleanly. Same source file, same access, entirely different outcomes — the blocks here are a fact about which instruments that battery used, not about pipeline health.
 
 Cap (`batch_165`) not reached; 581 tables remain pending.
+
+## batch_125 — 2026-09-09 23:0x
+
+4 tables claimed, 4 agents (one per table), all four `pang_2023_*` scales from one
+PLOS ONE deposit (10.1371/journal.pone.0285815, CC BY 4.0).
+
+**written 4 / blocked 0 / failed 0 — yield 4/4 (100%).**
+
+- `pang_2023_behavioral_intent` — done, 25 rows
+- `pang_2023_media_influence` — done, 25 rows
+- `pang_2023_perceived_cost` — done, 25 rows
+- `pang_2023_perceived_ease_use` — done, 25 rows
+
+Gates: normalize_nulls fixed 3 of 4; audit_batch **4 PASS, no anomalies** (no WARNs,
+so nothing owed under Step 5c); verify_batch **PASS=4**; lint_verification 4 rows,
+no problems; `irw-validate` ok on all four; `check_provenance.R` clean for this batch
+(its one outstanding IRW-generated flag, `aspirations_sonmez_2022`, and the 12
+`translation_source=mixed` review rows are pre-existing and unrelated).
+
+All four are `mapping_basis=data_labels` (the S1 workbook's header row *is* the item
+wording), but the item CODE is derived positionally in `data/pang_2023_nev_adoption.py`,
+so no agent claimed the exemption and all four ran a header diff. Verification:
+2 VERIFIED (behavioral_intent, media_influence), 2 PARTIAL (perceived_cost,
+perceived_ease_use — item↔text axis fully pinned, option↔resp axis not).
+
+**Notable — the source contradicts itself on scale direction, and all four tables
+override the paper.** The article's Methods says items ran "from 1 point (strongly
+disagree) to 5 points (strongly agree)"; the S2 questionnaire prints every item's
+options as Definitely agree / Agree / Neither / Disagree / Definitely disagree, and
+the deposit codes options by display position. All four agents independently landed
+on the questionnaire's order (1 = Definitely agree), i.e. resp runs reverse-Likert,
+and each ships a `public_note` saying so.
+
+Orchestrator re-checked this directly against the S1 workbook and S2 docx per Step 5b,
+because it overrides a source and is going out as a public note. **Confirmed, numbers
+reproduce exactly:** gender code 1 = 172/309 = 55.66% against the paper's "55.7% of
+the respondents were men" with Male listed first; age codes 1+2 = 273/309 = 88.35%
+against "Most (88.5%) ... aged between 20–40"; education codes 3+4 = 279/309 = 90.29%
+against "90.3% ... had a bachelor's degree or above" with Undergraduates listed third.
+Counter-evidence also confirmed and left standing: profession does NOT follow display
+order (codes 1..6 = 156/12/46/33/38/24, 2 and 5 swapped vs the paper's Table 2). So
+the convention is 3-for-4, which is why two rows are PARTIAL rather than VERIFIED.
+
+Also confirmed independently: S2 File, titled "Original and translation of the
+questionnaire", contains **zero CJK characters across all 262 paragraphs**. The survey
+was administered in Chinese (Sojump/WeChat, Yangtze River Delta), so all four ship
+`text_source=translated_substitute`, `translation_source=study_supplied`,
+`language=Chinese`, `_translated` columns empty. Nothing owed on the issues page —
+the English is the authors' own, not IRW-generated.
+
+Rights: no block. Items are the authors' own NEV-tailored wording under CC BY 4.0;
+TAM2 (Venkatesh & Davis 2000) and Taylor & Todd (1995) are cited as theoretical
+foundation only, with no row in `instrument_rights_register.csv`.
+
+**For the four still-queued `pang_2023_*` siblings** (perceived_enjoyment,
+perceived_risk, and the rest): the scale direction is settled — ship
+1 = Definitely agree .. 5 = Definitely disagree, with the same public_note.
+
+Cap (`batch_165`) not reached.
