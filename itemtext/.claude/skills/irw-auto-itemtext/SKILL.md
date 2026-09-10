@@ -351,6 +351,22 @@ match_item_text, match_item_code, notes`. `verdict` is `block` / `ship` / `ship_
 quote the caution and say why it does not block. An instrument already carrying a verdict is
 settled and needs no new escalation — record that you applied it, do not re-derive it.
 
+**A round may write a `block` row. A round may NEVER write `ship` or `ship_with_note`.**
+Ruled by Ben 2026-09-10, after batch_146 and batch_147 split on this in the same session:
+batch_146 found a `ship`-shaped picture for the PTCI and the SD3 and deliberately declined to
+write the rows; batch_147 wrote four, two of which (`SCCS`, the Qiu/Zheng/Wang `PANAS`) rest by
+their own notes on **silence rather than a positive grant**. Both rounds were reasoning honestly;
+the prompt simply did not say.
+
+The asymmetry is the point. A `block` is conservative, costs only a table that can be unblocked
+later, and the retry is cheap because the round banks its findings in `pending_index_notes.csv`.
+A `ship` row is the artifact *later rounds trust without re-deriving* — that is exactly what made
+batch_144 cheap — so a wrong `ship` propagates silently into published wording IRW has no grant
+for. Escalate every `ship`-shaped case to the human instead: put the quotes, the page sha256s and
+the reasoning in the provenance notes and the round summary, and leave the row unwritten.
+
+The four rows batch_147 wrote **stand** (Ben, 2026-09-10) — this rule is not retroactive.
+
 **The register's `match_*` columns find candidates. They do not decide anything.** Two failure
 modes, both of which produced wrong numbers in one afternoon:
 

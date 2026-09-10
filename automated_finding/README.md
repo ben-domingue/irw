@@ -215,6 +215,13 @@ Before uploading a file from `irw_output/` to Redivis, run through
 warnings printed during triage (and recorded in the triage CSV, glossary
 below) point at exactly what to check in each file.
 
+Run `run_qc()` on the finished response table as well. Observed range differences
+are warnings; source-documented response violations or construct separation can
+fail. Supply documented permitted values and construct mappings through the
+Python API when available; see [response-scale evidence](../irw_validate/README.md#response-scale-evidence)
+for the inputs, thresholds and profile behavior. Verify the source before
+splitting a table or removing an item.
+
 Then lint the finished tables — this is a check on output, not a converter,
 and it never rewrites a file:
 
@@ -293,8 +300,11 @@ a processing script, check the dataset's DOI against the
 | `human_assistance` | Got data, but mapping or QC needs a person | Read `reasons`; may still be worth adding |
 | `not_item_response` | Data shaped like IRW format but isn't response data | Skip |
 | `below_min_n` | Fewer than 100 distinct respondents | Skip — no human review needed, N isn't adjudicable |
-| `resp_scale_mixed` | Items span more than one response scale (a fail from `run_qc`) | Check whether the table bundles more than one construct; if so, split into separate tables per construct. A single construct measured with mixed item formats (e.g. 0/1 multiple-choice alongside 0-3 constructed-response) belongs in one table |
-| `item_scale_outlier` | One or two items fall outside the table's scale (a warn from `run_qc`) | Usually an administrative or count column swept in as an item — check and drop it |
+| `resp_scale_mixed` | Non-nested observed ranges with at least 15% of items differing from the modal min/max pair (`warn`) | Different item formats within one construct can be legitimate; width alone does not justify splitting |
+| `resp_scale_constructs` | Complete explicit construct evidence with distinct observed group ranges (`fail`) | Verify the documented constructs before splitting; old width-check waivers do not apply to this separate check |
+| `resp_scale_nested_support` | Different observed min/max ranges form a nested chain after isolated outliers are checked (`warn`) | Check category coverage; unused extremes do not establish different scales |
+| `item_scale_outlier` | Fewer than 15% of items differ from the modal min/max pair, including nested ranges (`warn`; names the items) | Inspect the source before removing or recoding any item |
+| `resp_outside_permitted` | An observed response violates a documented permitted set (`fail`) | Resolve the coding discrepancy against the source; do not redefine permitted values from the observations |
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
 | `file_too_large` | Tabular file exceeds its ceiling — `MAX_FILE_BYTES` (200MB), or 25MB for `.rdata`/`.rda`/`.rds` via `FORMAT_MAX_BYTES` — not downloaded. Also logged to `oversized_candidates.csv` | Revisit manually later if the dataset looks valuable |
@@ -319,7 +329,9 @@ than retried one doomed request at a time.
 
 ### QC warning glossary
 
-Starred names (`*`) are heuristics beyond the official IRW validator.
+Starred names (`*`) are additional checks beyond the R validator subset.
+Response-scale findings and documentation-input warnings are described in the
+[shared validator](../irw_validate/README.md#response-scale-evidence).
 
 `composite_items*` is one of the more consequential: a summary table melts
 into a perfectly well-formed id/item/resp frame and passes every structural
@@ -334,7 +346,7 @@ suffix, counts).
 |---|---|
 | `resp_direction*` | Cannot auto-verify coding direction within items — confirm no unreversed items |
 | `resp_ordinal*` | >50 unique resp values after melt — likely aggregate/continuous data, not item responses. Verify which: a composite/subscale sum is not a response and must be dropped; a genuinely continuous per-item response (e.g. a 0–100 slider) is legitimate — keep `resp` as a float, don't coerce to integer |
-| `multi_scale*` | Item names suggest 2+ subscales — IRW requires separate tables per construct |
+| `multi_scale*` | Item prefixes suggest groups (`warn`); verify their constructs in the source before any split |
 | `imputed_values*` | Column names or value distributions suggest imputed data — IRW requires removal |
 | `date_numeric*` / `date_range*` | `date` column not numeric or too small for Unix seconds |
 | `rt_units*` / `rt_negative*` | `rt` looks like milliseconds, or has negative values |
