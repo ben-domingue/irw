@@ -15850,3 +15850,90 @@ shipped on "silence is permission" and are recorded here instead:
   "somewhat important". Shipped as printed rather than silently corrected.
 
 Cap is batch_165; batch_154 completed, not the cap. Ending normally.
+
+## batch_155 — 2026-09-10T10:34 (4 tables, 4 agents)
+
+**written 3 / blocked 1 / failed 0 — yield 75%.** Circuit breaker not tripped (0% failed).
+Gates: `audit_batch.R` 3/3 PASS with **no WARNs** (so nothing owed under Step 5c);
+`verify_batch.R` 2 PASS + 1 MISSING(exempt); `lint_verification.R` 4 rows, no problems;
+`irw-validate` ok on all three; `check_provenance.R` exit 0 (its 3 outstanding IRW-generated
+tables and 19 `mixed` rows are pre-existing backlog, none from this round).
+
+| table | outcome | mapping_basis | Step 5b |
+|---|---|---|---|
+| `reinwarth_2023_phq4` | done, 4 items | data_labels | NOT_NEEDED (exempt) |
+| `ren_2019_scpv` | done, 12 items | paper_order | PARTIAL |
+| `ren2019_scpv` | done, 12 items | reconstructed | PARTIAL |
+| `ren2019_cpti` | **blocked** (data defect) | unknown | NO_ROUTE |
+
+### The finding of the round: figshare 11283215 is damaged, and it feeds five IRW tables
+
+`ren2019_cpti` blocked on a **data defect, not rights and not access** — retry test NO. The CPTI
+wording was fully in hand (Andershed's own CPTI v2.0 form + KEY, free from oru.se, no restrictive
+clause quotable; Colins et al. 2014 PMC3935116 CC BY reproduces all 28 items). The block is that
+the deposit's column labels cannot be honestly matched to it: Ren et al.'s own Table 5 subscale
+intercorrelations (.773/.643/.681) reproduce to within .003 only if every instrument item *j* is
+read one column to the RIGHT, and an independent sample (Wang et al. 2019, PMC6609029, 585
+mother-rated Chinese children) agrees — item-mean profile correlates rho −0.19 as-labelled, **+0.81
+shifted**. The agent declined to ship the shift because it is not clean (items 25–28 fit *worse*
+shifted; the published subscale alphas split between the two readings). Correct call.
+
+**Orchestrator re-verified this against the source `.xlsx` independently (Step 5b) and CONFIRMS it,
+with one methodological correction that matters for anyone re-running it: the sentinel codes must be
+cleared first.** SCPV3/4/7/10 carry `99`, SDQ1 and CPTI3+ carry `9`. Computed naively *with*
+sentinels, `SCPV1`'s median r against the rest of its block is 0.146 versus a block median of 0.14 —
+which makes SCPV1 look perfectly ordinary, and I initially read it that way. Sentinel-cleaned, the
+block median rises to **0.42** and SCPV1 stands alone:
+
+- per-column median r with the rest of SCPV: **SCPV1 0.146**, then 0.331, 0.364, 0.402, 0.440,
+  0.324, 0.451, 0.418, 0.336, 0.402, 0.536, 0.497. SCPV1 is the only column below 0.32.
+- `SCPV1` is the **only** SCPV column taking levels 1–4; all other eleven take 1–5.
+- `cor(SCPV1,CPTI2)=0.770`, `cor(SCPV1,SDQ1)=0.700` (agent reported 0.766/0.704 — reproduced), and
+  both cross-tabs are near-perfect staircases. Three different instruments' first columns are
+  monotone recodings of **one** variable.
+- Same signature on `CPTI1`: median r **−0.009**, max |r| 0.14, against a block median of 0.30.
+
+**Consequence, flagged for triage BEFORE upload:** the two SCPV tables shipped this round are clean
+as instruments and gate clean on item/resp sets, but the text attached to code `SCPV1` specifically
+is not trustworthy. Both agents' own Route 1 evidence had already listed SCPV1 swaps among the
+tolerated ones, independently. `ren2019_ypic` and `ren2019_sdq` come from the same file and should
+be checked before they are trusted. Worth a GitHub issue against the deposit — **not filed by this
+round**, since filing is outward-facing; left for a human.
+
+### Two duplicate tables, two *different* wrong descriptions
+
+`ren2019_scpv` and `ren_2019_scpv` are a confirmed duplicate pair: `metadata.csv` rows 3080/3084 are
+statistically identical (3576 rows, 5 levels, 299 respondents, 12 items, 11.9598662207358 items per
+person), same figshare deposit, built by the near-identical `data/ren2019_psychopathy_children.py`
+and `data/ren_2019_psychopathy_children.py`. Two agents worked them blind and converged on the same
+instrument and the same 12 stems — good corroboration.
+
+Step 3b mismatch **confirmed, and worse than either agent could see alone**: `biblio.csv` line 14767
+says "Socio-Cognitive Profile Victimization scale"; line 14775 says "Self-reported Child Psychopathy
+Version". *Neither is right.* Ren et al. head the block "Social Competence – Parents Version (SCPV)"
+citing CPPRG (1995) — the Fast Track **Social Competence Scale – Parent Version**, a 12-item parent
+rating of prosocial behaviour, emotion regulation and communication. Not victimization, not
+psychopathy, not self-report. Both Description fields need correcting and `tags.csv` rows 3074/3078
+need re-checking for construct tags that followed the wrong description.
+
+Harmonization needed before upload: `ren_2019_scpv` ships the interviewer-read `instructions` string
+and emits the four `_translated` columns empty; `ren2019_scpv` leaves `instructions` blank (parent
+forms went home in sealed envelopes, so that framing was never received) and omits `_translated`.
+Both defensible; they should not ship inconsistent.
+
+### Other notes
+
+- Both SCPV tables take the `translated_substitute` fallback (`language=Chinese`,
+  `translation_source=official_instrument_english`): the deposit has bare ASCII headers, zero CJK,
+  and the article prints no wording. Source form is image-only, read from a rendered PNG.
+- `reinwarth_2023_phq4` shipped at **zero export cost** — per-column non-missing n from the local
+  `.sav` reproduced live per-item n exactly (2457/2455/2455/2457) via `irw_table_sets`, no fetch.
+  Caveat carried publicly: the PHQ-4 is canonically scored 0–3 and the `.sav` even holds the 0–3
+  recodes, but IRW stores the raw **1–4**, so `option_text` follows 1–4.
+- Rights: no blocks this round. PHQ/GAD applied from the register (`verdict=ship`); the Fast Track
+  measure page answers its own "Available for Public Use?: Yes" and the CPTI pages carry no
+  quotable restriction — both ship-shaped, so **no register rows written** (a round may write
+  `block`, never `ship`).
+- Agent count 4, per the 2026-09-09 setting. No kills, no failed extractions, no retries.
+
+Cap is batch_165; batch_155 completed, not the cap. Ending normally.
