@@ -277,8 +277,16 @@ Sub-classifies each `human_assistance` row into `not_item_response` /
 typical action). Usually resolves ~60% of the bucket automatically.
 
 **Only rows whose `refined_flag` is literally `human_review` go into
-`human_review/`.** Write them to
-`human_review/human_review_<mode>_batch<N>.csv` in this repo (e.g.
+`human_review/`.** Since 2026-09-09 the script does this for you: at the
+end of every run it writes them to
+`human_review/human_review_<source>_<date>.csv`, merging and de-duplicating
+on `doi` if that file already exists, and `--no-archive` opts out. It used
+to be a step the caller had to remember, and the 2026-09-09 PMC weekly run
+is what happens when nobody does — Step 2b's own output lives in `runs/`,
+which is gitignored, so its three `human_review` rows died with the
+container. Check the `[human_review] archived N row(s)` line is in the run
+output; if you are writing one of these by hand instead, name it
+`human_review/human_review_<mode>_batch<N>.csv` (e.g.
 `human_review_pmc_batch1.csv`, `human_review_plos_batch27.csv`,
 `human_review_batch14.csv` for the repository-discovery mode) — a
 permanent, git-tracked archive, replacing the old "human eye" queue-sheet
