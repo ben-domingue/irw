@@ -13250,3 +13250,68 @@ tables (hui_2024_gbfs, iandolo_2021_asq, kim_2025_isi) flagged for review. Carri
 is not rediscovered next round.
 
 Queue after this round: 621 pending, 0 in_progress. Cap (batch_140) not reached.
+
+## batch_115 — 2026-09-09 18:57 → 19:20
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — yield 4/4 (100%)**. Four agents
+(the 2026-09-09 setting), all four returned clean. No kill, no rate limit, no reconcile.
+
+All four are `nas_rogoza_2024_*` from the same CC0 OSF deposit (https://osf.io/u93eq),
+continuing the study1/study2_nas pair shipped in batch_114. Each agent was told which three
+sibling tables belonged to the others; no collisions, and scratch stayed namespaced under
+`.cache/<table>/`.
+
+Gates, all clean: normalize_nulls 1 of 4 rewritten (study5_nas, 405 lines — bare-`NA`
+canonicalization only); audit_batch **PASS 4/4 with no anomalies**, so nothing for Step 5c to
+explain; verify_batch **PASS=4**; lint_verification 4 rows no problems; `irw-validate` ok on all
+four; `check_provenance.R` passes.
+
+**All four are `mapping_basis=paper_order`** — the deposited `.sav` files carry no variable and no
+value labels at either level (re-checked independently by three agents with pyreadstat), so there
+is no `data_labels` route anywhere in this study. Step 5b: 1 VERIFIED, 3 PARTIAL.
+
+- `study2_nvs` — 11 items, 1–7, English. **VERIFIED.** Re-ran the paper's 3-factor PA-oblimin EFA
+  over all 42 adjectives with live IRW responses and nearest-neighbour matched against additional
+  online Table 2: recovers 11/11 (identity permutation), worst euclidean deviation 0.022, min
+  pairwise separation 0.073 — a 3.3x margin, tighter than the sibling NAS block but decisive.
+- `study5_nas` / `study5_ngs` / `study5_nvs` — 4 items each, **0–100 visual analogue slider**,
+  **administered in Polish**, 30-day SEMA3 daily diary. All three PARTIAL: the routes pin item
+  location and block structure but every check is symmetric within one adjective pair, so 1 pair
+  per table is left unresolved (NAS1/NAS4, NGS Brilliant/Glorious + Powerful/Prestigious,
+  NVS1/NVS2). Recorded as such rather than overclaimed.
+
+**Step 3b — Study 5 is structurally unlike Studies 1–2, and the batch_114 hand-off was wrong about
+it.** It is not the 18-item Study 2 pool, not the 16-item final NAS, and the NGS block is not 13
+items: each scale is a **4-adjective within-person short form** on a 0–100 slider, not 1–7.
+`NAS.xlsx` asterisks exactly four of its 16 rows ("Items marked with * were used in the
+within-person protocol") and states a separate "Within-person response scale: Visual analogue
+slider bar ranging from 0 (Not at all) to 100 (Extremely)". Two of the three scales are also not
+these authors' instruments at all — NVS is Crowe et al. (2018), NGS is Crowe et al. (2016); no
+rights block found for either, and no matching row in `instrument_rights_register.csv`.
+
+**Step 5b orchestrator re-checks (all independent of the agents, all confirmed):**
+- Study 5 Daily codebook re-parsed directly: Polish throughout, anchors `0 = w ogóle` /
+  `100 = całkowicie`, and each of NVS/NAS/NGS is exactly 4 adjectives in the order shipped.
+- `NAS.xlsx` re-read: exactly four asterisked rows (Abusive, Nasty, Exploitative, Depreciating).
+  Confirms the genuine fork the study5_nas agent flagged — the daily codebook's order (Abusive,
+  Depreciating, Exploitative, Nasty) differs from NAS.xlsx's, and the agent chose the daily
+  codebook, correctly, since that is the protocol the data came from.
+- **The source misspelling is real**: the daily codebook prints NVS1 as `Zleckeważony` (correct
+  Polish `Zlekceważony`). Both state-protocol codebooks spell it that way, so it is shipped
+  verbatim and disclosed, not silently corrected.
+- One false alarm worth recording so the next round does not re-derive it: `option_text` for resp
+  1–99 *looks* like the literal string `NA` when read with Python's csv module. It is not — it is
+  R's bare `NA` token, which is the corpus-wide convention `normalize_nulls.R` exists to enforce.
+  The unlabelled slider points are correctly blank and were not padded with their own numbers.
+
+`translation_source=mixed` on all three Study 5 tables: the English adjectives and slider anchors
+are the authors' own (article + NAS.xlsx), but **the daily instruction has no published English
+anywhere in the deposit and its English was produced by IRW**. That component owes an issues-page
+line under the 2026-09-02 ruling when these ship; a `public_note` is written on each. They do not
+appear in `check_provenance.R`'s `mixed` review list yet only because they are still HELD.
+
+Orchestrator dropped `study2_nvs`'s `public_note` (agent concurred): it described an inference that
+verified cleanly at 11/11, which is not a text-vs-table mismatch, and that table ships no
+IRW-generated content — so nothing is owed. Detail retained in the internal `note`.
+
+Cap (`batch_140`) not reached; 617 pending remain.
