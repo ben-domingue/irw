@@ -12778,3 +12778,72 @@ Gates: normalize_nulls fixed 2 files; audit_batch **4/4 PASS, no anomalies** (so
 4. **Reviewed the lint WARN, kept VERIFIED.** `mhscdc_fried_2020_se` is flagged because its evidence contains "does not establish". Retained as VERIFIED: the hedge limits only the corroborating distributional route (which alone separates just Pre46/Pre54), while the per-item tie rests on the codebook labelling each Q number separately — a Step 5b exemption route that does distinguish every item. Phrase match, not a defect; reasoning recorded in notes.csv so it is not re-derived next time.
 
 Cap (batch_140) not reached.
+
+## batch_108 — 2026-09-09 16:57–17:12 — 4 tables — 3 written / 1 blocked / 0 failed (yield 75%)
+
+Tables: `mobility`, `moe2025_erq`, `moe2025_scs` written; `mohamed_2024_ppos` blocked.
+
+**Four agents per round, per Ben's 2026-09-09 call ("let's go up to more agents"). No kill, no
+reconcile, no salvage — all four agents ran to completion.** Baseline through the round was 18G
+available / 3G free with no swap movement, i.e. the same conditions under which the 19:10–19:20
+cluster failed at every size tried the previous evening. So this round is one clean data point for
+four agents, and it does NOT resolve the open question from that cluster: cadence was low here (a
+single deliberate round, not back-to-back firings), which is the variable that evening's failures
+actually tracked. Four is not yet demonstrated safe under rapid repeated firing.
+
+**Gates: all clean.** normalize_nulls 0 of 3 normalized; audit_batch 3/3 PASS **with no WARNs**
+(so Step 5c had nothing to explain — the first round in a while with a fully silent audit);
+verify_batch 3/3 PASS; lint_verification 3 rows, no problems; `irw-validate` ok on all three.
+`check_provenance.R` exits 1, but on PRE-EXISTING state only — `aspirations_sonmez_2022` owes an
+issues-page line, plus 3 `translation_source=mixed` review rows. **No batch_108 table is implicated**;
+none of the three shipped tables is machine_translation.
+
+Verification: all three written tables are `mapping_basis=paper_explicit`, so none needed a
+NOT_NEEDED row; 3 rows merged into `mapping_verification.csv` (now 689).
+- `mobility` **VERIFIED** (route 1). Opaque table name resolved to the **ltm CRAN package** via
+  `Rd_db("ltm")` → `Mobility.Rd`; live endorsement counts reproduce `colSums(ltm::Mobility)` exactly
+  for all 8 items (n=8445 each side), and the 8 counts are pairwise distinct with a minimum gap of
+  138, so no permutation survives.
+- `moe2025_erq` PARTIAL (route 3). Deposit's derived `Reappraisal` column equals
+  `rowMeans(ERQ{1,3,5,7,8,10})` to max |diff| 0.000000, and that subset is unique among all 210
+  six-item subsets. Does not separate the near-parallel ERQ 1/3/7/10 within the subscale.
+- `moe2025_scs` PARTIAL (source `_rev` key + routes 5/6). "SCS" settled as **Neff's 26-item
+  Self-Compassion Scale** — not Self-Control or Social Connectedness — by the .sav's own 13 `_rev`
+  columns matching Neff's reverse key exactly (1 of 10,400,600 subsets). Order within a polarity
+  class or subscale is not established.
+
+**Step 5b orchestrator re-checks — one agent claim confirmed exactly, one corrected.**
+- CONFIRMED, to the digit: the `moe2025_scs` **data defect**. 12 of 13 `_rev` columns are exact
+  `6−raw` (maxdiff 0.0); `SCS25_pre_rev` disagrees for **66 of 95** respondents (maxdiff 4).
+  `SCS25_pre_rev` correlates −0.571/−0.625/−0.511 with SCS4/SCS13/SCS18 while the stored
+  `SCS25_pre` gives −0.124/−0.153/−0.179. `6 − SCS25_pre_rev` looks like the intended raw values.
+  **Worth an irw data-fix issue against `data/moe2025_selfcompassion.py`** — not filed by this round.
+- CORRECTED: the `mohamed_2024_ppos` incidental scoring finding. Its structural half reproduces
+  exactly (Sharing/Caring/Overall are exact raw sums of the 18 columns, maxdiff 0 over 262 complete
+  rows), but its item-total arithmetic does not. Recomputed: **six** items have near-zero/negative
+  corrected item-total r (9:−0.130, 10:+0.106, 13:+0.075, 14:+0.135, 17:−0.195, 18:+0.089), not the
+  three claimed, and the claimed "Year 2, n=142 → 3.249/4.081/3.665" is unreachable from the file
+  (Year==2 has 128 rows, 121 complete → 3.398/3.757/3.577). Direction of the finding stands; its
+  numbers do not. Correction written into `notes.csv`. Nothing public depended on it — the table
+  ships no wording. This is the third round where an agent's *finding* was a lead rather than a fact.
+
+`mohamed_2024_ppos` block — **retry test NO**, determinate rights verdict, not an access failure, so
+it does not count toward the breaker. Item text was fully recoverable (S2 File prints all 18
+statements labelled `PPOS01`..`PPOS18`); El Centro Measures Library's PPOS page states "The scale is
+copyrighted so please contact the author for permission to use the scale.", corroborated by the same
+first author's 2025 paper acknowledging Krupat's permission. PeerJ's CC BY 4.0 does not launder the
+originator's terms. Agent appended a `verdict=block` row to `instrument_rights_register.csv` covering
+PPOS-D12/D6, which also blocks still-pending `pauli_2021_ppos_d6`. Row added to
+`pending_index_notes.csv`.
+
+**Two things for a human, neither actioned here:**
+1. `availability_audit_full.csv` marks `mohamed_2024_ppos` AVAILABLE because the PPOS "is a
+   well-documented public-domain instrument" — verified false; nothing on any Krupat-linked page says
+   public domain. Reported as the **fourth** bad rights assertion in that file, which is now a
+   pattern worth a pass of its own rather than four one-off corrections.
+2. The ERQ has no `instrument_rights_register.csv` row. `moe2025_erq` shipped under Ben's 2026-09-08
+   `li_2024_bdyz` ruling (irw#2121) against Stanford SPL's "academic research purposes with
+   appropriate citation" — a row could be added with `verdict=ship`; agents correctly declined to
+   edit the shared file mid-round.
+
+Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 645 pending remain.
