@@ -724,10 +724,10 @@ monier_2026_sti,done,batch_110,2026-09-09T17:34:08
 morales_2021_erq,done,batch_110,2026-09-09T17:34:08
 motion,done,batch_110,2026-09-09T17:34:08
 mpsycho_avlancheprep,done,batch_110,2026-09-09T17:34:08
-mq_supremecourt,pending,,
-mturkddm_recognition,pending,,
-mturkddm_y25,pending,,
-much_tte_2025_matrixreasoning,pending,,
+mq_supremecourt,blocked,batch_111,2026-09-09T17:51:28
+mturkddm_recognition,done,batch_111,2026-09-09T17:51:28
+mturkddm_y25,done,batch_111,2026-09-09T17:51:28
+much_tte_2025_matrixreasoning,done,batch_111,2026-09-09T17:51:28
 muharam_2022_srq29,pending,,
 muir_2025_resilience_behaviours,pending,,
 muir_2025_resilience_opinions,pending,,

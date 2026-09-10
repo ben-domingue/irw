@@ -12993,3 +12993,67 @@ NOT_NEEDED rows were owed in either file this round.
 `translation_source=mixed` tables flagged for review. **None of the four belong to this batch.**
 
 Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 637 pending remain.
+
+## batch_111 — 2026-09-09 17:51–18:10
+
+4 tables, 4 agents (one per table), all four returned. **Written 3 / blocked 1 / failed 0.**
+Yield 3/4 = 75%. Circuit breaker not tripped (0% failed; the one no-CSV table is a
+determinate rights block, retry test NO).
+
+- `mturkddm_recognition` — **done.** Ratcliff & Hendrickson (2021), OSF za9y8, Exp 1 task 2
+  word recognition. 4,404 rows / 2,202 items. `mapping_basis=data_labels` in its strongest
+  form: the item code IS the stimulus word (`x$test_word_string`). VERIFIED — re-running the
+  derivation over raw `Experiment1.data` reproduces per-item n for 2,202/2,202 items with 0
+  mismatches, and the resp-range route pins Correct=1 (0/2,202 mismatches vs 249/2,202 flipped).
+- `mturkddm_y25` — **done.** Same deposit, Exp 2 dot-numerosity. 24 rows / 12 items.
+  `data_labels`. VERIFIED — exact re-run reproduces live n and mean accuracy for all 12 items,
+  largest deviation 0.0e+00; paper Table 5 corroborates to <=0.017.
+- `much_tte_2025_matrixreasoning` — **done, after an orchestrator repair (see below).**
+  Much et al. (2025) J Open Psychol Data, OSF 9j6hm; OMIB matrix items. 40 rows / 20 items.
+  `data_labels`. PARTIAL, correctly: re-scoring raw selections against the shipped key
+  reproduces the authors' own 0/1 scoring 24,737/24,737, and 18 of 20 items are uniquely
+  pinned, but MR11 and MR12 share an identical published solution code so that route cannot
+  separate them (a swap between them would be inert).
+- `mq_supremecourt` — **blocked, retry test NO.** Items are 6108 SCDB caseId codes. Extraction
+  was actually solved (6108/6108 join exactly to SCDB `caseName`, no positional inference), but
+  every scdb.wustl.edu page carries `rel="license"` CC BY-NC 3.0 US. NC = reserved right ->
+  block under irw#1945, precedent `gilbert_meta_32`. I re-fetched index.php and data.php at
+  round close and confirmed the footer independently. Row added to pending_index_notes.csv.
+  **Escalation for Ben:** the two standing rulings collide here. The wording that would ship is
+  the official caption of a U.S. Supreme Court decision — a government edict with no reserved
+  right — so "the originator's page governs" would free it, while the ECR-R rule ("the licence
+  of the source IRW actually copied from governs") would not, since the caseId->caseName
+  correspondence is SCDB's own compilation. Blocked in the interim. Also note
+  `availability_audit_full.csv` marks this table AVAILABLE because SCDB is "freely
+  downloadable" — free of charge is not free of terms; that row misses the NC mark.
+
+### Gate results
+normalize_nulls 1 of 3 fixed · audit_batch 3 WARN (all explained in notes.csv per Step 5c) ·
+verify_batch PASS=3 · lint_verification 3 rows no problems · irw-validate ok on all 3 ·
+check_provenance clean for this batch (the tables it names are pre-existing backlog).
+
+### TOOL DEFECT FOUND — `normalize_nulls.R` corrupts all-digits text columns
+`much_tte`'s `correct_response` holds the OMIB 20-bit solution key as a digit STRING
+(MR11 = `01000000000000000000`). `normalize_nulls.R:58` calls
+`read.csv(path, stringsAsFactors = FALSE)` with **no `colClasses`**, so `type.convert` coerced
+that column to numeric and `write.csv` re-emitted it in scientific notation — leading zeros
+stripped and float64 precision lost (`MR11 -> 1e+18`; MR10's true key `...100000100011` came
+back as `...100000100352`). The extracting agent verified PASS at 24,737/24,737 **before**
+normalization; the normalized file then failed its own verify script at 14,853/24,737. This is
+exactly the failure mode Step 5b exists to catch, and it was caught by the gate rather than by
+reading a report.
+
+Fixed in-round: keys restored verbatim from the deposit's `mr_itemsolutions.csv`, verify now
+reproduces 24,737/24,737 PASS. **Do not re-run `normalize_nulls.R` on that file — it will
+re-corrupt it.** I also patched `verify_much_tte_2025_matrixreasoning.R` to resolve its paths
+relative to the script rather than the caller's cwd; it had assumed the batch dir and so
+returned NO VERDICT under `verify_batch.R`, which runs from `itemtext/`.
+
+Scanned every other `itemtables/batch_*/*__items.csv` for the scientific-notation signature:
+**0 files affected.** No shipped table besides this one carries a long all-digits text column,
+so this is a latent bug newly tripped, not existing corpus damage. **`normalize_nulls.R` needs
+`colClasses = "character"` — a human should make that change; a round should not edit a shared
+gate script.** Worth a GitHub issue.
+
+Four agents per round (Ben's 2026-09-09 setting) ran clean: no kills, no rate limits, no
+mid-round salvage. Round took ~19 minutes wall clock.
