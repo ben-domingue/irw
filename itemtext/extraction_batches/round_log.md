@@ -14489,3 +14489,74 @@ Notable:
 
 Circuit breaker: 0 failed of 4 (0%), not tripped. Cap (batch_165) not reached;
 533 pending remain.
+
+## batch_137 — 2026-09-10 02:19–02:40
+
+4 tables claimed, 4 agents (one per table), all `pierro_2018_*` from the same
+PLOS ONE article (Pierro, Pica, Giannini, Higgins & Kruglanski 2018,
+10.1371/journal.pone.0193357, CC BY 4.0). Each agent was told which siblings
+belonged to another agent.
+
+**written 3 / blocked 1 / failed 0 — yield 75%.** Circuit breaker NOT tripped
+(0 failed). No kills, no retries, no rate limits.
+
+- `pierro_2018_assessment_s1` — 72 rows (12 items x 6 levels), mapping_basis
+  `paper_order`, verification PARTIAL.
+- `pierro_2018_assessment_s3` — 72 rows, mapping_basis `reconstructed`,
+  verification PARTIAL.
+- `pierro_2018_locomotion_s1` — 72 rows, mapping_basis `reconstructed`,
+  verification PARTIAL.
+- `pierro_2018_hfs_s4` — **blocked**, instrument rights (Heartland Forgiveness
+  Scale). Retry test NO: determinate. Extraction was fully solved and then
+  declined — the holder's own page grants use only "for research or clinical
+  purposes, and you will not profit directly from use of the HFS", a
+  non-commercial condition that reserves a right, so it blocks under irw#1945
+  as restated 2026-09-08; the CC BY article reproducing the items does not
+  launder it. Block is effective (bare hfs1..hfsR6 codes carry no wording).
+  Row added to itemtables/pending_index_notes.csv.
+
+**Gates (all clean):** normalize_nulls 2 of 3 files normalized; audit_batch
+3/3 PASS, no anomalies, so no Step 5c WARN explanations were owed;
+verify_batch PASS=3; lint_verification 4 rows, no problems (all three shipped
+tables have a non-`data_labels` basis, so no NOT_NEEDED rows were owed);
+irw-validate ok on all three.
+
+**check_provenance.R exits 1, and it is NOT this round.** The single table
+owing a public issues-page entry is `aspirations_sonmez_2022`, pre-existing
+and unrelated. batch_137's three tables are `translated_substitute` but
+unuploaded/HELD, so no entry is owed yet; shipping them will stamp them and
+re-enter the check. `translation_source=mixed` on locomotion_s1 is a valid
+vocabulary value.
+
+**Step 5b — three agent claims independently re-checked by the orchestrator,
+all three confirmed:**
+
+1. *The R-marked items are stored ALREADY REVERSE-SCORED* (load-bearing: it
+   flipped the anchors shipped on assR1/assR5/assR11 and locaR6/locaR9, per
+   the `burkert_2019_whoqol_bref` precedent). Re-derived from the `.sav`s
+   directly rather than by re-running the agents' scripts. Assessment S1: the
+   deposit's own `assessment` composite equals the plain unweighted mean of
+   the 12 stored columns to max abs diff **0.000**, vs **1.2** if un-reversed
+   first; alpha stored **0.75** = the paper's published .75, un-reversed 0.64.
+   Locomotion S1: composite diff **0.000** vs **0.83**; alpha stored **0.78**
+   = the paper's published .78, un-reversed 0.58. Confirmed.
+2. *The HFS clause.* Re-fetched heartlandforgiveness.com/download-the-hfs
+   independently; the sentence is present verbatim as quoted. Block stands.
+3. All four `.sav` deposits carry no variable labels at all (agents checked
+   this before falling back), which is why no table this round could use
+   `data_labels`.
+
+**instrument_rights_register.csv — two rows added by the orchestrator** (the
+agents correctly declined to write a shared file): family `HFS` verdict
+`block` with the clause, URL and sha256 above; family `RMQ` verdict `ship`
+(Kruglanski et al. 2000 — no fee/permission/NC/ND clause on DMIDI, the
+Kruglanski lab page, or cuhigginslab.com/measures, whose footer
+"individual, noncommercial purposes" line is scoped to the Publications
+section and reserves nothing over the instrument; silence is permission).
+The RMQ row governs the remaining queued `pierro_2018_locomotion_s3` and the
+s3 affect siblings.
+
+Four agents again, per the 2026-09-09 setting; ran clean, consistent with the
+batch_104–119 record.
+
+Cap is batch_165; not reached.
