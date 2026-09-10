@@ -13710,3 +13710,76 @@ batch_122 table declares IRW-generated content, so nothing here is owed.
    **The table is HELD: read that page with a JS-capable client before uploading it.**
 
 Cap is `batch_165`; not reached. Ending normally.
+
+---
+
+## batch_123 — 2026-09-09 22:14–22:35
+
+**4 tables claimed, 4 written / 0 blocked / 0 failed — yield 4/4 (100%).** Four agents, all clean,
+no kills, no retries. Second consecutive full-yield round at four agents.
+
+| table | mapping_basis | verification | note |
+|---|---|---|---|
+| `orovou_2021_lec5` | data_labels | NOT_NEEDED | LEC-5, Greek admin, English fallback |
+| `orovou_2021_pcl5` | data_labels | NOT_NEEDED | PCL-5, Greek admin, English fallback |
+| `otaki_2022_dental_adaptability` | data_labels | VERIFIED | study's own 4-item survey, English admin |
+| `ozkurt_2026_basic_psych_needs` | paper_explicit | VERIFIED | BNSSS, Turkish admin, English fallback |
+
+**Gates** — normalize_nulls 0 of 4 changed; audit_batch **4/4 PASS, no anomalies** (Step 5c vacuous);
+verify_batch PASS 2 + MISSING(exempt) 2 (the two data_labels tables); lint_verification 4 rows, no
+problems (NOT_NEEDED rows written into BOTH the batch file and the permanent tracker, as the
+batch_020/021 lesson requires); `irw-validate` ok on all four. `check_provenance.R` flags
+**pre-existing debt only** — `aspirations_sonmez_2022` plus 12 `translation_source=mixed` review rows;
+none of this round's four tables is among them.
+
+**Three of four tables ship English the respondents did not read.** Both `orovou_2021_*` were
+administered in Greek and `ozkurt_2026_basic_psych_needs` in Turkish; in all three cases the
+administered wording appears in neither the article nor any supplement, so the base fields carry
+English (`text_source=translated_substitute`) with `language` set and a `public_note` written. This is
+disclosure-by-provenance, not a defect, but it is three of four in one round — the head of the queue
+is dominated by non-English studies depositing English-labelled `.sav` files.
+
+**Step 5b, orchestrator re-checks — every agent claim held, and one mattered.**
+
+1. **The CSDT rights block on `ozkurt_2026_basic_psych_needs` is a confirmed FALSE POSITIVE.** The
+   agent claimed the `SDT/CSDT` register row (verdict=`block`, full scope ruled 2026-09-09) matched
+   only on its `^bpns` code pattern. Re-checked mechanically: that row's `match_item_text` patterns
+   hit **0 of 14** shipped items while `match_item_code` hits **14 of 14** — a pure code-name
+   collision created by the study's own `BPNS1..14` column names. Item content is sport-specific
+   throughout ("in my sport", "my teammates"), unlike CSDT general-life BPNS/BPNSFS wording, and the
+   CSDT questionnaire library lists BPNSFS/BPNSS/PNTS/PNSSS/SMS-II but no BNSSS. **Ships.**
+2. Response-data claims reproduce against `table_sets.R` (server-side, no exports this round):
+   `orovou_2021_lec5` n=469 × 17 items, resp {0,1} — the study's binarisation of the LEC-5's standard
+   six-category axis, confirmed; `orovou_2021_pcl5` n=469 × 20 items, resp {0,1,2,3,4} — so the
+   canonical 0-4 is right and the paper's prose claim of a 1-5 scale is a slip in the article only;
+   `otaki_2022_dental_adaptability` n=18 × 4 items, resp {3,4,5}.
+3. `otaki_2022_dental_adaptability` `item_text` is byte-identical to `item` for 4/4 — the source
+   `.xlsx` headers ARE full item sentences, so this table's added value is the instrument name and
+   the anchors rather than the wording. Confirmed, and recorded as a `public_note`.
+
+**Three register rows added to `instrument_rights_register.csv`** (all three agents correctly
+deferred writing a shared file): LEC-5 `ship_with_note` and PCL-5 `ship_with_note` — both NCPTSD, the
+latter explicitly public domain, their only clauses being intended-user/fitness disclaimers that
+reserve no right (the LOT-R shape) — and BNSSS `ship`. The BNSSS row is **deliberately not keyed on
+`^bpns`**, to avoid re-colliding with the CSDT row; a table using `BPNS*` codes for the BNSSS has to
+be resolved on item content, as it was here.
+
+**Two things worth a human's attention, neither a blocker.**
+- **Dictionary/metadata defect.** `ozkurt_2026_basic_psych_needs`'s Description reads "Basic
+  Psychological Need Satisfaction Scale", i.e. the Deci & Ryan BPNS. The instrument is the **BNSSS**
+  (Ng, Lonsdale & Hodge 2011; Turkish adaptation Gümüşay & Argan 2019), 14 items from three of its
+  five subscales. A suggested replacement Description is in `notes.csv`. **The notes row is not the
+  fix — metadata.csv needs editing.**
+- `otaki_2022_dental_adaptability` has **n=18 respondents**, and its "higher technological demands"
+  item ships a `resp=3` "Neutral" option row that none of the 18 used (instrument-level anchors;
+  audit raised no WARN). The instrument's 1=Strongly disagree and 2=Disagree ship no option row at
+  all, correctly, since no respondent used them table-wide and `validate_items.R` compares resp sets.
+
+**For a later round** (from the ozkurt agent, unverified): `ozkurt_2026_sport_motivation` is SMS-II,
+which **is** in the CSDT library, so the block probably does reach it; `ozkurt_2026_ego_orientation`
+(EGOQ) and `ozkurt_2026_paces_enjoyment` (PACES) are not CSDT instruments and S6 File prints their
+items in English, but S1 is missing the EGOQ item-1 column and PACES was administered 1-7 — check the
+live resp set first.
+
+Queue after this round: 585 pending, 623 done, 118 blocked, 12 failed, 63 excluded; nothing left
+`in_progress`. Cap is `batch_165`; not reached. Ending normally.
