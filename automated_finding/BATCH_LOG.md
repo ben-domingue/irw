@@ -14041,3 +14041,96 @@ Recorded per-script rather than left to a later pass to re-derive:
 - **Xiao 2024, Shen 2026** — .xlsx deposits with positional codes and no
   label layer of any kind. Stems are in the source instruments' own
   publications.
+
+## 2026-09-09b — PMC weekly run: 0 good, and the license gate took a third of it before any data was read
+
+Scheduled weekly Europe PMC run (`irw_discover_pmc_monthly.py --mode
+weekly`, the 15 `HIGH_YIELD_TERMS` x the `JOURNALS` list). Bookkeeping went
+straight to main as `6721090` (1 `search_terms_log.csv` row + 60 DOIs into
+`pmc_seen_dois.csv`).
+
+60 candidates triaged, all 15 terms hit the per-term cap of 4 (so the
+`--limit 60` bound, not the term list, is what ended the run): 25
+`no_usable_file`, 22 `license_restricted`, 10 `human_assistance`, 3
+`below_min_n`. **0 `good`.**
+
+The license split is worth recording on its own: 38 cc-by, 21
+cc-by-nc-nd, 1 cc-by-nc. Every one of the 22 non-cc-by articles was
+dropped at the article license before its data file was examined, which
+is the correct conservative call but means the run's real denominator was
+38, not 60 — and 25 of those 38 had no usable file. One in three PMC
+articles reaching this connector is unusable on rights alone.
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 10 `human_assistance` rows: 3 `recoverable_format`, 3
+`aggregate_continuous`, 3 `human_review`, 1 `worth_retrying`, 0
+`not_item_response` / `wrong_file_selected`.
+
+**No raw candidates CSV is committed for this run.** PR `#2139` did force
+-add `pmc_monthly_candidates_weekly_2026-09-09.csv` past `.gitignore:60`
+— the same workaround the 2026-09-08 entry documents and the PLOS entry
+above (`2fff7ef`) declined to repeat forty minutes later on the same day.
+`#2139` was closed unmerged; this entry and the archived `human_review`
+rows are the durable record instead. The candidate rows were recovered
+from the closed PR's commit `8b32404` and Step 2b re-run locally, which
+reproduced the 3/3/3/1 split exactly — `irw_retriage_ha.py` is pure
+pattern matching over the triage columns with no re-download, so its
+output is deterministic and does not need the original container.
+
+### 3 `human_review` — archived to `human_review/human_review_pmc_2026-09-09.csv`
+
+Same failure mode in all three: no column met the id heuristic, so the row
+position was used as the person id and no item columns could be
+identified. Two of the three are plainly not person x item data and the
+classifier simply had nothing to rule them out with:
+
+- **Evaluation of sealing ability and adaptability of different endodontic
+  sealers: in vitro comparative study** (`PMC13450035`) — in vitro dental
+  materials measurements. Not IRW.
+- **Enhancing drought resilience in durum wheat: effect of root
+  architecture and genotypic performance** (`PMC11955194`) — agronomy
+  trial. Not IRW.
+- **Interrelations of work with health and wellbeing on a 50+ year old
+  workforce assessed using longitudinal self-reports and actigraphy**
+  (`PMC13415521`) — the one genuine maybe; longitudinal self-report plus
+  actigraphy, so the file may hold real item responses alongside sensor
+  channels. Worth a human look at the raw file.
+
+### 3 `recoverable_format` — all `resp_scale_mixed`, one deposit bundling several instruments
+
+- Domain-specific Grit Scale for College Athletics (`PMC11126736`, 589p /
+  50i) — also carries a `multi_scale` warning; a named instrument, the
+  best-shaped row in this bucket.
+- Physical activity distribution patterns and basketball skill acquisition
+  (`PMC13471745`, 300p / 7i).
+- Pain intensity and quality of life in lumbar disc patients
+  (`PMC13453140`, 112p / 37i) — also `multi_scale`.
+
+All three are the shape the standard already answers with one output file
+per scale.
+
+### 3 `aggregate_continuous`
+
+- Attitudes towards communication and perceived self-efficacy in nursing
+  students (`PMC13348135`, 125p / 100i) — dup_id_item at 1.0x plus a
+  `resp_ordinal` warning.
+- Education methods and self-efficacy of smoking cessation counselling
+  (`PMC8109004`, 311p / 4i) — same shape.
+- Perceptions about protein supplements in Saudi Arabia (`PMC13428538`,
+  358p / 2i) — >50 unique resp values after melt; 2 items, so it fails the
+  no-single-item bar's spirit regardless of what the resp column turns out
+  to be.
+
+### 1 `worth_retrying`
+
+- **Temperature and relative humidity differentially affect deltamethrin
+  and malathion** (`PMC13475386`, 101p / 6i) — an insecticide bioassay.
+  The dup_id_item-at-1.3x heuristic read it as a repeated-measures human
+  design; it is repeated measures on mosquitoes. Not IRW.
+
+So of the 10 rows Step 2b sub-classified, 3 are not human item response
+data at all (two `human_review`, the `worth_retrying`) and reached this
+bucket only because the heuristics work on triage columns rather than
+subject matter. The `HIGH_YIELD_TERMS` list is pulling non-psychometric
+PMC articles into the funnel — a term-list precision question for the
+journal_scout study, not a triage bug.
