@@ -792,10 +792,10 @@ papp_silva-martins2023,done,batch_127,2026-09-09T23:41:23
 park_2021_pss10,blocked,batch_127,2026-09-09T23:41:23
 park_2021_swls,blocked,batch_127,2026-09-09T23:41:23
 park_2024_ageism,done,batch_127,2026-09-09T23:41:23
-pauli_2021_coercion_attitudes,pending,,
-pauli_2021_ppos_d6,pending,,
-pavic_2022_healthcare_trust,pending,,
-pavic_2022_natural_immunity,pending,,
+pauli_2021_coercion_attitudes,done,batch_128,2026-09-09T23:56:50
+pauli_2021_ppos_d6,blocked,batch_128,2026-09-09T23:56:50
+pavic_2022_healthcare_trust,done,batch_128,2026-09-09T23:56:50
+pavic_2022_natural_immunity,done,batch_128,2026-09-09T23:56:50
 pavic_2022_science_literacy,pending,,
 pavic_2022_vaccine_conspiracy,pending,,
 pecino_2018_justice_climate,pending,,

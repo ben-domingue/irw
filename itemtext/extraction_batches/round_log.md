@@ -13972,3 +13972,81 @@ One transient noted for future agents: `soffice` cannot be launched from `Rscrip
 workaround is `env -u LD_LIBRARY_PATH`.
 
 Cap (`batch_165`) **not** reached; 571 rows remain pending.
+
+---
+
+## batch_128 — 2026-09-09
+
+**4 tables claimed, 3 written / 1 blocked / 0 failed.** Yield 75%; the block is a determinate
+rights verdict, not a pipeline fault, so nothing counts toward the circuit breaker (0% failed).
+
+| table | outcome | rows |
+|---|---|---|
+| `pauli_2021_coercion_attitudes` | done | 90 (15 items × 6 levels) |
+| `pavic_2022_healthcare_trust` | done | 40 (8 items × 5 levels) |
+| `pavic_2022_natural_immunity` | done | 15 (3 items × 5 levels) |
+| `pauli_2021_ppos_d6` | **blocked** — instrument rights | — |
+
+The round drew two source clusters, one per paper, and each cluster was split across two agents who
+were told which siblings belonged to someone else. No collisions; two `pavic_2022_*` siblings
+(`science_literacy`, `vaccine_conspiracy`) remain pending for a later round and were untouched.
+
+**The block.** `pauli_2021_ppos_d6` is the German PPOS-D6, a translated short form of Krupat's
+Patient-Practitioner Orientation Scale. `instrument_rights_register.csv` already carried a settled
+`verdict=block` row that named this table explicitly as reached-but-not-actioned; this round actions
+it. The clause was re-confirmed live rather than inherited on trust — the El Centro PPOS page fetched
+today is byte-identical to the register's recorded hash (sha256 `576df50a…168b5`, 216,274 bytes) and
+still reads "copyrighted so please contact the author for permission to use the scale". Retry test
+**NO**: the wording was fully in hand (Supplemental Information 1 prints all six items in administered
+German with the authors' English alongside) and extraction was deliberately not performed. Unblocking
+needs a rights change or Ben overturning the register, at which point this and `mohamed_2024_ppos`
+should be re-queued together.
+
+**Two disclosures worth a human's eye at triage.**
+1. *Language fallback on all three shipped tables.* Both papers administered in a language whose
+   wording was never deposited — German for `pauli_2021_coercion_attitudes` (the authors' own ad hoc
+   SACS translation), Croatian for both `pavic_2022_*` tables. All three ship the deposit's English
+   as `translated_substitute` / `study_supplied` with no `_translated` columns, each with a
+   `public_note`. Deliberately *not* substituted: Efkemann et al.'s published German SACS, which is a
+   different translation.
+2. *A paper contradicting its own deposit.* Pauli & Wilhelmy's Methods describe the coercion scale as
+   "1 (= I fully agree) to 6 (= I don't agree at all)", but the deposited coding is 0–5 with the
+   codebook labelling 5 = fully agree. The data settle it for the codebook and the shipped anchors
+   follow the deposit — "More coercion should be used in treatment" is the floor at mean 1.19 with
+   nothing above 4, against 3.44 and 3.87 for the two protection-framed items; the paper's stated
+   direction inverts all three. Disclosed in the `public_note`.
+
+**Step 5b orchestrator re-checks — three run, all confirming, numbers recorded in `notes.csv`.**
+Both public-note claims about response data were recomputed from the cached deposits rather than
+taken on report: `pavic_2022_healthcare_trust`'s five reverse-worded items are stored unreversed
+(`raw + rec == 6.0` exactly with r = −1.000 for HCS_trust2/4/5/7/8; forward items correlate
++0.852/+0.864/+0.877 with the forward-item mean, the five reverse ones −0.449 to −0.629), and
+`pavic_2022_natural_immunity`'s subscale total recomputes to n=577, M=6.603, SD=3.627 against the
+paper's published M=6.60, SD=3.63. Separately, `verify_pauli_2021_ppos_d6.R` was run **by hand**:
+`verify_batch.R` skips it because the table ships no `__items.csv`, so a blocked table's evidence
+would otherwise never execute. It returned VERDICT: PASS on both the identity and the rights hash.
+*Worth generalising:* every rights-blocked table with a verify script has this gap.
+
+**Gates.** normalize_nulls fixed 1 of 3; audit_batch **PASS 3, zero WARNs**; verify_batch PASS=1 plus
+2 MISSING(exempt); lint_verification 4 rows, **0 ERROR**, 1 WARN; `irw-validate` ok on all three;
+`check_provenance.R` clean for this batch (its flagged rows — `aspirations_sonmez_2022` and the
+12 `translation_source=mixed` review rows — are all pre-existing and none belong to batch_128).
+The lint WARN, on `pauli_2021_coercion_attitudes` VERIFIED-with-a-hedge, was reviewed and VERIFIED
+retained: the hedge scopes a *corroborating* n/range fingerprint that leaves {coercion2, coercion11}
+and {coercion5, coercion7} unseparated, while the route of record — per-variable codebook labels plus
+a number-preserving rename list — does distinguish all 15. Reasoning recorded in `notes.csv`. The
+coverage WARN that agent anticipated (`coercion3` never observed at 0, `coercion6` never at 5) did
+not fire.
+
+**Register gap for triage — not actioned by this round.** `pauli_2021_coercion_attitudes` ships the
+SACS (Husum, Finset & Ruud 2008), which has **no row** in `instrument_rights_register.csv`. The agent
+searched the rights holder's side and found nothing quotable reserving a right — both Husum-authored
+CC BY SACS reviews (PMC9095955, PMC9941667) state no terms of use and reprint no items — so it shipped
+under silence-is-permission. A `verdict=ship` row is warranted, but writing a durable rights verdict
+into the register is a human call and was deliberately left to Ben.
+
+**Infrastructure.** Four agents, zero kills, no rate limits, no export quota spent — every table took
+ground truth through `irw_table_sets()` server-side aggregates rather than a full export. This is the
+17th consecutive clean round at four agents (batches 104–128).
+
+Cap (`batch_165`) **not** reached; 565 rows remain pending.
