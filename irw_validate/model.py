@@ -6,12 +6,11 @@ for triage -- deciding whether a machine's guess at a conversion is worth a
 human's time -- and are now being asked to gate publication, which is a
 different question with a different cost of being wrong.
 
-`resp_scale_mixed` is the worked example. It is `fail` today, and
-`data/cao_2026_cdss.py` documents a table that trips it legitimately: an unused
-top category on a left-skewed 1-7 scale reads as a second scale. Promoting every
-heuristic to a blocking error would have rejected that correct table on the day
-the gate went in. So heuristics are capped at `warn` under `upload`, and
-`GATE_ERRORS` grows one documented case at a time.
+Response widths illustrate the distinction: an unused endpoint or a weighted
+item can change an observed range without changing the construct. Width-only
+findings warn in every profile. Explicit source-supported inputs can establish
+an out-of-codebook response or different construct groups with different
+ranges; only those evidence paths produce response-scale failures (#1697).
 """
 from __future__ import annotations
 
@@ -30,8 +29,11 @@ CORE_CHECKS = frozenset({
 
 #: Heuristics that block at the gate anyway. A `resp` with one distinct value is
 #: unusable at any altitude -- it carries no information for any model. Add to
-#: this only with a case written down.
-GATE_ERRORS = frozenset({"resp_variation*"})
+#: this only with a case written down. The two response checks fail only with
+#: explicit external documentation (#1697): an observed code outside its
+#: permitted set, or documented constructs with different observed ranges.
+#: Their width-only counterparts are raw WARN and are never promoted here.
+GATE_ERRORS = frozenset({"resp_variation*", "resp_outside_permitted", "resp_scale_constructs"})
 
 PROFILES = ("core", "triage", "upload", "legacy")
 

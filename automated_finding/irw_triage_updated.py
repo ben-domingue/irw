@@ -483,13 +483,12 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
 # `run_qc`, `Check` and `irw_metadata` now live in the `irw_validate` package
 # (irw#1703, sub-item 1.3), so one implementation serves the fifty scripts in
 # data/ that import run_qc from here, a CLI with an exit code, red_up's
-# pre-upload gate, and CI. Nothing else changed: the check bodies were MOVED
-# verbatim, and the golden test in irw_validate/tests/ pins their exact
-# (name, status, detail) emission order for eight fixtures.
+# pre-upload gate, and CI. The response-scale revision in irw#1697 therefore
+# belongs in that shared implementation, with regression tests alongside it.
 #
 # Severity profiles are layered ON TOP of these by irw_validate.core, never
-# underneath, so `run_qc` here behaves exactly as it did before the move --
-# which is why none of the fifty callers needed an edit.
+# underneath. This import preserves raw pass/warn/fail results, including the
+# revised response-scale checks; existing callers need no import changes.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from irw_validate._checks import (Check, _looks_composite,  # noqa: E402,F401
                                   irw_metadata, run_qc)
