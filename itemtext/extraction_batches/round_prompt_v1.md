@@ -79,7 +79,12 @@ the next round, and the wrapper will decline to start one for the same reason.
 they run in parallel.
 
 **FOUR agents per round — 2026-09-09, Ben's call ("let's go up to more agents"), taken while
-firing rounds back to back deliberately until something breaks.** This walks the probe back UP from
+firing rounds back to back deliberately until something breaks. IT DID NOT BREAK: 16 consecutive
+rounds (batch_104–119, 15:23–21:0x, ~2 min between rounds) ran with zero kills, zero failed
+extractions and 58 of 62 tables shipped, available memory never below 17G. So do NOT walk this
+back down to two or three on the strength of the 2026-09-08 record below — that night's cluster
+is not reproducible at double the agent count, which is the strongest evidence yet that the agent
+count was never the variable.** This walks the probe back UP from
 two, and it is consistent with what the failure record below actually says: the count was never shown
 to be the variable, so raising it is as informative as lowering it was. Previously TWO (2026-09-08,
 after THREE was killed too — Ben's call, "wait a few minutes and then perhaps try again with fewer
