@@ -796,10 +796,10 @@ pauli_2021_coercion_attitudes,done,batch_128,2026-09-09T23:56:50
 pauli_2021_ppos_d6,blocked,batch_128,2026-09-09T23:56:50
 pavic_2022_healthcare_trust,done,batch_128,2026-09-09T23:56:50
 pavic_2022_natural_immunity,done,batch_128,2026-09-09T23:56:50
-pavic_2022_science_literacy,pending,,
-pavic_2022_vaccine_conspiracy,pending,,
-pecino_2018_justice_climate,pending,,
-pedroso_2021_ifsq_laissezfaire,pending,,
+pavic_2022_science_literacy,done,batch_129,2026-09-10T00:12:25
+pavic_2022_vaccine_conspiracy,done,batch_129,2026-09-10T00:12:25
+pecino_2018_justice_climate,blocked,batch_129,2026-09-10T00:12:25
+pedroso_2021_ifsq_laissezfaire,done,batch_129,2026-09-10T00:12:25
 pedroso_2021_ifsq_responsiveness,pending,,
 pedroso_2021_ifsq_restriction,pending,,
 pellerin2020_cpc_hope,pending,,

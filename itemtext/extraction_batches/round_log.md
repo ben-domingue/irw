@@ -14050,3 +14050,33 @@ ground truth through `irw_table_sets()` server-side aggregates rather than a ful
 17th consecutive clean round at four agents (batches 104–128).
 
 Cap (`batch_165`) **not** reached; 565 rows remain pending.
+
+## batch_129 — 2026-09-10 00:00–00:10
+
+4 tables, 4 agents (one per table, per the 2026-09-09 four-agent setting). **Written 3 / blocked 1 / failed 0 — yield 75%.** No kills, no retries, no rate limits. Circuit breaker not tripped (0% failed).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `pavic_2022_science_literacy` | done | 30 (15×2) | data_labels | VERIFIED |
+| `pavic_2022_vaccine_conspiracy` | done | 35 (7×5) | data_labels | NOT_NEEDED |
+| `pedroso_2021_ifsq_laissezfaire` | done | 55 (11×5) | paper_explicit | VERIFIED |
+| `pecino_2018_justice_climate` | **blocked** | — | unknown | NO_ROUTE |
+
+**Gates (all clean).** normalize_nulls 0 of 3 changed; audit_batch 3/3 PASS, **no anomalies and no WARNs**; verify_batch PASS ×2 + MISSING(exempt) ×1 (`pavic_2022_vaccine_conspiracy`, correctly skipped as data_labels); lint_verification 4 rows, **0 ERROR**, 1 WARN; `irw-validate` ok on all three; `check_provenance.R` flags nothing in this batch.
+
+The lint WARN (`pavic_2022_science_literacy` VERIFIED-but-hedges) was reviewed and **kept as VERIFIED**, reason recorded in `notes.csv`: the hedge is scoped to Lit5/Lit10 both printing 85.44% in Table 4, and those two are distinguished by the data_labels exemption, so every item is distinguished from every other — the VERIFIED bar is met. False positive from the phrase "does NOT establish".
+
+### Step 5b — orchestrator re-checks
+
+- **`pecino_2018_justice_climate` is MIS-NAMED. Confirmed independently, decisively.** The agent's claim was re-checked against `data/pecino_2018_interpersonal_justice.py` and the S1 `.sav` directly. The script splits the 40 `cl` columns **by response-anchor set, not by construct** (its own comment concedes the sub-construct codes are "unlabeled"), then names the 6-column group after the paper's headline construct. The `.sav` settles it: `cl1ap..cl6me` carry variable labels **Support/Support/Innovation/Support/Innovation/Goals** on a 1–6 scale — an organizational-climate block — while the actual Colquitt interpersonal-justice items are **`jus12int`..`jus15int`, labelled "Interpersonal 12".."Interpersonal 15", 1–5 `strongly disagree..strongly agreed`**, and those are **not in IRW at all**. So the table name AND the dictionary Description ("Interpersonal justice climate scale, employees, 6 items, N=442") are both wrong.
+  - The FOCUS-93 attribution (ap/in/re/me = apoyo/innovación/reglas/metas) is the one part not confirmable from disk — it is a strong inference. The mis-naming finding does **not** depend on it.
+  - **Sibling `pecino_2018_extrarole_wfb` is the other 34 columns of the same climate block** and is mis-named on the same mechanism. It is still `pending` in the queue — re-check before extracting.
+  - Separately: four IRW-eligible interpersonal-justice items (`jus12int`..`jus15int`, n=442, 1–5, value-labelled) sit unshipped in the deposit. Coverage note for a human, not acted on here.
+  - Block classification: **blocked, not failed** — retry test NO. The source publishes no wording for `cl1..cl6` and its only supplement is the data file; every fetch that mattered succeeded first try. Flips only with library access to the FOCUS-93 item list. 36 verified option rows parked under `fixes/`, not uploaded.
+- `pavic_2022_science_literacy` (Lit6 published 72.77 vs observed 72.27 = paper typo) and `pedroso_2021_ifsq_laissezfaire` (LF6–LF9 stored reverse-scored; Table 4's LF5 count 219 vs its own 72.0% = 291) were both re-executed by their `verify_*.R` scripts under `verify_batch.R` and printed their numbers — **VERDICT: PASS** each.
+
+### Notable
+- Both `pavic_2022_*` tables ship **English for a Croatian administration** (documented fallback — zero Croatian strings in either deposit or supplement), `text_source=translated_substitute`, `translation_source=study_supplied`. The English is the *study's own*, not IRW-generated, so no issues-page entry is owed.
+- `pavic_2022_science_literacy` `option_text` records the study's **dichotomised scoring** ("Not correct or don't know" / "Correct"), not the three administered options (true/untrue/don't know) — the deposit keeps only the dichotomised variable. Disclosed in `public_note`; nothing invented.
+- Rights: no blocks. VCBS and IFSQ are both absent from `instrument_rights_register.csv` with no locatable distribution clause — silence-is-permission, recorded as non-exhaustive. The agent correctly declined to treat Elsevier's CC BY-NC-ND **article** licence on Shapiro et al. (2016) as an instrument-distribution notice (same call as batch_078/batch_106).
+- Cap (`batch_165`) not reached; queue has 561 pending after this round.
