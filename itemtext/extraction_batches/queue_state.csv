@@ -915,10 +915,10 @@ reinwarth_2023_phq4,done,batch_155,2026-09-10T10:34:09
 ren2019_cpti,blocked,batch_155,2026-09-10T10:34:09
 ren_2019_scpv,done,batch_155,2026-09-10T10:34:09
 ren2019_scpv,done,batch_155,2026-09-10T10:34:09
-ren_2019_sdq,pending,,
-ren2019_sdq,pending,,
-Resistance,pending,,
-reuter_2021_emotions,pending,,
+ren_2019_sdq,blocked,batch_156,2026-09-10T11:22:55
+ren2019_sdq,blocked,batch_156,2026-09-10T11:22:55
+Resistance,done,batch_156,2026-09-10T11:22:55
+reuter_2021_emotions,done,batch_156,2026-09-10T11:22:55
 reyes_2022_eheals,pending,,
 rfq_wozniakprus_2021,pending,,
 ribeiro_2024_msk_hq,pending,,

@@ -15937,3 +15937,65 @@ Both defensible; they should not ship inconsistent.
 - Agent count 4, per the 2026-09-09 setting. No kills, no failed extractions, no retries.
 
 Cap is batch_165; batch_155 completed, not the cap. Ending normally.
+
+## batch_156 — 2026-09-10
+
+4 tables claimed: `ren_2019_sdq`, `ren2019_sdq`, `Resistance`, `reuter_2021_emotions`.
+**written 2 / blocked 2 / failed 0 — yield 50%.** Zero failures, so the circuit breaker does not
+fire; both no-CSV outcomes are determinate rights verdicts, not pipeline faults.
+
+- **`Resistance`** — 84 rows (14 items × 6 resp), `data_labels`, verification **VERIFIED**. Turns
+  out to be the **Resistance to Framing** scale of the A-DMC (Bruine de Bruin/Parker/Fischhoff 2007)
+  as re-administered by Geiger, Vintr & Rachev 2023 (OSF `j5n6f`, CC BY 4.0) — an opaque table name
+  resolved by Step 3, not guessed. The structural finding: **`resp` is not a rating.** The study's
+  own codebook defines each column as |loss frame − gain frame|, so `resp` 0–5 is a derived
+  difference score. Hence `item_text` carries *both* administered wordings and `option_text` is
+  blank for all 84 rows by design. Verification re-ran the study's derivation from the raw Qualtrics
+  exports and then falsified it: 0 of 506 derived response vectors unreproduced, while the best of
+  42 same-family transpositions leaves 197 of 506 unreproduced. The table pools 261 English and 245
+  Bulgarian respondents; English ships, Bulgarian is pointed at in a `note_only` row.
+- **`reuter_2021_emotions`** — 78 rows (39 items × 0/1), `data_labels`, verification NOT_NEEDED.
+  Reuter/Forster/Kruger 2021, PeerJ, CC BY 4.0, via the Europe PMC `supplementaryFiles` zip. A
+  39-word emotion checklist; `option_text` blank both levels because the checkboxes carry no printed
+  labels — checkbox mechanics, not wording anyone read, so nothing was invented.
+- **`ren_2019_sdq` and `ren2019_sdq` — both BLOCKED ON RIGHTS, same instrument, same verdict.**
+  sdqinfo.org: *"Users are not permitted to create or distribute electronic versions for any purpose
+  without prior authorization from youth in mind"*, plus a no-derivatives bar and a
+  non-profit/no-charge restriction. Three independent reserve-a-right triggers under irw#1945; under
+  the 2026-09-04 DSES ruling it outranks the figshare deposit's CC BY 4.0, and it reaches
+  translations explicitly, so the Chinese administration is no route around it. Retry test **NO** on
+  both. One `block` row written to `instrument_rights_register.csv` (the two agents coordinated
+  correctly — one wrote it, one deliberately abstained; verified exactly one row exists).
+
+**Step 5b orchestrator checks — one claim corrected.** The rights clause was independently
+re-fetched: my own fetch returns the identical page sha256 `2507c69a…` and the clause verbatim, so
+the block is sound. The reported **SDQ1 response-data defect also confirms** — recoding the sentinel
+`9` to missing, every number reproduces exactly (n=297, corr(row index, SDQ1)=+0.869, corr(row index,
+prosocial mean excl SDQ1)=+0.415, item-total +0.437), and SDQ1 is the *only* monotone non-decreasing
+column of the 25 (EDUCATION, CPTI2 and SCPV1 are the other three in the file). **But the claim that
+the EDUCATION×SDQ1 crosstab is "deterministic" is overstated and has been corrected in `notes.csv`:**
+only 4 of 6 EDUCATION levels map to a single SDQ1 value — level 2 splits 1/27, level 5 splits
+24/109. The agent's own example (all 58 EDUCATION=3 → SDQ1=2) is true; the generalisation is not.
+The deposit also has 299 data rows, not 300. Verdict unaffected: SDQ1 is person-misaligned and its
+healthy-looking prosocial item-total is an ordering artifact. This refines batch_155's
+`ren2019_cpti` finding — within the SDQ block only SDQ1 is affected.
+
+**ESCALATION FOR BEN (not acted on by this round).** Both SDQ agents independently flagged that
+`addy_2021_sdq_ghana` (batch_001, uploaded 2026-08-17) and `ALSECYPIAMH_WU_2022_SDQ` (batch_012)
+shipped SDQ item text *before* the 2026-09-04/05/08 wording-rights rulings. Confirmed against their
+provenance rows: both are live and both are withdrawal candidates in the irw#1954 shape. Nothing was
+withdrawn here.
+
+**Gates.** normalize_nulls 0 of 2 changed; audit_batch **2/2 PASS with no anomalies** (so no Step 5c
+WARNs are owed — notably the blank-`option_text` WARN the `Resistance` agent expected did not fire);
+verify_batch PASS + 1 exempt; lint_verification **0 ERROR**, 3 WARN, all expected (two are the
+blocked SDQ rows carrying `mapping_basis=unknown`, one is `Resistance`'s by-design blank
+`option_text`). `irw-validate` clean apart from `name_charset` on the capital-R `Resistance` — a
+property of the live response table, which the itemtext file must match. `check_provenance.R` exits
+1, but on **pre-existing corpus-wide debt only**: the three tables owing issues-page lines
+(`PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`, `aspirations_sonmez_2022`) are from earlier rounds, and
+neither batch_156 table ships IRW-generated content.
+
+Agent count 4, per the 2026-09-09 setting. No kills, no failed extractions, no retries.
+
+Cap is batch_165; batch_156 completed, not the cap. Ending normally.
