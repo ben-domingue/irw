@@ -15558,3 +15558,65 @@ carried a verification row. Sidecars merged and deleted **by exact name**, never
 
 Ran at four agents per round. No kills, no rate limits, no retries; all four agents returned within
 ~5.5 minutes of dispatch. Cap (`batch_165`) not reached — 464 tables still pending.
+
+## batch_151 — 2026-09-10T16:23Z
+
+4 tables claimed, 4 agents (one per table), all returned. **Written 2 / blocked 2 / failed 0** —
+yield 50%, and 0% failed, so the circuit breaker did not fire and nothing was left `in_progress`.
+
+**Shipped**
+- `quarter_life_crisis__iuc` — IUS-12 (Carleton, Norton & Asmundson 2007), 60 rows (12 items × 5
+  levels). `mapping_basis=data_labels` from the Figshare workbook's own header row, but the agent
+  did NOT claim the exemption: `data/quarter_life_crisis.py` assigns codes *positionally* (`Unnamed:
+  14`…`Unnamed: 24`), so it ran the header diff and a response-frequency match — 60/60 cells, all 12
+  signatures distinct. **VERIFIED.** `option_text` blank for all five levels: the deposit records no
+  anchors anywhere (all five sheets searched), and the canonical "not at all characteristic of
+  me"…"entirely characteristic of me" labels were deliberately NOT substituted.
+- `queiros_2018_qcae` — QCAE, 124 rows (31 items × 4 levels), `mapping_basis=paper_explicit` from
+  the PLOS S1 File's numbered Portuguese items. Administered-language rule followed: Portuguese in
+  the base fields, English in `_translated`, `language=Portuguese`, `text_source=study_materials`.
+  **PARTIAL**, correctly so — route 3 reproduces all sixteen published composite SS figures to
+  printed precision (largest |diff| 0 and 0.0004) and a flipped response direction gives 2,028,451
+  against a published 4,695,751, so the scale direction is settled; but a sum is permutation-invariant
+  *within* a subscale, and route 1 reaches only 83.2% (PrR) and 71.0% (PeR). Within-subscale order
+  rests on the published number match, corroborated not proved.
+
+**Blocked — both on instrument rights, both retry-test NO, neither counting toward the breaker**
+- `quarter_life_crisis__cd` — Career Decision Scale (Osipow et al. 1976), PAR Inc.
+- `quarter_life_crisis__mwb` — SWEMWBS (7 items), University of Warwick / Warwick Innovations.
+
+Both are the expensive kind of block: the wording was fully in hand (the Figshare workbook reproduces
+the CDS verbatim, and `MWB_MAP` ties the SWEMWBS items to codes explicitly), so rights alone stopped
+two otherwise-trivial extractions. Both blocks *reach* — the live codes carry no wording.
+
+**Step 5b re-checks (orchestrator, independent).** Every consequential claim was re-verified against
+the agents' own cached pages rather than taken on report:
+- Warwick clause confirmed verbatim on TWO pages (sha256 `fce8a11751cd9b38`, `7b0eddc4cee0626c`).
+- PAR clauses confirmed verbatim (sha256 `41e690bb1f0bed49`), including "PAR does not grant permission
+  to reproduce full tests in publications"; the CDS product page confirms Osipow authorship.
+- **PII in the shared source, CORRECTED:** the `__cd` agent reported participants' real e-mail
+  addresses in the deposit's `Data Cleaning` sheet "column 4". Re-checked: the addresses are real —
+  89 email-shaped cells — but in **column 5**, not 4. This is the Figshare workbook, NOT the IRW
+  tables (id/item/resp/cov_age). All three `quarter_life_crisis__*` tables derive from that one
+  workbook. **Escalated for a human decision on the response side** — no action taken here.
+
+**Gates** — `normalize_nulls` 0 of 2 changed; `audit_batch` PASS 2/2 with no anomalies (so Step 5c had
+nothing to explain); `verify_batch` PASS 2/2; `lint_verification` 4 rows, no problems;
+`irw-validate` ok on both. `check_provenance.R` exits 1, but on `PMT_Trzcinska_2023_PMT` (batch_141),
+`poza2026_hlseu` (batch_142) and `aspirations_sonmez_2022` — **pre-existing debt, none from this
+round.** `queiros_2018_qcae` is `translation_source=mixed` (its instruction English is an IRW
+rendering) and so will owe an issues-page line *when uploaded*; it is HELD, so nothing is owed yet.
+
+**Tracker.** Both shipped tables already carried verification rows, so no NOT_NEEDED rows were owed.
+The `__mwb` agent wrote no verification sidecar (reasoning a blocked table cannot carry a verification
+outcome); the orchestrator added a NO_ROUTE row for it to both the batch file and the permanent
+tracker, matching the `__cd` agent's treatment and the batch_150 `qol_islam_2025` precedent, so all
+four tables are documented identically. Sidecars merged and deleted **by exact name**, never by glob.
+
+**Rights register.** A `block` row for the CDS was written by the `__cd` agent. **A WEMWBS/SWEMWBS row
+is still owed** — the `__mwb` agent correctly declined to touch the shared register while siblings ran.
+Worth flagging beyond this table: a name-substring sweep for WEMWBS will MISS `quarter_life_crisis__mwb`,
+which contains no `wemwbs` string.
+
+Ran at four agents per round. No kills, no rate limits, no retries; all four agents returned within
+~10.5 minutes of dispatch. Cap (`batch_165`) not reached — 460 tables still pending.
