@@ -12922,3 +12922,74 @@ review. None of the four belong to this batch; `monier_2026_pot` ships the autho
 (`translated_substitute` / `study_supplied`), so no issues-page line is owed for it.
 
 Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 641 pending remain.
+
+---
+
+## batch_110 — 2026-09-09T17:34 (4 tables, 4 agents)
+
+**Yield 4/4 written, 0 blocked, 0 failed.** The first clean sweep at the four-agent setting
+(raised from two on 2026-09-09 by Ben, "let's go up to more agents"). No kill, no reconcile, no
+salvage; all four agents returned inside ~7 minutes of wall clock. That is one data point, not a
+verdict on the cadence question — the failures this evening clustered by *timing*, not by agent
+count, and this round was fired after a gap.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `monier_2026_sti` | clean pass | paper_explicit | VERIFIED |
+| `morales_2021_erq` | pass w/ caveat | paper_explicit | PARTIAL |
+| `motion` | pass w/ caveat | paper_explicit | VERIFIED |
+| `mpsycho_avlancheprep` | pass w/ caveat | data_labels | PARTIAL |
+
+**Gates:** normalize_nulls 0 of 4 changed; audit_batch **4 PASS, no WARN** (so nothing owed under
+Step 5c); verify_batch **PASS=4**; lint_verification 0 ERROR / 1 WARN (adjudicated, below);
+`irw-validate` clean on all four.
+
+**Notable — three different reasons a table needed the fallback, none of them the same reason.**
+
+- `monier_2026_sti` is the ASTI self-transcendence scale from the same PLOS ONE article as
+  `monier_2026_pot` (batch_109). Its **Table 6 is an image**, so the ten items had to be read off
+  the figure rather than grepped — another instance of the image-only-table problem. Administered
+  in French, but the S1 headers carry only truncated CamelCase French fragments, so English ships
+  in the base fields with `language=French` and no `_translated`, matching the sibling's call.
+  Verification is strong: all **70 cells of Table 6 recompute from the S1 columns to within
+  0.0054**, and each column's nearest published row is its own with a 14x-48x margin, so no
+  pairwise swap survives.
+- `morales_2021_erq` — **a real defect on Gross's own resource page, confirmed by the
+  orchestrator at Step 5b.** The agent reported that the ERQ page's "Spanish (Spain)" link does
+  not serve an ERQ. Re-checked independently: `spl.stanford.edu/resources` points that entry at
+  `/sites/g/files/sbiybj19321/files/media/file/spanish.pdf` (HTTP 200, 9094 bytes), and the PDF is
+  headed **"BEQ"** with **16 items**, the Berkeley Expressivity Questionnaire translated at UCLA —
+  not the 10-item ERQ. The same file is linked twice on that page, once correctly under BEQ and
+  once wrongly under ERQ. **Future ERQ batches should not take that link at face value.** The
+  agent correctly declined to substitute it and shipped canonical English
+  (`translated_substitute` / `official_instrument_english`) for a Spanish-administered sample.
+  PARTIAL because the reappraisal/suppression key is pinned exactly — the canonical 6-item subset
+  reproduces all 12 of Table S.5's statistics and is **unique among all 210 six-item subsets**
+  (runner-up off by 0.090) — but order *within* a subscale is not: ERQ 1/3/7/10 are near-parallel
+  wordings and nothing at n=177 separates them.
+- `motion` — the opaque bare table name resolved from the **IRW biblio row**, not blind search:
+  O'Brien & Yeatman (2021) *Dev Sci*, a random-dot motion task. It is psychophysical, so there is
+  no per-item verbal stem; the 30 items are `block x coherence` conditions and `item_text` is a
+  **constructed stimulus description**, disclosed in provenance and in a `public_note`. The
+  verbatim text that does exist was recovered from the study's own on-screen instruction images.
+
+**Lint WARN adjudicated, not silenced.** `motion` was flagged "VERIFIED but its evidence hedges".
+Kept as VERIFIED: the lint matches the literal phrase "does not establish", and the two things the
+evidence declines to establish — which calendar session a block number denotes, and the pressed
+direction — are not part of the item-to-text mapping (`resp` is scored accuracy, so the option axis
+really is just Incorrect/Correct). On the mapping itself the route is fully discriminating, 30/30,
+including the accuracy-tied pair `1 24`/`6 24` (both 0.867925) separated by mean RT 1.8152 vs
+1.4035. Reasoning recorded in `notes.csv` so the next reviewer does not re-derive it.
+
+**One paywall, no block.** `mpsycho_avlancheprep` came straight from `Rd_db("MPsychoR")`, whose
+Format section labels all four columns and whose Description lists each one's categories (counts
+match the factor levels exactly, 4/4/5/3) — `data_labels`, so authoritative. Haegeli et al. (2012)
+*Prevention Science* is paywalled, so the administered wording could not be compared against the
+`.Rd`'s terse renderings, and the numeric key is an inference from listing order. PARTIAL for that
+reason, with a `public_note`. It shipped a verification row despite being `data_labels`, so no
+NOT_NEEDED rows were owed in either file this round.
+
+`check_provenance.R` exits 1 on **pre-existing rows only** — `aspirations_sonmez_2022` plus three
+`translation_source=mixed` tables flagged for review. **None of the four belong to this batch.**
+
+Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 637 pending remain.
