@@ -13450,3 +13450,47 @@ Step 5b (orchestrator re-checks, all three confirmed against primary sources):
 
 Four agents ran clean on the first firing, which is one data point for the raise
 and not yet a pattern. Cap (batch_140) not reached; 609 pending remain.
+
+## batch_118 — 2026-09-09T20:06 (4 tables, 4 agents)
+
+Tables: ngo_2025_green_purchase_intention, ngo_2025_green_subjective_norm,
+ni_2025_open_innovation, ni_2025_strategic_orientation.
+
+**written 4 / blocked 0 / failed 0 — yield 4/4 (100%).** Circuit breaker not tripped.
+
+Gates: normalize_nulls 0 of 4 changed; audit_batch PASS=4, no anomalies (no WARNs to
+explain at Step 5c); verify_batch PASS=4; lint_verification 4 rows, no problems;
+irw-validate ok on all 4; check_provenance clean for this batch (its 1 outstanding
+IRW-generated-content entry, aspirations_sonmez_2022, and the 3 `mixed` review rows are
+pre-existing and belong to other batches).
+
+All four are `mapping_basis=paper_order` (no data_labels rows, so no NOT_NEEDED rows were
+owed in either verification file). Step 5b outcomes: 2 NO_ROUTE (both ngo_2025 — the S2
+File prints wording with no codes and Table 2 prints codes with no wording, so nothing
+joins text to code), 2 PARTIAL (both ni_2025 — Table 3's per-item PC loadings pin each
+item CODE to a PI number to <=0.0005, but nothing keys the PI numbers to the prose
+wording order). Both ni_2025 tables ship English the study published while administration
+was in Chinese (Wenjuanxing / Chinese SME managers, no Chinese wording anywhere in the
+deposit): text_source=translated_substitute, translation_source=study_supplied,
+language=Chinese, no _translated columns.
+
+**Notable — a finding against a PRIOR batch, confirmed by the orchestrator, left for a
+human.** Both ngo_2025 agents independently reported that the odd-low/even-high item-mean
+alternation runs through ALL FIVE TPB constructs of the Ngo & Nguyen (2025) deposit. I
+re-checked it directly against the live tables (n=237 each): G_ATT 2.7/3.7/2.7/3.7, G_SN
+2.7/3.7/2.7/3.7, G_PBC 2.6/3.6/2.6/3.6, G_PI 2.7/3.6/2.7/3.7, G_PB 2.7/3.8/2.8/3.7. The
+split tracks column parity across constructs whose items have unrelated content, so it is
+structural rather than semantic and route 8 has no discriminating power on this deposit.
+batch_117's `ngo_2025_green_purchase_behavior` and `ngo_2025_green_attitude` are both
+recorded PARTIAL with route 8 as part of their stated basis; that component does not hold,
+though their route-1 and block-identity evidence is untouched. Whether those two tracker
+rows drop to NO_ROUTE is a human call — not changed here. Also recorded in batch_118
+notes.csv.
+
+Also worth noting: option_text is blank on all 4 tables (135 rows total). None of the four
+scales publishes its Likert anchors; unlabelled points were correctly not padded with
+their own numbers. That is a property of the sources, not a defect.
+
+No systemic access issues, no Step 3b instrument mismatches, no dictionary/metadata
+problems. Four agents (Ben's 2026-09-09 setting) — round ran clean, no kills, no retries.
+Cap is batch_140; not reached.
