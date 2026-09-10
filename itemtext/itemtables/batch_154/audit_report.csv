@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"reinecke_2018_online_vigilance","PASS",12,12,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"reinwarth_2023_domain_importance","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
+"reinwarth_2023_domain_satisfaction","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
+"reinwarth_2023_loneliness3","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,0,""
