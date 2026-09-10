@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"peters_2025_nrm_inj_approval","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"peters_2025_pbc_cond_power","PASS",22,22,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"peters_2025_pbc_cond_presence","PASS",22,22,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"

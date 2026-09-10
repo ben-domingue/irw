@@ -14267,3 +14267,65 @@ source with sibling-exclusion instructions and zero file collisions.
 
 Queue after this round: 656 done / 545 pending / 125 blocked / 63 excluded / 12 failed.
 Cap is batch_165 — not reached, 32 rounds remain.
+
+## batch_134 — 2026-09-10T08:32Z
+
+4 tables claimed, 4 agents (one per table), all completed. **Written 3 / blocked 1 / failed 0 — yield 75%.**
+Circuit breaker: 0% failed, not tripped. No agent kills; available memory never a factor.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| peters_2025_nrm_inj_approval | shipped (70 rows, 10 items × 7) | paper_explicit | VERIFIED |
+| peters_2025_pbc_cond_power | shipped (154 rows, 22 items × 7) | paper_explicit | VERIFIED |
+| peters_2025_pbc_cond_presence | shipped (110 rows, 22 items × 5) | paper_explicit | VERIFIED |
+| petrowski_2019_sclk9 | **blocked** (instrument rights) | unknown | NO_ROUTE |
+
+**Gates:** normalize_nulls 0 of 3 normalized · audit_batch **3/3 PASS, no WARNs** (so Step 5c has
+nothing to explain — first round in a while with a clean audit) · verify_batch 3/3 PASS ·
+lint_verification 0 ERROR, 2 WARN · irw-validate clean on all 3 · check_provenance flags nothing
+from this batch (its 1 owed issues-page line + 12 `mixed` reviews are pre-existing).
+
+**The two lint WARNs are correct-but-expected and were adjudicated, not waived.** Both flag a
+VERIFIED row whose evidence hedges. In each case the hedge is about a SECONDARY corroborating route
+while the PRIMARY route already distinguishes every item from every other: nrm_inj_approval rests on
+bijective code re-derivation from the sheet's own `id` column (10/10, 0 underived, 0 spurious, no
+positional step) and hedges only the class-level referent-applicability check; pbc_cond_power rests
+on explicit code labels + a name-preserving rename corroborated per-item against a deployed Dutch
+.lss, and hedges only route 8's 3-vs-19 direction split. VERIFIED stands in both.
+
+**Step 5b — three agent claims re-checked independently by the orchestrator; all three confirmed.**
+- nrm_inj_approval's applicability claim: boss n=904 and colleagues n=1118 ARE the two smallest,
+  next-smallest general n=1228. Confirmed exactly as written.
+- pbc_cond_power's route-8 claim: othdist 6.4 / techtouch 6.0 / signposts 5.8 are the top three
+  means and the only three above the highest barrier item, lonely 4.2 (floor busyplace 1.8).
+  Confirmed; the 3-vs-19 facilitator/barrier split is real.
+- petrowski_2019_sclk9's rights block: re-ran verify_petrowski_2019_sclk9.R — page bytes differ
+  (dynamic markup) but **5 of 5 reserved-rights clauses still present**. Block holds.
+
+**Rights: the missing YCR register row is now written (was owed since batch_133).** Three separate
+agents flagged that no `instrument_rights_register.csv` row governed the nine `peters_2025_*` tables
+and each correctly declined to write it while siblings were in flight. The orchestrator wrote it.
+Worth recording WHY, because the two agents reached the same verdict by different routes:
+`pbc_cond_power` argued the 2020 repo README reserves nothing (a bare copyright notice, and "We aim
+to release … CC-BY-NC-SA" is aspirational); `pbc_cond_presence` cited the 2025 paper's availability
+statement. Only the second is a positive grant, so the row rests on it — and the orchestrator
+re-fetched PMC12259484 to confirm it verbatim: "everything produced in this project is licensed
+under Creative Commons Attribution licenses or similarly, and available from the project's GitLab
+repositories". That supersedes the 2020 README, so the family stays shippable even if someone later
+reads the README as operative. Item wording independently came from the world-readable DMQs sheet
+and the CC0 build script, not the repo. **This resolves the judgement call `pbc_cond_power` raised
+for Ben — no withdrawal of the batch_133 siblings is needed.**
+
+**petrowski_2019_sclk9 blocked, retry test NO (determinate).** Step 3b passed FIRST — live scl1..scl9,
+resp 0–4, per-item n 2497–2502 matching the paper's N=2507, and these are the SCL-K-9's own nine items
+(one per SCL-90-R subscale), not an arbitrary nine of the SCL-90 nor the co-administered PHQ-D. Blocked
+because those nine ARE SCL-90-R items and Pearson's Terms of Sale and Use reserve rights on four axes
+(no reproduction of test items, no display, no redistribution, permission required to reproduce OR
+translate) with no fitness disclaimer → blocks under irw#1945. German form adds a second gate
+(Hogrefe/Testzentrale Bezugsberechtigung). Notable: extraction was **mechanically available and
+deliberately declined** — the PLOS article is CC BY 4.0 and its Table 1 prints all nine items keyed
+1–9 against the S1 file's scl1..scl9 — per the 2026-09-08 ruling that a CC BY appendix does not
+launder a restricted instrument. Registered as "SCL-90-R and short forms", flagging SCL-27/SCL-5/
+BSI/Mini-SCL as plausibly in scope pending their own checks. Row added to pending_index_notes.csv.
+
+**Queue:** 0 rows left in_progress; 541 pending. Cap is batch_165 — not reached, round ends normally.
