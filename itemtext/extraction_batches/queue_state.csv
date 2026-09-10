@@ -944,7 +944,7 @@ rr98_accuracy,done,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_iri_pt,blocked,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_maas,blocked,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_pid5bf,blocked,batch_163,2026-09-10T14:11:37
-ruiz_parra_2023_rfq8,pending,,
+ruiz_parra_2023_rfq8,done,batch_166,2026-09-10T16:34:20-07:00
 ruiz_parra_2023_tas20,blocked,,
 RvKDCS_Romiacg_Miroshnik_2020_BFI,blocked,batch_163,2026-09-10T14:11:37
 RvKDCS_Romiacg_Miroshnik_2020_CBI,done,batch_163,2026-09-10T14:11:37
@@ -956,9 +956,9 @@ rzeszutek_2020_wwii_matgrandmother,done,batch_165,2026-09-10T14:51:47-07:00
 rzeszutek_2020_wwii_patgrandfather,done,batch_165,2026-09-10T14:51:47-07:00
 rzeszutek_2020_wwii_patgrandmother,done,batch_165,2026-09-10T14:51:47-07:00
 SABFI2_Gallardo_Pujol_2018_LOT,done,batch_165,2026-09-10T14:51:47-07:00
-SABFI2_Gallardo_Pujol_2018_Micro,pending,,
-SABFI2_Gallardo_Pujol_2018_Tight,pending,,
-safiye_2023_rfq,pending,,
+SABFI2_Gallardo_Pujol_2018_Micro,done,batch_166,2026-09-10T16:34:20-07:00
+SABFI2_Gallardo_Pujol_2018_Tight,done,batch_166,2026-09-10T16:34:20-07:00
+safiye_2023_rfq,done,batch_166,2026-09-10T16:34:20-07:00
 salleh_2023_aim_iam_fim,pending,,
 santos_2018_cesd,pending,,
 santos_2018_gse,pending,,

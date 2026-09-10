@@ -16684,3 +16684,52 @@ table name is mixed-case, not fixable in the itemtext file); check_provenance fl
 
 Queue after this round: **404 pending, 751 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
 **Cap reached** -- batch_165 is the Step 0 cap batch; no further rounds until a human raises it.
+
+## batch_166 — 2026-09-10 16:34–16:52 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Round yield 4/4 (100%). Four agents, one per table, no kills, no retries, no rate limits.
+Stop conditions clear at start (no in_progress rows, no breaker flag, 405 pending; cap now batch_173).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `ruiz_parra_2023_rfq8` | **written** | 56 (8×7) | `paper_explicit` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Micro` | **written** | 24 (6×4) | `paper_order` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Tight` | **written** | 30 (6×5) | `paper_order` | PARTIAL, verify PASS |
+| `safiye_2023_rfq` | **written** | 56 (8×7) | `paper_order` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=4; lint_verification
+clean (4 rows); irw-validate no ERRORs (`name_charset` WARN on both SABFI2 tables, mixed-case live name, as
+batch_165); check_provenance flagged a SPLIT RECORD for ruiz_parra_2023_rfq8 (batch_163 block vs batch_166
+write) -- resolved by marking the batch_163 provenance note SUPERSEDED and the pending_index_notes row
+RESOLVED. No WARNs to explain beyond name_charset (notes.csv).
+
+### Notable
+
+- **RFQ rights ruling applied.** Ben's 2026-09-10 `ship_with_note` for the RFQ family (register row confirmed)
+  unblocked `ruiz_parra_2023_rfq8` (blocked + escalated at batch_163). Spanish S2 Appendix wording shipped with
+  the English S1 original in `_translated`; `instructions_translated` is this project's translation (S1's
+  English instructions are a different text) -- disclosed in public_note, so an issues-page entry is owed at
+  upload. Verified by published CFA/EFA loadings: unique best fit over all 8! orderings; only 3↔4 unpinned.
+- `safiye_2023_rfq` ships English RFQ-8 as `translated_substitute` (administered Serbian not in scope).
+  Deposit scoring columns match the RFQ-8 certainty/uncertainty key on 823/823 rows; only RFQ2↔RFQ6 unpinned.
+  The two RFQ agents independently agree on the English wording and numbering of all 8 items.
+- **SABFI2 Micro and Tight were located outside the deposit, one hop out.** The paper never describes either;
+  its Study 3 sample is ISP wave 2, and the International Situations Project OSF (osf.io/yv2nq) carries both
+  measures, translated by this paper's authors. Spanish wording read BY EYE from image-only survey
+  screenshots (`Spanish ISP.pdf` pp. 28-29, 34) -- worth a human spot-check.
+- **Dictionary defect (Micro): Description "Racial microagression scale" is wrong.** The items are the ISP
+  micro-macro life-space item (Salgado, González-Suhr & Oceja 2013): family / friends / city / society /
+  world / work. **Orchestrator Step 5b re-check CONFIRMED** from irw_fetch: means 3.1/3.2/2.8/2.7/2.5/2.4;
+  best 3-vs-3 split {Micro1,2,6} at 0.170 vs next 0.092, rest ≤ 0.024 -- so screen order (work last) holds
+  over the article order. tags.csv/metadata Description fix owed.
+- **Rights decision owed on Micro before upload:** Anales de Psicología's page says CC BY-SA 4.0 for pre-2025
+  articles; the SciELO España mirror footer links CC BY-NC 3.0. Agent shipped on the publisher's statement
+  and wrote no register row. If Ben rules the NC notice governs, pull Micro to blocked.
+- Tight: 6-item Gelfand et al. (2011) tightness scale, Spanish ISP translation; Tight4 is the lone
+  reverse-worded item (only flip raising alpha .408→.436); order among the five positive items unestablished.
+  No rights restriction found anywhere (no register row written).
+- **Backfill lead for batch_165's LOT:** its Spanish LOT-R wording is in `Spanish ISP.pdf` pp. 30-31, and
+  `English ISP.pdf` p. 24 shows the LOT items in standard LOT-R order (bears on its unpinned within-class order).
+
+Queue after this round: **401 pending, 754 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
