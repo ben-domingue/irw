@@ -14190,3 +14190,80 @@ script rather than assumed. Both agents' verify scripts were re-executed by
 verify_batch.R and both printed PASS on their own fetched data.
 
 Cap (batch_165) not reached.
+
+## batch_133 — 2026-09-10
+
+4 tables claimed, all four from the one `peters_2025_*` deposit (Your COVID-19 Risk /
+COVID-19 Risk Assessment Tool). **Written 4 / blocked 0 / failed 0 — yield 4/4 (100%).**
+Four agents, no kills, no retries on infrastructure.
+
+- `peters_2025_att_exp_strength` — 110 rows (16 items x 7, `weird` x 5), paper_explicit, VERIFIED
+- `peters_2025_att_instr_eval` — 339 rows (55 items x 5 or 7), paper_explicit, VERIFIED
+- `peters_2025_gen_risk_strength` — 15 rows (3 x 5), paper_explicit, VERIFIED
+- `peters_2025_gnrc_beliefs` — 30 rows (6 x 5), data_labels, NOT_NEEDED (exempt)
+
+Gates: normalize_nulls 1 file fixed; audit_batch 4/4 PASS, **no WARNs** (so no Step 5c
+entries owed); verify_batch 3 PASS + 1 MISSING(exempt); lint_verification 0 ERROR 0 WARN
+1 INFO; irw-validate ok on all four. `check_provenance.R` exits 1, but on a PRE-EXISTING
+debt — `aspirations_sonmez_2022` ships IRW-generated English with no issues-page entry.
+No `peters_2025_*` table is flagged by it. That debt is not this round's and was not
+treated as a batch_133 failure; it is owed a line on itemtext_issues.qmd by whoever
+shipped it.
+
+### The round's real event: a rights split across siblings, resolved by the orchestrator
+
+One agent (`att_instr_eval`) BLOCKED on rights; the other three shipped from the same
+deposit under the same licence terms. Four tables, one source, two verdicts — so the
+round could not close without settling it. **Resolved to ship; the block was overturned
+and the agent resumed to promote its parked candidate.**
+
+What the orchestrator checked independently (Step 5b), and what it changed:
+
+1. **The shipping agent's fact check was FALSE.** `att_exp_strength` recorded that the
+   `a-bc/your-covid-19-risk` repo holds 547 blobs all under `design/` or
+   `limesurvey-3-theme/` and that "there is no operationalizations directory in it" —
+   the load-bearing premise of its own not-a-block ruling. The GitLab API tree for that
+   project on `master` shows `v1/operationalizations/` **does** exist and contains
+   `sheets/DMQs.xlsx`, `sheets/DMQ_scales.xlsx` and the LimeSurvey exports. The agent had
+   enumerated a different repository. The README's copyright default (exempting only
+   `.Rmd` and `.csv`) therefore DOES reach the `.xlsx` the wording comes from.
+   **The blocking agent was factually right and the shipping agent was wrong.** That
+   note has been corrected in `notes.csv` with an ORCHESTRATOR CORRECTION paragraph;
+   left uncorrected it would have sent the next reviewer to a repo listing that does
+   not match reality.
+
+2. **The block was nevertheless overturned, on evidence neither agent had weighed.**
+   The 2025 paper (PMC12259484, CC BY 4.0), by the same rights holders, states under
+   *Availability of data, code, and material*: "everything produced in this project is
+   licensed under Creative Commons Attribution licenses or similarly, and available from
+   the project's GitLab repositories https://gitlab.com/a-bc/your-covid-19-risk and
+   https://gitlab.com/a-bc/your-covid-19-risk-data". Verified verbatim from the Europe PMC
+   fullTextXML. That is a later, specific, unhedged grant naming the exact repository, and
+   it supersedes the 2020 README's self-described interim holding notice ("for now...
+   we still need to iron out some things (e.g. how to prevent abuse of the logo)").
+   Note also that neither the README's aspiration (CC-BY-NC-SA) nor the paper's CC BY
+   reserves a no-redistribution right.
+
+3. **A silent content divergence was caught by the reconciliation, not by any gate.**
+   The parked `att_instr_eval` candidate took `option_text` from the sheet's
+   `*_anchor_en` fields, which append the displayed scale value — "save face (-3)",
+   "... (1)". That would have padded each unipolar anchor with its own `resp` value,
+   violating SKILL's no-self-numbering rule, while its siblings had used `*_anchor_bare`.
+   No gate would have caught it: `validate_items.R` and `audit_batch.R` compare SETS.
+   The resumed agent switched to `*_anchor_bare`; all four tables are now consistent, and
+   the bipolar display/storage mismatch (shown -3..+3, stored 1..7) is in the public_note.
+
+**Owed to Ben, and NOT written by this round:** one `instrument_rights_register.csv` row
+for this instrument (family YCR, verdict=ship, rule "2026-09-10 batch_133 — the 2025
+paper's availability statement grants CC Attribution over the project repositories,
+superseding the 2020 README interim notice", README sha256 `27b2f56a...`). No round has
+written it, and three agents independently said one was owed. **The blast radius is all
+22 `peters_2025_*` tables**, including the three still at the head of the queue
+(`nrm_inj_approval`, `pbc_cond_power`, `pbc_cond_presence`) — settling it in the register
+stops the next round re-litigating this from scratch, which is exactly what happened here.
+
+**Agent count: four, unchanged.** No kills, no memory pressure, four agents on one shared
+source with sibling-exclusion instructions and zero file collisions.
+
+Queue after this round: 656 done / 545 pending / 125 blocked / 63 excluded / 12 failed.
+Cap is batch_165 — not reached, 32 rounds remain.
