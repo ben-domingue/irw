@@ -15620,3 +15620,72 @@ which contains no `wemwbs` string.
 
 Ran at four agents per round. No kills, no rate limits, no retries; all four agents returned within
 ~10.5 minutes of dispatch. Cap (`batch_165`) not reached — 460 tables still pending.
+
+## batch_152 — 2026-09-10
+
+4 tables claimed: `quinn_2023_roommate_cesd`, `rahm_2017_panas`, `rahm_2017_shs`, `rahm_2017_spane`.
+**2 written / 2 blocked / 0 failed** — yield 50%. Circuit breaker NOT tripped: 0% failed (the
+threshold counts `failed`, and both no-CSV tables are determinate rights verdicts, retry test **NO**).
+
+**Shipped.**
+- `quinn_2023_roommate_cesd` — 80 rows (20 items x 4 options), `mapping_basis=data_labels`. The PLOS
+  S1 `.sav` labels every column with its own item number and full wording, and
+  `data/quinn_2023_roommate_cesd.py` renames number-preserving, so 20/20 are tied at source with no
+  positional inference. `instructions` left blank (neither `.sav` nor paper quotes literal instruction
+  wording), matching the shipped `dwyer_2019_clinton_cesd`.
+- `rahm_2017_panas` — 100 rows (20 items x 5 levels), `mapping_basis=data_labels`, `language=German`
+  with the `_translated` set. The `.sav` labels each column with the administered German adjective
+  plus the authors' own English gloss, and the processing script melts `PANAS_1..PANAS_20` unchanged,
+  so the IRW code *is* the source column name — exempt at the derivation level, not merely by declared
+  basis. Two caveats disclosed in the `public_note`: `option_text` carries the study's **English**
+  anchors with `option_text_translated` blank (the administered German anchors are in neither the
+  deposit nor the supplements, and the agent correctly declined to supply Krohne's German from
+  off-source knowledge), and `instructions` is blank because the paper describes but never quotes it.
+
+**Blocked — both on standing register rows, applied rather than re-derived.**
+- `rahm_2017_shs` — Subjective Happiness Scale (Lyubomirsky & Lepper 1999), register `verdict=block`,
+  rule `2026-09-06 irw#1955`. Clause re-fetched live today (HTTP 200): non-commercial-only **and**
+  permission-required-for-translations, and German is explicitly one of the permission-gated
+  translations, so the administered wording is directly covered. CC BY PLOS deposit does not launder it.
+- `rahm_2017_spane` — SPANE (Diener), register `verdict=block`, family `DIENER-NC`, same rule.
+
+**Step 5b re-checks (orchestrator, independent).** Nothing was taken on report:
+- **Both block verdicts re-checked against the register itself**, not just the agents' summaries: the
+  `SHS` and `DIENER-NC` rows do carry `verdict=block`, and the live item codes genuinely match their
+  patterns (`SHS_1..SHS_4` vs `^shs|happiness`; `SPANE_1..SPANE_12` vs `^flourish|^spane`). Both are
+  settled rulings correctly applied, not fresh derivations.
+- **The PANAS `ship` verdict** was likewise confirmed present (`^pan[_ ]?[0-9]|panas`, rule
+  `2026-09-08 batch_098`) before accepting that table as shippable.
+- **`quinn`'s response-data claim, which goes into a public note, was re-run from the cached `.sav`
+  and reproduces exactly**: reverse-scoring items 4/8/12/16 gives mean 16.73 / SD 10.59 / range 0-51
+  against the paper's published 16.80 (10.64), range 0-51, while the unreversed sum gives
+  22.16 / 7.00 / 8-43. So the table stores raw values and one ascending anchor set applies to all 20
+  items. Also confirmed the `.sav` has variable labels but **no value labels at all**, which is why the
+  anchors correctly came from the paper's Measures section rather than the file.
+- Step 3b held on the easy-to-confuse pair: SPANE (12 items, 1-5, `very rarely or never`) and PANAS
+  (20 items, 1-5, `very slightly or not at all`) were separated on item count, adjective set and
+  anchor set, not on name.
+
+**Gates** — `normalize_nulls` fixed 1 of 2 (`quinn`, 81 lines); `audit_batch` **PASS 2/2 with no
+anomalies**, so Step 5c had nothing to explain; `verify_batch` `MISSING(exempt)` 2/2, correct for
+`data_labels`; `lint_verification` 3 rows, no problems; `irw-validate` ok on both, 2 checks each.
+`check_provenance.R` exits 1 on `PMT_Trzcinska_2023_PMT`, `poza2026_hlseu` and `aspirations_sonmez_2022`
+— **pre-existing debt; neither batch_152 table appears anywhere in its output** (explicitly grepped).
+
+**Tracker.** Both shipped tables are `data_labels`, so the orchestrator added their `NOT_NEEDED` rows
+to **both** `verification_merged.csv` and the permanent tracker (the two-consecutive-round lint failure
+this guards against did not recur). `shs` carried its own `NO_ROUTE` row; the `spane` agent wrote a
+header-only sidecar deliberately. All written tables have exactly one tracker row. Sidecars merged and
+deleted **by exact name**, never by glob.
+
+**Rights register.** No new row was owed — both instruments were already ruled on. The orchestrator did
+fill the SHS row's empty `source_url` / `source_sha256` / `fetched` with the values the agent verified
+live today, which that row had been missing since it was filed.
+
+**Shared-file discipline held.** Three of four tables come from one `.sav` (`rahm_2017_spane_battery.py`);
+all three agents read it, none wrote a sibling's files, and all correctly declined to touch the shared
+register and `pending_index_notes.csv` while siblings ran — the orchestrator added both blocked rows.
+Scratch was namespaced per table (`.cache/<table>/`), and the two candidate CSVs had different names.
+
+Ran at four agents per round. No kills, no rate limits, no retries; all four returned within ~5 minutes
+of dispatch. Cap (`batch_165`) not reached — 456 tables still pending.
