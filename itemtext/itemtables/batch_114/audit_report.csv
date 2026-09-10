@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"nam_2024_function","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"narcissistic_personality_inventory","WARN",40,40,TRUE,TRUE,FALSE,TRUE,100,0,"100% of rows have blank item_text"
+"nas_rogoza_2024_study1","PASS",30,30,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"nas_rogoza_2024_study2_nas","PASS",18,18,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"

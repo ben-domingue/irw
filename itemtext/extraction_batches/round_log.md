@@ -13196,3 +13196,57 @@ shipped table whose five reverse items read backwards.
   (54.99/14.09) while SUPR and SUBR do.
 
 Cap (batch_140) not reached; 625 pending remain.
+
+## batch_114 — 2026-09-09 18:52
+4 tables claimed, **4 written / 0 blocked / 0 failed** — yield 4/4 (100%). Four agents
+per round (Ben's 2026-09-09 raise from two); the round ran clean with no kill, no retry
+and no reconcile, so the walk back up survives its first firing.
+
+- `nam_2024_function` — Washington Group Short Set on Functioning, 6 items x 4 options.
+  Administered in Korean; neither the article nor S1 Data publishes Korean wording, so the
+  canonical WG-SS English ships as `translated_substitute` /
+  `translation_source=official_instrument_english`. mapping_basis `paper_order`,
+  verification **PARTIAL** — the option axis is decisive (paper Table 1's 135/79
+  functional-limitation split reproduces exactly off the live data; a reversed scale would
+  give 212), but FL1 vs FL2 is not separable and FL4 vs FL6 rests on an a-priori
+  expectation. WG's "use the questions without changes to wording" line is comparability
+  guidance reserving no right, quoted in provenance under the 2026-09-08 LOT-R ruling, not
+  treated as a block.
+- `narcissistic_personality_inventory` — **NPI-40** confirmed by Step 3b against the
+  openpsychometrics deposit's own codebook (Q1–Q40, resp {1,2}), not NPI-16/NPI-13.
+  Forced-choice: 80 rows, `item_text` blank throughout by design, both paired statements in
+  `option_text`. mapping_basis `data_labels`, verification **VERIFIED**.
+- `nas_rogoza_2024_study1` — Rogoza et al. (2024) *Psych. Assessment*, OSF u93eq (CC0).
+  **Step 3b catch worth carrying to the siblings: this is the initial 30-adjective NAS
+  POOL, not the published 18-item NAS.** mapping_basis `data_labels` (the .sav column names
+  *are* the adjectives), so NOT_NEEDED — written into both verification_merged.csv and the
+  permanent tracker, per the batch_020/021 lint lesson.
+- `nas_rogoza_2024_study2_nas` — the 18-item Study 2 pool (NAS1–NAS16 are the published
+  scale in published order; NAS17 Condescending / NAS18 Selfish cross-loaded and were cut).
+  mapping_basis `paper_order`, verification **VERIFIED**: re-ran the paper's 3-factor
+  principal-axis oblimin EFA on the live IRW responses and matched each item to additional
+  Table 2's published loading triples — 18/18 recovered by nearest neighbour, worst
+  deviation 0.021, min pairwise separation between published triples 0.030.
+
+Gates: normalize_nulls 1/4 fixed; audit_batch **3 PASS / 1 WARN**; verify_batch 3 PASS +
+1 MISSING(exempt); lint_verification 0 ERROR / 1 WARN; `irw-validate` clean on all four;
+`check_provenance.R` flags nothing from this batch.
+
+Both WARNs are explained in `notes.csv` per Step 5c and neither is a defect. The audit WARN
+(NPI 100% blank `item_text`) is what a forced-choice instrument is supposed to look like.
+The lint WARN questioned VERIFIED-with-hedging on the NPI; adjudicated at round close and
+VERIFIED stands — the hedge is scoped to the response-count route alone, while the
+character-for-character codebook match and the form's `<input value>` pairing each
+distinguish all 40 items.
+
+Step 5b orchestrator re-checks (agent findings treated as leads, not conclusions): confirmed
+independently that all 30 `nas_rogoza_2024_study1` item codes really are the lowercased
+adjectives, which is the whole basis of its data_labels exemption; and that the NPI ships 40
+items x 2 distinct options with `item_text` = the normalize_nulls `NA` sentinel throughout.
+
+Pre-existing, NOT from this batch: `check_provenance.R` still reports `aspirations_sonmez_2022`
+shipping IRW-generated English with no issues-page entry, plus three `translation_source=mixed`
+tables (hui_2024_gbfs, iandolo_2021_asq, kim_2025_isi) flagged for review. Carried here so it
+is not rediscovered next round.
+
+Queue after this round: 621 pending, 0 in_progress. Cap (batch_140) not reached.
