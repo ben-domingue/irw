@@ -944,11 +944,11 @@ rr98_accuracy,done,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_iri_pt,blocked,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_maas,blocked,batch_162,2026-09-10T13:54:39
 ruiz_parra_2023_pid5bf,blocked,batch_163,2026-09-10T14:11:37
-ruiz_parra_2023_rfq8,blocked,batch_163,2026-09-10T14:11:37
+ruiz_parra_2023_rfq8,pending,,
 ruiz_parra_2023_tas20,blocked,,
 RvKDCS_Romiacg_Miroshnik_2020_BFI,blocked,batch_163,2026-09-10T14:11:37
 RvKDCS_Romiacg_Miroshnik_2020_CBI,done,batch_163,2026-09-10T14:11:37
-RvKDCS_Romiacg_Miroshnik_2020_KDOCS,done,batch_164,2026-09-10T14:50:16
+RvKDCS_Romiacg_Miroshnik_2020_KDOCS,blocked,batch_164,2026-09-10T15:30:00
 rzeszutek_2020_ghq28,blocked,batch_164,2026-09-10T14:50:16
 rzeszutek_2020_swls,blocked,batch_164,2026-09-10T14:50:16
 rzeszutek_2020_wwii_matgrandfather,done,batch_164,2026-09-10T14:50:16
