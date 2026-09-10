@@ -14893,3 +14893,62 @@ Notable, non-blocking:
   record; the agent count remains the wrong variable to blame.
 
 Cap (batch_165) not reached; 513 pending remain.
+
+## batch_142 — 2026-09-10 04:12–04:35
+
+4 tables claimed, 4 agents (one per table). **written 4 / blocked 0 / failed 0 — yield 4/4 (100%).**
+Circuit breaker not tripped. Queue: 509 pending remain, 0 in_progress.
+
+Tables: `powell_2018_affect`, `powell_2018_qcae`, `powell_2018_trust` (three siblings off one
+source, dispatched with explicit sibling boundaries), `poza2026_hlseu`.
+
+**Gates.** normalize_nulls 4/4 fixed; audit_batch PASS 3 / WARN 1; verify_batch PASS 3 +
+1 MISSING(exempt, data_labels); lint_verification 4 rows no problems; `irw-validate` ok on all
+four; `check_provenance.R` clean for this batch — `poza2026_hlseu` declares
+`translation_source=machine_translation` but is HELD, so no issues-page entry is owed until it
+ships. (The one outstanding failure it reports, `aspirations_sonmez_2022`, is pre-existing and
+not from this round.)
+
+**Step 5c — the single WARN, explained in notes.csv.** `powell_2018_trust`, "66.7% of rows have
+blank item_text": expected, and neither an itemtext defect nor a data defect. 3 items, source
+publishes 1 of the 3 adapted stems, so 2 items x 4 levels = 8 of 12 rows blank by design.
+
+**Step 5b — orchestrator re-checks of agent claims. All three confirmed to the digit.**
+- `powell_2018_trust` (claim that canonical SOEP wording must NOT be substituted): re-ran on the
+  source S1 Dataset, n=523. Only `rTrust3` exists, no `rTrust1`/`rTrust2`;
+  `TrustScore = Trust1 + Trust2 + (5 - Trust3)` reproduces the file's own TrustScore **523/523**;
+  r(Trust1,Trust2)=**+0.677**, r(Trust1,Trust3)=**-0.399**, r(Trust2,Trust3)=**-0.445**. The parent
+  SOEP index has two negatively worded items of three, this administration has one — so at least
+  one item was reworded and canonical text would have fabricated wording *and* placement. Agent
+  was right to leave Trust2/Trust3 blank.
+- `poza2026_hlseu` **source defect confirmed**: the .sav's `PrevencionDCHL` is labelled
+  `"8,9,10,11,12"` but reproduces **63/63** complete cases as items **9–12 only** (as 8–12 it
+  matches just **31/63**). Every other composite reproduces exactly as its label states
+  (`CuidadoHCHL` 1–7, `PromocionHPHL` 13–16, `HLFuncional`, `HLCritica`, `HLinteractiva` all
+  63/63). The authors dropped item 8 from their own subscale sum. This is a defect in the
+  deposited source, not in the IRW table or the item text.
+- `poza2026_hlseu` N: .sav holds **101** respondents against the paper's 278 — confirmed; the IRW
+  table is the deposited subset, so published statistics will not reproduce.
+
+**Notable.**
+- `poza2026_hlseu` ships **two administered languages in one table** (93/101 Arabic, 8/101 French,
+  per the .sav's own `@41Idioma`), both wordings marked in `item_text`, per the batch_141
+  `PMT_Trzcinska_2023_PMT` precedent. Wording recovered from the team's *companion* validation
+  paper (Bas-Sarmiento 2020, IJERPH 17:8181) via the Europe PMC supplementaryFiles zip endpoint —
+  the deposit and the source paper themselves print none. Arabic lam-alef ligature reversal from
+  pdftotext was repaired and round-trip verified 16/16.
+- `powell_2018_qcae` stores responses **raw** (the deposit's `rQCAE*` reverse-recoded duplicates
+  are dropped by the build), the opposite of sibling `gomez_2022_qcae` whose four `r` columns are
+  stored already reversed with flipped anchors. Recorded as a public_note.
+- Verification statuses: 1 NOT_NEEDED (`powell_2018_affect`, data_labels — codes are the source
+  header names, melted with no rename), 3 PARTIAL. All three PARTIALs are honest: qcae cannot
+  separate within-subscale order (sums are permutation-invariant), trust cannot separate Trust1
+  from Trust2 (both positively keyed), hlseu pins only 3 of 16 items uniquely.
+- **Rights: three "silence is permission" ships this round** (SOEP-Trust, QCAE, HLS-EU-Q family),
+  none of which has a row in `instrument_rights_register.csv`. The hlseu agent flagged that
+  `m-pohl.net/HLS19_Instruments` now 404s and WebSearch was down on 2026-09-10, so the HLS-EU
+  clearance is unchecked rather than checked-clear — worth a later register verdict.
+- Infrastructure: WebSearch was reported down by two independent agents on 2026-09-10; both
+  routed around it via Europe PMC and neither lost a table to it.
+- Four agents, zero kills, all four shipped. Consistent with the batch_104–119 run.
+
