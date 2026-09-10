@@ -14134,3 +14134,66 @@ bucket only because the heuristics work on triage columns rather than
 subject matter. The `HIGH_YIELD_TERMS` list is pulling non-psychometric
 PMC articles into the funnel — a term-list precision question for the
 journal_scout study, not a triage bug.
+
+## 2026-09-09c — The two PLOS `human_review` rows, resolved: both are score matrices, not item responses
+
+The 2026-09-09 PLOS entry left two rows genuinely ambiguous and their triage
+rows unavailable to archive (the run's CSV lived only in that session's
+container). Both were re-triaged from the DOI through `irw_discover_plos`'s
+own `process_one`, which reproduced the original flags exactly
+(`human_assistance` for both, `cc-by`, 2012p/16i and 502p/30i), and then the
+SI files were downloaded and read. Neither needs a human decision after all
+— **both are `not_item_response`. Drop them.** Both DOIs are already in
+`plos_seen_dois.csv`, so no future run will re-surface them and nothing
+needs to go into `human_review/`.
+
+### `pone.0181074` — early language abilities and math skills, Chinese children
+
+`journal.pone.0181074_S1_Table.xlsx`, 2012 rows x 17 columns, one row per
+child. The 16 columns the triage counted as items are **subtest totals**,
+not items — each has its own ceiling and they nest into each other:
+
+| column | range | column | range |
+|---|---|---|---|
+| object counting | 0–4 | listening comprehension | 0–31 |
+| forward counting | 0–12 | dictation | 0–37 (half-credit) |
+| magnitude comparison | 0–8 | informal math | 0–37 |
+| backward counting | 0–12 | formal math | 0–10 |
+| missing number | 0–11 | language skills | 0–60.5 (half-credit) |
+| addition / subtraction | 0–5 | non-verbal IQ | 0–26 |
+
+`informal math` is the sum of the counting/comparison subtests and
+`language skills` is listening comprehension + dictation, so the file even
+carries its composites alongside their parts — which is what `resp_scale_mixed`
+was reacting to. There is no item-level data in the deposit. Incidentally
+`gender` uses a `9999` sentinel and `age` a `109`, neither documented.
+
+### `pone.0200609` — teacher vs student perspectives, cognitive and motivational
+
+`journal.pone.0200609_S1_Data.xlsx`, 503 rows (502 unique IDs — one dup) x 35
+columns, with a `variable_names` codebook sheet that settles it. The 30
+"items" are three blocks of derived variables plus section-header spacers:
+
+- `sm_*` (7) — measured composites. The codebook calls them "Score out of
+  25", "Score out of 5", "Mean score between 1 and 4". Aggregates, no items.
+- `sc_*` (7) — "recoded from measurements", 1=low/2=medium/3=high. These are
+  a **tertile cut of the `sm_*` columns**, verified: the `sm` ranges under
+  each `sc` level partition with no overlap (e.g. `sm_cog` 0–15 → 1, 16–21 →
+  2, 22–25 → 3). Zero independent information, and the reason `dup_id_item`
+  fired — after the melt each student's score appears twice, once raw and
+  once binned.
+- `tj_*` (8) — a maths teacher and a language-arts teacher each rating the
+  student low/medium/high on four constructs. Real ordinal ratings, but
+  they are two raters judging a student on constructs, not an instrument
+  administered to anyone; the study design is judgment accuracy against the
+  `sc_*` recodes.
+
+So the `worth_retrying` longitudinal read of the dup_id_item shape on this
+row was wrong in an instructive way: the 1.0x repeat is not waves, it is the
+same seven measurements stored twice at two levels of coarseness. Worth
+noting for the heuristic — a raw/binned pair of the same variable looks
+exactly like a two-wave design by the ratio alone.
+
+Both were `human_review` only because no column met the id heuristic, which
+is a symptom of a file that has no items rather than of a file that needs
+eyes on it.
