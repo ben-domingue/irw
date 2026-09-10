@@ -760,10 +760,10 @@ niazi_2020_mfq,done,batch_119,2026-09-09T20:19:41
 niazi_2020_mfq_stereotype,done,batch_119,2026-09-09T20:19:41
 nomt_hooper_2024_study1,done,batch_119,2026-09-09T20:19:41
 nordhoff_2021_safety,done,batch_119,2026-09-09T20:19:41
-nordhoff_2021_trust,pending,,
-NSR-FC_Youhasan_2021,pending,,
-nteveros_2021_psqi_disturbance,pending,,
-nteveros_2021_who5,pending,,
+nordhoff_2021_trust,done,batch_120,2026-09-09T21:35:46-07:00
+NSR-FC_Youhasan_2021,done,batch_120,2026-09-09T21:35:46-07:00
+nteveros_2021_psqi_disturbance,blocked,batch_120,2026-09-09T21:35:46-07:00
+nteveros_2021_who5,blocked,batch_120,2026-09-09T21:35:46-07:00
 number_pattern_game,pending,,
 odachi_2022_fear_covid19,pending,,
 offlinefriend_dospert,pending,,

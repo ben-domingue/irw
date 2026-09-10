@@ -13536,3 +13536,62 @@ the two agents were told about each other and neither touched the other's files.
 
 No systemic access issues, no Step 3b instrument mismatches, no dictionary/metadata
 problems. Cap is batch_140; not reached.
+
+## batch_120 — 2026-09-09 21:29–21:4x
+
+4 tables, 4 agents (one per table), all dispatched in one message. **2 written / 2 blocked / 0 failed.**
+Yield 50%. Circuit breaker NOT tripped (0 failed; both no-CSV tables are determinate rights verdicts,
+retry test NO). Available memory never a factor; no kills, no retries, no salvage.
+
+Numbered batch_120, not 203 — the `batch_2NN` series (201, 202) belongs to the separate irw#1945
+rights line and arrived here by the 2026-09-08 merge from main.
+
+**Written**
+- `nordhoff_2021_trust` — 12 items × 5 options = 60 rows. mapping_basis `data_labels`: the processing
+  script melts the PLOS S1 workbook's `^TRUST\d+_` headers with `var_name="item"`, so the IRW item code
+  IS the source column header and the header embeds the wording. Verification NOT_NEEDED (recorded in
+  both the batch file and the tracker). Wording from the same workbook's "Descriptive statistics" sheet,
+  Q31–Q42 → TRUST1–TRUST12, 12/12; only the leading `Q31. ` numbering stripped, disclosed in provenance.
+  Anchors 1–5 from Table 2 / Methods 2.2.3. The 99 sentinel is filtered upstream so no option row is owed.
+- `NSR-FC_Youhasan_2021` — 35 items × 5 levels = 175 rows. mapping_basis `paper_explicit`, status
+  **VERIFIED** via the explicit-code-labels exemption: the deposit's own Supplement 1 labels each item
+  with the same `Q` code used as the column header, 35/35 character-for-character. Corroborated by route 5
+  (31/34 items load strongest on the paper's assigned factor; the 3 cross-loaders are the ones the paper
+  itself reports weak/double-loading). `verify_NSR-FC_Youhasan_2021.R` re-runs both, VERDICT: PASS.
+  Options populated only at resp=1/resp=5 — the paper states only the endpoints, so 2–4 are left blank,
+  not padded. Source typos preserved verbatim.
+
+**Blocked (both determinate, retry test NO; neither counts toward the breaker)**
+- `nteveros_2021_psqi_disturbance` — PSQI. University of Pittsburgh reserves rights on four axes
+  (non-commercial-only free reprint, no derivatives without prior written permission, permission-required
+  request form, published fee schedule incl. $5,000 to print the full PSQI in an academic publication),
+  no fitness disclaimer → block under the irw#1945 test. The agent appended a new PSQI row to
+  `instrument_rights_register.csv`; **the orchestrator independently re-fetched sleep.pitt.edu/psqi at
+  Step 5b and the quoted clause and fee schedule are verbatim correct.** Corroborating: `hellstrom_2019_psqi`
+  (batch_044) and `kim_2025_psqi` (batch_062) were each blocked independently in earlier rounds, before the
+  register row existed. The new row leaves `match_item_text`/`match_item_code` blank — deliberately, since
+  filling match_item_text would mean transcribing the blocked wording into a committed file, and the item
+  codes (`Q5a`–`Q5j`) carry no PSQI substring. A future `*psqi*` table finds the row by instrument name.
+- `nteveros_2021_who5` — WHO-5, applying the register verdict settled 2026-09-08 (CC BY-NC-SA 3.0 IGO,
+  WHO's own NC term post-2024 assignment) rather than re-deriving it. This closes one of the two tables the
+  batch_064 `kokoszka_2022_who5` note left pending on exactly that decision.
+
+Both blocks are *effective*: `Q5a`–`Q5j` and `MH_1`–`MH_5_r` are opaque codes, so no restricted wording
+leaks through the response table (cf. irw#2101/#2123). Both tables have rows in
+`itemtables/pending_index_notes.csv` saying what would have to change.
+
+**Gates** — normalize_nulls: 2 fixed. audit_batch: 2/2 PASS, no anomalies (so no Step 5c WARNs to explain).
+verify_batch: 1 PASS, 1 MISSING(exempt). lint_verification: 0 ERROR, 0 WARN, 1 INFO (the NSR-FC evidence
+hedges on within-subscale order but asserts a full item-axis tie — VERIFIED stands per the 2026-09-08
+item-axis rule). irw-validate: `nordhoff_2021_trust` ok; `NSR-FC_Youhasan_2021` WARN `name_charset` only,
+which is a property of the live corpus table name and must be matched verbatim to join — recorded in
+notes.csv as not-an-itemtext-defect. check_provenance: no vocab errors; its one flagged table
+(`aspirations_sonmez_2022`) is pre-existing and not from this round.
+
+**Caveat worth a human eye, logged in notes.csv, about the response data not the item text:**
+`nordhoff_2021_trust`'s shared workbook holds 198 rows with 113–116 non-missing per TRUST item, while the
+paper analyses 1,137 respondents and its own descriptive sheet reports n=622–647 per item with different
+means (Q31 M=4.41/SD=0.85 published vs 4.65/0.80 in the shared sheet). The deposit is a subset of the
+analysed sample — recorded so nobody re-diagnoses it as an extraction error.
+
+Cap is batch_165; not reached. Next firing picks up batch_121.
