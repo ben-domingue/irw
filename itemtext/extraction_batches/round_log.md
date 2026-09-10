@@ -13656,3 +13656,57 @@ declined to touch the shared register mid-round):
   site's sub-pages 404. If Ben rules the other way, the table extracts immediately.
 
 Cap is `batch_165`; 121 completed, not reached. Queue: 593 pending.
+
+## batch_122 — 2026-09-09 ~21:30–22:15
+
+4 tables, 4 agents (one per table), all dispatched in one message. **written 2 / blocked 2 / failed 0.**
+Yield 50%. Circuit breaker NOT tripped (0 failed; both no-CSV tables are determinate rights
+verdicts, retry test NO on each).
+
+Claimed: `okamura_2018_eol_attitude`, `opladen2025_edeq`, `opladen2025_wi`,
+`ordak_2026_vaccine_misreasoning`. The two `opladen2025_*` share one OSF deposit (osf.io/58xb9);
+each agent was told the sibling's files were off-limits, and neither wrote outside its own table.
+
+**Shipped**
+- `ordak_2026_vaccine_misreasoning` — 10 items x 2 levels = 20 rows. Not a questionnaire: ids are
+  597 Polish anti-vaccination Facebook posts, items are ten coder-applied misreasoning categories,
+  `item_text` is the coding definition from PLOS Table 1 (CC BY 4.0), disclosed via `public_note`.
+  Route 1 VERIFIED — all ten published Table 2 counts reproduce exactly and all ten are distinct,
+  so every item is separated. `option_text` composed from the paper's own verb (source publishes
+  no option labels); direction verified numerically, not assumed.
+- `opladen2025_wi` — 14 items x 2 options = 28 rows, German, `mapping_basis=data_labels` (the
+  deposit's own Readme sheet ties WI_1..WI_14 to full wording and value labels, 14/14), so
+  NOT_NEEDED rather than a route.
+
+**Blocked — both instrument rights, both determinate**
+- `okamura_2018_eol_attitude` — FATCOD-Form B-J short form. Holder's own manual: "alteration of
+  the wording is not permitted". **Escalation for Ben, blocked conservatively:** apart from that
+  clause the terms are unusually permissive, and an integrity instruction to administrators may
+  not be a right reserved against redistribution. The extraction is already solved (.sav labels
+  map 1:1 and in order onto the official short form) — a ruling reopens it immediately.
+- `opladen2025_edeq` — EDE-Q 6.0. CREDO (Fairburn's own group, the originator) reserves
+  non-commercial-only use naming the items explicitly. No laundering route; the German
+  administration is a derivative. **Blast radius: `oxfordcovid_xue_2024_edeq` is LIVE in irw_text
+  and is a withdrawal candidate**, and 7 further `*_edeq` tables in the queue are blocked by the
+  same verdict.
+
+Register rows added to `instrument_rights_register.csv` for both (EDE-Q, FATCOD). Note the
+register has no `escalate` verdict — FATCOD is recorded as `block` with the escalation in `notes`.
+
+**Gates** — normalize_nulls 0 of 2 changed; audit_batch 2/2 PASS, no WARNs to explain (Step 5c
+vacuous this round); verify_batch PASS 1 + MISSING(exempt) 1 (the data_labels table); lint 4 rows
+no problems; `irw-validate` ok on both. `check_provenance.R` exits 1 on **pre-existing** debt only
+(`aspirations_sonmez_2022` ships IRW-generated English with no issues-page line) — neither
+batch_122 table declares IRW-generated content, so nothing here is owed.
+
+**Step 5b, orchestrator re-checks — all three agent claims held.**
+1. Both rights clauses reproduce verbatim from the cached sources and both sha256 digests match
+   what the agents reported.
+2. `opladen2025_wi` dictionary mismatch is REAL: metadata.csv Description says "Body image scale
+   WI" but the items are the Whiteley Index health-anxiety screener. **Needs a metadata fix; the
+   pending_index_notes row is not the fix.**
+3. `opladen2025_wi` ZIS rights lead is genuinely unresolved, not agent sloppiness — re-fetched
+   zis.gesis.org and got HTTP 200 serving a 17KB JS loader shell with no terms in the HTML.
+   **The table is HELD: read that page with a JS-capable client before uploading it.**
+
+Cap is `batch_165`; not reached. Ending normally.
