@@ -15175,3 +15175,90 @@ table and those 20 fall together. There is no openpsychometrics/PWE/TIPI row in
 `instrument_rights_register.csv`; a ruling would settle 21 tables at once.
 
 Cap (batch_165) not reached; 486 pending remain.
+
+## batch_146 — 2026-09-10 06:26–06:40
+
+4 tables claimed, 4 agents (one per table). **Written 3 / blocked 1 / failed 0 — yield 75%.**
+Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `ptcichina_zhan_2024` | done (pass with caveats) | `paper_explicit` | PARTIAL, VERDICT: PASS |
+| `QCDQES_Oliveira_2022` | done (pass with caveats) | `data_labels` | NOT_NEEDED (exempt) |
+| `qi_2025_dark_triad` | done (pass with caveats) | `paper_order` | PARTIAL, VERDICT: PASS |
+| `ptacek2023_swls` | **blocked** (rights) | — | NO_ROUTE (nothing shipped) |
+
+**Gates all clean.** `normalize_nulls` fixed 2 of 3; `audit_batch` 3/3 PASS with **no anomalies**
+(so nothing owed under Step 5c); `verify_batch` PASS/PASS + 1 MISSING(exempt); `lint_verification`
+4 rows, no problems (the `data_labels` NOT_NEEDED row was written into *both* the batch file and the
+permanent tracker, so the two-round-old spurious-ERROR pattern did not recur); `irw-validate` clean
+apart from a `name_charset` WARN on `QCDQES_Oliveira_2022`'s own capitalisation, which is a property
+of the response table's name and not this batch's to fix. `check_provenance.R` exits 1 on
+**pre-existing** debt only — the three tables owing an issues-page line are
+`PMT_Trzcinska_2023_PMT` (batch_141), `poza2026_hlseu` (batch_142) and `aspirations_sonmez_2022`.
+`QCDQES_Oliveira_2022` appears in the check's HELD group (extracted and gated, never uploaded), so
+it owes nothing until it ships — at which point its `machine_translation` English does owe a line.
+
+**The block is determinate, not an access failure.** `ptacek2023_swls` is the Czech SWLS
+(`SWL1..SWL5`, resp 0–6). `instrument_rights_register.csv`'s SWLS row (verdict `block`, "2026-09-09
+— Ben ruled: be conservative where the holder's own terms are unclear") **names this table
+explicitly** as one of six queued tables it blocks. Retry test: **NO**. The block is *effective*
+rather than cosmetic — the item codes carry no wording, so nothing leaks via the response table.
+Carried forward from batch_145's own note: this table still has a live twin,
+`APFCompact_Ptacek_2024_SWLS` (1495 rows, 5 items `swl1..swl5`), differing only in item-code case —
+part of the partially-completed dedup flagged last round, for the corpus-trust pass.
+
+**Step 5b — all four re-checked claims CONFIRMED; none needed correction.**
+- `ptacek2023_swls`: read the register row in full. Its `notes` field does list this table by name
+  ("Six queued tables are blocked by this row: park_2021_swls, **ptacek2023_swls**, rahm_2017_swls,
+  rzeszutek_2020_swls, wu2021_swls, qi_2025_swls"). Note the row's `match_item_code` is `^swls`,
+  which does *not* match this table's `SWL1..SWL5` — the block reaches it by the explicit naming and
+  by `match_item_text`, not by the code pattern.
+- `ptcichina_zhan_2024`: the README typo is real and its repair is *forced*, not guessed. Line 36
+  reads `32. ptci35 -> ptci21`, but `ptci21` is already the target of line 25 (`21. ptci22 ->
+  ptci21`), and across all 33 lines `ptci32` is the single unclaimed target; the line's own ordinal
+  is 32. Only `ptci32` closes the map.
+- `QCDQES_Oliveira_2022`: the corroboration is exact. `irw_table_sets()` gives `n_rows = 28854`,
+  and 687 respondents × 42 items = 28854. **Worth recording so a later reader does not re-derive
+  it:** the per-item `n` column runs 682–687, not a flat 687, but that column counts *non-missing
+  resp only* — total rows are a full 687 per item, with a handful of NA responses. A property of
+  the response data, not an itemtext defect, and `audit_batch` correctly did not WARN on it.
+- `qi_2025_dark_triad`: independently re-run by `verify_batch`. Observed subscale alphas
+  .712/.748/.637 against the paper's published .71/.75/.64 (max deviation .0029, tolerance .005),
+  while the rival keyings miss badly (narcissism unreversed .135; psychopathy unreversed .750,
+  DT_25-only .771, DT_20-only .604). This pins subscale membership and the five reverse-keyed
+  positions exactly; it does not order the non-reversed items within a block, hence PARTIAL.
+
+**Two rights-register rows are owed and were deliberately NOT written.** Both agents located a
+`ship`-shaped rights picture and correctly declined to edit the shared register:
+- **PTCI (Foa et al. 1999)** — no locatable clause reserving a right on the item wording; the only
+  non-APA copyright notice in the paper covers *Figure 1* (a schematic, "Copyright 1998 by Guilford
+  Press"), not Appendix A, and two co-authors' own centre (OxCADAT) posts the full PDF openly.
+- **Short Dark Triad (SD3, Paulhus)** — the author's measures page splits instruments into
+  "available without permission" and "permission required"; the SD3 is on **neither** list (its
+  successor SD4 is public-domain), and the author-served `SD3.1.1.doc` carries no fee, permission,
+  NC, ND or no-redistribution clause.
+Both rest on silence-is-permission per irw#1945. Adding a `ship` verdict is a rights decision, and
+every existing register row carries a Ben ruling or an orchestrator re-verification — so these are
+**flagged for human triage rather than written**. Quotes and page sha256s are in the provenance
+notes.
+
+**Language substitutes — two of the three shipped tables ship English for a non-English
+administration**, both disclosed:
+- `ptcichina_zhan_2024`: administered in Chinese; no Chinese wording exists anywhere in scope
+  (`PTCI_data.sav` has no CJK and no value labels on any `ptci*` column, `PTCI_retest.sav` is
+  ASCII-only, the Mendeley companion holds the same files, the APA article is paywalled with no open
+  supplement). Ships the official instrument English → `translation_source=official_instrument_english`,
+  **not** `machine_translation`, so no issues-page line is owed.
+- `qi_2025_dark_triad`: same shape — SD3-C administration, Chinese wording in neither deposit nor
+  supplement, ships Paulhus's own English original. Also `official_instrument_english`.
+- `QCDQES_Oliveira_2022` is the opposite case and the only one owing disclosure: it ships the
+  *administered* Portuguese as base text and IRW-written English in the `_translated` columns →
+  `machine_translation`, `public_note` written, issues-page line due on upload.
+
+**One source-vs-administration caveat worth a reviewer's eye.** `QCDQES_Oliveira_2022`'s OSF
+Materials PDF is the *final 40-item recommended* OCDQ-RE — it omits items 6 and 37 and rewords
+several stems. The administered `.sav` wording is what ships; the PDF was used only for the
+instructions.
+
+Cap (batch_165) not reached; 480 pending remain.
