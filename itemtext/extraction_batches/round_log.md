@@ -16274,3 +16274,45 @@ was NOT touched for either; quotes are banked in `notes.csv`.
 No table was left `in_progress`; no `pending_index_notes.csv` rows were owed (nothing blocked).
 No full-table exports were made — `table_sets.R` / server-side aggregates throughout.
 Cap is `batch_165`; 159 is not the cap, so the queue continues. 428 pending remain.
+
+## batch_160 — 2026-09-10 13:13–13:30
+
+4 tables claimed, 4 agents (one per table), all four from a single source: Roettl & Terlutter
+(2018), PLOS ONE 10.1371/journal.pone.0200724 (S2 Appendix + S1 Data .sav).
+
+**written 4 / blocked 0 / failed 0 — yield 4/4 (100%).**
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| roettl_2018_brand_attitude | 168 (24 items × 7) | data_labels | NOT_NEEDED |
+| roettl_2018_brand_recognition | 16 (8 items × 2) | data_labels | NOT_NEEDED |
+| roettl_2018_game_attitude | 42 (6 items × 7) | data_labels | NOT_NEEDED |
+| roettl_2018_scepticism | 63 (9 items × 7) | data_labels | NOT_NEEDED |
+
+All four are `data_labels`: `data/roettl_2018_game.py` melts the `.sav` columns BY NAME, so the IRW
+item code IS the source column name and no positional step exists to verify. Hence four NOT_NEEDED
+rows and no `verify_*.R` (verify_batch reports MISSING(exempt)×4, which is correct here).
+
+Gates: normalize_nulls fixed 1 file (brand_recognition, 17 lines); audit_batch 4/4 PASS with no
+anomalies (so nothing for Step 5c to explain); verify_batch MISSING(exempt)=4; lint_verification
+4 rows, no problems; `irw-validate` ok on all four; check_provenance clean for this batch (the 5
+IRW-generated tables and 21 `mixed` rows it lists are pre-existing backlog, none from batch_160 —
+all four here ship the authors' OWN English via `translation_source=study_supplied`).
+
+Administered language is **German** throughout, with the study's own English in the `_translated`
+columns. Two agents independently noted the S2 Appendix numbers the scepticism block **F29_1..F29_9**
+while the `.sav` is **F31_1..F31_9**; the scepticism agent tied them by exact string identity 9/9
+against the `.sav` variable labels rather than by position, which is the right call.
+
+**Step 5b orchestrator re-checks — both agent claims about the response data CONFIRMED:**
+- `roettl_2018_scepticism`: per-item means run 2.15–3.50, n=234 on all 9, and all nine stems are
+  SKEP's *pro-advertising* trust statements keyed 1–7. So a high `resp` means LOW scepticism — the
+  table ships raw and unreversed. This is a property of the response data, not an itemtext defect,
+  and is now recorded in notes.csv.
+- `roettl_2018_brand_recognition`: `resp` is coded correctness (binary 0/1, n=234, means 0.30–0.70
+  against a 0.25 chance rate for four alternatives), not the alternative chosen. The agent's
+  per-category correct counts reproduce as ceiling percentages (71→30.3, 72→30.8, 110→47.0,
+  115→49.1, 118→50.4, 129→55.1, 147→62.8, 165→70.5), so the public_note is accurate.
+
+Four agents again ran with zero kills — 17 consecutive clean rounds at this setting.
+Circuit breaker not tripped (0 failed). Cap is batch_165; not reached, 424 pending.
