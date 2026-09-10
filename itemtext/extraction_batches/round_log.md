@@ -16640,3 +16640,47 @@ Both concern this deposit, and both were found independently by two agents that 
 
 Queue after this round: **408 pending, 747 done, 171 blocked, 12 failed, 63 excluded.** Cap is
 `batch_165` — **not reached**, next firing proceeds.
+
+## batch_165 — 2026-09-10 14:51–15:10 PDT — 4 tables, 4 written / 0 blocked / 0 failed — CAP REACHED
+
+Round yield 4/4 (100%). Four agents, one per table, no kills, no retries, no rate limits.
+Stop conditions clear at start (no in_progress rows, no breaker flag, 408 pending).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `rzeszutek_2020_wwii_matgrandmother` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_wwii_patgrandfather` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_wwii_patgrandmother` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `SABFI2_Gallardo_Pujol_2018_LOT` | **written** | 30 (6×5) | `reconstructed` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls fixed 2 files; audit_batch 1 PASS / 3 WARN; verify_batch PASS=1, MISSING(exempt)=3;
+lint_verification clean (4 rows); irw-validate no ERRORs (one `name_charset` WARN on SABFI2 -- the live
+table name is mixed-case, not fixable in the itemtext file); check_provenance flags nothing from this batch.
+
+### Notable
+
+- **The rzeszutek grandparent family is now complete** (matgrandfather in batch_164 + these three). All
+  three used the mother's-side/English placement of **item 23 in section 2**; the two `patgrand*` agents
+  met the Polish father's-side copy's contrary layout head-on and independently rejected it on three
+  grounds (item 23 is a verb clause that cannot follow "was a witness to:", the father's-side DOCX tables
+  break at different items with a truncated "wiem" header and a missing block-2 prompt, and the .sav label
+  for item 23 lacks the "Witnessed" prefix all of 24–29 carry). Disclosed in notes + a public note. The
+  data cannot distinguish the readings; it affects only item 23's section/prompt.
+- Father's-side Polish block-2 prompt reads `(pra)babcia` (no space) vs the mother's side `(pra) babcia`;
+  the English S2 father's-side fill-in line wrongly says "mother's side" (not shipped).
+- Audit WARNs on all three are the "NIE WIEM"-dropped-to-missing gradient (witnessed events lowest n),
+  explained in notes.csv. patgrandfather/patgrandmother agents matched live per-item n to the .sav
+  yes+no counts on all 29 items, ruling out code conflation. Raw-data quirk, live table unaffected:
+  mwojb20/22/23 each carry one unlabelled code 4 in the .sav, which the script drops.
+- **SABFI2 LOT** = the six scored LOT-R items (fillers not in deposit), LOT1..6 = LOT-R 1,3,4,7,9,10.
+  Ships Carver's English as `translated_substitute` (administered: Ferrando, Chico & Tous 2002 Spanish,
+  wording not in the deposit or paper) under the register's existing LOT-R `ship_with_note` verdict.
+  Response labels: paper describes 0–4, data store 1–5; shipped 1=strongly disagree..5=strongly agree.
+  **Step 5b orchestrator re-check CONFIRMED**: recomputed from irw_fetch, reversed-keyed mean M 3.3 /
+  SD 0.83 / alpha 0.88 vs published 3.33/0.83/.88; optimism item means 3.0/3.2/3.6 above pessimism
+  2.8/2.4/2.6; 15/15 correlation signs as predicted. Within-class order unestablished (PARTIAL).
+  Backfill lead: Carver's page links a Spanish LOT-R, not tied to this study's cited version.
+  Dictionary Description ("Life orientation scale") could name the LOT-R.
+
+Queue after this round: **404 pending, 751 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+**Cap reached** -- batch_165 is the Step 0 cap batch; no further rounds until a human raises it.
