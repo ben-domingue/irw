@@ -16458,3 +16458,71 @@ table already leaks the items.
    checked against the register on their own instrument, not by family.
 
 Queue after this round: 416 pending. Cap is `batch_165` — not reached, next firing proceeds.
+
+## batch_163 — 2026-09-10
+
+4 tables claimed, 4 agents (one per table), all four returned. **Written 1 / blocked 3 / failed 0.**
+Yield 25%. Circuit breaker NOT tripped: it counts `failed`, and this round failed nothing — all
+three no-CSV tables are determinate rights verdicts with retry test NO.
+
+| table | outcome | note |
+|---|---|---|
+| `RvKDCS_Romiacg_Miroshnik_2020_CBI` | **done**, 44 rows (11 items × 4 options) | `paper_explicit` / `study_materials`, Russian + IRW English `_translated`; Step 5b **VERIFIED** |
+| `RvKDCS_Romiacg_Miroshnik_2020_BFI` | blocked | BFI-2, Berkeley Personality Lab non-commercial clause |
+| `ruiz_parra_2023_pid5bf` | blocked | PID-5-BF, APA permission-required clause |
+| `ruiz_parra_2023_rfq8` | blocked | RFQ-8, UCL "research purposes" clause — **escalated, Ben's call** |
+
+Gates all clean: `normalize_nulls` 0 of 1 changed; `audit_batch` PASS 1/1 with no anomalies;
+`verify_batch` PASS=1; `lint_verification` 1 row, no problems; `check_provenance` no failure.
+`irw-validate` returned one WARN, no ERROR — `name_charset` on the live table name, explained in
+`notes.csv` (property of the published name, not of this item text; not fixable from the itemtext
+side).
+
+**Step 5b — orchestrator re-verified all three rights quotes independently.** All three were the
+kind of claim this step exists for: each is about to be written into a public note, and one
+contradicts a prior shipping decision. All three reproduced verbatim.
+- APA PID-5-BF: a bare `curl` returns an HTML bot-wall (sha256 `898cbf48…`, `file` reports HTML);
+  with a browser UA the real PDF downloads and its sha256 is `aabfb854…`, matching the agent's byte
+  for byte. Worth remembering — a bare status code would have read as a dead link.
+- Berkeley BFI-2: both sentences confirmed on `ocf.berkeley.edu/~johnlab/bfi.html`, plus the
+  commercial-request address and the registration gate.
+- UCL RFQ: confirmed from Wayback snapshot `20260308175751` (direct fetch is Cloudflare-403).
+
+**Two things owed to a human, deliberately not acted on by this round.**
+
+1. **`instrument_rights_register.csv` gets no rows from this round.** A round may write a `block`
+   but never a `ship`, and all three warranted entries have scope questions a round should not
+   settle alone:
+   - **BFI-2 (Berkeley)** — a block row is warranted, but see item 2.
+   - **PID-5-BF (APA)** — the register has *no* PID-5/APA row at all (its two DSM-5-named rows are
+     the VA's LEC-5 and PCL-5, different holders). Scope caution: the same cover-page clause covers
+     the entire DSM-5 "emerging measures" family, so a family-wide row would reach many tables. A
+     name match is a lead, not a verdict.
+   - **RFQ (UCL)** — honest verdict is `escalate`, not `block`. The clause has no "only", no fee,
+     no permission requirement, no NC/ND term and no redistribution bar, so it is materially weaker
+     than the hexaco.org clause it is being read against. A reasonable reader could call it
+     silence-is-permission. This is the one genuinely open question in the round.
+
+2. **The BFI-2 block reaches four LIVE tables — an irw#1954 re-audit lead.**
+   `sun_2025_morality_study3_{extraversion,openness,neuroticism}` and `cormier_2024_personality`
+   (BFI-2-XS). `cormier_2024_personality` shipped 2026-09-04 explicitly on the grounds that the
+   Colby page was Cloudflare-blocked and *"no clause could be quoted"*. The clause **is** quotable,
+   from `ocf.berkeley.edu`, and the orchestrator confirmed it directly rather than taking the
+   agent's word. Withdrawing live tables is a human decision and nothing was touched.
+
+Also of note: SKILL.md already records the BFI-2 as escalated (the `sun_2025_morality` Study 3
+`itbfi2*` tables); a grep of this log, the register and every batch notes/provenance file finds no
+ruling since. The three blocks in this round are all the same *shape* — free-to-use-for-research
+instruments whose rights holders reserve something — which is the irw#1945 class, not a pipeline
+problem. The head of the queue is serving up a battery of published clinical instruments, so a high
+block rate here is a fact about the queue, not about pipeline health.
+
+The unclaimed sibling `RvKDCS_Romiacg_Miroshnik_2020_KDOCS` was left untouched and is still
+`pending`. The CBI ships under silence-is-permission — Hocevar's (1979) Creative Behavior Inventory
+has no rights-holder statement anywhere to quote, and no distribution page at all. Its English
+`_translated` columns are IRW-generated (the deposit publishes Russian items only; the
+"English" workbook has English *headers*), so an issues-page entry is owed at upload;
+`check_provenance` currently lists it under HELD, which is correct until it ships.
+
+Queue after this round: 412 pending, 745 done, 169 blocked, 12 failed, 63 excluded. Cap is
+`batch_165` — not reached, next firing proceeds.
