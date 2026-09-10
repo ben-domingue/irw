@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_110 already exists (round cap reached)
+- itemtables/batch_140 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -57,12 +57,12 @@ the next round, and the wrapper will decline to start one for the same reason.
   `main` on 2026-09-08.
 
   **This is a correctness rule, not tidiness.** A naive "highest + 1" reads 202 and returns 203, and
-  the cap in Step 0 is expressed as "`batch_110` already exists" — so a run numbering itself 203, 204,
+  the cap in Step 0 is expressed as "`batch_140` already exists" — so a run numbering itself 203, 204,
   205 would create a directory the cap never checks for, and **the cap would silently never fire**.
   The round would keep going unattended past the point a human meant it to stop. batch_100 caught this
   and took 100 by hand; the rule is written down so the next round does not have to.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 2 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 4 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -78,9 +78,17 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**TWO agents per round — 2026-09-08, after THREE was killed too.** Ben's call
-("wait a few minutes and then perhaps try again with fewer agents"), taken after the drop from six
-failed to fix anything.
+**FOUR agents per round — 2026-09-09, Ben's call ("let's go up to more agents"), taken while
+firing rounds back to back deliberately until something breaks. IT DID NOT BREAK: 16 consecutive
+rounds (batch_104–119, 15:23–21:0x, ~2 min between rounds) ran with zero kills, zero failed
+extractions and 58 of 62 tables shipped, available memory never below 17G. So do NOT walk this
+back down to two or three on the strength of the 2026-09-08 record below — that night's cluster
+is not reproducible at double the agent count, which is the strongest evidence yet that the agent
+count was never the variable.** This walks the probe back UP from
+two, and it is consistent with what the failure record below actually says: the count was never shown
+to be the variable, so raising it is as informative as lowering it was. Previously TWO (2026-09-08,
+after THREE was killed too — Ben's call, "wait a few minutes and then perhaps try again with fewer
+agents", taken after the drop from six failed to fix anything).
 
 **Read this before reasoning about the round size, because the obvious model of the constraint is
 wrong.** The evening went six agents (3 clean rounds, then 2 kills) -> three agents (killed
