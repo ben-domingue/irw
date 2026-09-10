@@ -15407,3 +15407,85 @@ round summary, row unwritten.
 
 **Not retroactive — the four batch_147 rows stand** (Ben, 2026-09-10), including the two
 silence-based ones. Recorded in SKILL.md above the `match_*` guidance.
+
+## batch_149 — 2026-09-10 07:23–07:39
+
+4 tables, 4 agents (one per table, all dispatched in one message).
+**written 3 / blocked 1 / failed 0 — yield 75%.** Circuit breaker: 0% failed, no trip.
+No kills, no retries, no rate limits. Four agents remains the setting; this is the
+16th+ consecutive clean round at that count.
+
+| table | outcome | rows | mapping_basis |
+|---|---|---|---|
+| `qiang_2025_surface_acting` | shipped | 15 (3×5) | data_labels |
+| `qiang_2025_workplace_friendship` | shipped | 20 (4×5) | data_labels |
+| `qin_2025_behavioral_intention` | shipped | 18 (3×6) | paper_explicit, VERIFIED |
+| `qiang_2025_red_tape` | **blocked** | 0 | unknown |
+
+Gates all green: `normalize_nulls` 0 of 3 normalized; `audit_batch` **3 PASS, no
+anomalies** (so Step 5c had nothing to explain — no WARNs this round);
+`verify_batch` 1 PASS + 2 MISSING(exempt); `lint_verification` 3 rows, no problems;
+`irw-validate` ok on all three. `check_provenance.R` exits 1, but on the **standing**
+condition carried since batch_141/142 — `PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`,
+`aspirations_sonmez_2022` owe issues-page lines. **No batch_149 table is implicated**;
+all three shipped tables are `translated_substitute`/`study_supplied`, i.e. the study's
+own English, which owes nothing under the 2026-09-02 ruling.
+
+### The block: `qiang_2025_red_tape` — retry test **NO** (determinate)
+
+The one Qiang-2025 block whose wording the source never published. Unlike the sibling
+blocks (questionnaire items 17–42, whose S1 column *headers* ARE the item text and are
+what earned `data_labels` in batches 147–149), S1 columns 4–13 are bare codes
+`RE-1`…`RE-10`, and the processing script ships them unrenamed (`item_map=None`). The
+article prints no item list and quotes a single sample item for the Borst (2019) scale,
+attached to no particular `RE-n`. Rights were **not** the reason and no rights verdict
+was reached — no register row written in either direction. Row added to
+`pending_index_notes.csv`.
+
+### Orchestrator Step 5b re-check — four agent claims, all four confirmed to the decimal
+
+Every claim this round that overrides a source or reports a response-data defect was
+independently recomputed from the cached S1 File. Recording the numbers:
+
+1. **red_tape α**: all-10 = **0.7612** vs published 0.883; 252 five-item subsets,
+   max **0.7664**, min **0.4193** — so no subset reproduces the published α, and the
+   five-factor CFA's df=160 implies 20 indicators (~5 red-tape items, not 10). Even a
+   definitive identification of Borst's items would not yield a mapping.
+2. **surface_acting instrument mismatch (Step 3b) — the table name is wrong.** S1 headers
+   22–24 are a *value-suppression* block ("I suppress my own values when they differ from
+   those of the organization", "I say things at work that I do not actually believe"),
+   **not** the Brotheridge & Lee (2002) emotional-display items the Measures section claims
+   ("Pretend to have emotions that I don't really have"). α(22–24) = **0.6902** vs the
+   paper's reported 0.882 for surface acting. Near-verbatim parallel of Hewlin's Facades
+   of Conformity scale, which the paper never cites. Extracted against what the data
+   actually is, with `instrument` set descriptively. **The table name and dictionary
+   Description should be corrected — a human call, not made here.**
+3. **friendship / the Chinese header-35 question, resolved against the script's own comment.**
+   Dropped S1 column 39 (`35、我可以向同事倾诉心声`) is **not** a Chinese duplicate of item 36:
+   they agree on only **81/396** rows, r=**0.208**, means 3.5909 vs 3.8409, distributions
+   8/66/84/160/78 vs 7/28/74/199/88. Two distinct administered items, one never translated
+   in the deposit header. So no *shipped* item has recoverable administered Chinese — the
+   English fallback applies on the ground that the Chinese item **isn't in this table**,
+   not the batch_148 siblings' ground that no Chinese exists anywhere in the deposit.
+4. **Duplicate CO block**: S1 columns 47–50 (`CO-1.1`, `C0-2.1`, `C0-3.1`, `CO`) are an
+   exact row-for-row duplicate of columns 17–20 (`CO-1`, `C0-2`, `C0-3`, `CO-4`) —
+   **396/396 identical on all four pairs**.
+
+### Deposit-quality cluster, flagged for a human (response data, not item text)
+
+None of this touches the mapping of the three shipped tables, all of which are gated and
+either `data_labels` or independently VERIFIED. But the Qiang 2025 deposit does not
+reconcile with its own paper: **none** of its block alphas reproduce the published values
+— red tape 0.7612 vs 0.883, negative emotions **0.3942** vs 0.880, surface acting 0.6902
+vs 0.882 (CO block 0.5489) — one block is duplicated verbatim, one administered item is
+silently dropped, and the shipped friendship items barely cohere (fr1↔fr2 r=0.045,
+fr3↔fr4 r=−0.019) while the *dropped* item correlates 0.663 with fr1 and 0.612 with fr4.
+Worth its own GitHub issue covering all seven `qiang_2025_*` tables.
+
+`qin_2025_behavioral_intention` is unrelated and clean (PLOS ONE 10.1371/journal.pone.0336220):
+S1 Table prints `BI1`–`BI3` beside the wording, verified by a 547/547 per-respondent identity
+join (100% same-code agreement vs ≤64.7% cross-code) plus 12/12 published cross-loadings
+reproduced to ≤0.0041. Its S1 Table also publishes coded wording for **all 17 items**, i.e.
+for the four still-queued sibling `qin_2025_*` tables — the next round should land easily.
+
+Cap (`batch_165`) not reached. 468 pending remain.

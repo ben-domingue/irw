@@ -887,10 +887,10 @@ qiang_2025_abusive_supervision,done,batch_148,2026-09-10T07:11:06
 qiang_2025_coping,done,batch_148,2026-09-10T07:11:06
 qiang_2025_job_dissatisfaction,done,batch_148,2026-09-10T07:11:06
 qiang_2025_job_performance,done,batch_148,2026-09-10T07:11:06
-qiang_2025_red_tape,pending,,
-qiang_2025_surface_acting,pending,,
-qiang_2025_workplace_friendship,pending,,
-qin_2025_behavioral_intention,pending,,
+qiang_2025_red_tape,blocked,batch_149,2026-09-10T07:38:41
+qiang_2025_surface_acting,done,batch_149,2026-09-10T07:38:41
+qiang_2025_workplace_friendship,done,batch_149,2026-09-10T07:38:41
+qin_2025_behavioral_intention,done,batch_149,2026-09-10T07:38:41
 qin_2025_perceived_cultural_distance,pending,,
 qin_2025_tourism_experience,pending,,
 qin_2025_tourist_satisfaction,pending,,
