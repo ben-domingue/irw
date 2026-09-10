@@ -15015,3 +15015,67 @@ workbook's `xz_todo` tab. Sheet1 links were empty and no local `__items.csv` exi
 read it as flagged-for-later and proceeded — worth confirming with XZ that it was not in flight.
 
 Queue after this round: 505 pending, 0 in_progress. Cap is `batch_165`; not reached.
+
+## batch_144 — 2026-09-10
+
+4 tables claimed: `promis_BrummerHoffman_2021`, `PROMISPME_Forrest_2021_GHGlobal_Proxy`,
+`PROMISPME_Forrest_2021_LS_Proxy`, `PROMISPME_Forrest_2021_MP_Proxy`.
+
+**written 0 / blocked 4 / failed 0 — yield 0%.** Circuit breaker NOT tripped: it counts
+`failed`, and there were none. All four are determinate rights verdicts (retry test NO on every
+one), which is the case the 2026-09-03 split exists to keep off the counting side. This is a fact
+about what the queue served up, not about pipeline health — the head of the queue is currently a
+solid PROMIS block.
+
+All four match the settled `instrument_rights_register.csv` row "PROMIS / HealthMeasures family"
+(`verdict=block`, rule 2026-09-05, irw#1945, `match_item_code ^promis|^evpromis`). Verdict was
+APPLIED, not re-derived. Three agents independently re-fetched the HealthMeasures Terms of Use
+today and two reported the same md5 `fe672ca0c092d6b324a8098ac049c7e3`, byte-identical to the copy
+the ruling was made on; both bars are still present. Precedent is consistent: the seven
+`promis1wave1_*` tables were withdrawn 2026-09-05 and the `evpromisi_stone_2021_*` tables blocked
+in batch_031.
+
+Block effectiveness differs across the four and was recorded per table:
+- Fully effective on the three `PROMISPME_*` tables — item codes are opaque bank IDs
+  (`SWB_LS_001_PX`, `PedGlobal9_Proxy`), so no wording leaks through the response table.
+- Only PARTLY effective on `promis_BrummerHoffman_2021` (cf. irw#2101/#2123): its item codes
+  already carry the symptom keyword (`promis_dep_hopeless_frequency`). Blocked anyway — a code
+  names a construct, not the administered sentence.
+
+**Gates.** `normalize_nulls.R` and `audit_batch.R` both exited "No *__items.csv files found",
+which is the correct and expected result for an all-blocked round, not a fault. `verify_batch.R`:
+2 PASS, 2 MISSING. `lint_verification.R`: 2 rows, no problems. `irw-validate` not applicable (no
+CSVs). `check_provenance.R` clean for this round — its 3 outstanding issues-page tables and 19
+`translation_source=mixed` reviews are all pre-existing and unrelated to batch_144.
+
+**Agent inconsistency worth settling (no harm done this round).** Given identical circumstances the
+four agents split on how a blocked table records verification: `LS_Proxy` and `GHGlobal_Proxy` wrote
+a `NO_ROUTE` row plus a `verify_*.R` that re-derives the block and ends `VERDICT: PASS`, citing the
+`evpromisi_stone_2021_ddedanx` precedent; `promis_BrummerHoffman_2021` and `MP_Proxy` wrote a
+header-only verification file and no script, citing `kraft_todd_2017_care_measure` and arguing a
+blocked table cannot carry a verification outcome at all. Both precedents are real and both are in
+the tracker. I merged the two NO_ROUTE rows into `mapping_verification.csv` and did not invent rows
+for the other two — the tracker's rule is one row per WRITTEN table, and nothing was written. The
+`verify_batch.R` MISSING=2 above is entirely this disagreement, not a table whose claim failed to
+reproduce. **SKILL.md Step 5b should say which convention a block takes.**
+
+**Step 5b orchestrator re-checks (both agent findings confirmed, numbers re-derived server-side):**
+- `PROMISPME_Forrest_2021_GHGlobal_Proxy` data defects reproduce exactly: `PedGlobal4_Proxy` n=176
+  against 1782–1807 for the other 20 items (~10% administration); `PedGlobal9/10/12_Proxy` run
+  resp 1–6 while the other 18 run 1–5; `PedGlobal1_Proxy` shows only 3 distinct levels. The table's
+  `{1..6}` resp set is **not** one common ladder — any future extraction must ship per-item option
+  rows. Verified via `table_sets.R` (server-side aggregates, no export quota spent).
+- The `availability_audit_full.csv` claim also reproduces, but the count was off: an agent said 15
+  `PROMISPME_Forrest_2021_*` tables are marked `AVAILABLE`; it is **16**. The audit's rationale
+  ("PROMIS is an NIH-funded public-domain item bank … openly published by HealthMeasures.net")
+  predates the 2026-09-05 ruling and is wrong on rights for the whole family. Flagged, not acted on.
+
+**FOR BEN — one decision, not thirteen more rounds.** 13 `PROMISPME_Forrest_2021_*` tables remain
+`pending` and every one will block identically on the same register row. At 4 tables/round that is
+~3 more rounds spent re-confirming a verdict already settled twice today. Worth either bulk-marking
+them `blocked` in `queue_state.csv` or teaching the round to pre-screen claims against
+`instrument_rights_register.csv` before dispatching agents. Same correction applies to the 16
+`AVAILABLE` rows in `availability_audit_full.csv`.
+
+No export quota consumed: every ground-truth read went through `irw_table_sets()`.
+Cap is `batch_165`; not reached. Queue: 501 pending.

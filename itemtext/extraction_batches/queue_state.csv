@@ -862,10 +862,10 @@ promis1wave1_fatigue,blocked,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_haq,done,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_pain,blocked,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_physicalfunction,blocked,batch_022,2026-09-04T11:00:00-07:00
-promis_BrummerHoffman_2021,pending,,
-PROMISPME_Forrest_2021_GHGlobal_Proxy,pending,,
-PROMISPME_Forrest_2021_LS_Proxy,pending,,
-PROMISPME_Forrest_2021_MP_Proxy,pending,,
+promis_BrummerHoffman_2021,blocked,batch_144,2026-09-10T05:51:05
+PROMISPME_Forrest_2021_GHGlobal_Proxy,blocked,batch_144,2026-09-10T05:51:05
+PROMISPME_Forrest_2021_LS_Proxy,blocked,batch_144,2026-09-10T05:51:05
+PROMISPME_Forrest_2021_MP_Proxy,blocked,batch_144,2026-09-10T05:51:05
 PROMISPME_Forrest_2021_Physical_Children,pending,,
 PROMISPME_Forrest_2021_Physical_Proxy,pending,,
 PROMISPME_Forrest_2021_PosAff_Proxy,pending,,
