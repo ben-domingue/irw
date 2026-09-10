@@ -15388,3 +15388,22 @@ Common caveats, disclosed in provenance/notes/public_note on all four:
 
 Four agents per round held up again — 4/4 clean, no kills.
 Cap is batch_165; not reached.
+
+## Rounds may write `block`, never `ship` — ruled 2026-09-10
+
+batch_146 and batch_147 split on whether a round may add a row to
+`instrument_rights_register.csv`. batch_146 found a `ship`-shaped picture for the PTCI
+and the SD3 and declined to write either row, reasoning that a `ship` verdict is a rights
+decision. batch_147 wrote four rows — `INDCOL-32` block, `RSES` ship, `SCCS`
+ship_with_note, `PANAS (Qiu/Zheng/Wang 2008)` ship — the last two resting, by their own
+notes, on silence rather than a positive grant.
+
+**Ben's ruling: a round may write `block`; it may never write `ship` or `ship_with_note`.**
+A block costs a table that can be unblocked later, and the retry is cheap because findings
+are banked in `pending_index_notes.csv`. A `ship` row is what later rounds apply without
+re-deriving, so a wrong one propagates into published wording with no grant behind it.
+`ship`-shaped cases escalate: quotes and page sha256s into the provenance notes and the
+round summary, row unwritten.
+
+**Not retroactive — the four batch_147 rows stand** (Ben, 2026-09-10), including the two
+silence-based ones. Recorded in SKILL.md above the `match_*` guidance.
