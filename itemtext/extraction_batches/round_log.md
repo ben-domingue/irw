@@ -16526,3 +16526,117 @@ has no rights-holder statement anywhere to quote, and no distribution page at al
 
 Queue after this round: 412 pending, 745 done, 169 blocked, 12 failed, 63 excluded. Cap is
 `batch_165` — not reached, next firing proceeds.
+
+---
+
+## batch_164 — 2026-09-10 14:31–14:47
+
+**4 tables claimed. 2 written / 2 blocked / 0 failed.** Yield 50%. Circuit breaker NOT tripped
+(0% failed, threshold 30%) — both no-CSV tables are determinate rights blocks with retry test = NO,
+which do not count.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `RvKDCS_Romiacg_Miroshnik_2020_KDOCS` | **written** | 250 (50×5) | `paper_explicit` | VERIFIED, `VERDICT: PASS` |
+| `rzeszutek_2020_wwii_matgrandfather` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_ghq28` | blocked (rights) | — | — | NO_ROUTE |
+| `rzeszutek_2020_swls` | blocked (rights) | — | — | NO_ROUTE |
+
+**Gates all clean.** `normalize_nulls` 0 of 2 normalized; `audit_batch` 1 PASS / 1 WARN;
+`verify_batch` 1 PASS + 1 MISSING(exempt); `lint_verification` **0 ERROR**, 1 WARN;
+`irw-validate` clean apart from the pre-existing `name_charset` warning on the capitalised
+`RvKDCS_…` table name; `check_provenance` flags nothing from this batch.
+
+Four agents, one per table, per the 2026-09-09 setting. **No kills, no retries, no memory
+pressure** — the 17th consecutive clean round at four. Nothing here argues for changing the count.
+
+### The two WARNs, both explained rather than left to a future reviewer
+
+- `audit_batch` WARN on `rzeszutek_2020_wwii_matgrandfather` (row-count anomaly, `mwojdz26–29`
+  against median 176) is a **property of the response data, not an itemtext defect**, and is now
+  written into `notes.csv`. The instrument offered TAK / NIE / **NIE WIEM**, and the processing
+  script drops "don't know" to missing, so per-item n is "how many respondents knew the answer
+  about that grandparent". **Orchestrator re-derived this independently** (Step 5b, `item_stats.R`,
+  server-side): n runs **84–263** across all 29 items, the four flagged codes sit at 116 / 84 / 116 /
+  117 — the tail of a smooth gradient, not a discontinuity — and 24 of 29 items sit below the
+  500-respondent sample. The gradient matches the paper's own prose: n peaks at `mwojdz9`
+  "Nazi Concentration Camp" = **263** and `mwojdz17` "Forcedly Relocated to Siberia" = **252**
+  (fewest don't-knows, as the paper reports) and bottoms at `mwojdz27` = **84** in the "was your
+  grandfather a witness to:" block (most don't-knows). Not worth a GitHub issue.
+- `lint_verification` WARN on the KDOCS row ("VERIFIED but its evidence hedges") is **correct as
+  filed**. VERIFIED is defined on the *item axis*, and links A+B distinguish all 50 codes from each
+  other (50/50 form-field name ties; 50550/50550 cells re-derived from the named raw column, 0
+  disagreements, and a one-position control shift produces 31651 disagreements, so the check is
+  permutation-sensitive). The hedge is on the *option* axis only.
+
+### Step 5b — two agent claims re-checked, one CORRECTED
+
+1. **Confirmed.** The `matgrandfather` missingness figures reproduce exactly (263 / 252 / 84).
+2. **Corrected.** The `swls` agent reported that `eddiener.com/scales` fails its stored sha256
+   because it is "a page-builder site emitting per-request inline CSS/JS". **That diagnosis is
+   wrong.** Two orchestrator fetches in the same minute hash *identically*
+   (`3708aef5…`, 56492 bytes both times). The page is stable within a session and **genuinely
+   changed** between 2026-09-06 (`6f7449ac…`) and today. The verdict is unaffected — the
+   non-commercial sentence and the SWLS listing are both verbatim live — but the register's stored
+   hash is **stale, not unstable**, and will read as a tampered page to the next round that checks
+   it. The two `labs.psychology.illinois.edu` hashes still reproduce byte-for-byte. Not edited: a
+   round may write a `block` row, not amend a standing one.
+
+### For a human — two `availability_audit_full.csv` rows are now demonstrably wrong
+
+Both concern this deposit, and both were found independently by two agents that read the files:
+
+- **`rzeszutek_2020_swls` / `rzeszutek_2020_ghq28`**: the audit says "S1 File (Survey Polish) and
+  S2 File (Survey English) are the full study questionnaire". They are **only** the 29-item WWII
+  grandparent-trauma questionnaire and contain **not a single SWLS or GHQ-28 item**. The `.sav`
+  carries no variable or value labels on `swls1..swls5` or `ghq1..ghq28` either — there is no
+  wording anywhere in the deposit for those two tables.
+- **`rzeszutek_2020_ghq28`** is recorded AVAILABLE on the reasoning that the GHQ-28 is "not
+  enforced as a closed instrument the way NEO-FFI/HADS/BDI are". The rights holder's own published
+  terms say otherwise (below).
+
+### Rights
+
+- **New register row (line 61): the GHQ family** — GHQ-12/28/30/60, all versions and translations,
+  `match_item_code ghq1..ghq28`. GL Assessment's support FAQ (sha256 `37a3c76b…`, fetched today) is
+  permission-required (*"You will first need to contact us … permissions@gl-assessment.co.uk"*),
+  fee-bearing (*"a GHQ user guide should be purchased"*) and royalty-bearing (*"Part of the payment
+  received from permissions is paid as a royalty to the Institute of Psychiatry"*), and it reaches
+  the **Polish adaptation explicitly** (*"The MAPI Research Trust distributes translated versions on
+  behalf of our Company"*), closing the administered-language route under the 2026-09-08 derivative
+  ruling. Register re-parses cleanly at 61 rows × 11 cols, written under `flock`.
+- **`rzeszutek_2020_swls`** applied the standing 2026-09-09 SWLS verdict rather than re-deriving it —
+  that register row already names this table.
+- Both blocks pass the irw#2101/#2123 test: the live codes are opaque (`ghq1..ghq28`, `swls1..swls5`),
+  so no wording leaks through the response table.
+- **⚠️ K-DOCS ESCALATED TO BEN — shipped, but wants a human verdict.** Kaufman's own page publishes
+  the complete 50-item scale with no fee, NC, ND or redistribution clause and no copyright notice.
+  Its only permission-adjacent sentence is a *grant*: *"Many people reach out to me to ask permission
+  to use the scale. I am happy to give permission. Just drop me a line."* Read strictly, "ask
+  permission" brushes SKILL.md's permission-required trigger; read as written it reserves nothing,
+  and he is himself the party distributing the wording. Shipped under silence-is-permission (a block
+  needs a quotable restriction), **no register row written** per the 2026-09-10 rule. A block here
+  would reach the English `*_translated` columns too, since those carry Kaufman's exact wording.
+
+### Notable, for future rounds
+
+- **The four `rzeszutek_2020_wwii_*` grandparent tables are one instrument.** The 29 item texts in
+  both languages, the three section prompts and the two option rows apply **verbatim** to
+  `matgrandmother` / `patgrandfather` / `patgrandmother`; only the code prefix
+  (`mwojb` / `mwojdz` / `owojb` / `owojdz`), the side-of-family heading and the named grandparent
+  change. All three are `data_labels`-exempt for the same reason and can be produced cheaply. The
+  agent deliberately wrote none of them. **One wrinkle:** in the Polish S1 File the *father's-side*
+  copy places item 23 under the "witnessed" heading, while the mother's-side copy and the whole
+  English form place it in block 2. This round used the mother's-side/English placement (section 2);
+  the `patgrand*` tables meet that inconsistency head-on and should make the same call and say so.
+- The KDOCS table ships administered **Russian** with Kaufman's own published English in
+  `*_translated` — published wording, so no machine-translation disclosure is owed. Its option
+  direction is inferred from the form's ascending S1..S5 presentation and corroborated by item means
+  (everyday acts top out at 3.94, "writing a computer program" bottoms at 2.11); direction is pinned,
+  an interior permutation of levels 2/3/4 is not testable.
+- `table_context.R` returned a **spurious** "returned no rows" for the KDOCS table once; a direct
+  `irw_fetch()` immediately after returned 50550 rows. Transient — worth knowing before anyone
+  reads that message as a missing table.
+
+Queue after this round: **408 pending, 747 done, 171 blocked, 12 failed, 63 excluded.** Cap is
+`batch_165` — **not reached**, next firing proceeds.
