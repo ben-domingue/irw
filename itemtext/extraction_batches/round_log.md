@@ -16316,3 +16316,75 @@ against the `.sav` variable labels rather than by position, which is the right c
 
 Four agents again ran with zero kills — 17 consecutive clean rounds at this setting.
 Circuit breaker not tripped (0 failed). Cap is batch_165; not reached, 424 pending.
+
+## batch_161 — 2026-09-10 13:32–13:53
+
+4 tables claimed, 4 agents (one per table), all four completed. **Written 4 / blocked 0 /
+failed 0 — yield 100%.** No circuit-breaker condition (0 failed of 4).
+
+| table | mapping_basis | verification | audit |
+|---|---|---|---|
+| rosetti_2023_cas | reconstructed | PARTIAL (route 3 + 1/8) | PASS |
+| rosetti_2023_gad7 | paper_order | PARTIAL (route 1 + option-axis) | PASS |
+| rosetti2023_gad7 | paper_order | PARTIAL (routes 5 + 8 + 3-analogue) | PASS |
+| rosharudin_2023_dass21 | reconstructed | PARTIAL (route 3 + permutation) | PASS |
+
+Gates: `normalize_nulls.R` fixed 2 of 4; `audit_batch.R` 4/4 PASS (one note, see below);
+`verify_batch.R` PASS=4, every verify_*.R ends VERDICT: PASS; `lint_verification.R` 4 rows,
+no problems; `irw-validate` ok on all four. `check_provenance.R` exits 1, but on 5
+PRE-EXISTING tables owing an issues-page line (hua_2023_efl_study_engagement,
+lys_2020_rape_3_kpnts, PMT_Trzcinska_2023_PMT, poza2026_hlseu, QCDQES_Oliveira_2022,
+qi_2025_panas, aspirations_sonmez_2022) — **none from this batch**. All four batch_161
+rows ship a publisher's official English form, not IRW-generated wording, so none owes an
+entry.
+
+All four PARTIAL, none VERIFIED — an honest outcome, not a shortfall: three of the four
+sources publish no code-to-wording tie at all, so every mapping rests on statistical
+routes that pin subscale membership and direction but cannot separate every item from
+every other. Each evidence string says what it does NOT establish.
+
+Notable, both re-checked independently by the orchestrator at Step 5b and both CONFIRMED
+with the numbers re-derived:
+
+1. **`rosharudin_2023_dass21` response-data defect (Step 5c explanation of the audit
+   note).** The audit's only note is 100% blank `option_text`; it is deliberate and is a
+   property of the RESPONSE DATA, not an itemtext defect. The live table carries five resp
+   levels {0,1,2,3,4} where the paper and the Musa Bahasa Malaysia form both document a
+   four-point 0–3 ladder. Re-check: n_rows 14469 = 689 × 21 exactly; level-4 counts run
+   min 15 / max 62 per item, 0 of 21 items unused, 658 of 14469 observations (4.55%) —
+   the agent's "15–62 on every item, ~5%" is exact. Counting level 4 as 4 reproduces the
+   paper's Table 2 subscale SDs to ≤0.02, so it is a real analysed level, not a missing
+   code. The administration offered a fifth option nobody documented, so no anchor set and
+   no instruction paragraph could be shipped truthfully. Nothing was padded.
+
+2. **Duplication candidate: `rosetti_2023_gad7` vs `rosetti2023_gad7`.** Raised
+   independently by both gad7 agents. Re-check: identical item sets (GAD7_q1..q7),
+   identical resp sets ({0,1,2,3}), identical row counts (3276 = 468 × 7), and the two
+   processing scripts melt the same seven columns of the same figshare deposit, differing
+   only in the id scheme (source "R1" ids kept vs renumbered 1..468). Corroborated at
+   shape-and-provenance level; NO row-level response comparison was run, so this is a
+   candidate for corpus-trust triage, not an established byte-identical duplicate. Both
+   tables' item text was extracted and gated on its own merits regardless.
+
+Language: all four are non-English administrations (three Spanish, one Malay) whose
+administered wording is unrecoverable in scope — the Ecopsychology paper behind the three
+rosetti tables is closed access by four independent checks and its figshare deposit is a
+single label-free CSV. The 2026-09-01 fallback was applied throughout:
+`text_source=translated_substitute` (dass21: `canonical_instrument`) with
+`translation_source=official_instrument_english`. For dass21 the administered Malay IS
+shipped as `item_text` with official English in `_translated`. Note the three rosetti
+tables' `language=Spanish` is INFERRED from the sample, not read off any source — the
+agents recorded that honestly rather than sourcing it.
+
+**Two rights residuals for Ben — flagged, not decided, no register rows written:**
+- **CAS (`rosetti_2023_cas`).** No clause reserving any right is locatable; the rights
+  holders' own handout (sha256 5b9550c0…dd4c915) asks only for a citation — no fee, NC, ND
+  or redistribution term. Ship-shaped, so per the 2026-09-10 rule the agent escalated
+  rather than writing the row. Quotes and hash are in notes.csv.
+- **DASS (`rosharudin_2023_dass21`).** The settled DASS treatment was applied (FAQ:
+  "public domain… copied without restriction"), but the DASS **Download** page adds "the
+  scales may not be modified or sold for profit" — a no-modification sentence prior DASS
+  rounds did not quote, sitting beside an explicit copy-without-restriction grant. Blast
+  radius is corpus-wide (several live DASS tables), so it belongs to a human.
+
+Cap is batch_165; 161 is not the cap. Ending normally.
