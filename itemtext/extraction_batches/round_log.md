@@ -13120,3 +13120,79 @@ Round pacing: this round ran **four agents** (2026-09-09, Ben's call, walking th
 No kill, no OOM, no retry — all four agents completed first time, 253–361s each. That is the first clean
 data point at four, and it is evidence against the dispatch-spike model being binding at this size today.
 Cap is batch_140; 112 completed, so the next firing proceeds normally.
+
+## batch_113 — 2026-09-09T18:23 → 18:5x
+
+4 tables claimed, **4 written / 0 blocked / 0 failed** — yield 4/4 (100%). Four agents (the
+2026-09-09 setting, walking the probe back up from two); all four returned, no kills, no rate
+limits, no reconciles.
+
+Gates (re-run after the Step 5b correction below): normalize_nulls fixed 1 file, audit_batch
+**PASS=4, no anomalies** (so no WARNs to explain under Step 5c), verify_batch **PASS=4**,
+lint_verification 4 rows clean, `irw-validate` ok on all four, `check_provenance.R` reported
+nothing attributable to this batch (its 1 missing-entry and 3 `mixed` review items are
+pre-existing: aspirations_sonmez_2022, hui_2024_gbfs, iandolo_2021_asq, kim_2025_isi).
+
+Tables:
+- `muslih_2024_rses` — RSES, Indonesian, schizophrenia inpatients (PLOS ONE 19(5):e0300184, CC BY 4.0).
+  paper_explicit; wording from an **image-only Table 2** keyed `RSES 1`..`RSES 10`. VERIFIED —
+  10/10 means/SDs and 45/45 inter-item correlations reproduce to <=0.005. **See the override below.**
+- `naja_2024_challenges` — 5-item ad-hoc COVID challenge checklist, UAE dieticians (PLOS ONE
+  19(1):e0295904). data_labels; VERIFIED on exact endorsement counts 160/147/117/99/75 of 371.
+  Step 3b caught that the CD-RISC in the same paper is *not* what this table holds.
+- `najari_2024_bpqsf_awareness` — BPQ-SF, Persian (PLOS ONE 19(9):e0306348, CC BY 4.0).
+  paper_explicit from another **image-only Table 2** keyed `q1.`..`q46.`; VERIFIED, published
+  CICs reproduce at r=0.9949, MAD 0.0102.
+- `nakano_2020_osce_contact_precautions` — 15-item contact-precautions OSCE checklist (Nagoshi et al.
+  2019, JEEHP 16:31, CC BY 4.0; Dataverse CC0). PARTIAL, honestly: per-item proportions reproduce to
+  |diff|<=0.002 and a pooled-wave comparison breaks the ContPrec_1/ContPrec_10 tie, but ContPrec_2 and
+  ContPrec_9 sit at 1.000 in every published column, so a swap between those two is invisible.
+
+### Step 5b override — `muslih_2024_rses` resp axis (the notable event of this round)
+
+The agent faithfully transcribed the S1 Dataset's `Note` sheet, which gives the five
+negatively-worded items (RSES2,5,6,8,9) **flipped** anchors (1=Strongly agree..4=Strongly disagree)
+against 1=Strongly disagree..4=Strongly agree for the rest. The stored data contradicts that, so
+option_text was corrected to a **uniform** 1=Strongly disagree..4=Strongly agree on all ten items.
+Five convergent lines, computed from the live table (n=260):
+
+1. Within-positive-block correlations 0.51–0.86 (10/10 positive) and within-negative-block 0.43–0.85
+   (10/10 positive), but **23 of 25 cross-block correlations are NEGATIVE** (−0.22 to 0.061). Under
+   the Note sheet's coding all ten items would already point the same way and every correlation
+   would be positive.
+2. Alpha as stored = 0.74, matching the paper's reported overall ordinal alpha of **0.75**; recoding
+   the negative items to 5−x gives 0.82. The paper analysed un-recoded data.
+3. The paper's Methods states a uniform scale — "from 1 (strongly disagree) to 4 (strongly agree)" —
+   and describes reverse scoring as a step performed to *compute* the score, not as the stored coding.
+4. Table 2's highest mean is item 8 at 2.57 (live 2.6), a negatively-worded item, against 1.9–2.0 on
+   every positive item. Coherent under uniform anchoring in a schizophrenia sample; under the flipped
+   coding item 8 would be the *highest self-esteem* item.
+5. The paper's hierarchical model puts both factors on one general factor, which requires them to
+   correlate positively after recoding; as stored they correlate negatively.
+
+This is a defect in the **source's codebook**, not in the IRW response data, and is worth reporting
+upstream — Ben's call. The item-code-to-item-text mapping is untouched and stays VERIFIED.
+
+Worth recording that **no gate could have caught this**: audit_batch and validate_items compare sets
+only, `verify_batch`'s route (means and correlations) is invariant to option labels, and
+`irw-validate`'s `resp_ambiguous` correctly does *not* fire, because per-item direction differences
+are legitimate (cf. aip_vangsness_2019). Step 5b is the only thing standing between this and a
+shipped table whose five reverse items read backwards.
+
+### Also for triage
+- `najari_2024_bpqsf_awareness` is named for the BPQ-SF **Body Awareness subscale** but holds the
+  whole 46-item BPQ-SF (q1–q26 BA, q27–q40 Supradiaphragmatic, q41–q46 Subdiaphragmatic).
+  Independently confirmed server-side: 46 items q1..q46, resp 1–5, n=751 — and the dictionary
+  Description is self-contradictory, saying "Body Awareness subscale (46 items)" when BA is 26.
+  The Description should be corrected. Shipped with a `public_note` saying so.
+- Reported by that agent, **not verified this round and not acted on**: the sibling tables
+  `najari_2024_*_autonomic` (s1–s21) and `..._stress` (W1–W12) look like the DASS-21 and the SCL-90
+  somatization subscale, i.e. not BPQ subscales at all. Flagged as a lead only.
+- The BPQ has no row in `instrument_rights_register.csv`; the manual and translated forms are free
+  downloads with no fee/permission/NC/ND clause. Someone should add the row — the agent correctly
+  declined to write to a file shared with parallel agents.
+- `najari` paper-internal oddities, logged not acted on: q37's CIC is a print error (0.80 published
+  vs 0.381 computed), and Table 6's BPQBA mean/SD (45.41/11.63) does not reproduce from q1–q26
+  (54.99/14.09) while SUPR and SUBR do.
+
+Cap (batch_140) not reached; 625 pending remain.
