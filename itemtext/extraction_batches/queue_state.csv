@@ -832,10 +832,10 @@ pierro_2018_assessment_s1,done,batch_137,2026-09-10T02:30:23
 pierro_2018_assessment_s3,done,batch_137,2026-09-10T02:30:23
 pierro_2018_hfs_s4,blocked,batch_137,2026-09-10T02:30:23
 pierro_2018_locomotion_s1,done,batch_137,2026-09-10T02:30:23
-pierro_2018_locomotion_s3,pending,,
-pierro_2018_negaffect_s3,pending,,
-pierro_2018_posaffect_s3,pending,,
-pierro_2018_selfforgive_s1,pending,,
+pierro_2018_locomotion_s3,done,batch_138,2026-09-10T02:54:16
+pierro_2018_negaffect_s3,blocked,batch_138,2026-09-10T02:54:16
+pierro_2018_posaffect_s3,blocked,batch_138,2026-09-10T02:54:16
+pierro_2018_selfforgive_s1,done,batch_138,2026-09-10T02:54:16
 pierro_2018_selfforgive_s2,pending,,
 pierro_2018_selfforgive_s3,pending,,
 pierro_2018_tf_future_s4,pending,,

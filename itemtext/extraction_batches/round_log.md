@@ -14560,3 +14560,98 @@ Four agents again, per the 2026-09-09 setting; ran clean, consistent with the
 batch_104–119 record.
 
 Cap is batch_165; not reached.
+
+---
+
+## batch_138 — 2026-09-10
+
+**4 tables claimed, 2 written / 2 blocked / 0 failed. Yield 50%.** Circuit
+breaker not tripped (0% failed; both no-CSV outcomes are determinate blocks).
+
+| table | outcome | mapping_basis | Step 5b |
+|---|---|---|---|
+| `pierro_2018_locomotion_s3` | **done** | reconstructed | PARTIAL |
+| `pierro_2018_selfforgive_s1` | **done** | paper_order | PARTIAL |
+| `pierro_2018_negaffect_s3` | **blocked** | unknown | NO_ROUTE |
+| `pierro_2018_posaffect_s3` | **blocked** (orchestrator override) | unknown | NO_ROUTE |
+
+All four tables come from one source: Pierro et al. (2018) PLoS ONE
+13(3):e0193357, CC BY 4.0. Gates on the two written tables: `normalize_nulls`
+0 changed, `audit_batch` **2 PASS with no anomalies** (so nothing for Step 5c
+to explain), `verify_batch` **PASS/PASS**, `lint_verification` 4 rows no
+problems, `irw-validate` ok on both.
+
+### The round's real finding: canonical PANAS ordering is data-disconfirmed here
+
+The `negaffect` agent blocked its table and reported that the *only* testable
+mapping hypothesis is positively refuted. **The orchestrator re-derived this
+from the `.sav` independently (Step 5b) and it reproduces exactly.** The PANAS
+NA half is five near-synonym couplets; the data show five clean
+mutual-top-partner couplets — {1,5} r=0.853, {3,4} r=0.734, {2,6} r=0.708,
+{7,8} r=0.678, {9,10} r=0.574 — and **zero** of them is a couplet canonical
+Watson/Clark/Tellegen ordering predicts ({1,2}=0.560, {3,7}=0.349,
+{4,10}=0.401, {5,6}=0.500, {8,9}=0.434, every one weaker than the pairing
+actually observed). Canonical facet test: within 0.449 vs between 0.482,
+diff **−0.033**. The administration used a reordered list published nowhere.
+
+**This is why `posaffect_s3` was pulled after it had passed.** That agent
+shipped a CSV and rated it PARTIAL, but its numbering evidence (route 8,
+"CHECK 3") was argued *from the NA block under canonical ordering* — the very
+thing now refuted. With that gone the PA mapping has no support left, and the
+PA block reads incoherently under canonical labels anyway: *attentive*
+(posaffect9) is the **lowest** mean at 1.58 while near-synonym *alert*
+(posaffect6) is the **highest** at 3.53 (r=0.350); *strong* 3.09 vs *active*
+1.87 correlate 0.094; the strongest pair by far is {4,6} r=0.740
+(enthusiastic~alert, not a synonym pair) against excited~enthusiastic
+{2,4}=0.394. PA lacks the tight couplets that made the NA test decisive, so
+canonical PA order is *unsupported* rather than refuted — but unsupported is
+not shippable. The CSV is held at
+`itemtables/batch_138/quarantine/`, unshipped, with both re-check scripts
+beside it; its provenance/verification/notes were rewritten to `unknown` /
+`NO_ROUTE`. Shipping it would have passed `validate_items.R`, `audit_batch.R`
+*and* `irw-validate` while being wrong — exactly the silent failure Step 5b
+exists for, and the first time this round-flow has caught it in a table that
+had already cleared extraction.
+
+Both blocks are **determinate (retry test NO)**: all four S3-File `.sav`
+deposits carry no variable label on any item column, and the article's
+Supporting Information is four `.sav`s with no questionnaire or codebook.
+Only the authors (gennaro.pica@uniroma1.it) supplying the Study 3
+questionnaire changes either answer.
+
+### Other orchestrator re-checks (Step 5b), both confirmed
+
+1. *`locomotion_s3` stores its reverse items **raw**, the **opposite** of its
+   already-shipped sibling `pierro_2018_locomotion_s1` (batch_137), where they
+   are stored already recoded.* Re-derived from the `.sav`: the deposit's own
+   `locomotion` composite matches the **reversed** mean to max abs diff
+   **0.0000** over 85 cases, vs **0.8333** as-stored. Confirmed — so anchors
+   are **not** flipped and resp 1 = Strongly Disagree for all twelve items.
+   **Any agent taking `_s4` or the remaining s3 siblings must re-check this
+   per table and inherit neither answer.**
+2. *`selfforgive_s1`'s R-marked items ARE stored already recoded* (the
+   opposite convention, in the same paper): alpha as stored 0.717 = the
+   paper's published .72, un-reversed −0.613. Reproduced by `verify_batch`.
+
+### For the triage session
+
+- **`pierro_2018_selfforgive_s1` is not the HFS.** It is the 4-item state
+  self-forgiveness measure derived from Wohl's State Self-Forgiveness Scale.
+  The HFS `block` row registered in batch_137 governs `pierro_2018_hfs_s4`
+  only and does not reach this table.
+- **No `instrument_rights_register.csv` row exists for the State
+  Self-Forgiveness Scale (Wohl).** The agent found no fee/permission/NC/ND/
+  no-redistribution term on Wohl's Carleton pages (both HTTP 200, 2026-09-10),
+  i.e. `ship` under "silence is permission". **The orchestrator did not write
+  the row** — a rights determination is a human call, and it is flagged here
+  rather than taken.
+- `check_provenance.R` exits **1**, on `aspirations_sonmez_2022` shipping
+  IRW-generated English with no issues-page entry. Traced to
+  `itemtables/batch_007/provenance.csv` — **pre-existing, not this round.**
+- Both written tables carry English for an Italian administration
+  (`text_source=translated_substitute`); no Italian form exists in the deposit
+  or any of the four supplements. Both are PARTIAL, both disclose what their
+  route does not separate.
+
+Four agents, per the 2026-09-09 setting; ran clean, no kills, all four
+reported. Cap is batch_165; not reached.
