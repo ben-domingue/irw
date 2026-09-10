@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"reyes_2022_eheals","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
+"rfq_wozniakprus_2021","WARN",8,8,TRUE,TRUE,FALSE,TRUE,0,75,"75% of rows have blank option_text | 1 of 8 items have NO option_text rows while others do (RFQ8)"
+"rightwing_authoritariansim","PASS",48,48,TRUE,TRUE,FALSE,TRUE,0,0,""

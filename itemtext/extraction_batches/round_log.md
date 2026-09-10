@@ -15999,3 +15999,104 @@ neither batch_156 table ships IRW-generated content.
 Agent count 4, per the 2026-09-09 setting. No kills, no failed extractions, no retries.
 
 Cap is batch_165; batch_156 completed, not the cap. Ending normally.
+
+---
+
+## batch_157 — 2026-09-10 ~11:20–11:55 PDT
+
+4 tables claimed: `reyes_2022_eheals`, `rfq_wozniakprus_2021`, `ribeiro_2024_msk_hq`,
+`rightwing_authoritariansim`. **Written 3 / blocked 1 / failed 0 — yield 75%.** Circuit breaker not
+tripped (0 failed; the single block is determinate, retry test NO). Agent count 4, per the
+2026-09-09 setting: no kills, no failed extractions, no retries, no rate limits.
+
+**Blocked.** `ribeiro_2024_msk_hq` — instrument rights, not access. The administered
+European-Portuguese MSK-HQ-PT is fully printed in the PLOS S1 Appendix (CC BY) with all anchor sets,
+and the English original in S2, so the wording was in hand and buildable. Blocked because the MSK-HQ
+is licensed by Oxford University Innovation: its page requires written permission for any change to
+content/order/formatting and routes all use through a click-to-licence portal with a Payment Info
+step. A CC BY appendix reproducing a restricted instrument does not launder it (2026-09-08), and the
+Portuguese form is a derivative of the restricted English original, so the administered-language
+route does not avoid it. The block bites — codes are `msk1`..`msk14` and carry no wording. Agent
+appended a `block` row to `instrument_rights_register.csv` and a row to `pending_index_notes.csv`.
+Notable: the PLOS appendices carry **no OUI copyright line at all** (zero hits for Oxford / © /
+copyright / Keele / Arthritis in the docx XML), so a text sweep over deposits will not surface this
+notice — the register row records a shape signature instead. The agent flagged that this verdict
+likely reaches any other live MSK-HQ table in the corpus (irw#1954 shape) and did not sweep for
+siblings; **that sweep is owed.**
+
+**Step 5b re-check changed the round's output — a live data defect in a published table.**
+`rfq_wozniakprus_2021`: the agent overrode the source .sav's RFQ8 value labels, which is exactly the
+class of claim Step 5b exists to re-check. The *conclusion* is confirmed by the decisive route —
+cross-tabbing the deposit's raw RFQ8 against its own derived `RFQu8` over all 538 rows gives
+`{1,2,3,4->0; 5->1; 6->2; 7->3}`, byte-identical to the recode `RFQu2/u4/u5/u6` apply, so the
+depositor scored RFQ8 ascending like the rest and the .sav label is a source error. But the agent's
+supporting **correlation figures do not describe the live table**: live r(RFQ8,RFQ7)=+0.021 against
+the stated −0.203, and live r(RFQ8, RFQ2/4/5/6)=−0.031/0.040/0.024/0.041 against the stated
++0.20..+0.35. Every RFQ1–RFQ7 figure reproduces live exactly (r(RFQ2,RFQ6)=0.669, r(RFQ3,RFQ4)=0.638,
+RFQ7 negative with all seven), which is what made the RFQ8-only gap worth chasing.
+
+Chasing it found the cause. Live RFQ8 mean is **3.967** against the deposit's **4.279** while all
+seven other items match the deposit to 3 dp; value counts are live **58**/78/77/89/113/93/**30** vs
+deposit **30**/78/77/89/113/93/**58**. Values 1 and 7 have swapped and 2–6 are untouched. Mechanism,
+read off `data/rfq_wozniakprus_2021.py`: `pd.read_spss()` returns value LABELS, and `scale_mapper`
+maps `'strongly disagree'->1` / `'strongly agree'->7`. The .sav labels **only the two endpoints**, so
+for RFQ8 — whose endpoint labels are reversed — the script rewrites deposit 1→7 and 7→1 while 2–6
+pass through numerically. The result is a **half-reversal: the live RFQ8 scale is non-monotonic**, so
+its resp values are not ordinal and no anchors describe them. This also explains why live RFQ8
+correlates ~0 with everything — the item is destroyed as a measure in the live table.
+
+Orchestrator action: **blanked RFQ8's two endpoint `option_text` values** (its `item_text` stem is
+unaffected and correct); the other seven items ship fully labelled. Corrected the evidence string in
+both `verification_merged.csv` and `mapping_verification.csv`, and rewrote the provenance
+`public_note`, which had asserted "the anchors shipped here run 1 = Strongly disagree to 7 = Strongly
+agree for all eight items" — no longer true. Logged in `pending_index_notes.csv` as `data_defect`.
+**This is a response-data defect in a live published table, not an itemtext defect: it warrants its
+own GitHub issue, and RFQ8 should not be scored until reprocessed on the .sav's numeric codes.
+SIBLING RISK, unchecked: the same script emits `ghq`/`ders`/`ecr`/`bpi_wozniakprus_2021` through the
+identical label path, so any of their items whose .sav labels run the other way carries the same
+half-reversal. That sweep is owed too.**
+
+**Second Step 5b check — confirmed, numbers recorded.** `reyes_2022_eheals`: the agent claimed the
+response scale is reversed relative to canonical eHEALS and that S3's published per-item means
+reproduce as `5 − mean(resp)`. `item_stats.R` gives live means 2.17/2.21/2.24/2.25/2.28/2.31/2.06/2.78,
+i.e. 5−mean = 2.83/2.79/2.76/2.75/2.72/2.69/2.94/2.22 — exactly the published set. The reversal is
+therefore established numerically and not only from the deposit's Qualtrics key row: had the data run
+canonically, live and published means would agree, and they differ by 0.42 on the mean. Anyone scoring
+this table as higher = more literate inverts the construct. The agent also caught a real mapping fork —
+eHEALS's two published renderings order the same 8 items differently (appendix 3,4,5,6,7,8,9,10 =
+Table 1 Q3,Q4,Q1,Q2,Q5,Q6,Q7,Q8), so a default "canonical 1–8" transcription would have shipped items
+1–4 permuted.
+
+**Instrument mismatch (Step 3b).** `rightwing_authoritariansim` pools **three** instruments, not one:
+items 1–22 Altemeyer's RWA (resp 1–9), 23–32 the TIPI (1–7), 33–48 a 16-word vocabulary check-list
+(0–1). The dictionary Description ("Data from a survey that probes facist ideologies…") covers 22 of
+48 items — **a dictionary fix is owed.** Wording is the administered openpsychometrics form verbatim;
+its `/tests/RWAS/1.php` returns 0 bytes on GET (hence empty Wayback snapshots) but renders on POST.
+Mapping `reconstructed` and VERIFIED: all 300 item×resp count cells match server-side aggregates
+exactly, and all 48 per-item distributions are pairwise distinct. Table-name misspelling left alone —
+it is the live name.
+
+**Possible duplicate table.** `data/rfq8_wozniakprus_2022.R` reads the *same* Dataverse file and
+builds `rfq8_wozniakprus_2022` with the same RFQ1..RFQ8 items. Worth checking whether the two IRW
+tables are the same 538×8 responses under two names. Not investigated here.
+
+**Rights escalation, no ruling taken.** `rfq_wozniakprus_2021`: the UCL Psychoanalysis Unit page reads
+"The RFQ is freely available to download for research purposes. The measure is not yet suited for
+clinical purposes." The clinical sentence disclaims fitness (LOT-R rule → quoted, does not block); the
+availability sentence carries none of the six reserving terms, so it is ship-shaped — but "for research
+purposes" is a purpose qualifier in the hexaco.org family, so per the 2026-09-10 rule **no**
+`instrument_rights_register.csv` row was written. **A human ruling is owed.**
+
+**Gates.** normalize_nulls fixed 1 of 3 (`rightwing`, 301 lines) on the first pass and 1 of 3
+(`rfq`, after the orchestrator edit) on the re-run; audit_batch **2 PASS / 1 WARN**; verify_batch
+**3/3 PASS**; lint_verification **0 problems** (all three written tables carry verification rows —
+none is `data_labels`, so no NOT_NEEDED rows were owed); `irw-validate` clean on all three.
+Step 5c: the single WARN is `rfq_wozniakprus_2021` — "75% of rows have blank option_text" and "1 of 8
+items have NO option_text rows (RFQ8)". Both explained in `notes.csv`: the first is a property of the
+source (endpoints labelled only), the second is the orchestrator's deliberate withholding above.
+Neither is an itemtext defect. `check_provenance.R` exits 1 on **pre-existing corpus-wide debt only**
+(`PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`, `aspirations_sonmez_2022` from earlier rounds); no
+batch_157 table ships IRW-generated content, and the `rfq` row's `translation_source=
+official_instrument_english` passes the vocab check.
+
+Cap is batch_165; batch_157 completed, not the cap. Ending normally.
