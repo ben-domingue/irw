@@ -15079,3 +15079,28 @@ them `blocked` in `queue_state.csv` or teaching the round to pre-screen claims a
 
 No export quota consumed: every ground-truth read went through `irw_table_sets()`.
 Cap is `batch_165`; not reached. Queue: 501 pending.
+
+## PROMISPME bulk block — 2026-09-10
+
+batch_144 drew four PROMIS-family tables and blocked all four on the settled
+`instrument_rights_register.csv` verdict (rule 2026-09-05, irw#1945; HealthMeasures
+Terms of Use redistribution bar). The remaining **13 `PROMISPME_Forrest_2021_*` rows
+(Family, GHGlobal, LS, MP, Physical, PosAff, Psych, Strength — Children and Proxy forms)
+were marked `blocked` by hand**, batch `rights_2026-09-10`, rather than spent as ~3 more
+rounds re-confirming the same register row. The instrument is PROMIS Pediatric Measures
+in every case, so the block is by instrument, not by table-name prefix.
+
+Two items from batch_144 left undone, both flagged by the round and neither acted on:
+
+- `availability_audit_full.csv` marks **16** PROMISPME tables `AVAILABLE` on a rationale
+  that predates the rights ruling. The audit was not corrected. (The round's own agents
+  reported 15; the recheck found 16.)
+- `SKILL.md` Step 5b does not say which verification convention a *blocked* table takes.
+  batch_144's four agents split between a NO_ROUTE row plus `verify_*.R` and a header-only
+  record — that split is the whole of `verify_batch`'s MISSING=2 for the round.
+
+Also: `run_round.sh`'s post-condition check reported "ROUND FAILED — no audit_report.csv"
+for batch_144. That is a **false alarm on an all-blocked round**: `audit_batch` writes no
+report when the batch contains no `__items.csv`, which is the correct outcome when every
+table is blocked. The round itself completed, pushed, and left zero `in_progress` rows.
+The check should treat "no `__items.csv` and no `failed` rows" as a valid completion.
