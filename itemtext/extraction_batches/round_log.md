@@ -12847,3 +12847,78 @@ PPOS-D12/D6, which also blocks still-pending `pauli_2021_ppos_d6`. Row added to
    edit the shared file mid-round.
 
 Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 645 pending remain.
+
+---
+
+## batch_109 — 2026-09-09T17:16 (4 tables, 4 agents)
+
+**Written 3 / blocked 1 / failed 0.** Yield 75%. All four gates clean: `audit_batch.R` **3 PASS, no
+anomalies** (so no WARNs to explain at Step 5c), `verify_batch.R` 2 PASS + 1 `MISSING(exempt)`,
+`lint_verification.R` 3 rows no problems, `irw-validate` ok on all three. Four agents per round
+(Ben's 2026-09-09 call, walking the probe back up) — **no kills, no memory pressure, clean dispatch**.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `mohammed_2021_patient_safety_culture` | done | 210 (42×5) | data_labels | VERIFIED (labels + route 6) |
+| `molino_2018_d5_scale` | done | 56 (8×7) | data_labels | NOT_NEEDED |
+| `monier_2026_pot` | done | 49 (7×7) | data_labels | VERIFIED (self-describing codes + routes 5, 3) |
+| `molino_2018_d6_scale` | **blocked** | — | data_labels | none (blocked) |
+
+**Step 5b — all three substantive claims independently re-checked by the orchestrator, all three
+reproduced.** Unlike the last three rounds, nothing had to be corrected:
+
+1. **`mohammed_2021` polarity override.** The agent shipped the S1 `.sav`'s *truncated* variable
+   labels rather than repairing them with canonical AHRQ HSOPSC wording, on the grounds that 18 of
+   the 42 labels are negated rewrites of AHRQ's reverse-worded items and the data run in the labels'
+   direction. Re-executed `verify_mohammed_2021_patient_safety_culture.R`: all 18 correlate
+   **positively** with the 24-item positive mean, **+0.128 to +0.548, 0 of 18 negative**, exactly as
+   claimed. Substituting AHRQ text would have inverted 18 items relative to the responses. Note this
+   contradicts the paper's own "negatively worded items were reversed when computing percent
+   positive response" — the reversal is already baked into the stored columns.
+2. **`molino_2018_d5` pools two measures.** Re-read the S3 `.sav` labels directly: `d_5_1`–`d_5_5`
+   all carry the `Intenzione_` prefix (entrepreneurial intention, Liñán & Chen 2009) and
+   `d_5_6`–`d_5_8` all carry `Supporto_` (support from family/friends, ad hoc). Confirmed, and each
+   shipped Italian string matches its own label item-by-item. **The dictionary Description
+   ("D5 scale (unlabeled construct)") is wrong and should be corrected** — carried as a `public_note`.
+3. **`molino_2018_d6` rights block.** Both quoted clauses re-verified verbatim against the cached
+   sources and both page sha256s recomputed and matched (Hogrefe `69311436…3223d`, Giunti
+   `a1c25aa0…11eb6`). The four-scale split was re-derived from the `.sav` independently: exactly
+   **10 SeEff / 10 Des Soc / 6 Loc I / 8 SeReg = 34**, no unlabelled column, so the 20-of-34
+   commercial-publisher count is right.
+
+**`molino_2018_d6_scale` block — retry test NO**, a determinate rights verdict, not an access
+failure, so it does not count toward the breaker. Extraction was *fully solved* before the rights
+check (S3 `.sav` labels every column, S1/S2 print all 34 items in English and administered Italian);
+what stops it is that 20 of 34 items are one whole AMI scale (Hogrefe) and the TOM social-desirability
+scale (Giunti), whose terms forbid reproduction in any form. A table ships whole, so those 20 cannot
+be dropped without failing the item-set gate. The block reaches: IRW codes are the opaque
+`d_6_1`..`d_6_34`, so no wording is already exposed in the response table (cf. irw#2101). Row added
+to `pending_index_notes.csv` with the cached-file rebuild path (~15 min if unblocked).
+
+**Three things for a human, none actioned here:**
+1. **A new rights-clause SHAPE needs an explicit ruling.** Hogrefe and Giunti reserve their rights in
+   *conditions of sale* (Terms of Business / Condizioni Generali di Vendita) rather than on an
+   instrument page. Is a test publisher's sales contract a licence statement governing the
+   instrument, or a contract binding only purchasers? Every prior irw#1945 block rested on an
+   instrument page. This ruling decides `molino_2018_d6_scale` and will recur.
+2. `instrument_rights_register.csv` has **no row for AMI/Hogrefe, TOM/Giunti or LOC-L** — three rows
+   are owed once (1) is ruled. Agents correctly declined to edit the shared file mid-round. Also
+   still outstanding from batch_108: no ERQ row.
+3. Minor, `mohammed_2021` only: every one of the paper's 12 Table 3 percent-positive figures ends in
+   the digit **4** (74.14, 53.14, 51.94, …), which no genuine computation produces — most likely a
+   text-extraction artifact rather than a defect in the paper. It changes nothing: the agent had
+   already excluded route 3 from the verdict for exactly this reason, and the verdict rests on the
+   label identity plus route 6.
+
+**Carried forward, not re-raised:** `mohammed_2021_patient_safety_culture` inherits the S1 file's
+periodic duplication already flagged from sibling `mohammed_2021_job_satisfaction` (batch_013) — the
+full 42-item response pattern repeats exactly at lag 130 for **31.0%** of rows, 270 distinct patterns
+across 411 respondents. Reproduced in section 6 of the verify script. batch_013 recorded Xingyi as
+reviewing it; this is a response-data issue, not an item-text one.
+
+`check_provenance.R` exits 1, but on **pre-existing** rows only — `aspirations_sonmez_2022` (IRW-
+generated English with no issues-page entry) plus three `translation_source=mixed` tables flagged for
+review. None of the four belong to this batch; `monier_2026_pot` ships the authors' own English
+(`translated_substitute` / `study_supplied`), so no issues-page line is owed for it.
+
+Circuit breaker: 0 failed of 4 (0%) — not tripped. Cap `batch_140` not reached; 641 pending remain.
