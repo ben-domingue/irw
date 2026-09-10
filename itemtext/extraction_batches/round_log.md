@@ -13315,3 +13315,64 @@ verified cleanly at 11/11, which is not a text-vs-table mismatch, and that table
 IRW-generated content — so nothing is owed. Detail retained in the internal `note`.
 
 Cap (`batch_140`) not reached; 617 pending remain.
+
+## batch_116 — 2026-09-09 19:24–19:45
+
+4 tables claimed, **4 written / 0 blocked / 0 failed — yield 4/4 (100%)**.
+Four agents (the 2026-09-09 setting, walking the probe back up from two).
+No kills, no rate limits, no retries at the orchestrator level. One agent hit a
+single transient `missing value where TRUE/FALSE needed` from an IRW query and
+succeeded on its one permitted retry.
+
+| table | basis | verification | rows |
+|---|---|---|---|
+| nelson2019_ipqrd | data_labels | NOT_NEEDED | 215 |
+| nelson_2019_ipqrde | data_labels | NOT_NEEDED | 215 |
+| neurodegenerative_huizinga_2019_dass | paper_order | PARTIAL | 84 |
+| neurodegenerative_huizinga_2019_svc | paper_explicit | VERIFIED | 71 |
+
+Gates: normalize_nulls fixed 2 files; audit_batch **4/4 PASS, no anomalies** (so
+nothing for Step 5c); verify_batch 2 PASS + 2 MISSING(exempt); lint_verification
+4 rows, no problems; `irw-validate` clean on all four; `check_provenance.R`
+raised nothing attributable to this batch (its `aspirations_sonmez_2022` and
+`mixed` flags are pre-existing rows from earlier batches).
+
+**Step 5b — agent claim independently CONFIRMED, and it is a corpus finding, not
+an itemtext one.** The `nelson2019_ipqrd` agent reported that its table and
+`nelson_2019_ipqrde` look like duplicates. Re-checked here with server-side
+aggregates only (no export): `data/nelson2019_ipqrd.py` and
+`data/nelson_2019_ipqrde.py` fetch the same PLOS supplement
+(pone.0214082.s004.xlsx), melt the same 43 `ipq_rd_*` columns, apply the same
+`-9` sentinel filter and carry the same `cov_marital_status`, differing only in
+output filename and cosmetics. Live: both tables `n_rows=8487`, identical 43-item
+set, identical resp set 1–5, and `item_stats.R` returns identical per-item
+n/mean/sd/floor/ceiling for every item (ipq_rd_1 n=198 mean=2.90 sd=1.27
+floor=ceil=12.6; ipq_rd_16 n=197 mean=2.12 sd=0.83). The item text shipped is
+correct for both, so both are kept; **which of the two to retire is a human
+corpus-trust decision** and was deliberately NOT filed as an issue. Recorded in
+both tables' notes.csv rows and surfaced to Ben.
+
+Other notables:
+- Both nelson tables ship 43 items, not the paper's *final* 40-item IPQ-RDE
+  (3 items dropped for low loadings post hoc). 43 is what was administered and
+  what the live table holds, so all 43 ship. Step 3b check passed.
+- Both agents independently found the same one-word divergence at `ipq_rd_38`
+  (codebook "Time **spend** managing…" vs administered form "Time **spent**…")
+  and both shipped the form's wording. Useful corroboration from a shared source
+  read twice, which is exactly why sibling agents are told to read freely and
+  write narrowly.
+- `neurodegenerative_huizinga_2019_dass`: the deposit gives no per-item labels,
+  so wording came from the DASS site — which distributes **two** Dutch DASS-21
+  forms that differ in their first 3 items. The 2010 revised de Beurs
+  translation was chosen on data signals and the mapping is **PARTIAL** by
+  honest admission: subscale membership is pinned outright (canonical keys
+  reproduce the deposit's own DASS_depr/anxiety/stress/total for 1246/1246
+  complete records, 0 mismatches) but order *within* a subscale is not.
+- `neurodegenerative_huizinga_2019_svc` is the authors' own Dutch SVK; base
+  fields carry the verbatim Dutch, `_translated` the authors' own English, so
+  it is **not** a translated_substitute. VERIFIED by reproducing every published
+  Table 3 loading triple to within 0.016 and nearest-neighbour matching 19/19.
+- Sibling `neurodegenerative_huizinga_2019_vfq` was not claimed this round and
+  remains pending.
+
+Cap (batch_140) not reached; 613 pending remain.
