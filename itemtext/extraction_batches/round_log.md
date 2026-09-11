@@ -16733,3 +16733,43 @@ RESOLVED. No WARNs to explain beyond name_charset (notes.csv).
 
 Queue after this round: **401 pending, 754 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_167 — 2026-09-10 16:53–17:15 PDT — 4 tables, 1 written / 3 blocked / 0 failed
+
+Four agents, no kills. Yield 1/4 (25%); all three blocks determinate (retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `salleh_2023_aim_iam_fim` | **written** | 60 (12×5) | `data_labels` (positional code derivation, re-derived) | VERIFIED, verify PASS |
+| `santos_2018_cesd` | blocked | — | — | response-data defect |
+| `santos_2018_gse` | blocked | — | — | no code↔wording source |
+| `saputra_2023_perceived_ease_of_use` | blocked | — | — | wording never published |
+
+Gates: normalize_nulls 0 changes; audit_batch 1 PASS, no anomalies; verify_batch PASS=1; lint_verification
+clean (1 row); irw-validate ok; check_provenance no failures (13 `mixed` review items, all pre-existing).
+No WARNs to explain.
+
+### Notable
+
+- **santos_2018_cesd: response-data defect, worth a GitHub issue (not filed by the round).** cesd3/11/14/16
+  are stored in opposite directions in site-H wave-1 vs every other person-wave. **Orchestrator Step 5b
+  re-check CONFIRMED** from irw_fetch with independent code: item-rest r +0.43/+0.49/+0.55/+0.35 (H w1, n=224)
+  vs −0.33/−0.37/−0.52/−0.31 (rest, n=730); other 16 items positive in both. Agent also showed the study's own
+  CESDtot equals the 3−x sum in 527/527 non-H-w1 rows and the plain sum in 223/223 H-w1 rows — the defect is in
+  the OSF source and propagates into the paper's S1 Table A. Suggested fix: `resp := 3 − resp` for those four
+  items everywhere except ids `H*` at wave 1. Retry after the fix is routine (paper_explicit mapping already
+  established; canonical Radloff wording; Spanish-administration caveat).
+- **santos_2018_gse:** codes gse2..gse18 (non-contiguous) look like positions in a 20-item form — parent RCT
+  Beeber 2010 reports a 20-item Spanish GSE. No codebook anywhere. Possible dictionary description fix (10-item
+  subset of a 20-item administered form) — agent's claim, from cited literature, not re-checked.
+- **saputra_2023_perceived_ease_of_use:** paper gives one example item per construct, untied to codes. The
+  sibling `saputra_2023_*` tables still pending (e.g. perceived_usefulness) will very likely block identically.
+- **salleh_2023_aim_iam_fim — rights decision owed before upload:** no instrument_rights_register row for
+  AIM/IAM/FIM; originator (Weiner et al. 2017, Add. File 3) says "There is no cost to use these measures", no
+  reserving clause found. Ship-shaped, not registered. Also: data file is the KOSPEN pilot but the only
+  published form is the MIICA version (public_note written); seven truncated Malay headers restored from
+  Table 2; paper Table 4 has 5/21 polychorics 0.06–0.15 above live (reproduced by verify_batch; a paper
+  discrepancy, no swap explains it).
+
+Queue after this round: **397 pending, 755 done, 174 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
