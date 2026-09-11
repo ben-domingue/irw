@@ -16902,3 +16902,46 @@ capitalised — not an itemtext defect), others ok; check_provenance no failures
 
 Queue after this round: **385 pending, 765 done, 175 blocked, 13 failed, 63 excluded.**
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_171 — 2026-09-10 17:52–18:12 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Four agents, no kills. Yield 4/4 (100%). Breaker 0% failed, not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `shan_2020_ph` | **written** | 25 (5×5) | `data_labels` (S1 .sav labels; = article Table 7, M/SD match) | NOT_NEEDED |
+| `shen_2020_sas20` | **written** | 80 (20×4) | `data_labels` (S1–S5 .xls headers carry wording; script positional, so verified anyway) | VERIFIED (80/80 item×resp counts vs live GROUP BY, all patterns unique), verify PASS |
+| `shi_2021_gentrification` | **written** | 115 (23×5) | `data_labels` (S1 .xlsx `N、factor` headers renamed to item_N) | NOT_NEEDED |
+| `shi_2025_dass21` | **written** | 105 (21×5) | `reconstructed` (canonical DASS-21 numbering; .sav unlabeled) | PARTIAL (stored subscale scores 1764/1764 under canonical key, 0/147 swaps survive; within-subscale order not established), verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=2;
+lint_verification 0 ERROR, 1 WARN (shi_2025_dass21 option_text blank — deliberate, see defect below); irw-validate
+all 4 ok; check_provenance no failures (same 13 pre-existing `mixed` review items).
+
+### Notable
+
+- **shi_2025_dass21 — response-data defect, CONFIRMED by orchestrator.** Live resp by wave (resp 0..4): wave0
+  0/2042/1244/463/367, wave1 865/1512/1299/335/105, wave2 781/1873/952/439/71. Baseline is 1–4-coded (stored .sav
+  pre subscale minima 7/7/7, stored pre total mean 38.14 = paper's 38.17/38.10); waves 1–2 use five levels 0–4 with
+  52 / 27 ids using both 0 and 4 themselves, against a paper-described 4-point 0–3 scale. Defect is in the source
+  .sav; `data/shi_2025_mindfulness.py` passes it through. option_text ships blank for that reason; public_note
+  discloses. Suggested fix: wave0 −1; waves 1–2 need a decision. Also a LEAD, not established: person-total
+  correlations pre–post −0.149, pre–third −0.078, post–third 0.564 (confirmed; MAAS/RRS show the same near-zero
+  baseline link per agent) — baseline rows may not be matched to the same people. pre item sum ≠ stored total on
+  15/196. Affects shi_2025_maas / shi_2025_rrs (same .sav, still pending). Not filed.
+- **shi_2025_dass21 text:** administered simplified-Chinese (Wen et al. 2012) wording not in any supplement; ships
+  the official English DASS-21 as `translated_substitute` / `official_instrument_english`; DASS FAQ public-domain
+  statement (same sha as ptacek/rosharudin rounds). Instructions blank (English instructions describe a different
+  response scale than the paper's).
+- **shan_2020_ph — id-178 collision re-confirmed on live table:** 1015 rows, 202 ids, one id with 10 rows. Same
+  defect as shan_2020_g/hs (batch_170). ASSIS rights still shipped on silence; register row still owed.
+- **shen_2020_sas20:** English headers are the study's own (Chinese administration inferred from residual Chinese in
+  free-text cells); wording departs from Zung's original (item 4 "I think I might be going crazy"); items
+  5/9/13/17/19 stored pre-reversed per paper and source cells, option_text follows that. Deposit n=1647 vs paper
+  1637, but paper's 30.85±6.89 total reproduces on 1647 — not a defect. Zung SAS rights on silence; register row owed.
+- **shi_2021_gentrification:** item text is the factor name only (as in the data file); language Chinese inferred
+  (Wenjuanxing, 201/209 Chinese nationals, U+3001 list commas in headers) — `translated_substitute` /
+  `study_supplied`; author-built questionnaire, own CC BY article.
+
+Queue after this round: **381 pending, 769 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
