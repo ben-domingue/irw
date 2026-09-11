@@ -17264,3 +17264,60 @@ name_charset (mixed-case live table names, which the itemtext must match); check
   normalized that line ending.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_176 — 2026-09-10T21:35 (claim) → 21:55 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 361 pending; cap batch_189). Third
+round at SIX agents: no kills, all six agents returned (slowest 10.1 min, smacof_pvq40); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `sinche_2017_skill_development` | **written** | 75 (15×5) | `data_labels` | VERIFIED (75/75 item×resp cells vs .sav + Table 3 means), verify PASS |
+| `sinche_2017_skill_importance` | **written** | 75 (15×5) | `data_labels` | VERIFIED (15/15 unique frequency vectors vs .sav + Table 3), verify PASS |
+| `singleton_2021_carbon_reduction` | **written** | 75 (15×5) | `paper_explicit` | VERIFIED (15/15 count profiles, min off-diagonal L1 8), verify PASS |
+| `sleboda_2021_risk_benefit` | **written** | 880 (80×11) | `data_labels` | NOT_NEEDED (verify script written anyway, PASS) |
+| `smpi_lorenzoluaces_2020_gad7` | **written** | 28 (7×4) | `paper_order` | PARTIAL (GAD_4/5/6 pinned; 1/2/3/7 not), verify PASS |
+| `smacof_pvq40` | blocked (rights) | — | — | analysis banked, verify_smacof_pvq40.R PASS |
+
+**Written 5 / blocked 1 / failed 0 — yield 5/6 (83%).** Circuit breaker not near (0% failed).
+
+Gates: normalize_nulls 0 changed; audit_batch 5 PASS, no anomalies (no WARNs to explain); lint_verification
+clean (5 rows); irw-validate 0 ERROR / 0 WARN; check_provenance clean for this batch (the 13 `mixed` review
+lines are all pre-existing tables). verify_batch: first run reported **NO VERDICT for
+sinche_2017_skill_importance**; the script run standalone printed VERDICT: PASS, and a full verify_batch re-run
+came back PASS=5. Transient (first-run output not captured); classified on the re-run.
+
+### Notable
+- **smacof_pvq40 blocked on rights (retry test NO).** Schwartz's own repository of authorized PVQ40 versions
+  (ORPC 2(2), scholarworks.gvsu.edu/orpc/vol2/iss2/9/) carries CC BY-NC-ND 3.0 — **orchestrator confirmed** the
+  licence link on the cached landing page. Caveat: the PVQ40 English file itself returned 403, so the block rests on
+  the repository-level licence. **No PVQ/Schwartz row exists in instrument_rights_register.csv (confirmed by grep);
+  a block row is warranted and probably reaches other SVS/PVQ21/ESS21/PVQ-RR tables (unchecked).** Wording would
+  also be hard even if unblocked: Borg, Bardi & Schwartz 2017 prints no item list and two full PVQ40 texts disagree
+  on 7 items. Row added to pending_index_notes.csv.
+- **smacof PVQ40 response direction is opposite to its Rd.** Rd says 1 = not at all like me. **Orchestrator
+  CONFIRMED** from the package's PVQ40.rda (zeros dropped): value means sd 2.0 < un 2.3 < be 2.5 < se 2.6 < he 3.0 <
+  co 3.2 = ac 3.2 < st 3.3 < tr 3.6 < po 3.8, which matches the pan-cultural hierarchy only if 1 = very much like me.
+  Matters for anyone using the response table; worth a note in the dictionary.
+- **sinche_2017_skill_importance overrides the .sav value labels.** **Orchestrator CONFIRMED** both halves: the .sav
+  labels Employ_Skill_1R with the same agree/disagree set as Doc_Skill_1, while the paper's Methods say the
+  importance block ran "from 'not at all important' to 'extremely important'". Endpoints shipped from the paper,
+  2–4 blank; public_note written.
+- **sleboda_2021_risk_benefit `*_new` anchors follow the .sav value labels over the S1 File.** **Orchestrator
+  CONFIRMED** the labels: GT/SC/PE put "Helt ny" at 1 and "Mycket bekant" at 11; EN/VA the reverse — while GT_new's
+  own English variable label says "1 = absolutely old; 11 = absolutely new". The data argument (gene tech reads
+  newer than pesticides only under the labels) is a plausibility ordering, not proof. **For triage:**
+  option_text_translated renders "Mycket bekant" (literally "very familiar") as the study's "absolutely old" — a
+  defensible but interpretive pairing. Also: translated_substitute / study_supplied (no Swedish item wording was
+  published); the processing script's header comment misnames GT and EN (comment only); S2 Table vaccination
+  benefit mean 7.71 vs data 7.51 (likely paper typo).
+- **singleton_2021_carbon_reduction: even items stored reverse-scored**, option_text mapped per item. verify output
+  (re-run by orchestrator) reproduces published M/SD/alpha exactly (54.40/6.57/0.787) vs 49.91/3.80/0.223 if
+  re-reversed. **Dictionary defect:** Description says "Pro-environmental-behavior scale"; it is the revised NEP
+  (Dunlap 2000), an attitude measure. NEP shipped on silence (no rights terms found).
+- **smpi_lorenzoluaces_2020_gad7:** canonical GAD-7 anchors shipped though the paper describes the scale as "none
+  of the days"/"all the days" (disclosed in public_note). Response-data note: table holds the 487 SMPI-routed
+  participants, not the paper's n=1523 GAD-7 sample. The agent's cache holds the SMPI preprint Table 1 (item
+  wording) for the sibling `_smpi` table.
+
+Cap is `batch_189`; not reached. Ending normally.
