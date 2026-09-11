@@ -16856,3 +16856,49 @@ machine_translation — issues-page line owed at upload; 13 pre-existing `mixed`
 
 Queue after this round: **389 pending, 761 done, 175 blocked, 13 failed, 63 excluded.**
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_170 — 2026-09-10 17:36–17:52 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Four agents, no kills. Yield 4/4 (100%). Breaker 0% failed, not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `SCS_Suh_2023_SCS` | **written** | 210 (30×7) | `paper_explicit` (Singelis SCS form numbering; study OSF CFA syntax corroborates split) | PARTIAL (route 5, 30/30 own-subscale vs perm. max 24), verify PASS |
+| `sds` | **written** | 78 (13×6) | `paper_explicit` (TestGardener 3.1.1 vignette itemVec, positional) | VERIFIED, verify PASS |
+| `shan_2020_g` | **written** | 10 (2×5) | `data_labels` (S1 .sav labels) | NOT_NEEDED |
+| `shan_2020_hs` | **written** | 20 (4×5) | `data_labels` (S1 .sav labels) | NOT_NEEDED |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=2;
+lint_verification 0 ERROR, 1 WARN (sds option_text blank — correct: source labels levels only as ratings 0–4 +
+blank for missing; explained in notes.csv); irw-validate: SCS_Suh_2023_SCS WARN name_charset (live table name is
+capitalised — not an itemtext defect), others ok; check_provenance no failures (13 pre-existing `mixed` review items).
+
+### Notable
+
+- **sds — response-data defect, CONFIRMED by orchestrator.** Live `sds` stores TestGardener's missing/illegal
+  wastebasket code as `resp=6`, not a sixth rating: 177/6149 rows, per item 1–13 = 4/10/4/3/3/3/9/79/9/43/1/5/4
+  (re-counted from irw_fetch, matches agent). TestGardener `vignettes/SDS.Rmd` l.53: "a sixth choice for missing or
+  illegal responses", scored 0. Item 8's sixes sit on item7=1 in 75/79 (a skip). `data/TestGardener.R` copies
+  `SDS_U[,i]` straight to resp. Fix: drop resp==6 (optionally recode 1–5 → 0–4) and regenerate the item-text resp
+  rows. Not filed. item_text is the package authors' short symptom labels, not administered McCorkle & Young wording
+  (public_note says so); option_text blank throughout.
+- **shan_2020_* — id collision, CONFIRMED by orchestrator.** S1 .sav has `ID==178` on file rows 168 and 178, two
+  different people (Gender 2 vs 1; HS1–4 5/3/1/4 vs 3/2/4/3). Live shan_2020_hs: 812 rows / 202 ids, id 178 on 8
+  rows. Affects every table from `data/shan_2020_acculturative_stress.py`; fix is re-keying one row. Not filed.
+- **shan_2020 — availability audit wrong for f/pd/cs.** Both agents found the S1 .sav carries variable labels for
+  every subscale (the script's "no item text in the file" comment is wrong: `pd.read_spss` drops labels, pyreadstat
+  shows them). `availability_audit_full.csv` marks `shan_2020_f`, `_pd`, `_cs` UNAVAILABLE ("S1 File is raw data");
+  none of the three is in queue_state.csv. Candidates to add. (`shan_2020_ph` is still pending.)
+- **SCS_Suh_2023_SCS — audit row names the wrong instrument.** `availability_audit_full.csv` calls it Neff's
+  Self-Compassion Scale; live data is Singelis's 30-item Self-Construal Scale on 1–7 (as the dictionary says).
+  `text_source=translated_substitute` / `official_instrument_english`: 320 of 681 respondents are Korean and
+  presumably saw a Korean form that isn't in the deposit; public_note discloses it.
+- **Rights owed (rounds may not write ship rows):** Singelis SCS — letter says "Please feel free to use the SCS in
+  your research", asks for a copy of findings/translations (agent reads as research grant + courtesy; nearest
+  precedent ERQ, irw#2121). ASSIS (Sandhu & Asrabadi 1994) for shan_2020_g/hs — shipped on silence; the audit's
+  "(non-commercial)" tag quotes no clause. Worth a human look before either register entry is written.
+- shan_2020_hs corrected .sav label typo "origion" → "origin" per the study's own Table 7; shan_2020_g kept "life
+  style" verbatim. Both study_materials; minor inconsistency only.
+
+Queue after this round: **385 pending, 765 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
