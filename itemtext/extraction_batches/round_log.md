@@ -17746,3 +17746,44 @@ check_provenance.R no errors (88 IRW-generated tables, 0 missing an entry). No d
   are already cached under .cache/teicher_2015_mace_nonverbal/.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_186 — 2026-09-11T00:23 (claim) → 00:43 (close), 6 agents, 6 tables
+
+**3 written / 3 blocked / 0 failed — yield 50%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+All three blocks are determinate (two rights, one response-data defect); none counts toward the breaker.
+
+Written: temesgen_2025_elephant_park_attitude (7 items, paper_explicit, translated_substitute/study_supplied — authors' English
+questionnaire, interviews held in Tigrinya, PARTIAL), teodorini_2020_modafinil_attitudes (8, data_labels, NOT_NEEDED),
+teq_novak_2021_selfesteem (10, reconstructed, translated_substitute/official_instrument_english — Czech RSES, UMD English, PARTIAL).
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARN; verify_batch 2 PASS + 1 MISSING(exempt, data_labels);
+lint_verification no problems; irw-validate 3 ok; check_provenance 0 machine_translation tables missing an issues-page entry.
+
+Blocked:
+- **teq_novak_2021_bfin — BFI-44 rights, orchestrator CONFIRMED the clause.** Both cached Wayback copies of the Berkeley lab's
+  bfi.htm (sha256 ceba43d2…, c7cbfffb…; page says "44 items total") read "freely available for researchers to use for
+  non-commercial research purposes" / "At this time, the BFI is for non-commercial uses only". Same structure as the register's
+  BFI-2 block. **Ben to decide:** (1) add a BFI-44 `block` row to instrument_rights_register.csv (this round did not); (2) whether
+  ibrahim_2015_bfi, conner_2017_bfi and CV_OASIS_ODSIS_PPE_Novak_2020_BFI — shipped with BFI-44 wording before this, batch_048's
+  log having read only the current BFI-2 page — need withdrawing.
+- **teq_novak_2021_teq — response-data defect, orchestrator CONFIRMED.** The deposit pools 7 Sources and data/teq_novak_2021.R drops
+  the Source column. TEQ_13: Sources 1-6 mean 0.58, r=-0.31 with the positively keyed items vs Source 7 mean 2.8, r=+0.62; TEQ_14:
+  1.3/-0.63 vs 3.2/+0.22 (control TEQ_2 2.3/+0.21 vs 2.4/+0.06). The paper's own Table 1 carries the negative loadings. No Source
+  covariate in IRW, so Spreng wording on 13/14 would be wrong for ~86% of respondents. Worth a GitHub issue on the response table
+  (not filed). A gate-passing candidate is banked in .cache/teq_novak_2021_teq/. The agent suggests the other teq_novak_2021_*
+  tables from the same pooled file (scbs, spirit, socdes) deserve the same Source-split check; selfesteem was checked (Source 3 vs
+  7 item-mean profiles r=0.99).
+- **teshome_2021_pss10 — PSS register block applied.** Step 3b confirmed standard PSS-10 (S2 .sav reversed value labels on exactly
+  Perc4/5/7/8).
+
+Notable (source overrides, orchestrator re-checked):
+- **teq_novak_2021_selfesteem direction overrides the paper, CONFIRMED:** paper says higher score = higher self-esteem; deposit RSES
+  total vs SWLS total r=-0.59, item-item r all positive (0.08–0.65), so stored codes are higher = lower self-esteem with negatively
+  worded items pre-aligned. Anchors shipped per item accordingly, disclosed in public_note. Item order uses the common 2,5,6,8,9
+  negative set rather than the UMD form's numbering (data rank 105/126 for the latter); 5<->6 swap scores marginally above identity
+  (disclosed, hence PARTIAL).
+- **temesgen Q7, CONFIRMED:** deposit 38.73/7.85/53.42 vs Supplemental Table 6 34.17/11.65/54.18. 54.18 is also the paper's
+  KSNP-awareness figure, so likely a slip in the paper's table; source-internal, disclosed.
+- teodorini: .sav value labels ("Neither agree nor disagree") preferred over the S3 questionnaire's "neutral"; disclosed in notes.
+
+Cap is `batch_189`; not reached. Ending normally.
