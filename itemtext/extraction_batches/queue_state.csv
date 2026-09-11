@@ -1093,9 +1093,9 @@ trevisan_2018_mscs,done,batch_191,2026-09-11T06:32:45-07:00
 tsai_2017_treeit_h10_closure,done,batch_192,2026-09-11T06:47:03
 tsai_2017_treeit_h11_undo,done,batch_192,2026-09-11T06:47:03
 tsai_2017_treeit_h12_language,done,batch_192,2026-09-11T06:47:03
-tsai_2017_treeit_h13_control,pending,,
-tsai_2017_treeit_h14_document,pending,,
-tsai_2017_treeit_h1_consistency,pending,,
+tsai_2017_treeit_h13_control,done,batch_193,2026-09-11T06:49:51-07:00
+tsai_2017_treeit_h14_document,done,batch_193,2026-09-11T06:49:51-07:00
+tsai_2017_treeit_h1_consistency,done,batch_193,2026-09-11T06:49:51-07:00
 tsai_2017_treeit_h2_visibility,pending,,
 tsai_2017_treeit_h3_match,pending,,
 tsai_2017_treeit_h4_minimalist,pending,,

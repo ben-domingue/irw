@@ -18075,3 +18075,26 @@ First round on the `tsai_2017_treeit_*` family (Tsai et al. 2017 PLOS ONE, doi:1
 4. The three sibling tables' `instrument` strings differ slightly in wording. Harmonise them before upload if the family should share one name.
 
 Cap is batch_199; 192 is not the cap. Ending normally.
+
+## batch_193 — 2026-09-11T06:57:44-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills, no retries. Circuit breaker not tripped (0% failed).
+
+Second round on the `tsai_2017_treeit_*` family (11 pending after this: H2-H9, TAM BI/PEOU/PU). Agents were handed batch_192's converged conventions plus a harmonised instrument string, `Treeit Heuristic Evaluation (Tsai et al. 2017, Appendix 1; adapted from Zhang et al. 2003 usability heuristics): H<k>. <Name>`. That is batch_192's h12 form with a colon. The three batch_192 tables still carry their own variants (for-the-human item 4 there). All three reused the batch_192 cached S1/S3 after checking sha256. Settings are unchanged: paper_order, translated_substitute / study_supplied, language Chinese, S1 anchors.
+
+- `tsai_2017_treeit_h13_control`: **done**. 2 items, resp 2-5, 8 rows. PARTIAL: Table 3 item-total r 0.755 reproduces exactly, and substituting H10 columns gives 0.834, so the block is pinned. The order of H13-1 vs H13-2 is not established. H13-1 "initiators of actors" is kept as printed (sic).
+- `tsai_2017_treeit_h14_document`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: Navigation alpha 0.865 and H14 item-total r 0.768 reproduce exactly; other blocks substituted give 0.705-0.809. The list-style H14-2 is the outlier (r 0.12/0.14 vs 0.89; mean 3.50 vs 3.98/3.94), which is semantic coherence only. The order of H14-1 vs H14-3 is not established (98/101 identical).
+- `tsai_2017_treeit_h1_consistency`: **done**. 6 items, resp 1-5, 30 rows. PARTIAL: H1 item-total r 0.763 and UI alpha 0.892 reproduce; shifting the column window one place gives 0.791/0.789. The S1 block size (6) = xlsx columns (6). Within-block order is not established: H1-3..H1-6 are pairwise identical in 95-97/101.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, cached S1 text + S3 xlsx):** all confirmed. The S1 wording for H1/H13/H14 (including "actors" and the instructions lines) matches what shipped, and so do the anchors. The S3 xlsx has the H1-1..6, H13-1..2 and H14-1..3 columns. Identical-answer counts: H13-2 = H10-2 in 98/101, H13-1 = H13-2 in 56/101, H14-1 = H14-3 in 98/101. H14 correlations are 0.12/0.89/0.14, and the item means match the agents' figures.
+
+**Housekeeping:** the H1 agent saw one sibling's scratch files (s001.pdf, s003.xlsx, build.R, candidate__items.csv, ...) briefly in `itemtables/batch_193/` at start. They were gone before any gate ran, and the final directory holds only the expected files. This is a scratch-path slip, not a collision: every scratch filename is distinct from the shipped files.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open** and now covers 6 written tables. Every provenance note carries the escalation. No register row was written.
+2. The S3 identical-answer pattern shows up again in every block (H13-2 = H10-2 98/101; H14-1 = H7-3 96/101). That is why all six family tables are PARTIAL. It is not filed as a defect.
+3. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
+
+Cap is batch_199; 193 is not the cap. Ending normally.
