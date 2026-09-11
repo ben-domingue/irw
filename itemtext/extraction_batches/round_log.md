@@ -17429,3 +17429,45 @@ batch file and the permanent tracker); irw-validate ok on all 3; check_provenanc
   preferred over S1 Table A where they differ ("go ask"); punctuation worth a spot-check.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_179 — 2026-09-10T22:33 (claim) → 22:44 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 343 pending; cap batch_189). Sixth
+round at SIX agents: no kills, all six agents returned (slowest ~4.5 min, stoyel_2021_neg_affect); 19G available at launch.
+All six tables come from the one stoyel_2021 PLOS S1 workbook (sha256 b4b1e0f7…c024); siblings were told apart explicitly.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `stoyel_2021_neg_affect` | **written** | 50 (10×5) | `data_labels` | NOT_NEEDED (xlsx headers carry wording, 30/30 across waves); verify PASS (18234/18234 cells rebuilt, closest swap breaks 1984 cells) |
+| `stoyel_2021_edeq_binge_purge` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_eating_concern` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_restraint` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_shape_concern` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_weight_concern` | blocked (rights) | — | — | — |
+
+**Written 1 / blocked 5 / failed 0 — yield 1/6 (17%).** Circuit breaker not near (0% failed). All five blocks are
+the existing EDE-Q register row (block, batch_122) applied, retry test NO; each has a pending_index_notes.csv row.
+Low yield is the queue serving five EDE-Q subscales in a row, not a pipeline fault.
+
+Gates: normalize_nulls 0 of 1 changed; audit_batch 1 PASS, no WARN; verify_batch PASS=1; lint_verification clean
+(1 row); irw-validate ok; check_provenance clean for this batch (the 13 `mixed` review lines are pre-existing tables).
+
+### Notable
+- **EDE-Q register open question closed.** The row said "stoyel_2021 needs a separate look because its codes may"
+  carry wording. They do not: `data/stoyel_2021_disordered_eating.py` line 89 renames columns positionally to
+  `item_{i+1}`, so live codes are bare `item_1..item_N` and the block is effective. Four agents re-fetched CREDO
+  7.2.html independently — sha256 unchanged. Register note amended in place by the orchestrator.
+- **neg_affect is PANAS-20 NA** (Watson's 10 NA adjectives in instrument order), shipped under the PANAS `ship` row.
+  Study prints only the 1/5 anchors, so resp 2–4 option_text is blank. Agent wrote the tracker row as VERIFIED;
+  normalised to `data_labels_exemption`/NOT_NEEDED to match convention, evidence kept.
+  Data observation, **orchestrator CONFIRMED**: wave-1 NA item means 2.56–2.71 (high for a non-clinical sample),
+  but internally consistent (workbook mean-score column = item mean, alpha 0.887 vs paper 0.89). Not filed.
+- **Possible response-data defects in stoyel_2021_edeq_binge_purge (blocked table), orchestrator CONFIRMED from S1:**
+  EDEQX1 wave 1 uses 0–6 but waves 2/3 have no 0s (possible 0→1-based shift); EDEQX7 "yes" is 295/294/293 while n
+  falls 802/551/469 and other yes/no items fall sharply (EDEQX2 169/14/5) — looks like carry-forward/misalignment.
+  Also reported, not re-checked: restraint item_5 is empty at wave 1 (n 1020). Not filed.
+- **Email in a data script:** `data/stoyel_2021_disordered_eating.py` line 34 puts ben's address in its User-Agent.
+  Pre-existing; not run or changed this round, but it breaks the no-email-to-outside-services rule if re-run.
+- Lead for the next round: `stoyel_2021_pos_affect` (POSAF1..10, same workbook) should take the neg_affect route.
+
+Cap is `batch_189`; not reached. Ending normally.
