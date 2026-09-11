@@ -17025,3 +17025,85 @@ orchestrator's Step 5b re-check fetches of that table and _accept_factors.
 
 Queue after this round: **373 pending, 776 done, 176 blocked, 13 failed, 63 excluded.**
 **Cap is `batch_173` — this round IS that batch. Cap reached; stopping.**
+
+## Triage — batches 166–173 (2026-09-10)
+
+Eight rounds fired back to back in one session (26 shipped, 5 blocked, 1 failed). Triaged as one
+pass because every batch shares the same single blocker: rights rows a round is not allowed to write.
+
+**Gates, re-run live over all eight batches** (`audit_batch.R` output written outside the tree so the
+batch dirs keep the rounds' own reports): `normalize_nulls.R --dry-run` 0 of 26 files would change;
+`audit_batch.R` all tables PASS, no anomalies, every batch; `verify_batch.R` PASS on every table
+carrying a script, the rest `MISSING(exempt)` (`data_labels` basis, Step 5b exempt);
+`lint_verification.R` 26 rows, 0 ERROR, 3 WARN. The three WARNs were each resolved against the
+settled rules rather than acted on:
+- `sds`, `shi_2025_dass21` — blank `option_text`. Its own signal, explicitly not an argument for
+  PARTIAL (2026-09-08 rule). Both correct at source: `sds`'s options carry only rating numbers,
+  `shi_2025_dass21`'s anchors are unpublished and wave-inconsistent.
+- `science_ltm` — "VERIFIED but its evidence hedges". Cleared on the item-axis rule, `jiang_2021`
+  shape: the hedge scopes the response-frequency route's thin Technology/Environment separation,
+  while the item axis is pinned independently by self-describing `ltm::Science` column names plus
+  the `Science.Rd` listing. Status left VERIFIED.
+
+**Staged into `clean/` (9).** All nine take their wording from the study's own paper or an official
+public questionnaire — study-authored instruments with no third-party rights holder:
+`ruiz_parra_2023_rfq8`, `safiye_2023_rfq` (both on the RFQ `ship_with_note` row Ben applied
+2026-09-10), `schafer_2016_music_effects`, `schafer_2016_music_goals`, `science_ltm` (Eurobarometer
+38.1 country questionnaire), `shi_2021_gentrification`, `shineha_2024_gef_{accept_factors,
+attitudes, info_topics}`.
+
+**Held (17), none for a gate failure.**
+
+*Rights — ship-shaped, escalated, no register row (15).* Each round found no reserved right but may
+not write a `ship` row, so all of these wait on Ben:
+- explicit grant / public domain: `salleh_2023_aim_iam_fim`, `schalet_2016_hrsa`, `schmidt_2017_pds`,
+  `shi_2025_dass21`
+- author letter, research use plus a courtesy request: `SCS_Suh_2023_SCS`, `shi_2025_rrs`
+- silence, nothing quotable: `shen_2020_sas20`, `schmidt_2017_fas`,
+  `shin2024_creactability_{adaptability, creativity, quickness}`, `shan_2020_{g, hs, ph}` (ASSIS)
+- licence conflict: `SABFI2_Gallardo_Pujol_2018_Micro` — the journal's current page says CC BY-SA 4.0,
+  the SciELO España mirror footer says CC BY-NC 3.0. NC goes to Ben; the round asked for the ruling
+  before upload and this triage did not overrule it.
+
+Two additions this triage made to the rounds' own lists:
+- `shan_2020_{g,hs,ph}` — the rounds shipped the ASSIS on silence, and `availability_audit_full.csv`
+  describes it as "(non-commercial)" with no quoted clause. Pulled into the rights hold.
+- `SABFI2_Gallardo_Pujol_2018_Tight` — held because its notes carry **no rights assessment at all**.
+  Unlike its Micro sibling the round never checked the tightness scale's originator, and the wording
+  is third-party (ISP OSF materials), not study-authored. No gate would have caught this.
+
+*Open data decision (1).* `sds` — `resp=6` is TestGardener's missing/illegal sentinel rather than a
+rating (177/6149 rows; item 8's 79 sixes are a skip after item 7 = none, 75/79). The note records
+that fixing `data/TestGardener.R` would require regenerating this table's itemtext rows, so its
+shape depends on a decision not yet made. Held per the "fate depends on an open decision" rule.
+
+**Issues-page entries deliberately deferred, not dropped.** Nothing here is uploaded, and the entries
+describe live tables (`ruiz_parra_2023_rfq8`'s own note puts it as "owed once uploaded"). Owed on
+upload: IRW-translated or machine-translated text for `ruiz_parra_2023_rfq8` (IRW's own
+`instructions_translated`), `schmidt_2017_fas` and `schmidt_2017_pds` (machine translation of German
+labels); blank `option_text` for `sds`, `shi_2025_dass21`, `shineha_2024_gef_info_topics`; and the
+`shineha_2024_gef_info_topics` "choose three" vs five-selections source inconsistency.
+
+**Response-data defects found, none filed as issues** (all re-confirmed by an orchestrator against
+live data, all in source files rather than IRW recodes):
+1. `santos_2018_cesd` — four CES-D items stored in opposite directions across ~77% of person-waves;
+   the study's own `CESDtot` reproduces under a plain sum in 223/223 site-H wave-1 rows and under
+   `3−x` in 527/527 rows of every other cell. Determinate; blocked the table.
+2. `shi_2025_dass21` — wave 0 coded 1–4, waves 1–2 carrying five levels 0–4 against a 4-point
+   instrument; 52 wave-1 and 27 wave-2 respondents use both 0 and 4 within their own 21 answers.
+   Minimum fix is recoding wave 0 as `resp-1`; waves 1–2 still need a decision.
+3. `sds` — the `resp=6` sentinel above.
+4. *Lead, not established:* person totals correlate −0.15 pre→post but +0.56 post→third in
+   `shi_2025_dass21`, same shape in `shi_2025_rrs`; `preDASS总分` disagrees with the pre item sum in
+   15/196 rows. Suggests baseline rows may not be linked by `id` to later waves.
+
+**Metadata fixes owed outside itemtext:** `SABFI2_Gallardo_Pujol_2018_Micro`'s dictionary Description
+reads "Racial microagression scale" but the items are the ISP life-space measure (six settings,
+confirmed in the data); `schmidt_2017_fas`'s Description and script comment swap the bedroom and
+vehicle items (prose only, codes fine); `availability_audit_full.csv` calls `SCS_Suh_2023_SCS` Neff's
+Self-Compassion Scale when it is Singelis's Self-Construal Scale.
+
+**Lead worth acting on:** `SABFI2_Gallardo_Pujol_2018_Tight`'s notes locate the administered Spanish
+LOT-R at `Spanish ISP.pdf` pp. 30–31. `SABFI2_Gallardo_Pujol_2018_LOT` shipped in batch_165 on an
+English fallback that recorded Spanish as unrecoverable within scope — so an already-shipped table
+could be re-extracted with its administered wording.
