@@ -48,13 +48,41 @@ and the copy it called stale was the record of the hold release.
 
 ## Standing exclusions — do NOT extract these
 
-**`enem*` (52 tables): item text is being handled separately by Ben. Do not extract it.**
-Recorded 2026-08-18. All 52 rows are marked `status=excluded` in `queue_state.csv` so no round can
+**`enem*` (52 tables): item text is a separate hand-built workstream. Do not extract it in a
+round.** Recorded 2026-08-18 as handled by Ben; owned by @mateusmazza since #1848 (2026-09),
+arriving one PR per exam year under the standing terms below. All 52 rows are marked `status=excluded` in `queue_state.csv` so no round can
 claim them; do not flip them back to `pending`, and do not extract an `enem*` table even if asked to
 process "everything remaining". They are the Brazilian national exam (ENEM) tables and they dominate
 the corpus by volume — 2.12 billion of what were 2.44 billion pending responses, i.e. **87% of all
 pending response volume** — so any statistic about queue coverage should say whether it includes
-them. Post-exclusion the queue is 1,176 pending.
+them. Post-exclusion the queue is 1,176 pending. A year whose text has landed moves its four
+rows to `done` with the batch name; the rest stay `excluded`.
+
+### ENEM item text: standing terms for every exam year (2026-09-11)
+
+Set on #1848, the 2023 pilot, so the other twelve years do not re-open them. 2023 is the
+worked example: `itemtables/batch_enem_2023/`.
+
+1. **Source.** INEP's accessibility booklet (the LARANJA Braille / Adaptada Ledor text shipped in
+   the microdata) is the primary source where that year has one, because INEP wrote its own
+   descriptions of figures into it. The standard booklet PDF fills items the accessibility
+   booklet substitutes away, and is the only source for a year without one. The provenance note
+   says which items came from where.
+2. **Generated text.** Descriptions this project writes go in `item_text` only, marked inline,
+   and the table carries `description_source=partly_generated` (see "Generated descriptions"
+   under Settled rules). Items whose printed options are bare graphs or diagrams ship blank
+   `option_text`.
+3. **Layout.** One batch directory per year, `itemtables/batch_enem_<YYYY>/`, with the full set:
+   the four `__items.csv`, `notes.csv`, `provenance.csv`, `verification_merged.csv`,
+   `audit_report.csv`.
+4. **Build scripts** are committed once (`batch_enem_2023/scripts/`) and reused or adapted, not
+   re-created per year. Shared files such as `pending_index_notes.csv` and
+   `mapping_verification.csv` get rows appended, never a rewritten file.
+5. **Disclosures** — `machine_translation` and `partly_generated` issues-page entries — go up in
+   the same round as that year's upload.
+6. **Items INEP annulled are not shipped.** #1942 removed them from the response tables
+   (TX_GABARITO `X`; ten across the years), so item text that includes one fails the item-set
+   gate.
 
 ## Running a round
 
@@ -284,6 +312,35 @@ the phrase it relied on. An agent cannot buy VERIFIED with a stock sentence.
 blank or unverified response-option wording — `jo_2023_arp` does, because the study publishes no
 anchors. That is a real gap in what IRW ships and gets its own WARN; it is not an argument for
 PARTIAL.
+
+### Generated descriptions (2026-09-11)
+
+When a figure, graph, table, equation or diagram has no description in the source, one may be
+written here — **in `item_text` / `item_text_translated` only**, always marked inline, and the
+table gets `description_source=partly_generated`, which owes an issues-page entry like
+`machine_translation`. The line is annotation vs invention: a description inside the stem is a
+reading aid on a stimulus that exists; a generated `option_text` becomes a label on a response
+category that a distractor analysis joins to `resp` and reads as printed. So when printed options
+carry no text (ENEM 2023 `78578`, `125902`), `option_text` is blank and `correct_response` plus
+`resp_raw` keep the options addressable. `check_provenance.R` fails a marker in `option_text`, a
+marked table not recorded as `partly_generated`, and a `partly_generated` table with no marker.
+It cannot see an *unmarked* generated option, which is what ENEM 2023 first shipped — so the
+marker is a requirement, not a courtesy.
+
+### Stimuli in another language, and what `language` means (2026-09-11)
+
+**A stimulus that is itself in another language, and is the object of study, stays verbatim in
+the `_translated` columns** rather than being round-tripped. ENEM's foreign-language items put a
+Portuguese question around an English poem or Spanish passage; translating that passage "back"
+into English changes the item and makes it unanswerable. The same goes for a word an option
+analyses metalinguistically: it stays in the original, with a gloss. This extends the field-level
+rule in `language_backfill/README.md` ("a field already in English is its own translation") to
+text mixed within one cell. Kept-verbatim and forgot-to-translate are byte-identical, so the
+provenance note names the items kept verbatim.
+
+**`language` names the language of administration, not of each cell.** Every row of
+`enem_2023_1mil_lc` reads `Portuguese`, including the English and Spanish stimuli, because the
+candidates sat a Portuguese-language exam. Do not "fix" it per cell.
 
 ## Open items
 
