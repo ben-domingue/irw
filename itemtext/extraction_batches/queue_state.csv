@@ -1090,9 +1090,9 @@ transyouth_leshin_2026_youth_anx,blocked,batch_190,2026-09-11T06:10:45-07:00
 transyouth_leshin_2026_youth_posaff,blocked,batch_191,2026-09-11T06:32:45-07:00
 trevisan_2018_aq,blocked,batch_191,2026-09-11T06:32:45-07:00
 trevisan_2018_mscs,done,batch_191,2026-09-11T06:32:45-07:00
-tsai_2017_treeit_h10_closure,pending,,
-tsai_2017_treeit_h11_undo,pending,,
-tsai_2017_treeit_h12_language,pending,,
+tsai_2017_treeit_h10_closure,done,batch_192,2026-09-11T06:47:03
+tsai_2017_treeit_h11_undo,done,batch_192,2026-09-11T06:47:03
+tsai_2017_treeit_h12_language,done,batch_192,2026-09-11T06:47:03
 tsai_2017_treeit_h13_control,pending,,
 tsai_2017_treeit_h14_document,pending,,
 tsai_2017_treeit_h1_consistency,pending,,

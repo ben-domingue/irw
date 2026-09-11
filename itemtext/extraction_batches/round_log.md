@@ -18051,3 +18051,27 @@ All three are determinate blocks from a single source (Leshin et al. 2026, Psych
 4. The transyouth CC BY-NC response-data licence review (from batch_189) is still open.
 
 Cap is batch_199; 191 is not the cap. Ending normally.
+
+## batch_192 — 2026-09-11T06:47:03-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills, no retries. Circuit breaker not tripped (0% failed).
+
+First round on the `tsai_2017_treeit_*` family (Tsai et al. 2017 PLOS ONE, doi:10.1371/journal.pone.0180102; 17 tables, 14 more pending: H1-H9, H13, H14, TAM BI/PEOU/PU). All three siblings made the same calls independently: text from the S1 "Treeit Heuristic Evaluation" checklist, item codes = S3 xlsx column names, mapping_basis paper_order, text_source translated_substitute / study_supplied, language Chinese.
+
+- `tsai_2017_treeit_h10_closure`: **done**. 3 items, resp 2-5 (nobody used 1), 12 rows. Verification PARTIAL: heuristic means rebuilt from the xlsx reproduce paper Table 3/4 to 3 dp (H10 item-total r 0.903, UI-design alpha 0.892, max deviation 0.0005). That pins the block but not the order within it.
+- `tsai_2017_treeit_h11_undo`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: H11-1/H11-2 (the two "return to previous steps" items) r 0.965; H11-4 "prevent serious errors" tracks the H9 Error block (r 0.978 with H9-2). The order of 1 vs 2 is not established, and 3 is placed by elimination.
+- `tsai_2017_treeit_h12_language`: **done**. 3 items, resp 2-5, 12 rows. PARTIAL: H12-3 (aliases) stands apart (r 0.41 with the other two vs 0.947 between them); the order of H12-1 vs H12-2 is not established (99/101 identical answers).
+  - Anchor override: S1 prints Very unsatisfied..Very satisfied; the article Methods' "1 = strongly disagree to 5 = strongly agree" belongs to the S2 TAM form. S1 labels shipped and disclosed in public_note.
+  - Orchestrator added the four empty `_translated` columns so it matches h10/h11 (the agent had dropped them). No text changed.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (so there is nothing to explain for Step 5c); verify_batch PASS x3; lint clean; irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, against the cached S1 PDF and S3 xlsx):** all confirmed. The S1 H10/H11/H12 wording and anchors match what shipped. The article does contain "1 = strongly disagree to 5 = strongly agree". The Elsevier user-licence clause "may not redistribute, display or adapt" is present in the cached page. S3 has only H8-1..H8-3. H2-4 = H6-3 in 101/101 rows, H11-4 = H9-2 in 97/101 and = H9-4 in 96/101, H12-1 = H12-2 in 99/101, and 42 of 1,378 heuristic item pairs agree in >=93/101 rows. r(H11-4,H9-2) = 0.978.
+
+**For the human:**
+1. **Rights ruling for the whole family (all 17 tables).** The checklist adapts Zhang et al. (2003) J Biomed Inform 36:23-30. Crossref lists that article under the Elsevier open-archive user licence ("may not redistribute, display or adapt ... for non-commercial purposes"). The agents read it as a notice on the article, not terms on the heuristics, and our text comes from the CC BY PLOS S1. The per-heuristic `instructions` line (e.g. "Reversible actions. Users should be allowed to recover from errors...") very likely reproduces Zhang's wording; this is unconfirmed (ScienceDirect 403). No register row written. If ruled restrictive: block the family, or drop the instructions line, before upload.
+2. **`tsai_2017_treeit_h8_message` needs care when it comes up.** S1 prints 4 H8 items; S3 has 3 columns, and the paper's H8 item-total r reproduces from those 3. Which printed item was dropped must be established, not assumed from order.
+3. **Response-data pattern, not filed as a defect:** heavy identical-answer agreement across the S3 file, including content-unrelated cross-heuristic pairs (H2-4 = H6-3 in all 101 rows). It could be straight-lining or duplicated entry. It weakens every correlation-based mapping argument for this family, which is why all three are PARTIAL rather than VERIFIED.
+4. The three sibling tables' `instrument` strings differ slightly in wording. Harmonise them before upload if the family should share one name.
+
+Cap is batch_199; 192 is not the cap. Ending normally.
