@@ -18021,3 +18021,33 @@ All three are determinate blocks from a single source (Leshin et al. 2026, Psych
 1. The CC BY-NC 4.0 deposit licence also governs the transyouth_leshin_2026_* **response** data, and datastandard.md bars NC intake. The licence review of those response tables flagged at batch_189 is still open.
 2. The register's code pattern `^promis|^evpromis` misses `prim_*` and `anx*`. Future PROMIS sweeps need to match on wording or the dictionary Description.
 3. The last sibling, `transyouth_leshin_2026_youth_posaff`, is still pending and will almost certainly block the same way (Rmd `posaff_tscore_pediatric_v1`).
+
+## batch_191 — 2026-09-11T06:19:22-07:00 (3 tables, 3 agents)
+
+**Written 1 / blocked 2 / failed 0. Yield 1/3.** No kills, no retries; 19G available at close. Circuit breaker not tripped (0% failed).
+
+- `trevisan_2018_mscs`: **done**. 77 items MSCS_1..77, resp 1-5, 385 rows; mapping_basis paper_explicit, text_source study_materials (PLOS S1 questionnaire).
+  - All gates clean: validate_items.R --table-sets PASS, audit_batch PASS (no WARNs), verify_batch PASS, lint clean, irw-validate ok.
+  - Verification PARTIAL. Summing items into the seven Table 1 domains (reverse items as 6-resp) reproduces the .sav's own composites 1177-1178/1178 per domain; moving one item to another domain drops agreement to 152-514. Keying sign is right on 77/77 items. Not established: order within a domain x polarity cell, apart from items 11/20/30/41.
+  - **Two source overrides, both re-checked by the orchestrator.**
+    - Paper Table 1 misnumbers items 11/20/30; the S1 numbering is shipped. verify script re-run: MSCS_20 rest-of-domain r = -0.46. MSCS_11 vs MSCS_30 mean r with the reactivity items is 0.116 vs -0.026.
+    - The .sav value labels run backwards (1 = "5- very true or always true") on every MSCS column, MSCS_1 included, not just the reverse-keyed ones. The data are raw circled numbers: MSCS_n_R == 6 - MSCS_n in 100% of cells (32 _R columns), and MSCS_36 (hit/shove) has mean ~2.
+  - Data note, re-checked: `data/trevisan_2018_mscs.py` calls MSCS_54=3.88 (row 590) and MSCS_66=3.64 (row 885) data-entry errors. They are mean-substitution imputations: each respondent's other keyed items average 3.9 and 3.6. Dropping them is right; only the script comment is wrong.
+  - **⚠️ RIGHTS ESCALATION, Ben to rule before upload** (theobald precedent: shipped, flagged, no register row).
+    - Against shipping: the S1 questionnaire footer reads "Jodi Yager and Grace Iarocci. All rights reserved, including translation." (confirmed in S1 text). Under the SKILL.md reserve-a-right test, "including translation" arguably reserves a derivative right. PID-5-BF counted "all rights reserved" among its block reasons.
+    - For shipping: both copyright holders co-authored the CC BY 4.0 article, which says "The scale is available in a usable format in the supplementary material for readers to download to use for their own research or clinical purposes." (confirmed). There is no only/fee/NC/no-redistribution term.
+    - If blocked: delete the CSV and flip queue_state to blocked.
+- `trevisan_2018_aq`: **blocked**, retry test NO. 50-item AQ (AQ_1..50, resp 0/1). The .sav subscale totals match Baron-Cohen 2001's five subscales.
+  - The register row 'Autism Spectrum Quotient (AQ-10)' (family AQ, irw#1955) was applied. ARC clause re-checked in the cached page: "used for research purposes and not for commercial use ... You may not adapt or modify any of these tests, unless permission has been given".
+- `transyouth_leshin_2026_youth_posaff`: **blocked**, retry test NO. PROMIS Pediatric Positive Affect SF 8a v1.0 (8 items, matched to Forrest 2017 Table 3). Blocked by two separate rules, PROMIS register row + OSF CC BY-NC 4.0 (irw#1891).
+  - As batch_190 predicted, all transyouth_leshin_2026_* item text is now blocked.
+
+**Gates:** normalize_nulls 0 changed. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` issues-page entry still owed from batch_188; nothing from this batch.
+
+**For the human:**
+1. **MSCS rights ruling** (above).
+2. **Possible withdrawal: `rmet_higgins_2022_aq` is LIVE** (live_tables.csv: irw_text, published). itemtables/pilot/audit_confirmed.csv records its text as "the standard Autism Spectrum Quotient (AQ-28) verbatim". The AQ register row blocks the family, but its code pattern `^aq` misses this table name, and the row names only AQ-10, with no URL or hash. Widening the row to the whole AQ family (AQ-50/AQ-28/AQ-10) and adding the ARC URL + sha256 above are also Ben's call. Not acted on.
+3. `vanteffelen_2020_aq_hostility` (pending) matches `^aq` by name but is probably the Aggression Questionnaire. It needs reading, not a pattern sweep.
+4. The transyouth CC BY-NC response-data licence review (from batch_189) is still open.
+
+Cap is batch_199; 191 is not the cap. Ending normally.
