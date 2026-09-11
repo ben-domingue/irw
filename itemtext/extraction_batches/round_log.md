@@ -17609,3 +17609,42 @@ Gates: normalize_nulls 0/6 changed; audit_batch 6 PASS, no WARNs; verify_batch 4
   appended raw). Neither was committed.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_183 — 2026-09-10T23:33 (claim) → 23:44 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+
+Tables: sun_2026_eap_methods (5 items), sun_2026_eap_usage (12), sun_2026_tiktok_travel (29), szameitat_2015_multitask_examples
+(43), szameitat_2015_occupation_multitask (15), tan_2026_stem_technology_integration (15). All data_labels; tan also carries a
+VERIFIED row + verify script (positional code derivation; per-respondent join to the Forms export, 80/80 own-column agreement vs
+≤63.7% for any other column).
+
+Gates: normalize_nulls 1/6 changed (occupation_multitask, after the orchestrator's language edit below); audit_batch 6 PASS, no
+WARNs; verify_batch 1 PASS + 5 exempt; lint_verification 6 rows clean; irw-validate ok on all 6; check_provenance.R no errors
+(88 IRW-generated tables, 0 missing an entry).
+
+- **sun_2026_eap closes out:** methods and usage follow the batch_182 shape (`translated_substitute`/`study_supplied`,
+  language=Chinese, questionnaire anchors). Ben's open language ruling now covers 4 sun_2026_eap tables + 6 sun_2024 + sun_2021.
+  sun_2026_tiktok_travel ships the same shape, but on firmer ground: the paper says the English questionnaire was translated and
+  back-translated, and respondents were Douyin users paid in RMB.
+- **szameitat_2015 language, orchestrator HARMONISED — Ben to rule:** the two sibling agents disagreed. examples set
+  language='English; Turkish; Dutch; German'; occupation left it unset (huang_2016_cesd precedent). Orchestrator CONFIRMED the
+  country split: examples 366 ids (TR 101, UK 97, NL 77, DE 41, US 35, Intl 15), occupation 347 (TR 97, UK 94, NL 71, DE 41,
+  US 29, Intl 15), so ~60% answered unpublished translations, against huang's 30/114 French minority. The standard populates
+  language whenever administration was non-English, because that is the backfill signal, so occupation was aligned to examples.
+  Both keep text_source=study_materials with English base fields. A multi-value language string has no precedent. If Ben
+  prefers a single value or unset, change both tables together.
+- **tan_2026 possible keying defect, orchestrator CONFIRMED the numbers:** negatively worded item_09 and item_10 correlate
+  positively with the other 13 items (r 0.22–0.48 and 0.25–0.42; r(09,10)=0.67; n=80). The agent's further claim was that the
+  deposit's `Score` column equals the unreversed 15-item sum on 80/80 rows. That was NOT re-run. There is no codebook, so
+  option_text and instructions are blank and scale direction is undocumented. This concerns the response data, not the item
+  text, and may be worth an issue.
+- **sun_2026_tiktok_travel anchors:** S1 prints 1 Strongly disagree / 2 Somewhat disagree / 3 Disagree. Labels 2–3 are almost
+  certainly transposed, but they were shipped as printed and the swap is disclosed. S1's "Ecited." typo was corrected to
+  "Excited." (the spelling in the data header and Table 1).
+- **Source errors only, no data defects:** sun_2026_eap_usage Table 2's "5 (%)" column matches S2 in 1/36 cells, apparently a
+  typesetting shift (agent claim, not re-run; all means reproduce, orchestrator CONFIRMED the 12 live means 3.73–4.00).
+  sun_2026_eap_methods §7.4 quotes levels 1+2 as "strongly disagree". The szameitat Fig 10 caption says −3..+3 where the data
+  are 0–6. Orchestrator CONFIRMED the occupation mean ordering (Teacher 4.85 … Carpenter/Cleaner 3.30).
+
+Cap is `batch_189`; not reached. Ending normally.
