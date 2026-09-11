@@ -17928,3 +17928,27 @@ lint_verification 5 rows, no problems (NOT_NEEDED row for transreas_mokken writt
 check_provenance 0 IRW-generated tables missing an issues-page entry. No WARNs, so Step 5c had nothing to explain.
 
 **Cap reached:** batch_189 is the Step 0 cap batch. Stopping.
+
+## Triage — batch_174–189 (2026-09-11)
+
+Gates re-run live on all 16 batches (normalize_nulls, audit_batch, verify_batch, lint_verification): no FAIL, no file
+normalized, every WARN one the round had already explained. Reconciled: 69 `done` rows = 69 `__items.csv`, one
+provenance row each, none stamped, all in mapping_verification.csv.
+
+**Staged 62** to `/tmp/dl_174_189/` (selected from `done` rows; each file cmp-identical to its batch copy; none present
+in irw_text or irw_text_2, current or draft). Not uploaded.
+
+**Held 7** (files stay in their batch folders):
+- `theobald_2017_group_dynamics` — rights: ASPECT is CC BY-NC-SA; the CC BY re-release lacks three of ASPECT's eight
+  authors, so the 2026-09-08 originator ruling points to block. Ben to rule.
+- `sun_2021_blockchain_loan_adoption` — language: shipped with no `language` while its sibling Sun China surveys carry
+  `language=Chinese`; suggested harmonising to Chinese. Ben to rule.
+- `szameitat_2015_multitask_examples`, `szameitat_2015_occupation_multitask` — multi-value `language` string
+  ("English; Turkish; Dutch; German") has no precedent. Ben to rule.
+- `transreas_mokken` — item_text holds the Rd task-specification row, not a prompt. Ben deferred.
+- `simsalRbim_Mice_LargeValence`, `simsalRbim_Monkey_LargeValence` — third-person Methods paragraph in `instructions`.
+  Ben deferred.
+
+**BFI-44 withdrawal (Ben, 2026-09-11):** conner_2017_bfi, CV_OASIS_ODSIS_PPE_Novak_2020_BFI, ibrahim_2015_bfi deleted
+from the irw_text / irw_text_2 drafts by `tools/withdraw_bfi44.py` (removed set asserted equal to target set); public
+notes rewritten, register row BFI-44 `block` added. Takes effect at the next release.
