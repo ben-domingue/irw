@@ -17961,3 +17961,5 @@ response-data fact. 8 staged tables got no entry, recorded in `fixes/issues_page
 the verified wording respondents read, with only unpublished anchors or a minor source variant as caveat. The six
 sun_2024 entries were trimmed to the administration-language caveat (unstated anchors and within-block order are
 below the bar).
+
+**Uploaded 2026-09-11 (Ben): 62/62 to irw_text_2, row counts verified.** Draft diff shows all 62 `added`, none `changed`. Stamped `uploaded=2026-09-11` in provenance.csv and mapping_verification.csv (62 + 62 rows, byte delta 1224 as expected from 57+59 blank and 5+3 `NA` priors); the 62 batch `__items.csv` copies removed after cmp against `/tmp/dl_174_189/`. Sidecars stay. datapages/irw#184 stays on HOLD until the release is published.
