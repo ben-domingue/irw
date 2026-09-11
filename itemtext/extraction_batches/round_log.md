@@ -17107,3 +17107,38 @@ Self-Compassion Scale when it is Singelis's Self-Construal Scale.
 LOT-R at `Spanish ISP.pdf` pp. 30–31. `SABFI2_Gallardo_Pujol_2018_LOT` shipped in batch_165 on an
 English fallback that recorded Spanish as unrecoverable within scope — so an already-shipped table
 could be re-extracted with its administered wording.
+
+### Ben's rights rulings, 2026-09-10 (applied)
+
+Asked as two questions against the 15 rights-held tables. Outcome:
+
+**Keep the explicit public-domain / no-cost grants (4 tables, ship rows written, staged):**
+`salleh_2023_aim_iam_fim` (AIM/IAM/FIM, "There is no cost to use these measures."),
+`schalet_2016_hrsa` (HAM-A, public-domain reproduction sheet), `schmidt_2017_pds`
+(PDS, "free to use and access"), `shi_2025_dass21` (DASS, "public domain… copied without
+restriction" — the same page and hash the already-shipped `ptacek2023_dass21` and
+`rosharudin_2023_dass21` relied on, which is why no row existed until now).
+
+**Pull the author-letter tables (2 tables, block rows written, quarantined).** Ben ruled that
+a letter granting research use with a courtesy request attached is NOT sufficient for IRW to
+redistribute the wording. This overturns the reading the extracting agents applied from the ERQ
+precedent (irw#2121, 2026-09-08). `SCS_Suh_2023_SCS` → `quarantine/batch_170/`, `shi_2025_rrs`
+→ `quarantine/batch_172/`, both marked `blocked` in `queue_state.csv`. Neither was ever
+uploaded, so nothing is withdrawn and no issues-page entry is owed.
+
+Two register leads deliberately NOT swept, because a block row reaches the whole corpus and
+these tables have not been examined:
+- `qi_2025_self_construal` (pending) may be the Singelis SCS and would fall under the new block.
+- `kuehner_2017_mw_rumination` is **already shipped** and may be the RRS. Check it before
+  treating the RRS row as applied corpus-wide.
+
+**Open an issue for the silence cases (8 tables, still held):** Zung SAS (`shen_2020_sas20`),
+HBSC FAS II (`schmidt_2017_fas`), the three `shin2024_creactability_*`, and the three ASSIS
+tables (`shan_2020_{g,hs,ph}`). Ben wants the policy question filed rather than ruled per table.
+
+**`SABFI2_Gallardo_Pujol_2018_Micro`: hold** until Ben reads the CC BY-SA 4.0 and CC BY-NC 3.0
+notices himself. `SABFI2_..._Tight` stays held alongside it — it needs a rights check performed,
+not a ruling, since its round never assessed the instrument at all.
+
+Staged for upload after these rulings: **13 tables** in `itemtables/clean/`.
+Issues-page entries for all 13: datapages/irw PR #183 (merge after the upload, not before).
