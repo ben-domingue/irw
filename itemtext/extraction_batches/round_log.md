@@ -18222,3 +18222,78 @@ Retry test: NO for all three. Only a lifted register row or changed holder terms
 3. The next round starts on `turner_2022_cognitive_mediation`, `turner_2022_sr_belief_change` and `tutrin_2020_meq30`.
 
 Cap is batch_199; 198 is not the cap. Ending normally.
+
+## Triage of batch_190–198 and Ben's rulings (2026-09-11)
+
+The chain (3 agents, cap batch_199) ran batch_190–198 with 18 written / 9 blocked / 0 failed and no kills. It
+stopped before batch_199 on the driver's memory pre-flight (available 10G for 33 minutes, while another session's
+R job ran), not on any round failure. batch_199 was never claimed.
+
+**Rulings (Ben, 2026-09-11):**
+1. **trevisan_2018_mscs → BLOCK.** The rights holders' own S1 file reads "Jodi Yager and Grace Iarocci. All rights
+   reserved, including translation."; the CC BY article grants use "for their own research or clinical purposes"
+   only. This is a reserved right plus a research-use grant (courtesy-letter ruling, 2026-09-10), not the theobald
+   carve-out, where the originators re-released the wording under CC BY with no reservation. Quarantined:
+   `quarantine/batch_191/`.
+2. **tsai_2017_treeit → ship the three TAM tables only; BLOCK all 13 heuristic-checklist tables** (H1–H7, H9–H14).
+   The Zhang et al. (2003) Elsevier user-licence question stays unresolved, and on their own the heuristic tables are
+   low value: within-block order is not established for any of them, and S3 carries identical-answer columns. The
+   ruling also settles that the escalation does not reach the TAM tables (Davis 1989 adaptation, no shared
+   wording). Quarantined: `quarantine/batch_192`–`196/`. **H8 stays blocked** (option c; the parked heuristic-level
+   candidate is not shipped).
+3. **rmet_higgins_2022_aq → WITHDRAW**, and widen the register's AQ row to the whole ARC AQ family. The live table
+   served the 28-item AQ-Short verbatim (read back 2026-09-11). `tools/withdraw_aq28.py` deleted it from the
+   irw_text draft (697 → 696 tables; the draft set is exactly `removed rmet_higgins_2022_aq__items`). The table has
+   no provenance row (pilot 2026-08-21), so this log is its record; it had no issues-page entry. It remains served
+   at prior version tags, as every withdrawal does.
+4. **Scope:** fold handoff rulings 1–4 (theobald, sun_2021, szameitat, register rows) into this pass. Items 5–6
+   (ali_2021_iesr partial withdrawal, German IES-R terms, Taylor 1953 MMPI check) stay owed.
+
+I stated the heuristic count as "11" when asking. The range named in the question (H1–H7, H9–H14) is 13, and
+the ruling was applied to all 13.
+
+**Applied:**
+- theobald_2017_group_dynamics: note now cites the SHIP ruling.
+- sun_2021_blockchain_loan_adoption: `language=Chinese` column added (105 rows, +1,061 bytes exactly),
+  text_source translated_substitute / translation_source study_supplied, public_note written. Gates re-run on a
+  scratch copy: normalize_nulls 0 changed, audit_batch PASS, verify_batch PASS, irw-validate ok.
+- szameitat_2015_*: both files already carried `English; Turkish; Dutch; German`. The semicolon multi-language
+  convention is now in itemtext_standard.md (field table + "Administered language"). The occupation table's note
+  records that its LANGUAGE paragraph ("left unset") is superseded.
+- **Uploaded to the irw_text_2 draft and stamped `2026-09-11`** (8 tables): sun_2021_blockchain_loan_adoption,
+  szameitat_2015_multitask_examples, szameitat_2015_occupation_multitask, theobald_2017_group_dynamics,
+  tsai_2017_treeit_tam_bi, tsai_2017_treeit_tam_peou, tsai_2017_treeit_tam_pu, tuason_2021_covid_coping_enjoy.
+  Staged from `done` rows into the fresh `/tmp/dl_0911_pm/` with each file cmp-checked; no name was present in
+  either shard's current or draft; red_up verified 8/8 row counts; the draft set is 8 added, 0 changed. Stamps
+  are +10 bytes per row in 5 provenance files and mapping_verification.csv (16 rows, re-read from disk). Batch
+  copies were deleted after a second cmp.
+- Register (`instrument_rights_register.csv`, 74 → 81 records, appended in place as QUOTE_ALL + CRLF): block rows
+  SATAQ, BSQ (Body Shape; the abdullah_2024_bsq_* Bloating tables are excluded by code pattern), SLS, SHAPS
+  (secondhand CamCOPS evidence, recorded as such), TFEQ (PhenX counter-claim recorded), SCHWARTZ (wide scope, as
+  ruled); ship row MACE. The AQ row is replaced in place: it now covers AQ-50/28/10 with the ARC clause, both URLs
+  and sha256s, and code pattern `^AQ_?[0-9]{1,2}$|^aq10_[0-9]{1,2}$|^aq[0-9]{1,2}cont$`, narrowed from `^aq`.
+  Every hash was re-computed against the cached files. Where the evidence is weak, the row says so.
+- Issues page: datapages/irw#187 adds entries for all 8 (543 → 551, additive, parsed under Python and R).
+  `tian2026_digital_competence`, which `check_provenance.R` reported as owed since batch_188, is already on
+  origin/main; the report came from a stale local irw_site checkout.
+
+**Retroactive corpus audits PAUSED (Ben, 2026-09-11):** "we are constantly auditing the past corpus based on
+every minor change in a way that i don't think is helpful. we should pause this and come back to do a large audit
+at a later date." From now on, rulings and register rows apply to incoming tables. Leads on already-published
+tables are banked here in one line each, and nobody sweeps, investigates or withdraws on them until the large
+audit. The AQ-28 withdrawal above was ruled before the pause. Leads banked from this pass:
+`rmet_higgins_2022_rmet` (live; the same ARC clause covers the Eyes Test), the Schwartz response-table leads
+named in that row's notes, `sokolovskii_2021_tfeq`, and the PROMIS/DIENER-NC pattern gaps below.
+
+**Still open from these rounds (not ruled, not filed):**
+- `tuason_2021_covid_coping_enjoy` response data: `data/tuason_2021_thriving_covid.py` should rebuild Enjoy_* from
+  the `Emjoy` pick string or drop the middle well-being group (321 false all-zero rows). The item text shipped
+  with the defect disclosed.
+- The transyouth_leshin_2026_* response data sit under a CC BY-NC 4.0 OSF deposit (licence review open since
+  batch_189).
+- Register pattern gaps: PROMIS `^promis|^evpromis` misses `prim_*`/`anx*`; DIENER-NC's `^flourish|^spane` misses
+  `tuason_2021_wellbeing`. Leads, not widened, since a wider code pattern sweeps the corpus.
+- `vanteffelen_2020_aq_hostility` (pending) matches `^aq` by name but is probably the Aggression Questionnaire.
+- The batch_192–194 verify scripts' single-statistic controls are weaker than the later whole-profile controls.
+  This is moot while the heuristic tables are blocked.
+- `data/trevisan_2018_mscs.py` comment calls two mean-substitution imputations "data-entry errors".
