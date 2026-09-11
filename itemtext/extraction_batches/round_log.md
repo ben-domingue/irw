@@ -17203,3 +17203,64 @@ irw-validate clean on all 5; check_provenance clean (0 IRW-generated tables with
   PHCS5 is only weakly supported.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_175 — 2026-09-10T21:09 (claim) → 21:34 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 367 pending; cap batch_189). Second
+round at SIX agents: no kills, all six agents returned (slowest 8.8 min); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `silva_2023_ecohis` | **written** | 65 (13×5) | `paper_explicit` | VERIFIED, verify PASS |
+| `simsalRbim_Human_LargeValence_2017` | **written** | 14 (7×2) | `data_labels` | NOT_NEEDED |
+| `simsalRbim_Human_LowValence_2017` | **written** | 14 (7×2) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `simsalRbim_Mice_LargeValence` | **written** | 179 (5 items) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `simsalRbim_Monkey_LargeValence` | **written** | 127 (5 items) | `data_labels` | NOT_NEEDED |
+| `silva_2018_tfeq` | **blocked** (rights) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0. Yield 5/6 (83%).** Breaker not near (0% failed).
+
+Gates: normalize_nulls 0 files changed; audit_batch 1 PASS / 4 WARN (all four simsalRbim: 100% blank item_text
+and option_text — expected, explained in notes.csv); verify_batch PASS=3, MISSING(exempt)=2; lint_verification
+0 ERROR / 1 WARN (silva_2023_ecohis option_text blank by design, explained); irw-validate 0 ERROR, 4 WARN
+name_charset (mixed-case live table names, which the itemtext must match); check_provenance clean.
+
+### Notable
+- **Orchestrator harmonized the four simsalRbim tables to one convention before merge.** Agents had split: the
+  Monkey agent put the paper's liquid descriptions ("100 mM NaCl", "banana juice (diluted 1:3…)") in `item_text`,
+  and the Mice agent left `item_text` blank with the paper's Methods test paragraph in `instructions`. Ruled for
+  the Mice form under the 2026-09-05 picture-stimulus ruling: item identity stays in the code, and `item_text` holds
+  only wording a respondent read. Monkey was revised by its own agent. Its liquid descriptions moved to
+  `public_note`, its `instructions` is now the paper's verbatim macaque two-bottle paragraph, and the gate
+  re-passed. The two Human tables were also aligned on instruction formatting (newline paragraphs; LargeValence
+  had dropped "Press any key to continue.", now restored as a verbatim transcript). **Open question for Ben:** for
+  ANIMAL tables, does a third-person Methods paragraph belong in `instructions`, a field meant for what subjects
+  were told? Both animal tables do it now, so reversing it is a one-column change on two files.
+- **simsalRbim response-data questions (not itemtext):**
+  - The simsalRbim_data README says "You may use the data for scientific purposes only." while its LICENSE file
+    is GPL-3.0. Three agents flagged it independently. This may matter for the RESPONSE tables' licence under the
+    data standard.
+  - Participant counts don't match the paper: Human Large has 32 ids vs 25 in the paper, Human Low 63 vs 48.
+    Rankings still reproduce the paper (Low: rho 0.821, 0.857 with the tied Sunset/Flowers pair swapped; the paper
+    reports 0.86).
+  - Monkey `resp` is the amount DRUNK (banana reaches 500, the bottle size), though the paper says the amount
+    remaining was measured.
+- **silva_2023_ecohis: code 5 may be "Don't know", not the top of the scale.** The paper says only "5-point Likert";
+  the original ECOHIS has 5 frequency options plus Don't know. **Orchestrator CONFIRMED** from the deposit xlsx:
+  pooled mean caries count (ceod) by response code 1–5 = 0.92 / 2.41 / 2.89 / 3.81 / **2.71** (n = 3663 / 499 /
+  521 / 102 / 38), which breaks the monotone trend at 5. Suggestive, not proof. `option_text` ships blank, with a
+  public_note warning. The authors' SCORE averages 5s in as highest. Possible response-data issue; settle it from
+  the Tesch 2008 Brazilian form's option numbering. Also, `translated_substitute`: the administered wording was
+  Portuguese, and the shipped English is the authors' Table 2 wording ("Has your child ever…"). Mapping VERIFIED
+  by 7 per-item statistics; the closest pair (12/13) is separated by SD 0.724 vs 0.737.
+- **silva_2018_tfeq blocked on rights (retry test NO).** The TFEQ is sold by Pearson as the Eating Inventory
+  (1988, level B), under the same Pearson Terms page (identical sha256) as the SCL register row. Wording WAS
+  located: Silva 2017 UNESP thesis Anexo 3, codes and labels matching the live data; a mapping check is banked as
+  verify_silva_2018_tfeq.R, PASS. **Counter-evidence for a human:** PhenX says TFEQ-R18 is "freely available;
+  permission not required", and the thesis calls it public domain; neither is the rights holder. Not written by the
+  round: a TFEQ/Eating Inventory register row (`^TFEQ[0-9]+$`), which would also govern `sokolovskii_2021_tfeq`
+  (name match only). Row added to pending_index_notes.csv.
+- Minor fix this round: `pending_index_notes.csv`'s last row ended in LF while the rest are CRLF. The appended row
+  normalized that line ending.
+
+Cap is `batch_189`; not reached. Ending normally.
