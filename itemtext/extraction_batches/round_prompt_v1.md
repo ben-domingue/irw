@@ -222,6 +222,9 @@ Each subagent prompt must tell it to:
 - cd to /home/ben/irw-queue-runner/itemtext/ and read
   .claude/skills/irw-auto-itemtext/SKILL.md in full (plus references/itemtext_standard.md) before
   doing anything, and follow it precisely.
+- Never send Ben's (or anyone's) email address to an outside service — not as an API `email`/`mailto`
+  parameter, User-Agent, or header. APIs that ask for a contact email (Unpaywall, Crossref polite
+  pool, OpenAlex) are called without one, or skipped. batch_177's SHAPS agent passed it to Unpaywall.
 - Process its ONE assigned table via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the
