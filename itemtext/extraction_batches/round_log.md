@@ -17575,3 +17575,37 @@ irw-validate ok on all 5; check_provenance.R no errors (88 IRW-generated tables,
   near-1 alphas (.954-.986).
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_182 — 2026-09-10T23:15 (claim) → 23:32 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch). Circuit breaker 0% failed.
+
+Tables: sun_2024_price_value, sun_2024_risk, sun_2024_task_tech_fit, sun_2024_usage (paper_explicit, PARTIAL — construct
+pinned by Table 7 HTMT + a 720-way block-label permutation and a 281/281 join to mmc1.xlsx; within-block order rests on
+the paper's 1-3 numbering), sun_2026_eap_content (11 items), sun_2026_eap_difficulty (6 items) (both data_labels, NOT_NEEDED).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 6 PASS, no WARNs; verify_batch 4 PASS + 2 exempt; lint_verification
+6 rows clean; irw-validate ok on all 6; check_provenance.R no errors (88 IRW-generated tables, 0 missing an entry).
+
+- **Language convention (still Ben's open decision from batch_181):** all four sun_2024 tables were told to follow the
+  batch_181 sun_2024 shape (`translated_substitute`/`study_supplied`, language=Chinese) so the paper's six tables stay
+  uniform whichever way he rules. Both sun_2026_eap agents independently inferred Chinese too (Wenjuanxing platform,
+  Hubei Institute of Fine Arts, Chinese punctuation `、`/`：` in the S2 headers) and shipped the same shape, citing
+  shi_2021_gentrification. So the ruling now covers 8 shipped tables (6 sun_2024 + 2 sun_2026_eap) plus sun_2021,
+  and the queue head still holds sun_2026_eap_methods / eap_usage, which should follow it.
+- **sun_2024 Table 6 reporting errors, orchestrator CONFIRMED:** printed CR is impossible given the printed AVE for three
+  loadings ≤1: PV 0.984 (must be 0.9887-0.9888), TTF 0.985 (0.9891), U 0.978 (0.9834-0.9835). Usage alpha printed
+  0.975, mmc1.xlsx gives 0.9724, while every other construct's alpha reproduces (INN .9608, PV .9827, TTF .9829,
+  PR .9634, PE .9809). Not data defects; none of it was used as mapping evidence. An agent's further claim that Table 6's
+  per-item bootstrap-SD rows for INN and U are swapped rests on its own bootstrap and was NOT re-run.
+- **sun_2024 citations [77] TTF, [78] PV, [79] PR and [81] U all check out.** Only batch_181's PE [80] is wrong.
+- **sun_2026_eap_content, orchestrator CONFIRMED:** live item means 3.88/3.90/3.84/3.87/3.81/3.82/3.85/3.78/3.84/3.83/3.76
+  equal Table 5, pinning resp 5 = "Very Important". The paper's Methods anchors ("Very Unimportant") differ in wording
+  from the S1 questionnaire ("Not Important at All"); the questionnaire's wording was shipped.
+- **sun_2026_eap_difficulty:** the Section 3 prompt asks about "severity" but the published scale is agreement; both shipped
+  as published. Table 4 (90 percentages, 18 means) reproduces per the agent.
+- **Orchestrator slips caught before commit:** the claim rewrite first dropped queue_state.csv's CRLF line endings
+  (whole-file diff; restored) and a csv-module merge re-quoted all of mapping_verification.csv (restored; 6 rows
+  appended raw). Neither was committed.
+
+Cap is `batch_189`; not reached. Ending normally.
