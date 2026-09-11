@@ -16773,3 +16773,43 @@ No WARNs to explain.
 
 Queue after this round: **397 pending, 755 done, 174 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_168 — 2026-09-10 17:04–17:20 PDT — 4 tables, 3 written / 1 blocked / 0 failed
+
+Four agents, no kills. Yield 3/4 (75%); the one block is determinate (retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `saputra_2023_perceived_usefulness` | blocked | — | — | wording never published |
+| `schafer_2016_music_effects` | **written** | 30 (3×10) | `paper_explicit` | VERIFIED, verify PASS |
+| `schafer_2016_music_goals` | **written** | 30 (3×10) | `data_labels` (name-preserving header rename) | NOT_NEEDED |
+| `schalet_2016_hrsa` | **written** | 70 (14×5) | `paper_explicit` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies (no WARNs to explain); verify_batch PASS=2,
+MISSING(exempt)=1; lint_verification clean (3 rows); irw-validate ok on all 3; check_provenance no failures
+(13 `mixed` review items, all pre-existing).
+
+### Notable
+
+- **schafer_2016_music_effects / _goals (same paper + S1):** the study's own diary questions from a CC BY PLOS ONE
+  article. Language=German is *inferred* (Chemnitz; German S1 sheet name; German free-text entries), not stated;
+  no German wording published, so the author's English ships as translated_substitute/study_supplied with a
+  public_note. S1 header `effects emotion and mood` vs the paper's "arousal and mood regulation": resolved by
+  per-item means. **Orchestrator Step 5b re-check CONFIRMED** from irw_fetch with independent code: effects
+  M/SD 4.6/3.0, 3.2/2.9, 6.2/2.8 and goals 4.5/3.1, 3.2/2.9, 6.2/3.0 (self-awareness / social / arousal-mood)
+  match the paper. Minor cosmetic inconsistency between the siblings, left as-is: effects recorded
+  `paper_explicit` (+ verify script), goals recorded `data_labels`; goals ships empty `_translated` columns,
+  effects omits them; instrument-name strings differ in pattern.
+- **schalet_2016_hrsa — rights decision owed before upload:** canonical HAM-A wording from the UF Psychiatry
+  reproduction sheet (study published none; `.sav` labels generic). UF sheet and CamCOPS/NINDS CDE both state
+  "The HAM-A is in the public domain"; no `instrument_rights_register` Hamilton row exists and the round did
+  not write one. Instructions are that sheet's rater instruction, not confirmed as the trial's. Mapping
+  PARTIAL: paper Table 2 POMP subscale totals reproduce 23/24 cells exactly (24th within rounding; all 40
+  psych↔somatic swaps miss by ≥1.10), 10/14 items pinned by HRSD/BAI twin correlations; order within
+  {a03,a05} and {a07,a08} rests on paper numbering only. Agent left hints for the pending sibling
+  `schalet_2016_hrsd` (atypical alternates hrsd04a–06a/12a/16a scored via MAX(); week-8-only items 18–24).
+- **saputra_2023_perceived_usefulness:** same gap as its batch_167 sibling; agent additionally checked the
+  Mendeley Data deposit 448zhfvrm7 (v1 adds demographics only, v2 = S1). No other saputra_2023_* in queue.
+
+Queue after this round: **393 pending, 758 done, 175 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
