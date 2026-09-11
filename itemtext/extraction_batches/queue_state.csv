@@ -152,7 +152,7 @@ enem_2021_1mil_ch,excluded,,
 enem_2021_1mil_lc,excluded,,
 enem_2021_1mil_mt,excluded,,
 enem_2022_1mil_cn,excluded,,
-enem_2023_1mil_lc,excluded,,
+enem_2023_1mil_lc,done,batch_enem_2023,2026-09-11T03:50:30
 enem_2024_1mil_ch,excluded,,
 enem_2024_1mil_cn,excluded,,
 enem_2024_1mil_mt,excluded,,
@@ -166,9 +166,9 @@ enem_2021_1mil_cn,excluded,,
 enem_2022_1mil_ch,excluded,,
 enem_2022_1mil_lc,excluded,,
 enem_2022_1mil_mt,excluded,,
-enem_2023_1mil_ch,excluded,,
-enem_2023_1mil_cn,excluded,,
-enem_2023_1mil_mt,excluded,,
+enem_2023_1mil_ch,done,batch_enem_2023,2026-09-11T03:50:30
+enem_2023_1mil_cn,done,batch_enem_2023,2026-09-11T03:50:30
+enem_2023_1mil_mt,done,batch_enem_2023,2026-09-11T03:50:30
 enem_2024_1mil_lc,excluded,,
 enem_2025_1mil_ch,excluded,,
 criticalperiod_syntax,done,batch_011,2026-08-18T00:00:00

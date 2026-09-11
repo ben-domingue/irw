@@ -71,7 +71,15 @@ CHECKED <- list(
          review = "mixed",
          why = "Each ships English this project generated"),
     list(field = "key_source",         discloses = "derived_from_responses",
-         why = "Each ships an answer key this project derived rather than transcribed")
+         why = "Each ships an answer key this project derived rather than transcribed"),
+    ## Added 2026-09-11 (#1848, ENEM 2023). Five items had figures the source never
+    ## described in words, so this project wrote descriptions into item_text. Same
+    ## shape as the two above: IRW-authored content in a content field. It is a
+    ## column of its own rather than a `text_source` value because text_source
+    ## already carries claims other checks read (`translated_substitute` above,
+    ## `canonical_instrument` for the rights sweep), and a table can be both.
+    list(field = "description_source", discloses = "partly_generated",
+         why = "Each ships descriptions of figures or diagrams this project generated")
 )
 
 bad <- list()
@@ -209,6 +217,59 @@ if (length(sub_blank) || length(sub_nocol))
         "\nrecord. Fill translation_source on the rows named below (irw#1970).\n",
         sep = "")
 
+## Generated descriptions, checked against the text itself (ratified 2026-09-11, #1848).
+##
+## `description_source=partly_generated` is only worth anything if the marker it
+## promises is really there, and the rule that matters most is one no provenance
+## field can express: generated text never goes in option_text. A generated label on
+## a response category is what someone doing distractor analysis joins to `resp` and
+## reads as printed on the page -- the inline marker helps a human reader and does
+## nothing for a merge. ENEM 2023 shipped ten such cells before review. So the
+## __items.csv beside each batch provenance file is read, and three things fail:
+##   1. a marker anywhere in option_text / option_text_translated;
+##   2. a marker in item_text / item_text_translated on a table not recorded as
+##      description_source=partly_generated (so no disclosure would be owed);
+##   3. partly_generated with no marker at all (the claim cannot be checked by grep).
+## Only item files still on disk are read; an uploaded batch whose CSVs were removed
+## has nothing to check. Add a language's marker to GEN_MARKER when one first ships --
+## the English one is required in the _translated columns regardless, so an unknown
+## base-field marker is still caught on item_text_translated.
+GEN_MARKER <- "\\((AI-generated|gerada por IA)\\)"
+marker_bad <- character(0)
+for (f in files[grepl("/itemtables/batch_[^/]+/provenance\\.csv$", files)]) {
+    x  <- read.csv(f, stringsAsFactors = FALSE, colClasses = "character")
+    ds <- if ("description_source" %in% names(x))
+        setNames(ifelse(is.na(x$description_source), "", trimws(x$description_source)),
+                 x$table) else setNames(rep("", nrow(x)), x$table)
+    for (it in Sys.glob(file.path(dirname(f), "*__items.csv"))) {
+        tbl <- sub("__items\\.csv$", "", basename(it))
+        claims_gen <- identical(unname(ds[tbl]), "partly_generated")
+        raw <- readLines(it, warn = FALSE, encoding = "UTF-8")
+        if (!any(grepl(GEN_MARKER, raw))) {
+            if (claims_gen)
+                marker_bad <- c(marker_bad, sprintf(
+                    "  %-44s partly_generated, but no inline marker anywhere", tbl))
+            next
+        }
+        d <- read.csv(it, stringsAsFactors = FALSE, colClasses = "character",
+                      encoding = "UTF-8")
+        hit <- function(cols) {
+            cols <- intersect(cols, names(d))
+            if (!length(cols)) return(logical(nrow(d)))
+            Reduce(`|`, lapply(cols, function(k) grepl(GEN_MARKER, d[[k]])))
+        }
+        opt <- hit(c("option_text", "option_text_translated"))
+        if (any(opt))
+            marker_bad <- c(marker_bad, sprintf(
+                "  %-44s generated text in option_text, items: %s", tbl,
+                paste(unique(d$item[opt]), collapse = ", ")))
+        if (any(hit(c("item_text", "item_text_translated"))) && !claims_gen)
+            marker_bad <- c(marker_bad, sprintf(
+                "  %-44s marked generated text in item_text, but description_source is %s",
+                tbl, sQuote(if (is.na(ds[tbl])) "(no provenance row)" else ds[tbl])))
+    }
+}
+
 ## One table, two records that disagree. Reported, never enforced: which record
 ## holds is a judgement about the evidence, not something a script can settle.
 cl <- do.call(rbind, claims)
@@ -262,6 +323,12 @@ if (length(bad)) {
             cat("  (empty is NOT allowed on a text_source=translated_substitute row",
                 "-- irw#1970)\n")
     }
+}
+
+if (length(marker_bad)) {
+    cat("\nGENERATED-TEXT MARKERS (#1848: generated descriptions belong in item_text only,",
+        "\nalways marked, on a description_source=partly_generated row):\n", sep = "")
+    cat(marker_bad, sep = "\n"); cat("\n")
 }
 
 ## A machine translation is IRW-generated content, so it is disclosed publicly.
@@ -348,7 +415,8 @@ if (file.exists(page) && (length(needs_note) || length(held_dropped))) {
                 "\n", sep = "")
         }
         cat("  The standing ruling is that IRW-generated content carries a line on\n",
-            "  the issues page (translations 2026-09-02, derived answer keys 2026-09-03).\n", sep = "")
+            "  the issues page (translations 2026-09-02, derived answer keys 2026-09-03,\n",
+            "  generated descriptions 2026-09-11).\n", sep = "")
     }
 } else {
     undisclosed <- character(0)
@@ -379,4 +447,5 @@ if (file.exists(page) && length(needs_review)) {
 ## copy of the page we read -- otherwise a colleague's branch checkout would
 ## fail everyone's gate for a defect that is not there. This exact false
 ## positive happened on 2026-09-02, minutes after the 60 entries were merged.
-quit(status = if (length(bad) || (length(undisclosed) && page_is_current)) 1L else 0L)
+quit(status = if (length(bad) || length(marker_bad) ||
+                  (length(undisclosed) && page_is_current)) 1L else 0L)
