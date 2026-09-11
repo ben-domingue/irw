@@ -17648,3 +17648,50 @@ WARNs; verify_batch 1 PASS + 5 exempt; lint_verification 6 rows clean; irw-valid
   are 0–6. Orchestrator CONFIRMED the occupation mean ordering (Teacher 4.85 … Carpenter/Cleaner 3.30).
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_184 — 2026-09-10T23:46 (claim) → 2026-09-11T00:05 (close), 6 agents, 6 tables
+
+**5 written / 1 blocked / 0 failed — yield 83%.** No kills (19G available at launch). Circuit breaker 0% failed.
+
+Tables: taylorabdulai_2025_incentives (7 items, reconstructed, VERIFIED), teicher_2015_mace_distress_helpless (35, paper_order,
+PARTIAL), teicher_2015_mace_distress_terrified (35, paper_order, PARTIAL), teicher_2015_mace_emot_neglect (5, reconstructed,
+VERIFIED), teicher_2015_mace_nonverbal (5, reconstructed, VERIFIED). Blocked: tanck_2021_edeq (EDE-Q rights register row, retry NO).
+
+Gates: normalize_nulls 2/5 changed (the two files the orchestrator rewrote, below); audit_batch 3 PASS + 2 WARN (explained in
+notes.csv, expected); verify_batch 5 PASS; lint_verification 5 rows clean; irw-validate ok on all 5; check_provenance.R no errors
+(88 IRW-generated tables, 0 missing an entry).
+
+- **MACE rights — Ben to register:** no instrument_rights_register row exists for the MACE. All four agents independently found
+  no restriction: Teicher & Parigger published every form as supplements to their own CC BY article ("provided as open access or
+  with General Public License V2 (MACEscore) to help facilitate their free use as research tools"), no copyright text in the S3
+  docx. Ship-shaped, but rounds may not write ship rows, so it is unregistered; quotes and sha256s are in provenance notes. Six
+  more teicher_2015_mace_* tables remain pending and will hit the same question.
+- **MACE sibling harmonisation, orchestrator:** distress_helpless and distress_terrified agreed exactly on item_text (35/35) and
+  the same 4 deliberate blanks, but shipped section_prompt differently (full block intro vs first sentence only). emot_neglect
+  put "Please check all ages that apply." in instructions where nonverbal (which shares both section prompts) kept it in
+  section_prompt. Harmonised both pairs to the literal full intro as printed, instructions blank for the checklist tables;
+  provenance notes updated to say so. The age-grid sentence arguably describes the untabulated age checkboxes — if Ben prefers
+  first-sentence-only, change all four together.
+- **MACE distress 4-item blank (both tables):** the published S3 MACE-X is a post-collection revision. At H/O_Adults_argue it
+  reads "argue with mother/father", but the paper says hearing/observing adults arguing and the data fit that (448/458 O=1 also
+  H=1). At Attempt_sex_sib/Intercourse_sib it reads "Had or attempted..." and "Threatened to harm your sibling", but
+  Intercourse_sib is 0.8% (7/839), all nested in Attempt_sex_sib. Agent numbers, not re-run by the orchestrator. Blanks disclosed in public_note.
+  Helpless agent also flags a paper Table 9 label conflict (item 19 "touched or fondled" vs o_touch_them's form wording).
+- **teicher_2015_mace_nonverbal response-data gap, orchestrator CONFIRMED:** the paper's non-verbal emotional abuse scale has 6
+  items; data/teicher_2015_mace_items.py deliberately excluded Adult_resposibility (MACE-X 65, "not clearly matched to a named
+  subscale" in its header), so the live table has 5 (Closet 3.3, Financial_pressure 37.5, Kept_secrets 30.4, P_diff_please 43.8,
+  P_no_time 24.1 %Yes). Worth an issue; public_note discloses it.
+- **teicher_2015_mace_emot_neglect polarity, orchestrator CONFIRMED:** stored as answered, not reversed (P_loved_you 98%,
+  P_special 96%, Fam_strength 89% Yes). public_note written.
+- **MACE distress resp=0 is structural:** ~92% of zeros are for events the respondent did not endorse; 30 (helpless) / 18
+  (terrified) resp=1 rows sit on non-endorsed events. Agent numbers, not re-run. Data property, not itemtext.
+- **taylorabdulai_2025_incentives is check-all-that-apply, orchestrator CONFIRMED:** per-respondent Yes counts 0:120 1:179 2:41
+  3:21 4:3 5:7 6:1 7:5; 412 Yes over 377 ids, so resp=0 means "not selected". item_text is Table 4 labels (questionnaire
+  unpublished); VERIFIED by 7/7 exact frequency matches, all distinct.
+- **tanck_2021_edeq:** Step 3b confirmed EDE-Q 6.0 German (stored subscale scores reproduce under the standard key, 8/8, max diff
+  0.0000). CREDO page sha256 unchanged. Data notes: item17 all 0 (orchestrator CONFIRMED, 146/146); .sav value labels are 1–7
+  over stored 0–6 (stored values correct); item14>item13 skip-logic violations in 5 pre / 3 post (agent numbers).
+- **Email in processing scripts, orchestrator CONFIRMED:** data/tanck_2021_mirror.py and data/teicher_2015_mace_items.py both send
+  Ben's address in their User-Agent. Neither was run this round; the scripts need a hygiene fix.
+
+Cap is `batch_189`; not reached. Ending normally.
