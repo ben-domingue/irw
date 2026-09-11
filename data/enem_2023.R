@@ -11,6 +11,15 @@ ALPHABET <- c("A", "B", "C", "D", "E", ".", "*")
 # the five that are actual answers; anything else in TX_GABARITO is not scorable
 ANSWER_KEYS <- c("A", "B", "C", "D", "E")
 
+# INEP-FLAGGED ITEM KEPT ON PURPOSE (ruled 2026-09-11, #1848). ITENS_PROVA_2023 sets
+# IN_ITEM_ABAN = 1 on two MT items. 14887 has TX_GABARITO "X" (no key, "Exclusão
+# pedagógica") and is dropped below as annulled. 86360 keeps a valid key (D) and was
+# excluded from INEP's own scoring for "Bis<0,01 e Problemas na convergência": it barely
+# discriminates. It was really administered and its responses are scored against a
+# printed key, so it STAYS in enem_2023_1mil_mt. The rule: drop an item only when it has
+# no scorable key; an item INEP set aside for its statistics is data, and is disclosed
+# rather than removed.
+
 # INEP's own per-area presence flag: 0 = absent, 1 = present, 2 = eliminated
 PRESENCE_COLS <- paste0("TP_PRESENCA_", c("CN", "CH", "LC", "MT"))
 

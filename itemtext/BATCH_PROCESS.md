@@ -65,9 +65,13 @@ worked example: `itemtables/batch_enem_2023/`.
 
 1. **Source.** INEP's accessibility booklet (the LARANJA Braille / Adaptada Ledor text shipped in
    the microdata) is the primary source where that year has one, because INEP wrote its own
-   descriptions of figures into it. The standard booklet PDF fills items the accessibility
-   booklet substitutes away, and is the only source for a year without one. The provenance note
-   says which items came from where.
+   descriptions of figures into it. It does **not** carry the same items as the regular booklets:
+   in 2023 the CN and MT accessibility booklets each swap two figure-only items for two others.
+   So before joining by position, compare the accessibility `CO_PROVA`'s item set in
+   `ITENS_PROVA_<YYYY>.csv` with the regular booklet's. Items only in the regular set come from
+   the standard booklet PDF, which is also the only source for a year without an accessibility
+   booklet. Items only in the accessibility set are not in the response tables and are not
+   shipped. The provenance note says which items came from where.
 2. **Generated text.** Descriptions this project writes go in `item_text` only, marked inline,
    and the table carries `description_source=partly_generated` (see "Generated descriptions"
    under Settled rules). Items whose printed options are bare graphs or diagrams ship blank
@@ -82,7 +86,10 @@ worked example: `itemtables/batch_enem_2023/`.
    the same round as that year's upload.
 6. **Items INEP annulled are not shipped.** #1942 removed them from the response tables
    (TX_GABARITO `X`; ten across the years), so item text that includes one fails the item-set
-   gate.
+   gate. **An item INEP flags `IN_ITEM_ABAN = 1` but that keeps a valid key is kept and
+   disclosed** (ruled 2026-09-11): 2023 MT `86360`, set aside by INEP for "Bis<0,01", is
+   really administered data. Check `IN_ITEM_ABAN` in each year's `ITENS_PROVA` and name any
+   such item in the notes and `public_note`.
 
 ## Running a round
 
