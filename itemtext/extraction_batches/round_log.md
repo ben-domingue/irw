@@ -17695,3 +17695,54 @@ notes.csv, expected); verify_batch 5 PASS; lint_verification 5 rows clean; irw-v
   Ben's address in their User-Agent. Neither was run this round; the scripts need a hygiene fix.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_185 — 2026-09-11T00:05 (claim) → 2026-09-11T00:21 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch). Circuit breaker 0% failed. (A first
+dispatch call went out with a placeholder prompt by orchestrator error; that agent correctly did nothing and wrote no files.
+The real six were then dispatched together.)
+
+Tables, all from Teicher & Parigger 2015 (same S3 MACE-X / S9 source as batch_184's four): teicher_2015_mace_peer_physical (5,
+reconstructed, VERIFIED), teicher_2015_mace_physical (6, reconstructed, VERIFIED), teicher_2015_mace_phys_neglect (5,
+reconstructed, VERIFIED), teicher_2015_mace_sexual (12, reconstructed, PARTIAL), teicher_2015_mace_witness_parent (8,
+reconstructed, VERIFIED, 2 blank), teicher_2015_mace_witness_sib (8, reconstructed, PARTIAL, 2 blank).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 4 PASS + 2 WARN (25% blank item_text on the two witness tables — the deliberate
+blanks, explained in notes.csv); verify_batch 6 PASS; lint_verification 0 ERROR, 1 WARN (peer_physical "VERIFIED but hedges" —
+the hedge is about section-prompt rendering only, VERIFIED kept, explained in notes.csv); irw-validate ok on all 6;
+check_provenance.R no errors (88 IRW-generated tables, 0 missing an entry). No data_labels tables, so no NOT_NEEDED rows;
+6 rows appended to mapping_verification.csv (968 -> 974).
+
+- **Agents were seeded with batch_184's harmonised MACE conventions and cached sources** (sha256s re-checked against batch_184
+  provenance). Orchestrator CONFIRMED all 64 item rows for events shared with batch_184's distress_helpless table carry
+  byte-identical item_text, and all six use one instrument string per file with instructions blank. Instrument strings differ
+  cosmetically across the ten MACE tables (e.g. "75-item experimental version" vs "experimental version ... Teicher & Parigger,
+  2015"); not harmonised — Ben's call if wanted.
+- **MACE rights — still unregistered, now 10 tables:** all six agents re-confirmed no instrument_rights_register row and applied
+  batch_184's ship-shaped finding without writing a row. Ben to register.
+- **Blanks carried over, re-derived independently:** witness_parent H/O_Adults_argue (orchestrator CONFIRMED O=1&H=1 448/458) and
+  witness_sib Attempt_sex_sib/Intercourse_sib (orchestrator CONFIRMED 7/7 nested, 7/839). Both agents searched S1, S2, S3 XML,
+  S5/S6 workbooks, S8 manual and the article; administered wording unpublished. Public_notes disclose.
+- **teicher_2015_mace_sexual — paper label override, orchestrator CONFIRMED:** Table 9 / Results / S6 reference sheet label the
+  retained extra-familial item "fondled", but its 5.6% is o_touch_them (5.584 on the 967 complete cases) and not o_fondled
+  (10.548); S6 scoring formulas and S2/S3 wording tie o_touch_them to "Had you touch their body in a sexual way". Kept the form
+  wording by column name, disclosed. 5 of 12 items have no published statistic, hence PARTIAL. The sibling-block
+  attempt/intercourse merger does NOT recur at 16/17 or 29/30.
+- **teicher_2015_mace_phys_neglect P_ER wording, orchestrator CONFIRMED:** S3 MACE-X item 60 ends "...if the need ever arose."; S2
+  MACE item 45 adds ", or would have if needed." Shipped S3 (the developmental form the data used), disclosed, not blanked since
+  item identity is pinned (2.28 vs 2.3 %No). If Ben prefers strict consistency with the four blanks, blank it. Protective items
+  stored as answered (orchestrator CONFIRMED %No P_protect 3.0, P_ER 2.3, Looked_out_each_other 9.5).
+- **teicher_2015_mace_physical data note, orchestrator CONFIRMED:** Spank_open contains Spanked_bare 243/243 and Spanked_strap
+  257/257 — the rule MACEscore's spank_yr_check.R enforces, so S9 Spank_open may be program-corrected rather than the raw tick.
+  Paper Results says the medical-attention hit item was the one eliminated, contradicting its own Table 4 (3.1%, live 3.14) and
+  MACEscore; table and package followed. Response data, not itemtext.
+- **witness_sib verification PARTIAL:** Table 11 pins 4 items; Touch_them_sib/Attempt_sex_sib/Intercourse_sib (6/8/7 of 839)
+  are not separable by data. witness_parent's Adults_hit_med (no _f suffix) pinned to the father item by nesting (13/13 push_f,
+  12/13 hit_f vs 9/13, 7/13 mother).
+- **Availability-audit misclassification — Ben to decide:** teicher_2015_mace_verbal and teicher_2015_mace_peer_verbal are NOT in
+  queue_state.csv because availability_audit_full.csv marks them UNAVAILABLE ("supplements only give short internal column
+  codes"). That is wrong: the S3 MACE-X docx used for all ten shipped MACE tables prints full wording, and MACEscore
+  mace_x_names.R gives code order. Not added to the queue by this round (a human call); they are two cheap tables whose sources
+  are already cached under .cache/teicher_2015_mace_nonverbal/.
+
+Cap is `batch_189`; not reached. Ending normally.
