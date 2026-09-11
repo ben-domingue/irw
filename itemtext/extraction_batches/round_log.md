@@ -17820,3 +17820,50 @@ Notable:
   shipped, disclosed in public_note.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_188 — 2026-09-11T00:59 (claim) → 01:18 (close), 6 agents, 6 tables
+
+**3 written / 3 blocked / 0 failed — yield 50%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+All three blocks are rights blocks with determinate verdicts (retry test NO), not access failures.
+
+Written:
+- tian2026_digital_competence (29 items × 5, data_labels, study_materials, **machine_translation**, VERIFIED). Chinese
+  wording from the BMC Psychology supplement xlsx headers (figshare 10.6084/m9.figshare.32564154.v1, CC BY). The live
+  data matches the deposit cell for cell on 764/764 ids. Every dc_N agrees with its column N on 764/764, and no other
+  column comes closer than 668/764. The paper's Table 2 domain totals reproduce (application 41.516 vs 41.520). Anchors:
+  the paper's English endpoints only, resp 2-4 blank. Three Chinese typos kept as printed; orchestrator CONFIRMED them in
+  the xlsx (item 14 "教学教学", item 20 "知情4", item 23 "的数进行"). The English is IRW-generated, so it **owes an
+  itemtext_issues.qmd entry when uploaded**. check_provenance currently lists it as HELD, so none is owed yet.
+- tomioka_2022_srh_future_needs (7 items, resp 0/1, data_labels, study_materials/study_supplied, NOT_NEEDED). Japanese
+  S2 questionnaire verbatim, the study's English S1 in _translated. Select-all form, so option_text is blank (the
+  reuter_2021_emotions precedent). The public_note says the study's English condenses the Japanese options.
+- tomioka_2022_srh_importance (2 items, resp 1-3, data_labels, study_materials/study_supplied, NOT_NEEDED). Option 4
+  "Not important" was chosen by nobody, so it has no row. Live counts equal the raw file (B1 457/398/10, B2 577/287/1).
+  tomioka_2022_srh_support_types is still pending; both agents left it alone.
+
+Blocked (register rows added for all three, per the rule that a round may write `block`):
+- timss_tam: IEA's released-items clause (non-commercial, no redistribution, covers translations; sha256 7f2ecb5a…0764).
+  Direct precedent is cdm_timss03/07/11 (irw#1891). New register family `TIMSS-IEA`. Strong.
+- tiemensma_2018_iesr: IES-R. CamCOPS docs report Weiss declined reproduction permission on 2015-07-28, and the VA
+  NCPTSD page gives only "request from Weiss". New register family `IES-R`. **Ben to confirm:** the refusal is
+  third-party-reported, the same evidentiary shape as the batch_177 SHAPS block. **Knock-on if it stands:**
+  ali_2021_iesr (batch_003) and beck_2021_iesr (batch_008, German) shipped before the rulings (irw#1954). The
+  availability-audit row calling the IES-R "freely reproduced" is wrong on this evidence.
+- tma: Taylor MAS. Its items are drawn from the MMPI, and UMN Press says it "does not allow for the reproduction of
+  test items … online" (sha256 4303ed75…fc6c). New register family `MMPI`. **Weakest of the three, Ben to rule:** the
+  clause does not name the TMAS; the MMPI derivation rests on secondary sources, with Taylor 1953 unread; item-level
+  correspondence to the MMPI was not checked. Unblock would be quick: codebook, per-item keying and typos are banked
+  in pending_index_notes.csv.
+
+Step 5b checks by the orchestrator: all three rights clauses were re-read in the cached pages and their sha256s re-hashed
+(all match). The TMAS-from-MMPI claim was confirmed in cached psytests.org text. The tian typos were confirmed against
+the xlsx.
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARN; verify_batch 1 PASS + 2 MISSING(exempt, data_labels);
+lint_verification 3 rows, no problems; irw-validate 3 ok; check_provenance 0 IRW-generated tables missing an issues-page
+entry.
+
+Housekeeping: queue_state.csv and instrument_rights_register.csv are CRLF files, and the updates preserved that (a
+naive csv rewrite turns the whole file into diff noise).
+
+Cap is `batch_189`; not reached. Ending normally.
