@@ -17787,3 +17787,36 @@ Notable (source overrides, orchestrator re-checked):
 - teodorini: .sav value labels ("Neither agree nor disagree") preferred over the S3 questionnaire's "neutral"; disclosed in notes.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_187 — 2026-09-11T00:45 (claim) → 00:58 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+
+Written: thanh_2025_attitude (5 items, PARTIAL), thanh_2025_environ_concern (6, VERIFIED), thanh_2025_green_behavior (8,
+PARTIAL), thanh_2025_green_knowledge (6, PARTIAL), thanh_2025_perceived_control (5, PARTIAL) — all paper_explicit,
+translated_substitute/study_supplied (Thanh & Cong 2025 PLOS ONE, CC BY; administered in Vietnamese, only the authors' English
+S1 Appendix published; endpoints-only anchors, resp 2-4 blank). Three agents independently re-ran the paper's PLS model and
+reproduced all 22 Table 2 loadings to ≤0.0005, which pins every retained item; the dropped items (ATT4-5, EGB6-8, GK5-6) and
+PBC order within {1,5}/{2,3,4} rest on the appendix numbering, hence PARTIAL. theobald_2017_group_dynamics (2 items,
+paper_explicit, study_materials, VERIFIED — live counts equal Table 1 in all 12 cells).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 6 PASS, no WARN; verify_batch 6 PASS; lint_verification no problems;
+irw-validate 6 ok; check_provenance 0 machine_translation tables missing an issues-page entry.
+
+Notable:
+- **thanh_2025_* response-data defect, orchestrator CONFIRMED on live data (407 ids, 30 items).** Exactly the 8 items the
+  authors dropped (ATT4, ATT5, EC6, EGB6-8, GK5, GK6) look like uniform random fill: SD 1.39-1.45 (uniform on 1-5 = 1.41) vs
+  0.74-1.02 for the 22 retained; chi-square vs uniform p 0.086-0.59 vs ≤5e-40 for every retained item; max |r| with any other
+  item 0.077-0.134 vs ≥0.51 for every retained item. EC6 r with EC1-5 = 0.018/0.014/0.059/0.054/0.063. Defect is in the
+  authors' S1 File (live == deposit). Text was shipped on those codes with a public_note on each affected table (not a block —
+  unlike teq_novak_2021_teq, the wording attaches correctly; the question is whether the stored responses are genuine).
+  **Ben to decide:** whether those 8 columns should stay in the thanh_2025_* response tables; worth a GitHub issue (not filed).
+- **theobald_2017_group_dynamics — RIGHTS ESCALATION, not self-cleared; Ben to rule before upload.** Both items originate in
+  the ASPECT validation paper (Wiggins et al. 2017, CBE-LSE, PMC5459250), licensed CC BY-NC-SA 3.0. The shipped wording was
+  copied from Theobald et al. 2017 PLOS ONE (CC BY 4.0), whose five authors include ASPECT's copyright holders — so the rights
+  holders themselves republished it under CC BY (SWLS "page you copied from governs" reading), unlike song_2025's third-party CC BY
+  copy. The 2026-09-09 IGDS9-SF "stricter governs" ruling could be read the other way. If blocked, delete the __items.csv; no
+  register row written. Also: Table 1 prints "today's [topic] activity" while Methods quote "today's group activity"; Table 1
+  shipped, disclosed in public_note.
+
+Cap is `batch_189`; not reached. Ending normally.
