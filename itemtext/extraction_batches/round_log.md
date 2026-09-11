@@ -16813,3 +16813,46 @@ MISSING(exempt)=1; lint_verification clean (3 rows); irw-validate ok on all 3; c
 
 Queue after this round: **393 pending, 758 done, 175 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_169 — 2026-09-10 17:16–17:34 PDT — 4 tables, 3 written / 0 blocked / 1 failed
+
+Four agents, no kills. Yield 3/4 (75%). Breaker 25% failed (< 30%), not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `schalet_2016_hrsd` | **failed** (orchestrator override of agent's "blocked") | — | — | — |
+| `schmidt_2017_fas` | **written** | 13 (4 items) | `data_labels` (.sav labels) | NOT_NEEDED; verify script PASS anyway |
+| `schmidt_2017_pds` | **written** | 12 (3×4) | `data_labels` (.sav labels) | NOT_NEEDED |
+| `science_ltm` | **written** | 28 (7×4) | `paper_explicit` (ltm Science.Rd + Eurobarometer 38.1 UK questionnaire) | VERIFIED, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=1;
+lint_verification 0 ERROR, 1 WARN (science_ltm "VERIFIED but evidence hedges" — kept VERIFIED, reasoning in
+notes.csv); irw-validate ok on all 3; check_provenance no failures (schmidt_2017_fas/pds listed as HELD
+machine_translation — issues-page line owed at upload; 13 pre-existing `mixed` review items).
+
+### Notable
+
+- **science_ltm — response-data defect (resp_raw direction), CONFIRMED by orchestrator.** Agent found the three
+  negatively worded items (Environment, Technology, Industry) are stored 1=Strongly agree..4=Strongly disagree,
+  opposite to ltm's factor levels and the live `resp_raw`, via Eurobarometer 38.1 GB codebook marginals (TVD
+  0.023–0.034 reversed vs 0.37–0.70 as documented). Orchestrator re-check from local `ltm::Science`, independent
+  of the codebook: under resp_raw's labels 85% (Industry), 70% (Environment), 72% (Technology) of the 1992 UK
+  sample would *agree* science doesn't matter; and those items correlate weakly *positively* with the positive
+  items (Industry–Comfort .15, –Future .11, –Benefit .11). Shipped option_text follows the data, with public_note.
+  `resp_raw` mislabelled on 1,176 rows — not filed; deserves a data issue. Rights: no Eurobarometer register row;
+  GESIS terms page unread (bot-blocked).
+- **schalet_2016_hrsd — classified failed, not blocked.** Instrument is HRSD-17 "modified to incorporate atypical
+  symptoms" (Reimherr 1998) plus week-8 items 18–24; 8 of 30 items (d04a/05a/06a/12a/16a, d22–d24) have no located
+  wording. Agent said retry test NO, but Reimherr 1998 — the one reference that could print the atypical anchors —
+  returned **HTTP 403**, an unresolved access failure; "when in doubt choose failed". Agent banked a full mapping:
+  paper Table 2 HRSD POMP scores reproduced 12/12 cells on 131 completers from the cached .sav. **Decision for Ben:**
+  ship a partial table with the 22 worded items, or hold for the atypical anchors.
+- **schmidt_2017_fas / _pds (same PLOS ONE S1 .sav):** German .sav labels verbatim, IRW machine translation in
+  `_translated` (issues-page lines owed). FAS: dictionary Description and `data/schmidt_2017_fas.py` comment list
+  car before bedroom; data has `ses_1_1`=bedroom (0–1), `ses_2_1`=vehicle (0–2) — prose wrong, codes fine. PDS: sum of
+  items reproduces paper Table 1 (4.83/1.57 vs 4.82/1.57); `pub_2_1`/`pub_3_1` each merge a girls' and a boys'
+  question; authors' abbreviated stems with ellipses. **Rights owed:** no register row for HBSC FAS II or PDS
+  (both appear free to use; rounds may not write ship rows).
+
+Queue after this round: **389 pending, 761 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
