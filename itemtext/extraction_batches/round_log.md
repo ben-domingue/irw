@@ -17867,3 +17867,64 @@ Housekeeping: queue_state.csv and instrument_rights_register.csv are CRLF files,
 naive csv rewrite turns the whole file into diff noise).
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_189 — 2026-09-11T01:21 (claim) → 01:34 (close), 6 agents, 6 tables
+
+**5 written / 1 blocked / 0 failed — yield 83%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+The one block is a rights block with a determinate verdict (retry test NO), not an access failure.
+
+Written:
+- tomioka_2022_srh_support_types (12 items × resp 0/1, data_labels, study_materials/study_supplied, NOT_NEEDED). This is
+  the last of the tomioka_2022_srh_* tables. Conventions follow the batch_188 siblings, and the source sha256s match
+  them. The live data matches its own deposit column on 865/865 per item, with no other column above 758. B7-11 "None"
+  behaves as the none-of-these option: 93/95 of its endorsers ticked nothing else. Trap: pandas reads the codebook label
+  "None" as missing, but openpyxl and readxl do not.
+- torices_2025_bapq (36 items × 6, paper_order, translated_substitute/third_party_english, PARTIAL, verify PASS). The
+  study was Spanish, but no Spanish wording is in scope. The English is from Sasson 2013 Table 2 (PMC3661685), and the
+  Spanish anchors are verbatim from the deposit codebook. The verify reproduces header order 36/36 and live-vs-deposit
+  counts 216/216. All 36 items match the scoring-key polarity, and 28/36 correlate most with their own subscale. It does
+  not separate items within the same subscale and polarity. **Override, confirmed by orchestrator:** items 4 and 29 ship
+  singular "conversation", where Sasson prints the plural. psytests.org has the singular for both, and Gernsbacher 2017
+  (PMC5305234) quotes "I leave long pauses in conversation". **Response-data defect, confirmed by orchestrator on live
+  data:** resp 6 appears 17/108 on BAPQ_01 and **0 of 3,780** on BAPQ_02..36, with the mass piled at 5 (BAPQ_28 76/108).
+  The raw deposit has the same zeros, so it is not caused by the IRW script. The top option was probably not offered for
+  items 2-36. Candidate for a data issue. No BAPQ register row, and none written, since no restriction was found.
+- tran_2023_gad7 (7 × 4, paper_order, translated_substitute/official_instrument_english, language=Vietnamese, PARTIAL,
+  verify PASS). The deposit has bare headers and no Vietnamese anywhere. The verify pins the worry triad
+  {GAD1,GAD2,GAD3}: rank 1/35 at mean r 0.646, though the margin over 0.635 is thin. It also pins the GAD6 irritability
+  outlier (0.440 vs 0.521 next) and the direction: 6.75% score ≥10 vs the paper's 6.8%, where reversed coding gives
+  95.5%. It does not establish order within the triad or among GAD4/5/7. Applied the existing PHQ/GAD `ship` ruling.
+- tran_2023_phq9 (9 × 4, same basis and source as gad7, PARTIAL, verify PASS). The verify pins three items:
+  - PHQ9 is the least endorsed item (mean 0.117).
+  - PHQ3 is the strongest correlate of the deposit's sleep-quality item (−0.338 vs −0.226 next).
+  - PHQ5 is the strongest correlate of early satiation (+0.348) and irregular breakfast (+0.257).
+  The direction also checks out: 41 score ≥10, matching the paper's MDD count of 41. It does not separate
+  PHQ1/2/4/6/7/8. Data notes, not defects: one id has a trailing space ("A457 "), and PHQ1 is NA for A095.
+- transreas_mokken (12 × resp 0/1, data_labels, study_materials, NOT_NEEDED). Codes are the mokken package column names.
+  The Rd table's row order matches the column order 12/12, and live means equal package means (max diff 0).
+  **Ben to decide:** item_text holds the Rd's task-specification row (e.g. "Property: length; Format: YA > YB > YC;
+  Objects: sticks; Measures: 12, 11.5, 11 (cm)"), not a spoken prompt. The tasks used physical objects, and Verweij,
+  Sijtsma & Koops 1996 is closed, so no prompt is published. The alternative is blank item_text, which #1770 would then
+  hold. Disclosed in public_note. T05W's "(cm)" for ball weights is a source typo, copied as printed.
+
+Blocked:
+- transyouth_leshin_2026_parents_dep: this is PROMIS Depression SF 8a, verbatim and in published order, in the OSF
+  study_measures_parents.docx. Applied the existing `PROMIS / HealthMeasures family` block ruling, so no new register
+  row. **Two flags for Ben:**
+  1. The OSF project licence is **CC BY-NC 4.0**. The orchestrator confirmed this via api.osf.io licence
+     60bf992258510b0009a5a9a6. It covers the response data too, and datastandard.md intake bars NC, so every
+     `transyouth_leshin_2026_*` response table may need a licence review.
+  2. The register's PROMIS code pattern (^promis|^evpromis) misses `prim_*`.
+  Pending siblings _parents_posaff, _youth_anx and _youth_posaff also look like PROMIS: the agent inferred this from the
+  materials but did not check it against live data. They will likely block the same way. pending_index_notes.csv row
+  added.
+
+Step 5b checks by the orchestrator: the BAPQ resp-6 zeros were re-checked on a live irw_fetch (CONFIRMED, numbers above).
+The BAPQ singular-wording override was checked against cached Sasson, psytests and Gernsbacher text (CONFIRMED). The OSF
+licence was resolved by API (CONFIRMED CC BY-NC 4.0).
+
+Gates: normalize_nulls 0/5 changed; audit_batch 5 PASS, no WARN; verify_batch 3 PASS + 2 MISSING(exempt, data_labels);
+lint_verification 5 rows, no problems (NOT_NEEDED row for transreas_mokken written to both files); irw-validate 5 ok;
+check_provenance 0 IRW-generated tables missing an issues-page entry. No WARNs, so Step 5c had nothing to explain.
+
+**Cap reached:** batch_189 is the Step 0 cap batch. Stopping.
