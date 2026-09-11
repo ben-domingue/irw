@@ -1,0 +1,71 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysFresh","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically fresh",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_MentalTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am mentally tired",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FocusWell","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can focus well",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysSpent","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically spent",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_HandleFeels","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I can handle unpleasant feelings",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_CantFocus","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I cannot focus today",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_UnderControl","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I have things under control today",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_FeelFIt","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I feel physically fit",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_ThinkClear","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am thinking clearly",NA,"fully applies",6
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,"does not apply at all",0
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,NA,1
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,NA,2
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,NA,3
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,NA,4
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,NA,5
+"strohacker_2024_arms_readiness","strohacker_2024_arms_readiness_1","ARMS_PhysTired","Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",NA,NA,"I am physically tired",NA,"fully applies",6

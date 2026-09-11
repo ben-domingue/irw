@@ -17471,3 +17471,57 @@ Gates: normalize_nulls 0 of 1 changed; audit_batch 1 PASS, no WARN; verify_batch
 - Lead for the next round: `stoyel_2021_pos_affect` (POSAF1..10, same workbook) should take the neg_affect route.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_180 — 2026-09-10T22:44 (claim) → 22:58 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 337 pending; cap batch_189). Seventh
+round at SIX agents: no kills, all six agents returned (slowest ~7 min, strohacker_2024_arms_readiness); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `stoyel_2021_pos_affect` | **written** | 50 (10×5) | `data_labels` | NOT_NEEDED (xlsx headers POSAF1-10; positional derivation reproduces 18231/18231 live cells), verify PASS |
+| `strohacker_2024_arms_readiness` | **written** | 70 (10×7) | `paper_explicit` | VERIFIED (self-describing codes 10/10 vs paper quotes; polarity: all 24 fatigue×readiness pairs negative −0.73..−0.33; pair structure 8/10 + 2 near-ties), verify PASS |
+| `stoyel_2021_social_media` | blocked (rights, SATAQ-3 derivative) | — | — | mapping banked, cache verify script PASS |
+| `stoyel_2021_sociocult_info` | blocked (rights, SATAQ-3) | — | — | — |
+| `stoyel_2021_sociocult_pressure` | blocked (rights, SATAQ-3) | — | — | — |
+| `stoyel_2021_tv_internalization` | blocked (rights, SATAQ-3) | — | — | — |
+
+**Written 2 / blocked 4 / failed 0 — yield 2/6 (33%).** Circuit breaker not near (0% failed). All four blocks are
+determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row. Low yield is the queue serving
+four more SATAQ-3 subscales from the same stoyel_2021 workbook, not a pipeline fault.
+
+Gates: normalize_nulls 0 of 2 changed; audit_batch 2 PASS, no WARN; verify_batch PASS=2; lint_verification clean
+(2 rows incl. 1 NOT_NEEDED, written to both the batch file and the permanent tracker); irw-validate ok on both;
+check_provenance clean for this batch (the 13 `mixed` review lines are pre-existing tables).
+
+### Notable
+- **SATAQ-3 block now covers five stoyel_2021 tables** (athlete_internal from batch_178, plus Information,
+  Pressures, Internalization-General). **Orchestrator CONFIRMED** the clause "This scale is provided free of cost to
+  those who wish to use it for non-commercial (ie, you make no money) purposes." in the cached Wayback copy, sha256
+  efe36a96…f6c6 (identical to batch_178). `instrument_rights_register.csv` still has **no SATAQ row**; four agents
+  each suggested a BLOCK row in notes. Adding it is left for a human.
+- **Decision for Ben — stoyel_2021_social_media.** Study-authored items, but the paper says "These new items matched
+  the typical wording of the SATAQ [36]" (**orchestrator CONFIRMED** in article XML), and SMED5-8 are SATAQ-3 items
+  with "TV/magazines/music videos" swapped for "social media/influencers". Blocked as a derivative under SKILL.md.
+  If Ben rules otherwise, a validated 36-row candidate is in `.cache/stoyel_2021_social_media/`. Mapping is
+  non-contiguous: item_1..7 = SMED2,4,5,6,7,8,9 (11733/11733 cells reproduced).
+- **stoyel_2021_social_media response-data observations, orchestrator CONFIRMED:** item_2 (SMED4, "main purpose of
+  your social media usage") is a nominal question stored as 1–6 with unpublished categories, and its distribution
+  jumps between waves (w1 {1:754,2:43,4:2,5:2}; w2 {1:111,…,5:238,6:13}); it alone gives the table its 1–6 range.
+  The workbook's SMED mean-score column equals mean(SMED5,7,8) in 100% of cases at all three waves, although the
+  paper labels the scale "5–9". Arguably item_1 (time/day) and item_2 (purpose) do not belong in an IRW response
+  table. Not filed.
+- **stoyel_2021_pos_affect caveat:** the article describes only the PANAS *negative* items; the 1/5 anchors were
+  applied to PA because in the workbook the POSAF block uses the same stem and range as NEGAF (**orchestrator
+  CONFIRMED** headers). Endpoints only, so resp 2–4 option_text blank.
+- **strohacker_2024_arms_readiness:** mixed-language administration (paper: "the ARMS, BREQ-3, and PPFS were
+  translated from English to German", **orchestrator CONFIRMED**), German wording unpublished, and no cohort flag
+  in the data. Shipped English with a public_note, language columns omitted per the ibrahim_2015_sf36 precedent.
+  "I feel physically fit" follows the study over canonical ARMS "I am physically fit". ARMS (Keegan et al. 2021,
+  Frontiers, CC BY 4.0) has no register row; the agent read silence as permission, and a ship row needs Ben.
+- **Lead for the next round (strohacker_2024_bmzi_motive is at the head of the queue), orchestrator CONFIRMED:**
+  `data/strohacker_2024_situational.py` line 21 comments BMZI as "1 = strongly agree … 5 = strongly disagree", but
+  the S1 workbook descriptor row reads "1=strongly disagree … 5=strongly agree". The data are not recoded, so only
+  the comment is wrong. Do not take option direction from the script.
+
+Cap is `batch_189`; not reached. Ending normally.
