@@ -17988,3 +17988,36 @@ below the bar).
 7. **Deferred:** transreas_mokken (Rd task-specification rows as item_text), simsalRbim_Mice_LargeValence and
    simsalRbim_Monkey_LargeValence (third-person Methods paragraph in `instructions`), stoyel_2021_social_media
    (SATAQ derivative block vs. study-authored items; candidate banked in .cache/).
+
+## batch_190 — 2026-09-11T06:10:45-07:00 (3 tables, 3 agents)
+
+**Written 0 / blocked 3 / failed 0. Yield 0/3.** No kills and no retries; free memory was 17G at claim time. Circuit breaker not tripped: 0% failed.
+All three are determinate blocks from a single source (Leshin et al. 2026, Psychological Science; OSF osf.io/t3a9r). This matches the batch_189 lead on sibling `_parents_dep`.
+
+- `transyouth_leshin_2026_parents_posaff`: **blocked**, retry test NO.
+  - 15 items `prim_posaff1..15`, resp 0-4. This is the HealthMeasures positive-affect bank ("I felt cheerful." .. "I felt content."; scored `prim_posaff_tscore_adult_v1`).
+  - The register row 'PROMIS / HealthMeasures family' blocks it, and the HealthMeasures ToU v1.12-2017 covers PROMIS and NIH Toolbox alike.
+  - Not established: whether it is PROMIS 15a or NIH Toolbox Positive Affect. healthmeasures.net pages returned 404. The verdict is the same either way.
+- `transyouth_leshin_2026_youth_anx`: **blocked**, retry test NO.
+  - PROMIS Pediatric v2.0 Anxiety SF 8a, 8 items `anx1..8`. Wording matched to the HEAL CDE CRF.
+  - PROMIS register block applies.
+- `transyouth_leshin_2026_parents_support`: **blocked**, retry test NO.
+  - These are the study's own 3 social-support items, not PROMIS. But the only publication of the wording is the CC BY-NC 4.0 OSF deposit.
+  - Blocked under the itemtext_standard.md irw#1891 source-licence rule, same shape as ieswriting_molloy_2022 and gilbert_meta_32.
+  - A validated 21-row candidate (data_labels) is banked at `.cache/transyouth_leshin_2026_parents_support/`. It can ship unchanged if Ben rules otherwise.
+
+**Step 5b re-checks by the orchestrator:**
+- OSF node t3a9r licence re-fetched from api.osf.io: 'CC-BY Attribution-NonCommercial 4.0 International'. Confirmed.
+- Register PROMIS row verdict=block. Confirmed.
+- itemtext_standard.md lines 160-166 do say CC BY-NC-sourced wording does not ship. Confirmed.
+
+**Gates:**
+- With no `__items.csv`, normalize_nulls.R and audit_batch.R stop with "No *__items.csv files found", and irw-validate had nothing to check.
+- verify_batch.R reports MISSING for the three tables. That is expected, because nothing shipped.
+- lint_verification.R crashes on a header-only verification_merged.csv ("replacement has 1 row, data has 0"). This is a zero-row edge case in the script, not a defect in this batch.
+- check_provenance.R exits 1 on a pre-existing issue from batch_188, not this batch. `tian2026_digital_competence` is machine_translation, was stamped uploaded 2026-09-11, and **now owes an itemtext_issues.qmd entry**. The batch_188 log said the entry would be owed on upload.
+
+**For the human:**
+1. The CC BY-NC 4.0 deposit licence also governs the transyouth_leshin_2026_* **response** data, and datastandard.md bars NC intake. The licence review of those response tables flagged at batch_189 is still open.
+2. The register's code pattern `^promis|^evpromis` misses `prim_*` and `anx*`. Future PROMIS sweeps need to match on wording or the dictionary Description.
+3. The last sibling, `transyouth_leshin_2026_youth_posaff`, is still pending and will almost certainly block the same way (Rmd `posaff_tscore_pediatric_v1`).
