@@ -17958,6 +17958,6 @@ for the staged tables, removes the `CV_OASIS_ODSIS_PPE_Novak_2020_BFI` entry and
 response-data fact. 8 staged tables got no entry, recorded in `fixes/issues_page_dropped.csv`: `silva_2018_phcs`,
 `sinche_2017_skill_development`, `sned_bendall_2024`, `stoyel_2021_neg_affect`, `stoyel_2021_pos_affect`,
 `teicher_2015_mace_peer_physical`, `teicher_2015_mace_physical`, `teodorini_2020_modafinil_attitudes` -- each ships
-verified wording what respondents read, with only unpublished anchors or a minor source variant as caveat. The six
+the verified wording respondents read, with only unpublished anchors or a minor source variant as caveat. The six
 sun_2024 entries were trimmed to the administration-language caveat (unstated anchors and within-block order are
 below the bar).
