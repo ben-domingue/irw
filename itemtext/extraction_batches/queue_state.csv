@@ -1099,9 +1099,9 @@ tsai_2017_treeit_h1_consistency,done,batch_193,2026-09-11T06:49:51-07:00
 tsai_2017_treeit_h2_visibility,done,batch_194,2026-09-11T07:00:22-07:00
 tsai_2017_treeit_h3_match,done,batch_194,2026-09-11T07:00:22-07:00
 tsai_2017_treeit_h4_minimalist,done,batch_194,2026-09-11T07:00:22-07:00
-tsai_2017_treeit_h5_memory,pending,,
-tsai_2017_treeit_h6_feedback,pending,,
-tsai_2017_treeit_h7_flexibility,pending,,
+tsai_2017_treeit_h5_memory,done,batch_195,2026-09-11T07:21:53-07:00
+tsai_2017_treeit_h6_feedback,done,batch_195,2026-09-11T07:21:53-07:00
+tsai_2017_treeit_h7_flexibility,done,batch_195,2026-09-11T07:21:53-07:00
 tsai_2017_treeit_h8_message,pending,,
 tsai_2017_treeit_h9_error,pending,,
 tsai_2017_treeit_tam_bi,pending,,

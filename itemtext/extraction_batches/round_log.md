@@ -18120,3 +18120,28 @@ This is the third round on the `tsai_2017_treeit_*` family. 8 tables are still p
 4. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
 
 Cap is batch_199; 194 is not the cap. Ending normally.
+
+## batch_195 — 2026-09-11T07:23:00-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. Circuit breaker not tripped (0% failed).
+
+This is the fourth round on the `tsai_2017_treeit_*` family, and 5 tables remain pending: H8, H9 and TAM BI/PEOU/PU. The agents were given the batch_192-194 conventions and batch_194's lesson that controls must be scored against the whole construct profile, and all three did that. All three reused the cached S1/S3 after re-checking the sha256 and kept their scratch files in their own `.cache/<table>/` directories. Block sizes agree for all three: S1 prints 7/4/3 statements, and S3 has 7/4/3 columns.
+
+- `tsai_2017_treeit_h5_memory`: **done**. 7 items, resp 1-5, 35 rows. PARTIAL: Navigation alpha 0.865 and H5 item-total r 0.870 reproduce, with all 20 Table 3/4 statistics within 0.0005. The closest control is a one-column left shift, off by 0.0050 on the full profile. Putting H14's columns in the H5 slot misses H5's own r by only 0.0019, but H3 exposes it (0.847 vs 0.915), so this is a second case where a single statistic would not have rejected a control. Of the 322 single-column swaps, only near-copies still reproduce: H5-1<-H2-3 (99/101) and H5-2<-H3-1 (94/101). H5-3 = H5-4 in 100/101 rows. Within-block order is not established. Two text details are disclosed: the description line keeps S1's curly apostrophe ("users’"), and "Concrete examples (DD/MM/YY, e.g., 10/20/99)." ships as printed, although the example is actually MM/DD/YY.
+- `tsai_2017_treeit_h6_feedback`: **done**. 4 items, resp 2-5, 16 rows (nobody chose 1). PARTIAL: H6 sits in User-Interface Design. H6 item-total r 0.913 and UI alpha 0.892 reproduce. Controls miss by 0.0081 (dropping H6-1, the closest) up to 0.1887. **H6-3 = H2-4 in 101/101 rows**, the only fully identical pair among the 53 heuristic columns, and the public_note discloses it from H6's side too. H6-3 = H10-3 98/101, H6-1 = H12-1 98/101, H6-2 = H6-3 97/101.
+- `tsai_2017_treeit_h7_flexibility`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: H7 sits in System Support. Alpha 0.855 and H7 item-total r 0.749 reproduce. The thinnest control rejection so far is H14-1 swapped in for H7-3: 0.0030 against a 0.0015 tolerance, because those two columns agree in 96/101 rows. H7-1 = H7-2 in 96/101 rows, and the two cannot be told apart (means 3.495/3.485). The Table 4 construct SD (0.703) does not reproduce from the mean-of-means composite (0.533), so it was not used; batch_194's H4 agent saw the same for Navigation.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R still exits 1 only on the pre-existing `tian2026_digital_competence` entry. Nothing from this batch is flagged.
+
+**Step 5b re-checks (orchestrator, cached s003.xlsx af4273..., s001.txt):** all confirmed.
+- Every shipped item_text and instructions string was found verbatim in the S1 text layer. The one apparent miss (H5-5) is PDF checkbox glyphs interleaved in the layout text, and `pdftotext -layout` shows the same wording.
+- Identical-answer counts are exact: H6-3=H2-4 101, H5-3=H5-4 100, H5-1=H2-3 99, H5-2=H3-1 94, H5-2=H9-1 94, H5-6=H14-1 95, H5-7=H3-2 96, H6-2=H6-3 97, H6-1=H12-1 98, H6-3=H10-3 98, H7-1=H7-2 96, H7-3=H14-1 96, H7-1=H7-3 41.
+- A search over all heuristic columns finds exactly one fully identical pair, (H2-4, H6-3).
+- Level counts match the agents' figures: H5-6 1/6/14/52/28, H6-1 0/0/12/43/46, H6-3 0/1/6/32/62, H7-1 5/14/23/44/15, H7-2 5/14/25/41/16, H7-3 1/5/16/53/26.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open.** It now covers 12 written tables, and no register row has been written.
+2. **The "whole construct profile" control lesson has now appeared twice** (H2 in batch_194, H5 here). batch_192/193's single-statistic controls are worth re-running with that in mind; they still check construct alpha.
+3. `tsai_2017_treeit_h8_message` is next in the queue. S1 prints 4 items but S3 has 3 columns (see batch_192 item 2), so a Step 3b mismatch is expected.
+
+Cap is batch_199; 195 is not the cap. Ending normally.
