@@ -17525,3 +17525,53 @@ check_provenance clean for this batch (the 13 `mixed` review lines are pre-exist
   the comment is wrong. Do not take option direction from the script.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_181 — 2026-09-10T22:59 (claim) → 23:13 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 331 pending; cap batch_189). Eighth
+round at SIX agents: no kills, all six agents returned (slowest ~6.7 min, sun_2024_innovation); 19G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `sugiura_2015_disaster_characteristics` | **written** | 240 (40×6) | `data_labels` | NOT_NEEDED (S1 'label P' sheet numbers 1-40 = data header; all 8 published factor alphas reproduce), exempt |
+| `sun_2016_risky_choice_graph` | **written** | 8 (4×2) | `paper_order` | VERIFIED (per-pair chi2 2.760/6.484/4.825/9.029 reproduce, max diff 0.0004, nearest wrong pair 1.7 away), verify PASS |
+| `sun_2021_blockchain_loan_adoption` | **written** | 105 (15×7) | `paper_explicit` | PARTIAL (5 alphas + 10 HTMT reproduce ≤0.0005; within-construct order not checkable), verify PASS |
+| `sun_2024_innovation` | **written** | 21 (3×7) | `paper_explicit` | PARTIAL (Table 7 HTMT 15/15 ≤0.0005, best of 720 label assignments, next 0.0987; within-block order not checkable), verify PASS |
+| `sun_2024_performance_expectancy` | **written** | 21 (3×7) | `paper_explicit` | PARTIAL (alpha/AVE/CR 0.981/0.963/0.987 = Table 6 PE row, max diff 0.0005, runner-up PV 0.0037; order not checkable), verify PASS |
+| `strohacker_2024_bmzi_motive` | blocked (wording unpublished + 2 ambiguous codes) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0 — yield 5/6 (83%).** Circuit breaker not near (0% failed). The block is
+determinate (retry test NO) and has a pending_index_notes.csv row.
+
+Gates: normalize_nulls 0 of 5 changed; audit_batch 4 PASS + 1 WARN; verify_batch PASS=4, MISSING(exempt)=1;
+lint_verification clean (5 rows incl. 1 NOT_NEEDED, written to both the batch file and the permanent tracker);
+irw-validate ok on all 5; check_provenance.R no errors (88 IRW-generated tables, 0 missing an issues-page entry).
+
+- **Audit WARN explained (notes.csv):** sun_2016_risky_choice_graph has blank item_text on 100% of rows. Expected:
+  each item is a graph stimulus with no question stem, and the gamble ("A:80%,¥50" / "B:40%,¥100") is in option_text.
+- **strohacker_2024_bmzi_motive block.** The paper names no BMZI item. It says the items were reworded to "right now"
+  and translated German→English. 9 of 11 codes match a published BMZI item, but `BMZI_PrimaryFitness` and
+  `BMZI_PrimaryHealth` each fit two, and the item set matches neither the 24- nor the 23-item form. Rights look open:
+  Schmid 2018 PLOS ONE prints the BMZI wording under CC BY, there is no restrictive clause, and there is still no register row.
+- **Scale direction, orchestrator CONFIRMED:** the paper's Methods sentence "1 = I strongly agree, 5 = I strongly
+  disagree" (article XML) is wrong, like the script comment flagged last round. Live data: BMZI_Compete mean 1.690 with
+  317/519 at 1; BMZI_PrimaryFitness mean 3.842 with 70.9% at 4-5. That ordering matches Schmid 2018's norms only under
+  1 = disagree. Data not recoded, so there is no data defect.
+- **sun_2016 source misprint, orchestrator CONFIRMED:** Table 1 prints 68% for Pair 4, money-compressed. Live resultd
+  gives 62/94 = 66.0%; chi2 on that table = 9.03, the paper's 9.029, while 64/94 would give 11.0.
+- **sun_2024 citation error, orchestrator CONFIRMED:** the PE items are credited to "Venkatesh et al. (2016) [80]", but
+  reference 80 in the article XML is Vershitsky et al. 2022 (Publ. Organ. Rev.). The items are UTAUT2-style adaptations.
+- **Decision for Ben: the administered language of the Sun/Dedahanov/Shin/Li China surveys.** Neither paper states it.
+  - Both sun_2024 agents independently inferred Chinese from the sample (CEOs of mainland SMEs, QR-code survey) and the
+    xlsx's Chinese-Excel metadata. They shipped `translated_substitute`/`study_supplied` with `language=Chinese`
+    (qin_2025 precedent).
+  - The sun_2021 agent, looking at the same author group's survey run in China, shipped `study_materials` with no
+    language column (hayek_2022_subj_norm precedent), because the S1 Appendix questionnaire is in English.
+  - Both are defensible, and the corpus holds both conventions. Whichever way it goes, the four remaining sun_2024_*
+    tables at the head of the queue should follow it.
+  - Not changed here.
+- **sun_2021 response-data observation (not a defect):** 58-74% of respondents give identical answers to all three
+  items of a construct (orchestrator CONFIRMED: pr .68, rs .58, pf .63, com .74, ui .69). This is consistent with the
+  near-1 alphas (.954-.986).
+
+Cap is `batch_189`; not reached. Ending normally.

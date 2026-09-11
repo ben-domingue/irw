@@ -1,0 +1,9 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resulta","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"A:80%,¥50",1
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resulta","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"B:40%,¥100",0
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultb","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"A:60%,¥100",1
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultb","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"B:40%,¥150",0
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultc","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"A:60%,¥50",1
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultc","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"B:20%,¥150",0
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultd","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"A:40%,¥50",1
+"sun_2016_risky_choice_graph","sun_2016_risky_choice_graph_1","resultd","Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",NA,NA,NA,NA,"B:20%,¥100",0
