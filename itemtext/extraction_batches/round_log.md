@@ -17142,3 +17142,64 @@ not a ruling, since its round never assessed the instrument at all.
 
 Staged for upload after these rulings: **13 tables** in `itemtables/clean/`.
 Issues-page entries for all 13: datapages/irw PR #183 (merge after the upload, not before).
+
+## batch_174 — 2026-09-10T20:49 (claim) → 21:07 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 373 pending; cap batch_189). First round
+at SIX agents: no kills, all six agents returned (slowest 12.4 min); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `shinohara_2021_testimony` | **written** | 33 (9 items) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `shu_2024_gad7` | **written** | 28 (7×4) | `data_labels` | NOT_NEEDED |
+| `shu_2024_phq9` | **written** | 36 (9×4) | `data_labels` | NOT_NEEDED |
+| `silva_2018_mbds` | **written** | 336 (12×28) | `paper_explicit` | VERIFIED, verify PASS |
+| `silva_2018_phcs` | **written** | 40 (8×5) | `paper_explicit` | PARTIAL, verify PASS |
+| `silva_2018_bsq` | **blocked** (rights) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0. Yield 5/6 (83%).** Breaker not near (0% failed).
+
+Gates: normalize_nulls fixed 1 file (silva_2018_phcs, blank→NA); audit_batch 5 PASS, no anomalies (no WARNs to
+explain); verify_batch PASS=3, MISSING(exempt)=2 (the shu data_labels tables); lint_verification clean (5 rows);
+irw-validate clean on all 5; check_provenance clean (0 IRW-generated tables without an issues-page entry).
+
+### Notable
+
+- **silva_2018_bsq blocked on BSQ rights, not access.** The wording was found: Silva et al. 2016, Cad Saúde Pública,
+  Table 2, all 34 items in EN+PT, CC BY. But psyctc.org's BSQ page says the BSQ and its short forms have been
+  managed by MAPI Trust since Oct 2023, free only for "non-commercial, unfunded use", and "all requests for
+  permission to use or translate the BSQ must go to them". **Orchestrator re-fetched the page and CONFIRMED** the
+  MAPI / non-commercial wording. **No register row exists for BSQ**, so Ben should decide whether to add a `block`
+  row. `abdullah_2024_bsq_*` is the Bloating Severity Questionnaire, a different instrument. The mapping is settled
+  if the block is ever lifted (verify_silva_2018_bsq.R is left in the batch dir, PASS). Row added to
+  pending_index_notes.csv.
+- **Rights, silence cases (need a human look before upload):** `silva_2018_mbds` (Multidimensional Body
+  Dissatisfaction Scale) and `silva_2018_phcs` (Perceived Health Competence Scale) both ship on silence. Agents
+  found no restriction clause from the originators, and neither wrote a register row. For PHCS, the only
+  restriction-like text is an aggregator's hedge (db.arabpsychology.com), not the rights holder's.
+- **shu_2024_gad7/phq9** applied the existing PHQ/GAD family `ship` register row. Both are `translated_substitute`
+  (administered Chinese, not recoverable; the .sav carries only the study's own English, which is not the official
+  English wording). PHQ1's SPSS label is cut off at 255 bytes ("...uninterested in doin"); the agent completed it as
+  "doing things" and disclosed that in public_note. **Orchestrator CONFIRMED** the label is exactly 255 bytes.
+- **shu_2024_phq9: the deposit overrides the paper's instrument description.** The paper says PHQ-8 plus a separate
+  suicidal-ideation question scored 1–4. The .sav has all nine items as one 0–3 block. **Orchestrator CONFIRMED:**
+  PHQtotal = 9-item sum on 1190/1190 rows but 8-item sum on only 1022/1190 (86%); GADtotal = 7-item sum 1190/1190.
+  The table is correctly the PHQ-9.
+- **shinohara_2021_testimony: the processing script's header comment has the rank direction backwards.**
+  `data/shinohara_2021_testimony.py` line 8 says "1-3, higher = larger reward given", but 1 = high reward/first
+  choice and 3 = low reward. **Orchestrator CONFIRMED** from irw_fetch: positive-condition allocation at resp 3 is
+  observation/valence/neutral = 15/20/29, matching the paper's published low-reward counts. The data are right and
+  only the comment is wrong (a small fix in data/). The table is `translated_substitute`: the administered language
+  was probably Japanese, but no script is published and the English comes from the paper's Methods.
+- **silva_2018_mbds: resp is a weighted product** (importance/10 × rating, 28 distinct values 0.1–5.0). option_text is
+  blank for all 28 values, disclosed in public_note. Possible data-direction question: the 2017 source marks items
+  4/6/9/12/16 as reverse-scored, yet **orchestrator CONFIRMED** all 66 inter-item correlations are positive (min
+  r=0.24, 0 negative; n=802). So the stored items all point the same way: either the source had already reversed
+  them, or the reverse flag doesn't apply to this weighted score. This is not an itemtext defect, but it is worth
+  one look before anyone models keying. Instructions and option labels are blank, because Carvalho 2013 (SciELO)
+  returned 403/504.
+- **silva_2018_phcs polarity CONFIRMED:** means PHCS1/2/6/7 = 1.9/2.1/2.2/2.1 vs PHCS3/4/5/8 = 3.9/3.8/3.5/3.5, and all
+  16 cross-block correlations are negative (−0.54 to −0.25). The order among PHCS2/6/7 is not established; PHCS4 vs
+  PHCS5 is only weakly supported.
+
+Cap is `batch_189`; not reached. Ending normally.
