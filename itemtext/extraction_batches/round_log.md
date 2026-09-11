@@ -18145,3 +18145,30 @@ This is the fourth round on the `tsai_2017_treeit_*` family, and 5 tables remain
 3. `tsai_2017_treeit_h8_message` is next in the queue. S1 prints 4 items but S3 has 3 columns (see batch_192 item 2), so a Step 3b mismatch is expected.
 
 Cap is batch_199; 195 is not the cap. Ending normally.
+
+## batch_196 — 2026-09-11T07:36:00-07:00 (3 tables, 3 agents)
+
+**Written 2 / blocked 1 / failed 0. Yield 2/3.** No kills and no retries. The circuit breaker did not trip (0% failed; the one block is a determinate verdict).
+
+This is the fifth round on the `tsai_2017_treeit_*` family and the first TAM table. Two tables are still pending: `tsai_2017_treeit_tam_peou` and `tsai_2017_treeit_tam_pu`. All three agents reused the cached S1/S2/S3 files after re-checking their sha256 and kept scratch files in their own `.cache/<table>/` directories.
+
+- `tsai_2017_treeit_h8_message`: **blocked** (Step 3b instrument mismatch). S1 prints four H8 statements, all ordinary item rows (none is a heading or a duplicate), but S3 has three columns. S1 has 54 heuristic statements against 53 heuristic columns in S3, so H8 is the only block that disagrees. The three columns reproduce the whole System Support profile to within 0.00045, and dropping any one misses by 0.031-0.077. Adding any of the other 50 columns as a fourth item never reproduces the profile (best miss 0.0092), so the paper analysed three items too. Every published statistic depends only on the H8 mean, so all 24 statement-to-column assignments fit equally. **Retry test: NO.** What would change it is in `pending_index_notes.csv`.
+- `tsai_2017_treeit_h9_error`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: System Support alpha 0.855 and H9 item-total r 0.768 reproduce (max deviation 0.0005). **The nearest control, H9-1<-H3-1, misses by 0.0019 against a tolerance of 0.0015.** That is the thinnest rejection in the family so far (H7's was 0.0030), and it comes from near-copy columns (93/101 identical). Within-block order is not established. H9-2 "The system provides avoid modes or uses informative feedback, e.g., different sounds." ships as printed (sic) and public_note discloses it.
+- `tsai_2017_treeit_tam_bi`: **done**. 4 items, resp 1-5, 20 rows. **VERIFIED, the first in this family.** Table 3 prints a separate item-total r for each item (BI12-15: 0.916/0.912/0.896/0.886), and the uncorrected r against the BI sum reproduces all four in order. Alpha is 0.9234 vs 0.923 and the mean 4.0198 vs 4.020. Of the 24 orderings only the published one reproduces; the nearest control is a BI1/BI2 swap at 0.0038. The instrument string is new: `TreeIt Technology Acceptance Model Questionnaire (Tsai et al. 2017, Appendix 2; adapted from Davis et al. 1989 TAM): Behavioral Intention`. Anchors are S2's column headers (Strongly disagree..Strongly agree, printed without numbers). The numeric direction comes from the article Methods; all four items are positively worded, so the data cannot test it. instructions is NA because S2 prints only "Section Two: TAM Questions:". The TAM columns do not show the heuristic block's identical-answer pattern (BI pairs 67-78/101).
+
+**Gates:** normalize_nulls changed 0 files; audit_batch PASS x2 with no WARNs (nothing for Step 5c); verify_batch PASS x2; lint clean (2 rows); irw-validate ok x2. check_provenance.R flags only the pre-existing `tian2026_digital_competence` entry; nothing from this batch.
+
+**Step 5b re-checks (orchestrator, against cached s001.pdf 005195..., s002.pdf ec5e95..., s003.xlsx af4273...):** everything confirmed.
+- **H8 columns:** S3 has exactly H8-1..H8-3 and 53 heuristic columns. `pdftotext -layout` shows four H8 statements, each with its own checkbox row.
+- **TAM BI:** BI item-total r is 0.91579/0.91247/0.89569/0.88554, with alpha 0.92342 and mean 4.0198. The article's Table 3 text reads "BI12 0.923 0.89 0.9241 0.7534 0.916 BI13 0.88 0.912 BI14 0.85 0.896 BI15 0.85 0.886". The four shipped BI statements match the S2 text.
+- **H9:** level counts match the agent's figures, H9-2=H9-4 in 98/101 rows, H9-2=H11-4 in 97, H9-1=H3-1 in 93. The S1 text layer has "The system provides avoid modes or uses / informative feedback, e.g., different sounds." and the H9 description line as shipped.
+
+**Housekeeping:** the permanent `mapping_verification.csv` is CRLF with some LF lines mixed in, so the two new rows were appended with CRLF and nothing else was rewritten.
+
+**For the human:**
+1. **H8 needs a ruling.** Choose between (a) a heuristic-level table with blank item_text, which is already built and gated and parked at `.cache/tsai_2017_treeit_h8_message/parked_heuristic_level__items.csv` (gitignored; move it to `itemtext/fixes/` to keep it; option-only under #1770, which is why it was not shipped); (b) print order H8-k = statement k, with `mapping_basis=unknown` and the fourth statement disclosed as unmatched; or (c) leaving it blocked.
+2. **The family rights ruling from batch_192 is still open** and now covers 13 written heuristic tables. The TAM BI agent's view is that the Zhang et al. (2003) question reaches only the S1 checklist wording, not the S2 TAM statements (Davis 1989 adaptation, statements study-specific, no restriction found). Confirm that scoping when you rule.
+3. **The VERIFIED on TAM BI rests on one link that is not proven:** that Table 3's BI12-15 numbering follows S2's print order. The 5 PU + 6 PEOU + 4 BI = 15 statement layout supports it, and the evidence says so. Separately, the BI1/BI2 ordering margin is 0.0038.
+4. **Next round:** TAM PEOU/PU should reuse TAM BI's instrument string form and verify script. The agent pre-checked both: PU max deviation 0.0003, PEOU 0.0005. PU1 vs PU5 (0.876 vs 0.874) is a thin ordering gap.
+
+Cap is batch_199; 196 is not the cap. Ending normally.
