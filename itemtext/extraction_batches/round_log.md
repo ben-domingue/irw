@@ -16945,3 +16945,47 @@ all 4 ok; check_provenance no failures (same 13 pre-existing `mixed` review item
 
 Queue after this round: **381 pending, 769 done, 175 blocked, 13 failed, 63 excluded.**
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_172 — 2026-09-10T18:12:55-07:00 — 4 tables, 4 agents
+
+**3 written / 1 blocked / 0 failed** (yield 75%; failed rate 0%, circuit breaker not tripped). No kills, no rate
+limits. Written: shi_2025_rrs, shin2024_creactability_adaptability, shin2024_creactability_creativity. Blocked:
+shi_2025_maas (rights, retry test NO).
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARNs (nothing for Step 5c); verify_batch 3 PASS;
+lint_verification 3 rows, no problems; irw-validate all 3 ok; check_provenance no failures (same 13 pre-existing
+`mixed` review items).
+
+### Notable
+
+- **shi_2025_maas — BLOCKED on CSDT rights.** MAAS has its own CSDT library page (commercial use needs permission) and
+  the CSDT Limited Use License bars redistribution; applied the settled SDT/CSDT register row (full scope, adaptations
+  included — administered as Chen et al. 2012 Chinese MAAS). Same verdict as ruiz_parra_2023_maas (batch_162). No
+  verification row (blocked). pending_index_notes row added. MAAS has NO DASS21-style wave-coding defect: resp 1..6 by
+  wave 150/439/598/544/711/498, 80/326/236/326/1006/965, 15/250/299/382/705/1288.
+- **shi_2025 baseline linkage lead — CONFIRMED by orchestrator (the numbers; the interpretation is still a lead).**
+  Person-total r across waves (0-1 / 0-2 / 1-2) on live tables: MAAS −0.042 / +0.042 / +0.381; RRS −0.011 / +0.270 /
+  +0.096; DASS21 −0.149 / −0.078 / +0.564. Baseline arm means reproduce paper Table 3 exactly (MAAS 58.3±12.3 /
+  59.5±9.46; RRS 46.0±14.5 / 45.3±10.9), which also identifies **cov_group 1 = mindfulness training, 2 = peer
+  support** (data/shi_2025_mindfulness.py records it as unknown). Near-zero pre–post stability on three trait scales
+  suggests the pre block is not id-aligned with waves 1–2, though RRS pre–third 0.270 is not zero, so it is not a
+  clean whole-block misalignment either. Worth one response-data issue covering all three tables plus the DASS21
+  wave-0 recode. Not filed.
+- **shi_2025_rrs:** canonical English RRS from Nolen-Hoeksema's own distribution copy (umich ~gonzo) as
+  `translated_substitute` / `official_instrument_english` for Han & Yang 2009 Chinese administration. PARTIAL: 12/5/5
+  key reproduces the .sav's stored subscale scores 1758/1758, all 145 cross-subscale swaps fail, Table 3 reproduces;
+  within-subscale order unverified. No wave-coding defect (all waves 1–4). **Rights ship-shaped on a courtesy clause
+  ("Please send me copies of reports") — no register row, needs Ben's call.**
+- **shin2024_creactability_adaptability / _creativity:** English from the CC BY Frontiers article (Table 2), Korean
+  administration inferred → `translated_substitute` / `study_supplied`, public_note on both. Both agents independently
+  reached the same convention. Table 4 pooled category counts reproduce exactly (19/142/398/429/610/441/130), settling
+  the processing script's "resp direction unverified". Table 3 logits rank-match live item totals (Spearman 1.000),
+  pinning deposit column order to the paper's item numbers — paper's "item difficulty" caption actually runs in the
+  easiness direction (confirmed by verify output). **Orchestrator downgraded adaptability VERIFIED → PARTIAL**: Table 2
+  is unnumbered, so number→wording rests on listed order (the agent's own NOT ESTABLISHED clause; creativity's agent
+  recorded PARTIAL on identical evidence). creativity omits the resp=1 "not at all" row (unused). Rights on silence
+  (scale author is the article's corresponding author); no register row, flagged. shin2024_creactability_quickness
+  still pending.
+
+Queue after this round: **377 pending, 772 done, 176 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.

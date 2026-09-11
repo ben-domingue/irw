@@ -979,10 +979,10 @@ shan_2020_ph,done,batch_171,2026-09-10T17:52:34-07:00
 shen_2020_sas20,done,batch_171,2026-09-10T17:52:34-07:00
 shi_2021_gentrification,done,batch_171,2026-09-10T17:52:34-07:00
 shi_2025_dass21,done,batch_171,2026-09-10T17:52:34-07:00
-shi_2025_maas,pending,,
-shi_2025_rrs,pending,,
-shin2024_creactability_adaptability,pending,,
-shin2024_creactability_creativity,pending,,
+shi_2025_maas,blocked,batch_172,2026-09-10T18:12:55-07:00
+shi_2025_rrs,done,batch_172,2026-09-10T18:12:55-07:00
+shin2024_creactability_adaptability,done,batch_172,2026-09-10T18:12:55-07:00
+shin2024_creactability_creativity,done,batch_172,2026-09-10T18:12:55-07:00
 shin2024_creactability_quickness,pending,,
 shineha_2024_gef_accept_factors,pending,,
 shineha_2024_gef_attitudes,pending,,
