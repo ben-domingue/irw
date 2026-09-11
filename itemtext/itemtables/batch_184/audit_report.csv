@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"taylorabdulai_2025_incentives","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"teicher_2015_mace_distress_helpless","WARN",35,35,TRUE,TRUE,FALSE,TRUE,11.4,50,"11.4% of rows have blank item_text | 50% of rows have blank option_text"
+"teicher_2015_mace_distress_terrified","WARN",35,35,TRUE,TRUE,FALSE,TRUE,11.4,50,"11.4% of rows have blank item_text | 50% of rows have blank option_text"
+"teicher_2015_mace_emot_neglect","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"teicher_2015_mace_nonverbal","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""

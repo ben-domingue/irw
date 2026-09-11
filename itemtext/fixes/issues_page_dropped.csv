@@ -3,3 +3,11 @@ abdullah_2024_bsq_sev24,"Below the bar: the BSQ's per-item multiple-choice categ
 alcoholstroop_jones2024,"Below the bar: no per-word correct_response key can exist because ink colour was randomised per trial; nothing in the shipped text contradicts the table."
 arora2025_blueq_pedagogical,"Below the bar: the only caveat is that the study's data file records numeric codes and never published anchors, so the anchors come from the published BLUE-Q. Recorded at round_log.md line 619."
 machivallianism_test_tipi,"Below the bar: its two caveats are a pipeline-internal gate note (validate_items.R skipped against the Redivis export cap, both set checks run server-side instead) and a deliberate transcription choice (instructions holds only the stem the deposit documents, not the TIPI's longer published preamble). Neither is a text-vs-table mismatch."
+silva_2018_phcs,"Below the bar: the Portuguese wording is the administered version from the validation paper the study cites, and the only gap is unpublished Portuguese anchors (batch_174 triage)."
+sinche_2017_skill_development,"Below the bar: verbatim .sav variable and value labels, verified against the paper's Table 3 means; no caveat recorded (batch_176 triage)."
+sned_bendall_2024,"Below the bar: the shipped MacArthur prompt is the administered Gorilla wording and the paper only paraphrases it; the rt defect is a response-data issue, not an item-text one (batch_177 triage)."
+stoyel_2021_neg_affect,Below the bar: verbatim workbook headers; the only caveat is that the study prints just the 1 and 5 anchors (batch_179 triage).
+stoyel_2021_pos_affect,"Below the bar: verbatim workbook headers; endpoint anchors applied from the shared PANAS block, points 2-4 unpublished (batch_180 triage)."
+teicher_2015_mace_peer_physical,"Below the bar: published MACE-X wording identical to the MACE, mapping verified against Table 7, no administered-vs-form mismatch (batch_185 triage)."
+teicher_2015_mace_physical,"Below the bar: published form wording identical across S1-S3, mapping verified against Table 4; the Spank_open caveat concerns response data (batch_185 triage)."
+teodorini_2020_modafinil_attitudes,Below the bar: stems identical in both sources; only the midpoint label differs between the questionnaire ('neutral') and the shipped .sav labels (batch_186 triage).
