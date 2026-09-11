@@ -17963,3 +17963,28 @@ sun_2024 entries were trimmed to the administration-language caveat (unstated an
 below the bar).
 
 **Uploaded 2026-09-11 (Ben): 62/62 to irw_text_2, row counts verified.** Draft diff shows all 62 `added`, none `changed`. Stamped `uploaded=2026-09-11` in provenance.csv and mapping_verification.csv (62 + 62 rows, byte delta 1224 as expected from 57+59 blank and 5+3 `NA` priors); the 62 batch `__items.csv` copies removed after cmp against `/tmp/dl_174_189/`. Sidecars stay. datapages/irw#184 stays on HOLD until the release is published.
+
+## Ben's rulings on the batch_174–189 escalations (2026-09-11) — recorded, NOT yet applied
+
+1. **BFI-44: withdraw** conner_2017_bfi, CV_OASIS_ODSIS_PPE_Novak_2020_BFI, ibrahim_2015_bfi. DONE (released irw_text
+   v22.0 / irw_text_2 v3.0; register row BFI-44 block; datapages/irw#184 merged).
+2. **theobald_2017_group_dynamics: SHIP.** ASPECT (Wiggins et al. 2017) is CC BY-NC-SA; the wording was re-released
+   under CC BY by five of ASPECT's eight authors (Theobald et al. 2017). Ben ruled the originators' own CC BY
+   re-release is sufficient, although three ASPECT authors are not on it — a narrowing of the 2026-09-08 WHO-5
+   rule for the case where the reprint is by the originators themselves. Upload the held file.
+3. **IES-R: keep the block row.** Withdraw the Weiss preamble from ali_2021_iesr (`instructions`; partial
+   withdrawal, keep the study's own item wording). beck_2021_iesr (German IES-R, (c) Maercker & Schützwohl): research
+   that rights holder's terms before deciding — no action yet.
+4. **MMPI row (tma): keep the block; verify later** by reading Taylor 1953 (doi:10.1037/h0056264) to confirm the
+   TMAS items are MMPI items. Unblock material is in pending_index_notes.csv.
+5. **Register rows approved** (write them): `block` for SATAQ-3, BSQ (Body Shape), Servant Leadership Survey,
+   SHAPS, TFEQ, and Schwartz values (PVQ40 plus SVS / PVQ-21 / ESS21 / PVQ-RR — Ben ticked both scope options;
+   read as the wider scope, confirm if a sweep turns up live tables); `ship` for MACE (Teicher & Parigger 2015,
+   forms published openly with the CC BY article, MACEscore GPL-2).
+6. **Language.** sun_2021_blockchain_loan_adoption: set `language=Chinese`, text_source translated_substitute
+   (matching the 11 live Sun China tables), then ship. szameitat_2015_multitask_examples and
+   szameitat_2015_occupation_multitask: keep `language="English; Turkish; Dutch; German"`, write the
+   semicolon-separated multi-language convention into itemtext_standard.md, then ship both.
+7. **Deferred:** transreas_mokken (Rd task-specification rows as item_text), simsalRbim_Mice_LargeValence and
+   simsalRbim_Monkey_LargeValence (third-person Methods paragraph in `instructions`), stoyel_2021_social_media
+   (SATAQ derivative block vs. study-authored items; candidate banked in .cache/).
