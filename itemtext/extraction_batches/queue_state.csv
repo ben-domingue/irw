@@ -1108,9 +1108,9 @@ tsai_2017_treeit_tam_bi,done,batch_196,2026-09-11T07:35:58-07:00
 tsai_2017_treeit_tam_peou,done,batch_197,2026-09-11T07:38:43-07:00
 tsai_2017_treeit_tam_pu,done,batch_197,2026-09-11T07:38:43-07:00
 tuason_2021_covid_coping_enjoy,done,batch_197,2026-09-11T07:38:43-07:00
-tuason_2021_loneliness_emotional,pending,,
-tuason_2021_loneliness_social,pending,,
-tuason_2021_wellbeing,pending,,
+tuason_2021_loneliness_emotional,blocked,batch_198,2026-09-11T07:57:00-07:00
+tuason_2021_loneliness_social,blocked,batch_198,2026-09-11T07:57:00-07:00
+tuason_2021_wellbeing,blocked,batch_198,2026-09-11T07:57:00-07:00
 turner_2022_cognitive_mediation,pending,,
 turner_2022_sr_belief_change,pending,,
 tutrin_2020_meq30,pending,,

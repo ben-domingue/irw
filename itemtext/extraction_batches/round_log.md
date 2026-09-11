@@ -18199,3 +18199,26 @@ Both TAM tables: resp 1 ("Strongly disagree") is not shipped because no responde
 5. `tsai_2017_treeit_h8_message` (the batch_196 H8 ruling) is still open.
 
 Cap is batch_199; 197 is not the cap. Ending normally.
+
+## batch_198 — 2026-09-11T07:50:51-07:00 (3 tables, 3 agents)
+
+**Written 0 / blocked 3 / failed 0. Yield 0/3.** No kills and no retries. The circuit breaker did not trip (0% failed). All three blocks are determinate rights verdicts from existing `instrument_rights_register.csv` rows, not access failures. The zero yield reflects what the queue served, not pipeline health.
+
+The round finishes the `tuason_2021_*` family (PLOS ONE e0248591, CC BY 4.0). All three agents reused the batch_197 S2 .sav after checking its integrity (sha256 c6d0daf7...3230, identical to a fresh PLOS download) and kept scratch in their own `.cache/<table>/` dirs.
+
+- `tuason_2021_loneliness_emotional`: **blocked** (rights). This is the De Jong Gierveld 6-item scale, emotional subscale. Register row **DJG** (block, 2026-09-08) applied. The OSF u6gck manual (file tfksw, sha256 1930351b...ab67e5) was re-fetched and still carries the NC + No-derivatives conditions. The .sav labels are terse ("(emptyness)/(miss)/(rejected)") and the register rules that ND reaches those too. Response data are clean: .sav codes 1-3 equal live 0-2 in all 9 item x level cells.
+- `tuason_2021_loneliness_social`: **blocked** (rights, DJG). The administered wording was found in the S1 questionnaire .docx ("There are plenty of people that I can lean on in case of trouble." etc.). It is a variant rendering, so ND applies (the dopmeijer_2022 precedent). Data are stored raw (2 = Yes = least lonely); the recomputed social total, mean 1.409 / SD 1.283, reproduces Table 1 (1.40/1.28). No defect.
+- `tuason_2021_wellbeing`: **blocked** (rights). The paper cites Diener et al. 2010 for its 8-item PWB measure, which is the Flourishing Scale. Register row **DIENER-NC** (irw#1955) applied; eddiener.com/scales was re-fetched and still says "permitted for non-commercial purposes only". resp 18-24 is raw, equal to scale points 1-7 per the .sav's `WB<i>_rec` labels. Well_being_Mn = mean(WB-17) exactly, and alpha is 0.885 vs .89 published. No defect.
+
+Retry test: NO for all three. Only a lifted register row or changed holder terms would change the outcome. Each has a `pending_index_notes.csv` row.
+
+**Gates:** there is nothing to gate because no `__items.csv` was written. `normalize_nulls.R` and `audit_batch.R` exit "No *__items.csv files found". `verify_batch.R` reports MISSING x3, which is expected: blocked tables carry no verify script under Step 5b. `lint_verification.R` says "nothing to lint", and `irw-validate` had no input. No `mapping_verification.csv` rows were added, since no tables were written. `check_provenance.R` flags only the standing `tian2026_digital_competence` entry and the `mixed` review list; nothing from this batch.
+
+**Step 5b re-checks (orchestrator):** both register rows exist with verdict=block, and their clauses match what the agents quoted: DJG "Not commercial ... No derivatives ...", DIENER-NC "permitted for non-commercial purposes only". The two DJG agents independently fetched the same manual and got identical sha256s. No response-data defect was claimed, so there was nothing further to re-check.
+
+**For the human:**
+1. **Register pattern gap:** DIENER-NC's `match_item_code` is `^flourish|^spane`, which does not match `tuason_2021_wellbeing`. A future shipment of that table would not be caught by the pattern check. Consider adding the table name, or text-match strings for the Flourishing items; the row's `match_item_text` is empty. The DJG row's `loneliness` pattern does cover both tuason loneliness tables.
+2. The batch_197 items are still open: the `tuason_2021_covid_coping_enjoy` processing-script defect, the tsai family rights ruling, and the `tsai_2017_treeit_h8_message` ruling.
+3. The next round starts on `turner_2022_cognitive_mediation`, `turner_2022_sr_belief_change` and `tutrin_2020_meq30`.
+
+Cap is batch_199; 198 is not the cap. Ending normally.
