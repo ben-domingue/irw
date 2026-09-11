@@ -18098,3 +18098,25 @@ Second round on the `tsai_2017_treeit_*` family (11 pending after this: H2-H9, T
 3. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
 
 Cap is batch_199; 193 is not the cap. Ending normally.
+
+## batch_194 — 2026-09-11T07:10:00-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. Circuit breaker not tripped (0% failed).
+
+This is the third round on the `tsai_2017_treeit_*` family. 8 tables are still pending: H5-H9 and TAM BI/PEOU/PU. The agents got the batch_192/193 conventions and the harmonised instrument string, and all three reused the cached S1/S3 after re-checking the sha256. Settings are unchanged: paper_order, translated_substitute / study_supplied, language Chinese, S1 anchors. Agents were told to keep scratch files out of the batch directory (the batch_193 slip); the final directory holds only the expected files.
+
+- `tsai_2017_treeit_h2_visibility`: **done**. 4 items, resp 2-5, 16 rows (nobody chose 1). PARTIAL: H2 item-total r 0.862 and UI alpha 0.892 reproduce, and all 20 Table 3/4 statistics are within 0.0005. Each control was scored on all seven UI statistics: shift right misses by up to 0.013, dropping H2-4 by 0.045, other blocks by 0.033-0.148. The order within the block is not established. **H2-4 is identical to H6-3 in 101/101 rows** (H6-3 is a Feedback item), so no statistic can say which item's answers that column holds; public_note discloses it.
+- `tsai_2017_treeit_h3_match`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: Navigation alpha 0.865 and H3 item-total r 0.915 reproduce. Other blocks substituted give 0.730-0.827, and window shifts give 0.875/0.893. The order within the block is not established. Unlike the siblings, the H3 items do not straight-line with each other (46/44/66 of 101 identical). An "actions" content check is printed but not scored, because it was defined post hoc.
+- `tsai_2017_treeit_h4_minimalist`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: H4 item-total r 0.860 and Navigation alpha 0.865 reproduce. Other blocks give 0.755-0.827, and window shifts give 0.844 (left) / 0.887 (right). H4-4 "Progressive levels of details." is the outlier (r 0.43-0.45 with the rest vs 0.97 among them), which is semantic coherence only. The order of H4-1..H4-3 is not established (96-99/101 identical pairwise).
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, cached s003.xlsx sha256 af4273..., s001.pdf 005195...):** all confirmed. Identical-answer counts: H2-4 = H6-3 101/101, H2-3 = H5-1 99, H2-1 = H2-2 98, H3-3 = H4-3 99, H3-3 = H4-1 97, H3-1 = H5-2 94, H4-{1,2,3} = H4-4 56/55/54. Per-item level counts match every agent's figures, and H4-4's r with H4-1/2/3 is 0.452/0.452/0.430. The S1 text layer for H2 (p1-2), H3 (p2) and H4 (p3), including the description lines, matches the shipped item_text and instructions word for word, and S1 prints 4/3/4 statements, equal to the S3 column counts.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open.** It now covers 9 written tables; each provenance note carries the escalation, and no register row was written.
+2. **The sibling verify scripts' control is weaker than it looks** (from the H2 agent). A one-column left shift of the H2 window gives H2 item-total r 0.8609 vs the published 0.862, inside the 0.0015 tolerance the h1 script uses. It is caught only through the other heuristics' statistics (H1 0.802 vs 0.763, H10 0.881 vs 0.903). Controls should score the whole construct profile, not the target heuristic's r alone. The shipped PARTIAL verdicts still stand, since each batch_192/193 script also checks the construct alpha, but re-run the earlier scripts with that in mind.
+3. Because H2-4 = H6-3 in all 101 rows, when H6 comes up its item 3 cannot be told apart from H2-4 either. This looks like duplicated entry rather than straight-lining; it is not filed as a defect.
+4. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
+
+Cap is batch_199; 194 is not the cap. Ending normally.
