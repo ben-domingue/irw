@@ -228,11 +228,21 @@ manual Sheets-fill workflow on a different table — don't modify it.
 
 ## Standing exclusion: `enem*`
 
-**Do not extract item text for any `enem*` table.** Ben is handling the ENEM (Brazilian national
-exam) item text separately, confirmed 2026-08-18. All 52 are marked `status=excluded` in
-`extraction_batches/queue_state.csv`; never flip one back to `pending`, and skip them even when
-asked to process "the rest of the queue". If a user asks specifically for an `enem*` table, say it
-is excluded and check with them before doing anything.
+**Do not extract item text for any `enem*` table with this skill.** ENEM (the Brazilian
+national exam) item text is a separate hand-built workstream owned by @mateusmazza, not a
+gap in the queue -- see #1848 for the 2023 tables and #1709 for scaling to the other years.
+The exclusion exists because the source is INEP's own accessibility booklets and DOSVOX
+screen-reader files rather than a source paper, so none of Steps 1-4 apply; it is not a
+rights or availability bar.
+
+All 52 are marked `status=excluded` in `extraction_batches/queue_state.csv`. Never flip one
+to `pending`, and skip them even when asked to process "the rest of the queue". A table
+whose text has actually landed moves to `done` with its batch and timestamp, which is a
+different transition. If a user asks specifically for an `enem*` table, say it is excluded
+and check with them before doing anything.
+
+(Earlier revisions of this section said Ben was handling ENEM, confirmed 2026-08-18. That
+was superseded once the work started under #1848; corrected 2026-09-11.)
 
 ## Standing exclusion: commercially published instruments the source cannot share
 
