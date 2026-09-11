@@ -1,4 +1,4 @@
-"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp","item_text_translated","option_text_translated","instructions_translated","section_prompt_translated","language","raw_resp"
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp","item_text_translated","option_text_translated","instructions_translated","section_prompt_translated","language","resp_raw"
 "enem_2023_1mil_lc","enem_2023_1mil_lc_1",15035,"ENEM 2023 — Prova de Linguagens, Códigos e suas Tecnologias","ATENÇÃO: transcreva no espaço apropriado do seu CARTÃO-RESPOSTA, com sua caligrafia usual, considerando as letras maiúsculas e minúsculas, a seguinte frase:
 Eu sempre fui um sonhador
 LEIA ATENTAMENTE AS INSTRUÇÕES SEGUINTES:
