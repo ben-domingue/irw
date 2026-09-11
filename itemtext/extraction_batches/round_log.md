@@ -18271,7 +18271,7 @@ the ruling was applied to all 13.
   SATAQ, BSQ (Body Shape; the abdullah_2024_bsq_* Bloating tables are excluded by code pattern), SLS, SHAPS
   (secondhand CamCOPS evidence, recorded as such), TFEQ (PhenX counter-claim recorded), SCHWARTZ (wide scope, as
   ruled); ship row MACE. The AQ row is replaced in place: it now covers AQ-50/28/10 with the ARC clause, both URLs
-  and sha256s, and code pattern `^AQ_?[0-9]{1,2}$|^aq10_[0-9]{1,2}$|^aq[0-9]{1,2}cont$`, narrowed from `^aq`.
+  and sha256s, and code pattern `^AQ_?[0-9]{1,2}$|^aq10_[0-9]{1,2}$`, narrowed from `^aq`.
   Every hash was re-computed against the cached files. Where the evidence is weak, the row says so.
 - Issues page: datapages/irw#187 adds entries for all 8 (543 → 551, additive, parsed under Python and R).
   `tian2026_digital_competence`, which `check_provenance.R` reported as owed since batch_188, is already on
@@ -18282,8 +18282,8 @@ every minor change in a way that i don't think is helpful. we should pause this 
 at a later date." From now on, rulings and register rows apply to incoming tables. Leads on already-published
 tables are banked here in one line each, and nobody sweeps, investigates or withdraws on them until the large
 audit. The AQ-28 withdrawal above was ruled before the pause. Leads banked from this pass:
-`rmet_higgins_2022_rmet` (live; the same ARC clause covers the Eyes Test), the Schwartz response-table leads
-named in that row's notes, `sokolovskii_2021_tfeq`, and the PROMIS/DIENER-NC pattern gaps below.
+`rmet_higgins_2022_rmet` (live; the same ARC clause covers the Eyes Test), `sokolovskii_2021_tfeq` (response table,
+`i_n` codes outside the TFEQ pattern), and the PROMIS/DIENER-NC pattern gaps below.
 
 **Still open from these rounds (not ruled, not filed):**
 - `tuason_2021_covid_coping_enjoy` response data: `data/tuason_2021_thriving_covid.py` should rebuild Enjoy_* from
