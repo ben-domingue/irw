@@ -65,7 +65,12 @@ worked example: `itemtables/batch_enem_2023/`.
 
 1. **Source.** INEP's accessibility booklet (the LARANJA Braille / Adaptada Ledor text shipped in
    the microdata) is the primary source where that year has one, because INEP wrote its own
-   descriptions of figures into it. It does **not** carry the same items as the regular booklets:
+   descriptions of figures into it. Its wording is **not** the printed booklet's: it is written
+   to be read aloud, so notation is spelled out ("gramas por mol" for g/mol, "Q índice 2" for a
+   subscript) and credits can precede the passage. In 2023 only 2 of 44 MT and 5 of 45 CN items
+   matched the standard booklet word for word. Ruled 2026-09-11: ship that wording as is and say
+   so in every table's `note` and `public_note`, rather than re-transcribing from page images.
+   It also does **not** carry the same items as the regular booklets:
    in 2023 the CN and MT accessibility booklets each swap two figure-only items for two others.
    So before joining by position, compare the accessibility `CO_PROVA`'s item set in
    `ITENS_PROVA_<YYYY>.csv` with the regular booklet's. Items only in the regular set come from
