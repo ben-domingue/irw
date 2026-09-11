@@ -16989,3 +16989,39 @@ lint_verification 3 rows, no problems; irw-validate all 3 ok; check_provenance n
 
 Queue after this round: **377 pending, 772 done, 176 blocked, 13 failed, 63 excluded.**
 Cap is `batch_173`; not reached. Ending normally.
+
+## batch_173 — 2026-09-10T18:26 (claim) → 18:50 (close), 4 agents, 4 tables
+
+**Written 4 / blocked 0 / failed 0 — yield 100%.** No kills, no rate limits. All Step 4 gates clean: audit_batch 4 PASS
+(no WARNs, so no Step 5c notes), verify_batch 2 PASS + 2 MISSING(exempt, data_labels), lint_verification no problems,
+irw-validate ok ×4, check_provenance 0 IRW-generated tables missing an issues-page entry. Zero whole-table exports
+except one deliberate ~1MB irw_fetch of shineha_2024_gef_info_topics (per-sample percentages need row data) plus the
+orchestrator's Step 5b re-check fetches of that table and _accept_factors.
+
+- **shin2024_creactability_quickness:** closes out the shin2024 trio with batch_172's conventions (CC BY Frontiers
+  Table 2 English, Korean administration inferred → `translated_substitute` / `study_supplied`, public_note).
+  `paper_order`, **PARTIAL** (recorded as such by the agent, consistent with the batch_172 downgrade): Table 3 logits
+  vs live totals Spearman 1.000, max residual 0.0045, the claimed order the only one of 3! permutations that fits
+  (next best 0.2436); Table 4 pooled counts reproduce exactly. Unnumbered Table 2 leaves number→wording on listed
+  order. Rights on silence, same as siblings — no register row, needs Ben's call.
+- **shineha_2024_gef_{accept_factors, attitudes, info_topics}** (PLOS ONE e0300107, CC BY 4.0; MHLW-commissioned
+  study questionnaire, not a third-party instrument): all three agents independently reached `data_labels` (S1 .sav
+  variable labels), `translated_substitute` / `study_supplied`, `language=Japanese` — the deposit holds only the
+  authors' "tentative" English translation, 0 CJK characters anywhere. Minor cosmetic inconsistency: accept_factors
+  and info_topics carry empty `_translated` columns, attitudes omits them; both forms exist in prior batches and pass
+  every gate.
+  - **attitudes:** item codes are not questionnaire order (Fig1a=Q1, b=Q5, c=Q3, d=Q4). Fig1b anchor conflict —
+    **CONFIRMED by orchestrator**: questionnaire Q5 table prints Strongly agree(7)…strongly disagree(1), .sav labels
+    Strongly acceptable(7)…Strongly unacceptable(1); same direction, questionnaire anchors shipped, disclosed.
+  - **info_topics:** VERIFIED (data_labels table, verified anyway): 15 Fig 3 topic bars match live per-sample
+    percentages. Order override (.sav Other=16 / Nothing=17 vs questionnaire order) **CONFIRMED by orchestrator**:
+    784/784 Fig3_17 pickers picked nothing else; all 28 Fig3_16 pickers picked 5. **Source inconsistency CONFIRMED**:
+    Q7 says "choose three" but live selection counts are exactly 5 (3,614) or Nothing-only (784); the sibling Q6
+    table fits its own "choose three" (3: 3,714, 1: 684 — confirmed). Disclosed in public_note; perhaps the Japanese
+    original asked for five. Not an IRW processing defect; no issue filed.
+  - **accept_factors:** paper prose attributes 32.3%/19.3% to "can experts deal with risks", but Fig 4 and the .sav
+    put them on Fig4_6 "Probability of potential risks" — orchestrator confirmed live Fig4_6 = 32.3 public / 19.3
+    expert. Prose error in the article; mapping unaffected.
+
+Queue after this round: **373 pending, 776 done, 176 blocked, 13 failed, 63 excluded.**
+**Cap is `batch_173` — this round IS that batch. Cap reached; stopping.**
