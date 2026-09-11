@@ -1039,6 +1039,23 @@ live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
   reproduces, so a reader can judge it.
 - empty — no `correct_response`, or the instrument has no correct answer at all.
 
+`description_source` — who wrote the descriptions of figures, graphs, tables, equations or
+diagrams that sit in `item_text`, when there are any. Allowed values in
+`itemtext/provenance_vocab.csv`; `check_provenance.R` enforces them. **Added 2026-09-11 on
+#1848** (ENEM 2023), where INEP's accessibility booklet describes most figures itself but five
+items needed descriptions written here.
+
+- `source_published` — every description is the source's own wording.
+- `partly_generated` — at least one was written by this project. The rules, all enforced by
+  `check_provenance.R` against the `__items.csv` beside the provenance file:
+  generated descriptions go in `item_text` / `item_text_translated` **only**, each marked
+  inline (`(AI-generated)` in English, the source-language equivalent in the base field), and
+  **never in `option_text`**. When printed options carry no text at all (bare graphs), leave
+  `option_text` blank rather than describing them: a generated label on a response category
+  gets joined to `resp` and read as printed, and the marker does nothing for a merge.
+  Disclosed on the public issues page, exactly as `machine_translation` is.
+- empty — no descriptions of non-text content.
+
 `machine_translation` means this project generated the English rather than the study's
 authors. That obliges an entry on the public issues page — ratified 2026-09-02 — and
 `check_issues_page.R` now reports those tables as DUE until one exists.
