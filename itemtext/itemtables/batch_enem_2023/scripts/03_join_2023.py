@@ -42,21 +42,30 @@ LANGUAGE = "Portuguese"   # ENEM is administered in Portuguese (irw#1777)
 
 # Column order copied from itemtables/batch_015/weber2026_name_knowledge__items.csv,
 # the first table shipped under the #1777 administered-language policy: the four
-# _translated columns sit after resp, then `language`. raw_resp is appended last as
+# _translated columns sit after resp, then `language`. resp_raw is appended last as
 # this project's addition.
 #
-# raw_resp carries the printed option letter (A-E). The standard documents it as a
-# stand-in for `resp` when no scoring key exists; here it is ADDITIONAL, because the
-# live ENEM tables have both a scored `resp` (0/1) and a `text` column holding the raw
-# letter. Without it there is no per-option letter anywhere in the item text, so
-# option_text could not be joined to `text == "A"` -- and row order is not a safe
-# substitute, since Redivis does not guarantee it. validate_items.R only falls back to
-# raw_resp when `resp` is absent, so adding it alongside changes no gate.
+# resp_raw carries the printed option letter (A-E), under the spelling ruled in #2094.
+# The standard documents it as a stand-in for `resp` when no scoring key exists; here
+# it is ADDITIONAL, because the ENEM response tables have both a scored `resp` (0/1)
+# and the raw letter (`resp_raw`, or `text` in the nominal tables). Without it there is
+# no per-option letter anywhere in the item text, so option_text could not be joined to
+# the chosen letter -- and row order is not a safe substitute, since Redivis does not
+# guarantee it. validate_items.R only falls back to resp_raw when `resp` is absent, so
+# adding it alongside changes no gate.
 SCHEMA = ["table", "section_id", "item", "instrument", "instructions",
           "section_prompt", "item_text", "correct_response", "option_text", "resp",
           "item_text_translated", "option_text_translated",
           "instructions_translated", "section_prompt_translated",
-          "language", "raw_resp"]
+          "language", "resp_raw"]
+
+# Items whose printed options carry no text at all -- each option is a bare graph or
+# diagram. 01_pdf_sourced_2023.py still writes a generated description per option, but
+# a generated option label gets joined to responses and read as if it were printed, and
+# the inline marker does nothing for a merge (#1848 review). So option_text and
+# option_text_translated ship blank for these; correct_response and resp_raw keep the
+# options addressable. The item_text description of the option format stays, marked.
+NO_PRINTED_OPTION_TEXT = {"78578", "125902"}
 
 
 def load_itens():
@@ -158,7 +167,7 @@ def main():
                 "correct_response": "" if annulled else key,
                 "option_text": r["option_text"],
                 "resp": 0 if annulled else (1 if r["option_letter"] == key else 0),
-                "raw_resp": r["option_letter"],
+                "resp_raw": r["option_letter"],
                 "_letter": r["option_letter"],
             })
             seen[area].add(item)
@@ -180,18 +189,21 @@ def main():
                 sys.exit(f"{item}: key {r['correct_response']} != ITENS_PROVA {keys[item]}")
             inst, instructions = instr[area]
             t = tr_items.get(item, {})
+            blank_opts = item in NO_PRINTED_OPTION_TEXT
             out[area].append({
                 "table": r["table"], "section_id": f"{r['table']}_1", "item": item,
                 "item_text_translated": t.get("stem", ""),
-                "option_text_translated": t.get("options", {}).get(r["option_letter"], ""),
+                "option_text_translated": "" if blank_opts else
+                    t.get("options", {}).get(r["option_letter"], ""),
                 "instructions_translated": tr_instr.get(area, ""),
                 "section_prompt_translated": "",
                 "language": LANGUAGE,
                 "instrument": inst, "instructions": instructions,
                 "section_prompt": "", "item_text": r["item_text"],
                 "correct_response": r["correct_response"],
-                "option_text": r["option_text"], "resp": int(r["resp"]),
-                "raw_resp": r["option_letter"],
+                "option_text": "" if blank_opts else r["option_text"],
+                "resp": int(r["resp"]),
+                "resp_raw": r["option_letter"],
                 "_letter": r["option_letter"],
             })
             added[area].add(item)

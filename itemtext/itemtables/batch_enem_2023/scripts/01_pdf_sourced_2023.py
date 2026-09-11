@@ -22,6 +22,11 @@ description for these, so they were generated from the rendered page image. The
 marker is inline (so it travels with the text) and also recorded in the
 `desc_provenance` column and in PROVENANCE.md.
 
+The per-option descriptions for 78578 and 125902 (whose printed options are bare
+graphs / diagrams) are still written here, but 03_join_2023.py blanks them in the
+shipped option_text: a generated label on a response category is not permitted
+(#1848 review). Only item_text may carry generated, marked description.
+
 Style follows INEP's own conventions in the DOSVOX files:
   "Descrição da figura: ... (Fim da descrição)"
   "Descrição das alternativas: <shared framing>" followed by per-option specifics

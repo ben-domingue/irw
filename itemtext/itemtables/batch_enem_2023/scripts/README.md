@@ -18,6 +18,12 @@ the `enem*` tables are a standing exclusion in the item-text skill (see
 | `08_validate_corrected.sbatch` | re-run of the gate against the #1942-CORRECTED tables; this is the one that counts |
 | `09_audit_batch.sbatch` | generates `../audit_report.csv` |
 
+`03` was edited after it ran, on review (#1848): it now emits `resp_raw` (not
+`raw_resp`) and blanks `option_text` / `option_text_translated` for 78578 and
+125902, whose printed options carry no text. The committed `__items.csv` had the
+same two changes, and the drop of annulled item 14887, applied directly, so this
+edited `03` has not itself been re-run.
+
 `04` is kept alongside `08` on purpose: it is the record of what was actually
 run before #1942 landed, and its log names the pre-fix CSV paths.
 
