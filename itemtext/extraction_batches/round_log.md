@@ -17321,3 +17321,61 @@ came back PASS=5. Transient (first-run output not captured); classified on the r
   wording) for the sibling `_smpi` table.
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_177 — 2026-09-10T21:56 (claim) → 22:13 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 355 pending; cap batch_189). Fourth
+round at SIX agents: no kills, all six agents returned (slowest 11.9 min, sned_bendall_2024); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `smpi_lorenzoluaces_2020_phq9` | **written** | 36 (9×4) | `paper_order` | PARTIAL (PHQ_1/3/4/5/7/8/9 pinned; PHQ_2↔PHQ_6 not), verify PASS |
+| `sned_bendall_2024` | **written** | 60 (6×10) | `paper_explicit` | VERIFIED (Table 1 counts: 8 totals + 48 regional cells exact; MacArthur 24/24), verify PASS |
+| `song_2023_rses` | **written** | 40 (10×4) | `paper_order` | PARTIAL (keying clusters + published M/SD/alpha; within-class order not), verify PASS |
+| `smpi_lorenzoluaces_2020_shaps` | blocked (rights) | — | — | — |
+| `song_2025_ep` | blocked (rights) | — | — | analysis banked, verify_song_2025_ep.R PASS |
+| `song_2025_fg` | blocked (rights) | — | — | — |
+
+**Written 3 / blocked 3 / failed 0 — yield 3/6 (50%).** Circuit breaker not near (0% failed); all three blocks
+are determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row.
+
+Gates: normalize_nulls 0 changed; audit_batch 3 PASS, no anomalies (no WARNs to explain); verify_batch PASS=3;
+lint_verification clean (3 rows; no data_labels tables, so no NOT_NEEDED rows owed); irw-validate 0 ERROR / 0 WARN;
+check_provenance clean for this batch (the 13 `mixed` review lines are all pre-existing tables).
+
+### Notable
+- **Servant Leadership Survey blocked on rights (song_2025_ep, song_2025_fg).** Originator article (van
+  Dierendonck & Nuijten 2011, PMC3152712) is CC BY-NC and its item-table note says the SLS "may freely be used for
+  scientific purposes". **Orchestrator CONFIRMED both strings** in the Europe PMC fullTextXML. Song et al.'s items
+  are negated rewordings, treated as derivative. **No SLS row in instrument_rights_register.csv (confirmed by grep);
+  a block row is warranted and reaches the still-pending `song_2025_hu` and `song_2025_st`** (and any other
+  song_2025_* SLS dimension), which will otherwise each burn an agent re-deriving the same verdict. Banked for an
+  unblock: ep reproduces Table 2 M/SD/skew/kurtosis to 0.0009; EP3's English reads positive but behaves negated;
+  FG items correlate positively with the negatively-printed SLS items although FG wording reads the other way
+  (polarity puzzle). Dictionary Description calls fg an "unlabeled construct"; it is SLS Forgiveness.
+- **SHAPS blocked on rights.** Clause "may be reproduced under its proper title for personal use and research.
+  Reproduction in any book or manual or for commercial purpose must be negotiated with the British Journal of
+  Psychiatry" — **orchestrator CONFIRMED** on the CamCOPS page; the 1995 article itself was not read (paywalled),
+  so the block rests on a verbatim secondary quotation. No SHAPS register row exists; block row warranted
+  (`^SHAPS_?[0-9]+$`). Independent obstacle: paper describes a 4-point agree/disagree scale, live data are 0–4 with
+  all five levels used and 4 = most pleasure, so anchors are unrecoverable anyway.
+  **Disclosure:** the shaps agent sent ben's email address as the `email` parameter of one Unpaywall API lookup
+  (DOI 10.1192/bjp.167.1.99), against the standing instruction not to send it to outside services.
+- **song_2023_rses RSES8 overrides the paper's keying.** Paper lists item 8 as negatively worded; **orchestrator
+  CONFIRMED** it is stored unreversed: counts 14/96/798/330, r = .54–.59 with the positive items vs .01–.16 with
+  3/5/9/10, and reversing it moves the total off the published M/SD. Items 3/5/9/10 are stored already
+  reverse-scored (option_text runs agree→disagree for those). Disclosed in public_note. Text is the UMD English
+  RSES as translated_substitute; administered language (Chinese) is inferred, not stated by the paper.
+- **sned_bendall_2024 response-data defect: `rt` holds whole-study completion time.** **Orchestrator CONFIRMED**:
+  one distinct rt value per id across all 801 ids, range 549–177642 s, median 3789. Under the rt-scope rule this
+  should be a named covariate (e.g. `cov_completion_time_s`) in `data/sned_bendall_2024.R`. Not filed.
+  Text from the study's Gorilla Open Materials (CC BY); the MacArthur prompt ships the administered slider text,
+  not the paper's paraphrase. Paper Table 1 typos (All-column urban-leisure mean 6.43 vs 6.64; UK most-time 6.24
+  vs 6.42) are paper errors, not data defects.
+- **smpi_lorenzoluaces_2020_phq9:** canonical PHQ-9 form anchors shipped although the paper describes "none of the
+  days"/"all the days" (disclosed in public_note, same as the batch_176 GAD-7 sibling). Table holds the 487
+  SMPI-routed participants, not the paper's n=1503.
+- Orchestrator note: the first merge into mapping_verification.csv via csv.writer re-terminated 29 existing
+  LF-only lines as CRLF (the file has mixed endings); reverted and re-done as a pure append (+3 lines).
+
+Cap is `batch_189`; not reached. Ending normally.
