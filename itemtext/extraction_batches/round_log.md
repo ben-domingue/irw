@@ -17379,3 +17379,53 @@ check_provenance clean for this batch (the 13 `mixed` review lines are all pre-e
   LF-only lines as CRLF (the file has mixed endings); reverted and re-done as a pure append (+3 lines).
 
 Cap is `batch_189`; not reached. Ending normally.
+
+## batch_178 — 2026-09-10T22:15 (claim) → 22:31 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 349 pending; cap batch_189). Fifth
+round at SIX agents: no kills, all six agents returned (slowest ~10 min, stoyel_2021_athlete_internal); 19G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `srivani_2022_education4` | **written** | 33 (11×3) | `data_labels` | NOT_NEEDED (S2 coding sheet ties codes to text; 33/33 count cells match) |
+| `stachl_2020_belonging` | **written** | 65 (13×5) | `paper_explicit` | VERIFIED (PCM difficulties vs S1 Table D, max dev 0.0027; 78/78 swaps worse; weak pair split by descriptor labels), verify PASS |
+| `stenhouse_2026_math_anxiety` | **written** | 141 | `data_labels` | NOT_NEEDED (xlsx headers carry wording; 141/141 count cells match) |
+| `song_2025_hu` | blocked (rights) | — | — | analysis banked, verify_song_2025_hu.R PASS |
+| `song_2025_st` | blocked (rights) | — | — | — |
+| `stoyel_2021_athlete_internal` | blocked (rights) | — | — | — |
+
+**Written 3 / blocked 3 / failed 0 — yield 3/6 (50%).** Circuit breaker not near (0% failed); all three blocks
+are determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row.
+
+Gates: normalize_nulls fixed 1 file (stenhouse, 142 lines); audit_batch 2 PASS / 1 WARN (explained below);
+verify_batch PASS=1, MISSING(exempt)=2; lint_verification clean (3 rows incl. 2 NOT_NEEDED, written to both the
+batch file and the permanent tracker); irw-validate ok on all 3; check_provenance clean for this batch (the 13
+`mixed` review lines are all pre-existing tables).
+
+### Notable
+- **Servant Leadership Survey block extended to song_2025_hu and song_2025_st** (Humility items 10/18/25/29 and
+  Stewardship items 11/19/26, negated). Same clause and same PMC3152712 XML hash as batch_177's confirmed check.
+  Both agents flag that `instrument_rights_register.csv` has no SLS row; a BLOCK row covering all song_2025 SLS
+  tables is left for a human.
+- **SATAQ-3 blocked on rights (stoyel_2021_athlete_internal).** The table is SATAQ-3 (not SATAQ-4). Thompson's
+  own page: "provided free of cost to those who wish to use it for non-commercial (ie, you make no money)
+  purposes." **Orchestrator CONFIRMED** in both cached Wayback copies. No SATAQ register row exists; suggested BLOCK
+  row is in notes. Leads for the 11 pending stoyel_2021 siblings: sociocult_info/sociocult_pressure/tv_internalization
+  are likely the same SATAQ-3 block; `social_media` items were written to mirror SATAQ (derivative question) and
+  its item_k codes are positional over non-contiguous SMED source items; edeq_* already register-blocked; PANAS
+  (pos/neg_affect) register says ship.
+- **srivani_2022_education4 response-data defect: all "Disagree" answers dropped.** The questionnaire prints
+  "Disagree (-1)", but `data/srivani_2022_education4.py` keeps only {0,1,2}. **Orchestrator CONFIRMED**: 20 cells
+  of -1 in the S2 data sheet; live n_rows 1575 = 1595 − 20 (ELN −7, LET −2, ELS −3, TDE −4, ECT −4). Shipped with a
+  public_note. Not filed.
+- **stenhouse_2026_math_anxiety response-data defect: 1–10 endpoints dropped.** Raw 17.1/20.1 store the endpoints
+  as "1 - Not anxious"/"10 - Very anxious"; `pd.to_numeric(errors="coerce")` blanks them. **Orchestrator CONFIRMED**:
+  17.1 raw 295 → live 241 (−44 −10), 20.1 raw 294 → live 254 (−33 −7), both live resp 2–9. The audit WARN (2 of
+  27 items with no option_text) is this defect, not an itemtext one: the only labelled points are the missing ones.
+  Also: section 15 asks "How far do you agree" but the file's labels are Never..Always — shipped as the file has it.
+  18.x items adapt Hunt & Sari's MTAS (copyright notice only, no restrictive term) — ship-shaped, no register row
+  written. Not filed.
+- **stachl_2020_belonging:** wording read by eye from cartoon images (S1 Fig A1, 300 dpi); cartoon wording
+  preferred over S1 Table A where they differ ("go ask"); punctuation worth a spot-check.
+
+Cap is `batch_189`; not reached. Ending normally.
