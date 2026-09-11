@@ -18172,3 +18172,30 @@ This is the fifth round on the `tsai_2017_treeit_*` family and the first TAM tab
 4. **Next round:** TAM PEOU/PU should reuse TAM BI's instrument string form and verify script. The agent pre-checked both: PU max deviation 0.0003, PEOU 0.0005. PU1 vs PU5 (0.876 vs 0.874) is a thin ordering gap.
 
 Cap is batch_199; 196 is not the cap. Ending normally.
+
+## batch_197 — 2026-09-11T07:48:43-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. The circuit breaker did not trip (0% failed).
+
+This round finishes the `tsai_2017_treeit_*` family's TAM tables (PEOU, PU) and opens the `tuason_2021_*` family. The two TAM agents reused the batch_196 cache after re-checking sha256, and kept scratch in their own `.cache/<table>/` dirs.
+
+- `tsai_2017_treeit_tam_peou`: **done**. 6 items, resp 2-5, 24 rows. **VERIFIED.** Table 3's per-item item-total r (0.860/0.842/0.825/0.780/0.756/0.873) is reproduced in order, max deviation 0.0005. Of the 720 orderings only the published one reproduces; the nearest control, a PEOU1<->PEOU6 swap, misses by 0.0132. No 6-column window or single-column substitution comes close (best 0.0919 and 0.0210). Instrument string follows TAM BI's form, ending "Perceived Ease of Use".
+- `tsai_2017_treeit_tam_pu`: **done**. 5 items, resp 2-5, 20 rows. **VERIFIED, with a thin margin.** Item-total r 0.876/0.870/0.860/0.838/0.874 is reproduced, max deviation 0.00029. The PU1<->PU5 swap misses by 0.00182, only 0.00032 beyond the family tolerance of 0.0015 (3.6x the 3-dp rounding half-width). An independent route rules the swap out: the one-factor loading rank PU1>PU2>PU5>PU3>PU4 matches Table 3's LISREL loading rank (0.87/0.86/0.84/0.80/0.77).
+- `tuason_2021_covid_coping_enjoy`: **done**. 23 items (Enjoy_01-03, 05-24; no Enjoy_04 exists and the paper lists 23 options), resp 0/1, 46 rows. `data_labels`: the codes are the PLOS S2 .sav column names, and the variable labels' "E<n>" prefixes match 23/23. option_text is blank because the columns carry no value labels. **The response data have a real defect (not an itemtext defect), disclosed in public_note:** 0/1 columns were filled in only for the low/high well-being groups. See Step 5b below.
+
+Both TAM tables: resp 1 ("Strongly disagree") is not shipped because no respondent used it. The gate requires an exact resp-set match. The TAM columns print no instructions (heading only), and `translated_substitute/study_supplied` matches the batch_196 siblings (English-only materials for a Mandarin-reading sample).
+
+**Gates:** normalize_nulls changed 0 files; audit_batch PASS x3 with no WARNs (nothing for Step 5c); verify_batch PASS x2 + 1 exempt (data_labels); lint clean (3 rows, including the NOT_NEEDED row written to both files); irw-validate ok x3. check_provenance.R flags only the pre-existing `tian2026_digital_competence` entry and the standing `mixed` review list; nothing from this batch.
+
+**Step 5b re-checks (orchestrator):** all confirmed.
+- **tuason defect**, from the cached s002.sav: summed Enjoy_* per respondent is 0 for 322, 2 for 1, 4 for 2, 5 for 612 and 8 for 1. Every one of the 938 `Emjoy` strings lists exactly 5 picks. Crossed with `Well_being_3groups`: group 2 (middle) has 321 all-zero and 1 not; group 1 has 1 all-zero; group 3 has none. 163 all-zero respondents picked option 1 in `Emjoy`. The 0/1 columns agree with the `Emjoy` picks for 610 of 938 rows (the agent's 609 of 616 low/high, plus the one filled-in middle respondent).
+- **TAM PU/PEOU:** re-ran `verify_tsai_2017_treeit_tam_pu.R` (PASS; it also reprints PEOU and BI). The article text layer reads "PU1 0.912 0.87 0.9124 0.6759 0.876 PU2 0.86 0.870 PU3 0.80 0.860 PU4 0.77 0.838 PU5 0.84 0.874" and "PEOU1 0.905 0.85 0.9065 0.6201 0.860 PEOU2 0.78 0.842 PEOU3 0.76 0.825 PEOU4 0.74 0.780 PEOU5 0.70 0.756 PEOU6 0.86 0.873". All 11 shipped statements match S2's `pdftotext -layout` print order (statements 1-5 PU, 6-11 PEOU). Per-level counts xlsx = live for all PU items.
+
+**For the human:**
+1. **The tuason_2021_covid_coping_enjoy response data should be fixed at the processing script** (`data/tuason_2021_thriving_covid.py`). Either rebuild Enjoy_* from the `Emjoy` pick string or drop the middle well-being group; as it stands, 321 respondents' zeros are false. No GitHub issue was filed; that is your call. The item text is correct either way.
+2. **The family rights ruling from batch_192 is still open.** Both TAM agents, like TAM BI, found no wording shared with the Zhang et al. (2003) S1 checklist and wrote no register row. The ruling should confirm that the escalation does not reach the three TAM tables.
+3. **The same "not established" link applies to all three TAM tables:** that Table 3's PU/PEOU/BI numbering follows S2's print order (supported by the 5+6+4=15 layout and BI12-15 numbering).
+4. **Next round starts on `tuason_2021_loneliness_emotional/_social` and `_wellbeing`.** The S2 .sav is cached at `.cache/tuason_2021_covid_coping_enjoy/s002.sav`. The loneliness labels are terse ("Emotional loneliness 1 (emptyness)"), not the administered wording. The labels say 1=No, 2=More or less, 3=Yes, but the script maps text to No=0/More or less=1/Yes=2. The De Jong Gierveld scale has a rights history in SKILL.md. WB1-8 carry no variable or value labels and are coded 18-24.
+5. `tsai_2017_treeit_h8_message` (the batch_196 H8 ruling) is still open.
+
+Cap is batch_199; 197 is not the cap. Ending normally.
