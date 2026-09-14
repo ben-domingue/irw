@@ -124,4 +124,36 @@ for (n in names(SRC)) {
     cat(sprintf("  item %-2s key %-42s -> %-12s matches shipped: %s\n",
                 n, k, got, identical(got, WANT[[n]])))
 }
+## ---- D. the option rows: raw_resp -> resp must follow the data-derived key ----
+# Added after the 2026-09-14 correction that moved the options out of item_text and into
+# option_text/raw_resp rows. The claim being tested is new: for every single-select item,
+# the option row whose raw_resp equals the key must carry resp 1 and every other option row
+# resp 0. If that mapping were wrong the table would say a child scored 1 for the wrong
+# choice, which no earlier check would have caught.
+cat("\n=== D. option rows: the keyed letter scores 1, the others 0 ===\n")
+bad <- character(0); checked <- 0
+SINGLE <- setdiff(LETTERED, 13)   # 13 is check-all; handled on its own below
+for (n in SINGLE) {
+    rows <- items[items$item == paste0(n, "code") & !is.na(items$raw_resp), ]
+    if (!nrow(rows)) next
+    got <- sort(unique(unlist(strsplit(derived(n), ","))))
+    for (i in seq_len(nrow(rows))) {
+        want <- as.integer(rows$raw_resp[i] %in% got)
+        if (is.na(rows$resp[i]) || rows$resp[i] != want)
+            bad <- c(bad, paste0(n, "code/", rows$raw_resp[i]))
+        checked <- checked + 1
+    }
+}
+cat(sprintf("  %d option rows across %d single-select items; disagreements: %s\n",
+            checked, length(SINGLE),
+            if (!length(bad)) "none" else paste(bad, collapse = ", ")))
+multi <- items[items$item == "13code", ]
+cat(sprintf("  13code is CHECK-ALL, so no single option maps to a score: option rows carry\n"))
+cat(sprintf("  blank resp (%d rows) and the two scored levels sit on their own rows (%d).\n",
+            sum(!is.na(multi$raw_resp) & is.na(multi$resp)),
+            sum(is.na(multi$raw_resp) & !is.na(multi$resp))))
+pic <- unique(items$item[is.na(items$option_text) & !is.na(items$raw_resp)])
+cat(sprintf("  items whose options are PICTURES (lettered but no text): %s\n",
+            paste(setdiff(pic, "13code"), collapse = ", ")))
+
 cat("\nVERDICT: PASS\n")
