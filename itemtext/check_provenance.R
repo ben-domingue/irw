@@ -89,6 +89,7 @@ sub_nocol <- character(0)
 needs_note <- character(0)
 note_reason <- character(0)
 needs_review <- character(0)
+nt_bad <- character(0)
 withdrawn <- character(0)
 stamped   <- character(0)
 unstamped <- character(0)
@@ -176,6 +177,9 @@ for (f in files) {
         if ("translation_source" %in% names(x)) {
             tr <- ifelse(is.na(x$translation_source), "", trimws(x$translation_source))
             sub_blank <- c(sub_blank, x$table[ts == "translated_substitute" & !nzchar(tr)])
+            nt_bad <- c(nt_bad, sprintf(
+                "  %-44s not_translated on a translated_substitute row: English is in the base fields",
+                x$table[ts == "translated_substitute" & tr == "not_translated"]))
         } else {
             ## The column postdates most of the corpus (added 2026-09-02), so these
             ## rows have no field to leave blank. Counted apart because the remedy
@@ -270,6 +274,28 @@ for (f in files[grepl("/itemtables/batch_[^/]+/provenance\\.csv$", files)]) {
     }
 }
 
+## `translation_source=not_translated` (added 2026-09-14, #1848), checked against the
+## text. Blank means "administered in English"; not_translated means "not English,
+## and no English ships on purpose". The second is only true if the _translated
+## columns really are empty, so a stray cell fails -- otherwise the record would say
+## no IRW English ships while some does, and the disclosure check would never see it.
+for (f in files[grepl("/itemtables/batch_[^/]+/provenance\\.csv$", files)]) {
+    x <- read.csv(f, stringsAsFactors = FALSE, colClasses = "character")
+    if (!"translation_source" %in% names(x)) next
+    for (tbl in x$table[trimws(x$translation_source) %in% "not_translated"]) {
+        it <- file.path(dirname(f), paste0(tbl, "__items.csv"))
+        if (!file.exists(it)) next
+        d <- read.csv(it, stringsAsFactors = FALSE, colClasses = "character",
+                      encoding = "UTF-8")
+        cols <- grep("_translated$", names(d), value = TRUE)
+        filled <- cols[vapply(cols, function(k) any(!is.na(d[[k]]) & nzchar(trimws(d[[k]]))),
+                              logical(1))]
+        if (length(filled))
+            nt_bad <- c(nt_bad, sprintf("  %-44s not_translated, but these columns have text: %s",
+                                        tbl, paste(filled, collapse = ", ")))
+    }
+}
+
 ## One table, two records that disagree. Reported, never enforced: which record
 ## holds is a judgement about the evidence, not something a script can settle.
 cl <- do.call(rbind, claims)
@@ -329,6 +355,11 @@ if (length(marker_bad)) {
     cat("\nGENERATED-TEXT MARKERS (#1848: generated descriptions belong in item_text only,",
         "\nalways marked, on a description_source=partly_generated row):\n", sep = "")
     cat(marker_bad, sep = "\n"); cat("\n")
+}
+
+if (length(nt_bad)) {
+    cat("\nNOT_TRANSLATED CONTRADICTED (the record says no English ships):\n")
+    cat(nt_bad, sep = "\n"); cat("\n")
 }
 
 ## A machine translation is IRW-generated content, so it is disclosed publicly.
@@ -447,5 +478,5 @@ if (file.exists(page) && length(needs_review)) {
 ## copy of the page we read -- otherwise a colleague's branch checkout would
 ## fail everyone's gate for a defect that is not there. This exact false
 ## positive happened on 2026-09-02, minutes after the 60 entries were merged.
-quit(status = if (length(bad) || length(marker_bad) ||
+quit(status = if (length(bad) || length(marker_bad) || length(nt_bad) ||
                   (length(undisclosed) && page_is_current)) 1L else 0L)
