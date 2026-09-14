@@ -14293,3 +14293,63 @@ exactly like a two-wave design by the ratio alone.
 Both were `human_review` only because no column met the id heuristic, which
 is a symptom of a file that has no items rather than of a file that needs
 eyes on it.
+
+## 2026-09-14 — Repos weekly run: 0 good, 2 worth_retrying after Step 2b, OSF unreachable all run
+
+Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, the 14
+`HIGH_YIELD_TERMS` due since their last watermark — `growth mindset` was
+skipped this pass, not yet due). Bookkeeping pushed straight to main as
+`191f26c` (14 `search_terms_log.csv` rows + 26 `repo_triage_seen_keys.csv`
+keys).
+
+**OSF was unreachable for all 14 terms** — every query returned
+`HTTPSConnectionPool(host='api.osf.io', port=443): Read timed out. (read
+timeout=30)`. Dataverse and DataCite both searched normally. This is a
+run-wide OSF outage, not a per-term issue like the 2026-09-07 entry's
+`grit`/`resilience` false positives. Per the connector's own design the
+affected terms' watermarks did not advance, so a later run re-covers them —
+`self-esteem`, `self-efficacy`, `depression`, `anxiety`, `burnout`,
+`perceived stress`, `well-being`, `life satisfaction`, `academic
+motivation`, `work engagement`, `psychological resilience`,
+`procrastination`, plus 2 more, all still owe an OSF pass.
+
+37 raw candidates found; 23 new after `repo_triage_seen_keys.csv` dedup
+(the other 14 were already triaged via the monthly full sweep or a prior
+weekly run, same overlap the two connectors are designed to share).
+Triage: 0 `good`, 2 `human_assistance`, 1 `below_min_n`, 20
+`no_usable_file`. `no_usable_file` here is one dominant shape — 20 of 20 hit
+"no resolvable tabular file on landing page" — mostly Zenodo/ScienceDB/
+DataCite metadata-only records or code-only deposits, plus a UKDA depositor
+page not reachable without institutional access.
+
+Step 2b (`irw_retriage_ha.py`, run by hand since this connector's own
+script doesn't chain it) resolved both `human_assistance` rows to
+`worth_retrying`, 0 `human_review` — no `human_review/` file this batch:
+
+- **DVN/QUVQIR** — "Replication Data for: Partisanship and perceived costs
+  predict carbon [tax support?]". Item columns hold text-coded Likert
+  responses (`'Strongly Agree'`, etc.) rather than numeric codes — needs a
+  human to map the text scale to `resp`, not a QC failure.
+- **DVN/XZTGXT** — "When Value Conflict Becomes a Governance Burden:
+  Ideological Polarization, Residential Segregation, and Depression among
+  Medicare Beneficiaries" (5,357 participants, 43 items). `dup_id_item`
+  failed but at a 1.0x ratio, the same shape the entry above this one just
+  showed can go either way (genuine longitudinal waves vs. a raw/binned
+  pair of the same variable at two levels of coarseness) — needs a look at
+  the actual columns before writing a script either way.
+
+TODO.md entry added for both.
+
+**Per-run candidate/triage CSVs were not committed to the review branch.**
+The task's own template still says to commit
+`monthly_candidates_weekly_2026-09-14.csv` /
+`monthly_triage_weekly_2026-09-14.csv` to the PR branch, but both names are
+now covered by `.gitignore:57-58` specifically to close the force-add
+loophole documented in the 2026-09-08 entry above (`f7cbdda` was the sixth
+routine to force past it; that PR was closed unmerged for exactly this).
+Following that precedent rather than the stale template wording: this
+write-up plus the two DOIs above are the durable record, and the PR
+description carries the same detail instead of a committed CSV. The raw
+files remain on disk only in this session's `runs/` (gitignored, disposable
+per README's "Where files live" table) and will not survive the container;
+both DOIs are re-resolvable from their URLs if either needs another look.
