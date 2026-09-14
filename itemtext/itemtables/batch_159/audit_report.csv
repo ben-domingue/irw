@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"roelen_2020_dietary_diversity","PASS",17,17,TRUE,TRUE,FALSE,TRUE,0,0,""
+"roelen_2020_k6","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""
+"roelen_2020_rses","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
+"roettl_2018_arousal","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"

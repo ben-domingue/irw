@@ -16,7 +16,7 @@ Batches that emit these columns in different orders are both correct.
 | `section_id` | Identifier for a group of items that share a common context; functions like `item_family`, annotating testlets and grouped items. |
 | `item` | Persistent identifier for the probe being used to measure — matches the core IRW dataset's `item` field exactly. |
 | `instrument` | Full, human-readable name or title for the instrument identified by `table`. |
-| `language` | Language the instrument was administered in, named plainly (`German`, `Spanish`) rather than as a code. Present when that language is not English. |
+| `language` | Language the instrument was administered in, named plainly (`German`, `Spanish`) rather than as a code. Present when that language is not English. A multi-language administration lists every language, semicolon-separated (`English; Turkish; Dutch; German`) — see "Administered language" below. |
 | `instructions` | Literal text of the instructions provided to the participant for the overall instrument. |
 | `section_prompt` | Literal text of a shared prompt (e.g. a reading passage) that applies to all items within a given `section_id`. |
 | `item_text` | Literal text of the specific prompt or question associated with an `item`. |
@@ -63,6 +63,19 @@ data deposit and the paper's own supplements. If the administered wording is the
 ship it; if it is not, take the fallback and say in provenance which files you checked
 and that they contained no text in that script. Do not go hunting off-source for a
 published original — that is a later pass, not a blocker.
+
+**Several administered languages in one table: a semicolon list.** When one table's
+respondents read different language versions (a multi-country administration), `language`
+names every administered language, English included, separated by `; ` — e.g.
+`English; Turkish; Dutch; German` — in the order the paper names them or by sample
+share. The base fields hold the one version that could be recovered, the provenance note
+says which version that is, and `public_note` says who read something else. Ruled by
+Ben 2026-09-11 on `szameitat_2015_multitask_examples` and
+`szameitat_2015_occupation_multitask`, after the round had split between leaving
+`language` unset (the `huang_2016_cesd` precedent) and listing all four. The list form wins
+because the empty field would make a majority-translated table read as an English
+administration, which is exactly what the backfill query above cannot afford. Query such
+tables with a substring match, not equality.
 
 Whether the shipped English is the authors' own rendering or a canonical instrument
 does **not** change any of this. `text_source` distinguishes those (`study_materials`

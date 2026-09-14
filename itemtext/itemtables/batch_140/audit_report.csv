@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"pilch_2021_coping_behavior","PASS",16,16,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"pilch_2021_fear_covid19","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"pilch_2021_personality_ipip20","PASS",20,20,TRUE,TRUE,FALSE,TRUE,0,0,""
+"pilch_2021_protection_motivation","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"

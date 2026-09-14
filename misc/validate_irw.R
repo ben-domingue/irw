@@ -21,7 +21,7 @@
 ##
 ## Example:
 ##
-##   source("https://raw.githubusercontent.com/ben-domingue/irw/main/src/misc/validate_irw.R")
+##   source("https://raw.githubusercontent.com/ben-domingue/irw/main/misc/validate_irw.R")
 ##   ## or, if working locally:
 ##   ## source("/path/to/irw/src/misc/validate_irw.R")
 ##

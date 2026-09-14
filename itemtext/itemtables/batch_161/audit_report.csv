@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"rosetti_2023_cas","PASS",22,22,TRUE,TRUE,FALSE,TRUE,0,0,""
+"rosetti_2023_gad7","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"rosetti2023_gad7","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"rosharudin_2023_dass21","PASS",21,21,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"

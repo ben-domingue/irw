@@ -277,8 +277,16 @@ Sub-classifies each `human_assistance` row into `not_item_response` /
 typical action). Usually resolves ~60% of the bucket automatically.
 
 **Only rows whose `refined_flag` is literally `human_review` go into
-`human_review/`.** Write them to
-`human_review/human_review_<mode>_batch<N>.csv` in this repo (e.g.
+`human_review/`.** Since 2026-09-09 the script does this for you: at the
+end of every run it writes them to
+`human_review/human_review_<source>_<date>.csv`, merging and de-duplicating
+on `doi` if that file already exists, and `--no-archive` opts out. It used
+to be a step the caller had to remember, and the 2026-09-09 PMC weekly run
+is what happens when nobody does — Step 2b's own output lives in `runs/`,
+which is gitignored, so its three `human_review` rows died with the
+container. Check the `[human_review] archived N row(s)` line is in the run
+output; if you are writing one of these by hand instead, name it
+`human_review/human_review_<mode>_batch<N>.csv` (e.g.
 `human_review_pmc_batch1.csv`, `human_review_plos_batch27.csv`,
 `human_review_batch14.csv` for the repository-discovery mode) — a
 permanent, git-tracked archive, replacing the old "human eye" queue-sheet
@@ -628,6 +636,13 @@ Before uploading a file from `irw_output/` to Redivis, run through
 `datastandard.md`'s "What to verify before saving" checklist — the QC
 warnings recorded in the triage CSV point at exactly what to check.
 
+Run `run_qc()` on the final response table. Supply source-documented
+`permitted_values` and `item_constructs` when available; the shared validator's
+[response-scale evidence](../../../../irw_validate/README.md#response-scale-evidence)
+section defines these Python API inputs and their severity rules. Observed
+range differences alone warn. Verify the source before splitting or dropping
+items, and resolve documentation-backed failures before writing the output.
+
 If the batch also produced item text, its gate chain (Step 3.5:
 `normalize_nulls.R` → `validate_items.R --resp-csv` → `audit_batch.R
 --resp-dir`) is part of this checklist, and `itemtext_output/` must contain
@@ -915,12 +930,11 @@ follow and expensive to rediscover.
 
 **Run your own output through `run_qc()`.** A Step 3 script writes straight
 to `irw_output/` and never touches triage, so *none* of the QC checks run on
-it. The 2026-08-26 Eugene-Springfield build shipped 20 tables in which nine
-mixed two or more response scales, plus two administrative columns
-(`submiss`, `smiss` -- missing-response counts) carried as items, and nothing
-objected. Two checks now exist for exactly this — `resp_scale_mixed` (fail)
-and `item_scale_outlier` (warn) — but they only help if the script calls them.
-Import `run_qc` and assert no `fail` before writing.
+it. The 2026-08-26 Eugene-Springfield build exposed mixed item blocks and two
+administrative columns (`submiss`, `smiss` -- missing-response counts) carried
+as items. Import `run_qc`, review its warnings against the source and assert no
+`fail` before writing. Range differences and item prefixes alone are warnings;
+they do not establish a construct boundary or justify dropping an item.
 
 **A script that drops columns must balance its books.** After melting, assert
 that every source column is either in the output or was skipped for a printed
@@ -1005,13 +1019,15 @@ over the integer cells (or its reflection, when a reverse-code was applied
 after imputation), the file is mean-imputed and those cells must be dropped,
 not shipped.
 
-**An item's observed maximum is not its scale.** `run_qc`'s
-`resp_scale_mixed` reads it as one, so a rarely-endorsed top category on a few
-items of a subscale trips it. Check the response distributions before
-splitting: a handful of respondents reaching 7 on one item of four, with the
-rest topping out at 6, is one left-skewed scale, not two. Waive the check
-through a named, printed exemption rather than either splitting a real
-subscale or silently dropping the assert.
+**An item's observed range is not its permitted response set.** A rarely used
+extreme can make one item's observed range narrower than another's. The shared
+checks now warn on that pattern in either direction, so the pattern alone
+needs no failure exemption. Complete documented permitted sets can resolve
+width warnings; an observed value outside such a set fails. Use explicit
+source-backed construct mappings for construct findings, as described in
+[response-scale evidence](../../../../irw_validate/README.md#response-scale-evidence).
+Never infer a codebook from the observed categories or split a scale solely
+because its items use different formats.
 
 **Demographics deposited as regression dummies are recoverable.** Take the
 index of whichever indicator is 1, and the omitted index where none is -- the

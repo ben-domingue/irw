@@ -22,6 +22,10 @@ human_review         -- genuinely ambiguous; needs eyes on the raw file
 Output
 ------
 irw_retriage_ha.csv  -- original columns + refined_flag + refined_reason
+human_review/human_review_<source>_<date>.csv
+                     -- the human_review rows, copied into the permanent
+                        archive that discovery runs read for exclusions.
+                        Suppress with --no-archive.
 """
 
 from __future__ import annotations
@@ -295,6 +299,86 @@ FLAG_ORDER = [
 ]
 
 
+HUMAN_REVIEW_DIR = "human_review"
+
+# Columns the existing human_review/*.csv archive uses, in order. A retriage
+# output carries these plus whatever the connector added; extras are dropped so
+# every file in the directory stays diffable against the others.
+HUMAN_REVIEW_COLS = [
+    "source", "title", "url", "doi", "license", "flag", "reasons",
+    "n_responses", "n_participants", "n_items", "density", "data_file",
+    "n_other_files", "refined_flag", "refined_reason",
+]
+
+
+def archive_human_review(retriage_csv, *, source=None, date=None, stream=None):
+    """Copy the `human_review` rows of a retriage output into the permanent archive.
+
+    Step 2b's own output is a per-run file under `runs/`, which is gitignored
+    and disposable -- so before this existed, an unattended run's `human_review`
+    rows died with the container. `human_review/*.csv` is the standing archive
+    that replaced the retired "human eye" queue tab (deprecated 2026-08-12), and
+    `_load_human_review_exclusions()` reads every file in it on every discovery
+    run, so a row that never lands here is a row a future run will re-surface
+    and re-triage from scratch. The 2026-09-09 PMC weekly run lost three that
+    way (see the 2026-09-09b BATCH_LOG entry); this makes the archive a step
+    the runner takes rather than one a caller has to remember.
+
+    Writes `human_review/human_review_<source>_<date>.csv`. Re-running the same
+    source on the same day merges into that file and de-duplicates on `doi`
+    rather than clobbering it. Returns the path written, or None if the
+    retriage held no `human_review` rows.
+    """
+    import os, sys
+    from datetime import date as _date
+    stream = stream or sys.stderr
+
+    try:
+        df = pd.read_csv(retriage_csv)
+    except Exception as exc:
+        print(f"!! human_review archive skipped: cannot read {retriage_csv} ({exc})",
+              file=stream, flush=True)
+        return None
+    if "refined_flag" not in df.columns:
+        return None
+    hr = df[df["refined_flag"] == "human_review"].copy()
+    if hr.empty:
+        return None
+
+    if source is None:                          # connectors stamp every row with
+        col = hr["source"] if "source" in hr.columns else None   # their own name
+        source = str(col.mode().iat[0]) if col is not None and not col.mode().empty             else "unknown"
+    source = re.sub(r"[^a-z0-9]+", "_", str(source).lower()).strip("_") or "unknown"
+    date = date or _date.today().isoformat()
+
+    # Relative to this file, not cwd: a scheduled connector may be invoked from
+    # anywhere, and an archive written outside automated_finding/ is one the
+    # exclusion loader will never read.
+    out_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                           HUMAN_REVIEW_DIR)
+    os.makedirs(out_dir, exist_ok=True)
+    out = os.path.join(out_dir, f"human_review_{source}_{date}.csv")
+
+    hr = hr.reindex(columns=HUMAN_REVIEW_COLS)
+    n_new = len(hr)
+    if os.path.exists(out):
+        try:
+            prev = pd.read_csv(out).reindex(columns=HUMAN_REVIEW_COLS)
+            hr = pd.concat([prev, hr], ignore_index=True)
+            if "doi" in hr.columns:
+                hr = hr.drop_duplicates(subset="doi", keep="first")
+            n_new = len(hr) - len(prev)
+        except Exception as exc:                # never lose today's rows to a
+            print(f"!! could not merge into {out} ({exc}); "                    # bad
+                  f"writing this run's rows only", file=stream, flush=True)     # merge
+    hr.to_csv(out, index=False)
+    shown = os.path.relpath(out, os.getcwd())      # a connector run from outside
+    if shown.startswith(os.pardir):                # the repo gets the plain path
+        shown = out                                # rather than a ../../.. chain
+    print(f"[human_review] archived {n_new} row(s) -> {shown}", flush=True)
+    return out
+
+
 def chain_step2b(triage_csv, *, run=True, stream=None):
     """Run Step 2b over `triage_csv`'s human_assistance rows, or say it wasn't.
 
@@ -358,6 +442,9 @@ def main():
                     help="triage CSV to read (default: irw_triage.csv)")
     ap.add_argument("--output", default="irw_retriage_ha.csv",
                     help="output CSV (default: irw_retriage_ha.csv)")
+    ap.add_argument("--no-archive", action="store_true",
+                    help="don't copy the human_review rows into human_review/ "
+                         "(default: archive them, since runs/ is disposable)")
     args = ap.parse_args()
 
     args.input = resolve_in_path(args.input)
@@ -377,6 +464,12 @@ def main():
     args.output = in_runs_dir(args.output)
     ha.to_csv(args.output, index=False)
     print(f"Wrote {len(ha)} rows to {args.output}\n")
+
+    # runs/ is disposable; human_review/ is not. Archiving here rather than in
+    # chain_step2b covers both entry points at once, since that helper reaches
+    # this script through main().
+    if not args.no_archive:
+        archive_human_review(args.output)
 
     # ── Summary ──────────────────────────────────────────────────────────────
     counts = ha["refined_flag"].value_counts()

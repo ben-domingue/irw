@@ -85,10 +85,78 @@ df5 <- df5 |>
   rename(id=Participantcode)
 artist_codes <- setNames(artist_data$Code, artist_data$Name)
 
+# -------- Study 5: two columns the deposited answer key does not cover --------
+# Study 5 scores a response by looking its column header up in the separate
+# answer-key workbook. Both workbooks hold exactly 132 authors, so the counts
+# agree and nothing looks wrong -- but two of the names do not match, and
+# `artist_codes[artist]` then returns NA. `ifelse(x == NA, 1, 0)` is NA for
+# every respondent, so 124 real AUT/NON answers were published as NA, with no
+# error, no warning and no change in row count (#2093).
+#
+#   study-5 column     answer key           raw values in the column
+#   Susan_Smith        `Susan_Smit` (AUT)   AUT x8  / NON x54
+#   Geronimo_Stilton   absent; the key      AUT x36 / NON x26
+#                      carries an unmatched
+#                      `Paulo_Coelho` (AUT)
+#
+# Footnote 3 of the paper explains both. The instrument was revised AFTER these
+# 62 people had answered, so the deposited key is the revised instrument and the
+# deposited data is the administered one:
+#
+#   "Initially it was Geronimo Stilton, but this is a character rather than an
+#    author. Another typo we noticed at a very late stage was the author Susan
+#    Smith. This should be S.E. Smith or Susan Smit. Given that the latter is
+#    much more likely to be known to Dutch-speaking readers, we recommend using
+#    her name. The changes have been made in the appendices."
+#
+# So the two get different treatment, because the deposit settles one and not
+# the other:
+#
+# * `Susan_Smith` is scored against the key's `Susan_Smit`. The paper says the
+#   printed name is a typo for that author and the key codes her AUT, so this
+#   follows the deposit rather than guessing. It recovers 62 responses.
+#   It deliberately does NOT merge the item with studies 3/4's `Susan Smit`:
+#   study-5 participants saw a misprinted name, and the DART's foils are
+#   near-misses of real authors ("Jane Jessup"), so a misprint is not
+#   self-evidently the same stimulus. #2084 kept the two codes distinct.
+#
+# * `Geronimo_Stilton` is DROPPED. The deposit has no code for the slot at all,
+#   and the two readings give the 62 responses opposite meanings -- NON because
+#   the authors call him "a character rather than an author", which is what a
+#   foil is; or AUT because the slot was built as an author item and the paper's
+#   Study 5 figures were computed under whatever key was then current. Nothing
+#   in the deposit distinguishes them, so scoring it either way would publish an
+#   assertion the source does not make. Dropping loses nothing that was usable:
+#   those 62 were already being served as NA. Settled 2026-09-09; restoring the
+#   item needs a ruling, not a rebuild.
+STUDY5_KEY_ALIASES <- c(Susan_Smith = "Susan_Smit")
+STUDY5_DROP_ITEMS  <- c("Geronimo_Stilton")
+
+# Fail loudly if the deposit changes under us, in either direction: a new
+# mismatch must not be silently NA'd, and a fixed deposit must not keep being
+# patched. This script is only ever run by hand against freshly downloaded
+# workbooks, so the moment to notice is now, not after upload.
+unmatched <- setdiff(names(df5)[-1], names(artist_codes))
+expected  <- c(names(STUDY5_KEY_ALIASES), STUDY5_DROP_ITEMS)
+if (!setequal(unmatched, expected)) {
+  stop("DART study 5: expected exactly these columns to be missing from the ",
+       "answer key -- ", paste(sort(expected), collapse=", "),
+       " -- but found ", paste(sort(unmatched), collapse=", "),
+       ". See #2093 before changing STUDY5_KEY_ALIASES/STUDY5_DROP_ITEMS.")
+}
+
+df5 <- df5 |> select(-all_of(STUDY5_DROP_ITEMS))
+
 # Loop through each artist's column in df5 and encode the responses
 for (artist in names(df5)[-1]) {
+  # The answer key is keyed on its own spelling of the name, which for
+  # Susan_Smith is not the one the participants were shown.
+  key_name <- if (artist %in% names(STUDY5_KEY_ALIASES)) STUDY5_KEY_ALIASES[[artist]] else artist
+  correct  <- artist_codes[[key_name]]
+  # An unresolved key is the whole defect: it scores everyone NA in silence.
+  if (is.na(correct)) stop("DART study 5: no answer-key code for ", key_name, " (#2093)")
   # Compare the participants' responses with the correct code and update df5 directly
-  df5[[artist]] <- ifelse(df5[[artist]] == artist_codes[artist], 1, 0)
+  df5[[artist]] <- ifelse(df5[[artist]] == correct, 1, 0)
 }
 df5 <-  pivot_longer(df5, cols=-c(id), names_to='item', values_to='resp')
 

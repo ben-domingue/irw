@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"pavic_2022_science_literacy","PASS",15,15,TRUE,TRUE,FALSE,TRUE,0,0,""
+"pavic_2022_vaccine_conspiracy","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"pedroso_2021_ifsq_laissezfaire","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""

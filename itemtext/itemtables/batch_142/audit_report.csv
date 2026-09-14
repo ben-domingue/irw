@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"powell_2018_affect","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,50,"50% of rows have blank option_text"
+"powell_2018_qcae","PASS",31,31,TRUE,TRUE,FALSE,TRUE,0,0,""
+"powell_2018_trust","WARN",3,3,TRUE,TRUE,FALSE,TRUE,66.7,0,"66.7% of rows have blank item_text"
+"poza2026_hlseu","PASS",16,16,TRUE,TRUE,FALSE,TRUE,0,0,""

@@ -855,9 +855,12 @@ apply_license_attribution <- function(biblio, label = "core",
 ##115 names would also go stale the moment one is renamed.
 ##
 ##BLANK-ONLY. A licence recorded in the sheet always wins, so this can never
-##overwrite a real one -- which matters for osf.io/3xvys specifically, where
-###2058 asks the depositor to set a public licence. If that lands, the sheet
-##supersedes this automatically and the entry can be deleted.
+##overwrite a real one. When a depositor later sets a licence, record it in
+##dictionary_auto.csv and delete the project here.
+##
+##That has happened once: osf.io/3xvys (parenting_anunciacao_2025_*, 6 tables)
+##was listed here until the depositor set CC BY 4.0 on 2026-09-08 (#2058). It
+##now comes from dictionary_auto.csv, so the list is 22 projects, 109 tables.
 OSF_PERMISSION_PROJECTS <- c(
     "qtqpb",  # 19  eammi_grahe_2018_*
     "75crd",  # 15  parentalempathy_gonzalez_2021_*
@@ -866,7 +869,6 @@ OSF_PERMISSION_PROJECTS <- c(
     "3w6ap",  #  7  kazarovytska_2026_*
     "t3a9r",  #  7  transyouth_leshin_2026_*
     "zevcs",  #  7  personalitychange_kramer_2025_*
-    "3xvys",  #  6  parenting_anunciacao_2025_*  -- see #2058
     "6nm2s",  #  6  thirdpartypunishmentunfairsharing_mcauliffe_*
     "rf9k8",  #  5  talaifar_2025_*
     "69nwe",  #  4  smpi_lorenzoluaces_2020_*

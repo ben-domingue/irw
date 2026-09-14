@@ -14041,3 +14041,255 @@ Recorded per-script rather than left to a later pass to re-derive:
 - **Xiao 2024, Shen 2026** — .xlsx deposits with positional codes and no
   label layer of any kind. Stems are in the source instruments' own
   publications.
+
+## 2026-09-09 — PLOS monthly run: 0 good, 21 human_assistance, 6 worth_retrying after Step 2b
+
+Scheduled monthly PLOS run (`irw_discover_plos_monthly.py --mode full
+--limit 150`, all 125 terms in the shared construct list x plosone).
+Bookkeeping went straight to main as `588eaf3` (1 `search_terms_log.csv`
+row + 123 DOIs into `plos_seen_dois.csv`).
+
+123 candidates triaged, 125/125 terms visited (123 hit the per-term cap of
+1): 95 `no_usable_file`, 21 `human_assistance`, 4 `below_min_n`,
+2 `not_item_response`, 1 `pii_suspected`. **0 `good`.**
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 21 `human_assistance` rows:
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 11 |
+| `worth_retrying` | 6 |
+| `aggregate_continuous` | 2 |
+| `human_review` | 2 |
+| `not_item_response` | 0 |
+
+**No raw candidates CSV was committed this run.** The 2026-09-08 entry
+above documents this exact routine force-adding
+`plos_monthly_candidates_weekly_2026-09-08.csv` past `.gitignore:59` as
+"the exact workaround `#2075` removed... the sixth scheduled routine to
+use it" (PR closed unmerged). This run is the seventh time that
+instruction would have recurred — it came from this run's own task
+prompt, unchanged since before `#2075`/`#2111` — so the write-up below
+stands in for the CSV instead, per README's "Where files live" table
+(`runs/` is "disposable once the batch is written up in BATCH_LOG.md").
+`runs/plos_monthly_candidates_full_2026-09-09.csv` and its
+`.retriage_ha.csv` sibling are on disk in this session's container only
+and will not survive it; every DOI below is reachable again from its URL,
+and all 123 are now in `plos_seen_dois.csv` so a future run won't
+re-surface them by accident — re-triage a specific one by DOI if it needs
+another look.
+
+### 6 `worth_retrying` (id-column mapping was the only flag, or a
+longitudinal dup_id_item shape)
+
+- **Construct validity of a global scale for Workplace Social Capital
+  based on COPSOQ III** (1316p / 8i) — a named, validated instrument
+  (COPSOQ III); low-confidence id-column mapping was the only issue.
+  `pone.0221893`
+- **An atlas of personality, emotion and behaviour** (1290p / 4i) —
+  dup_id_item fail but n_participants=1290 at a 1.2x ratio, consistent
+  with a longitudinal/repeated-measures design. `pone.0227877`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — dup_id_item fail, 1.0x
+  ratio, same longitudinal-shape read. `pone.0200609`
+- **Sports instructors' job insecurity and turnover intention in South
+  Korea** (267p / 57i) — id-column mapping only. `pone.0347639`
+- **Heterosexist microaggressions, student academic experience and
+  perception of campus climate** (471p / 13i) — id-column mapping only.
+  `pone.0231580`
+- **Influencing mechanisms of live streaming influencer characteristics
+  on purchase intention** (400p / 24i) — id-column mapping only.
+  `pone.0322294`
+
+### 11 `recoverable_format` — all the same shape: one deposit, several
+instruments bundled in one file (`resp_scale_mixed`, several with a
+`multi_scale` warning); the standard already answers this with one table
+per scale. Largest by participant count: Overconfidence/financial-literacy
+Japan panel (`pone.0315622`, 191,762p / 26i), risk-perception/protection
+motivation (`pone.0191994`, 3040p / 64i), Working Memory/Reasoning/Task
+Switching training (`pone.0142169`, 5382p / 3i), early language abilities
+and math skills in Chinese children (`pone.0181074`, 2012p / 16i),
+CEO narcissism and ambidextrous innovation (`pone.0280758`, 1662p / 15i).
+Remainder: smoking self-efficacy in Qatari men (`pone.0263306`), emotional
+regulation in shooters (`pone.0318872`), COVID-era quality of life
+(`pone.0276841`), teacher resilience/work engagement (`pone.0222518`),
+learning motivation and organizational performance (`pone.0304729`),
+exercise-video energy expenditure in children (`pone.0333283`).
+
+### 2 `human_review` (genuinely ambiguous, no clear id column)
+
+- **The role of early language abilities on math skills among Chinese
+  children** (2012p / 16i) — same DOI/table also carries the
+  `recoverable_format` multi-scale issue above; both need a look together.
+  `pone.0181074`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — same row as the
+  `worth_retrying` longitudinal read above; the id-column question and the
+  dup_id_item shape are separate open questions on the same table.
+  `pone.0200609`
+
+### 2 `aggregate_continuous`
+
+Not itemized here — see `runs/plos_monthly_candidates_full_2026-09-09.retriage_ha.csv`
+for this session's duration only; both need a look at whether the flagged
+columns are composite/subscale scores (drop) or genuine continuous
+per-item responses (keep) before any decision.
+
+None of the 123 candidates this run were flagged `good` outright.
+
+## 2026-09-09b — PMC weekly run: 0 good, and the license gate took a third of it before any data was read
+
+Scheduled weekly Europe PMC run (`irw_discover_pmc_monthly.py --mode
+weekly`, the 15 `HIGH_YIELD_TERMS` x the `JOURNALS` list). Bookkeeping went
+straight to main as `6721090` (1 `search_terms_log.csv` row + 60 DOIs into
+`pmc_seen_dois.csv`).
+
+60 candidates triaged, all 15 terms hit the per-term cap of 4 (so the
+`--limit 60` bound, not the term list, is what ended the run): 25
+`no_usable_file`, 22 `license_restricted`, 10 `human_assistance`, 3
+`below_min_n`. **0 `good`.**
+
+The license split is worth recording on its own: 38 cc-by, 21
+cc-by-nc-nd, 1 cc-by-nc. Every one of the 22 non-cc-by articles was
+dropped at the article license before its data file was examined, which
+is the correct conservative call but means the run's real denominator was
+38, not 60 — and 25 of those 38 had no usable file. One in three PMC
+articles reaching this connector is unusable on rights alone.
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 10 `human_assistance` rows: 3 `recoverable_format`, 3
+`aggregate_continuous`, 3 `human_review`, 1 `worth_retrying`, 0
+`not_item_response` / `wrong_file_selected`.
+
+**No raw candidates CSV is committed for this run.** PR `#2139` did force
+-add `pmc_monthly_candidates_weekly_2026-09-09.csv` past `.gitignore:60`
+— the same workaround the 2026-09-08 entry documents and the PLOS entry
+above (`2fff7ef`) declined to repeat forty minutes later on the same day.
+`#2139` was closed unmerged; this entry and the archived `human_review`
+rows are the durable record instead. The candidate rows were recovered
+from the closed PR's commit `8b32404` and Step 2b re-run locally, which
+reproduced the 3/3/3/1 split exactly — `irw_retriage_ha.py` is pure
+pattern matching over the triage columns with no re-download, so its
+output is deterministic and does not need the original container.
+
+### 3 `human_review` — archived to `human_review/human_review_pmc_2026-09-09.csv`
+
+Same failure mode in all three: no column met the id heuristic, so the row
+position was used as the person id and no item columns could be
+identified. Two of the three are plainly not person x item data and the
+classifier simply had nothing to rule them out with:
+
+- **Evaluation of sealing ability and adaptability of different endodontic
+  sealers: in vitro comparative study** (`PMC13450035`) — in vitro dental
+  materials measurements. Not IRW.
+- **Enhancing drought resilience in durum wheat: effect of root
+  architecture and genotypic performance** (`PMC11955194`) — agronomy
+  trial. Not IRW.
+- **Interrelations of work with health and wellbeing on a 50+ year old
+  workforce assessed using longitudinal self-reports and actigraphy**
+  (`PMC13415521`) — the one genuine maybe; longitudinal self-report plus
+  actigraphy, so the file may hold real item responses alongside sensor
+  channels. Worth a human look at the raw file.
+
+### 3 `recoverable_format` — all `resp_scale_mixed`, one deposit bundling several instruments
+
+- Domain-specific Grit Scale for College Athletics (`PMC11126736`, 589p /
+  50i) — also carries a `multi_scale` warning; a named instrument, the
+  best-shaped row in this bucket.
+- Physical activity distribution patterns and basketball skill acquisition
+  (`PMC13471745`, 300p / 7i).
+- Pain intensity and quality of life in lumbar disc patients
+  (`PMC13453140`, 112p / 37i) — also `multi_scale`.
+
+All three are the shape the standard already answers with one output file
+per scale.
+
+### 3 `aggregate_continuous`
+
+- Attitudes towards communication and perceived self-efficacy in nursing
+  students (`PMC13348135`, 125p / 100i) — dup_id_item at 1.0x plus a
+  `resp_ordinal` warning.
+- Education methods and self-efficacy of smoking cessation counselling
+  (`PMC8109004`, 311p / 4i) — same shape.
+- Perceptions about protein supplements in Saudi Arabia (`PMC13428538`,
+  358p / 2i) — >50 unique resp values after melt; 2 items, so it fails the
+  no-single-item bar's spirit regardless of what the resp column turns out
+  to be.
+
+### 1 `worth_retrying`
+
+- **Temperature and relative humidity differentially affect deltamethrin
+  and malathion** (`PMC13475386`, 101p / 6i) — an insecticide bioassay.
+  The dup_id_item-at-1.3x heuristic read it as a repeated-measures human
+  design; it is repeated measures on mosquitoes. Not IRW.
+
+So of the 10 rows Step 2b sub-classified, 3 are not human item response
+data at all (two `human_review`, the `worth_retrying`) and reached this
+bucket only because the heuristics work on triage columns rather than
+subject matter. The `HIGH_YIELD_TERMS` list is pulling non-psychometric
+PMC articles into the funnel — a term-list precision question for the
+journal_scout study, not a triage bug.
+
+## 2026-09-09c — The two PLOS `human_review` rows, resolved: both are score matrices, not item responses
+
+The 2026-09-09 PLOS entry left two rows genuinely ambiguous and their triage
+rows unavailable to archive (the run's CSV lived only in that session's
+container). Both were re-triaged from the DOI through `irw_discover_plos`'s
+own `process_one`, which reproduced the original flags exactly
+(`human_assistance` for both, `cc-by`, 2012p/16i and 502p/30i), and then the
+SI files were downloaded and read. Neither needs a human decision after all
+— **both are `not_item_response`. Drop them.** Both DOIs are already in
+`plos_seen_dois.csv`, so no future run will re-surface them and nothing
+needs to go into `human_review/`.
+
+### `pone.0181074` — early language abilities and math skills, Chinese children
+
+`journal.pone.0181074_S1_Table.xlsx`, 2012 rows x 17 columns, one row per
+child. The 16 columns the triage counted as items are **subtest totals**,
+not items — each has its own ceiling and they nest into each other:
+
+| column | range | column | range |
+|---|---|---|---|
+| object counting | 0–4 | listening comprehension | 0–31 |
+| forward counting | 0–12 | dictation | 0–37 (half-credit) |
+| magnitude comparison | 0–8 | informal math | 0–37 |
+| backward counting | 0–12 | formal math | 0–10 |
+| missing number | 0–11 | language skills | 0–60.5 (half-credit) |
+| addition / subtraction | 0–5 | non-verbal IQ | 0–26 |
+
+`informal math` is the sum of the counting/comparison subtests and
+`language skills` is listening comprehension + dictation, so the file even
+carries its composites alongside their parts — which is what `resp_scale_mixed`
+was reacting to. There is no item-level data in the deposit. Incidentally
+`gender` uses a `9999` sentinel and `age` a `109`, neither documented.
+
+### `pone.0200609` — teacher vs student perspectives, cognitive and motivational
+
+`journal.pone.0200609_S1_Data.xlsx`, 503 rows (502 unique IDs — one dup) x 35
+columns, with a `variable_names` codebook sheet that settles it. The 30
+"items" are three blocks of derived variables plus section-header spacers:
+
+- `sm_*` (7) — measured composites. The codebook calls them "Score out of
+  25", "Score out of 5", "Mean score between 1 and 4". Aggregates, no items.
+- `sc_*` (7) — "recoded from measurements", 1=low/2=medium/3=high. These are
+  a **tertile cut of the `sm_*` columns**, verified: the `sm` ranges under
+  each `sc` level partition with no overlap (e.g. `sm_cog` 0–15 → 1, 16–21 →
+  2, 22–25 → 3). Zero independent information, and the reason `dup_id_item`
+  fired — after the melt each student's score appears twice, once raw and
+  once binned.
+- `tj_*` (8) — a maths teacher and a language-arts teacher each rating the
+  student low/medium/high on four constructs. Real ordinal ratings, but
+  they are two raters judging a student on constructs, not an instrument
+  administered to anyone; the study design is judgment accuracy against the
+  `sc_*` recodes.
+
+So the `worth_retrying` longitudinal read of the dup_id_item shape on this
+row was wrong in an instructive way: the 1.0x repeat is not waves, it is the
+same seven measurements stored twice at two levels of coarseness. Worth
+noting for the heuristic — a raw/binned pair of the same variable looks
+exactly like a two-wave design by the ratio alone.
+
+Both were `human_review` only because no column met the id heuristic, which
+is a symptom of a file that has no items rather than of a file that needs
+eyes on it.

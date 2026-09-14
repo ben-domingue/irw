@@ -13,6 +13,14 @@
 # after which `red_up` is on PATH and `python3 -m red_up` works from anywhere.
 # The install must be editable and must point at a real `src` checkout: red_up
 # reads metadata/redivis_config.R next to itself for the dataset list.
+#
+# `irw_validate` used to ship here too, which meant the only way to get the
+# validator was to install the uploader. It is now its own distribution --
+# irw_validate/pyproject.toml -- because it needs pandas and nothing else, and
+# because the read/write line this file draws around red_up does not apply to
+# it. Install both from a checkout:
+#
+#   pip install -e /path/to/irw/src -e /path/to/irw/src/irw_validate
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -27,7 +35,6 @@ dependencies = ["redivis>=0.18.0"]
 
 [project.scripts]
 red_up = "red_up.cli:main"
-irw-validate = "irw_validate.cli:main"
 
 [tool.setuptools]
-packages = ["red_up", "irw_validate"]
+packages = ["red_up"]

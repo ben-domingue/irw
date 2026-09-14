@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"rzeszutek_2020_wwii_matgrandmother","WARN",29,29,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=231: mwojb26, mwojb27, mwojb28, mwojb29"
+"rzeszutek_2020_wwii_patgrandfather","WARN",29,29,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=150: owojdz27, owojdz28"
+"rzeszutek_2020_wwii_patgrandmother","WARN",29,29,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=161: owojb27"
+"SABFI2_Gallardo_Pujol_2018_LOT","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,0,""

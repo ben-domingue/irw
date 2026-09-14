@@ -9,8 +9,9 @@ order.
 
 `run_qc` here is the moved implementation itself, not a translation of it: the
 severity profiles in `irw_validate.model` are layered on top by
-`irw_validate.core`, never underneath. So a caller of `run_qc` sees exactly what
-it saw before this package existed.
+`irw_validate.core`, never underneath. PR #1697 intentionally revises the
+response-scale diagnostics in that one shared implementation; optional
+documented evidence is accepted through the same backwards-compatible import.
 """
 from ._checks import Check, irw_metadata, run_qc
 

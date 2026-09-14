@@ -228,11 +228,21 @@ manual Sheets-fill workflow on a different table — don't modify it.
 
 ## Standing exclusion: `enem*`
 
-**Do not extract item text for any `enem*` table.** Ben is handling the ENEM (Brazilian national
-exam) item text separately, confirmed 2026-08-18. All 52 are marked `status=excluded` in
-`extraction_batches/queue_state.csv`; never flip one back to `pending`, and skip them even when
-asked to process "the rest of the queue". If a user asks specifically for an `enem*` table, say it
-is excluded and check with them before doing anything.
+**Do not extract item text for any `enem*` table with this skill.** ENEM (the Brazilian
+national exam) item text is a separate hand-built workstream owned by @mateusmazza, not a
+gap in the queue -- see #1848 for the 2023 tables and #1709 for scaling to the other years.
+The exclusion exists because the source is INEP's own accessibility booklets and DOSVOX
+screen-reader files rather than a source paper, so none of Steps 1-4 apply; it is not a
+rights or availability bar.
+
+All 52 are marked `status=excluded` in `extraction_batches/queue_state.csv`. Never flip one
+to `pending`, and skip them even when asked to process "the rest of the queue". A table
+whose text has actually landed moves to `done` with its batch and timestamp, which is a
+different transition. If a user asks specifically for an `enem*` table, say it is excluded
+and check with them before doing anything.
+
+(Earlier revisions of this section said Ben was handling ENEM, confirmed 2026-08-18. That
+was superseded once the work started under #1848; corrected 2026-09-11.)
 
 ## Standing exclusion: commercially published instruments the source cannot share
 
@@ -350,6 +360,22 @@ match_item_text, match_item_code, notes`. `verdict` is `block` / `ship` / `ship_
 `escalate`; `ship_with_note` is the LOT-R shape, where the table ships but the provenance note must
 quote the caution and say why it does not block. An instrument already carrying a verdict is
 settled and needs no new escalation — record that you applied it, do not re-derive it.
+
+**A round may write a `block` row. A round may NEVER write `ship` or `ship_with_note`.**
+Ruled by Ben 2026-09-10, after batch_146 and batch_147 split on this in the same session:
+batch_146 found a `ship`-shaped picture for the PTCI and the SD3 and deliberately declined to
+write the rows; batch_147 wrote four, two of which (`SCCS`, the Qiu/Zheng/Wang `PANAS`) rest by
+their own notes on **silence rather than a positive grant**. Both rounds were reasoning honestly;
+the prompt simply did not say.
+
+The asymmetry is the point. A `block` is conservative, costs only a table that can be unblocked
+later, and the retry is cheap because the round banks its findings in `pending_index_notes.csv`.
+A `ship` row is the artifact *later rounds trust without re-deriving* — that is exactly what made
+batch_144 cheap — so a wrong `ship` propagates silently into published wording IRW has no grant
+for. Escalate every `ship`-shaped case to the human instead: put the quotes, the page sha256s and
+the reasoning in the provenance notes and the round summary, and leave the row unwritten.
+
+The four rows batch_147 wrote **stand** (Ben, 2026-09-10) — this rule is not retroactive.
 
 **The register's `match_*` columns find candidates. They do not decide anything.** Two failure
 modes, both of which produced wrong numbers in one afternoon:
@@ -1022,6 +1048,23 @@ live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
   as a machine translation is. Say in the `note` HOW it was derived and how well it
   reproduces, so a reader can judge it.
 - empty — no `correct_response`, or the instrument has no correct answer at all.
+
+`description_source` — who wrote the descriptions of figures, graphs, tables, equations or
+diagrams that sit in `item_text`, when there are any. Allowed values in
+`itemtext/provenance_vocab.csv`; `check_provenance.R` enforces them. **Added 2026-09-11 on
+#1848** (ENEM 2023), where INEP's accessibility booklet describes most figures itself but five
+items needed descriptions written here.
+
+- `source_published` — every description is the source's own wording.
+- `partly_generated` — at least one was written by this project. The rules, all enforced by
+  `check_provenance.R` against the `__items.csv` beside the provenance file:
+  generated descriptions go in `item_text` / `item_text_translated` **only**, each marked
+  inline (`(AI-generated)` in English, the source-language equivalent in the base field), and
+  **never in `option_text`**. When printed options carry no text at all (bare graphs), leave
+  `option_text` blank rather than describing them: a generated label on a response category
+  gets joined to `resp` and read as printed, and the marker does nothing for a merge.
+  Disclosed on the public issues page, exactly as `machine_translation` is.
+- empty — no descriptions of non-text content.
 
 `machine_translation` means this project generated the English rather than the study's
 authors. That obliges an entry on the public issues page — ratified 2026-09-02 — and

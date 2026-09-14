@@ -43,6 +43,12 @@ jobs:
           # with --no-deps left one pre-existing test unable to import cli.
           python -m pip install pandas
           python -m pip install -e .
+          # irw_validate is its own distribution now, not a rider on
+          # irw-red-up. Installing it here is also what checks its pyproject
+          # still builds -- the pipeline itself does not need the install,
+          # because red_up and irw_triage_updated both put the repo root on
+          # sys.path before importing it.
+          python -m pip install -e irw_validate
 
       - name: red_up
         run: python -m unittest discover -s red_up/tests -t . -v
@@ -74,6 +80,10 @@ jobs:
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core r-cran-readr
           Rscript misc/tests/smoke_validate_irw.R
+
+      - name: Curated BibTeX corrections
+        working-directory: metadata
+        run: Rscript tests/test_bibtex_overrides.R
 
       # The dictionary union (#1732). Runs offline -- dict_union.R touches no
       # network -- so the merge rule is checked on every PR rather than only
@@ -129,6 +139,16 @@ jobs:
           python metadata/check_config_parity.py \
             --rpkg  _deps/Rpkg/R/redivis-config.R \
             --pypkg _deps/Python-pkg/src/irw/config.py
+
+      # The ENEM post-scoring checks (#1942). Base R only -- no microdata, no
+      # network -- so the thresholds that decide whether a 45-million-row table
+      # is publishable are exercised on every PR rather than only when someone
+      # has 13 years of INEP files on disk. The test that matters is the
+      # false-positive one: a legitimately HARD form must still pass, because
+      # difficulty alone must never fail a build.
+      - name: enem scoring checks
+        working-directory: data
+        run: Rscript tests/test_enem_checks.R
 
   # A PR to data/ contains a conversion SCRIPT, never a table --
   # automated_finding/irw_output/ is gitignored, so no output is ever in the

@@ -1,0 +1,10 @@
+doi,BibTex,source_url,reason
+10.7910/DVN/X2C2PL,"@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
+  title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
+  publisher = {Harvard Dataverse},
+  version = {1},
+  doi = {10.7910/DVN/X2C2PL},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}",https://dataverse.harvard.edu/api/datasets/:persistentId/?persistentId=doi:10.7910/DVN/X2C2PL,"#1754: DOI content negotiation returns author 'ich Nguyen, Bich'; the deposit's citation metadata authorName is 'Van Bich Nguyen'. Preserve the full source name literally because the resolver's family/given-name parsing is defective. Dataset title, publisher, year and released version verified against the native Dataverse record on 2026-09-06."

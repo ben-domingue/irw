@@ -19,9 +19,8 @@ OUT_DIR = REPO_ROOT / "automated_finding" / "irw_output"
 # (numbered 17-42 in the original questionnaire) and split cleanly by
 # content into 5 more scales: job performance (17-21), value suppression/
 # surface acting (22-24), job dissatisfaction (25-29), coping (30-32),
-# workplace friendship (33-37, dropping item 35's Chinese-language
-# duplicate of item 36), abusive supervision (38-41). Item 42 (daily
-# overtime) is a single item, not shipped. The ambiguous duplicate
+# workplace friendship (33-37, all five items), abusive supervision
+# (38-41). Item 42 (daily overtime) is a single item, not shipped. The ambiguous duplicate
 # CO-1..CO-4 / CO-1.1..CO block (8 columns, unclear whether a distinct
 # construct or a raw-file artifact) is also not shipped.
 URL = ("https://journals.plos.org/plosone/article/file"
@@ -54,11 +53,25 @@ COPING = {
     "31、I usually remain calm in the face of work-related stress.": "cope2",
     "32、In my current job, I feel capable of handling many tasks simultaneously.": "cope3",
 }
+# Item 35 is the only questionnaire item left in Chinese, and it READS like a
+# translation of item 36 -- "\u6211\u53ef\u4ee5\u5411\u540c\u4e8b\u503e\u8bc9\u5fc3\u58f0", "I can confide my innermost
+# feelings to colleagues", against 36's "I can confide in my colleagues". It was
+# dropped as a duplicate on that reading until 2026-09-10. The response data says
+# they are different administered items: they agree on 81 of 396 rows, r = 0.208.
+#
+# The drop also removed the BETTER item. Item 35 correlates 0.663 with item 33 and
+# 0.612 with item 37; item 36 correlates 0.377 and -0.019 with the same two. Alpha
+# over the four shipped items is 0.571, and 0.705 over all five.
+#
+# fr5 is appended rather than inserted in questionnaire order on purpose: fr1-fr4
+# are already published item codes, and renumbering them would silently change what
+# an existing analysis refers to.
 FRIENDSHIP = {
     "33、I have built strong friendships at work.": "fr1",
     "34、I socialize with my colleagues outside the workplace.": "fr2",
     "36、I can confide in my colleagues.": "fr3",
     "37、I feel I can truly trust many of my coworkers.": "fr4",
+    "35、我可以向同事倾诉心声": "fr5",
 }
 ABUSIVE_SUP = {
     "38、My supervisor does not praise me for the efforts I make at work.": "as1",
