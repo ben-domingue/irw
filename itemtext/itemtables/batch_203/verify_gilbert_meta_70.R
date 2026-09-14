@@ -78,6 +78,16 @@ if (!file.exists(F)) {
     for (i in seq_len(nrow(fm)))
         cat(sprintf("     %-12s %-9s %d/%d booklets  claim=%s\n",
                     fm$code[i], fm$scope[i], fm$n_booklets[i], fm$n_pool[i], fm$claim[i]))
+    dic <- fm[fm$scope == "baseline-dictation", ]
+    if (nrow(dic)) {
+        cat("  LETTER DICTATION (added 2026-09-14 from 'Dictation for Stds1-2.pdf', the\n")
+        cat("  enumerator's sheet, which lists the four letters read out for EACH baseline\n")
+        cat("  form). Positions 2 and 4 are the same letter on all four forms; 1 and 3 are\n")
+        cat("  not. They still ship BLANK, because let_dic is defined in all three waves\n")
+        cat("  and the deposit publishes no endline dictation list -- the endline booklets\n")
+        cat("  print only answer blanks. What the sheet does settle is the section's own\n")
+        cat("  spoken instruction, which now ships.\n")
+    }
     gained <- unique(items$item[!is.na(items$item_text) | !is.na(items$option_text)])
     cat(sprintf("  items carrying literal text or options: %d of %d\n",
                 length(gained), length(unique(items$item))))
