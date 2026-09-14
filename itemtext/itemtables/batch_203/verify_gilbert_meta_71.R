@@ -15,7 +15,8 @@
 MAP <- c(b = 0, e1 = 0.5, e2 = 1)
 D <- read.csv(".cache/gilbert_meta_73/std12_dict.csv", stringsAsFactors = FALSE)
 D <- D[startsWith(D$stem, "mathwrit_std12"), ]
-d <- as.data.frame(readRDS(file.path(Sys.getenv("CLAUDE_JOB_DIR"), "tmp", "b203_gilbert_meta_71.rds")))
+d <- as.data.frame(irw::irw_fetch("gilbert_meta_71"))
+if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
 
 same <- setequal(D$stem, unique(d$item))
@@ -50,11 +51,56 @@ cat(sprintf("  %d of %d codes are wave-restricted and therefore discriminating\n
 cat(sprintf("  violations: %d%s\n", length(bad),
             if (length(bad)) paste0(" -- ", paste(bad, collapse=", ")) else ""))
 
+
+## ---- B. which item positions carry the SAME question on every form ----------
+# Added 2026-09-14. The first version of this table shipped the dictionary's task
+# label ("Addition-one digit") for all 20 items, on the argument that four parallel
+# forms mean no literal item belongs to a code. That is right for MOST positions and
+# wrong for some: the deposit publishes all eight booklets (four baseline forms, four
+# endline samples) and several positions print the identical problem in every one.
+# Those now ship the real question.
+#
+# THE CHECK, AND WHAT IT CANNOT SETTLE. b203_math12_forms.csv is built by reading all
+# eight booklet PDFs and recording, per question position, how many contain every
+# operand of that position's problem. A fixed problem appears in 8/8; one that varies
+# by form does not. The method only discriminates when an operand has two digits --
+# single digits appear somewhere on every math page, so 8/8 is uninformative there.
+# Those positions are reported separately and were settled by reading rendered pages.
+items <- read.csv("itemtables/batch_203/gilbert_meta_71__items.csv",
+                  stringsAsFactors = FALSE, na.strings = "NA")
+F <- ".cache/gilbert_meta_73/b203_math12_forms.csv"
+cat("\n=== B. form-constancy of each question position (8 booklets) ===\n")
+constB <- TRUE
+if (!file.exists(F)) {
+    cat("  skipped:", F, "not present (rebuild from the deposit PDFs)\n")
+} else {
+    fm <- read.csv(F, stringsAsFactors = FALSE)
+    disc <- fm[fm$discriminating == 1, ]
+    ok <- (disc$claim == "constant") == (disc$n_booklets == 8)
+    constB <- all(ok)
+    cat(sprintf("  %d of %d discriminating positions agree with the shipped reading%s\n",
+                sum(ok), nrow(disc),
+                if (all(ok)) "" else paste0(" -- DISAGREE: ", paste(disc$qno[!ok], collapse=", "))))
+    for (i in seq_len(nrow(disc)))
+        cat(sprintf("     %-3s %-12s operands %-9s %d/8 booklets  claim=%s\n",
+                    disc$qno[i], disc$code[i], disc$operands[i], disc$n_booklets[i], disc$claim[i]))
+    nd <- fm[fm$discriminating == 0, ]
+    cat(sprintf("  not discriminable this way (all operands single-digit): %s\n",
+                paste(nd$qno, collapse = ", ")))
+    cat("     add1d_d (9+9+9) and subt1d_a (8-3) are shipped constant on the rendered\n")
+    cat("     pages, not on this check; num (the Hindi word अठारह) likewise.\n")
+    shipped <- sub("^mathwrit_std12_", "", unique(items$item[!is.na(items$item_text)]))
+    cat(sprintf("  items shipping a literal question: %d of %d; all claimed constant: %s\n",
+                length(shipped), length(unique(items$item)),
+                all(shipped %in% c(fm$code[fm$claim == "constant"], "num"))))
+}
+
 cat("\n=== What this does NOT establish ===\n")
-cat("  Codes sharing the same wave profile are not separated from each other,\n")
-cat("  nor are members of a task family -- several items share one task\n")
-cat("  description. Their assignment rests on the dictionary naming each\n")
-cat("  variable, which it does. item_text is a TASK DESCRIPTION rather than a\n")
-cat("  literal item, because the deposit ships four parallel forms and the live\n")
-cat("  table records no form. PARTIAL for those reasons.\n")
-cat("\nVERDICT:", if (!length(bad) && same) "PASS" else "FAIL", "\n")
+cat("  Codes sharing the same wave profile are not separated from each other, nor\n")
+cat("  are members of a task family. Their assignment rests on the dictionary\n")
+cat("  naming each variable, which it does. Twelve of the twenty items still carry\n")
+cat("  no item_text: their question position prints a DIFFERENT problem on each of\n")
+cat("  the four parallel forms and the live table does not record which form a\n")
+cat("  child took, so no single wording is correct for them. PARTIAL for that\n")
+cat("  reason -- not for lack of a source.\n")
+cat("\nVERDICT:", if (!length(bad) && same && constB) "PASS" else "FAIL", "\n")

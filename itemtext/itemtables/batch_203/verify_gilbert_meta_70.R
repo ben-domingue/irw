@@ -15,7 +15,8 @@
 MAP <- c(b = 0, e1 = 0.5, e2 = 1)
 D <- read.csv(".cache/gilbert_meta_73/std12_dict.csv", stringsAsFactors = FALSE)
 D <- D[startsWith(D$stem, "langwrit_std12"), ]
-d <- as.data.frame(readRDS(file.path(Sys.getenv("CLAUDE_JOB_DIR"), "tmp", "b203_gilbert_meta_70.rds")))
+d <- as.data.frame(irw::irw_fetch("gilbert_meta_70"))
+if (!nrow(d)) stop("irw_fetch returned no rows -- nothing was checked")
 d$item <- as.character(d$item)
 
 same <- setequal(D$stem, unique(d$item))
@@ -41,11 +42,55 @@ cat(sprintf("  %d of %d codes are wave-restricted and therefore discriminating\n
 cat(sprintf("  violations: %d%s\n", length(bad),
             if (length(bad)) paste0(" -- ", paste(bad, collapse=", ")) else ""))
 
+
+## ---- B. which item positions carry the SAME question on every form ----------
+# Added 2026-09-14, for the same reason as gilbert_meta_71's part B. The first
+# version shipped the dictionary's task label for all 33 items on the parallel-forms
+# argument, without opening the booklets. The deposit publishes all of them -- four
+# baseline forms (Hindi_Written_1-2/Hindi1-2_Form1..4.pdf) and four endline samples
+# (Written Std1-2/mit1-2 sample 1..4.pdf) -- so which positions are fixed is a fact
+# that can be read off rather than assumed.
+#
+# THE CHECK. b203_hindi12_forms.csv records, per position, how many booklets contain
+# a distinctive substring of that position's printed content. The substrings are
+# taken from the PDFs' own text layer, which uses a legacy Kruti-Dev encoding and so
+# extracts as transliterated noise -- but that noise is DETERMINISTIC, so identical
+# content yields identical strings and differing content does not. Unlike the
+# arithmetic test in gilbert_meta_71, every position here discriminates, because
+# Hindi words are long enough not to collide.
+#
+# SCOPE per position: codes the dictionary defines at baseline only (let_fill*,
+# comp*) are checked against the four baseline forms alone, which is the complete
+# set for them; codes defined in all three waves are checked against all eight.
+items <- read.csv("itemtables/batch_203/gilbert_meta_70__items.csv",
+                  stringsAsFactors = FALSE, na.strings = "NA")
+F <- ".cache/gilbert_meta_73/b203_hindi12_forms.csv"
+cat("\n=== B. form-constancy of each question position ===\n")
+constB <- TRUE
+if (!file.exists(F)) {
+    cat("  skipped:", F, "not present (rebuild from the deposit PDFs)\n")
+} else {
+    fm <- read.csv(F, stringsAsFactors = FALSE)
+    ok <- fm$claim == fm$observed
+    constB <- all(ok)
+    cat(sprintf("  %d of %d positions agree with the shipped reading%s\n", sum(ok), nrow(fm),
+                if (all(ok)) "" else paste0(" -- DISAGREE: ", paste(fm$code[!ok], collapse=", "))))
+    for (i in seq_len(nrow(fm)))
+        cat(sprintf("     %-12s %-9s %d/%d booklets  claim=%s\n",
+                    fm$code[i], fm$scope[i], fm$n_booklets[i], fm$n_pool[i], fm$claim[i]))
+    gained <- unique(items$item[!is.na(items$item_text) | !is.na(items$option_text)])
+    cat(sprintf("  items carrying literal text or options: %d of %d\n",
+                length(gained), length(unique(items$item))))
+}
+
 cat("\n=== What this does NOT establish ===\n")
-cat("  Codes sharing the same wave profile are not separated from each other,\n")
-cat("  nor are members of a task family -- several items share one task\n")
-cat("  description. Their assignment rests on the dictionary naming each\n")
-cat("  variable, which it does. item_text is a TASK DESCRIPTION rather than a\n")
-cat("  literal item, because the deposit ships four parallel forms and the live\n")
-cat("  table records no form. PARTIAL for those reasons.\n")
-cat("\nVERDICT:", if (!length(bad) && same) "PASS" else "FAIL", "\n")
+cat("  Codes sharing the same wave profile are not separated from each other, nor\n")
+cat("  are members of a task family. Their assignment rests on the dictionary\n")
+cat("  naming each variable, which it does. Twenty-one of the thirty-three items\n")
+cat("  still carry no text, for two different reasons: their position prints\n")
+cat("  different content on each parallel form (let_fill1, matpic1-2, com_sen2,\n")
+cat("  make_sen*), or the item IS a picture with no printed words at all\n")
+cat("  (writpic*, obj_name*) or is dictated aloud (let_dic*, word_dic*).\n")
+cat("  matpic3-4 are pictures whose OPTIONS are words, so they ship options with\n")
+cat("  no item_text. PARTIAL for those reasons -- not for lack of a source.\n")
+cat("\nVERDICT:", if (!length(bad) && same && constB) "PASS" else "FAIL", "\n")
