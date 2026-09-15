@@ -29,10 +29,15 @@
 
 import io
 import os
+import sys
 
 import pandas as pd
 import pyreadstat
 import requests
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                "..", "automated_finding"))
+from irw_triage_updated import run_qc          # noqa: E402
 
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                        "..", "automated_finding", "irw_output")
@@ -80,6 +85,9 @@ def convert():
         long = long.sort_values(["id", "item"], key=lambda s: s if s.name == "id"
                                 else s.str.split("_").str[1].astype(int))
         long = long[["id", "item", "resp"]].reset_index(drop=True)
+        checks = run_qc(long)
+        bad = [c for c in checks if c.status == "fail"]
+        assert not bad, (name, [(c.name, c.detail) for c in bad])
         long.to_csv(os.path.join(OUT_DIR, f"{name}.csv"), index=False)
         print(f"{name}: rows={len(long)} ids={long['id'].nunique()} "
               f"items={long['item'].nunique()} "
