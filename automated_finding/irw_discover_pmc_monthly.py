@@ -42,6 +42,7 @@ from irw_discover_updated import _load_auto_exclusions, resolve_out_path
 from irw_discover_pmc import (
     from_pmc, process_one_isolated, _new_pool, JOURNALS, DEFAULT_JOURNALS,
     FIELDNAMES, SEEN_DOIS_PATH, load_seen_dois, append_seen_dois,
+    INCONCLUSIVE_FLAGS,
 )
 from irw_discover_monthly import TERM_LIST as FULL_TERM_LIST
 
@@ -155,8 +156,11 @@ def main():
                     if hit.doi in skip:
                         continue
                     skip.add(hit.doi)
-                    newly_attempted.append(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    # Same guard as irw_discover_pmc.py's main(). Without it
+                    # an infra failure (e.g. a missing xlrd) retired the DOI.
+                    if row["flag"] not in INCONCLUSIVE_FLAGS:
+                        newly_attempted.append(hit.doi)
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1
