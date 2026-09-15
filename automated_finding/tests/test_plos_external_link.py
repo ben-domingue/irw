@@ -117,5 +117,19 @@ class OsfGuidTest(unittest.TestCase):
         self.assertEqual(irw_batch_updated._osf_files("https://osf.io/"), ([], "", []))
 
 
+class DataverseLicenseShapeTest(unittest.TestCase):
+    def test_pre_5_10_string_license(self):
+        payload = {"data": {"latestVersion": {"license": "CC0", "files": [
+            {"dataFile": {"filename": "SAS-SV-Database.tab", "id": 7, "filesize": 9}}]}}}
+
+        class R(_Resp):
+            headers = {}
+        with mock.patch.object(irw_batch_updated, "_dataverse_instance", return_value="https://datahub.tec.mx"), \
+             mock.patch.object(irw_batch_updated.requests, "get", return_value=R(payload)):
+            files, lic, _ = irw_batch_updated._dataverse_files("", "10.57687/FK2/DCVIJU")
+        self.assertEqual(lic, "CC0")
+        self.assertEqual(files[0][0], "https://datahub.tec.mx/api/access/datafile/7")
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -261,7 +261,12 @@ def _dataverse_files(url: str, doi: str) -> tuple:
             "Dataverse candidate can be triaged until it lifts.")
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
-    license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
+    # Dataverse < 5.10 returns license as a bare string ("CC0"), newer as
+    # {"name": ..., "uri": ...}. The dict-only read crashed on older
+    # installations (datahub.tec.mx, PLOS 10.1371/journal.pone.0327226).
+    lic = latest.get("license") or {}
+    license_raw = (lic.get("name", "") if isinstance(lic, dict) else str(lic)) \
+        or latest.get("termsOfUse", "")
     out, oversized = [], []
     for f in latest.get("files", []):
         df = f.get("dataFile", {})
