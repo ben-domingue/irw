@@ -5,19 +5,12 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-14 repos weekly batch
 
-- [ ] **DR-NTU 10.21979/N9/P5WUGI ("Fact-Check Misinformation by Generative
-  AI: The Roles of Digital Literacy, Information Processing, and Information
-  Self-Efficacy")** — 668 respondents, 54 Likert items in five blocks, stored
-  as text labels. Triage wrongly called it `no_usable_file`. Deposit licence
-  is CC BY-NC 4.0, so it needs a licence ruling first; then find the item
-  wording (likely in the Technology in Society paper). See BATCH_LOG.md
-  2026-09-14.
+- [x] **DR-NTU 10.21979/N9/P5WUGI** — taken on Ben's NC approval
+  (2026-09-15): six `nguyen_2026_factcheck_*` tables, PR #2186, uploaded to
+  the Redivis draft, not released.
 
-- [ ] **UK Data Service ReShare 858431 (The Great Friendship Project,
-  loneliness trial)** — open CC BY 4.0 xlsx plus data dictionary: UCLA-3,
-  UCLA-20, 20-item `scs`, SWEMWBS, EQ-5D, ICECAP-A; 56 people × 3 waves.
-  Small n; decide whether it clears the bar. Normalise `Time` case
-  (`T0`/`t0`). See BATCH_LOG.md 2026-09-14.
+- [x] **UK Data Service ReShare 858431 (The Great Friendship Project)** —
+  skipped: 56 respondents, below datastandard.md's flat 100-id floor.
 
 - [ ] **Science Data Bank 10.57760/sciencedb.0103e** (personality,
   resilience, social support in Chinese college students) — `no_usable_file`

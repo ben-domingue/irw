@@ -14377,8 +14377,8 @@ automated flags were wrong in both directions:
   data dictionary with response labels: UCLA-3, UCLA-20, a 20-item `scs`
   scale, SWEMWBS, EQ-5D and ICECAP-A, 56 people across T0/T1/T2 (141 rows;
   `Time` mixes `T0`/`t0` case) in an intervention/control trial. CC BY 4.0.
-  Small n; plausibly the `below_min_n` row. SWEMWBS and EQ-5D are licensed
-  instruments, which matters for item text, not responses.
+  56 respondents is below the flat 100-id floor, so it is skipped (plausibly
+  the `below_min_n` row).
 - **ReShare 858764 (birdsong and well-being)** is `safeguarded`: the data
   zip returns 401 without a UKDS login. Access-blocked, not fileless.
 - **Science Data Bank 0103e and psych.000x6** could not be checked (their
@@ -14394,3 +14394,6 @@ automated flags were wrong in both directions:
 
 Because all 23 keys are now in `repo_triage_seen_keys.csv`, P5WUGI and
 858431 would never resurface on their own; they are carried in TODO.md.
+
+**Follow-up 2026-09-15:** Ben approved P5WUGI despite CC BY-NC; it shipped
+to the Redivis draft as six `nguyen_2026_factcheck_*` tables (PR #2186).
