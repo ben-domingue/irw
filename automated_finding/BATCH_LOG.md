@@ -14293,3 +14293,107 @@ exactly like a two-wave design by the ratio alone.
 Both were `human_review` only because no column met the id heuristic, which
 is a symptom of a file that has no items rather than of a file that needs
 eyes on it.
+
+## 2026-09-14 — Repos weekly run: 0 good by triage, 2 usable found by hand, OSF unreachable all run
+
+Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 14
+`HIGH_YIELD_TERMS`). Bookkeeping pushed straight to main as
+`191f26c` (14 `search_terms_log.csv` rows + 26 `repo_triage_seen_keys.csv`
+keys).
+
+**OSF was unreachable for all 14 terms** — every query returned
+`HTTPSConnectionPool(host='api.osf.io', port=443): Read timed out. (read
+timeout=30)`. Dataverse and DataCite both searched normally. This is a
+run-wide OSF outage, not a per-term issue like the 2026-09-07 entry's
+`grit`/`resilience` false positives. Per the connector's own design the
+affected terms' watermarks did not advance, so a later run re-covers them —
+`self-esteem`, `self-efficacy`, `depression`, `anxiety`, `burnout`,
+`perceived stress`, `well-being`, `life satisfaction`, `academic
+motivation`, `work engagement`, `psychological resilience`,
+`loneliness`, `procrastination` and `growth mindset` all still owe an OSF
+pass.
+
+37 raw candidates found; 23 new after `repo_triage_seen_keys.csv` dedup
+(the other 14 were already triaged via the monthly full sweep or a prior
+weekly run, same overlap the two connectors are designed to share).
+Triage: 0 `good`, 2 `human_assistance`, 1 `below_min_n`, 20
+`no_usable_file`. `no_usable_file` here is one dominant shape — 20 of 20 hit
+"no resolvable tabular file on landing page" — mostly Zenodo/ScienceDB/
+DataCite metadata-only records or code-only deposits, plus a UKDA depositor
+page not reachable without institutional access.
+
+Step 2b (`irw_retriage_ha.py`, run by hand since this connector's own
+script doesn't chain it) resolved both `human_assistance` rows to
+`worth_retrying`, 0 `human_review` — no `human_review/` file this batch:
+
+- **DVN/QUVQIR** — "Replication Data for: Partisanship and perceived costs
+  predict carbon pricing opposition better than objective costs". Item columns hold text-coded Likert
+  responses (`'Strongly Agree'`, etc.) rather than numeric codes — needs a
+  human to map the text scale to `resp`, not a QC failure.
+- **DVN/XZTGXT** — "When Value Conflict Becomes a Governance Burden:
+  Ideological Polarization, Residential Segregation, and Depression among
+  Medicare Beneficiaries" (5,357 participants, 43 items). `dup_id_item`
+  failed but at a 1.0x ratio, the same shape the entry above this one just
+  showed can go either way (genuine longitudinal waves vs. a raw/binned
+  pair of the same variable at two levels of coarseness) — needs a look at
+  the actual columns before writing a script either way.
+
+(Both later rejected on inspection; see the hand check below.)
+
+**Per-run candidate/triage CSVs were not committed to the review branch.**
+The task's own template still says to commit
+`monthly_candidates_weekly_2026-09-14.csv` /
+`monthly_triage_weekly_2026-09-14.csv` to the PR branch, but both names are
+now covered by `.gitignore:57-58` specifically to close the force-add
+loophole documented in the 2026-09-08 entry above (`f7cbdda` was the sixth
+routine to force past it; that PR was closed unmerged for exactly this).
+Following that precedent rather than the stale template wording: this
+write-up plus the DOIs above are the durable record, and the PR
+description carries the same detail instead of a committed CSV. The raw
+files remain on disk only in this session's `runs/` (gitignored, disposable
+per README's "Where files live" table) and will not survive the container;
+every DOI is re-resolvable from its URL if it needs another look.
+
+### Hand check of all 23 (same day) — the triage missed two usable datasets
+
+Every candidate DOI was resolved and the plausible files downloaded. The
+automated flags were wrong in both directions:
+
+- **Both `worth_retrying` rows are rejects.** DVN/XZTGXT is county-year
+  panel data (`fips`, `DV_year`, `depression_total`, `Gini`, `Poverty_T`,
+  ...; ~4,500 rows in `Depression_allrace.tab`) — the "participants" are
+  counties, the "items" covariates, and `dup_id_item` is the same county in
+  different years. DVN/QUVQIR's data (`panel_vars.tab`, 11,781 rows × 83
+  columns) is a Canadian opinion panel of single-item attitudes, bills and
+  demographics with no multi-item scale. Both TODO items removed.
+- **DR-NTU 10.21979/N9/P5WUGI was flagged `no_usable_file` but has one.**
+  `Technology in Society Dataset.tab` (SPSS original) is 668 respondents ×
+  54 item columns in five blocks (`C_1-10`, `G_1-12`, `H_1-12`, `I_1-11`,
+  `J3_1-5`, 7-point agreement stored as labels; `B1ad_1-4` 5-point frequency)
+  plus 5 scale scores. Deposit licence CC BY-NC 4.0, so it needs a licence
+  decision before anything else; item wording not yet located.
+- **UK Data Service ReShare 858431 (The Great Friendship Project) is open,
+  not access-blocked.** `858431_bundle.zip` holds `TGFP_data.xlsx` plus a
+  data dictionary with response labels: UCLA-3, UCLA-20, a 20-item `scs`
+  scale, SWEMWBS, EQ-5D and ICECAP-A, 56 people across T0/T1/T2 (141 rows;
+  `Time` mixes `T0`/`t0` case) in an intervention/control trial. CC BY 4.0.
+  56 respondents is below the flat 100-id floor, so it is skipped (plausibly
+  the `below_min_n` row).
+- **ReShare 858764 (birdsong and well-being)** is `safeguarded`: the data
+  zip returns 401 without a UKDS login. Access-blocked, not fileless.
+- **Science Data Bank 0103e and psych.000x6** could not be checked (their
+  file API requires login), so `no_usable_file` there is unverified.
+  0103e (personality, resilience and social support in Chinese college
+  students) is the one worth a manual look.
+- The rest are genuine rejects: four ISIR/GSAR/WARJMB Zenodo records holding
+  only a PDF, a restricted `.sav` (DataverseNL UIBTVT), an EEG deposit
+  (NEMAR), country-level index panels (DVN/BGQEET), rat behaviour (DVN/SIFCDV),
+  synthetic LLM help-seekers (Imperial), and Recherche Data Gouv ENKAUD, whose
+  `Barrier_value` is a 0-7 count of barriers per ecosystem service rather
+  than item responses.
+
+Because all 23 keys are now in `repo_triage_seen_keys.csv`, P5WUGI and
+858431 would never resurface on their own; they are carried in TODO.md.
+
+**Follow-up 2026-09-15:** Ben approved P5WUGI despite CC BY-NC; it shipped
+to the Redivis draft as six `nguyen_2026_factcheck_*` tables (PR #2186).
