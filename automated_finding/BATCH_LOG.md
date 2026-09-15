@@ -14294,7 +14294,7 @@ Both were `human_review` only because no column met the id heuristic, which
 is a symptom of a file that has no items rather than of a file that needs
 eyes on it.
 
-## 2026-09-14 — Repos weekly run: 0 good by triage, 2 usable found by hand, OSF unreachable all run
+## 2026-09-14 — Repos weekly run: 0 good by triage, 1 usable found by hand, OSF unreachable all run
 
 Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 14
 `HIGH_YIELD_TERMS`). Bookkeeping pushed straight to main as
@@ -14318,9 +14318,10 @@ pass.
 weekly run, same overlap the two connectors are designed to share).
 Triage: 0 `good`, 2 `human_assistance`, 1 `below_min_n`, 20
 `no_usable_file`. `no_usable_file` here is one dominant shape — 20 of 20 hit
-"no resolvable tabular file on landing page" — mostly Zenodo/ScienceDB/
-DataCite metadata-only records or code-only deposits, plus a UKDA depositor
-page not reachable without institutional access.
+"no resolvable tabular file on landing page". The hand check below found
+that reason covers several different cases: PDF-only Zenodo records,
+login-gated files (Science Data Bank, UKDS `safeguarded` 858764), and at
+least one deposit that does have a usable file (DR-NTU P5WUGI).
 
 Step 2b (`irw_retriage_ha.py`, run by hand since this connector's own
 script doesn't chain it) resolved both `human_assistance` rows to
@@ -14354,7 +14355,7 @@ files remain on disk only in this session's `runs/` (gitignored, disposable
 per README's "Where files live" table) and will not survive the container;
 every DOI is re-resolvable from its URL if it needs another look.
 
-### Hand check of all 23 (same day) — the triage missed two usable datasets
+### Hand check of all 23 (same day) — the triage missed one usable dataset
 
 Every candidate DOI was resolved and the plausible files downloaded. The
 automated flags were wrong in both directions:
@@ -14370,21 +14371,29 @@ automated flags were wrong in both directions:
   `Technology in Society Dataset.tab` (SPSS original) is 668 respondents ×
   54 item columns in five blocks (`C_1-10`, `G_1-12`, `H_1-12`, `I_1-11`,
   `J3_1-5`, 7-point agreement stored as labels; `B1ad_1-4` 5-point frequency)
-  plus 5 scale scores. Deposit licence CC BY-NC 4.0, so it needs a licence
-  decision before anything else; item wording not yet located.
+  plus 5 scale scores. Deposit licence CC BY-NC 4.0, so it needed a licence
+  decision before anything else. Item wording is in the SPSS variable labels
+  (see the header of `data/nguyen_2026_factcheck.py`).
 - **UK Data Service ReShare 858431 (The Great Friendship Project) is open,
   not access-blocked.** `858431_bundle.zip` holds `TGFP_data.xlsx` plus a
   data dictionary with response labels: UCLA-3, UCLA-20, a 20-item `scs`
   scale, SWEMWBS, EQ-5D and ICECAP-A, 56 people across T0/T1/T2 (141 rows;
   `Time` mixes `T0`/`t0` case) in an intervention/control trial. CC BY 4.0.
-  56 respondents is below the flat 100-id floor, so it is skipped (plausibly
-  the `below_min_n` row).
+  56 respondents is below the flat 100-id floor, so it is skipped. Its
+  triage flag is unknown: it is the only candidate with a known n below 100,
+  so it is probably the `below_min_n` row, but the triage CSV was not kept
+  and that cannot be confirmed. Either way it is not usable.
 - **ReShare 858764 (birdsong and well-being)** is `safeguarded`: the data
-  zip returns 401 without a UKDS login. Access-blocked, not fileless.
+  zip returns 401 without a UKDS login. Access-blocked, not fileless, and
+  safeguarded data comes under the UKDS End User Licence, which does not
+  allow redistribution, so it is a reject.
 - **Science Data Bank 0103e and psych.000x6** could not be checked (their
   file API requires login), so `no_usable_file` there is unverified.
-  0103e (personality, resilience and social support in Chinese college
-  students) is the one worth a manual look.
+  psych.000x6 ("Family relationship experience and growth mindset: neural
+  mechanisms of social negative feedback processing") is `restricted access`
+  in DataCite and a neural study, so it is a reject. 0103e (personality,
+  resilience and social support in Chinese college students) is the one
+  worth a manual look.
 - The rest are genuine rejects: four ISIR/GSAR/WARJMB Zenodo records holding
   only a PDF, a restricted `.sav` (DataverseNL UIBTVT), an EEG deposit
   (NEMAR), country-level index panels (DVN/BGQEET), rat behaviour (DVN/SIFCDV),
@@ -14392,8 +14401,9 @@ automated flags were wrong in both directions:
   `Barrier_value` is a 0-7 count of barriers per ecosystem service rather
   than item responses.
 
-Because all 23 keys are now in `repo_triage_seen_keys.csv`, P5WUGI and
-858431 would never resurface on their own; they are carried in TODO.md.
+Because all 23 keys are now in `repo_triage_seen_keys.csv`, none of these
+will come up again on their own. P5WUGI, 858431 and 0103e are carried in
+TODO.md. 858764 and psych.000x6 are recorded above as rejects.
 
 **Follow-up 2026-09-15:** Ben approved P5WUGI despite CC BY-NC; it shipped
 to the Redivis draft as six `nguyen_2026_factcheck_*` tables (PR #2186).
