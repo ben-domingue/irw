@@ -3860,6 +3860,17 @@ cogcontrol_gyurkovics_2019_sart,10.1037/xge0000698,NA,"Gyurkovics, M., Stafford,
 "
 cogcontrol_gyurkovics_2019_simon,10.1037/xge0000698,NA,"Gyurkovics, M., Stafford, T., & Levita, L. (2020). Cognitive control across adolescence: Dynamic adjustments and mind-wandering. Journal of Experimental Psychology: General, 149(6), 1017–1031. https://doi.org/10.1037/xge0000698",https://osf.io/7vbtr/overview,CC BY 4.0,NA,Cognitive control across adolescence - Ignoring stimulus location when identifying arrow direction," @article{Gyurkovics_2020, title={Cognitive control across adolescence: Dynamic adjustments and mind-wandering.}, volume={149}, ISSN={0096-3445}, url={http://dx.doi.org/10.1037/xge0000698}, DOI={10.1037/xge0000698}, number={6}, journal={Journal of Experimental Psychology: General}, publisher={American Psychological Association (APA)}, author={Gyurkovics, Máté and Stafford, Tom and Levita, Liat}, year={2020}, month=June, pages={1017–1031} }
 "
+cognitive_children_2026,10.6084/m9.figshare.32519529.v1,NA,"Carla Alexandra Yandún-Cartagena, Adriana Aroca - Fárez, Daniel Sono Toledo, Cristina Elizabeth Moreno Yandún",https://doi.org/10.6084/m9.figshare.32519529.v1,CC BY 4.0,NA,"Pre- and post-intervention cognitive assessment battery evaluating attention, memory, language, and logical thinking across school-age children (wave 0 = pre, 1 = post)","@misc{https://doi.org/10.6084/m9.figshare.32519529.v1,
+  doi = {10.6084/M9.FIGSHARE.32519529.V1},
+  url = {https://figshare.com/articles/dataset/Pre-_and_Post-Intervention_Cognitive_Assessment_Data_Matrix_Attention_Memory_Language_and_Logical_Thinking_in_Children_Anonymized_/32519529/1},
+  author = {Yandún-Cartagena, Carla Alexandra and Aroca - Fárez, Adriana and Sono Toledo, Daniel and Moreno Yandún, Cristina Elizabeth},
+  keywords = {Creative arts, media and communication curriculum and pedagogy},
+  title = {Pre- and Post-Intervention Cognitive Assessment Data Matrix: Attention, Memory, Language, and Logical Thinking in Children (Anonymized)},
+  publisher = {figshare},
+  year = {2026},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
+"
 cognitive_load_klimova_2023_know,NA,10.3886/E194063V2,"Klimova, Aigul, Deviatko, Inna, Lebedev, Daniil, and Semenova, Tatiana. Cognitive Load: Fully-labeled or end-labeled scales. Ann Arbor, MI: Inter-university Consortium for Political and Social Research [distributor], 2023-09-26. https://doi.org/10.3886/E194063V2",https://www.openicpsr.org/openicpsr/project/194063/version/V2/view,CC BY 4.0,NA,Task Knowledge,"@misc{https://doi.org/10.3886/e194063v2,
   doi = {10.3886/E194063V2},
   url = {https://www.openicpsr.org/openicpsr/project/194063/version/V2/view},
@@ -4232,7 +4243,7 @@ conspiracy_asd__asd_aq10,NA,10.6084/m9.figshare.30903575.v2,"Webster-Harris C (2
 conspiracy_asd__cognitive_flexibility,NA,10.6084/m9.figshare.30903575.v2,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Cognitive Flexibility Inventory (20 items, 1-7; N=433).","@misc{Webster-Harris_2025, title={Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles}, author={Webster-Harris, C}, year={2025}, howpublished={figshare}, url={https://doi.org/10.6084/m9.figshare.30903575.v2}, doi={10.6084/m9.figshare.30903575.v2} }"
 conspiracy_asd__conspiracy_gcbs,NA,10.6084/m9.figshare.30903575.v2,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Generic Conspiracy Beliefs Scale (15 items, 1-5; N=433).","@misc{Webster-Harris_2025, title={Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles}, DOI={10.6084/m9.figshare.30903575.v2}, publisher={figshare}, author={Webster-Harris, C}, year={2025}}"
 conspiracy_asd__schizotypy,NA,10.6084/m9.figshare.30903575.v2,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Schizotypy subscale (37 items, 1-5; N=433).","@misc{Webster-Harris_2025, title={Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles}, author={Webster-Harris, C}, year={2025}, publisher={figshare}, doi={10.6084/m9.figshare.30903575.v2}, url={https://doi.org/10.6084/m9.figshare.30903575.v2} }"
-conspiracy_asd__thinking_styles,NA,NA,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Thinking Styles subscale (10 items, 1-5; N=433).","@misc{Webster-Harris_2025, title={Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles}, DOI={10.6084/m9.figshare.30903575.v2}, publisher={figshare}, author={Webster-Harris, C}, year={2025}}"
+conspiracy_asd__thinking_styles,NA,10.6084/m9.figshare.30903575.v2,"Webster-Harris C (2025). Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles. figshare. https://doi.org/10.6084/m9.figshare.30903575.v2",https://doi.org/10.6084/m9.figshare.30903575.v2,CC BY 4.0,NA,"Conspiracy beliefs study — Thinking Styles subscale (10 items, 1-5; N=433).","@misc{Webster-Harris_2025, title={Conspiracy Belief and the association with autistic traits, schizotypy, cognitive flexibility, and thinking styles}, DOI={10.6084/m9.figshare.30903575.v2}, publisher={figshare}, author={Webster-Harris, C}, year={2025}}"
 content_literacy_intervention_g1,10.1007/s10648-021-09609-6,NA,"Kim, J. S., Relyea, J. E., Burkhauser, M. A., Scherer, E., & Rich, P. (2021). Improving elementary grade students’ science and social studies vocabulary knowledge depth, reading comprehension, and argumentative writing: A conceptual replication. Educational Psychology Review, 1-30.",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/RVJIMX,CC BY 4.0,NA,"Items from a randomized trial to improve reading comprehension, science domain knowledge, and reading engagement via literacy inteventions","@misc{https://doi.org/10.7910/dvn/rvjimx,
   doi = {10.7910/DVN/RVJIMX},
   url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/RVJIMX},
@@ -5920,6 +5931,50 @@ feng2026_perceived_usefulness,NA,10.7910/DVN/ZDNSFJ,"Feng, A. (2026). Questionna
   year = {2026}
 }
 "
+feng_2024_org_support,10.1371/journal.pone.0310078,NA,"Feng, G.; Shi, K.; Huang, Q.; Ma, J. (2024). The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model. PLOS ONE, 19(11), e0310078. https://doi.org/10.1371/journal.pone.0310078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001,CC BY 4.0,NA,"Perceived organizational support, 24 items rated 1-5. Responses from 873 primary and secondary school teachers in Guangdong Province, China.","@article{Feng2024,
+  author = {Feng, G. and Shi, K. and Huang, Q. and Ma, J.},
+  year = {2024},
+  title = {The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {11},
+  pages = {e0310078},
+  doi = {10.1371/journal.pone.0310078},
+  url = {https://doi.org/10.1371/journal.pone.0310078}
+}"
+feng_2024_professional_development,10.1371/journal.pone.0310078,NA,"Feng, G.; Shi, K.; Huang, Q.; Ma, J. (2024). The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model. PLOS ONE, 19(11), e0310078. https://doi.org/10.1371/journal.pone.0310078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001,CC BY 4.0,NA,"Professional development of primary and secondary school teachers (Chen Jingjun et al.), 21 items rated 1-5 across five dimensions: professional sentiment, development actions, professionalization concept, problem-solving skills, and professional knowledge. Responses from 873 primary and secondary school teachers in Guangdong Province, China.","@article{Feng2024,
+  author = {Feng, G. and Shi, K. and Huang, Q. and Ma, J.},
+  title = {The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model},
+  journal = {PLOS ONE},
+  year = {2024},
+  volume = {19},
+  number = {11},
+  pages = {e0310078},
+  doi = {10.1371/journal.pone.0310078},
+  url = {https://doi.org/10.1371/journal.pone.0310078}
+}"
+feng_2024_work_engagement,10.1371/journal.pone.0310078,NA,"Feng, G.; Shi, K.; Huang, Q.; Ma, J. (2024). The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model. PLOS ONE, 19(11), e0310078. https://doi.org/10.1371/journal.pone.0310078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001,CC BY 4.0,NA,"Utrecht Work Engagement Scale, Chinese version (Zhang Yiwen & Gan Yiqun), 17 items rated 1-5. Responses from 873 primary and secondary school teachers in Guangdong Province, China.","@article{Feng2024,
+  author = {Feng, G. and Shi, K. and Huang, Q. and Ma, J.},
+  year = {2024},
+  title = {The impact of work values on the professional development of primary and secondary school teachers: {A} moderated mediation model},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {11},
+  pages = {e0310078},
+  doi = {10.1371/journal.pone.0310078},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001}
+}"
+feng_2024_work_values,10.1371/journal.pone.0310078,NA,"Feng, G.; Shi, K.; Huang, Q.; Ma, J. (2024). The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model. PLOS ONE, 19(11), e0310078. https://doi.org/10.1371/journal.pone.0310078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001,CC BY 4.0,NA,"Teacher work values scale (Xu Xingchun), 27 items rated 1-5 across seven dimensions: material remuneration, reputation and status, career development, interpersonal relations, organizational management, altruistic dedication, and security and stability. Responses from 873 primary and secondary school teachers in Guangdong Province, China.","@article{Feng2024,
+  author = {Feng, G. and Shi, K. and Huang, Q. and Ma, J.},
+  year = {2024},
+  title = {The impact of work values on the professional development of primary and secondary school teachers: A moderated mediation model},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {11},
+  pages = {e0310078},
+  doi = {10.1371/journal.pone.0310078},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0310078.s001}
+}"
 ffm_AGR,10.1037/1040-3590.4.1.26,NA,"Goldberg, L. R. (1992). The development of markers for the Big-Five factor structure. Psychological assessment, 4(1), 26.",https://openpsychometrics.org/_rawdata/,CC BY 4.0,NA,"The personality test was constructed with the ""Big-Five Factor Markers"" from the IPIP. https://ipip.ori.org/newBigFive5broadKey.htm
 
 IPIP-FFM-data-8Nov2018.zip","@article{Goldberg_1992, title={The development of markers for the Big-Five factor structure.}, volume={4}, ISSN={1040-3590}, url={http://dx.doi.org/10.1037/1040-3590.4.1.26}, DOI={10.1037/1040-3590.4.1.26}, number={1}, journal={Psychological Assessment}, publisher={American Psychological Association (APA)}, author={Goldberg, Lewis R.}, year={1992}, month=mar, pages={26–42} }
@@ -10435,7 +10490,7 @@ li_2021_org_cultural_diversity,10.1371/journal.pone.0250878,NA,"Li J, Wu N, Xion
 "
 li_2021_sustainable_innov_behav,10.1371/journal.pone.0250878,NA,"Li J, Wu N, Xiong S (2021). Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing. PLOS ONE, 16(5), e0250878. https://doi.org/10.1371/journal.pone.0250878",https://doi.org/10.1371/journal.pone.0250878.s002,CC BY 4.0,NA,"Sustainable Innovation Behavior scale, employees in culturally diverse organizations"," @article{Li_2021, title={Sustainable innovation in the context of organizational cultural diversity: The role of cultural intelligence and knowledge sharing}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0250878}, DOI={10.1371/journal.pone.0250878}, number={5}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Li, Jinlong and Wu, Na and Xiong, Shengxu}, editor={Damij, Nadja}, year={2021}, month=May, pages={e0250878} }
 "
-li_2024_bdyz,10.7717/peerj.17910,NA,Li et al. (2024). Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? PeerJ.,https://europepmc.org/article/PMC/PMC11332389,CC BY 4.0,NA,"4-item body-image scale subset (items 1/2/6/9 only, 1-7 Likert), same sample as li_2024_fa"," @article{Li_2024, title={Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? The role of emotional expressive suppression and social avoidance and distress}, volume={12}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.17910}, DOI={10.7717/peerj.17910}, journal={PeerJ}, publisher={PeerJ}, author={Li, Yan and Fan, Yuxia and Lin, Jing and Shi, Shaobo}, year={2024}, month=Aug, pages={e17910} }
+li_2024_bdyz,10.7717/peerj.17910,NA,Li et al. (2024). Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? PeerJ.,https://europepmc.org/article/PMC/PMC11332389,CC BY 4.0,NA,"4-item Expressive Suppression subscale of the ERQ (Gross & John, 2003; 1-7 Likert; deposit ships the items labelled 1/2/6/9), same sample as li_2024_fa"," @article{Li_2024, title={Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? The role of emotional expressive suppression and social avoidance and distress}, volume={12}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.17910}, DOI={10.7717/peerj.17910}, journal={PeerJ}, publisher={PeerJ}, author={Li, Yan and Fan, Yuxia and Lin, Jing and Shi, Shaobo}, year={2024}, month=Aug, pages={e17910} }
 "
 li_2024_fa,10.7717/peerj.17910,NA,Li et al. (2024). Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? PeerJ.,https://europepmc.org/article/PMC/PMC11332389,CC BY 4.0,NA,"13-item Food Addiction scale (binary 0/1), n=1151 Chinese college students"," @article{Li_2024, title={Does how individuals handle social situations exacerbate the relationship between physique anxiety and food addiction? The role of emotional expressive suppression and social avoidance and distress}, volume={12}, ISSN={2167-8359}, url={http://dx.doi.org/10.7717/peerj.17910}, DOI={10.7717/peerj.17910}, journal={PeerJ}, publisher={PeerJ}, author={Li, Yan and Fan, Yuxia and Lin, Jing and Shi, Shaobo}, year={2024}, month=Aug, pages={e17910} }
 "
@@ -10516,9 +10571,9 @@ liang2026_extrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, W. et al.
 "
 liang2026_intrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, W. et al. (2026). Data for exercise motivation study [Dataset]. figshare. https://doi.org/10.1371/journal.pone.0345759",https://figshare.com/articles/dataset/31837640,CC BY 4.0,NA,"Intrinsic motivation subscale from an exercise motivation study (N=45, 5 items, 1-5 Likert)."," @article{Liang_2026, title={App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345759}, DOI={10.1371/journal.pone.0345759}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Liang, Xilin and Wang, Zenan}, editor={Tilga, Henri}, year={2026}, month=Mar, pages={e0345759} }
 "
-liang_2026_extrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, X.; Wang, Z. (2026). App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students. PLOS One. DOI: 10.1371/journal.pone.0345759",https://plos.figshare.com/articles/dataset/Exercise_motivation_questionnaire_dataset_/26047004,CC BY 4.0,NA,"Extrinsic exercise motivation scale from app-supported vs. conventional PE comparison; N=45, 5 items, 1-5 Likert"," @article{Liang_2026, title={App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345759}, DOI={10.1371/journal.pone.0345759}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Liang, Xilin and Wang, Zenan}, editor={Tilga, Henri}, year={2026}, month=Mar, pages={e0345759} }
+liang_2026_extrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, X.; Wang, Z. (2026). App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students. PLOS One. DOI: 10.1371/journal.pone.0345759",https://figshare.com/articles/dataset/31837640,CC BY 4.0,NA,"Extrinsic exercise motivation scale from app-supported vs. conventional PE comparison; N=45, 5 items, 1-5 Likert"," @article{Liang_2026, title={App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345759}, DOI={10.1371/journal.pone.0345759}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Liang, Xilin and Wang, Zenan}, editor={Tilga, Henri}, year={2026}, month=Mar, pages={e0345759} }
 "
-liang_2026_intrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, X.; Wang, Z. (2026). App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students. PLOS One. DOI: 10.1371/journal.pone.0345759",https://plos.figshare.com/articles/dataset/Exercise_motivation_questionnaire_dataset_/26047004,CC BY 4.0,NA,"Intrinsic exercise motivation scale from app-supported vs. conventional PE comparison; N=45, 5 items, 1-5 Likert"," @article{Liang_2026, title={App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345759}, DOI={10.1371/journal.pone.0345759}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Liang, Xilin and Wang, Zenan}, editor={Tilga, Henri}, year={2026}, month=Mar, pages={e0345759} }
+liang_2026_intrinsic_motivation,10.1371/journal.pone.0345759,NA,"Liang, X.; Wang, Z. (2026). App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students. PLOS One. DOI: 10.1371/journal.pone.0345759",https://figshare.com/articles/dataset/31837640,CC BY 4.0,NA,"Intrinsic exercise motivation scale from app-supported vs. conventional PE comparison; N=45, 5 items, 1-5 Likert"," @article{Liang_2026, title={App-supported versus conventional college physical education: Effects on standardized physical fitness scores and exercise motivation in Chinese university students}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345759}, DOI={10.1371/journal.pone.0345759}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Liang, Xilin and Wang, Zenan}, editor={Tilga, Henri}, year={2026}, month=Mar, pages={e0345759} }
 "
 liem_2024_attitude_env,10.1371/journal.pone.0306616,NA,"Vo Tan Liem, Nguyen Ngoc Hien (2024) Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers. PLoS ONE 19(7): e0306616",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0306616,CC BY 4.0,NA,Attitude toward the environment scale (15 items 5-pt Likert based on the New Environmental Paradigm) rated by managers of Vietnamese manufacturing firms," @article{Liem_2024, title={Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers}, volume={19}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0306616}, DOI={10.1371/journal.pone.0306616}, number={7}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Liem, Vo Tan and Hien, Nguyen Ngoc}, editor={Bamgbade, Jibril Adewale}, year={2024}, month=July, pages={e0306616} }
 "
@@ -10533,6 +10588,17 @@ liem_2024_green_competitive_adv,10.1371/journal.pone.0306616,NA,"Vo Tan Liem, Ng
 liem_2024_perceived_benefit_cp,10.1371/journal.pone.0306616,NA,"Vo Tan Liem, Nguyen Ngoc Hien (2024) Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers. PLoS ONE 19(7): e0306616",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0306616,CC BY 4.0,NA,Perceived benefit of cleaner production scale (9 items 5-pt Likert) rated by managers of Vietnamese manufacturing firms," @article{Liem_2024, title={Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers}, volume={19}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0306616}, DOI={10.1371/journal.pone.0306616}, number={7}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Liem, Vo Tan and Hien, Nguyen Ngoc}, editor={Bamgbade, Jibril Adewale}, year={2024}, month=July, pages={e0306616} }
 "
 liem_2024_perceived_benefit_ema,10.1371/journal.pone.0306616,NA,"Vo Tan Liem, Nguyen Ngoc Hien (2024) Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers. PLoS ONE 19(7): e0306616",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0306616,CC BY 4.0,NA,Perceived benefit of environmental management accounting scale (4 items 5-pt Likert) rated by managers of Vietnamese manufacturing firms," @article{Liem_2024, title={Customer pressure and environmental stewardship: The moderator role of perceived benefit by managers}, volume={19}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0306616}, DOI={10.1371/journal.pone.0306616}, number={7}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Liem, Vo Tan and Hien, Nguyen Ngoc}, editor={Bamgbade, Jibril Adewale}, year={2024}, month=July, pages={e0306616} }
+"
+lindstrom2021_collective_narcissism,10.17045/sthlmuni.14980251.v1,NA,"Lindström, J. (2021). Data and code for - Personality and Team Identification Predict Violent Intentions Among Soccer Supporters [Dataset]. Stockholm University. https://doi.org/10.17045/sthlmuni.14980251.v1",https://su.figshare.com/articles/dataset/Data_and_code_for_-_Personality_and_Team_Identification_Predict_Violent_Intentions_Among_Soccer_Supporters/14980251,CC BY 4.0,NA,Collective Narcissism Scale adapted to Hammarby Football Club (7 items; CN3-CN9); Swedish soccer supporters; N=223; 1-7 Likert,"@misc{https://doi.org/10.17045/sthlmuni.14980251.v1,
+  doi = {10.17045/STHLMUNI.14980251.V1},
+  url = {https://su.figshare.com/articles/dataset/Data_and_code_for_-_Personality_and_Team_Identification_Predict_Violent_Intentions_Among_Soccer_Supporters/14980251/1},
+  author = {Lindström, Joanna},
+  keywords = {Personality, Social and Criminal Psychology},
+  title = {Data and code for - Personality and Team Identification Predict Violent Intentions Among Soccer Supporters},
+  publisher = {Stockholm University},
+  year = {2021},
+  copyright = {Creative Commons Attribution 4.0 International}
+}
 "
 lindstrom2021_conscientiousness,10.17045/sthlmuni.14980251.v1,NA,"Lindström, J. (2021). Data and code for - Personality and Team Identification Predict Violent Intentions Among Soccer Supporters [Dataset]. Stockholm University. https://doi.org/10.17045/sthlmuni.14980251.v1",https://su.figshare.com/articles/dataset/Data_and_code_for_-_Personality_and_Team_Identification_Predict_Violent_Intentions_Among_Soccer_Supporters/14980251,CC BY 4.0,NA,Conscientiousness subscale (7 items; CN3-CN9); Swedish soccer supporters; N=223; 1-7 Likert,"@misc{https://doi.org/10.17045/sthlmuni.14980251.v1,
   doi = {10.17045/STHLMUNI.14980251.V1},
@@ -11397,196 +11463,196 @@ mexico_2023_mobility_utilities,NA,NA,ESRU-EMOVI 2023,https://ceey.org.mx/conteni
   year={2023},
   url={https://ceey.org.mx/contenido/que-hacemos/emovi/}
 }"
-mexico_2023_quality_administration,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Public Administration Perceptions,"@misc{inegi2023encig,
+mexico_2023_quality_administration,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Public Administration Perceptions,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_buses,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Bus Transportation Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_buses,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Bus Transportation Service Quality,"@misc{INEGI2023,
   author = {INEGI},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_cablecars,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Cable Cars Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_cablecars,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Cable Cars Service Quality,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_confidence,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Institutional Confidence,"@misc{inegi2023encig,
+mexico_2023_quality_confidence,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Institutional Confidence,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_corruption,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Personal Corruption Experience,"@misc{INEGI2023,
+mexico_2023_quality_corruption,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Personal Corruption Experience,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_corruptionperception,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Corruption Perception,"@misc{inegi2023encig,
+mexico_2023_quality_corruptionperception,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Corruption Perception,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_drainage,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Drainage Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_drainage,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Drainage Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_electricgovernment,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Electronic Government Services,"@misc{inegi_encig_2023,
+mexico_2023_quality_electricgovernment,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Electronic Government Services,"@misc{inegi_encig_2023,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_generalcorruption,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,General Corruption Attitudes,"@misc{inegi2023encig,
+mexico_2023_quality_generalcorruption,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,General Corruption Attitudes,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_health,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Health Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_health,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Health Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_healthservice,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Health Service Satisfaction,"@misc{inegi_encig_2023,
+mexico_2023_quality_healthservice,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Health Service Satisfaction,"@misc{inegi_encig_2023,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_highways,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Highways Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_highways,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Highways Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_homelightning,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Home Lightning Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_homelightning,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Home Lightning Service Quality,"@misc{inegi2023encig,
   author = {INEGI},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_lightning,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Public Lightning Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_lightning,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Public Lightning Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_low,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Low Demand Services,"@misc{inegi2023encig,
+mexico_2023_quality_low,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Low Demand Services,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_parks,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Parks Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_parks,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Parks Service Quality,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_police,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Police Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_police,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Police Service Quality,"@misc{inegi2023encig,
   author = {INEGI},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_problems,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Worst Problems Identified,"@misc{inegi2023encig,
+mexico_2023_quality_problems,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Worst Problems Identified,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_roads,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Roads Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_roads,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Roads Service Quality,"@misc{INEGI2023,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_schooling,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Schooling Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_schooling,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Schooling Service Quality,"@misc{INEGI2023,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_streets,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Streets Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_streets,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Streets Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_trains,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Train Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_trains,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Train Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_transportationstations,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Transportation Stations Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_transportationstations,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Transportation Stations Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   year = {2023},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_trash,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Trash Collection Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_trash,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Trash Collection Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_university,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,University Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_university,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,University Service Quality,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_water,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Potable Water Service Quality,"@misc{INEGI2023,
+mexico_2023_quality_water,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Potable Water Service Quality,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
   howpublished = {\url{https://www.inegi.org.mx/programas/encig/2023/#microdatos}},
   note = {SNIEG. Información de Interés Nacional}
 }"
-mexico_2023_quality_wellbeing,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Well-Being Service Quality,"@misc{inegi2023encig,
+mexico_2023_quality_wellbeing,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Well-Being Service Quality,"@misc{inegi2023encig,
   author = {{INEGI}},
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   year = {2023},
   howpublished = {SNIEG. Información de Interés Nacional},
   url = {https://www.inegi.org.mx/programas/encig/2023/#microdatos}
 }"
-mexico_2023_quality_wellbeingservice,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,NA,NA,Well-Being Service Satisfaction,"@misc{INEGI2023,
+mexico_2023_quality_wellbeingservice,NA,NA,INEGI. Encuesta Nacional de Calidad e Impacto Gubernamental 2023. SNIEG. Información de Interés Nacional,https://www.inegi.org.mx/programas/encig/2023/#microdatos,Permission via Email,NA,Well-Being Service Satisfaction,"@misc{INEGI2023,
   title = {Encuesta Nacional de Calidad e Impacto Gubernamental 2023},
   author = {{INEGI}},
   year = {2023},
@@ -11922,6 +11988,24 @@ milson_2026_social_media_use,10.25421/yorksj.32113705,NA,"Milson, R. (2026). The
 }
 "
 mindfulness_assessment,10.1177/1073191104268029,NA,"Baer, R. A., Smith G. T., Allen, K. B. Kentucky Inventory of Mindful Skills [dataset and codebook]. http://openpsychometrics.org/_rawdata/KIMS.zip///Baer, R. A., Smith G. T., Allen, K. B. (2004). Assessment of mindfulness by self-report: The Kentucky Inventory of Mindfulness Skills. Assessment, 11, 191-206.",http://openpsychometrics.org/_rawdata/,CC BY 4.0,NA,"Responses to the  Kentucky Inventory of Mindfulness Skills Assessment, which asks participants to rate how much they agree with certain statements about self-care and mindfulness practice","@article{Baer_2004, title={Assessment of Mindfulness by Self-Report: The Kentucky Inventory of Mindfulness Skills}, volume={11}, ISSN={1552-3489}, url={http://dx.doi.org/10.1177/1073191104268029}, DOI={10.1177/1073191104268029}, number={3}, journal={Assessment}, publisher={SAGE Publications}, author={Baer, Ruth A. and Smith, Gregory T. and Allen, Kristin B.}, year={2004}, month=sep, pages={191–206} }
+"
+mironshatz_2015_child_wishes,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"What the respondent wishes most for their child or grandchild, rating cheerful, friendly, polite and intelligent 1-4. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_day_type_affect,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Happy, tired and tense/stressed rated 0-6 for each of four day types (typical working weekday, non-working weekday, Sunday, Saturday), 12 items. Sparse by design: the working-weekday items were asked only of respondents in work. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_happiness_beliefs,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Seven statements about the nature of happiness (whether it is difficult to reach, reachable only through love, tied to sharing meals with loved ones, and so on), each rated 1-4. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_mood_yesterday,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Overall feeling yesterday: 10 mood adjectives (impatient, competent, tense, happy, depressed, interested, affectionate, calm, irritated, tired) each rated 0-6. Duration-weighted recodes of the same adjectives are excluded as composites. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_paired_comparison,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Six binary self-ratings against 'most people' (anxious, healthy, reliable and responsible, happy, lucky in life, drives better on the road), coded 0/1. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_self_description,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Self-description on 12 adjectives (enthusiastic, optimistic, laughs easily, pessimistic, worrier, depressed, often angry, often tense and others), each rated -3 to 3. The pos_self/neg_self averages are excluded as composites. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_sources_of_joy,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"33 life domains (work, children, friends, financial security, nature, sex, health, travel, art and others) each rated 1-3 as a source of joy. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_sources_of_pain,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"33 life domains each rated 1-3 as a source of pain. Not the same 33 domains as the joy list: this one includes the politics of the country and hobbies around house & garden where the joy list has creative hobbies, home improvement and future career, so the two are separate tables rather than one merged on an assumed correspondence. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
+"
+mironshatz_2015_swls,10.1371/journal.pone.0133254,NA,"Miron-Shatz, T.; Bhargave, R.; Doniger, G.M. (2015). Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry. PLOS ONE, 10(8), e0133254. https://doi.org/10.1371/journal.pone.0133254",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0133254.s001,CC BY 4.0,NA,"Satisfaction With Life Scale (Diener), 5 items rated 1-7, from a study of how the role of health and emotions in life satisfaction changes at milestone ages. Responses from 810 adults across four sites (Columbus OH, France, Denmark, Austin TX)."," @article{Miron_Shatz_2015, title={Milestone Age Affects the Role of Health and Emotions in Life Satisfaction: A Preliminary Inquiry}, volume={10}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0133254}, DOI={10.1371/journal.pone.0133254}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Miron-Shatz, Talya and Bhargave, Rajesh and Doniger, Glen M.}, editor={Ma, Yina}, year={2015}, month=Aug, pages={e0133254} }
 "
 mistry_2022_hardship,10.1371/journal.pone.0277247,NA,Mistry SK et al. (2022). Changes in loneliness prevalence and its associated factors among Bangladeshi older adults during the COVID-19 pandemic. PLOS ONE.,https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0277247,CC BY 4.0,NA,"8-item COVID-19-era hardship/concern battery, Bangladeshi older adults, two repeated cross-sectional survey rounds"," @article{Mistry_2022, title={Changes in loneliness prevalence and its associated factors among Bangladeshi older adults during the COVID-19 pandemic}, volume={17}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0277247}, DOI={10.1371/journal.pone.0277247}, number={11}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Mistry, Sabuj Kanti and Ali, A. R. M. Mehrab and Yadav, Uday Narayan and Khanam, Fouzia and Huda, Md. Nazmul}, editor={Rahman, Mahfuzar}, year={2022}, month=Nov, pages={e0277247} }
 "
@@ -12318,6 +12402,17 @@ neurips_2020,NA,NA,"Wang, Z., Lamb, A., Saveliev, E., Cameron, P., Zaykov, Y., H
   note={[data set]},
   url={https://eedi.com/research#data}
 }"
+neurips_2020_task34,10.48550/arXiv.2007.12061,NA,"Wang, Z., Lamb, A., Saveliev, E., Cameron, P., Zaykov, Y., Hernández-Lobato, J.M., Turner, R.E., Baraniuk, R.G., Barton, C., Jones, S.P., Woodhead, S., & Zhang, C. (2020). Diagnostic questions: The neurips 2020 education challenge [data set]. arXiv preprint arXiv:2007.12061",https://eedi.com/research#data,CC BY 4.0,NA,"Responses to the 948 diagnostic mathematics questions of the NeurIPS 2020 Education Challenge tasks 3 and 4 (question quality and personalisation). Split out from neurips_2020, which holds the tasks 1/2 release: the challenge anonymised the two releases separately and its guide (arXiv:2007.12061, p.8) states that question, user and answer IDs must not be linked between them, so they cannot share an id or item space. resp is 1 if the student answered correctly. See irw#1875.","@misc{https://doi.org/10.48550/arxiv.2007.12061,
+  doi = {10.48550/ARXIV.2007.12061},
+  url = {https://arxiv.org/abs/2007.12061},
+  author = {Wang, Zichao and Lamb, Angus and Saveliev, Evgeny and Cameron, Pashmina and Zaykov, Yordan and Hernández-Lobato, José Miguel and Turner, Richard E. and Baraniuk, Richard G. and Barton, Craig and Jones, Simon Peyton and Woodhead, Simon and Zhang, Cheng},
+  keywords = {Computers and Society (cs.CY), Human-Computer Interaction (cs.HC), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
+  title = {Instructions and Guide for Diagnostic Questions: The NeurIPS 2020 Education Challenge},
+  publisher = {arXiv},
+  year = {2020},
+  copyright = {arXiv.org perpetual, non-exclusive license}
+}
+"
 neurips_2022,10.48550/arXiv.2208.12610,NA,"Gong, W., Smith, D., Wang, Z., Barton C., Woodhead, S., Pawlowski, N., Jennings, J., Zhang, C. (2022). NeurIPS Competition Instructions and Guide: Causal Insights for Learning Paths in Education [data set]. arXiv:2208.12610",https://eedi.com/research#data,CC BY 4.0,NA,"Items from a dataset from the 2022 NeurIPS Education Challenge, is based on real AB experiment data to  uncover causal links between learning one construct to the success of learning another","@misc{https://doi.org/10.48550/arxiv.2208.12610,
   doi = {10.48550/ARXIV.2208.12610},
   url = {https://arxiv.org/abs/2208.12610},
@@ -12427,36 +12522,33 @@ nguyen_2026_autonomy_student_voice,NA,10.17632/whsbpyxy6w,"Nguyen, X. (2026). Th
   year = {2026}
 }
 "
-nguyen_2026_barthel,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Barthel Index: 10 activities-of-daily-living items measured 48 hours after surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 3,940 responses; deposited weighted item scores use 0,5,10,15 with differing item maxima.","@misc{https://doi.org/10.7910/dvn/x2c2pl,
-  doi = {10.7910/DVN/X2C2PL},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/X2C2PL},
-  author = {ich Nguyen, Bich},
-  keywords = {Medicine, Health and Life Sciences},
+nguyen_2026_barthel,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Barthel Index: 10 activities-of-daily-living items measured 48 hours after surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 3,940 responses; deposited weighted item scores use 0,5,10,15 with differing item maxima.","@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
   title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
   publisher = {Harvard Dataverse},
-  year = {2026}
-}
-"
-nguyen_2026_gad7,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"GAD-7: 7 anxiety-symptom items measured before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 2,758 responses on the source 0–3 scale.","@misc{https://doi.org/10.7910/dvn/x2c2pl,
+  version = {1},
   doi = {10.7910/DVN/X2C2PL},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/X2C2PL},
-  author = {ich Nguyen, Bich},
-  keywords = {Medicine, Health and Life Sciences},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}"
+nguyen_2026_gad7,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"GAD-7: 7 anxiety-symptom items measured before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 2,758 responses on the source 0–3 scale.","@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
   title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
   publisher = {Harvard Dataverse},
-  year = {2026}
-}
-"
-nguyen_2026_isi,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Insomnia Severity Index: 7 sleep-symptom/interference items measured 48 hours after surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 2,758 responses on the source 0–4 scale.","@misc{https://doi.org/10.7910/dvn/x2c2pl,
+  version = {1},
   doi = {10.7910/DVN/X2C2PL},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/X2C2PL},
-  author = {ich Nguyen, Bich},
-  keywords = {Medicine, Health and Life Sciences},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}"
+nguyen_2026_isi,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Insomnia Severity Index: 7 sleep-symptom/interference items measured 48 hours after surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 2,758 responses on the source 0–4 scale.","@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
   title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
   publisher = {Harvard Dataverse},
-  year = {2026}
-}
-"
+  version = {1},
+  doi = {10.7910/DVN/X2C2PL},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}"
 nguyen_2026_misfit_academic_performance,NA,10.17632/j8tkztz636,"Nguyen, X. (2026). Dataset on online learning misfit, technostress, performance-related difficulties, dissatisfaction, and motivation loss among teacher education students. Mendeley Data, V3.",https://data.mendeley.com/datasets/j8tkztz636,CC BY 4.0,NA,"Dataset on online learning misfit, technostress, performance-related difficulties, dissatisfaction, and motivation loss among teacher education students. IRW table nguyen_2026_misfit_academic_performance: 1823 respondents x 3 items, 5469 responses.","@misc{https://doi.org/10.17632/j8tkztz636,
   doi = {10.17632/J8TKZTZ636},
   url = {https://data.mendeley.com/datasets/j8tkztz636},
@@ -12507,26 +12599,24 @@ nguyen_2026_misfit_technostress,NA,10.17632/j8tkztz636,"Nguyen, X. (2026). Datas
   year = {2026}
 }
 "
-nguyen_2026_mspss,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Multidimensional Scale of Perceived Social Support: 12 items measured before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 4,728 responses on the source 1–7 agreement scale.","@misc{https://doi.org/10.7910/dvn/x2c2pl,
-  doi = {10.7910/DVN/X2C2PL},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/X2C2PL},
-  author = {ich Nguyen, Bich},
-  keywords = {Medicine, Health and Life Sciences},
+nguyen_2026_mspss,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Multidimensional Scale of Perceived Social Support: 12 items measured before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 4,728 responses on the source 1–7 agreement scale.","@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
   title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
   publisher = {Harvard Dataverse},
-  year = {2026}
-}
-"
-nguyen_2026_pic,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Preoperative information/counseling (PIC): 9 agreement items about explanations, understanding, opportunity to ask questions and reassurance before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 3,546 responses on the source 1–5 scale.","@misc{https://doi.org/10.7910/dvn/x2c2pl,
+  version = {1},
   doi = {10.7910/DVN/X2C2PL},
-  url = {https://dataverse.harvard.edu/citation?persistentId=doi:10.7910/DVN/X2C2PL},
-  author = {ich Nguyen, Bich},
-  keywords = {Medicine, Health and Life Sciences},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}"
+nguyen_2026_pic,10.7910/DVN/X2C2PL,NA,"Van Bich Nguyen (2026). Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam"" (Version 1) [Data set]. Harvard Dataverse. https://doi.org/10.7910/DVN/X2C2PL",https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/X2C2PL&version=1.0,CC0 1.0,NA,"Preoperative information/counseling (PIC): 9 agreement items about explanations, understanding, opportunity to ask questions and reassurance before surgery. 394 women undergoing gynecologic surgery in Hanoi, Vietnam; ages 15–77. 3,546 responses on the source 1–5 scale.","@misc{Nguyen2026GynecologicSurgery,
+  author = {{Van Bich Nguyen}},
   title = {Dataset for the Study ""Preoperative Anxiety and Early Postoperative Recovery Among Women Undergoing Gynecologic Surgery in Vietnam""},
+  year = {2026},
   publisher = {Harvard Dataverse},
-  year = {2026}
-}
-"
+  version = {1},
+  doi = {10.7910/DVN/X2C2PL},
+  url = {https://doi.org/10.7910/DVN/X2C2PL}
+}"
 nguyen_2026_sdt_academic_motivation,NA,10.17632/n45sjtxmzy,"Nguyen, X. (2026). dataset on mental health, academic motivation, and perceived academic performance among Vietnamese students in online learning from a self-determination theory perspective. Mendeley Data, V1.",https://data.mendeley.com/datasets/n45sjtxmzy,CC BY 4.0,NA,"dataset on mental health, academic motivation, and perceived academic performance among Vietnamese students in online learning from a self-determination theory perspective. IRW table nguyen_2026_sdt_academic_motivation: 2763 respondents x 7 items, 19341 responses.","@misc{https://doi.org/10.17632/n45sjtxmzy,
   doi = {10.17632/N45SJTXMZY},
   url = {https://data.mendeley.com/datasets/n45sjtxmzy},
@@ -13050,12 +13140,12 @@ parentalempathy_gonzalez_2021_pem_tripleF,10.1371/journal.pone.0259522,NA,"Gonza
 "
 parentalempathy_gonzalez_2021_reacctcompliance_tripleF,10.1371/journal.pone.0259522,NA,"Gonzalez, S., & Rodriguez, C. M. (2021). Development and psychometric characteristics of analog measures of parental empathy. PLOS ONE, 16(11), e0259522.",https://osf.io/75crd/,Permission via Email,NA,Parents' weighted responses to a child in a simulated compliance/non-compliance scenario," @article{Gonzalez_2021, title={Development and psychometric characteristics of analog measures of parental empathy}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0259522}, DOI={10.1371/journal.pone.0259522}, number={11}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Gonzalez, Samantha and Rodriguez, Christina M.}, editor={Rhee, Soo Hyun}, year={2021}, month=Nov, pages={e0259522} }
 "
-parenting_anunciacao_2025_affect,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
-parenting_anunciacao_2025_goals,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
-parenting_anunciacao_2025_material_rewards,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
-parenting_anunciacao_2025_materialism,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
-parenting_anunciacao_2025_rejection,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
-parenting_anunciacao_2025_values,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,Permission via Email,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_affect,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_goals,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_material_rewards,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_materialism,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_rejection,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
+parenting_anunciacao_2025_values,Upcoming,NA,"Anunciacao, L. (2026, January 7). Family - Different structures and child rearing. Retrieved from osf.io/3xvys",https://osf.io/3xvys/overview,CC BY 4.0,NA,"Parental Care by Family Structure (Nuclear, Remarried, Single-Parent, LGBTQIA+) and Child Gender: A Brazilian Cross-Sectional Study",NA
 park_2021_pss10,10.1371/journal.pone.0246887,NA,"Park S, Lee HJ, Jeon BJ, Yoo EY, Kim JB, Park JH (2021). Effects of occupational balance on subjective health, quality of life, and health-related variables in community-dwelling older adults: A structural equation modeling approach. PLOS ONE, 16(2), e0246887. https://doi.org/10.1371/journal.pone.0246887",https://doi.org/10.1371/journal.pone.0246887.s001,CC BY 4.0,NA,"Perceived Stress Scale-10 (10 items), Korean community-dwelling older adults, N=208"," @article{Park_2021, title={Effects of occupational balance on subjective health, quality of life, and health-related variables in community-dwelling older adults: A structural equation modeling approach}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0246887}, DOI={10.1371/journal.pone.0246887}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Park, Sangmi and Lee, Hae Jong and Jeon, Byoung-Jin and Yoo, Eun-Young and Kim, Jong-Bae and Park, Ji-Hyuk}, editor={Kueh, Yee Cheng}, year={2021}, month=Feb, pages={e0246887} }
 "
 park_2021_swls,10.1371/journal.pone.0246887,NA,"Park S, Lee HJ, Jeon BJ, Yoo EY, Kim JB, Park JH (2021). Effects of occupational balance on subjective health, quality of life, and health-related variables in community-dwelling older adults: A structural equation modeling approach. PLOS ONE, 16(2), e0246887. https://doi.org/10.1371/journal.pone.0246887",https://doi.org/10.1371/journal.pone.0246887.s001,CC BY 4.0,NA,"Satisfaction With Life Scale (5 items), Korean community-dwelling older adults, N=208"," @article{Park_2021, title={Effects of occupational balance on subjective health, quality of life, and health-related variables in community-dwelling older adults: A structural equation modeling approach}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0246887}, DOI={10.1371/journal.pone.0246887}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Park, Sangmi and Lee, Hae Jong and Jeon, Byoung-Jin and Yoo, Eun-Young and Kim, Jong-Bae and Park, Ji-Hyuk}, editor={Kueh, Yee Cheng}, year={2021}, month=Feb, pages={e0246887} }
@@ -14544,7 +14634,7 @@ qiang_2025_red_tape,10.1371/journal.pone.0327359,NA,"Qiang, Q., et al. (2025). D
 "
 qiang_2025_surface_acting,10.1371/journal.pone.0327359,NA,"Qiang, Q., et al. (2025). Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0327359,CC BY 4.0,NA,"Surface acting / value-suppression scale, Chinese retail staff, 3 items, 1-5, N=396"," @article{Qiang_2025, title={Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0327359}, DOI={10.1371/journal.pone.0327359}, number={7}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Qiang, Qin and Wang, Kaixin and Lai, Jianxin}, editor={Depetris-Chauvin, Nicolas}, year={2025}, month=July, pages={e0327359} }
 "
-qiang_2025_workplace_friendship,10.1371/journal.pone.0327359,NA,"Qiang, Q., et al. (2025). Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0327359,CC BY 4.0,NA,"Workplace friendship scale, Chinese retail staff, 5 items, 1-5, N=396"," @article{Qiang_2025, title={Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0327359}, DOI={10.1371/journal.pone.0327359}, number={7}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Qiang, Qin and Wang, Kaixin and Lai, Jianxin}, editor={Depetris-Chauvin, Nicolas}, year={2025}, month=July, pages={e0327359} }
+qiang_2025_workplace_friendship,10.1371/journal.pone.0327359,NA,"Qiang, Q., et al. (2025). Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0327359,CC BY 4.0,NA,"Workplace friendship scale, Chinese retail staff, 4 items, 1-5, N=396"," @article{Qiang_2025, title={Does the perception of red tape affect the emotional labor of frontline retail staff in China? A post-COVID-19 era}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0327359}, DOI={10.1371/journal.pone.0327359}, number={7}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Qiang, Qin and Wang, Kaixin and Lai, Jianxin}, editor={Depetris-Chauvin, Nicolas}, year={2025}, month=July, pages={e0327359} }
 "
 qin_2025_behavioral_intention,10.1371/journal.pone.0336220,NA,"Qin, L.; Zhang, H. (2025). Impact of rich cultural tourism experience on tourist satisfactions and behavioral intentions toward Ningxia's cultural heritage: Moderation role of perceived cultural distance. PLOS One. DOI: 10.1371/journal.pone.0336220",https://plos.figshare.com/articles/dataset/Questionnaire_Results_/26396855,CC BY 4.0,NA,"Behavioral intention toward cultural heritage tourism in Ningxia (BI scale); N=547, 3 items, 1-6 Likert"," @article{Qin_2025, title={Impact of rich cultural tourism experience on tourist satisfactions and behavioral intentions toward Ningxia’s cultural heritage: Moderation role of perceived cultural distance}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0336220}, DOI={10.1371/journal.pone.0336220}, number={11}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Qin, Lei and Zhang, Hongmei}, editor={Chen, Yile}, year={2025}, month=Nov, pages={e0336220} }
 "
@@ -14892,7 +14982,7 @@ robbins_2019_has_belief,10.1371/journal.pone.0216544,NA,"Robbins, J. A., Roberts
 "
 robbins_2019_risk_quality_belief,10.1371/journal.pone.0216544,NA,"Robbins, J. A., Roberts, C., & Weary, D. M. (2019). Factors influencing public support for dairy tie stall housing in the US. PLOS ONE. https://doi.org/10.1371/journal.pone.0216544",https://doi.org/10.1371/journal.pone.0216544,CC BY 4.0,NA,Factors influencing public support for dairy tie stall housing in the US: belief-rating batteries across two survey framings," @article{Robbins_2019, title={Factors influencing public support for dairy tie stall housing in the U.S.}, volume={14}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0216544}, DOI={10.1371/journal.pone.0216544}, number={5}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Robbins, Jesse A. and Roberts, Caitlin and Weary, Daniel M. and Franks, Becca and von Keyserlingk, Marina A. G.}, editor={Loor, Juan J.}, year={2019}, month=May, pages={e0216544} }
 "
-rodas_2026_stait_trait_anxiety,10.1371/journal.pone.0345773,NA,"Rodas JA, Oleas D, Mascialino G, Figueira JAV, Rodríguez-Lorenzana A (2026) Underlying structure and measurement invariance by sex of the state trait anxiety inventory: A psychometric analysis in Ecuador. PLOS ONE 21(3): e0345773. https://doi.org/10.1371/journal.pone.0345773",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0345773#sec017,NA,NA,Psychometric analysis of the underlying structure and measurement invariance by sex of the state trait anxiety inventory," @article{Rodas_2026, title={Underlying structure and measurement invariance by sex of the state trait anxiety inventory: A psychometric analysis in Ecuador}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345773}, DOI={10.1371/journal.pone.0345773}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Rodas, Jose A. and Oleas, Daniel and Mascialino, Guido and Figueira, José Alejandro Valdevila and Rodríguez-Lorenzana, Alberto}, editor={Katsantonis, Ioannis G.}, year={2026}, month=Mar, pages={e0345773} }
+rodas_2026_stait_trait_anxiety,10.1371/journal.pone.0345773,NA,"Rodas JA, Oleas D, Mascialino G, Figueira JAV, Rodríguez-Lorenzana A (2026) Underlying structure and measurement invariance by sex of the state trait anxiety inventory: A psychometric analysis in Ecuador. PLOS ONE 21(3): e0345773. https://doi.org/10.1371/journal.pone.0345773",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0345773#sec017,CC BY 4.0,NA,Psychometric analysis of the underlying structure and measurement invariance by sex of the state trait anxiety inventory," @article{Rodas_2026, title={Underlying structure and measurement invariance by sex of the state trait anxiety inventory: A psychometric analysis in Ecuador}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0345773}, DOI={10.1371/journal.pone.0345773}, number={3}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Rodas, Jose A. and Oleas, Daniel and Mascialino, Guido and Figueira, José Alejandro Valdevila and Rodríguez-Lorenzana, Alberto}, editor={Katsantonis, Ioannis G.}, year={2026}, month=Mar, pages={e0345773} }
 "
 rodriguezandres_2016_mnemocity_usability,10.1371/journal.pone.0161858,NA,"Rodriguez-Andres D, Juan M-C, Mendez-Lopez M, Perez-Hernandez E, Lluch J (2016) MnemoCity task: Assessment of children's spatial memory using stereoscopy and virtual environments. PLoS ONE 11(8):e0161858",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0161858,CC BY 4.0,NA,"MnemoCity Task usability/satisfaction survey (children, virtual-environment spatial memory task), 9 items 1-5 Likert"," @article{Rodr_guez_Andr_s_2016, title={MnemoCity Task: Assessment of Childrens Spatial Memory Using Stereoscopy and Virtual Environments}, volume={11}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0161858}, DOI={10.1371/journal.pone.0161858}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Rodríguez-Andrés, David and Juan, M.-Carmen and Méndez-López, Magdalena and Pérez-Hernández, Elena and Lluch, Javier}, editor={Kroesbergen, Evelyn}, year={2016}, month=Aug, pages={e0161858} }
 "
@@ -15228,7 +15318,7 @@ schmidt_2017_fas,10.1371/journal.pone.0182845,NA,"Schmidt M, Egger F, Benzing V,
 "
 schmidt_2017_pds,10.1371/journal.pone.0182845,NA,"Schmidt M, Egger F, Benzing V, Jaeger K, Conzelmann A, Roebers CM, et al. (2017) Disentangling the relationship between children's motor ability, executive function and academic achievement. PLoS ONE 12(8):e0182845.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182845.s001,CC BY 4.0,NA,"German version of the Pubertal Development Scale (PDS), 3 raw items, 1-4 scale. N=232 children."," @article{Schmidt_2017, title={Disentangling the relationship between children’s motor ability, executive function and academic achievement}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182845}, DOI={10.1371/journal.pone.0182845}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Schmidt, Mirko and Egger, Fabienne and Benzing, Valentin and Jäger, Katja and Conzelmann, Achim and Roebers, Claudia M. and Pesce, Caterina}, editor={Ardigò, Luca Paolo}, year={2017}, month=Aug, pages={e0182845} }
 "
-schoen_2019_to_2022_mkt,10.1086/692912,NA,"Schoen, R. C., Bray, W., Wolfe, C., Tazaz, A., & Nielsen, L. (2017). Developing an assessment instrument to measure early elementary teachers’ mathematical knowledge for teaching. The Elementary School Journal, 118(1), 55–81.",https://osf.io/twgcu/,Permission via Email,NA,Mathematical Knowledge for Teaching Test," @article{Schoen_2017, title={Developing an Assessment Instrument to Measure Early Elementary Teachers’ Mathematical Knowledge for Teaching}, volume={118}, ISSN={1554-8279}, url={http://dx.doi.org/10.1086/692912}, DOI={10.1086/692912}, number={1}, journal={The Elementary School Journal}, publisher={University of Chicago Press}, author={Schoen, Robert C. and Bray, Wendy and Wolfe, Christopher and Tazaz, Amanda and Nielsen, Lynne}, year={2017}, month=sep, pages={55–81} }
+schoen_2019_to_2022_mkt,10.1086/692912,NA,"Schoen, R. C., Bray, W., Wolfe, C., Tazaz, A., & Nielsen, L. (2017). Developing an assessment instrument to measure early elementary teachers’ mathematical knowledge for teaching. The Elementary School Journal, 118(1), 55–81.",https://osf.io/twgcu/,CC BY 4.0,NA,Mathematical Knowledge for Teaching Test," @article{Schoen_2017, title={Developing an Assessment Instrument to Measure Early Elementary Teachers’ Mathematical Knowledge for Teaching}, volume={118}, ISSN={1554-8279}, url={http://dx.doi.org/10.1086/692912}, DOI={10.1086/692912}, number={1}, journal={The Elementary School Journal}, publisher={University of Chicago Press}, author={Schoen, Robert C. and Bray, Wendy and Wolfe, Christopher and Tazaz, Amanda and Nielsen, Lynne}, year={2017}, month=sep, pages={55–81} }
 "
 schoepp2022_test_anxiety,https://osf.io/r67wb/,NA,"Schoepp, P., Góra, P., Hrymchak, Y., Mazur, J., Surowski, M., Traczyk, J., & Sobkow, A. (2022). Polish Adaptation of the Online Test Anxiety Inventory (OTAI). OSF.",https://osf.io/r67wb/,CC BY 4.0,NA,"Polish adaptation of the Online Test Anxiety Inventory (OTAI), 18 items, 0-3 Likert, N=130","@misc{schoepp2022polish,
   author = {Schoepp, P. and Góra, P. and Hrymchak, Y. and Mazur, J. and Surowski, M. and Traczyk, J. and Sobkow, A.},
@@ -15419,6 +15509,41 @@ shao_2025_work_engagement,10.1371/journal.pone.0320839,NA,"Shao, Y.; Jiang, W.; 
 "
 shen_2020_sas20,10.1371/journal.pone.0243890,NA,"Shen M., Xu H., Fu J., Wang T., Fu Z., Zhao X., Zhou G., Jin Q., Tong G. (2020). Investigation of anxiety levels of 1637 healthcare workers during the epidemic of COVID-19. PLOS ONE. https://doi.org/10.1371/journal.pone.0243890",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0243890.s001,CC BY 4.0,NA,Zung Self-Rating Anxiety Scale (SAS-20) among COVID-19-era healthcare workers; 20 items 1-4 scale; N=1647 merged across 5 hospitals," @article{Shen_2020, title={Investigation of anxiety levels of 1637 healthcare workers during the epidemic of COVID-19}, volume={15}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0243890}, DOI={10.1371/journal.pone.0243890}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Shen, Meiping and Xu, Hongzhen and Fu, Junfen and Wang, Tianlin and Fu, Zangzang and Zhao, Xiaomei and Zhou, Gendi and Jin, Qi and Tong, Guixiu}, editor={Aboelhadid, Shawky M.}, year={2020}, month=Dec, pages={e0243890} }
 "
+shen_2026_cdrisc,10.1371/journal.pone.0350219,NA,"Shen, Q.; Li, L.; Li, C. (2026). How does self-control influences college students’ smartphone dependence: The chain mediating effect of mental toughness and social adaptability. PLOS ONE, 21(6), e0350219. https://doi.org/10.1371/journal.pone.0350219",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001,CC BY 4.0,NA,"Connor-Davidson Resilience Scale, Chinese version, 25 items rated 0-4 across optimism, strength and resilience; reported in the source as mental toughness. Responses from 490 college students at four universities in Hubei Province, China."," @article{Shen_2026, title={How does self-control influences college students’ smartphone dependence: The chain mediating effect of mental toughness and social adaptability}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0350219}, DOI={10.1371/journal.pone.0350219}, number={6}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Shen, Quanwei and Li, Lin and Li, Chenglong}, editor={Said, Mohamed Ahmed}, year={2026}, month=June, pages={e0350219} }
+"
+shen_2026_self_control,10.1371/journal.pone.0350219,NA,"Shen, Q.; Li, L.; Li, C. (2026). How does self-control influences college students’ smartphone dependence: The chain mediating effect of mental toughness and social adaptability. PLOS ONE, 21(6), e0350219. https://doi.org/10.1371/journal.pone.0350219",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001,CC BY 4.0,NA,"College student self-control scale (Tan Shuhua), 19 items rated 1-5 across five dimensions: impulse control, healthy habits, resistance to temptation, work concentration and moderate entertainment. Responses from 490 college students at four universities in Hubei Province, China.","@article{Shen2026,
+  author = {Shen, Q. and Li, L. and Li, C.},
+  year = {2026},
+  title = {How does self-control influences college students' smartphone dependence: {T}he chain mediating effect of mental toughness and social adaptability},
+  journal = {PLOS ONE},
+  volume = {21},
+  number = {6},
+  pages = {e0350219},
+  doi = {10.1371/journal.pone.0350219},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001}
+}"
+shen_2026_smartphone_addiction,10.1371/journal.pone.0350219,NA,"Shen, Q.; Li, L.; Li, C. (2026). How does self-control influences college students’ smartphone dependence: The chain mediating effect of mental toughness and social adaptability. PLOS ONE, 21(6), e0350219. https://doi.org/10.1371/journal.pone.0350219",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001,CC BY 4.0,NA,"Adult Smartphone Addiction Scale (Chen Huan), rated 1-5. The article describes 20 items; the deposit carries 26 on the same scale with no missing values, and all 26 are shipped. Responses from 490 college students at four universities in Hubei Province, China.","@article{Shen2026,
+  author = {Shen, Q. and Li, L. and Li, C.},
+  year = {2026},
+  title = {How does self-control influences college students' smartphone dependence: The chain mediating effect of mental toughness and social adaptability},
+  journal = {PLOS ONE},
+  volume = {21},
+  number = {6},
+  pages = {e0350219},
+  doi = {10.1371/journal.pone.0350219},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001}
+}"
+shen_2026_social_adaptability,10.1371/journal.pone.0350219,NA,"Shen, Q.; Li, L.; Li, C. (2026). How does self-control influences college students’ smartphone dependence: The chain mediating effect of mental toughness and social adaptability. PLOS ONE, 21(6), e0350219. https://doi.org/10.1371/journal.pone.0350219",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001,CC BY 4.0,NA,"Social adaptability diagnostic scale (Zheng Richang), 20 items scored -2, 0 or 2. Left as administered: the source reverses the odd-numbered items before summing, but reverse-scored items are not recoded in IRW. Responses from 490 college students at four universities in Hubei Province, China.","@article{Shen2026,
+  author = {Shen, Q. and Li, L. and Li, C.},
+  year = {2026},
+  title = {How does self-control influences college students' smartphone dependence: The chain mediating effect of mental toughness and social adaptability},
+  journal = {PLOS ONE},
+  volume = {21},
+  number = {6},
+  pages = {e0350219},
+  doi = {10.1371/journal.pone.0350219},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0350219.s001}
+}"
 shi2024_sas,10.3390/bs14100928,NA,"Shi, Chen, Yang, Wang, Sun & Song (2024). How Does Parental Early Maladaptive Schema Affect Adolescents' Social Adaptation? Based on the Perspective of Intergenerational Transmission. Behavioral Sciences, 14(10), 928.",https://doi.org/10.7910/DVN/7CYIQG,CC0 1.0,NA,"Adolescent Social Adaptation Scale (Chen et al. 2016, 33 items, 1-5), Chinese parent-adolescent dyads N=201"," @article{Shi_2024, title={How Does Parental Early Maladaptive Schema Affect Adolescents’ Social Adaptation? Based on the Perspective of Intergenerational Transmission}, volume={14}, ISSN={2076-328X}, url={http://dx.doi.org/10.3390/bs14100928}, DOI={10.3390/bs14100928}, number={10}, journal={Behavioral Sciences}, publisher={MDPI AG}, author={Shi, Ying and Chen, I-Jun and Yang, Mengping and Wang, Liling and Song, Yunping and Sun, Zhiyin}, year={2024}, month=Oct, pages={928} }
 "
 shi2024_ysq_adolescent,10.3390/bs14100928,NA,"Shi, Chen, Yang, Wang, Sun & Song (2024). How Does Parental Early Maladaptive Schema Affect Adolescents' Social Adaptation? Based on the Perspective of Intergenerational Transmission. Behavioral Sciences, 14(10), 928.",https://doi.org/10.7910/DVN/7CYIQG,CC0 1.0,NA,"Young Schema Questionnaire (short form, 75 items, 1-6 Likert), adolescent self-report, Chinese parent-adolescent dyads N=201"," @article{Shi_2024, title={How Does Parental Early Maladaptive Schema Affect Adolescents’ Social Adaptation? Based on the Perspective of Intergenerational Transmission}, volume={14}, ISSN={2076-328X}, url={http://dx.doi.org/10.3390/bs14100928}, DOI={10.3390/bs14100928}, number={10}, journal={Behavioral Sciences}, publisher={MDPI AG}, author={Shi, Ying and Chen, I-Jun and Yang, Mengping and Wang, Liling and Song, Yunping and Sun, Zhiyin}, year={2024}, month=Oct, pages={928} }
@@ -15841,6 +15966,325 @@ song_2025_st,10.1371/journal.pone.0323811,NA,"Song, Z., et al. (2025). The dilem
 "
 song_2025_wwb,10.1371/journal.pone.0323811,NA,"Song, Z., et al. (2025). The dilemma of frontline servant leadership: The conflict between top management directives and grassroots employee wellbeing and retention. PLOS ONE.",https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0323811,CC BY 4.0,NA,"Servant-leadership survey block WWB (unlabeled construct), frontline employees, 1-5 Likert, N=486"," @article{Song_2025, title={The dilemma of frontline servant leadership: The conflict between top management directives and grassroots employee wellbeing and retention}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0323811}, DOI={10.1371/journal.pone.0323811}, number={5}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Song, Zhiwen and Xu, Ziyu and Tang, Binglin Martin and Leong, Wai Nga}, editor={Klein, Leander Luiz}, year={2025}, month=May, pages={e0323811} }
 "
+spain_2011_immigrant_catalan,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Usefulness of the Catalan language course for learning and work goals,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  number = {2913},
+  year = {2013},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar\&cuestionario=16800\&muestra=22361\&pregunta=528563\&variable=577256}
+}"
+spain_2011_immigrant_citizenship,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Perceived benefits of having obtained Spanish nationality,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_family,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Perceived benefits of completed family reunification,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2012},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_naturalisation,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Expected benefits of obtaining Spanish nationality,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_permit,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Expected benefits of obtaining permanent residence,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_representation,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Attitudes towards parliamentary representatives of immigrant origin,"@dataset{cis2013,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_residence,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Perceived benefits of having obtained permanent residence,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_reunification,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Expected benefits of family reunification,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256}
+}"
+spain_2011_immigrant_satisfaction,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Satisfaction with life domains among immigrant residents,"@dataset{CIS2013,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2011_immigrant_spanish,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Encuesta a población inmigrante, Estudio 2913",https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256,Custom,NA,Usefulness of the Spanish language course for learning and work goals,"@dataset{CIS2913,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Encuesta a población inmigrante},
+  year = {2013},
+  number = {2913},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/encuesta-a-poblacion-inmigrante?chartType=bar&cuestionario=16800&muestra=22361&pregunta=528563&variable=577256}
+}"
+spain_2012_entrepreneurship_barriers,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Perceived difficulty of starting a business,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Actitudes de la juventud en {E}spaña hacia el emprendimiento},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_economy,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Retrospective and prospective evaluation of the national economic situation,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en España hacia el emprendimiento},
+  year = {2012},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_education,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Contribution of school education to entrepreneurial skills,"@dataset{CIS2938,
+  title={Actitudes de la juventud en España hacia el emprendimiento},
+  author={{Centro de Investigaciones Sociológicas (CIS)}},
+  year={2012},
+  number={2938},
+  url={https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization={Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_entrepreneurs,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Attitudes towards entrepreneurs and their social role,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en España hacia el emprendimiento},
+  year = {2012},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_friends,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Homophily of the friendship circle on social characteristics,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en España hacia el emprendimiento},
+  number = {2938},
+  year = {2012},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_image,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Opinion of occupational groups including entrepreneurs,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en {E}spaña hacia el emprendimiento},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_entrepreneurship_motives,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Importance of factors in the decision to start a business,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en España hacia el emprendimiento},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680}
+}"
+spain_2012_entrepreneurship_unemployment,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Importance of causes of unemployment in Spain,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en {E}spaña hacia el emprendimiento},
+  number = {2938},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680}
+}"
+spain_2012_entrepreneurship_values,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Actitudes de la juventud en España hacia el emprendimiento, Estudio 2938",https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680,Custom,NA,Importance of life domains and personal goals,"@dataset{CIS2938,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Actitudes de la juventud en España hacia el emprendimiento},
+  number = {2938},
+  year = {2012},
+  url = {https://www.cis.es/es/estudios/actitudes-de-la-juventud-en-espana-hacia-el-emprendimiento?chartType=bar&cuestionario=16438&muestra=21859&pregunta=529937&variable=557680}
+}"
+spain_2012_gender_acceptability,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Acceptability of abusive behaviours between partners,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2013},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_beliefs,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Agreement with beliefs about abusers and abused women,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302}
+}"
+spain_2012_gender_campaigns,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Perceived usefulness of awareness campaigns against gender violence,"@dataset{CIS_2968_2013,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2013},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_causes,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Factors regarded as causes of gender violence,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2012},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_complaints,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Agreement with statements about false and withdrawn complaints,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Percepción social de la violencia de género},
+  year = {2013},
+  number = {2968},
+  organization = {Centro de Investigaciones Sociológicas (CIS)},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302}
+}"
+spain_2012_gender_coordination,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Agreement on coordination of services for victims of gender violence,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2012},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_couple,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Importance of aspects for a couple relationship to work,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_custody,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Agreement on child custody for convicted abusers,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Percepción social de la violencia de género},
+  number = {2968},
+  year = {2012},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302}
+}"
+spain_2012_gender_prevalence,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,"Perceived extent of abuse against men, women, children and elderly","@dataset{CIS2014,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2014},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302}
+}"
+spain_2012_gender_punishment,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Acceptability and punishability of forms of abuse,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2012},
+  number = {2968},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302}
+}"
+spain_2012_gender_situation,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Women's position relative to men across work and education domains,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2012},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_gender_vulnerability,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción social de la violencia de género, Estudio 2968",https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302,Custom,NA,Groups of women seen as more vulnerable to gender violence,"@dataset{CIS2968,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Percepción social de la violencia de género},
+  year = {2012},
+  number = {2968},
+  url = {https://www.cis.es/es/estudios/percepcion-social-de-la-violencia-de-genero?chartType=bar&cuestionario=16887&muestra=22437&pregunta=534829&variable=597302},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2012_reality_media,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Conocimiento sobre la realidad sociopolítica y económica, Estudio 2973",https://www.cis.es/es/estudios/conocimiento-sobre-la-realidad-sociopolitica-y-economica?chartType=bar&cuestionario=16907&muestra=22454&pregunta=536685&variable=605297,Custom,NA,Frequency of following news and political content across media,"@dataset{CIS2973,
+  title={Conocimiento sobre la realidad sociopolítica y económica},
+  author={{Centro de Investigaciones Sociológicas (CIS)}},
+  year={2013},
+  number={2973},
+  url={https://www.cis.es/es/estudios/conocimiento-sobre-la-realidad-sociopolitica-y-economica?chartType=bar&cuestionario=16907&muestra=22454&pregunta=536685&variable=605297}
+}"
+spain_2013_defense_attractions,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Importance of attractions of military life in choosing a military career,"@dataset{CIS2012,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  year = {2012},
+  number = {2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2013_defense_capability,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Perceived preparedness and capability of the armed forces,"@dataset{CIS2012,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  note = {Estudio 2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_children,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Encouragement of a daughter or son towards a military career,"@dataset{CIS2998,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  number = {2998},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_conditions,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Importance of employment conditions in choosing a military career,"@dataset{CIS2998,
+  author = {Centro de Investigaciones Sociológicas (CIS)},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  number = {2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2013_defense_emotion,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Emotional response to national and military symbols,"@dataset{CIS2998,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  year = {2013},
+  number = {2998},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_missions,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Perceived benefits of participation in peace missions,"@dataset{CIS2013,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  year = {2013},
+  number = {2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_prestige,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Contribution of the armed forces to international prestige,"@dataset{CIS2998,
+  author = {Centro de Investigaciones Sociológicas},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  number = {2998},
+  organization = {Centro de Investigaciones Sociológicas (CIS)},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_professions,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Valuation of professions including military occupations,"@dataset{CIS2998,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  year = {2011},
+  number = {2998},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_resources,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,"Adequacy of troops, means and budget of the armed forces","@dataset{CIS2998,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  number = {2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_sacrifice,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Causes for which the respondent would risk their life,"@dataset{CIS2998,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  series = {Estudio},
+  number = {2998},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
+spain_2013_defense_threats,NA,NA,"Centro de Investigaciones Sociológicas (CIS), La defensa nacional y las Fuerzas Armadas (X), Estudio 2998",https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar,Custom,NA,Perceived seriousness of security threats to Spain,"@dataset{CIS2013,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {La defensa nacional y las Fuerzas Armadas (X)},
+  year = {2013},
+  number = {2998},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/la-defensa-nacional-y-las-fuerzas-armadas-x-?cuestionario=16525&muestra=21866&pregunta=269269&variable=559566&chartType=bar}
+}"
 spain_2013_services_complaints,NA,NA,FUERA DE COLECCIÓN CIS - España 2015. Análisis de la realidad social. nº 49 pp. 591,https://www.cis.es/es/estudios/calidad-de-los-servicios-publicos-viii-?chartType=bar&cuestionario=16908&muestra=22449&pregunta=536716&variable=603732,Custom,NA,Complaints filed against public administration and their resolution,"@misc{CIS2015,
   title={Calidad de los servicios públicos VIII},
   author={Centro de Investigaciones Sociológicas},
@@ -16024,6 +16468,74 @@ spain_2014_citizenship_trust,NA,NA,"Centro de Investigaciones Sociológicas (CIS
   year = {2023},
   url = {https://www.cis.es/es/estudios/ciudadania-issp-?cuestionario=16860&muestra=22521&pregunta=541045&variable=630618&chartType=bar},
   organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_agreement,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Agreement with what each party leader said in the debate,"@dataset{CIS2012,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  type = {Estudio},
+  number = {3016},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_debate,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,"Evaluation of the 2014 debate: interest, relevance and conflict","@dataset{CIS2014,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  year = {2014},
+  number = {3016},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_general,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Interest and relevance of state of the nation debates in general,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  number = {3016},
+  year = {2024},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810}
+}"
+spain_2014_debate_government,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Confidence conveyed by the Government in the debate,"@dataset{CIS2012,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  number = {3016},
+  year = {2012},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810}
+}"
+spain_2014_debate_leaders,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Rating of each party leader's performance in the debate,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  year = {2024},
+  number = {3016},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_media,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Frequency of following political news across media and conversation,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  year = {2024},
+  number = {3016},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_opposition,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Capacity shown by the opposition leader in the debate,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  year = {2024},
+  number = {3016},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810}
+}"
+spain_2014_debate_rajoy,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Political qualities shown by Mariano Rajoy in the debate,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  number = {3016},
+  year = {2024},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2014_debate_rubalcaba,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Debate sobre el estado de la nación (XXIV), Estudio 3016",https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848&muestra=22410&pregunta=532810,Custom,NA,Political qualities shown by Alfredo Perez Rubalcaba in the debate,"@dataset{CIS2023,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Debate sobre el estado de la nación (XXIV)},
+  number = {3016},
+  year = {2023},
+  url = {https://www.cis.es/es/estudios/debate-sobre-el-estado-de-la-nacion-xxiv-?cuestionario=16848\&muestra=22410\&pregunta=532810}
 }"
 spain_2014_family_activities,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Opiniones y actitudes sobre la familia (II), Estudio 3032",https://www.cis.es/es/estudios/opiniones-y-actitudes-sobre-la-familia-ii-?cuestionario=16893&muestra=22465&pregunta=536541&variable=604458&chartType=bar,Custom,NA,"Frequency of eating together, helping with homework, going to shows, watching television, playing or doing sport, sharing chores, talking and going for walks with the children","@dataset{CIS_3032,
   author = {{Centro de Investigaciones Sociológicas (CIS)}},
@@ -16461,11 +16973,60 @@ spain_2018_housing_rentals,NA,NA,"Centro de Investigaciones Sociológicas (CIS),
   url = {https://www.cis.es/es/estudios/barometro-de-la-vivienda-y-el-alquiler?cuestionario=17329&muestra=24021&pregunta=592252&variable=807645&chartType=bar},
   organization = {Centro de Investigaciones Sociológicas}
 }"
+spain_2023_identity_authenticity,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,"Importance of birthplace, nationality, residence, language, and ancestry for being considered truly of the autonomous community","@dataset{CIS3409,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2023_identity_centralism,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,Placement of national political parties on a centralism versus decentralization scale,"@dataset{CIS3409,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2023_identity_europe,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,Perceived benefit or harm of EU membership for Spain and for the autonomous community,"@dataset{CIS3409,
+  author = {{Centro de Investigaciones Sociológicas}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar}
+}"
 spain_2023_identity_identification,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,"Degree of identification with social ambits such as class, country, gender, profession, ideology, place, generation, religion, and sexual orientation","@dataset{CIS3409,
   author = {{Centro de Investigaciones Sociológicas}},
   title = {Estudio sobre identidades culturales, nacionales y europeas},
   number = {3409},
   organization = {Centro de Investigaciones Sociológicas},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar}
+}"
+spain_2023_identity_patriotism,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,Agreement with opinions about what a strong Spanish patriotic sentiment produces,"@dataset{CIS3409,
+  author = {Centro de Investigaciones Sociológicas},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  year = {2024},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar}
+}"
+spain_2023_identity_pride,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,Pride in being Spanish and in being of the autonomous community,"@dataset{CIS3409,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar},
+  organization = {Centro de Investigaciones Sociológicas}
+}"
+spain_2023_identity_state,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,Preferences and evaluations of the territorial organization of the Spanish state,"@dataset{CIS2024,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  year = {2024},
+  url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar}
+}"
+spain_2023_identity_territorial,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Estudio sobre identidades culturales, nacionales y europeas, Estudio 3409",https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar,Custom,NA,"Identification with territorial units from the local municipality up to Spain, Europe, and humanity as a whole","@dataset{CIS_3409,
+  author = {{Centro de Investigaciones Sociológicas (CIS)}},
+  title = {Estudio sobre identidades culturales, nacionales y europeas},
+  number = {3409},
+  year = {2024},
   url = {https://www.cis.es/es/estudios/estudio-sobre-identidades-culturales-nacionales-y-europeas?cuestionario=17764&muestra=25769&pregunta=636881&variable=1003464&chartType=bar}
 }"
 spain_2023_science_activities,NA,NA,"Centro de Investigaciones Sociológicas (CIS), Percepción de la ciencia y la tecnología, Estudio 3406",https://www.cis.es/es/estudios/percepcion-de-la-ciencia-y-la-tecnologia?cuestionario=17757&muestra=25761&pregunta=636157&variable=1001443&chartType=bar,Custom,NA,"Interest in science related activities such as visiting museums, reading news of discoveries, and attending talks","@dataset{CIS3406,
@@ -17534,7 +18095,7 @@ ssd12_habib_2025,10.1371/journal.pone.0318062,NA,"Habib S, Mozumder MK (2025) Va
 "
 stachl_2020_belonging,10.1371/journal.pone.0233431,NA,"Stachl C., Baranger A. (2020). Sense of belonging within the graduate community of a research-focused STEM department: Quantitative assessment using a visual narrative and item response theory. PLOS ONE. https://doi.org/10.1371/journal.pone.0233431",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0233431.s002,CC BY 4.0,NA,Graduate STEM department sense-of-belonging survey; 13 items 0-4 scale; N=183," @article{Stachl_2020, title={Sense of belonging within the graduate community of a research-focused STEM department: Quantitative assessment using a visual narrative and item response theory}, volume={15}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0233431}, DOI={10.1371/journal.pone.0233431}, number={5}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Stachl, Christiane N. and Baranger, Anne M.}, editor={Blanch, Angel}, year={2020}, month=May, pages={e0233431} }
 "
-steinberg_2023_mentalizing_momentary,10.1007/s12144-023-04963-w,NA,"Steinberg, N., Moshe-Cohen, R., Sheena, L. et al. Capturing a mentalized moment: A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life. Curr Psychol 43, 7596–7611 (2024). https://doi.org/10.1007/s12144-023-04963-w",https://osf.io/9cm75/,Permission via Email,NA,A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life," @article{Steinberg_2023, title={Capturing a mentalized moment: A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life}, volume={43}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-023-04963-w}, DOI={10.1007/s12144-023-04963-w}, number={8}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Steinberg, Noa and Moshe-Cohen, Rotem and Sheena, Leeav and Kivity, Yogev}, year={2023}, month=jul, pages={7596–7611} }
+steinberg_2023_mentalizing_momentary,10.1007/s12144-023-04963-w,NA,"Steinberg, N., Moshe-Cohen, R., Sheena, L. et al. Capturing a mentalized moment: A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life. Curr Psychol 43, 7596–7611 (2024). https://doi.org/10.1007/s12144-023-04963-w",https://osf.io/9cm75/,CC BY-NC 4.0,NA,A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life," @article{Steinberg_2023, title={Capturing a mentalized moment: A pilot study of the psychometric properties of a novel assessment method of mentalizing in daily life}, volume={43}, ISSN={1936-4733}, url={http://dx.doi.org/10.1007/s12144-023-04963-w}, DOI={10.1007/s12144-023-04963-w}, number={8}, journal={Current Psychology}, publisher={Springer Science and Business Media LLC}, author={Steinberg, Noa and Moshe-Cohen, Rotem and Sheena, Leeav and Kivity, Yogev}, year={2023}, month=jul, pages={7596–7611} }
 "
 stenhouse_2026_math_anxiety,10.23634/mmu.00644376,NA,Stenhouse R et al. (2026). Mathematics anxiety and mathematics teaching anxiety in trainee teachers survey data. Manchester Metropolitan University. https://doi.org/10.23634/mmu.00644376,https://e-space.mmu.ac.uk/id/eprint/644376,CC BY 4.0,NA,"Math anxiety, math teaching anxiety (19 items; Hunt & Sari 2019), and math confidence (6 items) in trainee teachers (England)","@misc{https://doi.org/10.23634/mmu.00644376,
   doi = {10.23634/MMU.00644376},
@@ -17966,6 +18527,19 @@ tasaygar_2025_bai,10.1371/journal.pone.0331030,NA,"Taş Aygar G, et al. (2025) T
 "
 tasaygar_2025_sdasi,10.1371/journal.pone.0331030,NA,"Taş Aygar G, et al. (2025) The psychosocial dimensions of seborrheic dermatitis: A cross-sectional study on anxiety, personality, and quality of life. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0331030.s001,CC BY 4.0,NA,"4 raw clinician-scored components of the Seborrheic Dermatitis Area and Severity Index (erythema, scaling, infiltration, extent), from the same seborrheic dermatitis study"," @article{Ta_Aygar_2025, title={The psychosocial dimensions of seborrheic dermatitis: A cross-sectional study on anxiety, personality, and quality of life}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0331030}, DOI={10.1371/journal.pone.0331030}, number={8}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Taş Aygar, Gamze and Karataş, Hanife and Kaya, Elif and Borazan, Nur Şeyma and Kartal, Selda Pelin}, editor={Aalemi, Ahmad Khalid}, year={2025}, month=Aug, pages={e0331030} }
 "
+tatala_2023_religious_experience,10.1371/journal.pone.0279984,NA,"Tatala, M.; Wojtasiński, M.; Janowski, K. (2023). Loneliness and time abroad in Polish migrants in the UK: Protective role of religious experience. PLOS ONE, 18(2), e0279984. https://doi.org/10.1371/journal.pone.0279984",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0279984.s001,CC BY 4.0,NA,"Religious Experience Scale, 17 items rated 1-5. Responses from 200 Polish migrants living in the UK.","@article{Tatala2023,
+  author = {Tatala, M. and Wojtasiński, M. and Janowski, K.},
+  title = {Loneliness and time abroad in {P}olish migrants in the {UK}: Protective role of religious experience},
+  journal = {PLOS ONE},
+  year = {2023},
+  volume = {18},
+  number = {2},
+  pages = {e0279984},
+  doi = {10.1371/journal.pone.0279984},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0279984.s001}
+}"
+tatala_2023_ucla_loneliness,10.1371/journal.pone.0279984,NA,"Tatala, M.; Wojtasiński, M.; Janowski, K. (2023). Loneliness and time abroad in Polish migrants in the UK: Protective role of religious experience. PLOS ONE, 18(2), e0279984. https://doi.org/10.1371/journal.pone.0279984",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0279984.s001,CC BY 4.0,NA,"Revised UCLA Loneliness Scale (R-UCLA), 20 items rated 1-4. Responses from 200 Polish migrants living in the UK."," @article{Tatala_2023, title={Loneliness and time abroad in Polish migrants in the UK: Protective role of religious experience}, volume={18}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0279984}, DOI={10.1371/journal.pone.0279984}, number={2}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tatala, Małgorzata and Wojtasiński, Marcin and Janowski, Konrad}, editor={Jasny, Lorien Shana}, year={2023}, month=Feb, pages={e0279984} }
+"
 taylorabdulai_2025_conspiracy,10.1371/journal.pone.0319798,NA,"Taylor-Abdulai HB, Dzantor EK, Mensah NK, Asumah MN, Ocansey S, Arhin SK, et al. (2025) Coronavirus disease 2019 (COVID-19) vaccine acceptability in Ghana: An urban-based population study. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0319798.s001,CC BY 4.0,NA,"COVID-19 vaccine conspiracy-belief items, 4 items (Yes/No; Not-sure dropped as non-response), urban Ghana population"," @article{Taylor_Abdulai_2025, title={Coronavirus disease 2019 (COVID-19) vaccine acceptability in Ghana: An urban-based population study}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0319798}, DOI={10.1371/journal.pone.0319798}, number={3}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Taylor-Abdulai, Hannah Benedicta and Dzantor, Edem Kojo and Mensah, Nathan Kumasenu and Asumah, Mubarick Nungbaso and Ocansey, Stephen and Arhin, Samuel Kofi and Barnes, Precious and Opoku, Victor Obiri and Mankir, Zakariah Jirimah and Famieh, Sylvester Ackah and Botchey, Collins Paa Kwesi}, editor={Mohamed, Mona Gamal}, year={2025}, month=Mar, pages={e0319798} }
 "
 taylorabdulai_2025_incentives,10.1371/journal.pone.0319798,NA,"Taylor-Abdulai HB, Dzantor EK, Mensah NK, Asumah MN, Ocansey S, Arhin SK, et al. (2025) Coronavirus disease 2019 (COVID-19) vaccine acceptability in Ghana: An urban-based population study. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0319798.s001,CC BY 4.0,NA,"Factors that would increase COVID-19 vaccine acceptance, 7 Yes/No items, urban Ghana population"," @article{Taylor_Abdulai_2025, title={Coronavirus disease 2019 (COVID-19) vaccine acceptability in Ghana: An urban-based population study}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0319798}, DOI={10.1371/journal.pone.0319798}, number={3}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Taylor-Abdulai, Hannah Benedicta and Dzantor, Edem Kojo and Mensah, Nathan Kumasenu and Asumah, Mubarick Nungbaso and Ocansey, Stephen and Arhin, Samuel Kofi and Barnes, Precious and Opoku, Victor Obiri and Mankir, Zakariah Jirimah and Famieh, Sylvester Ackah and Botchey, Collins Paa Kwesi}, editor={Mohamed, Mona Gamal}, year={2025}, month=Mar, pages={e0319798} }
@@ -18182,6 +18756,29 @@ tian2026_digital_competence,NA,10.6084/m9.figshare.32564154.v1,"Tian, X. (2026).
 }
 "
 tiemensma_2018_iesr,10.1371/journal.pone.0195229,NA,"Tiemensma J, Depaoli S, Winter SD, Felt JM, Rus HM, Arroyo AC (2018). The performance of the IES-R for Latinos and non-Latinos: Assessing measurement invariance. PLOS ONE, 13(4), e0195229. https://doi.org/10.1371/journal.pone.0195229",https://doi.org/10.1371/journal.pone.0195229.s001,CC BY 4.0,NA,22-item Impact of Event Scale-Revised (IES-R) in a Latino/non-Latino measurement-invariance study," @article{Tiemensma_2018, title={The performance of the IES-R for Latinos and non-Latinos: Assessing measurement invariance}, volume={13}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0195229}, DOI={10.1371/journal.pone.0195229}, number={4}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tiemensma, Jitske and Depaoli, Sarah and Winter, Sonja D. and Felt, John M. and Rus, Holly M. and Arroyo, Amber C.}, editor={Annunziato, Rachel}, year={2018}, month=Apr, pages={e0195229} }
+"
+tims_2017_autonomy,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Job autonomy, 4 items rated 1-5. The article describes a three-item measure; the deposit carries four columns and all four are shipped. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
+"
+tims_2017_career_competencies,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Career competencies questionnaire, 21 items rated 1-5 across six dimensions (reflection on motivation, reflection on qualities, networking, professional profiling, work exploration, career control). Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
+"
+tims_2017_cse,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Core Self-Evaluations Scale (Judge et al.), 12 items rated 1-5, from a two-country study of the perception, action and development paths linking core self-evaluations to work engagement. Items are as administered: the deposit's six reverse-keyed recodes are excluded so each item appears once. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
+"
+tims_2017_hindering_demands,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Hindering job demands, 6 items rated 1-5. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country.","@article{Tims2017,
+  author = {Tims, Maria and Akkermans, Joeri},
+  year = {2017},
+  title = {Core self-evaluations and work engagement: Testing a perception, action, and development path},
+  journal = {PLOS ONE},
+  volume = {12},
+  number = {8},
+  pages = {e0182745},
+  doi = {10.1371/journal.pone.0182745},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002}
+}"
+tims_2017_job_crafting,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Job Crafting Scale (Tims et al.), the 15 expansive items rated 1-5 across three dimensions: increasing structural job resources, increasing social job resources, and increasing challenging job demands. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
+"
+tims_2017_supervisor_support,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Supervisory social support, 4 items rated 1-5. The article describes a three-item measure; the deposit carries four columns and all four are shipped. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
+"
+tims_2017_uwes,10.1371/journal.pone.0182745,NA,"Tims, M.; Akkermans, J. (2017). Core self-evaluations and work engagement: Testing a perception, action, and development path. PLOS ONE, 12(8), e0182745. https://doi.org/10.1371/journal.pone.0182745",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0182745.s002,CC BY 4.0,NA,"Utrecht Work Engagement Scale (UWES-9), 9 items rated 1-7 across vigor, dedication and absorption. Responses from 706 employees pooling the paper's two samples, the Netherlands (N=303) and Germany (N=404), distinguished by cov_country."," @article{Tims_2017, title={Core self-evaluations and work engagement: Testing a perception, action, and development path}, volume={12}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0182745}, DOI={10.1371/journal.pone.0182745}, number={8}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Tims, Maria and Akkermans, Jos}, editor={Conejero, J. Alberto}, year={2017}, month=Aug, pages={e0182745} }
 "
 timss_tam,NA,NA,"Robitzsch A, Kiefer T, Wu M (2022). TAM: Test Analysis Modules. R package version 4.1-4, https://CRAN.R-project.org/package=TAM.",https://cran.r-project.org/web/packages/TAM/index.html,GPL-3.0,NA,TIMSS 2011 data from Australian and Taiwanese students,"@Manual{TAM2022,
   title = {TAM: Test Analysis Modules},
@@ -18477,7 +19074,7 @@ trevisan_2018_mscs,10.1371/journal.pone.0206800,NA,"Trevisan, D. A., Tafreshi, D
 "
 trivia_fastrich_2017,10.1037/mot0000087,NA,"Fastrich, G. M., Kerr, T., Castel, A. D., &amp; Murayama, K. (2018). The role of interest in memory for trivia questions: An investigation with a large-scale database. Motivation Science, 4(3), 227–250. https://doi.org/10.1037/mot0000087",https://osf.io/kjahf/overview,CC BY 4.0,NA,"The current study established a normative database for 244 trivia questions with a large sample (N = 1498) and examined how pre-answer interest (i.e., interest in the question) and post-answer interest (i.e., interest in the answer) relate to learning performance"," @article{Fastrich_2018, title={The role of interest in memory for trivia questions: An investigation with a large-scale database.}, volume={4}, ISSN={2333-8113}, url={http://dx.doi.org/10.1037/mot0000087}, DOI={10.1037/mot0000087}, number={3}, journal={Motivation Science}, publisher={American Psychological Association (APA)}, author={Fastrich, Greta M. and Kerr, Tyson and Castel, Alan D. and Murayama, Kou}, year={2018}, month=sep, pages={227–250} }
 "
-trog_brinchmann_2019,https://doi.org/10.1111/desc.12709,NA,"Brinchmann, E. I., Braeken, J., & Lyster, S.-A. H. (2019). Is there a direct relation between the development of vocabulary and grammar? Developmental Science, 22(1), e12709. https://doi.org/10.1111/desc.12709",https://cran.r-project.org/web/packages/mokken,NA,NA,"Scores from 217 Norwegian children on the clustered items of the Norwegian adaptation of the Test for Reception of Grammar (TROG-2; Bishop, 2003), across three annual assessments; used in Brinchmann et al. (2019) to study longitudinal vocabulary and grammar development"," @article{Brinchmann_2018, title={Is there a direct relation between the development of vocabulary and grammar?}, volume={22}, ISSN={1467-7687}, url={http://dx.doi.org/10.1111/desc.12709}, DOI={10.1111/desc.12709}, number={1}, journal={Developmental Science}, publisher={Wiley}, author={Brinchmann, Ellen Irén and Braeken, Johan and Lyster, Solveig‐Alma Halaas}, year={2018}, month=Aug }
+trog_brinchmann_2019,https://doi.org/10.1111/desc.12709,NA,"Brinchmann, E. I., Braeken, J., & Lyster, S.-A. H. (2019). Is there a direct relation between the development of vocabulary and grammar? Developmental Science, 22(1), e12709. https://doi.org/10.1111/desc.12709",https://cran.r-project.org/web/packages/mokken,GPL-2.0,NA,"Scores from 217 Norwegian children on the clustered items of the Norwegian adaptation of the Test for Reception of Grammar (TROG-2; Bishop, 2003), across three annual assessments; used in Brinchmann et al. (2019) to study longitudinal vocabulary and grammar development"," @article{Brinchmann_2018, title={Is there a direct relation between the development of vocabulary and grammar?}, volume={22}, ISSN={1467-7687}, url={http://dx.doi.org/10.1111/desc.12709}, DOI={10.1111/desc.12709}, number={1}, journal={Developmental Science}, publisher={Wiley}, author={Brinchmann, Ellen Irén and Braeken, Johan and Lyster, Solveig‐Alma Halaas}, year={2018}, month=Aug }
 "
 trusz_2025_nfi,NA,NA,"Trusz, S. (2025). Datasets and materials underlying the Study on The Need Fulfillment Inventory for Older Adults Participating in University of the Third Age Activities: Development and Psychometric Properties [Data set]. Harvard Dataverse.",https://doi.org/10.7910/DVN/DWCBOE,CC0 1.0,NA,"Need Fulfillment Inventory (NFI-72) for older adults participating in University of the Third Age activities, Poland; exploratory factor analysis sample","@dataset{Trusz2025,
   author = {Trusz, S.},
@@ -18606,82 +19203,82 @@ ups_vangsness_2019,NA,10.17605/OSF.IO/R7WCX,"Vangsness, L., Voss, N. M., Maddox,
   year = {2022}
 }
 "
-uruguay_2022_technology_access,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,"Household access and ownership of computers, tablets, and internet connectivity","@misc{EncuestaTIC,
+uruguay_2022_technology_access,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.","Household access and ownership of computers, tablets, and internet connectivity","@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_barriers,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Barriers and concerns affecting online shopping behavior,"@misc{Encuesta_TIC,
+uruguay_2022_technology_barriers,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Barriers and concerns affecting online shopping behavior,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_communication,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Communication and participation activities on the internet,"@misc{EncuestaTIC,
+uruguay_2022_technology_communication,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Communication and participation activities on the internet,"@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_devices,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Internet usage frequency across devices and connection types,"@misc{Encuesta_TIC,
+uruguay_2022_technology_devices,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Internet usage frequency across devices and connection types,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_entertainment,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Entertainment activities conducted on the internet,"@misc{Encuesta_TIC,
+uruguay_2022_technology_entertainment,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Entertainment activities conducted on the internet,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_govperception,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Perception and satisfaction with government online services,"@misc{Encuesta_TIC,
+uruguay_2022_technology_govperception,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Perception and satisfaction with government online services,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_govservices,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Use of government services and administrative activities online,"@misc{EncuestaTIC,
+uruguay_2022_technology_govservices,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Use of government services and administrative activities online,"@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_information,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Information search activities conducted online,"@misc{Encuesta_TIC,
+uruguay_2022_technology_information,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Information search activities conducted online,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_ownership,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Household ownership of technology and communication devices,"@misc{Encuesta_TIC,
+uruguay_2022_technology_ownership,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Household ownership of technology and communication devices,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_places,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Internet access points and locations of use in the last 3 months,"@misc{EncuestaTIC,
+uruguay_2022_technology_places,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Internet access points and locations of use in the last 3 months,"@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_safety,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Safety and security risks experienced online,"@misc{Encuesta_TIC,
+uruguay_2022_technology_safety,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Safety and security risks experienced online,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_skills,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Digital skills and technical abilities for internet and device use,"@misc{Encuesta_TICs,
+uruguay_2022_technology_skills,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Digital skills and technical abilities for internet and device use,"@misc{Encuesta_TICs,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_socialmedia,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Frequency of use of social media platforms,"@misc{Encuesta_TICs,
+uruguay_2022_technology_socialmedia,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Frequency of use of social media platforms,"@misc{Encuesta_TICs,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_streaming,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Streaming services and platforms accessed online,"@misc{Encuesta_TIC,
+uruguay_2022_technology_streaming,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Streaming services and platforms accessed online,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_transactions,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Online transactions and commerce activities,"@misc{Encuesta_TIC,
+uruguay_2022_technology_transactions,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Online transactions and commerce activities,"@misc{Encuesta_TIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
 }"
-uruguay_2022_technology_work,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,NA,NA,Work and study-related activities conducted through the internet,"@misc{EncuestaTIC,
+uruguay_2022_technology_work,NA,NA,Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones,https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata,Custom,"Public Domain - Instituto Nacional de Estadística, Uruguay (© 2023) under Ley 16.616.",Work and study-related activities conducted through the internet,"@misc{EncuestaTIC,
   title = {Encuesta de Usos de las Tecnologías de la Información y las Comunicaciones},
   howpublished = {\url{https://www4.ine.gub.uy/Anda5/index.php/catalog/736/get-microdata}},
   note = {Accessed: 2023-10-01}
@@ -19267,6 +19864,41 @@ wvs_panasiuk_science,10.1037/pspp0000549,NA,"Panasiuk, S. L., McCanny, A., & Che
 "
 wvs_panasiuk_security,10.1037/pspp0000549,NA,"Panasiuk, S. L., McCanny, A., & Cheung, F. (2025). Methods reflect values: Evaluating the shortcomings of the average for measuring population well-being. Journal of Personality and Social Psychology. https://doi.org/10.1037/pspp0000549",https://osf.io/3ejtz/files/osfstorage,NA,NA,"This file contains item-level response data from the World Values Survey (WVS) time-series dataset (1981–2022), focusing on the thematic subset “Security”"," @article{Panasiuk_2025, title={Methods reflect values: Evaluating the shortcomings of the average for measuring population well-being.}, volume={128}, ISSN={0022-3514}, url={http://dx.doi.org/10.1037/pspp0000549}, DOI={10.1037/pspp0000549}, number={6}, journal={Journal of Personality and Social Psychology}, publisher={American Psychological Association (APA)}, author={Panasiuk, Sofia L. and McCanny, Anthony and Cheung, Felix}, year={2025}, month=jun, pages={1355–1370} }
 "
+xiao_2024_hierarchical_plateau,10.1371/journal.pone.0315916,NA,"Xiao, L. (2024). The impact of hierarchical plateau on civil servants’ taking charge behavior: The role of work engagement and trait mindfulness. PLOS ONE, 19(12), e0315916. https://doi.org/10.1371/journal.pone.0315916",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001,CC BY 4.0,NA,"Hierarchical plateau, the 4-item brief career plateau measure (Allen et al.), rated 1-5. Responses from 307 civil servants in the Pearl River Delta, Guangdong Province, China.","@article{Xiao2024,
+  author = {Xiao, L.},
+  year = {2024},
+  title = {The impact of hierarchical plateau on civil servants' taking charge behavior: {T}he role of work engagement and trait mindfulness},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {12},
+  pages = {e0315916},
+  doi = {10.1371/journal.pone.0315916},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001}
+}"
+xiao_2024_taking_charge,10.1371/journal.pone.0315916,NA,"Xiao, L. (2024). The impact of hierarchical plateau on civil servants’ taking charge behavior: The role of work engagement and trait mindfulness. PLOS ONE, 19(12), e0315916. https://doi.org/10.1371/journal.pone.0315916",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001,CC BY 4.0,NA,"Taking charge behavior, the 4 highest-loading items of the Morrison & Phelps scale as used by Parker & Collins, rated 1-5. Responses from 307 civil servants in the Pearl River Delta, Guangdong Province, China.","@article{Xiao2024,
+  author = {Xiao, L.},
+  title = {The impact of hierarchical plateau on civil servants' taking charge behavior: {T}he role of work engagement and trait mindfulness},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {12},
+  pages = {e0315916},
+  year = {2024},
+  doi = {10.1371/journal.pone.0315916},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001}
+}"
+xiao_2024_trait_mindfulness,10.1371/journal.pone.0315916,NA,"Xiao, L. (2024). The impact of hierarchical plateau on civil servants’ taking charge behavior: The role of work engagement and trait mindfulness. PLOS ONE, 19(12), e0315916. https://doi.org/10.1371/journal.pone.0315916",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001,CC BY 4.0,NA,"Mindful Attention Awareness Scale (MAAS), 15 items rated 1-6. Responses from 307 civil servants in the Pearl River Delta, Guangdong Province, China.","@article{Xiao2024,
+  author = {Xiao, L.},
+  year = {2024},
+  title = {The impact of hierarchical plateau on civil servants' taking charge behavior: {T}he role of work engagement and trait mindfulness},
+  journal = {PLOS ONE},
+  volume = {19},
+  number = {12},
+  pages = {e0315916},
+  doi = {10.1371/journal.pone.0315916},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001}
+}"
+xiao_2024_work_engagement,10.1371/journal.pone.0315916,NA,"Xiao, L. (2024). The impact of hierarchical plateau on civil servants’ taking charge behavior: The role of work engagement and trait mindfulness. PLOS ONE, 19(12), e0315916. https://doi.org/10.1371/journal.pone.0315916",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0315916.s001,CC BY 4.0,NA,"Utrecht Work Engagement Scale (UWES-9), 9 items rated 1-5. Responses from 307 civil servants in the Pearl River Delta, Guangdong Province, China."," @article{Xiao_2024, title={The impact of hierarchical plateau on civil servants’ taking charge behavior: The role of work engagement and trait mindfulness}, volume={19}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0315916}, DOI={10.1371/journal.pone.0315916}, number={12}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Xiao, Linsheng}, editor={Ahmed, Fawad}, year={2024}, month=Dec, pages={e0315916} }
+"
 xiao_2026_entrepreneurial_intention,10.1371/journal.pone.0352807,NA,"Xiao B, Wang X, Liu Q, Zhang P (2026) Linking entrepreneurial spirit and entrepreneurial environment perception to entrepreneurial intention: Moderation by entrepreneurial role models. PLoS ONE.",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0352807.s002,CC BY 4.0,NA,"40-item multi-construct entrepreneurship survey (innovativeness, proactiveness, perceived policy support, perceived access to finance, perceived entrepreneurship education, role models, entrepreneurial intention; all 1-5 Likert), Chinese university students"," @article{Xiao_2026, title={Linking entrepreneurial spirit and entrepreneurial environment perception to entrepreneurial intention: Moderation by entrepreneurial role models}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0352807}, DOI={10.1371/journal.pone.0352807}, number={7}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Xiao, Biyan and Wang, Xiaoqing and Liu, Qianhong and Zhang, Peng}, editor={Rusu, Valentina Diana}, year={2026}, month=July, pages={e0352807} }
 "
 xie_2026_student_questionnaire,10.1371/journal.pone.0340806,NA,Xie et al. (2026). Innovative practice of sustainable digital signal processing education. PLOS One. DOI: 10.1371/journal.pone.0340806,https://plos.figshare.com/articles/dataset/31091356,CC BY 4.0,NA,"Student questionnaire survey responses (78 students, 15 items, 5-point Likert)","@article{Xie_2026, title={Innovative practice of sustainable digital signal processing education}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0340806}, DOI={10.1371/journal.pone.0340806}, number={1}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Xie, Zhibo and Zhu, Zhongjie and Wang, Yuer and Bai, Yongqiang and Zhang, Ruihua}, editor={Uysal, Fatih}, year={2026}, month=Jan, pages={e0340806} }
@@ -19848,6 +20480,43 @@ zhu_2024_pyd,10.1371/journal.pone.0303531,NA,"Zhu X, Chu CKM, Wu X, Shek DTL (20
 "
 zhu_2026_llm_meteorology_performance,10.1371/journal.pone.0347933,NA,"Zhu S, Li H (2026). The application of large language models in meteorology graduate research: current status impact and prospects. PLOS One.",https://doi.org/10.1371/journal.pone.0347933.s001,CC BY 4.0,NA,Graduate students' ratings (1-5) of LLM tool performance across 5 aspects (accuracy problem-solving practicality innovation ease-of-use) in meteorology research," @article{Zhu_2026, title={The application of large language models in meteorology graduate research: current status, impact, and prospects}, volume={21}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0347933}, DOI={10.1371/journal.pone.0347933}, number={4}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Zhu, Siguang and Li, Honghui}, editor={Kim, Junghwan}, year={2026}, month=Apr, pages={e0347933} }
 "
+znidarsic_2021_coworker_support,10.1371/journal.pone.0245078,NA,"Žnidaršič, J.; Bernik, M. (2021). Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia. PLOS ONE, 16(1), e0245078. https://doi.org/10.1371/journal.pone.0245078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001,CC BY 4.0,NA,"Co-worker support for work-family balance: the same 9 items as the leader-support block, re-asked about colleagues, rated 1-5. Item codes CS01-CS09 are positional. Responses from 247 Slovenian employees.","@article{Znidarscic2021,
+  author = {Žnidaršič, Jaka and Bernik, Marko},
+  year = {2021},
+  title = {Impact of work-family balance results on employee work engagement within the organization: The case of {Slovenia}},
+  journal = {PLOS ONE},
+  volume = {16},
+  number = {1},
+  pages = {e0245078},
+  doi = {10.1371/journal.pone.0245078},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001}
+}"
+znidarsic_2021_leader_support,10.1371/journal.pone.0245078,NA,"Žnidaršič, J.; Bernik, M. (2021). Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia. PLOS ONE, 16(1), e0245078. https://doi.org/10.1371/journal.pone.0245078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001,CC BY 4.0,NA,"Leader support for work-family balance, 9 items rated 1 (never) to 5 (very often), following Shinn et al. Item codes LS01-LS09 are positional: the deposit has no item codes, only the full item stems as column headers. Responses from 247 Slovenian employees.","@article{Znidaric2021,
+  author = {Žnidaršič, J. and Bernik, M.},
+  year = {2021},
+  title = {Impact of work-family balance results on employee work engagement within the organization: The case of {Slovenia}},
+  journal = {PLOS ONE},
+  volume = {16},
+  number = {1},
+  pages = {e0245078},
+  doi = {10.1371/journal.pone.0245078},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001}
+}"
+znidarsic_2021_org_practices,10.1371/journal.pone.0245078,NA,"Žnidaršič, J.; Bernik, M. (2021). Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia. PLOS ONE, 16(1), e0245078. https://doi.org/10.1371/journal.pone.0245078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001,CC BY 4.0,NA,"Organizational work-family practices, 25 items rated 1-5, drawn from the Slovenian Family-Friendly Company certificate measure set across eight areas including working time, work organization, workplace flexibility, leadership and services for families. Item codes OP01-OP25 are positional. Responses from 247 Slovenian employees."," @article{_nidar_i__2021, title={Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0245078}, DOI={10.1371/journal.pone.0245078}, number={1}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Žnidaršič, Jasmina and Bernik, Mojca}, editor={Beier, Grischa}, year={2021}, month=Jan, pages={e0245078} }
+"
+znidarsic_2021_uwes,10.1371/journal.pone.0245078,NA,"Žnidaršič, J.; Bernik, M. (2021). Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia. PLOS ONE, 16(1), e0245078. https://doi.org/10.1371/journal.pone.0245078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001,CC BY 4.0,NA,"Utrecht Work Engagement Scale (UWES-9), 9 items rated 1-5. Responses from 247 Slovenian employees."," @article{_nidar_i__2021, title={Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia}, volume={16}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0245078}, DOI={10.1371/journal.pone.0245078}, number={1}, journal={PLOS ONE}, publisher={Public Library of Science (PLoS)}, author={Žnidaršič, Jasmina and Bernik, Mojca}, editor={Beier, Grischa}, year={2021}, month=Jan, pages={e0245078} }
+"
+znidarsic_2021_wf_balance,10.1371/journal.pone.0245078,NA,"Žnidaršič, J.; Bernik, M. (2021). Impact of work-family balance results on employee work engagement within the organization: The case of Slovenia. PLOS ONE, 16(1), e0245078. https://doi.org/10.1371/journal.pone.0245078",https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001,CC BY 4.0,NA,"Work-family balance, 4 items rated 1-5 (Brough et al.). Responses from 247 Slovenian employees.","@article{Znidaršič2021,
+  author = {Žnidaršič, Janja and Bernik, Marko},
+  year = {2021},
+  title = {Impact of work-family balance results on employee work engagement within the organization: {T}he case of {S}lovenia},
+  journal = {PLOS ONE},
+  volume = {16},
+  number = {1},
+  pages = {e0245078},
+  doi = {10.1371/journal.pone.0245078},
+  url = {https://journals.plos.org/plosone/article/file?type=supplementary&id=10.1371/journal.pone.0245078.s001}
+}"
 zou_2025_critical_thinking,10.1371/journal.pone.0324486,NA,Zou et al. (2025). How does task complexity and task difficulty affect college students' writing performance? Critical thinking disposition. PLOS ONE.,https://doi.org/10.1371/journal.pone.0324486,CC BY 4.0,NA,"Critical thinking disposition inventory (70 items, 7 dimensions, 7-pt Likert) from 201 Chinese college students."," @article{Zou_2025, title={How does task complexity and task difficulty affect college students’ writing performance? The mediating effect of critical thinking disposition}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0324486}, DOI={10.1371/journal.pone.0324486}, number={6}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Zou, Yumei and Kuek, Florence and Cheng, Xiaoli and Feng, Wenqin}, editor={Derakhshan, Ali}, year={2025}, month=June, pages={e0324486} }
 "
 zou_2025_task_difficulty,10.1371/journal.pone.0324486,NA,Zou et al. (2025). How does task complexity and task difficulty affect college students' writing performance? Critical thinking disposition. PLOS ONE.,https://doi.org/10.1371/journal.pone.0324486,CC BY 4.0,NA,"Perceived task-difficulty ratings (5 items, 7-pt Likert) from 201 college students across 3 writing tasks of varying complexity (repeated measure, wave=task order)."," @article{Zou_2025, title={How does task complexity and task difficulty affect college students’ writing performance? The mediating effect of critical thinking disposition}, volume={20}, ISSN={1932-6203}, url={http://dx.doi.org/10.1371/journal.pone.0324486}, DOI={10.1371/journal.pone.0324486}, number={6}, journal={PLOS One}, publisher={Public Library of Science (PLoS)}, author={Zou, Yumei and Kuek, Florence and Cheng, Xiaoli and Feng, Wenqin}, editor={Derakhshan, Ali}, year={2025}, month=June, pages={e0324486} }

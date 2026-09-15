@@ -1,11 +1,11 @@
-# IRW table-name consistency audit -- 2026-09-07
+# IRW table-name consistency audit -- 2026-09-15
 
 Ground truth: `irw::irw_list_tables(source = c("core","comp","nom","sim"))`. 
 Dictionary sheets included (Public rows only).
 
 ## A. Incomplete coverage (missing >=2 sources, tag-only rows dropped -- matches metadata/04_tables.R's `zz`)
 
-Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (127 rows). Nothing here is auto-fixed -- triage by hand.
+Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CSV: `table_audit_report_incomplete.csv` (209 rows). Nothing here is auto-fixed -- triage by hand.
 
 | table | category | redivis | dictionary_sheet | biblio_csv | metadata_csv | tags_csv |
 |---|---|---|---|---|---|---|
@@ -18,6 +18,9 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | hachenberger_2025_stroop_pilot_bin | core |  |  | 1 |  |  |
 | hachenberger_2025_webexec_main | core |  |  | 1 |  |  |
 | hachenberger_2025_webexec_pilot | core |  |  | 1 |  |  |
+| liang2026_extrinsic_motivation | core |  |  | 1 |  |  |
+| liang2026_intrinsic_motivation | core |  |  | 1 |  |  |
+| lindstrom2021_conscientiousness | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_canada | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_india | core |  |  | 1 |  |  |
 | thirdpartypunishmentunfairsharing_mcauliffe_2025_peru | core |  |  | 1 |  |  |
@@ -36,10 +39,7 @@ Full list, aligned columns: `table_audit_report_incomplete.txt`. Same data as CS
 | nhl_hockey | comp |  | 1 | 1 |  |  |
 | abdullah_2024_hbbloat_subjnorm | core |  | 1 | 1 |  |  |
 | alexander_2017_ecr | core |  | 1 | 1 |  |  |
-| anthropomorphism_health_voropaeva_2026 | core |  | 1 | 1 |  |  |
-| apfcompact_ptacek_2024_dass-21 | core |  | 1 | 1 |  |  |
-| autobiographicalinterview_lockrow_2023_detailcounts | core |  | 1 | 1 |  |  |
-_...and 97 more, see the .txt or .csv._
+_...and 179 more, see the .txt or .csv._
 
 ## B. Urgent -- live in Redivis, not in any local CSV yet
 
