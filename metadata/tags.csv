@@ -2052,8 +2052,6 @@ li_2026_coach_leadership,NA,NA,Program-based,NA,Survey/questionnaire,Likert Scal
 li_2026_imi_teq,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 li_2026_sport_commitment,NA,NA,Program-based,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 li_2026_team_cohesion,NA,NA,Program-based,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
-liang2026_extrinsic_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
-liang2026_intrinsic_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 liang_2026_extrinsic_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 liang_2026_intrinsic_motivation,NA,NA,Educational,NA,Survey/questionnaire,Likert Scale/selected response,chi,NA
 liem_2024_attitude_env,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
@@ -2063,7 +2061,6 @@ liem_2024_env_mgmt_acct,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/sel
 liem_2024_green_competitive_adv,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 liem_2024_perceived_benefit_cp,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
 liem_2024_perceived_benefit_ema,NA,NA,Workplace,NA,Survey/questionnaire,Likert Scale/selected response,vie,NA
-lindstrom2021_conscientiousness,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
 lindstrom2021_honesty_humility,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
 lindstrom2021_team_identification,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
 lindstrom2021_violent_intentions,Adult (18+),NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,swe,NA
@@ -2518,6 +2515,7 @@ nelson2019_ipqrd,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response
 nelson_2019_ipqrde,NA,NA,NA,NA,Survey/questionnaire,Likert Scale/selected response,eng,NA
 nerdy_personality,Adult (18+),NA,Internet-based,Personality,Survey/questionnaire,Likert Scale/selected response,eng,Nerdy Personality Attributes Scale
 neurips_2020,Child (<18y),"Child (6-12y), Adolescent (12-18y)",Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,NeurIPS 2020 Education Challenge
+neurips_2020_task34,Child (<18y),Child (6-12y),Educational,Cognitive/educational,Test,Likert Scale/selected response,eng,NeurIPS 2020 Education Challenge (tasks 3/4)
 neurips_2022,NA,NA,NA,NA,NA,NA,NA,NA
 neurodegenerative_huizinga_2019_brief,Adult (18+),NA,"Internet-based, Targeted/specific",Cognitive/educational,Survey/questionnaire,Likert Scale/selected response,dut,Behavior Rating Inventory of Executive Function - Adult (BRIEF-A)
 neurodegenerative_huizinga_2019_cvc,Adult (18+),NA,"Internet-based, Targeted/specific",Physical health/functioning,Survey/questionnaire,Likert Scale/selected response,dut,The Cerebral Visual Complaints questionnaire (CVC-q)
