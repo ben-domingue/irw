@@ -5,23 +5,26 @@ context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
 ## From the 2026-09-14 repos weekly batch
 
-- [ ] **DVN/QUVQIR ("Replication Data for: Partisanship and perceived costs
-  predict carbon...")** — `worth_retrying` after Step 2b: item columns hold
-  text-coded Likert responses (`'Strongly Agree'`, etc.) instead of numeric
-  codes, so the automatic loader couldn't map them to `resp`. Needs a human
-  to confirm the response-scale mapping before a script is written. See
-  BATCH_LOG.md 2026-09-14.
+- [ ] **DR-NTU 10.21979/N9/P5WUGI ("Fact-Check Misinformation by Generative
+  AI: The Roles of Digital Literacy, Information Processing, and Information
+  Self-Efficacy")** — 668 respondents, 54 Likert items in five blocks, stored
+  as text labels. Triage wrongly called it `no_usable_file`. Deposit licence
+  is CC BY-NC 4.0, so it needs a licence ruling first; then find the item
+  wording (likely in the Technology in Society paper). See BATCH_LOG.md
+  2026-09-14.
 
-- [ ] **DVN/XZTGXT ("When Value Conflict Becomes a Governance Burden:
-  Ideological Polarization, Residential Segregation, and Depression among
-  Medicare Beneficiaries", 5,357p / 43i)** — `worth_retrying` after Step 2b:
-  `dup_id_item` failed at a 1.0x ratio. Could be genuine longitudinal waves,
-  or (per the pattern the batch immediately above this one in BATCH_LOG.md
-  found) a raw/binned pair of the same variables stored at two levels of
-  coarseness. Needs the actual column list checked before writing a script
-  either way. See BATCH_LOG.md 2026-09-14.
+- [ ] **UK Data Service ReShare 858431 (The Great Friendship Project,
+  loneliness trial)** — open CC BY 4.0 xlsx plus data dictionary: UCLA-3,
+  UCLA-20, 20-item `scs`, SWEMWBS, EQ-5D, ICECAP-A; 56 people × 3 waves.
+  Small n; decide whether it clears the bar. Normalise `Time` case
+  (`T0`/`t0`). See BATCH_LOG.md 2026-09-14.
 
-- [ ] **14 `HIGH_YIELD_TERMS` still owe an OSF pass** — OSF timed out on
+- [ ] **Science Data Bank 10.57760/sciencedb.0103e** (personality,
+  resilience, social support in Chinese college students) — `no_usable_file`
+  unverified because the file API needs a login; check the landing page by
+  hand.
+
+- [ ] **All 14 `HIGH_YIELD_TERMS` still owe an OSF pass** — OSF timed out on
   every query this run (`api.osf.io` read timeouts, not per-term false
   positives). Watermarks did not advance, so the next weekly/monthly repos
   run re-covers them automatically; no action needed unless OSF is still
