@@ -118,6 +118,7 @@ drop_wording_hedges <- function(ev, hits) {
 # have a file, the run still reported success. Collected and reported as ERROR
 # flags below instead. See ben-domingue/irw#1736.
 skipped <- character(0)
+empty <- character(0)
 
 read_one <- function(a) {
     p <- if (dir.exists(a)) file.path(a, "verification_merged.csv") else a
@@ -127,11 +128,30 @@ read_one <- function(a) {
         return(NULL)
     }
     d <- read.csv(p, stringsAsFactors = FALSE)
+    # A round that BLOCKS every table it claimed writes a header-only
+    # verification_merged.csv -- batch_216 (2026-09-16) is the first, and
+    # batch_144 dodged it only because two of its agents happened to write
+    # NO_ROUTE rows. Assigning ..src to a zero-row data.frame is an error in R
+    # ("replacement has 1 row, data has 0"), so this crashed rather than
+    # reporting. An empty file is "nothing to lint", not a failure.
+    if (!nrow(d)) {
+        empty <<- c(empty, a)
+        message("skipping ", a, " -- verification file has no rows (all-blocked round)")
+        return(NULL)
+    }
     d$..src <- p
     d$..dir <- if (dir.exists(a)) a else NA_character_
     d
 }
 v <- do.call(rbind, Filter(Negate(is.null), lapply(sub("/$", "", args), read_one)))
+# Every input was present but empty: there is genuinely nothing to check, and
+# that is a clean outcome. Only a MISSING file still means the caller pointed
+# this at the wrong path, which is what the stop() below is for.
+if ((is.null(v) || !nrow(v)) && length(empty) && !length(skipped)) {
+    cat(sprintf("lint_verification: nothing to lint -- %d batch(es) recorded no verification rows: %s\n",
+                length(empty), paste(empty, collapse = ", ")))
+    quit(save = "no", status = 0)
+}
 if (is.null(v) || !nrow(v))
     stop("nothing to lint -- no verification rows were found in: ",
          paste(sub("/$", "", args), collapse = ", "),
