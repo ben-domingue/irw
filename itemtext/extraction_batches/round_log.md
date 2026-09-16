@@ -18867,3 +18867,58 @@ Chinese label strings through MAP_CN5 — so the recode sits in the deposited fi
 with the pre-recode anchor labels left attached. That is the fact the public note has to state.
 
 Cap (batch_230) not reached; 211 rows still pending.
+
+## batch_215 — 2026-09-15 22:42–23:0x PT
+
+3 tables claimed, 3 agents (one per table), all three returned. **2 written / 1 blocked / 0 failed.**
+Yield 2/3 = 67% written; 0% failed, so the circuit breaker does not trip (it counts `failed`, not
+`blocked`). Numbering note: highest existing was `batch_214`, so this round is 215 — outside the
+200–205 hole, consecutive from 206 as the amended rule requires.
+
+All three tables came from ONE source: Wang Y, Liu B, Zhang L, Zhang P (2022), *Front. Psychiatry*
+13:827519 (CC BY 4.0), deposit figshare 19158812 (Frontiers Data Sheet 1 .xlsx, CC BY 4.0, bare
+headers, **no variable or value labels anywhere**). A fourth sibling, `wang2022_dass_anxiety`, shipped
+in batch_214; each agent was told which siblings belonged to others and none collided.
+
+**Written.** `wang2022_dass_depression` (28 rows) and `wang2022_dass_stress` (28 rows), both
+`reconstructed` / `translated_substitute` / `mixed`, both PARTIAL on mapping verification. Gates all
+clean: normalize_nulls 0 of 2 changed; audit_batch **2 PASS, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch 2 PASS; lint_verification 2 rows no problems; `irw-validate` ok on both;
+check_provenance clean for this round. Both reproduce their subscale against the paper's published
+alphas (depression 0.8729 / anxiety 0.8436 / stress 0.8602 against 0.87 / 0.84 / 0.86) and each live
+item matches exactly one deposit column — the depression agent got an *exact whole-vector* match on
+all seven with zero rivals, the stress agent nearest-column with a 0.0658 closest rival plus all four
+of Table 1's stress cells. PARTIAL, not VERIFIED, for the same reason in both cases: the block is
+pinned and each item pinned to a column, but the canonical sentence order *within* the subscale rests
+on the DASS-21 numbering convention, which neither deposit nor paper states — a permutation inside
+the block would be undetectable. Both ship English under the 2026-09-01 fallback (administration was
+the Chinese DASS-21, deposit carries no labels and no CJK in the DASS headers), with option text the
+study's OWN endpoints only ("completely inconsistent" / "completely in line") and resp 1 and 2 left
+**blank, unpadded**. DASS-21 rights verdict=ship applied from the register, not re-derived.
+
+**Blocked (not failed).** `wang2022_fomo` — instrument rights, retry test NO. The instrument was
+established from the paper rather than assumed (FoMOs, Przybylski et al. 2013), and the extracting
+agent correctly **falsified the premise it was handed**: the 2013 CHB article is not open access
+(Crossref shows no CC licence for 10.1016/j.chb.2013.02.014). The block rests not on that bare
+copyright notice (PANAS ruling excludes it) but on a distribution clause of the HEXACO shape — free
+for academic use, licensing required for commercial — which blocks under irw#1945. Register row added.
+
+**Step 5b orchestrator re-checks — both changed or qualified what was reported.**
+1. The depression agent reported r(FoMO, depression) = 0.4783 pairwise / 0.4957 complete-case against
+   the paper's 0.51, attributing the gap to covariate adjustment. Re-checked: **both numbers are
+   exactly right**, but the explanation was an unverified guess and a simpler one is sufficient —
+   deleting listwise across all four scales at once (n=309) gives **0.5019**, the published value to
+   within rounding, while anxiety and stress barely move (0.5517, 0.5749). Only 5 rows have a missing
+   depression value and none are missing in FoMO, so depression is simply the subscale sensitive to
+   the missing-data rule. notes.csv amended to say so and to mark the covariate reading unreliable.
+2. The FoMO agent described its rights clause as resting on "several independent third-party
+   reproductions that agree in substance". Re-checked against what is actually on disk: of its four
+   cached pages, **only one carries the clause at all** — the primary selfdeterminationtheory.org
+   questionnaire page is a 5.5KB Cloudflare interstitial, and psychroots/studocu/ratemyfomo contain no
+   permissions text. The block stands (an unchanged retry meets the same gated pages either way), but
+   the register row records the basis as SECONDARY AND THIN and says a human should confirm it before
+   it is relied on widely; a primary copy showing no such clause would unblock the table outright.
+
+Queue after this round: 885 done, 236 blocked, 208 pending, 59 excluded, 13 failed; no rows left
+`in_progress`. Cap is `batch_230` and this is 215, so the cap is NOT reached — the next firing
+proceeds normally.
