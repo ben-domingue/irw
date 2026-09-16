@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"enem_2015_1mil_ch","PASS",45,45,TRUE,TRUE,TRUE,TRUE,0,0,""
+"enem_2015_1mil_cn","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,6.7,"6.7% of rows have blank option_text | 3 of 45 items have NO option_text rows while others do (17715, 28652, 61065)"
+"enem_2015_1mil_lc","WARN",50,50,TRUE,TRUE,TRUE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=999906: 12762, 15119, 30185, 32925, 47771, 48578, 62205, 67408, 8265, 83482"
+"enem_2015_1mil_mt","WARN",45,45,TRUE,TRUE,TRUE,TRUE,0,4.4,"4.4% of rows have blank option_text | 2 of 45 items have NO option_text rows while others do (14712, 24019)"
