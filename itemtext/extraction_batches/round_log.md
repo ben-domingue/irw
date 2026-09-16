@@ -18818,3 +18818,52 @@ permission" with no `ship` row written. The auth agent re-derived the same concl
 reached, independently.
 
 Cap (batch_230) not reached; 214 pending remain.
+
+## batch_214 — 2026-09-15 22:24–22:40 PDT
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents per round
+(the 2026-09-11 setting). No kills, no rate limits, no retries.
+
+- `wang_2016_study3_power` — Generalized Sense of Power (8 items × 5 levels, 40 rows). Wang YN 2016
+  PLOS ONE 11(1):e0146050 Study 3, n=210 Chinese. mapping_basis=reconstructed,
+  text_source=translated_substitute, translation_source=mixed. Administered Chinese *anchors* ship
+  verbatim from the deposit's value labels; the *item* wording is an English fallback (three agreeing
+  open-access reproductions) because no Chinese item wording exists in the deposit or paper.
+  Verification PARTIAL — routes 3 + 5/6 + 7; within-polarity-class order not established.
+- `wang_2016_study3_se` — Rosenberg Self-Esteem, 10 items × resp 1–5 (50 rows), same source file.
+  RSES already carries verdict=ship in instrument_rights_register.csv (express public-domain grant
+  reaching translations); applied, not re-derived. Verification PARTIAL — routes 3 + 5/6 + 9 (all
+  50 of 50 item×level counts of the .sav's labelled codes equal the live resp counts).
+- `wang2022_dass_anxiety` — DASS-21 anxiety subscale, 7 items × resp 0–3 (28 rows).
+  **The DASS rights question is NOT a block**: the register already carries verdict=ship on the
+  rights holder's express public-domain grant, which extends to translations (the relevant arm, this
+  being a Chinese administration). Verification PARTIAL — per-item (n, mean, sd) reproduce deposit
+  columns DASS2/4/7/9/15/19/20 exactly and each claimed column is the nearest of all 21; canonical
+  within-subscale numbering not established. option_text ships only the study's own endpoints
+  (resp 0, 3); 1 and 2 left blank rather than substituting canonical DASS anchors onto a visibly
+  relabelled scale.
+
+Gates, all run in the foreground by the orchestrator after every agent finished: normalize_nulls
+0 of 3 normalized; audit_batch **3 PASS, no anomalies** (hence no Step 5c WARNs to explain);
+verify_batch **PASS=3**; lint_verification 3 rows, no problems; `irw-validate` ok on all three.
+Notably irw-validate did NOT raise `resp_ambiguous` on the power table, which its agent had
+expected — per-item direction differences are legitimate and correctly unflagged.
+
+`check_provenance.R` exits 1, but **not on anything from this round**: the single failing table is
+`tian2026_digital_competence` (ships IRW-generated English with no issues-page entry), pre-existing
+and unrelated. All three batch_214 tables are HELD (uploaded blank), so no public-note entry is owed
+yet; each owes one when it ships, since all three declare translation_source=mixed.
+
+**Step 5b, orchestrator's own re-check — both label-override claims CONFIRMED.** Two agents
+independently flipped the deposit's anchor labels on the reverse-worded items (power p2/p4/p6/p7;
+se se2/se5/se6/se8/se9), claiming the values are stored already reverse-scored. This overrides a
+source, so it was re-checked independently of the agents' verify scripts: in the live data every
+inter-item correlation is positive (power min +0.22, p1 with the four negatives +0.38/+0.40/+0.42/
++0.39; se min +0.32, se1 with the five negatives +0.48/+0.51/+0.50/+0.34/+0.45), alpha as-stored is
+0.880 and 0.898 against published .88 and .90, and un-reversing collapses them to 0.440 and 0.300.
+Totals 29.4/5.4 and 39.1/7.0 match Table 5's 29.37/5.37 and 39.12/6.95. Worth recording *where* the
+recode is: `data/wang_2016_authenticity_relationship.py` applies none of its own — it maps the .sav's
+Chinese label strings through MAP_CN5 — so the recode sits in the deposited file upstream of IRW,
+with the pre-recode anchor labels left attached. That is the fact the public note has to state.
+
+Cap (batch_230) not reached; 211 rows still pending.
