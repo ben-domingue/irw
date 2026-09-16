@@ -18577,3 +18577,84 @@ correct — nothing of it ships until upload. Someone should add the tian2026 li
 
 Circuit breaker: not tripped (0 failed of 3). Queue after this round: 226 pending,
 871 done, 232 blocked, 59 excluded, 13 failed. Cap `batch_230` not reached.
+
+## batch_210 — 2026-09-15 21:09–21:20
+
+3 tables, 3 agents (one per table, the 2026-09-11 setting). **1 written / 2 blocked / 0 failed.**
+Yield 1/3 = 33%. Circuit breaker NOT tripped: 0 failed (0%), both no-CSV tables are determinate
+rights verdicts with retry test = NO. No kills, no rate limits, no retries.
+
+Numbering note: the series resumed at 206 after 199 (200–205 belong to the irw#1945 rights line),
+so this is 206, 207, 208, 209, **210**. Cap is batch_230; not reached.
+
+**vaporova_2020_imitation — WRITTEN, clean.** Vaporova & Zmyj (2020) PLOS ONE 15(9):e0235595,
+CC BY 4.0. Not a questionnaire: a behaviour-coded three-step mitten imitation task (mouse hand
+puppet), 9- and 14-month-olds and 4-year-olds at TU Dortmund. 3 items x 2 levels = 6 rows.
+`item_text` = the paper's own naming of the three demonstrated target actions in its Coding
+paragraph; `option_text` = the S1 Data header's own value labels (0 = not imitated, 1 = imitated);
+`instructions` = the single experimenter utterance ("Now you may play with the mouse!"), spoken in
+German with only the paper's English published, hence language=German, text_source=
+translated_substitute, translation_source=study_supplied, `_translated` columns empty.
+mapping_basis=data_labels, but earned rather than asserted: `data/vaporova_2020_imitation.py`
+assigns the codes POSITIONALLY (`block[[0,3,13,14,15]]` then a rename list in a DIFFERENT order
+from the column list), so the exemption was not available and a real route was run.
+Step 5b VERIFIED — header diff 3/3 plus response-frequency match: source workbook rows 4:98,
+analyzable-imitation flag == 1, gives n/count-of-1s 82/45, 82/21, 82/27 against live 82/45, 82/21,
+82/27 (means .5488/.2561/.3293 both sides, exact). Smallest gap between rates .0732, so every item
+is separated from every other and no permutation survives — including the shaking /
+putting-back-on swap the script's mismatched orderings invite. Does NOT establish the instructions
+line (no numeric check exists for it); that limit is stated in the evidence and the row is
+VERIFIED on the item axis, per the 2026-09-08 rule.
+
+**vanteffelen_2020_pid5_hostility — BLOCKED (instrument rights). Retry test: NO.**
+The 10 codes PID_1..PID_10 (resp 0–3) are the Dutch-administered **Hostility facet of the FULL
+220-item PID-5—Adult** (APA items 28/32/38/85/92/116/158/170/188/216), not the 25-item Brief Form —
+established from the study's own S1 Data .sav variable labels. The agent checked the full form
+against APA's OWN page rather than name-matching the existing PID-5-BF register row (Ben's
+2026-09-10 instruction), and the full form carries the word-for-word identical clause: reproduction
+permitted "by researchers and by clinicians for use with their patients", other uses by permission
+from APPI, "All Rights Reserved" on every item page. Reserves a right under irw#1945.
+PLOS CC BY 4.0 governs the response data, not APA's wording; the Dutch administration is a
+derivative. Block is EFFECTIVE — the live codes are bare. A `block` row was added to
+instrument_rights_register.csv for the full form, its facet subsets and its translations, scoped
+explicitly NOT to the rest of the DSM-5 "emerging measures" family.
+
+**vanteffelen_2020_rpq — BLOCKED (instrument rights), ESCALATED. Retry test: NO.**
+RPQ_1..RPQ_23 are the Dutch (Cima et al. 2013) administration of Raine et al.'s (2006)
+Reactive-Proactive Aggression Questionnaire in canonical order; 21 of 23 .sav columns carry the
+Dutch stem and the value labels 1=Nooit/2=Soms/3=Vaak match the live resp set {1,2,3} exactly.
+Raine distributes the RPQ himself as a .docx from his UPenn page, stating: "The RPQ can be freely
+used for research purposes, but I would appreciate knowing a little about your study first at the
+following email address: [his address]" — a purpose-scoped grant to USE, not to reproduce or
+redistribute.
+**BEN'S RULING REQUESTED.** This clause is the weakest of its comparators: no "only", and
+"I would appreciate knowing" is a courtesy rather than a permission gate, so a
+silence-is-permission reading is genuinely available. Blocked under "err on the side of not having
+things" and the standing rule that a round may write a `block` but never a `ship`.
+If the verdict flips this is a same-day extraction, with one caveat banked in the notes: RPQ_20's
+variable label is truncated at SPSS's 255-char cap and RPQ_23 has no label at all; neither Dutch
+stem appears anywhere else in the deposit (S2 Table lists only the 54 PID-5H/STAXI-2T/AQ-H/FOA
+items), so both would ship with blank item_text.
+
+**Step 5b orchestrator re-checks (2 of 2 confirmed, 1 agent omission repaired).**
+- Re-fetched Raine's RPQ .docx independently (HTTP 200, 29,164 bytes,
+  sha256 70f9c104…13b2) and extracted the clause from word/document.xml: **verbatim match** to the
+  agent's quote and hash. The escalation as written to Ben is accurate.
+- The vaporova mapping claim was re-run end to end by `verify_batch.R`, which re-fetches the source
+  workbook itself: all nine numbers reproduce exactly. VERDICT: PASS.
+- **Repaired:** the RPQ agent did not write its `pending_index_notes.csv` row (the pid5 agent did).
+  The orchestrator added it, status=blocked, including the independent re-fetch evidence and the
+  two-stem caveat. Worth watching whether this recurs — the row is what a blocked table leaves
+  behind, and the round would otherwise have lost it silently.
+
+**Gates:** normalize_nulls fixed 1 file (6 lines). audit_batch PASS 1/1, **no WARNs**, so nothing
+was owed under Step 5c. verify_batch PASS=1. lint_verification 0 ERROR / 0 WARN / 1 INFO (the INFO
+correctly notes the evidence hedges on the instructions line while still asserting a full item-axis
+tie; VERIFIED stands). irw-validate ok, nothing to report. check_provenance: 1189 rows / 209 files,
+no failure; its outstanding items are pre-existing and none belongs to this round.
+
+**Carried forward (not this round's to fix):** `data/vanteffelen_2020_hostility.py` line 29
+hardcodes Ben's email into its User-Agent —
+`UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}`. Confirmed by the orchestrator by
+reading the line. First logged by batch_209; still unfixed, and it leaks the address to every host
+that script touches.
