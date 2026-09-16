@@ -1186,9 +1186,9 @@ wu2021_resilience,blocked,batch_229,2026-09-16T02:42:15-07:00
 wu2021_swls,blocked,batch_230,2026-09-16T03:01:18
 wu_2024_resilience,done,batch_230,2026-09-16T03:01:18
 wu2026_liking,done,batch_230,2026-09-16T03:01:18
-wu2026_novel,pending,,
-wu2026_typical,pending,,
-wurm_2016_mdi,pending,,
+wu2026_novel,done,batch_231,2026-09-16T11:55:03-07:00
+wu2026_typical,done,batch_231,2026-09-16T11:55:03-07:00
+wurm_2016_mdi,done,batch_231,2026-09-16T11:55:03-07:00
 xiao_2026_entrepreneurial_intention,pending,,
 xiong_2025_dass21,pending,,
 xu_2016_pqb,pending,,

@@ -19940,3 +19940,46 @@ already on GitHub. Check the FILE, not the PR.
 
 Only the three tables held for the rename (irw#2198) remain unshipped from this chain:
 `wang_2026_teaching_presence`, `weida_2020_financial_security`, `wu2021_burnout`.
+
+## batch_231 — 2026-09-16 11:41–11:55 PDT
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| wu2026_novel | done, 70 rows | paper_explicit | VERIFIED (route 1 per-item means, Fig 2 + route 8 anchor direction) |
+| wu2026_typical | done, 70 rows | paper_explicit | VERIFIED (route 1 per-item means, Fig 2 + direction check) |
+| wurm_2016_mdi | done, 60 rows | paper_order | VERIFIED (route 1 published S1 Table per-group means + code-identity to .sav) |
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch 3 PASS, **no WARNs**; verify_batch PASS=3;
+lint_verification 3 rows, no problems; `irw-validate` ok on all three (2 checks each).
+
+Notes:
+- The two `wu2026_*` tables share one source (PLOS ONE 21(4):e0342855, CC BY 4.0) and were
+  split across two agents with explicit sibling warnings; no collision, and the two
+  independently reproduced the same Fig 2 table from opposite rows of it.
+- Both `wu2026_*` tables are picture-stimulus tables: all ten items carry the *identical*
+  single-item statement because each rates a different vase photograph, so `item_text` cannot
+  and need not be distinguished per item. What route 1 pins is stimulus identity
+  (`Novel_n`/`Typical_n` = Fig 1 vase n). Both agents stated this limit in their evidence and
+  still claimed VERIFIED, which is correct here — every *code* is separated.
+- All three tables ship `text_source=translated_substitute`: wu2026_* administered in Chinese
+  (translation_source=study_supplied — paper is English, no Chinese wording in the deposit or
+  either supplement), wurm_2016_mdi administered in German (translation_source=
+  official_instrument_english — Nielsen/Oernboel/Bech/Christensen 2019, PMC6454403 Table 2,
+  co-authored by the MDI's author). Each owes an issues-page line once uploaded.
+- `wurm_2016_mdi` items 8 and 10 are MDI composites (the higher of two sub-items each:
+  restless/slowed-down, reduced/increased appetite). Both alternatives ship in one `item_text`;
+  disclosed in the public_note, because a `resp` of 4 does not say which sub-item produced it.
+  Deliberately NOT data_labels: the deposited .sav labels 21 of 103 columns and none are mdi.
+- Step 5b orchestrator re-check: re-ran `verify_wu2026_novel.R` independently — Fig 2 vs live
+  per-item means reproduce at max deviation 0.0050 (tolerance 0.015), tight pair Novel_4/Novel_7
+  0.0050 as shipped vs 0.0250 swapped, anchor correlation −0.856. Claim confirmed as written.
+  No agent overrode a source and none reported a data defect this round.
+- `check_provenance.R` exits 1, but **not on this batch**: the three tables it names as shipping
+  IRW-generated English with no issues-page entry are `tian2026_digital_competence`,
+  `vanteffelen_2020_foa`, `wang_2025_green_space_wellbeing` — all pre-existing and none of ours.
+  batch_231's three are HELD (never uploaded), so no entry is owed yet.
+
+Circuit breaker not tripped (0 failed). Queue after this round: 918 done / 251 blocked /
+13 failed / 59 excluded / **160 pending**. Cap is batch_240; not reached, next round is batch_232.
