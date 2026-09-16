@@ -20099,3 +20099,56 @@ Also recorded from the yang_2023 source, for whoever takes the siblings: **Table
 Option anchors: `yandun2026_memory` and `yang_2023_consumption_intent` both publish endpoints only, so resp 2–4 ship blank `option_text`, unpadded. `yang_2018_cesd` ships E1's full four-anchor set on all twenty items (E5/E10/E15/E20 carry an abbreviated copy of the same anchors, the rest carry none) — disclosed in provenance.
 
 No rate limit, spend cap or kill this round; three agents, no retries. Queue after round: **151 pending, 0 in_progress**. Cap (batch_240) not reached.
+
+## batch_235 — 2026-09-16 12:46–12:58
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+Circuit breaker not tripped (0% failed).
+
+Tables, all from one source — Yang et al. 2023, PLOS ONE 18(6):e0280701, CC BY 4.0, S1 Data XLSX,
+N=494 Chinese undergraduates:
+
+- `yang_2023_emotional_eating_cesd` — 80 rows (20 items × resp 1–4). mapping_basis data_labels,
+  verification PARTIAL, verify PASS.
+- `yang_2023_emotional_eating_ders` — 180 rows (36 × 1–5). data_labels, PARTIAL, verify PASS.
+- `yang_2023_emotional_eating_eesr` — 115 rows (23 × 1–5). data_labels, VERIFIED, verify PASS.
+
+Gates: normalize_nulls fixed 2 of 3; audit_batch PASS 2 / WARN 1; verify_batch PASS=3;
+lint_verification 0 ERROR, 2 WARN (both "option_text blank", expected — see below);
+irw-validate clean on all three.
+
+**Notable — one export quirk, three consequences (Step 5b: independently re-checked by the
+orchestrator against the workbook and `data/yang_2023_emotional_eating.py`, not taken on the
+agents' reports).** The S1 workbook is a wjx-style survey export in which the first sub-item column
+of each matrix question carries the question STEM instead of that sub-item's own label. The
+processing script builds each block as `[the unprefixed column] + [every column matching
+startswith("@1n")]`, and for the CES-D block the instruction column itself matches the filter.
+Confirmed exactly: the assembled CES-D order is 1-based columns 29,28,30,…,47, so **`CESD_1` is
+canonical Radloff item 2 and `CESD_2` is canonical item 1**; `CESD_3` onward align with canonical
+numbering. `EESR_1` and `DERS_1` are likewise the instruction-headed columns. UPPS-P (20 `@12`
+columns, no unprefixed column) is unaffected — relevant to the still-pending
+`yang_2023_emotional_eating_uppsp`. Also confirmed against the workbook: the duplicate English
+labels the EESR agent reported are real — 1-based columns 9/24 both read "@10. hostile" (→ EESR_5,
+EESR_20) and 17/26 both "@10, depressed" (→ EESR_13, EESR_22), four distinct columns with distinct
+distributions whose Chinese wording the deposit's English collapses.
+
+Three rows of shipped text are not the study's own words and are disclosed in provenance/public_note:
+`CESD_2` and `DERS_1` carry canonical English assigned by elimination, and DERS's five option labels
+are the canonical anchors (the paper misstates the format as 1–4 while every item in the data uses
+five levels). `EESR_1` ships BLANK item_text rather than a guess. All three tables ship blank
+option_text — no anchor wording is published — and nothing was padded with scale numbers. Language
+is Chinese; the deposit contains zero CJK, so the 2026-09-01 fallback applies (English in base
+fields, `_translated` omitted, text_source=translated_substitute).
+
+Audit WARN (eesr: 4.3% blank item_text, 100% blank option_text) explained in notes.csv per Step 5c:
+both are itemtext gaps in the source, not defects in the response data.
+
+**Two things for a human, neither caused by this round:**
+1. `check_provenance.R` exits 1 on a PRE-EXISTING debt — `tian2026_digital_competence` (batch_217),
+   `vanteffelen_2020_foa` (batch_188) and `wang_2025_green_space_wellbeing` (batch_209) each ship
+   IRW-generated English with no entry on the public issues page. No batch_235 table is implicated.
+2. `data/yang_2023_emotional_eating.py` sends Ben's email address to PLOS in its User-Agent
+   (`UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}`). Rounds are forbidden from
+   doing this; the repo script predates the rule and still does it.
+
+Cap (`batch_240`) not yet reached.
