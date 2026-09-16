@@ -18387,3 +18387,69 @@ to read the items before applying it. Checked: no other `meq`/`mystic` table is 
 `PEMAIW_Qiu_2020_FFMQ` (batch_131) is the Five Facet Mindfulness Questionnaire — not affected.
 
 Cap is `batch_230`; not reached. 235 rows remain `pending`, 0 `in_progress`.
+
+## batch_207 — 2026-09-15 20:27–20:50 PDT
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+
+- `ucla_BrummerHoffman_2021` — done. 3-item UCLA Loneliness (Brazilian Portuguese), OSF p8j2v
+  CC BY 4.0, same deposit as the shipped `gad_`/`phq_BrummerHoffman_2021`. mapping_basis=data_labels,
+  verification NOT_NEEDED (exemption earned by the code derivation: `data/BF_BrummerHoffman_2021.R`
+  does no rename, so the IRW code is the authors' own post-rename column name). Content caveat
+  shipped as a public_note: the item coded `ucla_left_out` was administered as "Abandonado"
+  (abandoned), not a rendering of the canonical "left out"; `_translated` follows the administered
+  Portuguese. Ground truth via `irw_table_sets()`, no full export.
+- `uffler_2017_lecture_seating` — done. 26 items x 7 levels = 182 rows. verification PARTIAL
+  (published per-subscale r2 route; pins subscale membership, not within-subscale order).
+  `verify_*.R` PASS.
+- `uffler_2017_seat_reasons` — done. 7 items x 2 levels = 14 rows. verification VERIFIED
+  (S1 Graph 1 percentages x n=477 nursing subsample vs live endorsement counts, max deviation
+  1 count, all seven predicted counts distinct). `verify_*.R` PASS.
+
+Gates: normalize_nulls fixed 1 of 3 (seat_reasons, written by Python); audit_batch 3/3 PASS, no
+WARNs; verify_batch 2 PASS + 1 MISSING(exempt); lint_verification clean; irw-validate clean except
+one `name_charset` WARN on `ucla_BrummerHoffman_2021`, which is a property of the upstream IRW
+table name (capitalisation) and affects every `*_BrummerHoffman_2021` sibling, not this item file.
+
+`check_provenance.R` exits 1, but **not on anything from this round**: the single offender is
+`tian2026_digital_competence` (batch_188, machine_translation with no issues-page entry). Pre-existing
+and still outstanding.
+
+### Step 5b — orchestrator re-checks of the round's claims (all confirmed, one agent aside corrected)
+
+Re-read the source article directly rather than trusting the reports:
+
+- **Instrument mismatch confirmed.** The paper states plainly "We used the Motivated Strategies for
+  Learning Questionnaire (MSLQ)... Twenty-six questions were submitted to the study population",
+  answers "on a Likert scale graduated from 1 (not at all true of me) to 7 (very true of me)". The
+  IRW dictionary Description for `uffler_2017_lecture_seating` ("questionnaire on motivations for
+  lecture-hall seating choice") is wrong and **should be corrected to name the MSLQ motivation
+  section**.
+- **Published r2 confirmed exactly** as used in the verification route: intrinsic 0.73, task value
+  0.84, self-efficacy 0.63, control of learning beliefs 0.48, extrinsic 0.20 (p=0.22, non-significant
+  — so excluding it from the route is the paper's own position, not a convenience).
+- **Per-item n defect confirmed exactly.** Independent `irw_fetch` count: QUESTIO20=591,
+  QUESTIO18/19/23=592, the other 22 items 593. Matches the agent's claim to the row. Cause is
+  upstream junk in the S2 sheet (a stray BOM in row 560, the typo "²5" in two cells) coerced to NA.
+  A response-data defect, not an itemtext defect.
+- **n=477 nursing confirmed** from the paper's own breakdown of the 596; 593 included after 3
+  exclusions for aberrant values.
+- **French translation confirmed**: "we had to translate the items into French. The translated
+  questionnaire was not tested in preliminary studies." Supports `text_source=translated_substitute`
+  with no French wording published anywhere in the article or its two supplements.
+- **One agent aside was wrong and is NOT on disk.** The `lecture_seating` agent's report called the
+  companion table "the actual seat-choice checklist". It is not: the paper collected seat reasons via
+  a single OPEN question ("Why did you sit in that place today?") whose free-text answers the authors
+  "grouped into categories". The `seat_reasons` agent had this right, and its notes/public_note say
+  so; the wrong reading never reached a file. Recorded here so it does not get re-derived.
+
+### Metadata follow-ups owed (not blocked tables, so no pending_index_notes rows)
+
+Both IRW dictionary Descriptions for the uffler pair are wrong and want correcting:
+1. `uffler_2017_lecture_seating` — is the MSLQ motivation section, not a seating-motivation instrument.
+2. `uffler_2017_seat_reasons` — "7-item binary checklist (multi-select)" describes the derived file,
+   not the instrument; the seven codes are researcher categories over free text.
+3. `cov_seat_rank_preference` (both tables) is a misnomer — the S2 `RANK` column is the lecture-hall
+   row the student actually occupied (1-9), assigned by the researcher on the day, not a preference.
+
+Cap not reached (cap is `batch_230`). Queue: 232 pending, 0 in_progress.
