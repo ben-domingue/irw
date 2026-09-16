@@ -324,6 +324,16 @@ routing a transport failure to a sticky flag silently discards datasets. (It
 did — see BATCH_LOG.md 2026-08-17, where a WAF block was being recorded as
 `no_usable_file`.)
 
+`external_unresolved` is **sticky on purpose** (Ben, 2026-09-16). It sits on
+the line between the two: the deposit was never opened, but the reason is that
+no resolver exists for that host, which is a fact about our coverage rather
+than a transient outage. Making it inconclusive would re-surface and re-triage
+the same ICPSR/GESIS/institutional-repository links on every run that finds
+them, for a recovery that only arrives if someone writes a resolver. The
+standing record of what was skipped is the run CSV, not the ledger — so when a
+resolver *is* added, re-triage from those CSVs rather than expecting the
+candidates to come back on their own.
+
 A source that hard-blocks mid-batch (WAF challenge) is detected once and its
 remaining rows are skipped for the rest of the run, recorded retryably rather
 than retried one doomed request at a time.
