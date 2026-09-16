@@ -589,12 +589,61 @@ def triage_external_link(ext_link: str, base: dict) -> dict:
                 "reasons": "no tabular-format Supporting Information file; data "
                            f"link on a host with no resolver: {landing}"[:400]}
 
+    already = _deposit_already_in_irw(landing, doi)
+    if already:
+        return {**base, **empty, "flag": "already_in_irw",
+                "reasons": f"the deposit this article points at ({already}) is "
+                           f"already in the IRW dictionary, under another paper; "
+                           f"not re-triaged: {landing}"[:400]}
+
     row = process_one({"source": source, "url": landing, "doi": doi})
     reasons = f"via Data Availability link {landing} | {row.get('reasons', '')}"
     return {**base, **{k: v for k, v in row.items()
                        if k not in ("source", "title", "url", "doi")},
             "reasons": reasons[:400]}
 
+
+
+_IRW_DEPOSIT_DOIS = None
+
+
+def _deposit_already_in_irw(landing: str, doi: str) -> str:
+    """The IRW table name is not knowable here, but "is this deposit already
+    in the dictionary" is -- and that is the question the connectors never
+    asked.
+
+    Candidate exclusion matches the *paper* DOI, which cannot catch a deposit
+    that entered IRW through a different paper. One deposit routinely serves
+    two: Mendeley 48y8tkf5wh is `floreskanter_2021_cerq` in the corpus and was
+    re-used by PLOS 10.1371/journal.pone.0326319 in 2025, so the 2025 article
+    looked new and its data was already there, byte for byte. Article-attached
+    Supporting Information could not collide this way; a Data Availability
+    link can, which is why this check arrives with that feature rather than
+    before it. Three of five hand-picked leads on 2026-09-16 were duplicates
+    of this kind.
+
+    Returns the matched deposit DOI, or "".
+    """
+    global _IRW_DEPOSIT_DOIS
+    if _IRW_DEPOSIT_DOIS is None:
+        from irw_discover_updated import _load_existing_irw_dois
+        try:
+            # The dictionary's "URL (for data)" column, normalised to deposit
+            # DOIs by the same extractor used here -- so the two sides of this
+            # comparison are built the same way.
+            _IRW_DEPOSIT_DOIS = _load_existing_irw_dois()
+        except Exception:
+            _IRW_DEPOSIT_DOIS = set()   # never block a run on the sheet
+    if not _IRW_DEPOSIT_DOIS:
+        return ""
+    from irw_discover_updated import _extract_doi_from_url, norm_doi
+    keys = {_extract_doi_from_url(landing) or "",
+            norm_doi(doi) if doi else "",
+            _extract_doi_from_url(f"https://doi.org/{doi}") if doi else ""}
+    for k in keys:
+        if k and k in _IRW_DEPOSIT_DOIS:
+            return k
+    return ""
 
 
 def extract_external_link(text: str) -> str:
