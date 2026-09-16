@@ -19365,3 +19365,66 @@ explanations are owed); verify_batch PASS=1; lint_verification 2 rows, no proble
 `translation_source=mixed` items are pre-existing and belong to earlier rounds).
 
 Cap (batch_230) not reached.
+
+## batch_222 — 2026-09-16 00:24–00:40
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents, one per table.
+All three are `wesselmann_2018_*` siblings off one PLOS ONE deposit
+(10.1371/journal.pone.0208438, CC BY 4.0, S1 File `.sav`); each agent was told which siblings
+belonged to another agent and none crossed.
+
+- `wesselmann_2018_distress` — 30 rows (5 items × 6 levels). MHI-5. `mapping_basis=data_labels`.
+- `wesselmann_2018_msp` — 70 rows (14 × 5). `mapping_basis=data_labels`.
+- `wesselmann_2018_needs` — 100 rows (20 × 5). `mapping_basis=data_labels`.
+
+All three are **exempt from Step 5b by derivation, not merely by basis**: the processing script
+`data/wesselmann_2018_ostracism_veterans.py` melts the `.sav` columns under their own names, so the
+IRW item code IS the source column name — no positional step exists that could permute text across
+codes. NOT_NEEDED rows written to both `verification_merged.csv` and `mapping_verification.csv`.
+
+**Gates.** normalize_nulls: 2 of 3 files fixed. audit_batch: 3 PASS, **no WARNs** (so no Step 5c
+entries owed). verify_batch: 3 MISSING(exempt), as expected for data_labels. lint_verification:
+3 rows, no problems. irw-validate: ok on all three. check_provenance: clean for this round's tables
+(its standing findings — 1 IRW-generated table with no issues-page entry, 13 `mixed` REVIEW rows —
+are pre-existing and name none of ours).
+
+**Step 5b orchestrator re-checks — both agent claims independently confirmed, numbers reproduced exactly:**
+
+1. `wesselmann_2018_distress` scale direction. The `.sav` carries ZERO value labels, so the 1–6
+   direction came from the paper and the agent backed it numerically. Re-ran against the `.sav`:
+   `dis1R/dis3R/dis5R` = `7 − dis_i` exactly (max |diff| = 0, n=127); the file's own `distress`
+   composite = `mean(dis1R,dis2,dis3R,dis4,dis5R)` exactly (max |diff| = 0.000000, n=128) while the
+   raw five-item mean is off by up to 3.000; correlations +0.732 ptsd, +0.757 traitanx, +0.703
+   stateanx, −0.532 support. Every figure matched the agent's report to the digit. Low raw = more
+   distress ⇒ 1 = All of the time, 6 = Never, as the paper states. Confirmed.
+
+2. `wesselmann_2018_msp` **Step 3b instrument mismatch — CONFIRMED, and it is a dictionary defect.**
+   All 14 `msp1`–`msp14` columns run 1–5 (n=123–126 each) and carry military-specific wording
+   ("My closest friendships are with members of my platoon/fellow veterans"; "I have access to
+   military-sponsored mental health resources…"). Zimet's MSPSS is 12 items on a 7-point scale, so
+   neither the count nor the range fits. Located the defect precisely: **`metadata/biblio.csv`
+   Description reads "Multidimensional Scale of Perceived Social Support, veterans, 14 items, N=126"
+   and is wrong**, while `metadata/tags.csv` already carries the correct Construct Name
+   "Military-based perceived social support (14 items)". Only the biblio Description needs fixing —
+   a one-field metadata correction for a human, not an itemtext defect. Extraction was done against
+   what the data actually is (the paper's own measure: 4 items from Smith et al. plus 10
+   author-generated).
+
+**Disclosed deviations, all three tables:** the `.sav` has no value labels and the sources anchor
+only the scale endpoints, so middle scale points ship with `option_text` blank rather than padded
+with their own numbers (distress resp 2–5; msp and needs resp 2–4). For `distress` the canonical
+MHI/SF-36 middle anchors were deliberately NOT substituted — this study never printed them and
+renames its sixth point "Never". `distress`'s `instructions` field carries the canonical MHI/SF-36
+stem ("How much of the time during the past month have you…") because the shipped `item_text` values
+are sentence fragments; the paper corroborates the recall window and the frequency format but does
+not print the sentence. Recorded in notes/provenance. Neither clears the issues-page bar
+(both are "the source never printed it").
+
+**Rights, for Ben — no block, but a ratification worth banking.** The `distress` agent applied the
+register's existing ratified-pending `ship` row for RAND SF-36 v1 (added batch_121) rather than
+re-deriving, on the grounds that the MHI-5 is that survey's mental-health subscale, and read RAND's
+own Permissions Information: "All of the surveys from RAND Health Care are public documents,
+available without charge." Nothing reserved. No register row was written (a round may write `block`
+rows only, and this would be a `ship`) — flagged here in case an MHI row is worth its own entry.
+
+Cap (`batch_230`) not reached; queue has 187 pending after this round.
