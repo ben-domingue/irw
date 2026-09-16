@@ -200,6 +200,12 @@ class TrailingPunctuationTest(unittest.TestCase):
         ]:
             self.assertEqual(irw_batch_updated.strip_trailing_punctuation(raw), want)
 
+    def test_markdown_bracket_junk_is_cut(self):
+        self.assertEqual(
+            irw_batch_updated.strip_trailing_punctuation(
+                "https://doi.org/10.5281/zenodo.17423755%5D(https:/doi.org/10.5281/zenodo.17423755"),
+            "https://doi.org/10.5281/zenodo.17423755")
+
     def test_leaves_legitimate_urls_alone(self):
         for u in ["https://figshare.com/articles/dataset/x/31933275",
                   "https://osf.io/ajkh4/?view_only=13dbb2a2f98648499cbbe3cbbe8a439d",

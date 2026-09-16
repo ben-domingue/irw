@@ -517,8 +517,15 @@ _KNOWN_REPO_HOSTS = ("datadryad.org", "zenodo.org", "osf.io", "figshare.com",
 _RE_TRAILING_PUNCT = re.compile(r"""[.,;:)\]}>'"]+$""")
 
 
+# A statement written in Markdown ("[10.5281/zenodo.17423755](https://...)")
+# leaves the encoded bracket inside the scraped URL, which then resolves to
+# nothing. Seen in PMC 10.1186/s12889-018-5219-x's statement, 2026-09-16.
+_RE_BRACKET_JUNK = re.compile(r"%5B|%5D|\]\(|\[", re.IGNORECASE)
+
+
 def strip_trailing_punctuation(url: str) -> str:
-    return _RE_TRAILING_PUNCT.sub("", url.strip())
+    url = _RE_BRACKET_JUNK.split(url.strip(), 1)[0]
+    return _RE_TRAILING_PUNCT.sub("", url)
 
 def _landing_url(link: str) -> str:
     """Where a doi.org / hdl.handle.net link lands. Resolvers dispatch on the
