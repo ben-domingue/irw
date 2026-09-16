@@ -19983,3 +19983,71 @@ Notes:
 
 Circuit breaker not tripped (0 failed). Queue after this round: 918 done / 251 blocked /
 13 failed / 59 excluded / **160 pending**. Cap is batch_240; not reached, next round is batch_232.
+
+## batch_232 — 2026-09-16
+
+3 tables claimed, 3 agents (one per table, the standing three-agent setting). No kills, no retries.
+
+**Written 2 / blocked 1 / failed 0 — yield 2/3 (67%).** Zero failures, so the circuit breaker
+does not apply; the one no-CSV table is a determinate rights verdict, not a pipeline fault.
+
+- `xiao_2026_entrepreneurial_intention` — **done.** 40 items x 5 levels = 200 rows.
+  Xiao et al. (2026) PLoS ONE 21(7):e0352807, CC BY 4.0; wording from the S2 File "Variable
+  Codebook" sheet, cross-checked against S1 Table (39/40 byte-identical; PAF8 taken from the
+  codebook because S1 Table truncates it mid-clause). mapping_basis `paper_explicit`.
+  Step 5b **PARTIAL**, route 9 (response-frequency fingerprint on the item axis): the 40 per-item
+  count vectors are mutually distinct (40 distinct of 40), so an exact match is identifying rather
+  than merely consistent, and all 40 matched exactly, 0 mismatches. Does NOT establish the
+  within-block order of the four intention items, which the codebook numbers EI1-EI4 while the raw
+  file and IRW call them In1-In4 — pinned as a block, ordered only by listing order. Hence PARTIAL.
+  Administered in Chinese with no CJK anywhere in the codebook item rows, so the 2026-09-01 fallback
+  applies: English in the base fields, `language=Chinese`, `text_source=translated_substitute`,
+  `translation_source=study_supplied`, no `_translated` columns. Source publishes only the 1 and 5
+  anchors; resp 2-4 option_text left blank, not padded.
+- `xiong_2025_dass21` — **done.** 21 items x 4 anchors = 84 rows. PLoS ONE
+  10.1371/journal.pone.0316703 (Jakarta, n=974). Methods state "The English version has been used in
+  the study", so English administration and no `_translated` columns. Wording transcribed from the
+  official Dass21.pdf (the paper reproduces none). Rights: the already-settled DASS register row
+  (verdict ship, Ben 2026-09-10) applied, not re-derived. mapping_basis `paper_order`.
+  Step 5b **PARTIAL**, routes 3+5+7: the canonical subscale key reproduces the published alphas
+  (D .826 vs .826, A .746 vs .752, S .842 vs .849, total .915 vs .918; summed |dev| .0129); block
+  structure .0622 against 5000 random 7/7/7 partitions (block max .0611, median -.0015, 0/5000 beat
+  it; 0/5000 match the published alphas as well); markers DASS_21 (.35) and DASS_10 (.38) are the
+  two lowest means of 21. Does NOT establish within-subscale order — 4 of 147 single cross-subscale
+  swaps score as well on both criteria — nor the option_text<->resp axis. Hence PARTIAL.
+- `xu_2016_pqb` — **blocked** on instrument rights. Retry test **NO** (determinate). Notable
+  because the extraction was fully solved first: the CC BY PLOS ONE Appendix (Xu et al. 2016,
+  10.1371/journal.pone.0148935) prints all 21 PQ-B items each tagged with the exact live item code
+  PQ1..PQ21, and `data/xu_2016_pqb.py` melts those columns under their own names, so it would have
+  shipped at `paper_explicit`, 21/21. The originator — the Loewy Lab, UCSF — reserves rights twice
+  over: a per-use charging bar and permission required for translations. Same shape as the UWES,
+  IRI, SHS, DOSPERT and ARC AQ blocks; per the 2026-09-08 "originator's page governs" ruling the
+  CC BY reprint does not launder it, and IRW's own free use is no defence because IRW redistributes.
+  The study itself notes it translated the PQ-B "with the author's permission", corroborating.
+
+**Step 3b instrument mismatch (`xiao_2026_entrepreneurial_intention`), re-derived by the
+orchestrator and confirmed.** The table is named for entrepreneurial intention but the live 40 items
+are the study's whole battery: In 4, Inn 4, PAF 8, PEE 10, PPS 7, Pro 5, RM 2 — only the four `In*`
+items are intention. The shipped file reproduces that composition exactly. Extraction follows the
+data; `instrument` names the full questionnaire and the dictionary Description is already correct.
+
+**Source data defect worth not propagating (`xiao_2026_...`):** the S2 codebook's Notes column swaps
+the two spirit dimensions, tagging Inn1-4 "Proactiveness" and Pro1-5 "Innovativeness". S1 Table's
+headings, the CFA factor names and the item content all agree with the code prefixes instead. Not
+propagated into the shipped file.
+
+**Rights register updated.** `instrument_rights_register.csv` had no PQ row; the orchestrator added
+one (Prodromal Questionnaire family, PQ-92 / PQ-Brief, Loewy Lab UCSF; verdict block; clause and
+page sha256 `4a78171504acf2d358335a55b61a05b4b341717c1abc30f1e1aaa8b345a229a8`, fetched 2026-09-16).
+Both clauses were re-read verbatim out of the cached page and the sha recomputed before filing —
+the agent's quotation checked out exactly.
+
+**Gates.** normalize_nulls: 1 of 2 normalized (xiong, 85 lines). audit_batch: PASS 2, no anomalies,
+so no Step 5c WARNs to explain. verify_batch: PASS 2. lint_verification: 2 rows, no problems — both
+written tables carry a real verification row, so no NOT_NEEDED rows were owed. irw-validate: ok on
+both. check_provenance: passes; neither of this round's tables is among the three flagged
+IRW-generated-content tables (xiao is HELD — extracted and gated, never uploaded, so no wording
+ships and no issues-page line is owed until it is).
+
+Queue after this round: 920 done / 252 blocked / 157 pending / 59 excluded / 13 failed.
+Cap (batch_240) not reached.
