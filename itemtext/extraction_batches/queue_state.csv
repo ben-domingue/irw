@@ -1174,9 +1174,9 @@ wolf_2017_study1_posaff,done,batch_225,2026-09-16T01:09:06-07:00
 wolf_2017_study1_vitality,blocked,batch_226,2026-09-16T01:12:40
 wolf_2017_study2_nature_connect,done,batch_226,2026-09-16T01:12:40
 wolf_2017_study2_posaff_post,done,batch_226,2026-09-16T01:12:40
-wolf_2017_study2_posaff_pre,pending,,
-wolf_2017_study2_vitality_post,pending,,
-wolf_2017_study2_vitality_pre,pending,,
+wolf_2017_study2_posaff_pre,done,batch_227,2026-09-16T01:38:06
+wolf_2017_study2_vitality_post,blocked,batch_227,2026-09-16T01:38:06
+wolf_2017_study2_vitality_pre,blocked,batch_227,2026-09-16T01:38:06
 wolters2026_panas_na,pending,,
 wolters2026_panas_pa,pending,,
 wolters2026_wi,pending,,

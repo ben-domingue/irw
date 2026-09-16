@@ -19557,3 +19557,62 @@ pre-existing and not from this round).
   serves up, not about pipeline health.
 
 Cap (`batch_230`) NOT reached; the next firing picks up `batch_227`.
+
+## batch_227 — 2026-09-16T01:38 (3 tables: 1 written / 2 blocked / 0 failed)
+
+Source: all three from Wolf, zu Ermgassen, Balmford, White & Weinstein 2017, PLOS ONE
+12(1):e0170225 (CC BY 4.0), Study 2 S2 File `.sav`. Three agents, one per table
+(the 2026-09-11 three-agent setting). No kills, no rate limits, no retries.
+
+**Written (1):** `wolf_2017_study2_posaff_pre` — 8 items x 5 levels = 40 rows,
+mapping_basis=data_labels (derivation pattern 1: `data/wolf_2017_biodiversity_wellbeing.py`
+melts `posaff_pre1..8` unrenamed, so the IRW code IS the `.sav` column name and that file's
+own variable labels carry each adjective). Gates: normalize 0/1 changed, audit PASS (no
+anomalies, so nothing owed under Step 5c), lint clean, `irw-validate` ok, verify MISSING(exempt)
+as expected for data_labels.
+
+**Blocked (2):** `wolf_2017_study2_vitality_pre` (3 items) and
+`wolf_2017_study2_vitality_post` (6 items) — both verbatim state-form Subjective Vitality
+Scale, a Center for Self-Determination Theory library instrument. Applied the settled
+`instrument_rights_register.csv` block row (Ben's 2026-09-09 FULL SCOPE ruling); neither agent
+re-derived it or re-fetched the licence pages. RETRY TEST: NO for both — determinate licence
+bars, sources fully read and every stem in hand. Rows added to
+`itemtables/pending_index_notes.csv`. This matches `wolf_2017_study1_vitality`, blocked the same
+way in batch_226; the SVS has now cost this source three of its five Study-2/Study-1 tables.
+
+**Circuit breaker: not tripped.** 0 failed of 3 (0%). The 67% blocked rate is a fact about
+which tables the queue served up — one PLOS deposit that happens to administer a licence-blocked
+instrument at three timepoints — not about pipeline health.
+
+**Step 5b, orchestrator re-check of the round's own claims — all three confirmed, numbers
+independently reproduced from the cached `.sav`:**
+- The `posaff_pre` agent's central claim held exactly. 8 adjectives, not the 12 of the POST
+  table: proud, upset, scared, hostile, enthusiastic, interested, irritable, alert — matching
+  the article's "selecting eight items of the PANAS scale ... (alpha = .74)" at baseline.
+  Every shipped `item_text` matches its column's SPSS variable label 8/8.
+- Responses are stored RAW, confirmed: reverse-scoring the four negative adjectives and
+  averaging reproduces the `.sav`'s own `posaff_pre` composite to **max absolute difference
+  0.0** over 264 complete cases, r = 1.000000, mean 3.9001. Unreversed raw mean 2.3139,
+  r = 0.3313. The `public_note` warning is therefore correct as written.
+- Anchors re-derived from the pre columns' own value labels: `NOT AT ALL (1)` / `EXTREMELY (5)`,
+  with 2/3/4 labelled only by their own digit. Code echoes stripped, 2/3/4 left blank — no
+  scale point padded with its own number.
+- **Notable near-miss, and the reason prior art is a lead and not an answer:** all eight pre
+  adjectives recur in the 12-item POST set but *never at the same index* (pre1 proud = post10;
+  pre6 interested = post1). A positional copy from batch_226 would have mis-assigned all eight
+  items and passed every set-comparison gate, since `validate_items.R` and `audit_batch.R`
+  compare SETS only. The agent re-derived from the pre columns instead.
+- Both SVS blocks verified against the `.sav` directly: `vital_pre1..3` and `vital_post1..6`
+  carry the canonical state-SVS stems. Also corrected a reading of the paper — its "three items
+  of the SVS" in Study 2 describes the PRE measure only; the POST measure administers all six.
+
+**Lead raised and resolved (not a defect):** the vitality_pre agent flagged a stray
+`.cache/conner_2017_vitality/` as a possible live SVS table that the 2026-09-09 FULL SCOPE
+ruling would retroactively withdraw. Checked: `conner_2017_vitality` (shipped batch_021,
+uploaded 2026-09-04) is the modified 4-item energy/fatigue subscale of the **RAND SF-36**, not
+the SVS — the batch_021 agent had already caught and disclosed that the IRW dictionary
+mislabels it as the Subjective Vitality Scale. The CSDT ruling does not reach it. No action.
+
+**Pre-existing gate failure, NOT from this round:** `check_provenance.R` exits 1 on
+`tian2026_digital_competence` (ships IRW-generated English with no entry on the public issues
+page). None of batch_227's three tables are implicated. Carried forward.
