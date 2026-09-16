@@ -18453,3 +18453,45 @@ Both IRW dictionary Descriptions for the uffler pair are wrong and want correcti
    row the student actually occupied (1-9), assigned by the researcher on the day, not a preference.
 
 Cap not reached (cap is `batch_230`). Queue: 232 pending, 0 in_progress.
+
+## batch_208 — 2026-09-15T20:43 (3 tables, 3 agents)
+
+Tables: `valdivia_2023_oms`, `valverdeberrocoso_2021_learning_design`, `valverdeberrocoso_2021_sqd`.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not tripped (0% failed).
+229 pending remain.
+
+Gates: `normalize_nulls` fixed 2 of 3 files; `audit_batch` 3/3 PASS with no anomalies (so no
+Step 5c WARN explanations owed); `verify_batch` PASS=3; `lint_verification` 3 rows, no problems;
+`irw-validate` ok on all three. `check_provenance.R` exits 1 on a PRE-EXISTING table
+(`tian2026_digital_competence`, ships IRW-generated English with no issues-page entry) — nothing
+in this batch is implicated; all three tables here are HELD, so no entry is owed yet.
+
+All three VERIFIED, all via route 1 (per-item descriptives from a published table), all with every
+item individually distinguished — no PARTIAL, no NO_ROUTE.
+
+Notable:
+
+- **Two tables share one source and corroborated each other independently.** Both
+  `valverdeberrocoso_2021_*` agents read PLOS ONE 10.1371/journal.pone.0256283's S1 File (`.s002`)
+  and separately derived that the SQD block carries `1 = Totalmente en desacuerdo … 6 = Totalmente
+  de acuerdo` while the SPA/RES/PRA and TICTIP blocks carry `1 = Nunca … 6 = Siempre`. Two
+  different anchor sets in one questionnaire is exactly the crossing error the sibling warning
+  exists to prevent, and it did not happen. `valverdeberrocoso_2021_tictip` is still pending and
+  takes the Nunca…Siempre set; Tables 1 and 2 of the article give it a ready route-1 verification.
+- **`valdivia_2023_oms`: the source `.sav`'s value labels are a trap the pipeline dodged.**
+  Orchestrator Step 5b re-checked this directly rather than taking the agent's word: pyreadstat on
+  `peerj-11-16375-s003.sav` shows value label `1.0 = "completely agree"` for exactly oms2, oms6,
+  oms7, oms8, oms14 and `1.0 = "completely disagree"` for the other ten — 5 of 15 reversed, as
+  reported. Because `data/valdivia_2023_oms.py` reads label STRINGS via `read_spss` and recodes
+  through one uniform map, the live integers are label-ordered for all 15; an extraction that had
+  trusted per-item value labels would have shipped inverted anchors on those five.
+- **Item 2's Spanish is defective in the SOURCE, not here.** Also re-checked at Step 5b:
+  `pdftotext -raw` of the S1 File prints "2. Si supiera que un compañero está en tratamiento por
+  una enfermedad mental, cómodo(a) trabajando con él." — a verb is missing in the published
+  questionnaire. Shipped verbatim, matching character-for-character, and the public_note is
+  accurate as written.
+- `valdivia_2023_oms` carries `translation_source=mixed` and a `public_note` disclosing that
+  `instructions_translated` is IRW-written English. It owes an issues-page line when it ships.
+
+Cap (`batch_230`) not reached; next round takes `batch_209`.
