@@ -20398,3 +20398,60 @@ check_provenance clean for this batch.
   `section_prompt` are blank by design — a gap the source never published, below the
   issues-page bar.
 - Queue: 136 pending remain, 0 in_progress. Cap (`batch_240`) **not** reached.
+
+## batch_240 — 2026-09-16 14:07–14:30 — 3 tables — **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%)
+
+Tables: `yu_2025_bedtime_procrastination` (45 rows), `yu_2025_physical_activity` (15 rows),
+`yuebo_2024_netbenefit` (80 rows). Three agents, one per table, per the 2026-09-11 setting.
+No kills, no retries, no rate limits.
+
+**Gates all clean.** normalize_nulls 0 of 3 normalized · audit_batch **PASS=3, no anomalies**
+(so no Step 5c WARNs to explain) · verify_batch **PASS=3** · lint_verification 3 rows, no problems ·
+`irw-validate` ok on all three (2 checks each) · `check_provenance.R` clean for this batch.
+No `data_labels` tables this round, so all three carry a real verification row and no NOT_NEEDED
+rows were owed in either file.
+
+**Verification: 1 VERIFIED, 1 PARTIAL, 1 NO_ROUTE.**
+- `yuebo_2024_netbenefit` VERIFIED — the PLOS S1 Appendix prints each item against its own
+  `Code`, each of the 16 codes occurring exactly once, and `data/yuebo_2024_online_learning.py`
+  melts by column name, so `item` IS the S1 Data header. 16/16 wording matches, 16/16 codes are
+  literal headers. Distinguishes every item from every other.
+- `yu_2025_bedtime_procrastination` PARTIAL — route 6 (keying polarity) pins the resp direction
+  only; BPn↔instrument-item-n is an inference the data cannot test.
+- `yu_2025_physical_activity` NO_ROUTE — recorded honestly rather than left looking checked.
+  Every published PA-block statistic is permutation-invariant (alpha recomputed under all 6
+  relabellings, range = 0 at each wave); **nothing separates PE2 from PE3.** The lever that
+  pinned the sibling `yang_2026_pars3` in batch_238 — the stored `intensity×(duration−1)×frequency`
+  total — does not exist here: this deposit's derived column is the plain MEAN of PE1–PE3
+  (376/376 exact, all waves), despite the paper describing product scoring.
+
+**Step 5b orchestrator re-check — both consequential claims CONFIRMED, numbers recorded in notes.csv.**
+The bedtime agent overrode the stored scale direction for four items, which flips shipped anchors,
+so it was re-checked independently: wave 1, n=376, 9 items → 36 inter-item correlations, **0 negative,
+range 0.471–0.683**, per-item means 3.03–3.30 — consistent with the stored values being already
+reverse-scored. The PLOS article text was fetched and prints the anchor list verbatim as
+"1 = never; 2 = sometimes; 3 = sometimes; 4 = often; 5 = always" and "Four of the entries were reverse
+scoring questions" — confirming both the repeated "sometimes" (transcribed as printed, not silently
+repaired) and the count of four. **The paper does not say WHICH four**; BP2/BP3/BP7/BP9 comes from the
+instrument's numbering, and because the stored data is already reversed the data cannot test that
+choice. That is exactly why the status is PARTIAL and not VERIFIED.
+
+**Notable:**
+- All three tables were administered in **Chinese** and none of the three deposits carries a label
+  layer, so all three ship English under the 2026-09-01 fallback (`translated_substitute`,
+  `_translated` columns omitted, `language=Chinese`) — a later-backfill signal on all three.
+- `yu_2025_*` share one deposit (PLOS ONE 10.1371/journal.pone.0331340, S1 File `s001.xlsx`,
+  115 bare codes, no labels). Both agents independently reached the same read of it.
+- **Note for whoever takes the `yuebo_2024` siblings** (`_satisfaction`, `_srvquality`, still
+  pending): the same S1 Appendix holds their wording, but it **reuses the code `US1–US4/US5` for
+  BOTH Continuous Use and User Satisfaction**. That pair needs care against
+  `data/yuebo_2024_online_learning.py`, which maps `USE*`→use and `US*`→satisfaction.
+- `yu_2025_physical_activity` caveat worth carrying: canonical PARS-3 scores duration as raw−1,
+  but the IRW table stores the raw 1–5 response for all three items.
+- One deliberate whole-table export was spent (`irw_fetch` on the 10,152-row bedtime table, inside
+  its verify script); everything else used `table_sets.R` / `--table-sets`.
+- Queue: **133 pending remain, 0 in_progress.**
+
+**CAP REACHED.** `batch_240` is the batch named as the round cap in Step 0 of the round prompt.
+This round completed it, so the series stops here: the next firing will self-cancel on the
+"batch_240 already exists" stop condition. Resuming requires a human to raise the cap.
