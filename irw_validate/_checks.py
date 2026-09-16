@@ -356,7 +356,12 @@ def run_qc(df: pd.DataFrame, coercion_method: str = "",
     # a trial index is the opposite -- and stop `dup_id_item` from seeing it,
     # re-breaking the table the rename had just fixed. Seen on `motion` and
     # `rr98_accuracy` (irw#1842 block J). One list, so the two cannot drift.
-    known = {"id", "item", "resp", "date", "treat", "item_family"} | set(OCCASION)
+    # `resp_raw` is in datastandard.md's schema table and the standard goes out
+    # of its way to insist on that spelling over `raw_resp` -- but it was absent
+    # here, so the validator warned about the one spelling it asks for. Seen on
+    # `fitz_2024_numeracy`, whose free-text numeracy answers need it.
+    known = {"id", "item", "resp", "resp_raw", "date", "treat",
+             "item_family"} | set(OCCASION)
     known_prefix = ("cov_", "itemcov_", "qmatrix", "trial_")
     unprefixed = [c for c in df.columns
                   if c not in known and not c.startswith(known_prefix)]
