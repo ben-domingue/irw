@@ -18922,3 +18922,74 @@ for academic use, licensing required for commercial — which blocks under irw#1
 Queue after this round: 885 done, 236 blocked, 208 pending, 59 excluded, 13 failed; no rows left
 `in_progress`. Cap is `batch_230` and this is 215, so the cap is NOT reached — the next firing
 proceeds normally.
+
+## batch_216 — 2026-09-15
+
+3 tables claimed: `wang_2024_emotion2`, `wang_2024_emotion3`, `wang_2024_emotion4` — all three
+siblings of one source file, dispatched with explicit sibling boundaries. 3 agents.
+
+**written 0 / blocked 3 / failed 0 — yield 0%.** Circuit breaker NOT tripped: it counts `failed`,
+and there were none. All three are determinate availability verdicts (retry test NO on every one),
+which is exactly the case the 2026-09-03 split exists to keep off the counting side. This is a fact
+about what the queue served up — three tables from a single label-free deposit — not about pipeline
+health.
+
+**The block, common to all three.** Source is Wang K. et al. (2024) PLOS ONE
+`10.1371/journal.pone.0303965` (CC BY 4.0); instrument is the study's own EFL-adapted Achievement
+Emotions Questionnaire (AEQ; Pekrun et al. 2011), 19 items over 5 subscales, administered in Chinese
+to 1,460 secondary EFL learners, 1–5 Likert. Both deposits (S1 File `.s001`, S1 Raw data `.s002`,
+byte-identical, md5 `e87d8ceb0190ffa38a47a8b04d5d20dc`) carry **zero variable labels and zero value
+labels** across all 22 columns, so no `data_labels` route exists. The article prints exactly **one
+sample item per subscale**, with no item code attached, and Table 1 keys items
+`JO1-4/HO1-4/PR1-4/AX1-3/BO1-4` with factor loadings only. The paper says all AEQ items were
+"adapted to be relevant to the EFL context" without listing which were drawn, so
+canonical-instrument substitution fails too. Shipping bare 1–5 agreement anchors with blank
+`item_text` was considered and correctly rejected by two agents under the #1770 option-only rule.
+
+**Availability block, not rights.** The deposit is CC BY 4.0 and no restriction on the AEQ wording
+was located, so **no `instrument_rights_register.csv` row was written**. One agent noted the AEQ-R
+carries "© 2022 R. Pekrun … All rights reserved." but correctly declined to assert a verdict on the
+2011 AEQ without fetching and quoting a clause — the availability block is prior to it either way.
+
+**Step 5b orchestrator re-check — confirmed, and it changed one conclusion.** Re-run against the
+cached `.sav` (no export spent):
+- Label-free deposit: CONFIRMED (`column_names_to_labels` all `None`, `variable_value_labels` `{}`).
+- `emotion4`'s anxiety evidence reproduces to the digit: alpha **0.617** vs published AX .62; other
+  blocks .865/.857/.857/.828 vs published .87/.86/.86/.83; block-4 scale correlates **−0.253 /
+  −0.264 / −0.253** with blocks 1–3 and **+0.426** with block 5. `VAR4x` = Anxiety is settled.
+- **`emotion3`'s Pride claim does NOT survive as stated.** That agent concluded `VAR3x` = Pride from
+  Table 1's block order; the `emotion2` agent flagged that the Measure section's prose gives a
+  different order ("enjoyment, pride, hope, anxiety, boredom") making `VAR3x` = Hope. The two orders
+  disagree *exactly* on VAR2x vs VAR3x. The data cannot break the tie: **alpha(VAR2x) = 0.857 and
+  alpha(VAR3x) = 0.857**, identical to three decimals, against published Hope .86 and Pride .86. The
+  deciding evidence is the published Table 3 intercorrelation matrix, which is a PLOS table **image**
+  nobody has transcribed (cf. the standing image-only-table backlog).
+  **Consequence for a human: do NOT "correct" the dictionary Description ("unlabeled construct") for
+  `wang_2024_emotion2`/`emotion3` on the strength of this round.** Both agents suggested it; only
+  `emotion4` → anxiety is actually earned. Recorded in `pending_index_notes.csv` for all three.
+
+**Gates.** `normalize_nulls.R` and `audit_batch.R` both exited "No *__items.csv files found" — the
+correct and expected result for an all-blocked round, not a fault (same as batch_144).
+`verify_batch.R`: MISSING=3. `irw-validate` not applicable (no CSVs). `check_provenance.R` exit 0 and
+clean for this round — its outstanding issues-page table (`tian2026_digital_competence`) and 13
+`translation_source=mixed` reviews are all pre-existing and unrelated to batch_216.
+
+**`lint_verification.R` CRASHED — tooling gap, not a table failure.** All three agents took the
+header-only convention for a blocked table, so `verification_merged.csv` has a header and **zero**
+rows, and the script dies with `replacement has 1 row, data has 0` before reporting anything. This is
+new: batch_144 had the same all-blocked shape but two agents wrote `NO_ROUTE` rows, so the file was
+non-empty and the linter passed. **`lint_verification.R` should handle a zero-row
+`verification_merged.csv` as "nothing to lint", not an error.** No table was marked `failed` on this
+basis — there is no shipped claim to fail to reproduce.
+
+**The Step 5b convention question from batch_144 is still open, but the split is gone.** Given
+identical circumstances all three agents this round independently chose header-only verification file
++ no `verify_*.R`, citing the rule that a blocked table has no live item text and so cannot carry a
+verification outcome. batch_144 saw agents split 2–2 on exactly this and asked that **SKILL.md Step 5b
+say which convention a block takes**; it still doesn't. Three-for-three convergence is mild evidence
+for the header-only reading, and the `verify_batch.R` MISSING=3 above is entirely this convention, not
+a failed claim. No rows were invented in `mapping_verification.csv` — the tracker's rule is one row per
+WRITTEN table, and nothing was written.
+
+Queue after this round: 205 pending, 0 in_progress (885 done / 239 blocked / 59 excluded / 13 failed).
+Cap is `batch_230`; not reached.
