@@ -20338,3 +20338,63 @@ check_provenance clean for this batch (its 3 flagged IRW-generated tables are pr
 
 Queue after this round: 936 done / 254 blocked / 139 pending / 59 excluded / 13 failed.
 Cap (batch_240) NOT reached — next round proceeds normally.
+
+## batch_239 — 2026-09-16 13:51–14:0x PDT
+
+3 tables, 3 agents (one per table). **written 3 / blocked 0 / failed 0 — yield 100%.**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `ye_2025_q25_scale` | 40 rows (10 items × 4 opts) | data_labels | NOT_NEEDED (self-describing codes; route-9 resp check recorded) |
+| `yin_2022_gad7` | 28 rows (7 × 4) | data_labels | VERIFIED (code-identity + route 7 + route 3) |
+| `yin_2022_values_importance` | 65 rows (13 × 5) | data_labels | VERIFIED (routes 1+9, paper Table 4) |
+
+All three sourced from the study's own deposit (level-1): PLOS S1 `.sav` for `ye_2025`,
+the shared PLOS S1 `.xlsx` for both `yin_2022_*`. All three are `data_labels` — the IRW item
+code *is* the source column name in every case, so no positional inference exists anywhere in
+this round.
+
+Gates: normalize_nulls 1 of 3 normalized · audit_batch **3/3 PASS, no anomalies** (so no
+Step 5c WARN explanations owed) · verify_batch 2 PASS + 1 MISSING(exempt) · lint_verification
+0 ERROR / 0 WARN / 1 INFO (the `yin_2022_gad7` evidence hedges but asserts a full item-axis
+tie — VERIFIED stands per the 2026-09-08 item-axis rule) · irw-validate 3/3 ok ·
+check_provenance clean for this batch.
+
+### Step 5b — orchestrator re-checks (both confirmed)
+
+- **GAD-7 missingness.** Agent reported `GAD-7 question: trouble relaxing` at n=151 against 153
+  for the other six. Independent `irw_fetch`: 153/153/153/153/**151**/153/153 over 153 distinct
+  ids, means 0.79/1.41/1.35/0.94/1.15/1.12/1.42. Confirmed — a response-data property (two
+  blank source cells), **not** an itemtext defect.
+- **GSE-10 identification.** Agent claims `ye_2025_q25_scale`'s ten `Q25_Row*` items are the
+  General Self-Efficacy Scale (Schwarzer & Jerusalem; Chinese adaptation Zhang & Schwarzer 1995)
+  in canonical order, and proposes a dictionary correction. Checked the shipped text item by
+  item: Row1 「如果我尽力去做的话，我总是能够解决问题的」 = GSE 1, … Row10
+  「无论什么事在我身上发生，我都能够应付自如」 = GSE 10. All ten match canonically, in order.
+  Confirmed.
+
+### Notable / for triage
+
+- **Dictionary correction owed (`ye_2025_q25_scale`).** The Description is the uninformative
+  "10-item Chinese text-coded item block (agreement/fit format, 4-pt)" because the processing
+  script deliberately declined to name the scale. It is the GSE-10 and should say so. Not an
+  instrument mismatch — just an uninformative name.
+- **GSE rights are ship-shaped; no register row written** (a round may never write `ship`, per
+  2026-09-10). Schwarzer & Jerusalem's own FAQ grants reuse in writing, attribution only, with
+  no NC/ND/no-redistribution clause. The GSE is among the most-administered scales in the
+  corpus and will recur — a **human-written `ship` row in `instrument_rights_register.csv` is
+  worth adding.**
+- **`ye_2025_q25_scale` ships a `public_note`** (`translation_source=mixed`): the English item
+  text is the publisher's own parallel English, but the instructions and all four anchor
+  translations were produced by IRW, because this study used its own fit-format anchors
+  (不符合 … 非常符合) rather than the GSE's published "Not at all true … Exactly true".
+  The administered Chinese ships verbatim in the base fields; no canonical anchors were
+  substituted.
+- **`yin_2022` S1 "Question Key" sheet is mislabelled** — it names blocks by spreadsheet column
+  letters ("Column AC to AP") shifted ~2 columns from the delivered file. Harmless here (the
+  importance block is the file's only 5-point importance block, and Table 4 confirms the
+  labels), but worth knowing if that workbook is revisited.
+- `yin_2022_values_importance` publishes no preamble anywhere, so `instructions` and
+  `section_prompt` are blank by design — a gap the source never published, below the
+  issues-page bar.
+- Queue: 136 pending remain, 0 in_progress. Cap (`batch_240`) **not** reached.
