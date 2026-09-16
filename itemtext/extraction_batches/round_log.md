@@ -18993,3 +18993,90 @@ WRITTEN table, and nothing was written.
 
 Queue after this round: 205 pending, 0 in_progress (885 done / 239 blocked / 59 excluded / 13 failed).
 Cap is `batch_230`; not reached.
+
+## batch_217 — 2026-09-15 23:10 to 23:30 PDT
+
+3 tables, 3 agents (one per table), the three-agent setting Ben set on 2026-09-11. No kills, no
+retries, no rate limiting. **3 written / 0 blocked / 0 failed — yield 3/3 (100%).**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wang_2025_green_space_wellbeing` | written, 125 rows (25 items x 5) | `data_labels` | NOT_NEEDED (exempt) |
+| `wang_2026_attitude` | written, 15 rows (3 items x 5) | `paper_explicit` | PARTIAL |
+| `wang_2026_behavioral_intention` | written, 25 rows (5 items x 5) | `paper_explicit` | VERIFIED |
+
+Gates: `normalize_nulls` 0 of 3 normalized; `audit_batch` **3 PASS, no anomalies** (so no Step 5c
+WARNs to explain); `verify_batch` **2 PASS + 1 MISSING(exempt)** — the exempt one is the `data_labels`
+table, which is correctly owed no `verify_*.R`; `irw-validate` ok on all three, 2 checks each;
+`lint_verification` 3 rows, **0 ERROR**, 1 WARN. The NOT_NEEDED row went into BOTH
+`verification_merged.csv` and the permanent tracker, so the lint came back with no ERRORs — the
+batch_020/021 false alarm did not recur.
+
+**The one lint WARN was reviewed and the status deliberately kept.** It flags
+`wang_2026_behavioral_intention` as VERIFIED while its evidence says "does not establish". What that
+hedge disclaims is *not* item-level discrimination — it is whether the authors' own spreadsheet
+labelling is right (untestable from inside the deposit) and the Chinese wording (the language
+fallback, not a mapping question). On the mapping the route separates every item from every other: 5
+pairwise-distinct response-level count vectors, exactly 5 of 25 live-vs-deposit vector equalities, the
+diagonal only. That meets the VERIFIED bar as written. Explanation recorded in `notes.csv`.
+
+**`check_provenance.R` exits 1, and it is NOT this round.** The failing table is
+`tian2026_digital_competence` (batch_188), which ships English this project generated with no
+issues-page line; the 13 `translation_source=mixed` reviews are likewise pre-existing. This round's
+own machine-translation table, `wang_2025_green_space_wellbeing`, is correctly counted as HELD —
+extracted and gated, never uploaded, so no wording ships and no entry is owed yet. **It owes an
+issues-page line the moment it is uploaded**, and its `public_note` is written for that.
+
+**Step 5b — two agent claims re-checked independently, both confirmed with numbers.**
+1. `wang_2025_green_space_wellbeing` is the round's only un-re-runnable claim (`data_labels`, no
+   `verify_*.R` by design), so I checked it directly: all **25/25** shipped `item_text` strings equal
+   their `ITEM_MAP` key in `data/wang_2025_green_space_wellbeing.py` exactly, once the block-local
+   leading number is stripped — **0 mismatches**, 25 distinct items, 125 rows. The claimed
+   restarting numbering is real and matches the six described blocks precisely: leading numbers run
+   1-4, 1-4, 1-5, 1-4, 1-3, 1-5 (4/4/5/4/3/5 = 25). The exact-string dictionary lookup makes the tie
+   authoritative at the source, as claimed. *(Note for the next round: my first pass at this check
+   used a double-quote regex against a single-quoted dict and silently found 0 pairs, i.e. reported
+   "0 mismatches" vacuously. A confirmation of a mapping claim must print the denominator — 25 here —
+   or it is not a check.)*
+2. The `wang_2026_attitude` rights escalation, which was about to be filed as a note: Crossref
+   confirms the upstream Ayanwale et al. (2022) `10.1016/j.caeai.2022.100099` VOR licence is
+   **CC BY-NC-ND 4.0** (start 2022-09-12; the other two licences on the record are Elsevier TDM).
+   The agent's claim is accurate as written.
+
+**FOR BEN — a rights judgement, not a block, and not decided by a round.** `wang_2026_attitude`
+shipped on "silence is permission". The wording IRW copied is Wang & Zou's own CC BY 4.0 PLOS
+appendix, but the nearest-upstream *publication* of near-identical wording (Ayanwale et al., "AI
+technology" for "DG technology") is NC-ND per the above. The agent's reasoning for shipping: Ayanwale
+et al. assert no instrument-level right, are themselves an adapter (items from Chai, Wang & Xu 2020 /
+Chai et al. 2021), and the wording is the standard TAM perceived-enjoyment triad. The nearest contrary
+shape in the register is the servant-leadership row, but there the NC article's authors *were* the
+instrument's authors and stamped a copyright footnote. No register row was written (rounds may write
+only `block` rows). Worth a ruling before more TAM-family tables arrive — there are three more
+`wang_2026_*` scales in the queue.
+
+**Two shared-source findings for whoever takes the unclaimed `wang_2026_*` siblings.** All five
+scales come from one S1/S2 Appendix pair, and both remaining agents independently reported the same
+two discrepancies — corroboration, not duplication:
+- `wang_2026_teaching_presence`: the S1 Appendix prints **TP1-TP12** but the data carries only
+  **TP1-TP8**, and the paper says TP3-TP6 were dropped for low loadings. So the data's TP numbering is
+  **not** the appendix's, and the surviving eight are not simply TP1-TP8 in appendix order. That table
+  must reconcile this before trusting positions.
+- `wang_2026_attitude`: the appendix labels items `AT1`-`AT3` while the data columns and IRW codes are
+  `ATT1`-`ATT3`, with nothing stating the correspondence. This is exactly why that table is PARTIAL
+  rather than VERIFIED, compounded by three near-synonymous enjoyment items (means 3.79/3.72/3.73,
+  loading spread 0.018) that no data route can separate — a permutation among them is undetectable.
+
+Both `wang_2026_*` tables took the 2026-09-01 English fallback (administered in Chinese via
+translation/back-translation, 500 Shandong EFL primary teachers; zero CJK anywhere in either deposit
+file or the article), so `text_source=translated_substitute`, `translation_source=study_supplied`,
+`language=Chinese`, `_translated` empty. `wang_2025_green_space_wellbeing` is the opposite case and the
+better one: it ships the **administered Chinese** in `item_text` with IRW's English in `_translated`.
+Its `option_text`, `instructions` and `section_prompt` are blank across all five levels because the
+Figshare deposit is the exported response matrix only — no anchor labels, no questionnaire form, no
+linked article (Figshare `references`/`related_materials` empty, Crossref finds no such work). Per the
+issues-page bar that is a gap the source never published, not a page entry.
+
+No `blocked` tables this round, so no `pending_index_notes.csv` rows were owed.
+
+Queue after this round: 202 pending, 0 in_progress (888 done / 239 blocked / 59 excluded / 13 failed).
+Cap is `batch_230`; not reached.
