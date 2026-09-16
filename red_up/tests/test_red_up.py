@@ -417,9 +417,17 @@ class Planning(unittest.TestCase):
     def setUp(self):
         _, self.targets = load_registry()
         self.shard = newest_shard(self.targets)
+        self.text_shard = newest_text_shard(self.targets)
 
     def _reports(self, tmp, names):
         return check_all([(write(Path(tmp), f"{n}.csv", RESPONSE), n) for n in names])
+
+    def _validated_items(self, tmp, names):
+        """check_all + validate_for_target for item-text files, as cli.py runs them."""
+        reports = check_all([(write(Path(tmp), f"{n}.csv", ITEMS), n) for n in names])
+        for report in reports:
+            validate_for_target(report, self.text_shard)
+        return reports
 
     def _validated(self, tmp, names):
         """check_all + the format validator, in the order cli.py runs them.
@@ -482,6 +490,42 @@ class Planning(unittest.TestCase):
             items = planning.build(reports, self.shard, {})
             self.assertEqual(items[0].status, planning.SKIP)
             self.assertTrue(any(e.startswith("name_length:") for e in reports[0].errors))
+
+    def test_item_text_inherits_its_response_table_over_length_name(self):
+        """#2199, ruled 2026-09-16: exempt a name that matches a live table.
+
+        An item-text table's name must equal its response table's name or the
+        join breaks, so when the RESPONSE table is already live under an
+        over-length name the length was never this upload's choice. The
+        2026-09-16 item-text upload skipped two weatherspoon_2015 tables for a
+        cap their own response tables have exceeded since publication.
+        """
+        base = "weatherspoon_2015_family_physicians_effectiveness"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._validated_items(tmp, [f"{base}__items"])
+            self.assertTrue(any(e.startswith("name_length:")
+                                for e in reports[0].errors))
+            # The response table is live; its item text never has been.
+            items = planning.build(reports, self.text_shard,
+                                   {base: ["item_response_warehouse_6"]})
+            self.assertEqual(reports[0].errors, [])
+            self.assertTrue(any("inherited from the response table" in w
+                                for w in reports[0].warnings))
+            # It is a NEW item-text table, and must NOT be routed at the
+            # response table the lookup found.
+            self.assertEqual(items[0].status, planning.NEW)
+            self.assertEqual(items[0].dataset, self.text_shard.name)
+            self.assertEqual(items[0].found_in, [])
+
+    def test_item_text_with_no_live_response_table_is_still_blocked(self):
+        """The cap still governs a name entering the corpus."""
+        base = "weatherspoon_2015_family_physicians_effectiveness"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._validated_items(tmp, [f"{base}__items"])
+            items = planning.build(reports, self.text_shard, {})
+            self.assertEqual(items[0].status, planning.SKIP)
+            self.assertTrue(any(e.startswith("name_length:")
+                                for e in reports[0].errors))
 
     def test_grandfathering_does_not_reach_any_other_error(self):
         with tempfile.TemporaryDirectory() as tmp:

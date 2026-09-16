@@ -85,17 +85,37 @@ def index_tables(owner: str, dataset_names: list[str]) -> dict[str, list[str]]:
 #: for anyone holding the old name.
 GRANDFATHERED = "name_length"
 
+#: An item-text table's name is not its own: it must equal its response
+#: table's name or the join breaks. `irw_validate` knows this and measures the
+#: RESPONSE name -- `_validate_item_text` strips this suffix before calling
+#: `check_name` -- so a `name_length` error on item text is a report about a
+#: name the upload cannot choose.
+#:
+#: Ruled by Ben, 2026-09-16 (#2199): exempt a name that matches a live table.
+#: Two weatherspoon_2015 tables were skipped by the 2026-09-16 item-text upload
+#: for a cap their own response tables have exceeded since they were published,
+#: and shortening only the item-text side would ship text that joins to nothing.
+ITEMS_SUFFIX = "__items"
 
-def _grandfather_name_length(report: FileReport) -> None:
-    """Demote a name-length error on a table that is already published."""
+
+def _grandfather_name_length(report: FileReport, inherited: bool = False) -> None:
+    """Demote a name-length error on a table that is already published.
+
+    `inherited` says the published name is the RESPONSE table's, not this
+    file's own -- the item-text case, where the length was never a choice.
+    """
+    why = ("allowed because this name is inherited from the response table, "
+           "which is already published under it; an item-text table must "
+           "carry that exact name or the join breaks"
+           if inherited else
+           "allowed because this name is already published; "
+           "the cap governs new tables, not repairs to old ones")
     kept, moved = [], []
     for err in report.errors:
         (moved if err.startswith(f"{GRANDFATHERED}:") else kept).append(err)
     if moved:
         report.errors[:] = kept
-        report.warnings.extend(
-            f"{m} -- allowed because this name is already published; "
-            "the cap governs new tables, not repairs to old ones" for m in moved)
+        report.warnings.extend(f"{m} -- {why}" for m in moved)
 
 
 def build(reports: list[FileReport], target: Target,
@@ -106,6 +126,13 @@ def build(reports: list[FileReport], target: Target,
         found = index.get(report.table, [])
         if found:
             _grandfather_name_length(report)
+        elif report.table.endswith(ITEMS_SUFFIX) and index.get(
+                report.table[: -len(ITEMS_SUFFIX)]):
+            # The response table is live under this over-length name, so the
+            # length is inherited. Looked up SEPARATELY and deliberately not
+            # folded into `found`: `found` decides the destination, and an
+            # item-text file must never be routed onto its response table.
+            _grandfather_name_length(report, inherited=True)
         reason = eligible(report.path, target)
         if reason:
             items.append(Item(report=report, status=EXCLUDED, dataset=None,
