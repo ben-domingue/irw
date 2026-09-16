@@ -1156,9 +1156,9 @@ weatherspoon_2015_pediatricians_effectiveness,blocked,batch_219,2026-09-15T23:52
 weatherspoon_2015_pediatricians_freq,done,batch_220,2026-09-16T00:08:03
 weeldenburg_2022_targetmtpq,done,batch_220,2026-09-16T00:08:03
 weida_2020_financial_security,done,batch_220,2026-09-16T00:08:03
-wekker_2018_mfsq,pending,,
-wemwbs_BrummerHoffman_2021,pending,,
-wen_2022_pyd,pending,,
+wekker_2018_mfsq,blocked,batch_221,2026-09-16T00:11:17
+wemwbs_BrummerHoffman_2021,blocked,batch_221,2026-09-16T00:11:17
+wen_2022_pyd,done,batch_221,2026-09-16T00:11:17
 wesselmann_2018_distress,pending,,
 wesselmann_2018_msp,pending,,
 wesselmann_2018_needs,pending,,

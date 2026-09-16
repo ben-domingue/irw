@@ -19304,3 +19304,64 @@ table appears anywhere in its output**.
 
 Queue after this round: 895 done / 241 blocked / 193 pending / 59 excluded /
 13 failed. Cap (batch_230) not reached.
+
+## batch_221 — 2026-09-16
+
+3 tables claimed, 3 agents (one per table). **1 written / 2 blocked / 0 failed.** Yield 1/3 (33%).
+Circuit breaker not tripped (it counts `failed`, and there were none; both blocks are determinate
+rights verdicts with retry test NO).
+
+- **wen_2022_pyd — DONE.** 130 rows (26 items x 5 resp levels). Wen et al. 2022, PLOS ONE 17(7):
+  e0270974, CC BY 4.0; scale developed by these authors, no reserved-right clause. Item wording
+  transcribed from Table 1, which is an **image only** — no text route reaches it, so the
+  transcription is manual and deserves a human spot-check; the paper's own grammatical slip in
+  confi4 and character4's trailing period are reproduced verbatim. mapping_basis=paper_order
+  (Table 1 prints loadings but no item codes). text_source=translated_substitute /
+  translation_source=study_supplied: administered in Chinese, but no Chinese wording exists in the
+  paper or the S1/S2 .sav deposit (s003–s005 404), so the authors' English ships in the base fields
+  with the `_translated` columns empty. `option_text` blank for all 130 rows — the 1–5 anchors are
+  unpublished and visibly differ by item (health self-ratings, confidence ratings and agreement
+  statements in one table); scale points were NOT padded with their own numbers.
+  Verification **PARTIAL** (route 1 + exhaustive permutation search): all 26 published factor
+  loadings reproduce on `cov_study=='s2'` (n=471 vs the paper's N=472) in IRW code order, max
+  deviation 0.0052; permutation search at tol 0.01 pins 20 of 26 items uniquely (care 1 of 120,
+  connect 1 of 720 fitting orderings), but does NOT separate compe1/compe2, confi2/confi3 or
+  character1/character2 — hence PARTIAL, not VERIFIED. `verify_wen_2022_pyd.R` re-runs it: PASS.
+- **wekker_2018_mfsq — BLOCKED (rights, retry test NO).** McCoy Female Sexuality Questionnaire,
+  distributed by Mapi Research Trust; the ePROVIDE page reserves rights three ways (all-rights-
+  reserved notice; an express no-modify/retype/translate/copy clause requiring prior written
+  permission; fees for funded academic/healthcare/commercial users). irw#1945 blocks, and under the
+  2026-09-04 DSES generalisation the holder's clause outranks the study's own CC BY 4.0 PLOS
+  deposit; the administered Dutch translation is a derivative covered by the same clause. Step 3b
+  PASSES (S2 File holds MCC1..MCC19 + five domain scores, matching the 19-item/5-domain structure;
+  the live table is the 18 Likert items, MCC12 dropped by the processing script). Even absent the
+  rights bar this was an option-only table under #1770: the .sav carries per-item 1/4/7 anchors but
+  bare variable labels and the paper reproduces no stems. Block row appended to
+  instrument_rights_register.csv.
+- **wemwbs_BrummerHoffman_2021 — BLOCKED (rights, retry test NO).** Warwick owns WEMWBS/SWEMWBS
+  wording and licenses it; the licences page expressly withholds permission to share the scale
+  publicly or pass it to other parties, prices commercial use at GBP 90–6000, and makes
+  non-commercial use subject to Warwick's discretion. IRW redistributes, so the non-commercial
+  academic defence does not apply; the Brazilian Portuguese administration is a derivative.
+  **Step 3b instrument mismatch:** the dictionary Description says "Warwick-Edinburgh Mental
+  Well-Being Scale" but the live data is the 7-item SHORT form (SWEMWBS) — worth a dictionary fix,
+  though both forms are Warwick-licensed so the verdict is unchanged. **irw#2101/#2123 caveat:** the
+  block is only partly effective — `data/BF_BrummerHoffman_2021.R` carries source column names
+  through unchanged, so the live *response* table's item codes (`wemwbs_calm`, `wemwbs_optimistic`,
+  …) already gloss each item's content. Blocked anyway. Block row appended to the rights register.
+
+**Step 5b (orchestrator re-check of the agents' own claims).** Both rights claims were about to be
+filed publicly (a `public_note` and two register rows), so both were re-fetched independently and
+both quoted clauses reproduce verbatim on the live pages — Warwick's "does not give you permission
+to publicly share WEMWBS…" and ePROVIDE's "You are not authorized to modify, retype, translate,
+copy or otherwise duplicate the Questionnaire…" plus the all-rights-reserved and fee lines. The
+wen_2022_pyd loading evidence was independently re-executed by verify_batch.R rather than taken on
+report (max deviation 0.0044–0.0052 by subscale, 20 of 26 pinned). No agent claim had to be
+corrected this round.
+
+**Gates:** normalize_nulls 0 of 1 changed; audit_batch PASS (1/1, no anomalies, so no Step 5c WARN
+explanations are owed); verify_batch PASS=1; lint_verification 2 rows, no problems; irw-validate ok
+(2 checks); check_provenance clean for this batch (its standing `tian2026_digital_competence` and
+`translation_source=mixed` items are pre-existing and belong to earlier rounds).
+
+Cap (batch_230) not reached.
