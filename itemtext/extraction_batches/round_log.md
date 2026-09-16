@@ -19141,3 +19141,88 @@ no issues-page entries are owed.
 
 Queue after this round: 891 done / 239 blocked / 199 pending / 59 excluded / 13 failed. Cap is
 `batch_230`; not reached, next round proceeds normally.
+
+## batch_219 — 2026-09-15
+
+3 tables claimed, 3 agents (one per table). **3 CSVs written / 2 blocked / 0 failed.**
+Yield: 3 of 3 extracted cleanly; 1 of 3 ships now, 2 are held on a corpus naming
+defect with their passing CSVs retained. Circuit breaker not tripped (0% failed).
+
+All three are the same PLOS ONE source: Weatherspoon et al. 2015,
+10.1371/journal.pone.0119855, CC BY 4.0. Question 12 is a two-column grid —
+left "How often do you use it?" (5=Always … 1=Never), right "Is it effective?"
+(Yes=1, No=2, Don't Know=9) — over the same 17 communication techniques, which
+is exactly the `_freq` / `_effectiveness` split in the table names. All three
+`mapping_basis=paper_explicit`, `text_source=study_materials`.
+
+- `weatherspoon_2015_family_physicians_freq` — **done**. 85 rows (17 items × 5
+  anchors). VERIFIED route 1: all 17 n's and all 85 percentage cells of paper
+  Table 2 reproduce to 0.00 pp, all 17 vectors distinct, and the match also
+  fixes the anchor direction (a reversal would mirror every vector).
+- `weatherspoon_2015_family_physicians_effectiveness` — **blocked** (naming), CSV
+  retained. VERIFIED route 1 against Table 4: 17/17 items reproduce their
+  published Yes/No counts exactly, all 17 (n, Yes%, No%) triples distinct.
+- `weatherspoon_2015_pediatricians_effectiveness` — **blocked** (naming), CSV
+  retained. VERIFIED route 1 against Table 4: 17/17 exact.
+
+### Both blocks are one corpus naming defect, not extraction failures
+
+`irw-validate` raised `name_length` ERRORs on two of the three: the LIVE table
+names are 49 and 45 characters against datastandard.md's 40-char cap. The
+pipeline cannot fix this — the itemtext stem must stay identical to the live
+table name or `__items` creates a duplicate instead of replacing it. Classified
+`blocked`, not `failed`, per the batch_132 precedent
+(`personality_handwriting__financial_behavior`, 43 chars): an unchanged retry
+hits the identical wall and would redo correct work to no effect. To unblock:
+shorten the construct label to ≤40 chars (construct only, never author/year),
+renaming the live table and the CSV together, or waive the cap. `_freq` is
+within the cap and is unaffected. **Three of the four `weatherspoon_2015_*`
+tables are over-long, so this wants one decision, not three.**
+
+### Step 5b — orchestrator re-checks (both agent findings confirmed, one sharpened)
+
+- **Confirmed and sharpened.** The family-physician effectiveness agent reported
+  25 rows carrying resp 3/4/5, values the Yes/No column never offered. True:
+  616 rows / 55 ids, resp = 1:570, 2:21, 3:13, 4:11, 5:1. But the 25 rows come
+  from just **3 distinct respondents** across 14 items — a per-RESPONDENT
+  defect, not a per-item one, consistent with three people's frequency-column
+  answers being read into the effectiveness column. The agent's note implied a
+  diffuse problem; it is three respondents. Worth its own issue against
+  `data/weatherspoon_2015_communication.py`, which drops sentinel 9 but passes
+  3/4/5 through.
+- **Confirmed.** The pediatrician table is clean of the same defect: independent
+  server-side aggregates give resp_min=1, resp_max=2 for all 17 items.
+- **Confirmed, and it applies to all four tables.** The IRW dictionary
+  Description calls the effectiveness tables a "17-item scale … (1-5)". It is
+  not: 1–5 belongs to the frequency half of the grid. A metadata fix.
+
+### Transcription caveat worth a human eye
+
+The S1 questionnaire is a .docx containing **only scanned page images** (zero
+text nodes; the Q12 grid is `word/media/image3.png`), so every stem, the
+instruction line and the anchor labels were read off an image by all three
+agents independently — which is useful corroboration, but punctuation and
+casing deserve a spot-check. Disclosed normalisations: "Occa-sionally"
+(hyphenated across a line break) → "Occasionally"; a double space in item 13.
+Where the questionnaire and Table 4 differ ("print material" vs "print
+materials"), the administered questionnaire wording was shipped. This is also
+why `data_labels` was unavailable — the deposited .xls/.xlsx carry bare code
+headers with no variable labels.
+
+Noted by the pediatrician agent and worth repeating: **Table 4's row order is
+domain-grouped, not questionnaire order** — a naive positional read would have
+mis-assigned 13 of 17 items. The statistical pairing, not the row order, is what
+fixed the mapping.
+
+### Gates
+
+normalize_nulls 3/3 fixed · audit_batch **1 PASS + 2 WARN**, both WARNs
+explained in notes.csv per Step 5c (low-n items matching the paper's own
+published n's; blank `option_text` on the out-of-range 3/4/5 rows, left blank
+rather than padded) · verify_batch **3/3 PASS** · lint_verification 3 rows, no
+problems · irw-validate 1 ok + the 2 `name_length` ERRORs above ·
+check_provenance exit 0, and none of its standing complaints involve this batch.
+
+Next: `weatherspoon_2015_pediatricians_freq` is still `pending` and is the same
+Q12 `a` battery on the S2 dataset — it can reuse the `_freq` extraction verbatim,
+verified against paper Table 3. Cap (batch_230) not reached.
