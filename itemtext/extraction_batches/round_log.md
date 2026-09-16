@@ -19616,3 +19616,55 @@ mislabels it as the Subjective Vitality Scale. The CSDT ruling does not reach it
 **Pre-existing gate failure, NOT from this round:** `check_provenance.R` exits 1 on
 `tian2026_digital_competence` (ships IRW-generated English with no entry on the public issues
 page). None of batch_227's three tables are implicated. Carried forward.
+
+## batch_228 — 2026-09-16 01:41–02:10
+3 tables, 3 agents. **Written 3 / blocked 0 / failed 0 — yield 100%.** All from one
+figshare deposit (10.6084/m9.figshare.32044005.v1, CC BY 4.0): `wolters2026_panas_na`,
+`wolters2026_panas_pa`, `wolters2026_wi`. Circuit breaker not tripped.
+
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs, so nothing owed to
+Step 5c); verify_batch PASS 3; lint_verification 3 rows clean; irw-validate clean 3;
+check_provenance clean (its one outstanding IRW-generated table, tian2026_digital_competence,
+is pre-existing and not from this round).
+
+Source shape: the deposit is a single .xlsx with a bare header row — no variable labels,
+no value labels, no supplement, and no locatable journal article. So every mapping here is
+inferred, not read off the file: mapping_basis `reconstructed` (both PANAS) and `paper_order`
+(WI). All three verification rows are **PARTIAL**, correctly — each route pins the IRW
+renumbering decisively but not the column-number→wording step.
+
+Administration is German; no German wording is in scope under rights-reserving terms, so all
+three ship English base fields with `language=German` and empty `_translated` (documented
+fallback shape). text_source=translated_substitute throughout.
+
+### Orchestrator re-checks (Step 5b)
+- **Deposit duplicate-column defect — CONFIRMED, and its scope corrected.** The panas_pa agent
+  reported the eight `Symptom_concerns_*_t0/_t1` columns appearing twice. Re-read of the xlsx:
+  116 columns, those 8 names duplicated at positions 6–13 and 63–70, and the duplicated blocks
+  are **byte-identical across all 83 rows** (83/83 each) — redundant columns, not a second
+  measurement. The agent called it "a concern for wolters2026_symptom_concerns"; **no such table
+  exists in the itemtext queue**, so this is a latent trap for any future processing script that
+  melts all columns (it would double every id×item), not a defect in anything shipped.
+- **wi_9 polarity override — CONFIRMED by re-run.** verify_batch reproduced item-rest r = +0.32
+  (15/83 endorsed) on the scale's one reverse-keyed item, which is positive only if the deposit
+  stores Whiteley *scores* rather than raw yes/no. Option text shipped flipped (Yes=0/No=1) and
+  disclosed. irw-validate does not flag this (per-item direction differences are legitimate).
+
+### Open items for a human — nothing shipped turns on either
+1. **Does ZIS govern?** Both PANAS agents independently read the same rights-reserving clauses on
+   ZIS 10.6102/zis146 (NC + permission-required) and 10.6102/zis242 (CC BY-NC) for Krohne et al.
+   (1996), so the German wording was withheld. Whether ZIS is the originator's designated venue
+   (governs) or a mere aggregator (does not, under the DMIDI/SCCS rule) is a **corpus-wide** call —
+   ZIS is the standard venue for German scales. This incidentally **resolves the open ZIS lead
+   batch_122 left on `opladen2025_wi`**, where the terms page could not be read.
+2. **A register `block` row for the German PANAS is OWED** and was deliberately not written by
+   either agent (shared-file race, batch_124 precedent). Not written by this round either.
+3. **PANAS level-1 anchor.** Both tables ship Watson's "very slightly or not at all"; the
+   administered German level 1 is *gar nicht* ("not at all"), narrower. Levels 2–5 agree exactly.
+   The two tables are consistent with each other, so this is accuracy-vs-original, not an
+   internal inconsistency. Changing it would mean editing both tables together.
+
+Also noted: *angeregt*=inspired / *begeistert*=enthusiastic (two bilingual sources), which is the
+reverse of what positional reasoning from Watson's ordering would suggest — a near-miss avoided.
+
+Cap (batch_230) not yet reached; next round proceeds.
