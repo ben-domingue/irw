@@ -64,6 +64,8 @@ class RoutingTest(unittest.TestCase):
 
 
 class _Resp:
+    ok = True
+
     def __init__(self, payload):
         self._p = payload
 
@@ -177,6 +179,89 @@ class LicenseNameTest(unittest.TestCase):
         payload = {"data": {"relationships": {"license": {"data": {"id": "xyz"}}}}}
         with mock.patch.object(irw_batch_updated.requests, "get", return_value=_Resp(payload)):
             self.assertEqual(irw_batch_updated._osf_license("nodes", "abcde", {}), "xyz")
+
+
+class TrailingPunctuationTest(unittest.TestCase):
+    """A DOI scraped mid-sentence keeps the sentence's punctuation.
+
+    "... available from https://doi.org/10.5061/dryad.j6g1c." resolved to a
+    404 and the row was retired as external_unresolved. 13 of the 33 doi.org
+    links in the 2026-09-15 backlog re-triage carried trailing punctuation;
+    10 resolve once it is stripped.
+    """
+
+    def test_strips_sentence_punctuation(self):
+        for raw, want in [
+            ("https://doi.org/10.5061/dryad.j6g1c.", "https://doi.org/10.5061/dryad.j6g1c"),
+            ("https://doi.org/10.18170/DVN/WBO7LK)", "https://doi.org/10.18170/DVN/WBO7LK"),
+            ("https://doi.org/10.5683/SP3/S6XUE3.", "https://doi.org/10.5683/SP3/S6XUE3"),
+            ("https://osf.io/abcde/,", "https://osf.io/abcde/"),
+            ("https://doi.org/10.17863/CAM.121719);", "https://doi.org/10.17863/CAM.121719"),
+        ]:
+            self.assertEqual(irw_discover_plos.strip_trailing_punctuation(raw), want)
+
+    def test_leaves_legitimate_urls_alone(self):
+        for u in ["https://figshare.com/articles/dataset/x/31933275",
+                  "https://osf.io/ajkh4/?view_only=13dbb2a2f98648499cbbe3cbbe8a439d",
+                  "https://datahub.tec.mx/dataset.xhtml?persistentId=doi:10.57687/FK2/DCVIJU",
+                  "https://doi.org/10.7910/DVN/UT9RVL"]:
+            self.assertEqual(irw_discover_plos.strip_trailing_punctuation(u), u)
+
+    def test_extractor_strips_before_storing(self):
+        html = ('Data Availability:</strong> All data are available from '
+                'https://doi.org/10.5061/dryad.j6g1c.</p>')
+        avail = irw_discover_plos.extract_data_availability(html)
+        m = irw_discover_plos._RE_URL.search(avail)
+        self.assertEqual(irw_discover_plos.strip_trailing_punctuation(m.group(0)),
+                         "https://doi.org/10.5061/dryad.j6g1c")
+
+
+class FigshareIdTest(unittest.TestCase):
+    """Legacy figshare URLs carry a trailing version segment.
+
+    ".../articles/survey3a/7357034/1" was parsed as article 1, which 404s.
+    Found 2026-09-16 while scoping the PMC gap; the deposit is live and CC BY.
+    """
+
+    def _id(self, url):
+        seen = {}
+
+        def fake_get(u, **kw):
+            seen["url"] = u
+            return _Resp({"license": {"name": "CC BY 4.0"}, "files": []})
+        with mock.patch.object(irw_batch_updated.requests, "get", side_effect=fake_get):
+            irw_batch_updated._figshare_files(url)
+        return seen.get("url", "").rsplit("/", 1)[-1]
+
+    def test_version_segment_is_not_the_id(self):
+        self.assertEqual(self._id("https://figshare.com/articles/survey3a/7357034/1"), "7357034")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/x/30913817/1"), "30913817")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/n/6667499/2?file=1"), "6667499")
+
+    def test_modern_and_bare_forms_unchanged(self):
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/Database_UDIFP-29/31933275"), "31933275")
+        self.assertEqual(self._id("https://figshare.com/articles/An_examination/5544883"), "5544883")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/x/27092545/"), "27092545")
+
+    def test_no_article_id(self):
+        self.assertEqual(irw_batch_updated._figshare_files("https://figshare.com/"), ([], "", []))
+
+
+class DataverseProbeTest(unittest.TestCase):
+    def test_version_endpoint_identifies_dataverse(self):
+        with mock.patch.object(irw_discover_plos.requests, "get",
+                               return_value=_Resp({"status": "OK", "data": {"version": "6.8"}})) as g:
+            self.assertTrue(irw_discover_plos._is_dataverse_host("https://borealisdata.ca/collections/x"))
+        self.assertEqual(g.call_args[0][0], "https://borealisdata.ca/api/info/version")
+
+    def test_non_dataverse_host(self):
+        with mock.patch.object(irw_discover_plos.requests, "get",
+                               return_value=_Resp({"nope": 1})):
+            self.assertFalse(irw_discover_plos._is_dataverse_host("https://data.ru.nl/collections/di/d"))
+
+    def test_probe_failure_is_not_a_dataverse(self):
+        with mock.patch.object(irw_discover_plos.requests, "get", side_effect=OSError("down")):
+            self.assertFalse(irw_discover_plos._is_dataverse_host("https://example.org/x"))
 
 
 if __name__ == "__main__":
