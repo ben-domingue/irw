@@ -121,6 +121,22 @@ def _norm_license(raw: str) -> str:
     s = re.sub(r"[-_]?\d+\.\d+$", "", s)   # strip version (e.g. cc-by-4.0 -> cc-by)
     s = re.sub(r"https?://.*creativecommons\.org/licenses/([^/]+).*", r"cc-\1", s)
     s = re.sub(r"https?://.*creativecommons\.org/publicdomain/zero.*", "cc0", s)
+    # Spelled-out Creative Commons names, as OSF and some Dataverse
+    # installations report them ("CC-By Attribution-NonCommercial 4.0
+    # International"). Without this an NC deposit normalises to a long
+    # unrecognised string, which reads as unknown rather than blocked.
+    if "creative-commons" in s or s.startswith("cc"):
+        if "zero" in s or re.match(r"^cc-?0", s) or "public-domain-dedication" in s:
+            return "cc0"
+        if "attribution" in s:
+            parts = ["cc", "by"]
+            if "noncommercial" in s or "non-commercial" in s:
+                parts.append("nc")
+            if "noderiv" in s or "no-deriv" in s:
+                parts.append("nd")
+            if "sharealike" in s or "share-alike" in s:
+                parts.append("sa")
+            return "-".join(parts)
     return s
 
 def check_license(raw: str) -> tuple[str, bool, bool]:
@@ -281,10 +297,19 @@ def _dataverse_files(url: str, doi: str) -> tuple:
 
 
 def _osf_license(kind: str, guid: str, params: dict) -> str:
+    """The licence NAME. The relationship alone gives an opaque id
+    ("563c1cf88c5e4a3877f9e96a"), which no licence check can read: a CC-BY
+    node and an NC one look the same, and both fall through as unknown.
+    ?embed=license returns the name in the same request."""
     r = requests.get(f"https://api.osf.io/v2/{kind}/{guid}/",
-                     params=params, headers=UA, timeout=30)
+                     params={**params, "embed": "license"}, headers=UA, timeout=30)
     r.raise_for_status()
-    return (r.json().get("data", {}).get("relationships", {})
+    data = r.json().get("data", {})
+    embedded = ((data.get("embeds", {}) or {}).get("license", {}) or {}).get("data", {}) or {}
+    name = (embedded.get("attributes", {}) or {}).get("name", "")
+    if name:
+        return name
+    return (data.get("relationships", {})
             .get("license", {}).get("data", {}) or {}).get("id", "")
 
 

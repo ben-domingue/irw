@@ -131,5 +131,53 @@ class DataverseLicenseShapeTest(unittest.TestCase):
         self.assertEqual(files[0][0], "https://datahub.tec.mx/api/access/datafile/7")
 
 
+class LicenseNameTest(unittest.TestCase):
+    """Spelled-out Creative Commons names, as OSF reports them.
+
+    The 2026-09-15 backlog re-triage recorded 96 rows whose licence was an
+    opaque OSF id; one (10.1371/journal.pone.0338082) was NC-SA, which has to
+    block. An unreadable licence must never come out looking permissive.
+    """
+
+    def test_spelled_out_names(self):
+        for raw, norm, blocked in [
+            ("CC-By Attribution 4.0 International", "cc-by", False),
+            ("CC-By Attribution-NonCommercial 4.0 International", "cc-by-nc", True),
+            ("CC-BY Attribution-NonCommercial-ShareAlike 4.0 International", "cc-by-nc-sa", True),
+            ("CC-By Attribution-NonCommercial-NoDerivatives 4.0 International", "cc-by-nc-nd", True),
+            ("CC-By Attribution-ShareAlike 4.0 International", "cc-by-sa", False),
+            ("CC0 1.0 Universal", "cc0", False),
+            ("Creative Commons Attribution Non Commercial 4.0 International", "cc-by-nc", True),
+        ]:
+            got_norm, got_blocked, _ = irw_batch_updated.check_license(raw)
+            self.assertEqual((got_norm, got_blocked), (norm, blocked), raw)
+
+    def test_existing_forms_unchanged(self):
+        for raw, norm in [("cc-by-4.0", "cc-by"), ("CC0", "cc0"),
+                          ("https://creativecommons.org/licenses/by-nc/4.0/", "cc-by-nc"),
+                          ("MIT License", "mit-license")]:
+            self.assertEqual(irw_batch_updated.check_license(raw)[0], norm, raw)
+
+    def test_opaque_id_is_never_open(self):
+        _, blocked, unknown = irw_batch_updated.check_license("563c1cf88c5e4a3877f9e96a")
+        self.assertTrue(unknown)
+        self.assertFalse(blocked)
+
+    def test_osf_license_prefers_embedded_name(self):
+        payload = {"data": {"embeds": {"license": {"data": {"attributes": {
+            "name": "CC-By Attribution-NonCommercial 4.0 International"}}}},
+            "relationships": {"license": {"data": {"id": "563c1cf88c5e4a3877f9e96a"}}}}}
+        with mock.patch.object(irw_batch_updated.requests, "get",
+                               return_value=_Resp(payload)) as g:
+            name = irw_batch_updated._osf_license("nodes", "abcde", {})
+        self.assertEqual(g.call_args.kwargs["params"]["embed"], "license")
+        self.assertTrue(irw_batch_updated.check_license(name)[1])
+
+    def test_osf_license_falls_back_to_id(self):
+        payload = {"data": {"relationships": {"license": {"data": {"id": "xyz"}}}}}
+        with mock.patch.object(irw_batch_updated.requests, "get", return_value=_Resp(payload)):
+            self.assertEqual(irw_batch_updated._osf_license("nodes", "abcde", {}), "xyz")
+
+
 if __name__ == "__main__":
     unittest.main()
