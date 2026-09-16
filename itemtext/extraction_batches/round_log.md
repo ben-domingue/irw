@@ -19226,3 +19226,81 @@ check_provenance exit 0, and none of its standing complaints involve this batch.
 Next: `weatherspoon_2015_pediatricians_freq` is still `pending` and is the same
 Q12 `a` battery on the S2 dataset — it can reuse the `_freq` extraction verbatim,
 verified against paper Table 3. Cap (batch_230) not reached.
+
+## batch_220 — 2026-09-16 00:0x
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** — yield 3/3 (100%).
+Three agents (the standing setting since 2026-09-11), one table each, no kills,
+no retries, no export-quota trouble: every gate ran on `--table-sets`
+aggregates and the only full exports in the round were my own two Step 5b
+re-checks.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `weatherspoon_2015_pediatricians_freq` | written | paper_explicit | **VERIFIED** |
+| `weeldenburg_2022_targetmtpq` | written | paper_order | PARTIAL |
+| `weida_2020_financial_security` | written | reconstructed | PARTIAL |
+
+`weatherspoon_2015_pediatricians_freq` is the follow-on the batch_219 entry
+above predicted, and it landed as predicted: same Q12 `a` battery, wording from
+the study's own image-only S1 Document, pinned against paper Table 3
+(pediatricians). The agent re-read the page images itself rather than copying
+the family-physician sibling's transcript, which is the right call — the
+corroboration is only worth something if it is independent. At 36 characters
+the table name clears the 40-char cap that blocked the two `_effectiveness`
+siblings last round.
+
+### Step 3b: `weida_2020_financial_security` is not a financial-security scale
+
+The table name and the dictionary Description both call this a "10-item
+financial security scale (secf_1m..secf_10m)". **Its ten items are the study's
+CES-D-10 depression scale.** `secf` is the survey's section F, not
+"sec[urity] f[inancial]". The agent established this from the source SAS file
+(`rowSums(secf_1m..secf_10m)` equals the file's own `dpsscore` exactly for all
+371 respondents, and `dps`, SAS-labelled "depression", equals `dpsscore >= 10`
+exactly).
+
+I re-checked it against the LIVE table independently, per Step 5b, and it
+confirms: N = 371, ten items, total range **0–30**, mean 11.4, and **56.3%
+(209/371) scoring ≥ 10** — which is the paper's own reported CES-D-10 range and
+its recommended ≥10 cutoff proportion, to the respondent. A financial-security
+scale does not reproduce that. The actual financial-health variables
+(`fingoal`, `budget`, `latefee`, `utilshut`, …) are different columns of the
+same file and are *not* in this IRW table — and, pointedly, those columns *are*
+SAS-labelled with their full question text while the `secf_*` columns are not,
+which is presumably how the name went wrong in the first place.
+
+**The table name and the dictionary Description both need correcting.** That is
+a repo-side fix, not a round's to make; recorded in notes.csv.
+
+### Step 5b re-checks (both confirmed, numbers recorded)
+
+- `secf_4m` item-rest r = **0.067**, against 0.270–0.726 for the other nine —
+  confirmed on the live table, not just asserted. It is the CES-D's known weak
+  "everything I did was an effort" item, and its position-4 assignment rests on
+  the canonical CES-D-10 order plus its endorsement rank rather than on any
+  correlational signal. The verify script says so in its own output, which is
+  the honest way to ship it.
+- `Q12_14a` ("Use video or DVD") really does top out at resp 4 — max = 4,
+  ceiling 0.0% — matching Table 3's published 0.0% for "Always". Per-item n's
+  (192/193/192/192/193/194/194/189/…) match the agent's report exactly.
+
+Both PARTIALs are correctly PARTIAL rather than optimistic: weeldenburg pins
+all five subscale *blocks* against paper Table 1 (worst deviation 0.0059, five
+distinct published means, so no block permutation is possible) plus two
+within-block positions by content signature, but leaves the remaining
+within-block order resting on the questionnaire's interleaved numbering; weida
+leaves the order of the eight negatively worded items unestablished. Each says
+what it does not establish in its own evidence string.
+
+### Gates
+
+normalize_nulls 0 of 3 needed changing · audit_batch **3/3 PASS, no anomalies**
+(so Step 5c has nothing to explain this round) · verify_batch **3/3 PASS** ·
+lint_verification 3 rows, no problems · irw-validate **3/3 ok** ·
+check_provenance exits 1, but on a pre-existing complaint —
+`tian2026_digital_competence` owes an issues-page line — and **no batch_220
+table appears anywhere in its output**.
+
+Queue after this round: 895 done / 241 blocked / 193 pending / 59 excluded /
+13 failed. Cap (batch_230) not reached.
