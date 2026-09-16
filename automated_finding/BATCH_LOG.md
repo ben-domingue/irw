@@ -14407,3 +14407,35 @@ TODO.md. 858764 and psych.000x6 are recorded above as rejects.
 
 **Follow-up 2026-09-15:** Ben approved P5WUGI despite CC BY-NC; it shipped
 to the Redivis draft as six `nguyen_2026_factcheck_*` tables (PR #2186).
+
+## 2026-09-16b — first processing batch off the Data Availability backlog
+
+Five open-licence leads were hand-picked from the #2193/#2203 backlogs and
+processed. **One shipped**; the batch is mostly a lesson about the other four.
+
+**Shipped:** `basinska_2023_bits_s1` / `_bits_s2` / `_work_overload` /
+`_bat23` (irw#2204) — Polish BITS validation, Mendeley 7wfgz62xgs, CC BY 4.0.
+37,593 responses across four tables.
+
+**Three were already in IRW, as the same deposits** — not near-matches:
+Mendeley `48y8tkf5wh` is `floreskanter_2021_cerq` (247,932 responses,
+identical to what was regenerated before anyone noticed); Dataverse `UT9RVL`
+is `RD_PPCSEDSOF_Afable_2023`; figshare `3122734` is the six `kotsou_2016_*`
+tables. Cause: candidate exclusion matches the paper DOI, and each of these
+deposits entered IRW through a *different, earlier* paper than the one that
+surfaced it. Fixed by the `already_in_irw` flag added in this batch.
+
+**Skipped — `10.1371/journal.pone.0231048`, Malay MAIA** (figshare
+10673534, CC0, 815 respondents, 7 instruments). The only file on the record,
+`Final_Malay_Dataset2.sav`, is the **post-imputation MICE dataset**, not the
+raw collection. The paper says so ("missing values were imputed using the
+multiple imputation technique using the MICE package"), and the file shows
+it: `D4_Education` holds fractional values — a nominal category cannot be
+2.5 — and MAIA responses reach 6.21 on a 1-6 scale. There is no raw
+counterpart on the record. A salvage was available (the imputer wrote
+non-integers, so the imputed cells are identifiable; dropping non-integer
+and out-of-range cells costs ~0.3% of cells and yields seven tables) and was
+**declined by Ben, 2026-09-16**: it rests on inference about which cells were
+imputed rather than on a documented raw file. Re-openable only by obtaining
+the pre-imputation file from the authors. No licence problem — this is not a
+`license_blocked_candidates.csv` row.

@@ -31,9 +31,9 @@ class RoutingTest(unittest.TestCase):
                     "license": "cc-by", "n_responses": 10, "n_participants": 5,
                     "n_items": 2, "density": 1.0, "data_file": "d.sav"}
 
-        with mock.patch.object(irw_discover_plos, "_landing_url", return_value=landing), \
+        with mock.patch.object(irw_batch_updated, "_landing_url", return_value=landing), \
              mock.patch.object(irw_batch_updated, "process_one", side_effect=fake_deposit):
-            out = irw_discover_plos.triage_external_link(link, dict(BASE))
+            out = irw_batch_updated.triage_external_link(link, dict(BASE))
         return out, seen.get("row")
 
     def test_figshare_doi_reaches_resolver_and_keeps_plos_identity(self):
@@ -58,12 +58,14 @@ class RoutingTest(unittest.TestCase):
         self.assertEqual(out["flag"], "external_unresolved")
 
     def test_unresolvable_link_is_inconclusive(self):
-        with mock.patch.object(irw_discover_plos, "_landing_url", side_effect=OSError("down")):
-            out = irw_discover_plos.triage_external_link("https://doi.org/10.1/x", dict(BASE))
+        with mock.patch.object(irw_batch_updated, "_landing_url", side_effect=OSError("down")):
+            out = irw_batch_updated.triage_external_link("https://doi.org/10.1/x", dict(BASE))
         self.assertIn(out["flag"], irw_discover_plos.INCONCLUSIVE_FLAGS)
 
 
 class _Resp:
+    ok = True
+
     def __init__(self, payload):
         self._p = payload
 
@@ -177,6 +179,153 @@ class LicenseNameTest(unittest.TestCase):
         payload = {"data": {"relationships": {"license": {"data": {"id": "xyz"}}}}}
         with mock.patch.object(irw_batch_updated.requests, "get", return_value=_Resp(payload)):
             self.assertEqual(irw_batch_updated._osf_license("nodes", "abcde", {}), "xyz")
+
+
+class TrailingPunctuationTest(unittest.TestCase):
+    """A DOI scraped mid-sentence keeps the sentence's punctuation.
+
+    "... available from https://doi.org/10.5061/dryad.j6g1c." resolved to a
+    404 and the row was retired as external_unresolved. 13 of the 33 doi.org
+    links in the 2026-09-15 backlog re-triage carried trailing punctuation;
+    10 resolve once it is stripped.
+    """
+
+    def test_strips_sentence_punctuation(self):
+        for raw, want in [
+            ("https://doi.org/10.5061/dryad.j6g1c.", "https://doi.org/10.5061/dryad.j6g1c"),
+            ("https://doi.org/10.18170/DVN/WBO7LK)", "https://doi.org/10.18170/DVN/WBO7LK"),
+            ("https://doi.org/10.5683/SP3/S6XUE3.", "https://doi.org/10.5683/SP3/S6XUE3"),
+            ("https://osf.io/abcde/,", "https://osf.io/abcde/"),
+            ("https://doi.org/10.17863/CAM.121719);", "https://doi.org/10.17863/CAM.121719"),
+        ]:
+            self.assertEqual(irw_batch_updated.strip_trailing_punctuation(raw), want)
+
+    def test_markdown_bracket_junk_is_cut(self):
+        self.assertEqual(
+            irw_batch_updated.strip_trailing_punctuation(
+                "https://doi.org/10.5281/zenodo.17423755%5D(https:/doi.org/10.5281/zenodo.17423755"),
+            "https://doi.org/10.5281/zenodo.17423755")
+
+    def test_leaves_legitimate_urls_alone(self):
+        for u in ["https://figshare.com/articles/dataset/x/31933275",
+                  "https://osf.io/ajkh4/?view_only=13dbb2a2f98648499cbbe3cbbe8a439d",
+                  "https://datahub.tec.mx/dataset.xhtml?persistentId=doi:10.57687/FK2/DCVIJU",
+                  "https://doi.org/10.7910/DVN/UT9RVL"]:
+            self.assertEqual(irw_batch_updated.strip_trailing_punctuation(u), u)
+
+    def test_extractor_strips_before_storing(self):
+        html = ('Data Availability:</strong> All data are available from '
+                'https://doi.org/10.5061/dryad.j6g1c.</p>')
+        avail = irw_discover_plos.extract_data_availability(html)
+        m = irw_batch_updated._RE_URL.search(avail)
+        self.assertEqual(irw_batch_updated.strip_trailing_punctuation(m.group(0)),
+                         "https://doi.org/10.5061/dryad.j6g1c")
+
+
+class FigshareIdTest(unittest.TestCase):
+    """Legacy figshare URLs carry a trailing version segment.
+
+    ".../articles/survey3a/7357034/1" was parsed as article 1, which 404s.
+    Found 2026-09-16 while scoping the PMC gap; the deposit is live and CC BY.
+    """
+
+    def _id(self, url):
+        seen = {}
+
+        def fake_get(u, **kw):
+            seen["url"] = u
+            return _Resp({"license": {"name": "CC BY 4.0"}, "files": []})
+        with mock.patch.object(irw_batch_updated.requests, "get", side_effect=fake_get):
+            irw_batch_updated._figshare_files(url)
+        return seen.get("url", "").rsplit("/", 1)[-1]
+
+    def test_version_segment_is_not_the_id(self):
+        self.assertEqual(self._id("https://figshare.com/articles/survey3a/7357034/1"), "7357034")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/x/30913817/1"), "30913817")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/n/6667499/2?file=1"), "6667499")
+
+    def test_modern_and_bare_forms_unchanged(self):
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/Database_UDIFP-29/31933275"), "31933275")
+        self.assertEqual(self._id("https://figshare.com/articles/An_examination/5544883"), "5544883")
+        self.assertEqual(self._id("https://figshare.com/articles/dataset/x/27092545/"), "27092545")
+
+    def test_no_article_id(self):
+        self.assertEqual(irw_batch_updated._figshare_files("https://figshare.com/"), ([], "", []))
+
+
+class DataverseProbeTest(unittest.TestCase):
+    def test_version_endpoint_identifies_dataverse(self):
+        with mock.patch.object(irw_batch_updated.requests, "get",
+                               return_value=_Resp({"status": "OK", "data": {"version": "6.8"}})) as g:
+            self.assertTrue(irw_batch_updated._is_dataverse_host("https://borealisdata.ca/collections/x"))
+        self.assertEqual(g.call_args[0][0], "https://borealisdata.ca/api/info/version")
+
+    def test_non_dataverse_host(self):
+        with mock.patch.object(irw_batch_updated.requests, "get",
+                               return_value=_Resp({"nope": 1})):
+            self.assertFalse(irw_batch_updated._is_dataverse_host("https://data.ru.nl/collections/di/d"))
+
+    def test_probe_failure_is_not_a_dataverse(self):
+        with mock.patch.object(irw_batch_updated.requests, "get", side_effect=OSError("down")):
+            self.assertFalse(irw_batch_updated._is_dataverse_host("https://example.org/x"))
+
+
+class DepositDedupTest(unittest.TestCase):
+    """A deposit already in IRW under a different paper.
+
+    Candidate exclusion matches the paper DOI, so it cannot see this: on
+    2026-09-16 three of five hand-picked leads were deposits already in the
+    corpus (Mendeley 48y8tkf5wh = floreskanter_2021_cerq, Dataverse UT9RVL,
+    figshare 3122734), and one had a processing script written before anyone
+    noticed.
+    """
+
+    def setUp(self):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = None
+
+    def tearDown(self):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = None
+
+    def _triage(self, link, landing, corpus):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = corpus
+        with mock.patch.object(irw_batch_updated, "_landing_url", return_value=landing), \
+             mock.patch.object(irw_batch_updated, "process_one") as po:
+            row = irw_batch_updated.triage_external_link(link, dict(BASE))
+        return row, po
+
+    def test_deposit_in_corpus_is_flagged_not_triaged(self):
+        row, po = self._triage("https://doi.org/10.17632/48y8tkf5wh",
+                               "https://data.mendeley.com/datasets/48y8tkf5wh/4",
+                               {"10.17632/48y8tkf5wh"})
+        self.assertEqual(row["flag"], "already_in_irw")
+        self.assertIn("48y8tkf5wh", row["reasons"])
+        po.assert_not_called()          # no download, no triage
+
+    def test_figshare_landing_matches_its_doi_form(self):
+        row, _ = self._triage("https://figshare.com/articles/dataset/x/3122734",
+                              "https://figshare.com/articles/dataset/x/3122734",
+                              {"10.6084/m9.figshare.3122734"})
+        self.assertEqual(row["flag"], "already_in_irw")
+
+    def test_unseen_deposit_is_triaged_normally(self):
+        row, po = self._triage("https://doi.org/10.17632/7wfgz62xgs",
+                               "https://data.mendeley.com/datasets/7wfgz62xgs/1",
+                               {"10.17632/48y8tkf5wh"})
+        self.assertNotEqual(row.get("flag"), "already_in_irw")
+        po.assert_called_once()
+
+    def test_empty_corpus_never_blocks_a_run(self):
+        row, po = self._triage("https://doi.org/10.17632/7wfgz62xgs",
+                               "https://data.mendeley.com/datasets/7wfgz62xgs/1",
+                               set())
+        self.assertNotEqual(row.get("flag"), "already_in_irw")
+        po.assert_called_once()
+
+    def test_sheet_failure_is_not_fatal(self):
+        with mock.patch("irw_discover_updated._load_existing_irw_dois",
+                        side_effect=OSError("sheet down")):
+            self.assertEqual(irw_batch_updated._deposit_already_in_irw(
+                "https://data.mendeley.com/datasets/7wfgz62xgs/1", ""), "")
 
 
 if __name__ == "__main__":

@@ -49,7 +49,14 @@ import requests
 from irw_discover_updated import (
     Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
 )
-from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
+from irw_batch_updated import (
+    check_license, TABULAR_EXT, polite_get, FileTooLarge,
+    # Link handling is shared with irw_discover_pmc.py: both connectors read
+    # a Data Availability statement and hand the deposit to the same
+    # resolvers. It lives in irw_batch_updated because both already import
+    # from there, and neither connector should import the other.
+    extract_external_link, triage_external_link,
+)
 from irw_triage_updated import load_table, triage_dataset, preflight_deps
 
 UA = {"User-Agent": "irw-discovery-scout/1.0 (research; contact itemresponsewarehouse@stanford.edu)"}
@@ -166,13 +173,6 @@ _RE_SI_BLOCK = re.compile(
 _RE_TAG = re.compile(r"<[^>]+>")
 _RE_URL = re.compile(r'https?://[^\s"\'<>]+')
 _RE_BARE_DOI = re.compile(r'\b10\.\d{4,9}/[^\s,;)"\'<>]+')
-
-# External repos already covered by irw_discover_updated.py's own connectors
-# -- flagged for visibility, not re-downloaded here.
-_KNOWN_REPO_HOSTS = ("datadryad.org", "zenodo.org", "osf.io", "figshare.com",
-                     "dataverse.harvard.edu")
-
-
 def _strip_tags(s: str) -> str:
     return _RE_TAG.sub(" ", s).strip()
 
@@ -214,58 +214,8 @@ def extract_si_files(html: str, doi: str, journal: str = DEFAULT_JOURNAL) -> lis
     return out
 
 
-def _landing_url(link: str) -> str:
-    """Where a doi.org / hdl.handle.net link lands. Resolvers dispatch on the
-    host, and a DOI link names no host."""
-    host = (urlparse(link).netloc or "").lower()
-    if "doi.org" not in host and "hdl.handle.net" not in host:
-        return link
-    resp = requests.head(link, headers=UA, timeout=30, allow_redirects=True)
-    return resp.url
-
-
-def triage_external_link(ext_link: str, base: dict) -> dict:
-    """Triage the deposit a Data Availability statement points at.
-
-    Until 2026-09-15 this connector recorded the link and flagged the row
-    no_usable_file without opening it. In that day's weekly run all 4
-    spot-checked links (figshare 5544883 and 31933275, OSF J45TH and U5XKW)
-    held the data, and the seen-DOI ledger retired every one. The repo
-    pipeline's resolvers already read these hosts, so reuse them.
-
-    The deposit's own licence is the one checked: the article's CC BY does
-    not cover a separately deposited file.
-    """
-    from irw_batch_updated import process_one as triage_deposit, _host_resolver
-
-    empty = {"n_responses": "", "n_participants": "", "n_items": "",
-             "density": "", "data_file": ""}
-    try:
-        landing = _landing_url(ext_link)
-    except Exception as e:
-        return {**base, **empty, "flag": "download_failed",
-                "reasons": f"could not resolve Data Availability link {ext_link}: "
-                           f"{type(e).__name__}"[:200]}
-
-    doi_m = _RE_BARE_DOI.search(ext_link) or _RE_BARE_DOI.search(landing)
-    doi = doi_m.group(0) if doi_m else ""
-    # Any Dataverse installation, not only Harvard's: _dataverse_files()
-    # finds the instance from the landing URL.
-    source = "dataverse" if "/dataset.xhtml" in landing and doi else ""
-    if _host_resolver(landing) is None and not source:
-        return {**base, **empty, "flag": "external_unresolved",
-                "reasons": "no tabular-format Supporting Information file; data "
-                           f"link on a host with no resolver: {landing}"[:400]}
-
-    row = triage_deposit({"source": source, "url": landing, "doi": doi})
-    reasons = f"via Data Availability link {landing} | {row.get('reasons', '')}"
-    return {**base, **{k: v for k, v in row.items()
-                       if k not in ("source", "title", "url", "doi")},
-            "reasons": reasons[:400]}
-
-
 def process_one(hit: Hit) -> dict:
-    journal =hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
+    journal = hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
     base = {"source": "plos", "journal": journal, "title": hit.title,
             "doi": hit.doi, "url": hit.url}
     try:
@@ -277,18 +227,7 @@ def process_one(hit: Hit) -> dict:
                 "density": "", "data_file": ""}
 
     avail = extract_data_availability(html)
-    ext_link = ""
-    for m in _RE_URL.finditer(avail):
-        host = urlparse(m.group(0)).netloc
-        if any(h in host for h in _KNOWN_REPO_HOSTS) or "doi.org" in host:
-            ext_link = m.group(0)
-            break
-    if not ext_link:
-        # Data Availability statements often give a bare DOI ("doi:
-        # 10.5061/dryad.xxxx") with no URL scheme at all.
-        m = _RE_BARE_DOI.search(avail)
-        if m:
-            ext_link = f"https://doi.org/{m.group(0)}"
+    ext_link = extract_external_link(avail)
 
     license_raw = extract_license(html)
     license_norm, blocked, unknown = check_license(license_raw)
