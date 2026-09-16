@@ -19915,3 +19915,28 @@ carries. Filed as its own issue.
 
 Still held for the rename (irw#2198), unstamped, copies kept: `wang_2026_teaching_presence`,
 `weida_2020_financial_security`, `wu2021_burnout`.
+
+**The last two uploaded, 2026-09-16 — the chain closes at 54 of 54.**
+`weatherspoon_2015_family_physicians_effectiveness` and
+`weatherspoon_2015_pediatricians_effectiveness` went up unchanged after
+ben-domingue/irw#2200 merged; nothing was re-extracted. Stamped `uploaded=2026-09-16` in
+`batch_219/provenance.csv` and `mapping_verification.csv` (verified field by field: only the
+`uploaded` column changed), and their `__items.csv` deleted from batch_219; sidecars stay.
+
+**The blocker was never the cap itself.** red_up had grandfathered the 40-character cap since
+2026-09-03 (#1779), but the grandfather test looked up the file's OWN name — and item text for
+these two had never been uploaded, so nothing was found and the error stood. Meanwhile
+`irw_validate` measures the RESPONSE name for an item-text file (`_validate_item_text` strips
+`__items` before `check_name`), which is why the error read 49 characters for a 56-character
+file name: it was reporting a name the upload cannot choose, and its advice to shorten the
+construct label would have shipped item text that joins to nothing. #2200 demotes it to a warning
+when the response table is live, with the lookup kept out of the destination logic so an
+item-text file can never be routed onto its response table.
+
+Worth remembering for the next merged fix: the fix being merged was not enough. `red_up` is an
+editable install pointing at `src/red_up/plan.py`, and that checkout was three commits behind
+`origin/main`, so the first upload attempt would have skipped both tables again with the merge
+already on GitHub. Check the FILE, not the PR.
+
+Only the three tables held for the rename (irw#2198) remain unshipped from this chain:
+`wang_2026_teaching_presence`, `weida_2020_financial_security`, `wu2021_burnout`.
