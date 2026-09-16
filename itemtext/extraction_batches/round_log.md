@@ -18719,3 +18719,56 @@ failing on it.
 **Carried forward (still not this round's to fix):** `data/vanteffelen_2020_hostility.py` line 29
 still hardcodes Ben's email into its User-Agent. First logged by batch_209, re-confirmed by batch_210,
 unfixed as of this round.
+
+## batch_212 — 2026-09-15 21:46–22:00 PT
+
+3 tables, 3 agents (one per table). **2 written / 1 blocked / 0 failed** — yield 67%.
+Circuit breaker not tripped (0 failed).
+
+- `wang_2015_donation_decision` — **done**, 27 rows (3 items). Wang, Tang & Wang (2015)
+  PLOS ONE 10(9):e0138219, CC BY 4.0; Methods prints all three prompts verbatim.
+  mapping_basis=paper_explicit, text_source=study_materials. Verification routes 1+2
+  **VERIFIED**: eight published cell means reproduce within 0.009, six wtc contributor
+  percentages within 0.05; a distress↔sympathy swap would move every mean 0.8–1.4.
+  Caveat (in notes.csv): `option_text` blank throughout — the paper names only the anchors
+  of a "7-point" scale while both S1 and the live table carry **eight** codes 0–7, so no
+  anchor could be pinned. Nothing padded with its own number. Orchestrator re-checked the
+  live item/resp levels: distress and sympathy each hold exactly 0–7 (8 levels),
+  wtc_amount 0–100 by tens (11 levels) — the note is accurate as written. Mixed
+  Chinese/English administration disclosed in public_note.
+- `wang_2016_study1_authliving` — **done**, 20 rows (4 items × 5 levels). Wang (2016)
+  PLOS ONE 11(1):e0146050 Study 1, Authentic Living subscale of Wood et al. (2008).
+  Administered in Chinese, no Chinese wording anywhere in the deposit (s001.sav carries
+  no variable or value labels), so English base fields with
+  text_source=translated_substitute, translation_source=official_instrument_english.
+  Verification route 3 **PARTIAL**, correctly so: published totals reproduce
+  (42.49/6.19 vs 42.49/6.18; 38.34/5.08 exact; r=0.606 vs .61) and the block and coding
+  direction are pinned, but **within-block order is not** — no per-item statistics
+  published, no labels in the .sav, all four items positively keyed on the same 1–5 range.
+  Shipped in canonical Wood numbering; public_note says a permutation within the four
+  would be undetectable.
+- `wakui_2023_who5` — **blocked** (not failed). Determinate instrument-rights verdict:
+  WHO-5 Well-Being Index, already a settled `block` row in instrument_rights_register.csv
+  (family WHO5, withdrawn from both shards, 2a45976) — WHO licenses it CC BY-NC-SA 3.0 IGO
+  and under the 2026-09-05 HEXACO ruling (irw#1945) originator-governs, so the permissive
+  PLOS deposit (10.1371/journal.pone.0294357, CC BY 4.0) does not clear it. Orchestrator
+  verified the register row exists and carries that clause verbatim. Step 3b identity
+  confirmed via table_sets.R only (5 items W1–W5, resp 0–5, 61 respondents × 2 waves) —
+  no full-table export spent. Items are opaque codes so nothing leaks; Japanese
+  administration is no route around it (a translation is a derivative).
+  **Retry test: NO** — an unchanged retry returns the same answer. Row added to
+  itemtables/pending_index_notes.csv.
+
+Gates: normalize_nulls 0 of 2 changed; audit_batch **2 PASS, no anomalies** (so no Step 5c
+WARNs to explain); verify_batch **PASS=2** (both verify_<table>.R end VERDICT: PASS);
+lint_verification 0 ERROR, 1 WARN (the known "option_text ships blank" WARN on
+wang_2015_donation_decision, explained in notes.csv); `irw-validate` ok on both files,
+nothing to report.
+
+`check_provenance.R` exits 1, **pre-existing and not from this batch**: the only owed
+issues-page entry is `tian2026_digital_competence`, plus 13 `translation_source=mixed`
+review rows, none of them batch_212 tables. Both of this round's provenance rows are clean
+(translation_source populated where text_source=translated_substitute).
+
+No systemic access issues; no Step 3b instrument mismatches; no dictionary/metadata problems.
+Cap (batch_230) not reached — next round is batch_213.
