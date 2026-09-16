@@ -19495,3 +19495,65 @@ No rate limit, no kill, no salvage. Three agents (the 2026-09-11 setting) ran cl
 **Step 5b (orchestrator re-check):** the wolf_2017 raw-vs-reverse-scored finding was about to become a note asserting a defect in the response data and in the dictionary, so it was re-checked against the live table rather than taken on the agent's word. `item_stats.R` confirms it decisively: the six adjectives named as negative have means 1.14 / 1.11 / 1.09 / 1.06 / 1.10 / 1.24 with **85.0–94.3% of responses at the floor** (resp=1), while the six positive ones run 2.11 / 2.59 / 2.64 / 2.74 / 3.59 / 3.66; n=140 on all twelve, resp 1–5. Reverse-scored negatives would sit near 4.9, not 1.1. Confirmed raw, and the positive/negative split falls exactly on the canonical PANAS-20 first-12 ordering. The numbers are recorded in that table's `notes.csv` row. **This is a dictionary defect, not an itemtext defect** — the Description "PANAS positive affect (12 items)" is wrong for this table, and the same trap very likely applies to `wolf_2017_study2_posaff_pre/_post`, which are still `pending`. Worth a human decision at triage. The `witus` claims needed no separate re-check: verify_batch re-ran that table's own `verify_*.R` and it reproduced all 12 cells.
 
 No blocked tables, so no `pending_index_notes.csv` rows are owed this round. No rate limit, no kill, no salvage; three agents (the 2026-09-11 setting) ran clean again. Circuit breaker not tripped (0% failed). Cap is batch_230 — not reached; next round is batch_226.
+
+## batch_226 — 2026-09-16T01:12-07:00
+
+3 tables claimed (all `wolf_2017_*`, all from the one PLOS ONE deposit, Wolf et al. 2017
+12(1):e0170225, CC BY 4.0). **2 written / 1 blocked / 0 failed — yield 67%.** Circuit breaker
+NOT tripped (0% failed). Three agents, per the 2026-09-11 setting; no kills, no retries.
+
+- `wolf_2017_study2_nature_connect` — **done.** 30 rows (6 items x 5 levels), `data_labels`,
+  verification NOT_NEEDED (derivation pattern 1: the .py melts `connect1..connect6` unrenamed, so
+  the IRW code IS the .sav column name and that file's variable labels carry the sentences).
+- `wolf_2017_study2_posaff_post` — **done.** 60 rows (12 items x 5 levels), `data_labels`,
+  verification NOT_NEEDED, same derivation pattern. PANAS carries `ship` at register row 33 —
+  applied, not re-derived.
+- `wolf_2017_study1_vitality` — **blocked**, retry test NO (determinate). The 6 items are the
+  Bostic/Ryan state Subjective Vitality Scale, a CSDT-library instrument; register row 26's
+  `verdict=block` under Ben's 2026-09-09 FULL SCOPE ruling was applied. Register left unedited
+  (no new row owed). Block is effective — `vital1..vital6` are opaque codes.
+
+Gates: normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no anomalies** (so Step 5c had
+nothing to explain — no WARNs this round); verify_batch 2x MISSING(exempt), correct for
+`data_labels`; lint_verification clean (NOT_NEEDED rows written into BOTH the batch file and the
+permanent tracker, so no spurious ERRORs); `irw-validate` ok on both; `check_provenance.R` clean
+for this batch (its one outstanding IRW-generated-content gap, `tian2026_digital_competence`, is
+pre-existing and not from this round).
+
+### Step 5b — orchestrator re-checks of the agents' own claims
+
+1. **posaff_post's reverse-scoring finding: CONFIRMED, with one number corrected.** Recomputed
+   from the cached `.sav`: six negative adjectives mean 1.284–1.545 with 64.8–83.3% at the floor,
+   six positives 2.439–3.538, and the deposit's own composite `posaff_post` = 3.783, which is
+   reproduced to 3.784 by reverse-scoring the six negatives — so the stored IRW responses are
+   indeed raw. But the agent's "raw 12-item mean is 2.34" is **wrong: it is 2.170**. That figure
+   sat in `notes.csv` only (the `public_note` did not carry it) and has been corrected in place
+   with the discrepancy disclosed. Everything else in the note reproduced exactly.
+2. **nature_connect's "not in the paper" claim: CONFIRMED.** The article contains exactly three
+   "connect" strings — a discussion phrase ("connecting people to biodiverse environments"), a
+   remark about prior work, and a reference title. The scale is never named, reported or given an
+   alpha; the S2 deposit's variable labels are its only source. Labels verified verbatim against
+   the `.sav`, and the agent's characterisation holds: only `connect3` mentions nature, the other
+   five ask about restoration/self-transcendence while watching the video. `instrument` is a
+   descriptive study-specific label, and a `public_note` discloses the mismatch. This is the
+   second dictionary-description defect from this one deposit (cf. `wolf_2017_study1_posaff`,
+   batch_225) and a third is queued — see below.
+3. **The vitality agent's "other SVS tables a sweep would miss" lead: RESOLVED, mostly negative.**
+   Register row 26's `match_item_code` genuinely does not match `^vital`, so the warning is
+   well-founded. The one live candidate it implicates, `conner_2017_vitality` (done, batch_021,
+   shipped **before** the 2026-09-09 ruling), was checked and is **NOT** affected: it is the RAND
+   SF-36 4-item energy/fatigue subscale, not the CSDT SVS — batch_021 had already caught that its
+   dictionary description says otherwise. No withdrawal is owed.
+
+### Notable / for the next rounds
+
+- **The two still-pending SVS siblings, `wolf_2017_study2_vitality_pre` and
+  `_post`, are blocked by the same CSDT ruling** and should be closed out on the register row
+  rather than re-derived from scratch. Recorded in `pending_index_notes.csv`.
+- **`wolf_2017_study2_posaff_pre` (8 items, still pending) will hit the same PANAS
+  name-vs-content defect** as `study1_posaff` and `study2_posaff_post`: the table name says
+  positive affect, the items include negative adjectives and are stored raw.
+- A high blocked rate at this point in the queue remains a fact about which tables the queue
+  serves up, not about pipeline health.
+
+Cap (`batch_230`) NOT reached; the next firing picks up `batch_227`.

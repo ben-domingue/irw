@@ -1171,9 +1171,9 @@ wilson_2022_kelpie_personality,done,batch_224,2026-09-16T00:58:20-07:00
 wirs,done,batch_225,2026-09-16T01:09:06-07:00
 witus_2022_narrator_perception,done,batch_225,2026-09-16T01:09:06-07:00
 wolf_2017_study1_posaff,done,batch_225,2026-09-16T01:09:06-07:00
-wolf_2017_study1_vitality,pending,,
-wolf_2017_study2_nature_connect,pending,,
-wolf_2017_study2_posaff_post,pending,,
+wolf_2017_study1_vitality,blocked,batch_226,2026-09-16T01:12:40
+wolf_2017_study2_nature_connect,done,batch_226,2026-09-16T01:12:40
+wolf_2017_study2_posaff_post,done,batch_226,2026-09-16T01:12:40
 wolf_2017_study2_posaff_pre,pending,,
 wolf_2017_study2_vitality_post,pending,,
 wolf_2017_study2_vitality_pre,pending,,
