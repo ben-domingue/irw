@@ -18658,3 +18658,64 @@ hardcodes Ben's email into its User-Agent —
 `UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}`. Confirmed by the orchestrator by
 reading the line. First logged by batch_209; still unfixed, and it leaks the address to every host
 that script touches.
+
+## batch_211 — 2026-09-15
+
+**3 tables, 3 agents. Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+All three agents returned clean passes; nothing hit the circuit breaker (0 failed, threshold 30%).
+
+| table | rows | mapping_basis | Step 5b |
+|---|---|---|---|
+| `verbagg` | 48 (24 items × 2) | paper_explicit | PARTIAL |
+| `Veterans_Affairs_SSVF_Survey_2016-17` | 177 (59 items, resp 1–5) | reconstructed | PARTIAL |
+| `VSOCFP_Sebo_2024` | 56 (8 items × 7) | paper_explicit | VERIFIED |
+
+**Gates:** normalize_nulls fixed 2 of 3 files. audit_batch PASS=2 WARN=1. verify_batch PASS=3.
+lint_verification 3 rows, no problems. irw-validate: no ERRORs — two `name_charset` WARNs
+(`Veterans_Affairs_SSVF_Survey_2016-17`, `VSOCFP_Sebo_2024` are not lowercase), which are properties
+of the existing live table names and not something this batch introduced. check_provenance: 1192
+rows / 210 files, no failure; its outstanding items are pre-existing and none belongs to this round.
+
+**Step 5b — the orchestrator's re-check changed a public artifact.** The SSVF agent's
+`public_note` asserted that item 3 runs 1=Very Dissatisfied→5=Very Satisfied — the reverse of the
+direction the VA data dictionary states for the FY2018-2020 satisfaction items — citing r=+0.87 with
+the quality item 1. That claim was *not* covered by `verify_Veterans_Affairs_SSVF_Survey_2016-17.R`,
+which verifies the item↔source-column tie (59/59 per-item n, 340,723 = 340,723) and the sub-service
+labels, but never the coding direction. Re-checked server-side, pairing items 1 and 3 within `id`:
+n=5743 complete pairs, **CORR = +0.84**, mean item 1 = 4.4, mean item 3 = 4.5, and 5135/5743 = 89.4%
+of respondents at item 3 resp≥4. The substance holds — both items ascend toward the favourable pole,
+so the reversed-direction finding stands — but +0.869 did not reproduce, and the `public_note` was
+edited to +0.84. Worth noting the general shape: a claim that is about to be filed publicly and is
+*not* in the re-runnable evidence script is exactly the one Step 5b exists to catch.
+
+**Step 5c — the one WARN, explained in notes.csv, is not an itemtext defect.** All four parts are
+properties of the response data or of the FOIA release. The row-count anomaly (items 13, 30–37, 51
+against a median of 6633) is screener gating: every one of those items is a "What was the quality of
+service?" follow-up, answered only by respondents who needed and received that service. The three
+remaining parts — 0.6% blank `item_text`, 0.6% blank `option_text`, and "1 of 59 items has NO
+option_text rows" — are all the *same single row*, item 7 / resp 1, the form's "Q8 into" transition
+column whose only stored value is 1 and whose wording the release does not publish. (My first draft
+of this note attributed the blanks to items 43/49/55 as well; checked against the file, those three
+do carry the Other Supportive Services block stem and are not part of these WARNs.)
+
+**Disclosure caveats carried (all in provenance `public_note`, all owed on upload):**
+`verbagg` ships English for a Dutch administration — no Dutch wording is published in the lme4
+deposit or De Boeck & Wilson's archived materials — with the do-mode sentences written as the
+parallel of the only published (want-mode) form, and `option_text` at resp=1 reading "perhaps or
+yes" to describe lme4's `r2` dichotomisation rather than a printed option. `VSOCFP_Sebo_2024` ships
+third-party published English in its `_translated` columns (items from PMC11960917, anchors from
+PMC9364613) with IRW-translated instructions.
+
+**Notable, not blocking:** `VSOCFP_Sebo_2024` is the refined 8-item SOC-8, not the SOC-13 — the
+processing script keeps only non-reverse-stored SOC columns then drops SOC5, so items 1,2,3,5,7 are
+absent; `instrument` names the SOC-8 (Step 3b). Two level-1 sources disagree by one character on the
+SOC11 anchor ("de juste" in the OSF .dta value label vs "de justes proportions" in the published
+questionnaire); the questionnaire wording ships and `verify_batch` reports the difference rather than
+failing on it.
+
+**Cap not reached** (cap is `batch_230`; 19 rounds remain). Queue after this round: 220 pending,
+875 done, 234 blocked, 59 excluded, 13 failed.
+
+**Carried forward (still not this round's to fix):** `data/vanteffelen_2020_hostility.py` line 29
+still hardcodes Ben's email into its User-Agent. First logged by batch_209, re-confirmed by batch_210,
+unfixed as of this round.
