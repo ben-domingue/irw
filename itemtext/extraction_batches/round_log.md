@@ -19668,3 +19668,86 @@ Also noted: *angeregt*=inspired / *begeistert*=enthusiastic (two bilingual sourc
 reverse of what positional reasoning from Watson's ordering would suggest — a near-miss avoided.
 
 Cap (batch_230) not yet reached; next round proceeds.
+
+## batch_229 — 2026-09-16T02:11–02:43 -07:00
+
+3 tables claimed from the `wu2021_*` block, all from one source: Wu & Qi (2021) *Front. Psychol.*
+12:708342 + its CC BY 4.0 figshare deposit 16683931 (588×136, bare codes `B1`..`G20`).
+**Written 1 / blocked 2 / failed 0 — yield 33%.** Circuit breaker not tripped (0 failed).
+All six gates clean: normalize (0 changed), audit **PASS ×1, no anomalies**, verify_batch **PASS**,
+lint **no problems**, `irw-validate` **ok**, `check_provenance` raised nothing against this batch.
+No audit WARNs, so nothing owed under Step 5c.
+
+- `wu2021_burnout` → **done**. 16 items × 5 levels = 80 rows. mapping_basis `paper_order`,
+  text_source `study_materials` (administered Chinese, verbatim from the Frontiers supplementary
+  questionnaire reached via the Europe PMC `PMC8503271/supplementaryFiles` zip),
+  translation_source `official_instrument_english`. Verification **PARTIAL**.
+- `wu2021_panas` → **blocked**, determinate (retry test NO). New LBUS register row.
+- `wu2021_resilience` → **blocked**, determinate (retry test NO). New CD-RISC register row.
+
+### The headline finding: four of the six `wu2021_*` tables are misnamed
+Two agents reached this independently, and the orchestrator confirmed it arithmetically at Step 5b.
+The deposit carries its own Chinese aggregate columns, and each is *exactly* the mean of one whole
+block — which names that block outright:
+
+| block | shipped as | actually is | proof |
+|---|---|---|---|
+| B1–B21 | `wu2021_empathy` | Occupation Expectation | 职业期望 = mean(all 21 B), maxdiff 5.3e-15, n=506 |
+| C1–C25 | `wu2021_resilience` | CD-RISC-25 ✔ **correct** | 心理弹性 = mean(all 25 C), maxdiff 0, n=496 |
+| D1–D16 | `wu2021_burnout` | Basic Empathy Scale | 移情 = mean(all 16 D), maxdiff 0, n=530 |
+| E1–E5 | `wu2021_swls` | SWLS ✔ **correct** | 生活满意度 = mean(all 5 E), maxdiff 0, n=564 |
+| F1–F14 | `wu2021_career_expectation` | the actual affect scale (PA 6 + NA 8, scored 1–7) | 积极情感 = mean(F1,3,4,7,8,9); 消极情感 = mean(F2,5,6,10,11,12,13,14), n=546 |
+| G1–G20 | `wu2021_panas` | Learning Burnout Scale | 学习倦怠 = mean(all 20 G), maxdiff 0, n=536; its 8/6/6 factor columns are exact unique subsets matching the LBUS published key |
+
+`data/wu2021_empathy.py` guessed the letter→scale map from the aggregate names and shifted four of
+six. **A dictionary/table-name fix is owed for `wu2021_empathy`, `wu2021_burnout`,
+`wu2021_career_expectation` and `wu2021_panas`**, plus their Description fields. `wu2021_burnout`
+therefore ships with `instrument` set to the Basic Empathy Scale per Step 3b, not to burnout, and
+its public_note says so — the shipped item text is correct for the data; it is the table *name*
+that lies.
+
+### Step 5b correction — an agent's claim was checked and found understated
+The `wu2021_panas` agent reported that the B and G block means correlate r = −0.987 and called it
+"arithmetically consistent, but unusual". The correlation reproduces exactly (**r = −0.9875,
+n = 462**) but the characterisation is **wrong, and the finding is stronger than reported**:
+α(B)=0.936 and α(G)=0.842, so the **disattenuated correlation is −1.112** — outside the range a
+true correlation can occupy. The two composites are more perfectly related than either is to
+itself. This is impossible for two genuinely separate measurements.
+
+The defect is **isolated to the B–G pair**: all 14 other block pairs are ordinary (disattenuated
+−0.51 to +0.56). A second, independent anomaly points the same way — **the file is row-sorted on
+exactly these two blocks and no others**: G's block mean is non-decreasing across 99.8% of adjacent
+rows and B's non-increasing across 99.8%, while C, D, E and F all sit at ~50–56% (random order).
+No exact per-item complement exists, and the best fit `sum_B = 158.894 − 1.5079·sum_G` leaves a
+residual sd of 2.237 — a very tight near-linear relation, not an exact algebraic identity.
+**Mechanism unknown; deliberately not asserted.**
+
+This is a **response-data** defect in `wu2021_empathy` (B) and `wu2021_panas` (G), not an item-text
+problem, and it deserves its own GitHub issue. **It does not touch what this batch shipped**:
+`wu2021_burnout` is block D, whose correlations with every other block are unremarkable
+(disattenuated −0.26 to +0.27) and which is not part of the sort.
+
+### Two new register rows (written by the orchestrator, per the 2026-09-11 ruling)
+- **CD-RISC** (`block`) — proprietary, fee-licensed; ToS (iii) bars publishing/distributing/
+  deriving "any part thereof". Read via the Internet Archive because the live host 403s (the
+  WHOQOL text-proxy route); corroborated by NIH PhenX 870601. Evidence is **primary and strong**.
+- **LBUS** (`block`) — developer-consent-by-e-mail required, which reserves a right under irw#1945.
+  **EVIDENCE IS THIN — a human should confirm before this row is relied on widely** (FoMOs
+  posture): one university counselling-centre page, no originator distribution page exists, and the
+  2005 *Acta Psychologica Sinica* article is a scan printing no items. A second reproduction carries
+  the wording but no permissions clause, so it neither corroborates nor contradicts.
+
+Both blocks are **effective** (contrast irw#2101/#2123): `C1..C25` and `G1..G20` are opaque codes,
+so withholding the text actually withholds the instrument. Response data is unaffected either way.
+
+### Banked for a future LBUS retry (in `notes.csv`, should the block ever lift)
+The full 20-item Chinese form, instructions, anchors and reverse-key list were recovered, and the
+live data settle the one point on which the two reproductions disagree (the order of items 1 and 2).
+Also established: the eight reverse-keyed items (1,3,6,8,11,13,15,18) are stored **already
+reversed** — all three subscales correlate negatively with the same respondents' resilience
+(−0.245/−0.314/−0.528) and subscale–total r of 0.851/0.794/0.603 track the published
+0.914/0.799/0.704. The same is true of `wu2021_burnout`'s eight negative items, which is why its
+option_text ships flipped for D1, D3, D4, D5, D10, D14, D15, D16 (α as stored 0.827 = exactly the
+published value; flipping them back gives 0.593).
+
+Cap (batch_230) not yet reached; next round proceeds.
