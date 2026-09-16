@@ -19891,3 +19891,27 @@ confirmation of the upload.
 **Owed on the user's confirmation that the upload happened**: stamp `uploaded=<date>` in each batch's
 `provenance.csv` and in `mapping_verification.csv`, delete the uploaded `__items.csv` from the batch
 folders (sidecars stay), and open the issues-page PR. Never stamp ahead of confirmation.
+
+### Upload of batch_206–230 (2026-09-16)
+
+**52 of the 54 staged tables uploaded.** Stamped `uploaded=2026-09-16` in each batch's
+`provenance.csv` and in `mapping_verification.csv` — 52 rows in each, verified field by field
+against the committed version: the only column that changed anywhere is `uploaded`, no header or
+row count moved, and the stamped set matches the uploaded set exactly. The 52 `__items.csv` were
+deleted from their batch folders; sidecars stay. `clean/` is the user's to clear.
+
+**Two were skipped by the uploader**, and they are NOT stamped:
+`weatherspoon_2015_family_physicians_effectiveness` (49 chars) and
+`weatherspoon_2015_pediatricians_effectiveness` (45 chars) — `name_length`, against
+`datastandard.md`'s 40-character cap. batch_219's own notes predicted this. It cannot be fixed in
+the extraction: **the item-text table name must equal the response table's name for the join**, and
+the response tables are already published at those lengths. Their `__items.csv` are kept in
+batch_219.
+
+That cap is not a rule the corpus obeys: **130 of 4,273 live tables exceed 40 characters**, the
+longest at 65, and one of those 65-character tables ALREADY HAS live item text (42 items, verified
+through `get_itemtext` at `irw_version` 380). So the check blocks names the warehouse already
+carries. Filed as its own issue.
+
+Still held for the rename (irw#2198), unstamped, copies kept: `wang_2026_teaching_presence`,
+`weida_2020_financial_security`, `wu2021_burnout`.
