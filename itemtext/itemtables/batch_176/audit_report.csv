@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"sinche_2017_skill_development","PASS",15,15,TRUE,TRUE,FALSE,TRUE,0,0,""
+"sinche_2017_skill_importance","PASS",15,15,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"singleton_2021_carbon_reduction","PASS",15,15,TRUE,TRUE,FALSE,TRUE,0,0,""
+"sleboda_2021_risk_benefit","PASS",80,80,TRUE,TRUE,FALSE,TRUE,0,81.8,"81.8% of rows have blank option_text"
+"smpi_lorenzoluaces_2020_gad7","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""

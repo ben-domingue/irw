@@ -1,0 +1,7 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"thanh_2025_attitude","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"thanh_2025_environ_concern","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"thanh_2025_green_behavior","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"thanh_2025_green_knowledge","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"thanh_2025_perceived_control","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,60,"60% of rows have blank option_text"
+"theobald_2017_group_dynamics","PASS",2,2,TRUE,TRUE,FALSE,TRUE,0,0,""

@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"roettl_2018_brand_attitude","PASS",24,24,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"roettl_2018_brand_recognition","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,0,""
+"roettl_2018_game_attitude","PASS",6,6,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"roettl_2018_scepticism","PASS",9,9,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"

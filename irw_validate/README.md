@@ -12,7 +12,7 @@ Exit codes: `0` ok · `1` something blocks · `2` bad input. Same contract as `r
 ## Installing
 
 ```
-pip install irw-validate                    # once published
+pip install irw-validate                    # from PyPI
 pip install -e /path/to/irw/src/irw_validate   # from a checkout
 ```
 

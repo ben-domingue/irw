@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_165 already exists (round cap reached)
+- itemtables/batch_230 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -51,18 +51,23 @@ the next round, and the wrapper will decline to start one for the same reason.
 
 ## Step 1 — Claim this round's tables
 
-- Next batch number = **highest existing `itemtables/batch_0NN` or `batch_1NN` + 1**, zero-padded to
-  three digits. **Ignore the `batch_2NN` series entirely**: `batch_201` and `batch_202` belong to the
-  separate irw#1945 rights line, not to this queue, and they arrived on this branch by a merge from
-  `main` on 2026-09-08.
+- Next batch number = **highest existing `itemtables/batch_NNN` + 1**, zero-padded to three digits,
+  with ONE hole: **the numbers 200–205 are not ours and must be skipped.** `batch_201` and
+  `batch_202` already exist and 201–205 are all claimed by the separate irw#1945 rights line; they
+  arrived on this branch by a merge from `main` on 2026-09-08. So if "highest + 1" lands anywhere in
+  200–205, use **`batch_206`** instead. After 199 the series is 206, 207, 208, … (amended 2026-09-15,
+  when 199 was reached; before that the rule was "ignore the `batch_2NN` series entirely", which had
+  no successor to 199 at all).
 
-  **This is a correctness rule, not tidiness.** A naive "highest + 1" reads 202 and returns 203, and
-  the cap in Step 0 is expressed as "`batch_140` already exists" — so a run numbering itself 203, 204,
-  205 would create a directory the cap never checks for, and **the cap would silently never fire**.
-  The round would keep going unattended past the point a human meant it to stop. batch_100 caught this
-  and took 100 by hand; the rule is written down so the next round does not have to.
+  **This is a correctness rule, not tidiness.** The cap in Step 0 is expressed as a directory that
+  must not already exist, so a round that numbers itself into a range the cap does not name creates a
+  directory the cap never checks for, and **the cap would silently never fire** — the round would keep
+  going unattended past the point a human meant it to stop. That is why 200–205 is a hole and not a
+  free-for-all: the cap is now a `batch_2NN` number, and it only works because every round after 199
+  numbers itself consecutively from 206 upward. batch_100 caught the original form of this bug; the
+  rule is written down so the next round does not have to.
   mkdir -p itemtables/batch_<NNN>
-- Take the first 4 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
+- Take the first 3 rows with status=="pending" from queue_state.csv (fewer is fine if the queue
   is nearly empty — don't stall). ONLY status=="pending" rows are eligible: rows marked
   "excluded" are off-limits permanently (currently the 52 enem* tables, whose item text Ben is
   handling separately). Never re-mark an excluded row as pending.
@@ -78,7 +83,15 @@ the next round, and the wrapper will decline to start one for the same reason.
 **Dispatch ONE AGENT PER TABLE** (subagent_type "general-purpose"), all in the same message so
 they run in parallel.
 
-**FOUR agents per round — 2026-09-09, Ben's call ("let's go up to more agents"), taken while
+**THREE agents per round — 2026-09-11, Ben's call ("reduce the number of agents"), cut from six
+for the batch_190–199 chain. No kill prompted it: six ran 16 clean rounds (batch_174–189). This is a
+preference, not a failure signal, so do not read it as evidence about the kill rules below.**
+
+**Previously SIX agents per round — 2026-09-10 evening, Ben's call ("let's increase the number of agents"),
+raised from four after 40+ consecutive clean rounds at four with 19G available and no swap
+movement at launch. If a round at six is killed, apply the kill rules below as written.**
+
+**Previously FOUR agents per round — 2026-09-09, Ben's call ("let's go up to more agents"), taken while
 firing rounds back to back deliberately until something breaks. IT DID NOT BREAK: 16 consecutive
 rounds (batch_104–119, 15:23–21:0x, ~2 min between rounds) ran with zero kills, zero failed
 extractions and 58 of 62 tables shipped, available memory never below 17G. So do NOT walk this
@@ -218,6 +231,9 @@ Each subagent prompt must tell it to:
 - cd to /home/ben/irw-queue-runner/itemtext/ and read
   .claude/skills/irw-auto-itemtext/SKILL.md in full (plus references/itemtext_standard.md) before
   doing anything, and follow it precisely.
+- Never send Ben's (or anyone's) email address to an outside service — not as an API `email`/`mailto`
+  parameter, User-Agent, or header. APIs that ask for a contact email (Unpaywall, Crossref polite
+  pool, OpenAlex) are called without one, or skipped. batch_177's SHAPS agent passed it to Unpaywall.
 - Process its ONE assigned table via SKILL.md Steps 2-6:
   table_context.R for ground truth (respect a STOP) -> find the source paper (Step 3, including
   Step 3b's instrument-mismatch check) -> extract/structure (Step 4, literal transcript, match the

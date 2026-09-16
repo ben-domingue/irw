@@ -16130,3 +16130,3813 @@ keep describing wording that no longer ships. The withdrawal itself gets no entr
 (SDQ-20), a different instrument. A name sweep would have taken it.
 
 Script: `tools/withdraw_sdq.py`. Takes effect at the next release.
+
+## batch_158 — 2026-09-10
+
+4 tables claimed, 4 agents (one per table), all four returned. **Written 3 / blocked 1 / failed 0.**
+Yield 3/4 = 75%. Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `rinaldi_2021_mas` | done (61 items × 1–7, 427 rows) | `paper_order` | PARTIAL — routes 1+6+5 |
+| `rodriguezandres_2016_mnemocity_usability` | done (9 items × 1–5, 45 rows) | `paper_explicit` | VERIFIED — route 1 |
+| `rodriguezquiroga_2024_epistemic_trust` | done (15 items × 1–7, 105 rows) | `paper_explicit` | VERIFIED — route 1 |
+| `roar_gijbels2024` | **blocked** (rights) | `unknown` | NO_ROUTE |
+
+Gates: `normalize_nulls` fixed 2 of 3 files. `audit_batch` PASS 2 / WARN 1. `verify_batch` PASS=3.
+`lint_verification` 4 rows, no problems. `irw-validate` ok on all 3. `check_provenance` exit 1 —
+**pre-existing, not this batch**: the five tables owing an issues-page line
+(`PMT_Trzcinska_2023_PMT`, `poza2026_hlseu`, `QCDQES_Oliveira_2022`, `qi_2025_panas`,
+`aspirations_sonmez_2022`) are all from earlier rounds; none of batch_158's four tables appears in
+any failure list (they are HELD, so no wording ships yet).
+
+**The one block.** `roar_gijbels2024` is blocked on WORDING RIGHTS, not access — retry test NO.
+The ROAR-PA stimuli exist only in `yeatmanlab/roar-pa-manuscript`, under Stanford's own
+"ACADEMIC SOFTWARE LICENSE FOR ROAR" (Docket S21-342): clause 2 covers "accompanying information,
+materials or manuals", clause 5 limits use to "internal academic, non-commercial purposes" and bars
+transfer without "prior written permission", clause 8 bars distribution without "express written
+permission". The CC BY *Scientific Reports* article publishes no item list. A `block` row went into
+`instrument_rights_register.csv` (family `ROAR-STANFORD`, rows 58→59); no `ship` row was written.
+Note `verify_batch` was not run on this table (no CSV); its `verify_*.R` verifies the BLOCK, not a
+mapping, and says so.
+
+**Step 5b orchestrator re-checks — all three claims confirmed.**
+1. Re-fetched `LICENSE.txt` independently: 3539 bytes, sha256 `18c777856ff1…` matching the agent's
+   quoted hash, and all five reserved-right fragments present. Block is determinate.
+2. `rinaldi_2021_mas` / `Mas_57`: confirmed. First check looked for an empty string and found none —
+   the field is the `NA` null sentinel across all 7 of its rows. 1/61 = 1.64%, exactly the audit
+   WARN. The agent was right and the check was miscalibrated.
+3. `rodriguezquiroga_2024_epistemic_trust`: **dictionary metadata defect confirmed.** The Description
+   says "Epistemic Trust, Mistrust, and Credulity **Inventory (ETMCI)**"; grep finds `ETMCI` and no
+   `ETMCQ`. The instrument and source paper both call it the **Questionnaire (ETMCQ)**. Worth a
+   one-word metadata correction — not made here, since metadata is outside a round's scope.
+
+**Audit WARN explained (Step 5c), appended to `notes.csv`.** `rinaldi_2021_mas`: the 1.6% blank
+`item_text` is a SOURCE/DEPOSIT defect (the `.sav` carries an undocumented 61st `Mas_*` column the
+paper never tabulates) — not an itemtext defect and not a response-data defect, since Mas_57's
+responses are ordinary (top correlate r=0.71). The 71.4% blank `option_text` is a property of what
+the source published: only the two endpoints of the 1–7 scale are labelled, so resp 2–6 are left
+blank rather than padded, per the standard. 5 of 7 levels = 71.4%.
+
+**Other things worth a human's eye.**
+- `rodriguezandres_2016`: wording exists ONLY as table images (PLOS Tables 2/3) — transcription is
+  OCR-by-reading and deserves a spot-check. Source also contradicts itself: Table 2 gives SA1 an
+  agreement scale, Table 3 gives the same question "Very boring…Very fun". Shipped as printed.
+- `roar_gijbels2024`, separate from item text and left untouched: the same Stanford licence governs
+  the RESPONSE DATA IRW already publishes. `biblio.csv` records `License=Custom` pointing at this
+  same file, but clauses 5/8 bar redistribution of the whole deposit, not just the task materials.
+  Ben's call.
+- Both `roar_gijbels2024` (blocked) and `rinaldi_2021_mas` (note_only) got
+  `itemtables/pending_index_notes.csv` rows.
+
+Four agents again ran clean — no kills, no failed extractions, nothing to walk back.
+Cap is `batch_165`; 158 is not the cap, so the queue continues. 432 pending remain.
+
+---
+
+## batch_159 — 2026-09-10
+
+**4 tables claimed, 4 written / 0 blocked / 0 failed. Yield 4/4 = 100%.** Four agents, all clean:
+no kills, no retries, no salvage. Numbered 159 by the "highest `batch_0NN`/`batch_1NN` + 1" rule —
+the `batch_2NN` series (irw#1945 rights line) was ignored, as the protocol requires.
+
+| table | rows | items | mapping_basis | verification |
+|---|---|---|---|---|
+| `roelen_2020_dietary_diversity` | 34 | 17 | data_labels | NOT_NEEDED |
+| `roelen_2020_k6` | 30 | 6 | data_labels | VERIFIED (route 9) |
+| `roelen_2020_rses` | 40 | 10 | data_labels | VERIFIED (routes 9 + 7) |
+| `roettl_2018_arousal` | 21 | 3 | data_labels | NOT_NEEDED |
+
+**Gates.** `normalize_nulls` 0 of 4 changed; `audit_batch` 4/4 PASS with no anomalies (so Step 5c
+has nothing to explain — no WARNs this round); `verify_batch` 2 PASS + 2 MISSING(exempt);
+`lint_verification` 4 rows, **0 ERROR**, 0 WARN, 2 INFO (both INFO are the 2026-09-08 item-axis
+rule accepting a hedged-but-full VERIFIED); `irw-validate` clean on all four.
+`check_provenance.R` exits 1, but **on pre-existing repo state only** — the 5 undisclosed
+IRW-generated tables and the 21 `mixed` review rows are all from earlier rounds. None of this
+round's four appears in any of its lists; all four are `translation_source=study_supplied`.
+
+**Three tables from ONE deposit.** All three `roelen_2020_*` tables are separate blocks of the same
+Fonkoze CLM Haiti baseline `.dta` (PLOS ONE 10.1371/journal.pone.0243457, CC BY 4.0), worked by
+three agents in parallel with explicit sibling boundaries. No file collisions; the three agents'
+independent readings of the shared file agreed.
+
+**Step 5b — orchestrator re-checks. All three claims reproduced; none had to be corrected.**
+- k6 resp direction: re-ran `verify_roelen_2020_k6.R` independently — 30/30 cells match, 0 duplicate
+  count vectors (every item separable), 24/30 cells mismatch under the flipped coding. The agent's
+  numbers are exact.
+- Stata 80-char truncation: confirmed by measuring the shipped strings. `q_306` and `q_311` are
+  **exactly 80 characters** and end mid-word (`...Irish potatoes, brea`, `...coconut, lemon,`);
+  the next-longest are 79, so the cap is real and only those two hit it. The k6 tails restored from
+  Table 3 are 98 and 83 chars, i.e. genuinely beyond what the `.dta` could hold.
+- `roettl_2018_arousal` unlabeled scale points: resp 2–6 carry unquoted `NA`, which is this repo's
+  established null convention (matches batches 155–158), **not** a scale point padded with its own
+  number. Endpoints only, as the source printed them.
+
+**Two RIGHTS escalations for Ben — both ship-shaped, both deliberately left undecided.** Per the
+rule that a round may write a `block` row but never a `ship` row, `instrument_rights_register.csv`
+was NOT touched for either; quotes are banked in `notes.csv`.
+- **K6 (`roelen_2020_k6`).** Harvard HCP: *"Use of the K6 and K10 is free and does not require any
+  formal permission or approval"* — citation requested, no fee/NC/ND/redistribution clause. Live
+  page is Incapsula-walled; read via Wayback capture of `hcp.med.harvard.edu/ncs/k6_scales.php`,
+  sha256 `beb88d73e0e59bce142043a5c870806695bf8fe7d3181e9cb755d9899f68b8fb`.
+- **Dietary diversity (FAO).** FAO's *Guidelines for measuring household and individual dietary
+  diversity* reserves all rights. The agent's reasoning that it does not reach these words: the
+  shipped labels are the Fonkoze team's own localized wording from a CC BY 4.0 deposit, differ from
+  FAO's Annex 2 for every group, and the list is 17 groups incl. Breastmilk vs FAO's 16. One line
+  (`q_312`, organ meat) coincides verbatim. Ben's call.
+
+**Other things worth a human's eye.**
+- `roelen_2020_*`: all three instruments were administered **orally in Haitian Creole** (67% of the
+  1,381 women could not read or write), and no Creole wording exists anywhere in the deposit or
+  supplements. All three ship English base fields with `language=Haitian Creole` and
+  `text_source=translated_substitute` / `translation_source=study_supplied`, per the 2026-09-01
+  fallback. Retry test NO on the Creole gap — determinate; only the authors' field questionnaire
+  would change it.
+- **Two resp-direction traps in one deposit, both disclosed in `public_note`.** RSES: the `.dta`
+  stores 1=Strongly agree…4=Strongly disagree, the *opposite* of the live table, which the
+  processing script flips via label strings — reading the raw numeric codes would ship the anchors
+  backwards. K6: IRW runs 0=None…4=All (higher = more distress), the reverse of the direction the
+  paper's own total uses (its mean of 19.0 sums 1=all 30 days…5=none).
+- `roelen_2020_rses` stores **raw** responses: the five reverse-keyed items (q_408, q_411, q_412,
+  q_414, q_415) are NOT reversed. Consistent with the paper's own α = 0.52 and its finding of no
+  coherent factor structure; analysts must reverse them.
+- `roelen_2020_k6` `q_406`'s `.dta` label is missing its verb (*"did you worthless?"*); Table 3's
+  *"did you feel worthless?"* ships, disclosed.
+- `roettl_2018_arousal`: the S2 Appendix is a gold-standard source — administered German and the
+  authors' own English side by side, so `_translated` carries study-supplied English and **no
+  machine translation and no issues-page line are owed**. Semantic differential, 7-point −3…+3,
+  poles only. Minor caveat logged: the `.sav` glosses `F2_3`'s right pole "calm", the appendix
+  "soothed"; the appendix (the administered questionnaire) ships. Judged below the issues-page bar.
+- Sibling intelligence for later rounds: all five `roettl_2018_*` tables come from one `.sav`/
+  appendix pair. `F1` (game attitude) and `F13/F16/F19/F22` (brand attitude) are the same
+  semantic-differential shape; brand-attitude items additionally carry full SPSS variable labels.
+
+No table was left `in_progress`; no `pending_index_notes.csv` rows were owed (nothing blocked).
+No full-table exports were made — `table_sets.R` / server-side aggregates throughout.
+Cap is `batch_165`; 159 is not the cap, so the queue continues. 428 pending remain.
+
+## batch_160 — 2026-09-10 13:13–13:30
+
+4 tables claimed, 4 agents (one per table), all four from a single source: Roettl & Terlutter
+(2018), PLOS ONE 10.1371/journal.pone.0200724 (S2 Appendix + S1 Data .sav).
+
+**written 4 / blocked 0 / failed 0 — yield 4/4 (100%).**
+
+| table | rows | mapping_basis | verification |
+|---|---|---|---|
+| roettl_2018_brand_attitude | 168 (24 items × 7) | data_labels | NOT_NEEDED |
+| roettl_2018_brand_recognition | 16 (8 items × 2) | data_labels | NOT_NEEDED |
+| roettl_2018_game_attitude | 42 (6 items × 7) | data_labels | NOT_NEEDED |
+| roettl_2018_scepticism | 63 (9 items × 7) | data_labels | NOT_NEEDED |
+
+All four are `data_labels`: `data/roettl_2018_game.py` melts the `.sav` columns BY NAME, so the IRW
+item code IS the source column name and no positional step exists to verify. Hence four NOT_NEEDED
+rows and no `verify_*.R` (verify_batch reports MISSING(exempt)×4, which is correct here).
+
+Gates: normalize_nulls fixed 1 file (brand_recognition, 17 lines); audit_batch 4/4 PASS with no
+anomalies (so nothing for Step 5c to explain); verify_batch MISSING(exempt)=4; lint_verification
+4 rows, no problems; `irw-validate` ok on all four; check_provenance clean for this batch (the 5
+IRW-generated tables and 21 `mixed` rows it lists are pre-existing backlog, none from batch_160 —
+all four here ship the authors' OWN English via `translation_source=study_supplied`).
+
+Administered language is **German** throughout, with the study's own English in the `_translated`
+columns. Two agents independently noted the S2 Appendix numbers the scepticism block **F29_1..F29_9**
+while the `.sav` is **F31_1..F31_9**; the scepticism agent tied them by exact string identity 9/9
+against the `.sav` variable labels rather than by position, which is the right call.
+
+**Step 5b orchestrator re-checks — both agent claims about the response data CONFIRMED:**
+- `roettl_2018_scepticism`: per-item means run 2.15–3.50, n=234 on all 9, and all nine stems are
+  SKEP's *pro-advertising* trust statements keyed 1–7. So a high `resp` means LOW scepticism — the
+  table ships raw and unreversed. This is a property of the response data, not an itemtext defect,
+  and is now recorded in notes.csv.
+- `roettl_2018_brand_recognition`: `resp` is coded correctness (binary 0/1, n=234, means 0.30–0.70
+  against a 0.25 chance rate for four alternatives), not the alternative chosen. The agent's
+  per-category correct counts reproduce as ceiling percentages (71→30.3, 72→30.8, 110→47.0,
+  115→49.1, 118→50.4, 129→55.1, 147→62.8, 165→70.5), so the public_note is accurate.
+
+Four agents again ran with zero kills — 17 consecutive clean rounds at this setting.
+Circuit breaker not tripped (0 failed). Cap is batch_165; not reached, 424 pending.
+
+## batch_161 — 2026-09-10 13:32–13:53
+
+4 tables claimed, 4 agents (one per table), all four completed. **Written 4 / blocked 0 /
+failed 0 — yield 100%.** No circuit-breaker condition (0 failed of 4).
+
+| table | mapping_basis | verification | audit |
+|---|---|---|---|
+| rosetti_2023_cas | reconstructed | PARTIAL (route 3 + 1/8) | PASS |
+| rosetti_2023_gad7 | paper_order | PARTIAL (route 1 + option-axis) | PASS |
+| rosetti2023_gad7 | paper_order | PARTIAL (routes 5 + 8 + 3-analogue) | PASS |
+| rosharudin_2023_dass21 | reconstructed | PARTIAL (route 3 + permutation) | PASS |
+
+Gates: `normalize_nulls.R` fixed 2 of 4; `audit_batch.R` 4/4 PASS (one note, see below);
+`verify_batch.R` PASS=4, every verify_*.R ends VERDICT: PASS; `lint_verification.R` 4 rows,
+no problems; `irw-validate` ok on all four. `check_provenance.R` exits 1, but on 5
+PRE-EXISTING tables owing an issues-page line (hua_2023_efl_study_engagement,
+lys_2020_rape_3_kpnts, PMT_Trzcinska_2023_PMT, poza2026_hlseu, QCDQES_Oliveira_2022,
+qi_2025_panas, aspirations_sonmez_2022) — **none from this batch**. All four batch_161
+rows ship a publisher's official English form, not IRW-generated wording, so none owes an
+entry.
+
+All four PARTIAL, none VERIFIED — an honest outcome, not a shortfall: three of the four
+sources publish no code-to-wording tie at all, so every mapping rests on statistical
+routes that pin subscale membership and direction but cannot separate every item from
+every other. Each evidence string says what it does NOT establish.
+
+Notable, both re-checked independently by the orchestrator at Step 5b and both CONFIRMED
+with the numbers re-derived:
+
+1. **`rosharudin_2023_dass21` response-data defect (Step 5c explanation of the audit
+   note).** The audit's only note is 100% blank `option_text`; it is deliberate and is a
+   property of the RESPONSE DATA, not an itemtext defect. The live table carries five resp
+   levels {0,1,2,3,4} where the paper and the Musa Bahasa Malaysia form both document a
+   four-point 0–3 ladder. Re-check: n_rows 14469 = 689 × 21 exactly; level-4 counts run
+   min 15 / max 62 per item, 0 of 21 items unused, 658 of 14469 observations (4.55%) —
+   the agent's "15–62 on every item, ~5%" is exact. Counting level 4 as 4 reproduces the
+   paper's Table 2 subscale SDs to ≤0.02, so it is a real analysed level, not a missing
+   code. The administration offered a fifth option nobody documented, so no anchor set and
+   no instruction paragraph could be shipped truthfully. Nothing was padded.
+
+2. **Duplication candidate: `rosetti_2023_gad7` vs `rosetti2023_gad7`.** Raised
+   independently by both gad7 agents. Re-check: identical item sets (GAD7_q1..q7),
+   identical resp sets ({0,1,2,3}), identical row counts (3276 = 468 × 7), and the two
+   processing scripts melt the same seven columns of the same figshare deposit, differing
+   only in the id scheme (source "R1" ids kept vs renumbered 1..468). Corroborated at
+   shape-and-provenance level; NO row-level response comparison was run, so this is a
+   candidate for corpus-trust triage, not an established byte-identical duplicate. Both
+   tables' item text was extracted and gated on its own merits regardless.
+
+Language: all four are non-English administrations (three Spanish, one Malay) whose
+administered wording is unrecoverable in scope — the Ecopsychology paper behind the three
+rosetti tables is closed access by four independent checks and its figshare deposit is a
+single label-free CSV. The 2026-09-01 fallback was applied throughout:
+`text_source=translated_substitute` (dass21: `canonical_instrument`) with
+`translation_source=official_instrument_english`. For dass21 the administered Malay IS
+shipped as `item_text` with official English in `_translated`. Note the three rosetti
+tables' `language=Spanish` is INFERRED from the sample, not read off any source — the
+agents recorded that honestly rather than sourcing it.
+
+**Two rights residuals for Ben — flagged, not decided, no register rows written:**
+- **CAS (`rosetti_2023_cas`).** No clause reserving any right is locatable; the rights
+  holders' own handout (sha256 5b9550c0…dd4c915) asks only for a citation — no fee, NC, ND
+  or redistribution term. Ship-shaped, so per the 2026-09-10 rule the agent escalated
+  rather than writing the row. Quotes and hash are in notes.csv.
+- **DASS (`rosharudin_2023_dass21`).** The settled DASS treatment was applied (FAQ:
+  "public domain… copied without restriction"), but the DASS **Download** page adds "the
+  scales may not be modified or sold for profit" — a no-modification sentence prior DASS
+  rounds did not quote, sitting beside an explicit copy-without-restriction grant. Blast
+  radius is corpus-wide (several live DASS tables), so it belongs to a human.
+
+Cap is batch_165; 161 is not the cap. Ending normally.
+
+## batch_162 — 2026-09-10 13:55–14:1x
+
+4 tables, 4 agents (one per table), all four returned. **Written 2 / blocked 2 / failed 0**, yield 50%.
+Circuit breaker NOT tripped: 0 failed. Both no-CSV tables are determinate rights verdicts with
+retry test = NO, which per the 2026-09-03 rule do not count toward the breaker.
+
+| table | outcome | why |
+|---|---|---|
+| `rosharudin_2023_ders18` | **done** | Malay DERS-18, 18 items × 5 levels = 90 rows; audit PASS |
+| `rr98_accuracy` | **done** | rtdists rr98, 33 stimulus levels × 2 = 66 rows; audit WARN (explained) |
+| `ruiz_parra_2023_iri_pt` | **blocked** | IRI register block applied (irw#1955); retry test NO |
+| `ruiz_parra_2023_maas` | **blocked** | CSDT full-scope block applied (2026-09-09); retry test NO |
+
+**Gates.** normalize_nulls fixed 91 lines in the DERS file; audit_batch PASS=1 WARN=1;
+verify_batch PASS=2 (both VERDICT: PASS); lint_verification 0 ERROR / 1 WARN;
+`irw-validate` ok on both CSVs (2 checks each, nothing to report); `check_provenance.R` clean for
+this batch (its 5 outstanding issues-page tables and 21 `mixed` rows are all pre-existing, none
+from batch_162). No NOT_NEEDED rows were owed — both written tables carry a real verification row.
+
+**Four agents held.** Second round at four since Ben's 2026-09-09 call. No kills, no retries, no
+salvage; the four `claude` processes and their R/Python children coexisted with an interactive
+session throughout. Nothing here argues for walking the count back down.
+
+**Step 5b re-check — CONFIRMED the agent, and the confirmation mattered.** `rosharudin_2023_ders18`
+ships a public_note saying the three Awareness items are stored RAW, opposite in direction to the
+other 15. Re-derived independently rather than taken on report: corrected item-total r in the live
+IRW values is @1_A +0.33, @4_A_A +0.33, @6_A +0.49 against +0.60 to +0.72 for all 15 other items,
+with no negative item anywhere (689 ids, 12,402 rows). The paper says outright that "all awareness
+items scores were reversed" before analysis and its Table 3 then reports Awareness item-total r of
+−0.23 to −0.42 against 0.53 to 0.70 for the rest. Mirror images at matching magnitudes — which
+confirms the direction claim by a route independent of the floor/ceiling swap the agent used.
+Checked specifically because it would have been a shipped defect: since the values are raw, the
+shipped `option_text` (1=Almost Never … 5=Almost Always) labels the stored `resp` correctly on all
+18 items. Also worth recording for downstream users — the paper's own finding is that the Malay
+Awareness subscale misbehaves, aggregate α rising 0.88 → 0.93 when the three items are dropped.
+
+**Audit WARN (Step 5c), `rr98_accuracy`:** "row-count anomaly, median=378". Expected; not an
+itemtext defect and not a data defect. The item IS the stimulus strength level, and Ratcliff &
+Rouder sampled the 33 levels non-uniformly — trials concentrate near the ambiguous midpoint
+(i 15, n=690) and thin out at the saturated extremes (i 32, n=37). `verify_rr98_accuracy.R`
+reproduces every per-item n from the CRAN source with max |n diff| = 0, so nothing is missing or
+conflated. Explanation appended to notes.csv.
+
+**Lint WARN, `rosharudin_2023_ders18`:** "VERIFIED but its evidence hedges — should this be
+PARTIAL?" Left as VERIFIED, deliberately. The standard for VERIFIED is that the route separates
+every item from every other, and the 18×18 nearest-neighbour assignment on floor/ceiling/sd returns
+the claimed code as unique best match 18 of 18 (smallest runner-up gap 0.411 against best-match
+costs of 0.038/0.064, ~7×). The hedging sentences are about `option_text`, which no route can
+verify, and about the item-number → Malay-sentence link, which Table 5 prints directly rather than
+leaving to inference. Neither concerns item separability.
+
+**Both blocks are rights, both applied rather than re-derived, and both are effective** — the live
+item codes (`IRI_PT_<n>`, `MAAS_1..14`) are bare source headers carrying no wording, so withholding
+item text really does withhold the instrument. Neither is the irw#2101 case where the response
+table already leaks the items.
+
+**Carried forward for a human, not acted on:**
+1. `ruiz_parra_2023_maas` — the deposit has 14 contiguous MAAS columns against a 15-item scale, and
+   which canonical item is missing is stated nowhere. Circumstantially item 15, but on a filing
+   convention, not evidence. Must be settled (probably by writing to the authors) before any
+   future unblock assigns text.
+2. `availability_audit_full.csv` line 913 marks `ruiz_parra_2023_maas` AVAILABLE because MAAS
+   wording is "freely and widely published" — the same class of error the register already flags
+   for the PPOS. Worth a sweep for other library instruments audited on that reasoning.
+3. Register scope note: the IRI block reaches `ruiz_parra_2023_iri_pt` only. The remaining queued
+   siblings `ruiz_parra_2023_pid5bf` (APA-published) and `ruiz_parra_2023_rfq8` must each be
+   checked against the register on their own instrument, not by family.
+
+Queue after this round: 416 pending. Cap is `batch_165` — not reached, next firing proceeds.
+
+## batch_163 — 2026-09-10
+
+4 tables claimed, 4 agents (one per table), all four returned. **Written 1 / blocked 3 / failed 0.**
+Yield 25%. Circuit breaker NOT tripped: it counts `failed`, and this round failed nothing — all
+three no-CSV tables are determinate rights verdicts with retry test NO.
+
+| table | outcome | note |
+|---|---|---|
+| `RvKDCS_Romiacg_Miroshnik_2020_CBI` | **done**, 44 rows (11 items × 4 options) | `paper_explicit` / `study_materials`, Russian + IRW English `_translated`; Step 5b **VERIFIED** |
+| `RvKDCS_Romiacg_Miroshnik_2020_BFI` | blocked | BFI-2, Berkeley Personality Lab non-commercial clause |
+| `ruiz_parra_2023_pid5bf` | blocked | PID-5-BF, APA permission-required clause |
+| `ruiz_parra_2023_rfq8` | blocked | RFQ-8, UCL "research purposes" clause — **escalated, Ben's call** |
+
+Gates all clean: `normalize_nulls` 0 of 1 changed; `audit_batch` PASS 1/1 with no anomalies;
+`verify_batch` PASS=1; `lint_verification` 1 row, no problems; `check_provenance` no failure.
+`irw-validate` returned one WARN, no ERROR — `name_charset` on the live table name, explained in
+`notes.csv` (property of the published name, not of this item text; not fixable from the itemtext
+side).
+
+**Step 5b — orchestrator re-verified all three rights quotes independently.** All three were the
+kind of claim this step exists for: each is about to be written into a public note, and one
+contradicts a prior shipping decision. All three reproduced verbatim.
+- APA PID-5-BF: a bare `curl` returns an HTML bot-wall (sha256 `898cbf48…`, `file` reports HTML);
+  with a browser UA the real PDF downloads and its sha256 is `aabfb854…`, matching the agent's byte
+  for byte. Worth remembering — a bare status code would have read as a dead link.
+- Berkeley BFI-2: both sentences confirmed on `ocf.berkeley.edu/~johnlab/bfi.html`, plus the
+  commercial-request address and the registration gate.
+- UCL RFQ: confirmed from Wayback snapshot `20260308175751` (direct fetch is Cloudflare-403).
+
+**Two things owed to a human, deliberately not acted on by this round.**
+
+1. **`instrument_rights_register.csv` gets no rows from this round.** A round may write a `block`
+   but never a `ship`, and all three warranted entries have scope questions a round should not
+   settle alone:
+   - **BFI-2 (Berkeley)** — a block row is warranted, but see item 2.
+   - **PID-5-BF (APA)** — the register has *no* PID-5/APA row at all (its two DSM-5-named rows are
+     the VA's LEC-5 and PCL-5, different holders). Scope caution: the same cover-page clause covers
+     the entire DSM-5 "emerging measures" family, so a family-wide row would reach many tables. A
+     name match is a lead, not a verdict.
+   - **RFQ (UCL)** — honest verdict is `escalate`, not `block`. The clause has no "only", no fee,
+     no permission requirement, no NC/ND term and no redistribution bar, so it is materially weaker
+     than the hexaco.org clause it is being read against. A reasonable reader could call it
+     silence-is-permission. This is the one genuinely open question in the round.
+
+2. **The BFI-2 block reaches four LIVE tables — an irw#1954 re-audit lead.**
+   `sun_2025_morality_study3_{extraversion,openness,neuroticism}` and `cormier_2024_personality`
+   (BFI-2-XS). `cormier_2024_personality` shipped 2026-09-04 explicitly on the grounds that the
+   Colby page was Cloudflare-blocked and *"no clause could be quoted"*. The clause **is** quotable,
+   from `ocf.berkeley.edu`, and the orchestrator confirmed it directly rather than taking the
+   agent's word. Withdrawing live tables is a human decision and nothing was touched.
+
+Also of note: SKILL.md already records the BFI-2 as escalated (the `sun_2025_morality` Study 3
+`itbfi2*` tables); a grep of this log, the register and every batch notes/provenance file finds no
+ruling since. The three blocks in this round are all the same *shape* — free-to-use-for-research
+instruments whose rights holders reserve something — which is the irw#1945 class, not a pipeline
+problem. The head of the queue is serving up a battery of published clinical instruments, so a high
+block rate here is a fact about the queue, not about pipeline health.
+
+The unclaimed sibling `RvKDCS_Romiacg_Miroshnik_2020_KDOCS` was left untouched and is still
+`pending`. The CBI ships under silence-is-permission — Hocevar's (1979) Creative Behavior Inventory
+has no rights-holder statement anywhere to quote, and no distribution page at all. Its English
+`_translated` columns are IRW-generated (the deposit publishes Russian items only; the
+"English" workbook has English *headers*), so an issues-page entry is owed at upload;
+`check_provenance` currently lists it under HELD, which is correct until it ships.
+
+Queue after this round: 412 pending, 745 done, 169 blocked, 12 failed, 63 excluded. Cap is
+`batch_165` — not reached, next firing proceeds.
+
+---
+
+## batch_164 — 2026-09-10 14:31–14:47
+
+**4 tables claimed. 2 written / 2 blocked / 0 failed.** Yield 50%. Circuit breaker NOT tripped
+(0% failed, threshold 30%) — both no-CSV tables are determinate rights blocks with retry test = NO,
+which do not count.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `RvKDCS_Romiacg_Miroshnik_2020_KDOCS` | **written** | 250 (50×5) | `paper_explicit` | VERIFIED, `VERDICT: PASS` |
+| `rzeszutek_2020_wwii_matgrandfather` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_ghq28` | blocked (rights) | — | — | NO_ROUTE |
+| `rzeszutek_2020_swls` | blocked (rights) | — | — | NO_ROUTE |
+
+**Gates all clean.** `normalize_nulls` 0 of 2 normalized; `audit_batch` 1 PASS / 1 WARN;
+`verify_batch` 1 PASS + 1 MISSING(exempt); `lint_verification` **0 ERROR**, 1 WARN;
+`irw-validate` clean apart from the pre-existing `name_charset` warning on the capitalised
+`RvKDCS_…` table name; `check_provenance` flags nothing from this batch.
+
+Four agents, one per table, per the 2026-09-09 setting. **No kills, no retries, no memory
+pressure** — the 17th consecutive clean round at four. Nothing here argues for changing the count.
+
+### The two WARNs, both explained rather than left to a future reviewer
+
+- `audit_batch` WARN on `rzeszutek_2020_wwii_matgrandfather` (row-count anomaly, `mwojdz26–29`
+  against median 176) is a **property of the response data, not an itemtext defect**, and is now
+  written into `notes.csv`. The instrument offered TAK / NIE / **NIE WIEM**, and the processing
+  script drops "don't know" to missing, so per-item n is "how many respondents knew the answer
+  about that grandparent". **Orchestrator re-derived this independently** (Step 5b, `item_stats.R`,
+  server-side): n runs **84–263** across all 29 items, the four flagged codes sit at 116 / 84 / 116 /
+  117 — the tail of a smooth gradient, not a discontinuity — and 24 of 29 items sit below the
+  500-respondent sample. The gradient matches the paper's own prose: n peaks at `mwojdz9`
+  "Nazi Concentration Camp" = **263** and `mwojdz17` "Forcedly Relocated to Siberia" = **252**
+  (fewest don't-knows, as the paper reports) and bottoms at `mwojdz27` = **84** in the "was your
+  grandfather a witness to:" block (most don't-knows). Not worth a GitHub issue.
+- `lint_verification` WARN on the KDOCS row ("VERIFIED but its evidence hedges") is **correct as
+  filed**. VERIFIED is defined on the *item axis*, and links A+B distinguish all 50 codes from each
+  other (50/50 form-field name ties; 50550/50550 cells re-derived from the named raw column, 0
+  disagreements, and a one-position control shift produces 31651 disagreements, so the check is
+  permutation-sensitive). The hedge is on the *option* axis only.
+
+### Step 5b — two agent claims re-checked, one CORRECTED
+
+1. **Confirmed.** The `matgrandfather` missingness figures reproduce exactly (263 / 252 / 84).
+2. **Corrected.** The `swls` agent reported that `eddiener.com/scales` fails its stored sha256
+   because it is "a page-builder site emitting per-request inline CSS/JS". **That diagnosis is
+   wrong.** Two orchestrator fetches in the same minute hash *identically*
+   (`3708aef5…`, 56492 bytes both times). The page is stable within a session and **genuinely
+   changed** between 2026-09-06 (`6f7449ac…`) and today. The verdict is unaffected — the
+   non-commercial sentence and the SWLS listing are both verbatim live — but the register's stored
+   hash is **stale, not unstable**, and will read as a tampered page to the next round that checks
+   it. The two `labs.psychology.illinois.edu` hashes still reproduce byte-for-byte. Not edited: a
+   round may write a `block` row, not amend a standing one.
+
+### For a human — two `availability_audit_full.csv` rows are now demonstrably wrong
+
+Both concern this deposit, and both were found independently by two agents that read the files:
+
+- **`rzeszutek_2020_swls` / `rzeszutek_2020_ghq28`**: the audit says "S1 File (Survey Polish) and
+  S2 File (Survey English) are the full study questionnaire". They are **only** the 29-item WWII
+  grandparent-trauma questionnaire and contain **not a single SWLS or GHQ-28 item**. The `.sav`
+  carries no variable or value labels on `swls1..swls5` or `ghq1..ghq28` either — there is no
+  wording anywhere in the deposit for those two tables.
+- **`rzeszutek_2020_ghq28`** is recorded AVAILABLE on the reasoning that the GHQ-28 is "not
+  enforced as a closed instrument the way NEO-FFI/HADS/BDI are". The rights holder's own published
+  terms say otherwise (below).
+
+### Rights
+
+- **New register row (line 61): the GHQ family** — GHQ-12/28/30/60, all versions and translations,
+  `match_item_code ghq1..ghq28`. GL Assessment's support FAQ (sha256 `37a3c76b…`, fetched today) is
+  permission-required (*"You will first need to contact us … permissions@gl-assessment.co.uk"*),
+  fee-bearing (*"a GHQ user guide should be purchased"*) and royalty-bearing (*"Part of the payment
+  received from permissions is paid as a royalty to the Institute of Psychiatry"*), and it reaches
+  the **Polish adaptation explicitly** (*"The MAPI Research Trust distributes translated versions on
+  behalf of our Company"*), closing the administered-language route under the 2026-09-08 derivative
+  ruling. Register re-parses cleanly at 61 rows × 11 cols, written under `flock`.
+- **`rzeszutek_2020_swls`** applied the standing 2026-09-09 SWLS verdict rather than re-deriving it —
+  that register row already names this table.
+- Both blocks pass the irw#2101/#2123 test: the live codes are opaque (`ghq1..ghq28`, `swls1..swls5`),
+  so no wording leaks through the response table.
+- **⚠️ K-DOCS ESCALATED TO BEN — shipped, but wants a human verdict.** Kaufman's own page publishes
+  the complete 50-item scale with no fee, NC, ND or redistribution clause and no copyright notice.
+  Its only permission-adjacent sentence is a *grant*: *"Many people reach out to me to ask permission
+  to use the scale. I am happy to give permission. Just drop me a line."* Read strictly, "ask
+  permission" brushes SKILL.md's permission-required trigger; read as written it reserves nothing,
+  and he is himself the party distributing the wording. Shipped under silence-is-permission (a block
+  needs a quotable restriction), **no register row written** per the 2026-09-10 rule. A block here
+  would reach the English `*_translated` columns too, since those carry Kaufman's exact wording.
+
+### Notable, for future rounds
+
+- **The four `rzeszutek_2020_wwii_*` grandparent tables are one instrument.** The 29 item texts in
+  both languages, the three section prompts and the two option rows apply **verbatim** to
+  `matgrandmother` / `patgrandfather` / `patgrandmother`; only the code prefix
+  (`mwojb` / `mwojdz` / `owojb` / `owojdz`), the side-of-family heading and the named grandparent
+  change. All three are `data_labels`-exempt for the same reason and can be produced cheaply. The
+  agent deliberately wrote none of them. **One wrinkle:** in the Polish S1 File the *father's-side*
+  copy places item 23 under the "witnessed" heading, while the mother's-side copy and the whole
+  English form place it in block 2. This round used the mother's-side/English placement (section 2);
+  the `patgrand*` tables meet that inconsistency head-on and should make the same call and say so.
+- The KDOCS table ships administered **Russian** with Kaufman's own published English in
+  `*_translated` — published wording, so no machine-translation disclosure is owed. Its option
+  direction is inferred from the form's ascending S1..S5 presentation and corroborated by item means
+  (everyday acts top out at 3.94, "writing a computer program" bottoms at 2.11); direction is pinned,
+  an interior permutation of levels 2/3/4 is not testable.
+- `table_context.R` returned a **spurious** "returned no rows" for the KDOCS table once; a direct
+  `irw_fetch()` immediately after returned 50550 rows. Transient — worth knowing before anyone
+  reads that message as a missing table.
+
+Queue after this round: **408 pending, 747 done, 171 blocked, 12 failed, 63 excluded.** Cap is
+`batch_165` — **not reached**, next firing proceeds.
+
+## batch_165 — 2026-09-10 14:51–15:10 PDT — 4 tables, 4 written / 0 blocked / 0 failed — CAP REACHED
+
+Round yield 4/4 (100%). Four agents, one per table, no kills, no retries, no rate limits.
+Stop conditions clear at start (no in_progress rows, no breaker flag, 408 pending).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `rzeszutek_2020_wwii_matgrandmother` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_wwii_patgrandfather` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `rzeszutek_2020_wwii_patgrandmother` | **written** | 58 (29×2) | `data_labels` | NOT_NEEDED (exempt) |
+| `SABFI2_Gallardo_Pujol_2018_LOT` | **written** | 30 (6×5) | `reconstructed` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls fixed 2 files; audit_batch 1 PASS / 3 WARN; verify_batch PASS=1, MISSING(exempt)=3;
+lint_verification clean (4 rows); irw-validate no ERRORs (one `name_charset` WARN on SABFI2 -- the live
+table name is mixed-case, not fixable in the itemtext file); check_provenance flags nothing from this batch.
+
+### Notable
+
+- **The rzeszutek grandparent family is now complete** (matgrandfather in batch_164 + these three). All
+  three used the mother's-side/English placement of **item 23 in section 2**; the two `patgrand*` agents
+  met the Polish father's-side copy's contrary layout head-on and independently rejected it on three
+  grounds (item 23 is a verb clause that cannot follow "was a witness to:", the father's-side DOCX tables
+  break at different items with a truncated "wiem" header and a missing block-2 prompt, and the .sav label
+  for item 23 lacks the "Witnessed" prefix all of 24–29 carry). Disclosed in notes + a public note. The
+  data cannot distinguish the readings; it affects only item 23's section/prompt.
+- Father's-side Polish block-2 prompt reads `(pra)babcia` (no space) vs the mother's side `(pra) babcia`;
+  the English S2 father's-side fill-in line wrongly says "mother's side" (not shipped).
+- Audit WARNs on all three are the "NIE WIEM"-dropped-to-missing gradient (witnessed events lowest n),
+  explained in notes.csv. patgrandfather/patgrandmother agents matched live per-item n to the .sav
+  yes+no counts on all 29 items, ruling out code conflation. Raw-data quirk, live table unaffected:
+  mwojb20/22/23 each carry one unlabelled code 4 in the .sav, which the script drops.
+- **SABFI2 LOT** = the six scored LOT-R items (fillers not in deposit), LOT1..6 = LOT-R 1,3,4,7,9,10.
+  Ships Carver's English as `translated_substitute` (administered: Ferrando, Chico & Tous 2002 Spanish,
+  wording not in the deposit or paper) under the register's existing LOT-R `ship_with_note` verdict.
+  Response labels: paper describes 0–4, data store 1–5; shipped 1=strongly disagree..5=strongly agree.
+  **Step 5b orchestrator re-check CONFIRMED**: recomputed from irw_fetch, reversed-keyed mean M 3.3 /
+  SD 0.83 / alpha 0.88 vs published 3.33/0.83/.88; optimism item means 3.0/3.2/3.6 above pessimism
+  2.8/2.4/2.6; 15/15 correlation signs as predicted. Within-class order unestablished (PARTIAL).
+  Backfill lead: Carver's page links a Spanish LOT-R, not tied to this study's cited version.
+  Dictionary Description ("Life orientation scale") could name the LOT-R.
+
+Queue after this round: **404 pending, 751 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+**Cap reached** -- batch_165 is the Step 0 cap batch; no further rounds until a human raises it.
+
+## batch_166 — 2026-09-10 16:34–16:52 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Round yield 4/4 (100%). Four agents, one per table, no kills, no retries, no rate limits.
+Stop conditions clear at start (no in_progress rows, no breaker flag, 405 pending; cap now batch_173).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `ruiz_parra_2023_rfq8` | **written** | 56 (8×7) | `paper_explicit` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Micro` | **written** | 24 (6×4) | `paper_order` | PARTIAL, verify PASS |
+| `SABFI2_Gallardo_Pujol_2018_Tight` | **written** | 30 (6×5) | `paper_order` | PARTIAL, verify PASS |
+| `safiye_2023_rfq` | **written** | 56 (8×7) | `paper_order` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=4; lint_verification
+clean (4 rows); irw-validate no ERRORs (`name_charset` WARN on both SABFI2 tables, mixed-case live name, as
+batch_165); check_provenance flagged a SPLIT RECORD for ruiz_parra_2023_rfq8 (batch_163 block vs batch_166
+write) -- resolved by marking the batch_163 provenance note SUPERSEDED and the pending_index_notes row
+RESOLVED. No WARNs to explain beyond name_charset (notes.csv).
+
+### Notable
+
+- **RFQ rights ruling applied.** Ben's 2026-09-10 `ship_with_note` for the RFQ family (register row confirmed)
+  unblocked `ruiz_parra_2023_rfq8` (blocked + escalated at batch_163). Spanish S2 Appendix wording shipped with
+  the English S1 original in `_translated`; `instructions_translated` is this project's translation (S1's
+  English instructions are a different text) -- disclosed in public_note, so an issues-page entry is owed at
+  upload. Verified by published CFA/EFA loadings: unique best fit over all 8! orderings; only 3↔4 unpinned.
+- `safiye_2023_rfq` ships English RFQ-8 as `translated_substitute` (administered Serbian not in scope).
+  Deposit scoring columns match the RFQ-8 certainty/uncertainty key on 823/823 rows; only RFQ2↔RFQ6 unpinned.
+  The two RFQ agents independently agree on the English wording and numbering of all 8 items.
+- **SABFI2 Micro and Tight were located outside the deposit, one hop out.** The paper never describes either;
+  its Study 3 sample is ISP wave 2, and the International Situations Project OSF (osf.io/yv2nq) carries both
+  measures, translated by this paper's authors. Spanish wording read BY EYE from image-only survey
+  screenshots (`Spanish ISP.pdf` pp. 28-29, 34) -- worth a human spot-check.
+- **Dictionary defect (Micro): Description "Racial microagression scale" is wrong.** The items are the ISP
+  micro-macro life-space item (Salgado, González-Suhr & Oceja 2013): family / friends / city / society /
+  world / work. **Orchestrator Step 5b re-check CONFIRMED** from irw_fetch: means 3.1/3.2/2.8/2.7/2.5/2.4;
+  best 3-vs-3 split {Micro1,2,6} at 0.170 vs next 0.092, rest ≤ 0.024 -- so screen order (work last) holds
+  over the article order. tags.csv/metadata Description fix owed.
+- **Rights decision owed on Micro before upload:** Anales de Psicología's page says CC BY-SA 4.0 for pre-2025
+  articles; the SciELO España mirror footer links CC BY-NC 3.0. Agent shipped on the publisher's statement
+  and wrote no register row. If Ben rules the NC notice governs, pull Micro to blocked.
+- Tight: 6-item Gelfand et al. (2011) tightness scale, Spanish ISP translation; Tight4 is the lone
+  reverse-worded item (only flip raising alpha .408→.436); order among the five positive items unestablished.
+  No rights restriction found anywhere (no register row written).
+- **Backfill lead for batch_165's LOT:** its Spanish LOT-R wording is in `Spanish ISP.pdf` pp. 30-31, and
+  `English ISP.pdf` p. 24 shows the LOT items in standard LOT-R order (bears on its unpinned within-class order).
+
+Queue after this round: **401 pending, 754 done, 171 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_167 — 2026-09-10 16:53–17:15 PDT — 4 tables, 1 written / 3 blocked / 0 failed
+
+Four agents, no kills. Yield 1/4 (25%); all three blocks determinate (retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `salleh_2023_aim_iam_fim` | **written** | 60 (12×5) | `data_labels` (positional code derivation, re-derived) | VERIFIED, verify PASS |
+| `santos_2018_cesd` | blocked | — | — | response-data defect |
+| `santos_2018_gse` | blocked | — | — | no code↔wording source |
+| `saputra_2023_perceived_ease_of_use` | blocked | — | — | wording never published |
+
+Gates: normalize_nulls 0 changes; audit_batch 1 PASS, no anomalies; verify_batch PASS=1; lint_verification
+clean (1 row); irw-validate ok; check_provenance no failures (13 `mixed` review items, all pre-existing).
+No WARNs to explain.
+
+### Notable
+
+- **santos_2018_cesd: response-data defect, worth a GitHub issue (not filed by the round).** cesd3/11/14/16
+  are stored in opposite directions in site-H wave-1 vs every other person-wave. **Orchestrator Step 5b
+  re-check CONFIRMED** from irw_fetch with independent code: item-rest r +0.43/+0.49/+0.55/+0.35 (H w1, n=224)
+  vs −0.33/−0.37/−0.52/−0.31 (rest, n=730); other 16 items positive in both. Agent also showed the study's own
+  CESDtot equals the 3−x sum in 527/527 non-H-w1 rows and the plain sum in 223/223 H-w1 rows — the defect is in
+  the OSF source and propagates into the paper's S1 Table A. Suggested fix: `resp := 3 − resp` for those four
+  items everywhere except ids `H*` at wave 1. Retry after the fix is routine (paper_explicit mapping already
+  established; canonical Radloff wording; Spanish-administration caveat).
+- **santos_2018_gse:** codes gse2..gse18 (non-contiguous) look like positions in a 20-item form — parent RCT
+  Beeber 2010 reports a 20-item Spanish GSE. No codebook anywhere. Possible dictionary description fix (10-item
+  subset of a 20-item administered form) — agent's claim, from cited literature, not re-checked.
+- **saputra_2023_perceived_ease_of_use:** paper gives one example item per construct, untied to codes. The
+  sibling `saputra_2023_*` tables still pending (e.g. perceived_usefulness) will very likely block identically.
+- **salleh_2023_aim_iam_fim — rights decision owed before upload:** no instrument_rights_register row for
+  AIM/IAM/FIM; originator (Weiner et al. 2017, Add. File 3) says "There is no cost to use these measures", no
+  reserving clause found. Ship-shaped, not registered. Also: data file is the KOSPEN pilot but the only
+  published form is the MIICA version (public_note written); seven truncated Malay headers restored from
+  Table 2; paper Table 4 has 5/21 polychorics 0.06–0.15 above live (reproduced by verify_batch; a paper
+  discrepancy, no swap explains it).
+
+Queue after this round: **397 pending, 755 done, 174 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_168 — 2026-09-10 17:04–17:20 PDT — 4 tables, 3 written / 1 blocked / 0 failed
+
+Four agents, no kills. Yield 3/4 (75%); the one block is determinate (retry test NO).
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `saputra_2023_perceived_usefulness` | blocked | — | — | wording never published |
+| `schafer_2016_music_effects` | **written** | 30 (3×10) | `paper_explicit` | VERIFIED, verify PASS |
+| `schafer_2016_music_goals` | **written** | 30 (3×10) | `data_labels` (name-preserving header rename) | NOT_NEEDED |
+| `schalet_2016_hrsa` | **written** | 70 (14×5) | `paper_explicit` | PARTIAL, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies (no WARNs to explain); verify_batch PASS=2,
+MISSING(exempt)=1; lint_verification clean (3 rows); irw-validate ok on all 3; check_provenance no failures
+(13 `mixed` review items, all pre-existing).
+
+### Notable
+
+- **schafer_2016_music_effects / _goals (same paper + S1):** the study's own diary questions from a CC BY PLOS ONE
+  article. Language=German is *inferred* (Chemnitz; German S1 sheet name; German free-text entries), not stated;
+  no German wording published, so the author's English ships as translated_substitute/study_supplied with a
+  public_note. S1 header `effects emotion and mood` vs the paper's "arousal and mood regulation": resolved by
+  per-item means. **Orchestrator Step 5b re-check CONFIRMED** from irw_fetch with independent code: effects
+  M/SD 4.6/3.0, 3.2/2.9, 6.2/2.8 and goals 4.5/3.1, 3.2/2.9, 6.2/3.0 (self-awareness / social / arousal-mood)
+  match the paper. Minor cosmetic inconsistency between the siblings, left as-is: effects recorded
+  `paper_explicit` (+ verify script), goals recorded `data_labels`; goals ships empty `_translated` columns,
+  effects omits them; instrument-name strings differ in pattern.
+- **schalet_2016_hrsa — rights decision owed before upload:** canonical HAM-A wording from the UF Psychiatry
+  reproduction sheet (study published none; `.sav` labels generic). UF sheet and CamCOPS/NINDS CDE both state
+  "The HAM-A is in the public domain"; no `instrument_rights_register` Hamilton row exists and the round did
+  not write one. Instructions are that sheet's rater instruction, not confirmed as the trial's. Mapping
+  PARTIAL: paper Table 2 POMP subscale totals reproduce 23/24 cells exactly (24th within rounding; all 40
+  psych↔somatic swaps miss by ≥1.10), 10/14 items pinned by HRSD/BAI twin correlations; order within
+  {a03,a05} and {a07,a08} rests on paper numbering only. Agent left hints for the pending sibling
+  `schalet_2016_hrsd` (atypical alternates hrsd04a–06a/12a/16a scored via MAX(); week-8-only items 18–24).
+- **saputra_2023_perceived_usefulness:** same gap as its batch_167 sibling; agent additionally checked the
+  Mendeley Data deposit 448zhfvrm7 (v1 adds demographics only, v2 = S1). No other saputra_2023_* in queue.
+
+Queue after this round: **393 pending, 758 done, 175 blocked, 12 failed, 63 excluded.** Breaker: 0% failed.
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_169 — 2026-09-10 17:16–17:34 PDT — 4 tables, 3 written / 0 blocked / 1 failed
+
+Four agents, no kills. Yield 3/4 (75%). Breaker 25% failed (< 30%), not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `schalet_2016_hrsd` | **failed** (orchestrator override of agent's "blocked") | — | — | — |
+| `schmidt_2017_fas` | **written** | 13 (4 items) | `data_labels` (.sav labels) | NOT_NEEDED; verify script PASS anyway |
+| `schmidt_2017_pds` | **written** | 12 (3×4) | `data_labels` (.sav labels) | NOT_NEEDED |
+| `science_ltm` | **written** | 28 (7×4) | `paper_explicit` (ltm Science.Rd + Eurobarometer 38.1 UK questionnaire) | VERIFIED, verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 3 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=1;
+lint_verification 0 ERROR, 1 WARN (science_ltm "VERIFIED but evidence hedges" — kept VERIFIED, reasoning in
+notes.csv); irw-validate ok on all 3; check_provenance no failures (schmidt_2017_fas/pds listed as HELD
+machine_translation — issues-page line owed at upload; 13 pre-existing `mixed` review items).
+
+### Notable
+
+- **science_ltm — response-data defect (resp_raw direction), CONFIRMED by orchestrator.** Agent found the three
+  negatively worded items (Environment, Technology, Industry) are stored 1=Strongly agree..4=Strongly disagree,
+  opposite to ltm's factor levels and the live `resp_raw`, via Eurobarometer 38.1 GB codebook marginals (TVD
+  0.023–0.034 reversed vs 0.37–0.70 as documented). Orchestrator re-check from local `ltm::Science`, independent
+  of the codebook: under resp_raw's labels 85% (Industry), 70% (Environment), 72% (Technology) of the 1992 UK
+  sample would *agree* science doesn't matter; and those items correlate weakly *positively* with the positive
+  items (Industry–Comfort .15, –Future .11, –Benefit .11). Shipped option_text follows the data, with public_note.
+  `resp_raw` mislabelled on 1,176 rows — not filed; deserves a data issue. Rights: no Eurobarometer register row;
+  GESIS terms page unread (bot-blocked).
+- **schalet_2016_hrsd — classified failed, not blocked.** Instrument is HRSD-17 "modified to incorporate atypical
+  symptoms" (Reimherr 1998) plus week-8 items 18–24; 8 of 30 items (d04a/05a/06a/12a/16a, d22–d24) have no located
+  wording. Agent said retry test NO, but Reimherr 1998 — the one reference that could print the atypical anchors —
+  returned **HTTP 403**, an unresolved access failure; "when in doubt choose failed". Agent banked a full mapping:
+  paper Table 2 HRSD POMP scores reproduced 12/12 cells on 131 completers from the cached .sav. **Decision for Ben:**
+  ship a partial table with the 22 worded items, or hold for the atypical anchors.
+- **schmidt_2017_fas / _pds (same PLOS ONE S1 .sav):** German .sav labels verbatim, IRW machine translation in
+  `_translated` (issues-page lines owed). FAS: dictionary Description and `data/schmidt_2017_fas.py` comment list
+  car before bedroom; data has `ses_1_1`=bedroom (0–1), `ses_2_1`=vehicle (0–2) — prose wrong, codes fine. PDS: sum of
+  items reproduces paper Table 1 (4.83/1.57 vs 4.82/1.57); `pub_2_1`/`pub_3_1` each merge a girls' and a boys'
+  question; authors' abbreviated stems with ellipses. **Rights owed:** no register row for HBSC FAS II or PDS
+  (both appear free to use; rounds may not write ship rows).
+
+Queue after this round: **389 pending, 761 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_170 — 2026-09-10 17:36–17:52 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Four agents, no kills. Yield 4/4 (100%). Breaker 0% failed, not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `SCS_Suh_2023_SCS` | **written** | 210 (30×7) | `paper_explicit` (Singelis SCS form numbering; study OSF CFA syntax corroborates split) | PARTIAL (route 5, 30/30 own-subscale vs perm. max 24), verify PASS |
+| `sds` | **written** | 78 (13×6) | `paper_explicit` (TestGardener 3.1.1 vignette itemVec, positional) | VERIFIED, verify PASS |
+| `shan_2020_g` | **written** | 10 (2×5) | `data_labels` (S1 .sav labels) | NOT_NEEDED |
+| `shan_2020_hs` | **written** | 20 (4×5) | `data_labels` (S1 .sav labels) | NOT_NEEDED |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=2;
+lint_verification 0 ERROR, 1 WARN (sds option_text blank — correct: source labels levels only as ratings 0–4 +
+blank for missing; explained in notes.csv); irw-validate: SCS_Suh_2023_SCS WARN name_charset (live table name is
+capitalised — not an itemtext defect), others ok; check_provenance no failures (13 pre-existing `mixed` review items).
+
+### Notable
+
+- **sds — response-data defect, CONFIRMED by orchestrator.** Live `sds` stores TestGardener's missing/illegal
+  wastebasket code as `resp=6`, not a sixth rating: 177/6149 rows, per item 1–13 = 4/10/4/3/3/3/9/79/9/43/1/5/4
+  (re-counted from irw_fetch, matches agent). TestGardener `vignettes/SDS.Rmd` l.53: "a sixth choice for missing or
+  illegal responses", scored 0. Item 8's sixes sit on item7=1 in 75/79 (a skip). `data/TestGardener.R` copies
+  `SDS_U[,i]` straight to resp. Fix: drop resp==6 (optionally recode 1–5 → 0–4) and regenerate the item-text resp
+  rows. Not filed. item_text is the package authors' short symptom labels, not administered McCorkle & Young wording
+  (public_note says so); option_text blank throughout.
+- **shan_2020_* — id collision, CONFIRMED by orchestrator.** S1 .sav has `ID==178` on file rows 168 and 178, two
+  different people (Gender 2 vs 1; HS1–4 5/3/1/4 vs 3/2/4/3). Live shan_2020_hs: 812 rows / 202 ids, id 178 on 8
+  rows. Affects every table from `data/shan_2020_acculturative_stress.py`; fix is re-keying one row. Not filed.
+- **shan_2020 — availability audit wrong for f/pd/cs.** Both agents found the S1 .sav carries variable labels for
+  every subscale (the script's "no item text in the file" comment is wrong: `pd.read_spss` drops labels, pyreadstat
+  shows them). `availability_audit_full.csv` marks `shan_2020_f`, `_pd`, `_cs` UNAVAILABLE ("S1 File is raw data");
+  none of the three is in queue_state.csv. Candidates to add. (`shan_2020_ph` is still pending.)
+- **SCS_Suh_2023_SCS — audit row names the wrong instrument.** `availability_audit_full.csv` calls it Neff's
+  Self-Compassion Scale; live data is Singelis's 30-item Self-Construal Scale on 1–7 (as the dictionary says).
+  `text_source=translated_substitute` / `official_instrument_english`: 320 of 681 respondents are Korean and
+  presumably saw a Korean form that isn't in the deposit; public_note discloses it.
+- **Rights owed (rounds may not write ship rows):** Singelis SCS — letter says "Please feel free to use the SCS in
+  your research", asks for a copy of findings/translations (agent reads as research grant + courtesy; nearest
+  precedent ERQ, irw#2121). ASSIS (Sandhu & Asrabadi 1994) for shan_2020_g/hs — shipped on silence; the audit's
+  "(non-commercial)" tag quotes no clause. Worth a human look before either register entry is written.
+- shan_2020_hs corrected .sav label typo "origion" → "origin" per the study's own Table 7; shan_2020_g kept "life
+  style" verbatim. Both study_materials; minor inconsistency only.
+
+Queue after this round: **385 pending, 765 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_171 — 2026-09-10 17:52–18:12 PDT — 4 tables, 4 written / 0 blocked / 0 failed
+
+Four agents, no kills. Yield 4/4 (100%). Breaker 0% failed, not tripped.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `shan_2020_ph` | **written** | 25 (5×5) | `data_labels` (S1 .sav labels; = article Table 7, M/SD match) | NOT_NEEDED |
+| `shen_2020_sas20` | **written** | 80 (20×4) | `data_labels` (S1–S5 .xls headers carry wording; script positional, so verified anyway) | VERIFIED (80/80 item×resp counts vs live GROUP BY, all patterns unique), verify PASS |
+| `shi_2021_gentrification` | **written** | 115 (23×5) | `data_labels` (S1 .xlsx `N、factor` headers renamed to item_N) | NOT_NEEDED |
+| `shi_2025_dass21` | **written** | 105 (21×5) | `reconstructed` (canonical DASS-21 numbering; .sav unlabeled) | PARTIAL (stored subscale scores 1764/1764 under canonical key, 0/147 swaps survive; within-subscale order not established), verify PASS |
+
+Gates: normalize_nulls 0 changes; audit_batch 4 PASS, no anomalies; verify_batch PASS=2, MISSING(exempt)=2;
+lint_verification 0 ERROR, 1 WARN (shi_2025_dass21 option_text blank — deliberate, see defect below); irw-validate
+all 4 ok; check_provenance no failures (same 13 pre-existing `mixed` review items).
+
+### Notable
+
+- **shi_2025_dass21 — response-data defect, CONFIRMED by orchestrator.** Live resp by wave (resp 0..4): wave0
+  0/2042/1244/463/367, wave1 865/1512/1299/335/105, wave2 781/1873/952/439/71. Baseline is 1–4-coded (stored .sav
+  pre subscale minima 7/7/7, stored pre total mean 38.14 = paper's 38.17/38.10); waves 1–2 use five levels 0–4 with
+  52 / 27 ids using both 0 and 4 themselves, against a paper-described 4-point 0–3 scale. Defect is in the source
+  .sav; `data/shi_2025_mindfulness.py` passes it through. option_text ships blank for that reason; public_note
+  discloses. Suggested fix: wave0 −1; waves 1–2 need a decision. Also a LEAD, not established: person-total
+  correlations pre–post −0.149, pre–third −0.078, post–third 0.564 (confirmed; MAAS/RRS show the same near-zero
+  baseline link per agent) — baseline rows may not be matched to the same people. pre item sum ≠ stored total on
+  15/196. Affects shi_2025_maas / shi_2025_rrs (same .sav, still pending). Not filed.
+- **shi_2025_dass21 text:** administered simplified-Chinese (Wen et al. 2012) wording not in any supplement; ships
+  the official English DASS-21 as `translated_substitute` / `official_instrument_english`; DASS FAQ public-domain
+  statement (same sha as ptacek/rosharudin rounds). Instructions blank (English instructions describe a different
+  response scale than the paper's).
+- **shan_2020_ph — id-178 collision re-confirmed on live table:** 1015 rows, 202 ids, one id with 10 rows. Same
+  defect as shan_2020_g/hs (batch_170). ASSIS rights still shipped on silence; register row still owed.
+- **shen_2020_sas20:** English headers are the study's own (Chinese administration inferred from residual Chinese in
+  free-text cells); wording departs from Zung's original (item 4 "I think I might be going crazy"); items
+  5/9/13/17/19 stored pre-reversed per paper and source cells, option_text follows that. Deposit n=1647 vs paper
+  1637, but paper's 30.85±6.89 total reproduces on 1647 — not a defect. Zung SAS rights on silence; register row owed.
+- **shi_2021_gentrification:** item text is the factor name only (as in the data file); language Chinese inferred
+  (Wenjuanxing, 201/209 Chinese nationals, U+3001 list commas in headers) — `translated_substitute` /
+  `study_supplied`; author-built questionnaire, own CC BY article.
+
+Queue after this round: **381 pending, 769 done, 175 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_172 — 2026-09-10T18:12:55-07:00 — 4 tables, 4 agents
+
+**3 written / 1 blocked / 0 failed** (yield 75%; failed rate 0%, circuit breaker not tripped). No kills, no rate
+limits. Written: shi_2025_rrs, shin2024_creactability_adaptability, shin2024_creactability_creativity. Blocked:
+shi_2025_maas (rights, retry test NO).
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARNs (nothing for Step 5c); verify_batch 3 PASS;
+lint_verification 3 rows, no problems; irw-validate all 3 ok; check_provenance no failures (same 13 pre-existing
+`mixed` review items).
+
+### Notable
+
+- **shi_2025_maas — BLOCKED on CSDT rights.** MAAS has its own CSDT library page (commercial use needs permission) and
+  the CSDT Limited Use License bars redistribution; applied the settled SDT/CSDT register row (full scope, adaptations
+  included — administered as Chen et al. 2012 Chinese MAAS). Same verdict as ruiz_parra_2023_maas (batch_162). No
+  verification row (blocked). pending_index_notes row added. MAAS has NO DASS21-style wave-coding defect: resp 1..6 by
+  wave 150/439/598/544/711/498, 80/326/236/326/1006/965, 15/250/299/382/705/1288.
+- **shi_2025 baseline linkage lead — CONFIRMED by orchestrator (the numbers; the interpretation is still a lead).**
+  Person-total r across waves (0-1 / 0-2 / 1-2) on live tables: MAAS −0.042 / +0.042 / +0.381; RRS −0.011 / +0.270 /
+  +0.096; DASS21 −0.149 / −0.078 / +0.564. Baseline arm means reproduce paper Table 3 exactly (MAAS 58.3±12.3 /
+  59.5±9.46; RRS 46.0±14.5 / 45.3±10.9), which also identifies **cov_group 1 = mindfulness training, 2 = peer
+  support** (data/shi_2025_mindfulness.py records it as unknown). Near-zero pre–post stability on three trait scales
+  suggests the pre block is not id-aligned with waves 1–2, though RRS pre–third 0.270 is not zero, so it is not a
+  clean whole-block misalignment either. Worth one response-data issue covering all three tables plus the DASS21
+  wave-0 recode. Not filed.
+- **shi_2025_rrs:** canonical English RRS from Nolen-Hoeksema's own distribution copy (umich ~gonzo) as
+  `translated_substitute` / `official_instrument_english` for Han & Yang 2009 Chinese administration. PARTIAL: 12/5/5
+  key reproduces the .sav's stored subscale scores 1758/1758, all 145 cross-subscale swaps fail, Table 3 reproduces;
+  within-subscale order unverified. No wave-coding defect (all waves 1–4). **Rights ship-shaped on a courtesy clause
+  ("Please send me copies of reports") — no register row, needs Ben's call.**
+- **shin2024_creactability_adaptability / _creativity:** English from the CC BY Frontiers article (Table 2), Korean
+  administration inferred → `translated_substitute` / `study_supplied`, public_note on both. Both agents independently
+  reached the same convention. Table 4 pooled category counts reproduce exactly (19/142/398/429/610/441/130), settling
+  the processing script's "resp direction unverified". Table 3 logits rank-match live item totals (Spearman 1.000),
+  pinning deposit column order to the paper's item numbers — paper's "item difficulty" caption actually runs in the
+  easiness direction (confirmed by verify output). **Orchestrator downgraded adaptability VERIFIED → PARTIAL**: Table 2
+  is unnumbered, so number→wording rests on listed order (the agent's own NOT ESTABLISHED clause; creativity's agent
+  recorded PARTIAL on identical evidence). creativity omits the resp=1 "not at all" row (unused). Rights on silence
+  (scale author is the article's corresponding author); no register row, flagged. shin2024_creactability_quickness
+  still pending.
+
+Queue after this round: **377 pending, 772 done, 176 blocked, 13 failed, 63 excluded.**
+Cap is `batch_173`; not reached. Ending normally.
+
+## batch_173 — 2026-09-10T18:26 (claim) → 18:50 (close), 4 agents, 4 tables
+
+**Written 4 / blocked 0 / failed 0 — yield 100%.** No kills, no rate limits. All Step 4 gates clean: audit_batch 4 PASS
+(no WARNs, so no Step 5c notes), verify_batch 2 PASS + 2 MISSING(exempt, data_labels), lint_verification no problems,
+irw-validate ok ×4, check_provenance 0 IRW-generated tables missing an issues-page entry. Zero whole-table exports
+except one deliberate ~1MB irw_fetch of shineha_2024_gef_info_topics (per-sample percentages need row data) plus the
+orchestrator's Step 5b re-check fetches of that table and _accept_factors.
+
+- **shin2024_creactability_quickness:** closes out the shin2024 trio with batch_172's conventions (CC BY Frontiers
+  Table 2 English, Korean administration inferred → `translated_substitute` / `study_supplied`, public_note).
+  `paper_order`, **PARTIAL** (recorded as such by the agent, consistent with the batch_172 downgrade): Table 3 logits
+  vs live totals Spearman 1.000, max residual 0.0045, the claimed order the only one of 3! permutations that fits
+  (next best 0.2436); Table 4 pooled counts reproduce exactly. Unnumbered Table 2 leaves number→wording on listed
+  order. Rights on silence, same as siblings — no register row, needs Ben's call.
+- **shineha_2024_gef_{accept_factors, attitudes, info_topics}** (PLOS ONE e0300107, CC BY 4.0; MHLW-commissioned
+  study questionnaire, not a third-party instrument): all three agents independently reached `data_labels` (S1 .sav
+  variable labels), `translated_substitute` / `study_supplied`, `language=Japanese` — the deposit holds only the
+  authors' "tentative" English translation, 0 CJK characters anywhere. Minor cosmetic inconsistency: accept_factors
+  and info_topics carry empty `_translated` columns, attitudes omits them; both forms exist in prior batches and pass
+  every gate.
+  - **attitudes:** item codes are not questionnaire order (Fig1a=Q1, b=Q5, c=Q3, d=Q4). Fig1b anchor conflict —
+    **CONFIRMED by orchestrator**: questionnaire Q5 table prints Strongly agree(7)…strongly disagree(1), .sav labels
+    Strongly acceptable(7)…Strongly unacceptable(1); same direction, questionnaire anchors shipped, disclosed.
+  - **info_topics:** VERIFIED (data_labels table, verified anyway): 15 Fig 3 topic bars match live per-sample
+    percentages. Order override (.sav Other=16 / Nothing=17 vs questionnaire order) **CONFIRMED by orchestrator**:
+    784/784 Fig3_17 pickers picked nothing else; all 28 Fig3_16 pickers picked 5. **Source inconsistency CONFIRMED**:
+    Q7 says "choose three" but live selection counts are exactly 5 (3,614) or Nothing-only (784); the sibling Q6
+    table fits its own "choose three" (3: 3,714, 1: 684 — confirmed). Disclosed in public_note; perhaps the Japanese
+    original asked for five. Not an IRW processing defect; no issue filed.
+  - **accept_factors:** paper prose attributes 32.3%/19.3% to "can experts deal with risks", but Fig 4 and the .sav
+    put them on Fig4_6 "Probability of potential risks" — orchestrator confirmed live Fig4_6 = 32.3 public / 19.3
+    expert. Prose error in the article; mapping unaffected.
+
+Queue after this round: **373 pending, 776 done, 176 blocked, 13 failed, 63 excluded.**
+**Cap is `batch_173` — this round IS that batch. Cap reached; stopping.**
+
+## Triage — batches 166–173 (2026-09-10)
+
+Eight rounds fired back to back in one session (26 shipped, 5 blocked, 1 failed). Triaged as one
+pass because every batch shares the same single blocker: rights rows a round is not allowed to write.
+
+**Gates, re-run live over all eight batches** (`audit_batch.R` output written outside the tree so the
+batch dirs keep the rounds' own reports): `normalize_nulls.R --dry-run` 0 of 26 files would change;
+`audit_batch.R` all tables PASS, no anomalies, every batch; `verify_batch.R` PASS on every table
+carrying a script, the rest `MISSING(exempt)` (`data_labels` basis, Step 5b exempt);
+`lint_verification.R` 26 rows, 0 ERROR, 3 WARN. The three WARNs were each resolved against the
+settled rules rather than acted on:
+- `sds`, `shi_2025_dass21` — blank `option_text`. Its own signal, explicitly not an argument for
+  PARTIAL (2026-09-08 rule). Both correct at source: `sds`'s options carry only rating numbers,
+  `shi_2025_dass21`'s anchors are unpublished and wave-inconsistent.
+- `science_ltm` — "VERIFIED but its evidence hedges". Cleared on the item-axis rule, `jiang_2021`
+  shape: the hedge scopes the response-frequency route's thin Technology/Environment separation,
+  while the item axis is pinned independently by self-describing `ltm::Science` column names plus
+  the `Science.Rd` listing. Status left VERIFIED.
+
+**Staged into `clean/` (9).** All nine take their wording from the study's own paper or an official
+public questionnaire — study-authored instruments with no third-party rights holder:
+`ruiz_parra_2023_rfq8`, `safiye_2023_rfq` (both on the RFQ `ship_with_note` row Ben applied
+2026-09-10), `schafer_2016_music_effects`, `schafer_2016_music_goals`, `science_ltm` (Eurobarometer
+38.1 country questionnaire), `shi_2021_gentrification`, `shineha_2024_gef_{accept_factors,
+attitudes, info_topics}`.
+
+**Held (17), none for a gate failure.**
+
+*Rights — ship-shaped, escalated, no register row (15).* Each round found no reserved right but may
+not write a `ship` row, so all of these wait on Ben:
+- explicit grant / public domain: `salleh_2023_aim_iam_fim`, `schalet_2016_hrsa`, `schmidt_2017_pds`,
+  `shi_2025_dass21`
+- author letter, research use plus a courtesy request: `SCS_Suh_2023_SCS`, `shi_2025_rrs`
+- silence, nothing quotable: `shen_2020_sas20`, `schmidt_2017_fas`,
+  `shin2024_creactability_{adaptability, creativity, quickness}`, `shan_2020_{g, hs, ph}` (ASSIS)
+- licence conflict: `SABFI2_Gallardo_Pujol_2018_Micro` — the journal's current page says CC BY-SA 4.0,
+  the SciELO España mirror footer says CC BY-NC 3.0. NC goes to Ben; the round asked for the ruling
+  before upload and this triage did not overrule it.
+
+Two additions this triage made to the rounds' own lists:
+- `shan_2020_{g,hs,ph}` — the rounds shipped the ASSIS on silence, and `availability_audit_full.csv`
+  describes it as "(non-commercial)" with no quoted clause. Pulled into the rights hold.
+- `SABFI2_Gallardo_Pujol_2018_Tight` — held because its notes carry **no rights assessment at all**.
+  Unlike its Micro sibling the round never checked the tightness scale's originator, and the wording
+  is third-party (ISP OSF materials), not study-authored. No gate would have caught this.
+
+*Open data decision (1).* `sds` — `resp=6` is TestGardener's missing/illegal sentinel rather than a
+rating (177/6149 rows; item 8's 79 sixes are a skip after item 7 = none, 75/79). The note records
+that fixing `data/TestGardener.R` would require regenerating this table's itemtext rows, so its
+shape depends on a decision not yet made. Held per the "fate depends on an open decision" rule.
+
+**Issues-page entries deliberately deferred, not dropped.** Nothing here is uploaded, and the entries
+describe live tables (`ruiz_parra_2023_rfq8`'s own note puts it as "owed once uploaded"). Owed on
+upload: IRW-translated or machine-translated text for `ruiz_parra_2023_rfq8` (IRW's own
+`instructions_translated`), `schmidt_2017_fas` and `schmidt_2017_pds` (machine translation of German
+labels); blank `option_text` for `sds`, `shi_2025_dass21`, `shineha_2024_gef_info_topics`; and the
+`shineha_2024_gef_info_topics` "choose three" vs five-selections source inconsistency.
+
+**Response-data defects found, none filed as issues** (all re-confirmed by an orchestrator against
+live data, all in source files rather than IRW recodes):
+1. `santos_2018_cesd` — four CES-D items stored in opposite directions across ~77% of person-waves;
+   the study's own `CESDtot` reproduces under a plain sum in 223/223 site-H wave-1 rows and under
+   `3−x` in 527/527 rows of every other cell. Determinate; blocked the table.
+2. `shi_2025_dass21` — wave 0 coded 1–4, waves 1–2 carrying five levels 0–4 against a 4-point
+   instrument; 52 wave-1 and 27 wave-2 respondents use both 0 and 4 within their own 21 answers.
+   Minimum fix is recoding wave 0 as `resp-1`; waves 1–2 still need a decision.
+3. `sds` — the `resp=6` sentinel above.
+4. *Lead, not established:* person totals correlate −0.15 pre→post but +0.56 post→third in
+   `shi_2025_dass21`, same shape in `shi_2025_rrs`; `preDASS总分` disagrees with the pre item sum in
+   15/196 rows. Suggests baseline rows may not be linked by `id` to later waves.
+
+**Metadata fixes owed outside itemtext:** `SABFI2_Gallardo_Pujol_2018_Micro`'s dictionary Description
+reads "Racial microagression scale" but the items are the ISP life-space measure (six settings,
+confirmed in the data); `schmidt_2017_fas`'s Description and script comment swap the bedroom and
+vehicle items (prose only, codes fine); `availability_audit_full.csv` calls `SCS_Suh_2023_SCS` Neff's
+Self-Compassion Scale when it is Singelis's Self-Construal Scale.
+
+**Lead worth acting on:** `SABFI2_Gallardo_Pujol_2018_Tight`'s notes locate the administered Spanish
+LOT-R at `Spanish ISP.pdf` pp. 30–31. `SABFI2_Gallardo_Pujol_2018_LOT` shipped in batch_165 on an
+English fallback that recorded Spanish as unrecoverable within scope — so an already-shipped table
+could be re-extracted with its administered wording.
+
+### Ben's rights rulings, 2026-09-10 (applied)
+
+Asked as two questions against the 15 rights-held tables. Outcome:
+
+**Keep the explicit public-domain / no-cost grants (4 tables, ship rows written, staged):**
+`salleh_2023_aim_iam_fim` (AIM/IAM/FIM, "There is no cost to use these measures."),
+`schalet_2016_hrsa` (HAM-A, public-domain reproduction sheet), `schmidt_2017_pds`
+(PDS, "free to use and access"), `shi_2025_dass21` (DASS, "public domain… copied without
+restriction" — the same page and hash the already-shipped `ptacek2023_dass21` and
+`rosharudin_2023_dass21` relied on, which is why no row existed until now).
+
+**Pull the author-letter tables (2 tables, block rows written, quarantined).** Ben ruled that
+a letter granting research use with a courtesy request attached is NOT sufficient for IRW to
+redistribute the wording. This overturns the reading the extracting agents applied from the ERQ
+precedent (irw#2121, 2026-09-08). `SCS_Suh_2023_SCS` → `quarantine/batch_170/`, `shi_2025_rrs`
+→ `quarantine/batch_172/`, both marked `blocked` in `queue_state.csv`. Neither was ever
+uploaded, so nothing is withdrawn and no issues-page entry is owed.
+
+Two register leads deliberately NOT swept, because a block row reaches the whole corpus and
+these tables have not been examined:
+- `qi_2025_self_construal` (pending) may be the Singelis SCS and would fall under the new block.
+- `kuehner_2017_mw_rumination` is **already shipped** and may be the RRS. Check it before
+  treating the RRS row as applied corpus-wide.
+
+**Open an issue for the silence cases (8 tables, still held):** Zung SAS (`shen_2020_sas20`),
+HBSC FAS II (`schmidt_2017_fas`), the three `shin2024_creactability_*`, and the three ASSIS
+tables (`shan_2020_{g,hs,ph}`). Ben wants the policy question filed rather than ruled per table.
+
+**`SABFI2_Gallardo_Pujol_2018_Micro`: hold** until Ben reads the CC BY-SA 4.0 and CC BY-NC 3.0
+notices himself. `SABFI2_..._Tight` stays held alongside it — it needs a rights check performed,
+not a ruling, since its round never assessed the instrument at all.
+
+Staged for upload after these rulings: **13 tables** in `itemtables/clean/`.
+Issues-page entries for all 13: datapages/irw PR #183 (merge after the upload, not before).
+
+## batch_174 — 2026-09-10T20:49 (claim) → 21:07 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 373 pending; cap batch_189). First round
+at SIX agents: no kills, all six agents returned (slowest 12.4 min); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `shinohara_2021_testimony` | **written** | 33 (9 items) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `shu_2024_gad7` | **written** | 28 (7×4) | `data_labels` | NOT_NEEDED |
+| `shu_2024_phq9` | **written** | 36 (9×4) | `data_labels` | NOT_NEEDED |
+| `silva_2018_mbds` | **written** | 336 (12×28) | `paper_explicit` | VERIFIED, verify PASS |
+| `silva_2018_phcs` | **written** | 40 (8×5) | `paper_explicit` | PARTIAL, verify PASS |
+| `silva_2018_bsq` | **blocked** (rights) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0. Yield 5/6 (83%).** Breaker not near (0% failed).
+
+Gates: normalize_nulls fixed 1 file (silva_2018_phcs, blank→NA); audit_batch 5 PASS, no anomalies (no WARNs to
+explain); verify_batch PASS=3, MISSING(exempt)=2 (the shu data_labels tables); lint_verification clean (5 rows);
+irw-validate clean on all 5; check_provenance clean (0 IRW-generated tables without an issues-page entry).
+
+### Notable
+
+- **silva_2018_bsq blocked on BSQ rights, not access.** The wording was found: Silva et al. 2016, Cad Saúde Pública,
+  Table 2, all 34 items in EN+PT, CC BY. But psyctc.org's BSQ page says the BSQ and its short forms have been
+  managed by MAPI Trust since Oct 2023, free only for "non-commercial, unfunded use", and "all requests for
+  permission to use or translate the BSQ must go to them". **Orchestrator re-fetched the page and CONFIRMED** the
+  MAPI / non-commercial wording. **No register row exists for BSQ**, so Ben should decide whether to add a `block`
+  row. `abdullah_2024_bsq_*` is the Bloating Severity Questionnaire, a different instrument. The mapping is settled
+  if the block is ever lifted (verify_silva_2018_bsq.R is left in the batch dir, PASS). Row added to
+  pending_index_notes.csv.
+- **Rights, silence cases (need a human look before upload):** `silva_2018_mbds` (Multidimensional Body
+  Dissatisfaction Scale) and `silva_2018_phcs` (Perceived Health Competence Scale) both ship on silence. Agents
+  found no restriction clause from the originators, and neither wrote a register row. For PHCS, the only
+  restriction-like text is an aggregator's hedge (db.arabpsychology.com), not the rights holder's.
+- **shu_2024_gad7/phq9** applied the existing PHQ/GAD family `ship` register row. Both are `translated_substitute`
+  (administered Chinese, not recoverable; the .sav carries only the study's own English, which is not the official
+  English wording). PHQ1's SPSS label is cut off at 255 bytes ("...uninterested in doin"); the agent completed it as
+  "doing things" and disclosed that in public_note. **Orchestrator CONFIRMED** the label is exactly 255 bytes.
+- **shu_2024_phq9: the deposit overrides the paper's instrument description.** The paper says PHQ-8 plus a separate
+  suicidal-ideation question scored 1–4. The .sav has all nine items as one 0–3 block. **Orchestrator CONFIRMED:**
+  PHQtotal = 9-item sum on 1190/1190 rows but 8-item sum on only 1022/1190 (86%); GADtotal = 7-item sum 1190/1190.
+  The table is correctly the PHQ-9.
+- **shinohara_2021_testimony: the processing script's header comment has the rank direction backwards.**
+  `data/shinohara_2021_testimony.py` line 8 says "1-3, higher = larger reward given", but 1 = high reward/first
+  choice and 3 = low reward. **Orchestrator CONFIRMED** from irw_fetch: positive-condition allocation at resp 3 is
+  observation/valence/neutral = 15/20/29, matching the paper's published low-reward counts. The data are right and
+  only the comment is wrong (a small fix in data/). The table is `translated_substitute`: the administered language
+  was probably Japanese, but no script is published and the English comes from the paper's Methods.
+- **silva_2018_mbds: resp is a weighted product** (importance/10 × rating, 28 distinct values 0.1–5.0). option_text is
+  blank for all 28 values, disclosed in public_note. Possible data-direction question: the 2017 source marks items
+  4/6/9/12/16 as reverse-scored, yet **orchestrator CONFIRMED** all 66 inter-item correlations are positive (min
+  r=0.24, 0 negative; n=802). So the stored items all point the same way: either the source had already reversed
+  them, or the reverse flag doesn't apply to this weighted score. This is not an itemtext defect, but it is worth
+  one look before anyone models keying. Instructions and option labels are blank, because Carvalho 2013 (SciELO)
+  returned 403/504.
+- **silva_2018_phcs polarity CONFIRMED:** means PHCS1/2/6/7 = 1.9/2.1/2.2/2.1 vs PHCS3/4/5/8 = 3.9/3.8/3.5/3.5, and all
+  16 cross-block correlations are negative (−0.54 to −0.25). The order among PHCS2/6/7 is not established; PHCS4 vs
+  PHCS5 is only weakly supported.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_175 — 2026-09-10T21:09 (claim) → 21:34 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 367 pending; cap batch_189). Second
+round at SIX agents: no kills, all six agents returned (slowest 8.8 min); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `silva_2023_ecohis` | **written** | 65 (13×5) | `paper_explicit` | VERIFIED, verify PASS |
+| `simsalRbim_Human_LargeValence_2017` | **written** | 14 (7×2) | `data_labels` | NOT_NEEDED |
+| `simsalRbim_Human_LowValence_2017` | **written** | 14 (7×2) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `simsalRbim_Mice_LargeValence` | **written** | 179 (5 items) | `data_labels` | VERIFIED (optional row), verify PASS |
+| `simsalRbim_Monkey_LargeValence` | **written** | 127 (5 items) | `data_labels` | NOT_NEEDED |
+| `silva_2018_tfeq` | **blocked** (rights) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0. Yield 5/6 (83%).** Breaker not near (0% failed).
+
+Gates: normalize_nulls 0 files changed; audit_batch 1 PASS / 4 WARN (all four simsalRbim: 100% blank item_text
+and option_text — expected, explained in notes.csv); verify_batch PASS=3, MISSING(exempt)=2; lint_verification
+0 ERROR / 1 WARN (silva_2023_ecohis option_text blank by design, explained); irw-validate 0 ERROR, 4 WARN
+name_charset (mixed-case live table names, which the itemtext must match); check_provenance clean.
+
+### Notable
+- **Orchestrator harmonized the four simsalRbim tables to one convention before merge.** Agents had split: the
+  Monkey agent put the paper's liquid descriptions ("100 mM NaCl", "banana juice (diluted 1:3…)") in `item_text`,
+  and the Mice agent left `item_text` blank with the paper's Methods test paragraph in `instructions`. Ruled for
+  the Mice form under the 2026-09-05 picture-stimulus ruling: item identity stays in the code, and `item_text` holds
+  only wording a respondent read. Monkey was revised by its own agent. Its liquid descriptions moved to
+  `public_note`, its `instructions` is now the paper's verbatim macaque two-bottle paragraph, and the gate
+  re-passed. The two Human tables were also aligned on instruction formatting (newline paragraphs; LargeValence
+  had dropped "Press any key to continue.", now restored as a verbatim transcript). **Open question for Ben:** for
+  ANIMAL tables, does a third-person Methods paragraph belong in `instructions`, a field meant for what subjects
+  were told? Both animal tables do it now, so reversing it is a one-column change on two files.
+- **simsalRbim response-data questions (not itemtext):**
+  - The simsalRbim_data README says "You may use the data for scientific purposes only." while its LICENSE file
+    is GPL-3.0. Three agents flagged it independently. This may matter for the RESPONSE tables' licence under the
+    data standard.
+  - Participant counts don't match the paper: Human Large has 32 ids vs 25 in the paper, Human Low 63 vs 48.
+    Rankings still reproduce the paper (Low: rho 0.821, 0.857 with the tied Sunset/Flowers pair swapped; the paper
+    reports 0.86).
+  - Monkey `resp` is the amount DRUNK (banana reaches 500, the bottle size), though the paper says the amount
+    remaining was measured.
+- **silva_2023_ecohis: code 5 may be "Don't know", not the top of the scale.** The paper says only "5-point Likert";
+  the original ECOHIS has 5 frequency options plus Don't know. **Orchestrator CONFIRMED** from the deposit xlsx:
+  pooled mean caries count (ceod) by response code 1–5 = 0.92 / 2.41 / 2.89 / 3.81 / **2.71** (n = 3663 / 499 /
+  521 / 102 / 38), which breaks the monotone trend at 5. Suggestive, not proof. `option_text` ships blank, with a
+  public_note warning. The authors' SCORE averages 5s in as highest. Possible response-data issue; settle it from
+  the Tesch 2008 Brazilian form's option numbering. Also, `translated_substitute`: the administered wording was
+  Portuguese, and the shipped English is the authors' Table 2 wording ("Has your child ever…"). Mapping VERIFIED
+  by 7 per-item statistics; the closest pair (12/13) is separated by SD 0.724 vs 0.737.
+- **silva_2018_tfeq blocked on rights (retry test NO).** The TFEQ is sold by Pearson as the Eating Inventory
+  (1988, level B), under the same Pearson Terms page (identical sha256) as the SCL register row. Wording WAS
+  located: Silva 2017 UNESP thesis Anexo 3, codes and labels matching the live data; a mapping check is banked as
+  verify_silva_2018_tfeq.R, PASS. **Counter-evidence for a human:** PhenX says TFEQ-R18 is "freely available;
+  permission not required", and the thesis calls it public domain; neither is the rights holder. Not written by the
+  round: a TFEQ/Eating Inventory register row (`^TFEQ[0-9]+$`), which would also govern `sokolovskii_2021_tfeq`
+  (name match only). Row added to pending_index_notes.csv.
+- Minor fix this round: `pending_index_notes.csv`'s last row ended in LF while the rest are CRLF. The appended row
+  normalized that line ending.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_176 — 2026-09-10T21:35 (claim) → 21:55 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 361 pending; cap batch_189). Third
+round at SIX agents: no kills, all six agents returned (slowest 10.1 min, smacof_pvq40); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `sinche_2017_skill_development` | **written** | 75 (15×5) | `data_labels` | VERIFIED (75/75 item×resp cells vs .sav + Table 3 means), verify PASS |
+| `sinche_2017_skill_importance` | **written** | 75 (15×5) | `data_labels` | VERIFIED (15/15 unique frequency vectors vs .sav + Table 3), verify PASS |
+| `singleton_2021_carbon_reduction` | **written** | 75 (15×5) | `paper_explicit` | VERIFIED (15/15 count profiles, min off-diagonal L1 8), verify PASS |
+| `sleboda_2021_risk_benefit` | **written** | 880 (80×11) | `data_labels` | NOT_NEEDED (verify script written anyway, PASS) |
+| `smpi_lorenzoluaces_2020_gad7` | **written** | 28 (7×4) | `paper_order` | PARTIAL (GAD_4/5/6 pinned; 1/2/3/7 not), verify PASS |
+| `smacof_pvq40` | blocked (rights) | — | — | analysis banked, verify_smacof_pvq40.R PASS |
+
+**Written 5 / blocked 1 / failed 0 — yield 5/6 (83%).** Circuit breaker not near (0% failed).
+
+Gates: normalize_nulls 0 changed; audit_batch 5 PASS, no anomalies (no WARNs to explain); lint_verification
+clean (5 rows); irw-validate 0 ERROR / 0 WARN; check_provenance clean for this batch (the 13 `mixed` review
+lines are all pre-existing tables). verify_batch: first run reported **NO VERDICT for
+sinche_2017_skill_importance**; the script run standalone printed VERDICT: PASS, and a full verify_batch re-run
+came back PASS=5. Transient (first-run output not captured); classified on the re-run.
+
+### Notable
+- **smacof_pvq40 blocked on rights (retry test NO).** Schwartz's own repository of authorized PVQ40 versions
+  (ORPC 2(2), scholarworks.gvsu.edu/orpc/vol2/iss2/9/) carries CC BY-NC-ND 3.0 — **orchestrator confirmed** the
+  licence link on the cached landing page. Caveat: the PVQ40 English file itself returned 403, so the block rests on
+  the repository-level licence. **No PVQ/Schwartz row exists in instrument_rights_register.csv (confirmed by grep);
+  a block row is warranted and probably reaches other SVS/PVQ21/ESS21/PVQ-RR tables (unchecked).** Wording would
+  also be hard even if unblocked: Borg, Bardi & Schwartz 2017 prints no item list and two full PVQ40 texts disagree
+  on 7 items. Row added to pending_index_notes.csv.
+- **smacof PVQ40 response direction is opposite to its Rd.** Rd says 1 = not at all like me. **Orchestrator
+  CONFIRMED** from the package's PVQ40.rda (zeros dropped): value means sd 2.0 < un 2.3 < be 2.5 < se 2.6 < he 3.0 <
+  co 3.2 = ac 3.2 < st 3.3 < tr 3.6 < po 3.8, which matches the pan-cultural hierarchy only if 1 = very much like me.
+  Matters for anyone using the response table; worth a note in the dictionary.
+- **sinche_2017_skill_importance overrides the .sav value labels.** **Orchestrator CONFIRMED** both halves: the .sav
+  labels Employ_Skill_1R with the same agree/disagree set as Doc_Skill_1, while the paper's Methods say the
+  importance block ran "from 'not at all important' to 'extremely important'". Endpoints shipped from the paper,
+  2–4 blank; public_note written.
+- **sleboda_2021_risk_benefit `*_new` anchors follow the .sav value labels over the S1 File.** **Orchestrator
+  CONFIRMED** the labels: GT/SC/PE put "Helt ny" at 1 and "Mycket bekant" at 11; EN/VA the reverse — while GT_new's
+  own English variable label says "1 = absolutely old; 11 = absolutely new". The data argument (gene tech reads
+  newer than pesticides only under the labels) is a plausibility ordering, not proof. **For triage:**
+  option_text_translated renders "Mycket bekant" (literally "very familiar") as the study's "absolutely old" — a
+  defensible but interpretive pairing. Also: translated_substitute / study_supplied (no Swedish item wording was
+  published); the processing script's header comment misnames GT and EN (comment only); S2 Table vaccination
+  benefit mean 7.71 vs data 7.51 (likely paper typo).
+- **singleton_2021_carbon_reduction: even items stored reverse-scored**, option_text mapped per item. verify output
+  (re-run by orchestrator) reproduces published M/SD/alpha exactly (54.40/6.57/0.787) vs 49.91/3.80/0.223 if
+  re-reversed. **Dictionary defect:** Description says "Pro-environmental-behavior scale"; it is the revised NEP
+  (Dunlap 2000), an attitude measure. NEP shipped on silence (no rights terms found).
+- **smpi_lorenzoluaces_2020_gad7:** canonical GAD-7 anchors shipped though the paper describes the scale as "none
+  of the days"/"all the days" (disclosed in public_note). Response-data note: table holds the 487 SMPI-routed
+  participants, not the paper's n=1523 GAD-7 sample. The agent's cache holds the SMPI preprint Table 1 (item
+  wording) for the sibling `_smpi` table.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_177 — 2026-09-10T21:56 (claim) → 22:13 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 355 pending; cap batch_189). Fourth
+round at SIX agents: no kills, all six agents returned (slowest 11.9 min, sned_bendall_2024); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `smpi_lorenzoluaces_2020_phq9` | **written** | 36 (9×4) | `paper_order` | PARTIAL (PHQ_1/3/4/5/7/8/9 pinned; PHQ_2↔PHQ_6 not), verify PASS |
+| `sned_bendall_2024` | **written** | 60 (6×10) | `paper_explicit` | VERIFIED (Table 1 counts: 8 totals + 48 regional cells exact; MacArthur 24/24), verify PASS |
+| `song_2023_rses` | **written** | 40 (10×4) | `paper_order` | PARTIAL (keying clusters + published M/SD/alpha; within-class order not), verify PASS |
+| `smpi_lorenzoluaces_2020_shaps` | blocked (rights) | — | — | — |
+| `song_2025_ep` | blocked (rights) | — | — | analysis banked, verify_song_2025_ep.R PASS |
+| `song_2025_fg` | blocked (rights) | — | — | — |
+
+**Written 3 / blocked 3 / failed 0 — yield 3/6 (50%).** Circuit breaker not near (0% failed); all three blocks
+are determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row.
+
+Gates: normalize_nulls 0 changed; audit_batch 3 PASS, no anomalies (no WARNs to explain); verify_batch PASS=3;
+lint_verification clean (3 rows; no data_labels tables, so no NOT_NEEDED rows owed); irw-validate 0 ERROR / 0 WARN;
+check_provenance clean for this batch (the 13 `mixed` review lines are all pre-existing tables).
+
+### Notable
+- **Servant Leadership Survey blocked on rights (song_2025_ep, song_2025_fg).** Originator article (van
+  Dierendonck & Nuijten 2011, PMC3152712) is CC BY-NC and its item-table note says the SLS "may freely be used for
+  scientific purposes". **Orchestrator CONFIRMED both strings** in the Europe PMC fullTextXML. Song et al.'s items
+  are negated rewordings, treated as derivative. **No SLS row in instrument_rights_register.csv (confirmed by grep);
+  a block row is warranted and reaches the still-pending `song_2025_hu` and `song_2025_st`** (and any other
+  song_2025_* SLS dimension), which will otherwise each burn an agent re-deriving the same verdict. Banked for an
+  unblock: ep reproduces Table 2 M/SD/skew/kurtosis to 0.0009; EP3's English reads positive but behaves negated;
+  FG items correlate positively with the negatively-printed SLS items although FG wording reads the other way
+  (polarity puzzle). Dictionary Description calls fg an "unlabeled construct"; it is SLS Forgiveness.
+- **SHAPS blocked on rights.** Clause "may be reproduced under its proper title for personal use and research.
+  Reproduction in any book or manual or for commercial purpose must be negotiated with the British Journal of
+  Psychiatry" — **orchestrator CONFIRMED** on the CamCOPS page; the 1995 article itself was not read (paywalled),
+  so the block rests on a verbatim secondary quotation. No SHAPS register row exists; block row warranted
+  (`^SHAPS_?[0-9]+$`). Independent obstacle: paper describes a 4-point agree/disagree scale, live data are 0–4 with
+  all five levels used and 4 = most pleasure, so anchors are unrecoverable anyway.
+  **Disclosure:** the shaps agent sent ben's email address as the `email` parameter of one Unpaywall API lookup
+  (DOI 10.1192/bjp.167.1.99), against the standing instruction not to send it to outside services.
+- **song_2023_rses RSES8 overrides the paper's keying.** Paper lists item 8 as negatively worded; **orchestrator
+  CONFIRMED** it is stored unreversed: counts 14/96/798/330, r = .54–.59 with the positive items vs .01–.16 with
+  3/5/9/10, and reversing it moves the total off the published M/SD. Items 3/5/9/10 are stored already
+  reverse-scored (option_text runs agree→disagree for those). Disclosed in public_note. Text is the UMD English
+  RSES as translated_substitute; administered language (Chinese) is inferred, not stated by the paper.
+- **sned_bendall_2024 response-data defect: `rt` holds whole-study completion time.** **Orchestrator CONFIRMED**:
+  one distinct rt value per id across all 801 ids, range 549–177642 s, median 3789. Under the rt-scope rule this
+  should be a named covariate (e.g. `cov_completion_time_s`) in `data/sned_bendall_2024.R`. Not filed.
+  Text from the study's Gorilla Open Materials (CC BY); the MacArthur prompt ships the administered slider text,
+  not the paper's paraphrase. Paper Table 1 typos (All-column urban-leisure mean 6.43 vs 6.64; UK most-time 6.24
+  vs 6.42) are paper errors, not data defects.
+- **smpi_lorenzoluaces_2020_phq9:** canonical PHQ-9 form anchors shipped although the paper describes "none of the
+  days"/"all the days" (disclosed in public_note, same as the batch_176 GAD-7 sibling). Table holds the 487
+  SMPI-routed participants, not the paper's n=1503.
+- Orchestrator note: the first merge into mapping_verification.csv via csv.writer re-terminated 29 existing
+  LF-only lines as CRLF (the file has mixed endings); reverted and re-done as a pure append (+3 lines).
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_178 — 2026-09-10T22:15 (claim) → 22:31 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 349 pending; cap batch_189). Fifth
+round at SIX agents: no kills, all six agents returned (slowest ~10 min, stoyel_2021_athlete_internal); 19G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `srivani_2022_education4` | **written** | 33 (11×3) | `data_labels` | NOT_NEEDED (S2 coding sheet ties codes to text; 33/33 count cells match) |
+| `stachl_2020_belonging` | **written** | 65 (13×5) | `paper_explicit` | VERIFIED (PCM difficulties vs S1 Table D, max dev 0.0027; 78/78 swaps worse; weak pair split by descriptor labels), verify PASS |
+| `stenhouse_2026_math_anxiety` | **written** | 141 | `data_labels` | NOT_NEEDED (xlsx headers carry wording; 141/141 count cells match) |
+| `song_2025_hu` | blocked (rights) | — | — | analysis banked, verify_song_2025_hu.R PASS |
+| `song_2025_st` | blocked (rights) | — | — | — |
+| `stoyel_2021_athlete_internal` | blocked (rights) | — | — | — |
+
+**Written 3 / blocked 3 / failed 0 — yield 3/6 (50%).** Circuit breaker not near (0% failed); all three blocks
+are determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row.
+
+Gates: normalize_nulls fixed 1 file (stenhouse, 142 lines); audit_batch 2 PASS / 1 WARN (explained below);
+verify_batch PASS=1, MISSING(exempt)=2; lint_verification clean (3 rows incl. 2 NOT_NEEDED, written to both the
+batch file and the permanent tracker); irw-validate ok on all 3; check_provenance clean for this batch (the 13
+`mixed` review lines are all pre-existing tables).
+
+### Notable
+- **Servant Leadership Survey block extended to song_2025_hu and song_2025_st** (Humility items 10/18/25/29 and
+  Stewardship items 11/19/26, negated). Same clause and same PMC3152712 XML hash as batch_177's confirmed check.
+  Both agents flag that `instrument_rights_register.csv` has no SLS row; a BLOCK row covering all song_2025 SLS
+  tables is left for a human.
+- **SATAQ-3 blocked on rights (stoyel_2021_athlete_internal).** The table is SATAQ-3 (not SATAQ-4). Thompson's
+  own page: "provided free of cost to those who wish to use it for non-commercial (ie, you make no money)
+  purposes." **Orchestrator CONFIRMED** in both cached Wayback copies. No SATAQ register row exists; suggested BLOCK
+  row is in notes. Leads for the 11 pending stoyel_2021 siblings: sociocult_info/sociocult_pressure/tv_internalization
+  are likely the same SATAQ-3 block; `social_media` items were written to mirror SATAQ (derivative question) and
+  its item_k codes are positional over non-contiguous SMED source items; edeq_* already register-blocked; PANAS
+  (pos/neg_affect) register says ship.
+- **srivani_2022_education4 response-data defect: all "Disagree" answers dropped.** The questionnaire prints
+  "Disagree (-1)", but `data/srivani_2022_education4.py` keeps only {0,1,2}. **Orchestrator CONFIRMED**: 20 cells
+  of -1 in the S2 data sheet; live n_rows 1575 = 1595 − 20 (ELN −7, LET −2, ELS −3, TDE −4, ECT −4). Shipped with a
+  public_note. Not filed.
+- **stenhouse_2026_math_anxiety response-data defect: 1–10 endpoints dropped.** Raw 17.1/20.1 store the endpoints
+  as "1 - Not anxious"/"10 - Very anxious"; `pd.to_numeric(errors="coerce")` blanks them. **Orchestrator CONFIRMED**:
+  17.1 raw 295 → live 241 (−44 −10), 20.1 raw 294 → live 254 (−33 −7), both live resp 2–9. The audit WARN (2 of
+  27 items with no option_text) is this defect, not an itemtext one: the only labelled points are the missing ones.
+  Also: section 15 asks "How far do you agree" but the file's labels are Never..Always — shipped as the file has it.
+  18.x items adapt Hunt & Sari's MTAS (copyright notice only, no restrictive term) — ship-shaped, no register row
+  written. Not filed.
+- **stachl_2020_belonging:** wording read by eye from cartoon images (S1 Fig A1, 300 dpi); cartoon wording
+  preferred over S1 Table A where they differ ("go ask"); punctuation worth a spot-check.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_179 — 2026-09-10T22:33 (claim) → 22:44 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 343 pending; cap batch_189). Sixth
+round at SIX agents: no kills, all six agents returned (slowest ~4.5 min, stoyel_2021_neg_affect); 19G available at launch.
+All six tables come from the one stoyel_2021 PLOS S1 workbook (sha256 b4b1e0f7…c024); siblings were told apart explicitly.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `stoyel_2021_neg_affect` | **written** | 50 (10×5) | `data_labels` | NOT_NEEDED (xlsx headers carry wording, 30/30 across waves); verify PASS (18234/18234 cells rebuilt, closest swap breaks 1984 cells) |
+| `stoyel_2021_edeq_binge_purge` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_eating_concern` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_restraint` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_shape_concern` | blocked (rights) | — | — | — |
+| `stoyel_2021_edeq_weight_concern` | blocked (rights) | — | — | — |
+
+**Written 1 / blocked 5 / failed 0 — yield 1/6 (17%).** Circuit breaker not near (0% failed). All five blocks are
+the existing EDE-Q register row (block, batch_122) applied, retry test NO; each has a pending_index_notes.csv row.
+Low yield is the queue serving five EDE-Q subscales in a row, not a pipeline fault.
+
+Gates: normalize_nulls 0 of 1 changed; audit_batch 1 PASS, no WARN; verify_batch PASS=1; lint_verification clean
+(1 row); irw-validate ok; check_provenance clean for this batch (the 13 `mixed` review lines are pre-existing tables).
+
+### Notable
+- **EDE-Q register open question closed.** The row said "stoyel_2021 needs a separate look because its codes may"
+  carry wording. They do not: `data/stoyel_2021_disordered_eating.py` line 89 renames columns positionally to
+  `item_{i+1}`, so live codes are bare `item_1..item_N` and the block is effective. Four agents re-fetched CREDO
+  7.2.html independently — sha256 unchanged. Register note amended in place by the orchestrator.
+- **neg_affect is PANAS-20 NA** (Watson's 10 NA adjectives in instrument order), shipped under the PANAS `ship` row.
+  Study prints only the 1/5 anchors, so resp 2–4 option_text is blank. Agent wrote the tracker row as VERIFIED;
+  normalised to `data_labels_exemption`/NOT_NEEDED to match convention, evidence kept.
+  Data observation, **orchestrator CONFIRMED**: wave-1 NA item means 2.56–2.71 (high for a non-clinical sample),
+  but internally consistent (workbook mean-score column = item mean, alpha 0.887 vs paper 0.89). Not filed.
+- **Possible response-data defects in stoyel_2021_edeq_binge_purge (blocked table), orchestrator CONFIRMED from S1:**
+  EDEQX1 wave 1 uses 0–6 but waves 2/3 have no 0s (possible 0→1-based shift); EDEQX7 "yes" is 295/294/293 while n
+  falls 802/551/469 and other yes/no items fall sharply (EDEQX2 169/14/5) — looks like carry-forward/misalignment.
+  Also reported, not re-checked: restraint item_5 is empty at wave 1 (n 1020). Not filed.
+- **Email in a data script:** `data/stoyel_2021_disordered_eating.py` line 34 puts ben's address in its User-Agent.
+  Pre-existing; not run or changed this round, but it breaks the no-email-to-outside-services rule if re-run.
+- Lead for the next round: `stoyel_2021_pos_affect` (POSAF1..10, same workbook) should take the neg_affect route.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_180 — 2026-09-10T22:44 (claim) → 22:58 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 337 pending; cap batch_189). Seventh
+round at SIX agents: no kills, all six agents returned (slowest ~7 min, strohacker_2024_arms_readiness); 20G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `stoyel_2021_pos_affect` | **written** | 50 (10×5) | `data_labels` | NOT_NEEDED (xlsx headers POSAF1-10; positional derivation reproduces 18231/18231 live cells), verify PASS |
+| `strohacker_2024_arms_readiness` | **written** | 70 (10×7) | `paper_explicit` | VERIFIED (self-describing codes 10/10 vs paper quotes; polarity: all 24 fatigue×readiness pairs negative −0.73..−0.33; pair structure 8/10 + 2 near-ties), verify PASS |
+| `stoyel_2021_social_media` | blocked (rights, SATAQ-3 derivative) | — | — | mapping banked, cache verify script PASS |
+| `stoyel_2021_sociocult_info` | blocked (rights, SATAQ-3) | — | — | — |
+| `stoyel_2021_sociocult_pressure` | blocked (rights, SATAQ-3) | — | — | — |
+| `stoyel_2021_tv_internalization` | blocked (rights, SATAQ-3) | — | — | — |
+
+**Written 2 / blocked 4 / failed 0 — yield 2/6 (33%).** Circuit breaker not near (0% failed). All four blocks are
+determinate rights verdicts (retry test NO), each with a pending_index_notes.csv row. Low yield is the queue serving
+four more SATAQ-3 subscales from the same stoyel_2021 workbook, not a pipeline fault.
+
+Gates: normalize_nulls 0 of 2 changed; audit_batch 2 PASS, no WARN; verify_batch PASS=2; lint_verification clean
+(2 rows incl. 1 NOT_NEEDED, written to both the batch file and the permanent tracker); irw-validate ok on both;
+check_provenance clean for this batch (the 13 `mixed` review lines are pre-existing tables).
+
+### Notable
+- **SATAQ-3 block now covers five stoyel_2021 tables** (athlete_internal from batch_178, plus Information,
+  Pressures, Internalization-General). **Orchestrator CONFIRMED** the clause "This scale is provided free of cost to
+  those who wish to use it for non-commercial (ie, you make no money) purposes." in the cached Wayback copy, sha256
+  efe36a96…f6c6 (identical to batch_178). `instrument_rights_register.csv` still has **no SATAQ row**; four agents
+  each suggested a BLOCK row in notes. Adding it is left for a human.
+- **Decision for Ben — stoyel_2021_social_media.** Study-authored items, but the paper says "These new items matched
+  the typical wording of the SATAQ [36]" (**orchestrator CONFIRMED** in article XML), and SMED5-8 are SATAQ-3 items
+  with "TV/magazines/music videos" swapped for "social media/influencers". Blocked as a derivative under SKILL.md.
+  If Ben rules otherwise, a validated 36-row candidate is in `.cache/stoyel_2021_social_media/`. Mapping is
+  non-contiguous: item_1..7 = SMED2,4,5,6,7,8,9 (11733/11733 cells reproduced).
+- **stoyel_2021_social_media response-data observations, orchestrator CONFIRMED:** item_2 (SMED4, "main purpose of
+  your social media usage") is a nominal question stored as 1–6 with unpublished categories, and its distribution
+  jumps between waves (w1 {1:754,2:43,4:2,5:2}; w2 {1:111,…,5:238,6:13}); it alone gives the table its 1–6 range.
+  The workbook's SMED mean-score column equals mean(SMED5,7,8) in 100% of cases at all three waves, although the
+  paper labels the scale "5–9". Arguably item_1 (time/day) and item_2 (purpose) do not belong in an IRW response
+  table. Not filed.
+- **stoyel_2021_pos_affect caveat:** the article describes only the PANAS *negative* items; the 1/5 anchors were
+  applied to PA because in the workbook the POSAF block uses the same stem and range as NEGAF (**orchestrator
+  CONFIRMED** headers). Endpoints only, so resp 2–4 option_text blank.
+- **strohacker_2024_arms_readiness:** mixed-language administration (paper: "the ARMS, BREQ-3, and PPFS were
+  translated from English to German", **orchestrator CONFIRMED**), German wording unpublished, and no cohort flag
+  in the data. Shipped English with a public_note, language columns omitted per the ibrahim_2015_sf36 precedent.
+  "I feel physically fit" follows the study over canonical ARMS "I am physically fit". ARMS (Keegan et al. 2021,
+  Frontiers, CC BY 4.0) has no register row; the agent read silence as permission, and a ship row needs Ben.
+- **Lead for the next round (strohacker_2024_bmzi_motive is at the head of the queue), orchestrator CONFIRMED:**
+  `data/strohacker_2024_situational.py` line 21 comments BMZI as "1 = strongly agree … 5 = strongly disagree", but
+  the S1 workbook descriptor row reads "1=strongly disagree … 5=strongly agree". The data are not recoded, so only
+  the comment is wrong. Do not take option direction from the script.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_181 — 2026-09-10T22:59 (claim) → 23:13 (close), 6 agents, 6 tables
+
+Stop conditions clear at start (no in_progress rows, no breaker flag, 331 pending; cap batch_189). Eighth
+round at SIX agents: no kills, all six agents returned (slowest ~6.7 min, sun_2024_innovation); 19G available at launch.
+
+| table | outcome | rows | mapping_basis | verification |
+|---|---|---|---|---|
+| `sugiura_2015_disaster_characteristics` | **written** | 240 (40×6) | `data_labels` | NOT_NEEDED (S1 'label P' sheet numbers 1-40 = data header; all 8 published factor alphas reproduce), exempt |
+| `sun_2016_risky_choice_graph` | **written** | 8 (4×2) | `paper_order` | VERIFIED (per-pair chi2 2.760/6.484/4.825/9.029 reproduce, max diff 0.0004, nearest wrong pair 1.7 away), verify PASS |
+| `sun_2021_blockchain_loan_adoption` | **written** | 105 (15×7) | `paper_explicit` | PARTIAL (5 alphas + 10 HTMT reproduce ≤0.0005; within-construct order not checkable), verify PASS |
+| `sun_2024_innovation` | **written** | 21 (3×7) | `paper_explicit` | PARTIAL (Table 7 HTMT 15/15 ≤0.0005, best of 720 label assignments, next 0.0987; within-block order not checkable), verify PASS |
+| `sun_2024_performance_expectancy` | **written** | 21 (3×7) | `paper_explicit` | PARTIAL (alpha/AVE/CR 0.981/0.963/0.987 = Table 6 PE row, max diff 0.0005, runner-up PV 0.0037; order not checkable), verify PASS |
+| `strohacker_2024_bmzi_motive` | blocked (wording unpublished + 2 ambiguous codes) | — | — | — |
+
+**Written 5 / blocked 1 / failed 0 — yield 5/6 (83%).** Circuit breaker not near (0% failed). The block is
+determinate (retry test NO) and has a pending_index_notes.csv row.
+
+Gates: normalize_nulls 0 of 5 changed; audit_batch 4 PASS + 1 WARN; verify_batch PASS=4, MISSING(exempt)=1;
+lint_verification clean (5 rows incl. 1 NOT_NEEDED, written to both the batch file and the permanent tracker);
+irw-validate ok on all 5; check_provenance.R no errors (88 IRW-generated tables, 0 missing an issues-page entry).
+
+- **Audit WARN explained (notes.csv):** sun_2016_risky_choice_graph has blank item_text on 100% of rows. Expected:
+  each item is a graph stimulus with no question stem, and the gamble ("A:80%,¥50" / "B:40%,¥100") is in option_text.
+- **strohacker_2024_bmzi_motive block.** The paper names no BMZI item. It says the items were reworded to "right now"
+  and translated German→English. 9 of 11 codes match a published BMZI item, but `BMZI_PrimaryFitness` and
+  `BMZI_PrimaryHealth` each fit two, and the item set matches neither the 24- nor the 23-item form. Rights look open:
+  Schmid 2018 PLOS ONE prints the BMZI wording under CC BY, there is no restrictive clause, and there is still no register row.
+- **Scale direction, orchestrator CONFIRMED:** the paper's Methods sentence "1 = I strongly agree, 5 = I strongly
+  disagree" (article XML) is wrong, like the script comment flagged last round. Live data: BMZI_Compete mean 1.690 with
+  317/519 at 1; BMZI_PrimaryFitness mean 3.842 with 70.9% at 4-5. That ordering matches Schmid 2018's norms only under
+  1 = disagree. Data not recoded, so there is no data defect.
+- **sun_2016 source misprint, orchestrator CONFIRMED:** Table 1 prints 68% for Pair 4, money-compressed. Live resultd
+  gives 62/94 = 66.0%; chi2 on that table = 9.03, the paper's 9.029, while 64/94 would give 11.0.
+- **sun_2024 citation error, orchestrator CONFIRMED:** the PE items are credited to "Venkatesh et al. (2016) [80]", but
+  reference 80 in the article XML is Vershitsky et al. 2022 (Publ. Organ. Rev.). The items are UTAUT2-style adaptations.
+- **Decision for Ben: the administered language of the Sun/Dedahanov/Shin/Li China surveys.** Neither paper states it.
+  - Both sun_2024 agents independently inferred Chinese from the sample (CEOs of mainland SMEs, QR-code survey) and the
+    xlsx's Chinese-Excel metadata. They shipped `translated_substitute`/`study_supplied` with `language=Chinese`
+    (qin_2025 precedent).
+  - The sun_2021 agent, looking at the same author group's survey run in China, shipped `study_materials` with no
+    language column (hayek_2022_subj_norm precedent), because the S1 Appendix questionnaire is in English.
+  - Both are defensible, and the corpus holds both conventions. Whichever way it goes, the four remaining sun_2024_*
+    tables at the head of the queue should follow it.
+  - Not changed here.
+- **sun_2021 response-data observation (not a defect):** 58-74% of respondents give identical answers to all three
+  items of a construct (orchestrator CONFIRMED: pr .68, rs .58, pf .63, com .74, ui .69). This is consistent with the
+  near-1 alphas (.954-.986).
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_182 — 2026-09-10T23:15 (claim) → 23:32 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch). Circuit breaker 0% failed.
+
+Tables: sun_2024_price_value, sun_2024_risk, sun_2024_task_tech_fit, sun_2024_usage (paper_explicit, PARTIAL — construct
+pinned by Table 7 HTMT + a 720-way block-label permutation and a 281/281 join to mmc1.xlsx; within-block order rests on
+the paper's 1-3 numbering), sun_2026_eap_content (11 items), sun_2026_eap_difficulty (6 items) (both data_labels, NOT_NEEDED).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 6 PASS, no WARNs; verify_batch 4 PASS + 2 exempt; lint_verification
+6 rows clean; irw-validate ok on all 6; check_provenance.R no errors (88 IRW-generated tables, 0 missing an entry).
+
+- **Language convention (still Ben's open decision from batch_181):** all four sun_2024 tables were told to follow the
+  batch_181 sun_2024 shape (`translated_substitute`/`study_supplied`, language=Chinese) so the paper's six tables stay
+  uniform whichever way he rules. Both sun_2026_eap agents independently inferred Chinese too (Wenjuanxing platform,
+  Hubei Institute of Fine Arts, Chinese punctuation `、`/`：` in the S2 headers) and shipped the same shape, citing
+  shi_2021_gentrification. So the ruling now covers 8 shipped tables (6 sun_2024 + 2 sun_2026_eap) plus sun_2021,
+  and the queue head still holds sun_2026_eap_methods / eap_usage, which should follow it.
+- **sun_2024 Table 6 reporting errors, orchestrator CONFIRMED:** printed CR is impossible given the printed AVE for three
+  loadings ≤1: PV 0.984 (must be 0.9887-0.9888), TTF 0.985 (0.9891), U 0.978 (0.9834-0.9835). Usage alpha printed
+  0.975, mmc1.xlsx gives 0.9724, while every other construct's alpha reproduces (INN .9608, PV .9827, TTF .9829,
+  PR .9634, PE .9809). Not data defects; none of it was used as mapping evidence. An agent's further claim that Table 6's
+  per-item bootstrap-SD rows for INN and U are swapped rests on its own bootstrap and was NOT re-run.
+- **sun_2024 citations [77] TTF, [78] PV, [79] PR and [81] U all check out.** Only batch_181's PE [80] is wrong.
+- **sun_2026_eap_content, orchestrator CONFIRMED:** live item means 3.88/3.90/3.84/3.87/3.81/3.82/3.85/3.78/3.84/3.83/3.76
+  equal Table 5, pinning resp 5 = "Very Important". The paper's Methods anchors ("Very Unimportant") differ in wording
+  from the S1 questionnaire ("Not Important at All"); the questionnaire's wording was shipped.
+- **sun_2026_eap_difficulty:** the Section 3 prompt asks about "severity" but the published scale is agreement; both shipped
+  as published. Table 4 (90 percentages, 18 means) reproduces per the agent.
+- **Orchestrator slips caught before commit:** the claim rewrite first dropped queue_state.csv's CRLF line endings
+  (whole-file diff; restored) and a csv-module merge re-quoted all of mapping_verification.csv (restored; 6 rows
+  appended raw). Neither was committed.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_183 — 2026-09-10T23:33 (claim) → 23:44 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+
+Tables: sun_2026_eap_methods (5 items), sun_2026_eap_usage (12), sun_2026_tiktok_travel (29), szameitat_2015_multitask_examples
+(43), szameitat_2015_occupation_multitask (15), tan_2026_stem_technology_integration (15). All data_labels; tan also carries a
+VERIFIED row + verify script (positional code derivation; per-respondent join to the Forms export, 80/80 own-column agreement vs
+≤63.7% for any other column).
+
+Gates: normalize_nulls 1/6 changed (occupation_multitask, after the orchestrator's language edit below); audit_batch 6 PASS, no
+WARNs; verify_batch 1 PASS + 5 exempt; lint_verification 6 rows clean; irw-validate ok on all 6; check_provenance.R no errors
+(88 IRW-generated tables, 0 missing an entry).
+
+- **sun_2026_eap closes out:** methods and usage follow the batch_182 shape (`translated_substitute`/`study_supplied`,
+  language=Chinese, questionnaire anchors). Ben's open language ruling now covers 4 sun_2026_eap tables + 6 sun_2024 + sun_2021.
+  sun_2026_tiktok_travel ships the same shape, but on firmer ground: the paper says the English questionnaire was translated and
+  back-translated, and respondents were Douyin users paid in RMB.
+- **szameitat_2015 language, orchestrator HARMONISED — Ben to rule:** the two sibling agents disagreed. examples set
+  language='English; Turkish; Dutch; German'; occupation left it unset (huang_2016_cesd precedent). Orchestrator CONFIRMED the
+  country split: examples 366 ids (TR 101, UK 97, NL 77, DE 41, US 35, Intl 15), occupation 347 (TR 97, UK 94, NL 71, DE 41,
+  US 29, Intl 15), so ~60% answered unpublished translations, against huang's 30/114 French minority. The standard populates
+  language whenever administration was non-English, because that is the backfill signal, so occupation was aligned to examples.
+  Both keep text_source=study_materials with English base fields. A multi-value language string has no precedent. If Ben
+  prefers a single value or unset, change both tables together.
+- **tan_2026 possible keying defect, orchestrator CONFIRMED the numbers:** negatively worded item_09 and item_10 correlate
+  positively with the other 13 items (r 0.22–0.48 and 0.25–0.42; r(09,10)=0.67; n=80). The agent's further claim was that the
+  deposit's `Score` column equals the unreversed 15-item sum on 80/80 rows. That was NOT re-run. There is no codebook, so
+  option_text and instructions are blank and scale direction is undocumented. This concerns the response data, not the item
+  text, and may be worth an issue.
+- **sun_2026_tiktok_travel anchors:** S1 prints 1 Strongly disagree / 2 Somewhat disagree / 3 Disagree. Labels 2–3 are almost
+  certainly transposed, but they were shipped as printed and the swap is disclosed. S1's "Ecited." typo was corrected to
+  "Excited." (the spelling in the data header and Table 1).
+- **Source errors only, no data defects:** sun_2026_eap_usage Table 2's "5 (%)" column matches S2 in 1/36 cells, apparently a
+  typesetting shift (agent claim, not re-run; all means reproduce, orchestrator CONFIRMED the 12 live means 3.73–4.00).
+  sun_2026_eap_methods §7.4 quotes levels 1+2 as "strongly disagree". The szameitat Fig 10 caption says −3..+3 where the data
+  are 0–6. Orchestrator CONFIRMED the occupation mean ordering (Teacher 4.85 … Carpenter/Cleaner 3.30).
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_184 — 2026-09-10T23:46 (claim) → 2026-09-11T00:05 (close), 6 agents, 6 tables
+
+**5 written / 1 blocked / 0 failed — yield 83%.** No kills (19G available at launch). Circuit breaker 0% failed.
+
+Tables: taylorabdulai_2025_incentives (7 items, reconstructed, VERIFIED), teicher_2015_mace_distress_helpless (35, paper_order,
+PARTIAL), teicher_2015_mace_distress_terrified (35, paper_order, PARTIAL), teicher_2015_mace_emot_neglect (5, reconstructed,
+VERIFIED), teicher_2015_mace_nonverbal (5, reconstructed, VERIFIED). Blocked: tanck_2021_edeq (EDE-Q rights register row, retry NO).
+
+Gates: normalize_nulls 2/5 changed (the two files the orchestrator rewrote, below); audit_batch 3 PASS + 2 WARN (explained in
+notes.csv, expected); verify_batch 5 PASS; lint_verification 5 rows clean; irw-validate ok on all 5; check_provenance.R no errors
+(88 IRW-generated tables, 0 missing an entry).
+
+- **MACE rights — Ben to register:** no instrument_rights_register row exists for the MACE. All four agents independently found
+  no restriction: Teicher & Parigger published every form as supplements to their own CC BY article ("provided as open access or
+  with General Public License V2 (MACEscore) to help facilitate their free use as research tools"), no copyright text in the S3
+  docx. Ship-shaped, but rounds may not write ship rows, so it is unregistered; quotes and sha256s are in provenance notes. Six
+  more teicher_2015_mace_* tables remain pending and will hit the same question.
+- **MACE sibling harmonisation, orchestrator:** distress_helpless and distress_terrified agreed exactly on item_text (35/35) and
+  the same 4 deliberate blanks, but shipped section_prompt differently (full block intro vs first sentence only). emot_neglect
+  put "Please check all ages that apply." in instructions where nonverbal (which shares both section prompts) kept it in
+  section_prompt. Harmonised both pairs to the literal full intro as printed, instructions blank for the checklist tables;
+  provenance notes updated to say so. The age-grid sentence arguably describes the untabulated age checkboxes — if Ben prefers
+  first-sentence-only, change all four together.
+- **MACE distress 4-item blank (both tables):** the published S3 MACE-X is a post-collection revision. At H/O_Adults_argue it
+  reads "argue with mother/father", but the paper says hearing/observing adults arguing and the data fit that (448/458 O=1 also
+  H=1). At Attempt_sex_sib/Intercourse_sib it reads "Had or attempted..." and "Threatened to harm your sibling", but
+  Intercourse_sib is 0.8% (7/839), all nested in Attempt_sex_sib. Agent numbers, not re-run by the orchestrator. Blanks disclosed in public_note.
+  Helpless agent also flags a paper Table 9 label conflict (item 19 "touched or fondled" vs o_touch_them's form wording).
+- **teicher_2015_mace_nonverbal response-data gap, orchestrator CONFIRMED:** the paper's non-verbal emotional abuse scale has 6
+  items; data/teicher_2015_mace_items.py deliberately excluded Adult_resposibility (MACE-X 65, "not clearly matched to a named
+  subscale" in its header), so the live table has 5 (Closet 3.3, Financial_pressure 37.5, Kept_secrets 30.4, P_diff_please 43.8,
+  P_no_time 24.1 %Yes). Worth an issue; public_note discloses it.
+- **teicher_2015_mace_emot_neglect polarity, orchestrator CONFIRMED:** stored as answered, not reversed (P_loved_you 98%,
+  P_special 96%, Fam_strength 89% Yes). public_note written.
+- **MACE distress resp=0 is structural:** ~92% of zeros are for events the respondent did not endorse; 30 (helpless) / 18
+  (terrified) resp=1 rows sit on non-endorsed events. Agent numbers, not re-run. Data property, not itemtext.
+- **taylorabdulai_2025_incentives is check-all-that-apply, orchestrator CONFIRMED:** per-respondent Yes counts 0:120 1:179 2:41
+  3:21 4:3 5:7 6:1 7:5; 412 Yes over 377 ids, so resp=0 means "not selected". item_text is Table 4 labels (questionnaire
+  unpublished); VERIFIED by 7/7 exact frequency matches, all distinct.
+- **tanck_2021_edeq:** Step 3b confirmed EDE-Q 6.0 German (stored subscale scores reproduce under the standard key, 8/8, max diff
+  0.0000). CREDO page sha256 unchanged. Data notes: item17 all 0 (orchestrator CONFIRMED, 146/146); .sav value labels are 1–7
+  over stored 0–6 (stored values correct); item14>item13 skip-logic violations in 5 pre / 3 post (agent numbers).
+- **Email in processing scripts, orchestrator CONFIRMED:** data/tanck_2021_mirror.py and data/teicher_2015_mace_items.py both send
+  Ben's address in their User-Agent. Neither was run this round; the scripts need a hygiene fix.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_185 — 2026-09-11T00:05 (claim) → 2026-09-11T00:21 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch). Circuit breaker 0% failed. (A first
+dispatch call went out with a placeholder prompt by orchestrator error; that agent correctly did nothing and wrote no files.
+The real six were then dispatched together.)
+
+Tables, all from Teicher & Parigger 2015 (same S3 MACE-X / S9 source as batch_184's four): teicher_2015_mace_peer_physical (5,
+reconstructed, VERIFIED), teicher_2015_mace_physical (6, reconstructed, VERIFIED), teicher_2015_mace_phys_neglect (5,
+reconstructed, VERIFIED), teicher_2015_mace_sexual (12, reconstructed, PARTIAL), teicher_2015_mace_witness_parent (8,
+reconstructed, VERIFIED, 2 blank), teicher_2015_mace_witness_sib (8, reconstructed, PARTIAL, 2 blank).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 4 PASS + 2 WARN (25% blank item_text on the two witness tables — the deliberate
+blanks, explained in notes.csv); verify_batch 6 PASS; lint_verification 0 ERROR, 1 WARN (peer_physical "VERIFIED but hedges" —
+the hedge is about section-prompt rendering only, VERIFIED kept, explained in notes.csv); irw-validate ok on all 6;
+check_provenance.R no errors (88 IRW-generated tables, 0 missing an entry). No data_labels tables, so no NOT_NEEDED rows;
+6 rows appended to mapping_verification.csv (968 -> 974).
+
+- **Agents were seeded with batch_184's harmonised MACE conventions and cached sources** (sha256s re-checked against batch_184
+  provenance). Orchestrator CONFIRMED all 64 item rows for events shared with batch_184's distress_helpless table carry
+  byte-identical item_text, and all six use one instrument string per file with instructions blank. Instrument strings differ
+  cosmetically across the ten MACE tables (e.g. "75-item experimental version" vs "experimental version ... Teicher & Parigger,
+  2015"); not harmonised — Ben's call if wanted.
+- **MACE rights — still unregistered, now 10 tables:** all six agents re-confirmed no instrument_rights_register row and applied
+  batch_184's ship-shaped finding without writing a row. Ben to register.
+- **Blanks carried over, re-derived independently:** witness_parent H/O_Adults_argue (orchestrator CONFIRMED O=1&H=1 448/458) and
+  witness_sib Attempt_sex_sib/Intercourse_sib (orchestrator CONFIRMED 7/7 nested, 7/839). Both agents searched S1, S2, S3 XML,
+  S5/S6 workbooks, S8 manual and the article; administered wording unpublished. Public_notes disclose.
+- **teicher_2015_mace_sexual — paper label override, orchestrator CONFIRMED:** Table 9 / Results / S6 reference sheet label the
+  retained extra-familial item "fondled", but its 5.6% is o_touch_them (5.584 on the 967 complete cases) and not o_fondled
+  (10.548); S6 scoring formulas and S2/S3 wording tie o_touch_them to "Had you touch their body in a sexual way". Kept the form
+  wording by column name, disclosed. 5 of 12 items have no published statistic, hence PARTIAL. The sibling-block
+  attempt/intercourse merger does NOT recur at 16/17 or 29/30.
+- **teicher_2015_mace_phys_neglect P_ER wording, orchestrator CONFIRMED:** S3 MACE-X item 60 ends "...if the need ever arose."; S2
+  MACE item 45 adds ", or would have if needed." Shipped S3 (the developmental form the data used), disclosed, not blanked since
+  item identity is pinned (2.28 vs 2.3 %No). If Ben prefers strict consistency with the four blanks, blank it. Protective items
+  stored as answered (orchestrator CONFIRMED %No P_protect 3.0, P_ER 2.3, Looked_out_each_other 9.5).
+- **teicher_2015_mace_physical data note, orchestrator CONFIRMED:** Spank_open contains Spanked_bare 243/243 and Spanked_strap
+  257/257 — the rule MACEscore's spank_yr_check.R enforces, so S9 Spank_open may be program-corrected rather than the raw tick.
+  Paper Results says the medical-attention hit item was the one eliminated, contradicting its own Table 4 (3.1%, live 3.14) and
+  MACEscore; table and package followed. Response data, not itemtext.
+- **witness_sib verification PARTIAL:** Table 11 pins 4 items; Touch_them_sib/Attempt_sex_sib/Intercourse_sib (6/8/7 of 839)
+  are not separable by data. witness_parent's Adults_hit_med (no _f suffix) pinned to the father item by nesting (13/13 push_f,
+  12/13 hit_f vs 9/13, 7/13 mother).
+- **Availability-audit misclassification — Ben to decide:** teicher_2015_mace_verbal and teicher_2015_mace_peer_verbal are NOT in
+  queue_state.csv because availability_audit_full.csv marks them UNAVAILABLE ("supplements only give short internal column
+  codes"). That is wrong: the S3 MACE-X docx used for all ten shipped MACE tables prints full wording, and MACEscore
+  mace_x_names.R gives code order. Not added to the queue by this round (a human call); they are two cheap tables whose sources
+  are already cached under .cache/teicher_2015_mace_nonverbal/.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_186 — 2026-09-11T00:23 (claim) → 00:43 (close), 6 agents, 6 tables
+
+**3 written / 3 blocked / 0 failed — yield 50%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+All three blocks are determinate (two rights, one response-data defect); none counts toward the breaker.
+
+Written: temesgen_2025_elephant_park_attitude (7 items, paper_explicit, translated_substitute/study_supplied — authors' English
+questionnaire, interviews held in Tigrinya, PARTIAL), teodorini_2020_modafinil_attitudes (8, data_labels, NOT_NEEDED),
+teq_novak_2021_selfesteem (10, reconstructed, translated_substitute/official_instrument_english — Czech RSES, UMD English, PARTIAL).
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARN; verify_batch 2 PASS + 1 MISSING(exempt, data_labels);
+lint_verification no problems; irw-validate 3 ok; check_provenance 0 machine_translation tables missing an issues-page entry.
+
+Blocked:
+- **teq_novak_2021_bfin — BFI-44 rights, orchestrator CONFIRMED the clause.** Both cached Wayback copies of the Berkeley lab's
+  bfi.htm (sha256 ceba43d2…, c7cbfffb…; page says "44 items total") read "freely available for researchers to use for
+  non-commercial research purposes" / "At this time, the BFI is for non-commercial uses only". Same structure as the register's
+  BFI-2 block. **Ben to decide:** (1) add a BFI-44 `block` row to instrument_rights_register.csv (this round did not); (2) whether
+  ibrahim_2015_bfi, conner_2017_bfi and CV_OASIS_ODSIS_PPE_Novak_2020_BFI — shipped with BFI-44 wording before this, batch_048's
+  log having read only the current BFI-2 page — need withdrawing.
+- **teq_novak_2021_teq — response-data defect, orchestrator CONFIRMED.** The deposit pools 7 Sources and data/teq_novak_2021.R drops
+  the Source column. TEQ_13: Sources 1-6 mean 0.58, r=-0.31 with the positively keyed items vs Source 7 mean 2.8, r=+0.62; TEQ_14:
+  1.3/-0.63 vs 3.2/+0.22 (control TEQ_2 2.3/+0.21 vs 2.4/+0.06). The paper's own Table 1 carries the negative loadings. No Source
+  covariate in IRW, so Spreng wording on 13/14 would be wrong for ~86% of respondents. Worth a GitHub issue on the response table
+  (not filed). A gate-passing candidate is banked in .cache/teq_novak_2021_teq/. The agent suggests the other teq_novak_2021_*
+  tables from the same pooled file (scbs, spirit, socdes) deserve the same Source-split check; selfesteem was checked (Source 3 vs
+  7 item-mean profiles r=0.99).
+- **teshome_2021_pss10 — PSS register block applied.** Step 3b confirmed standard PSS-10 (S2 .sav reversed value labels on exactly
+  Perc4/5/7/8).
+
+Notable (source overrides, orchestrator re-checked):
+- **teq_novak_2021_selfesteem direction overrides the paper, CONFIRMED:** paper says higher score = higher self-esteem; deposit RSES
+  total vs SWLS total r=-0.59, item-item r all positive (0.08–0.65), so stored codes are higher = lower self-esteem with negatively
+  worded items pre-aligned. Anchors shipped per item accordingly, disclosed in public_note. Item order uses the common 2,5,6,8,9
+  negative set rather than the UMD form's numbering (data rank 105/126 for the latter); 5<->6 swap scores marginally above identity
+  (disclosed, hence PARTIAL).
+- **temesgen Q7, CONFIRMED:** deposit 38.73/7.85/53.42 vs Supplemental Table 6 34.17/11.65/54.18. 54.18 is also the paper's
+  KSNP-awareness figure, so likely a slip in the paper's table; source-internal, disclosed.
+- teodorini: .sav value labels ("Neither agree nor disagree") preferred over the S3 questionnaire's "neutral"; disclosed in notes.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_187 — 2026-09-11T00:45 (claim) → 00:58 (close), 6 agents, 6 tables
+
+**6 written / 0 blocked / 0 failed — yield 100%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+
+Written: thanh_2025_attitude (5 items, PARTIAL), thanh_2025_environ_concern (6, VERIFIED), thanh_2025_green_behavior (8,
+PARTIAL), thanh_2025_green_knowledge (6, PARTIAL), thanh_2025_perceived_control (5, PARTIAL) — all paper_explicit,
+translated_substitute/study_supplied (Thanh & Cong 2025 PLOS ONE, CC BY; administered in Vietnamese, only the authors' English
+S1 Appendix published; endpoints-only anchors, resp 2-4 blank). Three agents independently re-ran the paper's PLS model and
+reproduced all 22 Table 2 loadings to ≤0.0005, which pins every retained item; the dropped items (ATT4-5, EGB6-8, GK5-6) and
+PBC order within {1,5}/{2,3,4} rest on the appendix numbering, hence PARTIAL. theobald_2017_group_dynamics (2 items,
+paper_explicit, study_materials, VERIFIED — live counts equal Table 1 in all 12 cells).
+
+Gates: normalize_nulls 0/6 changed; audit_batch 6 PASS, no WARN; verify_batch 6 PASS; lint_verification no problems;
+irw-validate 6 ok; check_provenance 0 machine_translation tables missing an issues-page entry.
+
+Notable:
+- **thanh_2025_* response-data defect, orchestrator CONFIRMED on live data (407 ids, 30 items).** Exactly the 8 items the
+  authors dropped (ATT4, ATT5, EC6, EGB6-8, GK5, GK6) look like uniform random fill: SD 1.39-1.45 (uniform on 1-5 = 1.41) vs
+  0.74-1.02 for the 22 retained; chi-square vs uniform p 0.086-0.59 vs ≤5e-40 for every retained item; max |r| with any other
+  item 0.077-0.134 vs ≥0.51 for every retained item. EC6 r with EC1-5 = 0.018/0.014/0.059/0.054/0.063. Defect is in the
+  authors' S1 File (live == deposit). Text was shipped on those codes with a public_note on each affected table (not a block —
+  unlike teq_novak_2021_teq, the wording attaches correctly; the question is whether the stored responses are genuine).
+  **Ben to decide:** whether those 8 columns should stay in the thanh_2025_* response tables; worth a GitHub issue (not filed).
+- **theobald_2017_group_dynamics — RIGHTS ESCALATION, not self-cleared; Ben to rule before upload.** Both items originate in
+  the ASPECT validation paper (Wiggins et al. 2017, CBE-LSE, PMC5459250), licensed CC BY-NC-SA 3.0. The shipped wording was
+  copied from Theobald et al. 2017 PLOS ONE (CC BY 4.0), whose five authors include ASPECT's copyright holders — so the rights
+  holders themselves republished it under CC BY (SWLS "page you copied from governs" reading), unlike song_2025's third-party CC BY
+  copy. The 2026-09-09 IGDS9-SF "stricter governs" ruling could be read the other way. If blocked, delete the __items.csv; no
+  register row written. Also: Table 1 prints "today's [topic] activity" while Methods quote "today's group activity"; Table 1
+  shipped, disclosed in public_note.
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_188 — 2026-09-11T00:59 (claim) → 01:18 (close), 6 agents, 6 tables
+
+**3 written / 3 blocked / 0 failed — yield 50%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+All three blocks are rights blocks with determinate verdicts (retry test NO), not access failures.
+
+Written:
+- tian2026_digital_competence (29 items × 5, data_labels, study_materials, **machine_translation**, VERIFIED). Chinese
+  wording from the BMC Psychology supplement xlsx headers (figshare 10.6084/m9.figshare.32564154.v1, CC BY). The live
+  data matches the deposit cell for cell on 764/764 ids. Every dc_N agrees with its column N on 764/764, and no other
+  column comes closer than 668/764. The paper's Table 2 domain totals reproduce (application 41.516 vs 41.520). Anchors:
+  the paper's English endpoints only, resp 2-4 blank. Three Chinese typos kept as printed; orchestrator CONFIRMED them in
+  the xlsx (item 14 "教学教学", item 20 "知情4", item 23 "的数进行"). The English is IRW-generated, so it **owes an
+  itemtext_issues.qmd entry when uploaded**. check_provenance currently lists it as HELD, so none is owed yet.
+- tomioka_2022_srh_future_needs (7 items, resp 0/1, data_labels, study_materials/study_supplied, NOT_NEEDED). Japanese
+  S2 questionnaire verbatim, the study's English S1 in _translated. Select-all form, so option_text is blank (the
+  reuter_2021_emotions precedent). The public_note says the study's English condenses the Japanese options.
+- tomioka_2022_srh_importance (2 items, resp 1-3, data_labels, study_materials/study_supplied, NOT_NEEDED). Option 4
+  "Not important" was chosen by nobody, so it has no row. Live counts equal the raw file (B1 457/398/10, B2 577/287/1).
+  tomioka_2022_srh_support_types is still pending; both agents left it alone.
+
+Blocked (register rows added for all three, per the rule that a round may write `block`):
+- timss_tam: IEA's released-items clause (non-commercial, no redistribution, covers translations; sha256 7f2ecb5a…0764).
+  Direct precedent is cdm_timss03/07/11 (irw#1891). New register family `TIMSS-IEA`. Strong.
+- tiemensma_2018_iesr: IES-R. CamCOPS docs report Weiss declined reproduction permission on 2015-07-28, and the VA
+  NCPTSD page gives only "request from Weiss". New register family `IES-R`. **Ben to confirm:** the refusal is
+  third-party-reported, the same evidentiary shape as the batch_177 SHAPS block. **Knock-on if it stands:**
+  ali_2021_iesr (batch_003) and beck_2021_iesr (batch_008, German) shipped before the rulings (irw#1954). The
+  availability-audit row calling the IES-R "freely reproduced" is wrong on this evidence.
+- tma: Taylor MAS. Its items are drawn from the MMPI, and UMN Press says it "does not allow for the reproduction of
+  test items … online" (sha256 4303ed75…fc6c). New register family `MMPI`. **Weakest of the three, Ben to rule:** the
+  clause does not name the TMAS; the MMPI derivation rests on secondary sources, with Taylor 1953 unread; item-level
+  correspondence to the MMPI was not checked. Unblock would be quick: codebook, per-item keying and typos are banked
+  in pending_index_notes.csv.
+
+Step 5b checks by the orchestrator: all three rights clauses were re-read in the cached pages and their sha256s re-hashed
+(all match). The TMAS-from-MMPI claim was confirmed in cached psytests.org text. The tian typos were confirmed against
+the xlsx.
+
+Gates: normalize_nulls 0/3 changed; audit_batch 3 PASS, no WARN; verify_batch 1 PASS + 2 MISSING(exempt, data_labels);
+lint_verification 3 rows, no problems; irw-validate 3 ok; check_provenance 0 IRW-generated tables missing an issues-page
+entry.
+
+Housekeeping: queue_state.csv and instrument_rights_register.csv are CRLF files, and the updates preserved that (a
+naive csv rewrite turns the whole file into diff noise).
+
+Cap is `batch_189`; not reached. Ending normally.
+
+## batch_189 — 2026-09-11T01:21 (claim) → 01:34 (close), 6 agents, 6 tables
+
+**5 written / 1 blocked / 0 failed — yield 83%.** No kills (19G available at launch and close). Circuit breaker 0% failed.
+The one block is a rights block with a determinate verdict (retry test NO), not an access failure.
+
+Written:
+- tomioka_2022_srh_support_types (12 items × resp 0/1, data_labels, study_materials/study_supplied, NOT_NEEDED). This is
+  the last of the tomioka_2022_srh_* tables. Conventions follow the batch_188 siblings, and the source sha256s match
+  them. The live data matches its own deposit column on 865/865 per item, with no other column above 758. B7-11 "None"
+  behaves as the none-of-these option: 93/95 of its endorsers ticked nothing else. Trap: pandas reads the codebook label
+  "None" as missing, but openpyxl and readxl do not.
+- torices_2025_bapq (36 items × 6, paper_order, translated_substitute/third_party_english, PARTIAL, verify PASS). The
+  study was Spanish, but no Spanish wording is in scope. The English is from Sasson 2013 Table 2 (PMC3661685), and the
+  Spanish anchors are verbatim from the deposit codebook. The verify reproduces header order 36/36 and live-vs-deposit
+  counts 216/216. All 36 items match the scoring-key polarity, and 28/36 correlate most with their own subscale. It does
+  not separate items within the same subscale and polarity. **Override, confirmed by orchestrator:** items 4 and 29 ship
+  singular "conversation", where Sasson prints the plural. psytests.org has the singular for both, and Gernsbacher 2017
+  (PMC5305234) quotes "I leave long pauses in conversation". **Response-data defect, confirmed by orchestrator on live
+  data:** resp 6 appears 17/108 on BAPQ_01 and **0 of 3,780** on BAPQ_02..36, with the mass piled at 5 (BAPQ_28 76/108).
+  The raw deposit has the same zeros, so it is not caused by the IRW script. The top option was probably not offered for
+  items 2-36. Candidate for a data issue. No BAPQ register row, and none written, since no restriction was found.
+- tran_2023_gad7 (7 × 4, paper_order, translated_substitute/official_instrument_english, language=Vietnamese, PARTIAL,
+  verify PASS). The deposit has bare headers and no Vietnamese anywhere. The verify pins the worry triad
+  {GAD1,GAD2,GAD3}: rank 1/35 at mean r 0.646, though the margin over 0.635 is thin. It also pins the GAD6 irritability
+  outlier (0.440 vs 0.521 next) and the direction: 6.75% score ≥10 vs the paper's 6.8%, where reversed coding gives
+  95.5%. It does not establish order within the triad or among GAD4/5/7. Applied the existing PHQ/GAD `ship` ruling.
+- tran_2023_phq9 (9 × 4, same basis and source as gad7, PARTIAL, verify PASS). The verify pins three items:
+  - PHQ9 is the least endorsed item (mean 0.117).
+  - PHQ3 is the strongest correlate of the deposit's sleep-quality item (−0.338 vs −0.226 next).
+  - PHQ5 is the strongest correlate of early satiation (+0.348) and irregular breakfast (+0.257).
+  The direction also checks out: 41 score ≥10, matching the paper's MDD count of 41. It does not separate
+  PHQ1/2/4/6/7/8. Data notes, not defects: one id has a trailing space ("A457 "), and PHQ1 is NA for A095.
+- transreas_mokken (12 × resp 0/1, data_labels, study_materials, NOT_NEEDED). Codes are the mokken package column names.
+  The Rd table's row order matches the column order 12/12, and live means equal package means (max diff 0).
+  **Ben to decide:** item_text holds the Rd's task-specification row (e.g. "Property: length; Format: YA > YB > YC;
+  Objects: sticks; Measures: 12, 11.5, 11 (cm)"), not a spoken prompt. The tasks used physical objects, and Verweij,
+  Sijtsma & Koops 1996 is closed, so no prompt is published. The alternative is blank item_text, which #1770 would then
+  hold. Disclosed in public_note. T05W's "(cm)" for ball weights is a source typo, copied as printed.
+
+Blocked:
+- transyouth_leshin_2026_parents_dep: this is PROMIS Depression SF 8a, verbatim and in published order, in the OSF
+  study_measures_parents.docx. Applied the existing `PROMIS / HealthMeasures family` block ruling, so no new register
+  row. **Two flags for Ben:**
+  1. The OSF project licence is **CC BY-NC 4.0**. The orchestrator confirmed this via api.osf.io licence
+     60bf992258510b0009a5a9a6. It covers the response data too, and datastandard.md intake bars NC, so every
+     `transyouth_leshin_2026_*` response table may need a licence review.
+  2. The register's PROMIS code pattern (^promis|^evpromis) misses `prim_*`.
+  Pending siblings _parents_posaff, _youth_anx and _youth_posaff also look like PROMIS: the agent inferred this from the
+  materials but did not check it against live data. They will likely block the same way. pending_index_notes.csv row
+  added.
+
+Step 5b checks by the orchestrator: the BAPQ resp-6 zeros were re-checked on a live irw_fetch (CONFIRMED, numbers above).
+The BAPQ singular-wording override was checked against cached Sasson, psytests and Gernsbacher text (CONFIRMED). The OSF
+licence was resolved by API (CONFIRMED CC BY-NC 4.0).
+
+Gates: normalize_nulls 0/5 changed; audit_batch 5 PASS, no WARN; verify_batch 3 PASS + 2 MISSING(exempt, data_labels);
+lint_verification 5 rows, no problems (NOT_NEEDED row for transreas_mokken written to both files); irw-validate 5 ok;
+check_provenance 0 IRW-generated tables missing an issues-page entry. No WARNs, so Step 5c had nothing to explain.
+
+**Cap reached:** batch_189 is the Step 0 cap batch. Stopping.
+
+## Triage — batch_174–189 (2026-09-11)
+
+Gates re-run live on all 16 batches (normalize_nulls, audit_batch, verify_batch, lint_verification): no FAIL, no file
+normalized, every WARN one the round had already explained. Reconciled: 69 `done` rows = 69 `__items.csv`, one
+provenance row each, none stamped, all in mapping_verification.csv.
+
+**Staged 62** to `/tmp/dl_174_189/` (selected from `done` rows; each file cmp-identical to its batch copy; none present
+in irw_text or irw_text_2, current or draft). Not uploaded.
+
+**Held 7** (files stay in their batch folders):
+- `theobald_2017_group_dynamics` — rights: ASPECT is CC BY-NC-SA; the CC BY re-release lacks three of ASPECT's eight
+  authors, so the 2026-09-08 originator ruling points to block. Ben to rule.
+- `sun_2021_blockchain_loan_adoption` — language: shipped with no `language` while its sibling Sun China surveys carry
+  `language=Chinese`; suggested harmonising to Chinese. Ben to rule.
+- `szameitat_2015_multitask_examples`, `szameitat_2015_occupation_multitask` — multi-value `language` string
+  ("English; Turkish; Dutch; German") has no precedent. Ben to rule.
+- `transreas_mokken` — item_text holds the Rd task-specification row, not a prompt. Ben deferred.
+- `simsalRbim_Mice_LargeValence`, `simsalRbim_Monkey_LargeValence` — third-person Methods paragraph in `instructions`.
+  Ben deferred.
+
+**BFI-44 withdrawal (Ben, 2026-09-11):** conner_2017_bfi, CV_OASIS_ODSIS_PPE_Novak_2020_BFI, ibrahim_2015_bfi deleted
+from the irw_text / irw_text_2 drafts by `tools/withdraw_bfi44.py` (removed set asserted equal to target set); public
+notes rewritten, register row BFI-44 `block` added. Takes effect at the next release.
+
+Issues page: datapages/irw#184 (HOLD until the upload and the BFI-44-removing releases are published) adds 54 entries
+for the staged tables, removes the `CV_OASIS_ODSIS_PPE_Novak_2020_BFI` entry and rewrites `conner_2017_bfi` to its
+response-data fact. 8 staged tables got no entry, recorded in `fixes/issues_page_dropped.csv`: `silva_2018_phcs`,
+`sinche_2017_skill_development`, `sned_bendall_2024`, `stoyel_2021_neg_affect`, `stoyel_2021_pos_affect`,
+`teicher_2015_mace_peer_physical`, `teicher_2015_mace_physical`, `teodorini_2020_modafinil_attitudes` -- each ships
+the verified wording respondents read, with only unpublished anchors or a minor source variant as caveat. The six
+sun_2024 entries were trimmed to the administration-language caveat (unstated anchors and within-block order are
+below the bar).
+
+**Uploaded 2026-09-11 (Ben): 62/62 to irw_text_2, row counts verified.** Draft diff shows all 62 `added`, none `changed`. Stamped `uploaded=2026-09-11` in provenance.csv and mapping_verification.csv (62 + 62 rows, byte delta 1224 as expected from 57+59 blank and 5+3 `NA` priors); the 62 batch `__items.csv` copies removed after cmp against `/tmp/dl_174_189/`. Sidecars stay. datapages/irw#184 stays on HOLD until the release is published.
+
+## Ben's rulings on the batch_174–189 escalations (2026-09-11) — recorded, NOT yet applied
+
+1. **BFI-44: withdraw** conner_2017_bfi, CV_OASIS_ODSIS_PPE_Novak_2020_BFI, ibrahim_2015_bfi. DONE (released irw_text
+   v22.0 / irw_text_2 v3.0; register row BFI-44 block; datapages/irw#184 merged).
+2. **theobald_2017_group_dynamics: SHIP.** ASPECT (Wiggins et al. 2017) is CC BY-NC-SA; the wording was re-released
+   under CC BY by five of ASPECT's eight authors (Theobald et al. 2017). Ben ruled the originators' own CC BY
+   re-release is sufficient, although three ASPECT authors are not on it — a narrowing of the 2026-09-08 WHO-5
+   rule for the case where the reprint is by the originators themselves. Upload the held file.
+3. **IES-R: keep the block row.** Withdraw the Weiss preamble from ali_2021_iesr (`instructions`; partial
+   withdrawal, keep the study's own item wording). beck_2021_iesr (German IES-R, (c) Maercker & Schützwohl): research
+   that rights holder's terms before deciding — no action yet.
+4. **MMPI row (tma): keep the block; verify later** by reading Taylor 1953 (doi:10.1037/h0056264) to confirm the
+   TMAS items are MMPI items. Unblock material is in pending_index_notes.csv.
+5. **Register rows approved** (write them): `block` for SATAQ-3, BSQ (Body Shape), Servant Leadership Survey,
+   SHAPS, TFEQ, and Schwartz values (PVQ40 plus SVS / PVQ-21 / ESS21 / PVQ-RR — Ben ticked both scope options;
+   read as the wider scope, confirm if a sweep turns up live tables); `ship` for MACE (Teicher & Parigger 2015,
+   forms published openly with the CC BY article, MACEscore GPL-2).
+6. **Language.** sun_2021_blockchain_loan_adoption: set `language=Chinese`, text_source translated_substitute
+   (matching the 11 live Sun China tables), then ship. szameitat_2015_multitask_examples and
+   szameitat_2015_occupation_multitask: keep `language="English; Turkish; Dutch; German"`, write the
+   semicolon-separated multi-language convention into itemtext_standard.md, then ship both.
+7. **Deferred:** transreas_mokken (Rd task-specification rows as item_text), simsalRbim_Mice_LargeValence and
+   simsalRbim_Monkey_LargeValence (third-person Methods paragraph in `instructions`), stoyel_2021_social_media
+   (SATAQ derivative block vs. study-authored items; candidate banked in .cache/).
+
+## batch_190 — 2026-09-11T06:10:45-07:00 (3 tables, 3 agents)
+
+**Written 0 / blocked 3 / failed 0. Yield 0/3.** No kills and no retries; free memory was 17G at claim time. Circuit breaker not tripped: 0% failed.
+All three are determinate blocks from a single source (Leshin et al. 2026, Psychological Science; OSF osf.io/t3a9r). This matches the batch_189 lead on sibling `_parents_dep`.
+
+- `transyouth_leshin_2026_parents_posaff`: **blocked**, retry test NO.
+  - 15 items `prim_posaff1..15`, resp 0-4. This is the HealthMeasures positive-affect bank ("I felt cheerful." .. "I felt content."; scored `prim_posaff_tscore_adult_v1`).
+  - The register row 'PROMIS / HealthMeasures family' blocks it, and the HealthMeasures ToU v1.12-2017 covers PROMIS and NIH Toolbox alike.
+  - Not established: whether it is PROMIS 15a or NIH Toolbox Positive Affect. healthmeasures.net pages returned 404. The verdict is the same either way.
+- `transyouth_leshin_2026_youth_anx`: **blocked**, retry test NO.
+  - PROMIS Pediatric v2.0 Anxiety SF 8a, 8 items `anx1..8`. Wording matched to the HEAL CDE CRF.
+  - PROMIS register block applies.
+- `transyouth_leshin_2026_parents_support`: **blocked**, retry test NO.
+  - These are the study's own 3 social-support items, not PROMIS. But the only publication of the wording is the CC BY-NC 4.0 OSF deposit.
+  - Blocked under the itemtext_standard.md irw#1891 source-licence rule, same shape as ieswriting_molloy_2022 and gilbert_meta_32.
+  - A validated 21-row candidate (data_labels) is banked at `.cache/transyouth_leshin_2026_parents_support/`. It can ship unchanged if Ben rules otherwise.
+
+**Step 5b re-checks by the orchestrator:**
+- OSF node t3a9r licence re-fetched from api.osf.io: 'CC-BY Attribution-NonCommercial 4.0 International'. Confirmed.
+- Register PROMIS row verdict=block. Confirmed.
+- itemtext_standard.md lines 160-166 do say CC BY-NC-sourced wording does not ship. Confirmed.
+
+**Gates:**
+- With no `__items.csv`, normalize_nulls.R and audit_batch.R stop with "No *__items.csv files found", and irw-validate had nothing to check.
+- verify_batch.R reports MISSING for the three tables. That is expected, because nothing shipped.
+- lint_verification.R crashes on a header-only verification_merged.csv ("replacement has 1 row, data has 0"). This is a zero-row edge case in the script, not a defect in this batch.
+- check_provenance.R exits 1 on a pre-existing issue from batch_188, not this batch. `tian2026_digital_competence` is machine_translation, was stamped uploaded 2026-09-11, and **now owes an itemtext_issues.qmd entry**. The batch_188 log said the entry would be owed on upload.
+
+**For the human:**
+1. The CC BY-NC 4.0 deposit licence also governs the transyouth_leshin_2026_* **response** data, and datastandard.md bars NC intake. The licence review of those response tables flagged at batch_189 is still open.
+2. The register's code pattern `^promis|^evpromis` misses `prim_*` and `anx*`. Future PROMIS sweeps need to match on wording or the dictionary Description.
+3. The last sibling, `transyouth_leshin_2026_youth_posaff`, is still pending and will almost certainly block the same way (Rmd `posaff_tscore_pediatric_v1`).
+
+## batch_191 — 2026-09-11T06:19:22-07:00 (3 tables, 3 agents)
+
+**Written 1 / blocked 2 / failed 0. Yield 1/3.** No kills, no retries; 19G available at close. Circuit breaker not tripped (0% failed).
+
+- `trevisan_2018_mscs`: **done**. 77 items MSCS_1..77, resp 1-5, 385 rows; mapping_basis paper_explicit, text_source study_materials (PLOS S1 questionnaire).
+  - All gates clean: validate_items.R --table-sets PASS, audit_batch PASS (no WARNs), verify_batch PASS, lint clean, irw-validate ok.
+  - Verification PARTIAL. Summing items into the seven Table 1 domains (reverse items as 6-resp) reproduces the .sav's own composites 1177-1178/1178 per domain; moving one item to another domain drops agreement to 152-514. Keying sign is right on 77/77 items. Not established: order within a domain x polarity cell, apart from items 11/20/30/41.
+  - **Two source overrides, both re-checked by the orchestrator.**
+    - Paper Table 1 misnumbers items 11/20/30; the S1 numbering is shipped. verify script re-run: MSCS_20 rest-of-domain r = -0.46. MSCS_11 vs MSCS_30 mean r with the reactivity items is 0.116 vs -0.026.
+    - The .sav value labels run backwards (1 = "5- very true or always true") on every MSCS column, MSCS_1 included, not just the reverse-keyed ones. The data are raw circled numbers: MSCS_n_R == 6 - MSCS_n in 100% of cells (32 _R columns), and MSCS_36 (hit/shove) has mean ~2.
+  - Data note, re-checked: `data/trevisan_2018_mscs.py` calls MSCS_54=3.88 (row 590) and MSCS_66=3.64 (row 885) data-entry errors. They are mean-substitution imputations: each respondent's other keyed items average 3.9 and 3.6. Dropping them is right; only the script comment is wrong.
+  - **⚠️ RIGHTS ESCALATION, Ben to rule before upload** (theobald precedent: shipped, flagged, no register row).
+    - Against shipping: the S1 questionnaire footer reads "Jodi Yager and Grace Iarocci. All rights reserved, including translation." (confirmed in S1 text). Under the SKILL.md reserve-a-right test, "including translation" arguably reserves a derivative right. PID-5-BF counted "all rights reserved" among its block reasons.
+    - For shipping: both copyright holders co-authored the CC BY 4.0 article, which says "The scale is available in a usable format in the supplementary material for readers to download to use for their own research or clinical purposes." (confirmed). There is no only/fee/NC/no-redistribution term.
+    - If blocked: delete the CSV and flip queue_state to blocked.
+- `trevisan_2018_aq`: **blocked**, retry test NO. 50-item AQ (AQ_1..50, resp 0/1). The .sav subscale totals match Baron-Cohen 2001's five subscales.
+  - The register row 'Autism Spectrum Quotient (AQ-10)' (family AQ, irw#1955) was applied. ARC clause re-checked in the cached page: "used for research purposes and not for commercial use ... You may not adapt or modify any of these tests, unless permission has been given".
+- `transyouth_leshin_2026_youth_posaff`: **blocked**, retry test NO. PROMIS Pediatric Positive Affect SF 8a v1.0 (8 items, matched to Forrest 2017 Table 3). Blocked by two separate rules, PROMIS register row + OSF CC BY-NC 4.0 (irw#1891).
+  - As batch_190 predicted, all transyouth_leshin_2026_* item text is now blocked.
+
+**Gates:** normalize_nulls 0 changed. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` issues-page entry still owed from batch_188; nothing from this batch.
+
+**For the human:**
+1. **MSCS rights ruling** (above).
+2. **Possible withdrawal: `rmet_higgins_2022_aq` is LIVE** (live_tables.csv: irw_text, published). itemtables/pilot/audit_confirmed.csv records its text as "the standard Autism Spectrum Quotient (AQ-28) verbatim". The AQ register row blocks the family, but its code pattern `^aq` misses this table name, and the row names only AQ-10, with no URL or hash. Widening the row to the whole AQ family (AQ-50/AQ-28/AQ-10) and adding the ARC URL + sha256 above are also Ben's call. Not acted on.
+3. `vanteffelen_2020_aq_hostility` (pending) matches `^aq` by name but is probably the Aggression Questionnaire. It needs reading, not a pattern sweep.
+4. The transyouth CC BY-NC response-data licence review (from batch_189) is still open.
+
+Cap is batch_199; 191 is not the cap. Ending normally.
+
+## batch_192 — 2026-09-11T06:47:03-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills, no retries. Circuit breaker not tripped (0% failed).
+
+First round on the `tsai_2017_treeit_*` family (Tsai et al. 2017 PLOS ONE, doi:10.1371/journal.pone.0180102; 17 tables, 14 more pending: H1-H9, H13, H14, TAM BI/PEOU/PU). All three siblings made the same calls independently: text from the S1 "Treeit Heuristic Evaluation" checklist, item codes = S3 xlsx column names, mapping_basis paper_order, text_source translated_substitute / study_supplied, language Chinese.
+
+- `tsai_2017_treeit_h10_closure`: **done**. 3 items, resp 2-5 (nobody used 1), 12 rows. Verification PARTIAL: heuristic means rebuilt from the xlsx reproduce paper Table 3/4 to 3 dp (H10 item-total r 0.903, UI-design alpha 0.892, max deviation 0.0005). That pins the block but not the order within it.
+- `tsai_2017_treeit_h11_undo`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: H11-1/H11-2 (the two "return to previous steps" items) r 0.965; H11-4 "prevent serious errors" tracks the H9 Error block (r 0.978 with H9-2). The order of 1 vs 2 is not established, and 3 is placed by elimination.
+- `tsai_2017_treeit_h12_language`: **done**. 3 items, resp 2-5, 12 rows. PARTIAL: H12-3 (aliases) stands apart (r 0.41 with the other two vs 0.947 between them); the order of H12-1 vs H12-2 is not established (99/101 identical answers).
+  - Anchor override: S1 prints Very unsatisfied..Very satisfied; the article Methods' "1 = strongly disagree to 5 = strongly agree" belongs to the S2 TAM form. S1 labels shipped and disclosed in public_note.
+  - Orchestrator added the four empty `_translated` columns so it matches h10/h11 (the agent had dropped them). No text changed.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (so there is nothing to explain for Step 5c); verify_batch PASS x3; lint clean; irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, against the cached S1 PDF and S3 xlsx):** all confirmed. The S1 H10/H11/H12 wording and anchors match what shipped. The article does contain "1 = strongly disagree to 5 = strongly agree". The Elsevier user-licence clause "may not redistribute, display or adapt" is present in the cached page. S3 has only H8-1..H8-3. H2-4 = H6-3 in 101/101 rows, H11-4 = H9-2 in 97/101 and = H9-4 in 96/101, H12-1 = H12-2 in 99/101, and 42 of 1,378 heuristic item pairs agree in >=93/101 rows. r(H11-4,H9-2) = 0.978.
+
+**For the human:**
+1. **Rights ruling for the whole family (all 17 tables).** The checklist adapts Zhang et al. (2003) J Biomed Inform 36:23-30. Crossref lists that article under the Elsevier open-archive user licence ("may not redistribute, display or adapt ... for non-commercial purposes"). The agents read it as a notice on the article, not terms on the heuristics, and our text comes from the CC BY PLOS S1. The per-heuristic `instructions` line (e.g. "Reversible actions. Users should be allowed to recover from errors...") very likely reproduces Zhang's wording; this is unconfirmed (ScienceDirect 403). No register row written. If ruled restrictive: block the family, or drop the instructions line, before upload.
+2. **`tsai_2017_treeit_h8_message` needs care when it comes up.** S1 prints 4 H8 items; S3 has 3 columns, and the paper's H8 item-total r reproduces from those 3. Which printed item was dropped must be established, not assumed from order.
+3. **Response-data pattern, not filed as a defect:** heavy identical-answer agreement across the S3 file, including content-unrelated cross-heuristic pairs (H2-4 = H6-3 in all 101 rows). It could be straight-lining or duplicated entry. It weakens every correlation-based mapping argument for this family, which is why all three are PARTIAL rather than VERIFIED.
+4. The three sibling tables' `instrument` strings differ slightly in wording. Harmonise them before upload if the family should share one name.
+
+Cap is batch_199; 192 is not the cap. Ending normally.
+
+## batch_193 — 2026-09-11T06:57:44-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills, no retries. Circuit breaker not tripped (0% failed).
+
+Second round on the `tsai_2017_treeit_*` family (11 pending after this: H2-H9, TAM BI/PEOU/PU). Agents were handed batch_192's converged conventions plus a harmonised instrument string, `Treeit Heuristic Evaluation (Tsai et al. 2017, Appendix 1; adapted from Zhang et al. 2003 usability heuristics): H<k>. <Name>`. That is batch_192's h12 form with a colon. The three batch_192 tables still carry their own variants (for-the-human item 4 there). All three reused the batch_192 cached S1/S3 after checking sha256. Settings are unchanged: paper_order, translated_substitute / study_supplied, language Chinese, S1 anchors.
+
+- `tsai_2017_treeit_h13_control`: **done**. 2 items, resp 2-5, 8 rows. PARTIAL: Table 3 item-total r 0.755 reproduces exactly, and substituting H10 columns gives 0.834, so the block is pinned. The order of H13-1 vs H13-2 is not established. H13-1 "initiators of actors" is kept as printed (sic).
+- `tsai_2017_treeit_h14_document`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: Navigation alpha 0.865 and H14 item-total r 0.768 reproduce exactly; other blocks substituted give 0.705-0.809. The list-style H14-2 is the outlier (r 0.12/0.14 vs 0.89; mean 3.50 vs 3.98/3.94), which is semantic coherence only. The order of H14-1 vs H14-3 is not established (98/101 identical).
+- `tsai_2017_treeit_h1_consistency`: **done**. 6 items, resp 1-5, 30 rows. PARTIAL: H1 item-total r 0.763 and UI alpha 0.892 reproduce; shifting the column window one place gives 0.791/0.789. The S1 block size (6) = xlsx columns (6). Within-block order is not established: H1-3..H1-6 are pairwise identical in 95-97/101.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, cached S1 text + S3 xlsx):** all confirmed. The S1 wording for H1/H13/H14 (including "actors" and the instructions lines) matches what shipped, and so do the anchors. The S3 xlsx has the H1-1..6, H13-1..2 and H14-1..3 columns. Identical-answer counts: H13-2 = H10-2 in 98/101, H13-1 = H13-2 in 56/101, H14-1 = H14-3 in 98/101. H14 correlations are 0.12/0.89/0.14, and the item means match the agents' figures.
+
+**Housekeeping:** the H1 agent saw one sibling's scratch files (s001.pdf, s003.xlsx, build.R, candidate__items.csv, ...) briefly in `itemtables/batch_193/` at start. They were gone before any gate ran, and the final directory holds only the expected files. This is a scratch-path slip, not a collision: every scratch filename is distinct from the shipped files.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open** and now covers 6 written tables. Every provenance note carries the escalation. No register row was written.
+2. The S3 identical-answer pattern shows up again in every block (H13-2 = H10-2 98/101; H14-1 = H7-3 96/101). That is why all six family tables are PARTIAL. It is not filed as a defect.
+3. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
+
+Cap is batch_199; 193 is not the cap. Ending normally.
+
+## batch_194 — 2026-09-11T07:10:00-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. Circuit breaker not tripped (0% failed).
+
+This is the third round on the `tsai_2017_treeit_*` family. 8 tables are still pending: H5-H9 and TAM BI/PEOU/PU. The agents got the batch_192/193 conventions and the harmonised instrument string, and all three reused the cached S1/S3 after re-checking the sha256. Settings are unchanged: paper_order, translated_substitute / study_supplied, language Chinese, S1 anchors. Agents were told to keep scratch files out of the batch directory (the batch_193 slip); the final directory holds only the expected files.
+
+- `tsai_2017_treeit_h2_visibility`: **done**. 4 items, resp 2-5, 16 rows (nobody chose 1). PARTIAL: H2 item-total r 0.862 and UI alpha 0.892 reproduce, and all 20 Table 3/4 statistics are within 0.0005. Each control was scored on all seven UI statistics: shift right misses by up to 0.013, dropping H2-4 by 0.045, other blocks by 0.033-0.148. The order within the block is not established. **H2-4 is identical to H6-3 in 101/101 rows** (H6-3 is a Feedback item), so no statistic can say which item's answers that column holds; public_note discloses it.
+- `tsai_2017_treeit_h3_match`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: Navigation alpha 0.865 and H3 item-total r 0.915 reproduce. Other blocks substituted give 0.730-0.827, and window shifts give 0.875/0.893. The order within the block is not established. Unlike the siblings, the H3 items do not straight-line with each other (46/44/66 of 101 identical). An "actions" content check is printed but not scored, because it was defined post hoc.
+- `tsai_2017_treeit_h4_minimalist`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: H4 item-total r 0.860 and Navigation alpha 0.865 reproduce. Other blocks give 0.755-0.827, and window shifts give 0.844 (left) / 0.887 (right). H4-4 "Progressive levels of details." is the outlier (r 0.43-0.45 with the rest vs 0.97 among them), which is semantic coherence only. The order of H4-1..H4-3 is not established (96-99/101 identical pairwise).
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R exits 1 only on the pre-existing `tian2026_digital_competence` entry (owed since batch_188); nothing from this batch.
+
+**Step 5b re-checks (orchestrator, cached s003.xlsx sha256 af4273..., s001.pdf 005195...):** all confirmed. Identical-answer counts: H2-4 = H6-3 101/101, H2-3 = H5-1 99, H2-1 = H2-2 98, H3-3 = H4-3 99, H3-3 = H4-1 97, H3-1 = H5-2 94, H4-{1,2,3} = H4-4 56/55/54. Per-item level counts match every agent's figures, and H4-4's r with H4-1/2/3 is 0.452/0.452/0.430. The S1 text layer for H2 (p1-2), H3 (p2) and H4 (p3), including the description lines, matches the shipped item_text and instructions word for word, and S1 prints 4/3/4 statements, equal to the S3 column counts.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open.** It now covers 9 written tables; each provenance note carries the escalation, and no register row was written.
+2. **The sibling verify scripts' control is weaker than it looks** (from the H2 agent). A one-column left shift of the H2 window gives H2 item-total r 0.8609 vs the published 0.862, inside the 0.0015 tolerance the h1 script uses. It is caught only through the other heuristics' statistics (H1 0.802 vs 0.763, H10 0.881 vs 0.903). Controls should score the whole construct profile, not the target heuristic's r alone. The shipped PARTIAL verdicts still stand, since each batch_192/193 script also checks the construct alpha, but re-run the earlier scripts with that in mind.
+3. Because H2-4 = H6-3 in all 101 rows, when H6 comes up its item 3 cannot be told apart from H2-4 either. This looks like duplicated entry rather than straight-lining; it is not filed as a defect.
+4. `tsai_2017_treeit_h8_message` (S1 prints 4 items, S3 has 3 columns) is still pending. See batch_192 item 2.
+
+Cap is batch_199; 194 is not the cap. Ending normally.
+
+## batch_195 — 2026-09-11T07:23:00-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. Circuit breaker not tripped (0% failed).
+
+This is the fourth round on the `tsai_2017_treeit_*` family, and 5 tables remain pending: H8, H9 and TAM BI/PEOU/PU. The agents were given the batch_192-194 conventions and batch_194's lesson that controls must be scored against the whole construct profile, and all three did that. All three reused the cached S1/S3 after re-checking the sha256 and kept their scratch files in their own `.cache/<table>/` directories. Block sizes agree for all three: S1 prints 7/4/3 statements, and S3 has 7/4/3 columns.
+
+- `tsai_2017_treeit_h5_memory`: **done**. 7 items, resp 1-5, 35 rows. PARTIAL: Navigation alpha 0.865 and H5 item-total r 0.870 reproduce, with all 20 Table 3/4 statistics within 0.0005. The closest control is a one-column left shift, off by 0.0050 on the full profile. Putting H14's columns in the H5 slot misses H5's own r by only 0.0019, but H3 exposes it (0.847 vs 0.915), so this is a second case where a single statistic would not have rejected a control. Of the 322 single-column swaps, only near-copies still reproduce: H5-1<-H2-3 (99/101) and H5-2<-H3-1 (94/101). H5-3 = H5-4 in 100/101 rows. Within-block order is not established. Two text details are disclosed: the description line keeps S1's curly apostrophe ("users’"), and "Concrete examples (DD/MM/YY, e.g., 10/20/99)." ships as printed, although the example is actually MM/DD/YY.
+- `tsai_2017_treeit_h6_feedback`: **done**. 4 items, resp 2-5, 16 rows (nobody chose 1). PARTIAL: H6 sits in User-Interface Design. H6 item-total r 0.913 and UI alpha 0.892 reproduce. Controls miss by 0.0081 (dropping H6-1, the closest) up to 0.1887. **H6-3 = H2-4 in 101/101 rows**, the only fully identical pair among the 53 heuristic columns, and the public_note discloses it from H6's side too. H6-3 = H10-3 98/101, H6-1 = H12-1 98/101, H6-2 = H6-3 97/101.
+- `tsai_2017_treeit_h7_flexibility`: **done**. 3 items, resp 1-5, 15 rows. PARTIAL: H7 sits in System Support. Alpha 0.855 and H7 item-total r 0.749 reproduce. The thinnest control rejection so far is H14-1 swapped in for H7-3: 0.0030 against a 0.0015 tolerance, because those two columns agree in 96/101 rows. H7-1 = H7-2 in 96/101 rows, and the two cannot be told apart (means 3.495/3.485). The Table 4 construct SD (0.703) does not reproduce from the mean-of-means composite (0.533), so it was not used; batch_194's H4 agent saw the same for Navigation.
+
+**Gates:** normalize_nulls 0 changed; audit_batch PASS x3, no WARNs (nothing for Step 5c); verify_batch PASS x3; lint clean (3 rows); irw-validate ok x3. check_provenance.R still exits 1 only on the pre-existing `tian2026_digital_competence` entry. Nothing from this batch is flagged.
+
+**Step 5b re-checks (orchestrator, cached s003.xlsx af4273..., s001.txt):** all confirmed.
+- Every shipped item_text and instructions string was found verbatim in the S1 text layer. The one apparent miss (H5-5) is PDF checkbox glyphs interleaved in the layout text, and `pdftotext -layout` shows the same wording.
+- Identical-answer counts are exact: H6-3=H2-4 101, H5-3=H5-4 100, H5-1=H2-3 99, H5-2=H3-1 94, H5-2=H9-1 94, H5-6=H14-1 95, H5-7=H3-2 96, H6-2=H6-3 97, H6-1=H12-1 98, H6-3=H10-3 98, H7-1=H7-2 96, H7-3=H14-1 96, H7-1=H7-3 41.
+- A search over all heuristic columns finds exactly one fully identical pair, (H2-4, H6-3).
+- Level counts match the agents' figures: H5-6 1/6/14/52/28, H6-1 0/0/12/43/46, H6-3 0/1/6/32/62, H7-1 5/14/23/44/15, H7-2 5/14/25/41/16, H7-3 1/5/16/53/26.
+
+**For the human:**
+1. **The family rights ruling from batch_192 is still open.** It now covers 12 written tables, and no register row has been written.
+2. **The "whole construct profile" control lesson has now appeared twice** (H2 in batch_194, H5 here). batch_192/193's single-statistic controls are worth re-running with that in mind; they still check construct alpha.
+3. `tsai_2017_treeit_h8_message` is next in the queue. S1 prints 4 items but S3 has 3 columns (see batch_192 item 2), so a Step 3b mismatch is expected.
+
+Cap is batch_199; 195 is not the cap. Ending normally.
+
+## batch_196 — 2026-09-11T07:36:00-07:00 (3 tables, 3 agents)
+
+**Written 2 / blocked 1 / failed 0. Yield 2/3.** No kills and no retries. The circuit breaker did not trip (0% failed; the one block is a determinate verdict).
+
+This is the fifth round on the `tsai_2017_treeit_*` family and the first TAM table. Two tables are still pending: `tsai_2017_treeit_tam_peou` and `tsai_2017_treeit_tam_pu`. All three agents reused the cached S1/S2/S3 files after re-checking their sha256 and kept scratch files in their own `.cache/<table>/` directories.
+
+- `tsai_2017_treeit_h8_message`: **blocked** (Step 3b instrument mismatch). S1 prints four H8 statements, all ordinary item rows (none is a heading or a duplicate), but S3 has three columns. S1 has 54 heuristic statements against 53 heuristic columns in S3, so H8 is the only block that disagrees. The three columns reproduce the whole System Support profile to within 0.00045, and dropping any one misses by 0.031-0.077. Adding any of the other 50 columns as a fourth item never reproduces the profile (best miss 0.0092), so the paper analysed three items too. Every published statistic depends only on the H8 mean, so all 24 statement-to-column assignments fit equally. **Retry test: NO.** What would change it is in `pending_index_notes.csv`.
+- `tsai_2017_treeit_h9_error`: **done**. 4 items, resp 1-5, 20 rows. PARTIAL: System Support alpha 0.855 and H9 item-total r 0.768 reproduce (max deviation 0.0005). **The nearest control, H9-1<-H3-1, misses by 0.0019 against a tolerance of 0.0015.** That is the thinnest rejection in the family so far (H7's was 0.0030), and it comes from near-copy columns (93/101 identical). Within-block order is not established. H9-2 "The system provides avoid modes or uses informative feedback, e.g., different sounds." ships as printed (sic) and public_note discloses it.
+- `tsai_2017_treeit_tam_bi`: **done**. 4 items, resp 1-5, 20 rows. **VERIFIED, the first in this family.** Table 3 prints a separate item-total r for each item (BI12-15: 0.916/0.912/0.896/0.886), and the uncorrected r against the BI sum reproduces all four in order. Alpha is 0.9234 vs 0.923 and the mean 4.0198 vs 4.020. Of the 24 orderings only the published one reproduces; the nearest control is a BI1/BI2 swap at 0.0038. The instrument string is new: `TreeIt Technology Acceptance Model Questionnaire (Tsai et al. 2017, Appendix 2; adapted from Davis et al. 1989 TAM): Behavioral Intention`. Anchors are S2's column headers (Strongly disagree..Strongly agree, printed without numbers). The numeric direction comes from the article Methods; all four items are positively worded, so the data cannot test it. instructions is NA because S2 prints only "Section Two: TAM Questions:". The TAM columns do not show the heuristic block's identical-answer pattern (BI pairs 67-78/101).
+
+**Gates:** normalize_nulls changed 0 files; audit_batch PASS x2 with no WARNs (nothing for Step 5c); verify_batch PASS x2; lint clean (2 rows); irw-validate ok x2. check_provenance.R flags only the pre-existing `tian2026_digital_competence` entry; nothing from this batch.
+
+**Step 5b re-checks (orchestrator, against cached s001.pdf 005195..., s002.pdf ec5e95..., s003.xlsx af4273...):** everything confirmed.
+- **H8 columns:** S3 has exactly H8-1..H8-3 and 53 heuristic columns. `pdftotext -layout` shows four H8 statements, each with its own checkbox row.
+- **TAM BI:** BI item-total r is 0.91579/0.91247/0.89569/0.88554, with alpha 0.92342 and mean 4.0198. The article's Table 3 text reads "BI12 0.923 0.89 0.9241 0.7534 0.916 BI13 0.88 0.912 BI14 0.85 0.896 BI15 0.85 0.886". The four shipped BI statements match the S2 text.
+- **H9:** level counts match the agent's figures, H9-2=H9-4 in 98/101 rows, H9-2=H11-4 in 97, H9-1=H3-1 in 93. The S1 text layer has "The system provides avoid modes or uses / informative feedback, e.g., different sounds." and the H9 description line as shipped.
+
+**Housekeeping:** the permanent `mapping_verification.csv` is CRLF with some LF lines mixed in, so the two new rows were appended with CRLF and nothing else was rewritten.
+
+**For the human:**
+1. **H8 needs a ruling.** Choose between (a) a heuristic-level table with blank item_text, which is already built and gated and parked at `.cache/tsai_2017_treeit_h8_message/parked_heuristic_level__items.csv` (gitignored; move it to `itemtext/fixes/` to keep it; option-only under #1770, which is why it was not shipped); (b) print order H8-k = statement k, with `mapping_basis=unknown` and the fourth statement disclosed as unmatched; or (c) leaving it blocked.
+2. **The family rights ruling from batch_192 is still open** and now covers 13 written heuristic tables. The TAM BI agent's view is that the Zhang et al. (2003) question reaches only the S1 checklist wording, not the S2 TAM statements (Davis 1989 adaptation, statements study-specific, no restriction found). Confirm that scoping when you rule.
+3. **The VERIFIED on TAM BI rests on one link that is not proven:** that Table 3's BI12-15 numbering follows S2's print order. The 5 PU + 6 PEOU + 4 BI = 15 statement layout supports it, and the evidence says so. Separately, the BI1/BI2 ordering margin is 0.0038.
+4. **Next round:** TAM PEOU/PU should reuse TAM BI's instrument string form and verify script. The agent pre-checked both: PU max deviation 0.0003, PEOU 0.0005. PU1 vs PU5 (0.876 vs 0.874) is a thin ordering gap.
+
+Cap is batch_199; 196 is not the cap. Ending normally.
+
+## batch_197 — 2026-09-11T07:48:43-07:00 (3 tables, 3 agents)
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no retries. The circuit breaker did not trip (0% failed).
+
+This round finishes the `tsai_2017_treeit_*` family's TAM tables (PEOU, PU) and opens the `tuason_2021_*` family. The two TAM agents reused the batch_196 cache after re-checking sha256, and kept scratch in their own `.cache/<table>/` dirs.
+
+- `tsai_2017_treeit_tam_peou`: **done**. 6 items, resp 2-5, 24 rows. **VERIFIED.** Table 3's per-item item-total r (0.860/0.842/0.825/0.780/0.756/0.873) is reproduced in order, max deviation 0.0005. Of the 720 orderings only the published one reproduces; the nearest control, a PEOU1<->PEOU6 swap, misses by 0.0132. No 6-column window or single-column substitution comes close (best 0.0919 and 0.0210). Instrument string follows TAM BI's form, ending "Perceived Ease of Use".
+- `tsai_2017_treeit_tam_pu`: **done**. 5 items, resp 2-5, 20 rows. **VERIFIED, with a thin margin.** Item-total r 0.876/0.870/0.860/0.838/0.874 is reproduced, max deviation 0.00029. The PU1<->PU5 swap misses by 0.00182, only 0.00032 beyond the family tolerance of 0.0015 (3.6x the 3-dp rounding half-width). An independent route rules the swap out: the one-factor loading rank PU1>PU2>PU5>PU3>PU4 matches Table 3's LISREL loading rank (0.87/0.86/0.84/0.80/0.77).
+- `tuason_2021_covid_coping_enjoy`: **done**. 23 items (Enjoy_01-03, 05-24; no Enjoy_04 exists and the paper lists 23 options), resp 0/1, 46 rows. `data_labels`: the codes are the PLOS S2 .sav column names, and the variable labels' "E<n>" prefixes match 23/23. option_text is blank because the columns carry no value labels. **The response data have a real defect (not an itemtext defect), disclosed in public_note:** 0/1 columns were filled in only for the low/high well-being groups. See Step 5b below.
+
+Both TAM tables: resp 1 ("Strongly disagree") is not shipped because no respondent used it. The gate requires an exact resp-set match. The TAM columns print no instructions (heading only), and `translated_substitute/study_supplied` matches the batch_196 siblings (English-only materials for a Mandarin-reading sample).
+
+**Gates:** normalize_nulls changed 0 files; audit_batch PASS x3 with no WARNs (nothing for Step 5c); verify_batch PASS x2 + 1 exempt (data_labels); lint clean (3 rows, including the NOT_NEEDED row written to both files); irw-validate ok x3. check_provenance.R flags only the pre-existing `tian2026_digital_competence` entry and the standing `mixed` review list; nothing from this batch.
+
+**Step 5b re-checks (orchestrator):** all confirmed.
+- **tuason defect**, from the cached s002.sav: summed Enjoy_* per respondent is 0 for 322, 2 for 1, 4 for 2, 5 for 612 and 8 for 1. Every one of the 938 `Emjoy` strings lists exactly 5 picks. Crossed with `Well_being_3groups`: group 2 (middle) has 321 all-zero and 1 not; group 1 has 1 all-zero; group 3 has none. 163 all-zero respondents picked option 1 in `Emjoy`. The 0/1 columns agree with the `Emjoy` picks for 610 of 938 rows (the agent's 609 of 616 low/high, plus the one filled-in middle respondent).
+- **TAM PU/PEOU:** re-ran `verify_tsai_2017_treeit_tam_pu.R` (PASS; it also reprints PEOU and BI). The article text layer reads "PU1 0.912 0.87 0.9124 0.6759 0.876 PU2 0.86 0.870 PU3 0.80 0.860 PU4 0.77 0.838 PU5 0.84 0.874" and "PEOU1 0.905 0.85 0.9065 0.6201 0.860 PEOU2 0.78 0.842 PEOU3 0.76 0.825 PEOU4 0.74 0.780 PEOU5 0.70 0.756 PEOU6 0.86 0.873". All 11 shipped statements match S2's `pdftotext -layout` print order (statements 1-5 PU, 6-11 PEOU). Per-level counts xlsx = live for all PU items.
+
+**For the human:**
+1. **The tuason_2021_covid_coping_enjoy response data should be fixed at the processing script** (`data/tuason_2021_thriving_covid.py`). Either rebuild Enjoy_* from the `Emjoy` pick string or drop the middle well-being group; as it stands, 321 respondents' zeros are false. No GitHub issue was filed; that is your call. The item text is correct either way.
+2. **The family rights ruling from batch_192 is still open.** Both TAM agents, like TAM BI, found no wording shared with the Zhang et al. (2003) S1 checklist and wrote no register row. The ruling should confirm that the escalation does not reach the three TAM tables.
+3. **The same "not established" link applies to all three TAM tables:** that Table 3's PU/PEOU/BI numbering follows S2's print order (supported by the 5+6+4=15 layout and BI12-15 numbering).
+4. **Next round starts on `tuason_2021_loneliness_emotional/_social` and `_wellbeing`.** The S2 .sav is cached at `.cache/tuason_2021_covid_coping_enjoy/s002.sav`. The loneliness labels are terse ("Emotional loneliness 1 (emptyness)"), not the administered wording. The labels say 1=No, 2=More or less, 3=Yes, but the script maps text to No=0/More or less=1/Yes=2. The De Jong Gierveld scale has a rights history in SKILL.md. WB1-8 carry no variable or value labels and are coded 18-24.
+5. `tsai_2017_treeit_h8_message` (the batch_196 H8 ruling) is still open.
+
+Cap is batch_199; 197 is not the cap. Ending normally.
+
+## batch_198 — 2026-09-11T07:50:51-07:00 (3 tables, 3 agents)
+
+**Written 0 / blocked 3 / failed 0. Yield 0/3.** No kills and no retries. The circuit breaker did not trip (0% failed). All three blocks are determinate rights verdicts from existing `instrument_rights_register.csv` rows, not access failures. The zero yield reflects what the queue served, not pipeline health.
+
+The round finishes the `tuason_2021_*` family (PLOS ONE e0248591, CC BY 4.0). All three agents reused the batch_197 S2 .sav after checking its integrity (sha256 c6d0daf7...3230, identical to a fresh PLOS download) and kept scratch in their own `.cache/<table>/` dirs.
+
+- `tuason_2021_loneliness_emotional`: **blocked** (rights). This is the De Jong Gierveld 6-item scale, emotional subscale. Register row **DJG** (block, 2026-09-08) applied. The OSF u6gck manual (file tfksw, sha256 1930351b...ab67e5) was re-fetched and still carries the NC + No-derivatives conditions. The .sav labels are terse ("(emptyness)/(miss)/(rejected)") and the register rules that ND reaches those too. Response data are clean: .sav codes 1-3 equal live 0-2 in all 9 item x level cells.
+- `tuason_2021_loneliness_social`: **blocked** (rights, DJG). The administered wording was found in the S1 questionnaire .docx ("There are plenty of people that I can lean on in case of trouble." etc.). It is a variant rendering, so ND applies (the dopmeijer_2022 precedent). Data are stored raw (2 = Yes = least lonely); the recomputed social total, mean 1.409 / SD 1.283, reproduces Table 1 (1.40/1.28). No defect.
+- `tuason_2021_wellbeing`: **blocked** (rights). The paper cites Diener et al. 2010 for its 8-item PWB measure, which is the Flourishing Scale. Register row **DIENER-NC** (irw#1955) applied; eddiener.com/scales was re-fetched and still says "permitted for non-commercial purposes only". resp 18-24 is raw, equal to scale points 1-7 per the .sav's `WB<i>_rec` labels. Well_being_Mn = mean(WB-17) exactly, and alpha is 0.885 vs .89 published. No defect.
+
+Retry test: NO for all three. Only a lifted register row or changed holder terms would change the outcome. Each has a `pending_index_notes.csv` row.
+
+**Gates:** there is nothing to gate because no `__items.csv` was written. `normalize_nulls.R` and `audit_batch.R` exit "No *__items.csv files found". `verify_batch.R` reports MISSING x3, which is expected: blocked tables carry no verify script under Step 5b. `lint_verification.R` says "nothing to lint", and `irw-validate` had no input. No `mapping_verification.csv` rows were added, since no tables were written. `check_provenance.R` flags only the standing `tian2026_digital_competence` entry and the `mixed` review list; nothing from this batch.
+
+**Step 5b re-checks (orchestrator):** both register rows exist with verdict=block, and their clauses match what the agents quoted: DJG "Not commercial ... No derivatives ...", DIENER-NC "permitted for non-commercial purposes only". The two DJG agents independently fetched the same manual and got identical sha256s. No response-data defect was claimed, so there was nothing further to re-check.
+
+**For the human:**
+1. **Register pattern gap:** DIENER-NC's `match_item_code` is `^flourish|^spane`, which does not match `tuason_2021_wellbeing`. A future shipment of that table would not be caught by the pattern check. Consider adding the table name, or text-match strings for the Flourishing items; the row's `match_item_text` is empty. The DJG row's `loneliness` pattern does cover both tuason loneliness tables.
+2. The batch_197 items are still open: the `tuason_2021_covid_coping_enjoy` processing-script defect, the tsai family rights ruling, and the `tsai_2017_treeit_h8_message` ruling.
+3. The next round starts on `turner_2022_cognitive_mediation`, `turner_2022_sr_belief_change` and `tutrin_2020_meq30`.
+
+Cap is batch_199; 198 is not the cap. Ending normally.
+
+## Triage of batch_190–198 and Ben's rulings (2026-09-11)
+
+The chain (3 agents, cap batch_199) ran batch_190–198 with 18 written / 9 blocked / 0 failed and no kills. It
+stopped before batch_199 on the driver's memory pre-flight (available 10G for 33 minutes, while another session's
+R job ran), not on any round failure. batch_199 was never claimed.
+
+**Rulings (Ben, 2026-09-11):**
+1. **trevisan_2018_mscs → BLOCK.** The rights holders' own S1 file reads "Jodi Yager and Grace Iarocci. All rights
+   reserved, including translation."; the CC BY article grants use "for their own research or clinical purposes"
+   only. This is a reserved right plus a research-use grant (courtesy-letter ruling, 2026-09-10), not the theobald
+   carve-out, where the originators re-released the wording under CC BY with no reservation. Quarantined:
+   `quarantine/batch_191/`.
+2. **tsai_2017_treeit → ship the three TAM tables only; BLOCK all 13 heuristic-checklist tables** (H1–H7, H9–H14).
+   The Zhang et al. (2003) Elsevier user-licence question stays unresolved, and on their own the heuristic tables are
+   low value: within-block order is not established for any of them, and S3 carries identical-answer columns. The
+   ruling also settles that the escalation does not reach the TAM tables (Davis 1989 adaptation, no shared
+   wording). Quarantined: `quarantine/batch_192`–`196/`. **H8 stays blocked** (option c; the parked heuristic-level
+   candidate is not shipped).
+3. **rmet_higgins_2022_aq → WITHDRAW**, and widen the register's AQ row to the whole ARC AQ family. The live table
+   served the 28-item AQ-Short verbatim (read back 2026-09-11). `tools/withdraw_aq28.py` deleted it from the
+   irw_text draft (697 → 696 tables; the draft set is exactly `removed rmet_higgins_2022_aq__items`). The table has
+   no provenance row (pilot 2026-08-21), so this log is its record; it had no issues-page entry. It remains served
+   at prior version tags, as every withdrawal does.
+4. **Scope:** fold handoff rulings 1–4 (theobald, sun_2021, szameitat, register rows) into this pass. Items 5–6
+   (ali_2021_iesr partial withdrawal, German IES-R terms, Taylor 1953 MMPI check) stay owed.
+
+I stated the heuristic count as "11" when asking. The range named in the question (H1–H7, H9–H14) is 13, and
+the ruling was applied to all 13.
+
+**Applied:**
+- theobald_2017_group_dynamics: note now cites the SHIP ruling.
+- sun_2021_blockchain_loan_adoption: `language=Chinese` column added (105 rows, +1,061 bytes exactly),
+  text_source translated_substitute / translation_source study_supplied, public_note written. Gates re-run on a
+  scratch copy: normalize_nulls 0 changed, audit_batch PASS, verify_batch PASS, irw-validate ok.
+- szameitat_2015_*: both files already carried `English; Turkish; Dutch; German`. The semicolon multi-language
+  convention is now in itemtext_standard.md (field table + "Administered language"). The occupation table's note
+  records that its LANGUAGE paragraph ("left unset") is superseded.
+- **Uploaded to the irw_text_2 draft and stamped `2026-09-11`** (8 tables): sun_2021_blockchain_loan_adoption,
+  szameitat_2015_multitask_examples, szameitat_2015_occupation_multitask, theobald_2017_group_dynamics,
+  tsai_2017_treeit_tam_bi, tsai_2017_treeit_tam_peou, tsai_2017_treeit_tam_pu, tuason_2021_covid_coping_enjoy.
+  Staged from `done` rows into the fresh `/tmp/dl_0911_pm/` with each file cmp-checked; no name was present in
+  either shard's current or draft; red_up verified 8/8 row counts; the draft set is 8 added, 0 changed. Stamps
+  are +10 bytes per row in 5 provenance files and mapping_verification.csv (16 rows, re-read from disk). Batch
+  copies were deleted after a second cmp.
+- Register (`instrument_rights_register.csv`, 74 → 81 records, appended in place as QUOTE_ALL + CRLF): block rows
+  SATAQ, BSQ (Body Shape; the abdullah_2024_bsq_* Bloating tables are excluded by code pattern), SLS, SHAPS
+  (secondhand CamCOPS evidence, recorded as such), TFEQ (PhenX counter-claim recorded), SCHWARTZ (wide scope, as
+  ruled); ship row MACE. The AQ row is replaced in place: it now covers AQ-50/28/10 with the ARC clause, both URLs
+  and sha256s, and code pattern `^AQ_?[0-9]{1,2}$|^aq10_[0-9]{1,2}$`, narrowed from `^aq`.
+  Every hash was re-computed against the cached files. Where the evidence is weak, the row says so.
+- Issues page: datapages/irw#187 adds entries for all 8 (543 → 551, additive, parsed under Python and R).
+  `tian2026_digital_competence`, which `check_provenance.R` reported as owed since batch_188, is already on
+  origin/main; the report came from a stale local irw_site checkout.
+
+**Retroactive corpus audits PAUSED (Ben, 2026-09-11):** "we are constantly auditing the past corpus based on
+every minor change in a way that i don't think is helpful. we should pause this and come back to do a large audit
+at a later date." From now on, rulings and register rows apply to incoming tables. Leads on already-published
+tables are banked here in one line each, and nobody sweeps, investigates or withdraws on them until the large
+audit. The AQ-28 withdrawal above was ruled before the pause. Leads banked from this pass:
+`rmet_higgins_2022_rmet` (live; the same ARC clause covers the Eyes Test), `sokolovskii_2021_tfeq` (response table,
+`i_n` codes outside the TFEQ pattern), and the PROMIS/DIENER-NC pattern gaps below.
+
+**Still open from these rounds (not ruled, not filed):**
+- `tuason_2021_covid_coping_enjoy` response data: `data/tuason_2021_thriving_covid.py` should rebuild Enjoy_* from
+  the `Emjoy` pick string or drop the middle well-being group (321 false all-zero rows). The item text shipped
+  with the defect disclosed.
+- The transyouth_leshin_2026_* response data sit under a CC BY-NC 4.0 OSF deposit (licence review open since
+  batch_189).
+- Register pattern gaps: PROMIS `^promis|^evpromis` misses `prim_*`/`anx*`; DIENER-NC's `^flourish|^spane` misses
+  `tuason_2021_wellbeing`. Leads, not widened, since a wider code pattern sweeps the corpus.
+- `vanteffelen_2020_aq_hostility` (pending) matches `^aq` by name but is probably the Aggression Questionnaire.
+- The batch_192–194 verify scripts' single-statistic controls are weaker than the later whole-profile controls.
+  This is moot while the heuristic tables are blocked.
+- `data/trevisan_2018_mscs.py` comment calls two mean-substitution imputations "data-entry errors".
+
+## batch_206 — 2026-09-15T20:02:33-07:00 (claim) → 20:2x (close), 3 tables, 3 agents
+
+**Numbering:** first round of the post-199 series. Highest existing directory was `batch_203` (the irw#1945
+rights line, which now holds 201/202/203), so "highest + 1" landed at 204, inside the 200–205 hole → **206**,
+per the Step 1 rule. `batch_199` was never created; the series is 198 → 206.
+
+**Yield: 2 written / 1 blocked / 0 failed** (67% written, 0% failed — well under the 30% breaker threshold,
+which counts only `failed`). 19G available at launch, no swap movement, no kills. Three agents (the
+2026-09-11 setting).
+
+**Written, both clean PASS on every gate:**
+- `turner_2022_cognitive_mediation` — 15 items × 5 levels, 75 rows. mapping_basis `reconstructed`,
+  verification route 1 (published per-item descriptives + route 1 on a re-run of the paper's own EFA),
+  status VERIFIED.
+- `turner_2022_sr_belief_change` — 9 items × 5 levels, 45 rows. mapping_basis `reconstructed`,
+  route 1+8, status **PARTIAL**, disclosed in `public_note`.
+
+Both are Turner, Chadha & Wood (2022), PLOS ONE 17(6):e0269928 (CC BY 4.0), item text from S2 File (DOCX);
+the CMBQb is the authors' own new instrument in their own CC BY supplement, so no register row and nothing
+quotable. The two halves split cleanly on the `.sav`'s `_CMgen` / `_SRchange` column suffixes, which
+`data/turner_2022_abcs.py` melts unchanged — the sibling-collision warning in the dispatch prompt did its job,
+neither agent wrote the other's files.
+
+**The hard part, and it was the same problem for both agents: S2 File numbers its items 1–24 by
+factor-loading RANK, not by the `Q<n>` codes the data carries, and not one of the five deposited `.sav`
+files has a single variable or value label** (`column_names_to_labels` empty throughout). So the
+S2-number → Q-code mapping had to be reconstructed by re-running the paper's EFA on its own S1 Data and
+matching published loadings. Both agents did this independently and agreed:
+- C-M half: re-run reproduces all 15 published loadings at a uniform **+0.0045 (sd 0.0012)**; 7 of the 15
+  codes are additionally pinned by Table 2's four published numbers each (M, SD, inter-item r range,
+  mean(SD) r), all reproducing **exactly**. The other 8 rest on loading order, where the smallest adjacent
+  gap is 0.007 — a 6× margin over the 0.0012 residual.
+- S-R half: eigenvalues 6.17/3.95 vs published 6.20/3.95 and %variance 25.69/16.46 exactly as printed; an
+  exhaustive search of all 9! = 362,880 permutations against both the loading and cross-loading columns
+  returns the shipped mapping as the minimiser (cost 0.000952, residuals ≤0.018).
+
+**Why S-R is PARTIAL and not VERIFIED:** S2 items 17 and 18 publish .693/.036 and .690/.037 —
+indistinguishable at printed precision, and the runner-up permutation (swapping exactly
+`Q34_SRchange` ↔ `Q35_Srchange`) costs only 6% more. That pair rests on route 8 instead: all four
+"other people must change" items (means 2.412–2.592) fall strictly below all five "the situation must change /
+I must leave it" items (2.720–3.192), a perfect 4/5 split, p = .0079 by chance. The `public_note` names both
+items. This is the status rule applied as written — the route pins a semantic class, not the individual pair.
+
+**Source defect found (recorded, not filed):** the S2 DOCX prints item 20's cross-loading as `0.71`, which is
+impossible in that solution and is an evident typo for `0.071` (replication gives 0.0704 for
+`Q22_SRchange`; no item exceeds 0.18). Separately, S2's cross-loading for the `Q36_CMgen` text (−.162) does not
+reconcile with the observed −.037 and reads as a second transcription error in the same table; `Q36`'s primary
+loading is isolated by .038, so its assignment is not at risk. Both agents hit the `0.71` independently, which
+is the corroboration. No public artifact, no issue filed.
+
+**Blocked — `tutrin_2020_meq30`, on INSTRUMENT RIGHTS, not access. Retry test: NO (determinate).**
+The MEQ30's own scoring appendix reserves a right: *"The MEQ30 is freely provided for non-commercial use."*
+(Barrett, Johnson & Griffiths 2015, J Psychopharmacol 29(11):1182-1190, doi:10.1177/0269881115609019,
+Appendix 2.) A `block` row was added to `instrument_rights_register.csv` (74 → 82 records; family MEQ).
+A permissive deposit does not launder a restricted instrument (2026-09-08), and the administered Russian is a
+derivative, so the CC0 Dataverse deposit does not cure it. **Orchestrator re-checked this at Step 5b rather than
+taking it on report**, because it is a determinate block that writes a permanent register row: the clause is
+verbatim at the quoted sha256 (`1309af3a…c49f`), and `pdftotext` context confirms the agent's key claim that it
+sits immediately after the factor-scoring key in the appendix printing the stand-alone instrument — i.e. a term
+on the instrument, not Sage's article reprints notice. Also confirmed: no MEQ item text has ever shipped in the
+corpus, so nothing needs withdrawing.
+
+The wording was located and **fully recoverable** — `FFR_190items_surveyRus_raw_scored.tab`
+(doi:10.7910/DVN/DEJQM4, CC0) has two stacked header rows, and at columns 82–96 row 0 carries canonical MEQ30
+English *prefixed with the very integer the IRW code uses* (`"35.  Freedom from the limitations of your personal
+self…"` → `MEQ_35`), row 1 the administered Russian. Mapping would have been `data_labels`, 15/15 verifiable by
+header diff; only the clause stopped it. Recorded in `pending_index_notes.csv` so nobody repeats the search.
+
+**Step 3b mismatch on that table:** it is named `meq30` but holds only the MEQ30's **15-item Mystical factor**
+(MEQ30 numbering 4,5,6,9,14,15,16,18,20,21,23,24,25,26,28) — the source column header says so outright. The code
+integers are the 190-question freediving survey's numbering, not MEQ30 1–30, and live resp is 1–5 where the
+MEQ30 is scored 0–5. Neither changed the outcome. Codes are bare `MEQ_9`…`MEQ_83`, so no wording leaks through
+the response table.
+
+**Gates:** `normalize_nulls.R` fixed 2/2 files; `audit_batch.R` **2 PASS, zero WARN** (so Step 5c had nothing to
+explain — the first round in a while with no WARN to justify); `verify_batch.R` PASS=2; `lint_verification.R`
+2 rows, no problems; `irw-validate` ok on both, nothing to report; `check_provenance.R` clean for this batch.
+Neither written table is `data_labels`, so no NOT_NEEDED rows were owed. `mapping_verification.csv` 1013 → 1015.
+
+**Pre-existing, not this round's:** `check_provenance.R` still reports `tian2026_digital_competence` as owing an
+issues-page line. That is the stale local `irw_site` checkout recorded at batch_188 — the entry is already on
+`origin/main`. The 13 `translation_source=mixed` rows it lists are the standing REVIEW list, unchanged.
+
+**Beware the new register row's code regex** (`^MEQ[_ ]?[0-9]|mystical`): `antunez_2013_rmeq` and other `*meq*`
+tables are the reduced Morningness-Eveningness Questionnaire, an unrelated instrument. The row's own notes say
+to read the items before applying it. Checked: no other `meq`/`mystic` table is in the queue, and
+`PEMAIW_Qiu_2020_FFMQ` (batch_131) is the Five Facet Mindfulness Questionnaire — not affected.
+
+Cap is `batch_230`; not reached. 235 rows remain `pending`, 0 `in_progress`.
+
+## batch_207 — 2026-09-15 20:27–20:50 PDT
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+
+- `ucla_BrummerHoffman_2021` — done. 3-item UCLA Loneliness (Brazilian Portuguese), OSF p8j2v
+  CC BY 4.0, same deposit as the shipped `gad_`/`phq_BrummerHoffman_2021`. mapping_basis=data_labels,
+  verification NOT_NEEDED (exemption earned by the code derivation: `data/BF_BrummerHoffman_2021.R`
+  does no rename, so the IRW code is the authors' own post-rename column name). Content caveat
+  shipped as a public_note: the item coded `ucla_left_out` was administered as "Abandonado"
+  (abandoned), not a rendering of the canonical "left out"; `_translated` follows the administered
+  Portuguese. Ground truth via `irw_table_sets()`, no full export.
+- `uffler_2017_lecture_seating` — done. 26 items x 7 levels = 182 rows. verification PARTIAL
+  (published per-subscale r2 route; pins subscale membership, not within-subscale order).
+  `verify_*.R` PASS.
+- `uffler_2017_seat_reasons` — done. 7 items x 2 levels = 14 rows. verification VERIFIED
+  (S1 Graph 1 percentages x n=477 nursing subsample vs live endorsement counts, max deviation
+  1 count, all seven predicted counts distinct). `verify_*.R` PASS.
+
+Gates: normalize_nulls fixed 1 of 3 (seat_reasons, written by Python); audit_batch 3/3 PASS, no
+WARNs; verify_batch 2 PASS + 1 MISSING(exempt); lint_verification clean; irw-validate clean except
+one `name_charset` WARN on `ucla_BrummerHoffman_2021`, which is a property of the upstream IRW
+table name (capitalisation) and affects every `*_BrummerHoffman_2021` sibling, not this item file.
+
+`check_provenance.R` exits 1, but **not on anything from this round**: the single offender is
+`tian2026_digital_competence` (batch_188, machine_translation with no issues-page entry). Pre-existing
+and still outstanding.
+
+### Step 5b — orchestrator re-checks of the round's claims (all confirmed, one agent aside corrected)
+
+Re-read the source article directly rather than trusting the reports:
+
+- **Instrument mismatch confirmed.** The paper states plainly "We used the Motivated Strategies for
+  Learning Questionnaire (MSLQ)... Twenty-six questions were submitted to the study population",
+  answers "on a Likert scale graduated from 1 (not at all true of me) to 7 (very true of me)". The
+  IRW dictionary Description for `uffler_2017_lecture_seating` ("questionnaire on motivations for
+  lecture-hall seating choice") is wrong and **should be corrected to name the MSLQ motivation
+  section**.
+- **Published r2 confirmed exactly** as used in the verification route: intrinsic 0.73, task value
+  0.84, self-efficacy 0.63, control of learning beliefs 0.48, extrinsic 0.20 (p=0.22, non-significant
+  — so excluding it from the route is the paper's own position, not a convenience).
+- **Per-item n defect confirmed exactly.** Independent `irw_fetch` count: QUESTIO20=591,
+  QUESTIO18/19/23=592, the other 22 items 593. Matches the agent's claim to the row. Cause is
+  upstream junk in the S2 sheet (a stray BOM in row 560, the typo "²5" in two cells) coerced to NA.
+  A response-data defect, not an itemtext defect.
+- **n=477 nursing confirmed** from the paper's own breakdown of the 596; 593 included after 3
+  exclusions for aberrant values.
+- **French translation confirmed**: "we had to translate the items into French. The translated
+  questionnaire was not tested in preliminary studies." Supports `text_source=translated_substitute`
+  with no French wording published anywhere in the article or its two supplements.
+- **One agent aside was wrong and is NOT on disk.** The `lecture_seating` agent's report called the
+  companion table "the actual seat-choice checklist". It is not: the paper collected seat reasons via
+  a single OPEN question ("Why did you sit in that place today?") whose free-text answers the authors
+  "grouped into categories". The `seat_reasons` agent had this right, and its notes/public_note say
+  so; the wrong reading never reached a file. Recorded here so it does not get re-derived.
+
+### Metadata follow-ups owed (not blocked tables, so no pending_index_notes rows)
+
+Both IRW dictionary Descriptions for the uffler pair are wrong and want correcting:
+1. `uffler_2017_lecture_seating` — is the MSLQ motivation section, not a seating-motivation instrument.
+2. `uffler_2017_seat_reasons` — "7-item binary checklist (multi-select)" describes the derived file,
+   not the instrument; the seven codes are researcher categories over free text.
+3. `cov_seat_rank_preference` (both tables) is a misnomer — the S2 `RANK` column is the lecture-hall
+   row the student actually occupied (1-9), assigned by the researcher on the day, not a preference.
+
+Cap not reached (cap is `batch_230`). Queue: 232 pending, 0 in_progress.
+
+## batch_208 — 2026-09-15T20:43 (3 tables, 3 agents)
+
+Tables: `valdivia_2023_oms`, `valverdeberrocoso_2021_learning_design`, `valverdeberrocoso_2021_sqd`.
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).** Circuit breaker not tripped (0% failed).
+229 pending remain.
+
+Gates: `normalize_nulls` fixed 2 of 3 files; `audit_batch` 3/3 PASS with no anomalies (so no
+Step 5c WARN explanations owed); `verify_batch` PASS=3; `lint_verification` 3 rows, no problems;
+`irw-validate` ok on all three. `check_provenance.R` exits 1 on a PRE-EXISTING table
+(`tian2026_digital_competence`, ships IRW-generated English with no issues-page entry) — nothing
+in this batch is implicated; all three tables here are HELD, so no entry is owed yet.
+
+All three VERIFIED, all via route 1 (per-item descriptives from a published table), all with every
+item individually distinguished — no PARTIAL, no NO_ROUTE.
+
+Notable:
+
+- **Two tables share one source and corroborated each other independently.** Both
+  `valverdeberrocoso_2021_*` agents read PLOS ONE 10.1371/journal.pone.0256283's S1 File (`.s002`)
+  and separately derived that the SQD block carries `1 = Totalmente en desacuerdo … 6 = Totalmente
+  de acuerdo` while the SPA/RES/PRA and TICTIP blocks carry `1 = Nunca … 6 = Siempre`. Two
+  different anchor sets in one questionnaire is exactly the crossing error the sibling warning
+  exists to prevent, and it did not happen. `valverdeberrocoso_2021_tictip` is still pending and
+  takes the Nunca…Siempre set; Tables 1 and 2 of the article give it a ready route-1 verification.
+- **`valdivia_2023_oms`: the source `.sav`'s value labels are a trap the pipeline dodged.**
+  Orchestrator Step 5b re-checked this directly rather than taking the agent's word: pyreadstat on
+  `peerj-11-16375-s003.sav` shows value label `1.0 = "completely agree"` for exactly oms2, oms6,
+  oms7, oms8, oms14 and `1.0 = "completely disagree"` for the other ten — 5 of 15 reversed, as
+  reported. Because `data/valdivia_2023_oms.py` reads label STRINGS via `read_spss` and recodes
+  through one uniform map, the live integers are label-ordered for all 15; an extraction that had
+  trusted per-item value labels would have shipped inverted anchors on those five.
+- **Item 2's Spanish is defective in the SOURCE, not here.** Also re-checked at Step 5b:
+  `pdftotext -raw` of the S1 File prints "2. Si supiera que un compañero está en tratamiento por
+  una enfermedad mental, cómodo(a) trabajando con él." — a verb is missing in the published
+  questionnaire. Shipped verbatim, matching character-for-character, and the public_note is
+  accurate as written.
+- `valdivia_2023_oms` carries `translation_source=mixed` and a `public_note` disclosing that
+  `instructions_translated` is IRW-written English. It owes an issues-page line when it ships.
+
+Cap (`batch_230`) not reached; next round takes `batch_209`.
+
+## batch_209 — 2026-09-15 20:56–21:06 PDT
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents,
+one per table, per the 2026-09-11 setting. No kills, no retries, no rate limits.
+
+Numbering note: highest existing was `batch_208`, so this round is `batch_209` — the
+200–205 hole (irw#1945) is behind us and the series now runs consecutively toward the
+`batch_230` cap.
+
+Tables:
+
+- **valverdeberrocoso_2021_tictip** — 28 items × 6 options, Spanish administered wording
+  from the PLOS S1 File questionnaire with the study's own English in `_translated`.
+  `mapping_basis=paper_explicit`, verification **VERIFIED** via route 1: paper Table 2
+  M/SD reproduce to |dM| ≤ 0.005, |dSD| ≤ 0.0005 (n=251), and all 28 published (M,SD)
+  pairs are unique — including the M-ties TICTIP06/11 and TICTIP17/18, separated by SD —
+  so every item is distinguished. `verify_*.R` re-ran clean at Step 4 (VERDICT: PASS).
+  One disclosed correction: paper Table 2's English for item 9 says "Scratch" where the
+  administered Spanish says "Rayuela" (Extremadura's school platform); the translated cell
+  ships Rayuela, recorded as the public_note. Source inconsistency noted, not corrected:
+  Methods describe 27 items (2+5+2+10+3+5) but Table 2, the S1 questionnaire and the S2
+  data sheet all carry 28, matching the IRW table.
+- **vanteffelen_2020_aq_hostility** — 8 items × 5 levels, `mapping_basis=data_labels`
+  (verification NOT_NEEDED). Dutch AQ hostility subscale.
+- **vanteffelen_2020_foa** — 40 items × 5 levels, `mapping_basis=data_labels`
+  (verification NOT_NEEDED). Step 3b resolved the opaque name: Forms of Aggression
+  questionnaire (Verona et al. 2008), confirmed by the paper's "The 40-item Forms of
+  Aggression". English `_translated` is IRW machine translation, so it owes an
+  issues-page line once live.
+
+Both vanteffelen tables share one PLOS `.sav` (journal.pone.0239631.s001, N=376, CC BY 4.0);
+the two agents were told which sibling belonged to the other and neither crossed over.
+`vanteffelen_2020_pid5_hostility` and `vanteffelen_2020_rpq` remain pending for a later round.
+
+Gates: normalize_nulls fixed 1 file (tictip, 169 lines); audit_batch **3/3 PASS, zero WARNs**
+(so nothing to explain under Step 5c); verify_batch 1 PASS + 2 MISSING(exempt);
+lint_verification 3 rows, no problems; `irw-validate` clean on all three.
+
+**Step 5b orchestrator re-checks — both agent findings confirmed, with numbers:**
+
+- The aq_hostility paper-vs-deposit discrepancy is real and verbatim. The paper's Measures
+  section says "In the 10-item hostility scale of the Aggression Questionnaire (AQH) [9] …
+  ranging from one (extremely uncharacteristic of me) to five (extremely characteristic of
+  me)", while the deposited `.sav` carries **8** HOS_ columns with **agreement** anchors
+  (1 Helemaal mee oneens … 3 *Weet niet* … 5 Helemaal mee eens) — a literal "don't know"
+  midpoint, shipped unnormalised. The deposit was followed on both counts, which is right:
+  8 is the canonical AQ hostility subscale length, and the paper's own example item "Other
+  people always seem to get the breaks" is HOS_4 "Het lijkt alsof anderen altijd meer geluk
+  hebben", so the instrument identification is not in doubt. A source-reporting slip, not an
+  itemtext or response-data defect — no issue filed.
+- Byte-comparison against the cached `.sav` redone independently: 8/8 and 40/40 shipped
+  `item_text` strings identical to the SPSS variable labels, 0 mismatches, n=376 non-missing
+  for every item in both tables.
+- The foa direction evidence reproduces exactly: AGG_13 1.024, AGG_26 1.027, AGG_34 1.032,
+  AGG_33 1.032, AGG_30 1.037 at the floor against AGG_17 2.883, AGG_21 2.574, AGG_20 2.269
+  at the top — consistent only with 1 = "(Bijna) nooit", not a reversed option axis.
+
+**Privacy finding to hand to a human (outside a round's scope to fix):**
+`data/vanteffelen_2020_hostility.py` line 29 hardcodes
+`UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}` and sends it to PLOS on
+line 52 — Ben's email leaves the machine on every run of that processing script. Found by
+the foa agent, verified by the orchestrator. Neither batch_209 agent sent it anywhere; both
+fetched with a generic User-Agent. Recorded in `notes.csv` too. Worth a repo-side fix.
+
+**Rights, for triage:** two ship-shaped findings a round may not act on. The AQ hostility
+row in `instrument_rights_register.csv` names this table but is the *Autism Spectrum
+Quotient* and explicitly does not cover it; Buss & Perry (1992) was published in JPSP, not
+by a test publisher (the commercial WPS instrument is the different 34-item Buss & Warren
+2000), and the PhenX protocol states permission is not required. The FOA has no register row
+and no locatable fee/permission/NC/ND clause. Both ship under silence-is-permission; no
+register rows were written, since a round may only write `block` rows.
+
+**Pre-existing `check_provenance.R` failure, NOT caused by this round (exit 1):**
+`tian2026_digital_competence` (batch_188, uploaded, `translation_source=machine_translation`)
+has no entry on the public issues page and owes one under the 2026-09-02 ruling. Everything
+else it reports is clean; `vanteffelen_2020_foa` appears only in the HELD list, which is
+correct — nothing of it ships until upload. Someone should add the tian2026 line to
+`itemtext_issues.qmd`.
+
+Circuit breaker: not tripped (0 failed of 3). Queue after this round: 226 pending,
+871 done, 232 blocked, 59 excluded, 13 failed. Cap `batch_230` not reached.
+
+## batch_210 — 2026-09-15 21:09–21:20
+
+3 tables, 3 agents (one per table, the 2026-09-11 setting). **1 written / 2 blocked / 0 failed.**
+Yield 1/3 = 33%. Circuit breaker NOT tripped: 0 failed (0%), both no-CSV tables are determinate
+rights verdicts with retry test = NO. No kills, no rate limits, no retries.
+
+Numbering note: the series resumed at 206 after 199 (200–205 belong to the irw#1945 rights line),
+so this is 206, 207, 208, 209, **210**. Cap is batch_230; not reached.
+
+**vaporova_2020_imitation — WRITTEN, clean.** Vaporova & Zmyj (2020) PLOS ONE 15(9):e0235595,
+CC BY 4.0. Not a questionnaire: a behaviour-coded three-step mitten imitation task (mouse hand
+puppet), 9- and 14-month-olds and 4-year-olds at TU Dortmund. 3 items x 2 levels = 6 rows.
+`item_text` = the paper's own naming of the three demonstrated target actions in its Coding
+paragraph; `option_text` = the S1 Data header's own value labels (0 = not imitated, 1 = imitated);
+`instructions` = the single experimenter utterance ("Now you may play with the mouse!"), spoken in
+German with only the paper's English published, hence language=German, text_source=
+translated_substitute, translation_source=study_supplied, `_translated` columns empty.
+mapping_basis=data_labels, but earned rather than asserted: `data/vaporova_2020_imitation.py`
+assigns the codes POSITIONALLY (`block[[0,3,13,14,15]]` then a rename list in a DIFFERENT order
+from the column list), so the exemption was not available and a real route was run.
+Step 5b VERIFIED — header diff 3/3 plus response-frequency match: source workbook rows 4:98,
+analyzable-imitation flag == 1, gives n/count-of-1s 82/45, 82/21, 82/27 against live 82/45, 82/21,
+82/27 (means .5488/.2561/.3293 both sides, exact). Smallest gap between rates .0732, so every item
+is separated from every other and no permutation survives — including the shaking /
+putting-back-on swap the script's mismatched orderings invite. Does NOT establish the instructions
+line (no numeric check exists for it); that limit is stated in the evidence and the row is
+VERIFIED on the item axis, per the 2026-09-08 rule.
+
+**vanteffelen_2020_pid5_hostility — BLOCKED (instrument rights). Retry test: NO.**
+The 10 codes PID_1..PID_10 (resp 0–3) are the Dutch-administered **Hostility facet of the FULL
+220-item PID-5—Adult** (APA items 28/32/38/85/92/116/158/170/188/216), not the 25-item Brief Form —
+established from the study's own S1 Data .sav variable labels. The agent checked the full form
+against APA's OWN page rather than name-matching the existing PID-5-BF register row (Ben's
+2026-09-10 instruction), and the full form carries the word-for-word identical clause: reproduction
+permitted "by researchers and by clinicians for use with their patients", other uses by permission
+from APPI, "All Rights Reserved" on every item page. Reserves a right under irw#1945.
+PLOS CC BY 4.0 governs the response data, not APA's wording; the Dutch administration is a
+derivative. Block is EFFECTIVE — the live codes are bare. A `block` row was added to
+instrument_rights_register.csv for the full form, its facet subsets and its translations, scoped
+explicitly NOT to the rest of the DSM-5 "emerging measures" family.
+
+**vanteffelen_2020_rpq — BLOCKED (instrument rights), ESCALATED. Retry test: NO.**
+RPQ_1..RPQ_23 are the Dutch (Cima et al. 2013) administration of Raine et al.'s (2006)
+Reactive-Proactive Aggression Questionnaire in canonical order; 21 of 23 .sav columns carry the
+Dutch stem and the value labels 1=Nooit/2=Soms/3=Vaak match the live resp set {1,2,3} exactly.
+Raine distributes the RPQ himself as a .docx from his UPenn page, stating: "The RPQ can be freely
+used for research purposes, but I would appreciate knowing a little about your study first at the
+following email address: [his address]" — a purpose-scoped grant to USE, not to reproduce or
+redistribute.
+**BEN'S RULING REQUESTED.** This clause is the weakest of its comparators: no "only", and
+"I would appreciate knowing" is a courtesy rather than a permission gate, so a
+silence-is-permission reading is genuinely available. Blocked under "err on the side of not having
+things" and the standing rule that a round may write a `block` but never a `ship`.
+If the verdict flips this is a same-day extraction, with one caveat banked in the notes: RPQ_20's
+variable label is truncated at SPSS's 255-char cap and RPQ_23 has no label at all; neither Dutch
+stem appears anywhere else in the deposit (S2 Table lists only the 54 PID-5H/STAXI-2T/AQ-H/FOA
+items), so both would ship with blank item_text.
+
+**Step 5b orchestrator re-checks (2 of 2 confirmed, 1 agent omission repaired).**
+- Re-fetched Raine's RPQ .docx independently (HTTP 200, 29,164 bytes,
+  sha256 70f9c104…13b2) and extracted the clause from word/document.xml: **verbatim match** to the
+  agent's quote and hash. The escalation as written to Ben is accurate.
+- The vaporova mapping claim was re-run end to end by `verify_batch.R`, which re-fetches the source
+  workbook itself: all nine numbers reproduce exactly. VERDICT: PASS.
+- **Repaired:** the RPQ agent did not write its `pending_index_notes.csv` row (the pid5 agent did).
+  The orchestrator added it, status=blocked, including the independent re-fetch evidence and the
+  two-stem caveat. Worth watching whether this recurs — the row is what a blocked table leaves
+  behind, and the round would otherwise have lost it silently.
+
+**Gates:** normalize_nulls fixed 1 file (6 lines). audit_batch PASS 1/1, **no WARNs**, so nothing
+was owed under Step 5c. verify_batch PASS=1. lint_verification 0 ERROR / 0 WARN / 1 INFO (the INFO
+correctly notes the evidence hedges on the instructions line while still asserting a full item-axis
+tie; VERIFIED stands). irw-validate ok, nothing to report. check_provenance: 1189 rows / 209 files,
+no failure; its outstanding items are pre-existing and none belongs to this round.
+
+**Carried forward (not this round's to fix):** `data/vanteffelen_2020_hostility.py` line 29
+hardcodes Ben's email into its User-Agent —
+`UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}`. Confirmed by the orchestrator by
+reading the line. First logged by batch_209; still unfixed, and it leaks the address to every host
+that script touches.
+
+## batch_211 — 2026-09-15
+
+**3 tables, 3 agents. Written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+All three agents returned clean passes; nothing hit the circuit breaker (0 failed, threshold 30%).
+
+| table | rows | mapping_basis | Step 5b |
+|---|---|---|---|
+| `verbagg` | 48 (24 items × 2) | paper_explicit | PARTIAL |
+| `Veterans_Affairs_SSVF_Survey_2016-17` | 177 (59 items, resp 1–5) | reconstructed | PARTIAL |
+| `VSOCFP_Sebo_2024` | 56 (8 items × 7) | paper_explicit | VERIFIED |
+
+**Gates:** normalize_nulls fixed 2 of 3 files. audit_batch PASS=2 WARN=1. verify_batch PASS=3.
+lint_verification 3 rows, no problems. irw-validate: no ERRORs — two `name_charset` WARNs
+(`Veterans_Affairs_SSVF_Survey_2016-17`, `VSOCFP_Sebo_2024` are not lowercase), which are properties
+of the existing live table names and not something this batch introduced. check_provenance: 1192
+rows / 210 files, no failure; its outstanding items are pre-existing and none belongs to this round.
+
+**Step 5b — the orchestrator's re-check changed a public artifact.** The SSVF agent's
+`public_note` asserted that item 3 runs 1=Very Dissatisfied→5=Very Satisfied — the reverse of the
+direction the VA data dictionary states for the FY2018-2020 satisfaction items — citing r=+0.87 with
+the quality item 1. That claim was *not* covered by `verify_Veterans_Affairs_SSVF_Survey_2016-17.R`,
+which verifies the item↔source-column tie (59/59 per-item n, 340,723 = 340,723) and the sub-service
+labels, but never the coding direction. Re-checked server-side, pairing items 1 and 3 within `id`:
+n=5743 complete pairs, **CORR = +0.84**, mean item 1 = 4.4, mean item 3 = 4.5, and 5135/5743 = 89.4%
+of respondents at item 3 resp≥4. The substance holds — both items ascend toward the favourable pole,
+so the reversed-direction finding stands — but +0.869 did not reproduce, and the `public_note` was
+edited to +0.84. Worth noting the general shape: a claim that is about to be filed publicly and is
+*not* in the re-runnable evidence script is exactly the one Step 5b exists to catch.
+
+**Step 5c — the one WARN, explained in notes.csv, is not an itemtext defect.** All four parts are
+properties of the response data or of the FOIA release. The row-count anomaly (items 13, 30–37, 51
+against a median of 6633) is screener gating: every one of those items is a "What was the quality of
+service?" follow-up, answered only by respondents who needed and received that service. The three
+remaining parts — 0.6% blank `item_text`, 0.6% blank `option_text`, and "1 of 59 items has NO
+option_text rows" — are all the *same single row*, item 7 / resp 1, the form's "Q8 into" transition
+column whose only stored value is 1 and whose wording the release does not publish. (My first draft
+of this note attributed the blanks to items 43/49/55 as well; checked against the file, those three
+do carry the Other Supportive Services block stem and are not part of these WARNs.)
+
+**Disclosure caveats carried (all in provenance `public_note`, all owed on upload):**
+`verbagg` ships English for a Dutch administration — no Dutch wording is published in the lme4
+deposit or De Boeck & Wilson's archived materials — with the do-mode sentences written as the
+parallel of the only published (want-mode) form, and `option_text` at resp=1 reading "perhaps or
+yes" to describe lme4's `r2` dichotomisation rather than a printed option. `VSOCFP_Sebo_2024` ships
+third-party published English in its `_translated` columns (items from PMC11960917, anchors from
+PMC9364613) with IRW-translated instructions.
+
+**Notable, not blocking:** `VSOCFP_Sebo_2024` is the refined 8-item SOC-8, not the SOC-13 — the
+processing script keeps only non-reverse-stored SOC columns then drops SOC5, so items 1,2,3,5,7 are
+absent; `instrument` names the SOC-8 (Step 3b). Two level-1 sources disagree by one character on the
+SOC11 anchor ("de juste" in the OSF .dta value label vs "de justes proportions" in the published
+questionnaire); the questionnaire wording ships and `verify_batch` reports the difference rather than
+failing on it.
+
+**Cap not reached** (cap is `batch_230`; 19 rounds remain). Queue after this round: 220 pending,
+875 done, 234 blocked, 59 excluded, 13 failed.
+
+**Carried forward (still not this round's to fix):** `data/vanteffelen_2020_hostility.py` line 29
+still hardcodes Ben's email into its User-Agent. First logged by batch_209, re-confirmed by batch_210,
+unfixed as of this round.
+
+## batch_212 — 2026-09-15 21:46–22:00 PT
+
+3 tables, 3 agents (one per table). **2 written / 1 blocked / 0 failed** — yield 67%.
+Circuit breaker not tripped (0 failed).
+
+- `wang_2015_donation_decision` — **done**, 27 rows (3 items). Wang, Tang & Wang (2015)
+  PLOS ONE 10(9):e0138219, CC BY 4.0; Methods prints all three prompts verbatim.
+  mapping_basis=paper_explicit, text_source=study_materials. Verification routes 1+2
+  **VERIFIED**: eight published cell means reproduce within 0.009, six wtc contributor
+  percentages within 0.05; a distress↔sympathy swap would move every mean 0.8–1.4.
+  Caveat (in notes.csv): `option_text` blank throughout — the paper names only the anchors
+  of a "7-point" scale while both S1 and the live table carry **eight** codes 0–7, so no
+  anchor could be pinned. Nothing padded with its own number. Orchestrator re-checked the
+  live item/resp levels: distress and sympathy each hold exactly 0–7 (8 levels),
+  wtc_amount 0–100 by tens (11 levels) — the note is accurate as written. Mixed
+  Chinese/English administration disclosed in public_note.
+- `wang_2016_study1_authliving` — **done**, 20 rows (4 items × 5 levels). Wang (2016)
+  PLOS ONE 11(1):e0146050 Study 1, Authentic Living subscale of Wood et al. (2008).
+  Administered in Chinese, no Chinese wording anywhere in the deposit (s001.sav carries
+  no variable or value labels), so English base fields with
+  text_source=translated_substitute, translation_source=official_instrument_english.
+  Verification route 3 **PARTIAL**, correctly so: published totals reproduce
+  (42.49/6.19 vs 42.49/6.18; 38.34/5.08 exact; r=0.606 vs .61) and the block and coding
+  direction are pinned, but **within-block order is not** — no per-item statistics
+  published, no labels in the .sav, all four items positively keyed on the same 1–5 range.
+  Shipped in canonical Wood numbering; public_note says a permutation within the four
+  would be undetectable.
+- `wakui_2023_who5` — **blocked** (not failed). Determinate instrument-rights verdict:
+  WHO-5 Well-Being Index, already a settled `block` row in instrument_rights_register.csv
+  (family WHO5, withdrawn from both shards, 2a45976) — WHO licenses it CC BY-NC-SA 3.0 IGO
+  and under the 2026-09-05 HEXACO ruling (irw#1945) originator-governs, so the permissive
+  PLOS deposit (10.1371/journal.pone.0294357, CC BY 4.0) does not clear it. Orchestrator
+  verified the register row exists and carries that clause verbatim. Step 3b identity
+  confirmed via table_sets.R only (5 items W1–W5, resp 0–5, 61 respondents × 2 waves) —
+  no full-table export spent. Items are opaque codes so nothing leaks; Japanese
+  administration is no route around it (a translation is a derivative).
+  **Retry test: NO** — an unchanged retry returns the same answer. Row added to
+  itemtables/pending_index_notes.csv.
+
+Gates: normalize_nulls 0 of 2 changed; audit_batch **2 PASS, no anomalies** (so no Step 5c
+WARNs to explain); verify_batch **PASS=2** (both verify_<table>.R end VERDICT: PASS);
+lint_verification 0 ERROR, 1 WARN (the known "option_text ships blank" WARN on
+wang_2015_donation_decision, explained in notes.csv); `irw-validate` ok on both files,
+nothing to report.
+
+`check_provenance.R` exits 1, **pre-existing and not from this batch**: the only owed
+issues-page entry is `tian2026_digital_competence`, plus 13 `translation_source=mixed`
+review rows, none of them batch_212 tables. Both of this round's provenance rows are clean
+(translation_source populated where text_source=translated_substitute).
+
+No systemic access issues; no Step 3b instrument mismatches; no dictionary/metadata problems.
+Cap (batch_230) not reached — next round is batch_213.
+
+## batch_213 — 2026-09-15 22:03–22:25
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+All three from one deposit: Wang YN (2016) PLOS ONE 11(1):e0146050.
+
+- `wang_2016_study1_power` — Sense of Power Scale (Anderson/John/Keltner 2012), 8 items × 1–5.
+  mapping_basis=reconstructed, text_source=translated_substitute (English fallback, language=Chinese),
+  translation_source=official_instrument_english. Verification PARTIAL (routes 3 + published alpha).
+- `wang_2016_study1_se` — RSES, 10 items × 1–5. reconstructed / translated_substitute / mixed
+  (English item text, administered Chinese option anchors taken from the S2+S3 .sav value labels).
+  Verification PARTIAL (routes 5+6 polarity partition, 3, 7). RSES has a settled `ship` row in the
+  rights register.
+- `wang_2016_study3_auth` — Authenticity Scale (Wood et al. 2008), 12 items × 1–5. reconstructed /
+  translated_substitute / mixed. Verification PARTIAL (routes 5 + 3; option axis from .sav value labels).
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **PASS 3/3, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch PASS 3/3; lint_verification clean (3 rows, no problems); `irw-validate` ok on all
+three. `check_provenance.R` exits 1, but on a **pre-existing** table — `tian2026_digital_competence`
+ships IRW-generated English with no issues-page entry. Nothing in batch_213 is implicated: all three are
+HELD (uploaded blank), so no public entry is owed yet. Their `translation_source=mixed` rows will want an
+issues-page line **if and when they are uploaded** — the shipped option_text is administered Chinese from
+the source, but the English glosses beside it are IRW-written.
+
+**Step 5b — three agent claims independently re-checked by the orchestrator, all three CONFIRMED:**
+
+1. `study1_power` is stored with items 2,4,6,7 **already reverse-scored**: alpha .710 as stored vs
+   **.099** if those four are un-reversed; total M 27.71/SD 3.78 as stored vs 21.98 un-reversed, against
+   the paper's Table 1 27.71/3.78. So the shipped option anchors are deliberately flipped for those four
+   items (resp 1 = "strongly agree"), disclosed in provenance + public_note. `irw-validate` reports no
+   `resp_ambiguous` — per-item direction differences are legitimate.
+2. `study1_se` likewise stored already reverse-coded: alpha .807 vs **.162** un-reversed, **0 of 45**
+   inter-item correlations negative, column sum 38.34/5.08 = the published total exactly.
+3. `study3_auth` — the agent's claim that Wang's stored `authenticity` aggregate (and hence Table 5) sums
+   **eleven** items, excluding a11, is confirmed decisively from s003.sav: least-squares weights are
+   exactly 1.0 on eleven columns and **0.0 on a11**, intercept 0, max|residual| 7.8e-14. Note the
+   drop-one mean/SD test ALONE does not identify a11 (dropping a8, a9 or a11 all land within 0.15 of
+   38.38); the regression is what settles it. The IRW response table correctly carries all twelve items —
+   this is a fact about the paper's scoring, not a defect in the IRW table.
+
+Rights: no register row exists for the Sense of Power Scale or the Authenticity Scale and no quotable
+fee/permission/NC/ND/no-redistribution clause is locatable for either; both shipped under "silence is
+permission" with no `ship` row written. The auth agent re-derived the same conclusion batch_212's sibling
+reached, independently.
+
+Cap (batch_230) not reached; 214 pending remain.
+
+## batch_214 — 2026-09-15 22:24–22:40 PDT
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents per round
+(the 2026-09-11 setting). No kills, no rate limits, no retries.
+
+- `wang_2016_study3_power` — Generalized Sense of Power (8 items × 5 levels, 40 rows). Wang YN 2016
+  PLOS ONE 11(1):e0146050 Study 3, n=210 Chinese. mapping_basis=reconstructed,
+  text_source=translated_substitute, translation_source=mixed. Administered Chinese *anchors* ship
+  verbatim from the deposit's value labels; the *item* wording is an English fallback (three agreeing
+  open-access reproductions) because no Chinese item wording exists in the deposit or paper.
+  Verification PARTIAL — routes 3 + 5/6 + 7; within-polarity-class order not established.
+- `wang_2016_study3_se` — Rosenberg Self-Esteem, 10 items × resp 1–5 (50 rows), same source file.
+  RSES already carries verdict=ship in instrument_rights_register.csv (express public-domain grant
+  reaching translations); applied, not re-derived. Verification PARTIAL — routes 3 + 5/6 + 9 (all
+  50 of 50 item×level counts of the .sav's labelled codes equal the live resp counts).
+- `wang2022_dass_anxiety` — DASS-21 anxiety subscale, 7 items × resp 0–3 (28 rows).
+  **The DASS rights question is NOT a block**: the register already carries verdict=ship on the
+  rights holder's express public-domain grant, which extends to translations (the relevant arm, this
+  being a Chinese administration). Verification PARTIAL — per-item (n, mean, sd) reproduce deposit
+  columns DASS2/4/7/9/15/19/20 exactly and each claimed column is the nearest of all 21; canonical
+  within-subscale numbering not established. option_text ships only the study's own endpoints
+  (resp 0, 3); 1 and 2 left blank rather than substituting canonical DASS anchors onto a visibly
+  relabelled scale.
+
+Gates, all run in the foreground by the orchestrator after every agent finished: normalize_nulls
+0 of 3 normalized; audit_batch **3 PASS, no anomalies** (hence no Step 5c WARNs to explain);
+verify_batch **PASS=3**; lint_verification 3 rows, no problems; `irw-validate` ok on all three.
+Notably irw-validate did NOT raise `resp_ambiguous` on the power table, which its agent had
+expected — per-item direction differences are legitimate and correctly unflagged.
+
+`check_provenance.R` exits 1, but **not on anything from this round**: the single failing table is
+`tian2026_digital_competence` (ships IRW-generated English with no issues-page entry), pre-existing
+and unrelated. All three batch_214 tables are HELD (uploaded blank), so no public-note entry is owed
+yet; each owes one when it ships, since all three declare translation_source=mixed.
+
+**Step 5b, orchestrator's own re-check — both label-override claims CONFIRMED.** Two agents
+independently flipped the deposit's anchor labels on the reverse-worded items (power p2/p4/p6/p7;
+se se2/se5/se6/se8/se9), claiming the values are stored already reverse-scored. This overrides a
+source, so it was re-checked independently of the agents' verify scripts: in the live data every
+inter-item correlation is positive (power min +0.22, p1 with the four negatives +0.38/+0.40/+0.42/
++0.39; se min +0.32, se1 with the five negatives +0.48/+0.51/+0.50/+0.34/+0.45), alpha as-stored is
+0.880 and 0.898 against published .88 and .90, and un-reversing collapses them to 0.440 and 0.300.
+Totals 29.4/5.4 and 39.1/7.0 match Table 5's 29.37/5.37 and 39.12/6.95. Worth recording *where* the
+recode is: `data/wang_2016_authenticity_relationship.py` applies none of its own — it maps the .sav's
+Chinese label strings through MAP_CN5 — so the recode sits in the deposited file upstream of IRW,
+with the pre-recode anchor labels left attached. That is the fact the public note has to state.
+
+Cap (batch_230) not reached; 211 rows still pending.
+
+## batch_215 — 2026-09-15 22:42–23:0x PT
+
+3 tables claimed, 3 agents (one per table), all three returned. **2 written / 1 blocked / 0 failed.**
+Yield 2/3 = 67% written; 0% failed, so the circuit breaker does not trip (it counts `failed`, not
+`blocked`). Numbering note: highest existing was `batch_214`, so this round is 215 — outside the
+200–205 hole, consecutive from 206 as the amended rule requires.
+
+All three tables came from ONE source: Wang Y, Liu B, Zhang L, Zhang P (2022), *Front. Psychiatry*
+13:827519 (CC BY 4.0), deposit figshare 19158812 (Frontiers Data Sheet 1 .xlsx, CC BY 4.0, bare
+headers, **no variable or value labels anywhere**). A fourth sibling, `wang2022_dass_anxiety`, shipped
+in batch_214; each agent was told which siblings belonged to others and none collided.
+
+**Written.** `wang2022_dass_depression` (28 rows) and `wang2022_dass_stress` (28 rows), both
+`reconstructed` / `translated_substitute` / `mixed`, both PARTIAL on mapping verification. Gates all
+clean: normalize_nulls 0 of 2 changed; audit_batch **2 PASS, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch 2 PASS; lint_verification 2 rows no problems; `irw-validate` ok on both;
+check_provenance clean for this round. Both reproduce their subscale against the paper's published
+alphas (depression 0.8729 / anxiety 0.8436 / stress 0.8602 against 0.87 / 0.84 / 0.86) and each live
+item matches exactly one deposit column — the depression agent got an *exact whole-vector* match on
+all seven with zero rivals, the stress agent nearest-column with a 0.0658 closest rival plus all four
+of Table 1's stress cells. PARTIAL, not VERIFIED, for the same reason in both cases: the block is
+pinned and each item pinned to a column, but the canonical sentence order *within* the subscale rests
+on the DASS-21 numbering convention, which neither deposit nor paper states — a permutation inside
+the block would be undetectable. Both ship English under the 2026-09-01 fallback (administration was
+the Chinese DASS-21, deposit carries no labels and no CJK in the DASS headers), with option text the
+study's OWN endpoints only ("completely inconsistent" / "completely in line") and resp 1 and 2 left
+**blank, unpadded**. DASS-21 rights verdict=ship applied from the register, not re-derived.
+
+**Blocked (not failed).** `wang2022_fomo` — instrument rights, retry test NO. The instrument was
+established from the paper rather than assumed (FoMOs, Przybylski et al. 2013), and the extracting
+agent correctly **falsified the premise it was handed**: the 2013 CHB article is not open access
+(Crossref shows no CC licence for 10.1016/j.chb.2013.02.014). The block rests not on that bare
+copyright notice (PANAS ruling excludes it) but on a distribution clause of the HEXACO shape — free
+for academic use, licensing required for commercial — which blocks under irw#1945. Register row added.
+
+**Step 5b orchestrator re-checks — both changed or qualified what was reported.**
+1. The depression agent reported r(FoMO, depression) = 0.4783 pairwise / 0.4957 complete-case against
+   the paper's 0.51, attributing the gap to covariate adjustment. Re-checked: **both numbers are
+   exactly right**, but the explanation was an unverified guess and a simpler one is sufficient —
+   deleting listwise across all four scales at once (n=309) gives **0.5019**, the published value to
+   within rounding, while anxiety and stress barely move (0.5517, 0.5749). Only 5 rows have a missing
+   depression value and none are missing in FoMO, so depression is simply the subscale sensitive to
+   the missing-data rule. notes.csv amended to say so and to mark the covariate reading unreliable.
+2. The FoMO agent described its rights clause as resting on "several independent third-party
+   reproductions that agree in substance". Re-checked against what is actually on disk: of its four
+   cached pages, **only one carries the clause at all** — the primary selfdeterminationtheory.org
+   questionnaire page is a 5.5KB Cloudflare interstitial, and psychroots/studocu/ratemyfomo contain no
+   permissions text. The block stands (an unchanged retry meets the same gated pages either way), but
+   the register row records the basis as SECONDARY AND THIN and says a human should confirm it before
+   it is relied on widely; a primary copy showing no such clause would unblock the table outright.
+
+Queue after this round: 885 done, 236 blocked, 208 pending, 59 excluded, 13 failed; no rows left
+`in_progress`. Cap is `batch_230` and this is 215, so the cap is NOT reached — the next firing
+proceeds normally.
+
+## batch_216 — 2026-09-15
+
+3 tables claimed: `wang_2024_emotion2`, `wang_2024_emotion3`, `wang_2024_emotion4` — all three
+siblings of one source file, dispatched with explicit sibling boundaries. 3 agents.
+
+**written 0 / blocked 3 / failed 0 — yield 0%.** Circuit breaker NOT tripped: it counts `failed`,
+and there were none. All three are determinate availability verdicts (retry test NO on every one),
+which is exactly the case the 2026-09-03 split exists to keep off the counting side. This is a fact
+about what the queue served up — three tables from a single label-free deposit — not about pipeline
+health.
+
+**The block, common to all three.** Source is Wang K. et al. (2024) PLOS ONE
+`10.1371/journal.pone.0303965` (CC BY 4.0); instrument is the study's own EFL-adapted Achievement
+Emotions Questionnaire (AEQ; Pekrun et al. 2011), 19 items over 5 subscales, administered in Chinese
+to 1,460 secondary EFL learners, 1–5 Likert. Both deposits (S1 File `.s001`, S1 Raw data `.s002`,
+byte-identical, md5 `e87d8ceb0190ffa38a47a8b04d5d20dc`) carry **zero variable labels and zero value
+labels** across all 22 columns, so no `data_labels` route exists. The article prints exactly **one
+sample item per subscale**, with no item code attached, and Table 1 keys items
+`JO1-4/HO1-4/PR1-4/AX1-3/BO1-4` with factor loadings only. The paper says all AEQ items were
+"adapted to be relevant to the EFL context" without listing which were drawn, so
+canonical-instrument substitution fails too. Shipping bare 1–5 agreement anchors with blank
+`item_text` was considered and correctly rejected by two agents under the #1770 option-only rule.
+
+**Availability block, not rights.** The deposit is CC BY 4.0 and no restriction on the AEQ wording
+was located, so **no `instrument_rights_register.csv` row was written**. One agent noted the AEQ-R
+carries "© 2022 R. Pekrun … All rights reserved." but correctly declined to assert a verdict on the
+2011 AEQ without fetching and quoting a clause — the availability block is prior to it either way.
+
+**Step 5b orchestrator re-check — confirmed, and it changed one conclusion.** Re-run against the
+cached `.sav` (no export spent):
+- Label-free deposit: CONFIRMED (`column_names_to_labels` all `None`, `variable_value_labels` `{}`).
+- `emotion4`'s anxiety evidence reproduces to the digit: alpha **0.617** vs published AX .62; other
+  blocks .865/.857/.857/.828 vs published .87/.86/.86/.83; block-4 scale correlates **−0.253 /
+  −0.264 / −0.253** with blocks 1–3 and **+0.426** with block 5. `VAR4x` = Anxiety is settled.
+- **`emotion3`'s Pride claim does NOT survive as stated.** That agent concluded `VAR3x` = Pride from
+  Table 1's block order; the `emotion2` agent flagged that the Measure section's prose gives a
+  different order ("enjoyment, pride, hope, anxiety, boredom") making `VAR3x` = Hope. The two orders
+  disagree *exactly* on VAR2x vs VAR3x. The data cannot break the tie: **alpha(VAR2x) = 0.857 and
+  alpha(VAR3x) = 0.857**, identical to three decimals, against published Hope .86 and Pride .86. The
+  deciding evidence is the published Table 3 intercorrelation matrix, which is a PLOS table **image**
+  nobody has transcribed (cf. the standing image-only-table backlog).
+  **Consequence for a human: do NOT "correct" the dictionary Description ("unlabeled construct") for
+  `wang_2024_emotion2`/`emotion3` on the strength of this round.** Both agents suggested it; only
+  `emotion4` → anxiety is actually earned. Recorded in `pending_index_notes.csv` for all three.
+
+**Gates.** `normalize_nulls.R` and `audit_batch.R` both exited "No *__items.csv files found" — the
+correct and expected result for an all-blocked round, not a fault (same as batch_144).
+`verify_batch.R`: MISSING=3. `irw-validate` not applicable (no CSVs). `check_provenance.R` exit 0 and
+clean for this round — its outstanding issues-page table (`tian2026_digital_competence`) and 13
+`translation_source=mixed` reviews are all pre-existing and unrelated to batch_216.
+
+**`lint_verification.R` CRASHED — tooling gap, not a table failure.** All three agents took the
+header-only convention for a blocked table, so `verification_merged.csv` has a header and **zero**
+rows, and the script dies with `replacement has 1 row, data has 0` before reporting anything. This is
+new: batch_144 had the same all-blocked shape but two agents wrote `NO_ROUTE` rows, so the file was
+non-empty and the linter passed. **`lint_verification.R` should handle a zero-row
+`verification_merged.csv` as "nothing to lint", not an error.** No table was marked `failed` on this
+basis — there is no shipped claim to fail to reproduce.
+
+**The Step 5b convention question from batch_144 is still open, but the split is gone.** Given
+identical circumstances all three agents this round independently chose header-only verification file
++ no `verify_*.R`, citing the rule that a blocked table has no live item text and so cannot carry a
+verification outcome. batch_144 saw agents split 2–2 on exactly this and asked that **SKILL.md Step 5b
+say which convention a block takes**; it still doesn't. Three-for-three convergence is mild evidence
+for the header-only reading, and the `verify_batch.R` MISSING=3 above is entirely this convention, not
+a failed claim. No rows were invented in `mapping_verification.csv` — the tracker's rule is one row per
+WRITTEN table, and nothing was written.
+
+Queue after this round: 205 pending, 0 in_progress (885 done / 239 blocked / 59 excluded / 13 failed).
+Cap is `batch_230`; not reached.
+
+## batch_217 — 2026-09-15 23:10 to 23:30 PDT
+
+3 tables, 3 agents (one per table), the three-agent setting Ben set on 2026-09-11. No kills, no
+retries, no rate limiting. **3 written / 0 blocked / 0 failed — yield 3/3 (100%).**
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wang_2025_green_space_wellbeing` | written, 125 rows (25 items x 5) | `data_labels` | NOT_NEEDED (exempt) |
+| `wang_2026_attitude` | written, 15 rows (3 items x 5) | `paper_explicit` | PARTIAL |
+| `wang_2026_behavioral_intention` | written, 25 rows (5 items x 5) | `paper_explicit` | VERIFIED |
+
+Gates: `normalize_nulls` 0 of 3 normalized; `audit_batch` **3 PASS, no anomalies** (so no Step 5c
+WARNs to explain); `verify_batch` **2 PASS + 1 MISSING(exempt)** — the exempt one is the `data_labels`
+table, which is correctly owed no `verify_*.R`; `irw-validate` ok on all three, 2 checks each;
+`lint_verification` 3 rows, **0 ERROR**, 1 WARN. The NOT_NEEDED row went into BOTH
+`verification_merged.csv` and the permanent tracker, so the lint came back with no ERRORs — the
+batch_020/021 false alarm did not recur.
+
+**The one lint WARN was reviewed and the status deliberately kept.** It flags
+`wang_2026_behavioral_intention` as VERIFIED while its evidence says "does not establish". What that
+hedge disclaims is *not* item-level discrimination — it is whether the authors' own spreadsheet
+labelling is right (untestable from inside the deposit) and the Chinese wording (the language
+fallback, not a mapping question). On the mapping the route separates every item from every other: 5
+pairwise-distinct response-level count vectors, exactly 5 of 25 live-vs-deposit vector equalities, the
+diagonal only. That meets the VERIFIED bar as written. Explanation recorded in `notes.csv`.
+
+**`check_provenance.R` exits 1, and it is NOT this round.** The failing table is
+`tian2026_digital_competence` (batch_188), which ships English this project generated with no
+issues-page line; the 13 `translation_source=mixed` reviews are likewise pre-existing. This round's
+own machine-translation table, `wang_2025_green_space_wellbeing`, is correctly counted as HELD —
+extracted and gated, never uploaded, so no wording ships and no entry is owed yet. **It owes an
+issues-page line the moment it is uploaded**, and its `public_note` is written for that.
+
+**Step 5b — two agent claims re-checked independently, both confirmed with numbers.**
+1. `wang_2025_green_space_wellbeing` is the round's only un-re-runnable claim (`data_labels`, no
+   `verify_*.R` by design), so I checked it directly: all **25/25** shipped `item_text` strings equal
+   their `ITEM_MAP` key in `data/wang_2025_green_space_wellbeing.py` exactly, once the block-local
+   leading number is stripped — **0 mismatches**, 25 distinct items, 125 rows. The claimed
+   restarting numbering is real and matches the six described blocks precisely: leading numbers run
+   1-4, 1-4, 1-5, 1-4, 1-3, 1-5 (4/4/5/4/3/5 = 25). The exact-string dictionary lookup makes the tie
+   authoritative at the source, as claimed. *(Note for the next round: my first pass at this check
+   used a double-quote regex against a single-quoted dict and silently found 0 pairs, i.e. reported
+   "0 mismatches" vacuously. A confirmation of a mapping claim must print the denominator — 25 here —
+   or it is not a check.)*
+2. The `wang_2026_attitude` rights escalation, which was about to be filed as a note: Crossref
+   confirms the upstream Ayanwale et al. (2022) `10.1016/j.caeai.2022.100099` VOR licence is
+   **CC BY-NC-ND 4.0** (start 2022-09-12; the other two licences on the record are Elsevier TDM).
+   The agent's claim is accurate as written.
+
+**FOR BEN — a rights judgement, not a block, and not decided by a round.** `wang_2026_attitude`
+shipped on "silence is permission". The wording IRW copied is Wang & Zou's own CC BY 4.0 PLOS
+appendix, but the nearest-upstream *publication* of near-identical wording (Ayanwale et al., "AI
+technology" for "DG technology") is NC-ND per the above. The agent's reasoning for shipping: Ayanwale
+et al. assert no instrument-level right, are themselves an adapter (items from Chai, Wang & Xu 2020 /
+Chai et al. 2021), and the wording is the standard TAM perceived-enjoyment triad. The nearest contrary
+shape in the register is the servant-leadership row, but there the NC article's authors *were* the
+instrument's authors and stamped a copyright footnote. No register row was written (rounds may write
+only `block` rows). Worth a ruling before more TAM-family tables arrive — there are three more
+`wang_2026_*` scales in the queue.
+
+**Two shared-source findings for whoever takes the unclaimed `wang_2026_*` siblings.** All five
+scales come from one S1/S2 Appendix pair, and both remaining agents independently reported the same
+two discrepancies — corroboration, not duplication:
+- `wang_2026_teaching_presence`: the S1 Appendix prints **TP1-TP12** but the data carries only
+  **TP1-TP8**, and the paper says TP3-TP6 were dropped for low loadings. So the data's TP numbering is
+  **not** the appendix's, and the surviving eight are not simply TP1-TP8 in appendix order. That table
+  must reconcile this before trusting positions.
+- `wang_2026_attitude`: the appendix labels items `AT1`-`AT3` while the data columns and IRW codes are
+  `ATT1`-`ATT3`, with nothing stating the correspondence. This is exactly why that table is PARTIAL
+  rather than VERIFIED, compounded by three near-synonymous enjoyment items (means 3.79/3.72/3.73,
+  loading spread 0.018) that no data route can separate — a permutation among them is undetectable.
+
+Both `wang_2026_*` tables took the 2026-09-01 English fallback (administered in Chinese via
+translation/back-translation, 500 Shandong EFL primary teachers; zero CJK anywhere in either deposit
+file or the article), so `text_source=translated_substitute`, `translation_source=study_supplied`,
+`language=Chinese`, `_translated` empty. `wang_2025_green_space_wellbeing` is the opposite case and the
+better one: it ships the **administered Chinese** in `item_text` with IRW's English in `_translated`.
+Its `option_text`, `instructions` and `section_prompt` are blank across all five levels because the
+Figshare deposit is the exported response matrix only — no anchor labels, no questionnaire form, no
+linked article (Figshare `references`/`related_materials` empty, Crossref finds no such work). Per the
+issues-page bar that is a gap the source never published, not a page entry.
+
+No `blocked` tables this round, so no `pending_index_notes.csv` rows were owed.
+
+Queue after this round: 202 pending, 0 in_progress (888 done / 239 blocked / 59 excluded / 13 failed).
+Cap is `batch_230`; not reached.
+
+## batch_218 — 2026-09-15 23:26–23:45 PDT
+
+3 tables claimed, 3 agents (one per table, the 2026-09-11 setting), **3 written / 0 blocked / 0 failed — 100% yield.**
+No kills; all three agents ran to completion. Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wang_2026_perceived_usefulness` | written, 15 rows (3 items × 5) | paper_explicit | VERIFIED |
+| `wang_2026_teaching_presence` | written, 40 rows (8 items × 5) | reconstructed | VERIFIED |
+| `warwas_2022_sharing_economy` | written, 16 rows (8 items × 2) | data_labels | NOT_NEEDED (exempt) |
+
+Gates: normalize_nulls 0 of 3 changed · audit_batch **3 PASS, no anomalies** · verify_batch 2 PASS +
+1 MISSING(exempt) · lint_verification 0 ERROR / 1 WARN / 0 INFO · irw-validate clean on all three ·
+check_provenance no new failure (the one table owing an issues-page line, `tian2026_digital_competence`,
+is pre-existing and not from this round).
+
+**Notable — the table name `wang_2026_teaching_presence` is wrong (Step 3b).** TP is *technology
+perception*. Confirmed by the orchestrator independently of the agent: the S1 Appendix heads the block
+"Technology Perception (TP)", the article says "technology perception (TP)" in its abstract and
+"incorporating Technology Perception (TP) and Technology Anxiety (TA)" in its framework section, and
+the string "teaching presence" appears **nowhere** in either the appendix or the article.
+`data/wang_2026_efl_tam.py` says outright that its construct names were inferred from column prefixes
+and never confirmed against item text — so the sibling `wang_2026_*` names deserve the same check. The
+shipped item text is correct and carries the right construct in `instrument`; only the table name and
+the dictionary Description ("TAM teaching-presence scale") are wrong. Renaming a published table is a
+human call — row added to `itemtables/pending_index_notes.csv`.
+
+**Notable — the TP renumbering batch_217 flagged as owed is now resolved.** The S1 Appendix prints
+TP1–TP12, the deposit holds 8 columns (TP3–TP6 dropped for low loadings), and the retained eight were
+renumbered *alphabetically*: live TP1..TP8 = appendix TP1, TP10, TP11, TP12, TP2, TP7, TP8, TP9. Proven
+rather than assumed — `verify_wang_2026_teaching_presence.R` re-ran in the orchestrator's own process
+and reproduces all eight published Table 2 VIFs to a total absolute deviation of 0.0016, the unique
+best of all 40320 permutations with the runner-up 0.0111 worse. Two negatively-worded items (live
+TP3/TP5) are stored **already reverse-scored** (they correlate +0.52…+0.60 with the other seven), so
+their `option_text` runs 1 = Strongly Agree … 5 = Strongly Disagree. That is a property of the deposited
+response data, not an itemtext defect; it is disclosed in the `public_note`.
+
+**Notable — a defect in the source paper's Table 2, recomputed and confirmed by the orchestrator.**
+The PU construct-level CA/CR/AVE row (0.874 / 0.909 / 0.665) is not PU's: the deposit's PU1–PU3 give
+0.765 / 0.865 / 0.680, and 0.874 / 0.909 / 0.666 is what the deposit's **BI1–BI5** block gives — the
+row is the BI block's numbers, exact to three decimals. The per-item VIF/loading rows the mapping
+actually relies on are correct for PU (1.626 / 1.554 / 1.500, recomputing to within 0.0003). Kept
+**below the issues-page bar**: it is a flaw in the paper, not a text-vs-table mismatch in shipped
+content. Note that batch_217's `wang_2026_attitude` cites the ATT reliability row as exact, which it
+is — the misalignment starts at the PU row.
+
+The single lint WARN (`wang_2026_perceived_usefulness` "VERIFIED but its evidence hedges") was reviewed
+and **VERIFIED was kept**. The hedge disclaims the correctness of the authors' own spreadsheet labelling
+and the administered Chinese wording — residuals that apply to every table shipped under the English
+fallback and that no route can close. The route itself distinguishes all three items (exact per-level
+count vectors, pairwise distinct; 3 of 9 deposit-vs-live comparisons equal, the diagonal only), so
+PARTIAL would misreport a complete route as an incomplete one.
+
+All three tables were administered in a language other than the one shipped (two Chinese, one Polish)
+and all three take the documented fallback: English in the base fields, `_translated` empty,
+`text_source=translated_substitute`, `translation_source=study_supplied`. No IRW-generated English, so
+no issues-page entries are owed.
+
+Queue after this round: 891 done / 239 blocked / 199 pending / 59 excluded / 13 failed. Cap is
+`batch_230`; not reached, next round proceeds normally.
+
+## batch_219 — 2026-09-15
+
+3 tables claimed, 3 agents (one per table). **3 CSVs written / 2 blocked / 0 failed.**
+Yield: 3 of 3 extracted cleanly; 1 of 3 ships now, 2 are held on a corpus naming
+defect with their passing CSVs retained. Circuit breaker not tripped (0% failed).
+
+All three are the same PLOS ONE source: Weatherspoon et al. 2015,
+10.1371/journal.pone.0119855, CC BY 4.0. Question 12 is a two-column grid —
+left "How often do you use it?" (5=Always … 1=Never), right "Is it effective?"
+(Yes=1, No=2, Don't Know=9) — over the same 17 communication techniques, which
+is exactly the `_freq` / `_effectiveness` split in the table names. All three
+`mapping_basis=paper_explicit`, `text_source=study_materials`.
+
+- `weatherspoon_2015_family_physicians_freq` — **done**. 85 rows (17 items × 5
+  anchors). VERIFIED route 1: all 17 n's and all 85 percentage cells of paper
+  Table 2 reproduce to 0.00 pp, all 17 vectors distinct, and the match also
+  fixes the anchor direction (a reversal would mirror every vector).
+- `weatherspoon_2015_family_physicians_effectiveness` — **blocked** (naming), CSV
+  retained. VERIFIED route 1 against Table 4: 17/17 items reproduce their
+  published Yes/No counts exactly, all 17 (n, Yes%, No%) triples distinct.
+- `weatherspoon_2015_pediatricians_effectiveness` — **blocked** (naming), CSV
+  retained. VERIFIED route 1 against Table 4: 17/17 exact.
+
+### Both blocks are one corpus naming defect, not extraction failures
+
+`irw-validate` raised `name_length` ERRORs on two of the three: the LIVE table
+names are 49 and 45 characters against datastandard.md's 40-char cap. The
+pipeline cannot fix this — the itemtext stem must stay identical to the live
+table name or `__items` creates a duplicate instead of replacing it. Classified
+`blocked`, not `failed`, per the batch_132 precedent
+(`personality_handwriting__financial_behavior`, 43 chars): an unchanged retry
+hits the identical wall and would redo correct work to no effect. To unblock:
+shorten the construct label to ≤40 chars (construct only, never author/year),
+renaming the live table and the CSV together, or waive the cap. `_freq` is
+within the cap and is unaffected. **Three of the four `weatherspoon_2015_*`
+tables are over-long, so this wants one decision, not three.**
+
+### Step 5b — orchestrator re-checks (both agent findings confirmed, one sharpened)
+
+- **Confirmed and sharpened.** The family-physician effectiveness agent reported
+  25 rows carrying resp 3/4/5, values the Yes/No column never offered. True:
+  616 rows / 55 ids, resp = 1:570, 2:21, 3:13, 4:11, 5:1. But the 25 rows come
+  from just **3 distinct respondents** across 14 items — a per-RESPONDENT
+  defect, not a per-item one, consistent with three people's frequency-column
+  answers being read into the effectiveness column. The agent's note implied a
+  diffuse problem; it is three respondents. Worth its own issue against
+  `data/weatherspoon_2015_communication.py`, which drops sentinel 9 but passes
+  3/4/5 through.
+- **Confirmed.** The pediatrician table is clean of the same defect: independent
+  server-side aggregates give resp_min=1, resp_max=2 for all 17 items.
+- **Confirmed, and it applies to all four tables.** The IRW dictionary
+  Description calls the effectiveness tables a "17-item scale … (1-5)". It is
+  not: 1–5 belongs to the frequency half of the grid. A metadata fix.
+
+### Transcription caveat worth a human eye
+
+The S1 questionnaire is a .docx containing **only scanned page images** (zero
+text nodes; the Q12 grid is `word/media/image3.png`), so every stem, the
+instruction line and the anchor labels were read off an image by all three
+agents independently — which is useful corroboration, but punctuation and
+casing deserve a spot-check. Disclosed normalisations: "Occa-sionally"
+(hyphenated across a line break) → "Occasionally"; a double space in item 13.
+Where the questionnaire and Table 4 differ ("print material" vs "print
+materials"), the administered questionnaire wording was shipped. This is also
+why `data_labels` was unavailable — the deposited .xls/.xlsx carry bare code
+headers with no variable labels.
+
+Noted by the pediatrician agent and worth repeating: **Table 4's row order is
+domain-grouped, not questionnaire order** — a naive positional read would have
+mis-assigned 13 of 17 items. The statistical pairing, not the row order, is what
+fixed the mapping.
+
+### Gates
+
+normalize_nulls 3/3 fixed · audit_batch **1 PASS + 2 WARN**, both WARNs
+explained in notes.csv per Step 5c (low-n items matching the paper's own
+published n's; blank `option_text` on the out-of-range 3/4/5 rows, left blank
+rather than padded) · verify_batch **3/3 PASS** · lint_verification 3 rows, no
+problems · irw-validate 1 ok + the 2 `name_length` ERRORs above ·
+check_provenance exit 0, and none of its standing complaints involve this batch.
+
+Next: `weatherspoon_2015_pediatricians_freq` is still `pending` and is the same
+Q12 `a` battery on the S2 dataset — it can reuse the `_freq` extraction verbatim,
+verified against paper Table 3. Cap (batch_230) not reached.
+
+## batch_220 — 2026-09-16 00:0x
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** — yield 3/3 (100%).
+Three agents (the standing setting since 2026-09-11), one table each, no kills,
+no retries, no export-quota trouble: every gate ran on `--table-sets`
+aggregates and the only full exports in the round were my own two Step 5b
+re-checks.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `weatherspoon_2015_pediatricians_freq` | written | paper_explicit | **VERIFIED** |
+| `weeldenburg_2022_targetmtpq` | written | paper_order | PARTIAL |
+| `weida_2020_financial_security` | written | reconstructed | PARTIAL |
+
+`weatherspoon_2015_pediatricians_freq` is the follow-on the batch_219 entry
+above predicted, and it landed as predicted: same Q12 `a` battery, wording from
+the study's own image-only S1 Document, pinned against paper Table 3
+(pediatricians). The agent re-read the page images itself rather than copying
+the family-physician sibling's transcript, which is the right call — the
+corroboration is only worth something if it is independent. At 36 characters
+the table name clears the 40-char cap that blocked the two `_effectiveness`
+siblings last round.
+
+### Step 3b: `weida_2020_financial_security` is not a financial-security scale
+
+The table name and the dictionary Description both call this a "10-item
+financial security scale (secf_1m..secf_10m)". **Its ten items are the study's
+CES-D-10 depression scale.** `secf` is the survey's section F, not
+"sec[urity] f[inancial]". The agent established this from the source SAS file
+(`rowSums(secf_1m..secf_10m)` equals the file's own `dpsscore` exactly for all
+371 respondents, and `dps`, SAS-labelled "depression", equals `dpsscore >= 10`
+exactly).
+
+I re-checked it against the LIVE table independently, per Step 5b, and it
+confirms: N = 371, ten items, total range **0–30**, mean 11.4, and **56.3%
+(209/371) scoring ≥ 10** — which is the paper's own reported CES-D-10 range and
+its recommended ≥10 cutoff proportion, to the respondent. A financial-security
+scale does not reproduce that. The actual financial-health variables
+(`fingoal`, `budget`, `latefee`, `utilshut`, …) are different columns of the
+same file and are *not* in this IRW table — and, pointedly, those columns *are*
+SAS-labelled with their full question text while the `secf_*` columns are not,
+which is presumably how the name went wrong in the first place.
+
+**The table name and the dictionary Description both need correcting.** That is
+a repo-side fix, not a round's to make; recorded in notes.csv.
+
+### Step 5b re-checks (both confirmed, numbers recorded)
+
+- `secf_4m` item-rest r = **0.067**, against 0.270–0.726 for the other nine —
+  confirmed on the live table, not just asserted. It is the CES-D's known weak
+  "everything I did was an effort" item, and its position-4 assignment rests on
+  the canonical CES-D-10 order plus its endorsement rank rather than on any
+  correlational signal. The verify script says so in its own output, which is
+  the honest way to ship it.
+- `Q12_14a` ("Use video or DVD") really does top out at resp 4 — max = 4,
+  ceiling 0.0% — matching Table 3's published 0.0% for "Always". Per-item n's
+  (192/193/192/192/193/194/194/189/…) match the agent's report exactly.
+
+Both PARTIALs are correctly PARTIAL rather than optimistic: weeldenburg pins
+all five subscale *blocks* against paper Table 1 (worst deviation 0.0059, five
+distinct published means, so no block permutation is possible) plus two
+within-block positions by content signature, but leaves the remaining
+within-block order resting on the questionnaire's interleaved numbering; weida
+leaves the order of the eight negatively worded items unestablished. Each says
+what it does not establish in its own evidence string.
+
+### Gates
+
+normalize_nulls 0 of 3 needed changing · audit_batch **3/3 PASS, no anomalies**
+(so Step 5c has nothing to explain this round) · verify_batch **3/3 PASS** ·
+lint_verification 3 rows, no problems · irw-validate **3/3 ok** ·
+check_provenance exits 1, but on a pre-existing complaint —
+`tian2026_digital_competence` owes an issues-page line — and **no batch_220
+table appears anywhere in its output**.
+
+Queue after this round: 895 done / 241 blocked / 193 pending / 59 excluded /
+13 failed. Cap (batch_230) not reached.
+
+## batch_221 — 2026-09-16
+
+3 tables claimed, 3 agents (one per table). **1 written / 2 blocked / 0 failed.** Yield 1/3 (33%).
+Circuit breaker not tripped (it counts `failed`, and there were none; both blocks are determinate
+rights verdicts with retry test NO).
+
+- **wen_2022_pyd — DONE.** 130 rows (26 items x 5 resp levels). Wen et al. 2022, PLOS ONE 17(7):
+  e0270974, CC BY 4.0; scale developed by these authors, no reserved-right clause. Item wording
+  transcribed from Table 1, which is an **image only** — no text route reaches it, so the
+  transcription is manual and deserves a human spot-check; the paper's own grammatical slip in
+  confi4 and character4's trailing period are reproduced verbatim. mapping_basis=paper_order
+  (Table 1 prints loadings but no item codes). text_source=translated_substitute /
+  translation_source=study_supplied: administered in Chinese, but no Chinese wording exists in the
+  paper or the S1/S2 .sav deposit (s003–s005 404), so the authors' English ships in the base fields
+  with the `_translated` columns empty. `option_text` blank for all 130 rows — the 1–5 anchors are
+  unpublished and visibly differ by item (health self-ratings, confidence ratings and agreement
+  statements in one table); scale points were NOT padded with their own numbers.
+  Verification **PARTIAL** (route 1 + exhaustive permutation search): all 26 published factor
+  loadings reproduce on `cov_study=='s2'` (n=471 vs the paper's N=472) in IRW code order, max
+  deviation 0.0052; permutation search at tol 0.01 pins 20 of 26 items uniquely (care 1 of 120,
+  connect 1 of 720 fitting orderings), but does NOT separate compe1/compe2, confi2/confi3 or
+  character1/character2 — hence PARTIAL, not VERIFIED. `verify_wen_2022_pyd.R` re-runs it: PASS.
+- **wekker_2018_mfsq — BLOCKED (rights, retry test NO).** McCoy Female Sexuality Questionnaire,
+  distributed by Mapi Research Trust; the ePROVIDE page reserves rights three ways (all-rights-
+  reserved notice; an express no-modify/retype/translate/copy clause requiring prior written
+  permission; fees for funded academic/healthcare/commercial users). irw#1945 blocks, and under the
+  2026-09-04 DSES generalisation the holder's clause outranks the study's own CC BY 4.0 PLOS
+  deposit; the administered Dutch translation is a derivative covered by the same clause. Step 3b
+  PASSES (S2 File holds MCC1..MCC19 + five domain scores, matching the 19-item/5-domain structure;
+  the live table is the 18 Likert items, MCC12 dropped by the processing script). Even absent the
+  rights bar this was an option-only table under #1770: the .sav carries per-item 1/4/7 anchors but
+  bare variable labels and the paper reproduces no stems. Block row appended to
+  instrument_rights_register.csv.
+- **wemwbs_BrummerHoffman_2021 — BLOCKED (rights, retry test NO).** Warwick owns WEMWBS/SWEMWBS
+  wording and licenses it; the licences page expressly withholds permission to share the scale
+  publicly or pass it to other parties, prices commercial use at GBP 90–6000, and makes
+  non-commercial use subject to Warwick's discretion. IRW redistributes, so the non-commercial
+  academic defence does not apply; the Brazilian Portuguese administration is a derivative.
+  **Step 3b instrument mismatch:** the dictionary Description says "Warwick-Edinburgh Mental
+  Well-Being Scale" but the live data is the 7-item SHORT form (SWEMWBS) — worth a dictionary fix,
+  though both forms are Warwick-licensed so the verdict is unchanged. **irw#2101/#2123 caveat:** the
+  block is only partly effective — `data/BF_BrummerHoffman_2021.R` carries source column names
+  through unchanged, so the live *response* table's item codes (`wemwbs_calm`, `wemwbs_optimistic`,
+  …) already gloss each item's content. Blocked anyway. Block row appended to the rights register.
+
+**Step 5b (orchestrator re-check of the agents' own claims).** Both rights claims were about to be
+filed publicly (a `public_note` and two register rows), so both were re-fetched independently and
+both quoted clauses reproduce verbatim on the live pages — Warwick's "does not give you permission
+to publicly share WEMWBS…" and ePROVIDE's "You are not authorized to modify, retype, translate,
+copy or otherwise duplicate the Questionnaire…" plus the all-rights-reserved and fee lines. The
+wen_2022_pyd loading evidence was independently re-executed by verify_batch.R rather than taken on
+report (max deviation 0.0044–0.0052 by subscale, 20 of 26 pinned). No agent claim had to be
+corrected this round.
+
+**Gates:** normalize_nulls 0 of 1 changed; audit_batch PASS (1/1, no anomalies, so no Step 5c WARN
+explanations are owed); verify_batch PASS=1; lint_verification 2 rows, no problems; irw-validate ok
+(2 checks); check_provenance clean for this batch (its standing `tian2026_digital_competence` and
+`translation_source=mixed` items are pre-existing and belong to earlier rounds).
+
+Cap (batch_230) not reached.
+
+## batch_222 — 2026-09-16 00:24–00:40
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents, one per table.
+All three are `wesselmann_2018_*` siblings off one PLOS ONE deposit
+(10.1371/journal.pone.0208438, CC BY 4.0, S1 File `.sav`); each agent was told which siblings
+belonged to another agent and none crossed.
+
+- `wesselmann_2018_distress` — 30 rows (5 items × 6 levels). MHI-5. `mapping_basis=data_labels`.
+- `wesselmann_2018_msp` — 70 rows (14 × 5). `mapping_basis=data_labels`.
+- `wesselmann_2018_needs` — 100 rows (20 × 5). `mapping_basis=data_labels`.
+
+All three are **exempt from Step 5b by derivation, not merely by basis**: the processing script
+`data/wesselmann_2018_ostracism_veterans.py` melts the `.sav` columns under their own names, so the
+IRW item code IS the source column name — no positional step exists that could permute text across
+codes. NOT_NEEDED rows written to both `verification_merged.csv` and `mapping_verification.csv`.
+
+**Gates.** normalize_nulls: 2 of 3 files fixed. audit_batch: 3 PASS, **no WARNs** (so no Step 5c
+entries owed). verify_batch: 3 MISSING(exempt), as expected for data_labels. lint_verification:
+3 rows, no problems. irw-validate: ok on all three. check_provenance: clean for this round's tables
+(its standing findings — 1 IRW-generated table with no issues-page entry, 13 `mixed` REVIEW rows —
+are pre-existing and name none of ours).
+
+**Step 5b orchestrator re-checks — both agent claims independently confirmed, numbers reproduced exactly:**
+
+1. `wesselmann_2018_distress` scale direction. The `.sav` carries ZERO value labels, so the 1–6
+   direction came from the paper and the agent backed it numerically. Re-ran against the `.sav`:
+   `dis1R/dis3R/dis5R` = `7 − dis_i` exactly (max |diff| = 0, n=127); the file's own `distress`
+   composite = `mean(dis1R,dis2,dis3R,dis4,dis5R)` exactly (max |diff| = 0.000000, n=128) while the
+   raw five-item mean is off by up to 3.000; correlations +0.732 ptsd, +0.757 traitanx, +0.703
+   stateanx, −0.532 support. Every figure matched the agent's report to the digit. Low raw = more
+   distress ⇒ 1 = All of the time, 6 = Never, as the paper states. Confirmed.
+
+2. `wesselmann_2018_msp` **Step 3b instrument mismatch — CONFIRMED, and it is a dictionary defect.**
+   All 14 `msp1`–`msp14` columns run 1–5 (n=123–126 each) and carry military-specific wording
+   ("My closest friendships are with members of my platoon/fellow veterans"; "I have access to
+   military-sponsored mental health resources…"). Zimet's MSPSS is 12 items on a 7-point scale, so
+   neither the count nor the range fits. Located the defect precisely: **`metadata/biblio.csv`
+   Description reads "Multidimensional Scale of Perceived Social Support, veterans, 14 items, N=126"
+   and is wrong**, while `metadata/tags.csv` already carries the correct Construct Name
+   "Military-based perceived social support (14 items)". Only the biblio Description needs fixing —
+   a one-field metadata correction for a human, not an itemtext defect. Extraction was done against
+   what the data actually is (the paper's own measure: 4 items from Smith et al. plus 10
+   author-generated).
+
+**Disclosed deviations, all three tables:** the `.sav` has no value labels and the sources anchor
+only the scale endpoints, so middle scale points ship with `option_text` blank rather than padded
+with their own numbers (distress resp 2–5; msp and needs resp 2–4). For `distress` the canonical
+MHI/SF-36 middle anchors were deliberately NOT substituted — this study never printed them and
+renames its sixth point "Never". `distress`'s `instructions` field carries the canonical MHI/SF-36
+stem ("How much of the time during the past month have you…") because the shipped `item_text` values
+are sentence fragments; the paper corroborates the recall window and the frequency format but does
+not print the sentence. Recorded in notes/provenance. Neither clears the issues-page bar
+(both are "the source never printed it").
+
+**Rights, for Ben — no block, but a ratification worth banking.** The `distress` agent applied the
+register's existing ratified-pending `ship` row for RAND SF-36 v1 (added batch_121) rather than
+re-deriving, on the grounds that the MHI-5 is that survey's mental-health subscale, and read RAND's
+own Permissions Information: "All of the surveys from RAND Health Care are public documents,
+available without charge." Nothing reserved. No register row was written (a round may write `block`
+rows only, and this would be a `ship`) — flagged here in case an MHI row is worth its own entry.
+
+Cap (`batch_230`) not reached; queue has 187 pending after this round.
+
+## batch_223 — 2026-09-16T00:45-07:00
+
+3 tables claimed. **1 written / 2 blocked / 0 failed** — yield 33%, breaker not tripped
+(blocked does not count; both blocks are determinate, retry test NO).
+
+- `wesselmann_2018_pcl` — **done**. 100 rows (20 items x 5 levels), `mapping_basis=data_labels`
+  from the PLOS S1 `.sav` variable labels (CC BY 4.0), item code = source column name
+  (pattern 1), so verification is NOT_NEEDED and no `verify_*.R` is owed. PCL-5 rights:
+  applied the register's existing `ship_with_note` (NCPTSD public domain).
+- `wesselmann_2018_trait_anxiety` — **blocked**, instrument rights. 7 STAI Form Y-2 T-Anxiety
+  items; the register's settled STAI `block` (2026-09-08 irw#2123) applied, not re-derived,
+  and re-confirmed at Mind Garden (fee-to-administer + permission gate). CC BY deposit does
+  not launder it. Block is *effective* here — codes are opaque (`trait1..trait7`).
+- `whodas_BrummerHoffman_2021` — **blocked**, instrument rights. WHODAS 2.0 12-item, WHO
+  reserves a licence to reproduce plus CC BY-NC-SA 3.0 IGO. New `block` row written to
+  `instrument_rights_register.csv`. Same deposit/script as `wemwbs_BrummerHoffman_2021`
+  (blocked in batch_221). Caveat per irw#2101/#2123: the live *response* table's codes
+  (`whodas_walking`, `whodas_dressing`, ...) already gloss item content, so the block is
+  only partly effective.
+
+Gates: normalize_nulls fixed 100 lines; audit_batch **PASS 1/1, no anomalies** (no WARNs, so
+nothing owed under Step 5c); verify_batch MISSING(exempt) — correct for a data_labels table;
+lint_verification 2 rows, clean; `irw-validate` ok, 2 checks nothing to report.
+`check_provenance.R` exits 1 on a **pre-existing** issue — `tian2026_digital_competence` ships
+IRW-generated English with no issues-page entry. None of this round's tables are implicated;
+not a batch_223 gate failure, but it will keep failing every round until that line is added.
+
+Step 5b re-check of the round's own claims, against the `.sav` directly (not the agent's report):
+- `ptsd` composite equals the plain unreversed mean of `pcl1..pcl20`, **max |diff| = 0.0** — confirmed.
+- Correlations confirmed to 3 dp: distress +0.732, traitanx +0.765, stateanx +0.714, support -0.511.
+- Item means confirmed: low pcl3 0.469 / pcl16 0.562, high pcl20 1.578 / pcl17 1.421 / pcl19 1.291.
+- All 20 shipped `item_text` values are character-identical to the `.sav` variable labels; 0 value-label
+  sets in the file, so the 0-4 anchors are correctly sourced from the NCPTSD form, not invented.
+- One correction to the agent's report: the file has **129 rows** (117 complete on all 20 items),
+  not N=128. The correlations reproduce exactly, so this is a pairwise-N slip in the prose only —
+  no shipped value depends on it.
+
+Two blocked tables both have rows in `itemtables/pending_index_notes.csv`.
+
+## batch_224 — 2026-09-16
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+
+- `wiedemann_2021_risk_perception` — done. 35 rows (5 items × 7 levels). PLoS ONE 16(7):e0253762, CC BY. mapping_basis=data_labels (S1 Dataset `.sav` variable labels carry the German stems for F01–F04/F06; the processing script melts the source column names verbatim). Verification run anyway because resp direction carried inference: **VERIFIED** — live complete-case cell means reproduce all 20 cells of the paper's Table 3 to max deviation 0.009, and all 119 rival item permutations score ≥1.108, so every item is distinguished. `verify_*.R` → VERDICT: PASS. Caveats: administered language German, but the deposit publishes anchors + instructions in English translation only, so those base fields hold English with empty `_translated` twins and `language=German` flags it; endpoint-only anchors leave option_text blank for resp 2–6 by design; F05/F07–F10 are skipped instrument numbering, not a gap.
+- `wiedemann_2021_text_readability` — done. 42 rows (F11–F16 × 7). Same deposit. mapping_basis=data_labels, Step 5b exempt (`verify_*.R` correctly absent; verify_batch reports MISSING(exempt)). NOT_NEEDED row written to BOTH `verification_merged.csv` and the permanent tracker. Caveats: German instructions never published (English sits in `instructions_translated` only, base blank); option_text blank on all 42 rows — the 7 points are unlabelled boxes between the two poles, which are already the item_text, and the coding direction is deliberately not inferred; `public_note` owed once uploaded (the rated text module varied by condition).
+- `wilson_2022_kelpie_personality` — done. 90 rows (18 items × 5). PLOS ONE 17(4):e0267266, CC BY. mapping_basis=data_labels (S2 File header supplies every item code, melted verbatim). **VERIFIED** — paper Table 2's per-item n/Mean/SD reproduce for all 18 items, max |diff| 0.004, all 18 triples unique; reversed coding would be off by 2.662. `verify_*.R` → VERDICT: PASS. Caveats: S1 File is a .docx of Google-Forms **screenshots only**, so every shipped string was transcribed off images — punctuation/casing deserves a human spot-check at triage; the form's sixth column "I don't know" maps to no resp level and is deliberately not shipped; `Stamina` is placed in the with-stock section on the strength of S1 image7 plus the paper's text, against the S2 header's ordering — the numbers do not settle that one.
+
+**Gates:** normalize_nulls 0 of 3 normalized; audit_batch **3/3 PASS, no WARNs** (so Step 5c had nothing to explain); verify_batch PASS=2, MISSING(exempt)=1; lint_verification 3 rows, no problems; `irw-validate` ok on all three; `check_provenance.R` surfaced only pre-existing items (tian2026_digital_competence owes an issues-page line; 13 `mixed` REVIEW rows) — nothing from this batch.
+
+**Step 5b (orchestrator re-check):** confirmed the text_readability note's reported statistics against the live table rather than taking the agent's word — claimed per-item means 2.12–3.26, floor 10.6–49.9%, ceiling 0.3–3.2%; measured F11–F16 means 2.1/3.3/2.1…(range 2.1–3.3), floor 11–50%, ceiling 0.3–3.2%. Agrees. No claim needed correcting this round.
+
+No rate limit, no kill, no salvage. Three agents (the 2026-09-11 setting) ran clean. Cap is batch_230 — not reached; next round is batch_225.
+
+## batch_225 — 2026-09-16
+
+3 tables claimed, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+
+- `wirs` — done. 12 rows (6 items × 2 levels). Source is the CRAN package `ltm` itself: `Rd_db("ltm")[["WIRS.Rd"]]` prints the card-framing paragraph and all six item stems verbatim, keyed "Item 1".."Item 6" to the data frame's own column headers, so no paper hunt was needed. mapping_basis=paper_explicit. The IRW codes are **positional** (`data/ltm.R` does `names(x) <- paste("item_",1:ncol(x),sep='')`), so no exemption was claimed and the derivation was re-run against the CRAN source instead: **VERIFIED** — per-respondent agreement over 1005 ids is exactly 1.000 on all six diagonal cells and ≤0.732 off-diagonal, per-item means matching to 1e-10 (0.3731/0.5831/0.2826/0.2398/0.3572/0.1473). `verify_wirs.R` → VERDICT: PASS. Caveats: `option_text` blank on all 12 rows — the source publishes no response labels and never states the 0/1 direction ("1 = that consultation took place" is the obvious reading, but nothing says so and nothing was invented); wording comes from the package documentation rather than a primary WIRS questionnaire. Both caveats sit below the issues-page bar, so `public_note` is empty. No rights clause locatable (published in full in GPL-2 `ltm`'s docs and in Bartholomew et al.); no register row written.
+- `witus_2022_narrator_perception` — done. 12 rows (3 items × 4 levels). Witus & Larson (2022), PLOS ONE 10.1371/journal.pone.0267580, CC BY 4.0. Wording from the S1 Appendix Qualtrics export, block "Video questions", Q28 p.25, a matrix printing its anchors **with their codes** (1 Not at all / 2 Only a little / 3 Moderately / 4 Very). mapping_basis=paper_explicit, text_source=study_materials. Step 3b passes and settled a real near-miss: the almost-identical Q22 "the author was…" blog-post block is a *different* instrument and is not what this table holds; `data/witus_2022_narrator_perception.py` builds from `Q28_1..3` via an explicit rename dict (not positional) restricted to the two video arms. **VERIFIED** (route 9) — all 12 item×resp cells match the raw S1 Dataset exactly (Q28_1 12/56/277/463, Q28_2 16/73/224/496, Q28_3 5/36/179/588), the three distributions are mutually distinct so the cross-match sweep returns one live item per raw column, and the resp direction is pinned with it. `verify_*.R` → VERDICT: PASS. Clean pass, no caveat, no notes row.
+- `wolf_2017_study1_posaff` — done. 60 rows (12 items × 5 levels). mapping_basis=**data_labels** (`data/wolf_2017_biodiversity_wellbeing.py` melts `posaff1..posaff12` verbatim, so the IRW code IS the `.sav` column name and that file's SPSS variable labels carry each adjective; 12/12 tied at the source). Step 5b exempt — no `verify_*.R`, verify_batch reports MISSING(exempt), NOT_NEEDED row written to BOTH `verification_merged.csv` and the permanent tracker. **Step 3b mismatch, and a substantive one:** the table is named `posaff` and the dictionary calls it "PANAS positive affect (12 items)", but the 12 items are the first 12 adjectives of the PANAS-20 in canonical order and include **six negative** ones (posaff2 distressed, posaff4 upset, posaff6 guilty, posaff7 scared, posaff8 hostile, posaff11 irritable). The paper reverse-scores negatives for its composite and the `.sav` keeps that composite separately, so the per-item responses in IRW are **raw**. `instrument` is set to "PANAS, 12-item selection" rather than to the table's name. Other caveats: option_text 2/3/4 left **blank** (the `.sav` labels only the poles, "NOT AT ALL (1)"/"EXTREMELY (5)", and the `(n)` echo was stripped — no padding with the level's own number); `instructions` are canonical PANAS present-moment wording, disclosed as such because neither the `.sav` nor the article prints the administered screen, and the canonical scale boilerplate was deliberately omitted since this study's anchors differ from the original. PANAS carries an existing `ship` verdict in `instrument_rights_register.csv` — applied, not re-derived, no register row written.
+
+**Gates:** normalize_nulls **3 of 3 normalized** (12/12/61 lines differing — null-token cleanup only, no content change); audit_batch **3/3 PASS, no WARNs** (so Step 5c had nothing to explain); verify_batch PASS=2, MISSING(exempt)=1; lint_verification 3 rows, no problems; `irw-validate` ok on all three (2 checks each, including `dup_item_resp` and `resp_ambiguous`); `check_provenance.R` exits 1 on the **pre-existing** `tian2026_digital_competence` issues-page gap plus the 13 standing `mixed` REVIEW rows — nothing from this batch, and the same exit-1 has been logged for many rounds.
+
+**Step 5b (orchestrator re-check):** the wolf_2017 raw-vs-reverse-scored finding was about to become a note asserting a defect in the response data and in the dictionary, so it was re-checked against the live table rather than taken on the agent's word. `item_stats.R` confirms it decisively: the six adjectives named as negative have means 1.14 / 1.11 / 1.09 / 1.06 / 1.10 / 1.24 with **85.0–94.3% of responses at the floor** (resp=1), while the six positive ones run 2.11 / 2.59 / 2.64 / 2.74 / 3.59 / 3.66; n=140 on all twelve, resp 1–5. Reverse-scored negatives would sit near 4.9, not 1.1. Confirmed raw, and the positive/negative split falls exactly on the canonical PANAS-20 first-12 ordering. The numbers are recorded in that table's `notes.csv` row. **This is a dictionary defect, not an itemtext defect** — the Description "PANAS positive affect (12 items)" is wrong for this table, and the same trap very likely applies to `wolf_2017_study2_posaff_pre/_post`, which are still `pending`. Worth a human decision at triage. The `witus` claims needed no separate re-check: verify_batch re-ran that table's own `verify_*.R` and it reproduced all 12 cells.
+
+No blocked tables, so no `pending_index_notes.csv` rows are owed this round. No rate limit, no kill, no salvage; three agents (the 2026-09-11 setting) ran clean again. Circuit breaker not tripped (0% failed). Cap is batch_230 — not reached; next round is batch_226.
+
+## batch_226 — 2026-09-16T01:12-07:00
+
+3 tables claimed (all `wolf_2017_*`, all from the one PLOS ONE deposit, Wolf et al. 2017
+12(1):e0170225, CC BY 4.0). **2 written / 1 blocked / 0 failed — yield 67%.** Circuit breaker
+NOT tripped (0% failed). Three agents, per the 2026-09-11 setting; no kills, no retries.
+
+- `wolf_2017_study2_nature_connect` — **done.** 30 rows (6 items x 5 levels), `data_labels`,
+  verification NOT_NEEDED (derivation pattern 1: the .py melts `connect1..connect6` unrenamed, so
+  the IRW code IS the .sav column name and that file's variable labels carry the sentences).
+- `wolf_2017_study2_posaff_post` — **done.** 60 rows (12 items x 5 levels), `data_labels`,
+  verification NOT_NEEDED, same derivation pattern. PANAS carries `ship` at register row 33 —
+  applied, not re-derived.
+- `wolf_2017_study1_vitality` — **blocked**, retry test NO (determinate). The 6 items are the
+  Bostic/Ryan state Subjective Vitality Scale, a CSDT-library instrument; register row 26's
+  `verdict=block` under Ben's 2026-09-09 FULL SCOPE ruling was applied. Register left unedited
+  (no new row owed). Block is effective — `vital1..vital6` are opaque codes.
+
+Gates: normalize_nulls 0 of 2 normalized; audit_batch **2 PASS, no anomalies** (so Step 5c had
+nothing to explain — no WARNs this round); verify_batch 2x MISSING(exempt), correct for
+`data_labels`; lint_verification clean (NOT_NEEDED rows written into BOTH the batch file and the
+permanent tracker, so no spurious ERRORs); `irw-validate` ok on both; `check_provenance.R` clean
+for this batch (its one outstanding IRW-generated-content gap, `tian2026_digital_competence`, is
+pre-existing and not from this round).
+
+### Step 5b — orchestrator re-checks of the agents' own claims
+
+1. **posaff_post's reverse-scoring finding: CONFIRMED, with one number corrected.** Recomputed
+   from the cached `.sav`: six negative adjectives mean 1.284–1.545 with 64.8–83.3% at the floor,
+   six positives 2.439–3.538, and the deposit's own composite `posaff_post` = 3.783, which is
+   reproduced to 3.784 by reverse-scoring the six negatives — so the stored IRW responses are
+   indeed raw. But the agent's "raw 12-item mean is 2.34" is **wrong: it is 2.170**. That figure
+   sat in `notes.csv` only (the `public_note` did not carry it) and has been corrected in place
+   with the discrepancy disclosed. Everything else in the note reproduced exactly.
+2. **nature_connect's "not in the paper" claim: CONFIRMED.** The article contains exactly three
+   "connect" strings — a discussion phrase ("connecting people to biodiverse environments"), a
+   remark about prior work, and a reference title. The scale is never named, reported or given an
+   alpha; the S2 deposit's variable labels are its only source. Labels verified verbatim against
+   the `.sav`, and the agent's characterisation holds: only `connect3` mentions nature, the other
+   five ask about restoration/self-transcendence while watching the video. `instrument` is a
+   descriptive study-specific label, and a `public_note` discloses the mismatch. This is the
+   second dictionary-description defect from this one deposit (cf. `wolf_2017_study1_posaff`,
+   batch_225) and a third is queued — see below.
+3. **The vitality agent's "other SVS tables a sweep would miss" lead: RESOLVED, mostly negative.**
+   Register row 26's `match_item_code` genuinely does not match `^vital`, so the warning is
+   well-founded. The one live candidate it implicates, `conner_2017_vitality` (done, batch_021,
+   shipped **before** the 2026-09-09 ruling), was checked and is **NOT** affected: it is the RAND
+   SF-36 4-item energy/fatigue subscale, not the CSDT SVS — batch_021 had already caught that its
+   dictionary description says otherwise. No withdrawal is owed.
+
+### Notable / for the next rounds
+
+- **The two still-pending SVS siblings, `wolf_2017_study2_vitality_pre` and
+  `_post`, are blocked by the same CSDT ruling** and should be closed out on the register row
+  rather than re-derived from scratch. Recorded in `pending_index_notes.csv`.
+- **`wolf_2017_study2_posaff_pre` (8 items, still pending) will hit the same PANAS
+  name-vs-content defect** as `study1_posaff` and `study2_posaff_post`: the table name says
+  positive affect, the items include negative adjectives and are stored raw.
+- A high blocked rate at this point in the queue remains a fact about which tables the queue
+  serves up, not about pipeline health.
+
+Cap (`batch_230`) NOT reached; the next firing picks up `batch_227`.
+
+## batch_227 — 2026-09-16T01:38 (3 tables: 1 written / 2 blocked / 0 failed)
+
+Source: all three from Wolf, zu Ermgassen, Balmford, White & Weinstein 2017, PLOS ONE
+12(1):e0170225 (CC BY 4.0), Study 2 S2 File `.sav`. Three agents, one per table
+(the 2026-09-11 three-agent setting). No kills, no rate limits, no retries.
+
+**Written (1):** `wolf_2017_study2_posaff_pre` — 8 items x 5 levels = 40 rows,
+mapping_basis=data_labels (derivation pattern 1: `data/wolf_2017_biodiversity_wellbeing.py`
+melts `posaff_pre1..8` unrenamed, so the IRW code IS the `.sav` column name and that file's
+own variable labels carry each adjective). Gates: normalize 0/1 changed, audit PASS (no
+anomalies, so nothing owed under Step 5c), lint clean, `irw-validate` ok, verify MISSING(exempt)
+as expected for data_labels.
+
+**Blocked (2):** `wolf_2017_study2_vitality_pre` (3 items) and
+`wolf_2017_study2_vitality_post` (6 items) — both verbatim state-form Subjective Vitality
+Scale, a Center for Self-Determination Theory library instrument. Applied the settled
+`instrument_rights_register.csv` block row (Ben's 2026-09-09 FULL SCOPE ruling); neither agent
+re-derived it or re-fetched the licence pages. RETRY TEST: NO for both — determinate licence
+bars, sources fully read and every stem in hand. Rows added to
+`itemtables/pending_index_notes.csv`. This matches `wolf_2017_study1_vitality`, blocked the same
+way in batch_226; the SVS has now cost this source three of its five Study-2/Study-1 tables.
+
+**Circuit breaker: not tripped.** 0 failed of 3 (0%). The 67% blocked rate is a fact about
+which tables the queue served up — one PLOS deposit that happens to administer a licence-blocked
+instrument at three timepoints — not about pipeline health.
+
+**Step 5b, orchestrator re-check of the round's own claims — all three confirmed, numbers
+independently reproduced from the cached `.sav`:**
+- The `posaff_pre` agent's central claim held exactly. 8 adjectives, not the 12 of the POST
+  table: proud, upset, scared, hostile, enthusiastic, interested, irritable, alert — matching
+  the article's "selecting eight items of the PANAS scale ... (alpha = .74)" at baseline.
+  Every shipped `item_text` matches its column's SPSS variable label 8/8.
+- Responses are stored RAW, confirmed: reverse-scoring the four negative adjectives and
+  averaging reproduces the `.sav`'s own `posaff_pre` composite to **max absolute difference
+  0.0** over 264 complete cases, r = 1.000000, mean 3.9001. Unreversed raw mean 2.3139,
+  r = 0.3313. The `public_note` warning is therefore correct as written.
+- Anchors re-derived from the pre columns' own value labels: `NOT AT ALL (1)` / `EXTREMELY (5)`,
+  with 2/3/4 labelled only by their own digit. Code echoes stripped, 2/3/4 left blank — no
+  scale point padded with its own number.
+- **Notable near-miss, and the reason prior art is a lead and not an answer:** all eight pre
+  adjectives recur in the 12-item POST set but *never at the same index* (pre1 proud = post10;
+  pre6 interested = post1). A positional copy from batch_226 would have mis-assigned all eight
+  items and passed every set-comparison gate, since `validate_items.R` and `audit_batch.R`
+  compare SETS only. The agent re-derived from the pre columns instead.
+- Both SVS blocks verified against the `.sav` directly: `vital_pre1..3` and `vital_post1..6`
+  carry the canonical state-SVS stems. Also corrected a reading of the paper — its "three items
+  of the SVS" in Study 2 describes the PRE measure only; the POST measure administers all six.
+
+**Lead raised and resolved (not a defect):** the vitality_pre agent flagged a stray
+`.cache/conner_2017_vitality/` as a possible live SVS table that the 2026-09-09 FULL SCOPE
+ruling would retroactively withdraw. Checked: `conner_2017_vitality` (shipped batch_021,
+uploaded 2026-09-04) is the modified 4-item energy/fatigue subscale of the **RAND SF-36**, not
+the SVS — the batch_021 agent had already caught and disclosed that the IRW dictionary
+mislabels it as the Subjective Vitality Scale. The CSDT ruling does not reach it. No action.
+
+**Pre-existing gate failure, NOT from this round:** `check_provenance.R` exits 1 on
+`tian2026_digital_competence` (ships IRW-generated English with no entry on the public issues
+page). None of batch_227's three tables are implicated. Carried forward.
+
+## batch_228 — 2026-09-16 01:41–02:10
+3 tables, 3 agents. **Written 3 / blocked 0 / failed 0 — yield 100%.** All from one
+figshare deposit (10.6084/m9.figshare.32044005.v1, CC BY 4.0): `wolters2026_panas_na`,
+`wolters2026_panas_pa`, `wolters2026_wi`. Circuit breaker not tripped.
+
+Gates: normalize_nulls 0/3 changed; audit_batch PASS 3 (no WARNs, so nothing owed to
+Step 5c); verify_batch PASS 3; lint_verification 3 rows clean; irw-validate clean 3;
+check_provenance clean (its one outstanding IRW-generated table, tian2026_digital_competence,
+is pre-existing and not from this round).
+
+Source shape: the deposit is a single .xlsx with a bare header row — no variable labels,
+no value labels, no supplement, and no locatable journal article. So every mapping here is
+inferred, not read off the file: mapping_basis `reconstructed` (both PANAS) and `paper_order`
+(WI). All three verification rows are **PARTIAL**, correctly — each route pins the IRW
+renumbering decisively but not the column-number→wording step.
+
+Administration is German; no German wording is in scope under rights-reserving terms, so all
+three ship English base fields with `language=German` and empty `_translated` (documented
+fallback shape). text_source=translated_substitute throughout.
+
+### Orchestrator re-checks (Step 5b)
+- **Deposit duplicate-column defect — CONFIRMED, and its scope corrected.** The panas_pa agent
+  reported the eight `Symptom_concerns_*_t0/_t1` columns appearing twice. Re-read of the xlsx:
+  116 columns, those 8 names duplicated at positions 6–13 and 63–70, and the duplicated blocks
+  are **byte-identical across all 83 rows** (83/83 each) — redundant columns, not a second
+  measurement. The agent called it "a concern for wolters2026_symptom_concerns"; **no such table
+  exists in the itemtext queue**, so this is a latent trap for any future processing script that
+  melts all columns (it would double every id×item), not a defect in anything shipped.
+- **wi_9 polarity override — CONFIRMED by re-run.** verify_batch reproduced item-rest r = +0.32
+  (15/83 endorsed) on the scale's one reverse-keyed item, which is positive only if the deposit
+  stores Whiteley *scores* rather than raw yes/no. Option text shipped flipped (Yes=0/No=1) and
+  disclosed. irw-validate does not flag this (per-item direction differences are legitimate).
+
+### Open items for a human — nothing shipped turns on either
+1. **Does ZIS govern?** Both PANAS agents independently read the same rights-reserving clauses on
+   ZIS 10.6102/zis146 (NC + permission-required) and 10.6102/zis242 (CC BY-NC) for Krohne et al.
+   (1996), so the German wording was withheld. Whether ZIS is the originator's designated venue
+   (governs) or a mere aggregator (does not, under the DMIDI/SCCS rule) is a **corpus-wide** call —
+   ZIS is the standard venue for German scales. This incidentally **resolves the open ZIS lead
+   batch_122 left on `opladen2025_wi`**, where the terms page could not be read.
+2. **A register `block` row for the German PANAS is OWED** and was deliberately not written by
+   either agent (shared-file race, batch_124 precedent). Not written by this round either.
+3. **PANAS level-1 anchor.** Both tables ship Watson's "very slightly or not at all"; the
+   administered German level 1 is *gar nicht* ("not at all"), narrower. Levels 2–5 agree exactly.
+   The two tables are consistent with each other, so this is accuracy-vs-original, not an
+   internal inconsistency. Changing it would mean editing both tables together.
+
+Also noted: *angeregt*=inspired / *begeistert*=enthusiastic (two bilingual sources), which is the
+reverse of what positional reasoning from Watson's ordering would suggest — a near-miss avoided.
+
+Cap (batch_230) not yet reached; next round proceeds.
+
+## batch_229 — 2026-09-16T02:11–02:43 -07:00
+
+3 tables claimed from the `wu2021_*` block, all from one source: Wu & Qi (2021) *Front. Psychol.*
+12:708342 + its CC BY 4.0 figshare deposit 16683931 (588×136, bare codes `B1`..`G20`).
+**Written 1 / blocked 2 / failed 0 — yield 33%.** Circuit breaker not tripped (0 failed).
+All six gates clean: normalize (0 changed), audit **PASS ×1, no anomalies**, verify_batch **PASS**,
+lint **no problems**, `irw-validate` **ok**, `check_provenance` raised nothing against this batch.
+No audit WARNs, so nothing owed under Step 5c.
+
+- `wu2021_burnout` → **done**. 16 items × 5 levels = 80 rows. mapping_basis `paper_order`,
+  text_source `study_materials` (administered Chinese, verbatim from the Frontiers supplementary
+  questionnaire reached via the Europe PMC `PMC8503271/supplementaryFiles` zip),
+  translation_source `official_instrument_english`. Verification **PARTIAL**.
+- `wu2021_panas` → **blocked**, determinate (retry test NO). New LBUS register row.
+- `wu2021_resilience` → **blocked**, determinate (retry test NO). New CD-RISC register row.
+
+### The headline finding: four of the six `wu2021_*` tables are misnamed
+Two agents reached this independently, and the orchestrator confirmed it arithmetically at Step 5b.
+The deposit carries its own Chinese aggregate columns, and each is *exactly* the mean of one whole
+block — which names that block outright:
+
+| block | shipped as | actually is | proof |
+|---|---|---|---|
+| B1–B21 | `wu2021_empathy` | Occupation Expectation | 职业期望 = mean(all 21 B), maxdiff 5.3e-15, n=506 |
+| C1–C25 | `wu2021_resilience` | CD-RISC-25 ✔ **correct** | 心理弹性 = mean(all 25 C), maxdiff 0, n=496 |
+| D1–D16 | `wu2021_burnout` | Basic Empathy Scale | 移情 = mean(all 16 D), maxdiff 0, n=530 |
+| E1–E5 | `wu2021_swls` | SWLS ✔ **correct** | 生活满意度 = mean(all 5 E), maxdiff 0, n=564 |
+| F1–F14 | `wu2021_career_expectation` | the actual affect scale (PA 6 + NA 8, scored 1–7) | 积极情感 = mean(F1,3,4,7,8,9); 消极情感 = mean(F2,5,6,10,11,12,13,14), n=546 |
+| G1–G20 | `wu2021_panas` | Learning Burnout Scale | 学习倦怠 = mean(all 20 G), maxdiff 0, n=536; its 8/6/6 factor columns are exact unique subsets matching the LBUS published key |
+
+`data/wu2021_empathy.py` guessed the letter→scale map from the aggregate names and shifted four of
+six. **A dictionary/table-name fix is owed for `wu2021_empathy`, `wu2021_burnout`,
+`wu2021_career_expectation` and `wu2021_panas`**, plus their Description fields. `wu2021_burnout`
+therefore ships with `instrument` set to the Basic Empathy Scale per Step 3b, not to burnout, and
+its public_note says so — the shipped item text is correct for the data; it is the table *name*
+that lies.
+
+### Step 5b correction — an agent's claim was checked and found understated
+The `wu2021_panas` agent reported that the B and G block means correlate r = −0.987 and called it
+"arithmetically consistent, but unusual". The correlation reproduces exactly (**r = −0.9875,
+n = 462**) but the characterisation is **wrong, and the finding is stronger than reported**:
+α(B)=0.936 and α(G)=0.842, so the **disattenuated correlation is −1.112** — outside the range a
+true correlation can occupy. The two composites are more perfectly related than either is to
+itself. This is impossible for two genuinely separate measurements.
+
+The defect is **isolated to the B–G pair**: all 14 other block pairs are ordinary (disattenuated
+−0.51 to +0.56). A second, independent anomaly points the same way — **the file is row-sorted on
+exactly these two blocks and no others**: G's block mean is non-decreasing across 99.8% of adjacent
+rows and B's non-increasing across 99.8%, while C, D, E and F all sit at ~50–56% (random order).
+No exact per-item complement exists, and the best fit `sum_B = 158.894 − 1.5079·sum_G` leaves a
+residual sd of 2.237 — a very tight near-linear relation, not an exact algebraic identity.
+**Mechanism unknown; deliberately not asserted.**
+
+This is a **response-data** defect in `wu2021_empathy` (B) and `wu2021_panas` (G), not an item-text
+problem, and it deserves its own GitHub issue. **It does not touch what this batch shipped**:
+`wu2021_burnout` is block D, whose correlations with every other block are unremarkable
+(disattenuated −0.26 to +0.27) and which is not part of the sort.
+
+### Two new register rows (written by the orchestrator, per the 2026-09-11 ruling)
+- **CD-RISC** (`block`) — proprietary, fee-licensed; ToS (iii) bars publishing/distributing/
+  deriving "any part thereof". Read via the Internet Archive because the live host 403s (the
+  WHOQOL text-proxy route); corroborated by NIH PhenX 870601. Evidence is **primary and strong**.
+- **LBUS** (`block`) — developer-consent-by-e-mail required, which reserves a right under irw#1945.
+  **EVIDENCE IS THIN — a human should confirm before this row is relied on widely** (FoMOs
+  posture): one university counselling-centre page, no originator distribution page exists, and the
+  2005 *Acta Psychologica Sinica* article is a scan printing no items. A second reproduction carries
+  the wording but no permissions clause, so it neither corroborates nor contradicts.
+
+Both blocks are **effective** (contrast irw#2101/#2123): `C1..C25` and `G1..G20` are opaque codes,
+so withholding the text actually withholds the instrument. Response data is unaffected either way.
+
+### Banked for a future LBUS retry (in `notes.csv`, should the block ever lift)
+The full 20-item Chinese form, instructions, anchors and reverse-key list were recovered, and the
+live data settle the one point on which the two reproductions disagree (the order of items 1 and 2).
+Also established: the eight reverse-keyed items (1,3,6,8,11,13,15,18) are stored **already
+reversed** — all three subscales correlate negatively with the same respondents' resilience
+(−0.245/−0.314/−0.528) and subscale–total r of 0.851/0.794/0.603 track the published
+0.914/0.799/0.704. The same is true of `wu2021_burnout`'s eight negative items, which is why its
+option_text ships flipped for D1, D3, D4, D5, D10, D14, D15, D16 (α as stored 0.827 = exactly the
+published value; flipping them back gives 0.593).
+
+Cap (batch_230) not yet reached; next round proceeds.
+
+## batch_230 — 2026-09-16 02:46–03:0x
+
+3 tables claimed, 3 agents (one per table). **2 written / 1 blocked / 0 failed** — yield 2/3 (67%).
+Circuit breaker: 0% failed, does not trip. No rate limit or spend cap hit.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wu2026_liking` | written | `paper_explicit` | VERIFIED |
+| `wu_2024_resilience` | written | `reconstructed` | PARTIAL |
+| `wu2021_swls` | blocked (instrument rights) | — | n/a |
+
+**Gates, all foreground, all clean:** `normalize_nulls.R` 0 of 2 normalized · `audit_batch.R` PASS×2,
+"no anomalies" (so Step 5c is empty — there were no WARNs to explain) · `verify_batch.R` PASS×2 ·
+`lint_verification.R` 2 rows, no problems · `irw-validate` ok on both · `check_provenance.R` no failure
+(its one flagged table, `tian2026_digital_competence`, is pre-existing and not from this round).
+
+**`wu2026_liking`** — Wu, Yahaya, Tai & Ren (2026) PLOS ONE 21(4):e0342855, CC BY 4.0. The ten "items" are
+ten ceramic vase PHOTOGRAPHS, not ten questions: every code carries the same statement, "This vase is
+pleasing to see.", and Fig 1 presents the vases as images with no textual description. The agent invented no
+descriptions — `description_source` left empty, disclosed in a `public_note`. Route 1 on Fig 2's published
+per-vase means: largest |observed−published| = 0.005 against a 0.02 tolerance, 0/20000 random permutations
+match, and the reversed reading misses by up to 2.70 so resp 1 = Strongly Disagree is settled. `option_text`
+given only for resp 1 and 7; 2–6 left blank rather than padded.
+
+**`wu_2024_resilience`** — Wu et al. (2024) PLOS ONE 10.1371/journal.pone.0312597. Step 3b mattered and was
+done: the instrument is the **Brief Resilience Scale** (Smith et al. 2008), *not* CD-RISC, so the batch_229
+CD-RISC register block does not reach it. PARTIAL, honestly: routes 6+3 pin the two polarity classes
+({B1,B3,B5} vs {B2,B4,B6}) and reproduce the paper's r = −0.360 exactly, but do not establish order *within*
+each class, so it is not VERIFIED.
+
+**`wu2021_swls`** — blocked, and this is a settled verdict applied rather than a new one derived:
+`instrument_rights_register.csv` row 20 (ruled block by Ben 2026-09-09) names `wu2021_swls` by name. The
+orchestrator re-read row 20 and confirmed it. Step 3b confirmed the table name is CORRECT — two independent
+checks (the deposit's 生活满意度 column is exactly the raw mean of E1..E5, max diff 0.0 over 564 rows; and
+Data_Sheet_2.PDF §5 prints the Chinese SWLS verbatim). Retry test NO. Row added to
+`itemtables/pending_index_notes.csv`.
+
+**Step 5b changed an answer — one agent finding did NOT survive re-checking.** The resilience agent reported,
+as an incidental out-of-scope finding, that sibling `wu_2024_self_control` "is stored in the opposite direction
+from the paper's scoring": raw C-block vs video-addiction gives +0.137 where the paper reports −0.453. The
+magnitude reproduces (I get +0.140, n=560) but the *interpretation* is wrong, and a whole-scale flip gives only
+−0.140, nowhere near −0.453. Keying the block by its own polarity structure — {C1,C3,C5} against
+{C2,C4,C6,C7}, which the inter-item correlation matrix separates cleanly (within-class +0.55…+0.70,
+cross-class −0.30…−0.47) — yields **r = −0.45**, matching the paper. So `wu_2024_self_control` is stored RAW
+with mixed keying, exactly the convention `wu_2024_resilience` uses; there is no defect and **no issue was
+filed**. The false lead never reached `notes.csv` or `provenance.csv` — it lived only in the agent's report —
+so nothing on disk needed correcting. (Also worth noting: `wu_2024_video_addiction`, not
+`wu_2024_sfv_addiction`, is the table's real name.)
+
+**Carried forward, unchanged from batch_229 and NOT fixed by this round** (a dictionary problem, unaffected by
+the SWLS block): four sibling table names are wrong — `wu2021_empathy` is really Occupation Expectation,
+`wu2021_burnout` is Basic Empathy, `wu2021_career_expectation` is positive/negative affect, `wu2021_panas` is
+Learning Burnout. `wu2021_swls` and `wu2021_resilience` are the two correctly named.
+
+Queue after this round: 163 pending, 0 in_progress.
+
+**CAP REACHED.** batch_230 is the cap named in Step 0 of the round prompt. Stopping; the next round needs a
+human to raise the cap.
+
+## Triage of batch_206–230 (2026-09-16)
+
+The whole chain triaged in one pass, per BATCH_PROCESS "Triage and staging". 57 tables shipped,
+20 blocked, across 25 batches.
+
+**Step 1 — gates re-run live, all four green.**
+
+| gate | result |
+|---|---|
+| `normalize_nulls.R` | no-op — all 57 files were already normalized by their rounds |
+| `audit_batch.R` (live) | **57 tables, 0 differences** from the rounds' own reports: same status AND same note text for every table. 54 PASS, 3 WARN |
+| `verify_batch.R` | every `verify_<table>.R` reproduces its claim; 0 FAILED. 8 `MISSING(exempt)` are all `mapping_basis=data_labels`, where Step 5b grants the exemption and no script is expected |
+| `lint_verification.R` | 59 rows, **0 ERROR**, 3 WARN, 1 INFO |
+
+The three audit WARNs are all explained in their batches' notes and are properties of the response
+data, not the item text: `Veterans_Affairs_SSVF_Survey_2016-17` (screener-gated follow-ups, plus one
+FOIA-unpublished transition column that accounts for all three of its blank-field WARNs) and the two
+`weatherspoon_2015_*_effectiveness` tables (the two least-used techniques). The lint WARNs asking
+"should this be PARTIAL?" on `wang_2026_behavioral_intention` / `wang_2026_perceived_usefulness` are
+answered in batch_218's notes: the hedge disclaims the unrecoverable administered Chinese wording,
+not item discrimination, so VERIFIED stands per the 2026-09-08 item-axis rule.
+
+`lint_verification.R` crashed before any of this could run — an all-blocked round (batch_216) leaves
+a header-only `verification_merged.csv`, and assigning a column to a zero-row data.frame is an error
+in R. Fixed in `9368f768`; an empty file is now "nothing to lint" while a missing file still stops.
+
+**Step 3 — 54 staged, 3 held.**
+
+Staged into `itemtables/clean/`: 54 `__items.csv`, verified byte-identical to their batch copies,
+with nothing else in the directory (an uploader walks it recursively).
+
+**Held, and not staged** — the table NAME names the wrong construct, and renaming a published table
+is the user's call, not a round's or a triager's. Now irw#2198:
+
+- `wang_2026_teaching_presence` — the construct is Technology Perception
+- `weida_2020_financial_security` — the items are verbatim CES-D-10 depression
+- `wu2021_burnout` — block D is the Basic Empathy Scale
+
+Their item text is extracted, gated and correct for the data, and each carries the true construct in
+its `instrument` field. It is held because publishing correct wording under a wrong table name puts a
+table's own item text in contradiction with its name. These three go live with the rename, not before.
+
+**Step 2 — what re-reading the rounds' claims turned up.** Ten of the 57 name or describe a construct
+the data is not, and in every case the cause is the same: the processing script inferred the construct
+from the column prefix and never checked it against item text (`data/wang_2026_efl_tam.py` says so in
+its own comment; `data/wu2021_empathy.py` did it for four blocks at once). Filed as irw#2198, which
+also records that the four `wu2021_*` names form a **4-cycle** — each target name is occupied by
+another table in the cycle, so a sequential rename collides at the first step — and that the signature
+is detectable from `metadata/metadata.csv` alone, without reading any item text: every named
+instrument disagrees with its own `n_items`, every re-identified one matches.
+
+Four issues filed from this chain, none of which blocks the upload:
+
+| issue | finding |
+|---|---|
+| irw#2195 | `wu2021_empathy`/`wu2021_panas`: blocks B and G disattenuate to r = -1.112, i.e. outside [-1,1]; plus the file is row-sorted on exactly those two blocks. Mechanism explicitly not asserted |
+| irw#2196 | `weatherspoon_2015_family_physicians_effectiveness`: 25 responses outside the Yes/No column's own scale, from 3 respondents across 14 items; the sibling table is clean |
+| irw#2197 | `weida_2020_financial_security`: `secf_4m` item-rest r = 0.07 against 0.27–0.73, the weakest of the ten assignments |
+| irw#2198 | the ten table-identity defects and the rename cycle |
+
+**Step 4 — issues page: entries prepared, NOT yet applied.** `draft_issues_qmd.R` drafted 48
+candidates; the measured bar takes **33**. 25 qualify on `text_source` ∈ {translated_substitute,
+canonical_instrument}, 2 more are IRW machine translation (`vanteffelen_2020_foa`,
+`wang_2025_green_space_wellbeing`), 3 are the `wolf_2017` `posaff` tables whose public_note records
+that half their adjectives are negative-affect, and **3 were invisible to the drafter** — no
+`public_note`, clean structured fields, caveat only in `notes.csv` (the batch_009 failure mode the
+REVIEW section exists to catch): `wesselmann_2018_distress`, `wesselmann_2018_pcl` and `wirs` all
+ship instructions or option labels taken from the canonical instrument because the study never
+printed them. Below the bar and deliberately dropped: the image-transcription caveats on
+`weatherspoon_2015_*_freq` and `wilson_2022_kelpie_personality` — those ship the actual administered
+wording, read off scanned form images, which is a transcription risk and not a substitution.
+
+Not applied yet because an entry is owed for an UPLOADED table and the upload is the user's step.
+This is the known backlog trap (irw#2133): triage happens before the upload, so the entries come due
+when nobody is looking at the batch any more. The 33 are prepared and go up as one site PR on
+confirmation of the upload.
+
+**Owed on the user's confirmation that the upload happened**: stamp `uploaded=<date>` in each batch's
+`provenance.csv` and in `mapping_verification.csv`, delete the uploaded `__items.csv` from the batch
+folders (sidecars stay), and open the issues-page PR. Never stamp ahead of confirmation.
+
+### Upload of batch_206–230 (2026-09-16)
+
+**52 of the 54 staged tables uploaded.** Stamped `uploaded=2026-09-16` in each batch's
+`provenance.csv` and in `mapping_verification.csv` — 52 rows in each, verified field by field
+against the committed version: the only column that changed anywhere is `uploaded`, no header or
+row count moved, and the stamped set matches the uploaded set exactly. The 52 `__items.csv` were
+deleted from their batch folders; sidecars stay. `clean/` is the user's to clear.
+
+**Two were skipped by the uploader**, and they are NOT stamped:
+`weatherspoon_2015_family_physicians_effectiveness` (49 chars) and
+`weatherspoon_2015_pediatricians_effectiveness` (45 chars) — `name_length`, against
+`datastandard.md`'s 40-character cap. batch_219's own notes predicted this. It cannot be fixed in
+the extraction: **the item-text table name must equal the response table's name for the join**, and
+the response tables are already published at those lengths. Their `__items.csv` are kept in
+batch_219.
+
+That cap is not a rule the corpus obeys: **130 of 4,273 live tables exceed 40 characters**, the
+longest at 65, and one of those 65-character tables ALREADY HAS live item text (42 items, verified
+through `get_itemtext` at `irw_version` 380). So the check blocks names the warehouse already
+carries. Filed as its own issue.
+
+Still held for the rename (irw#2198), unstamped, copies kept: `wang_2026_teaching_presence`,
+`weida_2020_financial_security`, `wu2021_burnout`.
+
+**The last two uploaded, 2026-09-16 — the chain closes at 54 of 54.**
+`weatherspoon_2015_family_physicians_effectiveness` and
+`weatherspoon_2015_pediatricians_effectiveness` went up unchanged after
+ben-domingue/irw#2200 merged; nothing was re-extracted. Stamped `uploaded=2026-09-16` in
+`batch_219/provenance.csv` and `mapping_verification.csv` (verified field by field: only the
+`uploaded` column changed), and their `__items.csv` deleted from batch_219; sidecars stay.
+
+**The blocker was never the cap itself.** red_up had grandfathered the 40-character cap since
+2026-09-03 (#1779), but the grandfather test looked up the file's OWN name — and item text for
+these two had never been uploaded, so nothing was found and the error stood. Meanwhile
+`irw_validate` measures the RESPONSE name for an item-text file (`_validate_item_text` strips
+`__items` before `check_name`), which is why the error read 49 characters for a 56-character
+file name: it was reporting a name the upload cannot choose, and its advice to shorten the
+construct label would have shipped item text that joins to nothing. #2200 demotes it to a warning
+when the response table is live, with the lookup kept out of the destination logic so an
+item-text file can never be routed onto its response table.
+
+Worth remembering for the next merged fix: the fix being merged was not enough. `red_up` is an
+editable install pointing at `src/red_up/plan.py`, and that checkout was three commits behind
+`origin/main`, so the first upload attempt would have skipped both tables again with the merge
+already on GitHub. Check the FILE, not the PR.
+
+Only the three tables held for the rename (irw#2198) remain unshipped from this chain:
+`wang_2026_teaching_presence`, `weida_2020_financial_security`, `wu2021_burnout`.

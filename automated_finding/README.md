@@ -307,6 +307,8 @@ a processing script, check the dataset's DOI against the
 | `resp_outside_permitted` | An observed response violates a documented permitted set (`fail`) | Resolve the coding discrepancy against the source; do not redefine permitted values from the observations |
 | `pii_suspected` | A raw column label looks like a direct identifier (person-qualified name, email, phone, DOB, address, national ID) | Skip the **whole candidate** — the PII rule is not a drop-the-column fix. Read the flagged column names in `reasons` and override only if it is a false positive |
 | `no_usable_file` | Landing page *was* read and holds no tabular file | Skip |
+| `already_in_irw` | The Data Availability link points at a deposit that is already in the IRW dictionary, under a different paper. Candidate exclusion matches the *paper* DOI and cannot see this: one deposit routinely serves two papers | Skip — the data is already in the corpus. If the new paper documents the instrument better than the shipped table does, that is a metadata fix, not a new table |
+| `external_unresolved` | PLOS only: no tabular SI file, and the Data Availability link is on a host with no resolver (ICPSR, institutional repositories, GitHub, ...). Links on figshare/OSF/Zenodo/Dryad/Mendeley/any Dataverse are triaged through `irw_batch_updated`'s resolvers instead | Open the link by hand if the study looks like item data; sticky, so it will not resurface |
 | `file_too_large` | Tabular file exceeds its ceiling — `MAX_FILE_BYTES` (200MB), or 25MB for `.rdata`/`.rda`/`.rds` via `FORMAT_MAX_BYTES` — not downloaded. Also logged to `oversized_candidates.csv` | Revisit manually later if the dataset looks valuable |
 | `license_restricted` | License (NC, ND, All Rights Reserved) blocks redistribution | Skip |
 | `download_failed` | Couldn't reach the data (network/HTTP error, unparseable listing, or a source-wide block) | **Retryable** — see the note below |
@@ -322,6 +324,16 @@ about the dataset and is sticky. Keep that distinction when adding flags:
 routing a transport failure to a sticky flag silently discards datasets. (It
 did — see BATCH_LOG.md 2026-08-17, where a WAF block was being recorded as
 `no_usable_file`.)
+
+`external_unresolved` is **sticky on purpose** (Ben, 2026-09-16). It sits on
+the line between the two: the deposit was never opened, but the reason is that
+no resolver exists for that host, which is a fact about our coverage rather
+than a transient outage. Making it inconclusive would re-surface and re-triage
+the same ICPSR/GESIS/institutional-repository links on every run that finds
+them, for a recovery that only arrives if someone writes a resolver. The
+standing record of what was skipped is the run CSV, not the ledger — so when a
+resolver *is* added, re-triage from those CSVs rather than expecting the
+candidates to come back on their own.
 
 A source that hard-blocks mid-batch (WAF challenge) is detected once and its
 remaining rows are skipped for the rest of the run, recorded retryably rather

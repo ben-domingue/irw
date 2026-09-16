@@ -121,6 +121,22 @@ def _norm_license(raw: str) -> str:
     s = re.sub(r"[-_]?\d+\.\d+$", "", s)   # strip version (e.g. cc-by-4.0 -> cc-by)
     s = re.sub(r"https?://.*creativecommons\.org/licenses/([^/]+).*", r"cc-\1", s)
     s = re.sub(r"https?://.*creativecommons\.org/publicdomain/zero.*", "cc0", s)
+    # Spelled-out Creative Commons names, as OSF and some Dataverse
+    # installations report them ("CC-By Attribution-NonCommercial 4.0
+    # International"). Without this an NC deposit normalises to a long
+    # unrecognised string, which reads as unknown rather than blocked.
+    if "creative-commons" in s or s.startswith("cc"):
+        if "zero" in s or re.match(r"^cc-?0", s) or "public-domain-dedication" in s:
+            return "cc0"
+        if "attribution" in s:
+            parts = ["cc", "by"]
+            if "noncommercial" in s or "non-commercial" in s:
+                parts.append("nc")
+            if "noderiv" in s or "no-deriv" in s:
+                parts.append("nd")
+            if "sharealike" in s or "share-alike" in s:
+                parts.append("sa")
+            return "-".join(parts)
     return s
 
 def check_license(raw: str) -> tuple[str, bool, bool]:
@@ -158,7 +174,12 @@ def _zenodo_files(url: str) -> tuple:
 
 
 def _figshare_files(url: str) -> tuple:
-    m = re.search(r"articles/(?:[^/]+/)?(?:[^/]+/)?(\d+)", url)
+    # The article id is the LAST number, except for a trailing version
+    # segment. The two-optional-segments form read the version of a legacy
+    # ".../articles/<slug>/<id>/<version>" URL as the id and then asked for
+    # article 1 (404 -> FileListUnreachable). Found 2026-09-16 on
+    # figshare.com/articles/survey3a/7357034/1, a live CC BY deposit.
+    m = re.search(r"articles/(?:[^/?#]+/)*?(\d{4,})(?:/(\d+))?/?(?:[?#]|$)", url)
     if not m:
         return [], "", []
     r = requests.get(f"https://api.figshare.com/v2/articles/{m.group(1)}",
@@ -261,7 +282,12 @@ def _dataverse_files(url: str, doi: str) -> tuple:
             "Dataverse candidate can be triaged until it lifts.")
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
-    license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
+    # Dataverse < 5.10 returns license as a bare string ("CC0"), newer as
+    # {"name": ..., "uri": ...}. The dict-only read crashed on older
+    # installations (datahub.tec.mx, PLOS 10.1371/journal.pone.0327226).
+    lic = latest.get("license") or {}
+    license_raw = (lic.get("name", "") if isinstance(lic, dict) else str(lic)) \
+        or latest.get("termsOfUse", "")
     out, oversized = [], []
     for f in latest.get("files", []):
         df = f.get("dataFile", {})
@@ -275,28 +301,88 @@ def _dataverse_files(url: str, doi: str) -> tuple:
     return out, license_raw, oversized
 
 
-def _osf_files(url: str) -> tuple:
-    node_id = [s for s in url.rstrip("/").split("/") if s][-1]
-    r = requests.get(
-        f"https://api.osf.io/v2/nodes/{node_id}/",
-        headers=UA, timeout=30)
+def _osf_license(kind: str, guid: str, params: dict) -> str:
+    """The licence NAME. The relationship alone gives an opaque id
+    ("563c1cf88c5e4a3877f9e96a"), which no licence check can read: a CC-BY
+    node and an NC one look the same, and both fall through as unknown.
+    ?embed=license returns the name in the same request."""
+    r = requests.get(f"https://api.osf.io/v2/{kind}/{guid}/",
+                     params={**params, "embed": "license"}, headers=UA, timeout=30)
     r.raise_for_status()
-    license_raw = (r.json().get("data", {}).get("relationships", {})
-                   .get("license", {}).get("data", {}) or {}).get("id", "")
-    r2 = requests.get(
-        f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
-        headers=UA, timeout=30)
-    r2.raise_for_status()
+    data = r.json().get("data", {})
+    embedded = ((data.get("embeds", {}) or {}).get("license", {}) or {}).get("data", {}) or {}
+    name = (embedded.get("attributes", {}) or {}).get("name", "")
+    if name:
+        return name
+    return (data.get("relationships", {})
+            .get("license", {}).get("data", {}) or {}).get("id", "")
+
+
+def _osf_files(url: str) -> tuple:
+    # The guid is the first path segment. Taking the last one broke on
+    # "osf.io/ajkh4/?view_only=<key>" (id read as "?view_only=...") and on
+    # "osf.io/ajkh4/files/". A view-only key must ride along on every API
+    # call, or a private-but-shared node answers 401.
+    parsed = urlparse(url)
+    m = re.match(r"/([A-Za-z0-9]{5})(?:/|$)", parsed.path or "")
+    if not m:
+        return [], "", []
+    guid = m.group(1).lower()
+    params = {}
+    vo = re.search(r"view_only=([A-Za-z0-9]+)", parsed.query or "")
+    if vo:
+        params["view_only"] = vo.group(1)
+
+    # A guid names a project, a registration or a single file, and
+    # /v2/nodes/ answers 404 for the other two ("osf.io/3h5a7" in PLOS
+    # 10.1371/journal.pone.0233137 is one .xlsx). Ask what it is first.
+    r = requests.get(f"https://api.osf.io/v2/guids/{guid}/",
+                     params=params, headers=UA, timeout=30)
+    r.raise_for_status()
+    data = r.json().get("data", {})
+    kind = data.get("type", "")
     out, oversized = [], []
-    for f in r2.json().get("data", []):
-        attrs = f.get("attributes", {})
-        name = attrs.get("name", "")
-        dl = f.get("links", {}).get("download", "")
+    if kind == "files":
+        attrs = data.get("attributes", {})
+        name, size = attrs.get("name", ""), attrs.get("size") or 0
+        dl = data.get("links", {}).get("download", "")
+        parent = re.search(r"/resources/([a-z0-9]{5})/",
+                           data.get("links", {}).get("move", ""))
+        license_raw = _osf_license("nodes", parent.group(1), params) if parent else ""
         if name.lower().endswith(TABULAR_EXT) and dl:
-            if (attrs.get("size") or 0) > MAX_FILE_BYTES:
-                oversized.append((name, attrs.get("size")))
+            if size > MAX_FILE_BYTES:
+                oversized.append((name, size))
+            else:
+                out.append((dl, name, size))
+        return out, license_raw, oversized
+    if kind not in ("nodes", "registrations"):
+        return [], "", []
+    license_raw = _osf_license(kind, guid, params)
+
+    # Data usually sits one or two folders down ("Data/", "Study 1/raw/");
+    # reading only the storage root reported those nodes as no_usable_file.
+    def walk(listing_url, depth):
+        r2 = requests.get(listing_url, params=params, headers=UA, timeout=30)
+        r2.raise_for_status()
+        for f in r2.json().get("data", []):
+            attrs = f.get("attributes", {})
+            name = attrs.get("name", "")
+            if attrs.get("kind") == "folder":
+                sub = ((f.get("relationships", {}).get("files", {})
+                        .get("links", {}).get("related", {})) or {}).get("href", "")
+                if sub and depth < 2:
+                    walk(sub, depth + 1)
                 continue
-            out.append((dl, name, attrs.get("size") or 0))
+            dl = f.get("links", {}).get("download", "")
+            if name.lower().endswith(TABULAR_EXT) and dl:
+                if vo:
+                    dl += ("&" if "?" in dl else "?") + f"view_only={vo.group(1)}"
+                if (attrs.get("size") or 0) > MAX_FILE_BYTES:
+                    oversized.append((name, attrs.get("size")))
+                    continue
+                out.append((dl, name, attrs.get("size") or 0))
+
+    walk(f"https://api.osf.io/v2/{kind}/{guid}/files/osfstorage/", 0)
     return out, license_raw, oversized
 
 
@@ -401,6 +487,179 @@ def resolve_data_files(row: dict) -> tuple:
         # was being retired as "no resolvable tabular file on landing page".
         raise FileListUnreachable(f"{type(e).__name__}: {str(e)[:150]}") from e
     return [], "", []
+
+
+# ---------------------------------------------------------------------------
+# Data Availability links
+#   Shared by the article connectors (irw_discover_plos.py,
+#   irw_discover_pmc.py): both read a statement off an article, find the
+#   deposit it names, and hand it to the resolvers above. Kept here rather
+#   than in either connector -- both already import from this module, and a
+#   connector importing another connector would couple two scheduled runners
+#   through one's module-level constants.
+# ---------------------------------------------------------------------------
+
+_RE_URL = re.compile(r'https?://[^\s"\'<>]+')
+_RE_BARE_DOI = re.compile(r'\b10\.\d{4,9}/[^\s,;)"\'<>]+')
+
+# External repos with a resolver above. A statement naming one of these, or
+# any DOI, is worth following.
+_KNOWN_REPO_HOSTS = ("datadryad.org", "zenodo.org", "osf.io", "figshare.com",
+                     "dataverse.harvard.edu", "data.mendeley.com")
+
+# Sentence punctuation the scrape carries off the page: a statement reads
+# "... available from https://doi.org/10.5061/dryad.j6g1c." and the trailing
+# period lands inside the URL, which then 404s at the resolver. 13 of the 33
+# doi.org links in the 2026-09-15 backlog re-triage carried one; 10 resolve
+# once it is removed. A closing bracket is the same story ("(doi:10.18170/
+# DVN/WBO7LK)"). Kept deliberately narrow: characters that are legal inside a
+# DOI suffix but never end one.
+_RE_TRAILING_PUNCT = re.compile(r"""[.,;:)\]}>'"]+$""")
+
+
+# A statement written in Markdown ("[10.5281/zenodo.17423755](https://...)")
+# leaves the encoded bracket inside the scraped URL, which then resolves to
+# nothing. Seen in PMC 10.1186/s12889-018-5219-x's statement, 2026-09-16.
+_RE_BRACKET_JUNK = re.compile(r"%5B|%5D|\]\(|\[", re.IGNORECASE)
+
+
+def strip_trailing_punctuation(url: str) -> str:
+    url = _RE_BRACKET_JUNK.split(url.strip(), 1)[0]
+    return _RE_TRAILING_PUNCT.sub("", url)
+
+def _landing_url(link: str) -> str:
+    """Where a doi.org / hdl.handle.net link lands. Resolvers dispatch on the
+    host, and a DOI link names no host."""
+    link = strip_trailing_punctuation(link)
+    host = (urlparse(link).netloc or "").lower()
+    if "doi.org" not in host and "hdl.handle.net" not in host:
+        return link
+    resp = requests.head(link, headers=UA, timeout=30, allow_redirects=True)
+    return resp.url
+
+
+def _is_dataverse_host(landing: str) -> bool:
+    """Does this host run Dataverse? Its version endpoint answers
+    {"status":"OK","data":{"version":...}} and nothing else does."""
+    parsed = urlparse(landing)
+    if not parsed.netloc:
+        return False
+    try:
+        r = requests.get(f"{parsed.scheme or 'https'}://{parsed.netloc}/api/info/version",
+                         headers=UA, timeout=15)
+        return bool(r.ok and (r.json().get("data") or {}).get("version"))
+    except Exception:
+        return False
+
+
+def triage_external_link(ext_link: str, base: dict) -> dict:
+    """Triage the deposit a Data Availability statement points at.
+
+    Until 2026-09-15 this connector recorded the link and flagged the row
+    no_usable_file without opening it. In that day's weekly run all 4
+    spot-checked links (figshare 5544883 and 31933275, OSF J45TH and U5XKW)
+    held the data, and the seen-DOI ledger retired every one. The repo
+    pipeline's resolvers already read these hosts, so reuse them.
+
+    The deposit's own licence is the one checked: the article's CC BY does
+    not cover a separately deposited file.
+    """
+    empty = {"n_responses": "", "n_participants": "", "n_items": "",
+             "density": "", "data_file": ""}
+    try:
+        landing = _landing_url(ext_link)
+    except Exception as e:
+        return {**base, **empty, "flag": "download_failed",
+                "reasons": f"could not resolve Data Availability link {ext_link}: "
+                           f"{type(e).__name__}"[:200]}
+
+    doi_m = _RE_BARE_DOI.search(ext_link) or _RE_BARE_DOI.search(landing)
+    doi = doi_m.group(0) if doi_m else ""
+    # Any Dataverse installation, not only Harvard's: _dataverse_files()
+    # finds the instance from the landing URL.
+    source = "dataverse" if "/dataset.xhtml" in landing and doi else ""
+    if not source and doi and _host_resolver(landing) is None:
+        # /dataset.xhtml is the classic Dataverse landing path; newer installs
+        # serve /collections/... instead, so ask the host what it runs rather
+        # than guessing from the URL. One cheap GET, and only on a link that
+        # would otherwise be discarded unopened.
+        source = "dataverse" if _is_dataverse_host(landing) else ""
+    if _host_resolver(landing) is None and not source:
+        return {**base, **empty, "flag": "external_unresolved",
+                "reasons": "no tabular-format Supporting Information file; data "
+                           f"link on a host with no resolver: {landing}"[:400]}
+
+    already = _deposit_already_in_irw(landing, doi)
+    if already:
+        return {**base, **empty, "flag": "already_in_irw",
+                "reasons": f"the deposit this article points at ({already}) is "
+                           f"already in the IRW dictionary, under another paper; "
+                           f"not re-triaged: {landing}"[:400]}
+
+    row = process_one({"source": source, "url": landing, "doi": doi})
+    reasons = f"via Data Availability link {landing} | {row.get('reasons', '')}"
+    return {**base, **{k: v for k, v in row.items()
+                       if k not in ("source", "title", "url", "doi")},
+            "reasons": reasons[:400]}
+
+
+
+_IRW_DEPOSIT_DOIS = None
+
+
+def _deposit_already_in_irw(landing: str, doi: str) -> str:
+    """The IRW table name is not knowable here, but "is this deposit already
+    in the dictionary" is -- and that is the question the connectors never
+    asked.
+
+    Candidate exclusion matches the *paper* DOI, which cannot catch a deposit
+    that entered IRW through a different paper. One deposit routinely serves
+    two: Mendeley 48y8tkf5wh is `floreskanter_2021_cerq` in the corpus and was
+    re-used by PLOS 10.1371/journal.pone.0326319 in 2025, so the 2025 article
+    looked new and its data was already there, byte for byte. Article-attached
+    Supporting Information could not collide this way; a Data Availability
+    link can, which is why this check arrives with that feature rather than
+    before it. Three of five hand-picked leads on 2026-09-16 were duplicates
+    of this kind.
+
+    Returns the matched deposit DOI, or "".
+    """
+    global _IRW_DEPOSIT_DOIS
+    if _IRW_DEPOSIT_DOIS is None:
+        from irw_discover_updated import _load_existing_irw_dois
+        try:
+            # The dictionary's "URL (for data)" column, normalised to deposit
+            # DOIs by the same extractor used here -- so the two sides of this
+            # comparison are built the same way.
+            _IRW_DEPOSIT_DOIS = _load_existing_irw_dois()
+        except Exception:
+            _IRW_DEPOSIT_DOIS = set()   # never block a run on the sheet
+    if not _IRW_DEPOSIT_DOIS:
+        return ""
+    from irw_discover_updated import _extract_doi_from_url, norm_doi
+    keys = {_extract_doi_from_url(landing) or "",
+            norm_doi(doi) if doi else "",
+            _extract_doi_from_url(f"https://doi.org/{doi}") if doi else ""}
+    for k in keys:
+        if k and k in _IRW_DEPOSIT_DOIS:
+            return k
+    return ""
+
+
+def extract_external_link(text: str) -> str:
+    """The first repository or DOI link in a Data Availability statement.
+
+    Takes plain text, so each connector can extract the statement in its own
+    format (PLOS scrapes HTML, PMC reads JATS XML) and share this.
+    """
+    for m in _RE_URL.finditer(text or ""):
+        host = urlparse(m.group(0)).netloc
+        if any(h in host for h in _KNOWN_REPO_HOSTS) or "doi.org" in host:
+            return strip_trailing_punctuation(m.group(0))
+    # Statements often give a bare DOI ("doi: 10.5061/dryad.xxxx") with no
+    # URL scheme at all.
+    m = _RE_BARE_DOI.search(text or "")
+    return f"https://doi.org/{strip_trailing_punctuation(m.group(0))}" if m else ""
 
 
 # ---------------------------------------------------------------------------

@@ -1,0 +1,25 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"transreas_mokken","transreas_mokken_1","T01L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA > YB > YC; Objects: sticks; Measures: 12, 11.5, 11 (cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T01L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA > YB > YC; Objects: sticks; Measures: 12, 11.5, 11 (cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T02L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA = YB = YC = YD; Objects: tubes; Measures: 12 (cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T02L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA = YB = YC = YD; Objects: tubes; Measures: 12 (cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T03W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA > YB > YC; Objects: tubes; Measures: 45, 25, 18 (g)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T03W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA > YB > YC; Objects: tubes; Measures: 45, 25, 18 (g)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T04W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA = YB = YC = YD; Objects: cubes; Measures: 65 (g)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T04W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA = YB = YC = YD; Objects: cubes; Measures: 65 (g)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T05W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA < YB < YC; Objects: balls; Measures: 40, 50, 70 (cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T05W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA < YB < YC; Objects: balls; Measures: 40, 50, 70 (cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T06A","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: area; Format: YA > YB > YC; Objects: discs; Measures: 7.5, 7, 6.5 (diameter; cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T06A","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: area; Format: YA > YB > YC; Objects: discs; Measures: 7.5, 7, 6.5 (diameter; cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T07L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA > YB = YC; Objects: sticks; Measures: 28.5, 27.5, 27.5 (cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T07L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA > YB = YC; Objects: sticks; Measures: 28.5, 27.5, 27.5 (cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T08W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA > YB = YC; Objects: balls; Measures: 65, 40, 40 (g)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T08W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA > YB = YC; Objects: balls; Measures: 65, 40, 40 (g)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T09L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA = YB < YC = YD; Objects: sticks; Measures: 12.5, 12.5, 13, 13 (cm)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T09L","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: length; Format: YA = YB < YC = YD; Objects: sticks; Measures: 12.5, 12.5, 13, 13 (cm)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T10W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA = YB < YC = YD; Objects: balls; Measures: 60, 60, 100, 100 (g)",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T10W","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: weight; Format: YA = YB < YC = YD; Objects: balls; Measures: 60, 60, 100, 100 (g)",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T11P","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: pseudo",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T11P","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: pseudo",NA,"correct",1
+"transreas_mokken","transreas_mokken_1","T12P","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: pseudo",NA,"incorrect",0
+"transreas_mokken","transreas_mokken_1","T12P","Transitive reasoning tasks (Verweij, Sijtsma, & Koops, 1996)",NA,NA,"Property: pseudo",NA,"correct",1

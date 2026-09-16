@@ -1,0 +1,81 @@
+"table","section_id","item","instrument","language","instructions","instructions_translated","section_prompt","section_prompt_translated","item_text","item_text_translated","correct_response","option_text","option_text_translated","resp"
+"shen_2020_sas20","shen_2020_sas20_1","sas_1","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel more nervous or anxious than usual",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_1","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel more nervous or anxious than usual",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_1","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel more nervous or anxious than usual",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_1","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel more nervous or anxious than usual",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_2","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm afraid for no reason",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_2","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm afraid for no reason",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_2","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm afraid for no reason",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_2","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm afraid for no reason",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_3","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I am easily upset or frightened",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_3","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I am easily upset or frightened",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_3","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I am easily upset or frightened",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_3","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I am easily upset or frightened",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_4","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think I might be going crazy",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_4","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think I might be going crazy",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_4","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think I might be going crazy",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_4","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think I might be going crazy",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_5","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think everything is fine",NA,NA,"Most or all of the time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_5","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think everything is fine",NA,NA,"considerable time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_5","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think everything is fine",NA,NA,"a small portion of time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_5","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I think everything is fine",NA,NA,"No or little time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_6","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are shaking",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_6","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are shaking",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_6","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are shaking",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_6","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are shaking",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_7","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by headache, neck pain and back pain",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_7","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by headache, neck pain and back pain",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_7","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by headache, neck pain and back pain",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_7","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by headache, neck pain and back pain",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_8","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel weak and tired easily",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_8","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel weak and tired easily",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_8","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel weak and tired easily",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_8","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel weak and tired easily",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_9","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel calm and easy to sit still",NA,NA,"Most or all of the time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_9","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel calm and easy to sit still",NA,NA,"considerable time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_9","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel calm and easy to sit still",NA,NA,"a small portion of time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_9","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel calm and easy to sit still",NA,NA,"No or little time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_10","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel my heart beating fast",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_10","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel my heart beating fast",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_10","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel my heart beating fast",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_10","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I feel my heart beating fast",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_11","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by bouts of dizziness",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_11","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by bouts of dizziness",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_11","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by bouts of dizziness",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_11","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I was troubled by bouts of dizziness",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_12","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I have fainted or feel like I'm going to faint",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_12","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I have fainted or feel like I'm going to faint",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_12","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I have fainted or feel like I'm going to faint",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_12","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I have fainted or feel like I'm going to faint",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_13","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"It's easy for me to breathe in and out",NA,NA,"Most or all of the time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_13","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"It's easy for me to breathe in and out",NA,NA,"considerable time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_13","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"It's easy for me to breathe in and out",NA,NA,"a small portion of time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_13","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"It's easy for me to breathe in and out",NA,NA,"No or little time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_14","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are numb and tingling",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_14","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are numb and tingling",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_14","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are numb and tingling",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_14","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are numb and tingling",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_15","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm suffering from stomachache and indigestion",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_15","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm suffering from stomachache and indigestion",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_15","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm suffering from stomachache and indigestion",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_15","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I'm suffering from stomachache and indigestion",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_16","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I often have to pee",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_16","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I often have to pee",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_16","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I often have to pee",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_16","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I often have to pee",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_17","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are often dry and warm",NA,NA,"Most or all of the time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_17","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are often dry and warm",NA,NA,"considerable time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_17","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are often dry and warm",NA,NA,"a small portion of time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_17","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"My hands and feet are often dry and warm",NA,NA,"No or little time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_18","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I blush and get hot",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_18","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I blush and get hot",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_18","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I blush and get hot",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_18","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I blush and get hot",NA,NA,"Most or all of the time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_19","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I fall asleep easily and sleep well all night",NA,NA,"Most or all of the time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_19","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I fall asleep easily and sleep well all night",NA,NA,"considerable time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_19","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I fall asleep easily and sleep well all night",NA,NA,"a small portion of time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_19","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I fall asleep easily and sleep well all night",NA,NA,"No or little time",NA,4
+"shen_2020_sas20","shen_2020_sas20_1","sas_20","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I had nightmares",NA,NA,"No or little time",NA,1
+"shen_2020_sas20","shen_2020_sas20_1","sas_20","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I had nightmares",NA,NA,"a small portion of time",NA,2
+"shen_2020_sas20","shen_2020_sas20_1","sas_20","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I had nightmares",NA,NA,"considerable time",NA,3
+"shen_2020_sas20","shen_2020_sas20_1","sas_20","Zung Self-Rating Anxiety Scale (SAS)","Chinese",NA,NA,NA,NA,"I had nightmares",NA,NA,"Most or all of the time",NA,4

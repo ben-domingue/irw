@@ -1,0 +1,79 @@
+"table","section_id","item","instrument","instructions","section_prompt","item_text","correct_response","option_text","resp"
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,1
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,2
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,3
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,4
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,5
+"sds","sds_1",1,"Symptom Distress Scale",NA,NA,"Inability to sleep",NA,NA,6
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,1
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,2
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,3
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,4
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,5
+"sds","sds_1",2,"Symptom Distress Scale",NA,NA,"Fatigue",NA,NA,6
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,1
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,2
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,3
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,4
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,5
+"sds","sds_1",3,"Symptom Distress Scale",NA,NA,"Bowel symptoms",NA,NA,6
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,1
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,2
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,3
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,4
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,5
+"sds","sds_1",4,"Symptom Distress Scale",NA,NA,"Breathing symptoms",NA,NA,6
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,1
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,2
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,3
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,4
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,5
+"sds","sds_1",5,"Symptom Distress Scale",NA,NA,"Coughing",NA,NA,6
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,1
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,2
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,3
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,4
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,5
+"sds","sds_1",6,"Symptom Distress Scale",NA,NA,"Inability to concentrate",NA,NA,6
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,1
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,2
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,3
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,4
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,5
+"sds","sds_1",7,"Symptom Distress Scale",NA,NA,"Intensity of nausea",NA,NA,6
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,1
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,2
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,3
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,4
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,5
+"sds","sds_1",8,"Symptom Distress Scale",NA,NA,"Frequency of nausea",NA,NA,6
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,1
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,2
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,3
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,4
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,5
+"sds","sds_1",9,"Symptom Distress Scale",NA,NA,"Intensity of pain",NA,NA,6
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,1
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,2
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,3
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,4
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,5
+"sds","sds_1",10,"Symptom Distress Scale",NA,NA,"Frequency of pain",NA,NA,6
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,1
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,2
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,3
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,4
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,5
+"sds","sds_1",11,"Symptom Distress Scale",NA,NA,"Bad outlook on life",NA,NA,6
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,1
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,2
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,3
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,4
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,5
+"sds","sds_1",12,"Symptom Distress Scale",NA,NA,"Loss of appetite",NA,NA,6
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,1
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,2
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,3
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,4
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,5
+"sds","sds_1",13,"Symptom Distress Scale",NA,NA,"Poor appearance",NA,NA,6

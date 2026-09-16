@@ -62,6 +62,10 @@ UA = {"User-Agent": "irw-triage/1.0 (research)"}
 # module name -> what it lets us read
 OPTIONAL_READERS = {
     "openpyxl":   ".xlsx",
+    # Old-style .xls. Absent from this list, it was never installed on the
+    # scheduled sandbox: both download_failed rows in the 2026-09-15 PLOS
+    # weekly run were "Import xlrd failed", not unreachable files.
+    "xlrd":       ".xls",
     "pyreadstat": ".sav / .sas7bdat",
     "pyreadr":    ".RData / .rds",
 }
