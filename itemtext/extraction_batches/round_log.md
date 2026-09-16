@@ -18495,3 +18495,85 @@ Notable:
   `instructions_translated` is IRW-written English. It owes an issues-page line when it ships.
 
 Cap (`batch_230`) not reached; next round takes `batch_209`.
+
+## batch_209 — 2026-09-15 20:56–21:06 PDT
+
+3 tables claimed, **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%). Three agents,
+one per table, per the 2026-09-11 setting. No kills, no retries, no rate limits.
+
+Numbering note: highest existing was `batch_208`, so this round is `batch_209` — the
+200–205 hole (irw#1945) is behind us and the series now runs consecutively toward the
+`batch_230` cap.
+
+Tables:
+
+- **valverdeberrocoso_2021_tictip** — 28 items × 6 options, Spanish administered wording
+  from the PLOS S1 File questionnaire with the study's own English in `_translated`.
+  `mapping_basis=paper_explicit`, verification **VERIFIED** via route 1: paper Table 2
+  M/SD reproduce to |dM| ≤ 0.005, |dSD| ≤ 0.0005 (n=251), and all 28 published (M,SD)
+  pairs are unique — including the M-ties TICTIP06/11 and TICTIP17/18, separated by SD —
+  so every item is distinguished. `verify_*.R` re-ran clean at Step 4 (VERDICT: PASS).
+  One disclosed correction: paper Table 2's English for item 9 says "Scratch" where the
+  administered Spanish says "Rayuela" (Extremadura's school platform); the translated cell
+  ships Rayuela, recorded as the public_note. Source inconsistency noted, not corrected:
+  Methods describe 27 items (2+5+2+10+3+5) but Table 2, the S1 questionnaire and the S2
+  data sheet all carry 28, matching the IRW table.
+- **vanteffelen_2020_aq_hostility** — 8 items × 5 levels, `mapping_basis=data_labels`
+  (verification NOT_NEEDED). Dutch AQ hostility subscale.
+- **vanteffelen_2020_foa** — 40 items × 5 levels, `mapping_basis=data_labels`
+  (verification NOT_NEEDED). Step 3b resolved the opaque name: Forms of Aggression
+  questionnaire (Verona et al. 2008), confirmed by the paper's "The 40-item Forms of
+  Aggression". English `_translated` is IRW machine translation, so it owes an
+  issues-page line once live.
+
+Both vanteffelen tables share one PLOS `.sav` (journal.pone.0239631.s001, N=376, CC BY 4.0);
+the two agents were told which sibling belonged to the other and neither crossed over.
+`vanteffelen_2020_pid5_hostility` and `vanteffelen_2020_rpq` remain pending for a later round.
+
+Gates: normalize_nulls fixed 1 file (tictip, 169 lines); audit_batch **3/3 PASS, zero WARNs**
+(so nothing to explain under Step 5c); verify_batch 1 PASS + 2 MISSING(exempt);
+lint_verification 3 rows, no problems; `irw-validate` clean on all three.
+
+**Step 5b orchestrator re-checks — both agent findings confirmed, with numbers:**
+
+- The aq_hostility paper-vs-deposit discrepancy is real and verbatim. The paper's Measures
+  section says "In the 10-item hostility scale of the Aggression Questionnaire (AQH) [9] …
+  ranging from one (extremely uncharacteristic of me) to five (extremely characteristic of
+  me)", while the deposited `.sav` carries **8** HOS_ columns with **agreement** anchors
+  (1 Helemaal mee oneens … 3 *Weet niet* … 5 Helemaal mee eens) — a literal "don't know"
+  midpoint, shipped unnormalised. The deposit was followed on both counts, which is right:
+  8 is the canonical AQ hostility subscale length, and the paper's own example item "Other
+  people always seem to get the breaks" is HOS_4 "Het lijkt alsof anderen altijd meer geluk
+  hebben", so the instrument identification is not in doubt. A source-reporting slip, not an
+  itemtext or response-data defect — no issue filed.
+- Byte-comparison against the cached `.sav` redone independently: 8/8 and 40/40 shipped
+  `item_text` strings identical to the SPSS variable labels, 0 mismatches, n=376 non-missing
+  for every item in both tables.
+- The foa direction evidence reproduces exactly: AGG_13 1.024, AGG_26 1.027, AGG_34 1.032,
+  AGG_33 1.032, AGG_30 1.037 at the floor against AGG_17 2.883, AGG_21 2.574, AGG_20 2.269
+  at the top — consistent only with 1 = "(Bijna) nooit", not a reversed option axis.
+
+**Privacy finding to hand to a human (outside a round's scope to fix):**
+`data/vanteffelen_2020_hostility.py` line 29 hardcodes
+`UA = {"User-Agent": "IRW-Finder/1.0 (ben.domingue@gmail.com)"}` and sends it to PLOS on
+line 52 — Ben's email leaves the machine on every run of that processing script. Found by
+the foa agent, verified by the orchestrator. Neither batch_209 agent sent it anywhere; both
+fetched with a generic User-Agent. Recorded in `notes.csv` too. Worth a repo-side fix.
+
+**Rights, for triage:** two ship-shaped findings a round may not act on. The AQ hostility
+row in `instrument_rights_register.csv` names this table but is the *Autism Spectrum
+Quotient* and explicitly does not cover it; Buss & Perry (1992) was published in JPSP, not
+by a test publisher (the commercial WPS instrument is the different 34-item Buss & Warren
+2000), and the PhenX protocol states permission is not required. The FOA has no register row
+and no locatable fee/permission/NC/ND clause. Both ship under silence-is-permission; no
+register rows were written, since a round may only write `block` rows.
+
+**Pre-existing `check_provenance.R` failure, NOT caused by this round (exit 1):**
+`tian2026_digital_competence` (batch_188, uploaded, `translation_source=machine_translation`)
+has no entry on the public issues page and owes one under the 2026-09-02 ruling. Everything
+else it reports is clean; `vanteffelen_2020_foa` appears only in the HELD list, which is
+correct — nothing of it ships until upload. Someone should add the tian2026 line to
+`itemtext_issues.qmd`.
+
+Circuit breaker: not tripped (0 failed of 3). Queue after this round: 226 pending,
+871 done, 232 blocked, 59 excluded, 13 failed. Cap `batch_230` not reached.
