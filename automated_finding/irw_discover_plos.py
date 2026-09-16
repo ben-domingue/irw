@@ -166,6 +166,18 @@ _RE_SI_BLOCK = re.compile(
 _RE_TAG = re.compile(r"<[^>]+>")
 _RE_URL = re.compile(r'https?://[^\s"\'<>]+')
 _RE_BARE_DOI = re.compile(r'\b10\.\d{4,9}/[^\s,;)"\'<>]+')
+# Sentence punctuation the scrape carries off the page: a statement reads
+# "... available from https://doi.org/10.5061/dryad.j6g1c." and the trailing
+# period lands inside the URL, which then 404s at the resolver. 13 of the 33
+# doi.org links in the 2026-09-15 backlog re-triage carried one; 10 resolve
+# once it is removed. A closing bracket is the same story ("(doi:10.18170/
+# DVN/WBO7LK)"). Kept deliberately narrow: characters that are legal inside a
+# DOI suffix but never end one.
+_RE_TRAILING_PUNCT = re.compile(r"""[.,;:)\]}>'"]+$""")
+
+
+def strip_trailing_punctuation(url: str) -> str:
+    return _RE_TRAILING_PUNCT.sub("", url.strip())
 
 # External repos already covered by irw_discover_updated.py's own connectors
 # -- flagged for visibility, not re-downloaded here.
@@ -217,11 +229,26 @@ def extract_si_files(html: str, doi: str, journal: str = DEFAULT_JOURNAL) -> lis
 def _landing_url(link: str) -> str:
     """Where a doi.org / hdl.handle.net link lands. Resolvers dispatch on the
     host, and a DOI link names no host."""
+    link = strip_trailing_punctuation(link)
     host = (urlparse(link).netloc or "").lower()
     if "doi.org" not in host and "hdl.handle.net" not in host:
         return link
     resp = requests.head(link, headers=UA, timeout=30, allow_redirects=True)
     return resp.url
+
+
+def _is_dataverse_host(landing: str) -> bool:
+    """Does this host run Dataverse? Its version endpoint answers
+    {"status":"OK","data":{"version":...}} and nothing else does."""
+    parsed = urlparse(landing)
+    if not parsed.netloc:
+        return False
+    try:
+        r = requests.get(f"{parsed.scheme or 'https'}://{parsed.netloc}/api/info/version",
+                         headers=UA, timeout=15)
+        return bool(r.ok and (r.json().get("data") or {}).get("version"))
+    except Exception:
+        return False
 
 
 def triage_external_link(ext_link: str, base: dict) -> dict:
@@ -252,6 +279,12 @@ def triage_external_link(ext_link: str, base: dict) -> dict:
     # Any Dataverse installation, not only Harvard's: _dataverse_files()
     # finds the instance from the landing URL.
     source = "dataverse" if "/dataset.xhtml" in landing and doi else ""
+    if not source and doi and _host_resolver(landing) is None:
+        # /dataset.xhtml is the classic Dataverse landing path; newer installs
+        # serve /collections/... instead, so ask the host what it runs rather
+        # than guessing from the URL. One cheap GET, and only on a link that
+        # would otherwise be discarded unopened.
+        source = "dataverse" if _is_dataverse_host(landing) else ""
     if _host_resolver(landing) is None and not source:
         return {**base, **empty, "flag": "external_unresolved",
                 "reasons": "no tabular-format Supporting Information file; data "
@@ -265,7 +298,7 @@ def triage_external_link(ext_link: str, base: dict) -> dict:
 
 
 def process_one(hit: Hit) -> dict:
-    journal =hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
+    journal = hit.source.split(":", 1)[1] if ":" in hit.source else DEFAULT_JOURNAL
     base = {"source": "plos", "journal": journal, "title": hit.title,
             "doi": hit.doi, "url": hit.url}
     try:
@@ -281,14 +314,14 @@ def process_one(hit: Hit) -> dict:
     for m in _RE_URL.finditer(avail):
         host = urlparse(m.group(0)).netloc
         if any(h in host for h in _KNOWN_REPO_HOSTS) or "doi.org" in host:
-            ext_link = m.group(0)
+            ext_link = strip_trailing_punctuation(m.group(0))
             break
     if not ext_link:
         # Data Availability statements often give a bare DOI ("doi:
         # 10.5061/dryad.xxxx") with no URL scheme at all.
         m = _RE_BARE_DOI.search(avail)
         if m:
-            ext_link = f"https://doi.org/{m.group(0)}"
+            ext_link = f"https://doi.org/{strip_trailing_punctuation(m.group(0))}"
 
     license_raw = extract_license(html)
     license_norm, blocked, unknown = check_license(license_raw)

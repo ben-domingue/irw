@@ -174,7 +174,12 @@ def _zenodo_files(url: str) -> tuple:
 
 
 def _figshare_files(url: str) -> tuple:
-    m = re.search(r"articles/(?:[^/]+/)?(?:[^/]+/)?(\d+)", url)
+    # The article id is the LAST number, except for a trailing version
+    # segment. The two-optional-segments form read the version of a legacy
+    # ".../articles/<slug>/<id>/<version>" URL as the id and then asked for
+    # article 1 (404 -> FileListUnreachable). Found 2026-09-16 on
+    # figshare.com/articles/survey3a/7357034/1, a live CC BY deposit.
+    m = re.search(r"articles/(?:[^/?#]+/)*?(\d{4,})(?:/(\d+))?/?(?:[?#]|$)", url)
     if not m:
         return [], "", []
     r = requests.get(f"https://api.figshare.com/v2/articles/{m.group(1)}",
