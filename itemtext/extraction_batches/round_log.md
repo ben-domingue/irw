@@ -18772,3 +18772,49 @@ review rows, none of them batch_212 tables. Both of this round's provenance rows
 
 No systemic access issues; no Step 3b instrument mismatches; no dictionary/metadata problems.
 Cap (batch_230) not reached — next round is batch_213.
+
+## batch_213 — 2026-09-15 22:03–22:25
+
+3 tables, 3 agents (one per table). **Written 3 / blocked 0 / failed 0 — yield 100%.**
+All three from one deposit: Wang YN (2016) PLOS ONE 11(1):e0146050.
+
+- `wang_2016_study1_power` — Sense of Power Scale (Anderson/John/Keltner 2012), 8 items × 1–5.
+  mapping_basis=reconstructed, text_source=translated_substitute (English fallback, language=Chinese),
+  translation_source=official_instrument_english. Verification PARTIAL (routes 3 + published alpha).
+- `wang_2016_study1_se` — RSES, 10 items × 1–5. reconstructed / translated_substitute / mixed
+  (English item text, administered Chinese option anchors taken from the S2+S3 .sav value labels).
+  Verification PARTIAL (routes 5+6 polarity partition, 3, 7). RSES has a settled `ship` row in the
+  rights register.
+- `wang_2016_study3_auth` — Authenticity Scale (Wood et al. 2008), 12 items × 1–5. reconstructed /
+  translated_substitute / mixed. Verification PARTIAL (routes 5 + 3; option axis from .sav value labels).
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **PASS 3/3, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch PASS 3/3; lint_verification clean (3 rows, no problems); `irw-validate` ok on all
+three. `check_provenance.R` exits 1, but on a **pre-existing** table — `tian2026_digital_competence`
+ships IRW-generated English with no issues-page entry. Nothing in batch_213 is implicated: all three are
+HELD (uploaded blank), so no public entry is owed yet. Their `translation_source=mixed` rows will want an
+issues-page line **if and when they are uploaded** — the shipped option_text is administered Chinese from
+the source, but the English glosses beside it are IRW-written.
+
+**Step 5b — three agent claims independently re-checked by the orchestrator, all three CONFIRMED:**
+
+1. `study1_power` is stored with items 2,4,6,7 **already reverse-scored**: alpha .710 as stored vs
+   **.099** if those four are un-reversed; total M 27.71/SD 3.78 as stored vs 21.98 un-reversed, against
+   the paper's Table 1 27.71/3.78. So the shipped option anchors are deliberately flipped for those four
+   items (resp 1 = "strongly agree"), disclosed in provenance + public_note. `irw-validate` reports no
+   `resp_ambiguous` — per-item direction differences are legitimate.
+2. `study1_se` likewise stored already reverse-coded: alpha .807 vs **.162** un-reversed, **0 of 45**
+   inter-item correlations negative, column sum 38.34/5.08 = the published total exactly.
+3. `study3_auth` — the agent's claim that Wang's stored `authenticity` aggregate (and hence Table 5) sums
+   **eleven** items, excluding a11, is confirmed decisively from s003.sav: least-squares weights are
+   exactly 1.0 on eleven columns and **0.0 on a11**, intercept 0, max|residual| 7.8e-14. Note the
+   drop-one mean/SD test ALONE does not identify a11 (dropping a8, a9 or a11 all land within 0.15 of
+   38.38); the regression is what settles it. The IRW response table correctly carries all twelve items —
+   this is a fact about the paper's scoring, not a defect in the IRW table.
+
+Rights: no register row exists for the Sense of Power Scale or the Authenticity Scale and no quotable
+fee/permission/NC/ND/no-redistribution clause is locatable for either; both shipped under "silence is
+permission" with no `ship` row written. The auth agent re-derived the same conclusion batch_212's sibling
+reached, independently.
+
+Cap (batch_230) not reached; 214 pending remain.

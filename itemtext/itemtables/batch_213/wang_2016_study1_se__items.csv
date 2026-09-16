@@ -1,0 +1,51 @@
+"table","section_id","item","instrument","language","instructions","instructions_translated","section_prompt","section_prompt_translated","item_text","item_text_translated","correct_response","option_text","option_text_translated","resp"
+"wang_2016_study1_se","wang_2016_study1_se_1","se1","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"On the whole, I am satisfied with myself.",NA,NA,"非常不符合","Very much untrue of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se1","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"On the whole, I am satisfied with myself.",NA,NA,"有些不符合","Somewhat untrue of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se1","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"On the whole, I am satisfied with myself.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se1","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"On the whole, I am satisfied with myself.",NA,NA,"有些符合","Somewhat true of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se1","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"On the whole, I am satisfied with myself.",NA,NA,"完全符合","Completely true of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se2","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"At times, I think I am no good at all.",NA,NA,"完全符合","Completely true of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se2","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"At times, I think I am no good at all.",NA,NA,"有些符合","Somewhat true of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se2","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"At times, I think I am no good at all.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se2","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"At times, I think I am no good at all.",NA,NA,"有些不符合","Somewhat untrue of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se2","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"At times, I think I am no good at all.",NA,NA,"非常不符合","Very much untrue of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se3","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I have a number of good qualities.",NA,NA,"非常不符合","Very much untrue of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se3","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I have a number of good qualities.",NA,NA,"有些不符合","Somewhat untrue of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se3","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I have a number of good qualities.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se3","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I have a number of good qualities.",NA,NA,"有些符合","Somewhat true of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se3","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I have a number of good qualities.",NA,NA,"完全符合","Completely true of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se4","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I am able to do things as well as most other people.",NA,NA,"非常不符合","Very much untrue of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se4","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I am able to do things as well as most other people.",NA,NA,"有些不符合","Somewhat untrue of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se4","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I am able to do things as well as most other people.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se4","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I am able to do things as well as most other people.",NA,NA,"有些符合","Somewhat true of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se4","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I am able to do things as well as most other people.",NA,NA,"完全符合","Completely true of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se5","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel I do not have much to be proud of.",NA,NA,"完全符合","Completely true of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se5","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel I do not have much to be proud of.",NA,NA,"有些符合","Somewhat true of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se5","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel I do not have much to be proud of.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se5","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel I do not have much to be proud of.",NA,NA,"有些不符合","Somewhat untrue of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se5","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel I do not have much to be proud of.",NA,NA,"非常不符合","Very much untrue of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se6","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I certainly feel useless at times.",NA,NA,"完全符合","Completely true of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se6","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I certainly feel useless at times.",NA,NA,"有些符合","Somewhat true of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se6","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I certainly feel useless at times.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se6","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I certainly feel useless at times.",NA,NA,"有些不符合","Somewhat untrue of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se6","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I certainly feel useless at times.",NA,NA,"非常不符合","Very much untrue of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se7","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others.",NA,NA,"非常不符合","Very much untrue of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se7","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others.",NA,NA,"有些不符合","Somewhat untrue of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se7","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se7","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others.",NA,NA,"有些符合","Somewhat true of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se7","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I feel that I'm a person of worth, at least on an equal plane with others.",NA,NA,"完全符合","Completely true of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se8","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I wish I could have more respect for myself.",NA,NA,"完全符合","Completely true of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se8","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I wish I could have more respect for myself.",NA,NA,"有些符合","Somewhat true of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se8","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I wish I could have more respect for myself.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se8","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I wish I could have more respect for myself.",NA,NA,"有些不符合","Somewhat untrue of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se8","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I wish I could have more respect for myself.",NA,NA,"非常不符合","Very much untrue of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se9","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,NA,"完全符合","Completely true of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se9","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,NA,"有些符合","Somewhat true of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se9","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se9","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,NA,"有些不符合","Somewhat untrue of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se9","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"All in all, I am inclined to feel that I am a failure.",NA,NA,"非常不符合","Very much untrue of me",5
+"wang_2016_study1_se","wang_2016_study1_se_1","se10","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I take a positive attitude toward myself.",NA,NA,"非常不符合","Very much untrue of me",1
+"wang_2016_study1_se","wang_2016_study1_se_1","se10","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I take a positive attitude toward myself.",NA,NA,"有些不符合","Somewhat untrue of me",2
+"wang_2016_study1_se","wang_2016_study1_se_1","se10","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I take a positive attitude toward myself.",NA,NA,"不能确定","Cannot decide",3
+"wang_2016_study1_se","wang_2016_study1_se_1","se10","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I take a positive attitude toward myself.",NA,NA,"有些符合","Somewhat true of me",4
+"wang_2016_study1_se","wang_2016_study1_se_1","se10","Rosenberg Self-Esteem Scale (RSES)","Chinese",NA,NA,NA,NA,"I take a positive attitude toward myself.",NA,NA,"完全符合","Completely true of me",5
