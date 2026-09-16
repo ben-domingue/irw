@@ -20210,3 +20210,71 @@ reproduced by the orchestrator. None had to be walked back.
   items, not resilience items. No register row applies.
 
 Cap (`batch_240`) not reached; 145 pending.
+
+## batch_237 — 2026-09-16 13:21–13:35
+
+**3 tables claimed** (`yang_2025_aiccs`, `yang2026_efl_learner_perspective`, `yang_2026_erq`), 3 agents,
+one per table. **Written 2 / blocked 1 / failed 0.** Yield 2/3 = 67%. No kills, no rate limits, no
+retries; all three agents ran to completion.
+
+Gates: normalize_nulls 0 of 2 changed; `audit_batch.R` **2/2 PASS, no anomalies**; `verify_batch.R`
+1 PASS + 1 MISSING(exempt); `lint_verification.R` **0 ERROR, 1 WARN**; `irw-validate` ok on both files.
+`check_provenance.R` exits 1 on three pre-existing tables (`tian2026_digital_competence`,
+`vanteffelen_2020_foa`, `wang_2025_green_space_wellbeing`) — none from this round, and this round's
+`translated_substitute` row carries the required `translation_source`.
+
+- **`yang_2025_aiccs`** — done. 140 rows, 28 items × 5 options, six `section_id`s (one per AIC-CCS
+  dimension). `mapping_basis=data_labels` → Step 5b exempt, NOT_NEEDED row written to both
+  `verification_merged.csv` and the permanent tracker. The tie is made at the source:
+  `data/yang_2025_intercultural.py` keys each IRW code to the S2 workbook's exact header string via a
+  name-keyed dict with an all-28-present assertion, not positionally.
+- **`yang2026_efl_learner_perspective`** — done. 83 rows, 36 items. `data_labels` (deposit header row 2
+  labels all 36 columns), `text_source=translated_substitute` / `translation_source=study_supplied`.
+  **VERIFIED**: the positional derivation re-ran cell-for-cell, 5544/5544 across 154 ids × 36 items,
+  0 mismatches — which separates even the tied-marginal pairs (item_03/item_04 both 114/40) that a
+  marginal comparison could not.
+- **`yang_2026_erq`** — **blocked**, retry test NO, so it does **not** count toward the circuit breaker.
+  Row added to `itemtables/pending_index_notes.csv`.
+
+### Orchestrator re-checks (Step 5b) — three agent claims checked, three confirmed
+
+Every claim below was re-derived from the cached source by the orchestrator, not taken from the report.
+
+- **`yang_2025_aiccs` anchor override — CONFIRMED, and the override is right.** The agent shipped the
+  questionnaire's anchors over the article's. S1 File line 22 literally prints
+  `(A) very low (B) low (C) average (D) high (E) very high` under Part II, while the article Methods says
+  Sections II and III ran "from 1 (strongly disagree) to 5 (strongly agree)". Both texts verified in the
+  cache. "Strongly disagree" is incoherent for stems like "understanding native history", and the paper's
+  own benchmark (mean <3.00 = low competence, >4.00 = extremely high) is a competence scale. Shipped
+  `option_text` is exactly `very low/low/average/high/very high` on resp 1–5. Disclosed in `public_note`.
+- **`yang_2026_erq` block evidence — CONFIRMED, numbers re-derived.** From the cached `s001.xlsx`:
+  n=1033 respondents, 14 items, resp range 1–7, item means **4.356–4.702** (agent said 4.36–4.70);
+  within-block r **0.501–0.593** (items 1–7) and **0.485–0.583** (items 8–14); the two blocks correlate
+  **−0.420 to −0.308** with each other. Clean 7/7 structure, and within each block the items are
+  statistically interchangeable, so subscale membership is all the data can pin. The Step 3b mismatch is
+  confirmed verbatim in the article text: it names the ERQ of Gross & John but says the reappraisal
+  dimension "includes seven items" and suppression "also consists of seven items" — 14, where the ERQ and
+  the Wang et al. (2007) Chinese revision are both 10 (6+4). No 14-item ERQ exists, so canonical wording
+  has no item-level correspondence and was correctly not substituted.
+- **`yang2026_efl_learner_perspective` dictionary error — CONFIRMED.** `metadata/biblio.csv:20076`'s
+  reference string reads "Yang, X., Li, J., & Guo, K. (2026) … Evidence from a survey of Chinese
+  university students", and is contradicted **by its own BibTeX field in the same row**, which carries
+  `author={Yang, Xixi and Nie, Qi}` and the title "…Evidence from textbook analysis and learner feedback".
+  The DOI (10.1371/journal.pone.0340479) is correct; the human-readable reference is not.
+
+### Carried forward for a human
+
+- **Dictionary fix owed:** correct `metadata/biblio.csv` row 20076's reference string for
+  `yang2026_efl_learner_perspective` to Yang X & Nie Q (2026), "Moral integration influences EFL oral
+  English learning: Evidence from textbook analysis and learner feedback" — the row's own Crossref BibTeX
+  already has it right, so this is a one-field fix with the correct value sitting beside it.
+- **Scale direction to disclose on upload:** `yang2026_efl_learner_perspective`'s four rating items
+  (`item_29`–`item_32`) are stored **reversed** relative to the paper's 1=lowest/4=highest scoring — in
+  the live table a *lower* value means *stronger* agreement, and the paper's means 2.98/2.96/3.08/3.21
+  reproduce as 5 − the stored means (max deviation 0.013). Already in `public_note`.
+- **The lint WARN is expected, not a defect:** `option_text` ships blank for every
+  `yang2026_efl_learner_perspective` item by design — the deposit carries no value labels and the paper
+  prints no anchors, and items 03–28/33–36 are select-all-that-apply checkboxes where 0/1 is selection
+  status, not printed wording. Explained in `notes.csv`.
+
+Cap (`batch_240`) not reached; 142 pending.
