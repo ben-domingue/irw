@@ -19810,3 +19810,84 @@ Queue after this round: 163 pending, 0 in_progress.
 
 **CAP REACHED.** batch_230 is the cap named in Step 0 of the round prompt. Stopping; the next round needs a
 human to raise the cap.
+
+## Triage of batch_206–230 (2026-09-16)
+
+The whole chain triaged in one pass, per BATCH_PROCESS "Triage and staging". 57 tables shipped,
+20 blocked, across 25 batches.
+
+**Step 1 — gates re-run live, all four green.**
+
+| gate | result |
+|---|---|
+| `normalize_nulls.R` | no-op — all 57 files were already normalized by their rounds |
+| `audit_batch.R` (live) | **57 tables, 0 differences** from the rounds' own reports: same status AND same note text for every table. 54 PASS, 3 WARN |
+| `verify_batch.R` | every `verify_<table>.R` reproduces its claim; 0 FAILED. 8 `MISSING(exempt)` are all `mapping_basis=data_labels`, where Step 5b grants the exemption and no script is expected |
+| `lint_verification.R` | 59 rows, **0 ERROR**, 3 WARN, 1 INFO |
+
+The three audit WARNs are all explained in their batches' notes and are properties of the response
+data, not the item text: `Veterans_Affairs_SSVF_Survey_2016-17` (screener-gated follow-ups, plus one
+FOIA-unpublished transition column that accounts for all three of its blank-field WARNs) and the two
+`weatherspoon_2015_*_effectiveness` tables (the two least-used techniques). The lint WARNs asking
+"should this be PARTIAL?" on `wang_2026_behavioral_intention` / `wang_2026_perceived_usefulness` are
+answered in batch_218's notes: the hedge disclaims the unrecoverable administered Chinese wording,
+not item discrimination, so VERIFIED stands per the 2026-09-08 item-axis rule.
+
+`lint_verification.R` crashed before any of this could run — an all-blocked round (batch_216) leaves
+a header-only `verification_merged.csv`, and assigning a column to a zero-row data.frame is an error
+in R. Fixed in `9368f768`; an empty file is now "nothing to lint" while a missing file still stops.
+
+**Step 3 — 54 staged, 3 held.**
+
+Staged into `itemtables/clean/`: 54 `__items.csv`, verified byte-identical to their batch copies,
+with nothing else in the directory (an uploader walks it recursively).
+
+**Held, and not staged** — the table NAME names the wrong construct, and renaming a published table
+is the user's call, not a round's or a triager's. Now irw#2198:
+
+- `wang_2026_teaching_presence` — the construct is Technology Perception
+- `weida_2020_financial_security` — the items are verbatim CES-D-10 depression
+- `wu2021_burnout` — block D is the Basic Empathy Scale
+
+Their item text is extracted, gated and correct for the data, and each carries the true construct in
+its `instrument` field. It is held because publishing correct wording under a wrong table name puts a
+table's own item text in contradiction with its name. These three go live with the rename, not before.
+
+**Step 2 — what re-reading the rounds' claims turned up.** Ten of the 57 name or describe a construct
+the data is not, and in every case the cause is the same: the processing script inferred the construct
+from the column prefix and never checked it against item text (`data/wang_2026_efl_tam.py` says so in
+its own comment; `data/wu2021_empathy.py` did it for four blocks at once). Filed as irw#2198, which
+also records that the four `wu2021_*` names form a **4-cycle** — each target name is occupied by
+another table in the cycle, so a sequential rename collides at the first step — and that the signature
+is detectable from `metadata/metadata.csv` alone, without reading any item text: every named
+instrument disagrees with its own `n_items`, every re-identified one matches.
+
+Four issues filed from this chain, none of which blocks the upload:
+
+| issue | finding |
+|---|---|
+| irw#2195 | `wu2021_empathy`/`wu2021_panas`: blocks B and G disattenuate to r = -1.112, i.e. outside [-1,1]; plus the file is row-sorted on exactly those two blocks. Mechanism explicitly not asserted |
+| irw#2196 | `weatherspoon_2015_family_physicians_effectiveness`: 25 responses outside the Yes/No column's own scale, from 3 respondents across 14 items; the sibling table is clean |
+| irw#2197 | `weida_2020_financial_security`: `secf_4m` item-rest r = 0.07 against 0.27–0.73, the weakest of the ten assignments |
+| irw#2198 | the ten table-identity defects and the rename cycle |
+
+**Step 4 — issues page: entries prepared, NOT yet applied.** `draft_issues_qmd.R` drafted 48
+candidates; the measured bar takes **33**. 25 qualify on `text_source` ∈ {translated_substitute,
+canonical_instrument}, 2 more are IRW machine translation (`vanteffelen_2020_foa`,
+`wang_2025_green_space_wellbeing`), 3 are the `wolf_2017` `posaff` tables whose public_note records
+that half their adjectives are negative-affect, and **3 were invisible to the drafter** — no
+`public_note`, clean structured fields, caveat only in `notes.csv` (the batch_009 failure mode the
+REVIEW section exists to catch): `wesselmann_2018_distress`, `wesselmann_2018_pcl` and `wirs` all
+ship instructions or option labels taken from the canonical instrument because the study never
+printed them. Below the bar and deliberately dropped: the image-transcription caveats on
+`weatherspoon_2015_*_freq` and `wilson_2022_kelpie_personality` — those ship the actual administered
+wording, read off scanned form images, which is a transcription risk and not a substitution.
+
+Not applied yet because an entry is owed for an UPLOADED table and the upload is the user's step.
+This is the known backlog trap (irw#2133): triage happens before the upload, so the entries come due
+when nobody is looking at the batch any more. The 33 are prepared and go up as one site PR on
+confirmation of the upload.
+
+**Owed on the user's confirmation that the upload happened**: stamp `uploaded=<date>` in each batch's
+`provenance.csv` and in `mapping_verification.csv`, delete the uploaded `__items.csv` from the batch
+folders (sidecars stay), and open the issues-page PR. Never stamp ahead of confirmation.
