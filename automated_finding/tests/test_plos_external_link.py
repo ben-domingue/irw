@@ -270,5 +270,63 @@ class DataverseProbeTest(unittest.TestCase):
             self.assertFalse(irw_batch_updated._is_dataverse_host("https://example.org/x"))
 
 
+class DepositDedupTest(unittest.TestCase):
+    """A deposit already in IRW under a different paper.
+
+    Candidate exclusion matches the paper DOI, so it cannot see this: on
+    2026-09-16 three of five hand-picked leads were deposits already in the
+    corpus (Mendeley 48y8tkf5wh = floreskanter_2021_cerq, Dataverse UT9RVL,
+    figshare 3122734), and one had a processing script written before anyone
+    noticed.
+    """
+
+    def setUp(self):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = None
+
+    def tearDown(self):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = None
+
+    def _triage(self, link, landing, corpus):
+        irw_batch_updated._IRW_DEPOSIT_DOIS = corpus
+        with mock.patch.object(irw_batch_updated, "_landing_url", return_value=landing), \
+             mock.patch.object(irw_batch_updated, "process_one") as po:
+            row = irw_batch_updated.triage_external_link(link, dict(BASE))
+        return row, po
+
+    def test_deposit_in_corpus_is_flagged_not_triaged(self):
+        row, po = self._triage("https://doi.org/10.17632/48y8tkf5wh",
+                               "https://data.mendeley.com/datasets/48y8tkf5wh/4",
+                               {"10.17632/48y8tkf5wh"})
+        self.assertEqual(row["flag"], "already_in_irw")
+        self.assertIn("48y8tkf5wh", row["reasons"])
+        po.assert_not_called()          # no download, no triage
+
+    def test_figshare_landing_matches_its_doi_form(self):
+        row, _ = self._triage("https://figshare.com/articles/dataset/x/3122734",
+                              "https://figshare.com/articles/dataset/x/3122734",
+                              {"10.6084/m9.figshare.3122734"})
+        self.assertEqual(row["flag"], "already_in_irw")
+
+    def test_unseen_deposit_is_triaged_normally(self):
+        row, po = self._triage("https://doi.org/10.17632/7wfgz62xgs",
+                               "https://data.mendeley.com/datasets/7wfgz62xgs/1",
+                               {"10.17632/48y8tkf5wh"})
+        self.assertNotEqual(row.get("flag"), "already_in_irw")
+        po.assert_called_once()
+
+    def test_empty_corpus_never_blocks_a_run(self):
+        row, po = self._triage("https://doi.org/10.17632/7wfgz62xgs",
+                               "https://data.mendeley.com/datasets/7wfgz62xgs/1",
+                               set())
+        self.assertNotEqual(row.get("flag"), "already_in_irw")
+        po.assert_called_once()
+
+    def test_sheet_failure_is_not_fatal(self):
+        with mock.patch("irw_discover_updated._load_existing_irw_dois",
+                        side_effect=OSError("sheet down")):
+            self.assertEqual(irw_batch_updated._deposit_already_in_irw(
+                "https://data.mendeley.com/datasets/7wfgz62xgs/1", ""), "")
+
+
 if __name__ == "__main__":
     unittest.main()
