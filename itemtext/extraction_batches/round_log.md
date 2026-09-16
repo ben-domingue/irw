@@ -19428,3 +19428,42 @@ available without charge." Nothing reserved. No register row was written (a roun
 rows only, and this would be a `ship`) — flagged here in case an MHI row is worth its own entry.
 
 Cap (`batch_230`) not reached; queue has 187 pending after this round.
+
+## batch_223 — 2026-09-16T00:45-07:00
+
+3 tables claimed. **1 written / 2 blocked / 0 failed** — yield 33%, breaker not tripped
+(blocked does not count; both blocks are determinate, retry test NO).
+
+- `wesselmann_2018_pcl` — **done**. 100 rows (20 items x 5 levels), `mapping_basis=data_labels`
+  from the PLOS S1 `.sav` variable labels (CC BY 4.0), item code = source column name
+  (pattern 1), so verification is NOT_NEEDED and no `verify_*.R` is owed. PCL-5 rights:
+  applied the register's existing `ship_with_note` (NCPTSD public domain).
+- `wesselmann_2018_trait_anxiety` — **blocked**, instrument rights. 7 STAI Form Y-2 T-Anxiety
+  items; the register's settled STAI `block` (2026-09-08 irw#2123) applied, not re-derived,
+  and re-confirmed at Mind Garden (fee-to-administer + permission gate). CC BY deposit does
+  not launder it. Block is *effective* here — codes are opaque (`trait1..trait7`).
+- `whodas_BrummerHoffman_2021` — **blocked**, instrument rights. WHODAS 2.0 12-item, WHO
+  reserves a licence to reproduce plus CC BY-NC-SA 3.0 IGO. New `block` row written to
+  `instrument_rights_register.csv`. Same deposit/script as `wemwbs_BrummerHoffman_2021`
+  (blocked in batch_221). Caveat per irw#2101/#2123: the live *response* table's codes
+  (`whodas_walking`, `whodas_dressing`, ...) already gloss item content, so the block is
+  only partly effective.
+
+Gates: normalize_nulls fixed 100 lines; audit_batch **PASS 1/1, no anomalies** (no WARNs, so
+nothing owed under Step 5c); verify_batch MISSING(exempt) — correct for a data_labels table;
+lint_verification 2 rows, clean; `irw-validate` ok, 2 checks nothing to report.
+`check_provenance.R` exits 1 on a **pre-existing** issue — `tian2026_digital_competence` ships
+IRW-generated English with no issues-page entry. None of this round's tables are implicated;
+not a batch_223 gate failure, but it will keep failing every round until that line is added.
+
+Step 5b re-check of the round's own claims, against the `.sav` directly (not the agent's report):
+- `ptsd` composite equals the plain unreversed mean of `pcl1..pcl20`, **max |diff| = 0.0** — confirmed.
+- Correlations confirmed to 3 dp: distress +0.732, traitanx +0.765, stateanx +0.714, support -0.511.
+- Item means confirmed: low pcl3 0.469 / pcl16 0.562, high pcl20 1.578 / pcl17 1.421 / pcl19 1.291.
+- All 20 shipped `item_text` values are character-identical to the `.sav` variable labels; 0 value-label
+  sets in the file, so the 0-4 anchors are correctly sourced from the NCPTSD form, not invented.
+- One correction to the agent's report: the file has **129 rows** (117 complete on all 20 items),
+  not N=128. The correlations reproduce exactly, so this is a pairwise-N slip in the prose only —
+  no shipped value depends on it.
+
+Two blocked tables both have rows in `itemtables/pending_index_notes.csv`.
