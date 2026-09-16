@@ -9,7 +9,7 @@ the `enem*` tables are a standing exclusion in the item-text skill (see
 
 | script | does |
 |---|---|
-| `01_pdf_sourced_2023.py` | the five items absent or truncated in the DOSVOX text, transcribed from the standard AZUL PDF (54804, 60332, 78578, 81742, 125902) |
+| `01_pdf_sourced_2023.py` | the four items the accessibility booklet replaces with other items (54804, 78578, 81742, 125902), transcribed from the standard AZUL PDF, plus a replacement description for the one figure INEP declined to describe (60332) |
 | `02_parse_dosvox_2023.py` | parses the four DOSVOX screen-reader plain-text files into item stems and options, keyed on the file's own `QUESTÃO` position |
 | `03_join_2023.py` | joins position → `CO_ITEM` via `ITENS_PROVA_2023.csv` at the regular LARANJA booklet, attaches `TX_GABARITO` as `correct_response`, emits the four `__items.csv` |
 | `04_validate.sbatch` | the original item/resp-set gate run, against the PRE-#1942 response CSVs |

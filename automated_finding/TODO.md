@@ -3,6 +3,26 @@
 Currently open action items only. For the full batch-by-batch history and
 context behind these (and everything already resolved), see `BATCH_LOG.md`.
 
+## From the 2026-09-14 repos weekly batch
+
+- [x] **DR-NTU 10.21979/N9/P5WUGI** — taken on Ben's NC approval
+  (2026-09-15): six `nguyen_2026_factcheck_*` tables, PR #2186, uploaded to
+  the Redivis draft, not released.
+
+- [x] **UK Data Service ReShare 858431 (The Great Friendship Project)** —
+  skipped: 56 respondents, below datastandard.md's flat 100-id floor.
+
+- [ ] **Science Data Bank 10.57760/sciencedb.0103e** (personality,
+  resilience, social support in Chinese college students) — `no_usable_file`
+  unverified because the file API needs a login; check the landing page by
+  hand.
+
+- [ ] **All 14 `HIGH_YIELD_TERMS` still owe an OSF pass** — OSF timed out on
+  every query this run (`api.osf.io` read timeouts, not per-term false
+  positives). Watermarks did not advance, so the next weekly/monthly repos
+  run re-covers them automatically; no action needed unless OSF is still
+  down next time. See BATCH_LOG.md 2026-09-14.
+
 ## From the 2026-09-08 PLOS weekly batch
 
 - [ ] **Sánchez 2020 (`10.1371/journal.pone.0236940`) is held on one

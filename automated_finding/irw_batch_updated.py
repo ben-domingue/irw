@@ -261,7 +261,12 @@ def _dataverse_files(url: str, doi: str) -> tuple:
             "Dataverse candidate can be triaged until it lifts.")
     r.raise_for_status()
     latest = r.json().get("data", {}).get("latestVersion", {})
-    license_raw = (latest.get("license") or {}).get("name", "") or latest.get("termsOfUse", "")
+    # Dataverse < 5.10 returns license as a bare string ("CC0"), newer as
+    # {"name": ..., "uri": ...}. The dict-only read crashed on older
+    # installations (datahub.tec.mx, PLOS 10.1371/journal.pone.0327226).
+    lic = latest.get("license") or {}
+    license_raw = (lic.get("name", "") if isinstance(lic, dict) else str(lic)) \
+        or latest.get("termsOfUse", "")
     out, oversized = [], []
     for f in latest.get("files", []):
         df = f.get("dataFile", {})
@@ -275,28 +280,79 @@ def _dataverse_files(url: str, doi: str) -> tuple:
     return out, license_raw, oversized
 
 
-def _osf_files(url: str) -> tuple:
-    node_id = [s for s in url.rstrip("/").split("/") if s][-1]
-    r = requests.get(
-        f"https://api.osf.io/v2/nodes/{node_id}/",
-        headers=UA, timeout=30)
+def _osf_license(kind: str, guid: str, params: dict) -> str:
+    r = requests.get(f"https://api.osf.io/v2/{kind}/{guid}/",
+                     params=params, headers=UA, timeout=30)
     r.raise_for_status()
-    license_raw = (r.json().get("data", {}).get("relationships", {})
-                   .get("license", {}).get("data", {}) or {}).get("id", "")
-    r2 = requests.get(
-        f"https://api.osf.io/v2/nodes/{node_id}/files/osfstorage/",
-        headers=UA, timeout=30)
-    r2.raise_for_status()
+    return (r.json().get("data", {}).get("relationships", {})
+            .get("license", {}).get("data", {}) or {}).get("id", "")
+
+
+def _osf_files(url: str) -> tuple:
+    # The guid is the first path segment. Taking the last one broke on
+    # "osf.io/ajkh4/?view_only=<key>" (id read as "?view_only=...") and on
+    # "osf.io/ajkh4/files/". A view-only key must ride along on every API
+    # call, or a private-but-shared node answers 401.
+    parsed = urlparse(url)
+    m = re.match(r"/([A-Za-z0-9]{5})(?:/|$)", parsed.path or "")
+    if not m:
+        return [], "", []
+    guid = m.group(1).lower()
+    params = {}
+    vo = re.search(r"view_only=([A-Za-z0-9]+)", parsed.query or "")
+    if vo:
+        params["view_only"] = vo.group(1)
+
+    # A guid names a project, a registration or a single file, and
+    # /v2/nodes/ answers 404 for the other two ("osf.io/3h5a7" in PLOS
+    # 10.1371/journal.pone.0233137 is one .xlsx). Ask what it is first.
+    r = requests.get(f"https://api.osf.io/v2/guids/{guid}/",
+                     params=params, headers=UA, timeout=30)
+    r.raise_for_status()
+    data = r.json().get("data", {})
+    kind = data.get("type", "")
     out, oversized = [], []
-    for f in r2.json().get("data", []):
-        attrs = f.get("attributes", {})
-        name = attrs.get("name", "")
-        dl = f.get("links", {}).get("download", "")
+    if kind == "files":
+        attrs = data.get("attributes", {})
+        name, size = attrs.get("name", ""), attrs.get("size") or 0
+        dl = data.get("links", {}).get("download", "")
+        parent = re.search(r"/resources/([a-z0-9]{5})/",
+                           data.get("links", {}).get("move", ""))
+        license_raw = _osf_license("nodes", parent.group(1), params) if parent else ""
         if name.lower().endswith(TABULAR_EXT) and dl:
-            if (attrs.get("size") or 0) > MAX_FILE_BYTES:
-                oversized.append((name, attrs.get("size")))
+            if size > MAX_FILE_BYTES:
+                oversized.append((name, size))
+            else:
+                out.append((dl, name, size))
+        return out, license_raw, oversized
+    if kind not in ("nodes", "registrations"):
+        return [], "", []
+    license_raw = _osf_license(kind, guid, params)
+
+    # Data usually sits one or two folders down ("Data/", "Study 1/raw/");
+    # reading only the storage root reported those nodes as no_usable_file.
+    def walk(listing_url, depth):
+        r2 = requests.get(listing_url, params=params, headers=UA, timeout=30)
+        r2.raise_for_status()
+        for f in r2.json().get("data", []):
+            attrs = f.get("attributes", {})
+            name = attrs.get("name", "")
+            if attrs.get("kind") == "folder":
+                sub = ((f.get("relationships", {}).get("files", {})
+                        .get("links", {}).get("related", {})) or {}).get("href", "")
+                if sub and depth < 2:
+                    walk(sub, depth + 1)
                 continue
-            out.append((dl, name, attrs.get("size") or 0))
+            dl = f.get("links", {}).get("download", "")
+            if name.lower().endswith(TABULAR_EXT) and dl:
+                if vo:
+                    dl += ("&" if "?" in dl else "?") + f"view_only={vo.group(1)}"
+                if (attrs.get("size") or 0) > MAX_FILE_BYTES:
+                    oversized.append((name, attrs.get("size")))
+                    continue
+                out.append((dl, name, attrs.get("size") or 0))
+
+    walk(f"https://api.osf.io/v2/{kind}/{guid}/files/osfstorage/", 0)
     return out, license_raw, oversized
 
 

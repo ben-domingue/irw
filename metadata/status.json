@@ -1,54 +1,54 @@
 {
-  "generated": "2026-09-08T06:06:40-0700",
+  "generated": "2026-09-15T17:27:56+0000",
   "source": "metadata/11_status.R -- local pipeline CSVs, no Redivis calls",
-  "n_tables": 4238,
+  "n_tables": 4273,
   "coverage": {
     "tags": {
-      "n": 4176,
-      "pct": 98.5
+      "n": 4174,
+      "pct": 97.7
     },
     "tags_by_column": {
       "age range": {
         "n": 3079,
-        "pct": 72.7
+        "pct": 72.1
       },
       "child age (for child-focused studies)": {
-        "n": 714,
+        "n": 715,
         "pct": 74.7,
-        "denominator": 956,
+        "denominator": 957,
         "of": "tables whose `age range` is Child (<18y) or Mixed",
-        "pct_of_all_tables": 16.8
+        "pct_of_all_tables": 16.7
       },
       "sample": {
-        "n": 3766,
-        "pct": 88.9
+        "n": 3765,
+        "pct": 88.1
       },
       "construct type": {
-        "n": 2304,
-        "pct": 54.4
+        "n": 2305,
+        "pct": 53.9
       },
       "measurement tool": {
-        "n": 4138,
-        "pct": 97.6
+        "n": 4136,
+        "pct": 96.8
       },
       "item format": {
-        "n": 4030,
-        "pct": 95.1
+        "n": 4028,
+        "pct": 94.3
       },
       "primary language(s)": {
-        "n": 3946,
-        "pct": 93.1
+        "n": 3944,
+        "pct": 92.3
       },
       "construct name": {
-        "n": 2315,
-        "pct": 54.6,
+        "n": 2316,
+        "pct": 54.2,
         "kind": "description",
         "note": "free text, not a controlled vocabulary -- a fill rate, not a coverage target (#1837)"
       }
     },
     "itemtext": {
-      "n": 755,
-      "pct": 17.8
+      "n": 1316,
+      "pct": 30.8
     }
   },
   "tags_by_shard": {
@@ -58,13 +58,13 @@
       "pct": 100
     },
     "item_response_warehouse_2": {
-      "n_tables": 966,
-      "tagged": 964,
-      "pct": 99.8
+      "n_tables": 964,
+      "tagged": 961,
+      "pct": 99.7
     },
     "item_response_warehouse_3": {
-      "n_tables": 983,
-      "tagged": 981,
+      "n_tables": 984,
+      "tagged": 982,
       "pct": 99.8
     },
     "item_response_warehouse_4": {
@@ -74,13 +74,13 @@
     },
     "item_response_warehouse_5": {
       "n_tables": 309,
-      "tagged": 256,
-      "pct": 82.8
+      "tagged": 255,
+      "pct": 82.5
     },
     "item_response_warehouse_6": {
-      "n_tables": 12,
-      "tagged": 7,
-      "pct": 58.3
+      "n_tables": 48,
+      "tagged": 8,
+      "pct": 16.7
     }
   },
   "orphan_tag_rows": 0
