@@ -1207,9 +1207,9 @@ yang_2023_perceived_value,done,batch_236,2026-09-16T20:03:40+00:00
 yang_2025_aiccs,done,batch_237,2026-09-16T13:21:43
 yang2026_efl_learner_perspective,done,batch_237,2026-09-16T13:21:43
 yang_2026_erq,blocked,batch_237,2026-09-16T13:21:43
-yang_2026_igd_benefits,pending,,
-yang_2026_igd_criteria,pending,,
-yang_2026_pars3,pending,,
+yang_2026_igd_benefits,done,batch_238,2026-09-16T13:47:59
+yang_2026_igd_criteria,blocked,batch_238,2026-09-16T13:47:59
+yang_2026_pars3,done,batch_238,2026-09-16T13:47:59
 ye_2025_q25_scale,pending,,
 yin_2022_gad7,pending,,
 yin_2022_values_importance,pending,,

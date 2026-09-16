@@ -20278,3 +20278,63 @@ Every claim below was re-derived from the cached source by the orchestrator, not
   status, not printed wording. Explained in `notes.csv`.
 
 Cap (`batch_240`) not reached; 142 pending.
+
+## batch_238 — 2026-09-16 13:38–13:55
+
+3 tables, 3 agents (one per table). **Written 2 / blocked 1 / failed 0.** Yield 2/3 (67%).
+Circuit breaker not tripped (0% failed).
+
+- **yang_2026_igd_benefits — done.** 4 items x 10 resp = 40 rows. Yang, Wang & Ramos (2026)
+  PLOS ONE 10.1371/journal.pone.0351550 (CC BY 4.0), Measures section prints all four questions.
+  mapping_basis=paper_order, text_source=translated_substitute, translation_source=study_supplied,
+  language=Chinese (no Chinese wording in either supplement, so the 2026-09-01 fallback applies).
+  Verification VERIFIED via route 1: live T1 M(SD) 4.444(2.337)/5.039(2.518)/4.090(2.318)/5.765(2.583)
+  vs published Table 3 4.44(2.34)/5.04(2.52)/4.09(2.32)/5.76(2.58), worst |diff| 0.005 on means;
+  signed T2-T1 change separates benefits from costs by sign independently. audit PASS.
+- **yang_2026_pars3 — done.** 3 items x 5 resp = 15 rows. Yang, Lu & Wang (2026) PLOS ONE
+  10.1371/journal.pone.0350928 (CC BY 4.0) — same paper as batch_237's blocked yang_2026_erq, but
+  unlike the ERQ the Measures section does reproduce all three PARS-3 stems. mapping_basis=paper_order,
+  translated_substitute / study_supplied / Chinese. Verification PARTIAL: item1*(item2-1)*item3
+  reproduces the S1 workbook's stored PA total for 1033/1033 respondents vs 406/1033 and 425/1033 for
+  the other two duration positions, pinning item2=duration decisively; the product is commutative so
+  intensity vs frequency (item1 vs item3) rests on paper order — correctly PARTIAL, not VERIFIED.
+  audit WARN, explained in notes (see below).
+- **yang_2026_igd_criteria — blocked, retry test NO.** 9 items crit1..crit9, resp 0/1, 2 waves.
+  Same paper as igd_benefits. Two determinate grounds: (1) no wording published — the Chinese 9-item
+  DSM-5 IGD Symptoms checklist is cited, not printed; S1 Data is a bare CSV with no label layer,
+  S1 File is a regression table plus sensitivity figures, and the body names only the nine constructs
+  (shipping those would be IRW-authored gloss); the defining validation paper (Yang et al. 2023,
+  Child Psychiatry Hum Dev) is Springer subscription-only. (2) Rights — the only retrievable wording
+  is APA's DSM-5 IGD criteria, permission-required. Block is effective: data/yang_2026_igd.py renames
+  d23n1..d23n9 to crit1..crit9, so no wording leaks via item codes. Row added to pending_index_notes.csv.
+  The agent deliberately did NOT write an instrument_rights_register.csv row (shared file, siblings
+  live; and the primary ground is non-availability) — the APA quote, URL and sha256 are in its notes
+  row if a human wants the row registered.
+
+**Step 3b instrument mismatch (dictionary fix needed).** `yang_2026_igd_benefits` is named for benefits
+and the dictionary Description reads "4 perceived-benefit-of-gaming rating items", but only TWO of the
+four items are benefit ratings. The instrument is a matched 2x2 — positive/negative impact x at present/
+in the future: benefit_a = short-term benefits, benefit_b = short-term COSTS, benefit_c = long-term
+benefits, benefit_d = long-term COSTS. The extraction follows the live data, and the mismatch is carried
+as a public_note. **The dictionary Description should be corrected.**
+
+**Step 5b orchestrator re-checks — both agent claims confirmed, two numbers corrected.**
+- The benefit/cost correlation evidence was re-computed on the live table (2061 person-wave rows,
+  waves pooled). The 2x2 valence split is confirmed, but the agent's note said a-c = .76 (actual .77)
+  and gave the cross-valence range as -.33 to -.42 (actual -.31 to -.42: a-b -.35, a-d -.33, c-b -.31,
+  c-d -.42). notes.csv corrected on both counts.
+- The pars3 1033/1033 fingerprint reproduces exactly under verify_batch.R. Confirmed as stated.
+
+**Step 5c — the one audit WARN is expected, not a defect.** pars3: 86.7% blank option_text, and item1/
+item2 have no option_text rows at all. The source publishes anchors for the frequency item only
+("less than once a month" = 1 to "daily" = 5); intensity and duration are genuine 5-point scales whose
+anchors the paper never prints, and unlabeled points are left blank rather than padded. Property of the
+source, not of the response data.
+
+**Gates:** normalize_nulls 0 of 2 normalized; audit_batch PASS=1 WARN=1; verify_batch PASS=2;
+lint_verification 0 ERROR / 0 WARN / 1 INFO (the igd_benefits evidence hedges but asserts a full
+item-axis tie — VERIFIED stands per the 2026-09-08 item-axis rule); irw-validate ok on both files;
+check_provenance clean for this batch (its 3 flagged IRW-generated tables are pre-existing and unrelated).
+
+Queue after this round: 936 done / 254 blocked / 139 pending / 59 excluded / 13 failed.
+Cap (batch_240) NOT reached — next round proceeds normally.
