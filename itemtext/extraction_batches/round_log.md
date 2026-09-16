@@ -19080,3 +19080,64 @@ No `blocked` tables this round, so no `pending_index_notes.csv` rows were owed.
 
 Queue after this round: 202 pending, 0 in_progress (888 done / 239 blocked / 59 excluded / 13 failed).
 Cap is `batch_230`; not reached.
+
+## batch_218 — 2026-09-15 23:26–23:45 PDT
+
+3 tables claimed, 3 agents (one per table, the 2026-09-11 setting), **3 written / 0 blocked / 0 failed — 100% yield.**
+No kills; all three agents ran to completion. Circuit breaker not tripped (0% failed).
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wang_2026_perceived_usefulness` | written, 15 rows (3 items × 5) | paper_explicit | VERIFIED |
+| `wang_2026_teaching_presence` | written, 40 rows (8 items × 5) | reconstructed | VERIFIED |
+| `warwas_2022_sharing_economy` | written, 16 rows (8 items × 2) | data_labels | NOT_NEEDED (exempt) |
+
+Gates: normalize_nulls 0 of 3 changed · audit_batch **3 PASS, no anomalies** · verify_batch 2 PASS +
+1 MISSING(exempt) · lint_verification 0 ERROR / 1 WARN / 0 INFO · irw-validate clean on all three ·
+check_provenance no new failure (the one table owing an issues-page line, `tian2026_digital_competence`,
+is pre-existing and not from this round).
+
+**Notable — the table name `wang_2026_teaching_presence` is wrong (Step 3b).** TP is *technology
+perception*. Confirmed by the orchestrator independently of the agent: the S1 Appendix heads the block
+"Technology Perception (TP)", the article says "technology perception (TP)" in its abstract and
+"incorporating Technology Perception (TP) and Technology Anxiety (TA)" in its framework section, and
+the string "teaching presence" appears **nowhere** in either the appendix or the article.
+`data/wang_2026_efl_tam.py` says outright that its construct names were inferred from column prefixes
+and never confirmed against item text — so the sibling `wang_2026_*` names deserve the same check. The
+shipped item text is correct and carries the right construct in `instrument`; only the table name and
+the dictionary Description ("TAM teaching-presence scale") are wrong. Renaming a published table is a
+human call — row added to `itemtables/pending_index_notes.csv`.
+
+**Notable — the TP renumbering batch_217 flagged as owed is now resolved.** The S1 Appendix prints
+TP1–TP12, the deposit holds 8 columns (TP3–TP6 dropped for low loadings), and the retained eight were
+renumbered *alphabetically*: live TP1..TP8 = appendix TP1, TP10, TP11, TP12, TP2, TP7, TP8, TP9. Proven
+rather than assumed — `verify_wang_2026_teaching_presence.R` re-ran in the orchestrator's own process
+and reproduces all eight published Table 2 VIFs to a total absolute deviation of 0.0016, the unique
+best of all 40320 permutations with the runner-up 0.0111 worse. Two negatively-worded items (live
+TP3/TP5) are stored **already reverse-scored** (they correlate +0.52…+0.60 with the other seven), so
+their `option_text` runs 1 = Strongly Agree … 5 = Strongly Disagree. That is a property of the deposited
+response data, not an itemtext defect; it is disclosed in the `public_note`.
+
+**Notable — a defect in the source paper's Table 2, recomputed and confirmed by the orchestrator.**
+The PU construct-level CA/CR/AVE row (0.874 / 0.909 / 0.665) is not PU's: the deposit's PU1–PU3 give
+0.765 / 0.865 / 0.680, and 0.874 / 0.909 / 0.666 is what the deposit's **BI1–BI5** block gives — the
+row is the BI block's numbers, exact to three decimals. The per-item VIF/loading rows the mapping
+actually relies on are correct for PU (1.626 / 1.554 / 1.500, recomputing to within 0.0003). Kept
+**below the issues-page bar**: it is a flaw in the paper, not a text-vs-table mismatch in shipped
+content. Note that batch_217's `wang_2026_attitude` cites the ATT reliability row as exact, which it
+is — the misalignment starts at the PU row.
+
+The single lint WARN (`wang_2026_perceived_usefulness` "VERIFIED but its evidence hedges") was reviewed
+and **VERIFIED was kept**. The hedge disclaims the correctness of the authors' own spreadsheet labelling
+and the administered Chinese wording — residuals that apply to every table shipped under the English
+fallback and that no route can close. The route itself distinguishes all three items (exact per-level
+count vectors, pairwise distinct; 3 of 9 deposit-vs-live comparisons equal, the diagonal only), so
+PARTIAL would misreport a complete route as an incomplete one.
+
+All three tables were administered in a language other than the one shipped (two Chinese, one Polish)
+and all three take the documented fallback: English in the base fields, `_translated` empty,
+`text_source=translated_substitute`, `translation_source=study_supplied`. No IRW-generated English, so
+no issues-page entries are owed.
+
+Queue after this round: 891 done / 239 blocked / 199 pending / 59 excluded / 13 failed. Cap is
+`batch_230`; not reached, next round proceeds normally.
