@@ -18297,3 +18297,93 @@ audit. The AQ-28 withdrawal above was ruled before the pause. Leads banked from 
 - The batch_192–194 verify scripts' single-statistic controls are weaker than the later whole-profile controls.
   This is moot while the heuristic tables are blocked.
 - `data/trevisan_2018_mscs.py` comment calls two mean-substitution imputations "data-entry errors".
+
+## batch_206 — 2026-09-15T20:02:33-07:00 (claim) → 20:2x (close), 3 tables, 3 agents
+
+**Numbering:** first round of the post-199 series. Highest existing directory was `batch_203` (the irw#1945
+rights line, which now holds 201/202/203), so "highest + 1" landed at 204, inside the 200–205 hole → **206**,
+per the Step 1 rule. `batch_199` was never created; the series is 198 → 206.
+
+**Yield: 2 written / 1 blocked / 0 failed** (67% written, 0% failed — well under the 30% breaker threshold,
+which counts only `failed`). 19G available at launch, no swap movement, no kills. Three agents (the
+2026-09-11 setting).
+
+**Written, both clean PASS on every gate:**
+- `turner_2022_cognitive_mediation` — 15 items × 5 levels, 75 rows. mapping_basis `reconstructed`,
+  verification route 1 (published per-item descriptives + route 1 on a re-run of the paper's own EFA),
+  status VERIFIED.
+- `turner_2022_sr_belief_change` — 9 items × 5 levels, 45 rows. mapping_basis `reconstructed`,
+  route 1+8, status **PARTIAL**, disclosed in `public_note`.
+
+Both are Turner, Chadha & Wood (2022), PLOS ONE 17(6):e0269928 (CC BY 4.0), item text from S2 File (DOCX);
+the CMBQb is the authors' own new instrument in their own CC BY supplement, so no register row and nothing
+quotable. The two halves split cleanly on the `.sav`'s `_CMgen` / `_SRchange` column suffixes, which
+`data/turner_2022_abcs.py` melts unchanged — the sibling-collision warning in the dispatch prompt did its job,
+neither agent wrote the other's files.
+
+**The hard part, and it was the same problem for both agents: S2 File numbers its items 1–24 by
+factor-loading RANK, not by the `Q<n>` codes the data carries, and not one of the five deposited `.sav`
+files has a single variable or value label** (`column_names_to_labels` empty throughout). So the
+S2-number → Q-code mapping had to be reconstructed by re-running the paper's EFA on its own S1 Data and
+matching published loadings. Both agents did this independently and agreed:
+- C-M half: re-run reproduces all 15 published loadings at a uniform **+0.0045 (sd 0.0012)**; 7 of the 15
+  codes are additionally pinned by Table 2's four published numbers each (M, SD, inter-item r range,
+  mean(SD) r), all reproducing **exactly**. The other 8 rest on loading order, where the smallest adjacent
+  gap is 0.007 — a 6× margin over the 0.0012 residual.
+- S-R half: eigenvalues 6.17/3.95 vs published 6.20/3.95 and %variance 25.69/16.46 exactly as printed; an
+  exhaustive search of all 9! = 362,880 permutations against both the loading and cross-loading columns
+  returns the shipped mapping as the minimiser (cost 0.000952, residuals ≤0.018).
+
+**Why S-R is PARTIAL and not VERIFIED:** S2 items 17 and 18 publish .693/.036 and .690/.037 —
+indistinguishable at printed precision, and the runner-up permutation (swapping exactly
+`Q34_SRchange` ↔ `Q35_Srchange`) costs only 6% more. That pair rests on route 8 instead: all four
+"other people must change" items (means 2.412–2.592) fall strictly below all five "the situation must change /
+I must leave it" items (2.720–3.192), a perfect 4/5 split, p = .0079 by chance. The `public_note` names both
+items. This is the status rule applied as written — the route pins a semantic class, not the individual pair.
+
+**Source defect found (recorded, not filed):** the S2 DOCX prints item 20's cross-loading as `0.71`, which is
+impossible in that solution and is an evident typo for `0.071` (replication gives 0.0704 for
+`Q22_SRchange`; no item exceeds 0.18). Separately, S2's cross-loading for the `Q36_CMgen` text (−.162) does not
+reconcile with the observed −.037 and reads as a second transcription error in the same table; `Q36`'s primary
+loading is isolated by .038, so its assignment is not at risk. Both agents hit the `0.71` independently, which
+is the corroboration. No public artifact, no issue filed.
+
+**Blocked — `tutrin_2020_meq30`, on INSTRUMENT RIGHTS, not access. Retry test: NO (determinate).**
+The MEQ30's own scoring appendix reserves a right: *"The MEQ30 is freely provided for non-commercial use."*
+(Barrett, Johnson & Griffiths 2015, J Psychopharmacol 29(11):1182-1190, doi:10.1177/0269881115609019,
+Appendix 2.) A `block` row was added to `instrument_rights_register.csv` (74 → 82 records; family MEQ).
+A permissive deposit does not launder a restricted instrument (2026-09-08), and the administered Russian is a
+derivative, so the CC0 Dataverse deposit does not cure it. **Orchestrator re-checked this at Step 5b rather than
+taking it on report**, because it is a determinate block that writes a permanent register row: the clause is
+verbatim at the quoted sha256 (`1309af3a…c49f`), and `pdftotext` context confirms the agent's key claim that it
+sits immediately after the factor-scoring key in the appendix printing the stand-alone instrument — i.e. a term
+on the instrument, not Sage's article reprints notice. Also confirmed: no MEQ item text has ever shipped in the
+corpus, so nothing needs withdrawing.
+
+The wording was located and **fully recoverable** — `FFR_190items_surveyRus_raw_scored.tab`
+(doi:10.7910/DVN/DEJQM4, CC0) has two stacked header rows, and at columns 82–96 row 0 carries canonical MEQ30
+English *prefixed with the very integer the IRW code uses* (`"35.  Freedom from the limitations of your personal
+self…"` → `MEQ_35`), row 1 the administered Russian. Mapping would have been `data_labels`, 15/15 verifiable by
+header diff; only the clause stopped it. Recorded in `pending_index_notes.csv` so nobody repeats the search.
+
+**Step 3b mismatch on that table:** it is named `meq30` but holds only the MEQ30's **15-item Mystical factor**
+(MEQ30 numbering 4,5,6,9,14,15,16,18,20,21,23,24,25,26,28) — the source column header says so outright. The code
+integers are the 190-question freediving survey's numbering, not MEQ30 1–30, and live resp is 1–5 where the
+MEQ30 is scored 0–5. Neither changed the outcome. Codes are bare `MEQ_9`…`MEQ_83`, so no wording leaks through
+the response table.
+
+**Gates:** `normalize_nulls.R` fixed 2/2 files; `audit_batch.R` **2 PASS, zero WARN** (so Step 5c had nothing to
+explain — the first round in a while with no WARN to justify); `verify_batch.R` PASS=2; `lint_verification.R`
+2 rows, no problems; `irw-validate` ok on both, nothing to report; `check_provenance.R` clean for this batch.
+Neither written table is `data_labels`, so no NOT_NEEDED rows were owed. `mapping_verification.csv` 1013 → 1015.
+
+**Pre-existing, not this round's:** `check_provenance.R` still reports `tian2026_digital_competence` as owing an
+issues-page line. That is the stale local `irw_site` checkout recorded at batch_188 — the entry is already on
+`origin/main`. The 13 `translation_source=mixed` rows it lists are the standing REVIEW list, unchanged.
+
+**Beware the new register row's code regex** (`^MEQ[_ ]?[0-9]|mystical`): `antunez_2013_rmeq` and other `*meq*`
+tables are the reduced Morningness-Eveningness Questionnaire, an unrelated instrument. The row's own notes say
+to read the items before applying it. Checked: no other `meq`/`mystic` table is in the queue, and
+`PEMAIW_Qiu_2020_FFMQ` (batch_131) is the Five Facet Mindfulness Questionnaire — not affected.
+
+Cap is `batch_230`; not reached. 235 rows remain `pending`, 0 `in_progress`.
