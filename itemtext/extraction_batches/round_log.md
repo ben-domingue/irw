@@ -19751,3 +19751,62 @@ option_text ships flipped for D1, D3, D4, D5, D10, D14, D15, D16 (α as stored 0
 published value; flipping them back gives 0.593).
 
 Cap (batch_230) not yet reached; next round proceeds.
+
+## batch_230 — 2026-09-16 02:46–03:0x
+
+3 tables claimed, 3 agents (one per table). **2 written / 1 blocked / 0 failed** — yield 2/3 (67%).
+Circuit breaker: 0% failed, does not trip. No rate limit or spend cap hit.
+
+| table | outcome | mapping_basis | verification |
+|---|---|---|---|
+| `wu2026_liking` | written | `paper_explicit` | VERIFIED |
+| `wu_2024_resilience` | written | `reconstructed` | PARTIAL |
+| `wu2021_swls` | blocked (instrument rights) | — | n/a |
+
+**Gates, all foreground, all clean:** `normalize_nulls.R` 0 of 2 normalized · `audit_batch.R` PASS×2,
+"no anomalies" (so Step 5c is empty — there were no WARNs to explain) · `verify_batch.R` PASS×2 ·
+`lint_verification.R` 2 rows, no problems · `irw-validate` ok on both · `check_provenance.R` no failure
+(its one flagged table, `tian2026_digital_competence`, is pre-existing and not from this round).
+
+**`wu2026_liking`** — Wu, Yahaya, Tai & Ren (2026) PLOS ONE 21(4):e0342855, CC BY 4.0. The ten "items" are
+ten ceramic vase PHOTOGRAPHS, not ten questions: every code carries the same statement, "This vase is
+pleasing to see.", and Fig 1 presents the vases as images with no textual description. The agent invented no
+descriptions — `description_source` left empty, disclosed in a `public_note`. Route 1 on Fig 2's published
+per-vase means: largest |observed−published| = 0.005 against a 0.02 tolerance, 0/20000 random permutations
+match, and the reversed reading misses by up to 2.70 so resp 1 = Strongly Disagree is settled. `option_text`
+given only for resp 1 and 7; 2–6 left blank rather than padded.
+
+**`wu_2024_resilience`** — Wu et al. (2024) PLOS ONE 10.1371/journal.pone.0312597. Step 3b mattered and was
+done: the instrument is the **Brief Resilience Scale** (Smith et al. 2008), *not* CD-RISC, so the batch_229
+CD-RISC register block does not reach it. PARTIAL, honestly: routes 6+3 pin the two polarity classes
+({B1,B3,B5} vs {B2,B4,B6}) and reproduce the paper's r = −0.360 exactly, but do not establish order *within*
+each class, so it is not VERIFIED.
+
+**`wu2021_swls`** — blocked, and this is a settled verdict applied rather than a new one derived:
+`instrument_rights_register.csv` row 20 (ruled block by Ben 2026-09-09) names `wu2021_swls` by name. The
+orchestrator re-read row 20 and confirmed it. Step 3b confirmed the table name is CORRECT — two independent
+checks (the deposit's 生活满意度 column is exactly the raw mean of E1..E5, max diff 0.0 over 564 rows; and
+Data_Sheet_2.PDF §5 prints the Chinese SWLS verbatim). Retry test NO. Row added to
+`itemtables/pending_index_notes.csv`.
+
+**Step 5b changed an answer — one agent finding did NOT survive re-checking.** The resilience agent reported,
+as an incidental out-of-scope finding, that sibling `wu_2024_self_control` "is stored in the opposite direction
+from the paper's scoring": raw C-block vs video-addiction gives +0.137 where the paper reports −0.453. The
+magnitude reproduces (I get +0.140, n=560) but the *interpretation* is wrong, and a whole-scale flip gives only
+−0.140, nowhere near −0.453. Keying the block by its own polarity structure — {C1,C3,C5} against
+{C2,C4,C6,C7}, which the inter-item correlation matrix separates cleanly (within-class +0.55…+0.70,
+cross-class −0.30…−0.47) — yields **r = −0.45**, matching the paper. So `wu_2024_self_control` is stored RAW
+with mixed keying, exactly the convention `wu_2024_resilience` uses; there is no defect and **no issue was
+filed**. The false lead never reached `notes.csv` or `provenance.csv` — it lived only in the agent's report —
+so nothing on disk needed correcting. (Also worth noting: `wu_2024_video_addiction`, not
+`wu_2024_sfv_addiction`, is the table's real name.)
+
+**Carried forward, unchanged from batch_229 and NOT fixed by this round** (a dictionary problem, unaffected by
+the SWLS block): four sibling table names are wrong — `wu2021_empathy` is really Occupation Expectation,
+`wu2021_burnout` is Basic Empathy, `wu2021_career_expectation` is positive/negative affect, `wu2021_panas` is
+Learning Burnout. `wu2021_swls` and `wu2021_resilience` are the two correctly named.
+
+Queue after this round: 163 pending, 0 in_progress.
+
+**CAP REACHED.** batch_230 is the cap named in Step 0 of the round prompt. Stopping; the next round needs a
+human to raise the cap.

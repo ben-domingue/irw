@@ -1183,9 +1183,9 @@ wolters2026_wi,done,batch_228,2026-09-16T01:41:46
 wu2021_burnout,done,batch_229,2026-09-16T02:42:15-07:00
 wu2021_panas,blocked,batch_229,2026-09-16T02:42:15-07:00
 wu2021_resilience,blocked,batch_229,2026-09-16T02:42:15-07:00
-wu2021_swls,pending,,
-wu_2024_resilience,pending,,
-wu2026_liking,pending,,
+wu2021_swls,blocked,batch_230,2026-09-16T03:01:18
+wu_2024_resilience,done,batch_230,2026-09-16T03:01:18
+wu2026_liking,done,batch_230,2026-09-16T03:01:18
 wu2026_novel,pending,,
 wu2026_typical,pending,,
 wurm_2016_mdi,pending,,
