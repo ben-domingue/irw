@@ -298,13 +298,25 @@ mkdir -p "$LOG_DIR"
   # in_progress rows and an audit_report.csv in the batch it just built. This does not
   # try to repair anything -- reconciling a half-finished round is a human decision,
   # and the work is usually salvageable rather than lost.
+  # One exception, found the hard way on 2026-09-15 by batch_216: a round that
+  # BLOCKS every table it claimed writes no __items.csv, so audit_batch has
+  # nothing to audit and produces no audit_report.csv. That round is complete --
+  # notes.csv, provenance.csv, the queue rows and the commit were all correct --
+  # yet this check called it dead and halted the chain. So demand the audit report
+  # only when the round actually wrote at least one items CSV. Everything else
+  # about the post-condition is unchanged: zero in_progress rows and a batch
+  # directory are still required, because those are what batch_020 lacked.
   left="$(awk -F, 'NR>1 && $2=="in_progress"' "$QUEUE" | wc -l)"
-  if [[ "$left" -gt 0 || -z "$batch_dir" || ! -f "$batch_dir/audit_report.csv" ]]; then
+  wrote_any=0
+  if [[ -n "$batch_dir" ]] && compgen -G "$batch_dir/*__items.csv" >/dev/null; then
+    wrote_any=1
+  fi
+  if [[ "$left" -gt 0 || -z "$batch_dir" || ( "$wrote_any" -eq 1 && ! -f "$batch_dir/audit_report.csv" ) ]]; then
     echo
     echo "ERROR: the agent exited 0 but the round did NOT complete."
     [[ "$left" -gt 0 ]] && echo "  - $left row(s) still in_progress"
     [[ -n "$batch_dir" ]] || echo "  - no new batch directory was created (Step 3 never finished)"
-    [[ -z "$batch_dir" || -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
+    [[ "$wrote_any" -eq 0 || -f "$batch_dir/audit_report.csv" ]] || echo "  - no audit_report.csv in $batch_dir (Step 4 never finished)"
     echo
     if [[ -n "$batch_dir" ]]; then
       echo "Do not re-run. The extraction work is probably intact -- check $batch_dir,"
