@@ -20051,3 +20051,27 @@ ships and no issues-page line is owed until it is).
 
 Queue after this round: 920 done / 252 blocked / 157 pending / 59 excluded / 13 failed.
 Cap (batch_240) not reached.
+
+## batch_233 — 2026-09-16T12:16 (3 tables, 3 agents)
+
+**xu_2022_ples_aa, xu_2025_hcq_p, yandun2026_logical_thinking**
+
+written 3 / blocked 0 / failed 0 — **yield 3/3 (100%)**. Circuit breaker not tripped.
+
+Gates: `normalize_nulls.R` fixed 1 of 3 (xu_2025_hcq_p, 295 lines). `audit_batch.R` **3 PASS, zero WARN** (so nothing owed at Step 5c). `verify_batch.R` 2 PASS + 1 MISSING(exempt) — xu_2022_ples_aa is `data_labels` and correctly ships no verify script. `lint_verification.R` 3 rows, clean. `irw-validate` ok on all three.
+
+`check_provenance.R` exits 1, but on **pre-existing** rows, not this batch: the three tables owing an issues-page line are `tian2026_digital_competence`, `vanteffelen_2020_foa`, `wang_2025_green_space_wellbeing`. None of batch_233's tables declare IRW-generated content — two are `translated_substitute`/`study_supplied` and one is `study_materials`/`official_instrument_english`. Nothing in this round caused the non-zero exit.
+
+Verification rows: xu_2025_hcq_p VERIFIED (routes 1+3: 49/49 per-item means match to ≤0.005, SDs to ≤0.0005, all 49 (mean,SD) pairs distinct; total 224.12/38.421/144–280 reproduced). yandun2026_logical_thinking VERIFIED (positional_header_diff: claimed column order reproduces 400/400 live cells and is the only 1 of 24 permutations that does). xu_2022_ples_aa NOT_NEEDED (header string carries code and wording together; the processing script splits that same header).
+
+**Step 5b re-checks — all three escalations CONFIRMED against live data:**
+
+1. *xu_2022_ples_aa response data does not reproduce its paper.* Live: 3152 rows, 197 ids, 16 items, domain means 2.0/2.2/2.5/2.5, grand 2.30. Paper Fig 3: 2.5767/2.4524/2.5225/2.3426, grand 2.474 (N=189). The direction inverts — the paper's highest domain is the live lowest, and item_1.1 is 1.8 live against its published 2.74 maximum. The agent's arithmetic that no subsetting closes the gap (the 8 dropped "unfamiliar" cases can move the grand mean by at most 0.056) stands. A real response-table defect, worth its own issue; it does not touch the item↔text tie.
+2. *yandun2026_logical_thinking metadata is stale.* Live table has 4 items (log1–log4), 50 ids, 400 cells. `metadata.csv` records 300 responses and 3 items, and the dictionary Description reads "…1-5 scale; 3 items; pre/post intervention". Both should read 4 items / 400 responses.
+3. *PII in the yandun figshare deposit, not in IRW.* `DATA_MATRIX_TRANSLATED.xlsx` sheet "Pre-Intervention" column C is headed `NAME` and carries a full personal name for each of the 50 children (rows 4–53), under CC BY. It does **not** reach IRW: live `id` values are integers 1–50 and no name appears in the response or item-text table. Flagged against the corpus-wide PII rule as a property of the upstream deposit.
+
+Also: the hcq_p agent predicted `irw-validate` would flag `resp_ambiguous` (its 23 reverse-scored items ship opposite anchors). It did not — per-item direction differences are legitimately unflagged, as `aip_vangsness_2019` already establishes. Clean result, not a missed check.
+
+Rights finding escalated, no register row written (rounds may not write `ship`): the HCQ-P developer's site thecomfortline.com (fetched 2026-09-16, sha256 `78a72dbf80557301044cb677ab75fb4b0e488dc35d3415478cf361f0cc3faec6`) carries a positive blanket grant — "you do NOT need permission to use anything on the site, including the instruments" — with no fee/NC/ND/no-redistribution clause. That is the quote and hash for a Kolcaba comfort-questionnaire family (GCQ/HCQ-P/NCQ) `ship` row if Ben wants one.
+
+Queue after round: 154 pending, 0 in_progress. Cap (batch_240) not reached.
