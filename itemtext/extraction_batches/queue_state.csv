@@ -1201,9 +1201,9 @@ yang_2023_consumption_intent,done,batch_234,2026-09-16T12:33:20
 yang_2023_emotional_eating_cesd,done,batch_235,2026-09-16T12:46:22
 yang_2023_emotional_eating_ders,done,batch_235,2026-09-16T12:46:22
 yang_2023_emotional_eating_eesr,done,batch_235,2026-09-16T12:46:22
-yang_2023_emotional_eating_uppsp,pending,,
-yang_2023_green_brand_image,pending,,
-yang_2023_perceived_value,pending,,
+yang_2023_emotional_eating_uppsp,done,batch_236,2026-09-16T20:03:40+00:00
+yang_2023_green_brand_image,done,batch_236,2026-09-16T20:03:40+00:00
+yang_2023_perceived_value,done,batch_236,2026-09-16T20:03:40+00:00
 yang_2025_aiccs,pending,,
 yang2026_efl_learner_perspective,pending,,
 yang_2026_erq,pending,,

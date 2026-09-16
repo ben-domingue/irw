@@ -20152,3 +20152,61 @@ both are itemtext gaps in the source, not defects in the response data.
    doing this; the repo script predates the rule and still does it.
 
 Cap (`batch_240`) not yet reached.
+
+## batch_236 — 2026-09-16T20:03:40Z
+
+3 tables claimed, 3 agents (one per table). **written 3 / blocked 0 / failed 0 — yield 3/3 (100%).**
+Circuit breaker not tripped (0% failed). Queue after: 932 done, 252 blocked, 145 pending, 59 excluded, 13 failed.
+
+Tables: `yang_2023_emotional_eating_uppsp`, `yang_2023_green_brand_image`, `yang_2023_perceived_value`.
+All three are "pass with caveats" — every caveat is a finding about the source or the dictionary, not a
+defect in what shipped.
+
+Gates: normalize_nulls fixed 2 of 3 files; audit_batch **3 PASS, no anomalies** (so no Step 5c WARNs to
+explain); verify_batch **PASS=3**; lint_verification 0 ERROR / 1 WARN / 0 INFO; `irw-validate` clean on all
+three; `check_provenance.R` clean for this batch (the 3 tables it names as owing an issues-page line are
+pre-existing and not from this round — ours are HELD, nothing uploaded). The one lint WARN is blank
+`option_text` on `yang_2023_green_brand_image`, which is correct-and-expected: the paper labels only the
+endpoints (1 = disagree, 5 = agree) and nothing was padded.
+
+All three tables carry a verification row, so no NOT_NEEDED rows were owed in either file. All three are
+**PARTIAL** — honestly so; in each case the route pins the block but not every within-block pair.
+
+### Step 5b — orchestrator re-check: three claims tested, three confirmed
+
+Every claim in this round that overrides a source or would become a public note was independently
+reproduced by the orchestrator. None had to be walked back.
+
+1. **The E/F table-name swap is real.** Recomputed all six per-letter-block alphas from the S1 CSV
+   (A .80748, B .77891, C .71195, D .74331, E .93354, F .84915; n=341) and read Tables 1 and 3 out of the
+   **JATS manuscript XML as markup, not OCR**. Both tables assign E1–E3 to *Consumption intention* (α .934)
+   and F1–F4 to *Customer perceived value* (α .849). E matches consumption intention to −.0005 and misses
+   perceived value by .085. So `data/yang_2023_green_brand.py` has **`yang_2023_perceived_value` and
+   `yang_2023_consumption_intent` swapped**. Reached independently by two agents this round and by batch_234.
+2. **The C3/C4 defect is real.** The S1 header is literally `…C1, C2, C4…` — no C3 column exists —
+   while Tables 1 and 3 both print C3. α{C1,C2,C4} = .71195 against the published .712.
+3. **The UPPS-P anchor override is justified.** Negative urgency {6,8,13,15} correlates **+0.537** with the
+   study's own CES-D total (positive urgency +0.479, premeditation −0.074, sensation seeking +0.322,
+   perseverance +0.014; n=494). Those items are worded in the impulsive direction, so the paper's printed
+   "1 (strongly agree) to 4 (strongly disagree)" would force a *negative* correlation. Raw 20-item α .8337
+   vs published .834, and the raw sum correlates r=1.000000 with the workbook's own SUPPSP total, confirming
+   the live table stores **unreversed** responses ({1,2,4,5,7,11,12,19} need reversing before summing).
+   Also confirmed UPPSP_1's header really is truncated to a single letter `I`.
+
+### Carried forward for a human
+
+- **Dictionary fix owed (#):** swap `yang_2023_perceived_value` / `yang_2023_consumption_intent`, or at
+  minimum correct both Descriptions — the former is currently described as a "3-item Customer Perceived
+  Value scale" and is not.
+- **Do not use this paper's Table 4** as mapping evidence: its descriptive rows are shifted relative to
+  their construct labels (noted independently in batch_234 and again here).
+- **A provenance correction owed to batch_234**, not a shipping error: it recorded Table 1 as image-only
+  because grep over the scraped article *page* returns 0 hits. The *manuscript XML* carries Tables 1 and 3
+  as real markup. Its OCR is corroborated character-for-character, so nothing it shipped is wrong — only
+  its account of the route. Worth fixing before that row is uploaded, and worth knowing generally: **for
+  PLOS, try `article/file?id=<doi>&type=manuscript` before concluding a table is image-only.**
+- **False lead, recorded so the next round doesn't re-chase it:** the CD-RISC rights-register row's
+  `match_item_code` regex `^C[0-9]{1,2}$` matches this table's C1/C2/C4, which are brand social-image
+  items, not resilience items. No register row applies.
+
+Cap (`batch_240`) not reached; 145 pending.
