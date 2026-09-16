@@ -31,9 +31,9 @@ class RoutingTest(unittest.TestCase):
                     "license": "cc-by", "n_responses": 10, "n_participants": 5,
                     "n_items": 2, "density": 1.0, "data_file": "d.sav"}
 
-        with mock.patch.object(irw_discover_plos, "_landing_url", return_value=landing), \
+        with mock.patch.object(irw_batch_updated, "_landing_url", return_value=landing), \
              mock.patch.object(irw_batch_updated, "process_one", side_effect=fake_deposit):
-            out = irw_discover_plos.triage_external_link(link, dict(BASE))
+            out = irw_batch_updated.triage_external_link(link, dict(BASE))
         return out, seen.get("row")
 
     def test_figshare_doi_reaches_resolver_and_keeps_plos_identity(self):
@@ -58,8 +58,8 @@ class RoutingTest(unittest.TestCase):
         self.assertEqual(out["flag"], "external_unresolved")
 
     def test_unresolvable_link_is_inconclusive(self):
-        with mock.patch.object(irw_discover_plos, "_landing_url", side_effect=OSError("down")):
-            out = irw_discover_plos.triage_external_link("https://doi.org/10.1/x", dict(BASE))
+        with mock.patch.object(irw_batch_updated, "_landing_url", side_effect=OSError("down")):
+            out = irw_batch_updated.triage_external_link("https://doi.org/10.1/x", dict(BASE))
         self.assertIn(out["flag"], irw_discover_plos.INCONCLUSIVE_FLAGS)
 
 
@@ -198,21 +198,21 @@ class TrailingPunctuationTest(unittest.TestCase):
             ("https://osf.io/abcde/,", "https://osf.io/abcde/"),
             ("https://doi.org/10.17863/CAM.121719);", "https://doi.org/10.17863/CAM.121719"),
         ]:
-            self.assertEqual(irw_discover_plos.strip_trailing_punctuation(raw), want)
+            self.assertEqual(irw_batch_updated.strip_trailing_punctuation(raw), want)
 
     def test_leaves_legitimate_urls_alone(self):
         for u in ["https://figshare.com/articles/dataset/x/31933275",
                   "https://osf.io/ajkh4/?view_only=13dbb2a2f98648499cbbe3cbbe8a439d",
                   "https://datahub.tec.mx/dataset.xhtml?persistentId=doi:10.57687/FK2/DCVIJU",
                   "https://doi.org/10.7910/DVN/UT9RVL"]:
-            self.assertEqual(irw_discover_plos.strip_trailing_punctuation(u), u)
+            self.assertEqual(irw_batch_updated.strip_trailing_punctuation(u), u)
 
     def test_extractor_strips_before_storing(self):
         html = ('Data Availability:</strong> All data are available from '
                 'https://doi.org/10.5061/dryad.j6g1c.</p>')
         avail = irw_discover_plos.extract_data_availability(html)
-        m = irw_discover_plos._RE_URL.search(avail)
-        self.assertEqual(irw_discover_plos.strip_trailing_punctuation(m.group(0)),
+        m = irw_batch_updated._RE_URL.search(avail)
+        self.assertEqual(irw_batch_updated.strip_trailing_punctuation(m.group(0)),
                          "https://doi.org/10.5061/dryad.j6g1c")
 
 
@@ -249,19 +249,19 @@ class FigshareIdTest(unittest.TestCase):
 
 class DataverseProbeTest(unittest.TestCase):
     def test_version_endpoint_identifies_dataverse(self):
-        with mock.patch.object(irw_discover_plos.requests, "get",
+        with mock.patch.object(irw_batch_updated.requests, "get",
                                return_value=_Resp({"status": "OK", "data": {"version": "6.8"}})) as g:
-            self.assertTrue(irw_discover_plos._is_dataverse_host("https://borealisdata.ca/collections/x"))
+            self.assertTrue(irw_batch_updated._is_dataverse_host("https://borealisdata.ca/collections/x"))
         self.assertEqual(g.call_args[0][0], "https://borealisdata.ca/api/info/version")
 
     def test_non_dataverse_host(self):
-        with mock.patch.object(irw_discover_plos.requests, "get",
+        with mock.patch.object(irw_batch_updated.requests, "get",
                                return_value=_Resp({"nope": 1})):
-            self.assertFalse(irw_discover_plos._is_dataverse_host("https://data.ru.nl/collections/di/d"))
+            self.assertFalse(irw_batch_updated._is_dataverse_host("https://data.ru.nl/collections/di/d"))
 
     def test_probe_failure_is_not_a_dataverse(self):
-        with mock.patch.object(irw_discover_plos.requests, "get", side_effect=OSError("down")):
-            self.assertFalse(irw_discover_plos._is_dataverse_host("https://example.org/x"))
+        with mock.patch.object(irw_batch_updated.requests, "get", side_effect=OSError("down")):
+            self.assertFalse(irw_batch_updated._is_dataverse_host("https://example.org/x"))
 
 
 if __name__ == "__main__":

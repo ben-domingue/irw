@@ -490,6 +490,123 @@ def resolve_data_files(row: dict) -> tuple:
 
 
 # ---------------------------------------------------------------------------
+# Data Availability links
+#   Shared by the article connectors (irw_discover_plos.py,
+#   irw_discover_pmc.py): both read a statement off an article, find the
+#   deposit it names, and hand it to the resolvers above. Kept here rather
+#   than in either connector -- both already import from this module, and a
+#   connector importing another connector would couple two scheduled runners
+#   through one's module-level constants.
+# ---------------------------------------------------------------------------
+
+_RE_URL = re.compile(r'https?://[^\s"\'<>]+')
+_RE_BARE_DOI = re.compile(r'\b10\.\d{4,9}/[^\s,;)"\'<>]+')
+
+# External repos with a resolver above. A statement naming one of these, or
+# any DOI, is worth following.
+_KNOWN_REPO_HOSTS = ("datadryad.org", "zenodo.org", "osf.io", "figshare.com",
+                     "dataverse.harvard.edu", "data.mendeley.com")
+
+# Sentence punctuation the scrape carries off the page: a statement reads
+# "... available from https://doi.org/10.5061/dryad.j6g1c." and the trailing
+# period lands inside the URL, which then 404s at the resolver. 13 of the 33
+# doi.org links in the 2026-09-15 backlog re-triage carried one; 10 resolve
+# once it is removed. A closing bracket is the same story ("(doi:10.18170/
+# DVN/WBO7LK)"). Kept deliberately narrow: characters that are legal inside a
+# DOI suffix but never end one.
+_RE_TRAILING_PUNCT = re.compile(r"""[.,;:)\]}>'"]+$""")
+
+
+def strip_trailing_punctuation(url: str) -> str:
+    return _RE_TRAILING_PUNCT.sub("", url.strip())
+
+def _landing_url(link: str) -> str:
+    """Where a doi.org / hdl.handle.net link lands. Resolvers dispatch on the
+    host, and a DOI link names no host."""
+    link = strip_trailing_punctuation(link)
+    host = (urlparse(link).netloc or "").lower()
+    if "doi.org" not in host and "hdl.handle.net" not in host:
+        return link
+    resp = requests.head(link, headers=UA, timeout=30, allow_redirects=True)
+    return resp.url
+
+
+def _is_dataverse_host(landing: str) -> bool:
+    """Does this host run Dataverse? Its version endpoint answers
+    {"status":"OK","data":{"version":...}} and nothing else does."""
+    parsed = urlparse(landing)
+    if not parsed.netloc:
+        return False
+    try:
+        r = requests.get(f"{parsed.scheme or 'https'}://{parsed.netloc}/api/info/version",
+                         headers=UA, timeout=15)
+        return bool(r.ok and (r.json().get("data") or {}).get("version"))
+    except Exception:
+        return False
+
+
+def triage_external_link(ext_link: str, base: dict) -> dict:
+    """Triage the deposit a Data Availability statement points at.
+
+    Until 2026-09-15 this connector recorded the link and flagged the row
+    no_usable_file without opening it. In that day's weekly run all 4
+    spot-checked links (figshare 5544883 and 31933275, OSF J45TH and U5XKW)
+    held the data, and the seen-DOI ledger retired every one. The repo
+    pipeline's resolvers already read these hosts, so reuse them.
+
+    The deposit's own licence is the one checked: the article's CC BY does
+    not cover a separately deposited file.
+    """
+    empty = {"n_responses": "", "n_participants": "", "n_items": "",
+             "density": "", "data_file": ""}
+    try:
+        landing = _landing_url(ext_link)
+    except Exception as e:
+        return {**base, **empty, "flag": "download_failed",
+                "reasons": f"could not resolve Data Availability link {ext_link}: "
+                           f"{type(e).__name__}"[:200]}
+
+    doi_m = _RE_BARE_DOI.search(ext_link) or _RE_BARE_DOI.search(landing)
+    doi = doi_m.group(0) if doi_m else ""
+    # Any Dataverse installation, not only Harvard's: _dataverse_files()
+    # finds the instance from the landing URL.
+    source = "dataverse" if "/dataset.xhtml" in landing and doi else ""
+    if not source and doi and _host_resolver(landing) is None:
+        # /dataset.xhtml is the classic Dataverse landing path; newer installs
+        # serve /collections/... instead, so ask the host what it runs rather
+        # than guessing from the URL. One cheap GET, and only on a link that
+        # would otherwise be discarded unopened.
+        source = "dataverse" if _is_dataverse_host(landing) else ""
+    if _host_resolver(landing) is None and not source:
+        return {**base, **empty, "flag": "external_unresolved",
+                "reasons": "no tabular-format Supporting Information file; data "
+                           f"link on a host with no resolver: {landing}"[:400]}
+
+    row = process_one({"source": source, "url": landing, "doi": doi})
+    reasons = f"via Data Availability link {landing} | {row.get('reasons', '')}"
+    return {**base, **{k: v for k, v in row.items()
+                       if k not in ("source", "title", "url", "doi")},
+            "reasons": reasons[:400]}
+
+
+
+def extract_external_link(text: str) -> str:
+    """The first repository or DOI link in a Data Availability statement.
+
+    Takes plain text, so each connector can extract the statement in its own
+    format (PLOS scrapes HTML, PMC reads JATS XML) and share this.
+    """
+    for m in _RE_URL.finditer(text or ""):
+        host = urlparse(m.group(0)).netloc
+        if any(h in host for h in _KNOWN_REPO_HOSTS) or "doi.org" in host:
+            return strip_trailing_punctuation(m.group(0))
+    # Statements often give a bare DOI ("doi: 10.5061/dryad.xxxx") with no
+    # URL scheme at all.
+    m = _RE_BARE_DOI.search(text or "")
+    return f"https://doi.org/{strip_trailing_punctuation(m.group(0))}" if m else ""
+
+
+# ---------------------------------------------------------------------------
 # Politeness: per-domain rate limiting
 # ---------------------------------------------------------------------------
 
