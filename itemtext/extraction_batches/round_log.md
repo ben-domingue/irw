@@ -20075,3 +20075,27 @@ Also: the hcq_p agent predicted `irw-validate` would flag `resp_ambiguous` (its 
 Rights finding escalated, no register row written (rounds may not write `ship`): the HCQ-P developer's site thecomfortline.com (fetched 2026-09-16, sha256 `78a72dbf80557301044cb677ab75fb4b0e488dc35d3415478cf361f0cc3faec6`) carries a positive blanket grant — "you do NOT need permission to use anything on the site, including the instruments" — with no fee/NC/ND/no-redistribution clause. That is the quote and hash for a Kolcaba comfort-questionnaire family (GCQ/HCQ-P/NCQ) `ship` row if Ben wants one.
 
 Queue after round: 154 pending, 0 in_progress. Cap (batch_240) not reached.
+
+## batch_234 — 2026-09-16T12:33 → 12:50
+
+3 tables claimed, 3 agents (one per table). **3 written / 0 blocked / 0 failed — yield 3/3 (100%).**
+
+- `yandun2026_memory` — 25 rows (5 items × 5 levels). Same figshare deposit as batch_233's sibling (doi:10.6084/m9.figshare.32114668.v1, CC BY 4.0), workbook indicator header row. mapping_basis=data_labels, text_source=translated_substitute / study_supplied, language=Spanish.
+- `yang_2018_cesd` — 80 rows (20 items × 4 levels). Yang et al. 2018 PLOS ONE 10.1371/journal.pone.0191632 (CC BY 4.0); the `.sav`'s own value labels for options, Radloff CES-D wording from PMC7543651 for the stems (the deposit's variable labels are bare placeholders `"01  e1"`…). mapping_basis=reconstructed, translated_substitute / mixed, language=Chinese.
+- `yang_2023_consumption_intent` — 20 rows (4 items × 5 levels). PLOS ONE 10.1371/journal.pone.0292633 (CC BY 4.0), Table 1. mapping_basis=paper_explicit, translated_substitute / study_supplied, language=Chinese.
+
+Gates: normalize_nulls 0 of 3 changed; audit_batch **PASS 3, no anomalies** (no WARNs, so Step 5c had nothing to explain); verify_batch **PASS=3**; lint_verification 3 rows, no problems; `irw-validate` ok on all three, nothing to report. `check_provenance.R` exits 1, but on three **pre-existing** tables from other rounds (tian2026_digital_competence, vanteffelen_2020_foa, wang_2025_green_space_wellbeing owe issues-page lines) — no batch_234 table appears in any failing list, and no vocabulary violation.
+
+Verification rows (all three, merged into mapping_verification.csv → 1083 rows): yandun2026_memory VERIFIED, yang_2018_cesd PARTIAL, yang_2023_consumption_intent PARTIAL. No NOT_NEEDED rows were owed — every written table carries a real verification row.
+
+**Step 5b re-checks — all three agent claims re-run by the orchestrator against live data, all CONFIRMED:**
+
+1. *`yang_2023_consumption_intent` and `yang_2023_perceived_value` are named the wrong way round.* This is the round's significant finding. `data/yang_2023_green_brand.py` sends S1 columns F1–F4 to `…consumption_intent` and E1–E3 to `…perceived_value`; the paper assigns them the opposite way in both Table 1 and Table 3. Re-running the per-block Cronbach alphas settles it from the data, not the paper's word: A .807 / B .779 / C .712 / D .743 / F .849 / E .934, reproducing all six published alphas to ≤0.0005. The F block is the .849 *Customer perceived value* factor and misses the .934 *Consumption intention* factor by .085. Per Step 3b the item text shipped is what the live data actually is (perceived-value wording, `instrument` = Customer perceived value), with a `public_note`. **The two IRW table names need a metadata fix, and the untouched sibling `yang_2023_perceived_value` carries the mirror-image defect.** No issue filed — left for the triage session, since renaming published tables is a human call.
+2. *`yang_2018_cesd` polarity and storage direction.* Re-ran: recoding live 1–4 → 0–3 and reversing {E4,E8,E12,E16} reproduces the deposit's own `depressionS` for **358/358** respondents and the published M=12.9/SD=9.0/range 0–46 (observed 12.877/8.979/0–46); no reversal matches 36/358. The quadruple ranks **1 of 4845** 4-subsets by mean residual r (0.282 vs best rival 0.254). PARTIAL is the right status — nothing published orders items *within* either polarity block.
+3. *`yandun2026_memory` column mapping.* Re-ran: the claimed column order 10–14 reproduces **500 of 500** live cells and is the only one of **120** permutations that does. Note the verify script's own caveat — this pins item↔text for all 5 items but not the option axis, whose points 2–4 are unlabelled.
+
+Also recorded from the yang_2023 source, for whoever takes the siblings: **Table 4's descriptive rows are shifted relative to their construct labels** (row 1 "Agribusiness image" 3.9/0.90 is the F block; row 5 "Perceived value" 4.1/0.79 is the D block) — do not use Table 4 as mapping evidence. And Table 1 is published **as an image only**, so all four `item_text` strings are OCR-grade transcription and deserve a human spot-check. Table 1's code labels are known to slip once (it prints C3 where the raw file has C4), which is why the within-pair order of F1/F4 and F2/F3 is PARTIAL rather than VERIFIED.
+
+Option anchors: `yandun2026_memory` and `yang_2023_consumption_intent` both publish endpoints only, so resp 2–4 ship blank `option_text`, unpadded. `yang_2018_cesd` ships E1's full four-anchor set on all twenty items (E5/E10/E15/E20 carry an abbreviated copy of the same anchors, the rest carry none) — disclosed in provenance.
+
+No rate limit, spend cap or kill this round; three agents, no retries. Queue after round: **151 pending, 0 in_progress**. Cap (batch_240) not reached.

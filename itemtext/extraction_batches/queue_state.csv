@@ -1195,9 +1195,9 @@ xu_2016_pqb,blocked,batch_232,2026-09-16T11:58:23-07:00
 xu_2022_ples_aa,done,batch_233,2026-09-16T12:16:17
 xu_2025_hcq_p,done,batch_233,2026-09-16T12:16:17
 yandun2026_logical_thinking,done,batch_233,2026-09-16T12:16:17
-yandun2026_memory,pending,,
-yang_2018_cesd,pending,,
-yang_2023_consumption_intent,pending,,
+yandun2026_memory,done,batch_234,2026-09-16T12:33:20
+yang_2018_cesd,done,batch_234,2026-09-16T12:33:20
+yang_2023_consumption_intent,done,batch_234,2026-09-16T12:33:20
 yang_2023_emotional_eating_cesd,pending,,
 yang_2023_emotional_eating_ders,pending,,
 yang_2023_emotional_eating_eesr,pending,,
