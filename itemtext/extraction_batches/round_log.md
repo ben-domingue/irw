@@ -21080,3 +21080,21 @@ Gates: normalize_nulls 0 changes; audit_batch PASS x2, no WARNs; verify_batch PA
 Heads-up for the next rounds: the next 13 queue rows are all `mede_2025_*` siblings from the same TISP deposit. Agents should check each battery's originating instrument for the same NC/ND issue (clim_government's came from Hickman), and should follow clim_emotions' language convention (English core wording, all 37 languages listed).
 
 Housekeeping: the queue claim/update was made byte-wise (mixed line endings). A first csv-module claim crashed on the blank rows the stray CRs produce, and a second normalised the file and inflated the diff; both were restored with `git checkout` before dispatch. Minor: `itemtables/batch_262/verification_merged.csv` carries the `talaifar_2025_study2_plp` row twice (the permanent tracker has it once), left as is. Queue: **142 pending, 0 in_progress.** Next up: mede_2025_clim_polsupport, mede_2025_clim_weather_future, mede_2025_clim_weather_past. Cap (batch_264) not reached.
+
+## batch_264 — 2026-09-19T10:11 (3 tables, 3 agents) — CAP REACHED
+
+**3 written / 0 blocked / 0 failed — yield 3/3.** No kills, no rate limits. Available memory 17G at dispatch. Circuit breaker: 0% failed, not tripped.
+
+All three are TISP siblings (Mede et al. 2025 Sci Data, OSF 5c3qd, CC BY 4.0). All are `data_labels` from core-questionnaire_english.qsf ChoiceDataExportTags, cross-checked against the master docx. All follow clim_emotions' language convention: English core wording, the 37-language list, and a public_note on the local translations.
+
+- `mede_2025_clim_polsupport`: **written**, 5 items / 15 rows (QID86), resp 1–3 = "Not at all" / "Moderately" / "Very much". Administered option 4 "Not applicable" is dropped by data/mede_2025_tisp.py, so it has no row; the public_note says so. Rights: the paper and the Cologna et al. 2025 NCC companion credit no originator, and nothing matches in the register. The agent's extra corroboration: live "very much" shares on forest protection (82.1%) and sustainable energy (75.5%) match the NCC paper's 82%/75%. The two tax items come out 2–3 points above the published figures, probably a sample/weighting difference; noted, not a defect.
+- `mede_2025_clim_weather_past`: **written**, 6 items / 30 rows (QID103). 1="Not at all", 5="Very much", 2–4 blank. The instructions include QID103's own two-sentence opener ("The next questions are about climate change and weather events… think about your country.").
+- `mede_2025_clim_weather_future`: **written**, 6 items / 30 rows (QID104), same options. The agent prepended QID103's opener to QID104's question text. **Orchestrator re-check (Step 5b):** the QSF block CLIM_WEATHER contains exactly [QID103, QID104] with no page break, so the opener is on screen with the future question and the prepend is sound; it is disclosed in provenance/public_note. Both weather tables therefore carry the same opener, which is consistent.
+- Rights: none of the three batteries credits an originator (unlike clim_government/Hickman), so no NC/ND question arises. No register rows written.
+- Data: no defects. Every item uses every level. Per-item n: polsupport 65,758–66,908, weather_past 71,437–71,488 (n = distinct ids), weather_future 67,942–68,029.
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x3, no WARNs; verify_batch MISSING(exempt)=3; lint 3 rows, clean (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance clean (only the pre-existing `mixed` REVIEW on ye_2025_q25_scale).
+
+Housekeeping: the queue claim/update was made byte-wise again (mixed line endings), diff 3 lines each time. Queue: **139 pending, 0 in_progress.** Next up: mede_2025_goals_priority, mede_2025_goals_tackle, mede_2025_normperc.
+
+**Cap reached: batch_264 is the Step 0 cap. No further rounds until a human raises it.**

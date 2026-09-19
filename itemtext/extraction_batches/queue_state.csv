@@ -1288,9 +1288,9 @@ talaifar_2025_study2_plp,done,batch_262,2026-09-19T09:46:06-07:00
 cogcontrol_gyurkovics_2019_mwprobe,done,batch_263,2026-09-19T10:00:12-07:00
 mede_2025_clim_emotions,done,batch_263,2026-09-19T10:00:12-07:00
 mede_2025_clim_government,blocked,batch_263,2026-09-19T10:00:12-07:00
-mede_2025_clim_polsupport,pending,,
-mede_2025_clim_weather_future,pending,,
-mede_2025_clim_weather_past,pending,,
+mede_2025_clim_polsupport,done,batch_264,2026-09-19T10:24:00-07:00
+mede_2025_clim_weather_future,done,batch_264,2026-09-19T10:24:00-07:00
+mede_2025_clim_weather_past,done,batch_264,2026-09-19T10:24:00-07:00
 mede_2025_goals_priority,pending,,
 mede_2025_goals_tackle,pending,,
 mede_2025_normperc,pending,,
