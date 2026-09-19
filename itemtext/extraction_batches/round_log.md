@@ -20769,3 +20769,16 @@ Housekeeping: my first claim write went through csv.DictWriter and normalised th
 The mapping_verification.csv append matched the file's CRLF endings.
 
 Queue: **84 pending, 0 in_progress.** Next up: `zhang_2024_attractiveness`, `zhang_2024_gift_intention`, `zhang_2024_parasocial`. Cap (batch_258) not reached.
+
+## batch_250 — 2026-09-18 21:02–21:08 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills, no rate limits.
+
+- `zhang_2024_attractiveness` (4 items), `zhang_2024_gift_intention` (3), `zhang_2024_parasocial` (3) — all from Zhang & Liu 2024, PLOS ONE e0296908 (CC BY 4.0). Wording from S1 Appendix (docx), codes are the S1 Dataset xlsx headers used unchanged by `data/zhang_2024_giftgiving.py`. All `paper_order`, `translated_substitute` / `study_supplied`, `language=Chinese` (administered in Chinese; no CJK text anywhere in the supplements). Endpoints-only scale labels, 2–4 blank.
+- Gates: normalize 0 changes; audit_batch PASS ×3 (no WARNs, so nothing for Step 5c); verify_batch PASS ×3; lint clean (3 rows); irw-validate ok ×3; check_provenance exit 0 (its `mixed` REVIEW list of 19 is unchanged, and none are from this batch).
+- Step 5b: no agent overrode a source or reported a response-data defect, so nothing needed an independent re-check. The published Table 2 loadings / Table 3 composites reproduce from the live data in all three.
+- **For triage, the verification status is inconsistent across siblings with the same evidence type.** gift_intention and parasocial recorded **PARTIAL**: the live code→S1 column match is decisive and the loadings reproduce, but the wording→code link rests on appendix numbering. attractiveness recorded **NO_ROUTE** for the same situation: its loadings pin live ATR1–4 to the paper's codes, with the best alternative ordering off by 0.014, and it too leaves wording→code to numbering. I left each agent's call as-is. Harmonising probably means moving attractiveness to PARTIAL.
+- Rights: the source scales (Ha & Lam 2016; Pavlou 2003; Xu, Wu & Li 2020) have no register rows. The agents found no restriction, but the attractiveness agent did not open Ha & Lam's own page.
+- Housekeeping: the tracker merge first went through csv.DictWriter and rewrote 6 existing rows' endings. I caught it in the diff, reverted, and did a raw append instead. The queue claim went through DictWriter too, and it normalised 24 lines of queue_state. I caught that before committing and redid it byte-level. The final "done" update was byte-level.
+
+Queue: **81 pending, 0 in_progress.** Next: `zhang_2024_streamer_dsp`, `zhang_2024_viewer_dsp`, `zhang_2025_coercive_pressure`. Cap (batch_258) not reached.
