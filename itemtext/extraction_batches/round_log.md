@@ -20989,3 +20989,32 @@ Gates:
 Housekeeping: the claim write normalized 3 LF-only lines to CRLF. The final queue update was redone byte-wise from HEAD, so the committed diff is exactly the 3 rows for this batch.
 
 Queue: **60 pending, 0 in_progress.** Next up: `IJLS_Eersel_2024_ICECAP`, `IJLS_Eersel_2024_IUS`, `IJLS_Eersel_2024_Optimism`, all from one source, so tell each agent about its siblings. Cap (batch_258) not reached.
+
+## batch_258 — 2026-09-19 09:09 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no rate limits. All three agents finished in 3–4.5 minutes.
+
+- `presenteeism_golz_2024` (Golz et al. 2024, J Occup Rehabil, PMC11550221 and OSF wh483, both CC BY 4.0; 6 items, 36 rows): **VERIFIED**, mapping_basis `paper_order`, text_source `study_materials`. Route 1: the per-item M/SD on the 324 non-"not ill" respondents reproduce Table 3 within 0.006, and 0 of 15 pairwise swaps also match.
+  - **It overrides the source's numeric code.** The paper prints "I was not ill" as 0, while the deposit and the live table code it 6. resp=6 ships as "I was not ill".
+  - **Response-data defect, for a human.** resp 6 is a not-applicable sentinel sitting on the 1–5 frequency scale. The orchestrator re-checked on live data: 487 ids, 163 with any 6 (= the paper's 163 exclusions), 65 who answered 6 on all six items. An ordinal model will read "not ill" as maximal presenteeism. The candidate fix is to recode 6 → NA in `data/presenteeism_golz_2024.py` (not done here). It is disclosed in public_note and is worth its own issue.
+  - The live table also carries 114 resp=NA rows. That is a property of the data.
+  - No instruction stem is published, so `instructions` is blank.
+- `uti_newlands_2023_gad` (Newlands et al. 2023, Qual Life Res; OSF q2svk; 7 items, 28 rows): **PARTIAL**, `paper_order`, `canonical_instrument` (the phqscreeners GAD-7 English form; register verdict for the PHQ/GAD family is ship).
+  - The deposit stores the GAD-7 as **1–4**, not the printed 0–3. The direction is pinned by the published total: sum(resp)−7 reproduces 9.23/6.21/0–21, and the orchestrator re-checked it on live data at 9.229/6.209. This is disclosed in public_note.
+  - gad_5 and gad_4 are pinned by marker and cross-instrument correlations. The order among gad_1/2/3/6/7 is not established.
+- `uti_newlands_2023_phq` (same source; 9 items, 36 rows): **PARTIAL**, `paper_order`, `canonical_instrument` (Pfizer PHQ-9 English).
+  - The published total reproduces (11.479/7.216 vs 11.5/7.22), which pins 0 = Not at all.
+  - phq_2/3/4/8/9 are pinned by correlations with the study's own labelled RUTIIQ items and GAD item 5, and by the item distributions. The order among phq_1/5/6/7 is not established.
+- Neither sibling agent touched the other's files. The two verify scripts read the sibling table only as a correlate.
+
+Gates:
+- normalize_nulls: 0/3 rewritten.
+- audit_batch: PASS ×3.
+- verify_batch: PASS=3.
+- lint: 0 ERROR, 0 WARN, 1 INFO (golz: VERIFIED stands under the item-axis rule).
+- irw-validate: ok ×3.
+- check_provenance: clean. The `mixed` REVIEW list has 1 table (ye_2025_q25_scale), not from this batch.
+
+Housekeeping: queue_state.csv has mixed CRLF/LF line endings, and a csv.DictWriter rewrite churned every line. The claim and the done update were therefore made byte-wise on the 3 rows only.
+
+Queue: **157 pending, 0 in_progress.** Next up: `uti_newlands_2023_rutiiq` and `uti_newlands_2023_wpai`, which are siblings of this batch's GAD/PHQ from the same OSF file (tell agents), then `dss_mouta_2021`. Cap (batch_264) not reached.
