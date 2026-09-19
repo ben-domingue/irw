@@ -397,9 +397,10 @@ def coerce_to_irw(df: pd.DataFrame) -> Coercion:
     if trial_cols:
         notes.append(
             f"Detected trial_* columns ({trial_cols[:4]}). This may be "
-            "trials-based data (IRW standard §Trials). The item column will be "
-            "uninformative; trial_ columns carry the probe information. "
-            "Manual mapping required."
+            "trials-based data (IRW standard, Trials). `item` must still "
+            "identify the probe (C3); trial_ columns carry trial-level details "
+            "such as the trial index or block, which is what tells repeated "
+            "responses to one item apart (C5). Manual mapping required."
         )
         return Coercion(None, "low", "unresolved", notes, orig_cols)
 

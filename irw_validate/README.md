@@ -56,6 +56,38 @@ stated in prose — a sample floor of 100 unique ids, table names ≤40 characte
 `ARCHITECTURE.md`'s Rule 2 asks for exactly this: *where a rule can be made
 executable, make it executable instead of writing it down.*
 
+## Two verdicts: the standard, and the gate
+
+Every report under the `upload` and `legacy` profiles opens with two lines:
+
+```
+IRW Data Standard 1.0: does not conform (C4, C5)
+IRW upload gate: blocked by 3 error(s)
+```
+
+They answer different questions. **Conformance** asks whether the file is a valid
+IRW table, judged against the numbered clauses of the
+[IRW Data Standard](https://itemresponsewarehouse.org/standard.html) — only the
+checks in `model.CLAUSES` bear on it, and each finding names its clause (`[C4]`).
+**The gate** asks whether IRW would accept the table, which adds intake policy
+that is not part of the standard: the 100-id sample floor, table-name rules, and
+the heuristics. A researcher's table can conform and still fall under the floor.
+
+Three rules keep the verdict honest:
+
+- A waiver (`--override`) lets a table through the gate and leaves it
+  nonconforming. `nonconforming` counts overridden errors.
+- There is no verdict under `core` or `triage`. Those profiles keep inherited
+  readings of C4 and C5 for their callers, so a rater design would be called
+  nonconforming there and conforming at the gate.
+- There is no verdict for item text (`__items`), which Standard 1.0 does not cover.
+
+`STANDARD_VERSION` moves only when the standard's changelog does. Adding a check
+is not a new standard; changing what a clause requires is.
+
+The browser validator at https://itemresponsewarehouse.org/validate.html runs this
+package unchanged, in Pyodide, pinned to a released version.
+
 ## Profiles, and why severity is not a property of a check
 
 **Severity depends on the (check, profile) pair.** This is the central design

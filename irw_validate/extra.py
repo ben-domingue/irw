@@ -40,7 +40,7 @@ def check_name(table: str) -> list:
     if len(stem) > MAX_NAME:
         out.append(Finding(
             "name_length", "error",
-            f"table name is {len(stem)} characters; datastandard.md caps it at "
+            f"table name is {len(stem)} characters; IRW intake policy caps it at "
             f"{MAX_NAME}. Shorten the construct label, never the author or year.",
             table=table, group="name"))
     if not _NAME_OK.match(stem):
@@ -61,16 +61,16 @@ def check_shape(df: pd.DataFrame, table: str = "") -> list:
         if n < MIN_IDS:
             out.append(Finding(
                 "sample_floor", "warn",
-                f"{n} unique ids; datastandard.md sets a flat floor of {MIN_IDS} "
-                "with no judgment call in between. Warn rather than block: the "
-                "floor governs what to accept, not what is already published.",
+                f"{n} unique ids; IRW intake policy sets a flat floor of {MIN_IDS} "
+                "(not part of the data standard). Warn rather than block: the "
+                "floor governs what IRW accepts, not what is already published.",
                 table=table, group="core"))
     lead = [c for c in df.columns[:3]]
     if len(df.columns) >= 3 and lead != ["id", "item", "resp"]:
         out.append(Finding(
             "column_order", "warn",
-            f"columns start {lead}; datastandard.md step 7 writes "
-            "[id, item, resp] + covariates.",
+            f"columns start {lead}; the standard (C7) puts "
+            "[id, item, resp] first, then optional columns.",
             table=table, group="core"))
     return out
 

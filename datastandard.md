@@ -2,6 +2,14 @@
 
 This document tells an agent exactly what to produce when converting a raw dataset into IRW format. Read it before writing a single line of code.
 
+*The format itself is defined by the numbered clauses of the public
+[IRW Data Standard](https://itemresponsewarehouse.org/standard.html) (v1.0), and
+`irw-validate` reports each finding against them. This guide adds IRW's intake
+policy — licence, sample floor, naming, one file per scale — and the working
+practice for getting a source into that format. Where the two disagree, the
+public standard governs the format; raise the disagreement rather than following
+either silently.*
+
 ---
 
 ## Before you start
@@ -51,6 +59,7 @@ Every IRW file is a CSV in long format with one row per person-item observation.
 | `qmatrix1`…`qmatrixN` | no | Item classifications for cognitive diagnostic modeling (Q-matrix). One column per attribute. |
 | `rater` | no | Observer identifier in scenarios where items are rated by an external observer rather than self-reported. |
 | `item_family` | no | Groups items that may violate local independence — testlets, clones, or clusters of similar items. |
+| `trial_*` | no | Trial-level details in repeated-trial designs: the trial index (`trial_number`), block, list, and so on. `item` still identifies the probe — it is always authoritative, never a placeholder with the probe moved into `trial_` columns. A `trial_` index is what tells repeated responses by one `id` to one `item` apart. |
 
 Column order in the output file: `id`, `item`, `resp`, `resp_raw` if present, then optional response-level columns (`wave`, `treat`, `rt`, `date`), then `cov_*` and `itemcov_*` columns, then `qmatrix*`, `rater`, and `item_family` if present.
 

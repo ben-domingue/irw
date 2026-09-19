@@ -286,6 +286,14 @@ class RepeatedMeasures(unittest.TestCase):
                 report = validate_frame(self._rated(col), profile="upload")
                 self.assertNotIn("dup_id_item", [f.check for f in report.findings])
 
+    def test_a_trial_prefixed_index_explains_the_repeat(self):
+        # how the robison_2026_retesting_* and cogcontrol_* tables index trials
+        df = F(id=[1, 1, 2, 2], item=["a"] * 4, resp=[0, 1, 1, 0],
+               trial_number=[1, 2, 1, 2])
+        report = validate_frame(df, label="t_2024_x.csv")
+        self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+        self.assertIs(report.conforms, True)
+
     def test_a_group_column_does_not(self):
         # group describes the person, not the occasion -- a person appearing
         # twice under it is a real question, not an explanation
@@ -337,6 +345,57 @@ class RPythonParity(unittest.TestCase):
             declared, set(CORE_CHECKS),
             "misc/validate_irw.R and irw_validate.model.CORE_CHECKS disagree; "
             "the fork this package closed has reopened")
+
+
+class Standard(unittest.TestCase):
+    """Conformance to the IRW Data Standard is a separate verdict from the gate."""
+
+    def test_every_core_check_names_a_clause(self):
+        from irw_validate import CLAUSES
+        for check in CORE_CHECKS:
+            self.assertIn(check, CLAUSES, f"{check} tests no clause of the standard")
+
+    def test_a_clean_table_conforms(self):
+        report = validate_frame(FIXTURES["clean"](), label="x_2024_y.csv")
+        self.assertIs(report.conforms, True)
+        self.assertEqual(report.to_dict()["standard_version"], "1.0")
+
+    def test_missing_resp_names_clause_c1(self):
+        report = validate_frame(FIXTURES["missing_col"](), label="x_2024_y.csv")
+        self.assertIs(report.conforms, False)
+        self.assertEqual(report.nonconforming, ["C1"])
+
+    def test_text_resp_and_duplicates_name_their_clauses(self):
+        self.assertEqual(validate_frame(FIXTURES["nonnumeric_resp"]()).nonconforming, ["C4"])
+        self.assertEqual(validate_frame(FIXTURES["dup_id_item"]()).nonconforming, ["C5"])
+
+    def test_intake_policy_does_not_touch_conformance(self):
+        # 3 ids is far under the sample floor, and the name breaks the charset
+        # rule: IRW would warn about both, and the table still conforms.
+        report = validate_frame(FIXTURES["clean"](), label="Not A Good Name.csv")
+        self.assertIn("sample_floor", [f.check for f in report.findings])
+        self.assertIs(report.conforms, True)
+
+    def test_a_waiver_does_not_make_a_table_conform(self):
+        report = validate_frame(FIXTURES["nonnumeric_resp"]())
+        report.overridden, report.findings = report.errors, report.warnings
+        self.assertTrue(report.ok)
+        self.assertIs(report.conforms, False)
+
+    def test_no_verdict_where_the_profile_reads_the_clauses_differently(self):
+        for profile in ("core", "triage"):
+            self.assertIsNone(validate_frame(FIXTURES["clean"](), profile=profile).conforms)
+
+    def test_no_verdict_for_item_text(self):
+        df = F(table=["t"] * 2, item=["a", "b"], item_text=["one", "two"])
+        self.assertIsNone(validate_frame(df, label="t__items.csv").conforms)
+
+    def test_the_report_leads_with_both_verdicts(self):
+        from irw_validate import format_report
+        text = format_report(validate_frame(FIXTURES["dup_id_item"](), label="x.csv"))
+        self.assertIn("IRW Data Standard 1.0: does not conform (C5)", text)
+        self.assertIn("IRW upload gate: blocked", text)
+        self.assertIn("[C5]", text)
 
 
 class Cli(unittest.TestCase):
