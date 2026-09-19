@@ -20908,3 +20908,28 @@ Gates:
 - check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
 
 Queue: **69 pending, 0 in_progress.** Next up: `zhou_2025_ehealth_literacy`, `zvi_2022_rei`, `ALSECYPIAMH_WU_2022_MIL`. Cap (batch_258) not reached.
+
+## batch_255 — 2026-09-18 21:46 PDT (claimed) — 3 tables, 3 agents
+
+**Written 1 / blocked 2 / failed 0. Yield 1/3.** No kills. Both blocks are determinate verdicts, so the circuit breaker is not tripped.
+
+- `zhou_2025_ehealth_literacy` (Zhou et al. 2025, PLOS ONE e0330637, CC BY 4.0), 8 items eh1–eh8: **VERIFIED**, mapping_basis `data_labels`.
+  - Wording comes from the S1 xlsx headers (`@32、2-K …`, with the prefix stripped). These are the study's own English renderings, not the canonical eHEALS wording. `translated_substitute` / `study_supplied`, language=Chinese (inferred; no Chinese text exists anywhere in the deposit).
+  - The paper names only the two end anchors, so resp 2–4 option_text is blank.
+  - The processing script assigns codes by position, so a header diff was run even though the basis is data_labels. Each live ehK matches S1 column 2-K on 14892/14892 ids; the best other column reaches 12789–13837 (straight-lining).
+  - Rights: eHEALS (Norman & Skinner 2006, JMIR OA). No register row, and no restriction was found.
+- `zvi_2022_rei`: **blocked**. The 24 REI items c1..c24 are bare S1 column codes. The paper quotes 2 example items with no list or order. Cited ref 33 omits the items and ref 57 (Synthese 2012) is closed. Administered in Hebrew. Retry test NO; it needs an author-supplied questionnaire.
+- `ALSECYPIAMH_WU_2022_MIL`: **blocked on rights**. It is a Chinese MLQ (5 presence + 5 search items, resp 1–7), identified from its structure and the paper's Crossref references. Orchestrator re-check: the register has MLQ at `block` (irw#1945), and the quoted clause matches. The deposit also has no MLQ wording (unlabelled .sav; the supplement is the Claremont Purpose Scale only).
+- Both blocked tables have rows in `pending_index_notes.csv`.
+
+Gates:
+- normalize_nulls: 1/1 rewritten (NA convention).
+- audit_batch: PASS ×1, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=1.
+- lint: clean.
+- irw-validate: ok.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: `queue_state.csv` has mixed CRLF/`\r\r\n` line endings. A default `csv.reader` pass reads the stray `\r`s as blank rows, so this round edited the claimed rows byte-wise and left every other line untouched.
+
+Queue: **66 pending, 0 in_progress.** Next up: `AMI_CV_Hewitt2024`, `AOMT_BR_SF_EDPANAB_Geiger_2021_RF`, `BAFACALO_Golino_2013_BVPS`. Cap (batch_258) not reached.
