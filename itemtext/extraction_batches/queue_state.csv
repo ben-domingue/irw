@@ -1237,9 +1237,9 @@ zautra_2015_iri,blocked,batch_245,2026-09-18T20:12:44-07:00
 zautra_2015_tmms24,done,batch_246,2026-09-18T20:22:01-07:00
 zeng_2025_academic_buoyancy_cfa,blocked,batch_246,2026-09-18T20:22:01-07:00
 zeng_2025_academic_buoyancy_efa,blocked,batch_246,2026-09-18T20:22:01-07:00
-zeng_2025_megaproject_msr,pending,,
-zeng_2025_megaproject_seap,pending,,
-zeng_2026_gai_exploitation,pending,,
+zeng_2025_megaproject_msr,done,batch_247,2026-09-18T20:34:08-07:00
+zeng_2025_megaproject_seap,done,batch_247,2026-09-18T20:34:08-07:00
+zeng_2026_gai_exploitation,done,batch_247,2026-09-18T20:34:08-07:00
 zeng_2026_gai_inst_support,pending,,
 zeng_2026_gai_learning_effect,pending,,
 zeng_2026_gai_role_adapt,pending,,

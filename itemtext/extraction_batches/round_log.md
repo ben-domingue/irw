@@ -20674,3 +20674,34 @@ Gates: normalize (0 changed) · audit_batch 1 PASS, no anomalies (no WARNs to ex
 irw-validate ok · check_provenance: the pre-existing lys_2020_rape_3_kpnts missing-entry line and the unchanged `mixed` REVIEW list of 19, none from this batch.
 mapping_verification.csv +1 row (no data_labels tables, so no NOT_NEEDED rows).
 Queue: **93 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_247 — 2026-09-18T20:34–20:45-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+- `zeng_2025_megaproject_msr`: **written**, 195 rows (item_2_1..39 × resp 1–5). `zeng_2025_megaproject_seap`: **written**, 55 rows
+  (item_3_1..11 × resp 1–5). Both come from Zeng et al. 2025 PLOS ONE e0334291 (CC BY 4.0), and the two agents worked separately and agreed.
+  mapping_basis **data_labels**: the processing script names each code after the S1 xlsx header's own "2.N"/"3.N" number, and that header holds the full wording.
+  All headers match the S2 questionnaire exactly. The form was bilingual, so Chinese goes in the base fields, the form's own English in `_translated` (study_supplied), and
+  language = "Chinese; English". Caveat kept literal: at resp 4, the Chinese 偶尔有 means "occasionally" but the printed English is "Often".
+  NOT_NEEDED rows went into both verification_merged.csv and the tracker.
+- `zeng_2026_gai_exploitation`: **written**, 35 rows (EXPLOIT1..5 × resp 1–7). paper_explicit: Table 2 prints "EB<k>(Q<n>)".
+  translated_substitute/study_supplied: it was administered in Chinese and only the authors' English was released, and public_note discloses this. Only the
+  endpoints are labelled, so resp 2–6 are blank. Verification is **VERIFIED** and verify_ gives PASS: each live EXPLOIT<k> equals S1 Q<29+k> for all 207 of 207 ids, and the
+  best other column matches at most 109/207. The one-factor loadings are within 0.005 of Table 3. Source quirk: the paper uses the labels EB1–5 for
+  both Exploration (Q25–29) and Exploitation (Q30–34). The agent matched on the Q number.
+
+Gates: normalize_nulls fixed the seap file's formatting (56 lines, formatting only) · audit_batch 3 PASS, no anomalies, so there are no WARNs to explain ·
+verify_batch PASS=1, MISSING(exempt)=2 (data_labels) · lint clean · irw-validate ok ×3 · check_provenance exit 0. Its `mixed` REVIEW list of 19 is
+unchanged, and none of those tables are from this batch.
+Step 5b: no source overrides and no data-defect claims to re-check. verify_zeng_2026_gai_exploitation.R, re-run by verify_batch, is the independent check.
+
+Housekeeping, for a human:
+- My first queue_state rewrite used csv.DictWriter and silently converted the CRLF endings on the file's last 24 rows (the batch_201–205 block,
+  which the merge from main brought in) to LF. I caught it in the diff and restored the file from HEAD with a byte-level edit of only the 3 rows. **Rewrite this file
+  byte-preserving, not with a csv writer.**
+- `data/zeng_2026_gai_learning.py` puts Ben's email address in its HTTP User-Agent header (reported by the agent, which did not run it). This is worth scrubbing.
+- The siblings `zeng_2025_megaproject_ecm` (section 4 of the same S1 file) and `zeng_2026_gai_exploration` are **not in queue_state.csv**,
+  although their siblings are. They may be missing from the queue build.
+
+Queue: **90 pending, 0 in_progress.** Cap (batch_258) not reached.
