@@ -191,17 +191,23 @@ Two rules follow, and `metadata/tag_normalize.R` enforces the first on export:
 
 > `Representative` describes **the table we ship**, not only the study it came
 > from. **Non-random subsetting breaks the claim; random subsampling does not.**
-> If rows were dropped by a criterion — a booklet, a region, a completer filter —
-> the shipped table no longer represents the population the source named, so
-> drop `Representative`. If rows were dropped by a seeded random draw, keep it:
-> a random subsample of a representative sample is still representative. ENEM
-> does both — `enem_*.R` restricts to the standard booklets, then draws
-> 1,000,000 respondents at random (`enem_2013_1mil_ch`). The booklet restriction
-> is what narrows the frame; the draw is not. Subsetting done by a depositor
-> before the file reached us counts too, where the source says so. (Amended
-> 2026-09-19, #1760 — SamuelEnrique's "so long as all observations are included",
-> reworded so a random draw keeps the tag; confirmed by saviranadela 2026-09-12.
-> Governs new tagging only, as with the rest of #1760.)
+> If rows were dropped by a criterion — a region, a booklet, a completer or
+> attendance filter — the shipped table no longer represents the population the
+> source named, so drop `Representative`. If rows were dropped only by a seeded
+> random draw, keep it: a random subsample of a representative sample is still
+> representative. Subsetting done by a depositor before the file reached us
+> counts too, where the source says so. (Amended 2026-09-19, #1760 —
+> SamuelEnrique's "so long as all observations are included", reworded so a
+> random draw keeps the tag; confirmed by saviranadela 2026-09-12.)
+
+> **A census of people who chose to take part is not a representativeness
+> claim.** Releasing every registrant of a voluntary exam describes that
+> self-selected group and nobody wider, so it gets no `Representative`. ENEM
+> is the case: it is voluntary, taken mostly by people applying to university,
+> and INEP publishes every registrant without claiming they stand for any
+> population. (Ruled by Ben 2026-09-19, #1760.) Both rules govern new tagging
+> only. The 52 ENEM tables that carry `Representative` today are left for the
+> corpus audit, not swept here.
 
 If recruitment is not described at all, leave the frame facet blank. Silence is
 not the same as `General/non-specific`.
