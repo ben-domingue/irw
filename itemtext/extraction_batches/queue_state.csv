@@ -1219,9 +1219,9 @@ yuebo_2024_netbenefit,done,batch_240,2026-09-16T14:07:30
 yuebo_2024_satisfaction,done,batch_241,2026-09-18T19:14:43-07:00
 yuebo_2024_srvquality,done,batch_241,2026-09-18T19:14:43-07:00
 yuebo_2024_sysquality,done,batch_241,2026-09-18T19:14:43-07:00
-yuebo_2024_tck,pending,,
-yuebo_2024_tk,pending,,
-yuebo_2024_tpack,pending,,
+yuebo_2024_tck,done,batch_242,2026-09-18T19:52:19-07:00
+yuebo_2024_tk,blocked,batch_242,2026-09-18T19:52:19-07:00
+yuebo_2024_tpack,blocked,batch_242,2026-09-18T19:52:19-07:00
 yuebo_2024_use,pending,,
 zaehl2023_hexaco,pending,,
 zaehl2023_twq_commitment,pending,,

@@ -20496,3 +20496,41 @@ collision against the cached S1 files:
 - One agent's `table_context.R` hung for more than 5 minutes on a full `irw_fetch` and was abandoned;
   ground truth came from `table_sets.R` instead. The process had already exited by merge time.
 - Queue: **130 pending remain, 0 in_progress.** Cap (batch_290) not reached.
+
+## batch_242 — 2026-09-18T19:36 → ~19:55 (−07:00), 3 tables, 3 agents
+
+**1 written · 2 blocked · 0 failed** (yield 1/3; failed rate 0% → no breaker). All three come from the same
+PLOS ONE paper as batch_240/241 (Yuebo, Halili & Abdul Razak 2024, e0297515). Step 3b passed for each.
+
+- `yuebo_2024_tck` — **done.** 4 items × 5 = 20 rows. `paper_explicit` (appendix Code = S1 Data header =
+  IRW item), `translated_substitute`/`study_supplied`, `language=Chinese`, option_text blank (no anchors
+  printed). **VERIFIED**: per-item resp counts S1 vs live match cell for cell (TCK1 16/31/76/103/19 …).
+- `yuebo_2024_tk` — **blocked (rights).** TK2/TK3 are near-verbatim third-person rewordings of Schmidt et al.
+  (2009) TPACK survey TK items, and the survey's usage terms make contacting Dr. Schmidt a condition of use
+  (tpack_survey_v1point1.doc, sha256 823bfa3a…). Blocked under the 2026-09-05 HEXACO "please contact the
+  authors" rule. Retry test NO. **Needs Ben:** the clause is notify-for-tracking, not ask-for-approval,
+  and there's no fee/NC/ND term; if he rules that doesn't reserve a right, the wording and counts are banked in
+  batch_242/notes.csv.
+- `yuebo_2024_tpack` — **blocked (rights), escalated.** Appendix attributes the five items to Santos &
+  Castro (2021, SSHO), CC BY-NC-ND 4.0 per Crossref. Full text was 403, so the derivation is unconfirmed; no
+  register row was written. A gated candidate (validate PASS) is parked at the git-ignored
+  `.cache/yuebo_2024_tpack/candidate__items.csv`. Copy it somewhere tracked if it needs to survive.
+
+Gates: normalize (nothing to change) · audit_batch 1 PASS, no anomalies · verify_batch PASS=1 · lint clean ·
+irw-validate ok · check_provenance exit 0. The `mixed` REVIEW list of 19 is unchanged and none of its tables are from this batch.
+
+**Step 5b orchestrator re-check — rights consistency across the three.** tck shipped while tk was blocked,
+and both appendix rows cite "Schmid et al., 2009", so I checked tck's wording against both named
+originators:
+- Schmidt v1.1's TCK items are all "I know about technologies that I can use for understanding and doing
+  <subject>."
+- Valtonen 2017 (AJET, CC BY-NC-ND per the AJET page) Appendix A TCK1–4 are websites / ICT-applications /
+  illustrate-difficult-contents items.
+- Neither is the source of the shipped TCK1–4. So the ship stands and the split is consistent.
+- The TK match to Schmidt is confirmed from the parsed survey (e.g. "I know how to solve my own technical
+  problems." / "I keep up with important new technologies.").
+
+**Notable:** the remaining yuebo_2024 siblings (`pck`, `tpk`, `use`, etc., if pending) will hit the same
+Schmidt / Santos & Castro attribution question. A ruling on the Schmidt contact clause would settle tk and
+probably pck in one go.
+Queue: **127 pending, 0 in_progress.** Cap (batch_258) not reached.
