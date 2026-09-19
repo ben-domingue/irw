@@ -20933,3 +20933,33 @@ Gates:
 Housekeeping: `queue_state.csv` has mixed CRLF/`\r\r\n` line endings. A default `csv.reader` pass reads the stray `\r`s as blank rows, so this round edited the claimed rows byte-wise and left every other line untouched.
 
 Queue: **66 pending, 0 in_progress.** Next up: `AMI_CV_Hewitt2024`, `AOMT_BR_SF_EDPANAB_Geiger_2021_RF`, `BAFACALO_Golino_2013_BVPS`. Cap (batch_258) not reached.
+
+## batch_256 — 2026-09-18 21:54 PDT (claimed) — 3 tables, 3 agents
+
+**Written 2 / blocked 1 / failed 0. Yield 2/3.** No kills. The one block is a determinate rights verdict, so the circuit breaker is not tripped.
+
+- `AMI_CV_Hewitt2024` (Hewitt, Habicht et al. 2024, Behav Res; OSF dukhj, CC BY 4.0), 18 items × resp 0–4, 90 rows: **PARTIAL**, mapping_basis `paper_explicit`, text_source `study_materials`.
+  - Wording is the 18-item column of Supplementary Table 1. Instructions and option labels come from the published 12-item form.
+  - Verification is route 3, published subscale scores. The live data equal the deposit in 3402/3402 cells (189 persons). The authors' BA, SM and ES scores reproduce for 186/186, 189/189 and 188/188 persons (max |diff| 3.6e-15), and 0 of 36 single-item subscale moves still reproduce. Order within a subscale is not established. The orchestrator re-ran this through verify_batch: PASS.
+  - The source has two errors, neither of which affects this table. The paper quotes the dropped SM4 with item 14's wording, and the 12-item scoring key swaps items 5 and 6. Both are in notes.csv.
+- `AOMT_BR_SF_EDPANAB_Geiger_2021_RF` (OSF hx8qt, CC BY 4.0; A-DMC Resistance to Framing, 28 items RCG/RCL/AFP/AFN × resp 1–6, 168 rows): **NOT_NEEDED**, mapping_basis `data_labels`. The item codes are the Qualtrics question IDs.
+  - **Overrides the study's Codebook.xlsx.** The codebook repeats AFP1's condom wording for AFP2 and misassigns the AFN response labels. The shipped AFP2 is the beef problem.
+  - Orchestrator re-check confirms it. The NA.qsf gives AFP2 the lasagna/ground-beef stem. In the live data (n=507), AFP2 correlates 0.64 with AFN5 (beef) and 0.06 with AFN6 (condom); AFP1 correlates 0.90 with AFN6.
+  - The table pools English (NA, n=259) and Bulgarian (BG, n=248) administrations. It ships the English; the Bulgarian is disclosed in public_note.
+- `BAFACALO_Golino_2013_BVPS`: **blocked on rights**. It is the Brazilian translation of ETS Kit tests CF-3 and VZ-3. ETS licenses the Kit at its discretion, for a royalty, to signatories only. The items are also unkeyed figures. Retry test NO. There is a row in pending_index_notes.csv.
+  - Follow-ups for a human:
+    - The instrument_rights_register has no ETS Kit row. The agent supplied the quote and PDF sha256; see notes.csv.
+    - The sibling tables `BAFACALO_Golino_2013_FIS/_CIS/_SMS` probably fall under the same ETS derivation.
+    - availability_audit_full.csv marks BVPS AVAILABLE on the strength of a single example figure.
+
+Gates:
+- normalize_nulls: 1/2 rewritten (NA convention).
+- audit_batch: PASS ×2, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=1 and MISSING(exempt)=1.
+- lint: clean.
+- irw-validate: WARN name_charset ×2. These are the uppercase live table names, a property of the tables and not an itemtext defect.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: this round's first claim write went through csv.DictWriter and normalized 24 unrelated CRLF line endings. It was redone byte-wise from HEAD before commit, so the committed diff is exactly the 3 claimed rows.
+
+Queue: **63 pending, 0 in_progress.** Next up: `CV_OASIS_ODSIS_PPE_Novak_2020_PANAS`, `EWAS_Sanford_2024`, `FGSIS_Berzeviczy_2018`. Cap (batch_258) not reached.
