@@ -20705,3 +20705,35 @@ Housekeeping, for a human:
   although their siblings are. They may be missing from the queue build.
 
 Queue: **90 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_248 — 2026-09-18T20:41–20:52-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+All three tables come from Zeng, Kang & Piaw 2026 PLOS ONE e0346696 (CC BY 4.0), the same article as batch_247's `zeng_2026_gai_exploitation`, and follow its conventions:
+paper_explicit (Table 2 prints each item as "<code>(Q<n>)") · translated_substitute/study_supplied, language=Chinese, with a public_note ·
+only the endpoint anchors are published (1 = Strongly Disagree, 7 = Strongly Agree), so resp 2–6 option_text is left blank · no instructions published.
+Each table has 35 rows (5 items × resp 1–7). Every agent re-downloaded the source, and the XML/S1 sha256 values match batch_247's.
+- `zeng_2026_gai_inst_support` (IS1..5 = Q20..Q24): **written**, **VERIFIED**. Each live item matches its S1 column for 207/207 ids. The best other
+  Q5–Q39 column reaches ≤105/207. Loadings 0.904/0.875/0.893/0.896/0.892 vs Table 3's 0.903/0.877/0.890/0.897/0.892.
+- `zeng_2026_gai_learning_effect` (LE1..5 = Q35..Q39): **written**, **VERIFIED**. 207/207 id-level matches, best other column ≤112/207. Loadings
+  match Table 3 to within 0.004. Item means alone could not separate LE4 from LE5 (4.556 vs 4.551), so the id-level match is what establishes the mapping.
+- `zeng_2026_gai_role_adapt` (RA1..5 = Q10..Q14): **written**, **VERIFIED**. This block is one of the permuted ones: S1's physical column order is
+  Q10, Q11, Q14, Q12, Q13. The processing script renames the columns by name, and the live data confirm it: 207/207 matches for each item, best other column ≤112/207.
+  Loadings 0.938/0.661/0.898/0.901/0.734 vs Table 3's 0.934/0.667/0.899/0.903/0.733 rule out the positional reading (live RA3 loads 0.898 = Q12, not Q14's 0.733).
+  **Rights call for triage:** the paper cites this block to MAILS (Carolus et al. 2023). The journal version is CC BY-NC-ND 4.0, the arXiv preprint CC BY 4.0.
+  The agent judged the RA wording to be the Zeng authors' own. I checked against the MAILS item table (arXiv 2302.09319, lines 619–626 of the cached text):
+  RA2/RA3/RA5 (adapting or rethinking one's role, adjusting strategies) have no MAILS counterpart. RA1 ("When I encounter difficulties using GAI, I can
+  try different ways to solve them") and RA4 ("Even when facing challenges, I am capable of continuing to use GAI...") share a theme with MAILS's
+  "AI Problem solving" items ("I can rely on my skills in difficult situations when using AI", etc.) but are neither copies nor close paraphrases.
+  I agree it is the authors' own wording. This rests on the absence of a restriction, not a positive grant, and no register row was written. Hold the table if you read RA1/RA4 as derived from MAILS.
+
+Gates: normalize_nulls 0/3 changed · audit_batch 3 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=3 · lint clean (3 rows) ·
+irw-validate ok ×3 · check_provenance exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none of those tables are from this batch.
+Step 5b: no source overrides and no data-defect claims. I independently confirmed the S1 column permutation (read the xlsx header: …Q5,Q6,Q9,Q7,Q8,Q10,Q11,…)
+and the MAILS comparison above. The verify scripts, re-run by verify_batch, are the independent check on the mapping.
+
+Housekeeping: I made the same CRLF slip as batch_247 on the claim (csv writer normalised the doubled-CR rows of the batch_201–205 block). It was caught in the diff,
+and the file was restored with a byte-level edit of the 3 rows. The later "done" update was byte-level from the start.
+
+Queue: **87 pending, 0 in_progress.** Next up: `zeng_2026_gai_self_efficacy`, `zeng_2026_gai_ttf` (same article). Cap (batch_258) not reached.
