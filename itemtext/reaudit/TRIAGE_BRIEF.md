@@ -109,6 +109,9 @@ Study-specific items written by the study's own authors have no upstream; say so
   (`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:<doi>&format=json`).
   DataverseNL and some university repositories also block you; say so, and use UNREACHABLE only after
   the API route fails.
+- **[new, from wave 3]** Zenodo may rate-limit this machine's IP ("unusual traffic", 403 on the API too).
+  Do not retry in a loop. If Zenodo is the only thing between you and a verdict, write UNREACHABLE and
+  start `evidence` with `ZENODO_RATELIMIT:` so a later retry pass can find the row.
 - **[new, from wave 1]** Do not use a User-Agent or contact address copied from the repo's processing
   scripts: several carry a personal email address.
 - Budget: about 10 fetches per deposit, plus up to 4 for the upstream check. If a deposit needs
