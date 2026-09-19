@@ -484,6 +484,31 @@ local({
 })
 
 local({
+    ##Original_License (#2032). getrows() creates the column blank before the
+    ##refresh, which then fills it from the sheet's `Original License`, holds a
+    ##published value against a blank cell, and ignores a case difference.
+    b <- fake_biblio(biblio_row("a_2020"), biblio_row("b_2021"),
+                     biblio_row("c_2022"))
+    b$Original_License <- c(NA_character_, "CC BY 4.0", "CC BY-NC 4.0")
+    d <- fake_sheet(sheet_row("a_2020"), sheet_row("b_2021"),
+                    sheet_row("c_2022"))
+    d$`Original License` <- c("CC BY 4.0", "", "cc by-nc 4.0")
+    res <- refresh(b, d)
+    check(identical(res$biblio$Original_License,
+                    c("CC BY 4.0", "CC BY 4.0", "CC BY-NC 4.0")),
+          "Original_License fills from the sheet and a blank cell never blanks it")
+    check(nrow(res$log) == 1L && res$log$column[1] == "Original_License" &&
+          res$log$kind[1] == "fill",
+          "only the real fill is logged; a licence case difference is not a change")
+    ##A biblio without the column (every comps/nom/sim run before getrows()
+    ##adds it) is skipped, not an error.
+    b2 <- fake_biblio(biblio_row("a_2020"))
+    res2 <- refresh(b2, fake_sheet(sheet_row("a_2020")))
+    check(!("Original_License" %in% names(res2$biblio)),
+          "the refresh never invents the column itself")
+})
+
+local({
     ##Churn control. A run that rewrote every row for a resolver prefix or a
     ##case difference would bury the 226 real changes in a 4,261-row diff.
     b <- fake_biblio(biblio_row("a_2020", doi = "https://doi.org/10.1/x",
