@@ -20809,3 +20809,37 @@ Housekeeping:
 - I appended the tracker rows raw with CRLF. **Noticed:** batch_250's three tracker rows (zhang_2024_attractiveness/gift_intention/parasocial) went in with bare LF, while the rest of mapping_verification.csv is CRLF. They are left as-is; cosmetic only.
 
 Queue: **78 pending, 0 in_progress.** Next: `zhang_2025_environ_awareness`, `zhang_2025_normative_pressure`, `zhang_2025_self_efficacy`. Cap (batch_258) not reached.
+
+## batch_252 — 2026-09-18 21:19–21:25 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills and no rate limits.
+
+- All three are further tables from Zhang, Zhao, Shao, Fan & Wang 2025, PLOS ONE e0322200 (CC BY 4.0), the siblings of batch_251's `zhang_2025_coercive_pressure`. They follow its pattern:
+  - `paper_explicit`: the S2 appendix prints each `XXk:` code before its wording.
+  - `translated_substitute` / `study_supplied`, language=Chinese (the Chinese wording was never released).
+  - Only the endpoints are labelled: 1 = "total disagreement", 7 = "total agreement"; points 2–6 are blank.
+  - Leading code prefixes and trailing citations were stripped from the item text.
+  - The S1 and S2 files match batch_251's by sha256.
+- `zhang_2025_environ_awareness` (5 items): **VERIFIED**.
+  - Checks: id-level live-vs-S1 match 292/292 (best other column 174/292); Table 2 loadings 0.847/0.765/0.695/0.663/0.701 reproduce (best wrong ordering off by 0.006); alpha 0.852 = Table 2.
+  - EA5's "strategie" typo is shipped as printed. **Step 5b re-check:** the S2 docx paragraph really does read "integration strategie".
+- `zhang_2025_normative_pressure` (4 items): **VERIFIED**.
+  - Checks: id-level match 292/292 (best other 153/292); loadings 0.807/0.854/0.724/0.830 reproduce (best wrong ordering off by 0.023); alpha 0.879.
+- `zhang_2025_self_efficacy` (5 items): **VERIFIED**.
+  - Checks: id-level match 292/292 (best other 110/292); loadings reproduce exactly; alpha 0.906.
+  - **Caveat, re-checked in verify_batch output:** SE1, SE2 and SE5 have nearly the same loadings (0.819/0.813/0.812). So 5 of 119 wrong orderings fall within 0.02, and the loadings alone cannot tell those three items apart.
+  - VERIFIED rests on the S2 code labels plus the id-level column identity, the same basis as the coercive_pressure precedent. The evidence field says so.
+  - SE4's double space was collapsed.
+- Rights: no restriction was found on any of the source scales, and none has a register row, so all ship under silence-is-permission.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=3.
+- lint: 0 ERROR / 0 WARN, plus 3 INFO (hedged evidence alongside a full item-axis tie, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none are from this batch.
+
+Housekeeping: the first claim went through csv.DictWriter and normalised 24 queue lines, again. I caught it in the diff, ran `git checkout`, and redid the claim byte-level. The "done" update and the tracker append (CRLF) were byte-level too.
+
+Queue: **75 pending, 0 in_progress.** Next: `zhao_2024_erq`, `zhao_2025_digital_literacy`, `zhao_2025_nat_env_perception`. Cap (batch_258) not reached.
