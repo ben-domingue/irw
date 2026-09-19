@@ -232,3 +232,4 @@ zhou_2025_peer_relationship_inventory,376,2026-09-11,"Renamed from `zhou_2025_pe
 sel_marca_2025_estudantes,385,2026-09-17,"Rebuilt from the source: duplicate `id`+`item`+`wave` rows removed (1,080,966 to 918,812 rows); `cov_cohort` renamed `cov_turma`.",#1849,,
 sel_marca_2025_familiares,385,2026-09-17,"Rebuilt from the source: duplicate `id`+`item`+`wave` rows removed (623,951 to 593,043 rows); `cov_cohort` renamed `cov_turma`.",#1849,,
 sel_marca_2025_professores,385,2026-09-17,"Rebuilt from the source: `id` is now teacher x class, and duplicate rows removed (156,058 to 126,843 rows); `cov_cohort` renamed `cov_turma`.",#1849,,
+rfq_wozniakprus_2021,391,2026-09-19,"RFQ8 responses of 1 and 7 had been swapped (88 of 538), because the source file labels RFQ8's endpoints backwards; now taken from the raw codes, matching `rfq8_wozniakprus_2022`.",#2249,,
