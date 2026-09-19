@@ -189,6 +189,20 @@ Two rules follow, and `metadata/tag_normalize.R` enforces the first on export:
 > `Representative` and `Targeted/specific` **may co-occur**: a nationally
 > representative sample *of teachers* is both. Never collapse them to one.
 
+> `Representative` describes **the table we ship**, not only the study it came
+> from. **Non-random subsetting breaks the claim; random subsampling does not.**
+> If rows were dropped by a criterion — a booklet, a region, a completer filter —
+> the shipped table no longer represents the population the source named, so
+> drop `Representative`. If rows were dropped by a seeded random draw, keep it:
+> a random subsample of a representative sample is still representative. ENEM
+> does both — `enem_*.R` restricts to the standard booklets, then draws
+> 1,000,000 respondents at random (`enem_2013_1mil_ch`). The booklet restriction
+> is what narrows the frame; the draw is not. Subsetting done by a depositor
+> before the file reached us counts too, where the source says so. (Amended
+> 2026-09-19, #1760 — SamuelEnrique's "so long as all observations are included",
+> reworded so a random draw keeps the tag; confirmed by saviranadela 2026-09-12.
+> Governs new tagging only, as with the rest of #1760.)
+
 If recruitment is not described at all, leave the frame facet blank. Silence is
 not the same as `General/non-specific`.
 
