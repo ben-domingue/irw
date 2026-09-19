@@ -1,3 +1,12 @@
+"""RETIRED 2026-09-19 (irw#2245): do not run.
+
+These tables were withdrawn. They duplicate ma2026_bsmas/_igds/_sabas
+(data from the published figshare deposit 10.6084/m9.figshare.27211839.v2, CC BY 4.0),
+and this script's output carried cov_birthdate: children's full dates of birth.
+Kept only as the record of how the withdrawn tables were built.
+"""
+raise SystemExit("data/2024_online_addiction.py is retired (irw#2245); ma2026_* replaces it")
+
 from __future__ import annotations
 
 import re
