@@ -20782,3 +20782,30 @@ Queue: **84 pending, 0 in_progress.** Next up: `zhang_2024_attractiveness`, `zha
 - Housekeeping: the tracker merge first went through csv.DictWriter and rewrote 6 existing rows' endings. I caught it in the diff, reverted, and did a raw append instead. The queue claim went through DictWriter too, and it normalised 24 lines of queue_state. I caught that before committing and redid it byte-level. The final "done" update was byte-level.
 
 Queue: **81 pending, 0 in_progress.** Next: `zhang_2024_streamer_dsp`, `zhang_2024_viewer_dsp`, `zhang_2025_coercive_pressure`. Cap (batch_258) not reached.
+
+## batch_251 — 2026-09-18 21:10–21:16 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills, no rate limits (20G available at launch).
+
+- `zhang_2024_streamer_dsp` (4 items) and `zhang_2024_viewer_dsp` (6): the last two of the Zhang & Liu 2024 PLOS ONE e0296908 set (CC BY 4.0). They follow the batch_250 siblings: `paper_order`, `translated_substitute` / `study_supplied`, `language=Chinese`. The S1 files are byte-identical to the batch_250 copies (sha256 match). Both are **PARTIAL**: the live codes match the S1 columns id-for-id (325/325), and a refit of the Table 2 CFA reproduces the loadings. The step from appendix number to code cannot be tested from the data.
+  - Loading margins are thin. For viewer_dsp the best wrong ordering misses by 0.0065 (VDSP1/6/4 load 0.791/0.797/0.804). For streamer_dsp it misses by 0.018.
+  - viewer_dsp item 6 ("I want to make me noticed by others.") is shipped exactly as printed.
+  - **Triage call, streamer_dsp:** unlike its siblings, it ships with **no endpoint labels at all**. The paper says SDSP was "reverse scoring processing … in the analysis stage".
+    - **Step 5b re-check:** I computed the live composite independently: n=325, mean 3.681, SD 1.027. That equals Table 3, and reversing it would give 2.319. So IRW stores the post-reversal values.
+    - Whether stored 5 means agreeing with the English "…intentionally misleading" depends on the Chinese wording, which was never released. The agent declined to attach "Strongly agree"/"Strongly disagree" to either end, and the provenance note records both readings.
+    - Ben can pick a direction, or leave it blank.
+- `zhang_2025_coercive_pressure` (4 items, resp 1–7): Zhang et al. 2025 PLOS ONE e0322200. **VERIFIED**, `paper_explicit`: the S2 "List of scale items" prints `CP1:`…`CP4:` before each wording.
+  - Checks: id-level match 292/292, and the Table 2 loadings 0.759/0.662/0.810/0.852 reproduce (the nearest wrong ordering misses by ≥0.042). Live alpha is 0.853, the same as Table 2.
+  - Also `translated_substitute`/`study_supplied`, language=Chinese. The endpoints are "total disagreement"/"total agreement"; 2–6 are left blank.
+  - Trailing source citations were stripped from the item text.
+  - CP3 was never answered with a 1; that is a property of the data.
+  - Siblings (environ_awareness, normative_pressure, self_efficacy, …) head the queue for the next round.
+- Rights: the source scales are DeAndrea & Walther 2011 (SDSP), Souiden et al. 2011 (VDSP), and Dai et al. 2021 / Jiang et al. 2024 (CP). None has a register row and no restriction was found, so all ship under silence-is-permission.
+
+Gates: normalize_nulls 0/3 · audit_batch 3 PASS, no anomalies (no WARNs for Step 5c) · verify_batch PASS=3 · lint 0 ERROR/0 WARN, plus 1 INFO: coercive_pressure hedges but asserts a full item-axis tie, so VERIFIED stands · irw-validate ok ×3 · check_provenance exit 0 (its `mixed` REVIEW list of 19 is unchanged, and none are from this batch).
+
+Housekeeping:
+- My first claim went through csv.DictWriter and normalised 24 queue lines again. I caught it in the diff, ran `git checkout`, and redid the claim byte-level. The "done" update was byte-level too.
+- I appended the tracker rows raw with CRLF. **Noticed:** batch_250's three tracker rows (zhang_2024_attractiveness/gift_intention/parasocial) went in with bare LF, while the rest of mapping_verification.csv is CRLF. They are left as-is; cosmetic only.
+
+Queue: **78 pending, 0 in_progress.** Next: `zhang_2025_environ_awareness`, `zhang_2025_normative_pressure`, `zhang_2025_self_efficacy`. Cap (batch_258) not reached.
