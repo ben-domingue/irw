@@ -52,7 +52,6 @@ ngo_2025_green_purchase_intention,"Below the bar: wording is the study's own que
 ngo_2025_green_subjective_norm,"Below the bar: wording is the study's own questionnaire block matched to the G_SN columns by printed order, with block identity confirmed by alpha and loadings; unpublished anchors are a source gap."
 otaki_2022_dental_adaptability,"Below the bar: item codes are the full administered sentences from the study's own file, and the absent bottom two anchors simply went unused by 18 respondents."
 pezzuti_2025_coolpeople_main_nfc,"Below the bar: wording and anchors are the study's own .sav labels; the misleading 'nfc' code name (these are CVSCALE uncertainty-avoidance items) and partial coverage are naming and design facts, not a text-vs-table mismatch."
-pickova2025_moral_justifications,Below the bar: the item statements are verbatim form headers verified against the data; the stem's '6' artifact is visible on its face and the missing anchors are a source gap.
 powell_2018_trust,"Below the bar: Trust2 and Trust3 are left blank because their wording was never published (a gap), and nothing substituted contradicts the table."
 pranckeviciene_2022_gad7,"Below the bar: item wording is the study's own Lithuanian labels and the instructions and anchors come from the official Lithuanian GAD-7 form in the same language, coded 0-3 exactly as stored."
 reinwarth_2023_loneliness3,"Below the bar: the table stores the raw 1-5 responses and option_text follows that coding; the paper's 0-4 scoring is a recode, not a mismatch between shipped text and data."
