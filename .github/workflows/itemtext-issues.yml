@@ -1,0 +1,145 @@
+# Daily item-text liveness refresh and issues-page reconciliation (#2236, #1828).
+#
+# Two things went wrong silently before this job existed, and it guards both.
+#
+# 1. itemtext/live_tables.csv stopped moving. refresh_live_tables.py crashed
+#    whenever a shard had no open draft (#2234), and a dead refresh leaves the
+#    old snapshot in place -- which looks exactly like a refresh that found
+#    nothing new. It sat frozen from 2026-09-06 to 2026-09-18. Here the refresh
+#    runs every day, and a crash fails the run instead of going unseen.
+#
+# 2. Notes written at triage never reached the public issues page. A note is
+#    only DUE once its table is live, which happens at a release, long after
+#    anyone is looking at that batch. 259 accumulated that way (#2236).
+#    check_issues_page.R already exits 1 on anything DUE; nothing ran it.
+#
+# The check is deliberately NOT part of an upload: Ben does the uploads, and no
+# review step gets added there. Clearing DUE is the bookkeeping pass's job
+# (itemtext/BATCH_PROCESS.md step 7), and this job is what notices when that
+# pass did not happen.
+#
+# A table that went live today is correctly DUE until that pass runs, so the
+# run fails only on DUE tables stamped as uploaded more than GRACE_DAYS ago, or
+# with no date recorded. Everything DUE is listed in the job summary either way.
+#
+# Snapshot changes land by auto-merged PR, the same way and for the same reason
+# as version-manifest.yml: GITHUB_TOKEN cannot push to main.
+name: itemtext issues page
+
+on:
+  schedule:
+    - cron: "45 13 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: itemtext-issues
+  cancel-in-progress: false
+
+env:
+  GRACE_DAYS: "7"
+
+jobs:
+  reconcile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      # The public page lives in the site repo; the checker reads it from main.
+      - uses: actions/checkout@v4
+        with:
+          repository: datapages/irw
+          ref: main
+          path: irw_site
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+          sudo apt-get update -qq && sudo apt-get install -y -qq r-base-core
+
+      - name: Refresh live_tables.csv
+        id: refresh
+        env:
+          # Read-only token, as in version-manifest.yml.
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+        run: |
+          python3 itemtext/refresh_live_tables.py
+          # The header carries the snapshot date, so compare the table rows only;
+          # a date-only change is not worth a PR.
+          if git diff -U0 -- itemtext/live_tables.csv | grep -E '^[+-][^+#-]' -q; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            git checkout -- itemtext/live_tables.csv
+          fi
+
+      - name: Open and merge snapshot pull request
+        if: steps.refresh.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          date="$(date -u +%F)"
+          branch="itemtext/live-tables-$date-$GITHUB_RUN_ID"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
+          git add itemtext/live_tables.csv
+          git commit -m "itemtext: refresh live_tables.csv for $date" \
+                     -m "Automated daily run of .github/workflows/itemtext-issues.yml (#1828)."
+          git push -u origin "$branch"
+          url="$(gh pr create --base main --head "$branch" \
+            --title "itemtext: refresh live_tables.csv for $date" \
+            --body "Automated daily liveness snapshot. Refs #1828.")"
+          gh pr merge "$url" --squash --delete-branch
+
+      - name: Reconcile the issues page
+        working-directory: itemtext
+        run: |
+          set +e
+          Rscript .claude/skills/irw-auto-itemtext/scripts/check_issues_page.R \
+            ../irw_site/itemtext_issues.qmd > check.txt 2>&1
+          rc=$?
+          set -e
+          cat check.txt
+          # 1 is the checker's "something is DUE or ORPHAN"; anything else is a crash,
+          # which must not read as a clean page.
+          if [ "$rc" -gt 1 ]; then exit "$rc"; fi
+          python3 - <<'EOF'
+          import os, re, sys, datetime
+          grace = int(os.environ["GRACE_DAYS"])
+          today = datetime.date.today()
+          lines = open("check.txt").read().splitlines()
+          due, inside = [], False
+          for l in lines:
+              if l.startswith("DUE"):
+                  inside = True; continue
+              if inside and not l.startswith("  "):
+                  inside = False
+              if inside and l.strip():
+                  due.append(l.strip())
+          overdue = []
+          for d in due:
+              m = re.search(r"uploaded (\d{4}-\d{2}-\d{2})", d)
+              if not m or (today - datetime.date.fromisoformat(m.group(1))).days > grace:
+                  overdue.append(d)
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as s:
+              s.write(f"## Issues page: {len(due)} DUE, {len(overdue)} older than {grace} days\n\n")
+              s.write("```\n" + "\n".join(due) + "\n```\n" if due else "Nothing DUE.\n")
+          if overdue:
+              print(f"::error::{len(overdue)} live table(s) have owed an issues-page entry for "
+                    f"more than {grace} days. Write the entry or record the drop in "
+                    "itemtext/fixes/issues_page_dropped.csv (BATCH_PROCESS.md step 7).")
+              sys.exit(1)
+          EOF

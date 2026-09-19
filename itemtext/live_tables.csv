@@ -1,12 +1,14 @@
-# item-text tables in the Redivis shards as of 2026-09-18
+# item-text tables in the Redivis shards as of 2026-09-19
 # status=published: a reader can fetch it. status=draft: uploaded, not released yet.
 # generated -- do not hand-edit; rerun itemtext/refresh_live_tables.py (irw#1828)
 table,shard,status
 16_personalityfactors,irw_text,published
 360emergencymed_azami_2024,irw_text,published
 ALSECYPIAMH_WU_2022_PHQ,irw_text,published
+AMI_CV_Hewitt2024,irw_text_2,published
 AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,irw_text,published
 AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,irw_text,published
+AOMT_BR_SF_EDPANAB_Geiger_2021_RF,irw_text_2,published
 APFCompact_Ptacek_2024_DASS-21,irw_text,published
 Adherence_Zissette_2018_SDB,irw_text,published
 COACH_Chen_2022_ADL,irw_text,published
@@ -16,12 +18,15 @@ COACH_Chen_2022_MOS_SSS_C,irw_text,published
 CPDMMC_Kunnari_2020_HCD,irw_text,published
 CPDMMC_Kunnari_2020_PDP,irw_text,published
 CQTMS_Hur_2023,irw_text,published
+CV_OASIS_ODSIS_PPE_Novak_2020_PANAS,irw_text_2,published
 CV_OASIS_ODSIS_PPE_Novak_2020_RSES,irw_text,published
 DMCT_Addis_2020_PSIQ,irw_text,published
 EEN_Lacey_2024_Children,irw_text,published
 EEN_Lacey_2024_Parent,irw_text,published
+EWAS_Sanford_2024,irw_text_2,published
 FAD_fadplus_goto2021,irw_text_2,published
 FEDSP_Trzcinska_2023_MonKnow,irw_text_2,published
+FGSIS_Berzeviczy_2018,irw_text_2,published
 FIVPEI_Perrig_2023_AttDiff,irw_text_2,published
 IJLS_Eersel_2024_DenialAcceptance,irw_text_2,published
 IJLS_Eersel_2024_IJLSreaction,irw_text_2,published
@@ -1026,9 +1031,9 @@ qaslu_prado_2024,irw_text,published
 qi_2025_dark_triad,irw_text_2,published
 qi_2025_panas,irw_text_2,published
 qi_2025_self_concept_clarity,irw_text_2,published
-qi_2025_self_construal,irw_text_2,draft
+qi_2025_self_construal,irw_text_2,published
 qi_2025_self_esteem,irw_text_2,published
-qi_2025_swls,irw_text_2,draft
+qi_2025_swls,irw_text_2,published
 qiang_2025_abusive_supervision,irw_text_2,published
 qiang_2025_coping,irw_text_2,published
 qiang_2025_job_dissatisfaction,irw_text_2,published
@@ -1061,7 +1066,7 @@ rightwing_authoritariansim,irw_text_2,published
 rinaldi_2021_mas,irw_text_2,published
 rmet_higgins_2022_rmet,irw_text,published
 rmet_higgins_2022_tom,irw_text,published
-roar_lexical,irw_text_2,draft
+roar_lexical,irw_text_2,published
 rodriguezandres_2016_mnemocity_usability,irw_text_2,published
 rodriguezquiroga_2024_epistemic_trust,irw_text_2,published
 roelen_2020_dietary_diversity,irw_text_2,published
@@ -1115,9 +1120,9 @@ silva_2018_mbds,irw_text_2,published
 silva_2018_phcs,irw_text_2,published
 silva_2023_ecohis,irw_text_2,published
 simsalRbim_Human_LargeValence_2017,irw_text_2,published
-simsalRbim_Human_LargeValence_2018,irw_text_2,draft
+simsalRbim_Human_LargeValence_2018,irw_text_2,published
 simsalRbim_Human_LowValence_2017,irw_text_2,published
-simsalRbim_Mice_LowValence,irw_text_2,draft
+simsalRbim_Mice_LowValence,irw_text_2,published
 sinche_2017_skill_development,irw_text_2,published
 sinche_2017_skill_importance,irw_text_2,published
 singh_2025_identity_cse,irw_text,published
@@ -1206,7 +1211,7 @@ szameitat_2015_multitask_examples,irw_text_2,published
 szameitat_2015_occupation_multitask,irw_text_2,published
 tan_2026_stem_technology_integration,irw_text_2,published
 taylorabdulai_2025_incentives,irw_text_2,published
-tears,irw_text_2,draft
+tears,irw_text_2,published
 teicher_2015_mace_distress_helpless,irw_text_2,published
 teicher_2015_mace_distress_terrified,irw_text_2,published
 teicher_2015_mace_emot_neglect,irw_text_2,published
@@ -1220,9 +1225,9 @@ teicher_2015_mace_witness_sib,irw_text_2,published
 temesgen_2025_elephant_park_attitude,irw_text_2,published
 tenseness_pcmrs,irw_text,published
 teodorini_2020_modafinil_attitudes,irw_text_2,published
-teq_novak_2021_scbs,irw_text_2,draft
+teq_novak_2021_scbs,irw_text_2,published
 teq_novak_2021_selfesteem,irw_text_2,published
-teq_novak_2021_spirit,irw_text_2,draft
+teq_novak_2021_spirit,irw_text_2,published
 thanh_2025_attitude,irw_text_2,published
 thanh_2025_environ_concern,irw_text_2,published
 thanh_2025_green_behavior,irw_text_2,published
@@ -1359,7 +1364,39 @@ yin_2022_values_importance,irw_text_2,published
 yu_2025_bedtime_procrastination,irw_text_2,published
 yu_2025_physical_activity,irw_text_2,published
 yuebo_2024_netbenefit,irw_text_2,published
+zaehl2023_twq_commitment,irw_text_2,published
+zaehl2023_twq_support,irw_text_2,published
+zamzuri_2021_rpap_attitude,irw_text_2,published
+zamzuri_2021_rpap_practice,irw_text_2,published
+zamzuri_2021_rpap_risk_perception,irw_text_2,published
+zautra_2015_caug,irw_text_2,published
+zautra_2015_tmms24,irw_text_2,published
+zeng_2025_megaproject_msr,irw_text_2,published
+zeng_2025_megaproject_seap,irw_text_2,published
+zeng_2026_gai_exploitation,irw_text_2,published
+zeng_2026_gai_inst_support,irw_text_2,published
+zeng_2026_gai_learning_effect,irw_text_2,published
+zeng_2026_gai_role_adapt,irw_text_2,published
+zeng_2026_gai_self_efficacy,irw_text_2,published
+zeng_2026_gai_ttf,irw_text_2,published
+zhang_2020_trait_creativity_mood,irw_text_2,published
+zhang_2024_attractiveness,irw_text_2,published
+zhang_2024_gift_intention,irw_text_2,published
+zhang_2024_parasocial,irw_text_2,published
+zhang_2024_streamer_dsp,irw_text_2,published
+zhang_2024_viewer_dsp,irw_text_2,published
+zhang_2025_coercive_pressure,irw_text_2,published
+zhang_2025_environ_awareness,irw_text_2,published
+zhang_2025_normative_pressure,irw_text_2,published
+zhang_2025_self_efficacy,irw_text_2,published
+zhao_2024_erq,irw_text_2,published
+zhao_2025_digital_literacy,irw_text_2,published
+zhao_2025_nat_env_perception,irw_text_2,published
+zhao_2025_place_attachment,irw_text_2,published
+zhao_2025_psych_recovery_eval,irw_text_2,published
 zhou_2016_anxiety,irw_text,published
 zhou_2016_burnout,irw_text,published
 zhou_2016_coping_style,irw_text,published
 zhou_2016_personality,irw_text,published
+zhou_2024_smart_home_intention,irw_text_2,published
+zhou_2025_ehealth_literacy,irw_text_2,published
