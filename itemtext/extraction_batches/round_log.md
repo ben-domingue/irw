@@ -20605,3 +20605,42 @@ is unchanged, none from this batch). mapping_verification.csv +3 rows (no data_l
 rows). Sidecar merge note: the practice agent wrote CRLF sidecars, so they were merged with csv.reader rather
 than line-wise.
 Queue: **99 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_245 — 2026-09-18T20:12-07:00 — 3 tables, 3 agents
+
+**2 written / 1 blocked / 0 failed** (yield 2/3). Circuit breaker: 0% failed, not tripped. No kills, no rate limits.
+
+- `zamzuri_2021_rpap_risk_perception`: **written**, 96 rows (D1..D12 × resp 1–8). PLOS ONE e0256636 (CC BY),
+  paper_explicit via Table 2's printed codes. It follows batch_244's practice convention: wording from the S1
+  Questionnaire (s002.docx), where all 12 D items appear. 9 match Table 2 exactly; 3 differ only in punctuation.
+  language="English; Malay" with the Malay-omission public_note. Verification **VERIFIED**: live M/SD matched
+  against 24 candidates (12 Table 2 rows × as printed / reflected 9−M), and 12/12 are nearest their own code.
+  10 are within 0.006, D2 is off by 0.015 and D12 by 0.021. The tightest pair is D7 vs D9 (0.005 vs 0.062).
+  **Data finding: 8 of 12 items (D2, D3, D7–D12) are stored reverse-scored** in the live table, and the paper
+  doesn't say so. Those 8 items therefore ship with reversed anchors (resp 1="Strongly Agree", 8="Strongly Disagree"),
+  following the burkert/baka precedent. **Orchestrator re-checked (Step 5b):** the authors' S1 xlsx Sheet3
+  headers carry `_r` columns for exactly D2, D3, D7, D8, D9, D10, D11, D12. The live means confirm it (D8 1.66
+  live vs 7.34 printed; D7 2.37, D9 2.31). D12's direction is the least certain (answers spread evenly; rests
+  mostly on the D12_r header). `data/zamzuri_2021_rpap.py` passes the recoded values through unflagged, so this
+  may warrant a data-side note.
+- `zautra_2015_caug`: **written**, 40 rows (caug1..caug10 × resp 1–4). This is the Spanish General Self-Efficacy
+  Scale (Schwarzer & Jerusalem). Spanish item_text/option_text come verbatim from codebook S2, and the English in
+  `_translated` comes from the paper's Table 4 (translation_source=study_supplied). paper_explicit. Verification
+  **PARTIAL**: live counts equal the .sav caug<i>pre/post columns cell for cell (20/20 item-waves, no duplicate
+  count vectors). The Table 5 GSE means reproduce within 0.007 for all 4 group×wave cells. Which column carries
+  which wording rests on the codebook labels, not on data. **The codebook's English column swaps CAUG2/CAUG8
+  relative to its own Spanish column.** The agent followed the Spanish, which is what was administered and is in
+  published order. The data can't separate the pair (3.437 vs 3.419). A public_note discloses this. Rights:
+  the authors grant reproduction with credit (FAQ hash fdc6c30d… matches earlier rounds). No register row was
+  added under the 2026-09-10 rule.
+- `zautra_2015_iri`: **blocked** (retry test NO). This is Davis's IRI (Spanish administration), and the existing
+  IRI register row (irw#1955) is a block because commercial use is reserved. The agent re-fetched the guide
+  (sha256 a5af661f…) and its wording is unchanged. Even without the rights issue, the .sav has no wording and
+  Table 3 prints only the 7 English PT items, while the data hold 13 (PT+EC). The paper calls it a 7-item PT
+  subscale, which contradicts the data and the dictionary. pending_index_notes row added. This block has no
+  verification sidecar or verify script, per Step 5b (nothing shipped).
+
+Gates: normalize (caug normalized, 41 lines) · audit_batch 2 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=2 · lint clean · irw-validate ok ×2 · check_provenance exit 0 (the `mixed` REVIEW list of 19
+is unchanged, none from this batch). mapping_verification.csv +2 rows (no data_labels tables, so no NOT_NEEDED rows).
+Queue: **96 pending, 0 in_progress.** Cap (batch_258) not reached.
