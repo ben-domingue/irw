@@ -67,14 +67,30 @@ def push_one(dataset, path: Path, table_name: str, expected_rows: int) -> Upload
 
         table = table.create(description=description) if description else table.create()
         upload = table.upload(path.name)
-        with path.open("rb") as handle:
-            upload.create(
-                handle,
-                type="delimited",
-                remove_on_fail=True,    # do not leave a half-finished upload behind
-                wait_for_finish=True,
-                raise_on_fail=True,
-            )
+        try:
+            with path.open("rb") as handle:
+                upload.create(
+                    handle,
+                    type="delimited",
+                    # Every file red_up uploads is a .csv; say so rather than let
+                    # Redivis sniff. It sniffed ';' on the mede_2025 item tables,
+                    # whose `language` cell lists 37 languages separated by '; ',
+                    # and failed with "no variables found" (2026-09-19).
+                    delimiter=",",
+                    remove_on_fail=True,    # do not leave a half-finished upload behind
+                    wait_for_finish=True,
+                    raise_on_fail=True,
+                )
+        except Exception:
+            # remove_on_fail removes the upload, not the table created above, so
+            # a failed upload used to leave an EMPTY table in the draft -- which a
+            # release would publish as a real, zero-row table. Drop it. (Any
+            # previous table of this name was already deleted: see the replace.)
+            try:
+                table.delete()
+            except Exception:
+                pass
+            raise
 
         ok, actual = verify(table, expected_rows)
         result.actual = actual

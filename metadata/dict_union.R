@@ -526,6 +526,10 @@ BIBLIO_REFRESH_COLS <- list(
     Reference_x     = "Reference",
     DOI__for_paper_ = "DOI (for paper)",
     URL__for_data_  = "URL (for data)",
+    ##The source deposit's licence, distinct from the one IRW redistributes
+    ##under (#2032). Sparse: most rows have never had it recorded, and a blank
+    ##here means "not recorded", never "unlicensed".
+    Original_License = c("Original License", "Original_License"),
     Derived_License = c("Derived License", "Derived_License")
 )
 
@@ -542,7 +546,7 @@ BIBLIO_REFRESH_COLS <- list(
 biblio_norm <- function(x, col) {
     if (identical(col, "DOI__for_paper_")) return(dict_norm_doi(x))
     x <- gsub("\\s+", " ", trimws(as.character(x)))
-    if (identical(col, "Derived_License")) x <- tolower(x)
+    if (col %in% c("Derived_License", "Original_License")) x <- tolower(x)
     x
 }
 
