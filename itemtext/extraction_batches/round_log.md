@@ -20737,3 +20737,35 @@ Housekeeping: I made the same CRLF slip as batch_247 on the claim (csv writer no
 and the file was restored with a byte-level edit of the 3 rows. The later "done" update was byte-level from the start.
 
 Queue: **87 pending, 0 in_progress.** Next up: `zeng_2026_gai_self_efficacy`, `zeng_2026_gai_ttf` (same article). Cap (batch_258) not reached.
+
+## batch_249 — 2026-09-18T20:52–21:02-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+- `zeng_2026_gai_self_efficacy` (SE1..5 = Q15..Q19): **written**, **VERIFIED**. From the same Zeng, Kang & Piaw 2026 PLOS ONE article (CC BY 4.0) as batch_247/248, with the same conventions:
+  paper_explicit · translated_substitute/study_supplied, language=Chinese · endpoints only.
+  - Live SE<k> matches S1 Q<14+k> for 207/207 ids; the best other column reaches ≤96/207.
+  - Loadings 0.920/0.863/0.900/0.900/0.908 vs Table 3's 0.919/0.865/0.899/0.903/0.906.
+  - **Rights call for triage (same question as batch_248's role_adapt, a little closer):** Table 2's source cell [36] spans both RA and SE and cites MAILS (Carolus et al. 2023; journal version CC BY-NC-ND, arXiv preprint CC BY 4.0), which has its own AI Self-Efficacy facet.
+    The agent compared every item with MAILS's item list: none copies or closely paraphrases a MAILS item. SE2's "independently / without guidance" shares only the "on my own" idea with MAILS problem-solving item 2.
+    Treated as the authors' own wording. No register row was written. If MAILS derivation is ruled otherwise, hold this table together with role_adapt.
+- `zeng_2026_gai_ttf` (TTF1..5 = Q5..Q9): **written**, **VERIFIED**. This is the block with S1's permuted physical order (Q5,Q6,Q9,Q7,Q8); the rename is by name, and the live data confirm it.
+  - 207/207 id-level matches for each item; the best other column reaches ≤103/207.
+  - Loadings 0.976/0.774/0.895/0.909/0.848 vs 0.974/0.777/0.894/0.912/0.849. Live TTF5's 0.848 matches Q9, which rules out the positional reading.
+  - Rights: the items are cited to Al-Mamary et al. 2024 (Futur Bus J, CC BY 4.0 per Crossref). Its full text sat behind a JS challenge, so the wording was not compared, but a derivative would be CC BY anyway. Goodhue & Thompson is cited for the theory only.
+- `zhang_2020_trait_creativity_mood` (12 items, resp 0–100): **written**, **PARTIAL**. Source: Zhang et al. 2020 PLOS ONE e0236987 (CC BY 4.0).
+  - Coding: paper_order · translated_substitute/study_supplied, language=Chinese. The language is inferred: a Tsinghua sample on a Chinese ESM app, and the paper does not state it.
+  - Only the 0/100 anchors are published; 1–99 are left blank.
+  - **Source override:** the S1 header names two columns "tired" and none "sleepy". The agent shipped `tired.1` as "sleepy".
+  - **Step 5b re-check.** I read the raw S1 header myself: relaxed, tired, happy, stressed, concentrated, tired, active, angry, depressed, interested.
+    - The file order matches the paper's list only at positions 1–5. Positions 7–10 differ (paper: interested, active, angry, depressed). The agent's public_note said the file "otherwise follows the paper's item order", which is false. **I corrected the public_note** and added the check to note and notes.csv.
+    - The PA/NA reproduction does hold. I recomputed it independently: NA = 34.89/15.74/0–94 with tired.1 counted as negative, matching Table 1; without tired.1 it is 32.71. So one of the two "tired" columns is certainly the paper's "sleepy". Which one is not established (r = 0.74).
+    - Hence PARTIAL. **Triage call:** keep "sleepy" on position, or relabel tired.1 as ambiguous.
+  - The creativity stem "how original/useful…" was split at the slash into two stems.
+
+Gates: normalize_nulls 0/3 changed · audit_batch 3 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=3 · lint clean (3 rows) · irw-validate ok ×3 ·
+check_provenance exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none of those tables are from this batch.
+Housekeeping: my first claim write went through csv.DictWriter and normalised the doubled-CR rows again (the same slip as batch_247/248). I caught it in the diff, restored with `git checkout`, and redid the claim byte-level. The later "done" update was byte-level.
+The mapping_verification.csv append matched the file's CRLF endings.
+
+Queue: **84 pending, 0 in_progress.** Next up: `zhang_2024_attractiveness`, `zhang_2024_gift_intention`, `zhang_2024_parasocial`. Cap (batch_258) not reached.
