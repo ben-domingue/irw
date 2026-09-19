@@ -327,7 +327,7 @@ the 13:30 job refreshed.
 
 | Workflow | When (UTC) | What it does |
 |---|---|---|
-| `quarto_publish.yaml` | `workflow_dispatch`, **and** daily 14:30 | renders and publishes to `gh-pages`; the scheduled run first checks whether `main` has moved since the last publish and skips if not |
+| `quarto_publish.yaml` | `workflow_dispatch`, **and** every 3 h at :17 (datapages/irw#205) | renders and publishes to `gh-pages`; the scheduled run first checks whether `main` has moved since the last publish and skips if not; one publish at a time (`concurrency`) |
 
 The scheduled run watches *that repository only*. Pages query Redivis live at
 render time, so a new `irw_meta` release changes what the site would say without
