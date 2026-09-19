@@ -311,6 +311,14 @@ safe now that group is a function of item.
 > `resp` is the literal string `"NA"`**, which is what types its `resp` column as
 > a string. Both scripts now drop missing responses rather than writing them.
 
+> **`number_pattern_game` — fixed 2026-09-19: the probe was dropped, not a
+> trial index.** Each row judges whether `target` fits `set`; the script kept
+> `set` and dropped `target`, so every id+item pair was 30 different questions.
+> `item` is now set:target (25,499 items), with `trial_number`, `rt` and
+> `itemcov_set`; 272,700 rows, nothing removed. Its published item text
+> (batch_121) is re-keyed to match and must be released with it. Staged at
+> `tmp/corpus_trust_1856/number_pattern_game/`.
+
 > **`pact_project` — fixed 2026-09-19, a dedupe after all.** The five LDbase
 > files download without an account and the unfixed script reproduces the live
 > table exactly. Not waves: no student is in two cohorts. The copies come from
