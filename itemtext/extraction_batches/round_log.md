@@ -20534,3 +20534,39 @@ originators:
 Schmidt / Santos & Castro attribution question. A ruling on the Schmidt contact clause would settle tk and
 probably pck in one go.
 Queue: **127 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_243 — 2026-09-18T19:54-07:00 (3 agents, 3 tables)
+
+**Written 2 / blocked 1 / failed 0.** Yield 2/3. Circuit breaker not tripped (0% failed).
+
+- `yuebo_2024_use` — **written**, 25 rows (USE1..USE5 × resp 1–5). Same paper and convention as the
+  batch_240–242 siblings (translated_substitute / study_supplied, option_text blank, no instructions).
+  **Source defect, confirmed by orchestrator:** the S1 Appendix prints the "Continuous Use" block with codes
+  US1..US5, colliding with the User Satisfaction block's US1..US4. The S1 Data headers are USE1..USE5 +
+  US1..US4, and Table 3 uses USE1..USE5. Resolved by block heading + block size (5 vs 4) + ordinal suffix, so
+  mapping_basis=paper_order (not paper_explicit). Verification **PARTIAL**: the per-item resp counts
+  match S1 Data vs live (e.g. USE1 2/7/23/128/85), but the item means span only 4.08–4.21 and nothing
+  separates items by content. A swap of appendix rows would go undetected. Rights: Urbach, Smolnik & Riempp (2010) JSIS, no located
+  restriction, so it ships on silence (same originator/verdict as sysquality/srvquality).
+- `zaehl2023_twq_commitment` — **written**, 20 rows (COMT1..3, COMT4r × resp 1–5). German item_text with
+  the study's own English in `_translated` (OSF jb94w questionnaire Table I, CC BY 4.0). **Caveat:** that
+  English is the authors' DeepL output (footnoted in the PDF), recorded as translation_source=study_supplied.
+  Verification **VERIFIED**: the live item×resp counts match the raw OSF CSV in all 20 cells, and all four
+  distributions are distinct. The published COMT mean 3.47 reproduces only with COMT4r reversed (3.477 vs raw
+  3.116). Rights: Hoegl & Gemuenden (2001) TWQ, no located restriction, so it ships on silence.
+- `zaehl2023_hexaco` — **blocked (rights)**, retry test NO. German HEXACO-60, fully published with codes
+  (60/60 would be paper_explicit), but the register's HEXACO-PI-R row is `block` (irw#1945, 2026-09-05).
+  Orchestrator confirmed the register row. Row added to itemtables/pending_index_notes.csv. It is a candidate
+  for `excluded`, like de_vries_2022_hexaco_*. That is a human call.
+
+Gates: normalize (nothing to change) · audit_batch 2 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=2 · lint clean · irw-validate ok ×2 · check_provenance exit 0 (the `mixed` REVIEW list of
+19 is unchanged, none from this batch). mapping_verification.csv +2 rows (no data_labels tables, so no
+NOT_NEEDED rows).
+
+**Notable:** `zaehl2023_twq_support` (next in queue) is from the same OSF questionnaire and should ship
+the same way as twq_commitment. The queue file has mixed line endings (some rows `\r\r\n`, which parse
+as blank rows), so a naive csv.reader rewrite IndexErrors out. The claim was done as a byte-level edit of
+the three lines. At claim time pending was 105, not the 127 in batch_242's entry. a69f6675 restored #2227's 22
+batch_204/205 rows, which accounts for the gap exactly.
+Queue: **102 pending, 0 in_progress.** Cap (batch_258) not reached.
