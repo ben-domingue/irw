@@ -20644,3 +20644,33 @@ Gates: normalize (caug normalized, 41 lines) · audit_batch 2 PASS, no anomalies
 verify_batch PASS=2 · lint clean · irw-validate ok ×2 · check_provenance exit 0 (the `mixed` REVIEW list of 19
 is unchanged, none from this batch). mapping_verification.csv +2 rows (no data_labels tables, so no NOT_NEEDED rows).
 Queue: **96 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_246 — 2026-09-18T20:22–20:40-07:00 — 3 tables, 3 agents
+
+**1 written / 2 blocked / 0 failed** (yield 1/3). Circuit breaker not tripped (0% failed).
+
+- `zautra_2015_tmms24`: **written**, 120 rows (TMMS24_1..24 × resp 1–5), Spanish TMMS-24 (Fernández-Berrocal).
+  Spanish text is verbatim from codebook S2 (the source the batch_245 siblings used), typos kept and disclosed in public_note.
+  paper_explicit. Verification **PARTIAL**, and verify_ PASS. Live counts equal the .sav TMMS24_<i>pre/post columns cell
+  for cell (48/48 item-waves). The Table 5 means reproduce within 0.019. 23/24 items correlate highest with their own subscale; the
+  miss is TMMS24_23, which is ceiling-heavy (193/312 = 5). Order within a subscale rests on the codebook labels.
+  **English is machine_translation**: the paper's Table 2 is the original English TMMS, not the Spanish that was administered, and the codebook's
+  English is a loose content gloss that repeats one sentence for items 18 and 20. So an issues-page entry is owed at upload. check_provenance
+  lists it as HELD, so no entry is owed yet. **Rights: passed on SILENCE, which is not a grant.** There is no TMMS register row. No terms were locatable (the UMA lab site
+  has no instrument page, and laboratoriodeemociones.com is a login wall). The codebook's "Copyright 1995 APA, Adapted with
+  permission" line is a bare notice. The English original's rights sit upstream. **Worth a ruling before upload.**
+- `zeng_2025_academic_buoyancy_cfa` / `_efa`: **both blocked on rights** (retry test NO). The two agents concurred independently.
+  Items B24–B27 reword the four Uncertain Control items of Martin's fee-licensed **Motivation and Engagement Scale**
+  ("unsure" is flipped to "sure"; B27 is close to verbatim to the MES sample item). **Orchestrator re-checked (Step 5b):** I re-fetched Lifelong's terms page
+  (sha256 140980cd…, a dynamic page, so each agent got a different hash). The clauses are verbatim: one sample item per scale, prior
+  written permission required for adaptations, and "revisions or adaptations" barred from electronic publication. S1 Appendix A items 24–27
+  follow the MES template. **New register row added: MES → block.** Gate-passing candidates are parked in `.cache/` (cfa 21 items, efa 32
+  items; efa's mapping is VERIFIED against all 128 Table 2 cells). A partial ship with B24–B27 withheld would fail the item-set gate, so that is Ben's
+  call. Side findings for any future ship: efa's B9/B10/B13/B14/B17/B19 are stored already reverse-scored. The study's English for
+  items 21/22 does not translate the administered Chinese. The paper's goal-subscale α of .77 does not reproduce (.565 in data).
+  pending_index_notes rows added for both.
+
+Gates: normalize (0 changed) · audit_batch 1 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=1 · lint clean ·
+irw-validate ok · check_provenance: the pre-existing lys_2020_rape_3_kpnts missing-entry line and the unchanged `mixed` REVIEW list of 19, none from this batch.
+mapping_verification.csv +1 row (no data_labels tables, so no NOT_NEEDED rows).
+Queue: **93 pending, 0 in_progress.** Cap (batch_258) not reached.
