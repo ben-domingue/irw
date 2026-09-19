@@ -52,6 +52,8 @@ import pandas as pd
 import pyarrow.parquet as pq
 import requests
 
+from irw_validate.compat import run_qc
+
 REPO = "Open-Eval-Commons/OpenEval"
 REV = "23a1ded985b3c2cdaaddb27581a35bfabe0ad7e7"
 BASE = f"https://huggingface.co/datasets/{REPO}/resolve/{REV}"
@@ -118,6 +120,9 @@ def convert():
     d = d[["id", "item", "resp", "cov_model_size", "cov_temperature", "itemcov_n_instructions"]]
     d = d.sort_values(["id", "item"], key=lambda s: s.map(
         lambda v: int(v.rsplit("_", 1)[1]) if s.name == "item" else v)).reset_index(drop=True)
+
+    bad = [c for c in run_qc(d) if c.status == "fail"]
+    assert not bad, [(c.name, c.detail) for c in bad]
 
     os.makedirs(OUT_DIR, exist_ok=True)
     out = os.path.join(OUT_DIR, f"{TABLE}.csv")
