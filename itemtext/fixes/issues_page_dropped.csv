@@ -63,3 +63,8 @@ weatherspoon_2015_pediatricians_effectiveness,"Below the bar: the shipped Yes/No
 wesselmann_2018_msp,"Below the bar: verbatim .sav labels for the study's own military social support measure; the MSPSS name is a dictionary Description error, not a text mismatch."
 wiedemann_2021_text_readability,"Below the bar: the six semantic-differential items are the administered German with the study's own English, and the unlabelled scale points and unstated pole direction are a source gap."
 wolf_2017_study2_nature_connect,Below the bar: the deposit's own variable labels are the sole and verbatim source; that the scale is unreported in the paper and only one item mentions nature is orientation.
+presenteeism_golz_2024,"Below the bar: the study's own wording; that resp 6 means 'I was not ill' (the paper's 0, excluded by the authors) is a response-data fact carried in option_text and the public_note."
+talaifar_2025_study2_plp,"Below the bar: the study's own Qualtrics wording, tied by column name; item codes being the matched sensing-variable names is orientation, and the item_text says what was rated."
+cogcontrol_gyurkovics_2019_mwprobe,"Below the bar: the verbatim probe question; the binary resp collapsing four administered options is spelled out in each option_text row."
+talaifar_2025_study1_lifestyle_survey,"Below the bar: the study's own codebook wording, printed against the data's own column names; nothing in the text contradicts the table."
+morgan_2026_music_personality_stompr,"Below the bar: the STOMP-R genre names taken from the data's own labels; the retained failed-attention-check respondents are a response-data fact (cov_catch1), not an item-text mismatch."
