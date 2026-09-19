@@ -21018,3 +21018,15 @@ Gates:
 Housekeeping: queue_state.csv has mixed CRLF/LF line endings, and a csv.DictWriter rewrite churned every line. The claim and the done update were therefore made byte-wise on the 3 rows only.
 
 Queue: **157 pending, 0 in_progress.** Next up: `uti_newlands_2023_rutiiq` and `uti_newlands_2023_wpai`, which are siblings of this batch's GAD/PHQ from the same OSF file (tell agents), then `dss_mouta_2021`. Cap (batch_264) not reached.
+
+## batch_259 — 2026-09-19T09:20 (3 tables, 3 agents)
+
+**2 written / 1 blocked / 0 failed.** Yield 2/3. Circuit breaker: 0% failed, no trip. No kills, no rate limits.
+
+- `dss_mouta_2021` — written, 10 items x 5 levels. Brazilian Portuguese administered form from the study's OSF deposit (4xz8s); English = Hamilton, Shih & Mohammed 2016 original items + machine-translated instructions/labels 2-4 (translation_source=mixed; public_note written, so an issues-page line is owed on ship). paper_explicit. Verification PARTIAL: the authors' own Racional_A/Intuitivo_A reproduce for 1218/1218 people from exactly 1 of 252 five-item splits, dss_10 pinned as a marker (mean r -0.246 with the rational block); order within each block not established.
+- `uti_newlands_2023_wpai` — written, 6 items. WPAI:SHP V2.0 US English from reillyassociates.net, placeholder PROBLEM kept (the study's UTI adaptation is unpublished). paper_order, VERIFIED (skip gate 84/84 + 156/156, activity impairment 45.71/29.55 vs published 45.7/29.6, OWI SD 33.34 vs 33.3 with wpai_2 vs 31.02 swapped). **Rights, for Ben:** "no permission, no fees" but "cannot be called the WPAI if questions or responses are changed". The agent reads that as a naming condition, since IRW ships the form unaltered. If it is read as a reservation (cf. FATCOD), withdraw this table. Response data: 12 baseline + 7 retest 0-hours respondents answered wpai_5 despite the skip rule.
+- `uti_newlands_2023_rutiiq` — **blocked (rights, retry test NO).** PARED Insights requires a licence request and reserves licensing costs; the orchestrator re-fetched the clause and confirmed it verbatim. Everything else was there: all five published subscale totals reproduce exactly from OSF. The work is saved in the provenance note. Pending-index row added. **No instrument_rights_register.csv row yet** (rounds don't write it), so a human needs to add one.
+
+Gates: normalize_nulls 0 changes; audit_batch 1 PASS / 1 WARN (wpai, expected: skip-routed items + free-entry hours, explained in notes.csv); verify_batch PASS=2; lint 0 ERROR / 1 WARN (wpai VERIFIED with a hedge about the published OWI *mean*, not the mapping; kept VERIFIED, reasoning in notes.csv); irw-validate clean; check_provenance clean (1 pre-existing `mixed` REVIEW, ye_2025_q25_scale, not this batch).
+
+Housekeeping: the queue claim/update was made byte-wise again (queue_state.csv mixes CRLF/CR/LF line endings). Queue: **154 pending, 0 in_progress.** Next up: christiannationalism_davis2021, morgan_2026_music_personality_stompr, bfi_goldberg_1992_agreeableness. Cap (batch_264) not reached.
