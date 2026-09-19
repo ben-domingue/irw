@@ -20989,3 +20989,112 @@ Gates:
 Housekeeping: the claim write normalized 3 LF-only lines to CRLF. The final queue update was redone byte-wise from HEAD, so the committed diff is exactly the 3 rows for this batch.
 
 Queue: **60 pending, 0 in_progress.** Next up: `IJLS_Eersel_2024_ICECAP`, `IJLS_Eersel_2024_IUS`, `IJLS_Eersel_2024_Optimism`, all from one source, so tell each agent about its siblings. Cap (batch_258) not reached.
+
+## batch_258 — 2026-09-19 09:09 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills and no rate limits. All three agents finished in 3–4.5 minutes.
+
+- `presenteeism_golz_2024` (Golz et al. 2024, J Occup Rehabil, PMC11550221 and OSF wh483, both CC BY 4.0; 6 items, 36 rows): **VERIFIED**, mapping_basis `paper_order`, text_source `study_materials`. Route 1: the per-item M/SD on the 324 non-"not ill" respondents reproduce Table 3 within 0.006, and 0 of 15 pairwise swaps also match.
+  - **It overrides the source's numeric code.** The paper prints "I was not ill" as 0, while the deposit and the live table code it 6. resp=6 ships as "I was not ill".
+  - **Response-data defect, for a human.** resp 6 is a not-applicable sentinel sitting on the 1–5 frequency scale. The orchestrator re-checked on live data: 487 ids, 163 with any 6 (= the paper's 163 exclusions), 65 who answered 6 on all six items. An ordinal model will read "not ill" as maximal presenteeism. The candidate fix is to recode 6 → NA in `data/presenteeism_golz_2024.py` (not done here). It is disclosed in public_note and is worth its own issue.
+  - The live table also carries 114 resp=NA rows. That is a property of the data.
+  - No instruction stem is published, so `instructions` is blank.
+- `uti_newlands_2023_gad` (Newlands et al. 2023, Qual Life Res; OSF q2svk; 7 items, 28 rows): **PARTIAL**, `paper_order`, `canonical_instrument` (the phqscreeners GAD-7 English form; register verdict for the PHQ/GAD family is ship).
+  - The deposit stores the GAD-7 as **1–4**, not the printed 0–3. The direction is pinned by the published total: sum(resp)−7 reproduces 9.23/6.21/0–21, and the orchestrator re-checked it on live data at 9.229/6.209. This is disclosed in public_note.
+  - gad_5 and gad_4 are pinned by marker and cross-instrument correlations. The order among gad_1/2/3/6/7 is not established.
+- `uti_newlands_2023_phq` (same source; 9 items, 36 rows): **PARTIAL**, `paper_order`, `canonical_instrument` (Pfizer PHQ-9 English).
+  - The published total reproduces (11.479/7.216 vs 11.5/7.22), which pins 0 = Not at all.
+  - phq_2/3/4/8/9 are pinned by correlations with the study's own labelled RUTIIQ items and GAD item 5, and by the item distributions. The order among phq_1/5/6/7 is not established.
+- Neither sibling agent touched the other's files. The two verify scripts read the sibling table only as a correlate.
+
+Gates:
+- normalize_nulls: 0/3 rewritten.
+- audit_batch: PASS ×3.
+- verify_batch: PASS=3.
+- lint: 0 ERROR, 0 WARN, 1 INFO (golz: VERIFIED stands under the item-axis rule).
+- irw-validate: ok ×3.
+- check_provenance: clean. The `mixed` REVIEW list has 1 table (ye_2025_q25_scale), not from this batch.
+
+Housekeeping: queue_state.csv has mixed CRLF/LF line endings, and a csv.DictWriter rewrite churned every line. The claim and the done update were therefore made byte-wise on the 3 rows only.
+
+Queue: **157 pending, 0 in_progress.** Next up: `uti_newlands_2023_rutiiq` and `uti_newlands_2023_wpai`, which are siblings of this batch's GAD/PHQ from the same OSF file (tell agents), then `dss_mouta_2021`. Cap (batch_264) not reached.
+
+## batch_259 — 2026-09-19T09:20 (3 tables, 3 agents)
+
+**2 written / 1 blocked / 0 failed.** Yield 2/3. Circuit breaker: 0% failed, no trip. No kills, no rate limits.
+
+- `dss_mouta_2021` — written, 10 items x 5 levels. Brazilian Portuguese administered form from the study's OSF deposit (4xz8s); English = Hamilton, Shih & Mohammed 2016 original items + machine-translated instructions/labels 2-4 (translation_source=mixed; public_note written, so an issues-page line is owed on ship). paper_explicit. Verification PARTIAL: the authors' own Racional_A/Intuitivo_A reproduce for 1218/1218 people from exactly 1 of 252 five-item splits, dss_10 pinned as a marker (mean r -0.246 with the rational block); order within each block not established.
+- `uti_newlands_2023_wpai` — written, 6 items. WPAI:SHP V2.0 US English from reillyassociates.net, placeholder PROBLEM kept (the study's UTI adaptation is unpublished). paper_order, VERIFIED (skip gate 84/84 + 156/156, activity impairment 45.71/29.55 vs published 45.7/29.6, OWI SD 33.34 vs 33.3 with wpai_2 vs 31.02 swapped). **Rights, for Ben:** "no permission, no fees" but "cannot be called the WPAI if questions or responses are changed". The agent reads that as a naming condition, since IRW ships the form unaltered. If it is read as a reservation (cf. FATCOD), withdraw this table. Response data: 12 baseline + 7 retest 0-hours respondents answered wpai_5 despite the skip rule.
+- `uti_newlands_2023_rutiiq` — **blocked (rights, retry test NO).** PARED Insights requires a licence request and reserves licensing costs; the orchestrator re-fetched the clause and confirmed it verbatim. Everything else was there: all five published subscale totals reproduce exactly from OSF. The work is saved in the provenance note. Pending-index row added. **No instrument_rights_register.csv row yet** (rounds don't write it), so a human needs to add one.
+
+Gates: normalize_nulls 0 changes; audit_batch 1 PASS / 1 WARN (wpai, expected: skip-routed items + free-entry hours, explained in notes.csv); verify_batch PASS=2; lint 0 ERROR / 1 WARN (wpai VERIFIED with a hedge about the published OWI *mean*, not the mapping; kept VERIFIED, reasoning in notes.csv); irw-validate clean; check_provenance clean (1 pre-existing `mixed` REVIEW, ye_2025_q25_scale, not this batch).
+
+Housekeeping: the queue claim/update was made byte-wise again (queue_state.csv mixes CRLF/CR/LF line endings). Queue: **154 pending, 0 in_progress.** Next up: christiannationalism_davis2021, morgan_2026_music_personality_stompr, bfi_goldberg_1992_agreeableness. Cap (batch_264) not reached.
+
+## batch_260 — 2026-09-19T09:31 (3 tables, 3 agents)
+
+**2 written / 1 blocked / 0 failed.** Yield 2/3. Circuit breaker: 0% failed, no trip. No kills, no rate limits.
+
+- `morgan_2026_music_personality_stompr` — written, 23 items x 7 levels. data_labels: the script melts STOMPR01..23 by name, and the SurveyMonkey export's sub-header row labels every column with its genre (23/23). Caveat (notes.csv): the paper confirms only the 1/7 anchors ("Dislike Strongly"/"Like Strongly"); the labels for 2-6 and the instructions come from Rentfrow's canonical STOMP-R form and aren't confirmed as displayed. Response data: the live n is about 530 per item vs the paper's 389 because the Catch1 attention-check failures are kept (exposed as cov_catch1). Not an itemtext issue.
+- `bfi_goldberg_1992_agreeableness` — written, 10 items, 1/3/5 anchors only (2 and 4 blank, not padded). data_labels from openpsychometrics BIG5.zip codebook.txt. **Step 3b instrument mismatch:** the dictionary says "Big Five Inventory", but these are the 50-item IPIP Big-Five Factor Markers (confirmed against ipip.ori.org's Factor II key), not the BFI-44. All five `bfi_goldberg_1992_*` dictionary descriptions need correcting. The IPIP register row (ship) governs rights, not the BFI-44 block. public_note discloses the mismatch. The convention for the four queued siblings is written into this table's provenance note, so later rounds should reuse it.
+- `christiannationalism_davis2021` — **blocked (response-data defect, retry test NO).** `data/christiannationalism_davis2021.R` has an off-by-one (`items[i]` with `items<-names(x)[-1]`), so every live code names the next source column and the last item is coded as the string "NA". **The orchestrator re-checked this:** live `xianvalues` floor 40.2% = source `xiannation` 554/1378, and all six floor/ceiling pairs match the shift. Fix: script + re-upload of the response table, then re-queue. The deposit's .do file has all six item wordings keyed to the correct names. Pending-index row added. **Worth a GitHub issue (not filed by the round).**
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x2; verify_batch MISSING(exempt)=2 (both data_labels); lint clean (2 NOT_NEEDED rows, written into both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance clean (1 pre-existing `mixed` REVIEW, ye_2025_q25_scale, not from this batch).
+
+Housekeeping: the queue claim/update was made byte-wise (mixed line endings). Queue: **151 pending, 0 in_progress.** Next up: bfi_goldberg_1992_conscientiousness/_extraversion/_neuroticism, which are siblings from one source (point agents at the batch_260 agreeableness provenance note). Cap (batch_264) not reached.
+
+## batch_261 — 2026-09-19T09:38 (3 tables, 3 agents)
+
+**3 written / 0 blocked / 0 failed — yield 3/3.** No kills, no rate limits.
+
+- `bfi_goldberg_1992_conscientiousness`, `bfi_goldberg_1992_extraversion`, `bfi_goldberg_1992_neuroticism` — **written**, 50 rows each, mapping_basis=data_labels. All three reused the batch_260 agreeableness convention after re-checking it: the openpsychometrics BIG5.zip was re-downloaded (sha256 67953298…51ba53, identical to batch_260), `data/bfi_goldberg_1992.r` selects C/E/N1..10 by name, and the codebook keys every code to its wording. 1=Disagree/3=Neutral/5=Agree; 2 and 4 blank. Every item has live n=19718. All three factor keys were checked word for word against ipip.ori.org, and the local correlations show the data are stored raw (unreversed). Neuroticism: IPIP names Factor IV Emotional Stability, while the codebook calls N1–N10 neuroticism. The instrument field states both. **Orchestrator re-check (Step 5b):** 150/150 shipped item_text values equal the codebook strings exactly.
+- **Step 3b mismatch (all five siblings):** the dictionary Description says "Big Five Inventory", but the items are the IPIP Big-Five Factor Markers (Goldberg 1992), not the BFI-44. public_note discloses this. The dictionary Description is still worth correcting.
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x3 (no WARNs); verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance clean (the only item is the pre-existing `mixed` REVIEW on ye_2025_q25_scale).
+
+Housekeeping: the queue claim/update was again made byte-wise because the file has mixed line endings. A csv-module rewrite normalises about 57 bare CRs and inflates the diff to about 3,100 lines, so that attempt was reverted with `git checkout` before anything was dispatched. Queue: **148 pending, 0 in_progress.** Next up: `bfi_goldberg_1992_openness_to_experience` (same convention), then the `talaifar_2025_*` tables. Cap (batch_264) not reached.
+
+## batch_262 — 2026-09-19T09:46 (3 tables, 3 agents)
+
+**3 written / 0 blocked / 0 failed — yield 3/3.** No kills, no rate limits. Available memory 19G at dispatch.
+
+- `bfi_goldberg_1992_openness_to_experience` — **written**, 10 items / 50 rows, data_labels, same BIG5.zip codebook (sha256 67953298…51ba53) and convention as batch_260/261; 1/3/5 anchors, 2 and 4 blank. Step 3b mismatch as for the siblings: this is IPIP Factor V "Intellect or Imagination", not the BFI-44. The instrument field gives both names, and all 10 items match ipip.ori.org word for word. O2/O4/O6 are the reverse-keyed items (means 1.8–2.1, r −0.21 to −0.33 with O1), so the data are stored raw. All five `bfi_goldberg_1992_*` tables are now done.
+- `talaifar_2025_study1_lifestyle_survey` — **written**, 93 items / 930 rows, paper_explicit. The study's own OSF codebook (Fall 2016 handbook, osf.io/6k2cp; Spring 2017 identical) prints each `ls_N` column name beside its wording. There are 4 sections with their own prompts (activities/places/situations/people), on a 1–10 frequency scale. The OSF project rf9k8 is CC BY-SA 4.0. Verification is **PARTIAL**: 7/7 cross-block partner items are each other's strongest correlates (e.g. religious service ↔ religious facility r=0.89), Mac vs PC r=−0.73, and the item means fit the wording. verify PASS.
+- `talaifar_2025_study2_plp` — **written**, 61 items / 4,814 rows. The agent recorded this as data_labels because the item text is the Qualtrics header label in the deposited export. The IRW item codes, though, come from a hand-written rename list in the processing script, so the agent verified the mapping anyway: **VERIFIED**. Each live item's per-person vector matches exactly one source column, the one the list names (61/61), and the list agrees 61/61 with the authors' own rename in their analysis script. It is a slider scale from −1 to 1 in steps of 0.01: only −1, 0 and 1 carry labels, and every observed resp value gets a row with blank option_text. **Triage flag: the file is 7.0 MB, the largest itemtext file in the repo** (long instructions repeated per row × ~79 resp levels per item). No rule in SKILL.md/itemtext_standard.md covers the slider layout. It passes every gate, but Ben may want a convention for this before upload.
+- **Dictionary/biblio defect, confirmed by the orchestrator via Crossref (Step 5b):** `metadata/biblio.csv` gives the five Talaifar tables consecutive DOIs: study1_bfi=pspp0000545, study1_tivi=…546, study1_lifestyle_survey=…547, study2_plp=…548, study2_thermometer=…549. Only **10.1037/pspp0000545** is the Talaifar et al. (2025) paper. 546–549 resolve to other articles (547 = Büttner, "Narcissists' experience of ostracism"; 548 = Tissera, liking gaps; 549 is also cited for wvs_panasiuk_*). All four need correcting to …545 in the biblio sheet; that is not done here. The study1 agent had copied …547 into its provenance source_ref, and the orchestrator corrected it to …545 before the gates ran. Separately, biblio lists the licence as "Permission via Email", while the OSF deposit carries CC BY-SA 4.0.
+
+Gates: normalize_nulls fixed 1 file (study1, formatting only); audit_batch PASS x3, no WARNs; verify_batch PASS=2, MISSING(exempt)=1; lint 0 ERROR / 0 WARN / 1 INFO (study2's VERIFIED stands under the item-axis rule); irw-validate ok x3; check_provenance clean (only the pre-existing `mixed` REVIEW on ye_2025_q25_scale). NOT_NEEDED row for the openness table was written to both verification_merged.csv and mapping_verification.csv.
+
+Housekeeping: the queue claim/update was made byte-wise (mixed line endings). A first csv-module claim was overwritten from HEAD bytes before dispatch. Queue: **145 pending, 0 in_progress.** Next up: cogcontrol_gyurkovics_2019_mwprobe, mede_2025_clim_emotions, mede_2025_clim_government. Cap (batch_264) not reached.
+
+## batch_263 — 2026-09-19T10:00 (3 tables, 3 agents)
+
+**2 written / 1 blocked / 0 failed — yield 2/3.** No kills, no rate limits. Available memory 18G at dispatch. Circuit breaker: 0% failed, not tripped.
+
+- `cogcontrol_gyurkovics_2019_mwprobe`: **written**, 10 items / 20 rows, reconstructed (probe_01..10 are script-generated probe positions), study_materials. One probe wording from the accepted manuscript (White Rose 152525) is shared by all 10 items. resp is the authors' collapsed overall-MW 0/1, not the 4 administered options, so each resp row's option_text lists the two options it merges ("; "-joined), and a public_note says so. **VERIFIED**: re-running the probe numbering over OSF sart_merge.csv agrees with the live table on 1170/1170 rows. On the 106-person analytic sample the live table reproduces all five of paper Table 3's age χ² values (6.924/6.592/0.576/10.286/10.211 vs 6.92/6.59/0.58/10.29/10.21) and OR .406 (2.465 if flipped). verify PASS. Not established: on-screen option order/keys (rests on the authors' analyses.R).
+- `mede_2025_clim_emotions`: **written**, 9 items / 45 rows, data_labels. TISP OSF 5c3qd (CC BY 4.0); the core-questionnaire_english.qsf QID84 pairs each CLIM_EMO_* code with its word (9/9), and the master docx agrees. 1="Not at all", 5="Very strongly", 2–4 blank. English core wording shipped for a 37-language/68-country administration. The language field lists all 37, and a public_note discloses it. Per-sample translated questionnaires exist in the deposit (89 PDFs) but the schema holds one text per item. **Orchestrator re-check (Step 5b), server-side query:** `cov_language` is "EN" for 36,080 of 71,910 ids, and there are no JA/TR/EL/HU/ID/BN codes although those versions were fielded, so cov_language is not a reliable record of what respondents read. Confirmed as the agent stated. This is a response-data covariate issue, not an itemtext defect.
+- `mede_2025_clim_government`: **blocked (RIGHTS, escalated to Ben)**, retry test NO. Extraction is complete: a 35-row draft (7 items × resp 1–5, mapping from the same .qsf, QID85) passed validate_items.R --table-sets and sits in `.cache/mede_2025_clim_government/candidate__items.csv`. Mede et al. say the battery follows Hickman et al. 2021 (Lancet Planet Health), whose Table 3 prints the same stem verbatim and near-identical items. **Orchestrator re-check via Crossref: Hickman's VOR licence is CC BY-NC-ND 4.0.** Hickman has no instrument-specific rights statement, so this is a judgement call, not a settled precedent. **Ben's decision needed:** does an NC-ND article licence bind an adapted battery? If not, re-gate the draft and ship it. If it does, add a Hickman row to instrument_rights_register.csv. Row added to pending_index_notes.csv.
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x2, no WARNs; verify_batch PASS=1, MISSING(exempt)=1; lint 2 rows, clean (NOT_NEEDED row for clim_emotions written to both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance clean (only the pre-existing `mixed` REVIEW on ye_2025_q25_scale).
+
+Heads-up for the next rounds: the next 13 queue rows are all `mede_2025_*` siblings from the same TISP deposit. Agents should check each battery's originating instrument for the same NC/ND issue (clim_government's came from Hickman), and should follow clim_emotions' language convention (English core wording, all 37 languages listed).
+
+Housekeeping: the queue claim/update was made byte-wise (mixed line endings). A first csv-module claim crashed on the blank rows the stray CRs produce, and a second normalised the file and inflated the diff; both were restored with `git checkout` before dispatch. Minor: `itemtables/batch_262/verification_merged.csv` carries the `talaifar_2025_study2_plp` row twice (the permanent tracker has it once), left as is. Queue: **142 pending, 0 in_progress.** Next up: mede_2025_clim_polsupport, mede_2025_clim_weather_future, mede_2025_clim_weather_past. Cap (batch_264) not reached.
+
+## batch_264 — 2026-09-19T10:11 (3 tables, 3 agents) — CAP REACHED
+
+**3 written / 0 blocked / 0 failed — yield 3/3.** No kills, no rate limits. Available memory 17G at dispatch. Circuit breaker: 0% failed, not tripped.
+
+All three are TISP siblings (Mede et al. 2025 Sci Data, OSF 5c3qd, CC BY 4.0). All are `data_labels` from core-questionnaire_english.qsf ChoiceDataExportTags, cross-checked against the master docx. All follow clim_emotions' language convention: English core wording, the 37-language list, and a public_note on the local translations.
+
+- `mede_2025_clim_polsupport`: **written**, 5 items / 15 rows (QID86), resp 1–3 = "Not at all" / "Moderately" / "Very much". Administered option 4 "Not applicable" is dropped by data/mede_2025_tisp.py, so it has no row; the public_note says so. Rights: the paper and the Cologna et al. 2025 NCC companion credit no originator, and nothing matches in the register. The agent's extra corroboration: live "very much" shares on forest protection (82.1%) and sustainable energy (75.5%) match the NCC paper's 82%/75%. The two tax items come out 2–3 points above the published figures, probably a sample/weighting difference; noted, not a defect.
+- `mede_2025_clim_weather_past`: **written**, 6 items / 30 rows (QID103). 1="Not at all", 5="Very much", 2–4 blank. The instructions include QID103's own two-sentence opener ("The next questions are about climate change and weather events… think about your country.").
+- `mede_2025_clim_weather_future`: **written**, 6 items / 30 rows (QID104), same options. The agent prepended QID103's opener to QID104's question text. **Orchestrator re-check (Step 5b):** the QSF block CLIM_WEATHER contains exactly [QID103, QID104] with no page break, so the opener is on screen with the future question and the prepend is sound; it is disclosed in provenance/public_note. Both weather tables therefore carry the same opener, which is consistent.
+- Rights: none of the three batteries credits an originator (unlike clim_government/Hickman), so no NC/ND question arises. No register rows written.
+- Data: no defects. Every item uses every level. Per-item n: polsupport 65,758–66,908, weather_past 71,437–71,488 (n = distinct ids), weather_future 67,942–68,029.
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x3, no WARNs; verify_batch MISSING(exempt)=3; lint 3 rows, clean (NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance clean (only the pre-existing `mixed` REVIEW on ye_2025_q25_scale).
+
+Housekeeping: the queue claim/update was made byte-wise again (mixed line endings), diff 3 lines each time. Queue: **139 pending, 0 in_progress.** Next up: mede_2025_goals_priority, mede_2025_goals_tackle, mede_2025_normperc.
+
+**Cap reached: batch_264 is the Step 0 cap. No further rounds until a human raises it.**
