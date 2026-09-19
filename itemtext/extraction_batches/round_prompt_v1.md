@@ -14,7 +14,7 @@ itemtext/BATCH_PROCESS.md if you need context beyond this prompt.
 Run: ls -d itemtables/batch_* 2>/dev/null | sort -V
 
 Stop, self-cancel, and log if ANY of these hold:
-- itemtables/batch_258 already exists (round cap reached)
+- itemtables/batch_265 already exists (round cap reached)
 - zero rows with status=="pending" in extraction_batches/queue_state.csv (queue exhausted)
 - extraction_batches/circuit_breaker.flag exists (a prior round tripped it; human review pending)
 
@@ -52,12 +52,17 @@ the next round, and the wrapper will decline to start one for the same reason.
 ## Step 1 — Claim this round's tables
 
 - Next batch number = **highest existing `itemtables/batch_NNN` + 1**, zero-padded to three digits,
-  with ONE hole: **the numbers 200–205 are not ours and must be skipped.** `batch_201` and
+  with TWO holes. The first: **the numbers 200–205 are not ours and must be skipped.** `batch_201` and
   `batch_202` already exist and 201–205 are all claimed by the separate irw#1945 rights line; they
   arrived on this branch by a merge from `main` on 2026-09-08. So if "highest + 1" lands anywhere in
   200–205, use **`batch_206`** instead. After 199 the series is 206, 207, 208, … (amended 2026-09-15,
   when 199 was reached; before that the rule was "ignore the `batch_2NN` series entirely", which had
   no successor to 199 at all).
+  **A second hole, 300–304 (added 2026-09-19): those numbers are claimed by irw#2228**, a separate
+  hand-built line whose `batch_300` and `batch_301` reached this branch by a merge from `main`. So
+  compute "highest + 1" over directories numbered **below 300** only, and if that lands in 300–304,
+  use **`batch_305`** instead. Without this, the first round after that merge would call itself
+  `batch_302` -- a number #2228 has already claimed.
 
   **This is a correctness rule, not tidiness.** The cap in Step 0 is expressed as a directory that
   must not already exist, so a round that numbers itself into a range the cap does not name creates a
