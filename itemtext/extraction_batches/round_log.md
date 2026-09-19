@@ -20570,3 +20570,38 @@ as blank rows), so a naive csv.reader rewrite IndexErrors out. The claim was don
 the three lines. At claim time pending was 105, not the 127 in batch_242's entry. a69f6675 restored #2227's 22
 batch_204/205 rows, which accounts for the gap exactly.
 Queue: **102 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_244 — 2026-09-18T20:04–20:10-07:00 (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0.** Yield 3/3. Circuit breaker not tripped (0% failed).
+
+- `zaehl2023_twq_support`: **written**, 30 rows (SPRT1..SPRT6 × resp 1–5). It uses the same OSF jb94w
+  questionnaire PDF (identical sha256) and the same handling as twq_commitment: German item_text, the
+  authors' DeepL English in `_translated` (translation_source=study_supplied), option_text blank. Verification
+  **VERIFIED**: live item×resp counts match the raw OSF CSV in 30/30 cells and 324/324 person×item
+  responses, with six distinct distributions. The published facet mean 3.98 / α .92 reproduces (3.9846 / .919),
+  and no item is reversed. SPRT3 has no resp=2 in either the raw data or the live table, which is a real
+  empty cell. Rights: TWQ, no located restriction, so it ships on silence.
+- `zamzuri_2021_rpap_attitude`: **written**, 80 rows (E1..E10 × resp 1–8). PLOS ONE e0256636 (CC BY);
+  paper_explicit via Table 2's printed codes. Verification **VERIFIED**: Table 2 M(SD) matches live data within
+  0.006 for 10/10 items. E7 and E9 tie on mean 7.58 and are separated only by SD (.75 vs .74; live .749 vs .739).
+  Only the scale endpoints are labelled (1/8), and 2–7 are blank.
+- `zamzuri_2021_rpap_practice`: **written**, 104 rows (F1..F13 × resp 1–8). Same paper. Verification
+  **VERIFIED**: Table 2 M/SD reproduces for 13/13, and published means are pairwise ≥0.04 apart.
+  **Text-source choice differs from attitude.** Table 2's footnote b says its wording may differ from what was
+  administered, so this agent took 11/13 items from the S1 Questionnaire (final 29-item form) and fell back to
+  Table 2 only for F3/F11. The attitude agent used Table 2 verbatim, but the 6 attitude items that are also in the
+  S1 Questionnaire are word-identical there, so the shipped text would not change. F5 ships as the questionnaire
+  prints it ("I only to dispose rubbish…"). The orchestrator confirmed that wording in s002.docx.
+  `zamzuri_2021_rpap_risk_perception` (next in queue) should follow the same convention.
+- Both RPAP tables: the form was bilingual English/Malay and only the English is published, so
+  language="English; Malay" with no `_translated` columns. The practice agent left public_note blank. The
+  orchestrator copied the attitude table's Malay-omission public_note onto it, for consistency with the
+  szameitat/wang precedent.
+
+Gates: normalize (nothing to change) · audit_batch 3 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=3 · lint clean · irw-validate ok ×3 · check_provenance exit 0 (the `mixed` REVIEW list of 19
+is unchanged, none from this batch). mapping_verification.csv +3 rows (no data_labels tables, so no NOT_NEEDED
+rows). Sidecar merge note: the practice agent wrote CRLF sidecars, so they were merged with csv.reader rather
+than line-wise.
+Queue: **99 pending, 0 in_progress.** Cap (batch_258) not reached.
