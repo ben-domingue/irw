@@ -51,7 +51,7 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
 - `TRIAGE_BRIEF.md`: the brief every triage agent follows. It is the pilot brief plus a required
   upstream-originator rights check, a generic User-Agent rule, the WPAI naming ruling, and fetch
   workarounds learned in wave 1.
-- `triage_scope.csv`: the 678 deposits (2,057 tables) in scope. These are the candidates whose own
+- `triage_scope.csv`: the 678 deposits (2,056 tables; `zhou_2025_peer_relationship` appears twice because `candidates.csv` lists it twice) in scope. These are the candidates whose own
   stratum is never_assessed, BLOCKED, UNAVAILABLE or AVAILABLE, outside the 100 pilot deposits,
   minus anything live or queued at build time. (#2255's "649" subtracted the 15 pilot copyright
   deposits twice.) Deposits are shuffled (seed 20260920) into waves of 100 and slices of 20.
@@ -61,3 +61,9 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
   contradicted.
 - `register_rows_draft.csv`: draft rows for `instrument_rights_register.csv`, for a human to add.
   Rounds and triage never write `ship`.
+- `triage_results.csv` column `retry`: rows to redo before anything is queued. `quota` means a Zenodo rate
+  limit or an exhausted search budget blocked the check. `skipped_check` is a NOT_PUBLISHED whose evidence
+  admits a check was not run. `spotcheck_wrong` means the hand check contradicted the verdict. Wave 4 ran
+  into this machine's search and OpenAlex quotas partway through: 12 of its NOT_PUBLISHED rows skipped a
+  check, against 1-3 in each earlier wave. Its spot-check found 2 false negatives, which trips the stop
+  rule, so the brief was tightened before wave 5.

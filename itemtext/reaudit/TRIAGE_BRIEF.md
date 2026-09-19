@@ -29,6 +29,14 @@ For each table, one `verdict`:
 - `NOT_PUBLISHED` -- you reached the sources and the wording is not in any of them (e.g. data file
   has only codes Q1..Q20, paper describes the scale without items, no supplement). List what you
   checked.
+  **[new, from wave 4]** NOT_PUBLISHED is a claim that you *looked everywhere reasonable*, so:
+  (a) if the administered form is a named or adapted published instrument, check the original. Under the
+  settled fallback rule, the canonical-language original makes the table OBTAINABLE even when the
+  translated wording is unpublished (say so in `evidence`);
+  (b) a stem given in the methods ("have you ever used...?") plus item labels in the data *is* the wording;
+  (c) if a check you needed could not run (search budget, rate limit, paywall), the verdict is UNREACHABLE,
+  not NOT_PUBLISHED. Start `evidence` with `SEARCH_BUDGET:` or `ZENODO_RATELIMIT:`. A NOT_PUBLISHED whose
+  evidence says "not checked" is wrong.
 - `RIGHTS_BLOCK` -- wording exists but its originator (or distributor) reserves a right (below).
   Quote the clause and give the URL and the sha256 of the page you fetched.
 - `NOT_ITEM_TEXT` -- the table is not a set of worded items: e.g. reaction-time/physiological
