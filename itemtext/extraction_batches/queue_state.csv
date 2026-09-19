@@ -334,6 +334,9 @@ ecps_sahm_2024_identity,done,batch_022,2026-09-04T11:00:00-07:00
 ecps_sahm_2024_sscd,done,batch_022,2026-09-04T11:00:00-07:00
 ecps_sahm_2024_stress,done,batch_022,2026-09-04T11:00:00-07:00
 ecps_sahm_2024_vaccine,done,batch_022,2026-09-04T11:00:00-07:00
+ecps_sahm_2024_emotion,done,batch_022,2026-09-04T11:00:00-07:00
+ecps_sahm_2024_support,done,batch_022,2026-09-04T11:00:00-07:00
+ecps_sahm_2024_trust,done,batch_022,2026-09-04T11:00:00-07:00
 EEN_Lacey_2024_Children,done,batch_029,2026-09-04T20:23:53
 EEN_Lacey_2024_Parent,done,batch_029,2026-09-04T20:23:53
 ellis_2016_calc_instrprac,done,batch_029,2026-09-04T20:23:53
@@ -1337,31 +1340,31 @@ nomt_hooper_2024_study2,pending,,
 pass20_klosowska_2025_dass_online,pending,,
 pass20_klosowska_2025_pass_hospital,pending,,
 polca_carcinoma,pending,,
-preussmattsson_2022_ownership,pending,,
+preussmattsson_2022_ownership,done,batch_205,2026-09-16T18:20:00-07:00
 promis1wave1_anger,blocked,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_cesd,done,batch_022,2026-09-04T11:00:00-07:00
 promis1wave1_social,blocked,batch_022,2026-09-04T11:00:00-07:00
-qi_2025_self_construal,pending,,
-qi_2025_swls,pending,,
-quantshort,pending,,
-roar_lexical,pending,,
-simsalRbim_Human_LargeValence_2018,pending,,
-simsalRbim_Mice_LowValence,pending,,
-tears,pending,,
-teq_novak_2021_scbs,pending,,
-teq_novak_2021_spirit,pending,,
-wine_luckett2021,pending,,
-FAD_fadplus_goto2021,pending,,
-FEDSP_Trzcinska_2023_MonKnow,pending,,
-FIVPEI_Perrig_2023_AttDiff,pending,,
-NAMPRB_Siwiak_2024_SSUB,pending,,
-chile_2023_social-welfare-survey_rr,pending,,
-chile_2023_social-welfare-survey_ss,pending,,
-chile_2023_social-welfare-survey_u,pending,,
-estcrm_selfeff,pending,,
-florida_twins_par,pending,,
-gilbert_meta_112,pending,,
-gilbert_meta_113,pending,,
+qi_2025_self_construal,done,batch_205,2026-09-18T11:05:00-07:00
+qi_2025_swls,done,batch_205,2026-09-16T18:20:00-07:00
+quantshort,blocked,batch_205,2026-09-18T11:05:00-07:00
+roar_lexical,done,batch_205,2026-09-16T18:20:00-07:00
+simsalRbim_Human_LargeValence_2018,done,batch_205,2026-09-16T18:20:00-07:00
+simsalRbim_Mice_LowValence,done,batch_205,2026-09-16T18:20:00-07:00
+tears,done,batch_205,2026-09-16T18:20:00-07:00
+teq_novak_2021_scbs,done,batch_205,2026-09-16T18:20:00-07:00
+teq_novak_2021_spirit,done,batch_205,2026-09-16T18:20:00-07:00
+wine_luckett2021,done,batch_204,2026-09-14T19:45:00-07:00
+FAD_fadplus_goto2021,done,batch_204,2026-09-14T19:45:00-07:00
+FEDSP_Trzcinska_2023_MonKnow,done,batch_204,2026-09-14T19:45:00-07:00
+FIVPEI_Perrig_2023_AttDiff,done,batch_204,2026-09-14T19:45:00-07:00
+NAMPRB_Siwiak_2024_SSUB,done,batch_204,2026-09-14T19:45:00-07:00
+chile_2023_social-welfare-survey_rr,done,batch_204,2026-09-14T19:45:00-07:00
+chile_2023_social-welfare-survey_ss,done,batch_204,2026-09-14T19:45:00-07:00
+chile_2023_social-welfare-survey_u,done,batch_204,2026-09-14T19:45:00-07:00
+estcrm_selfeff,done,batch_204,2026-09-14T19:45:00-07:00
+florida_twins_par,done,batch_204,2026-09-14T19:45:00-07:00
+gilbert_meta_112,done,batch_204,2026-09-14T19:45:00-07:00
+gilbert_meta_113,blocked,batch_204,2026-09-14T19:30:00-07:00
 gilbert_meta_13,done,batch_203,2026-09-09T17:52:12-07:00
 gilbert_meta_14,done,batch_203,2026-09-09T17:52:12-07:00
 gilbert_meta_17,blocked,batch_203,2026-09-09T17:52:12-07:00
