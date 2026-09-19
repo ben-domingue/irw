@@ -29,6 +29,8 @@ metadata/**/*.txt
 !metadata/collection_members.csv
 # Curated citation inputs, reviewed against their recorded primary sources.
 !metadata/bibtex_overrides.csv
+# Public per-table change record (#2168), hand-appended; irw_site renders it.
+!metadata/table_changes.csv
 
 ##The dictionary union's audit trail (#1732). Tracked, unlike 03_tags.R's
 ##tags_provenance.csv, which this file excludes and the weekly runner therefore
