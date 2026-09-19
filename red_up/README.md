@@ -178,6 +178,14 @@ Two cautions the tool exists to enforce:
   *incomplete* one. Missing tables and missing rows wait happily; a table
   returning every item twice (`ben-domingue/irw#1816`) does not. See
   `ARCHITECTURE.md` §4.
+- **A released correction gets a line in `metadata/table_changes.csv`.** When
+  a release replaces, renames or retires a *published* response table, append
+  one row per table (`table, irw_version, date, change, issue, replaces,
+  replaced_by`) once the release is live, not at upload; the `irw_version` is
+  the first manifest version carrying the new shard tag. The site's Corrections
+  page renders the file, and nothing else will tell a user the table changed.
+  First-time tables, `__items` tables and rights withdrawals are not recorded
+  there (#2168).
 
 The check counts *time since the last release*, not the age of a table or of the
 draft — both of those reset whenever the draft is touched, so both would read as

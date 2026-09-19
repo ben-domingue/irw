@@ -63,7 +63,9 @@ HELD = ["construct_type", "sample_frame", "construct_name", "age_range", "child_
 
 FRAME_ATOMS = {"Representative", "Targeted/specific", "General/non-specific"}
 SETTING_ATOMS = {"Educational", "Clinical", "Program-based", "Non-human",
-                 "Internet-based", "Internet-based (Mturkers, etc)"}
+                 "Internet-based", "Internet-based (Mturkers, etc)",
+                 # Replace `Non-human`, which stays for older predictions (#2206).
+                 "AI/model", "Animal", "Non-person unit"}
 
 
 def blank(v):

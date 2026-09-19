@@ -1047,6 +1047,22 @@ live in `itemtext/provenance_vocab.csv` alongside `translation_source`, and
   indistinguishable to a reader from a key the study published, so it is disclosed exactly
   as a machine translation is. Say in the `note` HOW it was derived and how well it
   reproduces, so a reader can judge it.
+- `read_from_stimulus` — no published key existed, but the answer is legible in the
+  stimulus IRW already hosts. **Added 2026-09-18 on `gilbert_meta_70` (irw#1945)**, a Hindi
+  standard-1/2 assessment whose deposit leaves the scoring workbook's "Answer Details"
+  column empty for all eleven std12 items, while the booklet prints sentence-completions
+  against three single-word options where only one reading is grammatical, and
+  comprehension questions whose answers appear verbatim in the passage on the same page.
+  The previous vocabulary had no way to record this: it is not `source_published`, because
+  the source published a question and not an answer, and it is not
+  `derived_from_responses`, whose own definition is a key solved from response data. Left
+  unrecordable, six recoverable keys were shipped blank rather than mislabelled.
+  **Same disclosure class as the other two** — IRW, not the study, is asserting which
+  response is correct, and the column does not show a reader which — so it requires an
+  entry on the public issues page. Two conditions: say in the `note` which stimulus each
+  key was read from, and use it **only where the reading is forced**. Where a competent
+  reader of the language could disagree, leave the key blank; this value records
+  transcription of an unambiguous answer, not adjudication of a plausible one.
 - empty — no `correct_response`, or the instrument has no correct answer at all.
 
 `description_source` — who wrote the descriptions of figures, graphs, tables, equations or

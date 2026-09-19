@@ -43,7 +43,9 @@ columns are still enumerated proxies with nothing enforcing them.
 - `Adult (18+)`
 - `Mixed`
 - `Elderly (minimum age >50)`
-- `Non-human`
+- `Not applicable (non-person)` — `id` is not a person (an animal, an AI
+  system, or a stimulus/object rated by humans); ages do not apply. Replaces
+  `Non-human` (#2206, 2026-09-19); which *kind* of non-person goes in `Sample`.
 
 **Referent and definition (decided 2026-09-01, #1760).** The tag describes the
 **table as shipped in the IRW**, not the source study or its target population.
@@ -66,7 +68,7 @@ only when it parses as numeric, has ≥30 non-missing values, lies in `[0, 120]`
 and is not a banded code (fewer than 6 distinct values *and* a maximum under 10
 is the `cov_age_band` shape); convert first if the source states months.
 
-Then, first match wins: not human → `Non-human`; `min > 50` → `Elderly`; both
+Then, first match wins: `id` not a person → `Not applicable (non-person)`; `min > 50` → `Elderly`; both
 sides of 18 present **and** the smaller group ≥ **2%** of respondents → `Mixed`;
 `max < 18` → `Child (<18y)`; otherwise `Adult (18+)`. The 2% floor stops three
 17-year-olds in a 46,000-person adult survey from making it `Mixed`.
@@ -84,7 +86,7 @@ in an abstract, or from the construct. Blank is cheaper to fix than a wrong tag.
 Only fill when the sample includes children (`Age Range` is `Child (<18y)`
 or `Mixed`) and the source specifies a sub-range. Leave blank otherwise,
 including whenever `Age Range` is `Adult (18+)`, `Elderly (minimum age
->50)`, or `Non-human`.
+>50)`, or `Not applicable (non-person)`.
 
 - `Early (<6y)`
 - `Child (6-12y)`
@@ -118,17 +120,40 @@ old form until there is a service account to change it (#1708).
 - `Clinical`
 - `Targeted/specific`
 - `Representative`
-- `Non-human`
 - `Workplace` — added 2026-09-03 (#1704)
+- `AI/model` — added 2026-09-19 (#2206)
+- `Animal` — added 2026-09-19 (#2206)
+- `Non-person unit` — added 2026-09-19 (#2206)
 
-**These eight values are two facets, not one (decided 2026-09-01, #1760).**
+**These values answer two facets, plus a respondent-type override (decided
+2026-09-01, #1760; override split 2026-09-19, #2206).**
+
+*Respondent type — when `id` is not a person reached through some channel.*
+Tag by what the `id` column **is**, never by who produced the responses. Each of
+these three is **mutually exclusive with every other `Sample` atom**, frame
+included, and pairs with `Age Range` = `Not applicable (non-person)`:
+
+- `AI/model` — each `id` is an AI system: a language model, a model checkpoint,
+  a platform or an agent. Benchmark score tables with models as rows.
+- `Animal` — each `id` is a non-human animal (rats, dogs, capuchins, tortoises).
+  Tag it this way even when a human owner or handler filled in the ratings.
+- `Non-person unit` — each `id` is a stimulus, text, image, object, specimen
+  or organisation, and the humans are the raters (usually in `rater`, or as
+  items). Word norms, emoji ratings, pathology specimens, parties rated by experts.
+
+If `id` is a human rater rating stimuli that sit on the `item` axis, the table
+is a **human** table: tag it by how those raters were reached, not as
+`Non-person unit`. A table that mixes people and models in `id` (e.g.
+`lee_2025_nursing_exam`) is tagged by its people; these atoms are table-level
+and cannot express a mix. `Non-human`, the single atom these replace, is
+retired: do not write it.
 
 *Setting — how were these people reached?* `Educational` (through a school,
 university or course), `Clinical` (through a health-care setting, or by
 diagnosis or treatment status), `Program-based` (through the specific
 intervention or cohort the study is about), `Internet-based` (an online panel or
 crowdwork platform), `Workplace` (through an employer, an occupation, or a
-professional body), `Non-human` (mutually exclusive with everything). **These
+professional body). **These
 combine freely** — `Clinical, Educational, Internet-based` is coherent.
 
 **`Workplace` (decided 2026-09-03, #1704).** Respondents were reached through
@@ -188,6 +213,20 @@ Two rules follow, and `metadata/tag_normalize.R` enforces the first on export:
 
 > `Representative` and `Targeted/specific` **may co-occur**: a nationally
 > representative sample *of teachers* is both. Never collapse them to one.
+
+> `Representative` describes **the table we ship**, not only the study it came
+> from. **Non-random subsetting breaks the claim; random subsampling does not.**
+> If rows were dropped by a criterion — a booklet, a region, a completer filter —
+> the shipped table no longer represents the population the source named, so
+> drop `Representative`. If rows were dropped by a seeded random draw, keep it:
+> a random subsample of a representative sample is still representative. ENEM
+> does both — `enem_*.R` restricts to the standard booklets, then draws
+> 1,000,000 respondents at random (`enem_2013_1mil_ch`). The booklet restriction
+> is what narrows the frame; the draw is not. Subsetting done by a depositor
+> before the file reached us counts too, where the source says so. (Amended
+> 2026-09-19, #1760 — SamuelEnrique's "so long as all observations are included",
+> reworded so a random draw keeps the tag; confirmed by saviranadela 2026-09-12.
+> Governs new tagging only, as with the rest of #1760.)
 
 If recruitment is not described at all, leave the frame facet blank. Silence is
 not the same as `General/non-specific`.

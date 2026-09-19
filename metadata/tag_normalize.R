@@ -34,9 +34,13 @@ TAG_VOCAB <- list(
     ##channel people were reached through, so it does not displace the frame
     ##residual and is not listed in FRAME_SPECIFIC below. Adding a value is
     ##additive -- every row already carrying a `sample` keeps it.
+    ##
+    ##`AI/model`, `Animal` and `Non-person unit` replace `Non-human` (#2206,
+    ##2026-09-19), which had been carrying three unrelated meanings. It is
+    ##retired, not kept as a fallback: a leftover row stops the run.
     "sample" = c(
-        "Clinical", "Educational", "General/non-specific", "Internet-based",
-        "NA", "Non-human", "Program-based", "Representative",
+        "AI/model", "Animal", "Clinical", "Educational",
+        "General/non-specific", "Internet-based", "NA", "Non-person unit", "Program-based", "Representative",
         "Targeted/specific", "Workplace"
     ),
     "construct type" = c(
@@ -134,6 +138,10 @@ TAG_ATOM_DROP    <- c("etc)")
 ##nationally representative sample of teachers is both, and 49 rows say so.
 ##Never collapse them.
 FRAME_RESIDUAL <- "General/non-specific"
+##The respondent-type atoms say what `id` is when it is not a person reached
+##through some channel, so each is mutually exclusive with every other `sample`
+##atom (vocab.md; #1760, #2206).
+SAMPLE_EXCLUSIVE <- c("AI/model", "Animal", "Non-person unit")
 FRAME_SPECIFIC <- c("Representative", "Targeted/specific")
 
 ##Drops the residual when a more specific frame value is present. Returns atoms
@@ -180,7 +188,24 @@ normalize_multiselect <- function(x, column, vocab = TAG_VOCAB) {
         paste(sort(unique(atoms)), collapse = ", ")
     }, character(1), USE.NAMES = FALSE)
 
-    ##5. Refuse to publish an atom nobody has approved.
+    ##5. An exclusive `sample` atom beside any other atom is a contradiction,
+    ##   so it stops the run like an unknown atom does. Nothing enforced this
+    ##   before #2206, which is how thomeczek2025_les came to carry
+    ##   `Educational, Non-human, Targeted/specific`.
+    if (identical(column, "sample")) {
+        clash <- vapply(strsplit(ifelse(is.na(out), "", out), ", ", fixed = TRUE),
+                        function(a) any(a %in% SAMPLE_EXCLUSIVE) && length(a) > 1L,
+                        logical(1))
+        if (any(clash)) {
+            stop(sprintf(
+                "sample: %d row(s) combine a respondent-type atom (%s) with another atom: %s\nThese are mutually exclusive (vocab.md); fix the row in the Sheet or tags_auto.csv.",
+                sum(clash), paste(SAMPLE_EXCLUSIVE, collapse = ", "),
+                paste0('"', unique(out[clash]), '"', collapse = "; ")),
+                call. = FALSE)
+        }
+    }
+
+    ##6. Refuse to publish an atom nobody has approved.
     seen <- unique(unlist(strsplit(out[!is.na(out)], ", ", fixed = TRUE)))
     bad  <- setdiff(seen, allowed)
     if (length(bad)) {

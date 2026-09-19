@@ -25,7 +25,9 @@ import json
 import sys
 
 GOLD = "/home/ben/Dropbox/projects/irw/src/metadata/tags.csv"
-SETTING = {"Educational", "Clinical", "Program-based", "Internet-based", "Non-human"}
+# `Non-human` is retired (#2206) but stays so older predictions still score.
+SETTING = {"Educational", "Clinical", "Program-based", "Internet-based", "Non-human",
+           "AI/model", "Animal", "Non-person unit"}
 FRAME = {"Representative", "Targeted/specific", "General/non-specific"}
 
 

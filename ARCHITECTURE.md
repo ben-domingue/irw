@@ -259,6 +259,8 @@ stops rather than routing across families.
 
 `irw_site` also reads one file directly off disk rather than from Redivis:
 `data/hero_stats.json`, written into that repository by `metadata/09_hero_status.R`.
+Two more it reads from this repository's `main` over HTTPS at render time:
+`metadata/version_manifest.tsv` and `metadata/table_changes.csv`.
 
 ## 5. Which document wins
 
@@ -272,6 +274,7 @@ When two documents disagree, this is the order of precedence:
 | Whether a table meets the standard | [`irw_validate`](irw_validate/README.md) — `datastandard.md` states the rules, `irw-validate` is the one thing that enforces them, and `red_up` will not upload a table it blocks |
 | Redivis version hashes | Each client package's own config — this repo deliberately carries none |
 | Which Redivis version of every dataset was live at a given time | [`metadata/version_manifest.tsv`](metadata/version_manifest.tsv) — written by `red_up.manifest` from Redivis' own version history, refreshed daily by the `version-manifest` GitHub Action (13:30 UTC), which opens and merges its own PR when the file changes and files an issue when it cannot. The R and Python packages read the committed copy over HTTPS, so the file in `main` *is* the published record. An IRW version number is a citation: rows are appended, never renumbered, and the writer refuses rather than change one |
+| Which published tables were corrected, renamed or retired, and when | [`metadata/table_changes.csv`](metadata/table_changes.csv) — one row per table per released correction, appended by hand once the release is live (checklist in [`red_up/README.md`](red_up/README.md)); rendered by `irw_site`'s `corrections.qmd`, which also states the corrections policy (#2168). Response tables only: item-text caveats live on `itemtext_issues.qmd` and rights withdrawals stay internal |
 | Tag vocabulary for `sample` and `construct type` | `TAG_VOCAB` in [`metadata/tag_normalize.R`](metadata/tag_normalize.R) — enforced; the pipeline halts on an unknown value |
 | Which sources have tags | `.irw_tag_sources` in `Rpkg/R/redivis-config.R` |
 | Metadata pipeline run order | `DEFAULT_ORDER` in `.claude/skills/irw-site-update/scripts/run_pipeline.sh` — the order actually executed |
