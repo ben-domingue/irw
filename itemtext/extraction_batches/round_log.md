@@ -20843,3 +20843,40 @@ Gates:
 Housekeeping: the first claim went through csv.DictWriter and normalised 24 queue lines, again. I caught it in the diff, ran `git checkout`, and redid the claim byte-level. The "done" update and the tracker append (CRLF) were byte-level too.
 
 Queue: **75 pending, 0 in_progress.** Next: `zhao_2024_erq`, `zhao_2025_digital_literacy`, `zhao_2025_nat_env_perception`. Cap (batch_258) not reached.
+
+## batch_253 — 2026-09-18 21:26 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills: 20G available at dispatch.
+
+- `zhao_2024_erq` (ERQ-8 psychometrics, Zhao et al. 2024, PLOS ONE e0296035, CC BY 4.0), 10 items: **PARTIAL**.
+  - The study administered the Chinese ERQ-C, but neither the paper nor S1 contains any wording (S1 is just `ID, Gender, ERQr1..ERQr10`). The table ships Gross & John's English ERQ as `translated_substitute` / `official_instrument_english`, language=Chinese, following the 2026-09-08 ERQ ruling (irw#2121) and the moe2025_erq and morales_2021_erq precedent.
+  - Anchors shipped: 1, 4 and 7. Points 2, 3, 5 and 6 are blank.
+  - Verification: the reappraisal/suppression split ranks 1st of 210 possible 6/4 splits (0.4296 against 0.1642 for the runner-up). A refit reproduces all 18 of Table 3's loadings to within 0.0005, and the Table 4 alphas match exactly.
+  - Not established: the within-subscale Q-number → ERQ-wording tie, because the paper prints no wording.
+- `zhao_2025_digital_literacy` (Zhao, Tang & Wang 2025, PLOS ONE e0334214, CC BY 4.0; China Family Panel Studies internet-use items), 7 items: **data_labels / NOT_NEEDED**.
+  - `translated_substitute` / `study_supplied`, language=Chinese.
+  - **Source override, re-checked in Step 5b:** Table 2's "Index interpretation" column really does pair "Digital social" with "…for entertainment" (5.246) and "Digital entertainment" with "…for socializing" (4.797). The agent followed the S1 headers instead: the Index column and the Methods list order agree with them.
+  - This is recorded as a caveat in notes.csv. If the interpretation column is the right one, `digital_social` and `digital_entertainment` swap texts.
+  - The table_context.R and item_stats.R calls exported the 46k-row table; the gate used table-sets.
+  - The S1 xlsx carries one cell comment whose author field looks like a phone number. It is file metadata, not respondent data, and nothing ships from it.
+- `zhao_2025_nat_env_perception` (Zhao, Zhang & Zhao 2025, PLoS ONE e0325755, CC BY 4.0), 6 items: **VERIFIED**.
+  - The wording comes only from the Table 1 image, which prints NEP1..6 codes next to each item.
+  - `translated_substitute` / `study_supplied`, language=Chinese (inferred: in-person survey in Changsha).
+  - No anchors were published anywhere, so option_text is blank for resp 1–5.
+  - Verification: the id-level live-vs-S1 match is 199/199 (the best other column is 130/199).
+  - The CFA loadings are only approximate (max diff 0.069) because S1 is a 199-respondent minimum dataset against the paper's N=457.
+  - Siblings `zhao_2025_place_attachment` and `zhao_2025_psych_recovery_eval` are still pending and head the queue.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=2, MISSING(exempt)=1 (the data_labels table).
+- lint: 0 ERROR / 0 WARN / 1 INFO (hedged evidence alongside a full item-axis tie on nat_env_perception, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping:
+- The first claim went through csv.DictWriter and normalised 24 lines again. I caught it in the diff, checked the file out and redid the claim byte-level. The done update and the tracker append (CRLF) were byte-level too.
+- The sidecar headers mixed quoted and unquoted forms, so the merge used a csv parse and not a line concat.
+
+Queue: **72 pending, 0 in_progress.** Next up: `zhao_2025_place_attachment`, `zhao_2025_psych_recovery_eval`, `zhou_2024_smart_home_intention`. Cap (batch_258) not reached.
