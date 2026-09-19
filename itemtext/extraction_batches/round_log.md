@@ -21042,3 +21042,14 @@ Housekeeping: the queue claim/update was made byte-wise again (queue_state.csv m
 Gates: normalize_nulls 0 changes; audit_batch PASS x2; verify_batch MISSING(exempt)=2 (both data_labels); lint clean (2 NOT_NEEDED rows, written into both verification_merged.csv and mapping_verification.csv); irw-validate ok x2; check_provenance clean (1 pre-existing `mixed` REVIEW, ye_2025_q25_scale, not from this batch).
 
 Housekeeping: the queue claim/update was made byte-wise (mixed line endings). Queue: **151 pending, 0 in_progress.** Next up: bfi_goldberg_1992_conscientiousness/_extraversion/_neuroticism, which are siblings from one source (point agents at the batch_260 agreeableness provenance note). Cap (batch_264) not reached.
+
+## batch_261 — 2026-09-19T09:38 (3 tables, 3 agents)
+
+**3 written / 0 blocked / 0 failed — yield 3/3.** No kills, no rate limits.
+
+- `bfi_goldberg_1992_conscientiousness`, `bfi_goldberg_1992_extraversion`, `bfi_goldberg_1992_neuroticism` — **written**, 50 rows each, mapping_basis=data_labels. All three reused the batch_260 agreeableness convention after re-checking it: the openpsychometrics BIG5.zip was re-downloaded (sha256 67953298…51ba53, identical to batch_260), `data/bfi_goldberg_1992.r` selects C/E/N1..10 by name, and the codebook keys every code to its wording. 1=Disagree/3=Neutral/5=Agree; 2 and 4 blank. Every item has live n=19718. All three factor keys were checked word for word against ipip.ori.org, and the local correlations show the data are stored raw (unreversed). Neuroticism: IPIP names Factor IV Emotional Stability, while the codebook calls N1–N10 neuroticism. The instrument field states both. **Orchestrator re-check (Step 5b):** 150/150 shipped item_text values equal the codebook strings exactly.
+- **Step 3b mismatch (all five siblings):** the dictionary Description says "Big Five Inventory", but the items are the IPIP Big-Five Factor Markers (Goldberg 1992), not the BFI-44. public_note discloses this. The dictionary Description is still worth correcting.
+
+Gates: normalize_nulls 0 changes; audit_batch PASS x3 (no WARNs); verify_batch MISSING(exempt)=3; lint clean (3 NOT_NEEDED rows written to both verification_merged.csv and mapping_verification.csv); irw-validate ok x3; check_provenance clean (the only item is the pre-existing `mixed` REVIEW on ye_2025_q25_scale).
+
+Housekeeping: the queue claim/update was again made byte-wise because the file has mixed line endings. A csv-module rewrite normalises about 57 bare CRs and inflates the diff to about 3,100 lines, so that attempt was reverted with `git checkout` before anything was dispatched. Queue: **148 pending, 0 in_progress.** Next up: `bfi_goldberg_1992_openness_to_experience` (same convention), then the `talaifar_2025_*` tables. Cap (batch_264) not reached.
