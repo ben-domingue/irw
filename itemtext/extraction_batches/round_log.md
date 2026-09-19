@@ -20963,3 +20963,29 @@ Gates:
 Housekeeping: this round's first claim write went through csv.DictWriter and normalized 24 unrelated CRLF line endings. It was redone byte-wise from HEAD before commit, so the committed diff is exactly the 3 claimed rows.
 
 Queue: **63 pending, 0 in_progress.** Next up: `CV_OASIS_ODSIS_PPE_Novak_2020_PANAS`, `EWAS_Sanford_2024`, `FGSIS_Berzeviczy_2018`. Cap (batch_258) not reached.
+
+## batch_257 — 2026-09-18 22:05 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills. Circuit breaker not tripped.
+
+- `CV_OASIS_ODSIS_PPE_Novak_2020_PANAS` (OSF ad6b3; 20 items × resp 1–5, 100 rows): **PARTIAL**, mapping_basis `reconstructed`, text_source `translated_substitute` (translation_source `official_instrument_english`). The study ran in Czech and no Czech wording is published, so it ships the Watson, Clark & Tellegen 1988 English adjectives and anchors.
+  - Verification rests on subscale blocks (19/20 items closer to their own block; `panas_12` alert is the exception, and the authors flag it too), the author-named alert/interested/attentive trio, and the four lowest-mean items all being NA items. Order within blocks is not established. verify_batch: PASS.
+  - **Source defect in the paper, not the response data.** The Rmd scores PANAS-P with `starts_with("panas_1")`, which also pulls in NA items 11, 13, 15 and 18, so the published PANAS-P is a 14-item sum. The orchestrator re-checked this on the live table (n=1458). The buggy selection gives 28.92 (9.89) against the published 28.83 (9.77); the correct 10-item sum gives 21.34 (8.02). Spearman r(P,N) is 0.62 with the bug (published .61) and 0.40 with the correct sum. Confirmed and written into notes.csv. It does not affect the item text.
+- `EWAS_Sanford_2024` (Sanford & Elkins 2024, Psych Assess; OSF 4td6k, CC BY 4.0; 30 items, 180 rows): **VERIFIED**, mapping_basis `paper_explicit`. The study's codebook PDF prints each variable name beside its own stem and options. That is corroborated by a 30/30 range signature, the 6 final-scale items from Table 2 = exactly the 6 live items with n=718, Study 2 .sav labels matching 6/6, and Table 1's per-format partial r reproduced within 0.006.
+  - Audit WARN (row-count anomaly) is study design, not an itemtext defect. The 6 final items were in both studies (236+482); the other 24 were in Study 1 only. The orchestrator re-counted: 6×718, 24×236.
+  - Lint WARN ("VERIFIED but evidence hedges") was reviewed and VERIFIED was kept. The explicit-code-label route separates every item; the hedge applies only to the corroborating statistics.
+  - The sibling `EWAS_Sanford_2024_Flourish` block (Diener NC clause, batch_031) does not extend to the EWAS itself.
+- `FGSIS_Berzeviczy_2018` (OSF 7mgxk; 10 items, 34 rows): **NOT_NEEDED**, mapping_basis `data_labels`. The item codes are the xlsx headers, which carry the full wording. The typo "supossed" in Q8 is kept as administered. Rights shipped on silence (Herbenick has published no terms). Escalate if Ben wants the FGSIS treated as permission-required.
+  - **For a human: the source deposit has PII.** The public OSF `FGSIS Data.xlsx` has a populated "IP Address" column for all 170 respondents. The IRW processing script drops it, so the IRW table is clean. But under the PII-skip rule for intake, this dataset would not have been taken today. Worth a look.
+
+Gates:
+- normalize_nulls: 0/3 rewritten.
+- audit_batch: PASS ×2, WARN ×1 (EWAS, explained above and in notes.csv).
+- verify_batch: PASS=2, MISSING(exempt)=1.
+- lint: 0 ERROR, 1 WARN (EWAS, reviewed).
+- irw-validate: WARN name_charset ×3, from the uppercase live table names; not an itemtext defect.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: the claim write normalized 3 LF-only lines to CRLF. The final queue update was redone byte-wise from HEAD, so the committed diff is exactly the 3 rows for this batch.
+
+Queue: **60 pending, 0 in_progress.** Next up: `IJLS_Eersel_2024_ICECAP`, `IJLS_Eersel_2024_IUS`, `IJLS_Eersel_2024_Optimism`, all from one source, so tell each agent about its siblings. Cap (batch_258) not reached.
