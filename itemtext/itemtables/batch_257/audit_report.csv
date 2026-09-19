@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"CV_OASIS_ODSIS_PPE_Novak_2020_PANAS","PASS",20,20,TRUE,TRUE,FALSE,TRUE,0,0,""
+"EWAS_Sanford_2024","WARN",30,30,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=236: enga3, enri2, enri3, mea2, prod1, sat1"
+"FGSIS_Berzeviczy_2018","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""

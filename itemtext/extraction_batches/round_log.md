@@ -20455,3 +20455,537 @@ choice. That is exactly why the status is PARTIAL and not VERIFIED.
 **CAP REACHED.** `batch_240` is the batch named as the round cap in Step 0 of the round prompt.
 This round completed it, so the series stops here: the next firing will self-cancel on the
 "batch_240 already exists" stop condition. Resuming requires a human to raise the cap.
+
+## batch_241 — 2026-09-18 19:14–19:4x PDT — 3 tables — **3 written / 0 blocked / 0 failed** (yield 3/3 = 100%)
+
+First round after the cap was raised from batch_240 to **batch_290** (commit 216c5669). Three agents,
+one per table. All three are `yuebo_2024_*` siblings from one deposit (PLOS ONE
+10.1371/journal.pone.0297515, CC BY 4.0: S1 Data `.s001` CSV + S1 Appendix `.s002` DOCX). Each agent
+was told which files belonged to the other two.
+
+Tables: `yuebo_2024_satisfaction` (US1–US4), `yuebo_2024_srvquality` (SEQ1–SEQ4),
+`yuebo_2024_sysquality` (SQ1–SQ4). Each has 4 items × resp 1–5, so 20 rows.
+- All three are `paper_explicit`: the appendix Code column matches the S1 Data header, which is the IRW
+  item code. All are **VERIFIED**. sysquality also matches per-item resp counts cell for cell between
+  source and live (for example SQ4 16/26/87/100/16).
+- All three are `translated_substitute` / `study_supplied` / `language=Chinese`. The deposit has 0
+  CJK characters, so these are later-backfill candidates, like batch_240's `netbenefit`.
+- `option_text` is blank throughout (the source says "5-point Likert" and prints no anchors).
+
+Gates: normalize (1 file, blanks→NA) · audit_batch 3 PASS, no anomalies · verify_batch PASS=3 ·
+lint clean · irw-validate ok ×3 · check_provenance: 0 machine_translation tables missing a
+public-page entry. Its `mixed` REVIEW list of 19 tables predates this batch and has none of its tables.
+
+**Step 5b orchestrator re-check — CONFIRMED.** I checked batch_240's warning about the US-code
+collision against the cached S1 files:
+- S1 Data headers are `USE1..USE5` and `US1..US4`.
+- The appendix codes BOTH its "Continuous Use" block (5 rows) and its "User Satisfaction" block (4 rows)
+  as `US1..`.
+- The shipped satisfaction wording comes from the User Satisfaction block, which is correct.
+
+**For `yuebo_2024_use` (still pending): its wording is the appendix block coded US1–US5, not USE.**
+
+**Notable:**
+- **Provenance citation slip, fixed in this batch:** two agents cited the first author as "Yuebo Q". The
+  article JATS gives `<surname>Yuebo</surname><given-names>Li</given-names>`, so the citation should read
+  "Yuebo L". I corrected both batch_241 sidecars before the merge. **batch_240's `netbenefit` provenance
+  row carries the same "Yuebo Q" slip and was left untouched** — fix it at triage.
+- The satisfaction agent could not reproduce the paper's published VIFs for US1–US4 from S1 Data
+  (3.360/4.243/4.088/4.202 published vs ≈3.0/4.5/4.4/4.4). It was not used as evidence, and the
+  mapping does not depend on it.
+- One agent's `table_context.R` hung for more than 5 minutes on a full `irw_fetch` and was abandoned;
+  ground truth came from `table_sets.R` instead. The process had already exited by merge time.
+- Queue: **130 pending remain, 0 in_progress.** Cap (batch_290) not reached.
+
+## batch_242 — 2026-09-18T19:36 → ~19:55 (−07:00), 3 tables, 3 agents
+
+**1 written · 2 blocked · 0 failed** (yield 1/3; failed rate 0% → no breaker). All three come from the same
+PLOS ONE paper as batch_240/241 (Yuebo, Halili & Abdul Razak 2024, e0297515). Step 3b passed for each.
+
+- `yuebo_2024_tck` — **done.** 4 items × 5 = 20 rows. `paper_explicit` (appendix Code = S1 Data header =
+  IRW item), `translated_substitute`/`study_supplied`, `language=Chinese`, option_text blank (no anchors
+  printed). **VERIFIED**: per-item resp counts S1 vs live match cell for cell (TCK1 16/31/76/103/19 …).
+- `yuebo_2024_tk` — **blocked (rights).** TK2/TK3 are near-verbatim third-person rewordings of Schmidt et al.
+  (2009) TPACK survey TK items, and the survey's usage terms make contacting Dr. Schmidt a condition of use
+  (tpack_survey_v1point1.doc, sha256 823bfa3a…). Blocked under the 2026-09-05 HEXACO "please contact the
+  authors" rule. Retry test NO. **Needs Ben:** the clause is notify-for-tracking, not ask-for-approval,
+  and there's no fee/NC/ND term; if he rules that doesn't reserve a right, the wording and counts are banked in
+  batch_242/notes.csv.
+- `yuebo_2024_tpack` — **blocked (rights), escalated.** Appendix attributes the five items to Santos &
+  Castro (2021, SSHO), CC BY-NC-ND 4.0 per Crossref. Full text was 403, so the derivation is unconfirmed; no
+  register row was written. A gated candidate (validate PASS) is parked at the git-ignored
+  `.cache/yuebo_2024_tpack/candidate__items.csv`. Copy it somewhere tracked if it needs to survive.
+
+Gates: normalize (nothing to change) · audit_batch 1 PASS, no anomalies · verify_batch PASS=1 · lint clean ·
+irw-validate ok · check_provenance exit 0. The `mixed` REVIEW list of 19 is unchanged and none of its tables are from this batch.
+
+**Step 5b orchestrator re-check — rights consistency across the three.** tck shipped while tk was blocked,
+and both appendix rows cite "Schmid et al., 2009", so I checked tck's wording against both named
+originators:
+- Schmidt v1.1's TCK items are all "I know about technologies that I can use for understanding and doing
+  <subject>."
+- Valtonen 2017 (AJET, CC BY-NC-ND per the AJET page) Appendix A TCK1–4 are websites / ICT-applications /
+  illustrate-difficult-contents items.
+- Neither is the source of the shipped TCK1–4. So the ship stands and the split is consistent.
+- The TK match to Schmidt is confirmed from the parsed survey (e.g. "I know how to solve my own technical
+  problems." / "I keep up with important new technologies.").
+
+**Notable:** the remaining yuebo_2024 siblings (`pck`, `tpk`, `use`, etc., if pending) will hit the same
+Schmidt / Santos & Castro attribution question. A ruling on the Schmidt contact clause would settle tk and
+probably pck in one go.
+Queue: **127 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_243 — 2026-09-18T19:54-07:00 (3 agents, 3 tables)
+
+**Written 2 / blocked 1 / failed 0.** Yield 2/3. Circuit breaker not tripped (0% failed).
+
+- `yuebo_2024_use` — **written**, 25 rows (USE1..USE5 × resp 1–5). Same paper and convention as the
+  batch_240–242 siblings (translated_substitute / study_supplied, option_text blank, no instructions).
+  **Source defect, confirmed by orchestrator:** the S1 Appendix prints the "Continuous Use" block with codes
+  US1..US5, colliding with the User Satisfaction block's US1..US4. The S1 Data headers are USE1..USE5 +
+  US1..US4, and Table 3 uses USE1..USE5. Resolved by block heading + block size (5 vs 4) + ordinal suffix, so
+  mapping_basis=paper_order (not paper_explicit). Verification **PARTIAL**: the per-item resp counts
+  match S1 Data vs live (e.g. USE1 2/7/23/128/85), but the item means span only 4.08–4.21 and nothing
+  separates items by content. A swap of appendix rows would go undetected. Rights: Urbach, Smolnik & Riempp (2010) JSIS, no located
+  restriction, so it ships on silence (same originator/verdict as sysquality/srvquality).
+- `zaehl2023_twq_commitment` — **written**, 20 rows (COMT1..3, COMT4r × resp 1–5). German item_text with
+  the study's own English in `_translated` (OSF jb94w questionnaire Table I, CC BY 4.0). **Caveat:** that
+  English is the authors' DeepL output (footnoted in the PDF), recorded as translation_source=study_supplied.
+  Verification **VERIFIED**: the live item×resp counts match the raw OSF CSV in all 20 cells, and all four
+  distributions are distinct. The published COMT mean 3.47 reproduces only with COMT4r reversed (3.477 vs raw
+  3.116). Rights: Hoegl & Gemuenden (2001) TWQ, no located restriction, so it ships on silence.
+- `zaehl2023_hexaco` — **blocked (rights)**, retry test NO. German HEXACO-60, fully published with codes
+  (60/60 would be paper_explicit), but the register's HEXACO-PI-R row is `block` (irw#1945, 2026-09-05).
+  Orchestrator confirmed the register row. Row added to itemtables/pending_index_notes.csv. It is a candidate
+  for `excluded`, like de_vries_2022_hexaco_*. That is a human call.
+
+Gates: normalize (nothing to change) · audit_batch 2 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=2 · lint clean · irw-validate ok ×2 · check_provenance exit 0 (the `mixed` REVIEW list of
+19 is unchanged, none from this batch). mapping_verification.csv +2 rows (no data_labels tables, so no
+NOT_NEEDED rows).
+
+**Notable:** `zaehl2023_twq_support` (next in queue) is from the same OSF questionnaire and should ship
+the same way as twq_commitment. The queue file has mixed line endings (some rows `\r\r\n`, which parse
+as blank rows), so a naive csv.reader rewrite IndexErrors out. The claim was done as a byte-level edit of
+the three lines. At claim time pending was 105, not the 127 in batch_242's entry. a69f6675 restored #2227's 22
+batch_204/205 rows, which accounts for the gap exactly.
+Queue: **102 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_244 — 2026-09-18T20:04–20:10-07:00 (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0.** Yield 3/3. Circuit breaker not tripped (0% failed).
+
+- `zaehl2023_twq_support`: **written**, 30 rows (SPRT1..SPRT6 × resp 1–5). It uses the same OSF jb94w
+  questionnaire PDF (identical sha256) and the same handling as twq_commitment: German item_text, the
+  authors' DeepL English in `_translated` (translation_source=study_supplied), option_text blank. Verification
+  **VERIFIED**: live item×resp counts match the raw OSF CSV in 30/30 cells and 324/324 person×item
+  responses, with six distinct distributions. The published facet mean 3.98 / α .92 reproduces (3.9846 / .919),
+  and no item is reversed. SPRT3 has no resp=2 in either the raw data or the live table, which is a real
+  empty cell. Rights: TWQ, no located restriction, so it ships on silence.
+- `zamzuri_2021_rpap_attitude`: **written**, 80 rows (E1..E10 × resp 1–8). PLOS ONE e0256636 (CC BY);
+  paper_explicit via Table 2's printed codes. Verification **VERIFIED**: Table 2 M(SD) matches live data within
+  0.006 for 10/10 items. E7 and E9 tie on mean 7.58 and are separated only by SD (.75 vs .74; live .749 vs .739).
+  Only the scale endpoints are labelled (1/8), and 2–7 are blank.
+- `zamzuri_2021_rpap_practice`: **written**, 104 rows (F1..F13 × resp 1–8). Same paper. Verification
+  **VERIFIED**: Table 2 M/SD reproduces for 13/13, and published means are pairwise ≥0.04 apart.
+  **Text-source choice differs from attitude.** Table 2's footnote b says its wording may differ from what was
+  administered, so this agent took 11/13 items from the S1 Questionnaire (final 29-item form) and fell back to
+  Table 2 only for F3/F11. The attitude agent used Table 2 verbatim, but the 6 attitude items that are also in the
+  S1 Questionnaire are word-identical there, so the shipped text would not change. F5 ships as the questionnaire
+  prints it ("I only to dispose rubbish…"). The orchestrator confirmed that wording in s002.docx.
+  `zamzuri_2021_rpap_risk_perception` (next in queue) should follow the same convention.
+- Both RPAP tables: the form was bilingual English/Malay and only the English is published, so
+  language="English; Malay" with no `_translated` columns. The practice agent left public_note blank. The
+  orchestrator copied the attitude table's Malay-omission public_note onto it, for consistency with the
+  szameitat/wang precedent.
+
+Gates: normalize (nothing to change) · audit_batch 3 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=3 · lint clean · irw-validate ok ×3 · check_provenance exit 0 (the `mixed` REVIEW list of 19
+is unchanged, none from this batch). mapping_verification.csv +3 rows (no data_labels tables, so no NOT_NEEDED
+rows). Sidecar merge note: the practice agent wrote CRLF sidecars, so they were merged with csv.reader rather
+than line-wise.
+Queue: **99 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_245 — 2026-09-18T20:12-07:00 — 3 tables, 3 agents
+
+**2 written / 1 blocked / 0 failed** (yield 2/3). Circuit breaker: 0% failed, not tripped. No kills, no rate limits.
+
+- `zamzuri_2021_rpap_risk_perception`: **written**, 96 rows (D1..D12 × resp 1–8). PLOS ONE e0256636 (CC BY),
+  paper_explicit via Table 2's printed codes. It follows batch_244's practice convention: wording from the S1
+  Questionnaire (s002.docx), where all 12 D items appear. 9 match Table 2 exactly; 3 differ only in punctuation.
+  language="English; Malay" with the Malay-omission public_note. Verification **VERIFIED**: live M/SD matched
+  against 24 candidates (12 Table 2 rows × as printed / reflected 9−M), and 12/12 are nearest their own code.
+  10 are within 0.006, D2 is off by 0.015 and D12 by 0.021. The tightest pair is D7 vs D9 (0.005 vs 0.062).
+  **Data finding: 8 of 12 items (D2, D3, D7–D12) are stored reverse-scored** in the live table, and the paper
+  doesn't say so. Those 8 items therefore ship with reversed anchors (resp 1="Strongly Agree", 8="Strongly Disagree"),
+  following the burkert/baka precedent. **Orchestrator re-checked (Step 5b):** the authors' S1 xlsx Sheet3
+  headers carry `_r` columns for exactly D2, D3, D7, D8, D9, D10, D11, D12. The live means confirm it (D8 1.66
+  live vs 7.34 printed; D7 2.37, D9 2.31). D12's direction is the least certain (answers spread evenly; rests
+  mostly on the D12_r header). `data/zamzuri_2021_rpap.py` passes the recoded values through unflagged, so this
+  may warrant a data-side note.
+- `zautra_2015_caug`: **written**, 40 rows (caug1..caug10 × resp 1–4). This is the Spanish General Self-Efficacy
+  Scale (Schwarzer & Jerusalem). Spanish item_text/option_text come verbatim from codebook S2, and the English in
+  `_translated` comes from the paper's Table 4 (translation_source=study_supplied). paper_explicit. Verification
+  **PARTIAL**: live counts equal the .sav caug<i>pre/post columns cell for cell (20/20 item-waves, no duplicate
+  count vectors). The Table 5 GSE means reproduce within 0.007 for all 4 group×wave cells. Which column carries
+  which wording rests on the codebook labels, not on data. **The codebook's English column swaps CAUG2/CAUG8
+  relative to its own Spanish column.** The agent followed the Spanish, which is what was administered and is in
+  published order. The data can't separate the pair (3.437 vs 3.419). A public_note discloses this. Rights:
+  the authors grant reproduction with credit (FAQ hash fdc6c30d… matches earlier rounds). No register row was
+  added under the 2026-09-10 rule.
+- `zautra_2015_iri`: **blocked** (retry test NO). This is Davis's IRI (Spanish administration), and the existing
+  IRI register row (irw#1955) is a block because commercial use is reserved. The agent re-fetched the guide
+  (sha256 a5af661f…) and its wording is unchanged. Even without the rights issue, the .sav has no wording and
+  Table 3 prints only the 7 English PT items, while the data hold 13 (PT+EC). The paper calls it a 7-item PT
+  subscale, which contradicts the data and the dictionary. pending_index_notes row added. This block has no
+  verification sidecar or verify script, per Step 5b (nothing shipped).
+
+Gates: normalize (caug normalized, 41 lines) · audit_batch 2 PASS, no anomalies (no WARNs to explain) ·
+verify_batch PASS=2 · lint clean · irw-validate ok ×2 · check_provenance exit 0 (the `mixed` REVIEW list of 19
+is unchanged, none from this batch). mapping_verification.csv +2 rows (no data_labels tables, so no NOT_NEEDED rows).
+Queue: **96 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_246 — 2026-09-18T20:22–20:40-07:00 — 3 tables, 3 agents
+
+**1 written / 2 blocked / 0 failed** (yield 1/3). Circuit breaker not tripped (0% failed).
+
+- `zautra_2015_tmms24`: **written**, 120 rows (TMMS24_1..24 × resp 1–5), Spanish TMMS-24 (Fernández-Berrocal).
+  Spanish text is verbatim from codebook S2 (the source the batch_245 siblings used), typos kept and disclosed in public_note.
+  paper_explicit. Verification **PARTIAL**, and verify_ PASS. Live counts equal the .sav TMMS24_<i>pre/post columns cell
+  for cell (48/48 item-waves). The Table 5 means reproduce within 0.019. 23/24 items correlate highest with their own subscale; the
+  miss is TMMS24_23, which is ceiling-heavy (193/312 = 5). Order within a subscale rests on the codebook labels.
+  **English is machine_translation**: the paper's Table 2 is the original English TMMS, not the Spanish that was administered, and the codebook's
+  English is a loose content gloss that repeats one sentence for items 18 and 20. So an issues-page entry is owed at upload. check_provenance
+  lists it as HELD, so no entry is owed yet. **Rights: passed on SILENCE, which is not a grant.** There is no TMMS register row. No terms were locatable (the UMA lab site
+  has no instrument page, and laboratoriodeemociones.com is a login wall). The codebook's "Copyright 1995 APA, Adapted with
+  permission" line is a bare notice. The English original's rights sit upstream. **Worth a ruling before upload.**
+- `zeng_2025_academic_buoyancy_cfa` / `_efa`: **both blocked on rights** (retry test NO). The two agents concurred independently.
+  Items B24–B27 reword the four Uncertain Control items of Martin's fee-licensed **Motivation and Engagement Scale**
+  ("unsure" is flipped to "sure"; B27 is close to verbatim to the MES sample item). **Orchestrator re-checked (Step 5b):** I re-fetched Lifelong's terms page
+  (sha256 140980cd…, a dynamic page, so each agent got a different hash). The clauses are verbatim: one sample item per scale, prior
+  written permission required for adaptations, and "revisions or adaptations" barred from electronic publication. S1 Appendix A items 24–27
+  follow the MES template. **New register row added: MES → block.** Gate-passing candidates are parked in `.cache/` (cfa 21 items, efa 32
+  items; efa's mapping is VERIFIED against all 128 Table 2 cells). A partial ship with B24–B27 withheld would fail the item-set gate, so that is Ben's
+  call. Side findings for any future ship: efa's B9/B10/B13/B14/B17/B19 are stored already reverse-scored. The study's English for
+  items 21/22 does not translate the administered Chinese. The paper's goal-subscale α of .77 does not reproduce (.565 in data).
+  pending_index_notes rows added for both.
+
+Gates: normalize (0 changed) · audit_batch 1 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=1 · lint clean ·
+irw-validate ok · check_provenance: the pre-existing lys_2020_rape_3_kpnts missing-entry line and the unchanged `mixed` REVIEW list of 19, none from this batch.
+mapping_verification.csv +1 row (no data_labels tables, so no NOT_NEEDED rows).
+Queue: **93 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_247 — 2026-09-18T20:34–20:45-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+- `zeng_2025_megaproject_msr`: **written**, 195 rows (item_2_1..39 × resp 1–5). `zeng_2025_megaproject_seap`: **written**, 55 rows
+  (item_3_1..11 × resp 1–5). Both come from Zeng et al. 2025 PLOS ONE e0334291 (CC BY 4.0), and the two agents worked separately and agreed.
+  mapping_basis **data_labels**: the processing script names each code after the S1 xlsx header's own "2.N"/"3.N" number, and that header holds the full wording.
+  All headers match the S2 questionnaire exactly. The form was bilingual, so Chinese goes in the base fields, the form's own English in `_translated` (study_supplied), and
+  language = "Chinese; English". Caveat kept literal: at resp 4, the Chinese 偶尔有 means "occasionally" but the printed English is "Often".
+  NOT_NEEDED rows went into both verification_merged.csv and the tracker.
+- `zeng_2026_gai_exploitation`: **written**, 35 rows (EXPLOIT1..5 × resp 1–7). paper_explicit: Table 2 prints "EB<k>(Q<n>)".
+  translated_substitute/study_supplied: it was administered in Chinese and only the authors' English was released, and public_note discloses this. Only the
+  endpoints are labelled, so resp 2–6 are blank. Verification is **VERIFIED** and verify_ gives PASS: each live EXPLOIT<k> equals S1 Q<29+k> for all 207 of 207 ids, and the
+  best other column matches at most 109/207. The one-factor loadings are within 0.005 of Table 3. Source quirk: the paper uses the labels EB1–5 for
+  both Exploration (Q25–29) and Exploitation (Q30–34). The agent matched on the Q number.
+
+Gates: normalize_nulls fixed the seap file's formatting (56 lines, formatting only) · audit_batch 3 PASS, no anomalies, so there are no WARNs to explain ·
+verify_batch PASS=1, MISSING(exempt)=2 (data_labels) · lint clean · irw-validate ok ×3 · check_provenance exit 0. Its `mixed` REVIEW list of 19 is
+unchanged, and none of those tables are from this batch.
+Step 5b: no source overrides and no data-defect claims to re-check. verify_zeng_2026_gai_exploitation.R, re-run by verify_batch, is the independent check.
+
+Housekeeping, for a human:
+- My first queue_state rewrite used csv.DictWriter and silently converted the CRLF endings on the file's last 24 rows (the batch_201–205 block,
+  which the merge from main brought in) to LF. I caught it in the diff and restored the file from HEAD with a byte-level edit of only the 3 rows. **Rewrite this file
+  byte-preserving, not with a csv writer.**
+- `data/zeng_2026_gai_learning.py` puts Ben's email address in its HTTP User-Agent header (reported by the agent, which did not run it). This is worth scrubbing.
+- The siblings `zeng_2025_megaproject_ecm` (section 4 of the same S1 file) and `zeng_2026_gai_exploration` are **not in queue_state.csv**,
+  although their siblings are. They may be missing from the queue build.
+
+Queue: **90 pending, 0 in_progress.** Cap (batch_258) not reached.
+
+## batch_248 — 2026-09-18T20:41–20:52-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+All three tables come from Zeng, Kang & Piaw 2026 PLOS ONE e0346696 (CC BY 4.0), the same article as batch_247's `zeng_2026_gai_exploitation`, and follow its conventions:
+paper_explicit (Table 2 prints each item as "<code>(Q<n>)") · translated_substitute/study_supplied, language=Chinese, with a public_note ·
+only the endpoint anchors are published (1 = Strongly Disagree, 7 = Strongly Agree), so resp 2–6 option_text is left blank · no instructions published.
+Each table has 35 rows (5 items × resp 1–7). Every agent re-downloaded the source, and the XML/S1 sha256 values match batch_247's.
+- `zeng_2026_gai_inst_support` (IS1..5 = Q20..Q24): **written**, **VERIFIED**. Each live item matches its S1 column for 207/207 ids. The best other
+  Q5–Q39 column reaches ≤105/207. Loadings 0.904/0.875/0.893/0.896/0.892 vs Table 3's 0.903/0.877/0.890/0.897/0.892.
+- `zeng_2026_gai_learning_effect` (LE1..5 = Q35..Q39): **written**, **VERIFIED**. 207/207 id-level matches, best other column ≤112/207. Loadings
+  match Table 3 to within 0.004. Item means alone could not separate LE4 from LE5 (4.556 vs 4.551), so the id-level match is what establishes the mapping.
+- `zeng_2026_gai_role_adapt` (RA1..5 = Q10..Q14): **written**, **VERIFIED**. This block is one of the permuted ones: S1's physical column order is
+  Q10, Q11, Q14, Q12, Q13. The processing script renames the columns by name, and the live data confirm it: 207/207 matches for each item, best other column ≤112/207.
+  Loadings 0.938/0.661/0.898/0.901/0.734 vs Table 3's 0.934/0.667/0.899/0.903/0.733 rule out the positional reading (live RA3 loads 0.898 = Q12, not Q14's 0.733).
+  **Rights call for triage:** the paper cites this block to MAILS (Carolus et al. 2023). The journal version is CC BY-NC-ND 4.0, the arXiv preprint CC BY 4.0.
+  The agent judged the RA wording to be the Zeng authors' own. I checked against the MAILS item table (arXiv 2302.09319, lines 619–626 of the cached text):
+  RA2/RA3/RA5 (adapting or rethinking one's role, adjusting strategies) have no MAILS counterpart. RA1 ("When I encounter difficulties using GAI, I can
+  try different ways to solve them") and RA4 ("Even when facing challenges, I am capable of continuing to use GAI...") share a theme with MAILS's
+  "AI Problem solving" items ("I can rely on my skills in difficult situations when using AI", etc.) but are neither copies nor close paraphrases.
+  I agree it is the authors' own wording. This rests on the absence of a restriction, not a positive grant, and no register row was written. Hold the table if you read RA1/RA4 as derived from MAILS.
+
+Gates: normalize_nulls 0/3 changed · audit_batch 3 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=3 · lint clean (3 rows) ·
+irw-validate ok ×3 · check_provenance exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none of those tables are from this batch.
+Step 5b: no source overrides and no data-defect claims. I independently confirmed the S1 column permutation (read the xlsx header: …Q5,Q6,Q9,Q7,Q8,Q10,Q11,…)
+and the MAILS comparison above. The verify scripts, re-run by verify_batch, are the independent check on the mapping.
+
+Housekeeping: I made the same CRLF slip as batch_247 on the claim (csv writer normalised the doubled-CR rows of the batch_201–205 block). It was caught in the diff,
+and the file was restored with a byte-level edit of the 3 rows. The later "done" update was byte-level from the start.
+
+Queue: **87 pending, 0 in_progress.** Next up: `zeng_2026_gai_self_efficacy`, `zeng_2026_gai_ttf` (same article). Cap (batch_258) not reached.
+
+## batch_249 — 2026-09-18T20:52–21:02-07:00 — 3 tables, 3 agents
+
+**3 written / 0 blocked / 0 failed** (yield 3/3). The circuit breaker did not trip (0% failed).
+
+- `zeng_2026_gai_self_efficacy` (SE1..5 = Q15..Q19): **written**, **VERIFIED**. From the same Zeng, Kang & Piaw 2026 PLOS ONE article (CC BY 4.0) as batch_247/248, with the same conventions:
+  paper_explicit · translated_substitute/study_supplied, language=Chinese · endpoints only.
+  - Live SE<k> matches S1 Q<14+k> for 207/207 ids; the best other column reaches ≤96/207.
+  - Loadings 0.920/0.863/0.900/0.900/0.908 vs Table 3's 0.919/0.865/0.899/0.903/0.906.
+  - **Rights call for triage (same question as batch_248's role_adapt, a little closer):** Table 2's source cell [36] spans both RA and SE and cites MAILS (Carolus et al. 2023; journal version CC BY-NC-ND, arXiv preprint CC BY 4.0), which has its own AI Self-Efficacy facet.
+    The agent compared every item with MAILS's item list: none copies or closely paraphrases a MAILS item. SE2's "independently / without guidance" shares only the "on my own" idea with MAILS problem-solving item 2.
+    Treated as the authors' own wording. No register row was written. If MAILS derivation is ruled otherwise, hold this table together with role_adapt.
+- `zeng_2026_gai_ttf` (TTF1..5 = Q5..Q9): **written**, **VERIFIED**. This is the block with S1's permuted physical order (Q5,Q6,Q9,Q7,Q8); the rename is by name, and the live data confirm it.
+  - 207/207 id-level matches for each item; the best other column reaches ≤103/207.
+  - Loadings 0.976/0.774/0.895/0.909/0.848 vs 0.974/0.777/0.894/0.912/0.849. Live TTF5's 0.848 matches Q9, which rules out the positional reading.
+  - Rights: the items are cited to Al-Mamary et al. 2024 (Futur Bus J, CC BY 4.0 per Crossref). Its full text sat behind a JS challenge, so the wording was not compared, but a derivative would be CC BY anyway. Goodhue & Thompson is cited for the theory only.
+- `zhang_2020_trait_creativity_mood` (12 items, resp 0–100): **written**, **PARTIAL**. Source: Zhang et al. 2020 PLOS ONE e0236987 (CC BY 4.0).
+  - Coding: paper_order · translated_substitute/study_supplied, language=Chinese. The language is inferred: a Tsinghua sample on a Chinese ESM app, and the paper does not state it.
+  - Only the 0/100 anchors are published; 1–99 are left blank.
+  - **Source override:** the S1 header names two columns "tired" and none "sleepy". The agent shipped `tired.1` as "sleepy".
+  - **Step 5b re-check.** I read the raw S1 header myself: relaxed, tired, happy, stressed, concentrated, tired, active, angry, depressed, interested.
+    - The file order matches the paper's list only at positions 1–5. Positions 7–10 differ (paper: interested, active, angry, depressed). The agent's public_note said the file "otherwise follows the paper's item order", which is false. **I corrected the public_note** and added the check to note and notes.csv.
+    - The PA/NA reproduction does hold. I recomputed it independently: NA = 34.89/15.74/0–94 with tired.1 counted as negative, matching Table 1; without tired.1 it is 32.71. So one of the two "tired" columns is certainly the paper's "sleepy". Which one is not established (r = 0.74).
+    - Hence PARTIAL. **Triage call:** keep "sleepy" on position, or relabel tired.1 as ambiguous.
+  - The creativity stem "how original/useful…" was split at the slash into two stems.
+
+Gates: normalize_nulls 0/3 changed · audit_batch 3 PASS, no anomalies (no WARNs to explain) · verify_batch PASS=3 · lint clean (3 rows) · irw-validate ok ×3 ·
+check_provenance exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none of those tables are from this batch.
+Housekeeping: my first claim write went through csv.DictWriter and normalised the doubled-CR rows again (the same slip as batch_247/248). I caught it in the diff, restored with `git checkout`, and redid the claim byte-level. The later "done" update was byte-level.
+The mapping_verification.csv append matched the file's CRLF endings.
+
+Queue: **84 pending, 0 in_progress.** Next up: `zhang_2024_attractiveness`, `zhang_2024_gift_intention`, `zhang_2024_parasocial`. Cap (batch_258) not reached.
+
+## batch_250 — 2026-09-18 21:02–21:08 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills, no rate limits.
+
+- `zhang_2024_attractiveness` (4 items), `zhang_2024_gift_intention` (3), `zhang_2024_parasocial` (3) — all from Zhang & Liu 2024, PLOS ONE e0296908 (CC BY 4.0). Wording from S1 Appendix (docx), codes are the S1 Dataset xlsx headers used unchanged by `data/zhang_2024_giftgiving.py`. All `paper_order`, `translated_substitute` / `study_supplied`, `language=Chinese` (administered in Chinese; no CJK text anywhere in the supplements). Endpoints-only scale labels, 2–4 blank.
+- Gates: normalize 0 changes; audit_batch PASS ×3 (no WARNs, so nothing for Step 5c); verify_batch PASS ×3; lint clean (3 rows); irw-validate ok ×3; check_provenance exit 0 (its `mixed` REVIEW list of 19 is unchanged, and none are from this batch).
+- Step 5b: no agent overrode a source or reported a response-data defect, so nothing needed an independent re-check. The published Table 2 loadings / Table 3 composites reproduce from the live data in all three.
+- **For triage, the verification status is inconsistent across siblings with the same evidence type.** gift_intention and parasocial recorded **PARTIAL**: the live code→S1 column match is decisive and the loadings reproduce, but the wording→code link rests on appendix numbering. attractiveness recorded **NO_ROUTE** for the same situation: its loadings pin live ATR1–4 to the paper's codes, with the best alternative ordering off by 0.014, and it too leaves wording→code to numbering. I left each agent's call as-is. Harmonising probably means moving attractiveness to PARTIAL.
+- Rights: the source scales (Ha & Lam 2016; Pavlou 2003; Xu, Wu & Li 2020) have no register rows. The agents found no restriction, but the attractiveness agent did not open Ha & Lam's own page.
+- Housekeeping: the tracker merge first went through csv.DictWriter and rewrote 6 existing rows' endings. I caught it in the diff, reverted, and did a raw append instead. The queue claim went through DictWriter too, and it normalised 24 lines of queue_state. I caught that before committing and redid it byte-level. The final "done" update was byte-level.
+
+Queue: **81 pending, 0 in_progress.** Next: `zhang_2024_streamer_dsp`, `zhang_2024_viewer_dsp`, `zhang_2025_coercive_pressure`. Cap (batch_258) not reached.
+
+## batch_251 — 2026-09-18 21:10–21:16 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills, no rate limits (20G available at launch).
+
+- `zhang_2024_streamer_dsp` (4 items) and `zhang_2024_viewer_dsp` (6): the last two of the Zhang & Liu 2024 PLOS ONE e0296908 set (CC BY 4.0). They follow the batch_250 siblings: `paper_order`, `translated_substitute` / `study_supplied`, `language=Chinese`. The S1 files are byte-identical to the batch_250 copies (sha256 match). Both are **PARTIAL**: the live codes match the S1 columns id-for-id (325/325), and a refit of the Table 2 CFA reproduces the loadings. The step from appendix number to code cannot be tested from the data.
+  - Loading margins are thin. For viewer_dsp the best wrong ordering misses by 0.0065 (VDSP1/6/4 load 0.791/0.797/0.804). For streamer_dsp it misses by 0.018.
+  - viewer_dsp item 6 ("I want to make me noticed by others.") is shipped exactly as printed.
+  - **Triage call, streamer_dsp:** unlike its siblings, it ships with **no endpoint labels at all**. The paper says SDSP was "reverse scoring processing … in the analysis stage".
+    - **Step 5b re-check:** I computed the live composite independently: n=325, mean 3.681, SD 1.027. That equals Table 3, and reversing it would give 2.319. So IRW stores the post-reversal values.
+    - Whether stored 5 means agreeing with the English "…intentionally misleading" depends on the Chinese wording, which was never released. The agent declined to attach "Strongly agree"/"Strongly disagree" to either end, and the provenance note records both readings.
+    - Ben can pick a direction, or leave it blank.
+- `zhang_2025_coercive_pressure` (4 items, resp 1–7): Zhang et al. 2025 PLOS ONE e0322200. **VERIFIED**, `paper_explicit`: the S2 "List of scale items" prints `CP1:`…`CP4:` before each wording.
+  - Checks: id-level match 292/292, and the Table 2 loadings 0.759/0.662/0.810/0.852 reproduce (the nearest wrong ordering misses by ≥0.042). Live alpha is 0.853, the same as Table 2.
+  - Also `translated_substitute`/`study_supplied`, language=Chinese. The endpoints are "total disagreement"/"total agreement"; 2–6 are left blank.
+  - Trailing source citations were stripped from the item text.
+  - CP3 was never answered with a 1; that is a property of the data.
+  - Siblings (environ_awareness, normative_pressure, self_efficacy, …) head the queue for the next round.
+- Rights: the source scales are DeAndrea & Walther 2011 (SDSP), Souiden et al. 2011 (VDSP), and Dai et al. 2021 / Jiang et al. 2024 (CP). None has a register row and no restriction was found, so all ship under silence-is-permission.
+
+Gates: normalize_nulls 0/3 · audit_batch 3 PASS, no anomalies (no WARNs for Step 5c) · verify_batch PASS=3 · lint 0 ERROR/0 WARN, plus 1 INFO: coercive_pressure hedges but asserts a full item-axis tie, so VERIFIED stands · irw-validate ok ×3 · check_provenance exit 0 (its `mixed` REVIEW list of 19 is unchanged, and none are from this batch).
+
+Housekeeping:
+- My first claim went through csv.DictWriter and normalised 24 queue lines again. I caught it in the diff, ran `git checkout`, and redid the claim byte-level. The "done" update was byte-level too.
+- I appended the tracker rows raw with CRLF. **Noticed:** batch_250's three tracker rows (zhang_2024_attractiveness/gift_intention/parasocial) went in with bare LF, while the rest of mapping_verification.csv is CRLF. They are left as-is; cosmetic only.
+
+Queue: **78 pending, 0 in_progress.** Next: `zhang_2025_environ_awareness`, `zhang_2025_normative_pressure`, `zhang_2025_self_efficacy`. Cap (batch_258) not reached.
+
+## batch_252 — 2026-09-18 21:19–21:25 PDT (3 agents, 3 tables)
+
+**Written 3 / blocked 0 / failed 0 — yield 3/3.** No kills and no rate limits.
+
+- All three are further tables from Zhang, Zhao, Shao, Fan & Wang 2025, PLOS ONE e0322200 (CC BY 4.0), the siblings of batch_251's `zhang_2025_coercive_pressure`. They follow its pattern:
+  - `paper_explicit`: the S2 appendix prints each `XXk:` code before its wording.
+  - `translated_substitute` / `study_supplied`, language=Chinese (the Chinese wording was never released).
+  - Only the endpoints are labelled: 1 = "total disagreement", 7 = "total agreement"; points 2–6 are blank.
+  - Leading code prefixes and trailing citations were stripped from the item text.
+  - The S1 and S2 files match batch_251's by sha256.
+- `zhang_2025_environ_awareness` (5 items): **VERIFIED**.
+  - Checks: id-level live-vs-S1 match 292/292 (best other column 174/292); Table 2 loadings 0.847/0.765/0.695/0.663/0.701 reproduce (best wrong ordering off by 0.006); alpha 0.852 = Table 2.
+  - EA5's "strategie" typo is shipped as printed. **Step 5b re-check:** the S2 docx paragraph really does read "integration strategie".
+- `zhang_2025_normative_pressure` (4 items): **VERIFIED**.
+  - Checks: id-level match 292/292 (best other 153/292); loadings 0.807/0.854/0.724/0.830 reproduce (best wrong ordering off by 0.023); alpha 0.879.
+- `zhang_2025_self_efficacy` (5 items): **VERIFIED**.
+  - Checks: id-level match 292/292 (best other 110/292); loadings reproduce exactly; alpha 0.906.
+  - **Caveat, re-checked in verify_batch output:** SE1, SE2 and SE5 have nearly the same loadings (0.819/0.813/0.812). So 5 of 119 wrong orderings fall within 0.02, and the loadings alone cannot tell those three items apart.
+  - VERIFIED rests on the S2 code labels plus the id-level column identity, the same basis as the coercive_pressure precedent. The evidence field says so.
+  - SE4's double space was collapsed.
+- Rights: no restriction was found on any of the source scales, and none has a register row, so all ship under silence-is-permission.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=3.
+- lint: 0 ERROR / 0 WARN, plus 3 INFO (hedged evidence alongside a full item-axis tie, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. Its `mixed` REVIEW list of 19 is unchanged, and none are from this batch.
+
+Housekeeping: the first claim went through csv.DictWriter and normalised 24 queue lines, again. I caught it in the diff, ran `git checkout`, and redid the claim byte-level. The "done" update and the tracker append (CRLF) were byte-level too.
+
+Queue: **75 pending, 0 in_progress.** Next: `zhao_2024_erq`, `zhao_2025_digital_literacy`, `zhao_2025_nat_env_perception`. Cap (batch_258) not reached.
+
+## batch_253 — 2026-09-18 21:26 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills: 20G available at dispatch.
+
+- `zhao_2024_erq` (ERQ-8 psychometrics, Zhao et al. 2024, PLOS ONE e0296035, CC BY 4.0), 10 items: **PARTIAL**.
+  - The study administered the Chinese ERQ-C, but neither the paper nor S1 contains any wording (S1 is just `ID, Gender, ERQr1..ERQr10`). The table ships Gross & John's English ERQ as `translated_substitute` / `official_instrument_english`, language=Chinese, following the 2026-09-08 ERQ ruling (irw#2121) and the moe2025_erq and morales_2021_erq precedent.
+  - Anchors shipped: 1, 4 and 7. Points 2, 3, 5 and 6 are blank.
+  - Verification: the reappraisal/suppression split ranks 1st of 210 possible 6/4 splits (0.4296 against 0.1642 for the runner-up). A refit reproduces all 18 of Table 3's loadings to within 0.0005, and the Table 4 alphas match exactly.
+  - Not established: the within-subscale Q-number → ERQ-wording tie, because the paper prints no wording.
+- `zhao_2025_digital_literacy` (Zhao, Tang & Wang 2025, PLOS ONE e0334214, CC BY 4.0; China Family Panel Studies internet-use items), 7 items: **data_labels / NOT_NEEDED**.
+  - `translated_substitute` / `study_supplied`, language=Chinese.
+  - **Source override, re-checked in Step 5b:** Table 2's "Index interpretation" column really does pair "Digital social" with "…for entertainment" (5.246) and "Digital entertainment" with "…for socializing" (4.797). The agent followed the S1 headers instead: the Index column and the Methods list order agree with them.
+  - This is recorded as a caveat in notes.csv. If the interpretation column is the right one, `digital_social` and `digital_entertainment` swap texts.
+  - The table_context.R and item_stats.R calls exported the 46k-row table; the gate used table-sets.
+  - The S1 xlsx carries one cell comment whose author field looks like a phone number. It is file metadata, not respondent data, and nothing ships from it.
+- `zhao_2025_nat_env_perception` (Zhao, Zhang & Zhao 2025, PLoS ONE e0325755, CC BY 4.0), 6 items: **VERIFIED**.
+  - The wording comes only from the Table 1 image, which prints NEP1..6 codes next to each item.
+  - `translated_substitute` / `study_supplied`, language=Chinese (inferred: in-person survey in Changsha).
+  - No anchors were published anywhere, so option_text is blank for resp 1–5.
+  - Verification: the id-level live-vs-S1 match is 199/199 (the best other column is 130/199).
+  - The CFA loadings are only approximate (max diff 0.069) because S1 is a 199-respondent minimum dataset against the paper's N=457.
+  - Siblings `zhao_2025_place_attachment` and `zhao_2025_psych_recovery_eval` are still pending and head the queue.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=2, MISSING(exempt)=1 (the data_labels table).
+- lint: 0 ERROR / 0 WARN / 1 INFO (hedged evidence alongside a full item-axis tie on nat_env_perception, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping:
+- The first claim went through csv.DictWriter and normalised 24 lines again. I caught it in the diff, checked the file out and redid the claim byte-level. The done update and the tracker append (CRLF) were byte-level too.
+- The sidecar headers mixed quoted and unquoted forms, so the merge used a csv parse and not a line concat.
+
+Queue: **72 pending, 0 in_progress.** Next up: `zhao_2025_place_attachment`, `zhao_2025_psych_recovery_eval`, `zhou_2024_smart_home_intention`. Cap (batch_258) not reached.
+
+## batch_254 — 2026-09-18 21:36 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills.
+
+- `zhao_2025_place_attachment` (Zhao, Zhang & Zhao 2025, PLoS ONE e0325755, CC BY 4.0; sibling of batch_253's nat_env_perception), 8 items PA1–PA8: **VERIFIED**.
+  - Wording read from the Table 1 image, which prints the PA codes next to each item. `translated_substitute` / `study_supplied`, language=Chinese (inferred, as for the sibling).
+  - Verification: each live PAk matches S1's PAk column for 199/199 ids; the best other column matches 131/199. The place-dependence (PA1–4) / place-identity (PA5–8) split holds: mean within-block r 0.616 vs 0.536 across.
+  - No anchors published, so option_text is blank. The items are the authors' adaptation of Williams & Vaske (2003), not canonical wording.
+- `zhao_2025_psych_recovery_eval` (same paper), 12 items PRE1–PRE12: **VERIFIED**.
+  - Same basis: Table 1 image codes, S1 columns, 199/199 id-level match. The Table 4 loadings do NOT reproduce on the 199-respondent S1 (max diff 0.321), so they are not counted as evidence.
+  - **Data property, re-checked in Step 5b:** PRE11 and PRE12 are identical for 188/199 ids, r=0.94. The best other item pair agrees on 158/199, and neither PRE11 nor PRE12 agrees with any other item on more than 139/199. This is present in the S1 deposit, so it is not an itemtext defect. It may be a duplicated column or a genuine response pattern. Not filed.
+  - Table 1 heads the scale "Psychological restorative evaluation"; the text and Table 4 say "psychological recovery evaluation".
+- `zhou_2024_smart_home_intention` (Zhou, Qian & Kaner 2024, PLOS ONE e0300574, CC BY 4.0), 13 items: **VERIFIED**.
+  - Wording read from the Table 1 image. Anchors are the paper's own ("complete disagreement (1) … complete agreement (5)"). `translated_substitute` / `study_supplied`, language=Chinese.
+  - Verification: a refit reproduces all 13 unstandardized and 13 standardized loadings in Table 4 (max diff 0.0004), and all six alphas match to 3 decimals. Live vs S1 matches 200/200 per item.
+  - **Dictionary problem, re-checked in Step 5b:** `metadata/biblio.csv` expands ITS as "intention to switch", but the paper's construct is "Intergeneration-al technical support". The Description needs correcting. The agent also said the processing script header repeats the error. That was wrong: it is the stale near-duplicate `data/zhou_2024_smarthome_intention.py:9`, not the script that produced the table. Notes/provenance corrected.
+  - Housekeeping for a human: `data/zhou_2024_smarthome_intention.py` is a stale near-copy for a table that isn't live, and both zhou scripts put an email address in a User-Agent header.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=3.
+- lint: 0 ERROR / 0 WARN / 2 INFO (hedged evidence alongside a full item-axis tie on the two zhao tables, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Queue: **69 pending, 0 in_progress.** Next up: `zhou_2025_ehealth_literacy`, `zvi_2022_rei`, `ALSECYPIAMH_WU_2022_MIL`. Cap (batch_258) not reached.
+
+## batch_255 — 2026-09-18 21:46 PDT (claimed) — 3 tables, 3 agents
+
+**Written 1 / blocked 2 / failed 0. Yield 1/3.** No kills. Both blocks are determinate verdicts, so the circuit breaker is not tripped.
+
+- `zhou_2025_ehealth_literacy` (Zhou et al. 2025, PLOS ONE e0330637, CC BY 4.0), 8 items eh1–eh8: **VERIFIED**, mapping_basis `data_labels`.
+  - Wording comes from the S1 xlsx headers (`@32、2-K …`, with the prefix stripped). These are the study's own English renderings, not the canonical eHEALS wording. `translated_substitute` / `study_supplied`, language=Chinese (inferred; no Chinese text exists anywhere in the deposit).
+  - The paper names only the two end anchors, so resp 2–4 option_text is blank.
+  - The processing script assigns codes by position, so a header diff was run even though the basis is data_labels. Each live ehK matches S1 column 2-K on 14892/14892 ids; the best other column reaches 12789–13837 (straight-lining).
+  - Rights: eHEALS (Norman & Skinner 2006, JMIR OA). No register row, and no restriction was found.
+- `zvi_2022_rei`: **blocked**. The 24 REI items c1..c24 are bare S1 column codes. The paper quotes 2 example items with no list or order. Cited ref 33 omits the items and ref 57 (Synthese 2012) is closed. Administered in Hebrew. Retry test NO; it needs an author-supplied questionnaire.
+- `ALSECYPIAMH_WU_2022_MIL`: **blocked on rights**. It is a Chinese MLQ (5 presence + 5 search items, resp 1–7), identified from its structure and the paper's Crossref references. Orchestrator re-check: the register has MLQ at `block` (irw#1945), and the quoted clause matches. The deposit also has no MLQ wording (unlabelled .sav; the supplement is the Claremont Purpose Scale only).
+- Both blocked tables have rows in `pending_index_notes.csv`.
+
+Gates:
+- normalize_nulls: 1/1 rewritten (NA convention).
+- audit_batch: PASS ×1, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=1.
+- lint: clean.
+- irw-validate: ok.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: `queue_state.csv` has mixed CRLF/`\r\r\n` line endings. A default `csv.reader` pass reads the stray `\r`s as blank rows, so this round edited the claimed rows byte-wise and left every other line untouched.
+
+Queue: **66 pending, 0 in_progress.** Next up: `AMI_CV_Hewitt2024`, `AOMT_BR_SF_EDPANAB_Geiger_2021_RF`, `BAFACALO_Golino_2013_BVPS`. Cap (batch_258) not reached.
+
+## batch_256 — 2026-09-18 21:54 PDT (claimed) — 3 tables, 3 agents
+
+**Written 2 / blocked 1 / failed 0. Yield 2/3.** No kills. The one block is a determinate rights verdict, so the circuit breaker is not tripped.
+
+- `AMI_CV_Hewitt2024` (Hewitt, Habicht et al. 2024, Behav Res; OSF dukhj, CC BY 4.0), 18 items × resp 0–4, 90 rows: **PARTIAL**, mapping_basis `paper_explicit`, text_source `study_materials`.
+  - Wording is the 18-item column of Supplementary Table 1. Instructions and option labels come from the published 12-item form.
+  - Verification is route 3, published subscale scores. The live data equal the deposit in 3402/3402 cells (189 persons). The authors' BA, SM and ES scores reproduce for 186/186, 189/189 and 188/188 persons (max |diff| 3.6e-15), and 0 of 36 single-item subscale moves still reproduce. Order within a subscale is not established. The orchestrator re-ran this through verify_batch: PASS.
+  - The source has two errors, neither of which affects this table. The paper quotes the dropped SM4 with item 14's wording, and the 12-item scoring key swaps items 5 and 6. Both are in notes.csv.
+- `AOMT_BR_SF_EDPANAB_Geiger_2021_RF` (OSF hx8qt, CC BY 4.0; A-DMC Resistance to Framing, 28 items RCG/RCL/AFP/AFN × resp 1–6, 168 rows): **NOT_NEEDED**, mapping_basis `data_labels`. The item codes are the Qualtrics question IDs.
+  - **Overrides the study's Codebook.xlsx.** The codebook repeats AFP1's condom wording for AFP2 and misassigns the AFN response labels. The shipped AFP2 is the beef problem.
+  - Orchestrator re-check confirms it. The NA.qsf gives AFP2 the lasagna/ground-beef stem. In the live data (n=507), AFP2 correlates 0.64 with AFN5 (beef) and 0.06 with AFN6 (condom); AFP1 correlates 0.90 with AFN6.
+  - The table pools English (NA, n=259) and Bulgarian (BG, n=248) administrations. It ships the English; the Bulgarian is disclosed in public_note.
+- `BAFACALO_Golino_2013_BVPS`: **blocked on rights**. It is the Brazilian translation of ETS Kit tests CF-3 and VZ-3. ETS licenses the Kit at its discretion, for a royalty, to signatories only. The items are also unkeyed figures. Retry test NO. There is a row in pending_index_notes.csv.
+  - Follow-ups for a human:
+    - The instrument_rights_register has no ETS Kit row. The agent supplied the quote and PDF sha256; see notes.csv.
+    - The sibling tables `BAFACALO_Golino_2013_FIS/_CIS/_SMS` probably fall under the same ETS derivation.
+    - availability_audit_full.csv marks BVPS AVAILABLE on the strength of a single example figure.
+
+Gates:
+- normalize_nulls: 1/2 rewritten (NA convention).
+- audit_batch: PASS ×2, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=1 and MISSING(exempt)=1.
+- lint: clean.
+- irw-validate: WARN name_charset ×2. These are the uppercase live table names, a property of the tables and not an itemtext defect.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: this round's first claim write went through csv.DictWriter and normalized 24 unrelated CRLF line endings. It was redone byte-wise from HEAD before commit, so the committed diff is exactly the 3 claimed rows.
+
+Queue: **63 pending, 0 in_progress.** Next up: `CV_OASIS_ODSIS_PPE_Novak_2020_PANAS`, `EWAS_Sanford_2024`, `FGSIS_Berzeviczy_2018`. Cap (batch_258) not reached.
+
+## batch_257 — 2026-09-18 22:05 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills. Circuit breaker not tripped.
+
+- `CV_OASIS_ODSIS_PPE_Novak_2020_PANAS` (OSF ad6b3; 20 items × resp 1–5, 100 rows): **PARTIAL**, mapping_basis `reconstructed`, text_source `translated_substitute` (translation_source `official_instrument_english`). The study ran in Czech and no Czech wording is published, so it ships the Watson, Clark & Tellegen 1988 English adjectives and anchors.
+  - Verification rests on subscale blocks (19/20 items closer to their own block; `panas_12` alert is the exception, and the authors flag it too), the author-named alert/interested/attentive trio, and the four lowest-mean items all being NA items. Order within blocks is not established. verify_batch: PASS.
+  - **Source defect in the paper, not the response data.** The Rmd scores PANAS-P with `starts_with("panas_1")`, which also pulls in NA items 11, 13, 15 and 18, so the published PANAS-P is a 14-item sum. The orchestrator re-checked this on the live table (n=1458). The buggy selection gives 28.92 (9.89) against the published 28.83 (9.77); the correct 10-item sum gives 21.34 (8.02). Spearman r(P,N) is 0.62 with the bug (published .61) and 0.40 with the correct sum. Confirmed and written into notes.csv. It does not affect the item text.
+- `EWAS_Sanford_2024` (Sanford & Elkins 2024, Psych Assess; OSF 4td6k, CC BY 4.0; 30 items, 180 rows): **VERIFIED**, mapping_basis `paper_explicit`. The study's codebook PDF prints each variable name beside its own stem and options. That is corroborated by a 30/30 range signature, the 6 final-scale items from Table 2 = exactly the 6 live items with n=718, Study 2 .sav labels matching 6/6, and Table 1's per-format partial r reproduced within 0.006.
+  - Audit WARN (row-count anomaly) is study design, not an itemtext defect. The 6 final items were in both studies (236+482); the other 24 were in Study 1 only. The orchestrator re-counted: 6×718, 24×236.
+  - Lint WARN ("VERIFIED but evidence hedges") was reviewed and VERIFIED was kept. The explicit-code-label route separates every item; the hedge applies only to the corroborating statistics.
+  - The sibling `EWAS_Sanford_2024_Flourish` block (Diener NC clause, batch_031) does not extend to the EWAS itself.
+- `FGSIS_Berzeviczy_2018` (OSF 7mgxk; 10 items, 34 rows): **NOT_NEEDED**, mapping_basis `data_labels`. The item codes are the xlsx headers, which carry the full wording. The typo "supossed" in Q8 is kept as administered. Rights shipped on silence (Herbenick has published no terms). Escalate if Ben wants the FGSIS treated as permission-required.
+  - **For a human: the source deposit has PII.** The public OSF `FGSIS Data.xlsx` has a populated "IP Address" column for all 170 respondents. The IRW processing script drops it, so the IRW table is clean. But under the PII-skip rule for intake, this dataset would not have been taken today. Worth a look.
+
+Gates:
+- normalize_nulls: 0/3 rewritten.
+- audit_batch: PASS ×2, WARN ×1 (EWAS, explained above and in notes.csv).
+- verify_batch: PASS=2, MISSING(exempt)=1.
+- lint: 0 ERROR, 1 WARN (EWAS, reviewed).
+- irw-validate: WARN name_charset ×3, from the uppercase live table names; not an itemtext defect.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Housekeeping: the claim write normalized 3 LF-only lines to CRLF. The final queue update was redone byte-wise from HEAD, so the committed diff is exactly the 3 rows for this batch.
+
+Queue: **60 pending, 0 in_progress.** Next up: `IJLS_Eersel_2024_ICECAP`, `IJLS_Eersel_2024_IUS`, `IJLS_Eersel_2024_Optimism`, all from one source, so tell each agent about its siblings. Cap (batch_258) not reached.
