@@ -18,11 +18,13 @@ however many fail). Neither had an exit code, so neither could gate anything.
 """
 from .core import (MAX_BYTES, format_report, validate_file, validate_frame,
                    validate_paths)
-from .model import (CORE_CHECKS, GATE_ERRORS, PROFILES, Finding, Report,
-                    exit_code, severity_for)
+from .model import (CLAUSES, CORE_CHECKS, GATE_ERRORS, PROFILES,
+                    STANDARD_URL, STANDARD_VERSION, Finding, Report, exit_code,
+                    severity_for)
 
 __all__ = [
     "validate_file", "validate_frame", "validate_paths", "format_report",
     "Finding", "Report", "exit_code", "severity_for",
     "CORE_CHECKS", "GATE_ERRORS", "PROFILES", "MAX_BYTES",
+    "STANDARD_VERSION", "STANDARD_URL", "CLAUSES",
 ]

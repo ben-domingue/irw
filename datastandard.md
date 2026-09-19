@@ -2,6 +2,14 @@
 
 This document tells an agent exactly what to produce when converting a raw dataset into IRW format. Read it before writing a single line of code.
 
+*The format itself is defined by the numbered clauses of the public
+[IRW Data Standard](https://itemresponsewarehouse.org/standard.html) (v1.0), and
+`irw-validate` reports each finding against them. This guide adds IRW's intake
+policy — licence, sample floor, naming, one file per scale — and the working
+practice for getting a source into that format. Where the two disagree, the
+public standard governs the format; raise the disagreement rather than following
+either silently.*
+
 ---
 
 ## Before you start

@@ -37,6 +37,29 @@ GATE_ERRORS = frozenset({"resp_variation*", "resp_outside_permitted", "resp_scal
 
 PROFILES = ("core", "triage", "upload", "legacy")
 
+#: The published version of the format these checks enforce, the IRW Data
+#: Standard at https://itemresponsewarehouse.org/standard.html (#1716). Bump it
+#: only when that page's changelog does -- a new check is not a new standard.
+STANDARD_VERSION = "1.0"
+STANDARD_URL = "https://itemresponsewarehouse.org/standard.html"
+
+#: Check -> the numbered clause of the standard it tests. Only these checks bear
+#: on conformance; everything else the validator runs is IRW intake policy (the
+#: sample floor, table names) or a heuristic, and a table can conform to the
+#: standard while failing every one of them. `tests/test_validate.py` asserts
+#: that each of CORE_CHECKS has a clause, so a new core check cannot ship
+#: without one.
+CLAUSES = {
+    "required_columns": "C1",
+    "id_na": "C2",
+    "item_na": "C3",
+    "resp_na": "C4",
+    "resp_numeric": "C4",
+    "dup_id_item": "C5",
+    "cov_prefix": "C6",
+    "column_order": "C7",
+}
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -45,6 +68,14 @@ class Finding:
     message: str
     table: str = ""
     group: str = "core"    # "core" | "heuristic" | "name" | "covariate"
+
+    @property
+    def clause(self) -> str:
+        """The standard's clause this finding tests, or "" for intake/heuristics."""
+        return CLAUSES.get(self.check, "")
+
+    def to_dict(self) -> dict:
+        return {**vars(self), "clause": self.clause}
 
 
 @dataclass
@@ -56,6 +87,9 @@ class Report:
     stats: dict = field(default_factory=dict)
     overridden: list = field(default_factory=list)
     override_reason: str | None = None
+    #: "responses" or "item_text". Standard 1.0 defines the response table only;
+    #: item text has its own schema, so conformance is not asked of it.
+    kind: str = "responses"
 
     @property
     def errors(self) -> list:
@@ -70,15 +104,47 @@ class Report:
         """Mirrors red_up.checks.FileReport.ok, so the two compose directly."""
         return not self.errors
 
+    @property
+    def nonconforming(self) -> list:
+        """Clauses of the standard this table breaks, in clause order.
+
+        Overridden errors count. A waiver lets a table through IRW's gate; it
+        does not make the table conform to the standard.
+        """
+        broken = [f for f in self.errors + self.overridden
+                  if f.severity == "error" and f.clause]
+        return sorted({f.clause for f in broken})
+
+    @property
+    def conforms(self) -> bool | None:
+        """Does the table meet the IRW Data Standard, as distinct from `ok`?
+
+        `ok` asks whether IRW would accept the table under this profile, which
+        includes intake policy. `conforms` asks only whether it is a valid IRW
+        table: no error on a check the standard's clauses define.
+
+        None for item text, which Standard 1.0 does not cover, and under the
+        `core` and `triage` profiles. Those keep the inherited readings of C4
+        (99% of values numeric) and C5 (only wave/timepoint/date explain a
+        repeat) for their callers, and the standard is the gate's reading: a
+        rater design would be called nonconforming there and conforming here.
+        """
+        if self.kind != "responses" or self.profile not in ("upload", "legacy"):
+            return None
+        return not self.nonconforming
+
     def to_dict(self) -> dict:
         return {
             "label": self.label,
             "profile": self.profile,
+            "standard_version": STANDARD_VERSION,
+            "conforms": self.conforms,
+            "nonconforming": self.nonconforming,
             "ok": self.ok,
             "stats": self.stats,
             "checks_run": self.checks_run,
-            "findings": [vars(f) for f in self.findings],
-            "overridden": [vars(f) for f in self.overridden],
+            "findings": [f.to_dict() for f in self.findings],
+            "overridden": [f.to_dict() for f in self.overridden],
             "override_reason": self.override_reason,
         }
 

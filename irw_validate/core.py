@@ -6,7 +6,7 @@ from pathlib import Path
 
 from . import extra
 from ._checks import OCCASION, irw_metadata, run_qc
-from .model import Finding, Report, severity_for
+from .model import STANDARD_VERSION, Finding, Report, severity_for
 
 #: Above this, a full pandas load is not worth it inside the uploader's hot
 #: path -- red_up streams 500 MB tables with the csv module on purpose. Files
@@ -58,7 +58,7 @@ def is_item_text(label: str) -> bool:
 
 def _validate_item_text(df, label: str, profile: str) -> Report:
     """The item text schema: check what applies, and say nothing about the rest."""
-    report = Report(label=label, profile=profile)
+    report = Report(label=label, profile=profile, kind="item_text")
     table = _table_name(label)[: -len(ITEMS_SUFFIX)]
     missing = [c for c in ITEMS_REQUIRED if c not in df.columns]
     report.checks_run.append("required_columns")
@@ -337,11 +337,22 @@ def validate_paths(paths, *, profile: str = "upload") -> list:
 def format_report(report: Report, *, show_passes: bool = False) -> str:
     """One block per table, errors first. Kept plain so CI logs stay readable."""
     lines = [f"{report.label} [{report.profile}]"]
+    # Two verdicts, because they answer different questions: is this a valid
+    # IRW table (the standard), and would IRW accept it (the profile's gate,
+    # which adds intake policy such as the sample floor). A contributor's table
+    # can pass the first and fail the second.
+    if report.conforms is not None:
+        verdict = "conforms" if report.conforms else \
+            f"does not conform ({', '.join(report.nonconforming)})"
+        lines.append(f"  IRW Data Standard {STANDARD_VERSION}: {verdict}")
+        gate = "passes" if report.ok else f"blocked by {len(report.errors)} error(s)"
+        lines.append(f"  IRW {report.profile} gate: {gate}")
     if not report.findings and not report.overridden:
         lines.append(f"  ok -- {len(report.checks_run)} checks, nothing to report")
     order = {"error": 0, "warn": 1, "info": 2}
     for f in sorted(report.findings, key=lambda f: order.get(f.severity, 3)):
-        lines.append(f"  {f.severity.upper():5s} {f.check:22s} {f.message}")
+        where = f"[{f.clause}]" if f.clause else ""
+        lines.append(f"  {f.severity.upper():5s} {f.check:22s} {where:4s} {f.message}")
     for f in report.overridden:
         lines.append(f"  OVERRIDDEN {f.check:17s} {f.message}")
     if show_passes and report.checks_run:
