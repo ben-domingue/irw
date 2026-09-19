@@ -142,7 +142,10 @@ if (!is.null(snap)) {
 # `uploaded` is worth reporting whether or not that table owes a public note.
 all_rows <- rows
 rows <- rows[has(rows$public_note), ]
-rows$on_page <- vapply(rows$table, function(t) grepl(t, page, fixed = TRUE), logical(1))
+# Exact entry names, not a substring search of the page text: `sds` matched
+# inside other entries' prose and read as present, and the same test would hide
+# a DUE table whose name happens to appear in someone else's entry (#2236).
+rows$on_page <- tolower(rows$table) %in% page_entries
 
 dropped <- character(0)
 drop_file <- "fixes/issues_page_dropped.csv"
@@ -157,7 +160,16 @@ due     <- rows[rows$live & !rows$on_page & !rows$dropped, ]
 pending <- rows[!rows$live & !rows$on_page & !rows$dropped, ]
 # A table in the draft is neither live nor missing: it goes live at the next
 # release, so an entry written for it now is early but correct, not wrong.
-early   <- rows[!rows$live & rows$on_page & !rows$in_draft, ]
+# An entry rewritten to open "IRW does not offer item text" after a withdrawal is
+# deliberately on the page for a table with no item text: it keeps the response-data
+# facts that survive the withdrawal (conner_2017_bfi). Only the ENTRY's own wording
+# clears it -- a withdrawn table whose entry still describes the wording stays in CHECK.
+.ti <- which(grepl("^- table:", .lines))
+.body <- vapply(.ti, function(i) trimws(paste(.lines[i + 1:2], collapse = " ")), "")
+page_withdrawn <- page_entries[match(tolower(trimws(sub("^- table:", "", .lines[.ti]))), page_entries)][
+  grepl("IRW does not offer item text", .body, fixed = TRUE)]
+early   <- rows[!rows$live & rows$on_page & !rows$in_draft &
+                !(tolower(rows$table) %in% page_withdrawn), ]
 staged  <- rows[!rows$live & rows$on_page & rows$in_draft, ]
 
 if (is.null(snap)) {
@@ -235,7 +247,8 @@ if (is.null(snap)) {
       "    python3 refresh_live_tables.py\n", sep = "")
   orphan <- character(0)
 } else {
-  .accounted <- tolower(c(early$table, staged$table))
+  # page_withdrawn: entries that themselves say no item text is offered (see CHECK).
+  .accounted <- c(tolower(c(early$table, staged$table)), page_withdrawn)
   .missing <- setdiff(setdiff(page_entries, tolower(snap)), .accounted)
   # An entry for a table sitting in the draft is early, not wrong: it goes live
   # at the next release. Same distinction STAGED draws above.
