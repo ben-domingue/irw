@@ -45,3 +45,19 @@ sources confirmed 9 and contradicted none; the tenth (a Mendeley deposit) could 
   Its dominant failure was stopping at the paper: it missed wording in data-file labels, column
   headers, codebooks and supplements, and it treated figshare/Dataverse web-page failures as dead
   ends when their APIs work. Its "copyrighted" calls mostly held on outcome, not on reasoning.
+
+## Full triage (2026-09-19 on, irw#2255)
+
+- `TRIAGE_BRIEF.md`: the brief every triage agent follows. It is the pilot brief plus a required
+  upstream-originator rights check, a generic User-Agent rule, the WPAI naming ruling, and fetch
+  workarounds learned in wave 1.
+- `triage_scope.csv`: the 678 deposits (2,057 tables) in scope. These are the candidates whose own
+  stratum is never_assessed, BLOCKED, UNAVAILABLE or AVAILABLE, outside the 100 pilot deposits,
+  minus anything live or queued at build time. (#2255's "649" subtracted the 15 pilot copyright
+  deposits twice.) Deposits are shuffled (seed 20260920) into waves of 100 and slices of 20.
+- `triage_results.csv`: one row per table, appended wave by wave, in the pilot's columns plus
+  `rights_sha256`, `wave` and `slice`. About 10 verdicts per wave are hand-checked against sources.
+  Wave 1 checked 10: 9 were confirmed directly, 1 by its register row only, and none were
+  contradicted.
+- `register_rows_draft.csv`: draft rows for `instrument_rights_register.csv`, for a human to add.
+  Rounds and triage never write `ship`.

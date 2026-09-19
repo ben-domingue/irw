@@ -98,6 +98,15 @@ Study-specific items written by the study's own authors have no upstream; say so
   `/api/access/datafile/<id>` downloads.
 - OSF: `https://api.osf.io/v2/nodes/<id>/files/` .
 - Crossref/OpenAlex (`https://api.openalex.org/works/doi:<doi>`) give open-access copies of papers.
+- **[new, from wave 1]** Hosts that bot-block plain fetches, and what worked instead:
+  Zenodo landing pages return 403 to curl, so use the API (`https://zenodo.org/api/records/<id>`, which
+  lists files with download links) or the WebFetch tool. For MDPI, Springer (a ~3KB "Client
+  Challenge" page) and other publishers, look for a Europe PMC or PMC copy
+  (`https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=DOI:<doi>&format=json`).
+  DataverseNL and some university repositories also block you; say so, and use UNREACHABLE only after
+  the API route fails.
+- **[new, from wave 1]** Do not use a User-Agent or contact address copied from the repo's processing
+  scripts: several carry a personal email address.
 - Budget: about 10 fetches per deposit, plus up to 4 for the upstream check. If a deposit needs
   more, give your best verdict and say what a further look would check. Cache downloads under
   your own cache folder (given in your task), never inside the repo.
