@@ -70,7 +70,11 @@ CHECKED <- list(
     list(field = "translation_source", discloses = "machine_translation",
          review = "mixed",
          why = "Each ships English this project generated"),
-    list(field = "key_source",         discloses = "derived_from_responses",
+    ## `read_from_stimulus` added 2026-09-18 (gilbert_meta_70, #1945): a key read
+    ## off the hosted stimulus is no more the study's assertion than one solved
+    ## from responses, so it owes the same page entry.
+    list(field = "key_source",
+         discloses = c("derived_from_responses", "read_from_stimulus"),
          why = "Each ships an answer key this project derived rather than transcribed"),
     ## Added 2026-09-11 (#1848, ENEM 2023). Five items had figures the source never
     ## described in words, so this project wrote descriptions into item_text. Same
@@ -114,7 +118,7 @@ for (f in files) {
         if (length(off))
             bad[[paste(f, spec$field)]] <-
                 sprintf("  %-44s %-24s %s", x$table[off], spec$field, sQuote(vals[off]))
-        hit <- x$table[vals == spec$discloses]
+        hit <- x$table[vals %in% spec$discloses]
         needs_note <- c(needs_note, hit)
         note_reason <- c(note_reason, rep(spec$why, length(hit)))
         if (!is.null(spec$review))
@@ -447,7 +451,7 @@ if (file.exists(page) && (length(needs_note) || length(held_dropped))) {
         }
         cat("  The standing ruling is that IRW-generated content carries a line on\n",
             "  the issues page (translations 2026-09-02, derived answer keys 2026-09-03,\n",
-            "  generated descriptions 2026-09-11).\n", sep = "")
+            "  generated descriptions 2026-09-11, keys read from the stimulus 2026-09-18).\n", sep = "")
     }
 } else {
     undisclosed <- character(0)
