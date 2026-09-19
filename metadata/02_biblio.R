@@ -257,12 +257,19 @@ getrows<-function(l) {
     ## so a non-name row that got in before this gate existed outlives the fix
     ## unless it is taken out here (#2079).
     biblio <- drop_unshaped_dict_rows(biblio, name, "biblio")
-    ## Refresh the five dictionary-owned columns on EVERY row, not just the new
+    ## Refresh the dictionary-owned columns on EVERY row, not just the new
     ## ones (#2001). new_data_rows above is, by construction, the rows biblio
     ## does not have; without this a correction typed into the sheet for an
     ## already-published table reaches nobody. Fills blanks, prefers the
     ## dictionary on conflict, and never blanks a biblio value from an empty
     ## dictionary cell. See refresh_biblio_from_dict() in dict_union.R.
+    ## Original_License (#2032) is new to biblio, so the table read back from
+    ## Redivis does not have it yet, and the refresh skips a column biblio
+    ## lacks. Create it blank; the refresh then fills it on every row the
+    ## dictionary has a value for.
+    if (!("Original_License" %in% names(biblio))) {
+        biblio$Original_License <- NA_character_
+    }
     refreshed <- refresh_biblio_from_dict(biblio, irw_dict, name, log.file = file.refresh)
     biblio <- refreshed$biblio
     ## Runs before apply_data_doi(): the refresh never blanks a paper DOI, and
@@ -299,7 +306,8 @@ getrows<-function(l) {
     biblio<-biblio[,
                    c("table","DOI__for_paper_", "DOI__for_data_", "Reference_x",
                      "URL__for_data_",
-                     "Derived_License", "Custom_License_Terms", "Description", "BibTex")]
+                     "Original_License", "Derived_License", "Custom_License_Terms",
+                     "Description", "BibTex")]
     readr::write_csv(biblio, file.out)
 }
 
