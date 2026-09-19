@@ -21098,3 +21098,16 @@ Gates: normalize_nulls 0 changes; audit_batch PASS x3, no WARNs; verify_batch MI
 Housekeeping: the queue claim/update was made byte-wise again (mixed line endings), diff 3 lines each time. Queue: **139 pending, 0 in_progress.** Next up: mede_2025_goals_priority, mede_2025_goals_tackle, mede_2025_normperc.
 
 **Cap reached: batch_264 is the Step 0 cap. No further rounds until a human raises it.**
+
+## Triage: batch_258-264 (2026-09-19, re-audit pilot checkpoint, #2255)
+
+Gates re-run live on all seven batches: normalize_nulls (dry run: 0 of 18 files to change),
+audit_batch (17 PASS, 1 WARN), verify_batch (all rc=0; 10 tables data_labels-exempt, all screened by
+check_label_claims.py with no flags), lint_verification (1 WARN: uti_newlands_2023_wpai).
+
+- **Staged 17** to itemtables/clean/, byte-identical to the batch copies.
+- **HELD: uti_newlands_2023_wpai.** Its rights reasoning is ship-shaped and escalated. The WPAI page says "Written permission is neither required nor provided... no fees", but also "The questionnaire cannot be called the WPAI if questions or responses are changed". The round read that as a naming condition, not a reserved right. **This is Ben's ruling to make.** The audit WARN (wpai_2-4 have no option_text) is benign: those items are free-entry hours.
+- **Disclosure gap fixed.** uti_newlands_2023_phq was PARTIAL with no public_note, and uti_newlands_2023_gad's note did not say which items rest on printed numbering. Both notes now say which codes the data pin and which rest on the form's numbering.
+- talaifar_2025_study1_lifestyle_survey: its PARTIAL is a supplementary route. The item-to-code tie is the codebook printing each item against the data's column names, so it needs no note.
+- mede_2025 (4 tables): each round checked for the Hickman 2021 upstream that blocked clim_government, and found no attribution for these batteries. Clear.
+- Blocks from the chain: uti_newlands_2023_rutiiq (PARED Insights licence; **register row owed, human**), mede_2025_clim_government (Hickman NC-ND upstream), and christiannationalism_davis2021 (response-data defect: item codes are shifted one source column).
