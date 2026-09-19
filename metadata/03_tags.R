@@ -129,11 +129,10 @@ DERIVED_COLS  <- c("table", "age range", "child age (for child-focused studies)"
                    "generated")
 DERIVED_BASIS <- "derived_cov_age"
 AGE_RANGE_VOCAB <- c("Child (<18y)", "Adult (18+)", "Mixed",
-                     "Elderly (minimum age >50)", "Not applicable (non-person)",
-                     "Non-human")
-##`age range` values that say ages do not apply because `id` is not a person.
-##`Non-human` is the retiring spelling (#2206); the follow-up PR drops it.
-AGE_NOT_PERSON <- c("Not applicable (non-person)", "Non-human")
+                     "Elderly (minimum age >50)", "Not applicable (non-person)")
+##The `age range` value that says ages do not apply because `id` is not a
+##person. It replaced `Non-human` (#2206, 2026-09-19).
+AGE_NOT_PERSON <- "Not applicable (non-person)"
 
 ##Derived age tags outrank the Sheet -- for two columns only (#1760, decision 7,
 ##2026-09-01).

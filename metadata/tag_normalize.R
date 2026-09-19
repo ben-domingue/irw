@@ -36,13 +36,11 @@ TAG_VOCAB <- list(
     ##additive -- every row already carrying a `sample` keeps it.
     ##
     ##`AI/model`, `Animal` and `Non-person unit` replace `Non-human` (#2206,
-    ##2026-09-19), which had been carrying three unrelated meanings. `Non-human`
-    ##stays accepted only until the Sheet's rows are re-tagged; the follow-up
-    ##PR removes it, after which a leftover row stops the run as intended.
+    ##2026-09-19), which had been carrying three unrelated meanings. It is
+    ##retired, not kept as a fallback: a leftover row stops the run.
     "sample" = c(
         "AI/model", "Animal", "Clinical", "Educational",
-        "General/non-specific", "Internet-based", "NA", "Non-human",
-        "Non-person unit", "Program-based", "Representative",
+        "General/non-specific", "Internet-based", "NA", "Non-person unit", "Program-based", "Representative",
         "Targeted/specific", "Workplace"
     ),
     "construct type" = c(
@@ -143,7 +141,7 @@ FRAME_RESIDUAL <- "General/non-specific"
 ##The respondent-type atoms say what `id` is when it is not a person reached
 ##through some channel, so each is mutually exclusive with every other `sample`
 ##atom (vocab.md; #1760, #2206).
-SAMPLE_EXCLUSIVE <- c("AI/model", "Animal", "Non-person unit", "Non-human")
+SAMPLE_EXCLUSIVE <- c("AI/model", "Animal", "Non-person unit")
 FRAME_SPECIFIC <- c("Representative", "Targeted/specific")
 
 ##Drops the residual when a more specific frame value is present. Returns atoms
@@ -190,16 +188,17 @@ normalize_multiselect <- function(x, column, vocab = TAG_VOCAB) {
         paste(sort(unique(atoms)), collapse = ", ")
     }, character(1), USE.NAMES = FALSE)
 
-    ##5. An exclusive `sample` atom beside any other atom is a contradiction.
-    ##   Warn for now: live rows carry it (thomeczek2025_les) and are being
-    ##   re-tagged under #2206. The follow-up PR turns this into a stop.
+    ##5. An exclusive `sample` atom beside any other atom is a contradiction,
+    ##   so it stops the run like an unknown atom does. Nothing enforced this
+    ##   before #2206, which is how thomeczek2025_les came to carry
+    ##   `Educational, Non-human, Targeted/specific`.
     if (identical(column, "sample")) {
         clash <- vapply(strsplit(ifelse(is.na(out), "", out), ", ", fixed = TRUE),
                         function(a) any(a %in% SAMPLE_EXCLUSIVE) && length(a) > 1L,
                         logical(1))
         if (any(clash)) {
-            warning(sprintf(
-                "sample: %d row(s) combine a respondent-type atom (%s) with another atom: %s",
+            stop(sprintf(
+                "sample: %d row(s) combine a respondent-type atom (%s) with another atom: %s\nThese are mutually exclusive (vocab.md); fix the row in the Sheet or tags_auto.csv.",
                 sum(clash), paste(SAMPLE_EXCLUSIVE, collapse = ", "),
                 paste0('"', unique(out[clash]), '"', collapse = "; ")),
                 call. = FALSE)

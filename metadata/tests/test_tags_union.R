@@ -296,7 +296,6 @@ local({
 })
 
 ##Ages cannot contradict a non-person tag; the derivation has no way to know.
-##Both spellings until the Sheet is re-tagged (#2206).
 for (np in AGE_NOT_PERSON) local({
     tf <- tag_frame()
     tf[["age range"]][tf$table == "no_ages"] <- np
@@ -377,18 +376,14 @@ local({
           "the three respondent-type atoms pass the vocabulary")
 })
 
-##An exclusive atom beside another atom warns now; the follow-up PR makes it stop.
-local({
-    w <- NULL
-    out <- withCallingHandlers(
-        normalize_multiselect(c("Animal, Educational", "Clinical"), "sample"),
-        warning = function(x) { w <<- conditionMessage(x); invokeRestart("muffleWarning") })
-    check(!is.null(w) && grepl("1 row(s)", w, fixed = TRUE) &&
-          grepl("Animal, Educational", w, fixed = TRUE),
-          "an exclusive sample atom combined with another is reported")
-    check(identical(out, c("Animal, Educational", "Clinical")),
-          "the warning does not alter the cells")
-})
+##An exclusive atom beside another atom stops the run.
+expect_error(normalize_multiselect(c("Animal, Educational", "Clinical"), "sample"),
+             "1 row(s) combine a respondent-type atom",
+             "an exclusive sample atom combined with another stops the run")
+
+##`Non-human` is retired: a leftover row is an unknown atom, not a fallback.
+expect_error(normalize_multiselect("Non-human", "sample"),
+             '"Non-human"', "the retired Non-human atom is refused")
 
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }
