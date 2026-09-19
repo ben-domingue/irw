@@ -129,7 +129,10 @@ DERIVED_COLS  <- c("table", "age range", "child age (for child-focused studies)"
                    "generated")
 DERIVED_BASIS <- "derived_cov_age"
 AGE_RANGE_VOCAB <- c("Child (<18y)", "Adult (18+)", "Mixed",
-                     "Elderly (minimum age >50)", "Non-human")
+                     "Elderly (minimum age >50)", "Not applicable (non-person)")
+##The `age range` value that says ages do not apply because `id` is not a
+##person. It replaced `Non-human` (#2206, 2026-09-19).
+AGE_NOT_PERSON <- "Not applicable (non-person)"
 
 ##Derived age tags outrank the Sheet -- for two columns only (#1760, decision 7,
 ##2026-09-01).
@@ -199,13 +202,13 @@ apply_derived_tags <- function(tag, path, label) {
         was <- tag[[cols[1]]][row]
         now <- der[[cols[1]]][i]
 
-        ##`Non-human` is not a claim about ages, so ages cannot contradict it.
-        ##The derivation has no way to know a table's respondents are not people
-        ##-- that comes from the source -- and left unguarded it retagged four
-        ##`Non-human` tables from their respondents' "ages" (caught in the
-        ##2026-09-01 dry run). vocab.md says Non-human short-circuits; this is
-        ##that sentence in code.
-        if (identical(as.character(was), "Non-human")) {
+        ##A non-person tag is not a claim about ages, so ages cannot contradict
+        ##it. The derivation has no way to know a table's respondents are not
+        ##people -- that comes from the source -- and left unguarded it retagged
+        ##four such tables from their respondents' "ages" (caught in the
+        ##2026-09-01 dry run). vocab.md says a non-person tag short-circuits;
+        ##this is that sentence in code.
+        if (isTRUE(as.character(was) %in% AGE_NOT_PERSON)) {
             preserved <- preserved + 1L
             next
         }
@@ -227,7 +230,7 @@ apply_derived_tags <- function(tag, path, label) {
 
     print(paste0(label, ": derived age tags from ", path, " -- ", changed,
                  " overridden, ", confirmed, " confirmed, ", preserved,
-                 " Non-human preserved, ", nrow(add), " new row(s)"))
+                 " non-person preserved, ", nrow(add), " new row(s)"))
     tag
 }
 

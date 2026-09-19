@@ -49,7 +49,9 @@ MAX_LANGUAGE_CODES = 4
 
 FRAME_ATOMS = {"Representative", "Targeted/specific", "General/non-specific"}
 SETTING_ATOMS = {"Educational", "Clinical", "Program-based", "Non-human",
-                 "Workplace", "Internet-based", "Internet-based (Mturkers, etc)"}
+                 "Workplace", "Internet-based", "Internet-based (Mturkers, etc)",
+                 # Replace `Non-human` (#2206); it stays until the Sheet is re-tagged.
+                 "AI/model", "Animal", "Non-person unit"}
 
 
 def setting_only(sample):

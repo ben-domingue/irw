@@ -247,6 +247,14 @@ is the same each time.
    `__items.csv` files from the batch folder — sidecars stay, so the folder still documents
    every table the batch claimed. `clean/` is cleared by the user, not by you. **Never stamp
    ahead of confirmation**; a stamp that runs ahead of the actual upload is worse than none.
+8. **Once the release is out, clear the issues page in the same pass.** Run
+   `python3 refresh_live_tables.py`, then `check_issues_page.R` against the site's `main`
+   (SKILL.md, "After every upload"). Every DUE table gets an entry or a row in
+   `fixes/issues_page_dropped.csv` before the pass is done. This is bookkeeping, not an
+   upload step: the user is not asked to review anything here. It matters because a note
+   only turns DUE at release, when nobody is looking at the batch any more, and skipping
+   this step let 259 accumulate (#2236). The daily `itemtext-issues` workflow fails when
+   anything has been DUE for more than a week.
 
 Both CSVs are CRLF, but **the quoting is not uniform and this line used to claim it was**: `batch_019/provenance.csv` and `mapping_verification.csv` are MINIMAL-quoted, while `batch_018/provenance.csv` is QUOTE_ALL. Do not assume either. Round-trip the file with the convention you intend to use and check the result is **byte-identical** before writing; if it is not, append or edit the target lines in place. Reserialising them with a default `csv.writer`
 rewrites the whole file — check that a `QUOTE_ALL` + `\r\n` round-trip is byte-identical

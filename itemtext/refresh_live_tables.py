@@ -69,7 +69,15 @@ def _list(owner: str, shard: str, version: str) -> set[str] | None:
             if "429" in msg and attempt < 5:
                 time.sleep(15)
                 continue
-            if version == "next" and ("not_found" in msg or "404" in msg):
+            # Match on the lowercased message, not the snake_case code alone:
+            # the client raises NotFoundError("Not found: datapages.irw_text:next"),
+            # which contains neither `not_found` nor `404`, so a shard between
+            # releases used to crash the whole refresh and leave the snapshot
+            # stale. That is how live_tables.csv went 12 days without updating.
+            low = msg.lower()
+            if version == "next" and (
+                "not_found" in low or "not found" in low or "404" in low
+            ):
                 return None
             raise
     # Item-text tables end in __items; the bare name is what provenance.csv,

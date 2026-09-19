@@ -295,14 +295,14 @@ local({
           "an added row carries only the two derived columns")
 })
 
-##Ages cannot contradict `Non-human`; the derivation has no way to know.
-local({
+##Ages cannot contradict a non-person tag; the derivation has no way to know.
+for (np in AGE_NOT_PERSON) local({
     tf <- tag_frame()
-    tf[["age range"]][tf$table == "no_ages"] <- "Non-human"
+    tf[["age range"]][tf$table == "no_ages"] <- np
     f <- write_derived(list(drow("no_ages", "Adult (18+)")))
     out <- apply_derived_tags(tf, f, "t")
-    check(out[out$table == "no_ages", ][["age range"]] == "Non-human",
-          "a Non-human tag is never overridden by a derived age")
+    check(out[out$table == "no_ages", ][["age range"]] == np,
+          paste0("a `", np, "` tag is never overridden by a derived age"))
 })
 
 ##Case-insensitive matching, the trap that cost 308 rows elsewhere.
@@ -362,6 +362,28 @@ local({
     check(identical(normalize_multiselect(out, "sample"), out),
           "the rule is idempotent")
 })
+
+##---------------------------------------- respondent-type atoms (#2206) ---
+local({
+    x <- c("Animal", "AI/model", "Non-person unit", "Clinical, Educational")
+    out <- withCallingHandlers(normalize_multiselect(x, "sample"),
+                               warning = function(w) {
+                                   check(FALSE, "valid cells raise no exclusivity warning")
+                                   invokeRestart("muffleWarning")
+                               })
+    check(identical(out, c("Animal", "AI/model", "Non-person unit",
+                           "Clinical, Educational")),
+          "the three respondent-type atoms pass the vocabulary")
+})
+
+##An exclusive atom beside another atom stops the run.
+expect_error(normalize_multiselect(c("Animal, Educational", "Clinical"), "sample"),
+             "1 row(s) combine a respondent-type atom",
+             "an exclusive sample atom combined with another stops the run")
+
+##`Non-human` is retired: a leftover row is an unknown atom, not a fallback.
+expect_error(normalize_multiselect("Non-human", "sample"),
+             '"Non-human"', "the retired Non-human atom is refused")
 
 cat("\n")
 if (failures > 0L) { cat(failures, "FAILURE(S)\n"); quit(status = 1L) }

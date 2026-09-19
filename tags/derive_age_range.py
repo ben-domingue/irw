@@ -87,8 +87,9 @@ YEARS_OK = set()   # populated in main()/emit() from age_unit_confirmed.csv
 def classify(r):
     """Returns (age_range, child_age, verdict, reason).
 
-    verdict is one of derived / unusable / quarantine. `Non-human` is never
-    derived here -- it comes from the source and is left to the tagger.
+    verdict is one of derived / unusable / quarantine. A non-person value
+    (`Not applicable (non-person)`, formerly `Non-human`) is never derived here
+    -- it comes from the source and is left to the tagger.
     """
     n_age = int(r.n_age or 0)
     if n_age < MIN_RESPONDENTS:
