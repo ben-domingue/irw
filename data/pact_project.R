@@ -331,7 +331,7 @@ voco <- voco |>
          -chsch,
          -period,
          -grade,
-         -dob,
+         -any_of('dob'), # absent from the 2023-10 LDbase upload of VOCO
          -gender,
          -frl,
          -lep,
@@ -360,6 +360,17 @@ voco <- voco |>
 
 df <- rbind(pact8_1112, pact8_1213, pact11_1112, pact11_1213, voco)
 
+# These are not waves. The five files are four cohorts plus VoCO, and no
+# student appears in two cohorts. What repeats is the same score copied onto
+# several rows (#1856): PACT8 11-12 has one row per measure_id and PACT11 11-12
+# two per student, each carrying cond on only some rows; VOCO lists every
+# student twice; PACT8 12-13 re-lists the 777 students of PACT8 11-12, without
+# cond. Across 138,035 repeated sid+item pairs resp never disagrees.
+#
+# So: give each student their one condition where the source has exactly one,
+# then drop the copies. The 19 students recorded under both conditions (all
+# within a single file, on disjoint items) keep cond per row. The id and item
+# maps are built before the dedupe so numbering matches earlier versions.
 items <- as.data.frame(unique(df$item))
 items <- items |>
   mutate(item_id = row_number())
@@ -369,12 +380,22 @@ ids <- ids |>
   mutate(id = row_number())
 
 df <- df |>
+  group_by(sid) |>
+  mutate(cond = if (n_distinct(cond, na.rm = TRUE) == 1)
+                  first(na.omit(cond)) else cond) |>
+  ungroup() |>
+  distinct()
+
+stopifnot(!anyDuplicated(df[c('sid', 'item')]),
+          n_distinct(df$sid) == nrow(ids))
+
+df <- df |>
   # merge item IDs with df
   left_join(items, 
             by=c("item" = "unique(df$item)")) |>
   left_join(ids, by=c('sid' = "unique(df$sid)")) |>
   # drop character item variable
-  select(id, cond, item_id, resp) |>
+  select(id, item_id, resp, cond) |>
   # use item_id column as the item column
   rename(item = item_id,
          treat = cond) |>
