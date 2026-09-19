@@ -766,3 +766,68 @@ class ValidatorGate(unittest.TestCase):
             errors, warnings = checks_mod.run_validator(path)
         self.assertTrue(errors, "a missing validator must be an error, never a pass")
         self.assertIn("validator unavailable", errors[0])
+
+
+class _FakeUpload:
+    def __init__(self, fail):
+        self.fail, self.kwargs = fail, None
+
+    def create(self, handle, **kwargs):
+        self.kwargs = kwargs
+        if self.fail:
+            raise RuntimeError("Unable to parse file (no variables found)")
+
+
+class _FakeTable:
+    def __init__(self, fail):
+        self.deleted = False
+        self.up = _FakeUpload(fail)
+
+    def exists(self):
+        return False
+
+    def create(self, **kwargs):
+        return self
+
+    def upload(self, name):
+        return self.up
+
+    def delete(self):
+        self.deleted = True
+
+
+class _FakeDataset:
+    name = "irw_text_2"
+
+    def __init__(self, table):
+        self._t = table
+
+    def table(self, name):
+        return self._t
+
+
+class PushOne(unittest.TestCase):
+    """push_one against fakes: the two properties the 2026-09-19 mede_2025 failure exposed."""
+
+    def _csv(self):
+        d = tempfile.mkdtemp()
+        p = Path(d) / "x__items.csv"
+        p.write_text('"table","language"\n"x","English; Czech; Danish"\n')
+        return p
+
+    def test_failed_upload_leaves_no_empty_table(self):
+        from red_up.push import push_one
+        t = _FakeTable(fail=True)
+        r = push_one(_FakeDataset(t), self._csv(), "x__items", 1)
+        self.assertFalse(r.ok)
+        self.assertIn("no variables found", r.error)
+        self.assertTrue(t.deleted, "an empty table would be published at release")
+
+    def test_delimiter_is_explicit(self):
+        from red_up import push
+        t = _FakeTable(fail=False)
+        with mock.patch.object(push, "verify", return_value=(True, 1)):
+            r = push.push_one(_FakeDataset(t), self._csv(), "x__items", 1)
+        self.assertTrue(r.ok)
+        self.assertFalse(t.deleted)
+        self.assertEqual(t.up.kwargs.get("delimiter"), ",")
