@@ -286,6 +286,14 @@ class RepeatedMeasures(unittest.TestCase):
                 report = validate_frame(self._rated(col), profile="upload")
                 self.assertNotIn("dup_id_item", [f.check for f in report.findings])
 
+    def test_a_trial_prefixed_index_explains_the_repeat(self):
+        # how the robison_2026_retesting_* and cogcontrol_* tables index trials
+        df = F(id=[1, 1, 2, 2], item=["a"] * 4, resp=[0, 1, 1, 0],
+               trial_number=[1, 2, 1, 2])
+        report = validate_frame(df, label="t_2024_x.csv")
+        self.assertNotIn("dup_id_item", [f.check for f in report.findings])
+        self.assertIs(report.conforms, True)
+
     def test_a_group_column_does_not(self):
         # group describes the person, not the occasion -- a person appearing
         # twice under it is a real question, not an explanation

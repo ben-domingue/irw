@@ -178,7 +178,14 @@ def validate_frame(df, *, label: str = "", profile: str = "upload",
         # `rt` is in OCCASION for naming purposes but must never be what makes
         # rows unique -- it is a measurement, and rounding it would silently
         # merge rows (#1842 blocks I and J).
-        occasion_cols = tuple(c for c in OCCASION if c != "rt")
+        # `trial_*` columns count too: the 24 published trial tables index
+        # their trials as `trial_number`, `trial_num`, `trial_index` or
+        # `trial_block`, next to an `item` that always identifies the probe
+        # (standard C5; ruled 2026-09-19 -- the older reading, that `item` is
+        # uninformative in trial data and `trial_` carries the probe, is
+        # deprecated).
+        occasion_cols = tuple(c for c in OCCASION if c != "rt") + tuple(
+            c for c in df.columns if str(c).startswith("trial_"))
         if any(f.check == "dup_id_item" for f in report.findings):
             resolved_by = None
             for col in occasion_cols:
