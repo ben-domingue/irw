@@ -20880,3 +20880,31 @@ Housekeeping:
 - The sidecar headers mixed quoted and unquoted forms, so the merge used a csv parse and not a line concat.
 
 Queue: **72 pending, 0 in_progress.** Next up: `zhao_2025_place_attachment`, `zhao_2025_psych_recovery_eval`, `zhou_2024_smart_home_intention`. Cap (batch_258) not reached.
+
+## batch_254 — 2026-09-18 21:36 PDT (claimed) — 3 tables, 3 agents
+
+**Written 3 / blocked 0 / failed 0. Yield 3/3.** No kills.
+
+- `zhao_2025_place_attachment` (Zhao, Zhang & Zhao 2025, PLoS ONE e0325755, CC BY 4.0; sibling of batch_253's nat_env_perception), 8 items PA1–PA8: **VERIFIED**.
+  - Wording read from the Table 1 image, which prints the PA codes next to each item. `translated_substitute` / `study_supplied`, language=Chinese (inferred, as for the sibling).
+  - Verification: each live PAk matches S1's PAk column for 199/199 ids; the best other column matches 131/199. The place-dependence (PA1–4) / place-identity (PA5–8) split holds: mean within-block r 0.616 vs 0.536 across.
+  - No anchors published, so option_text is blank. The items are the authors' adaptation of Williams & Vaske (2003), not canonical wording.
+- `zhao_2025_psych_recovery_eval` (same paper), 12 items PRE1–PRE12: **VERIFIED**.
+  - Same basis: Table 1 image codes, S1 columns, 199/199 id-level match. The Table 4 loadings do NOT reproduce on the 199-respondent S1 (max diff 0.321), so they are not counted as evidence.
+  - **Data property, re-checked in Step 5b:** PRE11 and PRE12 are identical for 188/199 ids, r=0.94. The best other item pair agrees on 158/199, and neither PRE11 nor PRE12 agrees with any other item on more than 139/199. This is present in the S1 deposit, so it is not an itemtext defect. It may be a duplicated column or a genuine response pattern. Not filed.
+  - Table 1 heads the scale "Psychological restorative evaluation"; the text and Table 4 say "psychological recovery evaluation".
+- `zhou_2024_smart_home_intention` (Zhou, Qian & Kaner 2024, PLOS ONE e0300574, CC BY 4.0), 13 items: **VERIFIED**.
+  - Wording read from the Table 1 image. Anchors are the paper's own ("complete disagreement (1) … complete agreement (5)"). `translated_substitute` / `study_supplied`, language=Chinese.
+  - Verification: a refit reproduces all 13 unstandardized and 13 standardized loadings in Table 4 (max diff 0.0004), and all six alphas match to 3 decimals. Live vs S1 matches 200/200 per item.
+  - **Dictionary problem, re-checked in Step 5b:** `metadata/biblio.csv` expands ITS as "intention to switch", but the paper's construct is "Intergeneration-al technical support". The Description needs correcting. The agent also said the processing script header repeats the error. That was wrong: it is the stale near-duplicate `data/zhou_2024_smarthome_intention.py:9`, not the script that produced the table. Notes/provenance corrected.
+  - Housekeeping for a human: `data/zhou_2024_smarthome_intention.py` is a stale near-copy for a table that isn't live, and both zhou scripts put an email address in a User-Agent header.
+
+Gates:
+- normalize_nulls: 0/3 changed.
+- audit_batch: 3 PASS, no anomalies, so no WARNs for Step 5c.
+- verify_batch: PASS=3.
+- lint: 0 ERROR / 0 WARN / 2 INFO (hedged evidence alongside a full item-axis tie on the two zhao tables, so VERIFIED stands).
+- irw-validate: ok ×3.
+- check_provenance: exit 0. The `mixed` REVIEW list of 19 is unchanged and none are from this batch.
+
+Queue: **69 pending, 0 in_progress.** Next up: `zhou_2025_ehealth_literacy`, `zvi_2022_rei`, `ALSECYPIAMH_WU_2022_MIL`. Cap (batch_258) not reached.
