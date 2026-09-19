@@ -1,0 +1,25 @@
+table,age range (new),sample (new),was: age range,was: sample,id is,evidence
+binette_2022_extinction,Not applicable (non-person),Animal,NA,Non-human,rat,issue #2206 table
+machado_2020_cat_separation,Not applicable (non-person),Animal,NA,Non-human,cat,data/machado_2020_cat_separation.py
+muller_2016_dog_inhibition,Not applicable (non-person),Animal,NA,Non-human,dog,data/muller_2016_dog_inhibition.py
+simard_2018_epm_behavior,Not applicable (non-person),Animal,NA,Non-human,rodent,issue #2206 table
+simsalrbim_mice_largevalence,Not applicable (non-person),Animal,Non-human,Non-human,mouse,issue #2206 table
+simsalrbim_mice_lowvalence,Not applicable (non-person),Animal,Non-human,Non-human,mouse,issue #2206 table
+simsalrbim_monkey_largevalence,Not applicable (non-person),Animal,Non-human,Non-human,monkey,issue #2206 table
+wilson_2022_kelpie_personality,Not applicable (non-person),Animal,NA,Non-human,dog,issue #2206 table
+martinez_2024_joint_simon,Not applicable (non-person),Animal,(no row),(no row),capuchin,PR #2219
+martinez_2024_gonogo,Not applicable (non-person),Animal,(no row),(no row),capuchin,PR #2219
+santaca_2025_inhibitory_control,Not applicable (non-person),Animal,(no row),(no row),bearded dragon / tortoise,PR #2219
+acevedo_triana_2017_tmaze,Not applicable (non-person),Animal,(no row),(no row),rat,PR #2219
+emobank_buechel_2017,Not applicable (non-person),Non-person unit,Non-human,Targeted/specific,sentence,data/emobank_buechel_2017.R
+emoji_scheffler_2024,Not applicable (non-person),Non-person unit,Non-human,Non-human,emoji (rater = submission),data/emoji_scheffler_2024.R
+kalimahnorms_alzahrani_2025,Not applicable (non-person),Non-person unit,Non-human,Non-human,Arabic word (rater = participant),data/KalimahNorms_alzahrani_2025.R
+moralvignettes_rakhmankulova_2025,Not applicable (non-person),Non-person unit,Non-human,Non-human,video vignette (rater = ID),data/moralvignettes_rakhmankulova_2025.R
+rating_speed_2025,Not applicable (non-person),Non-person unit,Non-human,Non-human,word (rater = participant),data/rating_speed_2025.R
+polca_carcinoma,Not applicable (non-person),Non-person unit,Non-human,Non-human,cervical specimen (pathologists = items),issue #2206 table
+thomeczek2025_les,Not applicable (non-person),Non-person unit,Non-human,"Educational, Non-human, Targeted/specific",party state association (rater = expert),data/thomeczek2025_les.py docstring
+sned_bendall_2024,(blank: derive from cov_age),"Internet-based (Mturkers, etc) [confirm]",Non-human,Non-human,HUMAN: Prolific participant,data/sned_bendall_2024.R: id = ParticipantPrivateID; self-report items
+gilbert_meta_100,(blank) [confirm],Educational [confirm],Non-human,General/non-specific,HUMAN: student,vocabulary test; 2118 ids x 12 items; treat/block_id/cluster_id = school RCT
+wilmer-rmet-normative-data-set-2022,(blank: derive from cov_age),keep Targeted/specific [confirm],Non-human,Targeted/specific,HUMAN: test-taker,id + cov_age/cov_gender/cov_education; 17680 ids x 36 RMET items
+wilmer-mrmet-normative-data-set-2022,(blank: derive from cov_age),keep Targeted/specific [confirm],Non-human,Targeted/specific,HUMAN: test-taker,data/wilmer-mrmet-normative-data-set-2022.py: id = participant column; 9295 ids + cov_age
+wilmer-mrmet-and-rmet-validation-data-set-2022,(blank: derive from cov_age),keep Targeted/specific [confirm],Non-human,Targeted/specific,HUMAN: test-taker,id + cov_age/cov_gender/cov_vocab; 2515 ids x 73 items

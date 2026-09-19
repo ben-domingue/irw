@@ -27,9 +27,10 @@ for r in der.itertuples():
     now = getattr(r, "_2")            # 'age range' is not a valid identifier
     if str(r.table).lower() not in cur:
         kind = "new row"
-    elif str(was) == "Non-human":
+    elif str(was) in ("Not applicable (non-person)", "Non-human"):
         # 03_tags.R refuses this override; the report must show the same thing.
-        kind = "Non-human preserved"
+        # Both spellings until the Sheet is re-tagged (#2206).
+        kind = "non-person preserved"
     elif (pd.isna(was) and pd.isna(now)) or str(was) == str(now):
         kind = "confirmed"
     elif pd.isna(was):

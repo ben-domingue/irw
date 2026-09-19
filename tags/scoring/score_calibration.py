@@ -36,7 +36,9 @@ SETTING_ATOMS = {"Educational", "Clinical", "Program-based", "Non-human",
                  # belongs to the facet that publishes -- omitting it here
                  # understates setting fill rather than erroring, which is what
                  # the unknown-atom warning below exists to catch.
-                 "Workplace"}
+                 "Workplace",
+                 # Replace `Non-human`, which stays for older predictions (#2206).
+                 "AI/model", "Animal", "Non-person unit"}
 UNKNOWN_ATOMS = set()
 
 # `Internet-based (Mturkers, etc)` is the sheet form; 03_tags.R renames it on
