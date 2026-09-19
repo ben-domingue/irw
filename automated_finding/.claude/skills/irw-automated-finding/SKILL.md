@@ -98,6 +98,17 @@ the environment, not to skip the check.
    anything in it, and don't report a run as "committed" on the strength of
    a file being written there.
 
+   **A per-run CSV is not supposed to be committed anywhere.** If you find
+   `git add` refusing one because `runs/` is ignored, that is the rule
+   working, not an obstacle: do not copy the file up to
+   `automated_finding/` to get it committable, and do not `-f` it. Five
+   scheduled routines did exactly that between 2026-08-25 and 2026-09-07
+   before the top-level names were ignored too. What a run should commit is
+   the standing record only — the `search_terms_log.csv` and seen-key
+   appends, plus the `BATCH_LOG.md` write-up. Put the flag breakdown and
+   anything a human needs to act on in the PR description and BATCH_LOG,
+   not in a committed CSV.
+
    What stays at the top level of `automated_finding/` is the standing,
    cumulative record — never write these into `runs/`:
    `search_terms_log.csv`, `plos_seen_dois.csv`, `pmc_seen_dois.csv`,
@@ -179,9 +190,14 @@ python irw_discover_updated.py "search term 1" "search term 2" --out runs/candid
 
 ```bash
 python irw_batch_updated.py runs/candidates.csv --limit 10 --out runs/triage_test.csv   # sanity check first
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv     # full run
-python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resume   # if interrupted
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage   # full run
+python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --retriage --resume   # if interrupted
 ```
+
+**Pass `--retriage` on any scheduled or unattended run.** It chains Step 2b
+in-process over this run's `human_assistance` rows, writing
+`<out>.retriage_ha.csv`. Without it the step was reliably skipped — see
+Step 2b.
 
 - **Expect this to be slow.** Each candidate is a real network download plus
   a parse; a ~500-row candidate file has taken on the order of 2 hours
@@ -229,11 +245,31 @@ python irw_batch_updated.py runs/candidates.csv --out runs/irw_triage.csv --resu
   re-evaluate any future non-human candidate on content merits per the
   actual standard, not an invented species restriction.)
 
-## Step 2b — Retriage `human_assistance` (recommended before reviewing by hand)
+## Step 2b — Retriage `human_assistance` (REQUIRED, not optional)
+
+Normally you get this for free: `irw_batch_updated.py --retriage` chains it,
+and the two scheduled article connectors
+(`irw_discover_plos_monthly.py`, `irw_discover_pmc_monthly.py`), which
+triage in-process and never touch `irw_batch_updated.py`, run it
+unconditionally at the end of every run. Run it by hand only for a triage
+CSV that was produced without either:
 
 ```bash
-python irw_retriage_ha.py --input runs/irw_triage.csv --out runs/irw_retriage_ha.csv
+python irw_retriage_ha.py --input runs/irw_triage.csv --output runs/irw_retriage_ha.csv
 ```
+
+**A triage run is not finished until this has happened.** It was worded as
+"recommended" until 2026-09-07, and the scheduled routines duly skipped it
+week after week, committing triage CSVs with no `refined_flag` column at
+all. `#2076` fixed that on the `irw_batch_updated.py` path only, which is
+not the path the scheduled PLOS/PMC connectors take — so the 2026-09-08
+PLOS weekly run skipped the step again, nineteen hours after "REQUIRED"
+merged. Both connectors call it directly now. That is not a cosmetic gap: until the bucket is sub-classified, the
+`not_item_response` rows can't be dropped, the `human_review` rows can't be
+archived to `human_review/`, and the remainder can't be told apart from
+either — so the whole `human_assistance` bucket silently becomes nobody's
+job. If you are reporting on a run, "Step 2b: skipped" is a defect to state
+plainly, not a detail to omit.
 
 Sub-classifies each `human_assistance` row into `not_item_response` /
 `aggregate_continuous` / `wrong_file_selected` / `recoverable_format` /
@@ -241,8 +277,16 @@ Sub-classifies each `human_assistance` row into `not_item_response` /
 typical action). Usually resolves ~60% of the bucket automatically.
 
 **Only rows whose `refined_flag` is literally `human_review` go into
-`human_review/`.** Write them to
-`human_review/human_review_<mode>_batch<N>.csv` in this repo (e.g.
+`human_review/`.** Since 2026-09-09 the script does this for you: at the
+end of every run it writes them to
+`human_review/human_review_<source>_<date>.csv`, merging and de-duplicating
+on `doi` if that file already exists, and `--no-archive` opts out. It used
+to be a step the caller had to remember, and the 2026-09-09 PMC weekly run
+is what happens when nobody does — Step 2b's own output lives in `runs/`,
+which is gitignored, so its three `human_review` rows died with the
+container. Check the `[human_review] archived N row(s)` line is in the run
+output; if you are writing one of these by hand instead, name it
+`human_review/human_review_<mode>_batch<N>.csv` (e.g.
 `human_review_pmc_batch1.csv`, `human_review_plos_batch27.csv`,
 `human_review_batch14.csv` for the repository-discovery mode) — a
 permanent, git-tracked archive, replacing the old "human eye" queue-sheet
@@ -592,6 +636,13 @@ Before uploading a file from `irw_output/` to Redivis, run through
 `datastandard.md`'s "What to verify before saving" checklist — the QC
 warnings recorded in the triage CSV point at exactly what to check.
 
+Run `run_qc()` on the final response table. Supply source-documented
+`permitted_values` and `item_constructs` when available; the shared validator's
+[response-scale evidence](../../../../irw_validate/README.md#response-scale-evidence)
+section defines these Python API inputs and their severity rules. Observed
+range differences alone warn. Verify the source before splitting or dropping
+items, and resolve documentation-backed failures before writing the output.
+
 If the batch also produced item text, its gate chain (Step 3.5:
 `normalize_nulls.R` → `validate_items.R --resp-csv` → `audit_batch.R
 --resp-dir`) is part of this checklist, and `itemtext_output/` must contain
@@ -683,8 +734,12 @@ When adding a biblio/dictionary entry for a cleaned dataset, columns are, in
 order: `table, table.lower, Description, URL (for data), Reference,
 DOI (for paper), Original License, Custom License, Public Reshare?,
 Derived License, Custom License, Notes, Contributor, Date`. Note `Custom
-License` appears twice (both blank), `Derived License` mirrors `Original
-License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
+License` appears twice and **neither copy is blank** -- position 8 holds the
+source's own terms (20 rows) and position 11 the terms IRW redistributes under
+(4 rows), all on Public tables, verified 2026-09-06. This file claimed they were
+both blank until #1732; do not delete either. `stage_dict_row.py` addresses them
+as `custom_license_source` and `custom_license_derived`. `Derived License`
+mirrors `Original License`, license values are full display names (`"CC0 1.0"`, not `"cc0"`),
 `Contributor` is `"automated"`, and `Public Reshare?` is `"Public"` (not
 `"Yes"`).
 
@@ -875,12 +930,11 @@ follow and expensive to rediscover.
 
 **Run your own output through `run_qc()`.** A Step 3 script writes straight
 to `irw_output/` and never touches triage, so *none* of the QC checks run on
-it. The 2026-08-26 Eugene-Springfield build shipped 20 tables in which nine
-mixed two or more response scales, plus two administrative columns
-(`submiss`, `smiss` -- missing-response counts) carried as items, and nothing
-objected. Two checks now exist for exactly this — `resp_scale_mixed` (fail)
-and `item_scale_outlier` (warn) — but they only help if the script calls them.
-Import `run_qc` and assert no `fail` before writing.
+it. The 2026-08-26 Eugene-Springfield build exposed mixed item blocks and two
+administrative columns (`submiss`, `smiss` -- missing-response counts) carried
+as items. Import `run_qc`, review its warnings against the source and assert no
+`fail` before writing. Range differences and item prefixes alone are warnings;
+they do not establish a construct boundary or justify dropping an item.
 
 **A script that drops columns must balance its books.** After melting, assert
 that every source column is either in the output or was skipped for a printed
@@ -915,77 +969,41 @@ options the ordered/unordered distinction is vacuous -- a dichotomy is
 trivially ordinal and standard dichotomous IRT applies. An option-coded
 column is a nominal-standard candidate only at **three or more** categories.
 
-**Hand biblio rows over as a fully-quoted `.csv` for `File > Import`, NOT as a
-`.tsv` for pasting.** (Superseded the previous advice on 2026-08-27 -- that
-said the opposite; see below for why both halves were half-right.)
+**Stage biblio rows with `stage_dict_row.py`. Do not paste, import, or write a
+`make_biblio_*.py`.** Since #1732 the dictionary has the same write path as tags:
+automated rows go to `automated_finding/dictionary_auto.csv`, a git-tracked file,
+and `metadata/02_biblio.R` unions it into the sheet export on every run. One row
+per invocation, JSON on stdin:
 
-The old rule said `.tsv`, because Google Sheets' *paste* splits text on commas
-without honouring CSV quoting, so every comma inside a `Description` or
-`Reference` becomes a column break. That part is still true of the paste path.
-But `.tsv` fails the paste path too, for a different reason: the dictionary
-format mandates three always-blank columns -- H and K (`Custom License` x2) and
-L (`Notes`) -- which in a TSV become consecutive tabs. Sheets' text-to-columns
-collapses repeated delimiters into one; OpenOffice does not. So a TSV opens
-correctly in OpenOffice and misaligns in Sheets, shifting `Contributor` and
-`Date` three columns left. Re-copying the cells out of OpenOffice does not
-help -- the clipboard still carries text that Sheets re-splits.
+    echo '{"table": "foo_2026", "description": "...", "doi": "10.xxxx/yyy",
+           "url": "https://...", "reference": "...",
+           "original_license": "CC BY 4.0", "derived_license": "CC BY 4.0",
+           "public_reshare": "Public"}' | python3 stage_dict_row.py
 
-The fix is to change the *delivery path*, not the delimiter. Sheets' **import**
-honours both RFC4180 quoting and empty fields, where its paste honours
-neither. So:
+The merge is **column-wise**: a human cell in the sheet wins the cell it
+occupies, and an automated cell fills a cell the human left blank. So staging a
+row for a table the humans have already described is not an error and not a
+conflict -- their values simply win, and yours fill the gaps.
 
-- Write the file with `csv.QUOTE_ALL`, LF terminators, pure ASCII.
-- Tell ben-domingue: **File > Import > Upload > Import location: "Append to
-  current sheet" > Separator type: comma.**
-- Confirmed working 2026-08-27 on a 121-row batch: all 121 rows landed
-  contiguous at 14 columns with zero field mismatches across 1,694 cells.
-  An `.xlsx` also works and avoids delimiters entirely, but the quoted CSV is
-  what was actually verified end-to-end.
+What this ends, and why the procedure it replaces ran to seventy lines: the
+paste path could not carry a comma inside a `Description` (Sheets' paste ignores
+RFC4180 quoting), could not carry the mandated-blank columns as a TSV
+(text-to-columns collapses repeated delimiters, shifting `Contributor` and
+`Date` three columns left), auto-converted `Date` unreliably, and once failed on
+a well-formed 55-row batch for a cause never found (`BATCH_LOG.md`,
+2026-08-26). All of it is now the script's problem: it writes RFC4180 with LF
+terminators. It deliberately does **not** escape a leading `=`, `+`, `-` or `@`
+-- that was a paste-path mitigation, and since nothing is pasted any more,
+prefixing an apostrophe corrupts rather than protects: three `Notes` cells in
+the sheet legitimately begin "-1 sentinel values ..." or "-9 sentinel ...".
+It also refuses a blank `Public Reshare?`, which used to mean the row
+silently never reached biblio at all, and a `Public` row with no
+`Derived License`.
 
-**Verify a paste/import by exporting the target tab, not by re-checking the
-file.** The dictionary tab is gid `1337607315`
-(`https://docs.google.com/spreadsheets/d/<id>/export?format=csv&gid=1337607315`
--- the default export returns a cover tab instead). Diff it field-by-field
-against the source rows. On 2026-08-27 that localised a problem to one column
-in 8 rows and simultaneously proved alignment, completeness and no-duplicates
-for everything else; two rounds of re-checking the file itself had found
-nothing, because the file was fine.
-
-**Emit the `Date` column pre-formatted as `M/D/YYYY`, never ISO.** The sheet's
-own convention is `M/D/YYYY` (3,474 rows vs 206 in ISO). Handing Sheets
-`2026-08-27` and letting it auto-convert is unreliable -- on 2026-08-27 it
-converted 113 of 121 rows and left 8 as literal left-aligned text.
-
-**`csv.writer` defaults to CRLF.** Its `lineterminator` is `\r\n`, and opening
-the handle with `newline=""` preserves it. Pass `lineterminator="\n"`
-explicitly and verify with `file X.csv` (should not say "CRLF line
-terminators").
-
-**Keep fields boring anyway.** A 55-row biblio once failed to paste
-repeatedly while being verifiably well-formed, and the cause was never found
-(see `BATCH_LOG.md`, 2026-08-26). Since the failing component is the paste
-path and it cannot be inspected, the cheap insurance is to keep every field
-to plain prose: no tab, newline, carriage return or double quote, no leading
-`=`, `+`, `-`, `@` or `'` (Sheets reads those as formula or literal-text
-prefixes). Quotes in a `Reference` are decorative -- APA does not quote
-article titles -- so strip them. **Do not claim to know what Sheets does to a
-pasted quote**; that was asserted here once on a coincidence and did not hold
-up when tested.
-
-**Check that per field, never per line.** `'\t' in line` is vacuously true for
-every line of a TSV, so a file-level substring test for the delimiter catches
-nothing. Iterate fields:
-
-    for r in rows:
-        for v in r:
-            assert not (set('"\t\r\n') & set(v))
-
-**When a paste goes wrong, read the target sheet before theorising.** Fetch
-its CSV export: it shows the real header (so a layout mismatch is ruled in or
-out immediately) and exactly which rows landed and how they aligned. That one
-step killed two plausible-looking theories at once and showed nothing had
-half-landed. Verifying the *file* again is the wrong instinct once the file
-has already been checked -- the fault is downstream of it.
+The review surface is `git diff` on `dictionary_auto.csv` and
+`metadata/biblio.diff.csv` in the weekly pipeline PR -- not a re-export of the
+sheet. `metadata/biblio_provenance.csv` records which cells the automated file
+supplied, so a bad batch can be found and reverted.
 
 **On Dataverse, download `format=original`, not the `.tab` conversion.** One
 batch hit three distinct defects from the conversion alone: SPSS user-missing
@@ -1001,13 +1019,15 @@ over the integer cells (or its reflection, when a reverse-code was applied
 after imputation), the file is mean-imputed and those cells must be dropped,
 not shipped.
 
-**An item's observed maximum is not its scale.** `run_qc`'s
-`resp_scale_mixed` reads it as one, so a rarely-endorsed top category on a few
-items of a subscale trips it. Check the response distributions before
-splitting: a handful of respondents reaching 7 on one item of four, with the
-rest topping out at 6, is one left-skewed scale, not two. Waive the check
-through a named, printed exemption rather than either splitting a real
-subscale or silently dropping the assert.
+**An item's observed range is not its permitted response set.** A rarely used
+extreme can make one item's observed range narrower than another's. The shared
+checks now warn on that pattern in either direction, so the pattern alone
+needs no failure exemption. Complete documented permitted sets can resolve
+width warnings; an observed value outside such a set fails. Use explicit
+source-backed construct mappings for construct findings, as described in
+[response-scale evidence](../../../../irw_validate/README.md#response-scale-evidence).
+Never infer a codebook from the observed categories or split a scale solely
+because its items use different formats.
 
 **Demographics deposited as regression dummies are recoverable.** Take the
 index of whichever indicator is 1, and the omitted index where none is -- the

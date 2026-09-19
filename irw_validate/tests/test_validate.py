@@ -4,9 +4,9 @@
 The first class is the important one. Fifty scripts in `data/` call `run_qc` and
 read `.name` / `.status` / `.detail` off the result, and `run_qc` had no test
 coverage at all before this file. GOLDEN pins the exact emission order and
-status of every check for eight fixtures, so the move out of
-`irw_triage_updated.py` is provably behaviour-preserving rather than hopefully
-so.
+status of every check for eight fixtures. The original move preserved behavior;
+PR #1697 explicitly corrects a spurious range finding on text-only responses,
+while retaining their numeric failures.
 """
 from __future__ import annotations
 
@@ -43,7 +43,8 @@ FIXTURES = {
     "unprefixed_cov": lambda: F(id=[1, 2], item=["a", "b"], resp=[1, 2], age=[30, 40]),
 }
 
-#: Captured from `irw_triage_updated.run_qc` on 2026-09-02, BEFORE the move.
+#: Captured before the 2026-09-02 move, with one reviewed PR #1697 change:
+#: all-text responses retain numeric failures, not a spurious numeric-range finding.
 GOLDEN = {
     "clean": [("required_columns", "pass"), ("resp_numeric", "pass"),
               ("dup_id_item", "pass")],
@@ -56,8 +57,7 @@ GOLDEN = {
     "dup_with_wave": [("required_columns", "pass"), ("resp_numeric", "pass"),
                       ("dup_id_item", "warn")],
     "nonnumeric_resp": [("required_columns", "pass"), ("resp_numeric", "fail"),
-                        ("dup_id_item", "pass"), ("resp_variation*", "fail"),
-                        ("resp_scale_mixed", "fail")],
+                        ("dup_id_item", "pass"), ("resp_variation*", "fail")],
     "no_variation": [("required_columns", "pass"), ("resp_numeric", "pass"),
                      ("dup_id_item", "pass"), ("resp_variation*", "fail"),
                      ("imputed_values*", "warn")],
@@ -68,9 +68,9 @@ GOLDEN = {
 
 
 class GoldenCompatibility(unittest.TestCase):
-    """The fifty callers see exactly what they saw before the move."""
+    """Existing callers retain the reviewed check contract and emission order."""
 
-    def test_emission_order_and_status_unchanged(self):
+    def test_reviewed_emission_order_and_status(self):
         for name, build in FIXTURES.items():
             with self.subTest(fixture=name):
                 got = [(c.name, c.status) for c in run_qc(build())]
@@ -92,12 +92,13 @@ class Profiles(unittest.TestCase):
     """Severity is a property of (check, profile), never of the check alone."""
 
     def test_heuristics_do_not_block_the_gate(self):
-        # resp_scale_mixed is `fail` in triage; cao_2026_cdss documents a real
-        # table that trips it legitimately, so it must not block an upload.
-        df = FIXTURES["nonnumeric_resp"]()
+        # Composite-looking names alone remain insufficient to block upload.
+        df = F(id=[1, 1, 2, 2, 3, 3], item=["total_a", "total_b"] * 3,
+               resp=[1, 2, 3, 4, 5, 1])
         upload = validate_frame(df, profile="upload")
-        mixed = [f for f in upload.findings if f.check == "resp_scale_mixed"]
-        self.assertEqual([f.severity for f in mixed], ["warn"])
+        composite = [f for f in upload.findings if f.check == "composite_items*"]
+        self.assertEqual([f.severity for f in composite], ["warn"])
+        self.assertFalse(upload.errors)
 
     def test_gate_errors_still_block(self):
         report = validate_frame(FIXTURES["no_variation"](), profile="upload")

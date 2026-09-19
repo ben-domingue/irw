@@ -1,0 +1,76 @@
+# Daily report of what downstream of the pipeline is behind (issue #1940).
+#
+# The gap this closes: IRW has a compute clock and no publish clock. The weekly
+# metadata pipeline is automated; every step that puts a number in front of a
+# user -- upload_meta.py, the Publish click on Redivis, the site render -- is a
+# human action, unsequenced and unmonitored. So the published corpus can be
+# arbitrarily far behind the repository with nothing reporting it, which is
+# exactly the state found on 2026-09-08: the repo and the homepage both said
+# 4,238 tables while every live-querying page answered from irw_meta v21.0,
+# released four days earlier.
+#
+# Why this reports instead of acting: publishing is a human act (ARCHITECTURE.md
+# section 4 -- "that click is always a human action"), and #1940's decision was
+# to keep the judgement with a person and automate the *remembering*. Nothing
+# here blocks, gates or fails: the job is green whether the corpus is current or
+# a week stale. A monitoring job that can redden CI is a job people learn to
+# route to a folder.
+#
+# Why it does NOT open a pull request, unlike the two other scheduled jobs:
+# it writes nothing to the repository. Its whole output is one issue, rewritten
+# in place, so there is no diff to review and nothing to merge.
+#
+# 14:00 UTC: 30 minutes after version-manifest.yml (13:30 daily), so the
+# manifest this reads has already been refreshed today, and an hour after the
+# metadata pipeline starts on Mondays (13:00 weekly).
+
+name: drift report
+
+on:
+  schedule:
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: drift-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          # The report dates the last commit touching metadata/. A shallow
+          # checkout cannot answer that, and the script's API fallback covers it
+          # -- but fetching the history is cheaper than an extra API round trip
+          # and keeps the local git path (the one exercised when a human runs
+          # this by hand) as the path CI takes too.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        # Editable install so `red_up.drafts.inspect` is importable -- the draft
+        # check reuses it rather than reimplementing the released-version clock.
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e .
+
+      - name: Report
+        env:
+          # Same note as version-manifest.yml: red_up.auth's helper is named
+          # load_write_token, but this job only ever READS. Store the read-only
+          # token here, never the data.edit one.
+          REDIVIS_API_TOKEN: ${{ secrets.REDIVIS_API_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: python3 metadata/drift_report.py --post

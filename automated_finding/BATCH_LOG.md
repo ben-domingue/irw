@@ -13772,3 +13772,670 @@ Not shipped, and where the text actually is:
   deferred rather than guessed.
 
 Nine rows appended to `itemtext_provenance.csv`, `uploaded` blank.
+
+## 2026-09-07 — Repos weekly run: 0 good, and two of the fifteen terms were the reason
+
+Scheduled weekly repos run (`4d599e6` bookkeeping straight onto main,
+`cc90e65` candidates+triage on a branch as `#2072`). 23 candidates from the
+15 `HIGH_YIELD_TERMS` subset across OSF/Dataverse/DataCite, 12 new after
+seen-key dedup, **0 good**: 8 `no_usable_file`, 3 `human_assistance`,
+1 `license_restricted`. It did not run Step 2b, as no cloud run does.
+
+`#2072` was **closed without merging** and its branch deleted. The
+bookkeeping half was already on main, and `cc90e65`'s only unique content
+was two per-run CSVs written to the top level of `automated_finding/` —
+which is how a run gets them past the `runs/` gitignore. Nothing durable
+was lost; this entry plus the 15 `search_terms_log.csv` rows and 12
+`repo_triage_seen_keys.csv` keys are the record.
+
+### The `human_assistance` bucket cost nothing this week, by luck
+
+Retriaged locally after the fact: 1 `recoverable_format` (DVN/ENEPCH),
+2 `human_review` (DVN/PDCXQH, DVN/KO1I8W). All three are false-positive
+`resilience` hits — built-environment overheating, Miami-Dade climate
+investment, and firm innovation in China. None is item-response data, so
+the skipped Step 2b happened to cost nothing. That is not a reason to keep
+skipping it: the bucket being empty of real candidates was a property of
+this week's noise, not of the step.
+
+### Two terms produced a third of the run's candidates and none of its value
+
+`HIGH_YIELD_TERMS` was a verbatim copy across the repo, PLOS and PMC
+connectors. That was wrong in a way nobody had reason to notice: PLOS/PMC
+match a term against article **full text**, where a bare construct word is
+nearly always psychological, while this connector matches dataset
+**titles**, where the same word is a naked keyword.
+
+- `grit` → 5 of 23 candidates, all false: the GRIT-ADB hydrography database
+  (×2), a GRIT GNSS network station, and a German library-science article
+  by an author named Grit Bümann. No grit-titled candidate has ever reached
+  a `good` flag.
+- `resilience` → 3 of 3 false, and historically it pulls coral reefs,
+  wildfire recovery, irrigation, supply chains and agricultural yield.
+
+Fixed in `#2075`: `grit` dropped, `resilience` narrowed to `psychological
+resilience`. Both remain in the ~125-term `TERM_LIST`, so the monthly full
+sweep still covers them — only the weekly cadence changed.
+
+### Two silent failures the run reported as success
+
+1. **OSF missed 5 of 15 terms** (`self-efficacy`, `depression`, `perceived
+   stress`, `work engagement`, `growth mindset`) and nothing said so. The
+   watermark handling was correct — each term logged an honest
+   `not_searched=osf` and did not advance — but a source failing on a
+   *subset* of terms had no warning path at all, unlike a run-wide block or
+   a fully starved term. The only trace was a substring in
+   `search_terms_log.csv`. `#2076` adds per-source coverage reporting.
+2. **Step 2b skipped again.** The step was titled "recommended" and the
+   triage script ended with a passive one-line suggestion, so the routines
+   skipped it exactly as written. `#2076` adds `irw_batch_updated.py
+   --retriage` to chain it in-process and retitles the step REQUIRED.
+
+Also in `#2075`: per-run candidate/triage/retriage CSVs are now gitignored
+at the top level as well as inside `runs/`. Five scheduled routines between
+2026-08-25 and 2026-09-07 had worked around the `runs/` rule by copying
+output up to `automated_finding/` or force-adding it; the ten strays that
+reached main are untracked.
+
+## 2026-09-08 — PLOS weekly run: "REQUIRED" was unreachable from the runner
+
+Scheduled weekly PLOS run (`irw_discover_plos_monthly.py --mode weekly`,
+`--per-term-cap=4`). Bookkeeping went straight to main as `a4b1cff`
+(`search_terms_log.csv` + 56 DOIs into `plos_seen_dois.csv`); the candidates
+CSV went to a branch as `#2109`.
+
+56 candidates triaged, all 15 terms visited, 14 at the per-term cap:
+40 `no_usable_file`, 13 `human_assistance`, 1 `below_min_n`, 1 `timeout`,
+1 `not_item_response`. **0 `good`.**
+
+### Step 2b was skipped nineteen hours after it was made required
+
+`#2076` retitled Step 2b REQUIRED and added `irw_batch_updated.py
+--retriage` to chain it, precisely so scheduled runs would stop skipping it.
+It merged at 01:12Z. This run started at 19:50Z and skipped Step 2b anyway,
+reporting "0 good" and stopping there.
+
+The routine was not ignoring the rule. `irw_discover_plos_monthly.py` and
+`irw_discover_pmc_monthly.py` triage in-process off `irw_triage_updated` and
+never call `irw_batch_updated` — so `--retriage` did not exist on either of
+the two paths that had ever needed compelling. The fix landed on the
+interactive path and missed both unattended ones. Fixed in `#2111`: the
+chaining logic moves to `irw_retriage_ha.chain_step2b` and both article
+connectors call it with `run=True` unconditionally, since an unattended run
+has nobody to read a reminder on stderr.
+
+This is the second consecutive week a run reported success while the step
+that produces its actual yield did not happen — and the first where the
+enforcement mechanism itself was on the wrong path. A rule that only reaches
+attended runs is not a rule for the runs that skip things.
+
+### Run retroactively: 12 of the 13 are machine-actionable
+
+`chain_step2b` over this run's CSV:
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 9 |
+| `worth_retrying` | 3 |
+| `human_review` | 1 |
+
+All 13 are `cc-by`. The 9 `recoverable_format` are one shape — `QC failed on
+resp_scale_mixed` plus a `multi_scale` warning, i.e. one deposit carrying
+several instruments, which the standard already answers with one table per
+scale. Largest by size: `pone.0310078` (873 × 161), `pone.0133254`
+(810 × 194), `pone.0182745` (706 × 107), `pone.0350219` (490 × 90),
+`pone.0246676` (867 × 56). The single genuine `human_review` is
+`pone.0311284`, where no column met the id heuristic.
+
+So "0 good" was never the story: the 2026-09-01 PLOS weekly bucket looked
+the same and became 21 tables / 280,971 responses. The 12 actionable DOIs
+are unworked as of this entry.
+
+### The per-run CSV came back
+
+`f7cbdda` force-added
+`automated_finding/plos_monthly_candidates_weekly_2026-09-08.csv`, which
+`.gitignore:59` (`plos_monthly_candidates_*.csv`) covers — the exact
+workaround `#2075` removed the day before, and the sixth scheduled routine
+to use it. `#2109` closed unmerged; this entry plus `a4b1cff` is the durable
+record, which is what the rule asks for. The routine also wrote no BATCH_LOG
+entry at all, which is the other half of what replaces the CSV.
+
+## 2026-09-08b — The 2026-09-08 PLOS bucket worked: 35 tables, 298,644 responses
+
+Follow-up to the entry above. That run reported **0 `good`** and stopped;
+Step 2b, run retroactively, put 12 of its 13 `human_assistance` rows in
+machine-actionable buckets. This is what came of working them. Every one of
+the 35 tables below comes from a row the run itself labelled "0 good".
+
+### Dispositions (13 of 13 resolved; `human_review/` gets no file)
+
+| DOI | first author | verdict |
+|---|---|---|
+| `pone.0133254` | Miron-Shatz 2015 | processed, 9 tables |
+| `pone.0182745` | Tims 2017 | processed, 7 tables |
+| `pone.0310078` | Feng 2024 | processed, 4 tables |
+| `pone.0350219` | Shen 2026 | processed, 4 tables |
+| `pone.0315916` | Xiao 2024 | processed, 4 tables |
+| `pone.0245078` | Žnidaršič 2021 | processed, 5 tables |
+| `pone.0279984` | Tatala 2023 | processed, 2 tables |
+| `pone.0143120` | Gillespie 2015 | dropped — the 15 columns are PPI-R subscale scores, trait/state anxiety totals, their z-scores and three interaction terms. No item-level data in the deposit. |
+| `pone.0251859` | Shen 2021 | dropped — all 34 columns are T1/T2 scale totals (BDI, ASLEC frequency/quantity, tenacity, strength, optimism, resilience, and three social-support subscales). Composites, not responses. |
+| `pone.0250469` | Szczepaniak 2021 | dropped — a country-year macroeconomic panel (Gini, S80/20, education shares) for eight CEE economies, 15 rows per country. Not person-by-item data at all; the connector's `n_participants=119` was counting country-years. |
+| `pone.0246676` | Yang 2021 | license-blocked — S1 Data is a Word document pointing at OSF node `ajfhw`, which the API reports public with license "No license". Row appended to `license_blocked_candidates.csv`. |
+| `pone.0311284` | Tuicomepee 2024 | license-blocked — S1 Data is a 121-byte pointer to OSF node `3ywqk`, which is **private** (API returns 401) and reachable only through the anonymous view-only review link printed in the article. No license to inherit, and a peer-review link is not a public release. Row appended to `license_blocked_candidates.csv`. This was the batch's one genuine `human_review` row, and retriage was right about it. |
+| `pone.0236940` | Sánchez 2020 | **held**, see below |
+
+So `human_review/` gets no file for this batch, for the second PLOS weekly in
+a row: the one genuinely ambiguous row turned out to be a rights problem, not
+an ambiguity, and rights problems have their own standing file.
+
+### The one hold: Sánchez 2020 (`pone.0236940`)
+
+Structurally the best-looking candidate in the batch — 1,662 unique student
+ids, 17 multiple-choice exam items (`PS1.52`, `PS1.2`, ...) from a Blood
+module, two cohorts, and a matching block of 17 `QPS*` columns that are a
+constant per column (`EXCELENTE` / `BUENA` / `POBRE`) and so are an item
+attribute, a clean `itemcov_`.
+
+It is held on one unanswered question: the `PS*` responses are coded 0/1/2
+and nothing says what the three codes mean. The article describes item
+quality by discrimination index and mentions "incorrectly or blank answers",
+which makes `0 = blank / omitted, 1 = incorrect, 2 = correct` the most likely
+reading — and if that is right, `0` is a non-response sitting inside the
+valid range, exactly the sentinel case `datastandard.md` warns about, and it
+must be filtered rather than scored. The alternative (`0` incorrect, `1`
+partial, `2` correct) would make dropping the zeros wrong. The deposit's only
+other supplementary file is the rebuttal letter, so there is no codebook to
+settle it. Guessing here decides the meaning of 1,174 responses, so it waits
+for an author email. `TODO.md` entry added.
+
+### Tables written (35, to `irw_output/`, 298,644 responses)
+
+| paper | tables | ids | responses |
+|---|---|---|---|
+| Miron-Shatz 2015 (`pone.0133254`) | swls, mood_yesterday, day_type_affect, self_description, sources_of_joy, sources_of_pain, paired_comparison, child_wishes, happiness_beliefs | 810 | 95,700 |
+| Tims 2017 (`pone.0182745`) | cse, career_competencies, autonomy, supervisor_support, job_crafting, hindering_demands, uwes | 706 | 50,126 |
+| Feng 2024 (`pone.0310078`) | work_values, professional_development, work_engagement, org_support | 873 | 77,697 |
+| Shen 2026 (`pone.0350219`) | self_control, cdrisc, social_adaptability, smartphone_addiction | 490 | 44,100 |
+| Xiao 2024 (`pone.0315916`) | hierarchical_plateau, work_engagement, trait_mindfulness, taking_charge | 307 | 9,794 |
+| Žnidaršič 2021 (`pone.0245078`) | leader_support, coworker_support, org_practices, wf_balance, uwes | 247 | 13,827 |
+| Tatala 2023 (`pone.0279984`) | ucla_loneliness, religious_experience | 200 | 7,400 |
+
+`irw-validate --profile upload` is clean on all 35: no blocking findings.
+Warnings and why they stand:
+
+- `multi_scale*` on `tims_2017_career_competencies`, `tims_2017_job_crafting`
+  and `tims_2017_uwes`. In all three the item codes carry the *dimensions of
+  one instrument*, not separate constructs — UWES-9's vigor/dedication/
+  absorption, the Job Crafting Scale's three expansive dimensions, the career
+  competencies questionnaire's six. Splitting a 9-item UWES into three
+  3-item tables would misrepresent how it is scored. The check is doing its
+  job; the naming is what trips it. Note that the same instrument ships
+  un-flagged three more times in this batch (`xiao_2024_work_engagement`,
+  `feng_2024_work_engagement`, `znidarsic_2021_uwes`) purely because those
+  deposits number their items `WE1-9` / `WI1-17` / positional rather than by
+  dimension. Same decision, different column names.
+- `imputed_values*` on six tables. Each is one skewed item, and the two
+  extremes make the point: `mironshatz_2015_paired_comparison`'s `pair2` is
+  **binary**, so 66% on one value is unremarkable, and `pain1` ("Spiritual
+  and religious life" as a source of pain) sits at 72% on one value because
+  most people say it isn't one. Genuine distributions, not fill-ins.
+
+### Two things this batch says about the pipeline
+
+**"0 good" is not a yield number.** Two consecutive PLOS weeklies have now
+reported 0 `good` and produced, on inspection, 21 tables (2026-09-01) and 35
+tables (this one). The `good` flag means the script finished the mapping
+unaided; `human_assistance` means it didn't. Neither is a statement about the
+data. A weekly summary that leads with "0 good" and omits the
+`human_assistance` count is reporting on the script, not the corpus.
+
+**The blocks that defeated the mapper were all the same two shapes.** Every
+`recoverable_format` row was one deposit carrying several instruments with no
+separator — resolved by the standard's existing "one file per scale" rule,
+not by anything new. The two that needed real work were header shape
+(Miron-Shatz's four stacked header rows: banner / item wording / question
+name / variable code, with the data keyed to row 3) and Žnidaršič's total
+absence of item codes, where every column header is the item's full English
+stem and the block boundaries had to come from the article's Instruments
+section. Both are cheap to recognise once seen.
+
+### Item text: nothing shipped, and the reason is rights in five of seven
+
+Recorded per-script rather than left to a later pass to re-derive:
+
+- **Tatala 2023** — the wording is fully in hand: variable labels are present
+  and complete for all 54 columns and carry verbatim English stems ("I lack
+  companionship."); value labels are absent for every item column. Held
+  because UCLA1-20 are the Revised UCLA Loneliness Scale (Russell 1996), a
+  third-party copyrighted instrument — the CC BY licence covers these
+  authors' data, not Russell's items. RES1-17 are the Religious Experience
+  Scale, on which this paper's first author is an author; whether that makes
+  them ours to republish is ben-domingue's call, so both blocks are held
+  together rather than split on a judgment call.
+- **Žnidaršič 2021** — same shape: the stems *are* the column headers, in
+  English, no label layer to check. All five blocks are third-party
+  instruments (Shinn et al., the Family-Friendly Company measure set, Brough
+  et al., UWES-9).
+- **Miron-Shatz 2015** — the closest call. Row 1 of the deposit carries full
+  English wording for every item and this batch assigned the item codes, so
+  the join key would be known rather than reconstructed. Held on two grounds:
+  the study ran at four sites in three languages (Columbus, France, Denmark,
+  Austin — the deposit has separate `d2`/`d2f` education codings, so the
+  instrument was localised) and row 1 is English only, so shipping it as the
+  administered text would assert something false for two of four sites; and
+  the deposit carries no response-option wording at all, so `option_text`
+  would be NA throughout. Language is a schema rule owned by
+  `itemtext_standard.md`, not something to improvise inside a data script.
+  A later pass starts from row 1 of the "data" sheet keyed to the row-3
+  variable codes, which is the mapping already in the script.
+- **Feng 2024** — both levels checked: variable labels exist for 29 of 161
+  columns and all 29 are SPSS artefacts ("REGR factor score 1 for analysis
+  1"); no item column has one. Value labels are present and complete for the
+  item columns but hold the response options (完全不符合 … 完全符合), not the
+  stems.
+- **Tims 2017** — variable labels exist for 50 of 107 columns but are block
+  headers, not stems: CSE1 is labelled "Core self-evaluations", AUT1
+  "Autonomy items". Value labels only on the demographics.
+- **Xiao 2024, Shen 2026** — .xlsx deposits with positional codes and no
+  label layer of any kind. Stems are in the source instruments' own
+  publications.
+
+## 2026-09-09 — PLOS monthly run: 0 good, 21 human_assistance, 6 worth_retrying after Step 2b
+
+Scheduled monthly PLOS run (`irw_discover_plos_monthly.py --mode full
+--limit 150`, all 125 terms in the shared construct list x plosone).
+Bookkeeping went straight to main as `588eaf3` (1 `search_terms_log.csv`
+row + 123 DOIs into `plos_seen_dois.csv`).
+
+123 candidates triaged, 125/125 terms visited (123 hit the per-term cap of
+1): 95 `no_usable_file`, 21 `human_assistance`, 4 `below_min_n`,
+2 `not_item_response`, 1 `pii_suspected`. **0 `good`.**
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 21 `human_assistance` rows:
+
+| refined_flag | n |
+|---|---|
+| `recoverable_format` | 11 |
+| `worth_retrying` | 6 |
+| `aggregate_continuous` | 2 |
+| `human_review` | 2 |
+| `not_item_response` | 0 |
+
+**No raw candidates CSV was committed this run.** The 2026-09-08 entry
+above documents this exact routine force-adding
+`plos_monthly_candidates_weekly_2026-09-08.csv` past `.gitignore:59` as
+"the exact workaround `#2075` removed... the sixth scheduled routine to
+use it" (PR closed unmerged). This run is the seventh time that
+instruction would have recurred — it came from this run's own task
+prompt, unchanged since before `#2075`/`#2111` — so the write-up below
+stands in for the CSV instead, per README's "Where files live" table
+(`runs/` is "disposable once the batch is written up in BATCH_LOG.md").
+`runs/plos_monthly_candidates_full_2026-09-09.csv` and its
+`.retriage_ha.csv` sibling are on disk in this session's container only
+and will not survive it; every DOI below is reachable again from its URL,
+and all 123 are now in `plos_seen_dois.csv` so a future run won't
+re-surface them by accident — re-triage a specific one by DOI if it needs
+another look.
+
+### 6 `worth_retrying` (id-column mapping was the only flag, or a
+longitudinal dup_id_item shape)
+
+- **Construct validity of a global scale for Workplace Social Capital
+  based on COPSOQ III** (1316p / 8i) — a named, validated instrument
+  (COPSOQ III); low-confidence id-column mapping was the only issue.
+  `pone.0221893`
+- **An atlas of personality, emotion and behaviour** (1290p / 4i) —
+  dup_id_item fail but n_participants=1290 at a 1.2x ratio, consistent
+  with a longitudinal/repeated-measures design. `pone.0227877`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — dup_id_item fail, 1.0x
+  ratio, same longitudinal-shape read. `pone.0200609`
+- **Sports instructors' job insecurity and turnover intention in South
+  Korea** (267p / 57i) — id-column mapping only. `pone.0347639`
+- **Heterosexist microaggressions, student academic experience and
+  perception of campus climate** (471p / 13i) — id-column mapping only.
+  `pone.0231580`
+- **Influencing mechanisms of live streaming influencer characteristics
+  on purchase intention** (400p / 24i) — id-column mapping only.
+  `pone.0322294`
+
+### 11 `recoverable_format` — all the same shape: one deposit, several
+instruments bundled in one file (`resp_scale_mixed`, several with a
+`multi_scale` warning); the standard already answers this with one table
+per scale. Largest by participant count: Overconfidence/financial-literacy
+Japan panel (`pone.0315622`, 191,762p / 26i), risk-perception/protection
+motivation (`pone.0191994`, 3040p / 64i), Working Memory/Reasoning/Task
+Switching training (`pone.0142169`, 5382p / 3i), early language abilities
+and math skills in Chinese children (`pone.0181074`, 2012p / 16i),
+CEO narcissism and ambidextrous innovation (`pone.0280758`, 1662p / 15i).
+Remainder: smoking self-efficacy in Qatari men (`pone.0263306`), emotional
+regulation in shooters (`pone.0318872`), COVID-era quality of life
+(`pone.0276841`), teacher resilience/work engagement (`pone.0222518`),
+learning motivation and organizational performance (`pone.0304729`),
+exercise-video energy expenditure in children (`pone.0333283`).
+
+### 2 `human_review` (genuinely ambiguous, no clear id column)
+
+- **The role of early language abilities on math skills among Chinese
+  children** (2012p / 16i) — same DOI/table also carries the
+  `recoverable_format` multi-scale issue above; both need a look together.
+  `pone.0181074`
+- **Comparing teacher and student perspectives on the interplay of
+  cognitive and motivational...** (502p / 30i) — same row as the
+  `worth_retrying` longitudinal read above; the id-column question and the
+  dup_id_item shape are separate open questions on the same table.
+  `pone.0200609`
+
+### 2 `aggregate_continuous`
+
+Not itemized here — see `runs/plos_monthly_candidates_full_2026-09-09.retriage_ha.csv`
+for this session's duration only; both need a look at whether the flagged
+columns are composite/subscale scores (drop) or genuine continuous
+per-item responses (keep) before any decision.
+
+None of the 123 candidates this run were flagged `good` outright.
+
+## 2026-09-09b — PMC weekly run: 0 good, and the license gate took a third of it before any data was read
+
+Scheduled weekly Europe PMC run (`irw_discover_pmc_monthly.py --mode
+weekly`, the 15 `HIGH_YIELD_TERMS` x the `JOURNALS` list). Bookkeeping went
+straight to main as `6721090` (1 `search_terms_log.csv` row + 60 DOIs into
+`pmc_seen_dois.csv`).
+
+60 candidates triaged, all 15 terms hit the per-term cap of 4 (so the
+`--limit 60` bound, not the term list, is what ended the run): 25
+`no_usable_file`, 22 `license_restricted`, 10 `human_assistance`, 3
+`below_min_n`. **0 `good`.**
+
+The license split is worth recording on its own: 38 cc-by, 21
+cc-by-nc-nd, 1 cc-by-nc. Every one of the 22 non-cc-by articles was
+dropped at the article license before its data file was examined, which
+is the correct conservative call but means the run's real denominator was
+38, not 60 — and 25 of those 38 had no usable file. One in three PMC
+articles reaching this connector is unusable on rights alone.
+
+Step 2b (`chain_step2b`, built into the monthly script) ran automatically
+over the 10 `human_assistance` rows: 3 `recoverable_format`, 3
+`aggregate_continuous`, 3 `human_review`, 1 `worth_retrying`, 0
+`not_item_response` / `wrong_file_selected`.
+
+**No raw candidates CSV is committed for this run.** PR `#2139` did force
+-add `pmc_monthly_candidates_weekly_2026-09-09.csv` past `.gitignore:60`
+— the same workaround the 2026-09-08 entry documents and the PLOS entry
+above (`2fff7ef`) declined to repeat forty minutes later on the same day.
+`#2139` was closed unmerged; this entry and the archived `human_review`
+rows are the durable record instead. The candidate rows were recovered
+from the closed PR's commit `8b32404` and Step 2b re-run locally, which
+reproduced the 3/3/3/1 split exactly — `irw_retriage_ha.py` is pure
+pattern matching over the triage columns with no re-download, so its
+output is deterministic and does not need the original container.
+
+### 3 `human_review` — archived to `human_review/human_review_pmc_2026-09-09.csv`
+
+Same failure mode in all three: no column met the id heuristic, so the row
+position was used as the person id and no item columns could be
+identified. Two of the three are plainly not person x item data and the
+classifier simply had nothing to rule them out with:
+
+- **Evaluation of sealing ability and adaptability of different endodontic
+  sealers: in vitro comparative study** (`PMC13450035`) — in vitro dental
+  materials measurements. Not IRW.
+- **Enhancing drought resilience in durum wheat: effect of root
+  architecture and genotypic performance** (`PMC11955194`) — agronomy
+  trial. Not IRW.
+- **Interrelations of work with health and wellbeing on a 50+ year old
+  workforce assessed using longitudinal self-reports and actigraphy**
+  (`PMC13415521`) — the one genuine maybe; longitudinal self-report plus
+  actigraphy, so the file may hold real item responses alongside sensor
+  channels. Worth a human look at the raw file.
+
+### 3 `recoverable_format` — all `resp_scale_mixed`, one deposit bundling several instruments
+
+- Domain-specific Grit Scale for College Athletics (`PMC11126736`, 589p /
+  50i) — also carries a `multi_scale` warning; a named instrument, the
+  best-shaped row in this bucket.
+- Physical activity distribution patterns and basketball skill acquisition
+  (`PMC13471745`, 300p / 7i).
+- Pain intensity and quality of life in lumbar disc patients
+  (`PMC13453140`, 112p / 37i) — also `multi_scale`.
+
+All three are the shape the standard already answers with one output file
+per scale.
+
+### 3 `aggregate_continuous`
+
+- Attitudes towards communication and perceived self-efficacy in nursing
+  students (`PMC13348135`, 125p / 100i) — dup_id_item at 1.0x plus a
+  `resp_ordinal` warning.
+- Education methods and self-efficacy of smoking cessation counselling
+  (`PMC8109004`, 311p / 4i) — same shape.
+- Perceptions about protein supplements in Saudi Arabia (`PMC13428538`,
+  358p / 2i) — >50 unique resp values after melt; 2 items, so it fails the
+  no-single-item bar's spirit regardless of what the resp column turns out
+  to be.
+
+### 1 `worth_retrying`
+
+- **Temperature and relative humidity differentially affect deltamethrin
+  and malathion** (`PMC13475386`, 101p / 6i) — an insecticide bioassay.
+  The dup_id_item-at-1.3x heuristic read it as a repeated-measures human
+  design; it is repeated measures on mosquitoes. Not IRW.
+
+So of the 10 rows Step 2b sub-classified, 3 are not human item response
+data at all (two `human_review`, the `worth_retrying`) and reached this
+bucket only because the heuristics work on triage columns rather than
+subject matter. The `HIGH_YIELD_TERMS` list is pulling non-psychometric
+PMC articles into the funnel — a term-list precision question for the
+journal_scout study, not a triage bug.
+
+## 2026-09-09c — The two PLOS `human_review` rows, resolved: both are score matrices, not item responses
+
+The 2026-09-09 PLOS entry left two rows genuinely ambiguous and their triage
+rows unavailable to archive (the run's CSV lived only in that session's
+container). Both were re-triaged from the DOI through `irw_discover_plos`'s
+own `process_one`, which reproduced the original flags exactly
+(`human_assistance` for both, `cc-by`, 2012p/16i and 502p/30i), and then the
+SI files were downloaded and read. Neither needs a human decision after all
+— **both are `not_item_response`. Drop them.** Both DOIs are already in
+`plos_seen_dois.csv`, so no future run will re-surface them and nothing
+needs to go into `human_review/`.
+
+### `pone.0181074` — early language abilities and math skills, Chinese children
+
+`journal.pone.0181074_S1_Table.xlsx`, 2012 rows x 17 columns, one row per
+child. The 16 columns the triage counted as items are **subtest totals**,
+not items — each has its own ceiling and they nest into each other:
+
+| column | range | column | range |
+|---|---|---|---|
+| object counting | 0–4 | listening comprehension | 0–31 |
+| forward counting | 0–12 | dictation | 0–37 (half-credit) |
+| magnitude comparison | 0–8 | informal math | 0–37 |
+| backward counting | 0–12 | formal math | 0–10 |
+| missing number | 0–11 | language skills | 0–60.5 (half-credit) |
+| addition / subtraction | 0–5 | non-verbal IQ | 0–26 |
+
+`informal math` is the sum of the counting/comparison subtests and
+`language skills` is listening comprehension + dictation, so the file even
+carries its composites alongside their parts — which is what `resp_scale_mixed`
+was reacting to. There is no item-level data in the deposit. Incidentally
+`gender` uses a `9999` sentinel and `age` a `109`, neither documented.
+
+### `pone.0200609` — teacher vs student perspectives, cognitive and motivational
+
+`journal.pone.0200609_S1_Data.xlsx`, 503 rows (502 unique IDs — one dup) x 35
+columns, with a `variable_names` codebook sheet that settles it. The 30
+"items" are three blocks of derived variables plus section-header spacers:
+
+- `sm_*` (7) — measured composites. The codebook calls them "Score out of
+  25", "Score out of 5", "Mean score between 1 and 4". Aggregates, no items.
+- `sc_*` (7) — "recoded from measurements", 1=low/2=medium/3=high. These are
+  a **tertile cut of the `sm_*` columns**, verified: the `sm` ranges under
+  each `sc` level partition with no overlap (e.g. `sm_cog` 0–15 → 1, 16–21 →
+  2, 22–25 → 3). Zero independent information, and the reason `dup_id_item`
+  fired — after the melt each student's score appears twice, once raw and
+  once binned.
+- `tj_*` (8) — a maths teacher and a language-arts teacher each rating the
+  student low/medium/high on four constructs. Real ordinal ratings, but
+  they are two raters judging a student on constructs, not an instrument
+  administered to anyone; the study design is judgment accuracy against the
+  `sc_*` recodes.
+
+So the `worth_retrying` longitudinal read of the dup_id_item shape on this
+row was wrong in an instructive way: the 1.0x repeat is not waves, it is the
+same seven measurements stored twice at two levels of coarseness. Worth
+noting for the heuristic — a raw/binned pair of the same variable looks
+exactly like a two-wave design by the ratio alone.
+
+Both were `human_review` only because no column met the id heuristic, which
+is a symptom of a file that has no items rather than of a file that needs
+eyes on it.
+
+## 2026-09-14 — Repos weekly run: 0 good by triage, 1 usable found by hand, OSF unreachable all run
+
+Scheduled weekly repos run (`irw_discover_monthly.py --mode weekly`, all 14
+`HIGH_YIELD_TERMS`). Bookkeeping pushed straight to main as
+`191f26c` (14 `search_terms_log.csv` rows + 26 `repo_triage_seen_keys.csv`
+keys).
+
+**OSF was unreachable for all 14 terms** — every query returned
+`HTTPSConnectionPool(host='api.osf.io', port=443): Read timed out. (read
+timeout=30)`. Dataverse and DataCite both searched normally. This is a
+run-wide OSF outage, not a per-term issue like the 2026-09-07 entry's
+`grit`/`resilience` false positives. Per the connector's own design the
+affected terms' watermarks did not advance, so a later run re-covers them —
+`self-esteem`, `self-efficacy`, `depression`, `anxiety`, `burnout`,
+`perceived stress`, `well-being`, `life satisfaction`, `academic
+motivation`, `work engagement`, `psychological resilience`,
+`loneliness`, `procrastination` and `growth mindset` all still owe an OSF
+pass.
+
+37 raw candidates found; 23 new after `repo_triage_seen_keys.csv` dedup
+(the other 14 were already triaged via the monthly full sweep or a prior
+weekly run, same overlap the two connectors are designed to share).
+Triage: 0 `good`, 2 `human_assistance`, 1 `below_min_n`, 20
+`no_usable_file`. `no_usable_file` here is one dominant shape — 20 of 20 hit
+"no resolvable tabular file on landing page". The hand check below found
+that reason covers several different cases: PDF-only Zenodo records,
+login-gated files (Science Data Bank, UKDS `safeguarded` 858764), and at
+least one deposit that does have a usable file (DR-NTU P5WUGI).
+
+Step 2b (`irw_retriage_ha.py`, run by hand since this connector's own
+script doesn't chain it) resolved both `human_assistance` rows to
+`worth_retrying`, 0 `human_review` — no `human_review/` file this batch:
+
+- **DVN/QUVQIR** — "Replication Data for: Partisanship and perceived costs
+  predict carbon pricing opposition better than objective costs". Item columns hold text-coded Likert
+  responses (`'Strongly Agree'`, etc.) rather than numeric codes — needs a
+  human to map the text scale to `resp`, not a QC failure.
+- **DVN/XZTGXT** — "When Value Conflict Becomes a Governance Burden:
+  Ideological Polarization, Residential Segregation, and Depression among
+  Medicare Beneficiaries" (5,357 participants, 43 items). `dup_id_item`
+  failed but at a 1.0x ratio, the same shape the entry above this one just
+  showed can go either way (genuine longitudinal waves vs. a raw/binned
+  pair of the same variable at two levels of coarseness) — needs a look at
+  the actual columns before writing a script either way.
+
+(Both later rejected on inspection; see the hand check below.)
+
+**Per-run candidate/triage CSVs were not committed to the review branch.**
+The task's own template still says to commit
+`monthly_candidates_weekly_2026-09-14.csv` /
+`monthly_triage_weekly_2026-09-14.csv` to the PR branch, but both names are
+now covered by `.gitignore:57-58` specifically to close the force-add
+loophole documented in the 2026-09-08 entry above (`f7cbdda` was the sixth
+routine to force past it; that PR was closed unmerged for exactly this).
+Following that precedent rather than the stale template wording: this
+write-up plus the DOIs above are the durable record, and the PR
+description carries the same detail instead of a committed CSV. The raw
+files remain on disk only in this session's `runs/` (gitignored, disposable
+per README's "Where files live" table) and will not survive the container;
+every DOI is re-resolvable from its URL if it needs another look.
+
+### Hand check of all 23 (same day) — the triage missed one usable dataset
+
+Every candidate DOI was resolved and the plausible files downloaded. The
+automated flags were wrong in both directions:
+
+- **Both `worth_retrying` rows are rejects.** DVN/XZTGXT is county-year
+  panel data (`fips`, `DV_year`, `depression_total`, `Gini`, `Poverty_T`,
+  ...; ~4,500 rows in `Depression_allrace.tab`) — the "participants" are
+  counties, the "items" covariates, and `dup_id_item` is the same county in
+  different years. DVN/QUVQIR's data (`panel_vars.tab`, 11,781 rows × 83
+  columns) is a Canadian opinion panel of single-item attitudes, bills and
+  demographics with no multi-item scale. Both TODO items removed.
+- **DR-NTU 10.21979/N9/P5WUGI was flagged `no_usable_file` but has one.**
+  `Technology in Society Dataset.tab` (SPSS original) is 668 respondents ×
+  54 item columns in five blocks (`C_1-10`, `G_1-12`, `H_1-12`, `I_1-11`,
+  `J3_1-5`, 7-point agreement stored as labels; `B1ad_1-4` 5-point frequency)
+  plus 5 scale scores. Deposit licence CC BY-NC 4.0, so it needed a licence
+  decision before anything else. Item wording is in the SPSS variable labels
+  (see the header of `data/nguyen_2026_factcheck.py`).
+- **UK Data Service ReShare 858431 (The Great Friendship Project) is open,
+  not access-blocked.** `858431_bundle.zip` holds `TGFP_data.xlsx` plus a
+  data dictionary with response labels: UCLA-3, UCLA-20, a 20-item `scs`
+  scale, SWEMWBS, EQ-5D and ICECAP-A, 56 people across T0/T1/T2 (141 rows;
+  `Time` mixes `T0`/`t0` case) in an intervention/control trial. CC BY 4.0.
+  56 respondents is below the flat 100-id floor, so it is skipped. Its
+  triage flag is unknown: it is the only candidate with a known n below 100,
+  so it is probably the `below_min_n` row, but the triage CSV was not kept
+  and that cannot be confirmed. Either way it is not usable.
+- **ReShare 858764 (birdsong and well-being)** is `safeguarded`: the data
+  zip returns 401 without a UKDS login. Access-blocked, not fileless, and
+  safeguarded data comes under the UKDS End User Licence, which does not
+  allow redistribution, so it is a reject.
+- **Science Data Bank 0103e and psych.000x6** could not be checked (their
+  file API requires login), so `no_usable_file` there is unverified.
+  psych.000x6 ("Family relationship experience and growth mindset: neural
+  mechanisms of social negative feedback processing") is `restricted access`
+  in DataCite and a neural study, so it is a reject. 0103e (personality,
+  resilience and social support in Chinese college students) is the one
+  worth a manual look.
+- The rest are genuine rejects: four ISIR/GSAR/WARJMB Zenodo records holding
+  only a PDF, a restricted `.sav` (DataverseNL UIBTVT), an EEG deposit
+  (NEMAR), country-level index panels (DVN/BGQEET), rat behaviour (DVN/SIFCDV),
+  synthetic LLM help-seekers (Imperial), and Recherche Data Gouv ENKAUD, whose
+  `Barrier_value` is a 0-7 count of barriers per ecosystem service rather
+  than item responses.
+
+Because all 23 keys are now in `repo_triage_seen_keys.csv`, none of these
+will come up again on their own. P5WUGI, 858431 and 0103e are carried in
+TODO.md. 858764 and psych.000x6 are recorded above as rejects.
+
+**Follow-up 2026-09-15:** Ben approved P5WUGI despite CC BY-NC; it shipped
+to the Redivis draft as six `nguyen_2026_factcheck_*` tables (PR #2186).
+
+## 2026-09-16b — first processing batch off the Data Availability backlog
+
+Five open-licence leads were hand-picked from the #2193/#2203 backlogs and
+processed. **One shipped**; the batch is mostly a lesson about the other four.
+
+**Shipped:** `basinska_2023_bits_s1` / `_bits_s2` / `_work_overload` /
+`_bat23` (irw#2204) — Polish BITS validation, Mendeley 7wfgz62xgs, CC BY 4.0.
+37,593 responses across four tables.
+
+**Three were already in IRW, as the same deposits** — not near-matches:
+Mendeley `48y8tkf5wh` is `floreskanter_2021_cerq` (247,932 responses,
+identical to what was regenerated before anyone noticed); Dataverse `UT9RVL`
+is `RD_PPCSEDSOF_Afable_2023`; figshare `3122734` is the six `kotsou_2016_*`
+tables. Cause: candidate exclusion matches the paper DOI, and each of these
+deposits entered IRW through a *different, earlier* paper than the one that
+surfaced it. Fixed by the `already_in_irw` flag added in this batch.
+
+**Skipped — `10.1371/journal.pone.0231048`, Malay MAIA** (figshare
+10673534, CC0, 815 respondents, 7 instruments). The only file on the record,
+`Final_Malay_Dataset2.sav`, is the **post-imputation MICE dataset**, not the
+raw collection. The paper says so ("missing values were imputed using the
+multiple imputation technique using the MICE package"), and the file shows
+it: `D4_Education` holds fractional values — a nominal category cannot be
+2.5 — and MAIA responses reach 6.21 on a 1-6 scale. There is no raw
+counterpart on the record. A salvage was available (the imputer wrote
+non-integers, so the imputed cells are identifiable; dropping non-integer
+and out-of-range cells costs ~0.3% of cells and yields seven tables) and was
+**declined by Ben, 2026-09-16**: it rests on inference about which cells were
+imputed rather than on a documented raw file. Re-openable only by obtaining
+the pre-imputation file from the authors. No licence problem — this is not a
+`license_blocked_candidates.csv` row.

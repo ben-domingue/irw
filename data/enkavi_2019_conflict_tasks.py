@@ -142,10 +142,21 @@ def _prep_navon(df):
 
 
 def _prep_stopsignal(df):
+    # `condition` is the stop-signal FREQUENCY manipulation, not the delay
+    # (#1969). It carries exactly two levels and they are the frequency
+    # blocks: 40.0% of trials are stop trials under `high` and 20.0% under
+    # `low`, verified against the deposit.
+    #
+    # The delay is `SS_delay`, a separate column in the same file with 18
+    # distinct values (0-850 ms) present under both levels. It is NOT carried
+    # here and cannot be an itemcov_: the SSD is staircased trial by trial, so
+    # it varies within an item and within a person, which is exactly what the
+    # invariance check below exists to refuse. Carrying it would need a
+    # trial-level slot the standard does not have.
     df["shape_id"] = df["stimulus"].str.extract(r"/(\w+)\.png")
     return (
         ["condition", "SS_trial_type", "shape_id"],
-        {"itemcov_delay": "condition", "itemcov_trial_type": "SS_trial_type"},
+        {"itemcov_ss_frequency": "condition", "itemcov_trial_type": "SS_trial_type"},
     )
 
 

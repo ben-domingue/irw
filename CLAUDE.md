@@ -79,7 +79,8 @@ Additional rules:
 - Each measurement scale is saved as a **separate file**
 - Response times in **seconds**
 - Longitudinal timestamps in **Unix time**
-- Output saved as both `.csv` and `.RData`
+- Output saved as both `.csv` and `.RData` — except the `automated_finding`
+  pipeline, where `datastandard.md` overrides this
 
 ## Typical Processing Script Pattern
 

@@ -1,0 +1,70 @@
+# Packaging for `irw_validate` alone.
+#
+# This package used to ship as a rider on `irw-red-up` (see ../pyproject.toml),
+# which meant the only way to get the validator was to install the uploader --
+# editable, pointed at a real `src` checkout, because red_up reads
+# metadata/redivis_config.R next to itself.
+#
+# That was an accident of packaging, not a design. red_up is write-scoped and
+# needs the repo; the validator needs pandas and the standard library, and
+# nothing else. It is the piece an outside contributor wants before depositing
+# a table, and they should not have to clone the pipeline to run it.
+#
+# Nothing moves. The package directory IS the project directory, because two
+# modules resolve paths relative to __file__: `core.py` reaches
+# ../automated_finding for its loader of last resort, and `contract.py` walks
+# up to the repo root for the pull-request gate. Moving the package would
+# break both, and neither is worth breaking to satisfy a layout convention.
+#
+# Installed from a wheel there is no repo above the package, so `core.py`
+# checks (`_pipeline_root()`) and says what to do instead of raising an
+# ImportError from three frames down. `contract.py` is a repo gate and is only
+# meaningful in a checkout; it is shipped because excluding one module from a
+# 16-module package costs more than it saves.
+#
+#   pip install /path/to/irw/src/irw_validate      # or, once published:
+#   pip install irw-validate
+#
+# The `live` extra adds redivis, which only the live_* and repair_* modules
+# need. They are pipeline tools and are not importable without it; the
+# validator itself never touches the network.
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "irw-validate"
+version = "1.0.0"
+description = "Check a table against the Item Response Warehouse format, with an exit code"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+dependencies = ["pandas>=1.3.0"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Homepage = "https://itemresponsewarehouse.org"
+Source = "https://github.com/ben-domingue/irw/tree/main/irw_validate"
+
+[project.optional-dependencies]
+# Only the live_* and repair_* modules, which are pipeline tools that read
+# published Redivis tables. `validate_file` and `validate_frame` never do.
+live = ["redivis>=0.18.0"]
+# Only for validating .Rdata/.rda/.rds directly. Converting to CSV first needs
+# nothing extra, and is what an outside contributor will usually do.
+rdata = ["pyreadr"]
+
+[project.scripts]
+irw-validate = "irw_validate.cli:main"
+
+[tool.setuptools]
+# The package directory IS the project directory. Nothing moves: see the note
+# above about __file__-relative paths.
+packages = ["irw_validate"]
+package-dir = {"irw_validate" = "."}

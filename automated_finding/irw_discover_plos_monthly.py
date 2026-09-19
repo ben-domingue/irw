@@ -60,6 +60,7 @@ from irw_discover_updated import _load_auto_exclusions, resolve_out_path
 from irw_discover_plos import (
     from_plos, process_one_isolated, _new_pool, JOURNALS, DEFAULT_JOURNAL,
     FIELDNAMES, SEEN_DOIS_PATH, load_seen_dois, append_seen_dois,
+    INCONCLUSIVE_FLAGS,
 )
 from irw_discover_monthly import TERM_LIST as FULL_TERM_LIST
 
@@ -174,8 +175,11 @@ def main():
                     if hit.doi in skip:
                         continue
                     skip.add(hit.doi)
-                    newly_attempted.append(hit.doi)
                     row, pool = process_one_isolated(hit, pool)
+                    # Same guard as irw_discover_plos.py's main(). Without it
+                    # an infra failure (e.g. a missing xlrd) retired the DOI.
+                    if row["flag"] not in INCONCLUSIVE_FLAGS:
+                        newly_attempted.append(hit.doi)
                     writer.writerow(row)
                     outf.flush()
                     n_done += 1
@@ -204,6 +208,12 @@ def main():
     print(f"\n{n_done} candidates triaged -> {out_path}")
     print(f"{terms_visited}/{len(terms)} terms visited this run "
           f"({terms_capped} hit the per-term cap of {per_term_cap})")
+
+    # Step 2b, in-process. This connector triages off irw_triage_updated and
+    # never reaches irw_batch_updated's --retriage flag, so #2076's "REQUIRED"
+    # step had no way to run on a scheduled article sweep -- see chain_step2b.
+    from irw_retriage_ha import chain_step2b
+    chain_step2b(out_path, run=True)
 
     _append_log_rows([{
         "date": today,

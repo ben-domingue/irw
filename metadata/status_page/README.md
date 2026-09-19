@@ -20,16 +20,50 @@ reading tag coverage as 75% when seven of eight columns sit at 55%.
 
 | Section | Source | Refreshable in the cloud? |
 |---|---|---|
-| 01 Tagging | `metadata/status.json` (tracked) | **Readable, not regenerable.** Its inputs (`metadata/*.csv`) are gitignored. It only moves when Ben runs `metadata/11_status.R` locally and commits. |
-| 02 Item text | live Redivis `irw_text` v14.0 | **No.** Needs a Redivis read token, which the cloud environment does not have. Carry forward and age the stamp. |
+| 01 Tagging | `metadata/status.json` (tracked) | **Readable, not regenerable here** -- but no longer stale. Since #1940 (2026-09-08) `11_status.R` is stage 11 of the weekly pipeline, so it refreshes every Monday in the same run that writes its inputs. A render still cannot regenerate it; it can now trust that it is at most a week old, and `generated` says exactly how old. |
+| 02 Item text | live Redivis `irw_text` **and `irw_text_2`** | **No.** Needs a Redivis read token, which the cloud environment does not have. Carry forward and age the stamp. |
 | 03 Year 3 plan | GitHub issues/PRs (`#1702`) | **Yes.** |
 | Commit counts | `git log` in this clone | **Yes.** |
 
-`status.json` currently reports item text at 13.5% / 558 tables while the page
-says 14.0% / 579. That is not a bug: section 02 was last counted directly against
-Redivis, ahead of the last local `11_status.R` run. Prefer the live figure and
-let its stamp age; adopt the `status.json` figure only once it is the larger of
-the two, and say so in the note.
+## Item text lives in more than one dataset
+
+Redivis caps a dataset at 1000 tables, so item text was split on 2026-09-05:
+`irw_text` holds the first 718 tables and `irw_text_2` everything since. **Never
+count against `irw_text` alone.** It is a third of the corpus' item text short
+today and the shortfall grows with every batch, because new tables only ever go
+to the newest shard. A count that reads one dataset does not fail -- it returns a
+smaller number, which reads as item text having lost tables overnight.
+
+The dataset list is `IRW_TEXT_DATASETS` in `metadata/redivis_config.R`, which is
+authoritative (ARCHITECTURE.md section 5). Enumerate it rather than naming a
+dataset here, so the next shard is picked up without editing this file:
+
+    python3 - <<'EOF'
+    from red_up.auth import authenticate
+    from red_up.targets import load_registry, text_shards
+    import redivis
+    authenticate()
+    owner, targets = load_registry()
+    names = set()
+    for shard in text_shards(targets):
+        ds = redivis.user(owner).dataset(shard.name, version="current").get()
+        names |= {t.name for t in ds.list_tables()}
+    print(len(names))
+    EOF
+
+Two things to get right when turning that into a coverage figure. The shards hold
+`<table>__items`, so strip the suffix before joining to the corpus; and the join
+must be case-insensitive, or the ~300 tables whose names are not lowercase drop
+out silently (#1704). On 2026-09-10 that was 1,055 item-text tables, 1,052 of
+which matched a row in `metadata/metadata.csv`.
+
+The rule for reconciling section 02 with `status.json`: section 02 is counted
+directly against Redivis and `status.json` from the committed CSVs, so the two
+drift apart between runs. Prefer the live figure and let its stamp age; adopt the
+`status.json` figure only once it is the larger of the two, and say so in the
+note. (Until 2026-09-08 `status.json` was the laggard by construction, reporting
+13.5% / 558 against a page saying 14.0% / 579. It is now the fresher of the two
+-- 17.8% / 755 -- which is the case that rule was written to handle.)
 
 ## What the render does each morning
 

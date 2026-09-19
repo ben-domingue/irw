@@ -3,6 +3,7 @@ table,instrument,mean_word,mean_character,mean_character_responses,FK_grade
 360emergencymed_azami_2024,Clinical Performance (360-degree Evaluation Instrument),16.7818181818182,112.654545454545,16.25,12.2943934567531
 abdullah_2024_bsq_sev24,Bloating Severity Questionnaire (BSQ) -- Malay version (BSQ-M): Severity in Past 24 Hours subscale (Sev24),19.8214285714286,100.071428571429,2,7.74612290862291
 abdullah_2024_bsq_sevgen,Bloating Severity Questionnaire (BSQ) -- Malay version (BSQ-M): General Severity subscale (SevGen),12.2068965517241,66.5172413793103,2,5.47068965517241
+abdullah_2024_hpbbloat_stress,"Health Promoting Behaviour for Bloating (HPB-Bloat) scale, Stress Management subscale",10.6666666666667,59.3333333333333,7,5.16375
 abouhashish_2025_chatgpt_attitudes,"ChatGPT Knowledge, Perceptions, Attitudes, and Concerns Questionnaire (researcher-developed)",9.175,54.55,10.2,8.56019669618529
 abukhalaf_2025_disaster_prep,"Storm preparedness intention scale (researcher-developed, hurricane preparedness questionnaire)",4.33333333333333,23.3333333333333,2,62.8723076923077
 ada_boredom_bieleke2022,Dealing with boredom scale,8.2,39,14.4285714285714,3.00556097560976
@@ -27,10 +28,12 @@ alcoholstroop_jones2024,"Alcohol Stroop Task (novel online dataset; Jones, Petro
 alexander_2017_dsi,"Differentiation of Self Inventory (DSI) -- Emotional Reactivity and Emotional Cutoff subscales (Skowron & Friedlander, 1998)",12,63.4782608695652,7.33333333333333,6.40521739130435
 algner2022_cse,"Core Self-Evaluations Scale (German version: G-CSES; Heilmann & Jonas, 2010)",8.16666666666667,42.5833333333333,10.2,3.97051020408163
 algner2022_mimi16,MIMI-16 (Microinsults and Microinvalidations against women in the workplace),12.4375,72.5625,7,8.2354993718593
+algner2022_oss,"Occupational Self-Efficacy Scale - Short Form (OSS-SF; Rigotti, Schyns, & Mohr, 2008)",9.66666666666667,45.6666666666667,6.33333333333333,4.25241379310345
 algner2022_uwes,"Utrecht Work Engagement Scale-9, German version (UWES-9; Schaufeli & Bakker, 2003; Sautier et al., 2015)",6.88888888888889,40.7777777777778,7.42857142857143,4.98698924731183
 ali_2021_gad7,"GAD-7 (Generalized Anxiety Disorder 7-item scale; Spitzer et al., 2006)",6.42857142857143,37.8571428571429,15.25,6.84603174603175
 ali_2021_iesr,"Impact of Event Scale-Revised (IES-R; Weiss & Marmar, 1997)",8.54545454545454,43.8636363636364,10.4,4.24299422799423
 ali_2021_isi,"Insomnia Severity Index (ISI; Morin et al., 2011)",12.0333333333333,80.2,10.2333333333333,8.96726747720365
+ali_2021_phq9,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)",12,69.2222222222222,15.25,7.13456603773585
 ali_2021_spfi,"Stanford Professional Fulfillment Index (SPFI; Trockel et al., 2018)",6.6875,40.25,10.65,6.05361111111111
 alkouri_2025_coping,"Coping Behavior Inventory (CBI) (Sheu et al., 2002)",7.73684210526316,45.6315789473684,7.2,6.37158610812746
 alkouri_2025_icu_stressors,"Perceived Stress Scale (PSS) -- ICU/clinical placement stressor subscale (Sheu et al., 1997)",9.3448275862069,61.9655172413793,7.2,9.69507316452475
@@ -74,10 +77,16 @@ amatus_cipora_2024_tai,"The AMATUS Dataset: Arithmetic Performance, Mathematics 
 american_multiracial_face,American Multiracial Faces Database (AMFD) face-rating norming task,24.3386756642767,171.305356389709,14.2760438633488,16.752658516512
 an_2020_efl_self_regulated,Technology-based Self-regulated English Learning Strategies Scale (TSELSS) survey battery (Q1-Q26 TSELSS; Q27-Q33 English learning enjoyment/environment items; Q34-Q49 English Language Self-Efficacy Questionnaire),1.10204081632653,20.0612244897959,2.85714285714286,0.535906987330247
 andrich_mudfold,Andrich's attitude scale towards capital punishment,12.125,67.75,6.5,8.48101804123711
+anh_2026_ai_adoption,Artificial intelligence (AI) use scale,1,2,7.4,-3.4
+anh_2026_digitaltrust,Digital Trust (DT),1,2,7.4,-3.4
 anh_2026_finbehavior,Financial Behavior scale (Anh 2026; nine items based on Shih et al.),10,51.6666666666667,7.4,5.59948717948718
+anh_2026_finliteracy,Financial literacy,1,2,7.4,-3.4
+anh_2026_finsocialization,Family Financial Socialisation scale (Anh 2026; seven items adapted from Fan & Park),1,2,7.4,-3.4
+anh_2026_finwellbeing,"Financial well-being (FW) scale, adopted from Mahdzan et al.",1,2,7.4,-3.4
 anjum_2022_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),6.5,38.3333333333333,16,7.21679487179487
 AOMT_BR_SF_EDPANAB_Geiger_2021_AOT,Actively Open-Minded Thinking Scale,12.0714285714286,72.0714285714286,14.6,8.38886306001691
 AOMT_BR_SF_EDPANAB_Geiger_2021_BRS,"Bullshit Receptivity Scale and Motivational Statements (Pennycook et al., 2015)",12,67.55,16.6,6.15619834710744
+APFCompact_Ptacek_2024_DASS-21,Depression Anxiety Stress Scales - 21 Items (DASS-21),9.66666666666667,50.5238095238095,44.75,5.94592334494774
 aps_vangsness_2019,Active Procrastination Scale,12.5,67.125,17.6,6.041
 arnulf_2022_general_knowledge,General Knowledge Test (short form),7.25,38.6666666666667,8,3.51336206896552
 arora2025_blueq_pedagogical,Blended Learning Usability Evaluation-Questionnaire (BLUE-Q),16.8,105.4,8.5,9.50352941176471
@@ -120,6 +129,9 @@ boudreau_2022_police_reform,Support for police-reform proposals (statewide law-e
 boyd_prism_2024,Parasocial Relationships in Social Media (PRISM) survey,9.27272727272727,48.5909090909091,14,3.92515734265734
 bps_boredom_bieleke2022,Boredom proneness scale,11.5,59.75,14.4285714285714,5.6921370967742
 brain_hemisphere,Open Hemispheric Brain Dominance Scale (OHBDS),6.65,33.7,4.8,3.50575563909774
+brand_raffaelli_2024_familiarity_24,"Brand/logo familiarity ratings (Study 3, 2024)",11,60,6,3.71818181818182
+brand_raffaelli_2024_liking_20,"Brand/logo liking ratings (Study 1, 2020)",11,58,3,2.64545454545454
+brand_raffaelli_2024_liking_24,"Brand/logo liking ratings (Study 3, 2024)",11,58,3,2.64545454545455
 brederecke_2020_phq4,"Patient Health Questionnaire-4 (PHQ-4), German version",5.75,37.75,16.75,43.89
 brederecke_2020_sis,"Self-Image Scale, German version (SIS-D)",14.2727272727273,88.8181818181818,7.4,5.10578388677191
 broadband_inventories,Analog to Multiple Broadband Inventories (AMBI),7.0828729281768,35.3370165745856,11.7142857142857,3.82896628285227
@@ -141,6 +153,20 @@ buzgova_2023_lsita,"Life Satisfaction Index for the Third Age - Short Form (LSIT
 buzgova_2023_rses,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.0801568627451
 buzgova_2023_soc,"Sense of Coherence Scale, 13-item short form (SOC-13; Antonovsky's Orientation to Life Questionnaire)",14.0769230769231,75.3846153846154,6.56043956043956,5.49428571428572
 cacciatore_2021_crisis_care_satisfaction,"Defining and Understanding Social Support in Grief survey (Cacciatore et al., 2021): crisis care satisfaction items",2.11111111111111,16.5555555555556,20.8,9.46666666666667
+cacciatore_2021_isel,"Interpersonal Support Evaluation List, 12-item version (ISEL-12), adapted to a bereavement context",18,89.9166666666667,14.5,7.0145737327189
+cacciatore_2021_ongoing_satisfaction,Satisfaction with ongoing social support after traumatic grief (study-designed survey item set),1.88888888888889,14.6666666666667,20.8,6.97017543859649
+campos_2023_oes,Orofacial Esthetic Scale (OES),1,2,4.45454545454545,-3.4
+campos_2023_pidaq,"Psychosocial Impact of Dental Aesthetics Questionnaire (PIDAQ), 24-item version of Campos et al. (2020)",1,2,14.8,-3.4
+campos_2023_swls,Satisfaction with Life Scale (SWLS),1,2,14.4285714285714,-3.4
+carney_2023_substance_use,"WHO ASSIST (Alcohol, Smoking and Substance Involvement Screening Test), with the alcohol indicator from the AUDIT (Alcohol Use Disorders Identification Test)",12.5,75.75,30.6875,9.227
+carver_2017_puggs_pilot1_attitudes,"Public Understanding of Genetics and Genomics Survey (PUGGS), initial version used in the first pilot study — Section 4: Attitudes towards applications of genetics and genomics",1,2,11,-3.4
+carver_2017_puggs_pilot1_det_core,"Public Understanding and Attitudes towards Genetics and Genomics Survey (PUGGS), initial version used in the first pilot study — Section 2 Part 2: degree of genetic determinism",1,2,11,-3.4
+carver_2017_puggs_pilot1_genom_know,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, initial version used in the first pilot study — Section 3: Principles of genomics",1,2,11,-3.4
+carver_2017_puggs_pilot1_traits,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) Questionnaire, initial version used in the first pilot study — Section 2 Part 1: Table of Traits",1,2,59,-3.4
+carver_2017_puggs_pilot2_attitudes,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 5: Attitudes towards applications of modern genetics and genomics (second pilot version)",1,2,11,-3.4
+carver_2017_puggs_pilot2_det_core,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 3: Knowledge about gene-environment interaction (second pilot version)",1,2,4.5,-3.4
+carver_2017_puggs_pilot2_genom_know,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 4: Knowledge about modern genetics and genomics (second pilot / final version)",1,NA,NaN,NA
+carver_2017_puggs_pilot2_traits,"Public Understanding and Attitudes towards Genetics and Genomics (PUGGS) questionnaire, Section 2: Belief in genetic determinism",1,2,58.6,-3.4
 cbi_rodriguez_2021,Brief form of creative behavior inventory,10.8214285714286,66.0714285714286,15.5,6.30367692126356
 ccapsvtskhpacr_mercedes_2023_beck,Beck Depression Inventory(Beck),2.14285714285714,15.7619047619048,49.0952380952381,10.891367781155
 ccapsvtskhpacr_mercedes_2023_hada,Hospital Anxiety and Depression Scale(HADA and HADD),8.5,41.4285714285714,17.25,2.89642857142857
@@ -149,21 +175,109 @@ ccapsvtskhpacr_mercedes_2023_sf,Short Form 12 Health Survey Questionnaire(SF12),
 ccapsvtskhpacr_mercedes_2023_tsk,Spanish version of The Tampa Scale for Kinesiophobia (TSK),13.8823529411765,80.2941176470588,8.25,8.57813886210222
 cdm_mentalhealth_tan_2023_bsi,"Cognitive Diagnosis Modeling for characterizing mental health symptom profiles, Brief Symptom Inventory (BSI)",4.76470588235294,29.3529411764706,10.4,5.3521859114016
 cdm_mentalhealth_tan_2023_rapi,"Cognitive Diagnosis Modeling for characterizing mental health symptom profiles, Rutgers Alcohol Problem Index (RAPI)",9.30434782608696,49.3478260869565,10.2,4.63589191385616
+chatton2024_honos13,"Health of the Nation Outcome Scales, 13-item version (HoNOS-13)",1,2,26.4,-3.4
+chen2022_cls,Children's Loneliness Scale (CLS),1,2,15.4,-3.4
+chen2022_ses,"Rosenberg Self-Esteem Scale (SES), Chinese adaptation (Ji and Yu, 1999)",10.2,46.4,2,3.0801568627451
+chen2022b_selfesteem,"Rosenberg Self-Esteem Scale (SES), Chinese version (Ji and Yu, 1999)",1,2,2,-3.4
+chen2022b_socsupport,Multidimensional Scale of Perceived Social Support (MSPSS),10.75,51.5833333333333,15.1428571428571,3.6040503875969
+chen_2021_acculturation,"Bidimensional Acculturation Scale for Marriage-Based Immigrant Women (BAS-MBIW), acculturation subscale",1,2,6.2,-3.4
+chen_2021_enculturation,Bidimensional Acculturation Scale for Marriage-Based Immigrant Women (BAS-MBIW) - enculturation subscale,1,2,6.2,-3.4
 chen_2022_sasc,Smartphone Addiction Scale for College Students (SAS-C),12.8636363636364,69.2272727272727,10.4,6.93455342902712
 chile_2023_social-welfare-survey_ee,Chile CASEN education questions,10.6756756756757,55.2432432432432,5.86486486486486,6.31832364009579
 chile_2023_social-welfare-survey_f,NA,7.35514018691589,45.3551401869159,5.5981308411215,8.8640196042839
 chile_2023_social-welfare-survey_g,Chile CASEN environmental quality ratings,9.98275862068965,62.0689655172414,6.03448275862069,8.78514114704306
 chile_2023_social-welfare-survey_h,Chile CASEN community safety ratings,13,69.9393939393939,6.62121212121212,5.4746386946387
 chile_2023_social-welfare-survey_oo,Chile CASEN work/occupation questions,11.3543307086614,61.0314960629921,11.5511811023622,4.0009365301988
+chile_2023_social-welfare-survey_rr,"Encuesta de Bienestar Social 2023 (EBS 2023), Subsecretaría de Evaluación Social / Instituto Nacional de Estadísticas, Chile",9.93636363636364,54.7818181818182,5.12727272727273,4.95768826258807
+chile_2023_social-welfare-survey_ss,"Encuesta de Bienestar Social 2023 (EBS 2023), Subsecretaría de Evaluación Social / Instituto Nacional de Estadísticas, Chile",9.375,51.6111111111111,9.68055555555556,4.93587962962963
+chile_2023_social-welfare-survey_u,"Encuesta de Bienestar Social 2023 (EBS 2023), Subsecretaría de Evaluación Social / Instituto Nacional de Estadísticas, Chile",11.5846599131693,57.6222865412446,2.27351664254703,3.54792992078938
+chinvararak_2021_phq15,"Patient Health Questionnaire-15: Physical Symptoms (PHQ-15), Thai administration",1,2,9.66666666666667,-3.4
+choy_2022_extraneous_events,Extraneous Events scale,15,94,6.5,11.0558606557377
+chuemchit_2024_nonpartner_violence,"Interview survey questionnaire, Section 4 (General Safety): non-intimate partner violence module, adapted from the WHO multi-country study on women's health and domestic violence",1,2,2.5,-3.4
+chuemchit_2024_partner_violence,"Survey with Women Migrant Workers (Chuemchit et al. 2024; UN Women and College of Public Health Sciences, Chulalongkorn University) - partner violence module",1,2,2.5,-3.4
+cinar_tanriverdi_2023_gad7,"Yaygın Anksiyete Bozukluğu-7 (YAB-7) [Generalized Anxiety Disorder-7 (GAD-7), Turkish adaptation]",6.42857142857143,37.8571428571429,15.5,6.84603174603175
 close_relationships,Experiences in Close Relationships Scale (ECR),11.3333333333333,60.3611111111111,14,6.17752032520325
+COACH_Chen_2022_ADL,Activities of Daily Living (ADL),1.57142857142857,12.7142857142857,15.5,13.9864935064935
+COACH_Chen_2022_CSQ,"Consultation Satisfaction Questionnaire (CSQ; Baker 1990 short form), labelled ""Customer Satisfaction Questionnaire"" in the study codebook",10.375,57.5,10.2,6.34547619047619
 coach_chen_2022_hdrs,Hamilton Depression Rating Scale,4.17391304347826,32.0724637681159,45.9275362318841,13.8945073287047
+COACH_Chen_2022_IADL,"Lawton Instrumental Activities of Daily Living (IADL) Scale, Hong Kong Chinese version (Tong & Man, 2002)",2.46875,18.65625,47.375,14.2006606012658
+COACH_Chen_2022_MOS_SSS_C,"Medical Outcomes Study Social Support Survey, Chinese version (MOS-SSS-C)",9.31578947368421,49.1052631578947,16.6,4.37649122807018
 coach_chen_2022_phq9,Patient Health Questionnaire-9,11.7777777777778,68.7777777777778,15.25,7.13456603773585
+cogcontrol_gyurkovics_2019_flanker,Flanker task (four-alternative arrow version),1,5,8,NA
+cogcontrol_gyurkovics_2019_sart,Sustained Attention to Response Task (SART),1,1,8,-3.4
+cogcontrol_gyurkovics_2019_simon,Simon task (four-alternative arrow version),4.5,27.25,8,36.09
+cognitive_load_klimova_2023_mlq,"Meaning in Life Questionnaire (MLQ), Russian administration",1,2,10.6428571428571,-3.4
+colomer_perez_2021_soc13,"Sense of Coherence Scale, 13-item short form (SOC-13; Antonovsky's Orientation to Life Questionnaire)",1,2,6.56043956043956,-3.4
 condon_2024_sapa_personality,SAPA Personality Inventory (SPI-135-27&5),4.95555555555556,28.4444444444444,17.3333333333333,4.68646337817638
+conner_2017_bfi,Big Five Inventory (BFI-44),4.38636363636364,25.6363636363636,10.2,6.54140720678285
+conner_2017_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),6.4,30.15,42.75,2.209125
+conner_2017_curiosity,Curiosity and Exploration Inventory-II (CEI-II),12.2,67,13,8.22209836065574
+conner_2017_lot,"Life Orientation Test - Revised (LOT-R; 6 scored items), 7-point agree/disagree scale as administered in Conner et al. (2017), baseline and follow-up combined",8.83333333333333,44.5,19,4.77575471698113
+conner_2017_vitality,"Modified 4-item energy/fatigue (Vitality) scale of the RAND 36-Item Short Form Survey (SF-36), adapted for daily administration (rated for ""today"") in Conner et al. (2017); the first item was changed from the original ""full of pep"" to ""full of life""",5.5,24,17.5,-0.035909090909092
+consideration_future_consequences,"Consideration of Future Consequences Scale (CFCS; Strathman, Gleicher, Boninger & Edwards, 1994), openpsychometrics.org raw-data release",19.5,111.833333333333,21.4,11.33
+conspiracy_asd__cognitive_flexibility,Cognitive Flexibility Inventory (CFI),12.1,72.75,11.7142857142857,9.93203909465021
+conspiracy_asd__conspiracy_gcbs,Generic Conspiracy Beliefs Scale,15.4666666666667,98.2,8,10.9855021097046
+conspiracy_asd__schizotypy,Multidimensional Schizotypy Scale-Brief (MSS-B),12.9459459459459,70.1351351351351,18.4,6.72695945945946
+conspiracy_asd__thinking_styles,"Thinking Styles (Rational-Experiential Inventory, 10-item short form; REI-10)",11.5,64.6,7.4,7.15934782608696
+content_literacy_intervention_g1,"Model of Reading Engagement (MORE) student outcome battery: Me and My Reading Profile reading motivation survey, science vocabulary knowledge depth assessment, and social studies vocabulary knowledge depth assessment",2.67857142857143,10.75,4.44444444444444,-1.2769126984127
+cooper_2018_funny_topics,Humor survey: subjects students find funny (Cooper et al. 2018),3.41176470588235,21.5294117647059,10,95.54
+cooper_2018_offensive_topics,Humor survey: offensive joke subjects checklist,3.41176470588235,21.5294117647059,10,95.54
+cordova2019_clinical_edu_environment,"Postgraduate Hospital Educational Environment Measure (PHEEM), Spanish version adapted for physiotherapy interns (Cordova-Leon, Fernandez-Huerta & Rojas-Vargas, 2019) -- dictionary Description says 'DREEM-based' but this is PHEEM, a related but distinct Roff-family environment measure; worth correcting.",10.1,70.9,10.4,15.2294547511312
+cormier_2024_cognitive_decline,Subjective Cognitive Function (SCF) questionnaire,14,80.1666666666667,2.5,8.69380952380952
+cormier_2024_personality,"Big Five Inventory-2 Extra-Short Form (BFI-2-XS), with one embedded attention-check item",9.1875,49.1875,16.2,5.57271683673469
+cormier_2024_phq4,PHQ-4,18.5,99.25,15.25,7.88986486486487
+cormier_2024_pss4,Perceived Stress Scale-4 (PSS-4),18.75,100.25,9.6,7.61316666666667
+corti_2023_academic_adaptation,First Trimester Assessment Questionnaire (FTAQ),6.57142857142857,37.8571428571429,2,6.98155279503106
+cox_2024_feedback_perceptions,Feedback perceptions questionnaire,11.8,75.8,9,10.412
+CPDMMC_Kunnari_2020_HCD,"High-Conflict Moral Dilemmas (Greene et al., 2004 battery)",22.75,120.166666666667,7,10.3259489051095
+CPDMMC_Kunnari_2020_PDP,Process Dissociation Moral Dilemmas,17.0555555555556,94.2222222222222,11,9.39690938511327
+CQTMS_Hur_2023,"Character Qualities Test for Medical Students (SPHER3C), 160-item preliminary form",4.26875,19.7625,10.2,2.15943914714495
 criticalperiod_syntax,"Which English? grammaticality-judgment quiz (Hartshorne, Tenenbaum & Pinker, 2018)",3.09473684210526,15.5684210526316,10.8631578947368,3.32414965986395
+cucchi_2018_kims,Kentucky Inventory of Mindfulness Skills (KIMS) - Describing and Acting with Awareness subscales,15.3333333333333,80.6666666666667,16,6.97415151515152
+cucchi_2018_pts,"Interpersonal Reactivity Index (IRI; Davis, 1983), Perspective Taking subscale (7 items)",16.2857142857143,87.2857142857143,23.5,7.52984962406015
+cucchi_2018_rfq,Reflective Functioning Questionnaire (RFQ),9.625,46.75,14.4285714285714,3.64167207792208
+cucchi_2018_scoff,SCOFF questionnaire,11.4,58,2.5,4.17529824561403
+cugmas_2021_elderly_social_support,Egocentric social support network name generators with relationship-type name interpreter (Questionnaire on Social Support Networks during the Coronavirus Pandemic),1.1875,8.125,2,36.0973684210526
+CV_OASIS_ODSIS_PPE_Novak_2020_BFI,"Big Five Inventory (BFI-44), Neuroticism subscale",1,2,6.2,-3.4
+CV_OASIS_ODSIS_PPE_Novak_2020_RSES,Rosenberg Self-Esteem Scale (RSES),1,2,11,-3.4
+dahlstrom_2022_scoare,Evaluation of the SCOARE (Scientific Communication Advances Research Excellence) Workshop post-workshop evaluation survey,8.25,60.35,3.25,12.157196969697
+daiku_2021_dirty_dozen,"Dark Triad Dirty Dozen, Japanese version (DTDD-J)",8.08333333333333,38.0833333333333,4.6,3.49858247422681
+dalky_2020_sf36,SF-36 Health Survey (Arabic version),1,2,15.5205479452055,-3.4
+dasilva_2019_hexaco24,Brief HEXACO Inventory (BHI),6.83333333333333,34.9166666666667,16.2,4.27134146341463
+dass_Thiyagarajan2022,"Depression, Anxiety and Stress Scale - 21 Items (DASS-21)",1,2,13.5,-3.4
+dd_rotation,"Mental rotation task (10 binary items), Kievit (2010); see Borst, Kievit, Thompson & Kosslyn (2011)",4,26.7,6,9.57
+de_vries_2022_bat_burnout_core,"Burnout Assessment Tool (BAT) – core symptoms, work-related version",10.0434782608696,49.8695652173913,5,5.38842838321099
+de_vries_2022_bat_secondary,"Burnout Assessment Tool (BAT), secondary symptoms scale (work-related version)",6.4,35.1,5,3.79006060606061
+debacker_2018_decisionjustification,Decision justifications,10.25,65.25,2,8.55384146341463
+decamp_2022_online_discussion,"Online Teaching Practices Instrument (DeCamp et al., 2022): discussion facilitation contributions",12.0833333333333,87.1666666666667,6.2,13.5362931034483
+deilkas_2019_patient_safety_climate,"Safety Attitudes Questionnaire - Ambulatory Version (SAQ-AV), Norwegian version for GP practices",1,2,13.8,-3.4
+dejesus_2017_lequesne,Lequesne Functional Index (Índice Funcional de Lequesne),6.52380952380952,35.2619047619048,22.3571428571429,3.44844629822732
+dejesus_2017_sf36,"SF-36 (Medical Outcomes Study 36-Item Short-Form Health Survey), Brazilian Portuguese version",10.0857142857143,60.9571428571429,16.9571428571429,6.76212545528126
 depression_anxiety_stress,"Depression Anxiety Stress Scales (DASS-42), Ten Item Personality Inventory (TIPI), and a 16-word vocabulary checklist",6.78148148148148,39.1518518518519,34.2814814814815,6.70743902327995
+derubeis_2017_arsq,"Adult Rejection Sensitivity Questionnaire (ARSQ), German version",17.75,93.425,7.25,6.96872375690608
+di_riso_2025_mask_emotion,Ad Hoc Socio-Demographic Interview - Emotions experienced when wearing face masks,1,2,8.2,-3.4
+dinic_2025_shortdarktriad,Short Dark Triad (SD3),8.59259259259259,45.962962962963,7.4,5.00335249042146
+direkvand_2022_mjsi,Iranian Midwives Job Satisfaction Instrument (MJSI),1,2,2,-3.4
+DMCT_Addis_2020_PSIQ,Plymouth Sensory Imagery Questionnaire (Psi-Q),2.94285714285714,14.4285714285714,6.09090909090909,442.433398058252
+donati_2021_cfq7,"Cognitive Fusion Questionnaire-7 (CFQ-7), Italian version",12,60.7142857142857,15.8571428571429,4.97159663865547
+dong_2025_teacher_leadership,Survey Questionnaire on the Current Situation of Leadership among Primary and Secondary School Teachers in Xinjiang Uygur Autonomous Region,13.6875,94.9375,19.8,12.4070454545455
+dopmeijer_2022_loneliness,De Jong Gierveld Loneliness Scale (11-item),1,2,11.4,-3.4
+dou2025_area,"Aesthetic Responsiveness Assessment (AReA), Chinese revised 12-item version (Peng & Chen, 2023)",12.75,70.1666666666667,7.4,8.27792483660131
 double_marking_steele_2022,Exploring the Value of Double Marking in Dissertation Assessments,1,9.09259259259259,92.3333333333333,59.5262962962963
-dumas_Organisciak_2022,NA,1,4.7,7.4,20.43
+doustmohammadian_2017_fnlit,Food and Nutrition Literacy (FNLIT) scale for elementary school children (58-item validation form),10.3448275862069,60.3275862068966,5.76206896551724,7.53002405773857
+dpt_noncog__emotional_intelligence,Schutte Self Report Emotional Intelligence Test (SSEIT),11.3571428571429,60.5714285714286,7.4,6.49339285714285
+dpt_noncog__intolerance_of_uncertainty,Intolerance of Uncertainty Scale (IUS-27; 16-item selection),9.5,53.1875,28.6,6.04789473684211
+duboz_2021_swls,Satisfaction With Life Scale (SWLS),1,2,14.4285714285714,-3.4
+dudasova_2021_cpc12,"Compound Psychological Capital Scale (CPC-12), Czech translation",9.33333333333333,45.8333333333333,14,4.38035714285714
+dudasova_2021_cpc12_study3,Compound Psychological Capital Scale (CPC-12),12.1666666666667,60.1666666666667,6.5,5.48102739726028
+dudasova_2021_gratitude,Gratitude Questionnaire-Six Item Form (GQ-6),1,2,11.7142857142857,-3.4
+dudasova_2021_swls,Satisfaction With Life Scale (SWLS),1,2,14.4285714285714,-3.4
+dulger2024_wordcompletion,Scenario Completion Task and Memory Recognition Task (word-fragment completion component),1,8.23333333333333,19,54.4166666666667
 dumas_organisciak_2022,NA,1,4.7,7.4,20.43
+dumas_Organisciak_2022,NA,1,4.7,7.4,20.43
+dussel_2022_pcl17,"PTSD Checklist (PCL), 17-item DSM-IV version",1,2,10.4,-3.4
+dvivdtws_ppmial_marcatto_2023_dtw,"Dark Tetrad at Work (DTW) scale, Italian version",8.40909090909091,42.9090909090909,2,4.20954545454546
+dwyer_2019_clinton_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),6.3,30.85,42.25,2.22573015873016
 eammi_grahe_2018_american_dream,American Dream Beliefs,8.66666666666667,50,6.6,7.75923076923077
 eammi_grahe_2018_belong,Need to Belong,10.9166666666667,53,7.5,4.90798056904927
 eammi_grahe_2018_disability_identity,Disability Identity,7.8,43.0666666666667,7.4,8.12721367521368
@@ -180,21 +294,63 @@ eammi_grahe_2018_stress,Perceived Stress,9.08333333333333,54,4.83333333333333,36
 eammi_grahe_2018_support,Perceived Social Support,10.5384615384615,50.6923076923077,7.34065934065934,4.02162408759124
 eammi_grahe_2018_swb,Subjective Well-Being,8.5,41.8333333333333,5.85714285714286,2.76692307692308
 eammi_grahe_2018_transgressions,Interpersonal Transgressions,5.5,31,4.28571428571429,63.2427272727273
+ecps_sahm_2024_distrust,COVIDiSTRESS Global Survey Round II: Anti-expert sentiment,11.8461538461538,64.3076923076923,11.7142857142857,5.87726708074534
+ecps_sahm_2024_dtl,COVIDiSTRESS Global Survey Round II: Resilience,10.0298507462687,51.7462686567164,18.0149253731343,4.38536302288264
+ecps_sahm_2024_emotion,COVIDiSTRESS Global Survey Round II: Emotion regulation (ERQ short form),13.75,72.625,6.57142857142857,7.25795454545455
+ecps_sahm_2024_ia,COVIDiSTRESS Global Survey Round II: Information acquisition,4.85714285714286,35.1428571428571,3.6,10.9454621848739
+ecps_sahm_2024_identity,COVIDiSTRESS Global Survey Round II: Group identification,6,32.25,11.7142857142857,10.35
+ecps_sahm_2024_moral,COVIDiSTRESS Global Survey Round II: Moral values,11.9090909090909,66,11.7142857142857,6.25912560721721
+ecps_sahm_2024_sscd,COVIDiSTRESS Global Survey Round II: Compliance with COVID-19 guidelines,12.375,73.8333333333333,7.85714285714286,7.47697368421053
+ecps_sahm_2024_stress,COVIDiSTRESS Global Survey Round II: Perceived Stress Scale,7.86861313868613,47.5109489051095,14.978102189781,6.75651993988044
+ecps_sahm_2024_support,COVIDiSTRESS Global Survey Round II: Perceived social support,11.3333333333333,47,11.7142857142857,2.01823529411765
+ecps_sahm_2024_trust,COVIDiSTRESS Global Survey Round II: Trust in institutions,6.28571428571429,40.7142857142857,3.36363636363636,7.10825396825397
+ecps_sahm_2024_vaccine,COVIDiSTRESS Global Survey Round II: Vaccine willingness,13.2553191489362,78.2978723404255,11.3404255319149,7.96628812199037
 eeedprm_bulut_2021,Rosenberg Self-Esteem Scale,10.2,46.4,11,3.0801568627451
+EEN_Lacey_2024_Children,Destigmatizing Mental Health in Nepal - adolescent phone survey,8.41463414634146,49.9024390243902,14.390243902439,5.41766323498929
+EEN_Lacey_2024_Parent,"Parent (adult respondent) survey, Lacey et al. (2024), 'Can destigmatizing mental health increase willingness to seek help? Experimental evidence from Nepal'",18.4285714285714,107.792207792208,12.1818181818182,9.32572586188185
+ellis_2016_calc_instrprac,Characteristics of Successful Programs in College Calculus (CSPCC) Calculus I end-of-semester student survey - instructor classroom practices (Q19),12.625,86,4.66666666666667,8.58642156862745
+ellis_2016_calc_instrqual,"MAA Characteristics of Successful Programs in College Calculus (CSPCC) End-of-Semester Student Survey, Question 18 (instructor quality)",10.625,76.125,12.5,12.4313970588235
 emidy2024_fevs,2022 U.S. Office of Personnel Management Federal Employee Viewpoint Survey (OPM FEVS),10.4623655913978,65.6021505376344,13.7935483870968,10.6810519731976
+emobank_buechel_2017,"EmoBank crowdsourced VAD annotation task (5-point Self-Assessment Manikin: Pleasure, Arousal, Control)",115,773.833333333333,12.8666666666667,9.78664285714286
 emsc_kuan-chin_2023,Communication Skills,1.85714285714286,16.1428571428571,53.9047619047619,17.8112087912088
+enem_2023_1mil_ch,ENEM 2023 — Prova de Ciências Humanas e suas Tecnologias,1,2,39.48,-3.4
+enem_2023_1mil_cn,ENEM 2023 — Prova de Ciências da Natureza e suas Tecnologias,1,2,27.4,-3.4
+enem_2023_1mil_lc,"ENEM 2023 — Prova de Linguagens, Códigos e suas Tecnologias",1,2,56.476,-3.4
+enem_2023_1mil_mt,ENEM 2023 — Prova de Matemática e suas Tecnologias,1,2,22.9409090909091,-3.4
+enkavi_2019_ant_flanker,"Attention Network Task (ANT), expfactory `attention_network_task` implementation used in the Self-Regulation Ontology battery",19.25,75.625,8,4.36567961165049
+enkavi_2019_gonogo,"Go-Nogo Task, expfactory `go_nogo` implementation used in the Self-Regulation Ontology battery",1,2,8,-3.4
+enkavi_2019_navon,"Local-Global Letter Task (Navon global-local letter task), Self-Regulation Ontology battery",14,77,8,7.57
+enkavi_2019_simon,Simon Task,1,2,8,-3.4
+enkavi_2019_stopsignal,"Stop-Signal Task, expfactory `stop_signal` implementation used in the Self-Regulation Ontology battery",1,2,8,-3.4
+enkavi_2019_stroop,"Stroop task (color-word interference), expfactory `stroop` implementation used in the Self-Regulation Ontology battery",5,24,8,0.52
+environment_ltm,"Environment section, British Social Attitudes Survey 1990 (ltm package `Environment` data set)",4.33333333333333,29.5,16.6666666666667,8.33846153846154
+esiason_2024_ace,Adverse Childhood Experiences (ACE) Questionnaire,28.7,146.5,2.5,6.74687590937435
+esiason_2024_cfq,Cognitive Fusion Questionnaire (CFQ13),12.8461538461538,66.6153846153846,13.5714285714286,5.81547619047619
 estcrm_epia,Eysenck Personality Inventory Impulsivity Subscale,7.6,40.6,2.02702702702703,2.88276923076923
+estcrm_selfeff,"Teaching Self-Efficacy Scale (Kan, 2009)",10.3809523809524,85.2482269503546,2,16.9946245224617
+estevezlopez_2016_panas,"Positive and Negative Affect Schedule (PANAS), Spanish version (Sandín et al., 1999)",1,7.4,13,13.71
 eurpar2_mudfold,Political party preference data from Europeans,3.66666666666667,32.6666666666667,2.5,23.3854545454545
+evans_2023_vaccination_norms,Pro-Vaccination Social Norms Scale,16.8,93.2,15.08,8.7205393258427
+evans_2023_vaccine_hesitancy,"Vaccine Hesitancy Index (five items reflecting the Five Cs framework, adapted from Betsch et al.'s 5C scale)",11.6,74.6,14,9.36526984126984
+evpromisi_stone_2021_cdiag,"Chronic diagnosis checklist (baseline participant characteristics, Ecological Validity of PROMIS Instruments study)",9.66666666666667,55.9166666666667,24,9.49284188034188
+extremera_2016_ei,"Wong and Law Emotional Intelligence Scale, Spanish version (WLEIS-S)",9.6875,49.25,20.7142857142857,5.68557692307692
+extremera_2016_sbq,Suicidal Behaviours Questionnaire—Revised (SBQ-R),1,2,27.695652173913,-3.4
+extremera_2016_swls,Satisfaction With Life Scale (SWLS),1,2,14.4285714285714,-3.4
 faces_spanish_vegas_2022_faces,Family Adaptability and Cohesion Evaluation Scale Package (FACES IV).,11.4047619047619,60.0714285714286,14.6,5.82816872762773
 faces_spanish_vegas_2022_fss,family satisfaction scale (fss),6.8,43.4,18,9.96788235294118
 facit_yount_2021_crqsasx,Shortness of breath scale,9,47.85,20.5,4.24924691358025
 facit_yount_2021_hadsx,Depression scale,8.5,41.4285714285714,16.25,2.89642857142857
 fad_dataset1,Data on free will and determinism,9.25925925925926,55.6296296296296,3.6,7.52936507936508
 fad_dataset2,"Data on free will and determinism, dualism/anti-reduction subscale (participants: (1) students in an online Intro to Psych course, (2) students in an in-person, university Intro to Psych course)",1,17.0847457627119,3.6,-0.00237288135593161
+FAD_fadplus_goto2021,"Free Will and Determinism-Plus, Japanese translation FAD-J (Goto et al. 2015)",9.40740740740741,56.7407407407407,5.4,7.48253968253968
+falih_2026_dass21,Depression Anxiety Stress Scales - 21 item version (DASS-21),9.66666666666667,50.3809523809524,45.25,5.94592334494774
+falih_2026_mds16,16-item Maladaptive Daydreaming Scale (MDS-16),27.1875,166.75,4.63636363636364,9.51429223744292
+fatima_2025_mslq,"Motivated Strategies for Learning Questionnaire (MSLQ), adapted for clinical clerkship",18.0246913580247,99.2839506172839,6.57142857142857,9.88242609115636
 fcv19s_hossain_2022__fear,Fear of COVID-19,9.85714285714286,62.2857142857143,11,9.60481203007519
 fcv19s_hossain_2022_anxiety,Measured with GAD-7 to assess anxiety,6.28571428571429,37.7142857142857,15.25,6.97506493506494
 fcv19s_hossain_2022_depression,"WHO-5 Well-Being Index to evaluate positive well-being, inversely indication depression",7.6,39.2,18.1666666666667,2.58978947368421
 fcv19s_hossain_2022_fear,Fear of COVID-19,9.85714285714286,62.2857142857143,11,9.60481203007519
+FEDSP_Trzcinska_2023_MonKnow,"Money knowledge measure, Family Economic Deprivation and Self-esteem among Preschoolers (Trzcińska, Faculty of Psychology, University of Warsaw)",14,62,2,18.8928571428571
 fedsp_trzcinska_2023_prd,Relative deprevation amongst children,15.4,77.8,6.5,6.20041558441558
 fedsp_trzcinska_2023_pspcsa,Self-esteem amongst children,4,21.0833333333333,13.4,93.0058333333333
 fedsp_trzcinska_2023_smsd,Material and social deprevation amongst children,2.69230769230769,18.3846153846154,11.5,8.10666666666667
@@ -214,7 +370,11 @@ ffm_opn,"The personality test was constructed with the ""Big-Five Factor Markers
 
 IPIP-FFM-data-8Nov2018.zip",5.5,30,10.2,6.93681818181818
 firstborn_personality,Data from a survey with personality items that correlate with being a firstborn child,5.78947368421053,29.2894736842105,4.8,3.85834928229665
+fisher_2019_belonging,California Alliance graduate student survey (sense of belonging items),14,88.5,2,13.47
+fisher_2019_preparedness,Perceived level of preparation,32.5,216.5,3.33333333333333,17.2771428571429
+fisher_2019_structure,"Perceived departmental structure (2 items, California Alliance survey of STEM PhD students)",10.5,76,2,66.4638095238095
 fisher_temperment,"Data from an online version of the Fisher Temperment Inventory, which is a measure of personality based on the idea that behavior is influenced by the dominance of neurotransmitters in the brain.",7.03846153846154,40.7662721893491,13.3136094674556,6.90386085815079
+FIVPEI_Perrig_2023_AttDiff,"AttrakDiff semantic differential (Hassenzahl), as administered in the PXI validation study (Perrig et al. 2023)",3.33333333333333,22.3333333333333,4.19047619047619,152.135102040816
 fivpei_perrig_2023_imi,Intrinsic Motivation Inventory,9.14285714285714,47.2857142857143,6.42857142857143,4.20071428571429
 fivpei_perrig_2023_pxi,Player Experience Inventory,8.96969696969697,44.030303030303,19.5714285714286,3.1365601965602
 florida_twins_auth,The Book Authors measure assesses a child's recognition of real authors and determines whether their knowledge comes from reading the authors' work.,2.08,12.96,24.75,6.56580971659919
@@ -239,12 +399,46 @@ florida_twins_media,"Part of ""Homework and Free Time"" measure which assesses s
 florida_twins_nes,The Neighborhood Environment Scale evaluates the safety and perceived danger of the home neighborhood.,14,74.2,12.25,3.21702816901409
 florida_twins_pals,"Patterns of Adaptive Learning Scales (PALS) assess students' perceptions of achievement goals and approaches set by parents, teachers, and classrooms, as well as any dissonance between home and school environments.",15.1388888888889,77.6666666666667,8.2,6.24957951070337
 florida_twins_panas,Positive and Negative Affect Scale (PANAS) measures the trait levels of both positive and negative emotional states.,2,10.95,13,5.18662162162163
+florida_twins_par,"My Parents Scale (based on Lamborn, Mounts, Steinberg & Dornbusch, 1991)",19.6917808219178,109.869863013699,8.28082191780822,12.4247972972973
 florida_twins_read,"""How do you feel about reading?"" measures interest and enjoyment in reading.",10.6111111111111,52.5185185185185,19.25,2.33606020942408
 florida_twins_sch,"""What My School is Like?"" evaluates students' perceptions of their school environment.",9.78947368421053,45.7368421052632,12.25,0.399048152295634
 florida_twins_tech,"Part of ""Homework and Free Time"" measure which assesses student’s preferred and projected future occupation and education level, use of technology and social media, parental monitoring of technology and media use.",8.72727272727273,52.7272727272727,6.85714285714286,8.70946969696969
 frac20,Data from fraction subtraction problems.,4.1,11.05,NA,-1.879
+fredrickson_2015_mhcsf,"Mental Health Continuum-Short Form (MHC-SF), adult version",8.71428571428571,48.7142857142857,14.1666666666667,288.557213114754
+frikha_2023_pe_acrs,Physical Education Autonomy Relatedness Competence Scale (PE-ARCS),7.08333333333333,32.0833333333333,8.2,2.30426470588235
+frikha_2023_pe_ms,Physical Education Motivation Scale (PE-MS),9.33333333333333,39.4444444444444,8.2,2.94047619047619
 ftna_kasper_2022,Tanzanian national school examinations: Primary School Leaving Examination (PSLE) and Form Two National Assessment (FTNA),1.09090909090909,8.45454545454546,1,18.2687878787879
+fukuda_2021_health_literacy,European Health Literacy Survey Questionnaire (HLS-EU-Q47),1,2,12.5,-3.4
+fukuda_2021_info_reliability,Reliability of health and medical information sources,1,2,12,-3.4
+fukuda_2021_withholding_behavior,Preventive practices questionnaire,1,2,2.5,-3.4
+gabriel_2026_knowledge_confidence,Agricultural knowledge statements: confidence in judgement (six-point subjective probability scale),1,2,10.3333333333333,-3.4
+gabriel_2026_media_use,Media use for information on agriculture and food,1,2,7.4,-3.4
+gad_BrummerHoffman_2021,Augmented GAD-7,6.57142857142857,37.1428571428571,17.1,5.18590062111801
+gan_2015_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),1,2,42.25,-3.4
+gan_2015_ucla_loneliness,"UCLA Loneliness Scale, 8-item short form (ULS-8; Hays & DiMatteo, 1987)",1,2,6.5,-3.4
+ganbat_2022_pollution_disease_risk,"Wintertime illness-related absenteeism questionnaire (Ulaanbaatar private-sector employees), Question 2 - diseases experienced during high air pollution periods",1,2,2,-3.4
+ganbat_2022_pollution_leave_type,"Wintertime illness-related absenteeism survey (Ulaanbaatar private sector), Q7: type of temporary leave",2.4,14.8,2,2.29666666666667
+ganbat_2022_pollution_symptoms,Ulaanbaatar wintertime absenteeism survey: common symptoms related to air pollution (Q1),4,26.5,2,4.77625
+gao2025_attachment_anxiety,"Experiences in Close Relationships-Relationship Structures (ECR-RS), child-target version, attachment anxiety subscale",1,2,11.7142857142857,-3.4
+gao2025_spiritual_wellbeing,Spirituality Index of Well-Being (SIWB),1,2,10.2,-3.4
+garciabatista_2021_erq,Emotion Regulation Questionnaire (ERQ),1,2,2,-3.4
+genpsych_russell_2024_gemma,AI-GENIE Big Five personality inventory (Gemma-2 generated),10.0357142857143,62.1785714285714,14,9.36236273512964
+genpsych_russell_2024_gpt3_5,AI-GENIE GPT-3.5 generated Big Five personality inventory,10.6774193548387,74.6129032258064,14,11.3993606335716
+genpsych_russell_2024_gpt4o,AI-GENIE GPT-4o generated Big Five personality inventory,8.34285714285714,46.0285714285714,14,6.11990833739639
+genpsych_russell_2024_llama3,"AI-GENIE Llama-3 Big Five personality inventory (Russell-Lasalandra, Christensen & Golino, 2024)",9.56666666666667,54.2333333333333,14,7.41094444444444
+genpsych_russell_2024_mixtral,AI-GENIE generated Big Five personality inventory (Mixtral-8x7B),9.6875,58.71875,14,9.08942307692308
 geography,slepemapy.cz adaptive geography practice (outline-map place identification),2.28326474622771,17.042524005487,67,10.8671991920397
+gerber_2022_altruism,"Adapted Self-Report Altruism Scale (14-item child/adolescent adaptation by Witt & Boleman of Rushton, Chrisjohn & Fekken's Self-Report Altruism Scale)",1,2,4.2,-3.4
+gerber_2022_eas_temperament,"EAS (Emotionality, Activity and Sociability) Temperament Survey, French version (Gasman et al., 2002), child self-report form",1,2,7.4,-3.4
+gesbert_2021_tdeq,"Talent Development Environment Questionnaire, French version (TDEQ-FV; French adaptation of the 5-factor TDEQ-5)",18,105.04,6.5,9.9981268722467
+ghanbari_2016_helma_access,"Health Literacy Measure for Adolescents (HELMA), pre-final 47-item version",12,64.1818181818182,7.4,8.13090909090909
+ghanbari_2016_helma_appraise,"Health Literacy Measure for Adolescents (HELMA), appraisal subscale",11.2,70.2,7.4,9.21728571428571
+ghanbari_2016_helma_comm,Health Literacy Measure for Adolescents (HELMA) - communication subscale,16.875,93.25,7.4,9.60699817518248
+ghanbari_2016_helma_numeracy,Health Literacy Measure for Adolescents (HELMA) - numeracy subscale,35.3333333333333,190,2,9.17928571428572
+ghanbari_2016_helma_reading,"Health Literacy Measure for Adolescents (HELMA), pre-final 47-item version",11.5,78,7.4,12.8971428571429
+ghanbari_2016_helma_understand,"Health Literacy Measure for Adolescents (HELMA), understanding subscale",13.6666666666667,89.3333333333333,7.4,13.2966666666667
+ghanbari_2016_helma_use,Health Literacy Measure for Adolescents (HELMA) - use subscale,10.6,57.2,7.4,5.91003773584906
+gholami_2017_periodontal_knowledge,Periodontal knowledge questionnaire (three-item subset of a validated ten-item instrument),1,2,4.5,-3.4
 gilbert_meta_1,Reading comprehension data from an RCT,9.5,54.7,40.4083333333333,6.45675438596492
 gilbert_meta_10,Reading self-concept following a literacy intervention,7.8,37.3,11.5666666666667,1.44558974358974
 gilbert_meta_100,Vocabulary test,7,38.6666666666667,6.41666666666667,3.57571428571429
@@ -258,11 +452,18 @@ gilbert_meta_107,"Attitudes toward gender roles and equality measured among Path
 gilbert_meta_108,Likert scale of food insecurity,7.75,41.25,6,4.33839285714286
 gilbert_meta_11,Vocabulary test following a literacy intervention for grade 1 students,7.04166666666667,39.625,6.125,4.05329142011835
 gilbert_meta_12,Vocabulary test following a literacy intervention for grade 2 students,10.0952380952381,53.0476190476191,5.70238095238095,1.87261455525606
+gilbert_meta_13,"Partnership Schools for Liberia student assessment, reading and English test (Romero, Sandefur & Sandholtz 2020)",4.94594594594595,23.8378378378378,2,1.04055826318121
+gilbert_meta_14,"Partnership Schools for Liberia student assessment, mathematics test (Romero, Sandefur & Sandholtz 2020)",3.31884057971015,10.5507246376812,2,-1.49007979407979
+gilbert_meta_16,"Study-administered mathematics achievement test (baseline, midline and endline)",13.4225352112676,69.5211267605634,2,3.7776598097766
 gilbert_meta_2,Reading comprehension data from an RCT,9.05,54.45,18.35,7.26424625098658
 gilbert_meta_22,Attitudes towards savings in an RCT,10.8125,54.9375,13.1875,5.47427384393064
+gilbert_meta_23,"Early elementary mathematics assessment assembled from the Certica item bank (Bang, Li & Flynn 2023)",13.2393162393162,63.2649572649573,2.25641025641026,1.94342050439471
 gilbert_meta_24,Dietary behavior in children in an RCT,4.07692307692308,22.1538461538462,2.5,2.88842105263158
 gilbert_meta_25,Food preferences in children in an RCT,1.4,9.53333333333333,10,9.11790476190476
 gilbert_meta_26,Food knowledge in children in an RCT,7.46666666666667,38.4666666666667,5.58888888888889,1.75592857142857
+gilbert_meta_27,"ASER mother language test (भाषा की जाँच), Banerji, Berry & Shotland maternal literacy and participation evaluation",11.9444444444444,66.7777777777778,3.25,5.61609547738693
+gilbert_meta_29,"ASER child language test (भाषा की जाँच), Banerji, Berry & Shotland maternal literacy and participation evaluation",13.6666666666667,76.2666666666667,3.2,5.9325925925926
+gilbert_meta_30,"Child ASER numeracy test, Bihar maternal-literacy evaluation (Banerji, Berry & Shotland 2017)",4.9,27.3,2,4.83537414965987
 gilbert_meta_31,Academic achievement in an RCT,8,53.6666666666667,NA,8.77990196078431
 gilbert_meta_33,Social trust in an RCT,6.90361445783132,40.4096385542169,10.7469879518072,6.61030623381626
 gilbert_meta_34,Depression in an RCT,11.7777777777778,68.7777777777778,15.25,7.13456603773585
@@ -274,12 +475,14 @@ gilbert_meta_4,Measures of noncognitive skills in criminally engaged men,5.76923
 gilbert_meta_40,Computation in an RCT,4.3,16.45,1.28571428571429,0.703080246913583
 gilbert_meta_42,Mental health in an RCT,7.17647058823529,42.4117647058824,8.66176470588235,7.23565573770492
 gilbert_meta_44,Mental health in an RCT,7.46153846153846,39.5846153846154,7.4,3.32907216494846
+gilbert_meta_45,Maslach Burnout Inventory -- Human Services Survey (MBI-HSS; Maslach & Jackson 1981),3.2803738317757,16.5046728971963,18.6355140186916,3.50458556962695
 gilbert_meta_49,Psychological Distress (SRQ-20) in an RCT,6.3,33.35,2.5,3.44319047619048
 gilbert_meta_50,Parenting beliefs in an RCT,12.1818181818182,75.0909090909091,NA,8.47457199734572
 gilbert_meta_51,Feeding practices in an RCT,3,18.8571428571429,NA,19.27
 gilbert_meta_52,COVID symptons in an RCT,3,21.7272727272727,NA,36.09
 gilbert_meta_53,Women's empowerment in an RCT,8.53658536585366,42.6341463414634,7.39024390243902,3.51755400696864
 gilbert_meta_54,Consent in an RCT,17.1666666666667,84.8333333333333,19.75,7.0292718446602
+gilbert_meta_55,"Endline learning assessment test (Bangla literacy, English literacy, and numeracy)",43.1333333333333,212.533333333333,2,4.73852923861853
 gilbert_meta_56,Literacy in an RCT,30.25,145.5,2,1.10776859504132
 gilbert_meta_57,Depression (PHQ-9) in an RCT,11.7777777777778,68.7777777777778,15.25,7.13456603773585
 gilbert_meta_58,Depression (SCID) in an RCT,7.15384615384615,49.3846153846154,2.5,8.13618279569893
@@ -291,7 +494,11 @@ gilbert_meta_63,Indebtedness in an RCT,3.5,21.75,2.5,9.375
 gilbert_meta_64,Socioemotional learning in an RCT,9.58536585365854,59.6585365853659,23.3414634146341,3.77533117558664
 gilbert_meta_65,Mental health literacy in an RCT,10.1428571428571,58.6428571428571,10,7.1047619047619
 gilbert_meta_67,Mental Health Stigma in an RCT,14.75,78.25,20,6.1625
+gilbert_meta_68,"Written Hindi language test, Haryana arm (Banerjee et al. 2017 evaluation)",4.57142857142857,28.5714285714286,2,5.73660714285714
+gilbert_meta_69,"Written mathematics test, Haryana arm (Banerjee et al. 2017 evaluation)",2.8,20.4333333333333,2,7.33686138613861
 gilbert_meta_7,Vocabulary test following a reading intervention,10.0277777777778,53.1111111111111,6.33333333333333,2.2128000923361
+gilbert_meta_71,"Written mathematics test for standards 1-2, Bihar and Uttarakhand arm (Banerjee et al. 2017 evaluation)",1.7,3.9,2,-2.77303904923599
+gilbert_meta_73,Written mathematics test for standards 3-5 (Banerjee et al. 2017 evaluation),2.86111111111111,19.6111111111111,2,6.16333333333333
 gilbert_meta_74,Assessment from a literacy intervention,10,52.6666666666667,4.94444444444444,2.175
 gilbert_meta_75,Measure of political engagement,7.1,43,2.5,62.0604225352113
 gilbert_meta_76,"Test of Early Mathematics Ability, third edition, or TEMA-3",24.3205128205128,129.217948717949,NA,3.25994233998056
@@ -317,7 +524,29 @@ gilbert_meta_96,AI attitudes,12.5,69,6.42857142857143,9.73833333333333
 gilbert_meta_97,Psychological capital,11.1666666666667,57.3333333333333,12.5,5.67246268656717
 gilbert_meta_98,Gratitude,15,72.1666666666667,11.7142857142857,5.86222222222223
 gilbert_meta_99,religiosity,15.5625,86.75,5.125,7.95989367219917
+girma_2021_oslo3,Oslo Social Support Scale (OSSS-3),15.3571428571429,76.1428571428571,6,5.49230897009967
+girma_2021_phq9,"Patient Health Questionnaire-9 (PHQ-9; Kroenke, Spitzer & Williams, 2001)",1,2,15.25,-3.4
+gizaw_2023_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,15.25,-3.4
+gobbens_2018_adl,Groningen Activity Restriction Scale (GARS) - ADL subscale,1,2,64.5,-3.4
+gobbens_2018_iadl,"Groningen Activity Restriction Scale (GARS), IADL subscale",1,2,64.5,-3.4
+gomez_2022_qcae,Questionnaire of Cognitive and Affective Empathy (QCAE),13.6774193548387,70.1612903225806,15.5,6.52579732197201
+gordils_2021_behavioral_avoidance,"Behavioral Avoidance Scale (Lackey, 2012), adapted",15.9090909090909,87,5.85714285714286,6.79740259740259
+gordils_2021_discrimination,Everyday Discrimination Scale (adapted: perceived ZIP-code-level racial discrimination),6.88888888888889,42.5555555555556,4.57142857142857,5.14878787878788
+gordils_2021_intergroup_anxiety,"Perceived Intergroup Anxiety (four items adapted from Amodio, 2009, state affect measure)",15.5,87.5,6.71428571428571,7.58403225806452
+gordils_2021_interracial_comp,Perceived Racial Competition (adapted from Murayama and Elliot's five-item perceived competition scale),16.4,88,5.14285714285714,5.77185365853659
+gordils_2021_interracial_trust,"Perceived Interracial Trust (adapted from the General Trust Scale; Yamagishi & Yamagishi, 1994)",14,73.5,5.14285714285714,5.04142857142857
 gps_vangsness_2019,Lay’s General Procrastination Scale,12.875,69,17.6,7.41765776699029
+gpt4mcq_young_2025,"ChatGPT-4-generated multiple-choice quiz on the reading 'Love, Friendship, and Social Support'",12.05,83.65,58.4125,11.3907653061225
+grandahl_2017_hpv_beliefs,Beliefs about HPV and HPV vaccine - questions based on the Health Belief Model,1,2,16.2,-3.4
+gumus_2025_dietarian_identity,"Dietarian Identity Questionnaire (DIQ), Turkish version (Beslenme Kimliği Anketi – Türkçe, BKA-T)",14.3333333333333,79.4242424242424,16.4285714285714,9.37975067126966
+habibi_2021_meim,"Multigroup Ethnic Identity Measure (MEIM), 12-item Persian version",14.25,73.9166666666667,7,6.3908918128655
+han_2015_peer_assisted_learning,"Anatomy Dissection Course Questionnaire, Section B (self-assessment of upper-limb dissection learning objectives)",12.1666666666667,73.8333333333333,10,8.69362244897959
+han_2026_gad7,"Generalized Anxiety Disorder-7 (GAD-7) as administered in the Jiangsu elderly survey: GAD01-GAD06 are GAD-7 items, GAD07 is a study-specific loss-of-interest item scored in the GAD-7 total",10.6296296296296,70.6296296296296,13.0740740740741,11.6210607820364
+han_2026_isi,Insomnia Severity Index (ISI-7),7.71428571428571,46,5.31428571428571,4.7425
+han_2026_phq9,Patient Health Questionnaire-9 (PHQ-9),9.66666666666667,59,14,7.22621722846442
+hayek_2022_attitude,Attitude toward getting good academic grades (I-Change Model socio-cognitive questionnaire),10.75,58.5,14,3.69552325581396
+hayek_2022_self_efficacy,Self-efficacy towards getting good academic grades (I-Change model socio-cognitive questionnaire),12.4,58.8,14,4.66212903225806
+hayek_2022_subj_norm,Social norms towards getting good academic grades (I-Change Model socio-cognitive measures),9,48.3333333333333,14,6.27555555555555
 heard_roch_2022_cope,Coping scale asked of refugees,7.95833333333333,49.5,10.5,7.81125
 heard_roch_2022_idss,International Depression Symptom Scale (IDSS) asked of refugees,5.33333333333333,31.6666666666667,18,6.12416666666667
 heard_roch_2022_k6,KESS depression scale in last 2 weeks asked of refugees,38.5,180,16.6,6.94449344978166
@@ -328,38 +557,259 @@ heekerens2025_bfi_neuroticism,"Assesses openness to experience, imagination, and
 heekerens2025_bfi_openness,"Assesses openness to experience, imagination, and curiosity using the 2-item Openness subscale of the German BFI-10",5,27.5,18.6,23.61
 heekerens2025_dss,"Dissociative Symptoms Scale – German Version (G-DSS): Assesses moderately severe dissociative symptoms in the past week across four domains: Depersonalization/Derealization, Gaps in Awareness and Memory, Cognitive-Behavioral Reexperiencing, and Sensory Misperceptions",1,2,15,-3.4
 heekerens2025_sdq,Somatoform Dissociation Questionnaire – 20-item (German SDQ-20): Assesses somatoform dissociation (body-related dissociative phenomena) over the past 2 weeks,14.7,84.45,15.8,7.19652749140893
+hellstrom_2019_isi,Insomnia Severity Index (ISI),1,2,8.37142857142857,-3.4
+hewei_2022_msva_purchase,"MSVA clothing purchase questionnaire (media interactivity, perceived value, immersion experience, purchase intention)",11.7142857142857,68.5,7.4,7.67188311688312
+hicks_2020_bioveda,Biological Variation In Experimental Design And Analysis (BioVEDA) assessment,62.6875,361.5,8,7.97682460550202
 himmelstein-admc_raw-2025,"Adult Decision Making Competence (ADMC): the Resistance to Framing and Applying Decision Rules subtests, administered as part of the Forecasting Proficiency Test battery.",69.2435233160622,391.020725388601,6.78756476683938,8.69536605771132
 himmelstein-berlin_numeracy-2025,This dataset measures numeracy with the Berlin Numeracy Test.,51.25,261.25,NaN,6.51231924882629
 himmelstein-cognitive_reflection-2025,This dataset measures the tendency to override intuitive answers using the 7-item Cognitive Reflection Test (CRT).,36.4285714285714,178.714285714286,NaN,3.59467258794845
 himmelstein-impossible_question-2025,"This dataset measures accuracy on a two-alternative forced-choice general-knowledge task that also contains unanswerable ('impossible') questions, on which the correct response is to opt out.",10.6,60.9666666666667,2,6.68199414844472
 himmelstein-number_series-2025,This dataset measures accuracy on a number-series task where participants identify the next number in the sequence.,5.88888888888889,25.3333333333333,NaN,-1.10333333333333
+hirwa_2024_antibiotic_attitudes,"Attitudes towards antimicrobial use and antimicrobial resistance (Hirwa et al. 2024 cattle-farmer KAP questionnaire, part five)",1,2,6.66666666666667,-3.4
+hoorani_2022_child_help,"Young Lives child questionnaire (India, older cohort, round two): availability of someone to help",16,84.2,2.5,5.8425
+hoorani_2022_sp,"Young Lives Older Cohort Child Questionnaire (India), Round 3 - self-esteem pride items",8.5,42.5,11.2,2.67
+hori_2019_radiation_risk,"Radiation risk perception questionnaire for local government staff and schoolteachers living within the Urgent Protective Action Planning Zone of a nuclear power plant (Hori et al., 2019)",9.47619047619048,59.4761904761905,7.38095238095238,9.51174443646805
+horiuchi_2024_attachment,Attachment items used in Survey 1: 17 selected items from the Attachment Disorder Assessment Scale-Revised (ADAS-R) plus 3 additional attachment-related questions,1,2,1,-3.4
+horiuchi_2024_dissociation,"Child Dissociative Checklist (CDC), Version 3",1,2,14.3333333333333,-3.4
+horiuchi_2024_rsmsm,Rating Scale for Maladaptive Symptoms due to Maltreatment (RS-MSM),16.35,101.95,2,8.40909866468843
+hua_2023_efl_course_experience,"EFL Course Experience Questionnaire (EFL-CEQ), adapted from the Course Experience Questionnaire (CEQ)",11.3125,68.8125,3.8,7.90778846153846
+huang_2016_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),6.35,31,42.25,2.21720866141732
+huang_2023_d_scale,Index of Well-Being (幸福感指数量表),3.33333333333333,17.2222222222222,2.58730158730159,4.06666666666667
+hui_2024_gbfs,"General Benefit Finding Scale (GBFS), Chinese version (益处发现量表)",7.96428571428571,41.2857142857143,3.6,4.4488068545804
+humor_styles,Humor Styles Questionnaire (HSQ),16.4375,84.28125,17,7.84762119771863
 hypersensitive_narcissism,Hypersensitive Narcissism Scale (HSNS) and Dirty Dozen (DD),11.7272727272727,60.1363636363636,4.8,6.08906272022551
+iandolo_2021_asq,"Attachment Style Questionnaire (ASQ; Feeney, Noller & Hanrahan, 1994) -- Spanish version",10.225,53.275,2,5.50630745721272
+ibrahim_2015_sf36,"RAND 36-Item Health Survey 1.0 (MOS SF-36), developed at RAND as part of the Medical Outcomes Study",9.49655172413793,52.751724137931,15.0827586206897,5.25236250719956
 idas_machado2024,Brazilian Version of the Inventory of Depression and Anxiety Symptoms,7.6039603960396,43.8514851485149,8.27326732673267,10.4362357954545
 idcr_martinez_2023_story_recall_1,Recall based on visual feedback,2.90361445783133,15.0240963855422,NA,31.6528630705394
 idcr_martinez_2023_story_recall_2,Recall based on aural feedback,2.33333333333333,13.1458333333333,NA,31.1246428571429
 idcr_martinez_2023_story_recall_3,Recall based on shorter stories,1.46875,7.78125,NA,39.6487234042553
+IJLS_Eersel_2024_DenialAcceptance,Brief COPE -- denial and acceptance subscales (Dutch version),8,38.5,9.75,2.64875
+IJLS_Eersel_2024_IJLSreaction,Imminent Job Loss Scale (IJLS),12.1111111111111,60.1111111111111,6.2,5.48012232415902
+IJLS_Eersel_2024_Work,"Work attachment battery: work centrality (3 items), Utrecht Work Engagement Scale (UWES-9) dedication subscale (3 items), and affective organizational commitment subscale (3 items)",1,2,7.94117647058824,-3.4
+imos_1987,"28th International Mathematical Olympiad (IMO 1987), Havana, Cuba",54.1666666666667,248.833333333333,2,9.67047619047619
+imos_1988,"International Mathematical Olympiad 1988 (29th IMO, Canberra, Australia)",60.5,282,2,9.92810620300752
+imos_1989,"30th International Mathematical Olympiad (IMO 1989), Braunschweig, Germany",57.6666666666667,271.5,2,10.004603876949
+imos_1990,"31st International Mathematical Olympiad (IMO 1990), Beijing, China",53.1666666666667,268.166666666667,2,7.69260849492152
+imos_1991,"32nd International Mathematical Olympiad (IMO 1991), Sigtuna, Sweden",63.5,290,2,9.239003746594
+imos_1993,"34th International Mathematical Olympiad (IMO 1993), Istanbul, Turkiye",61.8333333333333,293.333333333333,2,8.66120866256951
+imos_1994,"35th International Mathematical Olympiad (IMO 1994), Hong Kong",58.8333333333333,266.833333333333,2,14.4351351351351
+imos_1996,"37th International Mathematical Olympiad (IMO 1996), Mumbai, India",61.8333333333333,290,2,8.4940625
+imos_1997,"38th International Mathematical Olympiad (IMO 1997), Mar del Plata, Argentina",78.5,360.333333333333,2,9.97173400305744
+imos_1999,"40th International Mathematical Olympiad (IMO 1999), Bucharest, Romania",49.1666666666667,247,2,8.89434065934066
+imos_2001,"42nd International Mathematical Olympiad (IMO 2001), Washington, DC, United States of America",46,208.833333333333,2,5.71061224489796
+imos_2004,"45th International Mathematical Olympiad (IMO 2004), Athens, Greece",59.5,299.5,2,10.5028260869565
+imos_2005,"46th International Mathematical Olympiad (IMO 2005), Mérida, Mexico",49.3333333333333,253,2,9.75917383820999
+imos_2006,"47th International Mathematical Olympiad (IMO 2006), Ljubljana, Slovenia",46.5,221.5,2,8.12653846153846
+imos_2008,"49th International Mathematical Olympiad (IMO 2008), Madrid, Spain",72.5,364,2,10.8365400843882
+imos_2009,"50th International Mathematical Olympiad (IMO 2009), Bremen, Germany",61.5,298.166666666667,2,10.0887045454545
+imos_2010,"51st International Mathematical Olympiad (IMO 2010), Astana, Kazakhstan",61.5,296.666666666667,2,6.59041982694157
+imos_2012,"53rd International Mathematical Olympiad (IMO 2012), Mar del Plata, Argentina",93.6666666666667,440.333333333333,2,8.26556722689076
+imos_2013,"54th International Mathematical Olympiad (IMO 2013), Santa Marta, Colombia",95.6666666666667,476.833333333333,2,10.8928378378378
+imos_2014,"55th International Mathematical Olympiad (IMO 2014), Cape Town, South Africa",70,353.166666666667,2,9.96683842473317
+imos_2015,"56th International Mathematical Olympiad (IMO 2015), Chiang Mai, Thailand",81,374,2,11.0352366863905
+imos_2017,"58th International Mathematical Olympiad (IMO 2017), Rio de Janeiro, Brazil",90,439.833333333333,2,9.28989589712186
+imps2025_hf,Hearts and Flowers task,1,2,8,-3.4
+ipip_openpsychometrics_as,International Personality Item Pool (IPIP) Assertiveness scale,5.8,28.4,14,3.15131034482759
+ipip_openpsychometrics_do,IPIP Dominance scale (CPI: Narcissism),5.9,31.9,14,4.911
 ips_vangsness_2019,Irrational Procrastination Scale,10.3333333333333,52.5555555555556,17.6,4.92801418439717
 isi_insomnia_wang2025,The Insomnia Severity Index (ISI),12.4285714285714,71.1428571428571,9.57142857142857,7.43185550082102
+iwasa_2016_dpssr,"Disgust Propensity and Sensitivity Scale-Revised, Japanese version (DPSS-R-J)",7.0625,38.6875,4,4.73464285714286
+iwasa_2016_padua_inventory,"Padua Inventory (Sanavio, 1988), 60-item version",15.4166666666667,83.2166666666667,7.2,7.50540291262136
+jablonska_2020_downward_comparison,"Identification-Contrast Scale (Van der Zee et al., 2000) reconfigured for Instagram use - downward comparison items",19.6666666666667,110.333333333333,21,9.88
+jablonska_2020_instagram_addiction,"Multidimensional Facebook Intensity Scale (Orosz, Tóth-Király & Bőthe 2016), adapted for Instagram; items 1-10 of the 13-item adaptation",9.7,52.5,21,5.83217525773196
+jablonska_2020_profile_grooming,"Instagram usage and social comparison questionnaire (Jabłońska & Zajdel, 2020) - profile grooming scale",7.66666666666667,47,21,8.94782608695652
+jablonska_2020_rses,Rosenberg Self-Esteem Scale,10.2,46.4,21,3.0801568627451
+jablonska_2020_swls,Satisfaction With Life Scale (SWLS),9.4,45.4,21,3.13982978723404
+jablonska_2020_upward_comparison,"Identification-Contrast Scale (Van der Zee et al., 2000) reconfigured for Instagram use - upward comparison items",22.8333333333333,127,21,11.0580656934307
+jaen_2024_odor_id,NIH Toolbox Odor Identification Test,27,138,8,9.36222222222223
+janoffbulman_2016_moralmotives_s1,Model of Moral Motives (MMM) Scale,14.5666666666667,83.7,5.85714285714286,9.16414479638009
+janoffbulman_2016_moralmotives_s2,Model of Moral Motives (MMM) Scale,14.6,83.6,5.85714285714286,9.10760045146727
+jeilani_2024_academic_stress,"Academic Stress Scale (adapted from the Student Stress Inventory, SSI; Arip et al.)",7.57142857142857,45.4285714285714,14,8.2911590296496
+jeilani_2024_psychological_wellbeing,Ryff Scales of Psychological Well-Being (autonomy items),15.5,79.5,14,7.2033870967742
+jeilani_2024_self_efficacy,General Self-Efficacy Scale (GSE),12.2,64.8,14,8.16666666666667
+jeon_2019_cbi,Korean version of the Copenhagen Burnout Inventory (CBI-K),11.2105263157895,60.5263157894737,19.2,5.12482826785273
+jeon_2019_cesd10,Korean version of the 10-item short-form Center for Epidemiological Studies Depression (CESD-10) scale,1,2,40.75,-3.4
+jiang_2021_resilience,Individual resilience questionnaire based on earthquake disaster from the perspective of nursing,14.9411764705882,88.5882352941177,4.6,8.44218487394958
+jiang_2024_growthm,"Growth mindset scale (Chinese; study questionnaire section 10, adapted from Mesler et al. 2021)",10.4,48.2,4.42857142857143,2.98907692307693
+jiang_2024_instituinteg,"Institutional integrity scale (Chinese; study questionnaire section 4, from Ash & Schreiner 2016)",12,78.4,4.42857142857143,11.1166666666667
+jiang_2024_ptsacc,"Student Perceptions of Teacher Support (Metheny et al., 2008) - Accessible subscale",14.6666666666667,78,4.33333333333333,6.75727272727273
+jimenezherrera_2022_moral_sensitivity,"Moral Sensitivity Questionnaire, Spanish version (MSQ-SPV; Spanish adaptation of Lützén's Moral Sensitivity Questionnaire)",18.3333333333333,96.4444444444444,2,8.72363636363636
+jo_2023_arp,"Affective Risk Perception (3 items, adapted from Brug et al. 2004)",7.66666666666667,48.3333333333333,2,7.30538461538461
+jo_2023_cfs,"Cabin Fever Syndrome scale (Jo & Baek, 2023)",9.33333333333333,63.6666666666667,2,8.93172413793103
+jo_2023_crp,Cognitive Risk Perception scale,10.5,60,2,6.33847826086956
+jo_2023_pbc,Perceived Behavioral Control (adapted from Ajzen's Theory of Planned Behavior),13.3333333333333,84.6666666666667,2,10.8558139534884
+jo_2023_sni,"Social Networking Intensity (3 items, adapted from Eid & Al-Jabri 2016)",12,86.6666666666667,2,10.9620512820513
+jo_2023_sno,"Subjective Norms (3-item scale adapted from Ajzen 1991, Theory of Planned Behavior)",17,104,2,10.8781481481481
+johannisson_2016_ipip_neo,IPIP-NEO-120 (120-item International Personality Item Pool representation of the NEO-PI-R),4.55833333333333,26.2583333333333,19.8,4.54570246800731
+johnhenderson_2020_health_mindset,Health Mindset Scale,15,78.6666666666667,6.5,4.94444444444445
+jordan_2020_burnout,"Copenhagen Burnout Inventory (personal burnout items and four work-related burnout items, school/work adaptation)",9.4,50.2,8.8,4.73732989690722
+jordan_2020_mindfulness,"Five Facet Mindfulness Questionnaire (FFMQ), 12-item short-form selection",15.6666666666667,82.75,17,7.40404255319149
+jordan_2020_resilience,Brief Resilience Scale (BRS),11,56.1666666666667,10.2,3.91126865671642
+jung_2018_media_use,"Health-related media use (past week), 5-item media-use battery (question B3)",1,2,13.3333333333333,-3.4
+jutte_2024_loneliness,Three items from the revised UCLA Loneliness Scale,1,2,4.28571428571429,-3.4
+jutte_2024_personality,"Single-item Big Five personality measure (after Rammstedt et al., 2013, BFI-10)",1,2,5.85714285714286,-3.4
+K-PCQ_Huh_2022,Korean version of the Pornography Craving Questionnaire (K-PCQ),10.1666666666667,51.4166666666667,8.71428571428571,2.49631147540984
+kalichman1995_scs,Sexual Compulsivity Scale (SCS),11.7,62.6,16.25,6.32000854700855
 karajko2025_ai_benefit,"Percepcije o vještačkoj inteligenciji (VI) građana BiH -- P7, procjena koliko se VI koristi po sektorima",8,68,7.2,14.6587361419069
 karajko2025_ai_governance,"Percepcije o vještačkoj inteligenciji (VI) građana BiH -- P12, koraci za povećanje povjerenja u VI",21.5,146.333333333333,11.2,16.46
 karajko2025_ai_risk,"Percepcije o vještačkoj inteligenciji (VI) građana BiH -- P8, stav prema korištenju VI po sektorima",8,68,13,14.6587361419069
 karajko2025_ai_trust,"Percepcije o vještačkoj inteligenciji (VI) građana BiH -- P14, povjerenje u subjekte",5.16666666666667,46.8333333333333,7.2,17.5082352941176
+karpudewan_2022_stp_cca,STEM Teaching Practices Questionnaire (29-item version),8.79310344827586,59.6551724137931,2,11.0070629276801
+karpudewan_2022_stp_efa,STEM Teaching Practices Questionnaire (33-item exploratory-factor-analysis version),7.84848484848485,52.6666666666667,5.75,10.4615952629746
 kfcovid_fear_li2020,Fear of COVID,9.71428571428571,62.4285714285714,14,9.82857142857143
+kfcovid_Li2020,COVID-19 knowledge questionnaire (twelve true/false items adapted from Zhong et al. 2020),15,93.1666666666667,2,9.640625
 kfcovid_pss_li2020,Perceived stress scale,19,101.5,9.6,7.70191558441558
+khattak_2026_attitude,Attitude towards BLS and CPR (Section Three of the study's BLS/CPR survey questionnaire),8.75,52.25,6.5,9.0625
+khattak_2026_cr,"Clinical Readiness & Emergency Response Capacity (BLS/CPR survey questionnaire, Khattak et al. 2026)",8.25,46.75,2.5,7.03964285714286
+kim2020_ams,Aging Males' Symptoms (AMS) scale,11.0588235294118,77.0588235294118,2.6,10.4480392156863
+kim_2023_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),1,2,15.25,-3.4
+kim_2023_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,15.25,-3.4
+kim_2025_isi,"Insomnia Severity Index (ISI), Korean version",1,2,12.0571428571429,-3.4
+kim_2025_psas,Korean version of the Pre-Sleep Arousal Scale (K-PSAS-16),1,2,8.2,-3.4
+kiraly_2024_perinatal_mh_freq,"Perinatal mental health identification and support practices survey (Kiraly, Boyle-Duke & Shklarski, 2024) - behavioral frequency items",14.625,86.4375,11.6,9.60459651898734
+kiraly_2024_perinatal_mh_symptoms,"Perinatal mental health identification and support practices survey (Kiraly, Boyle-Duke & Shklarski, 2024) - symptom identification checklist",4.26315789473684,27.0526315789474,2.5,7.63312540610787
+kitayama_2022_hweat,Japanese version of the Healthy Work Environment Assessment Tool (HWE-AT-J),26.1666666666667,179.388888888889,2,15.1352773109244
+knight_2026_crt,Cognitive Reflection Test (7-item),33.4285714285714,165.428571428571,8,4.96083333333333
+koirala_2024_brief_cope,"Brief COPE (Carver, 1997)",10.1071428571429,56.6071428571429,21,5.66126139817629
+kokoszka_2022_hamd,"Hamilton Depression Rating Scale, 17-item version (HDRS-17 / HAM-D)",1,2,44.6756756756757,-3.4
+komura_2026_gqs_animacy,"Godspeed Questionnaire Series (GQS), Animacy subscale",1,2,4,-3.4
+komura_2026_gqs_anthropomorphism,Godspeed Questionnaire Series (GQS): Anthropomorphism,1,2,4.68,-3.4
+komura_2026_gqs_likeability,Godspeed Questionnaire Series (GQS): Likeability,1,2,3.96,-3.4
+komura_2026_gqs_perceived_intelligence,Godspeed Questionnaire Series (GQS): Perceived Intelligence,1,2,5.64,-3.4
+komura_2026_gqs_perceived_safety,"Godspeed Questionnaire Series (GQS), Perceived Safety subscale",1,2,3.86666666666667,-3.4
+komura_2026_mdmt_capable,Multi-Dimensional Measure of Trust (MDMT): Capability,1,2,4.25,-3.4
+komura_2026_mdmt_ethical,"Multi-Dimensional Measure of Trust (MDMT), Ethical subscale",1,2,4.25,-3.4
+komura_2026_mdmt_reliable,"Multi-Dimensional Measure of Trust (MDMT), Reliable subscale",1,2,4.25,-3.4
+komura_2026_mdmt_sincere,"Multi-Dimensional Measure of Trust (MDMT), Sincere subscale",1,2,3.42857142857143,-3.4
+konerding_2019_patientsatisfaction,Universal short patient satisfaction questionnaire based on SERVQUAL,9.71428571428571,71.4285714285714,6.06122448979592,12.912987012987
+KoreanNursing_Park_2017,"Korean Nursing Licensing Examination mock examination: 50 case-based items (Park et al., 2017)",1,2,8,-3.4
+kraft_todd_2017_competence,"Warmth/competence scale (competence items), adapted from Fiske et al. 2002",1,10.2,6,27.28
+kraft_todd_2017_panas,Positive and Negative Affect Schedule (PANAS),1,7.4,13,13.71
+kraft_todd_2017_warmth,Warmth subscale of the warmth/competence scale (adapted from Fiske et al. 2002),1.25,7.75,5,6.1375
+kuczyk_2024_facemask_fba,"Questionnaire on expectations and experiences with wearing face masks in inpatient and day hospitals, pre-version (expectations), with the general mask-attitude validity items",1,2,15,-3.4
+kuczyk_2024_facemask_fbe,"Questionnaire on expectations and experiences with wearing face masks, post-version (experiences)",1,2,15,-3.4
+kuehner_2017_mw_rumination,Ambulatory assessment single-item measures of mind wandering (MW) and perceived uncontrollability of rumination (RUM),1,2,5.21428571428571,-3.4
 kushnir2017_anrt,"Attitudes toward Nicotine Replacement Therapy (ANRT), 12 items",10.6666666666667,61.1666666666667,16,5.90125
+kushnir2017_bfi,Big Five Inventory (BFI-44),4.38636363636364,25.6363636363636,17.6,6.54140720678285
+kushnir2017_ftnd,Fagerström Test for Nicotine Dependence (FTND),13.625,70,9.1875,5.42099770642202
+laksmita_2020_mspss,"Multidimensional Scale of Perceived Social Support (MSPSS), Indonesian version",1,2,15.1428571428571,-3.4
+latifi_2026_insect_fear,Insect Fear Questionnaire for School-Aged Children,1,2,9.075,-3.4
 lee2024_relative_clause,"Comprehension test for relative clauses (Appendix A), English relative-clause types",15.1666666666667,81,2,3.45614385614386
+lee_2024_panas,"Positive and Negative Affect Schedule (PANAS), Korean version (Park & Lee, 2016)",1,2,5,-3.4
+lee_2025_nursing_exam,"2023 Women's Health Nursing final examination, 4th-year first semester, Korean baccalaureate nursing programme",39.32,276.72,8,11.3010143755615
+leon_guereno_2020_breq,"Cuestionario de Regulación de la Conducta en el Ejercicio (BREQ-3), Spanish 23-item version (González-Cutre, Sicilia y Fernández, 2010)",8.39130434782609,45.7391304347826,8,6.81817213842059
+lessR_Mach4,Mach IV (Machiavellianism scale),13.15,69.55,12.5,6.18412737642586
 lhsbrasil_couto_2023_lhs,"Learned Helplessness Scale. The LHS can be used to measure states of learned helplessness and consists of 20 items, answered on a four-point scale (1 = Strongly disagree; 4 = Strongly agree).",13.85,67.6,11,5.8331582733813
 lhsbrasil_couto_2023_pss,"Perceived Stress Scale (PSS-10). The PSS measures the perception of individual stress in a global form, independent of stressor agents",12.9,62.4,9.6,194.146868686869
 lhsbrasil_couto_2023_ses,Rosenberg’s Self-Esteem Scale (SES). The SES is a unidimensional measurement that assesses global self-esteem through 10 items responded on a four-point scale,10.3,45.4,11,2.9765145631068
+li_2021_cultural_intelligence,"Cultural Intelligence Scale (CQS), 12-item short version (Bucker, Furrer & Lin)",1,2,2,-3.4
+li_2021_knowledge_sharing,"Knowledge Sharing (KS) scale (Faraj & Sproull, 2000; as applied by Srivastava, Bartol & Locke, 2006)",1,2,2,-3.4
+li_2021_sustainable_innov_behav,"Sustainable Innovation Behavior scale, adapted from the Innovation Behavior Scale (Scott & Bruce, 1994)",1,2,2,-3.4
+li_2024_bdyz,"Expressive Suppression subscale of the Emotion Regulation Questionnaire (ERQ; Gross & John, 2003), Chinese version (Zhao et al., 2015)",1,2,5.85714285714286,-3.4
+li_2025_corporate_performance,Corporate Performance (PERF) scale,1,2,13.6666666666667,-3.4
+li_2025_market_environment,Market Environment (ME) scale,7.8,52.8,13,9.84174358974359
+li_2025_marketing_culture,Marketing Culture (MC) scale,13.2,95,13,13.9404776119403
+li_2025_marketing_exploitation,Marketing Exploitation (PLOI) scale,14.2,108.8,13,17.8691267605634
+li_2025_marketing_exploration,Marketing Exploration (PLOR) scale,15.6,111.6,13.6666666666667,14.4707341772152
+li_2025_marketing_learning,Marketing Learning (ML),1,2,13,-3.4
+li_2025_marketing_operation,"Marketing Operations (MO) scale, Li et al. (2025) sustainable marketing capability questionnaire",13,93.4,13,13.8731515151515
+li_2025_policy_environment,Policy Environment (PE) scale,11.4,85.4,13,15.5612631578947
+li_2025_socmedia_ewom,"Electronic word-of-mouth scale (Xu et al., 2024)",16.3333333333333,119.5,3.2,13.8281481481481
+li_2025_socmedia_infoquality,"Information quality scale (Idkhan & Idris, 2023)",11.6666666666667,77,3.2,13.5714285714286
+li_2025_socmedia_revisit,"Revisit intention scale (Nazarian et al., 2024)",12.6666666666667,69.3333333333333,3.2,8.2921052631579
+li_2025_socmedia_satisfaction,"Satisfaction scale (Idkhan & Idris, 2023)",11.5,69.25,3.2,10.1863043478261
+li_2025_socmedia_usefulness,"Perceived usefulness scale (Al-Adwan et al., 2023)",12.25,76.25,3.2,11.3426020408163
+li_2026_imi_teq,"Chinese IMI-TEQ questionnaire (Intrinsic Motivation Inventory - Task Evaluation Questionnaire, items 1-22; plus 10 learning-fulfillment items and 2 system-usability items)",1,2,2,-3.4
+liang_2026_extrinsic_motivation,Exercise motivation questionnaire (Campus Sports World) - Extrinsic Motivation subscale,1,2,8.75,-3.4
+liang_2026_intrinsic_motivation,Exercise motivation questionnaire (Campus Sports World) - Intrinsic Motivation subscale,1,2,8.75,-3.4
+liem_2024_attitude_env,"Attitude toward the environment (revised New Ecological Paradigm scale; Dunlap, Van Liere, Mertig & Jones, 2000)",1,2,7.4,-3.4
+lindstrom2021_collective_narcissism,"Collective Narcissism Scale (7 items adapted to Hammarby Football Club; Golec de Zavala et al., 2009)",10.7142857142857,63.7142857142857,19.7142857142857,7.94057142857143
+liu_2017_ssrs_support,Social Support Rating Scale (SSRS; 社会支持评定量表),29.265306122449,175.591836734694,6.83673469387755,5.680452375414
+liu_2018_gse,General Self-Efficacy Scale (GSES),1,2,13.25,-3.4
+liu_2018_lot_r,Life Orientation Test-Revised (LOT-R),1,2,17,-3.4
+liu_2018_panas,Positive and Negative Affect Scale (PANAS),1,2,13,-3.4
+liu_2022_fragreading_cdq,Cognitive Development Questionnaire (Section III of the Questionnaire on the new media reading behavior of university students),13.4545454545455,73.9090909090909,4,8.39375921375921
+liu_2022_fragreading_frq,Fragmented Reading Questionnaire (FRQ),17.0909090909091,89.7272727272727,4,7.76384366327475
+liu_2022_mice_skills,"MICE employability skills questionnaire (Liu, Seevers & Lin, 2022)",1,2,7.2,-3.4
+liu_2023_adherence_barrier,"Hypertension doctors' medication adherence questionnaire (Liu et al., 2023), Q26 barriers checklist",2.85714285714286,21.8571428571429,3,9.77207792207792
+liu_2023_adherence_tools,"Hypertension doctors' medication adherence questionnaire (Liu et al., 2023), Q13: awareness of medication-adherence assessment tools",4,30,3.8,13.3307692307692
+liu_2023_improve_adherence,"Hypertension doctors' medication adherence questionnaire (Liu et al., 2023), Q19: interventions used to improve patient medication adherence",6.28571428571429,47.2857142857143,2,10.6285714285714
+liu_2023_perceived_control,Perceived Behavioral Control toward agricultural products’ regional public brand,1,2,7.4,-3.4
+liu_2023_poor_adherence,"Hypertension doctors' medication adherence questionnaire (Liu et al., 2023), Q16 poor-adherence situations checklist",4,29.5,3,12.52
+liu_2023_purchase_intention,Purchase Intention toward agricultural products' regional public brand (3 items adapted from Sun et al. 2022 and Ajzen 2020),1,2,7.4,-3.4
+liu_2023_training_freq,Liu et al. (2023) hypertension medication adherence questionnaire - training received (question 12),3.33333333333333,29.8333333333333,2,18.75
+liu_2025_classroom_interaction,Classroom Interaction Scale,1,2,7.4,-3.4
+liu_2025_foreign_lang_enjoyment,"Foreign Language Enjoyment Scale, short form (S-FLES; Botes, Dewaele & Greiff)",1,2,7.4,-3.4
+liu_2025_learning_motivation,"Learning Motivation Questionnaire (LMQ; compiled by Wang W., 2006)",15.875,85.875,8.2,8.76581692913386
+liu_2025_nlgz,"Perceived competence scale (4 items, adopted from Guan, Xiang, Land & Hamilton, 2023)",1,2,2,-3.4
+liu_2025_positive_cognition,"Attention to Positive and Negative Information Inventory, Chinese version (APNI; Noguchi, Gohm & Dalsky 2006; Chinese revision by Feng et al. 2015) -- Attention to Positive Information subscale, 12 items",11.3333333333333,58.75,14.2,6.61676470588235
+liu_2025_speaking_selfefficacy,"Speaking Self-Efficacy Scale (Wang & Sun), 14 items covering four dimensions: linguistic (items 1-5), self-regulatory (6-8), delivery (9-10), performance (11-14)",1,2,7.4,-3.4
+liu_2025_willingness_communicate,"Willingness to Communicate in English Scale (Peng & Woodrow, 2010), 10 items",1,2,7.4,-3.4
+liu_2025_ydcy,Physical Activity Rating Scale-3 (PARS-3; items YDCY2-YDCY4) plus one leisure-time sweat-frequency item (YDCY5),1,2,40.2941176470588,-3.4
+lorenz_2016_efficacy1,"Skala zur Allgemeinen Selbstwirksamkeitserwartung (SWE) / General Self-Efficacy Scale (GSE), 10 items",12.8,67.6,6.5,7.47075
+lorenz_2016_hope,"State Hope Scale (SHS), 6 items",7,31,6.5,1.46857142857143
+lorenz_2016_optimism2,"Life-Orientation-Test - Revised (LOT-R), deutsche Version / Life Orientation Test-Revised, German version, 10 items",7.8,38.8,6.5,4.09302564102564
 lshs-e_quidaja_2022,Online and paper forms of the Launay-Slade Hallucinations scale,17.25,98.3125,19.4,13.4572199820789
+lu_2017_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),1,2,15.25,-3.4
+lu_2017_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,15.25,-3.4
+lunacortes_2019_satisfaction,"Satisfaction scale (McCollough et al., 2000)",1,2,5.57142857142857,-3.4
+lunacortes_2019_social_value,"Perceived Social Value [PSV] (Sweeney and Soutar 2001), tourism adaptation, 3 items",1,2,5.57142857142857,-3.4
+luo_2021_conational_ties,"Multi-Dimensional Support Scale (MDSS), modified: co-national friends",19.75,115.75,3.75,8.99406626506024
+ly_2021_animal_empathy,Self-reported emotional response to farm-animal procedure videos (Ly & Weary 2021),1,6.28571428571429,4.36363636363636,6.71428571428572
 lys_2020_rape_1_rma,Rape myth acceptance ratings for the study 1 of the rape myth acceptance scale paper,14.9473684210526,76.6315789473684,15.5,5.55515864128406
 lys_2020_rape_2_rma,Rape myth acceptance ratings for the study 2 of the rape myth acceptance scale paper,14.9473684210526,76.6315789473684,15.5,5.55515864128406
 lys_2020_rape_2_rma_pre,"Rape myth acceptance ratings for the study 2 of the rape myth acceptance scale paper, but the ratings are for the study 1 results (previous answers of participants)",14.9473684210526,76.6315789473684,15.5,5.55515864128406
 lys_2020_rape_3_asi,Ambivalent Sexism Inventory ratings for study 3 of the rape myth acceptance scale paper,12.9090909090909,70.9090909090909,16.1666666666667,8.01708066581306
+lys_2020_rape_3_diff,Beliefs in Origins of Gender Differences Questionnaire (Studzinska & Wojciszke 2014),13.9230769230769,86,2,9.52839779005525
+lys_2020_rape_3_kpnts,Social Dominance Scale (Sidanius & Pratto 1999; Polish adaptation Klebaniuk 2010),10.5625,58.9375,19.8,5.28677144970414
 lys_2020_rape_3_rma,Rape myth acceptance ratings for the study 3 of the rape myth acceptance scale paper,14.9473684210526,76.6315789473684,15.5,5.55515864128406
+lys_2020_rape_3_rwa,Right-Wing Authoritarianism scale (Funke 2005; Polish adaptation Grzesiak-Feldman 2012),17.25,100.833333333333,2,9.02928229665072
+lys_2020_rape_3_sj,System Justification Scale (Kay & Jost 2003; Polish adaptation Klebaniuk 2010),8.75,49.25,19.8,7.71392857142857
+lys_2020_rape_3_unjust,"Unjust World Beliefs Scale ""What is the world?"" (Skrzypinska 2003)",10.1594202898551,60.0289855072464,2,8.18472740805061
+ma2021_sme_covid,Questionnaire of impact of COVID-19 on small and medium-sized enterprises,15.4285714285714,109.607142857143,2.71428571428571,13.5292038849801
+ma2026_bsmas,Bergen Social Media Addiction Scale (BSMAS),1,2,8.2,-3.4
+ma2026_sabas,Smartphone Application-Based Addiction Scale (SABAS),1,2,12.5,-3.4
+machado_2020_cat_separation,"Questionnaire for cat owners: identification of behavioral signals of separation related problems in domestic cats (Machado et al. 2020), separation-related behavior section, 7 items",1,2,2.5,-3.4
 machivallianism_test_main,MACH-IV,13.2,71.05,10.2,6.18527272727273
 machivallianism_test_tipi,Ten Item Personality Inventory (TIPI),2.5,23.9,17.5714285714286,17.6470769230769
 machivallianism_test_vcl,Vocabulary check-list (16-word validity check),1,6.8125,8,27.1275
+majeed_2024_luxury_purchase,"Online Luxury Purchase Intention Questionnaire (Majeed et al., 2024)",11.6774193548387,69.1290322580645,10.2,9.20667445412885
+makai_2023_entrepreneurial_transdanubia,"Entrepreneurial intention, external barriers and perceived university support and environment questionnaire (Makai & Dőry 2023); items adapted from Trivedi's entrepreneurial-intention constraint model, Gubik (2013) and Kraaijenbrink, Bos & Groen (2010)",1,2,15.4,-3.4
+makowska_2023_pdts,Digital Transformation Stress Scale (DTSS),21.1666666666667,125.166666666667,6,10.4898854961832
+makransky_2016_mcq_correct,Knowledge of microbiology multiple-choice test,7.5,46.3,8,10.2901666666667
+makransky_2016_self_efficacy,"Motivated Strategies for Learning Questionnaire (MSLQ), Self-Efficacy for Learning and Performance items, adapted to microbiology",13.25,75.625,14.8,10.0605188679245
+malik_2018_individual_motivation,"Physician motivation questionnaire (Malik et al. 2018), intrinsic motivation section",4,23.8636363636364,10.2,7.8641317671093
+malik_2018_organizational_motivation,"Physician Motivation Tool (Malik et al. 2018), organizational factors section",5.63888888888889,37.1388888888889,10.2,10.9648316912972
+malik_2018_social_motivation,"Physician motivation tool (Malik et al. 2018), socio-cultural motivation section",10.7142857142857,62.9285714285714,10.2,8.62207792207792
+malinowska_2021_saq_nurses,"Safety Attitudes Questionnaire - Short Form, Polish version (SAQ-SF PL)",10.9268292682927,67.5121951219512,20.3333333333333,9.75803574338639
+malinowska_2021_saq_physicians,"Safety Attitudes Questionnaire - Short Form, Polish version (SAQ-SF PL)",10.9268292682927,65.8048780487805,20.3333333333333,8.94333641153784
+mancone_2024_ravlt_recall,"Rey Auditory Verbal Learning Test (RAVLT), five immediate-recall learning trials",1,2,2,-3.4
+marcussonclavertz_2019_velten,Velten Mood Induction Procedure (80-statement pool),8.225,42.075,4,4.22398542385885
+marquessanchez_2023_kidmed,KIDMED Test of Adherence to the Mediterranean Diet (Mediterranean Diet Quality Index for Children and Adolescents),8.625,47.5625,2,4.49096830985916
+mascherini_2021_meddiet,"Med Diet Score (MedDietScore), as administered in the ABITUD-19 questionnaire",1,2,3.74242424242424,-3.4
+matarboumosleh_2017_gad2,Generalized Anxiety Disorder-2 (GAD-2),7,38.5,15.25,5.68285714285715
+matarboumosleh_2017_phq2,Patient Health Questionnaire-2 (PHQ-2),6,39.5,15.25,6.41666666666667
+matarboumosleh_2017_spai26,Smartphone Addiction Inventory (SPAI),14.1923076923077,81.3846153846154,15.5,8.25174174174174
+medvedev_2018_oxh,Oxford Happiness Questionnaire (OHQ),7.72413793103448,39.1724137931034,16.1666666666667,4.54294950738916
+medvedev_2018_pan,Positive and Negative Affect Schedule (PANAS),1,7.4,13,52.32
+megart_tonkovic_2021,MegaRT lexical decision task (Croatian nouns and Wuggy-matched pseudowords),1,7.21889400921659,8,NA
+meloni_2015_child_disab_knowledge,"Child's Disability Knowledge (16 statements on health and disability: 8 true [knowledge], 8 false [stereotype])",1,2,8.85714285714286,-3.4
+meloni_2015_child_ia_frequency,Child's Interests and Activities,1,2,9.4,-3.4
+meloni_2015_child_ia_satisfaction,Child's Interests and Activities,1,2,7,-3.4
+meloni_2015_deq_ce_child,Disability Explanation - Closed-Ended Questionnaire (child version),1,2,8.85714285714286,-3.4
+meloni_2015_deq_ce_parent,Disability Explanation - Closed-Ended Questionnaire (parent version),1,2,5.85714285714286,-3.4
+meloni_2015_deq_oe_child,"Disability Explanation - Open-Ended Questionnaire (child version), scored as coded-mention counts in nine disability-model categories",1,2,2,-3.4
+meloni_2015_deq_oe_parent,Disability Explanation - Open-Ended Questionnaire (parent version),1,2,2,-3.4
+meloni_2015_parent_divers_ed,Parent's Education About Diversity Questionnaire,1,2,13.8,-3.4
+meloni_2015_parent_interests,Parent's Interests and Activities Encouraged Questionnaire,1,2,5.6,-3.4
+menaldi_2023_brief_cope,Brief COPE (Indonesian administration),10.0714285714286,56.6785714285714,12.5,5.66126139817629
+mendes_2019_snycq,Short Version of the New York Cognition Questionnaire (Short-NYC-Q),1,2,2.43373493975904,-3.4
+meng_2017_referent_assignment,"Reference assignment task (Murakami & Hashiya, 2014)",8.2,49.2,8,1.09193798449612
+merlo2025_eet,Evening eating behaviour questionnaire (EET) - evening consumption of tryptophan-rich foods,2.10344827586207,12.7586206896552,7.33333333333333,4.46637374860957
+merlo2025_eng_cognitive,"Student Engagement Scale (SES) - cognitive engagement subscale; Italian version by Mameli & Passini (2017) of the Student Engagement in School Questionnaire (Lam et al., 2014)",15.5,76.25,3,6.75930107526882
+merlo2025_eng_emotional,"Student Engagement Scale (SES; Mameli & Passini, 2017) - affective (emotional) engagement subscale",7.33333333333333,34.7777777777778,6,3.00333333333333
+metacogmonitoring_double2025,"Metacognitive monitoring self-report item pool (Double, 2025, Study 1)",10.044776119403,58.0149253731343,6.5,8.21397111359502
 mexico_2023_quality_administration,Public Administration Perceptions,4.85714285714286,31.1428571428571,3.91666666666667,8.16899159663866
 mexico_2023_quality_corruptionperception,Corruption Perception,4.16,31.72,12.48,11.2259963302752
 mexico_2023_quality_drainage,Drainage Service Quality,15.2105263157895,96.2631578947368,11.7368421052632,10.556955017301
@@ -367,18 +817,35 @@ mexico_2023_quality_lightning,Public Lightning Service Quality,12,80.375,12.375,
 mexico_2023_quality_problems,Worst Problems Identified,3.41666666666667,23.6666666666667,13.5,10.7815243902439
 mexico_2023_quality_water,Potable Water Service Quality,11.0357142857143,64.3928571428571,10.6428571428571,7.04402565880721
 mgkt,Multifactor General Knowledge Test (Form A v0.8),7.46325878594249,43.1693290734824,2,4.19557633613464
+MGSISGCLQ_Hollyhead_2018,"Gynaecologic Cancer Lymphedema Questionnaire (GCLQ; Carter et al. 2010), administered to male respondents",10.6333333333333,58.6666666666667,5.33333333333333,6.27
 mhscdc_fried_2020_anger,EMA Anger Scale,7.85714285714286,41.5714285714286,34.2,4.17642857142857
 mhscdc_fried_2020_conscientiousness,EMA Conscientiousness Scale,9.25,48.3333333333333,17.4,5.23912162162162
 mhscdc_fried_2020_dass,DASS-21,13.6666666666667,67.4285714285714,46.25,5.78267918932279
+mhscdc_fried_2020_ema,"MHSCDC EMA Mini Survey (Fried, Papanikolaou & Epskamp 2020)",8.44444444444444,44.8333333333333,8.64444444444444,5.29341991341991
 mhscdc_fried_2020_loneliness,8-item revised UCLA loneliness scale,5.6,26.4,6.2,2.18685714285714
 mhscdc_fried_2020_mindfullness,EMA Mindfulness Scale,14.4166666666667,76.9166666666667,17,7.15273121387283
 mhscdc_fried_2020_motivation,EMA Motivation Scale,16.25,98.5625,20.1428571428571,7.01288043478261
 mhscdc_fried_2020_procrastination,EMA Procrastination scale,11.8,59.4,21.8,6.612
 mhscdc_fried_2020_ps,10-item Perceived Stress Scale,17.7,92.2,9.6,6.44633333333333
+mhscdc_fried_2020_se,General Self-Efficacy Scale (Schwarzer & Jerusalem 1995),12.4,65,13.25,7.61212903225806
+mhscdc_fried_2020_smartphone,"Smartphone Addiction Scale - Short Version (Kwon, Kim, Cho & Yang 2013)",12.0975609756098,69.0365853658537,12.890243902439,7.92071362236669
 mhscdc_fried_2020_tired,EMA Tiredness Scale,6.5,34.2,17,2.92038461538462
+mindfulness_assessment,Kentucky Inventory of Mindfulness Skills (KIMS),13.7948717948718,74.5384615384615,17,6.78814126394052
+mistry_2022_hardship,"COVID-19 hardship and concern battery, ARCED Foundation older-adult telephone survey (items adapted from the Questionnaire for Assessing the Impact of the COVID-19 Pandemic on Older Adults, QAICPOA)",1,2,12.4375,-3.4
+mobility,Women's Mobility of Social Freedom (Bangladesh Fertility Survey 1989),1,2,2.5,-3.4
+moe2025_erq,Emotion Regulation Questionnaire (ERQ),1,2,6.57142857142857,-3.4
+moe2025_scs,"Self-Compassion Scale (SCS; Neff, 2003), Italian version (Veneziani, Fuochi & Voci, 2017)",14.6153846153846,78.8461538461538,5.4,7.4998031496063
 mohammed_2021_job_satisfaction,"Safety Attitudes Questionnaire (SAQ), Job Satisfaction domain",7.6,36,10.2,74.9678947368421
+mohammed_2021_patient_safety_culture,Hospital Survey on Patient Safety Culture (HSOPSC),9.35714285714286,53.7619047619048,10.0714285714286,13.5976588580325
+molino_2018_d5_scale,"Questionnaire section 5: Entrepreneurial Intention (items 1-5, adapted from Liñán & Chen, 2009) and Support from family and friends (items 6-8, ad hoc)",10.375,59.375,7.71428571428571,7.36468373493976
+monier_2026_pot,Passage-of-Time (PoT) judgment questions,9.57142857142857,48.7142857142857,3.57142857142857,2.40852878464819
+monier_2026_sti,"Adult Self-Transcendence Inventory (ASTI), 10-item self-transcendence scale",10,51.3,2,5.774
+morales_2021_erq,Emotion Regulation Questionnaire (ERQ),1,2,6.57142857142857,-3.4
+morgan_2026_music_personality_music_activity,"Music-related Activities (10-item, study-specific measure; Morgan et al. 2026 raw survey materials -- not one of the paper's three named measures BFI-2-S/STOMP-R/PVQ-21)",6.9,48.6,NaN,10.3589710144928
+motion,"Random-dot motion discrimination task (""Space Race"")",10,58,8,6.93636363636364
 movac_pakpour2022,Motors of COVID-19 Vaccination Acceptance Scale (MoVac-COVID19S),12.6666666666667,66.4166666666667,14.4285714285714,3.59906626506024
 mpsycho_asti,Data from a scale assessing wisdom,8.72,44.28,11,5.1222904109589
+mpsycho_avlancheprep,"Preparedness items from the out-of-bounds skiing survey (Haegeli, Gunn, & Haider, 2012)",4.8125,32.8125,31.875,8.35440746753247
 mpsycho_bsss,Sensation-seeking scale from out-of-bounds skiers,9,47.375,13.8,3.9714897260274
 mpsycho_ceaq,Children responding to empathy scale,10.75,51.125,11.6666666666667,3.28389534883721
 mpsycho_condom,Condom usage scale,6,33.8333333333333,11,3.39878378378378
@@ -391,19 +858,64 @@ mpsycho_rwdq,Work design questionnaire from open-source developers,12.6571428571
 mpsycho_wenchuan,PTSD data from disaster survivors,11.1176470588235,70.7647058823529,10.4,9.82250773993808
 mpsycho_wilpat,Wilson-Patterson conservatism scale,1.80434782608696,14.4782608695652,9,17.2438161341016
 mpsycho_youthdep,Youth depression scale,6.76923076923077,29.3076923076923,30.3333333333333,1.53181818181818
+mturkddm_recognition,"Item recognition (word recognition memory) task, Ratcliff & Hendrickson (2021) Experiment 1",1,6.37829246139873,8,1726.55601271571
+mturkddm_y25,Numerosity discrimination task (Y25),1,2,8,-3.4
+much_tte_2025_matrixreasoning,Open Matrices Item Bank (OMIB) matrix reasoning test,1,2,8,-3.4
+muir_2025_resilience_behaviours,Conducive Organizational Response Behaviours,11.375,82.375,8.33333333333333,12.1305025773196
+muir_2025_resilience_opinions,Opinions about Organizational Response,13.5714285714286,89,10.2,11.0320728291317
+muller_2016_dog_inhibition,"Inhibitory control tasks (wait-for-treat, middle cup, leash), Muller et al. 2016",55,288,83.1111111111111,9.18853721129171
+muslih_2024_rses,"Rosenberg Self-Esteem Scale (RSES), Indonesian version",10.2,46.5,11,3.0801568627451
+naja_2024_challenges,Perceived challenges during COVID-19 (study-specific multi-select checklist),2.2,18,10,7.41628571428571
+najari_2024_bpqsf_awareness,"Body Perception Questionnaire-Short Form (BPQ-SF), Persian version",1,2,7.8,-3.4
+nakano_2020_osce_contact_precautions,"Hand hygiene and personal protective equipment OSCE checklist (15-item enhanced contact precautions checklist, University of Florida Intern OSCE)",11.4,61.9333333333333,6,3.58922815368922
+nam_2024_function,Washington Group Short Set on Functioning (WG-SS),10.5,67.6666666666667,15.75,10.0565384615385
 namprb_siwiak_2024_aot,Actively Open-minded Thinking Scale(AOT),13.125,81.125,9.83333333333333,9.6152358490566
 namprb_siwiak_2024_bsr10,Bullshit Receptivity Scale–shortened version (BSR_10),10.5,69.6666666666667,7.6,11.3115061728395
 namprb_siwiak_2024_desrpl,Dissociative Experiences Scale–Revised (DES-R-PL),21.5714285714286,123.678571428571,21.375,10.1712015137181
 namprb_siwiak_2024_gcbs,Generic Conspiracist Beliefs Scale(GCBS),15.5333333333333,98.4666666666667,27.2,11.0248907563025
 namprb_siwiak_2024_kon2066,Kon-2066,8.97674418604651,49.8139534883721,2.97674418604651,6.24506459948321
 namprb_siwiak_2024_kop20,Kwestionariusz Otwartości Przekonań(KOP20),10.5,58.2,15.5,4.40690476190476
+NAMPRB_Siwiak_2024_SSUB,"Survey of Scientifically Unaccepted Beliefs, Polish version (SSUB-PL; Siwiak, Buczel, Rabińska & Szpitalak 2024)",11.72,71.4,14,8.83540750853242
+narcissistic_personality_inventory,Narcissistic Personality Inventory (NPI-40),1,2,41.4125,-3.4
 narqing,Data from the Narcissistic Admiration and Rivalry Questionnaire (NARQ) along with Rosenberg self-esteem (RSE) and Multigroup Ethnic Identity Measure (MEIM).,10.2244897959184,51.8775510204082,8.61224489795918,5.12010591062772
+nas_rogoza_2024_study1,"Narcissistic Antagonism Scale (NAS), initial 30-item pool",1,9.16666666666667,4.14285714285714,23.3466666666667
+nas_rogoza_2024_study2_nas,"Narcissistic Antagonism Scale (NAS), 18-item version administered in Study 2",1,9.5,4.14285714285714,24.1333333333333
+nas_rogoza_2024_study2_nvs,"Narcissistic Vulnerability Scale (NVS), 11-adjective form administered in Study 2",1,9.45454545454546,4.14285714285714,18.2687878787879
+nas_rogoza_2024_study5_nas,"Narcissistic Antagonism Scale (NAS), 4-adjective within-person (daily) form",1,9,2.12871287128713,26.1
+nas_rogoza_2024_study5_ngs,"Narcissistic Grandiosity Scale (NGS), four-adjective daily state version administered in Study 5",1,9,2.12871287128713,17.25
+nas_rogoza_2024_study5_nvs,"Narcissistic Vulnerability Scale (NVS), four-item daily state version administered in Study 5",1,11.25,2.12871287128713,29.05
+nelson2019_ipqrd,"Illness Perception Questionnaire - Revised for Dental Use in Older Adults (IPQ-RDE), 43-item form",11.8837209302326,66.6511627906977,14,7.05333030523256
+nelson_2019_ipqrde,Illness Perception Questionnaire - Revised for Dental Use in Older Adults (IPQ-RDE),11.8837209302326,66.6511627906977,14,7.05333030523256
+neurodegenerative_huizinga_2019_dass,Depression Anxiety Stress Scales - 21 (DASS-21),9.66666666666667,50.3809523809524,34.75,5.94592334494774
+neurodegenerative_huizinga_2019_svc,Screening Visuele Klachten (SVK) / Screening of Visual Complaints (SVC),12.887323943662,74.6478873239437,8.85915492957746,7.30678357728068
+neurodegenerative_huizinga_2019_vfq,"National Eye Institute Visual Functioning Questionnaire - 25 (VFQ-25), version 2000, self-administered format",1,2,17.6231884057971,-3.4
+ngo_2025_green_attitude,Green attitude (four-item scale adapted from Al-Swidi and Saleh),8.75,51,2,6.7025
+ngo_2025_green_purchase_behavior,Green purchasing behaviour scale (Ngo & Nguyen 2025 TPB battery; items adapted from Joshi & Rahman),13,93,2,12.7322169811321
+ngo_2025_green_purchase_intention,Green purchasing intention,9.5,49.5,2,2.39921052631579
+ngo_2025_green_subjective_norm,Green subjective norm (four-item scale based on Onel),13.25,95,2,11.6561363636364
+ni_2025_open_innovation,"Open Innovation Behavior of SMEs (9-item scale adapted from Lichtenthaler, 2009)",18.1111111111111,137.222222222222,2,17.7771203155819
+ni_2025_strategic_orientation,"Innovative strategic orientation scale (3 items, adapted from Huang, Personnel Review)",1,2,2,-3.4
+niazi_2020_mfq,"Moral Foundations Questionnaire (MFQ30, full version, July 2008)",10.90625,60.78125,28.9166666666667,6.54939738538682
+niazi_2020_mfq_stereotype,"Moral Foundations Questionnaire (MFQ30), stereotype administration (rated as a typical member of the opposite gender would respond)",10.90625,60.78125,16.5,6.54939738538682
+nomt_hooper_2024_study1,Novel Object Memory Test (NOMT),8.25,40.75,8,3.00325757575758
+nordhoff_2021_safety,"Perceived safety items, online questionnaire on SAE Level 2 partially automated cars (Nordhoff et al., 2021)",8.66666666666667,41.1666666666667,10.2,2.99384615384616
+nordhoff_2021_trust,"Trust in partially automated cars scale (Nordhoff et al., 2021)",13.9166666666667,75.6666666666667,10.2,8.3500748502994
+NSR-FC_Youhasan_2021,Nursing Students' Readiness for Flipped Classroom (NSR-FC),11.6857142857143,72.3428571428571,7.4,9.29047619047619
+number_pattern_game,The Number Game,15.4941176470588,108.611764705882,2.5,7.04098979390008
+odachi_2022_fear_covid19,"Fear of COVID-19 Scale (FCV-19S), Japanese version",9.71428571428571,62.4285714285714,6.6,9.82857142857143
+ojelabi_2019_sf36,"RAND 36-Item Health Survey 1.0 / MOS 36-Item Short Form Survey (SF-36), version 1",9.44295302013423,52.261744966443,15.1208053691275,5.21826695859151
+opladen2025_wi,Whiteley Index (WI-14),5.28571428571429,33.9285714285714,3,63.1786486486486
+ordak_2026_vaccine_misreasoning,Statistical misreasoning coding framework (ten categories),13.3,100.1,24,16.0360977443609
+orovou_2021_lec5,Life Events Checklist for DSM-5 (LEC-5),8.82352941176471,60.2352941176471,17.5,10.565479876161
+orovou_2021_pcl5,PTSD Checklist for DSM-5 (PCL-5),1,2,10.4,-3.4
 os_tbmwtfs_schubert_2023_acs,Attentional Control Scale,14.9,79.7,8,7.64381879194631
 os_tbmwtfs_schubert_2023_bmw3,Brief Mind Wandering Three-Factor Scale,11.8333333333333,65.8333333333333,12.6,6.89119718309859
 os_tbmwtfs_schubert_2023_cerq,Cognitive Emotion-Regulation Questionnaire,14.5111111111111,76.1,6.22222222222222,7.3621939533692
 os_tbmwtfs_schubert_2023_dmw,Deliberate Mind Wandering,7.75,43,3.46428571428571,4.79113636363637
 os_tbmwtfs_schubert_2023_ipip,International Personality Item Pool,5.44,27.78,19.8,4.01468823529412
 os_tbmwtfs_schubert_2023_maas,Mindful Attention Awareness Scale,14.3333333333333,78.2666666666667,16.1666666666667,7.39813953488372
+otaki_2022_dental_adaptability,Tailor-made self-reported adaptability survey (quantitative segment),18.75,112.5,8.66666666666667,10.9171666666667
+oxfordcovid_xue_2024_at,Oxford ARC study: activities and technology use,5.16666666666667,27.1666666666667,6.2,3.1733870967742
 oxfordcovid_xue_2024_bfi,Big Five Inventory,4,23.7333333333333,14.4285714285714,169.843333333333
 oxfordcovid_xue_2024_brs,Brief Resilience Scale (BRS),11,55.3333333333333,10.2,3.91126865671642
 oxfordcovid_xue_2024_edeq,Eating Disorder Examination Questionnaire,21,115,7.75,9.44479083665339
@@ -420,13 +932,52 @@ oxfordcovid_xue_2024_rse,Rosenberg Self-Esteem Scale (RSE),10.2,46.4,11,3.080156
 oxfordcovid_xue_2024_school,Oxford School Scale,4.36974789915966,28.4453781512605,13.5042016806723,5.72637782385682
 oxfordcovid_xue_2024_swemws,Short Warwick-Edinburgh Mental Wellbeing Scale (WEMWBS – S),6.14285714285714,35,11.6,3.81966777408638
 oxfordcovid_xue_2024_ua,Oxford University Admission Scale,14.4285714285714,82,20.9285714285714,8.29103174603175
+ozkurt_2026_basic_psych_needs,Basic Psychological Needs Satisfaction in Sport Scale (BNSSS),8.21428571428571,42.2857142857143,7.4,4.22246305418719
+ozkurt_2026_ego_orientation,"Exercise Goal Orientation Questionnaire (EGOQ; Goal Orientation in Exercise Measure, GOEM)",12.8,62.5,7.4,5.5348125
 paampsmartsud_saba_2023_amps,Applied Mindfulness Process Scale,7.13333333333333,41.8,4.8,6.60134579439252
 paampsmartsud_saba_2023_attendance,Class Attendance Scale,4,23.25,7.5,6.62
+paampsmartsud_saba_2023_ders,Difficulties in Emotion Regulation Scale (DERS-36),9.75675675675676,50.6486486486486,22.2378378378378,5.14699109081381
 paampsmartsud_saba_2023_ffmq,Five Facet Mindfulness Questionnaire – Short Form,13.0833333333333,71.375,21.6,6.64880573248407
 paampsmartsud_saba_2023_pacs,Penn Alcohol Craving Scale,14,80.6,43.1714285714286,7.23285714285715
 paampsmartsud_saba_2023_pss,Perceived Stress Scale,17.9,94.4,9.6,6.55301117318436
+pakseresht_2021_gmfood_risk_ranking,GM food policy-scenario risk-dimension ranking task,2.25,19.5,7.75,16.065
+pang_2023_behavioral_intent,"Behavioral intention (BI) subscale, Factors Influencing Users' Willingness to Use New Energy Vehicles questionnaire",1,2,11,-3.4
+pang_2023_media_influence,"Mass media (MM) subscale, Factors Influencing Users' Willingness to Use New Energy Vehicles questionnaire",1,2,11,-3.4
+pang_2023_perceived_cost,Media-based perceptions and adoption model (MPAM) of new energy vehicles questionnaire - Perceived cost (PC),14.4,75.2,11,6.251
+pang_2023_perceived_ease_use,Media-based perceptions and adoption model (MPAM) of NEVs questionnaire — Perceived ease of use (PEOU) items,1,2,11,-3.4
+pang_2023_perceived_enjoyment,Media-based perceptions and adoption model (MPAM) of new energy vehicles questionnaire - Perceived enjoyment (PE),11.6,71.6,11,8.212
+pang_2023_perceived_risk,"Perceived risk (PR) subscale, Factors influencing users' willingness to use new energy vehicles questionnaire",11.8,57.4,11,5.212
+pang_2023_perceived_usefulness,Media-based perceptions and adoption model (MPAM) of NEVs questionnaire — Perceived usefulness (PU) items,1,2,11,-3.4
+pang_2023_social_norms,"Subjective norms (SNs) subscale, Factors influencing users’ willingness to use new energy vehicles questionnaire",1,2,11,-3.4
+papp_silva-martins2023,Questionário de Práticas Parentais de Atividade Física (QPPAF) — European Portuguese version of the Preschooler Physical Activity Parenting Practices (PPAPP),13.8709677419355,70.4838709677419,8,5.11969138070394
+park_2024_ageism,"Fraboni Scale of Ageism (FSA), Korean version - 18-item form administered by Park et al. (2024)",11.7777777777778,63.9444444444444,11,6.14672955974843
 pass_vangsness_2019,Procrastination Assessment Scale for Students,14.25,87,9,10.1172076023392
+pauli_2021_coercion_attitudes,Staff Attitude to Coercion Scale (SACS),8.46666666666667,55.2,10.8333333333333,9.82538582677165
+pavic_2022_healthcare_trust,"Revised Health Care System Distrust Scale (Shea et al., 2008) - 8-item Croatian adaptation",1,2,14.8,-3.4
+pavic_2022_natural_immunity,"Vaccination Attitudes Examination (VAX) Scale (Martin & Petrie, 2017) - preference for natural immunity subscale, 3 items",11,72.6666666666667,14.8,12.3
+pavic_2022_science_literacy,"Oxford scale of science literacy (Durant, Evans & Thomas, 1989; Miller, 1998) - 15 items",9.93333333333333,53.4,16,6.01
+pavic_2022_vaccine_conspiracy,"Vaccine Conspiracy Beliefs Scale (VCBS; Shapiro, Holding, Perez, Amsel & Rosberger, 2016), 7 items",7.85714285714286,50.8571428571429,14.8,10.2161038961039
+pedroso_2021_ifsq_laissezfaire,"Infant Feeding Style Questionnaire - Brazilian Portuguese version (IFSQ-Br), laissez-faire style",11.8181818181818,62.5454545454545,9.94545454545455,3.86687924016282
 pedroso_2021_ifsq_pressuring,"Infant Feeding Style Questionnaire — Brazilian Portuguese version (IFSQ-Br), Pressuring subscale",15.8235294117647,90.2352941176471,10.0117647058824,11.9687734668335
+pedroso_2021_ifsq_responsiveness,"Infant Feeding Style Questionnaire - Brazilian Portuguese version (IFSQ-Br), responsive style",11.25,56.3333333333333,9.9,3.34833333333333
+pedroso_2021_ifsq_restriction,"Infant Feeding Style Questionnaire - Brazilian Portuguese version (IFSQ-Br), restrictive style",8.72727272727273,47.8181818181818,10.0545454545455,3.9157196969697
+pellerin2020_cpc_hope,"Compound Psychological Capital Questionnaire (CPC-12), Hope subscale",13,60,5.85714285714286,4.00307692307692
+pellerin2020_cpc_optimism,"Compound Psychological Capital Scale (CPC-12), Optimism subscale",1,2,5.85714285714286,-3.4
+pellerin2020_cpc_selfefficacy,"Compound Psychological Capital Questionnaire (CPC-12), Self-efficacy subscale",12.3333333333333,70.6666666666667,5.85714285714286,9.31189189189189
+pellerin2020_gq6,Gratitude Questionnaire-Six Item Form (GQ-6),15,72.3333333333333,11.7142857142857,5.86222222222223
+PEMAIW_Qiu_2020_DASS,Depression Anxiety Stress Scales - 21 Items (DASS-21),9.71428571428571,51.3809523809524,45,5.99299583911235
+pemaiw_qiu_2020_dass,"Depression Anxiety Stress Scales - 21 Items (DASS-21; Lovibond & Lovibond, 1995)",9.66666666666667,50.5238095238095,44.75,5.94592334494774
+PEMAIW_Qiu_2020_FFMQ,Five Facet Mindfulness Questionnaire (FFMQ),13.1282051282051,72.6410256410256,17,7.36651072124756
+penningroth_2019_pm_concerns,Goal/concern relatedness form for real-life prospective memory tasks (concern categories),1.8,15.2666666666667,67.5,33.33875
+penningroth_2019_pm_goals,Survey on Real-Life Activities: goal-relatedness form for self-listed real-life prospective memory tasks,1.8,15.2666666666667,36.5,33.33875
+personality_handwriting__graphology,"Personality and Financial Behaviour Questionnaire (Thomas, Parul University) - Handwriting Traits checklist (neuroticism indicators)",4.48,26,2.5,4.35531715388858
+peters_2025_att_exp_strength,Your COVID-19 Risk (COVID-19 Risk Assessment Tool): experiential attitude belief expectation items,11,65,5.42727272727273,4.83
+peters_2025_att_instr_eval,COVID-19 Risk Assessment Tool (Your COVID-19 Risk / YCR) -- instrumental attitude belief-evaluation items (Reasoned Action Approach),7.03244837758112,32.3864306784661,7.89675516224189,5.04255706774564
+peters_2025_gen_risk_strength,"COVID-19 Risk Assessment Tool (Your COVID-19 Risk / YCR) -- Generic Belief items, belief-strength (expectancy) component",10.3333333333333,51.3333333333333,9.2,7.43571428571429
+peters_2025_gnrc_beliefs,COVID-19 Risk Assessment Tool (Your COVID-19 Risk / YCR) -- generic COVID-19 belief items,7.66666666666667,48.8333333333333,13.2333333333333,12.6896341463415
+peters_2025_nrm_inj_approval,"COVID-19 Risk Assessment Tool (Your COVID-19 Risk / YCR) -- Injunctive Norm items, perceived referent approval component",15.6,85,6.42857142857143,5.54098630136987
+peters_2025_pbc_cond_power,"Your COVID-19 Risk (COVID-19 Risk Assessment Tool): perceived behavioural control, perceived power of condition items",18.2727272727273,95.8181818181818,4.57142857142857,7.5111004784689
+peters_2025_pbc_cond_presence,"COVID-19 Risk Assessment Tool (Your COVID-19 Risk / YCR) -- Perceived behavioural control items, perceived presence of condition component",26.6363636363636,136.772727272727,6,9.67906919019547
 pezzuti_2025_coolpeople_adventurous,Adventurousness and risk-taking ratings,9,50,5.85714285714286,3.64131578947369
 pezzuti_2025_coolpeople_autonomous,"Autonomy, originality, and self-reliance evaluation",10.25,57.25,5.85714285714286,5.05909090909091
 pezzuti_2025_coolpeople_benevolent,Benevolence and caring for others ratings,11.5,67.6666666666667,5.85714285714286,7.44555555555556
@@ -439,6 +990,7 @@ pezzuti_2025_coolpeople_main_collectivism_usa,Measures of collectivist attitudes
 pezzuti_2025_coolpeople_main_individualism_usa,Ratings of individualist values and independence,8.75,46,5.85714285714286,6.02821428571429
 pezzuti_2025_coolpeople_main_masculinity_chile,Measurement of masculinity beliefs and gender role endorsement,14.25,84.25,5.85714285714286,10.4622368421053
 pezzuti_2025_coolpeople_main_materialism_chile,Measurement of materialism and views on possessions,11.2777777777778,57.8333333333333,5.85714285714286,5.20045155993432
+pezzuti_2025_coolpeople_main_nfc,"CVSCALE uncertainty avoidance (Yoo, Donthu & Lenartowicz, 2011)",10.8,67,5.85714285714286,8.50718518518519
 pezzuti_2025_coolpeople_main_powerdistance_usa_chile,Assessment of power distance acceptance and hierarchical norms,14.2,94.2,5.85714285714286,12.0522253521127
 pezzuti_2025_coolpeople_main_tight_usa_chile,"Ratings of tightness-looseness, or the strength of social norms",15,90.1666666666667,5.85714285714286,9.53333333333333
 pezzuti_2025_coolpeople_main_trendy_usa,Coolness ratings of fashionableness and alignment with current style trends,5.25,30.75,5.85714285714286,2.55684782608696
@@ -448,10 +1000,39 @@ pezzuti_2025_coolpeople_secure,"Security, safety-seeking, and social stability r
 pezzuti_2025_coolpeople_single-items,Ratings for single-item depictions of key personality or value traits,1.3,10.6,5.85714285714286,53.4846153846154
 pezzuti_2025_coolpeople_traditional,"Ratings of tradition, religious adherence, and satisfaction with the status quo",10.25,59.5,5.85714285714286,4.79305555555556
 pezzuti_2025_coolpeople_warm,Warmth and friendliness ratings of nominees across key studies,8.25,48.25,5.85714285714286,4.30888888888889
+phq_BrummerHoffman_2021,Augmented PHQ-9,11.8888888888889,66.4444444444444,17.1,6.47096573208723
 phq_insomnia_wang2025,The Patient Health Questionnaire (PHQ-9),11.7777777777778,68.7777777777778,15.25,7.13456603773585
+pickova2025_attitude,Attitude toward shopping on SHEIN/TEMU (study-authored 7-item semantic differential),1.28571428571429,9,2,26.0244444444444
+pickova2025_behavioral_intent,Attitude-Behavior Gap on TEMU and SHEIN survey (Picková 2025) - behavioral intention items,9.5,56.5,2,7.04785714285714
+pickova2025_fast_fashion_beliefs,General beliefs about the fast fashion industry (study-authored 5-item scale),15.2,96.4,2,12.8511578947368
+pickova2025_feelings,Attitude-Behavior Gap on TEMU and SHEIN survey (Picková 2025) - affective response items,10.8,64.2,2,7.24434482758621
+pickova2025_moral_justifications,Moral justifications for shopping on SHEIN/TEMU (study-authored 7-item neutralization scale),12.8571428571429,80.1428571428571,2,9.15962732919255
+pickova2025_perception,Perception of SHEIN/TEMU (study-authored 7-item scale),10.8571428571429,69.8571428571429,2,8.93790017211704
+pierro_2018_assessment_s1,Regulatory Mode Questionnaire (RMQ) -- Assessment scale,11.25,65.6666666666667,6.5,8.41432481751825
+pierro_2018_assessment_s3,Regulatory Mode Questionnaire (RMQ) — Assessment scale,11.25,65.6666666666667,6.5,8.41432481751825
+pierro_2018_locomotion_s1,"Regulatory Mode Questionnaire (RMQ), Locomotion scale",10.25,52,6.5,4.99806451612903
+pierro_2018_locomotion_s3,"Regulatory Mode Questionnaire (RMQ), Locomotion scale",10.25,52,6.5,4.99806451612903
+pierro_2018_selfforgive_s1,"State Self-Forgiveness Scale (SSFS), feelings subscale (4 items)",4.75,26.75,6,5.51513157894737
+pierro_2018_selfforgive_s2,"State Self-Forgiveness Scale (SSFS), feelings subscale (4 items)",4.75,26.75,6,5.51513157894737
+pierro_2018_selfforgive_s3,"State Self-Forgiveness Scale (SSFS; Wohl, DeShea & Wahkinney, 2008), 4 items derived from the feeling subscale",4.75,26.75,6,5.51513157894737
+pierro_2018_tf_future_s4,Temporal Focus Scale (TFS) — Future Focus subscale,7,32.25,3.33333333333333,2.73285714285715
+pierro_2018_tf_past_s4,"Temporal Focus Scale (TFS), Past Focus subscale",8,36.25,3.57142857142857,2.28
+pilch_2021_coping_behavior,Coping Behavior Scale (CBS),8.9375,58.3125,5.42857142857143,9.34713362068966
+pilch_2021_fear_covid19,"Fear of COVID-19 Scale (FCV-19S), Polish version",9.71428571428571,61.4285714285714,2,9.82857142857143
+pilch_2021_personality_ipip20,"IPIP-BFM-20 (International Personality Item Pool - Big Five Markers - 20), Polish version (Topolewska, Skimina, Strus, Cieciuch & Rowiński, 2014)",5.05,29.25,34,4.72207425742574
+pilch_2021_protection_motivation,Protection Motivation Questionnaire (PMQ),12.3,78.7,5.42857142857143,11.2720406504065
+PMT_Trzcinska_2023_PMT,Pictorial Materialism Test (PMT),38,197.5,88.6875,1.93342105263158
 polca_cheating,Responses from undergrads to questions about cheating behaviors,14.5,69.25,2.5,46.3327586206897
+polca_election,"2000 American National Election Study, presidential candidate trait battery (items K2a-K2f, K3a-K3f)",2.16666666666667,16.3333333333333,12.75,10.6703846153846
 political_psychology,Data on political ideologies,16.1,93.64,12.584,8.65186500618965
+powell_2018_affect,"Post-manipulation affective state measure (Powell et al., 2018)",1,7,4.5,18.17
+powell_2018_qcae,Questionnaire of Cognitive and Affective Empathy (QCAE),13.6774193548387,70.1612903225806,15.5,6.52579732197201
+powell_2018_trust,Adapted SOEP-Trust scale,4,22.3333333333333,15.5,4.25384615384615
+poza2026_hlseu,"European Health Literacy Survey Questionnaire, short form (HLS-EU-Q16); Arabic/French version for Arabic/French-speaking migrants (Bas-Sarmiento et al., 2020, IJERPH 17:8181, Table S1)",30.9375,207.125,17,11.4682670454545
 pps_vangsness_2019,Pure Procrastination Scale,11.5,60.4166666666667,17.6,6.16746376811594
+PPSRS_Caliciuri_2024,"Scientific Reasoning Scale (SRS), Italian version",52.9090909090909,310.727272727273,6,7.46094437394247
+pranckeviciene_2022_gad7,"Generalized Anxiety Disorder Questionnaire-7 (GAD-7), Lithuanian version",6.42857142857143,37.7142857142857,19.5,6.84603174603175
+pranckeviciene_2022_phq9,"Patient Health Questionnaire-9 (PHQ-9), Lithuanian version",12,69.2222222222222,19.5,7.13456603773585
 prcpsffmq_lecuona_2017,Five Facets Mindfulness Questionnaire,13.1538461538462,72.6923076923077,7,7.29750487329435
 preschool_sel_akt,Affect Knowledge Test-Shortened,5.47058823529412,30.2352941176471,9.33333333333333,-1.74407547169811
 preschool_sel_box,Adapted Box Task,13.5,74.2,8,6.50362068965518
@@ -460,6 +1041,10 @@ preschool_sel_htks,Head-Toes-Knees-Shoulders,3,15,9.33333333333333,-2.62
 preschool_sel_pl,preLAS: The English Language Proficiency Assessment for Early Learners:,3.43589743589744,15.8205128205128,8.28205128205128,-0.705139833711261
 preschool_sel_wj,Woodcock-Johnson IV,8.37179487179487,42.1923076923077,5.32051282051282,0.628091603053434
 preussmattsson_2022_ownership,"Illusory body-ownership questionnaire (Preuss Mattsson, Coppi, Chancel & Ehrsson, 2022), statements S1-S6, administered after each of 4 visuo-vestibular x visuo-tactile synchrony conditions",8.83333333333333,41.6666666666667,12.5,8.08241509433962
+previc_bohn2023,"PREVIC: Parent Report of Expressive Vocabulary in Children (Bohn et al., 2025) - initial 379-word item pool",1.0844327176781,6.68601583113456,3,327.929659367397
+promis1wave1_cesd,"PROMIS Wave 1 field test: CES-D (legacy items, Emotional Distress - Depression)",6.4,31.3,42.25,2.209125
+promis1wave1_haq,"PROMIS Wave 1 field test: HAQ (legacy items, Physical Function) - difficulty performing activities",10.632183908046,50.5977011494253,17.1034482758621,3.85051145066687
+protestant_workethic,"Protestant Work Ethic Scale (Mirels & Garrett, 1971), administered with the Ten Item Personality Inventory (Gosling, Rentfrow & Swann, 2003) and a 16-word vocabulary check-list",6.96446700507614,42.4670050761421,12.4619289340102,7.58098370993169
 psychoneurotic_inventory,Woodworth Psychoneurotic Inventory,9.26724137931035,46.9137931034483,2.5,3.85193249127525
 psychotools_conspiracist,Measure of belief in conspiracy theories,15.5333333333333,98.4666666666667,17.2,11.0248907563025
 psychotools_gratitude_gac,"The GAC is the sum of the affect adjectives grateful, thankful, and appreciative. The GAC can be used to measure gratitude as an emotion, mood, or disposition depending on the timeframe specified in the instructions",1,9.33333333333333,9.6,20.2
@@ -471,35 +1056,123 @@ psychtools_epi,Eysenck Personality Inventory,10.4210526315789,54.1228070175439,2
 psychtools_geras,Gender-related activities survey,2.74,17.5,3.64571428571429,53.3928521126761
 psychtools_msq,Motivational State Questionnaire,1.06666666666667,7.09333333333333,9.25,134.285
 psychtools_sai,State anxiety data over multiple studies,1.2,8.05,9.25,47.01
+ptacek2023_dass21,"Depression Anxiety Stress Scales - 21 (DASS-21), Czech translation (Vilimovsky & Kucera)",9.66666666666667,50.3809523809524,45.25,5.94592334494774
+ptcichina_zhan_2024,Posttraumatic Cognitions Inventory (PTCI),8.51515151515152,42.5757575757576,14.2857142857143,3.94016175994824
 qaslu_lopez_2024,Questionnaire for the Self-assessment of University Service-learning Experiences (QaSLu),11.2888888888889,85.8222222222222,7.2,13.9249974554707
 qaslu_prado_2024,Questionnaire for the Self-assessment of University Service-learning Experiences（QaSLU),11.3777777777778,83.9111111111111,7.2,13.5469848484849
+QCDQES_Oliveira_2022,"Organizational Climate Description Questionnaire Revised for Elementary Schools (OCDQ-RE), Portuguese version",7.78571428571429,55.1666666666667,12,9.14337662337662
+qi_2025_dark_triad,Short Dark Triad—Chinese version (SD3-C),8.66666666666667,45.8888888888889,14,4.78401709401709
+qi_2025_panas,"Positive and Negative Affect Schedule (PANAS), Chinese revision (Qiu, Zheng & Wang, 2008)",1,6.83333333333333,3,14.3
+qi_2025_self_concept_clarity,Self-Concept Clarity Scale,15.5,78,7.4,6.94962365591398
+qi_2025_self_esteem,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.0801568627451
+qiang_2025_abusive_supervision,Abusive Supervision Scale (4 items),10,57.5,7.4,7.485
+qiang_2025_coping,"Qiang et al. (2025) frontline retail staff survey, coping block (questionnaire items 30-32)",11.6666666666667,65,7.4,7.44555555555555
+qiang_2025_job_dissatisfaction,Job dissatisfaction scale (unnamed in the source; items 25-29 of the Qiang et al. 2025 questionnaire),10.2,50,7.4,4.35270588235294
+qiang_2025_job_performance,Job performance scale (unnamed in the source article; items 17-21 of the study questionnaire),1,2,7.4,-3.4
+qiang_2025_workplace_friendship,"Qiang et al. (2025) frontline retail staff survey, workplace friendship block (questionnaire items 33, 34, 35, 36, 37)",7.8,44,7.4,4.39558974358974
+qin_2025_behavioral_intention,"Behavioral intention scale (Qin & Zhang 2025 Ningxia cultural heritage tourism questionnaire, 3 items)",14,73.3333333333333,2,7.57
+qin_2025_perceived_cultural_distance,"Perceived cultural distance scale (Qin & Zhang 2025 Ningxia cultural heritage tourism questionnaire, 3 items)",20,133.333333333333,2,16.4
+qin_2025_tourism_experience,"Rich cultural tourism experience scale (Qin & Zhang 2025 Ningxia cultural heritage tourism questionnaire, 5 items)",26.4,175.8,2,16.8757293233083
+qin_2025_tourist_satisfaction,"Satisfaction scale (Qin & Zhang 2025 Ningxia cultural heritage tourism questionnaire, 3 items)",11.3333333333333,71,2,11.3888235294118
+quarter_life_crisis__iuc,Intolerance of Uncertainty Scale - Short Form (IUS-12),9,49.8333333333333,2,5.72925925925926
+queiros_2018_qcae,"Questionário de Empatia Afetiva e Cognitiva (Portuguese version of the Questionnaire of Cognitive and Affective Empathy, QCAE)",13.6774193548387,70.1612903225806,20,6.52579732197201
+quinn_2023_roommate_cesd,Center for Epidemiologic Studies Depression Scale (CES-D),6.4,31.25,42.75,2.209125
+rahm_2017_panas,"Positive and Negative Affect Schedule (PANAS), German version of Krohne, Egloff, Kohlmann & Tausch (1996)",1,7.4,13,52.32
+rahman_2022_phq9,Patient Health Questionnaire-9 (PHQ-9),9.77777777777778,58.8888888888889,23,6.89724137931034
+ravenscroft_2017_transition,Parent Survey on School Transition for Children with Disabilities,13.44,82.96,13.584,8.06977595307918
 rd_eppscqrk_kipkemoi_2024_scq,Social Communication Questionnaire,2.9,20.275,2.5,10.159297008547
 rd_ppcsedsof_afable_2023,Center for Epidemiological Studies - Depression (CES-D) Scale in older Filipinos.,4.63636363636364,23.2727272727273,10.3333333333333,1.95151515151515
 rd_ppcvdos_padconacns_jinbo_2019_dos,Duesseldorf Orthorexia Scale,12.6,71.5,4.5,7.85276377952756
+regalado_2023_tourism_value,"Perceived value, satisfaction and loyalty questionnaire for cultural coastal destinations (Regalado-Pezua et al., 2023)",5.94736842105263,33.5263157894737,10.5263157894737,6.67460642757336
+reinecke_2018_online_vigilance,Online Vigilance Scale,14,75.6666666666667,8,7.71047619047619
+reinwarth_2023_domain_importance,"Fragen zur Lebenszufriedenheit (FLZM) — General Life Satisfaction module, importance ratings",1.625,20.25,13.6,52.32
+reinwarth_2023_domain_satisfaction,"Fragebogen zur Lebenszufriedenheit (FLZ) / Questionnaire on Life Satisfaction -- General Life Satisfaction module, satisfaction ratings (Fragen zur Lebenszufriedenheit-Module, FLZ^M; Henrich & Herschbach, 2000)",3.375,22,14.6,14.295
+reinwarth_2023_loneliness3,"Loneliness Scale-SOEP (LS-S), German three-item loneliness scale (Richter & Weinhardt, 2013), German version of the UCLA Three-Item Loneliness Scale (Hughes et al., 2004)",3,20.3333333333333,5.6,6.55777777777778
+reinwarth_2023_phq4,"Patient Health Questionnaire-4 (PHQ-4): PHQ-2 depression module (items q17_1, q17_2) and GAD-2 anxiety module (items q17_3, q17_4)",6.5,39,20.25,6.00653846153846
+Resistance,"Resistance to Framing scale (Bruine de Bruin, Parker, & Fischhoff, 2007)",144.071428571429,860.928571428571,2,8.73647831946156
+reuter_2021_emotions,"Student Health Behavior and Academic Success survey (COVID-19 version, Appendix 2) - emotional state word check-list",1,7.58974358974359,2,12.6358974358974
+reyes_2022_eheals,eHealth Literacy Scale (eHEALS),13.125,71,14,7.39732142857143
+rfq_wozniakprus_2021,"Reflective Functioning Questionnaire, 8-item version (RFQ-8)",1,2,5.375,-3.4
 riasec,"Holland Code (RIASEC) Test (IIP RIASEC Markers), administered with the Ten Item Personality Inventory and a 16-word vocabulary check-list",4.40643274853801,28.3070175438597,13.6081871345029,8.56294789081886
+rightwing_authoritariansim,"Right-wing Authoritarianism Scale (RWAS), with the Ten Item Personality Inventory (TIPI) and a vocabulary check list (VCL)",15.6,93.9033333333333,15.9533333333333,10.0899028456488
+rinaldi_2021_mas,"Mentalized Affectivity Scale (MAS; Greenberg et al., 2017), Italian version",12.0655737704918,63.8360655737705,5.85714285714286,7.31258464005702
 rmet_higgins_2022_aq,Autism Spectrum Quotient,9.89285714285714,54.75,16.5,5.8191168127901
 rmet_higgins_2022_rmet,"The “Reading the Mind in the Eyes” Test Shows Poor Psychometric Properties in a Large, Demographically Representative U.S. Sample",22,132,8.33783783783784,10.1536363636364
 rmet_higgins_2022_tas,Toronto Alexithymia Scale,10.6,60.7,18.4,6.35532075471698
 rmet_higgins_2022_tom,Theory of Mind,14.4375,81.75,4.5,6.79560335497836
+rodriguezandres_2016_mnemocity_usability,MnemoCity task usability and satisfaction questionnaires (Q1 and Q2),7.22222222222222,33.6666666666667,10.6888888888889,1.02358974358975
+rodriguezquiroga_2024_epistemic_trust,"Epistemic Trust, Mistrust and Credulity Questionnaire (ETMCQ), Argentine version",16,85.2666666666667,17.5714285714286,7.9075
+roelen_2020_dietary_diversity,"Household Dietary Diversity food-group checklist (17 food groups), Fonkoze CLM (Chemen Lavi Miyo) baseline survey",7.52941176470588,51.1764705882353,2.5,7.08927601809955
+roelen_2020_k6,Kessler Psychological Distress Scale (K6),1,2,15.6,-3.4
+roelen_2020_rses,"Rosenberg Self-Esteem Scale (RSES), Haitian Creole version",10.3,47,11,3.20564077669903
+roettl_2018_arousal,"Arousal (semantic differential; Hernandez et al., 2011)",3,16.3333333333333,3.66666666666667,26.3566666666667
+roettl_2018_brand_attitude,"Attitude toward the product (7-point semantic differential; adapted from Shamdasani et al., 2001)",10.3333333333333,53.1666666666667,7.47619047619048,6.17142857142857
+roettl_2018_brand_recognition,"Recognition (adapted from Nelson et al., 2006)",1.25,8.5,5,8.4975
+roettl_2018_game_attitude,"Attitude toward the game (semantic differential; Gross, 2010)",3.16666666666667,21.8333333333333,4.73809523809524,54.3923076923077
+roettl_2018_scepticism,"Scepticism toward advertising (SKEP; Obermiller & Spangenberg, 1998)",8.22222222222222,56.5555555555556,6.42857142857143,11.2166666666667
 rosenberg_fadplus_goto2021,Rosenberg Self-Esteem Scale,9.4,42.5,6.5,2.76323404255319
+rosenberg_selfesteem,Rosenberg Self-Esteem Scale,10.3,46.5,11,3.09107766990292
+rosetti2023_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),1,2,15.25,-3.4
+rosetti_2023_cas,"Climate Change Anxiety Scale (CAS), 22-item four-factor version",1,2,7.6,-3.4
+rosetti_2023_gad7,GAD-7 (Generalized Anxiety Disorder 7-item scale),6.42857142857143,37.7142857142857,15.25,6.84603174603175
+rosharudin_2023_dass21,"Depression Anxiety Stress Scales - 21 (DASS-21), Malay version (Musa, Fadzil & Zain, 2007)",9.66666666666667,50.3809523809524,2,5.94592334494774
+rosharudin_2023_ders18,"Difficulties in Emotion Regulation Scale-18 (DERS-18), Malay version",9.38888888888889,49.7777777777778,13.8,5.38764299802761
+rr98_accuracy,"Ratcliff & Rouder (1998, Experiment 1) brightness discrimination task, accuracy-instruction blocks",8.3030303030303,55.7878787878788,81,6.72628400796284
+ruiz_parra_2023_rfq8,"Reflective Functioning Questionnaire (RFQ-8), Spanish version",9.625,47.75,5.85714285714286,3.64167207792208
+RvKDCS_Romiacg_Miroshnik_2020_CBI,"Creative Behavior Inventory (CBI), 11-item Russian version",5.81818181818182,31.8181818181818,18.25,4.37909090909091
+rzeszutek_2020_wwii_matgrandfather,Knowledge about World War II Events: Questionnaire (maternal (great)grandfather column),4.89655172413793,30.7586206896552,3,7.50979601748422
+rzeszutek_2020_wwii_matgrandmother,Knowledge about World War II Events: Questionnaire (maternal (great)grandmother column),4.89655172413793,30.7586206896552,3,7.50979601748422
+rzeszutek_2020_wwii_patgrandfather,Knowledge about World War II Events: Questionnaire (paternal (great)grandfather column),4.89655172413793,30.7586206896552,3,7.50979601748422
+rzeszutek_2020_wwii_patgrandmother,Knowledge about World War II Events: Questionnaire (paternal (great)grandmother column),4.89655172413793,30.7586206896552,3,7.50979601748422
+SABFI2_Gallardo_Pujol_2018_LOT,Life Orientation Test-Revised (LOT-R),1,2,10.2,-3.4
+safiye_2023_rfq,Reflective Functioning Questionnaire (RFQ-8),1,2,16.1428571428571,-3.4
+salleh_2023_aim_iam_fim,"AIM-IAM-FIM questionnaire (Malay Version): Acceptability of Intervention Measure (AIM), Intervention Appropriateness Measure (IAM), Feasibility of Intervention Measure (FIM)",5,32.3333333333333,11.4,7.6
 sapa_personality,SAPA-Project 696-item temperament item set (IPIP-based scales and the EPQ-R),5.31752873563218,30.132183908046,17.3333333333333,4.37636393032981
 sas_deters_2022,Schizotypal Ambivalence Scale (SAS),13.6842105263158,73.0526315789474,4.5,6.6753036437247
+schafer_2016_music_effects,"Music-listening diary: effects of music listening (Schäfer, 2016)",14.3333333333333,95.6666666666667,3.5,12.1209090909091
+schafer_2016_music_goals,"Goals of music listening (diary questionnaire, Schäfer 2016)",1,2,3.5,-3.4
+schalet_2016_hrsa,"Hamilton Rating Scale for Anxiety (HRSA / HAM-A), 14 items",15.4285714285714,121.857142857143,8,15.9391798941799
+schmidt_2017_pds,"Pubertal Development Scale (PDS), German version (Watzlawik, 2009)",8.66666666666667,45,26.9166666666667,2.77166666666667
+science_ltm,"Eurobarometer 38.1 (November 1992): attitudes to science and technology, Great Britain (Q.62, Q.66)",12.7142857142857,85.2857142857143,18.5,12.4382343499197
 sexual_compulsivity,Answers to the Sexual Compulsivity Scale,11.7,62.6,16.25,6.32000854700855
 sexual_selfconcept,Data on participants' feelings about and self-concept of sexual activities,13.36,71.14,29,8.30836881077039
+shi_2021_gentrification,"Scale for the importance of super-gentrification driving factors (Shi, Duan, Xu & Li, 2021)",4.8695652173913,37.5652173913044,14.4,14.9114645308925
+shi_2025_dass21,"Depression Anxiety Stress Scales - 21 (DASS-21), simplified Chinese version (Wen et al., 2012)",1,2,2,-3.4
+shineha_2024_gef_accept_factors,"Questionnaire on genome-edited foods (Shineha et al., 2024), Q6: factors important for the social acceptance of genome-edited food",1,2,2,-3.4
+shineha_2024_gef_attitudes,Questionnaire on genome-edited foods,11,70.6666666666667,16.8333333333333,6.06106359649123
+shineha_2024_gef_info_topics,"Questionnaire on genome-edited foods (Shineha et al. 2024), Q7: topics of interest",1,2,2,-3.4
+shinohara_2021_testimony,"Reward-allocation, reward-anticipation and explicit evaluation tasks toward puppets (Shinohara, Kanakogi, Okumura & Kobayashi, 2021)",1,2,27.0909090909091,-3.4
 short_dark_triad,Short Dark Triad (SD3),8.66666666666667,45.8888888888889,4.8,4.78401709401709
+shu_2024_gad7,"Generalized Anxiety Disorder-7 (GAD-7), Chinese version",1,2,14.5,-3.4
+shu_2024_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,16.25,-3.4
+shu_2025_translation_add,Translation and cultural adaptation of the MacLeod Clark Professional Identity Scale: additional questions on career choices,11.1428571428571,64.5714285714286,2,8.04417582417583
 shu_2025_translation_eib,Emotional identification and belongingness ratings,11.5714285714286,63.8095238095238,17.5555555555556,6.51764452282971
 shu_2025_translation_mcpis,"9-item MacLeod Clark Professional Identity Scale, used to assess the professional identity of health and social care students",10.6666666666667,56.3333333333333,14,6.63875
 shu_2025_translation_pcd,Professional commitment and devotion ratings,13.8125,78.125,17.5555555555556,7.47366515837104
 shu_2025_translation_pgv,Professional goals and values ratings,10.6,62,17.5555555555556,7.24588679245283
 shu_2025_translation_srt,Self-fulfilment and retention tendency ratings,14.2,74.6,17.5555555555556,6.41488888888889
+silva_2018_mbds,"Male Body Dissatisfaction Scale, reduced 12-item version (MBDS-R; Da Silva et al., 2017), Portuguese version (Carvalho et al., 2013)",9,44,2,4.39772727272727
+silva_2018_phcs,"Perceived Health Competence Scale (PHCS), unified Portuguese-language version",13.25,68,2,5.16240566037736
+silva_2023_ecohis,"Early Childhood Oral Health Impact Scale (ECOHIS; Pahel, Rozier & Slade, 2007), Brazilian Portuguese version (Tesch, Oliveira & Leão, 2008)",1,2,2,-3.4
+simsalRbim_Human_LargeValence_2017,Preference Test - Wide valence range (seven OASIS images),1,2,2,-3.4
+simsalRbim_Human_LowValence_2017,Preference Test: Narrow valence range (paired choices between seven OASIS pictures),1,2,2,-3.4
+sinche_2017_skill_development,"Transferrable skills developed during doctoral training (Sinche et al., 2017)",4.53333333333333,30.5333333333333,10.2,11.5157142857143
+sinche_2017_skill_importance,Transferrable skills: importance for success in current position (Sinche et al. 2017 survey of science PhDs),4.53333333333333,30.5333333333333,9,11.5157142857143
 singh_2025_identity_cse,"Evaluates perceptions of social groups as sources of self-worth, social importance, and personal impact",13.875,70.4375,15.5,6.7239527027027
 singh_2025_identity_gi,"Assesses feelings of belonging, similarity, and emotional bonds with one's ethnic or racial group",10.25,55.75,15.5,5.3175
 singh_2025_identity_grit,"Measures persistence, perseverance, and dedication towards long-term goals",9.375,49.75,16.2,5.84491666666667
 singh_2025_identity_irs,"Assesses perceptions of ethnic-racial identity functioning as a resource, advantage, burden, or stressor",8,49,15.5,6.74944444444444
+singh_2025_identity_pba,"Behavioral Avoidance Scale, adapted to ethnic/racial groups",11.9090909090909,74.9090909090909,14,8.55722151088348
 singh_2025_identity_pds,"Assesses the frequency of being treated with less respect, courtesy, or dignity in daily life",9.77777777777778,50.2222222222222,16.3333333333333,2.00530303030303
 singh_2025_identity_pia,"Measures feelings of nervousness, unease, and tension when interacting with members of other ethnic or racial groups",11,75.5,15.5,9.74
 singh_2025_identity_pit,"Evaluates perceptions of honesty, trustworthiness, and kindness of members from other ethnic or racial groups",9.8,65.2,10,7.41459259259259
 singh_2025_identity_pss,"Measures the frequency of stress, feelings of control, and ability to manage personal difficulties over the past month",17.9,93.4,9.6,6.55301117318436
+singleton_2021_carbon_reduction,"New Ecological Paradigm (NEP) Scale (Dunlap, Van Liere, Mertig, & Jones, 2000)",12.1333333333333,72.1333333333333,10.2,9.09259016393442
+sleboda_2021_risk_benefit,"16-item risk questionnaire (Savadori, Savio, Nicotra, Rumiati, Finucane & Slovic, 2004), Swedish translation, adapted to five technologies",1,2,4.775,-3.4
+smpi_lorenzoluaces_2020_gad7,Generalized Anxiety Disorder 7-item scale (GAD-7),6.42857142857143,37.7142857142857,15.25,6.84603174603175
+smpi_lorenzoluaces_2020_phq9,Patient Health Questionnaire-9 (PHQ-9),12,69.2222222222222,15.25,7.13456603773585
+sned_bendall_2024,"SNED participant questionnaires: Perceived rurality-urbanity V2 (adapted from Cox et al., 2018) and MacArthur Scale of Subjective Social Status (Adler et al., 2000)",23.3333333333333,119.666666666667,3.6,5.90071428571429
+socialstereotype_hughes_2025_judgement,"Interest in Affiliation (Tackman & Srivastava, 2016)",7.24242424242424,38.2121212121212,6.93939393939394,4.19395968048688
 socialstereotype_hughes_2025_personality_other,Ratings of personality by a rater,6.03571428571429,32.6428571428571,15.5,4.79610143702452
 socialstereotype_hughes_2025_personality_self,Personality ratings of self,5.21428571428571,27.5,15.5,4.14096673189824
 soderberg_2024_academic_selfefficacy,Academic self-efficacy (start-up survey),10.5,53,7.6,5.64309523809524
@@ -510,8 +1183,16 @@ soderberg_2024_family_support,Perceived family support for school (start-up surv
 soderberg_2024_general_selfefficacy,Short General Self-Efficacy scale (start-up survey),13.2,69.6,7.6,7.61557575757576
 soderberg_2024_peer_support,Perceived peer support at school (start-up survey),8.16666666666667,39.6666666666667,7.6,2.04397959183673
 soderberg_2024_teacher_support,Perceived teacher and school support (start-up survey),8.55555555555556,43.7777777777778,7.6,3.53108225108225
+song_2023_rses,Rosenberg Self-Esteem Scale (RSES),10.2,46.4,11,3.0801568627451
 spanishmegastudy,General knowledge items,10.5354330708661,61.3637795275591,10.9852362204724,10.337821176804
 spelling2pronounce_edwards2023,Word-level pronunciation difficulty ratings based on spelling,1,2,8.16666666666667,-3.4
+srivani_2022_education4,Questionnaire (Impact of Education 4.0 among Engineering Students for Learning English Language),14.3636363636364,96.1818181818182,8.66666666666667,12.192830840046
+stachl_2020_belonging,2019 Department of Chemistry Sense of Belonging (SB) Survey (graduate student and postdoctoral researcher version),13.6153846153846,75,13.4,5.49851567120048
+stenhouse_2026_math_anxiety,"Mathematics anxiety and mathematics teaching anxiety in trainee teachers survey (Stenhouse, Hyde & Parr, 2026): mathematics confidence items, maths anxiety rating, Mathematics Teaching Anxiety Scale (Hunt & Sari, 2019), maths teaching anxiety rating",12.290780141844,74.7021276595745,5.72340425531915,8.49069628138777
+stoyel_2021_neg_affect,"Positive and Negative Affect Schedule (PANAS), Negative Affect items",1,7,8.4,10.76
+stoyel_2021_pos_affect,"Positive and Negative Affect Schedule (PANAS), Positive Affect items",1,7.8,8.4,16.66
+strohacker_2024_arms_readiness,"Acute Readiness Monitoring Scale (ARMS), shortened 10-item version",4.3,22.5,6.28571428571429,5.84513953488372
+sugiura_2015_disaster_characteristics,Personal characteristics associated with the power to live with disasters (40-item questionnaire),13.325,72.8,4.5,7.60562429643527
 suicide_reinbergs_2025_dssm,"Suicide Stigma Scale. This study modified the personal stigma version of the Depression Stigma Scale (DSS) by replacing each instance of the word “depression” or “depressed” with the word “suicide,” “suicidal,” or “suicidality.”",9.88888888888889,53.1111111111111,14,7.88913857677903
 suicide_reinbergs_2025_gad,The GAD-2 assesses anxiety symptoms over the past two weeks.,7,38.5,15.25,5.68285714285715
 suicide_reinbergs_2025_ghsq,The GHSQ was used to assess participants’ help-seeking behaviors.,5.11111111111111,37.4444444444444,7.71428571428571,7.74515151515152
@@ -521,8 +1202,17 @@ suicide_reinbergs_2025_sbqr,The SBQ-R assesses participants’ suicide risk and 
 suicide_reinbergs_2025_soss,The Stigma of Suicide Scale–Short Form (SOSS-SF) was used to measure participants’ negative attitudes towards individuals who die by suicide.,1.125,9.125,14,34.7377777777778
 suicide_reinbergs_2025_stig,The STIG-9 measures general mental health stigma.,15.4444444444444,85.1111111111111,11,205.273076923077
 suicide_reinbergs_2025_stosa,"Stigma of Suicide Attempt Scale (STOSA). The STOSA is a 12-item scale measuring stigma related to suicide attempts with items such as, “Most people feel that attempted suicide is a sign of personal failure” rated on a 4-point Likert scale from 1 (Strongly disagree) to 4 (Strongly agree).",17.4166666666667,98.75,11,9.946172985782
+sun_2016_risky_choice_graph,"Graph-scale risky choice task, Experiment 1 (Sun et al., 2016): four probability-bet vs money-bet pairs",1,2,9.625,-3.4
+sun_2021_blockchain_loan_adoption,"Using Extended Complexity Theory to Test SMEs' Adoption of Blockchain-based Loan System questionnaire (Sun, Dedahanov, Shin & Li 2021)",11,73.7333333333333,5.85714285714286,8.51092737430168
+sun_2024_innovation,SME innovativeness,16.3333333333333,90.3333333333333,2,9.80448979591837
+sun_2024_performance_expectancy,Performance expectation (Sun et al. 2024 AI computing power leasing adoption survey; items based on Venkatesh et al.),14,93,2,13.1890476190476
+sun_2024_price_value,Price value,16.6666666666667,98,2,11.206
+sun_2024_risk,Perceived risk,13.3333333333333,72,2,8.785
+sun_2024_task_tech_fit,Task-technology fit,14.3333333333333,90.6666666666667,2,12.7767441860465
+sun_2024_usage,Usage,9.33333333333333,51.3333333333333,2,8.7
 sun_2025_morality_study1_compassion,Ratings of compassion for undergraduate targets.,5.5,32.5,16.2,5.32772727272727
 sun_2025_morality_study1_dependability,Ratings of dependability for undergraduate targets.,5,30,16.2,8.78
+sun_2025_morality_study1_fairnessMCQ,"Fairness (MCQ) subscale, informant report",8.27777777777778,52.5,13.6666666666667,61.0515436241611
 sun_2025_morality_study1_honesty,Ratings of honesty for undergraduate targets.,7.75,49.75,14,63.1309677419355
 sun_2025_morality_study1_loyalty,Ratings of loyalty for undergraduate targets.,8,51.5,14,68.41
 sun_2025_morality_study1_meaning,Scores for meaning in life among undergraduate targets.,14.3333333333333,71.3333333333333,3.45454545454545,5.09302325581395
@@ -547,6 +1237,11 @@ sun_2025_morality_study3_honesty,Ratings of honesty for nominated targets.,7.75,
 sun_2025_morality_study3_loyalty,Ratings of loyalty trait for nominated targets.,8,51.5,14,68.41
 sun_2025_morality_study3_neuroticism,Ratings of neuroticism for nominated targets.,4.83333333333333,32,16.2,7.45362068965517
 sun_2025_morality_study3_openness,Ratings of openness for nominated targets.,5.33333333333333,32.3333333333333,16.2,8.615
+sun_2026_eap_content,"Architectural Art English EAP needs analysis questionnaire, Section 4: teaching content importance",10.9090909090909,85.3636363636364,14.8,14.7228787878788
+sun_2026_eap_difficulty,"Architectural Art English EAP needs analysis questionnaire, Section 3: learning difficulties",19.1666666666667,142.5,12.4,15.9980434782609
+sun_2026_eap_methods,"Architectural Art English EAP needs analysis questionnaire, Section 5: teaching method effectiveness",16.4,136.2,12.4,18.0382168674699
+sun_2026_eap_usage,"Architectural Art English EAP needs analysis questionnaire, Section 2: English usage scenarios",7.58333333333333,54.5833333333333,14.8,10.7081593406593
+sun_2026_tiktok_travel,Questionnaire on the Influence of Government culture and tourism TikTok accounts on audience travel intentions,3.41379310344828,24.6551724137931,11.7142857142857,10.0565308254963
 sv-maia2_randelovic_2021_dass,Depression Anxiety Stress Scales-21 (DASS-21),13.6666666666667,67.4285714285714,46.25,5.78267918932279
 sv-maia2_randelovic_2021_delta,DELTA 9 disintegration scale,10.375,53.45,15,2.90786655948553
 sv-maia2_randelovic_2021_erq,Emotion Regulation Questionnaire,15.8,80.8,9.42857142857143,4.44416455696203
@@ -556,7 +1251,30 @@ sv-maia2_randelovic_2021_maas,Mindful Attention Awareness Scale,14.2666666666667
 sv-maia2_randelovic_2021_maia,interoceptive awareness,11.8648648648649,59.6486486486486,3.16666666666667,5.99811734285538
 sv-maia2_randelovic_2021_shs,Subjective Happiness Scale,18,107,5.28571428571429,7.25888888888889
 swmd_mokken,Well-being scale from students about teachers,7.71428571428571,40.4285714285714,7.2,4.24449735449735
+szameitat_2015_multitask_examples,"Szameitat et al. (2015) multitasking questionnaire, Question 11: examples of multitasking",6.3953488372093,38.6279069767442,11.7142857142857,6.05386659673048
+szameitat_2015_occupation_multitask,"Szameitat et al. (2015) multitasking beliefs questionnaire, Question 12: multitasking required in occupations",1.6,12.6,8.28571428571429,11.492
+tan_2026_stem_technology_integration,"Science Teacher’s Belief, Attitude, and Practice of Technology Integration in STEM Education",12.2666666666667,73.8666666666667,2,10.2048648648649
+taylorabdulai_2025_incentives,COVID-19 vaccine acceptability questionnaire (Taylor-Abdulai et al. 2025; adapted from a WHO questionnaire): What will make you accept COVID-19 vaccine,3.57142857142857,27.1428571428571,2.5,12.7068571428571
+teicher_2015_mace_distress_helpless,"Maltreatment and Abuse Chronology of Exposure Scale, experimental version (MACE-X) -- helplessness follow-up",12.2285714285714,73.6571428571429,5,7.39538205980067
+teicher_2015_mace_distress_terrified,"Maltreatment and Abuse Chronology of Exposure Scale, experimental version (MACE-X; Teicher & Parigger 2015): helpless/terrified follow-up, Terrified checkbox",12.2285714285714,73.6571428571429,5.5,7.39538205980067
+teicher_2015_mace_emot_neglect,"Maltreatment and Abuse Chronology of Exposure scale, experimental version (MACE-X; Teicher & Parigger, 2015): emotional neglect items",21.4,131.6,2.5,13.3784299065421
+teicher_2015_mace_nonverbal,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): parental non-verbal emotional abuse items",12,68.6,2.5,8.16666666666667
+teicher_2015_mace_peer_physical,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): peer physical bullying items",13.6,77,2.5,5.15811764705883
+teicher_2015_mace_phys_neglect,"Maltreatment and Abuse Chronology of Exposure scale, experimental version (MACE-X; Teicher & Parigger, 2015): physical neglect items",12.2,62.2,2.5,5.80406557377049
+teicher_2015_mace_physical,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): parental physical maltreatment items",12.1666666666667,70.5,2.5,4.83445205479452
+teicher_2015_mace_sexual,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): sexual abuse items",10.5,59.25,2.5,8.45261904761905
+teicher_2015_mace_witness_parent,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): witnessing interparental violence items",17.5,107.625,2.5,9.10357142857143
+teicher_2015_mace_witness_sib,"Maltreatment and Abuse Chronology of Exposure scale, 75-item experimental version (MACE-X): witnessing violence to siblings items",10.375,68.375,2.5,7.01727941176471
+temesgen_2025_elephant_park_attitude,Attitude statement toward KSNP conservation,8.57142857142857,58.7142857142857,12.8,11.7954566744731
 tenseness_pcmrs,Tenseness from the Freiburg Complaint Checklist,8.33333333333333,47.4358974358974,17.7435897435897,5.05138461538462
+teodorini_2020_modafinil_attitudes,"Attitudes toward modafinil for cognitive enhancement (Teodorini, Rycroft & Smith-Spark, 2020)",13.125,75.875,14,8.97065476190476
+teq_novak_2021_selfesteem,Rosenberg Self-Esteem Scale (RSES),1,2,11,-3.4
+thanh_2025_attitude,"Attitude (5 items, adapted from Blok et al., 2015)",9.4,65.6,9.4,10.258
+thanh_2025_environ_concern,Environmental Concern scale (based on Urban and Scasny),5.5,32.3333333333333,9.4,7.6519696969697
+thanh_2025_green_behavior,"Employee Green Behavior (8 items, adapted and shortened from Blok et al., 2015)",8.125,46,9.4,5.94558823529412
+thanh_2025_green_knowledge,Green Knowledge scale (adapted from Gatersleben et al.),12,73.1666666666667,9.4,9.74
+thanh_2025_perceived_control,"Perceived Behavioral Control scale (Thanh & Cong, 2025; adapted from Swaim et al.)",1,2,9.4,-3.4
+theobald_2017_group_dynamics,ASPECT survey (Assessing Student Perception of Engagement in the Classroom Tool) -- group dynamics items,7.5,51.5,12.5,10.935
 threat_isler_2024_exp1_cog_crt,"A preliminary study of how individuals evaluate their personal risks related to health (particularly COVID-19) and resource scarcity (like financial and material shortages) on various rating scales, comparing COVID-19 health threat manipulation to relaxation manipulation (N=253). Items related to CRT.",23,119,7.25,3.708
 threat_isler_2024_exp1_cog_panas,"A preliminary study of how individuals evaluate their personal risks related to health (particularly COVID-19) and resource scarcity (like financial and material shortages) on various rating scales, across three types of task incentivization (no-bonus, individual bonus, lottery bonus) (N=253). Items related to PANAS.",1,7.5,14,56.2736363636364
 threat_isler_2024_exp1_incentive_crt,"A preliminary study of how individuals evaluate their personal risks related to health (particularly COVID-19) and resource scarcity (like financial and material shortages) on various rating scales, comparing COVID-19 health threat manipulation to relaxation manipulation (N=253). Items related to CRT.",23,119,7.25,3.708
@@ -568,6 +1286,11 @@ threat_isler_2024_exp2_picture_panas,"A preliminary study of how individuals eva
 threat_isler_2024_exp3_cog_panas,A large-scale validation study comparing health threat and relaxation manipulations to a control condition (N=1777),1,7.5,14,56.2736363636364
 threat_isler_2024_exp4_cog_crt,A validation study replicating previous findings and testing both COVID-19-specific and general versions of health and resource scarcity threat manipulations (N=2689). Items related to CRT.,23,119,7.25,3.708
 threat_isler_2024_exp4_cog_panas,A validation study replicating previous findings and testing both COVID-19-specific and general versions of health and resource scarcity threat manipulations (N=2689). Items related to PANAS.,1,7.5,14,56.2736363636364
+tian2026_digital_competence,"Digital Competence Scale for Kindergarten Teachers in Western China (Tian et al., 2026), 29 items",22.6896551724138,156.551724137931,7.4,16.7585981873112
+tomioka_2022_srh_future_needs,"Survey for Nurses: Adolescents and Young Adults with Cancer (Tomioka et al. 2022), Section IV Q9 - future needs for sexual and reproductive support",3.14285714285714,26.2857142857143,2,18.8902597402597
+tomioka_2022_srh_importance,"Survey for Nurses: Adolescents and Young Adults with Cancer, Section IV (Support for sexual and reproductive issues), Questions 1-2: importance of explaining sexual and reproductive effects",24.5,160.5,7.33333333333333,14.4844117647059
+tomioka_2022_srh_support_types,"Survey for Nurses: Adolescents and Young Adults with Cancer (Tomioka et al. 2022), Section IV Q7 - types of sexual and reproductive support provided",2.91666666666667,23.5833333333333,2,16.9017857142857
+torices_2025_bapq,Broad Autism Phenotype Questionnaire (BAPQ),1,2,12.1666666666667,-3.4
 torok_2025_ai_acceptance,Hogyan viszonyulna Ön a mesterséges intelligenciához?,2.25,22.25,22.3333333333333,12.8208333333333
 torok_2025_data_disclosure,"Ha felkínálnának Önnek egy nagyon vonzó ingyenes szolgáltatást, melyik adatát adná meg a következők közül az igénybevétel érdekében?",2.125,18.25,3.5,12.3093382352941
 torok_2025_data_security,"Mennyire érzi, érezné biztonságban ezeket a személyes adatokat a következő területeken?",3,30.25,12.75,11.7292105263158
@@ -581,16 +1304,24 @@ torok_2025_news_source_frequency,Milyen gyakorisággal használja Ön a követke
 torok_2025_news_source_trust,Mennyire bízik meg a kapott információk hitelességében,8.625,63.5,8.8,9.31068661971831
 torok_2025_social_media_effects,torok_2025_social_media_effects,11,81.5,17.2,11.6108333333333
 tpi_vangsness_2019,Tuckman’s Procrastination Scale,10.5625,54.875,17.6,5.28677144970414
+tran_2023_gad7,"Generalized Anxiety Disorder 7-item scale (GAD-7), Vietnamese version",1,2,15.25,-3.4
+tran_2023_phq9,Patient Health Questionnaire-9 (PHQ-9),1,2,15.25,-3.4
+tsai_2017_treeit_tam_bi,"TreeIt Technology Acceptance Model Questionnaire (Tsai et al. 2017, Appendix 2; adapted from Davis et al. 1989 TAM): Behavioral Intention",1,2,10.2,-3.4
+tsai_2017_treeit_tam_peou,"TreeIt Technology Acceptance Model Questionnaire (Tsai et al. 2017, Appendix 2; adapted from Davis et al. 1989 TAM): Perceived Ease of Use",1,2,8.5,-3.4
+tsai_2017_treeit_tam_pu,"TreeIt Technology Acceptance Model Questionnaire (Tsai et al. 2017, Appendix 2; adapted from Davis et al. 1989 TAM): Perceived Usefulness",1,2,8.5,-3.4
+tuason_2021_covid_coping_enjoy,"COVID-19 coping checklist (author-created; Tuason, Guss & Boyd, 2021)",7.17391304347826,45.6086956521739,2,6.29884867622055
 twod_rotation_mather2023,"Two-Dimensional Rotation (R2D) item pool, International Cognitive Ability Resource (ICAR)",1,2,8,-3.4
 ups_vangsness_2019,Unintentional Procrastination Scale,16,77,17.6,5.61071428571428
 vcism_polish_trzcinska_2023,Preschool Implicit Association Test,4,21.0833333333333,16.25,74.2858333333333
 vermeiren_2022_art,Author Recognition Test: Measures participants’ exposure to print and reading frequency by identifying real fiction authors among foils. Scores reflect general cultural literacy and reading habits rather than comprehension.,2.06666666666667,13.5,NA,9.24292688172043
 veterans_affairs_ssvf_survey_2018-20,VA Satisfaction survey related to supportive services for low-income veterans (2-18-2020),14.7398843930636,99.0404624277457,7.73988439306358,10.0755882352941
+vocabulary_iq,"Vocabulary IQ Test (VIQT), with its optional supplemental survey",5.51666666666667,36.3,6.5,15.4752145015106
 wang_2024_self_efficacy_sources,EFL Sources of Speaking Self-Efficacy Scale (EFL-SSSES),14.4615384615385,83.1538461538462,3.71428571428571,7.93829787234043
 wang_2024_speaking_self_efficacy,EFL Speaking Self-Efficacy Scale (EFL-SSES),13,77.5333333333333,3.71428571428571,7.39179487179488
 wang_onlineriskexp_2025,"Scales that measure how often students encounter harmful online experiences, like cyberbullying, sexual solicitation, or exposure to explicit content.",14.3125,82.9375,6.4,9.50296266233766
 wang_onlineriskexp_2025_anxiety,The level of emotional and physical symptoms related to anxious feelings.,11.8571428571429,66.7142857142857,56.25,7.51621342512909
 weber2026_name_knowledge,"Name-based instructor-student interaction questionnaire (pilot), Perceived Effects section",9.74576271186441,57.9661016949153,16.6,7.76806484893147
+wine_luckett2021,"Aroma rating task, wine aroma model study (Luckett et al. 2021, Chemical Senses)",6.08474576271186,31.4152542372881,2,4.40087814550777
 xie_2026_student_questionnaire,"Student questionnaire on BOPPPS/collaborative inquiry-based DSP teaching model (motivation/participation/effectiveness dimensions); Xie, Zhu, Wang, Bai & Zhang (2026), PLOS ONE",8.53333333333333,48.1333333333333,8.66666666666667,6.359875
 xue_2025_academic_procrastination,"College Students' Academic Procrastination Questionnaire (Zhao, 2007)",1,2,7.4,-3.4
 xue_2025_academic_stress,"College Students' Academic Stress Scale (Liu, 2015)",1,2,7.4,-3.4

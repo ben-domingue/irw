@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"pickova2025_fast_fashion_beliefs","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"pickova2025_feelings","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"pickova2025_moral_justifications","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"pickova2025_perception","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"

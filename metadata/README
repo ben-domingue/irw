@@ -1,14 +1,22 @@
 Process for updating IRW metadata (https://redivis.com/datasets/bdxt-4fqe5tyf4)
 
-Preferred: use the site-update skill (.claude/skills/site-update/) instead of
-running the scripts below by hand. It runs them in order, diffs each output
+Preferred: use the site-update skill (.claude/skills/irw-site-update/) instead
+of running the scripts below by hand. It runs them in order, diffs each output
 CSV against what it replaced (added/removed/changed rows, flagged if any
 cell looks like a suspiciously long raw-text dump), and never overwrites
-silently.
+silently. Both scripts live in that skill, not in this directory:
 
-  scripts/run_pipeline.sh     # generate: 01 -> 02 -> 03 -> 05 -> 06 -> 07 -> 09
-  scripts/audit_tables.R      # cross-source table-name consistency audit;
-                               # run AFTER run_pipeline.sh, in the same directory
+  .claude/skills/irw-site-update/scripts/run_pipeline.sh
+                              # generate: 01 -> 02 -> 03 -> 05 -> 06 -> 07
+                              #           -> 08 -> 10 -> 09
+  .claude/skills/irw-site-update/scripts/audit_tables.R
+                              # cross-source table-name consistency audit;
+                              # run AFTER run_pipeline.sh, in the same directory
+
+That order is a copy, not the source of truth. The authoritative run order is
+`DEFAULT_ORDER` in run_pipeline.sh, which is what actually executes -- check it
+there before running anything by hand, and see ../ARCHITECTURE.md, whose
+authority table points at the same variable for this reason (#1726, #1729).
 
 Needs ANTHROPIC_API_KEY set (02_biblio.R's BibTeX-generation fallback calls
 Claude when a DOI-based lookup fails) and Redivis credentials configured
@@ -20,10 +28,17 @@ Manual run order, if not using the skill:
 2. 02_biblio.R: makes biblio.csv, comps_biblio.csv, nominal_biblio.csv, simsyn_biblio.csv [bibliographic information for citing -- one pass per source]
 3. 03_tags.R: makes tags.csv and nominal_tags.csv [pulls together hand-annotated tags,
    one Google Sheet per source. comp/sim deliberately have no tags --
-   see Rpkg/inst/developer/tags.md]
+   see ../ARCHITECTURE.md. Tag vocabulary and decision rules live in
+   ../tags/.claude/skills/irw-auto-tag/references/vocab.md]
 5. 05_comps.R: makes comps_metadata.csv [same idea as 01_metadata.R, for the irw_competitions source]
 6. 06_nominal.R: makes nominal_metadata.csv [same idea as 01_metadata.R, for the irw_nominal source]
 7. 07_simsyn.R: makes simsyn_metadata.csv [same idea as 01_metadata.R, for the irw_simsyn source]
+8. 08_itemtext.R: makes itemtext_metadata.csv [readability/length metadata for the
+   item-text tables. INCREMENTAL: it processes only tables absent from the
+   itemtext_metadata table already on Redivis and appends to it. Needs quanteda
+   and quanteda.textstats. For a full recompute -- e.g. after adding a column --
+   use hotfixes/08_itemtext_recompute.R instead. Generating the item text itself is a
+   separate job, see itemtext/.claude/skills/irw-auto-itemtext/.]
 10. 10_collections.R: makes collections.csv + collection_members.csv
    [labelled groupings of tables -- RCT, big_five, depression, q_matrix ... --
    issue #1633. Reads the version-controlled registry in ../collections/ and
@@ -40,9 +55,6 @@ Manual run order, if not using the skill:
    only; being superseded by the skill's audit_tables.R, which generalizes
    this to all four sources (core/comps/nominal/simsyn) and writes a
    standalone report rather than printing to console]
-
-08_itemtext.R is a separate concern (item-text readability metadata) --
-see itemtext/.claude/skills/irw-auto-itemtext/.
 
 hotfixes/: one-off patch/diagnostic scripts, out of scope for the normal
 update process -- see hotfixes/README.md.

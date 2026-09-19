@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"hui_2024_who5","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"humor_styles","PASS",32,32,TRUE,TRUE,FALSE,TRUE,0,0,""
+"iandolo_2021_asq","PASS",40,40,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"ibrahim_2015_bfi","PASS",44,44,TRUE,TRUE,FALSE,TRUE,0,0,""
+"ibrahim_2015_sf36","PASS",36,36,TRUE,TRUE,FALSE,TRUE,0,0,""

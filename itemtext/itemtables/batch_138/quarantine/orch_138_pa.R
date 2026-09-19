@@ -1,0 +1,13 @@
+library(haven)
+d <- read_sav(".cache/pierro_2018_posaffect_s3/s003.sav")
+pa <- as.data.frame(d[, paste0("posaffect",1:10)])
+pa[] <- lapply(pa, function(x){x[x<1|x>5]<-NA; as.numeric(x)})
+R <- cor(pa, use="pairwise.complete.obs")
+# canonical PA within-block order:
+lab <- c("interested","excited","strong","enthusiastic","proud","alert","inspired","determined","attentive","active")
+cat("means under canonical labels:\n")
+m <- colMeans(pa,na.rm=TRUE); for(i in 1:10) cat(sprintf("  %-13s posaffect%-2d %.2f\n", lab[i], i, m[i]))
+cat("\ncanonical near-synonym pairs and their r:\n")
+prs <- list(c(1,9),c(2,4),c(3,10),c(6,9),c(7,4),c(5,8))
+for(p in prs) cat(sprintf("  %-12s(%d) ~ %-12s(%d)  r=%.3f\n", lab[p[1]],p[1],lab[p[2]],p[2],R[p[1],p[2]]))
+cat("\nfull PA correlation matrix:\n"); print(round(R,2))

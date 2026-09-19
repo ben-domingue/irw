@@ -42,14 +42,24 @@ Two-phase, same shape as irw_discover_plos.py:
      the SAME triage_dataset()/load_table() gate every other connector
      uses.
 
-Known simplification vs. irw_discover_plos.py: this script does not scrape
-the full-text body for a Data Availability statement or an external-repo
-DOI mention (PLOS's `external_link` column) -- Europe PMC's supplementary-
-files endpoint is the whole point of this connector; chasing DAS-linked
-external repos is the regular repo-based pipeline's job already, and would
-require fetching+parsing full-text XML per candidate, a meaningfully
-heavier request than what this script does today. Worth adding later if it
-turns out to matter.
+  3. If (2) yields no tabular file, the article's Data Availability
+     statement is read from its JATS full text and any deposit it names is
+     handed to irw_batch_updated's resolvers, via the link handling
+     shared with irw_discover_plos.py (`triage_external_link`, which lives
+     in irw_batch_updated so neither connector imports the other).
+
+This step used to be skipped, on the reasoning that the supplementaryFiles
+endpoint is the point of this connector and that chasing DAS-linked repos
+was the repo pipeline's job anyway. Both halves turned out to be wrong.
+Nothing else reaches these deposits: the repo connectors search repository
+indexes, and a deposit is only found there if its own metadata matches a
+construct term -- an article's data file usually does not. And the cost
+argument does not survive measurement: the full text averages 137 KB
+against the ~367 KB supplementary zip already downloaded for every
+candidate, and it is fetched only on the failure path. PLOS made exactly
+this mistake and it cost 395 recoverable candidates (#2191, #2193); of a
+random 20 PMC candidates retired as `no_usable_file`, 5 name a deposit the
+resolvers can read.
 
 Run:
     python irw_discover_pmc.py "self-efficacy scale" "reading assessment" --out pmc_triage.csv
@@ -74,7 +84,10 @@ import requests
 from irw_discover_updated import (
     Hit, is_relevant, norm_doi, _load_auto_exclusions, in_runs_dir,
 )
-from irw_batch_updated import check_license, TABULAR_EXT, polite_get, FileTooLarge
+from irw_batch_updated import (
+    check_license, TABULAR_EXT, polite_get, FileTooLarge,
+    extract_external_link, triage_external_link,
+)
 from irw_triage_updated import load_table, triage_dataset, preflight_deps
 
 EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
@@ -87,6 +100,14 @@ EUROPEPMC_SEARCH = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
 # actually read (tabular supplements), so it is faster besides.
 EUROPEPMC_SUPPL = ("https://www.ebi.ac.uk/europepmc/webservices/rest/"
                    "{pmcid}/supplementaryFiles?includeInlineImage=false")
+# Full text, for the Data Availability statement. The core record does NOT
+# carry it: it has hasData/dataLinksTagsList but no statement text and no
+# repository URL, and the /datalinks endpoint answers 500. Measured over 20
+# articles (2026-09-16): mean 137 KB, max 243 KB -- smaller than the
+# supplementary zip this connector already downloads for every candidate,
+# and fetched only after that zip has failed to yield a tabular file.
+EUROPEPMC_FULLTEXT = ("https://www.ebi.ac.uk/europepmc/webservices/rest/"
+                      "{pmcid}/fullTextXML")
 ARTICLE_URL = "https://europepmc.org/article/PMC/{pmcid}"
 
 # slug -> (issn_l, display name). See module docstring for how this list
@@ -230,6 +251,67 @@ def fetch_core_license(pmcid: str) -> str:
     return results[0].get("license", "") if results else ""
 
 
+# JATS puts the Data Availability statement in a <sec sec-type=...>, a
+# <notes notes-type=...> or a <custom-meta>, with the type spelled
+# "data-availability", "data-availability-statement" or "availability"
+# depending on the publisher. Matching on the markup mentioning availability
+# of data or code found a statement in 19 of 20 sampled articles (the miss
+# genuinely has none), so this stays a pattern rather than an XML parse.
+_RE_DAS_BLOCK = re.compile(
+    r"<(sec|notes|custom-meta)\b[^>]*?(?:sec-type|notes-type|id)\s*=\s*"
+    r"[\"'][^\"']*(?:data|code)[^\"']*avail[^\"']*[\"'][^>]*>(.*?)</\1>",
+    re.IGNORECASE | re.DOTALL)
+# Fallback: a titled section whose heading says so.
+_RE_DAS_TITLE = re.compile(
+    r"<(sec|notes)\b[^>]*>\s*<title>[^<]*(?:data|code)[^<]*availab[^<]*</title>(.*?)</\1>",
+    re.IGNORECASE | re.DOTALL)
+_RE_XML_TAG = re.compile(r"<[^>]+>")
+
+
+def fetch_fulltext_xml(pmcid: str) -> str:
+    """The article's JATS full text. Only called once the supplementary
+    archive has already failed to produce a tabular file."""
+    return polite_get(EUROPEPMC_FULLTEXT.format(pmcid=pmcid)).text
+
+
+def extract_data_availability(xml: str) -> str:
+    """The Data Availability statement as plain text, or "" if absent."""
+    m = _RE_DAS_BLOCK.search(xml or "") or _RE_DAS_TITLE.search(xml or "")
+    if not m:
+        return ""
+    text = _RE_XML_TAG.sub(" ", m.group(2))
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def _data_availability_handoff(pmcid: str, base: dict, si_reason: str) -> dict | None:
+    """Triage the deposit the article's Data Availability statement names.
+
+    Returns None when there is no statement, no link in it, or the full text
+    cannot be fetched -- the caller then keeps its own no_usable_file verdict.
+
+    This connector used to stop at "the supplementary archive holds nothing
+    tabular" and retire the DOI, which is how PLOS lost 395 recoverable
+    candidates before #2191. Of a random 20 PMC candidates retired that way,
+    5 named a figshare/OSF deposit that the resolvers read.
+    """
+    try:
+        xml = fetch_fulltext_xml(pmcid)
+    except Exception:
+        return None
+    avail = extract_data_availability(xml)
+    base["data_availability"] = avail[:300]
+    link = extract_external_link(avail)
+    base["external_link"] = link
+    if not link:
+        return None
+    row = triage_external_link(link, base)
+    # triage_external_link's no-resolver wording is written for PLOS's
+    # Supporting Information; say what actually failed here.
+    if row.get("flag") == "external_unresolved":
+        row["reasons"] = f"{si_reason} | {row['reasons'].split('; ', 1)[-1]}"[:400]
+    return row
+
+
 def process_one(hit: Hit) -> dict:
     journal = hit.source.split(":", 1)[1] if ":" in hit.source else ""
     m = _RE_PMCID.search(hit.url)
@@ -257,9 +339,9 @@ def process_one(hit: Hit) -> dict:
     except requests.exceptions.HTTPError as e:
         status = e.response.status_code if e.response is not None else None
         if status == 404:
-            return {**base, "flag": "no_usable_file",
-                    "reasons": "no supplementary-files archive for this PMCID",
-                    **empty_meta}
+            reason = "no supplementary-files archive for this PMCID"
+            return (_data_availability_handoff(pmcid, base, reason)
+                    or {**base, "flag": "no_usable_file", "reasons": reason, **empty_meta})
         return {**base, "flag": "download_failed", "reasons": str(e)[:200], **empty_meta}
     except FileTooLarge as e:
         return {**base, "flag": "file_too_large", "reasons": str(e), **empty_meta}
@@ -269,17 +351,17 @@ def process_one(hit: Hit) -> dict:
     try:
         zf = zipfile.ZipFile(io.BytesIO(content))
     except zipfile.BadZipFile:
-        return {**base, "flag": "no_usable_file",
-                "reasons": "supplementary-files response was not a valid zip archive",
-                **empty_meta}
+        reason = "supplementary-files response was not a valid zip archive"
+        return (_data_availability_handoff(pmcid, base, reason)
+                or {**base, "flag": "no_usable_file", "reasons": reason, **empty_meta})
 
     names = zf.namelist()
     tabular = [n for n in names if any(n.lower().endswith(ext) for ext in TABULAR_EXT)]
     if not tabular:
-        return {**base, "flag": "no_usable_file",
-                "reasons": f"no tabular-format file among {len(names)} supplementary "
-                           f"file(s): {'; '.join(names[:10])}"[:400],
-                **empty_meta}
+        reason = (f"no tabular-format file among {len(names)} supplementary "
+                  f"file(s): {'; '.join(names[:10])}")[:400]
+        return (_data_availability_handoff(pmcid, base, reason)
+                or {**base, "flag": "no_usable_file", "reasons": reason, **empty_meta})
 
     fname = tabular[0]
     try:
@@ -316,10 +398,13 @@ def process_one(hit: Hit) -> dict:
 # ---------------------------------------------------------------------------
 
 FIELDNAMES = ["source", "journal", "doi", "title", "url", "pmcid", "license",
-              "flag", "reasons", "data_file", "n_responses", "n_participants",
+              "flag", "reasons", "data_availability", "external_link",
+              "data_file", "n_responses", "n_participants",
               "n_items", "density", "n_other_files"]
 
-_PROCESS_TIMEOUT = 90  # seconds; license lookup + SI download + one file parse
+# License lookup + SI download + one file parse -- and, on the failure path,
+# a full-text fetch, a DOI redirect and a repository listing besides.
+_PROCESS_TIMEOUT = 180
 
 
 def _new_pool() -> ProcessPoolExecutor:

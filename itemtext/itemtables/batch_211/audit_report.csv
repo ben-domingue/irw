@@ -1,0 +1,4 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"verbagg","PASS",24,24,TRUE,TRUE,FALSE,TRUE,0,0,""
+"Veterans_Affairs_SSVF_Survey_2016-17","WARN",59,59,TRUE,TRUE,FALSE,TRUE,0.6,0.6,"row-count anomaly (possible item-code conflation or missingness skew), median=6633: 13, 30, 31, 32, 33, 34, 35, 36, 37, 51, ... | 0.6% of rows have blank item_text | 0.6% of rows have blank option_text | 1 of 59 items have NO option_text rows while others do (7)"
+"VSOCFP_Sebo_2024","PASS",8,8,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"

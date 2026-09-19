@@ -1,0 +1,5 @@
+table,batch,mapping_basis,uploaded,route,status,evidence
+reinecke_2018_online_vigilance,batch_154,data_labels,,NOT_NEEDED,NOT_NEEDED,mapping_basis=data_labels: the IRW item code is the source file's own column name and the source file ties that column to its text; Step 5b exempt.
+reinwarth_2023_domain_importance,batch_154,data_labels,,NOT_NEEDED,NOT_NEEDED,mapping_basis=data_labels: the IRW item code is the source file's own column name and the source file ties that column to its text; Step 5b exempt.
+reinwarth_2023_domain_satisfaction,batch_154,data_labels,,NOT_NEEDED,NOT_NEEDED,mapping_basis=data_labels: the IRW item code is the source file's own column name and the source file ties that column to its text; Step 5b exempt.
+reinwarth_2023_loneliness3,batch_154,data_labels,,NOT_NEEDED,NOT_NEEDED,mapping_basis=data_labels: the IRW item code is the source file's own column name and the source file ties that column to its text; Step 5b exempt.

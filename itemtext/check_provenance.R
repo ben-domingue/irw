@@ -54,18 +54,49 @@ if (!length(files)) stop("no provenance.csv found under ", here)
 ## a content field, indistinguishable to a reader from a key the study itself
 ## published, which is precisely the situation the 2026-09-02 machine_translation
 ## ruling addressed. Same shape, same remedy.
+##
+## `review` is a SEPARATE and weaker claim than `discloses`, added 2026-09-06.
+## `mixed` means "different fields came from different sources -- say which in
+## the note", so unlike `machine_translation` it does NOT by itself say whether
+## any of those sources was this project. Some mixed rows carry IRW-authored
+## English and owe a page entry; some are two published sources combined and owe
+## nothing. The field cannot tell them apart, and guessing either way is wrong:
+## asserting a disclosure is owed would fail the gate on clean tables, and
+## staying silent is what let `ghanbari_2016_helma_numeracy` (batch_038) and
+## `gilbert_meta_27` (batch_039) reach a shipping decision unflagged in two
+## consecutive rounds. So mixed rows are REPORTED for a human to read the note,
+## and never decide the exit status.
 CHECKED <- list(
     list(field = "translation_source", discloses = "machine_translation",
+         review = "mixed",
          why = "Each ships English this project generated"),
-    list(field = "key_source",         discloses = "derived_from_responses",
-         why = "Each ships an answer key this project derived rather than transcribed")
+    ## `read_from_stimulus` added 2026-09-18 (gilbert_meta_70, #1945): a key read
+    ## off the hosted stimulus is no more the study's assertion than one solved
+    ## from responses, so it owes the same page entry.
+    list(field = "key_source",
+         discloses = c("derived_from_responses", "read_from_stimulus"),
+         why = "Each ships an answer key this project derived rather than transcribed"),
+    ## Added 2026-09-11 (#1848, ENEM 2023). Five items had figures the source never
+    ## described in words, so this project wrote descriptions into item_text. Same
+    ## shape as the two above: IRW-authored content in a content field. It is a
+    ## column of its own rather than a `text_source` value because text_source
+    ## already carries claims other checks read (`translated_substitute` above,
+    ## `canonical_instrument` for the rights sweep), and a table can be both.
+    list(field = "description_source", discloses = "partly_generated",
+         why = "Each ships descriptions of figures or diagrams this project generated")
 )
 
 bad <- list()
+claims <- list()          # table -> data.frame(file, mapping_basis, text_source)
 sub_blank <- character(0)
 sub_nocol <- character(0)
 needs_note <- character(0)
 note_reason <- character(0)
+needs_review <- character(0)
+nt_bad <- character(0)
+withdrawn <- character(0)
+stamped   <- character(0)
+unstamped <- character(0)
 n_rows <- 0L
 
 for (f in files) {
@@ -87,9 +118,61 @@ for (f in files) {
         if (length(off))
             bad[[paste(f, spec$field)]] <-
                 sprintf("  %-44s %-24s %s", x$table[off], spec$field, sQuote(vals[off]))
-        hit <- x$table[vals == spec$discloses]
+        hit <- x$table[vals %in% spec$discloses]
         needs_note <- c(needs_note, hit)
         note_reason <- c(note_reason, rep(spec$why, length(hit)))
+        if (!is.null(spec$review))
+            needs_review <- c(needs_review, x$table[vals %in% spec$review])
+    }
+
+    ## A withdrawn table ships no item text at all, so it has nothing to disclose.
+    ## The signal is the public_note's opening sentence, which every withdrawal
+    ## written by tools/withdraw_wording_rights.py shares; there is no `withdrawn`
+    ## column to read, and the `uploaded` stamp deliberately stays put as history.
+    if ("public_note" %in% names(x)) {
+        pn <- ifelse(is.na(x$public_note), "", trimws(x$public_note))
+        withdrawn <- c(withdrawn,
+                       x$table[startsWith(pn, "IRW does not offer item text for")])
+    }
+
+    ## A HELD table -- extracted, gated, and deliberately never uploaded -- ships
+    ## no wording either, so it owes an issues-page line for exactly the same
+    ## reason a withdrawal does not: the page describes what IRW ships. Before
+    ## this, `hua_2023_efl_study_engagement` (batch_047, a rights hold that will
+    ## never ship) failed the check in EVERY round report, and the only way to
+    ## clear it was to disclose wording that is not public.
+    ##
+    ## The signal is a blank `uploaded` stamp, and it has to be read across ALL
+    ## provenance files, not per row: one table can appear twice (batch_004 and
+    ## batch_012 both carry ALSECYPIAMH_WU_2022_PHQ, the second unstamped after
+    ## its hold was released). Held therefore means unstamped EVERYWHERE. The
+    ## literal string `unrecorded` counts as stamped -- it means uploaded on an
+    ## unknown date, which is what twod_rotation_mather2023 (live in irw_text)
+    ## and himmelstein-admc_raw-2025 carry.
+    ##
+    ## The trust boundary is the same as the withdrawal one, and tighter here:
+    ## a blank stamp on a table that WAS uploaded would exempt it wrongly, so
+    ## the exempted tables are named in the report rather than dropped silently.
+    ## Shipping a held table stamps it, and it re-enters the check that round.
+    if (all(c("table", "uploaded") %in% names(x))) {
+        up <- ifelse(is.na(x$uploaded), "", trimws(x$uploaded))
+        stamped   <- c(stamped,   x$table[nzchar(up)])
+        unstamped <- c(unstamped, x$table[!nzchar(up)])
+    }
+
+    ## One table can legitimately appear in two provenance files -- a language
+    ## backfill records a second event, and a redone batch supersedes an
+    ## earlier one. What is not fine is two rows making DIFFERENT claims about
+    ## the same shipped text with nothing saying which one holds: #1828 found
+    ## ALSECYPIAMH_WU_2022_PHQ recorded as `paper_order` in batch_004 and
+    ## `paper_explicit` in batch_012, neither marked superseded.
+    if ("table" %in% names(x)) {
+        get <- function(col) if (col %in% names(x))
+            ifelse(is.na(x[[col]]), "", trimws(x[[col]])) else rep("", nrow(x))
+        claims[[length(claims) + 1L]] <- data.frame(
+            table = x$table, file = f,
+            mapping_basis = get("mapping_basis"), text_source = get("text_source"),
+            note = get("note"), stringsAsFactors = FALSE)
     }
 
     if ("text_source" %in% names(x)) {
@@ -98,48 +181,152 @@ for (f in files) {
         if ("translation_source" %in% names(x)) {
             tr <- ifelse(is.na(x$translation_source), "", trimws(x$translation_source))
             sub_blank <- c(sub_blank, x$table[ts == "translated_substitute" & !nzchar(tr)])
+            nt_bad <- c(nt_bad, sprintf(
+                "  %-44s not_translated on a translated_substitute row: English is in the base fields",
+                x$table[ts == "translated_substitute" & tr == "not_translated"]))
         } else {
             ## The column postdates most of the corpus (added 2026-09-02), so these
-            ## rows have no field to leave blank. Counted apart: a backfill has to
-            ## add the column here, not just a value.
+            ## rows have no field to leave blank. Counted apart because the remedy
+            ## differs: here a fix has to add the column, not just a value.
             sub_nocol <- c(sub_nocol, sub)
         }
     }
 }
 
-## A blind spot the disclosure check above cannot see, reported separately.
+## The other shape of IRW-generated English, enforced since 2026-09-06 (irw#1970).
 ##
-## The check fires on `translation_source == machine_translation`, which is the
-## right test for a table shipping administered wording plus an IRW translation.
-## It does not reach the other shape: `text_source = translated_substitute`, where
-## the administered original could not be recovered and ENGLISH SITS IN THE BASE
-## FIELDS. There the English may be the study's own rendering (nothing to disclose)
-## or something this project wrote (a disclosure is owed), and `translation_source`
-## is the only field that would tell them apart.
+## The disclosure check above fires on `translation_source == machine_translation`,
+## which is the right test for a table shipping administered wording plus an IRW
+## translation. It does not reach `text_source = translated_substitute`, where the
+## administered original could not be recovered and ENGLISH SITS IN THE BASE FIELDS.
+## There the English may be the study's own rendering (nothing to disclose) or
+## something this project wrote (a disclosure is owed), and `translation_source` is
+## the only field that would tell them apart.
 ##
-## Measured 2026-09-05: 62 tables carry translated_substitute and not one of them
-## records where its English came from. They split two ways, and the split matters
-## because the remedies differ: 17 sit in provenance files that HAVE the column and
-## leave it blank, while 45 predate the column entirely (it was added 2026-09-02),
-## so a backfill there has to add the field, not just fill it. Reported as counts
-## rather than as errors -- most are almost certainly the study's own English; what
-## is wrong is that nothing distinguishes them. See ben-domingue/irw#1970.
-report_gap <- function(v, headline, remedy) {
-    if (!length(v)) return(invisible(NULL))
-    cat(sprintf("\n%s: %d table(s)\n", headline, length(v)))
-    cat("  ", remedy, "\n", sep = "")
-    cat(sprintf("  %s\n", paste(utils::head(sort(v), 8), collapse = ", ")))
-    if (length(v) > 8) cat(sprintf("  ... and %d more\n", length(v) - 8))
-}
-if (length(sub_blank) || length(sub_nocol)) {
-    cat("\ntranslated_substitute puts ENGLISH IN THE BASE FIELDS. Whether that English is",
-        "\nthe study's own or IRW's is what translation_source would record, and these",
-        "\ntables do not record it. Not an error -- a gap this check cannot resolve.\n",
+## Until 2026-09-06 this was reported as a count and passed: 63 tables carried
+## translated_substitute and not one recorded where its English came from, so the
+## check had no signal for this shape at all -- it could not miss cases, it could
+## not see them. All 63 were backfilled from their own provenance notes (26
+## official_instrument_english, 33 study_supplied, 3 mixed, 1 third_party_english;
+## no machine_translation among them), and a blank is an error from here on. That
+## is the fix the issue asked for: put the fact on the record at extraction time,
+## where the extractor knows the answer, rather than leaving a silent pass behind.
+if (length(sub_blank))
+    bad[["translated_substitute rows with no translation_source"]] <-
+        sprintf("  %-44s %-24s %s", sort(sub_blank), "translation_source",
+                sQuote(""))
+if (length(sub_nocol))
+    bad[["translated_substitute rows in a file with no translation_source column"]] <-
+        sprintf("  %-44s %-24s %s", sort(sub_nocol), "translation_source",
+                "(column absent -- add it)")
+if (length(sub_blank) || length(sub_nocol))
+    cat("\ntranslated_substitute puts ENGLISH IN THE BASE FIELDS, so where that English",
+        "\ncame from -- the study's own rendering or this project's -- has to be on the",
+        "\nrecord. Fill translation_source on the rows named below (irw#1970).\n",
         sep = "")
-    report_gap(sub_blank, "  column present, left blank",
-               "fill translation_source on these rows")
-    report_gap(sub_nocol, "  column absent from the provenance file",
-               "add the translation_source column, then fill it")
+
+## Generated descriptions, checked against the text itself (ratified 2026-09-11, #1848).
+##
+## `description_source=partly_generated` is only worth anything if the marker it
+## promises is really there, and the rule that matters most is one no provenance
+## field can express: generated text never goes in option_text. A generated label on
+## a response category is what someone doing distractor analysis joins to `resp` and
+## reads as printed on the page -- the inline marker helps a human reader and does
+## nothing for a merge. ENEM 2023 shipped ten such cells before review. So the
+## __items.csv beside each batch provenance file is read, and three things fail:
+##   1. a marker anywhere in option_text / option_text_translated;
+##   2. a marker in item_text / item_text_translated on a table not recorded as
+##      description_source=partly_generated (so no disclosure would be owed);
+##   3. partly_generated with no marker at all (the claim cannot be checked by grep).
+## Only item files still on disk are read; an uploaded batch whose CSVs were removed
+## has nothing to check. Add a language's marker to GEN_MARKER when one first ships --
+## the English one is required in the _translated columns regardless, so an unknown
+## base-field marker is still caught on item_text_translated.
+GEN_MARKER <- "\\((AI-generated|gerada por IA)\\)"
+marker_bad <- character(0)
+for (f in files[grepl("/itemtables/batch_[^/]+/provenance\\.csv$", files)]) {
+    x  <- read.csv(f, stringsAsFactors = FALSE, colClasses = "character")
+    ds <- if ("description_source" %in% names(x))
+        setNames(ifelse(is.na(x$description_source), "", trimws(x$description_source)),
+                 x$table) else setNames(rep("", nrow(x)), x$table)
+    for (it in Sys.glob(file.path(dirname(f), "*__items.csv"))) {
+        tbl <- sub("__items\\.csv$", "", basename(it))
+        claims_gen <- identical(unname(ds[tbl]), "partly_generated")
+        raw <- readLines(it, warn = FALSE, encoding = "UTF-8")
+        if (!any(grepl(GEN_MARKER, raw))) {
+            if (claims_gen)
+                marker_bad <- c(marker_bad, sprintf(
+                    "  %-44s partly_generated, but no inline marker anywhere", tbl))
+            next
+        }
+        d <- read.csv(it, stringsAsFactors = FALSE, colClasses = "character",
+                      encoding = "UTF-8")
+        hit <- function(cols) {
+            cols <- intersect(cols, names(d))
+            if (!length(cols)) return(logical(nrow(d)))
+            Reduce(`|`, lapply(cols, function(k) grepl(GEN_MARKER, d[[k]])))
+        }
+        opt <- hit(c("option_text", "option_text_translated"))
+        if (any(opt))
+            marker_bad <- c(marker_bad, sprintf(
+                "  %-44s generated text in option_text, items: %s", tbl,
+                paste(unique(d$item[opt]), collapse = ", ")))
+        if (any(hit(c("item_text", "item_text_translated"))) && !claims_gen)
+            marker_bad <- c(marker_bad, sprintf(
+                "  %-44s marked generated text in item_text, but description_source is %s",
+                tbl, sQuote(if (is.na(ds[tbl])) "(no provenance row)" else ds[tbl])))
+    }
+}
+
+## `translation_source=not_translated` (added 2026-09-14, #1848), checked against the
+## text. Blank means "administered in English"; not_translated means "not English,
+## and no English ships on purpose". The second is only true if the _translated
+## columns really are empty, so a stray cell fails -- otherwise the record would say
+## no IRW English ships while some does, and the disclosure check would never see it.
+for (f in files[grepl("/itemtables/batch_[^/]+/provenance\\.csv$", files)]) {
+    x <- read.csv(f, stringsAsFactors = FALSE, colClasses = "character")
+    if (!"translation_source" %in% names(x)) next
+    for (tbl in x$table[trimws(x$translation_source) %in% "not_translated"]) {
+        it <- file.path(dirname(f), paste0(tbl, "__items.csv"))
+        if (!file.exists(it)) next
+        d <- read.csv(it, stringsAsFactors = FALSE, colClasses = "character",
+                      encoding = "UTF-8")
+        cols <- grep("_translated$", names(d), value = TRUE)
+        filled <- cols[vapply(cols, function(k) any(!is.na(d[[k]]) & nzchar(trimws(d[[k]]))),
+                              logical(1))]
+        if (length(filled))
+            nt_bad <- c(nt_bad, sprintf("  %-44s not_translated, but these columns have text: %s",
+                                        tbl, paste(filled, collapse = ", ")))
+    }
+}
+
+## One table, two records that disagree. Reported, never enforced: which record
+## holds is a judgement about the evidence, not something a script can settle.
+cl <- do.call(rbind, claims)
+if (!is.null(cl)) {
+    dup <- unique(cl$table[duplicated(cl$table)])
+    ## Only rows that both make a claim. A language-backfill record carries
+    ## neither column -- it documents the translation, not the mapping -- and an
+    ## absent claim does not contradict a present one.
+    split_rec <- Filter(function(t) {
+        r <- cl[cl$table == t & nzchar(cl$mapping_basis) & nzchar(cl$text_source), ]
+        ## A row whose note says SUPERSEDED has already answered this: the
+        ## disagreement is recorded, not unresolved.
+        if (any(grepl("SUPERSEDED", r$note, fixed = TRUE))) return(FALSE)
+        nrow(unique(r[, c("mapping_basis", "text_source")])) > 1L
+    }, dup)
+    if (length(split_rec)) {
+        cat(sprintf("\nSPLIT RECORD: %d table(s) have provenance rows that disagree -- REVIEW, NOT A FAILURE\n",
+                    length(split_rec)))
+        for (t in sort(split_rec)) {
+            r <- cl[cl$table == t, ]
+            cat("  ", t, "\n", sep = "")
+            cat(sprintf("    %-46s %s / %s\n", r$file, r$mapping_basis, r$text_source),
+                sep = "")
+        }
+        cat("  Say in the superseded row's note which record holds, so a reader\n",
+            "  landing on either one is not left to guess (#1828).\n", sep = "")
+    }
 }
 
 ## Kept for the message below, which names the original vocabulary.
@@ -160,7 +347,23 @@ if (length(bad)) {
         cat("Allowed ", spec$field, " (from provenance_vocab.csv): ",
             paste(sQuote(a[nzchar(a)]), collapse = ", "),
             if (any(!nzchar(a))) " and empty" else "", "\n", sep = "")
+        ## ...except on a translated_substitute row, where empty is the one thing
+        ## it cannot be: that is the row whose English is unaccounted for.
+        if (spec$field == "translation_source" && (length(sub_blank) || length(sub_nocol)))
+            cat("  (empty is NOT allowed on a text_source=translated_substitute row",
+                "-- irw#1970)\n")
     }
+}
+
+if (length(marker_bad)) {
+    cat("\nGENERATED-TEXT MARKERS (#1848: generated descriptions belong in item_text only,",
+        "\nalways marked, on a description_source=partly_generated row):\n", sep = "")
+    cat(marker_bad, sep = "\n"); cat("\n")
+}
+
+if (length(nt_bad)) {
+    cat("\nNOT_TRANSLATED CONTRADICTED (the record says no English ships):\n")
+    cat(nt_bad, sep = "\n"); cat("\n")
 }
 
 ## A machine translation is IRW-generated content, so it is disclosed publicly.
@@ -195,12 +398,48 @@ if (file.exists(page)) {
     cat(sprintf("\nissues page not found at %s -- skipping the disclosure check\n", page))
 }
 
-if (file.exists(page) && length(needs_note)) {
+## A WITHDRAWAL ENDS THE DISCLOSURE, ratified by three commits before it was
+## written down here. `datapages/irw` a1b08bb ("withdrawal entries removed"),
+## d2274e1 and 33e1268 between them deleted 17 issues-page entries for tables
+## whose wording had been pulled under the #1945/#1955 rulings -- the page
+## describes what IRW ships, and a withdrawn table ships nothing to caveat. The
+## five entries carrying response-DATA facts (unreversed items, shifted anchors,
+## dominguez_2018_jcs item_17) were rewritten instead of deleted, which is the
+## line: the disclosure follows the wording, the data caveats stay.
+##
+## Until 2026-09-07 this check did not know that, so it went on demanding a page
+## line for `extremera_2016_shs` -- withdrawn 2026-09-06, its entry deleted the
+## same day -- and the gate was red on main for a defect whose only fix was to
+## revert one of those commits. Withdrawn tables are now excluded and counted
+## separately, so the exemption is visible rather than silent (irw#1970).
+##
+## The trust boundary: this takes the public_note at its word. A row that claims a
+## withdrawal while its wording is still live on Redivis would be exempted wrongly,
+## and nothing offline can see that -- red_up's draft/published listing is what would.
+held            <- setdiff(unique(unstamped), unique(stamped))
+exempt          <- union(withdrawn, held)
+disclosure_drop <- !(needs_note %in% exempt)
+needs_note_all  <- needs_note
+needs_note      <- needs_note[disclosure_drop]
+note_reason     <- note_reason[disclosure_drop]
+needs_review    <- setdiff(needs_review, exempt)
+dropped         <- unique(needs_note_all[!disclosure_drop])
+n_withdrawn     <- length(intersect(dropped, withdrawn))
+held_dropped    <- setdiff(dropped, withdrawn)
+
+if (file.exists(page) && (length(needs_note) || length(held_dropped))) {
     txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
     undisclosed <- needs_note[!vapply(needs_note, grepl, logical(1),
                                       x = txt, fixed = TRUE)]
     cat(sprintf("\nIRW-generated content: %d table(s), of which %d have no entry on the public issues page\n",
                 length(needs_note), length(undisclosed)))
+    if (n_withdrawn)
+        cat(sprintf("  (%d further table(s) declared IRW-generated content that has since been\n  withdrawn -- no wording ships, so no entry is owed. %d withdrawn in all.)\n",
+                    n_withdrawn, length(unique(withdrawn))))
+    if (length(held_dropped))
+        cat(sprintf("  (%d further table(s) declared IRW-generated content but are HELD --\n  extracted and gated, never uploaded, so no wording ships and no entry is\n  owed. %d held in all. Shipping one stamps it and it re-enters this check.)\n    %s\n",
+                    length(held_dropped), length(held),
+                    paste(sort(held_dropped), collapse = ", ")))
     if (length(undisclosed)) {
         for (why in unique(note_reason)) {
             u <- undisclosed[undisclosed %in% needs_note[note_reason == why]]
@@ -211,10 +450,31 @@ if (file.exists(page) && length(needs_note)) {
                 "\n", sep = "")
         }
         cat("  The standing ruling is that IRW-generated content carries a line on\n",
-            "  the issues page (translations 2026-09-02, derived answer keys 2026-09-03).\n", sep = "")
+            "  the issues page (translations 2026-09-02, derived answer keys 2026-09-03,\n",
+            "  generated descriptions 2026-09-11, keys read from the stimulus 2026-09-18).\n", sep = "")
     }
 } else {
     undisclosed <- character(0)
+}
+
+## Reported, never enforced -- see the `review` note on CHECKED above. A mixed
+## row that already has a page entry needs no second look, so only the ones
+## missing from the page are listed; that keeps this quiet once a batch is
+## disclosed instead of nagging on every run.
+if (file.exists(page) && length(needs_review)) {
+    txt <- paste(readLines(page, warn = FALSE), collapse = "\n")
+    unreviewed <- unique(needs_review[!vapply(needs_review, grepl, logical(1),
+                                              x = txt, fixed = TRUE)])
+    if (length(unreviewed)) {
+        cat(sprintf("\ntranslation_source=mixed, no issues-page entry: %d table(s) -- REVIEW, NOT A FAILURE\n",
+                    length(unreviewed)))
+        cat("    ", paste(unreviewed, collapse = ", "), "\n", sep = "")
+        cat("  `mixed` does not say WHICH field came from where. Read each note: if any\n",
+            "  part of the shipped text was written by this project, it owes a line on the\n",
+            "  issues page under the 2026-09-02 ruling, exactly as machine_translation does.\n",
+            "  If every part came from a published source, nothing is owed -- that is why\n",
+            "  this does not affect the exit status.\n", sep = "")
+    }
 }
 
 ## The vocabulary always decides the exit status: it is checked against files in
@@ -222,4 +482,5 @@ if (file.exists(page) && length(needs_note)) {
 ## copy of the page we read -- otherwise a colleague's branch checkout would
 ## fail everyone's gate for a defect that is not there. This exact false
 ## positive happened on 2026-09-02, minutes after the 60 entries were merged.
-quit(status = if (length(bad) || (length(undisclosed) && page_is_current)) 1L else 0L)
+quit(status = if (length(bad) || length(marker_bad) || length(nt_bad) ||
+                  (length(undisclosed) && page_is_current)) 1L else 0L)

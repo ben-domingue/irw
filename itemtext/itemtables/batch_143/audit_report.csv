@@ -1,0 +1,5 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"PPSRS_Caliciuri_2024","PASS",11,11,TRUE,TRUE,FALSE,TRUE,0,0,""
+"pranckeviciene_2022_gad7","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"pranckeviciene_2022_phq9","PASS",9,9,TRUE,TRUE,FALSE,TRUE,0,0,""
+"previc_bohn2023","PASS",379,379,TRUE,TRUE,FALSE,TRUE,0,0,""

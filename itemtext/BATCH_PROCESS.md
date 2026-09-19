@@ -13,7 +13,7 @@ extraction) — this file covers the batching layer. The round's own prompt is
 | `extraction_batches/queue_state.csv` | `table,status,batch,timestamp`; status is `pending`/`in_progress`/`done`/`failed`/`blocked`/`excluded`. `failed` and `blocked` are BOTH "no CSV" but mean different things and are counted differently by the circuit breaker (Step 5, ruled 2026-09-03): `failed` is a fault or an unresolved access failure that an unchanged retry might get past, and it counts; `blocked` is a determinate verdict that an unchanged retry cannot change, and it does not count. `blocked` is not permanent the way `excluded` is -- it says a HUMAN action or a data change is needed first, so these are the pool to revisit when one happens. Seeded from the AVAILABLE rows of `availability_audit_full.csv`. **The only state that must persist between rounds.** `excluded` means do not extract, ever — see the standing exclusions below. |
 | `extraction_batches/round_log.md` | One entry per round: counts, notable findings, open items. |
 | `extraction_batches/circuit_breaker.flag` | Present = a round failed >30% and the loop stopped for human review. Delete it to resume. |
-| `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. |
+| `itemtables/batch_NNN/` | `{table}__items.csv` (validated output), `notes.csv`, `provenance.csv`, `verification_merged.csv`, `audit_report.csv`. **Batch history, not a staging area** — see the note below on why the same table appears in two of these. |
 | `mapping_verification.csv` | Permanent, cross-batch record of how each table's item↔text mapping was verified (`route`, `status`, `evidence`). One row per table, ever. Fed by each batch's `verification_merged.csv`. |
 | `itemtables/pending_index_notes.csv` | Standing cumulative log of tables that could not be automated, for the index workbook. Columns `table,note,status`; `status` is one of `pending`/`blocked`/`excluded`/`note_only`/`resolved` (see SKILL.md Step 6b). Append across batches; never reset. |
 | `itemtables/clean/` | Vetted tables staged for upload. **Only `*__items.csv` may live here** — an uploader walks recursively, and this directory exists because stray `.csv` files were once uploaded as tables. `red_up` now excludes non-`__items` files when the target is an item-text shard and names what it excluded, but keep the directory clean anyway. Ben clears it after uploading. |
@@ -23,15 +23,78 @@ that dies partway (API limit, crash) is safely resumable — the next firing see
 what's missing and continues. Tables left `in_progress` by a dead round need
 manual reconciliation back to `pending`.
 
+### The same table can appear in two batch directories
+
+That is expected and is **not** a bug to clean up. When a held table is released
+(a paywall resolved, an author's confirmation arriving), the releasing batch keeps
+an unchanged copy of the CSV next to its new `provenance.csv` row, so that batch
+reads on its own. `ALSECYPIAMH_WU_2022_PHQ__items.csv` is in both `batch_004` (the
+original extraction, uploaded 2026-08-16) and `batch_012` (the #1643 hold release,
+provenance updated only), byte-identical in both.
+
+The consequence for uploading: **run `red_up` against `itemtables/clean/`, never
+across `itemtables/*/`.** Since #2055 `red_up` refuses the wrong argument outright:
+a directory holding a `provenance.csv` is batch history, and it stops before reading
+a single table. Do not reach for `--allow-history-dirs` to get past that here — the
+answer is always to stage into `clean/` first. The older, weaker backstop still
+applies when something slips through with the override: a run over the batch
+directories hits these duplicates, which `red_up` correctly refuses — a Redivis upload
+appends, so uploading two identical files doubles the table. The refusal names
+whether the colliding files have the same bytes; identical means you are pointed at
+the wrong directory, differing means two versions are genuinely in flight.
+
+Deleting one copy to silence it is the wrong fix. irw#1962 proposed exactly that,
+and the copy it called stale was the record of the hold release.
+
 ## Standing exclusions — do NOT extract these
 
-**`enem*` (52 tables): item text is being handled separately by Ben. Do not extract it.**
-Recorded 2026-08-18. All 52 rows are marked `status=excluded` in `queue_state.csv` so no round can
+**`enem*` (52 tables): item text is a separate hand-built workstream. Do not extract it in a
+round.** Recorded 2026-08-18 as handled by Ben; owned by @mateusmazza since #1848 (2026-09),
+arriving one PR per exam year under the standing terms below. All 52 rows are marked `status=excluded` in `queue_state.csv` so no round can
 claim them; do not flip them back to `pending`, and do not extract an `enem*` table even if asked to
 process "everything remaining". They are the Brazilian national exam (ENEM) tables and they dominate
 the corpus by volume — 2.12 billion of what were 2.44 billion pending responses, i.e. **87% of all
 pending response volume** — so any statistic about queue coverage should say whether it includes
-them. Post-exclusion the queue is 1,176 pending.
+them. Post-exclusion the queue is 1,176 pending. A year whose text has landed moves its four
+rows to `done` with the batch name; the rest stay `excluded`.
+
+### ENEM item text: standing terms for every exam year (2026-09-11)
+
+Set on #1848, the 2023 pilot, so the other twelve years do not re-open them. 2023 is the
+worked example: `itemtables/batch_enem_2023/`.
+
+1. **Source.** INEP's accessibility booklet (the LARANJA Braille / Adaptada Ledor text shipped in
+   the microdata) is the primary source where that year has one, because INEP wrote its own
+   descriptions of figures into it. Its wording is **not** the printed booklet's: it is written
+   to be read aloud, so notation is spelled out ("gramas por mol" for g/mol, "Q índice 2" for a
+   subscript) and credits can precede the passage. In 2023 only 2 of 44 MT and 5 of 45 CN items
+   matched the standard booklet word for word. Ruled 2026-09-11: ship that wording as is and say
+   so in every table's `note` and `public_note`, rather than re-transcribing from page images.
+   It also does **not** carry the same items as the regular booklets:
+   in 2023 the CN and MT accessibility booklets each swap two figure-only items for two others.
+   So before joining by position, compare the accessibility `CO_PROVA`'s item set in
+   `ITENS_PROVA_<YYYY>.csv` with the regular booklet's. Items only in the regular set come from
+   the standard booklet PDF, which is also the only source for a year without an accessibility
+   booklet. Items only in the accessibility set are not in the response tables and are not
+   shipped. The provenance note says which items came from where.
+2. **Generated text.** Descriptions this project writes go in `item_text` only, marked inline,
+   and the table carries `description_source=partly_generated` (see "Generated descriptions"
+   under Settled rules). Items whose printed options are bare graphs or diagrams ship blank
+   `option_text`.
+3. **Layout.** One batch directory per year, `itemtables/batch_enem_<YYYY>/`, with the full set:
+   the four `__items.csv`, `notes.csv`, `provenance.csv`, `verification_merged.csv`,
+   `audit_report.csv`.
+4. **Build scripts** are committed once (`batch_enem_2023/scripts/`) and reused or adapted, not
+   re-created per year. Shared files such as `pending_index_notes.csv` and
+   `mapping_verification.csv` get rows appended, never a rewritten file.
+5. **Disclosures** — `machine_translation` and `partly_generated` issues-page entries — go up in
+   the same round as that year's upload.
+6. **Items INEP annulled are not shipped.** #1942 removed them from the response tables
+   (TX_GABARITO `X`; ten across the years), so item text that includes one fails the item-set
+   gate. **An item INEP flags `IN_ITEM_ABAN = 1` but that keeps a valid key is kept and
+   disclosed** (ruled 2026-09-11): 2023 MT `86360`, set aside by INEP for "Bis<0,01", is
+   really administered data. Check `IN_ITEM_ABAN` in each year's `ITENS_PROVA` and name any
+   such item in the notes and `public_note`.
 
 ## Running a round
 
@@ -52,8 +115,9 @@ nonzero and says what to check.
 **Why there is no scheduler, and why "add one later" is the wrong turn:**
 
 - **The bottleneck is triage, not the trigger.** Roughly two thirds of the tables
-  in a round need a human go/no-go, and at ~1,009 pending and 6 tables a round
-  (halved from 12 on 2026-09-05) that is ~168 rounds. Any
+  in a round need a human go/no-go, and at ~796 pending and 3 tables a round
+  (12 -> 6 on 2026-09-05, 6 -> 3 on 2026-09-08, both for memory on this laptop;
+  3 is the daytime setting, for when Ben is using the machine) that is ~265 rounds. Any
   cadence faster than "when someone is ready to triage" just grows an unreviewed
   branch — which is also what makes the pre-round merge of `origin/main` start
   conflicting, and a failed merge stops the queue entirely. One round per triage
@@ -201,6 +265,94 @@ git diff --cached --name-only          # confirm ONLY what you meant is staged
 ```
 
 Prefer naming paths over `git add -A`, and check `--cached` before every commit.
+
+## Settled rules — do not re-litigate these per batch
+
+Each was decided once, by Ben, after a round had raised it repeatedly. They are here rather
+than in an issue because they are answers a triager needs while working, not open questions.
+
+### A table with no item text (2026-09-08)
+
+`irw_text` DOES ship tables whose `item_text` is blank throughout, when the instrument is a
+picture or stimulus task and the wording that exists is the instruction. `twod_rotation_mather2023`
+is live in exactly that shape: 608 items, `item_text` NA on every row, carrying `instrument`,
+`instructions`, `correct_response` and `option_text`. Do not withhold a table merely for blank
+`item_text` — check what it *does* carry.
+
+The bar is that something item-level survives. `klatt_2016_speed_estimation` is HELD on this
+rule, not exempted from it: it has no `correct_response` and no `option_text` either, so beyond
+one `instrument` string and one `instructions` string repeated over all 948 rows, it carries
+nothing a reader could not get from the response table. That is below the bar; `twod_rotation`,
+which distinguishes a correct from an incorrect option, is above it.
+
+(An earlier round recorded `twod_rotation_mather2023` as "withheld 2026-08-24" and held `klatt`
+for matching it. That was wrong on the facts — `twod_rotation` shipped. Its provenance row reads
+`uploaded=unrecorded`, which means shipped on an unknown date, NOT held. Check `live_tables.csv`
+before citing a table as precedent for withholding.)
+
+### The four `_translated` columns (2026-09-08)
+
+The variation is ACCEPTED. A table with nothing to translate may carry the four `_translated`
+columns full of NA or omit them entirely, and `irw_text` tables therefore vary in width. Both
+forms are correct; a reader asking for a column by name gets NA in one and nothing in the other,
+and no consumer depends on the width. Do not normalise this batch by batch — that edits files
+which have passed every gate without producing corpus-wide consistency — and do not raise it
+again as a finding.
+
+### VERIFIED vs PARTIAL: the item-axis rule (2026-09-08)
+
+**VERIFIED means one route pins every item to its code.** A hedge about what some *other* route,
+or some upstream source, could not confirm does not weaken that and must not pull the status down.
+Two shapes that stay VERIFIED:
+
+- the hedge scopes a **secondary route that is not load-bearing** — `jiang_2021_resilience` notes
+  route 1 could not separate C4–C8 (published means within 0.04), and in the same sentence that
+  those items are pinned by Table 4's printed code labels;
+- the hedge scopes an **upstream fact no route could ever settle** — whether the authors' own
+  appendix table is correctly labelled (`jo_2023_arp`), or whether a codebook's Q-numbering
+  matches the published scale's order (`kalichman1995_scs`).
+
+What is still PARTIAL is unchanged: a route that pins a class, a block, a subscale, a direction,
+or a subset of positions but not every item — `bang_2023_self_esteem`'s shape, which is why this
+lint exists.
+
+`lint_verification.R` enforces this, but conditionally: it clears a hedge only when the evidence
+*asserts, positively*, that every item is separated, and it prints the cleared row as INFO naming
+the phrase it relied on. An agent cannot buy VERIFIED with a stock sentence.
+
+**`option_text` is a separate signal.** A table can be VERIFIED on its item axis and still ship
+blank or unverified response-option wording — `jo_2023_arp` does, because the study publishes no
+anchors. That is a real gap in what IRW ships and gets its own WARN; it is not an argument for
+PARTIAL.
+
+### Generated descriptions (2026-09-11)
+
+When a figure, graph, table, equation or diagram has no description in the source, one may be
+written here — **in `item_text` / `item_text_translated` only**, always marked inline, and the
+table gets `description_source=partly_generated`, which owes an issues-page entry like
+`machine_translation`. The line is annotation vs invention: a description inside the stem is a
+reading aid on a stimulus that exists; a generated `option_text` becomes a label on a response
+category that a distractor analysis joins to `resp` and reads as printed. So when printed options
+carry no text (ENEM 2023 `78578`, `125902`), `option_text` is blank and `correct_response` plus
+`resp_raw` keep the options addressable. `check_provenance.R` fails a marker in `option_text`, a
+marked table not recorded as `partly_generated`, and a `partly_generated` table with no marker.
+It cannot see an *unmarked* generated option, which is what ENEM 2023 first shipped — so the
+marker is a requirement, not a courtesy.
+
+### Stimuli in another language, and what `language` means (2026-09-11)
+
+**A stimulus that is itself in another language, and is the object of study, stays verbatim in
+the `_translated` columns** rather than being round-tripped. ENEM's foreign-language items put a
+Portuguese question around an English poem or Spanish passage; translating that passage "back"
+into English changes the item and makes it unanswerable. The same goes for a word an option
+analyses metalinguistically: it stays in the original, with a gloss. This extends the field-level
+rule in `language_backfill/README.md` ("a field already in English is its own translation") to
+text mixed within one cell. Kept-verbatim and forgot-to-translate are byte-identical, so the
+provenance note names the items kept verbatim.
+
+**`language` names the language of administration, not of each cell.** Every row of
+`enem_2023_1mil_lc` reads `Portuguese`, including the English and Spanish stimuli, because the
+candidates sat a Portuguese-language exam. Do not "fix" it per cell.
 
 ## Open items
 

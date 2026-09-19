@@ -1,0 +1,6 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"kern_2021_life_satisfaction","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"khattak_2026_attitude","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"khattak_2026_cr","PASS",4,4,TRUE,TRUE,FALSE,TRUE,0,0,""
+"kim_2023_gad7","PASS",7,7,TRUE,TRUE,FALSE,TRUE,0,0,""
+"kim2020_ams","WARN",17,17,TRUE,TRUE,FALSE,TRUE,0,0,"row-count anomaly (possible item-code conflation or missingness skew), median=1335: Q05, Q08, Q09"

@@ -1,0 +1,7 @@
+"table","status","n_items_live","n_items_candidate","item_set_match","resp_set_match","uses_raw_resp","canonical_nulls","pct_item_text_missing","pct_option_text_missing","note"
+"jung_2018_media_use","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,0,""
+"jutte_2024_loneliness","PASS",3,3,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"jutte_2024_personality","PASS",5,5,TRUE,TRUE,FALSE,TRUE,0,71.4,"71.4% of rows have blank option_text"
+"kalichman1995_scs","PASS",10,10,TRUE,TRUE,FALSE,TRUE,0,0,""
+"karpudewan_2022_stp_cca","PASS",29,29,TRUE,TRUE,FALSE,TRUE,0,100,"100% of rows have blank option_text"
+"karpudewan_2022_stp_efa","WARN",33,33,TRUE,TRUE,FALSE,TRUE,12.1,75,"12.1% of rows have blank item_text | 75% of rows have blank option_text"

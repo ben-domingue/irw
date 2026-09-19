@@ -1,0 +1,37 @@
+table,section_id,item,instrument,language,instructions,section_prompt,item_text,item_text_translated,correct_response,resp,option_text,option_text_translated,subscale
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl1ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl2ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl3in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl4ap,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Support
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl5in,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Innovation
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,1,No one,,Goals
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,2,Few,,Goals
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,3,Someone,,Goals
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,4,Quite,,Goals
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,5,Considerable,,Goals
+pecino_2018_justice_climate,pecino_2018_justice_climate_1,cl6me,FOCUS-93 Organizational Climate Questionnaire (Spanish adaptation),Spanish,,,,,,6,Everyone,,Goals

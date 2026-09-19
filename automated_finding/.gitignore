@@ -45,6 +45,23 @@ irw_triage*.csv
 irw_retriage*.csv
 triage_test*.csv
 
+# Scheduled-routine per-run output, ignored at the top level as well as in
+# runs/. These names are already covered by the runs/ rule where the scripts
+# actually write them (resolve_out_path() -> in_runs_dir()), but a routine
+# that finds runs/ ignored has repeatedly copied its output up to
+# automated_finding/ and committed it there instead -- the plos/pmc weekly
+# candidate CSVs of 2026-08-25/08-26/09-01/09-02, then both halves of the
+# 2026-09-07 repos run. Ignoring the names in both places removes the
+# workaround: BATCH_LOG.md plus search_terms_log.csv are the durable record
+# of a run, and the CSVs regenerate from the scripts.
+monthly_candidates_*.csv
+monthly_triage_*.csv
+plos_monthly_candidates_*.csv
+pmc_monthly_candidates_*.csv
+plos_retriage_*.csv
+pmc_retriage_*.csv
+retriage_*.csv
+
 # Scratch / test run outputs
 test_*.csv
 

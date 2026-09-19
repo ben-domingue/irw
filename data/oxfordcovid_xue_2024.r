@@ -197,11 +197,19 @@ save(swemws_df, file="oxfordcovid_xue_2024_swemws.Rdata")
 write.csv(swemws_df, "oxfordcovid_xue_2024_swemws.csv", row.names=FALSE)
 
 # ---------- Activitiy and Technology Questionnaire ----------
+# Eight items on this form (five media_*, three activity_exercise_*) are free-text
+# hours-per-day quantities, not scale responses: the deposit's dictionary gives them
+# Field_Type "text" with no response options, and the section prompt invites decimals
+# ("e.g. 2.5 if you did 2 and a half hours"). They are dropped here, leaving the 36
+# radio items -- six reasons x six media, each 1 Never .. 5 Always. See #1996.
+hours_items <- c("media_playing", "media_social_media", "media_messaging", "media_video",
+                 "media_playing_voice", "activity_exercise_inside",
+                 "activity_exercise_outside", "activity_exercise_outside2")
 at_df <- arc_df |>
-  select(id, wave, starts_with("cov"), starts_with("media"), starts_with("activity"), -starts_with("covid"), -ends_with("complete"), -ends_with("timestamp"), -media_tv)
+  select(id, wave, starts_with("cov"), starts_with("media"), starts_with("activity"), -starts_with("covid"), -ends_with("complete"), -ends_with("timestamp"), -media_tv, -all_of(hours_items))
 at_df <- pivot_longer(at_df, -c(id, wave, starts_with("cov")), names_to="item", values_to="resp")
 at_df <- at_df %>%
-  filter(!is.na(resp) & resp == floor(resp) & resp <= 5)
+  filter(!is.na(resp))
 
 save(at_df, file="oxfordcovid_xue_2024_at.Rdata")
 write.csv(at_df, "oxfordcovid_xue_2024_at.csv", row.names=FALSE)

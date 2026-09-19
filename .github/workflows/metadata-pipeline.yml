@@ -170,6 +170,25 @@ jobs:
             echo "   canonicalisation has regressed (see canonicalize_csv.py) -- do not"
             echo "   try to read it, file it as a bug."
             echo
+            echo "## Straggler watch"
+            echo
+            # Stage 12 names tables live on Redivis with no metadata.csv row for
+            # several runs. run_pipeline.sh brackets its output so the named
+            # tables reach the reviewer here rather than only inside the 40kB log
+            # tail below -- a finding nobody reads is not a finding. Its exit 1
+            # is advisory and does not fail the job; see ADVISORY_STAGE in
+            # run_pipeline.sh.
+            if grep -q -- "--- ADVISORY 12 BEGIN ---" pipeline.log; then
+              # Fenced: the straggler block is aligned plain text and markdown
+              # would eat its indentation.
+              echo '```'
+              sed -n '/--- ADVISORY 12 BEGIN ---/,/--- ADVISORY 12 END ---/p' pipeline.log \
+                | sed '1d;$d'
+              echo '```'
+            else
+              echo "_Stage 12 did not run._"
+            fi
+            echo
             echo "Known noise, safe to skim: \`collections.csv\` definitions rewrite"
             echo "themselves most runs because they embed live coverage counts in their"
             echo "prose. \`n_tables\` is the field there that means something."

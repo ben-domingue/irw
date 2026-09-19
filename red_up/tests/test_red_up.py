@@ -16,7 +16,8 @@ from pathlib import Path
 
 from red_up import cli
 from red_up import plan as planning
-from red_up.checks import check_all, check_schema, scan, validate_for_target
+from red_up.checks import (check_all, check_schema, history_dirs, scan,
+                          validate_for_target)
 from red_up.discover import discover, table_name
 from red_up.targets import (
     ConfigError,
@@ -325,24 +326,108 @@ class Checks(unittest.TestCase):
             path = write(Path(tmp), "Foo.csv", RESPONSE)
             self.assertTrue(any("lowercase" in w for w in scan(path, "Foo").warnings))
 
+    def _collision(self, tmp, content_a, content_b):
+        root = Path(tmp)
+        (root / "x").mkdir()
+        (root / "y").mkdir()
+        a = write(root / "x", "dup.csv", content_a)
+        b = write(root / "y", "dup.csv", content_b)
+        return check_all([(a, "dup"), (b, "dup")])
+
     def test_two_files_claiming_one_table_name_is_an_error(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            (root / "x").mkdir()
-            (root / "y").mkdir()
-            a = write(root / "x", "dup.csv", RESPONSE)
-            b = write(root / "y", "dup.csv", RESPONSE)
-            reports = check_all([(a, "dup"), (b, "dup")])
+            reports = self._collision(tmp, RESPONSE, RESPONSE)
             self.assertTrue(all(not r.ok for r in reports))
+
+    def test_identical_collision_is_still_an_error_but_says_so(self):
+        """A Redivis upload appends, so two identical files double the table.
+
+        The message has to distinguish this case: identical content means batch
+        history, and the fix is to upload from the staging directory, never to
+        delete a copy (irw#1962).
+        """
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._collision(tmp, RESPONSE, RESPONSE)
+            self.assertTrue(all(not r.ok for r in reports))
+            for report in reports:
+                self.assertTrue(any("byte-identical" in e for e in report.errors))
+
+    def test_differing_collision_says_the_versions_differ(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._collision(tmp, RESPONSE, RESPONSE + "9,9,9\n")
+            self.assertTrue(all(not r.ok for r in reports))
+            for report in reports:
+                self.assertTrue(any("DIFFERING" in e for e in report.errors))
+
+
+class BatchHistoryGuard(unittest.TestCase):
+    """A directory with a provenance.csv is a record, not a staging area (#2055).
+
+    The collision check is not a backstop here: it only fires when two batches
+    hold the same table name, and a walk over batches with distinct names
+    uploads the whole extraction history without a word.
+    """
+
+    def _tree(self, root: Path) -> Path:
+        """Two batch directories and one staging directory, as item text has."""
+        for batch in ("batch_001", "batch_002"):
+            (root / batch).mkdir()
+            write(root / batch, "provenance.csv", "table,batch\nt,1\n")
+            write(root / batch, f"{batch}_t__items.csv", ITEMS)
+        (root / "clean").mkdir()
+        write(root / "clean", "staged__items.csv", ITEMS)
+        return root
+
+    def test_both_batch_directories_are_named(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._tree(Path(tmp))
+            csvs = sorted(discover(root).csvs)
+            self.assertEqual(history_dirs(csvs),
+                             [root / "batch_001", root / "batch_002"])
+
+    def test_the_staging_directory_alone_is_clean(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._tree(Path(tmp))
+            self.assertEqual(history_dirs(discover(root / "clean").csvs), [])
+
+    def test_the_marker_does_not_flag_its_own_directory_by_itself(self):
+        """A lone provenance.csv is just a file the target will exclude."""
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            marker = write(root, "provenance.csv", "table,batch\nt,1\n")
+            self.assertEqual(history_dirs([marker]), [])
+
+    def test_the_run_stops_before_anything_is_uploaded(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._tree(Path(tmp))
+            with mock.patch("sys.stderr"), self.assertRaises(SystemExit) as caught:
+                cli.main([str(root)])
+            self.assertEqual(caught.exception.code, 2)
+
+    def test_the_override_lets_a_deliberate_run_through(self):
+        sentinel = RuntimeError("reached the checks")
+        with tempfile.TemporaryDirectory() as tmp:
+            root = self._tree(Path(tmp))
+            with mock.patch.object(cli, "check_all", side_effect=sentinel):
+                with self.assertRaises(RuntimeError):
+                    cli.main([str(root), "--allow-history-dirs"])
 
 
 class Planning(unittest.TestCase):
     def setUp(self):
         _, self.targets = load_registry()
         self.shard = newest_shard(self.targets)
+        self.text_shard = newest_text_shard(self.targets)
 
     def _reports(self, tmp, names):
         return check_all([(write(Path(tmp), f"{n}.csv", RESPONSE), n) for n in names])
+
+    def _validated_items(self, tmp, names):
+        """check_all + validate_for_target for item-text files, as cli.py runs them."""
+        reports = check_all([(write(Path(tmp), f"{n}.csv", ITEMS), n) for n in names])
+        for report in reports:
+            validate_for_target(report, self.text_shard)
+        return reports
 
     def _validated(self, tmp, names):
         """check_all + the format validator, in the order cli.py runs them.
@@ -405,6 +490,42 @@ class Planning(unittest.TestCase):
             items = planning.build(reports, self.shard, {})
             self.assertEqual(items[0].status, planning.SKIP)
             self.assertTrue(any(e.startswith("name_length:") for e in reports[0].errors))
+
+    def test_item_text_inherits_its_response_table_over_length_name(self):
+        """#2199, ruled 2026-09-16: exempt a name that matches a live table.
+
+        An item-text table's name must equal its response table's name or the
+        join breaks, so when the RESPONSE table is already live under an
+        over-length name the length was never this upload's choice. The
+        2026-09-16 item-text upload skipped two weatherspoon_2015 tables for a
+        cap their own response tables have exceeded since publication.
+        """
+        base = "weatherspoon_2015_family_physicians_effectiveness"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._validated_items(tmp, [f"{base}__items"])
+            self.assertTrue(any(e.startswith("name_length:")
+                                for e in reports[0].errors))
+            # The response table is live; its item text never has been.
+            items = planning.build(reports, self.text_shard,
+                                   {base: ["item_response_warehouse_6"]})
+            self.assertEqual(reports[0].errors, [])
+            self.assertTrue(any("inherited from the response table" in w
+                                for w in reports[0].warnings))
+            # It is a NEW item-text table, and must NOT be routed at the
+            # response table the lookup found.
+            self.assertEqual(items[0].status, planning.NEW)
+            self.assertEqual(items[0].dataset, self.text_shard.name)
+            self.assertEqual(items[0].found_in, [])
+
+    def test_item_text_with_no_live_response_table_is_still_blocked(self):
+        """The cap still governs a name entering the corpus."""
+        base = "weatherspoon_2015_family_physicians_effectiveness"
+        with tempfile.TemporaryDirectory() as tmp:
+            reports = self._validated_items(tmp, [f"{base}__items"])
+            items = planning.build(reports, self.text_shard, {})
+            self.assertEqual(items[0].status, planning.SKIP)
+            self.assertTrue(any(e.startswith("name_length:")
+                                for e in reports[0].errors))
 
     def test_grandfathering_does_not_reach_any_other_error(self):
         with tempfile.TemporaryDirectory() as tmp:
