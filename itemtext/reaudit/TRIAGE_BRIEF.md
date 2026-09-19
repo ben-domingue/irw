@@ -22,6 +22,10 @@ For each table, one `verdict`:
   header or variable labels, or the instrument's own published form. You can say which source
   and where in it (table/appendix/file name). The item codes in IRW must be plausibly mappable to
   it (e.g. counts match n_items). Rights: not blocked (see below), **including upstream**.
+  **[new, from wave 2]** OBTAINABLE means you opened the file and saw the wording. A supplement whose
+  *title* promises a questionnaire, but which you could not download, is not enough: say
+  `NEEDS_HUMAN` ("wording probably in <file>, could not open it") so the extraction round does not
+  inherit a guess. For a named instrument, "upstream not checked" is not an acceptable rights entry.
 - `NOT_PUBLISHED` -- you reached the sources and the wording is not in any of them (e.g. data file
   has only codes Q1..Q20, paper describes the scale without items, no supplement). List what you
   checked.
