@@ -150,6 +150,11 @@ bartoli_2022_badge_notifications,irw_text,published
 beck_2021_iesr,irw_text,published
 beh_boredom_bieleke2022,irw_text,published
 benitezsillero_2021_bullying,irw_text,published
+bfi_goldberg_1992_agreeableness,irw_text_2,published
+bfi_goldberg_1992_conscientiousness,irw_text_2,published
+bfi_goldberg_1992_extraversion,irw_text_2,published
+bfi_goldberg_1992_neuroticism,irw_text_2,published
+bfi_goldberg_1992_openness_to_experience,irw_text_2,published
 bitew_2020_lte,irw_text,published
 bitew_2020_osss3,irw_text,published
 bitew_2020_phq9,irw_text,published
@@ -226,6 +231,7 @@ cinar_tanriverdi_2023_gad7,irw_text,published
 coach_chen_2022_hdrs,irw_text,published
 coach_chen_2022_phq9,irw_text,published
 cogcontrol_gyurkovics_2019_flanker,irw_text,published
+cogcontrol_gyurkovics_2019_mwprobe,irw_text_2,published
 cogcontrol_gyurkovics_2019_sart,irw_text,published
 cogcontrol_gyurkovics_2019_simon,irw_text,published
 colomer_perez_2021_soc13,irw_text,published
@@ -278,6 +284,7 @@ double_marking_steele_2022,irw_text,published
 doustmohammadian_2017_fnlit,irw_text,published
 dpt_noncog__emotional_intelligence,irw_text,published
 dpt_noncog__intolerance_of_uncertainty,irw_text,published
+dss_mouta_2021,irw_text_2,published
 dudasova_2021_cpc12,irw_text,published
 dudasova_2021_cpc12_study3,irw_text,published
 dudasova_2021_gratitude,irw_text,published
@@ -770,6 +777,10 @@ mascherini_2021_meddiet,irw_text_2,published
 matarboumosleh_2017_gad2,irw_text_2,published
 matarboumosleh_2017_phq2,irw_text_2,published
 matarboumosleh_2017_spai26,irw_text_2,published
+mede_2025_clim_emotions,irw_text_2,published
+mede_2025_clim_polsupport,irw_text_2,published
+mede_2025_clim_weather_future,irw_text_2,published
+mede_2025_clim_weather_past,irw_text_2,published
 medvedev_2018_oxh,irw_text_2,published
 medvedev_2018_pan,irw_text_2,published
 megart_tonkovic_2021,irw_text_2,published
@@ -819,6 +830,7 @@ monier_2026_pot,irw_text_2,published
 monier_2026_sti,irw_text_2,published
 morales_2021_erq,irw_text_2,published
 morgan_2026_music_personality_music_activity,irw_text,published
+morgan_2026_music_personality_stompr,irw_text_2,published
 motion,irw_text_2,published
 movac_pakpour2022,irw_text,published
 mpsycho_asti,irw_text,published
@@ -1008,6 +1020,7 @@ preschool_sel_dn,irw_text,published
 preschool_sel_htks,irw_text,published
 preschool_sel_pl,irw_text,published
 preschool_sel_wj,irw_text,published
+presenteeism_golz_2024,irw_text_2,published
 preussmattsson_2022_ownership,irw_text,published
 previc_bohn2023,irw_text_2,published
 promis1wave1_cesd,irw_text,published
@@ -1209,6 +1222,8 @@ sv-maia2_randelovic_2021_maia,irw_text,published
 swmd_mokken,irw_text,published
 szameitat_2015_multitask_examples,irw_text_2,published
 szameitat_2015_occupation_multitask,irw_text_2,published
+talaifar_2025_study1_lifestyle_survey,irw_text_2,published
+talaifar_2025_study2_plp,irw_text_2,published
 tan_2026_stem_technology_integration,irw_text_2,published
 taylorabdulai_2025_incentives,irw_text_2,published
 tears,irw_text_2,published
@@ -1276,6 +1291,9 @@ ucla_BrummerHoffman_2021,irw_text_2,published
 uffler_2017_lecture_seating,irw_text_2,published
 uffler_2017_seat_reasons,irw_text_2,published
 ups_vangsness_2019,irw_text,published
+uti_newlands_2023_gad,irw_text_2,published
+uti_newlands_2023_phq,irw_text_2,published
+uti_newlands_2023_wpai,irw_text_2,published
 valdivia_2023_oms,irw_text_2,published
 valverdeberrocoso_2021_learning_design,irw_text_2,published
 valverdeberrocoso_2021_sqd,irw_text_2,published
